@@ -687,7 +687,7 @@ class Reflection:
 
             return desc, params
 
-        match = re.search(r"oben .*?wie .*?in ([a-z0-9_]+)", desc)
+        match = re.search(r"\boven\b.*?\bwie(?:\s+in)?\s+([a-z]{2}\d{3,4})\b", desc)
         if match:
             params["mode"] = "composite"
             params["top_source_ref"] = match.group(1).upper()
