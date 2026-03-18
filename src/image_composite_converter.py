@@ -2465,7 +2465,7 @@ class Action:
             defaults = Action._apply_co2_label(Action._default_ac0881_params(w, h))
             if img is None:
                 return Action._finalize_ac08_style(name, defaults)
-            return Action._finalize_ac08_style(name, Action._apply_co2_label(Action._fit_ac0811_params_from_image(img, defaults)))
+            return Action._finalize_ac08_style(name, Action._fit_ac0811_params_from_image(img, defaults))
 
         if name == "AC0832":
             defaults = Action._apply_co2_label(Action._default_ac0812_params(w, h))
@@ -2478,9 +2478,7 @@ class Action:
             return Action._enforce_left_arm_badge_geometry(
                 Action._finalize_ac08_style(
                     name,
-                    Action._tune_ac0832_co2_badge(
-                        Action._apply_co2_label(Action._fit_ac0812_params_from_image(img, defaults))
-                    ),
+                    Action._tune_ac0832_co2_badge(Action._fit_ac0812_params_from_image(img, defaults)),
                 ),
                 w,
                 h,
@@ -2490,7 +2488,7 @@ class Action:
             defaults = Action._apply_co2_label(Action._default_ac0813_params(w, h))
             if img is None:
                 return Action._finalize_ac08_style(name, defaults)
-            return Action._finalize_ac08_style(name, Action._apply_co2_label(Action._fit_ac0813_params_from_image(img, defaults)))
+            return Action._finalize_ac08_style(name, Action._fit_ac0813_params_from_image(img, defaults))
 
         if name == "AC0834":
             defaults = Action._apply_co2_label(Action._default_ac0814_params(w, h))
@@ -2499,7 +2497,7 @@ class Action:
             return Action._finalize_ac08_style(
                 name,
                 Action._tune_ac0834_co2_badge(
-                    Action._apply_co2_label(Action._fit_ac0814_params_from_image(img, defaults)),
+                    Action._fit_ac0814_params_from_image(img, defaults),
                     w,
                     h,
                 ),
@@ -2515,14 +2513,14 @@ class Action:
             defaults = Action._apply_voc_label(Action._default_ac0881_params(w, h))
             if img is None:
                 return Action._finalize_ac08_style(name, defaults)
-            return Action._finalize_ac08_style(name, Action._apply_voc_label(Action._fit_ac0811_params_from_image(img, defaults)))
+            return Action._finalize_ac08_style(name, Action._fit_ac0811_params_from_image(img, defaults))
 
         if name == "AC0837":
             defaults = Action._apply_voc_label(Action._default_ac0812_params(w, h))
             if img is None:
                 return Action._enforce_left_arm_badge_geometry(Action._finalize_ac08_style(name, defaults), w, h)
             return Action._enforce_left_arm_badge_geometry(
-                Action._finalize_ac08_style(name, Action._apply_voc_label(Action._fit_ac0812_params_from_image(img, defaults))),
+                Action._finalize_ac08_style(name, Action._fit_ac0812_params_from_image(img, defaults)),
                 w,
                 h,
             )
@@ -2531,13 +2529,13 @@ class Action:
             defaults = Action._apply_voc_label(Action._default_ac0813_params(w, h))
             if img is None:
                 return Action._finalize_ac08_style(name, defaults)
-            return Action._finalize_ac08_style(name, Action._apply_voc_label(Action._fit_ac0813_params_from_image(img, defaults)))
+            return Action._finalize_ac08_style(name, Action._fit_ac0813_params_from_image(img, defaults))
 
         if name == "AC0839":
             defaults = Action._apply_voc_label(Action._default_ac0814_params(w, h))
             if img is None:
                 return Action._finalize_ac08_style(name, defaults)
-            return Action._finalize_ac08_style(name, Action._apply_voc_label(Action._fit_ac0814_params_from_image(img, defaults)))
+            return Action._finalize_ac08_style(name, Action._fit_ac0814_params_from_image(img, defaults))
 
         return None
 

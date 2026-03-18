@@ -270,6 +270,52 @@ def test_fit_semantic_badge_allows_lower_floor_when_connector_present(monkeypatc
     assert float(fitted["r"]) >= (float(defaults["r"]) * 0.80) - 1e-6
 
 
+def test_make_badge_params_passes_text_semantics_into_connector_fit(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Connector+text families must be fit with labeled defaults, not textless templates."""
+    if image_composite_converter.np is None:
+        pytest.skip("numpy not available in this environment")
+
+    np = image_composite_converter.np
+    img = np.full((20, 36, 3), 220, dtype=np.uint8)
+    seen: list[dict] = []
+
+    def fake_fit(_img, defaults):
+        seen.append(dict(defaults))
+        return dict(defaults)
+
+    monkeypatch.setattr(Action, "_fit_ac0814_params_from_image", staticmethod(fake_fit))
+
+    params = Action.make_badge_params(36, 20, "AC0834", img)
+
+    assert params is not None
+    assert seen, "fit helper should be called"
+    assert seen[0]["draw_text"] is True
+    assert seen[0]["text_mode"] == "co2"
+
+
+def test_make_badge_params_passes_voc_semantics_into_vertical_fit(monkeypatch: pytest.MonkeyPatch) -> None:
+    """VOC connector families must preserve text-aware defaults during image fitting."""
+    if image_composite_converter.np is None:
+        pytest.skip("numpy not available in this environment")
+
+    np = image_composite_converter.np
+    img = np.full((30, 20, 3), 220, dtype=np.uint8)
+    seen: list[dict] = []
+
+    def fake_fit(_img, defaults):
+        seen.append(dict(defaults))
+        return dict(defaults)
+
+    monkeypatch.setattr(Action, "_fit_ac0811_params_from_image", staticmethod(fake_fit))
+
+    params = Action.make_badge_params(20, 30, "AC0836", img)
+
+    assert params is not None
+    assert seen, "fit helper should be called"
+    assert seen[0]["draw_text"] is True
+    assert seen[0]["text_mode"] == "voc"
+
+
 def test_fit_semantic_badge_rejects_far_off_hough_center_for_ac08_variants(monkeypatch: pytest.MonkeyPatch) -> None:
     """Hough candidates far from template center should not override semantic circle placement."""
     if image_composite_converter.np is None or image_composite_converter.cv2 is None:
