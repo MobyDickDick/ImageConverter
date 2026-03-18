@@ -41,6 +41,16 @@ def test_optional_dependency_error_reports_windows_bundle_hint() -> None:
     assert "Linux-Umgebung" in message
 
 
+def test_source_loads_numpy_before_cv2() -> None:
+    """cv2 must be initialized after numpy so vendored OpenCV can resolve its dependency."""
+    source = Path(image_composite_converter.__file__).read_text(encoding="utf-8")
+
+    numpy_pos = source.index('np = _load_optional_module("numpy")')
+    cv2_pos = source.index('cv2 = _load_optional_module("cv2")')
+
+    assert numpy_pos < cv2_pos
+
+
 def test_co2_label_defaults_use_center_co_anchor_mode() -> None:
     """Default CO₂ layout should keep center_co mode and only shift left if required."""
     params = Action._apply_co2_label(Action._default_ac0870_params(15, 15))
@@ -323,6 +333,27 @@ def test_fit_ac0814_prevents_over_shrinking_elongated_plain_circle(monkeypatch: 
     )
 
     fitted = Action._fit_ac0814_params_from_image(img, defaults)
+
+    assert float(fitted["r"]) >= (default_r * 0.95) - 1e-6
+    assert float(fitted["min_circle_radius"]) >= (default_r * 0.95) - 1e-6
+
+
+def test_fit_ac0813_prevents_over_shrinking_elongated_plain_circle(monkeypatch: pytest.MonkeyPatch) -> None:
+    """AC0813-like elongated plain badges should keep a template-relative radius floor."""
+
+    defaults = Action._default_ac0813_params(20, 36)
+    default_r = float(defaults["r"])
+
+    monkeypatch.setattr(
+        Action,
+        "_fit_semantic_badge_from_image",
+        staticmethod(lambda _img, _defaults: {**_defaults, "r": 2.0, "draw_text": False, "arm_enabled": True}),
+    )
+
+    class DummyImg:
+        shape = (36, 20, 3)
+
+    fitted = Action._fit_ac0813_params_from_image(DummyImg(), defaults)
 
     assert float(fitted["r"]) >= (default_r * 0.95) - 1e-6
     assert float(fitted["min_circle_radius"]) >= (default_r * 0.95) - 1e-6
