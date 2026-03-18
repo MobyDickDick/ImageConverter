@@ -456,11 +456,12 @@ def _load_description_mapping_from_csv(path: str) -> dict[str, str]:
 
 def _load_description_mapping_from_xml(path: str) -> dict[str, str]:
     raw_desc: dict[str, str] = {}
-    if not os.path.exists(path):
+    resolved_path = _resolve_description_xml_path(path)
+    if resolved_path is None:
         return raw_desc
 
     try:
-        tree = ET.parse(path)
+        tree = ET.parse(resolved_path)
     except ET.ParseError:
         return raw_desc
 
@@ -537,6 +538,63 @@ def _load_description_mapping_from_xml(path: str) -> dict[str, str]:
                 _register_description(image_stem, merged_desc)
 
     return raw_desc
+
+
+def _resolve_description_xml_path(path: str) -> str | None:
+    candidate = Path(path)
+    if candidate.exists():
+        return str(candidate)
+
+    basename = candidate.name
+    if not basename:
+        return None
+
+    fallback_candidates = [
+        Path("artifacts/descriptions") / basename,
+        Path("artifacts/images_to_convert") / basename,
+    ]
+    for fallback in fallback_candidates:
+        if fallback.exists():
+            return str(fallback)
+    return None
+
+
+def _required_vendor_packages() -> list[str]:
+    return [
+        "numpy",
+        "opencv-python-headless",
+        "Pillow",
+        "PyMuPDF",
+    ]
+
+
+def build_linux_vendor_install_command(
+    vendor_dir: str = "vendor",
+    platform_tag: str = "manylinux2014_x86_64",
+    python_version: str | None = None,
+) -> list[str]:
+    if python_version is None:
+        python_version = f"{sys.version_info.major}{sys.version_info.minor}"
+
+    return [
+        sys.executable,
+        "-m",
+        "pip",
+        "install",
+        "--upgrade",
+        "--target",
+        vendor_dir,
+        "--platform",
+        platform_tag,
+        "--implementation",
+        "cp",
+        "--python-version",
+        python_version,
+        "--only-binary=:all:",
+        "--upgrade-strategy",
+        "eager",
+        *_required_vendor_packages(),
+    ]
 
 
 class Reflection:
@@ -6929,6 +6987,25 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
             "Kann alternativ über IMAGE_COMPOSITE_CONVERTER_LOG_FILE gesetzt werden."
         ),
     )
+    parser.add_argument(
+        "--print-linux-vendor-command",
+        action="store_true",
+        help=(
+            "Gibt einen pip-Aufruf aus, der Linux-kompatible Wheels für numpy/opencv/Pillow/PyMuPDF "
+            "in das Vendor-Verzeichnis installiert."
+        ),
+    )
+    parser.add_argument("--vendor-dir", default="vendor", help="Zielordner für vendorte Python-Pakete")
+    parser.add_argument(
+        "--vendor-platform",
+        default="manylinux2014_x86_64",
+        help="pip --platform Wert für Linux-Wheels, z. B. manylinux2014_x86_64",
+    )
+    parser.add_argument(
+        "--vendor-python-version",
+        default=None,
+        help="pip --python-version Wert ohne Punkt, z. B. 311 oder 312",
+    )
     return parser.parse_args(argv)
 
 
@@ -7020,6 +7097,18 @@ def main(argv: list[str] | None = None) -> int:
     args = parse_args(argv)
     log_path = str(args.log_file or "").strip()
     with _optional_log_capture(log_path):
+        if args.print_linux_vendor_command:
+            print(
+                " ".join(
+                    build_linux_vendor_install_command(
+                        vendor_dir=args.vendor_dir,
+                        platform_tag=args.vendor_platform,
+                        python_version=args.vendor_python_version,
+                    )
+                )
+            )
+            return 0
+
         csv_path, output_dir = _resolve_cli_csv_and_output(args)
 
         if not csv_path:
