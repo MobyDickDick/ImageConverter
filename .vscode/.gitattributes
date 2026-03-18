@@ -1,0 +1,4 @@
+# Normalize text files to LF to avoid binary diff warnings
+* text=auto eol=lf
+*.md text eol=lf
+*.json text eol=lf

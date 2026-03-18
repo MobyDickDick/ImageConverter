@@ -1,0 +1,21 @@
+ __pycache__/
+ .pytest_cache/
+ .pytest_cache
+ .tinylanguage/
+ .tinylanguage
+ .venv/
+ .vens
+ # Virtual environments
+venv/
+dist/*
+!dist/tinylanguage_bundle.zip
+__pycache__
+*.pyc
+vscode-extension/tinylanguage-vscode-0.1.0.vsix
+/vscode-extension/node_modules
+/.pytest_cache
+
+# Profiling artifacts
+artifacts/perf/**/*.prof
+converted_symbols
+converted_images
