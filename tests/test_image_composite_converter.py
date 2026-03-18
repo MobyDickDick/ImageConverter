@@ -134,6 +134,19 @@ def test_parse_description_marks_ac0838_with_right_horizontal_arm() -> None:
     assert "SEMANTIC: waagrechter Strich rechts vom Kreis" in list(params.get("elements", []))
 
 
+def test_parse_description_does_not_misread_ac0130_text_as_top_source_ref() -> None:
+    """AC0130 mentions 'oben mitte' and 'in beiden Diagonalen' but has no donor image reference."""
+    raw = image_composite_converter._load_description_mapping(
+        "artifacts/descriptions/Finale_Wurzelformen_V3.xml"
+    )
+    ref = image_composite_converter.Reflection(raw)
+
+    _desc, params = ref.parse_description("AC0130", "AC0130.jpg")
+
+    assert params["top_source_ref"] is None
+    assert "OBEN: Geschnitten aus Originaldatei BEIDEN" not in list(params.get("elements", []))
+
+
 def test_finalize_ac0820_locks_plain_circle_center_and_min_radius() -> None:
     """Plain AC0820 badges should keep a centered ring and preserve readable radius."""
     params = Action._apply_co2_label(Action._default_ac0870_params(20, 20))
