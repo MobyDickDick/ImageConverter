@@ -2559,6 +2559,52 @@ def test_parse_description_uses_xml_loaded_variant_descriptions() -> None:
     assert "rohr" in desc
 
 
+def test_load_description_mapping_from_xml_falls_back_to_descriptions_directory() -> None:
+    mapping = conv._load_description_mapping_from_xml(
+        "artifacts/images_to_convert/Finale_Wurzelformen_V3.xml"
+    )
+
+    assert mapping.get("AC0241")
+
+
+def test_build_linux_vendor_install_command_uses_vendor_defaults() -> None:
+    cmd = conv.build_linux_vendor_install_command(vendor_dir="vendor", platform_tag="manylinux2014_x86_64", python_version="311")
+
+    assert cmd[:4] == [image_composite_converter.sys.executable, "-m", "pip", "install"]
+    assert "--target" in cmd
+    assert "vendor" in cmd
+    assert "--platform" in cmd
+    assert "manylinux2014_x86_64" in cmd
+    assert "--python-version" in cmd
+    assert "311" in cmd
+    assert "numpy" in cmd
+    assert "opencv-python-headless" in cmd
+    assert "Pillow" in cmd
+    assert "PyMuPDF" in cmd
+
+
+def test_main_print_linux_vendor_command(capsys: pytest.CaptureFixture[str]) -> None:
+    exit_code = conv.main(
+        [
+            "artifacts/images_to_convert",
+            "--print-linux-vendor-command",
+            "--vendor-dir",
+            "vendor",
+            "--vendor-platform",
+            "manylinux2014_x86_64",
+            "--vendor-python-version",
+            "311",
+        ]
+    )
+
+    captured = capsys.readouterr()
+
+    assert exit_code == 0
+    assert "--target vendor" in captured.out
+    assert "--platform manylinux2014_x86_64" in captured.out
+    assert "--python-version 311" in captured.out
+
+
 def test_trace_image_segment_uses_raw_contour_chain_for_epsilon_sweep(monkeypatch: pytest.MonkeyPatch) -> None:
     """Contour extraction should keep all points so epsilon iterations can have an effect."""
     if image_composite_converter.np is None or image_composite_converter.cv2 is None:
