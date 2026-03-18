@@ -112,8 +112,11 @@ def _load_optional_module(module_name: str):
     return None
 
 
-cv2 = _load_optional_module("cv2")
+# Load numpy before cv2: OpenCV's Python bindings import numpy at module-import
+# time and can fail permanently for this process if cv2 is attempted first while
+# numpy is available only via repo-vendored site-packages.
 np = _load_optional_module("numpy")
+cv2 = _load_optional_module("cv2")
 fitz = _load_optional_module("fitz")  # PyMuPDF for native SVG rendering
 
 
@@ -1987,16 +1990,33 @@ class Action:
         """Fit AC0813 while keeping the vertical arm anchored to the upper edge."""
         params = Action._fit_semantic_badge_from_image(img, defaults)
         h, w = img.shape[:2]
+        aspect_ratio = (float(h) / float(w)) if w > 0 else 1.0
 
         raw_arm_stroke = float(params.get("arm_stroke", defaults.get("arm_stroke", max(1.0, float(w) * 0.10))))
         cx = float(params.get("cx", defaults.get("cx", float(w) / 2.0)))
         cy = float(params.get("cy", defaults.get("cy", float(h) - (float(w) / 2.0))))
         r = float(params.get("r", defaults.get("r", float(w) * 0.4)))
         stroke_circle = float(params.get("stroke_circle", defaults.get("stroke_circle", max(0.9, float(w) / 15.0))))
+        default_r = float(defaults.get("r", float(w) * 0.4))
 
         min_arm_stroke = max(1.0, stroke_circle * 0.75)
         max_arm_stroke = max(min_arm_stroke, min(float(w) * 0.14, stroke_circle * 1.6))
         arm_stroke = max(min_arm_stroke, min(raw_arm_stroke, max_arm_stroke))
+
+        if w <= 15 and not bool(params.get("draw_text", True)):
+            # Tiny plain connector badges can lose roughly one anti-aliased ring
+            # pixel in contour/Hough fitting; keep them near template size.
+            r = max(r, default_r * 0.98)
+
+        elongated_plain_badge = aspect_ratio >= 1.60 and w >= 20 and not bool(params.get("draw_text", True))
+        if elongated_plain_badge:
+            # AC0813_L-like forms are the vertical counterpart of AC0812_L/AC0814_L:
+            # JPEG antialiasing around the top connector often biases the detected
+            # ring inward, so preserve a tighter semantic radius floor here too.
+            r = max(r, default_r * 0.95)
+            params["min_circle_radius"] = float(max(float(params.get("min_circle_radius", 1.0)), default_r * 0.95))
+
+        params["r"] = r
 
         # Tiny vertical badges with text overlays (e.g. AC0833_S / AC0838_S)
         # tend to be over-influenced by anti-aliased text pixels during contour
