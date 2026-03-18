@@ -25,19 +25,96 @@ import importlib
 import io
 import struct
 
-try:
-    import cv2
-except ImportError:  # pragma: no cover - optional dependency in constrained environments
-    cv2 = None
-try:
-    import numpy as np
-except ImportError:  # pragma: no cover - optional dependency in constrained environments
-    np = None
+OPTIONAL_DEPENDENCY_ERRORS: dict[str, str] = {}
 
-try:
-    import fitz  # PyMuPDF for native SVG rendering
-except ImportError:  # pragma: no cover - optional dependency
-    fitz = None
+
+def _optional_dependency_base_dir() -> Path:
+    """Return the repository root used for vendored dependency discovery."""
+    return Path(__file__).resolve().parents[1]
+
+
+def _vendored_site_packages_dirs() -> list[Path]:
+    """Return repo-local site-packages directories that may contain bundled deps."""
+    base = _optional_dependency_base_dir()
+    candidates = [
+        base / ".venv" / "Lib" / "site-packages",
+        base / ".venv" / "lib" / "python3.10" / "site-packages",
+        base / ".venv" / "lib" / "python3.11" / "site-packages",
+        base / ".venv" / "lib" / "python3.12" / "site-packages",
+        base / ".venv" / "lib" / "python3.13" / "site-packages",
+        base / ".venv" / "lib" / "python3.14" / "site-packages",
+        base / "vendor" / "linux" / "site-packages",
+        base / "vendor" / "linux-py310" / "site-packages",
+        base / "vendor" / "linux-py311" / "site-packages",
+        base / "vendor" / "linux-py312" / "site-packages",
+        base / "vendor" / "linux-py313" / "site-packages",
+        base / "vendor" / "linux-py314" / "site-packages",
+        base / "vendor" / "win" / "site-packages",
+        base / "vendor" / "win-py310" / "site-packages",
+        base / "vendor" / "win-py311" / "site-packages",
+        base / "vendor" / "win-py312" / "site-packages",
+        base / "vendor" / "win-py313" / "site-packages",
+        base / "vendor" / "win-py314" / "site-packages",
+    ]
+    seen: set[str] = set()
+    existing: list[Path] = []
+    for candidate in candidates:
+        key = str(candidate)
+        if key in seen:
+            continue
+        seen.add(key)
+        if candidate.exists():
+            existing.append(candidate)
+    return existing
+
+
+def _describe_optional_dependency_error(module_name: str, exc: BaseException, attempted_paths: list[Path]) -> str:
+    detail = f"{type(exc).__name__}: {exc}"
+    lower = detail.lower()
+    if "add_dll_directory" in lower or ".pyd" in lower:
+        return (
+            f"{detail}. Repo-local Paket gefunden, aber es wirkt wie ein Windows-Build "
+            f"und ist unter dieser Linux-Umgebung nicht ladbar"
+        )
+    if "elf" in lower or "wrong elf class" in lower:
+        return f"{detail}. Repo-lokales Binary ist nicht mit dieser Laufzeit kompatibel"
+    if attempted_paths:
+        joined = ", ".join(str(path) for path in attempted_paths)
+        return f"{detail}. Zusätzliche Importpfade geprüft: {joined}"
+    return detail
+
+
+def _load_optional_module(module_name: str):
+    """Import optional dependencies, including repo-vendored site-packages."""
+    attempted_paths: list[Path] = []
+    try:
+        return importlib.import_module(module_name)
+    except Exception as exc:  # pragma: no cover - exercised only in dependency-missing envs
+        last_exc: BaseException = exc
+
+    for site_packages in _vendored_site_packages_dirs():
+        attempted_paths.append(site_packages)
+        path_str = str(site_packages)
+        added = False
+        if path_str not in sys.path:
+            sys.path.insert(0, path_str)
+            added = True
+        try:
+            return importlib.import_module(module_name)
+        except Exception as exc:  # pragma: no cover - exercised only in dependency-missing envs
+            last_exc = exc
+        finally:
+            if added:
+                with contextlib.suppress(ValueError):
+                    sys.path.remove(path_str)
+
+    OPTIONAL_DEPENDENCY_ERRORS[module_name] = _describe_optional_dependency_error(module_name, last_exc, attempted_paths)
+    return None
+
+
+cv2 = _load_optional_module("cv2")
+np = _load_optional_module("numpy")
+fitz = _load_optional_module("fitz")  # PyMuPDF for native SVG rendering
 
 
 
@@ -2003,12 +2080,14 @@ class Action:
         """Fit AC0814 while keeping the horizontal arm anchored to the right edge."""
         params = Action._fit_semantic_badge_from_image(img, defaults)
         h, w = img.shape[:2]
+        aspect_ratio = (float(w) / float(h)) if h > 0 else 1.0
 
         raw_arm_stroke = float(params.get("arm_stroke", defaults.get("arm_stroke", max(1.0, float(h) * 0.10))))
         cx = float(params.get("cx", defaults.get("cx", float(w) / 2.0)))
         cy = float(params.get("cy", defaults.get("cy", float(h) / 2.0)))
         r = float(params.get("r", defaults.get("r", float(h) * 0.4)))
         stroke_circle = float(params.get("stroke_circle", defaults.get("stroke_circle", max(0.9, float(h) / 15.0))))
+        default_r = float(defaults.get("r", float(h) * 0.4))
 
         min_arm_stroke = max(1.0, stroke_circle * 0.75)
         max_arm_stroke = max(min_arm_stroke, min(float(h) * 0.14, stroke_circle * 1.6))
@@ -2018,6 +2097,22 @@ class Action:
         cy = float(params.get("cy", defaults.get("cy", float(h) / 2.0)))
         r = float(params.get("r", defaults.get("r", float(h) * 0.4)))
 
+        if h <= 15 and not bool(params.get("draw_text", True)):
+            # Tiny plain connector badges can lose roughly one anti-aliased ring
+            # pixel in contour/Hough fitting; keep them near template size.
+            r = max(r, default_r * 0.98)
+
+        elongated_plain_badge = aspect_ratio >= 1.60 and h >= 20 and not bool(params.get("draw_text", True))
+        if elongated_plain_badge:
+            # AC0814_L-like forms are the mirrored counterpart of AC0812_L: JPEG
+            # antialiasing near the connector often makes the ring fit under-size.
+            # Keep a tighter semantic floor so later validation cannot preserve an
+            # already shrunken circle as the new optimum.
+            r = max(r, default_r * 0.95)
+            params["min_circle_radius"] = float(max(float(params.get("min_circle_radius", 1.0)), default_r * 0.95))
+
+        params["r"] = r
+
         params["arm_enabled"] = True
         params["arm_stroke"] = arm_stroke
         params["arm_x1"] = min(float(w), cx + r)
@@ -2025,7 +2120,20 @@ class Action:
         params["arm_x2"] = float(w)
         params["arm_y2"] = cy
         current_arm_len = float(math.hypot(params["arm_x2"] - params["arm_x1"], params["arm_y2"] - params["arm_y1"]))
-        params["arm_len_min"] = max(1.0, current_arm_len * 0.75)
+        default_arm_len = max(
+            0.0,
+            float(w) - (float(defaults.get("cx", float(h) / 2.0)) + float(defaults.get("r", float(h) * 0.4))),
+        )
+        semantic_arm_len_min = max(1.0, default_arm_len * 0.75)
+        min_arm_len_ratio = 0.75
+        if elongated_plain_badge:
+            min_arm_len_ratio = 0.82
+        params["arm_len_min_ratio"] = float(max(float(params.get("arm_len_min_ratio", min_arm_len_ratio)), min_arm_len_ratio))
+        params["arm_len_min"] = max(
+            1.0,
+            current_arm_len * float(params["arm_len_min_ratio"]),
+            semantic_arm_len_min,
+        )
         return Action._normalize_light_circle_colors(params)
 
     @staticmethod
