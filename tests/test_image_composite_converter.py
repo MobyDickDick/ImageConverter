@@ -9,6 +9,38 @@ from src.image_composite_converter import Action, _clip
 
 conv = image_composite_converter
 
+
+def test_vendored_site_packages_dirs_discovers_repo_bundle() -> None:
+    """Repo-local bundled site-packages should be discoverable for optional imports."""
+    dirs = image_composite_converter._vendored_site_packages_dirs()
+
+    assert any(path.as_posix().endswith(".venv/Lib/site-packages") for path in dirs)
+
+
+def test_vendored_site_packages_dirs_discovers_vendor_linux_bundle(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
+    """Dedicated vendor/linux-py310 bundles should be discoverable without using .venv."""
+    vendor_dir = tmp_path / "vendor" / "linux-py310" / "site-packages"
+    vendor_dir.mkdir(parents=True)
+
+    monkeypatch.setattr(image_composite_converter, "_optional_dependency_base_dir", lambda: tmp_path)
+
+    dirs = image_composite_converter._vendored_site_packages_dirs()
+
+    assert vendor_dir in dirs
+
+
+def test_optional_dependency_error_reports_windows_bundle_hint() -> None:
+    """Dependency diagnostics should explain when a bundled Windows wheel is unusable on Linux."""
+    message = image_composite_converter._describe_optional_dependency_error(
+        "numpy",
+        AttributeError("module 'os' has no attribute 'add_dll_directory'"),
+        [Path(".venv/Lib/site-packages")],
+    )
+
+    assert "Windows-Build" in message
+    assert "Linux-Umgebung" in message
+
+
 def test_co2_label_defaults_use_center_co_anchor_mode() -> None:
     """Default CO₂ layout should keep center_co mode and only shift left if required."""
     params = Action._apply_co2_label(Action._default_ac0870_params(15, 15))
@@ -268,6 +300,32 @@ def test_fit_semantic_badge_allows_lower_floor_when_connector_present(monkeypatc
     fitted = Action._fit_semantic_badge_from_image(img, defaults)
 
     assert float(fitted["r"]) >= (float(defaults["r"]) * 0.80) - 1e-6
+
+
+def test_fit_ac0814_prevents_over_shrinking_elongated_plain_circle(monkeypatch: pytest.MonkeyPatch) -> None:
+    """AC0814-like elongated plain badges should keep a template-relative radius floor."""
+    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+        pytest.skip("numpy/cv2 not available in this environment")
+
+    np = image_composite_converter.np
+    if np is None:
+        pytest.skip("numpy not available in this environment")
+    cv2 = image_composite_converter.cv2
+    img = np.full((20, 36, 3), 220, dtype=np.uint8)
+
+    defaults = Action._default_ac0814_params(36, 20)
+    default_r = float(defaults["r"])
+
+    monkeypatch.setattr(
+        cv2,
+        "HoughCircles",
+        lambda *_args, **_kwargs: np.array([[[10.0, 10.0, 2.0]]], dtype=np.float32),
+    )
+
+    fitted = Action._fit_ac0814_params_from_image(img, defaults)
+
+    assert float(fitted["r"]) >= (default_r * 0.95) - 1e-6
+    assert float(fitted["min_circle_radius"]) >= (default_r * 0.95) - 1e-6
 
 
 def test_make_badge_params_passes_text_semantics_into_connector_fit(monkeypatch: pytest.MonkeyPatch) -> None:
