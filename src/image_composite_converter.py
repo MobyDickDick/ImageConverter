@@ -5424,30 +5424,70 @@ class Action:
         expected = Action._expected_semantic_presence(semantic_elements)
         expected_co2 = any("co_2" in str(elem).lower() or "co₂" in str(elem).lower() for elem in semantic_elements)
         structural = Action._detect_semantic_primitives(img_orig)
+        circle_mask = Action.extract_badge_element_mask(img_orig, badge_params, "circle")
+        stem_mask = Action.extract_badge_element_mask(img_orig, badge_params, "stem")
+        arm_mask = Action.extract_badge_element_mask(img_orig, badge_params, "arm")
+        text_mask = Action.extract_badge_element_mask(img_orig, badge_params, "text")
+
+        def _mask_supports_element(mask: np.ndarray | None, element: str) -> bool:
+            if mask is None:
+                return False
+            pixel_count = int(np.count_nonzero(mask))
+            if pixel_count < 3:
+                return False
+            bbox = Action._mask_bbox(mask)
+            if bbox is None:
+                return False
+            x1, y1, x2, y2 = bbox
+            width = max(1.0, (x2 - x1) + 1.0)
+            height = max(1.0, (y2 - y1) + 1.0)
+            area = width * height
+            density = float(pixel_count) / max(1.0, area)
+            if element == "circle":
+                center = Action._mask_centroid_radius(mask)
+                if center is None:
+                    return False
+                cx, cy, radius = center
+                if radius < 2.0 or density < 0.10:
+                    return False
+                ys, xs = np.where(mask)
+                bins = 8
+                coverage_bins = np.zeros(bins, dtype=np.uint8)
+                ring_tol = max(1.2, float(radius) * 0.45)
+                for py, px in zip(ys, xs, strict=False):
+                    dist = math.hypot(float(px) - cx, float(py) - cy)
+                    if abs(dist - float(radius)) > ring_tol:
+                        continue
+                    ang = math.atan2(float(py) - cy, float(px) - cx)
+                    idx = int(((ang + math.pi) / (2.0 * math.pi)) * bins) % bins
+                    coverage_bins[idx] = 1
+                return int(np.sum(coverage_bins)) >= 3
+            if element == "arm":
+                return pixel_count >= 5 and max(width, height) / max(1.0, min(width, height)) >= 2.2
+            if element == "text":
+                return pixel_count >= max(4, int(round(min(width, height) * 0.35))) and density >= 0.08
+            return pixel_count >= 4
+
+        local_support = {
+            "circle": _mask_supports_element(circle_mask, "circle"),
+            "stem": _mask_supports_element(stem_mask, "stem"),
+            "arm": _mask_supports_element(arm_mask, "arm"),
+            "text": _mask_supports_element(text_mask, "text"),
+        }
         observed = {
-            "circle": (
-                Action.extract_badge_element_mask(img_orig, badge_params, "circle") is not None
-                and bool(structural.get("circle", False))
-            ),
-            "stem": Action.extract_badge_element_mask(img_orig, badge_params, "stem") is not None,
-            "arm": (
-                Action.extract_badge_element_mask(img_orig, badge_params, "arm") is not None
-                and bool(structural.get("arm", False))
-            ),
-            "text": (
-                Action.extract_badge_element_mask(img_orig, badge_params, "text") is not None
-                and bool(structural.get("text", False))
-            ),
+            "circle": bool(structural.get("circle", False) or local_support["circle"]),
+            "stem": bool(local_support["stem"]),
+            "arm": bool(structural.get("arm", False) or local_support["arm"]),
+            "text": bool(structural.get("text", False) or local_support["text"]),
         }
         issues = Action._semantic_presence_mismatches(expected, observed)
-        if expected.get("circle") and not structural.get("circle", False):
+        if expected.get("circle") and not observed["circle"]:
             issues.append("Strukturprüfung: Kein belastbarer Kreis-Kandidat im Rohbild erkannt")
-        if expected.get("arm") and not structural.get("arm", False):
+        if expected.get("arm") and not observed["arm"]:
             issues.append("Strukturprüfung: Kein belastbarer waagrechter Linien-Kandidat im Rohbild erkannt")
-        if expected.get("text") and not structural.get("text", False):
+        if expected.get("text") and not observed["text"]:
             issues.append("Strukturprüfung: Keine belastbare Textstruktur (z.B. CO₂) im Rohbild erkannt")
         if expected_co2 and expected.get("text"):
-            text_mask = Action.extract_badge_element_mask(img_orig, badge_params, "text")
             if text_mask is None:
                 issues.append("Strukturprüfung: CO₂-Textregion enthält keine verwertbaren Vordergrundpixel")
             else:
@@ -7195,6 +7235,60 @@ def _harmonization_anchor_priority(suffix: str, prefer_large: bool) -> int:
     return {"M": 0, "L": 1, "S": 2}.get(str(suffix), 3)
 
 
+def _clip_gray(value: float) -> int:
+    return int(max(0, min(255, round(float(value)))))
+
+
+def _family_harmonized_badge_colors(variant_rows: list[dict[str, object]]) -> dict[str, int]:
+    """Derive a family palette from L/M/S variants and slightly boost contrast."""
+    buckets: dict[str, list[float]] = {
+        "fill_gray": [],
+        "stroke_gray": [],
+        "text_gray": [],
+        "stem_gray": [],
+    }
+    for row in variant_rows:
+        params = dict(row["params"])
+        for key in buckets:
+            value = params.get(key)
+            if value is None:
+                continue
+            try:
+                buckets[key].append(float(value))
+            except (TypeError, ValueError):
+                continue
+
+    fill_avg = sum(buckets["fill_gray"]) / max(1, len(buckets["fill_gray"]))
+    stroke_avg = sum(buckets["stroke_gray"]) / max(1, len(buckets["stroke_gray"]))
+    if fill_avg < stroke_avg:
+        fill_avg, stroke_avg = stroke_avg, fill_avg
+
+    center = (fill_avg + stroke_avg) / 2.0
+    delta = abs(fill_avg - stroke_avg)
+    boosted_delta = max(18.0, delta * 1.12)
+    fill_gray = _clip_gray(center + (boosted_delta / 2.0))
+    stroke_gray = _clip_gray(center - (boosted_delta / 2.0))
+    if fill_gray <= stroke_gray:
+        fill_gray = _clip_gray(max(fill_gray, stroke_gray + 1.0))
+
+    colors = {
+        "fill_gray": fill_gray,
+        "stroke_gray": stroke_gray,
+        "text_gray": stroke_gray,
+        "stem_gray": stroke_gray,
+    }
+
+    if buckets["text_gray"]:
+        text_avg = sum(buckets["text_gray"]) / float(len(buckets["text_gray"]))
+        colors["text_gray"] = _clip_gray(min(text_avg, float(stroke_gray)))
+
+    if buckets["stem_gray"]:
+        stem_avg = sum(buckets["stem_gray"]) / float(len(buckets["stem_gray"]))
+        colors["stem_gray"] = _clip_gray(min(stem_avg, float(stroke_gray)))
+
+    return colors
+
+
 def _harmonize_semantic_size_variants(
     results: list[dict[str, object]],
     folder_path: str,
@@ -7267,14 +7361,18 @@ def _harmonize_semantic_size_variants(
         anchor_w = int(anchor["w"])
         anchor_h = int(anchor["h"])
         anchor_params = dict(anchor["params"])
+        family_colors = _family_harmonized_badge_colors(variant_rows)
 
         for row in variant_rows:
-            if row is anchor:
-                continue
             target_variant = str(row["variant"])
             target_w = int(row["w"])
             target_h = int(row["h"])
             scaled = _scale_badge_params(anchor_params, anchor_w, anchor_h, target_w, target_h)
+            scaled.update(family_colors)
+            if scaled.get("draw_text"):
+                scaled["text_gray"] = int(family_colors["text_gray"])
+            if scaled.get("stem_enabled"):
+                scaled["stem_gray"] = int(family_colors["stem_gray"])
             svg = Action.generate_badge_svg(target_w, target_h, scaled)
 
             target_filename = str(dict(row["entry"])["filename"])
@@ -7300,8 +7398,9 @@ def _harmonize_semantic_size_variants(
                 f.write(svg)
             harmonized_logs.append(
                 (
-                    f"{base}: {target_variant} aus {anchor_variant} abgeleitet "
-                    f"(max_delta={max_delta:.4f}, Fehler {baseline_error:.2f}->{candidate_error:.2f})"
+                    f"{base}: {target_variant} aus {anchor_variant} harmonisiert "
+                    f"(max_delta={max_delta:.4f}, Fehler {baseline_error:.2f}->{candidate_error:.2f}, "
+                    f"Farben fill/stroke={family_colors['fill_gray']}/{family_colors['stroke_gray']})"
                 )
             )
 
