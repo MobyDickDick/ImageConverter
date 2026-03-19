@@ -9,6 +9,7 @@ from __future__ import annotations
 import argparse
 import base64
 import contextlib
+import copy
 import csv
 import json
 import math
@@ -5584,6 +5585,7 @@ class Action:
         max_rounds: int = 6,
         debug_out_dir: str | None = None,
         apply_circle_geometry_penalty: bool = True,
+        stop_when_error_below_threshold: bool = False,
     ) -> list[str]:
         h, w = img_orig.shape[:2]
         logs: list[str] = []
@@ -5594,6 +5596,8 @@ class Action:
             elements.append("arm")
         if params.get("draw_text", True):
             elements.append("text")
+        best_params = copy.deepcopy(params)
+        best_full_err = float("inf")
 
         for round_idx in range(max_rounds):
             logs.append(f"Runde {round_idx + 1}: elementweise Validierung gestartet")
@@ -5663,10 +5667,15 @@ class Action:
             full_render = Action._fit_to_original_size(img_orig, Action.render_svg_to_numpy(full_svg, w, h))
             full_err = Action.calculate_error(img_orig, full_render)
             logs.append(f"Runde {round_idx + 1}: Gesamtfehler={full_err:.3f}")
+            if math.isfinite(full_err) and full_err < best_full_err:
+                best_full_err = full_err
+                best_params = copy.deepcopy(params)
 
             if full_err <= 8.0:
-                logs.append("Gesamtfehler unter Schwellwert, Validierung beendet")
-                break
+                if stop_when_error_below_threshold:
+                    logs.append("Gesamtfehler unter Schwellwert, Validierung beendet")
+                    break
+                logs.append("Gesamtfehler unter Schwellwert, Suche nach besserem Optimum wird fortgesetzt")
 
             if round_idx + 1 >= max_rounds:
                 break
@@ -5674,6 +5683,10 @@ class Action:
             if not round_changed:
                 logs.append("Keine Element-Geometrieänderung mehr; Validierung vorzeitig beendet")
                 break
+
+        if math.isfinite(best_full_err):
+            params.clear()
+            params.update(best_params)
 
         for element in elements:
             if element == "text" and not params.get("draw_text", True):
