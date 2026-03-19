@@ -79,6 +79,35 @@ def test_mask_supports_circle_accepts_sparse_ring_samples() -> None:
     assert conv.Action._mask_supports_circle(ring_mask) is True
 
 
+def test_detect_semantic_primitives_detects_plain_ring_without_arm() -> None:
+    """Small plain-circle badges should not hallucinate a horizontal arm."""
+    if conv.cv2 is None or conv.np is None:
+        pytest.skip("opencv/numpy not available in this environment")
+
+    img = conv.cv2.imread("artifacts/images_to_convert/AC0800_M.jpg")
+    assert img is not None
+
+    observed = conv.Action._detect_semantic_primitives(img)
+
+    assert observed["circle"] is True
+    assert observed["arm"] is False
+    assert observed["text"] is False
+
+
+def test_foreground_mask_keeps_tiny_plain_ring_pixels() -> None:
+    """Foreground extraction should preserve faint anti-aliased ring strokes."""
+    if conv.cv2 is None or conv.np is None:
+        pytest.skip("opencv/numpy not available in this environment")
+
+    img = conv.cv2.imread("artifacts/images_to_convert/AC0800_M.jpg")
+    assert img is not None
+
+    fg = conv.Action._foreground_mask(img)
+
+    assert int(conv.np.count_nonzero(fg)) >= 20
+    assert conv.Action._circle_from_foreground_mask(fg) is not None
+
+
 def test_semantic_validation_accepts_text_supported_by_local_mask(monkeypatch: pytest.MonkeyPatch) -> None:
     """Text badges should pass semantic validation when the text ROI contains enough local foreground support."""
     if conv.np is None:

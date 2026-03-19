@@ -3605,8 +3605,77 @@ class Action:
     @staticmethod
     def _foreground_mask(img: np.ndarray) -> np.ndarray:
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-        _, fg = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
-        return fg > 0
+        _, fg_otsu = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
+
+        # Tiny anti-aliased badges can have only a few gray levels; a pure Otsu
+        # split then frequently drops the ring entirely. Blend in a gentle local
+        # contrast cue so faint circular strokes remain available to downstream
+        # semantic checks without over-activating the white background.
+        blur = cv2.GaussianBlur(gray, (3, 3), 0)
+        local_contrast = cv2.absdiff(gray, blur)
+        contrast_thresh = max(2, int(round(float(np.percentile(local_contrast, 82)))))
+        fg_contrast = local_contrast >= contrast_thresh
+
+        fg = (fg_otsu > 0) | fg_contrast
+        fg_u8 = fg.astype(np.uint8) * 255
+        kernel = np.ones((2, 2), dtype=np.uint8)
+        fg_u8 = cv2.morphologyEx(fg_u8, cv2.MORPH_CLOSE, kernel, iterations=1)
+        return fg_u8 > 0
+
+    @staticmethod
+    def _circle_from_foreground_mask(fg_mask: np.ndarray) -> tuple[float, float, float] | None:
+        """Infer a coarse circle from the foreground mask when Hough is too brittle."""
+        mask_u8 = (fg_mask.astype(np.uint8)) * 255
+        contours, _ = cv2.findContours(mask_u8, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+        if not contours:
+            return None
+
+        h, w = fg_mask.shape[:2]
+        min_side = float(max(1, min(h, w)))
+        best: tuple[float, float, float, float] | None = None
+
+        for cnt in contours:
+            area = float(cv2.contourArea(cnt))
+            if area < max(4.0, min_side * 0.35):
+                continue
+            x, y, bw, bh = cv2.boundingRect(cnt)
+            if bw < 3 or bh < 3:
+                continue
+            aspect = float(bw) / max(1.0, float(bh))
+            if not (0.65 <= aspect <= 1.35):
+                continue
+
+            (cx, cy), radius = cv2.minEnclosingCircle(cnt)
+            radius = float(radius)
+            if radius < max(2.5, min_side * 0.10) or radius > max(8.0, min_side * 0.55):
+                continue
+
+            dist = np.sqrt((cnt[:, 0, 0].astype(np.float32) - cx) ** 2 + (cnt[:, 0, 1].astype(np.float32) - cy) ** 2)
+            if dist.size == 0:
+                continue
+            radial_residual = float(np.mean(np.abs(dist - radius)))
+            bins = 12
+            coverage_bins = np.zeros(bins, dtype=np.uint8)
+            for px, py in cnt[:, 0, :]:
+                ang = math.atan2(float(py) - cy, float(px) - cx)
+                idx = int(((ang + math.pi) / (2.0 * math.pi)) * bins) % bins
+                coverage_bins[idx] = 1
+            coverage = int(np.sum(coverage_bins))
+            if coverage < 6:
+                continue
+
+            bbox_fill_ratio = area / max(1.0, float(bw * bh))
+            # Favor thin ring-like circles or broadly circular contour support.
+            if bbox_fill_ratio > 0.82 and radial_residual > max(1.0, radius * 0.22):
+                continue
+
+            score = radial_residual + abs(1.0 - aspect) * 3.0 + max(0, 7 - coverage) * 0.75
+            if best is None or score < best[0]:
+                best = (score, float(cx), float(cy), radius)
+
+        if best is None:
+            return None
+        return best[1], best[2], best[3]
 
     @staticmethod
     def _mask_supports_circle(mask: np.ndarray | None) -> bool:
@@ -5415,6 +5484,12 @@ class Action:
                 circle_geom = (float(cx), float(cy), float(r))
                 break
 
+        if not has_circle:
+            fallback_circle = Action._circle_from_foreground_mask(fg_mask > 0)
+            if fallback_circle is not None:
+                has_circle = True
+                circle_geom = fallback_circle
+
         # Horizontal line cue: long near-horizontal segment via probabilistic Hough.
         has_arm = False
         edges = cv2.Canny(gray, 45, 140)
@@ -5451,6 +5526,28 @@ class Action:
                     if endpoint_d2 > expanded_r:
                         outside_len += max(0.0, endpoint_d2 - expanded_r)
                     if outside_len < max(2.0, float(w) * 0.08):
+                        continue
+                    sample_count = max(8, dx + 1)
+                    near_ring = 0
+                    outside_samples = 0
+                    for step in range(sample_count):
+                        t = step / max(1, sample_count - 1)
+                        sx = float(x1) + (float(x2) - float(x1)) * t
+                        sy = float(y1) + (float(y2) - float(y1)) * t
+                        dist = math.hypot(sx - cx, sy - cy)
+                        if dist > expanded_r:
+                            outside_samples += 1
+                        if abs(dist - radius) <= max(1.2, float(radius) * 0.16):
+                            near_ring += 1
+                    # Tiny circle arcs can appear as horizontal line segments in
+                    # HoughLinesP. Treat them as ring evidence, not as external arms,
+                    # when most samples cling to the circle circumference and only a
+                    # small fraction actually leaves the circle silhouette.
+                    if near_ring >= int(round(sample_count * 0.55)) and outside_samples <= int(round(sample_count * 0.35)):
+                        continue
+                    # Real semantic arms must sit mostly on one side of the circle.
+                    mid_x = (float(x1) + float(x2)) / 2.0
+                    if abs(mid_x - cx) < max(1.5, float(radius) * 0.35):
                         continue
                 has_arm = True
                 break
