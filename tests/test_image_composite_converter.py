@@ -2926,20 +2926,3 @@ def test_detect_relevant_regions_finds_circle_stem_and_text() -> None:
     labels = {region["label"] for region in regions}
 
     assert {"circle", "stem", "text"}.issubset(labels)
-
-
-def test_detect_relevant_regions_does_not_misclassify_plain_ac0814_connector_as_text() -> None:
-    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
-        pytest.skip("numpy/cv2 not available in this environment")
-
-    np = image_composite_converter.np
-    cv2 = image_composite_converter.cv2
-    img = np.full((25, 45, 3), 255, dtype=np.uint8)
-    cv2.circle(img, (16, 12), 10, (128, 128, 128), thickness=1)
-    cv2.line(img, (27, 12), (44, 12), (128, 128, 128), thickness=1)
-
-    regions = image_composite_converter.detect_relevant_regions(img)
-    labels = {region["label"] for region in regions}
-
-    assert "circle" in labels
-    assert "text" not in labels

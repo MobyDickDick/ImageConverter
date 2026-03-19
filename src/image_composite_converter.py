@@ -118,10 +118,6 @@ def detect_relevant_regions(img) -> list[dict[str, object]]:
 
     stem_candidate = None
     text_candidates: list[tuple[int, int, int, int]] = []
-    circle_bbox = None
-    if regions:
-        circle_bbox = regions[0]["bbox"]
-
     for idx in range(1, num_labels):
         x, y, w, h, area = [int(v) for v in stats[idx]]
         if area < 6:
@@ -129,7 +125,8 @@ def detect_relevant_regions(img) -> list[dict[str, object]]:
         bbox = (x, y, x + w - 1, y + h - 1)
         aspect = max(w, h) / max(1.0, min(w, h))
         touches_circle = False
-        if circle_bbox:
+        if regions:
+            circle_bbox = regions[0]["bbox"]
             cx0 = int(circle_bbox["x0"])
             cy0 = int(circle_bbox["y0"])
             cx1 = int(circle_bbox["x1"])
@@ -143,32 +140,11 @@ def detect_relevant_regions(img) -> list[dict[str, object]]:
     if stem_candidate is not None:
         regions.append(_bbox_to_dict("stem", _expand_bbox(stem_candidate, width, height, pad=1), ANNOTATION_COLORS["stem"]))
 
-    filtered_text_candidates: list[tuple[int, int, int, int]] = []
-    for bbox in text_candidates:
-        x0, y0, x1, y1 = bbox
-        bw = x1 - x0 + 1
-        bh = y1 - y0 + 1
-        aspect = max(bw, bh) / max(1.0, min(bw, bh))
-        if circle_bbox:
-            cx0 = int(circle_bbox["x0"])
-            cy0 = int(circle_bbox["y0"])
-            cx1 = int(circle_bbox["x1"])
-            cy1 = int(circle_bbox["y1"])
-            near_circle = not (x1 < cx0 - 3 or x0 > cx1 + 3 or y1 < cy0 - 3 or y0 > cy1 + 3)
-            circle_mid_y = (cy0 + cy1) / 2.0
-            circle_mid_x = (cx0 + cx1) / 2.0
-            aligned_horizontally = abs(((y0 + y1) / 2.0) - circle_mid_y) <= max(2.0, bh * 0.75)
-            aligned_vertically = abs(((x0 + x1) / 2.0) - circle_mid_x) <= max(2.0, bw * 0.75)
-            connector_like = aspect >= 2.8 and near_circle and (aligned_horizontally or aligned_vertically)
-            if connector_like:
-                continue
-        filtered_text_candidates.append(bbox)
-
-    if filtered_text_candidates:
-        x0 = min(b[0] for b in filtered_text_candidates)
-        y0 = min(b[1] for b in filtered_text_candidates)
-        x1 = max(b[2] for b in filtered_text_candidates)
-        y1 = max(b[3] for b in filtered_text_candidates)
+    if text_candidates:
+        x0 = min(b[0] for b in text_candidates)
+        y0 = min(b[1] for b in text_candidates)
+        x1 = max(b[2] for b in text_candidates)
+        y1 = max(b[3] for b in text_candidates)
         regions.append(_bbox_to_dict("text", _expand_bbox((x0, y0, x1, y1), width, height, pad=1), ANNOTATION_COLORS["text"]))
 
     return regions
