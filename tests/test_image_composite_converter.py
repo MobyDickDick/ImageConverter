@@ -338,6 +338,17 @@ def test_fit_ac0814_prevents_over_shrinking_elongated_plain_circle(monkeypatch: 
     assert float(fitted["min_circle_radius"]) >= (default_r * 0.95) - 1e-6
 
 
+def test_default_ac0814_params_follow_hand_traced_sample_geometry() -> None:
+    """AC0814 should stay close to the hand-traced sample proportions."""
+    params = Action._default_ac0814_params(45, 25)
+
+    assert float(params["cx"]) == pytest.approx(16.086563, abs=1.0)
+    assert float(params["cy"]) == pytest.approx(12.450594, abs=0.75)
+    assert float(params["r"]) == pytest.approx(11.6, abs=1.0)
+    assert float(params["arm_x1"]) == pytest.approx(27.549407, abs=1.25)
+    assert float(params["arm_x2"]) == pytest.approx(45.0, abs=0.25)
+
+
 def test_fit_ac0813_prevents_over_shrinking_elongated_plain_circle(monkeypatch: pytest.MonkeyPatch) -> None:
     """AC0813-like elongated plain badges should keep a template-relative radius floor."""
 
@@ -2836,3 +2847,20 @@ def test_detect_relevant_regions_finds_circle_stem_and_text() -> None:
     labels = {region["label"] for region in regions}
 
     assert {"circle", "stem", "text"}.issubset(labels)
+
+
+def test_detect_relevant_regions_does_not_misclassify_plain_ac0814_connector_as_text() -> None:
+    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+        pytest.skip("numpy/cv2 not available in this environment")
+
+    np = image_composite_converter.np
+    cv2 = image_composite_converter.cv2
+    img = np.full((25, 45, 3), 255, dtype=np.uint8)
+    cv2.circle(img, (16, 12), 10, (128, 128, 128), thickness=1)
+    cv2.line(img, (27, 12), (44, 12), (128, 128, 128), thickness=1)
+
+    regions = image_composite_converter.detect_relevant_regions(img)
+    labels = {region["label"] for region in regions}
+
+    assert "circle" in labels
+    assert "text" not in labels
