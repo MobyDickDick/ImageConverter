@@ -2355,6 +2355,21 @@ class Action:
             r = max(r, default_r * 0.95)
             params["min_circle_radius"] = float(max(float(params.get("min_circle_radius", 1.0)), default_r * 0.95))
 
+            default_cx = float(defaults.get("cx", float(w) / 2.0))
+            default_cy = float(defaults.get("cy", float(h) / 2.0))
+            # AC0814_M was hand-traced with a noticeably stable left circle margin
+            # and a perfectly horizontal connector. In medium/large plain variants
+            # the raster fit can still drift the ring a pixel or two toward the
+            # connector; keep the circle anchored near the semantic template so the
+            # generated SVG stays close to the manual sample.
+            params["cx"] = default_cx
+            params["cy"] = float(Action._clip_scalar(cy, default_cy - 0.6, default_cy + 0.6))
+            params["lock_circle_cx"] = True
+            params["lock_circle_cy"] = True
+            params["lock_arm_center_to_circle"] = True
+            cx = float(params["cx"])
+            cy = float(params["cy"])
+
         params["r"] = r
 
         params["arm_enabled"] = True

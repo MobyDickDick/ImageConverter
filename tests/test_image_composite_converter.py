@@ -338,6 +338,38 @@ def test_fit_ac0814_prevents_over_shrinking_elongated_plain_circle(monkeypatch: 
     assert float(fitted["min_circle_radius"]) >= (default_r * 0.95) - 1e-6
 
 
+def test_fit_ac0814_keeps_elongated_plain_circle_close_to_template_center(monkeypatch: pytest.MonkeyPatch) -> None:
+    """AC0814-like plain badges should keep the manual sample's left circle placement."""
+
+    defaults = Action._default_ac0814_params(45, 25)
+
+    monkeypatch.setattr(
+        Action,
+        "_fit_semantic_badge_from_image",
+        staticmethod(
+            lambda _img, _defaults: {
+                **_defaults,
+                "cx": 18.8,
+                "cy": 14.2,
+                "r": 9.0,
+                "draw_text": False,
+                "arm_enabled": True,
+            }
+        ),
+    )
+
+    class DummyImg:
+        shape = (25, 45, 3)
+
+    fitted = Action._fit_ac0814_params_from_image(DummyImg(), defaults)
+
+    assert float(fitted["cx"]) == pytest.approx(float(defaults["cx"]), abs=1e-6)
+    assert float(fitted["cy"]) == pytest.approx(float(defaults["cy"]), abs=0.6)
+    assert fitted["lock_circle_cx"] is True
+    assert fitted["lock_circle_cy"] is True
+    assert fitted["lock_arm_center_to_circle"] is True
+
+
 def test_default_ac0814_params_follow_hand_traced_sample_geometry() -> None:
     """AC0814 should stay close to the hand-traced sample proportions."""
     params = Action._default_ac0814_params(45, 25)
