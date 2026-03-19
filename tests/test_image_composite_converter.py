@@ -2782,3 +2782,34 @@ def test_trace_image_segment_uses_raw_contour_chain_for_epsilon_sweep(monkeypatc
     assert paths
     assert called_methods
     assert all(method == cv2.CHAIN_APPROX_NONE for method in called_methods)
+
+
+def test_bbox_to_dict_records_expected_coordinates() -> None:
+    region = image_composite_converter._bbox_to_dict("circle", (1, 2, 6, 8), (0, 0, 255))
+
+    assert region["label"] == "circle"
+    assert region["bbox"] == {"x0": 1, "y0": 2, "x1": 6, "y1": 8, "width": 6, "height": 7}
+    assert region["color_bgr"] == [0, 0, 255]
+
+
+def test_parse_args_defaults_to_annotation_mode() -> None:
+    args = image_composite_converter.parse_args(["images"])
+
+    assert args.mode == "annotate"
+
+
+def test_detect_relevant_regions_finds_circle_stem_and_text() -> None:
+    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+        pytest.skip("numpy/cv2 not available in this environment")
+
+    np = image_composite_converter.np
+    cv2 = image_composite_converter.cv2
+    img = np.full((80, 80, 3), 255, dtype=np.uint8)
+    cv2.circle(img, (28, 26), 14, (0, 0, 0), thickness=2)
+    cv2.rectangle(img, (24, 39), (32, 67), (0, 0, 0), thickness=-1)
+    cv2.putText(img, "M", (45, 35), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 0, 0), 2, cv2.LINE_AA)
+
+    regions = image_composite_converter.detect_relevant_regions(img)
+    labels = {region["label"] for region in regions}
+
+    assert {"circle", "stem", "text"}.issubset(labels)
