@@ -1,8 +1,0 @@
-run-meta: run_seed=705003006 pass_seed_offset=0 nonce_ns=1773939303295381400
-status=semantic_mismatch
-best_attempt_svg=AC0811_M_failed.svg
-best_attempt_diff=AC0811_M_failed_diff.png
-issue=Beschreibung erwartet Kreis, im Bild aber nicht robust erkennbar
-issue=Im Bild ist senkrechter Strich erkennbar, aber nicht in der Beschreibung enthalten
-issue=Im Bild ist waagrechter Strich erkennbar, aber nicht in der Beschreibung enthalten
-issue=Strukturprüfung: Kein belastbarer Kreis-Kandidat im Rohbild erkannt
