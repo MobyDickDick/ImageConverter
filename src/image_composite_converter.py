@@ -6024,6 +6024,60 @@ def _extract_ref_parts(name: str) -> tuple[str, int] | None:
     return match.group(1), int(match.group(2))
 
 
+def _normalize_range_token(value: str) -> str:
+    return re.sub(r"[^A-Z0-9]", "", str(value or "").upper())
+
+
+def _compact_range_token(value: str) -> str:
+    token = _normalize_range_token(value)
+    match = re.match(r"^([A-Z]+)(\d+)$", token)
+    if not match:
+        return token
+    letters, digits = match.groups()
+    return f"{letters[0]}{digits}"
+
+
+def _shared_partial_range_token(start_ref: str, end_ref: str) -> str:
+    start_token = _normalize_range_token(start_ref)
+    end_token = _normalize_range_token(end_ref)
+    compact_start = _compact_range_token(start_ref)
+    compact_end = _compact_range_token(end_ref)
+    if not start_token or not end_token:
+        return ""
+    for left, right in ((start_token, end_token), (compact_start, compact_end)):
+        if left and left == right:
+            return left
+        if left and left in right:
+            return left
+        if right and right in left:
+            return right
+
+        max_len = min(len(left), len(right))
+        for length in range(max_len, 2, -1):
+            for idx in range(0, len(left) - length + 1):
+                candidate = left[idx: idx + length]
+                if candidate in right:
+                    return candidate
+    return ""
+
+
+def _matches_partial_range_token(filename: str, start_ref: str, end_ref: str) -> bool:
+    token = _shared_partial_range_token(start_ref, end_ref)
+    if not token:
+        return False
+    stem = _normalize_range_token(get_base_name_from_file(os.path.splitext(filename)[0]))
+    if not stem:
+        return False
+    if token in stem:
+        return True
+
+    pos = 0
+    for char in stem:
+        if pos < len(token) and char == token[pos]:
+            pos += 1
+    return pos == len(token)
+
+
 def _extract_symbol_family(name: str) -> str | None:
     """Extract 2-3 letter corpus family prefixes such as AC, GE, DLG, or NAV."""
     match = re.match(r"^([A-Z]{2,3})\d{3,4}$", str(name).upper())
@@ -6038,9 +6092,10 @@ def _in_requested_range(filename: str, start_ref: str, end_ref: str) -> bool:
     start_parts = _extract_ref_parts(start_ref)
     end_parts = _extract_ref_parts(end_ref)
 
-    # If no parseable range bounds are provided, treat filtering as disabled.
+    # If no parseable range bounds are provided, fall back to a shared partial
+    # token filter. This keeps interactive batches small, e.g. AC08..A08 -> A08*.
     if start_parts is None and end_parts is None:
-        return True
+        return _matches_partial_range_token(filename, start_ref, end_ref) if (start_ref or end_ref) else True
 
     # Files that do not follow the usual XX0000 naming scheme should still be
     # processed in "convert whole folder" workflows.
@@ -7665,6 +7720,15 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--start", default="", help="Start-Referenz (inkl.), default: kein unteres Limit")
     parser.add_argument("--end", default="ZZZZZZ", help="End-Referenz (inkl.), default: ZZZZZZ")
     parser.add_argument(
+        "--interactive-range",
+        action="store_true",
+        help=(
+            "Fragt auf der Konsole 'Namen von' und 'Namen bis' ab und verarbeitet nur diesen Bereich. "
+            "Wenn beide Eingaben keine volle Referenz sind, wird nach ihrem gemeinsamen Teilstring gefiltert "
+            "(z. B. AC08 und A08 => alle A08*-Dateien)."
+        ),
+    )
+    parser.add_argument(
         "--debug-ac0811-dir",
         default=None,
         help="Optional: Ordner für AC0811 Element-Diff-Dumps pro Runde/Element",
@@ -7798,8 +7862,29 @@ def _resolve_cli_csv_and_output(args: argparse.Namespace) -> tuple[str, str | No
     return csv_path, output_dir
 
 
+def _prompt_interactive_range(args: argparse.Namespace) -> tuple[str, str]:
+    current_start = str(args.start or "").strip()
+    current_end = str(args.end or "").strip()
+    prompt_start = f"Namen von [{current_start}]: " if current_start else "Namen von: "
+    prompt_end = f"Namen bis [{current_end}]: " if current_end else "Namen bis: "
+
+    start_value = input(prompt_start).strip() or current_start
+    end_value = input(prompt_end).strip() or current_end
+    if not end_value:
+        end_value = start_value
+
+    shared = _shared_partial_range_token(start_value, end_value)
+    if shared and _extract_ref_parts(start_value) is None and _extract_ref_parts(end_value) is None:
+        print(f"[INFO] Verwende Teilstring-Filter '{shared}' für die Auswahl der Bilder.")
+    else:
+        print(f"[INFO] Verwende Bereich von '{start_value or '(Anfang)'}' bis '{end_value or '(Ende)'}'.")
+    return start_value, end_value
+
+
 def main(argv: list[str] | None = None) -> int:
     args = parse_args(argv)
+    if args.interactive_range:
+        args.start, args.end = _prompt_interactive_range(args)
     log_path = str(args.log_file or "").strip()
     with _optional_log_capture(log_path):
         if args.print_linux_vendor_command:
