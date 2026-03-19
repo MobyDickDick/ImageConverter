@@ -794,11 +794,7 @@
         "--csv-path",
         "${workspaceFolder}/artifacts/images_to_convert/Finale_Wurzelformen_V3.xml",
         "--output-dir",
-        "${workspaceFolder}/artifacts/converted_images",
-        "--start",
-        "AC0000",
-        "--end",
-        "ZZ9999"
+        "${workspaceFolder}/artifacts/converted_images"
       ],
       "logToFile": true,
       "justMyCode": false,
