@@ -652,6 +652,80 @@ def test_run_iteration_pipeline_element_validation_log_contains_run_meta(
     assert "nonce_ns=" in first_line
 
 
+def test_run_iteration_pipeline_writes_failed_best_attempt_artifacts_for_semantic_mismatch(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Semantic mismatches should still emit best-effort SVG and diff artifacts."""
+    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+        pytest.skip("numpy/cv2 not available in this environment")
+
+    np = image_composite_converter.np
+    if np is None:
+        pytest.skip("numpy not available in this environment")
+    cv2 = image_composite_converter.cv2
+
+    img = np.full((12, 20, 3), 240, dtype=np.uint8)
+    img_path = tmp_path / "AC0814_L.jpg"
+    csv_path = tmp_path / "data.csv"
+    svg_dir = tmp_path / "svg"
+    diff_dir = tmp_path / "diff"
+    reports_dir = tmp_path / "reports"
+    csv_path.write_text("Wurzelform;Beschreibung\nAC0814;semantic\n", encoding="utf-8")
+    assert cv2.imwrite(str(img_path), img)
+
+    monkeypatch.setattr(
+        image_composite_converter.Reflection,
+        "parse_description",
+        lambda *_args, **_kwargs: (
+            "semantic",
+            {"mode": "semantic_badge", "elements": ["SEMANTIC: Kreis ohne Buchstabe"], "label": ""},
+        ),
+    )
+    monkeypatch.setattr(
+        image_composite_converter.Action,
+        "make_badge_params",
+        staticmethod(lambda *_args, **_kwargs: image_composite_converter.Action._default_ac0814_params(20, 12)),
+    )
+    monkeypatch.setattr(
+        image_composite_converter.Action,
+        "validate_semantic_description_alignment",
+        staticmethod(lambda *_args, **_kwargs: ["circle missing"]),
+    )
+    monkeypatch.setattr(
+        image_composite_converter.Action,
+        "generate_badge_svg",
+        staticmethod(lambda w, h, _p: f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}"/>'),
+    )
+    monkeypatch.setattr(
+        image_composite_converter.Action,
+        "render_svg_to_numpy",
+        staticmethod(lambda _svg, w, h: np.full((h, w, 3), 245, dtype=np.uint8)),
+    )
+    monkeypatch.setattr(
+        image_composite_converter.Action,
+        "create_diff_image",
+        staticmethod(lambda a, _b: a.copy()),
+    )
+
+    res = image_composite_converter.run_iteration_pipeline(
+        str(img_path),
+        str(csv_path),
+        2,
+        str(svg_dir),
+        str(diff_dir),
+        str(reports_dir),
+    )
+
+    assert res is None
+    assert (svg_dir / "AC0814_L_failed.svg").exists()
+    assert (diff_dir / "AC0814_L_failed_diff.png").exists()
+    log_text = (reports_dir / "AC0814_L_element_validation.log").read_text(encoding="utf-8")
+    assert "status=semantic_mismatch" in log_text
+    assert "best_attempt_svg=AC0814_L_failed.svg" in log_text
+    assert "best_attempt_diff=AC0814_L_failed_diff.png" in log_text
+
+
 def test_run_iteration_pipeline_breaks_early_on_flat_composite_error(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
