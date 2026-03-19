@@ -99,6 +99,20 @@
       }
     },
     {
+      "name": "Python: image_composite_converter (interactive range)",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/src/image_composite_converter.py",
+      "python": "${config:python.defaultInterpreterPath}",
+      "args": [
+        "--interactive-range",
+        "${workspaceFolder}/artifacts/images_to_convert"
+      ],
+      "console": "integratedTerminal",
+      "logToFile": true,
+      "justMyCode": false
+    },
+    {
       "name": "Python: run_all.py",
       "type": "debugpy",
       "request": "launch",
