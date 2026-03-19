@@ -1,0 +1,6 @@
+run-meta: run_seed=934600924 pass_seed_offset=0 nonce_ns=1773933205392757400
+status=semantic_mismatch
+best_attempt_svg=AC0839_S_failed.svg
+best_attempt_diff=AC0839_S_failed_diff.png
+issue=Beschreibung erwartet Buchstabe/Text, im Bild aber nicht robust erkennbar
+issue=Strukturprüfung: Keine belastbare Textstruktur (z.B. CO₂) im Rohbild erkannt
