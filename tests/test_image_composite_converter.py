@@ -9,6 +9,48 @@ from src.image_composite_converter import Action, _clip
 
 conv = image_composite_converter
 
+
+def test_vendored_site_packages_dirs_discovers_repo_bundle() -> None:
+    """Repo-local bundled site-packages should be discoverable for optional imports."""
+    dirs = image_composite_converter._vendored_site_packages_dirs()
+
+    assert any(path.as_posix().endswith(".venv/Lib/site-packages") for path in dirs)
+
+
+def test_vendored_site_packages_dirs_discovers_vendor_linux_bundle(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
+    """Dedicated vendor/linux-py310 bundles should be discoverable without using .venv."""
+    vendor_dir = tmp_path / "vendor" / "linux-py310" / "site-packages"
+    vendor_dir.mkdir(parents=True)
+
+    monkeypatch.setattr(image_composite_converter, "_optional_dependency_base_dir", lambda: tmp_path)
+
+    dirs = image_composite_converter._vendored_site_packages_dirs()
+
+    assert vendor_dir in dirs
+
+
+def test_optional_dependency_error_reports_windows_bundle_hint() -> None:
+    """Dependency diagnostics should explain when a bundled Windows wheel is unusable on Linux."""
+    message = image_composite_converter._describe_optional_dependency_error(
+        "numpy",
+        AttributeError("module 'os' has no attribute 'add_dll_directory'"),
+        [Path(".venv/Lib/site-packages")],
+    )
+
+    assert "Windows-Build" in message
+    assert "Linux-Umgebung" in message
+
+
+def test_source_loads_numpy_before_cv2() -> None:
+    """cv2 must be initialized after numpy so vendored OpenCV can resolve its dependency."""
+    source = Path(image_composite_converter.__file__).read_text(encoding="utf-8")
+
+    numpy_pos = source.index('np = _load_optional_module("numpy")')
+    cv2_pos = source.index('cv2 = _load_optional_module("cv2")')
+
+    assert numpy_pos < cv2_pos
+
+
 def test_co2_label_defaults_use_center_co_anchor_mode() -> None:
     """Default CO₂ layout should keep center_co mode and only shift left if required."""
     params = Action._apply_co2_label(Action._default_ac0870_params(15, 15))
@@ -520,6 +562,80 @@ def test_run_iteration_pipeline_element_validation_log_contains_run_meta(
     assert "nonce_ns=" in first_line
 
 
+def test_run_iteration_pipeline_writes_failed_best_attempt_artifacts_for_semantic_mismatch(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Semantic mismatches should still emit best-effort SVG and diff artifacts."""
+    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+        pytest.skip("numpy/cv2 not available in this environment")
+
+    np = image_composite_converter.np
+    if np is None:
+        pytest.skip("numpy not available in this environment")
+    cv2 = image_composite_converter.cv2
+
+    img = np.full((12, 20, 3), 240, dtype=np.uint8)
+    img_path = tmp_path / "AC0814_L.jpg"
+    csv_path = tmp_path / "data.csv"
+    svg_dir = tmp_path / "svg"
+    diff_dir = tmp_path / "diff"
+    reports_dir = tmp_path / "reports"
+    csv_path.write_text("Wurzelform;Beschreibung\nAC0814;semantic\n", encoding="utf-8")
+    assert cv2.imwrite(str(img_path), img)
+
+    monkeypatch.setattr(
+        image_composite_converter.Reflection,
+        "parse_description",
+        lambda *_args, **_kwargs: (
+            "semantic",
+            {"mode": "semantic_badge", "elements": ["SEMANTIC: Kreis ohne Buchstabe"], "label": ""},
+        ),
+    )
+    monkeypatch.setattr(
+        image_composite_converter.Action,
+        "make_badge_params",
+        staticmethod(lambda *_args, **_kwargs: image_composite_converter.Action._default_ac0814_params(20, 12)),
+    )
+    monkeypatch.setattr(
+        image_composite_converter.Action,
+        "validate_semantic_description_alignment",
+        staticmethod(lambda *_args, **_kwargs: ["circle missing"]),
+    )
+    monkeypatch.setattr(
+        image_composite_converter.Action,
+        "generate_badge_svg",
+        staticmethod(lambda w, h, _p: f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}"/>'),
+    )
+    monkeypatch.setattr(
+        image_composite_converter.Action,
+        "render_svg_to_numpy",
+        staticmethod(lambda _svg, w, h: np.full((h, w, 3), 245, dtype=np.uint8)),
+    )
+    monkeypatch.setattr(
+        image_composite_converter.Action,
+        "create_diff_image",
+        staticmethod(lambda a, _b: a.copy()),
+    )
+
+    res = image_composite_converter.run_iteration_pipeline(
+        str(img_path),
+        str(csv_path),
+        2,
+        str(svg_dir),
+        str(diff_dir),
+        str(reports_dir),
+    )
+
+    assert res is None
+    assert (svg_dir / "AC0814_L_failed.svg").exists()
+    assert (diff_dir / "AC0814_L_failed_diff.png").exists()
+    log_text = (reports_dir / "AC0814_L_element_validation.log").read_text(encoding="utf-8")
+    assert "status=semantic_mismatch" in log_text
+    assert "best_attempt_svg=AC0814_L_failed.svg" in log_text
+    assert "best_attempt_diff=AC0814_L_failed_diff.png" in log_text
+
+
 def test_run_iteration_pipeline_breaks_early_on_flat_composite_error(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
@@ -731,6 +847,61 @@ def test_convert_range_does_not_skip_variants_in_quality_passes(
     assert captured_cfg["skipped_variants"] == []
     assert observed_skips
     assert all(not skip_set for skip_set in observed_skips)
+
+
+def test_convert_range_writes_svgs_and_diffs_to_dedicated_subfolders(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Converted SVGs and diff PNGs should be separated into stable subdirectories."""
+    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+        pytest.skip("numpy/cv2 not available in this environment")
+
+    np = image_composite_converter.np
+    if np is None:
+        pytest.skip("numpy not available in this environment")
+    cv2 = image_composite_converter.cv2
+
+    images_dir = tmp_path / "images"
+    images_dir.mkdir()
+    csv_path = tmp_path / "data.csv"
+    csv_path.write_text("Wurzelform;Beschreibung\nAC0812;semantic\n", encoding="utf-8")
+    assert cv2.imwrite(str(images_dir / "AC0812_L.jpg"), np.full((10, 10, 3), 230, dtype=np.uint8))
+
+    monkeypatch.setattr(image_composite_converter, "_in_requested_range", lambda *_args, **_kwargs: True)
+    monkeypatch.setattr(image_composite_converter, "_load_quality_config", lambda *_args, **_kwargs: {})
+    monkeypatch.setattr(image_composite_converter, "_write_quality_pass_report", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(image_composite_converter, "_harmonize_semantic_size_variants", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(image_composite_converter, "_write_pixel_delta2_ranking", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(image_composite_converter, "_select_open_quality_cases", lambda *_args, **_kwargs: [])
+    monkeypatch.setattr(image_composite_converter, "_select_middle_lower_tercile", lambda *_args, **_kwargs: [])
+
+    def fake_pipeline(img_path: str, _csv_path: str, _iterations: int, svg_out: str, diff_out: str, reports_out: str, *_args, **_kwargs):
+        stem = Path(img_path).stem
+        Path(svg_out).mkdir(parents=True, exist_ok=True)
+        Path(diff_out).mkdir(parents=True, exist_ok=True)
+        Path(reports_out).mkdir(parents=True, exist_ok=True)
+        (Path(svg_out) / f"{stem}.svg").write_text("<svg/>", encoding="utf-8")
+        (Path(diff_out) / f"{stem}_diff.png").write_bytes(b"png")
+        params = {"mode": "semantic_badge", "elements": ["circle"], "cx": 5.0, "cy": 5.0, "r": 3.0}
+        return stem, "semantic", params, 1, 100.0
+
+    monkeypatch.setattr(image_composite_converter, "run_iteration_pipeline", fake_pipeline)
+
+    output_root = tmp_path / "out"
+    result = image_composite_converter.convert_range(
+        str(images_dir),
+        str(csv_path),
+        iterations=2,
+        start_ref="AC0812",
+        end_ref="AC0812",
+        output_root=str(output_root),
+    )
+
+    assert result == str(output_root)
+    assert (output_root / "converted_svgs" / "AC0812_L.svg").exists()
+    assert (output_root / "diff_pngs" / "AC0812_L_diff.png").exists()
+    assert (output_root / "reports" / "Iteration_Log.csv").exists()
 
 
 def test_template_transfer_donor_family_compatible() -> None:
@@ -2456,11 +2627,19 @@ def test_resolve_cli_csv_and_output_keeps_explicit_csv_over_autodetect(tmp_path:
     assert output_dir == "out_dir"
 
 
-def test_default_converted_symbols_root_points_to_converted_images_svg() -> None:
+def test_default_converted_symbols_root_points_to_converted_images() -> None:
     root = Path(conv._default_converted_symbols_root())
 
-    assert root.name == "converted_images_svg"
+    assert root.name == "converted_images"
     assert root.parent.name == "artifacts"
+
+
+def test_conversion_output_subdirectories_live_below_root() -> None:
+    root = Path("/tmp/example-output")
+
+    assert Path(conv._converted_svg_output_dir(str(root))) == root / "converted_svgs"
+    assert Path(conv._diff_output_dir(str(root))) == root / "diff_pngs"
+    assert Path(conv._reports_output_dir(str(root))) == root / "reports"
 
 
 def test_render_embedded_raster_svg_wraps_gif_without_optional_deps(tmp_path: Path) -> None:
@@ -2626,6 +2805,29 @@ def test_load_description_mapping_from_xml_falls_back_to_descriptions_directory(
     assert mapping.get("AC0241")
 
 
+def test_resolve_description_xml_path_supports_mixed_windows_style_input() -> None:
+    resolved = conv._resolve_description_xml_path(
+        r"C:\Users\marku\myCloud\ImageConverter/artifacts/images_to_convert/Finale_Wurzelformen_V3.xml"
+    )
+
+    assert resolved is not None
+    assert resolved.endswith("artifacts/descriptions/Finale_Wurzelformen_V3.xml")
+
+
+def test_resolve_cli_csv_and_output_rewrites_missing_xml_to_descriptions_directory() -> None:
+    args = conv.parse_args(
+        [
+            "artifacts/images_to_convert",
+            r"C:\Users\marku\myCloud\ImageConverter/artifacts/images_to_convert/Finale_Wurzelformen_V3.xml",
+        ]
+    )
+
+    csv_path, output_dir = conv._resolve_cli_csv_and_output(args)
+
+    assert csv_path.endswith("artifacts/descriptions/Finale_Wurzelformen_V3.xml")
+    assert output_dir is None
+
+
 def test_build_linux_vendor_install_command_uses_vendor_defaults() -> None:
     cmd = conv.build_linux_vendor_install_command(vendor_dir="vendor", platform_tag="manylinux2014_x86_64", python_version="311")
 
@@ -2693,3 +2895,51 @@ def test_trace_image_segment_uses_raw_contour_chain_for_epsilon_sweep(monkeypatc
     assert paths
     assert called_methods
     assert all(method == cv2.CHAIN_APPROX_NONE for method in called_methods)
+
+
+def test_bbox_to_dict_records_expected_coordinates() -> None:
+    region = image_composite_converter._bbox_to_dict("circle", (1, 2, 6, 8), (0, 0, 255))
+
+    assert region["label"] == "circle"
+    assert region["bbox"] == {"x0": 1, "y0": 2, "x1": 6, "y1": 8, "width": 6, "height": 7}
+    assert region["color_bgr"] == [0, 0, 255]
+
+
+def test_parse_args_defaults_to_annotation_mode() -> None:
+    args = image_composite_converter.parse_args(["images"])
+
+    assert args.mode == "annotate"
+
+
+def test_detect_relevant_regions_finds_circle_stem_and_text() -> None:
+    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+        pytest.skip("numpy/cv2 not available in this environment")
+
+    np = image_composite_converter.np
+    cv2 = image_composite_converter.cv2
+    img = np.full((80, 80, 3), 255, dtype=np.uint8)
+    cv2.circle(img, (28, 26), 14, (0, 0, 0), thickness=2)
+    cv2.rectangle(img, (24, 39), (32, 67), (0, 0, 0), thickness=-1)
+    cv2.putText(img, "M", (45, 35), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 0, 0), 2, cv2.LINE_AA)
+
+    regions = image_composite_converter.detect_relevant_regions(img)
+    labels = {region["label"] for region in regions}
+
+    assert {"circle", "stem", "text"}.issubset(labels)
+
+
+def test_detect_relevant_regions_does_not_misclassify_plain_ac0814_connector_as_text() -> None:
+    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+        pytest.skip("numpy/cv2 not available in this environment")
+
+    np = image_composite_converter.np
+    cv2 = image_composite_converter.cv2
+    img = np.full((25, 45, 3), 255, dtype=np.uint8)
+    cv2.circle(img, (16, 12), 10, (128, 128, 128), thickness=1)
+    cv2.line(img, (27, 12), (44, 12), (128, 128, 128), thickness=1)
+
+    regions = image_composite_converter.detect_relevant_regions(img)
+    labels = {region["label"] for region in regions}
+
+    assert "circle" in labels
+    assert "text" not in labels
