@@ -1,6 +1,48 @@
-run-meta: run_seed=934600924 pass_seed_offset=0 nonce_ns=1773933218580735800
-status=semantic_mismatch
-best_attempt_svg=AC0836_S_failed.svg
-best_attempt_diff=AC0836_S_failed_diff.png
-issue=Beschreibung erwartet Buchstabe/Text, im Bild aber nicht robust erkennbar
-issue=Strukturprüfung: Keine belastbare Textstruktur (z.B. CO₂) im Rohbild erkannt
+run-meta: run_seed=705003006 pass_seed_offset=4 nonce_ns=1773939693467475500
+status=semantic_ok
+Runde 1: elementweise Validierung gestartet
+circle: Fehler=168.818
+circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
+circle: Radius-Bracketing r 5.700->6.500 (best_err=123.578); Kandidaten=5.500->168.818, 6.000->160.112, 6.500->123.578, 7.000->131.383
+stem: Fehler=53.235
+stem: Breitenkorrektur mode=iter, ratio=0.167, alt=1.000, neu=1.000
+stem: Geometrie nach Elementabgleich aktualisiert
+stem: Breiten-Bracketing keine relevante Änderung (stem_width: 1.000); Kandidaten=1.000->53.235, 1.500->53.235
+stem: Längen-Bracketing keine relevante Änderung (stem_len: 11.000); Kandidaten=7.500->88.933, 11.000->44.000, 12.000->50.225, 16.500->87.738, 20.500->102.126, 25.000->124.121
+text: Fehler=161.743
+text: Breiten-Bracketing voc_font_scale 0.562->0.337; Kandidaten=0.337->161.743, 0.477->161.743, 0.526->161.743, 0.562->161.743, 0.646->164.442, 0.716->164.221, 0.968->163.130, 1.221->169.086, 1.411->168.124, 1.600->165.620
+Runde 1: Gesamtfehler=21.360
+Runde 2: elementweise Validierung gestartet
+circle: Fehler=123.578
+circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
+circle: Radius-Bracketing keine relevante Änderung (r: 6.500, best_err=123.578); Kandidaten=6.000->160.112, 6.500->123.578, 7.000->131.383
+stem: Fehler=44.000
+stem: Breiten-Bracketing keine relevante Änderung (stem_width: 1.000); Kandidaten=1.000->53.235, 1.500->53.235
+stem: Längen-Bracketing keine relevante Änderung (stem_len: 11.000); Kandidaten=7.500->88.933, 11.000->44.000, 12.000->50.225, 16.500->87.738, 20.500->102.126, 25.000->124.121
+text: Fehler=161.743
+text: Breiten-Bracketing voc_font_scale 0.337->0.950; Kandidaten=0.300->161.743, 0.337->161.743, 0.388->161.743, 0.495->161.743, 0.690->169.114, 0.950->161.337, 1.210->170.785, 1.405->167.859, 1.600->165.620
+Runde 2: Gesamtfehler=23.645
+Runde 3: elementweise Validierung gestartet
+circle: Fehler=123.578
+circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
+circle: Radius-Bracketing keine relevante Änderung (r: 6.500, best_err=123.578); Kandidaten=6.000->160.112, 6.500->123.578, 7.000->131.383
+stem: Fehler=44.000
+stem: Breiten-Bracketing keine relevante Änderung (stem_width: 1.000); Kandidaten=1.000->53.235, 1.500->53.235
+stem: Längen-Bracketing keine relevante Änderung (stem_len: 11.000); Kandidaten=7.500->88.933, 11.000->44.000, 12.000->50.225, 16.500->87.738, 20.500->102.126, 25.000->124.121
+text: Fehler=161.337
+text: Breiten-Bracketing voc_font_scale 0.950->1.025; Kandidaten=0.450->161.743, 0.623->163.408, 0.795->167.177, 0.807->168.597, 0.950->161.337, 1.025->158.258, 1.092->163.325, 1.255->169.615, 1.427->167.940, 1.600->165.620
+Runde 3: Gesamtfehler=24.456
+Runde 4: elementweise Validierung gestartet
+circle: Fehler=123.578
+circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
+circle: Radius-Bracketing keine relevante Änderung (r: 6.500, best_err=123.578); Kandidaten=6.000->160.112, 6.500->123.578, 7.000->131.383
+stem: Fehler=44.000
+stem: Breiten-Bracketing keine relevante Änderung (stem_width: 1.000); Kandidaten=1.000->53.235, 1.500->53.235
+stem: Längen-Bracketing keine relevante Änderung (stem_len: 11.000); Kandidaten=7.500->88.933, 11.000->44.000, 12.000->50.225, 16.500->87.738, 20.500->102.126, 25.000->124.121
+text: Fehler=158.258
+text: Breiten-Bracketing keine relevante Änderung (voc_font_scale: 1.025); Kandidaten=0.450->161.743, 0.623->163.408, 0.795->167.177, 0.871->165.450, 1.025->158.258, 1.179->171.106, 1.255->169.615, 1.427->167.940, 1.600->165.620
+Runde 4: Gesamtfehler=24.456
+Keine Element-Geometrieänderung mehr; Validierung vorzeitig beendet
+circle: Farb-Bracketing übersprungen (Farben gesperrt)
+stem: Farb-Bracketing übersprungen (Farben gesperrt)
+text: Farb-Bracketing übersprungen (Farben gesperrt)

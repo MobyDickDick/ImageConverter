@@ -1,0 +1,28 @@
+run-meta: run_seed=705003006 pass_seed_offset=4 nonce_ns=1773939691540756900
+status=semantic_ok
+Runde 1: elementweise Validierung gestartet
+circle: Fehler=163.942
+circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
+circle: Radius-Bracketing r 6.000->6.500 (best_err=122.899); Kandidaten=5.500->180.552, 6.000->163.942, 6.500->122.899, 7.000->130.102
+arm: Fehler=102.233
+arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
+arm: Längen-Bracketing keine relevante Änderung (arm_len: 11.000); Kandidaten=9.000->113.333, 11.000->102.233, 13.000->102.233, 17.000->102.233, 21.000->102.233, 25.000->102.233
+text: Fehler=151.067
+text: Breiten-Stochastic-Survivor aktiviert (voc_font_scale=0.632, err=149.855)
+text: Breiten-Bracketing voc_font_scale 0.562->0.632; Kandidaten=0.337->151.067, 0.477->151.067, 0.526->151.067, 0.562->151.067, 0.646->151.915, 0.716->156.353, 0.968->156.523, 1.221->173.497, 1.411->163.538, 1.600->174.689
+Runde 1: Gesamtfehler=19.827
+Runde 2: elementweise Validierung gestartet
+circle: Fehler=122.899
+circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
+circle: Radius-Bracketing keine relevante Änderung (r: 6.500, best_err=122.899); Kandidaten=6.000->163.720, 6.500->122.899, 7.000->130.102
+arm: Fehler=102.233
+arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
+arm: Längen-Bracketing keine relevante Änderung (arm_len: 11.000); Kandidaten=9.000->113.333, 11.000->102.233, 13.000->102.233, 17.000->102.233, 21.000->102.233, 25.000->102.233
+text: Fehler=149.855
+text: Breiten-Bracketing keine relevante Änderung (voc_font_scale: 0.632); Kandidaten=0.379->151.067, 0.537->151.067, 0.562->151.067, 0.632->149.855, 0.727->157.127, 0.745->154.245, 0.990->158.772, 1.234->169.078, 1.417->163.862, 1.600->174.689
+Runde 2: Gesamtfehler=19.827
+Keine Element-Geometrieänderung mehr; Validierung vorzeitig beendet
+circle: Farb-Bracketing übersprungen (Farben gesperrt)
+arm: Farb-Bracketing übersprungen (Farben gesperrt)
+text: Farb-Bracketing übersprungen (Farben gesperrt)
+semantic-guard: Erwartete Arm-Geometrie bestätigt/wiederhergestellt (z.B. AC0812 links).

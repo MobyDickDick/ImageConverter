@@ -1,0 +1,30 @@
+run-meta: run_seed=705003006 pass_seed_offset=0 nonce_ns=1773939075089381800
+status=semantic_ok
+Runde 1: elementweise Validierung gestartet
+circle: Fehler=126.845
+circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
+circle: Radius-Bracketing r 9.050->9.000 (best_err=126.845); Kandidaten=8.500->138.902, 9.000->126.845, 9.500->138.484
+arm: Fehler=87.556
+arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
+arm: Längen-Bracketing arm_len 13.200->13.000; Kandidaten=11.000->100.056, 13.000->93.361, 17.000->93.361, 23.000->93.361, 29.000->93.361, 35.000->93.361
+Runde 1: Gesamtfehler=12.733
+Runde 2: elementweise Validierung gestartet
+circle: Fehler=126.845
+circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
+circle: Radius-Bracketing keine relevante Änderung (r: 9.000, best_err=126.845); Kandidaten=8.500->138.902, 9.000->126.845, 9.500->138.484
+arm: Fehler=93.361
+arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
+arm: Längen-Bracketing arm_len 12.200->12.000; Kandidaten=11.000->100.056, 12.000->93.361, 17.000->93.361, 23.000->93.361, 29.000->93.361, 35.000->93.361
+Runde 2: Gesamtfehler=12.733
+Runde 3: elementweise Validierung gestartet
+circle: Fehler=126.845
+circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
+circle: Radius-Bracketing keine relevante Änderung (r: 9.000, best_err=126.845); Kandidaten=8.500->138.902, 9.000->126.845, 9.500->138.484
+arm: Fehler=93.361
+arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
+arm: Längen-Bracketing keine relevante Änderung (arm_len: 12.000); Kandidaten=11.000->100.056, 12.000->93.361, 17.000->93.361, 23.000->93.361, 29.000->93.361, 35.000->93.361
+Runde 3: Gesamtfehler=12.733
+Keine Element-Geometrieänderung mehr; Validierung vorzeitig beendet
+circle: Farb-Bracketing übersprungen (Farben gesperrt)
+arm: Farb-Bracketing übersprungen (Farben gesperrt)
+semantic-guard: Erwartete Arm-Geometrie bestätigt/wiederhergestellt (z.B. AC0812 links).
