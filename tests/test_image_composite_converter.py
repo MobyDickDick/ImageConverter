@@ -68,6 +68,17 @@ def test_semantic_validation_accepts_circle_supported_by_local_mask(monkeypatch:
     assert issues == []
 
 
+def test_mask_supports_circle_accepts_sparse_ring_samples() -> None:
+    """Thin ring masks should still count as circle support during semantic validation."""
+    if conv.np is None:
+        pytest.skip("numpy not available in this environment")
+    ring_mask = conv.np.zeros((12, 12), dtype=bool)
+    for y, x in [(2, 5), (3, 8), (5, 9), (8, 7), (9, 5), (8, 3), (5, 2), (3, 3)]:
+        ring_mask[y, x] = True
+
+    assert conv.Action._mask_supports_circle(ring_mask) is True
+
+
 def test_semantic_validation_accepts_text_supported_by_local_mask(monkeypatch: pytest.MonkeyPatch) -> None:
     """Text badges should pass semantic validation when the text ROI contains enough local foreground support."""
     if conv.np is None:
@@ -839,6 +850,25 @@ def test_validate_semantic_description_alignment_rejects_non_semantic_cross_shap
     assert any("Kreis" in issue for issue in issues)
     assert any("waagrechter Strich" in issue for issue in issues)
     assert any("Text" in issue or "CO₂" in issue or "CO_2" in issue for issue in issues)
+
+
+def test_detect_semantic_primitives_ignores_t_glyph_bar_inside_circle() -> None:
+    """A centered T glyph inside a circle should not be misread as an external arm."""
+    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+        pytest.skip("numpy/cv2 not available in this environment")
+
+    np = image_composite_converter.np
+    cv2 = image_composite_converter.cv2
+
+    img = np.full((36, 36, 3), 255, dtype=np.uint8)
+    cv2.circle(img, (18, 18), 10, (150, 150, 150), 2)
+    cv2.line(img, (14, 15), (22, 15), (120, 120, 120), 2)
+    cv2.line(img, (18, 15), (18, 23), (120, 120, 120), 2)
+
+    observed = Action._detect_semantic_primitives(img)
+
+    assert observed["circle"] is True
+    assert observed["arm"] is False
 
 
 
