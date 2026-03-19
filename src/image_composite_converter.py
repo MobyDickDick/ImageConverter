@@ -306,6 +306,31 @@ def _load_optional_module(module_name: str):
     return None
 
 
+def _import_with_vendored_fallback(module_name: str):
+    """Import a module, retrying with repo-vendored site-packages on sys.path."""
+    try:
+        return importlib.import_module(module_name)
+    except Exception as exc:
+        last_exc: BaseException = exc
+
+    for site_packages in _vendored_site_packages_dirs():
+        path_str = str(site_packages)
+        added = False
+        if path_str not in sys.path:
+            sys.path.insert(0, path_str)
+            added = True
+        try:
+            return importlib.import_module(module_name)
+        except Exception as exc:
+            last_exc = exc
+        finally:
+            if added:
+                with contextlib.suppress(ValueError):
+                    sys.path.remove(path_str)
+
+    raise last_exc
+
+
 # Load numpy before cv2: OpenCV's Python bindings import numpy at module-import
 # time and can fail permanently for this process if cv2 is attempted first while
 # numpy is available only via repo-vendored site-packages.
@@ -344,11 +369,40 @@ class Candidate:
 
 
 def load_grayscale_image(path: Path) -> list[list[int]]:
-    image_module = importlib.import_module("PIL.Image")
+    image_module = _import_with_vendored_fallback("PIL.Image")
     gray = image_module.open(path).convert("L")
     w, h = gray.size
     px = gray.load()
     return [[int(px[x, y]) for x in range(w)] for y in range(h)]
+
+
+def _create_diff_image_without_cv2(input_path: str | Path, svg_content: str):
+    """Create a red/cyan diff image using PyMuPDF when numpy/opencv are unavailable."""
+    if fitz is None:
+        raise RuntimeError("Fallback diff generation requires fitz (PyMuPDF).")
+
+    original_doc = fitz.open(str(input_path))
+    original_pix = original_doc[0].get_pixmap(alpha=False)
+
+    svg_doc = fitz.open("pdf", svg_content.encode("utf-8"))
+    svg_pix = svg_doc[0].get_pixmap(alpha=False)
+    if (svg_pix.width, svg_pix.height) != (original_pix.width, original_pix.height):
+        svg_pix = fitz.Pixmap(svg_pix, original_pix.width, original_pix.height)
+
+    original_samples = original_pix.samples
+    svg_samples = svg_pix.samples
+    diff_samples = bytearray(len(original_samples))
+
+    for idx in range(0, len(diff_samples), 3):
+        r0, g0, b0 = original_samples[idx : idx + 3]
+        rs, gs, bs = svg_samples[idx : idx + 3]
+        gray_orig = int(round((r0 + g0 + b0) / 3))
+        gray_svg = int(round((rs + gs + bs) / 3))
+        diff_samples[idx] = gray_svg
+        diff_samples[idx + 1] = gray_svg
+        diff_samples[idx + 2] = gray_orig
+
+    return fitz.Pixmap(fitz.csRGB, original_pix.width, original_pix.height, bytes(diff_samples), 0)
 
 
 def _compute_otsu_threshold(grayscale: list[list[int]]) -> int:
@@ -5604,7 +5658,7 @@ def run_iteration_pipeline(
         with open(log_path, "w", encoding="utf-8") as f:
             f.write("\n".join(payload).rstrip() + "\n")
 
-    def _write_attempt_artifacts(svg_content: str, rendered_img=None, *, failed: bool = False) -> None:
+    def _write_attempt_artifacts(svg_content: str, rendered_img=None, diff_img=None, *, failed: bool = False) -> None:
         suffix = "_failed" if failed else ""
         svg_path = os.path.join(svg_out_dir, f"{base}{suffix}.svg")
         with open(svg_path, "w", encoding="utf-8") as f:
@@ -5615,7 +5669,7 @@ def run_iteration_pipeline(
             render = Action.render_svg_to_numpy(svg_content, w, h)
         if render is None:
             return
-        diff = Action.create_diff_image(perc.img, render)
+        diff = diff_img if diff_img is not None else Action.create_diff_image(perc.img, render)
         cv2.imwrite(os.path.join(diff_out_dir, f"{base}{suffix}_diff.png"), diff)
 
     if params["mode"] == "semantic_badge":
@@ -5738,7 +5792,7 @@ def run_iteration_pipeline(
         print("-> Konvergenzdiagnose: Iterationsbudget ausgeschöpft (Optimum unklar, ggf. Suchraum erweitern)")
 
     if best_svg:
-        _write_attempt_artifacts(best_svg, best_diff)
+        _write_attempt_artifacts(best_svg, diff_img=best_diff)
 
     _write_validation_log([
         "status=composite_ok",
@@ -6622,14 +6676,19 @@ def convert_range(
             for filename in files:
                 stem = os.path.splitext(filename)[0]
                 image_path = os.path.join(folder_path, filename)
+                svg_content = _render_embedded_raster_svg(image_path)
                 svg_path = os.path.join(svg_out_dir, f"{stem}.svg")
                 with open(svg_path, "w", encoding="utf-8") as svg_file:
-                    svg_file.write(_render_embedded_raster_svg(image_path))
+                    svg_file.write(svg_content)
+                if fitz is not None:
+                    diff = _create_diff_image_without_cv2(image_path, svg_content)
+                    diff.save(os.path.join(diff_out_dir, f"{stem}_diff.png"))
                 writer.writerow([filename, "embedded-raster", 0, "0.00", "0.00000000"])
         with open(os.path.join(reports_out_dir, "fallback_mode.txt"), "w", encoding="utf-8") as f:
             f.write(
                 "Fallback-Modus aktiv: fehlende numpy/opencv-Abhängigkeiten; "
-                "SVG-Dateien wurden als eingebettete Rasterbilder erzeugt.\n"
+                "SVG-Dateien wurden als eingebettete Rasterbilder erzeugt"
+                + (" und Differenzbilder via Pillow/PyMuPDF geschrieben.\n" if fitz is not None else ".\n")
             )
         return out_root
     rng = _conversion_random()
@@ -7310,7 +7369,7 @@ def _write_pixel_delta2_ranking(folder_path: str, svg_out_dir: str, reports_out_
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--mode", choices=("annotate", "convert"), default="annotate", help="annotate=markiere Kreis/Kellenstiel/Schrift und schreibe Koordinaten; convert=alte SVG-Konvertierung")
+    parser.add_argument("--mode", choices=("annotate", "convert"), default="convert", help="annotate=markiere Kreis/Kellenstiel/Schrift und schreibe Koordinaten; convert=alte SVG-Konvertierung")
     parser.add_argument("folder_path", help="Pfad zum Ordner mit den Bildern")
     parser.add_argument(
         "csv_or_output",

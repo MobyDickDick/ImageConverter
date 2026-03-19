@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import shutil
 from pathlib import Path
 
 import pytest
@@ -2882,10 +2883,43 @@ def test_bbox_to_dict_records_expected_coordinates() -> None:
     assert region["color_bgr"] == [0, 0, 255]
 
 
-def test_parse_args_defaults_to_annotation_mode() -> None:
+def test_parse_args_defaults_to_convert_mode() -> None:
     args = image_composite_converter.parse_args(["images"])
 
-    assert args.mode == "annotate"
+    assert args.mode == "convert"
+
+
+def test_create_diff_image_without_cv2_writes_rgb_overlay(tmp_path: Path) -> None:
+    src = tmp_path / "sample.jpg"
+    shutil.copyfile("artifacts/images_to_convert/AC0010.jpg", src)
+
+    svg = image_composite_converter._render_embedded_raster_svg(src)
+    diff = image_composite_converter._create_diff_image_without_cv2(src, svg)
+
+    assert diff.n == 3
+    assert diff.width > 0
+    assert diff.height > 0
+
+
+def test_convert_range_fallback_writes_diff_pngs_when_cv2_missing(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
+    images_dir = tmp_path / "images"
+    images_dir.mkdir()
+    shutil.copyfile("artifacts/images_to_convert/AC0010.jpg", images_dir / "AC0010.jpg")
+
+    monkeypatch.setattr(image_composite_converter, "cv2", None)
+    monkeypatch.setattr(image_composite_converter, "np", None)
+
+    out_dir = image_composite_converter.convert_range(
+        str(images_dir),
+        csv_path="",
+        iterations=1,
+        start_ref="AC0010",
+        end_ref="AC0010",
+        output_root=str(tmp_path / "out"),
+    )
+
+    assert (Path(out_dir) / "converted_svgs" / "AC0010.svg").exists()
+    assert (Path(out_dir) / "diff_pngs" / "AC0010_diff.png").exists()
 
 
 def test_detect_relevant_regions_finds_circle_stem_and_text() -> None:
