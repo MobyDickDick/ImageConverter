@@ -58,6 +58,21 @@ If nothing appears, double-check you are running from the repository root and th
 python -m pytest
 ```
 
+### VS Code: Launch-Aufruf für den Image Converter
+
+Falls du den Launch-Aufruf für den Bildkonverter suchst: In `.vscode/launch.json` gibt es die Konfiguration **`Python: run image_composite_converter -> artifacts/converted_images`**. Sie startet das Modul `src.image_composite_converter` mit dem Arbeitsverzeichnis `${workspaceFolder}` und übergibt dabei direkt den Eingabeordner sowie die CSV/XML- und Ausgabe-Pfade.
+
+Entspricht auf der Kommandozeile sinngemäß:
+
+```bash
+python -m src.image_composite_converter \
+  artifacts/images_to_convert \
+  --csv-path artifacts/images_to_convert/Finale_Wurzelformen_V3.xml \
+  --output-dir artifacts/converted_images \
+  --start AC0000 \
+  --end ZZ9999
+```
+
 ### Run the “everything” runner
 
 If you want a broad smoke test across demos and tools:
