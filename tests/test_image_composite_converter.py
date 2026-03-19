@@ -2715,6 +2715,29 @@ def test_load_description_mapping_from_xml_falls_back_to_descriptions_directory(
     assert mapping.get("AC0241")
 
 
+def test_resolve_description_xml_path_supports_mixed_windows_style_input() -> None:
+    resolved = conv._resolve_description_xml_path(
+        r"C:\Users\marku\myCloud\ImageConverter/artifacts/images_to_convert/Finale_Wurzelformen_V3.xml"
+    )
+
+    assert resolved is not None
+    assert resolved.endswith("artifacts/descriptions/Finale_Wurzelformen_V3.xml")
+
+
+def test_resolve_cli_csv_and_output_rewrites_missing_xml_to_descriptions_directory() -> None:
+    args = conv.parse_args(
+        [
+            "artifacts/images_to_convert",
+            r"C:\Users\marku\myCloud\ImageConverter/artifacts/images_to_convert/Finale_Wurzelformen_V3.xml",
+        ]
+    )
+
+    csv_path, output_dir = conv._resolve_cli_csv_and_output(args)
+
+    assert csv_path.endswith("artifacts/descriptions/Finale_Wurzelformen_V3.xml")
+    assert output_dir is None
+
+
 def test_build_linux_vendor_install_command_uses_vendor_defaults() -> None:
     cmd = conv.build_linux_vendor_install_command(vendor_dir="vendor", platform_tag="manylinux2014_x86_64", python_version="311")
 

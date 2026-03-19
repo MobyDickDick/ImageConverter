@@ -815,11 +815,15 @@ def _load_description_mapping_from_xml(path: str) -> dict[str, str]:
 
 
 def _resolve_description_xml_path(path: str) -> str | None:
-    candidate = Path(path)
+    raw_path = str(path or "").strip()
+    if not raw_path:
+        return None
+
+    candidate = Path(raw_path)
     if candidate.exists():
         return str(candidate)
 
-    basename = candidate.name
+    basename = os.path.basename(raw_path.replace("\\", "/"))
     if not basename:
         return None
 
@@ -7410,6 +7414,8 @@ def _resolve_cli_csv_and_output(args: argparse.Namespace) -> tuple[str, str | No
 
     if csv_path is None:
         csv_path = _auto_detect_csv_path(args.folder_path) or ""
+    elif str(csv_path).lower().endswith(".xml"):
+        csv_path = _resolve_description_xml_path(csv_path) or csv_path
 
     return csv_path, output_dir
 
