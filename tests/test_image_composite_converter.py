@@ -1473,6 +1473,65 @@ def test_validate_badge_logs_extent_bracketing_for_line_elements() -> None:
     assert any("arm: Längen-Bracketing" in line for line in logs)
 
 
+def test_validate_badge_continues_after_threshold_by_default(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Validation should keep searching after crossing the error threshold by default."""
+
+    np = image_composite_converter.np
+    if np is None:
+        pytest.skip("numpy not available in this environment")
+    img = np.zeros((15, 15, 3), dtype=np.uint8)
+    params = {"circle_enabled": True, "draw_text": False}
+
+    round_errors = iter([7.5, 6.0])
+    width_calls: list[int] = []
+
+    monkeypatch.setattr(Action, "generate_badge_svg", staticmethod(lambda _w, _h, _params: "<svg/>"))
+    monkeypatch.setattr(Action, "render_svg_to_numpy", staticmethod(lambda _svg, w, h: np.zeros((h, w, 3), dtype=np.uint8)))
+    monkeypatch.setattr(Action, "_fit_to_original_size", staticmethod(lambda _orig, render: render))
+    monkeypatch.setattr(Action, "extract_badge_element_mask", staticmethod(lambda _img, _params, _element: np.ones((15, 15), dtype=np.uint8)))
+    monkeypatch.setattr(Action, "_element_match_error", staticmethod(lambda *_args, **_kwargs: 0.0))
+    monkeypatch.setattr(Action, "_optimize_element_width_bracket", staticmethod(lambda *_args, **_kwargs: width_calls.append(1) or True))
+    monkeypatch.setattr(Action, "_optimize_element_extent_bracket", staticmethod(lambda *_args, **_kwargs: False))
+    monkeypatch.setattr(Action, "_optimize_circle_center_bracket", staticmethod(lambda *_args, **_kwargs: False))
+    monkeypatch.setattr(Action, "_optimize_circle_radius_bracket", staticmethod(lambda *_args, **_kwargs: False))
+    monkeypatch.setattr(Action, "_optimize_element_color_bracket", staticmethod(lambda *_args, **_kwargs: False))
+    monkeypatch.setattr(Action, "calculate_error", staticmethod(lambda *_args, **_kwargs: next(round_errors)))
+
+    logs = Action.validate_badge_by_elements(img, params, max_rounds=2)
+
+    assert len(width_calls) == 2
+    assert any("Suche nach besserem Optimum wird fortgesetzt" in line for line in logs)
+
+
+def test_validate_badge_can_preserve_legacy_threshold_stop(monkeypatch: pytest.MonkeyPatch) -> None:
+    """An explicit flag should still allow the historical threshold-based early exit."""
+
+    np = image_composite_converter.np
+    if np is None:
+        pytest.skip("numpy not available in this environment")
+    img = np.zeros((15, 15, 3), dtype=np.uint8)
+    params = {"circle_enabled": True, "draw_text": False}
+
+    width_calls: list[int] = []
+
+    monkeypatch.setattr(Action, "generate_badge_svg", staticmethod(lambda _w, _h, _params: "<svg/>"))
+    monkeypatch.setattr(Action, "render_svg_to_numpy", staticmethod(lambda _svg, w, h: np.zeros((h, w, 3), dtype=np.uint8)))
+    monkeypatch.setattr(Action, "_fit_to_original_size", staticmethod(lambda _orig, render: render))
+    monkeypatch.setattr(Action, "extract_badge_element_mask", staticmethod(lambda _img, _params, _element: np.ones((15, 15), dtype=np.uint8)))
+    monkeypatch.setattr(Action, "_element_match_error", staticmethod(lambda *_args, **_kwargs: 0.0))
+    monkeypatch.setattr(Action, "_optimize_element_width_bracket", staticmethod(lambda *_args, **_kwargs: width_calls.append(1) or False))
+    monkeypatch.setattr(Action, "_optimize_element_extent_bracket", staticmethod(lambda *_args, **_kwargs: False))
+    monkeypatch.setattr(Action, "_optimize_circle_center_bracket", staticmethod(lambda *_args, **_kwargs: False))
+    monkeypatch.setattr(Action, "_optimize_circle_radius_bracket", staticmethod(lambda *_args, **_kwargs: False))
+    monkeypatch.setattr(Action, "_optimize_element_color_bracket", staticmethod(lambda *_args, **_kwargs: False))
+    monkeypatch.setattr(Action, "calculate_error", staticmethod(lambda *_args, **_kwargs: 7.5))
+
+    logs = Action.validate_badge_by_elements(img, params, max_rounds=2, stop_when_error_below_threshold=True)
+
+    assert len(width_calls) == 1
+    assert any("Gesamtfehler unter Schwellwert, Validierung beendet" in line for line in logs)
+
+
 def test_element_error_for_circle_radius_uses_expanded_source_mask_for_growth(monkeypatch: pytest.MonkeyPatch) -> None:
     """Circle growth probes should evaluate against an equally expanded source mask."""
 
