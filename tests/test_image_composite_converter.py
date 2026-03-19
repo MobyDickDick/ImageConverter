@@ -42,6 +42,57 @@ def test_optional_dependency_error_reports_windows_bundle_hint() -> None:
     assert "Linux-Umgebung" in message
 
 
+def test_semantic_validation_accepts_circle_supported_by_local_mask(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Local ROI support should prevent false circle mismatches when Hough detection misses JPEG-soft rings."""
+    if conv.np is None:
+        pytest.skip("numpy not available in this environment")
+    monkeypatch.setattr(conv.Action, "_detect_semantic_primitives", staticmethod(lambda _img: {"circle": False, "arm": False, "text": False}))
+    monkeypatch.setattr(conv.Action, "_mask_bbox", staticmethod(lambda _mask: (2.0, 2.0, 7.0, 7.0)))
+    monkeypatch.setattr(conv.Action, "_mask_centroid_radius", staticmethod(lambda _mask: (4.5, 4.5, 2.5)))
+
+    circle_mask = conv.np.zeros((10, 10), dtype=bool)
+    for y, x in [(2, 4), (3, 6), (5, 7), (7, 5), (6, 3), (4, 2)]:
+        circle_mask[y, x] = True
+
+    def fake_extract(_img, _params, element: str):
+        return circle_mask if element == "circle" else None
+
+    monkeypatch.setattr(conv.Action, "extract_badge_element_mask", staticmethod(fake_extract))
+
+    issues = conv.Action.validate_semantic_description_alignment(
+        conv.np.zeros((10, 10, 3), dtype=conv.np.uint8),
+        ["SEMANTIC: Kreis mit grauem Rand"],
+        {"cx": 4.5, "cy": 4.5, "r": 2.5},
+    )
+
+    assert issues == []
+
+
+def test_semantic_validation_accepts_text_supported_by_local_mask(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Text badges should pass semantic validation when the text ROI contains enough local foreground support."""
+    if conv.np is None:
+        pytest.skip("numpy not available in this environment")
+    monkeypatch.setattr(conv.Action, "_detect_semantic_primitives", staticmethod(lambda _img: {"circle": False, "arm": False, "text": False}))
+    monkeypatch.setattr(conv.Action, "_mask_bbox", staticmethod(lambda _mask: (1.0, 1.0, 8.0, 5.0)))
+
+    text_mask = conv.np.zeros((10, 10), dtype=bool)
+    text_mask[1:6, 2:4] = True
+    text_mask[2:5, 6:9] = True
+
+    def fake_extract(_img, _params, element: str):
+        return text_mask if element == "text" else None
+
+    monkeypatch.setattr(conv.Action, "extract_badge_element_mask", staticmethod(fake_extract))
+
+    issues = conv.Action.validate_semantic_description_alignment(
+        conv.np.zeros((10, 10, 3), dtype=conv.np.uint8),
+        ["SEMANTIC: waagrecht geschriebenem Buchstaben \"VOC\""],
+        {"draw_text": True, "text_mode": "voc"},
+    )
+
+    assert issues == []
+
+
 def test_source_loads_numpy_before_cv2() -> None:
     """cv2 must be initialized after numpy so vendored OpenCV can resolve its dependency."""
     source = Path(image_composite_converter.__file__).read_text(encoding="utf-8")
@@ -50,6 +101,34 @@ def test_source_loads_numpy_before_cv2() -> None:
     cv2_pos = source.index('cv2 = _load_optional_module("cv2")')
 
     assert numpy_pos < cv2_pos
+
+
+def test_family_harmonized_badge_colors_averages_family_palette() -> None:
+    """L/M/S families should use averaged grayscale values as harmonization base."""
+    rows = [
+        {"params": {"fill_gray": 220, "stroke_gray": 150, "text_gray": 148}},
+        {"params": {"fill_gray": 230, "stroke_gray": 160, "text_gray": 156}},
+        {"params": {"fill_gray": 210, "stroke_gray": 140, "text_gray": 138}},
+    ]
+
+    colors = conv._family_harmonized_badge_colors(rows)
+
+    assert colors["fill_gray"] > colors["stroke_gray"]
+    assert colors["text_gray"] <= colors["stroke_gray"]
+    assert 215 <= colors["fill_gray"] <= 225
+    assert 145 <= colors["stroke_gray"] <= 155
+
+
+def test_family_harmonized_badge_colors_boosts_low_contrast() -> None:
+    """Family averaging should expand weak fill/stroke separation instead of preserving muddy contrast."""
+    rows = [
+        {"params": {"fill_gray": 205, "stroke_gray": 200}},
+        {"params": {"fill_gray": 206, "stroke_gray": 201}},
+    ]
+
+    colors = conv._family_harmonized_badge_colors(rows)
+
+    assert colors["fill_gray"] - colors["stroke_gray"] >= 18
 
 
 def test_co2_label_defaults_use_center_co_anchor_mode() -> None:
