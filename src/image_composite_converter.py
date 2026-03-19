@@ -25,19 +25,293 @@ import importlib
 import io
 import struct
 
-try:
-    import cv2
-except ImportError:  # pragma: no cover - optional dependency in constrained environments
-    cv2 = None
-try:
-    import numpy as np
-except ImportError:  # pragma: no cover - optional dependency in constrained environments
-    np = None
+OPTIONAL_DEPENDENCY_ERRORS: dict[str, str] = {}
 
-try:
-    import fitz  # PyMuPDF for native SVG rendering
-except ImportError:  # pragma: no cover - optional dependency
-    fitz = None
+
+ANNOTATION_COLORS: dict[str, tuple[int, int, int]] = {
+    "circle": (0, 0, 255),
+    "stem": (0, 180, 0),
+    "text": (255, 0, 0),
+}
+
+
+def _bbox_from_points(points: list[tuple[int, int]]) -> tuple[int, int, int, int] | None:
+    if not points:
+        return None
+    xs = [p[0] for p in points]
+    ys = [p[1] for p in points]
+    return min(xs), min(ys), max(xs), max(ys)
+
+
+def _bbox_from_mask(mask) -> tuple[int, int, int, int] | None:
+    if mask is None or np is None:
+        return None
+    ys, xs = np.where(mask > 0)
+    if len(xs) == 0 or len(ys) == 0:
+        return None
+    return int(xs.min()), int(ys.min()), int(xs.max()), int(ys.max())
+
+
+def _expand_bbox(bbox: tuple[int, int, int, int], width: int, height: int, pad: int = 1) -> tuple[int, int, int, int]:
+    x0, y0, x1, y1 = bbox
+    return (
+        max(0, int(x0) - pad),
+        max(0, int(y0) - pad),
+        min(width - 1, int(x1) + pad),
+        min(height - 1, int(y1) + pad),
+    )
+
+
+def _bbox_to_dict(label: str, bbox: tuple[int, int, int, int], color: tuple[int, int, int]) -> dict[str, object]:
+    x0, y0, x1, y1 = bbox
+    return {
+        "label": label,
+        "bbox": {
+            "x0": int(x0),
+            "y0": int(y0),
+            "x1": int(x1),
+            "y1": int(y1),
+            "width": int(x1 - x0 + 1),
+            "height": int(y1 - y0 + 1),
+        },
+        "color_bgr": [int(color[0]), int(color[1]), int(color[2])],
+    }
+
+
+def detect_relevant_regions(img) -> list[dict[str, object]]:
+    if cv2 is None or np is None:
+        raise RuntimeError("detect_relevant_regions benötigt numpy und opencv-python-headless")
+
+    if img is None:
+        return []
+
+    height, width = img.shape[:2]
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    blur = cv2.GaussianBlur(gray, (5, 5), 0)
+    _thr, binary_inv = cv2.threshold(blur, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
+
+    regions: list[dict[str, object]] = []
+    used_mask = np.zeros((height, width), dtype=np.uint8)
+
+    circles = cv2.HoughCircles(
+        blur,
+        cv2.HOUGH_GRADIENT,
+        dp=1.2,
+        minDist=max(8, min(height, width) // 4),
+        param1=120,
+        param2=12,
+        minRadius=max(3, min(height, width) // 10),
+        maxRadius=max(4, min(height, width) // 2),
+    )
+    if circles is not None:
+        best = max(circles[0], key=lambda c: float(c[2]))
+        cx, cy, radius = [int(round(v)) for v in best]
+        radius = max(1, radius)
+        circle_mask = np.zeros((height, width), dtype=np.uint8)
+        cv2.circle(circle_mask, (cx, cy), radius + 1, 255, thickness=-1)
+        bbox = _expand_bbox((cx - radius, cy - radius, cx + radius, cy + radius), width, height, pad=1)
+        regions.append(_bbox_to_dict("circle", bbox, ANNOTATION_COLORS["circle"]))
+        used_mask = cv2.bitwise_or(used_mask, circle_mask)
+
+    residual = cv2.bitwise_and(binary_inv, cv2.bitwise_not(used_mask))
+    num_labels, labels, stats, _centroids = cv2.connectedComponentsWithStats(residual, connectivity=8)
+
+    stem_candidate = None
+    text_candidates: list[tuple[int, int, int, int]] = []
+    for idx in range(1, num_labels):
+        x, y, w, h, area = [int(v) for v in stats[idx]]
+        if area < 6:
+            continue
+        bbox = (x, y, x + w - 1, y + h - 1)
+        aspect = max(w, h) / max(1.0, min(w, h))
+        touches_circle = False
+        if regions:
+            circle_bbox = regions[0]["bbox"]
+            cx0 = int(circle_bbox["x0"])
+            cy0 = int(circle_bbox["y0"])
+            cx1 = int(circle_bbox["x1"])
+            cy1 = int(circle_bbox["y1"])
+            touches_circle = not (bbox[2] < cx0 - 2 or bbox[0] > cx1 + 2 or bbox[3] < cy0 - 2 or bbox[1] > cy1 + 2)
+        if stem_candidate is None and touches_circle and aspect >= 2.2:
+            stem_candidate = bbox
+            continue
+        text_candidates.append(bbox)
+
+    if stem_candidate is not None:
+        regions.append(_bbox_to_dict("stem", _expand_bbox(stem_candidate, width, height, pad=1), ANNOTATION_COLORS["stem"]))
+
+    if text_candidates:
+        x0 = min(b[0] for b in text_candidates)
+        y0 = min(b[1] for b in text_candidates)
+        x1 = max(b[2] for b in text_candidates)
+        y1 = max(b[3] for b in text_candidates)
+        regions.append(_bbox_to_dict("text", _expand_bbox((x0, y0, x1, y1), width, height, pad=1), ANNOTATION_COLORS["text"]))
+
+    return regions
+
+
+def annotate_image_regions(img, regions: list[dict[str, object]]):
+    if cv2 is None:
+        raise RuntimeError("annotate_image_regions benötigt opencv-python-headless")
+    annotated = img.copy()
+    for region in regions:
+        bbox = dict(region["bbox"])
+        color = tuple(int(v) for v in region["color_bgr"])
+        label = str(region["label"])
+        x0, y0, x1, y1 = int(bbox["x0"]), int(bbox["y0"]), int(bbox["x1"]), int(bbox["y1"])
+        cv2.rectangle(annotated, (x0, y0), (x1, y1), color, thickness=2)
+        cv2.putText(annotated, label, (x0, max(12, y0 - 4)), cv2.FONT_HERSHEY_SIMPLEX, 0.45, color, 1, cv2.LINE_AA)
+    return annotated
+
+
+def analyze_range(folder_path: str, output_root: str | None = None, start_ref: str = "", end_ref: str = "ZZZZZZ") -> str:
+    out_root = output_root or os.path.join(_default_converted_symbols_root(), "annotated")
+    annotated_dir = os.path.join(out_root, "annotated_pngs")
+    reports_dir = os.path.join(out_root, "reports")
+    os.makedirs(annotated_dir, exist_ok=True)
+    os.makedirs(reports_dir, exist_ok=True)
+
+    files = sorted(
+        f
+        for f in os.listdir(folder_path)
+        if f.lower().endswith((".bmp", ".jpg", ".jpeg", ".png", ".gif")) and _in_requested_range(f, start_ref, end_ref)
+    )
+
+    report_rows: list[dict[str, object]] = []
+    for filename in files:
+        image_path = os.path.join(folder_path, filename)
+        stem = os.path.splitext(filename)[0]
+        if cv2 is None or np is None:
+            report_rows.append({"filename": filename, "status": "missing_dependencies", "regions": []})
+            continue
+        img = cv2.imread(image_path)
+        if img is None:
+            report_rows.append({"filename": filename, "status": "unreadable", "regions": []})
+            continue
+        regions = detect_relevant_regions(img)
+        annotated = annotate_image_regions(img, regions)
+        cv2.imwrite(os.path.join(annotated_dir, f"{stem}_annotated.png"), annotated)
+        report_rows.append({"filename": filename, "status": "ok", "regions": regions})
+
+    json_path = os.path.join(reports_dir, "detected_regions.json")
+    with open(json_path, "w", encoding="utf-8") as f:
+        json.dump(report_rows, f, ensure_ascii=False, indent=2)
+
+    csv_path = os.path.join(reports_dir, "detected_regions.csv")
+    with open(csv_path, "w", encoding="utf-8", newline="") as f:
+        writer = csv.writer(f, delimiter=";")
+        writer.writerow(["filename", "label", "x0", "y0", "x1", "y1", "width", "height", "color_bgr", "status"])
+        for row in report_rows:
+            if not row["regions"]:
+                writer.writerow([row["filename"], "", "", "", "", "", "", "", "", row["status"]])
+                continue
+            for region in row["regions"]:
+                bbox = region["bbox"]
+                writer.writerow([
+                    row["filename"],
+                    region["label"],
+                    bbox["x0"],
+                    bbox["y0"],
+                    bbox["x1"],
+                    bbox["y1"],
+                    bbox["width"],
+                    bbox["height"],
+                    ",".join(str(int(v)) for v in region["color_bgr"]),
+                    row["status"],
+                ])
+    return out_root
+
+
+def _optional_dependency_base_dir() -> Path:
+    """Return the repository root used for vendored dependency discovery."""
+    return Path(__file__).resolve().parents[1]
+
+
+def _vendored_site_packages_dirs() -> list[Path]:
+    """Return repo-local site-packages directories that may contain bundled deps."""
+    base = _optional_dependency_base_dir()
+    candidates = [
+        base / ".venv" / "Lib" / "site-packages",
+        base / ".venv" / "lib" / "python3.10" / "site-packages",
+        base / ".venv" / "lib" / "python3.11" / "site-packages",
+        base / ".venv" / "lib" / "python3.12" / "site-packages",
+        base / ".venv" / "lib" / "python3.13" / "site-packages",
+        base / ".venv" / "lib" / "python3.14" / "site-packages",
+        base / "vendor" / "linux" / "site-packages",
+        base / "vendor" / "linux-py310" / "site-packages",
+        base / "vendor" / "linux-py311" / "site-packages",
+        base / "vendor" / "linux-py312" / "site-packages",
+        base / "vendor" / "linux-py313" / "site-packages",
+        base / "vendor" / "linux-py314" / "site-packages",
+        base / "vendor" / "win" / "site-packages",
+        base / "vendor" / "win-py310" / "site-packages",
+        base / "vendor" / "win-py311" / "site-packages",
+        base / "vendor" / "win-py312" / "site-packages",
+        base / "vendor" / "win-py313" / "site-packages",
+        base / "vendor" / "win-py314" / "site-packages",
+    ]
+    seen: set[str] = set()
+    existing: list[Path] = []
+    for candidate in candidates:
+        key = str(candidate)
+        if key in seen:
+            continue
+        seen.add(key)
+        if candidate.exists():
+            existing.append(candidate)
+    return existing
+
+
+def _describe_optional_dependency_error(module_name: str, exc: BaseException, attempted_paths: list[Path]) -> str:
+    detail = f"{type(exc).__name__}: {exc}"
+    lower = detail.lower()
+    if "add_dll_directory" in lower or ".pyd" in lower:
+        return (
+            f"{detail}. Repo-local Paket gefunden, aber es wirkt wie ein Windows-Build "
+            f"und ist unter dieser Linux-Umgebung nicht ladbar"
+        )
+    if "elf" in lower or "wrong elf class" in lower:
+        return f"{detail}. Repo-lokales Binary ist nicht mit dieser Laufzeit kompatibel"
+    if attempted_paths:
+        joined = ", ".join(str(path) for path in attempted_paths)
+        return f"{detail}. Zusätzliche Importpfade geprüft: {joined}"
+    return detail
+
+
+def _load_optional_module(module_name: str):
+    """Import optional dependencies, including repo-vendored site-packages."""
+    attempted_paths: list[Path] = []
+    try:
+        return importlib.import_module(module_name)
+    except Exception as exc:  # pragma: no cover - exercised only in dependency-missing envs
+        last_exc: BaseException = exc
+
+    for site_packages in _vendored_site_packages_dirs():
+        attempted_paths.append(site_packages)
+        path_str = str(site_packages)
+        added = False
+        if path_str not in sys.path:
+            sys.path.insert(0, path_str)
+            added = True
+        try:
+            return importlib.import_module(module_name)
+        except Exception as exc:  # pragma: no cover - exercised only in dependency-missing envs
+            last_exc = exc
+        finally:
+            if added:
+                with contextlib.suppress(ValueError):
+                    sys.path.remove(path_str)
+
+    OPTIONAL_DEPENDENCY_ERRORS[module_name] = _describe_optional_dependency_error(module_name, last_exc, attempted_paths)
+    return None
+
+
+# Load numpy before cv2: OpenCV's Python bindings import numpy at module-import
+# time and can fail permanently for this process if cv2 is attempted first while
+# numpy is available only via repo-vendored site-packages.
+np = _load_optional_module("numpy")
+cv2 = _load_optional_module("cv2")
+fitz = _load_optional_module("fitz")  # PyMuPDF for native SVG rendering
 
 
 
@@ -687,7 +961,7 @@ class Reflection:
 
             return desc, params
 
-        match = re.search(r"oben .*?wie .*?in ([a-z0-9_]+)", desc)
+        match = re.search(r"\boven\b.*?\bwie(?:\s+in)?\s+([a-z]{2}\d{3,4})\b", desc)
         if match:
             params["mode"] = "composite"
             params["top_source_ref"] = match.group(1).upper()
@@ -1910,16 +2184,33 @@ class Action:
         """Fit AC0813 while keeping the vertical arm anchored to the upper edge."""
         params = Action._fit_semantic_badge_from_image(img, defaults)
         h, w = img.shape[:2]
+        aspect_ratio = (float(h) / float(w)) if w > 0 else 1.0
 
         raw_arm_stroke = float(params.get("arm_stroke", defaults.get("arm_stroke", max(1.0, float(w) * 0.10))))
         cx = float(params.get("cx", defaults.get("cx", float(w) / 2.0)))
         cy = float(params.get("cy", defaults.get("cy", float(h) - (float(w) / 2.0))))
         r = float(params.get("r", defaults.get("r", float(w) * 0.4)))
         stroke_circle = float(params.get("stroke_circle", defaults.get("stroke_circle", max(0.9, float(w) / 15.0))))
+        default_r = float(defaults.get("r", float(w) * 0.4))
 
         min_arm_stroke = max(1.0, stroke_circle * 0.75)
         max_arm_stroke = max(min_arm_stroke, min(float(w) * 0.14, stroke_circle * 1.6))
         arm_stroke = max(min_arm_stroke, min(raw_arm_stroke, max_arm_stroke))
+
+        if w <= 15 and not bool(params.get("draw_text", True)):
+            # Tiny plain connector badges can lose roughly one anti-aliased ring
+            # pixel in contour/Hough fitting; keep them near template size.
+            r = max(r, default_r * 0.98)
+
+        elongated_plain_badge = aspect_ratio >= 1.60 and w >= 20 and not bool(params.get("draw_text", True))
+        if elongated_plain_badge:
+            # AC0813_L-like forms are the vertical counterpart of AC0812_L/AC0814_L:
+            # JPEG antialiasing around the top connector often biases the detected
+            # ring inward, so preserve a tighter semantic radius floor here too.
+            r = max(r, default_r * 0.95)
+            params["min_circle_radius"] = float(max(float(params.get("min_circle_radius", 1.0)), default_r * 0.95))
+
+        params["r"] = r
 
         # Tiny vertical badges with text overlays (e.g. AC0833_S / AC0838_S)
         # tend to be over-influenced by anti-aliased text pixels during contour
@@ -1970,13 +2261,15 @@ class Action:
         if w <= 0 or h <= 0:
             return Action._default_ac081x_shared(w, h)
 
-        # AC0812 source rasters leave a slightly larger vertical margin around the
-        # ring than AC0811/AC0813. Using 0.40*h tends to over-size the circle.
-        r = float(h) * 0.36
-        stroke_circle = max(0.9, float(h) / 15.0)
-        cx = float(h) / 2.0
+        # AC0814_L-like originals use a noticeably larger ring than the earlier
+        # generic AC081x template and keep a visible left margin before the
+        # circle. A tighter template gets much closer to the hand-traced sample.
+        r = float(h) * 0.46
+        stroke_circle = max(0.9, float(h) / 25.0)
+        left_margin = max(stroke_circle * 0.5, float(h) * 0.18)
+        cx = r + left_margin
         cy = float(h) / 2.0
-        arm_stroke = max(1.0, float(h) * 0.10)
+        arm_stroke = max(1.0, stroke_circle)
 
         return Action._normalize_light_circle_colors(
             {
@@ -2003,12 +2296,14 @@ class Action:
         """Fit AC0814 while keeping the horizontal arm anchored to the right edge."""
         params = Action._fit_semantic_badge_from_image(img, defaults)
         h, w = img.shape[:2]
+        aspect_ratio = (float(w) / float(h)) if h > 0 else 1.0
 
         raw_arm_stroke = float(params.get("arm_stroke", defaults.get("arm_stroke", max(1.0, float(h) * 0.10))))
         cx = float(params.get("cx", defaults.get("cx", float(w) / 2.0)))
         cy = float(params.get("cy", defaults.get("cy", float(h) / 2.0)))
         r = float(params.get("r", defaults.get("r", float(h) * 0.4)))
         stroke_circle = float(params.get("stroke_circle", defaults.get("stroke_circle", max(0.9, float(h) / 15.0))))
+        default_r = float(defaults.get("r", float(h) * 0.4))
 
         min_arm_stroke = max(1.0, stroke_circle * 0.75)
         max_arm_stroke = max(min_arm_stroke, min(float(h) * 0.14, stroke_circle * 1.6))
@@ -2018,6 +2313,37 @@ class Action:
         cy = float(params.get("cy", defaults.get("cy", float(h) / 2.0)))
         r = float(params.get("r", defaults.get("r", float(h) * 0.4)))
 
+        if h <= 15 and not bool(params.get("draw_text", True)):
+            # Tiny plain connector badges can lose roughly one anti-aliased ring
+            # pixel in contour/Hough fitting; keep them near template size.
+            r = max(r, default_r * 0.98)
+
+        elongated_plain_badge = aspect_ratio >= 1.60 and h >= 20 and not bool(params.get("draw_text", True))
+        if elongated_plain_badge:
+            # AC0814_L-like forms are the mirrored counterpart of AC0812_L: JPEG
+            # antialiasing near the connector often makes the ring fit under-size.
+            # Keep a tighter semantic floor so later validation cannot preserve an
+            # already shrunken circle as the new optimum.
+            r = max(r, default_r * 0.95)
+            params["min_circle_radius"] = float(max(float(params.get("min_circle_radius", 1.0)), default_r * 0.95))
+
+            default_cx = float(defaults.get("cx", float(w) / 2.0))
+            default_cy = float(defaults.get("cy", float(h) / 2.0))
+            # AC0814_M was hand-traced with a noticeably stable left circle margin
+            # and a perfectly horizontal connector. In medium/large plain variants
+            # the raster fit can still drift the ring a pixel or two toward the
+            # connector; keep the circle anchored near the semantic template so the
+            # generated SVG stays close to the manual sample.
+            params["cx"] = default_cx
+            params["cy"] = float(Action._clip_scalar(cy, default_cy - 0.6, default_cy + 0.6))
+            params["lock_circle_cx"] = True
+            params["lock_circle_cy"] = True
+            params["lock_arm_center_to_circle"] = True
+            cx = float(params["cx"])
+            cy = float(params["cy"])
+
+        params["r"] = r
+
         params["arm_enabled"] = True
         params["arm_stroke"] = arm_stroke
         params["arm_x1"] = min(float(w), cx + r)
@@ -2025,7 +2351,20 @@ class Action:
         params["arm_x2"] = float(w)
         params["arm_y2"] = cy
         current_arm_len = float(math.hypot(params["arm_x2"] - params["arm_x1"], params["arm_y2"] - params["arm_y1"]))
-        params["arm_len_min"] = max(1.0, current_arm_len * 0.75)
+        default_arm_len = max(
+            0.0,
+            float(w) - (float(defaults.get("cx", float(h) / 2.0)) + float(defaults.get("r", float(h) * 0.4))),
+        )
+        semantic_arm_len_min = max(1.0, default_arm_len * 0.75)
+        min_arm_len_ratio = 0.75
+        if elongated_plain_badge:
+            min_arm_len_ratio = 0.82
+        params["arm_len_min_ratio"] = float(max(float(params.get("arm_len_min_ratio", min_arm_len_ratio)), min_arm_len_ratio))
+        params["arm_len_min"] = max(
+            1.0,
+            current_arm_len * float(params["arm_len_min_ratio"]),
+            semantic_arm_len_min,
+        )
         return Action._normalize_light_circle_colors(params)
 
     @staticmethod
@@ -2465,7 +2804,7 @@ class Action:
             defaults = Action._apply_co2_label(Action._default_ac0881_params(w, h))
             if img is None:
                 return Action._finalize_ac08_style(name, defaults)
-            return Action._finalize_ac08_style(name, Action._apply_co2_label(Action._fit_ac0811_params_from_image(img, defaults)))
+            return Action._finalize_ac08_style(name, Action._fit_ac0811_params_from_image(img, defaults))
 
         if name == "AC0832":
             defaults = Action._apply_co2_label(Action._default_ac0812_params(w, h))
@@ -2478,9 +2817,7 @@ class Action:
             return Action._enforce_left_arm_badge_geometry(
                 Action._finalize_ac08_style(
                     name,
-                    Action._tune_ac0832_co2_badge(
-                        Action._apply_co2_label(Action._fit_ac0812_params_from_image(img, defaults))
-                    ),
+                    Action._tune_ac0832_co2_badge(Action._fit_ac0812_params_from_image(img, defaults)),
                 ),
                 w,
                 h,
@@ -2490,7 +2827,7 @@ class Action:
             defaults = Action._apply_co2_label(Action._default_ac0813_params(w, h))
             if img is None:
                 return Action._finalize_ac08_style(name, defaults)
-            return Action._finalize_ac08_style(name, Action._apply_co2_label(Action._fit_ac0813_params_from_image(img, defaults)))
+            return Action._finalize_ac08_style(name, Action._fit_ac0813_params_from_image(img, defaults))
 
         if name == "AC0834":
             defaults = Action._apply_co2_label(Action._default_ac0814_params(w, h))
@@ -2499,7 +2836,7 @@ class Action:
             return Action._finalize_ac08_style(
                 name,
                 Action._tune_ac0834_co2_badge(
-                    Action._apply_co2_label(Action._fit_ac0814_params_from_image(img, defaults)),
+                    Action._fit_ac0814_params_from_image(img, defaults),
                     w,
                     h,
                 ),
@@ -2515,14 +2852,14 @@ class Action:
             defaults = Action._apply_voc_label(Action._default_ac0881_params(w, h))
             if img is None:
                 return Action._finalize_ac08_style(name, defaults)
-            return Action._finalize_ac08_style(name, Action._apply_voc_label(Action._fit_ac0811_params_from_image(img, defaults)))
+            return Action._finalize_ac08_style(name, Action._fit_ac0811_params_from_image(img, defaults))
 
         if name == "AC0837":
             defaults = Action._apply_voc_label(Action._default_ac0812_params(w, h))
             if img is None:
                 return Action._enforce_left_arm_badge_geometry(Action._finalize_ac08_style(name, defaults), w, h)
             return Action._enforce_left_arm_badge_geometry(
-                Action._finalize_ac08_style(name, Action._apply_voc_label(Action._fit_ac0812_params_from_image(img, defaults))),
+                Action._finalize_ac08_style(name, Action._fit_ac0812_params_from_image(img, defaults)),
                 w,
                 h,
             )
@@ -2531,13 +2868,13 @@ class Action:
             defaults = Action._apply_voc_label(Action._default_ac0813_params(w, h))
             if img is None:
                 return Action._finalize_ac08_style(name, defaults)
-            return Action._finalize_ac08_style(name, Action._apply_voc_label(Action._fit_ac0813_params_from_image(img, defaults)))
+            return Action._finalize_ac08_style(name, Action._fit_ac0813_params_from_image(img, defaults))
 
         if name == "AC0839":
             defaults = Action._apply_voc_label(Action._default_ac0814_params(w, h))
             if img is None:
                 return Action._finalize_ac08_style(name, defaults)
-            return Action._finalize_ac08_style(name, Action._apply_voc_label(Action._fit_ac0814_params_from_image(img, defaults)))
+            return Action._finalize_ac08_style(name, Action._fit_ac0814_params_from_image(img, defaults))
 
         return None
 
@@ -5242,9 +5579,15 @@ def run_iteration_pipeline(
     elements = ", ".join(params["elements"]) if params["elements"] else "Kein Compositing-Befehl gefunden"
     print(f"Befehl erkannt: {elements}")
 
+    os.makedirs(svg_out_dir, exist_ok=True)
+    os.makedirs(diff_out_dir, exist_ok=True)
+    if reports_out_dir:
+        os.makedirs(reports_out_dir, exist_ok=True)
+
+    base = os.path.splitext(filename)[0]
     log_path = None
     if reports_out_dir:
-        log_path = os.path.join(reports_out_dir, f"{os.path.splitext(filename)[0]}_element_validation.log")
+        log_path = os.path.join(reports_out_dir, f"{base}_element_validation.log")
 
     def _write_validation_log(lines: list[str]) -> None:
         if not log_path:
@@ -5261,6 +5604,20 @@ def run_iteration_pipeline(
         with open(log_path, "w", encoding="utf-8") as f:
             f.write("\n".join(payload).rstrip() + "\n")
 
+    def _write_attempt_artifacts(svg_content: str, rendered_img=None, *, failed: bool = False) -> None:
+        suffix = "_failed" if failed else ""
+        svg_path = os.path.join(svg_out_dir, f"{base}{suffix}.svg")
+        with open(svg_path, "w", encoding="utf-8") as f:
+            f.write(svg_content)
+
+        render = rendered_img
+        if render is None:
+            render = Action.render_svg_to_numpy(svg_content, w, h)
+        if render is None:
+            return
+        diff = Action.create_diff_image(perc.img, render)
+        cv2.imwrite(os.path.join(diff_out_dir, f"{base}{suffix}_diff.png"), diff)
+
     if params["mode"] == "semantic_badge":
         badge_params = Action.make_badge_params(w, h, perc.base_name, perc.img)
         if badge_params is None:
@@ -5276,10 +5633,19 @@ def run_iteration_pipeline(
             badge_params,
         )
         if semantic_issues:
+            failed_svg = Action.generate_badge_svg(w, h, badge_params)
+            _write_attempt_artifacts(failed_svg, failed=True)
             print("[ERROR] Semantik-Abgleich fehlgeschlagen:")
             for issue in semantic_issues:
                 print(f"  - {issue}")
-            _write_validation_log(["status=semantic_mismatch", *[f"issue={issue}" for issue in semantic_issues]])
+            _write_validation_log(
+                [
+                    "status=semantic_mismatch",
+                    f"best_attempt_svg={base}_failed.svg",
+                    f"best_attempt_diff={base}_failed_diff.png",
+                    *[f"issue={issue}" for issue in semantic_issues],
+                ]
+            )
             return None
 
         validation_logs: list[str] = []
@@ -5310,15 +5676,10 @@ def run_iteration_pipeline(
         _write_validation_log(["status=semantic_ok", *validation_logs])
 
         svg_content = Action.generate_badge_svg(w, h, badge_params)
-        base = os.path.splitext(filename)[0]
-        with open(os.path.join(svg_out_dir, f"{base}.svg"), "w", encoding="utf-8") as f:
-            f.write(svg_content)
-
         svg_rendered = Action.render_svg_to_numpy(svg_content, w, h)
         if svg_rendered is None:
             raise RuntimeError("SVG rendering failed although fitz is installed.")
-        diff = Action.create_diff_image(perc.img, svg_rendered)
-        cv2.imwrite(os.path.join(diff_out_dir, f"{base}_diff.png"), diff)
+        _write_attempt_artifacts(svg_content, svg_rendered)
         return base, desc, params, 1, Action.calculate_error(perc.img, svg_rendered)
 
     if params["mode"] != "composite":
@@ -5376,11 +5737,8 @@ def run_iteration_pipeline(
     else:
         print("-> Konvergenzdiagnose: Iterationsbudget ausgeschöpft (Optimum unklar, ggf. Suchraum erweitern)")
 
-    base = os.path.splitext(filename)[0]
-    with open(os.path.join(svg_out_dir, f"{base}.svg"), "w", encoding="utf-8") as f:
-        f.write(best_svg)
-    if best_diff is not None:
-        cv2.imwrite(os.path.join(diff_out_dir, f"{base}_diff.png"), best_diff)
+    if best_svg:
+        _write_attempt_artifacts(best_svg, best_diff)
 
     _write_validation_log([
         "status=composite_ok",
@@ -5449,7 +5807,19 @@ def _conversion_random() -> random.Random:
 
 def _default_converted_symbols_root() -> str:
     repo_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    return os.path.join(repo_root, "artifacts", "converted_images_svg")
+    return os.path.join(repo_root, "artifacts", "converted_images")
+
+
+def _converted_svg_output_dir(output_root: str) -> str:
+    return os.path.join(output_root, "converted_svgs")
+
+
+def _diff_output_dir(output_root: str) -> str:
+    return os.path.join(output_root, "diff_pngs")
+
+
+def _reports_output_dir(output_root: str) -> str:
+    return os.path.join(output_root, "reports")
 
 
 def _sniff_raster_size(path: str | Path) -> tuple[int, int]:
@@ -6231,9 +6601,9 @@ def convert_range(
     output_root: str | None = None,
 ) -> str:
     out_root = output_root or _default_converted_symbols_root()
-    svg_out_dir = out_root
-    diff_out_dir = os.path.join(out_root, "diff_pngs")
-    reports_out_dir = os.path.join(out_root, "reports")
+    svg_out_dir = _converted_svg_output_dir(out_root)
+    diff_out_dir = _diff_output_dir(out_root)
+    reports_out_dir = _reports_output_dir(out_root)
 
     os.makedirs(svg_out_dir, exist_ok=True)
     os.makedirs(diff_out_dir, exist_ok=True)
@@ -6940,6 +7310,7 @@ def _write_pixel_delta2_ranking(folder_path: str, svg_out_dir: str, reports_out_
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser()
+    parser.add_argument("--mode", choices=("annotate", "convert"), default="annotate", help="annotate=markiere Kreis/Kellenstiel/Schrift und schreibe Koordinaten; convert=alte SVG-Konvertierung")
     parser.add_argument("folder_path", help="Pfad zum Ordner mit den Bildern")
     parser.add_argument(
         "csv_or_output",
@@ -7089,6 +7460,8 @@ def _resolve_cli_csv_and_output(args: argparse.Namespace) -> tuple[str, str | No
 
     if csv_path is None:
         csv_path = _auto_detect_csv_path(args.folder_path) or ""
+    elif str(csv_path).lower().endswith(".xml"):
+        csv_path = _resolve_description_xml_path(csv_path) or csv_path
 
     return csv_path, output_dir
 
@@ -7125,16 +7498,24 @@ def main(argv: list[str] | None = None) -> int:
             if installed:
                 print(f"[INFO] Installiert: {', '.join(installed)}")
 
-        out_dir = convert_range(
-            args.folder_path,
-            csv_path,
-            args.iterations,
-            args.start,
-            args.end,
-            args.debug_ac0811_dir,
-            args.debug_element_diff_dir,
-            output_dir,
-        )
+        if args.mode == "annotate":
+            out_dir = analyze_range(
+                args.folder_path,
+                output_root=output_dir,
+                start_ref=args.start,
+                end_ref=args.end,
+            )
+        else:
+            out_dir = convert_range(
+                args.folder_path,
+                csv_path,
+                args.iterations,
+                args.start,
+                args.end,
+                args.debug_ac0811_dir,
+                args.debug_element_diff_dir,
+                output_dir,
+            )
         print(f"\nAbgeschlossen! Ausgaben unter: {out_dir}")
         return 0
 
@@ -7145,26 +7526,26 @@ if __name__ == "__main__":
 
 
 def convert_image(input_path: str, output_path: str, *, max_iter: int = 120, plateau_limit: int = 14, seed: int = 42) -> Path:
-    """Backward-compatible single-image conversion entrypoint."""
+    """Backward-compatible single-image entrypoint.
+
+    - For raster targets (e.g. ``.png``), write an annotated image plus JSON coordinates.
+    - For SVG targets or missing image deps, preserve the historical embedded-raster fallback.
+    """
     del max_iter, plateau_limit, seed
     target = Path(output_path)
     target.parent.mkdir(parents=True, exist_ok=True)
 
-    if cv2 is None or np is None:
+    if target.suffix.lower() == ".svg" or cv2 is None or np is None:
         target.write_text(_render_embedded_raster_svg(input_path), encoding="utf-8")
         return target
 
-    out_root = convert_range(
-        str(Path(input_path).parent),
-        "",
-        128,
-        start_ref=Path(input_path).stem,
-        end_ref=Path(input_path).stem,
-        output_root=str(target.parent),
-    )
-    generated = Path(out_root) / f"{Path(input_path).stem}.svg"
-    if generated != target:
-        generated.replace(target)
+    img = cv2.imread(str(input_path))
+    if img is None:
+        raise FileNotFoundError(f"Bild konnte nicht gelesen werden: {input_path}")
+    regions = detect_relevant_regions(img)
+    annotated = annotate_image_regions(img, regions)
+    cv2.imwrite(str(target), annotated)
+    target.with_suffix(".json").write_text(json.dumps(regions, ensure_ascii=False, indent=2), encoding="utf-8")
     return target
 
 
