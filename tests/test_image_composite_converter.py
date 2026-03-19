@@ -2643,10 +2643,10 @@ def test_resolve_cli_csv_and_output_keeps_explicit_csv_over_autodetect(tmp_path:
     assert output_dir == "out_dir"
 
 
-def test_default_converted_symbols_root_points_to_converted_images_svg() -> None:
+def test_default_converted_symbols_root_points_to_converted_images() -> None:
     root = Path(conv._default_converted_symbols_root())
 
-    assert root.name == "converted_images_svg"
+    assert root.name == "converted_images"
     assert root.parent.name == "artifacts"
 
 
