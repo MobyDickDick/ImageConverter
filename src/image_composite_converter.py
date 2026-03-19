@@ -815,15 +815,11 @@ def _load_description_mapping_from_xml(path: str) -> dict[str, str]:
 
 
 def _resolve_description_xml_path(path: str) -> str | None:
-    raw_path = str(path or "").strip()
-    if not raw_path:
-        return None
-
-    candidate = Path(raw_path)
+    candidate = Path(path)
     if candidate.exists():
         return str(candidate)
 
-    basename = os.path.basename(raw_path.replace("\\", "/"))
+    basename = candidate.name
     if not basename:
         return None
 
