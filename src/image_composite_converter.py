@@ -5817,6 +5817,18 @@ def _default_converted_symbols_root() -> str:
     return os.path.join(repo_root, "artifacts", "converted_images_svg")
 
 
+def _converted_svg_output_dir(output_root: str) -> str:
+    return os.path.join(output_root, "converted_svgs")
+
+
+def _diff_output_dir(output_root: str) -> str:
+    return os.path.join(output_root, "diff_pngs")
+
+
+def _reports_output_dir(output_root: str) -> str:
+    return os.path.join(output_root, "reports")
+
+
 def _sniff_raster_size(path: str | Path) -> tuple[int, int]:
     file_path = Path(path)
     with file_path.open("rb") as fh:
@@ -6596,9 +6608,9 @@ def convert_range(
     output_root: str | None = None,
 ) -> str:
     out_root = output_root or _default_converted_symbols_root()
-    svg_out_dir = out_root
-    diff_out_dir = os.path.join(out_root, "diff_pngs")
-    reports_out_dir = os.path.join(out_root, "reports")
+    svg_out_dir = _converted_svg_output_dir(out_root)
+    diff_out_dir = _diff_output_dir(out_root)
+    reports_out_dir = _reports_output_dir(out_root)
 
     os.makedirs(svg_out_dir, exist_ok=True)
     os.makedirs(diff_out_dir, exist_ok=True)

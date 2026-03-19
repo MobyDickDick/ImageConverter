@@ -865,6 +865,61 @@ def test_convert_range_does_not_skip_variants_in_quality_passes(
     assert all(not skip_set for skip_set in observed_skips)
 
 
+def test_convert_range_writes_svgs_and_diffs_to_dedicated_subfolders(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Converted SVGs and diff PNGs should be separated into stable subdirectories."""
+    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+        pytest.skip("numpy/cv2 not available in this environment")
+
+    np = image_composite_converter.np
+    if np is None:
+        pytest.skip("numpy not available in this environment")
+    cv2 = image_composite_converter.cv2
+
+    images_dir = tmp_path / "images"
+    images_dir.mkdir()
+    csv_path = tmp_path / "data.csv"
+    csv_path.write_text("Wurzelform;Beschreibung\nAC0812;semantic\n", encoding="utf-8")
+    assert cv2.imwrite(str(images_dir / "AC0812_L.jpg"), np.full((10, 10, 3), 230, dtype=np.uint8))
+
+    monkeypatch.setattr(image_composite_converter, "_in_requested_range", lambda *_args, **_kwargs: True)
+    monkeypatch.setattr(image_composite_converter, "_load_quality_config", lambda *_args, **_kwargs: {})
+    monkeypatch.setattr(image_composite_converter, "_write_quality_pass_report", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(image_composite_converter, "_harmonize_semantic_size_variants", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(image_composite_converter, "_write_pixel_delta2_ranking", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(image_composite_converter, "_select_open_quality_cases", lambda *_args, **_kwargs: [])
+    monkeypatch.setattr(image_composite_converter, "_select_middle_lower_tercile", lambda *_args, **_kwargs: [])
+
+    def fake_pipeline(img_path: str, _csv_path: str, _iterations: int, svg_out: str, diff_out: str, reports_out: str, *_args, **_kwargs):
+        stem = Path(img_path).stem
+        Path(svg_out).mkdir(parents=True, exist_ok=True)
+        Path(diff_out).mkdir(parents=True, exist_ok=True)
+        Path(reports_out).mkdir(parents=True, exist_ok=True)
+        (Path(svg_out) / f"{stem}.svg").write_text("<svg/>", encoding="utf-8")
+        (Path(diff_out) / f"{stem}_diff.png").write_bytes(b"png")
+        params = {"mode": "semantic_badge", "elements": ["circle"], "cx": 5.0, "cy": 5.0, "r": 3.0}
+        return stem, "semantic", params, 1, 100.0
+
+    monkeypatch.setattr(image_composite_converter, "run_iteration_pipeline", fake_pipeline)
+
+    output_root = tmp_path / "out"
+    result = image_composite_converter.convert_range(
+        str(images_dir),
+        str(csv_path),
+        iterations=2,
+        start_ref="AC0812",
+        end_ref="AC0812",
+        output_root=str(output_root),
+    )
+
+    assert result == str(output_root)
+    assert (output_root / "converted_svgs" / "AC0812_L.svg").exists()
+    assert (output_root / "diff_pngs" / "AC0812_L_diff.png").exists()
+    assert (output_root / "reports" / "Iteration_Log.csv").exists()
+
+
 def test_template_transfer_donor_family_compatible() -> None:
     assert image_composite_converter._template_transfer_donor_family_compatible("GE011", "GE020") is True
     assert image_composite_converter._template_transfer_donor_family_compatible("GE011", "AC0812") is False
@@ -2593,6 +2648,14 @@ def test_default_converted_symbols_root_points_to_converted_images_svg() -> None
 
     assert root.name == "converted_images_svg"
     assert root.parent.name == "artifacts"
+
+
+def test_conversion_output_subdirectories_live_below_root() -> None:
+    root = Path("/tmp/example-output")
+
+    assert Path(conv._converted_svg_output_dir(str(root))) == root / "converted_svgs"
+    assert Path(conv._diff_output_dir(str(root))) == root / "diff_pngs"
+    assert Path(conv._reports_output_dir(str(root))) == root / "reports"
 
 
 def test_render_embedded_raster_svg_wraps_gif_without_optional_deps(tmp_path: Path) -> None:
