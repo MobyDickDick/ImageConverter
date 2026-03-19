@@ -2490,6 +2490,16 @@ def test_parse_description_marks_ac0810_as_semantic_badge() -> None:
     assert "SEMANTIC: waagrechter Strich rechts vom Kreis" in params["elements"]
 
 
+def test_parse_description_marks_ac0811_as_semantic_badge() -> None:
+    """Reflection parsing should treat AC0811 as a semantic circle+down-stem badge."""
+    desc, params = image_composite_converter.Reflection({}).parse_description("AC0811", "AC0811_L.jpg")
+
+    assert desc == ""
+    assert params["mode"] == "semantic_badge"
+    assert "SEMANTIC: Kreis ohne Buchstabe" in params["elements"]
+    assert "SEMANTIC: senkrechter Strich hinter dem Kreis" in params["elements"]
+
+
 @pytest.mark.parametrize(
     ("symbol", "expected_element"),
     [

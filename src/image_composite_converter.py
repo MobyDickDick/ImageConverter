@@ -962,6 +962,7 @@ class Reflection:
 
         if base_name.upper() in {
             "AR0100",
+            "AC0811",
             "AC0810",
             "AC0812",
             "AC0813",
@@ -981,7 +982,7 @@ class Reflection:
             "AC0882",
         }:
             params["mode"] = "semantic_badge"
-            if base_name.upper() in {"AC0810", "AC0812", "AC0813", "AC0814"}:
+            if base_name.upper() in {"AC0810", "AC0811", "AC0812", "AC0813", "AC0814"}:
                 params["elements"].append("SEMANTIC: Kreis ohne Buchstabe")
                 params["label"] = ""
             elif symbol_upper in forced_co2_symbols or Reflection._contains_co_marker(desc):
@@ -998,7 +999,7 @@ class Reflection:
                 params["label"] = "M" if base_name.upper() == "AR0100" else "T"
             if base_name.upper() in {"AC0810", "AC0814", "AC0833", "AC0834", "AC0838", "AC0839"}:
                 params["elements"].append("SEMANTIC: waagrechter Strich rechts vom Kreis")
-            if base_name.upper() in {"AC0881", "AC0831", "AC0836"}:
+            if base_name.upper() in {"AC0811", "AC0881", "AC0831", "AC0836"}:
                 params["elements"].append("SEMANTIC: senkrechter Strich hinter dem Kreis")
             if base_name.upper() in {"AC0812", "AC0832", "AC0837", "AC0882"}:
                 params["elements"].append("SEMANTIC: waagrechter Strich links vom Kreis")
