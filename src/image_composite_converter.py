@@ -3608,6 +3608,61 @@ class Action:
         return fg > 0
 
     @staticmethod
+    def _mask_supports_circle(mask: np.ndarray | None) -> bool:
+        if mask is None:
+            return False
+        pixel_count = int(np.count_nonzero(mask))
+        if pixel_count < 4:
+            return False
+
+        bbox = Action._mask_bbox(mask)
+        if bbox is None:
+            return False
+        x1, y1, x2, y2 = bbox
+        width = max(1.0, (x2 - x1) + 1.0)
+        height = max(1.0, (y2 - y1) + 1.0)
+        if not (0.60 <= (width / height) <= 1.40):
+            return False
+
+        cx = (x1 + x2) / 2.0
+        cy = (y1 + y2) / 2.0
+        approx_radius = max(1.0, (width + height) * 0.25)
+        area = width * height
+        density = float(pixel_count) / max(1.0, area)
+        if density < 0.04:
+            return False
+
+        ys, xs = np.where(mask)
+        bins = 12
+        coverage_bins = np.zeros(bins, dtype=np.uint8)
+        ring_tol = max(1.2, approx_radius * 0.45)
+        near_ring = 0
+        for py, px in zip(ys, xs, strict=False):
+            dist = math.hypot(float(px) - cx, float(py) - cy)
+            if abs(dist - approx_radius) > ring_tol:
+                continue
+            near_ring += 1
+            ang = math.atan2(float(py) - cy, float(px) - cx)
+            idx = int(((ang + math.pi) / (2.0 * math.pi)) * bins) % bins
+            coverage_bins[idx] = 1
+
+        coverage = int(np.sum(coverage_bins))
+        if coverage >= 4 and near_ring >= max(4, int(round(pixel_count * 0.35))):
+            return True
+
+        mask_u8 = (mask.astype(np.uint8)) * 255
+        contours, _ = cv2.findContours(mask_u8, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+        if not contours:
+            return False
+        cnt = max(contours, key=cv2.contourArea)
+        perimeter = float(cv2.arcLength(cnt, True))
+        if perimeter <= 0.0:
+            return False
+        contour_area = float(cv2.contourArea(cnt))
+        circularity = (4.0 * math.pi * contour_area) / max(1e-6, perimeter * perimeter)
+        return circularity >= 0.28 and density <= 0.72
+
+    @staticmethod
     def extract_badge_element_mask(img_orig: np.ndarray, params: dict, element: str) -> np.ndarray | None:
         h, w = img_orig.shape[:2]
         region_mask = Action._element_region_mask(h, w, params, element)
@@ -5324,6 +5379,7 @@ class Action:
             maxRadius=max(8, int(round(min_side * 0.48))),
         )
         has_circle = False
+        circle_geom: tuple[float, float, float] | None = None
         if circles is not None and circles.size > 0:
             circle_candidates = np.round(circles[0, :]).astype(int)
             for cx, cy, radius in circle_candidates:
@@ -5355,6 +5411,7 @@ class Action:
                     continue
 
                 has_circle = True
+                circle_geom = (float(cx), float(cy), float(r))
                 break
 
         # Horizontal line cue: long near-horizontal segment via probabilistic Hough.
@@ -5377,6 +5434,23 @@ class Action:
                     continue
                 if dy > max(1, int(round(dx * 0.18))):
                     continue
+                if circle_geom is not None:
+                    cx, cy, radius = circle_geom
+                    endpoint_d1 = math.hypot(float(x1) - cx, float(y1) - cy)
+                    endpoint_d2 = math.hypot(float(x2) - cx, float(y2) - cy)
+                    expanded_r = float(radius) + max(1.5, float(radius) * 0.10)
+                    # Ignore short bars that stay inside the circle (e.g. the top
+                    # bar of a "T" glyph). A semantic arm must visibly leave the
+                    # circle silhouette on at least one side.
+                    if endpoint_d1 <= expanded_r and endpoint_d2 <= expanded_r:
+                        continue
+                    outside_len = 0.0
+                    if endpoint_d1 > expanded_r:
+                        outside_len += max(0.0, endpoint_d1 - expanded_r)
+                    if endpoint_d2 > expanded_r:
+                        outside_len += max(0.0, endpoint_d2 - expanded_r)
+                    if outside_len < max(2.0, float(w) * 0.08):
+                        continue
                 has_arm = True
                 break
 
@@ -5399,6 +5473,12 @@ class Action:
                     width = int(stats[label_idx, cv2.CC_STAT_WIDTH])
                     height = int(stats[label_idx, cv2.CC_STAT_HEIGHT])
                     aspect = float(width) / max(1.0, float(height))
+                    if circle_geom is not None:
+                        cx, cy, radius = circle_geom
+                        comp_cx = x1 + float(stats[label_idx, cv2.CC_STAT_LEFT] + (width / 2.0))
+                        comp_cy = y1 + float(stats[label_idx, cv2.CC_STAT_TOP] + (height / 2.0))
+                        if math.hypot(comp_cx - cx, comp_cy - cy) > float(radius) * 0.72:
+                            continue
                     small_component_count += 1
                     total_small_area += area
                     if 0.25 <= aspect <= 4.0:
@@ -5444,24 +5524,7 @@ class Action:
             area = width * height
             density = float(pixel_count) / max(1.0, area)
             if element == "circle":
-                center = Action._mask_centroid_radius(mask)
-                if center is None:
-                    return False
-                cx, cy, radius = center
-                if radius < 2.0 or density < 0.10:
-                    return False
-                ys, xs = np.where(mask)
-                bins = 8
-                coverage_bins = np.zeros(bins, dtype=np.uint8)
-                ring_tol = max(1.2, float(radius) * 0.45)
-                for py, px in zip(ys, xs, strict=False):
-                    dist = math.hypot(float(px) - cx, float(py) - cy)
-                    if abs(dist - float(radius)) > ring_tol:
-                        continue
-                    ang = math.atan2(float(py) - cy, float(px) - cx)
-                    idx = int(((ang + math.pi) / (2.0 * math.pi)) * bins) % bins
-                    coverage_bins[idx] = 1
-                return int(np.sum(coverage_bins)) >= 3
+                return Action._mask_supports_circle(mask)
             if element == "arm":
                 return pixel_count >= 5 and max(width, height) / max(1.0, min(width, height)) >= 2.2
             if element == "text":
