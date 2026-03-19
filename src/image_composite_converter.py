@@ -5607,9 +5607,15 @@ def run_iteration_pipeline(
     elements = ", ".join(params["elements"]) if params["elements"] else "Kein Compositing-Befehl gefunden"
     print(f"Befehl erkannt: {elements}")
 
+    os.makedirs(svg_out_dir, exist_ok=True)
+    os.makedirs(diff_out_dir, exist_ok=True)
+    if reports_out_dir:
+        os.makedirs(reports_out_dir, exist_ok=True)
+
+    base = os.path.splitext(filename)[0]
     log_path = None
     if reports_out_dir:
-        log_path = os.path.join(reports_out_dir, f"{os.path.splitext(filename)[0]}_element_validation.log")
+        log_path = os.path.join(reports_out_dir, f"{base}_element_validation.log")
 
     def _write_validation_log(lines: list[str]) -> None:
         if not log_path:
@@ -5626,6 +5632,20 @@ def run_iteration_pipeline(
         with open(log_path, "w", encoding="utf-8") as f:
             f.write("\n".join(payload).rstrip() + "\n")
 
+    def _write_attempt_artifacts(svg_content: str, rendered_img=None, *, failed: bool = False) -> None:
+        suffix = "_failed" if failed else ""
+        svg_path = os.path.join(svg_out_dir, f"{base}{suffix}.svg")
+        with open(svg_path, "w", encoding="utf-8") as f:
+            f.write(svg_content)
+
+        render = rendered_img
+        if render is None:
+            render = Action.render_svg_to_numpy(svg_content, w, h)
+        if render is None:
+            return
+        diff = Action.create_diff_image(perc.img, render)
+        cv2.imwrite(os.path.join(diff_out_dir, f"{base}{suffix}_diff.png"), diff)
+
     if params["mode"] == "semantic_badge":
         badge_params = Action.make_badge_params(w, h, perc.base_name, perc.img)
         if badge_params is None:
@@ -5641,10 +5661,19 @@ def run_iteration_pipeline(
             badge_params,
         )
         if semantic_issues:
+            failed_svg = Action.generate_badge_svg(w, h, badge_params)
+            _write_attempt_artifacts(failed_svg, failed=True)
             print("[ERROR] Semantik-Abgleich fehlgeschlagen:")
             for issue in semantic_issues:
                 print(f"  - {issue}")
-            _write_validation_log(["status=semantic_mismatch", *[f"issue={issue}" for issue in semantic_issues]])
+            _write_validation_log(
+                [
+                    "status=semantic_mismatch",
+                    f"best_attempt_svg={base}_failed.svg",
+                    f"best_attempt_diff={base}_failed_diff.png",
+                    *[f"issue={issue}" for issue in semantic_issues],
+                ]
+            )
             return None
 
         validation_logs: list[str] = []
@@ -5675,15 +5704,10 @@ def run_iteration_pipeline(
         _write_validation_log(["status=semantic_ok", *validation_logs])
 
         svg_content = Action.generate_badge_svg(w, h, badge_params)
-        base = os.path.splitext(filename)[0]
-        with open(os.path.join(svg_out_dir, f"{base}.svg"), "w", encoding="utf-8") as f:
-            f.write(svg_content)
-
         svg_rendered = Action.render_svg_to_numpy(svg_content, w, h)
         if svg_rendered is None:
             raise RuntimeError("SVG rendering failed although fitz is installed.")
-        diff = Action.create_diff_image(perc.img, svg_rendered)
-        cv2.imwrite(os.path.join(diff_out_dir, f"{base}_diff.png"), diff)
+        _write_attempt_artifacts(svg_content, svg_rendered)
         return base, desc, params, 1, Action.calculate_error(perc.img, svg_rendered)
 
     if params["mode"] != "composite":
@@ -5741,11 +5765,8 @@ def run_iteration_pipeline(
     else:
         print("-> Konvergenzdiagnose: Iterationsbudget ausgeschöpft (Optimum unklar, ggf. Suchraum erweitern)")
 
-    base = os.path.splitext(filename)[0]
-    with open(os.path.join(svg_out_dir, f"{base}.svg"), "w", encoding="utf-8") as f:
-        f.write(best_svg)
-    if best_diff is not None:
-        cv2.imwrite(os.path.join(diff_out_dir, f"{base}_diff.png"), best_diff)
+    if best_svg:
+        _write_attempt_artifacts(best_svg, best_diff)
 
     _write_validation_log([
         "status=composite_ok",
