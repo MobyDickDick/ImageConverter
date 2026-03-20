@@ -53,7 +53,7 @@ Speziallogik in `src/image_composite_converter.py`.
 
 ---
 
-### Aufgabe 1.2 – Stagnation der Validierungsrunden früher erkennen
+### Aufgabe 1.2 – Stagnation der Validierungsrunden früher erkennen ✅ erledigt
 **Ziel:** Leere oder redundante Runden sollen nicht mehr mehrfach wiederholt werden.
 
 **Umsetzung:**

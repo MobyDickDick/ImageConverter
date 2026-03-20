@@ -5847,6 +5847,30 @@ class Action:
             elements.append("text")
         best_params = copy.deepcopy(params)
         best_full_err = float("inf")
+        previous_round_state: tuple[tuple[tuple[str, float], ...], float] | None = None
+        fallback_search_active = False
+
+        def _stagnation_fingerprint(current_params: dict) -> tuple[tuple[str, float], ...]:
+            tracked_keys = (
+                "cx",
+                "cy",
+                "r",
+                "arm_len",
+                "stem_width",
+                "arm_stroke",
+                "text_scale",
+                "co2_font_scale",
+                "voc_scale",
+            )
+            fingerprint: list[tuple[str, float]] = []
+            for key in tracked_keys:
+                value = current_params.get(key)
+                try:
+                    numeric_value = float(value)
+                except (TypeError, ValueError):
+                    continue
+                fingerprint.append((key, round(numeric_value, 4)))
+            return tuple(fingerprint)
 
         for round_idx in range(max_rounds):
             logs.append(f"Runde {round_idx + 1}: elementweise Validierung gestartet")
@@ -5901,7 +5925,8 @@ class Action:
                 if extent_changed:
                     round_changed = True
 
-                if element == "circle" and apply_circle_geometry_penalty:
+                circle_geometry_penalty_active = apply_circle_geometry_penalty and not fallback_search_active
+                if element == "circle" and circle_geometry_penalty_active:
                     center_changed = Action._optimize_circle_center_bracket(img_orig, params, logs)
                     if center_changed:
                         round_changed = True
@@ -5920,6 +5945,25 @@ class Action:
                 best_full_err = full_err
                 best_params = copy.deepcopy(params)
 
+            current_round_state = (_stagnation_fingerprint(params), round(float(full_err), 6))
+            if previous_round_state is not None:
+                same_fingerprint = current_round_state[0] == previous_round_state[0]
+                nearly_same_error = abs(current_round_state[1] - previous_round_state[1]) <= 1e-6
+                if same_fingerprint and nearly_same_error:
+                    logs.append(
+                        "stagnation_detected: identischer Parameter-Fingerprint und praktisch unveränderter Gesamtfehler"
+                    )
+                    if not fallback_search_active and round_idx + 1 < max_rounds:
+                        fallback_search_active = True
+                        logs.append(
+                            "switch_to_fallback_search: deaktiviere Circle-Geometry-Penalty für eine letzte Ausweichrunde"
+                        )
+                        previous_round_state = current_round_state
+                        continue
+                    logs.append("stopped_due_to_stagnation: Validierung vorzeitig beendet")
+                    break
+            previous_round_state = current_round_state
+
             if full_err <= 8.0:
                 if stop_when_error_below_threshold:
                     logs.append("Gesamtfehler unter Schwellwert, Validierung beendet")
@@ -5930,7 +5974,16 @@ class Action:
                 break
 
             if not round_changed:
-                logs.append("Keine Element-Geometrieänderung mehr; Validierung vorzeitig beendet")
+                if not fallback_search_active and round_idx + 1 < max_rounds:
+                    fallback_search_active = True
+                    logs.append(
+                        "stagnation_detected: keine relevante Geometrieänderung in der letzten Validierungsrunde"
+                    )
+                    logs.append(
+                        "switch_to_fallback_search: deaktiviere Circle-Geometry-Penalty für eine letzte Ausweichrunde"
+                    )
+                    continue
+                logs.append("stopped_due_to_stagnation: keine weitere Parameterbewegung erkennbar")
                 break
 
         if math.isfinite(best_full_err):
