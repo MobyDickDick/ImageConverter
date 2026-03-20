@@ -3145,6 +3145,100 @@ def test_load_description_mapping_from_xml_reads_wurzelform_key_and_images(tmp_p
     assert mapping["AC0812_M"] == "Semantic badge sample"
 
 
+def test_load_existing_conversion_rows_reads_prior_iteration_log(tmp_path: Path) -> None:
+    output_root = tmp_path / "converted"
+    reports_dir = output_root / "reports"
+    svg_dir = output_root / "converted_svgs"
+    images_dir = tmp_path / "images"
+    reports_dir.mkdir(parents=True)
+    svg_dir.mkdir(parents=True)
+    images_dir.mkdir()
+
+    (reports_dir / "Iteration_Log.csv").write_text(
+        "Dateiname;Gefundene Elemente;Beste Iteration;Diff-Score;FehlerProPixel\n"
+        "AC0820_L.jpg;SEMANTIC: Kreis + Buchstabe CO_2;3;20.61;0.02289506\n",
+        encoding="utf-8",
+    )
+    (svg_dir / "AC0820_L.svg").write_text(
+        '<svg width="30px" height="30px" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">'
+        '<circle cx="15" cy="15" r="10" fill="#dcdcdc" stroke="#7f7f7f" stroke-width="1"/>'
+        '<text x="15" y="17" fill="#5f5f5f">CO₂</text>'
+        "</svg>",
+        encoding="utf-8",
+    )
+    shutil.copyfile("artifacts/images_to_convert/AC0820_L.jpg", images_dir / "AC0820_L.jpg")
+
+    rows = conv._load_existing_conversion_rows(str(output_root), str(images_dir))
+
+    assert len(rows) == 1
+    assert rows[0]["variant"] == "AC0820_L"
+    assert rows[0]["base"] == "AC0820"
+    assert rows[0]["best_iter"] == 3
+    assert rows[0]["error_per_pixel"] == pytest.approx(0.02289506)
+    assert rows[0]["params"]["mode"] == "semantic_badge"
+
+
+def test_convert_range_uses_existing_conversion_rows_as_template_donors(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    images_dir = tmp_path / "images"
+    images_dir.mkdir()
+    csv_path = tmp_path / "mapping.csv"
+    output_root = tmp_path / "converted"
+    target_name = "AC0833_L.jpg"
+    shutil.copyfile("artifacts/images_to_convert/AC0833_L.jpg", images_dir / target_name)
+    csv_path.write_text("Wurzelform;Beschreibung\nAC0833;semantic\n", encoding="utf-8")
+
+    existing_donor = {
+        "filename": "AC0820_L.jpg",
+        "params": {"mode": "semantic_badge", "draw_text": True, "text_mode": "co2"},
+        "best_iter": 1,
+        "best_error": 10.0,
+        "error_per_pixel": 0.01,
+        "w": 30,
+        "h": 30,
+        "base": "AC0820",
+        "variant": "AC0820_L",
+    }
+
+    monkeypatch.setattr(conv, "_load_existing_conversion_rows", lambda *_args, **_kwargs: [existing_donor])
+    monkeypatch.setattr(conv, "_load_quality_config", lambda *_args, **_kwargs: {})
+    monkeypatch.setattr(conv, "_write_quality_config", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(conv, "_write_quality_pass_report", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(conv, "_harmonize_semantic_size_variants", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(conv, "_write_pixel_delta2_ranking", lambda *_args, **_kwargs: None)
+
+    calls: list[list[str]] = []
+
+    def fake_run_iteration_pipeline(image_path: str, *_args, **_kwargs):
+        return (
+            Path(image_path).stem,
+            "semantic",
+            {"mode": "semantic_badge", "draw_text": True, "text_mode": "co2", "elements": ["SEMANTIC: test"]},
+            1,
+            100.0,
+        )
+
+    def fake_try_template_transfer(*, target_row, donor_rows, **_kwargs):
+        calls.append([str(row.get("variant", "")) for row in donor_rows])
+        return None, None
+
+    monkeypatch.setattr(conv, "run_iteration_pipeline", fake_run_iteration_pipeline)
+    monkeypatch.setattr(conv, "_try_template_transfer", fake_try_template_transfer)
+
+    conv.convert_range(
+        str(images_dir),
+        str(csv_path),
+        iterations=1,
+        start_ref="AC0833",
+        end_ref="AC0833",
+        output_root=str(output_root),
+    )
+
+    assert calls
+    assert "AC0820_L" in calls[0]
+
+
 def test_resolve_cli_csv_and_output_accepts_xml_as_table_path(tmp_path: Path) -> None:
     in_dir = tmp_path / "images"
     in_dir.mkdir()
