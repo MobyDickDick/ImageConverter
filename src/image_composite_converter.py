@@ -2397,10 +2397,24 @@ class Action:
         cy = float(params.get("cy", defaults.get("cy", float(h) / 2.0)))
         r = float(params.get("r", defaults.get("r", float(h) * 0.4)))
 
-        if h <= 15 and not bool(params.get("draw_text", True)):
+        tiny_plain_badge = h <= 18 and not bool(params.get("draw_text", True))
+        if tiny_plain_badge:
             # Tiny plain connector badges can lose roughly one anti-aliased ring
             # pixel in contour/Hough fitting; keep them near template size.
             r = max(r, default_r * 0.98)
+            default_cx = float(defaults.get("cx", float(w) / 2.0))
+            default_cy = float(defaults.get("cy", float(h) / 2.0))
+            # AC0814_S has very little empty space around the ring. Even a
+            # sub-pixel pose drift is visually obvious, so keep the traced circle
+            # anchored to the semantic template and only allow a tiny vertical
+            # correction for raster antialiasing.
+            params["cx"] = default_cx
+            params["cy"] = float(Action._clip_scalar(cy, default_cy - 0.5, default_cy + 0.5))
+            params["lock_circle_cx"] = True
+            params["lock_circle_cy"] = True
+            params["lock_arm_center_to_circle"] = True
+            cx = float(params["cx"])
+            cy = float(params["cy"])
 
         elongated_plain_badge = aspect_ratio >= 1.60 and h >= 20 and not bool(params.get("draw_text", True))
         if elongated_plain_badge:

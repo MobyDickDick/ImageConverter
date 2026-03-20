@@ -1491,6 +1491,68 @@ def test_fit_ac0812_elongated_variant_uses_stronger_min_arm_ratio(monkeypatch: p
     assert float(fitted["arm_len_min_ratio"]) >= 0.82
 
 
+def test_fit_ac0814_tiny_plain_variant_reanchors_circle_to_template(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Tiny AC0814 variants should keep the circle centered on the semantic template."""
+
+    monkeypatch.setattr(
+        Action,
+        "_fit_semantic_badge_from_image",
+        staticmethod(
+            lambda _img, defaults: {
+                **defaults,
+                "cx": float(defaults["cx"]) + 1.75,
+                "cy": float(defaults["cy"]) + 1.25,
+                "r": float(defaults["r"]) * 0.90,
+                "arm_enabled": True,
+                "draw_text": False,
+            }
+        ),
+    )
+
+    class DummyImg:
+        shape = (14, 24, 3)
+
+    defaults = Action._default_ac0814_params(24, 14)
+    fitted = Action._fit_ac0814_params_from_image(DummyImg(), defaults)
+
+    assert float(fitted["cx"]) == pytest.approx(float(defaults["cx"]))
+    assert float(fitted["cy"]) == pytest.approx(float(defaults["cy"]) + 0.5)
+    assert float(fitted["r"]) >= float(defaults["r"]) * 0.98
+    assert fitted["lock_circle_cx"] is True
+    assert fitted["lock_circle_cy"] is True
+    assert fitted["lock_arm_center_to_circle"] is True
+
+
+def test_fit_ac0814_tiny_plain_variant_reanchors_arm_to_adjusted_circle(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Tiny AC0814 arm geometry should be rebuilt from the reanchored circle pose."""
+
+    monkeypatch.setattr(
+        Action,
+        "_fit_semantic_badge_from_image",
+        staticmethod(
+            lambda _img, defaults: {
+                **defaults,
+                "cx": float(defaults["cx"]) + 2.0,
+                "cy": float(defaults["cy"]) - 1.0,
+                "r": float(defaults["r"]),
+                "arm_enabled": True,
+                "draw_text": False,
+            }
+        ),
+    )
+
+    class DummyImg:
+        shape = (14, 24, 3)
+
+    defaults = Action._default_ac0814_params(24, 14)
+    fitted = Action._fit_ac0814_params_from_image(DummyImg(), defaults)
+
+    assert float(fitted["arm_x1"]) == pytest.approx(min(24.0, float(fitted["cx"]) + float(fitted["r"])))
+    assert float(fitted["arm_y1"]) == pytest.approx(float(fitted["cy"]))
+    assert float(fitted["arm_x2"]) == pytest.approx(24.0)
+    assert float(fitted["arm_y2"]) == pytest.approx(float(fitted["cy"]))
+
+
 def test_validate_badge_can_expand_ac0812_tiny_circle_radius() -> None:
     """Element validation should actively correct a too-small AC0812_S circle radius."""
     img_path = Path("artifacts/images_to_convert/AC0812_S.jpg")
