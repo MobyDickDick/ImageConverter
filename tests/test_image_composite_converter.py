@@ -947,6 +947,13 @@ def test_in_requested_range_supports_three_letter_prefixes() -> None:
     assert image_composite_converter._in_requested_range("DLG0030.jpg", "DLG0030", "DLG0030") is True
 
 
+def test_in_requested_range_treats_identical_short_bounds_as_prefix_filter() -> None:
+    """Short identical bounds should include every symbol whose base name starts with that token."""
+    assert image_composite_converter._in_requested_range("AC0814_L.jpg", "AC081", "AC081") is True
+    assert image_composite_converter._in_requested_range("AC0813_M.jpg", "AC081", "AC081") is True
+    assert image_composite_converter._in_requested_range("AC0820_L.jpg", "AC081", "AC081") is False
+
+
 def test_in_requested_range_supports_one_sided_bounds() -> None:
     """When one bound is invalid, the valid bound should still be applied."""
     assert image_composite_converter._in_requested_range("AC0812_L.jpg", "", "AC0812") is True
