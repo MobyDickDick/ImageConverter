@@ -2243,15 +2243,38 @@ def test_decompose_circle_with_stem_ignores_plain_circle() -> None:
                 pixels[y][x] = 1
                 grayscale[y][x] = 180
 
+    element = conv.Element(pixels=pixels, x0=0, y0=0, x1=size - 1, y1=size - 1)
+    candidate = conv.Candidate(shape="circle", cx=cx, cy=cy, w=r * 2, h=r * 2)
+
+    parts = conv.decompose_circle_with_stem(grayscale, element, candidate)
+
+    assert parts is None
+
 def test_optimize_stem_extent_keeps_bottom_anchored_ac0811_stem_from_collapsing() -> None:
     """Bottom-anchored AC0811 stems should retain a minimum visible length during bracketing."""
 
     if image_composite_converter.np is None:
         pytest.skip("numpy not available in this environment")
 
-    parts = conv.decompose_circle_with_stem(grayscale, element, candidate)
+    np = image_composite_converter.np
+    img = np.zeros((15, 15, 3), dtype=np.uint8)
+    params = Action._default_ac0811_params(15, 15)
+    logs: list[str] = []
 
-    assert parts is None
+    params["draw_text"] = False
+    params["stem_bottom"] = 15.0
+    params["stem_top"] = 9.0
+
+    original = Action._element_error_for_extent
+    try:
+        Action._element_error_for_extent = staticmethod(lambda *_args, **_kwargs: 0.0)
+        changed = Action._optimize_element_extent_bracket(img, params, "stem", logs)
+    finally:
+        Action._element_error_for_extent = original
+
+    assert changed is True
+    assert float(params["stem_bottom"]) == 15.0
+    assert float(params["stem_bottom"]) - float(params["stem_top"]) >= 5.5
 
 
 def test_decompose_circle_with_stem_recenters_vertical_stem() -> None:
