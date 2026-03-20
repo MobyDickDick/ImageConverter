@@ -231,26 +231,35 @@ def _optional_dependency_base_dir() -> Path:
 def _vendored_site_packages_dirs() -> list[Path]:
     """Return repo-local site-packages directories that may contain bundled deps."""
     base = _optional_dependency_base_dir()
-    candidates = [
-        base / ".venv" / "Lib" / "site-packages",
-        base / ".venv" / "lib" / "python3.10" / "site-packages",
-        base / ".venv" / "lib" / "python3.11" / "site-packages",
-        base / ".venv" / "lib" / "python3.12" / "site-packages",
-        base / ".venv" / "lib" / "python3.13" / "site-packages",
-        base / ".venv" / "lib" / "python3.14" / "site-packages",
+    linux_candidates = [
         base / "vendor" / "linux" / "site-packages",
         base / "vendor" / "linux-py310" / "site-packages",
         base / "vendor" / "linux-py311" / "site-packages",
         base / "vendor" / "linux-py312" / "site-packages",
         base / "vendor" / "linux-py313" / "site-packages",
         base / "vendor" / "linux-py314" / "site-packages",
+    ]
+    windows_candidates = [
         base / "vendor" / "win" / "site-packages",
         base / "vendor" / "win-py310" / "site-packages",
         base / "vendor" / "win-py311" / "site-packages",
         base / "vendor" / "win-py312" / "site-packages",
         base / "vendor" / "win-py313" / "site-packages",
         base / "vendor" / "win-py314" / "site-packages",
+        base / ".venv" / "Lib" / "site-packages",
     ]
+    posix_venv_candidates = [
+        base / ".venv" / "lib" / "python3.10" / "site-packages",
+        base / ".venv" / "lib" / "python3.11" / "site-packages",
+        base / ".venv" / "lib" / "python3.12" / "site-packages",
+        base / ".venv" / "lib" / "python3.13" / "site-packages",
+        base / ".venv" / "lib" / "python3.14" / "site-packages",
+    ]
+    if os.name == "nt":
+        candidates = windows_candidates + linux_candidates + posix_venv_candidates
+    else:
+        candidates = linux_candidates + posix_venv_candidates + windows_candidates
+
     seen: set[str] = set()
     existing: list[Path] = []
     for candidate in candidates:
@@ -261,6 +270,12 @@ def _vendored_site_packages_dirs() -> list[Path]:
         if candidate.exists():
             existing.append(candidate)
     return existing
+
+
+def _clear_partial_module_import(module_name: str) -> None:
+    """Discard partially imported package state before the next fallback attempt."""
+    for imported_name in [name for name in list(sys.modules) if name == module_name or name.startswith(f"{module_name}.")]:
+        sys.modules.pop(imported_name, None)
 
 
 def _describe_optional_dependency_error(module_name: str, exc: BaseException, attempted_paths: list[Path]) -> str:
@@ -286,6 +301,7 @@ def _load_optional_module(module_name: str):
         return importlib.import_module(module_name)
     except Exception as exc:  # pragma: no cover - exercised only in dependency-missing envs
         last_exc: BaseException = exc
+        _clear_partial_module_import(module_name)
 
     for site_packages in _vendored_site_packages_dirs():
         attempted_paths.append(site_packages)
@@ -298,6 +314,7 @@ def _load_optional_module(module_name: str):
             return importlib.import_module(module_name)
         except Exception as exc:  # pragma: no cover - exercised only in dependency-missing envs
             last_exc = exc
+            _clear_partial_module_import(module_name)
         finally:
             if added:
                 with contextlib.suppress(ValueError):
@@ -313,6 +330,7 @@ def _import_with_vendored_fallback(module_name: str):
         return importlib.import_module(module_name)
     except Exception as exc:
         last_exc: BaseException = exc
+        _clear_partial_module_import(module_name)
 
     for site_packages in _vendored_site_packages_dirs():
         path_str = str(site_packages)
@@ -324,6 +342,7 @@ def _import_with_vendored_fallback(module_name: str):
             return importlib.import_module(module_name)
         except Exception as exc:
             last_exc = exc
+            _clear_partial_module_import(module_name)
         finally:
             if added:
                 with contextlib.suppress(ValueError):

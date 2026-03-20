@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import contextlib
+import sys
 import shutil
 from pathlib import Path
 
@@ -30,6 +31,51 @@ def test_vendored_site_packages_dirs_discovers_vendor_linux_bundle(monkeypatch: 
 
     assert vendor_dir in dirs
 
+
+def test_vendored_site_packages_dirs_prefers_linux_vendor_on_linux(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
+    """Linux vendor bundles should be attempted before Windows-style repo environments."""
+    vendor_dir = tmp_path / "vendor" / "linux-py310" / "site-packages"
+    venv_dir = tmp_path / ".venv" / "Lib" / "site-packages"
+    vendor_dir.mkdir(parents=True)
+    venv_dir.mkdir(parents=True)
+
+    monkeypatch.setattr(image_composite_converter, "_optional_dependency_base_dir", lambda: tmp_path)
+
+    dirs = image_composite_converter._vendored_site_packages_dirs()
+
+    assert dirs.index(vendor_dir) < dirs.index(venv_dir)
+
+
+def test_load_optional_module_recovers_after_failed_partial_package(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
+    """A failed import from one bundle must not poison the retry against the next bundle."""
+    vendor_dir = tmp_path / "vendor" / "linux-py310" / "site-packages"
+    windows_dir = tmp_path / ".venv" / "Lib" / "site-packages"
+    vendor_dir.mkdir(parents=True)
+    windows_dir.mkdir(parents=True)
+    expected = object()
+    calls: list[tuple[str, tuple[str, ...]]] = []
+
+    def fake_import(name: str):
+        if name != "cv2":
+            raise AssertionError(f"unexpected module request: {name}")
+        calls.append((name, tuple(sys.path[:3])))
+        if str(windows_dir) in sys.path and str(vendor_dir) not in sys.path:
+            sys.modules["cv2"] = object()
+            sys.modules["cv2.typing"] = object()
+            raise ImportError("broken Windows wheel")
+        if str(vendor_dir) in sys.path:
+            assert "cv2" not in sys.modules
+            assert "cv2.typing" not in sys.modules
+            return expected
+        raise ModuleNotFoundError(name)
+
+    monkeypatch.setattr(image_composite_converter, "_optional_dependency_base_dir", lambda: tmp_path)
+    monkeypatch.setattr(image_composite_converter.importlib, "import_module", fake_import)
+
+    result = image_composite_converter._load_optional_module("cv2")
+
+    assert result is expected
+    assert len(calls) >= 2
 
 def test_optional_dependency_error_reports_windows_bundle_hint() -> None:
     """Dependency diagnostics should explain when a bundled Windows wheel is unusable on Linux."""
