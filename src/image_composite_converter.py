@@ -2049,6 +2049,23 @@ class Action:
         return p
 
     @staticmethod
+    def _tune_ac0831_co2_badge(params: dict) -> dict:
+        """Stabilize AC0831 text placement for vertically elongated CO₂ badges."""
+        p = dict(params)
+        r = float(p.get("r", 0.0))
+        p["stroke_gray"] = Action.LIGHT_CIRCLE_STROKE_GRAY
+        p["text_gray"] = p["stroke_gray"]
+        p["stroke_circle"] = Action.AC08_STROKE_WIDTH_PX
+        # Vertical connector variants read closer to the source rasters when the
+        # whole CO₂ cluster is centered as a unit instead of keeping only "CO"
+        # centered. A slight downward optical bias better matches badges such as
+        # AC0831_L where the merged JPEG text blob sits a little below center.
+        p["co2_anchor_mode"] = "cluster"
+        p["co2_optical_bias"] = float(p.get("co2_optical_bias", 0.10))
+        p["co2_dy"] = float(p.get("co2_dy", 0.0)) + (0.07 * r)
+        return p
+
+    @staticmethod
     def _tune_ac0834_co2_badge(params: dict, w: int, h: int) -> dict:
         """Stabilize tiny AC0834 badges where fitting drifts the circle downward."""
         p = dict(params)
@@ -2920,8 +2937,11 @@ class Action:
         if name == "AC0831":
             defaults = Action._apply_co2_label(Action._default_ac0881_params(w, h))
             if img is None:
-                return Action._finalize_ac08_style(name, defaults)
-            return Action._finalize_ac08_style(name, Action._fit_ac0811_params_from_image(img, defaults))
+                return Action._finalize_ac08_style(name, Action._tune_ac0831_co2_badge(defaults))
+            return Action._finalize_ac08_style(
+                name,
+                Action._tune_ac0831_co2_badge(Action._fit_ac0811_params_from_image(img, defaults)),
+            )
 
         if name == "AC0832":
             defaults = Action._apply_co2_label(Action._default_ac0812_params(w, h))
@@ -5723,6 +5743,9 @@ class Action:
                     roi = Action._foreground_mask(img_orig)[y1 : y2 + 1, x1 : x2 + 1].astype(np.uint8)
                     n_labels, _labels, stats, _centroids = cv2.connectedComponentsWithStats(roi, connectivity=8)
                     compact = 0
+                    merged_text_blob = False
+                    roi_h, roi_w = roi.shape[:2]
+                    roi_area = max(1, roi_h * roi_w)
                     for idx in range(1, n_labels):
                         area = int(stats[idx, cv2.CC_STAT_AREA])
                         if area < 2:
@@ -5732,7 +5755,21 @@ class Action:
                         aspect = float(width) / max(1.0, float(height))
                         if 0.2 <= aspect <= 4.5:
                             compact += 1
-                    if compact < 2:
+                            density = float(area) / max(1.0, float(width * height))
+                            coverage = float(area) / float(roi_area)
+                            # JPEG anti-aliasing can merge the full CO₂ cluster into
+                            # a single compact foreground island, especially in
+                            # elongated connector badges such as AC0831_L. Accept
+                            # that case when the blob is large/dense enough to be a
+                            # plausible merged text cluster instead of noise.
+                            if (
+                                compact == 1
+                                and 0.75 <= aspect <= 1.80
+                                and density >= 0.30
+                                and coverage >= 0.18
+                            ):
+                                merged_text_blob = True
+                    if compact < 2 and not merged_text_blob:
                         issues.append("Strukturprüfung: Erwartete CO₂-Glyphenstruktur nicht ausreichend belegt")
         return issues
 
