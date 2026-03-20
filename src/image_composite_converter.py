@@ -29,6 +29,22 @@ import struct
 OPTIONAL_DEPENDENCY_ERRORS: dict[str, str] = {}
 
 
+AC08_REGRESSION_CASES: tuple[dict[str, str], ...] = (
+    {"variant": "AC0882_S", "focus": "stagnation", "reason": "Small left-connector outlier that previously burned many near-identical validation rounds."},
+    {"variant": "AC0837_L", "focus": "stagnation", "reason": "Large left-connector case used to verify adaptive search still moves on stubborn families."},
+    {"variant": "AC0839_S", "focus": "small_variant", "reason": "Small right-connector badge that tends to drift in geometry and text placement."},
+    {"variant": "AC0820_L", "focus": "circle_text", "reason": "Plain circle/text badge used as a connector-free baseline for quality passes."},
+    {"variant": "AC0831_L", "focus": "semantic_vertical", "reason": "Vertical connector family representative for stem alignment and text balance."},
+    {"variant": "AC0834_S", "focus": "small_variant", "reason": "Small mirrored connector badge included to catch asymmetric regressions on _S variants."},
+    {"variant": "AC0835_S", "focus": "small_variant", "reason": "Small circle/text family member that stresses compact text scaling without connectors."},
+    {"variant": "AC0811_L", "focus": "semantic_vertical", "reason": "Known semantic family anchor for circle-without-letter vs. connector interpretation conflicts."},
+    {"variant": "AC0812_M", "focus": "semantic_horizontal", "reason": "Medium left-connector case that complements AC0811_L and covers family-specific semantic overrides."},
+)
+
+AC08_REGRESSION_SET_NAME = "ac08_core_9"
+AC08_REGRESSION_VARIANTS = tuple(case["variant"] for case in AC08_REGRESSION_CASES)
+
+
 ANNOTATION_COLORS: dict[str, tuple[int, int, int]] = {
     "circle": (0, 0, 255),
     "stem": (0, 180, 0),
@@ -7220,6 +7236,7 @@ def convert_range(
     debug_ac0811_dir: str | None = None,
     debug_element_diff_dir: str | None = None,
     output_root: str | None = None,
+    selected_variants: set[str] | None = None,
 ) -> str:
     out_root = output_root or _default_converted_symbols_root()
     svg_out_dir = _converted_svg_output_dir(out_root)
@@ -7230,10 +7247,13 @@ def convert_range(
     os.makedirs(diff_out_dir, exist_ok=True)
     os.makedirs(reports_out_dir, exist_ok=True)
 
+    normalized_selected_variants = {str(v).upper() for v in (selected_variants or set()) if str(v).strip()}
     files = sorted(
         f
         for f in os.listdir(folder_path)
-        if f.lower().endswith((".bmp", ".jpg", ".png", ".gif")) and _in_requested_range(f, start_ref, end_ref)
+        if f.lower().endswith((".bmp", ".jpg", ".png", ".gif"))
+        and _in_requested_range(f, start_ref, end_ref)
+        and (not normalized_selected_variants or os.path.splitext(f)[0].upper() in normalized_selected_variants)
     )
     if cv2 is None or np is None:
         log_path = os.path.join(reports_out_dir, "Iteration_Log.csv")
@@ -7550,6 +7570,13 @@ def convert_range(
 
     _harmonize_semantic_size_variants(semantic_results, folder_path, svg_out_dir, reports_out_dir)
     _write_pixel_delta2_ranking(folder_path, svg_out_dir, reports_out_dir)
+    _write_ac08_regression_manifest(
+        reports_out_dir,
+        folder_path=folder_path,
+        csv_path=csv_path,
+        iterations=iterations,
+        selected_variants=sorted(normalized_selected_variants),
+    )
 
     Action.STOCHASTIC_SEED_OFFSET = 0
     Action.STOCHASTIC_RUN_SEED = 0
@@ -7968,6 +7995,42 @@ def _harmonize_semantic_size_variants(
             f.write("\n".join(category_logs).rstrip() + "\n")
 
 
+def _write_ac08_regression_manifest(
+    reports_out_dir: str,
+    *,
+    folder_path: str,
+    csv_path: str,
+    iterations: int,
+    selected_variants: list[str],
+) -> None:
+    """Write a reproducible manifest for the fixed AC08 regression subset."""
+    if sorted(selected_variants) != sorted(AC08_REGRESSION_VARIANTS):
+        return
+
+    csv_manifest_path = os.path.join(reports_out_dir, "ac08_regression_set.csv")
+    with open(csv_manifest_path, "w", encoding="utf-8", newline="") as f:
+        writer = csv.writer(f, delimiter=";")
+        writer.writerow(["set", "variant", "focus", "reason"])
+        for case in AC08_REGRESSION_CASES:
+            writer.writerow([AC08_REGRESSION_SET_NAME, case["variant"], case["focus"], case["reason"]])
+
+    summary_lines = [
+        f"set={AC08_REGRESSION_SET_NAME}",
+        f"images_total={len(AC08_REGRESSION_CASES)}",
+        f"iterations={int(iterations)}",
+        f"folder_path={folder_path}",
+        f"csv_path={csv_path}",
+        "expected_reports=Iteration_Log.csv,quality_tercile_passes.csv,pixel_delta2_ranking.csv,pixel_delta2_summary.txt",
+        "expected_logs=variant_harmonization.log,shape_catalog.csv",
+        (
+            "recommended_command=python -m src.image_composite_converter "
+            f"{folder_path} --csv-path {csv_path} --ac08-regression-set {int(iterations)}"
+        ),
+    ]
+    with open(os.path.join(reports_out_dir, "ac08_regression_summary.txt"), "w", encoding="utf-8") as f:
+        f.write("\n".join(summary_lines) + "\n")
+
+
 def _write_pixel_delta2_ranking(folder_path: str, svg_out_dir: str, reports_out_dir: str, threshold: float = 18.0) -> None:
     ranking: list[dict[str, float | str]] = []
     for svg_name in sorted(f for f in os.listdir(svg_out_dir) if f.lower().endswith(".svg")):
@@ -8070,6 +8133,14 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         help=(
             "Installiert fehlende Bild-Abhängigkeiten (numpy, opencv-python-headless) "
             "automatisch via pip vor der Konvertierung."
+        ),
+    )
+    parser.add_argument(
+        "--ac08-regression-set",
+        action="store_true",
+        help=(
+            "Verarbeitet genau das feste AC08-Regression-Set ("
+            f"{AC08_REGRESSION_SET_NAME}: {', '.join(AC08_REGRESSION_VARIANTS)})"
         ),
     )
     parser.add_argument(
@@ -8211,6 +8282,10 @@ def main(argv: list[str] | None = None) -> int:
     args = parse_args(argv)
     log_path = str(args.log_file or "").strip()
     with _optional_log_capture(log_path):
+        if args.ac08_regression_set:
+            args.start = "AC0000"
+            args.end = "ZZ9999"
+
         if args.print_linux_vendor_command:
             print(
                 " ".join(
@@ -8245,6 +8320,13 @@ def main(argv: list[str] | None = None) -> int:
             if installed:
                 print(f"[INFO] Installiert: {', '.join(installed)}")
 
+        if args.ac08_regression_set:
+            print(
+                "[INFO] Verwende festes AC08-Regression-Set "
+                f"{AC08_REGRESSION_SET_NAME}: {', '.join(AC08_REGRESSION_VARIANTS)}"
+            )
+        selected_variants = set(AC08_REGRESSION_VARIANTS) if args.ac08_regression_set else None
+
         if args.mode == "annotate":
             out_dir = analyze_range(
                 args.folder_path,
@@ -8262,6 +8344,7 @@ def main(argv: list[str] | None = None) -> int:
                 args.debug_ac0811_dir,
                 args.debug_element_diff_dir,
                 output_dir,
+                selected_variants,
             )
         print(f"\nAbgeschlossen! Ausgaben unter: {out_dir}")
         return 0

@@ -250,7 +250,7 @@ Speziallogik in `src/image_composite_converter.py`.
 
 ## Phase 5 – Regression und Abschluss
 
-### Aufgabe 5.1 – Kleines AC08-Regression-Set definieren
+### Aufgabe 5.1 – Kleines AC08-Regression-Set definieren ✅ erledigt
 **Ziel:** Künftige Änderungen schnell und reproduzierbar bewerten.
 
 **Vorschlag für das erste feste Set:**
@@ -267,6 +267,23 @@ Speziallogik in `src/image_composite_converter.py`.
 **Akzeptanzkriterien:**
 - Das Set deckt Semantikfehler, Stagnation und kleine Varianten ab.
 - Jeder Lauf produziert vergleichbare Reports und Logs.
+
+**Umgesetzt in Code/Workflow:**
+- Festes Set `ac08_core_9` als kanonische Regression-Teilmenge im Konverter hinterlegt.
+- CLI-Schalter `--ac08-regression-set` verarbeitet genau diese neun Varianten statt eines bloßen Bereichsfilters.
+- Jeder Lauf schreibt zusätzlich:
+  - `ac08_regression_set.csv` mit Fokus/Begründung je Variante,
+  - `ac08_regression_summary.txt` mit reproduzierbarem Kommando und erwarteten Reports.
+
+**Reproduzierbarer Aufruf:**
+```bash
+python -m src.image_composite_converter \
+  artifacts/images_to_convert \
+  --csv-path artifacts/images_to_convert/Finale_Wurzelformen_V3.xml \
+  --output-dir artifacts/converted_images \
+  --ac08-regression-set \
+  128
+```
 
 ---
 
