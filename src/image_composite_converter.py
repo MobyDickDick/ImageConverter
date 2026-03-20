@@ -3248,16 +3248,27 @@ class Action:
 
     @staticmethod
     def render_svg_to_numpy(svg_string: str, size_w: int, size_h: int):
-        if fitz is None:
+        if fitz is None or np is None or cv2 is None:
             return None
-        doc = fitz.open("pdf", svg_string.encode("utf-8"))
-        page = doc.load_page(0)
-        zoom_x = size_w / page.rect.width if page.rect.width > 0 else 1
-        zoom_y = size_h / page.rect.height if page.rect.height > 0 else 1
-        mat = fitz.Matrix(zoom_x, zoom_y)
-        pix = page.get_pixmap(matrix=mat, alpha=False)
-        img = np.frombuffer(pix.samples, dtype=np.uint8).reshape(pix.h, pix.w, 3)
-        return cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
+
+        attempts = [svg_string]
+        normalized_svg = re.sub(r">\s+<", "><", str(svg_string or "").strip())
+        if normalized_svg and normalized_svg != svg_string:
+            attempts.append(normalized_svg)
+
+        for candidate_svg in attempts:
+            try:
+                with fitz.open("pdf", candidate_svg.encode("utf-8")) as doc:
+                    page = doc.load_page(0)
+                    zoom_x = size_w / page.rect.width if page.rect.width > 0 else 1
+                    zoom_y = size_h / page.rect.height if page.rect.height > 0 else 1
+                    mat = fitz.Matrix(zoom_x, zoom_y)
+                    pix = page.get_pixmap(matrix=mat, alpha=False)
+                img = np.frombuffer(pix.samples, dtype=np.uint8).reshape(pix.h, pix.w, 3)
+                return cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
+            except Exception:
+                continue
+        return None
 
     @staticmethod
     def create_diff_image(
@@ -6116,6 +6127,23 @@ def run_iteration_pipeline(
         with open(log_path, "w", encoding="utf-8") as f:
             f.write("\n".join(payload).rstrip() + "\n")
 
+    def _params_snapshot(snapshot: dict[str, object]) -> str:
+        return json.dumps(snapshot, ensure_ascii=False, sort_keys=True, default=str)
+
+    def _record_render_failure(reason: str, *, svg_content: str | None = None, params_snapshot: dict[str, object] | None = None) -> None:
+        if svg_content:
+            _write_attempt_artifacts(svg_content, failed=True)
+        lines = [
+            "status=render_failure",
+            f"failure_reason={reason}",
+            f"filename={filename}",
+        ]
+        if svg_content:
+            lines.append(f"best_attempt_svg={base}_failed.svg")
+        if params_snapshot is not None:
+            lines.append("params_snapshot=" + _params_snapshot(params_snapshot))
+        _write_validation_log(lines)
+
     def _write_attempt_artifacts(svg_content: str, rendered_img=None, diff_img=None, *, failed: bool = False) -> None:
         suffix = "_failed" if failed else ""
         svg_path = os.path.join(svg_out_dir, f"{base}{suffix}.svg")
@@ -6191,7 +6219,12 @@ def run_iteration_pipeline(
         svg_content = Action.generate_badge_svg(w, h, badge_params)
         svg_rendered = Action.render_svg_to_numpy(svg_content, w, h)
         if svg_rendered is None:
-            raise RuntimeError("SVG rendering failed although fitz is installed.")
+            _record_render_failure(
+                "semantic_badge_final_render_failed",
+                svg_content=svg_content,
+                params_snapshot=badge_params,
+            )
+            return None
         _write_attempt_artifacts(svg_content, svg_rendered)
         return base, desc, params, 1, Action.calculate_error(perc.img, svg_rendered)
 
@@ -6216,6 +6249,13 @@ def run_iteration_pipeline(
         svg_content = Action.generate_composite_svg(w, h, params, folder_path, float(eps))
 
         svg_rendered = Action.render_svg_to_numpy(svg_content, w, h)
+        if svg_rendered is None:
+            _record_render_failure(
+                "composite_iteration_render_failed",
+                svg_content=svg_content,
+                params_snapshot=params,
+            )
+            return None
         error = Action.calculate_error(perc.img, svg_rendered)
 
         if previous_error is not None and abs(error - previous_error) <= plateau_tolerance:
@@ -6403,6 +6443,41 @@ def _default_converted_symbols_root() -> str:
 
 def _converted_svg_output_dir(output_root: str) -> str:
     return os.path.join(output_root, "converted_svgs")
+
+
+def _read_validation_log_details(log_path: str) -> dict[str, str]:
+    if not os.path.exists(log_path):
+        return {}
+    details: dict[str, str] = {}
+    try:
+        with open(log_path, "r", encoding="utf-8") as f:
+            for raw_line in f:
+                line = raw_line.strip()
+                if not line or ": " in line.split("=", 1)[0]:
+                    continue
+                if "=" not in line:
+                    continue
+                key, value = line.split("=", 1)
+                details[key] = value
+    except OSError:
+        return {}
+    return details
+
+
+def _write_batch_failure_summary(reports_out_dir: str, failures: list[dict[str, str]]) -> None:
+    summary_path = os.path.join(reports_out_dir, "batch_failure_summary.csv")
+    with open(summary_path, "w", encoding="utf-8", newline="") as f:
+        writer = csv.writer(f, delimiter=";")
+        writer.writerow(["filename", "status", "reason", "details", "log_file"])
+        for failure in failures:
+            writer.writerow([
+                failure.get("filename", ""),
+                failure.get("status", ""),
+                failure.get("reason", ""),
+                failure.get("details", ""),
+                failure.get("log_file", ""),
+            ])
+
 
 
 def _diff_output_dir(output_root: str) -> str:
@@ -7376,22 +7451,53 @@ def convert_range(
     max_quality_passes = 4
     quality_logs: list[dict[str, object]] = []
     result_map: dict[str, dict[str, object]] = {}
+    batch_failures: list[dict[str, str]] = []
     existing_donor_rows = _load_existing_conversion_rows(out_root, folder_path)
 
     def _convert_one(filename: str, iteration_budget: int, badge_rounds: int) -> dict[str, object] | None:
         image_path = os.path.join(folder_path, filename)
-        res = run_iteration_pipeline(
-            image_path,
-            csv_path,
-            max(1, int(iteration_budget)),
-            svg_out_dir,
-            diff_out_dir,
-            reports_out_dir,
-            debug_ac0811_dir,
-            debug_element_diff_dir,
-            badge_validation_rounds=max(1, int(badge_rounds)),
-        )
+        base = os.path.splitext(filename)[0]
+        log_file = os.path.join(reports_out_dir, f"{base}_element_validation.log")
+        try:
+            res = run_iteration_pipeline(
+                image_path,
+                csv_path,
+                max(1, int(iteration_budget)),
+                svg_out_dir,
+                diff_out_dir,
+                reports_out_dir,
+                debug_ac0811_dir,
+                debug_element_diff_dir,
+                badge_validation_rounds=max(1, int(badge_rounds)),
+            )
+        except Exception as exc:
+            batch_failures.append(
+                {
+                    "filename": filename,
+                    "status": "batch_error",
+                    "reason": type(exc).__name__,
+                    "details": str(exc),
+                    "log_file": os.path.basename(log_file),
+                }
+            )
+            with open(log_file, "w", encoding="utf-8") as f:
+                f.write(f"status=batch_error\nfilename={filename}\nreason={type(exc).__name__}\ndetails={exc}\n")
+            print(f"[WARN] {filename}: Batchlauf setzt nach Fehler fort ({type(exc).__name__}: {exc})")
+            return None
         if not res:
+            details = _read_validation_log_details(log_file)
+            status = details.get("status", "")
+            if status in {"render_failure", "batch_error"}:
+                batch_failures.append(
+                    {
+                        "filename": filename,
+                        "status": status,
+                        "reason": details.get("failure_reason", details.get("reason", "unknown")),
+                        "details": details.get("params_snapshot", details.get("details", "")),
+                        "log_file": os.path.basename(log_file),
+                    }
+                )
+                print(f"[WARN] {filename}: Fehler protokolliert, Batchlauf wird fortgesetzt ({status}).")
             return None
 
         _base, _desc, params, best_iter, best_error = res
@@ -7616,6 +7722,7 @@ def convert_range(
             continue
 
     _write_quality_pass_report(reports_out_dir, quality_logs)
+    _write_batch_failure_summary(reports_out_dir, batch_failures)
     if strategy_logs:
         strategy_path = os.path.join(reports_out_dir, "strategy_switch_template_transfers.csv")
         with open(strategy_path, "w", encoding="utf-8", newline="") as f:

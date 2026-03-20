@@ -80,7 +80,7 @@ Speziallogik in `src/image_composite_converter.py`.
 
 ---
 
-### Aufgabe 1.3 – Render-/Batch-Fehler robuster behandeln
+### Aufgabe 1.3 – Render-/Batch-Fehler robuster behandeln ✅ erledigt
 **Ziel:** Einzelne Renderprobleme dürfen den Batchlauf nicht abbrechen.
 
 **Umsetzung:**
@@ -95,6 +95,11 @@ Speziallogik in `src/image_composite_converter.py`.
 **Akzeptanzkriterien:**
 - Ein einzelner MuPDF-/SVG-Renderfehler stoppt den AC08-Batch nicht mehr vollständig.
 - Fehlgeschlagene Dateien werden reproduzierbar geloggt.
+
+**Umgesetzt in Code/Workflow:**
+- `Action.render_svg_to_numpy` kapselt Renderer-Ausnahmen und versucht zusätzlich einen normalisierten Retry-Pfad, bevor ein Renderfehler gemeldet wird.
+- `run_iteration_pipeline` schreibt bei Renderabbrüchen pro Datei einen `render_failure`-Status inklusive Dateiname, Ursache, Parametersnapshot und bestmöglichem Fehlversuchs-SVG.
+- `convert_range` fängt Datei-fehler robust ab, arbeitet den restlichen Batch weiter ab und erzeugt im Report-Ordner eine zentrale `batch_failure_summary.csv`.
 
 **Empfohlene Tests:**
 - Batch `AC0800..AC0899`

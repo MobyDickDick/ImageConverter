@@ -3852,3 +3852,95 @@ def test_detect_relevant_regions_finds_circle_stem_and_text() -> None:
     labels = {region["label"] for region in regions}
 
     assert {"circle", "stem", "text"}.issubset(labels)
+
+
+def test_render_svg_to_numpy_returns_none_after_retryable_renderer_failures(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Renderer exceptions should be absorbed so batch processing can decide how to continue."""
+    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+        pytest.skip("numpy/cv2 not available in this environment")
+
+    attempts: list[tuple[str, bytes]] = []
+
+    def fake_open(kind: str, payload: bytes):
+        attempts.append((kind, payload))
+        raise RuntimeError("renderer exploded")
+
+    monkeypatch.setattr(image_composite_converter.fitz, "open", fake_open)
+
+    result = Action.render_svg_to_numpy('<svg xmlns="http://www.w3.org/2000/svg">  <rect width="1" height="1"/> </svg>', 4, 4)
+
+    assert result is None
+    assert len(attempts) >= 1
+
+
+
+def test_convert_range_continues_after_render_failure_and_writes_batch_summary(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """A render failure for one file should be logged without aborting the remaining batch."""
+    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+        pytest.skip("numpy/cv2 not available in this environment")
+
+    np = image_composite_converter.np
+    cv2 = image_composite_converter.cv2
+    if np is None or cv2 is None:
+        pytest.skip("numpy/cv2 not available in this environment")
+
+    images_dir = tmp_path / "images"
+    images_dir.mkdir()
+    output_root = tmp_path / "out"
+    csv_path = tmp_path / "data.csv"
+    csv_path.write_text("Wurzelform;Beschreibung\nAC0820;semantic\n", encoding="utf-8")
+    for name in ("AC0820_L.jpg", "AC0820_M.jpg"):
+        assert cv2.imwrite(str(images_dir / name), np.full((10, 10, 3), 220, dtype=np.uint8))
+
+    monkeypatch.setattr(image_composite_converter, "_in_requested_range", lambda *_args, **_kwargs: True)
+    monkeypatch.setattr(image_composite_converter, "_load_quality_config", lambda *_args, **_kwargs: {})
+    monkeypatch.setattr(image_composite_converter, "_write_quality_config", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(image_composite_converter, "_harmonize_semantic_size_variants", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(image_composite_converter, "_write_pixel_delta2_ranking", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(image_composite_converter, "_select_open_quality_cases", lambda rows, **_kwargs: [])
+    monkeypatch.setattr(image_composite_converter, "_select_middle_lower_tercile", lambda _rows: [])
+    monkeypatch.setattr(image_composite_converter, "_try_template_transfer", lambda **_kwargs: (None, None))
+
+    def fake_pipeline(img_path: str, _csv_path: str, _iterations: int, svg_out: str, diff_out: str, reports_out: str, *_args, **_kwargs):
+        stem = Path(img_path).stem
+        Path(svg_out).mkdir(parents=True, exist_ok=True)
+        Path(diff_out).mkdir(parents=True, exist_ok=True)
+        Path(reports_out).mkdir(parents=True, exist_ok=True)
+        if stem.endswith("_L"):
+            log_path = Path(reports_out) / f"{stem}_element_validation.log"
+            log_path.write_text(
+                "status=render_failure\n"
+                "failure_reason=composite_iteration_render_failed\n"
+                f"filename={stem}.jpg\n"
+                "params_snapshot={\"mode\":\"semantic_badge\"}\n",
+                encoding="utf-8",
+            )
+            return None
+        svg = '<svg width="10" height="10" xmlns="http://www.w3.org/2000/svg"><rect width="10" height="10" fill="#d0d0d0"/></svg>'
+        (Path(svg_out) / f"{stem}.svg").write_text(svg, encoding="utf-8")
+        (Path(diff_out) / f"{stem}_diff.png").write_bytes(b"png")
+        params = {"mode": "semantic_badge", "elements": ["circle"], "cx": 5.0, "cy": 5.0, "r": 3.0}
+        return stem, "semantic", params, 1, 30.0
+
+    monkeypatch.setattr(image_composite_converter, "run_iteration_pipeline", fake_pipeline)
+
+    result = image_composite_converter.convert_range(
+        str(images_dir),
+        str(csv_path),
+        iterations=1,
+        start_ref="AC0820",
+        end_ref="AC0820",
+        output_root=str(output_root),
+    )
+
+    assert result == str(output_root)
+    iteration_log = (output_root / "reports" / "Iteration_Log.csv").read_text(encoding="utf-8-sig")
+    assert "AC0820_M.jpg" in iteration_log
+    assert "AC0820_L.jpg" not in iteration_log
+
+    batch_summary = (output_root / "reports" / "batch_failure_summary.csv").read_text(encoding="utf-8")
+    assert "AC0820_L.jpg;render_failure;composite_iteration_render_failed" in batch_summary
+    assert "AC0820_L_element_validation.log" in batch_summary
