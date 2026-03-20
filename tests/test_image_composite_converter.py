@@ -342,6 +342,17 @@ def test_finalize_non_ac0820_text_badge_uses_less_strict_radius_floor() -> None:
     assert float(params["min_circle_radius"]) >= float(params["template_circle_radius"]) * 0.90
 
 
+def test_finalize_elongated_connector_badge_uses_stronger_radius_floor() -> None:
+    """Strongly elongated connector badges should resist circle shrink during validation."""
+    params = Action._default_ac0811_params(30, 45)
+    params["template_circle_radius"] = float(params["r"])
+    params["r"] = float(params["r"]) * 0.84
+
+    params = Action._finalize_ac08_style("AC0811_L", params)
+
+    assert float(params["min_circle_radius"]) >= float(params["template_circle_radius"]) * 0.95
+
+
 def test_finalize_plain_ac08_badge_reanchors_circle_to_template_center() -> None:
     """Plain AC08xx badges should lock to template circle center, not drifted fit center."""
     params = Action._apply_co2_label(Action._default_ac0870_params(20, 20))

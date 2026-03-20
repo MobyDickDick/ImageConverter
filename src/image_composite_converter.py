@@ -1448,6 +1448,28 @@ class Action:
         if p.get("circle_enabled", True):
             has_connector = bool(p.get("arm_enabled") or p.get("stem_enabled"))
             has_text = bool(p.get("draw_text", False))
+            aspect_ratio = 1.0
+            badge_w = float(p.get("badge_width", 0.0))
+            badge_h = float(p.get("badge_height", 0.0))
+            if badge_w <= 0.0 or badge_h <= 0.0:
+                circle_diameter = max(1.0, float(p.get("r", 1.0)) * 2.0)
+                extent_w = circle_diameter
+                extent_h = circle_diameter
+                if p.get("stem_enabled"):
+                    stem_top = float(p.get("stem_top", float(p.get("cy", 0.0)) + float(p.get("r", 0.0))))
+                    stem_bottom = float(p.get("stem_bottom", stem_top))
+                    extent_h = max(extent_h, max(1.0, stem_bottom))
+                if p.get("arm_enabled"):
+                    arm_x1 = float(p.get("arm_x1", float(p.get("cx", 0.0)) - float(p.get("r", 0.0))))
+                    arm_x2 = float(p.get("arm_x2", float(p.get("cx", 0.0)) + float(p.get("r", 0.0))))
+                    arm_y1 = float(p.get("arm_y1", float(p.get("cy", 0.0))))
+                    arm_y2 = float(p.get("arm_y2", float(p.get("cy", 0.0))))
+                    extent_w = max(extent_w, abs(arm_x2 - arm_x1), max(abs(arm_x1), abs(arm_x2)))
+                    extent_h = max(extent_h, abs(arm_y2 - arm_y1), max(abs(arm_y1), abs(arm_y2)))
+                badge_w = extent_w
+                badge_h = extent_h
+            if badge_w > 0.0 and badge_h > 0.0:
+                aspect_ratio = badge_w / badge_h
 
             # For all semantic AC08xx badges, keep a robust radius floor anchored
             # to the template geometry. This prevents degenerate late-stage fits
@@ -1460,6 +1482,12 @@ class Action:
                 # Text badges are especially sensitive to circle shrink because
                 # the label scales relative to the interior diameter.
                 min_ratio = 0.92 if symbol_name == "AC0820" else 0.90
+            elif has_connector and (aspect_ratio >= 1.60 or aspect_ratio <= (1.0 / 1.60)):
+                # Strongly elongated connector badges are vulnerable to the
+                # circle-only mask under-estimating the ring and collapsing the
+                # circle toward the connector. Keep them closer to the semantic
+                # template while still allowing modest adaptation.
+                min_ratio = 0.95
             p["min_circle_radius"] = float(max(float(p.get("min_circle_radius", 1.0)), base_r * min_ratio))
 
             # Plain centered badges should keep their circle optically centered.
