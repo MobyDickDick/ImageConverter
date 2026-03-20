@@ -3490,6 +3490,48 @@ def test_convert_range_uses_existing_conversion_rows_as_template_donors(
     assert "AC0820_L" in calls[0]
 
 
+def test_validate_badge_by_elements_detects_stagnation_and_stops(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+        pytest.skip("numpy/cv2 not available in this environment")
+
+    np = image_composite_converter.np
+    if np is None:
+        pytest.skip("numpy not available in this environment")
+
+    params = {
+        "circle_enabled": True,
+        "stem_enabled": False,
+        "arm_enabled": False,
+        "draw_text": False,
+        "cx": 5.0,
+        "cy": 5.0,
+        "r": 3.0,
+    }
+    img = np.zeros((12, 12, 3), dtype=np.uint8)
+
+    monkeypatch.setattr(conv.Action, "generate_badge_svg", staticmethod(lambda *_args, **_kwargs: "<svg />"))
+    monkeypatch.setattr(conv.Action, "render_svg_to_numpy", staticmethod(lambda *_args, **_kwargs: img.copy()))
+    monkeypatch.setattr(conv.Action, "_fit_to_original_size", staticmethod(lambda _orig, rendered: rendered))
+    monkeypatch.setattr(conv.Action, "create_diff_image", staticmethod(lambda *_args, **_kwargs: img.copy()))
+    monkeypatch.setattr(conv.Action, "extract_badge_element_mask", staticmethod(lambda *_args, **_kwargs: np.ones((12, 12), dtype=bool)))
+    monkeypatch.setattr(conv.Action, "_element_match_error", staticmethod(lambda *_args, **_kwargs: 1.0))
+    monkeypatch.setattr(conv.Action, "_optimize_element_width_bracket", staticmethod(lambda *_args, **_kwargs: False))
+    monkeypatch.setattr(conv.Action, "_optimize_element_extent_bracket", staticmethod(lambda *_args, **_kwargs: False))
+    monkeypatch.setattr(conv.Action, "_optimize_circle_center_bracket", staticmethod(lambda *_args, **_kwargs: False))
+    monkeypatch.setattr(conv.Action, "_optimize_circle_radius_bracket", staticmethod(lambda *_args, **_kwargs: False))
+    monkeypatch.setattr(conv.Action, "_optimize_element_color_bracket", staticmethod(lambda *_args, **_kwargs: False))
+    monkeypatch.setattr(conv.Action, "_apply_canonical_badge_colors", staticmethod(lambda current: current))
+    monkeypatch.setattr(conv.Action, "calculate_error", staticmethod(lambda *_args, **_kwargs: 42.0))
+
+    logs = conv.Action.validate_badge_by_elements(img, params, max_rounds=4)
+
+    assert any("stagnation_detected" in line for line in logs)
+    assert any("switch_to_fallback_search" in line for line in logs)
+    assert any("stopped_due_to_stagnation" in line for line in logs)
+
+
 def test_resolve_cli_csv_and_output_accepts_xml_as_table_path(tmp_path: Path) -> None:
     in_dir = tmp_path / "images"
     in_dir.mkdir()
