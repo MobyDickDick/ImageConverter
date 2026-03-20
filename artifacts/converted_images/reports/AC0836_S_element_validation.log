@@ -1,4 +1,4 @@
-run-meta: run_seed=34070119 pass_seed_offset=2 nonce_ns=1774027387781696300
+run-meta: run_seed=725101178 pass_seed_offset=4 nonce_ns=1774033029475189000
 status=semantic_ok
 Runde 1: elementweise Validierung gestartet
 circle: Fehler=109.813
@@ -10,8 +10,9 @@ stem: Geometrie nach Elementabgleich aktualisiert
 stem: Breiten-Bracketing keine relevante Änderung (stem_width: 1.000); Kandidaten=1.000->95.850, 1.500->95.850
 stem: Längen-Bracketing keine relevante Änderung (stem_len: 11.000); Kandidaten=7.500->109.438, 11.000->94.686, 12.000->106.959, 16.500->116.209, 20.500->115.306, 25.000->116.813
 text: Fehler=127.256
-text: Breiten-Bracketing voc_font_scale 0.562->0.900; Kandidaten=0.900->122.080, 1.125->126.231, 1.350->126.879, 1.650->138.231, 1.950->144.077, 2.175->144.785, 2.400->146.031
-Runde 1: Gesamtfehler=23.373
+text: Breiten-Stochastic-Survivor aktiviert (voc_font_scale=1.059, err=121.242)
+text: Breiten-Bracketing voc_font_scale 0.562->1.059; Kandidaten=0.900->122.080, 1.125->126.231, 1.350->126.879, 1.650->138.231, 1.950->144.077, 2.175->144.785, 2.400->146.031
+Runde 1: Gesamtfehler=24.896
 Runde 2: elementweise Validierung gestartet
 circle: Fehler=82.639
 circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
@@ -19,19 +20,9 @@ circle: Radius-Bracketing keine relevante Änderung (r: 6.500, best_err=82.639);
 stem: Fehler=94.686
 stem: Breiten-Bracketing keine relevante Änderung (stem_width: 1.000); Kandidaten=1.000->95.850, 1.500->95.850
 stem: Längen-Bracketing keine relevante Änderung (stem_len: 11.000); Kandidaten=7.500->109.438, 11.000->94.686, 12.000->106.959, 16.500->116.209, 20.500->115.306, 25.000->116.813
-text: Fehler=122.080
-text: Breiten-Bracketing voc_font_scale 0.900->1.035; Kandidaten=0.900->122.080, 1.035->118.403, 1.125->126.231, 1.350->126.879, 1.650->138.231, 1.950->144.077, 2.175->144.785, 2.400->146.031
-Runde 2: Gesamtfehler=24.568
-Runde 3: elementweise Validierung gestartet
-circle: Fehler=82.639
-circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
-circle: Radius-Bracketing keine relevante Änderung (r: 6.500, best_err=82.639); Kandidaten=6.000->103.693, 6.500->82.639, 7.000->87.600
-stem: Fehler=94.686
-stem: Breiten-Bracketing keine relevante Änderung (stem_width: 1.000); Kandidaten=1.000->95.850, 1.500->95.850
-stem: Längen-Bracketing keine relevante Änderung (stem_len: 11.000); Kandidaten=7.500->109.438, 11.000->94.686, 12.000->106.959, 16.500->116.209, 20.500->115.306, 25.000->116.813
-text: Fehler=118.403
-text: Breiten-Bracketing keine relevante Änderung (voc_font_scale: 1.035); Kandidaten=0.900->122.080, 1.035->118.403, 1.125->126.231, 1.190->127.147, 1.350->126.879, 1.650->138.231, 1.950->144.077, 2.175->144.785, 2.400->146.031
-Runde 3: Gesamtfehler=24.568
+text: Fehler=121.242
+text: Breiten-Bracketing keine relevante Änderung (voc_font_scale: 1.059); Kandidaten=0.900->122.080, 1.059->121.242, 1.125->126.231, 1.218->125.465, 1.350->126.879, 1.650->138.231, 1.950->144.077, 2.175->144.785, 2.400->146.031
+Runde 2: Gesamtfehler=24.896
 Keine Element-Geometrieänderung mehr; Validierung vorzeitig beendet
 circle: Farb-Bracketing übersprungen (Farben gesperrt)
 stem: Farb-Bracketing übersprungen (Farben gesperrt)

@@ -1,5 +1,19 @@
-run-meta: run_seed=34070119 pass_seed_offset=0 nonce_ns=1774027206314984200
-status=semantic_mismatch
-best_attempt_svg=AC0820_S_failed.svg
-best_attempt_diff=AC0820_S_failed_diff.png
-issue=Im Bild ist waagrechter Strich erkennbar, aber nicht in der Beschreibung enthalten
+run-meta: run_seed=725101178 pass_seed_offset=4 nonce_ns=1774033014795256400
+status=semantic_ok
+Runde 1: elementweise Validierung gestartet
+circle: Fehler=153.819
+circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
+circle: Radius-Bracketing r 5.000->6.500 (best_err=75.648); Kandidaten=5.500->143.477, 6.000->109.960, 6.500->75.648, 7.000->87.413
+text: Fehler=91.722
+text: Breiten-Bracketing co2_font_scale 0.970->0.873; Kandidaten=0.873->91.722, 0.919->91.722, 0.965->91.722, 0.970->91.722, 1.026->91.722, 1.088->91.722, 1.115->91.722, 1.134->91.722, 1.180->91.722
+Runde 1: Gesamtfehler=24.973
+Runde 2: elementweise Validierung gestartet
+circle: Fehler=75.648
+circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
+circle: Radius-Bracketing keine relevante Änderung (r: 6.500, best_err=75.648); Kandidaten=6.000->109.434, 6.500->75.648, 7.000->87.413
+text: Fehler=91.722
+text: Breiten-Bracketing keine relevante Änderung (co2_font_scale: 0.873); Kandidaten=0.873->91.722, 0.919->91.722, 0.965->91.722, 1.004->91.722, 1.026->91.722, 1.088->91.722, 1.134->91.722, 1.180->91.722
+Runde 2: Gesamtfehler=24.973
+Keine Element-Geometrieänderung mehr; Validierung vorzeitig beendet
+circle: Farb-Bracketing übersprungen (Farben gesperrt)
+text: Farb-Bracketing übersprungen (Farben gesperrt)
