@@ -1,0 +1,27 @@
+run-meta: run_seed=935010667 pass_seed_offset=4 nonce_ns=1774023117115666800
+status=semantic_ok
+Runde 1: elementweise Validierung gestartet
+circle: Fehler=150.226
+circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
+circle: Radius-Bracketing r 7.400->9.000 (best_err=93.672); Kandidaten=8.500->101.040, 9.000->93.672, 9.500->100.164
+arm: Fehler=47.870
+arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
+arm: Längen-Bracketing arm_len 13.200->12.000; Kandidaten=12.000->49.410, 13.000->49.410, 18.000->49.410, 23.500->49.410, 29.500->49.410, 35.000->49.410
+text: Fehler=134.660
+text: Breiten-Bracketing co2_font_scale 0.886->0.797; Kandidaten=0.797->134.660, 0.844->134.660, 0.886->134.660, 0.890->134.660, 0.952->134.660, 1.014->134.660, 1.018->134.660, 1.061->134.660, 1.107->134.660
+Runde 1: Gesamtfehler=20.339
+Runde 2: elementweise Validierung gestartet
+circle: Fehler=93.672
+circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
+circle: Radius-Bracketing keine relevante Änderung (r: 9.000, best_err=93.672); Kandidaten=8.500->101.770, 9.000->93.672, 9.500->100.164
+arm: Fehler=49.410
+arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
+arm: Längen-Bracketing keine relevante Änderung (arm_len: 12.000); Kandidaten=12.000->49.410, 18.000->49.410, 23.500->49.410, 29.500->49.410, 35.000->49.410
+text: Fehler=134.660
+text: Breiten-Bracketing keine relevante Änderung (co2_font_scale: 0.797); Kandidaten=0.797->134.660, 0.844->134.660, 0.890->134.660, 0.917->134.660, 0.952->134.660, 1.014->134.660, 1.061->134.660, 1.107->134.660
+Runde 2: Gesamtfehler=20.339
+Keine Element-Geometrieänderung mehr; Validierung vorzeitig beendet
+circle: Farb-Bracketing übersprungen (Farben gesperrt)
+arm: Farb-Bracketing übersprungen (Farben gesperrt)
+text: Farb-Bracketing übersprungen (Farben gesperrt)
+semantic-guard: Erwartete Arm-Geometrie bestätigt/wiederhergestellt (z.B. AC0812 links).

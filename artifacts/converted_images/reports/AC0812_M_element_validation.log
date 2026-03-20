@@ -1,0 +1,22 @@
+run-meta: run_seed=935010667 pass_seed_offset=4 nonce_ns=1774023120003519600
+status=semantic_ok
+Runde 1: elementweise Validierung gestartet
+circle: Fehler=114.788
+circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
+circle: Radius-Bracketing r 8.833->8.000 (best_err=108.167); Kandidaten=8.000->108.167, 8.500->108.772, 9.000->114.310, 9.500->111.454
+arm: Fehler=50.067
+arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
+arm: Längen-Bracketing keine relevante Änderung (arm_len: 17.000); Kandidaten=14.000->62.551, 17.000->50.067, 19.000->50.067, 24.500->50.067, 29.500->50.067, 35.000->50.067
+Runde 1: Gesamtfehler=16.567
+Runde 2: elementweise Validierung gestartet
+circle: Fehler=105.738
+circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
+circle: Radius-Bracketing keine relevante Änderung (r: 8.000, best_err=105.738); Kandidaten=8.000->105.738, 9.500->111.454
+arm: Fehler=50.067
+arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
+arm: Längen-Bracketing keine relevante Änderung (arm_len: 17.000); Kandidaten=14.000->62.551, 17.000->50.067, 19.000->50.067, 24.500->50.067, 29.500->50.067, 35.000->50.067
+Runde 2: Gesamtfehler=16.567
+Keine Element-Geometrieänderung mehr; Validierung vorzeitig beendet
+circle: Farb-Bracketing übersprungen (Farben gesperrt)
+arm: Farb-Bracketing übersprungen (Farben gesperrt)
+semantic-guard: Erwartete Arm-Geometrie bestätigt/wiederhergestellt (z.B. AC0812 links).
