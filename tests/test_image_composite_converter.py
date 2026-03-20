@@ -1247,6 +1247,69 @@ def test_template_transfer_donor_family_compatible() -> None:
     ) is True
 
 
+def test_convert_range_filters_to_explicit_selected_variants_and_writes_regression_manifest(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    np = image_composite_converter.np
+    if np is None:
+        pytest.skip("numpy not available in this environment")
+    cv2 = image_composite_converter.cv2
+    if cv2 is None:
+        pytest.skip("opencv not available in this environment")
+
+    images_dir = tmp_path / "images"
+    images_dir.mkdir()
+    csv_path = tmp_path / "data.csv"
+    csv_path.write_text("Wurzelform;Beschreibung\n", encoding="utf-8")
+    for variant in image_composite_converter.AC08_REGRESSION_VARIANTS:
+        assert cv2.imwrite(str(images_dir / f"{variant}.jpg"), np.full((10, 10, 3), 230, dtype=np.uint8))
+    assert cv2.imwrite(str(images_dir / "AC0999_L.jpg"), np.full((10, 10, 3), 200, dtype=np.uint8))
+
+    monkeypatch.setattr(image_composite_converter, "_in_requested_range", lambda *_args, **_kwargs: True)
+    monkeypatch.setattr(image_composite_converter, "_load_quality_config", lambda *_args, **_kwargs: {})
+    monkeypatch.setattr(image_composite_converter, "_write_quality_pass_report", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(image_composite_converter, "_harmonize_semantic_size_variants", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(image_composite_converter, "_write_pixel_delta2_ranking", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(image_composite_converter, "_select_open_quality_cases", lambda *_args, **_kwargs: [])
+    monkeypatch.setattr(image_composite_converter, "_select_middle_lower_tercile", lambda *_args, **_kwargs: [])
+
+    seen: list[str] = []
+
+    def fake_pipeline(img_path: str, _csv_path: str, _iterations: int, svg_out: str, diff_out: str, reports_out: str, *_args, **_kwargs):
+        stem = Path(img_path).stem
+        seen.append(stem)
+        Path(svg_out).mkdir(parents=True, exist_ok=True)
+        Path(diff_out).mkdir(parents=True, exist_ok=True)
+        Path(reports_out).mkdir(parents=True, exist_ok=True)
+        (Path(svg_out) / f"{stem}.svg").write_text("<svg/>", encoding="utf-8")
+        (Path(diff_out) / f"{stem}_diff.png").write_bytes(b"png")
+        params = {"mode": "semantic_badge", "elements": ["circle"], "cx": 5.0, "cy": 5.0, "r": 3.0}
+        return stem, "semantic", params, 1, 100.0
+
+    monkeypatch.setattr(image_composite_converter, "run_iteration_pipeline", fake_pipeline)
+
+    output_root = tmp_path / "out"
+    result = image_composite_converter.convert_range(
+        str(images_dir),
+        str(csv_path),
+        iterations=32,
+        start_ref="AC0000",
+        end_ref="ZZ9999",
+        output_root=str(output_root),
+        selected_variants=set(image_composite_converter.AC08_REGRESSION_VARIANTS),
+    )
+
+    assert result == str(output_root)
+    assert sorted(seen) == sorted(image_composite_converter.AC08_REGRESSION_VARIANTS)
+    reports_dir = output_root / "reports"
+    manifest = (reports_dir / "ac08_regression_set.csv").read_text(encoding="utf-8")
+    summary = (reports_dir / "ac08_regression_summary.txt").read_text(encoding="utf-8")
+    assert "AC0999_L" not in manifest
+    assert "set;variant;focus;reason" in manifest
+    assert image_composite_converter.AC08_REGRESSION_SET_NAME in manifest
+    assert "expected_reports=Iteration_Log.csv,quality_tercile_passes.csv,pixel_delta2_ranking.csv,pixel_delta2_summary.txt" in summary
+
+
 def test_parse_description_extracts_documented_alias_refs() -> None:
     raw = {"GE0000": "Kreisform wie AC0010 und Kante wie in AC0501"}
     _desc, params = image_composite_converter.Reflection(raw).parse_description("GE0000", "GE0000_S.jpg")
@@ -3095,6 +3158,12 @@ def test_parse_args_accepts_log_file_option() -> None:
     assert args.log_file == "run.log"
 
 
+def test_parse_args_accepts_ac08_regression_set_flag() -> None:
+    args = conv.parse_args(["in_folder", "--ac08-regression-set"])
+
+    assert args.ac08_regression_set is True
+
+
 def test_parse_args_uses_console_prompt_defaults_for_missing_range() -> None:
     args = conv.parse_args(["in_folder"])
 
@@ -3135,6 +3204,27 @@ def test_main_skips_range_prompt_when_start_and_end_are_provided(monkeypatch: py
     rc = conv.main(["images", "--start", "AC0001", "--end", "AC0003"])
 
     assert rc == 0
+
+
+def test_main_uses_fixed_ac08_regression_set(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setattr(conv, "_resolve_cli_csv_and_output", lambda _args: ("table.csv", "out_dir"))
+    monkeypatch.setattr(conv, "_optional_log_capture", lambda _path: contextlib.nullcontext())
+    captured: dict[str, object] = {}
+
+    def fake_convert_range(*args, **kwargs):
+        captured["args"] = args
+        captured["kwargs"] = kwargs
+        return "out_dir"
+
+    monkeypatch.setattr(conv, "convert_range", fake_convert_range)
+
+    rc = conv.main(["images", "--ac08-regression-set"])
+
+    assert rc == 0
+    assert captured["args"][3] == "AC0000"
+    assert captured["args"][4] == "ZZ9999"
+    assert captured["args"][7] == "out_dir"
+    assert captured["args"][8] == set(conv.AC08_REGRESSION_VARIANTS)
 
 
 def test_optional_log_capture_writes_output_to_file(tmp_path: Path, capsys: pytest.CaptureFixture[str]) -> None:
