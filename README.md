@@ -206,6 +206,7 @@ See [benchmarks/microbenchmarks.py](benchmarks/microbenchmarks.py) and [docs/per
 ### Planning
 - [docs/expansion_roadmap.md](docs/expansion_roadmap.md)
 - [docs/self_hosting_port_plan.md](docs/self_hosting_port_plan.md)
+- [docs/ac08_improvement_plan.md](docs/ac08_improvement_plan.md)
 
 ---
 
