@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import contextlib
 import shutil
 from pathlib import Path
 
@@ -920,8 +921,19 @@ def test_in_requested_range_excludes_values_outside_span() -> None:
 
 
 def test_in_requested_range_includes_non_reference_filenames() -> None:
-    """Non XX0000 filenames should not be filtered out by range settings."""
+    """Non XX0000 filenames should not be filtered out by broad cross-prefix range settings."""
     assert image_composite_converter._in_requested_range("LOGO.JPG", "AC0000", "ZZ9999") is True
+
+
+def test_in_requested_range_excludes_non_reference_filenames_for_exact_family_filter() -> None:
+    """Exact family-specific filters should not pull unrelated helper files into the batch."""
+    assert image_composite_converter._in_requested_range("z_231.jpg", "AC0811", "AC0811") is False
+
+
+def test_in_requested_range_supports_three_letter_prefixes() -> None:
+    """Three-letter families such as DLG should respect exact range filtering."""
+    assert image_composite_converter._in_requested_range("DLG0030.jpg", "AC0811", "AC0811") is False
+    assert image_composite_converter._in_requested_range("DLG0030.jpg", "DLG0030", "DLG0030") is True
 
 
 def test_in_requested_range_supports_one_sided_bounds() -> None:
@@ -2791,6 +2803,48 @@ def test_parse_args_keeps_legacy_three_positional_arguments() -> None:
 def test_parse_args_accepts_log_file_option() -> None:
     args = conv.parse_args(["in_folder", "out_folder", "--log-file", "run.log"])
     assert args.log_file == "run.log"
+
+
+def test_parse_args_uses_console_prompt_defaults_for_missing_range() -> None:
+    args = conv.parse_args(["in_folder"])
+
+    assert args.start is None
+    assert args.end is None
+
+
+def test_main_prompts_for_range_when_start_and_end_are_missing(monkeypatch: pytest.MonkeyPatch) -> None:
+    prompts: list[str] = []
+    monkeypatch.setattr(conv, "_resolve_cli_csv_and_output", lambda _args: ("", "out_dir"))
+    monkeypatch.setattr(conv, "convert_range", lambda *_args, **_kwargs: "out_dir")
+    monkeypatch.setattr(conv, "_optional_log_capture", lambda _path: contextlib.nullcontext())
+
+    answers = iter(["AC0001", "AC0003"])
+
+    def fake_input(prompt: str) -> str:
+        prompts.append(prompt)
+        return next(answers)
+
+    monkeypatch.setattr("builtins.input", fake_input)
+
+    rc = conv.main(["images"])
+
+    assert rc == 0
+    assert prompts == ["Namen von: ", "Namen bis: "]
+
+
+def test_main_skips_range_prompt_when_start_and_end_are_provided(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setattr(conv, "_resolve_cli_csv_and_output", lambda _args: ("", "out_dir"))
+    monkeypatch.setattr(conv, "convert_range", lambda *_args, **_kwargs: "out_dir")
+    monkeypatch.setattr(conv, "_optional_log_capture", lambda _path: contextlib.nullcontext())
+
+    def fail_input(_prompt: str) -> str:
+        raise AssertionError("input should not be called")
+
+    monkeypatch.setattr("builtins.input", fail_input)
+
+    rc = conv.main(["images", "--start", "AC0001", "--end", "AC0003"])
+
+    assert rc == 0
 
 
 def test_optional_log_capture_writes_output_to_file(tmp_path: Path, capsys: pytest.CaptureFixture[str]) -> None:

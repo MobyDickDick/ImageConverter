@@ -6018,7 +6018,7 @@ def run_iteration_pipeline(
 
 
 def _extract_ref_parts(name: str) -> tuple[str, int] | None:
-    match = re.match(r"^([A-Z]{2})(\d{3,4})$", name.upper())
+    match = re.match(r"^([A-Z]{2,3})(\d{3,4})$", name.upper())
     if not match:
         return None
     return match.group(1), int(match.group(2))
@@ -6097,10 +6097,17 @@ def _in_requested_range(filename: str, start_ref: str, end_ref: str) -> bool:
     if start_parts is None and end_parts is None:
         return _matches_partial_range_token(filename, start_ref, end_ref) if (start_ref or end_ref) else True
 
-    # Files that do not follow the usual XX0000 naming scheme should still be
-    # processed in "convert whole folder" workflows.
+    # Files that do not follow the usual XX0000 / XXX0000 naming scheme should
+    # only pass through broad whole-folder spans, not exact family-specific
+    # filters like AC0811..AC0811.
     if stem_parts is None:
-        return True
+        if start_parts is not None and end_parts is not None:
+            start_key = start_parts
+            end_key = end_parts
+            if start_key > end_key:
+                start_key, end_key = end_key, start_key
+            return start_key[0] != end_key[0]
+        return False
 
     # Support one-sided range filters if only one boundary can be parsed.
     if start_parts is None:
@@ -7717,8 +7724,8 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     )
     parser.add_argument("--csv-path", default=None, help="Expliziter Pfad zur CSV/TSV/XML-Export-Tabelle")
     parser.add_argument("--output-dir", default=None, help="Explizites Ausgabeverzeichnis")
-    parser.add_argument("--start", default="", help="Start-Referenz (inkl.), default: kein unteres Limit")
-    parser.add_argument("--end", default="ZZZZZZ", help="End-Referenz (inkl.), default: ZZZZZZ")
+    parser.add_argument("--start", default=None, help="Start-Referenz (inkl.); wenn nicht gesetzt, erfolgt eine Konsolenabfrage")
+    parser.add_argument("--end", default=None, help="End-Referenz (inkl.); wenn nicht gesetzt, erfolgt eine Konsolenabfrage")
     parser.add_argument(
         "--interactive-range",
         action="store_true",
@@ -7883,8 +7890,6 @@ def _prompt_interactive_range(args: argparse.Namespace) -> tuple[str, str]:
 
 def main(argv: list[str] | None = None) -> int:
     args = parse_args(argv)
-    if args.interactive_range:
-        args.start, args.end = _prompt_interactive_range(args)
     log_path = str(args.log_file or "").strip()
     with _optional_log_capture(log_path):
         if args.print_linux_vendor_command:
@@ -7898,6 +7903,12 @@ def main(argv: list[str] | None = None) -> int:
                 )
             )
             return 0
+
+        if args.interactive_range or args.start is None or args.end is None:
+            args.start, args.end = _prompt_interactive_range(args)
+        else:
+            args.start = str(args.start or "").strip()
+            args.end = str(args.end or "ZZZZZZ").strip() or args.start
 
         csv_path, output_dir = _resolve_cli_csv_and_output(args)
 
