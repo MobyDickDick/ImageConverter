@@ -6624,7 +6624,10 @@ def _write_quality_pass_report(
             "filename",
             "old_error_per_pixel",
             "new_error_per_pixel",
+            "old_mean_delta2",
+            "new_mean_delta2",
             "improved",
+            "decision",
             "iteration_budget",
             "badge_validation_rounds",
         ])
@@ -6634,7 +6637,10 @@ def _write_quality_pass_report(
                 row["filename"],
                 f"{float(row['old_error_per_pixel']):.8f}",
                 f"{float(row['new_error_per_pixel']):.8f}",
+                f"{float(row.get('old_mean_delta2', float('inf'))):.6f}",
+                f"{float(row.get('new_mean_delta2', float('inf'))):.6f}",
                 "1" if bool(row["improved"]) else "0",
+                row.get("decision", "accepted_improvement" if bool(row["improved"]) else "rejected_regression"),
                 row["iteration_budget"],
                 row["badge_validation_rounds"],
             ])
@@ -7285,9 +7291,21 @@ def convert_range(
         pixel_count = 1.0
         width = 0
         height = 0
+        mean_delta2 = float("inf")
+        std_delta2 = float("inf")
         if img is not None:
             height, width = img.shape[:2]
             pixel_count = float(max(1, width * height))
+            svg_path = os.path.join(svg_out_dir, f"{os.path.splitext(filename)[0]}.svg")
+            if os.path.exists(svg_path):
+                try:
+                    with open(svg_path, "r", encoding="utf-8") as f:
+                        svg_content = f.read()
+                except OSError:
+                    svg_content = ""
+                if svg_content:
+                    rendered = Action.render_svg_to_numpy(svg_content, width, height)
+                    mean_delta2, std_delta2 = Action.calculate_delta2_stats(img, rendered)
 
         return {
             "filename": filename,
@@ -7295,6 +7313,8 @@ def convert_range(
             "best_iter": int(best_iter),
             "best_error": float(best_error),
             "error_per_pixel": float(best_error) / pixel_count,
+            "mean_delta2": float(mean_delta2),
+            "std_delta2": float(std_delta2),
             "w": int(width),
             "h": int(height),
             "base": get_base_name_from_file(os.path.splitext(filename)[0]).upper(),
@@ -7395,7 +7415,11 @@ def convert_range(
                 continue
 
             new_error_pp = float(new_row["error_per_pixel"])
-            improved = new_error_pp + 1e-9 < prev_error_pp
+            prev_mean_delta2 = float(row.get("mean_delta2", float("inf")))
+            new_mean_delta2 = float(new_row.get("mean_delta2", float("inf")))
+            error_improved = new_error_pp + 1e-9 < prev_error_pp
+            delta2_improved = new_mean_delta2 + 1e-6 < prev_mean_delta2
+            improved = error_improved or delta2_improved
             if improved:
                 result_map[filename] = new_row
                 improved_in_pass = True
@@ -7406,7 +7430,10 @@ def convert_range(
                     "filename": filename,
                     "old_error_per_pixel": prev_error_pp,
                     "new_error_per_pixel": new_error_pp,
+                    "old_mean_delta2": prev_mean_delta2,
+                    "new_mean_delta2": new_mean_delta2,
                     "improved": improved,
+                    "decision": "accepted_improvement" if improved else "rejected_regression",
                     "iteration_budget": iteration_budget,
                     "badge_validation_rounds": badge_rounds,
                 }
