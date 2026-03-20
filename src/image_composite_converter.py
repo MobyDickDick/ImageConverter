@@ -7717,8 +7717,8 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     )
     parser.add_argument("--csv-path", default=None, help="Expliziter Pfad zur CSV/TSV/XML-Export-Tabelle")
     parser.add_argument("--output-dir", default=None, help="Explizites Ausgabeverzeichnis")
-    parser.add_argument("--start", default="", help="Start-Referenz (inkl.), default: kein unteres Limit")
-    parser.add_argument("--end", default="ZZZZZZ", help="End-Referenz (inkl.), default: ZZZZZZ")
+    parser.add_argument("--start", default=None, help="Start-Referenz (inkl.); wenn nicht gesetzt, erfolgt eine Konsolenabfrage")
+    parser.add_argument("--end", default=None, help="End-Referenz (inkl.); wenn nicht gesetzt, erfolgt eine Konsolenabfrage")
     parser.add_argument(
         "--interactive-range",
         action="store_true",
@@ -7883,8 +7883,6 @@ def _prompt_interactive_range(args: argparse.Namespace) -> tuple[str, str]:
 
 def main(argv: list[str] | None = None) -> int:
     args = parse_args(argv)
-    if args.interactive_range:
-        args.start, args.end = _prompt_interactive_range(args)
     log_path = str(args.log_file or "").strip()
     with _optional_log_capture(log_path):
         if args.print_linux_vendor_command:
@@ -7898,6 +7896,12 @@ def main(argv: list[str] | None = None) -> int:
                 )
             )
             return 0
+
+        if args.interactive_range or args.start is None or args.end is None:
+            args.start, args.end = _prompt_interactive_range(args)
+        else:
+            args.start = str(args.start or "").strip()
+            args.end = str(args.end or "ZZZZZZ").strip() or args.start
 
         csv_path, output_dir = _resolve_cli_csv_and_output(args)
 
