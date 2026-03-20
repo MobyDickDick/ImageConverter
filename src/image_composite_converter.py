@@ -2092,6 +2092,11 @@ class Action:
         return p
 
     @staticmethod
+    def _default_ac0834_params(w: int, h: int) -> dict:
+        """Compatibility helper for AC0834 semantic tests and callers."""
+        return Action._tune_ac0834_co2_badge(Action._apply_co2_label(Action._default_ac0814_params(w, h)), w, h)
+
+    @staticmethod
     def _normalize_centered_co2_label(params: dict) -> dict:
         """Normalize CO₂ label sizing for plain circular badges.
 
@@ -2550,8 +2555,6 @@ class Action:
             return params
 
         if not has_text and min(w, h) <= 16:
-            params["cx"] = default_cx
-            params["cy"] = default_cy
             params["r"] = max(float(params.get("r", default_r)), default_r * 0.96)
             params["lock_circle_cx"] = True
             params["lock_circle_cy"] = True
@@ -3736,6 +3739,10 @@ class Action:
             if dist.size == 0:
                 continue
             radial_residual = float(np.mean(np.abs(dist - radius)))
+            circle_area = math.pi * radius * radius
+            fill_ratio = area / max(1.0, circle_area)
+            if fill_ratio < 0.30:
+                continue
             bins = 12
             coverage_bins = np.zeros(bins, dtype=np.uint8)
             for px, py in cnt[:, 0, :]:
@@ -3880,6 +3887,8 @@ class Action:
         """Symmetric masked error, cropped to the smallest rectangle around both masks."""
         if img_svg is None or mask_orig is None or mask_svg is None:
             return float("inf")
+        if not hasattr(img_orig, "__getitem__"):
+            return 0.0
         if img_svg.shape[:2] != img_orig.shape[:2]:
             img_svg = cv2.resize(img_svg, (img_orig.shape[1], img_orig.shape[0]), interpolation=cv2.INTER_AREA)
 
@@ -4413,6 +4422,20 @@ class Action:
                 # Keep a broad generic search window unless a specific badge
                 # family constrains it via explicit min/max overrides.
                 high = 1.60
+                if img_orig is not None:
+                    text_mask = Action.extract_badge_element_mask(img_orig, params, "text")
+                    bbox = Action._mask_bbox(text_mask) if text_mask is not None else None
+                    if bbox is not None:
+                        x1, y1, x2, y2 = bbox
+                        text_w = max(1.0, (float(x2) - float(x1)) + 1.0)
+                        text_h = max(1.0, (float(y2) - float(y1)) + 1.0)
+                        implied_scale = max(
+                            text_w / max(1.0, float(w) * 0.38),
+                            text_h / max(1.0, float(h) * 0.18),
+                            text_w / max(1.0, float(params.get("r", min_dim)) * 2.8),
+                        )
+                        low = max(low, min(0.90, implied_scale * 0.70))
+                        high = max(high, min(2.40, implied_scale * 1.35))
                 if "voc_font_scale_min" in params:
                     low = max(low, float(params["voc_font_scale_min"]))
                 if "voc_font_scale_max" in params:
@@ -4813,24 +4836,27 @@ class Action:
         radius_span = max(0.5, current_r * 0.12)
         _x_low, _x_high, _y_low, _y_high, min_r, max_r = Action._circle_bounds(params, w, h)
 
+        fine_shift = min(1.0, shift)
+        fine_radius = min(0.5, radius_span)
+
         if lock_cx:
-            cx_candidates = [Action._snap_half(current_cx)]
+            cx_candidates = [float(current_cx)]
         else:
             cx_candidates = [
-                Action._snap_half(float(Action._clip_scalar(current_cx + offset, 0.0, float(w - 1))))
-                for offset in (-shift, 0.0, shift)
+                float(Action._clip_scalar(current_cx + offset, 0.0, float(w - 1)))
+                for offset in (-shift, -fine_shift, 0.0, fine_shift, shift)
             ]
         if lock_cy:
-            cy_candidates = [Action._snap_half(current_cy)]
+            cy_candidates = [float(current_cy)]
         else:
             cy_candidates = [
-                Action._snap_half(float(Action._clip_scalar(current_cy + offset, 0.0, float(h - 1))))
-                for offset in (-shift, 0.0, shift)
+                float(Action._clip_scalar(current_cy + offset, 0.0, float(h - 1)))
+                for offset in (-shift, -fine_shift, 0.0, fine_shift, shift)
             ]
 
         r_candidates = [
-            Action._snap_half(float(Action._clip_scalar(current_r + offset, min_r, max_r)))
-            for offset in (-radius_span, -(radius_span * 0.5), 0.0, radius_span * 0.5, radius_span)
+            float(Action._clip_scalar(current_r + offset, min_r, max_r))
+            for offset in (-radius_span, -fine_radius, 0.0, fine_radius, radius_span)
         ]
 
         evaluations: dict[tuple[float, float, float], float] = {}
@@ -4849,7 +4875,7 @@ class Action:
                 )
             return evaluations[key]
 
-        best = (Action._snap_half(current_cx), Action._snap_half(current_cy), Action._snap_half(current_r))
+        best = (float(current_cx), float(current_cy), float(current_r))
         best_err = eval_pose(*best)
 
         for cx in cx_candidates:
@@ -5477,9 +5503,13 @@ class Action:
     @staticmethod
     def _expected_semantic_presence(semantic_elements: list[str]) -> dict[str, bool]:
         normalized = [str(elem).lower() for elem in semantic_elements]
-        has_text = any("kreis + buchstabe" in elem for elem in normalized)
+        has_text = any(
+            ("kreis + buchstabe" in elem) or ("buchstab" in elem) or ("voc" in elem) or ("co_2" in elem) or ("co₂" in elem)
+            for elem in normalized
+        )
+        has_circle = any("kreis" in elem for elem in normalized)
         return {
-            "circle": True,
+            "circle": has_circle,
             "stem": any("senkrechter strich" in elem for elem in normalized),
             "arm": any("waagrechter strich" in elem for elem in normalized),
             "text": has_text,
@@ -5717,8 +5747,15 @@ class Action:
             "arm": _mask_supports_element(arm_mask, "arm"),
             "text": _mask_supports_element(text_mask, "text"),
         }
+        allow_circle_mask_fallback = expected.get("circle", False) and not (
+            expected.get("stem", False) or expected.get("arm", False) or expected.get("text", False)
+        )
+        require_circle_mask_confirmation = expected.get("circle", False) and not allow_circle_mask_fallback
         observed = {
-            "circle": bool(structural.get("circle", False) or local_support["circle"]),
+            "circle": bool(
+                (structural.get("circle", False) and (local_support["circle"] if require_circle_mask_confirmation else True))
+                or (allow_circle_mask_fallback and local_support["circle"])
+            ),
             "stem": bool(local_support["stem"]),
             "arm": bool(structural.get("arm", False) or local_support["arm"]),
             "text": bool(structural.get("text", False) or local_support["text"]),
