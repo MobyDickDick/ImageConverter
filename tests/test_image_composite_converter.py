@@ -1411,6 +1411,15 @@ def test_finalize_non_ac0820_co2_keeps_text_scale_locked() -> None:
     assert params["lock_text_scale"] is True
 
 
+def test_make_badge_params_applies_ac0831_vertical_co2_tuning() -> None:
+    """AC0831 should use cluster-centered CO₂ placement with a slight downward bias."""
+    params = Action.make_badge_params(25, 45, "AC0831", None)
+
+    assert params["co2_anchor_mode"] == "cluster"
+    assert float(params["co2_optical_bias"]) >= 0.10
+    assert float(params["co2_dy"]) > 0.0
+
+
 def test_finalize_tiny_non_ac0820_co2_unlocks_bounded_text_tuning() -> None:
     """Tiny CO₂ variants should allow bounded text tuning across AC08xx families."""
     params = Action._apply_co2_label(Action._default_ac0813_params(15, 25))
@@ -2636,6 +2645,25 @@ def test_parse_description_marks_ac0811_as_semantic_badge() -> None:
     assert params["mode"] == "semantic_badge"
     assert "SEMANTIC: Kreis ohne Buchstabe" in params["elements"]
     assert "SEMANTIC: senkrechter Strich hinter dem Kreis" in params["elements"]
+
+
+def test_validate_semantic_alignment_accepts_merged_co2_blob_for_ac0831_artifact() -> None:
+    """Merged JPEG text blobs should still count as valid CO₂ evidence for AC0831_L."""
+    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+        pytest.skip("numpy/cv2 not available in this environment")
+
+    cv2 = image_composite_converter.cv2
+    img = cv2.imread("artifacts/images_to_convert/AC0831_L.jpg")
+    assert img is not None
+
+    params = Action.make_badge_params(img.shape[1], img.shape[0], "AC0831", img)
+    issues = Action.validate_semantic_description_alignment(
+        img,
+        ["SEMANTIC: Kreis + Buchstabe CO_2", "SEMANTIC: senkrechter Strich hinter dem Kreis"],
+        params,
+    )
+
+    assert "Strukturprüfung: Erwartete CO₂-Glyphenstruktur nicht ausreichend belegt" not in issues
 
 
 @pytest.mark.parametrize(
