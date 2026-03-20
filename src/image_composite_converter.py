@@ -6715,6 +6715,30 @@ def _write_quality_pass_report(
             ])
 
 
+def _evaluate_quality_pass_candidate(
+    old_row: dict[str, object],
+    new_row: dict[str, object],
+) -> tuple[bool, str, float, float, float, float]:
+    """Return whether a quality-pass candidate should replace the previous result.
+
+    The acceptance rule mirrors AC08 task 1.1: keep the new candidate only when
+    at least one core quality metric improves (`error_per_pixel` or
+    `mean_delta2`). The caller also receives the normalized metrics so reporting
+    can use one consistent decision path for stochastic re-runs and fallback
+    template transfers.
+    """
+
+    prev_error_pp = float(old_row.get("error_per_pixel", float("inf")))
+    new_error_pp = float(new_row.get("error_per_pixel", float("inf")))
+    prev_mean_delta2 = float(old_row.get("mean_delta2", float("inf")))
+    new_mean_delta2 = float(new_row.get("mean_delta2", float("inf")))
+    error_improved = new_error_pp + 1e-9 < prev_error_pp
+    delta2_improved = new_mean_delta2 + 1e-6 < prev_mean_delta2
+    improved = error_improved or delta2_improved
+    decision = "accepted_improvement" if improved else "rejected_regression"
+    return improved, decision, prev_error_pp, new_error_pp, prev_mean_delta2, new_mean_delta2
+
+
 def _extract_svg_inner(svg_text: str) -> str:
     match = re.search(r"<svg[^>]*>(.*)</svg>", svg_text, flags=re.DOTALL | re.IGNORECASE)
     if match:
@@ -7261,13 +7285,22 @@ def _try_template_transfer(
         f.write(best_svg)
 
     rendered = Action.render_svg_to_numpy(best_svg, w, h)
+    mean_delta2 = float(target_row.get("mean_delta2", float("inf")))
+    std_delta2 = float(target_row.get("std_delta2", float("inf")))
     if rendered is not None:
         diff = Action.create_diff_image(img_orig, rendered)
         cv2.imwrite(os.path.join(diff_out_dir, f"{stem}_diff.png"), diff)
+        try:
+            mean_delta2, std_delta2 = Action.calculate_delta2_stats(img_orig, rendered)
+        except Exception:
+            mean_delta2 = float(target_row.get("mean_delta2", float("inf")))
+            std_delta2 = float(target_row.get("std_delta2", float("inf")))
 
     updated_row = dict(target_row)
     updated_row["best_error"] = float(best_error)
     updated_row["error_per_pixel"] = float(best_error_pp)
+    updated_row["mean_delta2"] = float(mean_delta2)
+    updated_row["std_delta2"] = float(std_delta2)
 
     detail = {
         "filename": filename,
@@ -7276,6 +7309,8 @@ def _try_template_transfer(
         "scale": float(best_scale),
         "old_error_per_pixel": float(prev_error_pp),
         "new_error_per_pixel": float(best_error_pp),
+        "old_mean_delta2": float(target_row.get("mean_delta2", float("inf"))),
+        "new_mean_delta2": float(mean_delta2),
     }
     return updated_row, detail
 
@@ -7481,18 +7516,14 @@ def convert_range(
             rng.shuffle(candidates)
         for row in candidates:
             filename = str(row["filename"])
-            prev_error_pp = float(row["error_per_pixel"])
-
             new_row = _convert_one(filename, iteration_budget=iteration_budget, badge_rounds=badge_rounds)
             if new_row is None:
                 continue
 
-            new_error_pp = float(new_row["error_per_pixel"])
-            prev_mean_delta2 = float(row.get("mean_delta2", float("inf")))
-            new_mean_delta2 = float(new_row.get("mean_delta2", float("inf")))
-            error_improved = new_error_pp + 1e-9 < prev_error_pp
-            delta2_improved = new_mean_delta2 + 1e-6 < prev_mean_delta2
-            improved = error_improved or delta2_improved
+            improved, decision, prev_error_pp, new_error_pp, prev_mean_delta2, new_mean_delta2 = _evaluate_quality_pass_candidate(
+                row,
+                new_row,
+            )
             if improved:
                 result_map[filename] = new_row
                 improved_in_pass = True
@@ -7506,7 +7537,7 @@ def convert_range(
                     "old_mean_delta2": prev_mean_delta2,
                     "new_mean_delta2": new_mean_delta2,
                     "improved": improved,
-                    "decision": "accepted_improvement" if improved else "rejected_regression",
+                    "decision": decision,
                     "iteration_budget": iteration_budget,
                     "badge_validation_rounds": badge_rounds,
                 }
@@ -7552,8 +7583,24 @@ def convert_range(
                 if updated is None or detail is None:
                     continue
 
-                new_error_pp = float(updated["error_per_pixel"])
-                improved = new_error_pp + 1e-9 < prev_error_pp
+                improved, decision, prev_error_pp, new_error_pp, prev_mean_delta2, new_mean_delta2 = _evaluate_quality_pass_candidate(
+                    current,
+                    updated,
+                )
+                quality_logs.append(
+                    {
+                        "pass": pass_idx,
+                        "filename": filename,
+                        "old_error_per_pixel": prev_error_pp,
+                        "new_error_per_pixel": new_error_pp,
+                        "old_mean_delta2": prev_mean_delta2,
+                        "new_mean_delta2": new_mean_delta2,
+                        "improved": improved,
+                        "decision": decision,
+                        "iteration_budget": iteration_budget,
+                        "badge_validation_rounds": badge_rounds,
+                    }
+                )
                 if improved:
                     result_map[filename] = updated
                     fallback_improved = True

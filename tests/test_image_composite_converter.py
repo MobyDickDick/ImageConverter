@@ -1107,6 +1107,25 @@ def test_quality_pass_report_records_delta2_and_decision(tmp_path: Path) -> None
     assert "rejected_regression" in rows[2]
 
 
+def test_evaluate_quality_pass_candidate_rejects_full_regression() -> None:
+    improved, decision, old_error, new_error, old_delta2, new_delta2 = conv._evaluate_quality_pass_candidate(
+        {
+            "error_per_pixel": 0.20,
+            "mean_delta2": 10.0,
+        },
+        {
+            "error_per_pixel": 0.25,
+            "mean_delta2": 12.0,
+        },
+    )
+
+    assert improved is False
+    assert decision == "rejected_regression"
+    assert old_error == pytest.approx(0.20)
+    assert new_error == pytest.approx(0.25)
+    assert old_delta2 == pytest.approx(10.0)
+    assert new_delta2 == pytest.approx(12.0)
+
 
 def test_convert_range_accepts_quality_pass_when_mean_delta2_improves(
     tmp_path: Path,
@@ -1175,6 +1194,77 @@ def test_convert_range_accepts_quality_pass_when_mean_delta2_improves(
     assert pass_reports[0]["decision"] == "accepted_improvement"
     assert float(pass_reports[0]["new_error_per_pixel"]) > float(pass_reports[0]["old_error_per_pixel"])
     assert float(pass_reports[0]["new_mean_delta2"]) < float(pass_reports[0]["old_mean_delta2"])
+
+
+def test_convert_range_rejects_quality_pass_regression_and_keeps_previous_output(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+        pytest.skip("numpy/cv2 not available in this environment")
+
+    np = image_composite_converter.np
+    cv2 = image_composite_converter.cv2
+    if np is None or cv2 is None:
+        pytest.skip("numpy/cv2 not available in this environment")
+
+    images_dir = tmp_path / "images"
+    images_dir.mkdir()
+    output_root = tmp_path / "out"
+    csv_path = tmp_path / "data.csv"
+    csv_path.write_text("Wurzelform;Beschreibung\nAC0820;semantic\n", encoding="utf-8")
+    assert cv2.imwrite(str(images_dir / "AC0820_L.jpg"), np.full((10, 10, 3), 220, dtype=np.uint8))
+
+    monkeypatch.setattr(image_composite_converter, "_in_requested_range", lambda *_args, **_kwargs: True)
+    monkeypatch.setattr(image_composite_converter, "_load_quality_config", lambda *_args, **_kwargs: {})
+    monkeypatch.setattr(image_composite_converter, "_write_quality_config", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(image_composite_converter, "_harmonize_semantic_size_variants", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(image_composite_converter, "_write_pixel_delta2_ranking", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(image_composite_converter, "_select_open_quality_cases", lambda rows, **_kwargs: list(rows))
+    monkeypatch.setattr(image_composite_converter, "_select_middle_lower_tercile", lambda _rows: [])
+    monkeypatch.setattr(image_composite_converter, "_try_template_transfer", lambda **_kwargs: (None, None))
+
+    pass_reports: list[dict[str, object]] = []
+    monkeypatch.setattr(image_composite_converter, "_write_quality_pass_report", lambda _dir, rows: pass_reports.extend(rows))
+
+    state = {"count": 0}
+
+    def fake_pipeline(img_path: str, _csv_path: str, _iterations: int, svg_out: str, diff_out: str, reports_out: str, *_args, **_kwargs):
+        state["count"] += 1
+        stem = Path(img_path).stem
+        Path(svg_out).mkdir(parents=True, exist_ok=True)
+        Path(diff_out).mkdir(parents=True, exist_ok=True)
+        Path(reports_out).mkdir(parents=True, exist_ok=True)
+        if state["count"] == 1:
+            svg = "<svg width=\"10\" height=\"10\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"10\" height=\"10\" fill=\"#d0d0d0\"/></svg>"
+            best_error = 30.0
+        else:
+            svg = "<svg width=\"10\" height=\"10\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"10\" height=\"10\" fill=\"#000000\"/></svg>"
+            best_error = 31.0
+        (Path(svg_out) / f"{stem}.svg").write_text(svg, encoding="utf-8")
+        (Path(diff_out) / f"{stem}_diff.png").write_bytes(b"png")
+        params = {"mode": "semantic_badge", "elements": ["circle"], "cx": 5.0, "cy": 5.0, "r": 3.0}
+        return stem, "semantic", params, 1, best_error
+
+    monkeypatch.setattr(image_composite_converter, "run_iteration_pipeline", fake_pipeline)
+
+    result = image_composite_converter.convert_range(
+        str(images_dir),
+        str(csv_path),
+        iterations=1,
+        start_ref="AC0820",
+        end_ref="AC0820",
+        output_root=str(output_root),
+    )
+
+    assert result == str(output_root)
+    assert pass_reports
+    assert pass_reports[0]["improved"] is False
+    assert pass_reports[0]["decision"] == "rejected_regression"
+
+    iteration_log = (output_root / "reports" / "Iteration_Log.csv").read_text(encoding="utf-8-sig")
+    assert "0.30000000" in iteration_log
+    assert "0.31000000" not in iteration_log
 
 
 def test_convert_range_writes_svgs_and_diffs_to_dedicated_subfolders(
