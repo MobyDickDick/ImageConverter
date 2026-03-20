@@ -287,7 +287,7 @@ python -m src.image_composite_converter \
 
 ---
 
-### Aufgabe 5.2 – Erfolgskriterien schriftlich festhalten
+### Aufgabe 5.2 – Erfolgskriterien schriftlich festhalten ✅ erledigt
 **Ziel:** Abschluss einer Maßnahme objektiv bewerten können.
 
 **Metriken:**
@@ -302,6 +302,35 @@ python -m src.image_composite_converter \
 - keine angenommenen Regressionen,
 - messbare Verbesserung im Regression-Set,
 - keine Verschlechterung in stabilen Familien.
+
+**Umgesetzt in Code/Workflow:**
+- Läufe mit dem festen Regression-Set `ac08_core_9` schreiben zusätzlich:
+  - `ac08_success_metrics.csv` mit den schriftlich festgelegten Abschlussmetriken,
+  - `ac08_success_criteria.txt` mit der konkreten Erfolgsdefinition und dem gemessenen Status des aktuellen Laufs.
+- Erfasst werden dabei die in dieser Aufgabe geforderten Kennzahlen:
+  - `improved_error_per_pixel_count`,
+  - `improved_mean_delta2_count`,
+  - `semantic_mismatch_count`,
+  - `batch_abort_or_render_failure_count`,
+  - `mean_validation_rounds_per_file`.
+- Die Erfolgsdefinition wird maschinenlesbar ausgewertet als:
+  - `criterion_no_new_batch_aborts`,
+  - `criterion_no_accepted_regressions`,
+  - `criterion_regression_set_improved`,
+  - `criterion_stable_families_not_worse`,
+  - sowie `overall_success` als zusammengefasster Abschlussstatus.
+
+**Reproduzierbarer Aufruf:**
+```bash
+python -m src.image_composite_converter \
+  artifacts/images_to_convert \
+  --csv-path artifacts/images_to_convert/Finale_Wurzelformen_V3.xml \
+  --output-dir artifacts/converted_images \
+  --ac08-regression-set \
+  128
+```
+
+Danach liegen die schriftlich fixierten Erfolgskriterien und die aktuelle Bewertung im Report-Ordner unter `artifacts/converted_images/reports/`.
 
 ---
 

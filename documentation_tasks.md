@@ -178,6 +178,7 @@ PY
 - [x] Jede Sourcecodedatei ist so detailliert wie sinnvoll dokumentiert (inklusive Kontext/Begründungen für größere Zusammenhänge).
 - [x] Große Sourcecodedateien sind in überschaubare, logisch getrennte kleinere Dateien aufgeteilt (inkl. ggf. neuer Modulstruktur und aktualisierten Importpfaden).
 - [x] AC08-Aufgabe 5.1 ist erledigt: Ein festes Regression-Set inkl. reproduzierbarem CLI-Workflow und Manifest/Report-Dateien ist definiert. (siehe `docs/ac08_improvement_plan.md`)
+- [x] AC08-Aufgabe 5.2 ist erledigt: Schriftlich fixierte Erfolgskriterien inkl. maschinenlesbarem Report für das Regression-Set sind definiert. (siehe `docs/ac08_improvement_plan.md`)
 
 ## Aufgaben zur Redundanz-Reduktion (aus `docs/redundancy_review.md`)
 
