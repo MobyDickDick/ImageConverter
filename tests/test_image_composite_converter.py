@@ -921,8 +921,19 @@ def test_in_requested_range_excludes_values_outside_span() -> None:
 
 
 def test_in_requested_range_includes_non_reference_filenames() -> None:
-    """Non XX0000 filenames should not be filtered out by range settings."""
+    """Non XX0000 filenames should not be filtered out by broad cross-prefix range settings."""
     assert image_composite_converter._in_requested_range("LOGO.JPG", "AC0000", "ZZ9999") is True
+
+
+def test_in_requested_range_excludes_non_reference_filenames_for_exact_family_filter() -> None:
+    """Exact family-specific filters should not pull unrelated helper files into the batch."""
+    assert image_composite_converter._in_requested_range("z_231.jpg", "AC0811", "AC0811") is False
+
+
+def test_in_requested_range_supports_three_letter_prefixes() -> None:
+    """Three-letter families such as DLG should respect exact range filtering."""
+    assert image_composite_converter._in_requested_range("DLG0030.jpg", "AC0811", "AC0811") is False
+    assert image_composite_converter._in_requested_range("DLG0030.jpg", "DLG0030", "DLG0030") is True
 
 
 def test_in_requested_range_supports_one_sided_bounds() -> None:

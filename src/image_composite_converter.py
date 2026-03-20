@@ -6018,7 +6018,7 @@ def run_iteration_pipeline(
 
 
 def _extract_ref_parts(name: str) -> tuple[str, int] | None:
-    match = re.match(r"^([A-Z]{2})(\d{3,4})$", name.upper())
+    match = re.match(r"^([A-Z]{2,3})(\d{3,4})$", name.upper())
     if not match:
         return None
     return match.group(1), int(match.group(2))
@@ -6097,10 +6097,17 @@ def _in_requested_range(filename: str, start_ref: str, end_ref: str) -> bool:
     if start_parts is None and end_parts is None:
         return _matches_partial_range_token(filename, start_ref, end_ref) if (start_ref or end_ref) else True
 
-    # Files that do not follow the usual XX0000 naming scheme should still be
-    # processed in "convert whole folder" workflows.
+    # Files that do not follow the usual XX0000 / XXX0000 naming scheme should
+    # only pass through broad whole-folder spans, not exact family-specific
+    # filters like AC0811..AC0811.
     if stem_parts is None:
-        return True
+        if start_parts is not None and end_parts is not None:
+            start_key = start_parts
+            end_key = end_parts
+            if start_key > end_key:
+                start_key, end_key = end_key, start_key
+            return start_key[0] != end_key[0]
+        return False
 
     # Support one-sided range filters if only one boundary can be parsed.
     if start_parts is None:
