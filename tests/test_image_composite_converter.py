@@ -1307,7 +1307,55 @@ def test_convert_range_filters_to_explicit_selected_variants_and_writes_regressi
     assert "AC0999_L" not in manifest
     assert "set;variant;focus;reason" in manifest
     assert image_composite_converter.AC08_REGRESSION_SET_NAME in manifest
-    assert "expected_reports=Iteration_Log.csv,quality_tercile_passes.csv,pixel_delta2_ranking.csv,pixel_delta2_summary.txt" in summary
+    assert "expected_reports=Iteration_Log.csv,quality_tercile_passes.csv,pixel_delta2_ranking.csv,pixel_delta2_summary.txt,ac08_success_metrics.csv,ac08_success_criteria.txt" in summary
+
+
+def test_write_ac08_success_criteria_report_summarizes_regression_metrics(tmp_path: Path) -> None:
+    reports_dir = tmp_path / "reports"
+    reports_dir.mkdir()
+    expected = list(image_composite_converter.AC08_REGRESSION_VARIANTS)
+
+    (reports_dir / "Iteration_Log.csv").write_text(
+        "Dateiname;Gefundene Elemente;Beste Iteration;Diff-Score;FehlerProPixel\n"
+        + "".join(f"{variant}.jpg;SEMANTIC: circle;2;10.00;0.01000000\n" for variant in expected),
+        encoding="utf-8",
+    )
+    (reports_dir / "quality_tercile_passes.csv").write_text(
+        "pass;filename;old_error_per_pixel;new_error_per_pixel;old_mean_delta2;new_mean_delta2;improved;decision;iteration_budget;badge_validation_rounds\n"
+        "1;AC0820_L.jpg;0.03000000;0.02000000;20.000000;15.000000;1;accepted_improvement;128;6\n"
+        "1;AC0835_S.jpg;0.01000000;0.01200000;10.000000;10.500000;0;rejected_regression;128;6\n",
+        encoding="utf-8",
+    )
+    (reports_dir / "AC0811_L_element_validation.log").write_text(
+        "run-meta: seed=1\nstatus=semantic_mismatch\nRunde 1: elementweise Validierung gestartet\n",
+        encoding="utf-8",
+    )
+    (reports_dir / "AC0820_L_element_validation.log").write_text(
+        "run-meta: seed=1\nRunde 1: elementweise Validierung gestartet\nRunde 2: elementweise Validierung gestartet\n",
+        encoding="utf-8",
+    )
+    (reports_dir / "AC0835_S_element_validation.log").write_text(
+        "run-meta: seed=1\nRunde 1: elementweise Validierung gestartet\nAbbruch: SVG konnte nicht gerendert werden\n",
+        encoding="utf-8",
+    )
+
+    image_composite_converter._write_ac08_success_criteria_report(
+        str(reports_dir),
+        selected_variants=expected,
+    )
+
+    metrics = (reports_dir / "ac08_success_metrics.csv").read_text(encoding="utf-8")
+    summary = (reports_dir / "ac08_success_criteria.txt").read_text(encoding="utf-8")
+    assert "improved_error_per_pixel_count;1" in metrics
+    assert "improved_mean_delta2_count;1" in metrics
+    assert "semantic_mismatch_count;1" in metrics
+    assert "batch_abort_or_render_failure_count;1" in metrics
+    assert "rejected_regression_count;1" in metrics
+    assert "accepted_regression_count;0" in metrics
+    assert "criterion_no_new_batch_aborts=0" in summary
+    assert "criterion_no_accepted_regressions=1" in summary
+    assert "criterion_regression_set_improved=1" in summary
+    assert "overall_success=0" in summary
 
 
 def test_parse_description_extracts_documented_alias_refs() -> None:
