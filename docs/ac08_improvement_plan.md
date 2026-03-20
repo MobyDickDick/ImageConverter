@@ -30,7 +30,7 @@ Speziallogik in `src/image_composite_converter.py`.
 
 ## Phase 1 – Auswertung und Guardrails stabilisieren
 
-### Aufgabe 1.1 – Qualitäts-Pass nur bei echter Verbesserung übernehmen
+### Aufgabe 1.1 – Qualitäts-Pass nur bei echter Verbesserung übernehmen ✅ erledigt
 **Ziel:** Nachgelagerte Qualitäts-/Tercile-Pässe sollen keine Verschlechterungen mehr einführen.
 
 **Umsetzung:**
