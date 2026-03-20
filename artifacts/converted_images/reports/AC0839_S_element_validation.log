@@ -1,4 +1,4 @@
-run-meta: run_seed=935010667 pass_seed_offset=4 nonce_ns=1774023110852933000
+run-meta: run_seed=34070119 pass_seed_offset=2 nonce_ns=1774027378438868600
 status=semantic_ok
 Runde 1: elementweise Validierung gestartet
 circle: Fehler=129.427
@@ -8,8 +8,8 @@ arm: Fehler=97.462
 arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
 arm: Längen-Bracketing arm_len 8.900->8.000; Kandidaten=8.000->101.938, 9.000->101.938, 12.000->101.938, 16.500->101.938, 20.500->101.938, 25.000->101.938
 text: Fehler=105.659
-text: Breiten-Bracketing voc_font_scale 0.562->0.646; Kandidaten=0.337->105.659, 0.477->105.659, 0.526->105.659, 0.562->105.659, 0.646->104.976, 0.716->112.298, 0.968->125.931, 1.221->125.143, 1.411->143.551, 1.600->137.790
-Runde 1: Gesamtfehler=26.528
+text: Breiten-Bracketing voc_font_scale 0.562->0.900; Kandidaten=0.900->120.093, 1.125->130.447, 1.350->143.350, 1.650->145.348, 1.950->161.805, 2.175->168.328, 2.400->161.286
+Runde 1: Gesamtfehler=27.723
 Runde 2: elementweise Validierung gestartet
 circle: Fehler=120.789
 circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
@@ -17,9 +17,9 @@ circle: Radius-Bracketing keine relevante Änderung (r: 6.500, best_err=120.789)
 arm: Fehler=101.938
 arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
 arm: Längen-Bracketing arm_len 7.900->8.000; Kandidaten=8.000->101.938, 12.000->101.938, 16.500->101.938, 20.500->101.938, 25.000->101.938
-text: Fehler=104.976
-text: Breiten-Bracketing keine relevante Änderung (voc_font_scale: 0.646); Kandidaten=0.388->105.659, 0.549->105.659, 0.569->105.659, 0.646->104.976, 0.743->114.108, 0.751->113.927, 0.994->126.190, 1.236->141.336, 1.418->143.226, 1.600->137.790
-Runde 2: Gesamtfehler=26.528
+text: Fehler=120.093
+text: Breiten-Bracketing keine relevante Änderung (voc_font_scale: 0.900); Kandidaten=0.900->120.093, 1.035->120.945, 1.125->130.447, 1.350->143.350, 1.650->145.348, 1.950->161.805, 2.175->168.328, 2.400->161.286
+Runde 2: Gesamtfehler=27.723
 Runde 3: elementweise Validierung gestartet
 circle: Fehler=120.789
 circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
@@ -27,9 +27,9 @@ circle: Radius-Bracketing keine relevante Änderung (r: 6.500, best_err=120.789)
 arm: Fehler=101.938
 arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
 arm: Längen-Bracketing arm_len 7.900->8.000; Kandidaten=8.000->101.938, 12.000->101.938, 16.500->101.938, 20.500->101.938, 25.000->101.938
-text: Fehler=104.976
-text: Breiten-Bracketing keine relevante Änderung (voc_font_scale: 0.646); Kandidaten=0.388->105.659, 0.549->105.659, 0.569->105.659, 0.646->104.976, 0.743->114.108, 0.751->113.927, 0.994->126.190, 1.236->141.336, 1.418->143.226, 1.600->137.790
-Runde 3: Gesamtfehler=26.528
+text: Fehler=120.093
+text: Breiten-Bracketing keine relevante Änderung (voc_font_scale: 0.900); Kandidaten=0.900->120.093, 1.035->120.945, 1.125->130.447, 1.350->143.350, 1.650->145.348, 1.950->161.805, 2.175->168.328, 2.400->161.286
+Runde 3: Gesamtfehler=27.723
 Runde 4: elementweise Validierung gestartet
 circle: Fehler=120.789
 circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
@@ -37,9 +37,9 @@ circle: Radius-Bracketing keine relevante Änderung (r: 6.500, best_err=120.789)
 arm: Fehler=101.938
 arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
 arm: Längen-Bracketing arm_len 7.900->8.000; Kandidaten=8.000->101.938, 12.000->101.938, 16.500->101.938, 20.500->101.938, 25.000->101.938
-text: Fehler=104.976
-text: Breiten-Bracketing keine relevante Änderung (voc_font_scale: 0.646); Kandidaten=0.388->105.659, 0.549->105.659, 0.569->105.659, 0.646->104.976, 0.743->114.108, 0.751->113.927, 0.994->126.190, 1.236->141.336, 1.418->143.226, 1.600->137.790
-Runde 4: Gesamtfehler=26.528
+text: Fehler=120.093
+text: Breiten-Bracketing keine relevante Änderung (voc_font_scale: 0.900); Kandidaten=0.900->120.093, 1.035->120.945, 1.125->130.447, 1.350->143.350, 1.650->145.348, 1.950->161.805, 2.175->168.328, 2.400->161.286
+Runde 4: Gesamtfehler=27.723
 Runde 5: elementweise Validierung gestartet
 circle: Fehler=120.789
 circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
@@ -47,9 +47,9 @@ circle: Radius-Bracketing keine relevante Änderung (r: 6.500, best_err=120.789)
 arm: Fehler=101.938
 arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
 arm: Längen-Bracketing arm_len 7.900->8.000; Kandidaten=8.000->101.938, 12.000->101.938, 16.500->101.938, 20.500->101.938, 25.000->101.938
-text: Fehler=104.976
-text: Breiten-Bracketing keine relevante Änderung (voc_font_scale: 0.646); Kandidaten=0.388->105.659, 0.549->105.659, 0.569->105.659, 0.646->104.976, 0.743->114.108, 0.751->113.927, 0.994->126.190, 1.236->141.336, 1.418->143.226, 1.600->137.790
-Runde 5: Gesamtfehler=26.528
+text: Fehler=120.093
+text: Breiten-Bracketing keine relevante Änderung (voc_font_scale: 0.900); Kandidaten=0.900->120.093, 1.035->120.945, 1.125->130.447, 1.350->143.350, 1.650->145.348, 1.950->161.805, 2.175->168.328, 2.400->161.286
+Runde 5: Gesamtfehler=27.723
 Runde 6: elementweise Validierung gestartet
 circle: Fehler=120.789
 circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
@@ -57,9 +57,9 @@ circle: Radius-Bracketing keine relevante Änderung (r: 6.500, best_err=120.789)
 arm: Fehler=101.938
 arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
 arm: Längen-Bracketing arm_len 7.900->8.000; Kandidaten=8.000->101.938, 12.000->101.938, 16.500->101.938, 20.500->101.938, 25.000->101.938
-text: Fehler=104.976
-text: Breiten-Bracketing keine relevante Änderung (voc_font_scale: 0.646); Kandidaten=0.388->105.659, 0.549->105.659, 0.569->105.659, 0.646->104.976, 0.743->114.108, 0.751->113.927, 0.994->126.190, 1.236->141.336, 1.418->143.226, 1.600->137.790
-Runde 6: Gesamtfehler=26.528
+text: Fehler=120.093
+text: Breiten-Bracketing keine relevante Änderung (voc_font_scale: 0.900); Kandidaten=0.900->120.093, 1.035->120.945, 1.125->130.447, 1.350->143.350, 1.650->145.348, 1.950->161.805, 2.175->168.328, 2.400->161.286
+Runde 6: Gesamtfehler=27.723
 Runde 7: elementweise Validierung gestartet
 circle: Fehler=120.789
 circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
@@ -67,9 +67,9 @@ circle: Radius-Bracketing keine relevante Änderung (r: 6.500, best_err=120.789)
 arm: Fehler=101.938
 arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
 arm: Längen-Bracketing arm_len 7.900->8.000; Kandidaten=8.000->101.938, 12.000->101.938, 16.500->101.938, 20.500->101.938, 25.000->101.938
-text: Fehler=104.976
-text: Breiten-Bracketing keine relevante Änderung (voc_font_scale: 0.646); Kandidaten=0.388->105.659, 0.549->105.659, 0.569->105.659, 0.646->104.976, 0.743->114.108, 0.751->113.927, 0.994->126.190, 1.236->141.336, 1.418->143.226, 1.600->137.790
-Runde 7: Gesamtfehler=26.528
+text: Fehler=120.093
+text: Breiten-Bracketing keine relevante Änderung (voc_font_scale: 0.900); Kandidaten=0.900->120.093, 1.035->120.945, 1.125->130.447, 1.350->143.350, 1.650->145.348, 1.950->161.805, 2.175->168.328, 2.400->161.286
+Runde 7: Gesamtfehler=27.723
 Runde 8: elementweise Validierung gestartet
 circle: Fehler=120.789
 circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
@@ -77,9 +77,9 @@ circle: Radius-Bracketing keine relevante Änderung (r: 6.500, best_err=120.789)
 arm: Fehler=101.938
 arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
 arm: Längen-Bracketing arm_len 7.900->8.000; Kandidaten=8.000->101.938, 12.000->101.938, 16.500->101.938, 20.500->101.938, 25.000->101.938
-text: Fehler=104.976
-text: Breiten-Bracketing keine relevante Änderung (voc_font_scale: 0.646); Kandidaten=0.388->105.659, 0.549->105.659, 0.569->105.659, 0.646->104.976, 0.743->114.108, 0.751->113.927, 0.994->126.190, 1.236->141.336, 1.418->143.226, 1.600->137.790
-Runde 8: Gesamtfehler=26.528
+text: Fehler=120.093
+text: Breiten-Bracketing keine relevante Änderung (voc_font_scale: 0.900); Kandidaten=0.900->120.093, 1.035->120.945, 1.125->130.447, 1.350->143.350, 1.650->145.348, 1.950->161.805, 2.175->168.328, 2.400->161.286
+Runde 8: Gesamtfehler=27.723
 Runde 9: elementweise Validierung gestartet
 circle: Fehler=120.789
 circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
@@ -87,19 +87,9 @@ circle: Radius-Bracketing keine relevante Änderung (r: 6.500, best_err=120.789)
 arm: Fehler=101.938
 arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
 arm: Längen-Bracketing arm_len 7.900->8.000; Kandidaten=8.000->101.938, 12.000->101.938, 16.500->101.938, 20.500->101.938, 25.000->101.938
-text: Fehler=104.976
-text: Breiten-Bracketing keine relevante Änderung (voc_font_scale: 0.646); Kandidaten=0.388->105.659, 0.549->105.659, 0.569->105.659, 0.646->104.976, 0.743->114.108, 0.751->113.927, 0.994->126.190, 1.236->141.336, 1.418->143.226, 1.600->137.790
-Runde 9: Gesamtfehler=26.528
-Runde 10: elementweise Validierung gestartet
-circle: Fehler=120.789
-circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
-circle: Radius-Bracketing keine relevante Änderung (r: 6.500, best_err=120.789); Kandidaten=6.500->120.789, 7.000->129.427
-arm: Fehler=101.938
-arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
-arm: Längen-Bracketing arm_len 7.900->8.000; Kandidaten=8.000->101.938, 12.000->101.938, 16.500->101.938, 20.500->101.938, 25.000->101.938
-text: Fehler=104.976
-text: Breiten-Bracketing keine relevante Änderung (voc_font_scale: 0.646); Kandidaten=0.388->105.659, 0.549->105.659, 0.569->105.659, 0.646->104.976, 0.743->114.108, 0.751->113.927, 0.994->126.190, 1.236->141.336, 1.418->143.226, 1.600->137.790
-Runde 10: Gesamtfehler=26.528
+text: Fehler=120.093
+text: Breiten-Bracketing keine relevante Änderung (voc_font_scale: 0.900); Kandidaten=0.900->120.093, 1.035->120.945, 1.125->130.447, 1.350->143.350, 1.650->145.348, 1.950->161.805, 2.175->168.328, 2.400->161.286
+Runde 9: Gesamtfehler=27.723
 circle: Farb-Bracketing übersprungen (Farben gesperrt)
 arm: Farb-Bracketing übersprungen (Farben gesperrt)
 text: Farb-Bracketing übersprungen (Farben gesperrt)

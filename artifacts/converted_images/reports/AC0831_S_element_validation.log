@@ -1,5 +1,97 @@
-run-meta: run_seed=935010667 pass_seed_offset=0 nonce_ns=1774022854997045600
-status=semantic_mismatch
-best_attempt_svg=AC0831_S_failed.svg
-best_attempt_diff=AC0831_S_failed_diff.png
-issue=Strukturprüfung: Erwartete CO₂-Glyphenstruktur nicht ausreichend belegt
+run-meta: run_seed=34070119 pass_seed_offset=2 nonce_ns=1774027395475114600
+status=semantic_ok
+Runde 1: elementweise Validierung gestartet
+circle: Fehler=132.189
+circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
+circle: Radius-Bracketing r 5.700->7.000 (best_err=81.694); Kandidaten=5.500->135.400, 6.000->113.890, 6.500->83.733, 7.000->81.694
+stem: Fehler=89.499
+stem: Breitenkorrektur mode=iter, ratio=0.500, alt=1.000, neu=1.000
+stem: Geometrie nach Elementabgleich aktualisiert
+stem: Breiten-Bracketing keine relevante Änderung (stem_width: 1.000); Kandidaten=1.000->89.499, 1.500->89.499
+stem: Längen-Bracketing stem_len 10.500->12.000; Kandidaten=7.500->96.642, 10.500->87.448, 12.000->87.381, 16.500->116.124, 20.500->120.170, 25.000->112.882
+text: Fehler=112.446
+text: Breiten-Bracketing co2_font_scale 0.886->0.797; Kandidaten=0.797->112.446, 0.844->112.446, 0.886->112.446, 0.890->112.446, 0.952->112.446, 1.014->112.446, 1.018->112.446, 1.061->112.446, 1.107->112.446
+Runde 1: Gesamtfehler=21.248
+Runde 2: elementweise Validierung gestartet
+circle: Fehler=81.694
+circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
+circle: Radius-Bracketing keine relevante Änderung (r: 7.000, best_err=81.694); Kandidaten=6.500->83.255, 7.000->81.694
+stem: Fehler=87.448
+stem: Breiten-Bracketing keine relevante Änderung (stem_width: 1.000); Kandidaten=1.000->89.499, 1.500->89.499
+stem: Längen-Bracketing stem_len 10.500->12.000; Kandidaten=7.500->96.642, 10.500->87.448, 12.000->87.381, 16.500->116.124, 20.500->120.170, 25.000->112.882
+text: Fehler=112.446
+text: Breiten-Bracketing keine relevante Änderung (co2_font_scale: 0.797); Kandidaten=0.797->112.446, 0.844->112.446, 0.890->112.446, 0.917->112.446, 0.952->112.446, 1.014->112.446, 1.061->112.446, 1.107->112.446
+Runde 2: Gesamtfehler=21.248
+Runde 3: elementweise Validierung gestartet
+circle: Fehler=81.694
+circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
+circle: Radius-Bracketing keine relevante Änderung (r: 7.000, best_err=81.694); Kandidaten=6.500->83.255, 7.000->81.694
+stem: Fehler=87.448
+stem: Breiten-Bracketing keine relevante Änderung (stem_width: 1.000); Kandidaten=1.000->89.499, 1.500->89.499
+stem: Längen-Bracketing stem_len 10.500->12.000; Kandidaten=7.500->96.642, 10.500->87.448, 12.000->87.381, 16.500->116.124, 20.500->120.170, 25.000->112.882
+text: Fehler=112.446
+text: Breiten-Bracketing keine relevante Änderung (co2_font_scale: 0.797); Kandidaten=0.797->112.446, 0.844->112.446, 0.890->112.446, 0.917->112.446, 0.952->112.446, 1.014->112.446, 1.061->112.446, 1.107->112.446
+Runde 3: Gesamtfehler=21.248
+Runde 4: elementweise Validierung gestartet
+circle: Fehler=81.694
+circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
+circle: Radius-Bracketing keine relevante Änderung (r: 7.000, best_err=81.694); Kandidaten=6.500->83.255, 7.000->81.694
+stem: Fehler=87.448
+stem: Breiten-Bracketing keine relevante Änderung (stem_width: 1.000); Kandidaten=1.000->89.499, 1.500->89.499
+stem: Längen-Bracketing stem_len 10.500->12.000; Kandidaten=7.500->96.642, 10.500->87.448, 12.000->87.381, 16.500->116.124, 20.500->120.170, 25.000->112.882
+text: Fehler=112.446
+text: Breiten-Bracketing keine relevante Änderung (co2_font_scale: 0.797); Kandidaten=0.797->112.446, 0.844->112.446, 0.890->112.446, 0.917->112.446, 0.952->112.446, 1.014->112.446, 1.061->112.446, 1.107->112.446
+Runde 4: Gesamtfehler=21.248
+Runde 5: elementweise Validierung gestartet
+circle: Fehler=81.694
+circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
+circle: Radius-Bracketing keine relevante Änderung (r: 7.000, best_err=81.694); Kandidaten=6.500->83.255, 7.000->81.694
+stem: Fehler=87.448
+stem: Breiten-Bracketing keine relevante Änderung (stem_width: 1.000); Kandidaten=1.000->89.499, 1.500->89.499
+stem: Längen-Bracketing stem_len 10.500->12.000; Kandidaten=7.500->96.642, 10.500->87.448, 12.000->87.381, 16.500->116.124, 20.500->120.170, 25.000->112.882
+text: Fehler=112.446
+text: Breiten-Bracketing keine relevante Änderung (co2_font_scale: 0.797); Kandidaten=0.797->112.446, 0.844->112.446, 0.890->112.446, 0.917->112.446, 0.952->112.446, 1.014->112.446, 1.061->112.446, 1.107->112.446
+Runde 5: Gesamtfehler=21.248
+Runde 6: elementweise Validierung gestartet
+circle: Fehler=81.694
+circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
+circle: Radius-Bracketing keine relevante Änderung (r: 7.000, best_err=81.694); Kandidaten=6.500->83.255, 7.000->81.694
+stem: Fehler=87.448
+stem: Breiten-Bracketing keine relevante Änderung (stem_width: 1.000); Kandidaten=1.000->89.499, 1.500->89.499
+stem: Längen-Bracketing stem_len 10.500->12.000; Kandidaten=7.500->96.642, 10.500->87.448, 12.000->87.381, 16.500->116.124, 20.500->120.170, 25.000->112.882
+text: Fehler=112.446
+text: Breiten-Bracketing keine relevante Änderung (co2_font_scale: 0.797); Kandidaten=0.797->112.446, 0.844->112.446, 0.890->112.446, 0.917->112.446, 0.952->112.446, 1.014->112.446, 1.061->112.446, 1.107->112.446
+Runde 6: Gesamtfehler=21.248
+Runde 7: elementweise Validierung gestartet
+circle: Fehler=81.694
+circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
+circle: Radius-Bracketing keine relevante Änderung (r: 7.000, best_err=81.694); Kandidaten=6.500->83.255, 7.000->81.694
+stem: Fehler=87.448
+stem: Breiten-Bracketing keine relevante Änderung (stem_width: 1.000); Kandidaten=1.000->89.499, 1.500->89.499
+stem: Längen-Bracketing stem_len 10.500->12.000; Kandidaten=7.500->96.642, 10.500->87.448, 12.000->87.381, 16.500->116.124, 20.500->120.170, 25.000->112.882
+text: Fehler=112.446
+text: Breiten-Bracketing keine relevante Änderung (co2_font_scale: 0.797); Kandidaten=0.797->112.446, 0.844->112.446, 0.890->112.446, 0.917->112.446, 0.952->112.446, 1.014->112.446, 1.061->112.446, 1.107->112.446
+Runde 7: Gesamtfehler=21.248
+Runde 8: elementweise Validierung gestartet
+circle: Fehler=81.694
+circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
+circle: Radius-Bracketing keine relevante Änderung (r: 7.000, best_err=81.694); Kandidaten=6.500->83.255, 7.000->81.694
+stem: Fehler=87.448
+stem: Breiten-Bracketing keine relevante Änderung (stem_width: 1.000); Kandidaten=1.000->89.499, 1.500->89.499
+stem: Längen-Bracketing stem_len 10.500->12.000; Kandidaten=7.500->96.642, 10.500->87.448, 12.000->87.381, 16.500->116.124, 20.500->120.170, 25.000->112.882
+text: Fehler=112.446
+text: Breiten-Bracketing keine relevante Änderung (co2_font_scale: 0.797); Kandidaten=0.797->112.446, 0.844->112.446, 0.890->112.446, 0.917->112.446, 0.952->112.446, 1.014->112.446, 1.061->112.446, 1.107->112.446
+Runde 8: Gesamtfehler=21.248
+Runde 9: elementweise Validierung gestartet
+circle: Fehler=81.694
+circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
+circle: Radius-Bracketing keine relevante Änderung (r: 7.000, best_err=81.694); Kandidaten=6.500->83.255, 7.000->81.694
+stem: Fehler=87.448
+stem: Breiten-Bracketing keine relevante Änderung (stem_width: 1.000); Kandidaten=1.000->89.499, 1.500->89.499
+stem: Längen-Bracketing stem_len 10.500->12.000; Kandidaten=7.500->96.642, 10.500->87.448, 12.000->87.381, 16.500->116.124, 20.500->120.170, 25.000->112.882
+text: Fehler=112.446
+text: Breiten-Bracketing keine relevante Änderung (co2_font_scale: 0.797); Kandidaten=0.797->112.446, 0.844->112.446, 0.890->112.446, 0.917->112.446, 0.952->112.446, 1.014->112.446, 1.061->112.446, 1.107->112.446
+Runde 9: Gesamtfehler=21.248
+circle: Farb-Bracketing übersprungen (Farben gesperrt)
+stem: Farb-Bracketing übersprungen (Farben gesperrt)
+text: Farb-Bracketing übersprungen (Farben gesperrt)

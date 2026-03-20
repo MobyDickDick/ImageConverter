@@ -1,5 +1,27 @@
-run-meta: run_seed=935010667 pass_seed_offset=0 nonce_ns=1774022996629028800
-status=semantic_mismatch
-best_attempt_svg=AC0833_M_failed.svg
-best_attempt_diff=AC0833_M_failed_diff.png
-issue=Strukturprüfung: Erwartete CO₂-Glyphenstruktur nicht ausreichend belegt
+run-meta: run_seed=34070119 pass_seed_offset=2 nonce_ns=1774027389611858600
+status=semantic_ok
+Runde 1: elementweise Validierung gestartet
+circle: Fehler=137.008
+circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
+circle: Radius-Bracketing r 8.833->8.000 (best_err=129.755); Kandidaten=8.000->129.755, 8.500->132.228, 9.000->137.008, 9.500->130.960
+arm: Fehler=59.264
+arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
+arm: Längen-Bracketing keine relevante Änderung (arm_len: 17.000); Kandidaten=13.000->75.102, 17.000->59.264, 18.500->59.264, 24.000->59.264, 29.500->59.264, 35.000->59.264
+text: Fehler=100.922
+text: Breiten-Bracketing übersprungen (co2_font_scale: current=0.886, Range=0.886..0.886)
+Runde 1: Gesamtfehler=24.064
+Runde 2: elementweise Validierung gestartet
+circle: Fehler=130.948
+circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
+circle: Radius-Bracketing keine relevante Änderung (r: 8.000, best_err=130.948); Kandidaten=8.000->130.948, 9.500->130.960
+arm: Fehler=59.264
+arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
+arm: Längen-Bracketing keine relevante Änderung (arm_len: 17.000); Kandidaten=13.000->75.102, 17.000->59.264, 18.500->59.264, 24.000->59.264, 29.500->59.264, 35.000->59.264
+text: Fehler=100.922
+text: Breiten-Bracketing übersprungen (co2_font_scale: current=0.886, Range=0.886..0.886)
+Runde 2: Gesamtfehler=24.064
+Keine Element-Geometrieänderung mehr; Validierung vorzeitig beendet
+circle: Farb-Bracketing übersprungen (Farben gesperrt)
+arm: Farb-Bracketing übersprungen (Farben gesperrt)
+text: Farb-Bracketing übersprungen (Farben gesperrt)
+semantic-guard: Erwartete Arm-Geometrie bestätigt/wiederhergestellt (z.B. AC0812 links).

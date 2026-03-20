@@ -1,16 +1,5 @@
-run-meta: run_seed=935010667 pass_seed_offset=0 nonce_ns=1774022955288627000
-status=semantic_ok
-Runde 1: elementweise Validierung gestartet
-circle: Fehler=138.534
-circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
-circle: Radius-Bracketing r 12.200->13.500 (best_err=30.971); Kandidaten=10.500->170.893, 12.000->138.534, 13.000->56.413, 13.500->30.971, 14.000->47.287, 14.500->96.449
-Runde 1: Gesamtfehler=6.847
-Gesamtfehler unter Schwellwert, Suche nach besserem Optimum wird fortgesetzt
-Runde 2: elementweise Validierung gestartet
-circle: Fehler=30.971
-circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
-circle: Radius-Bracketing keine relevante Änderung (r: 13.500, best_err=30.971); Kandidaten=10.500->170.079, 13.500->30.971, 14.000->47.287, 14.500->96.449
-Runde 2: Gesamtfehler=6.847
-Gesamtfehler unter Schwellwert, Suche nach besserem Optimum wird fortgesetzt
-Keine Element-Geometrieänderung mehr; Validierung vorzeitig beendet
-circle: Farb-Bracketing übersprungen (Farben gesperrt)
+run-meta: run_seed=34070119 pass_seed_offset=0 nonce_ns=1774027241935072500
+status=semantic_mismatch
+best_attempt_svg=AC0800_L_failed.svg
+best_attempt_diff=AC0800_L_failed_diff.png
+issue=Im Bild ist Kreis erkennbar, aber nicht in der Beschreibung enthalten

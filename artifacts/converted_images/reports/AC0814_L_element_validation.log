@@ -1,24 +1,6 @@
-run-meta: run_seed=935010667 pass_seed_offset=0 nonce_ns=1774022856395945400
-status=semantic_ok
-Runde 1: elementweise Validierung gestartet
-circle: Fehler=26.193
-circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
-circle: Radius-Bracketing r 10.925->11.000 (best_err=26.193); Kandidaten=11.000->26.193, 12.000->66.013
-arm: Fehler=59.387
-arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
-arm: Längen-Bracketing keine relevante Änderung (arm_len: 18.000); Kandidaten=15.000->62.753, 18.000->60.297, 22.500->60.297, 30.000->60.297, 37.500->60.297, 45.000->60.297
-Runde 1: Gesamtfehler=6.191
-Gesamtfehler unter Schwellwert, Suche nach besserem Optimum wird fortgesetzt
-Runde 2: elementweise Validierung gestartet
-circle: Fehler=26.193
-circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
-circle: Radius-Bracketing keine relevante Änderung (r: 11.000, best_err=26.193); Kandidaten=11.000->26.193, 12.000->66.013
-arm: Fehler=59.387
-arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
-arm: Längen-Bracketing keine relevante Änderung (arm_len: 18.000); Kandidaten=15.000->62.753, 18.000->60.297, 22.500->60.297, 30.000->60.297, 37.500->60.297, 45.000->60.297
-Runde 2: Gesamtfehler=6.191
-Gesamtfehler unter Schwellwert, Suche nach besserem Optimum wird fortgesetzt
-Keine Element-Geometrieänderung mehr; Validierung vorzeitig beendet
-circle: Farb-Bracketing übersprungen (Farben gesperrt)
-arm: Farb-Bracketing übersprungen (Farben gesperrt)
-semantic-guard: Erwartete Arm-Geometrie bestätigt/wiederhergestellt (z.B. AC0812 links).
+run-meta: run_seed=34070119 pass_seed_offset=0 nonce_ns=1774027279555826400
+status=semantic_mismatch
+best_attempt_svg=AC0814_L_failed.svg
+best_attempt_diff=AC0814_L_failed_diff.png
+issue=Beschreibung erwartet Buchstabe/Text, im Bild aber nicht robust erkennbar
+issue=Strukturprüfung: Keine belastbare Textstruktur (z.B. CO₂) im Rohbild erkannt

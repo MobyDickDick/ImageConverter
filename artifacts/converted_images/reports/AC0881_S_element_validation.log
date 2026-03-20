@@ -1,4 +1,4 @@
-run-meta: run_seed=935010667 pass_seed_offset=4 nonce_ns=1774023124575837700
+run-meta: run_seed=34070119 pass_seed_offset=2 nonce_ns=1774027362457442300
 status=semantic_ok
 Runde 1: elementweise Validierung gestartet
 circle: Fehler=81.922
@@ -83,15 +83,6 @@ stem: Breiten-Bracketing keine relevante Änderung (stem_width: 1.000); Kandidat
 stem: Längen-Bracketing stem_len 9.000->21.000; Kandidaten=9.000->92.059, 13.000->89.417, 17.000->84.951, 21.000->79.098, 25.000->82.508
 text: Fehler=65.535
 Runde 9: Gesamtfehler=13.133
-Runde 10: elementweise Validierung gestartet
-circle: Fehler=81.922
-circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
-circle: Radius-Bracketing keine relevante Änderung (r: 7.000, best_err=81.922); Kandidaten=6.500->86.566, 7.000->81.922
-stem: Fehler=80.765
-stem: Breiten-Bracketing keine relevante Änderung (stem_width: 1.000); Kandidaten=1.000->83.158, 1.500->122.684, 2.000->122.684
-stem: Längen-Bracketing stem_len 10.500->9.000; Kandidaten=9.000->69.658, 10.500->80.765, 13.000->90.000, 17.000->87.538, 21.000->79.333, 25.000->76.167
-text: Fehler=65.535
-Runde 10: Gesamtfehler=13.645
 circle: Farb-Bracketing übersprungen (Farben gesperrt)
 stem: Farb-Bracketing übersprungen (Farben gesperrt)
 text: Farb-Bracketing übersprungen (Farben gesperrt)

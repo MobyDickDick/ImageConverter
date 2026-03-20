@@ -1,5 +1,27 @@
-run-meta: run_seed=935010667 pass_seed_offset=0 nonce_ns=1774022854764267700
-status=semantic_mismatch
-best_attempt_svg=AC0832_L_failed.svg
-best_attempt_diff=AC0832_L_failed_diff.png
-issue=Strukturprüfung: Erwartete CO₂-Glyphenstruktur nicht ausreichend belegt
+run-meta: run_seed=34070119 pass_seed_offset=0 nonce_ns=1774027099537841900
+status=semantic_ok
+Runde 1: elementweise Validierung gestartet
+circle: Fehler=134.078
+circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
+circle: Radius-Bracketing r 10.667->11.000 (best_err=131.494); Kandidaten=9.500->132.754, 10.500->134.078, 11.000->131.494, 11.500->132.666, 12.000->132.356
+arm: Fehler=72.433
+arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
+arm: Längen-Bracketing keine relevante Änderung (arm_len: 21.500); Kandidaten=17.500->81.351, 21.500->72.433, 24.500->72.433, 31.500->72.433, 38.000->72.433, 45.000->72.433
+text: Fehler=109.837
+text: Breiten-Bracketing übersprungen (co2_font_scale: current=0.740, Range=0.740..0.740)
+Runde 1: Gesamtfehler=26.278
+Runde 2: elementweise Validierung gestartet
+circle: Fehler=131.494
+circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
+circle: Radius-Bracketing keine relevante Änderung (r: 11.000, best_err=131.494); Kandidaten=10.000->133.917, 11.000->131.494, 11.500->132.666, 12.000->132.356
+arm: Fehler=72.433
+arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
+arm: Längen-Bracketing keine relevante Änderung (arm_len: 21.500); Kandidaten=17.500->81.351, 21.500->72.433, 24.500->72.433, 31.500->72.433, 38.000->72.433, 45.000->72.433
+text: Fehler=109.837
+text: Breiten-Bracketing übersprungen (co2_font_scale: current=0.740, Range=0.740..0.740)
+Runde 2: Gesamtfehler=26.278
+Keine Element-Geometrieänderung mehr; Validierung vorzeitig beendet
+circle: Farb-Bracketing übersprungen (Farben gesperrt)
+arm: Farb-Bracketing übersprungen (Farben gesperrt)
+text: Farb-Bracketing übersprungen (Farben gesperrt)
+semantic-guard: Erwartete Arm-Geometrie bestätigt/wiederhergestellt (z.B. AC0812 links).

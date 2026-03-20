@@ -1,6 +1,8 @@
-run-meta: run_seed=935010667 pass_seed_offset=0 nonce_ns=1774022899380225900
+run-meta: run_seed=34070119 pass_seed_offset=0 nonce_ns=1774027229211136800
 status=semantic_mismatch
 best_attempt_svg=AC0812_S_failed.svg
 best_attempt_diff=AC0812_S_failed_diff.png
 issue=Beschreibung erwartet waagrechter Strich, im Bild aber nicht robust erkennbar
+issue=Beschreibung erwartet Buchstabe/Text, im Bild aber nicht robust erkennbar
 issue=Strukturprüfung: Kein belastbarer waagrechter Linien-Kandidat im Rohbild erkannt
+issue=Strukturprüfung: Keine belastbare Textstruktur (z.B. CO₂) im Rohbild erkannt

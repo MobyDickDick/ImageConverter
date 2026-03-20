@@ -1,14 +1,6 @@
-run-meta: run_seed=935010667 pass_seed_offset=4 nonce_ns=1774023114541823700
-status=semantic_ok
-Runde 1: elementweise Validierung gestartet
-circle: Fehler=50.124
-circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
-circle: Radius-Bracketing keine relevante Änderung (r: 7.000, best_err=50.124); Kandidaten=6.500->56.914, 7.000->50.124
-arm: Fehler=73.946
-arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
-arm: Längen-Bracketing keine relevante Änderung (arm_len: 10.500); Kandidaten=8.000->74.476, 10.500->73.946, 12.000->73.946, 16.500->73.946, 20.500->73.946, 25.000->73.946
-Runde 1: Gesamtfehler=11.069
-Keine Element-Geometrieänderung mehr; Validierung vorzeitig beendet
-circle: Farb-Bracketing übersprungen (Farben gesperrt)
-arm: Farb-Bracketing übersprungen (Farben gesperrt)
-semantic-guard: Erwartete Arm-Geometrie bestätigt/wiederhergestellt (z.B. AC0812 links).
+run-meta: run_seed=34070119 pass_seed_offset=0 nonce_ns=1774027161083033300
+status=semantic_mismatch
+best_attempt_svg=AC0813_S_failed.svg
+best_attempt_diff=AC0813_S_failed_diff.png
+issue=Beschreibung erwartet Buchstabe/Text, im Bild aber nicht robust erkennbar
+issue=Strukturprüfung: Keine belastbare Textstruktur (z.B. CO₂) im Rohbild erkannt
