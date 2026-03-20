@@ -6128,11 +6128,27 @@ def _extract_symbol_family(name: str) -> str | None:
     return match.group(1)
 
 
+def _matches_exact_prefix_filter(filename: str, start_ref: str, end_ref: str) -> bool:
+    start_token = _normalize_range_token(start_ref)
+    end_token = _normalize_range_token(end_ref)
+    if not start_token or start_token != end_token:
+        return False
+    stem = _normalize_range_token(get_base_name_from_file(os.path.splitext(filename)[0]))
+    if not stem:
+        return False
+    return stem.startswith(start_token)
+
+
 def _in_requested_range(filename: str, start_ref: str, end_ref: str) -> bool:
     stem = get_base_name_from_file(os.path.splitext(filename)[0]).upper()
     stem_parts = _extract_ref_parts(stem)
     start_parts = _extract_ref_parts(start_ref)
     end_parts = _extract_ref_parts(end_ref)
+
+    # Identical start/end filters should also work as a prefix selector so an
+    # input like AC081..AC081 includes AC0814_L, AC0813_M, etc.
+    if _matches_exact_prefix_filter(filename, start_ref, end_ref):
+        return True
 
     # If no parseable range bounds are provided, fall back to a shared partial
     # token filter. This keeps interactive batches small, e.g. AC08..A08 -> A08*.
