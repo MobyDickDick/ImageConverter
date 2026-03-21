@@ -45,6 +45,64 @@ AC08_REGRESSION_SET_NAME = "ac08_core_9"
 AC08_REGRESSION_VARIANTS = tuple(case["variant"] for case in AC08_REGRESSION_CASES)
 
 
+AC08_MITIGATION_STATUS: dict[str, dict[str, str]] = {
+    "AC0882": {
+        "family": "left_connector",
+        "risk": "high",
+        "implemented": "adaptive_locks,left_connector_family,small_variant_mode",
+        "status": "Mitigated via adaptive fallback search, connector-family guardrails, and _S-specific tuning.",
+    },
+    "AC0837": {
+        "family": "left_connector",
+        "risk": "high",
+        "implemented": "adaptive_locks,left_connector_family",
+        "status": "Mitigated via adaptive fallback search plus shared left-connector geometry locks.",
+    },
+    "AC0839": {
+        "family": "right_connector",
+        "risk": "high",
+        "implemented": "adaptive_locks,right_connector_family,small_variant_mode",
+        "status": "Mitigated via mirrored connector guardrails with stagnation-triggered unlocks and _S handling.",
+    },
+    "AC0820": {
+        "family": "circle_text",
+        "risk": "medium",
+        "implemented": "adaptive_locks,quality_pass_guardrails,co2_cluster_anchor",
+        "status": "Mitigated via bounded quality-pass rollbacks, adaptive text scaling, and centered CO₂ layout.",
+    },
+    "AC0831": {
+        "family": "semantic_vertical",
+        "risk": "medium",
+        "implemented": "adaptive_locks,semantic_vertical_family",
+        "status": "Mitigated via semantic vertical-family tuning plus bounded fallback search on stubborn runs.",
+    },
+    "AC0834": {
+        "family": "right_connector",
+        "risk": "medium",
+        "implemented": "right_connector_family,small_variant_mode",
+        "status": "Mitigated via shared right-connector geometry enforcement and _S-specific connector/text floors.",
+    },
+    "AC0835": {
+        "family": "circle_text",
+        "risk": "medium",
+        "implemented": "small_variant_mode,circle_text_family",
+        "status": "Mitigated primarily through compact circle/text tuning for small variants.",
+    },
+    "AC0811": {
+        "family": "semantic_vertical",
+        "risk": "medium",
+        "implemented": "semantic_audit,semantic_priority_rules,semantic_vertical_family",
+        "status": "Mitigated via semantic audit output and strict family-priority rules for circle-with-stem badges.",
+    },
+    "AC0812": {
+        "family": "semantic_horizontal",
+        "risk": "medium",
+        "implemented": "semantic_audit,semantic_priority_rules,left_connector_family",
+        "status": "Mitigated via semantic conflict logging and shared left-connector family reconstruction.",
+    },
+}
+
+
 ANNOTATION_COLORS: dict[str, tuple[int, int, int]] = {
     "circle": (0, 0, 255),
     "stem": (0, 180, 0),
@@ -8783,6 +8841,10 @@ def convert_range(
     ]
     _write_semantic_audit_report(reports_out_dir, semantic_audit_rows)
     _write_pixel_delta2_ranking(folder_path, svg_out_dir, reports_out_dir)
+    _write_ac08_weak_family_status_report(
+        reports_out_dir,
+        selected_variants=sorted(normalized_selected_variants),
+    )
     _write_ac08_regression_manifest(
         reports_out_dir,
         folder_path=folder_path,
@@ -9237,7 +9299,7 @@ def _write_ac08_regression_manifest(
         f"iterations={int(iterations)}",
         f"folder_path={folder_path}",
         f"csv_path={csv_path}",
-        "expected_reports=Iteration_Log.csv,quality_tercile_passes.csv,pixel_delta2_ranking.csv,pixel_delta2_summary.txt,ac08_success_metrics.csv,ac08_success_criteria.txt",
+        "expected_reports=Iteration_Log.csv,quality_tercile_passes.csv,pixel_delta2_ranking.csv,pixel_delta2_summary.txt,ac08_weak_family_status.csv,ac08_weak_family_status.txt,ac08_success_metrics.csv,ac08_success_criteria.txt",
         "expected_logs=variant_harmonization.log,shape_catalog.csv",
         (
             "recommended_command=python -m src.image_composite_converter "
@@ -9377,6 +9439,128 @@ def _write_ac08_success_criteria_report(
         summary_lines.append("missing_variants=" + ",".join(missing_variants))
 
     with open(os.path.join(reports_out_dir, "ac08_success_criteria.txt"), "w", encoding="utf-8") as f:
+        f.write("\n".join(summary_lines) + "\n")
+
+
+def _write_ac08_weak_family_status_report(
+    reports_out_dir: str,
+    *,
+    selected_variants: list[str],
+    ranking_threshold: float = 18.0,
+) -> None:
+    """Summarize currently weak AC08 families and the mitigation status implemented in code."""
+    normalized_variants = sorted({str(variant).strip().upper() for variant in selected_variants if str(variant).strip()})
+    if not normalized_variants or any(not variant.startswith("AC08") for variant in normalized_variants):
+        return
+
+    ranking_rows: list[dict[str, str]] = []
+    ranking_path = os.path.join(reports_out_dir, "pixel_delta2_ranking.csv")
+    if os.path.exists(ranking_path):
+        with open(ranking_path, "r", encoding="utf-8", newline="") as f:
+            ranking_rows = list(csv.DictReader(f, delimiter=";"))
+
+    ranking_by_variant: dict[str, dict[str, str]] = {}
+    for row in ranking_rows:
+        image_name = str(row.get("image", "")).strip()
+        if not image_name:
+            continue
+        variant = os.path.splitext(image_name)[0].upper()
+        ranking_by_variant[variant] = row
+
+    focus_by_variant = {case["variant"].upper(): case["focus"] for case in AC08_REGRESSION_CASES}
+    weak_rows: list[dict[str, str]] = []
+    for variant in normalized_variants:
+        base = variant.split("_", 1)[0]
+        ranking_row = ranking_by_variant.get(variant, {})
+        mean_delta2_raw = str(ranking_row.get("mean_delta2", "")).strip()
+        try:
+            mean_delta2 = float(mean_delta2_raw) if mean_delta2_raw else float("nan")
+        except ValueError:
+            mean_delta2 = float("nan")
+        is_weak = (not math.isfinite(mean_delta2)) or mean_delta2 > ranking_threshold
+        if not is_weak:
+            continue
+
+        mitigation = AC08_MITIGATION_STATUS.get(base, {})
+        log_path = os.path.join(reports_out_dir, f"{variant}_element_validation.log")
+        log_text = ""
+        if os.path.exists(log_path):
+            with open(log_path, "r", encoding="utf-8") as f:
+                log_text = f.read()
+
+        active_markers: list[str] = []
+        if "adaptive_unlock_applied" in log_text:
+            active_markers.append("adaptive_unlock_applied")
+        if "small_variant_mode_active" in log_text:
+            active_markers.append("small_variant_mode_active")
+        if "semantic_audit_status=" in log_text:
+            active_markers.append("semantic_audit_logged")
+        if "stopped_due_to_stagnation" in log_text:
+            active_markers.append("stagnation_guard_triggered")
+
+        weak_rows.append({
+            "variant": variant,
+            "base_family": base,
+            "focus": focus_by_variant.get(variant, "review"),
+            "mean_delta2": "nan" if not math.isfinite(mean_delta2) else f"{mean_delta2:.6f}",
+            "risk": str(mitigation.get("risk", "unknown")),
+            "family_group": str(mitigation.get("family", "unknown")),
+            "implemented_mitigations": str(mitigation.get("implemented", "manual_review")),
+            "active_log_markers": ",".join(active_markers) if active_markers else "none_observed",
+            "status": str(mitigation.get("status", "No family-specific mitigation documented yet; inspect logs and ranking manually.")),
+        })
+
+    weak_rows.sort(
+        key=lambda row: (
+            -float("inf") if row["mean_delta2"] == "nan" else float(row["mean_delta2"]),
+            row["variant"],
+        ),
+        reverse=True,
+    )
+
+    csv_path = os.path.join(reports_out_dir, "ac08_weak_family_status.csv")
+    with open(csv_path, "w", encoding="utf-8", newline="") as f:
+        writer = csv.writer(f, delimiter=";")
+        writer.writerow([
+            "variant",
+            "base_family",
+            "focus",
+            "mean_delta2",
+            "risk",
+            "family_group",
+            "implemented_mitigations",
+            "active_log_markers",
+            "status",
+        ])
+        for row in weak_rows:
+            writer.writerow([
+                row["variant"],
+                row["base_family"],
+                row["focus"],
+                row["mean_delta2"],
+                row["risk"],
+                row["family_group"],
+                row["implemented_mitigations"],
+                row["active_log_markers"],
+                row["status"],
+            ])
+
+    summary_lines = [
+        f"ranking_threshold_mean_delta2={ranking_threshold:.3f}",
+        f"weak_variants={len(weak_rows)}",
+        "goal=Verbleibende AC08-Schwachfamilien und ihren aktuellen Mitigation-Status dokumentieren",
+    ]
+    if weak_rows:
+        summary_lines.append("variants=" + ",".join(row["variant"] for row in weak_rows))
+        for row in weak_rows:
+            summary_lines.append(
+                f"{row['variant']}: mean_delta2={row['mean_delta2']}; risk={row['risk']}; markers={row['active_log_markers']}; status={row['status']}"
+            )
+    else:
+        summary_lines.append("variants=none")
+        summary_lines.append("All selected AC08 variants are currently at or below the weak-family threshold.")
+
+    with open(os.path.join(reports_out_dir, "ac08_weak_family_status.txt"), "w", encoding="utf-8") as f:
         f.write("\n".join(summary_lines) + "\n")
 
 

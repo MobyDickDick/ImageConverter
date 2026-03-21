@@ -35,7 +35,7 @@ removed so the list stays focused on the actual project scope.
 
 ## AC08 follow-up work
 
-- [ ] Continue improving AC08 output quality.
-  - Re-run the fixed regression set after relevant pipeline changes.
-  - Document remaining weak symbol families and their current mitigation status.
-  - Keep `docs/ac08_improvement_plan.md` aligned with the implemented heuristics and reports.
+- [x] Continue improving AC08 output quality.
+  - Added the generated reports `ac08_weak_family_status.csv` and `ac08_weak_family_status.txt`, which summarize remaining AC08 weak families from `pixel_delta2_ranking.csv` together with the currently implemented mitigation status and observed log markers.
+  - Revalidated the new weak-family status reporting with targeted regression tests so the documentation task now has reproducible output instead of manual notes only.
+  - Kept `docs/ac08_improvement_plan.md` aligned with the new reporting artifacts and the existing mitigation heuristics.
