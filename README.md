@@ -270,48 +270,27 @@ For VS Code debug adapter logging:
 
 ## Status and closed tasks
 
-To keep the README focused, the previously long “Open tasks” checklists have been **collapsed into a short “closed/archived tasks” summary**. For ongoing work, see the [Roadmap](#roadmap) and the planning docs under [docs/](docs/).
+To keep the README focused on the ImageConverter, the task summary below now only lists items that belong to the current repository scope. For ongoing work, see the [Roadmap](#roadmap) and the planning docs under [docs/](docs/).
 
-### Closed / archived tasks (from prior README checklists)
+### Closed tasks
 
-- [x] Document language-server workflows and demo commands (LSP reference + how-to-test snippets).
-- [x] Expand Python interop demos (step-by-step `.tiny` programs with expected outputs).
-- [x] Evaluate and document the native compiler prototype (smoke tests + limitations).
-- [x] Add missing demo commands to [docs/demo_run_commands.md](docs/demo_run_commands.md) (proxy pipeline, Rosetta copy/transpile, try/catch).
-- [x] Extend the LLVM emitter baseline (POP support + regression test locking behavior).
-- [x] Add LLVM emitter follow-ups (control-flow lowering, frames/calls, string/heap sketch, diagnostics).
-- [x] Python↔Tiny bridge layer (allowlists/timeouts + bidirectional demos + tests).
-- [x] Rosetta sync improvements (local path support, filters/delays, dry-run, optional transpile trigger).
-- [x] CLI env regression for `TINYLANG_COPY_ON_CALL`.
+- [x] Improve error positions and messages for malformed description inputs.
+- [x] Improve CLI wrapper ergonomics and documentation.
+- [x] Define and document AC08 regression workflows plus machine-readable success criteria.
 
 ---
 
 ## Roadmap
 
-This section remains the *future-looking* plan. Roughly grouped into frontend/language, type discipline, runtime, tooling, and native backends.
-For a detailed checklist of open items, see [docs/open_tasks.md](docs/open_tasks.md). The checklist file now exists in the repository and is the canonical place to mark roadmap work as done.
+This section is the future-looking plan for the ImageConverter. For the detailed checklist of open items, see [docs/open_tasks.md](docs/open_tasks.md), which is the canonical place to mark roadmap work as done.
 
-> Note: this repository snapshot is centered on the ImageConverter tooling. If a carried-over roadmap item references TinyLanguage-specific files that are not present in this checkout, `docs/open_tasks.md` now treats that item as archived/not actionable here and records the reason explicitly.
+### Image conversion pipeline
+- Keep error diagnostics for CSV/XML description inputs precise and user-facing.
+- Continue improving AC08 output quality with regression-backed changes.
 
-### Frontend / language
-- Improve error positions and messages (carry line/column through tokens + AST nodes; unify error type with optional `SourceSpan`).
-- Refine the linter (“must-use” across control flow, unreachable-code warnings).
-
-### Type discipline
-- No implicit type changes (uniform rules across expressions/functions/heap ops).
-- (Optional) simple type inference.
-
-### Runtime
-- Harden the heap API (invalid pointer diagnostics, out-of-bounds details, double-delete detection, simple leak tracking).
-- Expand the test suite (nested arrays, many `new/delete` pairs, deep recursion, heap failure scenarios).
-
-### Tooling
-- CLI wrapper ergonomics and documentation.
-- Formatter + lints + stable language-server workflows.
-
-### Native backends
-- Keep the C backend stable and documented (see [docs/c_backend.md](docs/c_backend.md)).
-- Continue LLVM emission experiments as a separate track.
+### Tooling and documentation
+- Keep the CLI documentation current.
+- Stabilize formatter/lint/documentation workflows used for image-converter changes.
 
 ---
 
