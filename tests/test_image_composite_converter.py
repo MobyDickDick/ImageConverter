@@ -834,6 +834,7 @@ def test_write_semantic_audit_report_persists_csv_and_json(tmp_path: Path) -> No
                 "SEMANTIC: senkrechter Strich hinter dem Kreis",
             ],
             status="semantic_ok",
+            semantic_priority_order=["family_rule", "layout_override", "description_heuristic"],
         ),
         image_composite_converter._semantic_audit_record(
             base_name="AC0814",
@@ -845,6 +846,8 @@ def test_write_semantic_audit_report_persists_csv_and_json(tmp_path: Path) -> No
             ],
             status="semantic_mismatch",
             mismatch_reasons=["Text unexpectedly required"],
+            semantic_priority_order=["family_rule", "layout_override", "description_heuristic"],
+            semantic_conflicts=["family_rule_kept_circle_without_letter_over_description_text=SEMANTIC: Kreis + Buchstabe CO_2"],
         ),
     ]
 
@@ -854,10 +857,13 @@ def test_write_semantic_audit_report_persists_csv_and_json(tmp_path: Path) -> No
     assert "AC0811_L.jpg" in csv_text
     assert "semantic_ok" in csv_text
     assert "Text unexpectedly required" in csv_text
+    assert "family_rule > layout_override > description_heuristic" in csv_text
+    assert "family_rule_kept_circle_without_letter_over_description_text=SEMANTIC: Kreis + Buchstabe CO_2" in csv_text
 
     payload = (reports_dir / "semantic_audit_ac0811_ac0814.json").read_text(encoding="utf-8")
     assert '"filename": "AC0814_S.jpg"' in payload
     assert '"status": "semantic_mismatch"' in payload
+    assert '"semantic_conflicts": [' in payload
 
 
 def test_run_iteration_pipeline_breaks_early_on_flat_composite_error(
@@ -3028,6 +3034,21 @@ def test_parse_description_marks_ac0811_as_semantic_badge() -> None:
     assert params["mode"] == "semantic_badge"
     assert "SEMANTIC: Kreis ohne Buchstabe" in params["elements"]
     assert "SEMANTIC: senkrechter Strich hinter dem Kreis" in params["elements"]
+
+
+def test_parse_description_keeps_ac0814_family_rule_over_text_heuristic() -> None:
+    """AC0811-AC0814 family rules must outrank soft description hints about badge text."""
+    raw = {
+        "AC0814": "Kreis ohne Buchstabe",
+        "AC0814_L": "Kreis mit Buchstabe CO2 und waagrechter Strich rechts",
+    }
+
+    _desc, params = image_composite_converter.Reflection(raw).parse_description("AC0814", "AC0814_L.jpg")
+
+    assert "SEMANTIC: Kreis ohne Buchstabe" in params["elements"]
+    assert not any("Kreis + Buchstabe" in element for element in params["elements"])
+    assert params["semantic_priority_order"] == ["family_rule", "layout_override", "description_heuristic"]
+    assert "family_rule_kept_circle_without_letter_over_description_text=SEMANTIC: Kreis + Buchstabe CO_2" in params["semantic_conflicts"]
 
 
 def test_validate_semantic_alignment_accepts_merged_co2_blob_for_ac0831_artifact() -> None:

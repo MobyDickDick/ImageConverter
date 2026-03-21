@@ -982,6 +982,13 @@ class Reflection:
             "label": "M",
             "documented_alias_refs": sorted(Reflection._extract_documented_alias_refs(desc)),
             "description_fragments": description_fragments,
+            "semantic_priority_order": [
+                "family_rule",
+                "layout_override",
+                "description_heuristic",
+            ],
+            "semantic_conflicts": [],
+            "semantic_sources": {},
         }
 
         semantic_symbol = symbol_upper.startswith("AC08") or symbol_upper == "AR0100"
@@ -1011,37 +1018,64 @@ class Reflection:
             "AC0882",
         }:
             params["mode"] = "semantic_badge"
+            family_elements: list[str] = []
+            heuristic_elements: list[str] = []
             if base_name.upper() in {"AC0810", "AC0811", "AC0812", "AC0813", "AC0814"}:
-                params["elements"].append("SEMANTIC: Kreis ohne Buchstabe")
+                family_elements.append("SEMANTIC: Kreis ohne Buchstabe")
                 params["label"] = ""
             elif symbol_upper in forced_co2_symbols or Reflection._contains_co_marker(desc):
-                params["elements"].append("SEMANTIC: Kreis + Buchstabe CO_2")
+                heuristic_elements.append("SEMANTIC: Kreis + Buchstabe CO_2")
                 params["label"] = "CO_2"
             elif "voc" in desc:
-                params["elements"].append("SEMANTIC: Kreis + Buchstabe VOC")
+                heuristic_elements.append("SEMANTIC: Kreis + Buchstabe VOC")
                 params["label"] = "VOC"
             elif "buchstabe" in desc:
-                params["elements"].append("SEMANTIC: Kreis + Buchstabe")
+                heuristic_elements.append("SEMANTIC: Kreis + Buchstabe")
                 params["label"] = "M" if symbol_upper == "AR0100" else "T"
             else:
-                params["elements"].append("SEMANTIC: Kreis + Buchstabe")
+                heuristic_elements.append("SEMANTIC: Kreis + Buchstabe")
                 params["label"] = "M" if base_name.upper() == "AR0100" else "T"
             if base_name.upper() in {"AC0810", "AC0814", "AC0833", "AC0834", "AC0838", "AC0839"}:
-                params["elements"].append("SEMANTIC: waagrechter Strich rechts vom Kreis")
+                family_elements.append("SEMANTIC: waagrechter Strich rechts vom Kreis")
             if base_name.upper() in {"AC0811", "AC0881", "AC0831", "AC0836"}:
-                params["elements"].append("SEMANTIC: senkrechter Strich hinter dem Kreis")
+                family_elements.append("SEMANTIC: senkrechter Strich hinter dem Kreis")
             if base_name.upper() in {"AC0812", "AC0832", "AC0837", "AC0882"}:
-                params["elements"].append("SEMANTIC: waagrechter Strich links vom Kreis")
+                family_elements.append("SEMANTIC: waagrechter Strich links vom Kreis")
             if "waagrechter strich rechts" in desc:
-                params["elements"].append("SEMANTIC: waagrechter Strich rechts vom Kreis")
+                heuristic_elements.append("SEMANTIC: waagrechter Strich rechts vom Kreis")
             if "senkrechter strich oben" in desc:
-                params["elements"].append("SEMANTIC: senkrechter Strich oben vom Kreis")
+                heuristic_elements.append("SEMANTIC: senkrechter Strich oben vom Kreis")
             if "senkrechter strich hinter" in desc:
-                params["elements"].append("SEMANTIC: senkrechter Strich hinter dem Kreis")
+                heuristic_elements.append("SEMANTIC: senkrechter Strich hinter dem Kreis")
+
+            params["semantic_sources"] = {
+                "family_rule": list(dict.fromkeys(family_elements)),
+                "description_heuristic": list(dict.fromkeys(heuristic_elements)),
+            }
+            if symbol_upper in {"AC0811", "AC0812", "AC0813", "AC0814"} and (
+                Reflection._contains_co_marker(desc) or "voc" in desc or "buchstabe" in desc
+            ):
+                params["semantic_conflicts"].append(
+                    "family_rule_kept_circle_without_letter_over_description_text=SEMANTIC: Kreis + Buchstabe CO_2"
+                    if Reflection._contains_co_marker(desc)
+                    else "family_rule_kept_circle_without_letter_over_description_text=SEMANTIC: Kreis + Buchstabe"
+                )
+            params["elements"].extend(params["semantic_sources"]["family_rule"])
+            accepted_heuristics, ignored_heuristics = Reflection._resolve_semantic_heuristics(
+                canonical_base=symbol_upper,
+                family_elements=params["semantic_sources"]["family_rule"],
+                heuristic_elements=params["semantic_sources"]["description_heuristic"],
+            )
+            params["semantic_conflicts"].extend(ignored_heuristics)
+            params["semantic_sources"]["description_heuristic"] = accepted_heuristics
+            for element in accepted_heuristics:
+                if element not in params["elements"]:
+                    params["elements"].append(element)
 
             layout_overrides = Reflection._parse_semantic_badge_layout_overrides(desc)
             if layout_overrides:
                 params["badge_overrides"] = layout_overrides
+                params["semantic_sources"]["layout_override"] = sorted(layout_overrides)
                 params["elements"].append("SEMANTIC: Layout-Override für Badge-Text")
 
             return desc, params
@@ -1106,6 +1140,61 @@ class Reflection:
             overrides["co2_dx"] = 0.0
 
         return overrides
+
+    @staticmethod
+    def _resolve_semantic_heuristics(
+        *,
+        canonical_base: str,
+        family_elements: list[str],
+        heuristic_elements: list[str],
+    ) -> tuple[list[str], list[str]]:
+        """Filter heuristic semantic claims against stronger family rules and log conflicts."""
+        accepted: list[str] = []
+        conflicts: list[str] = []
+        normalized_family = {str(element).lower() for element in family_elements}
+        family_has_textless_circle = "semantic: kreis ohne buchstabe" in normalized_family
+        family_has_right_arm = "semantic: waagrechter strich rechts vom kreis" in normalized_family
+        family_has_left_arm = "semantic: waagrechter strich links vom kreis" in normalized_family
+        family_has_rear_stem = "semantic: senkrechter strich hinter dem kreis" in normalized_family
+
+        for element in heuristic_elements:
+            normalized = str(element).lower()
+            conflict_reason = ""
+            if canonical_base in {"AC0811", "AC0812", "AC0813", "AC0814"} and family_has_textless_circle:
+                if "kreis + buchstabe" in normalized:
+                    conflict_reason = (
+                        "family_rule_kept_circle_without_letter_over_description_text="
+                        + str(element)
+                    )
+            if not conflict_reason and family_has_right_arm and "semantic: waagrechter strich links vom kreis" == normalized:
+                conflict_reason = "family_rule_kept_right_arm_over_description_left_arm"
+            if not conflict_reason and family_has_left_arm and "semantic: waagrechter strich rechts vom kreis" == normalized:
+                conflict_reason = "family_rule_kept_left_arm_over_description_right_arm"
+            if not conflict_reason and family_has_rear_stem and "semantic: senkrechter strich oben vom kreis" == normalized:
+                conflict_reason = "family_rule_kept_rear_stem_over_description_top_stem"
+
+            if conflict_reason:
+                conflicts.append(conflict_reason)
+                continue
+            accepted.append(element)
+
+        if canonical_base in {"AC0811", "AC0812", "AC0813", "AC0814"} and family_has_textless_circle:
+            if not any("family_rule_kept_circle_without_letter_over_description_text=" in item for item in conflicts):
+                raw_text_conflict = next(
+                    (
+                        str(element)
+                        for element in heuristic_elements
+                        if "kreis + buchstabe" in str(element).lower()
+                    ),
+                    "",
+                )
+                if raw_text_conflict:
+                    conflicts.append(
+                        "family_rule_kept_circle_without_letter_over_description_text="
+                        + raw_text_conflict
+                    )
+
+        return accepted, conflicts
 
 
 class Action:
@@ -6096,6 +6185,9 @@ def run_iteration_pipeline(
             description_fragments=list(params.get("description_fragments", [])),
             semantic_elements=list(params.get("elements", [])),
             status="semantic_pending",
+            semantic_priority_order=list(params.get("semantic_priority_order", [])),
+            semantic_conflicts=list(params.get("semantic_conflicts", [])),
+            semantic_sources=dict(params.get("semantic_sources", {})),
         )
 
     if not desc.strip() and params["mode"] != "semantic_badge":
@@ -6190,6 +6282,9 @@ def run_iteration_pipeline(
                     semantic_elements=list(params.get("elements", [])),
                     status="semantic_mismatch",
                     mismatch_reasons=semantic_issues,
+                    semantic_priority_order=list(params.get("semantic_priority_order", [])),
+                    semantic_conflicts=list(params.get("semantic_conflicts", [])),
+                    semantic_sources=dict(params.get("semantic_sources", {})),
                 )
             _write_validation_log(
                 [
@@ -6207,6 +6302,12 @@ def run_iteration_pipeline(
                             ),
                             "semantic_audit_derived_elements=" + " | ".join(
                                 str(value) for value in semantic_audit_row.get("derived_elements", [])
+                            ),
+                            "semantic_audit_priority_order=" + " > ".join(
+                                str(value) for value in semantic_audit_row.get("semantic_priority_order", [])
+                            ),
+                            "semantic_audit_conflicts=" + " | ".join(
+                                str(value) for value in semantic_audit_row.get("semantic_conflicts", [])
                             ),
                             f"semantic_audit_mismatch_reason={semantic_audit_row.get('mismatch_reason', '')}",
                         ]
@@ -6251,6 +6352,9 @@ def run_iteration_pipeline(
                 description_fragments=list(params.get("description_fragments", [])),
                 semantic_elements=list(params.get("elements", [])),
                 status="semantic_ok",
+                semantic_priority_order=list(params.get("semantic_priority_order", [])),
+                semantic_conflicts=list(params.get("semantic_conflicts", [])),
+                semantic_sources=dict(params.get("semantic_sources", {})),
             )
         _write_validation_log(
             [
@@ -6266,6 +6370,12 @@ def run_iteration_pipeline(
                         ),
                         "semantic_audit_derived_elements=" + " | ".join(
                             str(value) for value in semantic_audit_row.get("derived_elements", [])
+                        ),
+                        "semantic_audit_priority_order=" + " > ".join(
+                            str(value) for value in semantic_audit_row.get("semantic_priority_order", [])
+                        ),
+                        "semantic_audit_conflicts=" + " | ".join(
+                            str(value) for value in semantic_audit_row.get("semantic_conflicts", [])
                         ),
                     ]
                     if semantic_audit_row is not None
@@ -6580,6 +6690,9 @@ def _semantic_audit_record(
     semantic_elements: list[str],
     status: str,
     mismatch_reasons: list[str] | None = None,
+    semantic_priority_order: list[str] | None = None,
+    semantic_conflicts: list[str] | None = None,
+    semantic_sources: dict[str, object] | None = None,
 ) -> dict[str, object]:
     """Build a normalized semantic-audit record for AC0811..AC0814 style families."""
     mismatch_reasons = [str(reason) for reason in (mismatch_reasons or []) if str(reason).strip()]
@@ -6592,6 +6705,9 @@ def _semantic_audit_record(
         "description_lookup_keys": [fragment["key"] for fragment in description_fragments],
         "description_text": joined_description,
         "derived_elements": [str(element) for element in semantic_elements],
+        "semantic_priority_order": [str(item) for item in (semantic_priority_order or [])],
+        "semantic_conflicts": [str(item) for item in (semantic_conflicts or [])],
+        "semantic_sources": dict(semantic_sources or {}),
         "status": str(status),
         "mismatch_reason": " | ".join(mismatch_reasons),
         "mismatch_reasons": mismatch_reasons,
@@ -6614,6 +6730,8 @@ def _write_semantic_audit_report(reports_out_dir: str, audit_rows: list[dict[str
                 "recognized_description_elements",
                 "description_text",
                 "derived_elements",
+                "semantic_priority_order",
+                "semantic_conflicts",
                 "status",
                 "mismatch_reason",
             ]
@@ -6627,6 +6745,8 @@ def _write_semantic_audit_report(reports_out_dir: str, audit_rows: list[dict[str
                     " | ".join(str(value) for value in row.get("recognized_description_elements", [])),
                     row.get("description_text", ""),
                     " | ".join(str(value) for value in row.get("derived_elements", [])),
+                    " > ".join(str(value) for value in row.get("semantic_priority_order", [])),
+                    " | ".join(str(value) for value in row.get("semantic_conflicts", [])),
                     row.get("status", ""),
                     row.get("mismatch_reason", ""),
                 ]
