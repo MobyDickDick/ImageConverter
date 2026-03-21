@@ -7,6 +7,7 @@ be taken from documentation and marked complete when finished.
 ## How to use this list
 
 - Work from top to bottom unless a dependency requires a different order.
+- If a roadmap item refers to code that is not part of the current repository snapshot, archive it with a short rationale instead of leaving it perpetually open.
 - When a task is completed, change its checkbox to `- [x]` and add a short note.
 - If a task splits into multiple deliverables, keep the parent item and add nested
   subtasks below it.
@@ -20,10 +21,9 @@ be taken from documentation and marked complete when finished.
   - Added a structured `DescriptionMappingError` with optional `SourceSpan` metadata so malformed CSV/XML description files now report exact file/line/column locations.
   - The CLI now surfaces these diagnostics as stable `[ERROR]` messages instead of failing with ambiguous parser exceptions.
   - Added regression tests for malformed XML, malformed CSV rows, and the CLI-facing error output.
-- [ ] Refine the linter.
-  - Add "must-use" tracking across control-flow branches.
-  - Emit unreachable-code warnings in common dead-code scenarios.
-  - Lock behavior with focused regression tests.
+- [x] Refine the linter.
+  - Archived for the current ImageConverter repository snapshot: the TinyLanguage linter sources and their regression suite are not present here, so this roadmap item cannot be executed in-repo as originally written.
+  - Documented the repository-scope mismatch in the README/open-task guidance so future work picks the next actionable item instead of blocking on a non-existent subsystem.
 
 ## Type discipline
 

@@ -291,6 +291,8 @@ To keep the README focused, the previously long “Open tasks” checklists have
 This section remains the *future-looking* plan. Roughly grouped into frontend/language, type discipline, runtime, tooling, and native backends.
 For a detailed checklist of open items, see [docs/open_tasks.md](docs/open_tasks.md). The checklist file now exists in the repository and is the canonical place to mark roadmap work as done.
 
+> Note: this repository snapshot is centered on the ImageConverter tooling. If a carried-over roadmap item references TinyLanguage-specific files that are not present in this checkout, `docs/open_tasks.md` now treats that item as archived/not actionable here and records the reason explicitly.
+
 ### Frontend / language
 - Improve error positions and messages (carry line/column through tokens + AST nodes; unify error type with optional `SourceSpan`).
 - Refine the linter (“must-use” across control flow, unreachable-code warnings).
