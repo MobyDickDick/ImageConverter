@@ -425,6 +425,51 @@ def test_finalize_ac08_small_variant_enables_compact_text_and_connector_guards()
     assert float(params["co2_font_scale_max"]) <= 1.10
 
 
+
+
+def test_finalize_left_connector_family_applies_shared_guardrails() -> None:
+    """Left-connector AC08 families should share connector/circle guardrails."""
+    params = Action._apply_co2_label(Action._default_ac0812_params(20, 12))
+    params["template_circle_radius"] = float(params["r"])
+    params["template_circle_cx"] = float(params["cx"])
+    params["template_circle_cy"] = float(params["cy"])
+    params["cx"] = float(params["cx"]) - 1.5
+    params["cy"] = float(params["cy"]) + 1.0
+    params["r"] = float(params["r"]) * 0.85
+
+    tuned = Action._finalize_ac08_style("AC0832_S", params)
+
+    assert tuned["connector_family_group"] == "ac08_left_connector"
+    assert tuned["connector_family_direction"] == "left"
+    assert tuned["lock_circle_cx"] is True
+    assert tuned["lock_circle_cy"] is True
+    assert float(tuned["cx"]) == float(params["template_circle_cx"])
+    assert float(tuned["cy"]) == float(params["template_circle_cy"])
+    assert float(tuned["arm_len_min_ratio"]) >= 0.86
+    assert float(tuned["min_circle_radius"]) >= float(params["template_circle_radius"]) * 0.94
+    assert float(tuned["max_circle_radius"]) <= float(tuned["cx"]) - float(tuned["arm_len_min"]) + 1e-6
+    assert tuned["lock_text_scale"] is False
+    assert float(tuned["co2_font_scale_min"]) >= 0.78
+
+
+def test_finalize_left_connector_path_text_recenters_and_preserves_visible_arm() -> None:
+    """Plain-text left-arm badges should keep the T glyph centered and the arm visible."""
+    params = Action._default_ac0882_params(45, 25)
+    params["template_circle_radius"] = float(params["r"])
+    params["template_circle_cx"] = float(params["cx"])
+    params["template_circle_cy"] = float(params["cy"])
+    params["arm_enabled"] = False
+
+    tuned = Action._finalize_ac08_style("AC0882_L", params)
+
+    assert tuned["connector_family_group"] == "ac08_left_connector"
+    assert tuned["arm_enabled"] is True
+    assert float(tuned["arm_x1"]) == 0.0
+    assert abs(float(tuned["arm_y1"]) - float(tuned["cy"])) < 1e-6
+    assert abs(float(tuned["arm_y2"]) - float(tuned["cy"])) < 1e-6
+    assert float(tuned["arm_len_min_ratio"]) >= 0.84
+    assert float(tuned["s"]) >= 0.0088
+
 def test_validate_badge_logs_small_variant_mode(monkeypatch: pytest.MonkeyPatch) -> None:
     """Validation logs should explicitly state when the `_S` small-variant mode is active."""
     if image_composite_converter.np is None:

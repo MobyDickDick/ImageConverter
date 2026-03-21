@@ -227,15 +227,25 @@ Speziallogik in `src/image_composite_converter.py`.
 
 ## Phase 4 – Familienweise Feinarbeit
 
-### Aufgabe 4.1 – Linke Connector-Familien gemeinsam tunen
+### Aufgabe 4.1 – Linke Connector-Familien gemeinsam tunen ✅ erledigt
 **Familien:** `AC0812`, `AC0832`, `AC0837`, `AC0882`
 
 **Ziel:** Linksausrichtung, Arm-Länge und Kreisverankerung gemeinsam stabilisieren.
+
+**Umgesetzt in Code/Workflow:**
+- `Action._tune_ac08_left_connector_family` bündelt jetzt die gemeinsamen Guardrails für alle linken Connector-Familien und versieht sie mit der Familienmarkierung `connector_family_group=ac08_left_connector`.
+- Die gemeinsame Familienlogik hält den Kreis auf dem semantischen Template-Zentrum (`lock_circle_cx/cy`), erzwingt einen robusten Mindestanteil für die linke Arm-Länge und begrenzt `max_circle_radius` zusätzlich über die verfügbare Connector-Spanne, damit der Kreis nicht in den Arm hineinwächst.
+- Für Text-Varianten werden lesbare, zentrierte Textgrenzen mitgeführt: CO₂/VOC-Badges erhalten bounded Mindest-/Maximalskalen, und die `path_t`-Variante (`AC0882`) zentriert den Glyph-Bounding-Box-Anker nach dem Familien-Tuning erneut.
+- Die bestehende Arm-Wiederherstellung über `Action._enforce_left_arm_badge_geometry` bleibt Bestandteil der Familienlogik, sodass fehlende oder temporär verlorene Connector-Geometrie vor der Finalisierung zuverlässig rekonstruiert wird.
 
 **Prüfpunkte:**
 - Arm bleibt sichtbar und ausreichend lang.
 - Kreis kollabiert nicht in Richtung Connector.
 - Text bleibt lesbar und zentriert.
+
+**Empfohlene/ergänzte Tests:**
+- Unit-Tests für `AC0832_S` prüfen die gemeinsamen Familien-Guardrails (Kreis-Locks, Connector-Längenfloor, Text-Skalierungsgrenzen und Radius-Obergrenze).
+- Unit-Tests für `AC0882_L` prüfen, dass `path_t` zentriert bleibt und die linke Arm-Geometrie auch aus einem unvollständigen Paramatersatz wiederhergestellt wird.
 
 ---
 
