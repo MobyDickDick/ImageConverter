@@ -1,7 +1,7 @@
 """Image-to-composite-SVG conversion pipeline.
 
-Ported from the user-provided prototype and exposed as a Python helper module so
-it can be executed directly or via TinyLanguage (`src_tiny/image_composite_converter.tiny`).
+Ported from the user-provided prototype and exposed as a Python helper module
+for direct CLI and module-based execution.
 """
 
 from __future__ import annotations
