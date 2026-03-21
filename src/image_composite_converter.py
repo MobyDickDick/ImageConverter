@@ -9385,9 +9385,34 @@ def _write_pixel_delta2_ranking(folder_path: str, svg_out_dir: str, reports_out_
 
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--mode", choices=("annotate", "convert"), default="convert", help="annotate=markiere Kreis/Kellenstiel/Schrift und schreibe Koordinaten; convert=alte SVG-Konvertierung")
-    parser.add_argument("folder_path", help="Pfad zum Ordner mit den Bildern")
+    parser = argparse.ArgumentParser(
+        description=(
+            "Verarbeite einen Bildordner entweder im Analysemodus (Bounding-Boxes/JSON) "
+            "oder im Konvertierungsmodus (SVG-/Diff-/Report-Ausgaben)."
+        ),
+        epilog=(
+            "Beispiele:\n"
+            "  python -m src.image_composite_converter artifacts/images_to_convert "
+            "--descriptions-path artifacts/images_to_convert/Finale_Wurzelformen_V3.xml "
+            "--output-dir artifacts/converted_images --start AC0000 --end ZZ9999\n"
+            "  python -m src.image_composite_converter artifacts/images_to_convert "
+            "--mode annotate --output-dir artifacts/annotated --start AC0811 --end AC0814\n"
+            "  python -m src.image_composite_converter --print-linux-vendor-command --vendor-dir vendor"
+        ),
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
+    parser.add_argument(
+        "--mode",
+        choices=("annotate", "convert"),
+        default="convert",
+        help="annotate=markiere Kreis/Kellenstiel/Schrift und schreibe Koordinaten; convert=SVG-Konvertierung mit Reports",
+    )
+    parser.add_argument(
+        "folder_path",
+        nargs="?",
+        default="artifacts/images_to_convert",
+        help="Pfad zum Ordner mit den Bildern (Default: artifacts/images_to_convert)",
+    )
     parser.add_argument(
         "csv_or_output",
         nargs="?",
@@ -9404,8 +9429,21 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         default=128,
         help="Anzahl der Iterationen (optional, default: 128)",
     )
-    parser.add_argument("--csv-path", default=None, help="Expliziter Pfad zur CSV/TSV/XML-Export-Tabelle")
+    parser.add_argument(
+        "--csv-path",
+        "--descriptions-path",
+        dest="csv_path",
+        default=None,
+        help="Expliziter Pfad zur CSV/TSV/XML-Export-Tabelle mit den Beschreibungen",
+    )
     parser.add_argument("--output-dir", default=None, help="Explizites Ausgabeverzeichnis")
+    parser.add_argument(
+        "--iterations",
+        dest="iterations_override",
+        type=int,
+        default=None,
+        help="Benannter Alias für die Iterationszahl; überschreibt den optionalen Positionswert",
+    )
     parser.add_argument("--start", default=None, help="Start-Referenz (inkl.); wenn nicht gesetzt, erfolgt eine Konsolenabfrage")
     parser.add_argument("--end", default=None, help="End-Referenz (inkl.); wenn nicht gesetzt, erfolgt eine Konsolenabfrage")
     parser.add_argument(
@@ -9470,7 +9508,11 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         default=None,
         help="pip --python-version Wert ohne Punkt, z. B. 311 oder 312",
     )
-    return parser.parse_args(argv)
+    args = parser.parse_args(argv)
+    if args.iterations_override is not None:
+        args.iterations = args.iterations_override
+    delattr(args, "iterations_override")
+    return args
 
 
 class _TeeTextIO(io.TextIOBase):

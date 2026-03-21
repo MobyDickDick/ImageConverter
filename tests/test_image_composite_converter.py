@@ -3757,6 +3757,12 @@ def test_parse_args_accepts_ac08_regression_set_flag() -> None:
     assert args.ac08_regression_set is True
 
 
+def test_parse_args_uses_default_folder_path_when_only_helper_flags_are_used() -> None:
+    args = conv.parse_args(["--print-linux-vendor-command"])
+
+    assert args.folder_path == "artifacts/images_to_convert"
+
+
 def test_parse_args_uses_console_prompt_defaults_for_missing_range() -> None:
     args = conv.parse_args(["in_folder"])
 
@@ -3860,6 +3866,34 @@ def test_resolve_cli_csv_and_output_keeps_explicit_csv_over_autodetect(tmp_path:
 
     assert csv_path == str(explicit)
     assert output_dir == "out_dir"
+
+
+def test_parse_args_accepts_descriptions_path_alias_and_named_iterations() -> None:
+    args = conv.parse_args(
+        [
+            "in_folder",
+            "out_dir",
+            "--descriptions-path",
+            "mapping.xml",
+            "--iterations",
+            "12",
+        ]
+    )
+
+    assert args.csv_path == "mapping.xml"
+    assert args.iterations == 12
+
+
+def test_parse_args_help_mentions_canonical_image_converter_flags(capsys: pytest.CaptureFixture[str]) -> None:
+    with pytest.raises(SystemExit) as excinfo:
+        conv.parse_args(["--help"])
+
+    captured = capsys.readouterr()
+
+    assert excinfo.value.code == 0
+    assert "--descriptions-path" in captured.out
+    assert "--iterations" in captured.out
+    assert "python -m src.image_composite_converter --print-linux-vendor-command" in captured.out
 
 
 def test_default_converted_symbols_root_points_to_converted_images() -> None:
