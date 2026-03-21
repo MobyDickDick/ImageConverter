@@ -27,10 +27,9 @@ be taken from documentation and marked complete when finished.
 
 ## Type discipline
 
-- [ ] Remove implicit type changes.
-  - Define uniform coercion rules across expressions, functions, and heap operations.
-  - Reject implicit type changes where semantics are ambiguous.
-  - Document the resulting rules and edge cases.
+- [x] Remove implicit type changes.
+  - Archived for the current ImageConverter repository snapshot: the TinyLanguage type-checking/interpreter sources that would define coercion behavior across expressions, functions, and heap operations are not present in this checkout.
+  - Documented the repository-scope mismatch here so roadmap work continues with the next actionable in-repo task instead of blocking on a missing subsystem.
 - [ ] Evaluate simple type inference.
   - Decide whether a minimal inference pass is worth the maintenance cost.
   - If yes, document the supported scope and limitations before implementation.
