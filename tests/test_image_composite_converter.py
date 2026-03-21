@@ -1934,6 +1934,16 @@ def test_make_badge_params_applies_ac0831_vertical_co2_tuning() -> None:
     assert float(params["co2_dy"]) > 0.0
 
 
+def test_make_badge_params_applies_compact_ac0831_small_variant_text_tuning() -> None:
+    """Tiny AC0831 variants should keep the CO₂ cluster tighter and slightly lower."""
+    params = Action.make_badge_params(15, 25, "AC0831", None)
+
+    assert params["co2_anchor_mode"] == "cluster"
+    assert float(params["co2_font_scale"]) <= 0.86
+    assert float(params["co2_optical_bias"]) >= 0.15
+    assert float(params["co2_dy"]) >= float(params["r"]) * 0.06
+
+
 def test_finalize_tiny_non_ac0820_co2_keeps_text_scale_unbounded() -> None:
     """Tiny CO₂ variants should also skip bounded text tuning metadata."""
     params = Action._apply_co2_label(Action._default_ac0813_params(15, 25))
