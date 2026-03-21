@@ -1,8 +1,8 @@
 # Open Tasks
 
 This checklist only tracks work that is actionable for the ImageConverter in the
-current repository snapshot. Historical TinyLanguage/compiler/runtime tasks were
-removed so the list stays focused on the actual project scope.
+current repository snapshot. Older unrelated language/compiler/runtime tasks were removed so the list stays
+focused on the actual project scope.
 
 ## How to use this list
 
