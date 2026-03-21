@@ -11,6 +11,11 @@ removed so the list stays focused on the actual project scope.
 - If a task splits into multiple deliverables, keep the parent item and add nested
   subtasks below it.
 
+## Current status
+
+- There are currently no unchecked ImageConverter roadmap items in the canonical task list.
+- Add new work items here before implementation starts, then continue to mark them in-place when they are done.
+
 ## Image conversion pipeline
 
 - [x] Publish the detailed roadmap checklist referenced from the README.
@@ -39,3 +44,6 @@ removed so the list stays focused on the actual project scope.
   - Added the generated reports `ac08_weak_family_status.csv` and `ac08_weak_family_status.txt`, which summarize remaining AC08 weak families from `pixel_delta2_ranking.csv` together with the currently implemented mitigation status and observed log markers.
   - Revalidated the new weak-family status reporting with targeted regression tests so the documentation task now has reproducible output instead of manual notes only.
   - Kept `docs/ac08_improvement_plan.md` aligned with the new reporting artifacts and the existing mitigation heuristics.
+
+- [x] Document that the canonical open-task list is currently empty and keep roadmap references aligned.
+  - Added an explicit current-status section here and synchronized the README/documentation index wording so future work is added back to the same checklist before implementation starts.

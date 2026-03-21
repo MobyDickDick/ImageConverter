@@ -15,5 +15,5 @@ aktuellen Projektfokus nutzbar bleibt.
 
 ## Verweis auf offene, noch relevante Arbeiten
 
-- Die verbleibenden offenen Punkte für den Image-Konverter werden in `docs/open_tasks.md` gepflegt.
+- Die verbleibenden offenen Punkte für den Image-Konverter werden in `docs/open_tasks.md` gepflegt; aktuell enthält die kanonische Liste keine offenen Einträge.
 - AC08-spezifische Verbesserungen und deren Priorisierung stehen in `docs/ac08_improvement_plan.md`.
