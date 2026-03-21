@@ -67,11 +67,15 @@ Entspricht auf der Kommandozeile sinngemäß:
 ```bash
 python -m src.image_composite_converter \
   artifacts/images_to_convert \
-  --csv-path artifacts/images_to_convert/Finale_Wurzelformen_V3.xml \
+  --descriptions-path artifacts/images_to_convert/Finale_Wurzelformen_V3.xml \
   --output-dir artifacts/converted_images \
   --start AC0000 \
   --end ZZ9999
 ```
+
+Die vollständige CLI-Referenz inkl. Annotate-Modus, AC08-Regression-Workflow,
+Positions-/Named-Argumenten und Vendor-Installationskommando steht in
+[docs/image_converter_cli.md](docs/image_converter_cli.md).
 
 ### Run the “everything” runner
 
