@@ -1617,6 +1617,81 @@ class Action:
             p["voc_font_scale_max"] = float(min(float(p.get("voc_font_scale_max", 0.96)), min(0.96, base_scale * 1.10)))
         return p
 
+
+    @staticmethod
+    def _tune_ac08_left_connector_family(name: str, params: dict) -> dict:
+        """Apply shared guardrails for left-connector AC08 families.
+
+        Aufgabe 4.1 groups AC0812, AC0832, AC0837 and AC0882 because they all
+        combine a circle on the right with a left-facing horizontal connector.
+        The shared failure modes are:
+        - the circle drifting left into the connector,
+        - the arm collapsing until it becomes barely visible, and
+        - text badges shrinking/offsetting once the circle geometry drifts.
+
+        Keep those families on a common semantic baseline before variant-specific
+        fine-tuning runs.
+        """
+        p = dict(params)
+        symbol_name = get_base_name_from_file(str(name)).upper().split("_", 1)[0]
+        if symbol_name not in {"AC0812", "AC0832", "AC0837", "AC0882"}:
+            return p
+
+        p["connector_family_group"] = "ac08_left_connector"
+        p["connector_family_direction"] = "left"
+        p["lock_circle_cx"] = True
+        p["lock_circle_cy"] = True
+        if "template_circle_cx" in p:
+            p["cx"] = float(p["template_circle_cx"])
+        if "template_circle_cy" in p:
+            p["cy"] = float(p["template_circle_cy"])
+
+        has_text = bool(p.get("draw_text", False))
+        is_small, _reason, min_dim = Action._is_ac08_small_variant(str(name), p)
+        arm_ratio_floor = 0.82
+        if has_text:
+            arm_ratio_floor = 0.84
+        if is_small:
+            arm_ratio_floor = max(arm_ratio_floor, 0.86)
+        p["arm_len_min_ratio"] = float(max(float(p.get("arm_len_min_ratio", arm_ratio_floor)), arm_ratio_floor))
+
+        template_r = float(p.get("template_circle_radius", p.get("r", 1.0)))
+        radius_floor_ratio = 0.95 if not has_text else 0.93
+        if is_small:
+            radius_floor_ratio = max(radius_floor_ratio, 0.96 if not has_text else 0.94)
+        p["min_circle_radius"] = float(max(float(p.get("min_circle_radius", 1.0)), template_r * radius_floor_ratio))
+
+        p = Action._enforce_left_arm_badge_geometry(
+            p,
+            int(round(float(p.get("width", 0.0) or 0.0))) or int(round(float(p.get("badge_width", 0.0) or 0.0))) or 1,
+            int(round(float(p.get("height", 0.0) or 0.0))) or int(round(float(p.get("badge_height", 0.0) or 0.0))) or 1,
+        )
+
+        if p.get("arm_enabled") and "cx" in p:
+            max_from_arm_floor = max(1.0, float(p["cx"]) - float(p.get("arm_len_min", 1.0)))
+            existing_max = float(p.get("max_circle_radius", 0.0) or 0.0)
+            if existing_max > 0.0:
+                p["max_circle_radius"] = float(min(existing_max, max_from_arm_floor))
+            else:
+                p["max_circle_radius"] = float(max_from_arm_floor)
+
+        text_mode = str(p.get("text_mode", "")).lower()
+        if text_mode == "co2":
+            base_scale = float(p.get("co2_font_scale", 0.82))
+            p["lock_text_scale"] = False
+            p["co2_font_scale_min"] = float(max(float(p.get("co2_font_scale_min", base_scale)), max(0.78, base_scale * 0.94)))
+            p["co2_font_scale_max"] = float(min(float(p.get("co2_font_scale_max", 1.12)), min(1.12, base_scale * 1.15)))
+            p["co2_anchor_mode"] = str(p.get("co2_anchor_mode", "cluster"))
+        elif text_mode == "voc":
+            base_scale = float(p.get("voc_font_scale", 0.52))
+            p["lock_text_scale"] = False
+            p["voc_font_scale_min"] = float(max(float(p.get("voc_font_scale_min", base_scale)), max(0.50, base_scale * 0.94)))
+            p["voc_font_scale_max"] = float(min(float(p.get("voc_font_scale_max", 0.98)), min(0.98, base_scale * 1.14)))
+        elif str(p.get("text_mode", "")).lower() == "path_t":
+            p["s"] = float(max(float(p.get("s", 0.0)), 0.0088 if min_dim >= 18.0 else 0.0082))
+            Action._center_glyph_bbox(p)
+        return p
+
     @staticmethod
     def _finalize_ac08_style(name: str, params: dict) -> dict:
         """Apply AC08xx palette/stroke conventions globally for semantic conversions."""
@@ -1771,6 +1846,7 @@ class Action:
                     p.setdefault("voc_font_scale_min", 0.60)
                     p.pop("voc_font_scale_max", None)
         p = Action._configure_ac08_small_variant_mode(name, p)
+        p = Action._tune_ac08_left_connector_family(name, p)
         if p.get("draw_text", True) and "text_gray" in p:
             p["text_gray"] = int(p.get("stroke_gray", Action.LIGHT_CIRCLE_STROKE_GRAY))
         return p
