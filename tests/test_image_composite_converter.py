@@ -812,6 +812,52 @@ def test_run_iteration_pipeline_writes_failed_best_attempt_artifacts_for_semanti
     assert "status=semantic_mismatch" in log_text
     assert "best_attempt_svg=AC0814_L_failed.svg" in log_text
     assert "best_attempt_diff=AC0814_L_failed_diff.png" in log_text
+    assert "semantic_audit_status=semantic_mismatch" in log_text
+    assert "semantic_audit_derived_elements=SEMANTIC: Kreis ohne Buchstabe" in log_text
+    assert "semantic_audit_mismatch_reason=circle missing" in log_text
+
+
+def test_write_semantic_audit_report_persists_csv_and_json(tmp_path: Path) -> None:
+    """Semantic audit exports should summarize AC0811-AC0814 review data in CSV and JSON."""
+    reports_dir = tmp_path / "reports"
+    reports_dir.mkdir()
+    rows = [
+        image_composite_converter._semantic_audit_record(
+            base_name="AC0811",
+            filename="AC0811_L.jpg",
+            description_fragments=[
+                {"source": "base_name", "key": "AC0811", "text": "Kreis ohne Buchstabe"},
+                {"source": "variant_name", "key": "AC0811_L", "text": "senkrechter Strich hinter dem Kreis"},
+            ],
+            semantic_elements=[
+                "SEMANTIC: Kreis ohne Buchstabe",
+                "SEMANTIC: senkrechter Strich hinter dem Kreis",
+            ],
+            status="semantic_ok",
+        ),
+        image_composite_converter._semantic_audit_record(
+            base_name="AC0814",
+            filename="AC0814_S.jpg",
+            description_fragments=[{"source": "base_name", "key": "AC0814", "text": "Kreis ohne Buchstabe"}],
+            semantic_elements=[
+                "SEMANTIC: Kreis ohne Buchstabe",
+                "SEMANTIC: waagrechter Strich rechts vom Kreis",
+            ],
+            status="semantic_mismatch",
+            mismatch_reasons=["Text unexpectedly required"],
+        ),
+    ]
+
+    image_composite_converter._write_semantic_audit_report(str(reports_dir), rows)
+
+    csv_text = (reports_dir / "semantic_audit_ac0811_ac0814.csv").read_text(encoding="utf-8")
+    assert "AC0811_L.jpg" in csv_text
+    assert "semantic_ok" in csv_text
+    assert "Text unexpectedly required" in csv_text
+
+    payload = (reports_dir / "semantic_audit_ac0811_ac0814.json").read_text(encoding="utf-8")
+    assert '"filename": "AC0814_S.jpg"' in payload
+    assert '"status": "semantic_mismatch"' in payload
 
 
 def test_run_iteration_pipeline_breaks_early_on_flat_composite_error(
