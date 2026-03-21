@@ -75,7 +75,7 @@ python -m src.image_composite_converter \
 
 Die vollständige CLI-Referenz inkl. Annotate-Modus, AC08-Regression-Workflow,
 Positions-/Named-Argumenten und Vendor-Installationskommando steht in
-[docs/image_converter_cli.md](docs/image_converter_cli.md).
+[docs/image_converter_cli.md](docs/image_converter_cli.md) sowie im lokalen Verifikations-Workflow [docs/image_converter_workflow.md](docs/image_converter_workflow.md).
 
 ### Run the “everything” runner
 
@@ -290,7 +290,7 @@ This section is the future-looking plan for the ImageConverter. For the detailed
 
 ### Tooling and documentation
 - Keep the CLI documentation current.
-- Stabilize formatter/lint/documentation workflows used for image-converter changes.
+- Keep the documented local workflow (`docs/image_converter_workflow.md`) aligned with the active checks and commands.
 
 ---
 

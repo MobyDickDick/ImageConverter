@@ -28,10 +28,10 @@ removed so the list stays focused on the actual project scope.
   - Updated the parser help text with examples, a clearer descriptions-table flag (`--descriptions-path` alias), a named `--iterations` override, and a default input directory for non-conversion helper flows.
   - Added regression tests that lock the new help text and the documented parser behaviors.
 
-- [ ] Stabilize formatter, lints, and local documentation workflows.
-  - Document the expected local workflow for image-converter changes.
-  - Add or refresh regression checks for formatter/lint behavior.
-  - Verify the documented tooling commands remain current.
+- [x] Stabilize formatter, lints, and local documentation workflows.
+  - Added `docs/image_converter_workflow.md` as the canonical local verification sequence for compile/test/CLI-help checks.
+  - Added regression tests that keep the workflow document referenced from the README and lock key command anchors.
+  - Re-validated the documented tooling commands against the current parser/help surface.
 
 ## AC08 follow-up work
 
