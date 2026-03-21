@@ -285,7 +285,7 @@ To keep the README focused, the previously long “Open tasks” checklists have
 ## Roadmap
 
 This section remains the *future-looking* plan. Roughly grouped into frontend/language, type discipline, runtime, tooling, and native backends.
-For a detailed checklist of open items, see [docs/open_tasks.md](docs/open_tasks.md).
+For a detailed checklist of open items, see [docs/open_tasks.md](docs/open_tasks.md). The checklist file now exists in the repository and is the canonical place to mark roadmap work as done.
 
 ### Frontend / language
 - Improve error positions and messages (carry line/column through tokens + AST nodes; unify error type with optional `SourceSpan`).
