@@ -247,6 +247,33 @@ Speziallogik in `src/image_composite_converter.py`.
 - Unit-Tests für `AC0832_S` prüfen die gemeinsamen Familien-Guardrails (Kreis-Locks, Connector-Längenfloor, Text-Skalierungsgrenzen und Radius-Obergrenze).
 - Unit-Tests für `AC0882_L` prüfen, dass `path_t` zentriert bleibt und die linke Arm-Geometrie auch aus einem unvollständigen Paramatersatz wiederhergestellt wird.
 
+## Artefaktbasierte Priorisierung (Snapshot `artifacts/converted_images`)
+
+Die aktuelle Artefaktauswertung ist zusätzlich in
+[`docs/ac08_artifact_analysis.md`](docs/ac08_artifact_analysis.md) dokumentiert.
+Aus den vorliegenden Reports ergeben sich für den nächsten Verbesserungszyklus
+folgende unmittelbar priorisierte Arbeitspakete:
+
+1. **Semantik-Gate für `AC0811`–`AC0814` nachschärfen.**
+   Obwohl die Audit-Logs bereits `Kreis ohne Buchstabe` und die korrekte
+   Connector-Geometrie ableiten, schlagen weiterhin alle Varianten dieser vier
+   Familien mit Textmismatch fehl. Das Follow-up muss deshalb die finale
+   Bewertungslogik an die bereits korrekte Family-Regel koppeln.
+2. **Primitive-Erkennung für problematische `_S`-Varianten stabilisieren.**
+   Die Snapshot-Fehler von `AC0833_S`, `AC0838_S` und `AC0870_S` zeigen, dass
+   kleine horizontale Linien bzw. Kreisdetektion noch nicht robust genug sind.
+3. **Qualitätspässe stärker begrenzen.**
+   Der aktuelle Report `pixel_delta2_summary.txt` meldet `0` Treffer unter dem
+   dokumentierten `mean_delta2`-Schwellwert, und `quality_tercile_passes.csv`
+   besteht überwiegend aus `rejected_regression`. Daraus folgt, dass weitere
+   Optimierungsrunden früher abgebrochen bzw. enger auf Parametergruppen
+   begrenzt werden müssen.
+4. **Variantendonor-Strategien systematisieren.**
+   `strategy_switch_template_transfers.csv` dokumentiert erst drei erfolgreiche
+   Transfers (`AC0832_S <- AC0832_L`, `AC0836_M <- AC0831_L`, `AC0836_S <-
+   AC0831_L`). Diese Spur ist vielversprechend genug, um daraus eine feste
+   Initialisierungsmatrix für geometrisch ähnliche AC08-Familien abzuleiten.
+
 ## Laufende Nachverfolgung offener Schwachfamilien
 
 Die Umsetzung erzeugt jetzt zusätzlich die Reports `ac08_weak_family_status.csv` und
