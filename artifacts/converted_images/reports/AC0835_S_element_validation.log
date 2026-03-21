@@ -1,4 +1,4 @@
-run-meta: run_seed=375552098 pass_seed_offset=4 nonce_ns=1774113071389328700
+run-meta: run_seed=95899077 pass_seed_offset=4 nonce_ns=1774119913693527400
 status=semantic_ok
 small_variant_mode_active: reason=min_dim, min_dim=11.040, mask_dilate_px=1, text_mode=voc, arm_min_ratio=0.000, stem_min_ratio=0.000
 Runde 1: elementweise Validierung gestartet
@@ -6,25 +6,25 @@ circle: Fehler=73.700
 circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
 circle: Mittelpunkt-Bracketing cx 7.500->5.000, cy 7.500->7.500 (best_err=63.338)
 circle: Radius-Bracketing r 5.520->5.500 (best_err=63.338); Kandidaten=4.968->64.896, 5.000->64.896, 5.500->63.338, 7.200->74.443
-text: Fehler=64.803
-text: Breiten-Bracketing voc_font_scale 0.562->0.900; Kandidaten=0.900->70.028, 1.125->78.449, 1.350->76.309, 1.650->78.642, 1.950->76.866, 2.175->77.875, 2.400->81.920
-Runde 1: Gesamtfehler=42.689
+text: Fehler=64.232
+text: Breiten-Bracketing voc_font_scale 0.562->0.900; Kandidaten=0.900->64.829, 1.125->72.191, 1.350->71.361, 1.650->76.977, 1.950->70.499, 2.175->70.999, 2.400->73.146
+Runde 1: Gesamtfehler=42.009
 Runde 2: elementweise Validierung gestartet
 circle: Fehler=63.338
 circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
 circle: Mittelpunkt-Bracketing keine relevante Änderung (cx=5.000, cy=7.500, best_err=63.338)
 circle: Radius-Bracketing keine relevante Änderung (r: 5.500, best_err=63.338); Kandidaten=4.950->64.896, 5.000->64.896, 5.500->63.338, 7.200->74.443
-text: Fehler=70.028
-text: Breiten-Bracketing keine relevante Änderung (voc_font_scale: 0.900); Kandidaten=0.900->70.028, 1.035->73.321, 1.125->78.449, 1.350->76.309, 1.650->78.642, 1.950->76.866, 2.175->77.875, 2.400->81.920
-Runde 2: Gesamtfehler=42.689
+text: Fehler=64.829
+text: Breiten-Bracketing keine relevante Änderung (voc_font_scale: 0.900); Kandidaten=0.900->64.829, 1.035->68.463, 1.125->72.191, 1.350->71.361, 1.650->76.977, 1.950->70.499, 2.175->70.999, 2.400->73.146
+Runde 2: Gesamtfehler=42.009
 stagnation_detected: identischer Parameter-Fingerprint und praktisch unveränderter Gesamtfehler
 switch_to_fallback_search: deaktiviere Circle-Geometry-Penalty für eine letzte Ausweichrunde
 Runde 3: elementweise Validierung gestartet
 circle: Fehler=63.338
 circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
-text: Fehler=70.028
-text: Breiten-Bracketing keine relevante Änderung (voc_font_scale: 0.900); Kandidaten=0.900->70.028, 1.035->73.321, 1.125->78.449, 1.350->76.309, 1.650->78.642, 1.950->76.866, 2.175->77.875, 2.400->81.920
-Runde 3: Gesamtfehler=42.689
+text: Fehler=64.829
+text: Breiten-Bracketing keine relevante Änderung (voc_font_scale: 0.900); Kandidaten=0.900->64.829, 1.035->68.463, 1.125->72.191, 1.350->71.361, 1.650->76.977, 1.950->70.499, 2.175->70.999, 2.400->73.146
+Runde 3: Gesamtfehler=42.009
 stagnation_detected: identischer Parameter-Fingerprint und praktisch unveränderter Gesamtfehler
 stopped_due_to_stagnation: Validierung vorzeitig beendet
 circle: Farb-Stochastic-Survivor aktiviert (fill_gray=201, err=6731.000)
@@ -32,5 +32,5 @@ circle: Farb-Bracketing fill_gray 242->201; Kandidaten=200->6732.000, 210->6765.
 circle: Farb-Stochastic-Survivor aktiviert (stroke_gray=200, err=5924.000)
 circle: Farb-Bracketing stroke_gray 127->200; Kandidaten=95->7470.000, 96->7444.000, 111->7097.000, 112->7074.000, 119->6913.000, 127->6731.000, 128->6713.000, 135->6565.000, 143->6426.000, 144->6409.000, 152->6293.000, 159->6201.000, 160->6193.000, 171->6066.000, 200->5924.000
 circle: Farboptimierung in Abschlussphase angewendet
-text: Farb-Bracketing text_gray 127->171; Kandidaten=95->72.297, 96->72.241, 111->71.106, 112->71.016, 119->70.511, 127->70.028, 128->69.983, 135->69.781, 143->69.590, 144->69.578, 152->69.477, 159->69.443, 160->69.432, 171->69.387, 191->69.567
+text: Farb-Bracketing text_gray 127->135; Kandidaten=95->66.361, 96->66.265, 111->65.489, 112->65.414, 119->65.095, 127->64.829, 128->64.776, 135->64.680, 143->64.691, 144->64.712, 152->64.765, 159->64.850, 160->64.829, 171->64.957, 192->65.563
 text: Farboptimierung in Abschlussphase angewendet
