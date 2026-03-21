@@ -1671,9 +1671,10 @@ class Action:
             p["cy"] = float(p["template_circle_cy"])
 
         has_text = bool(p.get("draw_text", False))
+        text_mode = str(p.get("text_mode", "")).lower()
         is_small, _reason, min_dim = Action._is_ac08_small_variant(str(name), p)
         arm_ratio_floor = 0.82
-        if has_text:
+        if has_text or text_mode == "path_t":
             arm_ratio_floor = 0.84
         if is_small:
             arm_ratio_floor = max(arm_ratio_floor, 0.86)
@@ -1746,9 +1747,10 @@ class Action:
             p["cy"] = float(p["template_circle_cy"])
 
         has_text = bool(p.get("draw_text", False))
+        text_mode = str(p.get("text_mode", "")).lower()
         is_small, _reason, min_dim = Action._is_ac08_small_variant(str(name), p)
         arm_ratio_floor = 0.82
-        if has_text:
+        if has_text or text_mode == "path_t":
             arm_ratio_floor = 0.84
         if is_small:
             arm_ratio_floor = max(arm_ratio_floor, 0.86)
@@ -5516,8 +5518,10 @@ class Action:
         if not low_bound < high_bound:
             return False
 
-        low = Action._snap_half(low_bound)
-        high = Action._snap_half(high_bound)
+        low = math.floor(low_bound * 2.0) / 2.0
+        high = math.ceil(high_bound * 2.0) / 2.0
+        low = float(Action._clip_scalar(low, low_bound, high_bound))
+        high = float(Action._clip_scalar(high, low_bound, high_bound))
         mid = Action._snap_half(float(Action._clip_scalar(current, low, high)))
         if high - low < 0.05:
             return False
@@ -5525,7 +5529,8 @@ class Action:
         evaluations: dict[float, float] = {}
 
         def eval_radius(radius: float) -> float:
-            snapped = Action._snap_half(float(Action._clip_scalar(radius, low_bound, high_bound)))
+            clipped = float(Action._clip_scalar(radius, low_bound, high_bound))
+            snapped = float(round(clipped, 3))
             if snapped not in evaluations:
                 evaluations[snapped] = float(Action._element_error_for_circle_radius(img_orig, params, snapped))
             return evaluations[snapped]
@@ -6146,7 +6151,7 @@ class Action:
             if color_key in {"stroke_gray", "stem_gray", "text_gray"}:
                 candidates.update(int(Action._clip_scalar(v, low_limit, high_limit)) for v in {96, 112, 128, 144, 152, 160, 171})
 
-            values = sorted(v for v in candidates if min_candidate <= v <= max_candidate)
+            values = sorted(v for v in candidates if low_limit <= v <= high_limit)
             errs = [
                 Action._element_error_for_color(img_orig, params, element, color_key, v, mask_orig)
                 for v in values
