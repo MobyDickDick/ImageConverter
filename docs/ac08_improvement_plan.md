@@ -249,15 +249,20 @@ Speziallogik in `src/image_composite_converter.py`.
 
 ---
 
-### Aufgabe 4.2 – Rechte Connector-Familien gemeinsam tunen
+### Aufgabe 4.2 – Rechte Connector-Familien gemeinsam tunen ✅ erledigt
 **Familien:** `AC0810`, `AC0814`, `AC0833`, `AC0834`, `AC0838`, `AC0839`
 
 **Ziel:** Spiegelbildliche Fälle konsistent behandeln.
 
-**Prüfpunkte:**
-- rechter Arm bleibt erhalten,
-- Kreis bleibt optisch ausgewogen,
-- kleine Varianten driften nicht nach unten/rechts.
+**Umgesetzt in Code/Workflow:**
+- `Action._tune_ac08_right_connector_family` bündelt jetzt die gemeinsamen Guardrails für alle rechten Connector-Familien und markiert sie mit `connector_family_group=ac08_right_connector`.
+- Die gemeinsame Familienlogik spiegelt die linken Connector-Guardrails: Kreiszentrum bleibt über `template_circle_cx/cy` an der semantischen Vorlage verankert, der rechte Arm wird über `arm_len_min_ratio` bzw. `arm_len_min` sichtbar gehalten und `max_circle_radius` wird an die verbleibende rechte Connector-Spanne gekoppelt, damit der Kreis nicht in den Arm hineinwächst.
+- `Action._enforce_right_arm_badge_geometry` stellt fehlende oder verloren gegangene Arm-Geometrie für `AC0810`, `AC0814`, `AC0833`, `AC0834`, `AC0838` und `AC0839` aus der finalen Kreispose wieder her; `_enforce_semantic_connector_expectation` nutzt diese Rekonstruktion jetzt auch bei semantisch erwarteten rechten Horizontalarmen.
+- Für CO₂- und VOC-Varianten werden lesbare, begrenzte Textfenster mitgeführt (`co2_font_scale_*`, `voc_font_scale_*`), sodass kleine rechte Varianten nicht mehr unverhältnismäßig nach unten/rechts driften oder textseitig kollabieren.
+
+**Prüfpunkte/ergänzte Tests:**
+- Neue Tests für `AC0834_S` prüfen die gemeinsamen Guardrails der rechten Connector-Familie (Kreis-Locks, Arm-Rekonstruktion, Mindestarmverhältnis und CO₂-Textgrenzen).
+- Neue Tests für `AC0839_L` prüfen, dass VOC-Varianten den rechten Arm sichtbar halten und bounded Textskalierung verwenden.
 
 ---
 
