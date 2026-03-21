@@ -2659,6 +2659,16 @@ def test_finalize_ac08_style_leaves_ac0835_s_voc_unbounded() -> None:
     assert "voc_font_scale_max" not in tuned
 
 
+def test_tune_ac0835_voc_badge_lowers_tiny_variant_text() -> None:
+    """AC0835_S should start with a lower VOC baseline to match the source raster."""
+    params = Action._apply_voc_label(Action._default_ac0870_params(15, 15))
+
+    tuned = Action._tune_ac0835_voc_badge(params, 15, 15)
+
+    assert float(tuned["voc_dy"]) >= float(tuned["r"]) * 0.13
+    assert int(tuned["text_gray"]) == Action.LIGHT_CIRCLE_STROKE_GRAY
+
+
 def test_finalize_ac08_circle_text_family_leaves_ac0820_unlocked() -> None:
     """AC0820 should no longer inject centered-family circle/text guardrails."""
     params = Action._apply_co2_label(Action._default_ac0870_params(30, 30))
