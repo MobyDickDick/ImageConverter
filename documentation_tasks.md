@@ -179,6 +179,7 @@ PY
 - [x] Große Sourcecodedateien sind in überschaubare, logisch getrennte kleinere Dateien aufgeteilt (inkl. ggf. neuer Modulstruktur und aktualisierten Importpfaden).
 - [x] AC08-Aufgabe 1.1 ist erledigt: Qualitäts-/Tercile-Pässe übernehmen nur noch echte Verbesserungen und protokollieren Regressionen explizit. (siehe `docs/ac08_improvement_plan.md`)
 - [x] AC08-Aufgabe 2.1 ist erledigt: Für AC0811–AC0814 wird ein strukturierter Semantik-Audit als Log/CSV/JSON ausgegeben. (siehe `docs/ac08_improvement_plan.md`)
+- [x] AC08-Aufgabe 3.1 ist erledigt: Für dokumentierte Problemfamilien werden bei Stagnation adaptive, begrenzte Locks/Freigaben aktiviert und explizit geloggt. (siehe `docs/ac08_improvement_plan.md`)
 - [x] AC08-Aufgabe 5.1 ist erledigt: Ein festes Regression-Set inkl. reproduzierbarem CLI-Workflow und Manifest/Report-Dateien ist definiert. (siehe `docs/ac08_improvement_plan.md`)
 - [x] AC08-Aufgabe 5.2 ist erledigt: Schriftlich fixierte Erfolgskriterien inkl. maschinenlesbarem Report für das Regression-Set sind definiert. (siehe `docs/ac08_improvement_plan.md`)
 
