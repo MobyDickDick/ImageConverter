@@ -3884,6 +3884,23 @@ def test_parse_args_accepts_descriptions_path_alias_and_named_iterations() -> No
     assert args.iterations == 12
 
 
+def test_readme_links_local_workflow_doc() -> None:
+    readme = Path("README.md").read_text(encoding="utf-8")
+
+    assert "docs/image_converter_workflow.md" in readme
+
+
+def test_local_workflow_doc_tracks_current_commands() -> None:
+    workflow_doc = Path("docs/image_converter_workflow.md").read_text(encoding="utf-8")
+
+    assert "python -m compileall src tests" in workflow_doc
+    assert "python -m pytest" in workflow_doc
+    assert "python -m src.image_composite_converter --help" in workflow_doc
+    assert "--descriptions-path" in workflow_doc
+    assert "--ac08-regression-set" in workflow_doc
+    assert "--print-linux-vendor-command" in workflow_doc
+
+
 def test_parse_args_help_mentions_canonical_image_converter_flags(capsys: pytest.CaptureFixture[str]) -> None:
     with pytest.raises(SystemExit) as excinfo:
         conv.parse_args(["--help"])
