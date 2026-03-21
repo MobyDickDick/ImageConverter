@@ -2660,6 +2660,22 @@ class Action:
         p["co2_anchor_mode"] = "cluster"
         p["co2_optical_bias"] = float(p.get("co2_optical_bias", 0.10))
         p["co2_dy"] = float(p.get("co2_dy", 0.0)) + (0.07 * r)
+        min_dim = float(
+            min(
+                float(p.get("width", 0.0) or 0.0),
+                float(p.get("height", 0.0) or 0.0),
+            )
+        )
+        if min_dim <= 0.0:
+            min_dim = max(1.0, r * 2.0)
+        if 0.0 < min_dim <= 15.5:
+            # Tiny vertical CO₂ badges compress the glyph cluster into a single
+            # JPEG blob. Rendering them with the generic AC0831 scale makes the
+            # label look too wide/high compared to the reference raster, so keep
+            # the text slightly tighter and bias it a little lower.
+            p["co2_font_scale"] = min(float(p.get("co2_font_scale", 0.82)), 0.86)
+            p["co2_optical_bias"] = max(float(p.get("co2_optical_bias", 0.15)), 0.15)
+            p["co2_dy"] = max(float(p.get("co2_dy", 0.0)), 0.06 * r)
         return p
 
     @staticmethod
