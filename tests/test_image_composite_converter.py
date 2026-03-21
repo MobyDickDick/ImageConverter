@@ -4526,3 +4526,50 @@ def test_convert_range_continues_after_render_failure_and_writes_batch_summary(
     batch_summary = (output_root / "reports" / "batch_failure_summary.csv").read_text(encoding="utf-8")
     assert "AC0820_L.jpg;render_failure;composite_iteration_render_failed" in batch_summary
     assert "AC0820_L_element_validation.log" in batch_summary
+
+
+def test_ac08_semantic_anchor_variants_convert_without_failed_svg(tmp_path: Path) -> None:
+    """The historical anchor failures AC0811_L and AC0812_M should now render as real SVG outputs."""
+    if (
+        image_composite_converter.np is None
+        or image_composite_converter.cv2 is None
+        or image_composite_converter.fitz is None
+    ):
+        pytest.skip("numpy/cv2/fitz not available in this environment")
+
+    images_dir = Path("artifacts/images_to_convert")
+    csv_path = images_dir / "Finale_Wurzelformen_V3.xml"
+    if not images_dir.exists() or not csv_path.exists():
+        pytest.skip("AC08 fixture inputs not available")
+
+    output_ac0811 = tmp_path / "ac0811_out"
+    result_ac0811 = image_composite_converter.convert_range(
+        str(images_dir),
+        str(csv_path),
+        iterations=4,
+        start_ref="AC0811",
+        end_ref="AC0811",
+        output_root=str(output_ac0811),
+    )
+
+    assert result_ac0811 == str(output_ac0811)
+    assert (output_ac0811 / "converted_svgs" / "AC0811_L.svg").exists()
+    assert not (output_ac0811 / "converted_svgs" / "AC0811_L_failed.svg").exists()
+    log_ac0811_l = (output_ac0811 / "reports" / "AC0811_L_element_validation.log").read_text(encoding="utf-8")
+    assert "status=semantic_ok" in log_ac0811_l
+
+    output_ac0812 = tmp_path / "ac0812_out"
+    result_ac0812 = image_composite_converter.convert_range(
+        str(images_dir),
+        str(csv_path),
+        iterations=4,
+        start_ref="AC0812",
+        end_ref="AC0812",
+        output_root=str(output_ac0812),
+    )
+
+    assert result_ac0812 == str(output_ac0812)
+    assert (output_ac0812 / "converted_svgs" / "AC0812_M.svg").exists()
+    assert not (output_ac0812 / "converted_svgs" / "AC0812_M_failed.svg").exists()
+    log_ac0812_m = (output_ac0812 / "reports" / "AC0812_M_element_validation.log").read_text(encoding="utf-8")
+    assert "status=semantic_ok" in log_ac0812_m
