@@ -86,23 +86,6 @@ AC08_ADAPTIVE_LOCK_PROFILES: dict[str, dict[str, float | bool]] = {
 }
 
 
-def _bbox_from_points(points: list[tuple[int, int]]) -> tuple[int, int, int, int] | None:
-    if not points:
-        return None
-    xs = [p[0] for p in points]
-    ys = [p[1] for p in points]
-    return min(xs), min(ys), max(xs), max(ys)
-
-
-def _bbox_from_mask(mask) -> tuple[int, int, int, int] | None:
-    if mask is None or np is None:
-        return None
-    ys, xs = np.where(mask > 0)
-    if len(xs) == 0 or len(ys) == 0:
-        return None
-    return int(xs.min()), int(ys.min()), int(xs.max()), int(ys.max())
-
-
 def _expand_bbox(bbox: tuple[int, int, int, int], width: int, height: int, pad: int = 1) -> tuple[int, int, int, int]:
     x0, y0, x1, y1 = bbox
     return (
@@ -628,8 +611,6 @@ def decompose_circle_with_stem(grayscale: list[list[int]], element: Element, can
     if not element.pixels or not element.pixels[0]:
         return None
 
-    h = len(element.pixels)
-    w = len(element.pixels[0])
     r = max(1.0, (candidate.w + candidate.h) / 4.0)
     cx = float(candidate.cx)
     cy = float(candidate.cy)
@@ -1000,7 +981,6 @@ class Reflection:
         self.raw_desc = raw_desc
 
     def parse_description(self, base_name: str, img_filename: str):
-        variant_name = os.path.splitext(img_filename)[0]
         canonical_base = get_base_name_from_file(base_name).upper()
         description_fragments = _collect_description_fragments(self.raw_desc, base_name, img_filename)
         desc_raw = " ".join(fragment["text"] for fragment in description_fragments)
@@ -3796,7 +3776,6 @@ class Action:
             elif p.get("text_mode") == "co2":
                 layout = Action._co2_layout(p)
                 font_size = float(layout["font_size"])
-                sub_scale = float(layout["sub_scale"])
                 y_text = float(layout["y_base"])
                 elements.append(
                     (
