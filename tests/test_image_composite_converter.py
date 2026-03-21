@@ -1795,6 +1795,66 @@ def test_finalize_tiny_non_ac0820_co2_unlocks_bounded_text_tuning() -> None:
     assert float(params["co2_font_scale_min"]) < float(params["co2_font_scale"])
     assert float(params["co2_font_scale_max"]) > float(params["co2_font_scale"])
 
+
+def test_release_ac08_adaptive_locks_relaxes_only_bounded_problem_family_knobs() -> None:
+    """Problem families should get narrow, bounded lock releases instead of global unlocks."""
+    params = Action._apply_co2_label(Action._default_ac0881_params(20, 20))
+    params = Action._finalize_ac08_style("AC0831", params)
+    params["template_circle_radius"] = float(params["r"])
+    params["stem_enabled"] = True
+    params["stem_top"] = 12.0
+    params["stem_bottom"] = 20.0
+    params["stem_len_min_ratio"] = 0.65
+    params["stem_len_min"] = 5.2
+    logs: list[str] = []
+
+    changed = Action._release_ac08_adaptive_locks(
+        params,
+        logs,
+        reason="stagnation_same_fingerprint",
+        current_error=12.5,
+    )
+
+    assert changed is True
+    assert params["adaptive_lock_release_active"] is True
+    assert params["lock_colors"] is False
+    assert int(params["fill_gray_max"]) - int(params["fill_gray_min"]) <= 20
+    assert float(params["min_circle_radius"]) < float(params["template_circle_radius"]) * 0.90
+    assert float(params["stem_len_min_ratio"]) == pytest.approx(0.58)
+    assert params["lock_text_scale"] is False
+    assert "adaptive_lock_release_activated: AC0831" in "\n".join(logs)
+
+
+def test_optimize_element_color_bracket_respects_adaptive_color_corridor(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Adaptive palette release must stay within the configured grayscale corridor."""
+    if image_composite_converter.np is None:
+        pytest.skip("numpy not available in this environment")
+
+    img = image_composite_converter.np.full((4, 4, 3), 220, dtype=image_composite_converter.np.uint8)
+    mask = image_composite_converter.np.ones((4, 4), dtype=image_composite_converter.np.uint8)
+    params = {
+        "circle_enabled": True,
+        "fill_gray": 220,
+        "fill_gray_min": 214,
+        "fill_gray_max": 226,
+        "lock_colors": False,
+    }
+    logs: list[str] = []
+
+    monkeypatch.setattr(Action, "_mean_gray_for_mask", staticmethod(lambda *_args, **_kwargs: 245.0))
+    monkeypatch.setattr(
+        Action,
+        "_element_error_for_color",
+        staticmethod(lambda _img, _params, _element, _color_key, color_value, _mask: abs(color_value - 226)),
+    )
+
+    changed = Action._optimize_element_color_bracket(img, params, "circle", mask, logs)
+
+    assert changed is True
+    assert int(params["fill_gray"]) == 226
+    assert int(params["fill_gray"]) <= int(params["fill_gray_max"])
+    assert int(params["fill_gray"]) >= int(params["fill_gray_min"])
+
 def test_generate_badge_svg_renders_center_co_as_split_text_nodes() -> None:
     """center_co layout should render CO and subscript as separate positioned text nodes."""
     params = Action._apply_co2_label(Action._default_ac0870_params(30, 30))

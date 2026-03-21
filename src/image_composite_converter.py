@@ -52,6 +52,40 @@ ANNOTATION_COLORS: dict[str, tuple[int, int, int]] = {
 }
 
 
+AC08_ADAPTIVE_LOCK_PROFILES: dict[str, dict[str, float | bool]] = {
+    # Known AC08 outlier families from the improvement plan. Profiles only relax
+    # tightly bounded locks after validation stagnates or when the residual
+    # error stays clearly above the "good enough" range.
+    "AC0882": {
+        "radius_floor_ratio": 0.84,
+        "arm_min_ratio": 0.68,
+        "color_corridor": 10.0,
+    },
+    "AC0837": {
+        "radius_floor_ratio": 0.86,
+        "arm_min_ratio": 0.70,
+        "color_corridor": 10.0,
+    },
+    "AC0839": {
+        "radius_floor_ratio": 0.86,
+        "arm_min_ratio": 0.70,
+        "text_scale_delta": 0.10,
+        "color_corridor": 10.0,
+    },
+    "AC0820": {
+        "radius_floor_ratio": 0.88,
+        "text_scale_delta": 0.10,
+        "color_corridor": 8.0,
+    },
+    "AC0831": {
+        "radius_floor_ratio": 0.87,
+        "stem_min_ratio": 0.58,
+        "text_scale_delta": 0.10,
+        "color_corridor": 10.0,
+    },
+}
+
+
 def _bbox_from_points(points: list[tuple[int, int]]) -> tuple[int, int, int, int] | None:
     if not points:
         return None
@@ -5579,7 +5613,7 @@ class Action:
             if color_key in {"stroke_gray", "stem_gray", "text_gray"}:
                 candidates.update(int(Action._clip_scalar(v, low_limit, high_limit)) for v in {96, 112, 128, 144, 152, 160, 171})
 
-            values = sorted(candidates)
+            values = sorted(v for v in candidates if min_candidate <= v <= max_candidate)
             errs = [
                 Action._element_error_for_color(img_orig, params, element, color_key, v, mask_orig)
                 for v in values
@@ -6155,6 +6189,12 @@ class Action:
                             )
                             continue
                     if not fallback_search_active and round_idx + 1 < max_rounds:
+                        Action._release_ac08_adaptive_locks(
+                            params,
+                            logs,
+                            reason="stagnation_same_fingerprint",
+                            current_error=full_err,
+                        )
                         fallback_search_active = True
                         logs.append(
                             "switch_to_fallback_search: deaktiviere Circle-Geometry-Penalty für eine letzte Ausweichrunde"
@@ -6170,6 +6210,13 @@ class Action:
                     logs.append("Gesamtfehler unter Schwellwert, Validierung beendet")
                     break
                 logs.append("Gesamtfehler unter Schwellwert, Suche nach besserem Optimum wird fortgesetzt")
+            elif round_idx >= 1:
+                Action._release_ac08_adaptive_locks(
+                    params,
+                    logs,
+                    reason="high_residual_error",
+                    current_error=full_err,
+                )
 
             if round_idx + 1 >= max_rounds:
                 break
@@ -6190,6 +6237,12 @@ class Action:
                         )
                         continue
                 if not fallback_search_active and round_idx + 1 < max_rounds:
+                    Action._release_ac08_adaptive_locks(
+                        params,
+                        logs,
+                        reason="stagnation_no_geometry_change",
+                        current_error=full_err,
+                    )
                     fallback_search_active = True
                     logs.append(
                         "stagnation_detected: keine relevante Geometrieänderung in der letzten Validierungsrunde"
