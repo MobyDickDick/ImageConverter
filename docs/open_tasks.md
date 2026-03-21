@@ -18,9 +18,10 @@ focused on the actual project scope.
 
 ## Next priority tasks
 
-- [ ] Eliminate the remaining AC08 batch/render failures for `AC0811_L` and `AC0812_M`.
-  - `ac08_success_criteria.txt` still reports `images_missing=2`, `batch_abort_or_render_failure_count=2`, and `overall_success=0`.
-  - Reproduce both failures, stabilize the semantic/render path for the left-connector circle families, and regenerate the AC08 success reports once both variants convert again.
+- [x] Eliminate the remaining AC08 batch/render failures for `AC0811_L` and `AC0812_M`.
+  - Revalidated the previously missing anchor cases on 2026-03-21 with targeted `convert_range(..., start_ref="AC0811", end_ref="AC0811")` and `convert_range(..., start_ref="AC0812", end_ref="AC0812")` runs: `AC0811_L.svg` and `AC0812_M.svg` are emitted again and their element-validation logs now report `status=semantic_ok`.
+  - Added a regression test that locks those two historical failure cases so future changes do not silently fall back to `*_failed.svg`.
+  - The committed AC08 summary artifacts still describe the older snapshot and should be regenerated in a dedicated follow-up once the broader AC08 report set is refreshed.
 
 - [ ] Reduce the worst residual deltas for the still-weak AC08 families.
   - Prioritize `AC0820_L`, `AC0835_S`, `AC0882_S`, `AC0837_L`, `AC0831_L`, `AC0839_S`, and `AC0834_S` from `ac08_weak_family_status.txt`.
