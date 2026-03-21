@@ -13,20 +13,29 @@ focused on the actual project scope.
 
 ## Current status
 
-- The canonical task list now contains follow-up work for the remaining AC08 quality gaps from the latest committed reports.
+- The latest committed AC08 report snapshot contains `54` evaluated AC08 validation logs, of which `43` are `semantic_ok` and `11` remain `semantic_mismatch`.
+- The remaining failures are concentrated in the families `AC0800`, `AC0811`, `AC0813`, `AC0814`, `AC0831`, `AC0836`, and `AC0870`; the detailed breakdown now lives in `docs/ac08_artifact_analysis.md`.
 - Continue to add new work items here before implementation starts, then mark them in-place when they are done.
 
 ## Next priority tasks
 
-- [x] Eliminate the remaining AC08 batch/render failures for `AC0811_L` and `AC0812_M`.
-  - Revalidated the previously missing anchor cases on 2026-03-21 with targeted `convert_range(..., start_ref="AC0811", end_ref="AC0811")` and `convert_range(..., start_ref="AC0812", end_ref="AC0812")` runs: `AC0811_L.svg` and `AC0812_M.svg` are emitted again and their element-validation logs now report `status=semantic_ok`.
-  - Added a regression test that locks those two historical failure cases so future changes do not silently fall back to `*_failed.svg`.
-  - The committed AC08 summary artifacts still describe the older snapshot and should be regenerated in a dedicated follow-up once the broader AC08 report set is refreshed.
+- [ ] Fix the vertical-connector semantic false positives in the remaining AC08 families.
+  - Target `AC0811_M`, `AC0811_S`, `AC0813_L`, `AC0813_M`, `AC0831_M`, and `AC0836_L` first.
+  - The current logs repeatedly report `Im Bild ist waagrechter Strich erkennbar, aber nicht in der Beschreibung enthalten`, although these families are expected to use vertical connectors or stems.
+  - Extend primitive detection/reporting so each problematic run records whether the connector was classified as `vertical`, `horizontal`, or `ambiguous` before semantic validation fails.
 
-- [ ] Reduce the worst residual deltas for the still-weak AC08 families.
-  - Prioritize `AC0820_L`, `AC0835_S`, `AC0882_S`, `AC0837_L`, `AC0831_L`, `AC0839_S`, and `AC0834_S` from `ac08_weak_family_status.txt`.
-  - Focus on family-specific quality improvements that preserve the new no-regression guardrails, especially for `_S` variants and stubborn connector geometries.
-  - [x] Applied a first targeted `_S`-variant follow-up for `AC0835_S` on 2026-03-21 by biasing the tiny VOC baseline downward before validation, which keeps the label closer to the source raster and reduces reliance on stagnation-triggered fallback rounds.
+- [ ] Harden circle detection for small AC08 variants before the semantic gate runs.
+  - Prioritize `AC0811_S`, `AC0814_S`, and `AC0870_S`, where the reports also contain `Beschreibung erwartet Kreis, im Bild aber nicht robust erkennbar` and/or `Strukturprüfung: Kein belastbarer Kreis-Kandidat im Rohbild erkannt`.
+  - Reuse the local mask / foreground fallback path already proven for thin-ring cases and expose enough instrumentation to tell whether the accepted circle came from Hough, foreground mask, or family-specific fallback.
+
+- [ ] Add a family-level semantic rule for the plain-ring family `AC0800`.
+  - All three committed logs (`AC0800_L/M/S`) still report `Im Bild ist Kreis erkennbar, aber nicht in der Beschreibung enthalten`.
+  - Promote `AC0800` to an explicit semantic family that derives `SEMANTIC: Kreis ohne Buchstabe` even when no text/connector clues are present.
+  - Add a regression test that locks this family once the semantic rule is implemented.
+
+- [ ] Refresh the AC08 reports after the next semantic round.
+  - Re-run the affected AC08 families once the connector-orientation and circle-fallback fixes are in place.
+  - Regenerate the committed report snapshot and update `docs/ac08_artifact_analysis.md` so the backlog reflects the new post-fix distribution instead of the current 43/11 split.
 
 - [ ] Make the AC08 success gate actionable in the normal workflow.
   - Promote the metrics from `ac08_success_metrics.csv` / `ac08_success_criteria.txt` into a documented regression check so failed criteria are visible before the next backlog review.
