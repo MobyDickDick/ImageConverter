@@ -52,6 +52,40 @@ ANNOTATION_COLORS: dict[str, tuple[int, int, int]] = {
 }
 
 
+AC08_ADAPTIVE_LOCK_PROFILES: dict[str, dict[str, float | bool]] = {
+    # Known AC08 outlier families from the improvement plan. Profiles only relax
+    # tightly bounded locks after validation stagnates or when the residual
+    # error stays clearly above the "good enough" range.
+    "AC0882": {
+        "radius_floor_ratio": 0.84,
+        "arm_min_ratio": 0.68,
+        "color_corridor": 10.0,
+    },
+    "AC0837": {
+        "radius_floor_ratio": 0.86,
+        "arm_min_ratio": 0.70,
+        "color_corridor": 10.0,
+    },
+    "AC0839": {
+        "radius_floor_ratio": 0.86,
+        "arm_min_ratio": 0.70,
+        "text_scale_delta": 0.10,
+        "color_corridor": 10.0,
+    },
+    "AC0820": {
+        "radius_floor_ratio": 0.88,
+        "text_scale_delta": 0.10,
+        "color_corridor": 8.0,
+    },
+    "AC0831": {
+        "radius_floor_ratio": 0.87,
+        "stem_min_ratio": 0.58,
+        "text_scale_delta": 0.10,
+        "color_corridor": 10.0,
+    },
+}
+
+
 def _bbox_from_points(points: list[tuple[int, int]]) -> tuple[int, int, int, int] | None:
     if not points:
         return None
@@ -968,15 +1002,8 @@ class Reflection:
     def parse_description(self, base_name: str, img_filename: str):
         variant_name = os.path.splitext(img_filename)[0]
         canonical_base = get_base_name_from_file(base_name).upper()
-        canonical_variant = get_base_name_from_file(variant_name).upper()
-
-        desc_parts = [
-            self.raw_desc.get(base_name, ""),
-            self.raw_desc.get(variant_name, ""),
-            self.raw_desc.get(canonical_base, ""),
-            self.raw_desc.get(canonical_variant, ""),
-        ]
-        desc_raw = " ".join(part for part in desc_parts if part)
+        description_fragments = _collect_description_fragments(self.raw_desc, base_name, img_filename)
+        desc_raw = " ".join(fragment["text"] for fragment in description_fragments)
         desc = desc_raw.lower().strip()
         base_upper = base_name.upper()
         symbol_upper = canonical_base or base_upper
@@ -988,6 +1015,14 @@ class Reflection:
             "elements": [],
             "label": "M",
             "documented_alias_refs": sorted(Reflection._extract_documented_alias_refs(desc)),
+            "description_fragments": description_fragments,
+            "semantic_priority_order": [
+                "family_rule",
+                "layout_override",
+                "description_heuristic",
+            ],
+            "semantic_conflicts": [],
+            "semantic_sources": {},
         }
 
         semantic_symbol = symbol_upper.startswith("AC08") or symbol_upper == "AR0100"
@@ -1017,37 +1052,64 @@ class Reflection:
             "AC0882",
         }:
             params["mode"] = "semantic_badge"
+            family_elements: list[str] = []
+            heuristic_elements: list[str] = []
             if base_name.upper() in {"AC0810", "AC0811", "AC0812", "AC0813", "AC0814"}:
-                params["elements"].append("SEMANTIC: Kreis ohne Buchstabe")
+                family_elements.append("SEMANTIC: Kreis ohne Buchstabe")
                 params["label"] = ""
             elif symbol_upper in forced_co2_symbols or Reflection._contains_co_marker(desc):
-                params["elements"].append("SEMANTIC: Kreis + Buchstabe CO_2")
+                heuristic_elements.append("SEMANTIC: Kreis + Buchstabe CO_2")
                 params["label"] = "CO_2"
             elif "voc" in desc:
-                params["elements"].append("SEMANTIC: Kreis + Buchstabe VOC")
+                heuristic_elements.append("SEMANTIC: Kreis + Buchstabe VOC")
                 params["label"] = "VOC"
             elif "buchstabe" in desc:
-                params["elements"].append("SEMANTIC: Kreis + Buchstabe")
+                heuristic_elements.append("SEMANTIC: Kreis + Buchstabe")
                 params["label"] = "M" if symbol_upper == "AR0100" else "T"
             else:
-                params["elements"].append("SEMANTIC: Kreis + Buchstabe")
+                heuristic_elements.append("SEMANTIC: Kreis + Buchstabe")
                 params["label"] = "M" if base_name.upper() == "AR0100" else "T"
             if base_name.upper() in {"AC0810", "AC0814", "AC0833", "AC0834", "AC0838", "AC0839"}:
-                params["elements"].append("SEMANTIC: waagrechter Strich rechts vom Kreis")
+                family_elements.append("SEMANTIC: waagrechter Strich rechts vom Kreis")
             if base_name.upper() in {"AC0811", "AC0881", "AC0831", "AC0836"}:
-                params["elements"].append("SEMANTIC: senkrechter Strich hinter dem Kreis")
+                family_elements.append("SEMANTIC: senkrechter Strich hinter dem Kreis")
             if base_name.upper() in {"AC0812", "AC0832", "AC0837", "AC0882"}:
-                params["elements"].append("SEMANTIC: waagrechter Strich links vom Kreis")
+                family_elements.append("SEMANTIC: waagrechter Strich links vom Kreis")
             if "waagrechter strich rechts" in desc:
-                params["elements"].append("SEMANTIC: waagrechter Strich rechts vom Kreis")
+                heuristic_elements.append("SEMANTIC: waagrechter Strich rechts vom Kreis")
             if "senkrechter strich oben" in desc:
-                params["elements"].append("SEMANTIC: senkrechter Strich oben vom Kreis")
+                heuristic_elements.append("SEMANTIC: senkrechter Strich oben vom Kreis")
             if "senkrechter strich hinter" in desc:
-                params["elements"].append("SEMANTIC: senkrechter Strich hinter dem Kreis")
+                heuristic_elements.append("SEMANTIC: senkrechter Strich hinter dem Kreis")
+
+            params["semantic_sources"] = {
+                "family_rule": list(dict.fromkeys(family_elements)),
+                "description_heuristic": list(dict.fromkeys(heuristic_elements)),
+            }
+            if symbol_upper in {"AC0811", "AC0812", "AC0813", "AC0814"} and (
+                Reflection._contains_co_marker(desc) or "voc" in desc or "buchstabe" in desc
+            ):
+                params["semantic_conflicts"].append(
+                    "family_rule_kept_circle_without_letter_over_description_text=SEMANTIC: Kreis + Buchstabe CO_2"
+                    if Reflection._contains_co_marker(desc)
+                    else "family_rule_kept_circle_without_letter_over_description_text=SEMANTIC: Kreis + Buchstabe"
+                )
+            params["elements"].extend(params["semantic_sources"]["family_rule"])
+            accepted_heuristics, ignored_heuristics = Reflection._resolve_semantic_heuristics(
+                canonical_base=symbol_upper,
+                family_elements=params["semantic_sources"]["family_rule"],
+                heuristic_elements=params["semantic_sources"]["description_heuristic"],
+            )
+            params["semantic_conflicts"].extend(ignored_heuristics)
+            params["semantic_sources"]["description_heuristic"] = accepted_heuristics
+            for element in accepted_heuristics:
+                if element not in params["elements"]:
+                    params["elements"].append(element)
 
             layout_overrides = Reflection._parse_semantic_badge_layout_overrides(desc)
             if layout_overrides:
                 params["badge_overrides"] = layout_overrides
+                params["semantic_sources"]["layout_override"] = sorted(layout_overrides)
                 params["elements"].append("SEMANTIC: Layout-Override für Badge-Text")
 
             return desc, params
@@ -1112,6 +1174,61 @@ class Reflection:
             overrides["co2_dx"] = 0.0
 
         return overrides
+
+    @staticmethod
+    def _resolve_semantic_heuristics(
+        *,
+        canonical_base: str,
+        family_elements: list[str],
+        heuristic_elements: list[str],
+    ) -> tuple[list[str], list[str]]:
+        """Filter heuristic semantic claims against stronger family rules and log conflicts."""
+        accepted: list[str] = []
+        conflicts: list[str] = []
+        normalized_family = {str(element).lower() for element in family_elements}
+        family_has_textless_circle = "semantic: kreis ohne buchstabe" in normalized_family
+        family_has_right_arm = "semantic: waagrechter strich rechts vom kreis" in normalized_family
+        family_has_left_arm = "semantic: waagrechter strich links vom kreis" in normalized_family
+        family_has_rear_stem = "semantic: senkrechter strich hinter dem kreis" in normalized_family
+
+        for element in heuristic_elements:
+            normalized = str(element).lower()
+            conflict_reason = ""
+            if canonical_base in {"AC0811", "AC0812", "AC0813", "AC0814"} and family_has_textless_circle:
+                if "kreis + buchstabe" in normalized:
+                    conflict_reason = (
+                        "family_rule_kept_circle_without_letter_over_description_text="
+                        + str(element)
+                    )
+            if not conflict_reason and family_has_right_arm and "semantic: waagrechter strich links vom kreis" == normalized:
+                conflict_reason = "family_rule_kept_right_arm_over_description_left_arm"
+            if not conflict_reason and family_has_left_arm and "semantic: waagrechter strich rechts vom kreis" == normalized:
+                conflict_reason = "family_rule_kept_left_arm_over_description_right_arm"
+            if not conflict_reason and family_has_rear_stem and "semantic: senkrechter strich oben vom kreis" == normalized:
+                conflict_reason = "family_rule_kept_rear_stem_over_description_top_stem"
+
+            if conflict_reason:
+                conflicts.append(conflict_reason)
+                continue
+            accepted.append(element)
+
+        if canonical_base in {"AC0811", "AC0812", "AC0813", "AC0814"} and family_has_textless_circle:
+            if not any("family_rule_kept_circle_without_letter_over_description_text=" in item for item in conflicts):
+                raw_text_conflict = next(
+                    (
+                        str(element)
+                        for element in heuristic_elements
+                        if "kreis + buchstabe" in str(element).lower()
+                    ),
+                    "",
+                )
+                if raw_text_conflict:
+                    conflicts.append(
+                        "family_rule_kept_circle_without_letter_over_description_text="
+                        + raw_text_conflict
+                    )
+
+        return accepted, conflicts
 
 
 class Action:
@@ -1445,6 +1562,212 @@ class Action:
         params[min_key] = float(max(float(params.get(min_key, 1.0)), length * ratio, 1.0))
 
     @staticmethod
+    def _is_ac08_small_variant(name: str, params: dict) -> tuple[bool, str, float]:
+        """Classify tiny AC08 variants so validation can use tighter `_S` heuristics."""
+        normalized_name = str(name).upper()
+        min_dim = float(min(float(params.get("width", 0.0) or 0.0), float(params.get("height", 0.0) or 0.0)))
+        if min_dim <= 0.0:
+            min_dim = max(1.0, float(params.get("r", 1.0)) * 2.0)
+
+        variant_suffix = normalized_name.endswith("_S")
+        dimension_small = min_dim <= 15.5
+        is_small = variant_suffix or dimension_small
+        if variant_suffix and dimension_small:
+            reason = "variant_suffix+min_dim"
+        elif variant_suffix:
+            reason = "variant_suffix"
+        elif dimension_small:
+            reason = "min_dim"
+        else:
+            reason = "standard"
+        return is_small, reason, min_dim
+
+    @staticmethod
+    def _configure_ac08_small_variant_mode(name: str, params: dict) -> dict:
+        """Apply `_S`-specific AC08 tuning for text, connector floors, and masks."""
+        p = dict(params)
+        is_small, reason, min_dim = Action._is_ac08_small_variant(name, p)
+        p["ac08_small_variant_mode"] = bool(is_small)
+        p["ac08_small_variant_reason"] = reason
+        p["ac08_small_variant_min_dim"] = float(min_dim)
+        if not is_small:
+            return p
+
+        p["validation_mask_dilate_px"] = int(max(1, int(p.get("validation_mask_dilate_px", 1))))
+        p["small_variant_antialias_bias"] = float(max(0.0, float(p.get("small_variant_antialias_bias", 0.08))))
+
+        if p.get("arm_enabled"):
+            p["arm_len_min_ratio"] = float(max(float(p.get("arm_len_min_ratio", 0.75)), 0.78))
+            Action._persist_connector_length_floor(p, "arm", default_ratio=0.78)
+        if p.get("stem_enabled"):
+            p["stem_len_min_ratio"] = float(max(float(p.get("stem_len_min_ratio", 0.65)), 0.70))
+            Action._persist_connector_length_floor(p, "stem", default_ratio=0.70)
+
+        text_mode = str(p.get("text_mode", "")).lower()
+        if text_mode == "co2":
+            base_scale = float(p.get("co2_font_scale", 0.82))
+            p["lock_text_scale"] = False
+            p["co2_font_scale_min"] = float(max(float(p.get("co2_font_scale_min", base_scale)), max(0.74, base_scale * 0.92)))
+            p["co2_font_scale_max"] = float(min(float(p.get("co2_font_scale_max", 1.18)), min(1.10, base_scale * 1.12)))
+            p["co2_subscript_offset_scale"] = float(min(float(p.get("co2_subscript_offset_scale", 0.24)), 0.24))
+        elif text_mode == "voc":
+            base_scale = float(p.get("voc_font_scale", 0.52))
+            p["lock_text_scale"] = False
+            p["voc_font_scale_min"] = float(max(float(p.get("voc_font_scale_min", base_scale)), max(0.46, base_scale * 0.92)))
+            p["voc_font_scale_max"] = float(min(float(p.get("voc_font_scale_max", 0.96)), min(0.96, base_scale * 1.10)))
+        return p
+
+
+    @staticmethod
+    def _tune_ac08_left_connector_family(name: str, params: dict) -> dict:
+        """Apply shared guardrails for left-connector AC08 families.
+
+        Aufgabe 4.1 groups AC0812, AC0832, AC0837 and AC0882 because they all
+        combine a circle on the right with a left-facing horizontal connector.
+        The shared failure modes are:
+        - the circle drifting left into the connector,
+        - the arm collapsing until it becomes barely visible, and
+        - text badges shrinking/offsetting once the circle geometry drifts.
+
+        Keep those families on a common semantic baseline before variant-specific
+        fine-tuning runs.
+        """
+        p = dict(params)
+        symbol_name = get_base_name_from_file(str(name)).upper().split("_", 1)[0]
+        if symbol_name not in {"AC0812", "AC0832", "AC0837", "AC0882"}:
+            return p
+
+        p["connector_family_group"] = "ac08_left_connector"
+        p["connector_family_direction"] = "left"
+        p["lock_circle_cx"] = True
+        p["lock_circle_cy"] = True
+        if "template_circle_cx" in p:
+            p["cx"] = float(p["template_circle_cx"])
+        if "template_circle_cy" in p:
+            p["cy"] = float(p["template_circle_cy"])
+
+        has_text = bool(p.get("draw_text", False))
+        is_small, _reason, min_dim = Action._is_ac08_small_variant(str(name), p)
+        arm_ratio_floor = 0.82
+        if has_text:
+            arm_ratio_floor = 0.84
+        if is_small:
+            arm_ratio_floor = max(arm_ratio_floor, 0.86)
+        p["arm_len_min_ratio"] = float(max(float(p.get("arm_len_min_ratio", arm_ratio_floor)), arm_ratio_floor))
+
+        template_r = float(p.get("template_circle_radius", p.get("r", 1.0)))
+        radius_floor_ratio = 0.95 if not has_text else 0.93
+        if is_small:
+            radius_floor_ratio = max(radius_floor_ratio, 0.96 if not has_text else 0.94)
+        p["min_circle_radius"] = float(max(float(p.get("min_circle_radius", 1.0)), template_r * radius_floor_ratio))
+
+        p = Action._enforce_left_arm_badge_geometry(
+            p,
+            int(round(float(p.get("width", 0.0) or 0.0))) or int(round(float(p.get("badge_width", 0.0) or 0.0))) or 1,
+            int(round(float(p.get("height", 0.0) or 0.0))) or int(round(float(p.get("badge_height", 0.0) or 0.0))) or 1,
+        )
+
+        if p.get("arm_enabled") and "cx" in p:
+            max_from_arm_floor = max(1.0, float(p["cx"]) - float(p.get("arm_len_min", 1.0)))
+            existing_max = float(p.get("max_circle_radius", 0.0) or 0.0)
+            if existing_max > 0.0:
+                p["max_circle_radius"] = float(min(existing_max, max_from_arm_floor))
+            else:
+                p["max_circle_radius"] = float(max_from_arm_floor)
+
+        text_mode = str(p.get("text_mode", "")).lower()
+        if text_mode == "co2":
+            base_scale = float(p.get("co2_font_scale", 0.82))
+            p["lock_text_scale"] = False
+            p["co2_font_scale_min"] = float(max(float(p.get("co2_font_scale_min", base_scale)), max(0.78, base_scale * 0.94)))
+            p["co2_font_scale_max"] = float(min(float(p.get("co2_font_scale_max", 1.12)), min(1.12, base_scale * 1.15)))
+            p["co2_anchor_mode"] = str(p.get("co2_anchor_mode", "cluster"))
+        elif text_mode == "voc":
+            base_scale = float(p.get("voc_font_scale", 0.52))
+            p["lock_text_scale"] = False
+            p["voc_font_scale_min"] = float(max(float(p.get("voc_font_scale_min", base_scale)), max(0.50, base_scale * 0.94)))
+            p["voc_font_scale_max"] = float(min(float(p.get("voc_font_scale_max", 0.98)), min(0.98, base_scale * 1.14)))
+        elif str(p.get("text_mode", "")).lower() == "path_t":
+            p["s"] = float(max(float(p.get("s", 0.0)), 0.0088 if min_dim >= 18.0 else 0.0082))
+            Action._center_glyph_bbox(p)
+        return p
+
+    @staticmethod
+    def _tune_ac08_right_connector_family(name: str, params: dict) -> dict:
+        """Apply shared guardrails for mirrored right-connector AC08 families.
+
+        Aufgabe 4.2 groups AC0810, AC0814, AC0833, AC0834, AC0838 and AC0839
+        because they all place the circle on the left and extend the connector
+        toward the right canvas edge. Their common regressions mirror the left
+        connector family:
+        - the circle drifts right into the connector span,
+        - the arm collapses until the badge looks almost circular, and
+        - tiny right-arm text badges drift down/right when text pixels dominate.
+
+        Keep those mirrored families on one semantic baseline before applying
+        family-specific CO₂/VOC or small-variant adjustments.
+        """
+        p = dict(params)
+        symbol_name = get_base_name_from_file(str(name)).upper().split("_", 1)[0]
+        if symbol_name not in {"AC0810", "AC0814", "AC0833", "AC0834", "AC0838", "AC0839"}:
+            return p
+
+        p["connector_family_group"] = "ac08_right_connector"
+        p["connector_family_direction"] = "right"
+        p["lock_circle_cx"] = True
+        p["lock_circle_cy"] = True
+        if "template_circle_cx" in p:
+            p["cx"] = float(p["template_circle_cx"])
+        if "template_circle_cy" in p:
+            p["cy"] = float(p["template_circle_cy"])
+
+        has_text = bool(p.get("draw_text", False))
+        is_small, _reason, min_dim = Action._is_ac08_small_variant(str(name), p)
+        arm_ratio_floor = 0.82
+        if has_text:
+            arm_ratio_floor = 0.84
+        if is_small:
+            arm_ratio_floor = max(arm_ratio_floor, 0.86)
+        p["arm_len_min_ratio"] = float(max(float(p.get("arm_len_min_ratio", arm_ratio_floor)), arm_ratio_floor))
+
+        template_r = float(p.get("template_circle_radius", p.get("r", 1.0)))
+        radius_floor_ratio = 0.95 if not has_text else 0.93
+        if is_small:
+            radius_floor_ratio = max(radius_floor_ratio, 0.96 if not has_text else 0.94)
+        p["min_circle_radius"] = float(max(float(p.get("min_circle_radius", 1.0)), template_r * radius_floor_ratio))
+
+        p = Action._enforce_right_arm_badge_geometry(
+            p,
+            int(round(float(p.get("width", 0.0) or 0.0))) or int(round(float(p.get("badge_width", 0.0) or 0.0))) or 1,
+            int(round(float(p.get("height", 0.0) or 0.0))) or int(round(float(p.get("badge_height", 0.0) or 0.0))) or 1,
+        )
+
+        if p.get("arm_enabled") and "cx" in p and "r" in p:
+            canvas_width = float(p.get("width", 0.0) or p.get("badge_width", 0.0) or p.get("arm_x2", 0.0) or 1.0)
+            right_extent = max(float(p["cx"]) + float(p["r"]), 0.0)
+            max_from_arm_floor = max(1.0, canvas_width - float(p.get("arm_len_min", 1.0)) - float(p["cx"]))
+            existing_max = float(p.get("max_circle_radius", 0.0) or 0.0)
+            bounded_max = min(max_from_arm_floor, max(1.0, right_extent))
+            if existing_max > 0.0:
+                p["max_circle_radius"] = float(min(existing_max, bounded_max))
+            else:
+                p["max_circle_radius"] = float(bounded_max)
+
+        text_mode = str(p.get("text_mode", "")).lower()
+        if text_mode == "co2":
+            base_scale = float(p.get("co2_font_scale", 0.82))
+            p["lock_text_scale"] = False
+            p["co2_font_scale_min"] = float(max(float(p.get("co2_font_scale_min", base_scale)), max(0.78, base_scale * 0.94)))
+            p["co2_font_scale_max"] = float(min(float(p.get("co2_font_scale_max", 1.12)), min(1.12, base_scale * 1.15)))
+            p["co2_anchor_mode"] = str(p.get("co2_anchor_mode", "cluster"))
+        elif text_mode == "voc":
+            base_scale = float(p.get("voc_font_scale", 0.52))
+            p["lock_text_scale"] = False
+            p["voc_font_scale_min"] = float(max(float(p.get("voc_font_scale_min", base_scale)), max(0.50, base_scale * 0.94)))
+            p["voc_font_scale_max"] = float(min(float(p.get("voc_font_scale_max", 0.98)), min(0.98, base_scale * 1.14)))
+        return p
+
+    @staticmethod
     def _finalize_ac08_style(name: str, params: dict) -> dict:
         """Apply AC08xx palette/stroke conventions globally for semantic conversions."""
         canonical_name = str(name).upper()
@@ -1452,6 +1775,7 @@ class Action:
         if not symbol_name.startswith("AC08"):
             return params
         p = Action._capture_canonical_badge_colors(Action._normalize_light_circle_colors(dict(params)))
+        p["badge_symbol_name"] = symbol_name
         # During geometry fitting we intentionally keep auto-estimated colors.
         # Canonical palette values are re-applied once fitting converged.
         p = Action._normalize_ac08_line_widths(p)
@@ -1596,9 +1920,98 @@ class Action:
                     p["voc_font_scale"] = float(max(float(p.get("voc_font_scale", 0.52)), 0.60))
                     p.setdefault("voc_font_scale_min", 0.60)
                     p.pop("voc_font_scale_max", None)
+        p = Action._configure_ac08_small_variant_mode(name, p)
+        p = Action._tune_ac08_left_connector_family(name, p)
+        p = Action._tune_ac08_right_connector_family(name, p)
         if p.get("draw_text", True) and "text_gray" in p:
             p["text_gray"] = int(p.get("stroke_gray", Action.LIGHT_CIRCLE_STROKE_GRAY))
         return p
+
+    @staticmethod
+    def _activate_ac08_adaptive_locks(
+        params: dict,
+        logs: list[str],
+        *,
+        full_err: float,
+        reason: str,
+    ) -> bool:
+        """Open a bounded family-specific fallback search space for stubborn AC08 badges."""
+        if bool(params.get("adaptive_unlock_active", False)):
+            return False
+
+        base_name = get_base_name_from_file(str(params.get("badge_symbol_name", ""))).upper()
+        if base_name not in {"AC0882", "AC0837", "AC0839", "AC0820", "AC0831"}:
+            return False
+
+        if not math.isfinite(full_err) or full_err < float(params.get("adaptive_unlock_error_threshold", 12.0)):
+            return False
+
+        params["adaptive_unlock_active"] = True
+        params["adaptive_unlock_reason"] = reason
+
+        if params.get("circle_enabled", True):
+            current_r = max(1.0, float(params.get("r", 1.0)))
+            existing_min = max(1.0, float(params.get("min_circle_radius", current_r)))
+            relaxed_min = max(1.0, min(existing_min, current_r) * 0.94)
+            params["min_circle_radius"] = float(min(existing_min, relaxed_min))
+            widened_max = max(
+                current_r * 1.08,
+                float(params.get("template_circle_radius", current_r)) * 1.08,
+            )
+            params["max_circle_radius"] = float(max(float(params.get("max_circle_radius", 0.0) or 0.0), widened_max))
+
+        if params.get("arm_enabled"):
+            current_ratio = float(params.get("arm_len_min_ratio", 0.75))
+            params["arm_len_min_ratio"] = float(min(current_ratio, 0.58 if base_name in {"AC0882", "AC0837", "AC0839"} else 0.65))
+        if params.get("stem_enabled"):
+            current_ratio = float(params.get("stem_len_min_ratio", 0.65))
+            params["stem_len_min_ratio"] = float(min(current_ratio, 0.52 if base_name == "AC0831" else 0.58))
+
+        min_dim = float(
+            min(
+                float(params.get("width", 0.0) or 0.0),
+                float(params.get("height", 0.0) or 0.0),
+            )
+        )
+        if min_dim <= 0.0:
+            min_dim = max(1.0, float(params.get("r", 1.0)) * 2.0)
+
+        text_mode = str(params.get("text_mode", "")).lower()
+        if text_mode == "co2" and (base_name in {"AC0820", "AC0831"} or min_dim <= 15.5):
+            base_scale = float(params.get("co2_font_scale", 0.82))
+            params["lock_text_scale"] = False
+            params["co2_font_scale_min"] = float(min(float(params.get("co2_font_scale_min", base_scale)), max(0.68, base_scale * 0.86)))
+            params["co2_font_scale_max"] = float(max(float(params.get("co2_font_scale_max", base_scale)), min(1.22, base_scale * 1.18)))
+        if text_mode == "voc" and (base_name == "AC0839" or min_dim <= 15.5):
+            base_scale = float(params.get("voc_font_scale", 0.52))
+            params["lock_text_scale"] = False
+            params["voc_font_scale_min"] = float(min(float(params.get("voc_font_scale_min", base_scale)), max(0.40, base_scale * 0.84)))
+            params["voc_font_scale_max"] = float(max(float(params.get("voc_font_scale_max", base_scale)), min(0.98, base_scale * 1.18)))
+
+        if base_name in {"AC0820", "AC0831", "AC0837", "AC0839", "AC0882"}:
+            params["lock_colors"] = False
+            for key, corridor in (
+                ("fill_gray", 10),
+                ("stroke_gray", 12),
+                ("stem_gray", 12),
+                ("text_gray", 12),
+            ):
+                if key not in params:
+                    continue
+                center = int(round(float(params.get(key, 0.0))))
+                params[f"{key}_min"] = int(max(0, center - corridor))
+                params[f"{key}_max"] = int(min(255, center + corridor))
+
+        logs.append(
+            "adaptive_unlock_applied: "
+            f"base={base_name}, reason={reason}, full_err={full_err:.3f}, "
+            f"radius=[{float(params.get('min_circle_radius', 0.0)):.3f}..{float(params.get('max_circle_radius', 0.0) or 0.0):.3f}], "
+            f"arm_ratio={float(params.get('arm_len_min_ratio', 0.0)):.3f}, "
+            f"stem_ratio={float(params.get('stem_len_min_ratio', 0.0)):.3f}, "
+            f"text_locked={'yes' if bool(params.get('lock_text_scale', False)) else 'no'}, "
+            f"colors_locked={'yes' if bool(params.get('lock_colors', False)) else 'no'}"
+        )
+        return True
 
     @staticmethod
     def _align_stem_to_circle_center(params: dict) -> dict:
@@ -2283,6 +2696,34 @@ class Action:
         p["arm_stroke"] = float(max(1.0, p.get("arm_stroke", Action.AC08_STROKE_WIDTH_PX)))
 
         arm_len = float(max(0.0, arm_x2))
+        ratio = float(max(0.0, min(1.0, float(p.get("arm_len_min_ratio", 0.75)))))
+        p["arm_len_min_ratio"] = ratio
+        p["arm_len_min"] = float(max(1.0, float(p.get("arm_len_min", 1.0)), arm_len * ratio))
+        return p
+
+    @staticmethod
+    def _enforce_right_arm_badge_geometry(params: dict, w: int, h: int) -> dict:
+        """Ensure AC0810/AC0814-like badges always keep a visible right connector arm."""
+        p = dict(params)
+        if not p.get("circle_enabled", True):
+            return p
+        if "cx" not in p or "cy" not in p or "r" not in p:
+            return p
+
+        cx = float(p["cx"])
+        cy = float(p["cy"])
+        r = float(p["r"])
+        canvas_width = max(float(w), float(p.get("arm_x2", 0.0) or 0.0), float(p.get("width", 0.0) or 0.0), float(p.get("badge_width", 0.0) or 0.0), cx + r)
+        arm_x1 = min(canvas_width, cx + r)
+
+        p["arm_enabled"] = True
+        p["arm_x1"] = arm_x1
+        p["arm_y1"] = cy
+        p["arm_x2"] = canvas_width
+        p["arm_y2"] = cy
+        p["arm_stroke"] = float(max(1.0, p.get("arm_stroke", Action.AC08_STROKE_WIDTH_PX)))
+
+        arm_len = float(max(0.0, canvas_width - arm_x1))
         ratio = float(max(0.0, min(1.0, float(p.get("arm_len_min_ratio", 0.75)))))
         p["arm_len_min_ratio"] = ratio
         p["arm_len_min"] = float(max(1.0, float(p.get("arm_len_min", 1.0)), arm_len * ratio))
@@ -3248,16 +3689,27 @@ class Action:
 
     @staticmethod
     def render_svg_to_numpy(svg_string: str, size_w: int, size_h: int):
-        if fitz is None:
+        if fitz is None or np is None or cv2 is None:
             return None
-        doc = fitz.open("pdf", svg_string.encode("utf-8"))
-        page = doc.load_page(0)
-        zoom_x = size_w / page.rect.width if page.rect.width > 0 else 1
-        zoom_y = size_h / page.rect.height if page.rect.height > 0 else 1
-        mat = fitz.Matrix(zoom_x, zoom_y)
-        pix = page.get_pixmap(matrix=mat, alpha=False)
-        img = np.frombuffer(pix.samples, dtype=np.uint8).reshape(pix.h, pix.w, 3)
-        return cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
+
+        attempts = [svg_string]
+        normalized_svg = re.sub(r">\s+<", "><", str(svg_string or "").strip())
+        if normalized_svg and normalized_svg != svg_string:
+            attempts.append(normalized_svg)
+
+        for candidate_svg in attempts:
+            try:
+                with fitz.open("pdf", candidate_svg.encode("utf-8")) as doc:
+                    page = doc.load_page(0)
+                    zoom_x = size_w / page.rect.width if page.rect.width > 0 else 1
+                    zoom_y = size_h / page.rect.height if page.rect.height > 0 else 1
+                    mat = fitz.Matrix(zoom_x, zoom_y)
+                    pix = page.get_pixmap(matrix=mat, alpha=False)
+                img = np.frombuffer(pix.samples, dtype=np.uint8).reshape(pix.h, pix.w, 3)
+                return cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
+            except Exception:
+                continue
+        return None
 
     @staticmethod
     def create_diff_image(
@@ -3847,6 +4299,13 @@ class Action:
         fg_bool = Action._foreground_mask(img_orig)
         mask = fg_bool & region_mask
 
+        dilate_px = int(params.get("validation_mask_dilate_px", 0) or 0)
+        if dilate_px > 0 and bool(params.get("ac08_small_variant_mode", False)):
+            kernel_size = max(2, (dilate_px * 2) + 1)
+            kernel = np.ones((kernel_size, kernel_size), dtype=np.uint8)
+            mask = cv2.dilate(mask.astype(np.uint8) * 255, kernel, iterations=1) > 0
+            mask &= region_mask
+
         if int(mask.sum()) < 3:
             return None
         return mask
@@ -3975,6 +4434,10 @@ class Action:
 
         miss = float(np.sum(local_mask_orig & (~local_mask_svg))) / orig_area
         extra = float(np.sum(local_mask_svg & (~local_mask_orig))) / orig_area
+        if bool(params.get("ac08_small_variant_mode", False)):
+            aa_bias = float(max(0.0, params.get("small_variant_antialias_bias", 0.0)))
+            miss = max(0.0, miss - aa_bias)
+            extra = max(0.0, extra - (aa_bias * 0.75))
         iou = inter / union
 
         # Normalize photometric term by source element area so comparisons stay
@@ -4385,12 +4848,15 @@ class Action:
         normalized_base = get_base_name_from_file(str(base_name)).upper()
         normalized_elements = [str(elem).lower() for elem in (semantic_elements or [])]
         expects_left_arm = any("waagrechter strich links" in elem for elem in normalized_elements)
+        expects_right_arm = any("waagrechter strich rechts" in elem for elem in normalized_elements)
 
         # AC0812/AC0837/AC0882 are directional left-arm families. If noisy element
         # extraction temporarily drops arm flags, regenerate canonical connector geometry
         # from the fitted circle before final SVG serialization.
         if normalized_base in {"AC0812", "AC0837", "AC0882"} or expects_left_arm:
             return Action._enforce_left_arm_badge_geometry(params, w, h)
+        if normalized_base in {"AC0810", "AC0814", "AC0833", "AC0834", "AC0838", "AC0839"} or expects_right_arm:
+            return Action._enforce_right_arm_badge_geometry(params, w, h)
         return params
 
     @staticmethod
@@ -4763,6 +5229,8 @@ class Action:
         if min_dim <= 22.0:
             low_bound = max(low_bound, current * 0.9)
         high_bound = min_dim * 0.48
+        if "max_circle_radius" in params:
+            high_bound = min(high_bound, float(params.get("max_circle_radius", high_bound)))
         if not low_bound < high_bound:
             return False
 
@@ -5376,23 +5844,27 @@ class Action:
 
         for color_key in Action._element_color_keys(element, params):
             current = int(round(float(params.get(color_key, 128))))
+            low_limit = int(Action._clip_scalar(int(params.get(f"{color_key}_min", 0)), 0, 255))
+            high_limit = int(Action._clip_scalar(int(params.get(f"{color_key}_max", 255)), 0, 255))
+            if low_limit > high_limit:
+                low_limit, high_limit = high_limit, low_limit
             candidates = {
-                int(Action._clip_scalar(current - 32, 0, 255)),
-                int(Action._clip_scalar(current - 16, 0, 255)),
-                int(Action._clip_scalar(current - 8, 0, 255)),
-                int(Action._clip_scalar(current, 0, 255)),
-                int(Action._clip_scalar(current + 8, 0, 255)),
-                int(Action._clip_scalar(current + 16, 0, 255)),
-                int(Action._clip_scalar(current + 32, 0, 255)),
+                int(Action._clip_scalar(current - 32, low_limit, high_limit)),
+                int(Action._clip_scalar(current - 16, low_limit, high_limit)),
+                int(Action._clip_scalar(current - 8, low_limit, high_limit)),
+                int(Action._clip_scalar(current, low_limit, high_limit)),
+                int(Action._clip_scalar(current + 8, low_limit, high_limit)),
+                int(Action._clip_scalar(current + 16, low_limit, high_limit)),
+                int(Action._clip_scalar(current + 32, low_limit, high_limit)),
             }
             if sampled is not None:
-                candidates.add(int(Action._clip_scalar(sampled, 0, 255)))
+                candidates.add(int(Action._clip_scalar(sampled, low_limit, high_limit)))
             if element == "circle" and color_key == "fill_gray":
-                candidates.update({200, 210, 220, 230, 240})
+                candidates.update(int(Action._clip_scalar(v, low_limit, high_limit)) for v in {200, 210, 220, 230, 240})
             if color_key in {"stroke_gray", "stem_gray", "text_gray"}:
-                candidates.update({96, 112, 128, 144, 152, 160, 171})
+                candidates.update(int(Action._clip_scalar(v, low_limit, high_limit)) for v in {96, 112, 128, 144, 152, 160, 171})
 
-            values = sorted(candidates)
+            values = sorted(v for v in candidates if min_candidate <= v <= max_candidate)
             errs = [
                 Action._element_error_for_color(img_orig, params, element, color_key, v, mask_orig)
                 for v in values
@@ -5417,14 +5889,14 @@ class Action:
                         params,
                         element,
                         color_key,
-                        int(Action._clip_scalar(int(round(v)), 0, 255)),
+                        int(Action._clip_scalar(int(round(v)), low_limit, high_limit)),
                         mask_orig,
                     ),
-                    snap=lambda v: int(Action._clip_scalar(int(round(v)), 0, 255)),
+                    snap=lambda v: int(Action._clip_scalar(int(round(v)), low_limit, high_limit)),
                     seed=1301,
                 )
                 if s_improved:
-                    best_value = int(Action._clip_scalar(int(round(s_best)), 0, 255))
+                    best_value = int(Action._clip_scalar(int(round(s_best)), low_limit, high_limit))
                     logs.append(
                         f"{element}: Farb-Stochastic-Survivor aktiviert ({color_key}={best_value}, err={s_err:.3f})"
                     )
@@ -5849,6 +6321,16 @@ class Action:
         best_full_err = float("inf")
         previous_round_state: tuple[tuple[tuple[str, float], ...], float] | None = None
         fallback_search_active = False
+        if bool(params.get("ac08_small_variant_mode", False)):
+            logs.append(
+                "small_variant_mode_active: "
+                f"reason={params.get('ac08_small_variant_reason', 'unknown')}, "
+                f"min_dim={float(params.get('ac08_small_variant_min_dim', 0.0)):.3f}, "
+                f"mask_dilate_px={int(params.get('validation_mask_dilate_px', 0) or 0)}, "
+                f"text_mode={params.get('text_mode', '')}, "
+                f"arm_min_ratio={float(params.get('arm_len_min_ratio', 0.0)):.3f}, "
+                f"stem_min_ratio={float(params.get('stem_len_min_ratio', 0.0)):.3f}"
+            )
 
         def _stagnation_fingerprint(current_params: dict) -> tuple[tuple[str, float], ...]:
             tracked_keys = (
@@ -5953,7 +6435,27 @@ class Action:
                     logs.append(
                         "stagnation_detected: identischer Parameter-Fingerprint und praktisch unveränderter Gesamtfehler"
                     )
+                    adaptive_unlock_applied = Action._activate_ac08_adaptive_locks(
+                        params,
+                        logs,
+                        full_err=full_err,
+                        reason="identical_fingerprint",
+                    )
+                    if adaptive_unlock_applied:
+                        previous_round_state = None
+                        fallback_search_active = True
+                        if round_idx + 1 < max_rounds:
+                            logs.append(
+                                "switch_to_fallback_search: adaptive family-unlocks aktiviert und Circle-Geometry-Penalty deaktiviert"
+                            )
+                            continue
                     if not fallback_search_active and round_idx + 1 < max_rounds:
+                        Action._release_ac08_adaptive_locks(
+                            params,
+                            logs,
+                            reason="stagnation_same_fingerprint",
+                            current_error=full_err,
+                        )
                         fallback_search_active = True
                         logs.append(
                             "switch_to_fallback_search: deaktiviere Circle-Geometry-Penalty für eine letzte Ausweichrunde"
@@ -5969,12 +6471,39 @@ class Action:
                     logs.append("Gesamtfehler unter Schwellwert, Validierung beendet")
                     break
                 logs.append("Gesamtfehler unter Schwellwert, Suche nach besserem Optimum wird fortgesetzt")
+            elif round_idx >= 1:
+                Action._release_ac08_adaptive_locks(
+                    params,
+                    logs,
+                    reason="high_residual_error",
+                    current_error=full_err,
+                )
 
             if round_idx + 1 >= max_rounds:
                 break
 
             if not round_changed:
+                adaptive_unlock_applied = Action._activate_ac08_adaptive_locks(
+                    params,
+                    logs,
+                    full_err=full_err,
+                    reason="no_geometry_movement",
+                )
+                if adaptive_unlock_applied:
+                    previous_round_state = None
+                    fallback_search_active = True
+                    if round_idx + 1 < max_rounds:
+                        logs.append(
+                            "switch_to_fallback_search: adaptive family-unlocks aktiviert und Circle-Geometry-Penalty deaktiviert"
+                        )
+                        continue
                 if not fallback_search_active and round_idx + 1 < max_rounds:
+                    Action._release_ac08_adaptive_locks(
+                        params,
+                        logs,
+                        reason="stagnation_no_geometry_change",
+                        current_error=full_err,
+                    )
                     fallback_search_active = True
                     logs.append(
                         "stagnation_detected: keine relevante Geometrieänderung in der letzten Validierungsrunde"
@@ -6082,6 +6611,19 @@ def run_iteration_pipeline(
 
     ref = Reflection(perc.raw_desc)
     desc, params = ref.parse_description(perc.base_name, filename)
+    semantic_audit_targets = {"AC0811", "AC0812", "AC0813", "AC0814"}
+    semantic_audit_row: dict[str, object] | None = None
+    if get_base_name_from_file(perc.base_name).upper() in semantic_audit_targets:
+        semantic_audit_row = _semantic_audit_record(
+            base_name=perc.base_name,
+            filename=filename,
+            description_fragments=list(params.get("description_fragments", [])),
+            semantic_elements=list(params.get("elements", [])),
+            status="semantic_pending",
+            semantic_priority_order=list(params.get("semantic_priority_order", [])),
+            semantic_conflicts=list(params.get("semantic_conflicts", [])),
+            semantic_sources=dict(params.get("semantic_sources", {})),
+        )
 
     if not desc.strip() and params["mode"] != "semantic_badge":
         print("  -> Überspringe Bild, da keine begleitende textliche Beschreibung vorliegt.")
@@ -6115,6 +6657,23 @@ def run_iteration_pipeline(
         payload.extend(str(line) for line in lines)
         with open(log_path, "w", encoding="utf-8") as f:
             f.write("\n".join(payload).rstrip() + "\n")
+
+    def _params_snapshot(snapshot: dict[str, object]) -> str:
+        return json.dumps(snapshot, ensure_ascii=False, sort_keys=True, default=str)
+
+    def _record_render_failure(reason: str, *, svg_content: str | None = None, params_snapshot: dict[str, object] | None = None) -> None:
+        if svg_content:
+            _write_attempt_artifacts(svg_content, failed=True)
+        lines = [
+            "status=render_failure",
+            f"failure_reason={reason}",
+            f"filename={filename}",
+        ]
+        if svg_content:
+            lines.append(f"best_attempt_svg={base}_failed.svg")
+        if params_snapshot is not None:
+            lines.append("params_snapshot=" + _params_snapshot(params_snapshot))
+        _write_validation_log(lines)
 
     def _write_attempt_artifacts(svg_content: str, rendered_img=None, diff_img=None, *, failed: bool = False) -> None:
         suffix = "_failed" if failed else ""
@@ -6150,11 +6709,46 @@ def run_iteration_pipeline(
             print("[ERROR] Semantik-Abgleich fehlgeschlagen:")
             for issue in semantic_issues:
                 print(f"  - {issue}")
+            if semantic_audit_row is not None:
+                semantic_audit_row = _semantic_audit_record(
+                    base_name=perc.base_name,
+                    filename=filename,
+                    description_fragments=list(params.get("description_fragments", [])),
+                    semantic_elements=list(params.get("elements", [])),
+                    status="semantic_mismatch",
+                    mismatch_reasons=semantic_issues,
+                    semantic_priority_order=list(params.get("semantic_priority_order", [])),
+                    semantic_conflicts=list(params.get("semantic_conflicts", [])),
+                    semantic_sources=dict(params.get("semantic_sources", {})),
+                )
             _write_validation_log(
                 [
                     "status=semantic_mismatch",
                     f"best_attempt_svg={base}_failed.svg",
                     f"best_attempt_diff={base}_failed_diff.png",
+                    *(
+                        [
+                            f"semantic_audit_status={semantic_audit_row.get('status', '')}",
+                            "semantic_audit_lookup_keys=" + " | ".join(
+                                str(value) for value in semantic_audit_row.get("description_lookup_keys", [])
+                            ),
+                            "semantic_audit_recognized_description_elements=" + " | ".join(
+                                str(value) for value in semantic_audit_row.get("recognized_description_elements", [])
+                            ),
+                            "semantic_audit_derived_elements=" + " | ".join(
+                                str(value) for value in semantic_audit_row.get("derived_elements", [])
+                            ),
+                            "semantic_audit_priority_order=" + " > ".join(
+                                str(value) for value in semantic_audit_row.get("semantic_priority_order", [])
+                            ),
+                            "semantic_audit_conflicts=" + " | ".join(
+                                str(value) for value in semantic_audit_row.get("semantic_conflicts", [])
+                            ),
+                            f"semantic_audit_mismatch_reason={semantic_audit_row.get('mismatch_reason', '')}",
+                        ]
+                        if semantic_audit_row is not None
+                        else []
+                    ),
                     *[f"issue={issue}" for issue in semantic_issues],
                 ]
             )
@@ -6186,13 +6780,60 @@ def run_iteration_pipeline(
                 "semantic-guard: Erwartete Arm-Geometrie bestätigt/wiederhergestellt (z.B. AC0812 links)."
             )
         quality_flags = _semantic_quality_flags(perc.base_name, validation_logs)
-        _write_validation_log(["status=semantic_ok", *quality_flags, *validation_logs])
+        if semantic_audit_row is not None:
+            semantic_audit_row = _semantic_audit_record(
+                base_name=perc.base_name,
+                filename=filename,
+                description_fragments=list(params.get("description_fragments", [])),
+                semantic_elements=list(params.get("elements", [])),
+                status="semantic_ok",
+                semantic_priority_order=list(params.get("semantic_priority_order", [])),
+                semantic_conflicts=list(params.get("semantic_conflicts", [])),
+                semantic_sources=dict(params.get("semantic_sources", {})),
+            )
+        _write_validation_log(
+            [
+                "status=semantic_ok",
+                *(
+                    [
+                        f"semantic_audit_status={semantic_audit_row.get('status', '')}",
+                        "semantic_audit_lookup_keys=" + " | ".join(
+                            str(value) for value in semantic_audit_row.get("description_lookup_keys", [])
+                        ),
+                        "semantic_audit_recognized_description_elements=" + " | ".join(
+                            str(value) for value in semantic_audit_row.get("recognized_description_elements", [])
+                        ),
+                        "semantic_audit_derived_elements=" + " | ".join(
+                            str(value) for value in semantic_audit_row.get("derived_elements", [])
+                        ),
+                        "semantic_audit_priority_order=" + " > ".join(
+                            str(value) for value in semantic_audit_row.get("semantic_priority_order", [])
+                        ),
+                        "semantic_audit_conflicts=" + " | ".join(
+                            str(value) for value in semantic_audit_row.get("semantic_conflicts", [])
+                        ),
+                    ]
+                    if semantic_audit_row is not None
+                    else []
+                ),
+                *quality_flags,
+                *validation_logs,
+            ]
+        )
 
         svg_content = Action.generate_badge_svg(w, h, badge_params)
         svg_rendered = Action.render_svg_to_numpy(svg_content, w, h)
         if svg_rendered is None:
-            raise RuntimeError("SVG rendering failed although fitz is installed.")
+            _record_render_failure(
+                "semantic_badge_final_render_failed",
+                svg_content=svg_content,
+                params_snapshot=badge_params,
+            )
+            return None
         _write_attempt_artifacts(svg_content, svg_rendered)
+        if semantic_audit_row is not None:
+            params = copy.deepcopy(params)
+            params["semantic_audit"] = semantic_audit_row
         return base, desc, params, 1, Action.calculate_error(perc.img, svg_rendered)
 
     if params["mode"] != "composite":
@@ -6216,6 +6857,13 @@ def run_iteration_pipeline(
         svg_content = Action.generate_composite_svg(w, h, params, folder_path, float(eps))
 
         svg_rendered = Action.render_svg_to_numpy(svg_content, w, h)
+        if svg_rendered is None:
+            _record_render_failure(
+                "composite_iteration_render_failed",
+                svg_content=svg_content,
+                params_snapshot=params,
+            )
+            return None
         error = Action.calculate_error(perc.img, svg_rendered)
 
         if previous_error is not None and abs(error - previous_error) <= plateau_tolerance:
@@ -6403,6 +7051,145 @@ def _default_converted_symbols_root() -> str:
 
 def _converted_svg_output_dir(output_root: str) -> str:
     return os.path.join(output_root, "converted_svgs")
+
+
+def _read_validation_log_details(log_path: str) -> dict[str, str]:
+    if not os.path.exists(log_path):
+        return {}
+    details: dict[str, str] = {}
+    try:
+        with open(log_path, "r", encoding="utf-8") as f:
+            for raw_line in f:
+                line = raw_line.strip()
+                if not line or ": " in line.split("=", 1)[0]:
+                    continue
+                if "=" not in line:
+                    continue
+                key, value = line.split("=", 1)
+                details[key] = value
+    except OSError:
+        return {}
+    return details
+
+
+def _write_batch_failure_summary(reports_out_dir: str, failures: list[dict[str, str]]) -> None:
+    summary_path = os.path.join(reports_out_dir, "batch_failure_summary.csv")
+    with open(summary_path, "w", encoding="utf-8", newline="") as f:
+        writer = csv.writer(f, delimiter=";")
+        writer.writerow(["filename", "status", "reason", "details", "log_file"])
+        for failure in failures:
+            writer.writerow([
+                failure.get("filename", ""),
+                failure.get("status", ""),
+                failure.get("reason", ""),
+                failure.get("details", ""),
+                failure.get("log_file", ""),
+            ])
+
+
+
+def _collect_description_fragments(raw_desc: dict[str, str], base_name: str, img_filename: str) -> list[dict[str, str]]:
+    """Return the ordered description fragments consulted for one variant lookup."""
+    variant_name = os.path.splitext(img_filename)[0]
+    canonical_base = get_base_name_from_file(base_name).upper()
+    canonical_variant = get_base_name_from_file(variant_name).upper()
+
+    lookup_keys = [
+        ("base_name", str(base_name)),
+        ("variant_name", str(variant_name)),
+        ("canonical_base", canonical_base),
+        ("canonical_variant", canonical_variant),
+    ]
+    fragments: list[dict[str, str]] = []
+    seen: set[tuple[str, str]] = set()
+    for source, key in lookup_keys:
+        normalized_key = str(key or "").strip()
+        if not normalized_key:
+            continue
+        marker = (source, normalized_key)
+        if marker in seen:
+            continue
+        seen.add(marker)
+        value = str(raw_desc.get(normalized_key, "") or "").strip()
+        if not value:
+            continue
+        fragments.append({"source": source, "key": normalized_key, "text": value})
+    return fragments
+
+
+def _semantic_audit_record(
+    *,
+    base_name: str,
+    filename: str,
+    description_fragments: list[dict[str, str]],
+    semantic_elements: list[str],
+    status: str,
+    mismatch_reasons: list[str] | None = None,
+    semantic_priority_order: list[str] | None = None,
+    semantic_conflicts: list[str] | None = None,
+    semantic_sources: dict[str, object] | None = None,
+) -> dict[str, object]:
+    """Build a normalized semantic-audit record for AC0811..AC0814 style families."""
+    mismatch_reasons = [str(reason) for reason in (mismatch_reasons or []) if str(reason).strip()]
+    joined_description = " ".join(fragment["text"] for fragment in description_fragments).strip()
+    return {
+        "filename": str(filename),
+        "base_name": get_base_name_from_file(base_name).upper(),
+        "description_fragments": description_fragments,
+        "recognized_description_elements": [fragment["text"] for fragment in description_fragments],
+        "description_lookup_keys": [fragment["key"] for fragment in description_fragments],
+        "description_text": joined_description,
+        "derived_elements": [str(element) for element in semantic_elements],
+        "semantic_priority_order": [str(item) for item in (semantic_priority_order or [])],
+        "semantic_conflicts": [str(item) for item in (semantic_conflicts or [])],
+        "semantic_sources": dict(semantic_sources or {}),
+        "status": str(status),
+        "mismatch_reason": " | ".join(mismatch_reasons),
+        "mismatch_reasons": mismatch_reasons,
+    }
+
+
+def _write_semantic_audit_report(reports_out_dir: str, audit_rows: list[dict[str, object]]) -> None:
+    """Persist semantic audit rows as CSV/JSON for targeted AC0811..AC0814 review."""
+    if not audit_rows:
+        return
+
+    csv_path = os.path.join(reports_out_dir, "semantic_audit_ac0811_ac0814.csv")
+    with open(csv_path, "w", encoding="utf-8", newline="") as f:
+        writer = csv.writer(f, delimiter=";")
+        writer.writerow(
+            [
+                "filename",
+                "base_name",
+                "description_lookup_keys",
+                "recognized_description_elements",
+                "description_text",
+                "derived_elements",
+                "semantic_priority_order",
+                "semantic_conflicts",
+                "status",
+                "mismatch_reason",
+            ]
+        )
+        for row in audit_rows:
+            writer.writerow(
+                [
+                    row.get("filename", ""),
+                    row.get("base_name", ""),
+                    " | ".join(str(value) for value in row.get("description_lookup_keys", [])),
+                    " | ".join(str(value) for value in row.get("recognized_description_elements", [])),
+                    row.get("description_text", ""),
+                    " | ".join(str(value) for value in row.get("derived_elements", [])),
+                    " > ".join(str(value) for value in row.get("semantic_priority_order", [])),
+                    " | ".join(str(value) for value in row.get("semantic_conflicts", [])),
+                    row.get("status", ""),
+                    row.get("mismatch_reason", ""),
+                ]
+            )
+
+    json_path = os.path.join(reports_out_dir, "semantic_audit_ac0811_ac0814.json")
+    with open(json_path, "w", encoding="utf-8") as f:
+        json.dump(audit_rows, f, ensure_ascii=False, indent=2)
 
 
 def _diff_output_dir(output_root: str) -> str:
@@ -7376,22 +8163,53 @@ def convert_range(
     max_quality_passes = 4
     quality_logs: list[dict[str, object]] = []
     result_map: dict[str, dict[str, object]] = {}
+    batch_failures: list[dict[str, str]] = []
     existing_donor_rows = _load_existing_conversion_rows(out_root, folder_path)
 
     def _convert_one(filename: str, iteration_budget: int, badge_rounds: int) -> dict[str, object] | None:
         image_path = os.path.join(folder_path, filename)
-        res = run_iteration_pipeline(
-            image_path,
-            csv_path,
-            max(1, int(iteration_budget)),
-            svg_out_dir,
-            diff_out_dir,
-            reports_out_dir,
-            debug_ac0811_dir,
-            debug_element_diff_dir,
-            badge_validation_rounds=max(1, int(badge_rounds)),
-        )
+        base = os.path.splitext(filename)[0]
+        log_file = os.path.join(reports_out_dir, f"{base}_element_validation.log")
+        try:
+            res = run_iteration_pipeline(
+                image_path,
+                csv_path,
+                max(1, int(iteration_budget)),
+                svg_out_dir,
+                diff_out_dir,
+                reports_out_dir,
+                debug_ac0811_dir,
+                debug_element_diff_dir,
+                badge_validation_rounds=max(1, int(badge_rounds)),
+            )
+        except Exception as exc:
+            batch_failures.append(
+                {
+                    "filename": filename,
+                    "status": "batch_error",
+                    "reason": type(exc).__name__,
+                    "details": str(exc),
+                    "log_file": os.path.basename(log_file),
+                }
+            )
+            with open(log_file, "w", encoding="utf-8") as f:
+                f.write(f"status=batch_error\nfilename={filename}\nreason={type(exc).__name__}\ndetails={exc}\n")
+            print(f"[WARN] {filename}: Batchlauf setzt nach Fehler fort ({type(exc).__name__}: {exc})")
+            return None
         if not res:
+            details = _read_validation_log_details(log_file)
+            status = details.get("status", "")
+            if status in {"render_failure", "batch_error"}:
+                batch_failures.append(
+                    {
+                        "filename": filename,
+                        "status": status,
+                        "reason": details.get("failure_reason", details.get("reason", "unknown")),
+                        "details": details.get("params_snapshot", details.get("details", "")),
+                        "log_file": os.path.basename(log_file),
+                    }
+                )
+                print(f"[WARN] {filename}: Fehler protokolliert, Batchlauf wird fortgesetzt ({status}).")
             return None
 
         _base, _desc, params, best_iter, best_error = res
@@ -7616,6 +8434,7 @@ def convert_range(
             continue
 
     _write_quality_pass_report(reports_out_dir, quality_logs)
+    _write_batch_failure_summary(reports_out_dir, batch_failures)
     if strategy_logs:
         strategy_path = os.path.join(reports_out_dir, "strategy_switch_template_transfers.csv")
         with open(strategy_path, "w", encoding="utf-8", newline="") as f:
@@ -7669,6 +8488,13 @@ def convert_range(
                 )
 
     _harmonize_semantic_size_variants(semantic_results, folder_path, svg_out_dir, reports_out_dir)
+    semantic_audit_rows = [
+        dict(audit)
+        for row in result_map.values()
+        for audit in [dict(row.get("params", {}).get("semantic_audit", {}))]
+        if audit
+    ]
+    _write_semantic_audit_report(reports_out_dir, semantic_audit_rows)
     _write_pixel_delta2_ranking(folder_path, svg_out_dir, reports_out_dir)
     _write_ac08_regression_manifest(
         reports_out_dir,

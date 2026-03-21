@@ -413,6 +413,138 @@ def test_finalize_plain_ac08_badge_reanchors_circle_to_template_center() -> None
     assert float(params["cy"]) == 9.5
 
 
+def test_finalize_ac08_small_variant_enables_compact_text_and_connector_guards() -> None:
+    """Small AC08 `_S` variants should activate the dedicated text/connector tuning mode."""
+    params = Action.make_badge_params(15, 15, "AC0832")
+
+    assert params["ac08_small_variant_mode"] is True
+    assert params["ac08_small_variant_reason"] in {"variant_suffix+min_dim", "variant_suffix", "min_dim"}
+    assert int(params["validation_mask_dilate_px"]) >= 1
+    assert float(params["arm_len_min_ratio"]) >= 0.78
+    assert float(params["co2_subscript_offset_scale"]) <= 0.24
+    assert float(params["co2_font_scale_max"]) <= 1.10
+
+
+
+
+def test_finalize_left_connector_family_applies_shared_guardrails() -> None:
+    """Left-connector AC08 families should share connector/circle guardrails."""
+    params = Action._apply_co2_label(Action._default_ac0812_params(20, 12))
+    params["template_circle_radius"] = float(params["r"])
+    params["template_circle_cx"] = float(params["cx"])
+    params["template_circle_cy"] = float(params["cy"])
+    params["cx"] = float(params["cx"]) - 1.5
+    params["cy"] = float(params["cy"]) + 1.0
+    params["r"] = float(params["r"]) * 0.85
+
+    tuned = Action._finalize_ac08_style("AC0832_S", params)
+
+    assert tuned["connector_family_group"] == "ac08_left_connector"
+    assert tuned["connector_family_direction"] == "left"
+    assert tuned["lock_circle_cx"] is True
+    assert tuned["lock_circle_cy"] is True
+    assert float(tuned["cx"]) == float(params["template_circle_cx"])
+    assert float(tuned["cy"]) == float(params["template_circle_cy"])
+    assert float(tuned["arm_len_min_ratio"]) >= 0.86
+    assert float(tuned["min_circle_radius"]) >= float(params["template_circle_radius"]) * 0.94
+    assert float(tuned["max_circle_radius"]) <= float(tuned["cx"]) - float(tuned["arm_len_min"]) + 1e-6
+    assert tuned["lock_text_scale"] is False
+    assert float(tuned["co2_font_scale_min"]) >= 0.78
+
+
+def test_finalize_left_connector_path_text_recenters_and_preserves_visible_arm() -> None:
+    """Plain-text left-arm badges should keep the T glyph centered and the arm visible."""
+    params = Action._default_ac0882_params(45, 25)
+    params["template_circle_radius"] = float(params["r"])
+    params["template_circle_cx"] = float(params["cx"])
+    params["template_circle_cy"] = float(params["cy"])
+    params["arm_enabled"] = False
+
+    tuned = Action._finalize_ac08_style("AC0882_L", params)
+
+    assert tuned["connector_family_group"] == "ac08_left_connector"
+    assert tuned["arm_enabled"] is True
+    assert float(tuned["arm_x1"]) == 0.0
+    assert abs(float(tuned["arm_y1"]) - float(tuned["cy"])) < 1e-6
+    assert abs(float(tuned["arm_y2"]) - float(tuned["cy"])) < 1e-6
+    assert float(tuned["arm_len_min_ratio"]) >= 0.84
+    assert float(tuned["s"]) >= 0.0088
+
+
+def test_finalize_right_connector_family_applies_shared_guardrails() -> None:
+    """Right-connector AC08 families should share mirrored connector/circle guardrails."""
+    params = Action._apply_co2_label(Action._default_ac0814_params(20, 12))
+    params["template_circle_radius"] = float(params["r"])
+    params["template_circle_cx"] = float(params["cx"])
+    params["template_circle_cy"] = float(params["cy"])
+    params["cx"] = float(params["cx"]) + 1.5
+    params["cy"] = float(params["cy"]) - 1.0
+    params["r"] = float(params["r"]) * 0.85
+    params["arm_enabled"] = False
+
+    tuned = Action._finalize_ac08_style("AC0834_S", params)
+
+    assert tuned["connector_family_group"] == "ac08_right_connector"
+    assert tuned["connector_family_direction"] == "right"
+    assert tuned["lock_circle_cx"] is True
+    assert tuned["lock_circle_cy"] is True
+    assert float(tuned["cx"]) == float(params["template_circle_cx"])
+    assert float(tuned["cy"]) == float(params["template_circle_cy"])
+    assert tuned["arm_enabled"] is True
+    assert float(tuned["arm_x2"]) == 20.0
+    assert float(tuned["arm_len_min_ratio"]) >= 0.86
+    assert float(tuned["min_circle_radius"]) >= float(params["template_circle_radius"]) * 0.94
+    assert tuned["lock_text_scale"] is False
+    assert float(tuned["co2_font_scale_min"]) >= 0.78
+
+
+def test_finalize_right_connector_voc_family_preserves_visible_arm() -> None:
+    """VOC right-arm badges should keep the mirrored connector visible and text bounded."""
+    params = Action._apply_voc_label(Action._default_ac0814_params(45, 25))
+    params["template_circle_radius"] = float(params["r"])
+    params["template_circle_cx"] = float(params["cx"])
+    params["template_circle_cy"] = float(params["cy"])
+    params["arm_enabled"] = False
+
+    tuned = Action._finalize_ac08_style("AC0839_L", params)
+
+    assert tuned["connector_family_group"] == "ac08_right_connector"
+    assert tuned["arm_enabled"] is True
+    assert float(tuned["arm_x1"]) == pytest.approx(float(tuned["cx"]) + float(tuned["r"]))
+    assert abs(float(tuned["arm_y1"]) - float(tuned["cy"])) < 1e-6
+    assert abs(float(tuned["arm_y2"]) - float(tuned["cy"])) < 1e-6
+    assert float(tuned["arm_len_min_ratio"]) >= 0.84
+    assert tuned["lock_text_scale"] is False
+    assert float(tuned["voc_font_scale_min"]) >= 0.50
+
+def test_validate_badge_logs_small_variant_mode(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Validation logs should explicitly state when the `_S` small-variant mode is active."""
+    if image_composite_converter.np is None:
+        pytest.skip("numpy not available in this environment")
+
+    np = image_composite_converter.np
+    if np is None:
+        pytest.skip("numpy not available in this environment")
+
+    img = np.full((15, 15, 3), 255, dtype=np.uint8)
+    params = Action.make_badge_params(15, 15, "AC0832")
+
+    monkeypatch.setattr(Action, "generate_badge_svg", staticmethod(lambda *_args, **_kwargs: "<svg/>"))
+    monkeypatch.setattr(Action, "render_svg_to_numpy", staticmethod(lambda *_args, **_kwargs: img.copy()))
+    monkeypatch.setattr(Action, "_fit_to_original_size", staticmethod(lambda *_args, **_kwargs: img.copy()))
+    monkeypatch.setattr(Action, "extract_badge_element_mask", staticmethod(lambda *_args, **_kwargs: np.ones((15, 15), dtype=bool)))
+    monkeypatch.setattr(Action, "_element_match_error", staticmethod(lambda *_args, **_kwargs: 0.0))
+    monkeypatch.setattr(Action, "_optimize_element_width_bracket", staticmethod(lambda *_args, **_kwargs: False))
+    monkeypatch.setattr(Action, "_optimize_element_extent_bracket", staticmethod(lambda *_args, **_kwargs: False))
+    monkeypatch.setattr(Action, "_optimize_circle_center_bracket", staticmethod(lambda *_args, **_kwargs: False))
+    monkeypatch.setattr(Action, "_optimize_circle_radius_bracket", staticmethod(lambda *_args, **_kwargs: False))
+    monkeypatch.setattr(Action, "calculate_error", staticmethod(lambda *_args, **_kwargs: 7.5))
+
+    logs = Action.validate_badge_by_elements(img, params, max_rounds=1)
+
+    assert any(log.startswith("small_variant_mode_active:") for log in logs)
+
+
 def test_fit_semantic_badge_records_template_center_for_finalize_locking() -> None:
     """Semantic fit should persist template center so finalize can restore canonical centering."""
     if image_composite_converter.np is None or image_composite_converter.cv2 is None:
@@ -812,6 +944,58 @@ def test_run_iteration_pipeline_writes_failed_best_attempt_artifacts_for_semanti
     assert "status=semantic_mismatch" in log_text
     assert "best_attempt_svg=AC0814_L_failed.svg" in log_text
     assert "best_attempt_diff=AC0814_L_failed_diff.png" in log_text
+    assert "semantic_audit_status=semantic_mismatch" in log_text
+    assert "semantic_audit_derived_elements=SEMANTIC: Kreis ohne Buchstabe" in log_text
+    assert "semantic_audit_mismatch_reason=circle missing" in log_text
+
+
+def test_write_semantic_audit_report_persists_csv_and_json(tmp_path: Path) -> None:
+    """Semantic audit exports should summarize AC0811-AC0814 review data in CSV and JSON."""
+    reports_dir = tmp_path / "reports"
+    reports_dir.mkdir()
+    rows = [
+        image_composite_converter._semantic_audit_record(
+            base_name="AC0811",
+            filename="AC0811_L.jpg",
+            description_fragments=[
+                {"source": "base_name", "key": "AC0811", "text": "Kreis ohne Buchstabe"},
+                {"source": "variant_name", "key": "AC0811_L", "text": "senkrechter Strich hinter dem Kreis"},
+            ],
+            semantic_elements=[
+                "SEMANTIC: Kreis ohne Buchstabe",
+                "SEMANTIC: senkrechter Strich hinter dem Kreis",
+            ],
+            status="semantic_ok",
+            semantic_priority_order=["family_rule", "layout_override", "description_heuristic"],
+        ),
+        image_composite_converter._semantic_audit_record(
+            base_name="AC0814",
+            filename="AC0814_S.jpg",
+            description_fragments=[{"source": "base_name", "key": "AC0814", "text": "Kreis ohne Buchstabe"}],
+            semantic_elements=[
+                "SEMANTIC: Kreis ohne Buchstabe",
+                "SEMANTIC: waagrechter Strich rechts vom Kreis",
+            ],
+            status="semantic_mismatch",
+            mismatch_reasons=["Text unexpectedly required"],
+            semantic_priority_order=["family_rule", "layout_override", "description_heuristic"],
+            semantic_conflicts=["family_rule_kept_circle_without_letter_over_description_text=SEMANTIC: Kreis + Buchstabe CO_2"],
+        ),
+    ]
+
+    image_composite_converter._write_semantic_audit_report(str(reports_dir), rows)
+
+    csv_text = (reports_dir / "semantic_audit_ac0811_ac0814.csv").read_text(encoding="utf-8")
+    assert "AC0811_L.jpg" in csv_text
+    assert "semantic_ok" in csv_text
+    assert "Text unexpectedly required" in csv_text
+    assert "family_rule > layout_override > description_heuristic" in csv_text
+    assert "family_rule_kept_circle_without_letter_over_description_text=SEMANTIC: Kreis + Buchstabe CO_2" in csv_text
+
+    payload = (reports_dir / "semantic_audit_ac0811_ac0814.json").read_text(encoding="utf-8")
+    assert '"filename": "AC0814_S.jpg"' in payload
+    assert '"status": "semantic_mismatch"' in payload
+    assert '"semantic_conflicts": [' in payload
 
 
 def test_run_iteration_pipeline_breaks_early_on_flat_composite_error(
@@ -1742,6 +1926,66 @@ def test_finalize_tiny_non_ac0820_co2_unlocks_bounded_text_tuning() -> None:
     assert params["lock_text_scale"] is False
     assert float(params["co2_font_scale_min"]) < float(params["co2_font_scale"])
     assert float(params["co2_font_scale_max"]) > float(params["co2_font_scale"])
+
+
+def test_release_ac08_adaptive_locks_relaxes_only_bounded_problem_family_knobs() -> None:
+    """Problem families should get narrow, bounded lock releases instead of global unlocks."""
+    params = Action._apply_co2_label(Action._default_ac0881_params(20, 20))
+    params = Action._finalize_ac08_style("AC0831", params)
+    params["template_circle_radius"] = float(params["r"])
+    params["stem_enabled"] = True
+    params["stem_top"] = 12.0
+    params["stem_bottom"] = 20.0
+    params["stem_len_min_ratio"] = 0.65
+    params["stem_len_min"] = 5.2
+    logs: list[str] = []
+
+    changed = Action._release_ac08_adaptive_locks(
+        params,
+        logs,
+        reason="stagnation_same_fingerprint",
+        current_error=12.5,
+    )
+
+    assert changed is True
+    assert params["adaptive_lock_release_active"] is True
+    assert params["lock_colors"] is False
+    assert int(params["fill_gray_max"]) - int(params["fill_gray_min"]) <= 20
+    assert float(params["min_circle_radius"]) < float(params["template_circle_radius"]) * 0.90
+    assert float(params["stem_len_min_ratio"]) == pytest.approx(0.58)
+    assert params["lock_text_scale"] is False
+    assert "adaptive_lock_release_activated: AC0831" in "\n".join(logs)
+
+
+def test_optimize_element_color_bracket_respects_adaptive_color_corridor(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Adaptive palette release must stay within the configured grayscale corridor."""
+    if image_composite_converter.np is None:
+        pytest.skip("numpy not available in this environment")
+
+    img = image_composite_converter.np.full((4, 4, 3), 220, dtype=image_composite_converter.np.uint8)
+    mask = image_composite_converter.np.ones((4, 4), dtype=image_composite_converter.np.uint8)
+    params = {
+        "circle_enabled": True,
+        "fill_gray": 220,
+        "fill_gray_min": 214,
+        "fill_gray_max": 226,
+        "lock_colors": False,
+    }
+    logs: list[str] = []
+
+    monkeypatch.setattr(Action, "_mean_gray_for_mask", staticmethod(lambda *_args, **_kwargs: 245.0))
+    monkeypatch.setattr(
+        Action,
+        "_element_error_for_color",
+        staticmethod(lambda _img, _params, _element, _color_key, color_value, _mask: abs(color_value - 226)),
+    )
+
+    changed = Action._optimize_element_color_bracket(img, params, "circle", mask, logs)
+
+    assert changed is True
+    assert int(params["fill_gray"]) == 226
+    assert int(params["fill_gray"]) <= int(params["fill_gray_max"])
+    assert int(params["fill_gray"]) >= int(params["fill_gray_min"])
 
 def test_generate_badge_svg_renders_center_co_as_split_text_nodes() -> None:
     """center_co layout should render CO and subscript as separate positioned text nodes."""
@@ -2854,6 +3098,90 @@ def test_optimize_element_color_bracket_skips_when_colors_locked() -> None:
     assert changed is False
     assert any("Farben gesperrt" in line for line in logs)
 
+
+def test_activate_ac08_adaptive_locks_opens_bounded_family_search_space() -> None:
+    """Problem AC08 families should get bounded unlocks once fallback search is activated."""
+    params = Action._finalize_ac08_style(
+        "AC0839",
+        {
+            "width": 14,
+            "height": 14,
+            "circle_enabled": True,
+            "arm_enabled": True,
+            "draw_text": True,
+            "text_mode": "voc",
+            "cx": 7.0,
+            "cy": 7.0,
+            "r": 4.0,
+            "min_circle_radius": 3.8,
+            "arm_x1": 7.0,
+            "arm_y1": 7.0,
+            "arm_x2": 13.0,
+            "arm_y2": 7.0,
+            "arm_len_min_ratio": 0.75,
+            "fill_gray": 220,
+            "stroke_gray": 152,
+            "text_gray": 152,
+            "voc_font_scale": 0.52,
+        },
+    )
+    logs: list[str] = []
+
+    changed = Action._activate_ac08_adaptive_locks(
+        params,
+        logs,
+        full_err=19.5,
+        reason="unit_test",
+    )
+
+    assert changed is True
+    assert params["adaptive_unlock_active"] is True
+    assert params["lock_colors"] is False
+    assert params["lock_text_scale"] is False
+    assert params["max_circle_radius"] > params["r"]
+    assert params["min_circle_radius"] < 3.8
+    assert params["arm_len_min_ratio"] <= 0.58
+    assert params["voc_font_scale_min"] <= params["voc_font_scale"]
+    assert params["voc_font_scale_max"] >= params["voc_font_scale"]
+    assert params["fill_gray_min"] == int(params["fill_gray"]) - 10
+    assert params["fill_gray_max"] == int(params["fill_gray"]) + 10
+    assert any("adaptive_unlock_applied" in line for line in logs)
+
+
+def test_optimize_element_color_bracket_respects_adaptive_color_corridor(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Adaptive unlock color tuning must stay inside the configured narrow palette corridor."""
+    np = image_composite_converter.np
+    if np is None:
+        pytest.skip("numpy not available in this environment")
+
+    img = np.zeros((8, 8, 3), dtype=np.uint8)
+    mask = np.ones((8, 8), dtype=np.uint8)
+    params = {
+        "circle_enabled": True,
+        "fill_gray": 220,
+        "stroke_gray": 152,
+        "lock_colors": False,
+        "fill_gray_min": 214,
+        "fill_gray_max": 226,
+    }
+    logs: list[str] = []
+    seen_values: list[int] = []
+
+    def fake_error(_img, _params, _element, color_key, color_value, _mask):
+        if color_key == "fill_gray":
+            seen_values.append(int(color_value))
+        return float(abs(int(color_value) - 226))
+
+    monkeypatch.setattr(Action, "_element_error_for_color", staticmethod(fake_error))
+
+    changed = Action._optimize_element_color_bracket(img, params, "circle", mask, logs)
+
+    assert changed is True
+    assert params["fill_gray"] == 226
+    assert seen_values
+    assert min(seen_values) >= 214
+    assert max(seen_values) <= 226
+
 def test_validate_badge_runs_color_bracketing_after_geometry_steps() -> None:
     """Validation should optimize color only after extent/radius geometry updates."""
 
@@ -2982,6 +3310,21 @@ def test_parse_description_marks_ac0811_as_semantic_badge() -> None:
     assert params["mode"] == "semantic_badge"
     assert "SEMANTIC: Kreis ohne Buchstabe" in params["elements"]
     assert "SEMANTIC: senkrechter Strich hinter dem Kreis" in params["elements"]
+
+
+def test_parse_description_keeps_ac0814_family_rule_over_text_heuristic() -> None:
+    """AC0811-AC0814 family rules must outrank soft description hints about badge text."""
+    raw = {
+        "AC0814": "Kreis ohne Buchstabe",
+        "AC0814_L": "Kreis mit Buchstabe CO2 und waagrechter Strich rechts",
+    }
+
+    _desc, params = image_composite_converter.Reflection(raw).parse_description("AC0814", "AC0814_L.jpg")
+
+    assert "SEMANTIC: Kreis ohne Buchstabe" in params["elements"]
+    assert not any("Kreis + Buchstabe" in element for element in params["elements"])
+    assert params["semantic_priority_order"] == ["family_rule", "layout_override", "description_heuristic"]
+    assert "family_rule_kept_circle_without_letter_over_description_text=SEMANTIC: Kreis + Buchstabe CO_2" in params["semantic_conflicts"]
 
 
 def test_validate_semantic_alignment_accepts_merged_co2_blob_for_ac0831_artifact() -> None:
@@ -3622,6 +3965,62 @@ def test_validate_badge_by_elements_detects_stagnation_and_stops(
     assert any("stopped_due_to_stagnation" in line for line in logs)
 
 
+def test_validate_badge_by_elements_activates_ac08_adaptive_unlocks_on_stagnation(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """AC08 problem families should widen bounded search space before giving up on stagnation."""
+    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+        pytest.skip("numpy/cv2 not available in this environment")
+
+    np = image_composite_converter.np
+    if np is None:
+        pytest.skip("numpy not available in this environment")
+
+    params = Action._finalize_ac08_style(
+        "AC0831",
+        {
+            "width": 18,
+            "height": 18,
+            "circle_enabled": True,
+            "stem_enabled": True,
+            "arm_enabled": False,
+            "draw_text": True,
+            "text_mode": "co2",
+            "cx": 9.0,
+            "cy": 7.0,
+            "r": 4.0,
+            "stem_x": 8.5,
+            "stem_top": 11.0,
+            "stem_bottom": 17.0,
+            "stem_width": 1.0,
+            "fill_gray": 220,
+            "stroke_gray": 152,
+            "text_gray": 152,
+            "co2_font_scale": 0.82,
+        },
+    )
+    img = np.zeros((18, 18, 3), dtype=np.uint8)
+
+    monkeypatch.setattr(conv.Action, "generate_badge_svg", staticmethod(lambda *_args, **_kwargs: "<svg />"))
+    monkeypatch.setattr(conv.Action, "render_svg_to_numpy", staticmethod(lambda *_args, **_kwargs: img.copy()))
+    monkeypatch.setattr(conv.Action, "_fit_to_original_size", staticmethod(lambda _orig, rendered: rendered))
+    monkeypatch.setattr(conv.Action, "create_diff_image", staticmethod(lambda *_args, **_kwargs: img.copy()))
+    monkeypatch.setattr(conv.Action, "extract_badge_element_mask", staticmethod(lambda *_args, **_kwargs: np.ones((18, 18), dtype=bool)))
+    monkeypatch.setattr(conv.Action, "_element_match_error", staticmethod(lambda *_args, **_kwargs: 1.0))
+    monkeypatch.setattr(conv.Action, "_optimize_element_width_bracket", staticmethod(lambda *_args, **_kwargs: False))
+    monkeypatch.setattr(conv.Action, "_optimize_element_extent_bracket", staticmethod(lambda *_args, **_kwargs: False))
+    monkeypatch.setattr(conv.Action, "_optimize_circle_center_bracket", staticmethod(lambda *_args, **_kwargs: False))
+    monkeypatch.setattr(conv.Action, "_optimize_circle_radius_bracket", staticmethod(lambda *_args, **_kwargs: False))
+    monkeypatch.setattr(conv.Action, "_optimize_element_color_bracket", staticmethod(lambda *_args, **_kwargs: False))
+    monkeypatch.setattr(conv.Action, "_apply_canonical_badge_colors", staticmethod(lambda current: current))
+    monkeypatch.setattr(conv.Action, "calculate_error", staticmethod(lambda *_args, **_kwargs: 22.0))
+
+    logs = conv.Action.validate_badge_by_elements(img, params, max_rounds=4)
+
+    assert any("adaptive_unlock_applied" in line for line in logs)
+    assert any("adaptive family-unlocks aktiviert" in line for line in logs)
+
+
 def test_resolve_cli_csv_and_output_accepts_xml_as_table_path(tmp_path: Path) -> None:
     in_dir = tmp_path / "images"
     in_dir.mkdir()
@@ -3852,3 +4251,95 @@ def test_detect_relevant_regions_finds_circle_stem_and_text() -> None:
     labels = {region["label"] for region in regions}
 
     assert {"circle", "stem", "text"}.issubset(labels)
+
+
+def test_render_svg_to_numpy_returns_none_after_retryable_renderer_failures(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Renderer exceptions should be absorbed so batch processing can decide how to continue."""
+    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+        pytest.skip("numpy/cv2 not available in this environment")
+
+    attempts: list[tuple[str, bytes]] = []
+
+    def fake_open(kind: str, payload: bytes):
+        attempts.append((kind, payload))
+        raise RuntimeError("renderer exploded")
+
+    monkeypatch.setattr(image_composite_converter.fitz, "open", fake_open)
+
+    result = Action.render_svg_to_numpy('<svg xmlns="http://www.w3.org/2000/svg">  <rect width="1" height="1"/> </svg>', 4, 4)
+
+    assert result is None
+    assert len(attempts) >= 1
+
+
+
+def test_convert_range_continues_after_render_failure_and_writes_batch_summary(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """A render failure for one file should be logged without aborting the remaining batch."""
+    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+        pytest.skip("numpy/cv2 not available in this environment")
+
+    np = image_composite_converter.np
+    cv2 = image_composite_converter.cv2
+    if np is None or cv2 is None:
+        pytest.skip("numpy/cv2 not available in this environment")
+
+    images_dir = tmp_path / "images"
+    images_dir.mkdir()
+    output_root = tmp_path / "out"
+    csv_path = tmp_path / "data.csv"
+    csv_path.write_text("Wurzelform;Beschreibung\nAC0820;semantic\n", encoding="utf-8")
+    for name in ("AC0820_L.jpg", "AC0820_M.jpg"):
+        assert cv2.imwrite(str(images_dir / name), np.full((10, 10, 3), 220, dtype=np.uint8))
+
+    monkeypatch.setattr(image_composite_converter, "_in_requested_range", lambda *_args, **_kwargs: True)
+    monkeypatch.setattr(image_composite_converter, "_load_quality_config", lambda *_args, **_kwargs: {})
+    monkeypatch.setattr(image_composite_converter, "_write_quality_config", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(image_composite_converter, "_harmonize_semantic_size_variants", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(image_composite_converter, "_write_pixel_delta2_ranking", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(image_composite_converter, "_select_open_quality_cases", lambda rows, **_kwargs: [])
+    monkeypatch.setattr(image_composite_converter, "_select_middle_lower_tercile", lambda _rows: [])
+    monkeypatch.setattr(image_composite_converter, "_try_template_transfer", lambda **_kwargs: (None, None))
+
+    def fake_pipeline(img_path: str, _csv_path: str, _iterations: int, svg_out: str, diff_out: str, reports_out: str, *_args, **_kwargs):
+        stem = Path(img_path).stem
+        Path(svg_out).mkdir(parents=True, exist_ok=True)
+        Path(diff_out).mkdir(parents=True, exist_ok=True)
+        Path(reports_out).mkdir(parents=True, exist_ok=True)
+        if stem.endswith("_L"):
+            log_path = Path(reports_out) / f"{stem}_element_validation.log"
+            log_path.write_text(
+                "status=render_failure\n"
+                "failure_reason=composite_iteration_render_failed\n"
+                f"filename={stem}.jpg\n"
+                "params_snapshot={\"mode\":\"semantic_badge\"}\n",
+                encoding="utf-8",
+            )
+            return None
+        svg = '<svg width="10" height="10" xmlns="http://www.w3.org/2000/svg"><rect width="10" height="10" fill="#d0d0d0"/></svg>'
+        (Path(svg_out) / f"{stem}.svg").write_text(svg, encoding="utf-8")
+        (Path(diff_out) / f"{stem}_diff.png").write_bytes(b"png")
+        params = {"mode": "semantic_badge", "elements": ["circle"], "cx": 5.0, "cy": 5.0, "r": 3.0}
+        return stem, "semantic", params, 1, 30.0
+
+    monkeypatch.setattr(image_composite_converter, "run_iteration_pipeline", fake_pipeline)
+
+    result = image_composite_converter.convert_range(
+        str(images_dir),
+        str(csv_path),
+        iterations=1,
+        start_ref="AC0820",
+        end_ref="AC0820",
+        output_root=str(output_root),
+    )
+
+    assert result == str(output_root)
+    iteration_log = (output_root / "reports" / "Iteration_Log.csv").read_text(encoding="utf-8-sig")
+    assert "AC0820_M.jpg" in iteration_log
+    assert "AC0820_L.jpg" not in iteration_log
+
+    batch_summary = (output_root / "reports" / "batch_failure_summary.csv").read_text(encoding="utf-8")
+    assert "AC0820_L.jpg;render_failure;composite_iteration_render_failed" in batch_summary
+    assert "AC0820_L_element_validation.log" in batch_summary
