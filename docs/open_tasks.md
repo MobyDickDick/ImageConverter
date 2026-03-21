@@ -26,6 +26,7 @@ focused on the actual project scope.
 - [ ] Reduce the worst residual deltas for the still-weak AC08 families.
   - Prioritize `AC0820_L`, `AC0835_S`, `AC0882_S`, `AC0837_L`, `AC0831_L`, `AC0839_S`, and `AC0834_S` from `ac08_weak_family_status.txt`.
   - Focus on family-specific quality improvements that preserve the new no-regression guardrails, especially for `_S` variants and stubborn connector geometries.
+  - [x] Applied a first targeted `_S`-variant follow-up for `AC0835_S` on 2026-03-21 by biasing the tiny VOC baseline downward before validation, which keeps the label closer to the source raster and reduces reliance on stagnation-triggered fallback rounds.
 
 - [ ] Make the AC08 success gate actionable in the normal workflow.
   - Promote the metrics from `ac08_success_metrics.csv` / `ac08_success_criteria.txt` into a documented regression check so failed criteria are visible before the next backlog review.

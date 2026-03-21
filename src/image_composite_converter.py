@@ -2663,6 +2663,22 @@ class Action:
         return p
 
     @staticmethod
+    def _tune_ac0835_voc_badge(params: dict, w: int, h: int) -> dict:
+        """Keep tiny AC0835 badges from rendering the VOC label too high."""
+        p = dict(params)
+        r = float(p.get("r", 0.0))
+        p["stroke_gray"] = Action.LIGHT_CIRCLE_STROKE_GRAY
+        p["text_gray"] = p["stroke_gray"]
+        min_dim = float(min(max(0, w), max(0, h)))
+        if 0.0 < min_dim <= 15.5:
+            # The AC0835_S raster centers the VOC word slightly lower than the
+            # generic AC0870-derived default. Preserve that optical bias up
+            # front so the validator does not need to recover it from a
+            # stagnating small-variant search.
+            p["voc_dy"] = float(max(float(p.get("voc_dy", 0.0)), 0.13 * r))
+        return p
+
+    @staticmethod
     def _tune_ac0834_co2_badge(params: dict, w: int, h: int) -> dict:
         """Stabilize tiny AC0834 badges where fitting drifts the circle downward."""
         p = dict(params)
@@ -3610,8 +3626,15 @@ class Action:
         if name == "AC0835":
             defaults = Action._apply_voc_label(Action._default_ac0870_params(w, h))
             if img is None:
-                return Action._finalize_ac08_style(name, defaults)
-            return Action._finalize_ac08_style(name, Action._apply_voc_label(Action._fit_semantic_badge_from_image(img, defaults)))
+                return Action._finalize_ac08_style(name, Action._tune_ac0835_voc_badge(defaults, w, h))
+            return Action._finalize_ac08_style(
+                name,
+                Action._tune_ac0835_voc_badge(
+                    Action._apply_voc_label(Action._fit_semantic_badge_from_image(img, defaults)),
+                    w,
+                    h,
+                ),
+            )
 
         if name == "AC0836":
             defaults = Action._apply_voc_label(Action._default_ac0881_params(w, h))
