@@ -1,26 +1,40 @@
-run-meta: run_seed=725101178 pass_seed_offset=4 nonce_ns=1774033025946683000
+run-meta: run_seed=624623935 pass_seed_offset=4 nonce_ns=1774106857708697000
 status=semantic_ok
+small_variant_mode_active: reason=min_dim, min_dim=14.800, mask_dilate_px=1, text_mode=voc, arm_min_ratio=0.860, stem_min_ratio=0.000
 Runde 1: elementweise Validierung gestartet
-circle: Fehler=129.354
+circle: Fehler=75.357
 circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
-circle: Radius-Bracketing r 7.400->7.000 (best_err=123.567); Kandidaten=6.500->130.728, 7.000->123.567, 7.500->128.380, 9.500->132.324
-arm: Fehler=64.327
+circle: Radius-Bracketing r 7.400->7.000 (best_err=70.856); Kandidaten=6.768->73.525, 7.000->70.856, 7.500->74.169, 8.833->82.423
+arm: Fehler=45.894
 arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
-arm: Längen-Bracketing keine relevante Änderung (arm_len: 18.000); Kandidaten=13.500->74.781, 18.000->64.327, 19.000->64.327, 24.000->64.327, 29.500->64.327, 35.000->64.327
-text: Fehler=125.066
-text: Breiten-Bracketing voc_font_scale 0.562->0.900; Kandidaten=0.900->125.955, 1.125->137.115, 1.350->139.160, 1.650->141.898, 1.950->146.919, 2.175->148.520, 2.400->164.949
-Runde 1: Gesamtfehler=24.916
+arm: Längen-Bracketing keine relevante Änderung (arm_len: 18.000); Kandidaten=15.500->50.265, 18.000->45.894, 20.500->45.894, 25.000->45.894, 30.000->45.894, 35.000->45.894
+text: Fehler=84.924
+text: Breiten-Bracketing übersprungen (voc_font_scale: current=0.562, Range=0.900..0.900)
+Runde 1: Gesamtfehler=24.436
 Runde 2: elementweise Validierung gestartet
-circle: Fehler=124.282
+circle: Fehler=71.071
 circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
-circle: Radius-Bracketing keine relevante Änderung (r: 7.000, best_err=124.282); Kandidaten=6.500->131.576, 7.000->124.282, 9.500->132.324
-arm: Fehler=64.327
+circle: Radius-Bracketing keine relevante Änderung (r: 7.000, best_err=71.071); Kandidaten=6.768->73.520, 7.000->71.071, 8.833->82.423
+arm: Fehler=45.894
 arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
-arm: Längen-Bracketing keine relevante Änderung (arm_len: 18.000); Kandidaten=13.500->74.781, 18.000->64.327, 19.000->64.327, 24.000->64.327, 29.500->64.327, 35.000->64.327
-text: Fehler=125.955
-text: Breiten-Bracketing keine relevante Änderung (voc_font_scale: 0.900); Kandidaten=0.900->125.955, 1.035->131.868, 1.125->137.115, 1.350->139.160, 1.650->141.898, 1.950->146.919, 2.175->148.520, 2.400->164.949
-Runde 2: Gesamtfehler=24.916
-Keine Element-Geometrieänderung mehr; Validierung vorzeitig beendet
+arm: Längen-Bracketing keine relevante Änderung (arm_len: 18.000); Kandidaten=15.500->50.265, 18.000->45.894, 20.500->45.894, 25.000->45.894, 30.000->45.894, 35.000->45.894
+text: Fehler=84.924
+text: Breiten-Bracketing übersprungen (voc_font_scale: current=0.562, Range=0.900..0.900)
+Runde 2: Gesamtfehler=24.436
+stagnation_detected: identischer Parameter-Fingerprint und praktisch unveränderter Gesamtfehler
+adaptive_unlock_applied: base=AC0837, reason=identical_fingerprint, full_err=24.436, radius=[6.362..8.833], arm_ratio=0.580, stem_ratio=0.000, text_locked=no, colors_locked=no
+switch_to_fallback_search: adaptive family-unlocks aktiviert und Circle-Geometry-Penalty deaktiviert
+Runde 3: elementweise Validierung gestartet
+circle: Fehler=71.071
+circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
+arm: Fehler=45.894
+arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
+arm: Längen-Bracketing keine relevante Änderung (arm_len: 18.000); Kandidaten=15.000->51.520, 18.000->45.894, 20.000->45.894, 25.000->45.894, 30.000->45.894, 35.000->45.894
+text: Fehler=84.924
+text: Breiten-Bracketing übersprungen (voc_font_scale: current=0.562, Range=0.900..0.900)
+Runde 3: Gesamtfehler=24.436
+adaptive_lock_release_activated: AC0837, reason=high_residual_error, current_error=24.436
+stopped_due_to_stagnation: keine weitere Parameterbewegung erkennbar
 circle: Farb-Bracketing übersprungen (Farben gesperrt)
 arm: Farb-Bracketing übersprungen (Farben gesperrt)
 text: Farb-Bracketing übersprungen (Farben gesperrt)

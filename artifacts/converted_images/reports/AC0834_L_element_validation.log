@@ -1,16 +1,28 @@
-run-meta: run_seed=725101178 pass_seed_offset=0 nonce_ns=1774032872494206500
+run-meta: run_seed=624623935 pass_seed_offset=0 nonce_ns=1774106622251369200
 status=semantic_ok
 Runde 1: elementweise Validierung gestartet
 circle: Fehler=81.723
 circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
-circle: Radius-Bracketing keine relevante Änderung (r: 11.000, best_err=81.723); Kandidaten=10.500->98.868, 11.000->81.723, 12.000->106.583
-arm: Fehler=107.056
+circle: Radius-Bracketing keine relevante Änderung (r: 11.000, best_err=81.723); Kandidaten=10.695->98.868, 11.000->81.723, 12.000->106.583
+arm: Fehler=57.745
 arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
-arm: Längen-Bracketing keine relevante Änderung (arm_len: 18.500); Kandidaten=14.000->64.761, 18.500->58.768, 21.500->58.768, 29.500->58.768, 37.000->58.768, 45.000->58.768
+arm: Längen-Bracketing keine relevante Änderung (arm_len: 18.000); Kandidaten=15.000->61.523, 18.000->58.768, 22.500->58.768, 30.000->58.768, 37.500->58.768, 45.000->58.768
 text: Fehler=129.970
-text: Breiten-Bracketing übersprungen (co2_font_scale: current=0.886, Range=0.886..0.886)
+text: Breiten-Bracketing keine relevante Änderung (co2_font_scale: 0.886); Kandidaten=0.886->129.970, 0.906->129.970, 0.925->129.970, 0.952->129.970, 0.979->129.970, 0.999->129.970, 1.018->129.970
 Runde 1: Gesamtfehler=17.438
-Keine Element-Geometrieänderung mehr; Validierung vorzeitig beendet
+stagnation_detected: keine relevante Geometrieänderung in der letzten Validierungsrunde
+switch_to_fallback_search: deaktiviere Circle-Geometry-Penalty für eine letzte Ausweichrunde
+Runde 2: elementweise Validierung gestartet
+circle: Fehler=81.723
+circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
+arm: Fehler=57.745
+arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
+arm: Längen-Bracketing keine relevante Änderung (arm_len: 18.000); Kandidaten=15.000->61.523, 18.000->58.768, 22.500->58.768, 30.000->58.768, 37.500->58.768, 45.000->58.768
+text: Fehler=129.970
+text: Breiten-Bracketing keine relevante Änderung (co2_font_scale: 0.886); Kandidaten=0.886->129.970, 0.906->129.970, 0.925->129.970, 0.952->129.970, 0.979->129.970, 0.999->129.970, 1.018->129.970
+Runde 2: Gesamtfehler=17.438
+stagnation_detected: identischer Parameter-Fingerprint und praktisch unveränderter Gesamtfehler
+stopped_due_to_stagnation: Validierung vorzeitig beendet
 circle: Farb-Bracketing übersprungen (Farben gesperrt)
 arm: Farb-Bracketing übersprungen (Farben gesperrt)
 text: Farb-Bracketing übersprungen (Farben gesperrt)

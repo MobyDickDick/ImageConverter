@@ -1,19 +1,21 @@
-run-meta: run_seed=725101178 pass_seed_offset=4 nonce_ns=1774033029721225200
+run-meta: run_seed=624623935 pass_seed_offset=4 nonce_ns=1774106844062304700
 status=semantic_ok
+small_variant_mode_active: reason=min_dim, min_dim=11.040, mask_dilate_px=1, text_mode=voc, arm_min_ratio=0.000, stem_min_ratio=0.000
 Runde 1: elementweise Validierung gestartet
-circle: Fehler=127.820
+circle: Fehler=73.700
 circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
-circle: Radius-Bracketing r 5.520->6.500 (best_err=79.864); Kandidaten=5.500->130.553, 6.000->108.799, 6.500->79.864, 7.000->94.488
-text: Fehler=110.696
+text: Fehler=72.478
 text: Breiten-Bracketing übersprungen (voc_font_scale: current=0.562, Range=0.900..0.900)
-Runde 1: Gesamtfehler=27.084
+Runde 1: Gesamtfehler=44.276
+stagnation_detected: keine relevante Geometrieänderung in der letzten Validierungsrunde
+switch_to_fallback_search: deaktiviere Circle-Geometry-Penalty für eine letzte Ausweichrunde
 Runde 2: elementweise Validierung gestartet
-circle: Fehler=79.864
+circle: Fehler=73.700
 circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
-circle: Radius-Bracketing keine relevante Änderung (r: 6.500, best_err=79.864); Kandidaten=6.000->108.341, 6.500->79.864, 7.000->94.488
-text: Fehler=110.696
+text: Fehler=72.478
 text: Breiten-Bracketing übersprungen (voc_font_scale: current=0.562, Range=0.900..0.900)
-Runde 2: Gesamtfehler=27.084
-Keine Element-Geometrieänderung mehr; Validierung vorzeitig beendet
+Runde 2: Gesamtfehler=44.276
+stagnation_detected: identischer Parameter-Fingerprint und praktisch unveränderter Gesamtfehler
+stopped_due_to_stagnation: Validierung vorzeitig beendet
 circle: Farb-Bracketing übersprungen (Farben gesperrt)
 text: Farb-Bracketing übersprungen (Farben gesperrt)

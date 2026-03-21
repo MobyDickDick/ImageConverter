@@ -1,17 +1,19 @@
-run-meta: run_seed=725101178 pass_seed_offset=4 nonce_ns=1774033026181586100
+run-meta: run_seed=624623935 pass_seed_offset=4 nonce_ns=1774106843820244700
 status=semantic_ok
+small_variant_mode_active: reason=min_dim, min_dim=14.800, mask_dilate_px=1, text_mode=path_t, arm_min_ratio=0.000, stem_min_ratio=0.000
 Runde 1: elementweise Validierung gestartet
-circle: Fehler=188.823
+circle: Fehler=96.803
 circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
-circle: Radius-Bracketing r 7.400->9.500 (best_err=102.672); Kandidaten=6.500->180.708, 7.500->182.681, 8.500->110.770, 9.000->102.672, 9.500->102.672
-text: Fehler=90.950
-Runde 1: Gesamtfehler=20.003
+text: Fehler=78.857
+Runde 1: Gesamtfehler=43.390
+stagnation_detected: keine relevante Geometrieänderung in der letzten Validierungsrunde
+switch_to_fallback_search: deaktiviere Circle-Geometry-Penalty für eine letzte Ausweichrunde
 Runde 2: elementweise Validierung gestartet
-circle: Fehler=102.672
+circle: Fehler=96.803
 circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
-circle: Radius-Bracketing keine relevante Änderung (r: 9.500, best_err=102.672); Kandidaten=8.500->110.770, 9.500->102.672
-text: Fehler=90.950
-Runde 2: Gesamtfehler=20.003
-Keine Element-Geometrieänderung mehr; Validierung vorzeitig beendet
+text: Fehler=78.857
+Runde 2: Gesamtfehler=43.390
+stagnation_detected: identischer Parameter-Fingerprint und praktisch unveränderter Gesamtfehler
+stopped_due_to_stagnation: Validierung vorzeitig beendet
 circle: Farb-Bracketing übersprungen (Farben gesperrt)
 text: Farb-Bracketing übersprungen (Farben gesperrt)

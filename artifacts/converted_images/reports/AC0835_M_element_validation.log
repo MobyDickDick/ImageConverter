@@ -1,19 +1,21 @@
-run-meta: run_seed=725101178 pass_seed_offset=4 nonce_ns=1774033015581352900
+run-meta: run_seed=624623935 pass_seed_offset=4 nonce_ns=1774106851458052900
 status=semantic_ok
+small_variant_mode_active: reason=min_dim, min_dim=14.800, mask_dilate_px=1, text_mode=voc, arm_min_ratio=0.000, stem_min_ratio=0.000
 Runde 1: elementweise Validierung gestartet
-circle: Fehler=145.732
+circle: Fehler=91.443
 circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
-circle: Radius-Bracketing r 7.400->9.000 (best_err=70.972); Kandidaten=7.000->148.274, 7.500->143.999, 8.500->100.649, 9.000->70.972, 9.500->111.292
-text: Fehler=128.597
-text: Breiten-Bracketing übersprungen (voc_font_scale: current=0.562, Range=0.900..0.900)
-Runde 1: Gesamtfehler=20.032
+text: Fehler=83.566
+text: Breiten-Bracketing übersprungen (voc_font_scale: current=0.600, Range=0.900..0.900)
+Runde 1: Gesamtfehler=46.300
+stagnation_detected: keine relevante Geometrieänderung in der letzten Validierungsrunde
+switch_to_fallback_search: deaktiviere Circle-Geometry-Penalty für eine letzte Ausweichrunde
 Runde 2: elementweise Validierung gestartet
-circle: Fehler=70.972
+circle: Fehler=91.443
 circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
-circle: Radius-Bracketing keine relevante Änderung (r: 9.000, best_err=70.972); Kandidaten=8.000->118.003, 9.000->70.972, 9.500->111.292
-text: Fehler=128.597
-text: Breiten-Bracketing übersprungen (voc_font_scale: current=0.562, Range=0.900..0.900)
-Runde 2: Gesamtfehler=20.032
-Keine Element-Geometrieänderung mehr; Validierung vorzeitig beendet
+text: Fehler=83.566
+text: Breiten-Bracketing übersprungen (voc_font_scale: current=0.600, Range=0.900..0.900)
+Runde 2: Gesamtfehler=46.300
+stagnation_detected: identischer Parameter-Fingerprint und praktisch unveränderter Gesamtfehler
+stopped_due_to_stagnation: Validierung vorzeitig beendet
 circle: Farb-Bracketing übersprungen (Farben gesperrt)
 text: Farb-Bracketing übersprungen (Farben gesperrt)

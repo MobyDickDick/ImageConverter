@@ -1,7 +1,14 @@
-run-meta: run_seed=725101178 pass_seed_offset=0 nonce_ns=1774032877425329300
+run-meta: run_seed=624623935 pass_seed_offset=0 nonce_ns=1774106604314946000
 status=semantic_mismatch
 best_attempt_svg=AC0811_S_failed.svg
 best_attempt_diff=AC0811_S_failed_diff.png
+semantic_audit_status=semantic_mismatch
+semantic_audit_lookup_keys=AC0811 | AC0811_S | AC0811 | AC0811
+semantic_audit_recognized_description_elements=Kelle, ohne Text Kreis oben, Griff nach unten (dunkelgraue Linie) | Kelle, ohne Text Kreis oben, Griff nach unten (dunkelgraue Linie) | Kelle, ohne Text Kreis oben, Griff nach unten (dunkelgraue Linie) | Kelle, ohne Text Kreis oben, Griff nach unten (dunkelgraue Linie)
+semantic_audit_derived_elements=SEMANTIC: Kreis ohne Buchstabe | SEMANTIC: senkrechter Strich hinter dem Kreis
+semantic_audit_priority_order=family_rule > layout_override > description_heuristic
+semantic_audit_conflicts=
+semantic_audit_mismatch_reason=Beschreibung erwartet Kreis, im Bild aber nicht robust erkennbar | Im Bild ist waagrechter Strich erkennbar, aber nicht in der Beschreibung enthalten | Beschreibung erwartet Buchstabe/Text, im Bild aber nicht robust erkennbar | Strukturprüfung: Kein belastbarer Kreis-Kandidat im Rohbild erkannt | Strukturprüfung: Keine belastbare Textstruktur (z.B. CO₂) im Rohbild erkannt
 issue=Beschreibung erwartet Kreis, im Bild aber nicht robust erkennbar
 issue=Im Bild ist waagrechter Strich erkennbar, aber nicht in der Beschreibung enthalten
 issue=Beschreibung erwartet Buchstabe/Text, im Bild aber nicht robust erkennbar

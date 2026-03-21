@@ -1,6 +1,45 @@
-run-meta: run_seed=725101178 pass_seed_offset=0 nonce_ns=1774032915066929500
-status=semantic_mismatch
-best_attempt_svg=AC0836_M_failed.svg
-best_attempt_diff=AC0836_M_failed_diff.png
-issue=Beschreibung erwartet Kreis, im Bild aber nicht robust erkennbar
-issue=Strukturprüfung: Kein belastbarer Kreis-Kandidat im Rohbild erkannt
+run-meta: run_seed=624623935 pass_seed_offset=4 nonce_ns=1774106843595701400
+status=semantic_ok
+small_variant_mode_active: reason=min_dim, min_dim=15.200, mask_dilate_px=1, text_mode=voc, arm_min_ratio=0.000, stem_min_ratio=0.740
+Runde 1: elementweise Validierung gestartet
+circle: Fehler=70.842
+circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
+circle: Radius-Bracketing keine relevante Änderung (r: 7.600, best_err=70.842); Kandidaten=7.600->70.842, 9.600->97.970
+stem: Fehler=34.843
+stem: Breitenkorrektur mode=iter, ratio=1.000, alt=1.000, neu=2.000
+stem: Geometrie nach Elementabgleich aktualisiert
+stem: Breiten-Bracketing stem_width 2.000->2.000; Kandidaten=1.000->34.843, 1.500->19.745, 2.000->19.745
+stem: Längen-Bracketing stem_len 17.400->13.000; Kandidaten=13.000->19.557, 17.500->19.745, 18.500->26.119, 24.000->35.637, 29.500->42.986, 35.000->47.071
+text: Fehler=128.137
+text: Breiten-Bracketing übersprungen (voc_font_scale: current=0.562, Range=0.900..0.900)
+Runde 1: Gesamtfehler=25.834
+Runde 2: elementweise Validierung gestartet
+circle: Fehler=70.842
+circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
+circle: Radius-Bracketing keine relevante Änderung (r: 7.600, best_err=70.842); Kandidaten=7.600->70.842, 9.600->97.970
+stem: Fehler=29.763
+stem: Breitenkorrektur mode=iter, ratio=0.857, alt=2.000, neu=2.000
+stem: Geometrie nach Elementabgleich aktualisiert
+stem: Breiten-Bracketing stem_width 2.000->2.000; Kandidaten=1.000->41.172, 1.500->29.763, 2.000->29.763
+stem: Längen-Bracketing keine relevante Änderung (stem_len: 13.000); Kandidaten=13.000->29.763, 18.500->36.796, 24.000->44.804, 29.500->46.284, 35.000->51.285
+text: Fehler=128.137
+text: Breiten-Bracketing übersprungen (voc_font_scale: current=0.562, Range=0.900..0.900)
+Runde 2: Gesamtfehler=25.834
+stagnation_detected: identischer Parameter-Fingerprint und praktisch unveränderter Gesamtfehler
+switch_to_fallback_search: deaktiviere Circle-Geometry-Penalty für eine letzte Ausweichrunde
+Runde 3: elementweise Validierung gestartet
+circle: Fehler=70.842
+circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
+stem: Fehler=29.763
+stem: Breitenkorrektur mode=iter, ratio=0.857, alt=2.000, neu=2.000
+stem: Geometrie nach Elementabgleich aktualisiert
+stem: Breiten-Bracketing stem_width 2.000->2.000; Kandidaten=1.000->41.172, 1.500->29.763, 2.000->29.763
+stem: Längen-Bracketing keine relevante Änderung (stem_len: 13.000); Kandidaten=13.000->29.763, 18.500->36.796, 24.000->44.804, 29.500->46.284, 35.000->51.285
+text: Fehler=128.137
+text: Breiten-Bracketing übersprungen (voc_font_scale: current=0.562, Range=0.900..0.900)
+Runde 3: Gesamtfehler=25.834
+stagnation_detected: identischer Parameter-Fingerprint und praktisch unveränderter Gesamtfehler
+stopped_due_to_stagnation: Validierung vorzeitig beendet
+circle: Farb-Bracketing übersprungen (Farben gesperrt)
+stem: Farb-Bracketing übersprungen (Farben gesperrt)
+text: Farb-Bracketing übersprungen (Farben gesperrt)

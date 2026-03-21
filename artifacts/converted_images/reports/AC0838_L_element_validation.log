@@ -1,27 +1,6 @@
-run-meta: run_seed=725101178 pass_seed_offset=0 nonce_ns=1774032788440702500
-status=semantic_ok
-Runde 1: elementweise Validierung gestartet
-circle: Fehler=143.611
-circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
-circle: Radius-Bracketing r 11.667->10.500 (best_err=139.282); Kandidaten=10.500->139.282, 11.000->142.332, 11.500->143.611, 12.000->146.020
-arm: Fehler=67.848
-arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
-arm: Längen-Bracketing keine relevante Änderung (arm_len: 22.000); Kandidaten=16.500->84.592, 22.000->67.848, 23.500->67.848, 31.000->67.848, 38.000->67.848, 45.000->67.848
-text: Fehler=101.444
-text: Breiten-Bracketing voc_font_scale 0.562->0.900; Kandidaten=0.900->71.838, 1.125->86.352, 1.350->96.324, 1.650->105.663, 1.950->117.714, 2.175->121.433, 2.400->115.573
-Runde 1: Gesamtfehler=21.864
-Runde 2: elementweise Validierung gestartet
-circle: Fehler=141.338
-circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
-circle: Radius-Bracketing keine relevante Änderung (r: 10.500, best_err=141.338); Kandidaten=10.500->141.338, 12.000->146.020
-arm: Fehler=67.848
-arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
-arm: Längen-Bracketing keine relevante Änderung (arm_len: 22.000); Kandidaten=16.500->84.592, 22.000->67.848, 23.500->67.848, 31.000->67.848, 38.000->67.848, 45.000->67.848
-text: Fehler=71.838
-text: Breiten-Bracketing keine relevante Änderung (voc_font_scale: 0.900); Kandidaten=0.900->71.838, 1.035->83.879, 1.125->86.352, 1.350->96.324, 1.650->105.663, 1.950->117.714, 2.175->121.433, 2.400->115.573
-Runde 2: Gesamtfehler=21.864
-Keine Element-Geometrieänderung mehr; Validierung vorzeitig beendet
-circle: Farb-Bracketing übersprungen (Farben gesperrt)
-arm: Farb-Bracketing übersprungen (Farben gesperrt)
-text: Farb-Bracketing übersprungen (Farben gesperrt)
-semantic-guard: Erwartete Arm-Geometrie bestätigt/wiederhergestellt (z.B. AC0812 links).
+run-meta: run_seed=624623935 pass_seed_offset=0 nonce_ns=1774106714599827400
+status=semantic_mismatch
+best_attempt_svg=AC0838_L_failed.svg
+best_attempt_diff=AC0838_L_failed_diff.png
+issue=Beschreibung erwartet waagrechter Strich, im Bild aber nicht robust erkennbar
+issue=Strukturprüfung: Kein belastbarer waagrechter Linien-Kandidat im Rohbild erkannt

@@ -1,24 +1,46 @@
-run-meta: run_seed=725101178 pass_seed_offset=4 nonce_ns=1774033030335656800
+run-meta: run_seed=624623935 pass_seed_offset=4 nonce_ns=1774106845251957400
 status=semantic_ok
+small_variant_mode_active: reason=min_dim, min_dim=14.800, mask_dilate_px=1, text_mode=path_t, arm_min_ratio=0.860, stem_min_ratio=0.000
 Runde 1: elementweise Validierung gestartet
-circle: Fehler=156.181
+circle: Fehler=81.124
 circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
-circle: Radius-Bracketing r 7.400->6.500 (best_err=134.720); Kandidaten=6.500->134.720, 7.000->150.523, 7.500->156.671, 9.500->162.194
-arm: Fehler=50.290
+circle: Radius-Bracketing r 7.400->7.066 (best_err=75.819); Kandidaten=7.066->75.819, 7.500->81.308, 8.814->97.814
+arm: Fehler=28.988
 arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
-arm: Längen-Bracketing keine relevante Änderung (arm_len: 11.000); Kandidaten=8.000->65.065, 11.000->50.290, 15.000->50.290, 21.500->50.290, 28.500->50.290, 35.000->50.290
-text: Fehler=127.002
-Runde 1: Gesamtfehler=25.949
+arm: Längen-Bracketing arm_len 10.434->10.500; Kandidaten=9.000->30.917, 10.500->28.988, 15.500->28.988, 22.000->28.988, 28.500->28.988, 35.000->28.988
+text: Fehler=91.138
+Runde 1: Gesamtfehler=31.199
 Runde 2: elementweise Validierung gestartet
-circle: Fehler=136.795
+circle: Fehler=75.633
 circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
-circle: Radius-Bracketing keine relevante Änderung (r: 6.500, best_err=136.795); Kandidaten=6.500->136.795, 9.500->162.194
-arm: Fehler=50.290
+circle: Radius-Bracketing keine relevante Änderung (r: 7.066, best_err=75.633); Kandidaten=7.066->75.633, 8.814->97.814
+arm: Fehler=28.988
 arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
-arm: Längen-Bracketing keine relevante Änderung (arm_len: 11.000); Kandidaten=8.000->65.065, 11.000->50.290, 15.000->50.290, 21.500->50.290, 28.500->50.290, 35.000->50.290
-text: Fehler=127.002
-Runde 2: Gesamtfehler=25.949
-Keine Element-Geometrieänderung mehr; Validierung vorzeitig beendet
+arm: Längen-Bracketing arm_len 10.434->10.500; Kandidaten=9.000->30.917, 10.500->28.988, 15.500->28.988, 22.000->28.988, 28.500->28.988, 35.000->28.988
+text: Fehler=91.138
+Runde 2: Gesamtfehler=31.199
+stagnation_detected: identischer Parameter-Fingerprint und praktisch unveränderter Gesamtfehler
+adaptive_unlock_applied: base=AC0882, reason=identical_fingerprint, full_err=31.199, radius=[6.642..8.814], arm_ratio=0.580, stem_ratio=0.000, text_locked=no, colors_locked=no
+switch_to_fallback_search: adaptive family-unlocks aktiviert und Circle-Geometry-Penalty deaktiviert
+Runde 3: elementweise Validierung gestartet
+circle: Fehler=75.633
+circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
+arm: Fehler=28.988
+arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
+arm: Längen-Bracketing arm_len 10.434->10.500; Kandidaten=8.500->31.690, 10.500->28.988, 15.500->28.988, 22.000->28.988, 28.500->28.988, 35.000->28.988
+text: Fehler=91.138
+Runde 3: Gesamtfehler=31.199
+adaptive_lock_release_activated: AC0882, reason=high_residual_error, current_error=31.199
+Runde 4: elementweise Validierung gestartet
+circle: Fehler=75.633
+circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
+arm: Fehler=28.988
+arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
+arm: Längen-Bracketing arm_len 10.434->10.500; Kandidaten=8.500->31.690, 10.500->28.988, 15.500->28.988, 22.000->28.988, 28.500->28.988, 35.000->28.988
+text: Fehler=91.138
+Runde 4: Gesamtfehler=31.199
+stagnation_detected: identischer Parameter-Fingerprint und praktisch unveränderter Gesamtfehler
+stopped_due_to_stagnation: Validierung vorzeitig beendet
 circle: Farb-Bracketing übersprungen (Farben gesperrt)
 arm: Farb-Bracketing übersprungen (Farben gesperrt)
 text: Farb-Bracketing übersprungen (Farben gesperrt)

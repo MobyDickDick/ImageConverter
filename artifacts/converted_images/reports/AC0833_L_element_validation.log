@@ -1,27 +1,6 @@
-run-meta: run_seed=725101178 pass_seed_offset=0 nonce_ns=1774032855944150600
-status=semantic_ok
-Runde 1: elementweise Validierung gestartet
-circle: Fehler=140.403
-circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
-circle: Radius-Bracketing r 10.667->9.500 (best_err=128.510); Kandidaten=9.500->128.510, 10.000->135.272, 10.500->140.403, 12.000->142.276
-arm: Fehler=84.443
-arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
-arm: Längen-Bracketing keine relevante Änderung (arm_len: 23.000); Kandidaten=17.000->99.608, 23.000->84.443, 24.000->84.443, 31.000->84.443, 38.000->84.443, 45.000->84.443
-text: Fehler=107.679
-text: Breiten-Bracketing übersprungen (co2_font_scale: current=0.886, Range=0.886..0.886)
-Runde 1: Gesamtfehler=24.910
-Runde 2: elementweise Validierung gestartet
-circle: Fehler=130.412
-circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
-circle: Radius-Bracketing keine relevante Änderung (r: 9.500, best_err=130.412); Kandidaten=9.500->130.412, 12.000->142.276
-arm: Fehler=84.443
-arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
-arm: Längen-Bracketing keine relevante Änderung (arm_len: 23.000); Kandidaten=17.000->99.608, 23.000->84.443, 24.000->84.443, 31.000->84.443, 38.000->84.443, 45.000->84.443
-text: Fehler=107.679
-text: Breiten-Bracketing übersprungen (co2_font_scale: current=0.886, Range=0.886..0.886)
-Runde 2: Gesamtfehler=24.910
-Keine Element-Geometrieänderung mehr; Validierung vorzeitig beendet
-circle: Farb-Bracketing übersprungen (Farben gesperrt)
-arm: Farb-Bracketing übersprungen (Farben gesperrt)
-text: Farb-Bracketing übersprungen (Farben gesperrt)
-semantic-guard: Erwartete Arm-Geometrie bestätigt/wiederhergestellt (z.B. AC0812 links).
+run-meta: run_seed=624623935 pass_seed_offset=0 nonce_ns=1774106698124556800
+status=semantic_mismatch
+best_attempt_svg=AC0833_L_failed.svg
+best_attempt_diff=AC0833_L_failed_diff.png
+issue=Beschreibung erwartet waagrechter Strich, im Bild aber nicht robust erkennbar
+issue=Strukturprüfung: Kein belastbarer waagrechter Linien-Kandidat im Rohbild erkannt
