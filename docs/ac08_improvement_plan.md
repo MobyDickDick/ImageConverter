@@ -247,6 +247,24 @@ Speziallogik in `src/image_composite_converter.py`.
 - Unit-Tests für `AC0832_S` prüfen die gemeinsamen Familien-Guardrails (Kreis-Locks, Connector-Längenfloor, Text-Skalierungsgrenzen und Radius-Obergrenze).
 - Unit-Tests für `AC0882_L` prüfen, dass `path_t` zentriert bleibt und die linke Arm-Geometrie auch aus einem unvollständigen Paramatersatz wiederhergestellt wird.
 
+## Laufende Nachverfolgung offener Schwachfamilien
+
+Die Umsetzung erzeugt jetzt zusätzlich die Reports `ac08_weak_family_status.csv` und
+`ac08_weak_family_status.txt` im Report-Ordner. Grundlage ist das bestehende
+`pixel_delta2_ranking.csv`; aufgenommen werden nur weiterhin auffällige AC08-Varianten
+(aktuell oberhalb des dokumentierten `mean_delta2`-Schwellwerts). Für jede Schwachfamilie
+werden dabei
+
+- die betroffene Variante und Basisfamilie,
+- ihr Fokus im Regression-Set (z. B. `stagnation`, `small_variant`),
+- der aktuelle `mean_delta2`,
+- die bereits implementierten Mitigationsbausteine sowie
+- beobachtete Laufzeitmarker wie `adaptive_unlock_applied`, `small_variant_mode_active`
+  oder `semantic_audit_logged`
+
+dokumentiert. Damit lässt sich die noch verbleibende AC08-Restarbeit nach jedem Re-Run
+als Report statt nur manuell im Plantext nachverfolgen.
+
 ---
 
 ### Aufgabe 4.2 – Rechte Connector-Familien gemeinsam tunen ✅ erledigt
