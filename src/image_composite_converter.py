@@ -1768,6 +1768,126 @@ class Action:
         return p
 
     @staticmethod
+    def _enforce_vertical_connector_badge_geometry(params: dict, w: int, h: int) -> dict:
+        """Ensure AC0811/AC0813-like badges keep a centered visible vertical connector."""
+        p = dict(params)
+        if not p.get("circle_enabled", True):
+            return p
+        if "cx" not in p or "cy" not in p or "r" not in p:
+            return p
+
+        cx = float(p["cx"])
+        cy = float(p["cy"])
+        r = float(p["r"])
+        canvas_height = max(
+            float(h),
+            float(p.get("height", 0.0) or 0.0),
+            float(p.get("badge_height", 0.0) or 0.0),
+            float(p.get("stem_bottom", 0.0) or 0.0),
+            cy + r,
+        )
+
+        if p.get("stem_enabled"):
+            stem_width = float(max(1.0, p.get("stem_width", p.get("stroke_circle", Action.AC08_STROKE_WIDTH_PX))))
+            p["stem_enabled"] = True
+            p["stem_width"] = stem_width
+            p["stem_x"] = cx - (stem_width / 2.0)
+            p["stem_top"] = cy + r
+            p["stem_bottom"] = canvas_height
+            stem_len = float(max(0.0, canvas_height - (cy + r)))
+            ratio = float(max(0.0, min(1.0, float(p.get("stem_len_min_ratio", 0.65)))))
+            p["stem_len_min_ratio"] = ratio
+            p["stem_len_min"] = float(max(1.0, float(p.get("stem_len_min", 1.0)), stem_len * ratio))
+
+        if p.get("arm_enabled"):
+            arm_stroke = float(max(1.0, p.get("arm_stroke", Action.AC08_STROKE_WIDTH_PX)))
+            top_extent = max(0.0, cy - r)
+            p["arm_enabled"] = True
+            p["arm_stroke"] = arm_stroke
+            p["arm_x1"] = cx
+            p["arm_x2"] = cx
+            p["arm_y1"] = 0.0
+            p["arm_y2"] = top_extent
+            arm_len = float(max(0.0, top_extent))
+            ratio = float(max(0.0, min(1.0, float(p.get("arm_len_min_ratio", 0.75)))))
+            p["arm_len_min_ratio"] = ratio
+            p["arm_len_min"] = float(max(1.0, float(p.get("arm_len_min", 1.0)), arm_len * ratio))
+        return p
+
+    @staticmethod
+    def _tune_ac08_vertical_connector_family(name: str, params: dict) -> dict:
+        """Apply shared guardrails for AC08 families with vertical connectors.
+
+        Aufgabe 4.3 groups AC0811, AC0813, AC0831, AC0836 and AC0881 because
+        they all depend on a vertical connector staying centered relative to the
+        circle. Their main shared regressions are:
+        - the stem/arm drifting sideways relative to the circle,
+        - the vertical connector shrinking until the badge reads as plain circle,
+        - text badges becoming top-heavy once circle and connector alignment drifts.
+        """
+        p = dict(params)
+        symbol_name = get_base_name_from_file(str(name)).upper().split("_", 1)[0]
+        if symbol_name not in {"AC0811", "AC0813", "AC0831", "AC0836", "AC0881"}:
+            return p
+
+        p["connector_family_group"] = "ac08_vertical_connector"
+        p["connector_family_direction"] = "vertical"
+        if symbol_name in {"AC0811", "AC0831", "AC0836", "AC0881"}:
+            p["stem_enabled"] = True
+            p.pop("arm_enabled", None)
+        elif symbol_name == "AC0813":
+            p["arm_enabled"] = True
+        p["lock_circle_cx"] = True
+        p["lock_circle_cy"] = True
+        p["lock_stem_center_to_circle"] = bool(p.get("stem_enabled", False))
+        p["lock_arm_center_to_circle"] = bool(p.get("arm_enabled", False))
+        if "template_circle_cx" in p:
+            p["cx"] = float(p["template_circle_cx"])
+        if "template_circle_cy" in p:
+            p["cy"] = float(p["template_circle_cy"])
+
+        has_text = bool(p.get("draw_text", False))
+        is_small, _reason, min_dim = Action._is_ac08_small_variant(str(name), p)
+        template_r = float(p.get("template_circle_radius", p.get("r", 1.0)))
+        radius_floor_ratio = 0.95 if not has_text else 0.93
+        if is_small:
+            radius_floor_ratio = max(radius_floor_ratio, 0.96 if not has_text else 0.95)
+        p["min_circle_radius"] = float(max(float(p.get("min_circle_radius", 1.0)), template_r * radius_floor_ratio))
+
+        if p.get("stem_enabled"):
+            stem_ratio_floor = 0.70 if not has_text else 0.72
+            if is_small:
+                stem_ratio_floor = max(stem_ratio_floor, 0.74)
+            p["stem_len_min_ratio"] = float(max(float(p.get("stem_len_min_ratio", stem_ratio_floor)), stem_ratio_floor))
+        if p.get("arm_enabled"):
+            arm_ratio_floor = 0.78 if not has_text else 0.80
+            if is_small:
+                arm_ratio_floor = max(arm_ratio_floor, 0.82)
+            p["arm_len_min_ratio"] = float(max(float(p.get("arm_len_min_ratio", arm_ratio_floor)), arm_ratio_floor))
+
+        p = Action._enforce_vertical_connector_badge_geometry(
+            p,
+            int(round(float(p.get("width", 0.0) or 0.0))) or int(round(float(p.get("badge_width", 0.0) or 0.0))) or 1,
+            int(round(float(p.get("height", 0.0) or 0.0))) or int(round(float(p.get("badge_height", 0.0) or 0.0))) or 1,
+        )
+
+        text_mode = str(p.get("text_mode", "")).lower()
+        if text_mode == "co2":
+            base_scale = float(p.get("co2_font_scale", 0.82))
+            p["lock_text_scale"] = False
+            p["co2_anchor_mode"] = "cluster"
+            p["co2_optical_bias"] = float(max(float(p.get("co2_optical_bias", 0.10)), 0.10))
+            p["co2_dy"] = float(max(float(p.get("co2_dy", 0.0)), 0.05 * template_r if min_dim > 0.0 else 0.0))
+            p["co2_font_scale_min"] = float(max(float(p.get("co2_font_scale_min", base_scale)), max(0.78, base_scale * 0.94)))
+            p["co2_font_scale_max"] = float(min(float(p.get("co2_font_scale_max", 1.12)), min(1.12, base_scale * 1.15)))
+        elif text_mode == "voc":
+            base_scale = float(p.get("voc_font_scale", 0.52))
+            p["lock_text_scale"] = False
+            p["voc_font_scale_min"] = float(max(float(p.get("voc_font_scale_min", base_scale)), max(0.50, base_scale * 0.94)))
+            p["voc_font_scale_max"] = float(min(float(p.get("voc_font_scale_max", 0.98)), min(0.98, base_scale * 1.14)))
+        return p
+
+    @staticmethod
     def _finalize_ac08_style(name: str, params: dict) -> dict:
         """Apply AC08xx palette/stroke conventions globally for semantic conversions."""
         canonical_name = str(name).upper()
@@ -1923,6 +2043,7 @@ class Action:
         p = Action._configure_ac08_small_variant_mode(name, p)
         p = Action._tune_ac08_left_connector_family(name, p)
         p = Action._tune_ac08_right_connector_family(name, p)
+        p = Action._tune_ac08_vertical_connector_family(name, p)
         if p.get("draw_text", True) and "text_gray" in p:
             p["text_gray"] = int(p.get("stroke_gray", Action.LIGHT_CIRCLE_STROKE_GRAY))
         return p
@@ -1965,7 +2086,7 @@ class Action:
             params["arm_len_min_ratio"] = float(min(current_ratio, 0.58 if base_name in {"AC0882", "AC0837", "AC0839"} else 0.65))
         if params.get("stem_enabled"):
             current_ratio = float(params.get("stem_len_min_ratio", 0.65))
-            params["stem_len_min_ratio"] = float(min(current_ratio, 0.52 if base_name == "AC0831" else 0.58))
+            params["stem_len_min_ratio"] = float(min(current_ratio, 0.58 if base_name == "AC0831" else 0.58))
 
         min_dim = float(
             min(
@@ -2010,6 +2131,67 @@ class Action:
             f"stem_ratio={float(params.get('stem_len_min_ratio', 0.0)):.3f}, "
             f"text_locked={'yes' if bool(params.get('lock_text_scale', False)) else 'no'}, "
             f"colors_locked={'yes' if bool(params.get('lock_colors', False)) else 'no'}"
+        )
+        return True
+
+    @staticmethod
+    def _release_ac08_adaptive_locks(
+        params: dict,
+        logs: list[str],
+        *,
+        reason: str,
+        current_error: float,
+    ) -> bool:
+        """Relax bounded AC08 locks for a final fallback round without fully opening the search."""
+        if bool(params.get("adaptive_lock_release_active", False)):
+            return False
+
+        base_name = get_base_name_from_file(str(params.get("badge_symbol_name", ""))).upper()
+        if base_name not in {"AC0882", "AC0837", "AC0839", "AC0820", "AC0831"}:
+            return False
+        if not math.isfinite(current_error) or current_error < 8.0:
+            return False
+
+        params["adaptive_lock_release_active"] = True
+        params["adaptive_lock_release_reason"] = reason
+
+        if params.get("circle_enabled", True):
+            template_r = max(1.0, float(params.get("template_circle_radius", params.get("r", 1.0))))
+            current_min = max(1.0, float(params.get("min_circle_radius", template_r)))
+            params["min_circle_radius"] = float(min(current_min, template_r * 0.88))
+
+        if params.get("arm_enabled"):
+            current_ratio = float(params.get("arm_len_min_ratio", 0.75))
+            params["arm_len_min_ratio"] = float(min(current_ratio, 0.58 if base_name in {"AC0882", "AC0837", "AC0839"} else 0.65))
+        if params.get("stem_enabled"):
+            current_ratio = float(params.get("stem_len_min_ratio", 0.65))
+            params["stem_len_min_ratio"] = float(min(current_ratio, 0.58 if base_name == "AC0831" else 0.58))
+            stem_top = float(params.get("stem_top", 0.0))
+            stem_bottom = float(params.get("stem_bottom", stem_top))
+            params["stem_len_min"] = float(max(1.0, float(params.get("stem_len_min", 1.0)), (stem_bottom - stem_top) * float(params.get("stem_len_min_ratio", 0.0))))
+
+        text_mode = str(params.get("text_mode", "")).lower()
+        if text_mode == "co2" and base_name in {"AC0820", "AC0831"}:
+            base_scale = float(params.get("co2_font_scale", 0.82))
+            params["lock_text_scale"] = False
+            params["co2_font_scale_min"] = float(min(float(params.get("co2_font_scale_min", base_scale)), max(0.68, base_scale * 0.86)))
+            params["co2_font_scale_max"] = float(max(float(params.get("co2_font_scale_max", base_scale)), min(1.22, base_scale * 1.18)))
+        if text_mode == "voc" and base_name == "AC0839":
+            base_scale = float(params.get("voc_font_scale", 0.52))
+            params["lock_text_scale"] = False
+            params["voc_font_scale_min"] = float(min(float(params.get("voc_font_scale_min", base_scale)), max(0.40, base_scale * 0.84)))
+            params["voc_font_scale_max"] = float(max(float(params.get("voc_font_scale_max", base_scale)), min(0.98, base_scale * 1.18)))
+
+        params["lock_colors"] = False
+        for key, corridor in (("fill_gray", 10), ("stroke_gray", 12), ("stem_gray", 12), ("text_gray", 12)):
+            if key not in params:
+                continue
+            center = int(round(float(params.get(key, 0.0))))
+            params[f"{key}_min"] = int(max(0, center - corridor))
+            params[f"{key}_max"] = int(min(255, center + corridor))
+
+        logs.append(
+            f"adaptive_lock_release_activated: {base_name}, reason={reason}, current_error={current_error:.3f}"
         )
         return True
 

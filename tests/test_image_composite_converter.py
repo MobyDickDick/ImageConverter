@@ -517,6 +517,56 @@ def test_finalize_right_connector_voc_family_preserves_visible_arm() -> None:
     assert tuned["lock_text_scale"] is False
     assert float(tuned["voc_font_scale_min"]) >= 0.50
 
+
+def test_finalize_vertical_connector_family_applies_shared_guardrails() -> None:
+    """Vertical AC08 families should keep the connector centered and preserve readable text."""
+    params = Action._apply_co2_label(Action._default_ac0881_params(20, 30))
+    params["template_circle_radius"] = float(params["r"])
+    params["template_circle_cx"] = float(params["cx"])
+    params["template_circle_cy"] = float(params["cy"])
+    params["cx"] = float(params["cx"]) + 1.0
+    params["cy"] = float(params["cy"]) - 1.0
+    params["r"] = float(params["r"]) * 0.86
+    params["stem_enabled"] = False
+
+    tuned = Action._finalize_ac08_style("AC0831_L", params)
+
+    assert tuned["connector_family_group"] == "ac08_vertical_connector"
+    assert tuned["connector_family_direction"] == "vertical"
+    assert tuned["lock_circle_cx"] is True
+    assert tuned["lock_circle_cy"] is True
+    assert tuned["lock_stem_center_to_circle"] is True
+    assert float(tuned["cx"]) == float(params["template_circle_cx"])
+    assert float(tuned["cy"]) == float(params["template_circle_cy"])
+    assert tuned["stem_enabled"] is True
+    assert float(tuned["stem_top"]) == pytest.approx(float(tuned["cy"]) + float(tuned["r"]))
+    assert float(tuned["stem_bottom"]) == 30.0
+    assert float(tuned["stem_len_min_ratio"]) >= 0.72
+    assert float(tuned["min_circle_radius"]) >= float(params["template_circle_radius"]) * 0.93
+    assert tuned["lock_text_scale"] is False
+    assert tuned["co2_anchor_mode"] == "cluster"
+    assert float(tuned["co2_dy"]) > 0.0
+
+
+def test_finalize_vertical_connector_voc_family_keeps_centered_stem() -> None:
+    """VOC vertical badges should retain a centered stem and bounded text scale."""
+    params = Action._apply_voc_label(Action._default_ac0881_params(45, 25))
+    params["template_circle_radius"] = float(params["r"])
+    params["template_circle_cx"] = float(params["cx"])
+    params["template_circle_cy"] = float(params["cy"])
+    params["stem_enabled"] = False
+
+    tuned = Action._finalize_ac08_style("AC0836_L", params)
+
+    assert tuned["connector_family_group"] == "ac08_vertical_connector"
+    assert tuned["stem_enabled"] is True
+    assert float(tuned["stem_x"]) == pytest.approx(float(tuned["cx"]) - (float(tuned["stem_width"]) / 2.0))
+    assert float(tuned["stem_top"]) == pytest.approx(float(tuned["cy"]) + float(tuned["r"]))
+    assert float(tuned["stem_bottom"]) == 25.0
+    assert float(tuned["stem_len_min_ratio"]) >= 0.72
+    assert tuned["lock_text_scale"] is False
+    assert float(tuned["voc_font_scale_min"]) >= 0.50
+
 def test_validate_badge_logs_small_variant_mode(monkeypatch: pytest.MonkeyPatch) -> None:
     """Validation logs should explicitly state when the `_S` small-variant mode is active."""
     if image_composite_converter.np is None:
@@ -1901,12 +1951,13 @@ def test_finalize_ac0820_keeps_text_scale_tunable_with_bounds() -> None:
     assert float(params["co2_font_scale_max"]) > float(params["co2_font_scale"])
 
 
-def test_finalize_non_ac0820_co2_keeps_text_scale_locked() -> None:
-    """Non-AC0820 CO₂ badges should keep fixed text scale to avoid drift."""
+def test_finalize_vertical_non_ac0820_co2_unlocks_bounded_text_scale() -> None:
+    """Vertical non-AC0820 CO₂ badges should allow bounded text tuning to avoid top-heavy text."""
     params = Action._apply_co2_label(Action._default_ac0881_params(20, 20))
     params = Action._finalize_ac08_style("AC0831", params)
 
-    assert params["lock_text_scale"] is True
+    assert params["lock_text_scale"] is False
+    assert float(params["co2_font_scale_min"]) < float(params["co2_font_scale_max"])
 
 
 def test_make_badge_params_applies_ac0831_vertical_co2_tuning() -> None:

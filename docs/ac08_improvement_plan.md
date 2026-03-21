@@ -266,15 +266,19 @@ Speziallogik in `src/image_composite_converter.py`.
 
 ---
 
-### Aufgabe 4.3 – Vertikale Connector-Familien gemeinsam tunen
+### Aufgabe 4.3 – Vertikale Connector-Familien gemeinsam tunen ✅ erledigt
 **Familien:** `AC0811`, `AC0813`, `AC0831`, `AC0836`, `AC0881`
 
 **Ziel:** Vertikale Stämme/Arme und Textlage robust auflösen.
 
-**Prüfpunkte:**
-- Stem bleibt mittig zum Kreis,
-- vertikale Ausdehnung kollabiert nicht,
-- CO₂-Text wirkt nicht top-heavy.
+**Umgesetzt in Code/Workflow:**
+- `Action._tune_ac08_vertical_connector_family` bündelt jetzt gemeinsame Guardrails für `AC0811`, `AC0813`, `AC0831`, `AC0836` und `AC0881` und markiert sie mit `connector_family_group=ac08_vertical_connector`.
+- Die Familienlogik verankert Kreiszentrum und vertikale Connector-Achse wieder an der semantischen Vorlage, rekonstruiert fehlende Stems/vertikale Arme über `Action._enforce_vertical_connector_badge_geometry` und erzwingt Mindestlängen über `stem_len_min_ratio` bzw. `arm_len_min_ratio`, damit vertikale Ausdehnung nicht kollabiert.
+- CO₂-Varianten verwenden nun standardisiert cluster-zentrierte Textverankerung mit leichtem Down-Bias und bounded Textfenstern; VOC-Varianten behalten ebenfalls gebundene Skalierungsgrenzen, damit die Textlage in vertikalen Familien nicht top-heavy wird.
+
+**Prüfpunkte/ergänzte Tests:**
+- Neue Tests für `AC0831_L` prüfen die gemeinsamen Guardrails der vertikalen Connector-Familie (Kreis-Locks, Stem-Rekonstruktion, Mindest-Stemverhältnis und CO₂-Textlage).
+- Neue Tests für `AC0836_L` prüfen, dass VOC-Varianten den Stem mittig zum Kreis halten und bounded Textskalierung verwenden.
 
 ---
 
