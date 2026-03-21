@@ -282,7 +282,7 @@ To keep the README focused on the ImageConverter, the task summary below now onl
 
 ## Roadmap
 
-This section is the future-looking plan for the ImageConverter. For the detailed checklist of open items, see [docs/open_tasks.md](docs/open_tasks.md), which is the canonical place to mark roadmap work as done.
+This section is the future-looking plan for the ImageConverter. The canonical checklist lives in [docs/open_tasks.md](docs/open_tasks.md); it currently has no unchecked items, and any new roadmap work should be added there before implementation starts.
 
 ### Image conversion pipeline
 - Keep error diagnostics for CSV/XML description inputs precise and user-facing.
