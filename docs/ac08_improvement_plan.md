@@ -188,10 +188,10 @@ Speziallogik in `src/image_composite_converter.py`.
 - Verbesserungen passieren ohne generelle Regression in den stabilen Familien.
 
 **Umgesetzt in Code/Workflow:**
-- `Action.validate_badge_by_elements` aktiviert bei dokumentierter Stagnation bzw. weiterhin hohem Restfehler eine gezielte `adaptive_lock_release`, statt globale Sperren pauschal zu entfernen.
-- Die Freigabe ist auf die im Plan genannten Problemfamilien (`AC0882`, `AC0837`, `AC0839`, `AC0820`, `AC0831`) begrenzt und lockert nur enge Korridore für Radius-Floor, Connector-Mindestlängen, Text-Skalierung und Farbwerte.
-- Das Farb-Bracketing respektiert diese Freigaben nur innerhalb expliziter `*_min`/`*_max`-Grenzen, sodass die kanonische AC08-Palette weiterhin nur minimal verlassen wird.
-- Aktivierungen werden im Element-Validierungslog als `adaptive_lock_release_activated` mit Grund und aktuellem Fehler protokolliert.
+- `Action._activate_ac08_adaptive_locks` öffnet bei Stagnation bzw. weiterhin hohem Fehler einen eng begrenzten Fallback-Suchraum nur für die dokumentierten Problemfamilien `AC0882`, `AC0837`, `AC0839`, `AC0820` und `AC0831`.
+- Freigegeben werden dabei nur bounded Anpassungen: leicht erweiterte Radiusgrenzen (`min_circle_radius`/`max_circle_radius`), gelockerte Mindestlängen für Connectoren (`arm_len_min_ratio`/`stem_len_min_ratio`), bounded Textskalierung für kleine bzw. betroffene Text-Badges sowie eine enge Farbkorrektur innerhalb definierter Grauwert-Korridore.
+- `validate_badge_by_elements` aktiviert diese Family-Unlocks explizit erst dann, wenn der normale Validierungspfad stagniert (`identical_fingerprint` bzw. `no_geometry_movement`) und schreibt dafür nachvollziehbare Logmarker wie `adaptive_unlock_applied` und den Wechsel in den Fallback-Search-Modus.
+- Das Farb-Bracketing respektiert die neuen Min/Max-Korridore, damit adaptive Freigaben keine unkontrollierten Paletten-Regressionen erzeugen.
 
 **Empfohlene Tests:**
 - Fokus-Batch auf die Top-Ausreißer aus `pixel_delta2_ranking.csv`

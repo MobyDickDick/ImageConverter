@@ -1569,7 +1569,7 @@ class Action:
         if not symbol_name.startswith("AC08"):
             return params
         p = Action._capture_canonical_badge_colors(Action._normalize_light_circle_colors(dict(params)))
-        p["ac08_symbol_name"] = symbol_name
+        p["badge_symbol_name"] = symbol_name
         # During geometry fitting we intentionally keep auto-estimated colors.
         # Canonical palette values are re-applied once fitting converged.
         p = Action._normalize_ac08_line_widths(p)
@@ -1719,98 +1719,90 @@ class Action:
         return p
 
     @staticmethod
-    def _release_ac08_adaptive_locks(
+    def _activate_ac08_adaptive_locks(
         params: dict,
         logs: list[str],
         *,
+        full_err: float,
         reason: str,
-        current_error: float | None = None,
     ) -> bool:
-        """Relax selected AC08 locks for documented outlier families only.
-
-        The release stays intentionally narrow: colors may move only inside a
-        small corridor around the canonical palette, radius floors are reduced
-        only relative to the semantic template, and connector/text tuning stays
-        bounded. This implements task 3.1 from the AC08 plan without globally
-        weakening the stable badge families.
-        """
-
-        symbol_name = str(params.get("ac08_symbol_name") or "").upper()
-        profile = AC08_ADAPTIVE_LOCK_PROFILES.get(symbol_name)
-        if not profile:
-            return False
-        if bool(params.get("adaptive_lock_release_active", False)):
+        """Open a bounded family-specific fallback search space for stubborn AC08 badges."""
+        if bool(params.get("adaptive_unlock_active", False)):
             return False
 
-        params["adaptive_lock_release_active"] = True
-        params["adaptive_lock_release_reason"] = str(reason)
-        changed = False
+        base_name = get_base_name_from_file(str(params.get("badge_symbol_name", ""))).upper()
+        if base_name not in {"AC0882", "AC0837", "AC0839", "AC0820", "AC0831"}:
+            return False
 
-        template_r = float(params.get("template_circle_radius", params.get("r", 1.0)))
-        radius_floor_ratio = float(profile.get("radius_floor_ratio", 0.88))
-        current_min_r = float(params.get("min_circle_radius", 1.0))
-        relaxed_min_r = max(1.0, template_r * radius_floor_ratio)
-        if relaxed_min_r < current_min_r:
-            params["min_circle_radius"] = float(relaxed_min_r)
-            changed = True
+        if not math.isfinite(full_err) or full_err < float(params.get("adaptive_unlock_error_threshold", 12.0)):
+            return False
+
+        params["adaptive_unlock_active"] = True
+        params["adaptive_unlock_reason"] = reason
+
+        if params.get("circle_enabled", True):
+            current_r = max(1.0, float(params.get("r", 1.0)))
+            existing_min = max(1.0, float(params.get("min_circle_radius", current_r)))
+            relaxed_min = max(1.0, min(existing_min, current_r) * 0.94)
+            params["min_circle_radius"] = float(min(existing_min, relaxed_min))
+            widened_max = max(
+                current_r * 1.08,
+                float(params.get("template_circle_radius", current_r)) * 1.08,
+            )
+            params["max_circle_radius"] = float(max(float(params.get("max_circle_radius", 0.0) or 0.0), widened_max))
 
         if params.get("arm_enabled"):
-            arm_min_ratio = float(profile.get("arm_min_ratio", params.get("arm_len_min_ratio", 0.75)))
-            current_ratio = float(params.get("arm_len_min_ratio", arm_min_ratio))
-            if arm_min_ratio < current_ratio:
-                params["arm_len_min_ratio"] = float(max(0.0, min(1.0, arm_min_ratio)))
-                current_arm_len = float(
-                    math.hypot(
-                        float(params.get("arm_x2", 0.0)) - float(params.get("arm_x1", 0.0)),
-                        float(params.get("arm_y2", 0.0)) - float(params.get("arm_y1", 0.0)),
-                    )
-                )
-                params["arm_len_min"] = float(max(1.0, current_arm_len * params["arm_len_min_ratio"]))
-                changed = True
-
+            current_ratio = float(params.get("arm_len_min_ratio", 0.75))
+            params["arm_len_min_ratio"] = float(min(current_ratio, 0.58 if base_name in {"AC0882", "AC0837", "AC0839"} else 0.65))
         if params.get("stem_enabled"):
-            stem_min_ratio = float(profile.get("stem_min_ratio", params.get("stem_len_min_ratio", 0.65)))
-            current_ratio = float(params.get("stem_len_min_ratio", stem_min_ratio))
-            if stem_min_ratio < current_ratio:
-                params["stem_len_min_ratio"] = float(max(0.0, min(1.0, stem_min_ratio)))
-                current_stem_len = float(params.get("stem_bottom", 0.0)) - float(params.get("stem_top", 0.0))
-                params["stem_len_min"] = float(max(1.0, current_stem_len * params["stem_len_min_ratio"]))
-                changed = True
+            current_ratio = float(params.get("stem_len_min_ratio", 0.65))
+            params["stem_len_min_ratio"] = float(min(current_ratio, 0.52 if base_name == "AC0831" else 0.58))
 
-        color_corridor = int(max(0.0, float(profile.get("color_corridor", 0.0))))
-        if bool(params.get("lock_colors", False)) and color_corridor > 0:
-            params["lock_colors"] = False
-            for color_key in ("fill_gray", "stroke_gray", "stem_gray", "text_gray"):
-                if color_key not in params:
-                    continue
-                center = int(round(float(params[color_key])))
-                params[f"{color_key}_min"] = int(Action._clip_scalar(center - color_corridor, 0, 255))
-                params[f"{color_key}_max"] = int(Action._clip_scalar(center + color_corridor, 0, 255))
-            changed = True
-
-        text_scale_delta = float(profile.get("text_scale_delta", 0.0))
-        if text_scale_delta > 0.0 and params.get("draw_text", True):
-            if str(params.get("text_mode", "")).lower() == "co2":
-                base_scale = float(params.get("co2_font_scale", 0.82))
-                params["lock_text_scale"] = False
-                params["co2_font_scale_min"] = float(max(0.60, base_scale - text_scale_delta))
-                params["co2_font_scale_max"] = float(min(1.25, base_scale + text_scale_delta))
-                changed = True
-            elif str(params.get("text_mode", "")).lower() == "voc":
-                base_scale = float(params.get("voc_font_scale", 0.52))
-                params["lock_text_scale"] = False
-                params["voc_font_scale_min"] = float(max(0.45, base_scale - text_scale_delta))
-                params["voc_font_scale_max"] = float(min(1.05, base_scale + text_scale_delta))
-                changed = True
-
-        if changed:
-            error_suffix = ""
-            if current_error is not None and math.isfinite(float(current_error)):
-                error_suffix = f"; current_error={float(current_error):.3f}"
-            logs.append(
-                f"adaptive_lock_release_activated: {symbol_name} reason={reason}{error_suffix}"
+        min_dim = float(
+            min(
+                float(params.get("width", 0.0) or 0.0),
+                float(params.get("height", 0.0) or 0.0),
             )
-        return changed
+        )
+        if min_dim <= 0.0:
+            min_dim = max(1.0, float(params.get("r", 1.0)) * 2.0)
+
+        text_mode = str(params.get("text_mode", "")).lower()
+        if text_mode == "co2" and (base_name in {"AC0820", "AC0831"} or min_dim <= 15.5):
+            base_scale = float(params.get("co2_font_scale", 0.82))
+            params["lock_text_scale"] = False
+            params["co2_font_scale_min"] = float(min(float(params.get("co2_font_scale_min", base_scale)), max(0.68, base_scale * 0.86)))
+            params["co2_font_scale_max"] = float(max(float(params.get("co2_font_scale_max", base_scale)), min(1.22, base_scale * 1.18)))
+        if text_mode == "voc" and (base_name == "AC0839" or min_dim <= 15.5):
+            base_scale = float(params.get("voc_font_scale", 0.52))
+            params["lock_text_scale"] = False
+            params["voc_font_scale_min"] = float(min(float(params.get("voc_font_scale_min", base_scale)), max(0.40, base_scale * 0.84)))
+            params["voc_font_scale_max"] = float(max(float(params.get("voc_font_scale_max", base_scale)), min(0.98, base_scale * 1.18)))
+
+        if base_name in {"AC0820", "AC0831", "AC0837", "AC0839", "AC0882"}:
+            params["lock_colors"] = False
+            for key, corridor in (
+                ("fill_gray", 10),
+                ("stroke_gray", 12),
+                ("stem_gray", 12),
+                ("text_gray", 12),
+            ):
+                if key not in params:
+                    continue
+                center = int(round(float(params.get(key, 0.0))))
+                params[f"{key}_min"] = int(max(0, center - corridor))
+                params[f"{key}_max"] = int(min(255, center + corridor))
+
+        logs.append(
+            "adaptive_unlock_applied: "
+            f"base={base_name}, reason={reason}, full_err={full_err:.3f}, "
+            f"radius=[{float(params.get('min_circle_radius', 0.0)):.3f}..{float(params.get('max_circle_radius', 0.0) or 0.0):.3f}], "
+            f"arm_ratio={float(params.get('arm_len_min_ratio', 0.0)):.3f}, "
+            f"stem_ratio={float(params.get('stem_len_min_ratio', 0.0)):.3f}, "
+            f"text_locked={'yes' if bool(params.get('lock_text_scale', False)) else 'no'}, "
+            f"colors_locked={'yes' if bool(params.get('lock_colors', False)) else 'no'}"
+        )
+        return True
 
     @staticmethod
     def _align_stem_to_circle_center(params: dict) -> dict:
@@ -4986,6 +4978,8 @@ class Action:
         if min_dim <= 22.0:
             low_bound = max(low_bound, current * 0.9)
         high_bound = min_dim * 0.48
+        if "max_circle_radius" in params:
+            high_bound = min(high_bound, float(params.get("max_circle_radius", high_bound)))
         if not low_bound < high_bound:
             return False
 
@@ -5599,39 +5593,25 @@ class Action:
 
         for color_key in Action._element_color_keys(element, params):
             current = int(round(float(params.get(color_key, 128))))
-            corridor_min = params.get(f"{color_key}_min")
-            corridor_max = params.get(f"{color_key}_max")
-            min_candidate = int(Action._clip_scalar(current, 0, 255))
-            max_candidate = int(Action._clip_scalar(current, 0, 255))
-            if corridor_min is not None:
-                min_candidate = int(Action._clip_scalar(int(round(float(corridor_min))), 0, 255))
-            else:
-                min_candidate = 0
-            if corridor_max is not None:
-                max_candidate = int(Action._clip_scalar(int(round(float(corridor_max))), 0, 255))
-            else:
-                max_candidate = 255
+            low_limit = int(Action._clip_scalar(int(params.get(f"{color_key}_min", 0)), 0, 255))
+            high_limit = int(Action._clip_scalar(int(params.get(f"{color_key}_max", 255)), 0, 255))
+            if low_limit > high_limit:
+                low_limit, high_limit = high_limit, low_limit
             candidates = {
-                int(Action._clip_scalar(current - 32, min_candidate, max_candidate)),
-                int(Action._clip_scalar(current - 16, min_candidate, max_candidate)),
-                int(Action._clip_scalar(current - 8, min_candidate, max_candidate)),
-                int(Action._clip_scalar(current, min_candidate, max_candidate)),
-                int(Action._clip_scalar(current + 8, min_candidate, max_candidate)),
-                int(Action._clip_scalar(current + 16, min_candidate, max_candidate)),
-                int(Action._clip_scalar(current + 32, min_candidate, max_candidate)),
+                int(Action._clip_scalar(current - 32, low_limit, high_limit)),
+                int(Action._clip_scalar(current - 16, low_limit, high_limit)),
+                int(Action._clip_scalar(current - 8, low_limit, high_limit)),
+                int(Action._clip_scalar(current, low_limit, high_limit)),
+                int(Action._clip_scalar(current + 8, low_limit, high_limit)),
+                int(Action._clip_scalar(current + 16, low_limit, high_limit)),
+                int(Action._clip_scalar(current + 32, low_limit, high_limit)),
             }
             if sampled is not None:
-                candidates.add(int(Action._clip_scalar(sampled, min_candidate, max_candidate)))
+                candidates.add(int(Action._clip_scalar(sampled, low_limit, high_limit)))
             if element == "circle" and color_key == "fill_gray":
-                candidates.update({
-                    int(Action._clip_scalar(v, min_candidate, max_candidate))
-                    for v in (200, 210, 220, 230, 240)
-                })
+                candidates.update(int(Action._clip_scalar(v, low_limit, high_limit)) for v in {200, 210, 220, 230, 240})
             if color_key in {"stroke_gray", "stem_gray", "text_gray"}:
-                candidates.update({
-                    int(Action._clip_scalar(v, min_candidate, max_candidate))
-                    for v in (96, 112, 128, 144, 152, 160, 171)
-                })
+                candidates.update(int(Action._clip_scalar(v, low_limit, high_limit)) for v in {96, 112, 128, 144, 152, 160, 171})
 
             values = sorted(v for v in candidates if min_candidate <= v <= max_candidate)
             errs = [
@@ -5658,14 +5638,14 @@ class Action:
                         params,
                         element,
                         color_key,
-                        int(Action._clip_scalar(int(round(v)), 0, 255)),
+                        int(Action._clip_scalar(int(round(v)), low_limit, high_limit)),
                         mask_orig,
                     ),
-                    snap=lambda v: int(Action._clip_scalar(int(round(v)), 0, 255)),
+                    snap=lambda v: int(Action._clip_scalar(int(round(v)), low_limit, high_limit)),
                     seed=1301,
                 )
                 if s_improved:
-                    best_value = int(Action._clip_scalar(int(round(s_best)), 0, 255))
+                    best_value = int(Action._clip_scalar(int(round(s_best)), low_limit, high_limit))
                     logs.append(
                         f"{element}: Farb-Stochastic-Survivor aktiviert ({color_key}={best_value}, err={s_err:.3f})"
                     )
@@ -6194,6 +6174,20 @@ class Action:
                     logs.append(
                         "stagnation_detected: identischer Parameter-Fingerprint und praktisch unveränderter Gesamtfehler"
                     )
+                    adaptive_unlock_applied = Action._activate_ac08_adaptive_locks(
+                        params,
+                        logs,
+                        full_err=full_err,
+                        reason="identical_fingerprint",
+                    )
+                    if adaptive_unlock_applied:
+                        previous_round_state = None
+                        fallback_search_active = True
+                        if round_idx + 1 < max_rounds:
+                            logs.append(
+                                "switch_to_fallback_search: adaptive family-unlocks aktiviert und Circle-Geometry-Penalty deaktiviert"
+                            )
+                            continue
                     if not fallback_search_active and round_idx + 1 < max_rounds:
                         Action._release_ac08_adaptive_locks(
                             params,
@@ -6228,6 +6222,20 @@ class Action:
                 break
 
             if not round_changed:
+                adaptive_unlock_applied = Action._activate_ac08_adaptive_locks(
+                    params,
+                    logs,
+                    full_err=full_err,
+                    reason="no_geometry_movement",
+                )
+                if adaptive_unlock_applied:
+                    previous_round_state = None
+                    fallback_search_active = True
+                    if round_idx + 1 < max_rounds:
+                        logs.append(
+                            "switch_to_fallback_search: adaptive family-unlocks aktiviert und Circle-Geometry-Penalty deaktiviert"
+                        )
+                        continue
                 if not fallback_search_active and round_idx + 1 < max_rounds:
                     Action._release_ac08_adaptive_locks(
                         params,

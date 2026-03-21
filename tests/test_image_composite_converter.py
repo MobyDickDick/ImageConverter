@@ -2966,6 +2966,90 @@ def test_optimize_element_color_bracket_skips_when_colors_locked() -> None:
     assert changed is False
     assert any("Farben gesperrt" in line for line in logs)
 
+
+def test_activate_ac08_adaptive_locks_opens_bounded_family_search_space() -> None:
+    """Problem AC08 families should get bounded unlocks once fallback search is activated."""
+    params = Action._finalize_ac08_style(
+        "AC0839",
+        {
+            "width": 14,
+            "height": 14,
+            "circle_enabled": True,
+            "arm_enabled": True,
+            "draw_text": True,
+            "text_mode": "voc",
+            "cx": 7.0,
+            "cy": 7.0,
+            "r": 4.0,
+            "min_circle_radius": 3.8,
+            "arm_x1": 7.0,
+            "arm_y1": 7.0,
+            "arm_x2": 13.0,
+            "arm_y2": 7.0,
+            "arm_len_min_ratio": 0.75,
+            "fill_gray": 220,
+            "stroke_gray": 152,
+            "text_gray": 152,
+            "voc_font_scale": 0.52,
+        },
+    )
+    logs: list[str] = []
+
+    changed = Action._activate_ac08_adaptive_locks(
+        params,
+        logs,
+        full_err=19.5,
+        reason="unit_test",
+    )
+
+    assert changed is True
+    assert params["adaptive_unlock_active"] is True
+    assert params["lock_colors"] is False
+    assert params["lock_text_scale"] is False
+    assert params["max_circle_radius"] > params["r"]
+    assert params["min_circle_radius"] < 3.8
+    assert params["arm_len_min_ratio"] <= 0.58
+    assert params["voc_font_scale_min"] <= params["voc_font_scale"]
+    assert params["voc_font_scale_max"] >= params["voc_font_scale"]
+    assert params["fill_gray_min"] == int(params["fill_gray"]) - 10
+    assert params["fill_gray_max"] == int(params["fill_gray"]) + 10
+    assert any("adaptive_unlock_applied" in line for line in logs)
+
+
+def test_optimize_element_color_bracket_respects_adaptive_color_corridor(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Adaptive unlock color tuning must stay inside the configured narrow palette corridor."""
+    np = image_composite_converter.np
+    if np is None:
+        pytest.skip("numpy not available in this environment")
+
+    img = np.zeros((8, 8, 3), dtype=np.uint8)
+    mask = np.ones((8, 8), dtype=np.uint8)
+    params = {
+        "circle_enabled": True,
+        "fill_gray": 220,
+        "stroke_gray": 152,
+        "lock_colors": False,
+        "fill_gray_min": 214,
+        "fill_gray_max": 226,
+    }
+    logs: list[str] = []
+    seen_values: list[int] = []
+
+    def fake_error(_img, _params, _element, color_key, color_value, _mask):
+        if color_key == "fill_gray":
+            seen_values.append(int(color_value))
+        return float(abs(int(color_value) - 226))
+
+    monkeypatch.setattr(Action, "_element_error_for_color", staticmethod(fake_error))
+
+    changed = Action._optimize_element_color_bracket(img, params, "circle", mask, logs)
+
+    assert changed is True
+    assert params["fill_gray"] == 226
+    assert seen_values
+    assert min(seen_values) >= 214
+    assert max(seen_values) <= 226
+
 def test_validate_badge_runs_color_bracketing_after_geometry_steps() -> None:
     """Validation should optimize color only after extent/radius geometry updates."""
 
@@ -3747,6 +3831,62 @@ def test_validate_badge_by_elements_detects_stagnation_and_stops(
     assert any("stagnation_detected" in line for line in logs)
     assert any("switch_to_fallback_search" in line for line in logs)
     assert any("stopped_due_to_stagnation" in line for line in logs)
+
+
+def test_validate_badge_by_elements_activates_ac08_adaptive_unlocks_on_stagnation(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """AC08 problem families should widen bounded search space before giving up on stagnation."""
+    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+        pytest.skip("numpy/cv2 not available in this environment")
+
+    np = image_composite_converter.np
+    if np is None:
+        pytest.skip("numpy not available in this environment")
+
+    params = Action._finalize_ac08_style(
+        "AC0831",
+        {
+            "width": 18,
+            "height": 18,
+            "circle_enabled": True,
+            "stem_enabled": True,
+            "arm_enabled": False,
+            "draw_text": True,
+            "text_mode": "co2",
+            "cx": 9.0,
+            "cy": 7.0,
+            "r": 4.0,
+            "stem_x": 8.5,
+            "stem_top": 11.0,
+            "stem_bottom": 17.0,
+            "stem_width": 1.0,
+            "fill_gray": 220,
+            "stroke_gray": 152,
+            "text_gray": 152,
+            "co2_font_scale": 0.82,
+        },
+    )
+    img = np.zeros((18, 18, 3), dtype=np.uint8)
+
+    monkeypatch.setattr(conv.Action, "generate_badge_svg", staticmethod(lambda *_args, **_kwargs: "<svg />"))
+    monkeypatch.setattr(conv.Action, "render_svg_to_numpy", staticmethod(lambda *_args, **_kwargs: img.copy()))
+    monkeypatch.setattr(conv.Action, "_fit_to_original_size", staticmethod(lambda _orig, rendered: rendered))
+    monkeypatch.setattr(conv.Action, "create_diff_image", staticmethod(lambda *_args, **_kwargs: img.copy()))
+    monkeypatch.setattr(conv.Action, "extract_badge_element_mask", staticmethod(lambda *_args, **_kwargs: np.ones((18, 18), dtype=bool)))
+    monkeypatch.setattr(conv.Action, "_element_match_error", staticmethod(lambda *_args, **_kwargs: 1.0))
+    monkeypatch.setattr(conv.Action, "_optimize_element_width_bracket", staticmethod(lambda *_args, **_kwargs: False))
+    monkeypatch.setattr(conv.Action, "_optimize_element_extent_bracket", staticmethod(lambda *_args, **_kwargs: False))
+    monkeypatch.setattr(conv.Action, "_optimize_circle_center_bracket", staticmethod(lambda *_args, **_kwargs: False))
+    monkeypatch.setattr(conv.Action, "_optimize_circle_radius_bracket", staticmethod(lambda *_args, **_kwargs: False))
+    monkeypatch.setattr(conv.Action, "_optimize_element_color_bracket", staticmethod(lambda *_args, **_kwargs: False))
+    monkeypatch.setattr(conv.Action, "_apply_canonical_badge_colors", staticmethod(lambda current: current))
+    monkeypatch.setattr(conv.Action, "calculate_error", staticmethod(lambda *_args, **_kwargs: 22.0))
+
+    logs = conv.Action.validate_badge_by_elements(img, params, max_rounds=4)
+
+    assert any("adaptive_unlock_applied" in line for line in logs)
+    assert any("adaptive family-unlocks aktiviert" in line for line in logs)
 
 
 def test_resolve_cli_csv_and_output_accepts_xml_as_table_path(tmp_path: Path) -> None:
