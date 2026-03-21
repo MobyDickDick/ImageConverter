@@ -164,7 +164,7 @@ Speziallogik in `src/image_composite_converter.py`.
 
 ## Phase 3 – Suchraum für Problemfamilien gezielt öffnen
 
-### Aufgabe 3.1 – Adaptive Locks für AC08-Problemfälle
+### Aufgabe 3.1 – Adaptive Locks für AC08-Problemfälle ✅ erledigt
 **Ziel:** Bei klarer Stagnation dürfen ausgewählte Parameter begrenzt freigegeben werden.
 
 **Umsetzung:**
@@ -186,6 +186,12 @@ Speziallogik in `src/image_composite_converter.py`.
 **Akzeptanzkriterien:**
 - Problemfälle zeigen nach Freigabe messbare neue Kandidatenbewegung.
 - Verbesserungen passieren ohne generelle Regression in den stabilen Familien.
+
+**Umgesetzt in Code/Workflow:**
+- `Action.validate_badge_by_elements` aktiviert bei dokumentierter Stagnation bzw. weiterhin hohem Restfehler eine gezielte `adaptive_lock_release`, statt globale Sperren pauschal zu entfernen.
+- Die Freigabe ist auf die im Plan genannten Problemfamilien (`AC0882`, `AC0837`, `AC0839`, `AC0820`, `AC0831`) begrenzt und lockert nur enge Korridore für Radius-Floor, Connector-Mindestlängen, Text-Skalierung und Farbwerte.
+- Das Farb-Bracketing respektiert diese Freigaben nur innerhalb expliziter `*_min`/`*_max`-Grenzen, sodass die kanonische AC08-Palette weiterhin nur minimal verlassen wird.
+- Aktivierungen werden im Element-Validierungslog als `adaptive_lock_release_activated` mit Grund und aktuellem Fehler protokolliert.
 
 **Empfohlene Tests:**
 - Fokus-Batch auf die Top-Ausreißer aus `pixel_delta2_ranking.csv`

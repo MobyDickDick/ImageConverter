@@ -52,6 +52,40 @@ ANNOTATION_COLORS: dict[str, tuple[int, int, int]] = {
 }
 
 
+AC08_ADAPTIVE_LOCK_PROFILES: dict[str, dict[str, float | bool]] = {
+    # Known AC08 outlier families from the improvement plan. Profiles only relax
+    # tightly bounded locks after validation stagnates or when the residual
+    # error stays clearly above the "good enough" range.
+    "AC0882": {
+        "radius_floor_ratio": 0.84,
+        "arm_min_ratio": 0.68,
+        "color_corridor": 10.0,
+    },
+    "AC0837": {
+        "radius_floor_ratio": 0.86,
+        "arm_min_ratio": 0.70,
+        "color_corridor": 10.0,
+    },
+    "AC0839": {
+        "radius_floor_ratio": 0.86,
+        "arm_min_ratio": 0.70,
+        "text_scale_delta": 0.10,
+        "color_corridor": 10.0,
+    },
+    "AC0820": {
+        "radius_floor_ratio": 0.88,
+        "text_scale_delta": 0.10,
+        "color_corridor": 8.0,
+    },
+    "AC0831": {
+        "radius_floor_ratio": 0.87,
+        "stem_min_ratio": 0.58,
+        "text_scale_delta": 0.10,
+        "color_corridor": 10.0,
+    },
+}
+
+
 def _bbox_from_points(points: list[tuple[int, int]]) -> tuple[int, int, int, int] | None:
     if not points:
         return None
@@ -1535,6 +1569,7 @@ class Action:
         if not symbol_name.startswith("AC08"):
             return params
         p = Action._capture_canonical_badge_colors(Action._normalize_light_circle_colors(dict(params)))
+        p["ac08_symbol_name"] = symbol_name
         # During geometry fitting we intentionally keep auto-estimated colors.
         # Canonical palette values are re-applied once fitting converged.
         p = Action._normalize_ac08_line_widths(p)
@@ -1682,6 +1717,100 @@ class Action:
         if p.get("draw_text", True) and "text_gray" in p:
             p["text_gray"] = int(p.get("stroke_gray", Action.LIGHT_CIRCLE_STROKE_GRAY))
         return p
+
+    @staticmethod
+    def _release_ac08_adaptive_locks(
+        params: dict,
+        logs: list[str],
+        *,
+        reason: str,
+        current_error: float | None = None,
+    ) -> bool:
+        """Relax selected AC08 locks for documented outlier families only.
+
+        The release stays intentionally narrow: colors may move only inside a
+        small corridor around the canonical palette, radius floors are reduced
+        only relative to the semantic template, and connector/text tuning stays
+        bounded. This implements task 3.1 from the AC08 plan without globally
+        weakening the stable badge families.
+        """
+
+        symbol_name = str(params.get("ac08_symbol_name") or "").upper()
+        profile = AC08_ADAPTIVE_LOCK_PROFILES.get(symbol_name)
+        if not profile:
+            return False
+        if bool(params.get("adaptive_lock_release_active", False)):
+            return False
+
+        params["adaptive_lock_release_active"] = True
+        params["adaptive_lock_release_reason"] = str(reason)
+        changed = False
+
+        template_r = float(params.get("template_circle_radius", params.get("r", 1.0)))
+        radius_floor_ratio = float(profile.get("radius_floor_ratio", 0.88))
+        current_min_r = float(params.get("min_circle_radius", 1.0))
+        relaxed_min_r = max(1.0, template_r * radius_floor_ratio)
+        if relaxed_min_r < current_min_r:
+            params["min_circle_radius"] = float(relaxed_min_r)
+            changed = True
+
+        if params.get("arm_enabled"):
+            arm_min_ratio = float(profile.get("arm_min_ratio", params.get("arm_len_min_ratio", 0.75)))
+            current_ratio = float(params.get("arm_len_min_ratio", arm_min_ratio))
+            if arm_min_ratio < current_ratio:
+                params["arm_len_min_ratio"] = float(max(0.0, min(1.0, arm_min_ratio)))
+                current_arm_len = float(
+                    math.hypot(
+                        float(params.get("arm_x2", 0.0)) - float(params.get("arm_x1", 0.0)),
+                        float(params.get("arm_y2", 0.0)) - float(params.get("arm_y1", 0.0)),
+                    )
+                )
+                params["arm_len_min"] = float(max(1.0, current_arm_len * params["arm_len_min_ratio"]))
+                changed = True
+
+        if params.get("stem_enabled"):
+            stem_min_ratio = float(profile.get("stem_min_ratio", params.get("stem_len_min_ratio", 0.65)))
+            current_ratio = float(params.get("stem_len_min_ratio", stem_min_ratio))
+            if stem_min_ratio < current_ratio:
+                params["stem_len_min_ratio"] = float(max(0.0, min(1.0, stem_min_ratio)))
+                current_stem_len = float(params.get("stem_bottom", 0.0)) - float(params.get("stem_top", 0.0))
+                params["stem_len_min"] = float(max(1.0, current_stem_len * params["stem_len_min_ratio"]))
+                changed = True
+
+        color_corridor = int(max(0.0, float(profile.get("color_corridor", 0.0))))
+        if bool(params.get("lock_colors", False)) and color_corridor > 0:
+            params["lock_colors"] = False
+            for color_key in ("fill_gray", "stroke_gray", "stem_gray", "text_gray"):
+                if color_key not in params:
+                    continue
+                center = int(round(float(params[color_key])))
+                params[f"{color_key}_min"] = int(Action._clip_scalar(center - color_corridor, 0, 255))
+                params[f"{color_key}_max"] = int(Action._clip_scalar(center + color_corridor, 0, 255))
+            changed = True
+
+        text_scale_delta = float(profile.get("text_scale_delta", 0.0))
+        if text_scale_delta > 0.0 and params.get("draw_text", True):
+            if str(params.get("text_mode", "")).lower() == "co2":
+                base_scale = float(params.get("co2_font_scale", 0.82))
+                params["lock_text_scale"] = False
+                params["co2_font_scale_min"] = float(max(0.60, base_scale - text_scale_delta))
+                params["co2_font_scale_max"] = float(min(1.25, base_scale + text_scale_delta))
+                changed = True
+            elif str(params.get("text_mode", "")).lower() == "voc":
+                base_scale = float(params.get("voc_font_scale", 0.52))
+                params["lock_text_scale"] = False
+                params["voc_font_scale_min"] = float(max(0.45, base_scale - text_scale_delta))
+                params["voc_font_scale_max"] = float(min(1.05, base_scale + text_scale_delta))
+                changed = True
+
+        if changed:
+            error_suffix = ""
+            if current_error is not None and math.isfinite(float(current_error)):
+                error_suffix = f"; current_error={float(current_error):.3f}"
+            logs.append(
+                f"adaptive_lock_release_activated: {symbol_name} reason={reason}{error_suffix}"
+            )
+        return changed
 
     @staticmethod
     def _align_stem_to_circle_center(params: dict) -> dict:
@@ -5470,23 +5599,41 @@ class Action:
 
         for color_key in Action._element_color_keys(element, params):
             current = int(round(float(params.get(color_key, 128))))
+            corridor_min = params.get(f"{color_key}_min")
+            corridor_max = params.get(f"{color_key}_max")
+            min_candidate = int(Action._clip_scalar(current, 0, 255))
+            max_candidate = int(Action._clip_scalar(current, 0, 255))
+            if corridor_min is not None:
+                min_candidate = int(Action._clip_scalar(int(round(float(corridor_min))), 0, 255))
+            else:
+                min_candidate = 0
+            if corridor_max is not None:
+                max_candidate = int(Action._clip_scalar(int(round(float(corridor_max))), 0, 255))
+            else:
+                max_candidate = 255
             candidates = {
-                int(Action._clip_scalar(current - 32, 0, 255)),
-                int(Action._clip_scalar(current - 16, 0, 255)),
-                int(Action._clip_scalar(current - 8, 0, 255)),
-                int(Action._clip_scalar(current, 0, 255)),
-                int(Action._clip_scalar(current + 8, 0, 255)),
-                int(Action._clip_scalar(current + 16, 0, 255)),
-                int(Action._clip_scalar(current + 32, 0, 255)),
+                int(Action._clip_scalar(current - 32, min_candidate, max_candidate)),
+                int(Action._clip_scalar(current - 16, min_candidate, max_candidate)),
+                int(Action._clip_scalar(current - 8, min_candidate, max_candidate)),
+                int(Action._clip_scalar(current, min_candidate, max_candidate)),
+                int(Action._clip_scalar(current + 8, min_candidate, max_candidate)),
+                int(Action._clip_scalar(current + 16, min_candidate, max_candidate)),
+                int(Action._clip_scalar(current + 32, min_candidate, max_candidate)),
             }
             if sampled is not None:
-                candidates.add(int(Action._clip_scalar(sampled, 0, 255)))
+                candidates.add(int(Action._clip_scalar(sampled, min_candidate, max_candidate)))
             if element == "circle" and color_key == "fill_gray":
-                candidates.update({200, 210, 220, 230, 240})
+                candidates.update({
+                    int(Action._clip_scalar(v, min_candidate, max_candidate))
+                    for v in (200, 210, 220, 230, 240)
+                })
             if color_key in {"stroke_gray", "stem_gray", "text_gray"}:
-                candidates.update({96, 112, 128, 144, 152, 160, 171})
+                candidates.update({
+                    int(Action._clip_scalar(v, min_candidate, max_candidate))
+                    for v in (96, 112, 128, 144, 152, 160, 171)
+                })
 
-            values = sorted(candidates)
+            values = sorted(v for v in candidates if min_candidate <= v <= max_candidate)
             errs = [
                 Action._element_error_for_color(img_orig, params, element, color_key, v, mask_orig)
                 for v in values
@@ -6048,6 +6195,12 @@ class Action:
                         "stagnation_detected: identischer Parameter-Fingerprint und praktisch unveränderter Gesamtfehler"
                     )
                     if not fallback_search_active and round_idx + 1 < max_rounds:
+                        Action._release_ac08_adaptive_locks(
+                            params,
+                            logs,
+                            reason="stagnation_same_fingerprint",
+                            current_error=full_err,
+                        )
                         fallback_search_active = True
                         logs.append(
                             "switch_to_fallback_search: deaktiviere Circle-Geometry-Penalty für eine letzte Ausweichrunde"
@@ -6063,12 +6216,25 @@ class Action:
                     logs.append("Gesamtfehler unter Schwellwert, Validierung beendet")
                     break
                 logs.append("Gesamtfehler unter Schwellwert, Suche nach besserem Optimum wird fortgesetzt")
+            elif round_idx >= 1:
+                Action._release_ac08_adaptive_locks(
+                    params,
+                    logs,
+                    reason="high_residual_error",
+                    current_error=full_err,
+                )
 
             if round_idx + 1 >= max_rounds:
                 break
 
             if not round_changed:
                 if not fallback_search_active and round_idx + 1 < max_rounds:
+                    Action._release_ac08_adaptive_locks(
+                        params,
+                        logs,
+                        reason="stagnation_no_geometry_change",
+                        current_error=full_err,
+                    )
                     fallback_search_active = True
                     logs.append(
                         "stagnation_detected: keine relevante Geometrieänderung in der letzten Validierungsrunde"
