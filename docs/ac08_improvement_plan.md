@@ -282,15 +282,22 @@ Speziallogik in `src/image_composite_converter.py`.
 
 ---
 
-### Aufgabe 4.4 – Kreis-/Text-Badges separat tunen
+### Aufgabe 4.4 – Kreis-/Text-Badges separat tunen ✅ erledigt
 **Familien:** `AC0820`, `AC0835`, `AC0870`
 
 **Ziel:** Reine Kreis- und Kreis+Text-Symbole unabhängig von Connector-Heuristiken verbessern.
 
-**Prüfpunkte:**
-- Text-Cluster sauber zentriert,
-- Ringgröße bleibt plausibel,
-- VOC/CO₂-Skalierung ist family-spezifisch stabil.
+**Umgesetzt in Code/Workflow:**
+- `Action._tune_ac08_circle_text_family` bündelt jetzt die gemeinsamen Guardrails für `AC0820`, `AC0835` und `AC0870` und markiert sie mit `connector_family_group=ac08_circle_text`.
+- Die gemeinsame Familienlogik verankert connector-freie Kreis-/Text-Badges wieder am semantischen Template-Zentrum (`lock_circle_cx/cy`) und führt einen eigenständigen Radius-Floor/-Cap für reine Kreisfamilien mit, damit die Ringgröße nicht durch Text-Pixel oder frühere Connector-Heuristiken kippt.
+- `AC0820` nutzt in dieser Familienlogik weiterhin cluster-zentrierte CO₂-Positionierung, aber jetzt mit explizit gebundenen Textskalen und vertikaler Feinjustierung, die unabhängig von Connector-Familien arbeitet.
+- `AC0835` erhält eine separate VOC-Zentrierung mit bounded `voc_dy` sowie differenzierten Min-/Max-Skalierungsfenstern für kleine gegenüber mittleren/großen Varianten.
+- `AC0870` wird als connector-freie Pfadtext-Referenz mit derselben Familienlogik behandelt; nach dem Familien-Tuning wird der `T`-Glyph-Anker erneut zentriert und vor zu starker Schrumpfung geschützt.
+
+**Prüfpunkte/ergänzte Tests:**
+- Neue Tests für `AC0835_S` prüfen die gemeinsamen Circle/Text-Guardrails (Kreis-Locks, Radius-Floor, bounded VOC-Skalierung und vertikale Zentrierung).
+- Neue Tests für `AC0820_L` prüfen, dass die Familie CO₂ weiterhin cluster-zentriert hält, aber gleichzeitig den Kreis auf Template-Zentrum und plausiblen Radius begrenzt.
+- Neue Tests für `AC0870_S` prüfen, dass die connector-freie Pfadtext-Variante denselben Familienpfad nutzt und die zentrierte `T`-Skalierung nicht kollabiert.
 
 ---
 

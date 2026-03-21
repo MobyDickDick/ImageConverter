@@ -1888,6 +1888,82 @@ class Action:
         return p
 
     @staticmethod
+    def _tune_ac08_circle_text_family(name: str, params: dict) -> dict:
+        """Apply shared guardrails for connector-free AC08 circle/text badges.
+
+        Aufgabe 4.4 groups AC0820, AC0835 and AC0870 because they all:
+        - have no connector geometry that should influence circle fitting,
+        - regress when text blobs pull the circle away from the semantic center,
+        - need stable text scaling without letting the ring collapse or overgrow.
+        """
+        p = dict(params)
+        symbol_name = get_base_name_from_file(str(name)).upper().split("_", 1)[0]
+        if symbol_name not in {"AC0820", "AC0835", "AC0870"}:
+            return p
+
+        p["connector_family_group"] = "ac08_circle_text"
+        p["connector_family_direction"] = "centered"
+        p["lock_circle_cx"] = True
+        p["lock_circle_cy"] = True
+
+        if "template_circle_cx" in p:
+            p["cx"] = float(p["template_circle_cx"])
+        if "template_circle_cy" in p:
+            p["cy"] = float(p["template_circle_cy"])
+
+        template_r = float(p.get("template_circle_radius", p.get("r", 1.0)))
+        min_dim = float(
+            min(
+                float(p.get("width", 0.0) or 0.0),
+                float(p.get("height", 0.0) or 0.0),
+            )
+        )
+        if min_dim <= 0.0:
+            min_dim = max(1.0, template_r * 2.0)
+
+        text_mode = str(p.get("text_mode", "")).lower()
+        radius_floor_ratio = 0.94 if text_mode in {"co2", "voc"} else 0.96
+        p["min_circle_radius"] = float(max(float(p.get("min_circle_radius", 1.0)), template_r * radius_floor_ratio))
+
+        canvas_w = int(round(float(p.get("width", 0.0) or p.get("badge_width", 0.0) or min_dim)))
+        canvas_h = int(round(float(p.get("height", 0.0) or p.get("badge_height", 0.0) or min_dim)))
+        if canvas_w > 0 and canvas_h > 0 and "cx" in p and "cy" in p:
+            canvas_cap = Action._max_circle_radius_inside_canvas(
+                float(p["cx"]),
+                float(p["cy"]),
+                canvas_w,
+                canvas_h,
+                float(p.get("stroke_circle", 1.0)),
+            )
+            relaxed_cap = max(template_r * 1.08, float(p.get("max_circle_radius", 0.0) or 0.0))
+            p["max_circle_radius"] = float(min(canvas_cap, relaxed_cap)) if canvas_cap > 0.0 else float(relaxed_cap)
+
+        if text_mode == "co2":
+            base_scale = float(p.get("co2_font_scale", 0.94 if symbol_name == "AC0820" else 0.88))
+            p["lock_text_scale"] = False
+            p["co2_anchor_mode"] = "cluster"
+            p["co2_optical_bias"] = float(max(float(p.get("co2_optical_bias", 0.125)), 0.125 if symbol_name == "AC0820" else 0.10))
+            p["co2_dy"] = float(max(-0.06 * template_r, min(0.16 * template_r, float(p.get("co2_dy", 0.03 * template_r)))))
+            p["co2_font_scale_min"] = float(max(float(p.get("co2_font_scale_min", base_scale)), max(0.84, base_scale * 0.92)))
+            p["co2_font_scale_max"] = float(min(float(p.get("co2_font_scale_max", 1.12)), min(1.12, base_scale * 1.18)))
+        elif text_mode == "voc":
+            base_scale = float(p.get("voc_font_scale", 0.52))
+            p["lock_text_scale"] = False
+            p["voc_dy"] = float(max(-0.06 * template_r, min(0.08 * template_r, float(p.get("voc_dy", 0.0)))))
+            if min_dim <= 15.5:
+                p["voc_font_scale_min"] = float(max(float(p.get("voc_font_scale_min", base_scale)), max(0.50, base_scale * 0.96)))
+                p["voc_font_scale_max"] = float(min(float(p.get("voc_font_scale_max", 0.92)), min(0.92, max(base_scale, 0.52) * 1.05)))
+            else:
+                p["voc_font_scale"] = float(max(base_scale, 0.60))
+                p["voc_font_scale_min"] = float(max(float(p.get("voc_font_scale_min", p["voc_font_scale"])), 0.60))
+                p["voc_font_scale_max"] = float(min(float(p.get("voc_font_scale_max", 1.02)), 1.02))
+        else:
+            p["s"] = float(max(float(p.get("s", 0.0100)), 0.0100))
+            Action._center_glyph_bbox(p)
+
+        return p
+
+    @staticmethod
     def _finalize_ac08_style(name: str, params: dict) -> dict:
         """Apply AC08xx palette/stroke conventions globally for semantic conversions."""
         canonical_name = str(name).upper()
@@ -2044,6 +2120,7 @@ class Action:
         p = Action._tune_ac08_left_connector_family(name, p)
         p = Action._tune_ac08_right_connector_family(name, p)
         p = Action._tune_ac08_vertical_connector_family(name, p)
+        p = Action._tune_ac08_circle_text_family(name, p)
         if p.get("draw_text", True) and "text_gray" in p:
             p["text_gray"] = int(p.get("stroke_gray", Action.LIGHT_CIRCLE_STROKE_GRAY))
         return p
