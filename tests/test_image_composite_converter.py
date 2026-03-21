@@ -2682,6 +2682,67 @@ def test_voc_font_scale_bounds_expand_from_original_text_bbox(monkeypatch: pytes
 def test_finalize_ac08_style_caps_ac0835_s_voc_growth() -> None:
     """AC0835_S should keep VOC scale bounded to avoid heavy-looking labels."""
     params = Action._apply_voc_label(Action._default_ac0870_params(15, 15))
+    params["template_circle_radius"] = float(params["r"])
+    params["template_circle_cx"] = 7.5
+    params["template_circle_cy"] = 7.5
+    params["cx"] = 6.0
+    params["cy"] = 9.0
+    params["r"] = float(params["r"]) * 0.82
+
+    tuned = Action._finalize_ac08_style("AC0835_S", params)
+
+    assert tuned["connector_family_group"] == "ac08_circle_text"
+    assert tuned["connector_family_direction"] == "centered"
+    assert tuned["lock_circle_cx"] is True
+    assert tuned["lock_circle_cy"] is True
+    assert float(tuned["cx"]) == 7.5
+    assert float(tuned["cy"]) == 7.5
+    assert float(tuned["min_circle_radius"]) >= float(params["template_circle_radius"]) * 0.94
+    assert float(tuned["voc_font_scale_min"]) >= 0.50
+    assert float(tuned["voc_font_scale_max"]) <= 0.92
+    assert abs(float(tuned["voc_dy"])) <= float(params["template_circle_radius"]) * 0.08 + 1e-6
+
+
+def test_finalize_ac08_circle_text_family_keeps_ac0820_centered_and_clustered() -> None:
+    """AC0820 should use the circle/text family guardrails without connector heuristics."""
+    params = Action._apply_co2_label(Action._default_ac0870_params(30, 30))
+    params["template_circle_radius"] = float(params["r"])
+    params["template_circle_cx"] = 15.0
+    params["template_circle_cy"] = 15.0
+    params["cx"] = 13.0
+    params["cy"] = 12.0
+    params["r"] = float(params["r"]) * 0.84
+
+    tuned = Action._finalize_ac08_style("AC0820_L", params)
+
+    assert tuned["connector_family_group"] == "ac08_circle_text"
+    assert tuned["connector_family_direction"] == "centered"
+    assert float(tuned["cx"]) == 15.0
+    assert float(tuned["cy"]) == 15.0
+    assert tuned["co2_anchor_mode"] == "cluster"
+    assert tuned["lock_text_scale"] is False
+    assert float(tuned["min_circle_radius"]) >= float(params["template_circle_radius"]) * 0.94
+    assert float(tuned["max_circle_radius"]) <= float(params["template_circle_radius"]) * 1.08 + 1e-6
+
+
+def test_finalize_ac08_circle_text_family_recenters_ac0870_path_text() -> None:
+    """AC0870 should reuse the shared centered-badge family without text shrink drift."""
+    params = Action._default_ac0870_params(30, 30)
+    params["template_circle_radius"] = float(params["r"])
+    params["template_circle_cx"] = 15.0
+    params["template_circle_cy"] = 15.0
+    params["cx"] = 12.5
+    params["cy"] = 17.0
+    params["r"] = float(params["r"]) * 0.88
+    params["s"] = 0.008
+
+    tuned = Action._finalize_ac08_style("AC0870_S", params)
+
+    assert tuned["connector_family_group"] == "ac08_circle_text"
+    assert float(tuned["cx"]) == 15.0
+    assert float(tuned["cy"]) == 15.0
+    assert float(tuned["min_circle_radius"]) >= float(params["template_circle_radius"]) * 0.96
+    assert float(tuned["s"]) >= 0.0100
 
 def test_convert_image_writes_svg(tmp_path: Path) -> None:
     Image = pytest.importorskip("PIL.Image")
