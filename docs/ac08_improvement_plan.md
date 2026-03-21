@@ -198,7 +198,7 @@ Speziallogik in `src/image_composite_converter.py`.
 
 ---
 
-### Aufgabe 3.2 – Separate Regeln für kleine Varianten (`_S`)
+### Aufgabe 3.2 – Separate Regeln für kleine Varianten (`_S`) ✅ erledigt
 **Ziel:** Sehr kleine Varianten sollen nicht mit denselben Annahmen wie `_L`/`_M` behandelt werden.
 
 **Umsetzung:**
@@ -213,6 +213,12 @@ Speziallogik in `src/image_composite_converter.py`.
 **Akzeptanzkriterien:**
 - `_S`-Varianten verlieren gegenüber `_L`/`_M` nicht mehr überproportional stark.
 - Kritische Fälle wie `AC0882_S`, `AC0834_S`, `AC0839_S` verbessern sich messbar.
+
+**Umgesetzt in Code/Workflow:**
+- `Action._is_ac08_small_variant` und `Action._configure_ac08_small_variant_mode` klassifizieren jetzt `_S`-Badges über Variantensuffix und `min(width, height)` und aktivieren dafür einen expliziten `ac08_small_variant_mode` samt Metadaten.
+- Der Small-Variant-Modus setzt eigene, eng begrenzte Textfenster für `CO₂`/`VOC`, reduziert den `CO₂`-Subscript-Offset bei kleinen Badges und hebt die Mindestlängen für Arm-/Stem-Connectoren an, damit `_S`-Varianten nicht zu kurzen Stummeln kollabieren.
+- `extract_badge_element_mask` erweitert in diesem Modus die Foreground-Masken minimal per Dilation, und `Action._element_match_error` rechnet eine kleine Anti-Aliasing-Toleranz ein, damit winzige Badge-Kanten nicht übergewichtet werden.
+- `validate_badge_by_elements` schreibt mit `small_variant_mode_active` einen expliziten Logmarker inklusive Grund, `min_dim`, Masken-Dilation und Connector-Floors, sodass Small-Variant-Läufe im Report direkt nachvollziehbar sind.
 
 **Empfohlene Tests:**
 - Nur `_S`-Varianten aller AC08-Familien in einem Sammelbatch

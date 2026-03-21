@@ -413,6 +413,46 @@ def test_finalize_plain_ac08_badge_reanchors_circle_to_template_center() -> None
     assert float(params["cy"]) == 9.5
 
 
+def test_finalize_ac08_small_variant_enables_compact_text_and_connector_guards() -> None:
+    """Small AC08 `_S` variants should activate the dedicated text/connector tuning mode."""
+    params = Action.make_badge_params(15, 15, "AC0832")
+
+    assert params["ac08_small_variant_mode"] is True
+    assert params["ac08_small_variant_reason"] in {"variant_suffix+min_dim", "variant_suffix", "min_dim"}
+    assert int(params["validation_mask_dilate_px"]) >= 1
+    assert float(params["arm_len_min_ratio"]) >= 0.78
+    assert float(params["co2_subscript_offset_scale"]) <= 0.24
+    assert float(params["co2_font_scale_max"]) <= 1.10
+
+
+def test_validate_badge_logs_small_variant_mode(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Validation logs should explicitly state when the `_S` small-variant mode is active."""
+    if image_composite_converter.np is None:
+        pytest.skip("numpy not available in this environment")
+
+    np = image_composite_converter.np
+    if np is None:
+        pytest.skip("numpy not available in this environment")
+
+    img = np.full((15, 15, 3), 255, dtype=np.uint8)
+    params = Action.make_badge_params(15, 15, "AC0832")
+
+    monkeypatch.setattr(Action, "generate_badge_svg", staticmethod(lambda *_args, **_kwargs: "<svg/>"))
+    monkeypatch.setattr(Action, "render_svg_to_numpy", staticmethod(lambda *_args, **_kwargs: img.copy()))
+    monkeypatch.setattr(Action, "_fit_to_original_size", staticmethod(lambda *_args, **_kwargs: img.copy()))
+    monkeypatch.setattr(Action, "extract_badge_element_mask", staticmethod(lambda *_args, **_kwargs: np.ones((15, 15), dtype=bool)))
+    monkeypatch.setattr(Action, "_element_match_error", staticmethod(lambda *_args, **_kwargs: 0.0))
+    monkeypatch.setattr(Action, "_optimize_element_width_bracket", staticmethod(lambda *_args, **_kwargs: False))
+    monkeypatch.setattr(Action, "_optimize_element_extent_bracket", staticmethod(lambda *_args, **_kwargs: False))
+    monkeypatch.setattr(Action, "_optimize_circle_center_bracket", staticmethod(lambda *_args, **_kwargs: False))
+    monkeypatch.setattr(Action, "_optimize_circle_radius_bracket", staticmethod(lambda *_args, **_kwargs: False))
+    monkeypatch.setattr(Action, "calculate_error", staticmethod(lambda *_args, **_kwargs: 7.5))
+
+    logs = Action.validate_badge_by_elements(img, params, max_rounds=1)
+
+    assert any(log.startswith("small_variant_mode_active:") for log in logs)
+
+
 def test_fit_semantic_badge_records_template_center_for_finalize_locking() -> None:
     """Semantic fit should persist template center so finalize can restore canonical centering."""
     if image_composite_converter.np is None or image_composite_converter.cv2 is None:
