@@ -356,47 +356,49 @@ def test_parse_description_does_not_misread_ac0130_text_as_top_source_ref() -> N
     assert "OBEN: Geschnitten aus Originaldatei BEIDEN" not in list(params.get("elements", []))
 
 
-def test_finalize_ac0820_locks_plain_circle_center_and_min_radius() -> None:
-    """Plain AC0820 badges should keep a centered ring and preserve readable radius."""
+def test_finalize_ac0820_leaves_plain_circle_unlocked() -> None:
+    """AC0820 should no longer inject circle-center or radius guardrails."""
     params = Action._apply_co2_label(Action._default_ac0870_params(20, 20))
     params = Action._finalize_ac08_style("AC0820", params)
 
-    assert params["lock_circle_cx"] is True
-    assert params["lock_circle_cy"] is True
-    assert float(params["min_circle_radius"]) >= float(params["r"]) * 0.88
+    assert "lock_circle_cx" not in params
+    assert "lock_circle_cy" not in params
+    assert "min_circle_radius" not in params
 
 
-def test_finalize_ac0820_min_circle_radius_uses_template_baseline() -> None:
-    """Radius floor should be anchored to template size, not a shrunken interim fit."""
+def test_finalize_ac0820_keeps_template_radius_optional() -> None:
+    """Template radius metadata should remain optional after finalization."""
     params = Action._apply_co2_label(Action._default_ac0870_params(20, 20))
     params["template_circle_radius"] = float(params["r"])
     params["r"] = 3.0
 
     params = Action._finalize_ac08_style("AC0820", params)
 
-    assert float(params["min_circle_radius"]) >= float(params["template_circle_radius"]) * 0.92
+    assert float(params["r"]) == 3.0
+    assert "min_circle_radius" not in params
 
 
-def test_finalize_non_ac0820_text_badge_uses_less_strict_radius_floor() -> None:
-    """Non-AC0820 text badges should preserve the previous 90%-template floor."""
+def test_finalize_non_ac0820_text_badge_keeps_radius_unbounded() -> None:
+    """Non-AC0820 text badges should also skip injected radius floors."""
     params = Action._apply_co2_label(Action._default_ac0870_params(20, 20))
     params["template_circle_radius"] = float(params["r"])
     params["r"] = 3.0
 
     params = Action._finalize_ac08_style("AC0831", params)
 
-    assert float(params["min_circle_radius"]) >= float(params["template_circle_radius"]) * 0.90
+    assert float(params["r"]) == 3.0
+    assert "min_circle_radius" not in params
 
 
-def test_finalize_elongated_connector_badge_uses_stronger_radius_floor() -> None:
-    """Strongly elongated connector badges should resist circle shrink during validation."""
+def test_finalize_elongated_connector_badge_does_not_add_radius_floor() -> None:
+    """Elongated connector badges should not receive a hard radius floor anymore."""
     params = Action._default_ac0811_params(30, 45)
     params["template_circle_radius"] = float(params["r"])
     params["r"] = float(params["r"]) * 0.84
 
     params = Action._finalize_ac08_style("AC0811_L", params)
 
-    assert float(params["min_circle_radius"]) >= float(params["template_circle_radius"]) * 0.95
+    assert "min_circle_radius" not in params
 
 
 def test_finalize_plain_ac08_badge_reanchors_circle_to_template_center() -> None:
@@ -413,22 +415,20 @@ def test_finalize_plain_ac08_badge_reanchors_circle_to_template_center() -> None
     assert float(params["cy"]) == 9.5
 
 
-def test_finalize_ac08_small_variant_enables_compact_text_and_connector_guards() -> None:
-    """Small AC08 `_S` variants should activate the dedicated text/connector tuning mode."""
+def test_finalize_ac08_small_variant_keeps_only_small_variant_metadata() -> None:
+    """Small AC08 `_S` variants should still flag compact mode without forcing connector bounds."""
     params = Action.make_badge_params(15, 15, "AC0832")
 
     assert params["ac08_small_variant_mode"] is True
     assert params["ac08_small_variant_reason"] in {"variant_suffix+min_dim", "variant_suffix", "min_dim"}
     assert int(params["validation_mask_dilate_px"]) >= 1
-    assert float(params["arm_len_min_ratio"]) >= 0.78
-    assert float(params["co2_subscript_offset_scale"]) <= 0.24
-    assert float(params["co2_font_scale_max"]) <= 1.10
+    assert "arm_len_min_ratio" not in params or float(params["arm_len_min_ratio"]) <= 0.75
 
 
 
 
-def test_finalize_left_connector_family_applies_shared_guardrails() -> None:
-    """Left-connector AC08 families should share connector/circle guardrails."""
+def test_finalize_left_connector_family_leaves_geometry_unlocked() -> None:
+    """Left-connector families should preserve detected geometry without shared guardrails."""
     params = Action._apply_co2_label(Action._default_ac0812_params(20, 12))
     params["template_circle_radius"] = float(params["r"])
     params["template_circle_cx"] = float(params["cx"])
@@ -439,21 +439,15 @@ def test_finalize_left_connector_family_applies_shared_guardrails() -> None:
 
     tuned = Action._finalize_ac08_style("AC0832_S", params)
 
-    assert tuned["connector_family_group"] == "ac08_left_connector"
-    assert tuned["connector_family_direction"] == "left"
-    assert tuned["lock_circle_cx"] is True
-    assert tuned["lock_circle_cy"] is True
+    assert "connector_family_group" not in tuned
     assert float(tuned["cx"]) == float(params["template_circle_cx"])
     assert float(tuned["cy"]) == float(params["template_circle_cy"])
-    assert float(tuned["arm_len_min_ratio"]) >= 0.86
-    assert float(tuned["min_circle_radius"]) >= float(params["template_circle_radius"]) * 0.94
-    assert float(tuned["max_circle_radius"]) <= float(tuned["cx"]) - float(tuned["arm_len_min"]) + 1e-6
-    assert tuned["lock_text_scale"] is False
-    assert float(tuned["co2_font_scale_min"]) >= 0.78
+    assert "arm_len_min_ratio" not in tuned
+    assert "min_circle_radius" not in tuned
 
 
-def test_finalize_left_connector_path_text_recenters_and_preserves_visible_arm() -> None:
-    """Plain-text left-arm badges should keep the T glyph centered and the arm visible."""
+def test_finalize_left_connector_path_text_preserves_existing_settings() -> None:
+    """Left-arm text badges should no longer synthesize connector guardrails."""
     params = Action._default_ac0882_params(45, 25)
     params["template_circle_radius"] = float(params["r"])
     params["template_circle_cx"] = float(params["cx"])
@@ -462,17 +456,12 @@ def test_finalize_left_connector_path_text_recenters_and_preserves_visible_arm()
 
     tuned = Action._finalize_ac08_style("AC0882_L", params)
 
-    assert tuned["connector_family_group"] == "ac08_left_connector"
-    assert tuned["arm_enabled"] is True
-    assert float(tuned["arm_x1"]) == 0.0
-    assert abs(float(tuned["arm_y1"]) - float(tuned["cy"])) < 1e-6
-    assert abs(float(tuned["arm_y2"]) - float(tuned["cy"])) < 1e-6
-    assert float(tuned["arm_len_min_ratio"]) >= 0.84
-    assert float(tuned["s"]) >= 0.0088
+    assert tuned["arm_enabled"] is False
+    assert "connector_family_group" not in tuned
 
 
-def test_finalize_right_connector_family_applies_shared_guardrails() -> None:
-    """Right-connector AC08 families should share mirrored connector/circle guardrails."""
+def test_finalize_right_connector_family_leaves_geometry_unlocked() -> None:
+    """Right-connector families should preserve detected geometry without mirrored guardrails."""
     params = Action._apply_co2_label(Action._default_ac0814_params(20, 12))
     params["template_circle_radius"] = float(params["r"])
     params["template_circle_cx"] = float(params["cx"])
@@ -484,22 +473,16 @@ def test_finalize_right_connector_family_applies_shared_guardrails() -> None:
 
     tuned = Action._finalize_ac08_style("AC0834_S", params)
 
-    assert tuned["connector_family_group"] == "ac08_right_connector"
-    assert tuned["connector_family_direction"] == "right"
-    assert tuned["lock_circle_cx"] is True
-    assert tuned["lock_circle_cy"] is True
+    assert "connector_family_group" not in tuned
     assert float(tuned["cx"]) == float(params["template_circle_cx"])
     assert float(tuned["cy"]) == float(params["template_circle_cy"])
-    assert tuned["arm_enabled"] is True
-    assert float(tuned["arm_x2"]) == 20.0
-    assert float(tuned["arm_len_min_ratio"]) >= 0.86
-    assert float(tuned["min_circle_radius"]) >= float(params["template_circle_radius"]) * 0.94
-    assert tuned["lock_text_scale"] is False
-    assert float(tuned["co2_font_scale_min"]) >= 0.78
+    assert tuned["arm_enabled"] is False
+    assert "arm_len_min_ratio" not in tuned
+    assert "min_circle_radius" not in tuned
 
 
-def test_finalize_right_connector_voc_family_preserves_visible_arm() -> None:
-    """VOC right-arm badges should keep the mirrored connector visible and text bounded."""
+def test_finalize_right_connector_voc_family_preserves_existing_arm_state() -> None:
+    """VOC right-arm badges should keep the existing arm state without extra bounds."""
     params = Action._apply_voc_label(Action._default_ac0814_params(45, 25))
     params["template_circle_radius"] = float(params["r"])
     params["template_circle_cx"] = float(params["cx"])
@@ -508,18 +491,13 @@ def test_finalize_right_connector_voc_family_preserves_visible_arm() -> None:
 
     tuned = Action._finalize_ac08_style("AC0839_L", params)
 
-    assert tuned["connector_family_group"] == "ac08_right_connector"
-    assert tuned["arm_enabled"] is True
-    assert float(tuned["arm_x1"]) == pytest.approx(float(tuned["cx"]) + float(tuned["r"]))
-    assert abs(float(tuned["arm_y1"]) - float(tuned["cy"])) < 1e-6
-    assert abs(float(tuned["arm_y2"]) - float(tuned["cy"])) < 1e-6
-    assert float(tuned["arm_len_min_ratio"]) >= 0.84
-    assert tuned["lock_text_scale"] is False
-    assert float(tuned["voc_font_scale_min"]) >= 0.50
+    assert "connector_family_group" not in tuned
+    assert tuned["arm_enabled"] is False
+    assert "voc_font_scale_min" not in tuned
 
 
-def test_finalize_vertical_connector_family_applies_shared_guardrails() -> None:
-    """Vertical AC08 families should keep the connector centered and preserve readable text."""
+def test_finalize_vertical_connector_family_leaves_geometry_unlocked() -> None:
+    """Vertical families should keep detected geometry without centered connector guardrails."""
     params = Action._apply_co2_label(Action._default_ac0881_params(20, 30))
     params["template_circle_radius"] = float(params["r"])
     params["template_circle_cx"] = float(params["cx"])
@@ -531,25 +509,16 @@ def test_finalize_vertical_connector_family_applies_shared_guardrails() -> None:
 
     tuned = Action._finalize_ac08_style("AC0831_L", params)
 
-    assert tuned["connector_family_group"] == "ac08_vertical_connector"
-    assert tuned["connector_family_direction"] == "vertical"
-    assert tuned["lock_circle_cx"] is True
-    assert tuned["lock_circle_cy"] is True
-    assert tuned["lock_stem_center_to_circle"] is True
+    assert "connector_family_group" not in tuned
     assert float(tuned["cx"]) == float(params["template_circle_cx"])
     assert float(tuned["cy"]) == float(params["template_circle_cy"])
-    assert tuned["stem_enabled"] is True
-    assert float(tuned["stem_top"]) == pytest.approx(float(tuned["cy"]) + float(tuned["r"]))
-    assert float(tuned["stem_bottom"]) == 30.0
-    assert float(tuned["stem_len_min_ratio"]) >= 0.72
-    assert float(tuned["min_circle_radius"]) >= float(params["template_circle_radius"]) * 0.93
-    assert tuned["lock_text_scale"] is False
-    assert tuned["co2_anchor_mode"] == "cluster"
-    assert float(tuned["co2_dy"]) > 0.0
+    assert tuned["stem_enabled"] is False
+    assert "stem_len_min_ratio" not in tuned
+    assert "min_circle_radius" not in tuned
 
 
-def test_finalize_vertical_connector_voc_family_keeps_centered_stem() -> None:
-    """VOC vertical badges should retain a centered stem and bounded text scale."""
+def test_finalize_vertical_connector_voc_family_preserves_existing_stem_state() -> None:
+    """VOC vertical badges should preserve the existing stem state without extra bounds."""
     params = Action._apply_voc_label(Action._default_ac0881_params(45, 25))
     params["template_circle_radius"] = float(params["r"])
     params["template_circle_cx"] = float(params["cx"])
@@ -558,14 +527,9 @@ def test_finalize_vertical_connector_voc_family_keeps_centered_stem() -> None:
 
     tuned = Action._finalize_ac08_style("AC0836_L", params)
 
-    assert tuned["connector_family_group"] == "ac08_vertical_connector"
-    assert tuned["stem_enabled"] is True
-    assert float(tuned["stem_x"]) == pytest.approx(float(tuned["cx"]) - (float(tuned["stem_width"]) / 2.0))
-    assert float(tuned["stem_top"]) == pytest.approx(float(tuned["cy"]) + float(tuned["r"]))
-    assert float(tuned["stem_bottom"]) == 25.0
-    assert float(tuned["stem_len_min_ratio"]) >= 0.72
-    assert tuned["lock_text_scale"] is False
-    assert float(tuned["voc_font_scale_min"]) >= 0.50
+    assert "connector_family_group" not in tuned
+    assert tuned["stem_enabled"] is False
+    assert "voc_font_scale_min" not in tuned
 
 def test_validate_badge_logs_small_variant_mode(monkeypatch: pytest.MonkeyPatch) -> None:
     """Validation logs should explicitly state when the `_S` small-variant mode is active."""
@@ -1941,23 +1905,24 @@ def test_co2_layout_enforces_minimum_subscript_pixel_size() -> None:
     assert float(layout["sub_font_px"]) >= 4.0
 
 
-def test_finalize_ac0820_keeps_text_scale_tunable_with_bounds() -> None:
-    """AC0820 should allow bounded CO₂ scale tuning during validation rounds."""
+def test_finalize_ac0820_keeps_text_scale_unbounded() -> None:
+    """AC0820 should no longer inject bounded CO₂ scale tuning metadata."""
     params = Action._apply_co2_label(Action._default_ac0870_params(20, 20))
     params = Action._finalize_ac08_style("AC0820", params)
 
-    assert params["lock_text_scale"] is False
-    assert float(params["co2_font_scale_min"]) < float(params["co2_font_scale"])
-    assert float(params["co2_font_scale_max"]) > float(params["co2_font_scale"])
+    assert "lock_text_scale" not in params
+    assert "co2_font_scale_min" not in params
+    assert "co2_font_scale_max" not in params
 
 
-def test_finalize_vertical_non_ac0820_co2_unlocks_bounded_text_scale() -> None:
-    """Vertical non-AC0820 CO₂ badges should allow bounded text tuning to avoid top-heavy text."""
+def test_finalize_vertical_non_ac0820_co2_keeps_text_scale_unbounded() -> None:
+    """Vertical non-AC0820 CO₂ badges should no longer inject bounded text tuning."""
     params = Action._apply_co2_label(Action._default_ac0881_params(20, 20))
     params = Action._finalize_ac08_style("AC0831", params)
 
-    assert params["lock_text_scale"] is False
-    assert float(params["co2_font_scale_min"]) < float(params["co2_font_scale_max"])
+    assert "lock_text_scale" not in params
+    assert "co2_font_scale_min" not in params
+    assert "co2_font_scale_max" not in params
 
 
 def test_make_badge_params_applies_ac0831_vertical_co2_tuning() -> None:
@@ -1969,18 +1934,18 @@ def test_make_badge_params_applies_ac0831_vertical_co2_tuning() -> None:
     assert float(params["co2_dy"]) > 0.0
 
 
-def test_finalize_tiny_non_ac0820_co2_unlocks_bounded_text_tuning() -> None:
-    """Tiny CO₂ variants should allow bounded text tuning across AC08xx families."""
+def test_finalize_tiny_non_ac0820_co2_keeps_text_scale_unbounded() -> None:
+    """Tiny CO₂ variants should also skip bounded text tuning metadata."""
     params = Action._apply_co2_label(Action._default_ac0813_params(15, 25))
     params = Action._finalize_ac08_style("AC0833_S", params)
 
-    assert params["lock_text_scale"] is False
-    assert float(params["co2_font_scale_min"]) < float(params["co2_font_scale"])
-    assert float(params["co2_font_scale_max"]) > float(params["co2_font_scale"])
+    assert "lock_text_scale" not in params
+    assert "co2_font_scale_min" not in params
+    assert "co2_font_scale_max" not in params
 
 
-def test_release_ac08_adaptive_locks_relaxes_only_bounded_problem_family_knobs() -> None:
-    """Problem families should get narrow, bounded lock releases instead of global unlocks."""
+def test_release_ac08_adaptive_locks_is_disabled_without_guardrails() -> None:
+    """Adaptive lock release should be a no-op once guardrails are removed."""
     params = Action._apply_co2_label(Action._default_ac0881_params(20, 20))
     params = Action._finalize_ac08_style("AC0831", params)
     params["template_circle_radius"] = float(params["r"])
@@ -1998,14 +1963,9 @@ def test_release_ac08_adaptive_locks_relaxes_only_bounded_problem_family_knobs()
         current_error=12.5,
     )
 
-    assert changed is True
-    assert params["adaptive_lock_release_active"] is True
-    assert params["lock_colors"] is False
-    assert int(params["fill_gray_max"]) - int(params["fill_gray_min"]) <= 20
-    assert float(params["min_circle_radius"]) < float(params["template_circle_radius"]) * 0.90
-    assert float(params["stem_len_min_ratio"]) == pytest.approx(0.58)
-    assert params["lock_text_scale"] is False
-    assert "adaptive_lock_release_activated: AC0831" in "\n".join(logs)
+    assert changed is False
+    assert "adaptive_lock_release_active" not in params
+    assert logs == []
 
 
 def test_optimize_element_color_bracket_respects_adaptive_color_corridor(monkeypatch: pytest.MonkeyPatch) -> None:
@@ -2679,8 +2639,8 @@ def test_voc_font_scale_bounds_expand_from_original_text_bbox(monkeypatch: pytes
     assert high >= 2.0
 
 
-def test_finalize_ac08_style_caps_ac0835_s_voc_growth() -> None:
-    """AC0835_S should keep VOC scale bounded to avoid heavy-looking labels."""
+def test_finalize_ac08_style_leaves_ac0835_s_voc_unbounded() -> None:
+    """AC0835_S should not inject centered-family VOC bounds anymore."""
     params = Action._apply_voc_label(Action._default_ac0870_params(15, 15))
     params["template_circle_radius"] = float(params["r"])
     params["template_circle_cx"] = 7.5
@@ -2691,20 +2651,16 @@ def test_finalize_ac08_style_caps_ac0835_s_voc_growth() -> None:
 
     tuned = Action._finalize_ac08_style("AC0835_S", params)
 
-    assert tuned["connector_family_group"] == "ac08_circle_text"
-    assert tuned["connector_family_direction"] == "centered"
-    assert tuned["lock_circle_cx"] is True
-    assert tuned["lock_circle_cy"] is True
-    assert float(tuned["cx"]) == 7.5
-    assert float(tuned["cy"]) == 7.5
-    assert float(tuned["min_circle_radius"]) >= float(params["template_circle_radius"]) * 0.94
-    assert float(tuned["voc_font_scale_min"]) >= 0.50
-    assert float(tuned["voc_font_scale_max"]) <= 0.92
-    assert abs(float(tuned["voc_dy"])) <= float(params["template_circle_radius"]) * 0.08 + 1e-6
+    assert "connector_family_group" not in tuned
+    assert float(tuned["cx"]) == float(params["template_circle_cx"])
+    assert float(tuned["cy"]) == float(params["template_circle_cy"])
+    assert "min_circle_radius" not in tuned
+    assert "voc_font_scale_min" not in tuned
+    assert "voc_font_scale_max" not in tuned
 
 
-def test_finalize_ac08_circle_text_family_keeps_ac0820_centered_and_clustered() -> None:
-    """AC0820 should use the circle/text family guardrails without connector heuristics."""
+def test_finalize_ac08_circle_text_family_leaves_ac0820_unlocked() -> None:
+    """AC0820 should no longer inject centered-family circle/text guardrails."""
     params = Action._apply_co2_label(Action._default_ac0870_params(30, 30))
     params["template_circle_radius"] = float(params["r"])
     params["template_circle_cx"] = 15.0
@@ -2715,18 +2671,16 @@ def test_finalize_ac08_circle_text_family_keeps_ac0820_centered_and_clustered() 
 
     tuned = Action._finalize_ac08_style("AC0820_L", params)
 
-    assert tuned["connector_family_group"] == "ac08_circle_text"
-    assert tuned["connector_family_direction"] == "centered"
-    assert float(tuned["cx"]) == 15.0
-    assert float(tuned["cy"]) == 15.0
+    assert "connector_family_group" not in tuned
+    assert float(tuned["cx"]) == float(params["template_circle_cx"])
+    assert float(tuned["cy"]) == float(params["template_circle_cy"])
     assert tuned["co2_anchor_mode"] == "cluster"
-    assert tuned["lock_text_scale"] is False
-    assert float(tuned["min_circle_radius"]) >= float(params["template_circle_radius"]) * 0.94
-    assert float(tuned["max_circle_radius"]) <= float(params["template_circle_radius"]) * 1.08 + 1e-6
+    assert "min_circle_radius" not in tuned
+    assert "max_circle_radius" not in tuned
 
 
-def test_finalize_ac08_circle_text_family_recenters_ac0870_path_text() -> None:
-    """AC0870 should reuse the shared centered-badge family without text shrink drift."""
+def test_finalize_ac08_circle_text_family_leaves_ac0870_geometry_as_detected() -> None:
+    """AC0870 should no longer be recentered by shared circle/text guardrails."""
     params = Action._default_ac0870_params(30, 30)
     params["template_circle_radius"] = float(params["r"])
     params["template_circle_cx"] = 15.0
@@ -2738,11 +2692,10 @@ def test_finalize_ac08_circle_text_family_recenters_ac0870_path_text() -> None:
 
     tuned = Action._finalize_ac08_style("AC0870_S", params)
 
-    assert tuned["connector_family_group"] == "ac08_circle_text"
-    assert float(tuned["cx"]) == 15.0
-    assert float(tuned["cy"]) == 15.0
-    assert float(tuned["min_circle_radius"]) >= float(params["template_circle_radius"]) * 0.96
-    assert float(tuned["s"]) >= 0.0100
+    assert "connector_family_group" not in tuned
+    assert float(tuned["cx"]) == float(params["template_circle_cx"])
+    assert float(tuned["cy"]) == float(params["template_circle_cy"])
+    assert float(tuned["s"]) == 0.008
 
 def test_convert_image_writes_svg(tmp_path: Path) -> None:
     Image = pytest.importorskip("PIL.Image")
@@ -3169,24 +3122,24 @@ def test_co2_layout_caps_font_size_to_inner_circle_ratio() -> None:
     assert float(layout["font_size"]) <= (inner_diameter * 0.50) + 1e-6
 
 
-def test_co2_text_width_bracketing_is_bounded_for_ac0820() -> None:
-    """AC0820 CO₂ badges should allow bounded text tuning during width bracketing."""
+def test_co2_text_width_bracketing_uses_default_domain_for_ac0820() -> None:
+    """AC0820 text width bracketing should fall back to the default domain without explicit bounds."""
     params = Action._apply_co2_label(Action._default_ac0870_params(30, 30))
     params = Action._finalize_ac08_style("AC0820", params)
 
     key, low, high = Action._element_width_key_and_bounds("text", params, 30, 30)
     assert key == "co2_font_scale"
     assert float(low) <= float(params["co2_font_scale"]) <= float(high)
-    assert float(low) >= float(params["co2_font_scale_min"]) - 1e-9
-    assert float(high) <= float(params["co2_font_scale_max"]) + 1e-9
+    assert "co2_font_scale_min" not in params
+    assert "co2_font_scale_max" not in params
 
 
-def test_finalize_ac0820_locks_palette_against_color_bracketing() -> None:
-    """AC08xx semantic badges should keep canonical fill/stroke grayscale values."""
+def test_finalize_ac0820_leaves_palette_unlocked() -> None:
+    """AC08xx semantic badges should no longer lock the grayscale palette."""
     params = Action._apply_co2_label(Action._default_ac0870_params(30, 30))
     params = Action._finalize_ac08_style("AC0820", params)
 
-    assert params["lock_colors"] is True
+    assert "lock_colors" not in params
 
 
 def test_optimize_element_color_bracket_skips_when_colors_locked() -> None:
@@ -3211,8 +3164,8 @@ def test_optimize_element_color_bracket_skips_when_colors_locked() -> None:
     assert any("Farben gesperrt" in line for line in logs)
 
 
-def test_activate_ac08_adaptive_locks_opens_bounded_family_search_space() -> None:
-    """Problem AC08 families should get bounded unlocks once fallback search is activated."""
+def test_activate_ac08_adaptive_locks_is_disabled_without_guardrails() -> None:
+    """Adaptive AC08 unlocks should be a no-op once guardrails are removed."""
     params = Action._finalize_ac08_style(
         "AC0839",
         {
@@ -3246,18 +3199,9 @@ def test_activate_ac08_adaptive_locks_opens_bounded_family_search_space() -> Non
         reason="unit_test",
     )
 
-    assert changed is True
-    assert params["adaptive_unlock_active"] is True
-    assert params["lock_colors"] is False
-    assert params["lock_text_scale"] is False
-    assert params["max_circle_radius"] > params["r"]
-    assert params["min_circle_radius"] < 3.8
-    assert params["arm_len_min_ratio"] <= 0.58
-    assert params["voc_font_scale_min"] <= params["voc_font_scale"]
-    assert params["voc_font_scale_max"] >= params["voc_font_scale"]
-    assert params["fill_gray_min"] == int(params["fill_gray"]) - 10
-    assert params["fill_gray_max"] == int(params["fill_gray"]) + 10
-    assert any("adaptive_unlock_applied" in line for line in logs)
+    assert changed is False
+    assert "adaptive_unlock_active" not in params
+    assert logs == []
 
 
 def test_optimize_element_color_bracket_respects_adaptive_color_corridor(monkeypatch: pytest.MonkeyPatch) -> None:
@@ -3436,7 +3380,7 @@ def test_parse_description_keeps_ac0814_family_rule_over_text_heuristic() -> Non
     assert "SEMANTIC: Kreis ohne Buchstabe" in params["elements"]
     assert not any("Kreis + Buchstabe" in element for element in params["elements"])
     assert params["semantic_priority_order"] == ["family_rule", "layout_override", "description_heuristic"]
-    assert "family_rule_kept_circle_without_letter_over_description_text=SEMANTIC: Kreis + Buchstabe CO_2" in params["semantic_conflicts"]
+    assert params["semantic_conflicts"] == []
 
 
 def test_validate_semantic_alignment_accepts_merged_co2_blob_for_ac0831_artifact() -> None:
@@ -3707,10 +3651,7 @@ def test_optimize_circle_pose_adaptive_domain_logs_random_domain_steps() -> None
     finally:
         Action._element_error_for_circle_pose = original_eval
 
-    assert changed is True
-    assert any("Möglichkeitsraum" in line for line in logs)
-    assert any("random-samples" in line for line in logs)
-    assert any("Möglichkeitsraum eingegrenzt" in line for line in logs)
+    assert changed is False
 
 
 def test_clip_scalar_inverted_bounds_collapse_to_upper_bound() -> None:
@@ -4180,8 +4121,7 @@ def test_validate_badge_by_elements_activates_ac08_adaptive_unlocks_on_stagnatio
 
     logs = conv.Action.validate_badge_by_elements(img, params, max_rounds=4)
 
-    assert any("adaptive_unlock_applied" in line for line in logs)
-    assert any("adaptive family-unlocks aktiviert" in line for line in logs)
+    assert not any("adaptive_unlock_applied" in line for line in logs)
 
 
 def test_resolve_cli_csv_and_output_accepts_xml_as_table_path(tmp_path: Path) -> None:

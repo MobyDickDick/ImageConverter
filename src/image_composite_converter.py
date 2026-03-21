@@ -1108,7 +1108,6 @@ class Reflection:
         }
 
         semantic_symbol = symbol_upper.startswith("AC08") or symbol_upper == "AR0100"
-        forced_co2_symbols = {"AC0820", "AC0831", "AC0832", "AC0833", "AC0834"}
         if semantic_symbol:
             params["mode"] = "semantic_badge"
 
@@ -1139,9 +1138,12 @@ class Reflection:
             if base_name.upper() in {"AC0810", "AC0811", "AC0812", "AC0813", "AC0814"}:
                 family_elements.append("SEMANTIC: Kreis ohne Buchstabe")
                 params["label"] = ""
-            elif symbol_upper in forced_co2_symbols or Reflection._contains_co_marker(desc):
+            elif re.search(r"\bco(?:[_\s-]*2|₂)\b", desc):
                 heuristic_elements.append("SEMANTIC: Kreis + Buchstabe CO_2")
                 params["label"] = "CO_2"
+            elif re.search(r"\bco\b", desc):
+                heuristic_elements.append("SEMANTIC: Kreis + Buchstabe CO")
+                params["label"] = "CO"
             elif "voc" in desc:
                 heuristic_elements.append("SEMANTIC: Kreis + Buchstabe VOC")
                 params["label"] = "VOC"
@@ -1168,23 +1170,11 @@ class Reflection:
                 "family_rule": list(dict.fromkeys(family_elements)),
                 "description_heuristic": list(dict.fromkeys(heuristic_elements)),
             }
-            if symbol_upper in {"AC0811", "AC0812", "AC0813", "AC0814"} and (
-                Reflection._contains_co_marker(desc) or "voc" in desc or "buchstabe" in desc
-            ):
-                params["semantic_conflicts"].append(
-                    "family_rule_kept_circle_without_letter_over_description_text=SEMANTIC: Kreis + Buchstabe CO_2"
-                    if Reflection._contains_co_marker(desc)
-                    else "family_rule_kept_circle_without_letter_over_description_text=SEMANTIC: Kreis + Buchstabe"
-                )
             params["elements"].extend(params["semantic_sources"]["family_rule"])
-            accepted_heuristics, ignored_heuristics = Reflection._resolve_semantic_heuristics(
-                canonical_base=symbol_upper,
-                family_elements=params["semantic_sources"]["family_rule"],
-                heuristic_elements=params["semantic_sources"]["description_heuristic"],
+            params["semantic_sources"]["description_heuristic"] = list(
+                dict.fromkeys(params["semantic_sources"]["description_heuristic"])
             )
-            params["semantic_conflicts"].extend(ignored_heuristics)
-            params["semantic_sources"]["description_heuristic"] = accepted_heuristics
-            for element in accepted_heuristics:
+            for element in params["semantic_sources"]["description_heuristic"]:
                 if element not in params["elements"]:
                     params["elements"].append(element)
 
@@ -1211,15 +1201,6 @@ class Reflection:
 
         return desc, params
 
-    @staticmethod
-    def _contains_co_marker(text: str) -> bool:
-        """Hard-coded CO₂ exception: detect standalone CO and render as CO₂."""
-        if not text:
-            return False
-
-        subscript_digit_map = str.maketrans("₀₁₂₃₄₅₆₇₈₉", "0123456789")
-        normalized = text.lower().translate(subscript_digit_map)
-        return re.search(r"(^|[^a-z])co([^a-z]|$)", normalized) is not None
 
     @staticmethod
     def _extract_documented_alias_refs(text: str) -> set[str]:
@@ -1257,60 +1238,6 @@ class Reflection:
 
         return overrides
 
-    @staticmethod
-    def _resolve_semantic_heuristics(
-        *,
-        canonical_base: str,
-        family_elements: list[str],
-        heuristic_elements: list[str],
-    ) -> tuple[list[str], list[str]]:
-        """Filter heuristic semantic claims against stronger family rules and log conflicts."""
-        accepted: list[str] = []
-        conflicts: list[str] = []
-        normalized_family = {str(element).lower() for element in family_elements}
-        family_has_textless_circle = "semantic: kreis ohne buchstabe" in normalized_family
-        family_has_right_arm = "semantic: waagrechter strich rechts vom kreis" in normalized_family
-        family_has_left_arm = "semantic: waagrechter strich links vom kreis" in normalized_family
-        family_has_rear_stem = "semantic: senkrechter strich hinter dem kreis" in normalized_family
-
-        for element in heuristic_elements:
-            normalized = str(element).lower()
-            conflict_reason = ""
-            if canonical_base in {"AC0811", "AC0812", "AC0813", "AC0814"} and family_has_textless_circle:
-                if "kreis + buchstabe" in normalized:
-                    conflict_reason = (
-                        "family_rule_kept_circle_without_letter_over_description_text="
-                        + str(element)
-                    )
-            if not conflict_reason and family_has_right_arm and "semantic: waagrechter strich links vom kreis" == normalized:
-                conflict_reason = "family_rule_kept_right_arm_over_description_left_arm"
-            if not conflict_reason and family_has_left_arm and "semantic: waagrechter strich rechts vom kreis" == normalized:
-                conflict_reason = "family_rule_kept_left_arm_over_description_right_arm"
-            if not conflict_reason and family_has_rear_stem and "semantic: senkrechter strich oben vom kreis" == normalized:
-                conflict_reason = "family_rule_kept_rear_stem_over_description_top_stem"
-
-            if conflict_reason:
-                conflicts.append(conflict_reason)
-                continue
-            accepted.append(element)
-
-        if canonical_base in {"AC0811", "AC0812", "AC0813", "AC0814"} and family_has_textless_circle:
-            if not any("family_rule_kept_circle_without_letter_over_description_text=" in item for item in conflicts):
-                raw_text_conflict = next(
-                    (
-                        str(element)
-                        for element in heuristic_elements
-                        if "kreis + buchstabe" in str(element).lower()
-                    ),
-                    "",
-                )
-                if raw_text_conflict:
-                    conflicts.append(
-                        "family_rule_kept_circle_without_letter_over_description_text="
-                        + raw_text_conflict
-                    )
-
-        return accepted, conflicts
 
 
 class Action:
@@ -2201,10 +2128,33 @@ class Action:
                     p.setdefault("voc_font_scale_min", 0.60)
                     p.pop("voc_font_scale_max", None)
         p = Action._configure_ac08_small_variant_mode(name, p)
-        p = Action._tune_ac08_left_connector_family(name, p)
-        p = Action._tune_ac08_right_connector_family(name, p)
-        p = Action._tune_ac08_vertical_connector_family(name, p)
-        p = Action._tune_ac08_circle_text_family(name, p)
+        for key in (
+            "lock_circle_cx",
+            "lock_circle_cy",
+            "lock_stem_center_to_circle",
+            "lock_arm_center_to_circle",
+            "lock_text_scale",
+            "lock_colors",
+            "min_circle_radius",
+            "max_circle_radius",
+            "arm_len_min",
+            "arm_len_min_ratio",
+            "stem_len_min",
+            "stem_len_min_ratio",
+            "co2_font_scale_min",
+            "co2_font_scale_max",
+            "voc_font_scale_min",
+            "voc_font_scale_max",
+            "fill_gray_min",
+            "fill_gray_max",
+            "stroke_gray_min",
+            "stroke_gray_max",
+            "stem_gray_min",
+            "stem_gray_max",
+            "text_gray_min",
+            "text_gray_max",
+        ):
+            p.pop(key, None)
         if p.get("draw_text", True) and "text_gray" in p:
             p["text_gray"] = int(p.get("stroke_gray", Action.LIGHT_CIRCLE_STROKE_GRAY))
         return p
@@ -2217,83 +2167,8 @@ class Action:
         full_err: float,
         reason: str,
     ) -> bool:
-        """Open a bounded family-specific fallback search space for stubborn AC08 badges."""
-        if bool(params.get("adaptive_unlock_active", False)):
-            return False
-
-        base_name = get_base_name_from_file(str(params.get("badge_symbol_name", ""))).upper()
-        if base_name not in {"AC0882", "AC0837", "AC0839", "AC0820", "AC0831"}:
-            return False
-
-        if not math.isfinite(full_err) or full_err < float(params.get("adaptive_unlock_error_threshold", 12.0)):
-            return False
-
-        params["adaptive_unlock_active"] = True
-        params["adaptive_unlock_reason"] = reason
-
-        if params.get("circle_enabled", True):
-            current_r = max(1.0, float(params.get("r", 1.0)))
-            existing_min = max(1.0, float(params.get("min_circle_radius", current_r)))
-            relaxed_min = max(1.0, min(existing_min, current_r) * 0.94)
-            params["min_circle_radius"] = float(min(existing_min, relaxed_min))
-            widened_max = max(
-                current_r * 1.08,
-                float(params.get("template_circle_radius", current_r)) * 1.08,
-            )
-            params["max_circle_radius"] = float(max(float(params.get("max_circle_radius", 0.0) or 0.0), widened_max))
-
-        if params.get("arm_enabled"):
-            current_ratio = float(params.get("arm_len_min_ratio", 0.75))
-            params["arm_len_min_ratio"] = float(min(current_ratio, 0.58 if base_name in {"AC0882", "AC0837", "AC0839"} else 0.65))
-        if params.get("stem_enabled"):
-            current_ratio = float(params.get("stem_len_min_ratio", 0.65))
-            params["stem_len_min_ratio"] = float(min(current_ratio, 0.58 if base_name == "AC0831" else 0.58))
-
-        min_dim = float(
-            min(
-                float(params.get("width", 0.0) or 0.0),
-                float(params.get("height", 0.0) or 0.0),
-            )
-        )
-        if min_dim <= 0.0:
-            min_dim = max(1.0, float(params.get("r", 1.0)) * 2.0)
-
-        text_mode = str(params.get("text_mode", "")).lower()
-        if text_mode == "co2" and (base_name in {"AC0820", "AC0831"} or min_dim <= 15.5):
-            base_scale = float(params.get("co2_font_scale", 0.82))
-            params["lock_text_scale"] = False
-            params["co2_font_scale_min"] = float(min(float(params.get("co2_font_scale_min", base_scale)), max(0.68, base_scale * 0.86)))
-            params["co2_font_scale_max"] = float(max(float(params.get("co2_font_scale_max", base_scale)), min(1.22, base_scale * 1.18)))
-        if text_mode == "voc" and (base_name == "AC0839" or min_dim <= 15.5):
-            base_scale = float(params.get("voc_font_scale", 0.52))
-            params["lock_text_scale"] = False
-            params["voc_font_scale_min"] = float(min(float(params.get("voc_font_scale_min", base_scale)), max(0.40, base_scale * 0.84)))
-            params["voc_font_scale_max"] = float(max(float(params.get("voc_font_scale_max", base_scale)), min(0.98, base_scale * 1.18)))
-
-        if base_name in {"AC0820", "AC0831", "AC0837", "AC0839", "AC0882"}:
-            params["lock_colors"] = False
-            for key, corridor in (
-                ("fill_gray", 10),
-                ("stroke_gray", 12),
-                ("stem_gray", 12),
-                ("text_gray", 12),
-            ):
-                if key not in params:
-                    continue
-                center = int(round(float(params.get(key, 0.0))))
-                params[f"{key}_min"] = int(max(0, center - corridor))
-                params[f"{key}_max"] = int(min(255, center + corridor))
-
-        logs.append(
-            "adaptive_unlock_applied: "
-            f"base={base_name}, reason={reason}, full_err={full_err:.3f}, "
-            f"radius=[{float(params.get('min_circle_radius', 0.0)):.3f}..{float(params.get('max_circle_radius', 0.0) or 0.0):.3f}], "
-            f"arm_ratio={float(params.get('arm_len_min_ratio', 0.0)):.3f}, "
-            f"stem_ratio={float(params.get('stem_len_min_ratio', 0.0)):.3f}, "
-            f"text_locked={'yes' if bool(params.get('lock_text_scale', False)) else 'no'}, "
-            f"colors_locked={'yes' if bool(params.get('lock_colors', False)) else 'no'}"
-        )
-        return True
+        """Adaptive AC08 locks are disabled so semantic badge fitting stays unconstrained."""
+        return False
 
     @staticmethod
     def _release_ac08_adaptive_locks(
@@ -2303,58 +2178,8 @@ class Action:
         reason: str,
         current_error: float,
     ) -> bool:
-        """Relax bounded AC08 locks for a final fallback round without fully opening the search."""
-        if bool(params.get("adaptive_lock_release_active", False)):
-            return False
-
-        base_name = get_base_name_from_file(str(params.get("badge_symbol_name", ""))).upper()
-        if base_name not in {"AC0882", "AC0837", "AC0839", "AC0820", "AC0831"}:
-            return False
-        if not math.isfinite(current_error) or current_error < 8.0:
-            return False
-
-        params["adaptive_lock_release_active"] = True
-        params["adaptive_lock_release_reason"] = reason
-
-        if params.get("circle_enabled", True):
-            template_r = max(1.0, float(params.get("template_circle_radius", params.get("r", 1.0))))
-            current_min = max(1.0, float(params.get("min_circle_radius", template_r)))
-            params["min_circle_radius"] = float(min(current_min, template_r * 0.88))
-
-        if params.get("arm_enabled"):
-            current_ratio = float(params.get("arm_len_min_ratio", 0.75))
-            params["arm_len_min_ratio"] = float(min(current_ratio, 0.58 if base_name in {"AC0882", "AC0837", "AC0839"} else 0.65))
-        if params.get("stem_enabled"):
-            current_ratio = float(params.get("stem_len_min_ratio", 0.65))
-            params["stem_len_min_ratio"] = float(min(current_ratio, 0.58 if base_name == "AC0831" else 0.58))
-            stem_top = float(params.get("stem_top", 0.0))
-            stem_bottom = float(params.get("stem_bottom", stem_top))
-            params["stem_len_min"] = float(max(1.0, float(params.get("stem_len_min", 1.0)), (stem_bottom - stem_top) * float(params.get("stem_len_min_ratio", 0.0))))
-
-        text_mode = str(params.get("text_mode", "")).lower()
-        if text_mode == "co2" and base_name in {"AC0820", "AC0831"}:
-            base_scale = float(params.get("co2_font_scale", 0.82))
-            params["lock_text_scale"] = False
-            params["co2_font_scale_min"] = float(min(float(params.get("co2_font_scale_min", base_scale)), max(0.68, base_scale * 0.86)))
-            params["co2_font_scale_max"] = float(max(float(params.get("co2_font_scale_max", base_scale)), min(1.22, base_scale * 1.18)))
-        if text_mode == "voc" and base_name == "AC0839":
-            base_scale = float(params.get("voc_font_scale", 0.52))
-            params["lock_text_scale"] = False
-            params["voc_font_scale_min"] = float(min(float(params.get("voc_font_scale_min", base_scale)), max(0.40, base_scale * 0.84)))
-            params["voc_font_scale_max"] = float(max(float(params.get("voc_font_scale_max", base_scale)), min(0.98, base_scale * 1.18)))
-
-        params["lock_colors"] = False
-        for key, corridor in (("fill_gray", 10), ("stroke_gray", 12), ("stem_gray", 12), ("text_gray", 12)):
-            if key not in params:
-                continue
-            center = int(round(float(params.get(key, 0.0))))
-            params[f"{key}_min"] = int(max(0, center - corridor))
-            params[f"{key}_max"] = int(min(255, center + corridor))
-
-        logs.append(
-            f"adaptive_lock_release_activated: {base_name}, reason={reason}, current_error={current_error:.3f}"
-        )
-        return True
+        """Adaptive AC08 lock release is disabled because there are no AC08 locks to release."""
+        return False
 
     @staticmethod
     def _align_stem_to_circle_center(params: dict) -> dict:
