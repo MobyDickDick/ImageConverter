@@ -6162,7 +6162,11 @@ class Action:
     def _expected_semantic_presence(semantic_elements: list[str]) -> dict[str, bool]:
         normalized = [str(elem).lower() for elem in semantic_elements]
         has_text = any(
-            ("kreis + buchstabe" in elem) or ("buchstab" in elem) or ("voc" in elem) or ("co_2" in elem) or ("co₂" in elem)
+            ("kreis + buchstabe" in elem)
+            or (("buchstab" in elem) and ("ohne buchstabe" not in elem))
+            or ("voc" in elem)
+            or ("co_2" in elem)
+            or ("co₂" in elem)
             for elem in normalized
         )
         has_circle = any("kreis" in elem for elem in normalized)

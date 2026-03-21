@@ -3383,6 +3383,18 @@ def test_parse_description_keeps_ac0814_family_rule_over_text_heuristic() -> Non
     assert params["semantic_conflicts"] == []
 
 
+def test_expected_semantic_presence_does_not_treat_circle_ohne_buchstabe_as_text() -> None:
+    expected = image_composite_converter.Action._expected_semantic_presence([
+        "SEMANTIC: Kreis ohne Buchstabe",
+        "SEMANTIC: senkrechter Strich hinter dem Kreis",
+    ])
+
+    assert expected["circle"] is True
+    assert expected["stem"] is True
+    assert expected["arm"] is False
+    assert expected["text"] is False
+
+
 def test_validate_semantic_alignment_accepts_merged_co2_blob_for_ac0831_artifact() -> None:
     """Merged JPEG text blobs should still count as valid CO₂ evidence for AC0831_L."""
     if image_composite_converter.np is None or image_composite_converter.cv2 is None:
