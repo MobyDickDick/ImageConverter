@@ -791,6 +791,37 @@ class Perception:
         return _load_description_mapping(self.csv_path)
 
 
+@dataclass(frozen=True)
+class SourceSpan:
+    """Optional source location attached to diagnostics for user-facing data files."""
+
+    path: str
+    line: int | None = None
+    column: int | None = None
+
+    def format(self) -> str:
+        location = self.path
+        if self.line is not None:
+            location += f":{self.line}"
+            if self.column is not None:
+                location += f":{self.column}"
+        return location
+
+
+class DescriptionMappingError(ValueError):
+    """Structured loader error with an optional source span for diagnostics."""
+
+    def __init__(self, message: str, *, span: SourceSpan | None = None):
+        super().__init__(message)
+        self.message = message
+        self.span = span
+
+    def __str__(self) -> str:
+        if self.span is None:
+            return self.message
+        return f"{self.message} ({self.span.format()})"
+
+
 def _load_description_mapping(path: str) -> dict[str, str]:
     ext = os.path.splitext(path)[1].lower()
     if ext == ".xml":
@@ -824,12 +855,22 @@ def _load_description_mapping_from_csv(path: str) -> dict[str, str]:
         if desc_idx == -1:
             desc_idx = 2
 
-        for row in reader:
+        for row_number, row in enumerate(reader, start=2):
             if len(row) > max(root_idx, desc_idx):
                 root_name = row[root_idx].strip()
                 desc = row[desc_idx].strip()
                 if root_name:
                     raw_desc[root_name] = desc
+                continue
+
+            expected_columns = max(root_idx, desc_idx) + 1
+            raise DescriptionMappingError(
+                (
+                    "Description table row is missing expected columns "
+                    f"(expected at least {expected_columns}, got {len(row)})."
+                ),
+                span=SourceSpan(path=path, line=row_number, column=1),
+            )
     return raw_desc
 
 
@@ -841,8 +882,11 @@ def _load_description_mapping_from_xml(path: str) -> dict[str, str]:
 
     try:
         tree = ET.parse(resolved_path)
-    except ET.ParseError:
-        return raw_desc
+    except ET.ParseError as exc:
+        raise DescriptionMappingError(
+            "Description XML could not be parsed.",
+            span=SourceSpan(path=resolved_path, line=exc.position[0], column=exc.position[1] + 1),
+        ) from exc
 
     root = tree.getroot()
 
@@ -9601,6 +9645,15 @@ def _resolve_cli_csv_and_output(args: argparse.Namespace) -> tuple[str, str | No
     return csv_path, output_dir
 
 
+def _format_user_diagnostic(exc: BaseException) -> str:
+    """Render structured loader/runtime errors into one compact CLI message."""
+    if isinstance(exc, DescriptionMappingError):
+        if exc.span is not None:
+            return f"{exc.message} Ort: {exc.span.format()}."
+        return exc.message
+    return str(exc)
+
+
 def _prompt_interactive_range(args: argparse.Namespace) -> tuple[str, str]:
     current_start = str(args.start or "").strip()
     current_end = str(args.end or "").strip()
@@ -9624,72 +9677,81 @@ def main(argv: list[str] | None = None) -> int:
     args = parse_args(argv)
     log_path = str(args.log_file or "").strip()
     with _optional_log_capture(log_path):
-        if args.ac08_regression_set:
-            args.start = "AC0000"
-            args.end = "ZZ9999"
+        try:
+            if args.ac08_regression_set:
+                args.start = "AC0000"
+                args.end = "ZZ9999"
 
-        if args.print_linux_vendor_command:
-            print(
-                " ".join(
-                    build_linux_vendor_install_command(
-                        vendor_dir=args.vendor_dir,
-                        platform_tag=args.vendor_platform,
-                        python_version=args.vendor_python_version,
+            if args.print_linux_vendor_command:
+                print(
+                    " ".join(
+                        build_linux_vendor_install_command(
+                            vendor_dir=args.vendor_dir,
+                            platform_tag=args.vendor_platform,
+                            python_version=args.vendor_python_version,
+                        )
                     )
                 )
-            )
+                return 0
+
+            if args.interactive_range or args.start is None or args.end is None:
+                args.start, args.end = _prompt_interactive_range(args)
+            else:
+                args.start = str(args.start or "").strip()
+                args.end = str(args.end or "ZZZZZZ").strip() or args.start
+
+            csv_path, output_dir = _resolve_cli_csv_and_output(args)
+
+            if not csv_path:
+                print("[WARN] Keine CSV/TSV/XML angegeben oder gefunden. Einige Symbole können ohne Beschreibung übersprungen werden.")
+            elif not os.path.exists(csv_path):
+                print(f"[WARN] CSV/TSV/XML-Datei nicht gefunden: {csv_path}")
+            elif args.mode == "convert":
+                # Validate user-supplied description data before the batch starts so
+                # malformed files fail with a precise source location even when the
+                # selected image range happens to be empty.
+                _load_description_mapping(csv_path)
+
+            if args.bootstrap_deps:
+                try:
+                    installed = _bootstrap_required_image_dependencies()
+                except RuntimeError as exc:
+                    print(f"[ERROR] {exc}")
+                    return 2
+                if installed:
+                    print(f"[INFO] Installiert: {', '.join(installed)}")
+
+            if args.ac08_regression_set:
+                print(
+                    "[INFO] Verwende festes AC08-Regression-Set "
+                    f"{AC08_REGRESSION_SET_NAME}: {', '.join(AC08_REGRESSION_VARIANTS)}"
+                )
+            selected_variants = set(AC08_REGRESSION_VARIANTS) if args.ac08_regression_set else None
+
+            if args.mode == "annotate":
+                out_dir = analyze_range(
+                    args.folder_path,
+                    output_root=output_dir,
+                    start_ref=args.start,
+                    end_ref=args.end,
+                )
+            else:
+                out_dir = convert_range(
+                    args.folder_path,
+                    csv_path,
+                    args.iterations,
+                    args.start,
+                    args.end,
+                    args.debug_ac0811_dir,
+                    args.debug_element_diff_dir,
+                    output_dir,
+                    selected_variants,
+                )
+            print(f"\nAbgeschlossen! Ausgaben unter: {out_dir}")
             return 0
-
-        if args.interactive_range or args.start is None or args.end is None:
-            args.start, args.end = _prompt_interactive_range(args)
-        else:
-            args.start = str(args.start or "").strip()
-            args.end = str(args.end or "ZZZZZZ").strip() or args.start
-
-        csv_path, output_dir = _resolve_cli_csv_and_output(args)
-
-        if not csv_path:
-            print("[WARN] Keine CSV/TSV/XML angegeben oder gefunden. Einige Symbole können ohne Beschreibung übersprungen werden.")
-        elif not os.path.exists(csv_path):
-            print(f"[WARN] CSV/TSV/XML-Datei nicht gefunden: {csv_path}")
-
-        if args.bootstrap_deps:
-            try:
-                installed = _bootstrap_required_image_dependencies()
-            except RuntimeError as exc:
-                print(f"[ERROR] {exc}")
-                return 2
-            if installed:
-                print(f"[INFO] Installiert: {', '.join(installed)}")
-
-        if args.ac08_regression_set:
-            print(
-                "[INFO] Verwende festes AC08-Regression-Set "
-                f"{AC08_REGRESSION_SET_NAME}: {', '.join(AC08_REGRESSION_VARIANTS)}"
-            )
-        selected_variants = set(AC08_REGRESSION_VARIANTS) if args.ac08_regression_set else None
-
-        if args.mode == "annotate":
-            out_dir = analyze_range(
-                args.folder_path,
-                output_root=output_dir,
-                start_ref=args.start,
-                end_ref=args.end,
-            )
-        else:
-            out_dir = convert_range(
-                args.folder_path,
-                csv_path,
-                args.iterations,
-                args.start,
-                args.end,
-                args.debug_ac0811_dir,
-                args.debug_element_diff_dir,
-                output_dir,
-                selected_variants,
-            )
-        print(f"\nAbgeschlossen! Ausgaben unter: {out_dir}")
-        return 0
+        except DescriptionMappingError as exc:
+            print(f"[ERROR] {_format_user_diagnostic(exc)}")
+            return 2
 
 
 if __name__ == "__main__":
