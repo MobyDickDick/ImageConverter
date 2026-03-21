@@ -137,7 +137,7 @@ Speziallogik in `src/image_composite_converter.py`.
 
 ---
 
-### Aufgabe 2.2 – Prioritätsregeln für Family-Semantik festziehen
+### Aufgabe 2.2 – Prioritätsregeln für Family-Semantik festziehen ✅ erledigt
 **Ziel:** Eindeutige Familienregeln sollen beschreibungsbedingte Fehlinterpretationen übersteuern.
 
 **Umsetzung:**
@@ -151,6 +151,11 @@ Speziallogik in `src/image_composite_converter.py`.
 **Akzeptanzkriterien:**
 - Re-Runs für `AC0811..AC0814` erzeugen keine falschen Text-Erwartungen mehr.
 - Konfliktfälle sind im Log eindeutig gekennzeichnet.
+
+**Umgesetzt in Code/Workflow:**
+- `Reflection.parse_description` trennt jetzt Family-Regeln, Layout-Overrides und heuristische Beschreibungsauswertung explizit und speichert die feste Prioritätsreihenfolge `family_rule > layout_override > description_heuristic`.
+- Für `AC0811..AC0814` werden widersprüchliche Text-Heuristiken (z. B. "`Kreis + Buchstabe CO_2`") nicht mehr in `params["elements"]` übernommen, wenn die Family-Regel "`Kreis ohne Buchstabe`" bereits feststeht.
+- Konflikte zwischen Family-Regeln und weicheren Heuristiken werden in `semantic_conflicts` gesammelt und sowohl in den per-Datei-Logs als auch in den aggregierten Audit-Reports (`semantic_audit_ac0811_ac0814.csv/.json`) ausgegeben.
 
 **Empfohlene Tests:**
 - Direkter Vorher/Nachher-Vergleich der betroffenen Semantik-Fehler
