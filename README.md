@@ -55,3 +55,11 @@ python -m compileall src tests
 python -m pytest
 python -m src.image_composite_converter --help
 ```
+
+## VS Code / Windows troubleshooting
+
+Wenn VS Code beim Starten mit `debugpy` einen Fehler wie `Couldn't spawn debuggee: [WinError 5] Zugriff verweigert` meldet und in der geloggten `Command line` nur der Ordner `...\.venv\Scripts` statt `...\.venv\Scripts\python.exe` auftaucht, ist meist der Python-Interpreter falsch ausgewählt.
+
+- Wähle in VS Code über `Python: Select Interpreter` explizit die Datei `.venv\Scripts\python.exe` aus — **nicht** den Ordner `.venv\Scripts`.
+- Verwende bevorzugt die mitgelieferte Debug-Konfiguration `ImageConverter: convert interactive range`; sie startet den Einstiegspunkt als Modul (`python -m src.image_composite_converter`) und setzt das Workspace-Verzeichnis korrekt.
+- Falls du lieber direkt im Terminal prüfst, funktioniert derselbe Start auch ohne Debugger mit `python -m src.image_composite_converter artifacts/images_to_convert --interactive-range`.

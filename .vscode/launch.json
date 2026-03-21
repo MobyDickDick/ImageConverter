@@ -2,17 +2,31 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Python: image_composite_converter (interactive range)",
+      "name": "ImageConverter: convert interactive range",
       "type": "debugpy",
       "request": "launch",
-      "program": "${workspaceFolder}/src/image_composite_converter.py",
-      "python": "${config:python.defaultInterpreterPath}",
-      "args": [
-        "--interactive-range",
-        "${workspaceFolder}/artifacts/images_to_convert"
-      ],
+      "module": "src.image_composite_converter",
+      "cwd": "${workspaceFolder}",
       "console": "integratedTerminal",
-      "logToFile": true,
+      "args": [
+        "artifacts/images_to_convert",
+        "--interactive-range"
+      ],
+      "justMyCode": false
+    },
+    {
+      "name": "ImageConverter: annotate interactive range",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "src.image_composite_converter",
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "args": [
+        "artifacts/images_to_convert",
+        "--mode",
+        "annotate",
+        "--interactive-range"
+      ],
       "justMyCode": false
     }
   ]
