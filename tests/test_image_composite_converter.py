@@ -4266,6 +4266,74 @@ def test_load_description_mapping_from_xml_falls_back_to_descriptions_directory(
     assert mapping.get("AC0241")
 
 
+def test_load_description_mapping_from_xml_reports_line_and_column_for_parse_errors(tmp_path: Path) -> None:
+    xml_path = tmp_path / "broken.xml"
+    xml_path.write_text(
+        "<wurzelformen_export>\n"
+        "  <entries>\n"
+        "    <entry>\n"
+        "  </entries>\n"
+        "</wurzelformen_export>\n",
+        encoding="utf-8",
+    )
+
+    with pytest.raises(conv.DescriptionMappingError) as exc_info:
+        conv._load_description_mapping_from_xml(str(xml_path))
+
+    exc = exc_info.value
+    assert exc.span is not None
+    assert exc.span.path == str(xml_path)
+    assert exc.span.line == 4
+    assert exc.span.column == 5
+    assert "Description XML could not be parsed." in str(exc)
+
+
+def test_load_description_mapping_from_csv_reports_source_span_for_short_rows(tmp_path: Path) -> None:
+    csv_path = tmp_path / "broken.csv"
+    csv_path.write_text(
+        "Wurzelform;Beschreibung\n"
+        "AC0812\n",
+        encoding="utf-8",
+    )
+
+    with pytest.raises(conv.DescriptionMappingError) as exc_info:
+        conv._load_description_mapping_from_csv(str(csv_path))
+
+    exc = exc_info.value
+    assert exc.span is not None
+    assert exc.span.path == str(csv_path)
+    assert exc.span.line == 2
+    assert exc.span.column == 1
+    assert "missing expected columns" in exc.message
+
+
+def test_main_returns_error_for_invalid_description_xml_with_source_location(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    images_dir = tmp_path / "images"
+    images_dir.mkdir()
+    broken_xml = tmp_path / "broken.xml"
+    broken_xml.write_text("<wurzelformen_export>\n  <entries>\n", encoding="utf-8")
+
+    exit_code = conv.main(
+        [
+            str(images_dir),
+            "--descriptions-path",
+            str(broken_xml),
+            "--start",
+            "AC0001",
+            "--end",
+            "AC0001",
+        ]
+    )
+
+    captured = capsys.readouterr()
+
+    assert exit_code == 2
+    assert "[ERROR] Description XML could not be parsed." in captured.out
+    assert f"Ort: {broken_xml}:3:1." in captured.out
+
+
 def test_build_linux_vendor_install_command_uses_vendor_defaults() -> None:
     cmd = conv.build_linux_vendor_install_command(vendor_dir="vendor", platform_tag="manylinux2014_x86_64", python_version="311")
 

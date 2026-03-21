@@ -16,11 +16,10 @@ be taken from documentation and marked complete when finished.
 - [x] Publish the detailed roadmap checklist referenced from the README.
   - Added this file so roadmap tasks can now be tracked and marked complete in-repo.
 
-- [ ] Improve error positions and messages.
-  - Carry line/column information consistently through tokens.
-  - Preserve location metadata on AST nodes where diagnostics originate.
-  - Unify diagnostics behind an error type that can optionally expose a `SourceSpan`.
-  - Add regression tests for parser and runtime-facing error messages.
+- [x] Improve error positions and messages.
+  - Added a structured `DescriptionMappingError` with optional `SourceSpan` metadata so malformed CSV/XML description files now report exact file/line/column locations.
+  - The CLI now surfaces these diagnostics as stable `[ERROR]` messages instead of failing with ambiguous parser exceptions.
+  - Added regression tests for malformed XML, malformed CSV rows, and the CLI-facing error output.
 - [ ] Refine the linter.
   - Add "must-use" tracking across control-flow branches.
   - Emit unreachable-code warnings in common dead-code scenarios.
