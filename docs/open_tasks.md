@@ -13,8 +13,22 @@ focused on the actual project scope.
 
 ## Current status
 
-- There are currently no unchecked ImageConverter roadmap items in the canonical task list.
-- Add new work items here before implementation starts, then continue to mark them in-place when they are done.
+- The canonical task list now contains follow-up work for the remaining AC08 quality gaps from the latest committed reports.
+- Continue to add new work items here before implementation starts, then mark them in-place when they are done.
+
+## Next priority tasks
+
+- [ ] Eliminate the remaining AC08 batch/render failures for `AC0811_L` and `AC0812_M`.
+  - `ac08_success_criteria.txt` still reports `images_missing=2`, `batch_abort_or_render_failure_count=2`, and `overall_success=0`.
+  - Reproduce both failures, stabilize the semantic/render path for the left-connector circle families, and regenerate the AC08 success reports once both variants convert again.
+
+- [ ] Reduce the worst residual deltas for the still-weak AC08 families.
+  - Prioritize `AC0820_L`, `AC0835_S`, `AC0882_S`, `AC0837_L`, `AC0831_L`, `AC0839_S`, and `AC0834_S` from `ac08_weak_family_status.txt`.
+  - Focus on family-specific quality improvements that preserve the new no-regression guardrails, especially for `_S` variants and stubborn connector geometries.
+
+- [ ] Make the AC08 success gate actionable in the normal workflow.
+  - Promote the metrics from `ac08_success_metrics.csv` / `ac08_success_criteria.txt` into a documented regression check so failed criteria are visible before the next backlog review.
+  - Include validation-round instrumentation fixes if needed, because the current report still shows `mean_validation_rounds_per_file=0.000`, which is not yet decision-useful.
 
 ## Image conversion pipeline
 
