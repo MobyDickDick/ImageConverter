@@ -16,4 +16,5 @@ aktuellen Projektfokus nutzbar bleibt.
 ## Verweis auf offene, noch relevante Arbeiten
 
 - Die verbleibenden offenen Punkte für den Image-Konverter werden in `docs/open_tasks.md` gepflegt; aktuell enthält die kanonische Liste keine offenen Einträge.
+- Die im AC08-Plan beschriebene laufende Nachverfolgung offener Schwachfamilien ist für diesen Snapshot als Artefaktstand unter `artifacts/converted_images/reports/ac08_weak_family_status.csv` und `.txt` materialisiert.
 - AC08-spezifische Verbesserungen und deren Priorisierung stehen in `docs/ac08_improvement_plan.md`.

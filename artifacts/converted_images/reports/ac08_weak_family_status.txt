@@ -1,0 +1,13 @@
+ranking_threshold_mean_delta2=18.000
+weak_variants=9
+goal=Verbleibende AC08-Schwachfamilien und ihren aktuellen Mitigation-Status dokumentieren
+variants=AC0882_S,AC0837_L,AC0839_S,AC0820_L,AC0831_L,AC0834_S,AC0835_S,AC0812_M,AC0811_L
+AC0882_S: mean_delta2=6833.472168; risk=high; markers=none_observed; status=Mitigated via adaptive fallback search, connector-family guardrails, and _S-specific tuning.
+AC0837_L: mean_delta2=6637.490723; risk=high; markers=none_observed; status=Mitigated via adaptive fallback search plus shared left-connector geometry locks.
+AC0839_S: mean_delta2=6369.664062; risk=high; markers=none_observed; status=Mitigated via mirrored connector guardrails with stagnation-triggered unlocks and _S handling.
+AC0820_L: mean_delta2=6218.486816; risk=medium; markers=none_observed; status=Mitigated via bounded quality-pass rollbacks, adaptive text scaling, and centered CO₂ layout.
+AC0831_L: mean_delta2=6136.077148; risk=medium; markers=none_observed; status=Mitigated via semantic vertical-family tuning plus bounded fallback search on stubborn runs.
+AC0834_S: mean_delta2=6114.992188; risk=medium; markers=none_observed; status=Mitigated via shared right-connector geometry enforcement and _S-specific connector/text floors.
+AC0835_S: mean_delta2=5698.319824; risk=medium; markers=none_observed; status=Mitigated primarily through compact circle/text tuning for small variants.
+AC0812_M: mean_delta2=nan; risk=medium; markers=none_observed; status=Mitigated via semantic conflict logging and shared left-connector family reconstruction.
+AC0811_L: mean_delta2=nan; risk=medium; markers=none_observed; status=Mitigated via semantic audit output and strict family-priority rules for circle-with-stem badges.

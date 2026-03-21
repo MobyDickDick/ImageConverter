@@ -1,0 +1,10 @@
+variant;base_family;focus;mean_delta2;risk;family_group;implemented_mitigations;active_log_markers;status
+AC0882_S;AC0882;stagnation;6833.472168;high;left_connector;adaptive_locks,left_connector_family,small_variant_mode;none_observed;Mitigated via adaptive fallback search, connector-family guardrails, and _S-specific tuning.
+AC0837_L;AC0837;stagnation;6637.490723;high;left_connector;adaptive_locks,left_connector_family;none_observed;Mitigated via adaptive fallback search plus shared left-connector geometry locks.
+AC0839_S;AC0839;small_variant;6369.664062;high;right_connector;adaptive_locks,right_connector_family,small_variant_mode;none_observed;Mitigated via mirrored connector guardrails with stagnation-triggered unlocks and _S handling.
+AC0820_L;AC0820;circle_text;6218.486816;medium;circle_text;adaptive_locks,quality_pass_guardrails,co2_cluster_anchor;none_observed;Mitigated via bounded quality-pass rollbacks, adaptive text scaling, and centered CO₂ layout.
+AC0831_L;AC0831;semantic_vertical;6136.077148;medium;semantic_vertical;adaptive_locks,semantic_vertical_family;none_observed;Mitigated via semantic vertical-family tuning plus bounded fallback search on stubborn runs.
+AC0834_S;AC0834;small_variant;6114.992188;medium;right_connector;right_connector_family,small_variant_mode;none_observed;Mitigated via shared right-connector geometry enforcement and _S-specific connector/text floors.
+AC0835_S;AC0835;small_variant;5698.319824;medium;circle_text;small_variant_mode,circle_text_family;none_observed;Mitigated primarily through compact circle/text tuning for small variants.
+AC0812_M;AC0812;semantic_horizontal;nan;medium;semantic_horizontal;semantic_audit,semantic_priority_rules,left_connector_family;none_observed;Mitigated via semantic conflict logging and shared left-connector family reconstruction.
+AC0811_L;AC0811;semantic_vertical;nan;medium;semantic_vertical;semantic_audit,semantic_priority_rules,semantic_vertical_family;none_observed;Mitigated via semantic audit output and strict family-priority rules for circle-with-stem badges.

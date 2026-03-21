@@ -265,6 +265,8 @@ werden dabei
 dokumentiert. Damit lässt sich die noch verbleibende AC08-Restarbeit nach jedem Re-Run
 als Report statt nur manuell im Plantext nachverfolgen.
 
+**Aktueller Snapshot-Stand:** Die aus `artifacts/converted_images/reports/pixel_delta2_ranking.csv` abgeleiteten Dateien `ac08_weak_family_status.csv` und `ac08_weak_family_status.txt` wurden für diesen Repository-Stand neu erzeugt und mit dem Plan synchronisiert.
+
 ---
 
 ### Aufgabe 4.2 – Rechte Connector-Familien gemeinsam tunen ✅ erledigt

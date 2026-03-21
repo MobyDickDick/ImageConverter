@@ -47,3 +47,6 @@ removed so the list stays focused on the actual project scope.
 
 - [x] Document that the canonical open-task list is currently empty and keep roadmap references aligned.
   - Added an explicit current-status section here and synchronized the README/documentation index wording so future work is added back to the same checklist before implementation starts.
+
+- [x] Materialize the AC08 weak-family follow-up reports referenced by the improvement plan.
+  - Regenerated `artifacts/converted_images/reports/ac08_weak_family_status.csv` and `.txt` from the current `pixel_delta2_ranking.csv` so the documented AC08 follow-up now exists as committed snapshot artifacts, not only as code/tests.
