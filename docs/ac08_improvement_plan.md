@@ -109,7 +109,7 @@ Speziallogik in `src/image_composite_converter.py`.
 
 ## Phase 2 – Semantik und Initialisierung bereinigen
 
-### Aufgabe 2.1 – AC0811–AC0814 Semantik-Audit einführen
+### Aufgabe 2.1 – AC0811–AC0814 Semantik-Audit einführen ✅ erledigt
 **Ziel:** Inkonsistenzen zwischen Beschreibung, Badge-Familie und Text-Erwartung sichtbar machen.
 
 **Umsetzung:**
@@ -125,6 +125,11 @@ Speziallogik in `src/image_composite_converter.py`.
 **Akzeptanzkriterien:**
 - Für jede betroffene Datei ist nachvollziehbar, warum Text erwartet oder nicht erwartet wurde.
 - Inkonsistenzen sind nicht mehr nur implizit in den Fehlerlogs verborgen.
+
+**Umgesetzt in Code/Workflow:**
+- `Reflection.parse_description` protokolliert jetzt die tatsächlich verwendeten Beschreibungsfragmente samt Lookup-Reihenfolge für Varianten und Basissymbole.
+- `run_iteration_pipeline` schreibt für `AC0811..AC0814` strukturierte Audit-Metadaten direkt in die per-Datei-Logs (`semantic_audit_*`), inklusive abgeleiteter `params["elements"]`, Status und Mismatch-Gründen.
+- `convert_range` erzeugt zusätzlich die zusammengefassten Reports `semantic_audit_ac0811_ac0814.csv` und `semantic_audit_ac0811_ac0814.json`, damit die betroffenen Familien gesammelt geprüft werden können.
 
 **Empfohlene Tests:**
 - Batch `AC0811..AC0814`

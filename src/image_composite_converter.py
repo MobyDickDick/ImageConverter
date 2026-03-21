@@ -968,15 +968,8 @@ class Reflection:
     def parse_description(self, base_name: str, img_filename: str):
         variant_name = os.path.splitext(img_filename)[0]
         canonical_base = get_base_name_from_file(base_name).upper()
-        canonical_variant = get_base_name_from_file(variant_name).upper()
-
-        desc_parts = [
-            self.raw_desc.get(base_name, ""),
-            self.raw_desc.get(variant_name, ""),
-            self.raw_desc.get(canonical_base, ""),
-            self.raw_desc.get(canonical_variant, ""),
-        ]
-        desc_raw = " ".join(part for part in desc_parts if part)
+        description_fragments = _collect_description_fragments(self.raw_desc, base_name, img_filename)
+        desc_raw = " ".join(fragment["text"] for fragment in description_fragments)
         desc = desc_raw.lower().strip()
         base_upper = base_name.upper()
         symbol_upper = canonical_base or base_upper
@@ -988,6 +981,7 @@ class Reflection:
             "elements": [],
             "label": "M",
             "documented_alias_refs": sorted(Reflection._extract_documented_alias_refs(desc)),
+            "description_fragments": description_fragments,
         }
 
         semantic_symbol = symbol_upper.startswith("AC08") or symbol_upper == "AR0100"
@@ -6093,6 +6087,16 @@ def run_iteration_pipeline(
 
     ref = Reflection(perc.raw_desc)
     desc, params = ref.parse_description(perc.base_name, filename)
+    semantic_audit_targets = {"AC0811", "AC0812", "AC0813", "AC0814"}
+    semantic_audit_row: dict[str, object] | None = None
+    if get_base_name_from_file(perc.base_name).upper() in semantic_audit_targets:
+        semantic_audit_row = _semantic_audit_record(
+            base_name=perc.base_name,
+            filename=filename,
+            description_fragments=list(params.get("description_fragments", [])),
+            semantic_elements=list(params.get("elements", [])),
+            status="semantic_pending",
+        )
 
     if not desc.strip() and params["mode"] != "semantic_badge":
         print("  -> Überspringe Bild, da keine begleitende textliche Beschreibung vorliegt.")
@@ -6178,11 +6182,37 @@ def run_iteration_pipeline(
             print("[ERROR] Semantik-Abgleich fehlgeschlagen:")
             for issue in semantic_issues:
                 print(f"  - {issue}")
+            if semantic_audit_row is not None:
+                semantic_audit_row = _semantic_audit_record(
+                    base_name=perc.base_name,
+                    filename=filename,
+                    description_fragments=list(params.get("description_fragments", [])),
+                    semantic_elements=list(params.get("elements", [])),
+                    status="semantic_mismatch",
+                    mismatch_reasons=semantic_issues,
+                )
             _write_validation_log(
                 [
                     "status=semantic_mismatch",
                     f"best_attempt_svg={base}_failed.svg",
                     f"best_attempt_diff={base}_failed_diff.png",
+                    *(
+                        [
+                            f"semantic_audit_status={semantic_audit_row.get('status', '')}",
+                            "semantic_audit_lookup_keys=" + " | ".join(
+                                str(value) for value in semantic_audit_row.get("description_lookup_keys", [])
+                            ),
+                            "semantic_audit_recognized_description_elements=" + " | ".join(
+                                str(value) for value in semantic_audit_row.get("recognized_description_elements", [])
+                            ),
+                            "semantic_audit_derived_elements=" + " | ".join(
+                                str(value) for value in semantic_audit_row.get("derived_elements", [])
+                            ),
+                            f"semantic_audit_mismatch_reason={semantic_audit_row.get('mismatch_reason', '')}",
+                        ]
+                        if semantic_audit_row is not None
+                        else []
+                    ),
                     *[f"issue={issue}" for issue in semantic_issues],
                 ]
             )
@@ -6214,7 +6244,37 @@ def run_iteration_pipeline(
                 "semantic-guard: Erwartete Arm-Geometrie bestätigt/wiederhergestellt (z.B. AC0812 links)."
             )
         quality_flags = _semantic_quality_flags(perc.base_name, validation_logs)
-        _write_validation_log(["status=semantic_ok", *quality_flags, *validation_logs])
+        if semantic_audit_row is not None:
+            semantic_audit_row = _semantic_audit_record(
+                base_name=perc.base_name,
+                filename=filename,
+                description_fragments=list(params.get("description_fragments", [])),
+                semantic_elements=list(params.get("elements", [])),
+                status="semantic_ok",
+            )
+        _write_validation_log(
+            [
+                "status=semantic_ok",
+                *(
+                    [
+                        f"semantic_audit_status={semantic_audit_row.get('status', '')}",
+                        "semantic_audit_lookup_keys=" + " | ".join(
+                            str(value) for value in semantic_audit_row.get("description_lookup_keys", [])
+                        ),
+                        "semantic_audit_recognized_description_elements=" + " | ".join(
+                            str(value) for value in semantic_audit_row.get("recognized_description_elements", [])
+                        ),
+                        "semantic_audit_derived_elements=" + " | ".join(
+                            str(value) for value in semantic_audit_row.get("derived_elements", [])
+                        ),
+                    ]
+                    if semantic_audit_row is not None
+                    else []
+                ),
+                *quality_flags,
+                *validation_logs,
+            ]
+        )
 
         svg_content = Action.generate_badge_svg(w, h, badge_params)
         svg_rendered = Action.render_svg_to_numpy(svg_content, w, h)
@@ -6226,6 +6286,9 @@ def run_iteration_pipeline(
             )
             return None
         _write_attempt_artifacts(svg_content, svg_rendered)
+        if semantic_audit_row is not None:
+            params = copy.deepcopy(params)
+            params["semantic_audit"] = semantic_audit_row
         return base, desc, params, 1, Action.calculate_error(perc.img, svg_rendered)
 
     if params["mode"] != "composite":
@@ -6478,6 +6541,100 @@ def _write_batch_failure_summary(reports_out_dir: str, failures: list[dict[str, 
                 failure.get("log_file", ""),
             ])
 
+
+
+def _collect_description_fragments(raw_desc: dict[str, str], base_name: str, img_filename: str) -> list[dict[str, str]]:
+    """Return the ordered description fragments consulted for one variant lookup."""
+    variant_name = os.path.splitext(img_filename)[0]
+    canonical_base = get_base_name_from_file(base_name).upper()
+    canonical_variant = get_base_name_from_file(variant_name).upper()
+
+    lookup_keys = [
+        ("base_name", str(base_name)),
+        ("variant_name", str(variant_name)),
+        ("canonical_base", canonical_base),
+        ("canonical_variant", canonical_variant),
+    ]
+    fragments: list[dict[str, str]] = []
+    seen: set[tuple[str, str]] = set()
+    for source, key in lookup_keys:
+        normalized_key = str(key or "").strip()
+        if not normalized_key:
+            continue
+        marker = (source, normalized_key)
+        if marker in seen:
+            continue
+        seen.add(marker)
+        value = str(raw_desc.get(normalized_key, "") or "").strip()
+        if not value:
+            continue
+        fragments.append({"source": source, "key": normalized_key, "text": value})
+    return fragments
+
+
+def _semantic_audit_record(
+    *,
+    base_name: str,
+    filename: str,
+    description_fragments: list[dict[str, str]],
+    semantic_elements: list[str],
+    status: str,
+    mismatch_reasons: list[str] | None = None,
+) -> dict[str, object]:
+    """Build a normalized semantic-audit record for AC0811..AC0814 style families."""
+    mismatch_reasons = [str(reason) for reason in (mismatch_reasons or []) if str(reason).strip()]
+    joined_description = " ".join(fragment["text"] for fragment in description_fragments).strip()
+    return {
+        "filename": str(filename),
+        "base_name": get_base_name_from_file(base_name).upper(),
+        "description_fragments": description_fragments,
+        "recognized_description_elements": [fragment["text"] for fragment in description_fragments],
+        "description_lookup_keys": [fragment["key"] for fragment in description_fragments],
+        "description_text": joined_description,
+        "derived_elements": [str(element) for element in semantic_elements],
+        "status": str(status),
+        "mismatch_reason": " | ".join(mismatch_reasons),
+        "mismatch_reasons": mismatch_reasons,
+    }
+
+
+def _write_semantic_audit_report(reports_out_dir: str, audit_rows: list[dict[str, object]]) -> None:
+    """Persist semantic audit rows as CSV/JSON for targeted AC0811..AC0814 review."""
+    if not audit_rows:
+        return
+
+    csv_path = os.path.join(reports_out_dir, "semantic_audit_ac0811_ac0814.csv")
+    with open(csv_path, "w", encoding="utf-8", newline="") as f:
+        writer = csv.writer(f, delimiter=";")
+        writer.writerow(
+            [
+                "filename",
+                "base_name",
+                "description_lookup_keys",
+                "recognized_description_elements",
+                "description_text",
+                "derived_elements",
+                "status",
+                "mismatch_reason",
+            ]
+        )
+        for row in audit_rows:
+            writer.writerow(
+                [
+                    row.get("filename", ""),
+                    row.get("base_name", ""),
+                    " | ".join(str(value) for value in row.get("description_lookup_keys", [])),
+                    " | ".join(str(value) for value in row.get("recognized_description_elements", [])),
+                    row.get("description_text", ""),
+                    " | ".join(str(value) for value in row.get("derived_elements", [])),
+                    row.get("status", ""),
+                    row.get("mismatch_reason", ""),
+                ]
+            )
+
+    json_path = os.path.join(reports_out_dir, "semantic_audit_ac0811_ac0814.json")
+    with open(json_path, "w", encoding="utf-8") as f:
+        json.dump(audit_rows, f, ensure_ascii=False, indent=2)
 
 
 def _diff_output_dir(output_root: str) -> str:
@@ -7776,6 +7933,13 @@ def convert_range(
                 )
 
     _harmonize_semantic_size_variants(semantic_results, folder_path, svg_out_dir, reports_out_dir)
+    semantic_audit_rows = [
+        dict(audit)
+        for row in result_map.values()
+        for audit in [dict(row.get("params", {}).get("semantic_audit", {}))]
+        if audit
+    ]
+    _write_semantic_audit_report(reports_out_dir, semantic_audit_rows)
     _write_pixel_delta2_ranking(folder_path, svg_out_dir, reports_out_dir)
     _write_ac08_regression_manifest(
         reports_out_dir,
