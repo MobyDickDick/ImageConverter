@@ -30,9 +30,9 @@ be taken from documentation and marked complete when finished.
 - [x] Remove implicit type changes.
   - Archived for the current ImageConverter repository snapshot: the TinyLanguage type-checking/interpreter sources that would define coercion behavior across expressions, functions, and heap operations are not present in this checkout.
   - Documented the repository-scope mismatch here so roadmap work continues with the next actionable in-repo task instead of blocking on a missing subsystem.
-- [ ] Evaluate simple type inference.
-  - Decide whether a minimal inference pass is worth the maintenance cost.
-  - If yes, document the supported scope and limitations before implementation.
+- [x] Evaluate simple type inference.
+  - Archived for the current ImageConverter repository snapshot: the repository only contains the image-conversion pipeline plus its tests/docs, not the TinyLanguage parser/type-checker sources where a separate inference pass would exist.
+  - Decision: no in-repo implementation is justified here because there is no maintainable host subsystem for inference logic in this checkout; future work should revisit the idea only in a repository snapshot that again contains the TinyLanguage type-analysis pipeline.
 
 ## Runtime
 
