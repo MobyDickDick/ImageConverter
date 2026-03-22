@@ -296,6 +296,117 @@ def test_update_successful_conversions_manifest_appends_missing_variant_with_met
     assert "AC0002_L ; status=semantic_ok ; best_iteration=7 ; diff_score=9.500000 ; error_per_pixel=0.12500000 ; total_delta2=4.000000 ; mean_delta2=4.000000 ; std_delta2=0.000000 ; pixel_count=1" in manifest_text
 
 
+
+def test_update_successful_conversions_manifest_rejects_worse_candidate_and_restores_snapshot(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """A worse reconversion must not overwrite the persisted best-list entry or artifact snapshot."""
+    reports_dir = tmp_path / "reports"
+    svg_dir = tmp_path / "svg"
+    image_dir = tmp_path / "images"
+    reports_dir.mkdir()
+    svg_dir.mkdir()
+    image_dir.mkdir()
+
+    manifest_path = reports_dir / "successful_conversions.txt"
+    existing_line = (
+        "AC0003_L ; status=semantic_ok ; best_iteration=3 ; diff_score=4.000000 ; "
+        "error_per_pixel=0.10000000 ; total_delta2=10.000000 ; mean_delta2=10.000000 ; "
+        "std_delta2=0.000000 ; pixel_count=1"
+    )
+    manifest_path.write_text(existing_line + "\n", encoding="utf-8")
+    (reports_dir / "Iteration_Log.csv").write_text(
+        "Dateiname;Gefundene Elemente;Beste Iteration;Diff-Score;FehlerProPixel\n"
+        "AC0003_L.jpg;SEMANTIC;9;9.00;0.30000000\n",
+        encoding="utf-8-sig",
+    )
+    (reports_dir / "AC0003_L_element_validation.log").write_text("status=semantic_ok\n", encoding="utf-8")
+    (image_dir / "AC0003_L.jpg").write_bytes(b"fake-jpg")
+    (svg_dir / "AC0003_L.svg").write_text("<svg>new-worse</svg>", encoding="utf-8")
+
+    best_dir = reports_dir / "successful_conversions_bestlist"
+    best_dir.mkdir()
+    (best_dir / "AC0003_L.svg").write_text("<svg>old-best</svg>", encoding="utf-8")
+    (best_dir / "AC0003_L_element_validation.log").write_text("status=semantic_ok\nsource=best\n", encoding="utf-8")
+
+    np = conv.np
+    if np is None:
+        pytest.skip("numpy not available in this environment")
+
+    source = np.array([[[10, 10, 10]]], dtype=np.uint8)
+    rendered = np.array([[[14, 10, 10]]], dtype=np.uint8)
+
+    monkeypatch.setattr(conv.cv2, "imread", lambda path: source.copy() if path.endswith("AC0003_L.jpg") else None)
+    monkeypatch.setattr(conv.Action, "render_svg_to_numpy", staticmethod(lambda _svg, _w, _h: rendered.copy()))
+
+    updated_path, metrics = image_composite_converter.update_successful_conversions_manifest_with_metrics(
+        folder_path=str(image_dir),
+        svg_out_dir=str(svg_dir),
+        reports_out_dir=str(reports_dir),
+        manifest_path=manifest_path,
+        successful_variants=["AC0003_L"],
+    )
+
+    assert updated_path == manifest_path
+    assert [row["variant"] for row in metrics] == ["AC0003_L"]
+    assert updated_path.read_text(encoding="utf-8").strip() == existing_line
+    assert (svg_dir / "AC0003_L.svg").read_text(encoding="utf-8") == "<svg>old-best</svg>"
+    assert "source=best" in (reports_dir / "AC0003_L_element_validation.log").read_text(encoding="utf-8")
+
+
+def test_update_successful_conversions_manifest_accepts_better_candidate_and_updates_snapshot(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """A better reconversion should replace the best-list metrics and stored snapshot."""
+    reports_dir = tmp_path / "reports"
+    svg_dir = tmp_path / "svg"
+    image_dir = tmp_path / "images"
+    reports_dir.mkdir()
+    svg_dir.mkdir()
+    image_dir.mkdir()
+
+    manifest_path = reports_dir / "successful_conversions.txt"
+    manifest_path.write_text(
+        "AC0004_L ; status=semantic_ok ; best_iteration=2 ; diff_score=8.000000 ; error_per_pixel=0.20000000 ; total_delta2=12.000000 ; mean_delta2=12.000000 ; std_delta2=0.000000 ; pixel_count=1\n",
+        encoding="utf-8",
+    )
+    (reports_dir / "Iteration_Log.csv").write_text(
+        "Dateiname;Gefundene Elemente;Beste Iteration;Diff-Score;FehlerProPixel\n"
+        "AC0004_L.jpg;SEMANTIC;5;5.50;0.05000000\n",
+        encoding="utf-8-sig",
+    )
+    (reports_dir / "AC0004_L_element_validation.log").write_text("status=semantic_ok\n", encoding="utf-8")
+    (image_dir / "AC0004_L.jpg").write_bytes(b"fake-jpg")
+    (svg_dir / "AC0004_L.svg").write_text("<svg>new-better</svg>", encoding="utf-8")
+
+    np = conv.np
+    if np is None:
+        pytest.skip("numpy not available in this environment")
+
+    source = np.array([[[10, 10, 10]]], dtype=np.uint8)
+    rendered = np.array([[[11, 10, 10]]], dtype=np.uint8)
+
+    monkeypatch.setattr(conv.cv2, "imread", lambda path: source.copy() if path.endswith("AC0004_L.jpg") else None)
+    monkeypatch.setattr(conv.Action, "render_svg_to_numpy", staticmethod(lambda _svg, _w, _h: rendered.copy()))
+
+    updated_path, _metrics = image_composite_converter.update_successful_conversions_manifest_with_metrics(
+        folder_path=str(image_dir),
+        svg_out_dir=str(svg_dir),
+        reports_out_dir=str(reports_dir),
+        manifest_path=manifest_path,
+        successful_variants=["AC0004_L"],
+    )
+
+    manifest_text = updated_path.read_text(encoding="utf-8")
+    assert "best_iteration=5" in manifest_text
+    assert "diff_score=5.500000" in manifest_text
+    assert "error_per_pixel=0.05000000" in manifest_text
+    assert "mean_delta2=1.000000" in manifest_text
+    best_svg = (reports_dir / "successful_conversions_bestlist" / "AC0004_L.svg").read_text(encoding="utf-8")
+    assert best_svg == "<svg>new-better</svg>"
+
 def test_co2_label_defaults_use_center_co_anchor_mode() -> None:
     """Default CO₂ layout should keep center_co mode and only shift left if required."""
     params = Action._apply_co2_label(Action._default_ac0870_params(15, 15))

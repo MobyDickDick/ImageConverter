@@ -44,7 +44,7 @@ python -m src.image_composite_converter \
 python -m src.successful_conversion_quality_app
 ```
 
-Die kleine Anwendung liest `artifacts/converted_images/reports/successful_conversions.txt`, ergänzt die dort bereits als erfolgreich markierten Varianten automatisch um Qualitätskennzahlen wie `total_delta2 = Σ((ΔR)^2 + (ΔG)^2 + (ΔB)^2)`, `mean_delta2` und `std_delta2` und schreibt zusätzlich weiterhin einen CSV/TXT-Report zur Übersicht.
+Die kleine Anwendung liest `artifacts/converted_images/reports/successful_conversions.txt` als Bestenliste, ergänzt die dort bereits als erfolgreich markierten Varianten automatisch um Qualitätskennzahlen wie `total_delta2 = Σ((ΔR)^2 + (ΔG)^2 + (ΔB)^2)`, `mean_delta2` und `std_delta2` und übernimmt neue Konvertierungen nur dann in Manifest und Snapshot, wenn sich mindestens eine Kernmetrik verbessert. Schlechtere Neu-Konvertierungen werden verworfen und – falls vorhanden – aus der gespeicherten Bestenlisten-Sicherung wiederhergestellt. Zusätzlich wird weiterhin ein CSV/TXT-Report zur Übersicht geschrieben.
 
 ### Annotate source images
 
