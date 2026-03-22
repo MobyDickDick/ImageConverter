@@ -466,6 +466,26 @@ def test_generate_badge_svg_emits_background_rect_when_requested() -> None:
     assert '<rect x="0" y="0" width="30.0000" height="30.0000" fill="#ffffff"/>' in svg
 
 
+def test_generate_badge_svg_extends_border_touching_arm_caps() -> None:
+    """Rounded arms should extend slightly past the viewBox when they end on the border."""
+    params = {
+        "arm_enabled": True,
+        "arm_x1": 21.5,
+        "arm_y1": 10.0,
+        "arm_x2": 35.0,
+        "arm_y2": 10.0,
+        "arm_stroke": 1.0,
+        "stroke_gray": 120,
+        "circle_enabled": False,
+        "draw_text": False,
+    }
+
+    svg = Action.generate_badge_svg(35, 20, params)
+
+    assert 'x1="21.5000"' in svg
+    assert 'x2="35.5000"' in svg
+
+
 def test_fit_semantic_badge_uses_border_touch_fallback_for_tiny_plain_ring() -> None:
     """Tiny plain rings that touch every border should expand to the canvas-fitting circle."""
     if image_composite_converter.np is None or image_composite_converter.cv2 is None:
