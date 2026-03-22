@@ -1550,6 +1550,7 @@ class Action:
         - Line widths use integer pixel steps.
         """
         p = dict(params)
+        raw_circle_radius = float(p["r"]) if p.get("circle_enabled", True) and "r" in p else None
 
         half_keys = (
             "cx",
@@ -1590,6 +1591,36 @@ class Action:
 
         p = Action._enforce_circle_connector_symmetry(p, w, h)
         p = Action._clamp_circle_inside_canvas(p, w, h)
+
+        if (
+            raw_circle_radius is not None
+            and "cx" in p
+            and "cy" in p
+            and "r" in p
+        ):
+            canvas_fit_r = float(
+                Action._max_circle_radius_inside_canvas(
+                    float(p["cx"]),
+                    float(p["cy"]),
+                    w,
+                    h,
+                    float(p.get("stroke_circle", 0.0)),
+                )
+            )
+            snapped_canvas_fit_r = float(Action._snap_half(canvas_fit_r))
+            radius_gap_to_canvas = canvas_fit_r - raw_circle_radius
+            if (
+                snapped_canvas_fit_r > float(p["r"])
+                and radius_gap_to_canvas >= 0.0
+                and radius_gap_to_canvas <= 0.5
+                and (canvas_fit_r - float(p["r"])) <= 0.5
+            ):
+                p["r"] = float(
+                    max(
+                        float(p.get("min_circle_radius", 1.0)),
+                        min(snapped_canvas_fit_r, canvas_fit_r),
+                    )
+                )
 
         # Symmetry enforcement may reintroduce non-snapped values.
         for key in half_keys:
