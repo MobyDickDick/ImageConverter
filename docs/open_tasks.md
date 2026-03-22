@@ -30,8 +30,8 @@ focused on the actual project scope.
 
 - [x] Add a family-level semantic rule for the plain-ring family `AC0800`.
   - `AC0800` now derives `SEMANTIC: Kreis ohne Buchstabe` as an explicit semantic family instead of relying on text clues alone.
-  - `AC0800_L` and `AC0800_M` are treated as currently optimal conversions and are locked into the AC08 regression suite so future adjustments must keep them `semantic_ok`.
-  - `AC0800_S` now keeps the converted circle concentric with the template and may no longer shrink below the original template radius during circle-only validation.
+  - `AC0800_L`, `AC0800_M`, and `AC0800_S` are treated as currently optimal conversions and are locked into the AC08 regression suite so future adjustments must keep them `semantic_ok`.
+  - `AC0800_S` now keeps the converted circle concentric with the template and may no longer shrink below the original template radius during circle-only validation, so the small plain-ring variant is no longer tracked as an open geometric follow-up.
 
 - [ ] Refresh the AC08 reports after the next semantic round.
   - Re-run the affected AC08 families once the connector-orientation and circle-fallback fixes are in place.

@@ -564,6 +564,25 @@ def test_validate_badge_by_elements_keeps_ac0800_s_at_template_radius_floor() ->
     assert float(params["r"]) >= template_r - 0.01
 
 
+def test_make_badge_params_reanchors_ac0811_l_stem_after_template_center_lock() -> None:
+    """AC0811_L should keep its stem attached to the circle after template recentering."""
+    if image_composite_converter.cv2 is None:
+        pytest.skip("cv2 not available in this environment")
+
+    img = image_composite_converter.cv2.imread("artifacts/images_to_convert/AC0811_L.jpg")
+    assert img is not None
+
+    defaults = Action._default_ac0811_params(img.shape[1], img.shape[0])
+    params = Action.make_badge_params(img.shape[1], img.shape[0], "AC0811", img)
+
+    expected_top = float(params["cy"]) + float(params["r"]) - (float(params["stem_width"]) * 0.55)
+    default_stem_len = float(defaults["stem_bottom"]) - float(defaults["stem_top"])
+    fitted_stem_len = float(params["stem_bottom"]) - float(params["stem_top"])
+
+    assert float(params["stem_top"]) == pytest.approx(expected_top)
+    assert fitted_stem_len >= (default_stem_len * 0.90) - 0.01
+
+
 
 def test_finalize_ac08_small_variant_keeps_only_small_variant_metadata() -> None:
     """Small AC08 `_S` variants should still flag compact mode without forcing connector bounds."""
