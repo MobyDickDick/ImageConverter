@@ -218,6 +218,36 @@ def test_family_harmonized_badge_colors_boosts_low_contrast() -> None:
     assert colors["fill_gray"] - colors["stroke_gray"] >= 18
 
 
+def test_update_successful_conversions_manifest_keeps_existing_line_without_fresh_metrics(tmp_path: Path) -> None:
+    """Existing manifest metrics must survive when a variant is not reconverted in the current run."""
+    reports_dir = tmp_path / "reports"
+    svg_dir = tmp_path / "svg"
+    images_dir = tmp_path / "images"
+    reports_dir.mkdir()
+    svg_dir.mkdir()
+    images_dir.mkdir()
+
+    manifest_path = reports_dir / "successful_conversions.txt"
+    existing_line = (
+        "AC0800_L ; status=semantic_ok ; best_iteration=42 ; diff_score=0.123456 ; "
+        "error_per_pixel=0.00001234 ; total_delta2=12.500000 ; mean_delta2=0.100000 ; "
+        "std_delta2=0.010000 ; pixel_count=125  # bereits bestätigt"
+    )
+    manifest_path.write_text(existing_line + "\n", encoding="utf-8")
+
+    updated_path, metrics = image_composite_converter.update_successful_conversions_manifest_with_metrics(
+        folder_path=str(images_dir),
+        svg_out_dir=str(svg_dir),
+        reports_out_dir=str(reports_dir),
+        manifest_path=manifest_path,
+        successful_variants=["AC0800_L"],
+    )
+
+    assert updated_path == manifest_path
+    assert len(metrics) == 1
+    assert updated_path.read_text(encoding="utf-8").strip() == existing_line
+
+
 def test_co2_label_defaults_use_center_co_anchor_mode() -> None:
     """Default CO₂ layout should keep center_co mode and only shift left if required."""
     params = Action._apply_co2_label(Action._default_ac0870_params(15, 15))
