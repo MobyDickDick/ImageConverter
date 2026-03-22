@@ -1803,7 +1803,7 @@ class Action:
             p["stem_enabled"] = True
             p["stem_width"] = stem_width
             p["stem_x"] = cx - (stem_width / 2.0)
-            p["stem_top"] = cy + r
+            p["stem_top"] = cy + r - (stem_width * 0.55)
             p["stem_bottom"] = canvas_height
             stem_len = float(max(0.0, canvas_height - (cy + r)))
             ratio = float(max(0.0, min(1.0, float(p.get("stem_len_min_ratio", 0.65)))))
@@ -1989,6 +1989,12 @@ class Action:
         p["lock_colors"] = True
         if symbol_name != "AC0820":
             p = Action._normalize_centered_co2_label(p)
+        if symbol_name == "AC0831" and str(p.get("text_mode", "")).lower() == "co2":
+            p["fill_gray"] = 238
+            p["stroke_gray"] = 155
+            p["text_gray"] = 155
+            if p.get("stem_enabled"):
+                p["stem_gray"] = 155
         if symbol_name == "AC0820" and str(p.get("text_mode", "")).lower() == "co2":
             # AC0820 variants (L/M/S): center the full CO₂ cluster horizontally.
             p["co2_anchor_mode"] = "cluster"
@@ -2193,7 +2199,8 @@ class Action:
             if "stem_width" in params and "cx" in params:
                 params["stem_x"] = float(params["cx"]) - (float(params["stem_width"]) / 2.0)
             if "cy" in params and "r" in params:
-                params["stem_top"] = float(params["cy"]) + float(params["r"])
+                stem_width = float(params.get("stem_width", params.get("stroke_circle", Action.AC08_STROKE_WIDTH_PX)))
+                params["stem_top"] = float(params["cy"]) + float(params["r"]) - (stem_width * 0.55)
         return params
 
     @staticmethod
@@ -2461,6 +2468,7 @@ class Action:
         # applies a small left compensation so the overall CO₂ cluster appears
         # horizontally centered in the circle.
         params["co2_anchor_mode"] = str(params.get("co2_anchor_mode", "center_co"))
+        params["co2_index_mode"] = str(params.get("co2_index_mode", "subscript"))
         return params
 
     @staticmethod
@@ -2591,24 +2599,42 @@ class Action:
 
         # Keep the subscript readable and away from the border, but do not let it
         # drive the vertical centering of the main "CO" run.
-        min_subscript_offset = font_size * 0.08
-        max_subscript_offset = font_size * 0.24
-        subscript_offset = float(max(min_subscript_offset, min(max_subscript_offset, subscript_offset)))
-        subscript_y = y_base + subscript_offset
-        sub_bottom = subscript_y + (sub_font_px * 0.35)
-        if sub_bottom > inner_bottom:
-            max_offset = inner_bottom - y_base - (sub_font_px * 0.35)
-            subscript_offset = float(max(min_subscript_offset, min(max_subscript_offset, max_offset)))
+        index_mode = str(params.get("co2_index_mode", "subscript")).lower()
+        if index_mode == "superscript":
+            min_index_offset = font_size * 0.10
+            max_index_offset = font_size * 0.34
+            index_offset = float(max(min_index_offset, min(max_index_offset, font_size * float(params.get("co2_superscript_offset_scale", 0.22)))))
+            subscript_y = y_base - index_offset
+            sub_top = subscript_y - (sub_font_px * 0.60)
+            if sub_top < inner_top:
+                max_offset = max(min_index_offset, y_base - inner_top - (sub_font_px * 0.60))
+                index_offset = float(max(min_index_offset, min(max_index_offset, max_offset)))
+                subscript_y = y_base - index_offset
+            sub_bottom = subscript_y + (sub_font_px * 0.35)
+            if sub_bottom > inner_bottom:
+                min_offset = y_base - inner_bottom + (sub_font_px * 0.35)
+                index_offset = float(max(min_index_offset, min(max_index_offset, min_offset)))
+                subscript_y = y_base - index_offset
+        else:
+            min_subscript_offset = font_size * 0.08
+            max_subscript_offset = font_size * 0.24
+            subscript_offset = float(max(min_subscript_offset, min(max_subscript_offset, subscript_offset)))
             subscript_y = y_base + subscript_offset
+            sub_bottom = subscript_y + (sub_font_px * 0.35)
+            if sub_bottom > inner_bottom:
+                max_offset = inner_bottom - y_base - (sub_font_px * 0.35)
+                subscript_offset = float(max(min_subscript_offset, min(max_subscript_offset, max_offset)))
+                subscript_y = y_base + subscript_offset
 
-        sub_top = subscript_y - (sub_font_px * 0.60)
-        if sub_top < inner_top:
-            min_offset = inner_top - y_base + (sub_font_px * 0.60)
-            subscript_offset = float(max(min_subscript_offset, min(max_subscript_offset, min_offset)))
-            subscript_y = y_base + subscript_offset
+            sub_top = subscript_y - (sub_font_px * 0.60)
+            if sub_top < inner_top:
+                min_offset = inner_top - y_base + (sub_font_px * 0.60)
+                subscript_offset = float(max(min_subscript_offset, min(max_subscript_offset, min_offset)))
+                subscript_y = y_base + subscript_offset
 
         return {
             "anchor_mode": anchor_mode,
+            "index_mode": index_mode,
             "font_size": font_size,
             "sub_scale": sub_scale,
             "sub_font_px": sub_font_px,
@@ -2647,19 +2673,25 @@ class Action:
 
     @staticmethod
     def _tune_ac0831_co2_badge(params: dict) -> dict:
-        """Stabilize AC0831 text placement for vertically elongated CO₂ badges."""
+        """Stabilize AC0831 text placement for vertically elongated CO² badges."""
         p = dict(params)
         r = float(p.get("r", 0.0))
-        p["stroke_gray"] = Action.LIGHT_CIRCLE_STROKE_GRAY
+        p["stroke_gray"] = 155
+        p["fill_gray"] = 238
         p["text_gray"] = p["stroke_gray"]
         p["stroke_circle"] = Action.AC08_STROKE_WIDTH_PX
+        p["stem_gray"] = p["stroke_gray"]
         # Vertical connector variants read closer to the source rasters when the
-        # whole CO₂ cluster is centered as a unit instead of keeping only "CO"
-        # centered. A slight downward optical bias better matches badges such as
-        # AC0831_L where the merged JPEG text blob sits a little below center.
+        # whole CO² cluster is centered as a unit instead of keeping only "CO"
+        # centered. AC0831 follows the reference with a superscript 2 and a
+        # slightly higher text position than the generic vertical CO₂ family.
         p["co2_anchor_mode"] = "cluster"
-        p["co2_optical_bias"] = float(p.get("co2_optical_bias", 0.10))
-        p["co2_dy"] = float(p.get("co2_dy", 0.0)) + (0.07 * r)
+        p["co2_index_mode"] = "superscript"
+        p["co2_optical_bias"] = float(p.get("co2_optical_bias", 0.08))
+        p["co2_dy"] = float(max(float(p.get("co2_dy", 0.0)), 0.35))
+        p["co2_font_scale"] = min(float(p.get("co2_font_scale", 0.82)), 0.74)
+        p["co2_sub_font_scale"] = min(float(p.get("co2_sub_font_scale", 66.0)), 48.0)
+        p["co2_superscript_offset_scale"] = float(min(float(p.get("co2_superscript_offset_scale", 0.12)), 0.12))
         min_dim = float(
             min(
                 float(p.get("width", 0.0) or 0.0),
@@ -2672,10 +2704,12 @@ class Action:
             # Tiny vertical CO₂ badges compress the glyph cluster into a single
             # JPEG blob. Rendering them with the generic AC0831 scale makes the
             # label look too wide/high compared to the reference raster, so keep
-            # the text slightly tighter and bias it a little lower.
-            p["co2_font_scale"] = min(float(p.get("co2_font_scale", 0.82)), 0.86)
-            p["co2_optical_bias"] = max(float(p.get("co2_optical_bias", 0.15)), 0.15)
-            p["co2_dy"] = max(float(p.get("co2_dy", 0.0)), 0.06 * r)
+            # the text slightly tighter while keeping the superscript readable.
+            p["co2_font_scale"] = min(float(p.get("co2_font_scale", 0.74)), 0.74)
+            p["co2_sub_font_scale"] = min(float(p.get("co2_sub_font_scale", 48.0)), 48.0)
+            p["co2_optical_bias"] = max(float(p.get("co2_optical_bias", 0.10)), 0.10)
+            p["co2_dy"] = float(max(float(p.get("co2_dy", 0.0)), 0.35))
+            p["co2_superscript_offset_scale"] = float(min(float(p.get("co2_superscript_offset_scale", 0.12)), 0.12))
         return p
 
     @staticmethod

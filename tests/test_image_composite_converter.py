@@ -1926,22 +1926,26 @@ def test_finalize_vertical_non_ac0820_co2_keeps_text_scale_unbounded() -> None:
 
 
 def test_make_badge_params_applies_ac0831_vertical_co2_tuning() -> None:
-    """AC0831 should use cluster-centered CO₂ placement with a slight downward bias."""
+    """AC0831 should use cluster-centered CO² placement with compact sizing."""
     params = Action.make_badge_params(25, 45, "AC0831", None)
 
     assert params["co2_anchor_mode"] == "cluster"
-    assert float(params["co2_optical_bias"]) >= 0.10
-    assert float(params["co2_dy"]) > 0.0
+    assert params["co2_index_mode"] == "superscript"
+    assert float(params["co2_optical_bias"]) >= 0.08
+    assert float(params["co2_font_scale"]) <= 0.74
+    assert float(params["co2_sub_font_scale"]) <= 48.0
+    assert float(params["co2_dy"]) >= 0.35
 
 
 def test_make_badge_params_applies_compact_ac0831_small_variant_text_tuning() -> None:
-    """Tiny AC0831 variants should keep the CO₂ cluster tighter and slightly lower."""
+    """Tiny AC0831 variants should keep the CO² cluster tight and readable."""
     params = Action.make_badge_params(15, 25, "AC0831", None)
 
     assert params["co2_anchor_mode"] == "cluster"
-    assert float(params["co2_font_scale"]) <= 0.86
-    assert float(params["co2_optical_bias"]) >= 0.15
-    assert float(params["co2_dy"]) >= float(params["r"]) * 0.06
+    assert params["co2_index_mode"] == "superscript"
+    assert float(params["co2_font_scale"]) <= 0.74
+    assert float(params["co2_sub_font_scale"]) <= 48.0
+    assert float(params["co2_dy"]) >= 0.35
 
 
 def test_finalize_tiny_non_ac0820_co2_keeps_text_scale_unbounded() -> None:
