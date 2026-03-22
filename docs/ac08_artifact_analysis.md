@@ -106,7 +106,7 @@ Priorität: **mittel**
 
 Die nächste Verbesserungsrunde sollte erst als abgeschlossen gelten, wenn:
 
-- alle oben genannten Familien erneut konvertiert wurden und das feste AC08-Regression-Set die bisher als gut markierten Varianten `AC0800_L`, `AC0800_M`, `AC0800_S` und `AC0811_L` erneut geprüft hat,
+- alle oben genannten Familien erneut konvertiert wurden und das feste AC08-Regression-Set die bisher als gut markierten Varianten aus `artifacts/converted_images/reports/ac08_previously_good_variants.txt` erneut geprüft hat,
 - die betroffenen `*_element_validation.log`-Dateien keinen
   `semantic_mismatch` mehr enthalten oder bewusst begründete Restfälle benennen,
 - die neue Reportinstrumentierung die Richtung der erkannten Anschlüsse und die

@@ -1764,7 +1764,18 @@ def test_convert_range_filters_to_explicit_selected_variants_and_writes_regressi
     assert "AC0999_L" not in manifest
     assert "set;variant;focus;reason" in manifest
     assert image_composite_converter.AC08_REGRESSION_SET_NAME in manifest
+    assert "AC0800_L;stable_good;Previously marked good plain-ring large variant" in manifest
+    assert "AC0811_L;stable_good;Known regression-safe good conversion anchor" in manifest
     assert "expected_reports=Iteration_Log.csv,quality_tercile_passes.csv,pixel_delta2_ranking.csv,pixel_delta2_summary.txt,ac08_weak_family_status.csv,ac08_weak_family_status.txt,ac08_success_metrics.csv,ac08_success_criteria.txt" in summary
+
+
+def test_load_ac08_previously_good_variants_uses_manifest(tmp_path: Path) -> None:
+    manifest = tmp_path / "ac08_previously_good_variants.txt"
+    manifest.write_text("AC0800_L\nac0811_l\n# comment\nAC0800_L\n", encoding="utf-8")
+
+    variants = image_composite_converter._load_ac08_previously_good_variants(manifest)
+
+    assert variants == ("AC0800_L", "AC0811_L")
 
 
 def test_write_ac08_success_criteria_report_summarizes_regression_metrics(tmp_path: Path) -> None:

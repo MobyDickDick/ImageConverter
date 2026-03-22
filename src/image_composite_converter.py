@@ -29,17 +29,24 @@ import struct
 OPTIONAL_DEPENDENCY_ERRORS: dict[str, str] = {}
 
 
-AC08_PREVIOUSLY_GOOD_VARIANTS: tuple[str, ...] = (
+AC08_PREVIOUSLY_GOOD_VARIANTS_MANIFEST = Path("artifacts/converted_images/reports/ac08_previously_good_variants.txt")
+AC08_PREVIOUSLY_GOOD_VARIANTS_FALLBACK: tuple[str, ...] = (
     "AC0800_L",
     "AC0800_M",
     "AC0800_S",
     "AC0811_L",
 )
 
-AC08_REGRESSION_CASES: tuple[dict[str, str], ...] = (
-    {"variant": "AC0800_L", "focus": "stable_good", "reason": "Previously marked good plain-ring large variant that must stay semantic_ok after every AC08 adjustment."},
-    {"variant": "AC0800_M", "focus": "stable_good", "reason": "Previously marked good plain-ring medium variant that must stay semantic_ok after every AC08 adjustment."},
-    {"variant": "AC0800_S", "focus": "stable_good", "reason": "Previously marked good plain-ring small variant that must stay semantic_ok after every AC08 adjustment."},
+
+AC08_STABLE_GOOD_REASON_OVERRIDES: dict[str, str] = {
+    "AC0800_L": "Previously marked good plain-ring large variant that must stay semantic_ok after every AC08 adjustment.",
+    "AC0800_M": "Previously marked good plain-ring medium variant that must stay semantic_ok after every AC08 adjustment.",
+    "AC0800_S": "Previously marked good plain-ring small variant that must stay semantic_ok after every AC08 adjustment.",
+    "AC0811_L": "Known regression-safe good conversion anchor for circle-with-stem semantics; must remain semantic_ok.",
+}
+
+
+_AC08_BASE_REGRESSION_CASES: tuple[dict[str, str], ...] = (
     {"variant": "AC0882_S", "focus": "stagnation", "reason": "Small left-connector outlier that previously burned many near-identical validation rounds."},
     {"variant": "AC0837_L", "focus": "stagnation", "reason": "Large left-connector case used to verify adaptive search still moves on stubborn families."},
     {"variant": "AC0839_S", "focus": "small_variant", "reason": "Small right-connector badge that tends to drift in geometry and text placement."},
@@ -47,11 +54,45 @@ AC08_REGRESSION_CASES: tuple[dict[str, str], ...] = (
     {"variant": "AC0831_L", "focus": "semantic_vertical", "reason": "Vertical connector family representative for stem alignment and text balance."},
     {"variant": "AC0834_S", "focus": "small_variant", "reason": "Small mirrored connector badge included to catch asymmetric regressions on _S variants."},
     {"variant": "AC0835_S", "focus": "small_variant", "reason": "Small circle/text family member that stresses compact text scaling without connectors."},
-    {"variant": "AC0811_L", "focus": "stable_good", "reason": "Known regression-safe good conversion anchor for circle-with-stem semantics; must remain semantic_ok."},
     {"variant": "AC0812_M", "focus": "semantic_horizontal", "reason": "Medium left-connector case that complements AC0811_L and covers family-specific semantic overrides."},
 )
 
-AC08_REGRESSION_SET_NAME = "ac08_core_12"
+
+def _load_ac08_previously_good_variants(manifest_path: Path = AC08_PREVIOUSLY_GOOD_VARIANTS_MANIFEST) -> tuple[str, ...]:
+    """Load the canonical AC08 'previously good' manifest from disk."""
+    if manifest_path.exists():
+        variants: list[str] = []
+        for raw_line in manifest_path.read_text(encoding="utf-8").splitlines():
+            line = raw_line.split("#", 1)[0].strip().upper()
+            if not line:
+                continue
+            variants.append(line)
+        normalized = tuple(dict.fromkeys(variants))
+        if normalized:
+            return normalized
+    return AC08_PREVIOUSLY_GOOD_VARIANTS_FALLBACK
+
+
+AC08_PREVIOUSLY_GOOD_VARIANTS = _load_ac08_previously_good_variants()
+
+
+def _build_ac08_regression_cases() -> tuple[dict[str, str], ...]:
+    stable_good_cases = [
+        {
+            "variant": variant,
+            "focus": "stable_good",
+            "reason": AC08_STABLE_GOOD_REASON_OVERRIDES.get(
+                variant,
+                f"Previously marked good AC08 variant {variant} that must stay semantic_ok after every future adjustment.",
+            ),
+        }
+        for variant in AC08_PREVIOUSLY_GOOD_VARIANTS
+    ]
+    return tuple(stable_good_cases + list(_AC08_BASE_REGRESSION_CASES))
+
+
+AC08_REGRESSION_CASES = _build_ac08_regression_cases()
+AC08_REGRESSION_SET_NAME = f"ac08_core_{len(AC08_REGRESSION_CASES)}"
 AC08_REGRESSION_VARIANTS = tuple(case["variant"] for case in AC08_REGRESSION_CASES)
 
 
