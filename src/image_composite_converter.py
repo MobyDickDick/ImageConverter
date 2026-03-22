@@ -2095,10 +2095,18 @@ class Action:
                 if p.get("arm_enabled"):
                     p["lock_arm_center_to_circle"] = True
 
+            geometry_reanchored_to_template = False
             if bool(p.get("lock_circle_cx", False)) and "template_circle_cx" in p:
                 p["cx"] = float(p["template_circle_cx"])
+                geometry_reanchored_to_template = True
             if bool(p.get("lock_circle_cy", False)) and "template_circle_cy" in p:
                 p["cy"] = float(p["template_circle_cy"])
+                geometry_reanchored_to_template = True
+            if geometry_reanchored_to_template and p.get("circle_enabled", True):
+                if p.get("stem_enabled"):
+                    p = Action._align_stem_to_circle_center(p)
+                if p.get("arm_enabled"):
+                    Action._reanchor_arm_to_circle_edge(p, float(p.get("r", 0.0)))
         if p.get("stem_enabled"):
             Action._persist_connector_length_floor(p, "stem", default_ratio=0.65)
         if p.get("arm_enabled"):

@@ -16,7 +16,7 @@ Die verbliebenen Mismatches clustern stark auf wenige Familien:
 
 | Familie | Betroffene Varianten | Häufigste Beobachtung |
 | --- | --- | --- |
-| `AC0800` | `S` | Plain-Ring-Semantik ist vorhanden; für die kleine Variante bleibt die Radius-Stabilität der sensible Punkt |
+| `AC0800` | – | Plain-Ring-Semantik ist stabil; `L/M/S` gelten aktuell als gut konvertiert und laufen nur noch als Regression mit |
 | `AC0811` | `M`, `S` | Kreis + vertikaler Stiel werden falsch als waagrechter Strich bzw. fehlender Kreis bewertet |
 | `AC0813` | `L`, `M` | Vertikaler Anschluss wird in der Validierung als waagrechter Strich fehlklassifiziert |
 | `AC0814` | `S` | Kreisdetektion bricht im kleinen Raster zusammen |
@@ -39,12 +39,11 @@ Die Reportdaten zeigen drei wiederkehrende Problemklassen:
    - Das deutet eher auf ein Validierungs-/Primitiverkennungsproblem als auf ein
      reines SVG-Layoutproblem hin.
 
-3. **Plain-circle-Familie `AC0800_S` bleibt geometrisch sensibel**
-   - `AC0800_L` und `AC0800_M` gelten aktuell als optimal konvertiert und sollten
-     nur noch regressionsgesichert mitlaufen.
-   - Die kleine Variante ist weiterhin der empfindlichste Fall, weil ihr Kreis
-     trotz korrekter Konzentrizität optisch zu klein werden kann, wenn die
-     Radius-Optimierung unter die Template-Geometrie fällt.
+3. **Plain-circle-Familie `AC0800` ist derzeit stabil**
+   - `AC0800_L`, `AC0800_M` und `AC0800_S` gelten aktuell als gut konvertiert und
+     sollten nur noch regressionsgesichert mitlaufen.
+   - Die kleine Variante behält inzwischen Konzentrizität und Template-Radius,
+     sodass sie nicht mehr als eigener Problemcluster behandelt werden muss.
 
 ## Empfohlene nächste Algorithmus-Maßnahmen
 
@@ -75,15 +74,15 @@ Priorität: **hoch**
 - Für diese Familien zusätzliche Debug-Marker in den Report aufnehmen, z. B.
   `primitive_arm_orientation=vertical|horizontal|ambiguous`.
 
-### 3. Kleine `AC0800`-Variante geometrisch stabil halten
+### 3. Plain-circle-Familie `AC0800` regressionssicher halten
 
 Priorität: **mittel**
 
-- `AC0800_L` und `AC0800_M` als optimale Referenzvarianten beibehalten und bei
-  künftigen AC08-Anpassungen immer mitprüfen.
-- Für `AC0800_S` sicherstellen, dass die Kreis-Optimierung die Template-Radius-
-  Untergrenze nicht unterschreitet, auch wenn Anti-Aliasing oder JPEG-Artefakte
-  lokale Fehlerminima erzeugen.
+- `AC0800_L`, `AC0800_M` und `AC0800_S` als optimale Referenzvarianten
+  beibehalten und bei künftigen AC08-Anpassungen immer mitprüfen.
+- Die bereits eingeführte Template-Radius-Untergrenze für `AC0800_S`
+  regressionsgesichert beibehalten, damit Anti-Aliasing oder JPEG-Artefakte die
+  kleine Plain-Ring-Variante nicht erneut unterschneiden.
 - Die Plain-Ring-Familie weiterhin mit gezielten Regressionstests für `L/M/S`
   absichern.
 
