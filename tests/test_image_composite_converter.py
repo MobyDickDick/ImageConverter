@@ -1783,6 +1783,18 @@ def test_write_ac08_success_criteria_report_summarizes_regression_metrics(tmp_pa
         "1;AC0835_S.jpg;0.01000000;0.01200000;10.000000;10.500000;0;rejected_regression;128;6\n",
         encoding="utf-8",
     )
+    (reports_dir / "AC0800_L_element_validation.log").write_text(
+        "run-meta: seed=1\nstatus=semantic_ok\nRunde 1: elementweise Validierung gestartet\n",
+        encoding="utf-8",
+    )
+    (reports_dir / "AC0800_M_element_validation.log").write_text(
+        "run-meta: seed=1\nstatus=semantic_ok\nRunde 1: elementweise Validierung gestartet\n",
+        encoding="utf-8",
+    )
+    (reports_dir / "AC0800_S_element_validation.log").write_text(
+        "run-meta: seed=1\nstatus=semantic_ok\nRunde 1: elementweise Validierung gestartet\n",
+        encoding="utf-8",
+    )
     (reports_dir / "AC0811_L_element_validation.log").write_text(
         "run-meta: seed=1\nstatus=semantic_mismatch\nRunde 1: elementweise Validierung gestartet\n",
         encoding="utf-8",
@@ -1809,10 +1821,30 @@ def test_write_ac08_success_criteria_report_summarizes_regression_metrics(tmp_pa
     assert "batch_abort_or_render_failure_count;1" in metrics
     assert "rejected_regression_count;1" in metrics
     assert "accepted_regression_count;0" in metrics
+    assert "previous_good_expected;4" in metrics
+    assert "previous_good_preserved_count;3" in metrics
+    assert "previous_good_regressed_count;1" in metrics
+    assert "previous_good_missing_count;0" in metrics
     assert "criterion_no_new_batch_aborts=0" in summary
+    assert "previous_good_regressed=AC0811_L" in summary
     assert "criterion_no_accepted_regressions=1" in summary
     assert "criterion_regression_set_improved=1" in summary
     assert "overall_success=0" in summary
+
+
+def test_summarize_previous_good_ac08_variants_detects_regressions(tmp_path: Path) -> None:
+    reports_dir = tmp_path / "reports"
+    reports_dir.mkdir()
+    (reports_dir / "AC0800_L_element_validation.log").write_text("status=semantic_ok\n", encoding="utf-8")
+    (reports_dir / "AC0800_M_element_validation.log").write_text("status=semantic_ok\n", encoding="utf-8")
+    (reports_dir / "AC0800_S_element_validation.log").write_text("status=semantic_mismatch\n", encoding="utf-8")
+
+    summary = image_composite_converter._summarize_previous_good_ac08_variants(str(reports_dir))
+
+    assert summary["expected"] == list(image_composite_converter.AC08_PREVIOUSLY_GOOD_VARIANTS)
+    assert summary["preserved"] == ["AC0800_L", "AC0800_M"]
+    assert summary["regressed"] == ["AC0800_S"]
+    assert summary["missing"] == ["AC0811_L"]
 
 
 def test_parse_description_extracts_documented_alias_refs() -> None:

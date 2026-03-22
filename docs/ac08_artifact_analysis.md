@@ -100,13 +100,13 @@ Priorität: **mittel**
 1. Vertikal-vs.-horizontal-Fehlklassifikation (`AC0811`, `AC0813`, `AC0831`, `AC0836`)
 2. Kreis-Fallback für `_S`-Varianten (`AC0811_S`, `AC0814_S`, `AC0870_S`)
 3. Semantische Familienregel für `AC0800`
-4. Danach AC08-Regression-Set und Report-Snapshot neu erzeugen
+4. Danach AC08-Regression-Set inklusive aller bisher als gut markierten Varianten neu erzeugen
 
 ## Definition of done für den nächsten AC08-Zyklus
 
 Die nächste Verbesserungsrunde sollte erst als abgeschlossen gelten, wenn:
 
-- alle oben genannten Familien erneut konvertiert wurden,
+- alle oben genannten Familien erneut konvertiert wurden und das feste AC08-Regression-Set die bisher als gut markierten Varianten `AC0800_L`, `AC0800_M`, `AC0800_S` und `AC0811_L` erneut geprüft hat,
 - die betroffenen `*_element_validation.log`-Dateien keinen
   `semantic_mismatch` mehr enthalten oder bewusst begründete Restfälle benennen,
 - die neue Reportinstrumentierung die Richtung der erkannten Anschlüsse und die
