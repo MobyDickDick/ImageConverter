@@ -1931,11 +1931,46 @@ def test_load_successful_conversions_uses_manifest_and_allows_non_ac08_entries(t
     manifest = tmp_path / "successful_conversions.txt"
     manifest.write_text("AC0800_L ; total_delta2=22.000000\nge0015_s\nac0811_l ; mean_delta2=11.000000\n# comment\nAC0800_L\n", encoding="utf-8")
 
-    variants = image_composite_converter._load_successful_conversions(manifest)
+    variants = image_composite_converter._load_successful_conversions(manifest, tmp_path / "missing")
     ac08_variants = tuple(variant for variant in variants if variant.startswith("AC08"))
 
     assert variants == ("AC0800_L", "GE0015_S", "AC0811_L")
     assert ac08_variants == ("AC0800_L", "AC0811_L")
+
+
+def test_load_successful_conversions_expands_manifest_ranges_against_available_variants(tmp_path: Path) -> None:
+    manifest = tmp_path / "successful_conversions.txt"
+    source_dir = tmp_path / "images"
+    source_dir.mkdir()
+    for name in (
+        "AC0800_L.jpg",
+        "AC0800_M.jpg",
+        "AC0800_S.jpg",
+        "AC0811_L.jpg",
+        "AC0811_M.jpg",
+        "AC0811_S.jpg",
+        "AC0812_L.jpg",
+        "AC0812_M.jpg",
+        "AC0812_S.jpg",
+        "GE0015_S.jpg",
+    ):
+        (source_dir / name).write_bytes(b"jpg")
+    manifest.write_text("AC0800_L bis AC0812_S\nGE0015_S\n", encoding="utf-8")
+
+    variants = image_composite_converter._load_successful_conversions(manifest, source_dir)
+
+    assert variants == (
+        "AC0800_L",
+        "AC0800_M",
+        "AC0800_S",
+        "AC0811_L",
+        "AC0811_M",
+        "AC0811_S",
+        "AC0812_L",
+        "AC0812_M",
+        "AC0812_S",
+        "GE0015_S",
+    )
 
 
 def test_write_ac08_success_criteria_report_summarizes_regression_metrics(tmp_path: Path) -> None:

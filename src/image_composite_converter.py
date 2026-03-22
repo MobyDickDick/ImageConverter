@@ -30,6 +30,7 @@ OPTIONAL_DEPENDENCY_ERRORS: dict[str, str] = {}
 
 
 SUCCESSFUL_CONVERSIONS_MANIFEST = Path("artifacts/converted_images/reports/successful_conversions.txt")
+SUCCESSFUL_CONVERSIONS_SOURCE_DIR = Path("artifacts/images_to_convert")
 SUCCESSFUL_CONVERSIONS_FALLBACK: tuple[str, ...] = (
     "AC0800_L",
     "AC0800_M",
@@ -58,23 +59,75 @@ _AC08_BASE_REGRESSION_CASES: tuple[dict[str, str], ...] = (
 )
 
 
-def _load_successful_conversions(manifest_path: Path = SUCCESSFUL_CONVERSIONS_MANIFEST) -> tuple[str, ...]:
+def _iter_available_successful_conversion_variants(
+    source_dir: Path = SUCCESSFUL_CONVERSIONS_SOURCE_DIR,
+) -> tuple[str, ...]:
+    """Return known source-image variants that can back range expressions."""
+    if not source_dir.exists() or not source_dir.is_dir():
+        return ()
+    variants = sorted(
+        path.stem.upper()
+        for path in source_dir.iterdir()
+        if path.is_file() and path.suffix.lower() in {".jpg", ".jpeg", ".png", ".bmp", ".gif"}
+    )
+    return tuple(dict.fromkeys(variants))
+
+
+def _expand_successful_conversion_manifest_entry(
+    entry: str,
+    available_variants: tuple[str, ...],
+) -> tuple[str, ...]:
+    """Expand a manifest entry to one or more canonical variant IDs.
+
+    Supported formats are single variant IDs as well as inclusive ranges such as
+    ``AC0800_L bis AC0812_S`` or ``AC0800_L..AC0812_S``.
+    """
+    candidate = str(entry or "").strip().upper()
+    if not candidate:
+        return ()
+
+    range_match = re.match(
+        r"^(?P<start>[A-Z]{2,3}\d{4}_[A-Z])\s*(?:BIS|TO|\.\.|\.{3})\s*(?P<end>[A-Z]{2,3}\d{4}_[A-Z])$",
+        candidate,
+    )
+    if not range_match:
+        return (candidate,)
+
+    start_variant = range_match.group("start")
+    end_variant = range_match.group("end")
+    if not available_variants:
+        return (start_variant, end_variant) if start_variant != end_variant else (start_variant,)
+
+    selected = [
+        variant for variant in available_variants if _in_requested_range(f"{variant}.jpg", start_variant, end_variant)
+    ]
+    if selected:
+        return tuple(selected)
+    return (start_variant, end_variant) if start_variant != end_variant else (start_variant,)
+
+
+def _load_successful_conversions(
+    manifest_path: Path = SUCCESSFUL_CONVERSIONS_MANIFEST,
+    source_dir: Path = SUCCESSFUL_CONVERSIONS_SOURCE_DIR,
+) -> tuple[str, ...]:
     """Load the canonical successful-conversions manifest from disk.
 
-    The manifest may contain bare variant IDs or enriched lines of the form
+    The manifest may contain bare variant IDs, inclusive ranges such as
+    ``AC0800_L bis AC0812_S``, or enriched lines of the form
     ``VARIANT ; key=value ; key=value``. Only the first field is treated as the
-    canonical variant identifier.
+    canonical manifest selector.
     """
     if manifest_path.exists():
         variants: list[str] = []
+        available_variants = _iter_available_successful_conversion_variants(source_dir)
         for raw_line in manifest_path.read_text(encoding="utf-8").splitlines():
             line = raw_line.split("#", 1)[0].strip()
             if not line:
                 continue
-            variant = line.split(";", 1)[0].strip().upper()
-            if not variant:
+            entry = line.split(";", 1)[0].strip()
+            if not entry:
                 continue
-            variants.append(variant)
+            variants.extend(_expand_successful_conversion_manifest_entry(entry, available_variants))
         normalized = tuple(dict.fromkeys(variants))
         if normalized:
             return normalized
