@@ -2172,10 +2172,6 @@ class Action:
             "lock_colors",
             "min_circle_radius",
             "max_circle_radius",
-            "arm_len_min",
-            "arm_len_min_ratio",
-            "stem_len_min",
-            "stem_len_min_ratio",
             "co2_font_scale_min",
             "co2_font_scale_max",
             "voc_font_scale_min",
@@ -2408,6 +2404,8 @@ class Action:
         cy = float(params.get("cy", defaults.get("cy", float(w) / 2.0)))
         r = float(params.get("r", defaults.get("r", float(w) * 0.4)))
         stroke_circle = float(params.get("stroke_circle", defaults.get("stroke_circle", max(0.9, float(w) / 15.0))))
+        aspect_ratio = (float(h) / float(w)) if w > 0 else 1.0
+        elongated_plain_badge = aspect_ratio >= 1.60 and not bool(params.get("draw_text", False))
 
         # Foreground contour estimation helps stem-only badges, but for VOC/CO2
         # labels it can lock onto text blobs and shrink the fitted circle.
@@ -2442,6 +2440,26 @@ class Action:
             params["lock_circle_cx"] = True
             params["lock_stem_center_to_circle"] = True
 
+        # Keep elongated plain AC0811 variants close to their semantic template.
+        # The stem occupies only a thin column of dark pixels, so the generic
+        # circle/stem error tends to over-value shorter stems once the circle is
+        # nudged downward. Re-anchor the circle vertically and persist a stronger
+        # template-based stem floor so AC0811_L keeps a visibly long connector.
+        if elongated_plain_badge:
+            default_cx = float(defaults.get("cx", cx))
+            default_cy = float(defaults.get("cy", cy))
+            default_r = float(defaults.get("r", r))
+            params["cx"] = default_cx
+            params["cy"] = float(Action._clip_scalar(cy, default_cy - 1.0, default_cy + 1.0))
+            r = float(max(r, default_r * 0.97))
+            params["r"] = r
+            params["lock_circle_cx"] = True
+            params["lock_circle_cy"] = True
+            params["lock_stem_center_to_circle"] = True
+            params["stem_len_min_ratio"] = float(max(float(params.get("stem_len_min_ratio", 0.0) or 0.0), 0.80))
+            cx = float(params["cx"])
+            cy = float(params["cy"])
+
         # Keep text badges close to template radius; otherwise under-estimation
         # shrinks both the circle and text size in variants such as AC0836_L.
         if str(params.get("text_mode", "")).lower() in {"voc", "co2"}:
@@ -2475,6 +2493,9 @@ class Action:
         params["stem_top"] = stem_top
         params["stem_bottom"] = float(h)
         params["stem_gray"] = int(round(params.get("stroke_gray", defaults.get("stroke_gray", 152))))
+        if elongated_plain_badge:
+            params["stem_len_min_ratio"] = float(max(float(params.get("stem_len_min_ratio", 0.0) or 0.0), 0.80))
+            Action._persist_connector_length_floor(params, "stem", default_ratio=0.80)
 
         return Action._normalize_light_circle_colors(params)
 
