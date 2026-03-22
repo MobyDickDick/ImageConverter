@@ -3980,14 +3980,43 @@ class Action:
             )
 
         if p.get("arm_enabled"):
-            arm_y1 = p.get("arm_y1", p.get("arm_y", 0.0))
-            arm_y2 = p.get("arm_y2", p.get("arm_y", arm_y1))
+            arm_x1 = float(p.get("arm_x1", 0.0))
+            arm_y1 = float(p.get("arm_y1", p.get("arm_y", 0.0)))
+            arm_x2 = float(p.get("arm_x2", 0.0))
+            arm_y2 = float(p.get("arm_y2", p.get("arm_y", arm_y1)))
+            arm_stroke = float(p["arm_stroke"])
+            arm_half_stroke = arm_stroke * 0.5
+
+            # When a rounded connector ends exactly on the SVG border, rasterizers
+            # clip away half the cap and the arm looks visibly too short. Extend
+            # border-touching endpoints slightly beyond the viewBox so the rendered
+            # arm still reaches the expected canvas edge.
+            if arm_x1 <= 0.01:
+                arm_x1 = -arm_half_stroke
+            elif arm_x1 >= (float(w) - 0.01):
+                arm_x1 = float(w) + arm_half_stroke
+
+            if arm_x2 <= 0.01:
+                arm_x2 = -arm_half_stroke
+            elif arm_x2 >= (float(w) - 0.01):
+                arm_x2 = float(w) + arm_half_stroke
+
+            if arm_y1 <= 0.01:
+                arm_y1 = -arm_half_stroke
+            elif arm_y1 >= (float(h) - 0.01):
+                arm_y1 = float(h) + arm_half_stroke
+
+            if arm_y2 <= 0.01:
+                arm_y2 = -arm_half_stroke
+            elif arm_y2 >= (float(h) - 0.01):
+                arm_y2 = float(h) + arm_half_stroke
+
             elements.append(
                 (
-                    f'  <line x1="{p["arm_x1"]:.4f}" y1="{arm_y1:.4f}" '
-                    f'x2="{p["arm_x2"]:.4f}" y2="{arm_y2:.4f}" '
+                    f'  <line x1="{arm_x1:.4f}" y1="{arm_y1:.4f}" '
+                    f'x2="{arm_x2:.4f}" y2="{arm_y2:.4f}" '
                     f'stroke="{Action.grayhex(p.get("stroke_gray", 152))}" '
-                    f'stroke-width="{p["arm_stroke"]:.4f}" stroke-linecap="round"/>'
+                    f'stroke-width="{arm_stroke:.4f}" stroke-linecap="round"/>'
                 )
             )
 
