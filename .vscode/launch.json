@@ -15,16 +15,6 @@
       "justMyCode": false
     },
     {
-      "name": "ImageConverter: update successful conversion manifest quality",
-      "type": "debugpy",
-      "request": "launch",
-      "module": "src.successful_conversion_quality_app",
-      "cwd": "${workspaceFolder}",
-      "console": "integratedTerminal",
-      "args": [],
-      "justMyCode": false
-    },
-    {
       "name": "ImageConverter: annotate interactive range",
       "type": "debugpy",
       "request": "launch",
