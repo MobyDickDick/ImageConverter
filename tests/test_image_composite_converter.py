@@ -265,6 +265,65 @@ def test_finalize_ac0800_keeps_ring_darker_than_fill() -> None:
     assert float(params["stroke_circle"]) >= 1.0
 
 
+def test_select_circle_radius_plateau_candidate_prefers_plateau_midpoint(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Near-equal circle radii should resolve to the plateau center instead of a noisy edge minimum."""
+    if conv.np is None:
+        pytest.skip("numpy not available in this environment")
+
+    img = conv.np.zeros((20, 20, 3), dtype=conv.np.uint8)
+    params = {"circle_enabled": True, "min_circle_radius": 5.0, "max_circle_radius": 8.0}
+    evaluations = {5.0: 10.03, 5.5: 10.0, 6.0: 10.01}
+    full_errors = {5.5: 20.0, 6.0: 19.5}
+
+    monkeypatch.setattr(
+        conv.Action,
+        "_full_badge_error_for_circle_radius",
+        staticmethod(lambda _img, _params, radius: full_errors[float(radius)]),
+    )
+
+    best_r, best_err, best_full_err = conv.Action._select_circle_radius_plateau_candidate(
+        img,
+        params,
+        evaluations,
+        current_radius=5.0,
+    )
+
+    assert best_r == pytest.approx(6.0)
+    assert best_err == pytest.approx(10.01)
+    assert best_full_err == pytest.approx(19.5)
+
+
+def test_optimize_circle_radius_bracket_uses_plateau_selection(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Radius bracketing should not keep the smallest noisy minimum when the plateau center scores better overall."""
+    if conv.np is None:
+        pytest.skip("numpy not available in this environment")
+
+    img = conv.np.zeros((20, 20, 3), dtype=conv.np.uint8)
+    params = {"circle_enabled": True, "r": 5.0, "min_circle_radius": 5.0, "max_circle_radius": 8.0}
+    element_errors = {5.0: 10.03, 5.5: 10.0, 6.0: 10.01}
+    full_errors = {5.5: 20.0, 6.0: 19.5}
+
+    monkeypatch.setattr(conv.Action, "_clip_scalar", staticmethod(lambda value, low, high: max(low, min(high, value))))
+    monkeypatch.setattr(conv.Action, "_snap_half", staticmethod(lambda value: round(value * 2.0) / 2.0))
+    monkeypatch.setattr(
+        conv.Action,
+        "_element_error_for_circle_radius",
+        staticmethod(lambda _img, _params, radius: element_errors[float(radius)]),
+    )
+    monkeypatch.setattr(
+        conv.Action,
+        "_full_badge_error_for_circle_radius",
+        staticmethod(lambda _img, _params, radius: full_errors[float(radius)]),
+    )
+
+    logs: list[str] = []
+    changed = conv.Action._optimize_circle_radius_bracket(img, params, logs)
+
+    assert changed is True
+    assert params["r"] == pytest.approx(6.0)
+    assert any("full_err=19.500" in entry for entry in logs)
+
+
 def test_generate_badge_svg_emits_background_rect_when_requested() -> None:
     """Badge SVG should include an explicit background rect when configured."""
     params = {
