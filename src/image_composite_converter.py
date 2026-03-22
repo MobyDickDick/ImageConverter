@@ -1489,7 +1489,15 @@ class Action:
     def _normalize_ac08_line_widths(params: dict) -> dict:
         """For AC08xx symbols: prefer a uniform 1px circle/connector stroke."""
         p = dict(params)
+        prev_circle_stroke = float(p.get("stroke_circle", Action.AC08_STROKE_WIDTH_PX))
         p["stroke_circle"] = Action.AC08_STROKE_WIDTH_PX
+        if bool(p.pop("preserve_outer_diameter_on_stroke_normalization", False)) and p.get("circle_enabled", True) and "r" in p and prev_circle_stroke > 0.0:
+            # Keep the visual outer diameter stable when normalizing to the
+            # canonical AC08 1px stroke. Otherwise tiny plain-ring badges can
+            # lose more than a pixel of diameter even if the fitted geometry
+            # correctly reached the canvas border.
+            outer_radius = float(p["r"]) + (prev_circle_stroke / 2.0)
+            p["r"] = max(1.0, outer_radius - (Action.AC08_STROKE_WIDTH_PX / 2.0))
         # Keep semantic AC08xx families on their canonical stroke thickness.
         # The later pixel-error bracketing step can otherwise over-fit anti-aliased
         # ring edges and inflate widths (e.g. 1px -> 6px for tiny circles).
@@ -3436,6 +3444,21 @@ class Action:
                     bg_gray = Action._estimate_border_background_gray(gray)
                     if bg_gray >= 240.0:
                         params["background_fill"] = "#ffffff"
+
+        if not bool(params.get("arm_enabled") or params.get("stem_enabled")) and not bool(params.get("draw_text", False)):
+            fg_mask = Action._foreground_mask(img)
+            edge_touch_min = max(2, int(round(min_side * 0.20)))
+            touches_all_edges = all(
+                int(np.count_nonzero(edge)) >= edge_touch_min
+                for edge in (fg_mask[0, :], fg_mask[-1, :], fg_mask[:, 0], fg_mask[:, -1])
+            )
+            if touches_all_edges:
+                border_fit_r = max(1.0, (min_side / 2.0) - (float(params.get("stroke_circle", defaults.get("stroke_circle", 1.0))) / 2.0))
+                if float(params.get("r", 0.0)) < (border_fit_r - 0.35):
+                    params["cx"] = float(defaults.get("cx", float(w) / 2.0))
+                    params["cy"] = float(defaults.get("cy", float(h) / 2.0))
+                    params["r"] = float(border_fit_r)
+                    params["preserve_outer_diameter_on_stroke_normalization"] = True
 
         # Keep contour/Hough noise from collapsing circles far below the semantic
         # template size. This was most visible for compact centered badges
