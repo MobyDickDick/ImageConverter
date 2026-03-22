@@ -1,0 +1,7 @@
+# Canonical list of variants/images that are currently considered successful conversions.
+# The file may contain arbitrary image IDs. Family-specific regression suites
+# (such as AC08) automatically filter the relevant subset from this list.
+AC0800_L
+AC0800_M
+AC0800_S
+AC0811_L
