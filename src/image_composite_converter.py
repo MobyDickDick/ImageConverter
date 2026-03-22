@@ -29,8 +29,8 @@ import struct
 OPTIONAL_DEPENDENCY_ERRORS: dict[str, str] = {}
 
 
-AC08_PREVIOUSLY_GOOD_VARIANTS_MANIFEST = Path("artifacts/converted_images/reports/ac08_previously_good_variants.txt")
-AC08_PREVIOUSLY_GOOD_VARIANTS_FALLBACK: tuple[str, ...] = (
+SUCCESSFUL_CONVERSIONS_MANIFEST = Path("artifacts/converted_images/reports/successful_conversions.txt")
+SUCCESSFUL_CONVERSIONS_FALLBACK: tuple[str, ...] = (
     "AC0800_L",
     "AC0800_M",
     "AC0800_S",
@@ -58,8 +58,8 @@ _AC08_BASE_REGRESSION_CASES: tuple[dict[str, str], ...] = (
 )
 
 
-def _load_ac08_previously_good_variants(manifest_path: Path = AC08_PREVIOUSLY_GOOD_VARIANTS_MANIFEST) -> tuple[str, ...]:
-    """Load the canonical AC08 'previously good' manifest from disk."""
+def _load_successful_conversions(manifest_path: Path = SUCCESSFUL_CONVERSIONS_MANIFEST) -> tuple[str, ...]:
+    """Load the canonical successful-conversions manifest from disk."""
     if manifest_path.exists():
         variants: list[str] = []
         for raw_line in manifest_path.read_text(encoding="utf-8").splitlines():
@@ -70,10 +70,11 @@ def _load_ac08_previously_good_variants(manifest_path: Path = AC08_PREVIOUSLY_GO
         normalized = tuple(dict.fromkeys(variants))
         if normalized:
             return normalized
-    return AC08_PREVIOUSLY_GOOD_VARIANTS_FALLBACK
+    return SUCCESSFUL_CONVERSIONS_FALLBACK
 
 
-AC08_PREVIOUSLY_GOOD_VARIANTS = _load_ac08_previously_good_variants()
+SUCCESSFUL_CONVERSIONS = _load_successful_conversions()
+AC08_PREVIOUSLY_GOOD_VARIANTS = tuple(variant for variant in SUCCESSFUL_CONVERSIONS if variant.startswith("AC08"))
 
 
 def _build_ac08_regression_cases() -> tuple[dict[str, str], ...]:
