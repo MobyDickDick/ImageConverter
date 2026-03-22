@@ -426,6 +426,39 @@ def test_finalize_plain_ac08_badge_reanchors_circle_to_template_center() -> None
     assert float(params["cy"]) == 9.5
 
 
+def test_finalize_ac0800_preserves_plain_ring_geometry_bounds() -> None:
+    """AC0800 should keep center locks and a tight radius cap for later validation rounds."""
+    params = Action.make_badge_params(30, 30, "AC0800")
+
+    assert params["lock_circle_cx"] is True
+    assert params["lock_circle_cy"] is True
+    assert float(params["min_circle_radius"]) >= (10.8 * 0.96) - 0.01
+    assert float(params["max_circle_radius"]) <= (10.8 * 1.15) + 0.01
+
+
+
+def test_validate_badge_by_elements_keeps_ac0800_l_centered_and_bounded() -> None:
+    """AC0800_L should not drift left/right or overgrow during circle-only validation."""
+    if image_composite_converter.np is None or image_composite_converter.cv2 is None or image_composite_converter.fitz is None:
+        pytest.skip("numpy/cv2/fitz not available in this environment")
+
+    img = image_composite_converter.cv2.imread("artifacts/images_to_convert/AC0800_L.jpg")
+    assert img is not None
+
+    params = Action.make_badge_params(img.shape[1], img.shape[0], "AC0800", img)
+    template_cx = float(params["template_circle_cx"])
+    template_cy = float(params["template_circle_cy"])
+    template_r = float(params["template_circle_radius"])
+
+    logs = Action.validate_badge_by_elements(img, params, max_rounds=4)
+
+    assert logs
+    assert float(params["cx"]) == pytest.approx(template_cx)
+    assert float(params["cy"]) == pytest.approx(template_cy)
+    assert float(params["r"]) <= (template_r * 1.15) + 0.01
+
+
+
 def test_finalize_ac08_small_variant_keeps_only_small_variant_metadata() -> None:
     """Small AC08 `_S` variants should still flag compact mode without forcing connector bounds."""
     params = Action.make_badge_params(15, 15, "AC0832")

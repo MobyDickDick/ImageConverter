@@ -2135,6 +2135,12 @@ class Action:
                     p.setdefault("voc_font_scale_min", 0.60)
                     p.pop("voc_font_scale_max", None)
         p = Action._configure_ac08_small_variant_mode(name, p)
+        preserve_plain_ring_geometry = symbol_name == "AC0800"
+        preserved_plain_ring_keys = {
+            key: p[key]
+            for key in ("lock_circle_cx", "lock_circle_cy", "min_circle_radius", "max_circle_radius")
+            if preserve_plain_ring_geometry and key in p
+        }
         for key in (
             "lock_circle_cx",
             "lock_circle_cy",
@@ -2162,6 +2168,16 @@ class Action:
             "text_gray_max",
         ):
             p.pop(key, None)
+        if preserve_plain_ring_geometry:
+            p.update(preserved_plain_ring_keys)
+            if "template_circle_cx" in p:
+                p["cx"] = float(p["template_circle_cx"])
+            if "template_circle_cy" in p:
+                p["cy"] = float(p["template_circle_cy"])
+            template_r = float(p.get("template_circle_radius", p.get("r", 1.0)))
+            p["min_circle_radius"] = float(max(float(p.get("min_circle_radius", 1.0)), template_r * 0.96))
+            if "max_circle_radius" not in p:
+                p["max_circle_radius"] = float(max(template_r, template_r * 1.15))
         if p.get("draw_text", True) and "text_gray" in p:
             p["text_gray"] = int(p.get("stroke_gray", Action.LIGHT_CIRCLE_STROKE_GRAY))
         return p
