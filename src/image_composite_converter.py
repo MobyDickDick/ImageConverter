@@ -5271,6 +5271,80 @@ class Action:
             mask_svg=mask_svg,
         )
 
+    @staticmethod
+    def _full_badge_error_for_circle_radius(img_orig: np.ndarray, params: dict, radius_value: float) -> float:
+        """Evaluate the full SVG roundtrip error for a specific circle radius."""
+        h, w = img_orig.shape[:2]
+        if not params.get("circle_enabled", True):
+            return float("inf")
+
+        probe = dict(params)
+        max_r = max(1.0, (float(min(w, h)) * 0.48))
+        probe["r"] = float(Action._clip_scalar(radius_value, 1.0, max_r))
+
+        if probe.get("arm_enabled"):
+            Action._reanchor_arm_to_circle_edge(probe, float(probe["r"]))
+
+        if probe.get("stem_enabled"):
+            probe["stem_top"] = float(probe.get("cy", 0.0)) + float(probe["r"])
+
+        render = Action._fit_to_original_size(img_orig, Action.render_svg_to_numpy(Action.generate_badge_svg(w, h, probe), w, h))
+        if render is None:
+            return float("inf")
+        return float(Action.calculate_error(img_orig, render))
+
+    @staticmethod
+    def _select_circle_radius_plateau_candidate(
+        img_orig: np.ndarray,
+        params: dict,
+        evaluations: dict[float, float],
+        current_radius: float,
+    ) -> tuple[float, float, float]:
+        """Pick a stable radius from a near-optimal plateau instead of a noisy local minimum."""
+        finite = sorted((float(radius), float(err)) for radius, err in evaluations.items() if math.isfinite(err))
+        if not finite:
+            return current_radius, float("inf"), float("inf")
+
+        best_radius, best_err = min(finite, key=lambda pair: pair[1])
+        plateau_eps = max(0.06, best_err * 0.02)
+        plateau = [(radius, err) for radius, err in finite if err <= best_err + plateau_eps]
+        if not plateau:
+            full_err = Action._full_badge_error_for_circle_radius(img_orig, params, best_radius)
+            return best_radius, best_err, full_err
+
+        plateau_mid = Action._snap_half((plateau[0][0] + plateau[-1][0]) / 2.0)
+        candidate_radii = {best_radius, plateau_mid}
+        if len(plateau) >= 2:
+            candidate_radii.add(plateau[-1][0])
+
+        min_r = float(max(1.0, params.get("min_circle_radius", 1.0)))
+        max_r = float(params.get("max_circle_radius", max(radius for radius, _err in finite)))
+        bounded_candidates = sorted(
+            Action._snap_half(float(Action._clip_scalar(radius, min_r, max_r)))
+            for radius in candidate_radii
+        )
+
+        choice_pool: list[tuple[float, float, float, float]] = []
+        for radius in bounded_candidates:
+            if radius in evaluations:
+                elem_err = float(evaluations[radius])
+            else:
+                elem_err = float(Action._element_error_for_circle_radius(img_orig, params, radius))
+            full_err = float(Action._full_badge_error_for_circle_radius(img_orig, params, radius))
+            distance_to_mid = abs(radius - plateau_mid)
+            choice_pool.append((radius, elem_err, full_err, distance_to_mid))
+
+        chosen_radius, chosen_elem_err, chosen_full_err, _distance_to_mid = min(
+            choice_pool,
+            key=lambda item: (
+                round(item[2], 6),
+                round(item[1], 6),
+                item[3],
+                abs(item[0] - current_radius),
+            ),
+        )
+        return chosen_radius, chosen_elem_err, chosen_full_err
+
 
     @staticmethod
     def _element_error_for_circle_pose(
@@ -5545,11 +5619,11 @@ class Action:
                 break
             mid = next_mid
 
-        best_r, best_err = min(evaluations.items(), key=lambda pair: pair[1])
+        best_r, best_err, best_full_err = Action._select_circle_radius_plateau_candidate(img_orig, params, evaluations, current)
         candidate_dump = ", ".join(f"{v:.3f}->{e:.3f}" for v, e in sorted(evaluations.items()))
         if abs(best_r - current) < 0.02:
             logs.append(
-                f"circle: Radius-Bracketing keine relevante Änderung (r: {current:.3f}, best_err={best_err:.3f}); Kandidaten="
+                f"circle: Radius-Bracketing keine relevante Änderung (r: {current:.3f}, best_err={best_err:.3f}, full_err={best_full_err:.3f}); Kandidaten="
                 + candidate_dump
             )
             return False
@@ -5562,7 +5636,7 @@ class Action:
             params["stem_top"] = float(params.get("cy", 0.0)) + best_r
 
         logs.append(
-            f"circle: Radius-Bracketing r {old_r:.3f}->{best_r:.3f} (best_err={best_err:.3f}); Kandidaten="
+            f"circle: Radius-Bracketing r {old_r:.3f}->{best_r:.3f} (best_err={best_err:.3f}, full_err={best_full_err:.3f}); Kandidaten="
             + candidate_dump
         )
         return True
