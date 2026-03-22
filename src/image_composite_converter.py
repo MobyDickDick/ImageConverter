@@ -59,14 +59,22 @@ _AC08_BASE_REGRESSION_CASES: tuple[dict[str, str], ...] = (
 
 
 def _load_successful_conversions(manifest_path: Path = SUCCESSFUL_CONVERSIONS_MANIFEST) -> tuple[str, ...]:
-    """Load the canonical successful-conversions manifest from disk."""
+    """Load the canonical successful-conversions manifest from disk.
+
+    The manifest may contain bare variant IDs or enriched lines of the form
+    ``VARIANT ; key=value ; key=value``. Only the first field is treated as the
+    canonical variant identifier.
+    """
     if manifest_path.exists():
         variants: list[str] = []
         for raw_line in manifest_path.read_text(encoding="utf-8").splitlines():
-            line = raw_line.split("#", 1)[0].strip().upper()
+            line = raw_line.split("#", 1)[0].strip()
             if not line:
                 continue
-            variants.append(line)
+            variant = line.split(";", 1)[0].strip().upper()
+            if not variant:
+                continue
+            variants.append(variant)
         normalized = tuple(dict.fromkeys(variants))
         if normalized:
             return normalized
@@ -9074,6 +9082,13 @@ def convert_range(
         reports_out_dir,
         selected_variants=sorted(normalized_selected_variants),
     )
+    if SUCCESSFUL_CONVERSIONS_MANIFEST.exists():
+        update_successful_conversions_manifest_with_metrics(
+            folder_path=folder_path,
+            svg_out_dir=svg_out_dir,
+            reports_out_dir=reports_out_dir,
+            manifest_path=SUCCESSFUL_CONVERSIONS_MANIFEST,
+        )
 
     Action.STOCHASTIC_SEED_OFFSET = 0
     Action.STOCHASTIC_RUN_SEED = 0
@@ -9882,6 +9897,240 @@ def _write_pixel_delta2_ranking(folder_path: str, svg_out_dir: str, reports_out_
     ]
     with open(os.path.join(reports_out_dir, "pixel_delta2_summary.txt"), "w", encoding="utf-8") as f:
         f.write("\n".join(summary_lines) + "\n")
+
+
+def _load_iteration_log_rows(reports_out_dir: str) -> dict[str, dict[str, str]]:
+    """Load Iteration_Log.csv keyed by uppercase filename stem."""
+    path = os.path.join(reports_out_dir, "Iteration_Log.csv")
+    if not os.path.exists(path):
+        return {}
+
+    rows: dict[str, dict[str, str]] = {}
+    with open(path, 'r', encoding='utf-8-sig', newline='') as f:
+        reader = csv.DictReader(f, delimiter=';')
+        for row in reader:
+            filename = str(row.get('Dateiname', '')).strip()
+            if not filename:
+                continue
+            rows[os.path.splitext(filename)[0].upper()] = dict(row)
+    return rows
+
+
+def _find_image_path_by_variant(folder_path: str, variant: str) -> str | None:
+    """Return the raster image path for ``variant`` if present."""
+    for ext in ('.jpg', '.png', '.bmp', '.gif'):
+        candidate = os.path.join(folder_path, f'{variant}{ext}')
+        if os.path.exists(candidate):
+            return candidate
+    return None
+
+
+def collect_successful_conversion_quality_metrics(
+    folder_path: str,
+    svg_out_dir: str,
+    reports_out_dir: str,
+    successful_variants: list[str] | tuple[str, ...] | None = None,
+) -> list[dict[str, object]]:
+    """Collect quality metrics for variants listed as successful conversions."""
+    if cv2 is None or np is None:
+        missing = []
+        if cv2 is None:
+            missing.append('cv2')
+        if np is None:
+            missing.append('numpy')
+        raise RuntimeError('Required image dependencies are missing: ' + ', '.join(missing))
+
+    variants = [str(v).strip().upper() for v in (successful_variants or SUCCESSFUL_CONVERSIONS) if str(v).strip()]
+    iteration_rows = _load_iteration_log_rows(reports_out_dir)
+    metrics: list[dict[str, object]] = []
+    seen: set[str] = set()
+    for variant in variants:
+        if variant in seen:
+            continue
+        seen.add(variant)
+        image_path = _find_image_path_by_variant(folder_path, variant)
+        svg_path = os.path.join(svg_out_dir, f'{variant}.svg')
+        log_path = os.path.join(reports_out_dir, f'{variant}_element_validation.log')
+
+        row: dict[str, object] = {
+            'variant': variant,
+            'image_found': os.path.exists(image_path) if image_path else False,
+            'svg_found': os.path.exists(svg_path),
+            'log_found': os.path.exists(log_path),
+            'status': '',
+            'best_iteration': '',
+            'diff_score': float('nan'),
+            'error_per_pixel': float('nan'),
+            'pixel_count': 0,
+            'total_delta2': float('nan'),
+            'mean_delta2': float('nan'),
+            'std_delta2': float('nan'),
+        }
+
+        details = _read_validation_log_details(log_path) if os.path.exists(log_path) else {}
+        row['status'] = details.get('status', '')
+
+        iteration = iteration_rows.get(variant, {})
+        row['best_iteration'] = str(iteration.get('Beste Iteration', '')).strip()
+        try:
+            row['diff_score'] = float(str(iteration.get('Diff-Score', '')).strip().replace(',', '.'))
+        except ValueError:
+            row['diff_score'] = float('nan')
+        try:
+            row['error_per_pixel'] = float(str(iteration.get('FehlerProPixel', '')).strip().replace(',', '.'))
+        except ValueError:
+            row['error_per_pixel'] = float('nan')
+
+        if not image_path or not os.path.exists(image_path) or not os.path.exists(svg_path):
+            metrics.append(row)
+            continue
+
+        img_orig = cv2.imread(image_path)
+        if img_orig is None:
+            metrics.append(row)
+            continue
+        with open(svg_path, 'r', encoding='utf-8') as f:
+            svg_content = f.read()
+        rendered = Action.render_svg_to_numpy(svg_content, img_orig.shape[1], img_orig.shape[0])
+        if rendered is None:
+            metrics.append(row)
+            continue
+
+        diff = img_orig.astype(np.float32) - rendered.astype(np.float32)
+        delta2 = np.sum(diff * diff, axis=2)
+        row['pixel_count'] = int(delta2.shape[0] * delta2.shape[1])
+        row['total_delta2'] = float(np.sum(delta2))
+        row['mean_delta2'] = float(np.mean(delta2))
+        row['std_delta2'] = float(np.std(delta2))
+        metrics.append(row)
+
+    metrics.sort(key=lambda item: str(item.get('variant', '')))
+    return metrics
+
+
+def _format_successful_conversion_manifest_line(existing_line: str, metrics: dict[str, object]) -> str:
+    """Render one enriched successful-conversions manifest line."""
+    variant = str(metrics.get('variant', '')).strip().upper()
+    prefix, comment = existing_line, ''
+    if '#' in existing_line:
+        prefix, comment = existing_line.split('#', 1)
+        comment = '#' + comment.strip()
+    prefix = prefix.strip()
+    if not prefix:
+        return existing_line.rstrip('\n')
+
+    fields = [variant]
+    status = str(metrics.get('status', '')).strip()
+    if status:
+        fields.append(f'status={status}')
+    best_iteration = str(metrics.get('best_iteration', '')).strip()
+    if best_iteration:
+        fields.append(f'best_iteration={best_iteration}')
+    for key, precision in (
+        ('diff_score', 6),
+        ('error_per_pixel', 8),
+        ('total_delta2', 6),
+        ('mean_delta2', 6),
+        ('std_delta2', 6),
+    ):
+        value = float(metrics.get(key, float('nan')))
+        if math.isfinite(value):
+            fields.append(f'{key}={value:.{precision}f}')
+    pixel_count = int(metrics.get('pixel_count', 0) or 0)
+    if pixel_count > 0:
+        fields.append(f'pixel_count={pixel_count}')
+
+    line = ' ; '.join(fields)
+    if comment:
+        line += '  ' + comment
+    return line
+
+
+def update_successful_conversions_manifest_with_metrics(
+    folder_path: str,
+    svg_out_dir: str,
+    reports_out_dir: str,
+    manifest_path: Path | None = None,
+    successful_variants: list[str] | tuple[str, ...] | None = None,
+) -> tuple[Path, list[dict[str, object]]]:
+    """Update ``successful_conversions.txt`` in-place with quality metrics.
+
+    Existing comment lines are preserved. Only listed variants are enriched, so
+    this does not auto-add new successful IDs; it appends metrics to entries
+    that are already designated as successful.
+    """
+    resolved_manifest_path = Path(manifest_path) if manifest_path is not None else Path(reports_out_dir) / 'successful_conversions.txt'
+    if not resolved_manifest_path.exists():
+        raise FileNotFoundError(f'Successful-conversions manifest not found: {resolved_manifest_path}')
+
+    metrics_rows = collect_successful_conversion_quality_metrics(
+        folder_path=folder_path,
+        svg_out_dir=svg_out_dir,
+        reports_out_dir=reports_out_dir,
+        successful_variants=successful_variants or _load_successful_conversions(resolved_manifest_path),
+    )
+    metrics_by_variant = {str(row['variant']).upper(): row for row in metrics_rows}
+
+    updated_lines: list[str] = []
+    for raw_line in resolved_manifest_path.read_text(encoding='utf-8').splitlines():
+        stripped = raw_line.split('#', 1)[0].strip()
+        if not stripped:
+            updated_lines.append(raw_line)
+            continue
+        variant = stripped.split(';', 1)[0].strip().upper()
+        metrics = metrics_by_variant.get(variant)
+        if metrics is None:
+            updated_lines.append(raw_line)
+            continue
+        updated_lines.append(_format_successful_conversion_manifest_line(raw_line, metrics))
+
+    resolved_manifest_path.write_text('\n'.join(updated_lines) + '\n', encoding='utf-8')
+    return resolved_manifest_path, metrics_rows
+
+
+def write_successful_conversion_quality_report(
+    folder_path: str,
+    svg_out_dir: str,
+    reports_out_dir: str,
+    successful_variants: list[str] | tuple[str, ...] | None = None,
+    output_name: str = 'successful_conversion_quality',
+) -> tuple[str, str, list[dict[str, object]]]:
+    """Backward-compatible wrapper that now also refreshes the manifest."""
+    manifest_path, metrics = update_successful_conversions_manifest_with_metrics(
+        folder_path=folder_path,
+        svg_out_dir=svg_out_dir,
+        reports_out_dir=reports_out_dir,
+        successful_variants=successful_variants,
+    )
+
+    csv_path = os.path.join(reports_out_dir, f'{output_name}.csv')
+    txt_path = os.path.join(reports_out_dir, f'{output_name}.txt')
+    with open(csv_path, 'w', encoding='utf-8', newline='') as f:
+        writer = csv.writer(f, delimiter=';')
+        writer.writerow([
+            'variant', 'status', 'image_found', 'svg_found', 'log_found', 'best_iteration',
+            'diff_score', 'error_per_pixel', 'pixel_count', 'total_delta2', 'mean_delta2', 'std_delta2',
+        ])
+        for row in metrics:
+            writer.writerow([
+                row['variant'],
+                row['status'],
+                int(bool(row['image_found'])),
+                int(bool(row['svg_found'])),
+                int(bool(row['log_found'])),
+                row['best_iteration'],
+                '' if not math.isfinite(float(row['diff_score'])) else f"{float(row['diff_score']):.6f}",
+                '' if not math.isfinite(float(row['error_per_pixel'])) else f"{float(row['error_per_pixel']):.8f}",
+                int(row['pixel_count']),
+                '' if not math.isfinite(float(row['total_delta2'])) else f"{float(row['total_delta2']):.6f}",
+                '' if not math.isfinite(float(row['mean_delta2'])) else f"{float(row['mean_delta2']):.6f}",
+                '' if not math.isfinite(float(row['std_delta2'])) else f"{float(row['std_delta2']):.6f}",
+            ])
+
+    with open(txt_path, 'w', encoding='utf-8') as f:
+        f.write(f'manifest_path={manifest_path}\n')
+        f.write(f'variants_updated={len(metrics)}\n')
+    return csv_path, txt_path, metrics
 
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
