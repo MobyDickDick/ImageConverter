@@ -28,10 +28,10 @@ focused on the actual project scope.
   - Prioritize `AC0811_S`, `AC0814_S`, and `AC0870_S`, where the reports also contain `Beschreibung erwartet Kreis, im Bild aber nicht robust erkennbar` and/or `Strukturprüfung: Kein belastbarer Kreis-Kandidat im Rohbild erkannt`.
   - Reuse the local mask / foreground fallback path already proven for thin-ring cases and expose enough instrumentation to tell whether the accepted circle came from Hough, foreground mask, or family-specific fallback.
 
-- [ ] Add a family-level semantic rule for the plain-ring family `AC0800`.
-  - All three committed logs (`AC0800_L/M/S`) still report `Im Bild ist Kreis erkennbar, aber nicht in der Beschreibung enthalten`.
-  - Promote `AC0800` to an explicit semantic family that derives `SEMANTIC: Kreis ohne Buchstabe` even when no text/connector clues are present.
-  - Add a regression test that locks this family once the semantic rule is implemented.
+- [x] Add a family-level semantic rule for the plain-ring family `AC0800`.
+  - `AC0800` now derives `SEMANTIC: Kreis ohne Buchstabe` as an explicit semantic family instead of relying on text clues alone.
+  - `AC0800_L` and `AC0800_M` are treated as currently optimal conversions and are locked into the AC08 regression suite so future adjustments must keep them `semantic_ok`.
+  - `AC0800_S` now keeps the converted circle concentric with the template and may no longer shrink below the original template radius during circle-only validation.
 
 - [ ] Refresh the AC08 reports after the next semantic round.
   - Re-run the affected AC08 families once the connector-orientation and circle-fallback fixes are in place.
