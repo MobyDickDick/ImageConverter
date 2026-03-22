@@ -1561,6 +1561,7 @@ class Action:
             length = float(params.get("stem_bottom", 0.0)) - float(params.get("stem_top", 0.0))
             min_key = "stem_len_min"
             ratio_key = "stem_len_min_ratio"
+            template_length = float(params.get("template_stem_bottom", 0.0)) - float(params.get("template_stem_top", 0.0))
         elif element == "arm":
             x1 = float(params.get("arm_x1", 0.0))
             y1 = float(params.get("arm_y1", 0.0))
@@ -1569,6 +1570,11 @@ class Action:
             length = float(math.hypot(x2 - x1, y2 - y1))
             min_key = "arm_len_min"
             ratio_key = "arm_len_min_ratio"
+            tx1 = float(params.get("template_arm_x1", x1))
+            ty1 = float(params.get("template_arm_y1", y1))
+            tx2 = float(params.get("template_arm_x2", x2))
+            ty2 = float(params.get("template_arm_y2", y2))
+            template_length = float(math.hypot(tx2 - tx1, ty2 - ty1))
         else:
             return
 
@@ -1577,7 +1583,7 @@ class Action:
 
         ratio = float(max(0.0, min(1.0, float(params.get(ratio_key, default_ratio)))))
         params[ratio_key] = ratio
-        params[min_key] = float(max(float(params.get(min_key, 1.0)), length * ratio, 1.0))
+        params[min_key] = float(max(float(params.get(min_key, 1.0)), length * ratio, template_length * ratio, 1.0))
 
     @staticmethod
     def _is_ac08_small_variant(name: str, params: dict) -> tuple[bool, str, float]:
@@ -2469,6 +2475,7 @@ class Action:
         params["stem_top"] = stem_top
         params["stem_bottom"] = float(h)
         params["stem_gray"] = int(round(params.get("stroke_gray", defaults.get("stroke_gray", 152))))
+
         return Action._normalize_light_circle_colors(params)
 
     @staticmethod
@@ -3375,6 +3382,18 @@ class Action:
             params["template_circle_cx"] = float(params["cx"])
         if "cy" in params and "template_circle_cy" not in params:
             params["template_circle_cy"] = float(params["cy"])
+        if "stem_top" in params and "template_stem_top" not in params:
+            params["template_stem_top"] = float(params["stem_top"])
+        if "stem_bottom" in params and "template_stem_bottom" not in params:
+            params["template_stem_bottom"] = float(params["stem_bottom"])
+        if "arm_x1" in params and "template_arm_x1" not in params:
+            params["template_arm_x1"] = float(params["arm_x1"])
+        if "arm_y1" in params and "template_arm_y1" not in params:
+            params["template_arm_y1"] = float(params["arm_y1"])
+        if "arm_x2" in params and "template_arm_x2" not in params:
+            params["template_arm_x2"] = float(params["arm_x2"])
+        if "arm_y2" in params and "template_arm_y2" not in params:
+            params["template_arm_y2"] = float(params["arm_y2"])
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         h, w = gray.shape
 

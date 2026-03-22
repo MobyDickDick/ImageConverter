@@ -4817,3 +4817,19 @@ def test_ac08_semantic_anchor_variants_convert_without_failed_svg(tmp_path: Path
     assert not (output_ac0812 / "converted_svgs" / "AC0812_M_failed.svg").exists()
     log_ac0812_m = (output_ac0812 / "reports" / "AC0812_M_element_validation.log").read_text(encoding="utf-8")
     assert "status=semantic_ok" in log_ac0812_m
+
+
+def test_persist_connector_length_floor_uses_template_stem_geometry() -> None:
+    """Connector floors should remain anchored to the semantic template, not only to the current short fit."""
+    params = {
+        "stem_top": 9.0,
+        "stem_bottom": 15.0,
+        "template_stem_top": 7.0,
+        "template_stem_bottom": 18.0,
+        "stem_len_min_ratio": 0.70,
+    }
+
+    conv.Action._persist_connector_length_floor(params, "stem", default_ratio=0.65)
+
+    assert params["stem_len_min_ratio"] == pytest.approx(0.70)
+    assert params["stem_len_min"] >= ((18.0 - 7.0) * 0.70) - 1e-6
