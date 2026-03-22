@@ -6651,17 +6651,47 @@ class Action:
             "arm": _mask_supports_element(arm_mask, "arm"),
             "text": _mask_supports_element(text_mask, "text"),
         }
+        connector_direction = str(badge_params.get("connector_family_direction", "")).lower()
+        vertical_connector_family = bool(
+            connector_direction == "vertical"
+            or (
+                expected.get("stem", False)
+                and not expected.get("arm", False)
+                and bool(badge_params.get("stem_enabled", False))
+                and not bool(badge_params.get("arm_enabled", False))
+            )
+        )
         allow_circle_mask_fallback = expected.get("circle", False) and not (
             expected.get("stem", False) or expected.get("arm", False) or expected.get("text", False)
         )
-        require_circle_mask_confirmation = expected.get("circle", False) and not allow_circle_mask_fallback
+        connector_circle_mask_fallback = bool(
+            expected.get("circle", False)
+            and vertical_connector_family
+            and local_support["circle"]
+            and not local_support["arm"]
+        )
+        require_circle_mask_confirmation = expected.get("circle", False) and not (
+            allow_circle_mask_fallback or connector_circle_mask_fallback
+        )
         observed = {
             "circle": bool(
                 (structural.get("circle", False) and (local_support["circle"] if require_circle_mask_confirmation else True))
                 or (allow_circle_mask_fallback and local_support["circle"])
+                or connector_circle_mask_fallback
             ),
             "stem": bool(local_support["stem"]),
-            "arm": bool(structural.get("arm", False) or local_support["arm"]),
+            "arm": bool(
+                local_support["arm"]
+                or (
+                    structural.get("arm", False)
+                    and not (
+                        vertical_connector_family
+                        and expected.get("arm", False) is False
+                        and local_support["circle"]
+                        and local_support["arm"] is False
+                    )
+                )
+            ),
             "text": bool(structural.get("text", False) or local_support["text"]),
         }
         issues = Action._semantic_presence_mismatches(expected, observed)
