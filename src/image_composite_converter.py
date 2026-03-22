@@ -10096,17 +10096,35 @@ def update_successful_conversions_manifest_with_metrics(
     metrics_by_variant = {str(row['variant']).upper(): row for row in metrics_rows}
 
     updated_lines: list[str] = []
+    manifest_variants: set[str] = set()
     for raw_line in resolved_manifest_path.read_text(encoding='utf-8').splitlines():
         stripped = raw_line.split('#', 1)[0].strip()
         if not stripped:
             updated_lines.append(raw_line)
             continue
         variant = stripped.split(';', 1)[0].strip().upper()
+        manifest_variants.add(variant)
         metrics = metrics_by_variant.get(variant)
         if metrics is None:
             updated_lines.append(raw_line)
             continue
         updated_lines.append(_format_successful_conversion_manifest_line(raw_line, metrics))
+
+    missing_variants = [
+        variant
+        for variant in sorted(metrics_by_variant)
+        if variant not in manifest_variants
+    ]
+    if missing_variants:
+        if updated_lines and updated_lines[-1].strip():
+            updated_lines.append('')
+        for variant in missing_variants:
+            updated_lines.append(
+                _format_successful_conversion_manifest_line(
+                    variant,
+                    metrics_by_variant[variant],
+                )
+            )
 
     resolved_manifest_path.write_text('\n'.join(updated_lines) + '\n', encoding='utf-8')
     return resolved_manifest_path, metrics_rows

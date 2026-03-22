@@ -248,6 +248,54 @@ def test_update_successful_conversions_manifest_keeps_existing_line_without_fres
     assert updated_path.read_text(encoding="utf-8").strip() == existing_line
 
 
+def test_update_successful_conversions_manifest_appends_missing_variant_with_metrics(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Missing successful variants should be appended so metrics reach the manifest file."""
+    reports_dir = tmp_path / "reports"
+    svg_dir = tmp_path / "svg"
+    image_dir = tmp_path / "images"
+    reports_dir.mkdir()
+    svg_dir.mkdir()
+    image_dir.mkdir()
+
+    manifest_path = reports_dir / "successful_conversions.txt"
+    manifest_path.write_text("# erfolgreiche Varianten\n", encoding="utf-8")
+    (reports_dir / "Iteration_Log.csv").write_text(
+        "Dateiname;Gefundene Elemente;Beste Iteration;Diff-Score;FehlerProPixel\n"
+        "AC0002_L.jpg;SEMANTIC;7;9.50;0.12500000\n",
+        encoding="utf-8-sig",
+    )
+    (reports_dir / "AC0002_L_element_validation.log").write_text("status=semantic_ok\n", encoding="utf-8")
+    (image_dir / "AC0002_L.jpg").write_bytes(b"fake-jpg")
+    (svg_dir / "AC0002_L.svg").write_text('<svg xmlns="http://www.w3.org/2000/svg" width="1" height="1"/>', encoding="utf-8")
+
+    np = conv.np
+    if np is None:
+        pytest.skip("numpy not available in this environment")
+
+    source = np.array([[[10, 10, 10]]], dtype=np.uint8)
+    rendered = np.array([[[12, 10, 10]]], dtype=np.uint8)
+
+    monkeypatch.setattr(conv.cv2, "imread", lambda path: source.copy() if path.endswith("AC0002_L.jpg") else None)
+    monkeypatch.setattr(conv.Action, "render_svg_to_numpy", staticmethod(lambda _svg, _w, _h: rendered.copy()))
+
+    updated_path, metrics = image_composite_converter.update_successful_conversions_manifest_with_metrics(
+        folder_path=str(image_dir),
+        svg_out_dir=str(svg_dir),
+        reports_out_dir=str(reports_dir),
+        manifest_path=manifest_path,
+        successful_variants=["AC0002_L"],
+    )
+
+    assert updated_path == manifest_path
+    assert [row["variant"] for row in metrics] == ["AC0002_L"]
+    manifest_text = updated_path.read_text(encoding="utf-8")
+    assert "# erfolgreiche Varianten" in manifest_text
+    assert "AC0002_L ; status=semantic_ok ; best_iteration=7 ; diff_score=9.500000 ; error_per_pixel=0.12500000 ; total_delta2=4.000000 ; mean_delta2=4.000000 ; std_delta2=0.000000 ; pixel_count=1" in manifest_text
+
+
 def test_co2_label_defaults_use_center_co_anchor_mode() -> None:
     """Default CO₂ layout should keep center_co mode and only shift left if required."""
     params = Action._apply_co2_label(Action._default_ac0870_params(15, 15))
