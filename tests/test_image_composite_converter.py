@@ -4772,6 +4772,44 @@ def test_ac08_regression_suite_preserves_previously_good_variants(
     assert f"status={expected_status}" in log_text
 
 
+def test_ac0811_l_conversion_preserves_long_bottom_stem(tmp_path: Path) -> None:
+    """AC0811_L should keep a visibly long stem instead of collapsing during validation."""
+    if (
+        image_composite_converter.np is None
+        or image_composite_converter.cv2 is None
+        or image_composite_converter.fitz is None
+    ):
+        pytest.skip("numpy/cv2/fitz not available in this environment")
+
+    images_dir = Path("artifacts/images_to_convert")
+    csv_path = images_dir / "Finale_Wurzelformen_V3.xml"
+    if not images_dir.exists() or not csv_path.exists():
+        pytest.skip("AC0811 fixture inputs not available")
+
+    output_root = tmp_path / "ac0811_l_out"
+    result = image_composite_converter.convert_range(
+        str(images_dir),
+        str(csv_path),
+        iterations=4,
+        start_ref="AC0811",
+        end_ref="AC0811",
+        output_root=str(output_root),
+    )
+
+    assert result == str(output_root)
+    svg_text = (output_root / "converted_svgs" / "AC0811_L.svg").read_text(encoding="utf-8")
+
+    import re
+
+    match_y = re.search(r'<rect x="[0-9.]+" y="([0-9.]+)" width="[0-9.]+" height="([0-9.]+)"', svg_text)
+    assert match_y is not None
+    stem_y = float(match_y.group(1))
+    stem_h = float(match_y.group(2))
+
+    assert stem_y <= 27.5
+    assert stem_h >= 16.0
+
+
 def test_ac08_semantic_anchor_variants_convert_without_failed_svg(tmp_path: Path) -> None:
     """The historical anchor failures AC0811_L and AC0812_M should now render as real SVG outputs."""
     if (
