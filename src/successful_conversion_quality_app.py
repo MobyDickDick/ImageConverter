@@ -1,4 +1,4 @@
-"""CLI helper to record quality metrics for marked-good conversions."""
+"""CLI helper to maintain the successful-conversion best list with quality metrics."""
 
 from __future__ import annotations
 
@@ -11,7 +11,7 @@ from src import image_composite_converter as converter
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description=(
-            "Aktualisiert `successful_conversions.txt` mit Qualitätskennzahlen für alle dort markierten Bildvarianten."
+            "Aktualisiert `successful_conversions.txt` als Bestenliste mit Qualitätskennzahlen für alle dort markierten Bildvarianten und übernimmt nur verbesserte Neu-Konvertierungen."
         )
     )
     parser.add_argument(
