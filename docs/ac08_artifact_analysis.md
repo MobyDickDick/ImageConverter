@@ -16,7 +16,7 @@ Die verbliebenen Mismatches clustern stark auf wenige Familien:
 
 | Familie | Betroffene Varianten | Häufigste Beobachtung |
 | --- | --- | --- |
-| `AC0800` | `L`, `M`, `S` | Kreis im Bild erkennbar, aber noch nicht robust aus der Beschreibung / Validierung abgeleitet |
+| `AC0800` | `S` | Plain-Ring-Semantik ist vorhanden; für die kleine Variante bleibt die Radius-Stabilität der sensible Punkt |
 | `AC0811` | `M`, `S` | Kreis + vertikaler Stiel werden falsch als waagrechter Strich bzw. fehlender Kreis bewertet |
 | `AC0813` | `L`, `M` | Vertikaler Anschluss wird in der Validierung als waagrechter Strich fehlklassifiziert |
 | `AC0814` | `S` | Kreisdetektion bricht im kleinen Raster zusammen |
@@ -39,10 +39,12 @@ Die Reportdaten zeigen drei wiederkehrende Problemklassen:
    - Das deutet eher auf ein Validierungs-/Primitiverkennungsproblem als auf ein
      reines SVG-Layoutproblem hin.
 
-3. **Plain-circle-Familie `AC0800` bleibt semantisch untererfasst**
-   - Alle drei Varianten melden weiterhin: `Im Bild ist Kreis erkennbar, aber nicht in der Beschreibung enthalten`.
-   - Hier fehlt sehr wahrscheinlich noch eine stabile Ableitung „Kreis ohne
-     Buchstabe“ für die Plain-Ring-Familie in der semantischen Beschreibungsschicht.
+3. **Plain-circle-Familie `AC0800_S` bleibt geometrisch sensibel**
+   - `AC0800_L` und `AC0800_M` gelten aktuell als optimal konvertiert und sollten
+     nur noch regressionsgesichert mitlaufen.
+   - Die kleine Variante ist weiterhin der empfindlichste Fall, weil ihr Kreis
+     trotz korrekter Konzentrizität optisch zu klein werden kann, wenn die
+     Radius-Optimierung unter die Template-Geometrie fällt.
 
 ## Empfohlene nächste Algorithmus-Maßnahmen
 
@@ -73,14 +75,17 @@ Priorität: **hoch**
 - Für diese Familien zusätzliche Debug-Marker in den Report aufnehmen, z. B.
   `primitive_arm_orientation=vertical|horizontal|ambiguous`.
 
-### 3. Semantische Familienableitung für `AC0800` ergänzen
+### 3. Kleine `AC0800`-Variante geometrisch stabil halten
 
 Priorität: **mittel**
 
-- `AC0800` explizit als Plain-Ring-Familie in die semantischen Familienregeln
-  aufnehmen, analog zu den bereits spezialisierten AC081x-Regeln.
-- Erwartete Ableitung: `SEMANTIC: Kreis ohne Buchstabe` ohne Connector-/Text-Zwang.
-- Danach gezielt `AC0800_L/M/S` als Regressionstest absichern.
+- `AC0800_L` und `AC0800_M` als optimale Referenzvarianten beibehalten und bei
+  künftigen AC08-Anpassungen immer mitprüfen.
+- Für `AC0800_S` sicherstellen, dass die Kreis-Optimierung die Template-Radius-
+  Untergrenze nicht unterschreitet, auch wenn Anti-Aliasing oder JPEG-Artefakte
+  lokale Fehlerminima erzeugen.
+- Die Plain-Ring-Familie weiterhin mit gezielten Regressionstests für `L/M/S`
+  absichern.
 
 ### 4. CO₂-Kleinvarianten getrennt instrumentieren
 

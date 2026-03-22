@@ -2175,7 +2175,14 @@ class Action:
             if "template_circle_cy" in p:
                 p["cy"] = float(p["template_circle_cy"])
             template_r = float(p.get("template_circle_radius", p.get("r", 1.0)))
-            p["min_circle_radius"] = float(max(float(p.get("min_circle_radius", 1.0)), template_r * 0.96))
+            min_radius_ratio = 0.96
+            if bool(p.get("ac08_small_variant_mode", False)):
+                # AC0800_S is visually very sensitive to anti-aliased radius
+                # shrinkage. Keep the small plain-ring variant at least at the
+                # template radius so later validation rounds cannot undershoot
+                # the original circle diameter.
+                min_radius_ratio = 1.0
+            p["min_circle_radius"] = float(max(float(p.get("min_circle_radius", 1.0)), template_r * min_radius_ratio))
             if "max_circle_radius" not in p:
                 p["max_circle_radius"] = float(max(template_r, template_r * 1.15))
         if p.get("draw_text", True) and "text_gray" in p:

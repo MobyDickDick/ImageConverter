@@ -436,6 +436,16 @@ def test_finalize_ac0800_preserves_plain_ring_geometry_bounds() -> None:
     assert float(params["max_circle_radius"]) <= (10.8 * 1.15) + 0.01
 
 
+def test_finalize_ac0800_small_variant_keeps_template_radius_floor() -> None:
+    """AC0800_S should not shrink below the template radius during later optimization passes."""
+    params = Action.make_badge_params(15, 15, "AC0800")
+    params["template_circle_radius"] = float(params["r"])
+    params = Action._finalize_ac08_style("AC0800_S", params)
+
+    assert params["ac08_small_variant_mode"] is True
+    assert float(params["min_circle_radius"]) >= float(params["template_circle_radius"]) - 0.01
+
+
 
 def test_validate_badge_by_elements_keeps_ac0800_l_centered_and_bounded() -> None:
     """AC0800_L should not drift left/right or overgrow during circle-only validation."""
@@ -456,6 +466,27 @@ def test_validate_badge_by_elements_keeps_ac0800_l_centered_and_bounded() -> Non
     assert float(params["cx"]) == pytest.approx(template_cx)
     assert float(params["cy"]) == pytest.approx(template_cy)
     assert float(params["r"]) <= (template_r * 1.15) + 0.01
+
+
+def test_validate_badge_by_elements_keeps_ac0800_s_at_template_radius_floor() -> None:
+    """AC0800_S should stay concentric without shrinking below the original template radius."""
+    if image_composite_converter.np is None or image_composite_converter.cv2 is None or image_composite_converter.fitz is None:
+        pytest.skip("numpy/cv2/fitz not available in this environment")
+
+    img = image_composite_converter.cv2.imread("artifacts/images_to_convert/AC0800_S.jpg")
+    assert img is not None
+
+    params = Action.make_badge_params(img.shape[1], img.shape[0], "AC0800", img)
+    template_cx = float(params["template_circle_cx"])
+    template_cy = float(params["template_circle_cy"])
+    template_r = float(params["template_circle_radius"])
+
+    logs = Action.validate_badge_by_elements(img, params, max_rounds=4)
+
+    assert logs
+    assert float(params["cx"]) == pytest.approx(template_cx)
+    assert float(params["cy"]) == pytest.approx(template_cy)
+    assert float(params["r"]) >= template_r - 0.01
 
 
 
@@ -4599,6 +4630,7 @@ def test_convert_range_continues_after_render_failure_and_writes_batch_summary(
 @pytest.mark.parametrize(
     ("variant", "expected_status"),
     [
+        ("AC0800_L", "semantic_ok"),
         ("AC0800_M", "semantic_ok"),
         ("AC0820_L", "semantic_ok"),
         ("AC0835_S", "semantic_ok"),
