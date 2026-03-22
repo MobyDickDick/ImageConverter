@@ -38,6 +38,14 @@ python -m src.image_composite_converter \
   --end ZZ9999
 ```
 
+### Qualitätsparameter für als gut markierte Konvertierungen
+
+```bash
+python -m src.successful_conversion_quality_app
+```
+
+Die kleine Anwendung liest `artifacts/converted_images/reports/successful_conversions.txt`, ergänzt die dort bereits als erfolgreich markierten Varianten automatisch um Qualitätskennzahlen wie `total_delta2 = Σ((ΔR)^2 + (ΔG)^2 + (ΔB)^2)`, `mean_delta2` und `std_delta2` und schreibt zusätzlich weiterhin einen CSV/TXT-Report zur Übersicht.
+
 ### Annotate source images
 
 ```bash
@@ -55,7 +63,7 @@ python -m compileall src tests
 python -m pytest
 python -m src.image_composite_converter --help
 python -m src.image_composite_converter artifacts/images_to_convert --descriptions-path artifacts/images_to_convert/Finale_Wurzelformen_V3.xml --ac08-regression-set --output-dir artifacts/converted_images
-# neue erfolgreich konvertierte Bild-IDs in artifacts/converted_images/reports/successful_conversions.txt eintragen
+# neue erfolgreich konvertierte Bild-IDs in artifacts/converted_images/reports/successful_conversions.txt eintragen; Qualitätswerte werden danach automatisch an diese Einträge ergänzt
 ```
 
 ## VS Code / Windows troubleshooting

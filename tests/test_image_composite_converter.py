@@ -1816,7 +1816,7 @@ def test_convert_range_filters_to_explicit_selected_variants_and_writes_regressi
 
 def test_load_successful_conversions_uses_manifest_and_allows_non_ac08_entries(tmp_path: Path) -> None:
     manifest = tmp_path / "successful_conversions.txt"
-    manifest.write_text("AC0800_L\nge0015_s\nac0811_l\n# comment\nAC0800_L\n", encoding="utf-8")
+    manifest.write_text("AC0800_L ; total_delta2=22.000000\nge0015_s\nac0811_l ; mean_delta2=11.000000\n# comment\nAC0800_L\n", encoding="utf-8")
 
     variants = image_composite_converter._load_successful_conversions(manifest)
     ac08_variants = tuple(variant for variant in variants if variant.startswith("AC08"))
@@ -4982,3 +4982,59 @@ def test_persist_connector_length_floor_uses_template_stem_geometry() -> None:
 
     assert params["stem_len_min_ratio"] == pytest.approx(0.70)
     assert params["stem_len_min"] >= ((18.0 - 7.0) * 0.70) - 1e-6
+
+
+def test_write_successful_conversion_quality_report_records_delta2_totals(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    reports_dir = tmp_path / "reports"
+    svg_dir = tmp_path / "svg"
+    image_dir = tmp_path / "images"
+    reports_dir.mkdir()
+    svg_dir.mkdir()
+    image_dir.mkdir()
+
+    (reports_dir / "successful_conversions.txt").write_text("AC0001_L\nAC9999_M\n", encoding="utf-8")
+    (reports_dir / "Iteration_Log.csv").write_text(
+        "Dateiname;Gefundene Elemente;Beste Iteration;Diff-Score;FehlerProPixel\n"
+        "AC0001_L.jpg;SEMANTIC;4;12.50;0.25000000\n",
+        encoding="utf-8-sig",
+    )
+    (reports_dir / "AC0001_L_element_validation.log").write_text("status=semantic_ok\n", encoding="utf-8")
+    (image_dir / "AC0001_L.jpg").write_bytes(b"fake-jpg")
+    (svg_dir / "AC0001_L.svg").write_text('<svg xmlns="http://www.w3.org/2000/svg" width="2" height="1"/>', encoding="utf-8")
+
+    np = conv.np
+    if np is None:
+        pytest.skip("numpy not available in this environment")
+
+    source = np.array([[[10, 10, 10], [20, 20, 20]]], dtype=np.uint8)
+    rendered = np.array([[[13, 10, 10], [17, 20, 18]]], dtype=np.uint8)
+
+    monkeypatch.setattr(conv.cv2, "imread", lambda path: source.copy() if path.endswith("AC0001_L.jpg") else None)
+    monkeypatch.setattr(conv.Action, "render_svg_to_numpy", staticmethod(lambda _svg, _w, _h: rendered.copy()))
+
+    csv_path, txt_path, rows = conv.write_successful_conversion_quality_report(
+        folder_path=str(image_dir),
+        svg_out_dir=str(svg_dir),
+        reports_out_dir=str(reports_dir),
+        successful_variants=["AC0001_L", "AC9999_M"],
+    )
+
+    assert Path(csv_path).exists()
+    assert Path(txt_path).exists()
+    assert [row["variant"] for row in rows] == ["AC0001_L", "AC9999_M"]
+    assert rows[0]["status"] == "semantic_ok"
+    assert rows[0]["best_iteration"] == "4"
+    assert rows[0]["pixel_count"] == 2
+    assert rows[0]["total_delta2"] == pytest.approx(22.0)
+    assert rows[0]["mean_delta2"] == pytest.approx(11.0)
+    assert rows[0]["std_delta2"] == pytest.approx(2.0)
+    assert rows[1]["svg_found"] is False
+
+    csv_text = Path(csv_path).read_text(encoding="utf-8")
+    assert "AC0001_L;semantic_ok;1;1;1;4;12.500000;0.25000000;2;22.000000;11.000000;2.000000" in csv_text
+
+    manifest_text = (reports_dir / "successful_conversions.txt").read_text(encoding="utf-8")
+    assert "AC0001_L ; status=semantic_ok ; best_iteration=4 ; diff_score=12.500000 ; error_per_pixel=0.25000000 ; total_delta2=22.000000 ; mean_delta2=11.000000 ; std_delta2=2.000000 ; pixel_count=2" in manifest_text
+    assert "AC9999_M" in manifest_text
+    summary_text = Path(txt_path).read_text(encoding="utf-8")
+    assert "variants_updated=2" in summary_text
