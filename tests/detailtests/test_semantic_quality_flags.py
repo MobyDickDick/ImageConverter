@@ -101,6 +101,11 @@ def test_run_iteration_pipeline_logs_borderline_quality_for_ac0811(
     )
     monkeypatch.setattr(
         image_composite_converter.Action,
+        "apply_redraw_variation",
+        staticmethod(lambda params, _w, _h: (dict(params), ["redraw_variation: seed=123 changed_params=stem_width:1.000->1.050"])),
+    )
+    monkeypatch.setattr(
+        image_composite_converter.Action,
         "calculate_error",
         staticmethod(lambda *_args, **_kwargs: 12.0),
     )
@@ -124,6 +129,7 @@ def test_run_iteration_pipeline_logs_borderline_quality_for_ac0811(
     assert "status=semantic_ok" in log_text
     assert "quality=borderline" in log_text
     assert "quality_reason=semantic_ok_trotz_hohem_elementfehler:stem=10.750" in log_text
+    assert "redraw_variation: seed=" in log_text
 
 
 def test_write_ac08_weak_family_status_report_summarizes_ranked_outliers(tmp_path: Path) -> None:

@@ -258,11 +258,56 @@ def test_finalize_ac0820_variant_name_uses_cluster_anchor_mode() -> None:
 def test_finalize_ac0800_keeps_ring_darker_than_fill() -> None:
     """AC0800 should preserve generic ring semantics: darker stroke than fill."""
     params = Action.make_badge_params(30, 30, "AC0800")
-
     assert params is not None
     assert float(params["r"]) == pytest.approx(10.8)
     assert int(params["stroke_gray"]) < int(params["fill_gray"])
     assert float(params["stroke_circle"]) >= 1.0
+
+
+def test_apply_redraw_variation_jitters_params_and_logs_seed(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Final badge redraw should apply a slight stochastic variation and record it."""
+    monkeypatch.setattr(conv.time, "time_ns", lambda: 123_456_789)
+    conv.Action.STOCHASTIC_RUN_SEED = 11
+    conv.Action.STOCHASTIC_SEED_OFFSET = 2
+    params = {
+        "circle_enabled": True,
+        "cx": 10.0,
+        "cy": 10.0,
+        "r": 4.0,
+        "stroke_circle": 1.0,
+        "draw_text": False,
+    }
+
+    varied, logs = conv.Action.apply_redraw_variation(params, 20, 20)
+
+    assert logs
+    assert logs[0].startswith("redraw_variation: seed=")
+    assert "cx:" in logs[0]
+    assert "cy:" in logs[0]
+    assert varied["cx"] != params["cx"] or varied["cy"] != params["cy"] or varied["r"] != params["r"]
+    assert 0.0 <= float(varied["cx"]) <= 20.0
+    assert 0.0 <= float(varied["cy"]) <= 20.0
+
+
+def test_apply_redraw_variation_uses_new_time_nonce_per_run(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Separate redraw passes should produce different logged parameter jitters."""
+    timestamps = iter([100, 200])
+    monkeypatch.setattr(conv.time, "time_ns", lambda: next(timestamps))
+    conv.Action.STOCHASTIC_RUN_SEED = 5
+    conv.Action.STOCHASTIC_SEED_OFFSET = 0
+    params = {
+        "circle_enabled": True,
+        "cx": 10.0,
+        "cy": 10.0,
+        "r": 4.0,
+        "stroke_circle": 1.0,
+        "draw_text": False,
+    }
+
+    _varied_a, logs_a = conv.Action.apply_redraw_variation(params, 20, 20)
+    _varied_b, logs_b = conv.Action.apply_redraw_variation(params, 20, 20)
+
+    assert logs_a[0] != logs_b[0]
 
 
 def test_select_circle_radius_plateau_candidate_prefers_plateau_midpoint(monkeypatch: pytest.MonkeyPatch) -> None:

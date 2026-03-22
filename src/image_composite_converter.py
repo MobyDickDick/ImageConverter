@@ -1422,6 +1422,69 @@ class Action:
         return p
 
     @staticmethod
+    def apply_redraw_variation(params: dict, w: int, h: int) -> tuple[dict, list[str]]:
+        """Apply a slight per-run redraw jitter and describe it for the log."""
+        p = copy.deepcopy(params)
+        variation_logs: list[str] = []
+        if w <= 0 or h <= 0:
+            return p, variation_logs
+
+        seed = (
+            int(Action.STOCHASTIC_RUN_SEED) * 1009
+            + int(Action.STOCHASTIC_SEED_OFFSET) * 101
+            + int(time.time_ns() % 1_000_000_007)
+        )
+        rng = Action._make_rng(seed)
+
+        def _uniform(delta: float) -> float:
+            return float(rng.uniform(-abs(float(delta)), abs(float(delta))))
+
+        jitter_entries: list[str] = []
+
+        def _apply_numeric_jitter(key: str, delta: float, *, minimum: float | None = None, maximum: float | None = None) -> None:
+            if key not in p:
+                return
+            try:
+                old_float = float(p.get(key))
+            except (TypeError, ValueError):
+                return
+            new_value = old_float + _uniform(delta)
+            if minimum is not None:
+                new_value = max(float(minimum), new_value)
+            if maximum is not None:
+                new_value = min(float(maximum), new_value)
+            p[key] = float(new_value)
+            jitter_entries.append(f"{key}:{old_float:.3f}->{new_value:.3f}")
+
+        _apply_numeric_jitter("cx", max(0.15, float(w) * 0.01), minimum=0.0, maximum=float(w))
+        _apply_numeric_jitter("cy", max(0.15, float(h) * 0.01), minimum=0.0, maximum=float(h))
+        _apply_numeric_jitter("r", max(0.10, float(min(w, h)) * 0.008), minimum=1.0)
+        _apply_numeric_jitter("stroke_circle", 0.12, minimum=0.4)
+        _apply_numeric_jitter("arm_len", max(0.12, float(w) * 0.012), minimum=0.5, maximum=float(max(w, h)))
+        _apply_numeric_jitter("arm_stroke", 0.12, minimum=0.4)
+        _apply_numeric_jitter("stem_height", max(0.12, float(h) * 0.012), minimum=0.5, maximum=float(max(w, h)))
+        _apply_numeric_jitter("stem_width", 0.12, minimum=0.4, maximum=float(max(1, w)))
+        _apply_numeric_jitter("text_scale", 0.03, minimum=0.35, maximum=4.0)
+        _apply_numeric_jitter("text_x", max(0.10, float(w) * 0.01), minimum=0.0, maximum=float(w))
+        _apply_numeric_jitter("text_y", max(0.10, float(h) * 0.01), minimum=0.0, maximum=float(h))
+        _apply_numeric_jitter("co2_dx", 0.08)
+        _apply_numeric_jitter("co2_dy", 0.08)
+        _apply_numeric_jitter("voc_scale", 0.03, minimum=0.35, maximum=4.0)
+
+        p = Action._clamp_circle_inside_canvas(p, w, h)
+        if p.get("arm_enabled"):
+            Action._reanchor_arm_to_circle_edge(p, float(p.get("r", 1.0)))
+        if p.get("stem_enabled") and "cy" in p and "r" in p:
+            p["stem_top"] = float(p.get("cy", 0.0)) + float(p.get("r", 0.0))
+
+        if jitter_entries:
+            variation_logs.append(
+                "redraw_variation: seed="
+                f"{seed} changed_params=" + " | ".join(jitter_entries)
+            )
+        return p, variation_logs
+
+    @staticmethod
     def _enforce_circle_connector_symmetry(params: dict, w: int, h: int) -> dict:
         """Keep circle+connector "lollipop" geometry centered around the connector axis."""
         p = dict(params)
@@ -7273,6 +7336,7 @@ def run_iteration_pipeline(
             w,
             h,
         )
+        badge_params, redraw_variation_logs = Action.apply_redraw_variation(badge_params, w, h)
         if badge_params.get("arm_enabled"):
             validation_logs.append(
                 "semantic-guard: Erwartete Arm-Geometrie bestätigt/wiederhergestellt (z.B. AC0812 links)."
@@ -7315,6 +7379,7 @@ def run_iteration_pipeline(
                     else []
                 ),
                 *quality_flags,
+                *redraw_variation_logs,
                 *validation_logs,
             ]
         )
