@@ -1113,6 +1113,7 @@ class Reflection:
 
         if base_name.upper() in {
             "AR0100",
+            "AC0800",
             "AC0811",
             "AC0810",
             "AC0812",
@@ -1135,7 +1136,7 @@ class Reflection:
             params["mode"] = "semantic_badge"
             family_elements: list[str] = []
             heuristic_elements: list[str] = []
-            if base_name.upper() in {"AC0810", "AC0811", "AC0812", "AC0813", "AC0814"}:
+            if base_name.upper() in {"AC0800", "AC0810", "AC0811", "AC0812", "AC0813", "AC0814"}:
                 family_elements.append("SEMANTIC: Kreis ohne Buchstabe")
                 params["label"] = ""
             elif re.search(r"\bco(?:[_\s-]*2|₂)\b", desc):

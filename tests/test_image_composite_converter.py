@@ -343,6 +343,17 @@ def test_parse_description_marks_ac0838_with_right_horizontal_arm() -> None:
     assert "SEMANTIC: waagrechter Strich rechts vom Kreis" in list(params.get("elements", []))
 
 
+def test_parse_description_marks_ac0800_as_plain_ring_family() -> None:
+    """AC0800 should remain a semantic plain ring even without text clues in the XML."""
+    ref = image_composite_converter.Reflection({})
+
+    _desc, params = ref.parse_description("AC0800", "AC0800_M.jpg")
+
+    assert params["mode"] == "semantic_badge"
+    assert params["label"] == ""
+    assert "SEMANTIC: Kreis ohne Buchstabe" in list(params.get("elements", []))
+
+
 def test_parse_description_does_not_misread_ac0130_text_as_top_source_ref() -> None:
     """AC0130 mentions 'oben mitte' and 'in beiden Diagonalen' but has no donor image reference."""
     raw = image_composite_converter._load_description_mapping(
@@ -4550,6 +4561,56 @@ def test_convert_range_continues_after_render_failure_and_writes_batch_summary(
     batch_summary = (output_root / "reports" / "batch_failure_summary.csv").read_text(encoding="utf-8")
     assert "AC0820_L.jpg;render_failure;composite_iteration_render_failed" in batch_summary
     assert "AC0820_L_element_validation.log" in batch_summary
+
+
+@pytest.mark.parametrize(
+    ("variant", "expected_status"),
+    [
+        ("AC0800_M", "semantic_ok"),
+        ("AC0820_L", "semantic_ok"),
+        ("AC0835_S", "semantic_ok"),
+        ("AC0837_L", "semantic_ok"),
+    ],
+)
+def test_ac08_regression_suite_preserves_previously_good_variants(
+    tmp_path: Path,
+    variant: str,
+    expected_status: str,
+) -> None:
+    """Regression-safe semantic changes must keep the already-good AC08 fixtures convertible."""
+    if (
+        image_composite_converter.np is None
+        or image_composite_converter.cv2 is None
+        or image_composite_converter.fitz is None
+    ):
+        pytest.skip("numpy/cv2/fitz not available in this environment")
+
+    images_dir = Path("artifacts/images_to_convert")
+    csv_path = images_dir / "Finale_Wurzelformen_V3.xml"
+    if not images_dir.exists() or not csv_path.exists():
+        pytest.skip("AC08 fixture inputs not available")
+
+    img_path = images_dir / f"{variant}.jpg"
+    assert img_path.exists(), f"missing regression fixture: {img_path}"
+
+    svg_dir = tmp_path / "svgs"
+    diff_dir = tmp_path / "diffs"
+    reports_dir = tmp_path / "reports"
+
+    result = image_composite_converter.run_iteration_pipeline(
+        str(img_path),
+        str(csv_path),
+        4,
+        str(svg_dir),
+        str(diff_dir),
+        str(reports_dir),
+    )
+
+    assert result is not None
+    assert (svg_dir / f"{variant}.svg").exists()
+    assert not (svg_dir / f"{variant}_failed.svg").exists()
+    log_text = (reports_dir / f"{variant}_element_validation.log").read_text(encoding="utf-8")
+    assert f"status={expected_status}" in log_text
 
 
 def test_ac08_semantic_anchor_variants_convert_without_failed_svg(tmp_path: Path) -> None:
