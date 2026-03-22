@@ -1764,7 +1764,20 @@ def test_convert_range_filters_to_explicit_selected_variants_and_writes_regressi
     assert "AC0999_L" not in manifest
     assert "set;variant;focus;reason" in manifest
     assert image_composite_converter.AC08_REGRESSION_SET_NAME in manifest
+    assert "AC0800_L;stable_good;Previously marked good plain-ring large variant" in manifest
+    assert "AC0811_L;stable_good;Known regression-safe good conversion anchor" in manifest
     assert "expected_reports=Iteration_Log.csv,quality_tercile_passes.csv,pixel_delta2_ranking.csv,pixel_delta2_summary.txt,ac08_weak_family_status.csv,ac08_weak_family_status.txt,ac08_success_metrics.csv,ac08_success_criteria.txt" in summary
+
+
+def test_load_successful_conversions_uses_manifest_and_allows_non_ac08_entries(tmp_path: Path) -> None:
+    manifest = tmp_path / "successful_conversions.txt"
+    manifest.write_text("AC0800_L\nge0015_s\nac0811_l\n# comment\nAC0800_L\n", encoding="utf-8")
+
+    variants = image_composite_converter._load_successful_conversions(manifest)
+    ac08_variants = tuple(variant for variant in variants if variant.startswith("AC08"))
+
+    assert variants == ("AC0800_L", "GE0015_S", "AC0811_L")
+    assert ac08_variants == ("AC0800_L", "AC0811_L")
 
 
 def test_write_ac08_success_criteria_report_summarizes_regression_metrics(tmp_path: Path) -> None:
@@ -1781,6 +1794,18 @@ def test_write_ac08_success_criteria_report_summarizes_regression_metrics(tmp_pa
         "pass;filename;old_error_per_pixel;new_error_per_pixel;old_mean_delta2;new_mean_delta2;improved;decision;iteration_budget;badge_validation_rounds\n"
         "1;AC0820_L.jpg;0.03000000;0.02000000;20.000000;15.000000;1;accepted_improvement;128;6\n"
         "1;AC0835_S.jpg;0.01000000;0.01200000;10.000000;10.500000;0;rejected_regression;128;6\n",
+        encoding="utf-8",
+    )
+    (reports_dir / "AC0800_L_element_validation.log").write_text(
+        "run-meta: seed=1\nstatus=semantic_ok\nRunde 1: elementweise Validierung gestartet\n",
+        encoding="utf-8",
+    )
+    (reports_dir / "AC0800_M_element_validation.log").write_text(
+        "run-meta: seed=1\nstatus=semantic_ok\nRunde 1: elementweise Validierung gestartet\n",
+        encoding="utf-8",
+    )
+    (reports_dir / "AC0800_S_element_validation.log").write_text(
+        "run-meta: seed=1\nstatus=semantic_ok\nRunde 1: elementweise Validierung gestartet\n",
         encoding="utf-8",
     )
     (reports_dir / "AC0811_L_element_validation.log").write_text(
@@ -1809,10 +1834,30 @@ def test_write_ac08_success_criteria_report_summarizes_regression_metrics(tmp_pa
     assert "batch_abort_or_render_failure_count;1" in metrics
     assert "rejected_regression_count;1" in metrics
     assert "accepted_regression_count;0" in metrics
+    assert "previous_good_expected;4" in metrics
+    assert "previous_good_preserved_count;3" in metrics
+    assert "previous_good_regressed_count;1" in metrics
+    assert "previous_good_missing_count;0" in metrics
     assert "criterion_no_new_batch_aborts=0" in summary
+    assert "previous_good_regressed=AC0811_L" in summary
     assert "criterion_no_accepted_regressions=1" in summary
     assert "criterion_regression_set_improved=1" in summary
     assert "overall_success=0" in summary
+
+
+def test_summarize_previous_good_ac08_variants_detects_regressions(tmp_path: Path) -> None:
+    reports_dir = tmp_path / "reports"
+    reports_dir.mkdir()
+    (reports_dir / "AC0800_L_element_validation.log").write_text("status=semantic_ok\n", encoding="utf-8")
+    (reports_dir / "AC0800_M_element_validation.log").write_text("status=semantic_ok\n", encoding="utf-8")
+    (reports_dir / "AC0800_S_element_validation.log").write_text("status=semantic_mismatch\n", encoding="utf-8")
+
+    summary = image_composite_converter._summarize_previous_good_ac08_variants(str(reports_dir))
+
+    assert summary["expected"] == list(image_composite_converter.AC08_PREVIOUSLY_GOOD_VARIANTS)
+    assert summary["preserved"] == ["AC0800_L", "AC0800_M"]
+    assert summary["regressed"] == ["AC0800_S"]
+    assert summary["missing"] == ["AC0811_L"]
 
 
 def test_parse_description_extracts_documented_alias_refs() -> None:

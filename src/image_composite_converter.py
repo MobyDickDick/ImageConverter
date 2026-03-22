@@ -29,7 +29,24 @@ import struct
 OPTIONAL_DEPENDENCY_ERRORS: dict[str, str] = {}
 
 
-AC08_REGRESSION_CASES: tuple[dict[str, str], ...] = (
+SUCCESSFUL_CONVERSIONS_MANIFEST = Path("artifacts/converted_images/reports/successful_conversions.txt")
+SUCCESSFUL_CONVERSIONS_FALLBACK: tuple[str, ...] = (
+    "AC0800_L",
+    "AC0800_M",
+    "AC0800_S",
+    "AC0811_L",
+)
+
+
+AC08_STABLE_GOOD_REASON_OVERRIDES: dict[str, str] = {
+    "AC0800_L": "Previously marked good plain-ring large variant that must stay semantic_ok after every AC08 adjustment.",
+    "AC0800_M": "Previously marked good plain-ring medium variant that must stay semantic_ok after every AC08 adjustment.",
+    "AC0800_S": "Previously marked good plain-ring small variant that must stay semantic_ok after every AC08 adjustment.",
+    "AC0811_L": "Known regression-safe good conversion anchor for circle-with-stem semantics; must remain semantic_ok.",
+}
+
+
+_AC08_BASE_REGRESSION_CASES: tuple[dict[str, str], ...] = (
     {"variant": "AC0882_S", "focus": "stagnation", "reason": "Small left-connector outlier that previously burned many near-identical validation rounds."},
     {"variant": "AC0837_L", "focus": "stagnation", "reason": "Large left-connector case used to verify adaptive search still moves on stubborn families."},
     {"variant": "AC0839_S", "focus": "small_variant", "reason": "Small right-connector badge that tends to drift in geometry and text placement."},
@@ -37,11 +54,46 @@ AC08_REGRESSION_CASES: tuple[dict[str, str], ...] = (
     {"variant": "AC0831_L", "focus": "semantic_vertical", "reason": "Vertical connector family representative for stem alignment and text balance."},
     {"variant": "AC0834_S", "focus": "small_variant", "reason": "Small mirrored connector badge included to catch asymmetric regressions on _S variants."},
     {"variant": "AC0835_S", "focus": "small_variant", "reason": "Small circle/text family member that stresses compact text scaling without connectors."},
-    {"variant": "AC0811_L", "focus": "semantic_vertical", "reason": "Known semantic family anchor for circle-without-letter vs. connector interpretation conflicts."},
     {"variant": "AC0812_M", "focus": "semantic_horizontal", "reason": "Medium left-connector case that complements AC0811_L and covers family-specific semantic overrides."},
 )
 
-AC08_REGRESSION_SET_NAME = "ac08_core_9"
+
+def _load_successful_conversions(manifest_path: Path = SUCCESSFUL_CONVERSIONS_MANIFEST) -> tuple[str, ...]:
+    """Load the canonical successful-conversions manifest from disk."""
+    if manifest_path.exists():
+        variants: list[str] = []
+        for raw_line in manifest_path.read_text(encoding="utf-8").splitlines():
+            line = raw_line.split("#", 1)[0].strip().upper()
+            if not line:
+                continue
+            variants.append(line)
+        normalized = tuple(dict.fromkeys(variants))
+        if normalized:
+            return normalized
+    return SUCCESSFUL_CONVERSIONS_FALLBACK
+
+
+SUCCESSFUL_CONVERSIONS = _load_successful_conversions()
+AC08_PREVIOUSLY_GOOD_VARIANTS = tuple(variant for variant in SUCCESSFUL_CONVERSIONS if variant.startswith("AC08"))
+
+
+def _build_ac08_regression_cases() -> tuple[dict[str, str], ...]:
+    stable_good_cases = [
+        {
+            "variant": variant,
+            "focus": "stable_good",
+            "reason": AC08_STABLE_GOOD_REASON_OVERRIDES.get(
+                variant,
+                f"Previously marked good AC08 variant {variant} that must stay semantic_ok after every future adjustment.",
+            ),
+        }
+        for variant in AC08_PREVIOUSLY_GOOD_VARIANTS
+    ]
+    return tuple(stable_good_cases + list(_AC08_BASE_REGRESSION_CASES))
+
+
+AC08_REGRESSION_CASES = _build_ac08_regression_cases()
+AC08_REGRESSION_SET_NAME = f"ac08_core_{len(AC08_REGRESSION_CASES)}"
 AC08_REGRESSION_VARIANTS = tuple(case["variant"] for case in AC08_REGRESSION_CASES)
 
 
@@ -9411,6 +9463,32 @@ def _write_ac08_regression_manifest(
         f.write("\n".join(summary_lines) + "\n")
 
 
+def _summarize_previous_good_ac08_variants(reports_out_dir: str) -> dict[str, object]:
+    """Summarize whether previously good AC08 variants stayed semantic_ok in the latest run."""
+    preserved: list[str] = []
+    regressed: list[str] = []
+    missing: list[str] = []
+
+    for variant in AC08_PREVIOUSLY_GOOD_VARIANTS:
+        log_path = os.path.join(reports_out_dir, f"{variant}_element_validation.log")
+        if not os.path.exists(log_path):
+            missing.append(variant)
+            continue
+        with open(log_path, "r", encoding="utf-8") as f:
+            log_text = f.read()
+        if "status=semantic_ok" in log_text and "status=semantic_mismatch" not in log_text:
+            preserved.append(variant)
+        else:
+            regressed.append(variant)
+
+    return {
+        "expected": list(AC08_PREVIOUSLY_GOOD_VARIANTS),
+        "preserved": preserved,
+        "regressed": regressed,
+        "missing": missing,
+    }
+
+
 def _write_ac08_success_criteria_report(
     reports_out_dir: str,
     *,
@@ -9483,10 +9561,19 @@ def _write_ac08_success_criteria_report(
         else 0.0
     )
 
+    previous_good = _summarize_previous_good_ac08_variants(reports_out_dir)
+    previous_good_preserved_count = len(previous_good["preserved"])
+    previous_good_regressed_count = len(previous_good["regressed"])
+    previous_good_missing_count = len(previous_good["missing"])
+
     regression_set_improved = improved_error_count > 0 or improved_mean_delta2_count > 0
     no_new_batch_aborts = batch_abort_count == 0
     no_accepted_regressions = accepted_regression_count == 0
-    stable_families_not_worse = no_accepted_regressions
+    stable_families_not_worse = (
+        no_accepted_regressions
+        and previous_good_regressed_count == 0
+        and previous_good_missing_count == 0
+    )
     overall_success = (
         no_new_batch_aborts
         and no_accepted_regressions
@@ -9508,6 +9595,10 @@ def _write_ac08_success_criteria_report(
         writer.writerow(["batch_abort_or_render_failure_count", batch_abort_count])
         writer.writerow(["rejected_regression_count", rejected_regression_count])
         writer.writerow(["accepted_regression_count", accepted_regression_count])
+        writer.writerow(["previous_good_expected", len(previous_good["expected"])])
+        writer.writerow(["previous_good_preserved_count", previous_good_preserved_count])
+        writer.writerow(["previous_good_regressed_count", previous_good_regressed_count])
+        writer.writerow(["previous_good_missing_count", previous_good_missing_count])
         writer.writerow(["mean_validation_rounds_per_file", f"{mean_validation_rounds:.3f}"])
         writer.writerow(["criterion_no_new_batch_aborts", int(no_new_batch_aborts)])
         writer.writerow(["criterion_no_accepted_regressions", int(no_accepted_regressions)])
@@ -9529,6 +9620,10 @@ def _write_ac08_success_criteria_report(
         f"batch_abort_or_render_failure_count={batch_abort_count}",
         f"rejected_regression_count={rejected_regression_count}",
         f"accepted_regression_count={accepted_regression_count}",
+        f"previous_good_expected={len(previous_good['expected'])}",
+        f"previous_good_preserved_count={previous_good_preserved_count}",
+        f"previous_good_regressed_count={previous_good_regressed_count}",
+        f"previous_good_missing_count={previous_good_missing_count}",
         f"mean_validation_rounds_per_file={mean_validation_rounds:.3f}",
         f"criterion_no_new_batch_aborts={int(no_new_batch_aborts)}",
         f"criterion_no_accepted_regressions={int(no_accepted_regressions)}",
@@ -9538,6 +9633,12 @@ def _write_ac08_success_criteria_report(
     ]
     if missing_variants:
         summary_lines.append("missing_variants=" + ",".join(missing_variants))
+    if previous_good["preserved"]:
+        summary_lines.append("previous_good_preserved=" + ",".join(previous_good["preserved"]))
+    if previous_good["regressed"]:
+        summary_lines.append("previous_good_regressed=" + ",".join(previous_good["regressed"]))
+    if previous_good["missing"]:
+        summary_lines.append("previous_good_missing=" + ",".join(previous_good["missing"]))
 
     with open(os.path.join(reports_out_dir, "ac08_success_criteria.txt"), "w", encoding="utf-8") as f:
         f.write("\n".join(summary_lines) + "\n")

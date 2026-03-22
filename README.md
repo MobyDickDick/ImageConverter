@@ -54,6 +54,8 @@ python -m src.image_composite_converter \
 python -m compileall src tests
 python -m pytest
 python -m src.image_composite_converter --help
+python -m src.image_composite_converter artifacts/images_to_convert --descriptions-path artifacts/images_to_convert/Finale_Wurzelformen_V3.xml --ac08-regression-set --output-dir artifacts/converted_images
+# neue erfolgreich konvertierte Bild-IDs in artifacts/converted_images/reports/successful_conversions.txt eintragen
 ```
 
 ## VS Code / Windows troubleshooting

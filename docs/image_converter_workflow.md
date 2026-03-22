@@ -20,7 +20,7 @@ python -m src.image_composite_converter \
   --interactive-range
 ```
 
-## 3. Regression-Set für AC08
+## 3. Regression-Set für AC08 und Schutz der bereits guten Varianten
 
 ```bash
 python -m src.image_composite_converter \
@@ -29,6 +29,8 @@ python -m src.image_composite_converter \
   --ac08-regression-set \
   --output-dir artifacts/converted_images
 ```
+
+Dabei werden die bereits als gut markierten Varianten aus `artifacts/converted_images/reports/successful_conversions.txt` immer mitgeprüft. Die Datei darf beliebige Bild-IDs enthalten. Für AC08 wird daraus automatisch nur der AC08-Teil in das feste Regression-Set und in die Preservation-Checks übernommen. Wenn eine dieser Varianten nicht mehr `semantic_ok` ist, gilt die Anpassung nicht als erfolgreich und muss vor dem nächsten Schritt korrigiert oder verworfen werden.
 
 ## 4. Linux-Vendor-Kommando ausgeben
 
