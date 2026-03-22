@@ -343,6 +343,22 @@ def test_generate_badge_svg_emits_background_rect_when_requested() -> None:
     assert '<rect x="0" y="0" width="30.0000" height="30.0000" fill="#ffffff"/>' in svg
 
 
+def test_fit_semantic_badge_uses_border_touch_fallback_for_tiny_plain_ring() -> None:
+    """Tiny plain rings that touch every border should expand to the canvas-fitting circle."""
+    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+        pytest.skip("numpy/cv2 not available in this environment")
+
+    img = image_composite_converter.cv2.imread("artifacts/images_to_convert/AC0800_S.jpg")
+    assert img is not None
+
+    fitted = Action.make_badge_params(img.shape[1], img.shape[0], "AC0800", img)
+
+    assert fitted is not None
+    assert float(fitted["cx"]) == pytest.approx(7.5)
+    assert float(fitted["cy"]) == pytest.approx(7.5)
+    assert float(fitted["r"]) == pytest.approx(7.0)
+
+
 def test_fit_semantic_badge_estimates_ring_style_for_plain_circle() -> None:
     """Plain circles should infer ring/center style from raster tones generically."""
     if image_composite_converter.np is None or image_composite_converter.cv2 is None:
