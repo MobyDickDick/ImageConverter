@@ -10,6 +10,8 @@
       "console": "integratedTerminal",
       "args": [
         "artifacts/images_to_convert",
+        "--descriptions-path",
+        "artifacts/descriptions/Finale_Wurzelformen_V3.xml",
         "--interactive-range"
       ],
       "justMyCode": false
