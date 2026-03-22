@@ -1040,6 +1040,21 @@ def test_quantize_clamps_circle_radius_to_canvas_bounds() -> None:
     assert float(quantized["r"]) <= 12.0 + 1e-6
 
 
+def test_quantize_promotes_near_canvas_fitting_circle_radius() -> None:
+    """Near-border circles should snap up to the true canvas fit instead of shrinking asymmetrically."""
+    params = {
+        "circle_enabled": True,
+        "cx": 12.5,
+        "cy": 12.5,
+        "r": 11.666666666666666,
+        "stroke_circle": 1.0,
+    }
+
+    quantized = Action._quantize_badge_params(params, w=25, h=45)
+
+    assert float(quantized["r"]) == pytest.approx(12.0)
+
+
 def test_circle_bounds_respect_canvas_for_locked_center() -> None:
     """Circle optimization bounds must not permit radii outside canvas limits."""
     params = {
