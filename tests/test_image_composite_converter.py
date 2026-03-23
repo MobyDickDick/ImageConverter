@@ -821,13 +821,15 @@ def test_scale_badge_params_reanchors_vertical_stem_after_circle_canvas_fit() ->
     assert float(scaled["template_stem_bottom"]) == pytest.approx(35.0)
 
 
-def test_default_ac0811_params_use_larger_lowered_circle_template() -> None:
-    """AC0811 defaults should keep a fuller circle with a bit more top clearance."""
-    params = Action._default_ac0811_params(25, 45)
+def test_default_edge_anchored_circle_geometry_keeps_symmetric_clearance() -> None:
+    """Edge-anchored connector badges should use the same clearance rule at either edge."""
+    top = Action._default_edge_anchored_circle_geometry(25, 45, anchor="top")
+    bottom = Action._default_edge_anchored_circle_geometry(25, 45, anchor="bottom")
 
-    assert float(params["r"]) == pytest.approx(10.75)
-    assert float(params["cy"]) == pytest.approx(12.75)
-    assert float(params["stem_top"]) == pytest.approx(23.5)
+    assert float(top["r"]) == pytest.approx(10.75)
+    assert float(top["cy"]) == pytest.approx(12.75)
+    assert float(bottom["r"]) == pytest.approx(float(top["r"]))
+    assert float(bottom["cy"]) == pytest.approx(45.0 - float(top["cy"]))
 
 
 def test_finalize_plain_ac08_badge_reanchors_circle_to_template_center() -> None:
