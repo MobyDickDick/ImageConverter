@@ -811,14 +811,23 @@ def test_scale_badge_params_reanchors_vertical_stem_after_circle_canvas_fit() ->
     scaled = image_composite_converter._scale_badge_params(anchor, 25, 45, 20, 35)
 
     assert float(scaled["cx"]) == pytest.approx(10.0)
-    assert float(scaled["cy"]) == pytest.approx(9.7222, abs=0.02)
-    assert float(scaled["r"]) == pytest.approx(8.0, abs=0.02)
+    assert float(scaled["cy"]) == pytest.approx(9.9167, abs=0.02)
+    assert float(scaled["r"]) == pytest.approx(8.6, abs=0.02)
     assert float(scaled["stem_top"]) == pytest.approx(float(scaled["cy"]) + float(scaled["r"]) - (float(scaled["stem_width"]) * 0.55), abs=0.02)
     assert float(scaled["stem_bottom"]) == pytest.approx(35.0)
     assert float(scaled["template_circle_cx"]) == pytest.approx(10.0)
-    assert float(scaled["template_circle_cy"]) == pytest.approx(9.7222, abs=0.02)
-    assert float(scaled["template_circle_radius"]) == pytest.approx(8.0)
+    assert float(scaled["template_circle_cy"]) == pytest.approx(9.9167, abs=0.02)
+    assert float(scaled["template_circle_radius"]) == pytest.approx(8.6)
     assert float(scaled["template_stem_bottom"]) == pytest.approx(35.0)
+
+
+def test_default_ac0811_params_use_larger_lowered_circle_template() -> None:
+    """AC0811 defaults should keep a fuller circle with a bit more top clearance."""
+    params = Action._default_ac0811_params(25, 45)
+
+    assert float(params["r"]) == pytest.approx(10.75)
+    assert float(params["cy"]) == pytest.approx(12.75)
+    assert float(params["stem_top"]) == pytest.approx(23.5)
 
 
 def test_finalize_plain_ac08_badge_reanchors_circle_to_template_center() -> None:

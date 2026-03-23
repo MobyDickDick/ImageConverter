@@ -2514,10 +2514,12 @@ class Action:
         if w <= 0 or h <= 0:
             return Action._default_ac081x_shared(w, h)
 
-        r = float(w) * 0.4
+        r = float(w) * 0.43
         stroke_circle = max(0.9, float(w) / 15.0)
         cx = float(w) / 2.0
-        cy = float(w) / 2.0
+        # Keep the circle slightly lower than a pure width/2 center so the
+        # upper arc does not look visually clipped on the taller AC0811_L canvas.
+        cy = r + max(stroke_circle * 0.75, float(w) * 0.08)
         stem_width = max(1.0, float(w) * 0.10)
         # AC0811 reference symbols use a visually slim vertical handle.
         # Persist an explicit width ceiling so later fitting/validation
