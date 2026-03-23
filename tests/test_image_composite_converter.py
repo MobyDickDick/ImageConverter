@@ -774,6 +774,28 @@ def test_finalize_elongated_connector_badge_does_not_add_radius_floor() -> None:
     assert "min_circle_radius" not in params
 
 
+def test_scale_badge_params_reanchors_vertical_stem_after_circle_canvas_fit() -> None:
+    """Scaled AC0811-family stems must stay attached when the circle gets clipped to a smaller canvas."""
+    anchor = Action._default_ac0811_params(25, 45)
+    anchor["template_circle_cx"] = float(anchor["cx"])
+    anchor["template_circle_cy"] = float(anchor["cy"])
+    anchor["template_circle_radius"] = float(anchor["r"])
+    anchor["template_stem_top"] = float(anchor["stem_top"])
+    anchor["template_stem_bottom"] = float(anchor["stem_bottom"])
+
+    scaled = image_composite_converter._scale_badge_params(anchor, 25, 45, 20, 35)
+
+    assert float(scaled["cx"]) == pytest.approx(10.0)
+    assert float(scaled["cy"]) == pytest.approx(9.7222, abs=0.02)
+    assert float(scaled["r"]) == pytest.approx(8.0, abs=0.02)
+    assert float(scaled["stem_top"]) == pytest.approx(float(scaled["cy"]) + float(scaled["r"]) - (float(scaled["stem_width"]) * 0.55), abs=0.02)
+    assert float(scaled["stem_bottom"]) == pytest.approx(35.0)
+    assert float(scaled["template_circle_cx"]) == pytest.approx(10.0)
+    assert float(scaled["template_circle_cy"]) == pytest.approx(9.7222, abs=0.02)
+    assert float(scaled["template_circle_radius"]) == pytest.approx(8.0)
+    assert float(scaled["template_stem_bottom"]) == pytest.approx(35.0)
+
+
 def test_finalize_plain_ac08_badge_reanchors_circle_to_template_center() -> None:
     """Plain AC08xx badges should lock to template circle center, not drifted fit center."""
     params = Action._apply_co2_label(Action._default_ac0870_params(20, 20))
