@@ -137,8 +137,24 @@ def test_detect_semantic_primitives_detects_plain_ring_without_arm() -> None:
     observed = conv.Action._detect_semantic_primitives(img)
 
     assert observed["circle"] is True
+    assert observed["stem"] is False
     assert observed["arm"] is False
     assert observed["text"] is False
+
+
+def test_detect_semantic_primitives_detects_vertical_connector_without_arm() -> None:
+    """AC0813 badges should report a vertical connector, not hallucinate a horizontal one."""
+    if conv.cv2 is None or conv.np is None:
+        pytest.skip("opencv/numpy not available in this environment")
+
+    img = conv.cv2.imread("artifacts/images_to_convert/AC0813_L.jpg")
+    assert img is not None
+
+    observed = conv.Action._detect_semantic_primitives(img)
+
+    assert observed["circle"] is True
+    assert observed["stem"] is True
+    assert observed["arm"] is False
 
 
 def test_foreground_mask_keeps_tiny_plain_ring_pixels() -> None:
@@ -694,6 +710,15 @@ def test_parse_description_marks_ac0833_with_right_horizontal_arm() -> None:
     _desc, params = ref.parse_description("AC0833", "AC0833_S.jpg")
 
     assert "SEMANTIC: waagrechter Strich rechts vom Kreis" in list(params.get("elements", []))
+
+
+def test_parse_description_marks_ac0813_with_top_vertical_connector() -> None:
+    """AC0813 belongs to the top-connector family and must encode that semantic element."""
+    ref = image_composite_converter.Reflection({})
+
+    _desc, params = ref.parse_description("AC0813", "AC0813_L.jpg")
+
+    assert "SEMANTIC: senkrechter Strich oben vom Kreis" in list(params.get("elements", []))
 
 
 def test_parse_description_marks_ac0838_with_right_horizontal_arm() -> None:
@@ -1646,7 +1671,26 @@ def test_detect_semantic_primitives_ignores_t_glyph_bar_inside_circle() -> None:
     observed = Action._detect_semantic_primitives(img)
 
     assert observed["circle"] is True
+    assert observed["stem"] is False
     assert observed["arm"] is False
+
+
+def test_validate_semantic_description_alignment_accepts_ac0813_vertical_connector() -> None:
+    """Vertical connector families should not fail semantic validation due to arm hallucinations."""
+    if image_composite_converter.cv2 is None:
+        pytest.skip("cv2 not available in this environment")
+
+    img = image_composite_converter.cv2.imread("artifacts/images_to_convert/AC0813_L.jpg")
+    assert img is not None
+
+    badge_params = Action.make_badge_params(img.shape[1], img.shape[0], "AC0813", img)
+    issues = Action.validate_semantic_description_alignment(
+        img,
+        ["SEMANTIC: Kreis ohne Buchstabe", "SEMANTIC: senkrechter Strich oben vom Kreis"],
+        badge_params,
+    )
+
+    assert issues == []
 
 
 
