@@ -2509,15 +2509,61 @@ class Action:
         }
 
     @staticmethod
+    def _default_edge_anchored_circle_geometry(
+        w: int,
+        h: int,
+        *,
+        anchor: str,
+        radius_ratio: float = 0.43,
+        stroke_divisor: float = 15.0,
+        edge_clearance_ratio: float = 0.08,
+        edge_clearance_stroke_factor: float = 0.75,
+    ) -> dict[str, float]:
+        """Return circle geometry for connector badges anchored near one canvas edge.
+
+        Elongated AC08 connector badges use a circle that is sized from the narrow
+        canvas dimension and visually offset away from the edge where the connector
+        originates. Using the same clearance rule for each anchor direction keeps
+        the ring from appearing clipped without baking variant-specific offsets into
+        one SKU.
+        """
+        narrow = float(min(w, h))
+        stroke_circle = max(0.9, narrow / stroke_divisor)
+        r = narrow * radius_ratio
+        cx = float(w) / 2.0
+        cy = float(h) / 2.0
+        edge_clearance = max(stroke_circle * edge_clearance_stroke_factor, narrow * edge_clearance_ratio)
+
+        anchor_key = anchor.lower()
+        if anchor_key == "top":
+            cy = r + edge_clearance
+        elif anchor_key == "bottom":
+            cy = float(h) - (r + edge_clearance)
+        elif anchor_key == "left":
+            cx = r + edge_clearance
+        elif anchor_key == "right":
+            cx = float(w) - (r + edge_clearance)
+        else:
+            raise ValueError(f"Unsupported anchor: {anchor}")
+
+        return {
+            "cx": cx,
+            "cy": cy,
+            "r": r,
+            "stroke_circle": stroke_circle,
+        }
+
+    @staticmethod
     def _default_ac0811_params(w: int, h: int) -> dict:
         """AC0811 is vertically elongated: circle sits in the upper square area."""
         if w <= 0 or h <= 0:
             return Action._default_ac081x_shared(w, h)
 
-        r = float(w) * 0.4
-        stroke_circle = max(0.9, float(w) / 15.0)
-        cx = float(w) / 2.0
-        cy = float(w) / 2.0
+        circle = Action._default_edge_anchored_circle_geometry(w, h, anchor="top")
+        cx = float(circle["cx"])
+        cy = float(circle["cy"])
+        r = float(circle["r"])
+        stroke_circle = float(circle["stroke_circle"])
         stem_width = max(1.0, float(w) * 0.10)
         # AC0811 reference symbols use a visually slim vertical handle.
         # Persist an explicit width ceiling so later fitting/validation
@@ -3246,12 +3292,13 @@ class Action:
         if w <= 0 or h <= 0:
             return Action._default_ac081x_shared(w, h)
 
-        # AC0813 is a vertically elongated symbol; like AC0811/AC0812 variants,
-        # keep the circle sized from the narrow side so the top arm can reach it.
-        r = float(w) * 0.4
-        stroke_circle = max(0.9, float(w) / 15.0)
-        cx = float(w) / 2.0
-        cy = float(h) - (float(w) / 2.0)
+        # Like other edge-anchored connector badges, size from the narrow side and
+        # keep a small optical clearance from the anchored edge.
+        circle = Action._default_edge_anchored_circle_geometry(w, h, anchor="bottom")
+        cx = float(circle["cx"])
+        cy = float(circle["cy"])
+        r = float(circle["r"])
+        stroke_circle = float(circle["stroke_circle"])
         arm_stroke = max(1.0, float(w) * 0.10)
 
         return Action._normalize_light_circle_colors(

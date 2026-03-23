@@ -811,14 +811,25 @@ def test_scale_badge_params_reanchors_vertical_stem_after_circle_canvas_fit() ->
     scaled = image_composite_converter._scale_badge_params(anchor, 25, 45, 20, 35)
 
     assert float(scaled["cx"]) == pytest.approx(10.0)
-    assert float(scaled["cy"]) == pytest.approx(9.7222, abs=0.02)
-    assert float(scaled["r"]) == pytest.approx(8.0, abs=0.02)
+    assert float(scaled["cy"]) == pytest.approx(9.9167, abs=0.02)
+    assert float(scaled["r"]) == pytest.approx(8.6, abs=0.02)
     assert float(scaled["stem_top"]) == pytest.approx(float(scaled["cy"]) + float(scaled["r"]) - (float(scaled["stem_width"]) * 0.55), abs=0.02)
     assert float(scaled["stem_bottom"]) == pytest.approx(35.0)
     assert float(scaled["template_circle_cx"]) == pytest.approx(10.0)
-    assert float(scaled["template_circle_cy"]) == pytest.approx(9.7222, abs=0.02)
-    assert float(scaled["template_circle_radius"]) == pytest.approx(8.0)
+    assert float(scaled["template_circle_cy"]) == pytest.approx(9.9167, abs=0.02)
+    assert float(scaled["template_circle_radius"]) == pytest.approx(8.6)
     assert float(scaled["template_stem_bottom"]) == pytest.approx(35.0)
+
+
+def test_default_edge_anchored_circle_geometry_keeps_symmetric_clearance() -> None:
+    """Edge-anchored connector badges should use the same clearance rule at either edge."""
+    top = Action._default_edge_anchored_circle_geometry(25, 45, anchor="top")
+    bottom = Action._default_edge_anchored_circle_geometry(25, 45, anchor="bottom")
+
+    assert float(top["r"]) == pytest.approx(10.75)
+    assert float(top["cy"]) == pytest.approx(12.75)
+    assert float(bottom["r"]) == pytest.approx(float(top["r"]))
+    assert float(bottom["cy"]) == pytest.approx(45.0 - float(top["cy"]))
 
 
 def test_finalize_plain_ac08_badge_reanchors_circle_to_template_center() -> None:
