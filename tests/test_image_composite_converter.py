@@ -180,6 +180,39 @@ def test_semantic_validation_accepts_text_supported_by_local_mask(monkeypatch: p
     assert issues == []
 
 
+def test_semantic_validation_ignores_structural_false_positives_for_plain_circle_badge(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Connector-free circle badges should not fail only because raw heuristics hallucinate arm/text noise."""
+    if conv.np is None:
+        pytest.skip("numpy not available in this environment")
+
+    monkeypatch.setattr(
+        conv.Action,
+        "_detect_semantic_primitives",
+        staticmethod(lambda _img: {"circle": True, "arm": True, "text": True}),
+    )
+    monkeypatch.setattr(conv.Action, "_mask_bbox", staticmethod(lambda _mask: (2.0, 2.0, 7.0, 7.0)))
+    monkeypatch.setattr(conv.Action, "_mask_centroid_radius", staticmethod(lambda _mask: (4.5, 4.5, 2.5)))
+
+    circle_mask = conv.np.zeros((10, 10), dtype=bool)
+    for y, x in [(2, 4), (3, 6), (5, 7), (7, 5), (6, 3), (4, 2)]:
+        circle_mask[y, x] = True
+
+    def fake_extract(_img, _params, element: str):
+        return circle_mask if element == "circle" else None
+
+    monkeypatch.setattr(conv.Action, "extract_badge_element_mask", staticmethod(fake_extract))
+
+    issues = conv.Action.validate_semantic_description_alignment(
+        conv.np.zeros((10, 10, 3), dtype=conv.np.uint8),
+        ["SEMANTIC: Kreis ohne Buchstabe"],
+        {"cx": 4.5, "cy": 4.5, "r": 2.5, "draw_text": False},
+    )
+
+    assert issues == []
+
+
 def test_source_loads_numpy_before_cv2() -> None:
     """cv2 must be initialized after numpy so vendored OpenCV can resolve its dependency."""
     source = Path(image_composite_converter.__file__).read_text(encoding="utf-8")
