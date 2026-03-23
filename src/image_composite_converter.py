@@ -1271,6 +1271,8 @@ class Reflection:
                 family_elements.append("SEMANTIC: waagrechter Strich rechts vom Kreis")
             if base_name.upper() in {"AC0811", "AC0881", "AC0831", "AC0836"}:
                 family_elements.append("SEMANTIC: senkrechter Strich hinter dem Kreis")
+            if base_name.upper() in {"AC0813"}:
+                family_elements.append("SEMANTIC: senkrechter Strich oben vom Kreis")
             if base_name.upper() in {"AC0812", "AC0832", "AC0837", "AC0882"}:
                 family_elements.append("SEMANTIC: waagrechter Strich links vom Kreis")
             if "waagrechter strich rechts" in desc:
@@ -6742,8 +6744,9 @@ class Action:
                 has_circle = True
                 circle_geom = fallback_circle
 
-        # Horizontal line cue: long near-horizontal segment via probabilistic Hough.
+        # Connector cues: long near-axis-aligned segment via probabilistic Hough.
         has_arm = False
+        has_stem = False
         edges = cv2.Canny(gray, 45, 140)
         lines = cv2.HoughLinesP(
             edges,
@@ -6758,9 +6761,9 @@ class Action:
                 x1, y1, x2, y2 = [int(v) for v in seg]
                 dx = abs(x2 - x1)
                 dy = abs(y2 - y1)
-                if dx < max(6, int(round(float(w) * 0.20))):
-                    continue
-                if dy > max(1, int(round(dx * 0.18))):
+                is_horizontal = dx >= max(6, int(round(float(w) * 0.20))) and dy <= max(1, int(round(dx * 0.18)))
+                is_vertical = dy >= max(6, int(round(float(h) * 0.20))) and dx <= max(1, int(round(dy * 0.18)))
+                if not is_horizontal and not is_vertical:
                     continue
                 if circle_geom is not None:
                     cx, cy, radius = circle_geom
@@ -6779,7 +6782,7 @@ class Action:
                         outside_len += max(0.0, endpoint_d2 - expanded_r)
                     if outside_len < max(2.0, float(w) * 0.08):
                         continue
-                    sample_count = max(8, dx + 1)
+                    sample_count = max(8, max(dx, dy) + 1)
                     near_ring = 0
                     outside_samples = 0
                     for step in range(sample_count):
@@ -6797,12 +6800,23 @@ class Action:
                     # small fraction actually leaves the circle silhouette.
                     if near_ring >= int(round(sample_count * 0.55)) and outside_samples <= int(round(sample_count * 0.35)):
                         continue
-                    # Real semantic arms must sit mostly on one side of the circle.
-                    mid_x = (float(x1) + float(x2)) / 2.0
-                    if abs(mid_x - cx) < max(1.5, float(radius) * 0.35):
-                        continue
-                has_arm = True
-                break
+                    if is_horizontal:
+                        # Real semantic arms must sit mostly on one side of the circle.
+                        mid_x = (float(x1) + float(x2)) / 2.0
+                        if abs(mid_x - cx) < max(1.5, float(radius) * 0.35):
+                            continue
+                    if is_vertical:
+                        # Real semantic stems/vertical arms must sit mostly above or
+                        # below the circle rather than through its center.
+                        mid_y = (float(y1) + float(y2)) / 2.0
+                        if abs(mid_y - cy) < max(1.5, float(radius) * 0.35):
+                            continue
+                if is_horizontal:
+                    has_arm = True
+                if is_vertical:
+                    has_stem = True
+                if has_arm and has_stem:
+                    break
 
         # Text cue: several small-ish connected components in center ROI.
         has_text = False
@@ -6841,6 +6855,7 @@ class Action:
 
         return {
             "circle": bool(has_circle),
+            "stem": bool(has_stem),
             "arm": bool(has_arm),
             "text": bool(has_text),
         }
@@ -6875,28 +6890,47 @@ class Action:
             density = float(pixel_count) / max(1.0, area)
             if element == "circle":
                 return Action._mask_supports_circle(mask)
+            if element == "stem":
+                return pixel_count >= 5 and (height / max(1.0, width)) >= 2.2
             if element == "arm":
-                return pixel_count >= 5 and max(width, height) / max(1.0, min(width, height)) >= 2.2
+                return pixel_count >= 5 and (width / max(1.0, height)) >= 2.2
             if element == "text":
                 return pixel_count >= max(4, int(round(min(width, height) * 0.35))) and density >= 0.08
             return pixel_count >= 4
 
-        local_support = {
-            "circle": _mask_supports_element(circle_mask, "circle"),
-            "stem": _mask_supports_element(stem_mask, "stem"),
-            "arm": _mask_supports_element(arm_mask, "arm"),
-            "text": _mask_supports_element(text_mask, "text"),
-        }
         connector_direction = str(badge_params.get("connector_family_direction", "")).lower()
+        arm_is_vertical = bool(
+            badge_params.get("arm_enabled", False)
+            and abs(float(badge_params.get("arm_x2", 0.0)) - float(badge_params.get("arm_x1", 0.0)))
+            <= abs(float(badge_params.get("arm_y2", 0.0)) - float(badge_params.get("arm_y1", 0.0)))
+        )
         vertical_connector_family = bool(
             connector_direction == "vertical"
             or (
                 expected.get("stem", False)
                 and not expected.get("arm", False)
-                and bool(badge_params.get("stem_enabled", False))
-                and not bool(badge_params.get("arm_enabled", False))
+                and (
+                    (bool(badge_params.get("stem_enabled", False)) and not bool(badge_params.get("arm_enabled", False)))
+                    or arm_is_vertical
+                )
             )
         )
+        local_support = {
+            "circle": _mask_supports_element(circle_mask, "circle"),
+            "stem": bool(
+                _mask_supports_element(stem_mask, "stem")
+                or (
+                    vertical_connector_family
+                    and bool(badge_params.get("arm_enabled", False))
+                    and _mask_supports_element(arm_mask, "stem")
+                )
+            ),
+            "arm": bool(
+                not vertical_connector_family
+                and _mask_supports_element(arm_mask, "arm")
+            ),
+            "text": _mask_supports_element(text_mask, "text"),
+        }
         allow_circle_mask_fallback = expected.get("circle", False) and not (
             expected.get("stem", False) or expected.get("arm", False) or expected.get("text", False)
         )
@@ -6924,11 +6958,12 @@ class Action:
                 or (allow_circle_mask_fallback and local_support["circle"])
                 or connector_circle_mask_fallback
             ),
-            "stem": bool(local_support["stem"]),
+            "stem": bool(local_support["stem"] or (structural.get("stem", False) and not plain_circle_badge)),
             "arm": bool(
                 local_support["arm"]
                 or (
                     structural.get("arm", False)
+                    and not structural.get("stem", False)
                     and not plain_circle_badge
                     and not (
                         vertical_connector_family
