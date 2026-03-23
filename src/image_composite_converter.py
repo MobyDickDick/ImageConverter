@@ -4082,36 +4082,11 @@ class Action:
             )
 
         if p.get("arm_enabled"):
-            arm_x1 = float(p.get("arm_x1", 0.0))
-            arm_y1 = float(p.get("arm_y1", p.get("arm_y", 0.0)))
-            arm_x2 = float(p.get("arm_x2", 0.0))
-            arm_y2 = float(p.get("arm_y2", p.get("arm_y", arm_y1)))
+            arm_x1 = float(Action._clip_scalar(float(p.get("arm_x1", 0.0)), 0.0, float(w)))
+            arm_y1 = float(Action._clip_scalar(float(p.get("arm_y1", p.get("arm_y", 0.0))), 0.0, float(h)))
+            arm_x2 = float(Action._clip_scalar(float(p.get("arm_x2", 0.0)), 0.0, float(w)))
+            arm_y2 = float(Action._clip_scalar(float(p.get("arm_y2", p.get("arm_y", arm_y1))), 0.0, float(h)))
             arm_stroke = float(p["arm_stroke"])
-            arm_half_stroke = arm_stroke * 0.5
-
-            # When a rounded connector ends exactly on the SVG border, rasterizers
-            # clip away half the cap and the arm looks visibly too short. Extend
-            # border-touching endpoints slightly beyond the viewBox so the rendered
-            # arm still reaches the expected canvas edge.
-            if arm_x1 <= 0.01:
-                arm_x1 = -arm_half_stroke
-            elif arm_x1 >= (float(w) - 0.01):
-                arm_x1 = float(w) + arm_half_stroke
-
-            if arm_x2 <= 0.01:
-                arm_x2 = -arm_half_stroke
-            elif arm_x2 >= (float(w) - 0.01):
-                arm_x2 = float(w) + arm_half_stroke
-
-            if arm_y1 <= 0.01:
-                arm_y1 = -arm_half_stroke
-            elif arm_y1 >= (float(h) - 0.01):
-                arm_y1 = float(h) + arm_half_stroke
-
-            if arm_y2 <= 0.01:
-                arm_y2 = -arm_half_stroke
-            elif arm_y2 >= (float(h) - 0.01):
-                arm_y2 = float(h) + arm_half_stroke
 
             elements.append(
                 (
@@ -4123,15 +4098,14 @@ class Action:
             )
 
         if p.get("stem_enabled"):
-            stem_bottom = float(p.get("stem_bottom", 0.0))
-            # If the stem should touch the lower border, extend by half a pixel so
-            # rasterization keeps the bottom row fully covered after quantization.
-            if stem_bottom >= (float(h) - 0.01):
-                stem_bottom = float(h) + 0.5
+            stem_x = float(Action._clip_scalar(float(p.get("stem_x", 0.0)), 0.0, float(w)))
+            stem_top = float(Action._clip_scalar(float(p.get("stem_top", 0.0)), 0.0, float(h)))
+            stem_width = max(0.0, min(float(p.get("stem_width", 0.0)), max(0.0, float(w) - stem_x)))
+            stem_bottom = float(Action._clip_scalar(float(p.get("stem_bottom", 0.0)), stem_top, float(h)))
             elements.append(
                 (
-                    f'  <rect x="{p["stem_x"]:.4f}" y="{p["stem_top"]:.4f}" '
-                    f'width="{p["stem_width"]:.4f}" height="{max(0.0, stem_bottom - p["stem_top"]):.4f}" '
+                    f'  <rect x="{stem_x:.4f}" y="{stem_top:.4f}" '
+                    f'width="{stem_width:.4f}" height="{max(0.0, stem_bottom - stem_top):.4f}" '
                     f'fill="{Action.grayhex(p.get("stem_gray", p["stroke_gray"]))}"/>'
                 )
             )

@@ -626,8 +626,8 @@ def test_generate_badge_svg_emits_background_rect_when_requested() -> None:
     assert '<rect x="0" y="0" width="30.0000" height="30.0000" fill="#ffffff"/>' in svg
 
 
-def test_generate_badge_svg_extends_border_touching_arm_caps() -> None:
-    """Rounded arms should extend slightly past the viewBox when they end on the border."""
+def test_generate_badge_svg_keeps_border_touching_arm_caps_inside_viewbox() -> None:
+    """Rounded arms may touch the border, but they must stay inside the original canvas."""
     params = {
         "arm_enabled": True,
         "arm_x1": 21.5,
@@ -643,7 +643,28 @@ def test_generate_badge_svg_extends_border_touching_arm_caps() -> None:
     svg = Action.generate_badge_svg(35, 20, params)
 
     assert 'x1="21.5000"' in svg
-    assert 'x2="35.5000"' in svg
+    assert 'x2="35.0000"' in svg
+    assert '35.5000' not in svg
+
+
+def test_generate_badge_svg_keeps_border_touching_stem_inside_viewbox() -> None:
+    """Bottom-anchored stems must not be extended past the canvas height."""
+    params = {
+        "stem_enabled": True,
+        "stem_x": 9.0,
+        "stem_top": 4.0,
+        "stem_bottom": 20.0,
+        "stem_width": 2.0,
+        "stroke_gray": 120,
+        "circle_enabled": False,
+        "draw_text": False,
+    }
+
+    svg = Action.generate_badge_svg(20, 20, params)
+
+    assert 'y="4.0000"' in svg
+    assert 'height="16.0000"' in svg
+    assert '20.5000' not in svg
 
 
 def test_fit_semantic_badge_uses_border_touch_fallback_for_tiny_plain_ring() -> None:
