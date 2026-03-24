@@ -5478,3 +5478,56 @@ def test_write_successful_conversion_quality_report_sorts_csv_by_variant(tmp_pat
     assert csv_lines[2].startswith("AC0002_L;")
     summary_text = Path(txt_path).read_text(encoding="utf-8")
     assert "leaderboard_csv_path=" in summary_text
+
+
+def test_kelle_constraints_require_handle_start_at_circle_center() -> None:
+    with pytest.raises(ValueError, match="Griff.Anfang"):
+        conv.Kelle(
+            griff=conv.Griff(anfang=conv.Punkt(11, 10), ende=conv.Punkt(11, 25)),
+            kreis=conv.Kreis(
+                mittelpunkt=conv.Punkt(10, 10),
+                radius=6,
+                randbreite=2,
+                rand_farbe=conv.RGBWert(90, 90, 90),
+                hintergrundfarbe=conv.RGBWert(220, 220, 220),
+            ),
+        )
+
+
+def test_kelle_to_svg_draws_handle_before_circle_and_clips() -> None:
+    kelle = conv.build_oriented_kelle(
+        "left",
+        mittelpunkt=conv.Punkt(12, 12),
+        radius=8,
+        griff_laenge=16,
+        randbreite=2,
+        rand_farbe=conv.RGBWert(120, 120, 120),
+        hintergrundfarbe=conv.RGBWert(230, 230, 230),
+    )
+
+    svg = kelle.to_svg(20, 20)
+
+    assert 'clipPath id="canvasClip"' in svg
+    assert svg.index("<line ") < svg.index("<circle ")
+
+
+def test_build_oriented_kelle_supports_left_top_right_and_down() -> None:
+    center = conv.Punkt(30, 30)
+    common = {
+        "mittelpunkt": center,
+        "radius": 9,
+        "griff_laenge": 14,
+        "randbreite": 2,
+        "rand_farbe": conv.RGBWert(130, 130, 130),
+        "hintergrundfarbe": conv.RGBWert(240, 240, 240),
+    }
+
+    left = conv.build_oriented_kelle("left", **common)
+    top = conv.build_oriented_kelle("top", **common)
+    right = conv.build_oriented_kelle("right", **common)
+    down = conv.build_oriented_kelle("down", **common)
+
+    assert left.griff.ende.x < left.griff.anfang.x
+    assert top.griff.ende.y < top.griff.anfang.y
+    assert right.griff.ende.x > right.griff.anfang.x
+    assert down.griff.ende.y > down.griff.anfang.y
