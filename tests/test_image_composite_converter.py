@@ -3455,6 +3455,18 @@ def test_finalize_ac08_circle_text_family_leaves_ac0820_unlocked() -> None:
     assert "max_circle_radius" not in tuned
 
 
+def test_finalize_ac0820_l_keeps_circle_radius_at_template_scale() -> None:
+    """AC0820_L should not collapse into a tiny ring during unconstrained fitting rounds."""
+    params = Action._apply_co2_label(Action._default_ac0870_params(30, 30))
+    params["template_circle_radius"] = float(params["r"])
+    params["r"] = float(params["template_circle_radius"]) * 0.60
+
+    tuned = Action._finalize_ac08_style("AC0820_L", params)
+
+    assert float(tuned["r"]) >= float(params["template_circle_radius"])
+    assert "min_circle_radius" not in tuned
+
+
 def test_finalize_ac08_circle_text_family_leaves_ac0870_geometry_as_detected() -> None:
     """AC0870 should no longer be recentered by shared circle/text guardrails."""
     params = Action._default_ac0870_params(30, 30)

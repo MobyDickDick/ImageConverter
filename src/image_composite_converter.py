@@ -2430,6 +2430,12 @@ class Action:
             p["co2_font_scale_max"] = float(min(1.12, base_scale * 1.22))
             p["co2_sub_font_scale"] = float(p.get("co2_sub_font_scale", 66.0))
             p["co2_subscript_offset_scale"] = 0.27
+            template_r = float(p.get("template_circle_radius", r))
+            # AC0820_L can otherwise collapse to a tiny ring in unconstrained
+            # rounds. Keep the rendered radius close to the source template
+            # without reintroducing global min/max guardrail metadata.
+            min_radius_ratio = 1.0 if template_r >= 10.0 else 0.95
+            p["r"] = float(max(float(p.get("r", template_r)), template_r * min_radius_ratio))
         if p.get("circle_enabled", True):
             has_connector = bool(p.get("arm_enabled") or p.get("stem_enabled"))
             has_text = bool(p.get("draw_text", False))
