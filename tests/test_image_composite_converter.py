@@ -476,20 +476,21 @@ def test_co2_layout_legacy_cluster_mode_still_supported() -> None:
     assert float(layout["co_x"]) < float(params["cx"])
 
 
-def test_finalize_ac0820_uses_cluster_anchor_mode() -> None:
-    """AC0820 should center the full CO₂ cluster horizontally."""
+def test_finalize_ac0820_keeps_default_anchor_mode() -> None:
+    """AC0820 should keep the default CO₂ anchor mode (no forced centering rule)."""
     params = Action._apply_co2_label(Action._default_ac0870_params(30, 30))
     params = Action._finalize_ac08_style("AC0820", params)
 
-    assert params["co2_anchor_mode"] == "cluster"
+    assert params["co2_anchor_mode"] == "center_co"
 
 
-def test_finalize_ac0820_variant_name_uses_cluster_anchor_mode() -> None:
-    """AC0820 variant names (e.g. AC0820_L) should center the full CO₂ label."""
+def test_finalize_ac0820_variant_name_keeps_default_anchor_mode() -> None:
+    """AC0820 variants should keep superscript CO² without forcing centered anchoring."""
     params = Action._apply_co2_label(Action._default_ac0870_params(30, 30))
     params = Action._finalize_ac08_style("AC0820_L", params)
 
-    assert params["co2_anchor_mode"] == "cluster"
+    assert params["co2_anchor_mode"] == "center_co"
+    assert params["co2_index_mode"] == "superscript"
     assert float(params["co2_optical_bias"]) >= 0.125
 
 
@@ -2673,7 +2674,7 @@ def test_make_badge_params_ac0820_l_uses_compact_co2_scale() -> None:
     """AC0820_L should avoid an oversized 'C' relative to the circle diameter."""
     params = Action.make_badge_params(30, 30, "AC0820", None)
 
-    assert params["co2_anchor_mode"] == "cluster"
+    assert params["co2_anchor_mode"] == "center_co"
     assert float(params["co2_font_scale"]) <= 0.82
 
 
@@ -3450,7 +3451,7 @@ def test_finalize_ac08_circle_text_family_leaves_ac0820_unlocked() -> None:
     assert "connector_family_group" not in tuned
     assert float(tuned["cx"]) == float(params["template_circle_cx"])
     assert float(tuned["cy"]) == float(params["template_circle_cy"])
-    assert tuned["co2_anchor_mode"] == "cluster"
+    assert tuned["co2_anchor_mode"] == "center_co"
     assert "min_circle_radius" not in tuned
     assert "max_circle_radius" not in tuned
 

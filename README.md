@@ -24,7 +24,7 @@ The recommended local verification workflow lives in
 - `docs/ac08_improvement_plan.md` — AC08 improvement backlog/history.
 - `docs/ac08_artifact_analysis.md` — AC08 artifact analysis notes.
 - `docs/open_tasks.md` — current ImageConverter task list.
-- `docs/kelle_modell.md` — formales Kellen-Modell (Kreis + Griff) mit Constraints und Orientierungen.
+- `docs/Forms.md` — formal forms model (circle + handle) with constraints and orientations.
 
 ## Quick start
 
