@@ -2741,9 +2741,9 @@ def test_enforce_left_arm_badge_geometry_restores_missing_arm() -> None:
     assert fixed.get("arm_enabled") is True
     assert float(fixed["arm_x1"]) == 0.0
     assert abs(float(fixed["arm_y1"]) - 12.5) < 1e-6
-    assert abs(float(fixed["arm_x2"]) - 22.5) < 1e-6
+    assert abs(float(fixed["arm_x2"]) - 22.0) < 1e-6
     assert abs(float(fixed["arm_y2"]) - 12.5) < 1e-6
-    assert float(fixed["arm_len_min"]) >= 22.5 * 0.75
+    assert float(fixed["arm_len_min"]) >= 22.0 * 0.75
 
 
 def test_tune_ac08_left_connector_family_keeps_template_right_extent() -> None:
@@ -4359,7 +4359,8 @@ def test_enforce_semantic_connector_expectation_restores_left_arm_for_ac0812() -
 
     assert restored["arm_enabled"] is True
     assert float(restored["arm_x1"]) == 0.0
-    assert abs(float(restored["arm_x2"]) - (float(restored["cx"]) - float(restored["r"]))) < 1e-6
+    expected_attach = float(restored["cx"]) - float(restored["r"]) - (float(restored["arm_stroke"]) / 2.0)
+    assert abs(float(restored["arm_x2"]) - expected_attach) < 1e-6
 
 
 def test_enforce_semantic_connector_expectation_handles_variant_base_name_for_ac0812() -> None:
@@ -4382,7 +4383,8 @@ def test_enforce_semantic_connector_expectation_handles_variant_base_name_for_ac
 
     assert restored["arm_enabled"] is True
     assert float(restored["arm_x1"]) == 0.0
-    assert abs(float(restored["arm_x2"]) - (float(restored["cx"]) - float(restored["r"]))) < 1e-6
+    expected_attach = float(restored["cx"]) - float(restored["r"]) - (float(restored["arm_stroke"]) / 2.0)
+    assert abs(float(restored["arm_x2"]) - expected_attach) < 1e-6
 
 
 def test_optimize_circle_pose_adaptive_domain_logs_random_domain_steps() -> None:
