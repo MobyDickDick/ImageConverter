@@ -2659,6 +2659,24 @@ def test_make_badge_params_applies_compact_ac0831_small_variant_text_tuning() ->
     assert float(params["co2_dy"]) >= 0.35
 
 
+def test_normalize_centered_co2_label_reduces_oversized_co_cluster() -> None:
+    """Centered CO₂ labels should stay clearly smaller than the enclosing ring."""
+    params = Action._apply_co2_label(Action._default_ac0870_params(30, 30))
+    params["co2_font_scale"] = 1.25
+
+    tuned = Action._normalize_centered_co2_label(params)
+
+    assert float(tuned["co2_font_scale"]) <= 0.96
+
+
+def test_make_badge_params_ac0820_l_uses_compact_co2_scale() -> None:
+    """AC0820_L should avoid an oversized 'C' relative to the circle diameter."""
+    params = Action.make_badge_params(30, 30, "AC0820", None)
+
+    assert params["co2_anchor_mode"] == "cluster"
+    assert float(params["co2_font_scale"]) <= 0.82
+
+
 def test_finalize_tiny_non_ac0820_co2_keeps_text_scale_unbounded() -> None:
     """Tiny CO₂ variants should also skip bounded text tuning metadata."""
     params = Action._apply_co2_label(Action._default_ac0813_params(15, 25))

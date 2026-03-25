@@ -2401,8 +2401,7 @@ class Action:
         # Canonical palette values are re-applied once fitting converged.
         p = Action._normalize_ac08_line_widths(p)
         p["lock_colors"] = True
-        if symbol_name != "AC0820":
-            p = Action._normalize_centered_co2_label(p)
+        p = Action._normalize_centered_co2_label(p)
         if symbol_name == "AC0831" and str(p.get("text_mode", "")).lower() == "co2":
             p["fill_gray"] = 238
             p["stroke_gray"] = 155
@@ -2418,11 +2417,11 @@ class Action:
             # glyph labels (e.g. single C) so the leading "C" is no longer
             # undersized compared to the original badge family.
             if r >= 10.0:
-                p["co2_font_scale"] = 0.94
+                p["co2_font_scale"] = 0.82
             elif r >= 6.0:
-                p["co2_font_scale"] = 0.95
+                p["co2_font_scale"] = 0.84
             else:
-                p["co2_font_scale"] = 0.97
+                p["co2_font_scale"] = 0.86
             # Keep AC0820_M/S adjustable in validation: the tiny CO run can still
             # be slightly undersized after geometric fitting, but we do not want
             # unconstrained growth that reintroduces prior over-scaling regressions.
@@ -3294,12 +3293,13 @@ class Action:
         cur_scale = float(p.get("co2_font_scale", 0.82))
         cur_font = max(4.0, r * cur_scale)
         cur_width = cur_font * 1.45
-        # Keep centered CO₂ labels clearly readable in small AC0820 badges while
-        # still fitting inside the inner ring.
-        target_width = inner_diameter * 0.84
+        # Keep centered CO₂ labels readable but prevent oversized "CO" glyphs
+        # that can visually rival the ring diameter on AC0820-like badges.
+        target_width = inner_diameter * 0.68
 
         adjusted_scale = cur_scale * (target_width / max(1e-6, cur_width))
-        p["co2_font_scale"] = float(max(0.90, min(1.12, adjusted_scale)))
+        min_scale = 0.72 if r >= 8.0 else 0.74
+        p["co2_font_scale"] = float(max(min_scale, min(0.96, adjusted_scale)))
         p["co2_sub_font_scale"] = float(max(60.0, min(68.0, float(p.get("co2_sub_font_scale", 66.0)))))
         p["co2_dx"] = float(max(-0.18 * r, min(0.18 * r, float(p.get("co2_dx", -0.04 * r)))))
         p["co2_dy"] = float(max(-0.20 * r, min(0.20 * r, float(p.get("co2_dy", 0.03 * r)))))
