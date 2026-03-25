@@ -7642,11 +7642,21 @@ def run_iteration_pipeline(
         elif debug_ac0811_dir and perc.base_name.upper() == "AC0811":
             debug_dir = os.path.join(debug_ac0811_dir, os.path.splitext(filename)[0])
             os.makedirs(debug_dir, exist_ok=True)
-        validation_logs = Action.validate_badge_by_elements(
+        if not bool(badge_params.get("draw_text", False)):
+            validation_logs.append("semantic-guard: Text bewusst deaktiviert (plain-ring Familie ohne Buchstabe).")
+        else:
+            validation_logs.append(
+                "semantic-guard: Textmodus aktiv ("
+                + str(badge_params.get("text_mode", "unknown"))
+                + ")."
+            )
+        validation_logs.extend(
+            Action.validate_badge_by_elements(
             perc.img,
             badge_params,
             max_rounds=max(1, int(badge_validation_rounds)),
             debug_out_dir=debug_dir,
+            )
         )
         badge_params = Action._enforce_semantic_connector_expectation(
             perc.base_name,
