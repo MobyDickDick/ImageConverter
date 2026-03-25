@@ -2409,8 +2409,14 @@ class Action:
             if p.get("stem_enabled"):
                 p["stem_gray"] = 155
         if symbol_name == "AC0820" and str(p.get("text_mode", "")).lower() == "co2":
-            # AC0820 variants (L/M/S): center the full CO₂ cluster horizontally.
-            p["co2_anchor_mode"] = "cluster"
+            # AC0820 variants (L/M/S): keep CO² superscript rendering, but do
+            # not force a centered anchor mode. The optimizer may keep center_co
+            # or drift via co2_dx/co2_dy to best match the source glyph raster.
+            p["co2_anchor_mode"] = str(p.get("co2_anchor_mode", "center_co"))
+            # AC0820 references render CO² with a raised "2" (superscript),
+            # including AC0820_L where a subscript drifts visually too low.
+            p["co2_index_mode"] = "superscript"
+            p["co2_superscript_offset_scale"] = float(min(float(p.get("co2_superscript_offset_scale", 0.16)), 0.18))
             p["co2_optical_bias"] = 0.125
             r = max(1.0, float(p.get("r", 1.0)))
             # Keep AC0820 text close to the cap-height used by centered path
