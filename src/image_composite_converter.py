@@ -3680,10 +3680,18 @@ class Action:
             default_cy = float(defaults.get("cy", float(h) / 2.0))
             # AC0814_M was hand-traced with a noticeably stable left circle margin
             # and a perfectly horizontal connector. In medium/large plain variants
-            # the raster fit can still drift the ring a pixel or two toward the
-            # connector; keep the circle anchored near the semantic template so the
-            # generated SVG stays close to the manual sample.
-            params["cx"] = default_cx
+            # the raster fit can still drift the ring toward the connector. Keep
+            # the circle near the semantic template, but allow a bounded leftward
+            # correction for medium canvases where the traced source circle sits
+            # slightly further left than the generic template baseline.
+            medium_plain_canvas = h <= 22 and w <= 38
+            max_left_correction = max(0.0, default_r * 0.14) if medium_plain_canvas else 0.0
+            corrected_cx = default_cx
+            if max_left_correction > 0.0:
+                corrected_cx = float(Action._clip_scalar(cx, default_cx - max_left_correction, default_cx))
+            params["cx"] = corrected_cx
+            if medium_plain_canvas:
+                params["template_circle_cx"] = corrected_cx
             params["cy"] = float(Action._clip_scalar(cy, default_cy - 0.6, default_cy + 0.6))
             params["lock_circle_cx"] = True
             params["lock_circle_cy"] = True
