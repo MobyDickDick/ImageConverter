@@ -1345,6 +1345,7 @@ class Reflection:
             "bottom_shape": None,
             "elements": [],
             "label": "M",
+            "variant_name": os.path.splitext(str(img_filename))[0].upper(),
             "documented_alias_refs": sorted(Reflection._extract_documented_alias_refs(desc)),
             "description_fragments": description_fragments,
             "semantic_priority_order": [
@@ -1614,10 +1615,20 @@ class Action:
         cy = float(max(0.0, min(float(h), float(p.get("cy", 0.0)))))
         stroke = float(p.get("stroke_circle", 0.0))
         max_r = Action._max_circle_radius_inside_canvas(cx, cy, w, h, stroke)
+        min_r = float(
+            max(
+                1.0,
+                float(p.get("min_circle_radius", 1.0)),
+                float(p.get("circle_radius_lower_bound_px", 1.0)),
+            )
+        )
 
         p["cx"] = cx
         p["cy"] = cy
-        p["r"] = float(max(1.0, min(max_r, float(p.get("r", 1.0)))))
+        if bool(p.get("allow_circle_overflow", False)):
+            p["r"] = float(max(min_r, float(p.get("r", min_r))))
+        else:
+            p["r"] = float(max(min_r, min(max_r, float(p.get("r", min_r)))))
         return p
 
     @staticmethod
@@ -2442,6 +2453,25 @@ class Action:
             # without reintroducing global min/max guardrail metadata.
             min_radius_ratio = 1.0 if template_r >= 10.0 else 0.95
             p["r"] = float(max(float(p.get("r", template_r)), template_r * min_radius_ratio))
+            image_width = float(p.get("width", p.get("badge_width", 0.0)) or 0.0)
+            variant_name = str(p.get("variant_name", "")).upper()
+            is_large_ac0820 = (
+                canonical_name == "AC0820_L"
+                or variant_name == "AC0820_L"
+                or (symbol_name == "AC0820" and image_width >= 28.0)
+            )
+            if is_large_ac0820 and image_width > 0.0:
+                    # Zusätzliche Restriktion aus AC0820_L:
+                    # Kreis.r > p_c.width / 2
+                    required_radius = (image_width / 2.0) + 0.5
+                    p["allow_circle_overflow"] = True
+                    p["circle_radius_lower_bound_px"] = float(
+                        max(float(p.get("circle_radius_lower_bound_px", 1.0)), required_radius)
+                    )
+                    p["min_circle_radius"] = float(
+                        max(float(p.get("min_circle_radius", 1.0)), required_radius)
+                    )
+                    p["r"] = float(max(float(p.get("r", required_radius)), required_radius))
         if p.get("circle_enabled", True):
             has_connector = bool(p.get("arm_enabled") or p.get("stem_enabled"))
             has_text = bool(p.get("draw_text", False))
@@ -4698,6 +4728,11 @@ class Action:
             old_cy = float(params["cy"])
             old_r = float(params["r"])
             min_r = float(max(1.0, params.get("min_circle_radius", 1.0)))
+            if "circle_radius_lower_bound_px" in params:
+                min_r = float(max(min_r, float(params.get("circle_radius_lower_bound_px", min_r))))
+            max_r = float(min(w, h)) * 0.48
+            if bool(params.get("allow_circle_overflow", False)):
+                max_r = max(max_r, float(max(w, h)) * 1.25, min_r + 0.5)
             if bool(params.get("lock_circle_cx", False)):
                 params["cx"] = old_cx
             else:
@@ -4706,7 +4741,7 @@ class Action:
                 params["cy"] = old_cy
             else:
                 params["cy"] = float(Action._clip_scalar(old_cy + center_dy * 0.65, 0.0, float(h - 1)))
-            params["r"] = float(Action._clip_scalar(old_r * scale, min_r, float(min(w, h)) * 0.48))
+            params["r"] = float(Action._clip_scalar(old_r * scale, min_r, max_r))
             changed = (
                 abs(params["cx"] - old_cx) > 0.02
                 or abs(params["cy"] - old_cy) > 0.02
@@ -5302,11 +5337,17 @@ class Action:
     @staticmethod
     def _circle_bounds(params: dict, w: int, h: int) -> tuple[float, float, float, float, float, float]:
         min_r = float(max(1.0, params.get("min_circle_radius", 1.0)))
+        if "circle_radius_lower_bound_px" in params:
+            min_r = float(max(min_r, float(params.get("circle_radius_lower_bound_px", min_r))))
+        allow_overflow = bool(params.get("allow_circle_overflow", False))
         max_r = max(min_r, float(min(w, h)) * 0.48)
         cx = float(params.get("cx", float(w) / 2.0))
         cy = float(params.get("cy", float(h) / 2.0))
         stroke = float(params.get("stroke_circle", 0.0))
-        max_r = min(max_r, Action._max_circle_radius_inside_canvas(cx, cy, w, h, stroke))
+        if allow_overflow:
+            max_r = max(max_r, float(max(w, h)) * 1.25, min_r + 0.5)
+        else:
+            max_r = min(max_r, Action._max_circle_radius_inside_canvas(cx, cy, w, h, stroke))
         if "max_circle_radius" in params:
             max_r = min(max_r, float(params.get("max_circle_radius", max_r)))
         return 0.0, float(w - 1), 0.0, float(h - 1), min_r, max_r
@@ -5774,8 +5815,17 @@ class Action:
             return float("inf")
 
         probe = dict(params)
-        max_r = max(1.0, (float(min(w, h)) * 0.48))
-        probe["r"] = float(Action._clip_scalar(radius_value, 1.0, max_r))
+        min_r = float(
+            max(
+                1.0,
+                float(probe.get("min_circle_radius", 1.0)),
+                float(probe.get("circle_radius_lower_bound_px", 1.0)),
+            )
+        )
+        max_r = max(min_r, (float(min(w, h)) * 0.48))
+        if bool(probe.get("allow_circle_overflow", False)):
+            max_r = max(max_r, float(max(w, h)) * 1.25, min_r + 0.5)
+        probe["r"] = float(Action._clip_scalar(radius_value, min_r, max_r))
 
         if probe.get("arm_enabled"):
             Action._reanchor_arm_to_circle_edge(probe, float(probe["r"]))
@@ -5824,8 +5874,17 @@ class Action:
             return float("inf")
 
         probe = dict(params)
-        max_r = max(1.0, (float(min(w, h)) * 0.48))
-        probe["r"] = float(Action._clip_scalar(radius_value, 1.0, max_r))
+        min_r = float(
+            max(
+                1.0,
+                float(probe.get("min_circle_radius", 1.0)),
+                float(probe.get("circle_radius_lower_bound_px", 1.0)),
+            )
+        )
+        max_r = max(min_r, (float(min(w, h)) * 0.48))
+        if bool(probe.get("allow_circle_overflow", False)):
+            max_r = max(max_r, float(max(w, h)) * 1.25, min_r + 0.5)
+        probe["r"] = float(Action._clip_scalar(radius_value, min_r, max_r))
 
         if probe.get("arm_enabled"):
             Action._reanchor_arm_to_circle_edge(probe, float(probe["r"]))
@@ -5862,8 +5921,16 @@ class Action:
         if len(plateau) >= 2:
             candidate_radii.add(plateau[-1][0])
 
-        min_r = float(max(1.0, params.get("min_circle_radius", 1.0)))
+        min_r = float(
+            max(
+                1.0,
+                params.get("min_circle_radius", 1.0),
+                params.get("circle_radius_lower_bound_px", 1.0),
+            )
+        )
         max_r = float(params.get("max_circle_radius", max(radius for radius, _err in finite)))
+        if bool(params.get("allow_circle_overflow", False)):
+            max_r = max(max_r, min_r + 0.5)
         bounded_candidates = sorted(
             Action._snap_half(float(Action._clip_scalar(radius, min_r, max_r)))
             for radius in candidate_radii
@@ -6098,6 +6165,7 @@ class Action:
         min_dim = float(min(w, h))
         low_bound = max(1.0, min_dim * 0.14)
         low_bound = max(low_bound, float(params.get("min_circle_radius", 1.0)))
+        low_bound = max(low_bound, float(params.get("circle_radius_lower_bound_px", 1.0)))
         has_connector = bool(params.get("arm_enabled") or params.get("stem_enabled"))
         if has_connector:
             # Connector badges (AC081x/AC083x families) are geometrically tied to
@@ -6113,7 +6181,10 @@ class Action:
         # AC0800_S noticeably smaller than the medium/large variants.
         if min_dim <= 22.0:
             low_bound = max(low_bound, current * 0.9)
+        allow_overflow = bool(params.get("allow_circle_overflow", False))
         high_bound = min_dim * 0.48
+        if allow_overflow:
+            high_bound = max(high_bound, float(max(w, h)) * 1.25, low_bound + 0.5)
         if "max_circle_radius" in params:
             high_bound = min(high_bound, float(params.get("max_circle_radius", high_bound)))
         if not low_bound < high_bound:
@@ -7698,6 +7769,15 @@ def run_iteration_pipeline(
         badge_params = Action.make_badge_params(w, h, perc.base_name, perc.img)
         if badge_params is None:
             return None
+        variant_id = os.path.splitext(filename)[0].upper()
+        if variant_id == "AC0820_L":
+            required_radius = (float(w) / 2.0) + 0.5
+            badge_params["variant_name"] = variant_id
+            badge_params["allow_circle_overflow"] = True
+            badge_params["circle_radius_lower_bound_px"] = float(
+                max(float(badge_params.get("circle_radius_lower_bound_px", 1.0)), required_radius)
+            )
+            badge_params["r"] = float(max(float(badge_params.get("r", required_radius)), required_radius))
 
         badge_overrides = params.get("badge_overrides")
         if isinstance(badge_overrides, dict):
@@ -7790,7 +7870,21 @@ def run_iteration_pipeline(
             w,
             h,
         )
+        if variant_id == "AC0820_L":
+            required_radius = (float(w) / 2.0) + 0.5
+            badge_params["allow_circle_overflow"] = True
+            badge_params["circle_radius_lower_bound_px"] = float(
+                max(float(badge_params.get("circle_radius_lower_bound_px", 1.0)), required_radius)
+            )
+            badge_params["r"] = float(max(float(badge_params.get("r", required_radius)), required_radius))
         badge_params, redraw_variation_logs = Action.apply_redraw_variation(badge_params, w, h)
+        if variant_id == "AC0820_L":
+            required_radius = (float(w) / 2.0) + 0.5
+            badge_params["allow_circle_overflow"] = True
+            badge_params["circle_radius_lower_bound_px"] = float(
+                max(float(badge_params.get("circle_radius_lower_bound_px", 1.0)), required_radius)
+            )
+            badge_params["r"] = float(max(float(badge_params.get("r", required_radius)), required_radius))
         if badge_params.get("arm_enabled"):
             validation_logs.append(
                 "semantic-guard: Erwartete Arm-Geometrie bestätigt/wiederhergestellt (z.B. AC0812 links)."
@@ -9702,7 +9796,15 @@ def _max_signature_delta(sig_a: dict[str, float], sig_b: dict[str, float]) -> fl
     return max(abs(sig_a[k] - sig_b[k]) for k in keys)
 
 
-def _scale_badge_params(anchor: dict, anchor_w: int, anchor_h: int, target_w: int, target_h: int) -> dict:
+def _scale_badge_params(
+    anchor: dict,
+    anchor_w: int,
+    anchor_h: int,
+    target_w: int,
+    target_h: int,
+    *,
+    target_variant: str = "",
+) -> dict:
     scaled = dict(anchor)
     scale = max(1e-6, float(min(target_w, target_h)) / max(1.0, float(min(anchor_w, anchor_h))))
     scale_x = max(1e-6, float(target_w) / max(1.0, float(anchor_w)))
@@ -9746,14 +9848,21 @@ def _scale_badge_params(anchor: dict, anchor_w: int, anchor_h: int, target_w: in
             scaled[key] = float(anchor[key]) * float(factor)
 
     if scaled.get("circle_enabled", True):
+        is_ac0820_l = str(target_variant).upper() == "AC0820_L"
+        required_r = (float(target_w) / 2.0) + 0.5 if is_ac0820_l else 1.0
+        if is_ac0820_l:
+            scaled["allow_circle_overflow"] = True
+            scaled["circle_radius_lower_bound_px"] = float(
+                max(float(scaled.get("circle_radius_lower_bound_px", 1.0)), required_r)
+            )
         stroke = max(0.0, float(scaled.get("stroke_circle", 1.0)))
         half_stroke = stroke / 2.0
         cx = float(scaled.get("cx", target_w / 2.0))
         cy = float(scaled.get("cy", target_h / 2.0))
-        r = max(1.0, float(scaled.get("r", 1.0)))
+        r = max(1.0, float(scaled.get("r", 1.0)), required_r)
 
         max_fit_r = max(1.0, (min(float(target_w), float(target_h)) / 2.0) - half_stroke)
-        if r > max_fit_r:
+        if not is_ac0820_l and r > max_fit_r:
             r = max_fit_r
 
         min_cx = r + half_stroke
@@ -9762,12 +9871,12 @@ def _scale_badge_params(anchor: dict, anchor_w: int, anchor_h: int, target_w: in
         max_cy = float(target_h) - r - half_stroke
 
         if min_cx > max_cx:
-            cx = float(target_w) / 2.0
+            cx = float(target_w) / 2.0 if not is_ac0820_l else float(Action._clip_scalar(cx, 0.0, float(target_w)))
         else:
             cx = float(Action._clip_scalar(cx, min_cx, max_cx))
 
         if min_cy > max_cy:
-            cy = float(target_h) / 2.0
+            cy = float(target_h) / 2.0 if not is_ac0820_l else float(Action._clip_scalar(cy, 0.0, float(target_h)))
         else:
             cy = float(Action._clip_scalar(cy, min_cy, max_cy))
 
@@ -9936,7 +10045,14 @@ def _harmonize_semantic_size_variants(
             target_variant = str(row["variant"])
             target_w = int(row["w"])
             target_h = int(row["h"])
-            scaled = _scale_badge_params(anchor_params, anchor_w, anchor_h, target_w, target_h)
+            scaled = _scale_badge_params(
+                anchor_params,
+                anchor_w,
+                anchor_h,
+                target_w,
+                target_h,
+                target_variant=target_variant,
+            )
             scaled.update(family_colors)
             if scaled.get("draw_text"):
                 scaled["text_gray"] = int(family_colors["text_gray"])
