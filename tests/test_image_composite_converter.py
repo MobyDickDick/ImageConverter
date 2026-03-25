@@ -1725,6 +1725,42 @@ def test_validate_semantic_description_alignment_accepts_ac0813_vertical_connect
     assert issues == []
 
 
+def test_validate_semantic_description_alignment_ignores_structural_stem_for_left_arm_badges(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Left-arm families should not fail when structural detection hallucinates a vertical stem."""
+    if image_composite_converter.np is None:
+        pytest.skip("numpy not available in this environment")
+
+    np = image_composite_converter.np
+    img = np.full((16, 24, 3), 240, dtype=np.uint8)
+    badge_params = Action._default_ac0812_params(24, 16)
+
+    monkeypatch.setattr(
+        Action,
+        "_detect_semantic_primitives",
+        staticmethod(lambda _img: {"circle": True, "stem": True, "arm": False, "text": False}),
+    )
+
+    def fake_extract(_img, _params, element):
+        mask = np.zeros((16, 24), dtype=np.uint8)
+        if element == "circle":
+            mask[4:12, 12:20] = 1
+        if element == "arm":
+            mask[7:9, 0:12] = 1
+        return mask
+
+    monkeypatch.setattr(Action, "extract_badge_element_mask", staticmethod(fake_extract))
+
+    issues = Action.validate_semantic_description_alignment(
+        img,
+        ["SEMANTIC: Kreis ohne Buchstabe", "SEMANTIC: waagrechter Strich links vom Kreis"],
+        badge_params,
+    )
+
+    assert issues == []
+
+
 
 
 def test_in_requested_range_accepts_cross_prefix_span() -> None:

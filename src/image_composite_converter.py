@@ -36,6 +36,8 @@ SUCCESSFUL_CONVERSIONS_FALLBACK: tuple[str, ...] = (
     "AC0800_M",
     "AC0800_S",
     "AC0811_L",
+    "AC0811_M",
+    "AC0811_S",
 )
 
 
@@ -44,6 +46,8 @@ AC08_STABLE_GOOD_REASON_OVERRIDES: dict[str, str] = {
     "AC0800_M": "Previously marked good plain-ring medium variant that must stay semantic_ok after every AC08 adjustment.",
     "AC0800_S": "Previously marked good plain-ring small variant that must stay semantic_ok after every AC08 adjustment.",
     "AC0811_L": "Known regression-safe good conversion anchor for circle-with-stem semantics; must remain semantic_ok.",
+    "AC0811_M": "Known regression-safe good conversion anchor for circle-with-stem semantics; must remain semantic_ok.",
+    "AC0811_S": "Known regression-safe good conversion anchor for circle-with-stem semantics; must remain semantic_ok.",
 }
 
 
@@ -7105,13 +7109,26 @@ class Action:
         require_circle_mask_confirmation = expected.get("circle", False) and not (
             allow_circle_mask_fallback or connector_circle_mask_fallback
         )
+        suppress_structural_stem_for_horizontal_connector = bool(
+            expected.get("arm", False)
+            and not expected.get("stem", False)
+            and local_support["arm"]
+            and not local_support["stem"]
+        )
         observed = {
             "circle": bool(
                 (structural.get("circle", False) and (local_support["circle"] if require_circle_mask_confirmation else True))
                 or (allow_circle_mask_fallback and local_support["circle"])
                 or connector_circle_mask_fallback
             ),
-            "stem": bool(local_support["stem"] or (structural.get("stem", False) and not plain_circle_badge)),
+            "stem": bool(
+                local_support["stem"]
+                or (
+                    structural.get("stem", False)
+                    and not plain_circle_badge
+                    and not suppress_structural_stem_for_horizontal_connector
+                )
+            ),
             "arm": bool(
                 local_support["arm"]
                 or (
