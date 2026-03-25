@@ -17,6 +17,19 @@ focused on the actual project scope.
 - The remaining failures are concentrated in the families `AC0800`, `AC0811`, `AC0813`, `AC0814`, `AC0831`, `AC0836`, and `AC0870`; the detailed breakdown now lives in `docs/ac08_artifact_analysis.md`.
 - Continue to add new work items here before implementation starts, then mark them in-place when they are done.
 
+
+
+## Kelle-/Optimierungs-Backlog (neu aus dem Umsetzungscheck)
+
+- [ ] A1: Gemeinsamen Parametervektor für globale Optimierung einführen.
+- [ ] A2: Globalen Mehrparameter-Suchmodus ergänzen (nicht nur Kreis-Pose).
+- [ ] A3: Near-Optimum-Plateau auf den globalen Parameterraum verallgemeinern.
+- [ ] A4: Schwerpunkt/zentralen Repräsentanten des Plateau-Bereichs berechnen und auswählen.
+- [ ] A5: Regressionstests für globalen Suchmodus, Seeds und Constraint-Einhaltung ergänzen.
+
+Details und Akzeptanzkriterien stehen in `docs/kelle_umsetzungscheck.md` unter
+„Abgeleitete Aufgaben (umsetzbare Roadmap)“.
+
 ## Next priority tasks
 
 - [ ] Fix the vertical-connector semantic false positives in the remaining AC08 families.
