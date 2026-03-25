@@ -1031,6 +1031,32 @@ def test_finalize_right_connector_voc_family_preserves_existing_arm_state() -> N
     assert "voc_font_scale_min" not in tuned
 
 
+def test_fit_ac0814_medium_plain_badge_allows_bounded_left_center_correction(monkeypatch: pytest.MonkeyPatch) -> None:
+    """AC0814_M should keep the traced circle from drifting right versus the source raster."""
+    if image_composite_converter.np is None:
+        pytest.skip("numpy not available in this environment")
+
+    defaults = Action._default_ac0814_params(35, 20)
+
+    def fake_fit(_img, _defaults):
+        fitted = dict(defaults)
+        fitted["cx"] = 11.5
+        fitted["cy"] = 9.5
+        fitted["r"] = 9.05
+        return fitted
+
+    monkeypatch.setattr(Action, "_fit_semantic_badge_from_image", staticmethod(fake_fit))
+
+    np = image_composite_converter.np
+    img = np.full((20, 35, 3), 220, dtype=np.uint8)
+    fitted = Action._fit_ac0814_params_from_image(img, defaults)
+    finalized = Action._finalize_ac08_style("AC0814_M", dict(fitted))
+
+    assert float(fitted["cx"]) == pytest.approx(11.5, abs=0.02)
+    assert float(fitted["cx"]) < float(defaults["cx"])
+    assert float(finalized["cx"]) == pytest.approx(float(fitted["cx"]), abs=0.001)
+
+
 def test_finalize_vertical_connector_family_leaves_geometry_unlocked() -> None:
     """Vertical families should keep detected geometry without centered connector guardrails."""
     params = Action._apply_co2_label(Action._default_ac0881_params(20, 30))
