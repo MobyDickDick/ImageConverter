@@ -3334,7 +3334,7 @@ class Action:
                 "arm_enabled": True,
                 "arm_x1": 0.0,
                 "arm_y1": cy,
-                "arm_x2": max(0.0, cx - r),
+                "arm_x2": max(0.0, cx - r - (arm_stroke / 2.0)),
                 "arm_y2": cy,
                 "arm_stroke": arm_stroke,
                 "arm_len_min_ratio": 0.75,
@@ -3389,7 +3389,8 @@ class Action:
         params["arm_stroke"] = arm_stroke
         params["arm_x1"] = 0.0
         params["arm_y1"] = cy
-        params["arm_x2"] = max(0.0, cx - r)
+        attach_offset = max(0.0, arm_stroke / 2.0)
+        params["arm_x2"] = max(0.0, cx - r - attach_offset)
         params["arm_y2"] = cy
         current_arm_len = float(math.hypot(params["arm_x2"] - params["arm_x1"], params["arm_y2"] - params["arm_y1"]))
         default_arm_len = max(
@@ -3433,14 +3434,16 @@ class Action:
         cx = float(p["cx"])
         cy = float(p["cy"])
         r = float(p["r"])
-        arm_x2 = max(0.0, cx - r)
+        arm_stroke = float(max(1.0, p.get("arm_stroke", Action.AC08_STROKE_WIDTH_PX)))
+        attach_offset = max(0.0, arm_stroke / 2.0)
+        arm_x2 = max(0.0, cx - r - attach_offset)
 
         p["arm_enabled"] = True
         p["arm_x1"] = 0.0
         p["arm_y1"] = cy
         p["arm_x2"] = arm_x2
         p["arm_y2"] = cy
-        p["arm_stroke"] = float(max(1.0, p.get("arm_stroke", Action.AC08_STROKE_WIDTH_PX)))
+        p["arm_stroke"] = arm_stroke
 
         arm_len = float(max(0.0, arm_x2))
         ratio = float(max(0.0, min(1.0, float(p.get("arm_len_min_ratio", 0.75)))))
@@ -3460,15 +3463,17 @@ class Action:
         cx = float(p["cx"])
         cy = float(p["cy"])
         r = float(p["r"])
+        arm_stroke = float(max(1.0, p.get("arm_stroke", Action.AC08_STROKE_WIDTH_PX)))
+        attach_offset = max(0.0, arm_stroke / 2.0)
         canvas_width = max(float(w), float(p.get("arm_x2", 0.0) or 0.0), float(p.get("width", 0.0) or 0.0), float(p.get("badge_width", 0.0) or 0.0), cx + r)
-        arm_x1 = min(canvas_width, cx + r)
+        arm_x1 = min(canvas_width, cx + r + attach_offset)
 
         p["arm_enabled"] = True
         p["arm_x1"] = arm_x1
         p["arm_y1"] = cy
         p["arm_x2"] = canvas_width
         p["arm_y2"] = cy
-        p["arm_stroke"] = float(max(1.0, p.get("arm_stroke", Action.AC08_STROKE_WIDTH_PX)))
+        p["arm_stroke"] = arm_stroke
 
         arm_len = float(max(0.0, canvas_width - arm_x1))
         ratio = float(max(0.0, min(1.0, float(p.get("arm_len_min_ratio", 0.75)))))
@@ -5929,6 +5934,8 @@ class Action:
         y1 = float(params.get("arm_y1", cy))
         x2 = float(params.get("arm_x2", cx))
         y2 = float(params.get("arm_y2", cy))
+        arm_stroke = float(max(0.0, params.get("arm_stroke", 0.0)))
+        attach_offset = arm_stroke / 2.0
 
         # Preserve dominant orientation (horizontal vs. vertical).
         is_horizontal = abs(x2 - x1) >= abs(y2 - y1)
@@ -5938,18 +5945,18 @@ class Action:
             p1_dist = abs(x1 - cx)
             p2_dist = abs(x2 - cx)
             if p2_dist <= p1_dist:
-                params["arm_x2"] = cx - radius if x1 <= cx else cx + radius
+                params["arm_x2"] = (cx - radius - attach_offset) if x1 <= cx else (cx + radius + attach_offset)
             else:
-                params["arm_x1"] = cx - radius if x2 <= cx else cx + radius
+                params["arm_x1"] = (cx - radius - attach_offset) if x2 <= cx else (cx + radius + attach_offset)
         else:
             params["arm_x1"] = cx
             params["arm_x2"] = cx
             p1_dist = abs(y1 - cy)
             p2_dist = abs(y2 - cy)
             if p2_dist <= p1_dist:
-                params["arm_y2"] = cy - radius if y1 <= cy else cy + radius
+                params["arm_y2"] = (cy - radius - attach_offset) if y1 <= cy else (cy + radius + attach_offset)
             else:
-                params["arm_y1"] = cy - radius if y2 <= cy else cy + radius
+                params["arm_y1"] = (cy - radius - attach_offset) if y2 <= cy else (cy + radius + attach_offset)
 
     @staticmethod
     def _optimize_circle_center_bracket(img_orig: np.ndarray, params: dict, logs: list[str]) -> bool:
