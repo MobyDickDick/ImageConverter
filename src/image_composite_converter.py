@@ -1986,6 +1986,46 @@ class Action:
             p["voc_font_scale_max"] = float(min(float(p.get("voc_font_scale_max", 0.96)), min(0.96, base_scale * 1.10)))
         return p
 
+    @staticmethod
+    def _enforce_template_circle_edge_extent(params: dict, w: int, h: int, *, anchor: str, retain_ratio: float = 0.97) -> dict:
+        """Keep edge-anchored circles close to template edge reach.
+
+        Generic safeguard for all edge-anchored connector families:
+        if optimization shortens the anchored side too much (e.g. right arc on
+        AC0812-like badges), raise `min_circle_radius` so the anchored contour
+        keeps at least `retain_ratio` of the template extent.
+        """
+        p = dict(params)
+        if not p.get("circle_enabled", True):
+            return p
+        if "cx" not in p or "r" not in p:
+            return p
+        if "template_circle_cx" not in p or "template_circle_radius" not in p:
+            return p
+
+        retain_ratio = float(max(0.90, min(1.00, retain_ratio)))
+        cx = float(p["cx"])
+        template_cx = float(p["template_circle_cx"])
+        template_r = max(1.0, float(p["template_circle_radius"]))
+        stroke = float(max(0.0, p.get("stroke_circle", 0.0)))
+        canvas_cap = float(Action._max_circle_radius_inside_canvas(cx, float(p.get("cy", float(h) / 2.0)), w, h, stroke))
+
+        if anchor == "right":
+            template_extent = template_cx + template_r
+            required_extent = template_extent * retain_ratio
+            required_r = required_extent - cx
+        elif anchor == "left":
+            template_extent = template_cx - template_r
+            required_extent = template_extent + ((1.0 - retain_ratio) * abs(template_extent))
+            required_r = cx - required_extent
+        else:
+            return p
+
+        required_r = float(max(1.0, min(canvas_cap, required_r)))
+        if required_r > 1.0:
+            p["min_circle_radius"] = float(max(float(p.get("min_circle_radius", 1.0)), required_r))
+        return p
+
 
     @staticmethod
     def _tune_ac08_left_connector_family(name: str, params: dict) -> dict:
@@ -2030,6 +2070,13 @@ class Action:
         if is_small:
             radius_floor_ratio = max(radius_floor_ratio, 0.96 if not has_text else 0.94)
         p["min_circle_radius"] = float(max(float(p.get("min_circle_radius", 1.0)), template_r * radius_floor_ratio))
+        p = Action._enforce_template_circle_edge_extent(
+            p,
+            int(round(float(p.get("width", 0.0) or 0.0))) or int(round(float(p.get("badge_width", 0.0) or 0.0))) or 1,
+            int(round(float(p.get("height", 0.0) or 0.0))) or int(round(float(p.get("badge_height", 0.0) or 0.0))) or 1,
+            anchor="right",
+            retain_ratio=0.97 if not is_small else 0.96,
+        )
 
         p = Action._enforce_left_arm_badge_geometry(
             p,
@@ -2106,6 +2153,13 @@ class Action:
         if is_small:
             radius_floor_ratio = max(radius_floor_ratio, 0.96 if not has_text else 0.94)
         p["min_circle_radius"] = float(max(float(p.get("min_circle_radius", 1.0)), template_r * radius_floor_ratio))
+        p = Action._enforce_template_circle_edge_extent(
+            p,
+            int(round(float(p.get("width", 0.0) or 0.0))) or int(round(float(p.get("badge_width", 0.0) or 0.0))) or 1,
+            int(round(float(p.get("height", 0.0) or 0.0))) or int(round(float(p.get("badge_height", 0.0) or 0.0))) or 1,
+            anchor="left",
+            retain_ratio=0.97 if not is_small else 0.96,
+        )
 
         p = Action._enforce_right_arm_badge_geometry(
             p,

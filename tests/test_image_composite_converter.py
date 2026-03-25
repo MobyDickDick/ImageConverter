@@ -2746,6 +2746,29 @@ def test_enforce_left_arm_badge_geometry_restores_missing_arm() -> None:
     assert float(fixed["arm_len_min"]) >= 22.5 * 0.75
 
 
+def test_tune_ac08_left_connector_family_keeps_template_right_extent() -> None:
+    """Left-connector families should keep most of the template right edge circle extent."""
+    defaults = Action._default_ac0812_params(25, 15)
+    params = {
+        **defaults,
+        "width": 25,
+        "height": 15,
+        "template_circle_cx": float(defaults["cx"]),
+        "template_circle_radius": float(defaults["r"]),
+        "cx": float(defaults["cx"]),
+        # Simulate a run where the fitted circle got too small on the right edge.
+        "r": float(defaults["r"]) * 0.78,
+        "draw_text": False,
+        "arm_enabled": True,
+    }
+
+    tuned = Action._tune_ac08_left_connector_family("AC0812_M", params)
+    min_r = float(tuned.get("min_circle_radius", 1.0))
+    required_r = (float(params["template_circle_cx"]) + float(params["template_circle_radius"])) * 0.97 - float(params["cx"])
+
+    assert min_r >= required_r - 1e-6
+
+
 def test_default_ac0812_uses_height_based_circle_radius() -> None:
     """AC0812 should size its circle from height without overfilling the frame."""
     params = Action._default_ac0812_params(25, 15)
