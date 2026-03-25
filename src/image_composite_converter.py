@@ -7114,12 +7114,32 @@ class Action:
             height = max(1.0, (y2 - y1) + 1.0)
             area = width * height
             density = float(pixel_count) / max(1.0, area)
+            small_variant = bool(badge_params.get("ac08_small_variant_mode", False))
             if element == "circle":
-                return Action._mask_supports_circle(mask)
+                if Action._mask_supports_circle(mask):
+                    return True
+                if small_variant:
+                    # `_S` AC08 crops frequently merge anti-aliased ring pixels into a
+                    # compact blob. Keep a permissive geometric fallback so robust circle
+                    # evidence from the local mask is not rejected only because contour
+                    # circularity deteriorates at 15x25px scale.
+                    aspect = width / max(1.0, height)
+                    return (
+                        0.58 <= aspect <= 1.55
+                        and density >= 0.34
+                        and pixel_count >= 10
+                    )
+                return False
             if element == "stem":
-                return pixel_count >= 5 and (height / max(1.0, width)) >= 2.2
+                ratio = height / max(1.0, width)
+                if small_variant:
+                    return pixel_count >= 4 and ratio >= 1.35
+                return pixel_count >= 5 and ratio >= 2.2
             if element == "arm":
-                return pixel_count >= 5 and (width / max(1.0, height)) >= 2.2
+                ratio = width / max(1.0, height)
+                if small_variant:
+                    return pixel_count >= 4 and ratio >= 1.35
+                return pixel_count >= 5 and ratio >= 2.2
             if element == "text":
                 return pixel_count >= max(4, int(round(min(width, height) * 0.35))) and density >= 0.08
             return pixel_count >= 4
@@ -7166,6 +7186,12 @@ class Action:
             and local_support["circle"]
             and not local_support["arm"]
         )
+        small_connector_circle_mask_fallback = bool(
+            expected.get("circle", False)
+            and bool(badge_params.get("ac08_small_variant_mode", False))
+            and local_support["circle"]
+            and (expected.get("stem", False) or expected.get("arm", False))
+        )
         plain_circle_badge = bool(
             expected.get("circle", False)
             and not expected.get("stem", False)
@@ -7189,6 +7215,7 @@ class Action:
                 (structural.get("circle", False) and (local_support["circle"] if require_circle_mask_confirmation else True))
                 or (allow_circle_mask_fallback and local_support["circle"])
                 or connector_circle_mask_fallback
+                or small_connector_circle_mask_fallback
             ),
             "stem": bool(
                 local_support["stem"]

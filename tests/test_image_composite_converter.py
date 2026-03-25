@@ -4174,6 +4174,29 @@ def test_validate_semantic_alignment_accepts_vertical_circle_when_raw_hough_miss
     assert "Im Bild ist waagrechter Strich erkennbar, aber nicht in der Beschreibung enthalten" not in issues
 
 
+def test_validate_semantic_alignment_accepts_ac0814_small_horizontal_connector() -> None:
+    """Tiny AC0814_S crops should keep circle+right-arm semantics despite anti-aliasing blur."""
+    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+        pytest.skip("numpy/cv2 not available in this environment")
+
+    cv2 = image_composite_converter.cv2
+    img = cv2.imread("artifacts/images_to_convert/AC0814_S.jpg")
+    assert img is not None
+
+    params = Action.make_badge_params(img.shape[1], img.shape[0], "AC0814", img)
+    issues = Action.validate_semantic_description_alignment(
+        img,
+        ["SEMANTIC: Kreis ohne Buchstabe", "SEMANTIC: waagrechter Strich rechts vom Kreis"],
+        params,
+    )
+
+    assert "Beschreibung erwartet Kreis, im Bild aber nicht robust erkennbar" not in issues
+    assert "Beschreibung erwartet waagrechter Strich, im Bild aber nicht robust erkennbar" not in issues
+    assert "Im Bild ist senkrechter Strich erkennbar, aber nicht in der Beschreibung enthalten" not in issues
+    assert "Strukturprüfung: Kein belastbarer Kreis-Kandidat im Rohbild erkannt" not in issues
+    assert "Strukturprüfung: Kein belastbarer waagrechter Linien-Kandidat im Rohbild erkannt" not in issues
+
+
 def test_validate_semantic_alignment_accepts_merged_co2_blob_for_ac0831_artifact() -> None:
     """Merged JPEG text blobs should still count as valid CO₂ evidence for AC0831_L."""
     if image_composite_converter.np is None or image_composite_converter.cv2 is None:
