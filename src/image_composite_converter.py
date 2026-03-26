@@ -767,17 +767,20 @@ def _create_diff_image_without_cv2(input_path: str | Path, svg_content: str):
         bs = int(round(min(255.0, max(0.0, float(bs) + (255.0 * (1.0 - alpha))))))
         dx = float(rs - r0) + float(gs - g0) + float(bs - b0)
         norm = max(-1.0, min(1.0, dx / (3.0 * 255.0)))
-        magnitude = int(round(abs(norm) * 255.0))
+        magnitude = abs(norm)
+        mean_tone = (float(r0) + float(g0) + float(b0) + float(rs) + float(gs) + float(bs)) / 6.0
+        up = int(round(mean_tone + magnitude * (255.0 - mean_tone)))
+        down = int(round(mean_tone * (1.0 - magnitude)))
         if norm >= 0.0:
-            # Positive delta (generated image brighter than source): cyan.
-            diff_samples[idx] = 0
-            diff_samples[idx + 1] = magnitude
-            diff_samples[idx + 2] = magnitude
+            # Positive delta (generated image brighter than source): cyan tint from base tone.
+            diff_samples[idx] = down
+            diff_samples[idx + 1] = up
+            diff_samples[idx + 2] = up
         else:
-            # Negative delta (generated image darker than source): red.
-            diff_samples[idx] = magnitude
-            diff_samples[idx + 1] = 0
-            diff_samples[idx + 2] = 0
+            # Negative delta (generated image darker than source): red tint from base tone.
+            diff_samples[idx] = up
+            diff_samples[idx + 1] = down
+            diff_samples[idx + 2] = down
 
     return fitz.Pixmap(fitz.csRGB, original_pix.width, original_pix.height, bytes(diff_samples), 0)
 
@@ -4661,6 +4664,7 @@ class Action:
         dx = np.sum(svg - orig, axis=2, dtype=np.int32).astype(np.float32)
         norm = np.clip(dx / (3.0 * 255.0), -1.0, 1.0)
 
+        mask = None
         if focus_mask is not None:
             if focus_mask.shape[:2] != img_orig.shape[:2]:
                 focus_mask = cv2.resize(
@@ -4671,13 +4675,23 @@ class Action:
             mask = focus_mask > 0
             norm = np.where(mask, norm, 0.0)
 
-        diff = np.zeros_like(img_orig)
-        magnitude = np.clip(np.abs(norm) * 255.0, 0.0, 255.0).astype(np.uint8)
+        # Base tone comes from the mean luminance of both pixels.
+        # This keeps identical bright pixels white, while identical dark pixels
+        # stay dark instead of being forced to black or white.
+        mean_tone = np.mean(np.concatenate((orig, svg), axis=2), axis=2).astype(np.float32)
+        magnitude = np.clip(np.abs(norm), 0.0, 1.0)
         positive = norm >= 0.0
-        # BGR: positive dx -> cyan (B+G), negative dx -> red.
-        diff[:, :, 0] = np.where(positive, magnitude, 0)
-        diff[:, :, 1] = np.where(positive, magnitude, 0)
-        diff[:, :, 2] = np.where(positive, 0, magnitude)
+
+        # Interpolate from grayscale base tone towards signed endpoint colors.
+        up = mean_tone + magnitude * (255.0 - mean_tone)
+        down = mean_tone * (1.0 - magnitude)
+
+        diff = np.zeros_like(img_orig)
+        diff[:, :, 0] = np.where(positive, up, down).astype(np.uint8)
+        diff[:, :, 1] = np.where(positive, up, down).astype(np.uint8)
+        diff[:, :, 2] = np.where(positive, down, up).astype(np.uint8)
+        if mask is not None:
+            diff = np.where(mask[:, :, None], diff, 0)
         return diff
 
     @staticmethod

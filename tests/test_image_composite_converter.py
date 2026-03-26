@@ -5337,10 +5337,10 @@ def test_create_diff_image_uses_signed_normalized_rgb_delta() -> None:
     )
 
     diff = Action.create_diff_image(orig, svg)
-    # First pixel brighter in generated image => cyan (B+G).
-    assert tuple(int(v) for v in diff[0, 0]) == (30, 30, 0)
-    # Second pixel darker in generated image => red.
-    assert tuple(int(v) for v in diff[0, 1]) == (0, 0, 30)
+    # First pixel brighter in generated image => cyan tint from dark base tone.
+    assert tuple(int(v) for v in diff[0, 0]) == (52, 52, 22)
+    # Second pixel darker in generated image => red tint from bright base tone.
+    assert tuple(int(v) for v in diff[0, 1]) == (163, 163, 193)
 
 
 def test_create_diff_image_respects_focus_mask_for_signed_delta() -> None:
@@ -5354,8 +5354,22 @@ def test_create_diff_image_respects_focus_mask_for_signed_delta() -> None:
     focus_mask = np.array([[1, 0]], dtype=np.uint8)
 
     diff = Action.create_diff_image(orig, svg, focus_mask)
-    assert tuple(int(v) for v in diff[0, 0]) == (30, 30, 0)
+    assert tuple(int(v) for v in diff[0, 0]) == (43, 43, 13)
     assert tuple(int(v) for v in diff[0, 1]) == (0, 0, 0)
+
+
+def test_create_diff_image_uses_mean_tone_for_zero_difference() -> None:
+    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+        pytest.skip("numpy/cv2 not available in this environment")
+
+    np = image_composite_converter.np
+
+    orig = np.array([[[255, 255, 255], [20, 20, 20]]], dtype=np.uint8)
+    svg = orig.copy()
+
+    diff = Action.create_diff_image(orig, svg)
+    assert tuple(int(v) for v in diff[0, 0]) == (255, 255, 255)
+    assert tuple(int(v) for v in diff[0, 1]) == (20, 20, 20)
 
 
 def test_convert_range_fallback_writes_diff_pngs_when_cv2_missing(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
