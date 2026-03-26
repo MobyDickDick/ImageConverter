@@ -21,8 +21,14 @@ focused on the actual project scope.
 
 ## Kelle-/Optimierungs-Backlog (neu aus dem Umsetzungscheck)
 
-- [ ] A1: Gemeinsamen Parametervektor für globale Optimierung einführen.
-- [ ] A2: Globalen Mehrparameter-Suchmodus ergänzen (nicht nur Kreis-Pose).
+- [x] A1: Gemeinsamen Parametervektor für globale Optimierung einführen.
+  - Added `GlobalParameterVector` as a central structure for geometry/text optimization fields (`cx`, `cy`, `r`, arm/stem, text position/scale), including param round-tripping.
+  - Added central bounds/lock metadata via `_global_parameter_vector_bounds` and per-round debug logging with `_log_global_parameter_vector`.
+  - Wrapped the existing circle adaptive/stochastic optimizers to read/write through the shared vector abstraction.
+- [x] A2: Globalen Mehrparameter-Suchmodus ergänzen (nicht nur Kreis-Pose).
+  - Added `Action._optimize_global_parameter_vector_sampling` as a reproducible baseline search that samples and shrinks multiple unlocked dimensions from `GlobalParameterVector` jointly (`cx`, `cy`, `r`, `stem_*`, `text_*`).
+  - Added per-round progress logs for `best_err`, accepted candidates, and the active parameter subset, plus a final delta summary for changed dimensions.
+  - Integrated the new mode into the existing optimization loop behind `enable_global_search_mode`, so the global pass can be activated without changing default conversion behavior.
 - [ ] A3: Near-Optimum-Plateau auf den globalen Parameterraum verallgemeinern.
 - [ ] A4: Schwerpunkt/zentralen Repräsentanten des Plateau-Bereichs berechnen und auswählen.
 - [ ] A5: Regressionstests für globalen Suchmodus, Seeds und Constraint-Einhaltung ergänzen.

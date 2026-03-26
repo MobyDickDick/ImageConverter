@@ -11,6 +11,7 @@ import base64
 import contextlib
 import copy
 import csv
+import dataclasses
 import json
 import math
 import os
@@ -727,6 +728,70 @@ class Candidate:
     w: float
     h: float
 
+
+@dataclass(frozen=True)
+class GlobalParameterVector:
+    """Unified optimization vector for badge/kelle geometry and text layout."""
+
+    cx: float
+    cy: float
+    r: float
+    arm_x1: float | None = None
+    arm_y1: float | None = None
+    arm_x2: float | None = None
+    arm_y2: float | None = None
+    arm_stroke: float | None = None
+    stem_x: float | None = None
+    stem_top: float | None = None
+    stem_bottom: float | None = None
+    stem_width: float | None = None
+    text_x: float | None = None
+    text_y: float | None = None
+    text_scale: float | None = None
+
+    @staticmethod
+    def from_params(params: dict) -> "GlobalParameterVector":
+        return GlobalParameterVector(
+            cx=float(params.get("cx", 0.0)),
+            cy=float(params.get("cy", 0.0)),
+            r=float(params.get("r", 1.0)),
+            arm_x1=float(params["arm_x1"]) if "arm_x1" in params else None,
+            arm_y1=float(params["arm_y1"]) if "arm_y1" in params else None,
+            arm_x2=float(params["arm_x2"]) if "arm_x2" in params else None,
+            arm_y2=float(params["arm_y2"]) if "arm_y2" in params else None,
+            arm_stroke=float(params["arm_stroke"]) if "arm_stroke" in params else None,
+            stem_x=float(params["stem_x"]) if "stem_x" in params else None,
+            stem_top=float(params["stem_top"]) if "stem_top" in params else None,
+            stem_bottom=float(params["stem_bottom"]) if "stem_bottom" in params else None,
+            stem_width=float(params["stem_width"]) if "stem_width" in params else None,
+            text_x=float(params["text_x"]) if "text_x" in params else None,
+            text_y=float(params["text_y"]) if "text_y" in params else None,
+            text_scale=float(params["text_scale"]) if "text_scale" in params else None,
+        )
+
+    def apply_to_params(self, params: dict) -> dict:
+        out = dict(params)
+        out["cx"] = float(self.cx)
+        out["cy"] = float(self.cy)
+        out["r"] = float(self.r)
+        optional_values = {
+            "arm_x1": self.arm_x1,
+            "arm_y1": self.arm_y1,
+            "arm_x2": self.arm_x2,
+            "arm_y2": self.arm_y2,
+            "arm_stroke": self.arm_stroke,
+            "stem_x": self.stem_x,
+            "stem_top": self.stem_top,
+            "stem_bottom": self.stem_bottom,
+            "stem_width": self.stem_width,
+            "text_x": self.text_x,
+            "text_y": self.text_y,
+            "text_scale": self.text_scale,
+        }
+        for key, value in optional_values.items():
+            if value is not None:
+                out[key] = float(value)
+        return out
 
 def load_grayscale_image(path: Path) -> list[list[int]]:
     image_module = _import_with_vendored_fallback("PIL.Image")
@@ -5469,6 +5534,66 @@ class Action:
         return 0.0, float(w - 1), 0.0, float(h - 1), min_r, max_r
 
     @staticmethod
+    def _global_parameter_vector_bounds(params: dict, w: int, h: int) -> dict[str, tuple[float, float, bool, str]]:
+        """Return central bounds/lock metadata for the shared optimization vector."""
+        x_low, x_high, y_low, y_high, r_low, r_high = Action._circle_bounds(params, w, h)
+        max_x = float(max(0, w - 1))
+        max_y = float(max(0, h - 1))
+        text_scale = float(params.get("text_scale", 1.0))
+        text_scale_min = float(params.get("text_scale_min", max(0.2, text_scale * 0.5)))
+        text_scale_max = float(params.get("text_scale_max", max(text_scale_min, text_scale * 1.8)))
+        return {
+            "cx": (x_low, x_high, bool(params.get("lock_circle_cx", False)), "canvas"),
+            "cy": (y_low, y_high, bool(params.get("lock_circle_cy", False)), "canvas"),
+            "r": (r_low, r_high, False, "template/semantic"),
+            "arm_x1": (0.0, max_x, bool(params.get("lock_arm", False)), "canvas"),
+            "arm_y1": (0.0, max_y, bool(params.get("lock_arm", False)), "canvas"),
+            "arm_x2": (0.0, max_x, bool(params.get("lock_arm", False)), "template"),
+            "arm_y2": (0.0, max_y, bool(params.get("lock_arm", False)), "template"),
+            "arm_stroke": (1.0, max(1.0, min(float(min(w, h)) * 0.20, float(params.get("r", min(w, h))) * 0.9)), bool(params.get("lock_stroke_widths", False)), "semantic"),
+            "stem_x": (0.0, max_x, bool(params.get("lock_stem", False)), "template"),
+            "stem_top": (0.0, max_y, bool(params.get("lock_stem", False)), "template"),
+            "stem_bottom": (0.0, max_y, bool(params.get("lock_stem", False)), "template"),
+            "stem_width": (1.0, max(1.0, min(float(w) * 0.25, float(params.get("stem_width_max", float(w) * 0.25)))), bool(params.get("lock_stroke_widths", False)), "semantic"),
+            "text_x": (0.0, max_x, bool(params.get("lock_text_position", False)), "template"),
+            "text_y": (0.0, max_y, bool(params.get("lock_text_position", False)), "template"),
+            "text_scale": (text_scale_min, text_scale_max, bool(params.get("lock_text_scale", False)), "semantic"),
+        }
+
+    @staticmethod
+    def _log_global_parameter_vector(logs: list[str], params: dict, w: int, h: int, *, label: str) -> None:
+        vector = GlobalParameterVector.from_params(params)
+        bounds = Action._global_parameter_vector_bounds(params, w, h)
+
+        def _fmt_value(value: float | None) -> str:
+            return "-" if value is None else f"{float(value):.3f}"
+
+        entries = []
+        for name in (
+            "cx",
+            "cy",
+            "r",
+            "arm_x1",
+            "arm_y1",
+            "arm_x2",
+            "arm_y2",
+            "arm_stroke",
+            "stem_x",
+            "stem_top",
+            "stem_bottom",
+            "stem_width",
+            "text_x",
+            "text_y",
+            "text_scale",
+        ):
+            low, high, locked, source = bounds[name]
+            value = getattr(vector, name)
+            entries.append(
+                f"{name}={_fmt_value(value)} [{low:.2f},{high:.2f}] lock={'ja' if locked else 'nein'} src={source}"
+            )
+        logs.append(f"{label}: global_vector " + "; ".join(entries))
+
+    @staticmethod
     def _stochastic_survivor_scalar(
         current_value: float,
         low: float,
@@ -5536,6 +5661,7 @@ class Action:
             return False
 
         h, w = img_orig.shape[:2]
+        Action._log_global_parameter_vector(logs, params, w, h, label="circle: survivor-start")
         x_low, x_high, y_low, y_high, r_low, r_high = Action._circle_bounds(params, w, h)
         current = (
             Action._snap_half(float(params.get("cx", (w - 1) / 2.0))),
@@ -5604,11 +5730,14 @@ class Action:
             logs.append("circle: Stochastic-Survivor keine relevante Verbesserung")
             return False
 
-        params["cx"], params["cy"], params["r"] = best
+        updated_vector = GlobalParameterVector.from_params(params)
+        updated_vector = dataclasses.replace(updated_vector, cx=best[0], cy=best[1], r=best[2])
+        params.update(updated_vector.apply_to_params(params))
         if params.get("arm_enabled"):
             Action._reanchor_arm_to_circle_edge(params, best[2])
         if params.get("stem_enabled"):
             params["stem_top"] = float(params.get("cy", 0.0)) + best[2]
+        Action._log_global_parameter_vector(logs, params, w, h, label="circle: survivor-final")
         logs.append(
             f"circle: Stochastic-Survivor übernommen (cx={best[0]:.3f}, cy={best[1]:.3f}, r={best[2]:.3f}, err={best_err:.3f})"
         )
@@ -5635,6 +5764,7 @@ class Action:
             return False
 
         h, w = img_orig.shape[:2]
+        Action._log_global_parameter_vector(logs, params, w, h, label="circle: adaptive-start")
         x_low, x_high, y_low, y_high, r_low, r_high = Action._circle_bounds(params, w, h)
         lock_cx = bool(params.get("lock_circle_cx", False))
         lock_cy = bool(params.get("lock_circle_cy", False))
@@ -5757,6 +5887,10 @@ class Action:
                     f"(cx={best[0]:.3f}, cy={best[1]:.3f}, r={best[2]:.3f})"
                 )
             )
+            round_vector = GlobalParameterVector.from_params(params)
+            round_vector = dataclasses.replace(round_vector, cx=best[0], cy=best[1], r=best[2])
+            round_params = round_vector.apply_to_params(params)
+            Action._log_global_parameter_vector(logs, round_params, w, h, label=f"circle: Runde {_round + 1}")
 
             # Iteratively shrink domain around the stable near-optimal region.
             shrink = 0.58
@@ -5788,11 +5922,14 @@ class Action:
             logs.append("circle: Adaptive-Domain-Suche keine relevante Verbesserung")
             return False
 
-        params["cx"], params["cy"], params["r"] = best
+        updated_vector = GlobalParameterVector.from_params(params)
+        updated_vector = dataclasses.replace(updated_vector, cx=best[0], cy=best[1], r=best[2])
+        params.update(updated_vector.apply_to_params(params))
         if params.get("arm_enabled"):
             Action._reanchor_arm_to_circle_edge(params, best[2])
         if params.get("stem_enabled"):
             params["stem_top"] = float(params.get("cy", 0.0)) + best[2]
+        Action._log_global_parameter_vector(logs, params, w, h, label="circle: adaptive-final")
 
         boundary_hit = (
             (not lock_cx and (abs(best[0] - x_low) <= 0.01 or abs(best[0] - x_high) <= 0.01))
@@ -5805,6 +5942,131 @@ class Action:
             "circle: Adaptive-Domain-Suche übernommen "
             f"(cx={best[0]:.3f}, cy={best[1]:.3f}, r={best[2]:.3f}, err={best_err:.3f}, "
             f"rand_optimum={'ja' if boundary_hit else 'nein'}, flaches_optimum={'ja' if flat_hint else 'nein'})"
+        )
+        return True
+
+    @staticmethod
+    def _full_badge_error_for_params(img_orig: np.ndarray, params: dict) -> float:
+        """Evaluate full-image error for an already prepared badge parameter dict."""
+        h, w = img_orig.shape[:2]
+        render = Action._fit_to_original_size(
+            img_orig,
+            Action.render_svg_to_numpy(Action.generate_badge_svg(w, h, params), w, h),
+        )
+        if render is None:
+            return float("inf")
+        return float(Action.calculate_error(img_orig, render))
+
+    @staticmethod
+    def _optimize_global_parameter_vector_sampling(
+        img_orig: np.ndarray,
+        params: dict,
+        logs: list[str],
+        *,
+        rounds: int = 3,
+        samples_per_round: int = 16,
+    ) -> bool:
+        """Global multi-parameter baseline search over the shared vector."""
+        if not bool(params.get("enable_global_search_mode", False)):
+            return False
+
+        h, w = img_orig.shape[:2]
+        bounds = Action._global_parameter_vector_bounds(params, w, h)
+        vector = GlobalParameterVector.from_params(params)
+
+        active_keys: list[str] = []
+        for key in ("cx", "cy", "r", "stem_x", "stem_width", "text_x", "text_y", "text_scale"):
+            value = getattr(vector, key)
+            if value is None:
+                continue
+            _low, _high, locked, _source = bounds[key]
+            if locked:
+                continue
+            active_keys.append(key)
+
+        if len(active_keys) < 4:
+            logs.append(
+                "global-search: übersprungen (zu wenige aktive Parameter; benötigt >=4)"
+            )
+            return False
+
+        def clamp_vector(candidate: GlobalParameterVector) -> GlobalParameterVector:
+            data = dataclasses.asdict(candidate)
+            for key in active_keys:
+                low, high, _locked, _source = bounds[key]
+                current_value = float(data[key])
+                clipped = float(Action._clip_scalar(current_value, low, high))
+                if key in {"cx", "cy", "r", "stem_x", "stem_width", "text_x", "text_y"}:
+                    clipped = float(Action._snap_half(clipped))
+                data[key] = clipped
+            return GlobalParameterVector(**data)
+
+        def eval_vector(candidate: GlobalParameterVector) -> float:
+            probe = candidate.apply_to_params(params)
+            if probe.get("arm_enabled"):
+                Action._reanchor_arm_to_circle_edge(probe, float(probe.get("r", 0.0)))
+            if probe.get("stem_enabled"):
+                probe["stem_top"] = float(probe.get("cy", 0.0)) + float(probe.get("r", 0.0))
+                if bool(probe.get("lock_stem_center_to_circle", False)):
+                    stem_w = float(probe.get("stem_width", 1.0))
+                    probe["stem_x"] = Action._snap_half(
+                        max(0.0, min(float(w) - stem_w, float(probe.get("cx", 0.0)) - (stem_w / 2.0)))
+                    )
+            return Action._full_badge_error_for_params(img_orig, probe)
+
+        rng = Action._make_rng(4099 + int(Action.STOCHASTIC_RUN_SEED) + int(Action.STOCHASTIC_SEED_OFFSET))
+        best = clamp_vector(vector)
+        best_err = eval_vector(best)
+        if not math.isfinite(best_err):
+            return False
+        improved = False
+
+        spans = {key: max(0.25, float(bounds[key][1] - bounds[key][0]) * 0.20) for key in active_keys}
+        logs.append(
+            f"global-search: gestartet (aktive_parameter={','.join(active_keys)}, samples_pro_runde={max(8, int(samples_per_round))}, start_err={best_err:.3f})"
+        )
+
+        for round_idx in range(max(1, int(rounds))):
+            accepted = 0
+            for _ in range(max(8, int(samples_per_round))):
+                sample_data = dataclasses.asdict(best)
+                for key in active_keys:
+                    low, high, _locked, _source = bounds[key]
+                    sigma = spans[key]
+                    sample_data[key] = float(Action._clip_scalar(rng.normal(float(sample_data[key]), sigma), low, high))
+                candidate = clamp_vector(GlobalParameterVector(**sample_data))
+                candidate_err = eval_vector(candidate)
+                if math.isfinite(candidate_err) and candidate_err + 0.05 < best_err:
+                    best = candidate
+                    best_err = candidate_err
+                    accepted += 1
+                    improved = True
+            for key in active_keys:
+                spans[key] = max(0.12, spans[key] * 0.78)
+            logs.append(
+                f"global-search: Runde {round_idx + 1} best_err={best_err:.3f}, akzeptierte_kandidaten={accepted}, sigma_mittel={sum(spans.values()) / max(1, len(spans)):.3f}"
+            )
+
+        if not improved:
+            logs.append("global-search: keine relevante Verbesserung")
+            return False
+
+        old_values = {key: float(getattr(vector, key)) for key in active_keys}
+        new_values = {key: float(getattr(best, key)) for key in active_keys}
+        params.update(best.apply_to_params(params))
+        delta_labels = [
+            f"{key} {old_values[key]:.3f}->{new_values[key]:.3f}"
+            for key in active_keys
+            if abs(new_values[key] - old_values[key]) >= 0.01
+        ]
+        if params.get("arm_enabled"):
+            Action._reanchor_arm_to_circle_edge(params, float(params.get("r", 0.0)))
+        if params.get("stem_enabled"):
+            params["stem_top"] = float(params.get("cy", 0.0)) + float(params.get("r", 0.0))
+        Action._log_global_parameter_vector(logs, params, w, h, label="global-search: final")
+        logs.append(
+            "global-search: übernommen "
+            f"(best_err={best_err:.3f}, verbessert={', '.join(delta_labels) if delta_labels else 'keine sichtbare delta-liste'})"
         )
         return True
 
@@ -7613,6 +7875,14 @@ class Action:
 
                 # Color fitting is intentionally deferred to the end so
                 # geometry convergence is not biased by temporary palette noise.
+
+            global_search_changed = Action._optimize_global_parameter_vector_sampling(
+                img_orig,
+                params,
+                logs,
+            )
+            if global_search_changed:
+                round_changed = True
 
             full_svg = Action.generate_badge_svg(w, h, params)
             full_render = Action._fit_to_original_size(img_orig, Action.render_svg_to_numpy(full_svg, w, h))

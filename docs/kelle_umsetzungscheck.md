@@ -88,20 +88,26 @@ Die folgenden Aufgaben leiten sich direkt aus den identifizierten Lücken ab und
 dass sie nacheinander abgearbeitet und getestet werden können.
 
 ### A1 – Gemeinsamen Parametervektor definieren
-- [ ] Einen einheitlichen Parametervektor für die Kelle/Badge-Geometrie einführen
+- [x] Einen einheitlichen Parametervektor für die Kelle/Badge-Geometrie einführen
       (mindestens: `cx`, `cy`, `r`, Griff-/Stiel-Lage, Griff-/Stiel-Breite, Textlage/Skalierung).
-- [ ] Pro Parameter klare Bounds und ggf. Locks dokumentieren (inkl. Herkunft: Template, Canvas, Semantik).
-- [ ] Bestehende elementweise Optimierer so kapseln, dass sie über denselben Vektor lesen/schreiben.
+- [x] Pro Parameter klare Bounds und ggf. Locks dokumentieren (inkl. Herkunft: Template, Canvas, Semantik).
+- [x] Bestehende elementweise Optimierer so kapseln, dass sie über denselben Vektor lesen/schreiben.
 
 **Akzeptanzkriterium:** Es gibt eine zentrale Struktur, die alle optimierbaren Parameter enthält,
 und eine Debug-Ausgabe, die den Vektor pro Runde protokolliert.
 
 ### A2 – Globale Mehrparameter-Suche ergänzen
-- [ ] Einen globalen Optimierungsmodus implementieren, der nicht nur `(cx, cy, r)`, sondern mehrere
+- [x] Einen globalen Optimierungsmodus implementieren, der nicht nur `(cx, cy, r)`, sondern mehrere
       Parameter gleichzeitig variiert.
-- [ ] Sampling zunächst als robuste Baseline (z. B. zufällig/Gauß um aktuelles Bestes), mit
+- [x] Sampling zunächst als robuste Baseline (z. B. zufällig/Gauß um aktuelles Bestes), mit
       schrittweise sinkender Streuung pro Runde.
-- [ ] Fortschrittsmetrik pro Runde loggen (`best_err`, akzeptierte Kandidaten, verbesserte Parameter).
+- [x] Fortschrittsmetrik pro Runde loggen (`best_err`, akzeptierte Kandidaten, verbesserte Parameter).
+
+Stand: umgesetzt über `Action._optimize_global_parameter_vector_sampling` (aktivierbar über
+`enable_global_search_mode`). Die Suche variiert einen gemeinsamen Teilvektor aus
+`GlobalParameterVector` gleichzeitig, nutzt Gauß-Sampling um den aktuellen Bestpunkt und reduziert
+die Streuung je Runde. Der Lauf protokolliert aktive Parameter, `best_err`, akzeptierte Kandidaten
+und finale Delta-Parameter.
 
 **Akzeptanzkriterium:** Mindestens ein reproduzierbarer Lauf optimiert >3 Parameter gleichzeitig
 und liefert eine nachweisbare Fehlerverbesserung gegenüber dem Startzustand.
