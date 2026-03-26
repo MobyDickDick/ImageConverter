@@ -1617,6 +1617,19 @@ class Action:
         return float(min(float(radius), width_cap))
 
     @staticmethod
+    def _apply_circle_text_radius_floor(params: dict, radius: float) -> float:
+        """Enforce CircleWithText lower bound: radius must exceed half text width."""
+        if not Action._is_circle_with_text(params):
+            return float(radius)
+        x1, _y1, x2, _y2 = Action._text_bbox(params)
+        text_width = max(0.0, float(x2) - float(x1))
+        if text_width <= 0.0:
+            return float(radius)
+        # Keep strict inequality: radius > (text_width / 2).
+        lower_bound = (text_width / 2.0) + 1e-3
+        return float(max(float(radius), lower_bound))
+
+    @staticmethod
     def _clamp_circle_inside_canvas(params: dict, w: int, h: int) -> dict:
         """Clamp circle center/radius so no part of the ring exceeds the viewport."""
         p = dict(params)
@@ -1637,6 +1650,9 @@ class Action:
                 float(p.get("circle_radius_lower_bound_px", 1.0)),
             )
         )
+        min_r = Action._apply_circle_text_radius_floor(p, min_r)
+        if not bool(p.get("allow_circle_overflow", False)):
+            min_r = min(min_r, max_r)
 
         p["cx"] = cx
         p["cy"] = cy

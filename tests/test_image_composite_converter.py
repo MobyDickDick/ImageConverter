@@ -3495,6 +3495,21 @@ def test_clamp_circle_with_text_enforces_strict_diameter_less_than_width() -> No
     assert (2.0 * float(clamped["r"])) < 20.0
 
 
+def test_clamp_circle_with_text_keeps_radius_above_half_text_width() -> None:
+    params = Action._apply_co2_label(Action._default_ac0870_params(30, 30))
+    params["draw_text"] = True
+    params["cx"] = 15.0
+    params["cy"] = 15.0
+    params["r"] = 3.0
+    params["stroke_circle"] = 0.0
+    x1, _y1, x2, _y2 = Action._text_bbox(params)
+
+    clamped = Action._clamp_circle_inside_canvas(params, 30, 30)
+
+    assert float(clamped["r"]) > ((float(x2) - float(x1)) / 2.0)
+    assert (2.0 * float(clamped["r"])) < 30.0
+
+
 def test_clamp_plain_circle_without_text_keeps_canvas_limited_half_width_radius() -> None:
     params = {
         "circle_enabled": True,
