@@ -737,7 +737,7 @@ def load_grayscale_image(path: Path) -> list[list[int]]:
 
 
 def _create_diff_image_without_cv2(input_path: str | Path, svg_content: str):
-    """Create a red/cyan diff image using PyMuPDF when numpy/opencv are unavailable."""
+    """Create a normalized signed red/cyan diff image when numpy/opencv are unavailable."""
     if fitz is None:
         raise RuntimeError("Fallback diff generation requires fitz (PyMuPDF).")
 
@@ -765,11 +765,19 @@ def _create_diff_image_without_cv2(input_path: str | Path, svg_content: str):
         rs = int(round(min(255.0, max(0.0, float(rs) + (255.0 * (1.0 - alpha))))))
         gs = int(round(min(255.0, max(0.0, float(gs) + (255.0 * (1.0 - alpha))))))
         bs = int(round(min(255.0, max(0.0, float(bs) + (255.0 * (1.0 - alpha))))))
-        gray_orig = int(round((r0 + g0 + b0) / 3))
-        gray_svg = int(round((rs + gs + bs) / 3))
-        diff_samples[idx] = gray_svg
-        diff_samples[idx + 1] = gray_svg
-        diff_samples[idx + 2] = gray_orig
+        dx = float(rs - r0) + float(gs - g0) + float(bs - b0)
+        norm = max(-1.0, min(1.0, dx / (3.0 * 255.0)))
+        magnitude = int(round(abs(norm) * 255.0))
+        if norm >= 0.0:
+            # Positive delta (generated image brighter than source): cyan.
+            diff_samples[idx] = 0
+            diff_samples[idx + 1] = magnitude
+            diff_samples[idx + 2] = magnitude
+        else:
+            # Negative delta (generated image darker than source): red.
+            diff_samples[idx] = magnitude
+            diff_samples[idx + 1] = 0
+            diff_samples[idx + 2] = 0
 
     return fitz.Pixmap(fitz.csRGB, original_pix.width, original_pix.height, bytes(diff_samples), 0)
 
@@ -4646,8 +4654,12 @@ class Action:
     ) -> np.ndarray:
         if img_svg.shape[:2] != img_orig.shape[:2]:
             img_svg = cv2.resize(img_svg, (img_orig.shape[1], img_orig.shape[0]), interpolation=cv2.INTER_AREA)
-        gray_orig = cv2.cvtColor(img_orig, cv2.COLOR_BGR2GRAY)
-        gray_svg = cv2.cvtColor(img_svg, cv2.COLOR_BGR2GRAY)
+        orig = img_orig.astype(np.int16)
+        svg = img_svg.astype(np.int16)
+        # Signed RGB sum difference as requested by the user:
+        # dx = (r2-r1) + (g2-g1) + (b2-b1), normalized to [-1, 1].
+        dx = np.sum(svg - orig, axis=2, dtype=np.int32).astype(np.float32)
+        norm = np.clip(dx / (3.0 * 255.0), -1.0, 1.0)
 
         if focus_mask is not None:
             if focus_mask.shape[:2] != img_orig.shape[:2]:
@@ -4657,13 +4669,15 @@ class Action:
                     interpolation=cv2.INTER_NEAREST,
                 )
             mask = focus_mask > 0
-            gray_orig = np.where(mask, gray_orig, 0).astype(np.uint8)
-            gray_svg = np.where(mask, gray_svg, 0).astype(np.uint8)
+            norm = np.where(mask, norm, 0.0)
 
         diff = np.zeros_like(img_orig)
-        diff[:, :, 2] = gray_orig
-        diff[:, :, 1] = gray_svg
-        diff[:, :, 0] = gray_svg
+        magnitude = np.clip(np.abs(norm) * 255.0, 0.0, 255.0).astype(np.uint8)
+        positive = norm >= 0.0
+        # BGR: positive dx -> cyan (B+G), negative dx -> red.
+        diff[:, :, 0] = np.where(positive, magnitude, 0)
+        diff[:, :, 1] = np.where(positive, magnitude, 0)
+        diff[:, :, 2] = np.where(positive, 0, magnitude)
         return diff
 
     @staticmethod
