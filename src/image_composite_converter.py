@@ -2508,6 +2508,19 @@ class Action:
                 canonical_name == "AC0820_L"
                 or variant_name == "AC0820_L"
             )
+            # General large-badge tuning (not variant-specific): for centered
+            # CO² labels without connectors, a mildly tighter/lower baseline
+            # produces better visual agreement across anti-aliased inputs.
+            large_centered_co2 = (
+                bool(p.get("circle_enabled", True))
+                and not bool(p.get("arm_enabled") or p.get("stem_enabled"))
+                and str(p.get("co2_anchor_mode", "center_co")).lower() == "center_co"
+                and template_r >= 10.0
+            )
+            if large_centered_co2:
+                p["co2_width_scale"] = float(min(float(p.get("co2_width_scale", 0.89)), 0.89))
+                p["co2_dy"] = float(max(float(p.get("co2_dy", 0.0)), 0.03 * template_r))
+                p["co2_center_co_bias"] = float(min(float(p.get("co2_center_co_bias", -0.05)), -0.05))
             if is_large_ac0820 and image_width > 0.0:
                 # AC0820_L should keep its circle primarily template-driven, but
                 # still respect the product rule that the circle diameter is
