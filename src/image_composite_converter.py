@@ -760,9 +760,11 @@ def _create_diff_image_without_cv2(input_path: str | Path, svg_content: str):
         sidx = (idx // 3) * 4
         rs, gs, bs, sa = svg_samples[sidx : sidx + 4]
         alpha = float(sa) / 255.0
-        rs = int(round((rs * alpha) + (255.0 * (1.0 - alpha))))
-        gs = int(round((gs * alpha) + (255.0 * (1.0 - alpha))))
-        bs = int(round((bs * alpha) + (255.0 * (1.0 - alpha))))
+        # PyMuPDF delivers premultiplied RGB when alpha=True. Composite onto
+        # white without multiplying RGB by alpha a second time.
+        rs = int(round(min(255.0, max(0.0, float(rs) + (255.0 * (1.0 - alpha))))))
+        gs = int(round(min(255.0, max(0.0, float(gs) + (255.0 * (1.0 - alpha))))))
+        bs = int(round(min(255.0, max(0.0, float(bs) + (255.0 * (1.0 - alpha))))))
         gray_orig = int(round((r0 + g0 + b0) / 3))
         gray_svg = int(round((rs + gs + bs) / 3))
         diff_samples[idx] = gray_svg
@@ -4613,7 +4615,10 @@ class Action:
                 rgba = np.frombuffer(pix.samples, dtype=np.uint8).reshape(pix.h, pix.w, 4).astype(np.float32)
                 rgb = rgba[:, :, :3]
                 alpha = (rgba[:, :, 3:4] / 255.0)
-                composited = (rgb * alpha) + (255.0 * (1.0 - alpha))
+                # PyMuPDF's RGBA pixmap uses premultiplied RGB for alpha=True.
+                # Composite onto white directly from premultiplied RGB.
+                composited = rgb + (255.0 * (1.0 - alpha))
+                composited = np.clip(composited, 0.0, 255.0)
                 img = composited.astype(np.uint8)
                 return cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
             except Exception:
