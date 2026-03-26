@@ -34,6 +34,7 @@ CircleWithLabelCO^2{
   CO^2: String,
   Constraints = {
     CO^2 = "$CO^2$",
+    2 * Circle.radius < p_o.width,
     for every pixel in glyph(CO^2):
       Distance(pixel, Circle.center) < Circle.radius
   }
@@ -44,6 +45,8 @@ Meaning of `CO^2 in Circle`:
 
 - Every pixel of the rendered text glyph `"CO^2"` must satisfy
   `Distance(pixel, Circle.center) < Circle.radius`.
+- The circle diameter must be strictly smaller than the output image width:
+  `2 * Circle.radius < p_o.width`.
 - In plain language: every text pixel has a distance to the circle center that is
   smaller than the circle radius.
 

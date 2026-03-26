@@ -3482,6 +3482,32 @@ def test_finalize_ac0820_l_does_not_force_large_canvas_overflow_radius() -> None
     assert "allow_circle_overflow" not in tuned
 
 
+def test_clamp_circle_with_text_enforces_strict_diameter_less_than_width() -> None:
+    params = {
+        "circle_enabled": True,
+        "draw_text": True,
+        "cx": 10.0,
+        "cy": 10.0,
+        "r": 10.0,
+        "stroke_circle": 0.0,
+    }
+    clamped = Action._clamp_circle_inside_canvas(params, 20, 20)
+    assert (2.0 * float(clamped["r"])) < 20.0
+
+
+def test_clamp_plain_circle_without_text_keeps_canvas_limited_half_width_radius() -> None:
+    params = {
+        "circle_enabled": True,
+        "draw_text": False,
+        "cx": 10.0,
+        "cy": 10.0,
+        "r": 10.0,
+        "stroke_circle": 0.0,
+    }
+    clamped = Action._clamp_circle_inside_canvas(params, 20, 20)
+    assert float(clamped["r"]) == pytest.approx(10.0)
+
+
 def test_finalize_ac0820_large_canvas_does_not_force_large_circle_radius_constraint() -> None:
     """Base AC0820 names should not inherit an AC0820_L overflow radius rule."""
     params = Action._apply_co2_label(Action._default_ac0870_params(30, 30))
