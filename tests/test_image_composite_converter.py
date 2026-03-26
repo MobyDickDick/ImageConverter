@@ -3469,16 +3469,16 @@ def test_finalize_ac0820_l_keeps_circle_radius_at_template_scale() -> None:
 
 
 
-def test_finalize_ac0820_l_does_not_force_large_canvas_overflow_radius() -> None:
-    """AC0820_L should avoid forcing a width/2 overflow radius floor."""
+def test_finalize_ac0820_l_enforces_minimum_diameter_over_half_image_width() -> None:
+    """AC0820_L should keep 2r strictly larger than half of the image width."""
     params = Action._apply_co2_label(Action._default_ac0870_params(30, 30))
     params["width"] = 30
-    params["r"] = 8.0
+    params["r"] = 7.0
 
     tuned = Action._finalize_ac08_style("AC0820_L", params)
 
-    assert float(tuned["r"]) <= (float(params["width"]) / 2.0)
-    assert "circle_radius_lower_bound_px" not in tuned
+    assert (2.0 * float(tuned["r"])) > (float(params["width"]) / 2.0)
+    assert float(tuned["circle_radius_lower_bound_px"]) > (float(params["width"]) / 4.0)
     assert "allow_circle_overflow" not in tuned
 
 
@@ -5531,6 +5531,54 @@ def test_ac0811_l_conversion_preserves_long_bottom_stem(tmp_path: Path) -> None:
 
     assert stem_y <= 27.5
     assert stem_h >= 16.0
+
+
+def test_ac0820_l_conversion_keeps_circle_diameter_above_half_image_width(tmp_path: Path) -> None:
+    """AC0820_L must keep the final circle diameter strictly above half the source width."""
+    if (
+        image_composite_converter.np is None
+        or image_composite_converter.cv2 is None
+        or image_composite_converter.fitz is None
+    ):
+        pytest.skip("numpy/cv2/fitz not available in this environment")
+
+    images_dir = Path("artifacts/images_to_convert")
+    csv_path = images_dir / "Finale_Wurzelformen_V3.xml"
+    if not images_dir.exists() or not csv_path.exists():
+        pytest.skip("AC0820 fixture inputs not available")
+
+    img_path = images_dir / "AC0820_L.jpg"
+    assert img_path.exists(), f"missing regression fixture: {img_path}"
+
+    src = image_composite_converter.cv2.imread(str(img_path))
+    assert src is not None
+    src_h, src_w = src.shape[:2]
+
+    svg_dir = tmp_path / "svgs"
+    diff_dir = tmp_path / "diffs"
+    reports_dir = tmp_path / "reports"
+
+    result = image_composite_converter.run_iteration_pipeline(
+        str(img_path),
+        str(csv_path),
+        4,
+        str(svg_dir),
+        str(diff_dir),
+        str(reports_dir),
+    )
+
+    assert result is not None
+    svg_text = (svg_dir / "AC0820_L.svg").read_text(encoding="utf-8")
+
+    import re
+
+    circle_match = re.search(r'<circle[^>]*\sr="([0-9.]+)"', svg_text)
+    assert circle_match is not None
+    radius = float(circle_match.group(1))
+
+    assert src_w == 30
+    assert src_h == 30
+    assert (2.0 * radius) > (float(src_w) / 2.0)
 
 
 def test_ac08_semantic_anchor_variants_convert_without_failed_svg(tmp_path: Path) -> None:
