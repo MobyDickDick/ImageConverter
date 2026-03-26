@@ -2489,14 +2489,17 @@ class Action:
             is_large_ac0820 = (
                 canonical_name == "AC0820_L"
                 or variant_name == "AC0820_L"
-                or (symbol_name == "AC0820" and image_width >= 28.0)
             )
             if is_large_ac0820 and image_width > 0.0:
-                # AC0820_L should keep its circle primarily template-driven.
-                # Forcing r > width/2 caused right-side over-expansion in
-                # recent rounds because text residuals can bias only one side
-                # while center stays locked. Keep only a soft template floor.
-                p["r"] = float(max(float(p.get("r", template_r)), template_r * 0.98))
+                # AC0820_L should keep its circle primarily template-driven, but
+                # still respect the product rule that the circle diameter is
+                # strictly larger than half the image width.
+                #   2r > (w / 2)  =>  r > (w / 4)
+                required_r = (image_width / 4.0) + 1e-3
+                p["r"] = float(max(float(p.get("r", template_r)), template_r * 0.98, required_r))
+                p["circle_radius_lower_bound_px"] = float(
+                    max(float(p.get("circle_radius_lower_bound_px", 1.0)), required_r)
+                )
         if p.get("circle_enabled", True):
             has_connector = bool(p.get("arm_enabled") or p.get("stem_enabled"))
             has_text = bool(p.get("draw_text", False))
@@ -7797,9 +7800,18 @@ def run_iteration_pipeline(
         badge_params = Action.make_badge_params(w, h, perc.base_name, perc.img)
         if badge_params is None:
             return None
+        # Persist source raster dimensions so variant-specific finalizers can
+        # enforce width/height-relative geometry rules reliably.
+        badge_params.setdefault("width", float(w))
+        badge_params.setdefault("height", float(h))
         variant_id = os.path.splitext(filename)[0].upper()
         if variant_id == "AC0820_L":
             badge_params["variant_name"] = variant_id
+            # `make_badge_params` receives the base symbol name (AC0820) and
+            # therefore cannot apply AC0820_L-only guardrails on its own.
+            # Re-finalize once the concrete variant is known so the large
+            # variant radius floor survives subsequent validation rounds.
+            badge_params = Action._finalize_ac08_style(variant_id, badge_params)
 
         badge_overrides = params.get("badge_overrides")
         if isinstance(badge_overrides, dict):
