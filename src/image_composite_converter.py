@@ -745,7 +745,9 @@ def _create_diff_image_without_cv2(input_path: str | Path, svg_content: str):
     original_pix = original_doc[0].get_pixmap(alpha=False)
 
     svg_doc = fitz.open("pdf", svg_content.encode("utf-8"))
-    svg_pix = svg_doc[0].get_pixmap(alpha=False)
+    # Render SVG with alpha and composite onto white so transparent backgrounds
+    # do not appear black in the diff viewer.
+    svg_pix = svg_doc[0].get_pixmap(alpha=True)
     if (svg_pix.width, svg_pix.height) != (original_pix.width, original_pix.height):
         svg_pix = fitz.Pixmap(svg_pix, original_pix.width, original_pix.height)
 
@@ -755,7 +757,12 @@ def _create_diff_image_without_cv2(input_path: str | Path, svg_content: str):
 
     for idx in range(0, len(diff_samples), 3):
         r0, g0, b0 = original_samples[idx : idx + 3]
-        rs, gs, bs = svg_samples[idx : idx + 3]
+        sidx = (idx // 3) * 4
+        rs, gs, bs, sa = svg_samples[sidx : sidx + 4]
+        alpha = float(sa) / 255.0
+        rs = int(round((rs * alpha) + (255.0 * (1.0 - alpha))))
+        gs = int(round((gs * alpha) + (255.0 * (1.0 - alpha))))
+        bs = int(round((bs * alpha) + (255.0 * (1.0 - alpha))))
         gray_orig = int(round((r0 + g0 + b0) / 3))
         gray_svg = int(round((rs + gs + bs) / 3))
         diff_samples[idx] = gray_svg
@@ -2476,6 +2483,15 @@ class Action:
             base_scale = float(p["co2_font_scale"])
             p["co2_font_scale_min"] = float(max(0.84, base_scale * 0.92))
             p["co2_font_scale_max"] = float(min(1.12, base_scale * 1.22))
+            # AC0820 references use a slightly narrower CO² wordmark than the
+            # generic Arial fallback. Apply a mild horizontal squeeze so the
+            # reconstructed text width tracks the source more closely.
+            if r >= 10.0:
+                p["co2_width_scale"] = float(min(float(p.get("co2_width_scale", 0.90)), 0.90))
+            elif r >= 6.0:
+                p["co2_width_scale"] = float(min(float(p.get("co2_width_scale", 0.92)), 0.92))
+            else:
+                p["co2_width_scale"] = float(min(float(p.get("co2_width_scale", 0.94)), 0.94))
             p["co2_sub_font_scale"] = float(p.get("co2_sub_font_scale", 66.0))
             p["co2_subscript_offset_scale"] = 0.27
             template_r = float(p.get("template_circle_radius", r))
@@ -3045,6 +3061,7 @@ class Action:
         params["co2_dx"] = float(params.get("co2_dx", 0.0))
         params["co2_dy"] = float(params.get("co2_dy", 0.0))
         params["co2_inner_padding_px"] = float(params.get("co2_inner_padding_px", 0.35))
+        params["co2_width_scale"] = float(params.get("co2_width_scale", 1.0))
         # Keep "CO" as an explicit run so the subscript position remains stable across
         # renderers. The default mode keeps the CO baseline vertically centered, but
         # applies a small left compensation so the overall CO₂ cluster appears
@@ -3085,9 +3102,24 @@ class Action:
         sub_font_px = max(4.0, font_size * (sub_scale / 100.0))
         anchor_mode = str(params.get("co2_anchor_mode", "center_co")).lower()
 
-        co_width = font_size * 1.04
+        width_scale = float(params.get("co2_width_scale", 1.0))
+        width_scale = float(max(0.78, min(1.12, width_scale)))
+        symbol_hint = str(params.get("badge_symbol_name", "")).upper()
+        if not symbol_hint:
+            symbol_hint = str(params.get("variant_name", "")).upper().split("_", 1)[0]
+        if symbol_hint == "AC0820":
+            # Keep AC0820 variants consistently narrower even when later
+            # optimization passes try to widen the default fallback font.
+            if r >= 10.0:
+                width_scale = min(width_scale, 0.90)
+            elif r >= 6.0:
+                width_scale = min(width_scale, 0.92)
+            else:
+                width_scale = min(width_scale, 0.94)
+
+        co_width = (font_size * 1.04) * width_scale
         gap = font_size * 0.03
-        sub_w = sub_font_px * 0.62
+        sub_w = (sub_font_px * 0.62) * width_scale
 
         if anchor_mode in {"cluster", "co"}:
             # Legacy mode: center the whole CO₂ cluster.
@@ -3101,7 +3133,7 @@ class Action:
             # if geometry constraints require it.
             # Prioritize matching the main "CO" glyphs first; if space is tight, shrink
             # or tuck the subscript before shifting the dominant "CO" run.
-            visual_sub_w = sub_font_px * float(params.get("co2_subscript_visual_width_factor", 0.62))
+            visual_sub_w = (sub_font_px * float(params.get("co2_subscript_visual_width_factor", 0.62))) * width_scale
             visual_cluster_shift = (gap + visual_sub_w) / 2.0
             center_co_bias = float(params.get("co2_center_co_bias", 0.0))
             co_x = (cx + float(params.get("co2_dx", 0.0))) + (visual_cluster_shift * center_co_bias)
@@ -3131,7 +3163,7 @@ class Action:
                     max_shrink_px = max(0.0, local_sub_font_px - min_sub_font_px)
                     shrink_px = min(max_shrink_px, overflow / 0.62)
                     local_sub_font_px -= shrink_px
-                    local_sub_w = local_sub_font_px * 0.62
+                    local_sub_w = (local_sub_font_px * 0.62) * width_scale
 
                 # Recompute geometry with adjusted ₂ attachment.
                 sub_font_px = local_sub_font_px
@@ -3217,6 +3249,7 @@ class Action:
         return {
             "anchor_mode": anchor_mode,
             "index_mode": index_mode,
+            "width_scale": width_scale,
             "font_size": font_size,
             "sub_scale": sub_scale,
             "sub_font_px": sub_font_px,
@@ -4406,18 +4439,23 @@ class Action:
                 layout = Action._co2_layout(p)
                 font_size = float(layout["font_size"])
                 y_text = float(layout["y_base"])
+                width_scale = float(layout.get("width_scale", 1.0))
                 elements.append(
                     (
                         f'  <text x="{float(layout["co_x"]):.4f}" y="{y_text:.4f}" fill="{Action.grayhex(p["text_gray"])}" '
                         f'font-family="Arial, Helvetica, sans-serif" font-size="{font_size:.4f}px" '
-                        f'font-style="normal" font-weight="600" text-anchor="middle" dominant-baseline="middle">CO</text>'
+                        f'font-style="normal" font-weight="600" text-anchor="middle" dominant-baseline="middle" '
+                        f'transform="translate({float(layout["co_x"]):.4f} {y_text:.4f}) scale({width_scale:.4f} 1) '
+                        f'translate({-float(layout["co_x"]):.4f} {-y_text:.4f})">CO</text>'
                     )
                 )
                 elements.append(
                     (
                         f'  <text x="{float(layout["subscript_x"]):.4f}" y="{float(layout["subscript_y"]):.4f}" fill="{Action.grayhex(p["text_gray"])}" '
                         f'font-family="Arial, Helvetica, sans-serif" font-size="{float(layout["sub_font_px"]):.4f}px" '
-                        f'font-style="normal" font-weight="600" text-anchor="start" dominant-baseline="middle">2</text>'
+                        f'font-style="normal" font-weight="600" text-anchor="start" dominant-baseline="middle" '
+                        f'transform="translate({float(layout["subscript_x"]):.4f} {float(layout["subscript_y"]):.4f}) scale({width_scale:.4f} 1) '
+                        f'translate({-float(layout["subscript_x"]):.4f} {-float(layout["subscript_y"]):.4f})">2</text>'
                     )
                 )
             elif p.get("text_mode") == "voc":
@@ -4571,8 +4609,12 @@ class Action:
                     zoom_x = size_w / page.rect.width if page.rect.width > 0 else 1
                     zoom_y = size_h / page.rect.height if page.rect.height > 0 else 1
                     mat = fitz.Matrix(zoom_x, zoom_y)
-                    pix = page.get_pixmap(matrix=mat, alpha=False)
-                img = np.frombuffer(pix.samples, dtype=np.uint8).reshape(pix.h, pix.w, 3)
+                    pix = page.get_pixmap(matrix=mat, alpha=True)
+                rgba = np.frombuffer(pix.samples, dtype=np.uint8).reshape(pix.h, pix.w, 4).astype(np.float32)
+                rgb = rgba[:, :, :3]
+                alpha = (rgba[:, :, 3:4] / 255.0)
+                composited = (rgb * alpha) + (255.0 * (1.0 - alpha))
+                img = composited.astype(np.uint8)
                 return cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
             except Exception:
                 continue
