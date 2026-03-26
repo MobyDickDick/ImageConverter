@@ -5946,6 +5946,131 @@ class Action:
         return True
 
     @staticmethod
+    def _full_badge_error_for_params(img_orig: np.ndarray, params: dict) -> float:
+        """Evaluate full-image error for an already prepared badge parameter dict."""
+        h, w = img_orig.shape[:2]
+        render = Action._fit_to_original_size(
+            img_orig,
+            Action.render_svg_to_numpy(Action.generate_badge_svg(w, h, params), w, h),
+        )
+        if render is None:
+            return float("inf")
+        return float(Action.calculate_error(img_orig, render))
+
+    @staticmethod
+    def _optimize_global_parameter_vector_sampling(
+        img_orig: np.ndarray,
+        params: dict,
+        logs: list[str],
+        *,
+        rounds: int = 3,
+        samples_per_round: int = 16,
+    ) -> bool:
+        """Global multi-parameter baseline search over the shared vector."""
+        if not bool(params.get("enable_global_search_mode", False)):
+            return False
+
+        h, w = img_orig.shape[:2]
+        bounds = Action._global_parameter_vector_bounds(params, w, h)
+        vector = GlobalParameterVector.from_params(params)
+
+        active_keys: list[str] = []
+        for key in ("cx", "cy", "r", "stem_x", "stem_width", "text_x", "text_y", "text_scale"):
+            value = getattr(vector, key)
+            if value is None:
+                continue
+            _low, _high, locked, _source = bounds[key]
+            if locked:
+                continue
+            active_keys.append(key)
+
+        if len(active_keys) < 4:
+            logs.append(
+                "global-search: übersprungen (zu wenige aktive Parameter; benötigt >=4)"
+            )
+            return False
+
+        def clamp_vector(candidate: GlobalParameterVector) -> GlobalParameterVector:
+            data = dataclasses.asdict(candidate)
+            for key in active_keys:
+                low, high, _locked, _source = bounds[key]
+                current_value = float(data[key])
+                clipped = float(Action._clip_scalar(current_value, low, high))
+                if key in {"cx", "cy", "r", "stem_x", "stem_width", "text_x", "text_y"}:
+                    clipped = float(Action._snap_half(clipped))
+                data[key] = clipped
+            return GlobalParameterVector(**data)
+
+        def eval_vector(candidate: GlobalParameterVector) -> float:
+            probe = candidate.apply_to_params(params)
+            if probe.get("arm_enabled"):
+                Action._reanchor_arm_to_circle_edge(probe, float(probe.get("r", 0.0)))
+            if probe.get("stem_enabled"):
+                probe["stem_top"] = float(probe.get("cy", 0.0)) + float(probe.get("r", 0.0))
+                if bool(probe.get("lock_stem_center_to_circle", False)):
+                    stem_w = float(probe.get("stem_width", 1.0))
+                    probe["stem_x"] = Action._snap_half(
+                        max(0.0, min(float(w) - stem_w, float(probe.get("cx", 0.0)) - (stem_w / 2.0)))
+                    )
+            return Action._full_badge_error_for_params(img_orig, probe)
+
+        rng = Action._make_rng(4099 + int(Action.STOCHASTIC_RUN_SEED) + int(Action.STOCHASTIC_SEED_OFFSET))
+        best = clamp_vector(vector)
+        best_err = eval_vector(best)
+        if not math.isfinite(best_err):
+            return False
+        improved = False
+
+        spans = {key: max(0.25, float(bounds[key][1] - bounds[key][0]) * 0.20) for key in active_keys}
+        logs.append(
+            f"global-search: gestartet (aktive_parameter={','.join(active_keys)}, samples_pro_runde={max(8, int(samples_per_round))}, start_err={best_err:.3f})"
+        )
+
+        for round_idx in range(max(1, int(rounds))):
+            accepted = 0
+            for _ in range(max(8, int(samples_per_round))):
+                sample_data = dataclasses.asdict(best)
+                for key in active_keys:
+                    low, high, _locked, _source = bounds[key]
+                    sigma = spans[key]
+                    sample_data[key] = float(Action._clip_scalar(rng.normal(float(sample_data[key]), sigma), low, high))
+                candidate = clamp_vector(GlobalParameterVector(**sample_data))
+                candidate_err = eval_vector(candidate)
+                if math.isfinite(candidate_err) and candidate_err + 0.05 < best_err:
+                    best = candidate
+                    best_err = candidate_err
+                    accepted += 1
+                    improved = True
+            for key in active_keys:
+                spans[key] = max(0.12, spans[key] * 0.78)
+            logs.append(
+                f"global-search: Runde {round_idx + 1} best_err={best_err:.3f}, akzeptierte_kandidaten={accepted}, sigma_mittel={sum(spans.values()) / max(1, len(spans)):.3f}"
+            )
+
+        if not improved:
+            logs.append("global-search: keine relevante Verbesserung")
+            return False
+
+        old_values = {key: float(getattr(vector, key)) for key in active_keys}
+        new_values = {key: float(getattr(best, key)) for key in active_keys}
+        params.update(best.apply_to_params(params))
+        delta_labels = [
+            f"{key} {old_values[key]:.3f}->{new_values[key]:.3f}"
+            for key in active_keys
+            if abs(new_values[key] - old_values[key]) >= 0.01
+        ]
+        if params.get("arm_enabled"):
+            Action._reanchor_arm_to_circle_edge(params, float(params.get("r", 0.0)))
+        if params.get("stem_enabled"):
+            params["stem_top"] = float(params.get("cy", 0.0)) + float(params.get("r", 0.0))
+        Action._log_global_parameter_vector(logs, params, w, h, label="global-search: final")
+        logs.append(
+            "global-search: übernommen "
+            f"(best_err={best_err:.3f}, verbessert={', '.join(delta_labels) if delta_labels else 'keine sichtbare delta-liste'})"
+        )
+        return True
+
+    @staticmethod
     def _enforce_semantic_connector_expectation(base_name: str, semantic_elements: list[str], params: dict, w: int, h: int) -> dict:
         """Restore mandatory connector geometry for directional semantic badges."""
         normalized_base = get_base_name_from_file(str(base_name)).upper()
@@ -7750,6 +7875,14 @@ class Action:
 
                 # Color fitting is intentionally deferred to the end so
                 # geometry convergence is not biased by temporary palette noise.
+
+            global_search_changed = Action._optimize_global_parameter_vector_sampling(
+                img_orig,
+                params,
+                logs,
+            )
+            if global_search_changed:
+                round_changed = True
 
             full_svg = Action.generate_badge_svg(w, h, params)
             full_render = Action._fit_to_original_size(img_orig, Action.render_svg_to_numpy(full_svg, w, h))

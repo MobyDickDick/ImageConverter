@@ -2623,6 +2623,69 @@ def test_optimize_circle_pose_adaptive_domain_logs_global_vector_metadata(monkey
     assert any("src=semantic" in line for line in logs)
 
 
+def test_optimize_global_parameter_vector_sampling_improves_multiple_fields(monkeypatch: pytest.MonkeyPatch) -> None:
+    np = image_composite_converter.np
+    if np is None:
+        pytest.skip("numpy not available in this environment")
+    img = np.full((24, 24, 3), 220, dtype=np.uint8)
+    params = {
+        "enable_global_search_mode": True,
+        "circle_enabled": True,
+        "cx": 5.0,
+        "cy": 5.0,
+        "r": 2.0,
+        "stem_enabled": True,
+        "stem_x": 3.0,
+        "stem_top": 7.0,
+        "stem_bottom": 15.0,
+        "stem_width": 1.0,
+        "draw_text": True,
+        "text_x": 4.0,
+        "text_y": 4.0,
+        "text_scale": 0.5,
+        "min_circle_radius": 1.0,
+    }
+    target = {"cx": 12.0, "cy": 11.0, "r": 6.0, "text_x": 12.0, "text_y": 12.0, "text_scale": 1.0}
+
+    def fake_full_error(_img, candidate_params):
+        err = 0.0
+        for key, center in target.items():
+            err += abs(float(candidate_params.get(key, 0.0)) - center)
+        return float(err)
+
+    monkeypatch.setattr(Action, "_full_badge_error_for_params", staticmethod(fake_full_error))
+    logs: list[str] = []
+    start = {k: float(params[k]) for k in target}
+
+    changed = Action._optimize_global_parameter_vector_sampling(
+        img,
+        params,
+        logs,
+        rounds=2,
+        samples_per_round=14,
+    )
+
+    assert changed is True
+    end = {k: float(params[k]) for k in target}
+    assert sum(abs(end[k] - target[k]) for k in target) < sum(abs(start[k] - target[k]) for k in target)
+    assert any("aktive_parameter=" in line for line in logs)
+    assert any("akzeptierte_kandidaten=" in line for line in logs)
+
+
+def test_optimize_global_parameter_vector_sampling_disabled_by_default() -> None:
+    np = image_composite_converter.np
+    if np is None:
+        pytest.skip("numpy not available in this environment")
+    img = np.full((16, 16, 3), 220, dtype=np.uint8)
+    params = {"circle_enabled": True, "cx": 8.0, "cy": 8.0, "r": 4.0, "text_x": 8.0, "text_y": 8.0, "text_scale": 1.0}
+    logs: list[str] = []
+
+    changed = Action._optimize_global_parameter_vector_sampling(img, params, logs)
+
+    assert changed is False
+    assert logs == []
+
+
 def test_co2_layout_vertical_centering_ignores_subscript_for_main_text() -> None:
     """The CO run should stay centered even if the subscript is very large."""
     params = Action._apply_co2_label(Action._default_ac0870_params(15, 15))
