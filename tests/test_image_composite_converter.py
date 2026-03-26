@@ -3452,6 +3452,9 @@ def test_finalize_ac08_circle_text_family_leaves_ac0820_unlocked() -> None:
     assert float(tuned["cx"]) == float(params["template_circle_cx"])
     assert float(tuned["cy"]) == float(params["template_circle_cy"])
     assert tuned["co2_anchor_mode"] == "center_co"
+    assert float(tuned["co2_width_scale"]) <= 0.89
+    assert float(tuned["co2_dy"]) >= float(params["template_circle_radius"]) * 0.03
+    assert float(tuned["co2_center_co_bias"]) <= -0.05
     assert "min_circle_radius" not in tuned
     assert "max_circle_radius" not in tuned
 
