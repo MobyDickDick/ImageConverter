@@ -88,10 +88,10 @@ Die folgenden Aufgaben leiten sich direkt aus den identifizierten Lücken ab und
 dass sie nacheinander abgearbeitet und getestet werden können.
 
 ### A1 – Gemeinsamen Parametervektor definieren
-- [ ] Einen einheitlichen Parametervektor für die Kelle/Badge-Geometrie einführen
+- [x] Einen einheitlichen Parametervektor für die Kelle/Badge-Geometrie einführen
       (mindestens: `cx`, `cy`, `r`, Griff-/Stiel-Lage, Griff-/Stiel-Breite, Textlage/Skalierung).
-- [ ] Pro Parameter klare Bounds und ggf. Locks dokumentieren (inkl. Herkunft: Template, Canvas, Semantik).
-- [ ] Bestehende elementweise Optimierer so kapseln, dass sie über denselben Vektor lesen/schreiben.
+- [x] Pro Parameter klare Bounds und ggf. Locks dokumentieren (inkl. Herkunft: Template, Canvas, Semantik).
+- [x] Bestehende elementweise Optimierer so kapseln, dass sie über denselben Vektor lesen/schreiben.
 
 **Akzeptanzkriterium:** Es gibt eine zentrale Struktur, die alle optimierbaren Parameter enthält,
 und eine Debug-Ausgabe, die den Vektor pro Runde protokolliert.
