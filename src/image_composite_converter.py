@@ -1603,6 +1603,20 @@ class Action:
         return float(max(1.0, edge_margin - (max(0.0, float(stroke)) / 2.0)))
 
     @staticmethod
+    def _is_circle_with_text(params: dict) -> bool:
+        """Return True when the badge encodes a circle-with-text shape."""
+        return bool(params.get("circle_enabled", True)) and bool(params.get("draw_text", False))
+
+    @staticmethod
+    def _apply_circle_text_width_constraint(params: dict, radius: float, w: int) -> float:
+        """Enforce CircleWithText constraint: 2 * radius < image width."""
+        if not Action._is_circle_with_text(params):
+            return float(radius)
+        # Keep a tiny strict margin so the optimized radius remains strictly below w/2.
+        width_cap = (float(w) / 2.0) - 1e-3
+        return float(min(float(radius), width_cap))
+
+    @staticmethod
     def _clamp_circle_inside_canvas(params: dict, w: int, h: int) -> dict:
         """Clamp circle center/radius so no part of the ring exceeds the viewport."""
         p = dict(params)
@@ -1615,6 +1629,7 @@ class Action:
         cy = float(max(0.0, min(float(h), float(p.get("cy", 0.0)))))
         stroke = float(p.get("stroke_circle", 0.0))
         max_r = Action._max_circle_radius_inside_canvas(cx, cy, w, h, stroke)
+        max_r = Action._apply_circle_text_width_constraint(p, max_r, w)
         min_r = float(
             max(
                 1.0,
@@ -5820,6 +5835,7 @@ class Action:
         if bool(probe.get("allow_circle_overflow", False)):
             max_r = max(max_r, float(max(w, h)) * 1.25, min_r + 0.5)
         probe["r"] = float(Action._clip_scalar(radius_value, min_r, max_r))
+        probe = Action._clamp_circle_inside_canvas(probe, w, h)
 
         if probe.get("arm_enabled"):
             Action._reanchor_arm_to_circle_edge(probe, float(probe["r"]))
@@ -5879,6 +5895,7 @@ class Action:
         if bool(probe.get("allow_circle_overflow", False)):
             max_r = max(max_r, float(max(w, h)) * 1.25, min_r + 0.5)
         probe["r"] = float(Action._clip_scalar(radius_value, min_r, max_r))
+        probe = Action._clamp_circle_inside_canvas(probe, w, h)
 
         if probe.get("arm_enabled"):
             Action._reanchor_arm_to_circle_edge(probe, float(probe["r"]))
@@ -5971,6 +5988,7 @@ class Action:
         probe["cy"] = Action._snap_half(float(Action._clip_scalar(cy_value, 0.0, float(h - 1))))
         min_r = float(max(1.0, probe.get("min_circle_radius", 1.0)))
         probe["r"] = Action._snap_half(float(Action._clip_scalar(radius_value, min_r, max_r)))
+        probe = Action._clamp_circle_inside_canvas(probe, w, h)
 
         if probe.get("arm_enabled"):
             Action._reanchor_arm_to_circle_edge(probe, float(probe["r"]))
@@ -7765,13 +7783,7 @@ def run_iteration_pipeline(
             return None
         variant_id = os.path.splitext(filename)[0].upper()
         if variant_id == "AC0820_L":
-            required_radius = (float(w) / 2.0) + 0.5
             badge_params["variant_name"] = variant_id
-            badge_params["allow_circle_overflow"] = True
-            badge_params["circle_radius_lower_bound_px"] = float(
-                max(float(badge_params.get("circle_radius_lower_bound_px", 1.0)), required_radius)
-            )
-            badge_params["r"] = float(max(float(badge_params.get("r", required_radius)), required_radius))
 
         badge_overrides = params.get("badge_overrides")
         if isinstance(badge_overrides, dict):
@@ -7864,21 +7876,7 @@ def run_iteration_pipeline(
             w,
             h,
         )
-        if variant_id == "AC0820_L":
-            required_radius = (float(w) / 2.0) + 0.5
-            badge_params["allow_circle_overflow"] = True
-            badge_params["circle_radius_lower_bound_px"] = float(
-                max(float(badge_params.get("circle_radius_lower_bound_px", 1.0)), required_radius)
-            )
-            badge_params["r"] = float(max(float(badge_params.get("r", required_radius)), required_radius))
         badge_params, redraw_variation_logs = Action.apply_redraw_variation(badge_params, w, h)
-        if variant_id == "AC0820_L":
-            required_radius = (float(w) / 2.0) + 0.5
-            badge_params["allow_circle_overflow"] = True
-            badge_params["circle_radius_lower_bound_px"] = float(
-                max(float(badge_params.get("circle_radius_lower_bound_px", 1.0)), required_radius)
-            )
-            badge_params["r"] = float(max(float(badge_params.get("r", required_radius)), required_radius))
         if badge_params.get("arm_enabled"):
             validation_logs.append(
                 "semantic-guard: Erwartete Arm-Geometrie bestätigt/wiederhergestellt (z.B. AC0812 links)."
