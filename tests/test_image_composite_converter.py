@@ -5317,6 +5317,47 @@ def test_create_diff_image_without_cv2_writes_rgb_overlay(tmp_path: Path) -> Non
     assert diff.height > 0
 
 
+def test_create_diff_image_uses_signed_normalized_rgb_delta() -> None:
+    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+        pytest.skip("numpy/cv2 not available in this environment")
+
+    np = image_composite_converter.np
+
+    orig = np.array(
+        [
+            [[10, 10, 10], [200, 200, 200]],
+        ],
+        dtype=np.uint8,
+    )
+    svg = np.array(
+        [
+            [[40, 40, 40], [170, 170, 170]],
+        ],
+        dtype=np.uint8,
+    )
+
+    diff = Action.create_diff_image(orig, svg)
+    # First pixel brighter in generated image => cyan (B+G).
+    assert tuple(int(v) for v in diff[0, 0]) == (30, 30, 0)
+    # Second pixel darker in generated image => red.
+    assert tuple(int(v) for v in diff[0, 1]) == (0, 0, 30)
+
+
+def test_create_diff_image_respects_focus_mask_for_signed_delta() -> None:
+    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+        pytest.skip("numpy/cv2 not available in this environment")
+
+    np = image_composite_converter.np
+
+    orig = np.array([[[0, 0, 0], [0, 0, 0]]], dtype=np.uint8)
+    svg = np.array([[[30, 30, 30], [30, 30, 30]]], dtype=np.uint8)
+    focus_mask = np.array([[1, 0]], dtype=np.uint8)
+
+    diff = Action.create_diff_image(orig, svg, focus_mask)
+    assert tuple(int(v) for v in diff[0, 0]) == (30, 30, 0)
+    assert tuple(int(v) for v in diff[0, 1]) == (0, 0, 0)
+
+
 def test_convert_range_fallback_writes_diff_pngs_when_cv2_missing(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
     images_dir = tmp_path / "images"
     images_dir.mkdir()
