@@ -21,7 +21,10 @@ focused on the actual project scope.
 
 ## Kelle-/Optimierungs-Backlog (neu aus dem Umsetzungscheck)
 
-- [ ] A1: Gemeinsamen Parametervektor für globale Optimierung einführen.
+- [x] A1: Gemeinsamen Parametervektor für globale Optimierung einführen.
+  - Added `GlobalParameterVector` as a central structure for geometry/text optimization fields (`cx`, `cy`, `r`, arm/stem, text position/scale), including param round-tripping.
+  - Added central bounds/lock metadata via `_global_parameter_vector_bounds` and per-round debug logging with `_log_global_parameter_vector`.
+  - Wrapped the existing circle adaptive/stochastic optimizers to read/write through the shared vector abstraction.
 - [ ] A2: Globalen Mehrparameter-Suchmodus ergänzen (nicht nur Kreis-Pose).
 - [ ] A3: Near-Optimum-Plateau auf den globalen Parameterraum verallgemeinern.
 - [ ] A4: Schwerpunkt/zentralen Repräsentanten des Plateau-Bereichs berechnen und auswählen.
