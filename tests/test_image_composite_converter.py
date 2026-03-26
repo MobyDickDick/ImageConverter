@@ -787,14 +787,14 @@ def test_finalize_ac0820_leaves_plain_circle_unlocked() -> None:
 
 
 def test_finalize_ac0820_keeps_template_radius_optional() -> None:
-    """Template radius metadata should remain optional after finalization."""
+    """Template radius metadata should softly stabilize AC0820 ring size."""
     params = Action._apply_co2_label(Action._default_ac0870_params(20, 20))
     params["template_circle_radius"] = float(params["r"])
     params["r"] = 3.0
 
     params = Action._finalize_ac08_style("AC0820", params)
 
-    assert float(params["r"]) == 3.0
+    assert float(params["r"]) >= float(params["template_circle_radius"]) * 0.95
     assert "min_circle_radius" not in params
 
 
@@ -3469,33 +3469,33 @@ def test_finalize_ac0820_l_keeps_circle_radius_at_template_scale() -> None:
 
 
 
-def test_finalize_ac0820_l_enforces_large_circle_radius_constraint() -> None:
-    """AC0820_L should enforce Kreis.r > (image_width / 2) during optimization."""
+def test_finalize_ac0820_l_does_not_force_large_canvas_overflow_radius() -> None:
+    """AC0820_L should avoid forcing a width/2 overflow radius floor."""
     params = Action._apply_co2_label(Action._default_ac0870_params(30, 30))
     params["width"] = 30
     params["r"] = 8.0
 
     tuned = Action._finalize_ac08_style("AC0820_L", params)
 
-    assert float(tuned["r"]) > (float(params["width"]) / 2.0)
-    assert float(tuned["circle_radius_lower_bound_px"]) > (float(params["width"]) / 2.0)
-    assert bool(tuned["allow_circle_overflow"]) is True
+    assert float(tuned["r"]) <= (float(params["width"]) / 2.0)
+    assert "circle_radius_lower_bound_px" not in tuned
+    assert "allow_circle_overflow" not in tuned
 
 
-def test_finalize_ac0820_large_canvas_enforces_large_circle_radius_constraint() -> None:
-    """Base AC0820 names should also enforce the AC0820_L rule on large canvases."""
+def test_finalize_ac0820_large_canvas_does_not_force_large_circle_radius_constraint() -> None:
+    """Base AC0820 names should not inherit an AC0820_L overflow radius rule."""
     params = Action._apply_co2_label(Action._default_ac0870_params(30, 30))
     params["width"] = 30
     params["r"] = 8.0
 
     tuned = Action._finalize_ac08_style("AC0820", params)
 
-    assert float(tuned["r"]) > (float(params["width"]) / 2.0)
-    assert bool(tuned["allow_circle_overflow"]) is True
+    assert float(tuned["r"]) <= (float(params["width"]) / 2.0)
+    assert "allow_circle_overflow" not in tuned
 
 
-def test_finalize_ac0820_variant_name_enforces_large_circle_radius_constraint() -> None:
-    """AC0820 with variant_name AC0820_L should use the same strict circle floor."""
+def test_finalize_ac0820_variant_name_does_not_force_large_circle_radius_constraint() -> None:
+    """AC0820 with variant_name AC0820_L should still avoid overflow radius floors."""
     params = Action._apply_co2_label(Action._default_ac0870_params(20, 20))
     params["variant_name"] = "AC0820_L"
     params["width"] = 30
@@ -3503,8 +3503,8 @@ def test_finalize_ac0820_variant_name_enforces_large_circle_radius_constraint() 
 
     tuned = Action._finalize_ac08_style("AC0820", params)
 
-    assert float(tuned["r"]) > 15.0
-    assert bool(tuned["allow_circle_overflow"]) is True
+    assert float(tuned["r"]) <= 15.0
+    assert "allow_circle_overflow" not in tuned
 
 
 

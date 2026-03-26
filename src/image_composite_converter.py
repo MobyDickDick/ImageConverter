@@ -2461,17 +2461,11 @@ class Action:
                 or (symbol_name == "AC0820" and image_width >= 28.0)
             )
             if is_large_ac0820 and image_width > 0.0:
-                    # Zusätzliche Restriktion aus AC0820_L:
-                    # Kreis.r > p_c.width / 2
-                    required_radius = (image_width / 2.0) + 0.5
-                    p["allow_circle_overflow"] = True
-                    p["circle_radius_lower_bound_px"] = float(
-                        max(float(p.get("circle_radius_lower_bound_px", 1.0)), required_radius)
-                    )
-                    p["min_circle_radius"] = float(
-                        max(float(p.get("min_circle_radius", 1.0)), required_radius)
-                    )
-                    p["r"] = float(max(float(p.get("r", required_radius)), required_radius))
+                # AC0820_L should keep its circle primarily template-driven.
+                # Forcing r > width/2 caused right-side over-expansion in
+                # recent rounds because text residuals can bias only one side
+                # while center stays locked. Keep only a soft template floor.
+                p["r"] = float(max(float(p.get("r", template_r)), template_r * 0.98))
         if p.get("circle_enabled", True):
             has_connector = bool(p.get("arm_enabled") or p.get("stem_enabled"))
             has_text = bool(p.get("draw_text", False))
