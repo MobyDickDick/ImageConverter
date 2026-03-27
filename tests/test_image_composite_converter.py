@@ -506,6 +506,17 @@ def test_finalize_ac0820_variant_name_keeps_default_anchor_mode() -> None:
     assert float(params["co2_optical_bias"]) >= 0.125
 
 
+def test_finalize_ac0820_m_enforces_larger_superscript_gap() -> None:
+    """AC0820_M should keep a stronger horizontal separation between O and superscript 2."""
+    params = Action._apply_co2_label(Action._default_ac0870_params(20, 20))
+    params = Action._finalize_ac08_style("AC0820_M", params)
+    layout = Action._co2_layout(params)
+
+    o_right = float(layout["co_x"]) + (float(layout["font_size"]) * 1.04 * float(layout["width_scale"]) / 2.0)
+    min_gap = float(layout["font_size"]) * 0.16
+    assert float(layout["subscript_x"]) - o_right >= (min_gap - 1e-6)
+
+
 def test_finalize_ac0800_keeps_ring_darker_than_fill() -> None:
     """AC0800 should preserve generic ring semantics: darker stroke than fill."""
     params = Action.make_badge_params(30, 30, "AC0800")
