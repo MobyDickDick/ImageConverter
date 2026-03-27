@@ -10222,10 +10222,33 @@ def convert_range(
         iterations=iterations,
         selected_variants=sorted(normalized_selected_variants),
     )
-    _write_ac08_success_criteria_report(
+    ac08_success_gate = _write_ac08_success_criteria_report(
         reports_out_dir,
         selected_variants=sorted(normalized_selected_variants),
     )
+    if ac08_success_gate is not None:
+        failed_criteria = [
+            key
+            for key in (
+                "criterion_no_new_batch_aborts",
+                "criterion_no_accepted_regressions",
+                "criterion_validation_rounds_recorded",
+                "criterion_regression_set_improved",
+                "criterion_stable_families_not_worse",
+            )
+            if not bool(ac08_success_gate.get(key, False))
+        ]
+        if failed_criteria:
+            print(
+                "[WARN] AC08 success gate failed: "
+                + ", ".join(failed_criteria)
+                + f" (mean_validation_rounds_per_file={float(ac08_success_gate.get('mean_validation_rounds_per_file', 0.0)):.3f})"
+            )
+        else:
+            print(
+                "[INFO] AC08 success gate passed "
+                f"(mean_validation_rounds_per_file={float(ac08_success_gate.get('mean_validation_rounds_per_file', 0.0)):.3f})."
+            )
     if SUCCESSFUL_CONVERSIONS_MANIFEST.exists():
         update_successful_conversions_manifest_with_metrics(
             folder_path=folder_path,
@@ -10768,10 +10791,10 @@ def _write_ac08_success_criteria_report(
     reports_out_dir: str,
     *,
     selected_variants: list[str],
-) -> None:
+) -> dict[str, object] | None:
     """Persist the written AC08 success criteria and the current measured status."""
     if sorted(selected_variants) != sorted(AC08_REGRESSION_VARIANTS):
-        return
+        return None
 
     expected_variants = sorted(selected_variants)
     iteration_rows: list[dict[str, str]] = []
@@ -10825,7 +10848,7 @@ def _write_ac08_success_criteria_report(
             semantic_mismatch_count += 1
         if "konnte nicht gerendert werden" in log_text or "Abbruch: SVG konnte nicht gerendert werden" in log_text:
             render_failure_count += 1
-        rounds = len(re.findall(r"^Runde\\s+\\d+: elementweise Validierung gestartet$", log_text, flags=re.MULTILINE))
+        rounds = len(re.findall(r"^Runde\s+\d+: elementweise Validierung gestartet$", log_text, flags=re.MULTILINE))
         if rounds > 0:
             validation_round_counts.append(rounds)
 
@@ -10844,6 +10867,7 @@ def _write_ac08_success_criteria_report(
     regression_set_improved = improved_error_count > 0 or improved_mean_delta2_count > 0
     no_new_batch_aborts = batch_abort_count == 0
     no_accepted_regressions = accepted_regression_count == 0
+    validation_rounds_recorded = mean_validation_rounds > 0.0
     stable_families_not_worse = (
         no_accepted_regressions
         and previous_good_regressed_count == 0
@@ -10852,6 +10876,7 @@ def _write_ac08_success_criteria_report(
     overall_success = (
         no_new_batch_aborts
         and no_accepted_regressions
+        and validation_rounds_recorded
         and regression_set_improved
         and stable_families_not_worse
     )
@@ -10877,6 +10902,7 @@ def _write_ac08_success_criteria_report(
         writer.writerow(["mean_validation_rounds_per_file", f"{mean_validation_rounds:.3f}"])
         writer.writerow(["criterion_no_new_batch_aborts", int(no_new_batch_aborts)])
         writer.writerow(["criterion_no_accepted_regressions", int(no_accepted_regressions)])
+        writer.writerow(["criterion_validation_rounds_recorded", int(validation_rounds_recorded)])
         writer.writerow(["criterion_regression_set_improved", int(regression_set_improved)])
         writer.writerow(["criterion_stable_families_not_worse", int(stable_families_not_worse)])
         writer.writerow(["overall_success", int(overall_success)])
@@ -10885,7 +10911,10 @@ def _write_ac08_success_criteria_report(
         f"set={AC08_REGRESSION_SET_NAME}",
         "goal=Abschluss einer AC08-Maßnahme objektiv bewerten",
         "success_metrics=improved_error_per_pixel_count,improved_mean_delta2_count,semantic_mismatch_count,batch_abort_or_render_failure_count,mean_validation_rounds_per_file",
-        "success_definition=no_new_batch_aborts && no_accepted_regressions && regression_set_improved && stable_families_not_worse",
+        (
+            "success_definition=no_new_batch_aborts && no_accepted_regressions "
+            "&& validation_rounds_recorded && regression_set_improved && stable_families_not_worse"
+        ),
         f"images_expected={len(expected_variants)}",
         f"images_converted={len(converted_variants)}",
         f"images_missing={len(missing_variants)}",
@@ -10902,6 +10931,7 @@ def _write_ac08_success_criteria_report(
         f"mean_validation_rounds_per_file={mean_validation_rounds:.3f}",
         f"criterion_no_new_batch_aborts={int(no_new_batch_aborts)}",
         f"criterion_no_accepted_regressions={int(no_accepted_regressions)}",
+        f"criterion_validation_rounds_recorded={int(validation_rounds_recorded)}",
         f"criterion_regression_set_improved={int(regression_set_improved)}",
         f"criterion_stable_families_not_worse={int(stable_families_not_worse)}",
         f"overall_success={int(overall_success)}",
@@ -10917,6 +10947,16 @@ def _write_ac08_success_criteria_report(
 
     with open(os.path.join(reports_out_dir, "ac08_success_criteria.txt"), "w", encoding="utf-8") as f:
         f.write("\n".join(summary_lines) + "\n")
+
+    return {
+        "overall_success": overall_success,
+        "criterion_no_new_batch_aborts": no_new_batch_aborts,
+        "criterion_no_accepted_regressions": no_accepted_regressions,
+        "criterion_validation_rounds_recorded": validation_rounds_recorded,
+        "criterion_regression_set_improved": regression_set_improved,
+        "criterion_stable_families_not_worse": stable_families_not_worse,
+        "mean_validation_rounds_per_file": mean_validation_rounds,
+    }
 
 
 def _write_ac08_weak_family_status_report(
