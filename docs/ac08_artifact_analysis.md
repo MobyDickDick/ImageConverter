@@ -32,14 +32,15 @@ sichtbar.
      eingecheckten Snapshot stabil.
 
 2. **Backlog-Verschiebung von Fehlerbehebung zu Regressionstor**
-   - Der nächste offene Schwerpunkt liegt nicht mehr auf
-     Einzel-Familien-Heuristiken, sondern auf einem klaren, im Workflow
-     sichtbaren AC08-Success-Gate (`ac08_success_metrics.csv` /
-     `ac08_success_criteria.txt`).
+   - Das AC08-Success-Gate ist inzwischen als regulärer Workflow-Check
+     dokumentiert und wird über `ac08_success_metrics.csv` /
+     `ac08_success_criteria.txt` ausgewertet.
+   - Neue AC08-Arbeit sollte nicht mehr ad hoc in diese Analyse, sondern zuerst
+     als offene Aufgabe in `docs/open_tasks.md` eingetragen werden.
 
 ## Nächster Fokus
 
-1. AC08-Success-Gate als verpflichtenden Workflow-Check dokumentieren und im
-   Teamablauf verankern.
-2. Danach wieder einen vollständigen AC08-Regression-Refresh fahren und das
-   Snapshot-Spektrum bei Bedarf erweitern.
+Aktuell ist aus diesem Snapshot kein zusätzlicher AC08-Soforttask ableitbar.
+Der nächste konkrete Arbeitsschritt entsteht erst, wenn in einem neuen
+Regression-Refresh wieder Abweichungen sichtbar werden oder in
+`docs/open_tasks.md` ein neuer Eintrag angelegt wird.
