@@ -6036,6 +6036,14 @@ class Action:
                     )
             return Action._full_badge_error_for_params(img_orig, probe)
 
+        def within_hard_bounds(candidate: GlobalParameterVector) -> tuple[bool, str]:
+            for key in active_keys:
+                low, high, _locked, _source = bounds[key]
+                value = float(getattr(candidate, key))
+                if value < low - 1e-6 or value > high + 1e-6:
+                    return False, f"{key}={value:.3f} außerhalb [{low:.3f}, {high:.3f}]"
+            return True, "ok"
+
         rng = Action._make_rng(4099 + int(Action.STOCHASTIC_RUN_SEED) + int(Action.STOCHASTIC_SEED_OFFSET))
         best = clamp_vector(vector)
         best_err = eval_vector(best)
@@ -6072,6 +6080,7 @@ class Action:
                     improved = True
 
             round_best_err = min(err for _cand, err in finite_round)
+            round_best = min(finite_round, key=lambda item: item[1])[0]
             epsilon = max(near_optimum_eps_floor, round_best_err * near_optimum_eps_rel)
             plateau = [(cand, err) for cand, err in finite_round if err <= round_best_err + epsilon]
             span_labels: list[str] = []
@@ -6084,6 +6093,61 @@ class Action:
                     span_values.append(key_span)
                     span_labels.append(f"{key}:{key_span:.3f}")
                 mean_span = sum(span_values) / max(1, len(span_values))
+
+            representative = round_best
+            representative_err = round_best_err
+            representative_source = "best_sample"
+            representative_reason = "niedrigster Fehler in dieser Runde"
+
+            if plateau:
+                weighted_data = dataclasses.asdict(round_best)
+                weight_sum = 0.0
+                for cand, cand_err in plateau:
+                    weight = 1.0 / (1.0 + max(0.0, float(cand_err) - round_best_err))
+                    weight_sum += weight
+                    for key in active_keys:
+                        weighted_data[key] = float(weighted_data[key]) + (float(getattr(cand, key)) * weight)
+                if weight_sum > 0.0:
+                    for key in active_keys:
+                        weighted_data[key] = float(weighted_data[key]) / (1.0 + weight_sum)
+                    centroid_raw = GlobalParameterVector(**weighted_data)
+                    centroid = clamp_vector(centroid_raw)
+                    centroid_safe, centroid_msg = within_hard_bounds(centroid)
+                    if not centroid_safe:
+                        logs.append(
+                            f"global-search: schwerpunkt verworfen (runde={round_idx + 1}, grund={centroid_msg})"
+                        )
+                    else:
+                        centroid_err = eval_vector(centroid)
+                        if math.isfinite(centroid_err):
+                            near_best_margin = max(0.02, epsilon * 0.30)
+                            if centroid_err <= round_best_err + near_best_margin and len(plateau) >= 3:
+                                representative = centroid
+                                representative_err = centroid_err
+                                representative_source = "schwerpunkt"
+                                representative_reason = (
+                                    "nahe am Bestpunkt und robuster Zentrumskandidat des Plateau-Bereichs"
+                                )
+                            elif centroid_err < round_best_err:
+                                representative = centroid
+                                representative_err = centroid_err
+                                representative_source = "schwerpunkt"
+                                representative_reason = "geringerer Fehler als best_sample"
+                        else:
+                            logs.append(
+                                "global-search: schwerpunkt verworfen "
+                                f"(runde={round_idx + 1}, grund=fehlerbewertung nicht endlich)"
+                            )
+
+            if representative_source == "schwerpunkt":
+                if representative_err <= best_err + 0.02:
+                    best = representative
+                    best_err = representative_err
+                    improved = True
+            elif representative_err + 0.01 < best_err:
+                best = representative
+                best_err = representative_err
+                improved = True
 
             stability = "n/a"
             if plateau_rounds:
@@ -6115,6 +6179,11 @@ class Action:
                 f"(runde={round_idx + 1}, punkte={len(plateau)}, epsilon={epsilon:.3f}, "
                 f"mittlere_spannweite={mean_span:.3f}, stabilitaet={stability}, "
                 f"spannweite={'; '.join(span_labels) if span_labels else 'n/a'})"
+            )
+            logs.append(
+                "global-search: plateau-repräsentant "
+                f"(runde={round_idx + 1}, kandidat={representative_source}, err={representative_err:.3f}, "
+                f"begründung={representative_reason})"
             )
 
         if not improved:

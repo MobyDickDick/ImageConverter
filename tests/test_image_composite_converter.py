@@ -2740,6 +2740,9 @@ def test_optimize_global_parameter_vector_sampling_logs_global_near_optimum_plat
     plateau_lines = [line for line in logs if "near-optimum-plateau" in line]
     assert len(plateau_lines) == 2
     assert all("punkte=" in line and "spannweite=" in line for line in plateau_lines)
+    representative_lines = [line for line in logs if "plateau-repräsentant" in line]
+    assert len(representative_lines) == 2
+    assert all("kandidat=" in line and "begründung=" in line for line in representative_lines)
 
 
 def test_optimize_global_parameter_vector_sampling_disabled_by_default() -> None:
