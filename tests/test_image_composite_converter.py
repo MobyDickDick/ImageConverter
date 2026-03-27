@@ -2745,6 +2745,102 @@ def test_optimize_global_parameter_vector_sampling_logs_global_near_optimum_plat
     assert all("kandidat=" in line and "begründung=" in line for line in representative_lines)
 
 
+def test_optimize_global_parameter_vector_sampling_uses_run_seed_offset(monkeypatch: pytest.MonkeyPatch) -> None:
+    np = image_composite_converter.np
+    if np is None:
+        pytest.skip("numpy not available in this environment")
+    img = np.full((24, 24, 3), 220, dtype=np.uint8)
+    params = {
+        "enable_global_search_mode": True,
+        "circle_enabled": True,
+        "cx": 6.0,
+        "cy": 6.0,
+        "r": 3.0,
+        "stem_enabled": True,
+        "stem_x": 4.0,
+        "stem_top": 9.0,
+        "stem_bottom": 15.0,
+        "stem_width": 1.0,
+        "draw_text": True,
+        "text_x": 5.0,
+        "text_y": 5.0,
+        "text_scale": 0.8,
+        "min_circle_radius": 1.0,
+    }
+
+    monkeypatch.setattr(Action, "_full_badge_error_for_params", staticmethod(lambda *_args, **_kwargs: 1.0))
+
+    captured: list[int] = []
+
+    def fake_make_rng(seed: int):
+        captured.append(int(seed))
+        return Action._ScalarRng(int(seed))
+
+    monkeypatch.setattr(Action, "_make_rng", staticmethod(fake_make_rng))
+    monkeypatch.setattr(Action, "STOCHASTIC_RUN_SEED", 123, raising=False)
+    monkeypatch.setattr(Action, "STOCHASTIC_SEED_OFFSET", 7, raising=False)
+
+    logs: list[str] = []
+    Action._optimize_global_parameter_vector_sampling(img, params, logs, rounds=1, samples_per_round=8)
+
+    assert captured == [4229]
+
+
+def test_optimize_global_parameter_vector_sampling_respects_locks_and_bounds(monkeypatch: pytest.MonkeyPatch) -> None:
+    np = image_composite_converter.np
+    if np is None:
+        pytest.skip("numpy not available in this environment")
+    img = np.full((20, 20, 3), 220, dtype=np.uint8)
+    params = {
+        "enable_global_search_mode": True,
+        "circle_enabled": True,
+        "cx": 8.0,
+        "cy": 7.0,
+        "r": 3.0,
+        "min_circle_radius": 2.0,
+        "lock_circle_cx": True,
+        "stem_enabled": True,
+        "stem_x": 1.0,
+        "stem_top": 10.0,
+        "stem_bottom": 17.0,
+        "stem_width": 1.0,
+        "draw_text": True,
+        "text_x": 8.0,
+        "text_y": 9.0,
+        "text_scale": 0.8,
+        "lock_text_position": True,
+    }
+
+    start_cx = float(params["cx"])
+    start_text_x = float(params["text_x"])
+    start_text_y = float(params["text_y"])
+    initial_bounds = Action._global_parameter_vector_bounds(params, img.shape[1], img.shape[0])
+
+    def fake_full_error(_img, candidate_params):
+        # Pulls the optimizer toward extreme values, so clamping/locks are exercised.
+        return float(
+            abs(float(candidate_params.get("cy", 0.0)) - 999.0)
+            + abs(float(candidate_params.get("r", 0.0)) - 999.0)
+            + abs(float(candidate_params.get("stem_x", 0.0)) - 999.0)
+            + abs(float(candidate_params.get("stem_width", 0.0)) - 999.0)
+            + abs(float(candidate_params.get("text_scale", 0.0)) - 99.0)
+        )
+
+    monkeypatch.setattr(Action, "_full_badge_error_for_params", staticmethod(fake_full_error))
+    logs: list[str] = []
+
+    Action._optimize_global_parameter_vector_sampling(img, params, logs, rounds=2, samples_per_round=12)
+
+    assert float(params["cx"]) == start_cx
+    assert float(params["text_x"]) == start_text_x
+    assert float(params["text_y"]) == start_text_y
+
+    for key in ("cy", "r", "stem_x", "stem_width", "text_scale"):
+        low, high, _locked, _source = initial_bounds[key]
+        value = float(params[key])
+        assert low <= value <= high
+
+
 def test_optimize_global_parameter_vector_sampling_disabled_by_default() -> None:
     np = image_composite_converter.np
     if np is None:
