@@ -3192,6 +3192,7 @@ class Action:
         # blob or drop it entirely. Keep a conservative minimum pixel height.
         sub_font_px = max(4.0, font_size * (sub_scale / 100.0))
         anchor_mode = str(params.get("co2_anchor_mode", "center_co")).lower()
+        index_mode = str(params.get("co2_index_mode", "subscript")).lower()
 
         width_scale = float(params.get("co2_width_scale", 1.0))
         width_scale = float(max(0.78, min(1.12, width_scale)))
@@ -3210,6 +3211,11 @@ class Action:
 
         co_width = (font_size * 1.04) * width_scale
         gap = font_size * 0.03
+        if index_mode == "superscript":
+            # Raised CO² labels need a slightly wider horizontal separation so
+            # the "2" does not visually touch the "O" after rasterization.
+            superscript_min_gap = font_size * float(params.get("co2_superscript_min_gap_scale", 0.085))
+            gap = max(gap, superscript_min_gap)
         sub_w = (sub_font_px * 0.62) * width_scale
 
         if anchor_mode in {"cluster", "co"}:
@@ -3244,6 +3250,11 @@ class Action:
             if overflow > 0.0:
                 # Step 1: reduce spacing before moving CO.
                 min_gap = font_size * 0.005
+                if index_mode == "superscript":
+                    min_gap = max(
+                        min_gap,
+                        font_size * float(params.get("co2_superscript_min_gap_scale", 0.085)),
+                    )
                 shrink_gap = min(overflow, max(0.0, local_gap - min_gap))
                 local_gap -= shrink_gap
                 overflow -= shrink_gap
@@ -3304,7 +3315,6 @@ class Action:
 
         # Keep the subscript readable and away from the border, but do not let it
         # drive the vertical centering of the main "CO" run.
-        index_mode = str(params.get("co2_index_mode", "subscript")).lower()
         if index_mode == "superscript":
             min_index_offset = font_size * 0.10
             max_index_offset = font_size * 0.34
@@ -3373,6 +3383,8 @@ class Action:
         p["stroke_circle"] = Action.AC08_STROKE_WIDTH_PX
         p["co2_font_scale"] = min(float(p.get("co2_font_scale", 0.82)), 0.74)
         p["co2_sub_font_scale"] = min(float(p.get("co2_sub_font_scale", 66.0)), 62.0)
+        p["co2_index_mode"] = "superscript"
+        p["co2_superscript_offset_scale"] = float(min(float(p.get("co2_superscript_offset_scale", 0.11)), 0.11))
         p["co2_dy"] = float(p.get("co2_dy", 0.0)) - (0.03 * r)
         p["text_gray"] = p["stroke_gray"]
         return p

@@ -2770,6 +2770,29 @@ def test_make_badge_params_applies_compact_ac0831_small_variant_text_tuning() ->
     assert float(params["co2_dy"]) >= 0.35
 
 
+def test_make_badge_params_ac0832_l_uses_superscript_two() -> None:
+    """AC0832_L should render CO² with a raised 2 instead of subscript CO₂."""
+    params = Action._apply_co2_label(Action._default_ac0812_params(25, 25))
+    params = Action._tune_ac0832_co2_badge(params)
+    params = Action._finalize_ac08_style("AC0832_L", params)
+
+    assert params["co2_index_mode"] == "superscript"
+    assert float(params["co2_superscript_offset_scale"]) <= 0.11
+
+
+def test_co2_layout_superscript_keeps_clear_gap_from_o_glyph() -> None:
+    """Superscript CO² rendering should keep a visible horizontal gap before the raised 2."""
+    params = Action._apply_co2_label(Action._default_ac0812_params(25, 25))
+    params = Action._tune_ac0832_co2_badge(params)
+    layout = Action._co2_layout(params)
+
+    co_width = float(layout["font_size"]) * 1.04 * float(layout["width_scale"])
+    o_right = float(layout["co_x"]) + (co_width / 2.0)
+    superscript_gap = float(layout["subscript_x"]) - o_right
+
+    assert superscript_gap >= float(layout["font_size"]) * 0.06
+
+
 def test_normalize_centered_co2_label_reduces_oversized_co_cluster() -> None:
     """Centered CO₂ labels should stay clearly smaller than the enclosing ring."""
     params = Action._apply_co2_label(Action._default_ac0870_params(30, 30))
