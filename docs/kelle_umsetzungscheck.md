@@ -140,11 +140,17 @@ Fehlerbewertung oder Parameterwerten außerhalb harter Bounds werden verworfen.
 inklusive Begründung im Log.
 
 ### A5 – Regression und Qualitätssicherung
-- [ ] Neue Tests für den globalen Suchmodus ergänzen (Determinismus via Seed, Constraint-Einhaltung,
+- [x] Neue Tests für den globalen Suchmodus ergänzen (Determinismus via Seed, Constraint-Einhaltung,
       Verbesserung gegenüber Baseline).
-- [ ] Bestehende Kelle-Tests beibehalten und um mindestens einen End-to-End-Fall mit aktivem
+- [x] Bestehende Kelle-Tests beibehalten und um mindestens einen End-to-End-Fall mit aktivem
       globalen Suchmodus erweitern.
-- [ ] Für AC08-/Kelle-relevante Familien einen kleinen Smoke-Regressionssatz definieren.
+- [x] Für AC08-/Kelle-relevante Familien einen kleinen Smoke-Regressionssatz definieren.
+
+Stand: umgesetzt über den bestehenden global-search-Regressionsblock (`Determinismus`,
+`Bounds/Locks`, `Multi-Field-Verbesserung`) plus einen Integrationsfall, der den Aufruf von
+`_optimize_global_parameter_vector_sampling` innerhalb von `validate_badge_by_elements`
+bei aktivem `enable_global_search_mode` absichert. Der AC08/Kelle-Smoke-Regressionssatz bleibt
+über `AC08_REGRESSION_VARIANTS` und die zugehörigen Pipeline-Tests fest verankert.
 
 **Akzeptanzkriterium:** Testlauf zeigt, dass neue Suche stabil ist, Constraints nicht verletzt,
 und keine bestehenden Kelle-/AC08-Baselines regressieren.
