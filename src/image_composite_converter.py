@@ -3212,9 +3212,9 @@ class Action:
         co_width = (font_size * 1.04) * width_scale
         gap = font_size * 0.03
         if index_mode == "superscript":
-            # Raised CO² labels need a slightly wider horizontal separation so
-            # the "2" does not visually touch the "O" after rasterization.
-            superscript_min_gap = font_size * float(params.get("co2_superscript_min_gap_scale", 0.085))
+            # Raised CO² labels need a wider horizontal separation so the "2"
+            # stays visibly detached from the "O" in all AC08 conversions.
+            superscript_min_gap = font_size * float(params.get("co2_superscript_min_gap_scale", 0.130))
             gap = max(gap, superscript_min_gap)
         sub_w = (sub_font_px * 0.62) * width_scale
 
@@ -3253,7 +3253,7 @@ class Action:
                 if index_mode == "superscript":
                     min_gap = max(
                         min_gap,
-                        font_size * float(params.get("co2_superscript_min_gap_scale", 0.085)),
+                        font_size * float(params.get("co2_superscript_min_gap_scale", 0.130)),
                     )
                 shrink_gap = min(overflow, max(0.0, local_gap - min_gap))
                 local_gap -= shrink_gap
