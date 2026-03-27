@@ -3414,8 +3414,8 @@ class Action:
         p["co2_sub_font_scale"] = min(float(p.get("co2_sub_font_scale", 66.0)), 48.0)
         # Keep the raised "2" clearly detached from the "O" in AC0831_L and
         # sibling variants where JPEG antialiasing tends to visually merge both.
-        p["co2_superscript_offset_scale"] = float(max(float(p.get("co2_superscript_offset_scale", 0.16)), 0.16))
-        p["co2_superscript_min_gap_scale"] = float(max(float(p.get("co2_superscript_min_gap_scale", 0.17)), 0.17))
+        p["co2_superscript_offset_scale"] = float(max(float(p.get("co2_superscript_offset_scale", 0.17)), 0.17))
+        p["co2_superscript_min_gap_scale"] = float(max(float(p.get("co2_superscript_min_gap_scale", 0.19)), 0.19))
         min_dim = float(
             min(
                 float(p.get("width", 0.0) or 0.0),
@@ -3433,8 +3433,8 @@ class Action:
             p["co2_sub_font_scale"] = min(float(p.get("co2_sub_font_scale", 48.0)), 48.0)
             p["co2_optical_bias"] = max(float(p.get("co2_optical_bias", 0.10)), 0.10)
             p["co2_dy"] = float(max(float(p.get("co2_dy", 0.0)), 0.35))
-            p["co2_superscript_offset_scale"] = float(max(float(p.get("co2_superscript_offset_scale", 0.16)), 0.16))
-            p["co2_superscript_min_gap_scale"] = float(max(float(p.get("co2_superscript_min_gap_scale", 0.17)), 0.17))
+            p["co2_superscript_offset_scale"] = float(max(float(p.get("co2_superscript_offset_scale", 0.17)), 0.17))
+            p["co2_superscript_min_gap_scale"] = float(max(float(p.get("co2_superscript_min_gap_scale", 0.19)), 0.19))
         return p
 
     @staticmethod
