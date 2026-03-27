@@ -5989,6 +5989,9 @@ class Action:
         if not bool(params.get("enable_global_search_mode", False)):
             return False
 
+        near_optimum_eps_floor = 0.06
+        near_optimum_eps_rel = 0.02
+
         h, w = img_orig.shape[:2]
         bounds = Action._global_parameter_vector_bounds(params, w, h)
         vector = GlobalParameterVector.from_params(params)
@@ -6041,12 +6044,17 @@ class Action:
         improved = False
 
         spans = {key: max(0.25, float(bounds[key][1] - bounds[key][0]) * 0.20) for key in active_keys}
+        plateau_rounds: list[dict[str, float | int]] = []
         logs.append(
             f"global-search: gestartet (aktive_parameter={','.join(active_keys)}, samples_pro_runde={max(8, int(samples_per_round))}, start_err={best_err:.3f})"
+        )
+        logs.append(
+            f"global-search: near-optimum-definition (err <= best_err + epsilon, epsilon=max({near_optimum_eps_floor:.2f}, best_err*{near_optimum_eps_rel:.2f}))"
         )
 
         for round_idx in range(max(1, int(rounds))):
             accepted = 0
+            finite_round: list[tuple[GlobalParameterVector, float]] = [(best, best_err)]
             for _ in range(max(8, int(samples_per_round))):
                 sample_data = dataclasses.asdict(best)
                 for key in active_keys:
@@ -6055,15 +6063,58 @@ class Action:
                     sample_data[key] = float(Action._clip_scalar(rng.normal(float(sample_data[key]), sigma), low, high))
                 candidate = clamp_vector(GlobalParameterVector(**sample_data))
                 candidate_err = eval_vector(candidate)
+                if math.isfinite(candidate_err):
+                    finite_round.append((candidate, candidate_err))
                 if math.isfinite(candidate_err) and candidate_err + 0.05 < best_err:
                     best = candidate
                     best_err = candidate_err
                     accepted += 1
                     improved = True
+
+            round_best_err = min(err for _cand, err in finite_round)
+            epsilon = max(near_optimum_eps_floor, round_best_err * near_optimum_eps_rel)
+            plateau = [(cand, err) for cand, err in finite_round if err <= round_best_err + epsilon]
+            span_labels: list[str] = []
+            mean_span = 0.0
+            if plateau:
+                span_values: list[float] = []
+                for key in active_keys:
+                    key_values = [float(getattr(cand, key)) for cand, _err in plateau]
+                    key_span = max(key_values) - min(key_values)
+                    span_values.append(key_span)
+                    span_labels.append(f"{key}:{key_span:.3f}")
+                mean_span = sum(span_values) / max(1, len(span_values))
+
+            stability = "n/a"
+            if plateau_rounds:
+                prev_center = float(plateau_rounds[-1]["center_mean"])
+                center_now = 0.0
+                if plateau:
+                    center_now = sum(
+                        float(getattr(plateau[0][0], key) if len(plateau) == 1 else (min(float(getattr(cand, key)) for cand, _ in plateau) + max(float(getattr(cand, key)) for cand, _ in plateau)) / 2.0)
+                        for key in active_keys
+                    ) / max(1, len(active_keys))
+                center_shift = abs(center_now - prev_center)
+                stability = "stabil" if center_shift <= 0.35 else "dynamisch"
+                plateau_rounds.append({"size": len(plateau), "mean_span": mean_span, "center_mean": center_now})
+            else:
+                center_now = 0.0
+                if plateau:
+                    center_now = sum(
+                        float(getattr(plateau[0][0], key) if len(plateau) == 1 else (min(float(getattr(cand, key)) for cand, _ in plateau) + max(float(getattr(cand, key)) for cand, _ in plateau)) / 2.0)
+                        for key in active_keys
+                    ) / max(1, len(active_keys))
+                plateau_rounds.append({"size": len(plateau), "mean_span": mean_span, "center_mean": center_now})
             for key in active_keys:
                 spans[key] = max(0.12, spans[key] * 0.78)
             logs.append(
                 f"global-search: Runde {round_idx + 1} best_err={best_err:.3f}, akzeptierte_kandidaten={accepted}, sigma_mittel={sum(spans.values()) / max(1, len(spans)):.3f}"
+            )
+            logs.append(
+                "global-search: near-optimum-plateau "
+                f"(runde={round_idx + 1}, punkte={len(plateau)}, epsilon={epsilon:.3f}, "
+                f"mittlere_spannweite={mean_span:.3f}, stabilitaet={stability}, "
+                f"spannweite={'; '.join(span_labels) if span_labels else 'n/a'})"
             )
 
         if not improved:

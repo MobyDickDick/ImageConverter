@@ -2695,6 +2695,53 @@ def test_optimize_global_parameter_vector_sampling_improves_multiple_fields(monk
     assert any("akzeptierte_kandidaten=" in line for line in logs)
 
 
+def test_optimize_global_parameter_vector_sampling_logs_global_near_optimum_plateau(monkeypatch: pytest.MonkeyPatch) -> None:
+    np = image_composite_converter.np
+    if np is None:
+        pytest.skip("numpy not available in this environment")
+    img = np.full((24, 24, 3), 220, dtype=np.uint8)
+    params = {
+        "enable_global_search_mode": True,
+        "circle_enabled": True,
+        "cx": 6.0,
+        "cy": 6.0,
+        "r": 3.0,
+        "stem_enabled": True,
+        "stem_x": 4.0,
+        "stem_top": 9.0,
+        "stem_bottom": 15.0,
+        "stem_width": 1.0,
+        "draw_text": True,
+        "text_x": 5.0,
+        "text_y": 5.0,
+        "text_scale": 0.8,
+        "min_circle_radius": 1.0,
+    }
+
+    def fake_full_error(_img, candidate_params):
+        cx = float(candidate_params.get("cx", 0.0))
+        cy = float(candidate_params.get("cy", 0.0))
+        text_x = float(candidate_params.get("text_x", 0.0))
+        return abs(cx - 10.0) + abs(cy - 10.0) + abs(text_x - 10.0)
+
+    monkeypatch.setattr(Action, "_full_badge_error_for_params", staticmethod(fake_full_error))
+    logs: list[str] = []
+
+    changed = Action._optimize_global_parameter_vector_sampling(
+        img,
+        params,
+        logs,
+        rounds=2,
+        samples_per_round=12,
+    )
+
+    assert changed is True
+    assert any("near-optimum-definition" in line for line in logs)
+    plateau_lines = [line for line in logs if "near-optimum-plateau" in line]
+    assert len(plateau_lines) == 2
+    assert all("punkte=" in line and "spannweite=" in line for line in plateau_lines)
+
+
 def test_optimize_global_parameter_vector_sampling_disabled_by_default() -> None:
     np = image_composite_converter.np
     if np is None:
