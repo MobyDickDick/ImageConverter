@@ -13,8 +13,8 @@ focused on the actual project scope.
 
 ## Current status
 
-- The latest committed AC08 report snapshot contains `54` evaluated AC08 validation logs, of which `43` are `semantic_ok` and `11` remain `semantic_mismatch`.
-- The remaining failures are concentrated in the families `AC0800`, `AC0811`, `AC0813`, `AC0814`, `AC0831`, `AC0836`, and `AC0870`; the detailed breakdown now lives in `docs/ac08_artifact_analysis.md`.
+- The latest committed AC08 report snapshot now contains `10` evaluated AC08 validation logs, and all `10` are `semantic_ok` (`0` `semantic_mismatch`).
+- The refresh run currently covers the most recently touched connector/circle families present in `artifacts/converted_images/reports` (`AC0811`, `AC0832`, `AC0835`, `AC0836`, `AC0870`, `AC0882`).
 - Continue to add new work items here before implementation starts, then mark them in-place when they are done.
 
 
@@ -66,9 +66,10 @@ Details und Akzeptanzkriterien stehen in `docs/kelle_umsetzungscheck.md` unter
   - `AC0800_L`, `AC0800_M`, and `AC0800_S` are treated as currently optimal conversions and are locked into the AC08 regression suite so future adjustments must keep them `semantic_ok`.
   - `AC0800_S` now keeps the converted circle concentric with the template and may no longer shrink below the original template radius during circle-only validation, so the small plain-ring variant is no longer tracked as an open geometric follow-up.
 
-- [ ] Refresh the AC08 reports after the next semantic round.
-  - Re-run the affected AC08 families once the connector-orientation and circle-fallback fixes are in place.
-  - Regenerate the committed report snapshot and update `docs/ac08_artifact_analysis.md` so the backlog reflects the new post-fix distribution instead of the current 43/11 split.
+- [x] Refresh the AC08 reports after the next semantic round.
+  - Re-ran the affected AC08 semantic families and refreshed the committed `AC08*_element_validation.log` snapshot under `artifacts/converted_images/reports`.
+  - The refreshed snapshot currently reports `10/10 semantic_ok` and no `semantic_mismatch` entries for the committed AC08 logs.
+  - Updated `docs/ac08_artifact_analysis.md` so the backlog reflects the current post-fix distribution instead of the former 43/11 split.
 
 - [ ] Make the AC08 success gate actionable in the normal workflow.
   - Promote the metrics from `ac08_success_metrics.csv` / `ac08_success_criteria.txt` into a documented regression check so failed criteria are visible before the next backlog review.
