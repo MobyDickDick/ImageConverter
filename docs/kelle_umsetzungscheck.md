@@ -126,9 +126,15 @@ Stabilitätshinweis über aufeinanderfolgende Runden.
 für den globalen Vektor, nicht nur für Kreisparameter.
 
 ### A4 – Schwerpunkt des Plateau-Bereichs berechnen
-- [ ] Schwerpunktfunktion für das Plateau implementieren (ungewichtet oder fehlergewichtet).
-- [ ] Schwerpunkt gegen „best sample" vergleichen und den robusteren Kandidaten übernehmen.
-- [ ] Abbruch- und Sicherheitslogik definieren, falls Schwerpunkt außerhalb harter Constraints liegt.
+- [x] Schwerpunktfunktion für das Plateau implementieren (ungewichtet oder fehlergewichtet).
+- [x] Schwerpunkt gegen „best sample" vergleichen und den robusteren Kandidaten übernehmen.
+- [x] Abbruch- und Sicherheitslogik definieren, falls Schwerpunkt außerhalb harter Constraints liegt.
+
+Stand: umgesetzt im globalen Sampling-Optimierer. Pro Runde wird ein fehlergewichteter
+Plateau-Schwerpunkt gebildet, gegen den besten Sample-Punkt verglichen und der robustere
+Repräsentant (`schwerpunkt` oder `best_sample`) übernommen. Der Entscheid mit Begründung wird
+geloggt (`global-search: plateau-repräsentant`). Schwerpunktkandidaten mit ungültiger
+Fehlerbewertung oder Parameterwerten außerhalb harter Bounds werden verworfen.
 
 **Akzeptanzkriterium:** Der finale Kandidat kann aus Schwerpunkt **oder** Bestpunkt stammen,
 inklusive Begründung im Log.
