@@ -2892,6 +2892,49 @@ def test_optimize_global_parameter_vector_sampling_disabled_by_default() -> None
     assert logs == []
 
 
+def test_validate_badge_by_elements_runs_global_search_when_enabled(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Element validation should execute one global-search pass when the mode flag is enabled."""
+    np = image_composite_converter.np
+    if np is None:
+        pytest.skip("numpy not available in this environment")
+
+    img = np.full((16, 16, 3), 220, dtype=np.uint8)
+    params = {
+        "enable_global_search_mode": True,
+        "circle_enabled": True,
+        "cx": 8.0,
+        "cy": 8.0,
+        "r": 4.0,
+        "draw_text": False,
+    }
+
+    monkeypatch.setattr(Action, "generate_badge_svg", staticmethod(lambda *_args, **_kwargs: "<svg/>"))
+    monkeypatch.setattr(Action, "render_svg_to_numpy", staticmethod(lambda *_args, **_kwargs: img))
+    monkeypatch.setattr(Action, "_fit_to_original_size", staticmethod(lambda *_args, **_kwargs: img))
+    monkeypatch.setattr(Action, "extract_badge_element_mask", staticmethod(lambda *_args, **_kwargs: np.ones((16, 16), dtype=bool)))
+    monkeypatch.setattr(Action, "_element_match_error", staticmethod(lambda *_args, **_kwargs: 0.0))
+    monkeypatch.setattr(Action, "_optimize_element_width_bracket", staticmethod(lambda *_args, **_kwargs: False))
+    monkeypatch.setattr(Action, "_optimize_element_extent_bracket", staticmethod(lambda *_args, **_kwargs: False))
+    monkeypatch.setattr(Action, "_optimize_circle_center_bracket", staticmethod(lambda *_args, **_kwargs: False))
+    monkeypatch.setattr(Action, "_optimize_circle_radius_bracket", staticmethod(lambda *_args, **_kwargs: False))
+    monkeypatch.setattr(Action, "_optimize_element_color_bracket", staticmethod(lambda *_args, **_kwargs: False))
+    monkeypatch.setattr(Action, "_apply_canonical_badge_colors", staticmethod(lambda current: current))
+    monkeypatch.setattr(Action, "calculate_error", staticmethod(lambda *_args, **_kwargs: 0.0))
+
+    calls: list[bool] = []
+
+    def fake_global_search(_img_orig, _params, _logs, *, rounds=3, samples_per_round=16):
+        calls.append(True)
+        return False
+
+    monkeypatch.setattr(Action, "_optimize_global_parameter_vector_sampling", staticmethod(fake_global_search))
+
+    logs = Action.validate_badge_by_elements(img, params, max_rounds=1)
+
+    assert calls == [True]
+    assert any("Runde 1: elementweise Validierung gestartet" in entry for entry in logs)
+
+
 def test_co2_layout_vertical_centering_ignores_subscript_for_main_text() -> None:
     """The CO run should stay centered even if the subscript is very large."""
     params = Action._apply_co2_label(Action._default_ac0870_params(15, 15))
