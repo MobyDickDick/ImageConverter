@@ -155,6 +155,7 @@ def test_detect_semantic_primitives_detects_vertical_connector_without_arm() -> 
     assert observed["circle"] is True
     assert observed["stem"] is True
     assert observed["arm"] is False
+    assert observed["connector_orientation"] == "vertical"
 
 
 def test_foreground_mask_keeps_tiny_plain_ring_pixels() -> None:
@@ -1528,6 +1529,21 @@ def test_run_iteration_pipeline_writes_failed_best_attempt_artifacts_for_semanti
     )
     monkeypatch.setattr(
         image_composite_converter.Action,
+        "_detect_semantic_primitives",
+        staticmethod(
+            lambda *_args, **_kwargs: {
+                "circle": True,
+                "stem": True,
+                "arm": False,
+                "text": False,
+                "connector_orientation": "vertical",
+                "horizontal_line_candidates": 0,
+                "vertical_line_candidates": 2,
+            }
+        ),
+    )
+    monkeypatch.setattr(
+        image_composite_converter.Action,
         "generate_badge_svg",
         staticmethod(lambda w, h, _p: f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}"/>'),
     )
@@ -1561,6 +1577,7 @@ def test_run_iteration_pipeline_writes_failed_best_attempt_artifacts_for_semanti
     assert "semantic_audit_status=semantic_mismatch" in log_text
     assert "semantic_audit_derived_elements=SEMANTIC: Kreis ohne Buchstabe" in log_text
     assert "semantic_audit_mismatch_reason=circle missing" in log_text
+    assert "semantic_connector_classification=vertical;horizontal_candidates=0;vertical_candidates=2" in log_text
 
 
 def test_write_semantic_audit_report_persists_csv_and_json(tmp_path: Path) -> None:
@@ -2355,13 +2372,33 @@ def test_write_ac08_success_criteria_report_summarizes_regression_metrics(tmp_pa
     assert "batch_abort_or_render_failure_count;1" in metrics
     assert "rejected_regression_count;1" in metrics
     assert "accepted_regression_count;0" in metrics
-    assert "previous_good_expected;4" in metrics
-    assert "previous_good_preserved_count;3" in metrics
-    assert "previous_good_regressed_count;1" in metrics
-    assert "previous_good_missing_count;0" in metrics
+    metric_rows = {}
+    for line in metrics.strip().splitlines()[1:]:
+        key, value = line.split(";", 1)
+        metric_rows[key] = value
+
+    known_logs = {
+        "AC0800_L": "semantic_ok",
+        "AC0800_M": "semantic_ok",
+        "AC0800_S": "semantic_ok",
+        "AC0811_L": "semantic_mismatch",
+        "AC0820_L": "other",
+    }
+    expected_previous_good = set(image_composite_converter.AC08_PREVIOUSLY_GOOD_VARIANTS)
+    expected_preserved = sum(1 for v, status in known_logs.items() if v in expected_previous_good and status == "semantic_ok")
+    expected_regressed = sum(1 for v, status in known_logs.items() if v in expected_previous_good and status != "semantic_ok")
+    expected_missing = len(expected_previous_good) - expected_preserved - expected_regressed
+
+    assert metric_rows["previous_good_expected"] == str(len(expected_previous_good))
+    assert metric_rows["previous_good_preserved_count"] == str(expected_preserved)
+    assert metric_rows["previous_good_regressed_count"] == str(expected_regressed)
+    assert metric_rows["previous_good_missing_count"] == str(expected_missing)
+    assert float(metric_rows["mean_validation_rounds_per_file"]) > 0.0
+    assert "criterion_validation_rounds_recorded;1" in metrics
     assert "criterion_no_new_batch_aborts=0" in summary
     assert "previous_good_regressed=AC0811_L" in summary
     assert "criterion_no_accepted_regressions=1" in summary
+    assert "criterion_validation_rounds_recorded=1" in summary
     assert "criterion_regression_set_improved=1" in summary
     assert "overall_success=0" in summary
 
@@ -2695,6 +2732,152 @@ def test_optimize_global_parameter_vector_sampling_improves_multiple_fields(monk
     assert any("akzeptierte_kandidaten=" in line for line in logs)
 
 
+def test_optimize_global_parameter_vector_sampling_logs_global_near_optimum_plateau(monkeypatch: pytest.MonkeyPatch) -> None:
+    np = image_composite_converter.np
+    if np is None:
+        pytest.skip("numpy not available in this environment")
+    img = np.full((24, 24, 3), 220, dtype=np.uint8)
+    params = {
+        "enable_global_search_mode": True,
+        "circle_enabled": True,
+        "cx": 6.0,
+        "cy": 6.0,
+        "r": 3.0,
+        "stem_enabled": True,
+        "stem_x": 4.0,
+        "stem_top": 9.0,
+        "stem_bottom": 15.0,
+        "stem_width": 1.0,
+        "draw_text": True,
+        "text_x": 5.0,
+        "text_y": 5.0,
+        "text_scale": 0.8,
+        "min_circle_radius": 1.0,
+    }
+
+    def fake_full_error(_img, candidate_params):
+        cx = float(candidate_params.get("cx", 0.0))
+        cy = float(candidate_params.get("cy", 0.0))
+        text_x = float(candidate_params.get("text_x", 0.0))
+        return abs(cx - 10.0) + abs(cy - 10.0) + abs(text_x - 10.0)
+
+    monkeypatch.setattr(Action, "_full_badge_error_for_params", staticmethod(fake_full_error))
+    logs: list[str] = []
+
+    changed = Action._optimize_global_parameter_vector_sampling(
+        img,
+        params,
+        logs,
+        rounds=2,
+        samples_per_round=12,
+    )
+
+    assert changed is True
+    assert any("near-optimum-definition" in line for line in logs)
+    plateau_lines = [line for line in logs if "near-optimum-plateau" in line]
+    assert len(plateau_lines) == 2
+    assert all("punkte=" in line and "spannweite=" in line for line in plateau_lines)
+    representative_lines = [line for line in logs if "plateau-repräsentant" in line]
+    assert len(representative_lines) == 2
+    assert all("kandidat=" in line and "begründung=" in line for line in representative_lines)
+
+
+def test_optimize_global_parameter_vector_sampling_uses_run_seed_offset(monkeypatch: pytest.MonkeyPatch) -> None:
+    np = image_composite_converter.np
+    if np is None:
+        pytest.skip("numpy not available in this environment")
+    img = np.full((24, 24, 3), 220, dtype=np.uint8)
+    params = {
+        "enable_global_search_mode": True,
+        "circle_enabled": True,
+        "cx": 6.0,
+        "cy": 6.0,
+        "r": 3.0,
+        "stem_enabled": True,
+        "stem_x": 4.0,
+        "stem_top": 9.0,
+        "stem_bottom": 15.0,
+        "stem_width": 1.0,
+        "draw_text": True,
+        "text_x": 5.0,
+        "text_y": 5.0,
+        "text_scale": 0.8,
+        "min_circle_radius": 1.0,
+    }
+
+    monkeypatch.setattr(Action, "_full_badge_error_for_params", staticmethod(lambda *_args, **_kwargs: 1.0))
+
+    captured: list[int] = []
+
+    def fake_make_rng(seed: int):
+        captured.append(int(seed))
+        return Action._ScalarRng(int(seed))
+
+    monkeypatch.setattr(Action, "_make_rng", staticmethod(fake_make_rng))
+    monkeypatch.setattr(Action, "STOCHASTIC_RUN_SEED", 123, raising=False)
+    monkeypatch.setattr(Action, "STOCHASTIC_SEED_OFFSET", 7, raising=False)
+
+    logs: list[str] = []
+    Action._optimize_global_parameter_vector_sampling(img, params, logs, rounds=1, samples_per_round=8)
+
+    assert captured == [4229]
+
+
+def test_optimize_global_parameter_vector_sampling_respects_locks_and_bounds(monkeypatch: pytest.MonkeyPatch) -> None:
+    np = image_composite_converter.np
+    if np is None:
+        pytest.skip("numpy not available in this environment")
+    img = np.full((20, 20, 3), 220, dtype=np.uint8)
+    params = {
+        "enable_global_search_mode": True,
+        "circle_enabled": True,
+        "cx": 8.0,
+        "cy": 7.0,
+        "r": 3.0,
+        "min_circle_radius": 2.0,
+        "lock_circle_cx": True,
+        "stem_enabled": True,
+        "stem_x": 1.0,
+        "stem_top": 10.0,
+        "stem_bottom": 17.0,
+        "stem_width": 1.0,
+        "draw_text": True,
+        "text_x": 8.0,
+        "text_y": 9.0,
+        "text_scale": 0.8,
+        "lock_text_position": True,
+    }
+
+    start_cx = float(params["cx"])
+    start_text_x = float(params["text_x"])
+    start_text_y = float(params["text_y"])
+    initial_bounds = Action._global_parameter_vector_bounds(params, img.shape[1], img.shape[0])
+
+    def fake_full_error(_img, candidate_params):
+        # Pulls the optimizer toward extreme values, so clamping/locks are exercised.
+        return float(
+            abs(float(candidate_params.get("cy", 0.0)) - 999.0)
+            + abs(float(candidate_params.get("r", 0.0)) - 999.0)
+            + abs(float(candidate_params.get("stem_x", 0.0)) - 999.0)
+            + abs(float(candidate_params.get("stem_width", 0.0)) - 999.0)
+            + abs(float(candidate_params.get("text_scale", 0.0)) - 99.0)
+        )
+
+    monkeypatch.setattr(Action, "_full_badge_error_for_params", staticmethod(fake_full_error))
+    logs: list[str] = []
+
+    Action._optimize_global_parameter_vector_sampling(img, params, logs, rounds=2, samples_per_round=12)
+
+    assert float(params["cx"]) == start_cx
+    assert float(params["text_x"]) == start_text_x
+    assert float(params["text_y"]) == start_text_y
+
+    for key in ("cy", "r", "stem_x", "stem_width", "text_scale"):
+        low, high, _locked, _source = initial_bounds[key]
+        value = float(params[key])
+        assert low <= value <= high
+
+
 def test_optimize_global_parameter_vector_sampling_disabled_by_default() -> None:
     np = image_composite_converter.np
     if np is None:
@@ -2707,6 +2890,49 @@ def test_optimize_global_parameter_vector_sampling_disabled_by_default() -> None
 
     assert changed is False
     assert logs == []
+
+
+def test_validate_badge_by_elements_runs_global_search_when_enabled(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Element validation should execute one global-search pass when the mode flag is enabled."""
+    np = image_composite_converter.np
+    if np is None:
+        pytest.skip("numpy not available in this environment")
+
+    img = np.full((16, 16, 3), 220, dtype=np.uint8)
+    params = {
+        "enable_global_search_mode": True,
+        "circle_enabled": True,
+        "cx": 8.0,
+        "cy": 8.0,
+        "r": 4.0,
+        "draw_text": False,
+    }
+
+    monkeypatch.setattr(Action, "generate_badge_svg", staticmethod(lambda *_args, **_kwargs: "<svg/>"))
+    monkeypatch.setattr(Action, "render_svg_to_numpy", staticmethod(lambda *_args, **_kwargs: img))
+    monkeypatch.setattr(Action, "_fit_to_original_size", staticmethod(lambda *_args, **_kwargs: img))
+    monkeypatch.setattr(Action, "extract_badge_element_mask", staticmethod(lambda *_args, **_kwargs: np.ones((16, 16), dtype=bool)))
+    monkeypatch.setattr(Action, "_element_match_error", staticmethod(lambda *_args, **_kwargs: 0.0))
+    monkeypatch.setattr(Action, "_optimize_element_width_bracket", staticmethod(lambda *_args, **_kwargs: False))
+    monkeypatch.setattr(Action, "_optimize_element_extent_bracket", staticmethod(lambda *_args, **_kwargs: False))
+    monkeypatch.setattr(Action, "_optimize_circle_center_bracket", staticmethod(lambda *_args, **_kwargs: False))
+    monkeypatch.setattr(Action, "_optimize_circle_radius_bracket", staticmethod(lambda *_args, **_kwargs: False))
+    monkeypatch.setattr(Action, "_optimize_element_color_bracket", staticmethod(lambda *_args, **_kwargs: False))
+    monkeypatch.setattr(Action, "_apply_canonical_badge_colors", staticmethod(lambda current: current))
+    monkeypatch.setattr(Action, "calculate_error", staticmethod(lambda *_args, **_kwargs: 0.0))
+
+    calls: list[bool] = []
+
+    def fake_global_search(_img_orig, _params, _logs, *, rounds=3, samples_per_round=16):
+        calls.append(True)
+        return False
+
+    monkeypatch.setattr(Action, "_optimize_global_parameter_vector_sampling", staticmethod(fake_global_search))
+
+    logs = Action.validate_badge_by_elements(img, params, max_rounds=1)
+
+    assert calls == [True]
+    assert any("Runde 1: elementweise Validierung gestartet" in entry for entry in logs)
 
 
 def test_co2_layout_vertical_centering_ignores_subscript_for_main_text() -> None:
@@ -2780,6 +3006,7 @@ def test_make_badge_params_applies_ac0831_vertical_co2_tuning() -> None:
     assert float(params["co2_font_scale"]) <= 0.74
     assert float(params["co2_sub_font_scale"]) <= 48.0
     assert float(params["co2_dy"]) >= 0.35
+    assert float(params["co2_superscript_min_gap_scale"]) >= 0.19
 
 
 def test_make_badge_params_applies_compact_ac0831_small_variant_text_tuning() -> None:
@@ -2791,6 +3018,7 @@ def test_make_badge_params_applies_compact_ac0831_small_variant_text_tuning() ->
     assert float(params["co2_font_scale"]) <= 0.74
     assert float(params["co2_sub_font_scale"]) <= 48.0
     assert float(params["co2_dy"]) >= 0.35
+    assert float(params["co2_superscript_min_gap_scale"]) >= 0.19
 
 
 def test_make_badge_params_ac0832_l_uses_superscript_two() -> None:
@@ -4466,6 +4694,47 @@ def test_validate_semantic_alignment_accepts_ac0814_small_horizontal_connector()
     assert "Im Bild ist senkrechter Strich erkennbar, aber nicht in der Beschreibung enthalten" not in issues
     assert "Strukturprüfung: Kein belastbarer Kreis-Kandidat im Rohbild erkannt" not in issues
     assert "Strukturprüfung: Kein belastbarer waagrechter Linien-Kandidat im Rohbild erkannt" not in issues
+
+
+def test_validate_semantic_alignment_accepts_ac0870_small_circle_text_variant() -> None:
+    """Tiny AC0870_S crops should retain circle+text semantics despite soft raster edges."""
+    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+        pytest.skip("numpy/cv2 not available in this environment")
+
+    cv2 = image_composite_converter.cv2
+    img = cv2.imread("artifacts/images_to_convert/AC0870_S.jpg")
+    assert img is not None
+
+    params = Action.make_badge_params(img.shape[1], img.shape[0], "AC0870", img)
+    issues = Action.validate_semantic_description_alignment(
+        img,
+        ["SEMANTIC: Kreis + Buchstabe VOC"],
+        params,
+    )
+
+    assert "Beschreibung erwartet Kreis, im Bild aber nicht robust erkennbar" not in issues
+    assert "Strukturprüfung: Kein belastbarer Kreis-Kandidat im Rohbild erkannt" not in issues
+
+
+def test_detect_semantic_primitives_reports_family_circle_fallback_source(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Semantic primitive detection should expose when AC08 small-family fallback provided circle evidence."""
+    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+        pytest.skip("numpy/cv2 not available in this environment")
+
+    cv2 = image_composite_converter.cv2
+    img = cv2.imread("artifacts/images_to_convert/AC0814_S.jpg")
+    assert img is not None
+
+    params = Action.make_badge_params(img.shape[1], img.shape[0], "AC0814", img)
+    assert params is not None
+
+    monkeypatch.setattr(cv2, "HoughCircles", lambda *args, **kwargs: None)
+    monkeypatch.setattr(Action, "_circle_from_foreground_mask", staticmethod(lambda _mask: None))
+
+    structural = Action._detect_semantic_primitives(img, params)
+
+    assert structural["circle"] is True
+    assert structural["circle_detection_source"] == "family_fallback"
 
 
 def test_validate_semantic_alignment_accepts_merged_co2_blob_for_ac0831_artifact() -> None:

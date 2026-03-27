@@ -64,6 +64,19 @@ python -m compileall src tests
 python -m pytest
 python -m src.image_composite_converter --help
 python -m src.image_composite_converter artifacts/images_to_convert --descriptions-path artifacts/images_to_convert/Finale_Wurzelformen_V3.xml --ac08-regression-set --output-dir artifacts/converted_images
+python - <<'PY'
+from pathlib import Path
+import csv
+import sys
+
+metrics = {}
+with Path("artifacts/converted_images/reports/ac08_success_metrics.csv").open("r", encoding="utf-8", newline="") as f:
+    for row in csv.DictReader(f, delimiter=";"):
+        metrics[row["metric"]] = row["value"]
+failed = [name for name in ("criterion_no_new_batch_aborts", "criterion_no_accepted_regressions", "criterion_validation_rounds_recorded", "criterion_regression_set_improved", "criterion_stable_families_not_worse", "overall_success") if metrics.get(name, "0") != "1"]
+print("AC08-Gate:", "PASS" if not failed else "FAIL")
+sys.exit(0 if not failed else 1)
+PY
 # neue erfolgreich konvertierte Bild-IDs in artifacts/converted_images/reports/successful_conversions.txt eintragen; Qualitätswerte werden danach automatisch an diese Einträge ergänzt
 ```
 

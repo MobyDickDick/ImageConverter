@@ -113,27 +113,44 @@ und finale Delta-Parameter.
 und liefert eine nachweisbare Fehlerverbesserung gegenüber dem Startzustand.
 
 ### A3 – Plateau/Maximum-Bereich verallgemeinern
-- [ ] Plateau-Bildung aus der Circle-Pose-Suche auf den globalen Parameterraum übertragen.
-- [ ] „Near-Optimum" formal definieren (`err <= best_err + epsilon`) und pro Runde persistieren.
-- [ ] Plateau-Statistiken ausgeben (Anzahl Punkte, Spannweite je Parameter, Stabilitätsindikator).
+- [x] Plateau-Bildung aus der Circle-Pose-Suche auf den globalen Parameterraum übertragen.
+- [x] „Near-Optimum" formal definieren (`err <= best_err + epsilon`) und pro Runde persistieren.
+- [x] Plateau-Statistiken ausgeben (Anzahl Punkte, Spannweite je Parameter, Stabilitätsindikator).
+
+Stand: umgesetzt in `Action._optimize_global_parameter_vector_sampling`. Der Lauf protokolliert die
+Near-Optimum-Definition (`epsilon=max(0.06, best_err*0.02)`), bildet pro Runde ein globales
+Plateau und loggt dessen Größe, mittlere/per-Parameter-Spannweiten sowie einen
+Stabilitätshinweis über aufeinanderfolgende Runden.
 
 **Akzeptanzkriterium:** Der Laufbericht enthält pro Runde einen expliziten Near-Optimum-Bereich
 für den globalen Vektor, nicht nur für Kreisparameter.
 
 ### A4 – Schwerpunkt des Plateau-Bereichs berechnen
-- [ ] Schwerpunktfunktion für das Plateau implementieren (ungewichtet oder fehlergewichtet).
-- [ ] Schwerpunkt gegen „best sample" vergleichen und den robusteren Kandidaten übernehmen.
-- [ ] Abbruch- und Sicherheitslogik definieren, falls Schwerpunkt außerhalb harter Constraints liegt.
+- [x] Schwerpunktfunktion für das Plateau implementieren (ungewichtet oder fehlergewichtet).
+- [x] Schwerpunkt gegen „best sample" vergleichen und den robusteren Kandidaten übernehmen.
+- [x] Abbruch- und Sicherheitslogik definieren, falls Schwerpunkt außerhalb harter Constraints liegt.
+
+Stand: umgesetzt im globalen Sampling-Optimierer. Pro Runde wird ein fehlergewichteter
+Plateau-Schwerpunkt gebildet, gegen den besten Sample-Punkt verglichen und der robustere
+Repräsentant (`schwerpunkt` oder `best_sample`) übernommen. Der Entscheid mit Begründung wird
+geloggt (`global-search: plateau-repräsentant`). Schwerpunktkandidaten mit ungültiger
+Fehlerbewertung oder Parameterwerten außerhalb harter Bounds werden verworfen.
 
 **Akzeptanzkriterium:** Der finale Kandidat kann aus Schwerpunkt **oder** Bestpunkt stammen,
 inklusive Begründung im Log.
 
 ### A5 – Regression und Qualitätssicherung
-- [ ] Neue Tests für den globalen Suchmodus ergänzen (Determinismus via Seed, Constraint-Einhaltung,
+- [x] Neue Tests für den globalen Suchmodus ergänzen (Determinismus via Seed, Constraint-Einhaltung,
       Verbesserung gegenüber Baseline).
-- [ ] Bestehende Kelle-Tests beibehalten und um mindestens einen End-to-End-Fall mit aktivem
+- [x] Bestehende Kelle-Tests beibehalten und um mindestens einen End-to-End-Fall mit aktivem
       globalen Suchmodus erweitern.
-- [ ] Für AC08-/Kelle-relevante Familien einen kleinen Smoke-Regressionssatz definieren.
+- [x] Für AC08-/Kelle-relevante Familien einen kleinen Smoke-Regressionssatz definieren.
+
+Stand: umgesetzt über den bestehenden global-search-Regressionsblock (`Determinismus`,
+`Bounds/Locks`, `Multi-Field-Verbesserung`) plus einen Integrationsfall, der den Aufruf von
+`_optimize_global_parameter_vector_sampling` innerhalb von `validate_badge_by_elements`
+bei aktivem `enable_global_search_mode` absichert. Der AC08/Kelle-Smoke-Regressionssatz bleibt
+über `AC08_REGRESSION_VARIANTS` und die zugehörigen Pipeline-Tests fest verankert.
 
 **Akzeptanzkriterium:** Testlauf zeigt, dass neue Suche stabil ist, Constraints nicht verletzt,
 und keine bestehenden Kelle-/AC08-Baselines regressieren.

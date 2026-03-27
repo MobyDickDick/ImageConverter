@@ -3414,8 +3414,8 @@ class Action:
         p["co2_sub_font_scale"] = min(float(p.get("co2_sub_font_scale", 66.0)), 48.0)
         # Keep the raised "2" clearly detached from the "O" in AC0831_L and
         # sibling variants where JPEG antialiasing tends to visually merge both.
-        p["co2_superscript_offset_scale"] = float(max(float(p.get("co2_superscript_offset_scale", 0.16)), 0.16))
-        p["co2_superscript_min_gap_scale"] = float(max(float(p.get("co2_superscript_min_gap_scale", 0.17)), 0.17))
+        p["co2_superscript_offset_scale"] = float(max(float(p.get("co2_superscript_offset_scale", 0.17)), 0.17))
+        p["co2_superscript_min_gap_scale"] = float(max(float(p.get("co2_superscript_min_gap_scale", 0.19)), 0.19))
         min_dim = float(
             min(
                 float(p.get("width", 0.0) or 0.0),
@@ -3433,8 +3433,8 @@ class Action:
             p["co2_sub_font_scale"] = min(float(p.get("co2_sub_font_scale", 48.0)), 48.0)
             p["co2_optical_bias"] = max(float(p.get("co2_optical_bias", 0.10)), 0.10)
             p["co2_dy"] = float(max(float(p.get("co2_dy", 0.0)), 0.35))
-            p["co2_superscript_offset_scale"] = float(max(float(p.get("co2_superscript_offset_scale", 0.16)), 0.16))
-            p["co2_superscript_min_gap_scale"] = float(max(float(p.get("co2_superscript_min_gap_scale", 0.17)), 0.17))
+            p["co2_superscript_offset_scale"] = float(max(float(p.get("co2_superscript_offset_scale", 0.17)), 0.17))
+            p["co2_superscript_min_gap_scale"] = float(max(float(p.get("co2_superscript_min_gap_scale", 0.19)), 0.19))
         return p
 
     @staticmethod
@@ -5989,6 +5989,9 @@ class Action:
         if not bool(params.get("enable_global_search_mode", False)):
             return False
 
+        near_optimum_eps_floor = 0.06
+        near_optimum_eps_rel = 0.02
+
         h, w = img_orig.shape[:2]
         bounds = Action._global_parameter_vector_bounds(params, w, h)
         vector = GlobalParameterVector.from_params(params)
@@ -6033,6 +6036,14 @@ class Action:
                     )
             return Action._full_badge_error_for_params(img_orig, probe)
 
+        def within_hard_bounds(candidate: GlobalParameterVector) -> tuple[bool, str]:
+            for key in active_keys:
+                low, high, _locked, _source = bounds[key]
+                value = float(getattr(candidate, key))
+                if value < low - 1e-6 or value > high + 1e-6:
+                    return False, f"{key}={value:.3f} außerhalb [{low:.3f}, {high:.3f}]"
+            return True, "ok"
+
         rng = Action._make_rng(4099 + int(Action.STOCHASTIC_RUN_SEED) + int(Action.STOCHASTIC_SEED_OFFSET))
         best = clamp_vector(vector)
         best_err = eval_vector(best)
@@ -6041,12 +6052,17 @@ class Action:
         improved = False
 
         spans = {key: max(0.25, float(bounds[key][1] - bounds[key][0]) * 0.20) for key in active_keys}
+        plateau_rounds: list[dict[str, float | int]] = []
         logs.append(
             f"global-search: gestartet (aktive_parameter={','.join(active_keys)}, samples_pro_runde={max(8, int(samples_per_round))}, start_err={best_err:.3f})"
+        )
+        logs.append(
+            f"global-search: near-optimum-definition (err <= best_err + epsilon, epsilon=max({near_optimum_eps_floor:.2f}, best_err*{near_optimum_eps_rel:.2f}))"
         )
 
         for round_idx in range(max(1, int(rounds))):
             accepted = 0
+            finite_round: list[tuple[GlobalParameterVector, float]] = [(best, best_err)]
             for _ in range(max(8, int(samples_per_round))):
                 sample_data = dataclasses.asdict(best)
                 for key in active_keys:
@@ -6055,15 +6071,119 @@ class Action:
                     sample_data[key] = float(Action._clip_scalar(rng.normal(float(sample_data[key]), sigma), low, high))
                 candidate = clamp_vector(GlobalParameterVector(**sample_data))
                 candidate_err = eval_vector(candidate)
+                if math.isfinite(candidate_err):
+                    finite_round.append((candidate, candidate_err))
                 if math.isfinite(candidate_err) and candidate_err + 0.05 < best_err:
                     best = candidate
                     best_err = candidate_err
                     accepted += 1
                     improved = True
+
+            round_best_err = min(err for _cand, err in finite_round)
+            round_best = min(finite_round, key=lambda item: item[1])[0]
+            epsilon = max(near_optimum_eps_floor, round_best_err * near_optimum_eps_rel)
+            plateau = [(cand, err) for cand, err in finite_round if err <= round_best_err + epsilon]
+            span_labels: list[str] = []
+            mean_span = 0.0
+            if plateau:
+                span_values: list[float] = []
+                for key in active_keys:
+                    key_values = [float(getattr(cand, key)) for cand, _err in plateau]
+                    key_span = max(key_values) - min(key_values)
+                    span_values.append(key_span)
+                    span_labels.append(f"{key}:{key_span:.3f}")
+                mean_span = sum(span_values) / max(1, len(span_values))
+
+            representative = round_best
+            representative_err = round_best_err
+            representative_source = "best_sample"
+            representative_reason = "niedrigster Fehler in dieser Runde"
+
+            if plateau:
+                weighted_data = dataclasses.asdict(round_best)
+                weight_sum = 0.0
+                for cand, cand_err in plateau:
+                    weight = 1.0 / (1.0 + max(0.0, float(cand_err) - round_best_err))
+                    weight_sum += weight
+                    for key in active_keys:
+                        weighted_data[key] = float(weighted_data[key]) + (float(getattr(cand, key)) * weight)
+                if weight_sum > 0.0:
+                    for key in active_keys:
+                        weighted_data[key] = float(weighted_data[key]) / (1.0 + weight_sum)
+                    centroid_raw = GlobalParameterVector(**weighted_data)
+                    centroid = clamp_vector(centroid_raw)
+                    centroid_safe, centroid_msg = within_hard_bounds(centroid)
+                    if not centroid_safe:
+                        logs.append(
+                            f"global-search: schwerpunkt verworfen (runde={round_idx + 1}, grund={centroid_msg})"
+                        )
+                    else:
+                        centroid_err = eval_vector(centroid)
+                        if math.isfinite(centroid_err):
+                            near_best_margin = max(0.02, epsilon * 0.30)
+                            if centroid_err <= round_best_err + near_best_margin and len(plateau) >= 3:
+                                representative = centroid
+                                representative_err = centroid_err
+                                representative_source = "schwerpunkt"
+                                representative_reason = (
+                                    "nahe am Bestpunkt und robuster Zentrumskandidat des Plateau-Bereichs"
+                                )
+                            elif centroid_err < round_best_err:
+                                representative = centroid
+                                representative_err = centroid_err
+                                representative_source = "schwerpunkt"
+                                representative_reason = "geringerer Fehler als best_sample"
+                        else:
+                            logs.append(
+                                "global-search: schwerpunkt verworfen "
+                                f"(runde={round_idx + 1}, grund=fehlerbewertung nicht endlich)"
+                            )
+
+            if representative_source == "schwerpunkt":
+                if representative_err <= best_err + 0.02:
+                    best = representative
+                    best_err = representative_err
+                    improved = True
+            elif representative_err + 0.01 < best_err:
+                best = representative
+                best_err = representative_err
+                improved = True
+
+            stability = "n/a"
+            if plateau_rounds:
+                prev_center = float(plateau_rounds[-1]["center_mean"])
+                center_now = 0.0
+                if plateau:
+                    center_now = sum(
+                        float(getattr(plateau[0][0], key) if len(plateau) == 1 else (min(float(getattr(cand, key)) for cand, _ in plateau) + max(float(getattr(cand, key)) for cand, _ in plateau)) / 2.0)
+                        for key in active_keys
+                    ) / max(1, len(active_keys))
+                center_shift = abs(center_now - prev_center)
+                stability = "stabil" if center_shift <= 0.35 else "dynamisch"
+                plateau_rounds.append({"size": len(plateau), "mean_span": mean_span, "center_mean": center_now})
+            else:
+                center_now = 0.0
+                if plateau:
+                    center_now = sum(
+                        float(getattr(plateau[0][0], key) if len(plateau) == 1 else (min(float(getattr(cand, key)) for cand, _ in plateau) + max(float(getattr(cand, key)) for cand, _ in plateau)) / 2.0)
+                        for key in active_keys
+                    ) / max(1, len(active_keys))
+                plateau_rounds.append({"size": len(plateau), "mean_span": mean_span, "center_mean": center_now})
             for key in active_keys:
                 spans[key] = max(0.12, spans[key] * 0.78)
             logs.append(
                 f"global-search: Runde {round_idx + 1} best_err={best_err:.3f}, akzeptierte_kandidaten={accepted}, sigma_mittel={sum(spans.values()) / max(1, len(spans)):.3f}"
+            )
+            logs.append(
+                "global-search: near-optimum-plateau "
+                f"(runde={round_idx + 1}, punkte={len(plateau)}, epsilon={epsilon:.3f}, "
+                f"mittlere_spannweite={mean_span:.3f}, stabilitaet={stability}, "
+                f"spannweite={'; '.join(span_labels) if span_labels else 'n/a'})"
+            )
+            logs.append(
+                "global-search: plateau-repräsentant "
+                f"(runde={round_idx + 1}, kandidat={representative_source}, err={representative_err:.3f}, "
+                f"begründung={representative_reason})"
             )
 
         if not improved:
@@ -7385,7 +7505,10 @@ class Action:
         return issues
 
     @staticmethod
-    def _detect_semantic_primitives(img_orig: np.ndarray) -> dict[str, bool]:
+    def _detect_semantic_primitives(
+        img_orig: np.ndarray,
+        badge_params: dict | None = None,
+    ) -> dict[str, bool | int | str]:
         """Detect coarse semantic primitives directly from the raw bitmap.
 
         This guard is intentionally conservative: it should flag obvious non-badge
@@ -7394,11 +7517,23 @@ class Action:
         """
         h, w = img_orig.shape[:2]
         if h <= 0 or w <= 0:
-            return {"circle": False, "arm": False, "text": False}
+            return {
+                "circle": False,
+                "stem": False,
+                "arm": False,
+                "text": False,
+                "circle_detection_source": "none",
+                "connector_orientation": "none",
+                "horizontal_line_candidates": 0,
+                "vertical_line_candidates": 0,
+            }
 
         gray = cv2.cvtColor(img_orig, cv2.COLOR_BGR2GRAY)
         fg_mask = Action._foreground_mask(img_orig).astype(np.uint8)
         min_side = max(1, min(h, w))
+        small_variant = bool((badge_params or {}).get("ac08_small_variant_mode", False))
+        symbol_hint = str((badge_params or {}).get("badge_symbol_name", "")).upper()
+        circle_detection_source = "none"
 
         # Circle cue: require at least one plausible Hough circle.
         circles = cv2.HoughCircles(
@@ -7445,6 +7580,7 @@ class Action:
 
                 has_circle = True
                 circle_geom = (float(cx), float(cy), float(r))
+                circle_detection_source = "hough"
                 break
 
         if not has_circle:
@@ -7452,10 +7588,46 @@ class Action:
             if fallback_circle is not None:
                 has_circle = True
                 circle_geom = fallback_circle
+                circle_detection_source = "foreground_mask"
+
+        if not has_circle and badge_params:
+            # `_S` AC08 families can keep a visually correct ring while Hough and
+            # contour-only extraction both fail due to anti-aliased compression.
+            # Validate the family template circle directly against foreground ring
+            # support so the semantic gate can still accept robust circle evidence.
+            if small_variant and symbol_hint in {"AC0811", "AC0814", "AC0870"}:
+                exp_cx = float(badge_params.get("cx", float(w) / 2.0))
+                exp_cy = float(badge_params.get("cy", float(h) / 2.0))
+                exp_r = float(badge_params.get("r", max(2.0, float(min_side) * 0.28)))
+                exp_r = float(Action._clip_scalar(exp_r, 2.0, float(min_side) * 0.60))
+                yy, xx = np.ogrid[:h, :w]
+                ring_tol = max(1.2, exp_r * 0.32)
+                ring = np.abs(np.sqrt((xx - exp_cx) ** 2 + (yy - exp_cy) ** 2) - exp_r) <= ring_tol
+                ring_count = int(np.count_nonzero(ring))
+                if ring_count > 0:
+                    support_ratio = float(np.mean(fg_mask[ring] > 0))
+                    if support_ratio >= 0.18:
+                        bins = 12
+                        coverage_bins = np.zeros(bins, dtype=np.uint8)
+                        ring_coords = np.argwhere(ring)
+                        for py, px in ring_coords:
+                            if fg_mask[py, px] <= 0:
+                                continue
+                            ang = math.atan2(float(py) - exp_cy, float(px) - exp_cx)
+                            idx = int(((ang + math.pi) / (2.0 * math.pi)) * bins) % bins
+                            coverage_bins[idx] = 1
+                        if int(np.sum(coverage_bins)) >= 5:
+                            has_circle = True
+                            circle_geom = (exp_cx, exp_cy, exp_r)
+                            circle_detection_source = "family_fallback"
 
         # Connector cues: long near-axis-aligned segment via probabilistic Hough.
         has_arm = False
         has_stem = False
+        horizontal_candidates = 0
+        vertical_candidates = 0
+        strongest_horizontal = 0
+        strongest_vertical = 0
         edges = cv2.Canny(gray, 45, 140)
         lines = cv2.HoughLinesP(
             edges,
@@ -7522,8 +7694,12 @@ class Action:
                             continue
                 if is_horizontal:
                     has_arm = True
+                    horizontal_candidates += 1
+                    strongest_horizontal = max(strongest_horizontal, dx)
                 if is_vertical:
                     has_stem = True
+                    vertical_candidates += 1
+                    strongest_vertical = max(strongest_vertical, dy)
                 if has_arm and has_stem:
                     break
 
@@ -7562,11 +7738,30 @@ class Action:
                 and total_small_area >= max(6, int(round(float(min_side) * 0.45)))
             )
 
+        connector_orientation = "none"
+        if strongest_horizontal > 0 and strongest_vertical > 0:
+            shorter = min(strongest_horizontal, strongest_vertical)
+            longer = max(strongest_horizontal, strongest_vertical)
+            if shorter / max(1.0, float(longer)) >= 0.75:
+                connector_orientation = "ambiguous"
+            elif strongest_vertical > strongest_horizontal:
+                connector_orientation = "vertical"
+            else:
+                connector_orientation = "horizontal"
+        elif strongest_vertical > 0:
+            connector_orientation = "vertical"
+        elif strongest_horizontal > 0:
+            connector_orientation = "horizontal"
+
         return {
             "circle": bool(has_circle),
             "stem": bool(has_stem),
             "arm": bool(has_arm),
             "text": bool(has_text),
+            "circle_detection_source": circle_detection_source,
+            "connector_orientation": connector_orientation,
+            "horizontal_line_candidates": int(horizontal_candidates),
+            "vertical_line_candidates": int(vertical_candidates),
         }
 
     @staticmethod
@@ -7577,7 +7772,7 @@ class Action:
     ) -> list[str]:
         expected = Action._expected_semantic_presence(semantic_elements)
         expected_co2 = any("co_2" in str(elem).lower() or "co₂" in str(elem).lower() for elem in semantic_elements)
-        structural = Action._detect_semantic_primitives(img_orig)
+        structural = Action._detect_semantic_primitives(img_orig, badge_params)
         circle_mask = Action.extract_badge_element_mask(img_orig, badge_params, "circle")
         stem_mask = Action.extract_badge_element_mask(img_orig, badge_params, "stem")
         arm_mask = Action.extract_badge_element_mask(img_orig, badge_params, "arm")
@@ -8202,7 +8397,18 @@ def run_iteration_pipeline(
         if semantic_issues:
             failed_svg = Action.generate_badge_svg(w, h, badge_params)
             _write_attempt_artifacts(failed_svg, failed=True)
+            structural = Action._detect_semantic_primitives(perc.img, badge_params)
+            connector_orientation = str(structural.get("connector_orientation", "unknown"))
+            circle_source = str(structural.get("circle_detection_source", "unknown"))
+            connector_debug_line = (
+                "semantic_connector_classification="
+                f"{connector_orientation};"
+                f"circle_source={circle_source};"
+                f"horizontal_candidates={int(structural.get('horizontal_line_candidates', 0) or 0)};"
+                f"vertical_candidates={int(structural.get('vertical_line_candidates', 0) or 0)}"
+            )
             print("[ERROR] Semantik-Abgleich fehlgeschlagen:")
+            print(f"  - {connector_debug_line}")
             for issue in semantic_issues:
                 print(f"  - {issue}")
             if semantic_audit_row is not None:
@@ -8222,6 +8428,7 @@ def run_iteration_pipeline(
                     "status=semantic_mismatch",
                     f"best_attempt_svg={base}_failed.svg",
                     f"best_attempt_diff={base}_failed_diff.png",
+                    connector_debug_line,
                     *(
                         [
                             f"semantic_audit_status={semantic_audit_row.get('status', '')}",
@@ -10015,10 +10222,33 @@ def convert_range(
         iterations=iterations,
         selected_variants=sorted(normalized_selected_variants),
     )
-    _write_ac08_success_criteria_report(
+    ac08_success_gate = _write_ac08_success_criteria_report(
         reports_out_dir,
         selected_variants=sorted(normalized_selected_variants),
     )
+    if ac08_success_gate is not None:
+        failed_criteria = [
+            key
+            for key in (
+                "criterion_no_new_batch_aborts",
+                "criterion_no_accepted_regressions",
+                "criterion_validation_rounds_recorded",
+                "criterion_regression_set_improved",
+                "criterion_stable_families_not_worse",
+            )
+            if not bool(ac08_success_gate.get(key, False))
+        ]
+        if failed_criteria:
+            print(
+                "[WARN] AC08 success gate failed: "
+                + ", ".join(failed_criteria)
+                + f" (mean_validation_rounds_per_file={float(ac08_success_gate.get('mean_validation_rounds_per_file', 0.0)):.3f})"
+            )
+        else:
+            print(
+                "[INFO] AC08 success gate passed "
+                f"(mean_validation_rounds_per_file={float(ac08_success_gate.get('mean_validation_rounds_per_file', 0.0)):.3f})."
+            )
     if SUCCESSFUL_CONVERSIONS_MANIFEST.exists():
         update_successful_conversions_manifest_with_metrics(
             folder_path=folder_path,
@@ -10561,10 +10791,10 @@ def _write_ac08_success_criteria_report(
     reports_out_dir: str,
     *,
     selected_variants: list[str],
-) -> None:
+) -> dict[str, object] | None:
     """Persist the written AC08 success criteria and the current measured status."""
     if sorted(selected_variants) != sorted(AC08_REGRESSION_VARIANTS):
-        return
+        return None
 
     expected_variants = sorted(selected_variants)
     iteration_rows: list[dict[str, str]] = []
@@ -10618,7 +10848,7 @@ def _write_ac08_success_criteria_report(
             semantic_mismatch_count += 1
         if "konnte nicht gerendert werden" in log_text or "Abbruch: SVG konnte nicht gerendert werden" in log_text:
             render_failure_count += 1
-        rounds = len(re.findall(r"^Runde\\s+\\d+: elementweise Validierung gestartet$", log_text, flags=re.MULTILINE))
+        rounds = len(re.findall(r"^Runde\s+\d+: elementweise Validierung gestartet$", log_text, flags=re.MULTILINE))
         if rounds > 0:
             validation_round_counts.append(rounds)
 
@@ -10637,6 +10867,7 @@ def _write_ac08_success_criteria_report(
     regression_set_improved = improved_error_count > 0 or improved_mean_delta2_count > 0
     no_new_batch_aborts = batch_abort_count == 0
     no_accepted_regressions = accepted_regression_count == 0
+    validation_rounds_recorded = mean_validation_rounds > 0.0
     stable_families_not_worse = (
         no_accepted_regressions
         and previous_good_regressed_count == 0
@@ -10645,6 +10876,7 @@ def _write_ac08_success_criteria_report(
     overall_success = (
         no_new_batch_aborts
         and no_accepted_regressions
+        and validation_rounds_recorded
         and regression_set_improved
         and stable_families_not_worse
     )
@@ -10670,6 +10902,7 @@ def _write_ac08_success_criteria_report(
         writer.writerow(["mean_validation_rounds_per_file", f"{mean_validation_rounds:.3f}"])
         writer.writerow(["criterion_no_new_batch_aborts", int(no_new_batch_aborts)])
         writer.writerow(["criterion_no_accepted_regressions", int(no_accepted_regressions)])
+        writer.writerow(["criterion_validation_rounds_recorded", int(validation_rounds_recorded)])
         writer.writerow(["criterion_regression_set_improved", int(regression_set_improved)])
         writer.writerow(["criterion_stable_families_not_worse", int(stable_families_not_worse)])
         writer.writerow(["overall_success", int(overall_success)])
@@ -10678,7 +10911,10 @@ def _write_ac08_success_criteria_report(
         f"set={AC08_REGRESSION_SET_NAME}",
         "goal=Abschluss einer AC08-Maßnahme objektiv bewerten",
         "success_metrics=improved_error_per_pixel_count,improved_mean_delta2_count,semantic_mismatch_count,batch_abort_or_render_failure_count,mean_validation_rounds_per_file",
-        "success_definition=no_new_batch_aborts && no_accepted_regressions && regression_set_improved && stable_families_not_worse",
+        (
+            "success_definition=no_new_batch_aborts && no_accepted_regressions "
+            "&& validation_rounds_recorded && regression_set_improved && stable_families_not_worse"
+        ),
         f"images_expected={len(expected_variants)}",
         f"images_converted={len(converted_variants)}",
         f"images_missing={len(missing_variants)}",
@@ -10695,6 +10931,7 @@ def _write_ac08_success_criteria_report(
         f"mean_validation_rounds_per_file={mean_validation_rounds:.3f}",
         f"criterion_no_new_batch_aborts={int(no_new_batch_aborts)}",
         f"criterion_no_accepted_regressions={int(no_accepted_regressions)}",
+        f"criterion_validation_rounds_recorded={int(validation_rounds_recorded)}",
         f"criterion_regression_set_improved={int(regression_set_improved)}",
         f"criterion_stable_families_not_worse={int(stable_families_not_worse)}",
         f"overall_success={int(overall_success)}",
@@ -10710,6 +10947,16 @@ def _write_ac08_success_criteria_report(
 
     with open(os.path.join(reports_out_dir, "ac08_success_criteria.txt"), "w", encoding="utf-8") as f:
         f.write("\n".join(summary_lines) + "\n")
+
+    return {
+        "overall_success": overall_success,
+        "criterion_no_new_batch_aborts": no_new_batch_aborts,
+        "criterion_no_accepted_regressions": no_accepted_regressions,
+        "criterion_validation_rounds_recorded": validation_rounds_recorded,
+        "criterion_regression_set_improved": regression_set_improved,
+        "criterion_stable_families_not_worse": stable_families_not_worse,
+        "mean_validation_rounds_per_file": mean_validation_rounds,
+    }
 
 
 def _write_ac08_weak_family_status_report(
