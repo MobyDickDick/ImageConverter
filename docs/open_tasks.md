@@ -71,9 +71,10 @@ Details und Akzeptanzkriterien stehen in `docs/kelle_umsetzungscheck.md` unter
   - The refreshed snapshot currently reports `10/10 semantic_ok` and no `semantic_mismatch` entries for the committed AC08 logs.
   - Updated `docs/ac08_artifact_analysis.md` so the backlog reflects the current post-fix distribution instead of the former 43/11 split.
 
-- [ ] Make the AC08 success gate actionable in the normal workflow.
-  - Promote the metrics from `ac08_success_metrics.csv` / `ac08_success_criteria.txt` into a documented regression check so failed criteria are visible before the next backlog review.
-  - Include validation-round instrumentation fixes if needed, because the current report still shows `mean_validation_rounds_per_file=0.000`, which is not yet decision-useful.
+- [x] Make the AC08 success gate actionable in the normal workflow.
+  - The AC08 regression run now emits an explicit console gate status (`passed`/`failed`) including failed criterion names and `mean_validation_rounds_per_file`, so failures are visible immediately after the run.
+  - The workflow/README now include a CI-/shell-friendly regression check that evaluates `ac08_success_metrics.csv` and exits non-zero when any gate criterion fails.
+  - Fixed validation-round instrumentation in the AC08 success metrics (`Runde n` log parsing), and added a dedicated criterion `criterion_validation_rounds_recorded` so `mean_validation_rounds_per_file` can no longer silently stay at `0.000` in a passing gate.
 
 ## Image conversion pipeline
 

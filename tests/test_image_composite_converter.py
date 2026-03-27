@@ -2372,13 +2372,33 @@ def test_write_ac08_success_criteria_report_summarizes_regression_metrics(tmp_pa
     assert "batch_abort_or_render_failure_count;1" in metrics
     assert "rejected_regression_count;1" in metrics
     assert "accepted_regression_count;0" in metrics
-    assert "previous_good_expected;4" in metrics
-    assert "previous_good_preserved_count;3" in metrics
-    assert "previous_good_regressed_count;1" in metrics
-    assert "previous_good_missing_count;0" in metrics
+    metric_rows = {}
+    for line in metrics.strip().splitlines()[1:]:
+        key, value = line.split(";", 1)
+        metric_rows[key] = value
+
+    known_logs = {
+        "AC0800_L": "semantic_ok",
+        "AC0800_M": "semantic_ok",
+        "AC0800_S": "semantic_ok",
+        "AC0811_L": "semantic_mismatch",
+        "AC0820_L": "other",
+    }
+    expected_previous_good = set(image_composite_converter.AC08_PREVIOUSLY_GOOD_VARIANTS)
+    expected_preserved = sum(1 for v, status in known_logs.items() if v in expected_previous_good and status == "semantic_ok")
+    expected_regressed = sum(1 for v, status in known_logs.items() if v in expected_previous_good and status != "semantic_ok")
+    expected_missing = len(expected_previous_good) - expected_preserved - expected_regressed
+
+    assert metric_rows["previous_good_expected"] == str(len(expected_previous_good))
+    assert metric_rows["previous_good_preserved_count"] == str(expected_preserved)
+    assert metric_rows["previous_good_regressed_count"] == str(expected_regressed)
+    assert metric_rows["previous_good_missing_count"] == str(expected_missing)
+    assert float(metric_rows["mean_validation_rounds_per_file"]) > 0.0
+    assert "criterion_validation_rounds_recorded;1" in metrics
     assert "criterion_no_new_batch_aborts=0" in summary
     assert "previous_good_regressed=AC0811_L" in summary
     assert "criterion_no_accepted_regressions=1" in summary
+    assert "criterion_validation_rounds_recorded=1" in summary
     assert "criterion_regression_set_improved=1" in summary
     assert "overall_success=0" in summary
 
