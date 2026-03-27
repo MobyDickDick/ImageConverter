@@ -476,6 +476,18 @@ def test_co2_layout_legacy_cluster_mode_still_supported() -> None:
     assert float(layout["co_x"]) < float(params["cx"])
 
 
+def test_co2_superscript_has_global_minimum_gap_from_o() -> None:
+    """Superscript 2 should keep a visible horizontal gap from the O glyph."""
+    params = Action._apply_co2_label(Action._default_ac0870_params(30, 30))
+    params["co2_index_mode"] = "superscript"
+    params["co2_anchor_mode"] = "cluster"
+    layout = Action._co2_layout(params)
+
+    o_right = float(layout["co_x"]) + (float(layout["font_size"]) * 1.04 * float(layout["width_scale"]) / 2.0)
+    min_gap = float(layout["font_size"]) * 0.13
+    assert float(layout["subscript_x"]) - o_right >= (min_gap - 1e-6)
+
+
 def test_finalize_ac0820_keeps_default_anchor_mode() -> None:
     """AC0820 should keep the default CO₂ anchor mode (no forced centering rule)."""
     params = Action._apply_co2_label(Action._default_ac0870_params(30, 30))
