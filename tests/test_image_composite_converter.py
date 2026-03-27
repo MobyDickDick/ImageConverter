@@ -2780,6 +2780,7 @@ def test_make_badge_params_applies_ac0831_vertical_co2_tuning() -> None:
     assert float(params["co2_font_scale"]) <= 0.74
     assert float(params["co2_sub_font_scale"]) <= 48.0
     assert float(params["co2_dy"]) >= 0.35
+    assert float(params["co2_superscript_min_gap_scale"]) >= 0.19
 
 
 def test_make_badge_params_applies_compact_ac0831_small_variant_text_tuning() -> None:
@@ -2791,6 +2792,7 @@ def test_make_badge_params_applies_compact_ac0831_small_variant_text_tuning() ->
     assert float(params["co2_font_scale"]) <= 0.74
     assert float(params["co2_sub_font_scale"]) <= 48.0
     assert float(params["co2_dy"]) >= 0.35
+    assert float(params["co2_superscript_min_gap_scale"]) >= 0.19
 
 
 def test_make_badge_params_ac0832_l_uses_superscript_two() -> None:
