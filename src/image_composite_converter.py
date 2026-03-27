@@ -2544,6 +2544,9 @@ class Action:
             # including AC0820_L where a subscript drifts visually too low.
             p["co2_index_mode"] = "superscript"
             p["co2_superscript_offset_scale"] = float(min(float(p.get("co2_superscript_offset_scale", 0.16)), 0.18))
+            # Keep the raised "2" detached from the trailing "O" in AC0820_M/S
+            # where antialiasing can visually merge both glyphs.
+            p["co2_superscript_min_gap_scale"] = float(max(float(p.get("co2_superscript_min_gap_scale", 0.16)), 0.16))
             p["co2_optical_bias"] = 0.125
             r = max(1.0, float(p.get("r", 1.0)))
             # Keep AC0820 text close to the cap-height used by centered path
