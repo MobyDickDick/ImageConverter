@@ -46,11 +46,11 @@ Details und Akzeptanzkriterien stehen in `docs/kelle_umsetzungscheck.md` unter
 
 ## Next priority tasks
 
-- [ ] Fix the vertical-connector semantic false positives in the remaining AC08 families.
+- [x] Fix the vertical-connector semantic false positives in the remaining AC08 families.
   - Target `AC0811_S`, `AC0813_L`, `AC0813_M`, `AC0831_M`, and `AC0836_L` first.
   - `AC0811_M` is now covered by the vertical-family circle-mask fallback; keep it in the next report refresh to confirm the committed artifacts match the fixed code path.
   - The current logs repeatedly report `Im Bild ist waagrechter Strich erkennbar, aber nicht in der Beschreibung enthalten`, although these families are expected to use vertical connectors or stems.
-  - Extend primitive detection/reporting so each problematic run records whether the connector was classified as `vertical`, `horizontal`, or `ambiguous` before semantic validation fails.
+  - Primitive detection/reporting now records connector orientation classification (`vertical`/`horizontal`/`ambiguous`) plus candidate counts in semantic mismatch logs before validation fails.
 
 - [ ] Harden circle detection for small AC08 variants before the semantic gate runs.
   - `AC0811_L` is treated as a regression-safe good conversion anchor and should remain out of the weak-family backlog unless a future report explicitly regresses it.

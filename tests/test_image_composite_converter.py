@@ -155,6 +155,7 @@ def test_detect_semantic_primitives_detects_vertical_connector_without_arm() -> 
     assert observed["circle"] is True
     assert observed["stem"] is True
     assert observed["arm"] is False
+    assert observed["connector_orientation"] == "vertical"
 
 
 def test_foreground_mask_keeps_tiny_plain_ring_pixels() -> None:
@@ -1528,6 +1529,21 @@ def test_run_iteration_pipeline_writes_failed_best_attempt_artifacts_for_semanti
     )
     monkeypatch.setattr(
         image_composite_converter.Action,
+        "_detect_semantic_primitives",
+        staticmethod(
+            lambda *_args, **_kwargs: {
+                "circle": True,
+                "stem": True,
+                "arm": False,
+                "text": False,
+                "connector_orientation": "vertical",
+                "horizontal_line_candidates": 0,
+                "vertical_line_candidates": 2,
+            }
+        ),
+    )
+    monkeypatch.setattr(
+        image_composite_converter.Action,
         "generate_badge_svg",
         staticmethod(lambda w, h, _p: f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}"/>'),
     )
@@ -1561,6 +1577,7 @@ def test_run_iteration_pipeline_writes_failed_best_attempt_artifacts_for_semanti
     assert "semantic_audit_status=semantic_mismatch" in log_text
     assert "semantic_audit_derived_elements=SEMANTIC: Kreis ohne Buchstabe" in log_text
     assert "semantic_audit_mismatch_reason=circle missing" in log_text
+    assert "semantic_connector_classification=vertical;horizontal_candidates=0;vertical_candidates=2" in log_text
 
 
 def test_write_semantic_audit_report_persists_csv_and_json(tmp_path: Path) -> None:

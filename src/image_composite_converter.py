@@ -7505,7 +7505,7 @@ class Action:
         return issues
 
     @staticmethod
-    def _detect_semantic_primitives(img_orig: np.ndarray) -> dict[str, bool]:
+    def _detect_semantic_primitives(img_orig: np.ndarray) -> dict[str, bool | int | str]:
         """Detect coarse semantic primitives directly from the raw bitmap.
 
         This guard is intentionally conservative: it should flag obvious non-badge
@@ -7514,7 +7514,15 @@ class Action:
         """
         h, w = img_orig.shape[:2]
         if h <= 0 or w <= 0:
-            return {"circle": False, "arm": False, "text": False}
+            return {
+                "circle": False,
+                "stem": False,
+                "arm": False,
+                "text": False,
+                "connector_orientation": "none",
+                "horizontal_line_candidates": 0,
+                "vertical_line_candidates": 0,
+            }
 
         gray = cv2.cvtColor(img_orig, cv2.COLOR_BGR2GRAY)
         fg_mask = Action._foreground_mask(img_orig).astype(np.uint8)
@@ -7576,6 +7584,10 @@ class Action:
         # Connector cues: long near-axis-aligned segment via probabilistic Hough.
         has_arm = False
         has_stem = False
+        horizontal_candidates = 0
+        vertical_candidates = 0
+        strongest_horizontal = 0
+        strongest_vertical = 0
         edges = cv2.Canny(gray, 45, 140)
         lines = cv2.HoughLinesP(
             edges,
@@ -7642,8 +7654,12 @@ class Action:
                             continue
                 if is_horizontal:
                     has_arm = True
+                    horizontal_candidates += 1
+                    strongest_horizontal = max(strongest_horizontal, dx)
                 if is_vertical:
                     has_stem = True
+                    vertical_candidates += 1
+                    strongest_vertical = max(strongest_vertical, dy)
                 if has_arm and has_stem:
                     break
 
@@ -7682,11 +7698,29 @@ class Action:
                 and total_small_area >= max(6, int(round(float(min_side) * 0.45)))
             )
 
+        connector_orientation = "none"
+        if strongest_horizontal > 0 and strongest_vertical > 0:
+            shorter = min(strongest_horizontal, strongest_vertical)
+            longer = max(strongest_horizontal, strongest_vertical)
+            if shorter / max(1.0, float(longer)) >= 0.75:
+                connector_orientation = "ambiguous"
+            elif strongest_vertical > strongest_horizontal:
+                connector_orientation = "vertical"
+            else:
+                connector_orientation = "horizontal"
+        elif strongest_vertical > 0:
+            connector_orientation = "vertical"
+        elif strongest_horizontal > 0:
+            connector_orientation = "horizontal"
+
         return {
             "circle": bool(has_circle),
             "stem": bool(has_stem),
             "arm": bool(has_arm),
             "text": bool(has_text),
+            "connector_orientation": connector_orientation,
+            "horizontal_line_candidates": int(horizontal_candidates),
+            "vertical_line_candidates": int(vertical_candidates),
         }
 
     @staticmethod
@@ -8322,7 +8356,16 @@ def run_iteration_pipeline(
         if semantic_issues:
             failed_svg = Action.generate_badge_svg(w, h, badge_params)
             _write_attempt_artifacts(failed_svg, failed=True)
+            structural = Action._detect_semantic_primitives(perc.img)
+            connector_orientation = str(structural.get("connector_orientation", "unknown"))
+            connector_debug_line = (
+                "semantic_connector_classification="
+                f"{connector_orientation};"
+                f"horizontal_candidates={int(structural.get('horizontal_line_candidates', 0) or 0)};"
+                f"vertical_candidates={int(structural.get('vertical_line_candidates', 0) or 0)}"
+            )
             print("[ERROR] Semantik-Abgleich fehlgeschlagen:")
+            print(f"  - {connector_debug_line}")
             for issue in semantic_issues:
                 print(f"  - {issue}")
             if semantic_audit_row is not None:
@@ -8342,6 +8385,7 @@ def run_iteration_pipeline(
                     "status=semantic_mismatch",
                     f"best_attempt_svg={base}_failed.svg",
                     f"best_attempt_diff={base}_failed_diff.png",
+                    connector_debug_line,
                     *(
                         [
                             f"semantic_audit_status={semantic_audit_row.get('status', '')}",
