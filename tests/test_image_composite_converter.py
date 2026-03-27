@@ -4633,6 +4633,47 @@ def test_validate_semantic_alignment_accepts_ac0814_small_horizontal_connector()
     assert "Strukturprüfung: Kein belastbarer waagrechter Linien-Kandidat im Rohbild erkannt" not in issues
 
 
+def test_validate_semantic_alignment_accepts_ac0870_small_circle_text_variant() -> None:
+    """Tiny AC0870_S crops should retain circle+text semantics despite soft raster edges."""
+    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+        pytest.skip("numpy/cv2 not available in this environment")
+
+    cv2 = image_composite_converter.cv2
+    img = cv2.imread("artifacts/images_to_convert/AC0870_S.jpg")
+    assert img is not None
+
+    params = Action.make_badge_params(img.shape[1], img.shape[0], "AC0870", img)
+    issues = Action.validate_semantic_description_alignment(
+        img,
+        ["SEMANTIC: Kreis + Buchstabe VOC"],
+        params,
+    )
+
+    assert "Beschreibung erwartet Kreis, im Bild aber nicht robust erkennbar" not in issues
+    assert "Strukturprüfung: Kein belastbarer Kreis-Kandidat im Rohbild erkannt" not in issues
+
+
+def test_detect_semantic_primitives_reports_family_circle_fallback_source(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Semantic primitive detection should expose when AC08 small-family fallback provided circle evidence."""
+    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+        pytest.skip("numpy/cv2 not available in this environment")
+
+    cv2 = image_composite_converter.cv2
+    img = cv2.imread("artifacts/images_to_convert/AC0814_S.jpg")
+    assert img is not None
+
+    params = Action.make_badge_params(img.shape[1], img.shape[0], "AC0814", img)
+    assert params is not None
+
+    monkeypatch.setattr(cv2, "HoughCircles", lambda *args, **kwargs: None)
+    monkeypatch.setattr(Action, "_circle_from_foreground_mask", staticmethod(lambda _mask: None))
+
+    structural = Action._detect_semantic_primitives(img, params)
+
+    assert structural["circle"] is True
+    assert structural["circle_detection_source"] == "family_fallback"
+
+
 def test_validate_semantic_alignment_accepts_merged_co2_blob_for_ac0831_artifact() -> None:
     """Merged JPEG text blobs should still count as valid CO₂ evidence for AC0831_L."""
     if image_composite_converter.np is None or image_composite_converter.cv2 is None:

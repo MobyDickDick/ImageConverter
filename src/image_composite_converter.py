@@ -7505,7 +7505,10 @@ class Action:
         return issues
 
     @staticmethod
-    def _detect_semantic_primitives(img_orig: np.ndarray) -> dict[str, bool | int | str]:
+    def _detect_semantic_primitives(
+        img_orig: np.ndarray,
+        badge_params: dict | None = None,
+    ) -> dict[str, bool | int | str]:
         """Detect coarse semantic primitives directly from the raw bitmap.
 
         This guard is intentionally conservative: it should flag obvious non-badge
@@ -7519,6 +7522,7 @@ class Action:
                 "stem": False,
                 "arm": False,
                 "text": False,
+                "circle_detection_source": "none",
                 "connector_orientation": "none",
                 "horizontal_line_candidates": 0,
                 "vertical_line_candidates": 0,
@@ -7527,6 +7531,9 @@ class Action:
         gray = cv2.cvtColor(img_orig, cv2.COLOR_BGR2GRAY)
         fg_mask = Action._foreground_mask(img_orig).astype(np.uint8)
         min_side = max(1, min(h, w))
+        small_variant = bool((badge_params or {}).get("ac08_small_variant_mode", False))
+        symbol_hint = str((badge_params or {}).get("badge_symbol_name", "")).upper()
+        circle_detection_source = "none"
 
         # Circle cue: require at least one plausible Hough circle.
         circles = cv2.HoughCircles(
@@ -7573,6 +7580,7 @@ class Action:
 
                 has_circle = True
                 circle_geom = (float(cx), float(cy), float(r))
+                circle_detection_source = "hough"
                 break
 
         if not has_circle:
@@ -7580,6 +7588,38 @@ class Action:
             if fallback_circle is not None:
                 has_circle = True
                 circle_geom = fallback_circle
+                circle_detection_source = "foreground_mask"
+
+        if not has_circle and badge_params:
+            # `_S` AC08 families can keep a visually correct ring while Hough and
+            # contour-only extraction both fail due to anti-aliased compression.
+            # Validate the family template circle directly against foreground ring
+            # support so the semantic gate can still accept robust circle evidence.
+            if small_variant and symbol_hint in {"AC0811", "AC0814", "AC0870"}:
+                exp_cx = float(badge_params.get("cx", float(w) / 2.0))
+                exp_cy = float(badge_params.get("cy", float(h) / 2.0))
+                exp_r = float(badge_params.get("r", max(2.0, float(min_side) * 0.28)))
+                exp_r = float(Action._clip_scalar(exp_r, 2.0, float(min_side) * 0.60))
+                yy, xx = np.ogrid[:h, :w]
+                ring_tol = max(1.2, exp_r * 0.32)
+                ring = np.abs(np.sqrt((xx - exp_cx) ** 2 + (yy - exp_cy) ** 2) - exp_r) <= ring_tol
+                ring_count = int(np.count_nonzero(ring))
+                if ring_count > 0:
+                    support_ratio = float(np.mean(fg_mask[ring] > 0))
+                    if support_ratio >= 0.18:
+                        bins = 12
+                        coverage_bins = np.zeros(bins, dtype=np.uint8)
+                        ring_coords = np.argwhere(ring)
+                        for py, px in ring_coords:
+                            if fg_mask[py, px] <= 0:
+                                continue
+                            ang = math.atan2(float(py) - exp_cy, float(px) - exp_cx)
+                            idx = int(((ang + math.pi) / (2.0 * math.pi)) * bins) % bins
+                            coverage_bins[idx] = 1
+                        if int(np.sum(coverage_bins)) >= 5:
+                            has_circle = True
+                            circle_geom = (exp_cx, exp_cy, exp_r)
+                            circle_detection_source = "family_fallback"
 
         # Connector cues: long near-axis-aligned segment via probabilistic Hough.
         has_arm = False
@@ -7718,6 +7758,7 @@ class Action:
             "stem": bool(has_stem),
             "arm": bool(has_arm),
             "text": bool(has_text),
+            "circle_detection_source": circle_detection_source,
             "connector_orientation": connector_orientation,
             "horizontal_line_candidates": int(horizontal_candidates),
             "vertical_line_candidates": int(vertical_candidates),
@@ -7731,7 +7772,7 @@ class Action:
     ) -> list[str]:
         expected = Action._expected_semantic_presence(semantic_elements)
         expected_co2 = any("co_2" in str(elem).lower() or "co₂" in str(elem).lower() for elem in semantic_elements)
-        structural = Action._detect_semantic_primitives(img_orig)
+        structural = Action._detect_semantic_primitives(img_orig, badge_params)
         circle_mask = Action.extract_badge_element_mask(img_orig, badge_params, "circle")
         stem_mask = Action.extract_badge_element_mask(img_orig, badge_params, "stem")
         arm_mask = Action.extract_badge_element_mask(img_orig, badge_params, "arm")
@@ -8356,11 +8397,13 @@ def run_iteration_pipeline(
         if semantic_issues:
             failed_svg = Action.generate_badge_svg(w, h, badge_params)
             _write_attempt_artifacts(failed_svg, failed=True)
-            structural = Action._detect_semantic_primitives(perc.img)
+            structural = Action._detect_semantic_primitives(perc.img, badge_params)
             connector_orientation = str(structural.get("connector_orientation", "unknown"))
+            circle_source = str(structural.get("circle_detection_source", "unknown"))
             connector_debug_line = (
                 "semantic_connector_classification="
                 f"{connector_orientation};"
+                f"circle_source={circle_source};"
                 f"horizontal_candidates={int(structural.get('horizontal_line_candidates', 0) or 0)};"
                 f"vertical_candidates={int(structural.get('vertical_line_candidates', 0) or 0)}"
             )
