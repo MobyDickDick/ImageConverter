@@ -113,9 +113,14 @@ und finale Delta-Parameter.
 und liefert eine nachweisbare Fehlerverbesserung gegenüber dem Startzustand.
 
 ### A3 – Plateau/Maximum-Bereich verallgemeinern
-- [ ] Plateau-Bildung aus der Circle-Pose-Suche auf den globalen Parameterraum übertragen.
-- [ ] „Near-Optimum" formal definieren (`err <= best_err + epsilon`) und pro Runde persistieren.
-- [ ] Plateau-Statistiken ausgeben (Anzahl Punkte, Spannweite je Parameter, Stabilitätsindikator).
+- [x] Plateau-Bildung aus der Circle-Pose-Suche auf den globalen Parameterraum übertragen.
+- [x] „Near-Optimum" formal definieren (`err <= best_err + epsilon`) und pro Runde persistieren.
+- [x] Plateau-Statistiken ausgeben (Anzahl Punkte, Spannweite je Parameter, Stabilitätsindikator).
+
+Stand: umgesetzt in `Action._optimize_global_parameter_vector_sampling`. Der Lauf protokolliert die
+Near-Optimum-Definition (`epsilon=max(0.06, best_err*0.02)`), bildet pro Runde ein globales
+Plateau und loggt dessen Größe, mittlere/per-Parameter-Spannweiten sowie einen
+Stabilitätshinweis über aufeinanderfolgende Runden.
 
 **Akzeptanzkriterium:** Der Laufbericht enthält pro Runde einen expliziten Near-Optimum-Bereich
 für den globalen Vektor, nicht nur für Kreisparameter.

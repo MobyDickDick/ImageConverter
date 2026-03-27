@@ -29,7 +29,10 @@ focused on the actual project scope.
   - Added `Action._optimize_global_parameter_vector_sampling` as a reproducible baseline search that samples and shrinks multiple unlocked dimensions from `GlobalParameterVector` jointly (`cx`, `cy`, `r`, `stem_*`, `text_*`).
   - Added per-round progress logs for `best_err`, accepted candidates, and the active parameter subset, plus a final delta summary for changed dimensions.
   - Integrated the new mode into the existing optimization loop behind `enable_global_search_mode`, so the global pass can be activated without changing default conversion behavior.
-- [ ] A3: Near-Optimum-Plateau auf den globalen Parameterraum verallgemeinern.
+- [x] A3: Near-Optimum-Plateau auf den globalen Parameterraum verallgemeinern.
+  - Added a formal near-optimum definition in the global optimizer logs (`err <= best_err + epsilon`, with `epsilon=max(0.06, best_err*0.02)`).
+  - Added per-round global plateau persistence and instrumentation in `_optimize_global_parameter_vector_sampling`, including point count, per-parameter spans, mean span, and a stability hint.
+  - Added regression coverage that checks near-optimum plateau logging for multi-round global runs.
 - [ ] A4: Schwerpunkt/zentralen Repräsentanten des Plateau-Bereichs berechnen und auswählen.
 - [ ] A5: Regressionstests für globalen Suchmodus, Seeds und Constraint-Einhaltung ergänzen.
 
