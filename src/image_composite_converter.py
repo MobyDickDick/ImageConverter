@@ -8380,6 +8380,11 @@ def run_iteration_pipeline(
         with open(svg_path, "w", encoding="utf-8") as f:
             f.write(svg_content)
 
+        # Failed attempts are tracked in logs/leaderboard but should not emit
+        # additional diff artifacts.
+        if failed:
+            return
+
         render = rendered_img
         if render is None:
             render = Action.render_svg_to_numpy(svg_content, w, h)
@@ -8447,7 +8452,6 @@ def run_iteration_pipeline(
                 [
                     "status=semantic_mismatch",
                     f"best_attempt_svg={base}_failed.svg",
-                    f"best_attempt_diff={base}_failed_diff.png",
                     connector_debug_line,
                     *(
                         [
@@ -9933,9 +9937,10 @@ def convert_range(
     quality_logs: list[dict[str, object]] = []
     result_map: dict[str, dict[str, object]] = {}
     batch_failures: list[dict[str, str]] = []
+    stop_after_failure = False
     existing_donor_rows = _load_existing_conversion_rows(out_root, folder_path)
 
-    def _convert_one(filename: str, iteration_budget: int, badge_rounds: int) -> dict[str, object] | None:
+    def _convert_one(filename: str, iteration_budget: int, badge_rounds: int) -> tuple[dict[str, object] | None, bool]:
         image_path = os.path.join(folder_path, filename)
         base = os.path.splitext(filename)[0]
         log_file = os.path.join(reports_out_dir, f"{base}_element_validation.log")
@@ -9964,7 +9969,7 @@ def convert_range(
             with open(log_file, "w", encoding="utf-8") as f:
                 f.write(f"status=batch_error\nfilename={filename}\nreason={type(exc).__name__}\ndetails={exc}\n")
             print(f"[WARN] {filename}: Batchlauf setzt nach Fehler fort ({type(exc).__name__}: {exc})")
-            return None
+            return None, True
         if not res:
             details = _read_validation_log_details(log_file)
             status = details.get("status", "")
@@ -9979,7 +9984,20 @@ def convert_range(
                     }
                 )
                 print(f"[WARN] {filename}: Fehler protokolliert, Batchlauf wird fortgesetzt ({status}).")
-            return None
+                return None, True
+            if status == "semantic_mismatch":
+                batch_failures.append(
+                    {
+                        "filename": filename,
+                        "status": status,
+                        "reason": "semantic_mismatch",
+                        "details": details.get("issue", ""),
+                        "log_file": os.path.basename(log_file),
+                    }
+                )
+                print(f"[WARN] {filename}: Semantischer Fehlmatch, Batchlauf stoppt nach diesem Fehler.")
+                return None, True
+            return None, False
 
         _base, _desc, params, best_iter, best_error = res
         details = _read_validation_log_details(log_file)
@@ -10016,11 +10034,14 @@ def convert_range(
             "h": int(height),
             "base": get_base_name_from_file(os.path.splitext(filename)[0]).upper(),
             "variant": os.path.splitext(filename)[0].upper(),
-        }
+        }, False
 
     # Initial conversion pass for all forms.
     for filename in process_files:
-        row = _convert_one(filename, iteration_budget=base_iterations, badge_rounds=6)
+        row, failed = _convert_one(filename, iteration_budget=base_iterations, badge_rounds=6)
+        if failed:
+            stop_after_failure = True
+            break
         if row is None:
             continue
 
@@ -10079,6 +10100,8 @@ def convert_range(
     # successful outputs (replace only when strictly better).
     strategy_logs: list[dict[str, object]] = []
     for pass_idx in range(1, max_quality_passes + 1):
+        if stop_after_failure:
+            break
         Action.STOCHASTIC_SEED_OFFSET = pass_idx
         current_rows = [
             row
@@ -10104,7 +10127,10 @@ def convert_range(
         for row in candidates:
             filename = str(row["filename"])
             adaptive_iteration_budget = _adaptive_iteration_budget_for_quality_row(row, iteration_budget)
-            new_row = _convert_one(filename, iteration_budget=adaptive_iteration_budget, badge_rounds=badge_rounds)
+            new_row, failed = _convert_one(filename, iteration_budget=adaptive_iteration_budget, badge_rounds=badge_rounds)
+            if failed:
+                stop_after_failure = True
+                break
             if new_row is None:
                 continue
 
@@ -10132,7 +10158,7 @@ def convert_range(
             )
 
         # Stop as soon as a full pass yields no strict improvement.
-        if not improved_in_pass:
+        if stop_after_failure or not improved_in_pass:
             break
 
     _write_quality_pass_report(reports_out_dir, quality_logs)
@@ -11420,6 +11446,39 @@ def _format_successful_conversion_manifest_line(existing_line: str, metrics: dic
     return line
 
 
+def _latest_failed_conversion_manifest_entry(reports_out_dir: str) -> dict[str, object] | None:
+    """Return the most recent failed conversion as a manifest-like row."""
+    summary_path = Path(reports_out_dir) / "batch_failure_summary.csv"
+    if not summary_path.exists():
+        return None
+
+    latest_row: dict[str, str] | None = None
+    try:
+        with summary_path.open("r", encoding="utf-8", newline="") as f:
+            reader = csv.DictReader(f, delimiter=";")
+            for row in reader:
+                filename = str(row.get("filename", "")).strip()
+                status = str(row.get("status", "")).strip().lower()
+                if not filename or status not in {"render_failure", "batch_error", "semantic_mismatch"}:
+                    continue
+                latest_row = row
+    except OSError:
+        return None
+
+    if latest_row is None:
+        return None
+
+    variant = Path(str(latest_row.get("filename", "")).strip()).stem.upper()
+    if not variant:
+        return None
+
+    return {
+        "variant": variant,
+        "status": "failed",
+        "failure_reason": str(latest_row.get("reason", "")).strip(),
+    }
+
+
 def update_successful_conversions_manifest_with_metrics(
     folder_path: str,
     svg_out_dir: str,
@@ -11493,6 +11552,23 @@ def update_successful_conversions_manifest_with_metrics(
                     accepted_metrics_by_variant[variant],
                 )
             )
+
+    failed_entry = _latest_failed_conversion_manifest_entry(reports_out_dir)
+    updated_without_failed = [
+        line
+        for line in updated_lines
+        if "status=failed" not in line.lower()
+    ]
+    updated_lines = updated_without_failed
+    if failed_entry is not None:
+        failed_variant = str(failed_entry.get("variant", "")).strip().upper()
+        failure_reason = str(failed_entry.get("failure_reason", "")).strip()
+        if updated_lines and updated_lines[-1].strip():
+            updated_lines.append("")
+        failed_line = f"{failed_variant} ; status=failed"
+        if failure_reason:
+            failed_line += f" ; reason={failure_reason}"
+        updated_lines.append(failed_line)
 
     resolved_manifest_path.write_text('\n'.join(updated_lines) + '\n', encoding='utf-8')
     return resolved_manifest_path, metrics_rows
