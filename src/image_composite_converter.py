@@ -4487,13 +4487,14 @@ class Action:
             )
 
         if name == "AC0835":
-            defaults = Action._apply_voc_label(Action._default_ac0870_params(w, h))
+            # AC0835 belongs to the right-arm VOC connector family.
+            defaults = Action._apply_voc_label(Action._default_ac0814_params(w, h))
             if img is None:
                 return Action._finalize_ac08_style(name, Action._tune_ac0835_voc_badge(defaults, w, h))
             return Action._finalize_ac08_style(
                 name,
                 Action._tune_ac0835_voc_badge(
-                    Action._apply_voc_label(Action._fit_semantic_badge_from_image(img, defaults)),
+                    Action._fit_ac0814_params_from_image(img, defaults),
                     w,
                     h,
                 ),
@@ -4516,10 +4517,12 @@ class Action:
             )
 
         if name == "AC0838":
-            defaults = Action._apply_voc_label(Action._default_ac0813_params(w, h))
+            # AC0838 is part of the right-arm VOC family (same geometry class as
+            # AC0814/AC0839), not the top-stem family.
+            defaults = Action._apply_voc_label(Action._default_ac0814_params(w, h))
             if img is None:
                 return Action._finalize_ac08_style(name, defaults)
-            return Action._finalize_ac08_style(name, Action._fit_ac0813_params_from_image(img, defaults))
+            return Action._finalize_ac08_style(name, Action._fit_ac0814_params_from_image(img, defaults))
 
         if name == "AC0839":
             defaults = Action._apply_voc_label(Action._default_ac0814_params(w, h))
