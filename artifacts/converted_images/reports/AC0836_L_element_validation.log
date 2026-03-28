@@ -1,6 +1,6 @@
-run-meta: run_seed=838873861 pass_seed_offset=4 nonce_ns=1774710401560410300
+run-meta: run_seed=689926997 pass_seed_offset=0 nonce_ns=1774724372581965800
 status=semantic_ok
-redraw_variation: seed=846560657930 changed_params=cx:16.500->16.372 | cy:13.500->13.757 | r:11.000->11.043 | stroke_circle:1.000->1.076 | stem_width:1.000->0.907
+redraw_variation: seed=696294824553 changed_params=cx:16.500->16.511 | cy:13.500->13.245 | r:11.000->10.836 | stroke_circle:1.000->0.912 | stem_width:1.000->1.093
 semantic-guard: Textmodus aktiv (voc).
 Runde 1: elementweise Validierung gestartet
 circle: Fehler=147.823
@@ -56,9 +56,9 @@ text: Breiten-Bracketing keine relevante Änderung (voc_font_scale: 0.956); Kand
 Runde 4: Gesamtfehler=31.318
 stagnation_detected: identischer Parameter-Fingerprint und praktisch unveränderter Gesamtfehler
 stopped_due_to_stagnation: Validierung vorzeitig beendet
-circle: Farb-Stochastic-Survivor aktiviert (fill_gray=190, err=11238.000)
-circle: Farb-Bracketing fill_gray 242->190; Kandidaten=186->11241.000, 200->11310.000, 210->11462.000, 220->11675.000, 226->11839.000, 230->11966.000, 234->12098.000, 240->12321.000, 242->12417.000, 250->12952.000, 255->13320.000
-circle: Farb-Bracketing stroke_gray 127->171; Kandidaten=95->11535.000, 96->11518.000, 111->11356.000, 112->11348.000, 119->11293.000, 127->11238.000, 128->11240.000, 135->11191.000, 143->11157.000, 144->11155.000, 152->11141.000, 159->11135.000, 160->11135.000, 171->11131.000, 186->11157.000
+circle: Farb-Stochastic-Survivor aktiviert (fill_gray=188, err=11238.000)
+circle: Farb-Bracketing fill_gray 242->188; Kandidaten=186->11241.000, 200->11310.000, 210->11462.000, 220->11675.000, 226->11839.000, 230->11966.000, 234->12098.000, 240->12321.000, 242->12417.000, 250->12952.000, 255->13320.000
+circle: Farb-Bracketing stroke_gray 127->171; Kandidaten=95->11534.000, 96->11519.000, 111->11360.000, 112->11346.000, 119->11293.000, 127->11238.000, 128->11238.000, 135->11190.000, 143->11157.000, 144->11157.000, 152->11140.000, 159->11138.000, 160->11131.000, 171->11130.000, 186->11154.000
 circle: Farboptimierung in Abschlussphase angewendet
 stem: Farb-Stochastic-Survivor aktiviert (stem_gray=225, err=130.989)
 stem: Farb-Bracketing stem_gray 127->225; Kandidaten=95->182.484, 96->182.047, 111->175.630, 112->175.213, 119->172.213, 127->168.797, 128->168.359, 135->165.359, 143->161.943, 144->161.505, 152->158.130, 159->155.422, 160->155.047, 171->150.880, 225->130.989

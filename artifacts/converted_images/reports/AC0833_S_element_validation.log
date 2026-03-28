@@ -1,7 +1,6 @@
-run-meta: run_seed=838873861 pass_seed_offset=0 nonce_ns=1774707017789058800
+run-meta: run_seed=689926997 pass_seed_offset=0 nonce_ns=1774724399177303700
 status=semantic_mismatch
 best_attempt_svg=AC0833_S_failed.svg
-best_attempt_diff=AC0833_S_failed_diff.png
 semantic_connector_classification=vertical;circle_source=hough;horizontal_candidates=0;vertical_candidates=3
 issue=Im Bild ist senkrechter Strich erkennbar, aber nicht in der Beschreibung enthalten
 issue=Beschreibung erwartet waagrechter Strich, im Bild aber nicht robust erkennbar
