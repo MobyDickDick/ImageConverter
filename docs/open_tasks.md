@@ -17,6 +17,15 @@ focused on the actual project scope.
 - The refresh run currently covers the most recently touched connector/circle families present in `artifacts/converted_images/reports` (`AC0811`, `AC0832`, `AC0835`, `AC0836`, `AC0870`, `AC0882`).
 - Continue to add new work items here before implementation starts, then mark them in-place when they are done.
 
+## Next tasks (added 2026-03-28)
+
+- [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.
+  - `_create_diff_image_without_cv2` nutzt jetzt Context-Manager für beide `fitz.open(...)` Dokumente, damit Batch-Läufe keine unnötig offenen MuPDF-Dokumente ansammeln.
+  - Ziel: Stabilere AC08-Serienläufe ohne native MuPDF-Stackoverflow-Ausreißer durch Ressourcenaufbau über viele Dateien.
+- [ ] B2: AC08-Batchlauf mit vollständigem Bereich `AC0800..AC0899` nach B1 erneut ausführen und Crash-Freiheit dokumentieren.
+  - Ergebnis in `artifacts/converted_images/reports` mit Logreferenz festhalten.
+- [ ] B3: Deterministischen Diagnosemodus für die Dateireihenfolge ergänzen (ohne `shuffle`), um schwer reproduzierbare Batchfehler schneller zu isolieren.
+
 
 
 ## Kelle-/Optimierungs-Backlog (neu aus dem Umsetzungscheck)
