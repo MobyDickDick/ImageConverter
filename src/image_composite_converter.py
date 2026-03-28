@@ -1495,11 +1495,11 @@ class Reflection:
             else:
                 heuristic_elements.append("SEMANTIC: Kreis + Buchstabe")
                 params["label"] = "M" if base_name.upper() == "AR0100" else "T"
-            if base_name.upper() in {"AC0810", "AC0814", "AC0833", "AC0834", "AC0838", "AC0839"}:
+            if base_name.upper() in {"AC0810", "AC0814", "AC0834", "AC0838", "AC0839"}:
                 family_elements.append("SEMANTIC: waagrechter Strich rechts vom Kreis")
             if base_name.upper() in {"AC0811", "AC0881", "AC0831", "AC0836"}:
                 family_elements.append("SEMANTIC: senkrechter Strich hinter dem Kreis")
-            if base_name.upper() in {"AC0813"}:
+            if base_name.upper() in {"AC0813", "AC0833"}:
                 family_elements.append("SEMANTIC: senkrechter Strich oben vom Kreis")
             if base_name.upper() in {"AC0812", "AC0832", "AC0837", "AC0882"}:
                 family_elements.append("SEMANTIC: waagrechter Strich links vom Kreis")
@@ -2246,7 +2246,7 @@ class Action:
     def _tune_ac08_right_connector_family(name: str, params: dict) -> dict:
         """Apply shared guardrails for mirrored right-connector AC08 families.
 
-        Aufgabe 4.2 groups AC0810, AC0814, AC0833, AC0834, AC0838 and AC0839
+        Aufgabe 4.2 groups AC0810, AC0814, AC0834, AC0838 and AC0839
         because they all place the circle on the left and extend the connector
         toward the right canvas edge. Their common regressions mirror the left
         connector family:
@@ -2259,7 +2259,7 @@ class Action:
         """
         p = dict(params)
         symbol_name = get_base_name_from_file(str(name)).upper().split("_", 1)[0]
-        if symbol_name not in {"AC0810", "AC0814", "AC0833", "AC0834", "AC0838", "AC0839"}:
+        if symbol_name not in {"AC0810", "AC0814", "AC0834", "AC0838", "AC0839"}:
             return p
 
         p["connector_family_group"] = "ac08_right_connector"
@@ -2376,7 +2376,7 @@ class Action:
     def _tune_ac08_vertical_connector_family(name: str, params: dict) -> dict:
         """Apply shared guardrails for AC08 families with vertical connectors.
 
-        Aufgabe 4.3 groups AC0811, AC0813, AC0831, AC0836 and AC0881 because
+        Aufgabe 4.3 groups AC0811, AC0813, AC0831, AC0833, AC0836 and AC0881 because
         they all depend on a vertical connector staying centered relative to the
         circle. Their main shared regressions are:
         - the stem/arm drifting sideways relative to the circle,
@@ -2385,7 +2385,7 @@ class Action:
         """
         p = dict(params)
         symbol_name = get_base_name_from_file(str(name)).upper().split("_", 1)[0]
-        if symbol_name not in {"AC0811", "AC0813", "AC0831", "AC0836", "AC0881"}:
+        if symbol_name not in {"AC0811", "AC0813", "AC0831", "AC0833", "AC0836", "AC0881"}:
             return p
 
         p["connector_family_group"] = "ac08_vertical_connector"
@@ -2393,7 +2393,7 @@ class Action:
         if symbol_name in {"AC0811", "AC0831", "AC0836", "AC0881"}:
             p["stem_enabled"] = True
             p.pop("arm_enabled", None)
-        elif symbol_name == "AC0813":
+        elif symbol_name in {"AC0813", "AC0833"}:
             p["arm_enabled"] = True
         p["lock_circle_cx"] = True
         p["lock_circle_cy"] = True
@@ -3706,6 +3706,26 @@ class Action:
         arm_stroke = float(max(1.0, p.get("arm_stroke", Action.AC08_STROKE_WIDTH_PX)))
         attach_offset = max(0.0, arm_stroke / 2.0)
         canvas_width = max(float(w), float(p.get("arm_x2", 0.0) or 0.0), float(p.get("width", 0.0) or 0.0), float(p.get("badge_width", 0.0) or 0.0), cx + r)
+        ratio = float(max(0.0, min(1.0, float(p.get("arm_len_min_ratio", 0.75)))))
+        requested_min_len = float(max(1.0, float(p.get("arm_len_min", 1.0))))
+        requested_min_len = float(min(requested_min_len, canvas_width * 0.35))
+        semantic_min_len = float(
+            max(
+                requested_min_len,
+                ratio * max(1.0, canvas_width * 0.20),
+            )
+        )
+        if str(p.get("text_mode", "")).lower() in {"co2", "voc"}:
+            semantic_min_len = float(max(semantic_min_len, canvas_width * 0.20))
+        arm_start = cx + r + attach_offset
+        max_arm_start = max(0.0, canvas_width - semantic_min_len)
+        if arm_start > max_arm_start:
+            cx = max(r + attach_offset, cx - (arm_start - max_arm_start))
+            p["cx"] = cx
+        max_r_for_semantic_span = max(1.0, canvas_width - semantic_min_len - attach_offset - cx)
+        if r > max_r_for_semantic_span:
+            r = max_r_for_semantic_span
+            p["r"] = r
         arm_x1 = min(canvas_width, cx + r + attach_offset)
 
         p["arm_enabled"] = True
@@ -3716,9 +3736,8 @@ class Action:
         p["arm_stroke"] = arm_stroke
 
         arm_len = float(max(0.0, canvas_width - arm_x1))
-        ratio = float(max(0.0, min(1.0, float(p.get("arm_len_min_ratio", 0.75)))))
         p["arm_len_min_ratio"] = ratio
-        p["arm_len_min"] = float(max(1.0, float(p.get("arm_len_min", 1.0)), arm_len * ratio))
+        p["arm_len_min"] = float(max(semantic_min_len, arm_len * ratio))
         return p
 
     @staticmethod
@@ -6263,7 +6282,7 @@ class Action:
         # from the fitted circle before final SVG serialization.
         if normalized_base in {"AC0812", "AC0837", "AC0882"} or expects_left_arm:
             return Action._enforce_left_arm_badge_geometry(params, w, h)
-        if normalized_base in {"AC0810", "AC0814", "AC0833", "AC0834", "AC0838", "AC0839"} or expects_right_arm:
+        if normalized_base in {"AC0810", "AC0814", "AC0834", "AC0838", "AC0839"} or expects_right_arm:
             return Action._enforce_right_arm_badge_geometry(params, w, h)
         return params
 
@@ -7852,13 +7871,15 @@ class Action:
                 return False
             if element == "stem":
                 ratio = height / max(1.0, width)
-                if small_variant:
-                    return pixel_count >= 4 and ratio >= 1.35
+                connector_text_badge = str(badge_params.get("text_mode", "")).lower() in {"co2", "voc"}
+                if small_variant or connector_text_badge:
+                    return pixel_count >= 4 and ratio >= 1.30
                 return pixel_count >= 5 and ratio >= 2.2
             if element == "arm":
                 ratio = width / max(1.0, height)
-                if small_variant:
-                    return pixel_count >= 4 and ratio >= 1.35
+                connector_text_badge = str(badge_params.get("text_mode", "")).lower() in {"co2", "voc"}
+                if small_variant or connector_text_badge:
+                    return pixel_count >= 4 and ratio >= 1.30
                 return pixel_count >= 5 and ratio >= 2.2
             if element == "text":
                 return pixel_count >= max(4, int(round(min(width, height) * 0.35))) and density >= 0.08

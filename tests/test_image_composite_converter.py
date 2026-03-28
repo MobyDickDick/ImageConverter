@@ -802,13 +802,13 @@ def test_parse_semantic_badge_layout_overrides_centers_full_co2_cluster() -> Non
     assert float(overrides["co2_dx"]) == 0.0
 
 
-def test_parse_description_marks_ac0833_with_right_horizontal_arm() -> None:
-    """AC0833 belongs to the right-arm CO₂ family and must include that semantic element."""
+def test_parse_description_marks_ac0833_with_top_vertical_connector() -> None:
+    """AC0833 belongs to the top-connector CO₂ family and must include that semantic element."""
     ref = image_composite_converter.Reflection({})
 
     _desc, params = ref.parse_description("AC0833", "AC0833_S.jpg")
 
-    assert "SEMANTIC: waagrechter Strich rechts vom Kreis" in list(params.get("elements", []))
+    assert "SEMANTIC: senkrechter Strich oben vom Kreis" in list(params.get("elements", []))
 
 
 def test_make_badge_params_ac0833_uses_superscript_index() -> None:
@@ -818,6 +818,17 @@ def test_make_badge_params_ac0833_uses_superscript_index() -> None:
     assert params is not None
     assert params.get("text_mode") == "co2"
     assert params.get("co2_index_mode") == "superscript"
+
+
+def test_make_badge_params_ac0833_uses_top_vertical_connector_geometry() -> None:
+    """AC0833 defaults must use the top-stem geometry family."""
+    params = image_composite_converter.Action.make_badge_params(24, 24, "AC0833")
+
+    assert params is not None
+    assert bool(params.get("arm_enabled", False))
+    assert abs(float(params.get("arm_x2", 0.0)) - float(params.get("arm_x1", 0.0))) <= abs(
+        float(params.get("arm_y2", 0.0)) - float(params.get("arm_y1", 0.0))
+    )
 
 
 def test_finalize_ac0833_keeps_superscript_after_fit() -> None:
