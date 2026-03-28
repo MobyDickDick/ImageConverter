@@ -11412,6 +11412,20 @@ def _is_successful_conversion_candidate_better(
     return improved
 
 
+def _merge_successful_conversion_metrics(
+    baseline: dict[str, object],
+    override: dict[str, object],
+) -> dict[str, object]:
+    """Merge ``override`` into ``baseline`` while keeping row-level defaults."""
+    merged = dict(baseline)
+    for key, value in override.items():
+        if key == 'variant':
+            continue
+        merged[key] = value
+    merged['variant'] = str(override.get('variant', baseline.get('variant', ''))).strip().upper()
+    return merged
+
+
 def _format_successful_conversion_manifest_line(existing_line: str, metrics: dict[str, object]) -> str:
     """Render one enriched successful-conversions manifest line."""
     if not _successful_conversion_metrics_available(metrics):
@@ -11421,7 +11435,7 @@ def _format_successful_conversion_manifest_line(existing_line: str, metrics: dic
     prefix, comment = existing_line, ''
     if '#' in existing_line:
         prefix, comment = existing_line.split('#', 1)
-        comment = '#' + comment.strip()
+        comment = '#' + comment.rstrip('\n').rstrip('\r').rstrip()
     prefix = prefix.strip()
     if not prefix:
         return existing_line.rstrip('\n')
@@ -11513,17 +11527,22 @@ def update_successful_conversions_manifest_with_metrics(
     )
 
     accepted_metrics_by_variant: dict[str, dict[str, object]] = {}
+    effective_metrics_rows: list[dict[str, object]] = []
     accepted_improved_variants: set[str] = set()
     for row in metrics_rows:
         variant = str(row['variant']).upper()
         previous_metrics = previous_manifest_metrics.get(variant)
         if _is_successful_conversion_candidate_better(previous_metrics, row):
             accepted_metrics_by_variant[variant] = row
+            effective_metrics_rows.append(row)
             accepted_improved_variants.add(variant)
             _store_successful_conversion_snapshot(variant, row, svg_out_dir, reports_out_dir)
         else:
             if previous_metrics is not None:
                 accepted_metrics_by_variant[variant] = previous_metrics
+                effective_metrics_rows.append(_merge_successful_conversion_metrics(row, previous_metrics))
+            else:
+                effective_metrics_rows.append(row)
             _restore_successful_conversion_snapshot(variant, svg_out_dir, reports_out_dir)
 
     updated_lines: list[str] = []
@@ -11537,9 +11556,6 @@ def update_successful_conversions_manifest_with_metrics(
         manifest_variants.add(variant)
         metrics = accepted_metrics_by_variant.get(variant)
         if metrics is None:
-            updated_lines.append(raw_line)
-            continue
-        if variant not in accepted_improved_variants:
             updated_lines.append(raw_line)
             continue
         updated_lines.append(_format_successful_conversion_manifest_line(raw_line, metrics))
@@ -11578,7 +11594,7 @@ def update_successful_conversions_manifest_with_metrics(
         updated_lines.append(failed_line)
 
     resolved_manifest_path.write_text('\n'.join(updated_lines) + '\n', encoding='utf-8')
-    return resolved_manifest_path, metrics_rows
+    return resolved_manifest_path, _sorted_successful_conversion_metrics_rows(effective_metrics_rows)
 
 def _sorted_successful_conversion_metrics_rows(
     metrics: list[dict[str, object]],
