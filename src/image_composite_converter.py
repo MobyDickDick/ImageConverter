@@ -27,6 +27,7 @@ from pathlib import Path
 import importlib
 import io
 import struct
+import statistics
 from src.overview_tiles import generate_conversion_overviews
 
 OPTIONAL_DEPENDENCY_ERRORS: dict[str, str] = {}
@@ -9202,6 +9203,39 @@ def _quality_sort_key(row: dict[str, object]) -> float:
     return float("inf")
 
 
+
+
+def _compute_successful_conversions_error_threshold(
+    rows: list[dict[str, object]],
+    successful_variants: list[str] | tuple[str, ...] | None = None,
+) -> float:
+    """Return mean(error_per_pixel) + 2*std(error_per_pixel) for successful rows.
+
+    The successful set is sourced from ``successful_conversions.txt`` (via
+    ``SUCCESSFUL_CONVERSIONS``) unless explicitly provided. Returns ``inf`` when
+    no finite samples are available.
+    """
+    selected = {str(v).strip().upper() for v in (successful_variants or SUCCESSFUL_CONVERSIONS) if str(v).strip()}
+    if not selected:
+        return float("inf")
+
+    values: list[float] = []
+    for row in rows:
+        variant = str(row.get("variant", "")).strip().upper()
+        if variant not in selected:
+            continue
+        err = float(row.get("error_per_pixel", float("inf")))
+        if math.isfinite(err):
+            values.append(err)
+
+    if not values:
+        return float("inf")
+
+    mean_val = float(statistics.fmean(values))
+    std_val = float(statistics.pstdev(values)) if len(values) > 1 else 0.0
+    return float(mean_val + 2.0 * std_val)
+
+
 def _select_middle_lower_tercile(rows: list[dict[str, object]]) -> list[dict[str, object]]:
     if len(rows) < 3:
         return []
@@ -10122,14 +10156,21 @@ def convert_range(
     initial_top_tercile = ranked_rows[:first_cut]
     initial_threshold = float(initial_top_tercile[-1]["error_per_pixel"]) if initial_top_tercile else float("inf")
 
+    successful_threshold = _compute_successful_conversions_error_threshold(current_rows)
+    threshold_source = "successful-conversions-mean-plus-2std"
+    if not math.isfinite(successful_threshold):
+        successful_threshold = initial_threshold
+        threshold_source = "initial-first-tercile"
+
     cfg = _load_quality_config(reports_out_dir)
-    allowed_error_pp = initial_threshold
+    allowed_error_pp = successful_threshold
     cfg_value = cfg.get("allowed_error_per_pixel")
     if cfg_value is not None:
         try:
             allowed_error_pp = max(0.0, float(cfg_value))
+            threshold_source = "manual-config"
         except (TypeError, ValueError):
-            allowed_error_pp = initial_threshold
+            allowed_error_pp = successful_threshold
 
     # Global policy: do not freeze individual variants. Every quality pass keeps
     # all variants eligible so each run can re-evaluate with stochastic search
@@ -10140,7 +10181,7 @@ def convert_range(
         reports_out_dir,
         allowed_error_per_pixel=allowed_error_pp,
         skipped_variants=sorted(v for v in skip_variants if v),
-        source="manual-config" if cfg_value is not None else "initial-first-tercile",
+        source=threshold_source,
     )
 
     # Iteratively refine unresolved quality cases while preserving all already
