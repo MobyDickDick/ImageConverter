@@ -6,6 +6,7 @@ from tools.retry_failed_image_conversions import _stem_from_failed_diff_name, re
 
 
 def test_stem_from_failed_diff_name_supports_diff_suffix() -> None:
+    assert _stem_from_failed_diff_name("AC0812_failed_diff.png") == "AC0812"
     assert _stem_from_failed_diff_name("AC0812_diff_failed.png") == "AC0812"
     assert _stem_from_failed_diff_name("AC0812_failed.png") == "AC0812"
     assert _stem_from_failed_diff_name("AC0812_diff.png") is None
@@ -18,7 +19,7 @@ def test_retry_failed_conversions_creates_embedded_svg(tmp_path: Path) -> None:
     diff_dir.mkdir()
     source_dir.mkdir()
 
-    (diff_dir / "AC0001_diff_failed.png").write_bytes(b"dummy")
+    (diff_dir / "AC0001_failed_diff.png").write_bytes(b"dummy")
 
     png_bytes = (
         b"\x89PNG\r\n\x1a\n"
@@ -40,3 +41,29 @@ def test_retry_failed_conversions_creates_embedded_svg(tmp_path: Path) -> None:
     assert svg_path.exists()
     content = svg_path.read_text(encoding="utf-8")
     assert '<image href="data:image/png;base64,' in content
+
+
+def test_retry_failed_conversions_accepts_jpg_sources(tmp_path: Path) -> None:
+    diff_dir = tmp_path / "diff"
+    source_dir = tmp_path / "images"
+    output_dir = tmp_path / "svg"
+    diff_dir.mkdir()
+    source_dir.mkdir()
+
+    (diff_dir / "AC0002_failed_diff.png").write_bytes(b"dummy")
+
+    jpeg_bytes = (
+        b"\xff\xd8\xff\xe0\x00\x10JFIF\x00\x01\x01\x00\x00\x01\x00\x01\x00\x00"
+        b"\xff\xc0\x00\x11\x08\x00\x01\x00\x01\x03\x01\x11\x00\x02\x11\x00\x03\x11\x00"
+        b"\xff\xd9"
+    )
+    (source_dir / "AC0002.jpg").write_bytes(jpeg_bytes)
+
+    results = retry_failed_conversions(diff_dir=diff_dir, source_dir=source_dir, output_dir=output_dir, overwrite=False)
+
+    assert len(results) == 1
+    assert results[0].status == "recovered"
+    svg_path = output_dir / "AC0002.svg"
+    assert svg_path.exists()
+    content = svg_path.read_text(encoding="utf-8")
+    assert '<image href="data:image/jpeg;base64,' in content
