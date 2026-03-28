@@ -1,0 +1,8 @@
+run-meta: run_seed=108655535 pass_seed_offset=0 nonce_ns=1774703874714092900
+status=semantic_mismatch
+best_attempt_svg=AC0833_M_failed.svg
+best_attempt_diff=AC0833_M_failed_diff.png
+semantic_connector_classification=vertical;circle_source=hough;horizontal_candidates=0;vertical_candidates=1
+issue=Im Bild ist senkrechter Strich erkennbar, aber nicht in der Beschreibung enthalten
+issue=Beschreibung erwartet waagrechter Strich, im Bild aber nicht robust erkennbar
+issue=Strukturprüfung: Kein belastbarer waagrechter Linien-Kandidat im Rohbild erkannt

@@ -1,0 +1,45 @@
+run-meta: run_seed=108655535 pass_seed_offset=4 nonce_ns=1774704607543391100
+status=semantic_ok
+redraw_variation: seed=109753248754 changed_params=cx:10.500->10.494 | cy:10.000->10.166 | r:8.500->8.559 | stroke_circle:1.000->0.978
+semantic-guard: Textmodus aktiv (voc).
+small_variant_mode_active: reason=min_dim, min_dim=14.800, mask_dilate_px=1, text_mode=voc, arm_min_ratio=0.000, stem_min_ratio=0.000
+Runde 1: elementweise Validierung gestartet
+circle: Fehler=91.022
+circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
+circle: Mittelpunkt-Bracketing cx 10.000->11.500, cy 10.000->7.000 (best_err=68.678)
+circle: Radius-Bracketing r 7.400->8.000 (best_err=68.678, full_err=42.535); Kandidaten=6.660->68.678, 7.000->68.678, 7.500->68.678, 9.600->68.678
+text: Fehler=111.197
+text: Breiten-Bracketing voc_font_scale 0.562->1.350; Kandidaten=0.900->103.617, 1.125->104.498, 1.350->101.965, 1.650->107.439, 1.950->111.668, 2.175->108.941, 2.400->107.199
+Runde 1: Gesamtfehler=47.102
+Runde 2: elementweise Validierung gestartet
+circle: Fehler=68.677
+circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
+circle: Mittelpunkt-Bracketing cx 11.500->10.500, cy 7.000->10.000 (best_err=60.119)
+circle: Radius-Bracketing r 8.000->8.500 (best_err=60.119, full_err=37.170); Kandidaten=7.200->60.119, 7.500->60.119, 8.000->60.119, 9.600->60.119
+text: Fehler=87.938
+text: Breiten-Bracketing voc_font_scale 1.350->1.552; Kandidaten=0.900->88.536, 1.125->88.929, 1.147->88.603, 1.350->87.938, 1.552->84.271, 1.650->86.272, 1.950->91.906, 2.175->92.459, 2.400->92.343
+Runde 2: Gesamtfehler=39.225
+Runde 3: elementweise Validierung gestartet
+circle: Fehler=61.595
+circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
+circle: Mittelpunkt-Bracketing keine relevante Änderung (cx=10.500, cy=10.000, best_err=60.119)
+circle: Radius-Bracketing keine relevante Änderung (r: 8.500, best_err=60.119, full_err=39.225); Kandidaten=7.650->60.119, 8.000->60.119, 8.500->60.119, 9.600->60.119
+text: Fehler=84.271
+text: Breiten-Bracketing keine relevante Änderung (voc_font_scale: 1.552); Kandidaten=0.900->88.536, 1.125->88.929, 1.319->87.423, 1.350->87.938, 1.552->84.271, 1.650->86.272, 1.785->89.150, 1.950->91.906, 2.175->92.459, 2.400->92.343
+Runde 3: Gesamtfehler=39.225
+stagnation_detected: identischer Parameter-Fingerprint und praktisch unveränderter Gesamtfehler
+switch_to_fallback_search: deaktiviere Circle-Geometry-Penalty für eine letzte Ausweichrunde
+Runde 4: elementweise Validierung gestartet
+circle: Fehler=61.595
+circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
+text: Fehler=84.271
+text: Breiten-Bracketing keine relevante Änderung (voc_font_scale: 1.552); Kandidaten=0.900->88.536, 1.125->88.929, 1.319->87.423, 1.350->87.938, 1.552->84.271, 1.650->86.272, 1.785->89.150, 1.950->91.906, 2.175->92.459, 2.400->92.343
+Runde 4: Gesamtfehler=39.225
+stagnation_detected: identischer Parameter-Fingerprint und praktisch unveränderter Gesamtfehler
+stopped_due_to_stagnation: Validierung vorzeitig beendet
+circle: Farb-Bracketing fill_gray 242->220; Kandidaten=198->10995.000, 200->10943.000, 210->10730.000, 220->10601.000, 226->10621.000, 230->10664.000, 234->10735.000, 240->10890.000, 242->11034.000, 250->12158.000, 255->12972.000
+circle: Farb-Bracketing stroke_gray 127->144; Kandidaten=95->11614.000, 96->11583.000, 111->11039.000, 112->11011.000, 119->10806.000, 127->10601.000, 128->10570.000, 135->10454.000, 143->10378.000, 144->10370.000, 152->10380.000, 159->10450.000, 160->10462.000, 171->10705.000, 198->11486.000
+circle: Farboptimierung in Abschlussphase angewendet
+text: Farb-Stochastic-Survivor aktiviert (text_gray=192, err=75.654)
+text: Farb-Bracketing text_gray 127->192; Kandidaten=95->90.371, 96->90.160, 111->87.293, 112->87.111, 119->85.782, 127->84.271, 128->84.093, 135->82.908, 143->81.652, 144->81.497, 152->80.423, 159->79.641, 160->79.146, 171->77.964, 199->77.037
+text: Farboptimierung in Abschlussphase angewendet

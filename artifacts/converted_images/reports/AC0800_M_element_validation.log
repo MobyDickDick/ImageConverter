@@ -1,0 +1,20 @@
+run-meta: run_seed=108655535 pass_seed_offset=0 nonce_ns=1774703955646588400
+status=semantic_ok
+redraw_variation: seed=109856810214 changed_params=cx:10.000->9.809 | cy:10.000->9.866 | r:9.500->9.362 | stroke_circle:1.000->0.947
+semantic-guard: Text bewusst deaktiviert (plain-ring Familie ohne Buchstabe).
+Runde 1: elementweise Validierung gestartet
+circle: Fehler=73.667
+circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
+Runde 1: Gesamtfehler=16.470
+stagnation_detected: keine relevante Geometrieänderung in der letzten Validierungsrunde
+switch_to_fallback_search: deaktiviere Circle-Geometry-Penalty für eine letzte Ausweichrunde
+Runde 2: elementweise Validierung gestartet
+circle: Fehler=73.667
+circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
+Runde 2: Gesamtfehler=16.470
+stagnation_detected: identischer Parameter-Fingerprint und praktisch unveränderter Gesamtfehler
+stopped_due_to_stagnation: Validierung vorzeitig beendet
+circle: Farb-Bracketing fill_gray 242->220; Kandidaten=200->4485.000, 207->4419.000, 210->4398.000, 220->4369.000, 226->4376.000, 230->4381.000, 234->4385.000, 240->4402.000, 242->4439.000, 250->4790.000, 255->5041.000
+circle: Farb-Stochastic-Survivor aktiviert (stroke_gray=191, err=3255.000)
+circle: Farb-Bracketing stroke_gray 127->191; Kandidaten=95->5383.000, 96->5344.000, 111->4802.000, 112->4771.000, 119->4584.000, 127->4369.000, 128->4352.000, 135->4201.000, 143->4042.000, 144->4024.000, 152->3884.000, 159->3761.000, 160->3745.000, 171->3552.000, 207->3406.000
+circle: Farboptimierung in Abschlussphase angewendet

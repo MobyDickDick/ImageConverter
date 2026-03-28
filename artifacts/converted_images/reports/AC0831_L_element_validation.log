@@ -1,0 +1,67 @@
+run-meta: run_seed=108655535 pass_seed_offset=4 nonce_ns=1774704641585088500
+status=semantic_ok
+redraw_variation: seed=109795034916 changed_params=cx:12.500->12.329 | cy:16.500->16.606 | r:11.000->10.922 | stroke_circle:1.000->1.014 | stem_width:1.000->1.071 | co2_dx:0.000->-0.048 | co2_dy:0.350->0.405
+semantic-guard: Textmodus aktiv (co2).
+Runde 1: elementweise Validierung gestartet
+circle: Fehler=140.925
+circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
+circle: Mittelpunkt-Bracketing cx 12.500->8.500, cy 12.500->15.500 (best_err=115.739)
+circle: Radius-Bracketing r 10.667->11.000 (best_err=115.739, full_err=26.068); Kandidaten=9.600->115.739, 10.000->115.739, 10.500->115.739, 12.000->115.739
+stem: Fehler=130.130
+stem: Breitenkorrektur mode=iter, ratio=0.250, alt=1.000, neu=2.000
+stem: Geometrie nach Elementabgleich aktualisiert
+stem: Breiten-Bracketing stem_width 2.000->1.000; Kandidaten=1.000->227.346, 1.500->317.055, 2.000->317.055
+stem: Längen-Stochastic-Survivor aktiviert (best_len=35.500, err=176.308)
+stem: Längen-Bracketing stem_len 18.500->35.500; Kandidaten=17.000->222.944, 18.500->227.346, 24.000->220.366, 31.000->196.416, 38.000->177.771, 45.000->171.284
+text: Fehler=115.436
+text: Breiten-Bracketing co2_font_scale 0.740->0.533; Kandidaten=0.533->115.436, 0.614->115.436, 0.629->115.436, 0.695->115.436, 0.740->115.436, 0.803->115.436, 0.851->115.436, 0.911->115.436, 0.992->115.436, 1.073->115.436
+Runde 1: Gesamtfehler=25.927
+Runde 2: elementweise Validierung gestartet
+circle: Fehler=117.033
+circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
+circle: Mittelpunkt-Bracketing cx 8.500->12.500, cy 15.500->16.500 (best_err=77.732)
+circle: Radius-Bracketing keine relevante Änderung (r: 11.000, best_err=77.732, full_err=16.852); Kandidaten=9.900->112.729, 11.000->77.732, 11.500->102.949, 12.000->103.364
+stem: Fehler=73.853
+stem: Breitenkorrektur mode=iter, ratio=0.125, alt=1.000, neu=1.000
+stem: Geometrie nach Elementabgleich aktualisiert
+stem: Breiten-Bracketing keine relevante Änderung (stem_width: 1.000); Kandidaten=1.000->49.910, 1.500->50.492, 2.000->50.492
+stem: Längen-Bracketing keine relevante Änderung (stem_len: 17.500); Kandidaten=17.000->51.484, 17.500->48.016, 24.000->57.966, 31.000->81.448, 38.000->81.380, 45.000->83.395
+text: Fehler=111.519
+text: Breiten-Bracketing co2_font_scale 0.533->0.450; Kandidaten=0.450->111.519, 0.453->111.519, 0.498->111.519, 0.533->111.519, 0.547->111.519, 0.611->111.519, 0.613->111.519, 0.676->111.519, 0.724->111.519, 0.773->111.519
+Runde 2: Gesamtfehler=16.852
+Runde 3: elementweise Validierung gestartet
+circle: Fehler=77.732
+circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
+circle: Mittelpunkt-Bracketing keine relevante Änderung (cx=12.500, cy=16.500, best_err=77.732)
+circle: Radius-Bracketing keine relevante Änderung (r: 11.000, best_err=77.732, full_err=16.852); Kandidaten=9.900->112.729, 11.000->77.732, 11.500->102.949, 12.000->103.364
+stem: Fehler=48.016
+stem: Breitenkorrektur mode=iter, ratio=0.429, alt=1.000, neu=2.000
+stem: Geometrie nach Elementabgleich aktualisiert
+stem: Breiten-Bracketing stem_width 2.000->1.000; Kandidaten=1.000->49.910, 1.500->50.492, 2.000->50.492
+stem: Längen-Bracketing keine relevante Änderung (stem_len: 17.500); Kandidaten=17.000->53.224, 17.500->49.910, 24.000->59.345, 31.000->83.759, 38.000->86.703, 45.000->89.303
+text: Fehler=111.519
+text: Breiten-Bracketing keine relevante Änderung (co2_font_scale: 0.450); Kandidaten=0.450->111.519, 0.480->111.519, 0.511->111.519, 0.517->111.519, 0.551->111.519, 0.592->111.519, 0.622->111.519, 0.652->111.519
+Runde 3: Gesamtfehler=16.852
+stagnation_detected: identischer Parameter-Fingerprint und praktisch unveränderter Gesamtfehler
+switch_to_fallback_search: deaktiviere Circle-Geometry-Penalty für eine letzte Ausweichrunde
+Runde 4: elementweise Validierung gestartet
+circle: Fehler=77.732
+circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
+stem: Fehler=49.910
+stem: Breitenkorrektur mode=iter, ratio=0.375, alt=1.000, neu=2.000
+stem: Geometrie nach Elementabgleich aktualisiert
+stem: Breiten-Bracketing stem_width 2.000->1.000; Kandidaten=1.000->49.910, 1.500->50.492, 2.000->50.492
+stem: Längen-Bracketing keine relevante Änderung (stem_len: 17.500); Kandidaten=17.000->53.224, 17.500->49.910, 24.000->59.345, 31.000->83.759, 38.000->86.703, 45.000->89.303
+text: Fehler=111.519
+text: Breiten-Bracketing keine relevante Änderung (co2_font_scale: 0.450); Kandidaten=0.450->111.519, 0.480->111.519, 0.511->111.519, 0.517->111.519, 0.551->111.519, 0.592->111.519, 0.622->111.519, 0.652->111.519
+Runde 4: Gesamtfehler=16.852
+stagnation_detected: identischer Parameter-Fingerprint und praktisch unveränderter Gesamtfehler
+stopped_due_to_stagnation: Validierung vorzeitig beendet
+circle: Farb-Bracketing fill_gray 238->230; Kandidaten=193->12391.000, 200->12132.000, 206->11942.000, 210->11854.000, 220->11700.000, 222->11677.000, 230->11602.000, 238->11616.000, 240->11662.000, 246->12306.000, 254->13656.000, 255->13827.000
+circle: Farb-Bracketing stroke_gray 155->123; Kandidaten=96->11207.000, 112->10980.000, 123->10955.000, 128->11004.000, 139->11170.000, 144->11280.000, 147->11361.000, 152->11504.000, 155->11602.000, 160->11775.000, 163->11875.000, 171->12175.000, 187->12838.000, 193->13080.000
+circle: Farboptimierung in Abschlussphase angewendet
+stem: Farb-Bracketing stem_gray 155->128; Kandidaten=96->49.172, 112->45.047, 123->42.219, 128->41.062, 139->43.641, 144->45.016, 147->45.828, 152->47.203, 155->48.016, 160->49.391, 163->50.219, 171->52.406, 187->56.797, 188->57.062
+stem: Farboptimierung in Abschlussphase angewendet
+text: Farb-Stochastic-Survivor aktiviert (text_gray=187, err=107.959)
+text: Farb-Bracketing text_gray 155->187; Kandidaten=96->120.099, 112->116.816, 123->115.004, 128->114.566, 139->113.072, 144->112.655, 147->112.231, 152->111.857, 155->111.519, 160->110.895, 163->110.556, 171->109.653, 186->108.040, 187->107.959
+text: Farboptimierung in Abschlussphase angewendet
