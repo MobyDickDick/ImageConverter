@@ -11362,15 +11362,11 @@ def _restore_successful_conversion_snapshot(variant: str, svg_out_dir: str, repo
         target_svg.parent.mkdir(parents=True, exist_ok=True)
         target_svg.write_text(snapshot_paths['svg'].read_text(encoding='utf-8'), encoding='utf-8')
         restored = True
-    elif target_svg.exists():
-        target_svg.unlink()
 
     target_log = Path(reports_out_dir) / f'{variant}_element_validation.log'
     if snapshot_paths['log'].exists():
         target_log.write_text(snapshot_paths['log'].read_text(encoding='utf-8'), encoding='utf-8')
         restored = True
-    elif target_log.exists():
-        target_log.unlink()
 
     return restored
 
