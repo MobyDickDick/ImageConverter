@@ -24,4 +24,4 @@ AC0831_L ; status=semantic_ok ; best_iteration=1 ; diff_score=14.170000 ; error_
 AC0831_M ; status=semantic_ok ; best_iteration=1 ; diff_score=11.640000 ; error_per_pixel=0.01663265 ; total_delta2=2504490.000000 ; mean_delta2=3577.842773 ; std_delta2=8960.000000 ; pixel_count=700
 AC0831_S ; status=semantic_ok ; best_iteration=1 ; diff_score=19.700000 ; error_per_pixel=0.05252267 ; total_delta2=1668198.000000 ; mean_delta2=4448.527832 ; std_delta2=10266.071289 ; pixel_count=375
 
-AC0833_S ; status=failed ; reason=semantic_mismatch
+AC0833_S ; status=semantic_ok ; best_iteration=1 ; diff_score=20.110000 ; error_per_pixel=0.05363200 ; total_delta2=1666644.000000 ; mean_delta2=4444.383789 ; std_delta2=9978.137695 ; pixel_count=375
