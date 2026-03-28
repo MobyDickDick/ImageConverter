@@ -1997,6 +1997,26 @@ def test_evaluate_quality_pass_candidate_rejects_full_regression() -> None:
     assert new_delta2 == pytest.approx(12.0)
 
 
+def test_adaptive_iteration_budget_reduces_for_early_plateau() -> None:
+    assert conv._adaptive_iteration_budget_for_quality_row(
+        {
+            "convergence": "plateau",
+            "best_iter": 24,
+        },
+        128,
+    ) == 77
+
+
+def test_adaptive_iteration_budget_increases_for_budget_edge_minimum() -> None:
+    assert conv._adaptive_iteration_budget_for_quality_row(
+        {
+            "convergence": "max_iterations",
+            "best_iter": 128,
+        },
+        128,
+    ) == 173
+
+
 def test_convert_range_accepts_quality_pass_when_mean_delta2_improves(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
