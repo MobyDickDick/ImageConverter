@@ -8667,7 +8667,8 @@ def _extract_ref_parts(name: str) -> tuple[str, int] | None:
 
 
 def _normalize_range_token(value: str) -> str:
-    return re.sub(r"[^A-Z0-9]", "", str(value or "").upper())
+    base = get_base_name_from_file(str(value or "").upper())
+    return re.sub(r"[^A-Z0-9]", "", base)
 
 
 def _compact_range_token(value: str) -> str:
