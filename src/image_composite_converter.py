@@ -26,6 +26,7 @@ from pathlib import Path
 import importlib
 import io
 import struct
+from src.overview_tiles import generate_conversion_overviews
 
 OPTIONAL_DEPENDENCY_ERRORS: dict[str, str] = {}
 
@@ -9866,6 +9867,7 @@ def convert_range(
                 "SVG-Dateien wurden als eingebettete Rasterbilder erzeugt"
                 + (" und Differenzbilder via Pillow/PyMuPDF geschrieben.\n" if fitz is not None else ".\n")
             )
+        generate_conversion_overviews(diff_out_dir, svg_out_dir, reports_out_dir)
         return out_root
     rng = _conversion_random()
     run_seed = rng.randrange(1 << 30)
@@ -10254,6 +10256,12 @@ def convert_range(
             svg_out_dir=svg_out_dir,
             reports_out_dir=reports_out_dir,
             manifest_path=SUCCESSFUL_CONVERSIONS_MANIFEST,
+        )
+    generated_overviews = generate_conversion_overviews(diff_out_dir, svg_out_dir, reports_out_dir)
+    if generated_overviews:
+        print(
+            "[INFO] Übersichts-Kacheln erzeugt: "
+            + ", ".join(f"{key}={path}" for key, path in sorted(generated_overviews.items()))
         )
 
     Action.STOCHASTIC_SEED_OFFSET = 0
