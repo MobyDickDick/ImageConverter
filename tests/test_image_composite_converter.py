@@ -1491,7 +1491,7 @@ def test_run_iteration_pipeline_writes_failed_best_attempt_artifacts_for_semanti
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    """Semantic mismatches should still emit best-effort SVG and diff artifacts."""
+    """Semantic mismatches should still emit a best-effort SVG artifact."""
     if image_composite_converter.np is None or image_composite_converter.cv2 is None:
         pytest.skip("numpy/cv2 not available in this environment")
 
@@ -1569,15 +1569,15 @@ def test_run_iteration_pipeline_writes_failed_best_attempt_artifacts_for_semanti
 
     assert res is None
     assert (svg_dir / "AC0814_L_failed.svg").exists()
-    assert (diff_dir / "AC0814_L_failed_diff.png").exists()
+    assert not (diff_dir / "AC0814_L_failed_diff.png").exists()
     log_text = (reports_dir / "AC0814_L_element_validation.log").read_text(encoding="utf-8")
     assert "status=semantic_mismatch" in log_text
     assert "best_attempt_svg=AC0814_L_failed.svg" in log_text
-    assert "best_attempt_diff=AC0814_L_failed_diff.png" in log_text
+    assert "best_attempt_diff=AC0814_L_failed_diff.png" not in log_text
     assert "semantic_audit_status=semantic_mismatch" in log_text
     assert "semantic_audit_derived_elements=SEMANTIC: Kreis ohne Buchstabe" in log_text
     assert "semantic_audit_mismatch_reason=circle missing" in log_text
-    assert "semantic_connector_classification=vertical;horizontal_candidates=0;vertical_candidates=2" in log_text
+    assert "semantic_connector_classification=vertical;circle_source=unknown;horizontal_candidates=0;vertical_candidates=2" in log_text
 
 
 def test_write_semantic_audit_report_persists_csv_and_json(tmp_path: Path) -> None:
@@ -5875,11 +5875,11 @@ def test_render_svg_to_numpy_returns_none_after_retryable_renderer_failures(monk
 
 
 
-def test_convert_range_continues_after_render_failure_and_writes_batch_summary(
+def test_convert_range_stops_after_render_failure_and_writes_batch_summary(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    """A render failure for one file should be logged without aborting the remaining batch."""
+    """A render failure should be logged and stop further conversions in that run."""
     if image_composite_converter.np is None or image_composite_converter.cv2 is None:
         pytest.skip("numpy/cv2 not available in this environment")
 
@@ -5893,8 +5893,15 @@ def test_convert_range_continues_after_render_failure_and_writes_batch_summary(
     output_root = tmp_path / "out"
     csv_path = tmp_path / "data.csv"
     csv_path.write_text("Wurzelform;Beschreibung\nAC0820;semantic\n", encoding="utf-8")
-    for name in ("AC0820_L.jpg", "AC0820_M.jpg"):
+    for name in ("AC0820_L.jpg", "AC0820_M.jpg", "AC0820_S.jpg"):
         assert cv2.imwrite(str(images_dir / name), np.full((10, 10, 3), 220, dtype=np.uint8))
+    class _FixedRandom:
+        def randrange(self, _limit: int) -> int:
+            return 7
+
+        def shuffle(self, _seq) -> None:
+            return None
+    monkeypatch.setattr(image_composite_converter, "_conversion_random", lambda: _FixedRandom())
 
     monkeypatch.setattr(image_composite_converter, "_in_requested_range", lambda *_args, **_kwargs: True)
     monkeypatch.setattr(image_composite_converter, "_load_quality_config", lambda *_args, **_kwargs: {})
@@ -5939,12 +5946,52 @@ def test_convert_range_continues_after_render_failure_and_writes_batch_summary(
 
     assert result == str(output_root)
     iteration_log = (output_root / "reports" / "Iteration_Log.csv").read_text(encoding="utf-8-sig")
-    assert "AC0820_M.jpg" in iteration_log
+    assert "AC0820_M.jpg" not in iteration_log
+    assert "AC0820_S.jpg" not in iteration_log
     assert "AC0820_L.jpg" not in iteration_log
 
     batch_summary = (output_root / "reports" / "batch_failure_summary.csv").read_text(encoding="utf-8")
     assert "AC0820_L.jpg;render_failure;composite_iteration_render_failed" in batch_summary
     assert "AC0820_L_element_validation.log" in batch_summary
+
+
+def test_update_successful_conversions_manifest_keeps_single_failed_entry(tmp_path: Path) -> None:
+    reports_dir = tmp_path / "reports"
+    svg_dir = tmp_path / "svg"
+    image_dir = tmp_path / "images"
+    reports_dir.mkdir()
+    svg_dir.mkdir()
+    image_dir.mkdir()
+
+    manifest_path = reports_dir / "successful_conversions.txt"
+    manifest_path.write_text(
+        "AC0001_L ; status=semantic_ok\n"
+        "AC0999_L ; status=failed ; reason=old\n"
+        "AC0998_L ; status=failed ; reason=older\n",
+        encoding="utf-8",
+    )
+    (reports_dir / "batch_failure_summary.csv").write_text(
+        "filename;status;reason;details;log_file\n"
+        "AC0123_M.jpg;render_failure;composite_iteration_render_failed;;AC0123_M_element_validation.log\n",
+        encoding="utf-8",
+    )
+    (reports_dir / "Iteration_Log.csv").write_text(
+        "Dateiname;Gefundene Elemente;Beste Iteration;Diff-Score;FehlerProPixel\n",
+        encoding="utf-8-sig",
+    )
+
+    updated_path, _ = image_composite_converter.update_successful_conversions_manifest_with_metrics(
+        folder_path=str(image_dir),
+        svg_out_dir=str(svg_dir),
+        reports_out_dir=str(reports_dir),
+        manifest_path=manifest_path,
+        successful_variants=["AC0001_L"],
+    )
+
+    manifest_lines = [line.strip() for line in updated_path.read_text(encoding="utf-8").splitlines() if line.strip()]
+    failed_lines = [line for line in manifest_lines if "status=failed" in line.lower()]
+    assert len(failed_lines) == 1
+    assert failed_lines[0].startswith("AC0123_M ; status=failed")
 
 
 @pytest.mark.parametrize(
