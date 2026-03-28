@@ -2541,6 +2541,8 @@ class Action:
             p["text_gray"] = 155
             if p.get("stem_enabled"):
                 p["stem_gray"] = 155
+        if symbol_name == "AC0833" and str(p.get("text_mode", "")).lower() == "co2":
+            p = Action._tune_ac0833_co2_badge(p)
         if symbol_name == "AC0820" and str(p.get("text_mode", "")).lower() == "co2":
             # AC0820 variants (L/M/S): keep CO² superscript rendering, but do
             # not force a centered anchor mode. The optimizer may keep center_co
@@ -3466,6 +3468,16 @@ class Action:
             # front so the validator does not need to recover it from a
             # stagnating small-variant search.
             p["voc_dy"] = float(max(float(p.get("voc_dy", 0.0)), 0.13 * r))
+        return p
+
+    @staticmethod
+    def _tune_ac0833_co2_badge(params: dict) -> dict:
+        """Tune AC0833 CO² badges so the trailing index stays superscript."""
+        p = Action._normalize_light_circle_colors(dict(params))
+        p["co2_anchor_mode"] = str(p.get("co2_anchor_mode", "cluster"))
+        p["co2_index_mode"] = "superscript"
+        p["co2_superscript_offset_scale"] = float(max(float(p.get("co2_superscript_offset_scale", 0.16)), 0.16))
+        p["co2_superscript_min_gap_scale"] = float(max(float(p.get("co2_superscript_min_gap_scale", 0.17)), 0.17))
         return p
 
     @staticmethod
@@ -4437,10 +4449,10 @@ class Action:
             )
 
         if name == "AC0833":
-            defaults = Action._apply_co2_label(Action._default_ac0813_params(w, h))
+            defaults = Action._tune_ac0833_co2_badge(Action._apply_co2_label(Action._default_ac0813_params(w, h)))
             if img is None:
                 return Action._finalize_ac08_style(name, defaults)
-            return Action._finalize_ac08_style(name, Action._fit_ac0813_params_from_image(img, defaults))
+            return Action._finalize_ac08_style(name, Action._tune_ac0833_co2_badge(Action._fit_ac0813_params_from_image(img, defaults)))
 
         if name == "AC0834":
             defaults = Action._apply_co2_label(Action._default_ac0814_params(w, h))

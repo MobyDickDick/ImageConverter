@@ -811,6 +811,25 @@ def test_parse_description_marks_ac0833_with_right_horizontal_arm() -> None:
     assert "SEMANTIC: waagrechter Strich rechts vom Kreis" in list(params.get("elements", []))
 
 
+def test_make_badge_params_ac0833_uses_superscript_index() -> None:
+    """AC0833 variants should render CO² with a raised superscript 2."""
+    params = image_composite_converter.Action.make_badge_params(24, 24, "AC0833")
+
+    assert params is not None
+    assert params.get("text_mode") == "co2"
+    assert params.get("co2_index_mode") == "superscript"
+
+
+def test_finalize_ac0833_keeps_superscript_after_fit() -> None:
+    """Final AC0833 tuning should keep superscript settings even after fitting updates."""
+    params = image_composite_converter.Action._apply_co2_label(image_composite_converter.Action._default_ac0813_params(24, 24))
+    params["co2_index_mode"] = "subscript"
+
+    tuned = image_composite_converter.Action._finalize_ac08_style("AC0833_M", params)
+
+    assert tuned.get("co2_index_mode") == "superscript"
+
+
 def test_parse_description_marks_ac0813_with_top_vertical_connector() -> None:
     """AC0813 belongs to the top-connector family and must encode that semantic element."""
     ref = image_composite_converter.Reflection({})
