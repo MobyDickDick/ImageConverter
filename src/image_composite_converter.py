@@ -9200,6 +9200,37 @@ def _iteration_strategy_for_pass(pass_idx: int, base_iterations: int) -> tuple[i
     return base + 48 + (p * 3), 8 + p
 
 
+def _adaptive_iteration_budget_for_quality_row(row: dict[str, object], planned_budget: int) -> int:
+    """Tune per-row iteration budget using convergence/plateau quality signals.
+
+    Heuristic goals:
+    - plateau reached clearly before budget end -> reduce budget next pass
+    - max-iterations hit or best-iter near budget end -> increase budget
+    """
+    budget = max(1, int(planned_budget))
+    convergence = str(row.get("convergence", "") or "").strip().lower()
+    best_iter_raw = row.get("best_iter", 0)
+    try:
+        best_iter = max(0, int(best_iter_raw))
+    except (TypeError, ValueError):
+        best_iter = 0
+
+    usage_ratio = (best_iter / budget) if budget > 0 else 0.0
+
+    if convergence == "plateau":
+        if usage_ratio <= 0.35:
+            return max(1, int(round(budget * 0.60)))
+        if usage_ratio <= 0.55:
+            return max(1, int(round(budget * 0.80)))
+        return budget
+
+    if convergence == "max_iterations" or usage_ratio >= 0.95:
+        return max(1, int(round(budget * 1.35)))
+    if usage_ratio >= 0.80:
+        return max(1, int(round(budget * 1.15)))
+    return budget
+
+
 def _write_quality_pass_report(
     reports_out_dir: str,
     pass_rows: list[dict[str, object]],
@@ -9895,7 +9926,7 @@ def convert_range(
     process_files = list(files)
     rng.shuffle(process_files)
 
-    base_iterations = max(128, int(iterations))
+    base_iterations = max(1, int(iterations))
     max_quality_passes = 4
     quality_logs: list[dict[str, object]] = []
     result_map: dict[str, dict[str, object]] = {}
@@ -9949,6 +9980,7 @@ def convert_range(
             return None
 
         _base, _desc, params, best_iter, best_error = res
+        details = _read_validation_log_details(log_file)
         img = cv2.imread(image_path)
         pixel_count = 1.0
         width = 0
@@ -9974,6 +10006,7 @@ def convert_range(
             "params": params,
             "best_iter": int(best_iter),
             "best_error": float(best_error),
+            "convergence": str(details.get("convergence", "")).strip().lower(),
             "error_per_pixel": float(best_error) / pixel_count,
             "mean_delta2": float(mean_delta2),
             "std_delta2": float(std_delta2),
@@ -10070,7 +10103,8 @@ def convert_range(
             rng.shuffle(candidates)
         for row in candidates:
             filename = str(row["filename"])
-            new_row = _convert_one(filename, iteration_budget=iteration_budget, badge_rounds=badge_rounds)
+            adaptive_iteration_budget = _adaptive_iteration_budget_for_quality_row(row, iteration_budget)
+            new_row = _convert_one(filename, iteration_budget=adaptive_iteration_budget, badge_rounds=badge_rounds)
             if new_row is None:
                 continue
 
@@ -10092,7 +10126,7 @@ def convert_range(
                     "new_mean_delta2": new_mean_delta2,
                     "improved": improved,
                     "decision": decision,
-                    "iteration_budget": iteration_budget,
+                    "iteration_budget": adaptive_iteration_budget,
                     "badge_validation_rounds": badge_rounds,
                 }
             )
