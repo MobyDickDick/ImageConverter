@@ -859,6 +859,28 @@ def test_parse_description_marks_ac0838_with_right_horizontal_arm() -> None:
     assert "SEMANTIC: waagrechter Strich rechts vom Kreis" in list(params.get("elements", []))
 
 
+def test_make_badge_params_ac0838_uses_right_horizontal_connector_geometry() -> None:
+    """AC0838 defaults must follow the right-arm connector family."""
+    params = image_composite_converter.Action.make_badge_params(24, 24, "AC0838")
+
+    assert params is not None
+    assert bool(params.get("arm_enabled", False))
+    assert abs(float(params.get("arm_x2", 0.0)) - float(params.get("arm_x1", 0.0))) >= abs(
+        float(params.get("arm_y2", 0.0)) - float(params.get("arm_y1", 0.0))
+    )
+
+
+def test_make_badge_params_ac0835_uses_right_horizontal_connector_geometry() -> None:
+    """AC0835 defaults must follow the right-arm VOC connector family."""
+    params = image_composite_converter.Action.make_badge_params(24, 24, "AC0835")
+
+    assert params is not None
+    assert bool(params.get("arm_enabled", False))
+    assert abs(float(params.get("arm_x2", 0.0)) - float(params.get("arm_x1", 0.0))) >= abs(
+        float(params.get("arm_y2", 0.0)) - float(params.get("arm_y1", 0.0))
+    )
+
+
 def test_parse_description_marks_ac0800_as_plain_ring_family() -> None:
     """AC0800 should remain a semantic plain ring even without text clues in the XML."""
     ref = image_composite_converter.Reflection({})
