@@ -1870,6 +1870,11 @@ def test_in_requested_range_treats_identical_short_bounds_as_prefix_filter() -> 
     assert image_composite_converter._in_requested_range("AC0820_L.jpg", "AC081", "AC081") is False
 
 
+def test_in_requested_range_partial_filter_ignores_size_suffix_in_bounds() -> None:
+    """Partial fallback filters should still find AC0800_* when users enter AC080_L..AC080_L."""
+    assert image_composite_converter._in_requested_range("AC0800_L.jpg", "AC080_L", "AC080_L") is True
+
+
 def test_in_requested_range_supports_one_sided_bounds() -> None:
     """When one bound is invalid, the valid bound should still be applied."""
     assert image_composite_converter._in_requested_range("AC0812_L.jpg", "", "AC0812") is True
