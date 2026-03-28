@@ -12,6 +12,7 @@ import contextlib
 import copy
 import csv
 import dataclasses
+import gc
 import json
 import math
 import os
@@ -26,6 +27,7 @@ from pathlib import Path
 import importlib
 import io
 import struct
+from src.overview_tiles import generate_conversion_overviews
 
 OPTIONAL_DEPENDENCY_ERRORS: dict[str, str] = {}
 
@@ -846,7 +848,12 @@ def _create_diff_image_without_cv2(input_path: str | Path, svg_content: str):
                 diff_samples[idx + 1] = down
                 diff_samples[idx + 2] = down
 
-        return fitz.Pixmap(fitz.csRGB, original_pix.width, original_pix.height, bytes(diff_samples), 0)
+        diff_pix = fitz.Pixmap(fitz.csRGB, original_pix.width, original_pix.height, bytes(diff_samples), 0)
+        # Explicitly release temporary MuPDF objects before returning the diff
+        # pixmap to reduce native-memory pressure in long AC08 batch runs.
+        del svg_pix
+        del original_pix
+        return diff_pix
 
 
 def _compute_otsu_threshold(grayscale: list[list[int]]) -> int:
@@ -4706,12 +4713,18 @@ class Action:
         if fitz is None or np is None or cv2 is None:
             return None
 
+        svg_string = str(svg_string or "")
+        if re.search(r"(?<![A-Za-z])(nan|inf)(?![A-Za-z])", svg_string, flags=re.IGNORECASE):
+            return None
+
         attempts = [svg_string]
-        normalized_svg = re.sub(r">\s+<", "><", str(svg_string or "").strip())
+        normalized_svg = re.sub(r">\s+<", "><", svg_string.strip())
         if normalized_svg and normalized_svg != svg_string:
             attempts.append(normalized_svg)
 
         for candidate_svg in attempts:
+            page = None
+            pix = None
             try:
                 with fitz.open("pdf", candidate_svg.encode("utf-8")) as doc:
                     page = doc.load_page(0)
@@ -4730,6 +4743,14 @@ class Action:
                 return cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
             except Exception:
                 continue
+            finally:
+                # Free native MuPDF resources eagerly to avoid accumulation over
+                # large AC08 range batches.
+                if pix is not None:
+                    del pix
+                if page is not None:
+                    del page
+                gc.collect()
         return None
 
     @staticmethod
@@ -9866,6 +9887,7 @@ def convert_range(
                 "SVG-Dateien wurden als eingebettete Rasterbilder erzeugt"
                 + (" und Differenzbilder via Pillow/PyMuPDF geschrieben.\n" if fitz is not None else ".\n")
             )
+        generate_conversion_overviews(diff_out_dir, svg_out_dir, reports_out_dir)
         return out_root
     rng = _conversion_random()
     run_seed = rng.randrange(1 << 30)
@@ -10254,6 +10276,12 @@ def convert_range(
             svg_out_dir=svg_out_dir,
             reports_out_dir=reports_out_dir,
             manifest_path=SUCCESSFUL_CONVERSIONS_MANIFEST,
+        )
+    generated_overviews = generate_conversion_overviews(diff_out_dir, svg_out_dir, reports_out_dir)
+    if generated_overviews:
+        print(
+            "[INFO] Übersichts-Kacheln erzeugt: "
+            + ", ".join(f"{key}={path}" for key, path in sorted(generated_overviews.items()))
         )
 
     Action.STOCHASTIC_SEED_OFFSET = 0

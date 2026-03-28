@@ -6284,3 +6284,101 @@ def test_build_oriented_kelle_supports_left_top_right_and_down() -> None:
     assert top.griff.ende.y < top.griff.anfang.y
     assert right.griff.ende.x > right.griff.anfang.x
     assert down.griff.ende.y > down.griff.anfang.y
+
+
+def test_generate_conversion_overviews_creates_diff_and_svg_tiles(tmp_path: Path) -> None:
+    """The overview generator should render one tile sheet for diff PNGs and one for SVG previews."""
+    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+        pytest.skip("numpy/cv2 not available in this environment")
+
+    from src.overview_tiles import generate_conversion_overviews
+
+    np = image_composite_converter.np
+    cv2 = image_composite_converter.cv2
+    if np is None or cv2 is None:
+        pytest.skip("numpy/cv2 not available in this environment")
+
+    diff_dir = tmp_path / "diff_pngs"
+    svg_dir = tmp_path / "converted_svgs"
+    reports_dir = tmp_path / "reports"
+    diff_dir.mkdir()
+    svg_dir.mkdir()
+    reports_dir.mkdir()
+
+    assert cv2.imwrite(str(diff_dir / "AC0812_L_diff.png"), np.full((20, 20, 3), 180, dtype=np.uint8))
+    (svg_dir / "AC0812_L.svg").write_text(
+        '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">'
+        '<circle cx="10" cy="10" r="8" fill="#dddddd" stroke="#777777"/></svg>',
+        encoding="utf-8",
+    )
+
+    generated = generate_conversion_overviews(diff_dir, svg_dir, reports_dir)
+
+    assert "diff" in generated
+    assert "svg" in generated
+    assert (reports_dir / "overview_diff_tiles.png").exists()
+    assert (reports_dir / "overview_svg_tiles.png").exists()
+
+
+def test_convert_range_invokes_overview_generation(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    """convert_range should call overview-tile generation after conversion output is written."""
+    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+        pytest.skip("numpy/cv2 not available in this environment")
+
+    np = image_composite_converter.np
+    cv2 = image_composite_converter.cv2
+    if np is None or cv2 is None:
+        pytest.skip("numpy/cv2 not available in this environment")
+
+    images_dir = tmp_path / "images"
+    output_root = tmp_path / "out"
+    images_dir.mkdir()
+    csv_path = tmp_path / "data.csv"
+    csv_path.write_text("Wurzelform;Beschreibung\nAC0812;semantic\n", encoding="utf-8")
+    assert cv2.imwrite(str(images_dir / "AC0812_L.jpg"), np.full((10, 10, 3), 220, dtype=np.uint8))
+
+    monkeypatch.setattr(image_composite_converter, "_in_requested_range", lambda *_args, **_kwargs: True)
+    monkeypatch.setattr(image_composite_converter, "_load_quality_config", lambda *_args, **_kwargs: {})
+    monkeypatch.setattr(image_composite_converter, "_write_quality_config", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(image_composite_converter, "_harmonize_semantic_size_variants", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(image_composite_converter, "_write_pixel_delta2_ranking", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(image_composite_converter, "_select_open_quality_cases", lambda rows, **_kwargs: [])
+    monkeypatch.setattr(image_composite_converter, "_select_middle_lower_tercile", lambda _rows: [])
+    monkeypatch.setattr(image_composite_converter, "_try_template_transfer", lambda **_kwargs: (None, None))
+
+    called: dict[str, str] = {}
+
+    def fake_overviews(diff_dir: str, svg_dir: str, reports_dir: str):
+        called["diff"] = diff_dir
+        called["svg"] = svg_dir
+        called["reports"] = reports_dir
+        return {"diff": str(Path(reports_dir) / "overview_diff_tiles.png")}
+
+    monkeypatch.setattr(image_composite_converter, "generate_conversion_overviews", fake_overviews)
+
+    def fake_pipeline(img_path: str, _csv_path: str, _iterations: int, svg_out: str, diff_out: str, reports_out: str, *_args, **_kwargs):
+        stem = Path(img_path).stem
+        Path(svg_out).mkdir(parents=True, exist_ok=True)
+        Path(diff_out).mkdir(parents=True, exist_ok=True)
+        Path(reports_out).mkdir(parents=True, exist_ok=True)
+        svg = '<svg width="10" height="10" xmlns="http://www.w3.org/2000/svg"><rect width="10" height="10" fill="#d0d0d0"/></svg>'
+        (Path(svg_out) / f"{stem}.svg").write_text(svg, encoding="utf-8")
+        (Path(diff_out) / f"{stem}_diff.png").write_bytes(b"png")
+        params = {"mode": "semantic_badge", "elements": ["circle"], "cx": 5.0, "cy": 5.0, "r": 3.0}
+        return stem, "semantic", params, 1, 30.0
+
+    monkeypatch.setattr(image_composite_converter, "run_iteration_pipeline", fake_pipeline)
+
+    result = image_composite_converter.convert_range(
+        str(images_dir),
+        str(csv_path),
+        iterations=1,
+        start_ref="AC0812",
+        end_ref="AC0812",
+        output_root=str(output_root),
+    )
+
+    assert result == str(output_root)
+    assert called["diff"] == str(output_root / "diff_pngs")
+    assert called["svg"] == str(output_root / "converted_svgs")
+    assert called["reports"] == str(output_root / "reports")

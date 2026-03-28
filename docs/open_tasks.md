@@ -23,7 +23,16 @@ focused on the actual project scope.
   - `_create_diff_image_without_cv2` nutzt jetzt Context-Manager für beide `fitz.open(...)` Dokumente, damit Batch-Läufe keine unnötig offenen MuPDF-Dokumente ansammeln.
   - Ziel: Stabilere AC08-Serienläufe ohne native MuPDF-Stackoverflow-Ausreißer durch Ressourcenaufbau über viele Dateien.
 - [ ] B2: AC08-Batchlauf mit vollständigem Bereich `AC0800..AC0899` nach B1 erneut ausführen und Crash-Freiheit dokumentieren.
+  - 2026-03-28: Vollbereichslauf erneut gestartet mit
+    `python -u -m src.image_composite_converter ... --start AC0800 --end AC0899`
+    und Log nach `artifacts/converted_images/reports/AC0800_AC0899_batch_2026-03-28.log` geschrieben.
+  - Aktueller Stand: weiterhin **nicht crash-frei**; der Prozess endet reproduzierbar mit
+    `MuPDF error: exception stack overflow!` und Exit-Code `139` (Segmentation fault),
+    zuletzt bei `AC0881_L`.
   - Ergebnis in `artifacts/converted_images/reports` mit Logreferenz festhalten.
+- [ ] B2.1: MuPDF-Stackoverflow/Segfault im Vollbereich `AC0800..AC0899` isolieren und robusten Guard ergänzen.
+  - Die bisherigen B1-Fixes (Context-Manager im Fallback-Diff-Pfad) reichen für den Vollbereich noch nicht aus.
+  - Die Rendering-Stabilisierung muss den nativen Crash im Haupt-Renderpfad (`render_svg_to_numpy`) verhindern.
 - [ ] B3: Deterministischen Diagnosemodus für die Dateireihenfolge ergänzen (ohne `shuffle`), um schwer reproduzierbare Batchfehler schneller zu isolieren.
 
 
