@@ -2040,10 +2040,33 @@ def test_convert_range_does_not_skip_variants_in_quality_passes(
     image_composite_converter.convert_range(str(images_dir), str(csv_path), iterations=2, start_ref="AC0812", end_ref="AC0812")
 
     assert captured_cfg["skipped_variants"] == []
+    assert captured_cfg["allowed_error_per_pixel"] == pytest.approx(1.0)
+    assert captured_cfg["source"] == "successful-conversions-mean-plus-2std"
     assert observed_skips
     assert all(not skip_set for skip_set in observed_skips)
 
 
+
+
+def test_compute_successful_conversions_error_threshold_returns_mean_plus_two_std() -> None:
+    rows = [
+        {"variant": "AC0001_L", "error_per_pixel": 0.10},
+        {"variant": "AC0002_L", "error_per_pixel": 0.20},
+        {"variant": "AC0003_L", "error_per_pixel": 0.30},
+        {"variant": "AC9999_L", "error_per_pixel": 9.99},
+    ]
+
+    threshold = conv._compute_successful_conversions_error_threshold(rows, ("AC0001_L", "AC0002_L", "AC0003_L"))
+
+    assert threshold == pytest.approx(0.3632993161855452)
+
+
+def test_compute_successful_conversions_error_threshold_returns_inf_without_samples() -> None:
+    rows = [{"variant": "AC9999_L", "error_per_pixel": 0.5}]
+
+    threshold = conv._compute_successful_conversions_error_threshold(rows, ("AC0001_L",))
+
+    assert threshold == float("inf")
 def test_quality_pass_report_records_delta2_and_decision(tmp_path: Path) -> None:
     reports_dir = tmp_path / "reports"
     reports_dir.mkdir()
