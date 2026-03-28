@@ -9895,7 +9895,7 @@ def convert_range(
     process_files = list(files)
     rng.shuffle(process_files)
 
-    base_iterations = max(128, int(iterations))
+    base_iterations = max(1, int(iterations))
     max_quality_passes = 4
     quality_logs: list[dict[str, object]] = []
     result_map: dict[str, dict[str, object]] = {}
