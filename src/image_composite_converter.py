@@ -9927,6 +9927,8 @@ def convert_range(
     rng.shuffle(process_files)
 
     base_iterations = max(1, int(iterations))
+    # Continue quality iterations while a pass still improves at least one case.
+    # Abort as soon as the next pass cannot beat the previous state.
     max_quality_passes = 4
     quality_logs: list[dict[str, object]] = []
     result_map: dict[str, dict[str, object]] = {}
@@ -10075,8 +10077,6 @@ def convert_range(
 
     # Iteratively refine unresolved quality cases while preserving all already
     # successful outputs (replace only when strictly better).
-    consecutive_no_improvement = 0
-    strategy_switch_after = 2
     strategy_logs: list[dict[str, object]] = []
     for pass_idx in range(1, max_quality_passes + 1):
         Action.STOCHASTIC_SEED_OFFSET = pass_idx
@@ -10131,77 +10131,9 @@ def convert_range(
                 }
             )
 
+        # Stop as soon as a full pass yields no strict improvement.
         if not improved_in_pass:
-            consecutive_no_improvement += 1
-        else:
-            consecutive_no_improvement = 0
-
-        if consecutive_no_improvement >= strategy_switch_after:
-            donor_rows = [
-                row
-                for row in result_map.values()
-                if math.isfinite(float(row.get("error_per_pixel", float("inf"))))
-                and float(row.get("error_per_pixel", float("inf"))) <= allowed_error_pp
-            ]
-            donor_rows.extend(
-                row
-                for row in existing_donor_rows
-                if float(row.get("error_per_pixel", float("inf"))) <= allowed_error_pp
-            )
-            fallback_improved = False
-            if len(candidates) > 1:
-                rng.shuffle(candidates)
-            for row in candidates:
-                filename = str(row["filename"])
-                current = result_map.get(filename)
-                if current is None:
-                    continue
-                prev_error_pp = float(current.get("error_per_pixel", float("inf")))
-                if prev_error_pp <= allowed_error_pp:
-                    continue
-
-                updated, detail = _try_template_transfer(
-                    target_row=current,
-                    donor_rows=donor_rows,
-                    folder_path=folder_path,
-                    svg_out_dir=svg_out_dir,
-                    diff_out_dir=diff_out_dir,
-                    rng=rng,
-                )
-                if updated is None or detail is None:
-                    continue
-
-                improved, decision, prev_error_pp, new_error_pp, prev_mean_delta2, new_mean_delta2 = _evaluate_quality_pass_candidate(
-                    current,
-                    updated,
-                )
-                quality_logs.append(
-                    {
-                        "pass": pass_idx,
-                        "filename": filename,
-                        "old_error_per_pixel": prev_error_pp,
-                        "new_error_per_pixel": new_error_pp,
-                        "old_mean_delta2": prev_mean_delta2,
-                        "new_mean_delta2": new_mean_delta2,
-                        "improved": improved,
-                        "decision": decision,
-                        "iteration_budget": iteration_budget,
-                        "badge_validation_rounds": badge_rounds,
-                    }
-                )
-                if improved:
-                    result_map[filename] = updated
-                    fallback_improved = True
-                    strategy_logs.append(detail)
-
-            if fallback_improved:
-                consecutive_no_improvement = 0
-                continue
-            else:
-                break
-
-        if not improved_in_pass and consecutive_no_improvement < strategy_switch_after:
-            continue
+            break
 
     _write_quality_pass_report(reports_out_dir, quality_logs)
     _write_batch_failure_summary(reports_out_dir, batch_failures)
