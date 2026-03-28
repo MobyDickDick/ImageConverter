@@ -2784,9 +2784,18 @@ class Action:
                 # template radius so later validation rounds cannot undershoot
                 # the original circle diameter.
                 min_radius_ratio = 1.0
-            p["min_circle_radius"] = float(max(float(p.get("min_circle_radius", 1.0)), template_r * min_radius_ratio))
+            # AC0800 plain rings should derive the radius floor strictly from
+            # the template, not from an overgrown fitted radius estimate.
+            p["min_circle_radius"] = float(max(1.0, template_r * min_radius_ratio))
             if "max_circle_radius" not in p:
                 p["max_circle_radius"] = float(max(template_r, template_r * 1.15))
+            min_r = float(max(1.0, p.get("min_circle_radius", 1.0)))
+            max_r = float(max(min_r, p.get("max_circle_radius", min_r)))
+            p["max_circle_radius"] = max_r
+            # Keep AC0800 geometry immediately inside semantic bounds. Without
+            # this clamp, fitted large variants can start validation already
+            # above the plain-ring cap and never re-enter the guarded range.
+            p["r"] = float(Action._clip_scalar(float(p.get("r", template_r)), min_r, max_r))
         if p.get("draw_text", True) and "text_gray" in p:
             p["text_gray"] = int(p.get("stroke_gray", Action.LIGHT_CIRCLE_STROKE_GRAY))
         return p
@@ -6471,7 +6480,7 @@ class Action:
         if bool(params.get("allow_circle_overflow", False)):
             max_r = max(max_r, min_r + 0.5)
         bounded_candidates = sorted(
-            Action._snap_half(float(Action._clip_scalar(radius, min_r, max_r)))
+            float(Action._clip_scalar(Action._snap_half(float(radius)), min_r, max_r))
             for radius in candidate_radii
         )
 
@@ -6735,6 +6744,7 @@ class Action:
         low = float(Action._clip_scalar(low, low_bound, high_bound))
         high = float(Action._clip_scalar(high, low_bound, high_bound))
         mid = Action._snap_half(float(Action._clip_scalar(current, low, high)))
+        mid = float(Action._clip_scalar(mid, low, high))
         if high - low < 0.05:
             return False
 
