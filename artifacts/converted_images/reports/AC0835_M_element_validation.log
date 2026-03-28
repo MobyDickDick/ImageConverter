@@ -1,6 +1,6 @@
-run-meta: run_seed=838873861 pass_seed_offset=4 nonce_ns=1774710387098011200
+run-meta: run_seed=912216458 pass_seed_offset=1 nonce_ns=1774730987218471285
 status=semantic_ok
-redraw_variation: seed=847098281835 changed_params=cx:10.500->10.468 | cy:10.000->9.905 | r:8.500->8.564 | stroke_circle:1.000->0.948
+redraw_variation: seed=921221597764 changed_params=cx:10.500->10.663 | cy:10.000->10.033 | r:8.500->8.650 | stroke_circle:1.000->1.047
 semantic-guard: Textmodus aktiv (voc).
 small_variant_mode_active: reason=min_dim, min_dim=14.800, mask_dilate_px=1, text_mode=voc, arm_min_ratio=0.000, stem_min_ratio=0.000
 Runde 1: elementweise Validierung gestartet
@@ -40,6 +40,6 @@ stopped_due_to_stagnation: Validierung vorzeitig beendet
 circle: Farb-Bracketing fill_gray 242->220; Kandidaten=198->10995.000, 200->10943.000, 210->10730.000, 220->10601.000, 226->10621.000, 230->10664.000, 234->10735.000, 240->10890.000, 242->11034.000, 250->12158.000, 255->12972.000
 circle: Farb-Bracketing stroke_gray 127->144; Kandidaten=95->11614.000, 96->11583.000, 111->11039.000, 112->11011.000, 119->10806.000, 127->10601.000, 128->10570.000, 135->10454.000, 143->10378.000, 144->10370.000, 152->10380.000, 159->10450.000, 160->10462.000, 171->10705.000, 198->11486.000
 circle: Farboptimierung in Abschlussphase angewendet
-text: Farb-Stochastic-Survivor aktiviert (text_gray=192, err=75.654)
-text: Farb-Bracketing text_gray 127->192; Kandidaten=95->90.371, 96->90.160, 111->87.293, 112->87.111, 119->85.782, 127->84.271, 128->84.093, 135->82.908, 143->81.652, 144->81.497, 152->80.423, 159->79.641, 160->79.146, 171->77.964, 199->77.037
+text: Farb-Stochastic-Survivor aktiviert (text_gray=193, err=75.621)
+text: Farb-Bracketing text_gray 127->193; Kandidaten=95->90.371, 96->90.160, 111->87.293, 112->87.111, 119->85.782, 127->84.271, 128->84.093, 135->82.908, 143->81.652, 144->81.497, 152->80.423, 159->79.641, 160->79.146, 171->77.964, 199->77.037
 text: Farboptimierung in Abschlussphase angewendet
