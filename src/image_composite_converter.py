@@ -413,10 +413,6 @@ def main(argv: list[str] | None = None) -> int:
     log_path = str(args.log_file or "").strip()
     with _optional_log_capture(log_path):
         try:
-            if args.ac08_regression_set:
-                args.start = "AC0000"
-                args.end = "ZZ9999"
-
             if args.print_linux_vendor_command:
                 print(
                     " ".join(

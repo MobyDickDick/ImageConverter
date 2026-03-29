@@ -47,22 +47,31 @@ def run_iteration_pipeline(
     regions = detect_relevant_regions_impl(img, cv2, np) if np is not None else []
     elements = [str(r.get("label", "")).strip() for r in regions if str(r.get("label", "")).strip()]
 
-    svg_content = _render_embedded_raster_svg(image_path)
-    svg_path = os.path.join(svg_out_dir, f"{stem}.svg")
-    with open(svg_path, "w", encoding="utf-8") as f:
-        f.write(svg_content)
-
-    params = {
-        "mode": "embedded_raster",
-        "elements": elements,
-        "semantic_audit": {
+    params = Action.make_badge_params(w, h, base, img) if hasattr(Action, "make_badge_params") else {}
+    if not isinstance(params, dict):
+        params = {}
+    params.setdefault("mode", "semantic_badge")
+    params.setdefault("elements", elements)
+    params.setdefault(
+        "semantic_audit",
+        {
             "variant": stem.upper(),
             "base": base,
             "description_lookup_keys": [stem, stem.upper(), base, base.upper()],
             "recognized_description_elements": elements,
             "description_text": str(description or ""),
         },
-    }
+    )
+
+    try:
+        svg_content = Action.generate_badge_svg(w, h, params)
+    except Exception:
+        svg_content = _render_embedded_raster_svg(image_path)
+        params["mode"] = "embedded_raster"
+
+    svg_path = os.path.join(svg_out_dir, f"{stem}.svg")
+    with open(svg_path, "w", encoding="utf-8") as f:
+        f.write(svg_content)
     rendered = Action.render_svg_to_numpy(svg_content, w, h)
     element_validation_lines: list[str] = []
     redraw_notes: list[str] = []
@@ -98,7 +107,7 @@ def run_iteration_pipeline(
     with open(log_path, "w", encoding="utf-8") as f:
         f.write("status=semantic_ok\n")
         f.write(f"filename={filename}\n")
-        f.write("convergence=embedded_raster_fallback\n")
+        f.write(f"convergence={params.get('mode', 'semantic_badge')}\n")
         f.write(f"validation_rounds=1\n")
         if math.isfinite(float(mean_delta2)):
             f.write(f"mean_delta2={float(mean_delta2):.6f}\n")
