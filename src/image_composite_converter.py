@@ -2593,11 +2593,6 @@ class Action:
             min_radius_ratio = 1.0 if template_r >= 10.0 else 0.95
             p["r"] = float(max(float(p.get("r", template_r)), template_r * min_radius_ratio))
             image_width = float(p.get("width", p.get("badge_width", 0.0)) or 0.0)
-            variant_name = str(p.get("variant_name", "")).upper()
-            is_large_ac0820 = (
-                canonical_name == "AC0820_L"
-                or variant_name == "AC0820_L"
-            )
             # General large-badge tuning (not variant-specific): for centered
             # CO² labels without connectors, a mildly tighter/lower baseline
             # produces better visual agreement across anti-aliased inputs.
@@ -2611,10 +2606,10 @@ class Action:
                 p["co2_width_scale"] = float(min(float(p.get("co2_width_scale", 0.89)), 0.89))
                 p["co2_dy"] = float(max(float(p.get("co2_dy", 0.0)), 0.03 * template_r))
                 p["co2_center_co_bias"] = float(min(float(p.get("co2_center_co_bias", -0.05)), -0.05))
-            if is_large_ac0820 and image_width > 0.0:
-                # AC0820_L should keep its circle primarily template-driven, but
-                # still respect the product rule that the circle diameter is
-                # strictly larger than half the image width.
+            if _needs_large_circle_overflow_guard(p) and image_width > 0.0:
+                # Generic large centered CO² rule: keep circle radius template-led
+                # while enforcing the product constraint that the diameter stays
+                # larger than half the badge width.
                 #   2r > (w / 2)  =>  r > (w / 4)
                 required_r = (image_width / 4.0) + 1e-3
                 p["r"] = float(max(float(p.get("r", template_r)), template_r * 0.98, required_r))
@@ -8450,15 +8445,6 @@ def run_iteration_pipeline(
         # enforce width/height-relative geometry rules reliably.
         badge_params.setdefault("width", float(w))
         badge_params.setdefault("height", float(h))
-        variant_id = os.path.splitext(filename)[0].upper()
-        if variant_id == "AC0820_L":
-            badge_params["variant_name"] = variant_id
-            # `make_badge_params` receives the base symbol name (AC0820) and
-            # therefore cannot apply AC0820_L-only guardrails on its own.
-            # Re-finalize once the concrete variant is known so the large
-            # variant radius floor survives subsequent validation rounds.
-            badge_params = Action._finalize_ac08_style(variant_id, badge_params)
-
         badge_overrides = params.get("badge_overrides")
         if isinstance(badge_overrides, dict):
             badge_params.update(badge_overrides)
@@ -10536,6 +10522,33 @@ def _max_signature_delta(sig_a: dict[str, float], sig_b: dict[str, float]) -> fl
     return max(abs(sig_a[k] - sig_b[k]) for k in keys)
 
 
+def _needs_large_circle_overflow_guard(params: dict) -> bool:
+    """Return whether circle placement may intentionally exceed canvas bounds.
+
+    This is a generic geometry rule for large, centered CO² badges without
+    connectors. It replaces single-variant checks (for example ``AC0820_L``)
+    so future families with the same structure automatically get the same
+    robust radius handling.
+    """
+    if not bool(params.get("circle_enabled", True)):
+        return False
+    if bool(params.get("arm_enabled") or params.get("stem_enabled")):
+        return False
+    if not bool(params.get("draw_text", False)):
+        return False
+    if str(params.get("text_mode", "")).lower() != "co2":
+        return False
+
+    template_r = float(params.get("template_circle_radius", params.get("r", 0.0)) or 0.0)
+    current_r = float(params.get("r", 0.0) or 0.0)
+    width = float(params.get("width", params.get("badge_width", 0.0)) or 0.0)
+
+    large_template = template_r >= 10.0
+    large_current = current_r >= 10.0
+    wide_canvas = width >= 30.0
+    return bool(large_template or large_current or wide_canvas)
+
+
 def _scale_badge_params(
     anchor: dict,
     anchor_w: int,
@@ -10588,9 +10601,9 @@ def _scale_badge_params(
             scaled[key] = float(anchor[key]) * float(factor)
 
     if scaled.get("circle_enabled", True):
-        is_ac0820_l = str(target_variant).upper() == "AC0820_L"
-        required_r = (float(target_w) / 2.0) + 0.5 if is_ac0820_l else 1.0
-        if is_ac0820_l:
+        overflow_guard = _needs_large_circle_overflow_guard(scaled)
+        required_r = (float(target_w) / 2.0) + 0.5 if overflow_guard else 1.0
+        if overflow_guard:
             scaled["allow_circle_overflow"] = True
             scaled["circle_radius_lower_bound_px"] = float(
                 max(float(scaled.get("circle_radius_lower_bound_px", 1.0)), required_r)
@@ -10602,7 +10615,7 @@ def _scale_badge_params(
         r = max(1.0, float(scaled.get("r", 1.0)), required_r)
 
         max_fit_r = max(1.0, (min(float(target_w), float(target_h)) / 2.0) - half_stroke)
-        if not is_ac0820_l and r > max_fit_r:
+        if not overflow_guard and r > max_fit_r:
             r = max_fit_r
 
         min_cx = r + half_stroke
@@ -10611,12 +10624,12 @@ def _scale_badge_params(
         max_cy = float(target_h) - r - half_stroke
 
         if min_cx > max_cx:
-            cx = float(target_w) / 2.0 if not is_ac0820_l else float(Action._clip_scalar(cx, 0.0, float(target_w)))
+            cx = float(target_w) / 2.0 if not overflow_guard else float(Action._clip_scalar(cx, 0.0, float(target_w)))
         else:
             cx = float(Action._clip_scalar(cx, min_cx, max_cx))
 
         if min_cy > max_cy:
-            cy = float(target_h) / 2.0 if not is_ac0820_l else float(Action._clip_scalar(cy, 0.0, float(target_h)))
+            cy = float(target_h) / 2.0 if not overflow_guard else float(Action._clip_scalar(cy, 0.0, float(target_h)))
         else:
             cy = float(Action._clip_scalar(cy, min_cy, max_cy))
 
