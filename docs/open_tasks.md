@@ -26,12 +26,18 @@ focused on the actual project scope.
   - 2026-03-28: Vollbereichslauf erneut gestartet mit
     `python -u -m src.image_composite_converter ... --start AC0800 --end AC0899`
     und Log nach `artifacts/converted_images/reports/AC0800_AC0899_batch_2026-03-28.log` geschrieben.
-  - 2026-03-29: Erneuter Vollbereichslauf mit identischem Befehl und Log nach
+  - 2026-03-29 (Lauf A): Erneuter Vollbereichslauf mit identischem Befehl und Log nach
     `artifacts/converted_images/reports/AC0800_AC0899_batch_2026-03-29.log` geschrieben.
-  - Neuer Stand: **kein MuPDF-Stackoverflow/Segfault beobachtet** (Exit-Code `0`),
-    der Lauf stoppt aber weiterhin vor vollständiger Bereichsabdeckung wegen
-    semantischem Fehlmatch (`AC0838_L`: kein belastbarer Kreis-Kandidat).
-  - Ergebnis in `artifacts/converted_images/reports` mit Logreferenz festhalten.
+  - 2026-03-29 (Lauf B, Verifikation): gleicher Befehl erneut ausgeführt, diesmal reproduzierbarer Abbruch mit
+    `MuPDF error: exception stack overflow!` und Shell-Exit-Code `139` (Segmentation Fault).
+  - Dokumentierte Reproduktion: `artifacts/converted_images/reports/AC0800_AC0899_batch_2026-03-29_repro.log`
+    und Kurzprotokoll `artifacts/converted_images/reports/AC0800_AC0899_batch_2026-03-29_repro_summary.md`.
+  - 2026-03-29 (Lauf C, erneuter Retry): gleicher Vollbereichs-Befehl erneut ausgeführt, diesmal Exit-Code `0`.
+    Der Lauf blieb aber semantisch nicht vollständig erfolgreich (`batch_failure_summary.csv`: `AC0838_S` als `semantic_mismatch`).
+  - Qualitätsvergleich gegen den vorherigen Commit-Stand (`pixel_delta2_ranking.csv`, nur `AC08*`):
+    `51` gemeinsame Varianten, davon `50` unverändert und `1` verbessert (`AC0800_S`: `4980.680176` -> `1429.839966`),
+    **keine** verschlechterte Variante.
+  - Status: Crash-Freiheit für den Vollbereich ist **nicht** nachgewiesen; B2 bleibt offen bis der Lauf stabil Exit-Code `0` liefert.
 - [ ] B2.1: MuPDF-Stackoverflow/Segfault im Vollbereich `AC0800..AC0899` isolieren und robusten Guard ergänzen.
   - Die bisherigen B1-Fixes (Context-Manager im Fallback-Diff-Pfad) reichen für den Vollbereich noch nicht aus.
   - Die Rendering-Stabilisierung muss den nativen Crash im Haupt-Renderpfad (`render_svg_to_numpy`) verhindern.
