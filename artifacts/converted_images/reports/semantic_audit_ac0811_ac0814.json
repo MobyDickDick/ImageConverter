@@ -1,179 +1,95 @@
 [
   {
-    "filename": "AC0811_S.jpg",
-    "base_name": "AC0811",
-    "description_fragments": [
-      {
-        "source": "base_name",
-        "key": "AC0811",
-        "text": "Kelle mit Kreis oben und Griff nach unten."
-      },
-      {
-        "source": "variant_name",
-        "key": "AC0811_S",
-        "text": "Kelle mit Kreis oben und Griff nach unten."
-      },
-      {
-        "source": "canonical_base",
-        "key": "AC0811",
-        "text": "Kelle mit Kreis oben und Griff nach unten."
-      },
-      {
-        "source": "canonical_variant",
-        "key": "AC0811",
-        "text": "Kelle mit Kreis oben und Griff nach unten."
-      }
+    "variant": "AC0080_S",
+    "base": "AC0080",
+    "description_lookup_keys": [
+      "AC0080_S",
+      "AC0080_S",
+      "AC0080",
+      "AC0080"
     ],
     "recognized_description_elements": [
-      "Kelle mit Kreis oben und Griff nach unten.",
-      "Kelle mit Kreis oben und Griff nach unten.",
-      "Kelle mit Kreis oben und Griff nach unten.",
-      "Kelle mit Kreis oben und Griff nach unten."
+      "circle",
+      "stem",
+      "text"
     ],
-    "description_lookup_keys": [
-      "AC0811",
-      "AC0811_S",
-      "AC0811",
-      "AC0811"
-    ],
-    "description_text": "Kelle mit Kreis oben und Griff nach unten. Kelle mit Kreis oben und Griff nach unten. Kelle mit Kreis oben und Griff nach unten. Kelle mit Kreis oben und Griff nach unten.",
-    "derived_elements": [
-      "SEMANTIC: Kreis ohne Buchstabe",
-      "SEMANTIC: senkrechter Strich hinter dem Kreis"
-    ],
-    "semantic_priority_order": [
-      "family_rule",
-      "layout_override",
-      "description_heuristic"
-    ],
-    "semantic_conflicts": [],
-    "semantic_sources": {
-      "family_rule": [
-        "SEMANTIC: Kreis ohne Buchstabe",
-        "SEMANTIC: senkrechter Strich hinter dem Kreis"
-      ],
-      "description_heuristic": []
-    },
-    "status": "semantic_ok",
-    "mismatch_reason": "",
-    "mismatch_reasons": []
+    "description_text": "Wie AC0020: zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben. Geometrische Variante: identisch zur Referenz."
   },
   {
-    "filename": "AC0813_S.jpg",
-    "base_name": "AC0813",
-    "description_fragments": [
-      {
-        "source": "base_name",
-        "key": "AC0813",
-        "text": "Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 180° gedreht."
-      },
-      {
-        "source": "variant_name",
-        "key": "AC0813_S",
-        "text": "Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 180° gedreht."
-      },
-      {
-        "source": "canonical_base",
-        "key": "AC0813",
-        "text": "Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 180° gedreht."
-      },
-      {
-        "source": "canonical_variant",
-        "key": "AC0813",
-        "text": "Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 180° gedreht."
-      }
+    "variant": "AC0800_M",
+    "base": "AC0800",
+    "description_lookup_keys": [
+      "AC0800_M",
+      "AC0800_M",
+      "AC0800",
+      "AC0800"
     ],
     "recognized_description_elements": [
-      "Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 180° gedreht.",
-      "Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 180° gedreht.",
-      "Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 180° gedreht.",
-      "Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 180° gedreht."
+      "circle",
+      "text"
     ],
-    "description_lookup_keys": [
-      "AC0813",
-      "AC0813_S",
-      "AC0813",
-      "AC0813"
-    ],
-    "description_text": "Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 180° gedreht. Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 180° gedreht. Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 180° gedreht. Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 180° gedreht.",
-    "derived_elements": [
-      "SEMANTIC: Kreis ohne Buchstabe",
-      "SEMANTIC: senkrechter Strich oben vom Kreis"
-    ],
-    "semantic_priority_order": [
-      "family_rule",
-      "layout_override",
-      "description_heuristic"
-    ],
-    "semantic_conflicts": [],
-    "semantic_sources": {
-      "family_rule": [
-        "SEMANTIC: Kreis ohne Buchstabe",
-        "SEMANTIC: senkrechter Strich oben vom Kreis"
-      ],
-      "description_heuristic": []
-    },
-    "status": "semantic_ok",
-    "mismatch_reason": "",
-    "mismatch_reasons": []
+    "description_text": "Kreisförmiges Badge."
   },
   {
-    "filename": "AC0811_M.jpg",
-    "base_name": "AC0811",
-    "description_fragments": [
-      {
-        "source": "base_name",
-        "key": "AC0811",
-        "text": "Kelle mit Kreis oben und Griff nach unten."
-      },
-      {
-        "source": "variant_name",
-        "key": "AC0811_M",
-        "text": "Kelle mit Kreis oben und Griff nach unten."
-      },
-      {
-        "source": "canonical_base",
-        "key": "AC0811",
-        "text": "Kelle mit Kreis oben und Griff nach unten."
-      },
-      {
-        "source": "canonical_variant",
-        "key": "AC0811",
-        "text": "Kelle mit Kreis oben und Griff nach unten."
-      }
+    "variant": "AC0080_L",
+    "base": "AC0080",
+    "description_lookup_keys": [
+      "AC0080_L",
+      "AC0080_L",
+      "AC0080",
+      "AC0080"
     ],
     "recognized_description_elements": [
-      "Kelle mit Kreis oben und Griff nach unten.",
-      "Kelle mit Kreis oben und Griff nach unten.",
-      "Kelle mit Kreis oben und Griff nach unten.",
-      "Kelle mit Kreis oben und Griff nach unten."
+      "circle",
+      "stem",
+      "text"
     ],
+    "description_text": "Wie AC0020: zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben. Geometrische Variante: identisch zur Referenz."
+  },
+  {
+    "variant": "AC0800_L",
+    "base": "AC0800",
     "description_lookup_keys": [
-      "AC0811",
-      "AC0811_M",
-      "AC0811",
-      "AC0811"
+      "AC0800_L",
+      "AC0800_L",
+      "AC0800",
+      "AC0800"
     ],
-    "description_text": "Kelle mit Kreis oben und Griff nach unten. Kelle mit Kreis oben und Griff nach unten. Kelle mit Kreis oben und Griff nach unten. Kelle mit Kreis oben und Griff nach unten.",
-    "derived_elements": [
-      "SEMANTIC: Kreis ohne Buchstabe",
-      "SEMANTIC: senkrechter Strich hinter dem Kreis"
+    "recognized_description_elements": [
+      "circle",
+      "text"
     ],
-    "semantic_priority_order": [
-      "family_rule",
-      "layout_override",
-      "description_heuristic"
+    "description_text": "Kreisförmiges Badge."
+  },
+  {
+    "variant": "AC0800_S",
+    "base": "AC0800",
+    "description_lookup_keys": [
+      "AC0800_S",
+      "AC0800_S",
+      "AC0800",
+      "AC0800"
     ],
-    "semantic_conflicts": [],
-    "semantic_sources": {
-      "family_rule": [
-        "SEMANTIC: Kreis ohne Buchstabe",
-        "SEMANTIC: senkrechter Strich hinter dem Kreis"
-      ],
-      "description_heuristic": []
-    },
-    "status": "semantic_ok",
-    "mismatch_reason": "",
-    "mismatch_reasons": []
+    "recognized_description_elements": [
+      "circle",
+      "text"
+    ],
+    "description_text": "Kreisförmiges Badge."
+  },
+  {
+    "variant": "AC0080_M",
+    "base": "AC0080",
+    "description_lookup_keys": [
+      "AC0080_M",
+      "AC0080_M",
+      "AC0080",
+      "AC0080"
+    ],
+    "recognized_description_elements": [
+      "circle",
+      "stem",
+      "text"
+    ],
+    "description_text": "Wie AC0020: zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben. Geometrische Variante: identisch zur Referenz."
   }
 ]
