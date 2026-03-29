@@ -1,4 +1,5 @@
 def _in_requested_range(filename: str, start_ref: str, end_ref: str) -> bool:
+    start_ref, end_ref = _normalize_range_bounds(start_ref, end_ref)
     stem = get_base_name_from_file(os.path.splitext(filename)[0]).upper()
     stem_parts = _extract_ref_parts(stem)
     start_parts = _extract_ref_parts(start_ref)
@@ -42,3 +43,22 @@ def _in_requested_range(filename: str, start_ref: str, end_ref: str) -> bool:
         start_key, end_key = end_key, start_key
 
     return start_key <= stem_parts <= end_key
+
+
+def _normalize_range_bounds(start_ref: str, end_ref: str) -> tuple[str, str]:
+    start_value = str(start_ref or "").strip()
+    end_value = str(end_ref or "").strip()
+
+    # Accept shorthand console input such as "AC080 - AC080" entered in one field.
+    if (not end_value) and start_value:
+        split = re.split(r"\s*(?:-|–|—|BIS|TO|\.{2,3})\s*", start_value, maxsplit=1, flags=re.IGNORECASE)
+        if len(split) == 2 and split[0].strip() and split[1].strip():
+            start_value, end_value = split[0].strip(), split[1].strip()
+
+    # Tolerate separators accidentally kept in one side (e.g. "- AC080").
+    start_value = re.sub(r"^\s*(?:-|–|—|BIS|TO|\.{2,3})\s*", "", start_value, flags=re.IGNORECASE).strip()
+    end_value = re.sub(r"^\s*(?:-|–|—|BIS|TO|\.{2,3})\s*", "", end_value, flags=re.IGNORECASE).strip()
+    start_value = re.sub(r"\s*(?:-|–|—|BIS|TO|\.{2,3})\s*$", "", start_value, flags=re.IGNORECASE).strip()
+    end_value = re.sub(r"\s*(?:-|–|—|BIS|TO|\.{2,3})\s*$", "", end_value, flags=re.IGNORECASE).strip()
+
+    return start_value, end_value
