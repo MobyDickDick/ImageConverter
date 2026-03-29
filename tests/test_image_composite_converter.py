@@ -914,6 +914,17 @@ def test_parse_description_falls_back_to_variant_filename_when_base_name_missing
     assert "SEMANTIC: senkrechter Strich hinter dem Kreis" in list(params.get("elements", []))
 
 
+def test_parse_description_recognizes_co2_with_caret_notation() -> None:
+    """Descriptions using CO^2 notation must still activate the CO₂ semantic label."""
+    raw = {"AC0831": "die Beschriftung fehlt ($CO^2$)."}
+
+    _desc, params = image_composite_converter.Reflection(raw).parse_description("AC0831_L", "AC0831_L.jpg")
+
+    assert params["mode"] == "semantic_badge"
+    assert "SEMANTIC: Kreis + Buchstabe CO_2" in list(params.get("elements", []))
+    assert "SEMANTIC: senkrechter Strich hinter dem Kreis" in list(params.get("elements", []))
+
+
 def test_parse_description_does_not_misread_ac0130_text_as_top_source_ref() -> None:
     """AC0130 mentions 'oben mitte' and 'in beiden Diagonalen' but has no donor image reference."""
     raw = image_composite_converter._load_description_mapping(
