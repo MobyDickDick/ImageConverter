@@ -246,7 +246,7 @@ def _bind_action_facade() -> type:
         LIGHT_CIRCLE_TEXT_GRAY = 128
 
     for name, value in list(globals().items()):
-        if callable(value) and (name.startswith("_") or name in {"generate_badge_svg", "calculate_error", "render_svg_to_numpy"}):
+        if callable(value) and (name.startswith("_") or name in {"generate_badge_svg", "calculate_error", "render_svg_to_numpy", "calculate_delta2_stats", "create_diff_image"}):
             setattr(Action, name, staticmethod(value))
     globals()["Action"] = Action
     return Action
