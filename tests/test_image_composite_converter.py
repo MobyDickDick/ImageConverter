@@ -892,6 +892,28 @@ def test_parse_description_marks_ac0800_as_plain_ring_family() -> None:
     assert "SEMANTIC: Kreis ohne Buchstabe" in list(params.get("elements", []))
 
 
+def test_parse_description_recognizes_ac08_family_when_given_variant_name() -> None:
+    """Variant stems like AC0831_L must still inherit AC0831 semantic text family rules."""
+    ref = image_composite_converter.Reflection({})
+
+    _desc, params = ref.parse_description("AC0831_L", "AC0831_L.jpg")
+
+    assert params["mode"] == "semantic_badge"
+    assert "SEMANTIC: Kreis + Buchstabe" in list(params.get("elements", []))
+    assert "SEMANTIC: senkrechter Strich hinter dem Kreis" in list(params.get("elements", []))
+
+
+def test_parse_description_falls_back_to_variant_filename_when_base_name_missing() -> None:
+    """Semantic family rules must still apply when only the variant filename carries the symbol stem."""
+    ref = image_composite_converter.Reflection({})
+
+    _desc, params = ref.parse_description("", "ac0831_l.jpg")
+
+    assert params["mode"] == "semantic_badge"
+    assert "SEMANTIC: Kreis + Buchstabe" in list(params.get("elements", []))
+    assert "SEMANTIC: senkrechter Strich hinter dem Kreis" in list(params.get("elements", []))
+
+
 def test_parse_description_does_not_misread_ac0130_text_as_top_source_ref() -> None:
     """AC0130 mentions 'oben mitte' and 'in beiden Diagonalen' but has no donor image reference."""
     raw = image_composite_converter._load_description_mapping(
@@ -3172,6 +3194,24 @@ def test_make_badge_params_applies_compact_ac0831_small_variant_text_tuning() ->
     assert float(params["co2_sub_font_scale"]) <= 48.0
     assert float(params["co2_dy"]) >= 0.35
     assert float(params["co2_superscript_min_gap_scale"]) >= 0.19
+
+
+def test_make_badge_params_accepts_ac0831_variant_stem_with_size_suffix() -> None:
+    """AC0831_L should resolve to AC0831 defaults and keep CO² rendering enabled."""
+    params = Action.make_badge_params(25, 45, "AC0831_L", None)
+
+    assert params is not None
+    assert bool(params.get("draw_text", False))
+    assert str(params.get("text_mode", "")).lower() == "co2"
+
+
+def test_make_badge_params_accepts_variant_with_extension_and_case_mixed() -> None:
+    """Badge defaults should normalize mixed-case variant identifiers with filename extensions."""
+    params = Action.make_badge_params(25, 45, "ac0831_l.jpg", None)
+
+    assert params is not None
+    assert bool(params.get("draw_text", False))
+    assert str(params.get("text_mode", "")).lower() == "co2"
 
 
 def test_make_badge_params_ac0832_l_uses_superscript_two() -> None:
