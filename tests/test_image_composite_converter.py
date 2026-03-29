@@ -2031,6 +2031,12 @@ def test_in_requested_range_partial_filter_ignores_size_suffix_in_bounds() -> No
     assert image_composite_converter._in_requested_range("AC0800_L.jpg", "AC080_L", "AC080_L") is True
 
 
+def test_in_requested_range_does_not_expand_identical_short_family_to_other_series() -> None:
+    """AC080..AC080 should stay within AC080* and exclude AC0812 variants."""
+    assert image_composite_converter._in_requested_range("AC0800_M.jpg", "AC080", "AC080") is True
+    assert image_composite_converter._in_requested_range("AC0812_M.jpg", "AC080", "AC080") is False
+
+
 def test_in_requested_range_supports_one_sided_bounds() -> None:
     """When one bound is invalid, the valid bound should still be applied."""
     assert image_composite_converter._in_requested_range("AC0812_L.jpg", "", "AC0812") is True
