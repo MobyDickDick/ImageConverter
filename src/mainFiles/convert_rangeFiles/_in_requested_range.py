@@ -3,11 +3,15 @@ def _in_requested_range(filename: str, start_ref: str, end_ref: str) -> bool:
     stem_parts = _extract_ref_parts(stem)
     start_parts = _extract_ref_parts(start_ref)
     end_parts = _extract_ref_parts(end_ref)
+    start_token = _normalize_range_token(start_ref)
+    end_token = _normalize_range_token(end_ref)
 
     # Identical start/end filters should also work as a prefix selector so an
     # input like AC081..AC081 includes AC0814_L, AC0813_M, etc.
     if _matches_exact_prefix_filter(filename, start_ref, end_ref):
         return True
+    if start_token and start_token == end_token:
+        return False
 
     # If no parseable range bounds are provided, fall back to a shared partial
     # token filter. This keeps interactive batches small, e.g. AC08..A08 -> A08*.
