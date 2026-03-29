@@ -19,3 +19,6 @@ vscode-extension/tinylanguage-vscode-0.1.0.vsix
 artifacts/perf/**/*.prof
 converted_symbols
 converted_images
+!artifacts/converted_images/
+!artifacts/converted_images/reports/
+!artifacts/converted_images/reports/call_tree_image_composite_converter.csv
