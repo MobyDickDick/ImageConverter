@@ -62,6 +62,8 @@ AC08_REGRESSION_VARIANTS = tuple(dict.fromkeys(AC08_REGRESSION_VARIANTS))
 # criteria reports used by this converter/test suite.
 AC08_PREVIOUSLY_GOOD_VARIANTS = ("AC0800_L", "AC0800_M", "AC0800_S", "AC0811_L")
 
+
+
 DEFAULT_CALL_TREE_CSV_PATH = "artifacts/converted_images/reports/call_tree_image_composite_converter.csv"
 
 OPTIONAL_DEPENDENCY_ERRORS: dict[str, str] = {}
@@ -123,19 +125,6 @@ def annotate_image_regions(img, regions: list[dict[str, object]]):
     return annotate_image_regions_impl(img, regions, cv2_module=cv2)
 
 
-def analyze_range(folder_path: str, output_root: str | None = None, start_ref: str = "", end_ref: str = "ZZZZZZ") -> str:
-    return analyze_range_impl(
-        folder_path=folder_path,
-        output_root=output_root,
-        start_ref=start_ref,
-        end_ref=end_ref,
-        default_output_root_fn=_default_converted_symbols_root,
-        in_requested_range_fn=_in_requested_range,
-        detect_regions_fn=detect_relevant_regions,
-        annotate_regions_fn=annotate_image_regions,
-        cv2_module=cv2,
-        np_module=np,
-    )
 
 
 def _optional_dependency_base_dir() -> Path:
@@ -834,34 +823,6 @@ def _missing_required_image_dependencies() -> list[str]:
     return missing
 
 
-def _bootstrap_required_image_dependencies() -> list[str]:
-    missing = _missing_required_image_dependencies()
-    if not missing:
-        return []
-
-    cmd = [sys.executable, "-m", "pip", "install", *missing]
-    print(f"[INFO] Fehlende Bild-Abhängigkeiten gefunden: {', '.join(missing)}")
-    print(f"[INFO] Installiere via: {' '.join(cmd)}")
-    try:
-        subprocess.run(cmd, check=True)
-    except subprocess.CalledProcessError as exc:
-        raise RuntimeError(
-            "Automatische Installation fehlgeschlagen. "
-            "Bitte Abhängigkeiten manuell installieren oder Proxy/Netzwerk prüfen."
-        ) from exc
-
-    # Re-import in current process so conversion can run without restart.
-    global cv2, np
-    if "opencv-python-headless" in missing:
-        import cv2 as _cv2
-
-        cv2 = _cv2
-    if "numpy" in missing:
-        import numpy as _np
-
-        np = _np
-
-    return missing
 
 
 def rgb_to_hex(rgb: np.ndarray) -> str:
@@ -924,11 +885,6 @@ class DescriptionMappingError(ValueError):
         return f"{self.message} ({self.span.format()})"
 
 
-def _load_description_mapping(path: str) -> dict[str, str]:
-    ext = os.path.splitext(path)[1].lower()
-    if ext == ".xml":
-        return _load_description_mapping_from_xml(path)
-    return _load_description_mapping_from_csv(path)
 
 
 def _load_description_mapping_from_csv(path: str) -> dict[str, str]:
@@ -1093,33 +1049,6 @@ def _required_vendor_packages() -> list[str]:
     ]
 
 
-def build_linux_vendor_install_command(
-    vendor_dir: str = "vendor",
-    platform_tag: str = "manylinux2014_x86_64",
-    python_version: str | None = None,
-) -> list[str]:
-    if python_version is None:
-        python_version = f"{sys.version_info.major}{sys.version_info.minor}"
-
-    return [
-        sys.executable,
-        "-m",
-        "pip",
-        "install",
-        "--upgrade",
-        "--target",
-        vendor_dir,
-        "--platform",
-        platform_tag,
-        "--implementation",
-        "cp",
-        "--python-version",
-        python_version,
-        "--only-binary=:all:",
-        "--upgrade-strategy",
-        "eager",
-        *_required_vendor_packages(),
-    ]
 
 
 class Reflection:
@@ -1368,28 +1297,6 @@ def _render_svg_to_numpy_via_subprocess(svg_string: str, size_w: int, size_h: in
         return None
 
 
-def _run_svg_render_subprocess_entrypoint() -> int:
-    try:
-        payload = json.loads(sys.stdin.buffer.read().decode("utf-8"))
-    except Exception:
-        return 2
-    svg = str(payload.get("svg", ""))
-    w = int(payload.get("w", 0))
-    h = int(payload.get("h", 0))
-    if w <= 0 or h <= 0:
-        return 2
-    rendered = _render_svg_to_numpy_inprocess(svg, w, h)
-    if rendered is None:
-        sys.stdout.write('{"ok": false}\n')
-        return 0
-    response = {
-        "ok": True,
-        "w": int(rendered.shape[1]),
-        "h": int(rendered.shape[0]),
-        "data": base64.b64encode(rendered.tobytes()).decode("ascii"),
-    }
-    sys.stdout.write(json.dumps(response, separators=(",", ":")))
-    return 0
 
 
 class Action:
@@ -9799,420 +9706,6 @@ def _try_template_transfer(
     return updated_row, detail
 
 
-def convert_range(
-    folder_path: str,
-    csv_path: str,
-    iterations: int,
-    start_ref: str = "AR0102",
-    end_ref: str = "AR0104",
-    debug_ac0811_dir: str | None = None,
-    debug_element_diff_dir: str | None = None,
-    output_root: str | None = None,
-    selected_variants: set[str] | None = None,
-) -> str:
-    out_root = output_root or _default_converted_symbols_root()
-    svg_out_dir = _converted_svg_output_dir(out_root)
-    diff_out_dir = _diff_output_dir(out_root)
-    reports_out_dir = _reports_output_dir(out_root)
-
-    os.makedirs(svg_out_dir, exist_ok=True)
-    os.makedirs(diff_out_dir, exist_ok=True)
-    os.makedirs(reports_out_dir, exist_ok=True)
-
-    normalized_selected_variants = {str(v).upper() for v in (selected_variants or set()) if str(v).strip()}
-    files = sorted(
-        f
-        for f in os.listdir(folder_path)
-        if f.lower().endswith((".bmp", ".jpg", ".png", ".gif"))
-        and _in_requested_range(f, start_ref, end_ref)
-        and (not normalized_selected_variants or os.path.splitext(f)[0].upper() in normalized_selected_variants)
-    )
-    if cv2 is None or np is None:
-        log_path = os.path.join(reports_out_dir, "Iteration_Log.csv")
-        with open(log_path, mode="w", encoding="utf-8-sig", newline="") as f:
-            writer = csv.writer(f, delimiter=";")
-            writer.writerow(["Dateiname", "Gefundene Elemente", "Beste Iteration", "Diff-Score", "FehlerProPixel"])
-            for filename in files:
-                stem = os.path.splitext(filename)[0]
-                image_path = os.path.join(folder_path, filename)
-                svg_content = _render_embedded_raster_svg(image_path)
-                svg_path = os.path.join(svg_out_dir, f"{stem}.svg")
-                with open(svg_path, "w", encoding="utf-8") as svg_file:
-                    svg_file.write(svg_content)
-                if fitz is not None:
-                    diff = _create_diff_image_without_cv2(image_path, svg_content)
-                    diff.save(os.path.join(diff_out_dir, f"{stem}_diff.png"))
-                writer.writerow([filename, "embedded-raster", 0, "0.00", "0.00000000"])
-        with open(os.path.join(reports_out_dir, "fallback_mode.txt"), "w", encoding="utf-8") as f:
-            f.write(
-                "Fallback-Modus aktiv: fehlende numpy/opencv-Abhängigkeiten; "
-                "SVG-Dateien wurden als eingebettete Rasterbilder erzeugt"
-                + (" und Differenzbilder via Pillow/PyMuPDF geschrieben.\n" if fitz is not None else ".\n")
-            )
-        generate_conversion_overviews(diff_out_dir, svg_out_dir, reports_out_dir)
-        return out_root
-    rng = _conversion_random()
-    run_seed = rng.randrange(1 << 30)
-    Action.STOCHASTIC_RUN_SEED = int(run_seed)
-    process_files = list(files)
-    rng.shuffle(process_files)
-
-    base_iterations = max(1, int(iterations))
-    # Continue quality iterations while a pass still improves at least one case.
-    # Abort as soon as the next pass cannot beat the previous state.
-    max_quality_passes = 4
-    quality_logs: list[dict[str, object]] = []
-    result_map: dict[str, dict[str, object]] = {}
-    batch_failures: list[dict[str, str]] = []
-    stop_after_failure = False
-    existing_donor_rows = _load_existing_conversion_rows(out_root, folder_path)
-
-    def _convert_one(filename: str, iteration_budget: int, badge_rounds: int) -> tuple[dict[str, object] | None, bool]:
-        image_path = os.path.join(folder_path, filename)
-        base = os.path.splitext(filename)[0]
-        log_file = os.path.join(reports_out_dir, f"{base}_element_validation.log")
-        try:
-            res = run_iteration_pipeline(
-                image_path,
-                csv_path,
-                max(1, int(iteration_budget)),
-                svg_out_dir,
-                diff_out_dir,
-                reports_out_dir,
-                debug_ac0811_dir,
-                debug_element_diff_dir,
-                badge_validation_rounds=max(1, int(badge_rounds)),
-            )
-        except Exception as exc:
-            batch_failures.append(
-                {
-                    "filename": filename,
-                    "status": "batch_error",
-                    "reason": type(exc).__name__,
-                    "details": str(exc),
-                    "log_file": os.path.basename(log_file),
-                }
-            )
-            with open(log_file, "w", encoding="utf-8") as f:
-                f.write(f"status=batch_error\nfilename={filename}\nreason={type(exc).__name__}\ndetails={exc}\n")
-            print(f"[WARN] {filename}: Batchlauf setzt nach Fehler fort ({type(exc).__name__}: {exc})")
-            return None, True
-        if not res:
-            details = _read_validation_log_details(log_file)
-            status = details.get("status", "")
-            if status in {"render_failure", "batch_error"}:
-                batch_failures.append(
-                    {
-                        "filename": filename,
-                        "status": status,
-                        "reason": details.get("failure_reason", details.get("reason", "unknown")),
-                        "details": details.get("params_snapshot", details.get("details", "")),
-                        "log_file": os.path.basename(log_file),
-                    }
-                )
-                print(f"[WARN] {filename}: Fehler protokolliert, Batchlauf wird fortgesetzt ({status}).")
-                return None, True
-            if status == "semantic_mismatch":
-                batch_failures.append(
-                    {
-                        "filename": filename,
-                        "status": status,
-                        "reason": "semantic_mismatch",
-                        "details": details.get("issue", ""),
-                        "log_file": os.path.basename(log_file),
-                    }
-                )
-                print(f"[WARN] {filename}: Semantischer Fehlmatch, Batchlauf stoppt nach diesem Fehler.")
-                return None, True
-            return None, False
-
-        _base, _desc, params, best_iter, best_error = res
-        details = _read_validation_log_details(log_file)
-        img = cv2.imread(image_path)
-        pixel_count = 1.0
-        width = 0
-        height = 0
-        mean_delta2 = float("inf")
-        std_delta2 = float("inf")
-        if img is not None:
-            height, width = img.shape[:2]
-            pixel_count = float(max(1, width * height))
-            svg_path = os.path.join(svg_out_dir, f"{os.path.splitext(filename)[0]}.svg")
-            if os.path.exists(svg_path):
-                try:
-                    with open(svg_path, "r", encoding="utf-8") as f:
-                        svg_content = f.read()
-                except OSError:
-                    svg_content = ""
-                if svg_content:
-                    rendered = Action.render_svg_to_numpy(svg_content, width, height)
-                    mean_delta2, std_delta2 = Action.calculate_delta2_stats(img, rendered)
-
-        return {
-            "filename": filename,
-            "params": params,
-            "best_iter": int(best_iter),
-            "best_error": float(best_error),
-            "convergence": str(details.get("convergence", "")).strip().lower(),
-            "error_per_pixel": float(best_error) / pixel_count,
-            "mean_delta2": float(mean_delta2),
-            "std_delta2": float(std_delta2),
-            "w": int(width),
-            "h": int(height),
-            "base": get_base_name_from_file(os.path.splitext(filename)[0]).upper(),
-            "variant": os.path.splitext(filename)[0].upper(),
-        }, False
-
-    # Initial conversion pass for all forms.
-    for filename in process_files:
-        row, failed = _convert_one(filename, iteration_budget=base_iterations, badge_rounds=6)
-        if failed:
-            stop_after_failure = True
-            break
-        if row is None:
-            continue
-
-        donor_rows = [
-            prev
-            for key, prev in result_map.items()
-            if key != filename and math.isfinite(float(prev.get("error_per_pixel", float("inf"))))
-        ]
-        donor_rows.extend(prev for prev in existing_donor_rows if str(prev.get("filename", "")) != filename)
-        if donor_rows:
-            transferred, _detail = _try_template_transfer(
-                target_row=row,
-                donor_rows=donor_rows,
-                folder_path=folder_path,
-                svg_out_dir=svg_out_dir,
-                diff_out_dir=diff_out_dir,
-                rng=rng,
-            )
-            if transferred is not None and float(transferred.get("error_per_pixel", float("inf"))) + 1e-9 < float(row.get("error_per_pixel", float("inf"))):
-                row = transferred
-
-        result_map[filename] = row
-
-    current_rows = [
-        row
-        for row in result_map.values()
-        if math.isfinite(float(row.get("error_per_pixel", float("inf"))))
-    ]
-    ranked_rows = sorted(current_rows, key=_quality_sort_key)
-    first_cut = max(1, len(ranked_rows) // 3) if ranked_rows else 0
-    initial_top_tercile = ranked_rows[:first_cut]
-    initial_threshold = float(initial_top_tercile[-1]["error_per_pixel"]) if initial_top_tercile else float("inf")
-
-    successful_threshold = _compute_successful_conversions_error_threshold(current_rows)
-    threshold_source = "successful-conversions-mean-plus-2std"
-    if not math.isfinite(successful_threshold):
-        successful_threshold = initial_threshold
-        threshold_source = "initial-first-tercile"
-
-    cfg = _load_quality_config(reports_out_dir)
-    allowed_error_pp = successful_threshold
-    cfg_value = cfg.get("allowed_error_per_pixel")
-    if cfg_value is not None:
-        try:
-            allowed_error_pp = max(0.0, float(cfg_value))
-            threshold_source = "manual-config"
-        except (TypeError, ValueError):
-            allowed_error_pp = successful_threshold
-
-    # Global policy: do not freeze individual variants. Every quality pass keeps
-    # all variants eligible so each run can re-evaluate with stochastic search
-    # while still converging by only accepting strict improvements.
-    skip_variants: set[str] = set()
-
-    _write_quality_config(
-        reports_out_dir,
-        allowed_error_per_pixel=allowed_error_pp,
-        skipped_variants=sorted(v for v in skip_variants if v),
-        source=threshold_source,
-    )
-
-    # Iteratively refine unresolved quality cases while preserving all already
-    # successful outputs (replace only when strictly better).
-    strategy_logs: list[dict[str, object]] = []
-    for pass_idx in range(1, max_quality_passes + 1):
-        if stop_after_failure:
-            break
-        Action.STOCHASTIC_SEED_OFFSET = pass_idx
-        current_rows = [
-            row
-            for row in result_map.values()
-            if math.isfinite(float(row.get("error_per_pixel", float("inf"))))
-        ]
-        candidates = _select_open_quality_cases(
-            current_rows,
-            allowed_error_per_pixel=allowed_error_pp,
-            skip_variants=skip_variants,
-        )
-        # Fallback to the historical selection when no explicit open set exists
-        # (e.g. without threshold config).
-        if not candidates:
-            candidates = _select_middle_lower_tercile(current_rows)
-        if not candidates:
-            break
-
-        improved_in_pass = False
-        iteration_budget, badge_rounds = _iteration_strategy_for_pass(pass_idx, base_iterations)
-        if len(candidates) > 1:
-            rng.shuffle(candidates)
-        for row in candidates:
-            filename = str(row["filename"])
-            adaptive_iteration_budget = _adaptive_iteration_budget_for_quality_row(row, iteration_budget)
-            new_row, failed = _convert_one(filename, iteration_budget=adaptive_iteration_budget, badge_rounds=badge_rounds)
-            if failed:
-                stop_after_failure = True
-                break
-            if new_row is None:
-                continue
-
-            improved, decision, prev_error_pp, new_error_pp, prev_mean_delta2, new_mean_delta2 = _evaluate_quality_pass_candidate(
-                row,
-                new_row,
-            )
-            if improved:
-                result_map[filename] = new_row
-                improved_in_pass = True
-
-            quality_logs.append(
-                {
-                    "pass": pass_idx,
-                    "filename": filename,
-                    "old_error_per_pixel": prev_error_pp,
-                    "new_error_per_pixel": new_error_pp,
-                    "old_mean_delta2": prev_mean_delta2,
-                    "new_mean_delta2": new_mean_delta2,
-                    "improved": improved,
-                    "decision": decision,
-                    "iteration_budget": adaptive_iteration_budget,
-                    "badge_validation_rounds": badge_rounds,
-                }
-            )
-
-        # Stop as soon as a full pass yields no strict improvement.
-        if stop_after_failure or not improved_in_pass:
-            break
-
-    _write_quality_pass_report(reports_out_dir, quality_logs)
-    _write_batch_failure_summary(reports_out_dir, batch_failures)
-    if strategy_logs:
-        strategy_path = os.path.join(reports_out_dir, "strategy_switch_template_transfers.csv")
-        with open(strategy_path, "w", encoding="utf-8", newline="") as f:
-            writer = csv.writer(f, delimiter=";")
-            writer.writerow([
-                "filename",
-                "donor_variant",
-                "rotation_deg",
-                "scale",
-                "old_error_per_pixel",
-                "new_error_per_pixel",
-            ])
-            for row in strategy_logs:
-                writer.writerow([
-                    row["filename"],
-                    row["donor_variant"],
-                    row["rotation_deg"],
-                    f"{float(row['scale']):.4f}",
-                    f"{float(row['old_error_per_pixel']):.8f}",
-                    f"{float(row['new_error_per_pixel']):.8f}",
-                ])
-
-    log_path = os.path.join(reports_out_dir, "Iteration_Log.csv")
-    semantic_results: list[dict[str, object]] = []
-    with open(log_path, mode="w", encoding="utf-8-sig", newline="") as f:
-        writer = csv.writer(f, delimiter=";")
-        writer.writerow(["Dateiname", "Gefundene Elemente", "Beste Iteration", "Diff-Score", "FehlerProPixel"])
-        for filename in files:
-            row = result_map.get(filename)
-            if row is None:
-                continue
-            params = dict(row["params"])
-            writer.writerow([
-                filename,
-                " + ".join(params.get("elements", [])),
-                int(row["best_iter"]),
-                f"{float(row['best_error']):.2f}",
-                f"{float(row['error_per_pixel']):.8f}",
-            ])
-
-            if params.get("mode") == "semantic_badge":
-                semantic_results.append(
-                    {
-                        "filename": filename,
-                        "base": row["base"],
-                        "variant": row["variant"],
-                        "w": int(row.get("w", 0)),
-                        "h": int(row.get("h", 0)),
-                        "error": float(row["best_error"]),
-                    }
-                )
-
-    _harmonize_semantic_size_variants(semantic_results, folder_path, svg_out_dir, reports_out_dir)
-    semantic_audit_rows = [
-        dict(audit)
-        for row in result_map.values()
-        for audit in [dict(row.get("params", {}).get("semantic_audit", {}))]
-        if audit
-    ]
-    _write_semantic_audit_report(reports_out_dir, semantic_audit_rows)
-    _write_pixel_delta2_ranking(folder_path, svg_out_dir, reports_out_dir)
-    _write_ac08_weak_family_status_report(
-        reports_out_dir,
-        selected_variants=sorted(normalized_selected_variants),
-    )
-    _write_ac08_regression_manifest(
-        reports_out_dir,
-        folder_path=folder_path,
-        csv_path=csv_path,
-        iterations=iterations,
-        selected_variants=sorted(normalized_selected_variants),
-    )
-    ac08_success_gate = _write_ac08_success_criteria_report(
-        reports_out_dir,
-        selected_variants=sorted(normalized_selected_variants),
-    )
-    if ac08_success_gate is not None:
-        failed_criteria = [
-            key
-            for key in (
-                "criterion_no_new_batch_aborts",
-                "criterion_no_accepted_regressions",
-                "criterion_validation_rounds_recorded",
-                "criterion_regression_set_improved",
-                "criterion_stable_families_not_worse",
-            )
-            if not bool(ac08_success_gate.get(key, False))
-        ]
-        if failed_criteria:
-            print(
-                "[WARN] AC08 success gate failed: "
-                + ", ".join(failed_criteria)
-                + f" (mean_validation_rounds_per_file={float(ac08_success_gate.get('mean_validation_rounds_per_file', 0.0)):.3f})"
-            )
-        else:
-            print(
-                "[INFO] AC08 success gate passed "
-                f"(mean_validation_rounds_per_file={float(ac08_success_gate.get('mean_validation_rounds_per_file', 0.0)):.3f})."
-            )
-    if SUCCESSFUL_CONVERSIONS_MANIFEST.exists():
-        update_successful_conversions_manifest_with_metrics(
-            folder_path=folder_path,
-            svg_out_dir=svg_out_dir,
-            reports_out_dir=reports_out_dir,
-            manifest_path=SUCCESSFUL_CONVERSIONS_MANIFEST,
-        )
-    generated_overviews = generate_conversion_overviews(diff_out_dir, svg_out_dir, reports_out_dir)
-    if generated_overviews:
-        print(
-            "[INFO] Übersichts-Kacheln erzeugt: "
-            + ", ".join(f"{key}={path}" for key, path in sorted(generated_overviews.items()))
-        )
-
-    Action.STOCHASTIC_SEED_OFFSET = 0
-    Action.STOCHASTIC_RUN_SEED = 0
-    return out_root
 
 
 def _read_svg_geometry(svg_path: str) -> tuple[int, int, dict] | None:
@@ -11623,161 +11116,6 @@ def write_successful_conversion_quality_report(
     return csv_path, txt_path, sorted_metrics
 
 
-def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
-    parser = argparse.ArgumentParser(
-        description=(
-            "Verarbeite einen Bildordner entweder im Analysemodus (Bounding-Boxes/JSON) "
-            "oder im Konvertierungsmodus (SVG-/Diff-/Report-Ausgaben)."
-        ),
-        epilog=(
-            "Beispiele:\n"
-            "  python -m src.image_composite_converter artifacts/images_to_convert "
-            "--descriptions-path artifacts/images_to_convert/Finale_Wurzelformen_V3.xml "
-            "--output-dir artifacts/converted_images --start AC0000 --end ZZ9999\n"
-            "  python -m src.image_composite_converter artifacts/images_to_convert "
-            "--mode annotate --output-dir artifacts/annotated --start AC0811 --end AC0814\n"
-            "  python -m src.image_composite_converter --print-linux-vendor-command --vendor-dir vendor"
-        ),
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-    )
-    parser.add_argument(
-        "--mode",
-        choices=("annotate", "convert"),
-        default="convert",
-        help="annotate=markiere Kreis/Kellenstiel/Schrift und schreibe Koordinaten; convert=SVG-Konvertierung mit Reports",
-    )
-    parser.add_argument(
-        "folder_path",
-        nargs="?",
-        default="artifacts/images_to_convert",
-        help="Pfad zum Ordner mit den Bildern (Default: artifacts/images_to_convert)",
-    )
-    parser.add_argument(
-        "csv_or_output",
-        nargs="?",
-        default=None,
-        help=(
-            "Optional: Pfad zur CSV/TSV/XML-Export-Tabelle ODER Ausgabeverzeichnis für konvertierte Dateien. "
-            "(Kompatibilität: bisheriger 2. Positionsparameter)"
-        ),
-    )
-    parser.add_argument(
-        "iterations",
-        nargs="?",
-        type=int,
-        default=128,
-        help="Anzahl der Iterationen (optional, default: 128)",
-    )
-    parser.add_argument(
-        "--csv-path",
-        "--descriptions-path",
-        dest="csv_path",
-        default=None,
-        help="Expliziter Pfad zur CSV/TSV/XML-Export-Tabelle mit den Beschreibungen",
-    )
-    parser.add_argument("--output-dir", default=None, help="Explizites Ausgabeverzeichnis")
-    parser.add_argument(
-        "--iterations",
-        dest="iterations_override",
-        type=int,
-        default=None,
-        help="Benannter Alias für die Iterationszahl; überschreibt den optionalen Positionswert",
-    )
-    parser.add_argument("--start", default=None, help="Start-Referenz (inkl.); wenn nicht gesetzt, erfolgt eine Konsolenabfrage")
-    parser.add_argument("--end", default=None, help="End-Referenz (inkl.); wenn nicht gesetzt, erfolgt eine Konsolenabfrage")
-    parser.add_argument(
-        "--interactive-range",
-        action="store_true",
-        help=(
-            "Fragt auf der Konsole 'Namen von' und 'Namen bis' ab und verarbeitet nur diesen Bereich. "
-            "Wenn beide Eingaben keine volle Referenz sind, wird nach ihrem gemeinsamen Teilstring gefiltert "
-            "(z. B. AC08 und A08 => alle A08*-Dateien)."
-        ),
-    )
-    parser.add_argument(
-        "--debug-ac0811-dir",
-        default=None,
-        help="Optional: Ordner für AC0811 Element-Diff-Dumps pro Runde/Element",
-    )
-    parser.add_argument(
-        "--debug-element-diff-dir",
-        default=None,
-        help="Optional: Ordner für Element-Diff-Dumps pro Runde/Element für alle Semantic-Badges",
-    )
-    parser.add_argument(
-        "--bootstrap-deps",
-        action="store_true",
-        help=(
-            "Installiert fehlende Bild-Abhängigkeiten (numpy, opencv-python-headless) "
-            "automatisch via pip vor der Konvertierung."
-        ),
-    )
-    parser.add_argument(
-        "--ac08-regression-set",
-        action="store_true",
-        help=(
-            "Verarbeitet genau das feste AC08-Regression-Set ("
-            f"{AC08_REGRESSION_SET_NAME}: {', '.join(AC08_REGRESSION_VARIANTS)})"
-        ),
-    )
-    parser.add_argument(
-        "--log-file",
-        default=os.environ.get("IMAGE_COMPOSITE_CONVERTER_LOG_FILE", ""),
-        help=(
-            "Optional: Schreibt den kompletten Konsolen-Output zusätzlich in diese Datei. "
-            "Kann alternativ über IMAGE_COMPOSITE_CONVERTER_LOG_FILE gesetzt werden."
-        ),
-    )
-    parser.add_argument(
-        "--print-linux-vendor-command",
-        action="store_true",
-        help=(
-            "Gibt einen pip-Aufruf aus, der Linux-kompatible Wheels für numpy/opencv/Pillow/PyMuPDF "
-            "in das Vendor-Verzeichnis installiert."
-        ),
-    )
-    parser.add_argument(
-        "--export-call-tree-csv",
-        nargs="?",
-        const=DEFAULT_CALL_TREE_CSV_PATH,
-        default=None,
-        help=(
-            "Erstellt einen moduleigenen Aufrufbaum aus image_composite_converter.py und schreibt ihn als CSV. "
-            "Optional kann ein Zielpfad angegeben werden "
-            f"(Default: {DEFAULT_CALL_TREE_CSV_PATH})."
-        ),
-    )
-    parser.add_argument("--vendor-dir", default="vendor", help="Zielordner für vendorte Python-Pakete")
-    parser.add_argument(
-        "--vendor-platform",
-        default="manylinux2014_x86_64",
-        help="pip --platform Wert für Linux-Wheels, z. B. manylinux2014_x86_64",
-    )
-    parser.add_argument(
-        "--vendor-python-version",
-        default=None,
-        help="pip --python-version Wert ohne Punkt, z. B. 311 oder 312",
-    )
-    parser.add_argument(
-        "--isolate-svg-render",
-        action="store_true",
-        help=(
-            "Rendert SVGs in einem isolierten Subprozess, damit native PyMuPDF-"
-            "Abstürze den Hauptlauf nicht beenden."
-        ),
-    )
-    parser.add_argument(
-        "--isolate-svg-render-timeout-sec",
-        type=float,
-        default=SVG_RENDER_SUBPROCESS_TIMEOUT_SEC,
-        help="Timeout pro isoliertem SVG-Render-Aufruf in Sekunden (Default: 20).",
-    )
-    parser.add_argument("--_render-svg-subprocess", action="store_true", help=argparse.SUPPRESS)
-    args = parser.parse_args(argv)
-    if args.iterations_override is not None:
-        args.iterations = args.iterations_override
-    delattr(args, "iterations_override")
-    return args
 
 
 class _TeeTextIO(io.TextIOBase):
@@ -11794,23 +11132,6 @@ class _TeeTextIO(io.TextIOBase):
     def flush(self) -> None:
         for stream in self._streams:
             stream.flush()
-
-
-@contextlib.contextmanager
-def _optional_log_capture(log_path: str):
-    """Duplicate stdout/stderr into ``log_path`` if configured."""
-    if not log_path:
-        yield
-        return
-
-    path = Path(log_path)
-    path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("w", encoding="utf-8") as logfile:
-        tee_stdout = _TeeTextIO(sys.stdout, logfile)
-        tee_stderr = _TeeTextIO(sys.stderr, logfile)
-        with contextlib.redirect_stdout(tee_stdout), contextlib.redirect_stderr(tee_stderr):
-            print(f"[INFO] Schreibe Konsolen-Output nach: {path}")
-            yield
 
 
 def _auto_detect_csv_path(folder_path: str) -> str | None:
@@ -11844,35 +11165,8 @@ def _auto_detect_csv_path(folder_path: str) -> str | None:
     return preferred[0] if preferred else candidates[0]
 
 
-def _resolve_cli_csv_and_output(args: argparse.Namespace) -> tuple[str, str | None]:
-    """Resolve effective table path and output directory from mixed CLI styles."""
-    csv_path = args.csv_path
-    output_dir = args.output_dir
-    if args.csv_or_output:
-        c = str(args.csv_or_output)
-        looks_like_csv = c.lower().endswith(".csv") or c.lower().endswith(".tsv") or c.lower().endswith(".xml")
-        if csv_path is None and looks_like_csv:
-            csv_path = c
-        elif output_dir is None and not looks_like_csv:
-            output_dir = c
-        elif csv_path is None:
-            csv_path = c
-
-    if csv_path is None:
-        csv_path = _auto_detect_csv_path(args.folder_path) or ""
-    elif str(csv_path).lower().endswith(".xml"):
-        csv_path = _resolve_description_xml_path(csv_path) or csv_path
-
-    return csv_path, output_dir
 
 
-def _format_user_diagnostic(exc: BaseException) -> str:
-    """Render structured loader/runtime errors into one compact CLI message."""
-    if isinstance(exc, DescriptionMappingError):
-        if exc.span is not None:
-            return f"{exc.message} Ort: {exc.span.format()}."
-        return exc.message
-    return str(exc)
 
 
 def _dotted_attr_name(node: ast.AST) -> str:
@@ -11978,93 +11272,48 @@ def _module_call_edges_for_path(module_path: str | os.PathLike[str]) -> tuple[di
     return callable_lines, edges
 
 
-def export_module_call_tree_csv(
-    output_csv_path: str | os.PathLike[str] = DEFAULT_CALL_TREE_CSV_PATH,
-    module_path: str | os.PathLike[str] = __file__,
-) -> str:
-    """Export a module-local call tree/table as CSV and return the written path."""
-    callable_lines, edges = _module_call_edges_for_path(module_path)
-    incoming: dict[str, int] = {name: 0 for name in callable_lines}
-    adjacency: dict[str, set[str]] = {name: set() for name in callable_lines}
-    for edge in edges:
-        caller = str(edge["caller"])
-        callee = str(edge["callee"])
-        adjacency.setdefault(caller, set()).add(callee)
-        incoming[callee] = incoming.get(callee, 0) + 1
-
-    roots = sorted([name for name in callable_lines if incoming.get(name, 0) == 0], key=lambda n: callable_lines[n])
-    if not roots:
-        roots = sorted(callable_lines, key=lambda n: callable_lines[n])
-
-    tree_rows: list[tuple[str, str, int, str, int]] = []
-
-    def walk(node: str, root: str, depth: int, parent: str, path: tuple[str, ...]):
-        tree_rows.append((root, node, depth, parent, callable_lines.get(node, 0)))
-        for child in sorted(adjacency.get(node, set()), key=lambda n: callable_lines.get(n, 0)):
-            if child in path:
-                continue
-            walk(child, root, depth + 1, node, path + (child,))
-
-    for root in roots:
-        walk(root, root, 0, "", (root,))
-
-    output_path = os.fspath(output_csv_path)
-    os.makedirs(os.path.dirname(output_path), exist_ok=True)
-    with open(output_path, "w", encoding="utf-8", newline="") as f:
-        writer = csv.writer(f, delimiter=";")
-        writer.writerow(
-            [
-                "root",
-                "node",
-                "depth",
-                "parent",
-                "node_line",
-                "edge_caller",
-                "edge_callee",
-                "edge_call_line",
-                "edge_caller_line",
-                "edge_callee_line",
-                "edge_raw_callee",
-            ]
-        )
-        edge_by_pair = {(str(edge["caller"]), str(edge["callee"])): edge for edge in edges}
-        for root, node, depth, parent, node_line in tree_rows:
-            edge = edge_by_pair.get((parent, node)) if parent else None
-            writer.writerow(
-                [
-                    root,
-                    node,
-                    depth,
-                    parent,
-                    node_line,
-                    parent if edge else "",
-                    node if edge else "",
-                    int(edge["call_line"]) if edge else "",
-                    int(edge["caller_line"]) if edge else "",
-                    int(edge["callee_line"]) if edge else "",
-                    str(edge["raw_callee"]) if edge else "",
-                ]
-            )
-    return output_path
 
 
-def _prompt_interactive_range(args: argparse.Namespace) -> tuple[str, str]:
-    current_start = str(args.start or "").strip()
-    current_end = str(args.end or "").strip()
-    prompt_start = f"Namen von [{current_start}]: " if current_start else "Namen von: "
-    prompt_end = f"Namen bis [{current_end}]: " if current_end else "Namen bis: "
 
-    start_value = input(prompt_start).strip() or current_start
-    end_value = input(prompt_end).strip() or current_end
-    if not end_value:
-        end_value = start_value
 
-    shared = _shared_partial_range_token(start_value, end_value)
-    if shared and _extract_ref_parts(start_value) is None and _extract_ref_parts(end_value) is None:
-        print(f"[INFO] Verwende Teilstring-Filter '{shared}' für die Auswahl der Bilder.")
-    else:
-        print(f"[INFO] Verwende Bereich von '{start_value or '(Anfang)'}' bis '{end_value or '(Ende)'}'.")
-    return start_value, end_value
+_MAINFILES_DIR = Path(__file__).resolve().parent / "mainFiles"
+
+
+def _load_mainfile_function(func_name: str, filename: str):
+    """Lade eine ausgelagerte Funktionsdefinition aus src/mainFiles in dieses Modul."""
+    source_path = _MAINFILES_DIR / filename
+    namespace: dict[str, object] = {}
+    code = compile(source_path.read_text(encoding="utf-8"), str(source_path), "exec")
+    exec(code, globals(), namespace)
+    loaded = namespace.get(func_name)
+    if not callable(loaded):
+        raise RuntimeError(f"Funktion {func_name!r} konnte aus {source_path} nicht geladen werden")
+    globals()[func_name] = loaded
+    return loaded
+
+
+analyze_range = _load_mainfile_function("analyze_range", "analyze_range.py")
+_load_description_mapping = _load_mainfile_function("_load_description_mapping", "_load_description_mapping.py")
+_run_svg_render_subprocess_entrypoint = _load_mainfile_function(
+    "_run_svg_render_subprocess_entrypoint", "_run_svg_render_subprocess_entrypoint.py"
+)
+_bootstrap_required_image_dependencies = _load_mainfile_function(
+    "_bootstrap_required_image_dependencies", "_bootstrap_required_image_dependencies.py"
+)
+build_linux_vendor_install_command = _load_mainfile_function(
+    "build_linux_vendor_install_command", "build_linux_vendor_install_command.py"
+)
+convert_range = _load_mainfile_function("convert_range", "convert_range.py")
+export_module_call_tree_csv = _load_mainfile_function("export_module_call_tree_csv", "export_module_call_tree_csv.py")
+parse_args = _load_mainfile_function("parse_args", "parse_args.py")
+_optional_log_capture = contextlib.contextmanager(
+    _load_mainfile_function("_optional_log_capture", "_optional_log_capture.py")
+)
+_resolve_cli_csv_and_output = _load_mainfile_function("_resolve_cli_csv_and_output", "_resolve_cli_csv_and_output.py")
+_format_user_diagnostic = _load_mainfile_function("_format_user_diagnostic", "_format_user_diagnostic.py")
+_prompt_interactive_range = _load_mainfile_function("_prompt_interactive_range", "_prompt_interactive_range.py")
+convert_image = _load_mainfile_function("convert_image", "convert_image.py")
+convert_image_variants = _load_mainfile_function("convert_image_variants", "convert_image_variants.py")
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -12161,33 +11410,3 @@ def main(argv: list[str] | None = None) -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-
-
-
-def convert_image(input_path: str, output_path: str, *, max_iter: int = 120, plateau_limit: int = 14, seed: int = 42) -> Path:
-    """Backward-compatible single-image entrypoint.
-
-    - For raster targets (e.g. ``.png``), write an annotated image plus JSON coordinates.
-    - For SVG targets or missing image deps, preserve the historical embedded-raster fallback.
-    """
-    del max_iter, plateau_limit, seed
-    target = Path(output_path)
-    target.parent.mkdir(parents=True, exist_ok=True)
-
-    if target.suffix.lower() == ".svg" or cv2 is None or np is None:
-        target.write_text(_render_embedded_raster_svg(input_path), encoding="utf-8")
-        return target
-
-    img = cv2.imread(str(input_path))
-    if img is None:
-        raise FileNotFoundError(f"Bild konnte nicht gelesen werden: {input_path}")
-    regions = detect_relevant_regions(img)
-    annotated = annotate_image_regions(img, regions)
-    cv2.imwrite(str(target), annotated)
-    target.with_suffix(".json").write_text(json.dumps(regions, ensure_ascii=False, indent=2), encoding="utf-8")
-    return target
-
-
-def convert_image_variants(*args, **kwargs):
-    """Compatibility shim kept for tooling imports."""
-    return convert_range(*args, **kwargs)
