@@ -7,28 +7,16 @@ for direct CLI and module-based execution.
 from __future__ import annotations
 
 import argparse
-import ast
 import base64
 import contextlib
-import copy
 import csv
-import dataclasses
-import gc
 import json
 import math
 import os
-import random
-import time
 import re
 import subprocess
 import sys
-import xml.etree.ElementTree as ET
-from dataclasses import dataclass
 from pathlib import Path
-import importlib
-import io
-import struct
-import statistics
 
 if __package__ in {None, ""}:
     # Allow direct CLI execution via ``python src/image_composite_converter.py``
