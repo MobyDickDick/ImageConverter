@@ -6,4 +6,8 @@ def _matches_exact_prefix_filter(filename: str, start_ref: str, end_ref: str) ->
     stem = _normalize_range_token(get_base_name_from_file(os.path.splitext(filename)[0]))
     if not stem:
         return False
-    return stem.startswith(start_token)
+    if not stem.startswith(start_token):
+        return False
+    if len(stem) == len(start_token):
+        return True
+    return stem[len(start_token)].isdigit()
