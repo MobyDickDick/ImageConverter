@@ -1175,7 +1175,7 @@ class Reflection:
             if base_upper in {"AC0800", "AC0810", "AC0811", "AC0812", "AC0813", "AC0814"}:
                 family_elements.append("SEMANTIC: Kreis ohne Buchstabe")
                 params["label"] = ""
-            elif re.search(r"\bco(?:[_\s-]*2|₂)\b", desc):
+            elif re.search(r"\bco(?:[_\s\-\^]*2|₂)\b", desc):
                 heuristic_elements.append("SEMANTIC: Kreis + Buchstabe CO_2")
                 params["label"] = "CO_2"
             elif re.search(r"\bco\b", desc):
