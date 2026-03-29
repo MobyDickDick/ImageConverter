@@ -10,12 +10,14 @@ import argparse
 import base64
 import contextlib
 import csv
+from dataclasses import dataclass
 import json
 import math
 import os
 import re
 import subprocess
 import sys
+import xml.etree.ElementTree as ET
 from pathlib import Path
 
 if __package__ in {None, ""}:
@@ -49,6 +51,28 @@ AC08_REGRESSION_VARIANTS = tuple(dict.fromkeys(AC08_REGRESSION_VARIANTS))
 # Keep the historical "previously good" anchor subset stable for AC08 success
 # criteria reports used by this converter/test suite.
 AC08_PREVIOUSLY_GOOD_VARIANTS = ("AC0800_L", "AC0800_M", "AC0800_S", "AC0811_L")
+
+
+@dataclass(frozen=True)
+class SourceSpan:
+    path: str
+    line: int | None = None
+    column: int | None = None
+
+    def format(self) -> str:
+        location = str(self.path)
+        if self.line is not None:
+            location = f"{location}:{self.line}"
+            if self.column is not None:
+                location = f"{location}:{self.column}"
+        return location
+
+
+class DescriptionMappingError(ValueError):
+    def __init__(self, message: str, *, span: SourceSpan | None = None) -> None:
+        super().__init__(message)
+        self.message = str(message)
+        self.span = span
 
 
 
@@ -121,6 +145,29 @@ def _load_mainfile_function(func_name: str, filename: str):
     return loaded
 
 
+def get_base_name_from_file(filename: str) -> str:
+    name = os.path.splitext(str(filename or ""))[0]
+    name = re.sub(r"(-\d+)$", "", name)
+    while True:
+        prev = name
+        name = re.sub(r"_([1-9]|L|M|S|[1-9]S|W|X)$", "", name, flags=re.IGNORECASE)
+        if name == prev:
+            break
+    return name
+
+
+_resolve_description_xml_path = _load_mainfile_function(
+    "_resolve_description_xml_path",
+    "_load_description_mappingFiles/_load_description_mapping_from_xmlFiles/_resolve_description_xml_path.py",
+)
+_load_description_mapping_from_csv = _load_mainfile_function(
+    "_load_description_mapping_from_csv",
+    "_load_description_mappingFiles/_load_description_mapping_from_csv.py",
+)
+_load_description_mapping_from_xml = _load_mainfile_function(
+    "_load_description_mapping_from_xml",
+    "_load_description_mappingFiles/_load_description_mapping_from_xml.py",
+)
 analyze_range = _load_mainfile_function("analyze_range", "analyze_range.py")
 _load_description_mapping = _load_mainfile_function("_load_description_mapping", "_load_description_mapping.py")
 _run_svg_render_subprocess_entrypoint = _load_mainfile_function(
