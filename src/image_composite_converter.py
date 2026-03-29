@@ -36,6 +36,7 @@ from src.image_composite_converter_regions import (
     annotate_image_regions_impl,
     detect_relevant_regions_impl,
 )
+from src.image_composite_converterFiles._clip_scalar import clip_scalar
 from src.successful_conversions import (
     AC08_MITIGATION_STATUS,
     AC08_PREVIOUSLY_GOOD_VARIANTS,
@@ -1600,19 +1601,7 @@ class Action:
 
     @staticmethod
     def _clip_scalar(value: float, low: float, high: float) -> float:
-        """Return value clamped to ``[low, high]`` with ``numpy.clip`` scalar semantics."""
-        lo = float(low)
-        hi = float(high)
-        # Mirror numpy.clip behaviour for inverted bounds (a_min > a_max):
-        # any scalar collapses to the supplied upper bound.
-        if lo > hi:
-            return hi
-        v = float(value)
-        if v < lo:
-            return lo
-        if v > hi:
-            return hi
-        return v
+        return clip_scalar(value=value, low=low, high=high)
 
     class _ScalarRng:
         def __init__(self, seed: int) -> None:
