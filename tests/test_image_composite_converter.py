@@ -5327,6 +5327,54 @@ def test_main_prompts_for_range_when_start_and_end_are_missing(monkeypatch: pyte
     assert prompts == ["Namen von: ", "Namen bis: "]
 
 
+def test_main_interactive_range_prefers_inline_start_range_over_previous_end_default(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr(conv, "_resolve_cli_csv_and_output", lambda _args: ("", "out_dir"))
+    monkeypatch.setattr(conv, "_optional_log_capture", lambda _path: contextlib.nullcontext())
+
+    captured: dict[str, object] = {}
+
+    def fake_convert_range(*args, **_kwargs):
+        captured["start"] = args[3]
+        captured["end"] = args[4]
+        return "out_dir"
+
+    monkeypatch.setattr(conv, "convert_range", fake_convert_range)
+
+    answers = iter(["AC080 - AC080", ""])
+    monkeypatch.setattr("builtins.input", lambda _prompt: next(answers))
+
+    rc = conv.main(["images", "--interactive-range", "--start", "AC080", "--end", "AC0831"])
+
+    assert rc == 0
+    assert captured["start"] == "AC080 - AC080"
+    assert captured["end"] == "AC080 - AC080"
+
+
+def test_main_interactive_range_keeps_explicit_identical_bounds(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setattr(conv, "_resolve_cli_csv_and_output", lambda _args: ("", "out_dir"))
+    monkeypatch.setattr(conv, "_optional_log_capture", lambda _path: contextlib.nullcontext())
+
+    captured: dict[str, object] = {}
+
+    def fake_convert_range(*args, **_kwargs):
+        captured["start"] = args[3]
+        captured["end"] = args[4]
+        return "out_dir"
+
+    monkeypatch.setattr(conv, "convert_range", fake_convert_range)
+
+    answers = iter(["AC080", "AC080"])
+    monkeypatch.setattr("builtins.input", lambda _prompt: next(answers))
+
+    rc = conv.main(["images", "--interactive-range", "--start", "AC080", "--end", "AC0831"])
+
+    assert rc == 0
+    assert captured["start"] == "AC080"
+    assert captured["end"] == "AC080"
+
+
 def test_main_skips_range_prompt_when_start_and_end_are_provided(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(conv, "_resolve_cli_csv_and_output", lambda _args: ("", "out_dir"))
     monkeypatch.setattr(conv, "convert_range", lambda *_args, **_kwargs: "out_dir")
