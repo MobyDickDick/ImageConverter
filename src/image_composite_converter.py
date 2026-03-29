@@ -21,6 +21,7 @@ import struct
 import subprocess
 import sys
 import tempfile
+import time
 import traceback
 import xml.etree.ElementTree as ET
 from pathlib import Path
@@ -85,20 +86,74 @@ DEFAULT_CALL_TREE_CSV_PATH = "artifacts/converted_images/reports/call_tree_image
 
 OPTIONAL_DEPENDENCY_ERRORS: dict[str, str] = {}
 
-try:
-    import numpy as np  # type: ignore
-except Exception:
-    np = None  # type: ignore
+def _optional_dependency_base_dir() -> Path:
+    return Path(__file__).resolve().parent.parent
 
-try:
-    import cv2  # type: ignore
-except Exception:
-    cv2 = None  # type: ignore
 
-try:
-    import fitz  # type: ignore
-except Exception:
-    fitz = None  # type: ignore
+def _vendored_site_packages_dirs() -> list[Path]:
+    base_dir = _optional_dependency_base_dir()
+    candidates: list[Path] = []
+
+    linux_vendor = base_dir / "vendor" / "linux-py310" / "site-packages"
+    if linux_vendor.exists():
+        candidates.append(linux_vendor)
+
+    vendor_root = base_dir / "vendor"
+    if vendor_root.exists():
+        for site_packages_dir in sorted(vendor_root.glob("*/site-packages")):
+            if site_packages_dir.exists() and site_packages_dir not in candidates:
+                candidates.append(site_packages_dir)
+
+    venv_site_packages = base_dir / ".venv" / "Lib" / "site-packages"
+    if venv_site_packages.exists():
+        candidates.append(venv_site_packages)
+
+    return candidates
+
+
+def _describe_optional_dependency_error(module_name: str, error: BaseException, searched_dirs: list[Path]) -> str:
+    message = str(error) or error.__class__.__name__
+    if "add_dll_directory" in message and any("Lib/site-packages" in str(path) for path in searched_dirs):
+        return (
+            f"{module_name} konnte nicht geladen werden: offenbar wurde ein Windows-Wheel auf Linux gefunden "
+            f"(add_dll_directory-Fehler)."
+        )
+    return f"{module_name} konnte nicht geladen werden: {message}"
+
+
+def _load_optional_module(module_name: str):
+    search_dirs = _vendored_site_packages_dirs()
+    last_error: BaseException | None = None
+
+    with contextlib.suppress(KeyError):
+        del OPTIONAL_DEPENDENCY_ERRORS[module_name]
+
+    for site_packages_dir in search_dirs:
+        with contextlib.suppress(ValueError):
+            sys.path.remove(str(site_packages_dir))
+        sys.path.insert(0, str(site_packages_dir))
+        try:
+            module = importlib.import_module(module_name)
+            return module
+        except Exception as exc:  # pragma: no cover - diagnosis path
+            last_error = exc
+            for key in tuple(sys.modules.keys()):
+                if key == module_name or key.startswith(f"{module_name}."):
+                    sys.modules.pop(key, None)
+
+    try:
+        return importlib.import_module(module_name)
+    except Exception as exc:
+        last_error = exc
+
+    if last_error is not None:
+        OPTIONAL_DEPENDENCY_ERRORS[module_name] = _describe_optional_dependency_error(module_name, last_error, search_dirs)
+    return None
+
+
+np = _load_optional_module("numpy")  # type: ignore
+cv2 = _load_optional_module("cv2")  # type: ignore
+fitz = _load_optional_module("fitz")  # type: ignore
 
 SVG_RENDER_SUBPROCESS_ENABLED = os.environ.get("IMAGE_CONVERTER_ISOLATE_SVG_RENDER", "").strip().lower() in {
     "1",
