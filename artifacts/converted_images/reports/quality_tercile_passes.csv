@@ -1,4 +1,7 @@
 pass;filename;old_error_per_pixel;new_error_per_pixel;old_mean_delta2;new_mean_delta2;improved;decision;iteration_budget;badge_validation_rounds
-1;AC0831_M.jpg;0.02201633;0.02412245;3451.379883;3577.842773;0;rejected_regression;129;7
-1;AC0831_L.jpg;0.01437551;0.01507872;3772.522705;3955.535889;0;rejected_regression;129;7
+1;AC0831_L.jpg;0.01430993;0.01436128;3741.085449;3753.045410;0;rejected_regression;129;7
+1;AC0831_M.jpg;0.02254286;0.02416327;3660.702881;3593.717041;1;accepted_improvement;129;7
 1;AC0831_S.jpg;0.05654756;0.05654756;4448.527832;4448.527832;0;rejected_regression;129;7
+2;AC0831_S.jpg;0.05654756;0.05654756;4448.527832;4448.527832;0;rejected_regression;156;9
+2;AC0831_M.jpg;0.02416327;0.02607347;3593.717041;4198.148438;0;rejected_regression;156;9
+2;AC0831_L.jpg;0.01430993;0.01436128;3741.085449;3753.045410;0;rejected_regression;156;9
