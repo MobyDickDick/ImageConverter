@@ -11,12 +11,17 @@ import base64
 import contextlib
 import csv
 from dataclasses import dataclass
+import importlib
 import json
 import math
 import os
+import random
 import re
+import struct
 import subprocess
 import sys
+import tempfile
+import traceback
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
@@ -79,6 +84,21 @@ class DescriptionMappingError(ValueError):
 DEFAULT_CALL_TREE_CSV_PATH = "artifacts/converted_images/reports/call_tree_image_composite_converter.csv"
 
 OPTIONAL_DEPENDENCY_ERRORS: dict[str, str] = {}
+
+try:
+    import numpy as np  # type: ignore
+except Exception:
+    np = None  # type: ignore
+
+try:
+    import cv2  # type: ignore
+except Exception:
+    cv2 = None  # type: ignore
+
+try:
+    import fitz  # type: ignore
+except Exception:
+    fitz = None  # type: ignore
 
 SVG_RENDER_SUBPROCESS_ENABLED = os.environ.get("IMAGE_CONVERTER_ISOLATE_SVG_RENDER", "").strip().lower() in {
     "1",
@@ -145,6 +165,42 @@ def _load_mainfile_function(func_name: str, filename: str):
     return loaded
 
 
+def _load_mainfile_tree() -> None:
+    """Load split helper modules into this module namespace.
+
+    The converter was split into many files under ``src/mainFiles`` where
+    functions reference each other through module-level globals. Importing only
+    top-level entry points is therefore not sufficient; runtime would otherwise
+    fail with ``NameError`` for helper symbols.
+    """
+
+    for source_path in sorted(_MAINFILES_DIR.rglob("*.py")):
+        code = compile(source_path.read_text(encoding="utf-8"), str(source_path), "exec")
+        exec(code, globals(), globals())
+
+
+def _bind_action_facade() -> type:
+    """Provide backward-compatible ``Action`` access for split functions."""
+
+    class Action:
+        STOCHASTIC_RUN_SEED = 0
+        STOCHASTIC_SEED_OFFSET = 0
+        T_PATH_D = 'd="M{sx:.2f},{sy:.2f} L{ex:.2f},{ey:.2f}"'
+        LIGHT_CIRCLE_FILL_GRAY = 216
+        LIGHT_CIRCLE_STROKE_GRAY = 140
+        LIGHT_CIRCLE_TEXT_GRAY = 128
+
+    for name, value in list(globals().items()):
+        if callable(value) and (name.startswith("_") or name in {"generate_badge_svg", "calculate_error", "render_svg_to_numpy"}):
+            setattr(Action, name, staticmethod(value))
+    globals()["Action"] = Action
+    return Action
+
+
+_load_mainfile_tree()
+_bind_action_facade()
+
+
 def get_base_name_from_file(filename: str) -> str:
     name = os.path.splitext(str(filename or ""))[0]
     name = re.sub(r"(-\d+)$", "", name)
@@ -154,6 +210,10 @@ def get_base_name_from_file(filename: str) -> str:
         if name == prev:
             break
     return name
+
+
+def _clip(value: float, low: float, high: float) -> float:
+    return float(max(low, min(high, value)))
 
 
 _resolve_description_xml_path = _load_mainfile_function(
