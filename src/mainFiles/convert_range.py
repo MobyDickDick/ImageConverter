@@ -19,13 +19,36 @@ def convert_range(
     os.makedirs(reports_out_dir, exist_ok=True)
 
     normalized_selected_variants = {str(v).upper() for v in (selected_variants or set()) if str(v).strip()}
-    files = sorted(
+    normalized_start, normalized_end = _normalize_range_bounds(start_ref, end_ref)
+    range_debug_path = os.path.join(reports_out_dir, "range_selection_debug.log")
+    candidates = sorted(
         f
         for f in os.listdir(folder_path)
         if f.lower().endswith((".bmp", ".jpg", ".png", ".gif"))
-        and _in_requested_range(f, start_ref, end_ref)
-        and (not normalized_selected_variants or os.path.splitext(f)[0].upper() in normalized_selected_variants)
     )
+    files: list[str] = []
+    with open(range_debug_path, "w", encoding="utf-8") as dbg:
+        dbg.write(f"start_ref_raw={start_ref}\n")
+        dbg.write(f"end_ref_raw={end_ref}\n")
+        dbg.write(f"start_ref_normalized={normalized_start}\n")
+        dbg.write(f"end_ref_normalized={normalized_end}\n")
+        if normalized_selected_variants:
+            dbg.write(f"selected_variants={','.join(sorted(normalized_selected_variants))}\n")
+        dbg.write("----\n")
+        for filename in candidates:
+            stem = os.path.splitext(filename)[0].upper()
+            in_range, reason = _in_requested_range_with_reason(filename, normalized_start, normalized_end)
+            in_selected_variants = (not normalized_selected_variants) or (stem in normalized_selected_variants)
+            include = in_range and in_selected_variants
+            dbg.write(
+                f"{filename};stem={stem};in_range={int(in_range)};reason={reason};"
+                f"in_selected_variants={int(in_selected_variants)};included={int(include)}\n"
+            )
+            if include:
+                files.append(filename)
+        dbg.write("----\n")
+        dbg.write(f"candidate_count={len(candidates)}\n")
+        dbg.write(f"included_count={len(files)}\n")
     if cv2 is None or np is None:
         log_path = os.path.join(reports_out_dir, "Iteration_Log.csv")
         with open(log_path, mode="w", encoding="utf-8-sig", newline="") as f:
