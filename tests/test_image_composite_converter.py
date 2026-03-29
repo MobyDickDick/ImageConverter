@@ -2034,6 +2034,7 @@ def test_in_requested_range_partial_filter_ignores_size_suffix_in_bounds() -> No
 def test_in_requested_range_does_not_expand_identical_short_family_to_other_series() -> None:
     """AC080..AC080 should stay within AC080* and exclude AC0812 variants."""
     assert image_composite_converter._in_requested_range("AC0800_M.jpg", "AC080", "AC080") is True
+    assert image_composite_converter._in_requested_range("AC0801_M.jpg", "AC080", "AC080") is False
     assert image_composite_converter._in_requested_range("AC0812_M.jpg", "AC080", "AC080") is False
 
 
