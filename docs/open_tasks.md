@@ -38,6 +38,9 @@ focused on the actual project scope.
     reproduzierbarer Abbruch mit `MuPDF error: exception stack overflow!` und Exit-Code `139` (`Segmentation fault`).
   - Dokumentation für Lauf E: `docs/ac0800_ac0899_runE_2026-03-29_summary.md`
     (inkl. Kommando, Exit-Code und letzter sichtbarer Datei vor dem Crash).
+  - 2026-03-29 (Lauf F, erneuter Vollbereichscheck): gleicher Vollbereichs-Befehl per `tee` erneut ausgeführt; diesmal Exit-Code `0` ohne MuPDF-Segfault, aber semantischer Stop bei `AC0838_M.jpg` (`semantic_mismatch`).
+  - Dokumentation für Lauf F: `docs/ac0800_ac0899_runF_2026-03-29_summary.md`
+    (inkl. Kommando, Exit-Code und Verweis auf `batch_failure_summary.csv`).
   - Qualitätsvergleich gegen den vorherigen Commit-Stand (`pixel_delta2_ranking.csv`, nur `AC08*`):
     `51` gemeinsame Varianten, davon `50` unverändert und `1` verbessert (`AC0800_S`: `4980.680176` -> `1429.839966`),
     **keine** verschlechterte Variante.
