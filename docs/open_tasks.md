@@ -26,9 +26,11 @@ focused on the actual project scope.
   - 2026-03-28: Vollbereichslauf erneut gestartet mit
     `python -u -m src.image_composite_converter ... --start AC0800 --end AC0899`
     und Log nach `artifacts/converted_images/reports/AC0800_AC0899_batch_2026-03-28.log` geschrieben.
-  - Aktueller Stand: weiterhin **nicht crash-frei**; der Prozess endet reproduzierbar mit
-    `MuPDF error: exception stack overflow!` und Exit-Code `139` (Segmentation fault),
-    zuletzt bei `AC0881_L`.
+  - 2026-03-29: Erneuter Vollbereichslauf mit identischem Befehl und Log nach
+    `artifacts/converted_images/reports/AC0800_AC0899_batch_2026-03-29.log` geschrieben.
+  - Neuer Stand: **kein MuPDF-Stackoverflow/Segfault beobachtet** (Exit-Code `0`),
+    der Lauf stoppt aber weiterhin vor vollständiger Bereichsabdeckung wegen
+    semantischem Fehlmatch (`AC0838_L`: kein belastbarer Kreis-Kandidat).
   - Ergebnis in `artifacts/converted_images/reports` mit Logreferenz festhalten.
 - [ ] B2.1: MuPDF-Stackoverflow/Segfault im Vollbereich `AC0800..AC0899` isolieren und robusten Guard ergänzen.
   - Die bisherigen B1-Fixes (Context-Manager im Fallback-Diff-Pfad) reichen für den Vollbereich noch nicht aus.
