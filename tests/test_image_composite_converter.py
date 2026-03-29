@@ -2037,6 +2037,12 @@ def test_in_requested_range_does_not_expand_identical_short_family_to_other_seri
     assert image_composite_converter._in_requested_range("AC0812_M.jpg", "AC080", "AC080") is False
 
 
+def test_in_requested_range_identical_short_bounds_skip_alpha_suffix_series() -> None:
+    """Short identical bounds should not match alpha-suffixed helper names like AC080A_*."""
+    assert image_composite_converter._in_requested_range("AC080A_L.jpg", "AC080", "AC080") is False
+    assert image_composite_converter._in_requested_range("AC0800_S.jpg", "AC080", "AC080") is True
+
+
 def test_in_requested_range_supports_one_sided_bounds() -> None:
     """When one bound is invalid, the valid bound should still be applied."""
     assert image_composite_converter._in_requested_range("AC0812_L.jpg", "", "AC0812") is True
