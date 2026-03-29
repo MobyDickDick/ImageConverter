@@ -1425,10 +1425,12 @@ class Reflection:
 
     def parse_description(self, base_name: str, img_filename: str):
         canonical_base = get_base_name_from_file(base_name).upper()
+        if not canonical_base:
+            canonical_base = get_base_name_from_file(img_filename).upper()
         description_fragments = _collect_description_fragments(self.raw_desc, base_name, img_filename)
         desc_raw = " ".join(fragment["text"] for fragment in description_fragments)
         desc = desc_raw.lower().strip()
-        base_upper = base_name.upper()
+        base_upper = canonical_base or base_name.upper()
         symbol_upper = canonical_base or base_upper
 
         params = {
@@ -1453,7 +1455,7 @@ class Reflection:
         if semantic_symbol:
             params["mode"] = "semantic_badge"
 
-        if base_name.upper() in {
+        if base_upper in {
             "AR0100",
             "AC0800",
             "AC0811",
@@ -1478,7 +1480,7 @@ class Reflection:
             params["mode"] = "semantic_badge"
             family_elements: list[str] = []
             heuristic_elements: list[str] = []
-            if base_name.upper() in {"AC0800", "AC0810", "AC0811", "AC0812", "AC0813", "AC0814"}:
+            if base_upper in {"AC0800", "AC0810", "AC0811", "AC0812", "AC0813", "AC0814"}:
                 family_elements.append("SEMANTIC: Kreis ohne Buchstabe")
                 params["label"] = ""
             elif re.search(r"\bco(?:[_\s-]*2|₂)\b", desc):
@@ -1495,14 +1497,14 @@ class Reflection:
                 params["label"] = "M" if symbol_upper == "AR0100" else "T"
             else:
                 heuristic_elements.append("SEMANTIC: Kreis + Buchstabe")
-                params["label"] = "M" if base_name.upper() == "AR0100" else "T"
-            if base_name.upper() in {"AC0810", "AC0814", "AC0834", "AC0838", "AC0839"}:
+                params["label"] = "M" if base_upper == "AR0100" else "T"
+            if base_upper in {"AC0810", "AC0814", "AC0834", "AC0838", "AC0839"}:
                 family_elements.append("SEMANTIC: waagrechter Strich rechts vom Kreis")
-            if base_name.upper() in {"AC0811", "AC0881", "AC0831", "AC0836"}:
+            if base_upper in {"AC0811", "AC0881", "AC0831", "AC0836"}:
                 family_elements.append("SEMANTIC: senkrechter Strich hinter dem Kreis")
-            if base_name.upper() in {"AC0813", "AC0833"}:
+            if base_upper in {"AC0813", "AC0833"}:
                 family_elements.append("SEMANTIC: senkrechter Strich oben vom Kreis")
-            if base_name.upper() in {"AC0812", "AC0832", "AC0837", "AC0882"}:
+            if base_upper in {"AC0812", "AC0832", "AC0837", "AC0882"}:
                 family_elements.append("SEMANTIC: waagrechter Strich links vom Kreis")
             if "waagrechter strich rechts" in desc:
                 heuristic_elements.append("SEMANTIC: waagrechter Strich rechts vom Kreis")
@@ -4343,7 +4345,7 @@ class Action:
 
     @staticmethod
     def make_badge_params(w: int, h: int, base_name: str, img: np.ndarray | None = None) -> dict | None:
-        name = base_name.upper()
+        name = get_base_name_from_file(base_name).upper()
 
         if name == "AR0100":
             scale = min(w, h) / 25.0 if min(w, h) > 0 else 1.0
