@@ -2042,6 +2042,18 @@ def test_in_requested_range_supports_one_sided_bounds() -> None:
     assert image_composite_converter._in_requested_range("AC0812_L.jpg", "", "AC0812") is True
     assert image_composite_converter._in_requested_range("AC0813_L.jpg", "", "AC0812") is False
 
+
+def test_in_requested_range_accepts_single_field_hyphen_range() -> None:
+    """Interactive shorthand like 'AC080 - AC080' should be split into exact bounds."""
+    assert image_composite_converter._in_requested_range("AC0800_L.jpg", "AC080 - AC080", "") is True
+    assert image_composite_converter._in_requested_range("AC0831_S.jpg", "AC080 - AC080", "") is False
+
+
+def test_in_requested_range_strips_accidental_leading_separator_from_bound() -> None:
+    """A pasted '- AC080' end bound should not degrade into an open-ended range."""
+    assert image_composite_converter._in_requested_range("AC0800_M.jpg", "AC080", "- AC080") is True
+    assert image_composite_converter._in_requested_range("AC0831_S.jpg", "AC080", "- AC080") is False
+
 def test_convert_range_does_not_skip_variants_in_quality_passes(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
