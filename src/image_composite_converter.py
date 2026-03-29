@@ -245,6 +245,50 @@ def _bind_action_facade() -> type:
         LIGHT_CIRCLE_STROKE_GRAY = 140
         LIGHT_CIRCLE_TEXT_GRAY = 128
 
+        @staticmethod
+        def make_badge_params(*_args, **_kwargs):
+            return {}
+
+        @staticmethod
+        def validate_semantic_description_alignment(*_args, **_kwargs):
+            return []
+
+        @staticmethod
+        def validate_badge_by_elements(*_args, **_kwargs):
+            return []
+
+        @staticmethod
+        def _enforce_semantic_connector_expectation(*_args, **_kwargs):
+            return {}
+
+        @staticmethod
+        def apply_redraw_variation(params, *_args, **_kwargs):
+            return dict(params or {}), []
+
+        @staticmethod
+        def _default_ac0811_params(width, height):
+            return {"mode": "semantic_badge", "width": float(width), "height": float(height)}
+
+        @staticmethod
+        def generate_badge_svg(width, height, _params):
+            return f'<svg xmlns="http://www.w3.org/2000/svg" width="{int(width)}" height="{int(height)}"/>'
+
+        @staticmethod
+        def render_svg_to_numpy(*_args, **_kwargs):
+            return None
+
+        @staticmethod
+        def calculate_error(*_args, **_kwargs):
+            return float("inf")
+
+        @staticmethod
+        def calculate_delta2_stats(*_args, **_kwargs):
+            return float("inf"), float("inf")
+
+        @staticmethod
+        def create_diff_image(image, *_args, **_kwargs):
+            return image
+
     for name, value in list(globals().items()):
         if callable(value) and (name.startswith("_") or name in {"generate_badge_svg", "calculate_error", "render_svg_to_numpy", "calculate_delta2_stats", "create_diff_image"}):
             setattr(Action, name, staticmethod(value))
@@ -252,8 +296,21 @@ def _bind_action_facade() -> type:
     return Action
 
 
+def _bind_reflection_facade() -> type:
+    """Provide backward-compatible ``Reflection`` placeholder access."""
+
+    class Reflection:
+        @staticmethod
+        def parse_description(*_args, **_kwargs):
+            return "", {}
+
+    globals()["Reflection"] = Reflection
+    return Reflection
+
+
 _load_mainfile_tree()
 _bind_action_facade()
+_bind_reflection_facade()
 
 
 def get_base_name_from_file(filename: str) -> str:
@@ -269,6 +326,45 @@ def get_base_name_from_file(filename: str) -> str:
 
 def _clip(value: float, low: float, high: float) -> float:
     return float(max(low, min(high, value)))
+
+
+def _semantic_quality_flags(variant: str, element_lines: list[str] | tuple[str, ...] | None) -> list[str]:
+    """Derive quality flags from element-level diagnostics.
+
+    AC0811 variants are allowed to stay ``semantic_ok`` even with a slightly
+    elevated single-element error. To keep reports machine-readable we emit
+    explicit quality flags.
+    """
+
+    variant_norm = str(variant or "").strip().upper()
+    if not variant_norm.startswith("AC0811"):
+        return []
+
+    if not element_lines:
+        return []
+
+    elevated: list[tuple[str, float]] = []
+    for raw_line in element_lines:
+        line = str(raw_line or "").strip()
+        match = re.search(r"^\s*([^:]+)\s*:\s*Fehler\s*=\s*([0-9]+(?:\.[0-9]+)?)", line, flags=re.IGNORECASE)
+        if not match:
+            continue
+        label = match.group(1).strip().lower()
+        value = float(match.group(2))
+        if value >= 10.0:
+            elevated.append((label, value))
+
+    if not elevated:
+        return []
+
+    elevated.sort(key=lambda item: item[1], reverse=True)
+    lead_label, lead_value = elevated[0]
+    labels = ",".join(label for label, _ in elevated)
+    return [
+        "quality=borderline",
+        f"quality_reason=semantic_ok_trotz_hohem_elementfehler:{lead_label}={lead_value:.3f}",
+        f"quality_elevated_elements={labels}",
+    ]
 
 
 _resolve_description_xml_path = _load_mainfile_function(
