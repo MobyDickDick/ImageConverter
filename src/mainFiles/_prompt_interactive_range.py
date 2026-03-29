@@ -9,6 +9,12 @@ def _prompt_interactive_range(args: argparse.Namespace) -> tuple[str, str]:
     start_value = entered_start or current_start
     end_value = entered_end or current_end
 
+    # If the user explicitly updates "Namen von" but leaves "Namen bis" empty,
+    # keep the interactive batch narrow by defaulting the end to the same value
+    # instead of reusing a stale end bound from a previous run.
+    if entered_start and not entered_end:
+        end_value = start_value
+
     # If users already enter a full range in "Namen von" (e.g. "AC080 - AC080")
     # and leave "Namen bis" empty, prefer the inline range over a potentially
     # stale default from a previous run.
