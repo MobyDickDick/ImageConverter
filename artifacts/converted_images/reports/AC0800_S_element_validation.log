@@ -1,20 +1,6 @@
-run-meta: run_seed=667077914 pass_seed_offset=4 nonce_ns=1774629098009620700
 status=semantic_ok
-redraw_variation: seed=673668382435 changed_params=cx:7.500->7.511 | cy:7.500->7.475 | r:7.000->6.995 | stroke_circle:1.000->0.886
-semantic-guard: Text bewusst deaktiviert (plain-ring Familie ohne Buchstabe).
-small_variant_mode_active: reason=min_dim, min_dim=14.000, mask_dilate_px=1, text_mode=, arm_min_ratio=0.000, stem_min_ratio=0.000
-Runde 1: elementweise Validierung gestartet
-circle: Fehler=28.400
-circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
-Runde 1: Gesamtfehler=13.058
-stagnation_detected: keine relevante Geometrieänderung in der letzten Validierungsrunde
-switch_to_fallback_search: deaktiviere Circle-Geometry-Penalty für eine letzte Ausweichrunde
-Runde 2: elementweise Validierung gestartet
-circle: Fehler=28.400
-circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
-Runde 2: Gesamtfehler=13.058
-stagnation_detected: identischer Parameter-Fingerprint und praktisch unveränderter Gesamtfehler
-stopped_due_to_stagnation: Validierung vorzeitig beendet
-circle: Farb-Bracketing fill_gray 242->240; Kandidaten=200->4226.000, 210->3691.000, 219->3255.000, 220->3213.000, 226->3035.000, 230->2946.000, 234->2849.000, 240->2755.000, 242->2775.000, 250->3213.000, 255->3531.000
-circle: Farb-Bracketing stroke_gray 127->171; Kandidaten=95->3579.000, 96->3551.000, 111->3100.000, 112->3088.000, 119->2913.000, 127->2755.000, 128->2736.000, 135->2612.000, 143->2461.000, 144->2445.000, 152->2300.000, 159->2173.000, 160->2153.000, 171->2001.000, 219->2988.000
-circle: Farboptimierung in Abschlussphase angewendet
+filename=AC0800_S.jpg
+convergence=embedded_raster_fallback
+validation_rounds=1
+mean_delta2=0.000000
+std_delta2=0.000000
