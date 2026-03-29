@@ -6086,6 +6086,37 @@ def test_render_svg_to_numpy_returns_none_after_retryable_renderer_failures(monk
     assert len(attempts) >= 1
 
 
+def test_render_svg_to_numpy_uses_subprocess_isolation_when_enabled(monkeypatch: pytest.MonkeyPatch) -> None:
+    if image_composite_converter.np is None:
+        pytest.skip("numpy not available in this environment")
+
+    np = image_composite_converter.np
+    marker = np.full((2, 3, 3), 77, dtype=np.uint8)
+    monkeypatch.setattr(image_composite_converter, "SVG_RENDER_SUBPROCESS_ENABLED", True)
+    monkeypatch.setattr(image_composite_converter, "_render_svg_to_numpy_via_subprocess", lambda *_a, **_k: marker.copy())
+    monkeypatch.setattr(image_composite_converter, "_render_svg_to_numpy_inprocess", lambda *_a, **_k: None)
+
+    result = Action.render_svg_to_numpy('<svg xmlns="http://www.w3.org/2000/svg"></svg>', 3, 2)
+    assert result is not None
+    assert result.shape == (2, 3, 3)
+    assert int(result[0, 0, 0]) == 77
+
+
+def test_render_svg_to_numpy_falls_back_to_inprocess_after_subprocess_failure(monkeypatch: pytest.MonkeyPatch) -> None:
+    if image_composite_converter.np is None:
+        pytest.skip("numpy not available in this environment")
+
+    np = image_composite_converter.np
+    fallback = np.full((1, 1, 3), 13, dtype=np.uint8)
+    monkeypatch.setattr(image_composite_converter, "SVG_RENDER_SUBPROCESS_ENABLED", True)
+    monkeypatch.setattr(image_composite_converter, "_render_svg_to_numpy_via_subprocess", lambda *_a, **_k: None)
+    monkeypatch.setattr(image_composite_converter, "_render_svg_to_numpy_inprocess", lambda *_a, **_k: fallback.copy())
+
+    result = Action.render_svg_to_numpy('<svg xmlns="http://www.w3.org/2000/svg"></svg>', 1, 1)
+    assert result is not None
+    assert int(result[0, 0, 0]) == 13
+
+
 
 def test_convert_range_stops_after_render_failure_and_writes_batch_summary(
     tmp_path: Path,
