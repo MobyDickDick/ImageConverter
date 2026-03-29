@@ -3,7 +3,9 @@
 from __future__ import annotations
 
 import math
+import re
 import sys
+from html import escape
 from pathlib import Path
 from typing import Callable
 
@@ -26,6 +28,10 @@ ImagePredicate = Callable[[Path], bool]
 
 
 RASTER_EXTENSIONS = {".png", ".jpg", ".jpeg", ".bmp", ".gif"}
+SVG_VIEWBOX_RE = re.compile(
+    r'viewBox\s*=\s*["\']\s*([+-]?\d*\.?\d+)\s+([+-]?\d*\.?\d+)\s+([+-]?\d*\.?\d+)\s+([+-]?\d*\.?\d+)\s*["\']',
+    flags=re.IGNORECASE,
+)
 
 
 def _read_raster(path: Path):
@@ -132,6 +138,105 @@ def create_tiled_overview_image(
     return output_path
 
 
+def _read_svg_text(path: Path) -> str | None:
+    try:
+        return path.read_text(encoding="utf-8")
+    except Exception:
+        return None
+
+
+def _extract_svg_bounds(svg_text: str) -> tuple[float, float, float, float]:
+    viewbox_match = SVG_VIEWBOX_RE.search(svg_text)
+    if viewbox_match:
+        try:
+            x = float(viewbox_match.group(1))
+            y = float(viewbox_match.group(2))
+            width = float(viewbox_match.group(3))
+            height = float(viewbox_match.group(4))
+            if width > 0 and height > 0:
+                return x, y, width, height
+        except ValueError:
+            pass
+
+    width_match = re.search(r'width\s*=\s*["\']\s*([+-]?\d*\.?\d+)', svg_text, flags=re.IGNORECASE)
+    height_match = re.search(r'height\s*=\s*["\']\s*([+-]?\d*\.?\d+)', svg_text, flags=re.IGNORECASE)
+    width = float(width_match.group(1)) if width_match else 1.0
+    height = float(height_match.group(1)) if height_match else 1.0
+    if width <= 0:
+        width = 1.0
+    if height <= 0:
+        height = 1.0
+    return 0.0, 0.0, width, height
+
+
+def _extract_svg_inner(svg_text: str) -> str:
+    match = re.search(r"<svg\b[^>]*>(.*)</svg>", svg_text, flags=re.IGNORECASE | re.DOTALL)
+    return match.group(1).strip() if match else svg_text.strip()
+
+
+def create_tiled_overview_svg(
+    source_files: list[Path],
+    output_path: Path,
+    *,
+    tile_size: int = 160,
+    padding: int = 12,
+    columns: int = 8,
+) -> Path | None:
+    """Create an SVG tile overview from SVG sources and write it to ``output_path``."""
+    valid = [path for path in source_files if path.exists() and path.suffix.lower() == ".svg"]
+    if not valid:
+        return None
+
+    cell_w = max(64, int(tile_size))
+    label_h = 24
+    cell_h = cell_w + label_h
+    cols = max(1, int(columns))
+    rows = int(math.ceil(len(valid) / cols))
+
+    canvas_h = padding + rows * (cell_h + padding)
+    canvas_w = padding + cols * (cell_w + padding)
+
+    elements = [
+        '<?xml version="1.0" encoding="UTF-8"?>',
+        (
+            f'<svg xmlns="http://www.w3.org/2000/svg" width="{canvas_w}" height="{canvas_h}" '
+            f'viewBox="0 0 {canvas_w} {canvas_h}">'
+        ),
+        f'<rect x="0" y="0" width="{canvas_w}" height="{canvas_h}" fill="#f8f8f8"/>',
+    ]
+
+    for idx, path in enumerate(valid):
+        svg_text = _read_svg_text(path)
+        if not svg_text:
+            continue
+        x, y, src_w, src_h = _extract_svg_bounds(svg_text)
+        inner = _extract_svg_inner(svg_text)
+
+        row = idx // cols
+        col = idx % cols
+        x0 = padding + col * (cell_w + padding)
+        y0 = padding + row * (cell_h + padding)
+
+        scale = min(cell_w / src_w, cell_w / src_h)
+        draw_w = src_w * scale
+        draw_h = src_h * scale
+        tx = x0 + (cell_w - draw_w) / 2.0
+        ty = y0 + (cell_w - draw_h) / 2.0
+
+        elements.append(f'<rect x="{x0}" y="{y0}" width="{cell_w}" height="{cell_w}" fill="#ffffff" stroke="#d0d0d0"/>')
+        elements.append(f'<g transform="translate({tx:.3f} {ty:.3f}) scale({scale:.6f}) translate({-x:.6f} {-y:.6f})">{inner}</g>')
+        elements.append(
+            f'<text x="{x0 + 2}" y="{y0 + cell_w + 16}" font-size="11" fill="#2d2d2d" '
+            'font-family="Arial, Helvetica, sans-serif">'
+            f"{escape(path.stem)}</text>"
+        )
+
+    elements.append("</svg>")
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.write_text("\n".join(elements) + "\n", encoding="utf-8")
+    return output_path
+
+
 def generate_conversion_overviews(
     diff_dir: str | Path,
     svg_dir: str | Path,
@@ -155,6 +260,10 @@ def generate_conversion_overviews(
     svg_res = create_tiled_overview_image(svg_files, svg_out)
     if svg_res is not None:
         generated["svg"] = str(svg_res)
+    svg_vector_out = reports_root / "overview_svg_tiles.svg"
+    svg_vector_res = create_tiled_overview_svg(svg_files, svg_vector_out)
+    if svg_vector_res is not None:
+        generated["svg_vector"] = str(svg_vector_res)
 
     return generated
 
