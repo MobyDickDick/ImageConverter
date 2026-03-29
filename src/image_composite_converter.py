@@ -10460,20 +10460,24 @@ def _read_svg_geometry(svg_path: str) -> tuple[int, int, dict] | None:
         params["arm_y2"] = float(line_match.group(4))
         params["arm_stroke"] = float(line_match.group(5))
 
-    text_tag_match = re.search(r"(<text[^>]*>)", text)
-    if text_tag_match:
-        text_tag = text_tag_match.group(1)
-        fill_match = re.search(r'fill="(#[0-9a-fA-F]{6})"', text_tag)
-        if fill_match:
-            params["text_gray"] = _gray_from_hex(fill_match.group(1), int(params["text_gray"]))
-        text_content_match = re.search(r"<text[^>]*>([^<]+)</text>", text)
-        text_content = text_content_match.group(1).strip().upper() if text_content_match else ""
-        if text_content == "VOC":
+    text_matches = re.findall(r"(<text[^>]*>)([^<]*)</text>", text)
+    if text_matches:
+        for text_tag, _text_content in text_matches:
+            fill_match = re.search(r'fill="(#[0-9a-fA-F]{6})"', text_tag)
+            if fill_match:
+                params["text_gray"] = _gray_from_hex(fill_match.group(1), int(params["text_gray"]))
+                break
+
+        text_tokens = [content.strip().upper() for _tag, content in text_matches if content and content.strip()]
+        normalized_tokens = [token.replace("₂", "2").replace("^", "").replace("_", "") for token in text_tokens]
+        merged_text = "".join(normalized_tokens)
+
+        if any(token == "VOC" for token in normalized_tokens):
             params["draw_text"] = True
             params["text_mode"] = "voc"
-        elif text_content in {"CO", "2"}:
-            # CO₂ is emitted as two separate text nodes ("CO" + subscript "2").
-            # Preserve text semantics so variant harmonization cannot strip labels.
+        elif merged_text == "CO2" or any(token == "CO2" for token in normalized_tokens):
+            # Support both single-node CO₂ labels (<text>CO2</text>, <text>CO₂</text>)
+            # and split-node output (<text>CO</text><text>2</text>).
             params["draw_text"] = True
             params["text_mode"] = "co2"
 

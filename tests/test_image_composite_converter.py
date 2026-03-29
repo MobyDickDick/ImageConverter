@@ -5515,6 +5515,45 @@ def test_load_existing_conversion_rows_reads_prior_iteration_log(tmp_path: Path)
     assert rows[0]["params"]["mode"] == "semantic_badge"
 
 
+def test_read_svg_geometry_detects_co2_text_from_single_text_node(tmp_path: Path) -> None:
+    svg_path = tmp_path / "AC0831_L.svg"
+    svg_path.write_text(
+        '<svg width="25px" height="45px" viewBox="0 0 25 45" xmlns="http://www.w3.org/2000/svg">'
+        '<circle cx="12.5" cy="12.5" r="10" fill="#efefef" stroke="#9b9b9b" stroke-width="1"/>'
+        '<rect x="12" y="22" width="1" height="23" fill="#9b9b9b"/>'
+        '<text x="12.5" y="16" fill="#6f6f6f">CO2</text>'
+        "</svg>",
+        encoding="utf-8",
+    )
+
+    geometry = conv._read_svg_geometry(str(svg_path))
+
+    assert geometry is not None
+    _w, _h, params = geometry
+    assert params.get("draw_text") is True
+    assert params.get("text_mode") == "co2"
+
+
+def test_read_svg_geometry_detects_split_co2_text_nodes(tmp_path: Path) -> None:
+    svg_path = tmp_path / "AC0831_M.svg"
+    svg_path.write_text(
+        '<svg width="25px" height="45px" viewBox="0 0 25 45" xmlns="http://www.w3.org/2000/svg">'
+        '<circle cx="12.5" cy="12.5" r="10" fill="#efefef" stroke="#9b9b9b" stroke-width="1"/>'
+        '<rect x="12" y="22" width="1" height="23" fill="#9b9b9b"/>'
+        '<text x="12.5" y="16" fill="#6f6f6f">CO</text>'
+        '<text x="17" y="13" fill="#6f6f6f">2</text>'
+        "</svg>",
+        encoding="utf-8",
+    )
+
+    geometry = conv._read_svg_geometry(str(svg_path))
+
+    assert geometry is not None
+    _w, _h, params = geometry
+    assert params.get("draw_text") is True
+    assert params.get("text_mode") == "co2"
+
+
 def test_convert_range_uses_existing_conversion_rows_as_template_donors(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
