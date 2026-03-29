@@ -141,8 +141,6 @@ _optional_log_capture = contextlib.contextmanager(
 _resolve_cli_csv_and_output = _load_mainfile_function("_resolve_cli_csv_and_output", "_resolve_cli_csv_and_output.py")
 _format_user_diagnostic = _load_mainfile_function("_format_user_diagnostic", "_format_user_diagnostic.py")
 _prompt_interactive_range = _load_mainfile_function("_prompt_interactive_range", "_prompt_interactive_range.py")
-convert_image = _load_mainfile_function("convert_image", "convert_image.py")
-convert_image_variants = _load_mainfile_function("convert_image_variants", "convert_image_variants.py")
 
 
 def main(argv: list[str] | None = None) -> int:
