@@ -1,5 +1,20 @@
 [
   {
+    "variant": "AC0800_M",
+    "base": "AC0800",
+    "description_lookup_keys": [
+      "AC0800_M",
+      "AC0800_M",
+      "AC0800",
+      "AC0800"
+    ],
+    "recognized_description_elements": [
+      "circle",
+      "text"
+    ],
+    "description_text": "Kreisförmiges Badge."
+  },
+  {
     "variant": "AC0800_L",
     "base": "AC0800",
     "description_lookup_keys": [
@@ -15,74 +30,11 @@
     "description_text": "Kreisförmiges Badge."
   },
   {
-    "variant": "AC0080_L",
-    "base": "AC0080",
-    "description_lookup_keys": [
-      "AC0080_L",
-      "AC0080_L",
-      "AC0080",
-      "AC0080"
-    ],
-    "recognized_description_elements": [
-      "circle",
-      "stem",
-      "text"
-    ],
-    "description_text": "Wie AC0020: zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben. Geometrische Variante: identisch zur Referenz."
-  },
-  {
-    "variant": "AC0080_M",
-    "base": "AC0080",
-    "description_lookup_keys": [
-      "AC0080_M",
-      "AC0080_M",
-      "AC0080",
-      "AC0080"
-    ],
-    "recognized_description_elements": [
-      "circle",
-      "stem",
-      "text"
-    ],
-    "description_text": "Wie AC0020: zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben. Geometrische Variante: identisch zur Referenz."
-  },
-  {
     "variant": "AC0800_S",
     "base": "AC0800",
     "description_lookup_keys": [
       "AC0800_S",
       "AC0800_S",
-      "AC0800",
-      "AC0800"
-    ],
-    "recognized_description_elements": [
-      "circle",
-      "text"
-    ],
-    "description_text": "Kreisförmiges Badge."
-  },
-  {
-    "variant": "AC0080_S",
-    "base": "AC0080",
-    "description_lookup_keys": [
-      "AC0080_S",
-      "AC0080_S",
-      "AC0080",
-      "AC0080"
-    ],
-    "recognized_description_elements": [
-      "circle",
-      "stem",
-      "text"
-    ],
-    "description_text": "Wie AC0020: zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben. Geometrische Variante: identisch zur Referenz."
-  },
-  {
-    "variant": "AC0800_M",
-    "base": "AC0800",
-    "description_lookup_keys": [
-      "AC0800_M",
-      "AC0800_M",
       "AC0800",
       "AC0800"
     ],
