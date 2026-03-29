@@ -29,6 +29,14 @@ import importlib
 import io
 import struct
 import statistics
+
+if __package__ in {None, ""}:
+    # Allow direct CLI execution via ``python src/image_composite_converter.py``
+    # from the repository root without requiring PYTHONPATH to be preset.
+    repo_root = Path(__file__).resolve().parent.parent
+    if str(repo_root) not in sys.path:
+        sys.path.insert(0, str(repo_root))
+
 from src.overview_tiles import generate_conversion_overviews
 from src.image_composite_converter_regions import (
     ANNOTATION_COLORS,
