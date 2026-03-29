@@ -89,6 +89,24 @@ def test_optional_dependency_error_reports_windows_bundle_hint() -> None:
     assert "Linux-Umgebung" in message
 
 
+def test_export_module_call_tree_csv_writes_rows(tmp_path: Path) -> None:
+    out_path = tmp_path / "call_tree.csv"
+
+    written = conv.export_module_call_tree_csv(out_path, Path(conv.__file__))
+
+    assert Path(written) == out_path
+    rows = out_path.read_text(encoding="utf-8").splitlines()
+    assert rows
+    assert rows[0].startswith("root;node;depth;parent;")
+    assert any(";main;" in row for row in rows[1:])
+
+
+def test_parse_args_export_call_tree_csv_default() -> None:
+    args = conv.parse_args(["--export-call-tree-csv"])
+
+    assert args.export_call_tree_csv == conv.DEFAULT_CALL_TREE_CSV_PATH
+
+
 def test_semantic_validation_accepts_circle_supported_by_local_mask(monkeypatch: pytest.MonkeyPatch) -> None:
     """Local ROI support should prevent false circle mismatches when Hough detection misses JPEG-soft rings."""
     if conv.np is None:

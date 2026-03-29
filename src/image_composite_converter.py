@@ -7,6 +7,7 @@ for direct CLI and module-based execution.
 from __future__ import annotations
 
 import argparse
+import ast
 import base64
 import contextlib
 import copy
@@ -52,6 +53,8 @@ AC08_REGRESSION_VARIANTS = tuple(dict.fromkeys(AC08_REGRESSION_VARIANTS))
 # Keep the historical "previously good" anchor subset stable for AC08 success
 # criteria reports used by this converter/test suite.
 AC08_PREVIOUSLY_GOOD_VARIANTS = ("AC0800_L", "AC0800_M", "AC0800_S", "AC0811_L")
+
+DEFAULT_CALL_TREE_CSV_PATH = "artifacts/converted_images/reports/call_tree_image_composite_converter.csv"
 
 OPTIONAL_DEPENDENCY_ERRORS: dict[str, str] = {}
 
@@ -11725,6 +11728,17 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
             "in das Vendor-Verzeichnis installiert."
         ),
     )
+    parser.add_argument(
+        "--export-call-tree-csv",
+        nargs="?",
+        const=DEFAULT_CALL_TREE_CSV_PATH,
+        default=None,
+        help=(
+            "Erstellt einen moduleigenen Aufrufbaum aus image_composite_converter.py und schreibt ihn als CSV. "
+            "Optional kann ein Zielpfad angegeben werden "
+            f"(Default: {DEFAULT_CALL_TREE_CSV_PATH})."
+        ),
+    )
     parser.add_argument("--vendor-dir", default="vendor", help="Zielordner für vendorte Python-Pakete")
     parser.add_argument(
         "--vendor-platform",
@@ -11853,6 +11867,179 @@ def _format_user_diagnostic(exc: BaseException) -> str:
     return str(exc)
 
 
+def _dotted_attr_name(node: ast.AST) -> str:
+    if isinstance(node, ast.Name):
+        return node.id
+    if isinstance(node, ast.Attribute):
+        prefix = _dotted_attr_name(node.value)
+        if prefix:
+            return f"{prefix}.{node.attr}"
+        return node.attr
+    return ""
+
+
+def _module_call_edges_for_path(module_path: str | os.PathLike[str]) -> tuple[dict[str, int], list[dict[str, object]]]:
+    """Return module-local callables and caller->callee edges for the given source file."""
+    source_path = Path(module_path)
+    source = source_path.read_text(encoding="utf-8")
+    tree = ast.parse(source)
+
+    callable_lines: dict[str, int] = {}
+    local_function_names: set[str] = set()
+
+    class CallableCollector(ast.NodeVisitor):
+        def __init__(self):
+            self._class_stack: list[str] = []
+
+        def visit_ClassDef(self, node: ast.ClassDef):
+            self._class_stack.append(node.name)
+            self.generic_visit(node)
+            self._class_stack.pop()
+
+        def visit_FunctionDef(self, node: ast.FunctionDef):
+            scoped_name = ".".join(self._class_stack + [node.name]) if self._class_stack else node.name
+            callable_lines[scoped_name] = node.lineno
+            local_function_names.add(node.name)
+            self.generic_visit(node)
+
+        def visit_AsyncFunctionDef(self, node: ast.AsyncFunctionDef):
+            scoped_name = ".".join(self._class_stack + [node.name]) if self._class_stack else node.name
+            callable_lines[scoped_name] = node.lineno
+            local_function_names.add(node.name)
+            self.generic_visit(node)
+
+    CallableCollector().visit(tree)
+    edges: list[dict[str, object]] = []
+
+    class CallEdgeCollector(ast.NodeVisitor):
+        def __init__(self):
+            self._scope_stack: list[str] = []
+            self._class_stack: list[str] = []
+
+        def _current_scope(self) -> str:
+            return ".".join(self._scope_stack)
+
+        def visit_ClassDef(self, node: ast.ClassDef):
+            self._class_stack.append(node.name)
+            self.generic_visit(node)
+            self._class_stack.pop()
+
+        def visit_FunctionDef(self, node: ast.FunctionDef):
+            scoped_name = ".".join(self._class_stack + [node.name]) if self._class_stack else node.name
+            self._scope_stack.append(scoped_name)
+            self.generic_visit(node)
+            self._scope_stack.pop()
+
+        def visit_AsyncFunctionDef(self, node: ast.AsyncFunctionDef):
+            scoped_name = ".".join(self._class_stack + [node.name]) if self._class_stack else node.name
+            self._scope_stack.append(scoped_name)
+            self.generic_visit(node)
+            self._scope_stack.pop()
+
+        def visit_Call(self, node: ast.Call):
+            caller = self._current_scope()
+            callee = ""
+            raw_callee = _dotted_attr_name(node.func)
+            if isinstance(node.func, ast.Name):
+                if node.func.id in local_function_names:
+                    callee = node.func.id
+            elif isinstance(node.func, ast.Attribute):
+                owner = _dotted_attr_name(node.func.value)
+                attr = node.func.attr
+                if owner in {"self", "cls"} and self._class_stack:
+                    candidate = f"{self._class_stack[-1]}.{attr}"
+                    if candidate in callable_lines:
+                        callee = candidate
+                elif attr in local_function_names:
+                    callee = attr
+
+            if caller and callee:
+                edges.append(
+                    {
+                        "caller": caller,
+                        "callee": callee,
+                        "caller_line": callable_lines.get(caller, 0),
+                        "callee_line": callable_lines.get(callee, 0),
+                        "call_line": getattr(node, "lineno", 0),
+                        "raw_callee": raw_callee,
+                    }
+                )
+            self.generic_visit(node)
+
+    CallEdgeCollector().visit(tree)
+    return callable_lines, edges
+
+
+def export_module_call_tree_csv(
+    output_csv_path: str | os.PathLike[str] = DEFAULT_CALL_TREE_CSV_PATH,
+    module_path: str | os.PathLike[str] = __file__,
+) -> str:
+    """Export a module-local call tree/table as CSV and return the written path."""
+    callable_lines, edges = _module_call_edges_for_path(module_path)
+    incoming: dict[str, int] = {name: 0 for name in callable_lines}
+    adjacency: dict[str, set[str]] = {name: set() for name in callable_lines}
+    for edge in edges:
+        caller = str(edge["caller"])
+        callee = str(edge["callee"])
+        adjacency.setdefault(caller, set()).add(callee)
+        incoming[callee] = incoming.get(callee, 0) + 1
+
+    roots = sorted([name for name in callable_lines if incoming.get(name, 0) == 0], key=lambda n: callable_lines[n])
+    if not roots:
+        roots = sorted(callable_lines, key=lambda n: callable_lines[n])
+
+    tree_rows: list[tuple[str, str, int, str, int]] = []
+
+    def walk(node: str, root: str, depth: int, parent: str, path: tuple[str, ...]):
+        tree_rows.append((root, node, depth, parent, callable_lines.get(node, 0)))
+        for child in sorted(adjacency.get(node, set()), key=lambda n: callable_lines.get(n, 0)):
+            if child in path:
+                continue
+            walk(child, root, depth + 1, node, path + (child,))
+
+    for root in roots:
+        walk(root, root, 0, "", (root,))
+
+    output_path = os.fspath(output_csv_path)
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
+    with open(output_path, "w", encoding="utf-8", newline="") as f:
+        writer = csv.writer(f, delimiter=";")
+        writer.writerow(
+            [
+                "root",
+                "node",
+                "depth",
+                "parent",
+                "node_line",
+                "edge_caller",
+                "edge_callee",
+                "edge_call_line",
+                "edge_caller_line",
+                "edge_callee_line",
+                "edge_raw_callee",
+            ]
+        )
+        edge_by_pair = {(str(edge["caller"]), str(edge["callee"])): edge for edge in edges}
+        for root, node, depth, parent, node_line in tree_rows:
+            edge = edge_by_pair.get((parent, node)) if parent else None
+            writer.writerow(
+                [
+                    root,
+                    node,
+                    depth,
+                    parent,
+                    node_line,
+                    parent if edge else "",
+                    node if edge else "",
+                    int(edge["call_line"]) if edge else "",
+                    int(edge["caller_line"]) if edge else "",
+                    int(edge["callee_line"]) if edge else "",
+                    str(edge["raw_callee"]) if edge else "",
+                ]
+            )
+    return output_path
+
+
 def _prompt_interactive_range(args: argparse.Namespace) -> tuple[str, str]:
     current_start = str(args.start or "").strip()
     current_end = str(args.end or "").strip()
@@ -11897,6 +12084,11 @@ def main(argv: list[str] | None = None) -> int:
                         )
                     )
                 )
+                return 0
+
+            if args.export_call_tree_csv:
+                path = export_module_call_tree_csv(output_csv_path=args.export_call_tree_csv)
+                print(f"[INFO] Aufrufbaum-CSV geschrieben: {path}")
                 return 0
 
             if args.interactive_range or args.start is None or args.end is None:
