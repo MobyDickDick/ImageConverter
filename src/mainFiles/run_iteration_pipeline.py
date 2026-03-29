@@ -52,17 +52,6 @@ def run_iteration_pipeline(
     with open(svg_path, "w", encoding="utf-8") as f:
         f.write(svg_content)
 
-    rendered = Action.render_svg_to_numpy(svg_content, w, h)
-    if rendered is None:
-        best_error = float("inf")
-        mean_delta2 = float("inf")
-        std_delta2 = float("inf")
-    else:
-        best_error = float(Action.calculate_error(img, rendered))
-        mean_delta2, std_delta2 = Action.calculate_delta2_stats(img, rendered)
-        diff = Action.create_diff_image(img, rendered)
-        cv2.imwrite(os.path.join(diff_out_dir, f"{stem}_diff.png"), diff)
-
     params = {
         "mode": "embedded_raster",
         "elements": elements,
@@ -74,6 +63,36 @@ def run_iteration_pipeline(
             "description_text": str(description or ""),
         },
     }
+    rendered = Action.render_svg_to_numpy(svg_content, w, h)
+    element_validation_lines: list[str] = []
+    redraw_notes: list[str] = []
+    if rendered is None:
+        best_error = float("inf")
+        mean_delta2 = float("inf")
+        std_delta2 = float("inf")
+    else:
+        validate_badge_by_elements = getattr(Action, "validate_badge_by_elements", None)
+        if callable(validate_badge_by_elements):
+            try:
+                checked = validate_badge_by_elements(img, rendered, params)
+                if checked:
+                    element_validation_lines = [str(line) for line in checked]
+            except Exception:
+                element_validation_lines = []
+
+        apply_redraw_variation = getattr(Action, "apply_redraw_variation", None)
+        if callable(apply_redraw_variation):
+            try:
+                _updated_params, notes = apply_redraw_variation(params, w, h)
+                if notes:
+                    redraw_notes = [str(note) for note in notes]
+            except Exception:
+                redraw_notes = []
+
+        best_error = float(Action.calculate_error(img, rendered))
+        mean_delta2, std_delta2 = Action.calculate_delta2_stats(img, rendered)
+        diff = Action.create_diff_image(img, rendered)
+        cv2.imwrite(os.path.join(diff_out_dir, f"{stem}_diff.png"), diff)
 
     log_path = os.path.join(reports_out_dir, f"{stem}_element_validation.log")
     with open(log_path, "w", encoding="utf-8") as f:
@@ -85,5 +104,11 @@ def run_iteration_pipeline(
             f.write(f"mean_delta2={float(mean_delta2):.6f}\n")
         if math.isfinite(float(std_delta2)):
             f.write(f"std_delta2={float(std_delta2):.6f}\n")
+        for line in element_validation_lines:
+            f.write(f"{line}\n")
+        for line in _semantic_quality_flags(stem, element_validation_lines):
+            f.write(f"{line}\n")
+        for note in redraw_notes:
+            f.write(f"{note}\n")
 
     return base, description, params, 0, float(best_error)
