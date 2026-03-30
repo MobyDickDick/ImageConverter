@@ -61,12 +61,12 @@ AC08_PREVIOUSLY_GOOD_VARIANTS = ("AC0800_L", "AC0800_M", "AC0800_S", "AC0811_L")
 
 DEFAULT_CALL_TREE_CSV_PATH = "artifacts/converted_images/reports/call_tree_image_composite_converter.csv"
 
-SVG_RENDER_SUBPROCESS_ENABLED = os.environ.get("IMAGE_CONVERTER_ISOLATE_SVG_RENDER", "").strip().lower() in {
-    "1",
-    "true",
-    "yes",
-    "on",
-}
+_svg_render_isolation_env = os.environ.get("IMAGE_CONVERTER_ISOLATE_SVG_RENDER", "").strip().lower()
+_svg_render_isolation_explicit = _svg_render_isolation_env in {"0", "false", "no", "off", "1", "true", "yes", "on"}
+_running_under_pytest = any("pytest" in (arg or "").lower() for arg in sys.argv[:1]) or "PYTEST_CURRENT_TEST" in os.environ
+SVG_RENDER_SUBPROCESS_ENABLED = _svg_render_isolation_env in {"1", "true", "yes", "on"} or (
+    not _svg_render_isolation_explicit and _running_under_pytest
+)
 try:
     SVG_RENDER_SUBPROCESS_TIMEOUT_SEC = max(
         1.0,
