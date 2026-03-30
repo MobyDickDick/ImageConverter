@@ -3,6 +3,10 @@
 from __future__ import annotations
 
 import sys
+from pathlib import Path
+
+if __package__ in (None, ""):
+    sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from src.mainFiles import image_composite_converter_runtime as _runtime
 
