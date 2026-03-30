@@ -1,3 +1,7 @@
+from src import image_composite_converter as _icc
+
+globals().update(vars(_icc))
+
 def _resolve_cli_csv_and_output(args: argparse.Namespace) -> tuple[str, str | None]:
     """Resolve effective table path and output directory from mixed CLI styles."""
     csv_path = args.csv_path

@@ -1,3 +1,7 @@
+from src import image_composite_converter as _icc
+
+globals().update(vars(_icc))
+
 def _matches_exact_prefix_filter(filename: str, start_ref: str, end_ref: str) -> bool:
     start_token = _normalize_range_token(start_ref)
     end_token = _normalize_range_token(end_ref)

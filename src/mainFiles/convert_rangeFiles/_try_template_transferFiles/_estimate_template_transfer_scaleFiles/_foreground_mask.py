@@ -1,3 +1,7 @@
+from src import image_composite_converter as _icc
+
+globals().update(vars(_icc))
+
 def _foreground_mask(img: np.ndarray) -> np.ndarray:
     """Return a robust foreground mask for badge-like dark strokes on bright backgrounds."""
     if img is None:

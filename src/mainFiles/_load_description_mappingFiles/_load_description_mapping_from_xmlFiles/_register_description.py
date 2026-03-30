@@ -1,3 +1,7 @@
+from src import image_composite_converter as _icc
+
+globals().update(vars(_icc))
+
 def _register_description(raw_desc: dict[str, str], key: str, description: str) -> None:
     normalized_desc = str(description or "").strip()
     if not normalized_desc:

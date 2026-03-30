@@ -1,3 +1,7 @@
+from src import image_composite_converter as _icc
+
+globals().update(vars(_icc))
+
 def _extract_image_specific_description(entry: ET.Element, image_name: str) -> str:
     normalized_name = str(image_name or "").strip()
     if not normalized_name:

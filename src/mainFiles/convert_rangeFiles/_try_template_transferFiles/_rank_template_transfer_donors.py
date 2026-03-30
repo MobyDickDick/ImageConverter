@@ -1,3 +1,7 @@
+from src import image_composite_converter as _icc
+
+globals().update(vars(_icc))
+
 def _rank_template_transfer_donors(
     target_row: dict[str, object],
     donor_rows: list[dict[str, object]],

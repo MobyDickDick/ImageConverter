@@ -1,3 +1,7 @@
+from src import image_composite_converter as _icc
+
+globals().update(vars(_icc))
+
 def _conversion_random() -> random.Random:
     """Return run-local RNG (seedable via env) for non-deterministic search order."""
     seed_raw = os.environ.get("TINY_ICC_RANDOM_SEED")

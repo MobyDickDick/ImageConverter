@@ -1,3 +1,7 @@
+from src import image_composite_converter as _icc
+
+globals().update(vars(_icc))
+
 def _summarize_previous_good_ac08_variants(reports_out_dir: str) -> dict[str, object]:
     """Summarize whether previously good AC08 variants stayed semantic_ok in the latest run."""
     preserved: list[str] = []

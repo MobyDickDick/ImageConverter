@@ -1,3 +1,7 @@
+from src import image_composite_converter as _icc
+
+globals().update(vars(_icc))
+
 def _select_open_quality_cases(
     rows: list[dict[str, object]],
     *,

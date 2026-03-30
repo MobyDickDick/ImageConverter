@@ -1,3 +1,7 @@
+from src import image_composite_converter as _icc
+
+globals().update(vars(_icc))
+
 def _template_transfer_transform_candidates(
     target_variant: str,
     donor_variant: str,

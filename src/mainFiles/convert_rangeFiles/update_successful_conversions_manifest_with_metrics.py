@@ -1,3 +1,7 @@
+from src import image_composite_converter as _icc
+
+globals().update(vars(_icc))
+
 def update_successful_conversions_manifest_with_metrics(
     folder_path: str,
     svg_out_dir: str,

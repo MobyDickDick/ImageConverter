@@ -1,3 +1,7 @@
+from src import image_composite_converter as _icc
+
+globals().update(vars(_icc))
+
 def _render_svg_to_numpy_inprocess(svg_string: str, size_w: int, size_h: int):
     if fitz is None or np is None or cv2 is None:
         return None

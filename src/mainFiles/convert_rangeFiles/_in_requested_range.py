@@ -1,3 +1,7 @@
+from src import image_composite_converter as _icc
+
+globals().update(vars(_icc))
+
 def _in_requested_range(filename: str, start_ref: str, end_ref: str) -> bool:
     matched, _reason = _in_requested_range_with_reason(filename, start_ref, end_ref)
     return matched

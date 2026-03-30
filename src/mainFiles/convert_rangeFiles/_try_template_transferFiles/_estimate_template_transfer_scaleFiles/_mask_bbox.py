@@ -1,3 +1,7 @@
+from src import image_composite_converter as _icc
+
+globals().update(vars(_icc))
+
 def _mask_bbox(mask: np.ndarray) -> tuple[float, float, float, float] | None:
     """Return (xmin, ymin, xmax, ymax) for truthy mask pixels."""
     if mask is None:

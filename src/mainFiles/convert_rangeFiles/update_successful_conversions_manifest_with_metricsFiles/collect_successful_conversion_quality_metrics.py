@@ -1,3 +1,7 @@
+from src import image_composite_converter as _icc
+
+globals().update(vars(_icc))
+
 def collect_successful_conversion_quality_metrics(
     folder_path: str,
     svg_out_dir: str,
