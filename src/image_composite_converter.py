@@ -10,6 +10,7 @@ import argparse
 import ast
 import base64
 import copy
+import contextlib
 import csv
 import dataclasses
 import gc
@@ -60,12 +61,12 @@ AC08_PREVIOUSLY_GOOD_VARIANTS = ("AC0800_L", "AC0800_M", "AC0800_S", "AC0811_L")
 
 DEFAULT_CALL_TREE_CSV_PATH = "artifacts/converted_images/reports/call_tree_image_composite_converter.csv"
 
-SVG_RENDER_SUBPROCESS_ENABLED = os.environ.get("IMAGE_CONVERTER_ISOLATE_SVG_RENDER", "").strip().lower() in {
-    "1",
-    "true",
-    "yes",
-    "on",
-}
+_svg_render_isolation_env = os.environ.get("IMAGE_CONVERTER_ISOLATE_SVG_RENDER", "").strip().lower()
+_svg_render_isolation_explicit = _svg_render_isolation_env in {"0", "false", "no", "off", "1", "true", "yes", "on"}
+_running_under_pytest = any("pytest" in (arg or "").lower() for arg in sys.argv[:1]) or "PYTEST_CURRENT_TEST" in os.environ
+SVG_RENDER_SUBPROCESS_ENABLED = _svg_render_isolation_env in {"1", "true", "yes", "on"} or (
+    not _svg_render_isolation_explicit and _running_under_pytest
+)
 try:
     SVG_RENDER_SUBPROCESS_TIMEOUT_SEC = max(
         1.0,
@@ -109,15 +110,47 @@ AC08_ADAPTIVE_LOCK_PROFILES: dict[str, dict[str, float | bool]] = {
 }
 
 
-def detect_relevant_regions(img) -> list[dict[str, object]]:
-    return detect_relevant_regions_impl(img, cv2_module=cv2, np_module=np)
+@dataclass(frozen=True)
+class RuntimeModules:
+    """Dependency bundle passed explicitly to extracted helper functions."""
+
+    cv2_module: object | None
+    np_module: object | None
 
 
-def annotate_image_regions(img, regions: list[dict[str, object]]):
-    return annotate_image_regions_impl(img, regions, cv2_module=cv2)
+def _runtime_modules() -> RuntimeModules:
+    """Resolve runtime image dependencies in one place for explicit parameter flow."""
+    return RuntimeModules(cv2_module=cv2, np_module=np)
 
 
-def analyze_range(folder_path: str, output_root: str | None = None, start_ref: str = "", end_ref: str = "ZZZZZZ") -> str:
+def detect_relevant_regions(img, *, runtime_modules: RuntimeModules) -> list[dict[str, object]]:
+    return detect_relevant_regions_impl(
+        img,
+        cv2_module=runtime_modules.cv2_module,
+        np_module=runtime_modules.np_module,
+    )
+
+
+def annotate_image_regions(img, regions: list[dict[str, object]], *, runtime_modules: RuntimeModules):
+    return annotate_image_regions_impl(img, regions, cv2_module=runtime_modules.cv2_module)
+
+
+def analyze_range(
+    folder_path: str,
+    output_root: str | None = None,
+    start_ref: str = "",
+    end_ref: str = "ZZZZZZ",
+    *,
+    runtime_modules: RuntimeModules | None = None,
+) -> str:
+    modules = runtime_modules or _runtime_modules()
+
+    def _detect_regions(img):
+        return detect_relevant_regions(img, runtime_modules=modules)
+
+    def _annotate_regions(img, regions):
+        return annotate_image_regions(img, regions, runtime_modules=modules)
+
     return analyze_range_impl(
         folder_path=folder_path,
         output_root=output_root,
@@ -125,10 +158,10 @@ def analyze_range(folder_path: str, output_root: str | None = None, start_ref: s
         end_ref=end_ref,
         default_output_root_fn=_default_converted_symbols_root,
         in_requested_range_fn=_in_requested_range,
-        detect_regions_fn=detect_relevant_regions,
-        annotate_regions_fn=annotate_image_regions,
-        cv2_module=cv2,
-        np_module=np,
+        detect_regions_fn=_detect_regions,
+        annotate_regions_fn=_annotate_regions,
+        cv2_module=modules.cv2_module,
+        np_module=modules.np_module,
     )
 
 
@@ -11981,11 +12014,13 @@ def main(argv: list[str] | None = None) -> int:
             selected_variants = set(AC08_REGRESSION_VARIANTS) if args.ac08_regression_set else None
 
             if args.mode == "annotate":
+                runtime_modules = _runtime_modules()
                 out_dir = analyze_range(
                     args.folder_path,
                     output_root=output_dir,
                     start_ref=args.start,
                     end_ref=args.end,
+                    runtime_modules=runtime_modules,
                 )
             else:
                 out_dir = convert_range(
@@ -12028,8 +12063,9 @@ def convert_image(input_path: str, output_path: str, *, max_iter: int = 120, pla
     img = cv2.imread(str(input_path))
     if img is None:
         raise FileNotFoundError(f"Bild konnte nicht gelesen werden: {input_path}")
-    regions = detect_relevant_regions(img)
-    annotated = annotate_image_regions(img, regions)
+    runtime_modules = _runtime_modules()
+    regions = detect_relevant_regions(img, runtime_modules=runtime_modules)
+    annotated = annotate_image_regions(img, regions, runtime_modules=runtime_modules)
     cv2.imwrite(str(target), annotated)
     target.with_suffix(".json").write_text(json.dumps(regions, ensure_ascii=False, indent=2), encoding="utf-8")
     return target
