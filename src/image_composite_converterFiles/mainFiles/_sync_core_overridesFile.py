@@ -1,3 +1,0 @@
-from __future__ import annotations
-
-from src.image_composite_converterFiles._sync_core_overridesFile import _sync_core_overrides
