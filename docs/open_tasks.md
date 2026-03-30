@@ -28,6 +28,12 @@ focused on the actual project scope.
   - `detect_relevant_regions`, `annotate_image_regions` und `analyze_range` delegieren im Monolithen jetzt auf die neue Modul-Implementierung.
   - Nächster geplanter Schritt: weitere fachliche Blöcke (zuerst optionale Dependency-/Import-Hilfen, danach semantische Prüf- und Optimierungsblöcke) in denselben kleinen Schritten extrahieren.
 
+- [x] C1.2: Optionale Dependency-/Import-Hilfen aus dem Monolithen ausgelagert.
+  - 2026-03-30: Neues Modul `src/image_composite_converter_dependencies.py` extrahiert die Dependency-Prüfung/-Bootstrap-Logik (`missing_required_image_dependencies`, `bootstrap_required_image_dependencies`).
+  - Der Monolith delegiert `_missing_required_image_dependencies` und `_bootstrap_required_image_dependencies` jetzt auf das neue Modul; externe Funktionsnamen bleiben unverändert.
+  - Nächster geplanter Schritt: semantische Prüf- und Optimierungsblöcke in kleinen, testbaren Schritten extrahieren.
+
+
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.
   - `_create_diff_image_without_cv2` nutzt jetzt Context-Manager für beide `fitz.open(...)` Dokumente, damit Batch-Läufe keine unnötig offenen MuPDF-Dokumente ansammeln.
   - Ziel: Stabilere AC08-Serienläufe ohne native MuPDF-Stackoverflow-Ausreißer durch Ressourcenaufbau über viele Dateien.
