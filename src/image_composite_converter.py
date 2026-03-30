@@ -10,6 +10,7 @@ import contextlib
 import importlib
 import os
 import sys
+import types
 from pathlib import Path
 
 import src.mainFiles.image_composite_converter_core as _core
@@ -105,8 +106,10 @@ _core._load_optional_module = _load_optional_module
 
 np = _load_optional_module("numpy")
 cv2 = _load_optional_module("cv2")
+fitz = _load_optional_module("fitz")
 _core.np = np
 _core.cv2 = cv2
+_core.fitz = fitz
 
 
 def _sync_core_overrides() -> None:
@@ -218,6 +221,18 @@ def main(argv: list[str] | None = None) -> int:
         except DescriptionMappingError as exc:
             print(f"[ERROR] {_format_user_diagnostic(exc)}")
             return 2
+
+
+class _CoreSyncModule(types.ModuleType):
+    def __setattr__(self, name, value):
+        super().__setattr__(name, value)
+        if name in {"convert_range", "main", "_sync_core_overrides"}:
+            return
+        if hasattr(_core, name):
+            setattr(_core, name, value)
+
+
+sys.modules[__name__].__class__ = _CoreSyncModule
 
 
 if __name__ == "__main__":
