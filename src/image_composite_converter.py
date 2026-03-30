@@ -29,14 +29,14 @@ import io
 import struct
 import statistics
 from src.overview_tiles import generate_conversion_overviews
-from src.image_composite_converter_regions import (
+from src.mainFiles.image_composite_converter_regions import (
     ANNOTATION_COLORS,
     analyze_range_impl,
     annotate_image_regions_impl,
     detect_relevant_regions_impl,
 )
-from src.image_composite_converterFiles._clip_scalar import clip_scalar
-from src.image_composite_converter_dependencies import (
+from src.mainFiles._clip_scalar import clip_scalar
+from src.mainFiles.image_composite_converter_dependencies import (
     bootstrap_required_image_dependencies,
     missing_required_image_dependencies,
 )
