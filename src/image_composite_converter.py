@@ -40,6 +40,10 @@ from src.image_composite_converter_dependencies import (
     bootstrap_required_image_dependencies,
     missing_required_image_dependencies,
 )
+from src.image_composite_converter_semantic_presence import (
+    expected_semantic_presence_impl,
+    semantic_presence_mismatches_impl,
+)
 from src.mainFiles._optional_module_loader import (
     OPTIONAL_DEPENDENCY_ERRORS,
     _import_with_vendored_fallback,
@@ -7401,40 +7405,11 @@ class Action:
 
     @staticmethod
     def _expected_semantic_presence(semantic_elements: list[str]) -> dict[str, bool]:
-        normalized = [str(elem).lower() for elem in semantic_elements]
-        has_text = any(
-            ("kreis + buchstabe" in elem)
-            or (("buchstab" in elem) and ("ohne buchstabe" not in elem))
-            or ("voc" in elem)
-            or ("co_2" in elem)
-            or ("co₂" in elem)
-            for elem in normalized
-        )
-        has_circle = any("kreis" in elem for elem in normalized)
-        return {
-            "circle": has_circle,
-            "stem": any("senkrechter strich" in elem for elem in normalized),
-            "arm": any("waagrechter strich" in elem for elem in normalized),
-            "text": has_text,
-        }
+        return expected_semantic_presence_impl(semantic_elements)
 
     @staticmethod
     def _semantic_presence_mismatches(expected: dict[str, bool], observed: dict[str, bool]) -> list[str]:
-        labels = {
-            "circle": "Kreis",
-            "stem": "senkrechter Strich",
-            "arm": "waagrechter Strich",
-            "text": "Buchstabe/Text",
-        }
-        issues: list[str] = []
-        for key in ("circle", "stem", "arm", "text"):
-            exp = bool(expected.get(key, False))
-            obs = bool(observed.get(key, False))
-            if exp and not obs:
-                issues.append(f"Beschreibung erwartet {labels[key]}, im Bild aber nicht robust erkennbar")
-            if obs and not exp:
-                issues.append(f"Im Bild ist {labels[key]} erkennbar, aber nicht in der Beschreibung enthalten")
-        return issues
+        return semantic_presence_mismatches_impl(expected, observed)
 
     @staticmethod
     def _detect_semantic_primitives(

@@ -23,7 +23,7 @@ focused on the actual project scope.
   - Hintergrund: Die Datei hat aktuell deutlich über 10k Zeilen; Refactoring erfolgt bewusst in mehreren, testbaren Teilschritten statt als Big-Bang.
   - Vorgehen: pro Teilbereich (z. B. Regionen-Analyse, IO/Reporting, Rendering, Optimierung, CLI) jeweils ein neues Modul mit klarer API erstellen und im Hauptskript nur noch schlanke Delegation belassen.
   - Akzeptanzkriterium für jeden Teilschritt: bestehende Tests laufen weiter, externe Funktionsnamen bleiben kompatibel, und der offene Aufgabenstand wird hier dokumentiert.
-- [ ] C1.1: Erste Extraktion abgeschlossen: Regionen-Analyse/Annotierung aus dem Monolithen ausgelagert.
+- [x] C1.1: Erste Extraktion abgeschlossen: Regionen-Analyse/Annotierung aus dem Monolithen ausgelagert.
   - 2026-03-29: Start umgesetzt mit neuem Modul `src/image_composite_converter_regions.py`.
   - `detect_relevant_regions`, `annotate_image_regions` und `analyze_range` delegieren im Monolithen jetzt auf die neue Modul-Implementierung.
   - Nächster geplanter Schritt: weitere fachliche Blöcke (zuerst optionale Dependency-/Import-Hilfen, danach semantische Prüf- und Optimierungsblöcke) in denselben kleinen Schritten extrahieren.
@@ -32,6 +32,12 @@ focused on the actual project scope.
   - 2026-03-30: Neues Modul `src/image_composite_converter_dependencies.py` extrahiert die Dependency-Prüfung/-Bootstrap-Logik (`missing_required_image_dependencies`, `bootstrap_required_image_dependencies`).
   - Der Monolith delegiert `_missing_required_image_dependencies` und `_bootstrap_required_image_dependencies` jetzt auf das neue Modul; externe Funktionsnamen bleiben unverändert.
   - Nächster geplanter Schritt: semantische Prüf- und Optimierungsblöcke in kleinen, testbaren Schritten extrahieren.
+
+
+- [x] C1.3: Semantische Präsenzprüfung aus dem Monolithen in ein Hilfsmodul ausgelagert.
+  - 2026-03-30: Neues Modul `src/image_composite_converter_semantic_presence.py` extrahiert die Kernlogik für erwartete Primitive und Mismatch-Texte (`expected_semantic_presence_impl`, `semantic_presence_mismatches_impl`).
+  - Der Monolith delegiert `Action._expected_semantic_presence` und `Action._semantic_presence_mismatches` jetzt direkt auf das neue Modul; Verhalten und Fehlermeldungstexte bleiben unverändert.
+  - Nächster geplanter Schritt: weitere semantische Prüf-/Diagnose-Helfer in kleinen, testbaren Schritten auslagern.
 
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.
