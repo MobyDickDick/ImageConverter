@@ -40,6 +40,7 @@ if __package__ in {None, ""}:
 from src.overview_tiles import generate_conversion_overviews
 from src.image_composite_converter_regions import (
     ANNOTATION_COLORS,
+    _bbox_to_dict,
     analyze_range_impl,
     annotate_image_regions_impl,
     detect_relevant_regions_impl,
@@ -129,7 +130,7 @@ def annotate_image_regions(img, regions: list[dict[str, object]]):
 
 def _optional_dependency_base_dir() -> Path:
     """Return the repository root used for vendored dependency discovery."""
-    return Path(__file__).resolve().parents[1]
+    return Path(__file__).resolve().parents[2]
 
 
 def _vendored_site_packages_dirs() -> list[Path]:
@@ -11276,7 +11277,7 @@ def _module_call_edges_for_path(module_path: str | os.PathLike[str]) -> tuple[di
 
 
 
-_MAINFILES_DIR = Path(__file__).resolve().parent / "mainFiles"
+_MAINFILES_DIR = Path(__file__).resolve().parent
 
 
 def _load_mainfile_function(func_name: str, filename: str):
