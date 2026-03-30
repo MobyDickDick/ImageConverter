@@ -8,7 +8,7 @@ from __future__ import annotations
 
 import os
 
-import src.image_composite_converter_core as _core
+import src.mainFiles.image_composite_converter_core as _core
 
 for _name in dir(_core):
     if _name.startswith("__"):
