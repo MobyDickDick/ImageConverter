@@ -36,6 +36,10 @@ from src.image_composite_converter_regions import (
     detect_relevant_regions_impl,
 )
 from src.image_composite_converterFiles._clip_scalar import clip_scalar
+from src.image_composite_converter_dependencies import (
+    bootstrap_required_image_dependencies,
+    missing_required_image_dependencies,
+)
 from src.mainFiles._optional_module_loader import (
     OPTIONAL_DEPENDENCY_ERRORS,
     _import_with_vendored_fallback,
@@ -725,41 +729,12 @@ def decompose_circle_with_stem(grayscale: list[list[int]], element: Element, can
     return [rect, circle]
 
 def _missing_required_image_dependencies() -> list[str]:
-    missing: list[str] = []
-    if cv2 is None:
-        missing.append("opencv-python-headless")
-    if np is None:
-        missing.append("numpy")
-    return missing
+    return missing_required_image_dependencies(cv2_module=cv2, np_module=np)
 
 
 def _bootstrap_required_image_dependencies() -> list[str]:
-    missing = _missing_required_image_dependencies()
-    if not missing:
-        return []
-
-    cmd = [sys.executable, "-m", "pip", "install", *missing]
-    print(f"[INFO] Fehlende Bild-Abhängigkeiten gefunden: {', '.join(missing)}")
-    print(f"[INFO] Installiere via: {' '.join(cmd)}")
-    try:
-        subprocess.run(cmd, check=True)
-    except subprocess.CalledProcessError as exc:
-        raise RuntimeError(
-            "Automatische Installation fehlgeschlagen. "
-            "Bitte Abhängigkeiten manuell installieren oder Proxy/Netzwerk prüfen."
-        ) from exc
-
-    # Re-import in current process so conversion can run without restart.
     global cv2, np
-    if "opencv-python-headless" in missing:
-        import cv2 as _cv2
-
-        cv2 = _cv2
-    if "numpy" in missing:
-        import numpy as _np
-
-        np = _np
-
+    missing, cv2, np = bootstrap_required_image_dependencies(cv2_module=cv2, np_module=np)
     return missing
 
 
