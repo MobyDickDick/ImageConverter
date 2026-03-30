@@ -6,7 +6,11 @@ re-exports the existing converter API from `image_composite_converter_core`.
 
 from __future__ import annotations
 
+import contextlib
+import importlib
 import os
+import sys
+from pathlib import Path
 
 import src.image_composite_converter_core as _core
 
@@ -16,8 +20,115 @@ for _name in dir(_core):
     globals()[_name] = getattr(_core, _name)
 
 
+def _optional_dependency_base_dir() -> Path:
+    """Return the repository root used for vendored dependency discovery."""
+    return Path(__file__).resolve().parents[1]
+
+
+def _vendored_site_packages_dirs() -> list[Path]:
+    """Return repo-local site-packages directories that may contain bundled deps."""
+    base = _optional_dependency_base_dir()
+    linux_candidates = [
+        base / "vendor" / "linux" / "site-packages",
+        base / "vendor" / "linux-py310" / "site-packages",
+        base / "vendor" / "linux-py311" / "site-packages",
+        base / "vendor" / "linux-py312" / "site-packages",
+        base / "vendor" / "linux-py313" / "site-packages",
+        base / "vendor" / "linux-py314" / "site-packages",
+    ]
+    windows_candidates = [
+        base / "vendor" / "win" / "site-packages",
+        base / "vendor" / "win-py310" / "site-packages",
+        base / "vendor" / "win-py311" / "site-packages",
+        base / "vendor" / "win-py312" / "site-packages",
+        base / "vendor" / "win-py313" / "site-packages",
+        base / "vendor" / "win-py314" / "site-packages",
+        base / ".venv" / "Lib" / "site-packages",
+    ]
+    posix_venv_candidates = [
+        base / ".venv" / "lib" / "python3.10" / "site-packages",
+        base / ".venv" / "lib" / "python3.11" / "site-packages",
+        base / ".venv" / "lib" / "python3.12" / "site-packages",
+        base / ".venv" / "lib" / "python3.13" / "site-packages",
+        base / ".venv" / "lib" / "python3.14" / "site-packages",
+    ]
+    if os.name == "nt":
+        candidates = windows_candidates + linux_candidates + posix_venv_candidates
+    else:
+        candidates = linux_candidates + posix_venv_candidates + windows_candidates
+
+    seen: set[str] = set()
+    existing: list[Path] = []
+    for candidate in candidates:
+        key = str(candidate)
+        if key in seen:
+            continue
+        seen.add(key)
+        if candidate.exists():
+            existing.append(candidate)
+    return existing
+
+
+def _load_optional_module(module_name: str):
+    """Import optional dependencies, including repo-vendored site-packages."""
+    attempted_paths: list[Path] = []
+    try:
+        return importlib.import_module(module_name)
+    except Exception as exc:  # pragma: no cover - exercised only in dependency-missing envs
+        last_exc: BaseException = exc
+        _clear_partial_module_import(module_name)
+
+    for site_packages in _vendored_site_packages_dirs():
+        attempted_paths.append(site_packages)
+        path_str = str(site_packages)
+        added = False
+        if path_str not in sys.path:
+            sys.path.insert(0, path_str)
+            added = True
+        try:
+            return importlib.import_module(module_name)
+        except Exception as exc:  # pragma: no cover - exercised only in dependency-missing envs
+            last_exc = exc
+            _clear_partial_module_import(module_name)
+        finally:
+            if added:
+                with contextlib.suppress(ValueError):
+                    sys.path.remove(path_str)
+
+    OPTIONAL_DEPENDENCY_ERRORS[module_name] = _describe_optional_dependency_error(module_name, last_exc, attempted_paths)
+    return None
+
+
+_core._optional_dependency_base_dir = _optional_dependency_base_dir
+_core._vendored_site_packages_dirs = _vendored_site_packages_dirs
+_core._load_optional_module = _load_optional_module
+
+np = _load_optional_module("numpy")
+cv2 = _load_optional_module("cv2")
+_core.np = np
+_core.cv2 = cv2
+
+
+def _sync_core_overrides() -> None:
+    """Mirror monkeypatched wrapper globals into the core module before calls."""
+    skip_names = {"convert_range", "main", "_sync_core_overrides"}
+    for name, value in globals().items():
+        if name in skip_names:
+            continue
+        if not hasattr(_core, name):
+            continue
+        if getattr(_core, name) is value:
+            continue
+        setattr(_core, name, value)
+
+
+def convert_range(*args, **kwargs):
+    _sync_core_overrides()
+    return _core.convert_range(*args, **kwargs)
+
 
 def main(argv: list[str] | None = None) -> int:
+    _sync_core_overrides()
     args = parse_args(argv)
     if bool(getattr(args, "_render_svg_subprocess", False)):
         return _run_svg_render_subprocess_entrypoint()
