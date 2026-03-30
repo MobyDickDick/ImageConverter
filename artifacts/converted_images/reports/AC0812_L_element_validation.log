@@ -1,4 +1,4 @@
-run-meta: run_seed=667077914 pass_seed_offset=0 nonce_ns=1774612031293447700
+run-meta: run_seed=378130192 pass_seed_offset=1 nonce_ns=1774877829408574500
 status=semantic_ok
 semantic_audit_status=semantic_ok
 semantic_audit_lookup_keys=AC0812 | AC0812_L | AC0812 | AC0812
@@ -6,7 +6,7 @@ semantic_audit_recognized_description_elements=Wie AC0811: Kelle mit Kreis oben 
 semantic_audit_derived_elements=SEMANTIC: Kreis ohne Buchstabe | SEMANTIC: waagrechter Strich links vom Kreis
 semantic_audit_priority_order=family_rule > layout_override > description_heuristic
 semantic_audit_conflicts=
-redraw_variation: seed=673952463800 changed_params=cx:29.000->28.769 | cy:12.500->12.719 | r:11.000->11.007 | stroke_circle:1.000->0.994 | arm_stroke:1.000->0.930
+redraw_variation: seed=382517118017 changed_params=cx:29.000->29.345 | cy:12.500->12.725 | r:11.000->11.176 | stroke_circle:1.000->0.959 | arm_stroke:1.000->0.950
 semantic-guard: Text bewusst deaktiviert (plain-ring Familie ohne Buchstabe).
 Runde 1: elementweise Validierung gestartet
 circle: Fehler=125.017
@@ -15,7 +15,7 @@ circle: Mittelpunkt-Bracketing cx 32.500->29.500, cy 12.500->12.500 (best_err=64
 circle: Radius-Bracketing r 10.667->11.000 (best_err=39.877, full_err=8.617); Kandidaten=9.600->118.662, 10.500->64.924, 11.000->39.877, 12.000->67.408
 arm: Fehler=58.499
 arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
-arm: Längen-Bracketing keine relevante Änderung (arm_len: 18.000); Kandidaten=18.000->58.499, 25.000->58.499, 31.500->58.499, 38.500->58.499, 45.000->58.499
+arm: Längen-Bracketing keine relevante Änderung (arm_len: 18.000); Kandidaten=16.000->60.463, 18.000->58.499, 23.000->58.499, 30.500->58.499, 38.000->58.499, 45.000->58.499
 Runde 1: Gesamtfehler=8.617
 Runde 2: elementweise Validierung gestartet
 circle: Fehler=39.877
@@ -24,7 +24,7 @@ circle: Mittelpunkt-Bracketing cx 29.500->29.000, cy 12.500->12.500 (best_err=26
 circle: Radius-Bracketing keine relevante Änderung (r: 11.000, best_err=26.604, full_err=6.350); Kandidaten=9.900->100.801, 11.000->26.604, 11.500->64.903, 12.000->64.903
 arm: Fehler=57.829
 arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
-arm: Längen-Bracketing arm_len 17.500->18.000; Kandidaten=18.000->57.829, 25.000->57.829, 31.500->57.829, 38.500->57.829, 45.000->57.829
+arm: Längen-Bracketing keine relevante Änderung (arm_len: 17.500); Kandidaten=16.000->59.189, 17.500->57.829, 23.000->57.829, 30.500->57.829, 38.000->57.829, 45.000->57.829
 Runde 2: Gesamtfehler=6.350
 Gesamtfehler unter Schwellwert, Suche nach besserem Optimum wird fortgesetzt
 Runde 3: elementweise Validierung gestartet
@@ -34,7 +34,7 @@ circle: Mittelpunkt-Bracketing keine relevante Änderung (cx=29.000, cy=12.500, 
 circle: Radius-Bracketing keine relevante Änderung (r: 11.000, best_err=26.604, full_err=6.350); Kandidaten=9.900->100.801, 11.000->26.604, 11.500->64.903, 12.000->64.903
 arm: Fehler=57.829
 arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
-arm: Längen-Bracketing arm_len 17.500->18.000; Kandidaten=18.000->57.829, 25.000->57.829, 31.500->57.829, 38.500->57.829, 45.000->57.829
+arm: Längen-Bracketing keine relevante Änderung (arm_len: 17.500); Kandidaten=16.000->59.189, 17.500->57.829, 23.000->57.829, 30.500->57.829, 38.000->57.829, 45.000->57.829
 Runde 3: Gesamtfehler=6.350
 stagnation_detected: identischer Parameter-Fingerprint und praktisch unveränderter Gesamtfehler
 switch_to_fallback_search: deaktiviere Circle-Geometry-Penalty für eine letzte Ausweichrunde
@@ -43,7 +43,7 @@ circle: Fehler=26.604
 circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
 arm: Fehler=57.829
 arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
-arm: Längen-Bracketing arm_len 17.500->18.000; Kandidaten=18.000->57.829, 25.000->57.829, 31.500->57.829, 38.500->57.829, 45.000->57.829
+arm: Längen-Bracketing keine relevante Änderung (arm_len: 17.500); Kandidaten=16.000->59.189, 17.500->57.829, 23.000->57.829, 30.500->57.829, 38.000->57.829, 45.000->57.829
 Runde 4: Gesamtfehler=6.350
 stagnation_detected: identischer Parameter-Fingerprint und praktisch unveränderter Gesamtfehler
 stopped_due_to_stagnation: Validierung vorzeitig beendet
