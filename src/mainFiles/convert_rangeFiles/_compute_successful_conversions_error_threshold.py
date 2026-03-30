@@ -1,3 +1,7 @@
+from src import image_composite_converter as _icc
+
+globals().update(vars(_icc))
+
 def _compute_successful_conversions_error_threshold(
     rows: list[dict[str, object]],
     successful_variants: list[str] | tuple[str, ...] | None = None,

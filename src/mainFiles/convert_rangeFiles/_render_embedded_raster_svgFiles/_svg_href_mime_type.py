@@ -1,3 +1,7 @@
+from src import image_composite_converter as _icc
+
+globals().update(vars(_icc))
+
 def _svg_href_mime_type(path: str | Path) -> str:
     ext = Path(path).suffix.lower()
     return {

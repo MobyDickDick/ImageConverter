@@ -1,3 +1,7 @@
+from src import image_composite_converter as _icc
+
+globals().update(vars(_icc))
+
 def _merge_successful_conversion_metrics(
     baseline: dict[str, object],
     override: dict[str, object],

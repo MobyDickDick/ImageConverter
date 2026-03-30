@@ -1,3 +1,7 @@
+from src import image_composite_converter as _icc
+
+globals().update(vars(_icc))
+
 def _write_semantic_audit_report(reports_out_dir: str, audit_rows: list[dict[str, object]]) -> None:
     """Persist semantic audit rows as CSV/JSON for targeted AC0811..AC0814 review."""
     if not audit_rows:

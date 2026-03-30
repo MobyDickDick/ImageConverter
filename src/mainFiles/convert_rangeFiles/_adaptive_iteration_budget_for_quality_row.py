@@ -1,3 +1,7 @@
+from src import image_composite_converter as _icc
+
+globals().update(vars(_icc))
+
 def _adaptive_iteration_budget_for_quality_row(row: dict[str, object], planned_budget: int) -> int:
     """Tune per-row iteration budget using convergence/plateau quality signals.
 

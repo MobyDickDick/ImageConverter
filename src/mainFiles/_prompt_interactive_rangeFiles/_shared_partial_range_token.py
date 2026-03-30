@@ -1,3 +1,7 @@
+from src import image_composite_converter as _icc
+
+globals().update(vars(_icc))
+
 def _shared_partial_range_token(start_ref: str, end_ref: str) -> str:
     start_token = _normalize_range_token(start_ref)
     end_token = _normalize_range_token(end_ref)

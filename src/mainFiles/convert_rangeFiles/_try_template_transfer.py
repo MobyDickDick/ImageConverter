@@ -1,3 +1,7 @@
+from src import image_composite_converter as _icc
+
+globals().update(vars(_icc))
+
 def _try_template_transfer(
     *,
     target_row: dict[str, object],

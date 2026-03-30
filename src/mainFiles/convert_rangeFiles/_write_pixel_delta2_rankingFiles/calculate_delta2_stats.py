@@ -1,2 +1,6 @@
+from src import image_composite_converter as _icc
+
+globals().update(vars(_icc))
+
 # Function body for 'calculate_delta2_stats' could not be extracted from the source module.
 # This placeholder is still created to keep the call-tree structure complete.

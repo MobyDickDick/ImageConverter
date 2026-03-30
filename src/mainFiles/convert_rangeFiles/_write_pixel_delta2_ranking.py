@@ -1,3 +1,7 @@
+from src import image_composite_converter as _icc
+
+globals().update(vars(_icc))
+
 def _write_pixel_delta2_ranking(folder_path: str, svg_out_dir: str, reports_out_dir: str, threshold: float = 18.0) -> None:
     ranking: list[dict[str, float | str]] = []
     for svg_name in sorted(f for f in os.listdir(svg_out_dir) if f.lower().endswith(".svg")):

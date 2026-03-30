@@ -1,3 +1,7 @@
+from src import image_composite_converter as _icc
+
+globals().update(vars(_icc))
+
 def _create_diff_image_without_cv2(input_path: str | Path, svg_content: str):
     """Create a normalized signed red/cyan diff image when numpy/opencv are unavailable."""
     if fitz is None:

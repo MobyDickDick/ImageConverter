@@ -1,3 +1,7 @@
+from src import image_composite_converter as _icc
+
+globals().update(vars(_icc))
+
 def _build_transformed_svg_from_template(
     template_svg_text: str,
     target_w: int,
