@@ -149,6 +149,9 @@ def annotate_image_regions(img, regions: list[dict[str, object]], *, runtime_mod
     return annotate_image_regions_impl(img, regions, cv2_module=runtime_modules.cv2_module)
 
 
+""" Start move to File mainFiles/analyze_range.py
+import src
+"""
 def analyze_range(
     folder_path: str,
     output_root: str | None = None,
@@ -177,6 +180,7 @@ def analyze_range(
         cv2_module=modules.cv2_module,
         np_module=modules.np_module,
     )
+""" End move to File mainFiles/analyze_range.py """
 
 
 # Load numpy before cv2: OpenCV's Python bindings import numpy at module-import
@@ -420,6 +424,9 @@ def load_grayscale_image(path: Path) -> list[list[int]]:
     return [[int(px[x, y]) for x in range(w)] for y in range(h)]
 
 
+""" Start move to File mainFiles/convert_rangeFiles/_create_diff_image_without_cv2.py
+import src
+"""
 def _create_diff_image_without_cv2(input_path: str | Path, svg_content: str):
     """Create a normalized signed red/cyan diff image when numpy/opencv are unavailable."""
     if fitz is None:
@@ -471,6 +478,7 @@ def _create_diff_image_without_cv2(input_path: str | Path, svg_content: str):
         del svg_pix
         del original_pix
         return diff_pix
+""" End move to File mainFiles/convert_rangeFiles/_create_diff_image_without_cv2.py """
 
 
 def _compute_otsu_threshold(grayscale: list[list[int]]) -> int:
@@ -742,10 +750,14 @@ def _missing_required_image_dependencies() -> list[str]:
     return missing_required_image_dependencies(cv2_module=cv2, np_module=np)
 
 
+""" Start move to File mainFiles/_bootstrap_required_image_dependencies.py
+import src
+"""
 def _bootstrap_required_image_dependencies() -> list[str]:
     global cv2, np
     missing, cv2, np = bootstrap_required_image_dependencies(cv2_module=cv2, np_module=np)
     return missing
+""" End move to File mainFiles/_bootstrap_required_image_dependencies.py """
 
 
 def rgb_to_hex(rgb: np.ndarray) -> str:
@@ -762,6 +774,9 @@ def _dotted_attr_name(node: ast.AST) -> str:
     return ""
 
 
+""" Start move to File mainFiles/export_module_call_tree_csvFiles/_module_call_edges_for_path.py
+import src
+"""
 def _module_call_edges_for_path(module_path: str | os.PathLike[str]) -> tuple[dict[str, int], list[dict[str, object]]]:
     source_path = Path(module_path)
     source = source_path.read_text(encoding="utf-8")
@@ -851,8 +866,12 @@ def _module_call_edges_for_path(module_path: str | os.PathLike[str]) -> tuple[di
 
     CallEdgeCollector().visit(tree)
     return callable_lines, edges
+""" End move to File mainFiles/export_module_call_tree_csvFiles/_module_call_edges_for_path.py """
 
 
+""" Start move to File mainFiles/export_module_call_tree_csv.py
+import src
+"""
 def export_module_call_tree_csv(
     output_csv_path: str | os.PathLike[str] = DEFAULT_CALL_TREE_CSV_PATH,
     module_path: str | os.PathLike[str] = __file__,
@@ -905,7 +924,11 @@ def export_module_call_tree_csv(
                 str(edge["raw_callee"]) if edge else "",
             ])
     return output_path
+""" End move to File mainFiles/export_module_call_tree_csv.py """
 
+""" Start move to File mainFiles/convert_rangeFiles/_in_requested_rangeFiles/get_base_name_from_file.py
+import src
+"""
 def get_base_name_from_file(filename: str) -> str:
     name = os.path.splitext(filename)[0]
     name = re.sub(r"(-\d+)$", "", name)
@@ -915,6 +938,7 @@ def get_base_name_from_file(filename: str) -> str:
         if name == prev:
             break
     return name
+""" End move to File mainFiles/convert_rangeFiles/_in_requested_rangeFiles/get_base_name_from_file.py """
 
 
 @dataclass
@@ -962,6 +986,9 @@ class DescriptionMappingError(ValueError):
         return f"{self.message} ({self.span.format()})"
 
 
+""" Start move to File mainFiles/_load_description_mapping.py
+import src
+"""
 def _load_description_mapping(path: str) -> dict[str, str]:
     return load_description_mapping(
         path,
@@ -969,16 +996,24 @@ def _load_description_mapping(path: str) -> dict[str, str]:
         source_span_cls=SourceSpan,
         get_base_name_from_file=get_base_name_from_file,
     )
+""" End move to File mainFiles/_load_description_mapping.py """
 
 
+""" Start move to File mainFiles/_load_description_mappingFiles/_load_description_mapping_from_csv.py
+import src
+"""
 def _load_description_mapping_from_csv(path: str) -> dict[str, str]:
     return load_description_mapping_from_csv(
         path,
         description_mapping_error_cls=DescriptionMappingError,
         source_span_cls=SourceSpan,
     )
+""" End move to File mainFiles/_load_description_mappingFiles/_load_description_mapping_from_csv.py """
 
 
+""" Start move to File mainFiles/_load_description_mappingFiles/_load_description_mapping_from_xml.py
+import src
+"""
 def _load_description_mapping_from_xml(path: str) -> dict[str, str]:
     return load_description_mapping_from_xml(
         path,
@@ -986,12 +1021,20 @@ def _load_description_mapping_from_xml(path: str) -> dict[str, str]:
         source_span_cls=SourceSpan,
         get_base_name_from_file=get_base_name_from_file,
     )
+""" End move to File mainFiles/_load_description_mappingFiles/_load_description_mapping_from_xml.py """
 
 
+""" Start move to File mainFiles/_resolve_cli_csv_and_outputFiles/_resolve_description_xml_path.py
+import src
+"""
 def _resolve_description_xml_path(path: str) -> str | None:
     return resolve_description_xml_path(path)
+""" End move to File mainFiles/_resolve_cli_csv_and_outputFiles/_resolve_description_xml_path.py """
 
 
+""" Start move to File mainFiles/build_linux_vendor_install_commandFiles/_required_vendor_packages.py
+import src
+"""
 def _required_vendor_packages() -> list[str]:
     return [
         "numpy",
@@ -999,8 +1042,12 @@ def _required_vendor_packages() -> list[str]:
         "Pillow",
         "PyMuPDF",
     ]
+""" End move to File mainFiles/build_linux_vendor_install_commandFiles/_required_vendor_packages.py """
 
 
+""" Start move to File mainFiles/build_linux_vendor_install_command.py
+import src
+"""
 def build_linux_vendor_install_command(
     vendor_dir: str = "vendor",
     platform_tag: str = "manylinux2014_x86_64",
@@ -1028,6 +1075,7 @@ def build_linux_vendor_install_command(
         "eager",
         *_required_vendor_packages(),
     ]
+""" End move to File mainFiles/build_linux_vendor_install_command.py """
 
 
 class Reflection:
@@ -1195,6 +1243,9 @@ class Reflection:
             overrides["co2_dx"] = 0.0
 
         return overrides
+""" Start move to File mainFiles/_run_svg_render_subprocess_entrypointFiles/_render_svg_to_numpy_inprocess.py
+import src
+"""
 def _render_svg_to_numpy_inprocess(svg_string: str, size_w: int, size_h: int):
     if fitz is None or np is None or cv2 is None:
         return None
@@ -1238,6 +1289,7 @@ def _render_svg_to_numpy_inprocess(svg_string: str, size_w: int, size_h: int):
                 del page
             gc.collect()
     return None
+""" End move to File mainFiles/_run_svg_render_subprocess_entrypointFiles/_render_svg_to_numpy_inprocess.py """
 
 
 def _render_svg_to_numpy_via_subprocess(svg_string: str, size_w: int, size_h: int):
@@ -1276,6 +1328,9 @@ def _render_svg_to_numpy_via_subprocess(svg_string: str, size_w: int, size_h: in
         return None
 
 
+""" Start move to File mainFiles/_run_svg_render_subprocess_entrypoint.py
+import src
+"""
 def _run_svg_render_subprocess_entrypoint() -> int:
     try:
         payload = json.loads(sys.stdin.buffer.read().decode("utf-8"))
@@ -1298,6 +1353,7 @@ def _run_svg_render_subprocess_entrypoint() -> int:
     }
     sys.stdout.write(json.dumps(response, separators=(",", ":")))
     return 0
+""" End move to File mainFiles/_run_svg_render_subprocess_entrypoint.py """
 
 
 class Action:
@@ -8409,18 +8465,29 @@ def run_iteration_pipeline(
     return base, desc, params, best_iter, best_error
 
 
+""" Start move to File mainFiles/_prompt_interactive_rangeFiles/_extract_ref_parts.py
+import src
+"""
 def _extract_ref_parts(name: str) -> tuple[str, int] | None:
     match = re.match(r"^([A-Z]{2,3})(\d{3,4})$", name.upper())
     if not match:
         return None
     return match.group(1), int(match.group(2))
+""" End move to File mainFiles/_prompt_interactive_rangeFiles/_extract_ref_parts.py """
 
 
+""" Start move to File mainFiles/_prompt_interactive_rangeFiles/_shared_partial_range_tokenFiles/_normalize_range_token.py
+import src
+"""
 def _normalize_range_token(value: str) -> str:
     base = get_base_name_from_file(str(value or "").upper())
     return re.sub(r"[^A-Z0-9]", "", base)
+""" End move to File mainFiles/_prompt_interactive_rangeFiles/_shared_partial_range_tokenFiles/_normalize_range_token.py """
 
 
+""" Start move to File mainFiles/_prompt_interactive_rangeFiles/_shared_partial_range_tokenFiles/_compact_range_token.py
+import src
+"""
 def _compact_range_token(value: str) -> str:
     token = _normalize_range_token(value)
     match = re.match(r"^([A-Z]+)(\d+)$", token)
@@ -8428,8 +8495,12 @@ def _compact_range_token(value: str) -> str:
         return token
     letters, digits = match.groups()
     return f"{letters[0]}{digits}"
+""" End move to File mainFiles/_prompt_interactive_rangeFiles/_shared_partial_range_tokenFiles/_compact_range_token.py """
 
 
+""" Start move to File mainFiles/_prompt_interactive_rangeFiles/_shared_partial_range_token.py
+import src
+"""
 def _shared_partial_range_token(start_ref: str, end_ref: str) -> str:
     start_token = _normalize_range_token(start_ref)
     end_token = _normalize_range_token(end_ref)
@@ -8452,8 +8523,12 @@ def _shared_partial_range_token(start_ref: str, end_ref: str) -> str:
                 if candidate in right:
                     return candidate
     return ""
+""" End move to File mainFiles/_prompt_interactive_rangeFiles/_shared_partial_range_token.py """
 
 
+""" Start move to File mainFiles/convert_rangeFiles/_in_requested_rangeFiles/_matches_partial_range_token.py
+import src
+"""
 def _matches_partial_range_token(filename: str, start_ref: str, end_ref: str) -> bool:
     token = _shared_partial_range_token(start_ref, end_ref)
     if not token:
@@ -8469,16 +8544,24 @@ def _matches_partial_range_token(filename: str, start_ref: str, end_ref: str) ->
         if pos < len(token) and char == token[pos]:
             pos += 1
     return pos == len(token)
+""" End move to File mainFiles/convert_rangeFiles/_in_requested_rangeFiles/_matches_partial_range_token.py """
 
 
+""" Start move to File mainFiles/convert_rangeFiles/_try_template_transferFiles/_template_transfer_donor_family_compatibleFiles/_extract_symbol_family.py
+import src
+"""
 def _extract_symbol_family(name: str) -> str | None:
     """Extract 2-3 letter corpus family prefixes such as AC, GE, DLG, or NAV."""
     match = re.match(r"^([A-Z]{2,3})\d{3,4}$", str(name).upper())
     if not match:
         return None
     return match.group(1)
+""" End move to File mainFiles/convert_rangeFiles/_try_template_transferFiles/_template_transfer_donor_family_compatibleFiles/_extract_symbol_family.py """
 
 
+""" Start move to File mainFiles/convert_rangeFiles/_in_requested_rangeFiles/_matches_exact_prefix_filter.py
+import src
+"""
 def _matches_exact_prefix_filter(filename: str, start_ref: str, end_ref: str) -> bool:
     start_token = _normalize_range_token(start_ref)
     end_token = _normalize_range_token(end_ref)
@@ -8491,8 +8574,12 @@ def _matches_exact_prefix_filter(filename: str, start_ref: str, end_ref: str) ->
     if match and match.group(2).endswith("0"):
         return stem == f"{match.group(1)}{match.group(2)}0"
     return stem.startswith(start_token)
+""" End move to File mainFiles/convert_rangeFiles/_in_requested_rangeFiles/_matches_exact_prefix_filter.py """
 
 
+""" Start move to File mainFiles/convert_rangeFiles/_in_requested_range.py
+import src
+"""
 def _in_requested_range(filename: str, start_ref: str, end_ref: str) -> bool:
     start_ref = re.sub(r"^\s*[-–—]+\s*", "", str(start_ref or "")).strip()
     end_ref = re.sub(r"^\s*[-–—]+\s*", "", str(end_ref or "")).strip()
@@ -8540,10 +8627,14 @@ def _in_requested_range(filename: str, start_ref: str, end_ref: str) -> bool:
         start_key, end_key = end_key, start_key
 
     return start_key <= stem_parts <= end_key
+""" End move to File mainFiles/convert_rangeFiles/_in_requested_range.py """
 
 
 
 
+""" Start move to File mainFiles/convert_rangeFiles/_conversion_random.py
+import src
+"""
 def _conversion_random() -> random.Random:
     """Return run-local RNG (seedable via env) for non-deterministic search order."""
     seed_raw = os.environ.get("TINY_ICC_RANDOM_SEED")
@@ -8553,16 +8644,28 @@ def _conversion_random() -> random.Random:
         except ValueError:
             pass
     return random.Random(time.time_ns())
+""" End move to File mainFiles/convert_rangeFiles/_conversion_random.py """
 
+""" Start move to File mainFiles/convert_rangeFiles/_default_converted_symbols_root.py
+import src
+"""
 def _default_converted_symbols_root() -> str:
     repo_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     return os.path.join(repo_root, "artifacts", "converted_images")
+""" End move to File mainFiles/convert_rangeFiles/_default_converted_symbols_root.py """
 
 
+""" Start move to File mainFiles/convert_rangeFiles/_converted_svg_output_dir.py
+import src
+"""
 def _converted_svg_output_dir(output_root: str) -> str:
     return os.path.join(output_root, "converted_svgs")
+""" End move to File mainFiles/convert_rangeFiles/_converted_svg_output_dir.py """
 
 
+""" Start move to File mainFiles/convert_rangeFiles/update_successful_conversions_manifest_with_metricsFiles/collect_successful_conversion_quality_metricsFiles/_read_validation_log_details.py
+import src
+"""
 def _read_validation_log_details(log_path: str) -> dict[str, str]:
     if not os.path.exists(log_path):
         return {}
@@ -8580,8 +8683,12 @@ def _read_validation_log_details(log_path: str) -> dict[str, str]:
     except OSError:
         return {}
     return details
+""" End move to File mainFiles/convert_rangeFiles/update_successful_conversions_manifest_with_metricsFiles/collect_successful_conversion_quality_metricsFiles/_read_validation_log_details.py """
 
 
+""" Start move to File mainFiles/convert_rangeFiles/_write_batch_failure_summary.py
+import src
+"""
 def _write_batch_failure_summary(reports_out_dir: str, failures: list[dict[str, str]]) -> None:
     summary_path = os.path.join(reports_out_dir, "batch_failure_summary.csv")
     with open(summary_path, "w", encoding="utf-8", newline="") as f:
@@ -8595,6 +8702,7 @@ def _write_batch_failure_summary(reports_out_dir: str, failures: list[dict[str, 
                 failure.get("details", ""),
                 failure.get("log_file", ""),
             ])
+""" End move to File mainFiles/convert_rangeFiles/_write_batch_failure_summary.py """
 
 
 
@@ -8659,6 +8767,9 @@ def _semantic_audit_record(
     }
 
 
+""" Start move to File mainFiles/convert_rangeFiles/_write_semantic_audit_report.py
+import src
+"""
 def _write_semantic_audit_report(reports_out_dir: str, audit_rows: list[dict[str, object]]) -> None:
     """Persist semantic audit rows as CSV/JSON for targeted AC0811..AC0814 review."""
     if not audit_rows:
@@ -8700,16 +8811,28 @@ def _write_semantic_audit_report(reports_out_dir: str, audit_rows: list[dict[str
     json_path = os.path.join(reports_out_dir, "semantic_audit_ac0811_ac0814.json")
     with open(json_path, "w", encoding="utf-8") as f:
         json.dump(audit_rows, f, ensure_ascii=False, indent=2)
+""" End move to File mainFiles/convert_rangeFiles/_write_semantic_audit_report.py """
 
 
+""" Start move to File mainFiles/convert_rangeFiles/_diff_output_dir.py
+import src
+"""
 def _diff_output_dir(output_root: str) -> str:
     return os.path.join(output_root, "diff_pngs")
+""" End move to File mainFiles/convert_rangeFiles/_diff_output_dir.py """
 
 
+""" Start move to File mainFiles/convert_rangeFiles/_reports_output_dir.py
+import src
+"""
 def _reports_output_dir(output_root: str) -> str:
     return os.path.join(output_root, "reports")
+""" End move to File mainFiles/convert_rangeFiles/_reports_output_dir.py """
 
 
+""" Start move to File mainFiles/convert_rangeFiles/_load_existing_conversion_rowsFiles/_is_semantic_template_variant.py
+import src
+"""
 def _is_semantic_template_variant(base_name: str, params: dict[str, object] | None = None) -> bool:
     """Return whether an existing converted SVG should participate as semantic donor."""
     normalized = str(get_base_name_from_file(base_name or "")).upper()
@@ -8720,8 +8843,12 @@ def _is_semantic_template_variant(base_name: str, params: dict[str, object] | No
     if isinstance(params, dict) and str(params.get("mode", "")).lower() == "semantic_badge":
         return True
     return False
+""" End move to File mainFiles/convert_rangeFiles/_load_existing_conversion_rowsFiles/_is_semantic_template_variant.py """
 
 
+""" Start move to File mainFiles/convert_rangeFiles/_load_existing_conversion_rows.py
+import src
+"""
 def _load_existing_conversion_rows(output_root: str, folder_path: str) -> list[dict[str, object]]:
     """Load previously converted variants so they can act as donor templates.
 
@@ -8801,8 +8928,12 @@ def _load_existing_conversion_rows(output_root: str, folder_path: str) -> list[d
         for row in rows
         if math.isfinite(float(row.get("error_per_pixel", float("inf"))))
     ]
+""" End move to File mainFiles/convert_rangeFiles/_load_existing_conversion_rows.py """
 
 
+""" Start move to File mainFiles/convert_rangeFiles/_load_existing_conversion_rowsFiles/_sniff_raster_size.py
+import src
+"""
 def _sniff_raster_size(path: str | Path) -> tuple[int, int]:
     file_path = Path(path)
     with file_path.open("rb") as fh:
@@ -8854,8 +8985,12 @@ def _sniff_raster_size(path: str | Path) -> tuple[int, int]:
                 fh.seek(max(0, segment_size - 2), os.SEEK_CUR)
 
     raise ValueError(f"Unsupported or unreadable raster image: {file_path}")
+""" End move to File mainFiles/convert_rangeFiles/_load_existing_conversion_rowsFiles/_sniff_raster_size.py """
 
 
+""" Start move to File mainFiles/convert_rangeFiles/_render_embedded_raster_svgFiles/_svg_href_mime_type.py
+import src
+"""
 def _svg_href_mime_type(path: str | Path) -> str:
     ext = Path(path).suffix.lower()
     return {
@@ -8865,8 +9000,12 @@ def _svg_href_mime_type(path: str | Path) -> str:
         ".gif": "image/gif",
         ".bmp": "image/bmp",
     }.get(ext, "application/octet-stream")
+""" End move to File mainFiles/convert_rangeFiles/_render_embedded_raster_svgFiles/_svg_href_mime_type.py """
 
 
+""" Start move to File mainFiles/convert_rangeFiles/_render_embedded_raster_svg.py
+import src
+"""
 def _render_embedded_raster_svg(input_path: str | Path) -> str:
     width, height = _sniff_raster_size(input_path)
     raw = Path(input_path).read_bytes()
@@ -8878,12 +9017,20 @@ def _render_embedded_raster_svg(input_path: str | Path) -> str:
         f'  <image width="{width}" height="{height}" href="data:{mime};base64,{encoded}"/>\n'
         "</svg>\n"
     )
+""" End move to File mainFiles/convert_rangeFiles/_render_embedded_raster_svg.py """
 
 
+""" Start move to File mainFiles/convert_rangeFiles/_load_quality_configFiles/_quality_config_path.py
+import src
+"""
 def _quality_config_path(reports_out_dir: str) -> str:
     return os.path.join(reports_out_dir, "quality_tercile_config.json")
+""" End move to File mainFiles/convert_rangeFiles/_load_quality_configFiles/_quality_config_path.py """
 
 
+""" Start move to File mainFiles/convert_rangeFiles/_load_quality_config.py
+import src
+"""
 def _load_quality_config(reports_out_dir: str) -> dict[str, object]:
     path = _quality_config_path(reports_out_dir)
     if not os.path.exists(path):
@@ -8894,8 +9041,12 @@ def _load_quality_config(reports_out_dir: str) -> dict[str, object]:
     except (json.JSONDecodeError, OSError):
         return {}
     return payload if isinstance(payload, dict) else {}
+""" End move to File mainFiles/convert_rangeFiles/_load_quality_config.py """
 
 
+""" Start move to File mainFiles/convert_rangeFiles/_write_quality_config.py
+import src
+"""
 def _write_quality_config(
     reports_out_dir: str,
     *,
@@ -8917,6 +9068,7 @@ def _write_quality_config(
     with open(path, "w", encoding="utf-8") as f:
         json.dump(payload, f, ensure_ascii=False, indent=2)
         f.write("\n")
+""" End move to File mainFiles/convert_rangeFiles/_write_quality_config.py """
 
 
 def _quality_sort_key(row: dict[str, object]) -> float:
@@ -8928,6 +9080,9 @@ def _quality_sort_key(row: dict[str, object]) -> float:
 
 
 
+""" Start move to File mainFiles/convert_rangeFiles/_compute_successful_conversions_error_threshold.py
+import src
+"""
 def _compute_successful_conversions_error_threshold(
     rows: list[dict[str, object]],
     successful_variants: list[str] | tuple[str, ...] | None = None,
@@ -8957,8 +9112,12 @@ def _compute_successful_conversions_error_threshold(
     mean_val = float(statistics.fmean(values))
     std_val = float(statistics.pstdev(values)) if len(values) > 1 else 0.0
     return float(mean_val + 2.0 * std_val)
+""" End move to File mainFiles/convert_rangeFiles/_compute_successful_conversions_error_threshold.py """
 
 
+""" Start move to File mainFiles/convert_rangeFiles/_select_middle_lower_tercile.py
+import src
+"""
 def _select_middle_lower_tercile(rows: list[dict[str, object]]) -> list[dict[str, object]]:
     if len(rows) < 3:
         return []
@@ -8966,8 +9125,12 @@ def _select_middle_lower_tercile(rows: list[dict[str, object]]) -> list[dict[str
     ranked = sorted(rows, key=_quality_sort_key)
     first_cut = max(1, len(ranked) // 3)
     return ranked[first_cut:]
+""" End move to File mainFiles/convert_rangeFiles/_select_middle_lower_tercile.py """
 
 
+""" Start move to File mainFiles/convert_rangeFiles/_select_open_quality_cases.py
+import src
+"""
 def _select_open_quality_cases(
     rows: list[dict[str, object]],
     *,
@@ -8993,8 +9156,12 @@ def _select_open_quality_cases(
         open_rows.append(row)
 
     return sorted(open_rows, key=_quality_sort_key, reverse=True)
+""" End move to File mainFiles/convert_rangeFiles/_select_open_quality_cases.py """
 
 
+""" Start move to File mainFiles/convert_rangeFiles/_iteration_strategy_for_pass.py
+import src
+"""
 def _iteration_strategy_for_pass(pass_idx: int, base_iterations: int) -> tuple[int, int]:
     """Adaptive per-pass search budget for unresolved quality cases."""
     p = max(1, int(pass_idx))
@@ -9006,8 +9173,12 @@ def _iteration_strategy_for_pass(pass_idx: int, base_iterations: int) -> tuple[i
     if phase == 1:
         return base + 24 + (p * 2), 7 + p
     return base + 48 + (p * 3), 8 + p
+""" End move to File mainFiles/convert_rangeFiles/_iteration_strategy_for_pass.py """
 
 
+""" Start move to File mainFiles/convert_rangeFiles/_adaptive_iteration_budget_for_quality_row.py
+import src
+"""
 def _adaptive_iteration_budget_for_quality_row(row: dict[str, object], planned_budget: int) -> int:
     """Tune per-row iteration budget using convergence/plateau quality signals.
 
@@ -9037,8 +9208,12 @@ def _adaptive_iteration_budget_for_quality_row(row: dict[str, object], planned_b
     if usage_ratio >= 0.80:
         return max(1, int(round(budget * 1.15)))
     return budget
+""" End move to File mainFiles/convert_rangeFiles/_adaptive_iteration_budget_for_quality_row.py """
 
 
+""" Start move to File mainFiles/convert_rangeFiles/_write_quality_pass_report.py
+import src
+"""
 def _write_quality_pass_report(
     reports_out_dir: str,
     pass_rows: list[dict[str, object]],
@@ -9074,8 +9249,12 @@ def _write_quality_pass_report(
                 row["iteration_budget"],
                 row["badge_validation_rounds"],
             ])
+""" End move to File mainFiles/convert_rangeFiles/_write_quality_pass_report.py """
 
 
+""" Start move to File mainFiles/convert_rangeFiles/_evaluate_quality_pass_candidate.py
+import src
+"""
 def _evaluate_quality_pass_candidate(
     old_row: dict[str, object],
     new_row: dict[str, object],
@@ -9098,15 +9277,23 @@ def _evaluate_quality_pass_candidate(
     improved = error_improved or delta2_improved
     decision = "accepted_improvement" if improved else "rejected_regression"
     return improved, decision, prev_error_pp, new_error_pp, prev_mean_delta2, new_mean_delta2
+""" End move to File mainFiles/convert_rangeFiles/_evaluate_quality_pass_candidate.py """
 
 
+""" Start move to File mainFiles/convert_rangeFiles/_try_template_transferFiles/_build_transformed_svg_from_templateFiles/_extract_svg_inner.py
+import src
+"""
 def _extract_svg_inner(svg_text: str) -> str:
     match = re.search(r"<svg[^>]*>(.*)</svg>", svg_text, flags=re.DOTALL | re.IGNORECASE)
     if match:
         return match.group(1).strip()
     return svg_text
+""" End move to File mainFiles/convert_rangeFiles/_try_template_transferFiles/_build_transformed_svg_from_templateFiles/_extract_svg_inner.py """
 
 
+""" Start move to File mainFiles/convert_rangeFiles/_try_template_transferFiles/_build_transformed_svg_from_template.py
+import src
+"""
 def _build_transformed_svg_from_template(
     template_svg_text: str,
     target_w: int,
@@ -9140,8 +9327,12 @@ def _build_transformed_svg_from_template(
         "  </g>\n"
         "</svg>"
     )
+""" End move to File mainFiles/convert_rangeFiles/_try_template_transferFiles/_build_transformed_svg_from_template.py """
 
 
+""" Start move to File mainFiles/convert_rangeFiles/_try_template_transferFiles/_semantic_transfer_scale_candidatesFiles/_template_transfer_scale_candidates.py
+import src
+"""
 def _template_transfer_scale_candidates(base_scale: float) -> list[float]:
     """Build a compact scale ladder around an estimated best scale."""
     if not math.isfinite(base_scale) or base_scale <= 0.0:
@@ -9164,8 +9355,12 @@ def _template_transfer_scale_candidates(base_scale: float) -> list[float]:
             seen.add(key)
             scales.append(key)
     return scales
+""" End move to File mainFiles/convert_rangeFiles/_try_template_transferFiles/_semantic_transfer_scale_candidatesFiles/_template_transfer_scale_candidates.py """
 
 
+""" Start move to File mainFiles/convert_rangeFiles/_try_template_transferFiles/_estimate_template_transfer_scale.py
+import src
+"""
 def _estimate_template_transfer_scale(
     img_orig: np.ndarray,
     donor_svg_text: str,
@@ -9207,8 +9402,12 @@ def _estimate_template_transfer_scale(
     if not math.isfinite(scale):
         return None
     return float(min(1.90, max(0.65, scale)))
+""" End move to File mainFiles/convert_rangeFiles/_try_template_transferFiles/_estimate_template_transfer_scale.py """
 
 
+""" Start move to File mainFiles/convert_rangeFiles/_try_template_transferFiles/_template_transfer_transform_candidates.py
+import src
+"""
 def _template_transfer_transform_candidates(
     target_variant: str,
     donor_variant: str,
@@ -9232,8 +9431,12 @@ def _template_transfer_transform_candidates(
             seen.add(key)
             candidates.append(candidate)
     return candidates
+""" End move to File mainFiles/convert_rangeFiles/_try_template_transferFiles/_template_transfer_transform_candidates.py """
 
 
+""" Start move to File mainFiles/convert_rangeFiles/_try_template_transferFiles/_rank_template_transfer_donors.py
+import src
+"""
 def _rank_template_transfer_donors(
     target_row: dict[str, object],
     donor_rows: list[dict[str, object]],
@@ -9267,8 +9470,12 @@ def _rank_template_transfer_donors(
 
     ranked.sort(key=lambda item: item[0])
     return [donor for _, donor in ranked]
+""" End move to File mainFiles/convert_rangeFiles/_try_template_transferFiles/_rank_template_transfer_donors.py """
 
 
+""" Start move to File mainFiles/convert_rangeFiles/_try_template_transferFiles/_template_transfer_donor_family_compatible.py
+import src
+"""
 def _template_transfer_donor_family_compatible(
     target_base: str,
     donor_base: str,
@@ -9286,10 +9493,14 @@ def _template_transfer_donor_family_compatible(
         # Keep legacy behavior for non-standard names where family extraction fails.
         return True
     return target_family == donor_family
+""" End move to File mainFiles/convert_rangeFiles/_try_template_transferFiles/_template_transfer_donor_family_compatible.py """
 
 
 
 
+""" Start move to File mainFiles/convert_rangeFiles/_try_template_transferFiles/_semantic_transfer_rotations.py
+import src
+"""
 def _semantic_transfer_rotations(target_params: dict[str, object], donor_params: dict[str, object]) -> tuple[int, ...]:
     """Rotation candidates for semantic transfer while preserving symbol semantics."""
     has_text = bool(target_params.get("draw_text", False) or donor_params.get("draw_text", False))
@@ -9305,12 +9516,16 @@ def _semantic_transfer_rotations(target_params: dict[str, object], donor_params:
         # meaning of connector-side symbols. Keep transfer upright/unrotated.
         return (0,)
     return (0, 90, 180, 270)
+""" End move to File mainFiles/convert_rangeFiles/_try_template_transferFiles/_semantic_transfer_rotations.py """
 
 
 
 
 
 
+""" Start move to File mainFiles/convert_rangeFiles/_try_template_transferFiles/_semantic_transfer_is_compatible.py
+import src
+"""
 def _semantic_transfer_is_compatible(target_params: dict[str, object], donor_params: dict[str, object]) -> bool:
     """Return whether donor semantics can preserve target semantic geometry."""
     target_has_arm = bool(target_params.get("arm_enabled", False))
@@ -9351,8 +9566,12 @@ def _semantic_transfer_is_compatible(target_params: dict[str, object], donor_par
             return False
 
     return True
+""" End move to File mainFiles/convert_rangeFiles/_try_template_transferFiles/_semantic_transfer_is_compatible.py """
 
 
+""" Start move to File mainFiles/convert_rangeFiles/_try_template_transferFiles/_semantic_transfer_is_compatibleFiles/_connector_arm_direction.py
+import src
+"""
 def _connector_arm_direction(params: dict[str, object]) -> int | None:
     """Return horizontal arm side: -1 left of circle, +1 right, or None if unknown."""
     x1 = params.get("arm_x1")
@@ -9369,8 +9588,12 @@ def _connector_arm_direction(params: dict[str, object]) -> int | None:
         if abs(delta) > 1e-3:
             return -1 if delta < 0.0 else 1
     return None
+""" End move to File mainFiles/convert_rangeFiles/_try_template_transferFiles/_semantic_transfer_is_compatibleFiles/_connector_arm_direction.py """
 
 
+""" Start move to File mainFiles/convert_rangeFiles/_try_template_transferFiles/_semantic_transfer_is_compatibleFiles/_connector_stem_direction.py
+import src
+"""
 def _connector_stem_direction(params: dict[str, object]) -> int | None:
     """Return vertical stem direction: -1 up, +1 down, or None if unknown."""
     y1 = params.get("arm_y1")
@@ -9387,8 +9610,12 @@ def _connector_stem_direction(params: dict[str, object]) -> int | None:
         if abs(delta) > 1e-3:
             return -1 if delta < 0.0 else 1
     return None
+""" End move to File mainFiles/convert_rangeFiles/_try_template_transferFiles/_semantic_transfer_is_compatibleFiles/_connector_stem_direction.py """
 
 
+""" Start move to File mainFiles/convert_rangeFiles/_try_template_transferFiles/_semantic_transfer_scale_candidates.py
+import src
+"""
 def _semantic_transfer_scale_candidates(base_scale: float) -> list[float]:
     """Broader scale ladder for semantic badge transfer exploration."""
     core = _template_transfer_scale_candidates(base_scale)
@@ -9403,7 +9630,11 @@ def _semantic_transfer_scale_candidates(base_scale: float) -> list[float]:
         seen.add(key)
         values.append(key)
     return values
+""" End move to File mainFiles/convert_rangeFiles/_try_template_transferFiles/_semantic_transfer_scale_candidates.py """
 
+""" Start move to File mainFiles/convert_rangeFiles/_try_template_transferFiles/_semantic_transfer_badge_params.py
+import src
+"""
 def _semantic_transfer_badge_params(
     donor_params: dict[str, object],
     target_params: dict[str, object],
@@ -9483,7 +9714,11 @@ def _semantic_transfer_badge_params(
     if symbol_name:
         p = Action._finalize_ac08_style(symbol_name, p)
     return p
+""" End move to File mainFiles/convert_rangeFiles/_try_template_transferFiles/_semantic_transfer_badge_params.py """
 
+""" Start move to File mainFiles/convert_rangeFiles/_try_template_transfer.py
+import src
+"""
 def _try_template_transfer(
     *,
     target_row: dict[str, object],
@@ -9674,8 +9909,12 @@ def _try_template_transfer(
         "new_mean_delta2": float(mean_delta2),
     }
     return updated_row, detail
+""" End move to File mainFiles/convert_rangeFiles/_try_template_transfer.py """
 
 
+""" Start move to File mainFiles/convert_range.py
+import src
+"""
 def convert_range(
     folder_path: str,
     csv_path: str,
@@ -10090,8 +10329,12 @@ def convert_range(
     Action.STOCHASTIC_SEED_OFFSET = 0
     Action.STOCHASTIC_RUN_SEED = 0
     return out_root
+""" End move to File mainFiles/convert_range.py """
 
 
+""" Start move to File mainFiles/convert_rangeFiles/_harmonize_semantic_size_variantsFiles/_read_svg_geometry.py
+import src
+"""
 def _read_svg_geometry(svg_path: str) -> tuple[int, int, dict] | None:
     if not os.path.exists(svg_path):
         return None
@@ -10222,8 +10465,12 @@ def _read_svg_geometry(svg_path: str) -> tuple[int, int, dict] | None:
         params["draw_text"] = False
 
     return w, h, params
+""" End move to File mainFiles/convert_rangeFiles/_harmonize_semantic_size_variantsFiles/_read_svg_geometry.py """
 
 
+""" Start move to File mainFiles/convert_rangeFiles/_harmonize_semantic_size_variantsFiles/_normalized_geometry_signature.py
+import src
+"""
 def _normalized_geometry_signature(w: int, h: int, params: dict) -> dict[str, float]:
     sig: dict[str, float] = {}
     scale = max(1.0, float(min(w, h)))
@@ -10248,15 +10495,23 @@ def _normalized_geometry_signature(w: int, h: int, params: dict) -> dict[str, fl
         sig["arm_stroke"] = float(params["arm_stroke"]) / scale
 
     return sig
+""" End move to File mainFiles/convert_rangeFiles/_harmonize_semantic_size_variantsFiles/_normalized_geometry_signature.py """
 
 
+""" Start move to File mainFiles/convert_rangeFiles/_harmonize_semantic_size_variantsFiles/_max_signature_delta.py
+import src
+"""
 def _max_signature_delta(sig_a: dict[str, float], sig_b: dict[str, float]) -> float:
     keys = sorted(set(sig_a.keys()).intersection(sig_b.keys()))
     if not keys:
         return 1.0
     return max(abs(sig_a[k] - sig_b[k]) for k in keys)
+""" End move to File mainFiles/convert_rangeFiles/_harmonize_semantic_size_variantsFiles/_max_signature_delta.py """
 
 
+""" Start move to File mainFiles/convert_rangeFiles/_harmonize_semantic_size_variantsFiles/_scale_badge_paramsFiles/_needs_large_circle_overflow_guard.py
+import src
+"""
 def _needs_large_circle_overflow_guard(params: dict) -> bool:
     """Return whether circle placement may intentionally exceed canvas bounds.
 
@@ -10282,8 +10537,12 @@ def _needs_large_circle_overflow_guard(params: dict) -> bool:
     large_current = current_r >= 10.0
     wide_canvas = width >= 30.0
     return bool(large_template or large_current or wide_canvas)
+""" End move to File mainFiles/convert_rangeFiles/_harmonize_semantic_size_variantsFiles/_scale_badge_paramsFiles/_needs_large_circle_overflow_guard.py """
 
 
+""" Start move to File mainFiles/convert_rangeFiles/_harmonize_semantic_size_variantsFiles/_scale_badge_params.py
+import src
+"""
 def _scale_badge_params(
     anchor: dict,
     anchor_w: int,
@@ -10389,6 +10648,7 @@ def _scale_badge_params(
         scaled["r"] = r
 
     return scaled
+""" End move to File mainFiles/convert_rangeFiles/_harmonize_semantic_size_variantsFiles/_scale_badge_params.py """
 
 
 def _harmonization_anchor_priority(suffix: str, prefer_large: bool) -> int:
@@ -10401,10 +10661,17 @@ def _harmonization_anchor_priority(suffix: str, prefer_large: bool) -> int:
     return {"M": 0, "L": 1, "S": 2}.get(str(suffix), 3)
 
 
+""" Start move to File mainFiles/convert_rangeFiles/_harmonize_semantic_size_variantsFiles/_family_harmonized_badge_colorsFiles/_clip_gray.py
+import src
+"""
 def _clip_gray(value: float) -> int:
     return int(max(0, min(255, round(float(value)))))
+""" End move to File mainFiles/convert_rangeFiles/_harmonize_semantic_size_variantsFiles/_family_harmonized_badge_colorsFiles/_clip_gray.py """
 
 
+""" Start move to File mainFiles/convert_rangeFiles/_harmonize_semantic_size_variantsFiles/_family_harmonized_badge_colors.py
+import src
+"""
 def _family_harmonized_badge_colors(variant_rows: list[dict[str, object]]) -> dict[str, int]:
     """Derive a family palette from L/M/S variants and slightly boost contrast."""
     buckets: dict[str, list[float]] = {
@@ -10453,8 +10720,12 @@ def _family_harmonized_badge_colors(variant_rows: list[dict[str, object]]) -> di
         colors["stem_gray"] = _clip_gray(min(stem_avg, float(stroke_gray)))
 
     return colors
+""" End move to File mainFiles/convert_rangeFiles/_harmonize_semantic_size_variantsFiles/_family_harmonized_badge_colors.py """
 
 
+""" Start move to File mainFiles/convert_rangeFiles/_harmonize_semantic_size_variants.py
+import src
+"""
 def _harmonize_semantic_size_variants(
     results: list[dict[str, object]],
     folder_path: str,
@@ -10584,8 +10855,12 @@ def _harmonize_semantic_size_variants(
         with open(os.path.join(reports_out_dir, "shape_catalog.csv"), "w", encoding="utf-8") as f:
             f.write("base;category;variants\n")
             f.write("\n".join(category_logs).rstrip() + "\n")
+""" End move to File mainFiles/convert_rangeFiles/_harmonize_semantic_size_variants.py """
 
 
+""" Start move to File mainFiles/convert_rangeFiles/_write_ac08_regression_manifest.py
+import src
+"""
 def _write_ac08_regression_manifest(
     reports_out_dir: str,
     *,
@@ -10625,8 +10900,12 @@ def _write_ac08_regression_manifest(
     ]
     with open(os.path.join(reports_out_dir, "ac08_regression_summary.txt"), "w", encoding="utf-8") as f:
         f.write("\n".join(summary_lines) + "\n")
+""" End move to File mainFiles/convert_rangeFiles/_write_ac08_regression_manifest.py """
 
 
+""" Start move to File mainFiles/convert_rangeFiles/_write_ac08_success_criteria_reportFiles/_summarize_previous_good_ac08_variants.py
+import src
+"""
 def _summarize_previous_good_ac08_variants(reports_out_dir: str) -> dict[str, object]:
     """Summarize whether previously good AC08 variants stayed semantic_ok in the latest run."""
     preserved: list[str] = []
@@ -10651,8 +10930,12 @@ def _summarize_previous_good_ac08_variants(reports_out_dir: str) -> dict[str, ob
         "regressed": regressed,
         "missing": missing,
     }
+""" End move to File mainFiles/convert_rangeFiles/_write_ac08_success_criteria_reportFiles/_summarize_previous_good_ac08_variants.py """
 
 
+""" Start move to File mainFiles/convert_rangeFiles/_write_ac08_success_criteria_report.py
+import src
+"""
 def _write_ac08_success_criteria_report(
     reports_out_dir: str,
     *,
@@ -10823,8 +11106,12 @@ def _write_ac08_success_criteria_report(
         "criterion_stable_families_not_worse": stable_families_not_worse,
         "mean_validation_rounds_per_file": mean_validation_rounds,
     }
+""" End move to File mainFiles/convert_rangeFiles/_write_ac08_success_criteria_report.py """
 
 
+""" Start move to File mainFiles/convert_rangeFiles/_write_ac08_weak_family_status_report.py
+import src
+"""
 def _write_ac08_weak_family_status_report(
     reports_out_dir: str,
     *,
@@ -10945,8 +11232,12 @@ def _write_ac08_weak_family_status_report(
 
     with open(os.path.join(reports_out_dir, "ac08_weak_family_status.txt"), "w", encoding="utf-8") as f:
         f.write("\n".join(summary_lines) + "\n")
+""" End move to File mainFiles/convert_rangeFiles/_write_ac08_weak_family_status_report.py """
 
 
+""" Start move to File mainFiles/convert_rangeFiles/_write_pixel_delta2_ranking.py
+import src
+"""
 def _write_pixel_delta2_ranking(folder_path: str, svg_out_dir: str, reports_out_dir: str, threshold: float = 18.0) -> None:
     ranking: list[dict[str, float | str]] = []
     for svg_name in sorted(f for f in os.listdir(svg_out_dir) if f.lower().endswith(".svg")):
@@ -10998,8 +11289,12 @@ def _write_pixel_delta2_ranking(folder_path: str, svg_out_dir: str, reports_out_
     ]
     with open(os.path.join(reports_out_dir, "pixel_delta2_summary.txt"), "w", encoding="utf-8") as f:
         f.write("\n".join(summary_lines) + "\n")
+""" End move to File mainFiles/convert_rangeFiles/_write_pixel_delta2_ranking.py """
 
 
+""" Start move to File mainFiles/convert_rangeFiles/update_successful_conversions_manifest_with_metricsFiles/collect_successful_conversion_quality_metricsFiles/_load_iteration_log_rows.py
+import src
+"""
 def _load_iteration_log_rows(reports_out_dir: str) -> dict[str, dict[str, str]]:
     """Load Iteration_Log.csv keyed by uppercase filename stem."""
     path = os.path.join(reports_out_dir, "Iteration_Log.csv")
@@ -11015,8 +11310,12 @@ def _load_iteration_log_rows(reports_out_dir: str) -> dict[str, dict[str, str]]:
                 continue
             rows[os.path.splitext(filename)[0].upper()] = dict(row)
     return rows
+""" End move to File mainFiles/convert_rangeFiles/update_successful_conversions_manifest_with_metricsFiles/collect_successful_conversion_quality_metricsFiles/_load_iteration_log_rows.py """
 
 
+""" Start move to File mainFiles/convert_rangeFiles/update_successful_conversions_manifest_with_metricsFiles/collect_successful_conversion_quality_metricsFiles/_find_image_path_by_variant.py
+import src
+"""
 def _find_image_path_by_variant(folder_path: str, variant: str) -> str | None:
     """Return the raster image path for ``variant`` if present."""
     for ext in ('.jpg', '.png', '.bmp', '.gif'):
@@ -11024,8 +11323,12 @@ def _find_image_path_by_variant(folder_path: str, variant: str) -> str | None:
         if os.path.exists(candidate):
             return candidate
     return None
+""" End move to File mainFiles/convert_rangeFiles/update_successful_conversions_manifest_with_metricsFiles/collect_successful_conversion_quality_metricsFiles/_find_image_path_by_variant.py """
 
 
+""" Start move to File mainFiles/convert_rangeFiles/update_successful_conversions_manifest_with_metricsFiles/collect_successful_conversion_quality_metrics.py
+import src
+"""
 def collect_successful_conversion_quality_metrics(
     folder_path: str,
     svg_out_dir: str,
@@ -11107,8 +11410,12 @@ def collect_successful_conversion_quality_metrics(
 
     metrics.sort(key=lambda item: str(item.get('variant', '')))
     return metrics
+""" End move to File mainFiles/convert_rangeFiles/update_successful_conversions_manifest_with_metricsFiles/collect_successful_conversion_quality_metrics.py """
 
 
+""" Start move to File mainFiles/convert_rangeFiles/update_successful_conversions_manifest_with_metricsFiles/_format_successful_conversion_manifest_lineFiles/_successful_conversion_metrics_available.py
+import src
+"""
 def _successful_conversion_metrics_available(metrics: dict[str, object]) -> bool:
     """Return whether a metrics row contains fresh conversion data worth persisting."""
     status = str(metrics.get('status', '')).strip()
@@ -11128,8 +11435,12 @@ def _successful_conversion_metrics_available(metrics: dict[str, object]) -> bool
         if math.isfinite(value):
             return True
     return False
+""" End move to File mainFiles/convert_rangeFiles/update_successful_conversions_manifest_with_metricsFiles/_format_successful_conversion_manifest_lineFiles/_successful_conversion_metrics_available.py """
 
 
+""" Start move to File mainFiles/convert_rangeFiles/update_successful_conversions_manifest_with_metricsFiles/_read_successful_conversion_manifest_metricsFiles/_parse_successful_conversion_manifest_line.py
+import src
+"""
 def _parse_successful_conversion_manifest_line(raw_line: str) -> tuple[str, dict[str, object]]:
     """Parse one successful-conversions manifest line into variant plus metrics."""
     stripped = raw_line.split('#', 1)[0].strip()
@@ -11158,8 +11469,12 @@ def _parse_successful_conversion_manifest_line(raw_line: str) -> tuple[str, dict
             continue
         metrics[key] = value
     return variant, metrics
+""" End move to File mainFiles/convert_rangeFiles/update_successful_conversions_manifest_with_metricsFiles/_read_successful_conversion_manifest_metricsFiles/_parse_successful_conversion_manifest_line.py """
 
 
+""" Start move to File mainFiles/convert_rangeFiles/update_successful_conversions_manifest_with_metricsFiles/_read_successful_conversion_manifest_metrics.py
+import src
+"""
 def _read_successful_conversion_manifest_metrics(manifest_path: Path) -> dict[str, dict[str, object]]:
     """Load persisted best-list metrics keyed by variant."""
     if not manifest_path.exists():
@@ -11171,13 +11486,21 @@ def _read_successful_conversion_manifest_metrics(manifest_path: Path) -> dict[st
         if variant:
             rows[variant] = metrics
     return rows
+""" End move to File mainFiles/convert_rangeFiles/update_successful_conversions_manifest_with_metricsFiles/_read_successful_conversion_manifest_metrics.py """
 
 
+""" Start move to File mainFiles/convert_rangeFiles/update_successful_conversions_manifest_with_metricsFiles/_restore_successful_conversion_snapshotFiles/_successful_conversion_snapshot_pathsFiles/_successful_conversion_snapshot_dir.py
+import src
+"""
 def _successful_conversion_snapshot_dir(reports_out_dir: str) -> Path:
     """Directory used to persist best-of artifacts for successful conversions."""
     return Path(reports_out_dir) / 'successful_conversions_bestlist'
+""" End move to File mainFiles/convert_rangeFiles/update_successful_conversions_manifest_with_metricsFiles/_restore_successful_conversion_snapshotFiles/_successful_conversion_snapshot_pathsFiles/_successful_conversion_snapshot_dir.py """
 
 
+""" Start move to File mainFiles/convert_rangeFiles/update_successful_conversions_manifest_with_metricsFiles/_restore_successful_conversion_snapshotFiles/_successful_conversion_snapshot_paths.py
+import src
+"""
 def _successful_conversion_snapshot_paths(reports_out_dir: str, variant: str) -> dict[str, Path]:
     base_dir = _successful_conversion_snapshot_dir(reports_out_dir)
     base_dir.mkdir(parents=True, exist_ok=True)
@@ -11186,8 +11509,12 @@ def _successful_conversion_snapshot_paths(reports_out_dir: str, variant: str) ->
         'log': base_dir / f'{variant}_element_validation.log',
         'metrics': base_dir / f'{variant}.json',
     }
+""" End move to File mainFiles/convert_rangeFiles/update_successful_conversions_manifest_with_metricsFiles/_restore_successful_conversion_snapshotFiles/_successful_conversion_snapshot_paths.py """
 
 
+""" Start move to File mainFiles/convert_rangeFiles/update_successful_conversions_manifest_with_metricsFiles/_restore_successful_conversion_snapshot.py
+import src
+"""
 def _restore_successful_conversion_snapshot(variant: str, svg_out_dir: str, reports_out_dir: str) -> bool:
     """Restore the previous best conversion for ``variant`` if a snapshot exists."""
     snapshot_paths = _successful_conversion_snapshot_paths(reports_out_dir, variant)
@@ -11205,8 +11532,12 @@ def _restore_successful_conversion_snapshot(variant: str, svg_out_dir: str, repo
         restored = True
 
     return restored
+""" End move to File mainFiles/convert_rangeFiles/update_successful_conversions_manifest_with_metricsFiles/_restore_successful_conversion_snapshot.py """
 
 
+""" Start move to File mainFiles/convert_rangeFiles/update_successful_conversions_manifest_with_metricsFiles/_store_successful_conversion_snapshot.py
+import src
+"""
 def _store_successful_conversion_snapshot(variant: str, metrics: dict[str, object], svg_out_dir: str, reports_out_dir: str) -> None:
     """Persist the current best conversion artifacts for later rollback/restoration."""
     snapshot_paths = _successful_conversion_snapshot_paths(reports_out_dir, variant)
@@ -11222,8 +11553,12 @@ def _store_successful_conversion_snapshot(variant: str, metrics: dict[str, objec
         json.dumps(metrics, ensure_ascii=False, indent=2, sort_keys=True),
         encoding='utf-8',
     )
+""" End move to File mainFiles/convert_rangeFiles/update_successful_conversions_manifest_with_metricsFiles/_store_successful_conversion_snapshot.py """
 
 
+""" Start move to File mainFiles/convert_rangeFiles/update_successful_conversions_manifest_with_metricsFiles/_is_successful_conversion_candidate_better.py
+import src
+"""
 def _is_successful_conversion_candidate_better(
     previous_metrics: dict[str, object] | None,
     candidate_metrics: dict[str, object],
@@ -11246,8 +11581,12 @@ def _is_successful_conversion_candidate_better(
         candidate_metrics,
     )
     return improved
+""" End move to File mainFiles/convert_rangeFiles/update_successful_conversions_manifest_with_metricsFiles/_is_successful_conversion_candidate_better.py """
 
 
+""" Start move to File mainFiles/convert_rangeFiles/update_successful_conversions_manifest_with_metricsFiles/_merge_successful_conversion_metrics.py
+import src
+"""
 def _merge_successful_conversion_metrics(
     baseline: dict[str, object],
     override: dict[str, object],
@@ -11260,8 +11599,12 @@ def _merge_successful_conversion_metrics(
         merged[key] = value
     merged['variant'] = str(override.get('variant', baseline.get('variant', ''))).strip().upper()
     return merged
+""" End move to File mainFiles/convert_rangeFiles/update_successful_conversions_manifest_with_metricsFiles/_merge_successful_conversion_metrics.py """
 
 
+""" Start move to File mainFiles/convert_rangeFiles/update_successful_conversions_manifest_with_metricsFiles/_format_successful_conversion_manifest_line.py
+import src
+"""
 def _format_successful_conversion_manifest_line(existing_line: str, metrics: dict[str, object]) -> str:
     """Render one enriched successful-conversions manifest line."""
     if not _successful_conversion_metrics_available(metrics):
@@ -11301,8 +11644,12 @@ def _format_successful_conversion_manifest_line(existing_line: str, metrics: dic
     if comment:
         line += '  ' + comment
     return line
+""" End move to File mainFiles/convert_rangeFiles/update_successful_conversions_manifest_with_metricsFiles/_format_successful_conversion_manifest_line.py """
 
 
+""" Start move to File mainFiles/convert_rangeFiles/update_successful_conversions_manifest_with_metricsFiles/_latest_failed_conversion_manifest_entry.py
+import src
+"""
 def _latest_failed_conversion_manifest_entry(reports_out_dir: str) -> dict[str, object] | None:
     """Return the most recent failed conversion as a manifest-like row."""
     summary_path = Path(reports_out_dir) / "batch_failure_summary.csv"
@@ -11334,8 +11681,12 @@ def _latest_failed_conversion_manifest_entry(reports_out_dir: str) -> dict[str, 
         "status": "failed",
         "failure_reason": str(latest_row.get("reason", "")).strip(),
     }
+""" End move to File mainFiles/convert_rangeFiles/update_successful_conversions_manifest_with_metricsFiles/_latest_failed_conversion_manifest_entry.py """
 
 
+""" Start move to File mainFiles/convert_rangeFiles/update_successful_conversions_manifest_with_metrics.py
+import src
+"""
 def update_successful_conversions_manifest_with_metrics(
     folder_path: str,
     svg_out_dir: str,
@@ -11431,12 +11782,17 @@ def update_successful_conversions_manifest_with_metrics(
 
     resolved_manifest_path.write_text('\n'.join(updated_lines) + '\n', encoding='utf-8')
     return resolved_manifest_path, _sorted_successful_conversion_metrics_rows(effective_metrics_rows)
+""" End move to File mainFiles/convert_rangeFiles/update_successful_conversions_manifest_with_metrics.py """
 
+""" Start move to File mainFiles/convert_rangeFiles/update_successful_conversions_manifest_with_metricsFiles/_sorted_successful_conversion_metrics_rows.py
+import src
+"""
 def _sorted_successful_conversion_metrics_rows(
     metrics: list[dict[str, object]],
 ) -> list[dict[str, object]]:
     """Sort successful-conversion rows by converted image name/variant."""
     return sorted(metrics, key=lambda row: str(row.get('variant', '')).upper())
+""" End move to File mainFiles/convert_rangeFiles/update_successful_conversions_manifest_with_metricsFiles/_sorted_successful_conversion_metrics_rows.py """
 
 
 def _write_successful_conversion_csv_table(csv_path: str | os.PathLike[str], metrics: list[dict[str, object]]) -> str:
@@ -11500,6 +11856,9 @@ def write_successful_conversion_quality_report(
     return csv_path, txt_path, sorted_metrics
 
 
+""" Start move to File mainFiles/parse_args.py
+import src
+"""
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description=(
@@ -11654,6 +12013,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         args.iterations = args.iterations_override
     delattr(args, "iterations_override")
     return args
+""" End move to File mainFiles/parse_args.py """
 
 
 class _TeeTextIO(io.TextIOBase):
@@ -11672,6 +12032,9 @@ class _TeeTextIO(io.TextIOBase):
             stream.flush()
 
 
+""" Start move to File mainFiles/_optional_log_capture.py
+import src
+"""
 @contextlib.contextmanager
 def _optional_log_capture(log_path: str):
     """Duplicate stdout/stderr into ``log_path`` if configured."""
@@ -11687,8 +12050,12 @@ def _optional_log_capture(log_path: str):
         with contextlib.redirect_stdout(tee_stdout), contextlib.redirect_stderr(tee_stderr):
             print(f"[INFO] Schreibe Konsolen-Output nach: {path}")
             yield
+""" End move to File mainFiles/_optional_log_capture.py """
 
 
+""" Start move to File mainFiles/_resolve_cli_csv_and_outputFiles/_auto_detect_csv_path.py
+import src
+"""
 def _auto_detect_csv_path(folder_path: str) -> str | None:
     """Best-effort table lookup for CLI compatibility mode.
 
@@ -11718,8 +12085,12 @@ def _auto_detect_csv_path(folder_path: str) -> str | None:
         if any(tag in os.path.basename(p).lower() for tag in ("reference", "roundtrip", "export", "mapping"))
     ]
     return preferred[0] if preferred else candidates[0]
+""" End move to File mainFiles/_resolve_cli_csv_and_outputFiles/_auto_detect_csv_path.py """
 
 
+""" Start move to File mainFiles/_resolve_cli_csv_and_output.py
+import src
+"""
 def _resolve_cli_csv_and_output(args: argparse.Namespace) -> tuple[str, str | None]:
     """Resolve effective table path and output directory from mixed CLI styles."""
     csv_path = args.csv_path
@@ -11740,8 +12111,12 @@ def _resolve_cli_csv_and_output(args: argparse.Namespace) -> tuple[str, str | No
         csv_path = _resolve_description_xml_path(csv_path) or csv_path
 
     return csv_path, output_dir
+""" End move to File mainFiles/_resolve_cli_csv_and_output.py """
 
 
+""" Start move to File mainFiles/_format_user_diagnostic.py
+import src
+"""
 def _format_user_diagnostic(exc: BaseException) -> str:
     """Render structured loader/runtime errors into one compact CLI message."""
     if isinstance(exc, DescriptionMappingError):
@@ -11749,8 +12124,12 @@ def _format_user_diagnostic(exc: BaseException) -> str:
             return f"{exc.message} Ort: {exc.span.format()}."
         return exc.message
     return str(exc)
+""" End move to File mainFiles/_format_user_diagnostic.py """
 
 
+""" Start move to File mainFiles/_prompt_interactive_range.py
+import src
+"""
 def _prompt_interactive_range(args: argparse.Namespace) -> tuple[str, str]:
     current_start = str(args.start or "").strip()
     current_end = str(args.end or "").strip()
@@ -11771,6 +12150,7 @@ def _prompt_interactive_range(args: argparse.Namespace) -> tuple[str, str]:
     else:
         print(f"[INFO] Verwende Bereich von '{start_value or '(Anfang)'}' bis '{end_value or '(Ende)'}'.")
     return start_value, end_value
+""" End move to File mainFiles/_prompt_interactive_range.py """
 
 
 def main(argv: list[str] | None = None) -> int:
