@@ -1,7 +1,3 @@
-from src import image_composite_converter as _icc
-
-globals().update(vars(_icc))
-
 def _write_quality_config(
     reports_out_dir: str,
     *,

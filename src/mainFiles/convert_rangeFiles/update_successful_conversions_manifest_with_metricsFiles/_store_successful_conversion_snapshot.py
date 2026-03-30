@@ -1,7 +1,3 @@
-from src import image_composite_converter as _icc
-
-globals().update(vars(_icc))
-
 def _store_successful_conversion_snapshot(variant: str, metrics: dict[str, object], svg_out_dir: str, reports_out_dir: str) -> None:
     """Persist the current best conversion artifacts for later rollback/restoration."""
     snapshot_paths = _successful_conversion_snapshot_paths(reports_out_dir, variant)

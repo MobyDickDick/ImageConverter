@@ -1,7 +1,3 @@
-from src import image_composite_converter as _icc
-
-globals().update(vars(_icc))
-
 def _iteration_strategy_for_pass(pass_idx: int, base_iterations: int) -> tuple[int, int]:
     """Adaptive per-pass search budget for unresolved quality cases."""
     p = max(1, int(pass_idx))

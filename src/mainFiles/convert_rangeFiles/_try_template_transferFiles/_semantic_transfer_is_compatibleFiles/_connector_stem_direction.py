@@ -1,7 +1,3 @@
-from src import image_composite_converter as _icc
-
-globals().update(vars(_icc))
-
 def _connector_stem_direction(params: dict[str, object]) -> int | None:
     """Return vertical stem direction: -1 up, +1 down, or None if unknown."""
     y1 = params.get("arm_y1")

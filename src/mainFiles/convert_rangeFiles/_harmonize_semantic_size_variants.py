@@ -1,7 +1,3 @@
-from src import image_composite_converter as _icc
-
-globals().update(vars(_icc))
-
 def _harmonize_semantic_size_variants(
     results: list[dict[str, object]],
     folder_path: str,

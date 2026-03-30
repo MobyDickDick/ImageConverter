@@ -1,7 +1,3 @@
-from src import image_composite_converter as _icc
-
-globals().update(vars(_icc))
-
 def _template_transfer_scale_candidates(base_scale: float) -> list[float]:
     """Build a compact scale ladder around an estimated best scale."""
     if not math.isfinite(base_scale) or base_scale <= 0.0:

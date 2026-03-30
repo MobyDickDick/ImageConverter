@@ -1,12 +1,7 @@
-from src import image_composite_converter as _icc
-
-globals().update(vars(_icc))
-
 def export_module_call_tree_csv(
     output_csv_path: str | os.PathLike[str] = DEFAULT_CALL_TREE_CSV_PATH,
     module_path: str | os.PathLike[str] = __file__,
 ) -> str:
-    """Export a module-local call tree/table as CSV and return the written path."""
     callable_lines, edges = _module_call_edges_for_path(module_path)
     incoming: dict[str, int] = {name: 0 for name in callable_lines}
     adjacency: dict[str, set[str]] = {name: set() for name in callable_lines}
@@ -33,40 +28,25 @@ def export_module_call_tree_csv(
         walk(root, root, 0, "", (root,))
 
     output_path = os.fspath(output_csv_path)
-    os.makedirs(os.path.dirname(output_path), exist_ok=True)
+    out_dir = os.path.dirname(output_path)
+    if out_dir:
+        os.makedirs(out_dir, exist_ok=True)
     with open(output_path, "w", encoding="utf-8", newline="") as f:
         writer = csv.writer(f, delimiter=";")
-        writer.writerow(
-            [
-                "root",
-                "node",
-                "depth",
-                "parent",
-                "node_line",
-                "edge_caller",
-                "edge_callee",
-                "edge_call_line",
-                "edge_caller_line",
-                "edge_callee_line",
-                "edge_raw_callee",
-            ]
-        )
+        writer.writerow([
+            "root", "node", "depth", "parent", "node_line", "edge_caller", "edge_callee",
+            "edge_call_line", "edge_caller_line", "edge_callee_line", "edge_raw_callee",
+        ])
         edge_by_pair = {(str(edge["caller"]), str(edge["callee"])): edge for edge in edges}
         for root, node, depth, parent, node_line in tree_rows:
             edge = edge_by_pair.get((parent, node)) if parent else None
-            writer.writerow(
-                [
-                    root,
-                    node,
-                    depth,
-                    parent,
-                    node_line,
-                    parent if edge else "",
-                    node if edge else "",
-                    int(edge["call_line"]) if edge else "",
-                    int(edge["caller_line"]) if edge else "",
-                    int(edge["callee_line"]) if edge else "",
-                    str(edge["raw_callee"]) if edge else "",
-                ]
-            )
+            writer.writerow([
+                root, node, depth, parent, node_line,
+                parent if edge else "",
+                node if edge else "",
+                int(edge["call_line"]) if edge else "",
+                int(edge["caller_line"]) if edge else "",
+                int(edge["callee_line"]) if edge else "",
+                str(edge["raw_callee"]) if edge else "",
+            ])
     return output_path

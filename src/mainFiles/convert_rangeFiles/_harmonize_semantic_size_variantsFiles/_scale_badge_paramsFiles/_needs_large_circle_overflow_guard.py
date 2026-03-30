@@ -1,7 +1,3 @@
-from src import image_composite_converter as _icc
-
-globals().update(vars(_icc))
-
 def _needs_large_circle_overflow_guard(params: dict) -> bool:
     """Return whether circle placement may intentionally exceed canvas bounds.
 

@@ -1,7 +1,3 @@
-from src import image_composite_converter as _icc
-
-globals().update(vars(_icc))
-
 def _max_signature_delta(sig_a: dict[str, float], sig_b: dict[str, float]) -> float:
     keys = sorted(set(sig_a.keys()).intersection(sig_b.keys()))
     if not keys:

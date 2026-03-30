@@ -1,7 +1,3 @@
-from src import image_composite_converter as _icc
-
-globals().update(vars(_icc))
-
 def get_base_name_from_file(filename: str) -> str:
     name = os.path.splitext(filename)[0]
     name = re.sub(r"(-\d+)$", "", name)

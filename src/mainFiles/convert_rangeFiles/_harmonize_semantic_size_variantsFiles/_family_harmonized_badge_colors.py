@@ -1,7 +1,3 @@
-from src import image_composite_converter as _icc
-
-globals().update(vars(_icc))
-
 def _family_harmonized_badge_colors(variant_rows: list[dict[str, object]]) -> dict[str, int]:
     """Derive a family palette from L/M/S variants and slightly boost contrast."""
     buckets: dict[str, list[float]] = {

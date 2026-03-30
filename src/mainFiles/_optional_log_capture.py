@@ -1,7 +1,3 @@
-from src import image_composite_converter as _icc
-
-globals().update(vars(_icc))
-
 def _optional_log_capture(log_path: str):
     """Duplicate stdout/stderr into ``log_path`` if configured."""
     if not log_path:

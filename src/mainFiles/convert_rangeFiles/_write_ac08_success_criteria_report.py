@@ -1,7 +1,3 @@
-from src import image_composite_converter as _icc
-
-globals().update(vars(_icc))
-
 def _write_ac08_success_criteria_report(
     reports_out_dir: str,
     *,

@@ -1,7 +1,3 @@
-from src import image_composite_converter as _icc
-
-globals().update(vars(_icc))
-
 def _format_user_diagnostic(exc: BaseException) -> str:
     """Render structured loader/runtime errors into one compact CLI message."""
     if isinstance(exc, DescriptionMappingError):

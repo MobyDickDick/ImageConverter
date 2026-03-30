@@ -1,7 +1,3 @@
-from src import image_composite_converter as _icc
-
-globals().update(vars(_icc))
-
 def _format_successful_conversion_manifest_line(existing_line: str, metrics: dict[str, object]) -> str:
     """Render one enriched successful-conversions manifest line."""
     if not _successful_conversion_metrics_available(metrics):

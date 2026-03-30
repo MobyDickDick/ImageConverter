@@ -1,7 +1,3 @@
-from src import image_composite_converter as _icc
-
-globals().update(vars(_icc))
-
 def build_linux_vendor_install_command(
     vendor_dir: str = "vendor",
     platform_tag: str = "manylinux2014_x86_64",

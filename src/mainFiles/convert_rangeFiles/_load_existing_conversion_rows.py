@@ -1,7 +1,3 @@
-from src import image_composite_converter as _icc
-
-globals().update(vars(_icc))
-
 def _load_existing_conversion_rows(output_root: str, folder_path: str) -> list[dict[str, object]]:
     """Load previously converted variants so they can act as donor templates.
 
