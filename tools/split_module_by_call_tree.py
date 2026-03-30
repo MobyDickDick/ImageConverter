@@ -30,7 +30,10 @@ def sanitize_name(name: str) -> str:
 def parse_call_tree_edges(csv_path: Path) -> dict[str, set[str]]:
     edges: dict[str, set[str]] = defaultdict(set)
     with csv_path.open("r", encoding="utf-8", newline="") as handle:
-        reader = csv.DictReader(handle, delimiter=";")
+        sample = handle.read(4096)
+        handle.seek(0)
+        delimiter = ";" if sample.count(";") >= sample.count(",") else ","
+        reader = csv.DictReader(handle, delimiter=delimiter)
         for row in reader:
             caller = (row.get("edge_caller") or "").strip()
             callee = (row.get("edge_callee") or "").strip()
@@ -108,12 +111,51 @@ def build_tree(
     recurse(root, root_dir, (root,))
 
 
+def _extract_plain_function_name(function_name: str) -> str | None:
+    if "." in function_name:
+        return None
+    if not function_name.isidentifier():
+        return None
+    return function_name
+
+
+def write_import_loader(loader_path: Path, source_snippets: dict[str, str]) -> None:
+    """Write a plain Python import loader for extracted top-level functions."""
+    top_level_names = sorted(
+        name
+        for name in source_snippets
+        if _extract_plain_function_name(name) is not None
+    )
+    lines = [
+        '"""Auto-generated plain-import facade for extracted call-tree modules."""',
+        "",
+    ]
+    for name in top_level_names:
+        module_name = sanitize_name(name)
+        lines.append(f"from .{module_name} import {name}")
+    lines.append("")
+    all_entries = ", ".join(repr(name) for name in top_level_names)
+    lines.append(f"__all__ = [{all_entries}]")
+    lines.append("")
+    loader_path.parent.mkdir(parents=True, exist_ok=True)
+    loader_path.write_text("\n".join(lines), encoding="utf-8")
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--source", type=Path, required=True, help="Path to the Python module source file")
     parser.add_argument("--call-tree", type=Path, required=True, help="Path to the exported call-tree CSV")
     parser.add_argument("--root", default="main", help="Root function to start from (default: main)")
     parser.add_argument("--output-dir", type=Path, default=Path("split_by_call_tree"), help="Output directory for generated tree")
+    parser.add_argument(
+        "--emit-import-loader",
+        type=Path,
+        default=None,
+        help=(
+            "Optional path for a generated plain Python import facade "
+            "(uses regular 'from ... import ...' statements)."
+        ),
+    )
     return parser.parse_args()
 
 
@@ -122,6 +164,8 @@ def main() -> int:
     edges = parse_call_tree_edges(args.call_tree)
     snippets = collect_function_sources(args.source)
     build_tree(args.root, edges, args.output_dir, snippets)
+    if args.emit_import_loader is not None:
+        write_import_loader(args.emit_import_loader, snippets)
     print(f"Generated call-tree split under: {args.output_dir / (sanitize_name(args.root) + 'Files')}")
     return 0
 

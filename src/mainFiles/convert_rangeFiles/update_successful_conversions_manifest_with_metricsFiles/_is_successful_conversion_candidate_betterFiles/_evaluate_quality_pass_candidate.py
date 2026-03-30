@@ -1,7 +1,3 @@
-from src import image_composite_converter as _icc
-
-globals().update(vars(_icc))
-
 def _evaluate_quality_pass_candidate(
     old_row: dict[str, object],
     new_row: dict[str, object],

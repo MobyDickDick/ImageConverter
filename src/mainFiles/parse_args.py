@@ -1,7 +1,3 @@
-from src import image_composite_converter as _icc
-
-globals().update(vars(_icc))
-
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description=(
@@ -115,17 +111,6 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
             "in das Vendor-Verzeichnis installiert."
         ),
     )
-    parser.add_argument(
-        "--export-call-tree-csv",
-        nargs="?",
-        const=DEFAULT_CALL_TREE_CSV_PATH,
-        default=None,
-        help=(
-            "Erstellt einen moduleigenen Aufrufbaum aus image_composite_converter.py und schreibt ihn als CSV. "
-            "Optional kann ein Zielpfad angegeben werden "
-            f"(Default: {DEFAULT_CALL_TREE_CSV_PATH})."
-        ),
-    )
     parser.add_argument("--vendor-dir", default="vendor", help="Zielordner für vendorte Python-Pakete")
     parser.add_argument(
         "--vendor-platform",
@@ -150,6 +135,16 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         type=float,
         default=SVG_RENDER_SUBPROCESS_TIMEOUT_SEC,
         help="Timeout pro isoliertem SVG-Render-Aufruf in Sekunden (Default: 20).",
+    )
+    parser.add_argument(
+        "--export-call-tree-csv",
+        nargs="?",
+        const=DEFAULT_CALL_TREE_CSV_PATH,
+        default="",
+        help=(
+            "Schreibt eine CSV mit dem modulinternen Aufrufbaum (optional mit Zielpfad; "
+            f"Default ohne Pfad: {DEFAULT_CALL_TREE_CSV_PATH})."
+        ),
     )
     parser.add_argument("--_render-svg-subprocess", action="store_true", help=argparse.SUPPRESS)
     args = parser.parse_args(argv)

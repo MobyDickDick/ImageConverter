@@ -1,7 +1,3 @@
-from src import image_composite_converter as _icc
-
-globals().update(vars(_icc))
-
 def _latest_failed_conversion_manifest_entry(reports_out_dir: str) -> dict[str, object] | None:
     """Return the most recent failed conversion as a manifest-like row."""
     summary_path = Path(reports_out_dir) / "batch_failure_summary.csv"

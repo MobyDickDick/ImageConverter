@@ -1,7 +1,3 @@
-from src import image_composite_converter as _icc
-
-globals().update(vars(_icc))
-
 def _semantic_transfer_scale_candidates(base_scale: float) -> list[float]:
     """Broader scale ladder for semantic badge transfer exploration."""
     core = _template_transfer_scale_candidates(base_scale)

@@ -1,7 +1,3 @@
-from src import image_composite_converter as _icc
-
-globals().update(vars(_icc))
-
 def _sniff_raster_size(path: str | Path) -> tuple[int, int]:
     file_path = Path(path)
     with file_path.open("rb") as fh:

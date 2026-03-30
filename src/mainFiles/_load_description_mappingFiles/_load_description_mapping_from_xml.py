@@ -1,7 +1,3 @@
-from src import image_composite_converter as _icc
-
-globals().update(vars(_icc))
-
 def _load_description_mapping_from_xml(path: str) -> dict[str, str]:
     raw_desc: dict[str, str] = {}
     resolved_path = _resolve_description_xml_path(path)

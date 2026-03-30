@@ -1,7 +1,3 @@
-from src import image_composite_converter as _icc
-
-globals().update(vars(_icc))
-
 def _read_validation_log_details(log_path: str) -> dict[str, str]:
     if not os.path.exists(log_path):
         return {}

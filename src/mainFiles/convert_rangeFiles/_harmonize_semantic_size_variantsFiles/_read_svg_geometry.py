@@ -1,7 +1,3 @@
-from src import image_composite_converter as _icc
-
-globals().update(vars(_icc))
-
 def _read_svg_geometry(svg_path: str) -> tuple[int, int, dict] | None:
     if not os.path.exists(svg_path):
         return None

@@ -1,7 +1,3 @@
-from src import image_composite_converter as _icc
-
-globals().update(vars(_icc))
-
 def _semantic_transfer_is_compatible(target_params: dict[str, object], donor_params: dict[str, object]) -> bool:
     """Return whether donor semantics can preserve target semantic geometry."""
     target_has_arm = bool(target_params.get("arm_enabled", False))

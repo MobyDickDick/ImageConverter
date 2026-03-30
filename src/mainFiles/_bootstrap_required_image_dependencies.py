@@ -1,7 +1,3 @@
-from src import image_composite_converter as _icc
-
-globals().update(vars(_icc))
-
 def _bootstrap_required_image_dependencies() -> list[str]:
     missing = _missing_required_image_dependencies()
     if not missing:

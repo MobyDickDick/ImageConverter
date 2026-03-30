@@ -1,7 +1,3 @@
-from src import image_composite_converter as _icc
-
-globals().update(vars(_icc))
-
 def _connector_arm_direction(params: dict[str, object]) -> int | None:
     """Return horizontal arm side: -1 left of circle, +1 right, or None if unknown."""
     x1 = params.get("arm_x1")
