@@ -1,3 +1,0 @@
-from __future__ import annotations
-
-from src.image_composite_converterFiles._vendored_site_packages_dirsFile import _vendored_site_packages_dirs
