@@ -1,3 +1,7 @@
+from src import image_composite_converter as _icc
+
+globals().update(vars(_icc))
+
 def _successful_conversion_metrics_available(metrics: dict[str, object]) -> bool:
     """Return whether a metrics row contains fresh conversion data worth persisting."""
     status = str(metrics.get('status', '')).strip()

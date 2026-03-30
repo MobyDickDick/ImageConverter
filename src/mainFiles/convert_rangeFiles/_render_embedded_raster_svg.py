@@ -1,3 +1,7 @@
+from src import image_composite_converter as _icc
+
+globals().update(vars(_icc))
+
 def _render_embedded_raster_svg(input_path: str | Path) -> str:
     width, height = _sniff_raster_size(input_path)
     raw = Path(input_path).read_bytes()

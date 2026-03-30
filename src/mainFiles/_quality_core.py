@@ -1,3 +1,7 @@
+from src import image_composite_converter as _icc
+
+globals().update(vars(_icc))
+
 def _quality_sort_key(row: dict[str, object]) -> tuple[float, float, str]:
     """Stable quality ordering from best to worst."""
 

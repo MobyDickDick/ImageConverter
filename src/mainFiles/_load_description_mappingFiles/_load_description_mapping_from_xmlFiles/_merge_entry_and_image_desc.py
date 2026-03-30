@@ -1,3 +1,7 @@
+from src import image_composite_converter as _icc
+
+globals().update(vars(_icc))
+
 def _merge_entry_and_image_desc(entry_desc: str, image_desc: str) -> str:
     entry_clean = str(entry_desc or "").strip()
     image_clean = str(image_desc or "").strip()

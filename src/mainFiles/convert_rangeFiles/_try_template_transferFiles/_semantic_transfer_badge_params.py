@@ -1,3 +1,7 @@
+from src import image_composite_converter as _icc
+
+globals().update(vars(_icc))
+
 def _semantic_transfer_badge_params(
     donor_params: dict[str, object],
     target_params: dict[str, object],

@@ -1,3 +1,7 @@
+from src import image_composite_converter as _icc
+
+globals().update(vars(_icc))
+
 def _run_svg_render_subprocess_entrypoint() -> int:
     try:
         payload = json.loads(sys.stdin.buffer.read().decode("utf-8"))

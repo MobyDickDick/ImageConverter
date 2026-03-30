@@ -1,3 +1,7 @@
+from src import image_composite_converter as _icc
+
+globals().update(vars(_icc))
+
 def convert_range(
     folder_path: str,
     csv_path: str,

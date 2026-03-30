@@ -1,3 +1,7 @@
+from src import image_composite_converter as _icc
+
+globals().update(vars(_icc))
+
 def _estimate_template_transfer_scale(
     img_orig: np.ndarray,
     donor_svg_text: str,

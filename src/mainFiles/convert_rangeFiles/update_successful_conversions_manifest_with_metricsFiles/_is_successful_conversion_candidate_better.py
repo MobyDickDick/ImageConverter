@@ -1,3 +1,7 @@
+from src import image_composite_converter as _icc
+
+globals().update(vars(_icc))
+
 def _is_successful_conversion_candidate_better(
     previous_metrics: dict[str, object] | None,
     candidate_metrics: dict[str, object],

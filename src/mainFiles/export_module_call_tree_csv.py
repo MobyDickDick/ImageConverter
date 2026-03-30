@@ -1,3 +1,7 @@
+from src import image_composite_converter as _icc
+
+globals().update(vars(_icc))
+
 def export_module_call_tree_csv(
     output_csv_path: str | os.PathLike[str] = DEFAULT_CALL_TREE_CSV_PATH,
     module_path: str | os.PathLike[str] = __file__,

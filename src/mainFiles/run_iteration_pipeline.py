@@ -1,3 +1,7 @@
+from src import image_composite_converter as _icc
+
+globals().update(vars(_icc))
+
 def run_iteration_pipeline(
     image_path: str,
     csv_path: str,

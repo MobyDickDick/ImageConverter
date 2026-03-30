@@ -1,3 +1,7 @@
+from src import image_composite_converter as _icc
+
+globals().update(vars(_icc))
+
 def _prompt_interactive_range(args: argparse.Namespace) -> tuple[str, str]:
     current_start = str(args.start or "").strip()
     current_end = str(args.end or "").strip()

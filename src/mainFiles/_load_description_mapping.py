@@ -1,3 +1,7 @@
+from src import image_composite_converter as _icc
+
+globals().update(vars(_icc))
+
 def _load_description_mapping(path: str) -> dict[str, str]:
     ext = os.path.splitext(path)[1].lower()
     if ext == ".xml":

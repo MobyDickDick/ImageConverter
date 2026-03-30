@@ -1,3 +1,7 @@
+from src import image_composite_converter as _icc
+
+globals().update(vars(_icc))
+
 def _missing_required_image_dependencies() -> list[str]:
     missing: list[str] = []
     if cv2 is None:

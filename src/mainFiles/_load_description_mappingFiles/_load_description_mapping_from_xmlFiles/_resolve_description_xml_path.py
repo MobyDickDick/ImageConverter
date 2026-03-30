@@ -1,3 +1,7 @@
+from src import image_composite_converter as _icc
+
+globals().update(vars(_icc))
+
 def _resolve_description_xml_path(path: str) -> str | None:
     candidate = Path(path)
     if candidate.exists():
