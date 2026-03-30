@@ -11,17 +11,23 @@ import sys
 import types
 
 import src.mainFiles.image_composite_converter_core as _core
-from src.image_composite_converterFiles._load_optional_moduleFile import _load_optional_module
-from src.image_composite_converterFiles._optional_dependency_base_dirFile import _optional_dependency_base_dir
-from src.image_composite_converterFiles._sync_core_overridesFile import _sync_core_overrides
-from src.image_composite_converterFiles._vendored_site_packages_dirsFile import _vendored_site_packages_dirs
-from src.image_composite_converterFiles.convert_rangeFile import convert_range
-from src.image_composite_converterFiles.mainFile import main
+from src.imageCompositeConverterFs.convertRange import convertRange
+from src.imageCompositeConverterFs.loadOptionalModule import loadOptionalModule
+from src.imageCompositeConverterFs.main import main
+from src.imageCompositeConverterFs.optionalDependencyBaseDir import optionalDependencyBaseDir
+from src.imageCompositeConverterFs.syncCoreOverrides import syncCoreOverrides
+from src.imageCompositeConverterFs.vendoredSitePackagesDirs import vendoredSitePackagesDirs
 
 for _name in dir(_core):
     if _name.startswith("__"):
         continue
     globals()[_name] = getattr(_core, _name)
+
+_optional_dependency_base_dir = optionalDependencyBaseDir
+_vendored_site_packages_dirs = vendoredSitePackagesDirs
+_load_optional_module = loadOptionalModule
+_sync_core_overrides = syncCoreOverrides
+convert_range = convertRange
 
 _core._optional_dependency_base_dir = _optional_dependency_base_dir
 _core._vendored_site_packages_dirs = _vendored_site_packages_dirs
