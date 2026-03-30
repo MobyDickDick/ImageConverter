@@ -28,7 +28,7 @@ from pathlib import Path
 import io
 import struct
 import statistics
-from src.overview_tiles import generate_conversion_overviews
+from src.mainFiles.overview_tiles import generate_conversion_overviews
 from src.mainFiles.image_composite_converter_regions import (
     ANNOTATION_COLORS,
     analyze_range_impl,
