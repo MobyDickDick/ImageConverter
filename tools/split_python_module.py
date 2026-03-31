@@ -289,7 +289,7 @@ def parseArgs() -> argparse.Namespace:
     parser.add_argument("source", type=Path, help="Path to the large Python module")
     parser.add_argument("--output-dir", type=Path, default=Path("split_output"), help="Target directory for non-destructive split output")
     parser.add_argument("--max-lines", type=int, default=DEFAULT_MAX_LINES, help=f"Maximum lines per chunk (default: {DEFAULT_MAX_LINES})")
-    parser.add_argument("--loader-name", type=str, default="image_composite_converter.py", help="Loader filename for non-destructive output mode")
+    parser.add_argument("--loader-name", type=str, default="imageCompositeConverter.py", help="Loader filename for non-destructive output mode")
     parser.add_argument("--deploy-in-place", action="store_true", help="Replace source file with loader and write chunks next to it")
     parser.add_argument("--backup-suffix", type=str, default=".bak", help="Suffix used for in-place backup copies (default: .bak)")
     parser.add_argument("--chunk-dir-name", type=str, default=None, help="Custom chunk directory name for in-place deploy")
