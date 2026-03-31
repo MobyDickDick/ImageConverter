@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from src.imageCompositeConverterFs.syncCoreOverrides import syncCoreOverrides
+from src.iccFs.syncCoreOverrides import syncCoreOverrides
 
 
 def convertRange(*args, **kwargs):
