@@ -8635,8 +8635,8 @@ def _conversion_random() -> random.Random:
     return random.Random(time.time_ns())
 
 def _default_converted_symbols_root() -> str:
-    repo_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    return os.path.join(repo_root, "artifacts", "converted_images")
+    repo_root = Path(__file__).resolve().parents[3]
+    return str(repo_root / "artifacts" / "converted_images")
 
 
 def _converted_svg_output_dir(output_root: str) -> str:
