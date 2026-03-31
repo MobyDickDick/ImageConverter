@@ -11349,6 +11349,16 @@ def _snake_to_camel_filename(filename: str) -> str:
     return f"{'_' * leading_underscores}{camel_stem}.{suffix}"
 
 
+def _snake_to_camel_name(name: str) -> str:
+    leading_underscores = len(name) - len(name.lstrip("_"))
+    core = name[leading_underscores:]
+    parts = [part for part in core.split("_") if part]
+    if not parts:
+        return name
+    camel_core = parts[0] + "".join(part[:1].upper() + part[1:] for part in parts[1:])
+    return ("_" * leading_underscores) + camel_core
+
+
 def _load_mainfile_function(func_name: str, filename: str):
     """Lade eine ausgelagerte Funktionsdefinition aus src/iccFs/mF in dieses Modul."""
     source_path = _MAINFILES_DIR / filename
@@ -11360,6 +11370,8 @@ def _load_mainfile_function(func_name: str, filename: str):
     code = compile(source_path.read_text(encoding="utf-8"), str(source_path), "exec")
     exec(code, globals(), namespace)
     loaded = namespace.get(func_name)
+    if not callable(loaded):
+        loaded = namespace.get(_snake_to_camel_name(func_name))
     if not callable(loaded):
         raise RuntimeError(f"Funktion {func_name!r} konnte aus {source_path} nicht geladen werden")
     globals()[func_name] = loaded

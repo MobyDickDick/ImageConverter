@@ -1,7 +1,7 @@
 """Thin CLI entrypoint for the image composite converter.
 
 This module intentionally keeps only the `main` orchestration function and
-re-exports the existing converter API from `image_composite_converter_core`.
+re-exports the existing converter API from `imageCompositeConverterCore`.
 """
 
 from __future__ import annotations
@@ -13,7 +13,7 @@ from pathlib import Path
 if __package__ in {None, ""}:
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-import src.iccFs.mF.image_composite_converter_core as _core
+import src.iccFs.mF.imageCompositeConverterCore as _core
 from src.iccFs.convertRange import convert_range
 from src.iccFs.loadOptionalModule import loadOptionalModule
 from src.iccFs.main import main
