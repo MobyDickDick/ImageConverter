@@ -108,17 +108,17 @@ def build_tree(
     recurse(root, root_dir, (root,))
 
 
-def parse_args() -> argparse.Namespace:
+def parseArgs() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--source", type=Path, required=True, help="Path to the Python module source file")
     parser.add_argument("--call-tree", type=Path, required=True, help="Path to the exported call-tree CSV")
     parser.add_argument("--root", default="main", help="Root function to start from (default: main)")
     parser.add_argument("--output-dir", type=Path, default=Path("split_by_call_tree"), help="Output directory for generated tree")
-    return parser.parse_args()
+    return parser.parseArgs()
 
 
 def main() -> int:
-    args = parse_args()
+    args = parseArgs()
     edges = parse_call_tree_edges(args.call_tree)
     snippets = collect_function_sources(args.source)
     build_tree(args.root, edges, args.output_dir, snippets)

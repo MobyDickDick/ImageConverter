@@ -1,4 +1,4 @@
-def get_base_name_from_file(filename: str) -> str:
+def getBaseNameFromFile(filename: str) -> str:
     name = os.path.splitext(filename)[0]
     name = re.sub(r"(-\d+)$", "", name)
     while True:

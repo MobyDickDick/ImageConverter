@@ -1,4 +1,4 @@
-def collect_successful_conversion_quality_metrics(
+def collectSuccessfulConversionQualityMetrics(
     folder_path: str,
     svg_out_dir: str,
     reports_out_dir: str,
@@ -14,14 +14,14 @@ def collect_successful_conversion_quality_metrics(
         raise RuntimeError('Required image dependencies are missing: ' + ', '.join(missing))
 
     variants = [str(v).strip().upper() for v in (successful_variants or SUCCESSFUL_CONVERSIONS) if str(v).strip()]
-    iteration_rows = _load_iteration_log_rows(reports_out_dir)
+    iteration_rows = _loadIterationLogRows(reports_out_dir)
     metrics: list[dict[str, object]] = []
     seen: set[str] = set()
     for variant in variants:
         if variant in seen:
             continue
         seen.add(variant)
-        image_path = _find_image_path_by_variant(folder_path, variant)
+        image_path = _findImagePathByVariant(folder_path, variant)
         svg_path = os.path.join(svg_out_dir, f'{variant}.svg')
         log_path = os.path.join(reports_out_dir, f'{variant}_element_validation.log')
 
@@ -40,7 +40,7 @@ def collect_successful_conversion_quality_metrics(
             'std_delta2': float('nan'),
         }
 
-        details = _read_validation_log_details(log_path) if os.path.exists(log_path) else {}
+        details = _readValidationLogDetails(log_path) if os.path.exists(log_path) else {}
         row['status'] = details.get('status', '')
 
         iteration = iteration_rows.get(variant, {})
@@ -64,7 +64,7 @@ def collect_successful_conversion_quality_metrics(
             continue
         with open(svg_path, 'r', encoding='utf-8') as f:
             svg_content = f.read()
-        rendered = Action.render_svg_to_numpy(svg_content, img_orig.shape[1], img_orig.shape[0])
+        rendered = Action.renderSvgToNumpy(svg_content, img_orig.shape[1], img_orig.shape[0])
         if rendered is None:
             metrics.append(row)
             continue

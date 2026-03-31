@@ -1,4 +1,4 @@
-def _svg_href_mime_type(path: str | Path) -> str:
+def _svgHrefMimeType(path: str | Path) -> str:
     ext = Path(path).suffix.lower()
     return {
         ".jpg": "image/jpeg",

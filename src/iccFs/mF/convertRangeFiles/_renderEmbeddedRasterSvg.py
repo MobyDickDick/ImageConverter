@@ -1,8 +1,8 @@
-def _render_embedded_raster_svg(input_path: str | Path) -> str:
-    width, height = _sniff_raster_size(input_path)
+def _renderEmbeddedRasterSvg(input_path: str | Path) -> str:
+    width, height = _sniffRasterSize(input_path)
     raw = Path(input_path).read_bytes()
     encoded = base64.b64encode(raw).decode("ascii")
-    mime = _svg_href_mime_type(input_path)
+    mime = _svgHrefMimeType(input_path)
     return (
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" '
         f'viewBox="0 0 {width} {height}">\n'

@@ -1,4 +1,4 @@
-def _write_quality_pass_report(
+def _writeQualityPassReport(
     reports_out_dir: str,
     pass_rows: list[dict[str, object]],
 ) -> None:

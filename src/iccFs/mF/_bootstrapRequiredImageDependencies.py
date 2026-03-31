@@ -1,5 +1,5 @@
-def _bootstrap_required_image_dependencies() -> list[str]:
-    missing = _missing_required_image_dependencies()
+def _bootstrapRequiredImageDependencies() -> list[str]:
+    missing = _missingRequiredImageDependencies()
     if not missing:
         return []
 

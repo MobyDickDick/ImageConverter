@@ -1,4 +1,4 @@
-def _required_vendor_packages() -> list[str]:
+def _requiredVendorPackages() -> list[str]:
     return [
         "numpy",
         "opencv-python-headless",

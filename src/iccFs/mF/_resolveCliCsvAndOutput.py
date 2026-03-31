@@ -1,4 +1,4 @@
-def _resolve_cli_csv_and_output(args: argparse.Namespace) -> tuple[str, str | None]:
+def _resolveCliCsvAndOutput(args: argparse.Namespace) -> tuple[str, str | None]:
     """Resolve effective table path and output directory from mixed CLI styles."""
     csv_path = args.csv_path
     output_dir = args.output_dir
@@ -13,8 +13,8 @@ def _resolve_cli_csv_and_output(args: argparse.Namespace) -> tuple[str, str | No
             csv_path = c
 
     if csv_path is None:
-        csv_path = _auto_detect_csv_path(args.folder_path) or ""
+        csv_path = _autoDetectCsvPath(args.folder_path) or ""
     elif str(csv_path).lower().endswith(".xml"):
-        csv_path = _resolve_description_xml_path(csv_path) or csv_path
+        csv_path = _resolveDescriptionXmlPath(csv_path) or csv_path
 
     return csv_path, output_dir

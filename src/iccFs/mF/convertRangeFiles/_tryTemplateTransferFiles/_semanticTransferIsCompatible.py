@@ -1,4 +1,4 @@
-def _semantic_transfer_is_compatible(target_params: dict[str, object], donor_params: dict[str, object]) -> bool:
+def _semanticTransferIsCompatible(target_params: dict[str, object], donor_params: dict[str, object]) -> bool:
     """Return whether donor semantics can preserve target semantic geometry."""
     target_has_arm = bool(target_params.get("arm_enabled", False))
     target_has_stem = bool(target_params.get("stem_enabled", False))
@@ -26,14 +26,14 @@ def _semantic_transfer_is_compatible(target_params: dict[str, object], donor_par
     # Directional connector families (e.g. AC0810 right arm vs AC0812 left arm)
     # must keep side/orientation stable during semantic transfer.
     if target_has_arm and donor_has_arm:
-        target_arm_dir = _connector_arm_direction(target_params)
-        donor_arm_dir = _connector_arm_direction(donor_params)
+        target_arm_dir = _connectorArmDirection(target_params)
+        donor_arm_dir = _connectorArmDirection(donor_params)
         if target_arm_dir is not None and donor_arm_dir is not None and target_arm_dir != donor_arm_dir:
             return False
 
     if target_has_stem and donor_has_stem:
-        target_stem_dir = _connector_stem_direction(target_params)
-        donor_stem_dir = _connector_stem_direction(donor_params)
+        target_stem_dir = _connectorStemDirection(target_params)
+        donor_stem_dir = _connectorStemDirection(donor_params)
         if target_stem_dir is not None and donor_stem_dir is not None and target_stem_dir != donor_stem_dir:
             return False
 

@@ -1,4 +1,4 @@
-def _format_user_diagnostic(exc: BaseException) -> str:
+def _formatUserDiagnostic(exc: BaseException) -> str:
     """Render structured loader/runtime errors into one compact CLI message."""
     if isinstance(exc, DescriptionMappingError):
         if exc.span is not None:

@@ -1,4 +1,4 @@
-def _write_ac08_regression_manifest(
+def _writeAc08RegressionManifest(
     reports_out_dir: str,
     *,
     folder_path: str,

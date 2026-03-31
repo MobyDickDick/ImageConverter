@@ -1,11 +1,11 @@
-def _write_quality_config(
+def _writeQualityConfig(
     reports_out_dir: str,
     *,
     allowed_error_per_pixel: float,
     skipped_variants: list[str],
     source: str,
 ) -> None:
-    path = _quality_config_path(reports_out_dir)
+    path = _qualityConfigPath(reports_out_dir)
     normalized_error_pp = float(allowed_error_per_pixel) if math.isfinite(allowed_error_per_pixel) else 0.0
     payload = {
         "allowed_error_per_pixel": float(max(0.0, normalized_error_pp)),

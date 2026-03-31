@@ -1,4 +1,4 @@
-def _template_transfer_donor_family_compatible(
+def _templateTransferDonorFamilyCompatible(
     target_base: str,
     donor_base: str,
     *,
@@ -9,8 +9,8 @@ def _template_transfer_donor_family_compatible(
     if donor_base.upper() in alias_refs:
         return True
 
-    target_family = _extract_symbol_family(target_base)
-    donor_family = _extract_symbol_family(donor_base)
+    target_family = _extractSymbolFamily(target_base)
+    donor_family = _extractSymbolFamily(donor_base)
     if target_family is None or donor_family is None:
         # Keep legacy behavior for non-standard names where family extraction fails.
         return True

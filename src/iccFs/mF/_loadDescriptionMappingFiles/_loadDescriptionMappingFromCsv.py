@@ -1,4 +1,4 @@
-def _load_description_mapping_from_csv(path: str) -> dict[str, str]:
+def _loadDescriptionMappingFromCsv(path: str) -> dict[str, str]:
     raw_desc: dict[str, str] = {}
     if not os.path.exists(path):
         return raw_desc

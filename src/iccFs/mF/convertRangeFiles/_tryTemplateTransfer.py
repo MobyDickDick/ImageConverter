@@ -1,4 +1,4 @@
-def _try_template_transfer(
+def _tryTemplateTransfer(
     *,
     target_row: dict[str, object],
     donor_rows: list[dict[str, object]],
@@ -30,7 +30,7 @@ def _try_template_transfer(
     target_variant = str(target_row.get("variant", "")).upper()
     target_base = str(target_row.get("base", "")).upper()
     target_svg_path = os.path.join(svg_out_dir, f"{target_variant}.svg")
-    target_svg_geometry = _read_svg_geometry(target_svg_path)
+    target_svg_geometry = _readSvgGeometry(target_svg_path)
     target_geom_params = dict(target_svg_geometry[2]) if target_svg_geometry is not None else None
     target_params_raw = target_row.get("params")
     target_alias_refs: set[str] = set()
@@ -39,7 +39,7 @@ def _try_template_transfer(
         if isinstance(alias_values, list):
             target_alias_refs = {str(v).upper() for v in alias_values if str(v).strip()}
     target_is_semantic = isinstance(target_params_raw, dict) and str(target_params_raw.get("mode", "")) == "semantic_badge"
-    ordered_donors = _rank_template_transfer_donors(target_row, donor_rows)
+    ordered_donors = _rankTemplateTransferDonors(target_row, donor_rows)
     if rng is not None and len(ordered_donors) > 1:
         head = ordered_donors[:3]
         tail = ordered_donors[3:]
@@ -50,7 +50,7 @@ def _try_template_transfer(
         donor_base = str(donor.get("base", "")).upper()
         if not donor_variant or donor_variant == target_variant:
             continue
-        if not target_is_semantic and not _template_transfer_donor_family_compatible(
+        if not target_is_semantic and not _templateTransferDonorFamilyCompatible(
             target_base,
             donor_base,
             documented_alias_refs=target_alias_refs,
@@ -64,11 +64,11 @@ def _try_template_transfer(
         except OSError:
             continue
 
-        donor_svg_geometry = _read_svg_geometry(donor_svg_path)
+        donor_svg_geometry = _readSvgGeometry(donor_svg_path)
         donor_geom_params = dict(donor_svg_geometry[2]) if donor_svg_geometry is not None else None
 
         estimated_scales = {
-            rotation: _estimate_template_transfer_scale(
+            rotation: _estimateTemplateTransferScale(
                 img_orig,
                 donor_svg_text,
                 w,
@@ -89,18 +89,18 @@ def _try_template_transfer(
                 and donor_is_semantic
                 and target_geom_params is not None
                 and donor_geom_params is not None
-                and _semantic_transfer_is_compatible(dict(target_params_raw), dict(donor_params_raw))
+                and _semanticTransferIsCompatible(dict(target_params_raw), dict(donor_params_raw))
             ):
                 base_scale = float(min(w, h)) / max(1.0, float(min(int(donor.get("w", w)), int(donor.get("h", h)))))
-                semantic_scales = _semantic_transfer_scale_candidates(base_scale)
+                semantic_scales = _semanticTransferScaleCandidates(base_scale)
                 if rng is not None:
                     keep = semantic_scales[:2]
                     rest = semantic_scales[2:]
                     rng.shuffle(rest)
                     semantic_scales = keep + rest
-                for rotation in _semantic_transfer_rotations(dict(target_params_raw), dict(donor_params_raw)):
+                for rotation in _semanticTransferRotations(dict(target_params_raw), dict(donor_params_raw)):
                     for scale in semantic_scales:
-                        candidate_params = _semantic_transfer_badge_params(
+                        candidate_params = _semanticTransferBadgeParams(
                             dict(donor_geom_params),
                             dict(target_geom_params),
                             target_w=w,
@@ -109,11 +109,11 @@ def _try_template_transfer(
                             scale=float(scale),
                         )
                         try:
-                            candidate_svg = Action.generate_badge_svg(w, h, candidate_params)
-                            rendered = Action.render_svg_to_numpy(candidate_svg, w, h)
+                            candidate_svg = Action.generateBadgeSvg(w, h, candidate_params)
+                            rendered = Action.renderSvgToNumpy(candidate_svg, w, h)
                         except Exception:
                             continue
-                        error = Action.calculate_error(img_orig, rendered)
+                        error = Action.calculateError(img_orig, rendered)
                         error_pp = float(error) / pixel_count
                         if error_pp + 1e-9 < best_error_pp:
                             best_error = float(error)
@@ -128,20 +128,20 @@ def _try_template_transfer(
             # Generic donor SVG transforms can remove those semantics.
             continue
 
-        for rotation, scale in _template_transfer_transform_candidates(
+        for rotation, scale in _templateTransferTransformCandidates(
             target_variant,
             donor_variant,
             estimated_scale_by_rotation=estimated_scales,
         ):
-            candidate_svg = _build_transformed_svg_from_template(
+            candidate_svg = _buildTransformedSvgFromTemplate(
                 donor_svg_text,
                 w,
                 h,
                 rotation_deg=rotation,
                 scale=scale,
             )
-            rendered = Action.render_svg_to_numpy(candidate_svg, w, h)
-            error = Action.calculate_error(img_orig, rendered)
+            rendered = Action.renderSvgToNumpy(candidate_svg, w, h)
+            error = Action.calculateError(img_orig, rendered)
             error_pp = float(error) / pixel_count
             if error_pp + 1e-9 < best_error_pp:
                 best_error = float(error)
@@ -159,14 +159,14 @@ def _try_template_transfer(
     with open(svg_path, "w", encoding="utf-8") as f:
         f.write(best_svg)
 
-    rendered = Action.render_svg_to_numpy(best_svg, w, h)
+    rendered = Action.renderSvgToNumpy(best_svg, w, h)
     mean_delta2 = float(target_row.get("mean_delta2", float("inf")))
     std_delta2 = float(target_row.get("std_delta2", float("inf")))
     if rendered is not None:
-        diff = Action.create_diff_image(img_orig, rendered)
+        diff = Action.createDiffImage(img_orig, rendered)
         cv2.imwrite(os.path.join(diff_out_dir, f"{stem}_diff.png"), diff)
         try:
-            mean_delta2, std_delta2 = Action.calculate_delta2_stats(img_orig, rendered)
+            mean_delta2, std_delta2 = Action.calculateDelta2Stats(img_orig, rendered)
         except Exception:
             mean_delta2 = float(target_row.get("mean_delta2", float("inf")))
             std_delta2 = float(target_row.get("std_delta2", float("inf")))

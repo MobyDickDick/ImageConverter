@@ -4,7 +4,7 @@ import contextlib
 from pathlib import Path
 
 
-def load_optional_module(moduleName: str):
+def loadOptionalModule(moduleName: str):
     """Import optional dependencies, including repo-vendored site-packages."""
     import src.imageCompositeConverter as module
 

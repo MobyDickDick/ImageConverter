@@ -1,4 +1,4 @@
-def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
+def parseArgs(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description=(
             "Verarbeite einen Bildordner entweder im Analysemodus (Bounding-Boxes/JSON) "
@@ -148,7 +148,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         help="Timeout pro isoliertem SVG-Render-Aufruf in Sekunden (Default: 20).",
     )
     parser.add_argument("--_render-svg-subprocess", action="store_true", help=argparse.SUPPRESS)
-    args = parser.parse_args(argv)
+    args = parser.parseArgs(argv)
     if args.iterations_override is not None:
         args.iterations = args.iterations_override
     delattr(args, "iterations_override")

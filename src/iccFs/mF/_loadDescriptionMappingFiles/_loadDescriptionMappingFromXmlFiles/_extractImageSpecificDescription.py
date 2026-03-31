@@ -1,4 +1,4 @@
-def _extract_image_specific_description(entry: ET.Element, image_name: str) -> str:
+def _extractImageSpecificDescription(entry: ET.Element, image_name: str) -> str:
     image_name = str(image_name or "").strip()
     if not image_name:
         return ""

@@ -1,4 +1,4 @@
-def _write_ac08_weak_family_status_report(
+def _writeAc08WeakFamilyStatusReport(
     reports_out_dir: str,
     *,
     selected_variants: list[str],

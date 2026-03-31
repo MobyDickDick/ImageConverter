@@ -1,8 +1,8 @@
-def _shared_partial_range_token(start_ref: str, end_ref: str) -> str:
-    start_token = _normalize_range_token(start_ref)
-    end_token = _normalize_range_token(end_ref)
-    compact_start = _compact_range_token(start_ref)
-    compact_end = _compact_range_token(end_ref)
+def _sharedPartialRangeToken(start_ref: str, end_ref: str) -> str:
+    start_token = _normalizeRangeToken(start_ref)
+    end_token = _normalizeRangeToken(end_ref)
+    compact_start = _compactRangeToken(start_ref)
+    compact_end = _compactRangeToken(end_ref)
     if not start_token or not end_token:
         return ""
     for left, right in ((start_token, end_token), (compact_start, compact_end)):

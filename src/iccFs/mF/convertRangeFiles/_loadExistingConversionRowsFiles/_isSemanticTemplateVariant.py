@@ -1,6 +1,6 @@
-def _is_semantic_template_variant(base_name: str, params: dict[str, object] | None = None) -> bool:
+def _isSemanticTemplateVariant(base_name: str, params: dict[str, object] | None = None) -> bool:
     """Return whether an existing converted SVG should participate as semantic donor."""
-    normalized = str(get_base_name_from_file(base_name or "")).upper()
+    normalized = str(getBaseNameFromFile(base_name or "")).upper()
     if not normalized:
         return False
     if normalized.startswith("AC08") or normalized in {"AR0100"}:
