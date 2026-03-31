@@ -43,7 +43,7 @@ _AC08_BASE_REGRESSION_CASES: tuple[dict[str, str], ...] = (
 )
 
 
-def _iterAvailableSuccessfulConversionVariants(
+def _iter_available_successful_conversion_variants(
     source_dir: Path = SUCCESSFUL_CONVERSIONS_SOURCE_DIR,
 ) -> tuple[str, ...]:
     """Return known source-image variants that can back range expressions."""
@@ -57,7 +57,7 @@ def _iterAvailableSuccessfulConversionVariants(
     return tuple(dict.fromkeys(variants))
 
 
-def _expandSuccessfulConversionManifestEntry(
+def _expand_successful_conversion_manifest_entry(
     entry: str,
     available_variants: tuple[str, ...],
 ) -> tuple[str, ...]:
@@ -91,14 +91,14 @@ def _expandSuccessfulConversionManifestEntry(
     return tuple(selected)
 
 
-def _loadSuccessfulConversions(
+def _load_successful_conversions(
     manifest_path: Path = SUCCESSFUL_CONVERSIONS_MANIFEST,
     source_dir: Path = SUCCESSFUL_CONVERSIONS_SOURCE_DIR,
 ) -> tuple[str, ...]:
     """Load the canonical successful-conversions manifest from disk."""
     if manifest_path.exists():
         variants: list[str] = []
-        available_variants = _iterAvailableSuccessfulConversionVariants(source_dir)
+        available_variants = _iter_available_successful_conversion_variants(source_dir)
         for raw_line in manifest_path.read_text(encoding="utf-8").splitlines():
             line = raw_line.split("#", 1)[0].strip()
             if not line:
@@ -106,18 +106,18 @@ def _loadSuccessfulConversions(
             entry = line.split(";", 1)[0].strip()
             if not entry:
                 continue
-            variants.extend(_expandSuccessfulConversionManifestEntry(entry, available_variants))
+            variants.extend(_expand_successful_conversion_manifest_entry(entry, available_variants))
         normalized = tuple(dict.fromkeys(variants))
         if normalized:
             return normalized
     return SUCCESSFUL_CONVERSIONS_FALLBACK
 
 
-SUCCESSFUL_CONVERSIONS = _loadSuccessfulConversions()
+SUCCESSFUL_CONVERSIONS = _load_successful_conversions()
 AC08_PREVIOUSLY_GOOD_VARIANTS = tuple(variant for variant in SUCCESSFUL_CONVERSIONS if variant.startswith("AC08"))
 
 
-def _buildAc08RegressionCases() -> tuple[dict[str, str], ...]:
+def _build_ac08_regression_cases() -> tuple[dict[str, str], ...]:
     stable_good_cases = [
         {
             "variant": variant,
@@ -132,7 +132,7 @@ def _buildAc08RegressionCases() -> tuple[dict[str, str], ...]:
     return tuple(stable_good_cases + list(_AC08_BASE_REGRESSION_CASES))
 
 
-AC08_REGRESSION_CASES = _buildAc08RegressionCases()
+AC08_REGRESSION_CASES = _build_ac08_regression_cases()
 AC08_REGRESSION_SET_NAME = f"ac08_core_{len(AC08_REGRESSION_CASES)}"
 AC08_REGRESSION_VARIANTS = tuple(case["variant"] for case in AC08_REGRESSION_CASES)
 
@@ -196,7 +196,7 @@ AC08_MITIGATION_STATUS: dict[str, dict[str, str]] = {
 
 
 # Backward-compatible aliases
-_iter_available_successful_conversion_variants = _iterAvailableSuccessfulConversionVariants
-_expand_successful_conversion_manifest_entry = _expandSuccessfulConversionManifestEntry
-_load_successful_conversions = _loadSuccessfulConversions
-_build_ac08_regression_cases = _buildAc08RegressionCases
+_iter_available_successful_conversion_variants = _iter_available_successful_conversion_variants
+_expand_successful_conversion_manifest_entry = _expand_successful_conversion_manifest_entry
+_load_successful_conversions = _load_successful_conversions
+_build_ac08_regression_cases = _build_ac08_regression_cases

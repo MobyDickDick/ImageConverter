@@ -1,5 +1,5 @@
 def analyze_range(folder_path: str, output_root: str | None = None, start_ref: str = "", end_ref: str = "ZZZZZZ") -> str:
-    return analyzeRangeImpl(
+    return analyze_range_impl(
         folder_path=folder_path,
         output_root=output_root,
         start_ref=start_ref,
