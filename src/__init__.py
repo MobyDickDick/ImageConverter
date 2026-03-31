@@ -1,7 +1,6 @@
 """Top-level package for ImageConverter source modules.
 
-Provides compatibility imports for both snake_case and Polish-notation
-(lower-camel) module naming.
+Provides compatibility imports for Polish-notation (lower-camel) module names.
 """
 
 from __future__ import annotations
@@ -12,7 +11,6 @@ from types import ModuleType
 __all__ = [
     "imageCompositeConverter",
     "overviewTiles",
-    "overview_tiles",
 ]
 
 
@@ -21,9 +19,8 @@ def __getattr__(name: str) -> ModuleType:
         module = import_module(".imageCompositeConverter", __name__)
         globals()[name] = module
         return module
-    if name in {"overviewTiles", "overview_tiles"}:
+    if name == "overviewTiles":
         module = import_module(".overviewTiles", __name__)
-        globals()["overviewTiles"] = module
-        globals()["overview_tiles"] = module
+        globals()[name] = module
         return module
     raise AttributeError(f"module {__name__!r} has no attribute {name!r}")

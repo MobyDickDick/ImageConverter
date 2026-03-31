@@ -8,10 +8,10 @@ from pathlib import Path
 
 import pytest
 
-import src.image_composite_converter as image_composite_converter
-from src.image_composite_converter import Action, _clip
+import src.imageCompositeConverter as imageCompositeConverter
+from src.imageCompositeConverter import Action, _clip
 
-conv = image_composite_converter
+conv = imageCompositeConverter
 
 
 def test_cli_entrypoint_runs_as_script_with_help() -> None:
@@ -29,7 +29,7 @@ def test_cli_entrypoint_runs_as_script_with_help() -> None:
 
 def test_vendored_site_packages_dirs_discovers_repo_bundle() -> None:
     """Repo-local bundled site-packages should be discoverable for optional imports."""
-    dirs = image_composite_converter._vendored_site_packages_dirs()
+    dirs = imageCompositeConverter._vendored_site_packages_dirs()
 
     assert any(path.as_posix().endswith(".venv/Lib/site-packages") for path in dirs)
 
@@ -39,9 +39,9 @@ def test_vendored_site_packages_dirs_discovers_vendor_linux_bundle(monkeypatch: 
     vendor_dir = tmp_path / "vendor" / "linux-py310" / "site-packages"
     vendor_dir.mkdir(parents=True)
 
-    monkeypatch.setattr(image_composite_converter, "_optional_dependency_base_dir", lambda: tmp_path)
+    monkeypatch.setattr(imageCompositeConverter, "_optional_dependency_base_dir", lambda: tmp_path)
 
-    dirs = image_composite_converter._vendored_site_packages_dirs()
+    dirs = imageCompositeConverter._vendored_site_packages_dirs()
 
     assert vendor_dir in dirs
 
@@ -53,9 +53,9 @@ def test_vendored_site_packages_dirs_prefers_linux_vendor_on_linux(monkeypatch: 
     vendor_dir.mkdir(parents=True)
     venv_dir.mkdir(parents=True)
 
-    monkeypatch.setattr(image_composite_converter, "_optional_dependency_base_dir", lambda: tmp_path)
+    monkeypatch.setattr(imageCompositeConverter, "_optional_dependency_base_dir", lambda: tmp_path)
 
-    dirs = image_composite_converter._vendored_site_packages_dirs()
+    dirs = imageCompositeConverter._vendored_site_packages_dirs()
 
     assert dirs.index(vendor_dir) < dirs.index(venv_dir)
 
@@ -83,17 +83,17 @@ def test_load_optional_module_recovers_after_failed_partial_package(monkeypatch:
             return expected
         raise ModuleNotFoundError(name)
 
-    monkeypatch.setattr(image_composite_converter, "_optional_dependency_base_dir", lambda: tmp_path)
-    monkeypatch.setattr(image_composite_converter.importlib, "import_module", fake_import)
+    monkeypatch.setattr(imageCompositeConverter, "_optional_dependency_base_dir", lambda: tmp_path)
+    monkeypatch.setattr(imageCompositeConverter.importlib, "import_module", fake_import)
 
-    result = image_composite_converter._load_optional_module("cv2")
+    result = imageCompositeConverter._load_optional_module("cv2")
 
     assert result is expected
     assert len(calls) >= 2
 
 def test_optional_dependency_error_reports_windows_bundle_hint() -> None:
     """Dependency diagnostics should explain when a bundled Windows wheel is unusable on Linux."""
-    message = image_composite_converter._describe_optional_dependency_error(
+    message = imageCompositeConverter._describe_optional_dependency_error(
         "numpy",
         AttributeError("module 'os' has no attribute 'add_dll_directory'"),
         [Path(".venv/Lib/site-packages")],
@@ -264,7 +264,7 @@ def test_semantic_validation_ignores_structural_false_positives_for_plain_circle
 
 def test_source_loads_numpy_before_cv2() -> None:
     """cv2 must be initialized after numpy so vendored OpenCV can resolve its dependency."""
-    source = Path(image_composite_converter.__file__).read_text(encoding="utf-8")
+    source = Path(imageCompositeConverter.__file__).read_text(encoding="utf-8")
 
     numpy_pos = source.index('np = _load_optional_module("numpy")')
     cv2_pos = source.index('cv2 = _load_optional_module("cv2")')
@@ -317,7 +317,7 @@ def test_update_successful_conversions_manifest_keeps_existing_line_without_fres
     )
     manifest_path.write_text(existing_line + "\n", encoding="utf-8")
 
-    updated_path, metrics = image_composite_converter.update_successful_conversions_manifest_with_metrics(
+    updated_path, metrics = imageCompositeConverter.update_successful_conversions_manifest_with_metrics(
         folder_path=str(images_dir),
         svg_out_dir=str(svg_dir),
         reports_out_dir=str(reports_dir),
@@ -363,7 +363,7 @@ def test_update_successful_conversions_manifest_appends_missing_variant_with_met
     monkeypatch.setattr(conv.cv2, "imread", lambda path: source.copy() if path.endswith("AC0002_L.jpg") else None)
     monkeypatch.setattr(conv.Action, "render_svg_to_numpy", staticmethod(lambda _svg, _w, _h: rendered.copy()))
 
-    updated_path, metrics = image_composite_converter.update_successful_conversions_manifest_with_metrics(
+    updated_path, metrics = imageCompositeConverter.update_successful_conversions_manifest_with_metrics(
         folder_path=str(image_dir),
         svg_out_dir=str(svg_dir),
         reports_out_dir=str(reports_dir),
@@ -422,7 +422,7 @@ def test_update_successful_conversions_manifest_rejects_worse_candidate_and_rest
     monkeypatch.setattr(conv.cv2, "imread", lambda path: source.copy() if path.endswith("AC0003_L.jpg") else None)
     monkeypatch.setattr(conv.Action, "render_svg_to_numpy", staticmethod(lambda _svg, _w, _h: rendered.copy()))
 
-    updated_path, metrics = image_composite_converter.update_successful_conversions_manifest_with_metrics(
+    updated_path, metrics = imageCompositeConverter.update_successful_conversions_manifest_with_metrics(
         folder_path=str(image_dir),
         svg_out_dir=str(svg_dir),
         reports_out_dir=str(reports_dir),
@@ -475,7 +475,7 @@ def test_update_successful_conversions_manifest_rejects_worse_candidate_without_
     monkeypatch.setattr(conv.cv2, "imread", lambda path: source.copy() if path.endswith("AC0800_L.jpg") else None)
     monkeypatch.setattr(conv.Action, "render_svg_to_numpy", staticmethod(lambda _svg, _w, _h: rendered.copy()))
 
-    updated_path, metrics = image_composite_converter.update_successful_conversions_manifest_with_metrics(
+    updated_path, metrics = imageCompositeConverter.update_successful_conversions_manifest_with_metrics(
         folder_path=str(image_dir),
         svg_out_dir=str(svg_dir),
         reports_out_dir=str(reports_dir),
@@ -526,7 +526,7 @@ def test_update_successful_conversions_manifest_accepts_better_candidate_and_upd
     monkeypatch.setattr(conv.cv2, "imread", lambda path: source.copy() if path.endswith("AC0004_L.jpg") else None)
     monkeypatch.setattr(conv.Action, "render_svg_to_numpy", staticmethod(lambda _svg, _w, _h: rendered.copy()))
 
-    updated_path, _metrics = image_composite_converter.update_successful_conversions_manifest_with_metrics(
+    updated_path, _metrics = imageCompositeConverter.update_successful_conversions_manifest_with_metrics(
         folder_path=str(image_dir),
         svg_out_dir=str(svg_dir),
         reports_out_dir=str(reports_dir),
@@ -779,10 +779,10 @@ def test_generate_badge_svg_keeps_border_touching_stem_inside_viewbox() -> None:
 
 def test_fit_semantic_badge_uses_border_touch_fallback_for_tiny_plain_ring() -> None:
     """Tiny plain rings that touch every border should expand to the canvas-fitting circle."""
-    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+    if imageCompositeConverter.np is None or imageCompositeConverter.cv2 is None:
         pytest.skip("numpy/cv2 not available in this environment")
 
-    img = image_composite_converter.cv2.imread("artifacts/images_to_convert/AC0800_S.jpg")
+    img = imageCompositeConverter.cv2.imread("artifacts/images_to_convert/AC0800_S.jpg")
     assert img is not None
 
     fitted = Action.make_badge_params(img.shape[1], img.shape[0], "AC0800", img)
@@ -795,11 +795,11 @@ def test_fit_semantic_badge_uses_border_touch_fallback_for_tiny_plain_ring() -> 
 
 def test_fit_semantic_badge_estimates_ring_style_for_plain_circle() -> None:
     """Plain circles should infer ring/center style from raster tones generically."""
-    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+    if imageCompositeConverter.np is None or imageCompositeConverter.cv2 is None:
         pytest.skip("numpy/cv2 not available in this environment")
 
-    np = image_composite_converter.np
-    cv2 = image_composite_converter.cv2
+    np = imageCompositeConverter.np
+    cv2 = imageCompositeConverter.cv2
     if np is None or cv2 is None:
         pytest.skip("numpy/cv2 not available in this environment")
 
@@ -826,7 +826,7 @@ def test_fit_semantic_badge_estimates_ring_style_for_plain_circle() -> None:
 
 def test_parse_semantic_badge_layout_overrides_centers_full_co2_cluster() -> None:
     """Horizontal centering directive should target the full CO₂ cluster."""
-    overrides = image_composite_converter.Reflection._parse_semantic_badge_layout_overrides(
+    overrides = imageCompositeConverter.Reflection._parse_semantic_badge_layout_overrides(
         "CO_2 bezüglich des Kreises horizontal zentriert"
     )
 
@@ -836,7 +836,7 @@ def test_parse_semantic_badge_layout_overrides_centers_full_co2_cluster() -> Non
 
 def test_parse_description_marks_ac0833_with_top_vertical_connector() -> None:
     """AC0833 belongs to the top-connector CO₂ family and must include that semantic element."""
-    ref = image_composite_converter.Reflection({})
+    ref = imageCompositeConverter.Reflection({})
 
     _desc, params = ref.parse_description("AC0833", "AC0833_S.jpg")
 
@@ -845,7 +845,7 @@ def test_parse_description_marks_ac0833_with_top_vertical_connector() -> None:
 
 def test_make_badge_params_ac0833_uses_superscript_index() -> None:
     """AC0833 variants should render CO² with a raised superscript 2."""
-    params = image_composite_converter.Action.make_badge_params(24, 24, "AC0833")
+    params = imageCompositeConverter.Action.make_badge_params(24, 24, "AC0833")
 
     assert params is not None
     assert params.get("text_mode") == "co2"
@@ -854,7 +854,7 @@ def test_make_badge_params_ac0833_uses_superscript_index() -> None:
 
 def test_make_badge_params_ac0833_uses_top_vertical_connector_geometry() -> None:
     """AC0833 defaults must use the top-stem geometry family."""
-    params = image_composite_converter.Action.make_badge_params(24, 24, "AC0833")
+    params = imageCompositeConverter.Action.make_badge_params(24, 24, "AC0833")
 
     assert params is not None
     assert bool(params.get("arm_enabled", False))
@@ -865,17 +865,17 @@ def test_make_badge_params_ac0833_uses_top_vertical_connector_geometry() -> None
 
 def test_finalize_ac0833_keeps_superscript_after_fit() -> None:
     """Final AC0833 tuning should keep superscript settings even after fitting updates."""
-    params = image_composite_converter.Action._apply_co2_label(image_composite_converter.Action._default_ac0813_params(24, 24))
+    params = imageCompositeConverter.Action._apply_co2_label(imageCompositeConverter.Action._default_ac0813_params(24, 24))
     params["co2_index_mode"] = "subscript"
 
-    tuned = image_composite_converter.Action._finalize_ac08_style("AC0833_M", params)
+    tuned = imageCompositeConverter.Action._finalize_ac08_style("AC0833_M", params)
 
     assert tuned.get("co2_index_mode") == "superscript"
 
 
 def test_parse_description_marks_ac0813_with_top_vertical_connector() -> None:
     """AC0813 belongs to the top-connector family and must encode that semantic element."""
-    ref = image_composite_converter.Reflection({})
+    ref = imageCompositeConverter.Reflection({})
 
     _desc, params = ref.parse_description("AC0813", "AC0813_L.jpg")
 
@@ -884,7 +884,7 @@ def test_parse_description_marks_ac0813_with_top_vertical_connector() -> None:
 
 def test_parse_description_marks_ac0838_with_right_horizontal_arm() -> None:
     """AC0838 belongs to the right-arm VOC family and must include that semantic element."""
-    ref = image_composite_converter.Reflection({})
+    ref = imageCompositeConverter.Reflection({})
 
     _desc, params = ref.parse_description("AC0838", "AC0838_L.jpg")
 
@@ -893,7 +893,7 @@ def test_parse_description_marks_ac0838_with_right_horizontal_arm() -> None:
 
 def test_make_badge_params_ac0838_uses_right_horizontal_connector_geometry() -> None:
     """AC0838 defaults must follow the right-arm connector family."""
-    params = image_composite_converter.Action.make_badge_params(24, 24, "AC0838")
+    params = imageCompositeConverter.Action.make_badge_params(24, 24, "AC0838")
 
     assert params is not None
     assert bool(params.get("arm_enabled", False))
@@ -904,7 +904,7 @@ def test_make_badge_params_ac0838_uses_right_horizontal_connector_geometry() -> 
 
 def test_make_badge_params_ac0835_uses_right_horizontal_connector_geometry() -> None:
     """AC0835 defaults must follow the right-arm VOC connector family."""
-    params = image_composite_converter.Action.make_badge_params(24, 24, "AC0835")
+    params = imageCompositeConverter.Action.make_badge_params(24, 24, "AC0835")
 
     assert params is not None
     assert bool(params.get("arm_enabled", False))
@@ -915,7 +915,7 @@ def test_make_badge_params_ac0835_uses_right_horizontal_connector_geometry() -> 
 
 def test_parse_description_marks_ac0800_as_plain_ring_family() -> None:
     """AC0800 should remain a semantic plain ring even without text clues in the XML."""
-    ref = image_composite_converter.Reflection({})
+    ref = imageCompositeConverter.Reflection({})
 
     _desc, params = ref.parse_description("AC0800", "AC0800_M.jpg")
 
@@ -926,7 +926,7 @@ def test_parse_description_marks_ac0800_as_plain_ring_family() -> None:
 
 def test_parse_description_recognizes_ac08_family_when_given_variant_name() -> None:
     """Variant stems like AC0831_L must still inherit AC0831 semantic text family rules."""
-    ref = image_composite_converter.Reflection({})
+    ref = imageCompositeConverter.Reflection({})
 
     _desc, params = ref.parse_description("AC0831_L", "AC0831_L.jpg")
 
@@ -937,7 +937,7 @@ def test_parse_description_recognizes_ac08_family_when_given_variant_name() -> N
 
 def test_parse_description_falls_back_to_variant_filename_when_base_name_missing() -> None:
     """Semantic family rules must still apply when only the variant filename carries the symbol stem."""
-    ref = image_composite_converter.Reflection({})
+    ref = imageCompositeConverter.Reflection({})
 
     _desc, params = ref.parse_description("", "ac0831_l.jpg")
 
@@ -950,7 +950,7 @@ def test_parse_description_recognizes_co2_with_caret_notation() -> None:
     """Descriptions using CO^2 notation must still activate the CO₂ semantic label."""
     raw = {"AC0831": "die Beschriftung fehlt ($CO^2$)."}
 
-    _desc, params = image_composite_converter.Reflection(raw).parse_description("AC0831_L", "AC0831_L.jpg")
+    _desc, params = imageCompositeConverter.Reflection(raw).parse_description("AC0831_L", "AC0831_L.jpg")
 
     assert params["mode"] == "semantic_badge"
     assert "SEMANTIC: Kreis + Buchstabe CO_2" in list(params.get("elements", []))
@@ -959,10 +959,10 @@ def test_parse_description_recognizes_co2_with_caret_notation() -> None:
 
 def test_parse_description_does_not_misread_ac0130_text_as_top_source_ref() -> None:
     """AC0130 mentions 'oben mitte' and 'in beiden Diagonalen' but has no donor image reference."""
-    raw = image_composite_converter._load_description_mapping(
+    raw = imageCompositeConverter._load_description_mapping(
         "artifacts/descriptions/Finale_Wurzelformen_V3.xml"
     )
-    ref = image_composite_converter.Reflection(raw)
+    ref = imageCompositeConverter.Reflection(raw)
 
     _desc, params = ref.parse_description("AC0130", "AC0130.jpg")
 
@@ -1024,7 +1024,7 @@ def test_scale_badge_params_reanchors_vertical_stem_after_circle_canvas_fit() ->
     anchor["template_stem_top"] = float(anchor["stem_top"])
     anchor["template_stem_bottom"] = float(anchor["stem_bottom"])
 
-    scaled = image_composite_converter._scale_badge_params(anchor, 25, 45, 20, 35)
+    scaled = imageCompositeConverter._scale_badge_params(anchor, 25, 45, 20, 35)
 
     assert float(scaled["cx"]) == pytest.approx(10.0)
     assert float(scaled["cy"]) == pytest.approx(9.9167, abs=0.02)
@@ -1162,10 +1162,10 @@ def test_finalize_ac0870_strips_transferred_connector_geometry() -> None:
 
 def test_validate_badge_by_elements_keeps_ac0800_l_centered_and_bounded() -> None:
     """AC0800_L should not drift left/right or overgrow during circle-only validation."""
-    if image_composite_converter.np is None or image_composite_converter.cv2 is None or image_composite_converter.fitz is None:
+    if imageCompositeConverter.np is None or imageCompositeConverter.cv2 is None or imageCompositeConverter.fitz is None:
         pytest.skip("numpy/cv2/fitz not available in this environment")
 
-    img = image_composite_converter.cv2.imread("artifacts/images_to_convert/AC0800_L.jpg")
+    img = imageCompositeConverter.cv2.imread("artifacts/images_to_convert/AC0800_L.jpg")
     assert img is not None
 
     params = Action.make_badge_params(img.shape[1], img.shape[0], "AC0800", img)
@@ -1183,10 +1183,10 @@ def test_validate_badge_by_elements_keeps_ac0800_l_centered_and_bounded() -> Non
 
 def test_validate_badge_by_elements_keeps_ac0800_s_at_template_radius_floor() -> None:
     """AC0800_S should stay concentric without shrinking below the original template radius."""
-    if image_composite_converter.np is None or image_composite_converter.cv2 is None or image_composite_converter.fitz is None:
+    if imageCompositeConverter.np is None or imageCompositeConverter.cv2 is None or imageCompositeConverter.fitz is None:
         pytest.skip("numpy/cv2/fitz not available in this environment")
 
-    img = image_composite_converter.cv2.imread("artifacts/images_to_convert/AC0800_S.jpg")
+    img = imageCompositeConverter.cv2.imread("artifacts/images_to_convert/AC0800_S.jpg")
     assert img is not None
 
     params = Action.make_badge_params(img.shape[1], img.shape[0], "AC0800", img)
@@ -1204,10 +1204,10 @@ def test_validate_badge_by_elements_keeps_ac0800_s_at_template_radius_floor() ->
 
 def test_make_badge_params_reanchors_ac0811_l_stem_after_template_center_lock() -> None:
     """AC0811_L should keep its stem attached to the circle after template recentering."""
-    if image_composite_converter.cv2 is None:
+    if imageCompositeConverter.cv2 is None:
         pytest.skip("cv2 not available in this environment")
 
-    img = image_composite_converter.cv2.imread("artifacts/images_to_convert/AC0811_L.jpg")
+    img = imageCompositeConverter.cv2.imread("artifacts/images_to_convert/AC0811_L.jpg")
     assert img is not None
 
     defaults = Action._default_ac0811_params(img.shape[1], img.shape[0])
@@ -1305,7 +1305,7 @@ def test_finalize_right_connector_voc_family_preserves_existing_arm_state() -> N
 
 def test_fit_ac0814_medium_plain_badge_allows_bounded_left_center_correction(monkeypatch: pytest.MonkeyPatch) -> None:
     """AC0814_M should keep the traced circle from drifting right versus the source raster."""
-    if image_composite_converter.np is None:
+    if imageCompositeConverter.np is None:
         pytest.skip("numpy not available in this environment")
 
     defaults = Action._default_ac0814_params(35, 20)
@@ -1319,7 +1319,7 @@ def test_fit_ac0814_medium_plain_badge_allows_bounded_left_center_correction(mon
 
     monkeypatch.setattr(Action, "_fit_semantic_badge_from_image", staticmethod(fake_fit))
 
-    np = image_composite_converter.np
+    np = imageCompositeConverter.np
     img = np.full((20, 35, 3), 220, dtype=np.uint8)
     fitted = Action._fit_ac0814_params_from_image(img, defaults)
     finalized = Action._finalize_ac08_style("AC0814_M", dict(fitted))
@@ -1366,10 +1366,10 @@ def test_finalize_vertical_connector_voc_family_preserves_existing_stem_state() 
 
 def test_validate_badge_logs_small_variant_mode(monkeypatch: pytest.MonkeyPatch) -> None:
     """Validation logs should explicitly state when the `_S` small-variant mode is active."""
-    if image_composite_converter.np is None:
+    if imageCompositeConverter.np is None:
         pytest.skip("numpy not available in this environment")
 
-    np = image_composite_converter.np
+    np = imageCompositeConverter.np
     if np is None:
         pytest.skip("numpy not available in this environment")
 
@@ -1394,10 +1394,10 @@ def test_validate_badge_logs_small_variant_mode(monkeypatch: pytest.MonkeyPatch)
 
 def test_fit_semantic_badge_records_template_center_for_finalize_locking() -> None:
     """Semantic fit should persist template center so finalize can restore canonical centering."""
-    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+    if imageCompositeConverter.np is None or imageCompositeConverter.cv2 is None:
         pytest.skip("numpy/cv2 not available in this environment")
 
-    np = image_composite_converter.np
+    np = imageCompositeConverter.np
     if np is None:
         pytest.skip("numpy not available in this environment")
     img = np.full((20, 20, 3), 240, dtype=np.uint8)
@@ -1409,13 +1409,13 @@ def test_fit_semantic_badge_records_template_center_for_finalize_locking() -> No
     assert float(params["template_circle_cy"]) == float(defaults["cy"])
 def test_fit_semantic_badge_prevents_over_shrinking_plain_text_badge_circle(monkeypatch: pytest.MonkeyPatch) -> None:
     """Circle fitting should keep a minimum template-relative radius for plain text badges."""
-    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+    if imageCompositeConverter.np is None or imageCompositeConverter.cv2 is None:
         pytest.skip("numpy/cv2 not available in this environment")
 
-    np = image_composite_converter.np
+    np = imageCompositeConverter.np
     if np is None:
         pytest.skip("numpy not available in this environment")
-    cv2 = image_composite_converter.cv2
+    cv2 = imageCompositeConverter.cv2
     img = np.full((20, 20, 3), 220, dtype=np.uint8)
 
     defaults = Action._apply_co2_label(Action._default_ac0870_params(20, 20))
@@ -1434,13 +1434,13 @@ def test_fit_semantic_badge_prevents_over_shrinking_plain_text_badge_circle(monk
 
 def test_fit_semantic_badge_allows_lower_floor_when_connector_present(monkeypatch: pytest.MonkeyPatch) -> None:
     """Connector badges should use a looser minimum-ratio floor than plain centered badges."""
-    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+    if imageCompositeConverter.np is None or imageCompositeConverter.cv2 is None:
         pytest.skip("numpy/cv2 not available in this environment")
 
-    np = image_composite_converter.np
+    np = imageCompositeConverter.np
     if np is None:
         pytest.skip("numpy not available in this environment")
-    cv2 = image_composite_converter.cv2
+    cv2 = imageCompositeConverter.cv2
     img = np.full((20, 20, 3), 220, dtype=np.uint8)
 
     defaults = {
@@ -1471,10 +1471,10 @@ def test_fit_semantic_badge_allows_lower_floor_when_connector_present(monkeypatc
 
 def test_make_badge_params_passes_text_semantics_into_connector_fit(monkeypatch: pytest.MonkeyPatch) -> None:
     """Connector+text families must be fit with labeled defaults, not textless templates."""
-    if image_composite_converter.np is None:
+    if imageCompositeConverter.np is None:
         pytest.skip("numpy not available in this environment")
 
-    np = image_composite_converter.np
+    np = imageCompositeConverter.np
     img = np.full((20, 36, 3), 220, dtype=np.uint8)
     seen: list[dict] = []
 
@@ -1494,10 +1494,10 @@ def test_make_badge_params_passes_text_semantics_into_connector_fit(monkeypatch:
 
 def test_make_badge_params_passes_voc_semantics_into_vertical_fit(monkeypatch: pytest.MonkeyPatch) -> None:
     """VOC connector families must preserve text-aware defaults during image fitting."""
-    if image_composite_converter.np is None:
+    if imageCompositeConverter.np is None:
         pytest.skip("numpy not available in this environment")
 
-    np = image_composite_converter.np
+    np = imageCompositeConverter.np
     img = np.full((30, 20, 3), 220, dtype=np.uint8)
     seen: list[dict] = []
 
@@ -1517,13 +1517,13 @@ def test_make_badge_params_passes_voc_semantics_into_vertical_fit(monkeypatch: p
 
 def test_fit_semantic_badge_rejects_far_off_hough_center_for_ac08_variants(monkeypatch: pytest.MonkeyPatch) -> None:
     """Hough candidates far from template center should not override semantic circle placement."""
-    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+    if imageCompositeConverter.np is None or imageCompositeConverter.cv2 is None:
         pytest.skip("numpy/cv2 not available in this environment")
 
-    np = image_composite_converter.np
+    np = imageCompositeConverter.np
     if np is None:
         pytest.skip("numpy not available in this environment")
-    cv2 = image_composite_converter.cv2
+    cv2 = imageCompositeConverter.cv2
     img = np.full((15, 25, 3), 220, dtype=np.uint8)
 
     defaults = Action._default_ac0812_params(25, 15)
@@ -1542,13 +1542,13 @@ def test_fit_semantic_badge_rejects_far_off_hough_center_for_ac08_variants(monke
 
 def test_fit_semantic_badge_keeps_near_template_hough_candidate(monkeypatch: pytest.MonkeyPatch) -> None:
     """A near-template Hough hit should still be accepted and applied."""
-    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+    if imageCompositeConverter.np is None or imageCompositeConverter.cv2 is None:
         pytest.skip("numpy/cv2 not available in this environment")
 
-    np = image_composite_converter.np
+    np = imageCompositeConverter.np
     if np is None:
         pytest.skip("numpy not available in this environment")
-    cv2 = image_composite_converter.cv2
+    cv2 = imageCompositeConverter.cv2
     img = np.full((15, 25, 3), 220, dtype=np.uint8)
 
     defaults = Action._default_ac0812_params(25, 15)
@@ -1613,7 +1613,7 @@ def test_circle_bounds_respect_canvas_for_locked_center() -> None:
 def test_fit_ac0812_does_not_cap_radius_to_too_small_template(monkeypatch: pytest.MonkeyPatch) -> None:
     """AC0812 fitting should allow radius growth above small defaults when image fit supports it."""
 
-    np = image_composite_converter.np
+    np = imageCompositeConverter.np
     if np is None:
         pytest.skip("numpy not available in this environment")
     img = np.full((25, 45, 3), 240, dtype=np.uint8)
@@ -1652,13 +1652,13 @@ def test_run_iteration_pipeline_element_validation_log_contains_run_meta(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     """Element validation logs should always include run metadata per execution."""
-    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+    if imageCompositeConverter.np is None or imageCompositeConverter.cv2 is None:
         pytest.skip("numpy/cv2 not available in this environment")
 
-    np = image_composite_converter.np
+    np = imageCompositeConverter.np
     if np is None:
         pytest.skip("numpy not available in this environment")
-    cv2 = image_composite_converter.cv2
+    cv2 = imageCompositeConverter.cv2
 
     img = np.full((12, 20, 3), 240, dtype=np.uint8)
     img_path = tmp_path / "AC0812_L.jpg"
@@ -1670,7 +1670,7 @@ def test_run_iteration_pipeline_element_validation_log_contains_run_meta(
     assert cv2.imwrite(str(img_path), img)
 
     monkeypatch.setattr(
-        image_composite_converter.Reflection,
+        imageCompositeConverter.Reflection,
         "parse_description",
         lambda *_args, **_kwargs: (
             "semantic",
@@ -1678,44 +1678,44 @@ def test_run_iteration_pipeline_element_validation_log_contains_run_meta(
         ),
     )
     monkeypatch.setattr(
-        image_composite_converter.Action,
+        imageCompositeConverter.Action,
         "make_badge_params",
-        staticmethod(lambda *_args, **_kwargs: image_composite_converter.Action._default_ac0812_params(20, 12)),
+        staticmethod(lambda *_args, **_kwargs: imageCompositeConverter.Action._default_ac0812_params(20, 12)),
     )
     monkeypatch.setattr(
-        image_composite_converter.Action,
+        imageCompositeConverter.Action,
         "validate_semantic_description_alignment",
         staticmethod(lambda *_args, **_kwargs: []),
     )
     monkeypatch.setattr(
-        image_composite_converter.Action,
+        imageCompositeConverter.Action,
         "validate_badge_by_elements",
         staticmethod(lambda *_args, **_kwargs: ["ok: element pass"]),
     )
     monkeypatch.setattr(
-        image_composite_converter.Action,
+        imageCompositeConverter.Action,
         "_enforce_semantic_connector_expectation",
         staticmethod(lambda _base, _elements, p, _w, _h: p),
     )
     monkeypatch.setattr(
-        image_composite_converter.Action,
+        imageCompositeConverter.Action,
         "generate_badge_svg",
         staticmethod(lambda w, h, _p: f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}"/>'),
     )
     monkeypatch.setattr(
-        image_composite_converter.Action,
+        imageCompositeConverter.Action,
         "render_svg_to_numpy",
         staticmethod(lambda _svg, w, h: np.full((h, w, 3), 240, dtype=np.uint8)),
     )
     monkeypatch.setattr(
-        image_composite_converter.Action,
+        imageCompositeConverter.Action,
         "create_diff_image",
         staticmethod(lambda a, _b: a.copy()),
     )
 
-    image_composite_converter.Action.STOCHASTIC_RUN_SEED = 123
-    image_composite_converter.Action.STOCHASTIC_SEED_OFFSET = 7
-    res = image_composite_converter.run_iteration_pipeline(
+    imageCompositeConverter.Action.STOCHASTIC_RUN_SEED = 123
+    imageCompositeConverter.Action.STOCHASTIC_SEED_OFFSET = 7
+    res = imageCompositeConverter.run_iteration_pipeline(
         str(img_path),
         str(csv_path),
         2,
@@ -1739,13 +1739,13 @@ def test_run_iteration_pipeline_writes_failed_best_attempt_artifacts_for_semanti
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     """Semantic mismatches should still emit a best-effort SVG artifact."""
-    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+    if imageCompositeConverter.np is None or imageCompositeConverter.cv2 is None:
         pytest.skip("numpy/cv2 not available in this environment")
 
-    np = image_composite_converter.np
+    np = imageCompositeConverter.np
     if np is None:
         pytest.skip("numpy not available in this environment")
-    cv2 = image_composite_converter.cv2
+    cv2 = imageCompositeConverter.cv2
 
     img = np.full((12, 20, 3), 240, dtype=np.uint8)
     img_path = tmp_path / "AC0814_L.jpg"
@@ -1757,7 +1757,7 @@ def test_run_iteration_pipeline_writes_failed_best_attempt_artifacts_for_semanti
     assert cv2.imwrite(str(img_path), img)
 
     monkeypatch.setattr(
-        image_composite_converter.Reflection,
+        imageCompositeConverter.Reflection,
         "parse_description",
         lambda *_args, **_kwargs: (
             "semantic",
@@ -1765,17 +1765,17 @@ def test_run_iteration_pipeline_writes_failed_best_attempt_artifacts_for_semanti
         ),
     )
     monkeypatch.setattr(
-        image_composite_converter.Action,
+        imageCompositeConverter.Action,
         "make_badge_params",
-        staticmethod(lambda *_args, **_kwargs: image_composite_converter.Action._default_ac0814_params(20, 12)),
+        staticmethod(lambda *_args, **_kwargs: imageCompositeConverter.Action._default_ac0814_params(20, 12)),
     )
     monkeypatch.setattr(
-        image_composite_converter.Action,
+        imageCompositeConverter.Action,
         "validate_semantic_description_alignment",
         staticmethod(lambda *_args, **_kwargs: ["circle missing"]),
     )
     monkeypatch.setattr(
-        image_composite_converter.Action,
+        imageCompositeConverter.Action,
         "_detect_semantic_primitives",
         staticmethod(
             lambda *_args, **_kwargs: {
@@ -1790,22 +1790,22 @@ def test_run_iteration_pipeline_writes_failed_best_attempt_artifacts_for_semanti
         ),
     )
     monkeypatch.setattr(
-        image_composite_converter.Action,
+        imageCompositeConverter.Action,
         "generate_badge_svg",
         staticmethod(lambda w, h, _p: f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}"/>'),
     )
     monkeypatch.setattr(
-        image_composite_converter.Action,
+        imageCompositeConverter.Action,
         "render_svg_to_numpy",
         staticmethod(lambda _svg, w, h: np.full((h, w, 3), 245, dtype=np.uint8)),
     )
     monkeypatch.setattr(
-        image_composite_converter.Action,
+        imageCompositeConverter.Action,
         "create_diff_image",
         staticmethod(lambda a, _b: a.copy()),
     )
 
-    res = image_composite_converter.run_iteration_pipeline(
+    res = imageCompositeConverter.run_iteration_pipeline(
         str(img_path),
         str(csv_path),
         2,
@@ -1832,7 +1832,7 @@ def test_write_semantic_audit_report_persists_csv_and_json(tmp_path: Path) -> No
     reports_dir = tmp_path / "reports"
     reports_dir.mkdir()
     rows = [
-        image_composite_converter._semantic_audit_record(
+        imageCompositeConverter._semantic_audit_record(
             base_name="AC0811",
             filename="AC0811_L.jpg",
             description_fragments=[
@@ -1846,7 +1846,7 @@ def test_write_semantic_audit_report_persists_csv_and_json(tmp_path: Path) -> No
             status="semantic_ok",
             semantic_priority_order=["family_rule", "layout_override", "description_heuristic"],
         ),
-        image_composite_converter._semantic_audit_record(
+        imageCompositeConverter._semantic_audit_record(
             base_name="AC0814",
             filename="AC0814_S.jpg",
             description_fragments=[{"source": "base_name", "key": "AC0814", "text": "Kreis ohne Buchstabe"}],
@@ -1861,7 +1861,7 @@ def test_write_semantic_audit_report_persists_csv_and_json(tmp_path: Path) -> No
         ),
     ]
 
-    image_composite_converter._write_semantic_audit_report(str(reports_dir), rows)
+    imageCompositeConverter._write_semantic_audit_report(str(reports_dir), rows)
 
     csv_text = (reports_dir / "semantic_audit_ac0811_ac0814.csv").read_text(encoding="utf-8")
     assert "AC0811_L.jpg" in csv_text
@@ -1882,13 +1882,13 @@ def test_run_iteration_pipeline_breaks_early_on_flat_composite_error(
     capsys: pytest.CaptureFixture[str],
 ) -> None:
     """Composite search should stop early once the diff error is flat for long enough."""
-    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+    if imageCompositeConverter.np is None or imageCompositeConverter.cv2 is None:
         pytest.skip("numpy/cv2 not available in this environment")
 
-    np = image_composite_converter.np
+    np = imageCompositeConverter.np
     if np is None:
         pytest.skip("numpy not available in this environment")
-    cv2 = image_composite_converter.cv2
+    cv2 = imageCompositeConverter.cv2
 
     img = np.full((8, 8, 3), 200, dtype=np.uint8)
     img_path = tmp_path / "AC0001_L.jpg"
@@ -1899,7 +1899,7 @@ def test_run_iteration_pipeline_breaks_early_on_flat_composite_error(
     assert cv2.imwrite(str(img_path), img)
 
     monkeypatch.setattr(
-        image_composite_converter.Reflection,
+        imageCompositeConverter.Reflection,
         "parse_description",
         lambda *_args, **_kwargs: (
             "composite",
@@ -1907,27 +1907,27 @@ def test_run_iteration_pipeline_breaks_early_on_flat_composite_error(
         ),
     )
     monkeypatch.setattr(
-        image_composite_converter.Action,
+        imageCompositeConverter.Action,
         "generate_composite_svg",
         staticmethod(lambda *_args, **_kwargs: '<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"/>'),
     )
     monkeypatch.setattr(
-        image_composite_converter.Action,
+        imageCompositeConverter.Action,
         "render_svg_to_numpy",
         staticmethod(lambda _svg, w, h: np.full((h, w, 3), 200, dtype=np.uint8)),
     )
     monkeypatch.setattr(
-        image_composite_converter.Action,
+        imageCompositeConverter.Action,
         "calculate_error",
         staticmethod(lambda *_args, **_kwargs: 42.0),
     )
     monkeypatch.setattr(
-        image_composite_converter.Action,
+        imageCompositeConverter.Action,
         "create_diff_image",
         staticmethod(lambda a, _b: a.copy()),
     )
 
-    res = image_composite_converter.run_iteration_pipeline(
+    res = imageCompositeConverter.run_iteration_pipeline(
         str(img_path),
         str(csv_path),
         128,
@@ -1949,10 +1949,10 @@ def test_run_iteration_pipeline_breaks_early_on_flat_composite_error(
 
 def test_validate_semantic_description_alignment_requires_co2_text_region(monkeypatch: pytest.MonkeyPatch) -> None:
     """CO₂ semantic badges should fail when no usable foreground text region exists."""
-    if image_composite_converter.np is None:
+    if imageCompositeConverter.np is None:
         pytest.skip("numpy not available in this environment")
 
-    np = image_composite_converter.np
+    np = imageCompositeConverter.np
     assert np is not None
     img = np.full((20, 20, 3), 255, dtype=np.uint8)
     badge_params = Action._apply_co2_label(Action._default_ac0870_params(20, 20))
@@ -1975,13 +1975,13 @@ def test_validate_semantic_description_alignment_requires_co2_text_region(monkey
 
 def test_validate_semantic_description_alignment_rejects_non_semantic_cross_shape() -> None:
     """A plain X-shape should not pass as circle+horizontal-line+CO₂ semantic badge."""
-    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+    if imageCompositeConverter.np is None or imageCompositeConverter.cv2 is None:
         pytest.skip("numpy/cv2 not available in this environment")
 
-    np = image_composite_converter.np
+    np = imageCompositeConverter.np
     if np is None:
         pytest.skip("numpy not available in this environment")
-    cv2 = image_composite_converter.cv2
+    cv2 = imageCompositeConverter.cv2
 
     h, w = 78, 51
     img = np.full((h, w, 3), 255, dtype=np.uint8)
@@ -2003,11 +2003,11 @@ def test_validate_semantic_description_alignment_rejects_non_semantic_cross_shap
 
 def test_detect_semantic_primitives_ignores_t_glyph_bar_inside_circle() -> None:
     """A centered T glyph inside a circle should not be misread as an external arm."""
-    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+    if imageCompositeConverter.np is None or imageCompositeConverter.cv2 is None:
         pytest.skip("numpy/cv2 not available in this environment")
 
-    np = image_composite_converter.np
-    cv2 = image_composite_converter.cv2
+    np = imageCompositeConverter.np
+    cv2 = imageCompositeConverter.cv2
 
     img = np.full((36, 36, 3), 255, dtype=np.uint8)
     cv2.circle(img, (18, 18), 10, (150, 150, 150), 2)
@@ -2023,10 +2023,10 @@ def test_detect_semantic_primitives_ignores_t_glyph_bar_inside_circle() -> None:
 
 def test_validate_semantic_description_alignment_accepts_ac0813_vertical_connector() -> None:
     """Vertical connector families should not fail semantic validation due to arm hallucinations."""
-    if image_composite_converter.cv2 is None:
+    if imageCompositeConverter.cv2 is None:
         pytest.skip("cv2 not available in this environment")
 
-    img = image_composite_converter.cv2.imread("artifacts/images_to_convert/AC0813_L.jpg")
+    img = imageCompositeConverter.cv2.imread("artifacts/images_to_convert/AC0813_L.jpg")
     assert img is not None
 
     badge_params = Action.make_badge_params(img.shape[1], img.shape[0], "AC0813", img)
@@ -2043,10 +2043,10 @@ def test_validate_semantic_description_alignment_ignores_structural_stem_for_lef
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     """Left-arm families should not fail when structural detection hallucinates a vertical stem."""
-    if image_composite_converter.np is None:
+    if imageCompositeConverter.np is None:
         pytest.skip("numpy not available in this environment")
 
-    np = image_composite_converter.np
+    np = imageCompositeConverter.np
     img = np.full((16, 24, 3), 240, dtype=np.uint8)
     badge_params = Action._default_ac0812_params(24, 16)
 
@@ -2079,66 +2079,66 @@ def test_validate_semantic_description_alignment_ignores_structural_stem_for_lef
 
 def test_in_requested_range_accepts_cross_prefix_span() -> None:
     """Ranges spanning prefixes (e.g. AC..ZZ) should include matching intermediate symbols."""
-    assert image_composite_converter._in_requested_range("AC0812_L.jpg", "AC0000", "ZZ9999") is True
+    assert imageCompositeConverter._in_requested_range("AC0812_L.jpg", "AC0000", "ZZ9999") is True
 
 
 def test_in_requested_range_handles_reversed_bounds() -> None:
     """If CLI bounds are swapped, filtering should still behave as an inclusive range."""
-    assert image_composite_converter._in_requested_range("AC0812_L.jpg", "ZZ9999", "AC0000") is True
+    assert imageCompositeConverter._in_requested_range("AC0812_L.jpg", "ZZ9999", "AC0000") is True
 
 
 def test_in_requested_range_excludes_values_outside_span() -> None:
     """Symbols before the lower bound should still be filtered out."""
-    assert image_composite_converter._in_requested_range("AB9999_L.jpg", "AC0000", "ZZ9999") is False
+    assert imageCompositeConverter._in_requested_range("AB9999_L.jpg", "AC0000", "ZZ9999") is False
 
 
 
 
 def test_in_requested_range_includes_non_reference_filenames() -> None:
     """Non XX0000 filenames should not be filtered out by broad cross-prefix range settings."""
-    assert image_composite_converter._in_requested_range("LOGO.JPG", "AC0000", "ZZ9999") is True
+    assert imageCompositeConverter._in_requested_range("LOGO.JPG", "AC0000", "ZZ9999") is True
 
 
 def test_in_requested_range_excludes_non_reference_filenames_for_exact_family_filter() -> None:
     """Exact family-specific filters should not pull unrelated helper files into the batch."""
-    assert image_composite_converter._in_requested_range("z_231.jpg", "AC0811", "AC0811") is False
+    assert imageCompositeConverter._in_requested_range("z_231.jpg", "AC0811", "AC0811") is False
 
 
 def test_in_requested_range_supports_three_letter_prefixes() -> None:
     """Three-letter families such as DLG should respect exact range filtering."""
-    assert image_composite_converter._in_requested_range("DLG0030.jpg", "AC0811", "AC0811") is False
-    assert image_composite_converter._in_requested_range("DLG0030.jpg", "DLG0030", "DLG0030") is True
+    assert imageCompositeConverter._in_requested_range("DLG0030.jpg", "AC0811", "AC0811") is False
+    assert imageCompositeConverter._in_requested_range("DLG0030.jpg", "DLG0030", "DLG0030") is True
 
 
 def test_in_requested_range_treats_identical_short_bounds_as_prefix_filter() -> None:
     """Short identical bounds should include every symbol whose base name starts with that token."""
-    assert image_composite_converter._in_requested_range("AC0814_L.jpg", "AC081", "AC081") is True
-    assert image_composite_converter._in_requested_range("AC0813_M.jpg", "AC081", "AC081") is True
-    assert image_composite_converter._in_requested_range("AC0820_L.jpg", "AC081", "AC081") is False
+    assert imageCompositeConverter._in_requested_range("AC0814_L.jpg", "AC081", "AC081") is True
+    assert imageCompositeConverter._in_requested_range("AC0813_M.jpg", "AC081", "AC081") is True
+    assert imageCompositeConverter._in_requested_range("AC0820_L.jpg", "AC081", "AC081") is False
 
 
 def test_in_requested_range_partial_filter_ignores_size_suffix_in_bounds() -> None:
     """Partial fallback filters should still find AC0800_* when users enter AC080_L..AC080_L."""
-    assert image_composite_converter._in_requested_range("AC0800_L.jpg", "AC080_L", "AC080_L") is True
+    assert imageCompositeConverter._in_requested_range("AC0800_L.jpg", "AC080_L", "AC080_L") is True
 
 
 def test_in_requested_range_supports_one_sided_bounds() -> None:
     """When one bound is invalid, the valid bound should still be applied."""
-    assert image_composite_converter._in_requested_range("AC0812_L.jpg", "", "AC0812") is True
-    assert image_composite_converter._in_requested_range("AC0813_L.jpg", "", "AC0812") is False
+    assert imageCompositeConverter._in_requested_range("AC0812_L.jpg", "", "AC0812") is True
+    assert imageCompositeConverter._in_requested_range("AC0813_L.jpg", "", "AC0812") is False
 
 def test_convert_range_does_not_skip_variants_in_quality_passes(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     """Global quality passes should keep all variants eligible (no per-variant skip lock)."""
-    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+    if imageCompositeConverter.np is None or imageCompositeConverter.cv2 is None:
         pytest.skip("numpy/cv2 not available in this environment")
 
-    np = image_composite_converter.np
+    np = imageCompositeConverter.np
     if np is None:
         pytest.skip("numpy not available in this environment")
-    cv2 = image_composite_converter.cv2
+    cv2 = imageCompositeConverter.cv2
 
     images_dir = tmp_path / "images"
     images_dir.mkdir()
@@ -2147,19 +2147,19 @@ def test_convert_range_does_not_skip_variants_in_quality_passes(
     for name in ("AC0812_L.jpg", "AC0812_M.jpg"):
         assert cv2.imwrite(str(images_dir / name), np.full((10, 10, 3), 230, dtype=np.uint8))
 
-    monkeypatch.setattr(image_composite_converter, "_in_requested_range", lambda *_args, **_kwargs: True)
-    monkeypatch.setattr(image_composite_converter, "_load_quality_config", lambda *_args, **_kwargs: {})
-    monkeypatch.setattr(image_composite_converter, "_write_quality_pass_report", lambda *_args, **_kwargs: None)
-    monkeypatch.setattr(image_composite_converter, "_harmonize_semantic_size_variants", lambda *_args, **_kwargs: None)
-    monkeypatch.setattr(image_composite_converter, "_write_pixel_delta2_ranking", lambda *_args, **_kwargs: None)
-    monkeypatch.setattr(image_composite_converter, "_default_converted_symbols_root", lambda: str(tmp_path / "out"))
+    monkeypatch.setattr(imageCompositeConverter, "_in_requested_range", lambda *_args, **_kwargs: True)
+    monkeypatch.setattr(imageCompositeConverter, "_load_quality_config", lambda *_args, **_kwargs: {})
+    monkeypatch.setattr(imageCompositeConverter, "_write_quality_pass_report", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(imageCompositeConverter, "_harmonize_semantic_size_variants", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(imageCompositeConverter, "_write_pixel_delta2_ranking", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(imageCompositeConverter, "_default_converted_symbols_root", lambda: str(tmp_path / "out"))
 
     def fake_pipeline(img_path: str, *_args, **_kwargs):
         stem = Path(img_path).stem
         params = {"mode": "semantic_badge", "cx": 5.0, "cy": 5.0, "r": 3.0}
         return stem, "semantic", params, 1, 100.0
 
-    monkeypatch.setattr(image_composite_converter, "run_iteration_pipeline", fake_pipeline)
+    monkeypatch.setattr(imageCompositeConverter, "run_iteration_pipeline", fake_pipeline)
 
     captured_cfg: dict[str, object] = {}
 
@@ -2168,7 +2168,7 @@ def test_convert_range_does_not_skip_variants_in_quality_passes(
         captured_cfg["skipped_variants"] = list(skipped_variants)
         captured_cfg["source"] = source
 
-    monkeypatch.setattr(image_composite_converter, "_write_quality_config", capture_quality_cfg)
+    monkeypatch.setattr(imageCompositeConverter, "_write_quality_config", capture_quality_cfg)
 
     observed_skips: list[set[str]] = []
 
@@ -2176,10 +2176,10 @@ def test_convert_range_does_not_skip_variants_in_quality_passes(
         observed_skips.append(set(skip_variants or set()))
         return []
 
-    monkeypatch.setattr(image_composite_converter, "_select_open_quality_cases", capture_open_cases)
-    monkeypatch.setattr(image_composite_converter, "_select_middle_lower_tercile", lambda _rows: [])
+    monkeypatch.setattr(imageCompositeConverter, "_select_open_quality_cases", capture_open_cases)
+    monkeypatch.setattr(imageCompositeConverter, "_select_middle_lower_tercile", lambda _rows: [])
 
-    image_composite_converter.convert_range(str(images_dir), str(csv_path), iterations=2, start_ref="AC0812", end_ref="AC0812")
+    imageCompositeConverter.convert_range(str(images_dir), str(csv_path), iterations=2, start_ref="AC0812", end_ref="AC0812")
 
     assert captured_cfg["skipped_variants"] == []
     assert captured_cfg["allowed_error_per_pixel"] == pytest.approx(1.0)
@@ -2296,11 +2296,11 @@ def test_convert_range_accepts_quality_pass_when_mean_delta2_improves(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+    if imageCompositeConverter.np is None or imageCompositeConverter.cv2 is None:
         pytest.skip("numpy/cv2 not available in this environment")
 
-    np = image_composite_converter.np
-    cv2 = image_composite_converter.cv2
+    np = imageCompositeConverter.np
+    cv2 = imageCompositeConverter.cv2
     if np is None or cv2 is None:
         pytest.skip("numpy/cv2 not available in this environment")
 
@@ -2311,17 +2311,17 @@ def test_convert_range_accepts_quality_pass_when_mean_delta2_improves(
     csv_path.write_text("Wurzelform;Beschreibung\nAC0820;semantic\n", encoding="utf-8")
     assert cv2.imwrite(str(images_dir / "AC0820_L.jpg"), np.full((10, 10, 3), 220, dtype=np.uint8))
 
-    monkeypatch.setattr(image_composite_converter, "_in_requested_range", lambda *_args, **_kwargs: True)
-    monkeypatch.setattr(image_composite_converter, "_load_quality_config", lambda *_args, **_kwargs: {})
-    monkeypatch.setattr(image_composite_converter, "_write_quality_config", lambda *_args, **_kwargs: None)
-    monkeypatch.setattr(image_composite_converter, "_harmonize_semantic_size_variants", lambda *_args, **_kwargs: None)
-    monkeypatch.setattr(image_composite_converter, "_write_pixel_delta2_ranking", lambda *_args, **_kwargs: None)
-    monkeypatch.setattr(image_composite_converter, "_select_open_quality_cases", lambda rows, **_kwargs: list(rows))
-    monkeypatch.setattr(image_composite_converter, "_select_middle_lower_tercile", lambda _rows: [])
-    monkeypatch.setattr(image_composite_converter, "_try_template_transfer", lambda **_kwargs: (None, None))
+    monkeypatch.setattr(imageCompositeConverter, "_in_requested_range", lambda *_args, **_kwargs: True)
+    monkeypatch.setattr(imageCompositeConverter, "_load_quality_config", lambda *_args, **_kwargs: {})
+    monkeypatch.setattr(imageCompositeConverter, "_write_quality_config", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(imageCompositeConverter, "_harmonize_semantic_size_variants", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(imageCompositeConverter, "_write_pixel_delta2_ranking", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(imageCompositeConverter, "_select_open_quality_cases", lambda rows, **_kwargs: list(rows))
+    monkeypatch.setattr(imageCompositeConverter, "_select_middle_lower_tercile", lambda _rows: [])
+    monkeypatch.setattr(imageCompositeConverter, "_try_template_transfer", lambda **_kwargs: (None, None))
 
     pass_reports: list[dict[str, object]] = []
-    monkeypatch.setattr(image_composite_converter, "_write_quality_pass_report", lambda _dir, rows: pass_reports.extend(rows))
+    monkeypatch.setattr(imageCompositeConverter, "_write_quality_pass_report", lambda _dir, rows: pass_reports.extend(rows))
 
     state = {"count": 0}
 
@@ -2342,9 +2342,9 @@ def test_convert_range_accepts_quality_pass_when_mean_delta2_improves(
         params = {"mode": "semantic_badge", "elements": ["circle"], "cx": 5.0, "cy": 5.0, "r": 3.0}
         return stem, "semantic", params, 1, best_error
 
-    monkeypatch.setattr(image_composite_converter, "run_iteration_pipeline", fake_pipeline)
+    monkeypatch.setattr(imageCompositeConverter, "run_iteration_pipeline", fake_pipeline)
 
-    result = image_composite_converter.convert_range(
+    result = imageCompositeConverter.convert_range(
         str(images_dir),
         str(csv_path),
         iterations=1,
@@ -2365,11 +2365,11 @@ def test_convert_range_rejects_quality_pass_regression_and_keeps_previous_output
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+    if imageCompositeConverter.np is None or imageCompositeConverter.cv2 is None:
         pytest.skip("numpy/cv2 not available in this environment")
 
-    np = image_composite_converter.np
-    cv2 = image_composite_converter.cv2
+    np = imageCompositeConverter.np
+    cv2 = imageCompositeConverter.cv2
     if np is None or cv2 is None:
         pytest.skip("numpy/cv2 not available in this environment")
 
@@ -2380,17 +2380,17 @@ def test_convert_range_rejects_quality_pass_regression_and_keeps_previous_output
     csv_path.write_text("Wurzelform;Beschreibung\nAC0820;semantic\n", encoding="utf-8")
     assert cv2.imwrite(str(images_dir / "AC0820_L.jpg"), np.full((10, 10, 3), 220, dtype=np.uint8))
 
-    monkeypatch.setattr(image_composite_converter, "_in_requested_range", lambda *_args, **_kwargs: True)
-    monkeypatch.setattr(image_composite_converter, "_load_quality_config", lambda *_args, **_kwargs: {})
-    monkeypatch.setattr(image_composite_converter, "_write_quality_config", lambda *_args, **_kwargs: None)
-    monkeypatch.setattr(image_composite_converter, "_harmonize_semantic_size_variants", lambda *_args, **_kwargs: None)
-    monkeypatch.setattr(image_composite_converter, "_write_pixel_delta2_ranking", lambda *_args, **_kwargs: None)
-    monkeypatch.setattr(image_composite_converter, "_select_open_quality_cases", lambda rows, **_kwargs: list(rows))
-    monkeypatch.setattr(image_composite_converter, "_select_middle_lower_tercile", lambda _rows: [])
-    monkeypatch.setattr(image_composite_converter, "_try_template_transfer", lambda **_kwargs: (None, None))
+    monkeypatch.setattr(imageCompositeConverter, "_in_requested_range", lambda *_args, **_kwargs: True)
+    monkeypatch.setattr(imageCompositeConverter, "_load_quality_config", lambda *_args, **_kwargs: {})
+    monkeypatch.setattr(imageCompositeConverter, "_write_quality_config", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(imageCompositeConverter, "_harmonize_semantic_size_variants", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(imageCompositeConverter, "_write_pixel_delta2_ranking", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(imageCompositeConverter, "_select_open_quality_cases", lambda rows, **_kwargs: list(rows))
+    monkeypatch.setattr(imageCompositeConverter, "_select_middle_lower_tercile", lambda _rows: [])
+    monkeypatch.setattr(imageCompositeConverter, "_try_template_transfer", lambda **_kwargs: (None, None))
 
     pass_reports: list[dict[str, object]] = []
-    monkeypatch.setattr(image_composite_converter, "_write_quality_pass_report", lambda _dir, rows: pass_reports.extend(rows))
+    monkeypatch.setattr(imageCompositeConverter, "_write_quality_pass_report", lambda _dir, rows: pass_reports.extend(rows))
 
     state = {"count": 0}
 
@@ -2411,9 +2411,9 @@ def test_convert_range_rejects_quality_pass_regression_and_keeps_previous_output
         params = {"mode": "semantic_badge", "elements": ["circle"], "cx": 5.0, "cy": 5.0, "r": 3.0}
         return stem, "semantic", params, 1, best_error
 
-    monkeypatch.setattr(image_composite_converter, "run_iteration_pipeline", fake_pipeline)
+    monkeypatch.setattr(imageCompositeConverter, "run_iteration_pipeline", fake_pipeline)
 
-    result = image_composite_converter.convert_range(
+    result = imageCompositeConverter.convert_range(
         str(images_dir),
         str(csv_path),
         iterations=1,
@@ -2437,13 +2437,13 @@ def test_convert_range_writes_svgs_and_diffs_to_dedicated_subfolders(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     """Converted SVGs and diff PNGs should be separated into stable subdirectories."""
-    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+    if imageCompositeConverter.np is None or imageCompositeConverter.cv2 is None:
         pytest.skip("numpy/cv2 not available in this environment")
 
-    np = image_composite_converter.np
+    np = imageCompositeConverter.np
     if np is None:
         pytest.skip("numpy not available in this environment")
-    cv2 = image_composite_converter.cv2
+    cv2 = imageCompositeConverter.cv2
 
     images_dir = tmp_path / "images"
     images_dir.mkdir()
@@ -2451,13 +2451,13 @@ def test_convert_range_writes_svgs_and_diffs_to_dedicated_subfolders(
     csv_path.write_text("Wurzelform;Beschreibung\nAC0812;semantic\n", encoding="utf-8")
     assert cv2.imwrite(str(images_dir / "AC0812_L.jpg"), np.full((10, 10, 3), 230, dtype=np.uint8))
 
-    monkeypatch.setattr(image_composite_converter, "_in_requested_range", lambda *_args, **_kwargs: True)
-    monkeypatch.setattr(image_composite_converter, "_load_quality_config", lambda *_args, **_kwargs: {})
-    monkeypatch.setattr(image_composite_converter, "_write_quality_pass_report", lambda *_args, **_kwargs: None)
-    monkeypatch.setattr(image_composite_converter, "_harmonize_semantic_size_variants", lambda *_args, **_kwargs: None)
-    monkeypatch.setattr(image_composite_converter, "_write_pixel_delta2_ranking", lambda *_args, **_kwargs: None)
-    monkeypatch.setattr(image_composite_converter, "_select_open_quality_cases", lambda *_args, **_kwargs: [])
-    monkeypatch.setattr(image_composite_converter, "_select_middle_lower_tercile", lambda *_args, **_kwargs: [])
+    monkeypatch.setattr(imageCompositeConverter, "_in_requested_range", lambda *_args, **_kwargs: True)
+    monkeypatch.setattr(imageCompositeConverter, "_load_quality_config", lambda *_args, **_kwargs: {})
+    monkeypatch.setattr(imageCompositeConverter, "_write_quality_pass_report", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(imageCompositeConverter, "_harmonize_semantic_size_variants", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(imageCompositeConverter, "_write_pixel_delta2_ranking", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(imageCompositeConverter, "_select_open_quality_cases", lambda *_args, **_kwargs: [])
+    monkeypatch.setattr(imageCompositeConverter, "_select_middle_lower_tercile", lambda *_args, **_kwargs: [])
 
     def fake_pipeline(img_path: str, _csv_path: str, _iterations: int, svg_out: str, diff_out: str, reports_out: str, *_args, **_kwargs):
         stem = Path(img_path).stem
@@ -2469,10 +2469,10 @@ def test_convert_range_writes_svgs_and_diffs_to_dedicated_subfolders(
         params = {"mode": "semantic_badge", "elements": ["circle"], "cx": 5.0, "cy": 5.0, "r": 3.0}
         return stem, "semantic", params, 1, 100.0
 
-    monkeypatch.setattr(image_composite_converter, "run_iteration_pipeline", fake_pipeline)
+    monkeypatch.setattr(imageCompositeConverter, "run_iteration_pipeline", fake_pipeline)
 
     output_root = tmp_path / "out"
-    result = image_composite_converter.convert_range(
+    result = imageCompositeConverter.convert_range(
         str(images_dir),
         str(csv_path),
         iterations=2,
@@ -2488,14 +2488,14 @@ def test_convert_range_writes_svgs_and_diffs_to_dedicated_subfolders(
 
 
 def test_template_transfer_donor_family_compatible() -> None:
-    assert image_composite_converter._template_transfer_donor_family_compatible("GE011", "GE020") is True
-    assert image_composite_converter._template_transfer_donor_family_compatible("GE011", "AC0812") is False
-    assert image_composite_converter._template_transfer_donor_family_compatible("DLG0000", "DLG0015") is True
-    assert image_composite_converter._template_transfer_donor_family_compatible("DLG0000", "AC0812") is False
-    assert image_composite_converter._template_transfer_donor_family_compatible("NAV0020", "NAV0030") is True
-    assert image_composite_converter._template_transfer_donor_family_compatible("NAV0020", "AC5000") is False
-    assert image_composite_converter._template_transfer_donor_family_compatible("LOGO", "AC0812") is True
-    assert image_composite_converter._template_transfer_donor_family_compatible(
+    assert imageCompositeConverter._template_transfer_donor_family_compatible("GE011", "GE020") is True
+    assert imageCompositeConverter._template_transfer_donor_family_compatible("GE011", "AC0812") is False
+    assert imageCompositeConverter._template_transfer_donor_family_compatible("DLG0000", "DLG0015") is True
+    assert imageCompositeConverter._template_transfer_donor_family_compatible("DLG0000", "AC0812") is False
+    assert imageCompositeConverter._template_transfer_donor_family_compatible("NAV0020", "NAV0030") is True
+    assert imageCompositeConverter._template_transfer_donor_family_compatible("NAV0020", "AC5000") is False
+    assert imageCompositeConverter._template_transfer_donor_family_compatible("LOGO", "AC0812") is True
+    assert imageCompositeConverter._template_transfer_donor_family_compatible(
         "GE0000",
         "AC0010",
         documented_alias_refs={"AC0010"},
@@ -2505,10 +2505,10 @@ def test_template_transfer_donor_family_compatible() -> None:
 def test_convert_range_filters_to_explicit_selected_variants_and_writes_regression_manifest(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    np = image_composite_converter.np
+    np = imageCompositeConverter.np
     if np is None:
         pytest.skip("numpy not available in this environment")
-    cv2 = image_composite_converter.cv2
+    cv2 = imageCompositeConverter.cv2
     if cv2 is None:
         pytest.skip("opencv not available in this environment")
 
@@ -2516,17 +2516,17 @@ def test_convert_range_filters_to_explicit_selected_variants_and_writes_regressi
     images_dir.mkdir()
     csv_path = tmp_path / "data.csv"
     csv_path.write_text("Wurzelform;Beschreibung\n", encoding="utf-8")
-    for variant in image_composite_converter.AC08_REGRESSION_VARIANTS:
+    for variant in imageCompositeConverter.AC08_REGRESSION_VARIANTS:
         assert cv2.imwrite(str(images_dir / f"{variant}.jpg"), np.full((10, 10, 3), 230, dtype=np.uint8))
     assert cv2.imwrite(str(images_dir / "AC0999_L.jpg"), np.full((10, 10, 3), 200, dtype=np.uint8))
 
-    monkeypatch.setattr(image_composite_converter, "_in_requested_range", lambda *_args, **_kwargs: True)
-    monkeypatch.setattr(image_composite_converter, "_load_quality_config", lambda *_args, **_kwargs: {})
-    monkeypatch.setattr(image_composite_converter, "_write_quality_pass_report", lambda *_args, **_kwargs: None)
-    monkeypatch.setattr(image_composite_converter, "_harmonize_semantic_size_variants", lambda *_args, **_kwargs: None)
-    monkeypatch.setattr(image_composite_converter, "_write_pixel_delta2_ranking", lambda *_args, **_kwargs: None)
-    monkeypatch.setattr(image_composite_converter, "_select_open_quality_cases", lambda *_args, **_kwargs: [])
-    monkeypatch.setattr(image_composite_converter, "_select_middle_lower_tercile", lambda *_args, **_kwargs: [])
+    monkeypatch.setattr(imageCompositeConverter, "_in_requested_range", lambda *_args, **_kwargs: True)
+    monkeypatch.setattr(imageCompositeConverter, "_load_quality_config", lambda *_args, **_kwargs: {})
+    monkeypatch.setattr(imageCompositeConverter, "_write_quality_pass_report", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(imageCompositeConverter, "_harmonize_semantic_size_variants", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(imageCompositeConverter, "_write_pixel_delta2_ranking", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(imageCompositeConverter, "_select_open_quality_cases", lambda *_args, **_kwargs: [])
+    monkeypatch.setattr(imageCompositeConverter, "_select_middle_lower_tercile", lambda *_args, **_kwargs: [])
 
     seen: list[str] = []
 
@@ -2541,27 +2541,27 @@ def test_convert_range_filters_to_explicit_selected_variants_and_writes_regressi
         params = {"mode": "semantic_badge", "elements": ["circle"], "cx": 5.0, "cy": 5.0, "r": 3.0}
         return stem, "semantic", params, 1, 100.0
 
-    monkeypatch.setattr(image_composite_converter, "run_iteration_pipeline", fake_pipeline)
+    monkeypatch.setattr(imageCompositeConverter, "run_iteration_pipeline", fake_pipeline)
 
     output_root = tmp_path / "out"
-    result = image_composite_converter.convert_range(
+    result = imageCompositeConverter.convert_range(
         str(images_dir),
         str(csv_path),
         iterations=32,
         start_ref="AC0000",
         end_ref="ZZ9999",
         output_root=str(output_root),
-        selected_variants=set(image_composite_converter.AC08_REGRESSION_VARIANTS),
+        selected_variants=set(imageCompositeConverter.AC08_REGRESSION_VARIANTS),
     )
 
     assert result == str(output_root)
-    assert sorted(seen) == sorted(image_composite_converter.AC08_REGRESSION_VARIANTS)
+    assert sorted(seen) == sorted(imageCompositeConverter.AC08_REGRESSION_VARIANTS)
     reports_dir = output_root / "reports"
     manifest = (reports_dir / "ac08_regression_set.csv").read_text(encoding="utf-8")
     summary = (reports_dir / "ac08_regression_summary.txt").read_text(encoding="utf-8")
     assert "AC0999_L" not in manifest
     assert "set;variant;focus;reason" in manifest
-    assert image_composite_converter.AC08_REGRESSION_SET_NAME in manifest
+    assert imageCompositeConverter.AC08_REGRESSION_SET_NAME in manifest
     assert "AC0800_L;stable_good;Previously marked good plain-ring large variant" in manifest
     assert "AC0811_L;stable_good;Known regression-safe good conversion anchor" in manifest
     assert "expected_reports=Iteration_Log.csv,quality_tercile_passes.csv,pixel_delta2_ranking.csv,pixel_delta2_summary.txt,ac08_weak_family_status.csv,ac08_weak_family_status.txt,ac08_success_metrics.csv,ac08_success_criteria.txt" in summary
@@ -2571,7 +2571,7 @@ def test_load_successful_conversions_uses_manifest_and_allows_non_ac08_entries(t
     manifest = tmp_path / "successful_conversions.txt"
     manifest.write_text("AC0800_L ; total_delta2=22.000000\nge0015_s\nac0811_l ; mean_delta2=11.000000\n# comment\nAC0800_L\n", encoding="utf-8")
 
-    variants = image_composite_converter._load_successful_conversions(manifest, tmp_path / "missing")
+    variants = imageCompositeConverter._load_successful_conversions(manifest, tmp_path / "missing")
     ac08_variants = tuple(variant for variant in variants if variant.startswith("AC08"))
 
     assert variants == ("AC0800_L", "GE0015_S", "AC0811_L")
@@ -2597,7 +2597,7 @@ def test_load_successful_conversions_expands_manifest_ranges_against_available_v
         (source_dir / name).write_bytes(b"jpg")
     manifest.write_text("AC0800_L bis AC0812_S\nGE0015_S\n", encoding="utf-8")
 
-    variants = image_composite_converter._load_successful_conversions(manifest, source_dir)
+    variants = imageCompositeConverter._load_successful_conversions(manifest, source_dir)
 
     assert variants == (
         "AC0800_L",
@@ -2616,7 +2616,7 @@ def test_load_successful_conversions_expands_manifest_ranges_against_available_v
 def test_write_ac08_success_criteria_report_summarizes_regression_metrics(tmp_path: Path) -> None:
     reports_dir = tmp_path / "reports"
     reports_dir.mkdir()
-    expected = list(image_composite_converter.AC08_REGRESSION_VARIANTS)
+    expected = list(imageCompositeConverter.AC08_REGRESSION_VARIANTS)
 
     (reports_dir / "Iteration_Log.csv").write_text(
         "Dateiname;Gefundene Elemente;Beste Iteration;Diff-Score;FehlerProPixel\n"
@@ -2654,7 +2654,7 @@ def test_write_ac08_success_criteria_report_summarizes_regression_metrics(tmp_pa
         encoding="utf-8",
     )
 
-    image_composite_converter._write_ac08_success_criteria_report(
+    imageCompositeConverter._write_ac08_success_criteria_report(
         str(reports_dir),
         selected_variants=expected,
     )
@@ -2679,7 +2679,7 @@ def test_write_ac08_success_criteria_report_summarizes_regression_metrics(tmp_pa
         "AC0811_L": "semantic_mismatch",
         "AC0820_L": "other",
     }
-    expected_previous_good = set(image_composite_converter.AC08_PREVIOUSLY_GOOD_VARIANTS)
+    expected_previous_good = set(imageCompositeConverter.AC08_PREVIOUSLY_GOOD_VARIANTS)
     expected_preserved = sum(1 for v, status in known_logs.items() if v in expected_previous_good and status == "semantic_ok")
     expected_regressed = sum(1 for v, status in known_logs.items() if v in expected_previous_good and status != "semantic_ok")
     expected_missing = len(expected_previous_good) - expected_preserved - expected_regressed
@@ -2705,9 +2705,9 @@ def test_summarize_previous_good_ac08_variants_detects_regressions(tmp_path: Pat
     (reports_dir / "AC0800_M_element_validation.log").write_text("status=semantic_ok\n", encoding="utf-8")
     (reports_dir / "AC0800_S_element_validation.log").write_text("status=semantic_mismatch\n", encoding="utf-8")
 
-    summary = image_composite_converter._summarize_previous_good_ac08_variants(str(reports_dir))
+    summary = imageCompositeConverter._summarize_previous_good_ac08_variants(str(reports_dir))
 
-    assert summary["expected"] == list(image_composite_converter.AC08_PREVIOUSLY_GOOD_VARIANTS)
+    assert summary["expected"] == list(imageCompositeConverter.AC08_PREVIOUSLY_GOOD_VARIANTS)
     assert summary["preserved"] == ["AC0800_L", "AC0800_M"]
     assert summary["regressed"] == ["AC0800_S"]
     assert summary["missing"] == ["AC0811_L"]
@@ -2715,7 +2715,7 @@ def test_summarize_previous_good_ac08_variants_detects_regressions(tmp_path: Pat
 
 def test_parse_description_extracts_documented_alias_refs() -> None:
     raw = {"GE0000": "Kreisform wie AC0010 und Kante wie in AC0501"}
-    _desc, params = image_composite_converter.Reflection(raw).parse_description("GE0000", "GE0000_S.jpg")
+    _desc, params = imageCompositeConverter.Reflection(raw).parse_description("GE0000", "GE0000_S.jpg")
     assert set(params.get("documented_alias_refs", [])) == {"AC0010", "AC0501"}
 
 
@@ -2723,11 +2723,11 @@ def test_template_transfer_skips_cross_family_donor_for_non_semantic(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+    if imageCompositeConverter.np is None or imageCompositeConverter.cv2 is None:
         pytest.skip("numpy/cv2 not available in this environment")
 
-    np = image_composite_converter.np
-    cv2 = image_composite_converter.cv2
+    np = imageCompositeConverter.np
+    cv2 = imageCompositeConverter.cv2
     if np is None or cv2 is None:
         pytest.skip("numpy/cv2 not available in this environment")
 
@@ -2766,8 +2766,8 @@ def test_template_transfer_skips_cross_family_donor_for_non_semantic(
         }
     ]
 
-    monkeypatch.setattr(image_composite_converter, "_rank_template_transfer_donors", lambda _t, d: d)
-    monkeypatch.setattr(image_composite_converter, "_read_svg_geometry", lambda _p: None)
+    monkeypatch.setattr(imageCompositeConverter, "_rank_template_transfer_donors", lambda _t, d: d)
+    monkeypatch.setattr(imageCompositeConverter, "_read_svg_geometry", lambda _p: None)
 
     called: dict[str, int] = {"build": 0}
 
@@ -2775,9 +2775,9 @@ def test_template_transfer_skips_cross_family_donor_for_non_semantic(
         called["build"] += 1
         return "<svg/>"
 
-    monkeypatch.setattr(image_composite_converter, "_build_transformed_svg_from_template", fail_if_called)
+    monkeypatch.setattr(imageCompositeConverter, "_build_transformed_svg_from_template", fail_if_called)
 
-    updated, detail = image_composite_converter._try_template_transfer(
+    updated, detail = imageCompositeConverter._try_template_transfer(
         target_row=target_row,
         donor_rows=donor_rows,
         folder_path=str(folder_path),
@@ -2831,7 +2831,7 @@ def test_co2_layout_keeps_text_within_inner_circle_bounds() -> None:
 def test_optimize_circle_pose_adaptive_domain_improves_and_logs(monkeypatch: pytest.MonkeyPatch) -> None:
     """Adaptive domain search should improve pose and report boundary/plateau hints."""
 
-    np = image_composite_converter.np
+    np = imageCompositeConverter.np
     if np is None:
         pytest.skip("numpy not available in this environment")
     img = np.full((20, 20, 3), 220, dtype=np.uint8)
@@ -2861,7 +2861,7 @@ def test_optimize_circle_pose_adaptive_domain_improves_and_logs(monkeypatch: pyt
 def test_optimize_circle_pose_adaptive_domain_uses_run_seed_offset(monkeypatch: pytest.MonkeyPatch) -> None:
     """Adaptive domain RNG should incorporate run-seed and pass offset."""
 
-    np = image_composite_converter.np
+    np = imageCompositeConverter.np
     if np is None:
         pytest.skip("numpy not available in this environment")
     img = np.full((20, 20, 3), 220, dtype=np.uint8)
@@ -2906,7 +2906,7 @@ def test_optimize_circle_pose_adaptive_domain_uses_run_seed_offset(monkeypatch: 
 def test_optimize_circle_pose_adaptive_domain_no_improvement(monkeypatch: pytest.MonkeyPatch) -> None:
     """Adaptive domain search should return False when no better sample exists."""
 
-    np = image_composite_converter.np
+    np = imageCompositeConverter.np
     if np is None:
         pytest.skip("numpy not available in this environment")
     img = np.full((20, 20, 3), 220, dtype=np.uint8)
@@ -2946,7 +2946,7 @@ def test_global_parameter_vector_roundtrip_preserves_core_fields() -> None:
         "text_scale": 0.9,
     }
 
-    vector = image_composite_converter.GlobalParameterVector.from_params(params)
+    vector = imageCompositeConverter.GlobalParameterVector.from_params(params)
     restored = vector.apply_to_params({})
 
     assert float(restored["cx"]) == 11.5
@@ -2958,7 +2958,7 @@ def test_global_parameter_vector_roundtrip_preserves_core_fields() -> None:
 
 
 def test_optimize_circle_pose_adaptive_domain_logs_global_vector_metadata(monkeypatch: pytest.MonkeyPatch) -> None:
-    np = image_composite_converter.np
+    np = imageCompositeConverter.np
     if np is None:
         pytest.skip("numpy not available in this environment")
     img = np.full((20, 20, 3), 220, dtype=np.uint8)
@@ -2979,7 +2979,7 @@ def test_optimize_circle_pose_adaptive_domain_logs_global_vector_metadata(monkey
 
 
 def test_optimize_global_parameter_vector_sampling_improves_multiple_fields(monkeypatch: pytest.MonkeyPatch) -> None:
-    np = image_composite_converter.np
+    np = imageCompositeConverter.np
     if np is None:
         pytest.skip("numpy not available in this environment")
     img = np.full((24, 24, 3), 220, dtype=np.uint8)
@@ -3028,7 +3028,7 @@ def test_optimize_global_parameter_vector_sampling_improves_multiple_fields(monk
 
 
 def test_optimize_global_parameter_vector_sampling_logs_global_near_optimum_plateau(monkeypatch: pytest.MonkeyPatch) -> None:
-    np = image_composite_converter.np
+    np = imageCompositeConverter.np
     if np is None:
         pytest.skip("numpy not available in this environment")
     img = np.full((24, 24, 3), 220, dtype=np.uint8)
@@ -3078,7 +3078,7 @@ def test_optimize_global_parameter_vector_sampling_logs_global_near_optimum_plat
 
 
 def test_optimize_global_parameter_vector_sampling_uses_run_seed_offset(monkeypatch: pytest.MonkeyPatch) -> None:
-    np = image_composite_converter.np
+    np = imageCompositeConverter.np
     if np is None:
         pytest.skip("numpy not available in this environment")
     img = np.full((24, 24, 3), 220, dtype=np.uint8)
@@ -3119,7 +3119,7 @@ def test_optimize_global_parameter_vector_sampling_uses_run_seed_offset(monkeypa
 
 
 def test_optimize_global_parameter_vector_sampling_respects_locks_and_bounds(monkeypatch: pytest.MonkeyPatch) -> None:
-    np = image_composite_converter.np
+    np = imageCompositeConverter.np
     if np is None:
         pytest.skip("numpy not available in this environment")
     img = np.full((20, 20, 3), 220, dtype=np.uint8)
@@ -3174,7 +3174,7 @@ def test_optimize_global_parameter_vector_sampling_respects_locks_and_bounds(mon
 
 
 def test_optimize_global_parameter_vector_sampling_disabled_by_default() -> None:
-    np = image_composite_converter.np
+    np = imageCompositeConverter.np
     if np is None:
         pytest.skip("numpy not available in this environment")
     img = np.full((16, 16, 3), 220, dtype=np.uint8)
@@ -3189,7 +3189,7 @@ def test_optimize_global_parameter_vector_sampling_disabled_by_default() -> None
 
 def test_validate_badge_by_elements_runs_global_search_when_enabled(monkeypatch: pytest.MonkeyPatch) -> None:
     """Element validation should execute one global-search pass when the mode flag is enabled."""
-    np = image_composite_converter.np
+    np = imageCompositeConverter.np
     if np is None:
         pytest.skip("numpy not available in this environment")
 
@@ -3411,11 +3411,11 @@ def test_release_ac08_adaptive_locks_is_disabled_without_guardrails() -> None:
 
 def test_optimize_element_color_bracket_respects_adaptive_color_corridor(monkeypatch: pytest.MonkeyPatch) -> None:
     """Adaptive palette release must stay within the configured grayscale corridor."""
-    if image_composite_converter.np is None:
+    if imageCompositeConverter.np is None:
         pytest.skip("numpy not available in this environment")
 
-    img = image_composite_converter.np.full((4, 4, 3), 220, dtype=image_composite_converter.np.uint8)
-    mask = image_composite_converter.np.ones((4, 4), dtype=image_composite_converter.np.uint8)
+    img = imageCompositeConverter.np.full((4, 4, 3), 220, dtype=imageCompositeConverter.np.uint8)
+    mask = imageCompositeConverter.np.ones((4, 4), dtype=imageCompositeConverter.np.uint8)
     params = {
         "circle_enabled": True,
         "fill_gray": 220,
@@ -3685,7 +3685,7 @@ def test_validate_badge_logs_extent_bracketing_for_line_elements() -> None:
 def test_validate_badge_continues_after_threshold_by_default(monkeypatch: pytest.MonkeyPatch) -> None:
     """Validation should keep searching after crossing the error threshold by default."""
 
-    np = image_composite_converter.np
+    np = imageCompositeConverter.np
     if np is None:
         pytest.skip("numpy not available in this environment")
     img = np.zeros((15, 15, 3), dtype=np.uint8)
@@ -3715,7 +3715,7 @@ def test_validate_badge_continues_after_threshold_by_default(monkeypatch: pytest
 def test_validate_badge_can_preserve_legacy_threshold_stop(monkeypatch: pytest.MonkeyPatch) -> None:
     """An explicit flag should still allow the historical threshold-based early exit."""
 
-    np = image_composite_converter.np
+    np = imageCompositeConverter.np
     if np is None:
         pytest.skip("numpy not available in this environment")
     img = np.zeros((15, 15, 3), dtype=np.uint8)
@@ -3744,7 +3744,7 @@ def test_validate_badge_can_preserve_legacy_threshold_stop(monkeypatch: pytest.M
 def test_element_error_for_circle_radius_uses_expanded_source_mask_for_growth(monkeypatch: pytest.MonkeyPatch) -> None:
     """Circle growth probes should evaluate against an equally expanded source mask."""
 
-    np = image_composite_converter.np
+    np = imageCompositeConverter.np
     if np is None:
         pytest.skip("numpy not available in this environment")
     img = np.zeros((25, 45, 3), dtype=np.uint8)
@@ -3916,7 +3916,7 @@ def test_circle_error_uses_stable_source_mask_for_radius_candidates(monkeypatch:
 def test_circle_color_error_uses_stable_photometric_mask(monkeypatch: pytest.MonkeyPatch) -> None:
     """Circle color bracketing should use stable source mask photometric scoring."""
 
-    np = image_composite_converter.np
+    np = imageCompositeConverter.np
     if np is None:
         pytest.skip("numpy not available in this environment")
     img = np.zeros((20, 20, 3), dtype=np.uint8)
@@ -3952,7 +3952,7 @@ def test_circle_color_error_uses_stable_photometric_mask(monkeypatch: pytest.Mon
 def test_circle_match_error_penalizes_non_concentric_candidate(monkeypatch: pytest.MonkeyPatch) -> None:
     """Circle scoring should prefer concentric candidates when overlap is otherwise similar."""
 
-    np = image_composite_converter.np
+    np = imageCompositeConverter.np
     if np is None:
         pytest.skip("numpy not available in this environment")
     img = np.zeros((20, 20, 3), dtype=np.uint8)
@@ -3977,7 +3977,7 @@ def test_optimize_element_improves_or_keeps_score() -> None:
 def test_circle_match_error_penalizes_undersized_candidate(monkeypatch: pytest.MonkeyPatch) -> None:
     """Circle scoring should discourage candidates that shrink below source radius."""
 
-    np = image_composite_converter.np
+    np = imageCompositeConverter.np
     if np is None:
         pytest.skip("numpy not available in this environment")
     img = np.zeros((20, 20, 3), dtype=np.uint8)
@@ -4013,7 +4013,7 @@ def test_circle_match_error_penalizes_undersized_candidate(monkeypatch: pytest.M
 def test_circle_pose_error_uses_element_match_scorer(monkeypatch: pytest.MonkeyPatch) -> None:
     """Center/pose probing should go through the unified element match scorer."""
 
-    np = image_composite_converter.np
+    np = imageCompositeConverter.np
     if np is None:
         pytest.skip("numpy not available in this environment")
     img = np.zeros((20, 20, 3), dtype=np.uint8)
@@ -4077,7 +4077,7 @@ def test_voc_font_scale_bounds_keep_broad_search_for_large_badges() -> None:
 def test_voc_font_scale_bounds_expand_from_original_text_bbox(monkeypatch: pytest.MonkeyPatch) -> None:
     """When original text extents are known, bounds should expand around that estimate."""
 
-    np = image_composite_converter.np
+    np = imageCompositeConverter.np
     if np is None:
         pytest.skip("numpy not available in this environment")
 
@@ -4446,10 +4446,10 @@ def test_decompose_circle_with_stem_ignores_plain_circle() -> None:
 def test_optimize_stem_extent_keeps_bottom_anchored_ac0811_stem_from_collapsing() -> None:
     """Bottom-anchored AC0811 stems should retain a minimum visible length during bracketing."""
 
-    if image_composite_converter.np is None:
+    if imageCompositeConverter.np is None:
         pytest.skip("numpy not available in this environment")
 
-    np = image_composite_converter.np
+    np = imageCompositeConverter.np
     img = np.zeros((15, 15, 3), dtype=np.uint8)
     params = Action._default_ac0811_params(15, 15)
     logs: list[str] = []
@@ -4543,7 +4543,7 @@ def test_estimate_vertical_stem_from_mask_ignores_circle_junction_bulge() -> Non
     """Stem width estimate should prefer the lower stem over top junction bulges."""
 
 
-    np = image_composite_converter.np
+    np = imageCompositeConverter.np
     if np is None:
         pytest.skip("numpy not available in this environment")
     mask = np.zeros((20, 15), dtype=bool)
@@ -4715,7 +4715,7 @@ def test_finalize_ac0820_leaves_palette_unlocked() -> None:
 def test_optimize_element_color_bracket_skips_when_colors_locked() -> None:
     """Color tuning must be skipped when lock_colors is enabled."""
 
-    np = image_composite_converter.np
+    np = imageCompositeConverter.np
     if np is None:
         pytest.skip("numpy not available in this environment")
     img = np.zeros((8, 8, 3), dtype=np.uint8)
@@ -4776,7 +4776,7 @@ def test_activate_ac08_adaptive_locks_is_disabled_without_guardrails() -> None:
 
 def test_optimize_element_color_bracket_respects_adaptive_color_corridor(monkeypatch: pytest.MonkeyPatch) -> None:
     """Adaptive unlock color tuning must stay inside the configured narrow palette corridor."""
-    np = image_composite_converter.np
+    np = imageCompositeConverter.np
     if np is None:
         pytest.skip("numpy not available in this environment")
 
@@ -4811,7 +4811,7 @@ def test_optimize_element_color_bracket_respects_adaptive_color_corridor(monkeyp
 def test_validate_badge_runs_color_bracketing_after_geometry_steps() -> None:
     """Validation should optimize color only after extent/radius geometry updates."""
 
-    np = image_composite_converter.np
+    np = imageCompositeConverter.np
     if np is None:
         pytest.skip("numpy not available in this environment")
 
@@ -4881,7 +4881,7 @@ def test_validate_badge_runs_color_bracketing_after_geometry_steps() -> None:
 def test_optimize_circle_pose_multistart_can_escape_local_center_radius_plateau(monkeypatch: pytest.MonkeyPatch) -> None:
     """Joint circle pose search should improve cx/cy/r together when independent steps stall."""
 
-    np = image_composite_converter.np
+    np = imageCompositeConverter.np
     if np is None:
         pytest.skip("numpy not available in this environment")
     img = np.zeros((20, 20, 3), dtype=np.uint8)
@@ -4920,7 +4920,7 @@ def test_make_badge_params_supports_ac0810_variants() -> None:
 
 def test_parse_description_marks_ac0810_as_semantic_badge() -> None:
     """Reflection parsing should treat AC0810 as a semantic circle+right-arm badge."""
-    desc, params = image_composite_converter.Reflection({}).parse_description("AC0810", "AC0810_L.jpg")
+    desc, params = imageCompositeConverter.Reflection({}).parse_description("AC0810", "AC0810_L.jpg")
 
     assert desc == ""
     assert params["mode"] == "semantic_badge"
@@ -4930,7 +4930,7 @@ def test_parse_description_marks_ac0810_as_semantic_badge() -> None:
 
 def test_parse_description_marks_ac0811_as_semantic_badge() -> None:
     """Reflection parsing should treat AC0811 as a semantic circle+down-stem badge."""
-    desc, params = image_composite_converter.Reflection({}).parse_description("AC0811", "AC0811_L.jpg")
+    desc, params = imageCompositeConverter.Reflection({}).parse_description("AC0811", "AC0811_L.jpg")
 
     assert desc == ""
     assert params["mode"] == "semantic_badge"
@@ -4945,7 +4945,7 @@ def test_parse_description_keeps_ac0814_family_rule_over_text_heuristic() -> Non
         "AC0814_L": "Kreis mit Buchstabe CO2 und waagrechter Strich rechts",
     }
 
-    _desc, params = image_composite_converter.Reflection(raw).parse_description("AC0814", "AC0814_L.jpg")
+    _desc, params = imageCompositeConverter.Reflection(raw).parse_description("AC0814", "AC0814_L.jpg")
 
     assert "SEMANTIC: Kreis ohne Buchstabe" in params["elements"]
     assert not any("Kreis + Buchstabe" in element for element in params["elements"])
@@ -4954,7 +4954,7 @@ def test_parse_description_keeps_ac0814_family_rule_over_text_heuristic() -> Non
 
 
 def test_expected_semantic_presence_does_not_treat_circle_ohne_buchstabe_as_text() -> None:
-    expected = image_composite_converter.Action._expected_semantic_presence([
+    expected = imageCompositeConverter.Action._expected_semantic_presence([
         "SEMANTIC: Kreis ohne Buchstabe",
         "SEMANTIC: senkrechter Strich hinter dem Kreis",
     ])
@@ -4967,10 +4967,10 @@ def test_expected_semantic_presence_does_not_treat_circle_ohne_buchstabe_as_text
 
 def test_validate_semantic_alignment_accepts_vertical_circle_when_raw_hough_misses() -> None:
     """Vertical connector families should accept a robust local circle mask when raw circle detection misses the ring."""
-    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+    if imageCompositeConverter.np is None or imageCompositeConverter.cv2 is None:
         pytest.skip("numpy/cv2 not available in this environment")
 
-    cv2 = image_composite_converter.cv2
+    cv2 = imageCompositeConverter.cv2
     img = cv2.imread("artifacts/images_to_convert/AC0811_M.jpg")
     assert img is not None
 
@@ -4988,10 +4988,10 @@ def test_validate_semantic_alignment_accepts_vertical_circle_when_raw_hough_miss
 
 def test_validate_semantic_alignment_accepts_ac0814_small_horizontal_connector() -> None:
     """Tiny AC0814_S crops should keep circle+right-arm semantics despite anti-aliasing blur."""
-    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+    if imageCompositeConverter.np is None or imageCompositeConverter.cv2 is None:
         pytest.skip("numpy/cv2 not available in this environment")
 
-    cv2 = image_composite_converter.cv2
+    cv2 = imageCompositeConverter.cv2
     img = cv2.imread("artifacts/images_to_convert/AC0814_S.jpg")
     assert img is not None
 
@@ -5011,10 +5011,10 @@ def test_validate_semantic_alignment_accepts_ac0814_small_horizontal_connector()
 
 def test_validate_semantic_alignment_accepts_ac0870_small_circle_text_variant() -> None:
     """Tiny AC0870_S crops should retain circle+text semantics despite soft raster edges."""
-    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+    if imageCompositeConverter.np is None or imageCompositeConverter.cv2 is None:
         pytest.skip("numpy/cv2 not available in this environment")
 
-    cv2 = image_composite_converter.cv2
+    cv2 = imageCompositeConverter.cv2
     img = cv2.imread("artifacts/images_to_convert/AC0870_S.jpg")
     assert img is not None
 
@@ -5031,10 +5031,10 @@ def test_validate_semantic_alignment_accepts_ac0870_small_circle_text_variant() 
 
 def test_detect_semantic_primitives_reports_family_circle_fallback_source(monkeypatch: pytest.MonkeyPatch) -> None:
     """Semantic primitive detection should expose when AC08 small-family fallback provided circle evidence."""
-    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+    if imageCompositeConverter.np is None or imageCompositeConverter.cv2 is None:
         pytest.skip("numpy/cv2 not available in this environment")
 
-    cv2 = image_composite_converter.cv2
+    cv2 = imageCompositeConverter.cv2
     img = cv2.imread("artifacts/images_to_convert/AC0814_S.jpg")
     assert img is not None
 
@@ -5052,10 +5052,10 @@ def test_detect_semantic_primitives_reports_family_circle_fallback_source(monkey
 
 def test_validate_semantic_alignment_accepts_merged_co2_blob_for_ac0831_artifact() -> None:
     """Merged JPEG text blobs should still count as valid CO₂ evidence for AC0831_L."""
-    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+    if imageCompositeConverter.np is None or imageCompositeConverter.cv2 is None:
         pytest.skip("numpy/cv2 not available in this environment")
 
-    cv2 = image_composite_converter.cv2
+    cv2 = imageCompositeConverter.cv2
     img = cv2.imread("artifacts/images_to_convert/AC0831_L.jpg")
     assert img is not None
 
@@ -5080,7 +5080,7 @@ def test_validate_semantic_alignment_accepts_merged_co2_blob_for_ac0831_artifact
 )
 def test_parse_description_infers_semantic_connectors_for_derived_ac08_badges(symbol: str, expected_element: str) -> None:
     """Derived AC08 badges should carry the same connector semantics as their base geometry."""
-    _desc, params = image_composite_converter.Reflection({}).parse_description(symbol, f"{symbol}_L.jpg")
+    _desc, params = imageCompositeConverter.Reflection({}).parse_description(symbol, f"{symbol}_L.jpg")
 
     assert params["mode"] == "semantic_badge"
     assert expected_element in params["elements"]
@@ -5088,13 +5088,13 @@ def test_parse_description_infers_semantic_connectors_for_derived_ac08_badges(sy
 
 def test_template_transfer_skips_nonsemantic_donors_for_semantic_targets(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     """Semantic target badges must not accept generic donor transforms that can drop connector semantics."""
-    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+    if imageCompositeConverter.np is None or imageCompositeConverter.cv2 is None:
         pytest.skip("numpy/cv2 not available in this environment")
 
-    np = image_composite_converter.np
+    np = imageCompositeConverter.np
     if np is None:
         pytest.skip("numpy not available in this environment")
-    cv2 = image_composite_converter.cv2
+    cv2 = imageCompositeConverter.cv2
 
     folder = tmp_path / "images"
     svg_dir = tmp_path / "svg"
@@ -5144,7 +5144,7 @@ def test_template_transfer_skips_nonsemantic_donors_for_semantic_targets(tmp_pat
         }
     ]
 
-    updated_row, detail = image_composite_converter._try_template_transfer(
+    updated_row, detail = imageCompositeConverter._try_template_transfer(
         target_row=target_row,
         donor_rows=donor_rows,
         folder_path=str(folder),
@@ -5161,13 +5161,13 @@ def test_template_transfer_skips_semantic_but_incompatible_donors_for_connector_
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     """Semantic transfer should reject semantic donors that cannot preserve connector geometry."""
-    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+    if imageCompositeConverter.np is None or imageCompositeConverter.cv2 is None:
         pytest.skip("numpy/cv2 not available in this environment")
 
-    np = image_composite_converter.np
+    np = imageCompositeConverter.np
     if np is None:
         pytest.skip("numpy not available in this environment")
-    cv2 = image_composite_converter.cv2
+    cv2 = imageCompositeConverter.cv2
 
     folder = tmp_path / "images"
     svg_dir = tmp_path / "svg"
@@ -5216,7 +5216,7 @@ def test_template_transfer_skips_semantic_but_incompatible_donors_for_connector_
         }
     ]
 
-    updated_row, detail = image_composite_converter._try_template_transfer(
+    updated_row, detail = imageCompositeConverter._try_template_transfer(
         target_row=target_row,
         donor_rows=donor_rows,
         folder_path=str(folder),
@@ -5239,7 +5239,7 @@ def test_semantic_transfer_rejects_opposite_arm_directions() -> None:
     assert target.get("arm_enabled") is True
     assert donor.get("arm_enabled") is True
 
-    assert image_composite_converter._semantic_transfer_is_compatible(target, donor) is False
+    assert imageCompositeConverter._semantic_transfer_is_compatible(target, donor) is False
 
 
 def test_enforce_semantic_connector_expectation_restores_left_arm_for_ac0812() -> None:
@@ -5505,7 +5505,7 @@ def test_local_workflow_doc_tracks_current_commands() -> None:
 
     assert "python -m compileall src tests" in workflow_doc
     assert "python -m pytest" in workflow_doc
-    assert "python -m src.image_composite_converter --help" in workflow_doc
+    assert "python -m src.imageCompositeConverter --help" in workflow_doc
     assert "--descriptions-path" in workflow_doc
     assert "--ac08-regression-set" in workflow_doc
     assert "--print-linux-vendor-command" in workflow_doc
@@ -5520,7 +5520,7 @@ def test_parse_args_help_mentions_canonical_image_converter_flags(capsys: pytest
     assert excinfo.value.code == 0
     assert "--descriptions-path" in captured.out
     assert "--iterations" in captured.out
-    assert "python -m src.image_composite_converter --print-linux-vendor-command" in captured.out
+    assert "python -m src.imageCompositeConverter --print-linux-vendor-command" in captured.out
 
 
 def test_default_converted_symbols_root_points_to_converted_images() -> None:
@@ -5564,8 +5564,8 @@ def test_convert_image_fallback_writes_embedded_svg(tmp_path: Path, monkeypatch:
         + b"\xff\xd9"
     )
     out_path = tmp_path / "sample.svg"
-    monkeypatch.setattr(image_composite_converter, "cv2", None)
-    monkeypatch.setattr(image_composite_converter, "np", None)
+    monkeypatch.setattr(imageCompositeConverter, "cv2", None)
+    monkeypatch.setattr(imageCompositeConverter, "np", None)
 
     result = conv.convert_image(jpg_path, out_path)
 
@@ -5757,10 +5757,10 @@ def test_convert_range_uses_existing_conversion_rows_as_template_donors(
 def test_validate_badge_by_elements_detects_stagnation_and_stops(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+    if imageCompositeConverter.np is None or imageCompositeConverter.cv2 is None:
         pytest.skip("numpy/cv2 not available in this environment")
 
-    np = image_composite_converter.np
+    np = imageCompositeConverter.np
     if np is None:
         pytest.skip("numpy not available in this environment")
 
@@ -5800,10 +5800,10 @@ def test_validate_badge_by_elements_activates_ac08_adaptive_unlocks_on_stagnatio
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     """AC08 problem families should widen bounded search space before giving up on stagnation."""
-    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+    if imageCompositeConverter.np is None or imageCompositeConverter.cv2 is None:
         pytest.skip("numpy/cv2 not available in this environment")
 
-    np = image_composite_converter.np
+    np = imageCompositeConverter.np
     if np is None:
         pytest.skip("numpy not available in this environment")
 
@@ -6021,7 +6021,7 @@ def test_main_returns_error_for_invalid_description_xml_with_source_location(
 def test_build_linux_vendor_install_command_uses_vendor_defaults() -> None:
     cmd = conv.build_linux_vendor_install_command(vendor_dir="vendor", platform_tag="manylinux2014_x86_64", python_version="311")
 
-    assert cmd[:4] == [image_composite_converter.sys.executable, "-m", "pip", "install"]
+    assert cmd[:4] == [imageCompositeConverter.sys.executable, "-m", "pip", "install"]
     assert "--target" in cmd
     assert "vendor" in cmd
     assert "--platform" in cmd
@@ -6058,11 +6058,11 @@ def test_main_print_linux_vendor_command(capsys: pytest.CaptureFixture[str]) -> 
 
 def test_trace_image_segment_uses_raw_contour_chain_for_epsilon_sweep(monkeypatch: pytest.MonkeyPatch) -> None:
     """Contour extraction should keep all points so epsilon iterations can have an effect."""
-    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+    if imageCompositeConverter.np is None or imageCompositeConverter.cv2 is None:
         pytest.skip("numpy/cv2 not available in this environment")
 
-    np = image_composite_converter.np
-    cv2 = image_composite_converter.cv2
+    np = imageCompositeConverter.np
+    cv2 = imageCompositeConverter.cv2
     if np is None or cv2 is None:
         pytest.skip("numpy/cv2 not available in this environment")
 
@@ -6088,7 +6088,7 @@ def test_trace_image_segment_uses_raw_contour_chain_for_epsilon_sweep(monkeypatc
 
 
 def test_bbox_to_dict_records_expected_coordinates() -> None:
-    region = image_composite_converter._bbox_to_dict("circle", (1, 2, 6, 8), (0, 0, 255))
+    region = imageCompositeConverter._bbox_to_dict("circle", (1, 2, 6, 8), (0, 0, 255))
 
     assert region["label"] == "circle"
     assert region["bbox"] == {"x0": 1, "y0": 2, "x1": 6, "y1": 8, "width": 6, "height": 7}
@@ -6096,7 +6096,7 @@ def test_bbox_to_dict_records_expected_coordinates() -> None:
 
 
 def test_parse_args_defaults_to_convert_mode() -> None:
-    args = image_composite_converter.parse_args(["images"])
+    args = imageCompositeConverter.parse_args(["images"])
 
     assert args.mode == "convert"
 
@@ -6105,8 +6105,8 @@ def test_create_diff_image_without_cv2_writes_rgb_overlay(tmp_path: Path) -> Non
     src = tmp_path / "sample.jpg"
     shutil.copyfile("artifacts/images_to_convert/AC0010.jpg", src)
 
-    svg = image_composite_converter._render_embedded_raster_svg(src)
-    diff = image_composite_converter._create_diff_image_without_cv2(src, svg)
+    svg = imageCompositeConverter._render_embedded_raster_svg(src)
+    diff = imageCompositeConverter._create_diff_image_without_cv2(src, svg)
 
     assert diff.n == 3
     assert diff.width > 0
@@ -6114,10 +6114,10 @@ def test_create_diff_image_without_cv2_writes_rgb_overlay(tmp_path: Path) -> Non
 
 
 def test_create_diff_image_uses_signed_normalized_rgb_delta() -> None:
-    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+    if imageCompositeConverter.np is None or imageCompositeConverter.cv2 is None:
         pytest.skip("numpy/cv2 not available in this environment")
 
-    np = image_composite_converter.np
+    np = imageCompositeConverter.np
 
     orig = np.array(
         [
@@ -6140,10 +6140,10 @@ def test_create_diff_image_uses_signed_normalized_rgb_delta() -> None:
 
 
 def test_create_diff_image_respects_focus_mask_for_signed_delta() -> None:
-    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+    if imageCompositeConverter.np is None or imageCompositeConverter.cv2 is None:
         pytest.skip("numpy/cv2 not available in this environment")
 
-    np = image_composite_converter.np
+    np = imageCompositeConverter.np
 
     orig = np.array([[[0, 0, 0], [0, 0, 0]]], dtype=np.uint8)
     svg = np.array([[[30, 30, 30], [30, 30, 30]]], dtype=np.uint8)
@@ -6155,10 +6155,10 @@ def test_create_diff_image_respects_focus_mask_for_signed_delta() -> None:
 
 
 def test_create_diff_image_uses_mean_tone_for_zero_difference() -> None:
-    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+    if imageCompositeConverter.np is None or imageCompositeConverter.cv2 is None:
         pytest.skip("numpy/cv2 not available in this environment")
 
-    np = image_composite_converter.np
+    np = imageCompositeConverter.np
 
     orig = np.array([[[255, 255, 255], [20, 20, 20]]], dtype=np.uint8)
     svg = orig.copy()
@@ -6173,10 +6173,10 @@ def test_convert_range_fallback_writes_diff_pngs_when_cv2_missing(monkeypatch: p
     images_dir.mkdir()
     shutil.copyfile("artifacts/images_to_convert/AC0010.jpg", images_dir / "AC0010.jpg")
 
-    monkeypatch.setattr(image_composite_converter, "cv2", None)
-    monkeypatch.setattr(image_composite_converter, "np", None)
+    monkeypatch.setattr(imageCompositeConverter, "cv2", None)
+    monkeypatch.setattr(imageCompositeConverter, "np", None)
 
-    out_dir = image_composite_converter.convert_range(
+    out_dir = imageCompositeConverter.convert_range(
         str(images_dir),
         csv_path="",
         iterations=1,
@@ -6190,17 +6190,17 @@ def test_convert_range_fallback_writes_diff_pngs_when_cv2_missing(monkeypatch: p
 
 
 def test_detect_relevant_regions_finds_circle_stem_and_text() -> None:
-    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+    if imageCompositeConverter.np is None or imageCompositeConverter.cv2 is None:
         pytest.skip("numpy/cv2 not available in this environment")
 
-    np = image_composite_converter.np
-    cv2 = image_composite_converter.cv2
+    np = imageCompositeConverter.np
+    cv2 = imageCompositeConverter.cv2
     img = np.full((80, 80, 3), 255, dtype=np.uint8)
     cv2.circle(img, (28, 26), 14, (0, 0, 0), thickness=2)
     cv2.rectangle(img, (24, 39), (32, 67), (0, 0, 0), thickness=-1)
     cv2.putText(img, "M", (45, 35), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 0, 0), 2, cv2.LINE_AA)
 
-    regions = image_composite_converter.detect_relevant_regions(img)
+    regions = imageCompositeConverter.detect_relevant_regions(img)
     labels = {region["label"] for region in regions}
 
     assert {"circle", "stem", "text"}.issubset(labels)
@@ -6208,7 +6208,7 @@ def test_detect_relevant_regions_finds_circle_stem_and_text() -> None:
 
 def test_render_svg_to_numpy_returns_none_after_retryable_renderer_failures(monkeypatch: pytest.MonkeyPatch) -> None:
     """Renderer exceptions should be absorbed so batch processing can decide how to continue."""
-    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+    if imageCompositeConverter.np is None or imageCompositeConverter.cv2 is None:
         pytest.skip("numpy/cv2 not available in this environment")
 
     attempts: list[tuple[str, bytes]] = []
@@ -6217,7 +6217,7 @@ def test_render_svg_to_numpy_returns_none_after_retryable_renderer_failures(monk
         attempts.append((kind, payload))
         raise RuntimeError("renderer exploded")
 
-    monkeypatch.setattr(image_composite_converter.fitz, "open", fake_open)
+    monkeypatch.setattr(imageCompositeConverter.fitz, "open", fake_open)
 
     result = Action.render_svg_to_numpy('<svg xmlns="http://www.w3.org/2000/svg">  <rect width="1" height="1"/> </svg>', 4, 4)
 
@@ -6226,14 +6226,14 @@ def test_render_svg_to_numpy_returns_none_after_retryable_renderer_failures(monk
 
 
 def test_render_svg_to_numpy_uses_subprocess_isolation_when_enabled(monkeypatch: pytest.MonkeyPatch) -> None:
-    if image_composite_converter.np is None:
+    if imageCompositeConverter.np is None:
         pytest.skip("numpy not available in this environment")
 
-    np = image_composite_converter.np
+    np = imageCompositeConverter.np
     marker = np.full((2, 3, 3), 77, dtype=np.uint8)
-    monkeypatch.setattr(image_composite_converter, "SVG_RENDER_SUBPROCESS_ENABLED", True)
-    monkeypatch.setattr(image_composite_converter, "_render_svg_to_numpy_via_subprocess", lambda *_a, **_k: marker.copy())
-    monkeypatch.setattr(image_composite_converter, "_render_svg_to_numpy_inprocess", lambda *_a, **_k: None)
+    monkeypatch.setattr(imageCompositeConverter, "SVG_RENDER_SUBPROCESS_ENABLED", True)
+    monkeypatch.setattr(imageCompositeConverter, "_render_svg_to_numpy_via_subprocess", lambda *_a, **_k: marker.copy())
+    monkeypatch.setattr(imageCompositeConverter, "_render_svg_to_numpy_inprocess", lambda *_a, **_k: None)
 
     result = Action.render_svg_to_numpy('<svg xmlns="http://www.w3.org/2000/svg"></svg>', 3, 2)
     assert result is not None
@@ -6242,14 +6242,14 @@ def test_render_svg_to_numpy_uses_subprocess_isolation_when_enabled(monkeypatch:
 
 
 def test_render_svg_to_numpy_falls_back_to_inprocess_after_subprocess_failure(monkeypatch: pytest.MonkeyPatch) -> None:
-    if image_composite_converter.np is None:
+    if imageCompositeConverter.np is None:
         pytest.skip("numpy not available in this environment")
 
-    np = image_composite_converter.np
+    np = imageCompositeConverter.np
     fallback = np.full((1, 1, 3), 13, dtype=np.uint8)
-    monkeypatch.setattr(image_composite_converter, "SVG_RENDER_SUBPROCESS_ENABLED", True)
-    monkeypatch.setattr(image_composite_converter, "_render_svg_to_numpy_via_subprocess", lambda *_a, **_k: None)
-    monkeypatch.setattr(image_composite_converter, "_render_svg_to_numpy_inprocess", lambda *_a, **_k: fallback.copy())
+    monkeypatch.setattr(imageCompositeConverter, "SVG_RENDER_SUBPROCESS_ENABLED", True)
+    monkeypatch.setattr(imageCompositeConverter, "_render_svg_to_numpy_via_subprocess", lambda *_a, **_k: None)
+    monkeypatch.setattr(imageCompositeConverter, "_render_svg_to_numpy_inprocess", lambda *_a, **_k: fallback.copy())
 
     result = Action.render_svg_to_numpy('<svg xmlns="http://www.w3.org/2000/svg"></svg>', 1, 1)
     assert result is not None
@@ -6262,11 +6262,11 @@ def test_convert_range_stops_after_render_failure_and_writes_batch_summary(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     """A render failure should be logged and stop further conversions in that run."""
-    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+    if imageCompositeConverter.np is None or imageCompositeConverter.cv2 is None:
         pytest.skip("numpy/cv2 not available in this environment")
 
-    np = image_composite_converter.np
-    cv2 = image_composite_converter.cv2
+    np = imageCompositeConverter.np
+    cv2 = imageCompositeConverter.cv2
     if np is None or cv2 is None:
         pytest.skip("numpy/cv2 not available in this environment")
 
@@ -6283,16 +6283,16 @@ def test_convert_range_stops_after_render_failure_and_writes_batch_summary(
 
         def shuffle(self, _seq) -> None:
             return None
-    monkeypatch.setattr(image_composite_converter, "_conversion_random", lambda: _FixedRandom())
+    monkeypatch.setattr(imageCompositeConverter, "_conversion_random", lambda: _FixedRandom())
 
-    monkeypatch.setattr(image_composite_converter, "_in_requested_range", lambda *_args, **_kwargs: True)
-    monkeypatch.setattr(image_composite_converter, "_load_quality_config", lambda *_args, **_kwargs: {})
-    monkeypatch.setattr(image_composite_converter, "_write_quality_config", lambda *_args, **_kwargs: None)
-    monkeypatch.setattr(image_composite_converter, "_harmonize_semantic_size_variants", lambda *_args, **_kwargs: None)
-    monkeypatch.setattr(image_composite_converter, "_write_pixel_delta2_ranking", lambda *_args, **_kwargs: None)
-    monkeypatch.setattr(image_composite_converter, "_select_open_quality_cases", lambda rows, **_kwargs: [])
-    monkeypatch.setattr(image_composite_converter, "_select_middle_lower_tercile", lambda _rows: [])
-    monkeypatch.setattr(image_composite_converter, "_try_template_transfer", lambda **_kwargs: (None, None))
+    monkeypatch.setattr(imageCompositeConverter, "_in_requested_range", lambda *_args, **_kwargs: True)
+    monkeypatch.setattr(imageCompositeConverter, "_load_quality_config", lambda *_args, **_kwargs: {})
+    monkeypatch.setattr(imageCompositeConverter, "_write_quality_config", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(imageCompositeConverter, "_harmonize_semantic_size_variants", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(imageCompositeConverter, "_write_pixel_delta2_ranking", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(imageCompositeConverter, "_select_open_quality_cases", lambda rows, **_kwargs: [])
+    monkeypatch.setattr(imageCompositeConverter, "_select_middle_lower_tercile", lambda _rows: [])
+    monkeypatch.setattr(imageCompositeConverter, "_try_template_transfer", lambda **_kwargs: (None, None))
 
     def fake_pipeline(img_path: str, _csv_path: str, _iterations: int, svg_out: str, diff_out: str, reports_out: str, *_args, **_kwargs):
         stem = Path(img_path).stem
@@ -6315,9 +6315,9 @@ def test_convert_range_stops_after_render_failure_and_writes_batch_summary(
         params = {"mode": "semantic_badge", "elements": ["circle"], "cx": 5.0, "cy": 5.0, "r": 3.0}
         return stem, "semantic", params, 1, 30.0
 
-    monkeypatch.setattr(image_composite_converter, "run_iteration_pipeline", fake_pipeline)
+    monkeypatch.setattr(imageCompositeConverter, "run_iteration_pipeline", fake_pipeline)
 
-    result = image_composite_converter.convert_range(
+    result = imageCompositeConverter.convert_range(
         str(images_dir),
         str(csv_path),
         iterations=1,
@@ -6362,7 +6362,7 @@ def test_update_successful_conversions_manifest_keeps_single_failed_entry(tmp_pa
         encoding="utf-8-sig",
     )
 
-    updated_path, _ = image_composite_converter.update_successful_conversions_manifest_with_metrics(
+    updated_path, _ = imageCompositeConverter.update_successful_conversions_manifest_with_metrics(
         folder_path=str(image_dir),
         svg_out_dir=str(svg_dir),
         reports_out_dir=str(reports_dir),
@@ -6393,9 +6393,9 @@ def test_ac08_regression_suite_preserves_previously_good_variants(
 ) -> None:
     """Regression-safe semantic changes must keep the already-good AC08 fixtures convertible."""
     if (
-        image_composite_converter.np is None
-        or image_composite_converter.cv2 is None
-        or image_composite_converter.fitz is None
+        imageCompositeConverter.np is None
+        or imageCompositeConverter.cv2 is None
+        or imageCompositeConverter.fitz is None
     ):
         pytest.skip("numpy/cv2/fitz not available in this environment")
 
@@ -6411,7 +6411,7 @@ def test_ac08_regression_suite_preserves_previously_good_variants(
     diff_dir = tmp_path / "diffs"
     reports_dir = tmp_path / "reports"
 
-    result = image_composite_converter.run_iteration_pipeline(
+    result = imageCompositeConverter.run_iteration_pipeline(
         str(img_path),
         str(csv_path),
         4,
@@ -6430,9 +6430,9 @@ def test_ac08_regression_suite_preserves_previously_good_variants(
 def test_ac0811_l_conversion_preserves_long_bottom_stem(tmp_path: Path) -> None:
     """AC0811_L should keep a visibly long stem instead of collapsing during validation."""
     if (
-        image_composite_converter.np is None
-        or image_composite_converter.cv2 is None
-        or image_composite_converter.fitz is None
+        imageCompositeConverter.np is None
+        or imageCompositeConverter.cv2 is None
+        or imageCompositeConverter.fitz is None
     ):
         pytest.skip("numpy/cv2/fitz not available in this environment")
 
@@ -6442,7 +6442,7 @@ def test_ac0811_l_conversion_preserves_long_bottom_stem(tmp_path: Path) -> None:
         pytest.skip("AC0811 fixture inputs not available")
 
     output_root = tmp_path / "ac0811_l_out"
-    result = image_composite_converter.convert_range(
+    result = imageCompositeConverter.convert_range(
         str(images_dir),
         str(csv_path),
         iterations=4,
@@ -6468,9 +6468,9 @@ def test_ac0811_l_conversion_preserves_long_bottom_stem(tmp_path: Path) -> None:
 def test_ac0820_l_conversion_keeps_circle_diameter_above_half_image_width(tmp_path: Path) -> None:
     """AC0820_L must keep the final circle diameter strictly above half the source width."""
     if (
-        image_composite_converter.np is None
-        or image_composite_converter.cv2 is None
-        or image_composite_converter.fitz is None
+        imageCompositeConverter.np is None
+        or imageCompositeConverter.cv2 is None
+        or imageCompositeConverter.fitz is None
     ):
         pytest.skip("numpy/cv2/fitz not available in this environment")
 
@@ -6482,7 +6482,7 @@ def test_ac0820_l_conversion_keeps_circle_diameter_above_half_image_width(tmp_pa
     img_path = images_dir / "AC0820_L.jpg"
     assert img_path.exists(), f"missing regression fixture: {img_path}"
 
-    src = image_composite_converter.cv2.imread(str(img_path))
+    src = imageCompositeConverter.cv2.imread(str(img_path))
     assert src is not None
     src_h, src_w = src.shape[:2]
 
@@ -6490,7 +6490,7 @@ def test_ac0820_l_conversion_keeps_circle_diameter_above_half_image_width(tmp_pa
     diff_dir = tmp_path / "diffs"
     reports_dir = tmp_path / "reports"
 
-    result = image_composite_converter.run_iteration_pipeline(
+    result = imageCompositeConverter.run_iteration_pipeline(
         str(img_path),
         str(csv_path),
         4,
@@ -6516,9 +6516,9 @@ def test_ac0820_l_conversion_keeps_circle_diameter_above_half_image_width(tmp_pa
 def test_ac08_semantic_anchor_variants_convert_without_failed_svg(tmp_path: Path) -> None:
     """The historical anchor failures AC0811_L and AC0812_M should now render as real SVG outputs."""
     if (
-        image_composite_converter.np is None
-        or image_composite_converter.cv2 is None
-        or image_composite_converter.fitz is None
+        imageCompositeConverter.np is None
+        or imageCompositeConverter.cv2 is None
+        or imageCompositeConverter.fitz is None
     ):
         pytest.skip("numpy/cv2/fitz not available in this environment")
 
@@ -6528,7 +6528,7 @@ def test_ac08_semantic_anchor_variants_convert_without_failed_svg(tmp_path: Path
         pytest.skip("AC08 fixture inputs not available")
 
     output_ac0811 = tmp_path / "ac0811_out"
-    result_ac0811 = image_composite_converter.convert_range(
+    result_ac0811 = imageCompositeConverter.convert_range(
         str(images_dir),
         str(csv_path),
         iterations=4,
@@ -6544,7 +6544,7 @@ def test_ac08_semantic_anchor_variants_convert_without_failed_svg(tmp_path: Path
     assert "status=semantic_ok" in log_ac0811_l
 
     output_ac0812 = tmp_path / "ac0812_out"
-    result_ac0812 = image_composite_converter.convert_range(
+    result_ac0812 = imageCompositeConverter.convert_range(
         str(images_dir),
         str(csv_path),
         iterations=4,
@@ -6737,13 +6737,13 @@ def test_build_oriented_kelle_supports_left_top_right_and_down() -> None:
 
 def test_generate_conversion_overviews_creates_diff_and_svg_tiles(tmp_path: Path) -> None:
     """The overview generator should render one tile sheet for diff PNGs and one for SVG previews."""
-    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+    if imageCompositeConverter.np is None or imageCompositeConverter.cv2 is None:
         pytest.skip("numpy/cv2 not available in this environment")
 
-    from src.overview_tiles import generate_conversion_overviews
+    from src.overviewTiles import generate_conversion_overviews
 
-    np = image_composite_converter.np
-    cv2 = image_composite_converter.cv2
+    np = imageCompositeConverter.np
+    cv2 = imageCompositeConverter.cv2
     if np is None or cv2 is None:
         pytest.skip("numpy/cv2 not available in this environment")
 
@@ -6771,11 +6771,11 @@ def test_generate_conversion_overviews_creates_diff_and_svg_tiles(tmp_path: Path
 
 def test_convert_range_invokes_overview_generation(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     """convert_range should call overview-tile generation after conversion output is written."""
-    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+    if imageCompositeConverter.np is None or imageCompositeConverter.cv2 is None:
         pytest.skip("numpy/cv2 not available in this environment")
 
-    np = image_composite_converter.np
-    cv2 = image_composite_converter.cv2
+    np = imageCompositeConverter.np
+    cv2 = imageCompositeConverter.cv2
     if np is None or cv2 is None:
         pytest.skip("numpy/cv2 not available in this environment")
 
@@ -6786,14 +6786,14 @@ def test_convert_range_invokes_overview_generation(tmp_path: Path, monkeypatch: 
     csv_path.write_text("Wurzelform;Beschreibung\nAC0812;semantic\n", encoding="utf-8")
     assert cv2.imwrite(str(images_dir / "AC0812_L.jpg"), np.full((10, 10, 3), 220, dtype=np.uint8))
 
-    monkeypatch.setattr(image_composite_converter, "_in_requested_range", lambda *_args, **_kwargs: True)
-    monkeypatch.setattr(image_composite_converter, "_load_quality_config", lambda *_args, **_kwargs: {})
-    monkeypatch.setattr(image_composite_converter, "_write_quality_config", lambda *_args, **_kwargs: None)
-    monkeypatch.setattr(image_composite_converter, "_harmonize_semantic_size_variants", lambda *_args, **_kwargs: None)
-    monkeypatch.setattr(image_composite_converter, "_write_pixel_delta2_ranking", lambda *_args, **_kwargs: None)
-    monkeypatch.setattr(image_composite_converter, "_select_open_quality_cases", lambda rows, **_kwargs: [])
-    monkeypatch.setattr(image_composite_converter, "_select_middle_lower_tercile", lambda _rows: [])
-    monkeypatch.setattr(image_composite_converter, "_try_template_transfer", lambda **_kwargs: (None, None))
+    monkeypatch.setattr(imageCompositeConverter, "_in_requested_range", lambda *_args, **_kwargs: True)
+    monkeypatch.setattr(imageCompositeConverter, "_load_quality_config", lambda *_args, **_kwargs: {})
+    monkeypatch.setattr(imageCompositeConverter, "_write_quality_config", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(imageCompositeConverter, "_harmonize_semantic_size_variants", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(imageCompositeConverter, "_write_pixel_delta2_ranking", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(imageCompositeConverter, "_select_open_quality_cases", lambda rows, **_kwargs: [])
+    monkeypatch.setattr(imageCompositeConverter, "_select_middle_lower_tercile", lambda _rows: [])
+    monkeypatch.setattr(imageCompositeConverter, "_try_template_transfer", lambda **_kwargs: (None, None))
 
     called: dict[str, str] = {}
 
@@ -6803,7 +6803,7 @@ def test_convert_range_invokes_overview_generation(tmp_path: Path, monkeypatch: 
         called["reports"] = reports_dir
         return {"diff": str(Path(reports_dir) / "overview_diff_tiles.png")}
 
-    monkeypatch.setattr(image_composite_converter, "generate_conversion_overviews", fake_overviews)
+    monkeypatch.setattr(imageCompositeConverter, "generate_conversion_overviews", fake_overviews)
 
     def fake_pipeline(img_path: str, _csv_path: str, _iterations: int, svg_out: str, diff_out: str, reports_out: str, *_args, **_kwargs):
         stem = Path(img_path).stem
@@ -6816,9 +6816,9 @@ def test_convert_range_invokes_overview_generation(tmp_path: Path, monkeypatch: 
         params = {"mode": "semantic_badge", "elements": ["circle"], "cx": 5.0, "cy": 5.0, "r": 3.0}
         return stem, "semantic", params, 1, 30.0
 
-    monkeypatch.setattr(image_composite_converter, "run_iteration_pipeline", fake_pipeline)
+    monkeypatch.setattr(imageCompositeConverter, "run_iteration_pipeline", fake_pipeline)
 
-    result = image_composite_converter.convert_range(
+    result = imageCompositeConverter.convert_range(
         str(images_dir),
         str(csv_path),
         iterations=1,

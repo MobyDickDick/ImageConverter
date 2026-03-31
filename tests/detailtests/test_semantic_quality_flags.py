@@ -4,11 +4,11 @@ from pathlib import Path
 
 import pytest
 
-from src import image_composite_converter
+from src import imageCompositeConverter
 
 
 def test_semantic_quality_flags_marks_ac0811_with_high_element_error() -> None:
-    flags = image_composite_converter._semantic_quality_flags(
+    flags = imageCompositeConverter._semantic_quality_flags(
         "AC0811_L",
         [
             "circle: Fehler=4.200",
@@ -23,7 +23,7 @@ def test_semantic_quality_flags_marks_ac0811_with_high_element_error() -> None:
 
 
 def test_semantic_quality_flags_ignores_non_ac0811_variants() -> None:
-    flags = image_composite_converter._semantic_quality_flags(
+    flags = imageCompositeConverter._semantic_quality_flags(
         "AC0812_L",
         [
             "circle: Fehler=3.000",
@@ -38,13 +38,13 @@ def test_run_iteration_pipeline_logs_borderline_quality_for_ac0811(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+    if imageCompositeConverter.np is None or imageCompositeConverter.cv2 is None:
         pytest.skip("numpy/cv2 not available in this environment")
 
-    np = image_composite_converter.np
+    np = imageCompositeConverter.np
     if np is None:
         pytest.skip("numpy not available in this environment")
-    cv2 = image_composite_converter.cv2
+    cv2 = imageCompositeConverter.cv2
 
     img = np.full((12, 20, 3), 240, dtype=np.uint8)
     img_path = tmp_path / "AC0811_L.jpg"
@@ -56,7 +56,7 @@ def test_run_iteration_pipeline_logs_borderline_quality_for_ac0811(
     assert cv2.imwrite(str(img_path), img)
 
     monkeypatch.setattr(
-        image_composite_converter.Reflection,
+        imageCompositeConverter.Reflection,
         "parse_description",
         lambda *_args, **_kwargs: (
             "semantic",
@@ -64,17 +64,17 @@ def test_run_iteration_pipeline_logs_borderline_quality_for_ac0811(
         ),
     )
     monkeypatch.setattr(
-        image_composite_converter.Action,
+        imageCompositeConverter.Action,
         "make_badge_params",
-        staticmethod(lambda *_args, **_kwargs: image_composite_converter.Action._default_ac0811_params(20, 12)),
+        staticmethod(lambda *_args, **_kwargs: imageCompositeConverter.Action._default_ac0811_params(20, 12)),
     )
     monkeypatch.setattr(
-        image_composite_converter.Action,
+        imageCompositeConverter.Action,
         "validate_semantic_description_alignment",
         staticmethod(lambda *_args, **_kwargs: []),
     )
     monkeypatch.setattr(
-        image_composite_converter.Action,
+        imageCompositeConverter.Action,
         "validate_badge_by_elements",
         staticmethod(
             lambda *_args, **_kwargs: [
@@ -85,37 +85,37 @@ def test_run_iteration_pipeline_logs_borderline_quality_for_ac0811(
         ),
     )
     monkeypatch.setattr(
-        image_composite_converter.Action,
+        imageCompositeConverter.Action,
         "generate_badge_svg",
         staticmethod(lambda w, h, _p: f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}"/>'),
     )
     monkeypatch.setattr(
-        image_composite_converter.Action,
+        imageCompositeConverter.Action,
         "render_svg_to_numpy",
         staticmethod(lambda _svg, w, h: np.full((h, w, 3), 245, dtype=np.uint8)),
     )
     monkeypatch.setattr(
-        image_composite_converter.Action,
+        imageCompositeConverter.Action,
         "_enforce_semantic_connector_expectation",
         staticmethod(lambda *_args, **_kwargs: {"stem_enabled": True}),
     )
     monkeypatch.setattr(
-        image_composite_converter.Action,
+        imageCompositeConverter.Action,
         "apply_redraw_variation",
         staticmethod(lambda params, _w, _h: (dict(params), ["redraw_variation: seed=123 changed_params=stem_width:1.000->1.050"])),
     )
     monkeypatch.setattr(
-        image_composite_converter.Action,
+        imageCompositeConverter.Action,
         "calculate_error",
         staticmethod(lambda *_args, **_kwargs: 12.0),
     )
     monkeypatch.setattr(
-        image_composite_converter.Action,
+        imageCompositeConverter.Action,
         "create_diff_image",
         staticmethod(lambda a, _b: a.copy()),
     )
 
-    res = image_composite_converter.run_iteration_pipeline(
+    res = imageCompositeConverter.run_iteration_pipeline(
         str(img_path),
         str(csv_path),
         2,
@@ -146,7 +146,7 @@ def test_write_ac08_weak_family_status_report_summarizes_ranked_outliers(tmp_pat
         encoding="utf-8",
     )
 
-    image_composite_converter._write_ac08_weak_family_status_report(
+    imageCompositeConverter._write_ac08_weak_family_status_report(
         str(reports_dir),
         selected_variants=["AC0882_S", "AC0811_L"],
     )
@@ -165,7 +165,7 @@ def test_write_ac08_weak_family_status_report_skips_non_ac08_selection(tmp_path:
     reports_dir = tmp_path / "reports"
     reports_dir.mkdir()
 
-    image_composite_converter._write_ac08_weak_family_status_report(
+    imageCompositeConverter._write_ac08_weak_family_status_report(
         str(reports_dir),
         selected_variants=["GE0001_M"],
     )
