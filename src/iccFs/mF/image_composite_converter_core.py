@@ -9846,7 +9846,7 @@ def _read_svg_geometry(svg_path: str) -> tuple[int, int, dict] | None:
         params["arm_y2"] = float(line_match.group(4))
         params["arm_stroke"] = float(line_match.group(5))
 
-    text_matches = re.findall(r"(<text[^>]*>)([^<]*)</text>", text)
+    text_matches = re.findall(r"(<text\b[^>]*>)(.*?)</text>", text, flags=re.IGNORECASE | re.DOTALL)
     if text_matches:
         for text_tag, _text_content in text_matches:
             fill_match = re.search(r'fill="(#[0-9a-fA-F]{6})"', text_tag)
@@ -9854,7 +9854,16 @@ def _read_svg_geometry(svg_path: str) -> tuple[int, int, dict] | None:
                 params["text_gray"] = _gray_from_hex(fill_match.group(1), int(params["text_gray"]))
                 break
 
-        text_tokens = [content.strip().upper() for _tag, content in text_matches if content and content.strip()]
+        text_tokens: list[str] = []
+        for _tag, content in text_matches:
+            if not content:
+                continue
+            # Allow nested glyph markup (<tspan>, etc.) by flattening text nodes
+            # instead of requiring direct text-only children.
+            flattened = re.sub(r"<[^>]+>", "", content)
+            flattened = re.sub(r"\s+", " ", flattened).strip()
+            if flattened:
+                text_tokens.append(flattened.upper())
         normalized_tokens = [token.replace("₂", "2").replace("^", "").replace("_", "") for token in text_tokens]
         merged_text = "".join(normalized_tokens)
 
