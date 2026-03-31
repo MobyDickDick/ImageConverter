@@ -8,14 +8,18 @@ from __future__ import annotations
 
 import sys
 import types
+from pathlib import Path
+
+if __package__ in {None, ""}:
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import src.iccFs.mF.image_composite_converter_core as _core
 from src.iccFs.convert_range import convert_range
-from src.iccFs.load_optional_module import load_optional_module
+from src.iccFs.loadOptionalModule import load_optional_module
 from src.iccFs.main import main
-from src.iccFs.optional_dependency_base_dir import optional_dependency_base_dir
-from src.iccFs.sync_core_overrides import sync_core_overrides
-from src.iccFs.vendored_site_packages_dirs import vendored_site_packages_dirs
+from src.iccFs.optionalDependencyBaseDir import optional_dependency_base_dir
+from src.iccFs.syncCoreOverrides import sync_core_overrides
+from src.iccFs.vendoredSitePackagesDirs import vendored_site_packages_dirs
 
 for _name in dir(_core):
     if _name.startswith("__"):

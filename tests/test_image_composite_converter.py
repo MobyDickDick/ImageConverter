@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import contextlib
+import subprocess
 import sys
 import shutil
 from pathlib import Path
@@ -11,6 +12,19 @@ import src.image_composite_converter as image_composite_converter
 from src.image_composite_converter import Action, _clip
 
 conv = image_composite_converter
+
+
+def test_cli_entrypoint_runs_as_script_with_help() -> None:
+    """The legacy script path should work without requiring PYTHONPATH tweaks."""
+    result = subprocess.run(
+        [sys.executable, "src/imageCompositeConverter.py", "--help"],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+    assert result.returncode == 0
+    assert "usage: imageCompositeConverter.py" in result.stdout
 
 
 def test_vendored_site_packages_dirs_discovers_repo_bundle() -> None:
