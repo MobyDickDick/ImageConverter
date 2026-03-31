@@ -10,7 +10,7 @@ import importlib
 import sys
 import types
 
-import src.mainFiles.image_composite_converter_core as _core
+import src.imageCompositeConverterFs.mainFiles.image_composite_converter_core as _core
 from src.imageCompositeConverterFs.convertRange import convertRange
 from src.imageCompositeConverterFs.loadOptionalModule import loadOptionalModule
 from src.imageCompositeConverterFs.main import main

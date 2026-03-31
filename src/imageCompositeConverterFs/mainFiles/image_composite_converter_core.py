@@ -11281,7 +11281,7 @@ _MAINFILES_DIR = Path(__file__).resolve().parent
 
 
 def _load_mainfile_function(func_name: str, filename: str):
-    """Lade eine ausgelagerte Funktionsdefinition aus src/mainFiles in dieses Modul."""
+    """Lade eine ausgelagerte Funktionsdefinition aus src/imageCompositeConverterFs/mainFiles in dieses Modul."""
     source_path = _MAINFILES_DIR / filename
     namespace: dict[str, object] = {}
     code = compile(source_path.read_text(encoding="utf-8"), str(source_path), "exec")
