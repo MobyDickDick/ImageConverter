@@ -3,8 +3,8 @@
 
 Example:
     python tools/split_module_by_call_tree.py \
-      --source src/image_composite_converter.py \
-      --call-tree artifacts/converted_images/reports/call_tree_image_composite_converter.csv \
+      --source src/imageCompositeConverter.py \
+      --call-tree artifacts/converted_images/reports/call_tree_imageCompositeConverter.csv \
       --root main \
       --output-dir split_by_call_tree
 """
