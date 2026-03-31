@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from src.overviewTiles import create_tiled_overview_svg, generate_conversion_overviews
+from src.iccFs.overviewTiles import create_tiled_overview_svg, generate_conversion_overviews
 
 
 def _write_svg(path: Path, body: str, *, width: int = 20, height: int = 10) -> None:
