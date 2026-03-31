@@ -6,7 +6,6 @@ re-exports the existing converter API from `image_composite_converter_core`.
 
 from __future__ import annotations
 
-import importlib
 import sys
 import types
 
