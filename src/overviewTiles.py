@@ -1,4 +1,4 @@
-"""Snake-case compatibility wrapper for overview tile helpers."""
+"""Polish-notation module wrapper for overview tile helpers."""
 
 from __future__ import annotations
 

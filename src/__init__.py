@@ -6,10 +6,12 @@ Provides compatibility imports for both snake_case and Polish-notation
 
 from . import imageCompositeConverter
 from . import image_composite_converter
-from . import overview_tiles
+from . import overviewTiles
+overview_tiles = overviewTiles
 
 __all__ = [
     "imageCompositeConverter",
     "image_composite_converter",
+    "overviewTiles",
     "overview_tiles",
 ]

@@ -62,7 +62,7 @@ def _parse_args() -> argparse.Namespace:
         action="store_true",
         help="CSV nach Länge des old-Werts (absteigend) sortieren und speichern",
     )
-    return parser.parseArgs()
+    return parser.parse_args()
 
 
 def _load_entries(csv_path: Path) -> list[RenameEntry]:
