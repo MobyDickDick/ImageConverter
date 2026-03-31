@@ -11338,9 +11338,24 @@ def _module_call_edges_for_path(module_path: str | os.PathLike[str]) -> tuple[di
 _MAINFILES_DIR = Path(__file__).resolve().parent
 
 
+def _snake_to_camel_filename(filename: str) -> str:
+    stem, suffix = filename.rsplit(".", 1)
+    leading_underscores = len(stem) - len(stem.lstrip("_"))
+    stem_without_prefix = stem[leading_underscores:]
+    parts = [part for part in stem_without_prefix.split("_") if part]
+    if not parts:
+        return filename
+    camel_stem = parts[0] + "".join(part[:1].upper() + part[1:] for part in parts[1:])
+    return f"{'_' * leading_underscores}{camel_stem}.{suffix}"
+
+
 def _load_mainfile_function(func_name: str, filename: str):
     """Lade eine ausgelagerte Funktionsdefinition aus src/iccFs/mF in dieses Modul."""
     source_path = _MAINFILES_DIR / filename
+    if not source_path.exists():
+        camel_source_path = _MAINFILES_DIR / _snake_to_camel_filename(filename)
+        if camel_source_path.exists():
+            source_path = camel_source_path
     namespace: dict[str, object] = {}
     code = compile(source_path.read_text(encoding="utf-8"), str(source_path), "exec")
     exec(code, globals(), namespace)
