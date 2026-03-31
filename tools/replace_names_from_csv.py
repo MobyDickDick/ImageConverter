@@ -2,6 +2,9 @@ from __future__ import annotations
 
 import argparse
 import csv
+import io
+import keyword
+import tokenize
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -78,6 +81,8 @@ def _validate_plans(plans: list[PlannedRename]) -> None:
     for plan in plans:
         old_path = plan.old_path
         new_path = plan.new_path
+        if new_path.exists() and new_path != old_path:
+            raise FileExistsError(f"Ziel existiert bereits: {new_path}")
         conflict_origin = targets.get(new_path)
         if conflict_origin and conflict_origin != old_path:
             raise FileExistsError(
@@ -99,6 +104,57 @@ def _apply_renames(plans: list[PlannedRename], apply: bool) -> None:
             old_path.rename(new_path)
 
 
+def _identifier_rename_map(mapping: dict[str, str]) -> dict[str, str]:
+    rename_map: dict[str, str] = {}
+    for old_name, new_name in mapping.items():
+        old_stem = old_name[:-3] if old_name.endswith(".py") else old_name
+        new_stem = new_name[:-3] if new_name.endswith(".py") else new_name
+        if not old_stem.isidentifier() or not new_stem.isidentifier():
+            continue
+        if keyword.iskeyword(old_stem) or keyword.iskeyword(new_stem):
+            continue
+        if old_stem == new_stem:
+            continue
+        rename_map[old_stem] = new_stem
+    return rename_map
+
+
+def _rewrite_python_source(source: str, rename_map: dict[str, str]) -> str:
+    rebuilt: list[tokenize.TokenInfo] = []
+    for token in tokenize.generate_tokens(io.StringIO(source).readline):
+        if token.type == tokenize.NAME and token.string in rename_map:
+            rebuilt.append(
+                tokenize.TokenInfo(
+                    type=token.type,
+                    string=rename_map[token.string],
+                    start=token.start,
+                    end=token.end,
+                    line=token.line,
+                )
+            )
+            continue
+        rebuilt.append(token)
+    return tokenize.untokenize(rebuilt)
+
+
+def _rewrite_python_sources(root: Path, mapping: dict[str, str], apply: bool) -> list[Path]:
+    rename_map = _identifier_rename_map(mapping)
+    if not rename_map:
+        return []
+    changed: list[Path] = []
+    for path in sorted(root.rglob("*.py")):
+        if any(part == ".git" for part in path.parts):
+            continue
+        source = path.read_text(encoding="utf-8")
+        updated = _rewrite_python_source(source, rename_map)
+        if source == updated:
+            continue
+        changed.append(path)
+        if apply:
+            path.write_text(updated, encoding="utf-8")
+    return changed
+
+
 def main() -> None:
     args = _parse_args()
     csv_path = args.csv if args.csv.is_absolute() else (REPO_ROOT / args.csv)
@@ -112,8 +168,10 @@ def main() -> None:
     mapping = _load_name_map(csv_path)
     plans = _planned_renames(root=root, mapping=mapping)
     _validate_plans(plans)
+    changed_python_sources = _rewrite_python_sources(root=root, mapping=mapping, apply=args.apply)
 
     print(f"Mapping-Einträge: {len(mapping)}")
+    print(f"Angepasste Python-Quellen: {len(changed_python_sources)}")
     print(f"Geplante Umbenennungen: {len(plans)}")
 
     if not args.apply:
