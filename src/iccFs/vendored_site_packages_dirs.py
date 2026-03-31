@@ -6,7 +6,7 @@ from pathlib import Path
 
 def vendored_site_packages_dirs() -> list[Path]:
     """Return repo-local site-packages directories that may contain bundled deps."""
-    import src.image_composite_converter as module
+    import src.imageCompositeConverter as module
 
     base = module._optional_dependency_base_dir()
     linuxCandidates = [
