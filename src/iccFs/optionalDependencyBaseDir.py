@@ -1,9 +1,16 @@
-"""Polish-notation module alias for ``optional_dependency_base_dir``."""
-
 from __future__ import annotations
 
-from .optional_dependency_base_dir import optional_dependency_base_dir
+from pathlib import Path
 
-optionalDependencyBaseDir = optional_dependency_base_dir
 
-__all__ = ["optional_dependency_base_dir", "optionalDependencyBaseDir"]
+def optionalDependencyBaseDir() -> Path:
+    """Return repository root used for vendored dependency discovery."""
+    return Path(__file__).resolve().parents[2]
+
+
+def optional_dependency_base_dir() -> Path:
+    """Backward-compatible snake_case alias."""
+    return optionalDependencyBaseDir()
+
+
+__all__ = ["optionalDependencyBaseDir", "optional_dependency_base_dir"]
