@@ -2245,6 +2245,7 @@ class Action:
         if not symbol_name.startswith("AC08"):
             return params
         p = Action._capture_canonical_badge_colors(Action._normalize_light_circle_colors(dict(params)))
+        p = Action._enforce_semantic_component_contract(canonical_name, p)
         p["badge_symbol_name"] = symbol_name
         # During geometry fitting we intentionally keep auto-estimated colors.
         # Canonical palette values are re-applied once fitting converged.
@@ -2488,6 +2489,24 @@ class Action:
         ):
             p.pop(key, None)
         if preserve_plain_ring_geometry:
+            # AC0800 variants are plain rings only. Template transfer can carry
+            # connector metadata from donor symbols (e.g. AC0811/AC0812), which
+            # must be stripped so L/S variants never render tiny residual grips.
+            p.pop("stem_enabled", None)
+            p.pop("arm_enabled", None)
+            for connector_key in (
+                "stem_x",
+                "stem_top",
+                "stem_bottom",
+                "stem_width",
+                "stem_gray",
+                "arm_x1",
+                "arm_y1",
+                "arm_x2",
+                "arm_y2",
+                "arm_stroke",
+            ):
+                p.pop(connector_key, None)
             p.update(preserved_plain_ring_keys)
             if "template_circle_cx" in p:
                 p["cx"] = float(p["template_circle_cx"])
@@ -2526,6 +2545,35 @@ class Action:
             p["r"] = float(Action._clip_scalar(float(p.get("r", template_r)), min_r, max_r))
         if p.get("draw_text", True) and "text_gray" in p:
             p["text_gray"] = int(p.get("stroke_gray", Action.LIGHT_CIRCLE_STROKE_GRAY))
+        return p
+
+    @staticmethod
+    def _enforce_semantic_component_contract(name: str, params: dict) -> dict:
+        """Strip components that are not part of the semantic symbol definition."""
+        p = dict(params)
+        canonical_name = str(name).upper()
+        symbol_name = canonical_name.split("_", 1)[0]
+
+        no_text_symbols = {"AC0800", "AC0810", "AC0811", "AC0812", "AC0813", "AC0814", "AC0881", "AC0882"}
+        no_connector_symbols = {"AC0800", "AC0820", "AC0835", "AC0870"}
+        arm_only_symbols = {"AC0810", "AC0812", "AC0813", "AC0814", "AC0832", "AC0833", "AC0834", "AC0837", "AC0838", "AC0839", "AC0882"}
+        stem_only_symbols = {"AC0811", "AC0831", "AC0836", "AC0881"}
+
+        if symbol_name in no_text_symbols:
+            p["draw_text"] = False
+            p["label"] = ""
+            p.pop("text_mode", None)
+
+        if symbol_name in no_connector_symbols or symbol_name in stem_only_symbols:
+            p.pop("arm_enabled", None)
+            for key in ("arm_x1", "arm_y1", "arm_x2", "arm_y2", "arm_stroke"):
+                p.pop(key, None)
+
+        if symbol_name in no_connector_symbols or symbol_name in arm_only_symbols:
+            p.pop("stem_enabled", None)
+            for key in ("stem_x", "stem_top", "stem_bottom", "stem_width", "stem_gray"):
+                p.pop(key, None)
+
         return p
 
     @staticmethod

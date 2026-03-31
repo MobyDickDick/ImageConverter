@@ -1068,6 +1068,83 @@ def test_finalize_ac0800_small_variant_keeps_template_radius_floor() -> None:
     assert float(params["min_circle_radius"]) >= float(params["template_circle_radius"]) - 0.01
 
 
+def test_finalize_ac0800_variants_strip_transferred_connector_geometry() -> None:
+    """AC0800 variants must stay plain rings even if donor params contain connector fields."""
+    params = Action.make_badge_params(30, 30, "AC0800")
+    params["stem_enabled"] = True
+    params["stem_x"] = 15.0
+    params["stem_top"] = 28.0
+    params["stem_bottom"] = 29.0
+    params["stem_width"] = 1.0
+    params["arm_enabled"] = True
+    params["arm_x1"] = 1.0
+    params["arm_y1"] = 15.0
+    params["arm_x2"] = 2.0
+    params["arm_y2"] = 15.0
+    params["arm_stroke"] = 1.0
+
+    tuned = Action._finalize_ac08_style("AC0800_L", params)
+    for key in (
+        "stem_enabled",
+        "stem_x",
+        "stem_top",
+        "stem_bottom",
+        "stem_width",
+        "arm_enabled",
+        "arm_x1",
+        "arm_y1",
+        "arm_x2",
+        "arm_y2",
+        "arm_stroke",
+    ):
+        assert key not in tuned
+
+
+def test_finalize_ac0812_strips_transferred_stem_geometry() -> None:
+    """Arm-only symbols must not keep a transferred vertical stem."""
+    params = Action._default_ac0812_params(30, 30)
+    params["stem_enabled"] = True
+    params["stem_x"] = 15.0
+    params["stem_top"] = 10.0
+    params["stem_bottom"] = 30.0
+    params["stem_width"] = 1.0
+
+    tuned = Action._finalize_ac08_style("AC0812_M", params)
+
+    for key in ("stem_enabled", "stem_x", "stem_top", "stem_bottom", "stem_width"):
+        assert key not in tuned
+    assert tuned.get("arm_enabled") is True
+
+
+def test_finalize_ac0870_strips_transferred_connector_geometry() -> None:
+    """Text-only circle symbols must not keep transferred arm/stem elements."""
+    params = Action._default_ac0870_params(30, 30)
+    params["arm_enabled"] = True
+    params["arm_x1"] = 2.0
+    params["arm_y1"] = 15.0
+    params["arm_x2"] = 6.0
+    params["arm_y2"] = 15.0
+    params["stem_enabled"] = True
+    params["stem_x"] = 15.0
+    params["stem_top"] = 20.0
+    params["stem_bottom"] = 29.0
+
+    tuned = Action._finalize_ac08_style("AC0870_S", params)
+
+    for key in (
+        "arm_enabled",
+        "arm_x1",
+        "arm_y1",
+        "arm_x2",
+        "arm_y2",
+        "stem_enabled",
+        "stem_x",
+        "stem_top",
+        "stem_bottom",
+    ):
+        assert key not in tuned
+
+
 
 def test_validate_badge_by_elements_keeps_ac0800_l_centered_and_bounded() -> None:
     """AC0800_L should not drift left/right or overgrow during circle-only validation."""
