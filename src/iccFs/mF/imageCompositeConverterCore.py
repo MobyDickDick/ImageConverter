@@ -1963,7 +1963,7 @@ class Action:
     def _tune_ac08_right_connector_family(name: str, params: dict) -> dict:
         """Apply shared guardrails for mirrored right-connector AC08 families.
 
-        Aufgabe 4.2 groups AC0810, AC0814, AC0834, AC0838 and AC0839
+        Aufgabe 4.2 groups AC0810, AC0814, AC0834, AC0835, AC0838 and AC0839
         because they all place the circle on the left and extend the connector
         toward the right canvas edge. Their common regressions mirror the left
         connector family:
@@ -1976,7 +1976,7 @@ class Action:
         """
         p = dict(params)
         symbol_name = getBaseNameFromFile(str(name)).upper().split("_", 1)[0]
-        if symbol_name not in {"AC0810", "AC0814", "AC0834", "AC0838", "AC0839"}:
+        if symbol_name not in {"AC0810", "AC0814", "AC0834", "AC0835", "AC0838", "AC0839"}:
             return p
 
         p["connector_family_group"] = "ac08_right_connector"
@@ -2166,14 +2166,14 @@ class Action:
     def _tune_ac08_circle_text_family(name: str, params: dict) -> dict:
         """Apply shared guardrails for connector-free AC08 circle/text badges.
 
-        Aufgabe 4.4 groups AC0820, AC0835 and AC0870 because they all:
+        Aufgabe 4.4 groups AC0820 and AC0870 because they both:
         - have no connector geometry that should influence circle fitting,
         - regress when text blobs pull the circle away from the semantic center,
         - need stable text scaling without letting the ring collapse or overgrow.
         """
         p = dict(params)
         symbol_name = getBaseNameFromFile(str(name)).upper().split("_", 1)[0]
-        if symbol_name not in {"AC0820", "AC0835", "AC0870"}:
+        if symbol_name not in {"AC0820", "AC0870"}:
             return p
 
         p["connector_family_group"] = "ac08_circle_text"
@@ -2556,7 +2556,7 @@ class Action:
         symbol_name = canonical_name.split("_", 1)[0]
 
         no_text_symbols = {"AC0800", "AC0810", "AC0811", "AC0812", "AC0813", "AC0814", "AC0881", "AC0882"}
-        no_connector_symbols = {"AC0800", "AC0820", "AC0835", "AC0870"}
+        no_connector_symbols = {"AC0800", "AC0820", "AC0870"}
         arm_only_symbols = {"AC0810", "AC0812", "AC0813", "AC0814", "AC0832", "AC0833", "AC0834", "AC0837", "AC0838", "AC0839", "AC0882"}
         stem_only_symbols = {"AC0811", "AC0831", "AC0836", "AC0881"}
 
