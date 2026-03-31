@@ -68,7 +68,7 @@ def _read_preview(path: Path):
     return None
 
 
-def create_tiled_overview_image(
+def createTiledOverviewImage(
     source_files: list[Path],
     output_path: Path,
     *,
@@ -174,7 +174,7 @@ def _extractSvgInner(svg_text: str) -> str:
     return match.group(1).strip() if match else svg_text.strip()
 
 
-def create_tiled_overview_svg(
+def createTiledOverviewSvg(
     source_files: list[Path],
     output_path: Path,
     *,
@@ -237,7 +237,7 @@ def create_tiled_overview_svg(
     return output_path
 
 
-def generate_conversion_overviews(
+def generateConversionOverviews(
     diff_dir: str | Path,
     svg_dir: str | Path,
     reports_dir: str | Path,
@@ -251,17 +251,17 @@ def generate_conversion_overviews(
 
     diff_files = sorted(diff_root.glob("*_diff.png"))
     diff_out = reports_root / "overview_diff_tiles.png"
-    diff_res = create_tiled_overview_image(diff_files, diff_out)
+    diff_res = createTiledOverviewImage(diff_files, diff_out)
     if diff_res is not None:
         generated["diff"] = str(diff_res)
 
     svg_files = sorted(svg_root.glob("*.svg"))
     svg_out = reports_root / "overview_svg_tiles.png"
-    svg_res = create_tiled_overview_image(svg_files, svg_out)
+    svg_res = createTiledOverviewImage(svg_files, svg_out)
     if svg_res is not None:
         generated["svg"] = str(svg_res)
     svg_vector_out = reports_root / "overview_svg_tiles.svg"
-    svg_vector_res = create_tiled_overview_svg(svg_files, svg_vector_out)
+    svg_vector_res = createTiledOverviewSvg(svg_files, svg_vector_out)
     if svg_vector_res is not None:
         generated["svg_vector"] = str(svg_vector_res)
 
@@ -288,10 +288,10 @@ def _resolve_optional_dependencies() -> None:
 _read_raster = _read_raster
 _render_svg = _render_svg
 _read_preview = _read_preview
-create_tiled_overview_image = create_tiled_overview_image
+createTiledOverviewImage = createTiledOverviewImage
 _read_svg_text = _read_svg_text
 _extract_svg_bounds = _extract_svg_bounds
 _extractSvgInner = _extractSvgInner
-create_tiled_overview_svg = create_tiled_overview_svg
-generate_conversion_overviews = generate_conversion_overviews
+createTiledOverviewSvg = createTiledOverviewSvg
+generateConversionOverviews = generateConversionOverviews
 _resolve_optional_dependencies = _resolve_optional_dependencies

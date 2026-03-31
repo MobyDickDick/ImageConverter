@@ -36,9 +36,7 @@ def loadOptionalModule(moduleName: str):
     return None
 
 
-def load_optional_module(moduleName: str):
-    """Backward-compatible snake_case alias."""
-    return loadOptionalModule(moduleName)
+load_optional_module = loadOptionalModule
 
 
 __all__ = ["loadOptionalModule", "load_optional_module"]

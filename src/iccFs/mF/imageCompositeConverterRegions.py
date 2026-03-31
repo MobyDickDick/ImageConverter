@@ -44,7 +44,7 @@ def _bbox_to_dict(label: str, bbox: tuple[int, int, int, int], color: tuple[int,
     }
 
 
-def detect_relevant_regions_impl(img, cv2_module, np_module) -> list[dict[str, object]]:
+def detectRelevantRegionsImpl(img, cv2_module, np_module) -> list[dict[str, object]]:
     if cv2_module is None or np_module is None:
         raise RuntimeError("detect_relevant_regions benötigt numpy und opencv-python-headless")
     if img is None:
@@ -111,7 +111,7 @@ def detect_relevant_regions_impl(img, cv2_module, np_module) -> list[dict[str, o
     return regions
 
 
-def annotate_image_regions_impl(img, regions: list[dict[str, object]], cv2_module):
+def annotateImageRegionsImpl(img, regions: list[dict[str, object]], cv2_module):
     if cv2_module is None:
         raise RuntimeError("annotate_image_regions benötigt opencv-python-headless")
     annotated = img.copy()
@@ -127,7 +127,7 @@ def annotate_image_regions_impl(img, regions: list[dict[str, object]], cv2_modul
     return annotated
 
 
-def analyze_range_impl(
+def analyzeRangeImpl(
     folder_path: str,
     output_root: str | None,
     start_ref: str,
@@ -198,6 +198,6 @@ def analyze_range_impl(
 # Backward-compatible aliases
 _expand_bbox = _expand_bbox
 _bbox_to_dict = _bbox_to_dict
-detect_relevant_regions_impl = detect_relevant_regions_impl
-annotate_image_regions_impl = annotate_image_regions_impl
-analyze_range_impl = analyze_range_impl
+detectRelevantRegionsImpl = detectRelevantRegionsImpl
+annotateImageRegionsImpl = annotateImageRegionsImpl
+analyzeRangeImpl = analyzeRangeImpl

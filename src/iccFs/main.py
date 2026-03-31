@@ -76,7 +76,7 @@ def main(argv: list[str] | None = None) -> int:
                     end_ref=args.end,
                 )
             else:
-                outDir = module.convert_range(
+                outDir = module.convertRange(
                     args.folder_path,
                     csvPath,
                     args.iterations,

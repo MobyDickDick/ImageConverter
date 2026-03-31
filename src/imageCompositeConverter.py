@@ -16,7 +16,7 @@ if __package__ in {None, ""}:
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import src.iccFs.mF.imageCompositeConverterCore as _core
-from src.iccFs.convertRange import convert_range
+from src.iccFs.convertRange import convertRange
 from src.iccFs.loadOptionalModule import loadOptionalModule
 from src.iccFs.main import main as _main
 from src.iccFs.optionalDependencyBaseDir import optionalDependencyBaseDir
@@ -32,14 +32,14 @@ _optional_dependency_base_dir = optionalDependencyBaseDir
 _vendored_site_packages_dirs = vendoredSitePackagesDirs
 _load_optional_module = loadOptionalModule
 _syncCoreOverrides = syncCoreOverrides
-convert_range = convert_range
+convertRange = convertRange
 
 # Polish-notation compatibility aliases for public integration points.
 optionalDependencyBaseDir = _optional_dependency_base_dir
 vendoredSitePackagesDirs = _vendored_site_packages_dirs
 loadOptionalModule = _load_optional_module
 syncCoreOverrides = _syncCoreOverrides
-convert_range = convert_range
+convertRange = convertRange
 
 
 def main(argv: list[str] | None = None) -> int:

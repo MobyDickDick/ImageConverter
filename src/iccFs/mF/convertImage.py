@@ -15,8 +15,8 @@ def convertImage(input_path: str, output_path: str, *, max_iter: int = 120, plat
     img = cv2.imread(str(input_path))
     if img is None:
         raise FileNotFoundError(f"Bild konnte nicht gelesen werden: {input_path}")
-    regions = detect_relevant_regions(img)
-    annotated = annotate_image_regions(img, regions)
+    regions = detectRelevantRegions(img)
+    annotated = annotateImageRegions(img, regions)
     cv2.imwrite(str(target), annotated)
     target.with_suffix(".json").write_text(json.dumps(regions, ensure_ascii=False, indent=2), encoding="utf-8")
     return target
