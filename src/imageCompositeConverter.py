@@ -10,30 +10,30 @@ import sys
 import types
 
 import src.iccFs.mF.imageCompositeConverterCore as _core
-from src.iccFs.convertRange import convertRange
-from src.iccFs.loadOptionalModule import loadOptionalModule
+from src.iccFs.convert_range import convert_range
+from src.iccFs.load_optional_module import load_optional_module
 from src.iccFs.main import main
-from src.iccFs.optionalDependencyBaseDir import optionalDependencyBaseDir
-from src.iccFs.syncCoreOverrides import syncCoreOverrides
-from src.iccFs.vendoredSitePackagesDirs import vendoredSitePackagesDirs
+from src.iccFs.optional_dependency_base_dir import optional_dependency_base_dir
+from src.iccFs.sync_core_overrides import sync_core_overrides
+from src.iccFs.vendored_site_packages_dirs import vendored_site_packages_dirs
 
 for _name in dir(_core):
     if _name.startswith("__"):
         continue
     globals()[_name] = getattr(_core, _name)
 
-_optional_dependency_base_dir = optionalDependencyBaseDir
-_vendored_site_packages_dirs = vendoredSitePackagesDirs
-_load_optional_module = loadOptionalModule
-_sync_core_overrides = syncCoreOverrides
-convert_range = convertRange
+_optional_dependency_base_dir = optional_dependency_base_dir
+_vendored_site_packages_dirs = vendored_site_packages_dirs
+_load_optional_module = load_optional_module
+_sync_core_overrides = sync_core_overrides
+convert_range = convert_range
 
 # Polish-notation compatibility aliases for public integration points.
-optionalDependencyBaseDir = _optional_dependency_base_dir
-vendoredSitePackagesDirs = _vendored_site_packages_dirs
-loadOptionalModule = _load_optional_module
-syncCoreOverrides = _sync_core_overrides
-convertRange = convert_range
+optional_dependency_base_dir = _optional_dependency_base_dir
+vendored_site_packages_dirs = _vendored_site_packages_dirs
+load_optional_module = _load_optional_module
+sync_core_overrides = _sync_core_overrides
+convert_range = convert_range
 
 _core._optional_dependency_base_dir = _optional_dependency_base_dir
 _core._vendored_site_packages_dirs = _vendored_site_packages_dirs
@@ -48,8 +48,8 @@ _core.fitz = fitz
 
 
 class _CoreSyncModule(types.ModuleType):
-    def __setattr__(self, name, value):
-        super().__setattr__(name, value)
+    def _setattr(self, name, value):
+        super()._setattr(name, value)
         if name in {"convert_range", "convertRange", "main", "_sync_core_overrides", "syncCoreOverrides"}:
             return
         if hasattr(_core, name):

@@ -48,7 +48,7 @@ def convert_range(
                 "SVG-Dateien wurden als eingebettete Rasterbilder erzeugt"
                 + (" und Differenzbilder via Pillow/PyMuPDF geschrieben.\n" if fitz is not None else ".\n")
             )
-        generateConversionOverviews(diff_out_dir, svg_out_dir, reports_out_dir)
+        generate_conversion_overviews(diff_out_dir, svg_out_dir, reports_out_dir)
         return out_root
     rng = _conversion_random()
     run_seed = rng.randrange(1 << 30)
@@ -402,7 +402,7 @@ def convert_range(
             reports_out_dir=reports_out_dir,
             manifest_path=SUCCESSFUL_CONVERSIONS_MANIFEST,
         )
-    generated_overviews = generateConversionOverviews(diff_out_dir, svg_out_dir, reports_out_dir)
+    generated_overviews = generate_conversion_overviews(diff_out_dir, svg_out_dir, reports_out_dir)
     if generated_overviews:
         print(
             "[INFO] Übersichts-Kacheln erzeugt: "

@@ -1,10 +1,10 @@
 from __future__ import annotations
 
-from src.iccFs.syncCoreOverrides import syncCoreOverrides
+from src.iccFs.sync_core_overrides import sync_core_overrides
 
 
-def convertRange(*args, **kwargs):
-    import src.imageCompositeConverter as module
+def convert_range(*args, **kwargs):
+    import src.image_composite_converter as module
 
-    syncCoreOverrides()
+    sync_core_overrides()
     return module._core.convert_range(*args, **kwargs)
