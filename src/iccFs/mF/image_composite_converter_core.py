@@ -37,15 +37,15 @@ if __package__ in {None, ""}:
     if str(repo_root) not in sys.path:
         sys.path.insert(0, str(repo_root))
 
-from src.overview_tiles import generate_conversion_overviews
-from src.image_composite_converter_regions import (
+from src.overviewTiles import generateConversionOverviews
+from src.imageCompositeConverterRegions import (
     ANNOTATION_COLORS,
     _bbox_to_dict,
-    analyze_range_impl,
-    annotate_image_regions_impl,
-    detect_relevant_regions_impl,
+    analyzeRangeImpl,
+    annotateImageRegionsImpl,
+    detectRelevantRegionsImpl,
 )
-from src.successful_conversions import (
+from src.successfulConversions import (
     AC08_MITIGATION_STATUS,
     AC08_PREVIOUSLY_GOOD_VARIANTS,
     AC08_REGRESSION_CASES,
@@ -53,7 +53,7 @@ from src.successful_conversions import (
     AC08_REGRESSION_VARIANTS,
     SUCCESSFUL_CONVERSIONS,
     SUCCESSFUL_CONVERSIONS_MANIFEST,
-    _load_successful_conversions,
+    _loadSuccessfulConversions,
 )
 
 # Keep regression variant list deterministic and duplicate-free for batch
@@ -63,6 +63,7 @@ AC08_REGRESSION_VARIANTS = tuple(dict.fromkeys(AC08_REGRESSION_VARIANTS))
 # criteria reports used by this converter/test suite.
 AC08_PREVIOUSLY_GOOD_VARIANTS = ("AC0800_L", "AC0800_M", "AC0800_S", "AC0811_L")
 
+_load_successful_conversions = _loadSuccessfulConversions
 
 
 DEFAULT_CALL_TREE_CSV_PATH = "artifacts/converted_images/reports/call_tree_image_composite_converter.csv"
@@ -119,11 +120,11 @@ AC08_ADAPTIVE_LOCK_PROFILES: dict[str, dict[str, float | bool]] = {
 
 
 def detect_relevant_regions(img) -> list[dict[str, object]]:
-    return detect_relevant_regions_impl(img, cv2_module=cv2, np_module=np)
+    return detectRelevantRegionsImpl(img, cv2_module=cv2, np_module=np)
 
 
 def annotate_image_regions(img, regions: list[dict[str, object]]):
-    return annotate_image_regions_impl(img, regions, cv2_module=cv2)
+    return annotateImageRegionsImpl(img, regions, cv2_module=cv2)
 
 
 
@@ -11033,7 +11034,7 @@ def update_successful_conversions_manifest_with_metrics(
         folder_path=folder_path,
         svg_out_dir=svg_out_dir,
         reports_out_dir=reports_out_dir,
-        successful_variants=successful_variants or _load_successful_conversions(resolved_manifest_path),
+        successful_variants=successful_variants or _loadSuccessfulConversions(resolved_manifest_path),
     )
 
     accepted_metrics_by_variant: dict[str, dict[str, object]] = {}
