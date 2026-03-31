@@ -31,21 +31,21 @@ import struct
 import statistics
 
 if __package__ in {None, ""}:
-    # Allow direct CLI execution via ``python src/image_composite_converter.py``
+    # Allow direct CLI execution via ``python src.imageCompositeConverter.py``
     # from the repository root without requiring PYTHONPATH to be preset.
     repo_root = Path(__file__).resolve().parent.parent
     if str(repo_root) not in sys.path:
         sys.path.insert(0, str(repo_root))
 
-from src.overview_tiles import generate_conversion_overviews
-from src.image_composite_converter_regions import (
+from src.iccFs.mF.overviewTiles import generate_conversion_overviews
+from src.iccFs.mF.imageCompositeConverterRegions import (
     ANNOTATION_COLORS,
     _bbox_to_dict,
     analyze_range_impl,
     annotate_image_regions_impl,
     detect_relevant_regions_impl,
 )
-from src.successful_conversions import (
+from src.iccFs.mF.successfulConversions import (
     AC08_MITIGATION_STATUS,
     AC08_PREVIOUSLY_GOOD_VARIANTS,
     AC08_REGRESSION_CASES,
