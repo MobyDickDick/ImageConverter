@@ -85,9 +85,37 @@ def _planned_path_renames(targets: list[Path]) -> list[PlannedRename]:
         if new_name == old_path.name:
             continue
         plans.append(PlannedRename(old_path=old_path, new_path=old_path.with_name(new_name)))
+    plans = _resolve_path_conflicts(plans)
     # deeper paths first to avoid invalidating parents too early
     plans.sort(key=lambda p: len(p.old_path.as_posix()), reverse=True)
     return plans
+
+
+def _with_counter_suffix(path: Path, counter: int) -> Path:
+    if path.suffix:
+        return path.with_name(f"{path.stem}{counter}{path.suffix}")
+    return path.with_name(f"{path.name}{counter}")
+
+
+def _resolve_path_conflicts(plans: list[PlannedRename]) -> list[PlannedRename]:
+    old_paths = {plan.old_path for plan in plans}
+    reserved_targets: set[Path] = set()
+    resolved: list[PlannedRename] = []
+
+    for plan in plans:
+        candidate = plan.new_path
+        counter = 1
+        while True:
+            conflict_with_existing = candidate.exists() and candidate not in old_paths
+            conflict_with_plan = candidate in reserved_targets
+            if not conflict_with_existing and not conflict_with_plan:
+                break
+            candidate = _with_counter_suffix(plan.new_path, counter)
+            counter += 1
+
+        resolved.append(PlannedRename(old_path=plan.old_path, new_path=candidate))
+        reserved_targets.add(candidate)
+    return resolved
 
 
 def _rename_identifiers_in_source(source: str, rename_map: dict[str, str]) -> str:
@@ -124,8 +152,9 @@ def _rewrite_python_sources(py_files: list[Path], function_map: dict[str, str], 
 
 
 def _apply_path_renames(plans: list[PlannedRename], apply: bool) -> None:
+    old_paths = {plan.old_path for plan in plans}
     for plan in plans:
-        if plan.new_path.exists():
+        if plan.new_path.exists() and plan.new_path not in old_paths:
             raise FileExistsError(f"Ziel existiert bereits: {plan.new_path}")
         print(f"PATH: {plan.old_path.relative_to(REPO_ROOT)} -> {plan.new_path.relative_to(REPO_ROOT)}")
         if apply:
