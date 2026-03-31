@@ -6,7 +6,7 @@ from pathlib import Path
 
 def load_optional_module(moduleName: str):
     """Import optional dependencies, including repo-vendored site-packages."""
-    import src.imageCompositeConverter as module
+    import src.image_composite_converter as module
 
     attemptedPaths: list[Path] = []
     try:

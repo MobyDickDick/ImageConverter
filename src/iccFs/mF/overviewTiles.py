@@ -269,11 +269,11 @@ def generate_conversion_overviews(
 
 
 def _resolve_optional_dependencies() -> None:
-    """Try to reuse optional deps loaded by ``src.imageCompositeConverter``."""
+    """Try to reuse optional deps loaded by ``src.image_composite_converter``."""
     global cv2, np, fitz
     if cv2 is not None and np is not None and fitz is not None:
         return
-    converter = sys.modules.get("src.imageCompositeConverter")
+    converter = sys.modules.get("src.image_composite_converter")
     if converter is None:
         return
     if cv2 is None:

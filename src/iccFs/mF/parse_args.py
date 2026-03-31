@@ -6,12 +6,12 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         ),
         epilog=(
             "Beispiele:\n"
-            "  python -m src.imageCompositeConverter artifacts/images_to_convert "
+            "  python -m src.image_composite_converter artifacts/images_to_convert "
             "--descriptions-path artifacts/images_to_convert/Finale_Wurzelformen_V3.xml "
             "--output-dir artifacts/converted_images --start AC0000 --end ZZ9999\n"
-            "  python -m src.imageCompositeConverter artifacts/images_to_convert "
+            "  python -m src.image_composite_converter artifacts/images_to_convert "
             "--mode annotate --output-dir artifacts/annotated --start AC0811 --end AC0814\n"
-            "  python -m src.imageCompositeConverter --print-linux-vendor-command --vendor-dir vendor"
+            "  python -m src.image_composite_converter --print-linux-vendor-command --vendor-dir vendor"
         ),
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
