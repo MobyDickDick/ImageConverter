@@ -286,7 +286,7 @@ class RGBWert:
     g: int
     b: int
 
-    def _post_init(self) -> None:
+    def __post_init__(self) -> None:
         for channel_name, channel in (("r", self.r), ("g", self.g), ("b", self.b)):
             if not isinstance(channel, int):
                 raise TypeError(f"RGB channel '{channel_name}' must be an integer.")
@@ -311,7 +311,7 @@ class Kreis:
     rand_farbe: RGBWert
     hintergrundfarbe: RGBWert
 
-    def _post_init(self) -> None:
+    def __post_init__(self) -> None:
         if float(self.radius) <= 0:
             raise ValueError("Kreis.radius must be > 0.")
         if float(self.randbreite) < 0:
@@ -335,7 +335,7 @@ class Kelle:
     griff: Griff
     kreis: Kreis
 
-    def _post_init(self) -> None:
+    def __post_init__(self) -> None:
         if self.griff.anfang != self.kreis.mittelpunkt:
             raise ValueError("Constraint verletzt: Griff.Anfang == Kreis.Mittelpunkt.")
         if self.griff.laenge <= float(self.kreis.radius):
@@ -847,7 +847,7 @@ class Perception:
     img_path: str
     csv_path: str
 
-    def _post_init(self) -> None:
+    def __post_init__(self) -> None:
         self.base_name = get_base_name_from_file(os.path.basename(self.img_path))
         self.img = cv2.imread(self.img_path)
         self.raw_desc = self._load_descriptions()
@@ -876,12 +876,12 @@ class SourceSpan:
 class DescriptionMappingError(ValueError):
     """Structured loader error with an optional source span for diagnostics."""
 
-    def _init(self, message: str, *, span: SourceSpan | None = None):
-        super()._init(message)
+    def __init__(self, message: str, *, span: SourceSpan | None = None):
+        super().__init__(message)
         self.message = message
         self.span = span
 
-    def _str(self) -> str:
+    def __str__(self) -> str:
         if self.span is None:
             return self.message
         return f"{self.message} ({self.span.format()})"
@@ -1054,7 +1054,7 @@ def _required_vendor_packages() -> list[str]:
 
 
 class Reflection:
-    def _init(self, raw_desc: dict[str, str]):
+    def __init__(self, raw_desc: dict[str, str]):
         self.raw_desc = raw_desc
 
     def parse_description(self, base_name: str, img_filename: str):
@@ -1379,7 +1379,7 @@ class Action:
         return v
 
     class _ScalarRng:
-        def _init(self, seed: int) -> None:
+        def __init__(self, seed: int) -> None:
             self._rng = random.Random(int(seed))
 
         def uniform(self, low: float, high: float) -> float:
@@ -2556,8 +2556,8 @@ class Action:
         symbol_name = canonical_name.split("_", 1)[0]
 
         no_text_symbols = {"AC0800", "AC0810", "AC0811", "AC0812", "AC0813", "AC0814", "AC0881", "AC0882"}
-        no_connector_symbols = {"AC0800", "AC0820", "AC0835", "AC0870"}
-        arm_only_symbols = {"AC0810", "AC0812", "AC0813", "AC0814", "AC0832", "AC0833", "AC0834", "AC0837", "AC0838", "AC0839", "AC0882"}
+        no_connector_symbols = {"AC0800", "AC0820", "AC0870"}
+        arm_only_symbols = {"AC0810", "AC0812", "AC0813", "AC0814", "AC0832", "AC0833", "AC0834", "AC0835", "AC0837", "AC0838", "AC0839", "AC0882"}
         stem_only_symbols = {"AC0811", "AC0831", "AC0836", "AC0881"}
 
         if symbol_name in no_text_symbols:
@@ -11180,7 +11180,7 @@ def write_successful_conversion_quality_report(
 class _TeeTextIO(io.TextIOBase):
     """Mirror text writes to multiple streams."""
 
-    def _init(self, *streams: io.TextIOBase):
+    def __init__(self, *streams: io.TextIOBase):
         self._streams = streams
 
     def write(self, s: str) -> int:
@@ -11249,21 +11249,21 @@ def _module_call_edges_for_path(module_path: str | os.PathLike[str]) -> tuple[di
     local_function_names: set[str] = set()
 
     class CallableCollector(ast.NodeVisitor):
-        def _init(self):
+        def __init__(self):
             self._class_stack: list[str] = []
 
-        def visit_class_def(self, node: ast.ClassDef):
+        def visit_ClassDef(self, node: ast.ClassDef):
             self._class_stack.append(node.name)
             self.generic_visit(node)
             self._class_stack.pop()
 
-        def visit_function_def(self, node: ast.FunctionDef):
+        def visit_FunctionDef(self, node: ast.FunctionDef):
             scoped_name = ".".join(self._class_stack + [node.name]) if self._class_stack else node.name
             callable_lines[scoped_name] = node.lineno
             local_function_names.add(node.name)
             self.generic_visit(node)
 
-        def visit_async_function_def(self, node: ast.AsyncFunctionDef):
+        def visit_AsyncFunctionDef(self, node: ast.AsyncFunctionDef):
             scoped_name = ".".join(self._class_stack + [node.name]) if self._class_stack else node.name
             callable_lines[scoped_name] = node.lineno
             local_function_names.add(node.name)
@@ -11273,31 +11273,31 @@ def _module_call_edges_for_path(module_path: str | os.PathLike[str]) -> tuple[di
     edges: list[dict[str, object]] = []
 
     class CallEdgeCollector(ast.NodeVisitor):
-        def _init(self):
+        def __init__(self):
             self._scope_stack: list[str] = []
             self._class_stack: list[str] = []
 
         def _current_scope(self) -> str:
             return ".".join(self._scope_stack)
 
-        def visit_class_def(self, node: ast.ClassDef):
+        def visit_ClassDef(self, node: ast.ClassDef):
             self._class_stack.append(node.name)
             self.generic_visit(node)
             self._class_stack.pop()
 
-        def visit_function_def(self, node: ast.FunctionDef):
+        def visit_FunctionDef(self, node: ast.FunctionDef):
             scoped_name = ".".join(self._class_stack + [node.name]) if self._class_stack else node.name
             self._scope_stack.append(scoped_name)
             self.generic_visit(node)
             self._scope_stack.pop()
 
-        def visit_async_function_def(self, node: ast.AsyncFunctionDef):
+        def visit_AsyncFunctionDef(self, node: ast.AsyncFunctionDef):
             scoped_name = ".".join(self._class_stack + [node.name]) if self._class_stack else node.name
             self._scope_stack.append(scoped_name)
             self.generic_visit(node)
             self._scope_stack.pop()
 
-        def visit_call(self, node: ast.Call):
+        def visit_Call(self, node: ast.Call):
             caller = self._current_scope()
             callee = ""
             raw_callee = _dotted_attr_name(node.func)
@@ -11339,7 +11339,7 @@ _MAINFILES_DIR = Path(__file__).resolve().parent
 
 
 def _load_mainfile_function(func_name: str, filename: str):
-    """Lade eine ausgelagerte Funktionsdefinition aus src/iccFs/mF in dieses Modul."""
+    """Lade eine ausgelagerte Funktionsdefinition aus src/iccFs/m_f in dieses Modul."""
     source_path = _MAINFILES_DIR / filename
     namespace: dict[str, object] = {}
     code = compile(source_path.read_text(encoding="utf-8"), str(source_path), "exec")

@@ -273,7 +273,9 @@ def _resolve_optional_dependencies() -> None:
     global cv2, np, fitz
     if cv2 is not None and np is not None and fitz is not None:
         return
-    converter = sys.modules.get("src.imageCompositeConverter")
+    converter = sys.modules.get("src.image_composite_converter")
+    if converter is None:
+        converter = sys.modules.get("src.imageCompositeConverter")
     if converter is None:
         return
     if cv2 is None:

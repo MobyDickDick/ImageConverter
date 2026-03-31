@@ -1,45 +1,73 @@
-"""Backward-compatible wrapper for the Polish-notation module name.
+"""Thin CLI entrypoint for the image composite converter.
 
-New code should import ``src.imageCompositeConverter``.
+This module intentionally keeps only the `main` orchestration function and
+re-exports the existing converter API from `imageCompositeConverterCore`.
 """
 
 from __future__ import annotations
 
-import importlib
 import sys
-from pathlib import Path
+import types
 
-# Bootstrap attributes used while ``src.imageCompositeConverter`` is still importing.
-OPTIONAL_DEPENDENCY_ERRORS: dict[str, str] = {}
-
-
-def _optional_dependency_base_dir() -> Path:
-    return Path(__file__).resolve().parents[1]
-
-
-def _vendored_site_packages_dirs() -> list[Path]:
-    from src.iccFs.vendored_site_packages_dirs import vendored_site_packages_dirs
-
-    return vendored_site_packages_dirs()
+import src.iccFs.m_f.imageCompositeConverterCore as _core
+from src.iccFs.convert_range import convert_range
+from src.iccFs.load_optional_module import load_optional_module
+from src.iccFs.main import main as _entry_main
+from src.iccFs.optional_dependency_base_dir import optional_dependency_base_dir
+from src.iccFs.sync_core_overrides import sync_core_overrides
+from src.iccFs.vendored_site_packages_dirs import vendored_site_packages_dirs
 
 
-def _clear_partial_module_import(module_name: str) -> None:
-    for name in [n for n in tuple(sys.modules) if n == module_name or n.startswith(module_name + ".")]:
-        sys.modules.pop(name, None)
+def main(argv: list[str] | None = None) -> int:
+    return _entry_main(argv)
 
-
-def _describe_optional_dependency_error(module_name: str, exc: BaseException, _attempted_paths: list[Path]) -> str:
-    return f"{module_name}: {exc}"
-
-
-import src.imageCompositeConverter as _polish
-
-for _name in dir(_polish):
+for _name in dir(_core):
     if _name.startswith("__"):
         continue
-    globals()[_name] = getattr(_polish, _name)
+    globals()[_name] = getattr(_core, _name)
 
-main = _polish.main
+_optional_dependency_base_dir = optional_dependency_base_dir
+_vendored_site_packages_dirs = vendored_site_packages_dirs
+_load_optional_module = load_optional_module
+_sync_core_overrides = sync_core_overrides
+convert_range = convert_range
+
+# Polish-notation compatibility aliases for public integration points.
+optional_dependency_base_dir = _optional_dependency_base_dir
+vendored_site_packages_dirs = _vendored_site_packages_dirs
+load_optional_module = _load_optional_module
+sync_core_overrides = _sync_core_overrides
+convert_range = convert_range
+
+_core._optional_dependency_base_dir = _optional_dependency_base_dir
+_core._vendored_site_packages_dirs = _vendored_site_packages_dirs
+_core._load_optional_module = _load_optional_module
+
+np = _load_optional_module("numpy")
+cv2 = _load_optional_module("cv2")
+fitz = _load_optional_module("fitz")
+_core.np = np
+_core.cv2 = cv2
+_core.fitz = fitz
+if hasattr(_core, "_legacy"):
+    _core._legacy.np = np
+    _core._legacy.cv2 = cv2
+    _core._legacy.fitz = fitz
+
+
+class _CoreSyncModule(types.ModuleType):
+    def __setattr__(self, name, value):
+        super().__setattr__(name, value)
+        if name in {"convert_range", "convertRange", "main", "_sync_core_overrides", "syncCoreOverrides"}:
+            return
+        if hasattr(_core, name):
+            setattr(_core, name, value)
+        if hasattr(_core, "_legacy") and hasattr(_core._legacy, name):
+            setattr(_core._legacy, name, value)
+
+
+sys.modules[__name__].__class__ = _CoreSyncModule
+
 
 if __name__ == "__main__":
     raise SystemExit(main())

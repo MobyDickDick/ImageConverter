@@ -8,21 +8,21 @@ def _module_call_edges_for_path(module_path: str | os.PathLike[str]) -> tuple[di
     local_function_names: set[str] = set()
 
     class CallableCollector(ast.NodeVisitor):
-        def _init(self):
+        def __init__(self):
             self._class_stack: list[str] = []
 
-        def visit_class_def(self, node: ast.ClassDef):
+        def visit_ClassDef(self, node: ast.ClassDef):
             self._class_stack.append(node.name)
             self.generic_visit(node)
             self._class_stack.pop()
 
-        def visit_function_def(self, node: ast.FunctionDef):
+        def visit_FunctionDef(self, node: ast.FunctionDef):
             scoped_name = ".".join(self._class_stack + [node.name]) if self._class_stack else node.name
             callable_lines[scoped_name] = node.lineno
             local_function_names.add(node.name)
             self.generic_visit(node)
 
-        def visit_async_function_def(self, node: ast.AsyncFunctionDef):
+        def visit_AsyncFunctionDef(self, node: ast.AsyncFunctionDef):
             scoped_name = ".".join(self._class_stack + [node.name]) if self._class_stack else node.name
             callable_lines[scoped_name] = node.lineno
             local_function_names.add(node.name)
@@ -32,31 +32,31 @@ def _module_call_edges_for_path(module_path: str | os.PathLike[str]) -> tuple[di
     edges: list[dict[str, object]] = []
 
     class CallEdgeCollector(ast.NodeVisitor):
-        def _init(self):
+        def __init__(self):
             self._scope_stack: list[str] = []
             self._class_stack: list[str] = []
 
         def _current_scope(self) -> str:
             return ".".join(self._scope_stack)
 
-        def visit_class_def(self, node: ast.ClassDef):
+        def visit_ClassDef(self, node: ast.ClassDef):
             self._class_stack.append(node.name)
             self.generic_visit(node)
             self._class_stack.pop()
 
-        def visit_function_def(self, node: ast.FunctionDef):
+        def visit_FunctionDef(self, node: ast.FunctionDef):
             scoped_name = ".".join(self._class_stack + [node.name]) if self._class_stack else node.name
             self._scope_stack.append(scoped_name)
             self.generic_visit(node)
             self._scope_stack.pop()
 
-        def visit_async_function_def(self, node: ast.AsyncFunctionDef):
+        def visit_AsyncFunctionDef(self, node: ast.AsyncFunctionDef):
             scoped_name = ".".join(self._class_stack + [node.name]) if self._class_stack else node.name
             self._scope_stack.append(scoped_name)
             self.generic_visit(node)
             self._scope_stack.pop()
 
-        def visit_call(self, node: ast.Call):
+        def visit_Call(self, node: ast.Call):
             caller = self._current_scope()
             callee = ""
             raw_callee = _dotted_attr_name(node.func)

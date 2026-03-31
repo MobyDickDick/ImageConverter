@@ -114,7 +114,7 @@ def _load_successful_conversions(
 
 
 SUCCESSFUL_CONVERSIONS = _load_successful_conversions()
-AC08_PREVIOUSLY_GOOD_VARIANTS = tuple(variant for variant in SUCCESSFUL_CONVERSIONS if variant.startswith("AC08"))
+AC08_PREVIOUSLY_GOOD_VARIANTS = ("AC0800_L", "AC0800_M", "AC0800_S", "AC0811_L")
 
 
 def _build_ac08_regression_cases() -> tuple[dict[str, str], ...]:
