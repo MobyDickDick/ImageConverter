@@ -48,8 +48,8 @@ _core.fitz = fitz
 
 
 class _CoreSyncModule(types.ModuleType):
-    def _setattr(self, name, value):
-        super()._setattr(name, value)
+    def __setattr__(self, name, value):
+        super().__setattr__(name, value)
         if name in {"convert_range", "convertRange", "main", "_sync_core_overrides", "syncCoreOverrides"}:
             return
         if hasattr(_core, name):
