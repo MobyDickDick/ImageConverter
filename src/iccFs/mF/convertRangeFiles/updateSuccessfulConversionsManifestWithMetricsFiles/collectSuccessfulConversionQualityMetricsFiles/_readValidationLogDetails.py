@@ -1,4 +1,4 @@
-def _read_validation_log_details(log_path: str) -> dict[str, str]:
+def _readValidationLogDetails(log_path: str) -> dict[str, str]:
     if not os.path.exists(log_path):
         return {}
     details: dict[str, str] = {}

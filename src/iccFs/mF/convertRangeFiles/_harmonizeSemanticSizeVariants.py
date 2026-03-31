@@ -1,4 +1,4 @@
-def _harmonize_semantic_size_variants(
+def _harmonizeSemanticSizeVariants(
     results: list[dict[str, object]],
     folder_path: str,
     svg_out_dir: str,
@@ -21,7 +21,7 @@ def _harmonize_semantic_size_variants(
             suffix = variant.rsplit("_", 1)[-1] if "_" in variant else ""
             if suffix not in {"L", "M", "S"}:
                 continue
-            parsed = _read_svg_geometry(os.path.join(svg_out_dir, f"{variant}.svg"))
+            parsed = _readSvgGeometry(os.path.join(svg_out_dir, f"{variant}.svg"))
             if parsed is None:
                 continue
             w, h, params = parsed
@@ -43,7 +43,7 @@ def _harmonize_semantic_size_variants(
         category_logs.append(f"{base};{category};{variants_joined}")
 
         sigs = {
-            row["variant"]: _normalized_geometry_signature(int(row["w"]), int(row["h"]), dict(row["params"]))
+            row["variant"]: _normalizedGeometrySignature(int(row["w"]), int(row["h"]), dict(row["params"]))
             for row in variant_rows
         }
         max_delta = 0.0
@@ -51,7 +51,7 @@ def _harmonize_semantic_size_variants(
             for j in range(i + 1, len(variant_rows)):
                 vi = str(variant_rows[i]["variant"])
                 vj = str(variant_rows[j]["variant"])
-                max_delta = max(max_delta, _max_signature_delta(sigs[vi], sigs[vj]))
+                max_delta = max(max_delta, _maxSignatureDelta(sigs[vi], sigs[vj]))
 
         # Do not skip families with one badly fitted outlier variant. We still
         # validate every harmonization candidate against raster error before write.
@@ -70,13 +70,13 @@ def _harmonize_semantic_size_variants(
         anchor_w = int(anchor["w"])
         anchor_h = int(anchor["h"])
         anchor_params = dict(anchor["params"])
-        family_colors = _family_harmonized_badge_colors(variant_rows)
+        family_colors = _familyHarmonizedBadgeColors(variant_rows)
 
         for row in variant_rows:
             target_variant = str(row["variant"])
             target_w = int(row["w"])
             target_h = int(row["h"])
-            scaled = _scale_badge_params(
+            scaled = _scaleBadgeParams(
                 anchor_params,
                 anchor_w,
                 anchor_h,
@@ -89,7 +89,7 @@ def _harmonize_semantic_size_variants(
                 scaled["text_gray"] = int(family_colors["text_gray"])
             if scaled.get("stem_enabled"):
                 scaled["stem_gray"] = int(family_colors["stem_gray"])
-            svg = Action.generate_badge_svg(target_w, target_h, scaled)
+            svg = Action.generateBadgeSvg(target_w, target_h, scaled)
 
             target_filename = str(dict(row["entry"])["filename"])
             target_path = os.path.join(folder_path, target_filename)
@@ -98,8 +98,8 @@ def _harmonize_semantic_size_variants(
                 harmonized_logs.append(f"{base}: {target_variant} übersprungen (Bild fehlt: {target_filename})")
                 continue
 
-            rendered = Action.render_svg_to_numpy(svg, target_w, target_h)
-            candidate_error = Action.calculate_error(target_img, rendered)
+            rendered = Action.renderSvgToNumpy(svg, target_w, target_h)
+            candidate_error = Action.calculateError(target_img, rendered)
             baseline_error = float(dict(row["entry"]).get("error", float("inf")))
             if candidate_error > baseline_error + 0.25:
                 harmonized_logs.append(

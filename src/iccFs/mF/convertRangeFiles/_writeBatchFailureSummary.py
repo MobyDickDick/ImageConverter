@@ -1,4 +1,4 @@
-def _write_batch_failure_summary(reports_out_dir: str, failures: list[dict[str, str]]) -> None:
+def _writeBatchFailureSummary(reports_out_dir: str, failures: list[dict[str, str]]) -> None:
     summary_path = os.path.join(reports_out_dir, "batch_failure_summary.csv")
     with open(summary_path, "w", encoding="utf-8", newline="") as f:
         writer = csv.writer(f, delimiter=";")

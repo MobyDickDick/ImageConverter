@@ -9,10 +9,10 @@ def convert_range(
     output_root: str | None = None,
     selected_variants: set[str] | None = None,
 ) -> str:
-    out_root = output_root or _default_converted_symbols_root()
-    svg_out_dir = _converted_svg_output_dir(out_root)
-    diff_out_dir = _diff_output_dir(out_root)
-    reports_out_dir = _reports_output_dir(out_root)
+    out_root = output_root or _defaultConvertedSymbolsRoot()
+    svg_out_dir = _convertedSvgOutputDir(out_root)
+    diff_out_dir = _diffOutputDir(out_root)
+    reports_out_dir = _reportsOutputDir(out_root)
 
     os.makedirs(svg_out_dir, exist_ok=True)
     os.makedirs(diff_out_dir, exist_ok=True)
@@ -23,7 +23,7 @@ def convert_range(
         f
         for f in os.listdir(folder_path)
         if f.lower().endswith((".bmp", ".jpg", ".png", ".gif"))
-        and _in_requested_range(f, start_ref, end_ref)
+        and _inRequestedRange(f, start_ref, end_ref)
         and (not normalized_selected_variants or os.path.splitext(f)[0].upper() in normalized_selected_variants)
     )
     if cv2 is None or np is None:
@@ -34,12 +34,12 @@ def convert_range(
             for filename in files:
                 stem = os.path.splitext(filename)[0]
                 image_path = os.path.join(folder_path, filename)
-                svg_content = _render_embedded_raster_svg(image_path)
+                svg_content = _renderEmbeddedRasterSvg(image_path)
                 svg_path = os.path.join(svg_out_dir, f"{stem}.svg")
                 with open(svg_path, "w", encoding="utf-8") as svg_file:
                     svg_file.write(svg_content)
                 if fitz is not None:
-                    diff = _create_diff_image_without_cv2(image_path, svg_content)
+                    diff = _createDiffImageWithoutCv2(image_path, svg_content)
                     diff.save(os.path.join(diff_out_dir, f"{stem}_diff.png"))
                 writer.writerow([filename, "embedded-raster", 0, "0.00", "0.00000000"])
         with open(os.path.join(reports_out_dir, "fallback_mode.txt"), "w", encoding="utf-8") as f:
@@ -50,7 +50,7 @@ def convert_range(
             )
         generate_conversion_overviews(diff_out_dir, svg_out_dir, reports_out_dir)
         return out_root
-    rng = _conversion_random()
+    rng = _conversionRandom()
     run_seed = rng.randrange(1 << 30)
     Action.STOCHASTIC_RUN_SEED = int(run_seed)
     process_files = list(files)
@@ -64,9 +64,9 @@ def convert_range(
     result_map: dict[str, dict[str, object]] = {}
     batch_failures: list[dict[str, str]] = []
     stop_after_failure = False
-    existing_donor_rows = _load_existing_conversion_rows(out_root, folder_path)
+    existing_donor_rows = _loadExistingConversionRows(out_root, folder_path)
 
-    def _convert_one(filename: str, iteration_budget: int, badge_rounds: int) -> tuple[dict[str, object] | None, bool]:
+    def _convertOne(filename: str, iteration_budget: int, badge_rounds: int) -> tuple[dict[str, object] | None, bool]:
         image_path = os.path.join(folder_path, filename)
         base = os.path.splitext(filename)[0]
         log_file = os.path.join(reports_out_dir, f"{base}_element_validation.log")
@@ -97,7 +97,7 @@ def convert_range(
             print(f"[WARN] {filename}: Batchlauf setzt nach Fehler fort ({type(exc).__name__}: {exc})")
             return None, True
         if not res:
-            details = _read_validation_log_details(log_file)
+            details = _readValidationLogDetails(log_file)
             status = details.get("status", "")
             if status in {"render_failure", "batch_error"}:
                 batch_failures.append(
@@ -126,7 +126,7 @@ def convert_range(
             return None, False
 
         _base, _desc, params, best_iter, best_error = res
-        details = _read_validation_log_details(log_file)
+        details = _readValidationLogDetails(log_file)
         img = cv2.imread(image_path)
         pixel_count = 1.0
         width = 0
@@ -144,8 +144,8 @@ def convert_range(
                 except OSError:
                     svg_content = ""
                 if svg_content:
-                    rendered = Action.render_svg_to_numpy(svg_content, width, height)
-                    mean_delta2, std_delta2 = Action.calculate_delta2_stats(img, rendered)
+                    rendered = Action.renderSvgToNumpy(svg_content, width, height)
+                    mean_delta2, std_delta2 = Action.calculateDelta2Stats(img, rendered)
 
         return {
             "filename": filename,
@@ -158,13 +158,13 @@ def convert_range(
             "std_delta2": float(std_delta2),
             "w": int(width),
             "h": int(height),
-            "base": get_base_name_from_file(os.path.splitext(filename)[0]).upper(),
+            "base": getBaseNameFromFile(os.path.splitext(filename)[0]).upper(),
             "variant": os.path.splitext(filename)[0].upper(),
         }, False
 
     # Initial conversion pass for all forms.
     for filename in process_files:
-        row, failed = _convert_one(filename, iteration_budget=base_iterations, badge_rounds=6)
+        row, failed = _convertOne(filename, iteration_budget=base_iterations, badge_rounds=6)
         if failed:
             stop_after_failure = True
             break
@@ -178,7 +178,7 @@ def convert_range(
         ]
         donor_rows.extend(prev for prev in existing_donor_rows if str(prev.get("filename", "")) != filename)
         if donor_rows:
-            transferred, _detail = _try_template_transfer(
+            transferred, _detail = _tryTemplateTransfer(
                 target_row=row,
                 donor_rows=donor_rows,
                 folder_path=folder_path,
@@ -201,13 +201,13 @@ def convert_range(
     initial_top_tercile = ranked_rows[:first_cut]
     initial_threshold = float(initial_top_tercile[-1]["error_per_pixel"]) if initial_top_tercile else float("inf")
 
-    successful_threshold = _compute_successful_conversions_error_threshold(current_rows)
+    successful_threshold = _computeSuccessfulConversionsErrorThreshold(current_rows)
     threshold_source = "successful-conversions-mean-plus-2std"
     if not math.isfinite(successful_threshold):
         successful_threshold = initial_threshold
         threshold_source = "initial-first-tercile"
 
-    cfg = _load_quality_config(reports_out_dir)
+    cfg = _loadQualityConfig(reports_out_dir)
     allowed_error_pp = successful_threshold
     cfg_value = cfg.get("allowed_error_per_pixel")
     if cfg_value is not None:
@@ -222,7 +222,7 @@ def convert_range(
     # while still converging by only accepting strict improvements.
     skip_variants: set[str] = set()
 
-    _write_quality_config(
+    _writeQualityConfig(
         reports_out_dir,
         allowed_error_per_pixel=allowed_error_pp,
         skipped_variants=sorted(v for v in skip_variants if v),
@@ -241,7 +241,7 @@ def convert_range(
             for row in result_map.values()
             if math.isfinite(float(row.get("error_per_pixel", float("inf"))))
         ]
-        candidates = _select_open_quality_cases(
+        candidates = _selectOpenQualityCases(
             current_rows,
             allowed_error_per_pixel=allowed_error_pp,
             skip_variants=skip_variants,
@@ -249,25 +249,25 @@ def convert_range(
         # Fallback to the historical selection when no explicit open set exists
         # (e.g. without threshold config).
         if not candidates:
-            candidates = _select_middle_lower_tercile(current_rows)
+            candidates = _selectMiddleLowerTercile(current_rows)
         if not candidates:
             break
 
         improved_in_pass = False
-        iteration_budget, badge_rounds = _iteration_strategy_for_pass(pass_idx, base_iterations)
+        iteration_budget, badge_rounds = _iterationStrategyForPass(pass_idx, base_iterations)
         if len(candidates) > 1:
             rng.shuffle(candidates)
         for row in candidates:
             filename = str(row["filename"])
-            adaptive_iteration_budget = _adaptive_iteration_budget_for_quality_row(row, iteration_budget)
-            new_row, failed = _convert_one(filename, iteration_budget=adaptive_iteration_budget, badge_rounds=badge_rounds)
+            adaptive_iteration_budget = _adaptiveIterationBudgetForQualityRow(row, iteration_budget)
+            new_row, failed = _convertOne(filename, iteration_budget=adaptive_iteration_budget, badge_rounds=badge_rounds)
             if failed:
                 stop_after_failure = True
                 break
             if new_row is None:
                 continue
 
-            improved, decision, prev_error_pp, new_error_pp, prev_mean_delta2, new_mean_delta2 = _evaluate_quality_pass_candidate(
+            improved, decision, prev_error_pp, new_error_pp, prev_mean_delta2, new_mean_delta2 = _evaluateQualityPassCandidate(
                 row,
                 new_row,
             )
@@ -294,8 +294,8 @@ def convert_range(
         if stop_after_failure or not improved_in_pass:
             break
 
-    _write_quality_pass_report(reports_out_dir, quality_logs)
-    _write_batch_failure_summary(reports_out_dir, batch_failures)
+    _writeQualityPassReport(reports_out_dir, quality_logs)
+    _writeBatchFailureSummary(reports_out_dir, batch_failures)
     if strategy_logs:
         strategy_path = os.path.join(reports_out_dir, "strategy_switch_template_transfers.csv")
         with open(strategy_path, "w", encoding="utf-8", newline="") as f:
@@ -348,27 +348,27 @@ def convert_range(
                     }
                 )
 
-    _harmonize_semantic_size_variants(semantic_results, folder_path, svg_out_dir, reports_out_dir)
+    _harmonizeSemanticSizeVariants(semantic_results, folder_path, svg_out_dir, reports_out_dir)
     semantic_audit_rows = [
         dict(audit)
         for row in result_map.values()
         for audit in [dict(row.get("params", {}).get("semantic_audit", {}))]
         if audit
     ]
-    _write_semantic_audit_report(reports_out_dir, semantic_audit_rows)
-    _write_pixel_delta2_ranking(folder_path, svg_out_dir, reports_out_dir)
-    _write_ac08_weak_family_status_report(
+    _writeSemanticAuditReport(reports_out_dir, semantic_audit_rows)
+    _writePixelDelta2Ranking(folder_path, svg_out_dir, reports_out_dir)
+    _writeAc08WeakFamilyStatusReport(
         reports_out_dir,
         selected_variants=sorted(normalized_selected_variants),
     )
-    _write_ac08_regression_manifest(
+    _writeAc08RegressionManifest(
         reports_out_dir,
         folder_path=folder_path,
         csv_path=csv_path,
         iterations=iterations,
         selected_variants=sorted(normalized_selected_variants),
     )
-    ac08_success_gate = _write_ac08_success_criteria_report(
+    ac08_success_gate = _writeAc08SuccessCriteriaReport(
         reports_out_dir,
         selected_variants=sorted(normalized_selected_variants),
     )
@@ -396,7 +396,7 @@ def convert_range(
                 f"(mean_validation_rounds_per_file={float(ac08_success_gate.get('mean_validation_rounds_per_file', 0.0)):.3f})."
             )
     if SUCCESSFUL_CONVERSIONS_MANIFEST.exists():
-        update_successful_conversions_manifest_with_metrics(
+        updateSuccessfulConversionsManifestWithMetrics(
             folder_path=folder_path,
             svg_out_dir=svg_out_dir,
             reports_out_dir=reports_out_dir,

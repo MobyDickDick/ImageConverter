@@ -1,4 +1,4 @@
-def _auto_detect_csv_path(folder_path: str) -> str | None:
+def _autoDetectCsvPath(folder_path: str) -> str | None:
     """Best-effort table lookup for CLI compatibility mode.
 
     Priority:

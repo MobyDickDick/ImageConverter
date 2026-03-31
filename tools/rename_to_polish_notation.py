@@ -161,7 +161,7 @@ def _apply_path_renames(plans: list[PlannedRename], apply: bool) -> None:
             plan.old_path.rename(plan.new_path)
 
 
-def parse_args() -> argparse.Namespace:
+def parseArgs() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description=(
             "Benennt Ordner/Dateien/Funktionen in polnische Notation (snake_case) um "
@@ -170,11 +170,11 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--list", type=Path, default=DEFAULT_LIST_PATH, help="Pfad zur Liste der Zielordner/-dateien")
     parser.add_argument("--apply", action="store_true", help="Änderungen wirklich schreiben/umbenennen")
-    return parser.parse_args()
+    return parser.parseArgs()
 
 
 def main() -> None:
-    args = parse_args()
+    args = parseArgs()
     list_path = args.list if args.list.is_absolute() else REPO_ROOT / args.list
     if not list_path.exists():
         raise FileNotFoundError(

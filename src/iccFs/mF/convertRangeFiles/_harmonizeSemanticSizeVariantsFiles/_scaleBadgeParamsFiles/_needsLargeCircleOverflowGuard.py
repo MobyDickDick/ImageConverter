@@ -1,4 +1,4 @@
-def _needs_large_circle_overflow_guard(params: dict) -> bool:
+def _needsLargeCircleOverflowGuard(params: dict) -> bool:
     """Return whether circle placement may intentionally exceed canvas bounds.
 
     This is a generic geometry rule for large, centered CO² badges without

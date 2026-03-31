@@ -1,4 +1,4 @@
-def _module_call_edges_for_path(module_path: str | os.PathLike[str]) -> tuple[dict[str, int], list[dict[str, object]]]:
+def _moduleCallEdgesForPath(module_path: str | os.PathLike[str]) -> tuple[dict[str, int], list[dict[str, object]]]:
     """Return module-local callables and caller->callee edges for the given source file."""
     source_path = Path(module_path)
     source = source_path.read_text(encoding="utf-8")

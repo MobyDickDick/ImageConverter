@@ -1,4 +1,4 @@
-def _read_svg_geometry(svg_path: str) -> tuple[int, int, dict] | None:
+def _readSvgGeometry(svg_path: str) -> tuple[int, int, dict] | None:
     if not os.path.exists(svg_path):
         return None
 
@@ -10,7 +10,7 @@ def _read_svg_geometry(svg_path: str) -> tuple[int, int, dict] | None:
     w = int(svg_match.group(1))
     h = int(svg_match.group(2))
 
-    def _gray_from_hex(color: str, fallback: int) -> int:
+    def _grayFromHex(color: str, fallback: int) -> int:
         m = re.match(r"#([0-9a-fA-F]{6})", color.strip())
         if not m:
             return fallback
@@ -47,9 +47,9 @@ def _read_svg_geometry(svg_path: str) -> tuple[int, int, dict] | None:
             fill_match = re.search(r'fill="(#[0-9a-fA-F]{6})"', circle_tag)
             stroke_match = re.search(r'stroke="(#[0-9a-fA-F]{6})"', circle_tag)
             if fill_match:
-                params["fill_gray"] = _gray_from_hex(fill_match.group(1), int(params["fill_gray"]))
+                params["fill_gray"] = _grayFromHex(fill_match.group(1), int(params["fill_gray"]))
             if stroke_match:
-                params["stroke_gray"] = _gray_from_hex(stroke_match.group(1), int(params["stroke_gray"]))
+                params["stroke_gray"] = _grayFromHex(stroke_match.group(1), int(params["stroke_gray"]))
 
     rect_match = re.search(
         r"<rect[^>]*x=\"([0-9.]+)\"[^>]*y=\"([0-9.]+)\"[^>]*width=\"([0-9.]+)\"[^>]*height=\"([0-9.]+)\"",
@@ -69,7 +69,7 @@ def _read_svg_geometry(svg_path: str) -> tuple[int, int, dict] | None:
         if rect_tag_match:
             rect_fill_match = re.search(r'fill="(#[0-9a-fA-F]{6})"', rect_tag_match.group(1))
             if rect_fill_match:
-                params["stem_gray"] = _gray_from_hex(rect_fill_match.group(1), int(params["stroke_gray"]))
+                params["stem_gray"] = _grayFromHex(rect_fill_match.group(1), int(params["stroke_gray"]))
             else:
                 params["stem_gray"] = int(params["stroke_gray"])
         else:
@@ -92,7 +92,7 @@ def _read_svg_geometry(svg_path: str) -> tuple[int, int, dict] | None:
         for text_tag, _text_content in text_matches:
             fill_match = re.search(r'fill="(#[0-9a-fA-F]{6})"', text_tag)
             if fill_match:
-                params["text_gray"] = _gray_from_hex(fill_match.group(1), int(params["text_gray"]))
+                params["text_gray"] = _grayFromHex(fill_match.group(1), int(params["text_gray"]))
                 break
 
         text_tokens = [content.strip().upper() for _tag, content in text_matches if content and content.strip()]
@@ -114,7 +114,7 @@ def _read_svg_geometry(svg_path: str) -> tuple[int, int, dict] | None:
         fill_match = re.search(r'fill="(#[0-9a-fA-F]{6})"', path_tag)
         params["draw_text"] = True
         if fill_match:
-            params["text_gray"] = _gray_from_hex(fill_match.group(1), int(params["text_gray"]))
+            params["text_gray"] = _grayFromHex(fill_match.group(1), int(params["text_gray"]))
         if Action.T_PATH_D in path_tag:
             params["text_mode"] = "path_t"
         else:

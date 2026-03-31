@@ -1,4 +1,4 @@
-def _sorted_successful_conversion_metrics_rows(
+def _sortedSuccessfulConversionMetricsRows(
     metrics: list[dict[str, object]],
 ) -> list[dict[str, object]]:
     """Sort successful-conversion rows by converted image name/variant."""

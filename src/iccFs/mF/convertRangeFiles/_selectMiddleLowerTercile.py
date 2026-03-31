@@ -1,4 +1,4 @@
-def _select_middle_lower_tercile(rows: list[dict[str, object]]) -> list[dict[str, object]]:
+def _selectMiddleLowerTercile(rows: list[dict[str, object]]) -> list[dict[str, object]]:
     if len(rows) < 3:
         return []
 

@@ -1,4 +1,4 @@
-def _write_pixel_delta2_ranking(folder_path: str, svg_out_dir: str, reports_out_dir: str, threshold: float = 18.0) -> None:
+def _writePixelDelta2Ranking(folder_path: str, svg_out_dir: str, reports_out_dir: str, threshold: float = 18.0) -> None:
     ranking: list[dict[str, float | str]] = []
     for svg_name in sorted(f for f in os.listdir(svg_out_dir) if f.lower().endswith(".svg")):
         stem = os.path.splitext(svg_name)[0]
@@ -19,11 +19,11 @@ def _write_pixel_delta2_ranking(folder_path: str, svg_out_dir: str, reports_out_
             svg_content = f.read()
 
         h, w = img_orig.shape[:2]
-        rendered = Action.render_svg_to_numpy(svg_content, w, h)
+        rendered = Action.renderSvgToNumpy(svg_content, w, h)
         if rendered is None:
             continue
 
-        mean_delta2, std_delta2 = Action.calculate_delta2_stats(img_orig, rendered)
+        mean_delta2, std_delta2 = Action.calculateDelta2Stats(img_orig, rendered)
         ranking.append(
             {
                 "image": os.path.basename(orig_path),

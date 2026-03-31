@@ -1,4 +1,4 @@
-def convert_image(input_path: str, output_path: str, *, max_iter: int = 120, plateau_limit: int = 14, seed: int = 42) -> Path:
+def convertImage(input_path: str, output_path: str, *, max_iter: int = 120, plateau_limit: int = 14, seed: int = 42) -> Path:
     """Backward-compatible single-image entrypoint.
 
     - For raster targets (e.g. ``.png``), write an annotated image plus JSON coordinates.
@@ -9,7 +9,7 @@ def convert_image(input_path: str, output_path: str, *, max_iter: int = 120, pla
     target.parent.mkdir(parents=True, exist_ok=True)
 
     if target.suffix.lower() == ".svg" or cv2 is None or np is None:
-        target.write_text(_render_embedded_raster_svg(input_path), encoding="utf-8")
+        target.write_text(_renderEmbeddedRasterSvg(input_path), encoding="utf-8")
         return target
 
     img = cv2.imread(str(input_path))

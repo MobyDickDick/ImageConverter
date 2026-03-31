@@ -284,7 +284,7 @@ def deploy_split_in_place(
     return chunk_count, loader_path, backup_path
 
 
-def parse_args() -> argparse.Namespace:
+def parseArgs() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("source", type=Path, help="Path to the large Python module")
     parser.add_argument("--output-dir", type=Path, default=Path("split_output"), help="Target directory for non-destructive split output")
@@ -305,11 +305,11 @@ def parse_args() -> argparse.Namespace:
         default=None,
         help="Optional CSV output containing caller/callee pairs discovered in top-level functions",
     )
-    return parser.parse_args()
+    return parser.parseArgs()
 
 
 def main() -> int:
-    args = parse_args()
+    args = parseArgs()
     if args.deploy_in_place:
         chunk_count, loader_path, backup_path = deploy_split_in_place(
             source_path=args.source,

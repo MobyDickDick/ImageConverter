@@ -55,16 +55,16 @@ def files_notation_without_prefix() -> list[str]:
     ]
 
 
-def parse_args() -> argparse.Namespace:
+def parseArgs() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Analyze long repository paths for Windows path limits.")
     parser.add_argument("--windows-base", default=WINDOWS_BASE, help="Base directory prefix to simulate on Windows")
     parser.add_argument("--limit", type=int, default=20, help="How many longest paths to print")
     parser.add_argument("--warning-threshold", type=int, default=260, help="Mark entries at or above this absolute path length")
-    return parser.parse_args()
+    return parser.parseArgs()
 
 
 def main() -> None:
-    args = parse_args()
+    args = parseArgs()
 
     print("# Top lange Pfade")
     for win_len, repo_len, rel in longest_paths(args.windows_base, args.limit):

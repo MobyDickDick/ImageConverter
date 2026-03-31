@@ -92,7 +92,7 @@ def main() -> None:
     parser.add_argument("--csv", type=Path, default=rename_tool.DEFAULT_MAPPING_CSV)
     parser.add_argument("--root", type=Path, default=rename_tool.REPO_ROOT)
     parser.add_argument("--write-safe-csv", type=Path, default=None)
-    args = parser.parse_args()
+    args = parser.parseArgs()
 
     csv_path = args.csv if args.csv.is_absolute() else rename_tool.REPO_ROOT / args.csv
     root = args.root if args.root.is_absolute() else rename_tool.REPO_ROOT / args.root

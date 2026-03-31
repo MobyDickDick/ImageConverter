@@ -1,6 +1,6 @@
-def _format_successful_conversion_manifest_line(existing_line: str, metrics: dict[str, object]) -> str:
+def _formatSuccessfulConversionManifestLine(existing_line: str, metrics: dict[str, object]) -> str:
     """Render one enriched successful-conversions manifest line."""
-    if not _successful_conversion_metrics_available(metrics):
+    if not _successfulConversionMetricsAvailable(metrics):
         return existing_line.rstrip('\n')
 
     variant = str(metrics.get('variant', '')).strip().upper()

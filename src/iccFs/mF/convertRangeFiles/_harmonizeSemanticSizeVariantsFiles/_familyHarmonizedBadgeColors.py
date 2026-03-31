@@ -1,4 +1,4 @@
-def _family_harmonized_badge_colors(variant_rows: list[dict[str, object]]) -> dict[str, int]:
+def _familyHarmonizedBadgeColors(variant_rows: list[dict[str, object]]) -> dict[str, int]:
     """Derive a family palette from L/M/S variants and slightly boost contrast."""
     buckets: dict[str, list[float]] = {
         "fill_gray": [],
@@ -25,10 +25,10 @@ def _family_harmonized_badge_colors(variant_rows: list[dict[str, object]]) -> di
     center = (fill_avg + stroke_avg) / 2.0
     delta = abs(fill_avg - stroke_avg)
     boosted_delta = max(18.0, delta * 1.12)
-    fill_gray = _clip_gray(center + (boosted_delta / 2.0))
-    stroke_gray = _clip_gray(center - (boosted_delta / 2.0))
+    fill_gray = _clipGray(center + (boosted_delta / 2.0))
+    stroke_gray = _clipGray(center - (boosted_delta / 2.0))
     if fill_gray <= stroke_gray:
-        fill_gray = _clip_gray(max(fill_gray, stroke_gray + 1.0))
+        fill_gray = _clipGray(max(fill_gray, stroke_gray + 1.0))
 
     colors = {
         "fill_gray": fill_gray,
@@ -39,10 +39,10 @@ def _family_harmonized_badge_colors(variant_rows: list[dict[str, object]]) -> di
 
     if buckets["text_gray"]:
         text_avg = sum(buckets["text_gray"]) / float(len(buckets["text_gray"]))
-        colors["text_gray"] = _clip_gray(min(text_avg, float(stroke_gray)))
+        colors["text_gray"] = _clipGray(min(text_avg, float(stroke_gray)))
 
     if buckets["stem_gray"]:
         stem_avg = sum(buckets["stem_gray"]) / float(len(buckets["stem_gray"]))
-        colors["stem_gray"] = _clip_gray(min(stem_avg, float(stroke_gray)))
+        colors["stem_gray"] = _clipGray(min(stem_avg, float(stroke_gray)))
 
     return colors

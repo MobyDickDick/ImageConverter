@@ -1,5 +1,5 @@
-def _compact_range_token(value: str) -> str:
-    token = _normalize_range_token(value)
+def _compactRangeToken(value: str) -> str:
+    token = _normalizeRangeToken(value)
     match = re.match(r"^([A-Z]+)(\d+)$", token)
     if not match:
         return token

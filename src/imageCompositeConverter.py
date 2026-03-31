@@ -15,27 +15,27 @@ if __package__ in {None, ""}:
 
 import src.iccFs.mF.image_composite_converter_core as _core
 from src.iccFs.convertRange import convert_range
-from src.iccFs.loadOptionalModule import load_optional_module
+from src.iccFs.loadOptionalModule import loadOptionalModule
 from src.iccFs.main import main
-from src.iccFs.optionalDependencyBaseDir import optional_dependency_base_dir
+from src.iccFs.optionalDependencyBaseDir import optionalDependencyBaseDir
 from src.iccFs.syncCoreOverrides import sync_core_overrides
-from src.iccFs.vendoredSitePackagesDirs import vendored_site_packages_dirs
+from src.iccFs.vendoredSitePackagesDirs import vendoredSitePackagesDirs
 
 for _name in dir(_core):
     if _name.startswith("__"):
         continue
     globals()[_name] = getattr(_core, _name)
 
-_optional_dependency_base_dir = optional_dependency_base_dir
-_vendored_site_packages_dirs = vendored_site_packages_dirs
-_load_optional_module = load_optional_module
+_optional_dependency_base_dir = optionalDependencyBaseDir
+_vendored_site_packages_dirs = vendoredSitePackagesDirs
+_load_optional_module = loadOptionalModule
 _sync_core_overrides = sync_core_overrides
 convert_range = convert_range
 
 # Polish-notation compatibility aliases for public integration points.
-optional_dependency_base_dir = _optional_dependency_base_dir
-vendored_site_packages_dirs = _vendored_site_packages_dirs
-load_optional_module = _load_optional_module
+optionalDependencyBaseDir = _optional_dependency_base_dir
+vendoredSitePackagesDirs = _vendored_site_packages_dirs
+loadOptionalModule = _load_optional_module
 sync_core_overrides = _sync_core_overrides
 convert_range = convert_range
 

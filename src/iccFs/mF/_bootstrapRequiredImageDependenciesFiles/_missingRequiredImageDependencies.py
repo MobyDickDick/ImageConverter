@@ -1,4 +1,4 @@
-def _missing_required_image_dependencies() -> list[str]:
+def _missingRequiredImageDependencies() -> list[str]:
     missing: list[str] = []
     if cv2 is None:
         missing.append("opencv-python-headless")

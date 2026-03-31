@@ -1,4 +1,4 @@
-def _run_svg_render_subprocess_entrypoint() -> int:
+def _runSvgRenderSubprocessEntrypoint() -> int:
     try:
         payload = json.loads(sys.stdin.buffer.read().decode("utf-8"))
     except Exception:
@@ -8,7 +8,7 @@ def _run_svg_render_subprocess_entrypoint() -> int:
     h = int(payload.get("h", 0))
     if w <= 0 or h <= 0:
         return 2
-    rendered = _render_svg_to_numpy_inprocess(svg, w, h)
+    rendered = _renderSvgToNumpyInprocess(svg, w, h)
     if rendered is None:
         sys.stdout.write('{"ok": false}\n')
         return 0

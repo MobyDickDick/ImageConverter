@@ -1,4 +1,4 @@
-def _compute_successful_conversions_error_threshold(
+def _computeSuccessfulConversionsErrorThreshold(
     rows: list[dict[str, object]],
     successful_variants: list[str] | tuple[str, ...] | None = None,
 ) -> float:

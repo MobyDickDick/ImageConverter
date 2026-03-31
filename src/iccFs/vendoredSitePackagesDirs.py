@@ -4,7 +4,7 @@ import os
 from pathlib import Path
 
 
-def vendored_site_packages_dirs() -> list[Path]:
+def vendoredSitePackagesDirs() -> list[Path]:
     """Return repo-local site-packages directories that may contain bundled deps."""
     import src.imageCompositeConverter as module
 

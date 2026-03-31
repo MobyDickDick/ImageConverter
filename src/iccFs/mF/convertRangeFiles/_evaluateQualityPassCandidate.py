@@ -1,4 +1,4 @@
-def _evaluate_quality_pass_candidate(
+def _evaluateQualityPassCandidate(
     old_row: dict[str, object],
     new_row: dict[str, object],
 ) -> tuple[bool, str, float, float, float, float]:

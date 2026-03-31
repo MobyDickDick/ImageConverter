@@ -1,4 +1,4 @@
-def build_linux_vendor_install_command(
+def buildLinuxVendorInstallCommand(
     vendor_dir: str = "vendor",
     platform_tag: str = "manylinux2014_x86_64",
     python_version: str | None = None,
@@ -23,5 +23,5 @@ def build_linux_vendor_install_command(
         "--only-binary=:all:",
         "--upgrade-strategy",
         "eager",
-        *_required_vendor_packages(),
+        *_requiredVendorPackages(),
     ]

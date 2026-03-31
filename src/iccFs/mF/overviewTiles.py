@@ -169,7 +169,7 @@ def _extract_svg_bounds(svg_text: str) -> tuple[float, float, float, float]:
     return 0.0, 0.0, width, height
 
 
-def _extract_svg_inner(svg_text: str) -> str:
+def _extractSvgInner(svg_text: str) -> str:
     match = re.search(r"<svg\b[^>]*>(.*)</svg>", svg_text, flags=re.IGNORECASE | re.DOTALL)
     return match.group(1).strip() if match else svg_text.strip()
 
@@ -210,7 +210,7 @@ def create_tiled_overview_svg(
         if not svg_text:
             continue
         x, y, src_w, src_h = _extract_svg_bounds(svg_text)
-        inner = _extract_svg_inner(svg_text)
+        inner = _extractSvgInner(svg_text)
 
         row = idx // cols
         col = idx % cols
@@ -291,7 +291,7 @@ _read_preview = _read_preview
 create_tiled_overview_image = create_tiled_overview_image
 _read_svg_text = _read_svg_text
 _extract_svg_bounds = _extract_svg_bounds
-_extract_svg_inner = _extract_svg_inner
+_extractSvgInner = _extractSvgInner
 create_tiled_overview_svg = create_tiled_overview_svg
 generate_conversion_overviews = generate_conversion_overviews
 _resolve_optional_dependencies = _resolve_optional_dependencies

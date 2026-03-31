@@ -1,4 +1,4 @@
-def _select_open_quality_cases(
+def _selectOpenQualityCases(
     rows: list[dict[str, object]],
     *,
     allowed_error_per_pixel: float,
