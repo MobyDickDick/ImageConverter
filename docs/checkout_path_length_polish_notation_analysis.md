@@ -4,7 +4,7 @@ Datum: 2026-03-31
 
 ## Kurzfazit
 
-- Das Problem ist reproduzierbar durch sehr tiefe Modulpfade unter `src/imageCompositeConverterFs/mainFiles/...`.
+- Das Problem ist reproduzierbar durch sehr tiefe Modulpfade unter `src/iccFs/mF/...`.
 - Es gibt **mindestens 1 Datei mit simuliertem Windows-Pfad > 260 Zeichen** (bei Basis `C:/work/ImageConverter/...` sogar 265 Zeichen).
 - Die aktuelle "Files"-Namenskonvention ist fast überall konsistent, aber bei **6 Ordnern fehlt der führende `_`-Präfix** (wenn wir polnische Notation als `_verb_objektFiles` interpretieren).
 
@@ -12,22 +12,22 @@ Datum: 2026-03-31
 
 Top 5 (Windows-Simulation `C:/work/ImageConverter`):
 
-1. `src/imageCompositeConverterFs/mainFiles/convert_rangeFiles/update_successful_conversions_manifest_with_metricsFiles/_restore_successful_conversion_snapshotFiles/_successful_conversion_snapshot_pathsFiles/_successful_conversion_snapshot_dir.py` → 265
-2. `src/imageCompositeConverterFs/mainFiles/convert_rangeFiles/update_successful_conversions_manifest_with_metricsFiles/_store_successful_conversion_snapshotFiles/_successful_conversion_snapshot_pathsFiles/_successful_conversion_snapshot_dir.py` → 263
-3. `src/imageCompositeConverterFs/mainFiles/convert_rangeFiles/_in_requested_rangeFiles/_matches_partial_range_tokenFiles/_shared_partial_range_tokenFiles/_compact_range_tokenFiles/_normalize_range_tokenFiles/get_base_name_from_file.py` → 254
-4. `src/imageCompositeConverterFs/mainFiles/convert_rangeFiles/update_successful_conversions_manifest_with_metricsFiles/_read_successful_conversion_manifest_metricsFiles/_parse_successful_conversion_manifest_line.py` → 234
-5. `src/imageCompositeConverterFs/mainFiles/convert_rangeFiles/update_successful_conversions_manifest_with_metricsFiles/_format_successful_conversion_manifest_lineFiles/_successful_conversion_metrics_available.py` → 231
+1. `src/iccFs/mF/convert_rangeFiles/update_successful_conversions_manifest_with_metricsFiles/_restore_successful_conversion_snapshotFiles/_successful_conversion_snapshot_pathsFiles/_successful_conversion_snapshot_dir.py` → 265
+2. `src/iccFs/mF/convert_rangeFiles/update_successful_conversions_manifest_with_metricsFiles/_store_successful_conversion_snapshotFiles/_successful_conversion_snapshot_pathsFiles/_successful_conversion_snapshot_dir.py` → 263
+3. `src/iccFs/mF/convert_rangeFiles/_in_requested_rangeFiles/_matches_partial_range_tokenFiles/_shared_partial_range_tokenFiles/_compact_range_tokenFiles/_normalize_range_tokenFiles/get_base_name_from_file.py` → 254
+4. `src/iccFs/mF/convert_rangeFiles/update_successful_conversions_manifest_with_metricsFiles/_read_successful_conversion_manifest_metricsFiles/_parse_successful_conversion_manifest_line.py` → 234
+5. `src/iccFs/mF/convert_rangeFiles/update_successful_conversions_manifest_with_metricsFiles/_format_successful_conversion_manifest_lineFiles/_successful_conversion_metrics_available.py` → 231
 
 ## Polnische Notation bei Ordnernamen
 
 Wenn wir für ausgelagerte Modulordner den Stil `_aktion_objektFiles` ansetzen, sind diese Ordner noch inkonsistent:
 
-- `src/imageCompositeConverterFs/mainFiles`
-- `src/imageCompositeConverterFs/mainFiles/convert_rangeFiles`
-- `src/imageCompositeConverterFs/mainFiles/export_module_call_tree_csvFiles`
-- `src/imageCompositeConverterFs/mainFiles/build_linux_vendor_install_commandFiles`
-- `src/imageCompositeConverterFs/mainFiles/convert_rangeFiles/update_successful_conversions_manifest_with_metricsFiles`
-- `src/imageCompositeConverterFs/mainFiles/convert_rangeFiles/update_successful_conversions_manifest_with_metricsFiles/collect_successful_conversion_quality_metricsFiles`
+- `src/iccFs/mF`
+- `src/iccFs/mF/convert_rangeFiles`
+- `src/iccFs/mF/export_module_call_tree_csvFiles`
+- `src/iccFs/mF/build_linux_vendor_install_commandFiles`
+- `src/iccFs/mF/convert_rangeFiles/update_successful_conversions_manifest_with_metricsFiles`
+- `src/iccFs/mF/convert_rangeFiles/update_successful_conversions_manifest_with_metricsFiles/collect_successful_conversion_quality_metricsFiles`
 
 ## Vorschlag zur Kürzung (ohne Funktionsverlust)
 

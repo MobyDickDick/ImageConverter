@@ -10,13 +10,13 @@ import importlib
 import sys
 import types
 
-import src.imageCompositeConverterFs.mainFiles.image_composite_converter_core as _core
-from src.imageCompositeConverterFs.convertRange import convertRange
-from src.imageCompositeConverterFs.loadOptionalModule import loadOptionalModule
-from src.imageCompositeConverterFs.main import main
-from src.imageCompositeConverterFs.optionalDependencyBaseDir import optionalDependencyBaseDir
-from src.imageCompositeConverterFs.syncCoreOverrides import syncCoreOverrides
-from src.imageCompositeConverterFs.vendoredSitePackagesDirs import vendoredSitePackagesDirs
+import src.iccFs.mF.image_composite_converter_core as _core
+from src.iccFs.convertRange import convertRange
+from src.iccFs.loadOptionalModule import loadOptionalModule
+from src.iccFs.main import main
+from src.iccFs.optionalDependencyBaseDir import optionalDependencyBaseDir
+from src.iccFs.syncCoreOverrides import syncCoreOverrides
+from src.iccFs.vendoredSitePackagesDirs import vendoredSitePackagesDirs
 
 for _name in dir(_core):
     if _name.startswith("__"):
