@@ -97,8 +97,8 @@ def main() -> None:
     csv_path = args.csv if args.csv.is_absolute() else rename_tool.REPO_ROOT / args.csv
     root = args.root if args.root.is_absolute() else rename_tool.REPO_ROOT / args.root
 
-    mapping = rename_tool._load_name_map(csv_path)
-    plans = rename_tool._planned_renames(root=root, mapping=mapping)
+    entries = rename_tool._load_entries(csv_path)
+    plans = rename_tool._planned_renames(root=root, entries=entries)
     row_lookup = _csv_row_lookup(csv_path)
     conflicts = _hard_conflicts(plans=plans, row_lookup=row_lookup)
 
