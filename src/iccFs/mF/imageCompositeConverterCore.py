@@ -7,7 +7,7 @@ callables from ``image_composite_converter_core``.
 
 from __future__ import annotations
 
-import src.iccFs.m_f.image_composite_converter_core as _legacy
+import src.iccFs.mF.image_composite_converter_core as _legacy
 
 
 def _to_polish_notation(name: str) -> str:
