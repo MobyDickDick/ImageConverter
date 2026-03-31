@@ -84,7 +84,8 @@ def _write_safe_csv(csv_path: Path, output_csv: Path, conflicts: list[HardConfli
 def main() -> None:
     parser = argparse.ArgumentParser(
         description=(
-            "Analysiert harte Umbenennungs-Konflikte aus replaceNames.csv und erzeugt optional eine "
+            "Analysiert harte Umbenennungs-Konflikte aus der konfigurierten replaceNames-CSV "
+            "(z. B. replaceNames.save.csv/replaceNames.safe.csv) und erzeugt optional eine "
             "bereinigte CSV ohne konfliktträchtige old->new-Einträge."
         )
     )
