@@ -1,0 +1,16 @@
+# Relative Pfade unter src/ (Dateien oder Ordner), die in polnische Notation umbenannt werden sollen.
+# Beispiel:
+# imageCompositeConverter.py
+# iccFs/convertRange.py
+# iccFs/mF
+
+imageCompositeConverter.py
+imageCompositeConverterRegions.py
+successfulConversions.py
+overviewTiles.py
+iccFs/convertRange.py
+iccFs/loadOptionalModule.py
+iccFs/optionalDependencyBaseDir.py
+iccFs/syncCoreOverrides.py
+iccFs/vendoredSitePackagesDirs.py
+iccFs/mF
