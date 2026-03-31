@@ -1,2 +1,6 @@
-# Function body for '_merge_entry_and_image_desc' could not be extracted from the source module.
-# This placeholder is still created to keep the call-tree structure complete.
+def _merge_entry_and_image_desc(entry_desc: str, image_desc: str) -> str:
+    e = entry_desc.strip()
+    i = image_desc.strip()
+    if e and i and e != i:
+        return f"{e} {i}".strip()
+    return i or e
