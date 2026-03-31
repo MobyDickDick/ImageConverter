@@ -1270,7 +1270,7 @@ def _render_svg_to_numpy_via_subprocess(svg_string: str, size_w: int, size_h: in
         {"svg": str(svg_string or ""), "w": int(size_w), "h": int(size_h)},
         ensure_ascii=False,
     ).encode("utf-8")
-    cmd = [sys.executable, "-m", "src.image_composite_converter", "--_render-svg-subprocess"]
+    cmd = [sys.executable, "-m", "src.imageCompositeConverter", "--_render-svg-subprocess"]
     try:
         completed = subprocess.run(
             cmd,
@@ -10294,7 +10294,7 @@ def _write_ac08_regression_manifest(
         "expected_reports=Iteration_Log.csv,quality_tercile_passes.csv,pixel_delta2_ranking.csv,pixel_delta2_summary.txt,ac08_weak_family_status.csv,ac08_weak_family_status.txt,ac08_success_metrics.csv,ac08_success_criteria.txt",
         "expected_logs=variant_harmonization.log,shape_catalog.csv",
         (
-            "recommended_command=python -m src.image_composite_converter "
+            "recommended_command=python -m src.imageCompositeConverter "
             f"{folder_path} --csv-path {csv_path} --ac08-regression-set {int(iterations)}"
         ),
     ]

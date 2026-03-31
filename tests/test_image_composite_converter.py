@@ -5491,7 +5491,7 @@ def test_local_workflow_doc_tracks_current_commands() -> None:
 
     assert "python -m compileall src tests" in workflow_doc
     assert "python -m pytest" in workflow_doc
-    assert "python -m src.image_composite_converter --help" in workflow_doc
+    assert "python -m src.imageCompositeConverter --help" in workflow_doc
     assert "--descriptions-path" in workflow_doc
     assert "--ac08-regression-set" in workflow_doc
     assert "--print-linux-vendor-command" in workflow_doc
@@ -5506,7 +5506,7 @@ def test_parse_args_help_mentions_canonical_image_converter_flags(capsys: pytest
     assert excinfo.value.code == 0
     assert "--descriptions-path" in captured.out
     assert "--iterations" in captured.out
-    assert "python -m src.image_composite_converter --print-linux-vendor-command" in captured.out
+    assert "python -m src.imageCompositeConverter --print-linux-vendor-command" in captured.out
 
 
 def test_default_converted_symbols_root_points_to_converted_images() -> None:

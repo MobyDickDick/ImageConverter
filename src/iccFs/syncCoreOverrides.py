@@ -3,7 +3,7 @@ from __future__ import annotations
 
 def syncCoreOverrides() -> None:
     """Mirror monkeypatched wrapper globals into the core module before calls."""
-    import src.image_composite_converter as module
+    import src.imageCompositeConverter as module
 
     skipNames = {"convert_range", "main", "_sync_core_overrides"}
     for name, value in module.__dict__.items():
