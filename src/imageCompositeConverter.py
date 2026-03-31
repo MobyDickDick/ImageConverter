@@ -14,7 +14,7 @@ if __package__ in {None, ""}:
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import src.iccFs.mF.image_composite_converter_core as _core
-from src.iccFs.convert_range import convert_range
+from src.iccFs.convertRange import convert_range
 from src.iccFs.loadOptionalModule import load_optional_module
 from src.iccFs.main import main
 from src.iccFs.optionalDependencyBaseDir import optional_dependency_base_dir
