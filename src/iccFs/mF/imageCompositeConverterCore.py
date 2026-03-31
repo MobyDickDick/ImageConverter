@@ -70,12 +70,15 @@ DEFAULT_CALL_TREE_CSV_PATH = "artifacts/converted_images/reports/call_tree_image
 
 OPTIONAL_DEPENDENCY_ERRORS: dict[str, str] = {}
 
-SVG_RENDER_SUBPROCESS_ENABLED = os.environ.get("IMAGE_CONVERTER_ISOLATE_SVG_RENDER", "").strip().lower() in {
-    "1",
-    "true",
-    "yes",
-    "on",
-}
+_svg_render_isolation_env = os.environ.get("IMAGE_CONVERTER_ISOLATE_SVG_RENDER", "").strip().lower()
+if _svg_render_isolation_env in {"0", "false", "no", "off"}:
+    SVG_RENDER_SUBPROCESS_ENABLED = False
+elif _svg_render_isolation_env in {"1", "true", "yes", "on"}:
+    SVG_RENDER_SUBPROCESS_ENABLED = True
+else:
+    # Default to isolated rendering because native PyMuPDF crashes (SIGSEGV)
+    # are not catchable in-process and would otherwise abort long conversions.
+    SVG_RENDER_SUBPROCESS_ENABLED = True
 try:
     SVG_RENDER_SUBPROCESS_TIMEOUT_SEC = max(
         1.0,
