@@ -5,9 +5,9 @@ def sync_core_overrides() -> None:
     """Mirror monkeypatched wrapper globals into the core module before calls."""
     import src.image_composite_converter as module
 
-    skipNames = {"convert_range", "main", "_sync_core_overrides", "syncCoreOverrides"}
+    skip_names = {"convert_range", "main", "_sync_core_overrides", "syncCoreOverrides"}
     for name, value in module.__dict__.items():
-        if name in skipNames:
+        if name in skip_names:
             continue
         if not hasattr(module._core, name):
             continue

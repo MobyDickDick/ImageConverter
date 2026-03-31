@@ -4,7 +4,7 @@ from src.iccFs.syncCoreOverrides import syncCoreOverrides
 
 
 def main(argv: list[str] | None = None) -> int:
-    import src.imageCompositeConverter as module
+    import src.image_composite_converter as module
 
     syncCoreOverrides()
     args = module.parseArgs(argv)
