@@ -6740,7 +6740,7 @@ def test_generate_conversion_overviews_creates_diff_and_svg_tiles(tmp_path: Path
     if imageCompositeConverter.np is None or imageCompositeConverter.cv2 is None:
         pytest.skip("numpy/cv2 not available in this environment")
 
-    from src.overviewTiles import generate_conversion_overviews
+    from src.iccFs.overviewTiles import generate_conversion_overviews
 
     np = imageCompositeConverter.np
     cv2 = imageCompositeConverter.cv2
