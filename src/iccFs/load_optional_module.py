@@ -4,9 +4,9 @@ import contextlib
 from pathlib import Path
 
 
-def loadOptionalModule(moduleName: str):
+def load_optional_module(moduleName: str):
     """Import optional dependencies, including repo-vendored site-packages."""
-    import src.imageCompositeConverter as module
+    import src.image_composite_converter as module
 
     attemptedPaths: list[Path] = []
     try:

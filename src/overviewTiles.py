@@ -34,16 +34,16 @@ SVG_VIEWBOX_RE = re.compile(
 )
 
 
-def _readRaster(path: Path):
-    _resolveOptionalDependencies()
+def _read_raster(path: Path):
+    _resolve_optional_dependencies()
     if cv2 is None:
         return None
     img = cv2.imread(str(path), cv2.IMREAD_COLOR)
     return img
 
 
-def _renderSvg(path: Path):
-    _resolveOptionalDependencies()
+def _render_svg(path: Path):
+    _resolve_optional_dependencies()
     if np is None or fitz is None:
         return None
     try:
@@ -60,15 +60,15 @@ def _renderSvg(path: Path):
     return None
 
 
-def _readPreview(path: Path):
+def _read_preview(path: Path):
     if path.suffix.lower() == ".svg":
-        return _renderSvg(path)
+        return _render_svg(path)
     if path.suffix.lower() in RASTER_EXTENSIONS:
-        return _readRaster(path)
+        return _read_raster(path)
     return None
 
 
-def createTiledOverviewImage(
+def create_tiled_overview_image(
     source_files: list[Path],
     output_path: Path,
     *,
@@ -77,7 +77,7 @@ def createTiledOverviewImage(
     columns: int = 8,
 ) -> Path | None:
     """Create a labeled tile view from source files and write it to ``output_path``."""
-    _resolveOptionalDependencies()
+    _resolve_optional_dependencies()
     if cv2 is None or np is None:
         return None
 
@@ -96,7 +96,7 @@ def createTiledOverviewImage(
     canvas = np.full((canvas_h, canvas_w, 3), 248, dtype=np.uint8)
 
     for idx, path in enumerate(valid):
-        preview = _readPreview(path)
+        preview = _read_preview(path)
         if preview is None:
             continue
 
@@ -138,14 +138,14 @@ def createTiledOverviewImage(
     return output_path
 
 
-def _readSvgText(path: Path) -> str | None:
+def _read_svg_text(path: Path) -> str | None:
     try:
         return path.read_text(encoding="utf-8")
     except Exception:
         return None
 
 
-def _extractSvgBounds(svg_text: str) -> tuple[float, float, float, float]:
+def _extract_svg_bounds(svg_text: str) -> tuple[float, float, float, float]:
     viewbox_match = SVG_VIEWBOX_RE.search(svg_text)
     if viewbox_match:
         try:
@@ -169,12 +169,12 @@ def _extractSvgBounds(svg_text: str) -> tuple[float, float, float, float]:
     return 0.0, 0.0, width, height
 
 
-def _extractSvgInner(svg_text: str) -> str:
+def _extract_svg_inner(svg_text: str) -> str:
     match = re.search(r"<svg\b[^>]*>(.*)</svg>", svg_text, flags=re.IGNORECASE | re.DOTALL)
     return match.group(1).strip() if match else svg_text.strip()
 
 
-def createTiledOverviewSvg(
+def create_tiled_overview_svg(
     source_files: list[Path],
     output_path: Path,
     *,
@@ -206,11 +206,11 @@ def createTiledOverviewSvg(
     ]
 
     for idx, path in enumerate(valid):
-        svg_text = _readSvgText(path)
+        svg_text = _read_svg_text(path)
         if not svg_text:
             continue
-        x, y, src_w, src_h = _extractSvgBounds(svg_text)
-        inner = _extractSvgInner(svg_text)
+        x, y, src_w, src_h = _extract_svg_bounds(svg_text)
+        inner = _extract_svg_inner(svg_text)
 
         row = idx // cols
         col = idx % cols
@@ -237,7 +237,7 @@ def createTiledOverviewSvg(
     return output_path
 
 
-def generateConversionOverviews(
+def generate_conversion_overviews(
     diff_dir: str | Path,
     svg_dir: str | Path,
     reports_dir: str | Path,
@@ -251,24 +251,24 @@ def generateConversionOverviews(
 
     diff_files = sorted(diff_root.glob("*_diff.png"))
     diff_out = reports_root / "overview_diff_tiles.png"
-    diff_res = createTiledOverviewImage(diff_files, diff_out)
+    diff_res = create_tiled_overview_image(diff_files, diff_out)
     if diff_res is not None:
         generated["diff"] = str(diff_res)
 
     svg_files = sorted(svg_root.glob("*.svg"))
     svg_out = reports_root / "overview_svg_tiles.png"
-    svg_res = createTiledOverviewImage(svg_files, svg_out)
+    svg_res = create_tiled_overview_image(svg_files, svg_out)
     if svg_res is not None:
         generated["svg"] = str(svg_res)
     svg_vector_out = reports_root / "overview_svg_tiles.svg"
-    svg_vector_res = createTiledOverviewSvg(svg_files, svg_vector_out)
+    svg_vector_res = create_tiled_overview_svg(svg_files, svg_vector_out)
     if svg_vector_res is not None:
         generated["svg_vector"] = str(svg_vector_res)
 
     return generated
 
 
-def _resolveOptionalDependencies() -> None:
+def _resolve_optional_dependencies() -> None:
     """Try to reuse optional deps loaded by ``src.imageCompositeConverter``."""
     global cv2, np, fitz
     if cv2 is not None and np is not None and fitz is not None:
@@ -285,13 +285,13 @@ def _resolveOptionalDependencies() -> None:
 
 
 # Backward-compatible aliases
-_read_raster = _readRaster
-_render_svg = _renderSvg
-_read_preview = _readPreview
-create_tiled_overview_image = createTiledOverviewImage
-_read_svg_text = _readSvgText
-_extract_svg_bounds = _extractSvgBounds
-_extract_svg_inner = _extractSvgInner
-create_tiled_overview_svg = createTiledOverviewSvg
-generate_conversion_overviews = generateConversionOverviews
-_resolve_optional_dependencies = _resolveOptionalDependencies
+_read_raster = _read_raster
+_render_svg = _render_svg
+_read_preview = _read_preview
+create_tiled_overview_image = create_tiled_overview_image
+_read_svg_text = _read_svg_text
+_extract_svg_bounds = _extract_svg_bounds
+_extract_svg_inner = _extract_svg_inner
+create_tiled_overview_svg = create_tiled_overview_svg
+generate_conversion_overviews = generate_conversion_overviews
+_resolve_optional_dependencies = _resolve_optional_dependencies
