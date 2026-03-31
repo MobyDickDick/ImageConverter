@@ -37,13 +37,13 @@ if __package__ in {None, ""}:
     if str(repo_root) not in sys.path:
         sys.path.insert(0, str(repo_root))
 
-from src.iccFs.mF.overviewTiles import generate_conversion_overviews
+from src.iccFs.mF.overviewTiles import generateConversionOverviews
 from src.iccFs.mF.imageCompositeConverterRegions import (
     ANNOTATION_COLORS,
     _bbox_to_dict,
-    analyze_range_impl,
-    annotate_image_regions_impl,
-    detect_relevant_regions_impl,
+    analyzeRangeImpl,
+    annotateImageRegionsImpl,
+    detectRelevantRegionsImpl,
 )
 from src.iccFs.mF.successfulConversions import (
     AC08_MITIGATION_STATUS,
@@ -122,12 +122,12 @@ AC08_ADAPTIVE_LOCK_PROFILES: dict[str, dict[str, float | bool]] = {
 }
 
 
-def detect_relevant_regions(img) -> list[dict[str, object]]:
-    return detect_relevant_regions_impl(img, cv2_module=cv2, np_module=np)
+def detectRelevantRegions(img) -> list[dict[str, object]]:
+    return detectRelevantRegionsImpl(img, cv2_module=cv2, np_module=np)
 
 
-def annotate_image_regions(img, regions: list[dict[str, object]]):
-    return annotate_image_regions_impl(img, regions, cv2_module=cv2)
+def annotateImageRegions(img, regions: list[dict[str, object]]):
+    return annotateImageRegionsImpl(img, regions, cv2_module=cv2)
 
 
 
@@ -376,7 +376,7 @@ def abstand(punkt1: Punkt, punkt2: Punkt) -> float:
     return math.hypot(float(punkt1.x) - float(punkt2.x), float(punkt1.y) - float(punkt2.y))
 
 
-def build_oriented_kelle(
+def buildOrientedKelle(
     orientation: str,
     *,
     mittelpunkt: Punkt,
@@ -493,7 +493,7 @@ class GlobalParameterVector:
                 out[key] = float(value)
         return out
 
-def load_grayscale_image(path: Path) -> list[list[int]]:
+def loadGrayscaleImage(path: Path) -> list[list[int]]:
     image_module = _import_with_vendored_fallback("PIL.Image")
     gray = image_module.open(path).convert("L")
     w, h = gray.size
@@ -600,8 +600,8 @@ def _adaptive_threshold(grayscale: list[list[int]], block_size: int = 15, c: int
     return out
 
 
-def load_binary_image_with_mode(path: Path, *, threshold: int = 220, mode: str = "global") -> list[list[int]]:
-    grayscale = load_grayscale_image(path)
+def loadBinaryImageWithMode(path: Path, *, threshold: int = 220, mode: str = "global") -> list[list[int]]:
+    grayscale = loadGrayscaleImage(path)
     m = str(mode).lower()
     if m == 'global':
         return [[1 if v < threshold else 0 for v in row] for row in grayscale]
@@ -613,7 +613,7 @@ def load_binary_image_with_mode(path: Path, *, threshold: int = 220, mode: str =
     raise ValueError(f"Unknown threshold mode '{mode}'.")
 
 
-def render_candidate_mask(candidate: Candidate, width: int, height: int) -> list[list[int]]:
+def renderCandidateMask(candidate: Candidate, width: int, height: int) -> list[list[int]]:
     mask = [[0 for _ in range(width)] for _ in range(height)]
     rx = max(1.0, (candidate.w + candidate.h) / 4.0) if candidate.shape == 'circle' else max(1.0, candidate.w / 2.0)
     ry = rx if candidate.shape == 'circle' else max(1.0, candidate.h / 2.0)
@@ -638,23 +638,23 @@ def _iou(a: list[list[int]], b: list[list[int]]) -> float:
     return inter / union if union else 0.0
 
 
-def score_candidate(target: list[list[int]], candidate: Candidate) -> float:
-    return _iou(target, render_candidate_mask(candidate, len(target[0]), len(target)))
+def scoreCandidate(target: list[list[int]], candidate: Candidate) -> float:
+    return _iou(target, renderCandidateMask(candidate, len(target[0]), len(target)))
 
 
-def random_neighbor(base: Candidate, scale: float, rng: random.Random) -> Candidate:
+def randomNeighbor(base: Candidate, scale: float, rng: random.Random) -> Candidate:
     return Candidate(base.shape, base.cx + rng.uniform(-scale, scale), base.cy + rng.uniform(-scale, scale), max(1.0, base.w + rng.uniform(-scale, scale) * 1.4), max(1.0, base.h + rng.uniform(-scale, scale) * 1.4))
 
 
-def optimize_element(target: list[list[int]], init: Candidate, *, max_iter: int, plateau_limit: int, seed: int) -> tuple[Candidate, float]:
+def optimizeElement(target: list[list[int]], init: Candidate, *, max_iter: int, plateau_limit: int, seed: int) -> tuple[Candidate, float]:
     rng = random.Random(seed)
     best = init
-    best_score = score_candidate(target, best)
+    best_score = scoreCandidate(target, best)
     scale = max(1.0, max(best.w, best.h) * 0.2)
     plateau = 0
     for _ in range(max_iter):
-        cand = random_neighbor(best, scale, rng)
-        s = score_candidate(target, cand)
+        cand = randomNeighbor(best, scale, rng)
+        s = scoreCandidate(target, cand)
         if s >= best_score:
             best, best_score, plateau = cand, s, 0
         else:
@@ -670,7 +670,7 @@ def _gray_to_hex(v: float) -> str:
     return f"#{g:02x}{g:02x}{g:02x}"
 
 
-def estimate_stroke_style(grayscale: list[list[int]], element: Element, candidate: Candidate) -> tuple[str, str | None, float | None]:
+def estimateStrokeStyle(grayscale: list[list[int]], element: Element, candidate: Candidate) -> tuple[str, str | None, float | None]:
     vals = [grayscale[y + element.y0][x + element.x0] for y,row in enumerate(element.pixels) for x,v in enumerate(row) if v]
     fill = _gray_to_hex(sum(vals) / max(1, len(vals)))
     if candidate.shape != 'circle':
@@ -691,7 +691,7 @@ def estimate_stroke_style(grayscale: list[list[int]], element: Element, candidat
     return fill, None, None
 
 
-def candidate_to_svg(candidate: Candidate, gx: int, gy: int, fill_color: str, stroke_color: str | None = None, stroke_width: float | None = None) -> str:
+def candidateToSvg(candidate: Candidate, gx: int, gy: int, fill_color: str, stroke_color: str | None = None, stroke_width: float | None = None) -> str:
     if candidate.shape == 'circle':
         r = max(1.0, (candidate.w + candidate.h) / 4.0)
         if stroke_color is not None and stroke_width is not None:
@@ -703,7 +703,7 @@ def candidate_to_svg(candidate: Candidate, gx: int, gy: int, fill_color: str, st
     return f'<ellipse cx="{candidate.cx + gx:.2f}" cy="{candidate.cy + gy:.2f}" rx="{rx:.2f}" ry="{ry:.2f}" fill="{fill_color}" />'
 
 
-def decompose_circle_with_stem(grayscale: list[list[int]], element: Element, candidate: Candidate) -> list[str] | None:
+def decomposeCircleWithStem(grayscale: list[list[int]], element: Element, candidate: Candidate) -> list[str] | None:
     if not element.pixels or not element.pixels[0]:
         return None
 
@@ -770,7 +770,7 @@ def decompose_circle_with_stem(grayscale: list[list[int]], element: Element, can
     stem_values = [grayscale[element.y0 + y][element.x0 + x] for x, y in best_cluster]
     stem_color = _gray_to_hex(round(sum(stem_values) / max(1, len(stem_values))))
 
-    fill_color, stroke_color, stroke_width = estimate_stroke_style(grayscale, element, candidate)
+    fill_color, stroke_color, stroke_width = estimateStrokeStyle(grayscale, element, candidate)
 
     stem_x = float(element.x0 + sx0)
     stem_y = float(element.y0 + sy0)
@@ -809,7 +809,7 @@ def decompose_circle_with_stem(grayscale: list[list[int]], element: Element, can
         f'width="{stem_wf:.2f}" height="{stem_hf:.2f}" fill="{stem_color}"/>'
     )
     circle_vals = [grayscale[element.y0 + y][element.x0 + x] for x, y in circle_pixels] or stem_values
-    circle = candidate_to_svg(
+    circle = candidateToSvg(
         candidate,
         element.x0,
         element.y0,
@@ -830,7 +830,7 @@ def _missingRequiredImageDependencies() -> list[str]:
 
 
 
-def rgb_to_hex(rgb: np.ndarray) -> str:
+def rgbToHex(rgb: np.ndarray) -> str:
     return "#{:02x}{:02x}{:02x}".format(int(rgb[0]), int(rgb[1]), int(rgb[2]))
 
 
@@ -4469,7 +4469,7 @@ class Action:
             # points, which can make the iterative epsilon sweep effectively a
             # no-op (same polygon across all iterations).
             contours, _ = cv2.findContours(mask, cv2.RETR_CCOMP, cv2.CHAIN_APPROX_NONE)
-            hex_color = rgb_to_hex(color[::-1])
+            hex_color = rgbToHex(color[::-1])
 
             for contour in contours:
                 if cv2.contourArea(contour) < 10:
@@ -8135,7 +8135,7 @@ def _semantic_quality_flags(base_name: str, validation_logs: list[str]) -> list[
     return markers
 
 
-def run_iteration_pipeline(
+def runIterationPipeline(
     img_path: str,
     csv_path: str,
     max_iterations: int,
@@ -11145,7 +11145,7 @@ def _write_successful_conversion_csv_table(csv_path: str | os.PathLike[str], met
     return csv_path
 
 
-def write_successful_conversion_quality_report(
+def writeSuccessfulConversionQualityReport(
     folder_path: str,
     svg_out_dir: str,
     reports_out_dir: str,
@@ -11392,7 +11392,7 @@ _bootstrapRequiredImageDependencies = _load_mainfile_function(
 buildLinuxVendorInstallCommand = _load_mainfile_function(
     "build_linux_vendor_install_command", "build_linux_vendor_install_command.py"
 )
-convert_range = _load_mainfile_function("convert_range", "convert_range.py")
+convertRange = _load_mainfile_function("convert_range", "convert_range.py")
 exportModuleCallTreeCsv = _load_mainfile_function("export_module_call_tree_csv", "export_module_call_tree_csv.py")
 parseArgs = _load_mainfile_function("parse_args", "parse_args.py")
 _optionalLogCapture = contextlib.contextmanager(

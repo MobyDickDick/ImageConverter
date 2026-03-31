@@ -8,9 +8,7 @@ def optionalDependencyBaseDir() -> Path:
     return Path(__file__).resolve().parents[2]
 
 
-def optional_dependency_base_dir() -> Path:
-    """Backward-compatible snake_case alias."""
-    return optionalDependencyBaseDir()
+optional_dependency_base_dir = optionalDependencyBaseDir
 
 
 __all__ = ["optionalDependencyBaseDir", "optional_dependency_base_dir"]

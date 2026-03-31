@@ -50,9 +50,7 @@ def vendoredSitePackagesDirs() -> list[Path]:
     return existing
 
 
-def vendored_site_packages_dirs() -> list[Path]:
-    """Backward-compatible snake_case alias."""
-    return vendoredSitePackagesDirs()
+vendored_site_packages_dirs = vendoredSitePackagesDirs
 
 
 __all__ = ["vendoredSitePackagesDirs", "vendored_site_packages_dirs"]

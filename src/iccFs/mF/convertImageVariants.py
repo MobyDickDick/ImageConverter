@@ -1,3 +1,3 @@
 def convertImageVariants(*args, **kwargs):
     """Compatibility shim kept for tooling imports."""
-    return convert_range(*args, **kwargs)
+    return convertRange(*args, **kwargs)
