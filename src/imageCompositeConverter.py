@@ -18,7 +18,7 @@ from src.iccFs.convertRange import convert_range
 from src.iccFs.loadOptionalModule import loadOptionalModule
 from src.iccFs.main import main
 from src.iccFs.optionalDependencyBaseDir import optionalDependencyBaseDir
-from src.iccFs.syncCoreOverrides import sync_core_overrides
+from src.iccFs.syncCoreOverrides import syncCoreOverrides
 from src.iccFs.vendoredSitePackagesDirs import vendoredSitePackagesDirs
 
 for _name in dir(_core):
@@ -29,14 +29,14 @@ for _name in dir(_core):
 _optional_dependency_base_dir = optionalDependencyBaseDir
 _vendored_site_packages_dirs = vendoredSitePackagesDirs
 _load_optional_module = loadOptionalModule
-_sync_core_overrides = sync_core_overrides
+_syncCoreOverrides = syncCoreOverrides
 convert_range = convert_range
 
 # Polish-notation compatibility aliases for public integration points.
 optionalDependencyBaseDir = _optional_dependency_base_dir
 vendoredSitePackagesDirs = _vendored_site_packages_dirs
 loadOptionalModule = _load_optional_module
-sync_core_overrides = _sync_core_overrides
+syncCoreOverrides = _syncCoreOverrides
 convert_range = convert_range
 
 _core._optional_dependency_base_dir = _optional_dependency_base_dir
@@ -54,7 +54,7 @@ _core.fitz = fitz
 class _CoreSyncModule(types.ModuleType):
     def __setattr__(self, name, value):
         super().__setattr__(name, value)
-        if name in {"convert_range", "convertRange", "main", "_sync_core_overrides", "syncCoreOverrides"}:
+        if name in {"convert_range", "convertRange", "main", "_syncCoreOverrides", "syncCoreOverrides"}:
             return
         if hasattr(_core, name):
             setattr(_core, name, value)
