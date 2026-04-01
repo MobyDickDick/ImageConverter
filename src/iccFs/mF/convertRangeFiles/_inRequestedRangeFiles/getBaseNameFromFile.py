@@ -1,3 +1,7 @@
+import os
+import re
+
+
 def getBaseNameFromFile(filename: str) -> str:
     name = os.path.splitext(filename)[0]
     name = re.sub(r"(-\d+)$", "", name)
