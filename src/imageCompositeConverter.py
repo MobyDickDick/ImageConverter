@@ -188,9 +188,9 @@ def _import_with_vendored_fallback(module_name: str):
 # Load numpy before cv2: OpenCV's Python bindings import numpy at module-import
 # time and can fail permanently for this process if cv2 is attempted first while
 # numpy is available only via repo-vendored site-packages.
-np = _loadOptionalModule("numpy")
-cv2 = _loadOptionalModule("cv2")
-fitz = _loadOptionalModule("fitz")  # PyMuPDF for native SVG rendering
+np = _load_optional_module("numpy")
+cv2 = _load_optional_module("cv2")
+fitz = _load_optional_module("fitz")  # PyMuPDF for native SVG rendering
 
 
 
@@ -2686,7 +2686,7 @@ class Action:
         geometry constrained to the semantic template (centered under the circle, extending
         to the image bottom).
         """
-        params = Action._fitSemanticBadgeFromImage(img, defaults)
+        params = Action._fit_semantic_badge_from_image(img, defaults)
         h, w = img.shape[:2]
 
         raw_stem_width = float(params.get("stem_width", defaults.get("stem_width", max(1.0, float(w) * 0.10))))
@@ -3233,7 +3233,7 @@ class Action:
     @staticmethod
     def _fitAc0812ParamsFromImage(img: np.ndarray, defaults: dict) -> dict:
         """Fit AC0812 while keeping the horizontal arm anchored to the left edge."""
-        params = Action._fitSemanticBadgeFromImage(img, defaults)
+        params = Action._fit_semantic_badge_from_image(img, defaults)
         h, w = img.shape[:2]
         aspect_ratio = (float(w) / float(h)) if h > 0 else 1.0
 
@@ -3364,7 +3364,7 @@ class Action:
     @staticmethod
     def _fitAc0813ParamsFromImage(img: np.ndarray, defaults: dict) -> dict:
         """Fit AC0813 while keeping the vertical arm anchored to the upper edge."""
-        params = Action._fitSemanticBadgeFromImage(img, defaults)
+        params = Action._fit_semantic_badge_from_image(img, defaults)
         h, w = img.shape[:2]
         aspect_ratio = (float(h) / float(w)) if w > 0 else 1.0
 
@@ -3476,7 +3476,7 @@ class Action:
     @staticmethod
     def _fitAc0814ParamsFromImage(img: np.ndarray, defaults: dict) -> dict:
         """Fit AC0814 while keeping the horizontal arm anchored to the right edge."""
-        params = Action._fitSemanticBadgeFromImage(img, defaults)
+        params = Action._fit_semantic_badge_from_image(img, defaults)
         h, w = img.shape[:2]
         aspect_ratio = (float(w) / float(h)) if h > 0 else 1.0
 
@@ -3579,7 +3579,7 @@ class Action:
     @staticmethod
     def _fitAc0810ParamsFromImage(img: np.ndarray, defaults: dict) -> dict:
         """Fit AC0810 with the same right-anchored arm behavior as AC0814."""
-        return Action._fitAc0814ParamsFromImage(img, defaults)
+        return Action._fit_ac0814_params_from_image(img, defaults)
 
     @staticmethod
     def _glyphBbox(text_mode: str) -> tuple[int, int, int, int]:
@@ -3964,12 +3964,14 @@ class Action:
         *,
         max_rounds: int = 2,
         debug_out_dir: str | None = None,
+        stop_when_error_below_threshold: bool = False,
     ) -> list[str]:
         return Action.validateBadgeByElements(
             img_orig,
             badge_params,
             max_rounds=max_rounds,
             debug_out_dir=debug_out_dir,
+            stop_when_error_below_threshold=stop_when_error_below_threshold,
         )
 
     @staticmethod
@@ -3979,6 +3981,37 @@ class Action:
     @staticmethod
     def render_svg_to_numpy(svg_content: str, w: int, h: int):
         return Action.renderSvgToNumpy(svg_content, w, h)
+
+    @staticmethod
+    def _detect_semantic_primitives(
+        img_orig: np.ndarray,
+        badge_params: dict | None = None,
+    ) -> dict[str, bool | int | str]:
+        return Action._detectSemanticPrimitives(img_orig, badge_params)
+
+    @staticmethod
+    def _foreground_mask(img: np.ndarray) -> np.ndarray:
+        return Action._foregroundMask(img)
+
+    @staticmethod
+    def _circle_from_foreground_mask(fg_mask: np.ndarray) -> tuple[float, float, float] | None:
+        return Action._circleFromForegroundMask(fg_mask)
+
+    @staticmethod
+    def _mask_supports_circle(mask: np.ndarray | None) -> bool:
+        return Action._maskSupportsCircle(mask)
+
+    @staticmethod
+    def _mask_bbox(mask: np.ndarray) -> tuple[float, float, float, float] | None:
+        return Action._maskBbox(mask)
+
+    @staticmethod
+    def _mask_centroid_radius(mask: np.ndarray) -> tuple[float, float, float] | None:
+        return Action._maskCentroidRadius(mask)
+
+    @staticmethod
+    def extract_badge_element_mask(img_orig: np.ndarray, params: dict, element: str) -> np.ndarray | None:
+        return Action.extractBadgeElementMask(img_orig, params, element)
 
     @staticmethod
     def _enforce_semantic_connector_expectation(
@@ -4045,13 +4078,13 @@ class Action:
             }
             if img is None:
                 return Action._finalizeAc08Style(name, defaults)
-            return Action._finalizeAc08Style(name, Action._fitSemanticBadgeFromImage(img, defaults))
+            return Action._finalizeAc08Style(name, Action._fit_semantic_badge_from_image(img, defaults))
 
         if name == "AC0811":
             defaults = Action._defaultAc0811Params(w, h)
             if img is None:
                 return Action._finalizeAc08Style(name, defaults)
-            return Action._finalizeAc08Style(name, Action._fitAc0811ParamsFromImage(img, defaults))
+            return Action._finalizeAc08Style(name, Action._fit_ac0811_params_from_image(img, defaults))
 
         if name == "AC0810":
             defaults = Action._defaultAc0810Params(w, h)
@@ -4064,7 +4097,7 @@ class Action:
             if img is None:
                 return Action._enforceLeftArmBadgeGeometry(Action._finalizeAc08Style(name, defaults), w, h)
             return Action._enforceLeftArmBadgeGeometry(
-                Action._finalizeAc08Style(name, Action._fitAc0812ParamsFromImage(img, defaults)),
+                Action._finalizeAc08Style(name, Action._fit_ac0812_params_from_image(img, defaults)),
                 w,
                 h,
             )
@@ -4079,20 +4112,20 @@ class Action:
             defaults = Action._defaultAc0814Params(w, h)
             if img is None:
                 return Action._finalizeAc08Style(name, defaults)
-            return Action._finalizeAc08Style(name, Action._fitAc0814ParamsFromImage(img, defaults))
+            return Action._finalizeAc08Style(name, Action._fit_ac0814_params_from_image(img, defaults))
 
         if name == "AC0881":
             defaults = Action._defaultAc0881Params(w, h)
             if img is None:
                 return Action._finalizeAc08Style(name, defaults)
-            return Action._finalizeAc08Style(name, Action._fitSemanticBadgeFromImage(img, defaults))
+            return Action._finalizeAc08Style(name, Action._fit_semantic_badge_from_image(img, defaults))
 
         if name == "AC0882":
             defaults = Action._defaultAc0882Params(w, h)
             if img is None:
                 return Action._enforceLeftArmBadgeGeometry(Action._finalizeAc08Style(name, defaults), w, h)
             return Action._enforceLeftArmBadgeGeometry(
-                Action._finalizeAc08Style(name, Action._fitSemanticBadgeFromImage(img, defaults)),
+                Action._finalizeAc08Style(name, Action._fit_semantic_badge_from_image(img, defaults)),
                 w,
                 h,
             )
@@ -4101,7 +4134,7 @@ class Action:
             defaults = Action._applyCo2Label(Action._defaultAc0870Params(w, h))
             if img is None:
                 return Action._finalizeAc08Style(name, defaults)
-            return Action._finalizeAc08Style(name, Action._applyCo2Label(Action._fitSemanticBadgeFromImage(img, defaults)))
+            return Action._finalizeAc08Style(name, Action._applyCo2Label(Action._fit_semantic_badge_from_image(img, defaults)))
 
         if name == "AC0831":
             defaults = Action._applyCo2Label(Action._defaultAc0881Params(w, h))
@@ -4109,7 +4142,7 @@ class Action:
                 return Action._finalizeAc08Style(name, Action._tuneAc0831Co2Badge(defaults))
             return Action._finalizeAc08Style(
                 name,
-                Action._tuneAc0831Co2Badge(Action._fitAc0811ParamsFromImage(img, defaults)),
+                Action._tuneAc0831Co2Badge(Action._fit_ac0811_params_from_image(img, defaults)),
             )
 
         if name == "AC0832":
@@ -4123,7 +4156,7 @@ class Action:
             return Action._enforceLeftArmBadgeGeometry(
                 Action._finalizeAc08Style(
                     name,
-                    Action._tuneAc0832Co2Badge(Action._fitAc0812ParamsFromImage(img, defaults)),
+                    Action._tuneAc0832Co2Badge(Action._fit_ac0812_params_from_image(img, defaults)),
                 ),
                 w,
                 h,
@@ -4142,7 +4175,7 @@ class Action:
             return Action._finalizeAc08Style(
                 name,
                 Action._tuneAc0834Co2Badge(
-                    Action._fitAc0814ParamsFromImage(img, defaults),
+                    Action._fit_ac0814_params_from_image(img, defaults),
                     w,
                     h,
                 ),
@@ -4156,7 +4189,7 @@ class Action:
             return Action._finalizeAc08Style(
                 name,
                 Action._tuneAc0835VocBadge(
-                    Action._fitAc0814ParamsFromImage(img, defaults),
+                    Action._fit_ac0814_params_from_image(img, defaults),
                     w,
                     h,
                 ),
@@ -4166,14 +4199,14 @@ class Action:
             defaults = Action._applyVocLabel(Action._defaultAc0881Params(w, h))
             if img is None:
                 return Action._finalizeAc08Style(name, defaults)
-            return Action._finalizeAc08Style(name, Action._fitAc0811ParamsFromImage(img, defaults))
+            return Action._finalizeAc08Style(name, Action._fit_ac0811_params_from_image(img, defaults))
 
         if name == "AC0837":
             defaults = Action._applyVocLabel(Action._defaultAc0812Params(w, h))
             if img is None:
                 return Action._enforceLeftArmBadgeGeometry(Action._finalizeAc08Style(name, defaults), w, h)
             return Action._enforceLeftArmBadgeGeometry(
-                Action._finalizeAc08Style(name, Action._fitAc0812ParamsFromImage(img, defaults)),
+                Action._finalizeAc08Style(name, Action._fit_ac0812_params_from_image(img, defaults)),
                 w,
                 h,
             )
@@ -4184,13 +4217,13 @@ class Action:
             defaults = Action._applyVocLabel(Action._defaultAc0814Params(w, h))
             if img is None:
                 return Action._finalizeAc08Style(name, defaults)
-            return Action._finalizeAc08Style(name, Action._fitAc0814ParamsFromImage(img, defaults))
+            return Action._finalizeAc08Style(name, Action._fit_ac0814_params_from_image(img, defaults))
 
         if name == "AC0839":
             defaults = Action._applyVocLabel(Action._defaultAc0814Params(w, h))
             if img is None:
                 return Action._finalizeAc08Style(name, defaults)
-            return Action._finalizeAc08Style(name, Action._fitAc0814ParamsFromImage(img, defaults))
+            return Action._finalizeAc08Style(name, Action._fit_ac0814_params_from_image(img, defaults))
 
         return None
 
@@ -5243,7 +5276,7 @@ class Action:
     @staticmethod
     def _globalParameterVectorBounds(params: dict, w: int, h: int) -> dict[str, tuple[float, float, bool, str]]:
         """Return central bounds/lock metadata for the shared optimization vector."""
-        x_low, x_high, y_low, y_high, r_low, r_high = Action._circleBounds(params, w, h)
+        x_low, x_high, y_low, y_high, r_low, r_high = Action._circle_bounds(params, w, h)
         max_x = float(max(0, w - 1))
         max_y = float(max(0, h - 1))
         text_scale = float(params.get("text_scale", 1.0))
@@ -5371,9 +5404,9 @@ class Action:
         Action._logGlobalParameterVector(logs, params, w, h, label="circle: survivor-start")
         x_low, x_high, y_low, y_high, r_low, r_high = Action._circleBounds(params, w, h)
         current = (
-            Action._snapHalf(float(params.get("cx", (w - 1) / 2.0))),
-            Action._snapHalf(float(params.get("cy", (h - 1) / 2.0))),
-            Action._snapHalf(float(params.get("r", max(1.0, min(w, h) * 0.3)))),
+            Action._snap_half(float(params.get("cx", (w - 1) / 2.0))),
+            Action._snap_half(float(params.get("cy", (h - 1) / 2.0))),
+            Action._snap_half(float(params.get("r", max(1.0, min(w, h) * 0.3)))),
         )
         lock_cx = bool(params.get("lock_circle_cx", False))
         lock_cy = bool(params.get("lock_circle_cy", False))
@@ -5487,12 +5520,12 @@ class Action:
             if lock_cx:
                 cx = current[0]
             else:
-                cx = Action._snapHalf(float(Action._clipScalar(cx, x_low, x_high)))
+                cx = Action._snap_half(float(Action._clip_scalar(cx, x_low, x_high)))
             if lock_cy:
                 cy = current[1]
             else:
-                cy = Action._snapHalf(float(Action._clipScalar(cy, y_low, y_high)))
-            rad = Action._snapHalf(float(Action._clipScalar(rad, r_low, r_high)))
+                cy = Action._snap_half(float(Action._clip_scalar(cy, y_low, y_high)))
+            rad = Action._snap_half(float(Action._clip_scalar(rad, r_low, r_high)))
             return cx, cy, rad
 
         cache: dict[tuple[float, float, float], float] = {}
@@ -5501,7 +5534,7 @@ class Action:
             pose = clampPose(candidate)
             if pose not in cache:
                 cache[pose] = float(
-                    Action._elementErrorForCirclePose(
+                    Action._element_error_for_circle_pose(
                         img_orig,
                         params,
                         cx_value=pose[0],
@@ -5525,7 +5558,7 @@ class Action:
             "r_high": r_high,
         }
 
-        rng = Action._makeRng(2027 + int(Action.STOCHASTIC_RUN_SEED) + int(Action.STOCHASTIC_SEED_OFFSET))
+        rng = Action._make_rng(2027 + int(Action.STOCHASTIC_RUN_SEED) + int(Action.STOCHASTIC_SEED_OFFSET))
         improved = False
         flat_plateau_hits = 0
 
@@ -5705,24 +5738,24 @@ class Action:
             for key in active_keys:
                 low, high, _locked, _source = bounds[key]
                 current_value = float(data[key])
-                clipped = float(Action._clipScalar(current_value, low, high))
+                clipped = float(Action._clip_scalar(current_value, low, high))
                 if key in {"cx", "cy", "r", "stem_x", "stem_width", "text_x", "text_y"}:
-                    clipped = float(Action._snapHalf(clipped))
+                    clipped = float(Action._snap_half(clipped))
                 data[key] = clipped
             return GlobalParameterVector(**data)
 
         def evalVector(candidate: GlobalParameterVector) -> float:
-            probe = candidate.applyToParams(params)
+            probe = candidate.apply_to_params(params)
             if probe.get("arm_enabled"):
                 Action._reanchorArmToCircleEdge(probe, float(probe.get("r", 0.0)))
             if probe.get("stem_enabled"):
                 probe["stem_top"] = float(probe.get("cy", 0.0)) + float(probe.get("r", 0.0))
                 if bool(probe.get("lock_stem_center_to_circle", False)):
                     stem_w = float(probe.get("stem_width", 1.0))
-                    probe["stem_x"] = Action._snapHalf(
+                    probe["stem_x"] = Action._snap_half(
                         max(0.0, min(float(w) - stem_w, float(probe.get("cx", 0.0)) - (stem_w / 2.0)))
                     )
-            return Action._fullBadgeErrorForParams(img_orig, probe)
+            return Action._full_badge_error_for_params(img_orig, probe)
 
         def withinHardBounds(candidate: GlobalParameterVector) -> tuple[bool, str]:
             for key in active_keys:
@@ -5732,7 +5765,7 @@ class Action:
                     return False, f"{key}={value:.3f} außerhalb [{low:.3f}, {high:.3f}]"
             return True, "ok"
 
-        rng = Action._makeRng(4099 + int(Action.STOCHASTIC_RUN_SEED) + int(Action.STOCHASTIC_SEED_OFFSET))
+        rng = Action._make_rng(4099 + int(Action.STOCHASTIC_RUN_SEED) + int(Action.STOCHASTIC_SEED_OFFSET))
         best = clampVector(vector)
         best_err = evalVector(best)
         if not math.isfinite(best_err):
@@ -5756,7 +5789,7 @@ class Action:
                 for key in active_keys:
                     low, high, _locked, _source = bounds[key]
                     sigma = spans[key]
-                    sample_data[key] = float(Action._clipScalar(rng.normal(float(sample_data[key]), sigma), low, high))
+                    sample_data[key] = float(Action._clip_scalar(rng.normal(float(sample_data[key]), sigma), low, high))
                 candidate = clampVector(GlobalParameterVector(**sample_data))
                 candidate_err = evalVector(candidate)
                 if math.isfinite(candidate_err):
@@ -5996,17 +6029,17 @@ class Action:
         if info is None:
             return float("inf")
         key, low, high = info
-        probe[key] = float(Action._clipScalar(width_value, low, high))
+        probe[key] = float(Action._clip_scalar(width_value, low, high))
         if key == "stem_width" and probe.get("stem_enabled"):
             probe["stem_x"] = float(probe.get("cx", probe.get("stem_x", 0.0))) - (probe["stem_width"] / 2.0)
-        elem_svg = Action.generateBadgeSvg(w, h, Action._elementOnlyParams(probe, element))
-        elem_render = Action._fitToOriginalSize(img_orig, Action.renderSvgToNumpy(elem_svg, w, h))
+        elem_svg = Action.generate_badge_svg(w, h, Action._elementOnlyParams(probe, element))
+        elem_render = Action._fit_to_original_size(img_orig, Action.render_svg_to_numpy(elem_svg, w, h))
         if elem_render is None:
             return float("inf")
-        mask_orig = Action.extractBadgeElementMask(img_orig, probe, element)
+        mask_orig = Action.extract_badge_element_mask(img_orig, probe, element)
         if mask_orig is None:
             return float("inf")
-        return Action._elementMatchError(img_orig, elem_render, probe, element, mask_orig=mask_orig)
+        return Action._element_match_error(img_orig, elem_render, probe, element, mask_orig=mask_orig)
 
     @staticmethod
     def _elementErrorForCircleRadius(img_orig: np.ndarray, params: dict, radius_value: float) -> float:
@@ -6025,7 +6058,7 @@ class Action:
         max_r = max(min_r, (float(min(w, h)) * 0.48))
         if bool(probe.get("allow_circle_overflow", False)):
             max_r = max(max_r, float(max(w, h)) * 1.25, min_r + 0.5)
-        probe["r"] = float(Action._clipScalar(radius_value, min_r, max_r))
+        probe["r"] = float(Action._clip_scalar(radius_value, min_r, max_r))
         probe = Action._clampCircleInsideCanvas(probe, w, h)
 
         if probe.get("arm_enabled"):
@@ -6034,8 +6067,8 @@ class Action:
         if probe.get("stem_enabled"):
             probe["stem_top"] = float(probe.get("cy", 0.0)) + float(probe["r"])
 
-        elem_svg = Action.generateBadgeSvg(w, h, Action._elementOnlyParams(probe, "circle"))
-        elem_render = Action._fitToOriginalSize(img_orig, Action.renderSvgToNumpy(elem_svg, w, h))
+        elem_svg = Action.generate_badge_svg(w, h, Action._elementOnlyParams(probe, "circle"))
+        elem_render = Action._fit_to_original_size(img_orig, Action.render_svg_to_numpy(elem_svg, w, h))
         if elem_render is None:
             return float("inf")
 
@@ -6051,14 +6084,14 @@ class Action:
         if source_mask_params.get("stem_enabled"):
             source_mask_params["stem_top"] = float(source_mask_params.get("cy", 0.0)) + float(source_mask_params["r"])
 
-        mask_orig = Action.extractBadgeElementMask(img_orig, source_mask_params, "circle")
+        mask_orig = Action.extract_badge_element_mask(img_orig, source_mask_params, "circle")
         if mask_orig is None:
             return float("inf")
-        mask_svg = Action.extractBadgeElementMask(elem_render, probe, "circle")
+        mask_svg = Action.extract_badge_element_mask(elem_render, probe, "circle")
         if mask_svg is None:
             return float("inf")
 
-        return Action._elementMatchError(
+        return Action._element_match_error(
             img_orig,
             elem_render,
             probe,
@@ -6116,7 +6149,7 @@ class Action:
         plateau = [(radius, err) for radius, err in finite if err <= best_err + plateau_eps]
         if not plateau:
             try:
-                full_err = float(Action._fullBadgeErrorForCircleRadius(img_orig, params, best_radius))
+                full_err = float(Action._full_badge_error_for_circle_radius(img_orig, params, best_radius))
             except Exception:
                 full_err = float("inf")
             return best_radius, best_err, full_err
@@ -6147,11 +6180,11 @@ class Action:
                 elem_err = float(evaluations[radius])
             else:
                 try:
-                    elem_err = float(Action._elementErrorForCircleRadius(img_orig, params, radius))
+                    elem_err = float(Action._element_error_for_circle_radius(img_orig, params, radius))
                 except Exception:
                     elem_err = float("inf")
             try:
-                full_err = float(Action._fullBadgeErrorForCircleRadius(img_orig, params, radius))
+                full_err = float(Action._full_badge_error_for_circle_radius(img_orig, params, radius))
             except Exception:
                 full_err = float("inf")
             if not math.isfinite(elem_err) and not math.isfinite(full_err):
@@ -6414,21 +6447,21 @@ class Action:
 
         low = math.floor(low_bound * 2.0) / 2.0
         high = math.ceil(high_bound * 2.0) / 2.0
-        low = float(Action._clipScalar(low, low_bound, high_bound))
-        high = float(Action._clipScalar(high, low_bound, high_bound))
-        mid = Action._snapHalf(float(Action._clipScalar(current, low, high)))
-        mid = float(Action._clipScalar(mid, low, high))
+        low = float(Action._clip_scalar(low, low_bound, high_bound))
+        high = float(Action._clip_scalar(high, low_bound, high_bound))
+        mid = Action._snap_half(float(Action._clip_scalar(current, low, high)))
+        mid = float(Action._clip_scalar(mid, low, high))
         if high - low < 0.05:
             return False
 
         evaluations: dict[float, float] = {}
 
         def evalRadius(radius: float) -> float:
-            clipped = float(Action._clipScalar(radius, low_bound, high_bound))
+            clipped = float(Action._clip_scalar(radius, low_bound, high_bound))
             snapped = float(round(clipped, 3))
             if snapped not in evaluations:
                 try:
-                    evaluations[snapped] = float(Action._elementErrorForCircleRadius(img_orig, params, snapped))
+                    evaluations[snapped] = float(Action._element_error_for_circle_radius(img_orig, params, snapped))
                 except Exception:
                     evaluations[snapped] = float("inf")
             return evaluations[snapped]
@@ -6466,12 +6499,12 @@ class Action:
 
             if high - low < 0.05:
                 break
-            next_mid = Action._snapHalf((low + high) / 2.0)
+            next_mid = Action._snap_half((low + high) / 2.0)
             if abs(next_mid - mid) < 0.02:
                 break
             mid = next_mid
 
-        best_r, best_err, best_full_err = Action._selectCircleRadiusPlateauCandidate(img_orig, params, evaluations, current)
+        best_r, best_err, best_full_err = Action._select_circle_radius_plateau_candidate(img_orig, params, evaluations, current)
         candidate_dump = ", ".join(f"{v:.3f}->{e:.3f}" for v, e in sorted(evaluations.items()))
         if abs(best_r - current) < 0.02:
             logs.append(
@@ -7023,11 +7056,11 @@ class Action:
         mask_orig: np.ndarray,
     ) -> float:
         probe = dict(params)
-        probe[color_key] = int(Action._clipScalar(color_value, 0, 255))
+        probe[color_key] = int(Action._clip_scalar(color_value, 0, 255))
 
         h, w = img_orig.shape[:2]
-        elem_svg = Action.generateBadgeSvg(w, h, Action._elementOnlyParams(probe, element))
-        elem_render = Action._fitToOriginalSize(img_orig, Action.renderSvgToNumpy(elem_svg, w, h))
+        elem_svg = Action.generate_badge_svg(w, h, Action._elementOnlyParams(probe, element))
+        elem_render = Action._fit_to_original_size(img_orig, Action.render_svg_to_numpy(elem_svg, w, h))
         if elem_render is None:
             return float("inf")
 
@@ -7035,9 +7068,9 @@ class Action:
             # Color-only circle probing should be photometric against a stable
             # source region. Do not let threshold-induced mask area changes in
             # candidate renders bias toward darker/larger-looking circles.
-            return Action._maskedUnionErrorInBbox(img_orig, elem_render, mask_orig, mask_orig)
+            return Action._masked_union_error_in_bbox(img_orig, elem_render, mask_orig, mask_orig)
 
-        return Action._elementMatchError(
+        return Action._element_match_error(
             img_orig,
             elem_render,
             probe,
@@ -7060,34 +7093,34 @@ class Action:
             return False
 
         changed_any = False
-        local_gray = Action._meanGrayForMask(img_orig, mask_orig)
+        local_gray = Action._mean_gray_for_mask(img_orig, mask_orig)
         sampled = int(round(local_gray)) if local_gray is not None else None
 
         for color_key in Action._elementColorKeys(element, params):
             current = int(round(float(params.get(color_key, 128))))
-            low_limit = int(Action._clipScalar(int(params.get(f"{color_key}_min", 0)), 0, 255))
-            high_limit = int(Action._clipScalar(int(params.get(f"{color_key}_max", 255)), 0, 255))
+            low_limit = int(Action._clip_scalar(int(params.get(f"{color_key}_min", 0)), 0, 255))
+            high_limit = int(Action._clip_scalar(int(params.get(f"{color_key}_max", 255)), 0, 255))
             if low_limit > high_limit:
                 low_limit, high_limit = high_limit, low_limit
             candidates = {
-                int(Action._clipScalar(current - 32, low_limit, high_limit)),
-                int(Action._clipScalar(current - 16, low_limit, high_limit)),
-                int(Action._clipScalar(current - 8, low_limit, high_limit)),
-                int(Action._clipScalar(current, low_limit, high_limit)),
-                int(Action._clipScalar(current + 8, low_limit, high_limit)),
-                int(Action._clipScalar(current + 16, low_limit, high_limit)),
-                int(Action._clipScalar(current + 32, low_limit, high_limit)),
+                int(Action._clip_scalar(current - 32, low_limit, high_limit)),
+                int(Action._clip_scalar(current - 16, low_limit, high_limit)),
+                int(Action._clip_scalar(current - 8, low_limit, high_limit)),
+                int(Action._clip_scalar(current, low_limit, high_limit)),
+                int(Action._clip_scalar(current + 8, low_limit, high_limit)),
+                int(Action._clip_scalar(current + 16, low_limit, high_limit)),
+                int(Action._clip_scalar(current + 32, low_limit, high_limit)),
             }
             if sampled is not None:
-                candidates.add(int(Action._clipScalar(sampled, low_limit, high_limit)))
+                candidates.add(int(Action._clip_scalar(sampled, low_limit, high_limit)))
             if element == "circle" and color_key == "fill_gray":
-                candidates.update(int(Action._clipScalar(v, low_limit, high_limit)) for v in {200, 210, 220, 230, 240})
+                candidates.update(int(Action._clip_scalar(v, low_limit, high_limit)) for v in {200, 210, 220, 230, 240})
             if color_key in {"stroke_gray", "stem_gray", "text_gray"}:
-                candidates.update(int(Action._clipScalar(v, low_limit, high_limit)) for v in {96, 112, 128, 144, 152, 160, 171})
+                candidates.update(int(Action._clip_scalar(v, low_limit, high_limit)) for v in {96, 112, 128, 144, 152, 160, 171})
 
             values = sorted(v for v in candidates if low_limit <= v <= high_limit)
             errs = [
-                Action._elementErrorForColor(img_orig, params, element, color_key, v, mask_orig)
+                Action._element_error_for_color(img_orig, params, element, color_key, v, mask_orig)
                 for v in values
             ]
             if not all(math.isfinite(e) for e in errs):
@@ -7105,12 +7138,12 @@ class Action:
                     float(current),
                     float(min(values)),
                     float(max(values)),
-                    lambda v: Action._elementErrorForColor(
+                    lambda v: Action._element_error_for_color(
                         img_orig,
                         params,
                         element,
                         color_key,
-                        int(Action._clipScalar(int(round(v)), low_limit, high_limit)),
+                        int(Action._clip_scalar(int(round(v)), low_limit, high_limit)),
                         mask_orig,
                     ),
                     snap=lambda v: int(Action._clipScalar(int(round(v)), low_limit, high_limit)),
@@ -7486,14 +7519,14 @@ class Action:
         expected = Action._expectedSemanticPresence(semantic_elements)
         expected_co2 = any("co_2" in str(elem).lower() or "co₂" in str(elem).lower() for elem in semantic_elements)
         try:
-            structural = Action._detectSemanticPrimitives(img_orig, badge_params)
+            structural = Action._detect_semantic_primitives(img_orig, badge_params)
         except TypeError:
             # Test doubles may still patch the legacy one-argument variant.
-            structural = Action._detectSemanticPrimitives(img_orig)
-        circle_mask = Action.extractBadgeElementMask(img_orig, badge_params, "circle")
-        stem_mask = Action.extractBadgeElementMask(img_orig, badge_params, "stem")
-        arm_mask = Action.extractBadgeElementMask(img_orig, badge_params, "arm")
-        text_mask = Action.extractBadgeElementMask(img_orig, badge_params, "text")
+            structural = Action._detect_semantic_primitives(img_orig)
+        circle_mask = Action.extract_badge_element_mask(img_orig, badge_params, "circle")
+        stem_mask = Action.extract_badge_element_mask(img_orig, badge_params, "stem")
+        arm_mask = Action.extract_badge_element_mask(img_orig, badge_params, "arm")
+        text_mask = Action.extract_badge_element_mask(img_orig, badge_params, "text")
 
         def _maskSupportsElement(mask: np.ndarray | None, element: str) -> bool:
             if mask is None:
@@ -7501,7 +7534,7 @@ class Action:
             pixel_count = int(np.count_nonzero(mask))
             if pixel_count < 3:
                 return False
-            bbox = Action._maskBbox(mask)
+            bbox = Action._mask_bbox(mask)
             if bbox is None:
                 return False
             x1, y1, x2, y2 = bbox
@@ -7511,7 +7544,7 @@ class Action:
             density = float(pixel_count) / max(1.0, area)
             small_variant = bool(badge_params.get("ac08_small_variant_mode", False))
             if element == "circle":
-                if Action._maskSupportsCircle(mask):
+                if Action._mask_supports_circle(mask):
                     return True
                 if small_variant:
                     # `_S` AC08 crops frequently merge anti-aliased ring pixels into a
@@ -7746,39 +7779,39 @@ class Action:
 
         for round_idx in range(max_rounds):
             logs.append(f"Runde {round_idx + 1}: elementweise Validierung gestartet")
-            full_svg = Action.generateBadgeSvg(w, h, params)
-            full_render = Action._fitToOriginalSize(img_orig, Action.renderSvgToNumpy(full_svg, w, h))
+            full_svg = Action.generate_badge_svg(w, h, params)
+            full_render = Action._fit_to_original_size(img_orig, Action.render_svg_to_numpy(full_svg, w, h))
             if full_render is None:
                 logs.append("Abbruch: SVG konnte nicht gerendert werden")
                 break
 
             if debug_out_dir:
-                full_diff = Action.createDiffImage(img_orig, full_render)
+                full_diff = Action.create_diff_image(img_orig, full_render)
                 cv2.imwrite(os.path.join(debug_out_dir, f"round_{round_idx + 1:02d}_full_diff.png"), full_diff)
 
             round_changed = False
             for element in elements:
-                elem_svg = Action.generateBadgeSvg(w, h, Action._elementOnlyParams(params, element))
-                elem_render = Action._fitToOriginalSize(img_orig, Action.renderSvgToNumpy(elem_svg, w, h))
+                elem_svg = Action.generate_badge_svg(w, h, Action._elementOnlyParams(params, element))
+                elem_render = Action._fit_to_original_size(img_orig, Action.render_svg_to_numpy(elem_svg, w, h))
                 if elem_render is None:
                     logs.append(f"{element}: Element-SVG konnte nicht gerendert werden")
                     continue
 
-                mask_orig = Action.extractBadgeElementMask(img_orig, params, element)
-                mask_svg = Action.extractBadgeElementMask(elem_render, params, element)
+                mask_orig = Action.extract_badge_element_mask(img_orig, params, element)
+                mask_svg = Action.extract_badge_element_mask(elem_render, params, element)
                 if mask_orig is None or mask_svg is None:
                     logs.append(f"{element}: Element konnte nicht extrahiert werden")
                     continue
 
                 if debug_out_dir:
                     elem_focus_mask = Action._elementRegionMask(h, w, params, element)
-                    elem_diff = Action.createDiffImage(img_orig, elem_render, elem_focus_mask)
+                    elem_diff = Action.create_diff_image(img_orig, elem_render, elem_focus_mask)
                     cv2.imwrite(
                         os.path.join(debug_out_dir, f"round_{round_idx + 1:02d}_{element}_diff.png"),
                         elem_diff,
                     )
 
-                elem_err = Action._elementMatchError(img_orig, elem_render, params, element, mask_orig=mask_orig, mask_svg=mask_svg)
+                elem_err = Action._element_match_error(img_orig, elem_render, params, element, mask_orig=mask_orig, mask_svg=mask_svg)
                 logs.append(f"{element}: Fehler={elem_err:.3f}")
 
                 if element == "stem" and params.get("stem_enabled"):
@@ -7789,27 +7822,27 @@ class Action:
                         round_changed = True
                         logs.append("stem: Geometrie nach Elementabgleich aktualisiert")
 
-                width_changed = Action._optimizeElementWidthBracket(img_orig, params, element, logs)
+                width_changed = Action._optimize_element_width_bracket(img_orig, params, element, logs)
                 if width_changed:
                     round_changed = True
 
-                extent_changed = Action._optimizeElementExtentBracket(img_orig, params, element, logs)
+                extent_changed = Action._optimize_element_extent_bracket(img_orig, params, element, logs)
                 if extent_changed:
                     round_changed = True
 
                 circle_geometry_penalty_active = apply_circle_geometry_penalty and not fallback_search_active
                 if element == "circle" and circle_geometry_penalty_active:
-                    center_changed = Action._optimizeCircleCenterBracket(img_orig, params, logs)
+                    center_changed = Action._optimize_circle_center_bracket(img_orig, params, logs)
                     if center_changed:
                         round_changed = True
-                    radius_changed = Action._optimizeCircleRadiusBracket(img_orig, params, logs)
+                    radius_changed = Action._optimize_circle_radius_bracket(img_orig, params, logs)
                     if radius_changed:
                         round_changed = True
 
                 # Color fitting is intentionally deferred to the end so
                 # geometry convergence is not biased by temporary palette noise.
 
-            global_search_changed = Action._optimizeGlobalParameterVectorSampling(
+            global_search_changed = Action._optimize_global_parameter_vector_sampling(
                 img_orig,
                 params,
                 logs,
@@ -7817,9 +7850,9 @@ class Action:
             if global_search_changed:
                 round_changed = True
 
-            full_svg = Action.generateBadgeSvg(w, h, params)
-            full_render = Action._fitToOriginalSize(img_orig, Action.renderSvgToNumpy(full_svg, w, h))
-            full_err = Action.calculateError(img_orig, full_render)
+            full_svg = Action.generate_badge_svg(w, h, params)
+            full_render = Action._fit_to_original_size(img_orig, Action.render_svg_to_numpy(full_svg, w, h))
+            full_err = Action.calculate_error(img_orig, full_render)
             logs.append(f"Runde {round_idx + 1}: Gesamtfehler={full_err:.3f}")
             if math.isfinite(full_err) and full_err < best_full_err:
                 best_full_err = full_err
@@ -7896,7 +7929,7 @@ class Action:
                         )
                         continue
                 if not fallback_search_active and round_idx + 1 < max_rounds:
-                    Action._releaseAc08AdaptiveLocks(
+                    Action._release_ac08_adaptive_locks(
                         params,
                         logs,
                         reason="stagnation_no_geometry_change",
@@ -7920,14 +7953,14 @@ class Action:
         for element in elements:
             if element == "text" and not params.get("draw_text", True):
                 continue
-            mask_orig = Action.extractBadgeElementMask(img_orig, params, element)
+            mask_orig = Action.extract_badge_element_mask(img_orig, params, element)
             if mask_orig is None:
                 continue
-            color_changed = Action._optimizeElementColorBracket(img_orig, params, element, mask_orig, logs)
+            color_changed = Action._optimize_element_color_bracket(img_orig, params, element, mask_orig, logs)
             if color_changed:
                 logs.append(f"{element}: Farboptimierung in Abschlussphase angewendet")
 
-        params.update(Action._applyCanonicalBadgeColors(params))
+        params.update(Action._apply_canonical_badge_colors(params))
 
         return logs
 
@@ -7983,7 +8016,7 @@ def runIterationPipeline(
     h, w = perc.img.shape[:2]
 
     ref = Reflection(perc.raw_desc)
-    desc, params = ref.parseDescription(perc.base_name, filename)
+    desc, params = ref.parse_description(perc.base_name, filename)
     semantic_audit_targets = {"AC0811", "AC0812", "AC0813", "AC0814"}
     semantic_audit_row: dict[str, object] | None = None
     if getBaseNameFromFile(perc.base_name).upper() in semantic_audit_targets:
@@ -8087,7 +8120,7 @@ def runIterationPipeline(
         if semantic_issues:
             failed_svg = Action.generate_badge_svg(w, h, badge_params)
             _writeAttemptArtifacts(failed_svg, failed=True)
-            structural = Action._detectSemanticPrimitives(perc.img, badge_params)
+            structural = Action._detect_semantic_primitives(perc.img, badge_params)
             connector_orientation = str(structural.get("connector_orientation", "unknown"))
             circle_source = str(structural.get("circle_detection_source", "unknown"))
             connector_debug_line = (
@@ -8258,7 +8291,7 @@ def runIterationPipeline(
     previous_error: float | None = None
     stop_reason = "max_iterations"
     for i, eps in enumerate(epsilon_factors):
-        svg_content = Action.generateCompositeSvg(w, h, params, folder_path, float(eps))
+        svg_content = Action.generate_composite_svg(w, h, params, folder_path, float(eps))
 
         svg_rendered = Action.render_svg_to_numpy(svg_content, w, h)
         if svg_rendered is None:
@@ -8268,7 +8301,7 @@ def runIterationPipeline(
                 params_snapshot=params,
             )
             return None
-        error = Action.calculateError(perc.img, svg_rendered)
+        error = Action.calculate_error(perc.img, svg_rendered)
 
         if previous_error is not None and abs(error - previous_error) <= plateau_tolerance:
             plateau_streak += 1
@@ -8281,7 +8314,7 @@ def runIterationPipeline(
 
         if improved:
             best_error, best_svg, best_iter = error, svg_content, i + 1
-            best_diff = Action.createDiffImage(perc.img, svg_rendered)
+            best_diff = Action.create_diff_image(perc.img, svg_rendered)
 
         previous_error = error
 
@@ -10744,7 +10777,7 @@ def collectSuccessfulConversionQualityMetrics(
             continue
         with open(svg_path, 'r', encoding='utf-8') as f:
             svg_content = f.read()
-        rendered = Action.renderSvgToNumpy(svg_content, img_orig.shape[1], img_orig.shape[0])
+        rendered = Action.render_svg_to_numpy(svg_content, img_orig.shape[1], img_orig.shape[0])
         if rendered is None:
             metrics.append(row)
             continue
@@ -11532,3 +11565,81 @@ def convertImageVariants(*args, **kwargs):
     """Compatibility shim kept for tooling imports."""
     return convertRange(*args, **kwargs)
 OPTIONAL_DEPENDENCY_ERRORS = dependency_helpers.OPTIONAL_DEPENDENCY_ERRORS
+
+# Backward-compatible snake_case aliases expected by legacy tests/tooling.
+_ACTION_SNAKE_CASE_ALIASES: dict[str, str] = {
+    "_apply_co2_label": "_applyCo2Label",
+    "_apply_voc_label": "_applyVocLabel",
+    "_co2_layout": "_co2Layout",
+    "_text_bbox": "_textBbox",
+    "_circle_bounds": "_circleBounds",
+    "_clamp_circle_inside_canvas": "_clampCircleInsideCanvas",
+    "_default_edge_anchored_circle_geometry": "_defaultEdgeAnchoredCircleGeometry",
+    "_max_circle_radius_inside_canvas": "_maxCircleRadiusInsideCanvas",
+    "_default_ac0812_params": "_defaultAc0812Params",
+    "_default_ac0813_params": "_defaultAc0813Params",
+    "_default_ac0814_params": "_defaultAc0814Params",
+    "_default_ac0834_params": "_defaultAc0834Params",
+    "_default_ac0870_params": "_defaultAc0870Params",
+    "_default_ac0881_params": "_defaultAc0881Params",
+    "_default_ac0882_params": "_defaultAc0882Params",
+    "_fit_ac0811_params_from_image": "_fitAc0811ParamsFromImage",
+    "_fit_ac0812_params_from_image": "_fitAc0812ParamsFromImage",
+    "_fit_ac0814_params_from_image": "_fitAc0814ParamsFromImage",
+    "_fit_semantic_badge_from_image": "_fitSemanticBadgeFromImage",
+    "_finalize_ac08_style": "_finalizeAc08Style",
+    "_estimate_vertical_stem_from_mask": "_estimateVerticalStemFromMask",
+    "_enforce_left_arm_badge_geometry": "_enforceLeftArmBadgeGeometry",
+    "_expected_semantic_presence": "_expectedSemanticPresence",
+    "_normalize_centered_co2_label": "_normalizeCenteredCo2Label",
+    "_persist_connector_length_floor": "_persistConnectorLengthFloor",
+    "_quantize_badge_params": "_quantizeBadgeParams",
+    "_tune_ac0832_co2_badge": "_tuneAc0832Co2Badge",
+    "_tune_ac0834_co2_badge": "_tuneAc0834Co2Badge",
+    "_tune_ac0835_voc_badge": "_tuneAc0835VocBadge",
+    "_tune_ac08_left_connector_family": "_tuneAc08LeftConnectorFamily",
+    "_activate_ac08_adaptive_locks": "_activateAc08AdaptiveLocks",
+    "_release_ac08_adaptive_locks": "_releaseAc08AdaptiveLocks",
+    "_global_parameter_vector_bounds": "_globalParameterVectorBounds",
+    "_optimize_global_parameter_vector_sampling": "_optimizeGlobalParameterVectorSampling",
+    "_optimize_circle_pose_multistart": "_optimizeCirclePoseMultistart",
+    "_optimize_circle_pose_adaptive_domain": "_optimizeCirclePoseAdaptiveDomain",
+    "_optimize_circle_radius_bracket": "_optimizeCircleRadiusBracket",
+    "_select_circle_radius_plateau_candidate": "_selectCircleRadiusPlateauCandidate",
+    "_optimize_element_color_bracket": "_optimizeElementColorBracket",
+    "_optimize_element_extent_bracket": "_optimizeElementExtentBracket",
+    "_optimize_element_width_bracket": "_optimizeElementWidthBracket",
+    "_element_error_for_color": "_elementErrorForColor",
+    "_element_error_for_circle_radius": "_elementErrorForCircleRadius",
+    "_element_error_for_circle_pose": "_elementErrorForCirclePose",
+    "_element_match_error": "_elementMatchError",
+    "_element_width_key_and_bounds": "_elementWidthKeyAndBounds",
+}
+for _snake_name, _camel_name in _ACTION_SNAKE_CASE_ALIASES.items():
+    if hasattr(Action, _camel_name) and not hasattr(Action, _snake_name):
+        setattr(Action, _snake_name, staticmethod(getattr(Action, _camel_name)))
+for _name in dir(Action):
+    if _name.startswith("__") or "_" not in _name and _name.lower() == _name:
+        continue
+    if not any(ch.isupper() for ch in _name):
+        continue
+    _snake = []
+    for _idx, _ch in enumerate(_name):
+        if _ch.isupper() and _idx > 0 and _name[_idx - 1] != "_":
+            _snake.append("_")
+        _snake.append(_ch.lower())
+    _snake_name = "".join(_snake)
+    if not _snake_name.startswith("_"):
+        _snake_name = f"_{_snake_name}"
+    if not hasattr(Action, _snake_name):
+        setattr(Action, _snake_name, staticmethod(getattr(Action, _name)))
+if hasattr(Action, "traceImageSegment") and not hasattr(Action, "trace_image_segment"):
+    Action.trace_image_segment = staticmethod(Action.traceImageSegment)
+if hasattr(Action, "generateCompositeSvg") and not hasattr(Action, "generate_composite_svg"):
+    Action.generate_composite_svg = staticmethod(Action.generateCompositeSvg)
+if "ScalarRng" in globals() and not hasattr(Action, "_ScalarRng"):
+    Action._ScalarRng = ScalarRng
+if hasattr(GlobalParameterVector, "fromParams") and not hasattr(GlobalParameterVector, "from_params"):
+    GlobalParameterVector.from_params = staticmethod(GlobalParameterVector.fromParams)
+if hasattr(GlobalParameterVector, "applyToParams") and not hasattr(GlobalParameterVector, "apply_to_params"):
+    GlobalParameterVector.apply_to_params = GlobalParameterVector.applyToParams
