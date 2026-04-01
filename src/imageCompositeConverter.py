@@ -38,6 +38,7 @@ from src.imageCompositeConverterRegions import (
 from src import imageCompositeConverterRange as range_helpers
 from src import imageCompositeConverterDependencies as dependency_helpers
 from src import imageCompositeConverterSemantic as semantic_helpers
+from src import imageCompositeConverterSemanticValidation as semantic_validation_helpers
 from src import imageCompositeConverterQuality as quality_helpers
 from src import imageCompositeConverterAudit as audit_helpers
 from src import imageCompositeConverterTransfer as transfer_helpers
@@ -7275,40 +7276,11 @@ class Action:
 
     @staticmethod
     def _expectedSemanticPresence(semantic_elements: list[str]) -> dict[str, bool]:
-        normalized = [str(elem).lower() for elem in semantic_elements]
-        has_text = any(
-            ("kreis + buchstabe" in elem)
-            or (("buchstab" in elem) and ("ohne buchstabe" not in elem))
-            or ("voc" in elem)
-            or ("co_2" in elem)
-            or ("co₂" in elem)
-            for elem in normalized
-        )
-        has_circle = any("kreis" in elem for elem in normalized)
-        return {
-            "circle": has_circle,
-            "stem": any("senkrechter strich" in elem for elem in normalized),
-            "arm": any("waagrechter strich" in elem for elem in normalized),
-            "text": has_text,
-        }
+        return semantic_validation_helpers.expectedSemanticPresenceImpl(semantic_elements)
 
     @staticmethod
     def _semanticPresenceMismatches(expected: dict[str, bool], observed: dict[str, bool]) -> list[str]:
-        labels = {
-            "circle": "Kreis",
-            "stem": "senkrechter Strich",
-            "arm": "waagrechter Strich",
-            "text": "Buchstabe/Text",
-        }
-        issues: list[str] = []
-        for key in ("circle", "stem", "arm", "text"):
-            exp = bool(expected.get(key, False))
-            obs = bool(observed.get(key, False))
-            if exp and not obs:
-                issues.append(f"Beschreibung erwartet {labels[key]}, im Bild aber nicht robust erkennbar")
-            if obs and not exp:
-                issues.append(f"Im Bild ist {labels[key]} erkennbar, aber nicht in der Beschreibung enthalten")
-        return issues
+        return semantic_validation_helpers.semanticPresenceMismatchesImpl(expected, observed)
 
     @staticmethod
     def _detectSemanticPrimitives(
