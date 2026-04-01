@@ -90,6 +90,10 @@ if _svg_render_isolation_env in {"0", "false", "no", "off"}:
     SVG_RENDER_SUBPROCESS_ENABLED = False
 elif _svg_render_isolation_env in {"1", "true", "yes", "on"}:
     SVG_RENDER_SUBPROCESS_ENABLED = True
+elif "PYTEST_VERSION" in os.environ:
+    # Pytest runs execute hundreds of small render calls; spawning a Python
+    # subprocess for each render makes focused unit tests look "hung".
+    SVG_RENDER_SUBPROCESS_ENABLED = False
 else:
     # Default to isolated rendering because native PyMuPDF crashes (SIGSEGV)
     # are not catchable in-process and would otherwise abort long conversions.
