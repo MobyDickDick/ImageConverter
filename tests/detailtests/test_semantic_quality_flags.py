@@ -8,7 +8,7 @@ from src import imageCompositeConverter as image_composite_converter
 
 
 def test_semantic_quality_flags_marks_ac0811_with_high_element_error() -> None:
-    flags = image_composite_converter._semantic_quality_flags(
+    flags = image_composite_converter._semanticQualityFlags(
         "AC0811_L",
         [
             "circle: Fehler=4.200",
@@ -23,7 +23,7 @@ def test_semantic_quality_flags_marks_ac0811_with_high_element_error() -> None:
 
 
 def test_semantic_quality_flags_ignores_non_ac0811_variants() -> None:
-    flags = image_composite_converter._semantic_quality_flags(
+    flags = image_composite_converter._semanticQualityFlags(
         "AC0812_L",
         [
             "circle: Fehler=3.000",
@@ -115,7 +115,7 @@ def test_run_iteration_pipeline_logs_borderline_quality_for_ac0811(
         staticmethod(lambda a, _b: a.copy()),
     )
 
-    res = image_composite_converter.run_iteration_pipeline(
+    res = image_composite_converter.runIterationPipeline(
         str(img_path),
         str(csv_path),
         2,
@@ -146,7 +146,7 @@ def test_write_ac08_weak_family_status_report_summarizes_ranked_outliers(tmp_pat
         encoding="utf-8",
     )
 
-    image_composite_converter._write_ac08_weak_family_status_report(
+    image_composite_converter._writeAc08WeakFamilyStatusReport(
         str(reports_dir),
         selected_variants=["AC0882_S", "AC0811_L"],
     )
@@ -165,7 +165,7 @@ def test_write_ac08_weak_family_status_report_skips_non_ac08_selection(tmp_path:
     reports_dir = tmp_path / "reports"
     reports_dir.mkdir()
 
-    image_composite_converter._write_ac08_weak_family_status_report(
+    image_composite_converter._writeAc08WeakFamilyStatusReport(
         str(reports_dir),
         selected_variants=["GE0001_M"],
     )

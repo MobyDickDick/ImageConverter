@@ -248,7 +248,7 @@ def test_family_harmonized_badge_colors_averages_family_palette() -> None:
         {"params": {"fill_gray": 210, "stroke_gray": 140, "text_gray": 138}},
     ]
 
-    colors = conv._family_harmonized_badge_colors(rows)
+    colors = conv._familyHarmonizedBadgeColors(rows)
 
     assert colors["fill_gray"] > colors["stroke_gray"]
     assert colors["text_gray"] <= colors["stroke_gray"]
@@ -263,7 +263,7 @@ def test_family_harmonized_badge_colors_boosts_low_contrast() -> None:
         {"params": {"fill_gray": 206, "stroke_gray": 201}},
     ]
 
-    colors = conv._family_harmonized_badge_colors(rows)
+    colors = conv._familyHarmonizedBadgeColors(rows)
 
     assert colors["fill_gray"] - colors["stroke_gray"] >= 18
 
@@ -285,7 +285,7 @@ def test_update_successful_conversions_manifest_keeps_existing_line_without_fres
     )
     manifest_path.write_text(existing_line + "\n", encoding="utf-8")
 
-    updated_path, metrics = image_composite_converter.update_successful_conversions_manifest_with_metrics(
+    updated_path, metrics = image_composite_converter.updateSuccessfulConversionsManifestWithMetrics(
         folder_path=str(images_dir),
         svg_out_dir=str(svg_dir),
         reports_out_dir=str(reports_dir),
@@ -331,7 +331,7 @@ def test_update_successful_conversions_manifest_appends_missing_variant_with_met
     monkeypatch.setattr(conv.cv2, "imread", lambda path: source.copy() if path.endswith("AC0002_L.jpg") else None)
     monkeypatch.setattr(conv.Action, "render_svg_to_numpy", staticmethod(lambda _svg, _w, _h: rendered.copy()))
 
-    updated_path, metrics = image_composite_converter.update_successful_conversions_manifest_with_metrics(
+    updated_path, metrics = image_composite_converter.updateSuccessfulConversionsManifestWithMetrics(
         folder_path=str(image_dir),
         svg_out_dir=str(svg_dir),
         reports_out_dir=str(reports_dir),
@@ -390,7 +390,7 @@ def test_update_successful_conversions_manifest_rejects_worse_candidate_and_rest
     monkeypatch.setattr(conv.cv2, "imread", lambda path: source.copy() if path.endswith("AC0003_L.jpg") else None)
     monkeypatch.setattr(conv.Action, "render_svg_to_numpy", staticmethod(lambda _svg, _w, _h: rendered.copy()))
 
-    updated_path, metrics = image_composite_converter.update_successful_conversions_manifest_with_metrics(
+    updated_path, metrics = image_composite_converter.updateSuccessfulConversionsManifestWithMetrics(
         folder_path=str(image_dir),
         svg_out_dir=str(svg_dir),
         reports_out_dir=str(reports_dir),
@@ -443,7 +443,7 @@ def test_update_successful_conversions_manifest_rejects_worse_candidate_without_
     monkeypatch.setattr(conv.cv2, "imread", lambda path: source.copy() if path.endswith("AC0800_L.jpg") else None)
     monkeypatch.setattr(conv.Action, "render_svg_to_numpy", staticmethod(lambda _svg, _w, _h: rendered.copy()))
 
-    updated_path, metrics = image_composite_converter.update_successful_conversions_manifest_with_metrics(
+    updated_path, metrics = image_composite_converter.updateSuccessfulConversionsManifestWithMetrics(
         folder_path=str(image_dir),
         svg_out_dir=str(svg_dir),
         reports_out_dir=str(reports_dir),
@@ -494,7 +494,7 @@ def test_update_successful_conversions_manifest_accepts_better_candidate_and_upd
     monkeypatch.setattr(conv.cv2, "imread", lambda path: source.copy() if path.endswith("AC0004_L.jpg") else None)
     monkeypatch.setattr(conv.Action, "render_svg_to_numpy", staticmethod(lambda _svg, _w, _h: rendered.copy()))
 
-    updated_path, _metrics = image_composite_converter.update_successful_conversions_manifest_with_metrics(
+    updated_path, _metrics = image_composite_converter.updateSuccessfulConversionsManifestWithMetrics(
         folder_path=str(image_dir),
         svg_out_dir=str(svg_dir),
         reports_out_dir=str(reports_dir),
@@ -927,7 +927,7 @@ def test_parse_description_recognizes_co2_with_caret_notation() -> None:
 
 def test_parse_description_does_not_misread_ac0130_text_as_top_source_ref() -> None:
     """AC0130 mentions 'oben mitte' and 'in beiden Diagonalen' but has no donor image reference."""
-    raw = image_composite_converter._load_description_mapping(
+    raw = image_composite_converter._loadDescriptionMapping(
         "artifacts/descriptions/Finale_Wurzelformen_V3.xml"
     )
     ref = image_composite_converter.Reflection(raw)
@@ -992,7 +992,7 @@ def test_scale_badge_params_reanchors_vertical_stem_after_circle_canvas_fit() ->
     anchor["template_stem_top"] = float(anchor["stem_top"])
     anchor["template_stem_bottom"] = float(anchor["stem_bottom"])
 
-    scaled = image_composite_converter._scale_badge_params(anchor, 25, 45, 20, 35)
+    scaled = image_composite_converter._scaleBadgeParams(anchor, 25, 45, 20, 35)
 
     assert float(scaled["cx"]) == pytest.approx(10.0)
     assert float(scaled["cy"]) == pytest.approx(9.9167, abs=0.02)
@@ -1606,7 +1606,7 @@ def test_run_iteration_pipeline_element_validation_log_contains_run_meta(
 
     image_composite_converter.Action.STOCHASTIC_RUN_SEED = 123
     image_composite_converter.Action.STOCHASTIC_SEED_OFFSET = 7
-    res = image_composite_converter.run_iteration_pipeline(
+    res = image_composite_converter.runIterationPipeline(
         str(img_path),
         str(csv_path),
         2,
@@ -1696,7 +1696,7 @@ def test_run_iteration_pipeline_writes_failed_best_attempt_artifacts_for_semanti
         staticmethod(lambda a, _b: a.copy()),
     )
 
-    res = image_composite_converter.run_iteration_pipeline(
+    res = image_composite_converter.runIterationPipeline(
         str(img_path),
         str(csv_path),
         2,
@@ -1723,7 +1723,7 @@ def test_write_semantic_audit_report_persists_csv_and_json(tmp_path: Path) -> No
     reports_dir = tmp_path / "reports"
     reports_dir.mkdir()
     rows = [
-        image_composite_converter._semantic_audit_record(
+        image_composite_converter._semanticAuditRecord(
             base_name="AC0811",
             filename="AC0811_L.jpg",
             description_fragments=[
@@ -1737,7 +1737,7 @@ def test_write_semantic_audit_report_persists_csv_and_json(tmp_path: Path) -> No
             status="semantic_ok",
             semantic_priority_order=["family_rule", "layout_override", "description_heuristic"],
         ),
-        image_composite_converter._semantic_audit_record(
+        image_composite_converter._semanticAuditRecord(
             base_name="AC0814",
             filename="AC0814_S.jpg",
             description_fragments=[{"source": "base_name", "key": "AC0814", "text": "Kreis ohne Buchstabe"}],
@@ -1752,7 +1752,7 @@ def test_write_semantic_audit_report_persists_csv_and_json(tmp_path: Path) -> No
         ),
     ]
 
-    image_composite_converter._write_semantic_audit_report(str(reports_dir), rows)
+    image_composite_converter._writeSemanticAuditReport(str(reports_dir), rows)
 
     csv_text = (reports_dir / "semantic_audit_ac0811_ac0814.csv").read_text(encoding="utf-8")
     assert "AC0811_L.jpg" in csv_text
@@ -1818,7 +1818,7 @@ def test_run_iteration_pipeline_breaks_early_on_flat_composite_error(
         staticmethod(lambda a, _b: a.copy()),
     )
 
-    res = image_composite_converter.run_iteration_pipeline(
+    res = image_composite_converter.runIterationPipeline(
         str(img_path),
         str(csv_path),
         128,
@@ -1970,53 +1970,53 @@ def test_validate_semantic_description_alignment_ignores_structural_stem_for_lef
 
 def test_in_requested_range_accepts_cross_prefix_span() -> None:
     """Ranges spanning prefixes (e.g. AC..ZZ) should include matching intermediate symbols."""
-    assert image_composite_converter._in_requested_range("AC0812_L.jpg", "AC0000", "ZZ9999") is True
+    assert image_composite_converter._inRequestedRange("AC0812_L.jpg", "AC0000", "ZZ9999") is True
 
 
 def test_in_requested_range_handles_reversed_bounds() -> None:
     """If CLI bounds are swapped, filtering should still behave as an inclusive range."""
-    assert image_composite_converter._in_requested_range("AC0812_L.jpg", "ZZ9999", "AC0000") is True
+    assert image_composite_converter._inRequestedRange("AC0812_L.jpg", "ZZ9999", "AC0000") is True
 
 
 def test_in_requested_range_excludes_values_outside_span() -> None:
     """Symbols before the lower bound should still be filtered out."""
-    assert image_composite_converter._in_requested_range("AB9999_L.jpg", "AC0000", "ZZ9999") is False
+    assert image_composite_converter._inRequestedRange("AB9999_L.jpg", "AC0000", "ZZ9999") is False
 
 
 
 
 def test_in_requested_range_includes_non_reference_filenames() -> None:
     """Non XX0000 filenames should not be filtered out by broad cross-prefix range settings."""
-    assert image_composite_converter._in_requested_range("LOGO.JPG", "AC0000", "ZZ9999") is True
+    assert image_composite_converter._inRequestedRange("LOGO.JPG", "AC0000", "ZZ9999") is True
 
 
 def test_in_requested_range_excludes_non_reference_filenames_for_exact_family_filter() -> None:
     """Exact family-specific filters should not pull unrelated helper files into the batch."""
-    assert image_composite_converter._in_requested_range("z_231.jpg", "AC0811", "AC0811") is False
+    assert image_composite_converter._inRequestedRange("z_231.jpg", "AC0811", "AC0811") is False
 
 
 def test_in_requested_range_supports_three_letter_prefixes() -> None:
     """Three-letter families such as DLG should respect exact range filtering."""
-    assert image_composite_converter._in_requested_range("DLG0030.jpg", "AC0811", "AC0811") is False
-    assert image_composite_converter._in_requested_range("DLG0030.jpg", "DLG0030", "DLG0030") is True
+    assert image_composite_converter._inRequestedRange("DLG0030.jpg", "AC0811", "AC0811") is False
+    assert image_composite_converter._inRequestedRange("DLG0030.jpg", "DLG0030", "DLG0030") is True
 
 
 def test_in_requested_range_treats_identical_short_bounds_as_prefix_filter() -> None:
     """Short identical bounds should include every symbol whose base name starts with that token."""
-    assert image_composite_converter._in_requested_range("AC0814_L.jpg", "AC081", "AC081") is True
-    assert image_composite_converter._in_requested_range("AC0813_M.jpg", "AC081", "AC081") is True
-    assert image_composite_converter._in_requested_range("AC0820_L.jpg", "AC081", "AC081") is False
+    assert image_composite_converter._inRequestedRange("AC0814_L.jpg", "AC081", "AC081") is True
+    assert image_composite_converter._inRequestedRange("AC0813_M.jpg", "AC081", "AC081") is True
+    assert image_composite_converter._inRequestedRange("AC0820_L.jpg", "AC081", "AC081") is False
 
 
 def test_in_requested_range_partial_filter_ignores_size_suffix_in_bounds() -> None:
     """Partial fallback filters should still find AC0800_* when users enter AC080_L..AC080_L."""
-    assert image_composite_converter._in_requested_range("AC0800_L.jpg", "AC080_L", "AC080_L") is True
+    assert image_composite_converter._inRequestedRange("AC0800_L.jpg", "AC080_L", "AC080_L") is True
 
 
 def test_in_requested_range_supports_one_sided_bounds() -> None:
     """When one bound is invalid, the valid bound should still be applied."""
-    assert image_composite_converter._in_requested_range("AC0812_L.jpg", "", "AC0812") is True
-    assert image_composite_converter._in_requested_range("AC0813_L.jpg", "", "AC0812") is False
+    assert image_composite_converter._inRequestedRange("AC0812_L.jpg", "", "AC0812") is True
+    assert image_composite_converter._inRequestedRange("AC0813_L.jpg", "", "AC0812") is False
 
 def test_convert_range_does_not_skip_variants_in_quality_passes(
     tmp_path: Path,
@@ -2038,19 +2038,19 @@ def test_convert_range_does_not_skip_variants_in_quality_passes(
     for name in ("AC0812_L.jpg", "AC0812_M.jpg"):
         assert cv2.imwrite(str(images_dir / name), np.full((10, 10, 3), 230, dtype=np.uint8))
 
-    monkeypatch.setattr(image_composite_converter, "_in_requested_range", lambda *_args, **_kwargs: True)
-    monkeypatch.setattr(image_composite_converter, "_load_quality_config", lambda *_args, **_kwargs: {})
-    monkeypatch.setattr(image_composite_converter, "_write_quality_pass_report", lambda *_args, **_kwargs: None)
-    monkeypatch.setattr(image_composite_converter, "_harmonize_semantic_size_variants", lambda *_args, **_kwargs: None)
-    monkeypatch.setattr(image_composite_converter, "_write_pixel_delta2_ranking", lambda *_args, **_kwargs: None)
-    monkeypatch.setattr(image_composite_converter, "_default_converted_symbols_root", lambda: str(tmp_path / "out"))
+    monkeypatch.setattr(image_composite_converter, "_inRequestedRange", lambda *_args, **_kwargs: True)
+    monkeypatch.setattr(image_composite_converter, "_loadQualityConfig", lambda *_args, **_kwargs: {})
+    monkeypatch.setattr(image_composite_converter, "_writeQualityPassReport", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(image_composite_converter, "_harmonizeSemanticSizeVariants", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(image_composite_converter, "_writePixelDelta2Ranking", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(image_composite_converter, "_defaultConvertedSymbolsRoot", lambda: str(tmp_path / "out"))
 
     def fake_pipeline(img_path: str, *_args, **_kwargs):
         stem = Path(img_path).stem
         params = {"mode": "semantic_badge", "cx": 5.0, "cy": 5.0, "r": 3.0}
         return stem, "semantic", params, 1, 100.0
 
-    monkeypatch.setattr(image_composite_converter, "run_iteration_pipeline", fake_pipeline)
+    monkeypatch.setattr(image_composite_converter, "runIterationPipeline", fake_pipeline)
 
     captured_cfg: dict[str, object] = {}
 
@@ -2059,7 +2059,7 @@ def test_convert_range_does_not_skip_variants_in_quality_passes(
         captured_cfg["skipped_variants"] = list(skipped_variants)
         captured_cfg["source"] = source
 
-    monkeypatch.setattr(image_composite_converter, "_write_quality_config", capture_quality_cfg)
+    monkeypatch.setattr(image_composite_converter, "_writeQualityConfig", capture_quality_cfg)
 
     observed_skips: list[set[str]] = []
 
@@ -2067,10 +2067,10 @@ def test_convert_range_does_not_skip_variants_in_quality_passes(
         observed_skips.append(set(skip_variants or set()))
         return []
 
-    monkeypatch.setattr(image_composite_converter, "_select_open_quality_cases", capture_open_cases)
-    monkeypatch.setattr(image_composite_converter, "_select_middle_lower_tercile", lambda _rows: [])
+    monkeypatch.setattr(image_composite_converter, "_selectOpenQualityCases", capture_open_cases)
+    monkeypatch.setattr(image_composite_converter, "_selectMiddleLowerTercile", lambda _rows: [])
 
-    image_composite_converter.convert_range(str(images_dir), str(csv_path), iterations=2, start_ref="AC0812", end_ref="AC0812")
+    image_composite_converter.convertRange(str(images_dir), str(csv_path), iterations=2, start_ref="AC0812", end_ref="AC0812")
 
     assert captured_cfg["skipped_variants"] == []
     assert captured_cfg["allowed_error_per_pixel"] == pytest.approx(1.0)
@@ -2089,7 +2089,7 @@ def test_compute_successful_conversions_error_threshold_returns_mean_plus_two_st
         {"variant": "AC9999_L", "error_per_pixel": 9.99},
     ]
 
-    threshold = conv._compute_successful_conversions_error_threshold(rows, ("AC0001_L", "AC0002_L", "AC0003_L"))
+    threshold = conv._computeSuccessfulConversionsErrorThreshold(rows, ("AC0001_L", "AC0002_L", "AC0003_L"))
 
     assert threshold == pytest.approx(0.3632993161855452)
 
@@ -2097,14 +2097,14 @@ def test_compute_successful_conversions_error_threshold_returns_mean_plus_two_st
 def test_compute_successful_conversions_error_threshold_returns_inf_without_samples() -> None:
     rows = [{"variant": "AC9999_L", "error_per_pixel": 0.5}]
 
-    threshold = conv._compute_successful_conversions_error_threshold(rows, ("AC0001_L",))
+    threshold = conv._computeSuccessfulConversionsErrorThreshold(rows, ("AC0001_L",))
 
     assert threshold == float("inf")
 def test_quality_pass_report_records_delta2_and_decision(tmp_path: Path) -> None:
     reports_dir = tmp_path / "reports"
     reports_dir.mkdir()
 
-    conv._write_quality_pass_report(
+    conv._writeQualityPassReport(
         str(reports_dir),
         [
             {
@@ -2144,7 +2144,7 @@ def test_quality_pass_report_records_delta2_and_decision(tmp_path: Path) -> None
 
 
 def test_evaluate_quality_pass_candidate_rejects_full_regression() -> None:
-    improved, decision, old_error, new_error, old_delta2, new_delta2 = conv._evaluate_quality_pass_candidate(
+    improved, decision, old_error, new_error, old_delta2, new_delta2 = conv._evaluateQualityPassCandidate(
         {
             "error_per_pixel": 0.20,
             "mean_delta2": 10.0,
@@ -2164,7 +2164,7 @@ def test_evaluate_quality_pass_candidate_rejects_full_regression() -> None:
 
 
 def test_adaptive_iteration_budget_reduces_for_early_plateau() -> None:
-    assert conv._adaptive_iteration_budget_for_quality_row(
+    assert conv._adaptiveIterationBudgetForQualityRow(
         {
             "convergence": "plateau",
             "best_iter": 24,
@@ -2174,7 +2174,7 @@ def test_adaptive_iteration_budget_reduces_for_early_plateau() -> None:
 
 
 def test_adaptive_iteration_budget_increases_for_budget_edge_minimum() -> None:
-    assert conv._adaptive_iteration_budget_for_quality_row(
+    assert conv._adaptiveIterationBudgetForQualityRow(
         {
             "convergence": "max_iterations",
             "best_iter": 128,
@@ -2202,17 +2202,17 @@ def test_convert_range_accepts_quality_pass_when_mean_delta2_improves(
     csv_path.write_text("Wurzelform;Beschreibung\nAC0820;semantic\n", encoding="utf-8")
     assert cv2.imwrite(str(images_dir / "AC0820_L.jpg"), np.full((10, 10, 3), 220, dtype=np.uint8))
 
-    monkeypatch.setattr(image_composite_converter, "_in_requested_range", lambda *_args, **_kwargs: True)
-    monkeypatch.setattr(image_composite_converter, "_load_quality_config", lambda *_args, **_kwargs: {})
-    monkeypatch.setattr(image_composite_converter, "_write_quality_config", lambda *_args, **_kwargs: None)
-    monkeypatch.setattr(image_composite_converter, "_harmonize_semantic_size_variants", lambda *_args, **_kwargs: None)
-    monkeypatch.setattr(image_composite_converter, "_write_pixel_delta2_ranking", lambda *_args, **_kwargs: None)
-    monkeypatch.setattr(image_composite_converter, "_select_open_quality_cases", lambda rows, **_kwargs: list(rows))
-    monkeypatch.setattr(image_composite_converter, "_select_middle_lower_tercile", lambda _rows: [])
-    monkeypatch.setattr(image_composite_converter, "_try_template_transfer", lambda **_kwargs: (None, None))
+    monkeypatch.setattr(image_composite_converter, "_inRequestedRange", lambda *_args, **_kwargs: True)
+    monkeypatch.setattr(image_composite_converter, "_loadQualityConfig", lambda *_args, **_kwargs: {})
+    monkeypatch.setattr(image_composite_converter, "_writeQualityConfig", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(image_composite_converter, "_harmonizeSemanticSizeVariants", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(image_composite_converter, "_writePixelDelta2Ranking", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(image_composite_converter, "_selectOpenQualityCases", lambda rows, **_kwargs: list(rows))
+    monkeypatch.setattr(image_composite_converter, "_selectMiddleLowerTercile", lambda _rows: [])
+    monkeypatch.setattr(image_composite_converter, "_tryTemplateTransfer", lambda **_kwargs: (None, None))
 
     pass_reports: list[dict[str, object]] = []
-    monkeypatch.setattr(image_composite_converter, "_write_quality_pass_report", lambda _dir, rows: pass_reports.extend(rows))
+    monkeypatch.setattr(image_composite_converter, "_writeQualityPassReport", lambda _dir, rows: pass_reports.extend(rows))
 
     state = {"count": 0}
 
@@ -2233,9 +2233,9 @@ def test_convert_range_accepts_quality_pass_when_mean_delta2_improves(
         params = {"mode": "semantic_badge", "elements": ["circle"], "cx": 5.0, "cy": 5.0, "r": 3.0}
         return stem, "semantic", params, 1, best_error
 
-    monkeypatch.setattr(image_composite_converter, "run_iteration_pipeline", fake_pipeline)
+    monkeypatch.setattr(image_composite_converter, "runIterationPipeline", fake_pipeline)
 
-    result = image_composite_converter.convert_range(
+    result = image_composite_converter.convertRange(
         str(images_dir),
         str(csv_path),
         iterations=1,
@@ -2271,17 +2271,17 @@ def test_convert_range_rejects_quality_pass_regression_and_keeps_previous_output
     csv_path.write_text("Wurzelform;Beschreibung\nAC0820;semantic\n", encoding="utf-8")
     assert cv2.imwrite(str(images_dir / "AC0820_L.jpg"), np.full((10, 10, 3), 220, dtype=np.uint8))
 
-    monkeypatch.setattr(image_composite_converter, "_in_requested_range", lambda *_args, **_kwargs: True)
-    monkeypatch.setattr(image_composite_converter, "_load_quality_config", lambda *_args, **_kwargs: {})
-    monkeypatch.setattr(image_composite_converter, "_write_quality_config", lambda *_args, **_kwargs: None)
-    monkeypatch.setattr(image_composite_converter, "_harmonize_semantic_size_variants", lambda *_args, **_kwargs: None)
-    monkeypatch.setattr(image_composite_converter, "_write_pixel_delta2_ranking", lambda *_args, **_kwargs: None)
-    monkeypatch.setattr(image_composite_converter, "_select_open_quality_cases", lambda rows, **_kwargs: list(rows))
-    monkeypatch.setattr(image_composite_converter, "_select_middle_lower_tercile", lambda _rows: [])
-    monkeypatch.setattr(image_composite_converter, "_try_template_transfer", lambda **_kwargs: (None, None))
+    monkeypatch.setattr(image_composite_converter, "_inRequestedRange", lambda *_args, **_kwargs: True)
+    monkeypatch.setattr(image_composite_converter, "_loadQualityConfig", lambda *_args, **_kwargs: {})
+    monkeypatch.setattr(image_composite_converter, "_writeQualityConfig", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(image_composite_converter, "_harmonizeSemanticSizeVariants", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(image_composite_converter, "_writePixelDelta2Ranking", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(image_composite_converter, "_selectOpenQualityCases", lambda rows, **_kwargs: list(rows))
+    monkeypatch.setattr(image_composite_converter, "_selectMiddleLowerTercile", lambda _rows: [])
+    monkeypatch.setattr(image_composite_converter, "_tryTemplateTransfer", lambda **_kwargs: (None, None))
 
     pass_reports: list[dict[str, object]] = []
-    monkeypatch.setattr(image_composite_converter, "_write_quality_pass_report", lambda _dir, rows: pass_reports.extend(rows))
+    monkeypatch.setattr(image_composite_converter, "_writeQualityPassReport", lambda _dir, rows: pass_reports.extend(rows))
 
     state = {"count": 0}
 
@@ -2302,9 +2302,9 @@ def test_convert_range_rejects_quality_pass_regression_and_keeps_previous_output
         params = {"mode": "semantic_badge", "elements": ["circle"], "cx": 5.0, "cy": 5.0, "r": 3.0}
         return stem, "semantic", params, 1, best_error
 
-    monkeypatch.setattr(image_composite_converter, "run_iteration_pipeline", fake_pipeline)
+    monkeypatch.setattr(image_composite_converter, "runIterationPipeline", fake_pipeline)
 
-    result = image_composite_converter.convert_range(
+    result = image_composite_converter.convertRange(
         str(images_dir),
         str(csv_path),
         iterations=1,
@@ -2342,13 +2342,13 @@ def test_convert_range_writes_svgs_and_diffs_to_dedicated_subfolders(
     csv_path.write_text("Wurzelform;Beschreibung\nAC0812;semantic\n", encoding="utf-8")
     assert cv2.imwrite(str(images_dir / "AC0812_L.jpg"), np.full((10, 10, 3), 230, dtype=np.uint8))
 
-    monkeypatch.setattr(image_composite_converter, "_in_requested_range", lambda *_args, **_kwargs: True)
-    monkeypatch.setattr(image_composite_converter, "_load_quality_config", lambda *_args, **_kwargs: {})
-    monkeypatch.setattr(image_composite_converter, "_write_quality_pass_report", lambda *_args, **_kwargs: None)
-    monkeypatch.setattr(image_composite_converter, "_harmonize_semantic_size_variants", lambda *_args, **_kwargs: None)
-    monkeypatch.setattr(image_composite_converter, "_write_pixel_delta2_ranking", lambda *_args, **_kwargs: None)
-    monkeypatch.setattr(image_composite_converter, "_select_open_quality_cases", lambda *_args, **_kwargs: [])
-    monkeypatch.setattr(image_composite_converter, "_select_middle_lower_tercile", lambda *_args, **_kwargs: [])
+    monkeypatch.setattr(image_composite_converter, "_inRequestedRange", lambda *_args, **_kwargs: True)
+    monkeypatch.setattr(image_composite_converter, "_loadQualityConfig", lambda *_args, **_kwargs: {})
+    monkeypatch.setattr(image_composite_converter, "_writeQualityPassReport", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(image_composite_converter, "_harmonizeSemanticSizeVariants", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(image_composite_converter, "_writePixelDelta2Ranking", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(image_composite_converter, "_selectOpenQualityCases", lambda *_args, **_kwargs: [])
+    monkeypatch.setattr(image_composite_converter, "_selectMiddleLowerTercile", lambda *_args, **_kwargs: [])
 
     def fake_pipeline(img_path: str, _csv_path: str, _iterations: int, svg_out: str, diff_out: str, reports_out: str, *_args, **_kwargs):
         stem = Path(img_path).stem
@@ -2360,10 +2360,10 @@ def test_convert_range_writes_svgs_and_diffs_to_dedicated_subfolders(
         params = {"mode": "semantic_badge", "elements": ["circle"], "cx": 5.0, "cy": 5.0, "r": 3.0}
         return stem, "semantic", params, 1, 100.0
 
-    monkeypatch.setattr(image_composite_converter, "run_iteration_pipeline", fake_pipeline)
+    monkeypatch.setattr(image_composite_converter, "runIterationPipeline", fake_pipeline)
 
     output_root = tmp_path / "out"
-    result = image_composite_converter.convert_range(
+    result = image_composite_converter.convertRange(
         str(images_dir),
         str(csv_path),
         iterations=2,
@@ -2379,14 +2379,14 @@ def test_convert_range_writes_svgs_and_diffs_to_dedicated_subfolders(
 
 
 def test_template_transfer_donor_family_compatible() -> None:
-    assert image_composite_converter._template_transfer_donor_family_compatible("GE011", "GE020") is True
-    assert image_composite_converter._template_transfer_donor_family_compatible("GE011", "AC0812") is False
-    assert image_composite_converter._template_transfer_donor_family_compatible("DLG0000", "DLG0015") is True
-    assert image_composite_converter._template_transfer_donor_family_compatible("DLG0000", "AC0812") is False
-    assert image_composite_converter._template_transfer_donor_family_compatible("NAV0020", "NAV0030") is True
-    assert image_composite_converter._template_transfer_donor_family_compatible("NAV0020", "AC5000") is False
-    assert image_composite_converter._template_transfer_donor_family_compatible("LOGO", "AC0812") is True
-    assert image_composite_converter._template_transfer_donor_family_compatible(
+    assert image_composite_converter._templateTransferDonorFamilyCompatible("GE011", "GE020") is True
+    assert image_composite_converter._templateTransferDonorFamilyCompatible("GE011", "AC0812") is False
+    assert image_composite_converter._templateTransferDonorFamilyCompatible("DLG0000", "DLG0015") is True
+    assert image_composite_converter._templateTransferDonorFamilyCompatible("DLG0000", "AC0812") is False
+    assert image_composite_converter._templateTransferDonorFamilyCompatible("NAV0020", "NAV0030") is True
+    assert image_composite_converter._templateTransferDonorFamilyCompatible("NAV0020", "AC5000") is False
+    assert image_composite_converter._templateTransferDonorFamilyCompatible("LOGO", "AC0812") is True
+    assert image_composite_converter._templateTransferDonorFamilyCompatible(
         "GE0000",
         "AC0010",
         documented_alias_refs={"AC0010"},
@@ -2411,13 +2411,13 @@ def test_convert_range_filters_to_explicit_selected_variants_and_writes_regressi
         assert cv2.imwrite(str(images_dir / f"{variant}.jpg"), np.full((10, 10, 3), 230, dtype=np.uint8))
     assert cv2.imwrite(str(images_dir / "AC0999_L.jpg"), np.full((10, 10, 3), 200, dtype=np.uint8))
 
-    monkeypatch.setattr(image_composite_converter, "_in_requested_range", lambda *_args, **_kwargs: True)
-    monkeypatch.setattr(image_composite_converter, "_load_quality_config", lambda *_args, **_kwargs: {})
-    monkeypatch.setattr(image_composite_converter, "_write_quality_pass_report", lambda *_args, **_kwargs: None)
-    monkeypatch.setattr(image_composite_converter, "_harmonize_semantic_size_variants", lambda *_args, **_kwargs: None)
-    monkeypatch.setattr(image_composite_converter, "_write_pixel_delta2_ranking", lambda *_args, **_kwargs: None)
-    monkeypatch.setattr(image_composite_converter, "_select_open_quality_cases", lambda *_args, **_kwargs: [])
-    monkeypatch.setattr(image_composite_converter, "_select_middle_lower_tercile", lambda *_args, **_kwargs: [])
+    monkeypatch.setattr(image_composite_converter, "_inRequestedRange", lambda *_args, **_kwargs: True)
+    monkeypatch.setattr(image_composite_converter, "_loadQualityConfig", lambda *_args, **_kwargs: {})
+    monkeypatch.setattr(image_composite_converter, "_writeQualityPassReport", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(image_composite_converter, "_harmonizeSemanticSizeVariants", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(image_composite_converter, "_writePixelDelta2Ranking", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(image_composite_converter, "_selectOpenQualityCases", lambda *_args, **_kwargs: [])
+    monkeypatch.setattr(image_composite_converter, "_selectMiddleLowerTercile", lambda *_args, **_kwargs: [])
 
     seen: list[str] = []
 
@@ -2432,10 +2432,10 @@ def test_convert_range_filters_to_explicit_selected_variants_and_writes_regressi
         params = {"mode": "semantic_badge", "elements": ["circle"], "cx": 5.0, "cy": 5.0, "r": 3.0}
         return stem, "semantic", params, 1, 100.0
 
-    monkeypatch.setattr(image_composite_converter, "run_iteration_pipeline", fake_pipeline)
+    monkeypatch.setattr(image_composite_converter, "runIterationPipeline", fake_pipeline)
 
     output_root = tmp_path / "out"
-    result = image_composite_converter.convert_range(
+    result = image_composite_converter.convertRange(
         str(images_dir),
         str(csv_path),
         iterations=32,
@@ -2462,7 +2462,7 @@ def test_load_successful_conversions_uses_manifest_and_allows_non_ac08_entries(t
     manifest = tmp_path / "successful_conversions.txt"
     manifest.write_text("AC0800_L ; total_delta2=22.000000\nge0015_s\nac0811_l ; mean_delta2=11.000000\n# comment\nAC0800_L\n", encoding="utf-8")
 
-    variants = image_composite_converter._load_successful_conversions(manifest, tmp_path / "missing")
+    variants = image_composite_converter._loadSuccessfulConversions(manifest, tmp_path / "missing")
     ac08_variants = tuple(variant for variant in variants if variant.startswith("AC08"))
 
     assert variants == ("AC0800_L", "GE0015_S", "AC0811_L")
@@ -2488,7 +2488,7 @@ def test_load_successful_conversions_expands_manifest_ranges_against_available_v
         (source_dir / name).write_bytes(b"jpg")
     manifest.write_text("AC0800_L bis AC0812_S\nGE0015_S\n", encoding="utf-8")
 
-    variants = image_composite_converter._load_successful_conversions(manifest, source_dir)
+    variants = image_composite_converter._loadSuccessfulConversions(manifest, source_dir)
 
     assert variants == (
         "AC0800_L",
@@ -2545,7 +2545,7 @@ def test_write_ac08_success_criteria_report_summarizes_regression_metrics(tmp_pa
         encoding="utf-8",
     )
 
-    image_composite_converter._write_ac08_success_criteria_report(
+    image_composite_converter._writeAc08SuccessCriteriaReport(
         str(reports_dir),
         selected_variants=expected,
     )
@@ -2596,7 +2596,7 @@ def test_summarize_previous_good_ac08_variants_detects_regressions(tmp_path: Pat
     (reports_dir / "AC0800_M_element_validation.log").write_text("status=semantic_ok\n", encoding="utf-8")
     (reports_dir / "AC0800_S_element_validation.log").write_text("status=semantic_mismatch\n", encoding="utf-8")
 
-    summary = image_composite_converter._summarize_previous_good_ac08_variants(str(reports_dir))
+    summary = image_composite_converter._summarizePreviousGoodAc08Variants(str(reports_dir))
 
     assert summary["expected"] == list(image_composite_converter.AC08_PREVIOUSLY_GOOD_VARIANTS)
     assert summary["preserved"] == ["AC0800_L", "AC0800_M"]
@@ -2657,8 +2657,8 @@ def test_template_transfer_skips_cross_family_donor_for_non_semantic(
         }
     ]
 
-    monkeypatch.setattr(image_composite_converter, "_rank_template_transfer_donors", lambda _t, d: d)
-    monkeypatch.setattr(image_composite_converter, "_read_svg_geometry", lambda _p: None)
+    monkeypatch.setattr(image_composite_converter, "_rankTemplateTransferDonors", lambda _t, d: d)
+    monkeypatch.setattr(image_composite_converter, "_readSvgGeometry", lambda _p: None)
 
     called: dict[str, int] = {"build": 0}
 
@@ -2666,9 +2666,9 @@ def test_template_transfer_skips_cross_family_donor_for_non_semantic(
         called["build"] += 1
         return "<svg/>"
 
-    monkeypatch.setattr(image_composite_converter, "_build_transformed_svg_from_template", fail_if_called)
+    monkeypatch.setattr(image_composite_converter, "_buildTransformedSvgFromTemplate", fail_if_called)
 
-    updated, detail = image_composite_converter._try_template_transfer(
+    updated, detail = image_composite_converter._tryTemplateTransfer(
         target_row=target_row,
         donor_rows=donor_rows,
         folder_path=str(folder_path),
@@ -5035,7 +5035,7 @@ def test_template_transfer_skips_nonsemantic_donors_for_semantic_targets(tmp_pat
         }
     ]
 
-    updated_row, detail = image_composite_converter._try_template_transfer(
+    updated_row, detail = image_composite_converter._tryTemplateTransfer(
         target_row=target_row,
         donor_rows=donor_rows,
         folder_path=str(folder),
@@ -5107,7 +5107,7 @@ def test_template_transfer_skips_semantic_but_incompatible_donors_for_connector_
         }
     ]
 
-    updated_row, detail = image_composite_converter._try_template_transfer(
+    updated_row, detail = image_composite_converter._tryTemplateTransfer(
         target_row=target_row,
         donor_rows=donor_rows,
         folder_path=str(folder),
@@ -5130,7 +5130,7 @@ def test_semantic_transfer_rejects_opposite_arm_directions() -> None:
     assert target.get("arm_enabled") is True
     assert donor.get("arm_enabled") is True
 
-    assert image_composite_converter._semantic_transfer_is_compatible(target, donor) is False
+    assert image_composite_converter._semanticTransferIsCompatible(target, donor) is False
 
 
 def test_enforce_semantic_connector_expectation_restores_left_arm_for_ac0812() -> None:
@@ -5231,7 +5231,7 @@ def test_circle_sampling_clip_preserves_upper_cap_with_inverted_bounds() -> None
 
 def test_parse_args_allows_two_positional_paths_with_default_iterations() -> None:
     """CLI should accept `folder output_dir` without requiring iterations."""
-    args = conv.parse_args(["in_folder", "out_folder"])
+    args = conv.parseArgs(["in_folder", "out_folder"])
 
     assert args.folder_path == "in_folder"
     assert args.csv_or_output == "out_folder"
@@ -5240,7 +5240,7 @@ def test_parse_args_allows_two_positional_paths_with_default_iterations() -> Non
 
 def test_parse_args_keeps_legacy_three_positional_arguments() -> None:
     """Backward compatibility: `folder csv iterations` still parses unchanged."""
-    args = conv.parse_args(["in_folder", "table.csv", "64"])
+    args = conv.parseArgs(["in_folder", "table.csv", "64"])
 
     assert args.folder_path == "in_folder"
     assert args.csv_or_output == "table.csv"
@@ -5248,24 +5248,24 @@ def test_parse_args_keeps_legacy_three_positional_arguments() -> None:
 
 
 def test_parse_args_accepts_log_file_option() -> None:
-    args = conv.parse_args(["in_folder", "out_folder", "--log-file", "run.log"])
+    args = conv.parseArgs(["in_folder", "out_folder", "--log-file", "run.log"])
     assert args.log_file == "run.log"
 
 
 def test_parse_args_accepts_ac08_regression_set_flag() -> None:
-    args = conv.parse_args(["in_folder", "--ac08-regression-set"])
+    args = conv.parseArgs(["in_folder", "--ac08-regression-set"])
 
     assert args.ac08_regression_set is True
 
 
 def test_parse_args_uses_default_folder_path_when_only_helper_flags_are_used() -> None:
-    args = conv.parse_args(["--print-linux-vendor-command"])
+    args = conv.parseArgs(["--print-linux-vendor-command"])
 
     assert args.folder_path == "artifacts/images_to_convert"
 
 
 def test_parse_args_uses_console_prompt_defaults_for_missing_range() -> None:
-    args = conv.parse_args(["in_folder"])
+    args = conv.parseArgs(["in_folder"])
 
     assert args.start is None
     assert args.end is None
@@ -5273,9 +5273,9 @@ def test_parse_args_uses_console_prompt_defaults_for_missing_range() -> None:
 
 def test_main_prompts_for_range_when_start_and_end_are_missing(monkeypatch: pytest.MonkeyPatch) -> None:
     prompts: list[str] = []
-    monkeypatch.setattr(conv, "_resolve_cli_csv_and_output", lambda _args: ("", "out_dir"))
-    monkeypatch.setattr(conv, "convert_range", lambda *_args, **_kwargs: "out_dir")
-    monkeypatch.setattr(conv, "_optional_log_capture", lambda _path: contextlib.nullcontext())
+    monkeypatch.setattr(conv, "_resolveCliCsvAndOutput", lambda _args: ("", "out_dir"))
+    monkeypatch.setattr(conv, "convertRange", lambda *_args, **_kwargs: "out_dir")
+    monkeypatch.setattr(conv, "_optionalLogCapture", lambda _path: contextlib.nullcontext())
 
     answers = iter(["AC0001", "AC0003"])
 
@@ -5292,9 +5292,9 @@ def test_main_prompts_for_range_when_start_and_end_are_missing(monkeypatch: pyte
 
 
 def test_main_skips_range_prompt_when_start_and_end_are_provided(monkeypatch: pytest.MonkeyPatch) -> None:
-    monkeypatch.setattr(conv, "_resolve_cli_csv_and_output", lambda _args: ("", "out_dir"))
-    monkeypatch.setattr(conv, "convert_range", lambda *_args, **_kwargs: "out_dir")
-    monkeypatch.setattr(conv, "_optional_log_capture", lambda _path: contextlib.nullcontext())
+    monkeypatch.setattr(conv, "_resolveCliCsvAndOutput", lambda _args: ("", "out_dir"))
+    monkeypatch.setattr(conv, "convertRange", lambda *_args, **_kwargs: "out_dir")
+    monkeypatch.setattr(conv, "_optionalLogCapture", lambda _path: contextlib.nullcontext())
 
     def fail_input(_prompt: str) -> str:
         raise AssertionError("input should not be called")
@@ -5307,8 +5307,8 @@ def test_main_skips_range_prompt_when_start_and_end_are_provided(monkeypatch: py
 
 
 def test_main_uses_fixed_ac08_regression_set(monkeypatch: pytest.MonkeyPatch) -> None:
-    monkeypatch.setattr(conv, "_resolve_cli_csv_and_output", lambda _args: ("table.csv", "out_dir"))
-    monkeypatch.setattr(conv, "_optional_log_capture", lambda _path: contextlib.nullcontext())
+    monkeypatch.setattr(conv, "_resolveCliCsvAndOutput", lambda _args: ("table.csv", "out_dir"))
+    monkeypatch.setattr(conv, "_optionalLogCapture", lambda _path: contextlib.nullcontext())
     captured: dict[str, object] = {}
 
     def fake_convert_range(*args, **kwargs):
@@ -5316,7 +5316,7 @@ def test_main_uses_fixed_ac08_regression_set(monkeypatch: pytest.MonkeyPatch) ->
         captured["kwargs"] = kwargs
         return "out_dir"
 
-    monkeypatch.setattr(conv, "convert_range", fake_convert_range)
+    monkeypatch.setattr(conv, "convertRange", fake_convert_range)
 
     rc = conv.main(["images", "--ac08-regression-set"])
 
@@ -5330,7 +5330,7 @@ def test_main_uses_fixed_ac08_regression_set(monkeypatch: pytest.MonkeyPatch) ->
 def test_optional_log_capture_writes_output_to_file(tmp_path: Path, capsys: pytest.CaptureFixture[str]) -> None:
     log_path = tmp_path / "run.log"
 
-    with conv._optional_log_capture(str(log_path)):
+    with conv._optionalLogCapture(str(log_path)):
         print("hello-capture")
 
     console = capsys.readouterr()
@@ -5348,8 +5348,8 @@ def test_resolve_cli_csv_and_output_autodetects_csv_when_second_arg_is_output(tm
     csv_file = in_dir / "reference_roundtrip.csv"
     csv_file.write_text("Wurzelform;Beschreibung\n", encoding="utf-8")
 
-    args = conv.parse_args([str(in_dir), str(out_dir)])
-    csv_path, output_dir = conv._resolve_cli_csv_and_output(args)
+    args = conv.parseArgs([str(in_dir), str(out_dir)])
+    csv_path, output_dir = conv._resolveCliCsvAndOutput(args)
 
     assert csv_path == str(csv_file)
     assert output_dir == str(out_dir)
@@ -5362,15 +5362,15 @@ def test_resolve_cli_csv_and_output_keeps_explicit_csv_over_autodetect(tmp_path:
     explicit = tmp_path / "explicit.csv"
     explicit.write_text("Wurzelform;Beschreibung\n", encoding="utf-8")
 
-    args = conv.parse_args([str(in_dir), "out_dir", "32", "--csv-path", str(explicit)])
-    csv_path, output_dir = conv._resolve_cli_csv_and_output(args)
+    args = conv.parseArgs([str(in_dir), "out_dir", "32", "--csv-path", str(explicit)])
+    csv_path, output_dir = conv._resolveCliCsvAndOutput(args)
 
     assert csv_path == str(explicit)
     assert output_dir == "out_dir"
 
 
 def test_parse_args_accepts_descriptions_path_alias_and_named_iterations() -> None:
-    args = conv.parse_args(
+    args = conv.parseArgs(
         [
             "in_folder",
             "out_dir",
@@ -5404,7 +5404,7 @@ def test_local_workflow_doc_tracks_current_commands() -> None:
 
 def test_parse_args_help_mentions_canonical_image_converter_flags(capsys: pytest.CaptureFixture[str]) -> None:
     with pytest.raises(SystemExit) as excinfo:
-        conv.parse_args(["--help"])
+        conv.parseArgs(["--help"])
 
     captured = capsys.readouterr()
 
@@ -5415,7 +5415,7 @@ def test_parse_args_help_mentions_canonical_image_converter_flags(capsys: pytest
 
 
 def test_default_converted_symbols_root_points_to_converted_images() -> None:
-    root = Path(conv._default_converted_symbols_root())
+    root = Path(conv._defaultConvertedSymbolsRoot())
 
     assert root.name == "converted_images"
     assert root.parent.name == "artifacts"
@@ -5424,9 +5424,9 @@ def test_default_converted_symbols_root_points_to_converted_images() -> None:
 def test_conversion_output_subdirectories_live_below_root() -> None:
     root = Path("/tmp/example-output")
 
-    assert Path(conv._converted_svg_output_dir(str(root))) == root / "converted_svgs"
-    assert Path(conv._diff_output_dir(str(root))) == root / "diff_pngs"
-    assert Path(conv._reports_output_dir(str(root))) == root / "reports"
+    assert Path(conv._convertedSvgOutputDir(str(root))) == root / "converted_svgs"
+    assert Path(conv._diffOutputDir(str(root))) == root / "diff_pngs"
+    assert Path(conv._reportsOutputDir(str(root))) == root / "reports"
 
 
 def test_render_embedded_raster_svg_wraps_gif_without_optional_deps(tmp_path: Path) -> None:
@@ -5439,7 +5439,7 @@ def test_render_embedded_raster_svg_wraps_gif_without_optional_deps(tmp_path: Pa
         + b",\x00\x00\x00\x00\x02\x00\x03\x00\x00\x02\x02D\x01\x00;"
     )
 
-    svg = conv._render_embedded_raster_svg(gif_path)
+    svg = conv._renderEmbeddedRasterSvg(gif_path)
 
     assert 'width="2"' in svg
     assert 'height="3"' in svg
@@ -5486,7 +5486,7 @@ def test_load_description_mapping_from_xml_reads_wurzelform_key_and_images(tmp_p
         encoding="utf-8",
     )
 
-    mapping = conv._load_description_mapping(str(xml_path))
+    mapping = conv._loadDescriptionMapping(str(xml_path))
 
     assert mapping["AC0812"] == "Semantic badge sample"
     assert mapping["AC0812_L"] == "Semantic badge sample"
@@ -5516,7 +5516,7 @@ def test_load_existing_conversion_rows_reads_prior_iteration_log(tmp_path: Path)
     )
     shutil.copyfile("artifacts/images_to_convert/AC0820_L.jpg", images_dir / "AC0820_L.jpg")
 
-    rows = conv._load_existing_conversion_rows(str(output_root), str(images_dir))
+    rows = conv._loadExistingConversionRows(str(output_root), str(images_dir))
 
     assert len(rows) == 1
     assert rows[0]["variant"] == "AC0820_L"
@@ -5537,7 +5537,7 @@ def test_read_svg_geometry_detects_co2_text_from_single_text_node(tmp_path: Path
         encoding="utf-8",
     )
 
-    geometry = conv._read_svg_geometry(str(svg_path))
+    geometry = conv._readSvgGeometry(str(svg_path))
 
     assert geometry is not None
     _w, _h, params = geometry
@@ -5557,7 +5557,7 @@ def test_read_svg_geometry_detects_split_co2_text_nodes(tmp_path: Path) -> None:
         encoding="utf-8",
     )
 
-    geometry = conv._read_svg_geometry(str(svg_path))
+    geometry = conv._readSvgGeometry(str(svg_path))
 
     assert geometry is not None
     _w, _h, params = geometry
@@ -5588,12 +5588,12 @@ def test_convert_range_uses_existing_conversion_rows_as_template_donors(
         "variant": "AC0820_L",
     }
 
-    monkeypatch.setattr(conv, "_load_existing_conversion_rows", lambda *_args, **_kwargs: [existing_donor])
-    monkeypatch.setattr(conv, "_load_quality_config", lambda *_args, **_kwargs: {})
-    monkeypatch.setattr(conv, "_write_quality_config", lambda *_args, **_kwargs: None)
-    monkeypatch.setattr(conv, "_write_quality_pass_report", lambda *_args, **_kwargs: None)
-    monkeypatch.setattr(conv, "_harmonize_semantic_size_variants", lambda *_args, **_kwargs: None)
-    monkeypatch.setattr(conv, "_write_pixel_delta2_ranking", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(conv, "_loadExistingConversionRows", lambda *_args, **_kwargs: [existing_donor])
+    monkeypatch.setattr(conv, "_loadQualityConfig", lambda *_args, **_kwargs: {})
+    monkeypatch.setattr(conv, "_writeQualityConfig", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(conv, "_writeQualityPassReport", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(conv, "_harmonizeSemanticSizeVariants", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(conv, "_writePixelDelta2Ranking", lambda *_args, **_kwargs: None)
 
     calls: list[list[str]] = []
 
@@ -5610,10 +5610,10 @@ def test_convert_range_uses_existing_conversion_rows_as_template_donors(
         calls.append([str(row.get("variant", "")) for row in donor_rows])
         return None, None
 
-    monkeypatch.setattr(conv, "run_iteration_pipeline", fake_run_iteration_pipeline)
-    monkeypatch.setattr(conv, "_try_template_transfer", fake_try_template_transfer)
+    monkeypatch.setattr(conv, "runIterationPipeline", fake_run_iteration_pipeline)
+    monkeypatch.setattr(conv, "_tryTemplateTransfer", fake_try_template_transfer)
 
-    conv.convert_range(
+    conv.convertRange(
         str(images_dir),
         str(csv_path),
         iterations=1,
@@ -5729,8 +5729,8 @@ def test_resolve_cli_csv_and_output_accepts_xml_as_table_path(tmp_path: Path) ->
     xml_path = tmp_path / "Finale_Wurzelformen_V3.xml"
     xml_path.write_text("<wurzelformen_export/>\n", encoding="utf-8")
 
-    args = conv.parse_args([str(in_dir), str(xml_path), "32"])
-    csv_path, output_dir = conv._resolve_cli_csv_and_output(args)
+    args = conv.parseArgs([str(in_dir), str(xml_path), "32"])
+    csv_path, output_dir = conv._resolveCliCsvAndOutput(args)
 
     assert csv_path == str(xml_path)
     assert output_dir is None
@@ -5757,7 +5757,7 @@ def test_load_description_mapping_from_xml_prefers_image_specific_detail(tmp_pat
         encoding="utf-8",
     )
 
-    mapping = conv._load_description_mapping(str(xml_path))
+    mapping = conv._loadDescriptionMapping(str(xml_path))
 
     assert "z_202" in mapping
     assert "Gruppenbeschreibung Rohrformen" in mapping["z_202"]
@@ -5782,14 +5782,14 @@ def test_load_description_mapping_from_xml_reads_bild_attribute_description(tmp_
         encoding="utf-8",
     )
 
-    mapping = conv._load_description_mapping(str(xml_path))
+    mapping = conv._loadDescriptionMapping(str(xml_path))
 
     assert mapping["z_111"] == "Rohrgruppe Halb offene Hand, Kontur + Innenfläche"
 
 
 def test_load_description_mapping_from_xml_registers_case_and_extension_variants() -> None:
     """XML loader should expose descriptions for key/image variants used by runtime lookup."""
-    mapping = conv._load_description_mapping_from_xml(
+    mapping = conv._loadDescriptionMappingFromXml(
         "artifacts/images_to_convert/Finale_Wurzelformen_V3.xml"
     )
 
@@ -5804,7 +5804,7 @@ def test_load_description_mapping_from_xml_registers_case_and_extension_variants
 
 def test_parse_description_uses_xml_loaded_variant_descriptions() -> None:
     """Descriptions from merged XML entries should be discoverable for concrete image variants."""
-    mapping = conv._load_description_mapping_from_xml(
+    mapping = conv._loadDescriptionMappingFromXml(
         "artifacts/images_to_convert/Finale_Wurzelformen_V3.xml"
     )
     ref = conv.Reflection(mapping)
@@ -5815,7 +5815,7 @@ def test_parse_description_uses_xml_loaded_variant_descriptions() -> None:
 
 
 def test_load_description_mapping_from_xml_falls_back_to_descriptions_directory() -> None:
-    mapping = conv._load_description_mapping_from_xml(
+    mapping = conv._loadDescriptionMappingFromXml(
         "artifacts/images_to_convert/Finale_Wurzelformen_V3.xml"
     )
 
@@ -5834,7 +5834,7 @@ def test_load_description_mapping_from_xml_reports_line_and_column_for_parse_err
     )
 
     with pytest.raises(conv.DescriptionMappingError) as exc_info:
-        conv._load_description_mapping_from_xml(str(xml_path))
+        conv._loadDescriptionMappingFromXml(str(xml_path))
 
     exc = exc_info.value
     assert exc.span is not None
@@ -5853,7 +5853,7 @@ def test_load_description_mapping_from_csv_reports_source_span_for_short_rows(tm
     )
 
     with pytest.raises(conv.DescriptionMappingError) as exc_info:
-        conv._load_description_mapping_from_csv(str(csv_path))
+        conv._loadDescriptionMappingFromCsv(str(csv_path))
 
     exc = exc_info.value
     assert exc.span is not None
@@ -5891,7 +5891,7 @@ def test_main_returns_error_for_invalid_description_xml_with_source_location(
 
 
 def test_build_linux_vendor_install_command_uses_vendor_defaults() -> None:
-    cmd = conv.build_linux_vendor_install_command(vendor_dir="vendor", platform_tag="manylinux2014_x86_64", python_version="311")
+    cmd = conv.buildLinuxVendorInstallCommand(vendor_dir="vendor", platform_tag="manylinux2014_x86_64", python_version="311")
 
     assert cmd[:4] == [image_composite_converter.sys.executable, "-m", "pip", "install"]
     assert "--target" in cmd
@@ -5968,7 +5968,7 @@ def test_bbox_to_dict_records_expected_coordinates() -> None:
 
 
 def test_parse_args_defaults_to_convert_mode() -> None:
-    args = image_composite_converter.parse_args(["images"])
+    args = image_composite_converter.parseArgs(["images"])
 
     assert args.mode == "convert"
 
@@ -5977,8 +5977,8 @@ def test_create_diff_image_without_cv2_writes_rgb_overlay(tmp_path: Path) -> Non
     src = tmp_path / "sample.jpg"
     shutil.copyfile("artifacts/images_to_convert/AC0010.jpg", src)
 
-    svg = image_composite_converter._render_embedded_raster_svg(src)
-    diff = image_composite_converter._create_diff_image_without_cv2(src, svg)
+    svg = image_composite_converter._renderEmbeddedRasterSvg(src)
+    diff = image_composite_converter._createDiffImageWithoutCv2(src, svg)
 
     assert diff.n == 3
     assert diff.width > 0
@@ -6048,7 +6048,7 @@ def test_convert_range_fallback_writes_diff_pngs_when_cv2_missing(monkeypatch: p
     monkeypatch.setattr(image_composite_converter, "cv2", None)
     monkeypatch.setattr(image_composite_converter, "np", None)
 
-    out_dir = image_composite_converter.convert_range(
+    out_dir = image_composite_converter.convertRange(
         str(images_dir),
         csv_path="",
         iterations=1,
@@ -6105,7 +6105,7 @@ def test_render_svg_to_numpy_uses_subprocess_isolation_when_enabled(monkeypatch:
     marker = np.full((2, 3, 3), 77, dtype=np.uint8)
     monkeypatch.setattr(image_composite_converter, "SVG_RENDER_SUBPROCESS_ENABLED", True)
     monkeypatch.setattr(image_composite_converter, "_render_svg_to_numpy_via_subprocess", lambda *_a, **_k: marker.copy())
-    monkeypatch.setattr(image_composite_converter, "_render_svg_to_numpy_inprocess", lambda *_a, **_k: None)
+    monkeypatch.setattr(image_composite_converter, "_renderSvgToNumpyInprocess", lambda *_a, **_k: None)
 
     result = Action.render_svg_to_numpy('<svg xmlns="http://www.w3.org/2000/svg"></svg>', 3, 2)
     assert result is not None
@@ -6121,7 +6121,7 @@ def test_render_svg_to_numpy_falls_back_to_inprocess_after_subprocess_failure(mo
     fallback = np.full((1, 1, 3), 13, dtype=np.uint8)
     monkeypatch.setattr(image_composite_converter, "SVG_RENDER_SUBPROCESS_ENABLED", True)
     monkeypatch.setattr(image_composite_converter, "_render_svg_to_numpy_via_subprocess", lambda *_a, **_k: None)
-    monkeypatch.setattr(image_composite_converter, "_render_svg_to_numpy_inprocess", lambda *_a, **_k: fallback.copy())
+    monkeypatch.setattr(image_composite_converter, "_renderSvgToNumpyInprocess", lambda *_a, **_k: fallback.copy())
 
     result = Action.render_svg_to_numpy('<svg xmlns="http://www.w3.org/2000/svg"></svg>', 1, 1)
     assert result is not None
@@ -6155,16 +6155,16 @@ def test_convert_range_stops_after_render_failure_and_writes_batch_summary(
 
         def shuffle(self, _seq) -> None:
             return None
-    monkeypatch.setattr(image_composite_converter, "_conversion_random", lambda: _FixedRandom())
+    monkeypatch.setattr(image_composite_converter, "_conversionRandom", lambda: _FixedRandom())
 
-    monkeypatch.setattr(image_composite_converter, "_in_requested_range", lambda *_args, **_kwargs: True)
-    monkeypatch.setattr(image_composite_converter, "_load_quality_config", lambda *_args, **_kwargs: {})
-    monkeypatch.setattr(image_composite_converter, "_write_quality_config", lambda *_args, **_kwargs: None)
-    monkeypatch.setattr(image_composite_converter, "_harmonize_semantic_size_variants", lambda *_args, **_kwargs: None)
-    monkeypatch.setattr(image_composite_converter, "_write_pixel_delta2_ranking", lambda *_args, **_kwargs: None)
-    monkeypatch.setattr(image_composite_converter, "_select_open_quality_cases", lambda rows, **_kwargs: [])
-    monkeypatch.setattr(image_composite_converter, "_select_middle_lower_tercile", lambda _rows: [])
-    monkeypatch.setattr(image_composite_converter, "_try_template_transfer", lambda **_kwargs: (None, None))
+    monkeypatch.setattr(image_composite_converter, "_inRequestedRange", lambda *_args, **_kwargs: True)
+    monkeypatch.setattr(image_composite_converter, "_loadQualityConfig", lambda *_args, **_kwargs: {})
+    monkeypatch.setattr(image_composite_converter, "_writeQualityConfig", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(image_composite_converter, "_harmonizeSemanticSizeVariants", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(image_composite_converter, "_writePixelDelta2Ranking", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(image_composite_converter, "_selectOpenQualityCases", lambda rows, **_kwargs: [])
+    monkeypatch.setattr(image_composite_converter, "_selectMiddleLowerTercile", lambda _rows: [])
+    monkeypatch.setattr(image_composite_converter, "_tryTemplateTransfer", lambda **_kwargs: (None, None))
 
     def fake_pipeline(img_path: str, _csv_path: str, _iterations: int, svg_out: str, diff_out: str, reports_out: str, *_args, **_kwargs):
         stem = Path(img_path).stem
@@ -6187,9 +6187,9 @@ def test_convert_range_stops_after_render_failure_and_writes_batch_summary(
         params = {"mode": "semantic_badge", "elements": ["circle"], "cx": 5.0, "cy": 5.0, "r": 3.0}
         return stem, "semantic", params, 1, 30.0
 
-    monkeypatch.setattr(image_composite_converter, "run_iteration_pipeline", fake_pipeline)
+    monkeypatch.setattr(image_composite_converter, "runIterationPipeline", fake_pipeline)
 
-    result = image_composite_converter.convert_range(
+    result = image_composite_converter.convertRange(
         str(images_dir),
         str(csv_path),
         iterations=1,
@@ -6234,7 +6234,7 @@ def test_update_successful_conversions_manifest_keeps_single_failed_entry(tmp_pa
         encoding="utf-8-sig",
     )
 
-    updated_path, _ = image_composite_converter.update_successful_conversions_manifest_with_metrics(
+    updated_path, _ = image_composite_converter.updateSuccessfulConversionsManifestWithMetrics(
         folder_path=str(image_dir),
         svg_out_dir=str(svg_dir),
         reports_out_dir=str(reports_dir),
@@ -6283,7 +6283,7 @@ def test_ac08_regression_suite_preserves_previously_good_variants(
     diff_dir = tmp_path / "diffs"
     reports_dir = tmp_path / "reports"
 
-    result = image_composite_converter.run_iteration_pipeline(
+    result = image_composite_converter.runIterationPipeline(
         str(img_path),
         str(csv_path),
         4,
@@ -6314,7 +6314,7 @@ def test_ac0811_l_conversion_preserves_long_bottom_stem(tmp_path: Path) -> None:
         pytest.skip("AC0811 fixture inputs not available")
 
     output_root = tmp_path / "ac0811_l_out"
-    result = image_composite_converter.convert_range(
+    result = image_composite_converter.convertRange(
         str(images_dir),
         str(csv_path),
         iterations=4,
@@ -6362,7 +6362,7 @@ def test_ac0820_l_conversion_keeps_circle_diameter_above_half_image_width(tmp_pa
     diff_dir = tmp_path / "diffs"
     reports_dir = tmp_path / "reports"
 
-    result = image_composite_converter.run_iteration_pipeline(
+    result = image_composite_converter.runIterationPipeline(
         str(img_path),
         str(csv_path),
         4,
@@ -6400,7 +6400,7 @@ def test_ac08_semantic_anchor_variants_convert_without_failed_svg(tmp_path: Path
         pytest.skip("AC08 fixture inputs not available")
 
     output_ac0811 = tmp_path / "ac0811_out"
-    result_ac0811 = image_composite_converter.convert_range(
+    result_ac0811 = image_composite_converter.convertRange(
         str(images_dir),
         str(csv_path),
         iterations=4,
@@ -6416,7 +6416,7 @@ def test_ac08_semantic_anchor_variants_convert_without_failed_svg(tmp_path: Path
     assert "status=semantic_ok" in log_ac0811_l
 
     output_ac0812 = tmp_path / "ac0812_out"
-    result_ac0812 = image_composite_converter.convert_range(
+    result_ac0812 = image_composite_converter.convertRange(
         str(images_dir),
         str(csv_path),
         iterations=4,
@@ -6612,7 +6612,7 @@ def test_generate_conversion_overviews_creates_diff_and_svg_tiles(tmp_path: Path
     if image_composite_converter.np is None or image_composite_converter.cv2 is None:
         pytest.skip("numpy/cv2 not available in this environment")
 
-    from src.overviewTiles import generate_conversion_overviews
+    from src.overviewTiles import generateConversionOverviews
 
     np = image_composite_converter.np
     cv2 = image_composite_converter.cv2
@@ -6633,7 +6633,7 @@ def test_generate_conversion_overviews_creates_diff_and_svg_tiles(tmp_path: Path
         encoding="utf-8",
     )
 
-    generated = generate_conversion_overviews(diff_dir, svg_dir, reports_dir)
+    generated = generateConversionOverviews(diff_dir, svg_dir, reports_dir)
 
     assert "diff" in generated
     assert "svg" in generated
@@ -6642,7 +6642,7 @@ def test_generate_conversion_overviews_creates_diff_and_svg_tiles(tmp_path: Path
 
 
 def test_convert_range_invokes_overview_generation(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
-    """convert_range should call overview-tile generation after conversion output is written."""
+    """convertRange should call overview-tile generation after conversion output is written."""
     if image_composite_converter.np is None or image_composite_converter.cv2 is None:
         pytest.skip("numpy/cv2 not available in this environment")
 
@@ -6658,14 +6658,14 @@ def test_convert_range_invokes_overview_generation(tmp_path: Path, monkeypatch: 
     csv_path.write_text("Wurzelform;Beschreibung\nAC0812;semantic\n", encoding="utf-8")
     assert cv2.imwrite(str(images_dir / "AC0812_L.jpg"), np.full((10, 10, 3), 220, dtype=np.uint8))
 
-    monkeypatch.setattr(image_composite_converter, "_in_requested_range", lambda *_args, **_kwargs: True)
-    monkeypatch.setattr(image_composite_converter, "_load_quality_config", lambda *_args, **_kwargs: {})
-    monkeypatch.setattr(image_composite_converter, "_write_quality_config", lambda *_args, **_kwargs: None)
-    monkeypatch.setattr(image_composite_converter, "_harmonize_semantic_size_variants", lambda *_args, **_kwargs: None)
-    monkeypatch.setattr(image_composite_converter, "_write_pixel_delta2_ranking", lambda *_args, **_kwargs: None)
-    monkeypatch.setattr(image_composite_converter, "_select_open_quality_cases", lambda rows, **_kwargs: [])
-    monkeypatch.setattr(image_composite_converter, "_select_middle_lower_tercile", lambda _rows: [])
-    monkeypatch.setattr(image_composite_converter, "_try_template_transfer", lambda **_kwargs: (None, None))
+    monkeypatch.setattr(image_composite_converter, "_inRequestedRange", lambda *_args, **_kwargs: True)
+    monkeypatch.setattr(image_composite_converter, "_loadQualityConfig", lambda *_args, **_kwargs: {})
+    monkeypatch.setattr(image_composite_converter, "_writeQualityConfig", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(image_composite_converter, "_harmonizeSemanticSizeVariants", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(image_composite_converter, "_writePixelDelta2Ranking", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(image_composite_converter, "_selectOpenQualityCases", lambda rows, **_kwargs: [])
+    monkeypatch.setattr(image_composite_converter, "_selectMiddleLowerTercile", lambda _rows: [])
+    monkeypatch.setattr(image_composite_converter, "_tryTemplateTransfer", lambda **_kwargs: (None, None))
 
     called: dict[str, str] = {}
 
@@ -6675,7 +6675,7 @@ def test_convert_range_invokes_overview_generation(tmp_path: Path, monkeypatch: 
         called["reports"] = reports_dir
         return {"diff": str(Path(reports_dir) / "overview_diff_tiles.png")}
 
-    monkeypatch.setattr(image_composite_converter, "generate_conversion_overviews", fake_overviews)
+    monkeypatch.setattr(image_composite_converter, "generateConversionOverviews", fake_overviews)
 
     def fake_pipeline(img_path: str, _csv_path: str, _iterations: int, svg_out: str, diff_out: str, reports_out: str, *_args, **_kwargs):
         stem = Path(img_path).stem
@@ -6688,9 +6688,9 @@ def test_convert_range_invokes_overview_generation(tmp_path: Path, monkeypatch: 
         params = {"mode": "semantic_badge", "elements": ["circle"], "cx": 5.0, "cy": 5.0, "r": 3.0}
         return stem, "semantic", params, 1, 30.0
 
-    monkeypatch.setattr(image_composite_converter, "run_iteration_pipeline", fake_pipeline)
+    monkeypatch.setattr(image_composite_converter, "runIterationPipeline", fake_pipeline)
 
-    result = image_composite_converter.convert_range(
+    result = image_composite_converter.convertRange(
         str(images_dir),
         str(csv_path),
         iterations=1,
