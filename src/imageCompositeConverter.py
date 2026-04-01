@@ -39,6 +39,7 @@ from src import imageCompositeConverterRange as range_helpers
 from src import imageCompositeConverterDependencies as dependency_helpers
 from src import imageCompositeConverterSemantic as semantic_helpers
 from src import imageCompositeConverterQuality as quality_helpers
+from src import imageCompositeConverterAudit as audit_helpers
 from src.successfulConversions import (
     AC08_MITIGATION_STATUS,
     AC08_PREVIOUSLY_GOOD_VARIANTS,
@@ -3997,6 +3998,67 @@ class Action:
         if params.get("draw_text", True) and params.get("text_mode") in {"path", "path_t"}:
             Action._centerGlyphBbox(params)
         return Action._normalizeLightCircleColors(params)
+
+    @staticmethod
+    def _default_ac0811_params(w: int, h: int) -> dict:
+        return Action._defaultAc0811Params(w, h)
+
+    @staticmethod
+    def make_badge_params(w: int, h: int, base_name: str, img: np.ndarray | None = None) -> dict | None:
+        return Action.makeBadgeParams(w, h, base_name, img)
+
+    @staticmethod
+    def validate_semantic_description_alignment(
+        img_orig,
+        semantic_elements: list[str],
+        badge_params: dict,
+    ) -> list[str]:
+        return Action.validateSemanticDescriptionAlignment(img_orig, semantic_elements, badge_params)
+
+    @staticmethod
+    def validate_badge_by_elements(
+        img_orig,
+        badge_params: dict,
+        *,
+        max_rounds: int = 2,
+        debug_out_dir: str | None = None,
+    ) -> list[str]:
+        return Action.validateBadgeByElements(
+            img_orig,
+            badge_params,
+            max_rounds=max_rounds,
+            debug_out_dir=debug_out_dir,
+        )
+
+    @staticmethod
+    def generate_badge_svg(w: int, h: int, params: dict) -> str:
+        return Action.generateBadgeSvg(w, h, params)
+
+    @staticmethod
+    def render_svg_to_numpy(svg_content: str, w: int, h: int):
+        return Action.renderSvgToNumpy(svg_content, w, h)
+
+    @staticmethod
+    def _enforce_semantic_connector_expectation(
+        base_name: str,
+        semantic_elements: list[str],
+        badge_params: dict,
+        w: int,
+        h: int,
+    ) -> dict:
+        return Action._enforceSemanticConnectorExpectation(base_name, semantic_elements, badge_params, w, h)
+
+    @staticmethod
+    def apply_redraw_variation(params: dict, w: int, h: int) -> tuple[dict, list[str]]:
+        return Action.applyRedrawVariation(params, w, h)
+
+    @staticmethod
+    def calculate_error(img1, img2) -> float:
+        return Action.calculateError(img1, img2)
+
+    @staticmethod
+    def create_diff_image(img1, img2):
+        return Action.createDiffImage(img1, img2)
 
     @staticmethod
     def makeBadgeParams(w: int, h: int, base_name: str, img: np.ndarray | None = None) -> dict | None:
@@ -8091,14 +8153,14 @@ def runIterationPipeline(
 
         render = rendered_img
         if render is None:
-            render = Action.renderSvgToNumpy(svg_content, w, h)
+            render = Action.render_svg_to_numpy(svg_content, w, h)
         if render is None:
             return
-        diff = diff_img if diff_img is not None else Action.createDiffImage(perc.img, render)
+        diff = diff_img if diff_img is not None else Action.create_diff_image(perc.img, render)
         cv2.imwrite(os.path.join(diff_out_dir, f"{base}{suffix}_diff.png"), diff)
 
     if params["mode"] == "semantic_badge":
-        badge_params = Action.makeBadgeParams(w, h, perc.base_name, perc.img)
+        badge_params = Action.make_badge_params(w, h, perc.base_name, perc.img)
         if badge_params is None:
             return None
         # Persist source raster dimensions so variant-specific finalizers can
@@ -8109,13 +8171,13 @@ def runIterationPipeline(
         if isinstance(badge_overrides, dict):
             badge_params.update(badge_overrides)
 
-        semantic_issues = Action.validateSemanticDescriptionAlignment(
+        semantic_issues = Action.validate_semantic_description_alignment(
             perc.img,
             list(params.get("elements", [])),
             badge_params,
         )
         if semantic_issues:
-            failed_svg = Action.generateBadgeSvg(w, h, badge_params)
+            failed_svg = Action.generate_badge_svg(w, h, badge_params)
             _writeAttemptArtifacts(failed_svg, failed=True)
             structural = Action._detectSemanticPrimitives(perc.img, badge_params)
             connector_orientation = str(structural.get("connector_orientation", "unknown"))
@@ -8193,21 +8255,21 @@ def runIterationPipeline(
                 + ")."
             )
         validation_logs.extend(
-            Action.validateBadgeByElements(
+            Action.validate_badge_by_elements(
             perc.img,
             badge_params,
             max_rounds=max(1, int(badge_validation_rounds)),
             debug_out_dir=debug_dir,
             )
         )
-        badge_params = Action._enforceSemanticConnectorExpectation(
+        badge_params = Action._enforce_semantic_connector_expectation(
             perc.base_name,
             list(params.get("elements", [])),
             badge_params,
             w,
             h,
         )
-        badge_params, redraw_variation_logs = Action.applyRedrawVariation(badge_params, w, h)
+        badge_params, redraw_variation_logs = Action.apply_redraw_variation(badge_params, w, h)
         if badge_params.get("arm_enabled"):
             validation_logs.append(
                 "semantic-guard: Erwartete Arm-Geometrie bestätigt/wiederhergestellt (z.B. AC0812 links)."
@@ -8255,8 +8317,8 @@ def runIterationPipeline(
             ]
         )
 
-        svg_content = Action.generateBadgeSvg(w, h, badge_params)
-        svg_rendered = Action.renderSvgToNumpy(svg_content, w, h)
+        svg_content = Action.generate_badge_svg(w, h, badge_params)
+        svg_rendered = Action.render_svg_to_numpy(svg_content, w, h)
         if svg_rendered is None:
             _recordRenderFailure(
                 "semantic_badge_final_render_failed",
@@ -8268,7 +8330,7 @@ def runIterationPipeline(
         if semantic_audit_row is not None:
             params = copy.deepcopy(params)
             params["semantic_audit"] = semantic_audit_row
-        return base, desc, params, 1, Action.calculateError(perc.img, svg_rendered)
+        return base, desc, params, 1, Action.calculate_error(perc.img, svg_rendered)
 
     if params["mode"] != "composite":
         print("  -> Überspringe Bild, da keine Zerschneide-Anweisung (Compositing) im Text vorliegt.")
@@ -8290,7 +8352,7 @@ def runIterationPipeline(
     for i, eps in enumerate(epsilon_factors):
         svg_content = Action.generateCompositeSvg(w, h, params, folder_path, float(eps))
 
-        svg_rendered = Action.renderSvgToNumpy(svg_content, w, h)
+        svg_rendered = Action.render_svg_to_numpy(svg_content, w, h)
         if svg_rendered is None:
             _recordRenderFailure(
                 "composite_iteration_render_failed",
@@ -8510,67 +8572,22 @@ def _semanticAuditRecord(
     semantic_conflicts: list[str] | None = None,
     semantic_sources: dict[str, object] | None = None,
 ) -> dict[str, object]:
-    """Build a normalized semantic-audit record for AC0811..AC0814 style families."""
-    mismatch_reasons = [str(reason) for reason in (mismatch_reasons or []) if str(reason).strip()]
-    joined_description = " ".join(fragment["text"] for fragment in description_fragments).strip()
-    return {
-        "filename": str(filename),
-        "base_name": getBaseNameFromFile(base_name).upper(),
-        "description_fragments": description_fragments,
-        "recognized_description_elements": [fragment["text"] for fragment in description_fragments],
-        "description_lookup_keys": [fragment["key"] for fragment in description_fragments],
-        "description_text": joined_description,
-        "derived_elements": [str(element) for element in semantic_elements],
-        "semantic_priority_order": [str(item) for item in (semantic_priority_order or [])],
-        "semantic_conflicts": [str(item) for item in (semantic_conflicts or [])],
-        "semantic_sources": dict(semantic_sources or {}),
-        "status": str(status),
-        "mismatch_reason": " | ".join(mismatch_reasons),
-        "mismatch_reasons": mismatch_reasons,
-    }
+    return audit_helpers.semanticAuditRecordImpl(
+        base_name=base_name,
+        filename=filename,
+        description_fragments=description_fragments,
+        semantic_elements=semantic_elements,
+        status=status,
+        mismatch_reasons=mismatch_reasons,
+        semantic_priority_order=semantic_priority_order,
+        semantic_conflicts=semantic_conflicts,
+        semantic_sources=semantic_sources,
+        get_base_name_fn=getBaseNameFromFile,
+    )
 
 
 def _writeSemanticAuditReport(reports_out_dir: str, audit_rows: list[dict[str, object]]) -> None:
-    """Persist semantic audit rows as CSV/JSON for targeted AC0811..AC0814 review."""
-    if not audit_rows:
-        return
-
-    csv_path = os.path.join(reports_out_dir, "semantic_audit_ac0811_ac0814.csv")
-    with open(csv_path, "w", encoding="utf-8", newline="") as f:
-        writer = csv.writer(f, delimiter=";")
-        writer.writerow(
-            [
-                "filename",
-                "base_name",
-                "description_lookup_keys",
-                "recognized_description_elements",
-                "description_text",
-                "derived_elements",
-                "semantic_priority_order",
-                "semantic_conflicts",
-                "status",
-                "mismatch_reason",
-            ]
-        )
-        for row in audit_rows:
-            writer.writerow(
-                [
-                    row.get("filename", ""),
-                    row.get("base_name", ""),
-                    " | ".join(str(value) for value in row.get("description_lookup_keys", [])),
-                    " | ".join(str(value) for value in row.get("recognized_description_elements", [])),
-                    row.get("description_text", ""),
-                    " | ".join(str(value) for value in row.get("derived_elements", [])),
-                    " > ".join(str(value) for value in row.get("semantic_priority_order", [])),
-                    " | ".join(str(value) for value in row.get("semantic_conflicts", [])),
-                    row.get("status", ""),
-                    row.get("mismatch_reason", ""),
-                ]
-            )
-
-    json_path = os.path.join(reports_out_dir, "semantic_audit_ac0811_ac0814.json")
-    with open(json_path, "w", encoding="utf-8") as f:
-        json.dump(audit_rows, f, ensure_ascii=False, indent=2)
+    return audit_helpers.writeSemanticAuditReportImpl(reports_out_dir, audit_rows)
 
 
 def _diffOutputDir(output_root: str) -> str:
@@ -8582,15 +8599,11 @@ def _reportsOutputDir(output_root: str) -> str:
 
 
 def _isSemanticTemplateVariant(base_name: str, params: dict[str, object] | None = None) -> bool:
-    """Return whether an existing converted SVG should participate as semantic donor."""
-    normalized = str(getBaseNameFromFile(base_name or "")).upper()
-    if not normalized:
-        return False
-    if normalized.startswith("AC08") or normalized in {"AR0100"}:
-        return True
-    if isinstance(params, dict) and str(params.get("mode", "")).lower() == "semantic_badge":
-        return True
-    return False
+    return audit_helpers.isSemanticTemplateVariantImpl(
+        base_name=base_name,
+        params=params,
+        get_base_name_fn=getBaseNameFromFile,
+    )
 
 
 def _loadExistingConversionRows(output_root: str, folder_path: str) -> list[dict[str, object]]:
@@ -10839,7 +10852,7 @@ def _writePixelDelta2Ranking(folder_path: str, svg_out_dir: str, reports_out_dir
             svg_content = f.read()
 
         h, w = img_orig.shape[:2]
-        rendered = Action.renderSvgToNumpy(svg_content, w, h)
+        rendered = Action.render_svg_to_numpy(svg_content, w, h)
         if rendered is None:
             continue
 
