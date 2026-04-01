@@ -43,6 +43,43 @@ _AC08_BASE_REGRESSION_CASES: tuple[dict[str, str], ...] = (
 )
 
 
+def expandSuccessfulConversionManifestEntry(raw_entry: str) -> tuple[str, ...]:
+    token = str(raw_entry or "").strip().upper()
+    if not token:
+        return ()
+    return (token,)
+
+
+def iterAvailableSuccessfulConversionVariants() -> tuple[str, ...]:
+    if SUCCESSFUL_CONVERSIONS_SOURCE_DIR.exists():
+        found = sorted(
+            path.stem.upper()
+            for path in SUCCESSFUL_CONVERSIONS_SOURCE_DIR.iterdir()
+            if path.is_file() and path.suffix.lower() in {".png", ".jpg", ".jpeg", ".bmp", ".gif"}
+        )
+        if found:
+            return tuple(found)
+    return SUCCESSFUL_CONVERSIONS_FALLBACK
+
+
+def loadSuccessfulConversions() -> tuple[str, ...]:
+    if SUCCESSFUL_CONVERSIONS_MANIFEST.exists():
+        values: list[str] = []
+        for line in SUCCESSFUL_CONVERSIONS_MANIFEST.read_text(encoding="utf-8").splitlines():
+            line = line.split("#", 1)[0].strip()
+            if not line:
+                continue
+            values.extend(expandSuccessfulConversionManifestEntry(line))
+        normalized = tuple(dict.fromkeys(v for v in values if re.match(r"^[A-Z]{2}\d{4}(?:_[A-Z0-9]+)?$", v)))
+        if normalized:
+            return normalized
+    return iterAvailableSuccessfulConversionVariants()
+
+
+def buildAc08RegressionCases() -> tuple[dict[str, str], ...]:
+    return tuple(_AC08_BASE_REGRESSION_CASES)
+
+
 
 
 

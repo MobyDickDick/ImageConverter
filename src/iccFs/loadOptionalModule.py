@@ -1,38 +1,43 @@
 from __future__ import annotations
 
 import contextlib
+import importlib
+import sys
 from pathlib import Path
+
+from src.iccFs.vendoredSitePackagesDirs import vendoredSitePackagesDirs
 
 
 def loadOptionalModule(moduleName: str):
     """Import optional dependencies, including repo-vendored site-packages."""
-    import src.imageCompositeConverter as module
-
     attemptedPaths: list[Path] = []
     try:
-        return module.importlib.import_module(moduleName)
+        return importlib.import_module(moduleName)
     except Exception as exc:  # pragma: no cover
         lastExc: BaseException = exc
-        module.clearPartialModuleImport(moduleName)
+        sys.modules.pop(moduleName, None)
 
-    for sitePackages in module.vendoredSitePackagesDirs():
+    for sitePackages in vendoredSitePackagesDirs():
         attemptedPaths.append(sitePackages)
         pathStr = str(sitePackages)
         added = False
-        if pathStr not in module.sys.path:
-            module.sys.path.insert(0, pathStr)
+        if pathStr not in sys.path:
+            sys.path.insert(0, pathStr)
             added = True
         try:
-            return module.importlib.import_module(moduleName)
+            return importlib.import_module(moduleName)
         except Exception as exc:  # pragma: no cover
             lastExc = exc
-            module.clearPartialModuleImport(moduleName)
+            sys.modules.pop(moduleName, None)
         finally:
             if added:
                 with contextlib.suppress(ValueError):
-                    module.sys.path.remove(pathStr)
+                    sys.path.remove(pathStr)
 
-    module.OPTIONAL_DEPENDENCY_ERRORS[moduleName] = module.describeOptionalDependencyError(moduleName, lastExc, attemptedPaths)
+    core = sys.modules.get("src.iccFs.mF.imageCompositeConverterCore")
+    if core is not None and hasattr(core, "OPTIONAL_DEPENDENCY_ERRORS"):
+        attempted = ", ".join(str(p) for p in attemptedPaths) or "<none>"
+        core.OPTIONAL_DEPENDENCY_ERRORS[moduleName] = f"{type(lastExc).__name__}: {lastExc} (paths: {attempted})"
     return None
 
 

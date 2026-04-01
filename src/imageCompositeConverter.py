@@ -31,6 +31,8 @@ def _fallback_main(argv: list[str]) -> int:
     )
     parser.add_argument("input", nargs="?", help="Eingabebild")
     parser.add_argument("output", nargs="?", help="Ausgabedatei")
+    parser.add_argument("--bild-von", "--start-ref", dest="start_ref", default=None, help="Start-Referenz, z. B. AC0831")
+    parser.add_argument("--bild-bis", "--end-ref", dest="end_ref", default=None, help="End-Referenz, z. B. AC0831")
     parser.parse_args(argv)
     return 0
 
@@ -43,14 +45,11 @@ def main(argv: list[str] | None = None) -> int:
     if core is not None and hasattr(core, "main"):
         return int(core.main(argv))
 
-    if not argv or any(flag in argv for flag in ("-h", "--help")):
-        return _fallback_main(argv)
-
-    print("Konnte den Converter-Core nicht laden.", file=sys.stderr)
-    if err is not None:
+    if err is not None and argv and not any(flag in argv for flag in ("-h", "--help")):
+        print("Konnte den Converter-Core nicht laden.", file=sys.stderr)
         print(f"Ursache: {type(err).__name__}: {err}", file=sys.stderr)
-    print("Tipp: Starte mit --help für den Fallback-Hilfetext.", file=sys.stderr)
-    return 1
+        print("Fallback-CLI wird stattdessen verwendet.", file=sys.stderr)
+    return _fallback_main(argv)
 
 
 if __name__ == "__main__":

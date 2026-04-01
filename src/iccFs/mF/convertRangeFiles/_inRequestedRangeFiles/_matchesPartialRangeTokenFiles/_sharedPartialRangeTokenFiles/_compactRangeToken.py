@@ -1,6 +1,6 @@
 import re
 
-from ..normalizeRangeToken import normalizeRangeToken
+from .._normalizeRangeToken import normalizeRangeToken
 
 
 def compactRangeToken(value: str) -> str:
