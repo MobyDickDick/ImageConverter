@@ -1,0 +1,3465 @@
+{
+  "source_file": "src/imageCompositeConverter.py",
+  "module_imports": [
+    "ET",
+    "__future__.annotations",
+    "argparse",
+    "base64",
+    "contextlib",
+    "copy",
+    "csv",
+    "dataclasses",
+    "dataclasses.dataclass",
+    "gc",
+    "importlib",
+    "io",
+    "json",
+    "math",
+    "os",
+    "pathlib.Path",
+    "random",
+    "re",
+    "src.imageCompositeConverterRegions.ANNOTATION_COLORS",
+    "src.imageCompositeConverterRegions.analyzeRangeImpl",
+    "src.imageCompositeConverterRegions.annotateImageRegionsImpl",
+    "src.imageCompositeConverterRegions.detectRelevantRegionsImpl",
+    "src.overviewTiles.generateConversionOverviews",
+    "src.successfulConversions.AC08_MITIGATION_STATUS",
+    "src.successfulConversions.AC08_PREVIOUSLY_GOOD_VARIANTS",
+    "src.successfulConversions.AC08_REGRESSION_CASES",
+    "src.successfulConversions.AC08_REGRESSION_SET_NAME",
+    "src.successfulConversions.AC08_REGRESSION_VARIANTS",
+    "src.successfulConversions.SUCCESSFUL_CONVERSIONS",
+    "src.successfulConversions.SUCCESSFUL_CONVERSIONS_MANIFEST",
+    "src.successfulConversions._loadSuccessfulConversions",
+    "statistics",
+    "struct",
+    "subprocess",
+    "sys",
+    "time"
+  ],
+  "module_constants": [
+    "AC08_ADAPTIVE_LOCK_PROFILES",
+    "AC08_PREVIOUSLY_GOOD_VARIANTS",
+    "AC08_REGRESSION_VARIANTS",
+    "OPTIONAL_DEPENDENCY_ERRORS",
+    "SVG_RENDER_SUBPROCESS_ENABLED",
+    "cv2",
+    "fitz",
+    "np"
+  ],
+  "function_count": 133,
+  "functions": [
+    {
+      "name": "detectRelevantRegions",
+      "source_range": {
+        "start_line": 107,
+        "end_line": 108
+      },
+      "is_async": false,
+      "parameters": [
+        "img"
+      ],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "cv2",
+        "detectRelevantRegionsImpl",
+        "dict",
+        "list",
+        "np",
+        "object",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions.detectRelevantRegions",
+      "suggested_file": "src/imageCompositeConverter_functions/detectRelevantRegions.py"
+    },
+    {
+      "name": "annotateImageRegions",
+      "source_range": {
+        "start_line": 111,
+        "end_line": 112
+      },
+      "is_async": false,
+      "parameters": [
+        "img",
+        "regions"
+      ],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "annotateImageRegionsImpl",
+        "cv2",
+        "dict",
+        "list",
+        "object",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions.annotateImageRegions",
+      "suggested_file": "src/imageCompositeConverter_functions/annotateImageRegions.py"
+    },
+    {
+      "name": "analyzeRange",
+      "source_range": {
+        "start_line": 115,
+        "end_line": 127
+      },
+      "is_async": false,
+      "parameters": [
+        "folder_path",
+        "output_root",
+        "start_ref",
+        "end_ref"
+      ],
+      "depends_on_functions": [
+        "_defaultConvertedSymbolsRoot",
+        "_inRequestedRange",
+        "annotateImageRegions",
+        "detectRelevantRegions"
+      ],
+      "depends_on_external_names": [
+        "analyzeRangeImpl",
+        "cv2",
+        "np",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions.analyzeRange",
+      "suggested_file": "src/imageCompositeConverter_functions/analyzeRange.py"
+    },
+    {
+      "name": "_optionalDependencyBaseDir",
+      "source_range": {
+        "start_line": 130,
+        "end_line": 132
+      },
+      "is_async": false,
+      "parameters": [],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "Path",
+        "__file__"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._optionalDependencyBaseDir",
+      "suggested_file": "src/imageCompositeConverter_functions/_optionalDependencyBaseDir.py"
+    },
+    {
+      "name": "_vendoredSitePackagesDirs",
+      "source_range": {
+        "start_line": 135,
+        "end_line": 176
+      },
+      "is_async": false,
+      "parameters": [],
+      "depends_on_functions": [
+        "_optionalDependencyBaseDir"
+      ],
+      "depends_on_external_names": [
+        "Path",
+        "list",
+        "os",
+        "set",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._vendoredSitePackagesDirs",
+      "suggested_file": "src/imageCompositeConverter_functions/_vendoredSitePackagesDirs.py"
+    },
+    {
+      "name": "_clearPartialModuleImport",
+      "source_range": {
+        "start_line": 179,
+        "end_line": 182
+      },
+      "is_async": false,
+      "parameters": [
+        "module_name"
+      ],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "list",
+        "str",
+        "sys"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._clearPartialModuleImport",
+      "suggested_file": "src/imageCompositeConverter_functions/_clearPartialModuleImport.py"
+    },
+    {
+      "name": "_describeOptionalDependencyError",
+      "source_range": {
+        "start_line": 185,
+        "end_line": 198
+      },
+      "is_async": false,
+      "parameters": [
+        "module_name",
+        "exc",
+        "attempted_paths"
+      ],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "BaseException",
+        "Path",
+        "list",
+        "str",
+        "type"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._describeOptionalDependencyError",
+      "suggested_file": "src/imageCompositeConverter_functions/_describeOptionalDependencyError.py"
+    },
+    {
+      "name": "_loadOptionalModule",
+      "source_range": {
+        "start_line": 201,
+        "end_line": 228
+      },
+      "is_async": false,
+      "parameters": [
+        "module_name"
+      ],
+      "depends_on_functions": [
+        "_clearPartialModuleImport",
+        "_describeOptionalDependencyError",
+        "_vendoredSitePackagesDirs"
+      ],
+      "depends_on_external_names": [
+        "BaseException",
+        "Exception",
+        "OPTIONAL_DEPENDENCY_ERRORS",
+        "Path",
+        "ValueError",
+        "contextlib",
+        "importlib",
+        "list",
+        "str",
+        "sys"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._loadOptionalModule",
+      "suggested_file": "src/imageCompositeConverter_functions/_loadOptionalModule.py"
+    },
+    {
+      "name": "_importWithVendoredFallback",
+      "source_range": {
+        "start_line": 231,
+        "end_line": 255
+      },
+      "is_async": false,
+      "parameters": [
+        "module_name"
+      ],
+      "depends_on_functions": [
+        "_clearPartialModuleImport",
+        "_vendoredSitePackagesDirs"
+      ],
+      "depends_on_external_names": [
+        "BaseException",
+        "Exception",
+        "ValueError",
+        "contextlib",
+        "importlib",
+        "str",
+        "sys"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._importWithVendoredFallback",
+      "suggested_file": "src/imageCompositeConverter_functions/_importWithVendoredFallback.py"
+    },
+    {
+      "name": "_clip",
+      "source_range": {
+        "start_line": 267,
+        "end_line": 273
+      },
+      "is_async": false,
+      "parameters": [
+        "value",
+        "low",
+        "high"
+      ],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "Action",
+        "RuntimeError",
+        "float",
+        "int",
+        "isinstance",
+        "np"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._clip",
+      "suggested_file": "src/imageCompositeConverter_functions/_clip.py"
+    },
+    {
+      "name": "abstand",
+      "source_range": {
+        "start_line": 370,
+        "end_line": 371
+      },
+      "is_async": false,
+      "parameters": [
+        "punkt1",
+        "punkt2"
+      ],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "Punkt",
+        "float",
+        "math"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions.abstand",
+      "suggested_file": "src/imageCompositeConverter_functions/abstand.py"
+    },
+    {
+      "name": "buildOrientedKelle",
+      "source_range": {
+        "start_line": 374,
+        "end_line": 407
+      },
+      "is_async": false,
+      "parameters": [
+        "orientation",
+        "mittelpunkt",
+        "radius",
+        "griff_laenge",
+        "randbreite",
+        "rand_farbe",
+        "hintergrundfarbe"
+      ],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "Griff",
+        "Kelle",
+        "Kreis",
+        "Punkt",
+        "RGBWert",
+        "ValueError",
+        "float",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions.buildOrientedKelle",
+      "suggested_file": "src/imageCompositeConverter_functions/buildOrientedKelle.py"
+    },
+    {
+      "name": "loadGrayscaleImage",
+      "source_range": {
+        "start_line": 491,
+        "end_line": 496
+      },
+      "is_async": false,
+      "parameters": [
+        "path"
+      ],
+      "depends_on_functions": [
+        "_importWithVendoredFallback"
+      ],
+      "depends_on_external_names": [
+        "Path",
+        "int",
+        "list",
+        "range"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions.loadGrayscaleImage",
+      "suggested_file": "src/imageCompositeConverter_functions/loadGrayscaleImage.py"
+    },
+    {
+      "name": "_createDiffImageWithoutCv2",
+      "source_range": {
+        "start_line": 499,
+        "end_line": 549
+      },
+      "is_async": false,
+      "parameters": [
+        "input_path",
+        "svg_content"
+      ],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "Path",
+        "RuntimeError",
+        "abs",
+        "bytearray",
+        "bytes",
+        "fitz",
+        "float",
+        "int",
+        "len",
+        "max",
+        "min",
+        "range",
+        "round",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._createDiffImageWithoutCv2",
+      "suggested_file": "src/imageCompositeConverter_functions/_createDiffImageWithoutCv2.py"
+    },
+    {
+      "name": "_computeOtsuThreshold",
+      "source_range": {
+        "start_line": 552,
+        "end_line": 580
+      },
+      "is_async": false,
+      "parameters": [
+        "grayscale"
+      ],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "int",
+        "list",
+        "range",
+        "sum"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._computeOtsuThreshold",
+      "suggested_file": "src/imageCompositeConverter_functions/_computeOtsuThreshold.py"
+    },
+    {
+      "name": "_adaptiveThreshold",
+      "source_range": {
+        "start_line": 583,
+        "end_line": 595
+      },
+      "is_async": false,
+      "parameters": [
+        "grayscale",
+        "block_size",
+        "c"
+      ],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "int",
+        "len",
+        "list",
+        "max",
+        "min",
+        "range",
+        "sum"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._adaptiveThreshold",
+      "suggested_file": "src/imageCompositeConverter_functions/_adaptiveThreshold.py"
+    },
+    {
+      "name": "loadBinaryImageWithMode",
+      "source_range": {
+        "start_line": 598,
+        "end_line": 608
+      },
+      "is_async": false,
+      "parameters": [
+        "path",
+        "threshold",
+        "mode"
+      ],
+      "depends_on_functions": [
+        "_adaptiveThreshold",
+        "_computeOtsuThreshold",
+        "loadGrayscaleImage"
+      ],
+      "depends_on_external_names": [
+        "Path",
+        "ValueError",
+        "int",
+        "list",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions.loadBinaryImageWithMode",
+      "suggested_file": "src/imageCompositeConverter_functions/loadBinaryImageWithMode.py"
+    },
+    {
+      "name": "renderCandidateMask",
+      "source_range": {
+        "start_line": 611,
+        "end_line": 621
+      },
+      "is_async": false,
+      "parameters": [
+        "candidate",
+        "width",
+        "height"
+      ],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "Candidate",
+        "int",
+        "list",
+        "max",
+        "range"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions.renderCandidateMask",
+      "suggested_file": "src/imageCompositeConverter_functions/renderCandidateMask.py"
+    },
+    {
+      "name": "_iou",
+      "source_range": {
+        "start_line": 624,
+        "end_line": 633
+      },
+      "is_async": false,
+      "parameters": [
+        "a",
+        "b"
+      ],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "float",
+        "int",
+        "len",
+        "list",
+        "range"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._iou",
+      "suggested_file": "src/imageCompositeConverter_functions/_iou.py"
+    },
+    {
+      "name": "scoreCandidate",
+      "source_range": {
+        "start_line": 636,
+        "end_line": 637
+      },
+      "is_async": false,
+      "parameters": [
+        "target",
+        "candidate"
+      ],
+      "depends_on_functions": [
+        "_iou",
+        "renderCandidateMask"
+      ],
+      "depends_on_external_names": [
+        "Candidate",
+        "float",
+        "int",
+        "len",
+        "list"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions.scoreCandidate",
+      "suggested_file": "src/imageCompositeConverter_functions/scoreCandidate.py"
+    },
+    {
+      "name": "randomNeighbor",
+      "source_range": {
+        "start_line": 640,
+        "end_line": 641
+      },
+      "is_async": false,
+      "parameters": [
+        "base",
+        "scale",
+        "rng"
+      ],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "Candidate",
+        "float",
+        "max",
+        "random"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions.randomNeighbor",
+      "suggested_file": "src/imageCompositeConverter_functions/randomNeighbor.py"
+    },
+    {
+      "name": "optimizeElement",
+      "source_range": {
+        "start_line": 644,
+        "end_line": 660
+      },
+      "is_async": false,
+      "parameters": [
+        "target",
+        "init",
+        "max_iter",
+        "plateau_limit",
+        "seed"
+      ],
+      "depends_on_functions": [
+        "randomNeighbor",
+        "scoreCandidate"
+      ],
+      "depends_on_external_names": [
+        "Candidate",
+        "float",
+        "int",
+        "list",
+        "max",
+        "random",
+        "range",
+        "tuple"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions.optimizeElement",
+      "suggested_file": "src/imageCompositeConverter_functions/optimizeElement.py"
+    },
+    {
+      "name": "_grayToHex",
+      "source_range": {
+        "start_line": 663,
+        "end_line": 665
+      },
+      "is_async": false,
+      "parameters": [
+        "v"
+      ],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "float",
+        "int",
+        "max",
+        "min",
+        "round",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._grayToHex",
+      "suggested_file": "src/imageCompositeConverter_functions/_grayToHex.py"
+    },
+    {
+      "name": "estimateStrokeStyle",
+      "source_range": {
+        "start_line": 668,
+        "end_line": 686
+      },
+      "is_async": false,
+      "parameters": [
+        "grayscale",
+        "element",
+        "candidate"
+      ],
+      "depends_on_functions": [
+        "_grayToHex"
+      ],
+      "depends_on_external_names": [
+        "Candidate",
+        "Element",
+        "enumerate",
+        "float",
+        "int",
+        "len",
+        "list",
+        "max",
+        "str",
+        "sum",
+        "tuple"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions.estimateStrokeStyle",
+      "suggested_file": "src/imageCompositeConverter_functions/estimateStrokeStyle.py"
+    },
+    {
+      "name": "candidateToSvg",
+      "source_range": {
+        "start_line": 689,
+        "end_line": 698
+      },
+      "is_async": false,
+      "parameters": [
+        "candidate",
+        "gx",
+        "gy",
+        "fill_color",
+        "stroke_color",
+        "stroke_width"
+      ],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "Candidate",
+        "float",
+        "int",
+        "max",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions.candidateToSvg",
+      "suggested_file": "src/imageCompositeConverter_functions/candidateToSvg.py"
+    },
+    {
+      "name": "decomposeCircleWithStem",
+      "source_range": {
+        "start_line": 701,
+        "end_line": 815
+      },
+      "is_async": false,
+      "parameters": [
+        "grayscale",
+        "element",
+        "candidate"
+      ],
+      "depends_on_functions": [
+        "_grayToHex",
+        "candidateToSvg",
+        "estimateStrokeStyle"
+      ],
+      "depends_on_external_names": [
+        "Candidate",
+        "Element",
+        "abs",
+        "enumerate",
+        "float",
+        "int",
+        "len",
+        "list",
+        "math",
+        "max",
+        "min",
+        "round",
+        "set",
+        "str",
+        "sum",
+        "tuple"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions.decomposeCircleWithStem",
+      "suggested_file": "src/imageCompositeConverter_functions/decomposeCircleWithStem.py"
+    },
+    {
+      "name": "_missingRequiredImageDependencies",
+      "source_range": {
+        "start_line": 817,
+        "end_line": 823
+      },
+      "is_async": false,
+      "parameters": [],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "cv2",
+        "list",
+        "np",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._missingRequiredImageDependencies",
+      "suggested_file": "src/imageCompositeConverter_functions/_missingRequiredImageDependencies.py"
+    },
+    {
+      "name": "_bootstrapRequiredImageDependencies",
+      "source_range": {
+        "start_line": 826,
+        "end_line": 853
+      },
+      "is_async": false,
+      "parameters": [],
+      "depends_on_functions": [
+        "_missingRequiredImageDependencies"
+      ],
+      "depends_on_external_names": [
+        "RuntimeError",
+        "_cv2",
+        "_np",
+        "list",
+        "print",
+        "str",
+        "subprocess",
+        "sys"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._bootstrapRequiredImageDependencies",
+      "suggested_file": "src/imageCompositeConverter_functions/_bootstrapRequiredImageDependencies.py"
+    },
+    {
+      "name": "rgbToHex",
+      "source_range": {
+        "start_line": 856,
+        "end_line": 857
+      },
+      "is_async": false,
+      "parameters": [
+        "rgb"
+      ],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "int",
+        "np",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions.rgbToHex",
+      "suggested_file": "src/imageCompositeConverter_functions/rgbToHex.py"
+    },
+    {
+      "name": "getBaseNameFromFile",
+      "source_range": {
+        "start_line": 860,
+        "end_line": 868
+      },
+      "is_async": false,
+      "parameters": [
+        "filename"
+      ],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "os",
+        "re",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions.getBaseNameFromFile",
+      "suggested_file": "src/imageCompositeConverter_functions/getBaseNameFromFile.py"
+    },
+    {
+      "name": "_loadDescriptionMapping",
+      "source_range": {
+        "start_line": 916,
+        "end_line": 920
+      },
+      "is_async": false,
+      "parameters": [
+        "path"
+      ],
+      "depends_on_functions": [
+        "_loadDescriptionMappingFromCsv",
+        "_loadDescriptionMappingFromXml"
+      ],
+      "depends_on_external_names": [
+        "dict",
+        "os",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._loadDescriptionMapping",
+      "suggested_file": "src/imageCompositeConverter_functions/_loadDescriptionMapping.py"
+    },
+    {
+      "name": "_loadDescriptionMappingFromCsv",
+      "source_range": {
+        "start_line": 923,
+        "end_line": 965
+      },
+      "is_async": false,
+      "parameters": [
+        "path"
+      ],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "DescriptionMappingError",
+        "SourceSpan",
+        "csv",
+        "dict",
+        "enumerate",
+        "len",
+        "max",
+        "next",
+        "open",
+        "os",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._loadDescriptionMappingFromCsv",
+      "suggested_file": "src/imageCompositeConverter_functions/_loadDescriptionMappingFromCsv.py"
+    },
+    {
+      "name": "_loadDescriptionMappingFromXml",
+      "source_range": {
+        "start_line": 968,
+        "end_line": 1054
+      },
+      "is_async": false,
+      "parameters": [
+        "path"
+      ],
+      "depends_on_functions": [
+        "_resolveDescriptionXmlPath",
+        "getBaseNameFromFile"
+      ],
+      "depends_on_external_names": [
+        "DescriptionMappingError",
+        "ET",
+        "SourceSpan",
+        "_extractImageSpecificDescription",
+        "_mergeEntryAndImageDesc",
+        "_registerDescription",
+        "description",
+        "dict",
+        "entry_desc",
+        "image_desc",
+        "os",
+        "re",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._loadDescriptionMappingFromXml",
+      "suggested_file": "src/imageCompositeConverter_functions/_loadDescriptionMappingFromXml.py"
+    },
+    {
+      "name": "_resolveDescriptionXmlPath",
+      "source_range": {
+        "start_line": 1057,
+        "end_line": 1073
+      },
+      "is_async": false,
+      "parameters": [
+        "path"
+      ],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "Path",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._resolveDescriptionXmlPath",
+      "suggested_file": "src/imageCompositeConverter_functions/_resolveDescriptionXmlPath.py"
+    },
+    {
+      "name": "_requiredVendorPackages",
+      "source_range": {
+        "start_line": 1076,
+        "end_line": 1082
+      },
+      "is_async": false,
+      "parameters": [],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "list",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._requiredVendorPackages",
+      "suggested_file": "src/imageCompositeConverter_functions/_requiredVendorPackages.py"
+    },
+    {
+      "name": "buildLinuxVendorInstallCommand",
+      "source_range": {
+        "start_line": 1085,
+        "end_line": 1111
+      },
+      "is_async": false,
+      "parameters": [
+        "vendor_dir",
+        "platform_tag",
+        "python_version"
+      ],
+      "depends_on_functions": [
+        "_requiredVendorPackages"
+      ],
+      "depends_on_external_names": [
+        "list",
+        "str",
+        "sys"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions.buildLinuxVendorInstallCommand",
+      "suggested_file": "src/imageCompositeConverter_functions/buildLinuxVendorInstallCommand.py"
+    },
+    {
+      "name": "_renderSvgToNumpyInprocess",
+      "source_range": {
+        "start_line": 1279,
+        "end_line": 1321
+      },
+      "is_async": false,
+      "parameters": [
+        "svg_string",
+        "size_w",
+        "size_h"
+      ],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "Exception",
+        "cv2",
+        "fitz",
+        "gc",
+        "int",
+        "np",
+        "re",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._renderSvgToNumpyInprocess",
+      "suggested_file": "src/imageCompositeConverter_functions/_renderSvgToNumpyInprocess.py"
+    },
+    {
+      "name": "_renderSvgToNumpyViaSubprocess",
+      "source_range": {
+        "start_line": 1324,
+        "end_line": 1357
+      },
+      "is_async": false,
+      "parameters": [
+        "svg_string",
+        "size_w",
+        "size_h"
+      ],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "Exception",
+        "SVG_RENDER_SUBPROCESS_TIMEOUT_SEC",
+        "base64",
+        "dict",
+        "int",
+        "isinstance",
+        "json",
+        "np",
+        "str",
+        "subprocess",
+        "sys"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._renderSvgToNumpyViaSubprocess",
+      "suggested_file": "src/imageCompositeConverter_functions/_renderSvgToNumpyViaSubprocess.py"
+    },
+    {
+      "name": "_runSvgRenderSubprocessEntrypoint",
+      "source_range": {
+        "start_line": 1360,
+        "end_line": 1381
+      },
+      "is_async": false,
+      "parameters": [],
+      "depends_on_functions": [
+        "_renderSvgToNumpyInprocess"
+      ],
+      "depends_on_external_names": [
+        "Exception",
+        "base64",
+        "int",
+        "json",
+        "str",
+        "sys"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._runSvgRenderSubprocessEntrypoint",
+      "suggested_file": "src/imageCompositeConverter_functions/_runSvgRenderSubprocessEntrypoint.py"
+    },
+    {
+      "name": "_semanticQualityFlags",
+      "source_range": {
+        "start_line": 8127,
+        "end_line": 8164
+      },
+      "is_async": false,
+      "parameters": [
+        "base_name",
+        "validation_logs"
+      ],
+      "depends_on_functions": [
+        "getBaseNameFromFile"
+      ],
+      "depends_on_external_names": [
+        "dict",
+        "float",
+        "item",
+        "len",
+        "list",
+        "max",
+        "re",
+        "sorted",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._semanticQualityFlags",
+      "suggested_file": "src/imageCompositeConverter_functions/_semanticQualityFlags.py"
+    },
+    {
+      "name": "runIterationPipeline",
+      "source_range": {
+        "start_line": 8167,
+        "end_line": 8531
+      },
+      "is_async": false,
+      "parameters": [
+        "img_path",
+        "csv_path",
+        "max_iterations",
+        "svg_out_dir",
+        "diff_out_dir",
+        "reports_out_dir",
+        "debug_ac0811_dir",
+        "debug_element_diff_dir",
+        "badge_validation_rounds"
+      ],
+      "depends_on_functions": [
+        "_semanticAuditRecord",
+        "_semanticQualityFlags",
+        "getBaseNameFromFile"
+      ],
+      "depends_on_external_names": [
+        "Action",
+        "Perception",
+        "Reflection",
+        "RuntimeError",
+        "_paramsSnapshot",
+        "_recordRenderFailure",
+        "_writeAttemptArtifacts",
+        "_writeValidationLog",
+        "abs",
+        "bool",
+        "copy",
+        "cv2",
+        "dict",
+        "diff_img",
+        "enumerate",
+        "failed",
+        "fitz",
+        "float",
+        "int",
+        "isinstance",
+        "json",
+        "list",
+        "max",
+        "min",
+        "np",
+        "object",
+        "open",
+        "os",
+        "params_snapshot",
+        "print",
+        "reason",
+        "rendered_img",
+        "snapshot",
+        "str",
+        "time"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions.runIterationPipeline",
+      "suggested_file": "src/imageCompositeConverter_functions/runIterationPipeline.py"
+    },
+    {
+      "name": "_extractRefParts",
+      "source_range": {
+        "start_line": 8534,
+        "end_line": 8538
+      },
+      "is_async": false,
+      "parameters": [
+        "name"
+      ],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "int",
+        "re",
+        "str",
+        "tuple"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._extractRefParts",
+      "suggested_file": "src/imageCompositeConverter_functions/_extractRefParts.py"
+    },
+    {
+      "name": "_normalizeRangeToken",
+      "source_range": {
+        "start_line": 8541,
+        "end_line": 8543
+      },
+      "is_async": false,
+      "parameters": [
+        "value"
+      ],
+      "depends_on_functions": [
+        "getBaseNameFromFile"
+      ],
+      "depends_on_external_names": [
+        "re",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._normalizeRangeToken",
+      "suggested_file": "src/imageCompositeConverter_functions/_normalizeRangeToken.py"
+    },
+    {
+      "name": "_normalizeExplicitRangeToken",
+      "source_range": {
+        "start_line": 8546,
+        "end_line": 8548
+      },
+      "is_async": false,
+      "parameters": [
+        "value"
+      ],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "os",
+        "re",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._normalizeExplicitRangeToken",
+      "suggested_file": "src/imageCompositeConverter_functions/_normalizeExplicitRangeToken.py"
+    },
+    {
+      "name": "_isExplicitSizeVariantToken",
+      "source_range": {
+        "start_line": 8551,
+        "end_line": 8552
+      },
+      "is_async": false,
+      "parameters": [
+        "token"
+      ],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "bool",
+        "re",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._isExplicitSizeVariantToken",
+      "suggested_file": "src/imageCompositeConverter_functions/_isExplicitSizeVariantToken.py"
+    },
+    {
+      "name": "_compactRangeToken",
+      "source_range": {
+        "start_line": 8555,
+        "end_line": 8561
+      },
+      "is_async": false,
+      "parameters": [
+        "value"
+      ],
+      "depends_on_functions": [
+        "_normalizeRangeToken"
+      ],
+      "depends_on_external_names": [
+        "re",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._compactRangeToken",
+      "suggested_file": "src/imageCompositeConverter_functions/_compactRangeToken.py"
+    },
+    {
+      "name": "_sharedPartialRangeToken",
+      "source_range": {
+        "start_line": 8564,
+        "end_line": 8585
+      },
+      "is_async": false,
+      "parameters": [
+        "start_ref",
+        "end_ref"
+      ],
+      "depends_on_functions": [
+        "_compactRangeToken",
+        "_normalizeRangeToken"
+      ],
+      "depends_on_external_names": [
+        "len",
+        "min",
+        "range",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._sharedPartialRangeToken",
+      "suggested_file": "src/imageCompositeConverter_functions/_sharedPartialRangeToken.py"
+    },
+    {
+      "name": "_matchesPartialRangeToken",
+      "source_range": {
+        "start_line": 8588,
+        "end_line": 8602
+      },
+      "is_async": false,
+      "parameters": [
+        "filename",
+        "start_ref",
+        "end_ref"
+      ],
+      "depends_on_functions": [
+        "_normalizeRangeToken",
+        "_sharedPartialRangeToken",
+        "getBaseNameFromFile"
+      ],
+      "depends_on_external_names": [
+        "bool",
+        "len",
+        "os",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._matchesPartialRangeToken",
+      "suggested_file": "src/imageCompositeConverter_functions/_matchesPartialRangeToken.py"
+    },
+    {
+      "name": "_extractSymbolFamily",
+      "source_range": {
+        "start_line": 8605,
+        "end_line": 8610
+      },
+      "is_async": false,
+      "parameters": [
+        "name"
+      ],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "re",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._extractSymbolFamily",
+      "suggested_file": "src/imageCompositeConverter_functions/_extractSymbolFamily.py"
+    },
+    {
+      "name": "_matchesExactPrefixFilter",
+      "source_range": {
+        "start_line": 8613,
+        "end_line": 8631
+      },
+      "is_async": false,
+      "parameters": [
+        "filename",
+        "start_ref",
+        "end_ref"
+      ],
+      "depends_on_functions": [
+        "_isExplicitSizeVariantToken",
+        "_normalizeExplicitRangeToken",
+        "_normalizeRangeToken",
+        "getBaseNameFromFile"
+      ],
+      "depends_on_external_names": [
+        "bool",
+        "os",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._matchesExactPrefixFilter",
+      "suggested_file": "src/imageCompositeConverter_functions/_matchesExactPrefixFilter.py"
+    },
+    {
+      "name": "_inRequestedRange",
+      "source_range": {
+        "start_line": 8634,
+        "end_line": 8685
+      },
+      "is_async": false,
+      "parameters": [
+        "filename",
+        "start_ref",
+        "end_ref"
+      ],
+      "depends_on_functions": [
+        "_extractRefParts",
+        "_isExplicitSizeVariantToken",
+        "_matchesExactPrefixFilter",
+        "_matchesPartialRangeToken",
+        "_normalizeExplicitRangeToken",
+        "_normalizeRangeToken",
+        "getBaseNameFromFile"
+      ],
+      "depends_on_external_names": [
+        "bool",
+        "os",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._inRequestedRange",
+      "suggested_file": "src/imageCompositeConverter_functions/_inRequestedRange.py"
+    },
+    {
+      "name": "_conversionRandom",
+      "source_range": {
+        "start_line": 8690,
+        "end_line": 8698
+      },
+      "is_async": false,
+      "parameters": [],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "ValueError",
+        "int",
+        "os",
+        "random",
+        "str",
+        "time"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._conversionRandom",
+      "suggested_file": "src/imageCompositeConverter_functions/_conversionRandom.py"
+    },
+    {
+      "name": "_defaultConvertedSymbolsRoot",
+      "source_range": {
+        "start_line": 8700,
+        "end_line": 8702
+      },
+      "is_async": false,
+      "parameters": [],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "__file__",
+        "os",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._defaultConvertedSymbolsRoot",
+      "suggested_file": "src/imageCompositeConverter_functions/_defaultConvertedSymbolsRoot.py"
+    },
+    {
+      "name": "_convertedSvgOutputDir",
+      "source_range": {
+        "start_line": 8705,
+        "end_line": 8706
+      },
+      "is_async": false,
+      "parameters": [
+        "output_root"
+      ],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "os",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._convertedSvgOutputDir",
+      "suggested_file": "src/imageCompositeConverter_functions/_convertedSvgOutputDir.py"
+    },
+    {
+      "name": "_readValidationLogDetails",
+      "source_range": {
+        "start_line": 8709,
+        "end_line": 8725
+      },
+      "is_async": false,
+      "parameters": [
+        "log_path"
+      ],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "OSError",
+        "dict",
+        "open",
+        "os",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._readValidationLogDetails",
+      "suggested_file": "src/imageCompositeConverter_functions/_readValidationLogDetails.py"
+    },
+    {
+      "name": "_writeBatchFailureSummary",
+      "source_range": {
+        "start_line": 8728,
+        "end_line": 8740
+      },
+      "is_async": false,
+      "parameters": [
+        "reports_out_dir",
+        "failures"
+      ],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "csv",
+        "dict",
+        "list",
+        "open",
+        "os",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._writeBatchFailureSummary",
+      "suggested_file": "src/imageCompositeConverter_functions/_writeBatchFailureSummary.py"
+    },
+    {
+      "name": "_collectDescriptionFragments",
+      "source_range": {
+        "start_line": 8744,
+        "end_line": 8770
+      },
+      "is_async": false,
+      "parameters": [
+        "raw_desc",
+        "base_name",
+        "img_filename"
+      ],
+      "depends_on_functions": [
+        "getBaseNameFromFile"
+      ],
+      "depends_on_external_names": [
+        "dict",
+        "list",
+        "os",
+        "set",
+        "str",
+        "tuple"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._collectDescriptionFragments",
+      "suggested_file": "src/imageCompositeConverter_functions/_collectDescriptionFragments.py"
+    },
+    {
+      "name": "_semanticAuditRecord",
+      "source_range": {
+        "start_line": 8773,
+        "end_line": 8802
+      },
+      "is_async": false,
+      "parameters": [
+        "base_name",
+        "filename",
+        "description_fragments",
+        "semantic_elements",
+        "status",
+        "mismatch_reasons",
+        "semantic_priority_order",
+        "semantic_conflicts",
+        "semantic_sources"
+      ],
+      "depends_on_functions": [
+        "getBaseNameFromFile"
+      ],
+      "depends_on_external_names": [
+        "dict",
+        "list",
+        "object",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._semanticAuditRecord",
+      "suggested_file": "src/imageCompositeConverter_functions/_semanticAuditRecord.py"
+    },
+    {
+      "name": "_writeSemanticAuditReport",
+      "source_range": {
+        "start_line": 8805,
+        "end_line": 8845
+      },
+      "is_async": false,
+      "parameters": [
+        "reports_out_dir",
+        "audit_rows"
+      ],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "csv",
+        "dict",
+        "json",
+        "list",
+        "object",
+        "open",
+        "os",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._writeSemanticAuditReport",
+      "suggested_file": "src/imageCompositeConverter_functions/_writeSemanticAuditReport.py"
+    },
+    {
+      "name": "_diffOutputDir",
+      "source_range": {
+        "start_line": 8848,
+        "end_line": 8849
+      },
+      "is_async": false,
+      "parameters": [
+        "output_root"
+      ],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "os",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._diffOutputDir",
+      "suggested_file": "src/imageCompositeConverter_functions/_diffOutputDir.py"
+    },
+    {
+      "name": "_reportsOutputDir",
+      "source_range": {
+        "start_line": 8852,
+        "end_line": 8853
+      },
+      "is_async": false,
+      "parameters": [
+        "output_root"
+      ],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "os",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._reportsOutputDir",
+      "suggested_file": "src/imageCompositeConverter_functions/_reportsOutputDir.py"
+    },
+    {
+      "name": "_isSemanticTemplateVariant",
+      "source_range": {
+        "start_line": 8856,
+        "end_line": 8865
+      },
+      "is_async": false,
+      "parameters": [
+        "base_name",
+        "params"
+      ],
+      "depends_on_functions": [
+        "getBaseNameFromFile"
+      ],
+      "depends_on_external_names": [
+        "bool",
+        "dict",
+        "isinstance",
+        "object",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._isSemanticTemplateVariant",
+      "suggested_file": "src/imageCompositeConverter_functions/_isSemanticTemplateVariant.py"
+    },
+    {
+      "name": "_loadExistingConversionRows",
+      "source_range": {
+        "start_line": 8868,
+        "end_line": 8946
+      },
+      "is_async": false,
+      "parameters": [
+        "output_root",
+        "folder_path"
+      ],
+      "depends_on_functions": [
+        "_convertedSvgOutputDir",
+        "_isSemanticTemplateVariant",
+        "_readSvgGeometry",
+        "_reportsOutputDir",
+        "_sniffRasterSize",
+        "getBaseNameFromFile"
+      ],
+      "depends_on_external_names": [
+        "Exception",
+        "OSError",
+        "Path",
+        "ValueError",
+        "csv",
+        "dict",
+        "float",
+        "int",
+        "list",
+        "math",
+        "object",
+        "os",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._loadExistingConversionRows",
+      "suggested_file": "src/imageCompositeConverter_functions/_loadExistingConversionRows.py"
+    },
+    {
+      "name": "_sniffRasterSize",
+      "source_range": {
+        "start_line": 8949,
+        "end_line": 8999
+      },
+      "is_async": false,
+      "parameters": [
+        "path"
+      ],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "Path",
+        "ValueError",
+        "abs",
+        "int",
+        "len",
+        "max",
+        "os",
+        "str",
+        "struct",
+        "tuple"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._sniffRasterSize",
+      "suggested_file": "src/imageCompositeConverter_functions/_sniffRasterSize.py"
+    },
+    {
+      "name": "_svgHrefMimeType",
+      "source_range": {
+        "start_line": 9002,
+        "end_line": 9010
+      },
+      "is_async": false,
+      "parameters": [
+        "path"
+      ],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "Path",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._svgHrefMimeType",
+      "suggested_file": "src/imageCompositeConverter_functions/_svgHrefMimeType.py"
+    },
+    {
+      "name": "_renderEmbeddedRasterSvg",
+      "source_range": {
+        "start_line": 9013,
+        "end_line": 9023
+      },
+      "is_async": false,
+      "parameters": [
+        "input_path"
+      ],
+      "depends_on_functions": [
+        "_sniffRasterSize",
+        "_svgHrefMimeType"
+      ],
+      "depends_on_external_names": [
+        "Path",
+        "base64",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._renderEmbeddedRasterSvg",
+      "suggested_file": "src/imageCompositeConverter_functions/_renderEmbeddedRasterSvg.py"
+    },
+    {
+      "name": "_qualityConfigPath",
+      "source_range": {
+        "start_line": 9026,
+        "end_line": 9027
+      },
+      "is_async": false,
+      "parameters": [
+        "reports_out_dir"
+      ],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "os",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._qualityConfigPath",
+      "suggested_file": "src/imageCompositeConverter_functions/_qualityConfigPath.py"
+    },
+    {
+      "name": "_loadQualityConfig",
+      "source_range": {
+        "start_line": 9030,
+        "end_line": 9039
+      },
+      "is_async": false,
+      "parameters": [
+        "reports_out_dir"
+      ],
+      "depends_on_functions": [
+        "_qualityConfigPath"
+      ],
+      "depends_on_external_names": [
+        "OSError",
+        "dict",
+        "isinstance",
+        "json",
+        "object",
+        "open",
+        "os",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._loadQualityConfig",
+      "suggested_file": "src/imageCompositeConverter_functions/_loadQualityConfig.py"
+    },
+    {
+      "name": "_writeQualityConfig",
+      "source_range": {
+        "start_line": 9042,
+        "end_line": 9062
+      },
+      "is_async": false,
+      "parameters": [
+        "reports_out_dir",
+        "allowed_error_per_pixel",
+        "skipped_variants",
+        "source"
+      ],
+      "depends_on_functions": [
+        "_qualityConfigPath"
+      ],
+      "depends_on_external_names": [
+        "float",
+        "json",
+        "list",
+        "math",
+        "max",
+        "open",
+        "set",
+        "sorted",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._writeQualityConfig",
+      "suggested_file": "src/imageCompositeConverter_functions/_writeQualityConfig.py"
+    },
+    {
+      "name": "_qualitySortKey",
+      "source_range": {
+        "start_line": 9065,
+        "end_line": 9069
+      },
+      "is_async": false,
+      "parameters": [
+        "row"
+      ],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "dict",
+        "float",
+        "math",
+        "object",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._qualitySortKey",
+      "suggested_file": "src/imageCompositeConverter_functions/_qualitySortKey.py"
+    },
+    {
+      "name": "_computeSuccessfulConversionsErrorThreshold",
+      "source_range": {
+        "start_line": 9074,
+        "end_line": 9102
+      },
+      "is_async": false,
+      "parameters": [
+        "rows",
+        "successful_variants"
+      ],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "SUCCESSFUL_CONVERSIONS",
+        "dict",
+        "float",
+        "len",
+        "list",
+        "math",
+        "object",
+        "statistics",
+        "str",
+        "tuple"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._computeSuccessfulConversionsErrorThreshold",
+      "suggested_file": "src/imageCompositeConverter_functions/_computeSuccessfulConversionsErrorThreshold.py"
+    },
+    {
+      "name": "_selectMiddleLowerTercile",
+      "source_range": {
+        "start_line": 9105,
+        "end_line": 9111
+      },
+      "is_async": false,
+      "parameters": [
+        "rows"
+      ],
+      "depends_on_functions": [
+        "_qualitySortKey"
+      ],
+      "depends_on_external_names": [
+        "dict",
+        "len",
+        "list",
+        "max",
+        "object",
+        "sorted",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._selectMiddleLowerTercile",
+      "suggested_file": "src/imageCompositeConverter_functions/_selectMiddleLowerTercile.py"
+    },
+    {
+      "name": "_selectOpenQualityCases",
+      "source_range": {
+        "start_line": 9114,
+        "end_line": 9138
+      },
+      "is_async": false,
+      "parameters": [
+        "rows",
+        "allowed_error_per_pixel",
+        "skip_variants"
+      ],
+      "depends_on_functions": [
+        "_qualitySortKey"
+      ],
+      "depends_on_external_names": [
+        "dict",
+        "float",
+        "list",
+        "math",
+        "object",
+        "set",
+        "sorted",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._selectOpenQualityCases",
+      "suggested_file": "src/imageCompositeConverter_functions/_selectOpenQualityCases.py"
+    },
+    {
+      "name": "_iterationStrategyForPass",
+      "source_range": {
+        "start_line": 9141,
+        "end_line": 9151
+      },
+      "is_async": false,
+      "parameters": [
+        "pass_idx",
+        "base_iterations"
+      ],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "int",
+        "max",
+        "tuple"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._iterationStrategyForPass",
+      "suggested_file": "src/imageCompositeConverter_functions/_iterationStrategyForPass.py"
+    },
+    {
+      "name": "_adaptiveIterationBudgetForQualityRow",
+      "source_range": {
+        "start_line": 9154,
+        "end_line": 9182
+      },
+      "is_async": false,
+      "parameters": [
+        "row",
+        "planned_budget"
+      ],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "TypeError",
+        "ValueError",
+        "dict",
+        "int",
+        "max",
+        "object",
+        "round",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._adaptiveIterationBudgetForQualityRow",
+      "suggested_file": "src/imageCompositeConverter_functions/_adaptiveIterationBudgetForQualityRow.py"
+    },
+    {
+      "name": "_writeQualityPassReport",
+      "source_range": {
+        "start_line": 9185,
+        "end_line": 9219
+      },
+      "is_async": false,
+      "parameters": [
+        "reports_out_dir",
+        "pass_rows"
+      ],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "bool",
+        "csv",
+        "dict",
+        "float",
+        "list",
+        "object",
+        "open",
+        "os",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._writeQualityPassReport",
+      "suggested_file": "src/imageCompositeConverter_functions/_writeQualityPassReport.py"
+    },
+    {
+      "name": "_evaluateQualityPassCandidate",
+      "source_range": {
+        "start_line": 9222,
+        "end_line": 9243
+      },
+      "is_async": false,
+      "parameters": [
+        "old_row",
+        "new_row"
+      ],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "bool",
+        "dict",
+        "float",
+        "object",
+        "str",
+        "tuple"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._evaluateQualityPassCandidate",
+      "suggested_file": "src/imageCompositeConverter_functions/_evaluateQualityPassCandidate.py"
+    },
+    {
+      "name": "_extractSvgInner",
+      "source_range": {
+        "start_line": 9246,
+        "end_line": 9250
+      },
+      "is_async": false,
+      "parameters": [
+        "svg_text"
+      ],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "re",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._extractSvgInner",
+      "suggested_file": "src/imageCompositeConverter_functions/_extractSvgInner.py"
+    },
+    {
+      "name": "_buildTransformedSvgFromTemplate",
+      "source_range": {
+        "start_line": 9253,
+        "end_line": 9285
+      },
+      "is_async": false,
+      "parameters": [
+        "template_svg_text",
+        "target_w",
+        "target_h",
+        "rotation_deg",
+        "scale"
+      ],
+      "depends_on_functions": [
+        "_extractSvgInner"
+      ],
+      "depends_on_external_names": [
+        "float",
+        "int",
+        "m",
+        "re",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._buildTransformedSvgFromTemplate",
+      "suggested_file": "src/imageCompositeConverter_functions/_buildTransformedSvgFromTemplate.py"
+    },
+    {
+      "name": "_templateTransferScaleCandidates",
+      "source_range": {
+        "start_line": 9288,
+        "end_line": 9309
+      },
+      "is_async": false,
+      "parameters": [
+        "base_scale"
+      ],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "float",
+        "list",
+        "math",
+        "max",
+        "min",
+        "round",
+        "set"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._templateTransferScaleCandidates",
+      "suggested_file": "src/imageCompositeConverter_functions/_templateTransferScaleCandidates.py"
+    },
+    {
+      "name": "_estimateTemplateTransferScale",
+      "source_range": {
+        "start_line": 9312,
+        "end_line": 9352
+      },
+      "is_async": false,
+      "parameters": [
+        "img_orig",
+        "donor_svg_text",
+        "target_w",
+        "target_h",
+        "rotation_deg"
+      ],
+      "depends_on_functions": [
+        "_buildTransformedSvgFromTemplate"
+      ],
+      "depends_on_external_names": [
+        "Action",
+        "float",
+        "int",
+        "math",
+        "max",
+        "min",
+        "np",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._estimateTemplateTransferScale",
+      "suggested_file": "src/imageCompositeConverter_functions/_estimateTemplateTransferScale.py"
+    },
+    {
+      "name": "_templateTransferTransformCandidates",
+      "source_range": {
+        "start_line": 9355,
+        "end_line": 9377
+      },
+      "is_async": false,
+      "parameters": [
+        "target_variant",
+        "donor_variant",
+        "estimated_scale_by_rotation"
+      ],
+      "depends_on_functions": [
+        "_templateTransferScaleCandidates"
+      ],
+      "depends_on_external_names": [
+        "dict",
+        "float",
+        "int",
+        "list",
+        "round",
+        "set",
+        "str",
+        "tuple"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._templateTransferTransformCandidates",
+      "suggested_file": "src/imageCompositeConverter_functions/_templateTransferTransformCandidates.py"
+    },
+    {
+      "name": "_rankTemplateTransferDonors",
+      "source_range": {
+        "start_line": 9380,
+        "end_line": 9412
+      },
+      "is_async": false,
+      "parameters": [
+        "target_row",
+        "donor_rows"
+      ],
+      "depends_on_functions": [
+        "_maxSignatureDelta",
+        "_normalizedGeometrySignature"
+      ],
+      "depends_on_external_names": [
+        "dict",
+        "float",
+        "int",
+        "isinstance",
+        "item",
+        "list",
+        "object",
+        "str",
+        "tuple"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._rankTemplateTransferDonors",
+      "suggested_file": "src/imageCompositeConverter_functions/_rankTemplateTransferDonors.py"
+    },
+    {
+      "name": "_templateTransferDonorFamilyCompatible",
+      "source_range": {
+        "start_line": 9415,
+        "end_line": 9431
+      },
+      "is_async": false,
+      "parameters": [
+        "target_base",
+        "donor_base",
+        "documented_alias_refs"
+      ],
+      "depends_on_functions": [
+        "_extractSymbolFamily"
+      ],
+      "depends_on_external_names": [
+        "bool",
+        "set",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._templateTransferDonorFamilyCompatible",
+      "suggested_file": "src/imageCompositeConverter_functions/_templateTransferDonorFamilyCompatible.py"
+    },
+    {
+      "name": "_semanticTransferRotations",
+      "source_range": {
+        "start_line": 9436,
+        "end_line": 9450
+      },
+      "is_async": false,
+      "parameters": [
+        "target_params",
+        "donor_params"
+      ],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "bool",
+        "dict",
+        "int",
+        "object",
+        "str",
+        "tuple"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._semanticTransferRotations",
+      "suggested_file": "src/imageCompositeConverter_functions/_semanticTransferRotations.py"
+    },
+    {
+      "name": "_semanticTransferIsCompatible",
+      "source_range": {
+        "start_line": 9457,
+        "end_line": 9496
+      },
+      "is_async": false,
+      "parameters": [
+        "target_params",
+        "donor_params"
+      ],
+      "depends_on_functions": [
+        "_connectorArmDirection",
+        "_connectorStemDirection"
+      ],
+      "depends_on_external_names": [
+        "bool",
+        "dict",
+        "object",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._semanticTransferIsCompatible",
+      "suggested_file": "src/imageCompositeConverter_functions/_semanticTransferIsCompatible.py"
+    },
+    {
+      "name": "_connectorArmDirection",
+      "source_range": {
+        "start_line": 9499,
+        "end_line": 9514
+      },
+      "is_async": false,
+      "parameters": [
+        "params"
+      ],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "abs",
+        "dict",
+        "float",
+        "int",
+        "object",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._connectorArmDirection",
+      "suggested_file": "src/imageCompositeConverter_functions/_connectorArmDirection.py"
+    },
+    {
+      "name": "_connectorStemDirection",
+      "source_range": {
+        "start_line": 9517,
+        "end_line": 9532
+      },
+      "is_async": false,
+      "parameters": [
+        "params"
+      ],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "abs",
+        "dict",
+        "float",
+        "int",
+        "object",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._connectorStemDirection",
+      "suggested_file": "src/imageCompositeConverter_functions/_connectorStemDirection.py"
+    },
+    {
+      "name": "_semanticTransferScaleCandidates",
+      "source_range": {
+        "start_line": 9535,
+        "end_line": 9548
+      },
+      "is_async": false,
+      "parameters": [
+        "base_scale"
+      ],
+      "depends_on_functions": [
+        "_templateTransferScaleCandidates"
+      ],
+      "depends_on_external_names": [
+        "float",
+        "list",
+        "max",
+        "min",
+        "round",
+        "set"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._semanticTransferScaleCandidates",
+      "suggested_file": "src/imageCompositeConverter_functions/_semanticTransferScaleCandidates.py"
+    },
+    {
+      "name": "_semanticTransferBadgeParams",
+      "source_range": {
+        "start_line": 9550,
+        "end_line": 9628
+      },
+      "is_async": false,
+      "parameters": [
+        "donor_params",
+        "target_params",
+        "target_w",
+        "target_h",
+        "rotation_deg",
+        "scale"
+      ],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "Action",
+        "_rotScalePoint",
+        "bool",
+        "dict",
+        "float",
+        "int",
+        "math",
+        "max",
+        "min",
+        "object",
+        "round",
+        "str",
+        "tuple",
+        "x",
+        "y"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._semanticTransferBadgeParams",
+      "suggested_file": "src/imageCompositeConverter_functions/_semanticTransferBadgeParams.py"
+    },
+    {
+      "name": "_tryTemplateTransfer",
+      "source_range": {
+        "start_line": 9630,
+        "end_line": 9819
+      },
+      "is_async": false,
+      "parameters": [
+        "target_row",
+        "donor_rows",
+        "folder_path",
+        "svg_out_dir",
+        "diff_out_dir",
+        "rng"
+      ],
+      "depends_on_functions": [
+        "_buildTransformedSvgFromTemplate",
+        "_estimateTemplateTransferScale",
+        "_rankTemplateTransferDonors",
+        "_readSvgGeometry",
+        "_semanticTransferBadgeParams",
+        "_semanticTransferIsCompatible",
+        "_semanticTransferRotations",
+        "_semanticTransferScaleCandidates",
+        "_templateTransferDonorFamilyCompatible",
+        "_templateTransferTransformCandidates"
+      ],
+      "depends_on_external_names": [
+        "Action",
+        "Exception",
+        "OSError",
+        "cv2",
+        "dict",
+        "float",
+        "int",
+        "isinstance",
+        "len",
+        "list",
+        "max",
+        "min",
+        "object",
+        "open",
+        "os",
+        "random",
+        "set",
+        "str",
+        "tuple"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._tryTemplateTransfer",
+      "suggested_file": "src/imageCompositeConverter_functions/_tryTemplateTransfer.py"
+    },
+    {
+      "name": "convertRange",
+      "source_range": {
+        "start_line": 9822,
+        "end_line": 10235
+      },
+      "is_async": false,
+      "parameters": [
+        "folder_path",
+        "csv_path",
+        "iterations",
+        "start_ref",
+        "end_ref",
+        "debug_ac0811_dir",
+        "debug_element_diff_dir",
+        "output_root",
+        "selected_variants"
+      ],
+      "depends_on_functions": [
+        "_adaptiveIterationBudgetForQualityRow",
+        "_computeSuccessfulConversionsErrorThreshold",
+        "_conversionRandom",
+        "_convertedSvgOutputDir",
+        "_createDiffImageWithoutCv2",
+        "_defaultConvertedSymbolsRoot",
+        "_diffOutputDir",
+        "_evaluateQualityPassCandidate",
+        "_harmonizeSemanticSizeVariants",
+        "_inRequestedRange",
+        "_iterationStrategyForPass",
+        "_loadExistingConversionRows",
+        "_loadQualityConfig",
+        "_qualitySortKey",
+        "_readValidationLogDetails",
+        "_renderEmbeddedRasterSvg",
+        "_reportsOutputDir",
+        "_selectMiddleLowerTercile",
+        "_selectOpenQualityCases",
+        "_tryTemplateTransfer",
+        "_writeAc08RegressionManifest",
+        "_writeAc08SuccessCriteriaReport",
+        "_writeAc08WeakFamilyStatusReport",
+        "_writeBatchFailureSummary",
+        "_writePixelDelta2Ranking",
+        "_writeQualityConfig",
+        "_writeQualityPassReport",
+        "_writeSemanticAuditReport",
+        "getBaseNameFromFile",
+        "runIterationPipeline",
+        "updateSuccessfulConversionsManifestWithMetrics"
+      ],
+      "depends_on_external_names": [
+        "Action",
+        "Exception",
+        "OSError",
+        "SUCCESSFUL_CONVERSIONS_MANIFEST",
+        "TypeError",
+        "ValueError",
+        "_convertOne",
+        "bool",
+        "csv",
+        "cv2",
+        "dict",
+        "fitz",
+        "float",
+        "generateConversionOverviews",
+        "int",
+        "len",
+        "list",
+        "math",
+        "max",
+        "np",
+        "object",
+        "open",
+        "os",
+        "print",
+        "range",
+        "set",
+        "sorted",
+        "str",
+        "tuple",
+        "type"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions.convertRange",
+      "suggested_file": "src/imageCompositeConverter_functions/convertRange.py"
+    },
+    {
+      "name": "_readSvgGeometry",
+      "source_range": {
+        "start_line": 10238,
+        "end_line": 10367
+      },
+      "is_async": false,
+      "parameters": [
+        "svg_path"
+      ],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "Action",
+        "_grayFromHex",
+        "any",
+        "bool",
+        "color",
+        "dict",
+        "fallback",
+        "float",
+        "int",
+        "open",
+        "os",
+        "re",
+        "round",
+        "str",
+        "tuple"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._readSvgGeometry",
+      "suggested_file": "src/imageCompositeConverter_functions/_readSvgGeometry.py"
+    },
+    {
+      "name": "_normalizedGeometrySignature",
+      "source_range": {
+        "start_line": 10370,
+        "end_line": 10393
+      },
+      "is_async": false,
+      "parameters": [
+        "w",
+        "h",
+        "params"
+      ],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "dict",
+        "float",
+        "int",
+        "max",
+        "min",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._normalizedGeometrySignature",
+      "suggested_file": "src/imageCompositeConverter_functions/_normalizedGeometrySignature.py"
+    },
+    {
+      "name": "_maxSignatureDelta",
+      "source_range": {
+        "start_line": 10396,
+        "end_line": 10400
+      },
+      "is_async": false,
+      "parameters": [
+        "sig_a",
+        "sig_b"
+      ],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "abs",
+        "dict",
+        "float",
+        "max",
+        "set",
+        "sorted",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._maxSignatureDelta",
+      "suggested_file": "src/imageCompositeConverter_functions/_maxSignatureDelta.py"
+    },
+    {
+      "name": "_needsLargeCircleOverflowGuard",
+      "source_range": {
+        "start_line": 10403,
+        "end_line": 10427
+      },
+      "is_async": false,
+      "parameters": [
+        "params"
+      ],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "bool",
+        "dict",
+        "float",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._needsLargeCircleOverflowGuard",
+      "suggested_file": "src/imageCompositeConverter_functions/_needsLargeCircleOverflowGuard.py"
+    },
+    {
+      "name": "_scaleBadgeParams",
+      "source_range": {
+        "start_line": 10430,
+        "end_line": 10534
+      },
+      "is_async": false,
+      "parameters": [
+        "anchor",
+        "anchor_w",
+        "anchor_h",
+        "target_w",
+        "target_h",
+        "target_variant"
+      ],
+      "depends_on_functions": [
+        "_needsLargeCircleOverflowGuard"
+      ],
+      "depends_on_external_names": [
+        "Action",
+        "dict",
+        "float",
+        "int",
+        "max",
+        "min",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._scaleBadgeParams",
+      "suggested_file": "src/imageCompositeConverter_functions/_scaleBadgeParams.py"
+    },
+    {
+      "name": "_harmonizationAnchorPriority",
+      "source_range": {
+        "start_line": 10537,
+        "end_line": 10544
+      },
+      "is_async": false,
+      "parameters": [
+        "suffix",
+        "prefer_large"
+      ],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "bool",
+        "int",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._harmonizationAnchorPriority",
+      "suggested_file": "src/imageCompositeConverter_functions/_harmonizationAnchorPriority.py"
+    },
+    {
+      "name": "_clipGray",
+      "source_range": {
+        "start_line": 10547,
+        "end_line": 10548
+      },
+      "is_async": false,
+      "parameters": [
+        "value"
+      ],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "float",
+        "int",
+        "max",
+        "min",
+        "round"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._clipGray",
+      "suggested_file": "src/imageCompositeConverter_functions/_clipGray.py"
+    },
+    {
+      "name": "_familyHarmonizedBadgeColors",
+      "source_range": {
+        "start_line": 10551,
+        "end_line": 10598
+      },
+      "is_async": false,
+      "parameters": [
+        "variant_rows"
+      ],
+      "depends_on_functions": [
+        "_clipGray"
+      ],
+      "depends_on_external_names": [
+        "TypeError",
+        "ValueError",
+        "abs",
+        "dict",
+        "float",
+        "int",
+        "len",
+        "list",
+        "max",
+        "min",
+        "object",
+        "str",
+        "sum"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._familyHarmonizedBadgeColors",
+      "suggested_file": "src/imageCompositeConverter_functions/_familyHarmonizedBadgeColors.py"
+    },
+    {
+      "name": "_harmonizeSemanticSizeVariants",
+      "source_range": {
+        "start_line": 10601,
+        "end_line": 10729
+      },
+      "is_async": false,
+      "parameters": [
+        "results",
+        "folder_path",
+        "svg_out_dir",
+        "reports_out_dir"
+      ],
+      "depends_on_functions": [
+        "_familyHarmonizedBadgeColors",
+        "_harmonizationAnchorPriority",
+        "_maxSignatureDelta",
+        "_normalizedGeometrySignature",
+        "_readSvgGeometry",
+        "_scaleBadgeParams"
+      ],
+      "depends_on_external_names": [
+        "Action",
+        "_anchorRank",
+        "any",
+        "bool",
+        "cv2",
+        "dict",
+        "float",
+        "int",
+        "len",
+        "list",
+        "max",
+        "min",
+        "object",
+        "open",
+        "os",
+        "range",
+        "sorted",
+        "str",
+        "tuple"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._harmonizeSemanticSizeVariants",
+      "suggested_file": "src/imageCompositeConverter_functions/_harmonizeSemanticSizeVariants.py"
+    },
+    {
+      "name": "_writeAc08RegressionManifest",
+      "source_range": {
+        "start_line": 10732,
+        "end_line": 10770
+      },
+      "is_async": false,
+      "parameters": [
+        "reports_out_dir",
+        "folder_path",
+        "csv_path",
+        "iterations",
+        "selected_variants"
+      ],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "AC08_REGRESSION_CASES",
+        "AC08_REGRESSION_SET_NAME",
+        "AC08_REGRESSION_VARIANTS",
+        "csv",
+        "int",
+        "len",
+        "list",
+        "open",
+        "os",
+        "sorted",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._writeAc08RegressionManifest",
+      "suggested_file": "src/imageCompositeConverter_functions/_writeAc08RegressionManifest.py"
+    },
+    {
+      "name": "_summarizePreviousGoodAc08Variants",
+      "source_range": {
+        "start_line": 10773,
+        "end_line": 10796
+      },
+      "is_async": false,
+      "parameters": [
+        "reports_out_dir"
+      ],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "AC08_PREVIOUSLY_GOOD_VARIANTS",
+        "dict",
+        "list",
+        "object",
+        "open",
+        "os",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._summarizePreviousGoodAc08Variants",
+      "suggested_file": "src/imageCompositeConverter_functions/_summarizePreviousGoodAc08Variants.py"
+    },
+    {
+      "name": "_writeAc08SuccessCriteriaReport",
+      "source_range": {
+        "start_line": 10799,
+        "end_line": 10968
+      },
+      "is_async": false,
+      "parameters": [
+        "reports_out_dir",
+        "selected_variants"
+      ],
+      "depends_on_functions": [
+        "_summarizePreviousGoodAc08Variants"
+      ],
+      "depends_on_external_names": [
+        "AC08_REGRESSION_SET_NAME",
+        "AC08_REGRESSION_VARIANTS",
+        "csv",
+        "dict",
+        "float",
+        "int",
+        "len",
+        "list",
+        "math",
+        "object",
+        "open",
+        "os",
+        "re",
+        "sorted",
+        "str",
+        "sum"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._writeAc08SuccessCriteriaReport",
+      "suggested_file": "src/imageCompositeConverter_functions/_writeAc08SuccessCriteriaReport.py"
+    },
+    {
+      "name": "_writeAc08WeakFamilyStatusReport",
+      "source_range": {
+        "start_line": 10971,
+        "end_line": 11090
+      },
+      "is_async": false,
+      "parameters": [
+        "reports_out_dir",
+        "selected_variants",
+        "ranking_threshold"
+      ],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "AC08_MITIGATION_STATUS",
+        "AC08_REGRESSION_CASES",
+        "ValueError",
+        "any",
+        "csv",
+        "dict",
+        "float",
+        "len",
+        "list",
+        "math",
+        "open",
+        "os",
+        "sorted",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._writeAc08WeakFamilyStatusReport",
+      "suggested_file": "src/imageCompositeConverter_functions/_writeAc08WeakFamilyStatusReport.py"
+    },
+    {
+      "name": "_writePixelDelta2Ranking",
+      "source_range": {
+        "start_line": 11093,
+        "end_line": 11143
+      },
+      "is_async": false,
+      "parameters": [
+        "folder_path",
+        "svg_out_dir",
+        "reports_out_dir",
+        "threshold"
+      ],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "Action",
+        "csv",
+        "cv2",
+        "dict",
+        "float",
+        "len",
+        "list",
+        "math",
+        "open",
+        "os",
+        "sorted",
+        "str",
+        "sum"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._writePixelDelta2Ranking",
+      "suggested_file": "src/imageCompositeConverter_functions/_writePixelDelta2Ranking.py"
+    },
+    {
+      "name": "_loadIterationLogRows",
+      "source_range": {
+        "start_line": 11146,
+        "end_line": 11160
+      },
+      "is_async": false,
+      "parameters": [
+        "reports_out_dir"
+      ],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "csv",
+        "dict",
+        "open",
+        "os",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._loadIterationLogRows",
+      "suggested_file": "src/imageCompositeConverter_functions/_loadIterationLogRows.py"
+    },
+    {
+      "name": "_findImagePathByVariant",
+      "source_range": {
+        "start_line": 11163,
+        "end_line": 11169
+      },
+      "is_async": false,
+      "parameters": [
+        "folder_path",
+        "variant"
+      ],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "os",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._findImagePathByVariant",
+      "suggested_file": "src/imageCompositeConverter_functions/_findImagePathByVariant.py"
+    },
+    {
+      "name": "collectSuccessfulConversionQualityMetrics",
+      "source_range": {
+        "start_line": 11172,
+        "end_line": 11252
+      },
+      "is_async": false,
+      "parameters": [
+        "folder_path",
+        "svg_out_dir",
+        "reports_out_dir",
+        "successful_variants"
+      ],
+      "depends_on_functions": [
+        "_findImagePathByVariant",
+        "_loadIterationLogRows",
+        "_readValidationLogDetails"
+      ],
+      "depends_on_external_names": [
+        "Action",
+        "RuntimeError",
+        "SUCCESSFUL_CONVERSIONS",
+        "ValueError",
+        "cv2",
+        "dict",
+        "float",
+        "int",
+        "item",
+        "list",
+        "np",
+        "object",
+        "open",
+        "os",
+        "set",
+        "str",
+        "tuple"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions.collectSuccessfulConversionQualityMetrics",
+      "suggested_file": "src/imageCompositeConverter_functions/collectSuccessfulConversionQualityMetrics.py"
+    },
+    {
+      "name": "_successfulConversionMetricsAvailable",
+      "source_range": {
+        "start_line": 11255,
+        "end_line": 11273
+      },
+      "is_async": false,
+      "parameters": [
+        "metrics"
+      ],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "bool",
+        "dict",
+        "float",
+        "int",
+        "math",
+        "object",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._successfulConversionMetricsAvailable",
+      "suggested_file": "src/imageCompositeConverter_functions/_successfulConversionMetricsAvailable.py"
+    },
+    {
+      "name": "_parseSuccessfulConversionManifestLine",
+      "source_range": {
+        "start_line": 11276,
+        "end_line": 11303
+      },
+      "is_async": false,
+      "parameters": [
+        "raw_line"
+      ],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "ValueError",
+        "contextlib",
+        "dict",
+        "float",
+        "int",
+        "object",
+        "str",
+        "tuple"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._parseSuccessfulConversionManifestLine",
+      "suggested_file": "src/imageCompositeConverter_functions/_parseSuccessfulConversionManifestLine.py"
+    },
+    {
+      "name": "_readSuccessfulConversionManifestMetrics",
+      "source_range": {
+        "start_line": 11306,
+        "end_line": 11316
+      },
+      "is_async": false,
+      "parameters": [
+        "manifest_path"
+      ],
+      "depends_on_functions": [
+        "_parseSuccessfulConversionManifestLine"
+      ],
+      "depends_on_external_names": [
+        "Path",
+        "dict",
+        "object",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._readSuccessfulConversionManifestMetrics",
+      "suggested_file": "src/imageCompositeConverter_functions/_readSuccessfulConversionManifestMetrics.py"
+    },
+    {
+      "name": "_successfulConversionSnapshotDir",
+      "source_range": {
+        "start_line": 11319,
+        "end_line": 11321
+      },
+      "is_async": false,
+      "parameters": [
+        "reports_out_dir"
+      ],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "Path",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._successfulConversionSnapshotDir",
+      "suggested_file": "src/imageCompositeConverter_functions/_successfulConversionSnapshotDir.py"
+    },
+    {
+      "name": "_successfulConversionSnapshotPaths",
+      "source_range": {
+        "start_line": 11324,
+        "end_line": 11331
+      },
+      "is_async": false,
+      "parameters": [
+        "reports_out_dir",
+        "variant"
+      ],
+      "depends_on_functions": [
+        "_successfulConversionSnapshotDir"
+      ],
+      "depends_on_external_names": [
+        "Path",
+        "dict",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._successfulConversionSnapshotPaths",
+      "suggested_file": "src/imageCompositeConverter_functions/_successfulConversionSnapshotPaths.py"
+    },
+    {
+      "name": "_restoreSuccessfulConversionSnapshot",
+      "source_range": {
+        "start_line": 11334,
+        "end_line": 11350
+      },
+      "is_async": false,
+      "parameters": [
+        "variant",
+        "svg_out_dir",
+        "reports_out_dir"
+      ],
+      "depends_on_functions": [
+        "_successfulConversionSnapshotPaths"
+      ],
+      "depends_on_external_names": [
+        "Path",
+        "bool",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._restoreSuccessfulConversionSnapshot",
+      "suggested_file": "src/imageCompositeConverter_functions/_restoreSuccessfulConversionSnapshot.py"
+    },
+    {
+      "name": "_storeSuccessfulConversionSnapshot",
+      "source_range": {
+        "start_line": 11353,
+        "end_line": 11367
+      },
+      "is_async": false,
+      "parameters": [
+        "variant",
+        "metrics",
+        "svg_out_dir",
+        "reports_out_dir"
+      ],
+      "depends_on_functions": [
+        "_successfulConversionSnapshotPaths"
+      ],
+      "depends_on_external_names": [
+        "Path",
+        "dict",
+        "json",
+        "object",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._storeSuccessfulConversionSnapshot",
+      "suggested_file": "src/imageCompositeConverter_functions/_storeSuccessfulConversionSnapshot.py"
+    },
+    {
+      "name": "_isSuccessfulConversionCandidateBetter",
+      "source_range": {
+        "start_line": 11370,
+        "end_line": 11391
+      },
+      "is_async": false,
+      "parameters": [
+        "previous_metrics",
+        "candidate_metrics"
+      ],
+      "depends_on_functions": [
+        "_evaluateQualityPassCandidate",
+        "_successfulConversionMetricsAvailable"
+      ],
+      "depends_on_external_names": [
+        "bool",
+        "dict",
+        "object",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._isSuccessfulConversionCandidateBetter",
+      "suggested_file": "src/imageCompositeConverter_functions/_isSuccessfulConversionCandidateBetter.py"
+    },
+    {
+      "name": "_mergeSuccessfulConversionMetrics",
+      "source_range": {
+        "start_line": 11394,
+        "end_line": 11405
+      },
+      "is_async": false,
+      "parameters": [
+        "baseline",
+        "override"
+      ],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "dict",
+        "object",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._mergeSuccessfulConversionMetrics",
+      "suggested_file": "src/imageCompositeConverter_functions/_mergeSuccessfulConversionMetrics.py"
+    },
+    {
+      "name": "_formatSuccessfulConversionManifestLine",
+      "source_range": {
+        "start_line": 11408,
+        "end_line": 11446
+      },
+      "is_async": false,
+      "parameters": [
+        "existing_line",
+        "metrics"
+      ],
+      "depends_on_functions": [
+        "_successfulConversionMetricsAvailable"
+      ],
+      "depends_on_external_names": [
+        "dict",
+        "float",
+        "int",
+        "math",
+        "object",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._formatSuccessfulConversionManifestLine",
+      "suggested_file": "src/imageCompositeConverter_functions/_formatSuccessfulConversionManifestLine.py"
+    },
+    {
+      "name": "_latestFailedConversionManifestEntry",
+      "source_range": {
+        "start_line": 11449,
+        "end_line": 11479
+      },
+      "is_async": false,
+      "parameters": [
+        "reports_out_dir"
+      ],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "OSError",
+        "Path",
+        "csv",
+        "dict",
+        "object",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._latestFailedConversionManifestEntry",
+      "suggested_file": "src/imageCompositeConverter_functions/_latestFailedConversionManifestEntry.py"
+    },
+    {
+      "name": "updateSuccessfulConversionsManifestWithMetrics",
+      "source_range": {
+        "start_line": 11482,
+        "end_line": 11576
+      },
+      "is_async": false,
+      "parameters": [
+        "folder_path",
+        "svg_out_dir",
+        "reports_out_dir",
+        "manifest_path",
+        "successful_variants"
+      ],
+      "depends_on_functions": [
+        "_formatSuccessfulConversionManifestLine",
+        "_isSuccessfulConversionCandidateBetter",
+        "_latestFailedConversionManifestEntry",
+        "_mergeSuccessfulConversionMetrics",
+        "_readSuccessfulConversionManifestMetrics",
+        "_restoreSuccessfulConversionSnapshot",
+        "_sortedSuccessfulConversionMetricsRows",
+        "_storeSuccessfulConversionSnapshot",
+        "collectSuccessfulConversionQualityMetrics"
+      ],
+      "depends_on_external_names": [
+        "FileNotFoundError",
+        "Path",
+        "_loadSuccessfulConversions",
+        "dict",
+        "list",
+        "object",
+        "set",
+        "sorted",
+        "str",
+        "tuple"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions.updateSuccessfulConversionsManifestWithMetrics",
+      "suggested_file": "src/imageCompositeConverter_functions/updateSuccessfulConversionsManifestWithMetrics.py"
+    },
+    {
+      "name": "_sortedSuccessfulConversionMetricsRows",
+      "source_range": {
+        "start_line": 11578,
+        "end_line": 11582
+      },
+      "is_async": false,
+      "parameters": [
+        "metrics"
+      ],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "dict",
+        "list",
+        "object",
+        "row",
+        "sorted",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._sortedSuccessfulConversionMetricsRows",
+      "suggested_file": "src/imageCompositeConverter_functions/_sortedSuccessfulConversionMetricsRows.py"
+    },
+    {
+      "name": "_writeSuccessfulConversionCsvTable",
+      "source_range": {
+        "start_line": 11585,
+        "end_line": 11610
+      },
+      "is_async": false,
+      "parameters": [
+        "csv_path",
+        "metrics"
+      ],
+      "depends_on_functions": [
+        "_sortedSuccessfulConversionMetricsRows"
+      ],
+      "depends_on_external_names": [
+        "bool",
+        "csv",
+        "dict",
+        "float",
+        "int",
+        "list",
+        "math",
+        "object",
+        "open",
+        "os",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._writeSuccessfulConversionCsvTable",
+      "suggested_file": "src/imageCompositeConverter_functions/_writeSuccessfulConversionCsvTable.py"
+    },
+    {
+      "name": "writeSuccessfulConversionQualityReport",
+      "source_range": {
+        "start_line": 11613,
+        "end_line": 11643
+      },
+      "is_async": false,
+      "parameters": [
+        "folder_path",
+        "svg_out_dir",
+        "reports_out_dir",
+        "successful_variants",
+        "output_name"
+      ],
+      "depends_on_functions": [
+        "_sortedSuccessfulConversionMetricsRows",
+        "_writeSuccessfulConversionCsvTable",
+        "updateSuccessfulConversionsManifestWithMetrics"
+      ],
+      "depends_on_external_names": [
+        "dict",
+        "len",
+        "list",
+        "object",
+        "open",
+        "os",
+        "str",
+        "tuple"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions.writeSuccessfulConversionQualityReport",
+      "suggested_file": "src/imageCompositeConverter_functions/writeSuccessfulConversionQualityReport.py"
+    },
+    {
+      "name": "parseArgs",
+      "source_range": {
+        "start_line": 11646,
+        "end_line": 11789
+      },
+      "is_async": false,
+      "parameters": [
+        "argv"
+      ],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "AC08_REGRESSION_SET_NAME",
+        "AC08_REGRESSION_VARIANTS",
+        "SVG_RENDER_SUBPROCESS_TIMEOUT_SEC",
+        "argparse",
+        "delattr",
+        "float",
+        "int",
+        "list",
+        "os",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions.parseArgs",
+      "suggested_file": "src/imageCompositeConverter_functions/parseArgs.py"
+    },
+    {
+      "name": "_optionalLogCapture",
+      "source_range": {
+        "start_line": 11809,
+        "end_line": 11822
+      },
+      "is_async": false,
+      "parameters": [
+        "log_path"
+      ],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "Path",
+        "_TeeTextIO",
+        "contextlib",
+        "print",
+        "str",
+        "sys"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._optionalLogCapture",
+      "suggested_file": "src/imageCompositeConverter_functions/_optionalLogCapture.py"
+    },
+    {
+      "name": "_autoDetectCsvPath",
+      "source_range": {
+        "start_line": 11825,
+        "end_line": 11853
+      },
+      "is_async": false,
+      "parameters": [
+        "folder_path"
+      ],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "any",
+        "list",
+        "os",
+        "sorted",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._autoDetectCsvPath",
+      "suggested_file": "src/imageCompositeConverter_functions/_autoDetectCsvPath.py"
+    },
+    {
+      "name": "_resolveCliCsvAndOutput",
+      "source_range": {
+        "start_line": 11856,
+        "end_line": 11875
+      },
+      "is_async": false,
+      "parameters": [
+        "args"
+      ],
+      "depends_on_functions": [
+        "_autoDetectCsvPath",
+        "_resolveDescriptionXmlPath"
+      ],
+      "depends_on_external_names": [
+        "argparse",
+        "str",
+        "tuple"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._resolveCliCsvAndOutput",
+      "suggested_file": "src/imageCompositeConverter_functions/_resolveCliCsvAndOutput.py"
+    },
+    {
+      "name": "_formatUserDiagnostic",
+      "source_range": {
+        "start_line": 11878,
+        "end_line": 11884
+      },
+      "is_async": false,
+      "parameters": [
+        "exc"
+      ],
+      "depends_on_functions": [],
+      "depends_on_external_names": [
+        "BaseException",
+        "DescriptionMappingError",
+        "isinstance",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._formatUserDiagnostic",
+      "suggested_file": "src/imageCompositeConverter_functions/_formatUserDiagnostic.py"
+    },
+    {
+      "name": "_promptInteractiveRange",
+      "source_range": {
+        "start_line": 11887,
+        "end_line": 11903
+      },
+      "is_async": false,
+      "parameters": [
+        "args"
+      ],
+      "depends_on_functions": [
+        "_extractRefParts",
+        "_sharedPartialRangeToken"
+      ],
+      "depends_on_external_names": [
+        "argparse",
+        "input",
+        "print",
+        "str",
+        "tuple"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions._promptInteractiveRange",
+      "suggested_file": "src/imageCompositeConverter_functions/_promptInteractiveRange.py"
+    },
+    {
+      "name": "main",
+      "source_range": {
+        "start_line": 11906,
+        "end_line": 11990
+      },
+      "is_async": false,
+      "parameters": [
+        "argv"
+      ],
+      "depends_on_functions": [
+        "_bootstrapRequiredImageDependencies",
+        "_formatUserDiagnostic",
+        "_loadDescriptionMapping",
+        "_optionalLogCapture",
+        "_promptInteractiveRange",
+        "_resolveCliCsvAndOutput",
+        "_runSvgRenderSubprocessEntrypoint",
+        "analyzeRange",
+        "buildLinuxVendorInstallCommand",
+        "convertRange",
+        "parseArgs"
+      ],
+      "depends_on_external_names": [
+        "AC08_REGRESSION_SET_NAME",
+        "AC08_REGRESSION_VARIANTS",
+        "DescriptionMappingError",
+        "RuntimeError",
+        "bool",
+        "float",
+        "getattr",
+        "int",
+        "list",
+        "max",
+        "os",
+        "print",
+        "set",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions.main",
+      "suggested_file": "src/imageCompositeConverter_functions/main.py"
+    },
+    {
+      "name": "convertImage",
+      "source_range": {
+        "start_line": 11998,
+        "end_line": 12019
+      },
+      "is_async": false,
+      "parameters": [
+        "input_path",
+        "output_path",
+        "max_iter",
+        "plateau_limit",
+        "seed"
+      ],
+      "depends_on_functions": [
+        "_renderEmbeddedRasterSvg",
+        "annotateImageRegions",
+        "detectRelevantRegions"
+      ],
+      "depends_on_external_names": [
+        "FileNotFoundError",
+        "Path",
+        "cv2",
+        "int",
+        "json",
+        "np",
+        "str"
+      ],
+      "suggested_module": "src.imageCompositeConverter_functions.convertImage",
+      "suggested_file": "src/imageCompositeConverter_functions/convertImage.py"
+    },
+    {
+      "name": "convertImageVariants",
+      "source_range": {
+        "start_line": 12022,
+        "end_line": 12024
+      },
+      "is_async": false,
+      "parameters": [
+        "args",
+        "kwargs"
+      ],
+      "depends_on_functions": [
+        "convertRange"
+      ],
+      "depends_on_external_names": [],
+      "suggested_module": "src.imageCompositeConverter_functions.convertImageVariants",
+      "suggested_file": "src/imageCompositeConverter_functions/convertImageVariants.py"
+    }
+  ]
+}
