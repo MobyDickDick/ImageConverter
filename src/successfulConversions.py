@@ -117,7 +117,7 @@ SUCCESSFUL_CONVERSIONS = _loadSuccessfulConversions()
 AC08_PREVIOUSLY_GOOD_VARIANTS = tuple(variant for variant in SUCCESSFUL_CONVERSIONS if variant.startswith("AC08"))
 
 
-def _build_ac08_regression_cases() -> tuple[dict[str, str], ...]:
+def _buildAc08RegressionCases() -> tuple[dict[str, str], ...]:
     stable_good_cases = [
         {
             "variant": variant,
@@ -132,7 +132,7 @@ def _build_ac08_regression_cases() -> tuple[dict[str, str], ...]:
     return tuple(stable_good_cases + list(_AC08_BASE_REGRESSION_CASES))
 
 
-AC08_REGRESSION_CASES = _build_ac08_regression_cases()
+AC08_REGRESSION_CASES = _buildAc08RegressionCases()
 AC08_REGRESSION_SET_NAME = f"ac08_core_{len(AC08_REGRESSION_CASES)}"
 AC08_REGRESSION_VARIANTS = tuple(case["variant"] for case in AC08_REGRESSION_CASES)
 
