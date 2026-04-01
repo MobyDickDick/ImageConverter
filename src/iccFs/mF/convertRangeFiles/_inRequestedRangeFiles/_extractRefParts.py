@@ -1,3 +1,6 @@
+import re
+
+
 def _extractRefParts(name: str) -> tuple[str, int] | None:
     match = re.match(r"^([A-Z]{2,3})(\d{3,4})$", name.upper())
     if not match:

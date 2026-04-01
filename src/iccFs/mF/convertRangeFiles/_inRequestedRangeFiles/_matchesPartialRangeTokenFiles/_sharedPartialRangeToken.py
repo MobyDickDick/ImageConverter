@@ -1,3 +1,7 @@
+from ._normalizeRangeToken import _normalizeRangeToken
+from ._sharedPartialRangeTokenFiles._compactRangeToken import _compactRangeToken
+
+
 def _sharedPartialRangeToken(start_ref: str, end_ref: str) -> str:
     start_token = _normalizeRangeToken(start_ref)
     end_token = _normalizeRangeToken(end_ref)
@@ -16,7 +20,7 @@ def _sharedPartialRangeToken(start_ref: str, end_ref: str) -> str:
         max_len = min(len(left), len(right))
         for length in range(max_len, 2, -1):
             for idx in range(0, len(left) - length + 1):
-                candidate = left[idx: idx + length]
+                candidate = left[idx : idx + length]
                 if candidate in right:
                     return candidate
     return ""

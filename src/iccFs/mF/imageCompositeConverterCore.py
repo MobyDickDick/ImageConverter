@@ -37,6 +37,7 @@ if __package__ in {None, ""}:
     if str(repo_root) not in sys.path:
         sys.path.insert(0, str(repo_root))
 
+from src.iccFs.optionalDependencyBaseDir import optionalDependencyBaseDir
 from src.iccFs.mF.overviewTiles import generateConversionOverviews
 from src.iccFs.mF.imageCompositeConverterRegions import (
     ANNOTATION_COLORS,
@@ -45,6 +46,8 @@ from src.iccFs.mF.imageCompositeConverterRegions import (
     annotateImageRegionsImpl,
     detectRelevantRegionsImpl,
 )
+from src.iccFs.mF.convertRangeFiles._inRequestedRange import _inRequestedRange
+from src.iccFs.mF.convertRangeFiles._inRequestedRangeFiles.getBaseNameFromFile import getBaseNameFromFile
 from src.iccFs.mF.successfulConversions import (
     AC08_MITIGATION_STATUS,
     AC08_PREVIOUSLY_GOOD_VARIANTS,
@@ -130,11 +133,7 @@ def annotateImageRegions(img, regions: list[dict[str, object]]):
     return annotateImageRegionsImpl(img, regions, cv2_module=cv2)
 
 
-
-
-def _optional_dependency_base_dir() -> Path:
-    """Return the repository root used for vendored dependency discovery."""
-    return Path(__file__).resolve().parents[2]
+_optional_dependency_base_dir = optionalDependencyBaseDir
 
 
 def _vendored_site_packages_dirs() -> list[Path]:
@@ -834,15 +833,6 @@ def rgbToHex(rgb: np.ndarray) -> str:
     return "#{:02x}{:02x}{:02x}".format(int(rgb[0]), int(rgb[1]), int(rgb[2]))
 
 
-def getBaseNameFromFile(filename: str) -> str:
-    name = os.path.splitext(filename)[0]
-    name = re.sub(r"(-\d+)$", "", name)
-    while True:
-        prev = name
-        name = re.sub(r"_([1-9]|L|M|S|[1-9]S|W|X)$", "", name, flags=re.IGNORECASE)
-        if name == prev:
-            break
-    return name
 
 
 @dataclass
@@ -8502,66 +8492,14 @@ def runIterationPipeline(
     return base, desc, params, best_iter, best_error
 
 
-def _extractRefParts(name: str) -> tuple[str, int] | None:
-    match = re.match(r"^([A-Z]{2,3})(\d{3,4})$", name.upper())
-    if not match:
-        return None
-    return match.group(1), int(match.group(2))
 
 
-def _normalizeRangeToken(value: str) -> str:
-    base = getBaseNameFromFile(str(value or "").upper())
-    return re.sub(r"[^A-Z0-9]", "", base)
 
 
-def _compactRangeToken(value: str) -> str:
-    token = _normalizeRangeToken(value)
-    match = re.match(r"^([A-Z]+)(\d+)$", token)
-    if not match:
-        return token
-    letters, digits = match.groups()
-    return f"{letters[0]}{digits}"
 
 
-def _sharedPartialRangeToken(start_ref: str, end_ref: str) -> str:
-    start_token = _normalizeRangeToken(start_ref)
-    end_token = _normalizeRangeToken(end_ref)
-    compact_start = _compactRangeToken(start_ref)
-    compact_end = _compactRangeToken(end_ref)
-    if not start_token or not end_token:
-        return ""
-    for left, right in ((start_token, end_token), (compact_start, compact_end)):
-        if left and left == right:
-            return left
-        if left and left in right:
-            return left
-        if right and right in left:
-            return right
-
-        max_len = min(len(left), len(right))
-        for length in range(max_len, 2, -1):
-            for idx in range(0, len(left) - length + 1):
-                candidate = left[idx: idx + length]
-                if candidate in right:
-                    return candidate
-    return ""
 
 
-def _matchesPartialRangeToken(filename: str, start_ref: str, end_ref: str) -> bool:
-    token = _sharedPartialRangeToken(start_ref, end_ref)
-    if not token:
-        return False
-    stem = _normalizeRangeToken(getBaseNameFromFile(os.path.splitext(filename)[0]))
-    if not stem:
-        return False
-    if token in stem:
-        return True
-
-    pos = 0
-    for char in stem:
-        if pos < len(token) and char == token[pos]:
-            pos += 1
-    return pos == len(token)
 
 
 def _extractSymbolFamily(name: str) -> str | None:
@@ -8572,57 +8510,8 @@ def _extractSymbolFamily(name: str) -> str | None:
     return match.group(1)
 
 
-def _matchesExactPrefixFilter(filename: str, start_ref: str, end_ref: str) -> bool:
-    start_token = _normalizeRangeToken(start_ref)
-    end_token = _normalizeRangeToken(end_ref)
-    if not start_token or start_token != end_token:
-        return False
-    stem = _normalizeRangeToken(getBaseNameFromFile(os.path.splitext(filename)[0]))
-    if not stem:
-        return False
-    return stem.startswith(start_token)
 
 
-def _inRequestedRange(filename: str, start_ref: str, end_ref: str) -> bool:
-    stem = getBaseNameFromFile(os.path.splitext(filename)[0]).upper()
-    stem_parts = _extractRefParts(stem)
-    start_parts = _extractRefParts(start_ref)
-    end_parts = _extractRefParts(end_ref)
-
-    # Identical start/end filters should also work as a prefix selector so an
-    # input like AC081..AC081 includes AC0814_L, AC0813_M, etc.
-    if _matchesExactPrefixFilter(filename, start_ref, end_ref):
-        return True
-
-    # If no parseable range bounds are provided, fall back to a shared partial
-    # token filter. This keeps interactive batches small, e.g. AC08..A08 -> A08*.
-    if start_parts is None and end_parts is None:
-        return _matchesPartialRangeToken(filename, start_ref, end_ref) if (start_ref or end_ref) else True
-
-    # Files that do not follow the usual XX0000 / XXX0000 naming scheme should
-    # only pass through broad whole-folder spans, not exact family-specific
-    # filters like AC0811..AC0811.
-    if stem_parts is None:
-        if start_parts is not None and end_parts is not None:
-            start_key = start_parts
-            end_key = end_parts
-            if start_key > end_key:
-                start_key, end_key = end_key, start_key
-            return start_key[0] != end_key[0]
-        return False
-
-    # Support one-sided range filters if only one boundary can be parsed.
-    if start_parts is None:
-        return stem_parts <= end_parts  # type: ignore[operator]
-    if end_parts is None:
-        return start_parts <= stem_parts
-
-    start_key = start_parts
-    end_key = end_parts
-    if start_key > end_key:
-        start_key, end_key = end_key, start_key
-
-    return start_key <= stem_parts <= end_key
 
 
 
