@@ -3,7 +3,6 @@
 Ported from the user-provided prototype and exposed as a Python helper module
 for direct CLI and module-based execution.
 """
-
 from __future__ import annotations
 
 import argparse
@@ -58,6 +57,19 @@ from src.iccFs.mF.successfulConversions import (
     SUCCESSFUL_CONVERSIONS_MANIFEST,
     _load_successful_conversions,
 )
+from src.iccFs.mF.convertRangeFiles._adaptiveIterationBudgetForQualityRow import _adaptiveIterationBudgetForQualityRow
+from src.iccFs.mF.convertRangeFiles._evaluateQualityPassCandidate import _evaluateQualityPassCandidate
+from src.iccFs.mF.convertRangeFiles._harmonizeSemanticSizeVariantsFiles._familyHarmonizedBadgeColorsFiles._clipGray import _clipGray
+from src.iccFs.mF.convertRangeFiles._harmonizeSemanticSizeVariantsFiles._maxSignatureDelta import _maxSignatureDelta
+from src.iccFs.mF.convertRangeFiles._harmonizeSemanticSizeVariantsFiles._normalizedGeometrySignature import _normalizedGeometrySignature
+from src.iccFs.mF.convertRangeFiles._harmonizeSemanticSizeVariantsFiles._scaleBadgeParamsFiles._needsLargeCircleOverflowGuard import _needsLargeCircleOverflowGuard
+from src.iccFs.mF.convertRangeFiles._iterationStrategyForPass import _iterationStrategyForPass
+from src.iccFs.mF.convertRangeFiles._tryTemplateTransferFiles._semanticTransferIsCompatibleFiles._connectorArmDirection import _connectorArmDirection
+from src.iccFs.mF.convertRangeFiles._tryTemplateTransferFiles._semanticTransferIsCompatibleFiles._connectorStemDirection import _connectorStemDirection
+from src.iccFs.mF.convertRangeFiles._tryTemplateTransferFiles._semanticTransferRotations import _semanticTransferRotations
+from src.iccFs.mF.convertRangeFiles.updateSuccessfulConversionsManifestWithMetricsFiles._mergeSuccessfulConversionMetrics import _mergeSuccessfulConversionMetrics
+from src.iccFs.mF.convertRangeFiles.updateSuccessfulConversionsManifestWithMetricsFiles._sortedSuccessfulConversionMetricsRows import _sortedSuccessfulConversionMetricsRows
+from src.iccFs.mF.buildLinuxVendorInstallCommandFiles._requiredVendorPackages import _requiredVendorPackages
 
 # Keep regression variant list deterministic and duplicate-free for batch
 # selection/tests even when upstream manifests accidentally repeat entries.
@@ -1035,13 +1047,6 @@ def _resolveDescriptionXmlPath(path: str) -> str | None:
     return None
 
 
-def _requiredVendorPackages() -> list[str]:
-    return [
-        "numpy",
-        "opencv-python-headless",
-        "Pillow",
-        "PyMuPDF",
-    ]
 
 
 
@@ -8967,48 +8972,8 @@ def _selectOpenQualityCases(
     return sorted(open_rows, key=_quality_sort_key, reverse=True)
 
 
-def _iterationStrategyForPass(pass_idx: int, base_iterations: int) -> tuple[int, int]:
-    """Adaptive per-pass search budget for unresolved quality cases."""
-    p = max(1, int(pass_idx))
-    base = max(1, int(base_iterations))
-    phase = (p - 1) % 3
-
-    if phase == 0:
-        return base + p, 6 + p
-    if phase == 1:
-        return base + 24 + (p * 2), 7 + p
-    return base + 48 + (p * 3), 8 + p
 
 
-def _adaptiveIterationBudgetForQualityRow(row: dict[str, object], planned_budget: int) -> int:
-    """Tune per-row iteration budget using convergence/plateau quality signals.
-
-    Heuristic goals:
-    - plateau reached clearly before budget end -> reduce budget next pass
-    - max-iterations hit or best-iter near budget end -> increase budget
-    """
-    budget = max(1, int(planned_budget))
-    convergence = str(row.get("convergence", "") or "").strip().lower()
-    best_iter_raw = row.get("best_iter", 0)
-    try:
-        best_iter = max(0, int(best_iter_raw))
-    except (TypeError, ValueError):
-        best_iter = 0
-
-    usage_ratio = (best_iter / budget) if budget > 0 else 0.0
-
-    if convergence == "plateau":
-        if usage_ratio <= 0.35:
-            return max(1, int(round(budget * 0.60)))
-        if usage_ratio <= 0.55:
-            return max(1, int(round(budget * 0.80)))
-        return budget
-
-    if convergence == "max_iterations" or usage_ratio >= 0.95:
-        return max(1, int(round(budget * 1.35)))
-    if usage_ratio >= 0.80:
-        return max(1, int(round(budget * 1.15)))
-    return budget
 
 
 def _writeQualityPassReport(
@@ -9048,28 +9013,6 @@ def _writeQualityPassReport(
             ])
 
 
-def _evaluateQualityPassCandidate(
-    old_row: dict[str, object],
-    new_row: dict[str, object],
-) -> tuple[bool, str, float, float, float, float]:
-    """Return whether a quality-pass candidate should replace the previous result.
-
-    The acceptance rule mirrors AC08 task 1.1: keep the new candidate only when
-    at least one core quality metric improves (`error_per_pixel` or
-    `mean_delta2`). The caller also receives the normalized metrics so reporting
-    can use one consistent decision path for stochastic re-runs and fallback
-    template transfers.
-    """
-
-    prev_error_pp = float(old_row.get("error_per_pixel", float("inf")))
-    new_error_pp = float(new_row.get("error_per_pixel", float("inf")))
-    prev_mean_delta2 = float(old_row.get("mean_delta2", float("inf")))
-    new_mean_delta2 = float(new_row.get("mean_delta2", float("inf")))
-    error_improved = new_error_pp + 1e-9 < prev_error_pp
-    delta2_improved = new_mean_delta2 + 1e-6 < prev_mean_delta2
-    improved = error_improved or delta2_improved
-    decision = "accepted_improvement" if improved else "rejected_regression"
-    return improved, decision, prev_error_pp, new_error_pp, prev_mean_delta2, new_mean_delta2
 
 
 def _extractSvgInner(svg_text: str) -> str:
@@ -9262,21 +9205,6 @@ def _templateTransferDonorFamilyCompatible(
 
 
 
-def _semanticTransferRotations(target_params: dict[str, object], donor_params: dict[str, object]) -> tuple[int, ...]:
-    """Rotation candidates for semantic transfer while preserving symbol semantics."""
-    has_text = bool(target_params.get("draw_text", False) or donor_params.get("draw_text", False))
-    has_connector = bool(
-        target_params.get("arm_enabled", False)
-        or target_params.get("stem_enabled", False)
-        or donor_params.get("arm_enabled", False)
-        or donor_params.get("stem_enabled", False)
-    )
-    if has_text or has_connector:
-        # Directional semantic badges (e.g. AC0812 left arm) encode orientation in
-        # geometry. Rotating donor templates can improve pixel error but flips the
-        # meaning of connector-side symbols. Keep transfer upright/unrotated.
-        return (0,)
-    return (0, 90, 180, 270)
 
 
 
@@ -9325,40 +9253,8 @@ def _semanticTransferIsCompatible(target_params: dict[str, object], donor_params
     return True
 
 
-def _connectorArmDirection(params: dict[str, object]) -> int | None:
-    """Return horizontal arm side: -1 left of circle, +1 right, or None if unknown."""
-    x1 = params.get("arm_x1")
-    x2 = params.get("arm_x2")
-    cx = params.get("cx")
-    if x1 is not None and x2 is not None and cx is not None:
-        mid = (float(x1) + float(x2)) * 0.5
-        delta = mid - float(cx)
-        if abs(delta) > 1e-3:
-            return -1 if delta < 0.0 else 1
-
-    if x1 is not None and cx is not None:
-        delta = float(x1) - float(cx)
-        if abs(delta) > 1e-3:
-            return -1 if delta < 0.0 else 1
-    return None
 
 
-def _connectorStemDirection(params: dict[str, object]) -> int | None:
-    """Return vertical stem direction: -1 up, +1 down, or None if unknown."""
-    y1 = params.get("arm_y1")
-    y2 = params.get("arm_y2")
-    if y1 is not None and y2 is not None:
-        dy = float(y2) - float(y1)
-        if abs(dy) > 1e-3:
-            return -1 if dy < 0.0 else 1
-
-    cy = params.get("cy")
-    if y1 is not None and y2 is not None and cy is not None:
-        mid = (float(y1) + float(y2)) * 0.5
-        delta = mid - float(cy)
-        if abs(delta) > 1e-3:
-            return -1 if delta < 0.0 else 1
-    return None
 
 
 def _semanticTransferScaleCandidates(base_scale: float) -> list[float]:
@@ -9791,64 +9687,10 @@ def _readSvgGeometry(svg_path: str) -> tuple[int, int, dict] | None:
     return w, h, params
 
 
-def _normalizedGeometrySignature(w: int, h: int, params: dict) -> dict[str, float]:
-    sig: dict[str, float] = {}
-    scale = max(1.0, float(min(w, h)))
-
-    if params.get("circle_enabled"):
-        sig["cx"] = float(params["cx"]) / max(1.0, float(w))
-        sig["cy"] = float(params["cy"]) / max(1.0, float(h))
-        sig["r"] = float(params["r"]) / scale
-        sig["stroke_circle"] = float(params["stroke_circle"]) / scale
-
-    if params.get("stem_enabled"):
-        sig["stem_x"] = float(params["stem_x"]) / max(1.0, float(w))
-        sig["stem_width"] = float(params["stem_width"]) / max(1.0, float(w))
-        sig["stem_top"] = float(params["stem_top"]) / max(1.0, float(h))
-        sig["stem_bottom"] = float(params["stem_bottom"]) / max(1.0, float(h))
-
-    if params.get("arm_enabled"):
-        sig["arm_x1"] = float(params["arm_x1"]) / max(1.0, float(w))
-        sig["arm_y1"] = float(params["arm_y1"]) / max(1.0, float(h))
-        sig["arm_x2"] = float(params["arm_x2"]) / max(1.0, float(w))
-        sig["arm_y2"] = float(params["arm_y2"]) / max(1.0, float(h))
-        sig["arm_stroke"] = float(params["arm_stroke"]) / scale
-
-    return sig
 
 
-def _maxSignatureDelta(sig_a: dict[str, float], sig_b: dict[str, float]) -> float:
-    keys = sorted(set(sig_a.keys()).intersection(sig_b.keys()))
-    if not keys:
-        return 1.0
-    return max(abs(sig_a[k] - sig_b[k]) for k in keys)
 
 
-def _needsLargeCircleOverflowGuard(params: dict) -> bool:
-    """Return whether circle placement may intentionally exceed canvas bounds.
-
-    This is a generic geometry rule for large, centered CO² badges without
-    connectors. It replaces single-variant checks (for example ``AC0820_L``)
-    so future families with the same structure automatically get the same
-    robust radius handling.
-    """
-    if not bool(params.get("circle_enabled", True)):
-        return False
-    if bool(params.get("arm_enabled") or params.get("stem_enabled")):
-        return False
-    if not bool(params.get("draw_text", False)):
-        return False
-    if str(params.get("text_mode", "")).lower() != "co2":
-        return False
-
-    template_r = float(params.get("template_circle_radius", params.get("r", 0.0)) or 0.0)
-    current_r = float(params.get("r", 0.0) or 0.0)
-    width = float(params.get("width", params.get("badge_width", 0.0)) or 0.0)
-
-    large_template = template_r >= 10.0
-    large_current = current_r >= 10.0
-    wide_canvas = width >= 30.0
-    return bool(large_template or large_current or wide_canvas)
 
 
 def _scaleBadgeParams(
@@ -9968,8 +9810,6 @@ def _harmonization_anchor_priority(suffix: str, prefer_large: bool) -> int:
     return {"M": 0, "L": 1, "S": 2}.get(str(suffix), 3)
 
 
-def _clipGray(value: float) -> int:
-    return int(max(0, min(255, round(float(value)))))
 
 
 def _familyHarmonizedBadgeColors(variant_rows: list[dict[str, object]]) -> dict[str, int]:
@@ -10815,18 +10655,6 @@ def _isSuccessfulConversionCandidateBetter(
     return improved
 
 
-def _mergeSuccessfulConversionMetrics(
-    baseline: dict[str, object],
-    override: dict[str, object],
-) -> dict[str, object]:
-    """Merge ``override`` into ``baseline`` while keeping row-level defaults."""
-    merged = dict(baseline)
-    for key, value in override.items():
-        if key == 'variant':
-            continue
-        merged[key] = value
-    merged['variant'] = str(override.get('variant', baseline.get('variant', ''))).strip().upper()
-    return merged
 
 
 def _formatSuccessfulConversionManifestLine(existing_line: str, metrics: dict[str, object]) -> str:
@@ -10999,11 +10827,6 @@ def updateSuccessfulConversionsManifestWithMetrics(
     resolved_manifest_path.write_text('\n'.join(updated_lines) + '\n', encoding='utf-8')
     return resolved_manifest_path, _sortedSuccessfulConversionMetricsRows(effective_metrics_rows)
 
-def _sortedSuccessfulConversionMetricsRows(
-    metrics: list[dict[str, object]],
-) -> list[dict[str, object]]:
-    """Sort successful-conversion rows by converted image name/variant."""
-    return sorted(metrics, key=lambda row: str(row.get('variant', '')).upper())
 
 
 def _write_successful_conversion_csv_table(csv_path: str | os.PathLike[str], metrics: list[dict[str, object]]) -> str:
