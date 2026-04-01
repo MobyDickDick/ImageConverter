@@ -35,6 +35,7 @@ from src.imageCompositeConverterRegions import (
     annotateImageRegionsImpl,
     detectRelevantRegionsImpl,
 )
+from src import imageCompositeConverterRange as range_helpers
 from src import imageCompositeConverterDependencies as dependency_helpers
 from src.successfulConversions import (
     AC08_MITIGATION_STATUS,
@@ -8455,159 +8456,74 @@ def runIterationPipeline(
 
 
 def _extractRefParts(name: str) -> tuple[str, int] | None:
-    match = re.match(r"^([A-Z]{2,3})(\d{3,4})$", name.upper())
-    if not match:
-        return None
-    return match.group(1), int(match.group(2))
+    return range_helpers.extractRefPartsImpl(name)
 
 
 def _normalizeRangeToken(value: str) -> str:
-    base = getBaseNameFromFile(str(value or "").upper())
-    return re.sub(r"[^A-Z0-9]", "", base)
+    return range_helpers.normalizeRangeTokenImpl(value, get_base_name_fn=getBaseNameFromFile)
 
 
 def _normalizeExplicitRangeToken(value: str) -> str:
-    raw = os.path.splitext(str(value or "").upper())[0]
-    return re.sub(r"[^A-Z0-9]", "", raw)
+    return range_helpers.normalizeExplicitRangeTokenImpl(value)
 
 
 def _isExplicitSizeVariantToken(token: str) -> bool:
-    return bool(re.match(r"^[A-Z]{2,3}\d{4}(?:[1-9]|[1-9]S|L|M|S|W|X)$", token))
+    return range_helpers.isExplicitSizeVariantTokenImpl(token)
 
 
 def _compactRangeToken(value: str) -> str:
-    token = _normalizeRangeToken(value)
-    match = re.match(r"^([A-Z]+)(\d+)$", token)
-    if not match:
-        return token
-    letters, digits = match.groups()
-    return f"{letters[0]}{digits}"
+    return range_helpers.compactRangeTokenImpl(value, normalize_range_token_fn=_normalizeRangeToken)
 
 
 def _sharedPartialRangeToken(start_ref: str, end_ref: str) -> str:
-    start_token = _normalizeRangeToken(start_ref)
-    end_token = _normalizeRangeToken(end_ref)
-    compact_start = _compactRangeToken(start_ref)
-    compact_end = _compactRangeToken(end_ref)
-    if not start_token or not end_token:
-        return ""
-    for left, right in ((start_token, end_token), (compact_start, compact_end)):
-        if left and left == right:
-            return left
-        if left and left in right:
-            return left
-        if right and right in left:
-            return right
-
-        max_len = min(len(left), len(right))
-        for length in range(max_len, 2, -1):
-            for idx in range(0, len(left) - length + 1):
-                candidate = left[idx: idx + length]
-                if candidate in right:
-                    return candidate
-    return ""
+    return range_helpers.sharedPartialRangeTokenImpl(
+        start_ref,
+        end_ref,
+        normalize_range_token_fn=_normalizeRangeToken,
+        compact_range_token_fn=_compactRangeToken,
+    )
 
 
 def _matchesPartialRangeToken(filename: str, start_ref: str, end_ref: str) -> bool:
-    token = _sharedPartialRangeToken(start_ref, end_ref)
-    if not token:
-        return False
-    stem = _normalizeRangeToken(getBaseNameFromFile(os.path.splitext(filename)[0]))
-    if not stem:
-        return False
-    if token in stem:
-        return True
-
-    pos = 0
-    for char in stem:
-        if pos < len(token) and char == token[pos]:
-            pos += 1
-    return pos == len(token)
+    return range_helpers.matchesPartialRangeTokenImpl(
+        filename,
+        start_ref,
+        end_ref,
+        shared_partial_range_token_fn=_sharedPartialRangeToken,
+        normalize_range_token_fn=_normalizeRangeToken,
+        get_base_name_fn=getBaseNameFromFile,
+    )
 
 
 def _extractSymbolFamily(name: str) -> str | None:
-    """Extract 2-3 letter corpus family prefixes such as AC, GE, DLG, or NAV."""
-    match = re.match(r"^([A-Z]{2,3})\d{3,4}$", str(name).upper())
-    if not match:
-        return None
-    return match.group(1)
+    return range_helpers.extractSymbolFamilyImpl(name)
 
 
 def _matchesExactPrefixFilter(filename: str, start_ref: str, end_ref: str) -> bool:
-    start_token = _normalizeRangeToken(start_ref)
-    end_token = _normalizeRangeToken(end_ref)
-    if not start_token or start_token != end_token:
-        return False
-    explicit_start = _normalizeExplicitRangeToken(start_ref)
-    explicit_end = _normalizeExplicitRangeToken(end_ref)
-    explicit_stem = _normalizeExplicitRangeToken(filename)
-    if (
-        explicit_start
-        and explicit_start == explicit_end
-        and _isExplicitSizeVariantToken(explicit_start)
-        and explicit_start != start_token
-    ):
-        return explicit_stem == explicit_start
-    stem = _normalizeRangeToken(getBaseNameFromFile(os.path.splitext(filename)[0]))
-    if not stem:
-        return False
-    return stem.startswith(start_token)
+    return range_helpers.matchesExactPrefixFilterImpl(
+        filename,
+        start_ref,
+        end_ref,
+        normalize_range_token_fn=_normalizeRangeToken,
+        normalize_explicit_range_token_fn=_normalizeExplicitRangeToken,
+        is_explicit_size_variant_token_fn=_isExplicitSizeVariantToken,
+        get_base_name_fn=getBaseNameFromFile,
+    )
 
 
 def _inRequestedRange(filename: str, start_ref: str, end_ref: str) -> bool:
-    stem = getBaseNameFromFile(os.path.splitext(filename)[0]).upper()
-    stem_parts = _extractRefParts(stem)
-    start_parts = _extractRefParts(start_ref)
-    end_parts = _extractRefParts(end_ref)
-    explicit_start = _normalizeExplicitRangeToken(start_ref)
-    explicit_end = _normalizeExplicitRangeToken(end_ref)
-    normalized_start = _normalizeRangeToken(start_ref)
-
-    # Identical start/end filters should also work as a prefix selector so an
-    # input like AC081..AC081 includes AC0814_L, AC0813_M, etc.
-    exact_prefix_match = _matchesExactPrefixFilter(filename, start_ref, end_ref)
-    if exact_prefix_match:
-        return True
-    if (
-        explicit_start
-        and explicit_start == explicit_end
-        and _isExplicitSizeVariantToken(explicit_start)
-        and normalized_start
-        and explicit_start != normalized_start
-    ):
-        return False
-
-    # If no parseable range bounds are provided, fall back to a shared partial
-    # token filter. This keeps interactive batches small, e.g. AC08..A08 -> A08*.
-    if start_parts is None and end_parts is None:
-        return _matchesPartialRangeToken(filename, start_ref, end_ref) if (start_ref or end_ref) else True
-
-    # Files that do not follow the usual XX0000 / XXX0000 naming scheme should
-    # only pass through broad whole-folder spans, not exact family-specific
-    # filters like AC0811..AC0811.
-    if stem_parts is None:
-        if start_parts is not None and end_parts is not None:
-            start_key = start_parts
-            end_key = end_parts
-            if start_key > end_key:
-                start_key, end_key = end_key, start_key
-            return start_key[0] != end_key[0]
-        return False
-
-    # Support one-sided range filters if only one boundary can be parsed.
-    if start_parts is None:
-        return stem_parts <= end_parts  # type: ignore[operator]
-    if end_parts is None:
-        return start_parts <= stem_parts
-
-    start_key = start_parts
-    end_key = end_parts
-    if start_key > end_key:
-        start_key, end_key = end_key, start_key
-
-    return start_key <= stem_parts <= end_key
-
-
+    return range_helpers.inRequestedRangeImpl(
+        filename,
+        start_ref,
+        end_ref,
+        get_base_name_fn=getBaseNameFromFile,
+        extract_ref_parts_fn=_extractRefParts,
+        normalize_explicit_range_token_fn=_normalizeExplicitRangeToken,
+        normalize_range_token_fn=_normalizeRangeToken,
+        matches_exact_prefix_filter_fn=_matchesExactPrefixFilter,
+        is_explicit_size_variant_token_fn=_isExplicitSizeVariantToken,
+        matches_partial_range_token_fn=_matchesPartialRangeToken,
+    )
 
 
 def _conversionRandom() -> random.Random:
