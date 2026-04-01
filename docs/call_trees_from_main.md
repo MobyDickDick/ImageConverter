@@ -12,28 +12,16 @@ Automatisch erzeugte, **statische** Aufrufbäume (AST-basiert) ausgehend von den
   - `buildLinuxVendorInstallCommand()`
     - `_requiredVendorPackages()`
   - `_promptInteractiveRange()`
-    - `_sharedPartialRangeToken()`
-      - `_normalizeRangeToken()`
-        - `getBaseNameFromFile()`
-      - `_normalizeRangeToken()`
-        - `getBaseNameFromFile()`
-      - `_compactRangeToken()`
-        - `_normalizeRangeToken()`
-          - `getBaseNameFromFile()`
-      - `_compactRangeToken()`
-        - `_normalizeRangeToken()`
-          - `getBaseNameFromFile()`
-    - `_extractRefParts()`
-    - `_extractRefParts()`
+  - `_sharedPartialRangeToken()`
+  - `_normalizeRangeToken()`
+  - `getBaseNameFromFile()`
+  - `_compactRangeToken()`
+  - `_extractRefParts()`
   - `_resolveCliCsvAndOutput()`
     - `_autoDetectCsvPath()`
-    - `_resolveDescriptionXmlPath()`
+  - `_resolveDescriptionXmlPath()`
   - `_loadDescriptionMapping()`
     - `_loadDescriptionMappingFromXml()`
-      - `_resolveDescriptionXmlPath()`
-      - `getBaseNameFromFile()`
-      - `getBaseNameFromFile()`
-      - `getBaseNameFromFile()`
     - `_loadDescriptionMappingFromCsv()`
   - `_bootstrapRequiredImageDependencies()`
     - `_missingRequiredImageDependencies()`
@@ -44,99 +32,43 @@ Automatisch erzeugte, **statische** Aufrufbäume (AST-basiert) ausgehend von den
     - `_diffOutputDir()`
     - `_reportsOutputDir()`
     - `_inRequestedRange()`
-      - `getBaseNameFromFile()`
-      - `_extractRefParts()`
-      - `_extractRefParts()`
-      - `_extractRefParts()`
       - `_normalizeExplicitRangeToken()`
-      - `_normalizeExplicitRangeToken()`
-      - `_normalizeRangeToken()`
-        - `getBaseNameFromFile()`
       - `_matchesExactPrefixFilter()`
-        - `_normalizeRangeToken()`
-          - `getBaseNameFromFile()`
-        - `_normalizeRangeToken()`
-          - `getBaseNameFromFile()`
-        - `_normalizeExplicitRangeToken()`
-        - `_normalizeExplicitRangeToken()`
-        - `_normalizeExplicitRangeToken()`
-        - `_isExplicitSizeVariantToken()`
-        - `_normalizeRangeToken()`
-          - `getBaseNameFromFile()`
-        - `getBaseNameFromFile()`
       - `_isExplicitSizeVariantToken()`
       - `_matchesPartialRangeToken()`
-        - `_sharedPartialRangeToken()`
-          - `_normalizeRangeToken()`
-            - `getBaseNameFromFile()`
-          - `_normalizeRangeToken()`
-            - `getBaseNameFromFile()`
-          - `_compactRangeToken()`
-            - `_normalizeRangeToken()`
-              - `getBaseNameFromFile()`
-          - `_compactRangeToken()`
-            - `_normalizeRangeToken()`
-              - `getBaseNameFromFile()`
-        - `_normalizeRangeToken()`
-          - `getBaseNameFromFile()`
-        - `getBaseNameFromFile()`
     - `_renderEmbeddedRasterSvg()`
-      - `_sniffRasterSize()`
       - `_svgHrefMimeType()`
+    - `_sniffRasterSize()`
     - `_createDiffImageWithoutCv2()`
     - `_conversionRandom()`
     - `_loadExistingConversionRows()`
-      - `_reportsOutputDir()`
-      - `_convertedSvgOutputDir()`
-      - `_readSvgGeometry()`
-      - `getBaseNameFromFile()`
       - `_isSemanticTemplateVariant()`
-        - `getBaseNameFromFile()`
-      - `_sniffRasterSize()`
+    - `_readSvgGeometry()`
     - `runIterationPipeline()`
-      - `getBaseNameFromFile()`
       - `_semanticAuditRecord()`
-        - `getBaseNameFromFile()`
-      - `_semanticAuditRecord()`
-        - `getBaseNameFromFile()`
       - `_semanticQualityFlags()`
-        - `getBaseNameFromFile()`
-      - `_semanticAuditRecord()`
-        - `getBaseNameFromFile()`
     - `_readValidationLogDetails()`
-    - `_readValidationLogDetails()`
-    - `getBaseNameFromFile()`
     - `_tryTemplateTransfer()`
-      - `_readSvgGeometry()`
       - `_rankTemplateTransferDonors()`
-        - `_normalizedGeometrySignature()`
-        - `_normalizedGeometrySignature()`
-        - `_maxSignatureDelta()`
       - `_templateTransferDonorFamilyCompatible()`
         - `_extractSymbolFamily()`
-        - `_extractSymbolFamily()`
-      - `_readSvgGeometry()`
       - `_estimateTemplateTransferScale()`
-        - `_buildTransformedSvgFromTemplate()`
-          - `_extractSvgInner()`
+      - `_buildTransformedSvgFromTemplate()`
+      - `_extractSvgInner()`
       - `_semanticTransferIsCompatible()`
         - `_connectorArmDirection()`
-        - `_connectorArmDirection()`
-        - `_connectorStemDirection()`
         - `_connectorStemDirection()`
       - `_semanticTransferScaleCandidates()`
-        - `_templateTransferScaleCandidates()`
+      - `_templateTransferScaleCandidates()`
       - `_semanticTransferRotations()`
       - `_semanticTransferBadgeParams()`
       - `_templateTransferTransformCandidates()`
-        - `_templateTransferScaleCandidates()`
-      - `_buildTransformedSvgFromTemplate()`
-        - `_extractSvgInner()`
+    - `_normalizedGeometrySignature()`
+    - `_maxSignatureDelta()`
     - `_computeSuccessfulConversionsErrorThreshold()`
     - `_loadQualityConfig()`
-      - `_qualityConfigPath()`
+    - `_qualityConfigPath()`
     - `_writeQualityConfig()`
-      - `_qualityConfigPath()`
     - `_selectOpenQualityCases()`
     - `_selectMiddleLowerTercile()`
     - `_iterationStrategyForPass()`
@@ -145,15 +77,8 @@ Automatisch erzeugte, **statische** Aufrufbäume (AST-basiert) ausgehend von den
     - `_writeQualityPassReport()`
     - `_writeBatchFailureSummary()`
     - `_harmonizeSemanticSizeVariants()`
-      - `_readSvgGeometry()`
-      - `_normalizedGeometrySignature()`
-      - `_maxSignatureDelta()`
       - `_harmonizationAnchorPriority()`
       - `_familyHarmonizedBadgeColors()`
-        - `_clipGray()`
-        - `_clipGray()`
-        - `_clipGray()`
-        - `_clipGray()`
         - `_clipGray()`
       - `_scaleBadgeParams()`
         - `_needsLargeCircleOverflowGuard()`
@@ -169,22 +94,14 @@ Automatisch erzeugte, **statische** Aufrufbäume (AST-basiert) ausgehend von den
       - `collectSuccessfulConversionQualityMetrics()`
         - `_loadIterationLogRows()`
         - `_findImagePathByVariant()`
-        - `_readValidationLogDetails()`
       - `_isSuccessfulConversionCandidateBetter()`
-        - `_successfulConversionMetricsAvailable()`
-        - `_successfulConversionMetricsAvailable()`
-        - `_evaluateQualityPassCandidate()`
+      - `_successfulConversionMetricsAvailable()`
       - `_storeSuccessfulConversionSnapshot()`
-        - `_successfulConversionSnapshotPaths()`
-          - `_successfulConversionSnapshotDir()`
+      - `_successfulConversionSnapshotPaths()`
+      - `_successfulConversionSnapshotDir()`
       - `_mergeSuccessfulConversionMetrics()`
       - `_restoreSuccessfulConversionSnapshot()`
-        - `_successfulConversionSnapshotPaths()`
-          - `_successfulConversionSnapshotDir()`
       - `_formatSuccessfulConversionManifestLine()`
-        - `_successfulConversionMetricsAvailable()`
-      - `_formatSuccessfulConversionManifestLine()`
-        - `_successfulConversionMetricsAvailable()`
       - `_latestFailedConversionManifestEntry()`
       - `_sortedSuccessfulConversionMetricsRows()`
   - `_formatUserDiagnostic()`
@@ -202,25 +119,14 @@ Automatisch erzeugte, **statische** Aufrufbäume (AST-basiert) ausgehend von den
       - `_resolveOptionalDependencies()`
       - `_readPreview()`
         - `_renderSvg()`
-          - `_resolveOptionalDependencies()`
         - `_readRaster()`
-          - `_resolveOptionalDependencies()`
-    - `createTiledOverviewImage()`
-      - `_resolveOptionalDependencies()`
-      - `_readPreview()`
-        - `_renderSvg()`
-          - `_resolveOptionalDependencies()`
-        - `_readRaster()`
-          - `_resolveOptionalDependencies()`
 
 - Einstieg über `createTiledOverviewImage()`
   - `createTiledOverviewImage()`
     - `_resolveOptionalDependencies()`
     - `_readPreview()`
       - `_renderSvg()`
-        - `_resolveOptionalDependencies()`
       - `_readRaster()`
-        - `_resolveOptionalDependencies()`
 
 - Einstieg über `_resolveOptionalDependencies()`
   - `_resolveOptionalDependencies()`
@@ -228,9 +134,8 @@ Automatisch erzeugte, **statische** Aufrufbäume (AST-basiert) ausgehend von den
 - Einstieg über `_readPreview()`
   - `_readPreview()`
     - `_renderSvg()`
-      - `_resolveOptionalDependencies()`
+    - `_resolveOptionalDependencies()`
     - `_readRaster()`
-      - `_resolveOptionalDependencies()`
 
 - Einstieg über `_readRaster()`
   - `_readRaster()`
