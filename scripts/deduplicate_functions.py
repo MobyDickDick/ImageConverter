@@ -151,16 +151,54 @@ def unresolved_globals(fn: FuncDef, info: ModuleInfo) -> set[str]:
     tree = ast.parse(fn.source)
     node = tree.body[0]
     assert isinstance(node, ast.FunctionDef)
-    local_defs: set[str] = set()
+    local_defs: set[str] = set(arg.arg for arg in node.args.args)
     references: set[str] = set()
-    for n in ast.walk(node):
-        if isinstance(n, ast.Name):
+
+    class _OuterScopeVisitor(ast.NodeVisitor):
+        def __init__(self) -> None:
+            self.scope_depth = 0
+
+        def visit_FunctionDef(self, n: ast.FunctionDef) -> None:  # noqa: N802
+            if self.scope_depth > 0:
+                return
+            self.scope_depth += 1
+            for stmt in n.body:
+                self.visit(stmt)
+            self.scope_depth -= 1
+
+        def visit_AsyncFunctionDef(self, n: ast.AsyncFunctionDef) -> None:  # noqa: N802
+            if self.scope_depth > 0:
+                return
+            self.scope_depth += 1
+            for stmt in n.body:
+                self.visit(stmt)
+            self.scope_depth -= 1
+
+        def visit_ClassDef(self, n: ast.ClassDef) -> None:  # noqa: N802
+            if self.scope_depth >= 1:
+                return
+            self.scope_depth += 1
+            self.scope_depth -= 1
+
+        def visit_Lambda(self, n: ast.Lambda) -> None:  # noqa: N802
+            if self.scope_depth >= 1:
+                return
+            self.scope_depth += 1
+            self.scope_depth -= 1
+
+        def visit_Name(self, n: ast.Name) -> None:  # noqa: N802
+            if self.scope_depth != 1:
+                return
             if isinstance(n.ctx, ast.Store):
                 local_defs.add(n.id)
             elif isinstance(n.ctx, ast.Load):
                 references.add(n.id)
-        elif isinstance(n, ast.arg):
-            local_defs.add(n.arg)
+
+        def visit_arg(self, n: ast.arg) -> None:  # noqa: N802
+            if self.scope_depth == 1:
+                local_defs.add(n.arg)
+
+    _OuterScopeVisitor().visit(node)
     builtins_set = set(dir(builtins))
     return {
         name
