@@ -35,6 +35,7 @@ from src.imageCompositeConverterRegions import (
     annotateImageRegionsImpl,
     detectRelevantRegionsImpl,
 )
+from src import imageCompositeConverterDependencies as dependency_helpers
 from src.successfulConversions import (
     AC08_MITIGATION_STATUS,
     AC08_PREVIOUSLY_GOOD_VARIANTS,
@@ -52,8 +53,6 @@ AC08_REGRESSION_VARIANTS = tuple(dict.fromkeys(AC08_REGRESSION_VARIANTS))
 # Keep the historical "previously good" anchor subset stable for AC08 success
 # criteria reports used by this converter/test suite.
 AC08_PREVIOUSLY_GOOD_VARIANTS = ("AC0800_L", "AC0800_M", "AC0800_S", "AC0811_L")
-
-OPTIONAL_DEPENDENCY_ERRORS: dict[str, str] = {}
 
 SVG_RENDER_SUBPROCESS_ENABLED = os.environ.get("IMAGE_CONVERTER_ISOLATE_SVG_RENDER", "").strip().lower() in {
     "1",
@@ -128,131 +127,55 @@ def analyzeRange(folder_path: str, output_root: str | None = None, start_ref: st
 
 
 def _optionalDependencyBaseDir() -> Path:
-    """Return the repository root used for vendored dependency discovery."""
-    return Path(__file__).resolve().parents[1]
+    return _optional_dependency_base_dir()
 
 
 def _vendoredSitePackagesDirs() -> list[Path]:
-    """Return repo-local site-packages directories that may contain bundled deps."""
-    base = _optionalDependencyBaseDir()
-    linux_candidates = [
-        base / "vendor" / "linux" / "site-packages",
-        base / "vendor" / "linux-py310" / "site-packages",
-        base / "vendor" / "linux-py311" / "site-packages",
-        base / "vendor" / "linux-py312" / "site-packages",
-        base / "vendor" / "linux-py313" / "site-packages",
-        base / "vendor" / "linux-py314" / "site-packages",
-    ]
-    windows_candidates = [
-        base / "vendor" / "win" / "site-packages",
-        base / "vendor" / "win-py310" / "site-packages",
-        base / "vendor" / "win-py311" / "site-packages",
-        base / "vendor" / "win-py312" / "site-packages",
-        base / "vendor" / "win-py313" / "site-packages",
-        base / "vendor" / "win-py314" / "site-packages",
-        base / ".venv" / "Lib" / "site-packages",
-    ]
-    posix_venv_candidates = [
-        base / ".venv" / "lib" / "python3.10" / "site-packages",
-        base / ".venv" / "lib" / "python3.11" / "site-packages",
-        base / ".venv" / "lib" / "python3.12" / "site-packages",
-        base / ".venv" / "lib" / "python3.13" / "site-packages",
-        base / ".venv" / "lib" / "python3.14" / "site-packages",
-    ]
-    if os.name == "nt":
-        candidates = windows_candidates + linux_candidates + posix_venv_candidates
-    else:
-        candidates = linux_candidates + posix_venv_candidates + windows_candidates
-
-    seen: set[str] = set()
-    existing: list[Path] = []
-    for candidate in candidates:
-        key = str(candidate)
-        if key in seen:
-            continue
-        seen.add(key)
-        if candidate.exists():
-            existing.append(candidate)
-    return existing
+    return _vendored_site_packages_dirs()
 
 
 def _clearPartialModuleImport(module_name: str) -> None:
-    """Discard partially imported package state before the next fallback attempt."""
-    for imported_name in [name for name in list(sys.modules) if name == module_name or name.startswith(f"{module_name}.")]:
-        sys.modules.pop(imported_name, None)
+    dependency_helpers.clear_partial_module_import(module_name)
 
 
 def _describeOptionalDependencyError(module_name: str, exc: BaseException, attempted_paths: list[Path]) -> str:
-    detail = f"{type(exc).__name__}: {exc}"
-    lower = detail.lower()
-    if "add_dll_directory" in lower or ".pyd" in lower:
-        return (
-            f"{detail}. Repo-local Paket gefunden, aber es wirkt wie ein Windows-Build "
-            f"und ist unter dieser Linux-Umgebung nicht ladbar"
-        )
-    if "elf" in lower or "wrong elf class" in lower:
-        return f"{detail}. Repo-lokales Binary ist nicht mit dieser Laufzeit kompatibel"
-    if attempted_paths:
-        joined = ", ".join(str(path) for path in attempted_paths)
-        return f"{detail}. Zusätzliche Importpfade geprüft: {joined}"
-    return detail
+    return _describe_optional_dependency_error(module_name, exc, attempted_paths)
 
 
 def _loadOptionalModule(module_name: str):
-    """Import optional dependencies, including repo-vendored site-packages."""
-    attempted_paths: list[Path] = []
-    try:
-        return importlib.import_module(module_name)
-    except Exception as exc:  # pragma: no cover - exercised only in dependency-missing envs
-        last_exc: BaseException = exc
-        _clearPartialModuleImport(module_name)
-
-    for site_packages in _vendoredSitePackagesDirs():
-        attempted_paths.append(site_packages)
-        path_str = str(site_packages)
-        added = False
-        if path_str not in sys.path:
-            sys.path.insert(0, path_str)
-            added = True
-        try:
-            return importlib.import_module(module_name)
-        except Exception as exc:  # pragma: no cover - exercised only in dependency-missing envs
-            last_exc = exc
-            _clearPartialModuleImport(module_name)
-        finally:
-            if added:
-                with contextlib.suppress(ValueError):
-                    sys.path.remove(path_str)
-
-    OPTIONAL_DEPENDENCY_ERRORS[module_name] = _describeOptionalDependencyError(module_name, last_exc, attempted_paths)
-    return None
+    return _load_optional_module(module_name)
 
 
 def _importWithVendoredFallback(module_name: str):
-    """Import a module, retrying with repo-vendored site-packages on sys.path."""
-    try:
-        return importlib.import_module(module_name)
-    except Exception as exc:
-        last_exc: BaseException = exc
-        _clearPartialModuleImport(module_name)
+    return _import_with_vendored_fallback(module_name)
 
-    for site_packages in _vendoredSitePackagesDirs():
-        path_str = str(site_packages)
-        added = False
-        if path_str not in sys.path:
-            sys.path.insert(0, path_str)
-            added = True
-        try:
-            return importlib.import_module(module_name)
-        except Exception as exc:
-            last_exc = exc
-            _clearPartialModuleImport(module_name)
-        finally:
-            if added:
-                with contextlib.suppress(ValueError):
-                    sys.path.remove(path_str)
 
-    raise last_exc
+def _optional_dependency_base_dir() -> Path:
+    return dependency_helpers.optional_dependency_base_dir()
+
+
+def _vendored_site_packages_dirs() -> list[Path]:
+    return dependency_helpers.vendored_site_packages_dirs(base_dir_fn=_optional_dependency_base_dir)
+
+
+def _describe_optional_dependency_error(module_name: str, exc: BaseException, attempted_paths: list[Path]) -> str:
+    return dependency_helpers.describe_optional_dependency_error(module_name, exc, attempted_paths)
+
+
+def _load_optional_module(module_name: str):
+    return dependency_helpers.load_optional_module(
+        module_name,
+        vendored_dirs_fn=_vendored_site_packages_dirs,
+        import_module_fn=importlib.import_module,
+    )
+
+
+def _import_with_vendored_fallback(module_name: str):
+    return dependency_helpers.import_with_vendored_fallback(
+        module_name,
+        vendored_dirs_fn=_vendored_site_packages_dirs,
+        import_module_fn=importlib.import_module,
+    )
 
 
 # Load numpy before cv2: OpenCV's Python bindings import numpy at module-import
@@ -12022,3 +11945,4 @@ def convertImage(input_path: str, output_path: str, *, max_iter: int = 120, plat
 def convertImageVariants(*args, **kwargs):
     """Compatibility shim kept for tooling imports."""
     return convertRange(*args, **kwargs)
+OPTIONAL_DEPENDENCY_ERRORS = dependency_helpers.OPTIONAL_DEPENDENCY_ERRORS
