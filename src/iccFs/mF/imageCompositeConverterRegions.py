@@ -134,4 +134,3 @@ expandBbox = expandBbox
 bboxToDict = bboxToDict
 detectRelevantRegionsImpl = detectRelevantRegionsImpl
 annotateImageRegionsImpl = annotateImageRegionsImpl
-analyzeRangeImpl = analyzeRangeImpl
