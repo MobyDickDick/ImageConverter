@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import argparse
 import ast
+import builtins
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Dict, List, Tuple
@@ -29,14 +30,23 @@ class FuncDef:
     source: str
 
 
-def module_name(root: Path, path: Path) -> str:
+@dataclass
+class ModuleInfo:
+    provided_names: set[str]
+
+
+def module_name(root: Path, path: Path, package_prefix: str = "src") -> str:
     rel = path.relative_to(root).with_suffix("")
-    return ".".join(rel.parts)
+    mod = ".".join(rel.parts)
+    if package_prefix:
+        return f"{package_prefix}.{mod}"
+    return mod
 
 
-def load_functions(root: Path) -> Tuple[Dict[str, List[FuncDef]], Dict[Path, int]]:
+def load_functions(root: Path) -> Tuple[Dict[str, List[FuncDef]], Dict[Path, int], Dict[Path, ModuleInfo]]:
     funcs: Dict[str, List[FuncDef]] = {}
     per_file_count: Dict[Path, int] = {}
+    module_info: Dict[Path, ModuleInfo] = {}
 
     for path in sorted(root.rglob("*.py")):
         if any(part in {"vendor", "artifacts", "__pycache__"} for part in path.parts):
@@ -49,6 +59,21 @@ def load_functions(root: Path) -> Tuple[Dict[str, List[FuncDef]], Dict[Path, int
         lines = text.splitlines(keepends=True)
         top_funcs = [n for n in tree.body if isinstance(n, ast.FunctionDef)]
         per_file_count[path] = len(top_funcs)
+        provided_names: set[str] = set()
+        for node in tree.body:
+            if isinstance(node, ast.Import):
+                for alias in node.names:
+                    provided_names.add(alias.asname or alias.name.split(".")[0])
+            elif isinstance(node, ast.ImportFrom):
+                for alias in node.names:
+                    provided_names.add(alias.asname or alias.name)
+            elif isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+                provided_names.add(node.name)
+            elif isinstance(node, ast.Assign):
+                for target in node.targets:
+                    if isinstance(target, ast.Name):
+                        provided_names.add(target.id)
+        module_info[path] = ModuleInfo(provided_names=provided_names)
         for fn in top_funcs:
             seg = "".join(lines[fn.lineno - 1 : fn.end_lineno])
             funcs.setdefault(fn.name, []).append(
@@ -60,7 +85,7 @@ def load_functions(root: Path) -> Tuple[Dict[str, List[FuncDef]], Dict[Path, int
                     source=seg.strip(),
                 )
             )
-    return funcs, per_file_count
+    return funcs, per_file_count, module_info
 
 
 def choose_canonical(cands: List[FuncDef], per_file_count: Dict[Path, int]) -> FuncDef | None:
@@ -88,7 +113,20 @@ def ensure_import(text: str, import_stmt: str) -> str:
     except SyntaxError:
         pass
 
-    # After existing imports if any.
+    # Keep __future__ imports first.
+    try:
+        tree = ast.parse(joined)
+        for node in tree.body:
+            if isinstance(node, ast.ImportFrom) and node.module == "__future__":
+                insert_at = max(insert_at, node.end_lineno)
+            elif isinstance(node, (ast.Import, ast.ImportFrom)):
+                insert_at = max(insert_at, node.end_lineno)
+            else:
+                break
+    except SyntaxError:
+        pass
+
+    # After existing leading imports if any.
     try:
         tree = ast.parse(joined)
         for node in tree.body:
@@ -109,14 +147,37 @@ def remove_range(text: str, start: int, end: int) -> str:
     return "".join(lines)
 
 
+def unresolved_globals(fn: FuncDef, info: ModuleInfo) -> set[str]:
+    tree = ast.parse(fn.source)
+    node = tree.body[0]
+    assert isinstance(node, ast.FunctionDef)
+    local_defs: set[str] = set()
+    references: set[str] = set()
+    for n in ast.walk(node):
+        if isinstance(n, ast.Name):
+            if isinstance(n.ctx, ast.Store):
+                local_defs.add(n.id)
+            elif isinstance(n.ctx, ast.Load):
+                references.add(n.id)
+        elif isinstance(n, ast.arg):
+            local_defs.add(n.arg)
+    builtins_set = set(dir(builtins))
+    return {
+        name
+        for name in references
+        if name not in local_defs and name not in info.provided_names and name not in builtins_set
+    }
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--root", default="src", type=Path)
+    parser.add_argument("--package-prefix", default="src")
     parser.add_argument("--apply", action="store_true")
     args = parser.parse_args()
 
     root = args.root.resolve()
-    funcs, per_file_count = load_functions(root)
+    funcs, per_file_count, module_info = load_functions(root)
 
     planned: List[Tuple[FuncDef, FuncDef]] = []
     for name, defs in sorted(funcs.items()):
@@ -125,8 +186,12 @@ def main() -> int:
         canonical = choose_canonical(defs, per_file_count)
         if canonical is None:
             continue
+        if unresolved_globals(canonical, module_info[canonical.path]):
+            continue
         for d in defs:
             if d.path == canonical.path:
+                continue
+            if "iccFs/mF" not in d.path.as_posix():
                 continue
             if d.source == canonical.source:
                 planned.append((d, canonical))
@@ -154,7 +219,7 @@ def main() -> int:
         for dup, _ in sorted(edits, key=lambda x: x[0].start, reverse=True):
             text = remove_range(text, dup.start, dup.end)
         for dup, canon in edits:
-            mod = module_name(root, canon.path)
+            mod = module_name(root, canon.path, args.package_prefix)
             text = ensure_import(text, f"from {mod} import {dup.name}")
         path.write_text(text, encoding="utf-8")
 
