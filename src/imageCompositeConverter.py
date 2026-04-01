@@ -38,6 +38,7 @@ from src.imageCompositeConverterRegions import (
 from src import imageCompositeConverterRange as range_helpers
 from src import imageCompositeConverterDependencies as dependency_helpers
 from src import imageCompositeConverterSemantic as semantic_helpers
+from src import imageCompositeConverterQuality as quality_helpers
 from src.successfulConversions import (
     AC08_MITIGATION_STATUS,
     AC08_PREVIOUSLY_GOOD_VARIANTS,
@@ -7969,36 +7970,11 @@ def _semanticQualityFlags(base_name: str, validation_logs: list[str]) -> list[st
     cases in the per-image validation log so downstream review can spot them.
     """
 
-    if getBaseNameFromFile(base_name).upper() != "AC0811":
-        return []
-
-    error_pattern = re.compile(r"^(circle|stem|arm|text): Fehler=([0-9]+(?:\.[0-9]+)?)$")
-    element_errors: dict[str, float] = {}
-    for entry in validation_logs:
-        match = error_pattern.match(str(entry).strip())
-        if not match:
-            continue
-        element_errors[match.group(1)] = float(match.group(2))
-
-    if not element_errors:
-        return []
-
-    highest_element, highest_error = max(element_errors.items(), key=lambda item: item[1])
-    elevated = [name for name, value in element_errors.items() if value >= 8.0]
-
-    if highest_error < 10.0 and len(elevated) < 2:
-        return []
-
-    markers = [
-        "quality=borderline",
-        (
-            "quality_reason="
-            f"semantic_ok_trotz_hohem_elementfehler:{highest_element}={highest_error:.3f}"
-        ),
-    ]
-    if elevated:
-        markers.append("quality_elevated_elements=" + ",".join(sorted(elevated)))
-    return markers
+    return quality_helpers.semanticQualityFlagsImpl(
+        base_name=base_name,
+        validation_logs=validation_logs,
+        get_base_name_fn=getBaseNameFromFile,
+    )
 
 
 def runIterationPipeline(
