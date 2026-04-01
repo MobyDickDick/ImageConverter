@@ -28,16 +28,16 @@ ImagePredicate = Callable[[Path], bool]
 RASTER_EXTENSIONS = {".png", ".jpg", ".jpeg", ".bmp", ".gif"}
 
 
-def _read_raster(path: Path):
-    _resolve_optional_dependencies()
+def _readRaster(path: Path):
+    _resolveOptionalDependencies()
     if cv2 is None:
         return None
     img = cv2.imread(str(path), cv2.IMREAD_COLOR)
     return img
 
 
-def _render_svg(path: Path):
-    _resolve_optional_dependencies()
+def _renderSvg(path: Path):
+    _resolveOptionalDependencies()
     if np is None or fitz is None:
         return None
     try:
@@ -54,15 +54,15 @@ def _render_svg(path: Path):
     return None
 
 
-def _read_preview(path: Path):
+def _readPreview(path: Path):
     if path.suffix.lower() == ".svg":
-        return _render_svg(path)
+        return _renderSvg(path)
     if path.suffix.lower() in RASTER_EXTENSIONS:
-        return _read_raster(path)
+        return _readRaster(path)
     return None
 
 
-def create_tiled_overview_image(
+def createTiledOverviewImage(
     source_files: list[Path],
     output_path: Path,
     *,
@@ -71,7 +71,7 @@ def create_tiled_overview_image(
     columns: int = 8,
 ) -> Path | None:
     """Create a labeled tile view from source files and write it to ``output_path``."""
-    _resolve_optional_dependencies()
+    _resolveOptionalDependencies()
     if cv2 is None or np is None:
         return None
 
@@ -90,7 +90,7 @@ def create_tiled_overview_image(
     canvas = np.full((canvas_h, canvas_w, 3), 248, dtype=np.uint8)
 
     for idx, path in enumerate(valid):
-        preview = _read_preview(path)
+        preview = _readPreview(path)
         if preview is None:
             continue
 
@@ -132,7 +132,7 @@ def create_tiled_overview_image(
     return output_path
 
 
-def generate_conversion_overviews(
+def generateConversionOverviews(
     diff_dir: str | Path,
     svg_dir: str | Path,
     reports_dir: str | Path,
@@ -146,20 +146,20 @@ def generate_conversion_overviews(
 
     diff_files = sorted(diff_root.glob("*_diff.png"))
     diff_out = reports_root / "overview_diff_tiles.png"
-    diff_res = create_tiled_overview_image(diff_files, diff_out)
+    diff_res = createTiledOverviewImage(diff_files, diff_out)
     if diff_res is not None:
         generated["diff"] = str(diff_res)
 
     svg_files = sorted(svg_root.glob("*.svg"))
     svg_out = reports_root / "overview_svg_tiles.png"
-    svg_res = create_tiled_overview_image(svg_files, svg_out)
+    svg_res = createTiledOverviewImage(svg_files, svg_out)
     if svg_res is not None:
         generated["svg"] = str(svg_res)
 
     return generated
 
 
-def _resolve_optional_dependencies() -> None:
+def _resolveOptionalDependencies() -> None:
     """Try to reuse optional deps loaded by ``src.imageCompositeConverter``."""
     global cv2, np, fitz
     if cv2 is not None and np is not None and fitz is not None:

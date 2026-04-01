@@ -28,12 +28,12 @@ import importlib
 import io
 import struct
 import statistics
-from src.overviewTiles import generate_conversion_overviews
+from src.overviewTiles import generateConversionOverviews
 from src.imageCompositeConverterRegions import (
     ANNOTATION_COLORS,
-    analyze_range_impl,
-    annotate_image_regions_impl,
-    detect_relevant_regions_impl,
+    analyzeRangeImpl,
+    annotateImageRegionsImpl,
+    detectRelevantRegionsImpl,
 )
 from src.successfulConversions import (
     AC08_MITIGATION_STATUS,
@@ -43,7 +43,7 @@ from src.successfulConversions import (
     AC08_REGRESSION_VARIANTS,
     SUCCESSFUL_CONVERSIONS,
     SUCCESSFUL_CONVERSIONS_MANIFEST,
-    _load_successful_conversions,
+    _loadSuccessfulConversions,
 )
 
 # Keep regression variant list deterministic and duplicate-free for batch
@@ -104,24 +104,24 @@ AC08_ADAPTIVE_LOCK_PROFILES: dict[str, dict[str, float | bool]] = {
 }
 
 
-def detect_relevant_regions(img) -> list[dict[str, object]]:
-    return detect_relevant_regions_impl(img, cv2_module=cv2, np_module=np)
+def detectRelevantRegions(img) -> list[dict[str, object]]:
+    return detectRelevantRegionsImpl(img, cv2_module=cv2, np_module=np)
 
 
-def annotate_image_regions(img, regions: list[dict[str, object]]):
-    return annotate_image_regions_impl(img, regions, cv2_module=cv2)
+def annotateImageRegions(img, regions: list[dict[str, object]]):
+    return annotateImageRegionsImpl(img, regions, cv2_module=cv2)
 
 
-def analyze_range(folder_path: str, output_root: str | None = None, start_ref: str = "", end_ref: str = "ZZZZZZ") -> str:
-    return analyze_range_impl(
+def analyzeRange(folder_path: str, output_root: str | None = None, start_ref: str = "", end_ref: str = "ZZZZZZ") -> str:
+    return analyzeRangeImpl(
         folder_path=folder_path,
         output_root=output_root,
         start_ref=start_ref,
         end_ref=end_ref,
-        default_output_root_fn=_default_converted_symbols_root,
-        in_requested_range_fn=_in_requested_range,
-        detect_regions_fn=detect_relevant_regions,
-        annotate_regions_fn=annotate_image_regions,
+        default_output_root_fn=_defaultConvertedSymbolsRoot,
+        in_requested_range_fn=_inRequestedRange,
+        detect_regions_fn=detectRelevantRegions,
+        annotate_regions_fn=annotateImageRegions,
         cv2_module=cv2,
         np_module=np,
     )
@@ -496,7 +496,7 @@ def load_grayscale_image(path: Path) -> list[list[int]]:
     return [[int(px[x, y]) for x in range(w)] for y in range(h)]
 
 
-def _create_diff_image_without_cv2(input_path: str | Path, svg_content: str):
+def _createDiffImageWithoutCv2(input_path: str | Path, svg_content: str):
     """Create a normalized signed red/cyan diff image when numpy/opencv are unavailable."""
     if fitz is None:
         raise RuntimeError("Fallback diff generation requires fitz (PyMuPDF).")
@@ -814,7 +814,7 @@ def decompose_circle_with_stem(grayscale: list[list[int]], element: Element, can
     )
     return [rect, circle]
 
-def _missing_required_image_dependencies() -> list[str]:
+def _missingRequiredImageDependencies() -> list[str]:
     missing: list[str] = []
     if cv2 is None:
         missing.append("opencv-python-headless")
@@ -823,8 +823,8 @@ def _missing_required_image_dependencies() -> list[str]:
     return missing
 
 
-def _bootstrap_required_image_dependencies() -> list[str]:
-    missing = _missing_required_image_dependencies()
+def _bootstrapRequiredImageDependencies() -> list[str]:
+    missing = _missingRequiredImageDependencies()
     if not missing:
         return []
 
@@ -857,7 +857,7 @@ def rgb_to_hex(rgb: np.ndarray) -> str:
     return "#{:02x}{:02x}{:02x}".format(int(rgb[0]), int(rgb[1]), int(rgb[2]))
 
 
-def get_base_name_from_file(filename: str) -> str:
+def getBaseNameFromFile(filename: str) -> str:
     name = os.path.splitext(filename)[0]
     name = re.sub(r"(-\d+)$", "", name)
     while True:
@@ -874,12 +874,12 @@ class Perception:
     csv_path: str
 
     def __post_init__(self) -> None:
-        self.base_name = get_base_name_from_file(os.path.basename(self.img_path))
+        self.base_name = getBaseNameFromFile(os.path.basename(self.img_path))
         self.img = cv2.imread(self.img_path)
         self.raw_desc = self._load_descriptions()
 
     def _load_descriptions(self) -> dict[str, str]:
-        return _load_description_mapping(self.csv_path)
+        return _loadDescriptionMapping(self.csv_path)
 
 
 @dataclass(frozen=True)
@@ -913,14 +913,14 @@ class DescriptionMappingError(ValueError):
         return f"{self.message} ({self.span.format()})"
 
 
-def _load_description_mapping(path: str) -> dict[str, str]:
+def _loadDescriptionMapping(path: str) -> dict[str, str]:
     ext = os.path.splitext(path)[1].lower()
     if ext == ".xml":
-        return _load_description_mapping_from_xml(path)
-    return _load_description_mapping_from_csv(path)
+        return _loadDescriptionMappingFromXml(path)
+    return _loadDescriptionMappingFromCsv(path)
 
 
-def _load_description_mapping_from_csv(path: str) -> dict[str, str]:
+def _loadDescriptionMappingFromCsv(path: str) -> dict[str, str]:
     raw_desc: dict[str, str] = {}
     if not os.path.exists(path):
         return raw_desc
@@ -965,9 +965,9 @@ def _load_description_mapping_from_csv(path: str) -> dict[str, str]:
     return raw_desc
 
 
-def _load_description_mapping_from_xml(path: str) -> dict[str, str]:
+def _loadDescriptionMappingFromXml(path: str) -> dict[str, str]:
     raw_desc: dict[str, str] = {}
-    resolved_path = _resolve_description_xml_path(path)
+    resolved_path = _resolveDescriptionXmlPath(path)
     if resolved_path is None:
         return raw_desc
 
@@ -990,9 +990,9 @@ def _load_description_mapping_from_xml(path: str) -> dict[str, str]:
             str(key or "").strip(),
             str(key or "").strip().upper(),
             str(key or "").strip().lower(),
-            get_base_name_from_file(str(key or "").strip()),
-            get_base_name_from_file(str(key or "").strip()).upper(),
-            get_base_name_from_file(str(key or "").strip()).lower(),
+            getBaseNameFromFile(str(key or "").strip()),
+            getBaseNameFromFile(str(key or "").strip()).upper(),
+            getBaseNameFromFile(str(key or "").strip()).lower(),
             os.path.splitext(str(key or "").strip())[0],
             os.path.splitext(str(key or "").strip())[0].upper(),
             os.path.splitext(str(key or "").strip())[0].lower(),
@@ -1054,7 +1054,7 @@ def _load_description_mapping_from_xml(path: str) -> dict[str, str]:
     return raw_desc
 
 
-def _resolve_description_xml_path(path: str) -> str | None:
+def _resolveDescriptionXmlPath(path: str) -> str | None:
     candidate = Path(path)
     if candidate.exists():
         return str(candidate)
@@ -1073,7 +1073,7 @@ def _resolve_description_xml_path(path: str) -> str | None:
     return None
 
 
-def _required_vendor_packages() -> list[str]:
+def _requiredVendorPackages() -> list[str]:
     return [
         "numpy",
         "opencv-python-headless",
@@ -1082,7 +1082,7 @@ def _required_vendor_packages() -> list[str]:
     ]
 
 
-def build_linux_vendor_install_command(
+def buildLinuxVendorInstallCommand(
     vendor_dir: str = "vendor",
     platform_tag: str = "manylinux2014_x86_64",
     python_version: str | None = None,
@@ -1107,7 +1107,7 @@ def build_linux_vendor_install_command(
         "--only-binary=:all:",
         "--upgrade-strategy",
         "eager",
-        *_required_vendor_packages(),
+        *_requiredVendorPackages(),
     ]
 
 
@@ -1116,9 +1116,9 @@ class Reflection:
         self.raw_desc = raw_desc
 
     def parse_description(self, base_name: str, img_filename: str):
-        canonical_base = get_base_name_from_file(base_name).upper()
+        canonical_base = getBaseNameFromFile(base_name).upper()
         if not canonical_base:
-            canonical_base = get_base_name_from_file(img_filename).upper()
+            canonical_base = getBaseNameFromFile(img_filename).upper()
         description_fragments = _collect_description_fragments(self.raw_desc, base_name, img_filename)
         desc_raw = " ".join(fragment["text"] for fragment in description_fragments)
         desc = desc_raw.lower().strip()
@@ -1276,7 +1276,7 @@ class Reflection:
             overrides["co2_dx"] = 0.0
 
         return overrides
-def _render_svg_to_numpy_inprocess(svg_string: str, size_w: int, size_h: int):
+def _renderSvgToNumpyInprocess(svg_string: str, size_w: int, size_h: int):
     if fitz is None or np is None or cv2 is None:
         return None
 
@@ -1357,7 +1357,7 @@ def _render_svg_to_numpy_via_subprocess(svg_string: str, size_w: int, size_h: in
         return None
 
 
-def _run_svg_render_subprocess_entrypoint() -> int:
+def _runSvgRenderSubprocessEntrypoint() -> int:
     try:
         payload = json.loads(sys.stdin.buffer.read().decode("utf-8"))
     except Exception:
@@ -1367,7 +1367,7 @@ def _run_svg_render_subprocess_entrypoint() -> int:
     h = int(payload.get("h", 0))
     if w <= 0 or h <= 0:
         return 2
-    rendered = _render_svg_to_numpy_inprocess(svg, w, h)
+    rendered = _renderSvgToNumpyInprocess(svg, w, h)
     if rendered is None:
         sys.stdout.write('{"ok": false}\n')
         return 0
@@ -1972,7 +1972,7 @@ class Action:
         fine-tuning runs.
         """
         p = dict(params)
-        symbol_name = get_base_name_from_file(str(name)).upper().split("_", 1)[0]
+        symbol_name = getBaseNameFromFile(str(name)).upper().split("_", 1)[0]
         if symbol_name not in {"AC0812", "AC0832", "AC0837", "AC0882"}:
             return p
 
@@ -2055,7 +2055,7 @@ class Action:
         family-specific CO₂/VOC or small-variant adjustments.
         """
         p = dict(params)
-        symbol_name = get_base_name_from_file(str(name)).upper().split("_", 1)[0]
+        symbol_name = getBaseNameFromFile(str(name)).upper().split("_", 1)[0]
         if symbol_name not in {"AC0810", "AC0814", "AC0834", "AC0838", "AC0839"}:
             return p
 
@@ -2181,7 +2181,7 @@ class Action:
         - text badges becoming top-heavy once circle and connector alignment drifts.
         """
         p = dict(params)
-        symbol_name = get_base_name_from_file(str(name)).upper().split("_", 1)[0]
+        symbol_name = getBaseNameFromFile(str(name)).upper().split("_", 1)[0]
         if symbol_name not in {"AC0811", "AC0813", "AC0831", "AC0833", "AC0836", "AC0881"}:
             return p
 
@@ -2252,7 +2252,7 @@ class Action:
         - need stable text scaling without letting the ring collapse or overgrow.
         """
         p = dict(params)
-        symbol_name = get_base_name_from_file(str(name)).upper().split("_", 1)[0]
+        symbol_name = getBaseNameFromFile(str(name)).upper().split("_", 1)[0]
         if symbol_name not in {"AC0820", "AC0835", "AC0870"}:
             return p
 
@@ -2400,7 +2400,7 @@ class Action:
                 p["co2_width_scale"] = float(min(float(p.get("co2_width_scale", 0.89)), 0.89))
                 p["co2_dy"] = float(max(float(p.get("co2_dy", 0.0)), 0.03 * template_r))
                 p["co2_center_co_bias"] = float(min(float(p.get("co2_center_co_bias", -0.05)), -0.05))
-            if _needs_large_circle_overflow_guard(p) and image_width > 0.0:
+            if _needsLargeCircleOverflowGuard(p) and image_width > 0.0:
                 # Generic large centered CO² rule: keep circle radius template-led
                 # while enforcing the product constraint that the diameter stays
                 # larger than half the badge width.
@@ -4162,7 +4162,7 @@ class Action:
 
     @staticmethod
     def make_badge_params(w: int, h: int, base_name: str, img: np.ndarray | None = None) -> dict | None:
-        name = get_base_name_from_file(base_name).upper()
+        name = getBaseNameFromFile(base_name).upper()
 
         if name == "AR0100":
             scale = min(w, h) / 25.0 if min(w, h) > 0 else 1.0
@@ -4577,7 +4577,7 @@ class Action:
             rendered = _render_svg_to_numpy_via_subprocess(svg_string, size_w, size_h)
             if rendered is not None:
                 return rendered
-        return _render_svg_to_numpy_inprocess(svg_string, size_w, size_h)
+        return _renderSvgToNumpyInprocess(svg_string, size_w, size_h)
 
     @staticmethod
     def create_diff_image(
@@ -6058,7 +6058,7 @@ class Action:
     @staticmethod
     def _enforce_semantic_connector_expectation(base_name: str, semantic_elements: list[str], params: dict, w: int, h: int) -> dict:
         """Restore mandatory connector geometry for directional semantic badges."""
-        normalized_base = get_base_name_from_file(str(base_name)).upper()
+        normalized_base = getBaseNameFromFile(str(base_name)).upper()
         normalized_elements = [str(elem).lower() for elem in (semantic_elements or [])]
         expects_left_arm = any("waagrechter strich links" in elem for elem in normalized_elements)
         expects_right_arm = any("waagrechter strich rechts" in elem for elem in normalized_elements)
@@ -8124,7 +8124,7 @@ class Action:
         return logs
 
 
-def _semantic_quality_flags(base_name: str, validation_logs: list[str]) -> list[str]:
+def _semanticQualityFlags(base_name: str, validation_logs: list[str]) -> list[str]:
     """Derive non-fatal quality markers from semantic element-validation logs.
 
     Semantic structure checks can pass even when one fitted element is still a
@@ -8132,7 +8132,7 @@ def _semantic_quality_flags(base_name: str, validation_logs: list[str]) -> list[
     cases in the per-image validation log so downstream review can spot them.
     """
 
-    if get_base_name_from_file(base_name).upper() != "AC0811":
+    if getBaseNameFromFile(base_name).upper() != "AC0811":
         return []
 
     error_pattern = re.compile(r"^(circle|stem|arm|text): Fehler=([0-9]+(?:\.[0-9]+)?)$")
@@ -8164,7 +8164,7 @@ def _semantic_quality_flags(base_name: str, validation_logs: list[str]) -> list[
     return markers
 
 
-def run_iteration_pipeline(
+def runIterationPipeline(
     img_path: str,
     csv_path: str,
     max_iterations: int,
@@ -8203,8 +8203,8 @@ def run_iteration_pipeline(
     desc, params = ref.parse_description(perc.base_name, filename)
     semantic_audit_targets = {"AC0811", "AC0812", "AC0813", "AC0814"}
     semantic_audit_row: dict[str, object] | None = None
-    if get_base_name_from_file(perc.base_name).upper() in semantic_audit_targets:
-        semantic_audit_row = _semantic_audit_record(
+    if getBaseNameFromFile(perc.base_name).upper() in semantic_audit_targets:
+        semantic_audit_row = _semanticAuditRecord(
             base_name=perc.base_name,
             filename=filename,
             description_fragments=list(params.get("description_fragments", [])),
@@ -8319,7 +8319,7 @@ def run_iteration_pipeline(
             for issue in semantic_issues:
                 print(f"  - {issue}")
             if semantic_audit_row is not None:
-                semantic_audit_row = _semantic_audit_record(
+                semantic_audit_row = _semanticAuditRecord(
                     base_name=perc.base_name,
                     filename=filename,
                     description_fragments=list(params.get("description_fragments", [])),
@@ -8399,9 +8399,9 @@ def run_iteration_pipeline(
             validation_logs.append(
                 "semantic-guard: Erwartete Arm-Geometrie bestätigt/wiederhergestellt (z.B. AC0812 links)."
             )
-        quality_flags = _semantic_quality_flags(perc.base_name, validation_logs)
+        quality_flags = _semanticQualityFlags(perc.base_name, validation_logs)
         if semantic_audit_row is not None:
-            semantic_audit_row = _semantic_audit_record(
+            semantic_audit_row = _semanticAuditRecord(
                 base_name=perc.base_name,
                 filename=filename,
                 description_fragments=list(params.get("description_fragments", [])),
@@ -8531,20 +8531,20 @@ def run_iteration_pipeline(
     return base, desc, params, best_iter, best_error
 
 
-def _extract_ref_parts(name: str) -> tuple[str, int] | None:
+def _extractRefParts(name: str) -> tuple[str, int] | None:
     match = re.match(r"^([A-Z]{2,3})(\d{3,4})$", name.upper())
     if not match:
         return None
     return match.group(1), int(match.group(2))
 
 
-def _normalize_range_token(value: str) -> str:
-    base = get_base_name_from_file(str(value or "").upper())
+def _normalizeRangeToken(value: str) -> str:
+    base = getBaseNameFromFile(str(value or "").upper())
     return re.sub(r"[^A-Z0-9]", "", base)
 
 
-def _compact_range_token(value: str) -> str:
-    token = _normalize_range_token(value)
+def _compactRangeToken(value: str) -> str:
+    token = _normalizeRangeToken(value)
     match = re.match(r"^([A-Z]+)(\d+)$", token)
     if not match:
         return token
@@ -8552,11 +8552,11 @@ def _compact_range_token(value: str) -> str:
     return f"{letters[0]}{digits}"
 
 
-def _shared_partial_range_token(start_ref: str, end_ref: str) -> str:
-    start_token = _normalize_range_token(start_ref)
-    end_token = _normalize_range_token(end_ref)
-    compact_start = _compact_range_token(start_ref)
-    compact_end = _compact_range_token(end_ref)
+def _sharedPartialRangeToken(start_ref: str, end_ref: str) -> str:
+    start_token = _normalizeRangeToken(start_ref)
+    end_token = _normalizeRangeToken(end_ref)
+    compact_start = _compactRangeToken(start_ref)
+    compact_end = _compactRangeToken(end_ref)
     if not start_token or not end_token:
         return ""
     for left, right in ((start_token, end_token), (compact_start, compact_end)):
@@ -8576,11 +8576,11 @@ def _shared_partial_range_token(start_ref: str, end_ref: str) -> str:
     return ""
 
 
-def _matches_partial_range_token(filename: str, start_ref: str, end_ref: str) -> bool:
-    token = _shared_partial_range_token(start_ref, end_ref)
+def _matchesPartialRangeToken(filename: str, start_ref: str, end_ref: str) -> bool:
+    token = _sharedPartialRangeToken(start_ref, end_ref)
     if not token:
         return False
-    stem = _normalize_range_token(get_base_name_from_file(os.path.splitext(filename)[0]))
+    stem = _normalizeRangeToken(getBaseNameFromFile(os.path.splitext(filename)[0]))
     if not stem:
         return False
     if token in stem:
@@ -8593,7 +8593,7 @@ def _matches_partial_range_token(filename: str, start_ref: str, end_ref: str) ->
     return pos == len(token)
 
 
-def _extract_symbol_family(name: str) -> str | None:
+def _extractSymbolFamily(name: str) -> str | None:
     """Extract 2-3 letter corpus family prefixes such as AC, GE, DLG, or NAV."""
     match = re.match(r"^([A-Z]{2,3})\d{3,4}$", str(name).upper())
     if not match:
@@ -8601,32 +8601,32 @@ def _extract_symbol_family(name: str) -> str | None:
     return match.group(1)
 
 
-def _matches_exact_prefix_filter(filename: str, start_ref: str, end_ref: str) -> bool:
-    start_token = _normalize_range_token(start_ref)
-    end_token = _normalize_range_token(end_ref)
+def _matchesExactPrefixFilter(filename: str, start_ref: str, end_ref: str) -> bool:
+    start_token = _normalizeRangeToken(start_ref)
+    end_token = _normalizeRangeToken(end_ref)
     if not start_token or start_token != end_token:
         return False
-    stem = _normalize_range_token(get_base_name_from_file(os.path.splitext(filename)[0]))
+    stem = _normalizeRangeToken(getBaseNameFromFile(os.path.splitext(filename)[0]))
     if not stem:
         return False
     return stem.startswith(start_token)
 
 
-def _in_requested_range(filename: str, start_ref: str, end_ref: str) -> bool:
-    stem = get_base_name_from_file(os.path.splitext(filename)[0]).upper()
-    stem_parts = _extract_ref_parts(stem)
-    start_parts = _extract_ref_parts(start_ref)
-    end_parts = _extract_ref_parts(end_ref)
+def _inRequestedRange(filename: str, start_ref: str, end_ref: str) -> bool:
+    stem = getBaseNameFromFile(os.path.splitext(filename)[0]).upper()
+    stem_parts = _extractRefParts(stem)
+    start_parts = _extractRefParts(start_ref)
+    end_parts = _extractRefParts(end_ref)
 
     # Identical start/end filters should also work as a prefix selector so an
     # input like AC081..AC081 includes AC0814_L, AC0813_M, etc.
-    if _matches_exact_prefix_filter(filename, start_ref, end_ref):
+    if _matchesExactPrefixFilter(filename, start_ref, end_ref):
         return True
 
     # If no parseable range bounds are provided, fall back to a shared partial
     # token filter. This keeps interactive batches small, e.g. AC08..A08 -> A08*.
     if start_parts is None and end_parts is None:
-        return _matches_partial_range_token(filename, start_ref, end_ref) if (start_ref or end_ref) else True
+        return _matchesPartialRangeToken(filename, start_ref, end_ref) if (start_ref or end_ref) else True
 
     # Files that do not follow the usual XX0000 / XXX0000 naming scheme should
     # only pass through broad whole-folder spans, not exact family-specific
@@ -8656,7 +8656,7 @@ def _in_requested_range(filename: str, start_ref: str, end_ref: str) -> bool:
 
 
 
-def _conversion_random() -> random.Random:
+def _conversionRandom() -> random.Random:
     """Return run-local RNG (seedable via env) for non-deterministic search order."""
     seed_raw = os.environ.get("TINY_ICC_RANDOM_SEED")
     if seed_raw is not None and str(seed_raw).strip() != "":
@@ -8666,16 +8666,16 @@ def _conversion_random() -> random.Random:
             pass
     return random.Random(time.time_ns())
 
-def _default_converted_symbols_root() -> str:
+def _defaultConvertedSymbolsRoot() -> str:
     repo_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     return os.path.join(repo_root, "artifacts", "converted_images")
 
 
-def _converted_svg_output_dir(output_root: str) -> str:
+def _convertedSvgOutputDir(output_root: str) -> str:
     return os.path.join(output_root, "converted_svgs")
 
 
-def _read_validation_log_details(log_path: str) -> dict[str, str]:
+def _readValidationLogDetails(log_path: str) -> dict[str, str]:
     if not os.path.exists(log_path):
         return {}
     details: dict[str, str] = {}
@@ -8694,7 +8694,7 @@ def _read_validation_log_details(log_path: str) -> dict[str, str]:
     return details
 
 
-def _write_batch_failure_summary(reports_out_dir: str, failures: list[dict[str, str]]) -> None:
+def _writeBatchFailureSummary(reports_out_dir: str, failures: list[dict[str, str]]) -> None:
     summary_path = os.path.join(reports_out_dir, "batch_failure_summary.csv")
     with open(summary_path, "w", encoding="utf-8", newline="") as f:
         writer = csv.writer(f, delimiter=";")
@@ -8713,8 +8713,8 @@ def _write_batch_failure_summary(reports_out_dir: str, failures: list[dict[str, 
 def _collect_description_fragments(raw_desc: dict[str, str], base_name: str, img_filename: str) -> list[dict[str, str]]:
     """Return the ordered description fragments consulted for one variant lookup."""
     variant_name = os.path.splitext(img_filename)[0]
-    canonical_base = get_base_name_from_file(base_name).upper()
-    canonical_variant = get_base_name_from_file(variant_name).upper()
+    canonical_base = getBaseNameFromFile(base_name).upper()
+    canonical_variant = getBaseNameFromFile(variant_name).upper()
 
     lookup_keys = [
         ("base_name", str(base_name)),
@@ -8739,7 +8739,7 @@ def _collect_description_fragments(raw_desc: dict[str, str], base_name: str, img
     return fragments
 
 
-def _semantic_audit_record(
+def _semanticAuditRecord(
     *,
     base_name: str,
     filename: str,
@@ -8756,7 +8756,7 @@ def _semantic_audit_record(
     joined_description = " ".join(fragment["text"] for fragment in description_fragments).strip()
     return {
         "filename": str(filename),
-        "base_name": get_base_name_from_file(base_name).upper(),
+        "base_name": getBaseNameFromFile(base_name).upper(),
         "description_fragments": description_fragments,
         "recognized_description_elements": [fragment["text"] for fragment in description_fragments],
         "description_lookup_keys": [fragment["key"] for fragment in description_fragments],
@@ -8771,7 +8771,7 @@ def _semantic_audit_record(
     }
 
 
-def _write_semantic_audit_report(reports_out_dir: str, audit_rows: list[dict[str, object]]) -> None:
+def _writeSemanticAuditReport(reports_out_dir: str, audit_rows: list[dict[str, object]]) -> None:
     """Persist semantic audit rows as CSV/JSON for targeted AC0811..AC0814 review."""
     if not audit_rows:
         return
@@ -8814,17 +8814,17 @@ def _write_semantic_audit_report(reports_out_dir: str, audit_rows: list[dict[str
         json.dump(audit_rows, f, ensure_ascii=False, indent=2)
 
 
-def _diff_output_dir(output_root: str) -> str:
+def _diffOutputDir(output_root: str) -> str:
     return os.path.join(output_root, "diff_pngs")
 
 
-def _reports_output_dir(output_root: str) -> str:
+def _reportsOutputDir(output_root: str) -> str:
     return os.path.join(output_root, "reports")
 
 
-def _is_semantic_template_variant(base_name: str, params: dict[str, object] | None = None) -> bool:
+def _isSemanticTemplateVariant(base_name: str, params: dict[str, object] | None = None) -> bool:
     """Return whether an existing converted SVG should participate as semantic donor."""
-    normalized = str(get_base_name_from_file(base_name or "")).upper()
+    normalized = str(getBaseNameFromFile(base_name or "")).upper()
     if not normalized:
         return False
     if normalized.startswith("AC08") or normalized in {"AR0100"}:
@@ -8834,14 +8834,14 @@ def _is_semantic_template_variant(base_name: str, params: dict[str, object] | No
     return False
 
 
-def _load_existing_conversion_rows(output_root: str, folder_path: str) -> list[dict[str, object]]:
+def _loadExistingConversionRows(output_root: str, folder_path: str) -> list[dict[str, object]]:
     """Load previously converted variants so they can act as donor templates.
 
     This lets an earlier conversion batch (for example the already converted
     ``AC08*`` symbols) improve later runs without requiring a fresh full pass.
     """
-    reports_path = Path(_reports_output_dir(output_root)) / "Iteration_Log.csv"
-    svg_out_dir = Path(_converted_svg_output_dir(output_root))
+    reports_path = Path(_reportsOutputDir(output_root)) / "Iteration_Log.csv"
+    svg_out_dir = Path(_convertedSvgOutputDir(output_root))
     if not reports_path.exists() or not svg_out_dir.exists():
         return []
 
@@ -8859,12 +8859,12 @@ def _load_existing_conversion_rows(output_root: str, folder_path: str) -> list[d
                 if not svg_path.exists():
                     continue
 
-                geometry = _read_svg_geometry(str(svg_path))
+                geometry = _readSvgGeometry(str(svg_path))
                 if geometry is None:
                     continue
                 w, h, params = geometry
-                base = get_base_name_from_file(variant).upper()
-                if _is_semantic_template_variant(base, params):
+                base = getBaseNameFromFile(variant).upper()
+                if _isSemanticTemplateVariant(base, params):
                     params["mode"] = "semantic_badge"
 
                 error_per_pixel_raw = str(raw_row.get("FehlerProPixel", "")).strip().replace(",", ".")
@@ -8873,7 +8873,7 @@ def _load_existing_conversion_rows(output_root: str, folder_path: str) -> list[d
                 image_path = Path(folder_path) / filename
                 if image_path.exists():
                     try:
-                        width, height = _sniff_raster_size(image_path)
+                        width, height = _sniffRasterSize(image_path)
                         w = int(width)
                         h = int(height)
                     except Exception:
@@ -8915,7 +8915,7 @@ def _load_existing_conversion_rows(output_root: str, folder_path: str) -> list[d
     ]
 
 
-def _sniff_raster_size(path: str | Path) -> tuple[int, int]:
+def _sniffRasterSize(path: str | Path) -> tuple[int, int]:
     file_path = Path(path)
     with file_path.open("rb") as fh:
         header = fh.read(32)
@@ -8968,7 +8968,7 @@ def _sniff_raster_size(path: str | Path) -> tuple[int, int]:
     raise ValueError(f"Unsupported or unreadable raster image: {file_path}")
 
 
-def _svg_href_mime_type(path: str | Path) -> str:
+def _svgHrefMimeType(path: str | Path) -> str:
     ext = Path(path).suffix.lower()
     return {
         ".jpg": "image/jpeg",
@@ -8979,11 +8979,11 @@ def _svg_href_mime_type(path: str | Path) -> str:
     }.get(ext, "application/octet-stream")
 
 
-def _render_embedded_raster_svg(input_path: str | Path) -> str:
-    width, height = _sniff_raster_size(input_path)
+def _renderEmbeddedRasterSvg(input_path: str | Path) -> str:
+    width, height = _sniffRasterSize(input_path)
     raw = Path(input_path).read_bytes()
     encoded = base64.b64encode(raw).decode("ascii")
-    mime = _svg_href_mime_type(input_path)
+    mime = _svgHrefMimeType(input_path)
     return (
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" '
         f'viewBox="0 0 {width} {height}">\n'
@@ -8992,12 +8992,12 @@ def _render_embedded_raster_svg(input_path: str | Path) -> str:
     )
 
 
-def _quality_config_path(reports_out_dir: str) -> str:
+def _qualityConfigPath(reports_out_dir: str) -> str:
     return os.path.join(reports_out_dir, "quality_tercile_config.json")
 
 
-def _load_quality_config(reports_out_dir: str) -> dict[str, object]:
-    path = _quality_config_path(reports_out_dir)
+def _loadQualityConfig(reports_out_dir: str) -> dict[str, object]:
+    path = _qualityConfigPath(reports_out_dir)
     if not os.path.exists(path):
         return {}
     try:
@@ -9008,14 +9008,14 @@ def _load_quality_config(reports_out_dir: str) -> dict[str, object]:
     return payload if isinstance(payload, dict) else {}
 
 
-def _write_quality_config(
+def _writeQualityConfig(
     reports_out_dir: str,
     *,
     allowed_error_per_pixel: float,
     skipped_variants: list[str],
     source: str,
 ) -> None:
-    path = _quality_config_path(reports_out_dir)
+    path = _qualityConfigPath(reports_out_dir)
     normalized_error_pp = float(allowed_error_per_pixel) if math.isfinite(allowed_error_per_pixel) else 0.0
     payload = {
         "allowed_error_per_pixel": float(max(0.0, normalized_error_pp)),
@@ -9040,7 +9040,7 @@ def _quality_sort_key(row: dict[str, object]) -> float:
 
 
 
-def _compute_successful_conversions_error_threshold(
+def _computeSuccessfulConversionsErrorThreshold(
     rows: list[dict[str, object]],
     successful_variants: list[str] | tuple[str, ...] | None = None,
 ) -> float:
@@ -9071,7 +9071,7 @@ def _compute_successful_conversions_error_threshold(
     return float(mean_val + 2.0 * std_val)
 
 
-def _select_middle_lower_tercile(rows: list[dict[str, object]]) -> list[dict[str, object]]:
+def _selectMiddleLowerTercile(rows: list[dict[str, object]]) -> list[dict[str, object]]:
     if len(rows) < 3:
         return []
 
@@ -9080,7 +9080,7 @@ def _select_middle_lower_tercile(rows: list[dict[str, object]]) -> list[dict[str
     return ranked[first_cut:]
 
 
-def _select_open_quality_cases(
+def _selectOpenQualityCases(
     rows: list[dict[str, object]],
     *,
     allowed_error_per_pixel: float,
@@ -9107,7 +9107,7 @@ def _select_open_quality_cases(
     return sorted(open_rows, key=_quality_sort_key, reverse=True)
 
 
-def _iteration_strategy_for_pass(pass_idx: int, base_iterations: int) -> tuple[int, int]:
+def _iterationStrategyForPass(pass_idx: int, base_iterations: int) -> tuple[int, int]:
     """Adaptive per-pass search budget for unresolved quality cases."""
     p = max(1, int(pass_idx))
     base = max(1, int(base_iterations))
@@ -9120,7 +9120,7 @@ def _iteration_strategy_for_pass(pass_idx: int, base_iterations: int) -> tuple[i
     return base + 48 + (p * 3), 8 + p
 
 
-def _adaptive_iteration_budget_for_quality_row(row: dict[str, object], planned_budget: int) -> int:
+def _adaptiveIterationBudgetForQualityRow(row: dict[str, object], planned_budget: int) -> int:
     """Tune per-row iteration budget using convergence/plateau quality signals.
 
     Heuristic goals:
@@ -9151,7 +9151,7 @@ def _adaptive_iteration_budget_for_quality_row(row: dict[str, object], planned_b
     return budget
 
 
-def _write_quality_pass_report(
+def _writeQualityPassReport(
     reports_out_dir: str,
     pass_rows: list[dict[str, object]],
 ) -> None:
@@ -9188,7 +9188,7 @@ def _write_quality_pass_report(
             ])
 
 
-def _evaluate_quality_pass_candidate(
+def _evaluateQualityPassCandidate(
     old_row: dict[str, object],
     new_row: dict[str, object],
 ) -> tuple[bool, str, float, float, float, float]:
@@ -9212,14 +9212,14 @@ def _evaluate_quality_pass_candidate(
     return improved, decision, prev_error_pp, new_error_pp, prev_mean_delta2, new_mean_delta2
 
 
-def _extract_svg_inner(svg_text: str) -> str:
+def _extractSvgInner(svg_text: str) -> str:
     match = re.search(r"<svg[^>]*>(.*)</svg>", svg_text, flags=re.DOTALL | re.IGNORECASE)
     if match:
         return match.group(1).strip()
     return svg_text
 
 
-def _build_transformed_svg_from_template(
+def _buildTransformedSvgFromTemplate(
     template_svg_text: str,
     target_w: int,
     target_h: int,
@@ -9227,7 +9227,7 @@ def _build_transformed_svg_from_template(
     rotation_deg: int,
     scale: float,
 ) -> str:
-    inner = _extract_svg_inner(template_svg_text)
+    inner = _extractSvgInner(template_svg_text)
     # Keep donor stroke widths visually stable when trying scale-based transfers.
     # This mirrors the "M->S/L while preserving line thickness" workflow that is
     # often needed for noisy small/large bitmap variants.
@@ -9254,7 +9254,7 @@ def _build_transformed_svg_from_template(
     )
 
 
-def _template_transfer_scale_candidates(base_scale: float) -> list[float]:
+def _templateTransferScaleCandidates(base_scale: float) -> list[float]:
     """Build a compact scale ladder around an estimated best scale."""
     if not math.isfinite(base_scale) or base_scale <= 0.0:
         base_scale = 1.0
@@ -9278,7 +9278,7 @@ def _template_transfer_scale_candidates(base_scale: float) -> list[float]:
     return scales
 
 
-def _estimate_template_transfer_scale(
+def _estimateTemplateTransferScale(
     img_orig: np.ndarray,
     donor_svg_text: str,
     target_w: int,
@@ -9288,7 +9288,7 @@ def _estimate_template_transfer_scale(
 ) -> float | None:
     """Estimate donor->target scale from foreground silhouette bboxes."""
     rendered = Action.render_svg_to_numpy(
-        _build_transformed_svg_from_template(
+        _buildTransformedSvgFromTemplate(
             donor_svg_text,
             target_w,
             target_h,
@@ -9321,7 +9321,7 @@ def _estimate_template_transfer_scale(
     return float(min(1.90, max(0.65, scale)))
 
 
-def _template_transfer_transform_candidates(
+def _templateTransferTransformCandidates(
     target_variant: str,
     donor_variant: str,
     *,
@@ -9336,7 +9336,7 @@ def _template_transfer_transform_candidates(
         estimated = None
         if estimated_scale_by_rotation is not None:
             estimated = estimated_scale_by_rotation.get(rotation)
-        for scale in _template_transfer_scale_candidates(estimated if estimated is not None else 1.0):
+        for scale in _templateTransferScaleCandidates(estimated if estimated is not None else 1.0):
             candidate = (rotation, float(scale))
             key = (rotation, round(float(scale), 4))
             if key in seen:
@@ -9346,7 +9346,7 @@ def _template_transfer_transform_candidates(
     return candidates
 
 
-def _rank_template_transfer_donors(
+def _rankTemplateTransferDonors(
     target_row: dict[str, object],
     donor_rows: list[dict[str, object]],
 ) -> list[dict[str, object]]:
@@ -9355,7 +9355,7 @@ def _rank_template_transfer_donors(
     target_sig: dict[str, float] | None = None
     target_params = target_row.get("params")
     if isinstance(target_params, dict):
-        target_sig = _normalized_geometry_signature(
+        target_sig = _normalizedGeometrySignature(
             int(target_row.get("w", 0)),
             int(target_row.get("h", 0)),
             dict(target_params),
@@ -9368,11 +9368,11 @@ def _rank_template_transfer_donors(
         donor_sig: dict[str, float] | None = None
         donor_params = donor.get("params")
         if isinstance(donor_params, dict):
-            donor_sig = _normalized_geometry_signature(int(donor.get("w", 0)), int(donor.get("h", 0)), dict(donor_params))
+            donor_sig = _normalizedGeometrySignature(int(donor.get("w", 0)), int(donor.get("h", 0)), dict(donor_params))
 
         delta = float("inf")
         if target_sig is not None and donor_sig is not None:
-            delta = _max_signature_delta(target_sig, donor_sig)
+            delta = _maxSignatureDelta(target_sig, donor_sig)
 
         key = (0.0 if donor_base == target_base else 1.0, delta, donor_error_pp)
         ranked.append((key, donor))
@@ -9381,7 +9381,7 @@ def _rank_template_transfer_donors(
     return [donor for _, donor in ranked]
 
 
-def _template_transfer_donor_family_compatible(
+def _templateTransferDonorFamilyCompatible(
     target_base: str,
     donor_base: str,
     *,
@@ -9392,8 +9392,8 @@ def _template_transfer_donor_family_compatible(
     if donor_base.upper() in alias_refs:
         return True
 
-    target_family = _extract_symbol_family(target_base)
-    donor_family = _extract_symbol_family(donor_base)
+    target_family = _extractSymbolFamily(target_base)
+    donor_family = _extractSymbolFamily(donor_base)
     if target_family is None or donor_family is None:
         # Keep legacy behavior for non-standard names where family extraction fails.
         return True
@@ -9402,7 +9402,7 @@ def _template_transfer_donor_family_compatible(
 
 
 
-def _semantic_transfer_rotations(target_params: dict[str, object], donor_params: dict[str, object]) -> tuple[int, ...]:
+def _semanticTransferRotations(target_params: dict[str, object], donor_params: dict[str, object]) -> tuple[int, ...]:
     """Rotation candidates for semantic transfer while preserving symbol semantics."""
     has_text = bool(target_params.get("draw_text", False) or donor_params.get("draw_text", False))
     has_connector = bool(
@@ -9423,7 +9423,7 @@ def _semantic_transfer_rotations(target_params: dict[str, object], donor_params:
 
 
 
-def _semantic_transfer_is_compatible(target_params: dict[str, object], donor_params: dict[str, object]) -> bool:
+def _semanticTransferIsCompatible(target_params: dict[str, object], donor_params: dict[str, object]) -> bool:
     """Return whether donor semantics can preserve target semantic geometry."""
     target_has_arm = bool(target_params.get("arm_enabled", False))
     target_has_stem = bool(target_params.get("stem_enabled", False))
@@ -9451,21 +9451,21 @@ def _semantic_transfer_is_compatible(target_params: dict[str, object], donor_par
     # Directional connector families (e.g. AC0810 right arm vs AC0812 left arm)
     # must keep side/orientation stable during semantic transfer.
     if target_has_arm and donor_has_arm:
-        target_arm_dir = _connector_arm_direction(target_params)
-        donor_arm_dir = _connector_arm_direction(donor_params)
+        target_arm_dir = _connectorArmDirection(target_params)
+        donor_arm_dir = _connectorArmDirection(donor_params)
         if target_arm_dir is not None and donor_arm_dir is not None and target_arm_dir != donor_arm_dir:
             return False
 
     if target_has_stem and donor_has_stem:
-        target_stem_dir = _connector_stem_direction(target_params)
-        donor_stem_dir = _connector_stem_direction(donor_params)
+        target_stem_dir = _connectorStemDirection(target_params)
+        donor_stem_dir = _connectorStemDirection(donor_params)
         if target_stem_dir is not None and donor_stem_dir is not None and target_stem_dir != donor_stem_dir:
             return False
 
     return True
 
 
-def _connector_arm_direction(params: dict[str, object]) -> int | None:
+def _connectorArmDirection(params: dict[str, object]) -> int | None:
     """Return horizontal arm side: -1 left of circle, +1 right, or None if unknown."""
     x1 = params.get("arm_x1")
     x2 = params.get("arm_x2")
@@ -9483,7 +9483,7 @@ def _connector_arm_direction(params: dict[str, object]) -> int | None:
     return None
 
 
-def _connector_stem_direction(params: dict[str, object]) -> int | None:
+def _connectorStemDirection(params: dict[str, object]) -> int | None:
     """Return vertical stem direction: -1 up, +1 down, or None if unknown."""
     y1 = params.get("arm_y1")
     y2 = params.get("arm_y2")
@@ -9501,9 +9501,9 @@ def _connector_stem_direction(params: dict[str, object]) -> int | None:
     return None
 
 
-def _semantic_transfer_scale_candidates(base_scale: float) -> list[float]:
+def _semanticTransferScaleCandidates(base_scale: float) -> list[float]:
     """Broader scale ladder for semantic badge transfer exploration."""
-    core = _template_transfer_scale_candidates(base_scale)
+    core = _templateTransferScaleCandidates(base_scale)
     extra = [0.55, 0.65, 0.75, 0.85, 1.00, 1.15, 1.30, 1.50, 1.75, 2.00]
     values = []
     seen: set[float] = set()
@@ -9516,7 +9516,7 @@ def _semantic_transfer_scale_candidates(base_scale: float) -> list[float]:
         values.append(key)
     return values
 
-def _semantic_transfer_badge_params(
+def _semanticTransferBadgeParams(
     donor_params: dict[str, object],
     target_params: dict[str, object],
     *,
@@ -9596,7 +9596,7 @@ def _semantic_transfer_badge_params(
         p = Action._finalize_ac08_style(symbol_name, p)
     return p
 
-def _try_template_transfer(
+def _tryTemplateTransfer(
     *,
     target_row: dict[str, object],
     donor_rows: list[dict[str, object]],
@@ -9628,7 +9628,7 @@ def _try_template_transfer(
     target_variant = str(target_row.get("variant", "")).upper()
     target_base = str(target_row.get("base", "")).upper()
     target_svg_path = os.path.join(svg_out_dir, f"{target_variant}.svg")
-    target_svg_geometry = _read_svg_geometry(target_svg_path)
+    target_svg_geometry = _readSvgGeometry(target_svg_path)
     target_geom_params = dict(target_svg_geometry[2]) if target_svg_geometry is not None else None
     target_params_raw = target_row.get("params")
     target_alias_refs: set[str] = set()
@@ -9637,7 +9637,7 @@ def _try_template_transfer(
         if isinstance(alias_values, list):
             target_alias_refs = {str(v).upper() for v in alias_values if str(v).strip()}
     target_is_semantic = isinstance(target_params_raw, dict) and str(target_params_raw.get("mode", "")) == "semantic_badge"
-    ordered_donors = _rank_template_transfer_donors(target_row, donor_rows)
+    ordered_donors = _rankTemplateTransferDonors(target_row, donor_rows)
     if rng is not None and len(ordered_donors) > 1:
         head = ordered_donors[:3]
         tail = ordered_donors[3:]
@@ -9648,7 +9648,7 @@ def _try_template_transfer(
         donor_base = str(donor.get("base", "")).upper()
         if not donor_variant or donor_variant == target_variant:
             continue
-        if not target_is_semantic and not _template_transfer_donor_family_compatible(
+        if not target_is_semantic and not _templateTransferDonorFamilyCompatible(
             target_base,
             donor_base,
             documented_alias_refs=target_alias_refs,
@@ -9662,11 +9662,11 @@ def _try_template_transfer(
         except OSError:
             continue
 
-        donor_svg_geometry = _read_svg_geometry(donor_svg_path)
+        donor_svg_geometry = _readSvgGeometry(donor_svg_path)
         donor_geom_params = dict(donor_svg_geometry[2]) if donor_svg_geometry is not None else None
 
         estimated_scales = {
-            rotation: _estimate_template_transfer_scale(
+            rotation: _estimateTemplateTransferScale(
                 img_orig,
                 donor_svg_text,
                 w,
@@ -9687,18 +9687,18 @@ def _try_template_transfer(
                 and donor_is_semantic
                 and target_geom_params is not None
                 and donor_geom_params is not None
-                and _semantic_transfer_is_compatible(dict(target_params_raw), dict(donor_params_raw))
+                and _semanticTransferIsCompatible(dict(target_params_raw), dict(donor_params_raw))
             ):
                 base_scale = float(min(w, h)) / max(1.0, float(min(int(donor.get("w", w)), int(donor.get("h", h)))))
-                semantic_scales = _semantic_transfer_scale_candidates(base_scale)
+                semantic_scales = _semanticTransferScaleCandidates(base_scale)
                 if rng is not None:
                     keep = semantic_scales[:2]
                     rest = semantic_scales[2:]
                     rng.shuffle(rest)
                     semantic_scales = keep + rest
-                for rotation in _semantic_transfer_rotations(dict(target_params_raw), dict(donor_params_raw)):
+                for rotation in _semanticTransferRotations(dict(target_params_raw), dict(donor_params_raw)):
                     for scale in semantic_scales:
-                        candidate_params = _semantic_transfer_badge_params(
+                        candidate_params = _semanticTransferBadgeParams(
                             dict(donor_geom_params),
                             dict(target_geom_params),
                             target_w=w,
@@ -9726,12 +9726,12 @@ def _try_template_transfer(
             # Generic donor SVG transforms can remove those semantics.
             continue
 
-        for rotation, scale in _template_transfer_transform_candidates(
+        for rotation, scale in _templateTransferTransformCandidates(
             target_variant,
             donor_variant,
             estimated_scale_by_rotation=estimated_scales,
         ):
-            candidate_svg = _build_transformed_svg_from_template(
+            candidate_svg = _buildTransformedSvgFromTemplate(
                 donor_svg_text,
                 w,
                 h,
@@ -9788,7 +9788,7 @@ def _try_template_transfer(
     return updated_row, detail
 
 
-def convert_range(
+def convertRange(
     folder_path: str,
     csv_path: str,
     iterations: int,
@@ -9799,10 +9799,10 @@ def convert_range(
     output_root: str | None = None,
     selected_variants: set[str] | None = None,
 ) -> str:
-    out_root = output_root or _default_converted_symbols_root()
-    svg_out_dir = _converted_svg_output_dir(out_root)
-    diff_out_dir = _diff_output_dir(out_root)
-    reports_out_dir = _reports_output_dir(out_root)
+    out_root = output_root or _defaultConvertedSymbolsRoot()
+    svg_out_dir = _convertedSvgOutputDir(out_root)
+    diff_out_dir = _diffOutputDir(out_root)
+    reports_out_dir = _reportsOutputDir(out_root)
 
     os.makedirs(svg_out_dir, exist_ok=True)
     os.makedirs(diff_out_dir, exist_ok=True)
@@ -9813,7 +9813,7 @@ def convert_range(
         f
         for f in os.listdir(folder_path)
         if f.lower().endswith((".bmp", ".jpg", ".png", ".gif"))
-        and _in_requested_range(f, start_ref, end_ref)
+        and _inRequestedRange(f, start_ref, end_ref)
         and (not normalized_selected_variants or os.path.splitext(f)[0].upper() in normalized_selected_variants)
     )
     if cv2 is None or np is None:
@@ -9824,12 +9824,12 @@ def convert_range(
             for filename in files:
                 stem = os.path.splitext(filename)[0]
                 image_path = os.path.join(folder_path, filename)
-                svg_content = _render_embedded_raster_svg(image_path)
+                svg_content = _renderEmbeddedRasterSvg(image_path)
                 svg_path = os.path.join(svg_out_dir, f"{stem}.svg")
                 with open(svg_path, "w", encoding="utf-8") as svg_file:
                     svg_file.write(svg_content)
                 if fitz is not None:
-                    diff = _create_diff_image_without_cv2(image_path, svg_content)
+                    diff = _createDiffImageWithoutCv2(image_path, svg_content)
                     diff.save(os.path.join(diff_out_dir, f"{stem}_diff.png"))
                 writer.writerow([filename, "embedded-raster", 0, "0.00", "0.00000000"])
         with open(os.path.join(reports_out_dir, "fallback_mode.txt"), "w", encoding="utf-8") as f:
@@ -9838,9 +9838,9 @@ def convert_range(
                 "SVG-Dateien wurden als eingebettete Rasterbilder erzeugt"
                 + (" und Differenzbilder via Pillow/PyMuPDF geschrieben.\n" if fitz is not None else ".\n")
             )
-        generate_conversion_overviews(diff_out_dir, svg_out_dir, reports_out_dir)
+        generateConversionOverviews(diff_out_dir, svg_out_dir, reports_out_dir)
         return out_root
-    rng = _conversion_random()
+    rng = _conversionRandom()
     run_seed = rng.randrange(1 << 30)
     Action.STOCHASTIC_RUN_SEED = int(run_seed)
     process_files = list(files)
@@ -9854,14 +9854,14 @@ def convert_range(
     result_map: dict[str, dict[str, object]] = {}
     batch_failures: list[dict[str, str]] = []
     stop_after_failure = False
-    existing_donor_rows = _load_existing_conversion_rows(out_root, folder_path)
+    existing_donor_rows = _loadExistingConversionRows(out_root, folder_path)
 
     def _convert_one(filename: str, iteration_budget: int, badge_rounds: int) -> tuple[dict[str, object] | None, bool]:
         image_path = os.path.join(folder_path, filename)
         base = os.path.splitext(filename)[0]
         log_file = os.path.join(reports_out_dir, f"{base}_element_validation.log")
         try:
-            res = run_iteration_pipeline(
+            res = runIterationPipeline(
                 image_path,
                 csv_path,
                 max(1, int(iteration_budget)),
@@ -9887,7 +9887,7 @@ def convert_range(
             print(f"[WARN] {filename}: Batchlauf setzt nach Fehler fort ({type(exc).__name__}: {exc})")
             return None, True
         if not res:
-            details = _read_validation_log_details(log_file)
+            details = _readValidationLogDetails(log_file)
             status = details.get("status", "")
             if status in {"render_failure", "batch_error"}:
                 batch_failures.append(
@@ -9916,7 +9916,7 @@ def convert_range(
             return None, False
 
         _base, _desc, params, best_iter, best_error = res
-        details = _read_validation_log_details(log_file)
+        details = _readValidationLogDetails(log_file)
         img = cv2.imread(image_path)
         pixel_count = 1.0
         width = 0
@@ -9948,7 +9948,7 @@ def convert_range(
             "std_delta2": float(std_delta2),
             "w": int(width),
             "h": int(height),
-            "base": get_base_name_from_file(os.path.splitext(filename)[0]).upper(),
+            "base": getBaseNameFromFile(os.path.splitext(filename)[0]).upper(),
             "variant": os.path.splitext(filename)[0].upper(),
         }, False
 
@@ -9968,7 +9968,7 @@ def convert_range(
         ]
         donor_rows.extend(prev for prev in existing_donor_rows if str(prev.get("filename", "")) != filename)
         if donor_rows:
-            transferred, _detail = _try_template_transfer(
+            transferred, _detail = _tryTemplateTransfer(
                 target_row=row,
                 donor_rows=donor_rows,
                 folder_path=folder_path,
@@ -9991,13 +9991,13 @@ def convert_range(
     initial_top_tercile = ranked_rows[:first_cut]
     initial_threshold = float(initial_top_tercile[-1]["error_per_pixel"]) if initial_top_tercile else float("inf")
 
-    successful_threshold = _compute_successful_conversions_error_threshold(current_rows)
+    successful_threshold = _computeSuccessfulConversionsErrorThreshold(current_rows)
     threshold_source = "successful-conversions-mean-plus-2std"
     if not math.isfinite(successful_threshold):
         successful_threshold = initial_threshold
         threshold_source = "initial-first-tercile"
 
-    cfg = _load_quality_config(reports_out_dir)
+    cfg = _loadQualityConfig(reports_out_dir)
     allowed_error_pp = successful_threshold
     cfg_value = cfg.get("allowed_error_per_pixel")
     if cfg_value is not None:
@@ -10012,7 +10012,7 @@ def convert_range(
     # while still converging by only accepting strict improvements.
     skip_variants: set[str] = set()
 
-    _write_quality_config(
+    _writeQualityConfig(
         reports_out_dir,
         allowed_error_per_pixel=allowed_error_pp,
         skipped_variants=sorted(v for v in skip_variants if v),
@@ -10031,7 +10031,7 @@ def convert_range(
             for row in result_map.values()
             if math.isfinite(float(row.get("error_per_pixel", float("inf"))))
         ]
-        candidates = _select_open_quality_cases(
+        candidates = _selectOpenQualityCases(
             current_rows,
             allowed_error_per_pixel=allowed_error_pp,
             skip_variants=skip_variants,
@@ -10039,17 +10039,17 @@ def convert_range(
         # Fallback to the historical selection when no explicit open set exists
         # (e.g. without threshold config).
         if not candidates:
-            candidates = _select_middle_lower_tercile(current_rows)
+            candidates = _selectMiddleLowerTercile(current_rows)
         if not candidates:
             break
 
         improved_in_pass = False
-        iteration_budget, badge_rounds = _iteration_strategy_for_pass(pass_idx, base_iterations)
+        iteration_budget, badge_rounds = _iterationStrategyForPass(pass_idx, base_iterations)
         if len(candidates) > 1:
             rng.shuffle(candidates)
         for row in candidates:
             filename = str(row["filename"])
-            adaptive_iteration_budget = _adaptive_iteration_budget_for_quality_row(row, iteration_budget)
+            adaptive_iteration_budget = _adaptiveIterationBudgetForQualityRow(row, iteration_budget)
             new_row, failed = _convert_one(filename, iteration_budget=adaptive_iteration_budget, badge_rounds=badge_rounds)
             if failed:
                 stop_after_failure = True
@@ -10057,7 +10057,7 @@ def convert_range(
             if new_row is None:
                 continue
 
-            improved, decision, prev_error_pp, new_error_pp, prev_mean_delta2, new_mean_delta2 = _evaluate_quality_pass_candidate(
+            improved, decision, prev_error_pp, new_error_pp, prev_mean_delta2, new_mean_delta2 = _evaluateQualityPassCandidate(
                 row,
                 new_row,
             )
@@ -10084,8 +10084,8 @@ def convert_range(
         if stop_after_failure or not improved_in_pass:
             break
 
-    _write_quality_pass_report(reports_out_dir, quality_logs)
-    _write_batch_failure_summary(reports_out_dir, batch_failures)
+    _writeQualityPassReport(reports_out_dir, quality_logs)
+    _writeBatchFailureSummary(reports_out_dir, batch_failures)
     if strategy_logs:
         strategy_path = os.path.join(reports_out_dir, "strategy_switch_template_transfers.csv")
         with open(strategy_path, "w", encoding="utf-8", newline="") as f:
@@ -10138,27 +10138,27 @@ def convert_range(
                     }
                 )
 
-    _harmonize_semantic_size_variants(semantic_results, folder_path, svg_out_dir, reports_out_dir)
+    _harmonizeSemanticSizeVariants(semantic_results, folder_path, svg_out_dir, reports_out_dir)
     semantic_audit_rows = [
         dict(audit)
         for row in result_map.values()
         for audit in [dict(row.get("params", {}).get("semantic_audit", {}))]
         if audit
     ]
-    _write_semantic_audit_report(reports_out_dir, semantic_audit_rows)
-    _write_pixel_delta2_ranking(folder_path, svg_out_dir, reports_out_dir)
-    _write_ac08_weak_family_status_report(
+    _writeSemanticAuditReport(reports_out_dir, semantic_audit_rows)
+    _writePixelDelta2Ranking(folder_path, svg_out_dir, reports_out_dir)
+    _writeAc08WeakFamilyStatusReport(
         reports_out_dir,
         selected_variants=sorted(normalized_selected_variants),
     )
-    _write_ac08_regression_manifest(
+    _writeAc08RegressionManifest(
         reports_out_dir,
         folder_path=folder_path,
         csv_path=csv_path,
         iterations=iterations,
         selected_variants=sorted(normalized_selected_variants),
     )
-    ac08_success_gate = _write_ac08_success_criteria_report(
+    ac08_success_gate = _writeAc08SuccessCriteriaReport(
         reports_out_dir,
         selected_variants=sorted(normalized_selected_variants),
     )
@@ -10186,13 +10186,13 @@ def convert_range(
                 f"(mean_validation_rounds_per_file={float(ac08_success_gate.get('mean_validation_rounds_per_file', 0.0)):.3f})."
             )
     if SUCCESSFUL_CONVERSIONS_MANIFEST.exists():
-        update_successful_conversions_manifest_with_metrics(
+        updateSuccessfulConversionsManifestWithMetrics(
             folder_path=folder_path,
             svg_out_dir=svg_out_dir,
             reports_out_dir=reports_out_dir,
             manifest_path=SUCCESSFUL_CONVERSIONS_MANIFEST,
         )
-    generated_overviews = generate_conversion_overviews(diff_out_dir, svg_out_dir, reports_out_dir)
+    generated_overviews = generateConversionOverviews(diff_out_dir, svg_out_dir, reports_out_dir)
     if generated_overviews:
         print(
             "[INFO] Übersichts-Kacheln erzeugt: "
@@ -10204,7 +10204,7 @@ def convert_range(
     return out_root
 
 
-def _read_svg_geometry(svg_path: str) -> tuple[int, int, dict] | None:
+def _readSvgGeometry(svg_path: str) -> tuple[int, int, dict] | None:
     if not os.path.exists(svg_path):
         return None
 
@@ -10336,7 +10336,7 @@ def _read_svg_geometry(svg_path: str) -> tuple[int, int, dict] | None:
     return w, h, params
 
 
-def _normalized_geometry_signature(w: int, h: int, params: dict) -> dict[str, float]:
+def _normalizedGeometrySignature(w: int, h: int, params: dict) -> dict[str, float]:
     sig: dict[str, float] = {}
     scale = max(1.0, float(min(w, h)))
 
@@ -10362,14 +10362,14 @@ def _normalized_geometry_signature(w: int, h: int, params: dict) -> dict[str, fl
     return sig
 
 
-def _max_signature_delta(sig_a: dict[str, float], sig_b: dict[str, float]) -> float:
+def _maxSignatureDelta(sig_a: dict[str, float], sig_b: dict[str, float]) -> float:
     keys = sorted(set(sig_a.keys()).intersection(sig_b.keys()))
     if not keys:
         return 1.0
     return max(abs(sig_a[k] - sig_b[k]) for k in keys)
 
 
-def _needs_large_circle_overflow_guard(params: dict) -> bool:
+def _needsLargeCircleOverflowGuard(params: dict) -> bool:
     """Return whether circle placement may intentionally exceed canvas bounds.
 
     This is a generic geometry rule for large, centered CO² badges without
@@ -10396,7 +10396,7 @@ def _needs_large_circle_overflow_guard(params: dict) -> bool:
     return bool(large_template or large_current or wide_canvas)
 
 
-def _scale_badge_params(
+def _scaleBadgeParams(
     anchor: dict,
     anchor_w: int,
     anchor_h: int,
@@ -10448,7 +10448,7 @@ def _scale_badge_params(
             scaled[key] = float(anchor[key]) * float(factor)
 
     if scaled.get("circle_enabled", True):
-        overflow_guard = _needs_large_circle_overflow_guard(scaled)
+        overflow_guard = _needsLargeCircleOverflowGuard(scaled)
         required_r = (float(target_w) / 2.0) + 0.5 if overflow_guard else 1.0
         if overflow_guard:
             scaled["allow_circle_overflow"] = True
@@ -10503,7 +10503,7 @@ def _scale_badge_params(
     return scaled
 
 
-def _harmonization_anchor_priority(suffix: str, prefer_large: bool) -> int:
+def _harmonizationAnchorPriority(suffix: str, prefer_large: bool) -> int:
     """Return size-priority rank for L/M/S harmonization anchors."""
     if prefer_large:
         # For connector families we keep L authoritative to avoid undersized
@@ -10513,11 +10513,11 @@ def _harmonization_anchor_priority(suffix: str, prefer_large: bool) -> int:
     return {"M": 0, "L": 1, "S": 2}.get(str(suffix), 3)
 
 
-def _clip_gray(value: float) -> int:
+def _clipGray(value: float) -> int:
     return int(max(0, min(255, round(float(value)))))
 
 
-def _family_harmonized_badge_colors(variant_rows: list[dict[str, object]]) -> dict[str, int]:
+def _familyHarmonizedBadgeColors(variant_rows: list[dict[str, object]]) -> dict[str, int]:
     """Derive a family palette from L/M/S variants and slightly boost contrast."""
     buckets: dict[str, list[float]] = {
         "fill_gray": [],
@@ -10544,10 +10544,10 @@ def _family_harmonized_badge_colors(variant_rows: list[dict[str, object]]) -> di
     center = (fill_avg + stroke_avg) / 2.0
     delta = abs(fill_avg - stroke_avg)
     boosted_delta = max(18.0, delta * 1.12)
-    fill_gray = _clip_gray(center + (boosted_delta / 2.0))
-    stroke_gray = _clip_gray(center - (boosted_delta / 2.0))
+    fill_gray = _clipGray(center + (boosted_delta / 2.0))
+    stroke_gray = _clipGray(center - (boosted_delta / 2.0))
     if fill_gray <= stroke_gray:
-        fill_gray = _clip_gray(max(fill_gray, stroke_gray + 1.0))
+        fill_gray = _clipGray(max(fill_gray, stroke_gray + 1.0))
 
     colors = {
         "fill_gray": fill_gray,
@@ -10558,16 +10558,16 @@ def _family_harmonized_badge_colors(variant_rows: list[dict[str, object]]) -> di
 
     if buckets["text_gray"]:
         text_avg = sum(buckets["text_gray"]) / float(len(buckets["text_gray"]))
-        colors["text_gray"] = _clip_gray(min(text_avg, float(stroke_gray)))
+        colors["text_gray"] = _clipGray(min(text_avg, float(stroke_gray)))
 
     if buckets["stem_gray"]:
         stem_avg = sum(buckets["stem_gray"]) / float(len(buckets["stem_gray"]))
-        colors["stem_gray"] = _clip_gray(min(stem_avg, float(stroke_gray)))
+        colors["stem_gray"] = _clipGray(min(stem_avg, float(stroke_gray)))
 
     return colors
 
 
-def _harmonize_semantic_size_variants(
+def _harmonizeSemanticSizeVariants(
     results: list[dict[str, object]],
     folder_path: str,
     svg_out_dir: str,
@@ -10590,7 +10590,7 @@ def _harmonize_semantic_size_variants(
             suffix = variant.rsplit("_", 1)[-1] if "_" in variant else ""
             if suffix not in {"L", "M", "S"}:
                 continue
-            parsed = _read_svg_geometry(os.path.join(svg_out_dir, f"{variant}.svg"))
+            parsed = _readSvgGeometry(os.path.join(svg_out_dir, f"{variant}.svg"))
             if parsed is None:
                 continue
             w, h, params = parsed
@@ -10612,7 +10612,7 @@ def _harmonize_semantic_size_variants(
         category_logs.append(f"{base};{category};{variants_joined}")
 
         sigs = {
-            row["variant"]: _normalized_geometry_signature(int(row["w"]), int(row["h"]), dict(row["params"]))
+            row["variant"]: _normalizedGeometrySignature(int(row["w"]), int(row["h"]), dict(row["params"]))
             for row in variant_rows
         }
         max_delta = 0.0
@@ -10620,7 +10620,7 @@ def _harmonize_semantic_size_variants(
             for j in range(i + 1, len(variant_rows)):
                 vi = str(variant_rows[i]["variant"])
                 vj = str(variant_rows[j]["variant"])
-                max_delta = max(max_delta, _max_signature_delta(sigs[vi], sigs[vj]))
+                max_delta = max(max_delta, _maxSignatureDelta(sigs[vi], sigs[vj]))
 
         # Do not skip families with one badly fitted outlier variant. We still
         # validate every harmonization candidate against raster error before write.
@@ -10630,7 +10630,7 @@ def _harmonize_semantic_size_variants(
             # Connector families ("Kellen") tend to under-fit large variants
             # when we derive L from M. Prefer L as harmonization anchor so the
             # largest geometry stays authoritative and M/S scale down from it.
-            priority = _harmonization_anchor_priority(suffix, prefer_large=has_connector)
+            priority = _harmonizationAnchorPriority(suffix, prefer_large=has_connector)
             err = float(dict(row["entry"]).get("error", float("inf")))
             return priority, err
 
@@ -10639,13 +10639,13 @@ def _harmonize_semantic_size_variants(
         anchor_w = int(anchor["w"])
         anchor_h = int(anchor["h"])
         anchor_params = dict(anchor["params"])
-        family_colors = _family_harmonized_badge_colors(variant_rows)
+        family_colors = _familyHarmonizedBadgeColors(variant_rows)
 
         for row in variant_rows:
             target_variant = str(row["variant"])
             target_w = int(row["w"])
             target_h = int(row["h"])
-            scaled = _scale_badge_params(
+            scaled = _scaleBadgeParams(
                 anchor_params,
                 anchor_w,
                 anchor_h,
@@ -10698,7 +10698,7 @@ def _harmonize_semantic_size_variants(
             f.write("\n".join(category_logs).rstrip() + "\n")
 
 
-def _write_ac08_regression_manifest(
+def _writeAc08RegressionManifest(
     reports_out_dir: str,
     *,
     folder_path: str,
@@ -10739,7 +10739,7 @@ def _write_ac08_regression_manifest(
         f.write("\n".join(summary_lines) + "\n")
 
 
-def _summarize_previous_good_ac08_variants(reports_out_dir: str) -> dict[str, object]:
+def _summarizePreviousGoodAc08Variants(reports_out_dir: str) -> dict[str, object]:
     """Summarize whether previously good AC08 variants stayed semantic_ok in the latest run."""
     preserved: list[str] = []
     regressed: list[str] = []
@@ -10765,7 +10765,7 @@ def _summarize_previous_good_ac08_variants(reports_out_dir: str) -> dict[str, ob
     }
 
 
-def _write_ac08_success_criteria_report(
+def _writeAc08SuccessCriteriaReport(
     reports_out_dir: str,
     *,
     selected_variants: list[str],
@@ -10837,7 +10837,7 @@ def _write_ac08_success_criteria_report(
         else 0.0
     )
 
-    previous_good = _summarize_previous_good_ac08_variants(reports_out_dir)
+    previous_good = _summarizePreviousGoodAc08Variants(reports_out_dir)
     previous_good_preserved_count = len(previous_good["preserved"])
     previous_good_regressed_count = len(previous_good["regressed"])
     previous_good_missing_count = len(previous_good["missing"])
@@ -10937,7 +10937,7 @@ def _write_ac08_success_criteria_report(
     }
 
 
-def _write_ac08_weak_family_status_report(
+def _writeAc08WeakFamilyStatusReport(
     reports_out_dir: str,
     *,
     selected_variants: list[str],
@@ -11059,7 +11059,7 @@ def _write_ac08_weak_family_status_report(
         f.write("\n".join(summary_lines) + "\n")
 
 
-def _write_pixel_delta2_ranking(folder_path: str, svg_out_dir: str, reports_out_dir: str, threshold: float = 18.0) -> None:
+def _writePixelDelta2Ranking(folder_path: str, svg_out_dir: str, reports_out_dir: str, threshold: float = 18.0) -> None:
     ranking: list[dict[str, float | str]] = []
     for svg_name in sorted(f for f in os.listdir(svg_out_dir) if f.lower().endswith(".svg")):
         stem = os.path.splitext(svg_name)[0]
@@ -11112,7 +11112,7 @@ def _write_pixel_delta2_ranking(folder_path: str, svg_out_dir: str, reports_out_
         f.write("\n".join(summary_lines) + "\n")
 
 
-def _load_iteration_log_rows(reports_out_dir: str) -> dict[str, dict[str, str]]:
+def _loadIterationLogRows(reports_out_dir: str) -> dict[str, dict[str, str]]:
     """Load Iteration_Log.csv keyed by uppercase filename stem."""
     path = os.path.join(reports_out_dir, "Iteration_Log.csv")
     if not os.path.exists(path):
@@ -11129,7 +11129,7 @@ def _load_iteration_log_rows(reports_out_dir: str) -> dict[str, dict[str, str]]:
     return rows
 
 
-def _find_image_path_by_variant(folder_path: str, variant: str) -> str | None:
+def _findImagePathByVariant(folder_path: str, variant: str) -> str | None:
     """Return the raster image path for ``variant`` if present."""
     for ext in ('.jpg', '.png', '.bmp', '.gif'):
         candidate = os.path.join(folder_path, f'{variant}{ext}')
@@ -11138,7 +11138,7 @@ def _find_image_path_by_variant(folder_path: str, variant: str) -> str | None:
     return None
 
 
-def collect_successful_conversion_quality_metrics(
+def collectSuccessfulConversionQualityMetrics(
     folder_path: str,
     svg_out_dir: str,
     reports_out_dir: str,
@@ -11154,14 +11154,14 @@ def collect_successful_conversion_quality_metrics(
         raise RuntimeError('Required image dependencies are missing: ' + ', '.join(missing))
 
     variants = [str(v).strip().upper() for v in (successful_variants or SUCCESSFUL_CONVERSIONS) if str(v).strip()]
-    iteration_rows = _load_iteration_log_rows(reports_out_dir)
+    iteration_rows = _loadIterationLogRows(reports_out_dir)
     metrics: list[dict[str, object]] = []
     seen: set[str] = set()
     for variant in variants:
         if variant in seen:
             continue
         seen.add(variant)
-        image_path = _find_image_path_by_variant(folder_path, variant)
+        image_path = _findImagePathByVariant(folder_path, variant)
         svg_path = os.path.join(svg_out_dir, f'{variant}.svg')
         log_path = os.path.join(reports_out_dir, f'{variant}_element_validation.log')
 
@@ -11180,7 +11180,7 @@ def collect_successful_conversion_quality_metrics(
             'std_delta2': float('nan'),
         }
 
-        details = _read_validation_log_details(log_path) if os.path.exists(log_path) else {}
+        details = _readValidationLogDetails(log_path) if os.path.exists(log_path) else {}
         row['status'] = details.get('status', '')
 
         iteration = iteration_rows.get(variant, {})
@@ -11221,7 +11221,7 @@ def collect_successful_conversion_quality_metrics(
     return metrics
 
 
-def _successful_conversion_metrics_available(metrics: dict[str, object]) -> bool:
+def _successfulConversionMetricsAvailable(metrics: dict[str, object]) -> bool:
     """Return whether a metrics row contains fresh conversion data worth persisting."""
     status = str(metrics.get('status', '')).strip()
     if status:
@@ -11242,7 +11242,7 @@ def _successful_conversion_metrics_available(metrics: dict[str, object]) -> bool
     return False
 
 
-def _parse_successful_conversion_manifest_line(raw_line: str) -> tuple[str, dict[str, object]]:
+def _parseSuccessfulConversionManifestLine(raw_line: str) -> tuple[str, dict[str, object]]:
     """Parse one successful-conversions manifest line into variant plus metrics."""
     stripped = raw_line.split('#', 1)[0].strip()
     if not stripped:
@@ -11272,26 +11272,26 @@ def _parse_successful_conversion_manifest_line(raw_line: str) -> tuple[str, dict
     return variant, metrics
 
 
-def _read_successful_conversion_manifest_metrics(manifest_path: Path) -> dict[str, dict[str, object]]:
+def _readSuccessfulConversionManifestMetrics(manifest_path: Path) -> dict[str, dict[str, object]]:
     """Load persisted best-list metrics keyed by variant."""
     if not manifest_path.exists():
         return {}
 
     rows: dict[str, dict[str, object]] = {}
     for raw_line in manifest_path.read_text(encoding='utf-8').splitlines():
-        variant, metrics = _parse_successful_conversion_manifest_line(raw_line)
+        variant, metrics = _parseSuccessfulConversionManifestLine(raw_line)
         if variant:
             rows[variant] = metrics
     return rows
 
 
-def _successful_conversion_snapshot_dir(reports_out_dir: str) -> Path:
+def _successfulConversionSnapshotDir(reports_out_dir: str) -> Path:
     """Directory used to persist best-of artifacts for successful conversions."""
     return Path(reports_out_dir) / 'successful_conversions_bestlist'
 
 
-def _successful_conversion_snapshot_paths(reports_out_dir: str, variant: str) -> dict[str, Path]:
-    base_dir = _successful_conversion_snapshot_dir(reports_out_dir)
+def _successfulConversionSnapshotPaths(reports_out_dir: str, variant: str) -> dict[str, Path]:
+    base_dir = _successfulConversionSnapshotDir(reports_out_dir)
     base_dir.mkdir(parents=True, exist_ok=True)
     return {
         'svg': base_dir / f'{variant}.svg',
@@ -11300,9 +11300,9 @@ def _successful_conversion_snapshot_paths(reports_out_dir: str, variant: str) ->
     }
 
 
-def _restore_successful_conversion_snapshot(variant: str, svg_out_dir: str, reports_out_dir: str) -> bool:
+def _restoreSuccessfulConversionSnapshot(variant: str, svg_out_dir: str, reports_out_dir: str) -> bool:
     """Restore the previous best conversion for ``variant`` if a snapshot exists."""
-    snapshot_paths = _successful_conversion_snapshot_paths(reports_out_dir, variant)
+    snapshot_paths = _successfulConversionSnapshotPaths(reports_out_dir, variant)
     restored = False
 
     target_svg = Path(svg_out_dir) / f'{variant}.svg'
@@ -11319,9 +11319,9 @@ def _restore_successful_conversion_snapshot(variant: str, svg_out_dir: str, repo
     return restored
 
 
-def _store_successful_conversion_snapshot(variant: str, metrics: dict[str, object], svg_out_dir: str, reports_out_dir: str) -> None:
+def _storeSuccessfulConversionSnapshot(variant: str, metrics: dict[str, object], svg_out_dir: str, reports_out_dir: str) -> None:
     """Persist the current best conversion artifacts for later rollback/restoration."""
-    snapshot_paths = _successful_conversion_snapshot_paths(reports_out_dir, variant)
+    snapshot_paths = _successfulConversionSnapshotPaths(reports_out_dir, variant)
     target_svg = Path(svg_out_dir) / f'{variant}.svg'
     if target_svg.exists():
         snapshot_paths['svg'].write_text(target_svg.read_text(encoding='utf-8'), encoding='utf-8')
@@ -11336,14 +11336,14 @@ def _store_successful_conversion_snapshot(variant: str, metrics: dict[str, objec
     )
 
 
-def _is_successful_conversion_candidate_better(
+def _isSuccessfulConversionCandidateBetter(
     previous_metrics: dict[str, object] | None,
     candidate_metrics: dict[str, object],
 ) -> bool:
     """Accept a new best-list candidate only when it improves quality."""
-    if not _successful_conversion_metrics_available(candidate_metrics):
+    if not _successfulConversionMetricsAvailable(candidate_metrics):
         return False
-    if not previous_metrics or not _successful_conversion_metrics_available(previous_metrics):
+    if not previous_metrics or not _successfulConversionMetricsAvailable(previous_metrics):
         return True
 
     previous_status = str(previous_metrics.get('status', '')).strip().lower()
@@ -11353,14 +11353,14 @@ def _is_successful_conversion_candidate_better(
     if previous_status != 'semantic_ok' and candidate_status == 'semantic_ok':
         return True
 
-    improved, _decision, _prev_error, _new_error, _prev_delta, _new_delta = _evaluate_quality_pass_candidate(
+    improved, _decision, _prev_error, _new_error, _prev_delta, _new_delta = _evaluateQualityPassCandidate(
         previous_metrics,
         candidate_metrics,
     )
     return improved
 
 
-def _merge_successful_conversion_metrics(
+def _mergeSuccessfulConversionMetrics(
     baseline: dict[str, object],
     override: dict[str, object],
 ) -> dict[str, object]:
@@ -11374,9 +11374,9 @@ def _merge_successful_conversion_metrics(
     return merged
 
 
-def _format_successful_conversion_manifest_line(existing_line: str, metrics: dict[str, object]) -> str:
+def _formatSuccessfulConversionManifestLine(existing_line: str, metrics: dict[str, object]) -> str:
     """Render one enriched successful-conversions manifest line."""
-    if not _successful_conversion_metrics_available(metrics):
+    if not _successfulConversionMetricsAvailable(metrics):
         return existing_line.rstrip('\n')
 
     variant = str(metrics.get('variant', '')).strip().upper()
@@ -11415,7 +11415,7 @@ def _format_successful_conversion_manifest_line(existing_line: str, metrics: dic
     return line
 
 
-def _latest_failed_conversion_manifest_entry(reports_out_dir: str) -> dict[str, object] | None:
+def _latestFailedConversionManifestEntry(reports_out_dir: str) -> dict[str, object] | None:
     """Return the most recent failed conversion as a manifest-like row."""
     summary_path = Path(reports_out_dir) / "batch_failure_summary.csv"
     if not summary_path.exists():
@@ -11448,7 +11448,7 @@ def _latest_failed_conversion_manifest_entry(reports_out_dir: str) -> dict[str, 
     }
 
 
-def update_successful_conversions_manifest_with_metrics(
+def updateSuccessfulConversionsManifestWithMetrics(
     folder_path: str,
     svg_out_dir: str,
     reports_out_dir: str,
@@ -11466,12 +11466,12 @@ def update_successful_conversions_manifest_with_metrics(
     if not resolved_manifest_path.exists():
         raise FileNotFoundError(f'Successful-conversions manifest not found: {resolved_manifest_path}')
 
-    previous_manifest_metrics = _read_successful_conversion_manifest_metrics(resolved_manifest_path)
-    metrics_rows = collect_successful_conversion_quality_metrics(
+    previous_manifest_metrics = _readSuccessfulConversionManifestMetrics(resolved_manifest_path)
+    metrics_rows = collectSuccessfulConversionQualityMetrics(
         folder_path=folder_path,
         svg_out_dir=svg_out_dir,
         reports_out_dir=reports_out_dir,
-        successful_variants=successful_variants or _load_successful_conversions(resolved_manifest_path),
+        successful_variants=successful_variants or _loadSuccessfulConversions(resolved_manifest_path),
     )
 
     accepted_metrics_by_variant: dict[str, dict[str, object]] = {}
@@ -11480,18 +11480,18 @@ def update_successful_conversions_manifest_with_metrics(
     for row in metrics_rows:
         variant = str(row['variant']).upper()
         previous_metrics = previous_manifest_metrics.get(variant)
-        if _is_successful_conversion_candidate_better(previous_metrics, row):
+        if _isSuccessfulConversionCandidateBetter(previous_metrics, row):
             accepted_metrics_by_variant[variant] = row
             effective_metrics_rows.append(row)
             accepted_improved_variants.add(variant)
-            _store_successful_conversion_snapshot(variant, row, svg_out_dir, reports_out_dir)
+            _storeSuccessfulConversionSnapshot(variant, row, svg_out_dir, reports_out_dir)
         else:
             if previous_metrics is not None:
                 accepted_metrics_by_variant[variant] = previous_metrics
-                effective_metrics_rows.append(_merge_successful_conversion_metrics(row, previous_metrics))
+                effective_metrics_rows.append(_mergeSuccessfulConversionMetrics(row, previous_metrics))
             else:
                 effective_metrics_rows.append(row)
-            _restore_successful_conversion_snapshot(variant, svg_out_dir, reports_out_dir)
+            _restoreSuccessfulConversionSnapshot(variant, svg_out_dir, reports_out_dir)
 
     updated_lines: list[str] = []
     manifest_variants: set[str] = set()
@@ -11506,7 +11506,7 @@ def update_successful_conversions_manifest_with_metrics(
         if metrics is None:
             updated_lines.append(raw_line)
             continue
-        updated_lines.append(_format_successful_conversion_manifest_line(raw_line, metrics))
+        updated_lines.append(_formatSuccessfulConversionManifestLine(raw_line, metrics))
 
     missing_variants = [
         variant
@@ -11518,13 +11518,13 @@ def update_successful_conversions_manifest_with_metrics(
             updated_lines.append('')
         for variant in missing_variants:
             updated_lines.append(
-                _format_successful_conversion_manifest_line(
+                _formatSuccessfulConversionManifestLine(
                     variant,
                     accepted_metrics_by_variant[variant],
                 )
             )
 
-    failed_entry = _latest_failed_conversion_manifest_entry(reports_out_dir)
+    failed_entry = _latestFailedConversionManifestEntry(reports_out_dir)
     updated_without_failed = [
         line
         for line in updated_lines
@@ -11542,9 +11542,9 @@ def update_successful_conversions_manifest_with_metrics(
         updated_lines.append(failed_line)
 
     resolved_manifest_path.write_text('\n'.join(updated_lines) + '\n', encoding='utf-8')
-    return resolved_manifest_path, _sorted_successful_conversion_metrics_rows(effective_metrics_rows)
+    return resolved_manifest_path, _sortedSuccessfulConversionMetricsRows(effective_metrics_rows)
 
-def _sorted_successful_conversion_metrics_rows(
+def _sortedSuccessfulConversionMetricsRows(
     metrics: list[dict[str, object]],
 ) -> list[dict[str, object]]:
     """Sort successful-conversion rows by converted image name/variant."""
@@ -11561,7 +11561,7 @@ def _write_successful_conversion_csv_table(csv_path: str | os.PathLike[str], met
             'variant', 'status', 'image_found', 'svg_found', 'log_found', 'best_iteration',
             'diff_score', 'error_per_pixel', 'pixel_count', 'total_delta2', 'mean_delta2', 'std_delta2',
         ])
-        for row in _sorted_successful_conversion_metrics_rows(metrics):
+        for row in _sortedSuccessfulConversionMetricsRows(metrics):
             writer.writerow([
                 row['variant'],
                 row['status'],
@@ -11587,14 +11587,14 @@ def write_successful_conversion_quality_report(
     output_name: str = 'successful_conversion_quality',
 ) -> tuple[str, str, list[dict[str, object]]]:
     """Backward-compatible wrapper that now also refreshes the manifest."""
-    manifest_path, metrics = update_successful_conversions_manifest_with_metrics(
+    manifest_path, metrics = updateSuccessfulConversionsManifestWithMetrics(
         folder_path=folder_path,
         svg_out_dir=svg_out_dir,
         reports_out_dir=reports_out_dir,
         successful_variants=successful_variants,
     )
 
-    sorted_metrics = _sorted_successful_conversion_metrics_rows(metrics)
+    sorted_metrics = _sortedSuccessfulConversionMetricsRows(metrics)
     csv_path = _write_successful_conversion_csv_table(
         os.path.join(reports_out_dir, f'{output_name}.csv'),
         sorted_metrics,
@@ -11612,7 +11612,7 @@ def write_successful_conversion_quality_report(
     return csv_path, txt_path, sorted_metrics
 
 
-def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
+def parseArgs(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description=(
             "Verarbeite einen Bildordner entweder im Analysemodus (Bounding-Boxes/JSON) "
@@ -11751,7 +11751,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         help="Timeout pro isoliertem SVG-Render-Aufruf in Sekunden (Default: 20).",
     )
     parser.add_argument("--_render-svg-subprocess", action="store_true", help=argparse.SUPPRESS)
-    args = parser.parse_args(argv)
+    args = parser.parseArgs(argv)
     if args.iterations_override is not None:
         args.iterations = args.iterations_override
     delattr(args, "iterations_override")
@@ -11775,7 +11775,7 @@ class _TeeTextIO(io.TextIOBase):
 
 
 @contextlib.contextmanager
-def _optional_log_capture(log_path: str):
+def _optionalLogCapture(log_path: str):
     """Duplicate stdout/stderr into ``log_path`` if configured."""
     if not log_path:
         yield
@@ -11791,7 +11791,7 @@ def _optional_log_capture(log_path: str):
             yield
 
 
-def _auto_detect_csv_path(folder_path: str) -> str | None:
+def _autoDetectCsvPath(folder_path: str) -> str | None:
     """Best-effort table lookup for CLI compatibility mode.
 
     Priority:
@@ -11822,7 +11822,7 @@ def _auto_detect_csv_path(folder_path: str) -> str | None:
     return preferred[0] if preferred else candidates[0]
 
 
-def _resolve_cli_csv_and_output(args: argparse.Namespace) -> tuple[str, str | None]:
+def _resolveCliCsvAndOutput(args: argparse.Namespace) -> tuple[str, str | None]:
     """Resolve effective table path and output directory from mixed CLI styles."""
     csv_path = args.csv_path
     output_dir = args.output_dir
@@ -11837,14 +11837,14 @@ def _resolve_cli_csv_and_output(args: argparse.Namespace) -> tuple[str, str | No
             csv_path = c
 
     if csv_path is None:
-        csv_path = _auto_detect_csv_path(args.folder_path) or ""
+        csv_path = _autoDetectCsvPath(args.folder_path) or ""
     elif str(csv_path).lower().endswith(".xml"):
-        csv_path = _resolve_description_xml_path(csv_path) or csv_path
+        csv_path = _resolveDescriptionXmlPath(csv_path) or csv_path
 
     return csv_path, output_dir
 
 
-def _format_user_diagnostic(exc: BaseException) -> str:
+def _formatUserDiagnostic(exc: BaseException) -> str:
     """Render structured loader/runtime errors into one compact CLI message."""
     if isinstance(exc, DescriptionMappingError):
         if exc.span is not None:
@@ -11853,7 +11853,7 @@ def _format_user_diagnostic(exc: BaseException) -> str:
     return str(exc)
 
 
-def _prompt_interactive_range(args: argparse.Namespace) -> tuple[str, str]:
+def _promptInteractiveRange(args: argparse.Namespace) -> tuple[str, str]:
     current_start = str(args.start or "").strip()
     current_end = str(args.end or "").strip()
     prompt_start = f"Namen von [{current_start}]: " if current_start else "Namen von: "
@@ -11864,8 +11864,8 @@ def _prompt_interactive_range(args: argparse.Namespace) -> tuple[str, str]:
     if not end_value:
         end_value = start_value
 
-    shared = _shared_partial_range_token(start_value, end_value)
-    if shared and _extract_ref_parts(start_value) is None and _extract_ref_parts(end_value) is None:
+    shared = _sharedPartialRangeToken(start_value, end_value)
+    if shared and _extractRefParts(start_value) is None and _extractRefParts(end_value) is None:
         print(f"[INFO] Verwende Teilstring-Filter '{shared}' für die Auswahl der Bilder.")
     else:
         print(f"[INFO] Verwende Bereich von '{start_value or '(Anfang)'}' bis '{end_value or '(Ende)'}'.")
@@ -11873,15 +11873,15 @@ def _prompt_interactive_range(args: argparse.Namespace) -> tuple[str, str]:
 
 
 def main(argv: list[str] | None = None) -> int:
-    args = parse_args(argv)
+    args = parseArgs(argv)
     if bool(getattr(args, "_render_svg_subprocess", False)):
-        return _run_svg_render_subprocess_entrypoint()
+        return _runSvgRenderSubprocessEntrypoint()
     global SVG_RENDER_SUBPROCESS_ENABLED, SVG_RENDER_SUBPROCESS_TIMEOUT_SEC
     if bool(args.isolate_svg_render):
         SVG_RENDER_SUBPROCESS_ENABLED = True
     SVG_RENDER_SUBPROCESS_TIMEOUT_SEC = max(1.0, float(args.isolate_svg_render_timeout_sec))
     log_path = str(args.log_file or "").strip()
-    with _optional_log_capture(log_path):
+    with _optionalLogCapture(log_path):
         try:
             if args.ac08_regression_set:
                 args.start = "AC0000"
@@ -11890,7 +11890,7 @@ def main(argv: list[str] | None = None) -> int:
             if args.print_linux_vendor_command:
                 print(
                     " ".join(
-                        build_linux_vendor_install_command(
+                        buildLinuxVendorInstallCommand(
                             vendor_dir=args.vendor_dir,
                             platform_tag=args.vendor_platform,
                             python_version=args.vendor_python_version,
@@ -11900,12 +11900,12 @@ def main(argv: list[str] | None = None) -> int:
                 return 0
 
             if args.interactive_range or args.start is None or args.end is None:
-                args.start, args.end = _prompt_interactive_range(args)
+                args.start, args.end = _promptInteractiveRange(args)
             else:
                 args.start = str(args.start or "").strip()
                 args.end = str(args.end or "ZZZZZZ").strip() or args.start
 
-            csv_path, output_dir = _resolve_cli_csv_and_output(args)
+            csv_path, output_dir = _resolveCliCsvAndOutput(args)
 
             if not csv_path:
                 print("[WARN] Keine CSV/TSV/XML angegeben oder gefunden. Einige Symbole können ohne Beschreibung übersprungen werden.")
@@ -11915,11 +11915,11 @@ def main(argv: list[str] | None = None) -> int:
                 # Validate user-supplied description data before the batch starts so
                 # malformed files fail with a precise source location even when the
                 # selected image range happens to be empty.
-                _load_description_mapping(csv_path)
+                _loadDescriptionMapping(csv_path)
 
             if args.bootstrap_deps:
                 try:
-                    installed = _bootstrap_required_image_dependencies()
+                    installed = _bootstrapRequiredImageDependencies()
                 except RuntimeError as exc:
                     print(f"[ERROR] {exc}")
                     return 2
@@ -11934,14 +11934,14 @@ def main(argv: list[str] | None = None) -> int:
             selected_variants = set(AC08_REGRESSION_VARIANTS) if args.ac08_regression_set else None
 
             if args.mode == "annotate":
-                out_dir = analyze_range(
+                out_dir = analyzeRange(
                     args.folder_path,
                     output_root=output_dir,
                     start_ref=args.start,
                     end_ref=args.end,
                 )
             else:
-                out_dir = convert_range(
+                out_dir = convertRange(
                     args.folder_path,
                     csv_path,
                     args.iterations,
@@ -11955,7 +11955,7 @@ def main(argv: list[str] | None = None) -> int:
             print(f"\nAbgeschlossen! Ausgaben unter: {out_dir}")
             return 0
         except DescriptionMappingError as exc:
-            print(f"[ERROR] {_format_user_diagnostic(exc)}")
+            print(f"[ERROR] {_formatUserDiagnostic(exc)}")
             return 2
 
 
@@ -11964,7 +11964,7 @@ if __name__ == "__main__":
 
 
 
-def convert_image(input_path: str, output_path: str, *, max_iter: int = 120, plateau_limit: int = 14, seed: int = 42) -> Path:
+def convertImage(input_path: str, output_path: str, *, max_iter: int = 120, plateau_limit: int = 14, seed: int = 42) -> Path:
     """Backward-compatible single-image entrypoint.
 
     - For raster targets (e.g. ``.png``), write an annotated image plus JSON coordinates.
@@ -11975,19 +11975,19 @@ def convert_image(input_path: str, output_path: str, *, max_iter: int = 120, pla
     target.parent.mkdir(parents=True, exist_ok=True)
 
     if target.suffix.lower() == ".svg" or cv2 is None or np is None:
-        target.write_text(_render_embedded_raster_svg(input_path), encoding="utf-8")
+        target.write_text(_renderEmbeddedRasterSvg(input_path), encoding="utf-8")
         return target
 
     img = cv2.imread(str(input_path))
     if img is None:
         raise FileNotFoundError(f"Bild konnte nicht gelesen werden: {input_path}")
-    regions = detect_relevant_regions(img)
-    annotated = annotate_image_regions(img, regions)
+    regions = detectRelevantRegions(img)
+    annotated = annotateImageRegions(img, regions)
     cv2.imwrite(str(target), annotated)
     target.with_suffix(".json").write_text(json.dumps(regions, ensure_ascii=False, indent=2), encoding="utf-8")
     return target
 
 
-def convert_image_variants(*args, **kwargs):
+def convertImageVariants(*args, **kwargs):
     """Compatibility shim kept for tooling imports."""
-    return convert_range(*args, **kwargs)
+    return convertRange(*args, **kwargs)
