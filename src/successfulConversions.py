@@ -43,7 +43,7 @@ _AC08_BASE_REGRESSION_CASES: tuple[dict[str, str], ...] = (
 )
 
 
-def _iter_available_successful_conversion_variants(
+def _iterAvailableSuccessfulConversionVariants(
     source_dir: Path = SUCCESSFUL_CONVERSIONS_SOURCE_DIR,
 ) -> tuple[str, ...]:
     """Return known source-image variants that can back range expressions."""
@@ -57,7 +57,7 @@ def _iter_available_successful_conversion_variants(
     return tuple(dict.fromkeys(variants))
 
 
-def _expand_successful_conversion_manifest_entry(
+def _expandSuccessfulConversionManifestEntry(
     entry: str,
     available_variants: tuple[str, ...],
 ) -> tuple[str, ...]:
@@ -91,14 +91,14 @@ def _expand_successful_conversion_manifest_entry(
     return tuple(selected)
 
 
-def _load_successful_conversions(
+def _loadSuccessfulConversions(
     manifest_path: Path = SUCCESSFUL_CONVERSIONS_MANIFEST,
     source_dir: Path = SUCCESSFUL_CONVERSIONS_SOURCE_DIR,
 ) -> tuple[str, ...]:
     """Load the canonical successful-conversions manifest from disk."""
     if manifest_path.exists():
         variants: list[str] = []
-        available_variants = _iter_available_successful_conversion_variants(source_dir)
+        available_variants = _iterAvailableSuccessfulConversionVariants(source_dir)
         for raw_line in manifest_path.read_text(encoding="utf-8").splitlines():
             line = raw_line.split("#", 1)[0].strip()
             if not line:
@@ -106,14 +106,14 @@ def _load_successful_conversions(
             entry = line.split(";", 1)[0].strip()
             if not entry:
                 continue
-            variants.extend(_expand_successful_conversion_manifest_entry(entry, available_variants))
+            variants.extend(_expandSuccessfulConversionManifestEntry(entry, available_variants))
         normalized = tuple(dict.fromkeys(variants))
         if normalized:
             return normalized
     return SUCCESSFUL_CONVERSIONS_FALLBACK
 
 
-SUCCESSFUL_CONVERSIONS = _load_successful_conversions()
+SUCCESSFUL_CONVERSIONS = _loadSuccessfulConversions()
 AC08_PREVIOUSLY_GOOD_VARIANTS = tuple(variant for variant in SUCCESSFUL_CONVERSIONS if variant.startswith("AC08"))
 
 
