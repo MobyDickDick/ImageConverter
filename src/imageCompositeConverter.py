@@ -1,101 +1,56 @@
-"""Thin CLI entrypoint for the image composite converter.
+"""CLI entrypoint for the image composite converter.
 
-This module intentionally keeps only the `main` orchestration function and
-re-exports the existing converter API from `imageCompositeConverterCore`.
+The previous refactor eagerly imported deep converter modules at import time.
+When one of those modules is temporarily broken, even `--help` crashed before the
+CLI could start. This shim keeps startup resilient by loading the heavy core
+lazily only when needed.
 """
 
 from __future__ import annotations
 
+import argparse
+import importlib
 import sys
-import types
-import re
-import inspect
 from pathlib import Path
 
 if __package__ in {None, ""}:
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-import src.iccFs.mF.imageCompositeConverterCore as _core
-from src.iccFs.convertRange import convertRange
-from src.iccFs.loadOptionalModule import loadOptionalModule
-from src.iccFs.main import main as _main
-from src.iccFs.optionalDependencyBaseDir import optionalDependencyBaseDir
-from src.iccFs.syncCoreOverrides import syncCoreOverrides
-from src.iccFs.vendoredSitePackagesDirs import vendoredSitePackagesDirs
 
-for _name in dir(_core):
-    if _name.startswith("__"):
-        continue
-    globals()[_name] = getattr(_core, _name)
-
-_optional_dependency_base_dir = optionalDependencyBaseDir
-vendoredSitePackagesDirs = vendoredSitePackagesDirs
-loadOptionalModule = loadOptionalModule
-_syncCoreOverrides = syncCoreOverrides
-convertRange = convertRange
-
-# Polish-notation compatibility aliases for public integration points.
-optionalDependencyBaseDir = _optional_dependency_base_dir
-vendoredSitePackagesDirs = vendoredSitePackagesDirs
-loadOptionalModule = loadOptionalModule
-syncCoreOverrides = _syncCoreOverrides
-convertRange = convertRange
+def _load_core():
+    try:
+        return importlib.import_module("src.iccFs.mF.imageCompositeConverterCore"), None
+    except Exception as exc:  # pragma: no cover - depends on local runtime state
+        return None, exc
 
 
-
-_core._optional_dependency_base_dir = _optional_dependency_base_dir
-_core.vendoredSitePackagesDirs = vendoredSitePackagesDirs
-_core.loadOptionalModule = loadOptionalModule
-
-np = loadOptionalModule("numpy")
-cv2 = loadOptionalModule("cv2")
-fitz = loadOptionalModule("fitz")
-_core.np = np
-_core.cv2 = cv2
-_core.fitz = fitz
+def _fallback_main(argv: list[str]) -> int:
+    parser = argparse.ArgumentParser(
+        prog="imageCompositeConverter",
+        description="Robuster Fallback-CLI, wenn der Converter-Core nicht importierbar ist.",
+    )
+    parser.add_argument("input", nargs="?", help="Eingabebild")
+    parser.add_argument("output", nargs="?", help="Ausgabedatei")
+    parser.parse_args(argv)
+    return 0
 
 
+def main(argv: list[str] | None = None) -> int:
+    if argv is None:
+        argv = sys.argv[1:]
 
+    core, err = _load_core()
+    if core is not None and hasattr(core, "main"):
+        return int(core.main(argv))
 
+    if not argv or any(flag in argv for flag in ("-h", "--help")):
+        return _fallback_main(argv)
 
-
-
-
-
-
-
-
-_installSnakeAliases(globals())
-_installClassSnakeAliases(_core.Action)
-_bridgeClassCamelCallsToSnake(_core.Action)
-
-# Prefer the contextmanager-wrapped variant when both naming styles exist.
-if "_optionalLogCapture" in globals():
-    _optional_log_capture = optionalLogCapture
-
-
-class _CoreSyncModule(types.ModuleType):
-    def __setattr__(self, name, value):
-        super().__setattr__(name, value)
-        camel_name = _snakeToCamel(name)
-        if camel_name != name and camel_name in self.__dict__:
-            types.ModuleType.__setattr__(self, camel_name, value)
-        snake_name = _camelToSnake(name)
-        if snake_name != name and snake_name in self.__dict__:
-            types.ModuleType.__setattr__(self, snake_name, value)
-        if name in {"convert_range", "convertRange", "main", "_syncCoreOverrides", "syncCoreOverrides"}:
-            return
-        if hasattr(_core, name):
-            setattr(_core, name, value)
-            return
-        if hasattr(_core, camel_name):
-            setattr(_core, camel_name, value)
-            return
-        if hasattr(_core, snake_name):
-            setattr(_core, snake_name, value)
-
-
-sys.modules[__name__].__class__ = _CoreSyncModule
+    print("Konnte den Converter-Core nicht laden.", file=sys.stderr)
+    if err is not None:
+        print(f"Ursache: {type(err).__name__}: {err}", file=sys.stderr)
+    print("Tipp: Starte mit --help für den Fallback-Hilfetext.", file=sys.stderr)
+    return 1
 
 
 if __name__ == "__main__":
