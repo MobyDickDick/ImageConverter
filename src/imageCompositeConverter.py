@@ -42,9 +42,6 @@ syncCoreOverrides = _syncCoreOverrides
 convertRange = convertRange
 
 
-def main(argv: list[str] | None = None) -> int:
-    """CLI entrypoint wrapper kept local for call-tree export compatibility."""
-    return _main(argv)
 
 _core._optional_dependency_base_dir = _optional_dependency_base_dir
 _core.vendoredSitePackagesDirs = vendoredSitePackagesDirs
@@ -58,57 +55,14 @@ _core.cv2 = cv2
 _core.fitz = fitz
 
 
-def _camelToSnake(name: str) -> str:
-    leading = len(name) - len(name.lstrip("_"))
-    core = name[leading:]
-    converted = re.sub(r"([a-z0-9])([A-Z])", r"\1_\2", core).lower()
-    return ("_" * leading) + converted
 
 
-def _snakeToCamel(name: str) -> str:
-    leading = len(name) - len(name.lstrip("_"))
-    core = name[leading:]
-    parts = [part for part in core.split("_") if part]
-    if not parts:
-        return name
-    return ("_" * leading) + parts[0] + "".join(part[:1].upper() + part[1:] for part in parts[1:])
 
 
-def _installSnakeAliases(namespace: dict[str, object]) -> None:
-    for attr_name, value in list(namespace.items()):
-        if attr_name.startswith("__") or not any(ch.isupper() for ch in attr_name):
-            continue
-        alias = _camelToSnake(attr_name)
-        if alias not in namespace:
-            namespace[alias] = value
 
 
-def _installClassSnakeAliases(cls: type) -> None:
-    for attr_name in dir(cls):
-        if attr_name.startswith("__") or not any(ch.isupper() for ch in attr_name):
-            continue
-        alias = _camelToSnake(attr_name)
-        if hasattr(cls, alias):
-            continue
-        setattr(cls, alias, getattr(cls, attr_name))
 
 
-def _bridgeClassCamelCallsToSnake(cls: type) -> None:
-    for attr_name in dir(cls):
-        if attr_name.startswith("__") or not any(ch.isupper() for ch in attr_name):
-            continue
-        alias = _camelToSnake(attr_name)
-        if not hasattr(cls, alias):
-            continue
-        attr_value = getattr(cls, attr_name)
-        if not inspect.isfunction(attr_value):
-            continue
-
-        def _forwarder(*args, __alias=alias, **kwargs):
-            target = getattr(cls, __alias)
-            return target(*args, **kwargs)
-
-        setattr(cls, attr_name, staticmethod(_forwarder))
 
 
 _installSnakeAliases(globals())
