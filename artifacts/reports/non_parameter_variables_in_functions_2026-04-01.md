@@ -1,0 +1,276 @@
+# Funktionen mit verwendeten Nicht-Parameter-Variablen
+
+Quelle: `src/imageCompositeConverter.py` (automatisch aus bestehendem Coverage-Report abgeleitet).
+
+Format pro Zeile: `<datei>:<zeile> <funktion> -> <verwendete Namen außerhalb der Parameterliste>`.
+
+- `src/imageCompositeConverter.py:107 detectRelevantRegions -> cv2, detectRelevantRegionsImpl, np`
+- `src/imageCompositeConverter.py:111 annotateImageRegions -> annotateImageRegionsImpl, cv2`
+- `src/imageCompositeConverter.py:115 analyzeRange -> _defaultConvertedSymbolsRoot, _inRequestedRange, analyzeRangeImpl, annotateImageRegions, cv2, detectRelevantRegions, np`
+- `src/imageCompositeConverter.py:130 _optionalDependencyBaseDir -> Path, __file__`
+- `src/imageCompositeConverter.py:135 _vendoredSitePackagesDirs -> Path, _optionalDependencyBaseDir, os`
+- `src/imageCompositeConverter.py:179 _clearPartialModuleImport -> sys`
+- `src/imageCompositeConverter.py:185 _describeOptionalDependencyError -> Path`
+- `src/imageCompositeConverter.py:201 _loadOptionalModule -> OPTIONAL_DEPENDENCY_ERRORS, Path, _clearPartialModuleImport, _describeOptionalDependencyError, _vendoredSitePackagesDirs, contextlib, importlib, sys`
+- `src/imageCompositeConverter.py:231 _importWithVendoredFallback -> _clearPartialModuleImport, _vendoredSitePackagesDirs, contextlib, importlib, sys`
+- `src/imageCompositeConverter.py:267 _clip -> Action, np`
+- `src/imageCompositeConverter.py:327 laenge -> abstand`
+- `src/imageCompositeConverter.py:370 abstand -> Punkt, math`
+- `src/imageCompositeConverter.py:374 buildOrientedKelle -> Griff, Kelle, Kreis, Punkt, RGBWert`
+- `src/imageCompositeConverter.py:448 fromParams -> GlobalParameterVector`
+- `src/imageCompositeConverter.py:491 loadGrayscaleImage -> Path, _importWithVendoredFallback`
+- `src/imageCompositeConverter.py:499 _createDiffImageWithoutCv2 -> Path, fitz`
+- `src/imageCompositeConverter.py:598 loadBinaryImageWithMode -> Path, _adaptiveThreshold, _computeOtsuThreshold, loadGrayscaleImage`
+- `src/imageCompositeConverter.py:611 renderCandidateMask -> Candidate`
+- `src/imageCompositeConverter.py:636 scoreCandidate -> Candidate, _iou, renderCandidateMask`
+- `src/imageCompositeConverter.py:640 randomNeighbor -> Candidate, random`
+- `src/imageCompositeConverter.py:644 optimizeElement -> Candidate, random, randomNeighbor, scoreCandidate`
+- `src/imageCompositeConverter.py:668 estimateStrokeStyle -> Candidate, Element, _grayToHex`
+- `src/imageCompositeConverter.py:689 candidateToSvg -> Candidate`
+- `src/imageCompositeConverter.py:701 decomposeCircleWithStem -> Candidate, Element, _grayToHex, candidateToSvg, estimateStrokeStyle, math`
+- `src/imageCompositeConverter.py:817 _missingRequiredImageDependencies -> cv2, np`
+- `src/imageCompositeConverter.py:826 _bootstrapRequiredImageDependencies -> _missingRequiredImageDependencies, subprocess, sys`
+- `src/imageCompositeConverter.py:856 rgbToHex -> np`
+- `src/imageCompositeConverter.py:860 getBaseNameFromFile -> os, re`
+- `src/imageCompositeConverter.py:876 __post_init__ -> cv2, getBaseNameFromFile, os`
+- `src/imageCompositeConverter.py:881 _loadDescriptions -> _loadDescriptionMapping`
+- `src/imageCompositeConverter.py:905 __init__ -> SourceSpan`
+- `src/imageCompositeConverter.py:916 _loadDescriptionMapping -> _loadDescriptionMappingFromCsv, _loadDescriptionMappingFromXml, os`
+- `src/imageCompositeConverter.py:923 _loadDescriptionMappingFromCsv -> DescriptionMappingError, SourceSpan, csv, os`
+- `src/imageCompositeConverter.py:968 _loadDescriptionMappingFromXml -> DescriptionMappingError, ET, SourceSpan, _extractImageSpecificDescription, _mergeEntryAndImageDesc, _registerDescription, _resolveDescriptionXmlPath, description, entry_desc, getBaseNameFromFile, image_desc, os, re`
+- `src/imageCompositeConverter.py:984 _registerDescription -> getBaseNameFromFile, os, raw_desc`
+- `src/imageCompositeConverter.py:1010 _extractImageSpecificDescription -> ET, re`
+- `src/imageCompositeConverter.py:1057 _resolveDescriptionXmlPath -> Path`
+- `src/imageCompositeConverter.py:1085 buildLinuxVendorInstallCommand -> _requiredVendorPackages, sys`
+- `src/imageCompositeConverter.py:1118 parseDescription -> Reflection, _collectDescriptionFragments, getBaseNameFromFile, os, re`
+- `src/imageCompositeConverter.py:1245 _extractDocumentedAliasRefs -> re`
+- `src/imageCompositeConverter.py:1257 _parseSemanticBadgeLayoutOverrides -> re`
+- `src/imageCompositeConverter.py:1279 _renderSvgToNumpyInprocess -> cv2, fitz, gc, np, re`
+- `src/imageCompositeConverter.py:1324 _renderSvgToNumpyViaSubprocess -> SVG_RENDER_SUBPROCESS_TIMEOUT_SEC, base64, json, np, subprocess, sys`
+- `src/imageCompositeConverter.py:1360 _runSvgRenderSubprocessEntrypoint -> _renderSvgToNumpyInprocess, base64, json, sys`
+- `src/imageCompositeConverter.py:1462 __init__ -> random`
+- `src/imageCompositeConverter.py:1472 _makeRng -> Action, np`
+- `src/imageCompositeConverter.py:1478 _argminIndex -> i`
+- `src/imageCompositeConverter.py:1499 _applyCircleTextWidthConstraint -> Action`
+- `src/imageCompositeConverter.py:1508 _applyCircleTextRadiusFloor -> Action`
+- `src/imageCompositeConverter.py:1521 _clampCircleInsideCanvas -> Action`
+- `src/imageCompositeConverter.py:1554 applyRedrawVariation -> Action, _applyNumericJitter, _uniform, copy, delta, key, maximum, minimum, time`
+- `src/imageCompositeConverter.py:1568 _uniform -> rng`
+- `src/imageCompositeConverter.py:1573 _applyNumericJitter -> _uniform, jitter_entries, p`
+- `src/imageCompositeConverter.py:1667 _quantizeBadgeParams -> Action`
+- `src/imageCompositeConverter.py:1754 _normalizeLightCircleColors -> Action`
+- `src/imageCompositeConverter.py:1764 _normalizeAc08LineWidths -> Action`
+- `src/imageCompositeConverter.py:1790 _estimateBorderBackgroundGray -> np`
+- `src/imageCompositeConverter.py:1801 _estimateCircleTonesAndStroke -> np`
+- `src/imageCompositeConverter.py:1833 _persistConnectorLengthFloor -> math`
+- `src/imageCompositeConverter.py:1885 _configureAc08SmallVariantMode -> Action`
+- `src/imageCompositeConverter.py:1920 _enforceTemplateCircleEdgeExtent -> Action`
+- `src/imageCompositeConverter.py:1961 _tuneAc08LeftConnectorFamily -> Action, getBaseNameFromFile`
+- `src/imageCompositeConverter.py:2043 _tuneAc08RightConnectorFamily -> Action, getBaseNameFromFile`
+- `src/imageCompositeConverter.py:2126 _enforceVerticalConnectorBadgeGeometry -> Action`
+- `src/imageCompositeConverter.py:2173 _tuneAc08VerticalConnectorFamily -> Action, getBaseNameFromFile`
+- `src/imageCompositeConverter.py:2246 _tuneAc08CircleTextFamily -> Action, getBaseNameFromFile`
+- `src/imageCompositeConverter.py:2322 _finalizeAc08Style -> Action, _needsLargeCircleOverflowGuard`
+- `src/imageCompositeConverter.py:2635 _alignStemToCircleCenter -> Action`
+- `src/imageCompositeConverter.py:2651 _defaultAc0870Params -> Action`
+- `src/imageCompositeConverter.py:2672 _defaultAc0881Params -> Action`
+- `src/imageCompositeConverter.py:2750 _defaultAc0811Params -> Action`
+- `src/imageCompositeConverter.py:2785 _estimateUpperCircleFromForeground -> Action, cv2, np`
+- `src/imageCompositeConverter.py:2838 _fitAc0811ParamsFromImage -> Action, np`
+- `src/imageCompositeConverter.py:2951 _defaultAc0882Params -> Action`
+- `src/imageCompositeConverter.py:2973 _applyCo2Label -> Action`
+- `src/imageCompositeConverter.py:3194 _applyVocLabel -> Action`
+- `src/imageCompositeConverter.py:3204 _tuneAc0832Co2Badge -> Action`
+- `src/imageCompositeConverter.py:3220 _tuneAc0831Co2Badge -> Action`
+- `src/imageCompositeConverter.py:3265 _tuneAc0835VocBadge -> Action`
+- `src/imageCompositeConverter.py:3281 _tuneAc0833Co2Badge -> Action`
+- `src/imageCompositeConverter.py:3291 _tuneAc0834Co2Badge -> Action`
+- `src/imageCompositeConverter.py:3317 _defaultAc0834Params -> Action`
+- `src/imageCompositeConverter.py:3322 _normalizeCenteredCo2Label -> Action`
+- `src/imageCompositeConverter.py:3357 _defaultAc0812Params -> Action`
+- `src/imageCompositeConverter.py:3392 _fitAc0812ParamsFromImage -> Action, math, np`
+- `src/imageCompositeConverter.py:3473 _enforceLeftArmBadgeGeometry -> Action`
+- `src/imageCompositeConverter.py:3502 _enforceRightArmBadgeGeometry -> Action`
+- `src/imageCompositeConverter.py:3551 _defaultAc0813Params -> Action`
+- `src/imageCompositeConverter.py:3584 _fitAc0813ParamsFromImage -> Action, np`
+- `src/imageCompositeConverter.py:3644 _rotateSemanticBadgeClockwise -> rotateClockwise, x, y`
+- `src/imageCompositeConverter.py:3648 rotateClockwise -> cx, cy`
+- `src/imageCompositeConverter.py:3660 _defaultAc0814Params -> Action`
+- `src/imageCompositeConverter.py:3696 _fitAc0814ParamsFromImage -> Action, math, np`
+- `src/imageCompositeConverter.py:3794 _defaultAc0810Params -> Action`
+- `src/imageCompositeConverter.py:3799 _fitAc0810ParamsFromImage -> Action, np`
+- `src/imageCompositeConverter.py:3804 _glyphBbox -> Action`
+- `src/imageCompositeConverter.py:3810 _centerGlyphBbox -> Action`
+- `src/imageCompositeConverter.py:3862 _fitAc0870ParamsFromImage -> Action, cv2, np`
+- `src/imageCompositeConverter.py:3922 _fitSemanticBadgeFromImage -> Action, cv2, math, np`
+- `src/imageCompositeConverter.py:4164 makeBadgeParams -> Action, getBaseNameFromFile, np`
+- `src/imageCompositeConverter.py:4356 generateBadgeSvg -> Action`
+- `src/imageCompositeConverter.py:4467 traceImageSegment -> cv2, np, rgbToHex`
+- `src/imageCompositeConverter.py:4522 generateCompositeSvg -> Action, cv2, os`
+- `src/imageCompositeConverter.py:4575 renderSvgToNumpy -> SVG_RENDER_SUBPROCESS_ENABLED, _renderSvgToNumpyInprocess, _renderSvgToNumpyViaSubprocess`
+- `src/imageCompositeConverter.py:4583 createDiffImage -> cv2, np`
+- `src/imageCompositeConverter.py:4628 calculateError -> cv2, np`
+- `src/imageCompositeConverter.py:4636 calculateDelta2Stats -> cv2, np`
+- `src/imageCompositeConverter.py:4651 _fitToOriginalSize -> cv2, np`
+- `src/imageCompositeConverter.py:4659 _maskCentroidRadius -> np`
+- `src/imageCompositeConverter.py:4669 _maskBbox -> np`
+- `src/imageCompositeConverter.py:4678 _maskCenterSize -> Action, np`
+- `src/imageCompositeConverter.py:4691 _maskMinRectCenterDiag -> cv2, math, np`
+- `src/imageCompositeConverter.py:4707 _elementBboxChangeIsPlausible -> Action, math, np`
+- `src/imageCompositeConverter.py:4759 _applyElementAlignmentStep -> Action`
+- `src/imageCompositeConverter.py:4871 _estimateVerticalStemFromMask -> np`
+- `src/imageCompositeConverter.py:4959 _ringAndFillMasks -> np`
+- `src/imageCompositeConverter.py:4968 _meanGrayForMask -> cv2, np`
+- `src/imageCompositeConverter.py:4978 _elementRegionMask -> Action, np`
+- `src/imageCompositeConverter.py:5015 _textBbox -> Action`
+- `src/imageCompositeConverter.py:5049 _foregroundMask -> cv2, np`
+- `src/imageCompositeConverter.py:5069 _circleFromForegroundMask -> cv2, math, np`
+- `src/imageCompositeConverter.py:5128 _maskSupportsCircle -> Action, cv2, math, np`
+- `src/imageCompositeConverter.py:5183 extractBadgeElementMask -> Action, cv2, np`
+- `src/imageCompositeConverter.py:5213 _maskedError -> cv2, np`
+- `src/imageCompositeConverter.py:5226 _unionBboxFromMasks -> Action, np`
+- `src/imageCompositeConverter.py:5246 _maskedUnionErrorInBbox -> Action, cv2, np`
+- `src/imageCompositeConverter.py:5281 _elementMatchError -> Action, cv2, math, np`
+- `src/imageCompositeConverter.py:5360 _captureCanonicalBadgeColors -> Action`
+- `src/imageCompositeConverter.py:5384 _circleBounds -> Action`
+- `src/imageCompositeConverter.py:5402 _globalParameterVectorBounds -> Action`
+- `src/imageCompositeConverter.py:5429 _logGlobalParameterVector -> Action, GlobalParameterVector, _fmtValue`
+- `src/imageCompositeConverter.py:5462 _stochasticSurvivorScalar -> Action, math, pair`
+- `src/imageCompositeConverter.py:5513 _optimizeCirclePoseStochasticSurvivor -> Action, GlobalParameterVector, candidate, dataclasses, evalPose, item, math, np`
+- `src/imageCompositeConverter.py:5540 evalPose -> Action, img_orig, params`
+- `src/imageCompositeConverter.py:5612 _optimizeCirclePoseAdaptiveDomain -> Action, GlobalParameterVector, candidate, clampPose, dataclasses, evalPose, item, math, np`
+- `src/imageCompositeConverter.py:5643 clampPose -> Action, current, lock_cx, lock_cy, r_high, r_low, x_high, x_low, y_high, y_low`
+- `src/imageCompositeConverter.py:5658 evalPose -> Action, cache, clampPose, img_orig, params`
+- `src/imageCompositeConverter.py:5814 _fullBadgeErrorForParams -> Action, np`
+- `src/imageCompositeConverter.py:5826 _optimizeGlobalParameterVectorSampling -> Action, GlobalParameterVector, clampVector, dataclasses, evalVector, item, math, np, withinHardBounds`
+- `src/imageCompositeConverter.py:5861 clampVector -> Action, GlobalParameterVector, active_keys, bounds, dataclasses`
+- `src/imageCompositeConverter.py:5872 evalVector -> Action, GlobalParameterVector, img_orig, params, w`
+- `src/imageCompositeConverter.py:5885 withinHardBounds -> GlobalParameterVector, active_keys, bounds`
+- `src/imageCompositeConverter.py:6059 _enforceSemanticConnectorExpectation -> Action, getBaseNameFromFile`
+- `src/imageCompositeConverter.py:6076 _elementWidthKeyAndBounds -> Action, np`
+- `src/imageCompositeConverter.py:6155 _elementErrorForWidth -> Action, np`
+- `src/imageCompositeConverter.py:6175 _elementErrorForCircleRadius -> Action, np`
+- `src/imageCompositeConverter.py:6234 _fullBadgeErrorForCircleRadius -> Action, np`
+- `src/imageCompositeConverter.py:6266 _selectCircleRadiusPlateauCandidate -> Action, item, math, np, pair`
+- `src/imageCompositeConverter.py:6341 _elementErrorForCirclePose -> Action, np`
+- `src/imageCompositeConverter.py:6429 _optimizeCircleCenterBracket -> Action, axis, cx_value, cy_value, evalCenter, fixed, math, np, optimizeAxis`
+- `src/imageCompositeConverter.py:6453 evalCenter -> Action, current_r, evaluations, h, img_orig, params, w`
+- `src/imageCompositeConverter.py:6464 optimizeAxis -> Action, evalCenter, math`
+- `src/imageCompositeConverter.py:6536 _optimizeCircleRadiusBracket -> Action, evalRadius, math, np, radius`
+- `src/imageCompositeConverter.py:6589 evalRadius -> Action, evaluations, high_bound, img_orig, low_bound, params`
+- `src/imageCompositeConverter.py:6678 _optimizeCirclePoseMultistart -> Action, evalPose, math, np`
+- `src/imageCompositeConverter.py:6722 evalPose -> Action, evaluations, img_orig, params`
+- `src/imageCompositeConverter.py:6788 _elementErrorForExtent -> Action, math, np`
+- `src/imageCompositeConverter.py:6861 _optimizeElementExtentBracket -> Action, math, np`
+- `src/imageCompositeConverter.py:7063 _optimizeElementWidthBracket -> Action, math, np`
+- `src/imageCompositeConverter.py:7180 _elementErrorForColor -> Action, np`
+- `src/imageCompositeConverter.py:7212 _optimizeElementColorBracket -> Action, math, np`
+- `src/imageCompositeConverter.py:7305 _refineStemGeometryFromMasks -> Action, np`
+- `src/imageCompositeConverter.py:7413 _detectSemanticPrimitives -> Action, cv2, math, np`
+- `src/imageCompositeConverter.py:7673 validateSemanticDescriptionAlignment -> Action, _maskSupportsElement, cv2, element, mask, np`
+- `src/imageCompositeConverter.py:7690 _maskSupportsElement -> Action, badge_params, np`
+- `src/imageCompositeConverter.py:7884 validateBadgeByElements -> Action, _stagnationFingerprint, copy, current_params, cv2, math, np, os`
+- `src/imageCompositeConverter.py:8127 _semanticQualityFlags -> getBaseNameFromFile, item, re`
+- `src/imageCompositeConverter.py:8167 runIterationPipeline -> Action, Perception, Reflection, _paramsSnapshot, _recordRenderFailure, _semanticAuditRecord, _semanticQualityFlags, _writeAttemptArtifacts, _writeValidationLog, copy, cv2, diff_img, failed, fitz, getBaseNameFromFile, json, np, os, params_snapshot, reason, rendered_img, snapshot, time`
+- `src/imageCompositeConverter.py:8236 _writeValidationLog -> Action, log_path, time`
+- `src/imageCompositeConverter.py:8251 _paramsSnapshot -> json`
+- `src/imageCompositeConverter.py:8254 _recordRenderFailure -> _paramsSnapshot, _writeAttemptArtifacts, _writeValidationLog, base, filename`
+- `src/imageCompositeConverter.py:8268 _writeAttemptArtifacts -> Action, base, cv2, diff_out_dir, h, os, perc, svg_out_dir, w`
+- `src/imageCompositeConverter.py:8534 _extractRefParts -> re`
+- `src/imageCompositeConverter.py:8541 _normalizeRangeToken -> getBaseNameFromFile, re`
+- `src/imageCompositeConverter.py:8546 _normalizeExplicitRangeToken -> os, re`
+- `src/imageCompositeConverter.py:8551 _isExplicitSizeVariantToken -> re`
+- `src/imageCompositeConverter.py:8555 _compactRangeToken -> _normalizeRangeToken, re`
+- `src/imageCompositeConverter.py:8564 _sharedPartialRangeToken -> _compactRangeToken, _normalizeRangeToken`
+- `src/imageCompositeConverter.py:8588 _matchesPartialRangeToken -> _normalizeRangeToken, _sharedPartialRangeToken, getBaseNameFromFile, os`
+- `src/imageCompositeConverter.py:8605 _extractSymbolFamily -> re`
+- `src/imageCompositeConverter.py:8613 _matchesExactPrefixFilter -> _isExplicitSizeVariantToken, _normalizeExplicitRangeToken, _normalizeRangeToken, getBaseNameFromFile, os`
+- `src/imageCompositeConverter.py:8634 _inRequestedRange -> _extractRefParts, _isExplicitSizeVariantToken, _matchesExactPrefixFilter, _matchesPartialRangeToken, _normalizeExplicitRangeToken, _normalizeRangeToken, getBaseNameFromFile, os`
+- `src/imageCompositeConverter.py:8690 _conversionRandom -> os, random, time`
+- `src/imageCompositeConverter.py:8700 _defaultConvertedSymbolsRoot -> __file__, os`
+- `src/imageCompositeConverter.py:8705 _convertedSvgOutputDir -> os`
+- `src/imageCompositeConverter.py:8709 _readValidationLogDetails -> os`
+- `src/imageCompositeConverter.py:8728 _writeBatchFailureSummary -> csv, os`
+- `src/imageCompositeConverter.py:8744 _collectDescriptionFragments -> getBaseNameFromFile, os`
+- `src/imageCompositeConverter.py:8773 _semanticAuditRecord -> getBaseNameFromFile`
+- `src/imageCompositeConverter.py:8805 _writeSemanticAuditReport -> csv, json, os`
+- `src/imageCompositeConverter.py:8848 _diffOutputDir -> os`
+- `src/imageCompositeConverter.py:8852 _reportsOutputDir -> os`
+- `src/imageCompositeConverter.py:8856 _isSemanticTemplateVariant -> getBaseNameFromFile`
+- `src/imageCompositeConverter.py:8868 _loadExistingConversionRows -> Path, _convertedSvgOutputDir, _isSemanticTemplateVariant, _readSvgGeometry, _reportsOutputDir, _sniffRasterSize, csv, getBaseNameFromFile, math, os`
+- `src/imageCompositeConverter.py:8949 _sniffRasterSize -> Path, os, struct`
+- `src/imageCompositeConverter.py:9002 _svgHrefMimeType -> Path`
+- `src/imageCompositeConverter.py:9013 _renderEmbeddedRasterSvg -> Path, _sniffRasterSize, _svgHrefMimeType, base64`
+- `src/imageCompositeConverter.py:9026 _qualityConfigPath -> os`
+- `src/imageCompositeConverter.py:9030 _loadQualityConfig -> _qualityConfigPath, json, os`
+- `src/imageCompositeConverter.py:9042 _writeQualityConfig -> _qualityConfigPath, json, math`
+- `src/imageCompositeConverter.py:9065 _qualitySortKey -> math`
+- `src/imageCompositeConverter.py:9074 _computeSuccessfulConversionsErrorThreshold -> SUCCESSFUL_CONVERSIONS, math, statistics`
+- `src/imageCompositeConverter.py:9105 _selectMiddleLowerTercile -> _qualitySortKey`
+- `src/imageCompositeConverter.py:9114 _selectOpenQualityCases -> _qualitySortKey, math`
+- `src/imageCompositeConverter.py:9185 _writeQualityPassReport -> csv, os`
+- `src/imageCompositeConverter.py:9246 _extractSvgInner -> re`
+- `src/imageCompositeConverter.py:9253 _buildTransformedSvgFromTemplate -> _extractSvgInner, m, re`
+- `src/imageCompositeConverter.py:9288 _templateTransferScaleCandidates -> math`
+- `src/imageCompositeConverter.py:9312 _estimateTemplateTransferScale -> Action, _buildTransformedSvgFromTemplate, math, np`
+- `src/imageCompositeConverter.py:9355 _templateTransferTransformCandidates -> _templateTransferScaleCandidates`
+- `src/imageCompositeConverter.py:9380 _rankTemplateTransferDonors -> _maxSignatureDelta, _normalizedGeometrySignature, item`
+- `src/imageCompositeConverter.py:9415 _templateTransferDonorFamilyCompatible -> _extractSymbolFamily`
+- `src/imageCompositeConverter.py:9457 _semanticTransferIsCompatible -> _connectorArmDirection, _connectorStemDirection`
+- `src/imageCompositeConverter.py:9535 _semanticTransferScaleCandidates -> _templateTransferScaleCandidates`
+- `src/imageCompositeConverter.py:9550 _semanticTransferBadgeParams -> Action, _rotScalePoint, math, x, y`
+- `src/imageCompositeConverter.py:9585 _rotScalePoint -> ca, cx, cy, sa, scale, tx, ty`
+- `src/imageCompositeConverter.py:9630 _tryTemplateTransfer -> Action, _buildTransformedSvgFromTemplate, _estimateTemplateTransferScale, _rankTemplateTransferDonors, _readSvgGeometry, _semanticTransferBadgeParams, _semanticTransferIsCompatible, _semanticTransferRotations, _semanticTransferScaleCandidates, _templateTransferDonorFamilyCompatible, _templateTransferTransformCandidates, cv2, os, random`
+- `src/imageCompositeConverter.py:9822 convertRange -> Action, SUCCESSFUL_CONVERSIONS_MANIFEST, _adaptiveIterationBudgetForQualityRow, _computeSuccessfulConversionsErrorThreshold, _conversionRandom, _convertOne, _convertedSvgOutputDir, _createDiffImageWithoutCv2, _defaultConvertedSymbolsRoot, _diffOutputDir, _evaluateQualityPassCandidate, _harmonizeSemanticSizeVariants, _inRequestedRange, _iterationStrategyForPass, _loadExistingConversionRows, _loadQualityConfig, _qualitySortKey, _readValidationLogDetails, _renderEmbeddedRasterSvg, _reportsOutputDir, _selectMiddleLowerTercile, _selectOpenQualityCases, _tryTemplateTransfer, _writeAc08RegressionManifest, _writeAc08SuccessCriteriaReport, _writeAc08WeakFamilyStatusReport, _writeBatchFailureSummary, _writePixelDelta2Ranking, _writeQualityConfig, _writeQualityPassReport, _writeSemanticAuditReport, csv, cv2, fitz, generateConversionOverviews, getBaseNameFromFile, math, np, os, runIterationPipeline, updateSuccessfulConversionsManifestWithMetrics`
+- `src/imageCompositeConverter.py:9890 _convertOne -> Action, _readValidationLogDetails, batch_failures, csv_path, cv2, debug_ac0811_dir, debug_element_diff_dir, diff_out_dir, folder_path, getBaseNameFromFile, os, reports_out_dir, runIterationPipeline, svg_out_dir`
+- `src/imageCompositeConverter.py:10238 _readSvgGeometry -> Action, _grayFromHex, color, fallback, os, re`
+- `src/imageCompositeConverter.py:10250 _grayFromHex -> re`
+- `src/imageCompositeConverter.py:10430 _scaleBadgeParams -> Action, _needsLargeCircleOverflowGuard`
+- `src/imageCompositeConverter.py:10551 _familyHarmonizedBadgeColors -> _clipGray`
+- `src/imageCompositeConverter.py:10601 _harmonizeSemanticSizeVariants -> Action, _anchorRank, _familyHarmonizedBadgeColors, _harmonizationAnchorPriority, _maxSignatureDelta, _normalizedGeometrySignature, _readSvgGeometry, _scaleBadgeParams, cv2, os`
+- `src/imageCompositeConverter.py:10659 _anchorRank -> _harmonizationAnchorPriority, has_connector`
+- `src/imageCompositeConverter.py:10732 _writeAc08RegressionManifest -> AC08_REGRESSION_CASES, AC08_REGRESSION_SET_NAME, AC08_REGRESSION_VARIANTS, csv, os`
+- `src/imageCompositeConverter.py:10773 _summarizePreviousGoodAc08Variants -> AC08_PREVIOUSLY_GOOD_VARIANTS, os`
+- `src/imageCompositeConverter.py:10799 _writeAc08SuccessCriteriaReport -> AC08_REGRESSION_SET_NAME, AC08_REGRESSION_VARIANTS, _summarizePreviousGoodAc08Variants, csv, math, os, re`
+- `src/imageCompositeConverter.py:10971 _writeAc08WeakFamilyStatusReport -> AC08_MITIGATION_STATUS, AC08_REGRESSION_CASES, csv, math, os`
+- `src/imageCompositeConverter.py:11093 _writePixelDelta2Ranking -> Action, csv, cv2, math, os`
+- `src/imageCompositeConverter.py:11146 _loadIterationLogRows -> csv, os`
+- `src/imageCompositeConverter.py:11163 _findImagePathByVariant -> os`
+- `src/imageCompositeConverter.py:11172 collectSuccessfulConversionQualityMetrics -> Action, SUCCESSFUL_CONVERSIONS, _findImagePathByVariant, _loadIterationLogRows, _readValidationLogDetails, cv2, item, np, os`
+- `src/imageCompositeConverter.py:11255 _successfulConversionMetricsAvailable -> math`
+- `src/imageCompositeConverter.py:11276 _parseSuccessfulConversionManifestLine -> contextlib`
+- `src/imageCompositeConverter.py:11306 _readSuccessfulConversionManifestMetrics -> Path, _parseSuccessfulConversionManifestLine`
+- `src/imageCompositeConverter.py:11319 _successfulConversionSnapshotDir -> Path`
+- `src/imageCompositeConverter.py:11324 _successfulConversionSnapshotPaths -> Path, _successfulConversionSnapshotDir`
+- `src/imageCompositeConverter.py:11334 _restoreSuccessfulConversionSnapshot -> Path, _successfulConversionSnapshotPaths`
+- `src/imageCompositeConverter.py:11353 _storeSuccessfulConversionSnapshot -> Path, _successfulConversionSnapshotPaths, json`
+- `src/imageCompositeConverter.py:11370 _isSuccessfulConversionCandidateBetter -> _evaluateQualityPassCandidate, _successfulConversionMetricsAvailable`
+- `src/imageCompositeConverter.py:11408 _formatSuccessfulConversionManifestLine -> _successfulConversionMetricsAvailable, math`
+- `src/imageCompositeConverter.py:11449 _latestFailedConversionManifestEntry -> Path, csv`
+- `src/imageCompositeConverter.py:11482 updateSuccessfulConversionsManifestWithMetrics -> Path, _formatSuccessfulConversionManifestLine, _isSuccessfulConversionCandidateBetter, _latestFailedConversionManifestEntry, _loadSuccessfulConversions, _mergeSuccessfulConversionMetrics, _readSuccessfulConversionManifestMetrics, _restoreSuccessfulConversionSnapshot, _sortedSuccessfulConversionMetricsRows, _storeSuccessfulConversionSnapshot, collectSuccessfulConversionQualityMetrics`
+- `src/imageCompositeConverter.py:11578 _sortedSuccessfulConversionMetricsRows -> row`
+- `src/imageCompositeConverter.py:11585 _writeSuccessfulConversionCsvTable -> _sortedSuccessfulConversionMetricsRows, csv, math, os`
+- `src/imageCompositeConverter.py:11613 writeSuccessfulConversionQualityReport -> _sortedSuccessfulConversionMetricsRows, _writeSuccessfulConversionCsvTable, os, updateSuccessfulConversionsManifestWithMetrics`
+- `src/imageCompositeConverter.py:11646 parseArgs -> AC08_REGRESSION_SET_NAME, AC08_REGRESSION_VARIANTS, SVG_RENDER_SUBPROCESS_TIMEOUT_SEC, argparse, os`
+- `src/imageCompositeConverter.py:11795 __init__ -> io`
+- `src/imageCompositeConverter.py:11809 _optionalLogCapture -> Path, _TeeTextIO, contextlib, sys`
+- `src/imageCompositeConverter.py:11825 _autoDetectCsvPath -> os`
+- `src/imageCompositeConverter.py:11856 _resolveCliCsvAndOutput -> _autoDetectCsvPath, _resolveDescriptionXmlPath, argparse`
+- `src/imageCompositeConverter.py:11878 _formatUserDiagnostic -> DescriptionMappingError`
+- `src/imageCompositeConverter.py:11887 _promptInteractiveRange -> _extractRefParts, _sharedPartialRangeToken, argparse`
+- `src/imageCompositeConverter.py:11906 main -> AC08_REGRESSION_SET_NAME, AC08_REGRESSION_VARIANTS, DescriptionMappingError, _bootstrapRequiredImageDependencies, _formatUserDiagnostic, _loadDescriptionMapping, _optionalLogCapture, _promptInteractiveRange, _resolveCliCsvAndOutput, _runSvgRenderSubprocessEntrypoint, analyzeRange, buildLinuxVendorInstallCommand, convertRange, os, parseArgs`
+- `src/imageCompositeConverter.py:11998 convertImage -> Path, _renderEmbeddedRasterSvg, annotateImageRegions, cv2, detectRelevantRegions, json, np`
+- `src/imageCompositeConverter.py:12022 convertImageVariants -> convertRange`
+- `src/imageCompositeConverterRegions.py:47 detectRelevantRegionsImpl -> ANNOTATION_COLORS, _bboxToDict, _expandBbox, c`
+- `src/imageCompositeConverterRegions.py:130 analyzeRangeImpl -> Callable, csv, json, os`
+- `src/overviewTiles.py:31 _readRaster -> Path, _resolveOptionalDependencies, cv2`
+- `src/overviewTiles.py:39 _renderSvg -> Path, _resolveOptionalDependencies, cv2, fitz, np`
+- `src/overviewTiles.py:57 _readPreview -> Path, RASTER_EXTENSIONS, _readRaster, _renderSvg`
+- `src/overviewTiles.py:65 createTiledOverviewImage -> Path, _readPreview, _resolveOptionalDependencies, cv2, math, np`
+- `src/overviewTiles.py:135 generateConversionOverviews -> Path, createTiledOverviewImage`
+- `src/overviewTiles.py:162 _resolveOptionalDependencies -> sys`
+- `src/successfulConversions.py:46 _iterAvailableSuccessfulConversionVariants -> Path, SUCCESSFUL_CONVERSIONS_SOURCE_DIR`
+- `src/successfulConversions.py:60 _expandSuccessfulConversionManifestEntry -> re`
+- `src/successfulConversions.py:94 _loadSuccessfulConversions -> Path, SUCCESSFUL_CONVERSIONS_FALLBACK, SUCCESSFUL_CONVERSIONS_MANIFEST, SUCCESSFUL_CONVERSIONS_SOURCE_DIR, _expandSuccessfulConversionManifestEntry, _iterAvailableSuccessfulConversionVariants`
+- `src/successfulConversions.py:120 _buildAc08RegressionCases -> AC08_PREVIOUSLY_GOOD_VARIANTS, AC08_STABLE_GOOD_REASON_OVERRIDES, _AC08_BASE_REGRESSION_CASES`
+- `Scanned 325 function(s). Potential issues in 269 function(s).`
