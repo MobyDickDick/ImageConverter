@@ -75,9 +75,49 @@ def snake_to_camel(name: str) -> str:
 
 
 def walk_rows(source_file: str, entrypoint: str, calls: dict[str, list[str]], defined: set[str]) -> list[Row]:
+    occurrences: dict[str, list[list[str]]] = {}
+    first_seen_order: list[str] = []
+
+    def dfs_paths(current: str, path: list[str]) -> None:
+        if current not in occurrences:
+            first_seen_order.append(current)
+        occurrences.setdefault(current, []).append(path)
+        for callee in calls.get(current, []):
+            if callee in defined and callee not in path:
+                dfs_paths(callee, [*path, callee])
+
+    dfs_paths(entrypoint, [entrypoint])
+
+    def lca_node(paths: list[list[str]]) -> str:
+        common = paths[0]
+        for path in paths[1:]:
+            max_len = min(len(common), len(path))
+            i = 0
+            while i < max_len and common[i] == path[i]:
+                i += 1
+            common = common[:i]
+        return common[-1]
+
+    parent_by_function: dict[str, str] = {entrypoint: ""}
+    for function, seen_paths in occurrences.items():
+        if function == entrypoint:
+            continue
+        parent_paths = [p[:-1] for p in seen_paths]
+        parent_by_function[function] = lca_node(parent_paths)
+
+    children: dict[str, list[str]] = {}
+    for function in first_seen_order:
+        children.setdefault(function, [])
+    for function in first_seen_order:
+        if function == entrypoint:
+            continue
+        parent = parent_by_function[function]
+        if function not in children[parent]:
+            children[parent].append(function)
+
     rows: list[Row] = []
 
-    def dfs(current: str, depth: int, parent: str, path: list[str]) -> None:
+    def emit(current: str, depth: int, path: list[str]) -> None:
         rows.append(
             Row(
                 source_file,
@@ -85,15 +125,14 @@ def walk_rows(source_file: str, entrypoint: str, calls: dict[str, list[str]], de
                 depth,
                 current,
                 snake_to_camel(current),
-                parent,
+                parent_by_function[current],
                 " > ".join(path),
             )
         )
-        for callee in calls.get(current, []):
-            if callee in defined and callee not in path:
-                dfs(callee, depth + 1, current, [*path, callee])
+        for child in children.get(current, []):
+            emit(child, depth + 1, [*path, child])
 
-    dfs(entrypoint, 0, "", [entrypoint])
+    emit(entrypoint, 0, [entrypoint])
     return rows
 
 

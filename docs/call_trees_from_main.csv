@@ -7,28 +7,16 @@ src/imageCompositeConverter.py;main;1;_optionalLogCapture;_optionalLogCapture;ma
 src/imageCompositeConverter.py;main;1;buildLinuxVendorInstallCommand;buildLinuxVendorInstallCommand;main;main > buildLinuxVendorInstallCommand
 src/imageCompositeConverter.py;main;2;_requiredVendorPackages;_requiredVendorPackages;buildLinuxVendorInstallCommand;main > buildLinuxVendorInstallCommand > _requiredVendorPackages
 src/imageCompositeConverter.py;main;1;_promptInteractiveRange;_promptInteractiveRange;main;main > _promptInteractiveRange
-src/imageCompositeConverter.py;main;2;_sharedPartialRangeToken;_sharedPartialRangeToken;_promptInteractiveRange;main > _promptInteractiveRange > _sharedPartialRangeToken
-src/imageCompositeConverter.py;main;3;_normalizeRangeToken;_normalizeRangeToken;_sharedPartialRangeToken;main > _promptInteractiveRange > _sharedPartialRangeToken > _normalizeRangeToken
-src/imageCompositeConverter.py;main;4;getBaseNameFromFile;getBaseNameFromFile;_normalizeRangeToken;main > _promptInteractiveRange > _sharedPartialRangeToken > _normalizeRangeToken > getBaseNameFromFile
-src/imageCompositeConverter.py;main;3;_normalizeRangeToken;_normalizeRangeToken;_sharedPartialRangeToken;main > _promptInteractiveRange > _sharedPartialRangeToken > _normalizeRangeToken
-src/imageCompositeConverter.py;main;4;getBaseNameFromFile;getBaseNameFromFile;_normalizeRangeToken;main > _promptInteractiveRange > _sharedPartialRangeToken > _normalizeRangeToken > getBaseNameFromFile
-src/imageCompositeConverter.py;main;3;_compactRangeToken;_compactRangeToken;_sharedPartialRangeToken;main > _promptInteractiveRange > _sharedPartialRangeToken > _compactRangeToken
-src/imageCompositeConverter.py;main;4;_normalizeRangeToken;_normalizeRangeToken;_compactRangeToken;main > _promptInteractiveRange > _sharedPartialRangeToken > _compactRangeToken > _normalizeRangeToken
-src/imageCompositeConverter.py;main;5;getBaseNameFromFile;getBaseNameFromFile;_normalizeRangeToken;main > _promptInteractiveRange > _sharedPartialRangeToken > _compactRangeToken > _normalizeRangeToken > getBaseNameFromFile
-src/imageCompositeConverter.py;main;3;_compactRangeToken;_compactRangeToken;_sharedPartialRangeToken;main > _promptInteractiveRange > _sharedPartialRangeToken > _compactRangeToken
-src/imageCompositeConverter.py;main;4;_normalizeRangeToken;_normalizeRangeToken;_compactRangeToken;main > _promptInteractiveRange > _sharedPartialRangeToken > _compactRangeToken > _normalizeRangeToken
-src/imageCompositeConverter.py;main;5;getBaseNameFromFile;getBaseNameFromFile;_normalizeRangeToken;main > _promptInteractiveRange > _sharedPartialRangeToken > _compactRangeToken > _normalizeRangeToken > getBaseNameFromFile
-src/imageCompositeConverter.py;main;2;_extractRefParts;_extractRefParts;_promptInteractiveRange;main > _promptInteractiveRange > _extractRefParts
-src/imageCompositeConverter.py;main;2;_extractRefParts;_extractRefParts;_promptInteractiveRange;main > _promptInteractiveRange > _extractRefParts
+src/imageCompositeConverter.py;main;1;_sharedPartialRangeToken;_sharedPartialRangeToken;main;main > _sharedPartialRangeToken
+src/imageCompositeConverter.py;main;1;_normalizeRangeToken;_normalizeRangeToken;main;main > _normalizeRangeToken
+src/imageCompositeConverter.py;main;1;getBaseNameFromFile;getBaseNameFromFile;main;main > getBaseNameFromFile
+src/imageCompositeConverter.py;main;1;_compactRangeToken;_compactRangeToken;main;main > _compactRangeToken
+src/imageCompositeConverter.py;main;1;_extractRefParts;_extractRefParts;main;main > _extractRefParts
 src/imageCompositeConverter.py;main;1;_resolveCliCsvAndOutput;_resolveCliCsvAndOutput;main;main > _resolveCliCsvAndOutput
 src/imageCompositeConverter.py;main;2;_autoDetectCsvPath;_autoDetectCsvPath;_resolveCliCsvAndOutput;main > _resolveCliCsvAndOutput > _autoDetectCsvPath
-src/imageCompositeConverter.py;main;2;_resolveDescriptionXmlPath;_resolveDescriptionXmlPath;_resolveCliCsvAndOutput;main > _resolveCliCsvAndOutput > _resolveDescriptionXmlPath
+src/imageCompositeConverter.py;main;1;_resolveDescriptionXmlPath;_resolveDescriptionXmlPath;main;main > _resolveDescriptionXmlPath
 src/imageCompositeConverter.py;main;1;_loadDescriptionMapping;_loadDescriptionMapping;main;main > _loadDescriptionMapping
 src/imageCompositeConverter.py;main;2;_loadDescriptionMappingFromXml;_loadDescriptionMappingFromXml;_loadDescriptionMapping;main > _loadDescriptionMapping > _loadDescriptionMappingFromXml
-src/imageCompositeConverter.py;main;3;_resolveDescriptionXmlPath;_resolveDescriptionXmlPath;_loadDescriptionMappingFromXml;main > _loadDescriptionMapping > _loadDescriptionMappingFromXml > _resolveDescriptionXmlPath
-src/imageCompositeConverter.py;main;3;getBaseNameFromFile;getBaseNameFromFile;_loadDescriptionMappingFromXml;main > _loadDescriptionMapping > _loadDescriptionMappingFromXml > getBaseNameFromFile
-src/imageCompositeConverter.py;main;3;getBaseNameFromFile;getBaseNameFromFile;_loadDescriptionMappingFromXml;main > _loadDescriptionMapping > _loadDescriptionMappingFromXml > getBaseNameFromFile
-src/imageCompositeConverter.py;main;3;getBaseNameFromFile;getBaseNameFromFile;_loadDescriptionMappingFromXml;main > _loadDescriptionMapping > _loadDescriptionMappingFromXml > getBaseNameFromFile
 src/imageCompositeConverter.py;main;2;_loadDescriptionMappingFromCsv;_loadDescriptionMappingFromCsv;_loadDescriptionMapping;main > _loadDescriptionMapping > _loadDescriptionMappingFromCsv
 src/imageCompositeConverter.py;main;1;_bootstrapRequiredImageDependencies;_bootstrapRequiredImageDependencies;main;main > _bootstrapRequiredImageDependencies
 src/imageCompositeConverter.py;main;2;_missingRequiredImageDependencies;_missingRequiredImageDependencies;_bootstrapRequiredImageDependencies;main > _bootstrapRequiredImageDependencies > _missingRequiredImageDependencies
@@ -39,99 +27,43 @@ src/imageCompositeConverter.py;main;2;_convertedSvgOutputDir;_convertedSvgOutput
 src/imageCompositeConverter.py;main;2;_diffOutputDir;_diffOutputDir;convertRange;main > convertRange > _diffOutputDir
 src/imageCompositeConverter.py;main;2;_reportsOutputDir;_reportsOutputDir;convertRange;main > convertRange > _reportsOutputDir
 src/imageCompositeConverter.py;main;2;_inRequestedRange;_inRequestedRange;convertRange;main > convertRange > _inRequestedRange
-src/imageCompositeConverter.py;main;3;getBaseNameFromFile;getBaseNameFromFile;_inRequestedRange;main > convertRange > _inRequestedRange > getBaseNameFromFile
-src/imageCompositeConverter.py;main;3;_extractRefParts;_extractRefParts;_inRequestedRange;main > convertRange > _inRequestedRange > _extractRefParts
-src/imageCompositeConverter.py;main;3;_extractRefParts;_extractRefParts;_inRequestedRange;main > convertRange > _inRequestedRange > _extractRefParts
-src/imageCompositeConverter.py;main;3;_extractRefParts;_extractRefParts;_inRequestedRange;main > convertRange > _inRequestedRange > _extractRefParts
 src/imageCompositeConverter.py;main;3;_normalizeExplicitRangeToken;_normalizeExplicitRangeToken;_inRequestedRange;main > convertRange > _inRequestedRange > _normalizeExplicitRangeToken
-src/imageCompositeConverter.py;main;3;_normalizeExplicitRangeToken;_normalizeExplicitRangeToken;_inRequestedRange;main > convertRange > _inRequestedRange > _normalizeExplicitRangeToken
-src/imageCompositeConverter.py;main;3;_normalizeRangeToken;_normalizeRangeToken;_inRequestedRange;main > convertRange > _inRequestedRange > _normalizeRangeToken
-src/imageCompositeConverter.py;main;4;getBaseNameFromFile;getBaseNameFromFile;_normalizeRangeToken;main > convertRange > _inRequestedRange > _normalizeRangeToken > getBaseNameFromFile
 src/imageCompositeConverter.py;main;3;_matchesExactPrefixFilter;_matchesExactPrefixFilter;_inRequestedRange;main > convertRange > _inRequestedRange > _matchesExactPrefixFilter
-src/imageCompositeConverter.py;main;4;_normalizeRangeToken;_normalizeRangeToken;_matchesExactPrefixFilter;main > convertRange > _inRequestedRange > _matchesExactPrefixFilter > _normalizeRangeToken
-src/imageCompositeConverter.py;main;5;getBaseNameFromFile;getBaseNameFromFile;_normalizeRangeToken;main > convertRange > _inRequestedRange > _matchesExactPrefixFilter > _normalizeRangeToken > getBaseNameFromFile
-src/imageCompositeConverter.py;main;4;_normalizeRangeToken;_normalizeRangeToken;_matchesExactPrefixFilter;main > convertRange > _inRequestedRange > _matchesExactPrefixFilter > _normalizeRangeToken
-src/imageCompositeConverter.py;main;5;getBaseNameFromFile;getBaseNameFromFile;_normalizeRangeToken;main > convertRange > _inRequestedRange > _matchesExactPrefixFilter > _normalizeRangeToken > getBaseNameFromFile
-src/imageCompositeConverter.py;main;4;_normalizeExplicitRangeToken;_normalizeExplicitRangeToken;_matchesExactPrefixFilter;main > convertRange > _inRequestedRange > _matchesExactPrefixFilter > _normalizeExplicitRangeToken
-src/imageCompositeConverter.py;main;4;_normalizeExplicitRangeToken;_normalizeExplicitRangeToken;_matchesExactPrefixFilter;main > convertRange > _inRequestedRange > _matchesExactPrefixFilter > _normalizeExplicitRangeToken
-src/imageCompositeConverter.py;main;4;_normalizeExplicitRangeToken;_normalizeExplicitRangeToken;_matchesExactPrefixFilter;main > convertRange > _inRequestedRange > _matchesExactPrefixFilter > _normalizeExplicitRangeToken
-src/imageCompositeConverter.py;main;4;_isExplicitSizeVariantToken;_isExplicitSizeVariantToken;_matchesExactPrefixFilter;main > convertRange > _inRequestedRange > _matchesExactPrefixFilter > _isExplicitSizeVariantToken
-src/imageCompositeConverter.py;main;4;_normalizeRangeToken;_normalizeRangeToken;_matchesExactPrefixFilter;main > convertRange > _inRequestedRange > _matchesExactPrefixFilter > _normalizeRangeToken
-src/imageCompositeConverter.py;main;5;getBaseNameFromFile;getBaseNameFromFile;_normalizeRangeToken;main > convertRange > _inRequestedRange > _matchesExactPrefixFilter > _normalizeRangeToken > getBaseNameFromFile
-src/imageCompositeConverter.py;main;4;getBaseNameFromFile;getBaseNameFromFile;_matchesExactPrefixFilter;main > convertRange > _inRequestedRange > _matchesExactPrefixFilter > getBaseNameFromFile
 src/imageCompositeConverter.py;main;3;_isExplicitSizeVariantToken;_isExplicitSizeVariantToken;_inRequestedRange;main > convertRange > _inRequestedRange > _isExplicitSizeVariantToken
 src/imageCompositeConverter.py;main;3;_matchesPartialRangeToken;_matchesPartialRangeToken;_inRequestedRange;main > convertRange > _inRequestedRange > _matchesPartialRangeToken
-src/imageCompositeConverter.py;main;4;_sharedPartialRangeToken;_sharedPartialRangeToken;_matchesPartialRangeToken;main > convertRange > _inRequestedRange > _matchesPartialRangeToken > _sharedPartialRangeToken
-src/imageCompositeConverter.py;main;5;_normalizeRangeToken;_normalizeRangeToken;_sharedPartialRangeToken;main > convertRange > _inRequestedRange > _matchesPartialRangeToken > _sharedPartialRangeToken > _normalizeRangeToken
-src/imageCompositeConverter.py;main;6;getBaseNameFromFile;getBaseNameFromFile;_normalizeRangeToken;main > convertRange > _inRequestedRange > _matchesPartialRangeToken > _sharedPartialRangeToken > _normalizeRangeToken > getBaseNameFromFile
-src/imageCompositeConverter.py;main;5;_normalizeRangeToken;_normalizeRangeToken;_sharedPartialRangeToken;main > convertRange > _inRequestedRange > _matchesPartialRangeToken > _sharedPartialRangeToken > _normalizeRangeToken
-src/imageCompositeConverter.py;main;6;getBaseNameFromFile;getBaseNameFromFile;_normalizeRangeToken;main > convertRange > _inRequestedRange > _matchesPartialRangeToken > _sharedPartialRangeToken > _normalizeRangeToken > getBaseNameFromFile
-src/imageCompositeConverter.py;main;5;_compactRangeToken;_compactRangeToken;_sharedPartialRangeToken;main > convertRange > _inRequestedRange > _matchesPartialRangeToken > _sharedPartialRangeToken > _compactRangeToken
-src/imageCompositeConverter.py;main;6;_normalizeRangeToken;_normalizeRangeToken;_compactRangeToken;main > convertRange > _inRequestedRange > _matchesPartialRangeToken > _sharedPartialRangeToken > _compactRangeToken > _normalizeRangeToken
-src/imageCompositeConverter.py;main;7;getBaseNameFromFile;getBaseNameFromFile;_normalizeRangeToken;main > convertRange > _inRequestedRange > _matchesPartialRangeToken > _sharedPartialRangeToken > _compactRangeToken > _normalizeRangeToken > getBaseNameFromFile
-src/imageCompositeConverter.py;main;5;_compactRangeToken;_compactRangeToken;_sharedPartialRangeToken;main > convertRange > _inRequestedRange > _matchesPartialRangeToken > _sharedPartialRangeToken > _compactRangeToken
-src/imageCompositeConverter.py;main;6;_normalizeRangeToken;_normalizeRangeToken;_compactRangeToken;main > convertRange > _inRequestedRange > _matchesPartialRangeToken > _sharedPartialRangeToken > _compactRangeToken > _normalizeRangeToken
-src/imageCompositeConverter.py;main;7;getBaseNameFromFile;getBaseNameFromFile;_normalizeRangeToken;main > convertRange > _inRequestedRange > _matchesPartialRangeToken > _sharedPartialRangeToken > _compactRangeToken > _normalizeRangeToken > getBaseNameFromFile
-src/imageCompositeConverter.py;main;4;_normalizeRangeToken;_normalizeRangeToken;_matchesPartialRangeToken;main > convertRange > _inRequestedRange > _matchesPartialRangeToken > _normalizeRangeToken
-src/imageCompositeConverter.py;main;5;getBaseNameFromFile;getBaseNameFromFile;_normalizeRangeToken;main > convertRange > _inRequestedRange > _matchesPartialRangeToken > _normalizeRangeToken > getBaseNameFromFile
-src/imageCompositeConverter.py;main;4;getBaseNameFromFile;getBaseNameFromFile;_matchesPartialRangeToken;main > convertRange > _inRequestedRange > _matchesPartialRangeToken > getBaseNameFromFile
 src/imageCompositeConverter.py;main;2;_renderEmbeddedRasterSvg;_renderEmbeddedRasterSvg;convertRange;main > convertRange > _renderEmbeddedRasterSvg
-src/imageCompositeConverter.py;main;3;_sniffRasterSize;_sniffRasterSize;_renderEmbeddedRasterSvg;main > convertRange > _renderEmbeddedRasterSvg > _sniffRasterSize
 src/imageCompositeConverter.py;main;3;_svgHrefMimeType;_svgHrefMimeType;_renderEmbeddedRasterSvg;main > convertRange > _renderEmbeddedRasterSvg > _svgHrefMimeType
+src/imageCompositeConverter.py;main;2;_sniffRasterSize;_sniffRasterSize;convertRange;main > convertRange > _sniffRasterSize
 src/imageCompositeConverter.py;main;2;_createDiffImageWithoutCv2;_createDiffImageWithoutCv2;convertRange;main > convertRange > _createDiffImageWithoutCv2
 src/imageCompositeConverter.py;main;2;_conversionRandom;_conversionRandom;convertRange;main > convertRange > _conversionRandom
 src/imageCompositeConverter.py;main;2;_loadExistingConversionRows;_loadExistingConversionRows;convertRange;main > convertRange > _loadExistingConversionRows
-src/imageCompositeConverter.py;main;3;_reportsOutputDir;_reportsOutputDir;_loadExistingConversionRows;main > convertRange > _loadExistingConversionRows > _reportsOutputDir
-src/imageCompositeConverter.py;main;3;_convertedSvgOutputDir;_convertedSvgOutputDir;_loadExistingConversionRows;main > convertRange > _loadExistingConversionRows > _convertedSvgOutputDir
-src/imageCompositeConverter.py;main;3;_readSvgGeometry;_readSvgGeometry;_loadExistingConversionRows;main > convertRange > _loadExistingConversionRows > _readSvgGeometry
-src/imageCompositeConverter.py;main;3;getBaseNameFromFile;getBaseNameFromFile;_loadExistingConversionRows;main > convertRange > _loadExistingConversionRows > getBaseNameFromFile
 src/imageCompositeConverter.py;main;3;_isSemanticTemplateVariant;_isSemanticTemplateVariant;_loadExistingConversionRows;main > convertRange > _loadExistingConversionRows > _isSemanticTemplateVariant
-src/imageCompositeConverter.py;main;4;getBaseNameFromFile;getBaseNameFromFile;_isSemanticTemplateVariant;main > convertRange > _loadExistingConversionRows > _isSemanticTemplateVariant > getBaseNameFromFile
-src/imageCompositeConverter.py;main;3;_sniffRasterSize;_sniffRasterSize;_loadExistingConversionRows;main > convertRange > _loadExistingConversionRows > _sniffRasterSize
+src/imageCompositeConverter.py;main;2;_readSvgGeometry;_readSvgGeometry;convertRange;main > convertRange > _readSvgGeometry
 src/imageCompositeConverter.py;main;2;runIterationPipeline;runIterationPipeline;convertRange;main > convertRange > runIterationPipeline
-src/imageCompositeConverter.py;main;3;getBaseNameFromFile;getBaseNameFromFile;runIterationPipeline;main > convertRange > runIterationPipeline > getBaseNameFromFile
 src/imageCompositeConverter.py;main;3;_semanticAuditRecord;_semanticAuditRecord;runIterationPipeline;main > convertRange > runIterationPipeline > _semanticAuditRecord
-src/imageCompositeConverter.py;main;4;getBaseNameFromFile;getBaseNameFromFile;_semanticAuditRecord;main > convertRange > runIterationPipeline > _semanticAuditRecord > getBaseNameFromFile
-src/imageCompositeConverter.py;main;3;_semanticAuditRecord;_semanticAuditRecord;runIterationPipeline;main > convertRange > runIterationPipeline > _semanticAuditRecord
-src/imageCompositeConverter.py;main;4;getBaseNameFromFile;getBaseNameFromFile;_semanticAuditRecord;main > convertRange > runIterationPipeline > _semanticAuditRecord > getBaseNameFromFile
 src/imageCompositeConverter.py;main;3;_semanticQualityFlags;_semanticQualityFlags;runIterationPipeline;main > convertRange > runIterationPipeline > _semanticQualityFlags
-src/imageCompositeConverter.py;main;4;getBaseNameFromFile;getBaseNameFromFile;_semanticQualityFlags;main > convertRange > runIterationPipeline > _semanticQualityFlags > getBaseNameFromFile
-src/imageCompositeConverter.py;main;3;_semanticAuditRecord;_semanticAuditRecord;runIterationPipeline;main > convertRange > runIterationPipeline > _semanticAuditRecord
-src/imageCompositeConverter.py;main;4;getBaseNameFromFile;getBaseNameFromFile;_semanticAuditRecord;main > convertRange > runIterationPipeline > _semanticAuditRecord > getBaseNameFromFile
 src/imageCompositeConverter.py;main;2;_readValidationLogDetails;_readValidationLogDetails;convertRange;main > convertRange > _readValidationLogDetails
-src/imageCompositeConverter.py;main;2;_readValidationLogDetails;_readValidationLogDetails;convertRange;main > convertRange > _readValidationLogDetails
-src/imageCompositeConverter.py;main;2;getBaseNameFromFile;getBaseNameFromFile;convertRange;main > convertRange > getBaseNameFromFile
 src/imageCompositeConverter.py;main;2;_tryTemplateTransfer;_tryTemplateTransfer;convertRange;main > convertRange > _tryTemplateTransfer
-src/imageCompositeConverter.py;main;3;_readSvgGeometry;_readSvgGeometry;_tryTemplateTransfer;main > convertRange > _tryTemplateTransfer > _readSvgGeometry
 src/imageCompositeConverter.py;main;3;_rankTemplateTransferDonors;_rankTemplateTransferDonors;_tryTemplateTransfer;main > convertRange > _tryTemplateTransfer > _rankTemplateTransferDonors
-src/imageCompositeConverter.py;main;4;_normalizedGeometrySignature;_normalizedGeometrySignature;_rankTemplateTransferDonors;main > convertRange > _tryTemplateTransfer > _rankTemplateTransferDonors > _normalizedGeometrySignature
-src/imageCompositeConverter.py;main;4;_normalizedGeometrySignature;_normalizedGeometrySignature;_rankTemplateTransferDonors;main > convertRange > _tryTemplateTransfer > _rankTemplateTransferDonors > _normalizedGeometrySignature
-src/imageCompositeConverter.py;main;4;_maxSignatureDelta;_maxSignatureDelta;_rankTemplateTransferDonors;main > convertRange > _tryTemplateTransfer > _rankTemplateTransferDonors > _maxSignatureDelta
 src/imageCompositeConverter.py;main;3;_templateTransferDonorFamilyCompatible;_templateTransferDonorFamilyCompatible;_tryTemplateTransfer;main > convertRange > _tryTemplateTransfer > _templateTransferDonorFamilyCompatible
 src/imageCompositeConverter.py;main;4;_extractSymbolFamily;_extractSymbolFamily;_templateTransferDonorFamilyCompatible;main > convertRange > _tryTemplateTransfer > _templateTransferDonorFamilyCompatible > _extractSymbolFamily
-src/imageCompositeConverter.py;main;4;_extractSymbolFamily;_extractSymbolFamily;_templateTransferDonorFamilyCompatible;main > convertRange > _tryTemplateTransfer > _templateTransferDonorFamilyCompatible > _extractSymbolFamily
-src/imageCompositeConverter.py;main;3;_readSvgGeometry;_readSvgGeometry;_tryTemplateTransfer;main > convertRange > _tryTemplateTransfer > _readSvgGeometry
 src/imageCompositeConverter.py;main;3;_estimateTemplateTransferScale;_estimateTemplateTransferScale;_tryTemplateTransfer;main > convertRange > _tryTemplateTransfer > _estimateTemplateTransferScale
-src/imageCompositeConverter.py;main;4;_buildTransformedSvgFromTemplate;_buildTransformedSvgFromTemplate;_estimateTemplateTransferScale;main > convertRange > _tryTemplateTransfer > _estimateTemplateTransferScale > _buildTransformedSvgFromTemplate
-src/imageCompositeConverter.py;main;5;_extractSvgInner;_extractSvgInner;_buildTransformedSvgFromTemplate;main > convertRange > _tryTemplateTransfer > _estimateTemplateTransferScale > _buildTransformedSvgFromTemplate > _extractSvgInner
+src/imageCompositeConverter.py;main;3;_buildTransformedSvgFromTemplate;_buildTransformedSvgFromTemplate;_tryTemplateTransfer;main > convertRange > _tryTemplateTransfer > _buildTransformedSvgFromTemplate
+src/imageCompositeConverter.py;main;3;_extractSvgInner;_extractSvgInner;_tryTemplateTransfer;main > convertRange > _tryTemplateTransfer > _extractSvgInner
 src/imageCompositeConverter.py;main;3;_semanticTransferIsCompatible;_semanticTransferIsCompatible;_tryTemplateTransfer;main > convertRange > _tryTemplateTransfer > _semanticTransferIsCompatible
 src/imageCompositeConverter.py;main;4;_connectorArmDirection;_connectorArmDirection;_semanticTransferIsCompatible;main > convertRange > _tryTemplateTransfer > _semanticTransferIsCompatible > _connectorArmDirection
-src/imageCompositeConverter.py;main;4;_connectorArmDirection;_connectorArmDirection;_semanticTransferIsCompatible;main > convertRange > _tryTemplateTransfer > _semanticTransferIsCompatible > _connectorArmDirection
-src/imageCompositeConverter.py;main;4;_connectorStemDirection;_connectorStemDirection;_semanticTransferIsCompatible;main > convertRange > _tryTemplateTransfer > _semanticTransferIsCompatible > _connectorStemDirection
 src/imageCompositeConverter.py;main;4;_connectorStemDirection;_connectorStemDirection;_semanticTransferIsCompatible;main > convertRange > _tryTemplateTransfer > _semanticTransferIsCompatible > _connectorStemDirection
 src/imageCompositeConverter.py;main;3;_semanticTransferScaleCandidates;_semanticTransferScaleCandidates;_tryTemplateTransfer;main > convertRange > _tryTemplateTransfer > _semanticTransferScaleCandidates
-src/imageCompositeConverter.py;main;4;_templateTransferScaleCandidates;_templateTransferScaleCandidates;_semanticTransferScaleCandidates;main > convertRange > _tryTemplateTransfer > _semanticTransferScaleCandidates > _templateTransferScaleCandidates
+src/imageCompositeConverter.py;main;3;_templateTransferScaleCandidates;_templateTransferScaleCandidates;_tryTemplateTransfer;main > convertRange > _tryTemplateTransfer > _templateTransferScaleCandidates
 src/imageCompositeConverter.py;main;3;_semanticTransferRotations;_semanticTransferRotations;_tryTemplateTransfer;main > convertRange > _tryTemplateTransfer > _semanticTransferRotations
 src/imageCompositeConverter.py;main;3;_semanticTransferBadgeParams;_semanticTransferBadgeParams;_tryTemplateTransfer;main > convertRange > _tryTemplateTransfer > _semanticTransferBadgeParams
 src/imageCompositeConverter.py;main;3;_templateTransferTransformCandidates;_templateTransferTransformCandidates;_tryTemplateTransfer;main > convertRange > _tryTemplateTransfer > _templateTransferTransformCandidates
-src/imageCompositeConverter.py;main;4;_templateTransferScaleCandidates;_templateTransferScaleCandidates;_templateTransferTransformCandidates;main > convertRange > _tryTemplateTransfer > _templateTransferTransformCandidates > _templateTransferScaleCandidates
-src/imageCompositeConverter.py;main;3;_buildTransformedSvgFromTemplate;_buildTransformedSvgFromTemplate;_tryTemplateTransfer;main > convertRange > _tryTemplateTransfer > _buildTransformedSvgFromTemplate
-src/imageCompositeConverter.py;main;4;_extractSvgInner;_extractSvgInner;_buildTransformedSvgFromTemplate;main > convertRange > _tryTemplateTransfer > _buildTransformedSvgFromTemplate > _extractSvgInner
+src/imageCompositeConverter.py;main;2;_normalizedGeometrySignature;_normalizedGeometrySignature;convertRange;main > convertRange > _normalizedGeometrySignature
+src/imageCompositeConverter.py;main;2;_maxSignatureDelta;_maxSignatureDelta;convertRange;main > convertRange > _maxSignatureDelta
 src/imageCompositeConverter.py;main;2;_computeSuccessfulConversionsErrorThreshold;_computeSuccessfulConversionsErrorThreshold;convertRange;main > convertRange > _computeSuccessfulConversionsErrorThreshold
 src/imageCompositeConverter.py;main;2;_loadQualityConfig;_loadQualityConfig;convertRange;main > convertRange > _loadQualityConfig
-src/imageCompositeConverter.py;main;3;_qualityConfigPath;_qualityConfigPath;_loadQualityConfig;main > convertRange > _loadQualityConfig > _qualityConfigPath
+src/imageCompositeConverter.py;main;2;_qualityConfigPath;_qualityConfigPath;convertRange;main > convertRange > _qualityConfigPath
 src/imageCompositeConverter.py;main;2;_writeQualityConfig;_writeQualityConfig;convertRange;main > convertRange > _writeQualityConfig
-src/imageCompositeConverter.py;main;3;_qualityConfigPath;_qualityConfigPath;_writeQualityConfig;main > convertRange > _writeQualityConfig > _qualityConfigPath
 src/imageCompositeConverter.py;main;2;_selectOpenQualityCases;_selectOpenQualityCases;convertRange;main > convertRange > _selectOpenQualityCases
 src/imageCompositeConverter.py;main;2;_selectMiddleLowerTercile;_selectMiddleLowerTercile;convertRange;main > convertRange > _selectMiddleLowerTercile
 src/imageCompositeConverter.py;main;2;_iterationStrategyForPass;_iterationStrategyForPass;convertRange;main > convertRange > _iterationStrategyForPass
@@ -140,15 +72,8 @@ src/imageCompositeConverter.py;main;2;_evaluateQualityPassCandidate;_evaluateQua
 src/imageCompositeConverter.py;main;2;_writeQualityPassReport;_writeQualityPassReport;convertRange;main > convertRange > _writeQualityPassReport
 src/imageCompositeConverter.py;main;2;_writeBatchFailureSummary;_writeBatchFailureSummary;convertRange;main > convertRange > _writeBatchFailureSummary
 src/imageCompositeConverter.py;main;2;_harmonizeSemanticSizeVariants;_harmonizeSemanticSizeVariants;convertRange;main > convertRange > _harmonizeSemanticSizeVariants
-src/imageCompositeConverter.py;main;3;_readSvgGeometry;_readSvgGeometry;_harmonizeSemanticSizeVariants;main > convertRange > _harmonizeSemanticSizeVariants > _readSvgGeometry
-src/imageCompositeConverter.py;main;3;_normalizedGeometrySignature;_normalizedGeometrySignature;_harmonizeSemanticSizeVariants;main > convertRange > _harmonizeSemanticSizeVariants > _normalizedGeometrySignature
-src/imageCompositeConverter.py;main;3;_maxSignatureDelta;_maxSignatureDelta;_harmonizeSemanticSizeVariants;main > convertRange > _harmonizeSemanticSizeVariants > _maxSignatureDelta
 src/imageCompositeConverter.py;main;3;_harmonizationAnchorPriority;_harmonizationAnchorPriority;_harmonizeSemanticSizeVariants;main > convertRange > _harmonizeSemanticSizeVariants > _harmonizationAnchorPriority
 src/imageCompositeConverter.py;main;3;_familyHarmonizedBadgeColors;_familyHarmonizedBadgeColors;_harmonizeSemanticSizeVariants;main > convertRange > _harmonizeSemanticSizeVariants > _familyHarmonizedBadgeColors
-src/imageCompositeConverter.py;main;4;_clipGray;_clipGray;_familyHarmonizedBadgeColors;main > convertRange > _harmonizeSemanticSizeVariants > _familyHarmonizedBadgeColors > _clipGray
-src/imageCompositeConverter.py;main;4;_clipGray;_clipGray;_familyHarmonizedBadgeColors;main > convertRange > _harmonizeSemanticSizeVariants > _familyHarmonizedBadgeColors > _clipGray
-src/imageCompositeConverter.py;main;4;_clipGray;_clipGray;_familyHarmonizedBadgeColors;main > convertRange > _harmonizeSemanticSizeVariants > _familyHarmonizedBadgeColors > _clipGray
-src/imageCompositeConverter.py;main;4;_clipGray;_clipGray;_familyHarmonizedBadgeColors;main > convertRange > _harmonizeSemanticSizeVariants > _familyHarmonizedBadgeColors > _clipGray
 src/imageCompositeConverter.py;main;4;_clipGray;_clipGray;_familyHarmonizedBadgeColors;main > convertRange > _harmonizeSemanticSizeVariants > _familyHarmonizedBadgeColors > _clipGray
 src/imageCompositeConverter.py;main;3;_scaleBadgeParams;_scaleBadgeParams;_harmonizeSemanticSizeVariants;main > convertRange > _harmonizeSemanticSizeVariants > _scaleBadgeParams
 src/imageCompositeConverter.py;main;4;_needsLargeCircleOverflowGuard;_needsLargeCircleOverflowGuard;_scaleBadgeParams;main > convertRange > _harmonizeSemanticSizeVariants > _scaleBadgeParams > _needsLargeCircleOverflowGuard
@@ -164,22 +89,14 @@ src/imageCompositeConverter.py;main;4;_parseSuccessfulConversionManifestLine;_pa
 src/imageCompositeConverter.py;main;3;collectSuccessfulConversionQualityMetrics;collectSuccessfulConversionQualityMetrics;updateSuccessfulConversionsManifestWithMetrics;main > convertRange > updateSuccessfulConversionsManifestWithMetrics > collectSuccessfulConversionQualityMetrics
 src/imageCompositeConverter.py;main;4;_loadIterationLogRows;_loadIterationLogRows;collectSuccessfulConversionQualityMetrics;main > convertRange > updateSuccessfulConversionsManifestWithMetrics > collectSuccessfulConversionQualityMetrics > _loadIterationLogRows
 src/imageCompositeConverter.py;main;4;_findImagePathByVariant;_findImagePathByVariant;collectSuccessfulConversionQualityMetrics;main > convertRange > updateSuccessfulConversionsManifestWithMetrics > collectSuccessfulConversionQualityMetrics > _findImagePathByVariant
-src/imageCompositeConverter.py;main;4;_readValidationLogDetails;_readValidationLogDetails;collectSuccessfulConversionQualityMetrics;main > convertRange > updateSuccessfulConversionsManifestWithMetrics > collectSuccessfulConversionQualityMetrics > _readValidationLogDetails
 src/imageCompositeConverter.py;main;3;_isSuccessfulConversionCandidateBetter;_isSuccessfulConversionCandidateBetter;updateSuccessfulConversionsManifestWithMetrics;main > convertRange > updateSuccessfulConversionsManifestWithMetrics > _isSuccessfulConversionCandidateBetter
-src/imageCompositeConverter.py;main;4;_successfulConversionMetricsAvailable;_successfulConversionMetricsAvailable;_isSuccessfulConversionCandidateBetter;main > convertRange > updateSuccessfulConversionsManifestWithMetrics > _isSuccessfulConversionCandidateBetter > _successfulConversionMetricsAvailable
-src/imageCompositeConverter.py;main;4;_successfulConversionMetricsAvailable;_successfulConversionMetricsAvailable;_isSuccessfulConversionCandidateBetter;main > convertRange > updateSuccessfulConversionsManifestWithMetrics > _isSuccessfulConversionCandidateBetter > _successfulConversionMetricsAvailable
-src/imageCompositeConverter.py;main;4;_evaluateQualityPassCandidate;_evaluateQualityPassCandidate;_isSuccessfulConversionCandidateBetter;main > convertRange > updateSuccessfulConversionsManifestWithMetrics > _isSuccessfulConversionCandidateBetter > _evaluateQualityPassCandidate
+src/imageCompositeConverter.py;main;3;_successfulConversionMetricsAvailable;_successfulConversionMetricsAvailable;updateSuccessfulConversionsManifestWithMetrics;main > convertRange > updateSuccessfulConversionsManifestWithMetrics > _successfulConversionMetricsAvailable
 src/imageCompositeConverter.py;main;3;_storeSuccessfulConversionSnapshot;_storeSuccessfulConversionSnapshot;updateSuccessfulConversionsManifestWithMetrics;main > convertRange > updateSuccessfulConversionsManifestWithMetrics > _storeSuccessfulConversionSnapshot
-src/imageCompositeConverter.py;main;4;_successfulConversionSnapshotPaths;_successfulConversionSnapshotPaths;_storeSuccessfulConversionSnapshot;main > convertRange > updateSuccessfulConversionsManifestWithMetrics > _storeSuccessfulConversionSnapshot > _successfulConversionSnapshotPaths
-src/imageCompositeConverter.py;main;5;_successfulConversionSnapshotDir;_successfulConversionSnapshotDir;_successfulConversionSnapshotPaths;main > convertRange > updateSuccessfulConversionsManifestWithMetrics > _storeSuccessfulConversionSnapshot > _successfulConversionSnapshotPaths > _successfulConversionSnapshotDir
+src/imageCompositeConverter.py;main;3;_successfulConversionSnapshotPaths;_successfulConversionSnapshotPaths;updateSuccessfulConversionsManifestWithMetrics;main > convertRange > updateSuccessfulConversionsManifestWithMetrics > _successfulConversionSnapshotPaths
+src/imageCompositeConverter.py;main;3;_successfulConversionSnapshotDir;_successfulConversionSnapshotDir;updateSuccessfulConversionsManifestWithMetrics;main > convertRange > updateSuccessfulConversionsManifestWithMetrics > _successfulConversionSnapshotDir
 src/imageCompositeConverter.py;main;3;_mergeSuccessfulConversionMetrics;_mergeSuccessfulConversionMetrics;updateSuccessfulConversionsManifestWithMetrics;main > convertRange > updateSuccessfulConversionsManifestWithMetrics > _mergeSuccessfulConversionMetrics
 src/imageCompositeConverter.py;main;3;_restoreSuccessfulConversionSnapshot;_restoreSuccessfulConversionSnapshot;updateSuccessfulConversionsManifestWithMetrics;main > convertRange > updateSuccessfulConversionsManifestWithMetrics > _restoreSuccessfulConversionSnapshot
-src/imageCompositeConverter.py;main;4;_successfulConversionSnapshotPaths;_successfulConversionSnapshotPaths;_restoreSuccessfulConversionSnapshot;main > convertRange > updateSuccessfulConversionsManifestWithMetrics > _restoreSuccessfulConversionSnapshot > _successfulConversionSnapshotPaths
-src/imageCompositeConverter.py;main;5;_successfulConversionSnapshotDir;_successfulConversionSnapshotDir;_successfulConversionSnapshotPaths;main > convertRange > updateSuccessfulConversionsManifestWithMetrics > _restoreSuccessfulConversionSnapshot > _successfulConversionSnapshotPaths > _successfulConversionSnapshotDir
 src/imageCompositeConverter.py;main;3;_formatSuccessfulConversionManifestLine;_formatSuccessfulConversionManifestLine;updateSuccessfulConversionsManifestWithMetrics;main > convertRange > updateSuccessfulConversionsManifestWithMetrics > _formatSuccessfulConversionManifestLine
-src/imageCompositeConverter.py;main;4;_successfulConversionMetricsAvailable;_successfulConversionMetricsAvailable;_formatSuccessfulConversionManifestLine;main > convertRange > updateSuccessfulConversionsManifestWithMetrics > _formatSuccessfulConversionManifestLine > _successfulConversionMetricsAvailable
-src/imageCompositeConverter.py;main;3;_formatSuccessfulConversionManifestLine;_formatSuccessfulConversionManifestLine;updateSuccessfulConversionsManifestWithMetrics;main > convertRange > updateSuccessfulConversionsManifestWithMetrics > _formatSuccessfulConversionManifestLine
-src/imageCompositeConverter.py;main;4;_successfulConversionMetricsAvailable;_successfulConversionMetricsAvailable;_formatSuccessfulConversionManifestLine;main > convertRange > updateSuccessfulConversionsManifestWithMetrics > _formatSuccessfulConversionManifestLine > _successfulConversionMetricsAvailable
 src/imageCompositeConverter.py;main;3;_latestFailedConversionManifestEntry;_latestFailedConversionManifestEntry;updateSuccessfulConversionsManifestWithMetrics;main > convertRange > updateSuccessfulConversionsManifestWithMetrics > _latestFailedConversionManifestEntry
 src/imageCompositeConverter.py;main;3;_sortedSuccessfulConversionMetricsRows;_sortedSuccessfulConversionMetricsRows;updateSuccessfulConversionsManifestWithMetrics;main > convertRange > updateSuccessfulConversionsManifestWithMetrics > _sortedSuccessfulConversionMetricsRows
 src/imageCompositeConverter.py;main;1;_formatUserDiagnostic;_formatUserDiagnostic;main;main > _formatUserDiagnostic
@@ -189,28 +106,16 @@ src/overviewTiles.py;generateConversionOverviews;1;createTiledOverviewImage;crea
 src/overviewTiles.py;generateConversionOverviews;2;_resolveOptionalDependencies;_resolveOptionalDependencies;createTiledOverviewImage;generateConversionOverviews > createTiledOverviewImage > _resolveOptionalDependencies
 src/overviewTiles.py;generateConversionOverviews;2;_readPreview;_readPreview;createTiledOverviewImage;generateConversionOverviews > createTiledOverviewImage > _readPreview
 src/overviewTiles.py;generateConversionOverviews;3;_renderSvg;_renderSvg;_readPreview;generateConversionOverviews > createTiledOverviewImage > _readPreview > _renderSvg
-src/overviewTiles.py;generateConversionOverviews;4;_resolveOptionalDependencies;_resolveOptionalDependencies;_renderSvg;generateConversionOverviews > createTiledOverviewImage > _readPreview > _renderSvg > _resolveOptionalDependencies
 src/overviewTiles.py;generateConversionOverviews;3;_readRaster;_readRaster;_readPreview;generateConversionOverviews > createTiledOverviewImage > _readPreview > _readRaster
-src/overviewTiles.py;generateConversionOverviews;4;_resolveOptionalDependencies;_resolveOptionalDependencies;_readRaster;generateConversionOverviews > createTiledOverviewImage > _readPreview > _readRaster > _resolveOptionalDependencies
-src/overviewTiles.py;generateConversionOverviews;1;createTiledOverviewImage;createTiledOverviewImage;generateConversionOverviews;generateConversionOverviews > createTiledOverviewImage
-src/overviewTiles.py;generateConversionOverviews;2;_resolveOptionalDependencies;_resolveOptionalDependencies;createTiledOverviewImage;generateConversionOverviews > createTiledOverviewImage > _resolveOptionalDependencies
-src/overviewTiles.py;generateConversionOverviews;2;_readPreview;_readPreview;createTiledOverviewImage;generateConversionOverviews > createTiledOverviewImage > _readPreview
-src/overviewTiles.py;generateConversionOverviews;3;_renderSvg;_renderSvg;_readPreview;generateConversionOverviews > createTiledOverviewImage > _readPreview > _renderSvg
-src/overviewTiles.py;generateConversionOverviews;4;_resolveOptionalDependencies;_resolveOptionalDependencies;_renderSvg;generateConversionOverviews > createTiledOverviewImage > _readPreview > _renderSvg > _resolveOptionalDependencies
-src/overviewTiles.py;generateConversionOverviews;3;_readRaster;_readRaster;_readPreview;generateConversionOverviews > createTiledOverviewImage > _readPreview > _readRaster
-src/overviewTiles.py;generateConversionOverviews;4;_resolveOptionalDependencies;_resolveOptionalDependencies;_readRaster;generateConversionOverviews > createTiledOverviewImage > _readPreview > _readRaster > _resolveOptionalDependencies
 src/overviewTiles.py;createTiledOverviewImage;0;createTiledOverviewImage;createTiledOverviewImage;;createTiledOverviewImage
 src/overviewTiles.py;createTiledOverviewImage;1;_resolveOptionalDependencies;_resolveOptionalDependencies;createTiledOverviewImage;createTiledOverviewImage > _resolveOptionalDependencies
 src/overviewTiles.py;createTiledOverviewImage;1;_readPreview;_readPreview;createTiledOverviewImage;createTiledOverviewImage > _readPreview
 src/overviewTiles.py;createTiledOverviewImage;2;_renderSvg;_renderSvg;_readPreview;createTiledOverviewImage > _readPreview > _renderSvg
-src/overviewTiles.py;createTiledOverviewImage;3;_resolveOptionalDependencies;_resolveOptionalDependencies;_renderSvg;createTiledOverviewImage > _readPreview > _renderSvg > _resolveOptionalDependencies
 src/overviewTiles.py;createTiledOverviewImage;2;_readRaster;_readRaster;_readPreview;createTiledOverviewImage > _readPreview > _readRaster
-src/overviewTiles.py;createTiledOverviewImage;3;_resolveOptionalDependencies;_resolveOptionalDependencies;_readRaster;createTiledOverviewImage > _readPreview > _readRaster > _resolveOptionalDependencies
 src/overviewTiles.py;_resolveOptionalDependencies;0;_resolveOptionalDependencies;_resolveOptionalDependencies;;_resolveOptionalDependencies
 src/overviewTiles.py;_readPreview;0;_readPreview;_readPreview;;_readPreview
 src/overviewTiles.py;_readPreview;1;_renderSvg;_renderSvg;_readPreview;_readPreview > _renderSvg
-src/overviewTiles.py;_readPreview;2;_resolveOptionalDependencies;_resolveOptionalDependencies;_renderSvg;_readPreview > _renderSvg > _resolveOptionalDependencies
+src/overviewTiles.py;_readPreview;1;_resolveOptionalDependencies;_resolveOptionalDependencies;_readPreview;_readPreview > _resolveOptionalDependencies
 src/overviewTiles.py;_readPreview;1;_readRaster;_readRaster;_readPreview;_readPreview > _readRaster
-src/overviewTiles.py;_readPreview;2;_resolveOptionalDependencies;_resolveOptionalDependencies;_readRaster;_readPreview > _readRaster > _resolveOptionalDependencies
 src/overviewTiles.py;_readRaster;0;_readRaster;_readRaster;;_readRaster
 src/overviewTiles.py;_readRaster;1;_resolveOptionalDependencies;_resolveOptionalDependencies;_readRaster;_readRaster > _resolveOptionalDependencies
