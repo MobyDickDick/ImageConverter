@@ -1,0 +1,238 @@
+# Call Trees ab `main()`
+
+Automatisch erzeugte, **statische** Aufrufbäume (AST-basiert) ausgehend von `src.imageCompositeConverter.main`.
+
+## `src/imageCompositeConverter.py`
+
+- `main()`
+  - `parse_args()`
+  - `_run_svg_render_subprocess_entrypoint()`
+    - `_render_svg_to_numpy_inprocess()`
+  - `_optional_log_capture()`
+  - `_resolve_cli_csv_and_output()`
+    - `_auto_detect_csv_path()`
+    - `_resolve_description_xml_path()`
+  - `_prompt_interactive_range()`
+    - `_shared_partial_range_token()`
+      - `_normalize_range_token()`
+        - `get_base_name_from_file()`
+      - `_normalize_range_token()`
+        - `get_base_name_from_file()`
+      - `_compact_range_token()`
+        - `_normalize_range_token()`
+          - `get_base_name_from_file()`
+      - `_compact_range_token()`
+        - `_normalize_range_token()`
+          - `get_base_name_from_file()`
+    - `_extract_ref_parts()`
+    - `_extract_ref_parts()`
+  - `analyze_range()`
+  - `convert_range()`
+    - `_converted_svg_output_dir()`
+    - `_diff_output_dir()`
+    - `_reports_output_dir()`
+    - `_conversion_random()`
+    - `_load_existing_conversion_rows()`
+      - `_converted_svg_output_dir()`
+      - `_reports_output_dir()`
+      - `_read_svg_geometry()`
+      - `_is_semantic_template_variant()`
+        - `get_base_name_from_file()`
+      - `get_base_name_from_file()`
+      - `_sniff_raster_size()`
+    - `_compute_successful_conversions_error_threshold()`
+    - `_load_quality_config()`
+      - `_quality_config_path()`
+    - `_write_quality_config()`
+      - `_quality_config_path()`
+    - `_write_quality_pass_report()`
+    - `_write_batch_failure_summary()`
+    - `_harmonize_semantic_size_variants()`
+      - `_family_harmonized_badge_colors()`
+        - `_clip_gray()`
+        - `_clip_gray()`
+        - `_clip_gray()`
+        - `_clip_gray()`
+        - `_clip_gray()`
+      - `_read_svg_geometry()`
+      - `_normalized_geometry_signature()`
+      - `_harmonization_anchor_priority()`
+      - `_scale_badge_params()`
+        - `_needs_large_circle_overflow_guard()`
+      - `_max_signature_delta()`
+    - `_write_semantic_audit_report()`
+    - `_write_pixel_delta2_ranking()`
+    - `_write_ac08_weak_family_status_report()`
+    - `_write_ac08_regression_manifest()`
+    - `_write_ac08_success_criteria_report()`
+      - `_summarize_previous_good_ac08_variants()`
+    - `_default_converted_symbols_root()`
+    - `_read_validation_log_details()`
+    - `_select_open_quality_cases()`
+    - `_iteration_strategy_for_pass()`
+    - `update_successful_conversions_manifest_with_metrics()`
+      - `_read_successful_conversion_manifest_metrics()`
+        - `_parse_successful_conversion_manifest_line()`
+      - `collect_successful_conversion_quality_metrics()`
+        - `_load_iteration_log_rows()`
+        - `_find_image_path_by_variant()`
+        - `_read_validation_log_details()`
+      - `_latest_failed_conversion_manifest_entry()`
+      - `_is_successful_conversion_candidate_better()`
+        - `_evaluate_quality_pass_candidate()`
+        - `_successful_conversion_metrics_available()`
+        - `_successful_conversion_metrics_available()`
+      - `_sorted_successful_conversion_metrics_rows()`
+      - `_store_successful_conversion_snapshot()`
+        - `_successful_conversion_snapshot_paths()`
+          - `_successful_conversion_snapshot_dir()`
+      - `_restore_successful_conversion_snapshot()`
+        - `_successful_conversion_snapshot_paths()`
+          - `_successful_conversion_snapshot_dir()`
+      - `_format_successful_conversion_manifest_line()`
+        - `_successful_conversion_metrics_available()`
+      - `_format_successful_conversion_manifest_line()`
+        - `_successful_conversion_metrics_available()`
+      - `_merge_successful_conversion_metrics()`
+    - `run_iteration_pipeline()`
+      - `_semantic_audit_record()`
+        - `get_base_name_from_file()`
+      - `_semantic_quality_flags()`
+        - `get_base_name_from_file()`
+      - `_semantic_audit_record()`
+        - `get_base_name_from_file()`
+      - `get_base_name_from_file()`
+      - `_semantic_audit_record()`
+        - `get_base_name_from_file()`
+    - `_read_validation_log_details()`
+    - `_try_template_transfer()`
+      - `_read_svg_geometry()`
+      - `_rank_template_transfer_donors()`
+        - `_normalized_geometry_signature()`
+        - `_normalized_geometry_signature()`
+        - `_max_signature_delta()`
+      - `_read_svg_geometry()`
+      - `_template_transfer_transform_candidates()`
+        - `_template_transfer_scale_candidates()`
+      - `_estimate_template_transfer_scale()`
+        - `_build_transformed_svg_from_template()`
+          - `_extract_svg_inner()`
+      - `_build_transformed_svg_from_template()`
+        - `_extract_svg_inner()`
+      - `_template_transfer_donor_family_compatible()`
+        - `_extract_symbol_family()`
+        - `_extract_symbol_family()`
+      - `_semantic_transfer_is_compatible()`
+        - `_connector_arm_direction()`
+        - `_connector_arm_direction()`
+        - `_connector_stem_direction()`
+        - `_connector_stem_direction()`
+      - `_semantic_transfer_scale_candidates()`
+        - `_template_transfer_scale_candidates()`
+      - `_semantic_transfer_rotations()`
+      - `_semantic_transfer_badge_params()`
+    - `_select_middle_lower_tercile()`
+    - `_adaptive_iteration_budget_for_quality_row()`
+    - `_evaluate_quality_pass_candidate()`
+    - `_render_embedded_raster_svg()`
+      - `_sniff_raster_size()`
+      - `_svg_href_mime_type()`
+    - `_in_requested_range()`
+      - `_extract_ref_parts()`
+      - `_extract_ref_parts()`
+      - `_extract_ref_parts()`
+      - `_matches_exact_prefix_filter()`
+        - `_normalize_range_token()`
+          - `get_base_name_from_file()`
+        - `_normalize_range_token()`
+          - `get_base_name_from_file()`
+        - `_normalize_range_token()`
+          - `get_base_name_from_file()`
+        - `get_base_name_from_file()`
+      - `get_base_name_from_file()`
+      - `_matches_partial_range_token()`
+        - `_shared_partial_range_token()`
+          - `_normalize_range_token()`
+            - `get_base_name_from_file()`
+          - `_normalize_range_token()`
+            - `get_base_name_from_file()`
+          - `_compact_range_token()`
+            - `_normalize_range_token()`
+              - `get_base_name_from_file()`
+          - `_compact_range_token()`
+            - `_normalize_range_token()`
+              - `get_base_name_from_file()`
+        - `_normalize_range_token()`
+          - `get_base_name_from_file()`
+        - `get_base_name_from_file()`
+    - `_create_diff_image_without_cv2()`
+    - `get_base_name_from_file()`
+  - `_bootstrap_required_image_dependencies()`
+    - `_missing_required_image_dependencies()`
+  - `build_linux_vendor_install_command()`
+    - `_required_vendor_packages()`
+  - `_load_description_mapping()`
+    - `_load_description_mapping_from_csv()`
+    - `_load_description_mapping_from_xml()`
+      - `_resolve_description_xml_path()`
+      - `get_base_name_from_file()`
+      - `get_base_name_from_file()`
+      - `get_base_name_from_file()`
+  - `_format_user_diagnostic()`
+
+## `src/imageCompositeConverterRegions.py`
+
+- Einstieg über `analyze_range_impl()`
+  - `analyze_range_impl()`
+
+## `src/overviewTiles.py`
+
+- Einstieg über `generate_conversion_overviews()`
+  - `generate_conversion_overviews()`
+    - `create_tiled_overview_image()`
+      - `_resolve_optional_dependencies()`
+      - `_read_preview()`
+        - `_render_svg()`
+          - `_resolve_optional_dependencies()`
+        - `_read_raster()`
+          - `_resolve_optional_dependencies()`
+    - `create_tiled_overview_image()`
+      - `_resolve_optional_dependencies()`
+      - `_read_preview()`
+        - `_render_svg()`
+          - `_resolve_optional_dependencies()`
+        - `_read_raster()`
+          - `_resolve_optional_dependencies()`
+- Einstieg über `create_tiled_overview_image()`
+  - `create_tiled_overview_image()`
+    - `_resolve_optional_dependencies()`
+    - `_read_preview()`
+      - `_render_svg()`
+        - `_resolve_optional_dependencies()`
+      - `_read_raster()`
+        - `_resolve_optional_dependencies()`
+- Einstieg über `_resolve_optional_dependencies()`
+  - `_resolve_optional_dependencies()`
+- Einstieg über `_read_preview()`
+  - `_read_preview()`
+    - `_render_svg()`
+      - `_resolve_optional_dependencies()`
+    - `_read_raster()`
+      - `_resolve_optional_dependencies()`
+- Einstieg über `_render_svg()`
+  - `_render_svg()`
+    - `_resolve_optional_dependencies()`
+- Einstieg über `_read_raster()`
+  - `_read_raster()`
+    - `_resolve_optional_dependencies()`
+
+## `src/successfulConversions.py`
+
+- Einstieg über `_load_successful_conversions()`
+  - `_load_successful_conversions()`
+    - `_iter_available_successful_conversion_variants()`
+    - `_expand_successful_conversion_manifest_entry()`
+- Einstieg über `_iter_available_successful_conversion_variants()`
+  - `_iter_available_successful_conversion_variants()`
+- Einstieg über `_expand_successful_conversion_manifest_entry()`
+  - `_expand_successful_conversion_manifest_entry()`
