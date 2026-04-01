@@ -7682,6 +7682,46 @@ class _TeeTextIO(io.TextIOBase):
 _MAINFILES_DIR = Path(__file__).resolve().parent
 
 
+def loadMainfileFunction(functionName: str, fileName: str):
+    """Load split mainfile functions lazily.
+
+    Some generated helper files may be absent in lean checkouts. In that case we
+    return a callable that raises a clear RuntimeError only when invoked.
+    """
+
+    module_path = _MAINFILES_DIR / fileName
+    if not module_path.exists():
+        def _missing_mainfile(*_args, **_kwargs):
+            raise RuntimeError(
+                f"Mainfile helper '{fileName}' fehlt; '{functionName}' ist nicht verfügbar."
+            )
+
+        return _missing_mainfile
+
+    module_name = f"{__name__}.__mainfile__{module_path.stem}"
+    spec = importlib.util.spec_from_file_location(module_name, module_path)
+    if spec is None or spec.loader is None:
+        def _missing_loader(*_args, **_kwargs):
+            raise RuntimeError(
+                f"Mainfile helper '{fileName}' konnte nicht geladen werden."
+            )
+
+        return _missing_loader
+
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    loaded = getattr(module, functionName, None)
+    if callable(loaded):
+        return loaded
+
+    def _missing_symbol(*_args, **_kwargs):
+        raise RuntimeError(
+            f"Mainfile helper '{fileName}' enthält keine callable '{functionName}'."
+        )
+
+    return _missing_symbol
+
+
 
 
 
