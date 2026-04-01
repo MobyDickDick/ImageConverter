@@ -33,6 +33,12 @@ def _fallback_main(argv: list[str]) -> int:
     parser.add_argument("output", nargs="?", help="Ausgabedatei")
     parser.add_argument("--bild-von", "--start-ref", dest="start_ref", default=None, help="Start-Referenz, z. B. AC0831")
     parser.add_argument("--bild-bis", "--end-ref", dest="end_ref", default=None, help="End-Referenz, z. B. AC0831")
+    parser.add_argument("--descriptions-path", default=None, help="Pfad zur Beschreibungsdatei (Fallback ignoriert den Wert).")
+    parser.add_argument(
+        "--interactive-range",
+        action="store_true",
+        help="Interaktiven Bereich wählen (im Fallback ohne Core nicht verfügbar).",
+    )
     parser.parse_args(argv)
     return 0
 
@@ -45,9 +51,12 @@ def main(argv: list[str] | None = None) -> int:
     if core is not None and hasattr(core, "main"):
         return int(core.main(argv))
 
-    if err is not None and argv and not any(flag in argv for flag in ("-h", "--help")):
+    if argv and not any(flag in argv for flag in ("-h", "--help")):
         print("Konnte den Converter-Core nicht laden.", file=sys.stderr)
-        print(f"Ursache: {type(err).__name__}: {err}", file=sys.stderr)
+        if err is not None:
+            print(f"Ursache: {type(err).__name__}: {err}", file=sys.stderr)
+        else:
+            print("Ursache: Core-Modul importiert, aber ohne main()-Einstiegspunkt.", file=sys.stderr)
         print("Fallback-CLI wird stattdessen verwendet.", file=sys.stderr)
     return _fallback_main(argv)
 
