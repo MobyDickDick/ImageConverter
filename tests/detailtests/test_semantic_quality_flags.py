@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pytest
 
-from src import image_composite_converter
+from src import imageCompositeConverter as image_composite_converter
 
 
 def test_semantic_quality_flags_marks_ac0811_with_high_element_error() -> None:
