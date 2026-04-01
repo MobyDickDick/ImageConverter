@@ -73,13 +73,24 @@ if not SVG_RENDER_SUBPROCESS_ENABLED and "pytest" in sys.modules:
     # the full test suite. Use the existing isolated renderer by default in
     # pytest sessions unless explicitly disabled via env config.
     SVG_RENDER_SUBPROCESS_ENABLED = True
+_default_svg_render_subprocess_timeout_sec = 20.0
+if "pytest" in sys.modules and "IMAGE_CONVERTER_ISOLATE_SVG_RENDER_TIMEOUT_SEC" not in os.environ:
+    # Test runs may trigger many render attempts; keep per-attempt subprocess
+    # timeouts tighter to avoid long stalls when a renderer child gets wedged.
+    _default_svg_render_subprocess_timeout_sec = 5.0
 try:
     SVG_RENDER_SUBPROCESS_TIMEOUT_SEC = max(
         1.0,
-        float(os.environ.get("IMAGE_CONVERTER_ISOLATE_SVG_RENDER_TIMEOUT_SEC", "20").strip() or "20"),
+        float(
+            os.environ.get(
+                "IMAGE_CONVERTER_ISOLATE_SVG_RENDER_TIMEOUT_SEC",
+                str(_default_svg_render_subprocess_timeout_sec),
+            ).strip()
+            or str(_default_svg_render_subprocess_timeout_sec)
+        ),
     )
 except ValueError:
-    SVG_RENDER_SUBPROCESS_TIMEOUT_SEC = 20.0
+    SVG_RENDER_SUBPROCESS_TIMEOUT_SEC = _default_svg_render_subprocess_timeout_sec
 
 
 AC08_ADAPTIVE_LOCK_PROFILES: dict[str, dict[str, float | bool]] = {
@@ -1203,6 +1214,16 @@ def _renderSvgToNumpyViaSubprocess(svg_string: str, size_w: int, size_h: int):
         return np.frombuffer(raw, dtype=np.uint8).reshape(h, w, 3).copy()
     except Exception:
         return None
+
+
+def _render_svg_to_numpy_inprocess(svg_string: str, size_w: int, size_h: int):
+    """Snake-case compatibility wrapper for tests and helper call sites."""
+    return _renderSvgToNumpyInprocess(svg_string, size_w, size_h)
+
+
+def _render_svg_to_numpy_via_subprocess(svg_string: str, size_w: int, size_h: int):
+    """Snake-case compatibility wrapper for tests and helper call sites."""
+    return _renderSvgToNumpyViaSubprocess(svg_string, size_w, size_h)
 
 
 def _runSvgRenderSubprocessEntrypoint() -> int:
@@ -4455,10 +4476,10 @@ class Action:
     @staticmethod
     def renderSvgToNumpy(svg_string: str, size_w: int, size_h: int):
         if SVG_RENDER_SUBPROCESS_ENABLED:
-            rendered = _renderSvgToNumpyViaSubprocess(svg_string, size_w, size_h)
+            rendered = _render_svg_to_numpy_via_subprocess(svg_string, size_w, size_h)
             if rendered is not None:
                 return rendered
-        return _renderSvgToNumpyInprocess(svg_string, size_w, size_h)
+        return _render_svg_to_numpy_inprocess(svg_string, size_w, size_h)
 
     @staticmethod
     def createDiffImage(
