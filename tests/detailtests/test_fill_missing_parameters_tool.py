@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import subprocess
 import sys
+import types
 from pathlib import Path
 
 
@@ -12,7 +13,7 @@ def test_fill_missing_parameters_updates_signature_and_calls(tmp_path: Path) -> 
         """
 
 def target(a):
-    return a
+    return a, b
 
 def caller(a, b):
     return target(a)
@@ -62,3 +63,8 @@ def caller(a, b):
     updated = module_path.read_text(encoding="utf-8")
     assert "def target(a, b=None):" in updated
     assert "return target(a, b=b)" in updated
+
+    module = types.ModuleType("sample")
+    exec(compile(updated, str(module_path), "exec"), module.__dict__)
+    assert module.target(5) == (5, None)
+    assert module.caller(5, 7) == (5, 7)
