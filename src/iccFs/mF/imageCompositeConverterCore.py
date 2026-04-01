@@ -41,7 +41,6 @@ from src.iccFs.mF.overviewTiles import generateConversionOverviews
 from src.iccFs.mF.imageCompositeConverterRegions import (
     ANNOTATION_COLORS,
     bboxToDict,
-    analyzeRangeImpl,
     annotateImageRegionsImpl,
     detectRelevantRegionsImpl,
 )
