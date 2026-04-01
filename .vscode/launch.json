@@ -5,7 +5,7 @@
       "name": "ImageConverter: convert interactive range",
       "type": "debugpy",
       "request": "launch",
-      "module": "src.imageCompositeConverter",
+      "module": "src.image_composite_converter",
       "cwd": "${workspaceFolder}",
       "console": "integratedTerminal",
       "args": [
@@ -20,7 +20,7 @@
       "name": "ImageConverter: annotate interactive range",
       "type": "debugpy",
       "request": "launch",
-      "module": "src.imageCompositeConverter",
+      "module": "src.image_composite_converter",
       "cwd": "${workspaceFolder}",
       "console": "integratedTerminal",
       "args": [

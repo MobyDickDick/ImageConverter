@@ -8,13 +8,13 @@ ImageConverter.
 ```bash
 python -m compileall src tests
 python -m pytest
-python -m src.imageCompositeConverter --help
+python -m src.image_composite_converter --help
 ```
 
 ## 2. Interaktive Konvertierung
 
 ```bash
-python -m src.imageCompositeConverter \
+python -m src.image_composite_converter \
   artifacts/images_to_convert \
   --descriptions-path artifacts/images_to_convert/Finale_Wurzelformen_V3.xml \
   --interactive-range
@@ -23,7 +23,7 @@ python -m src.imageCompositeConverter \
 ## 3. Regression-Set für AC08 und Schutz der bereits guten Varianten
 
 ```bash
-python -m src.imageCompositeConverter \
+python -m src.image_composite_converter \
   artifacts/images_to_convert \
   --descriptions-path artifacts/images_to_convert/Finale_Wurzelformen_V3.xml \
   --ac08-regression-set \
@@ -72,7 +72,7 @@ PY
 ## 5. Linux-Vendor-Kommando ausgeben
 
 ```bash
-python -m src.imageCompositeConverter --print-linux-vendor-command --vendor-dir vendor
+python -m src.image_composite_converter --print-linux-vendor-command --vendor-dir vendor
 ```
 
 ## 6. VS Code Debugging unter Windows

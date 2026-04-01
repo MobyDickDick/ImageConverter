@@ -1,8 +1,8 @@
-run-meta: run_seed=177154228 pass_seed_offset=0 nonce_ns=1774791518568610400
+run-meta: run_seed=124664291 pass_seed_offset=0 nonce_ns=1774772821984879100
 status=semantic_ok
-redraw_variation: seed=178893086410 changed_params=cx:23.000->22.985 | cy:9.500->9.376 | r:9.500->9.567 | stroke_circle:1.000->0.942 | arm_stroke:1.000->1.034
+redraw_variation: seed=126347426856 changed_params=cx:23.000->22.744 | cy:9.500->9.395 | r:9.500->9.641 | stroke_circle:1.000->1.065 | arm_stroke:1.000->0.913
 semantic-guard: Textmodus aktiv (voc).
-small_variant_mode_active: reason=min_dim, min_dim=14.800, mask_dilate_px=1, text_mode=voc, arm_min_ratio=0.750, stem_min_ratio=0.000
+small_variant_mode_active: reason=min_dim, min_dim=14.800, mask_dilate_px=1, text_mode=voc, arm_min_ratio=0.780, stem_min_ratio=0.000
 Runde 1: elementweise Validierung gestartet
 circle: Fehler=75.279
 circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
@@ -10,31 +10,31 @@ circle: Mittelpunkt-Bracketing cx 25.000->25.000, cy 10.000->7.000 (best_err=65.
 circle: Radius-Bracketing r 7.400->8.000 (best_err=65.216, full_err=32.280); Kandidaten=6.660->65.216, 7.000->65.216, 7.500->65.216, 9.600->65.216
 arm: Fehler=117.825
 arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
-arm: Längen-Bracketing arm_len 16.500->13.000; Kandidaten=13.000->112.115, 16.500->117.825, 18.500->117.825, 24.000->117.825, 29.500->117.825, 35.000->117.825
+arm: Längen-Bracketing arm_len 16.500->13.500; Kandidaten=13.500->113.174, 16.500->117.825, 19.000->117.825, 24.000->117.825, 29.500->117.825, 35.000->117.825
 text: Fehler=108.949
 text: Breiten-Stochastic-Survivor aktiviert (voc_font_scale=1.026, err=102.149)
 text: Breiten-Bracketing voc_font_scale 0.562->1.026; Kandidaten=0.900->102.760, 1.125->103.554, 1.350->106.559, 1.650->111.319, 1.950->118.401, 2.175->121.653, 2.400->122.125
-Runde 1: Gesamtfehler=33.187
+Runde 1: Gesamtfehler=33.370
 Runde 2: elementweise Validierung gestartet
 circle: Fehler=67.574
 circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
 circle: Mittelpunkt-Bracketing cx 25.000->23.500, cy 7.000->8.000 (best_err=66.705)
-circle: Radius-Bracketing r 8.000->9.000 (best_err=66.705, full_err=31.227); Kandidaten=7.200->68.120, 8.000->66.705, 8.500->66.705, 9.000->66.705, 9.600->66.705
-arm: Fehler=92.966
+circle: Radius-Bracketing r 8.000->9.000 (best_err=66.705, full_err=31.410); Kandidaten=7.200->68.120, 8.000->66.705, 8.500->66.705, 9.000->66.705, 9.600->66.705
+arm: Fehler=93.723
 arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
-arm: Längen-Bracketing arm_len 10.000->13.000; Kandidaten=13.000->95.228, 18.500->96.381, 24.000->96.381, 29.500->96.381, 35.000->96.381
+arm: Längen-Bracketing arm_len 11.000->13.500; Kandidaten=13.500->96.028, 19.000->96.381, 24.000->96.381, 29.500->96.381, 35.000->96.381
 text: Fehler=95.144
 text: Breiten-Stochastic-Survivor aktiviert (voc_font_scale=0.917, err=92.210)
 text: Breiten-Bracketing voc_font_scale 1.026->0.917; Kandidaten=0.900->93.270, 1.026->95.144, 1.125->98.889, 1.180->97.972, 1.350->99.882, 1.650->113.695, 1.950->120.563, 2.175->122.026, 2.400->121.793
-Runde 2: Gesamtfehler=31.073
+Runde 2: Gesamtfehler=31.256
 Runde 3: elementweise Validierung gestartet
 circle: Fehler=68.515
 circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
 circle: Mittelpunkt-Bracketing cx 23.500->23.500, cy 8.000->9.500 (best_err=67.297)
-circle: Radius-Bracketing r 9.000->9.500 (best_err=67.297, full_err=25.904); Kandidaten=8.100->71.793, 9.000->67.297, 9.500->67.297, 9.600->67.297
-arm: Fehler=42.067
+circle: Radius-Bracketing r 9.000->9.500 (best_err=67.297, full_err=25.724); Kandidaten=8.100->71.793, 9.000->67.297, 9.500->67.297, 9.600->67.297
+arm: Fehler=40.652
 arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
-arm: Längen-Bracketing arm_len 12.000->18.500; Kandidaten=13.000->40.652, 18.500->40.326, 24.000->40.326, 29.500->40.326, 35.000->40.326
+arm: Längen-Bracketing arm_len 13.000->13.500; Kandidaten=13.500->40.326, 19.000->40.326, 24.000->40.326, 29.500->40.326, 35.000->40.326
 text: Fehler=91.039
 text: Breiten-Stochastic-Survivor aktiviert (voc_font_scale=1.026, err=90.229)
 text: Breiten-Bracketing voc_font_scale 0.917->1.026; Kandidaten=0.900->90.319, 0.917->91.039, 1.055->90.984, 1.125->92.079, 1.350->93.943, 1.650->111.315, 1.950->117.345, 2.175->119.033, 2.400->118.828
@@ -46,7 +46,7 @@ circle: Mittelpunkt-Bracketing cx 23.500->23.000, cy 9.500->9.500 (best_err=58.9
 circle: Radius-Bracketing keine relevante Änderung (r: 9.500, best_err=58.946, full_err=23.559); Kandidaten=8.550->61.746, 9.500->58.946, 9.600->58.946
 arm: Fehler=41.079
 arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
-arm: Längen-Bracketing keine relevante Änderung (arm_len: 13.000); Kandidaten=13.000->41.079, 18.500->41.079, 24.000->41.079, 29.500->41.079, 35.000->41.079
+arm: Längen-Bracketing arm_len 13.000->13.500; Kandidaten=13.500->41.079, 19.000->41.079, 24.000->41.079, 29.500->41.079, 35.000->41.079
 text: Fehler=89.376
 text: Breiten-Stochastic-Survivor aktiviert (voc_font_scale=0.917, err=87.512)
 text: Breiten-Bracketing voc_font_scale 1.026->0.917; Kandidaten=0.900->88.592, 1.026->89.376, 1.125->91.344, 1.180->92.203, 1.350->95.061, 1.650->110.162, 1.950->116.954, 2.175->119.578, 2.400->119.858
@@ -58,7 +58,7 @@ circle: Mittelpunkt-Bracketing keine relevante Änderung (cx=23.000, cy=9.500, b
 circle: Radius-Bracketing keine relevante Änderung (r: 9.500, best_err=58.946, full_err=22.816); Kandidaten=8.550->61.746, 9.500->58.946, 9.600->58.946
 arm: Fehler=41.079
 arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
-arm: Längen-Bracketing keine relevante Änderung (arm_len: 13.000); Kandidaten=13.000->41.079, 18.500->41.079, 24.000->41.079, 29.500->41.079, 35.000->41.079
+arm: Längen-Bracketing arm_len 13.000->13.500; Kandidaten=13.500->41.079, 19.000->41.079, 24.000->41.079, 29.500->41.079, 35.000->41.079
 text: Fehler=87.512
 text: Breiten-Bracketing keine relevante Änderung (voc_font_scale: 0.917); Kandidaten=0.900->88.592, 0.917->87.512, 1.055->89.950, 1.125->91.344, 1.350->95.061, 1.650->110.162, 1.950->116.954, 2.175->119.578, 2.400->119.858
 Runde 5: Gesamtfehler=22.824
@@ -69,7 +69,7 @@ circle: Fehler=58.545
 circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
 arm: Fehler=41.079
 arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
-arm: Längen-Bracketing keine relevante Änderung (arm_len: 13.000); Kandidaten=13.000->41.079, 18.500->41.079, 24.000->41.079, 29.500->41.079, 35.000->41.079
+arm: Längen-Bracketing arm_len 13.000->13.500; Kandidaten=13.500->41.079, 19.000->41.079, 24.000->41.079, 29.500->41.079, 35.000->41.079
 text: Fehler=87.512
 text: Breiten-Bracketing keine relevante Änderung (voc_font_scale: 0.917); Kandidaten=0.900->88.592, 0.917->87.512, 1.055->89.950, 1.125->91.344, 1.350->95.061, 1.650->110.162, 1.950->116.954, 2.175->119.578, 2.400->119.858
 Runde 6: Gesamtfehler=22.824
