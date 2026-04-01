@@ -1,9 +1,23 @@
+def _resolveCallTreeModulePath(module_path: str | os.PathLike[str] | None) -> str:
+    """Resolve call-tree exports for wrapper modules to the full converter core module."""
+    if module_path is None:
+        return os.fspath(Path(__file__).resolve())
+
+    resolved = Path(module_path).resolve()
+    if resolved.name == "imageCompositeConverter.py":
+        candidate = resolved.parent / "iccFs" / "mF" / "imageCompositeConverterCore.py"
+        if candidate.exists():
+            return os.fspath(candidate)
+    return os.fspath(resolved)
+
+
+
 def exportModuleCallTreeCsv(
     output_csv_path: str | os.PathLike[str] = DEFAULT_CALL_TREE_CSV_PATH,
-    module_path: str | os.PathLike[str] = __file__,
+    module_path: str | os.PathLike[str] | None = None,
 ) -> str:
     """Export a module-local call tree/table as CSV and return the written path."""
-    callable_lines, edges = moduleCallEdgesForPath(module_path)
+    callable_lines, edges = moduleCallEdgesForPath(_resolveCallTreeModulePath(module_path))
     incoming: dict[str, int] = {name: 0 for name in callable_lines}
     adjacency: dict[str, set[str]] = {name: set() for name in callable_lines}
     for edge in edges:
