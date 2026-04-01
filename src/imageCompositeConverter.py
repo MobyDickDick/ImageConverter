@@ -28,14 +28,14 @@ import importlib
 import io
 import struct
 import statistics
-from src.overview_tiles import generate_conversion_overviews
-from src.image_composite_converter_regions import (
+from src.overviewTiles import generate_conversion_overviews
+from src.imageCompositeConverterRegions import (
     ANNOTATION_COLORS,
     analyze_range_impl,
     annotate_image_regions_impl,
     detect_relevant_regions_impl,
 )
-from src.successful_conversions import (
+from src.successfulConversions import (
     AC08_MITIGATION_STATUS,
     AC08_PREVIOUSLY_GOOD_VARIANTS,
     AC08_REGRESSION_CASES,
@@ -1328,7 +1328,7 @@ def _render_svg_to_numpy_via_subprocess(svg_string: str, size_w: int, size_h: in
         {"svg": str(svg_string or ""), "w": int(size_w), "h": int(size_h)},
         ensure_ascii=False,
     ).encode("utf-8")
-    cmd = [sys.executable, "-m", "src.image_composite_converter", "--_render-svg-subprocess"]
+    cmd = [sys.executable, "-m", "src.imageCompositeConverter", "--_render-svg-subprocess"]
     try:
         completed = subprocess.run(
             cmd,
@@ -10731,7 +10731,7 @@ def _write_ac08_regression_manifest(
         "expected_reports=Iteration_Log.csv,quality_tercile_passes.csv,pixel_delta2_ranking.csv,pixel_delta2_summary.txt,ac08_weak_family_status.csv,ac08_weak_family_status.txt,ac08_success_metrics.csv,ac08_success_criteria.txt",
         "expected_logs=variant_harmonization.log,shape_catalog.csv",
         (
-            "recommended_command=python -m src.image_composite_converter "
+            "recommended_command=python -m src.imageCompositeConverter "
             f"{folder_path} --csv-path {csv_path} --ac08-regression-set {int(iterations)}"
         ),
     ]
@@ -11620,12 +11620,12 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         ),
         epilog=(
             "Beispiele:\n"
-            "  python -m src.image_composite_converter artifacts/images_to_convert "
+            "  python -m src.imageCompositeConverter artifacts/images_to_convert "
             "--descriptions-path artifacts/images_to_convert/Finale_Wurzelformen_V3.xml "
             "--output-dir artifacts/converted_images --start AC0000 --end ZZ9999\n"
-            "  python -m src.image_composite_converter artifacts/images_to_convert "
+            "  python -m src.imageCompositeConverter artifacts/images_to_convert "
             "--mode annotate --output-dir artifacts/annotated --start AC0811 --end AC0814\n"
-            "  python -m src.image_composite_converter --print-linux-vendor-command --vendor-dir vendor"
+            "  python -m src.imageCompositeConverter --print-linux-vendor-command --vendor-dir vendor"
         ),
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
