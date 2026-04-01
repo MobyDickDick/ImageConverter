@@ -58,14 +58,14 @@ _core.cv2 = cv2
 _core.fitz = fitz
 
 
-def _camel_to_snake(name: str) -> str:
+def _camelToSnake(name: str) -> str:
     leading = len(name) - len(name.lstrip("_"))
     core = name[leading:]
     converted = re.sub(r"([a-z0-9])([A-Z])", r"\1_\2", core).lower()
     return ("_" * leading) + converted
 
 
-def _snake_to_camel(name: str) -> str:
+def _snakeToCamel(name: str) -> str:
     leading = len(name) - len(name.lstrip("_"))
     core = name[leading:]
     parts = [part for part in core.split("_") if part]
@@ -74,30 +74,30 @@ def _snake_to_camel(name: str) -> str:
     return ("_" * leading) + parts[0] + "".join(part[:1].upper() + part[1:] for part in parts[1:])
 
 
-def _install_snake_aliases(namespace: dict[str, object]) -> None:
+def _installSnakeAliases(namespace: dict[str, object]) -> None:
     for attr_name, value in list(namespace.items()):
         if attr_name.startswith("__") or not any(ch.isupper() for ch in attr_name):
             continue
-        alias = _camel_to_snake(attr_name)
+        alias = _camelToSnake(attr_name)
         if alias not in namespace:
             namespace[alias] = value
 
 
-def _install_class_snake_aliases(cls: type) -> None:
+def _installClassSnakeAliases(cls: type) -> None:
     for attr_name in dir(cls):
         if attr_name.startswith("__") or not any(ch.isupper() for ch in attr_name):
             continue
-        alias = _camel_to_snake(attr_name)
+        alias = _camelToSnake(attr_name)
         if hasattr(cls, alias):
             continue
         setattr(cls, alias, getattr(cls, attr_name))
 
 
-def _bridge_class_camel_calls_to_snake(cls: type) -> None:
+def _bridgeClassCamelCallsToSnake(cls: type) -> None:
     for attr_name in dir(cls):
         if attr_name.startswith("__") or not any(ch.isupper() for ch in attr_name):
             continue
-        alias = _camel_to_snake(attr_name)
+        alias = _camelToSnake(attr_name)
         if not hasattr(cls, alias):
             continue
         attr_value = getattr(cls, attr_name)
@@ -111,9 +111,9 @@ def _bridge_class_camel_calls_to_snake(cls: type) -> None:
         setattr(cls, attr_name, staticmethod(_forwarder))
 
 
-_install_snake_aliases(globals())
-_install_class_snake_aliases(_core.Action)
-_bridge_class_camel_calls_to_snake(_core.Action)
+_installSnakeAliases(globals())
+_installClassSnakeAliases(_core.Action)
+_bridgeClassCamelCallsToSnake(_core.Action)
 
 # Prefer the contextmanager-wrapped variant when both naming styles exist.
 if "_optionalLogCapture" in globals():
@@ -123,10 +123,10 @@ if "_optionalLogCapture" in globals():
 class _CoreSyncModule(types.ModuleType):
     def __setattr__(self, name, value):
         super().__setattr__(name, value)
-        camel_name = _snake_to_camel(name)
+        camel_name = _snakeToCamel(name)
         if camel_name != name and camel_name in self.__dict__:
             types.ModuleType.__setattr__(self, camel_name, value)
-        snake_name = _camel_to_snake(name)
+        snake_name = _camelToSnake(name)
         if snake_name != name and snake_name in self.__dict__:
             types.ModuleType.__setattr__(self, snake_name, value)
         if name in {"convert_range", "convertRange", "main", "_syncCoreOverrides", "syncCoreOverrides"}:
