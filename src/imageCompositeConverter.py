@@ -29,15 +29,15 @@ for _name in dir(_core):
     globals()[_name] = getattr(_core, _name)
 
 _optional_dependency_base_dir = optionalDependencyBaseDir
-_vendored_site_packages_dirs = vendoredSitePackagesDirs
-_load_optional_module = loadOptionalModule
+vendoredSitePackagesDirs = vendoredSitePackagesDirs
+loadOptionalModule = loadOptionalModule
 _syncCoreOverrides = syncCoreOverrides
 convertRange = convertRange
 
 # Polish-notation compatibility aliases for public integration points.
 optionalDependencyBaseDir = _optional_dependency_base_dir
-vendoredSitePackagesDirs = _vendored_site_packages_dirs
-loadOptionalModule = _load_optional_module
+vendoredSitePackagesDirs = vendoredSitePackagesDirs
+loadOptionalModule = loadOptionalModule
 syncCoreOverrides = _syncCoreOverrides
 convertRange = convertRange
 
@@ -47,12 +47,12 @@ def main(argv: list[str] | None = None) -> int:
     return _main(argv)
 
 _core._optional_dependency_base_dir = _optional_dependency_base_dir
-_core._vendored_site_packages_dirs = _vendored_site_packages_dirs
-_core._load_optional_module = _load_optional_module
+_core.vendoredSitePackagesDirs = vendoredSitePackagesDirs
+_core.loadOptionalModule = loadOptionalModule
 
-np = _load_optional_module("numpy")
-cv2 = _load_optional_module("cv2")
-fitz = _load_optional_module("fitz")
+np = loadOptionalModule("numpy")
+cv2 = loadOptionalModule("cv2")
+fitz = loadOptionalModule("fitz")
 _core.np = np
 _core.cv2 = cv2
 _core.fitz = fitz
@@ -117,7 +117,7 @@ _bridge_class_camel_calls_to_snake(_core.Action)
 
 # Prefer the contextmanager-wrapped variant when both naming styles exist.
 if "_optionalLogCapture" in globals():
-    _optional_log_capture = _optionalLogCapture
+    _optional_log_capture = optionalLogCapture
 
 
 class _CoreSyncModule(types.ModuleType):

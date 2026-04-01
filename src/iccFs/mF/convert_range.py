@@ -9,10 +9,10 @@ def convertRange(
     output_root: str | None = None,
     selected_variants: set[str] | None = None,
 ) -> str:
-    out_root = output_root or _defaultConvertedSymbolsRoot()
-    svg_out_dir = _convertedSvgOutputDir(out_root)
-    diff_out_dir = _diffOutputDir(out_root)
-    reports_out_dir = _reportsOutputDir(out_root)
+    out_root = output_root or defaultConvertedSymbolsRoot()
+    svg_out_dir = convertedSvgOutputDir(out_root)
+    diff_out_dir = diffOutputDir(out_root)
+    reports_out_dir = reportsOutputDir(out_root)
 
     os.makedirs(svg_out_dir, exist_ok=True)
     os.makedirs(diff_out_dir, exist_ok=True)
@@ -23,7 +23,7 @@ def convertRange(
         f
         for f in os.listdir(folder_path)
         if f.lower().endswith((".bmp", ".jpg", ".png", ".gif"))
-        and _inRequestedRange(f, start_ref, end_ref)
+        and inRequestedRange(f, start_ref, end_ref)
         and (not normalized_selected_variants or os.path.splitext(f)[0].upper() in normalized_selected_variants)
     )
     if cv2 is None or np is None:
@@ -34,12 +34,12 @@ def convertRange(
             for filename in files:
                 stem = os.path.splitext(filename)[0]
                 image_path = os.path.join(folder_path, filename)
-                svg_content = _renderEmbeddedRasterSvg(image_path)
+                svg_content = renderEmbeddedRasterSvg(image_path)
                 svg_path = os.path.join(svg_out_dir, f"{stem}.svg")
                 with open(svg_path, "w", encoding="utf-8") as svg_file:
                     svg_file.write(svg_content)
                 if fitz is not None:
-                    diff = _createDiffImageWithoutCv2(image_path, svg_content)
+                    diff = createDiffImageWithoutCv2(image_path, svg_content)
                     diff.save(os.path.join(diff_out_dir, f"{stem}_diff.png"))
                 writer.writerow([filename, "embedded-raster", 0, "0.00", "0.00000000"])
         with open(os.path.join(reports_out_dir, "fallback_mode.txt"), "w", encoding="utf-8") as f:
@@ -50,7 +50,7 @@ def convertRange(
             )
         generateConversionOverviews(diff_out_dir, svg_out_dir, reports_out_dir)
         return out_root
-    rng = _conversionRandom()
+    rng = conversionRandom()
     run_seed = rng.randrange(1 << 30)
     Action.STOCHASTIC_RUN_SEED = int(run_seed)
     process_files = list(files)
@@ -64,9 +64,9 @@ def convertRange(
     result_map: dict[str, dict[str, object]] = {}
     batch_failures: list[dict[str, str]] = []
     stop_after_failure = False
-    existing_donor_rows = _loadExistingConversionRows(out_root, folder_path)
+    existing_donor_rows = loadExistingConversionRows(out_root, folder_path)
 
-    def _convertOne(filename: str, iteration_budget: int, badge_rounds: int) -> tuple[dict[str, object] | None, bool]:
+    def convertOne(filename: str, iteration_budget: int, badge_rounds: int) -> tuple[dict[str, object] | None, bool]:
         image_path = os.path.join(folder_path, filename)
         base = os.path.splitext(filename)[0]
         log_file = os.path.join(reports_out_dir, f"{base}_element_validation.log")
@@ -97,7 +97,7 @@ def convertRange(
             print(f"[WARN] {filename}: Batchlauf setzt nach Fehler fort ({type(exc).__name__}: {exc})")
             return None, True
         if not res:
-            details = _readValidationLogDetails(log_file)
+            details = readValidationLogDetails(log_file)
             status = details.get("status", "")
             if status in {"render_failure", "batch_error"}:
                 batch_failures.append(
@@ -126,7 +126,7 @@ def convertRange(
             return None, False
 
         _base, _desc, params, best_iter, best_error = res
-        details = _readValidationLogDetails(log_file)
+        details = readValidationLogDetails(log_file)
         img = cv2.imread(image_path)
         pixel_count = 1.0
         width = 0
@@ -164,7 +164,7 @@ def convertRange(
 
     # Initial conversion pass for all forms.
     for filename in process_files:
-        row, failed = _convertOne(filename, iteration_budget=base_iterations, badge_rounds=6)
+        row, failed = convertOne(filename, iteration_budget=base_iterations, badge_rounds=6)
         if failed:
             stop_after_failure = True
             break
@@ -178,7 +178,7 @@ def convertRange(
         ]
         donor_rows.extend(prev for prev in existing_donor_rows if str(prev.get("filename", "")) != filename)
         if donor_rows:
-            transferred, _detail = _tryTemplateTransfer(
+            transferred, _detail = tryTemplateTransfer(
                 target_row=row,
                 donor_rows=donor_rows,
                 folder_path=folder_path,
@@ -196,18 +196,18 @@ def convertRange(
         for row in result_map.values()
         if math.isfinite(float(row.get("error_per_pixel", float("inf"))))
     ]
-    ranked_rows = sorted(current_rows, key=_quality_sort_key)
+    ranked_rows = sorted(current_rows, key=qualitySortKey)
     first_cut = max(1, len(ranked_rows) // 3) if ranked_rows else 0
     initial_top_tercile = ranked_rows[:first_cut]
     initial_threshold = float(initial_top_tercile[-1]["error_per_pixel"]) if initial_top_tercile else float("inf")
 
-    successful_threshold = _computeSuccessfulConversionsErrorThreshold(current_rows)
+    successful_threshold = computeSuccessfulConversionsErrorThreshold(current_rows)
     threshold_source = "successful-conversions-mean-plus-2std"
     if not math.isfinite(successful_threshold):
         successful_threshold = initial_threshold
         threshold_source = "initial-first-tercile"
 
-    cfg = _loadQualityConfig(reports_out_dir)
+    cfg = loadQualityConfig(reports_out_dir)
     allowed_error_pp = successful_threshold
     cfg_value = cfg.get("allowed_error_per_pixel")
     if cfg_value is not None:
@@ -222,7 +222,7 @@ def convertRange(
     # while still converging by only accepting strict improvements.
     skip_variants: set[str] = set()
 
-    _writeQualityConfig(
+    writeQualityConfig(
         reports_out_dir,
         allowed_error_per_pixel=allowed_error_pp,
         skipped_variants=sorted(v for v in skip_variants if v),
@@ -241,7 +241,7 @@ def convertRange(
             for row in result_map.values()
             if math.isfinite(float(row.get("error_per_pixel", float("inf"))))
         ]
-        candidates = _selectOpenQualityCases(
+        candidates = selectOpenQualityCases(
             current_rows,
             allowed_error_per_pixel=allowed_error_pp,
             skip_variants=skip_variants,
@@ -249,25 +249,25 @@ def convertRange(
         # Fallback to the historical selection when no explicit open set exists
         # (e.g. without threshold config).
         if not candidates:
-            candidates = _selectMiddleLowerTercile(current_rows)
+            candidates = selectMiddleLowerTercile(current_rows)
         if not candidates:
             break
 
         improved_in_pass = False
-        iteration_budget, badge_rounds = _iterationStrategyForPass(pass_idx, base_iterations)
+        iteration_budget, badge_rounds = iterationStrategyForPass(pass_idx, base_iterations)
         if len(candidates) > 1:
             rng.shuffle(candidates)
         for row in candidates:
             filename = str(row["filename"])
-            adaptive_iteration_budget = _adaptiveIterationBudgetForQualityRow(row, iteration_budget)
-            new_row, failed = _convertOne(filename, iteration_budget=adaptive_iteration_budget, badge_rounds=badge_rounds)
+            adaptive_iteration_budget = adaptiveIterationBudgetForQualityRow(row, iteration_budget)
+            new_row, failed = convertOne(filename, iteration_budget=adaptive_iteration_budget, badge_rounds=badge_rounds)
             if failed:
                 stop_after_failure = True
                 break
             if new_row is None:
                 continue
 
-            improved, decision, prev_error_pp, new_error_pp, prev_mean_delta2, new_mean_delta2 = _evaluateQualityPassCandidate(
+            improved, decision, prev_error_pp, new_error_pp, prev_mean_delta2, new_mean_delta2 = evaluateQualityPassCandidate(
                 row,
                 new_row,
             )
@@ -294,8 +294,8 @@ def convertRange(
         if stop_after_failure or not improved_in_pass:
             break
 
-    _writeQualityPassReport(reports_out_dir, quality_logs)
-    _writeBatchFailureSummary(reports_out_dir, batch_failures)
+    writeQualityPassReport(reports_out_dir, quality_logs)
+    writeBatchFailureSummary(reports_out_dir, batch_failures)
     if strategy_logs:
         strategy_path = os.path.join(reports_out_dir, "strategy_switch_template_transfers.csv")
         with open(strategy_path, "w", encoding="utf-8", newline="") as f:
@@ -348,27 +348,27 @@ def convertRange(
                     }
                 )
 
-    _harmonizeSemanticSizeVariants(semantic_results, folder_path, svg_out_dir, reports_out_dir)
+    harmonizeSemanticSizeVariants(semantic_results, folder_path, svg_out_dir, reports_out_dir)
     semantic_audit_rows = [
         dict(audit)
         for row in result_map.values()
         for audit in [dict(row.get("params", {}).get("semantic_audit", {}))]
         if audit
     ]
-    _writeSemanticAuditReport(reports_out_dir, semantic_audit_rows)
-    _writePixelDelta2Ranking(folder_path, svg_out_dir, reports_out_dir)
-    _writeAc08WeakFamilyStatusReport(
+    writeSemanticAuditReport(reports_out_dir, semantic_audit_rows)
+    writePixelDelta2Ranking(folder_path, svg_out_dir, reports_out_dir)
+    writeAc08WeakFamilyStatusReport(
         reports_out_dir,
         selected_variants=sorted(normalized_selected_variants),
     )
-    _writeAc08RegressionManifest(
+    writeAc08RegressionManifest(
         reports_out_dir,
         folder_path=folder_path,
         csv_path=csv_path,
         iterations=iterations,
         selected_variants=sorted(normalized_selected_variants),
     )
-    ac08_success_gate = _writeAc08SuccessCriteriaReport(
+    ac08_success_gate = writeAc08SuccessCriteriaReport(
         reports_out_dir,
         selected_variants=sorted(normalized_selected_variants),
     )

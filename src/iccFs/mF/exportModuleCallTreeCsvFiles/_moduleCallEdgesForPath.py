@@ -1,4 +1,4 @@
-def _moduleCallEdgesForPath(module_path: str | os.PathLike[str]) -> tuple[dict[str, int], list[dict[str, object]]]:
+def moduleCallEdgesForPath(module_path: str | os.PathLike[str]) -> tuple[dict[str, int], list[dict[str, object]]]:
     """Return module-local callables and caller->callee edges for the given source file."""
     source_path = Path(module_path)
     source = source_path.read_text(encoding="utf-8")
@@ -11,18 +11,18 @@ def _moduleCallEdgesForPath(module_path: str | os.PathLike[str]) -> tuple[dict[s
         def __init__(self):
             self._class_stack: list[str] = []
 
-        def visit_ClassDef(self, node: ast.ClassDef):
+        def visitClassDef(self, node: ast.ClassDef):
             self._class_stack.append(node.name)
             self.generic_visit(node)
             self._class_stack.pop()
 
-        def visit_FunctionDef(self, node: ast.FunctionDef):
+        def visitFunctionDef(self, node: ast.FunctionDef):
             scoped_name = ".".join(self._class_stack + [node.name]) if self._class_stack else node.name
             callable_lines[scoped_name] = node.lineno
             local_function_names.add(node.name)
             self.generic_visit(node)
 
-        def visit_AsyncFunctionDef(self, node: ast.AsyncFunctionDef):
+        def visitAsyncFunctionDef(self, node: ast.AsyncFunctionDef):
             scoped_name = ".".join(self._class_stack + [node.name]) if self._class_stack else node.name
             callable_lines[scoped_name] = node.lineno
             local_function_names.add(node.name)
@@ -36,35 +36,35 @@ def _moduleCallEdgesForPath(module_path: str | os.PathLike[str]) -> tuple[dict[s
             self._scope_stack: list[str] = []
             self._class_stack: list[str] = []
 
-        def _current_scope(self) -> str:
+        def currentScope(self) -> str:
             return ".".join(self._scope_stack)
 
-        def visit_ClassDef(self, node: ast.ClassDef):
+        def visitClassDef(self, node: ast.ClassDef):
             self._class_stack.append(node.name)
             self.generic_visit(node)
             self._class_stack.pop()
 
-        def visit_FunctionDef(self, node: ast.FunctionDef):
+        def visitFunctionDef(self, node: ast.FunctionDef):
             scoped_name = ".".join(self._class_stack + [node.name]) if self._class_stack else node.name
             self._scope_stack.append(scoped_name)
             self.generic_visit(node)
             self._scope_stack.pop()
 
-        def visit_AsyncFunctionDef(self, node: ast.AsyncFunctionDef):
+        def visitAsyncFunctionDef(self, node: ast.AsyncFunctionDef):
             scoped_name = ".".join(self._class_stack + [node.name]) if self._class_stack else node.name
             self._scope_stack.append(scoped_name)
             self.generic_visit(node)
             self._scope_stack.pop()
 
-        def visit_Call(self, node: ast.Call):
-            caller = self._current_scope()
+        def visitCall(self, node: ast.Call):
+            caller = self.currentScope()
             callee = ""
-            raw_callee = _dotted_attr_name(node.func)
+            raw_callee = dottedAttrName(node.func)
             if isinstance(node.func, ast.Name):
                 if node.func.id in local_function_names:
                     callee = node.func.id
             elif isinstance(node.func, ast.Attribute):
-                owner = _dotted_attr_name(node.func.value)
+                owner = dottedAttrName(node.func.value)
                 attr = node.func.attr
                 if owner in {"self", "cls"} and self._class_stack:
                     candidate = f"{self._class_stack[-1]}.{attr}"

@@ -1,4 +1,4 @@
-def _selectOpenQualityCases(
+def selectOpenQualityCases(
     rows: list[dict[str, object]],
     *,
     allowed_error_per_pixel: float,
@@ -22,4 +22,4 @@ def _selectOpenQualityCases(
             continue
         open_rows.append(row)
 
-    return sorted(open_rows, key=_quality_sort_key, reverse=True)
+    return sorted(open_rows, key=qualitySortKey, reverse=True)

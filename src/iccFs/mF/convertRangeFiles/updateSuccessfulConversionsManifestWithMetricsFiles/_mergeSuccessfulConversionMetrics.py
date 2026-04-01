@@ -1,4 +1,4 @@
-def _mergeSuccessfulConversionMetrics(
+def mergeSuccessfulConversionMetrics(
     baseline: dict[str, object],
     override: dict[str, object],
 ) -> dict[str, object]:

@@ -1,4 +1,4 @@
-def _harmonizeSemanticSizeVariants(
+def harmonizeSemanticSizeVariants(
     results: list[dict[str, object]],
     folder_path: str,
     svg_out_dir: str,
@@ -21,7 +21,7 @@ def _harmonizeSemanticSizeVariants(
             suffix = variant.rsplit("_", 1)[-1] if "_" in variant else ""
             if suffix not in {"L", "M", "S"}:
                 continue
-            parsed = _readSvgGeometry(os.path.join(svg_out_dir, f"{variant}.svg"))
+            parsed = readSvgGeometry(os.path.join(svg_out_dir, f"{variant}.svg"))
             if parsed is None:
                 continue
             w, h, params = parsed
@@ -43,7 +43,7 @@ def _harmonizeSemanticSizeVariants(
         category_logs.append(f"{base};{category};{variants_joined}")
 
         sigs = {
-            row["variant"]: _normalizedGeometrySignature(int(row["w"]), int(row["h"]), dict(row["params"]))
+            row["variant"]: normalizedGeometrySignature(int(row["w"]), int(row["h"]), dict(row["params"]))
             for row in variant_rows
         }
         max_delta = 0.0
@@ -51,32 +51,32 @@ def _harmonizeSemanticSizeVariants(
             for j in range(i + 1, len(variant_rows)):
                 vi = str(variant_rows[i]["variant"])
                 vj = str(variant_rows[j]["variant"])
-                max_delta = max(max_delta, _maxSignatureDelta(sigs[vi], sigs[vj]))
+                max_delta = max(max_delta, maxSignatureDelta(sigs[vi], sigs[vj]))
 
         # Do not skip families with one badly fitted outlier variant. We still
         # validate every harmonization candidate against raster error before write.
 
-        def _anchor_rank(row: dict[str, object]) -> tuple[int, float]:
+        def anchorRank(row: dict[str, object]) -> tuple[int, float]:
             suffix = str(row.get("suffix", ""))
             # Connector families ("Kellen") tend to under-fit large variants
             # when we derive L from M. Prefer L as harmonization anchor so the
             # largest geometry stays authoritative and M/S scale down from it.
-            priority = _harmonization_anchor_priority(suffix, prefer_large=has_connector)
+            priority = harmonizationAnchorPriority(suffix, prefer_large=has_connector)
             err = float(dict(row["entry"]).get("error", float("inf")))
             return priority, err
 
-        anchor = min(variant_rows, key=_anchor_rank)
+        anchor = min(variant_rows, key=anchorRank)
         anchor_variant = str(anchor["variant"])
         anchor_w = int(anchor["w"])
         anchor_h = int(anchor["h"])
         anchor_params = dict(anchor["params"])
-        family_colors = _familyHarmonizedBadgeColors(variant_rows)
+        family_colors = familyHarmonizedBadgeColors(variant_rows)
 
         for row in variant_rows:
             target_variant = str(row["variant"])
             target_w = int(row["w"])
             target_h = int(row["h"])
-            scaled = _scaleBadgeParams(
+            scaled = scaleBadgeParams(
                 anchor_params,
                 anchor_w,
                 anchor_h,

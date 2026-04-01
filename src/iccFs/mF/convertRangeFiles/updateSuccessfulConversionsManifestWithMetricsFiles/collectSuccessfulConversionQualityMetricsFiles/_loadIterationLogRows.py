@@ -1,4 +1,4 @@
-def _loadIterationLogRows(reports_out_dir: str) -> dict[str, dict[str, str]]:
+def loadIterationLogRows(reports_out_dir: str) -> dict[str, dict[str, str]]:
     """Load Iteration_Log.csv keyed by uppercase filename stem."""
     path = os.path.join(reports_out_dir, "Iteration_Log.csv")
     if not os.path.exists(path):

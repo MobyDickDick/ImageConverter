@@ -1,26 +1,26 @@
 import os
 
-from ._inRequestedRangeFiles._extractRefParts import _extractRefParts
-from ._inRequestedRangeFiles._matchesExactPrefixFilter import _matchesExactPrefixFilter
-from ._inRequestedRangeFiles._matchesPartialRangeToken import _matchesPartialRangeToken
+from ._inRequestedRangeFiles.extractRefParts import extractRefParts
+from ._inRequestedRangeFiles.matchesExactPrefixFilter import matchesExactPrefixFilter
+from ._inRequestedRangeFiles.matchesPartialRangeToken import matchesPartialRangeToken
 from ._inRequestedRangeFiles.getBaseNameFromFile import getBaseNameFromFile
 
 
-def _inRequestedRange(filename: str, start_ref: str, end_ref: str) -> bool:
+def inRequestedRange(filename: str, start_ref: str, end_ref: str) -> bool:
     stem = getBaseNameFromFile(os.path.splitext(filename)[0]).upper()
-    stem_parts = _extractRefParts(stem)
-    start_parts = _extractRefParts(start_ref)
-    end_parts = _extractRefParts(end_ref)
+    stem_parts = extractRefParts(stem)
+    start_parts = extractRefParts(start_ref)
+    end_parts = extractRefParts(end_ref)
 
     # Identical start/end filters should also work as a prefix selector so an
     # input like AC081..AC081 includes AC0814_L, AC0813_M, etc.
-    if _matchesExactPrefixFilter(filename, start_ref, end_ref):
+    if matchesExactPrefixFilter(filename, start_ref, end_ref):
         return True
 
     # If no parseable range bounds are provided, fall back to a shared partial
     # token filter. This keeps interactive batches small, e.g. AC08..A08 -> A08*.
     if start_parts is None and end_parts is None:
-        return _matchesPartialRangeToken(filename, start_ref, end_ref) if (start_ref or end_ref) else True
+        return matchesPartialRangeToken(filename, start_ref, end_ref) if (start_ref or end_ref) else True
 
     # Files that do not follow the usual XX0000 / XXX0000 naming scheme should
     # only pass through broad whole-folder spans, not exact family-specific

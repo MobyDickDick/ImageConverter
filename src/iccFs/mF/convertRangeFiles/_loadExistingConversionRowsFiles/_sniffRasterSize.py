@@ -1,4 +1,4 @@
-def _sniffRasterSize(path: str | Path) -> tuple[int, int]:
+def sniffRasterSize(path: str | Path) -> tuple[int, int]:
     file_path = Path(path)
     with file_path.open("rb") as fh:
         header = fh.read(32)

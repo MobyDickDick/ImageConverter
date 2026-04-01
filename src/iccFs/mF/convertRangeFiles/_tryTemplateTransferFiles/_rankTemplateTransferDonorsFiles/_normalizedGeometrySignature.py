@@ -1,1 +1,1 @@
-from src.iccFs.mF.convertRangeFiles._harmonizeSemanticSizeVariantsFiles._normalizedGeometrySignature import _normalizedGeometrySignature
+from src.iccFs.mF.convertRangeFiles._harmonizeSemanticSizeVariantsFiles.normalizedGeometrySignature import normalizedGeometrySignature

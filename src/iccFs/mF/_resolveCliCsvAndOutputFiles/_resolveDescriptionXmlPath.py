@@ -1,4 +1,4 @@
-def _resolveDescriptionXmlPath(path: str) -> str | None:
+def resolveDescriptionXmlPath(path: str) -> str | None:
     candidate = Path(path)
     if candidate.exists():
         return str(candidate)

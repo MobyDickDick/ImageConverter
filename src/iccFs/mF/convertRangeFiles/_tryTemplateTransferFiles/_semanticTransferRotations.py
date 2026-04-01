@@ -1,4 +1,4 @@
-def _semanticTransferRotations(target_params: dict[str, object], donor_params: dict[str, object]) -> tuple[int, ...]:
+def semanticTransferRotations(target_params: dict[str, object], donor_params: dict[str, object]) -> tuple[int, ...]:
     """Rotation candidates for semantic transfer while preserving symbol semantics."""
     has_text = bool(target_params.get("draw_text", False) or donor_params.get("draw_text", False))
     has_connector = bool(

@@ -40,12 +40,12 @@ from src.iccFs.optionalDependencyBaseDir import optionalDependencyBaseDir
 from src.iccFs.mF.overviewTiles import generateConversionOverviews
 from src.iccFs.mF.imageCompositeConverterRegions import (
     ANNOTATION_COLORS,
-    _bbox_to_dict,
+    bboxToDict,
     analyzeRangeImpl,
     annotateImageRegionsImpl,
     detectRelevantRegionsImpl,
 )
-from src.iccFs.mF.convertRangeFiles._inRequestedRange import _inRequestedRange
+from src.iccFs.mF.convertRangeFiles.inRequestedRange import inRequestedRange
 from src.iccFs.mF.convertRangeFiles._inRequestedRangeFiles.getBaseNameFromFile import getBaseNameFromFile
 from src.iccFs.mF.successfulConversions import (
     AC08_MITIGATION_STATUS,
@@ -55,21 +55,21 @@ from src.iccFs.mF.successfulConversions import (
     AC08_REGRESSION_VARIANTS,
     SUCCESSFUL_CONVERSIONS,
     SUCCESSFUL_CONVERSIONS_MANIFEST,
-    _load_successful_conversions,
+    loadSuccessfulConversions,
 )
-from src.iccFs.mF.convertRangeFiles._adaptiveIterationBudgetForQualityRow import _adaptiveIterationBudgetForQualityRow
-from src.iccFs.mF.convertRangeFiles._evaluateQualityPassCandidate import _evaluateQualityPassCandidate
-from src.iccFs.mF.convertRangeFiles._harmonizeSemanticSizeVariantsFiles._familyHarmonizedBadgeColorsFiles._clipGray import _clipGray
-from src.iccFs.mF.convertRangeFiles._harmonizeSemanticSizeVariantsFiles._maxSignatureDelta import _maxSignatureDelta
-from src.iccFs.mF.convertRangeFiles._harmonizeSemanticSizeVariantsFiles._normalizedGeometrySignature import _normalizedGeometrySignature
-from src.iccFs.mF.convertRangeFiles._harmonizeSemanticSizeVariantsFiles._scaleBadgeParamsFiles._needsLargeCircleOverflowGuard import _needsLargeCircleOverflowGuard
-from src.iccFs.mF.convertRangeFiles._iterationStrategyForPass import _iterationStrategyForPass
-from src.iccFs.mF.convertRangeFiles._tryTemplateTransferFiles._semanticTransferIsCompatibleFiles._connectorArmDirection import _connectorArmDirection
-from src.iccFs.mF.convertRangeFiles._tryTemplateTransferFiles._semanticTransferIsCompatibleFiles._connectorStemDirection import _connectorStemDirection
-from src.iccFs.mF.convertRangeFiles._tryTemplateTransferFiles._semanticTransferRotations import _semanticTransferRotations
-from src.iccFs.mF.convertRangeFiles.updateSuccessfulConversionsManifestWithMetricsFiles._mergeSuccessfulConversionMetrics import _mergeSuccessfulConversionMetrics
-from src.iccFs.mF.convertRangeFiles.updateSuccessfulConversionsManifestWithMetricsFiles._sortedSuccessfulConversionMetricsRows import _sortedSuccessfulConversionMetricsRows
-from src.iccFs.mF.buildLinuxVendorInstallCommandFiles._requiredVendorPackages import _requiredVendorPackages
+from src.iccFs.mF.convertRangeFiles.adaptiveIterationBudgetForQualityRow import adaptiveIterationBudgetForQualityRow
+from src.iccFs.mF.convertRangeFiles.evaluateQualityPassCandidate import evaluateQualityPassCandidate
+from src.iccFs.mF.convertRangeFiles._harmonizeSemanticSizeVariantsFiles._familyHarmonizedBadgeColorsFiles.clipGray import clipGray
+from src.iccFs.mF.convertRangeFiles._harmonizeSemanticSizeVariantsFiles.maxSignatureDelta import maxSignatureDelta
+from src.iccFs.mF.convertRangeFiles._harmonizeSemanticSizeVariantsFiles.normalizedGeometrySignature import normalizedGeometrySignature
+from src.iccFs.mF.convertRangeFiles._harmonizeSemanticSizeVariantsFiles._scaleBadgeParamsFiles.needsLargeCircleOverflowGuard import needsLargeCircleOverflowGuard
+from src.iccFs.mF.convertRangeFiles.iterationStrategyForPass import iterationStrategyForPass
+from src.iccFs.mF.convertRangeFiles._tryTemplateTransferFiles._semanticTransferIsCompatibleFiles.connectorArmDirection import connectorArmDirection
+from src.iccFs.mF.convertRangeFiles._tryTemplateTransferFiles._semanticTransferIsCompatibleFiles.connectorStemDirection import connectorStemDirection
+from src.iccFs.mF.convertRangeFiles._tryTemplateTransferFiles.semanticTransferRotations import semanticTransferRotations
+from src.iccFs.mF.convertRangeFiles.updateSuccessfulConversionsManifestWithMetricsFiles.mergeSuccessfulConversionMetrics import mergeSuccessfulConversionMetrics
+from src.iccFs.mF.convertRangeFiles.updateSuccessfulConversionsManifestWithMetricsFiles.sortedSuccessfulConversionMetricsRows import sortedSuccessfulConversionMetricsRows
+from src.iccFs.mF.buildLinuxVendorInstallCommandFiles.requiredVendorPackages import requiredVendorPackages
 
 # Keep regression variant list deterministic and duplicate-free for batch
 # selection/tests even when upstream manifests accidentally repeat entries.
@@ -78,7 +78,7 @@ AC08_REGRESSION_VARIANTS = tuple(dict.fromkeys(AC08_REGRESSION_VARIANTS))
 # criteria reports used by this converter/test suite.
 AC08_PREVIOUSLY_GOOD_VARIANTS = ("AC0800_L", "AC0800_M", "AC0800_S", "AC0811_L")
 
-_load_successful_conversions = _load_successful_conversions
+loadSuccessfulConversions = loadSuccessfulConversions
 
 
 DEFAULT_CALL_TREE_CSV_PATH = "artifacts/converted_images/reports/call_tree_image_composite_converter.csv"
@@ -152,7 +152,7 @@ def annotateImageRegions(img, regions: list[dict[str, object]]):
 _optional_dependency_base_dir = optionalDependencyBaseDir
 
 
-def _vendored_site_packages_dirs() -> list[Path]:
+def vendoredSitePackagesDirs() -> list[Path]:
     """Return repo-local site-packages directories that may contain bundled deps."""
     base = _optional_dependency_base_dir()
     linux_candidates = [
@@ -196,13 +196,13 @@ def _vendored_site_packages_dirs() -> list[Path]:
     return existing
 
 
-def _clear_partial_module_import(module_name: str) -> None:
+def clearPartialModuleImport(module_name: str) -> None:
     """Discard partially imported package state before the next fallback attempt."""
     for imported_name in [name for name in list(sys.modules) if name == module_name or name.startswith(f"{module_name}.")]:
         sys.modules.pop(imported_name, None)
 
 
-def _describe_optional_dependency_error(module_name: str, exc: BaseException, attempted_paths: list[Path]) -> str:
+def describeOptionalDependencyError(module_name: str, exc: BaseException, attempted_paths: list[Path]) -> str:
     detail = f"{type(exc).__name__}: {exc}"
     lower = detail.lower()
     if "add_dll_directory" in lower or ".pyd" in lower:
@@ -218,16 +218,16 @@ def _describe_optional_dependency_error(module_name: str, exc: BaseException, at
     return detail
 
 
-def _load_optional_module(module_name: str):
+def loadOptionalModule(module_name: str):
     """Import optional dependencies, including repo-vendored site-packages."""
     attempted_paths: list[Path] = []
     try:
         return importlib.import_module(module_name)
     except Exception as exc:  # pragma: no cover - exercised only in dependency-missing envs
         last_exc: BaseException = exc
-        _clear_partial_module_import(module_name)
+        clearPartialModuleImport(module_name)
 
-    for site_packages in _vendored_site_packages_dirs():
+    for site_packages in vendoredSitePackagesDirs():
         attempted_paths.append(site_packages)
         path_str = str(site_packages)
         added = False
@@ -238,25 +238,25 @@ def _load_optional_module(module_name: str):
             return importlib.import_module(module_name)
         except Exception as exc:  # pragma: no cover - exercised only in dependency-missing envs
             last_exc = exc
-            _clear_partial_module_import(module_name)
+            clearPartialModuleImport(module_name)
         finally:
             if added:
                 with contextlib.suppress(ValueError):
                     sys.path.remove(path_str)
 
-    OPTIONAL_DEPENDENCY_ERRORS[module_name] = _describe_optional_dependency_error(module_name, last_exc, attempted_paths)
+    OPTIONAL_DEPENDENCY_ERRORS[module_name] = describeOptionalDependencyError(module_name, last_exc, attempted_paths)
     return None
 
 
-def _import_with_vendored_fallback(module_name: str):
+def importWithVendoredFallback(module_name: str):
     """Import a module, retrying with repo-vendored site-packages on sys.path."""
     try:
         return importlib.import_module(module_name)
     except Exception as exc:
         last_exc: BaseException = exc
-        _clear_partial_module_import(module_name)
+        clearPartialModuleImport(module_name)
 
-    for site_packages in _vendored_site_packages_dirs():
+    for site_packages in vendoredSitePackagesDirs():
         path_str = str(site_packages)
         added = False
         if path_str not in sys.path:
@@ -266,7 +266,7 @@ def _import_with_vendored_fallback(module_name: str):
             return importlib.import_module(module_name)
         except Exception as exc:
             last_exc = exc
-            _clear_partial_module_import(module_name)
+            clearPartialModuleImport(module_name)
         finally:
             if added:
                 with contextlib.suppress(ValueError):
@@ -278,18 +278,18 @@ def _import_with_vendored_fallback(module_name: str):
 # Load numpy before cv2: OpenCV's Python bindings import numpy at module-import
 # time and can fail permanently for this process if cv2 is attempted first while
 # numpy is available only via repo-vendored site-packages.
-np = _load_optional_module("numpy")
-cv2 = _load_optional_module("cv2")
-fitz = _load_optional_module("fitz")  # PyMuPDF for native SVG rendering
+np = loadOptionalModule("numpy")
+cv2 = loadOptionalModule("cv2")
+fitz = loadOptionalModule("fitz")  # PyMuPDF for native SVG rendering
 
 
 
-def _clip(value, low, high):
+def clip(value, low, high):
     """Clip scalar/array values without hard-requiring numpy at runtime."""
     if np is not None:
         return np.clip(value, low, high)
     if isinstance(value, (int, float)):
-        return Action._clipScalar(float(value), float(low), float(high))
+        return Action.clipScalar(float(value), float(low), float(high))
     raise RuntimeError("numpy is required for non-scalar clip operations")
 
 
@@ -311,7 +311,7 @@ class RGBWert:
             if channel < 0 or channel >= 256:
                 raise ValueError(f"RGB channel '{channel_name}' must satisfy 0 <= x < 256.")
 
-    def to_hex(self) -> str:
+    def toHex(self) -> str:
         return f"#{self.r:02x}{self.g:02x}{self.b:02x}"
 
 
@@ -359,7 +359,7 @@ class Kelle:
         if self.griff.laenge <= float(self.kreis.radius):
             raise ValueError("Constraint verletzt: Griff.Länge > Kreis.Radius.")
 
-    def to_svg(self, width: int, height: int, *, clip_to_canvas: bool = True) -> str:
+    def toSvg(self, width: int, height: int, *, clip_to_canvas: bool = True) -> str:
         """Render the ladle as SVG. Handle is drawn first (background), then circle."""
         handle_stroke = max(1.0, float(self.kreis.randbreite))
         cx = float(self.kreis.mittelpunkt.x)
@@ -465,7 +465,7 @@ class GlobalParameterVector:
     text_scale: float | None = None
 
     @staticmethod
-    def from_params(params: dict) -> "GlobalParameterVector":
+    def fromParams(params: dict) -> "GlobalParameterVector":
         return GlobalParameterVector(
             cx=float(params.get("cx", 0.0)),
             cy=float(params.get("cy", 0.0)),
@@ -484,7 +484,7 @@ class GlobalParameterVector:
             text_scale=float(params["text_scale"]) if "text_scale" in params else None,
         )
 
-    def apply_to_params(self, params: dict) -> dict:
+    def applyToParams(self, params: dict) -> dict:
         out = dict(params)
         out["cx"] = float(self.cx)
         out["cy"] = float(self.cy)
@@ -509,14 +509,14 @@ class GlobalParameterVector:
         return out
 
 def loadGrayscaleImage(path: Path) -> list[list[int]]:
-    image_module = _import_with_vendored_fallback("PIL.Image")
+    image_module = importWithVendoredFallback("PIL.Image")
     gray = image_module.open(path).convert("L")
     w, h = gray.size
     px = gray.load()
     return [[int(px[x, y]) for x in range(w)] for y in range(h)]
 
 
-def _createDiffImageWithoutCv2(input_path: str | Path, svg_content: str):
+def createDiffImageWithoutCv2(input_path: str | Path, svg_content: str):
     """Create a normalized signed red/cyan diff image when numpy/opencv are unavailable."""
     if fitz is None:
         raise RuntimeError("Fallback diff generation requires fitz (PyMuPDF).")
@@ -569,7 +569,7 @@ def _createDiffImageWithoutCv2(input_path: str | Path, svg_content: str):
         return diff_pix
 
 
-def _compute_otsu_threshold(grayscale: list[list[int]]) -> int:
+def computeOtsuThreshold(grayscale: list[list[int]]) -> int:
     hist = [0] * 256
     total = 0
     for row in grayscale:
@@ -600,7 +600,7 @@ def _compute_otsu_threshold(grayscale: list[list[int]]) -> int:
     return threshold
 
 
-def _adaptive_threshold(grayscale: list[list[int]], block_size: int = 15, c: int = 5) -> list[list[int]]:
+def adaptiveThreshold(grayscale: list[list[int]], block_size: int = 15, c: int = 5) -> list[list[int]]:
     h = len(grayscale)
     w = len(grayscale[0]) if h else 0
     out = [[0] * w for _ in range(h)]
@@ -621,10 +621,10 @@ def loadBinaryImageWithMode(path: Path, *, threshold: int = 220, mode: str = "gl
     if m == 'global':
         return [[1 if v < threshold else 0 for v in row] for row in grayscale]
     if m == 'otsu':
-        t = _compute_otsu_threshold(grayscale)
+        t = computeOtsuThreshold(grayscale)
         return [[1 if v < t else 0 for v in row] for row in grayscale]
     if m == 'adaptive':
-        return _adaptive_threshold(grayscale)
+        return adaptiveThreshold(grayscale)
     raise ValueError(f"Unknown threshold mode '{mode}'.")
 
 
@@ -641,7 +641,7 @@ def renderCandidateMask(candidate: Candidate, width: int, height: int) -> list[l
     return mask
 
 
-def _iou(a: list[list[int]], b: list[list[int]]) -> float:
+def iou(a: list[list[int]], b: list[list[int]]) -> float:
     inter = union = 0
     for y in range(len(a)):
         for x in range(len(a[0])):
@@ -654,7 +654,7 @@ def _iou(a: list[list[int]], b: list[list[int]]) -> float:
 
 
 def scoreCandidate(target: list[list[int]], candidate: Candidate) -> float:
-    return _iou(target, renderCandidateMask(candidate, len(target[0]), len(target)))
+    return iou(target, renderCandidateMask(candidate, len(target[0]), len(target)))
 
 
 def randomNeighbor(base: Candidate, scale: float, rng: random.Random) -> Candidate:
@@ -680,14 +680,14 @@ def optimizeElement(target: list[list[int]], init: Candidate, *, max_iter: int, 
     return best, best_score
 
 
-def _gray_to_hex(v: float) -> str:
+def grayToHex(v: float) -> str:
     g = max(0, min(255, int(round(v))))
     return f"#{g:02x}{g:02x}{g:02x}"
 
 
 def estimateStrokeStyle(grayscale: list[list[int]], element: Element, candidate: Candidate) -> tuple[str, str | None, float | None]:
     vals = [grayscale[y + element.y0][x + element.x0] for y,row in enumerate(element.pixels) for x,v in enumerate(row) if v]
-    fill = _gray_to_hex(sum(vals) / max(1, len(vals)))
+    fill = grayToHex(sum(vals) / max(1, len(vals)))
     if candidate.shape != 'circle':
         return fill, None, None
     r = max(1.0, (candidate.w + candidate.h) / 4.0)
@@ -702,7 +702,7 @@ def estimateStrokeStyle(grayscale: list[list[int]], element: Element, candidate:
             elif d <= r*0.65:
                 inner.append(px)
     if outer and inner and (sum(outer)/len(outer)) < (sum(inner)/len(inner)) - 10:
-        return _gray_to_hex(sum(inner)/len(inner)), _gray_to_hex(sum(outer)/len(outer)), max(1.0, r*0.2)
+        return grayToHex(sum(inner)/len(inner)), grayToHex(sum(outer)/len(outer)), max(1.0, r*0.2)
     return fill, None, None
 
 
@@ -783,7 +783,7 @@ def decomposeCircleWithStem(grayscale: list[list[int]], element: Element, candid
         stem_direction = "bottom" if mean_y >= cy else "top"
 
     stem_values = [grayscale[element.y0 + y][element.x0 + x] for x, y in best_cluster]
-    stem_color = _gray_to_hex(round(sum(stem_values) / max(1, len(stem_values))))
+    stem_color = grayToHex(round(sum(stem_values) / max(1, len(stem_values))))
 
     fill_color, stroke_color, stroke_width = estimateStrokeStyle(grayscale, element, candidate)
 
@@ -828,13 +828,13 @@ def decomposeCircleWithStem(grayscale: list[list[int]], element: Element, candid
         candidate,
         element.x0,
         element.y0,
-        fill_color if fill_color else _gray_to_hex(sum(circle_vals) / max(1, len(circle_vals))),
+        fill_color if fill_color else grayToHex(sum(circle_vals) / max(1, len(circle_vals))),
         stroke_color,
         stroke_width,
     )
     return [rect, circle]
 
-def _missingRequiredImageDependencies() -> list[str]:
+def missingRequiredImageDependencies() -> list[str]:
     missing: list[str] = []
     if cv2 is None:
         missing.append("opencv-python-headless")
@@ -859,10 +859,10 @@ class Perception:
     def __post_init__(self) -> None:
         self.base_name = getBaseNameFromFile(os.path.basename(self.img_path))
         self.img = cv2.imread(self.img_path)
-        self.raw_desc = self._load_descriptions()
+        self.raw_desc = self.loadDescriptions()
 
-    def _load_descriptions(self) -> dict[str, str]:
-        return _loadDescriptionMapping(self.csv_path)
+    def loadDescriptions(self) -> dict[str, str]:
+        return loadDescriptionMapping(self.csv_path)
 
 
 @dataclass(frozen=True)
@@ -898,7 +898,7 @@ class DescriptionMappingError(ValueError):
 
 
 
-def _loadDescriptionMappingFromCsv(path: str) -> dict[str, str]:
+def loadDescriptionMappingFromCsv(path: str) -> dict[str, str]:
     raw_desc: dict[str, str] = {}
     if not os.path.exists(path):
         return raw_desc
@@ -943,9 +943,9 @@ def _loadDescriptionMappingFromCsv(path: str) -> dict[str, str]:
     return raw_desc
 
 
-def _loadDescriptionMappingFromXml(path: str) -> dict[str, str]:
+def loadDescriptionMappingFromXml(path: str) -> dict[str, str]:
     raw_desc: dict[str, str] = {}
-    resolved_path = _resolveDescriptionXmlPath(path)
+    resolved_path = resolveDescriptionXmlPath(path)
     if resolved_path is None:
         return raw_desc
 
@@ -959,7 +959,7 @@ def _loadDescriptionMappingFromXml(path: str) -> dict[str, str]:
 
     root = tree.getroot()
 
-    def _registerDescription(key: str, description: str) -> None:
+    def registerDescription(key: str, description: str) -> None:
         normalized_desc = str(description or "").strip()
         if not normalized_desc:
             return
@@ -978,14 +978,14 @@ def _loadDescriptionMappingFromXml(path: str) -> dict[str, str]:
             if candidate:
                 raw_desc[candidate] = normalized_desc
 
-    def _mergeEntryAndImageDesc(entry_desc: str, image_desc: str) -> str:
+    def mergeEntryAndImageDesc(entry_desc: str, image_desc: str) -> str:
         e = entry_desc.strip()
         i = image_desc.strip()
         if e and i and e != i:
             return f"{e} {i}".strip()
         return i or e
 
-    def _extractImageSpecificDescription(entry: ET.Element, image_name: str) -> str:
+    def extractImageSpecificDescription(entry: ET.Element, image_name: str) -> str:
         image_name = str(image_name or "").strip()
         if not image_name:
             return ""
@@ -1016,23 +1016,23 @@ def _loadDescriptionMappingFromXml(path: str) -> dict[str, str]:
         key = str(entry.attrib.get("key", "")).strip()
 
         if root_form and desc:
-            _registerDescription(root_form, desc)
+            registerDescription(root_form, desc)
         if key and desc:
-            _registerDescription(key, desc)
+            registerDescription(key, desc)
 
         for image_tag in entry.findall("./bilder/bild"):
             image_name = (image_tag.text or "").strip()
             image_stem = os.path.splitext(image_name)[0].strip()
-            image_specific_desc = _extractImageSpecificDescription(entry, image_name)
-            merged_desc = _mergeEntryAndImageDesc(desc, image_specific_desc)
+            image_specific_desc = extractImageSpecificDescription(entry, image_name)
+            merged_desc = mergeEntryAndImageDesc(desc, image_specific_desc)
             if merged_desc:
-                _registerDescription(image_name, merged_desc)
-                _registerDescription(image_stem, merged_desc)
+                registerDescription(image_name, merged_desc)
+                registerDescription(image_stem, merged_desc)
 
     return raw_desc
 
 
-def _resolveDescriptionXmlPath(path: str) -> str | None:
+def resolveDescriptionXmlPath(path: str) -> str | None:
     candidate = Path(path)
     if candidate.exists():
         return str(candidate)
@@ -1059,11 +1059,11 @@ class Reflection:
     def __init__(self, raw_desc: dict[str, str]):
         self.raw_desc = raw_desc
 
-    def parse_description(self, base_name: str, img_filename: str):
+    def parseDescription(self, base_name: str, img_filename: str):
         canonical_base = getBaseNameFromFile(base_name).upper()
         if not canonical_base:
             canonical_base = getBaseNameFromFile(img_filename).upper()
-        description_fragments = _collect_description_fragments(self.raw_desc, base_name, img_filename)
+        description_fragments = collectDescriptionFragments(self.raw_desc, base_name, img_filename)
         desc_raw = " ".join(fragment["text"] for fragment in description_fragments)
         desc = desc_raw.lower().strip()
         base_upper = canonical_base or base_name.upper()
@@ -1076,7 +1076,7 @@ class Reflection:
             "elements": [],
             "label": "M",
             "variant_name": os.path.splitext(str(img_filename))[0].upper(),
-            "documented_alias_refs": sorted(Reflection._extract_documented_alias_refs(desc)),
+            "documented_alias_refs": sorted(Reflection.extractDocumentedAliasRefs(desc)),
             "description_fragments": description_fragments,
             "semantic_priority_order": [
                 "family_rule",
@@ -1161,7 +1161,7 @@ class Reflection:
                 if element not in params["elements"]:
                     params["elements"].append(element)
 
-            layout_overrides = Reflection._parse_semantic_badge_layout_overrides(desc)
+            layout_overrides = Reflection.parseSemanticBadgeLayoutOverrides(desc)
             if layout_overrides:
                 params["badge_overrides"] = layout_overrides
                 params["semantic_sources"]["layout_override"] = sorted(layout_overrides)
@@ -1186,7 +1186,7 @@ class Reflection:
 
 
     @staticmethod
-    def _extract_documented_alias_refs(text: str) -> set[str]:
+    def extractDocumentedAliasRefs(text: str) -> set[str]:
         """Extract explicit "Wie AC0000" style alias references from descriptions."""
         if not text:
             return set()
@@ -1198,7 +1198,7 @@ class Reflection:
         return refs
 
     @staticmethod
-    def _parse_semantic_badge_layout_overrides(text: str) -> dict[str, float | str]:
+    def parseSemanticBadgeLayoutOverrides(text: str) -> dict[str, float | str]:
         """Extract optional layout directives from semantic badge descriptions."""
         if not text:
             return {}
@@ -1220,7 +1220,7 @@ class Reflection:
             overrides["co2_dx"] = 0.0
 
         return overrides
-def _renderSvgToNumpyInprocess(svg_string: str, size_w: int, size_h: int):
+def renderSvgToNumpyInprocess(svg_string: str, size_w: int, size_h: int):
     if fitz is None or np is None or cv2 is None:
         return None
 
@@ -1265,7 +1265,7 @@ def _renderSvgToNumpyInprocess(svg_string: str, size_w: int, size_h: int):
     return None
 
 
-def _render_svg_to_numpy_via_subprocess(svg_string: str, size_w: int, size_h: int):
+def renderSvgToNumpyViaSubprocess(svg_string: str, size_w: int, size_h: int):
     if np is None:
         return None
     payload = json.dumps(
@@ -1361,11 +1361,11 @@ class Action:
         return f"#{g:02x}{g:02x}{g:02x}"
 
     @staticmethod
-    def _snap_half(value: float) -> float:
+    def snapHalf(value: float) -> float:
         return round(float(value) * 2.0) / 2.0
 
     @staticmethod
-    def _clipScalar(value: float, low: float, high: float) -> float:
+    def clipScalar(value: float, low: float, high: float) -> float:
         """Return value clamped to ``[low, high]`` with ``numpy.clip`` scalar semantics."""
         lo = float(low)
         hi = float(high)
@@ -1391,21 +1391,21 @@ class Action:
             return float(self._rng.gauss(float(mean), float(sigma)))
 
     @staticmethod
-    def _make_rng(seed: int):
+    def makeRng(seed: int):
         if np is not None:
             return np.random.default_rng(int(seed))
         return Action._ScalarRng(int(seed))
 
     @staticmethod
-    def _argmin_index(values: list[float]) -> int:
+    def argminIndex(values: list[float]) -> int:
         return min(range(len(values)), key=lambda i: float(values[i]))
 
     @staticmethod
-    def _snap_int_px(value: float, minimum: float = 1.0) -> float:
+    def snapIntPx(value: float, minimum: float = 1.0) -> float:
         return float(max(int(round(float(minimum))), int(round(float(value)))))
 
     @staticmethod
-    def _max_circle_radius_inside_canvas(cx: float, cy: float, w: int, h: int, stroke: float = 0.0) -> float:
+    def maxCircleRadiusInsideCanvas(cx: float, cy: float, w: int, h: int, stroke: float = 0.0) -> float:
         """Return the largest circle radius that stays inside the SVG viewport."""
         if w <= 0 or h <= 0:
             return 1.0
@@ -1413,25 +1413,25 @@ class Action:
         return float(max(1.0, edge_margin - (max(0.0, float(stroke)) / 2.0)))
 
     @staticmethod
-    def _is_circle_with_text(params: dict) -> bool:
+    def isCircleWithText(params: dict) -> bool:
         """Return True when the badge encodes a circle-with-text shape."""
         return bool(params.get("circle_enabled", True)) and bool(params.get("draw_text", False))
 
     @staticmethod
-    def _apply_circle_text_width_constraint(params: dict, radius: float, w: int) -> float:
+    def applyCircleTextWidthConstraint(params: dict, radius: float, w: int) -> float:
         """Enforce CircleWithText constraint: 2 * radius < image width."""
-        if not Action._is_circle_with_text(params):
+        if not Action.isCircleWithText(params):
             return float(radius)
         # Keep a tiny strict margin so the optimized radius remains strictly below w/2.
         width_cap = (float(w) / 2.0) - 1e-3
         return float(min(float(radius), width_cap))
 
     @staticmethod
-    def _apply_circle_text_radius_floor(params: dict, radius: float) -> float:
+    def applyCircleTextRadiusFloor(params: dict, radius: float) -> float:
         """Enforce CircleWithText lower bound: radius must exceed half text width."""
-        if not Action._is_circle_with_text(params):
+        if not Action.isCircleWithText(params):
             return float(radius)
-        x1, _y1, x2, _y2 = Action._text_bbox(params)
+        x1, _y1, x2, _y2 = Action.textBbox(params)
         text_width = max(0.0, float(x2) - float(x1))
         if text_width <= 0.0:
             return float(radius)
@@ -1440,7 +1440,7 @@ class Action:
         return float(max(float(radius), lower_bound))
 
     @staticmethod
-    def _clamp_circle_inside_canvas(params: dict, w: int, h: int) -> dict:
+    def clampCircleInsideCanvas(params: dict, w: int, h: int) -> dict:
         """Clamp circle center/radius so no part of the ring exceeds the viewport."""
         p = dict(params)
         if not p.get("circle_enabled", True):
@@ -1451,8 +1451,8 @@ class Action:
         cx = float(max(0.0, min(float(w), float(p.get("cx", 0.0)))))
         cy = float(max(0.0, min(float(h), float(p.get("cy", 0.0)))))
         stroke = float(p.get("stroke_circle", 0.0))
-        max_r = Action._max_circle_radius_inside_canvas(cx, cy, w, h, stroke)
-        max_r = Action._apply_circle_text_width_constraint(p, max_r, w)
+        max_r = Action.maxCircleRadiusInsideCanvas(cx, cy, w, h, stroke)
+        max_r = Action.applyCircleTextWidthConstraint(p, max_r, w)
         min_r = float(
             max(
                 1.0,
@@ -1460,7 +1460,7 @@ class Action:
                 float(p.get("circle_radius_lower_bound_px", 1.0)),
             )
         )
-        min_r = Action._apply_circle_text_radius_floor(p, min_r)
+        min_r = Action.applyCircleTextRadiusFloor(p, min_r)
         if not bool(p.get("allow_circle_overflow", False)):
             min_r = min(min_r, max_r)
 
@@ -1473,7 +1473,7 @@ class Action:
         return p
 
     @staticmethod
-    def apply_redraw_variation(params: dict, w: int, h: int) -> tuple[dict, list[str]]:
+    def applyRedrawVariation(params: dict, w: int, h: int) -> tuple[dict, list[str]]:
         """Apply a slight per-run redraw jitter and describe it for the log."""
         p = copy.deepcopy(params)
         variation_logs: list[str] = []
@@ -1485,21 +1485,21 @@ class Action:
             + int(Action.STOCHASTIC_SEED_OFFSET) * 101
             + int(time.time_ns() % 1_000_000_007)
         )
-        rng = Action._make_rng(seed)
+        rng = Action.makeRng(seed)
 
-        def _uniform(delta: float) -> float:
+        def uniform(delta: float) -> float:
             return float(rng.uniform(-abs(float(delta)), abs(float(delta))))
 
         jitter_entries: list[str] = []
 
-        def _apply_numeric_jitter(key: str, delta: float, *, minimum: float | None = None, maximum: float | None = None) -> None:
+        def applyNumericJitter(key: str, delta: float, *, minimum: float | None = None, maximum: float | None = None) -> None:
             if key not in p:
                 return
             try:
                 old_float = float(p.get(key))
             except (TypeError, ValueError):
                 return
-            new_value = old_float + _uniform(delta)
+            new_value = old_float + uniform(delta)
             if minimum is not None:
                 new_value = max(float(minimum), new_value)
             if maximum is not None:
@@ -1507,24 +1507,24 @@ class Action:
             p[key] = float(new_value)
             jitter_entries.append(f"{key}:{old_float:.3f}->{new_value:.3f}")
 
-        _apply_numeric_jitter("cx", max(0.15, float(w) * 0.01), minimum=0.0, maximum=float(w))
-        _apply_numeric_jitter("cy", max(0.15, float(h) * 0.01), minimum=0.0, maximum=float(h))
-        _apply_numeric_jitter("r", max(0.10, float(min(w, h)) * 0.008), minimum=1.0)
-        _apply_numeric_jitter("stroke_circle", 0.12, minimum=0.4)
-        _apply_numeric_jitter("arm_len", max(0.12, float(w) * 0.012), minimum=0.5, maximum=float(max(w, h)))
-        _apply_numeric_jitter("arm_stroke", 0.12, minimum=0.4)
-        _apply_numeric_jitter("stem_height", max(0.12, float(h) * 0.012), minimum=0.5, maximum=float(max(w, h)))
-        _apply_numeric_jitter("stem_width", 0.12, minimum=0.4, maximum=float(max(1, w)))
-        _apply_numeric_jitter("text_scale", 0.03, minimum=0.35, maximum=4.0)
-        _apply_numeric_jitter("text_x", max(0.10, float(w) * 0.01), minimum=0.0, maximum=float(w))
-        _apply_numeric_jitter("text_y", max(0.10, float(h) * 0.01), minimum=0.0, maximum=float(h))
-        _apply_numeric_jitter("co2_dx", 0.08)
-        _apply_numeric_jitter("co2_dy", 0.08)
-        _apply_numeric_jitter("voc_scale", 0.03, minimum=0.35, maximum=4.0)
+        applyNumericJitter("cx", max(0.15, float(w) * 0.01), minimum=0.0, maximum=float(w))
+        applyNumericJitter("cy", max(0.15, float(h) * 0.01), minimum=0.0, maximum=float(h))
+        applyNumericJitter("r", max(0.10, float(min(w, h)) * 0.008), minimum=1.0)
+        applyNumericJitter("stroke_circle", 0.12, minimum=0.4)
+        applyNumericJitter("arm_len", max(0.12, float(w) * 0.012), minimum=0.5, maximum=float(max(w, h)))
+        applyNumericJitter("arm_stroke", 0.12, minimum=0.4)
+        applyNumericJitter("stem_height", max(0.12, float(h) * 0.012), minimum=0.5, maximum=float(max(w, h)))
+        applyNumericJitter("stem_width", 0.12, minimum=0.4, maximum=float(max(1, w)))
+        applyNumericJitter("text_scale", 0.03, minimum=0.35, maximum=4.0)
+        applyNumericJitter("text_x", max(0.10, float(w) * 0.01), minimum=0.0, maximum=float(w))
+        applyNumericJitter("text_y", max(0.10, float(h) * 0.01), minimum=0.0, maximum=float(h))
+        applyNumericJitter("co2_dx", 0.08)
+        applyNumericJitter("co2_dy", 0.08)
+        applyNumericJitter("voc_scale", 0.03, minimum=0.35, maximum=4.0)
 
-        p = Action._clamp_circle_inside_canvas(p, w, h)
+        p = Action.clampCircleInsideCanvas(p, w, h)
         if p.get("arm_enabled"):
-            Action._reanchor_arm_to_circle_edge(p, float(p.get("r", 1.0)))
+            Action.reanchorArmToCircleEdge(p, float(p.get("r", 1.0)))
         if p.get("stem_enabled") and "cy" in p and "r" in p:
             p["stem_top"] = float(p.get("cy", 0.0)) + float(p.get("r", 0.0))
 
@@ -1536,7 +1536,7 @@ class Action:
         return p, variation_logs
 
     @staticmethod
-    def _enforce_circle_connector_symmetry(params: dict, w: int, h: int) -> dict:
+    def enforceCircleConnectorSymmetry(params: dict, w: int, h: int) -> dict:
         """Keep circle+connector "lollipop" geometry centered around the connector axis."""
         p = dict(params)
         if not p.get("circle_enabled", True):
@@ -1586,7 +1586,7 @@ class Action:
         return p
 
     @staticmethod
-    def _quantize_badge_params(params: dict, w: int, h: int) -> dict:
+    def quantizeBadgeParams(params: dict, w: int, h: int) -> dict:
         """Quantize geometry for bitmap-like sources.
 
         - Coordinates/lengths use 0.5px steps.
@@ -1612,18 +1612,18 @@ class Action:
         )
         for key in half_keys:
             if key in p:
-                p[key] = Action._snap_half(float(p[key]))
+                p[key] = Action.snapHalf(float(p[key]))
 
         int_width_keys = ("stroke_circle", "arm_stroke", "stem_width")
         for key in int_width_keys:
             if key in p:
-                p[key] = Action._snap_int_px(float(p[key]), minimum=1.0)
+                p[key] = Action.snapIntPx(float(p[key]), minimum=1.0)
 
         if "stem_width_max" in p:
-            p["stem_width_max"] = max(1.0, Action._snap_half(float(p["stem_width_max"])))
+            p["stem_width_max"] = max(1.0, Action.snapHalf(float(p["stem_width_max"])))
 
         if p.get("stem_enabled") and "cx" in p and "stem_width" in p:
-            p["stem_x"] = Action._snap_half(float(p["cx"]) - (float(p["stem_width"]) / 2.0))
+            p["stem_x"] = Action.snapHalf(float(p["cx"]) - (float(p["stem_width"]) / 2.0))
 
         if "stem_x" in p and "stem_width" in p:
             p["stem_x"] = max(0.0, min(float(w) - float(p["stem_width"]), float(p["stem_x"])))
@@ -1632,8 +1632,8 @@ class Action:
         if "stem_bottom" in p:
             p["stem_bottom"] = max(0.0, min(float(h), float(p["stem_bottom"])))
 
-        p = Action._enforce_circle_connector_symmetry(p, w, h)
-        p = Action._clamp_circle_inside_canvas(p, w, h)
+        p = Action.enforceCircleConnectorSymmetry(p, w, h)
+        p = Action.clampCircleInsideCanvas(p, w, h)
 
         if (
             raw_circle_radius is not None
@@ -1642,7 +1642,7 @@ class Action:
             and "r" in p
         ):
             canvas_fit_r = float(
-                Action._max_circle_radius_inside_canvas(
+                Action.maxCircleRadiusInsideCanvas(
                     float(p["cx"]),
                     float(p["cy"]),
                     w,
@@ -1650,7 +1650,7 @@ class Action:
                     float(p.get("stroke_circle", 0.0)),
                 )
             )
-            snapped_canvas_fit_r = float(Action._snap_half(canvas_fit_r))
+            snapped_canvas_fit_r = float(Action.snapHalf(canvas_fit_r))
             radius_gap_to_canvas = canvas_fit_r - raw_circle_radius
             if (
                 snapped_canvas_fit_r > float(p["r"])
@@ -1668,12 +1668,12 @@ class Action:
         # Symmetry enforcement may reintroduce non-snapped values.
         for key in half_keys:
             if key in p:
-                p[key] = Action._snap_half(float(p[key]))
+                p[key] = Action.snapHalf(float(p[key]))
 
         return p
 
     @staticmethod
-    def _normalize_light_circle_colors(params: dict) -> dict:
+    def normalizeLightCircleColors(params: dict) -> dict:
         params["fill_gray"] = Action.LIGHT_CIRCLE_FILL_GRAY
         params["stroke_gray"] = Action.LIGHT_CIRCLE_STROKE_GRAY
         if params.get("stem_enabled"):
@@ -1683,7 +1683,7 @@ class Action:
         return params
 
     @staticmethod
-    def _normalize_ac08_line_widths(params: dict) -> dict:
+    def normalizeAc08LineWidths(params: dict) -> dict:
         """For AC08xx symbols: prefer a uniform 1px circle/connector stroke."""
         p = dict(params)
         prev_circle_stroke = float(p.get("stroke_circle", Action.AC08_STROKE_WIDTH_PX))
@@ -1709,7 +1709,7 @@ class Action:
         return p
 
     @staticmethod
-    def _estimate_border_background_gray(gray: np.ndarray) -> float:
+    def estimateBorderBackgroundGray(gray: np.ndarray) -> float:
         """Estimate badge background tone from the outer image border pixels."""
         if gray.size == 0:
             return 255.0
@@ -1720,7 +1720,7 @@ class Action:
         return float(np.median(border))
 
     @staticmethod
-    def _estimate_circle_tones_and_stroke(
+    def estimateCircleTonesAndStroke(
         gray: np.ndarray,
         cx: float,
         cy: float,
@@ -1752,7 +1752,7 @@ class Action:
         return fill_gray, ring_gray, stroke_est
 
     @staticmethod
-    def _persist_connector_length_floor(params: dict, element: str, default_ratio: float) -> None:
+    def persistConnectorLengthFloor(params: dict, element: str, default_ratio: float) -> None:
         """Persist a robust minimum connector length for later validation stages."""
         if element == "stem":
             length = float(params.get("stem_bottom", 0.0)) - float(params.get("stem_top", 0.0))
@@ -1783,7 +1783,7 @@ class Action:
         params[min_key] = float(max(float(params.get(min_key, 1.0)), length * ratio, template_length * ratio, 1.0))
 
     @staticmethod
-    def _is_ac08_small_variant(name: str, params: dict) -> tuple[bool, str, float]:
+    def isAc08SmallVariant(name: str, params: dict) -> tuple[bool, str, float]:
         """Classify tiny AC08 variants so validation can use tighter `_S` heuristics."""
         normalized_name = str(name).upper()
         min_dim = float(min(float(params.get("width", 0.0) or 0.0), float(params.get("height", 0.0) or 0.0)))
@@ -1804,10 +1804,10 @@ class Action:
         return is_small, reason, min_dim
 
     @staticmethod
-    def _configure_ac08_small_variant_mode(name: str, params: dict) -> dict:
+    def configureAc08SmallVariantMode(name: str, params: dict) -> dict:
         """Apply `_S`-specific AC08 tuning for text, connector floors, and masks."""
         p = dict(params)
-        is_small, reason, min_dim = Action._is_ac08_small_variant(name, p)
+        is_small, reason, min_dim = Action.isAc08SmallVariant(name, p)
         p["ac08_small_variant_mode"] = bool(is_small)
         p["ac08_small_variant_reason"] = reason
         p["ac08_small_variant_min_dim"] = float(min_dim)
@@ -1819,10 +1819,10 @@ class Action:
 
         if p.get("arm_enabled"):
             p["arm_len_min_ratio"] = float(max(float(p.get("arm_len_min_ratio", 0.75)), 0.78))
-            Action._persist_connector_length_floor(p, "arm", default_ratio=0.78)
+            Action.persistConnectorLengthFloor(p, "arm", default_ratio=0.78)
         if p.get("stem_enabled"):
             p["stem_len_min_ratio"] = float(max(float(p.get("stem_len_min_ratio", 0.65)), 0.70))
-            Action._persist_connector_length_floor(p, "stem", default_ratio=0.70)
+            Action.persistConnectorLengthFloor(p, "stem", default_ratio=0.70)
 
         text_mode = str(p.get("text_mode", "")).lower()
         if text_mode == "co2":
@@ -1839,7 +1839,7 @@ class Action:
         return p
 
     @staticmethod
-    def _enforce_template_circle_edge_extent(params: dict, w: int, h: int, *, anchor: str, retain_ratio: float = 0.97) -> dict:
+    def enforceTemplateCircleEdgeExtent(params: dict, w: int, h: int, *, anchor: str, retain_ratio: float = 0.97) -> dict:
         """Keep edge-anchored circles close to template edge reach.
 
         Generic safeguard for all edge-anchored connector families:
@@ -1860,7 +1860,7 @@ class Action:
         template_cx = float(p["template_circle_cx"])
         template_r = max(1.0, float(p["template_circle_radius"]))
         stroke = float(max(0.0, p.get("stroke_circle", 0.0)))
-        canvas_cap = float(Action._max_circle_radius_inside_canvas(cx, float(p.get("cy", float(h) / 2.0)), w, h, stroke))
+        canvas_cap = float(Action.maxCircleRadiusInsideCanvas(cx, float(p.get("cy", float(h) / 2.0)), w, h, stroke))
 
         if anchor == "right":
             template_extent = template_cx + template_r
@@ -1880,7 +1880,7 @@ class Action:
 
 
     @staticmethod
-    def _tune_ac08_left_connector_family(name: str, params: dict) -> dict:
+    def tuneAc08LeftConnectorFamily(name: str, params: dict) -> dict:
         """Apply shared guardrails for left-connector AC08 families.
 
         Aufgabe 4.1 groups AC0812, AC0832, AC0837 and AC0882 because they all
@@ -1909,7 +1909,7 @@ class Action:
 
         has_text = bool(p.get("draw_text", False))
         text_mode = str(p.get("text_mode", "")).lower()
-        is_small, _reason, min_dim = Action._is_ac08_small_variant(str(name), p)
+        is_small, _reason, min_dim = Action.isAc08SmallVariant(str(name), p)
         arm_ratio_floor = 0.82
         if has_text or text_mode == "path_t":
             arm_ratio_floor = 0.84
@@ -1922,7 +1922,7 @@ class Action:
         if is_small:
             radius_floor_ratio = max(radius_floor_ratio, 0.96 if not has_text else 0.94)
         p["min_circle_radius"] = float(max(float(p.get("min_circle_radius", 1.0)), template_r * radius_floor_ratio))
-        p = Action._enforce_template_circle_edge_extent(
+        p = Action.enforceTemplateCircleEdgeExtent(
             p,
             int(round(float(p.get("width", 0.0) or 0.0))) or int(round(float(p.get("badge_width", 0.0) or 0.0))) or 1,
             int(round(float(p.get("height", 0.0) or 0.0))) or int(round(float(p.get("badge_height", 0.0) or 0.0))) or 1,
@@ -1930,7 +1930,7 @@ class Action:
             retain_ratio=0.97 if not is_small else 0.96,
         )
 
-        p = Action._enforce_left_arm_badge_geometry(
+        p = Action.enforceLeftArmBadgeGeometry(
             p,
             int(round(float(p.get("width", 0.0) or 0.0))) or int(round(float(p.get("badge_width", 0.0) or 0.0))) or 1,
             int(round(float(p.get("height", 0.0) or 0.0))) or int(round(float(p.get("badge_height", 0.0) or 0.0))) or 1,
@@ -1958,11 +1958,11 @@ class Action:
             p["voc_font_scale_max"] = float(min(float(p.get("voc_font_scale_max", 0.98)), min(0.98, base_scale * 1.14)))
         elif str(p.get("text_mode", "")).lower() == "path_t":
             p["s"] = float(max(float(p.get("s", 0.0)), 0.0088 if min_dim >= 18.0 else 0.0082))
-            Action._center_glyph_bbox(p)
+            Action.centerGlyphBbox(p)
         return p
 
     @staticmethod
-    def _tune_ac08_right_connector_family(name: str, params: dict) -> dict:
+    def tuneAc08RightConnectorFamily(name: str, params: dict) -> dict:
         """Apply shared guardrails for mirrored right-connector AC08 families.
 
         Aufgabe 4.2 groups AC0810, AC0814, AC0834, AC0835, AC0838 and AC0839
@@ -1992,7 +1992,7 @@ class Action:
 
         has_text = bool(p.get("draw_text", False))
         text_mode = str(p.get("text_mode", "")).lower()
-        is_small, _reason, min_dim = Action._is_ac08_small_variant(str(name), p)
+        is_small, _reason, min_dim = Action.isAc08SmallVariant(str(name), p)
         arm_ratio_floor = 0.82
         if has_text or text_mode == "path_t":
             arm_ratio_floor = 0.84
@@ -2005,7 +2005,7 @@ class Action:
         if is_small:
             radius_floor_ratio = max(radius_floor_ratio, 0.96 if not has_text else 0.94)
         p["min_circle_radius"] = float(max(float(p.get("min_circle_radius", 1.0)), template_r * radius_floor_ratio))
-        p = Action._enforce_template_circle_edge_extent(
+        p = Action.enforceTemplateCircleEdgeExtent(
             p,
             int(round(float(p.get("width", 0.0) or 0.0))) or int(round(float(p.get("badge_width", 0.0) or 0.0))) or 1,
             int(round(float(p.get("height", 0.0) or 0.0))) or int(round(float(p.get("badge_height", 0.0) or 0.0))) or 1,
@@ -2013,7 +2013,7 @@ class Action:
             retain_ratio=0.97 if not is_small else 0.96,
         )
 
-        p = Action._enforce_right_arm_badge_geometry(
+        p = Action.enforceRightArmBadgeGeometry(
             p,
             int(round(float(p.get("width", 0.0) or 0.0))) or int(round(float(p.get("badge_width", 0.0) or 0.0))) or 1,
             int(round(float(p.get("height", 0.0) or 0.0))) or int(round(float(p.get("badge_height", 0.0) or 0.0))) or 1,
@@ -2045,7 +2045,7 @@ class Action:
         return p
 
     @staticmethod
-    def _enforce_vertical_connector_badge_geometry(params: dict, w: int, h: int) -> dict:
+    def enforceVerticalConnectorBadgeGeometry(params: dict, w: int, h: int) -> dict:
         """Ensure AC0811/AC0813-like badges keep a centered visible vertical connector."""
         p = dict(params)
         if not p.get("circle_enabled", True):
@@ -2092,7 +2092,7 @@ class Action:
         return p
 
     @staticmethod
-    def _tune_ac08_vertical_connector_family(name: str, params: dict) -> dict:
+    def tuneAc08VerticalConnectorFamily(name: str, params: dict) -> dict:
         """Apply shared guardrails for AC08 families with vertical connectors.
 
         Aufgabe 4.3 groups AC0811, AC0813, AC0831, AC0833, AC0836 and AC0881 because
@@ -2124,7 +2124,7 @@ class Action:
             p["cy"] = float(p["template_circle_cy"])
 
         has_text = bool(p.get("draw_text", False))
-        is_small, _reason, min_dim = Action._is_ac08_small_variant(str(name), p)
+        is_small, _reason, min_dim = Action.isAc08SmallVariant(str(name), p)
         template_r = float(p.get("template_circle_radius", p.get("r", 1.0)))
         radius_floor_ratio = 0.95 if not has_text else 0.93
         if is_small:
@@ -2142,7 +2142,7 @@ class Action:
                 arm_ratio_floor = max(arm_ratio_floor, 0.82)
             p["arm_len_min_ratio"] = float(max(float(p.get("arm_len_min_ratio", arm_ratio_floor)), arm_ratio_floor))
 
-        p = Action._enforce_vertical_connector_badge_geometry(
+        p = Action.enforceVerticalConnectorBadgeGeometry(
             p,
             int(round(float(p.get("width", 0.0) or 0.0))) or int(round(float(p.get("badge_width", 0.0) or 0.0))) or 1,
             int(round(float(p.get("height", 0.0) or 0.0))) or int(round(float(p.get("badge_height", 0.0) or 0.0))) or 1,
@@ -2165,7 +2165,7 @@ class Action:
         return p
 
     @staticmethod
-    def _tune_ac08_circle_text_family(name: str, params: dict) -> dict:
+    def tuneAc08CircleTextFamily(name: str, params: dict) -> dict:
         """Apply shared guardrails for connector-free AC08 circle/text badges.
 
         Aufgabe 4.4 groups AC0820 and AC0870 because they both:
@@ -2205,7 +2205,7 @@ class Action:
         canvas_w = int(round(float(p.get("width", 0.0) or p.get("badge_width", 0.0) or min_dim)))
         canvas_h = int(round(float(p.get("height", 0.0) or p.get("badge_height", 0.0) or min_dim)))
         if canvas_w > 0 and canvas_h > 0 and "cx" in p and "cy" in p:
-            canvas_cap = Action._max_circle_radius_inside_canvas(
+            canvas_cap = Action.maxCircleRadiusInsideCanvas(
                 float(p["cx"]),
                 float(p["cy"]),
                 canvas_w,
@@ -2236,25 +2236,25 @@ class Action:
                 p["voc_font_scale_max"] = float(min(float(p.get("voc_font_scale_max", 1.02)), 1.02))
         else:
             p["s"] = float(max(float(p.get("s", 0.0100)), 0.0100))
-            Action._center_glyph_bbox(p)
+            Action.centerGlyphBbox(p)
 
         return p
 
     @staticmethod
-    def _finalizeAc08Style(name: str, params: dict) -> dict:
+    def finalizeAc08Style(name: str, params: dict) -> dict:
         """Apply AC08xx palette/stroke conventions globally for semantic conversions."""
         canonical_name = str(name).upper()
         symbol_name = canonical_name.split("_", 1)[0]
         if not symbol_name.startswith("AC08"):
             return params
-        p = Action._capture_canonical_badge_colors(Action._normalize_light_circle_colors(dict(params)))
-        p = Action._enforce_semantic_component_contract(canonical_name, p)
+        p = Action.captureCanonicalBadgeColors(Action.normalizeLightCircleColors(dict(params)))
+        p = Action.enforceSemanticComponentContract(canonical_name, p)
         p["badge_symbol_name"] = symbol_name
         # During geometry fitting we intentionally keep auto-estimated colors.
         # Canonical palette values are re-applied once fitting converged.
-        p = Action._normalize_ac08_line_widths(p)
+        p = Action.normalizeAc08LineWidths(p)
         p["lock_colors"] = True
-        p = Action._normalize_centered_co2_label(p)
+        p = Action.normalizeCenteredCo2Label(p)
         if symbol_name == "AC0831" and str(p.get("text_mode", "")).lower() == "co2":
             p["fill_gray"] = 238
             p["stroke_gray"] = 155
@@ -2262,7 +2262,7 @@ class Action:
             if p.get("stem_enabled"):
                 p["stem_gray"] = 155
         if symbol_name == "AC0833" and str(p.get("text_mode", "")).lower() == "co2":
-            p = Action._tune_ac0833_co2_badge(p)
+            p = Action.tuneAc0833Co2Badge(p)
         if symbol_name == "AC0820" and str(p.get("text_mode", "")).lower() == "co2":
             # AC0820 variants (L/M/S): keep CO² superscript rendering, but do
             # not force a centered anchor mode. The optimizer may keep center_co
@@ -2323,7 +2323,7 @@ class Action:
                 p["co2_width_scale"] = float(min(float(p.get("co2_width_scale", 0.89)), 0.89))
                 p["co2_dy"] = float(max(float(p.get("co2_dy", 0.0)), 0.03 * template_r))
                 p["co2_center_co_bias"] = float(min(float(p.get("co2_center_co_bias", -0.05)), -0.05))
-            if _needsLargeCircleOverflowGuard(p) and image_width > 0.0:
+            if needsLargeCircleOverflowGuard(p) and image_width > 0.0:
                 # Generic large centered CO² rule: keep circle radius template-led
                 # while enforcing the product constraint that the diameter stays
                 # larger than half the badge width.
@@ -2411,13 +2411,13 @@ class Action:
                 geometry_reanchored_to_template = True
             if geometry_reanchored_to_template and p.get("circle_enabled", True):
                 if p.get("stem_enabled"):
-                    p = Action._align_stem_to_circle_center(p)
+                    p = Action.alignStemToCircleCenter(p)
                 if p.get("arm_enabled"):
-                    Action._reanchor_arm_to_circle_edge(p, float(p.get("r", 0.0)))
+                    Action.reanchorArmToCircleEdge(p, float(p.get("r", 0.0)))
         if p.get("stem_enabled"):
-            Action._persist_connector_length_floor(p, "stem", default_ratio=0.65)
+            Action.persistConnectorLengthFloor(p, "stem", default_ratio=0.65)
         if p.get("arm_enabled"):
-            Action._persist_connector_length_floor(p, "arm", default_ratio=0.75)
+            Action.persistConnectorLengthFloor(p, "arm", default_ratio=0.75)
         if str(p.get("text_mode", "")).lower() == "co2":
             min_dim = float(min(float(p.get("width", 0.0) or 0.0), float(p.get("height", 0.0) or 0.0)))
             if min_dim <= 0.0:
@@ -2457,7 +2457,7 @@ class Action:
                     p["voc_font_scale"] = float(max(float(p.get("voc_font_scale", 0.52)), 0.60))
                     p.setdefault("voc_font_scale_min", 0.60)
                     p.pop("voc_font_scale_max", None)
-        p = Action._configure_ac08_small_variant_mode(name, p)
+        p = Action.configureAc08SmallVariantMode(name, p)
         preserve_plain_ring_geometry = symbol_name == "AC0800"
         preserved_plain_ring_keys = {
             key: p[key]
@@ -2545,13 +2545,13 @@ class Action:
             # Keep AC0800 geometry immediately inside semantic bounds. Without
             # this clamp, fitted large variants can start validation already
             # above the plain-ring cap and never re-enter the guarded range.
-            p["r"] = float(Action._clipScalar(float(p.get("r", template_r)), min_r, max_r))
+            p["r"] = float(Action.clipScalar(float(p.get("r", template_r)), min_r, max_r))
         if p.get("draw_text", True) and "text_gray" in p:
             p["text_gray"] = int(p.get("stroke_gray", Action.LIGHT_CIRCLE_STROKE_GRAY))
         return p
 
     @staticmethod
-    def _enforce_semantic_component_contract(name: str, params: dict) -> dict:
+    def enforceSemanticComponentContract(name: str, params: dict) -> dict:
         """Strip components that are not part of the semantic symbol definition."""
         p = dict(params)
         canonical_name = str(name).upper()
@@ -2580,7 +2580,7 @@ class Action:
         return p
 
     @staticmethod
-    def _activate_ac08_adaptive_locks(
+    def activateAc08AdaptiveLocks(
         params: dict,
         logs: list[str],
         *,
@@ -2591,7 +2591,7 @@ class Action:
         return False
 
     @staticmethod
-    def _release_ac08_adaptive_locks(
+    def releaseAc08AdaptiveLocks(
         params: dict,
         logs: list[str],
         *,
@@ -2602,7 +2602,7 @@ class Action:
         return False
 
     @staticmethod
-    def _align_stem_to_circle_center(params: dict) -> dict:
+    def alignStemToCircleCenter(params: dict) -> dict:
         """Ensure vertical handle/stem extension runs through circle center.
 
         For vertical connector badges (e.g. AC0811/AC0831/AC0836), force the
@@ -2618,7 +2618,7 @@ class Action:
         return params
 
     @staticmethod
-    def _default_ac0870_params(w: int, h: int) -> dict:
+    def defaultAc0870Params(w: int, h: int) -> dict:
         scale = min(w, h) / 30.0 if min(w, h) > 0 else 1.0
         b = Action.AC0870_BASE
         params = {
@@ -2635,12 +2635,12 @@ class Action:
             "s": 0.0100 * scale,
             "text_mode": "path_t",
         }
-        Action._center_glyph_bbox(params)
-        return Action._normalize_light_circle_colors(params)
+        Action.centerGlyphBbox(params)
+        return Action.normalizeLightCircleColors(params)
 
     @staticmethod
-    def _default_ac0881_params(w: int, h: int) -> dict:
-        params = Action._default_ac0870_params(w, h)
+    def defaultAc0881Params(w: int, h: int) -> dict:
+        params = Action.defaultAc0870Params(w, h)
         params["stem_enabled"] = True
         params["stem_width"] = max(1.0, params["r"] * 0.30)
         params["stem_x"] = params["cx"] - (params["stem_width"] / 2.0)
@@ -2650,7 +2650,7 @@ class Action:
         return params
 
     @staticmethod
-    def _default_ac081x_shared(w: int, h: int) -> dict:
+    def defaultAc081xShared(w: int, h: int) -> dict:
         scale = min(1.0, (min(w, h) / 25.0)) if min(w, h) > 0 else 1.0
         cx = float(w) / 2.0
         cy = float(h) / 2.0
@@ -2672,7 +2672,7 @@ class Action:
         }
 
     @staticmethod
-    def _default_edge_anchored_circle_geometry(
+    def defaultEdgeAnchoredCircleGeometry(
         w: int,
         h: int,
         *,
@@ -2717,12 +2717,12 @@ class Action:
         }
 
     @staticmethod
-    def _default_ac0811_params(w: int, h: int) -> dict:
+    def defaultAc0811Params(w: int, h: int) -> dict:
         """AC0811 is vertically elongated: circle sits in the upper square area."""
         if w <= 0 or h <= 0:
-            return Action._default_ac081x_shared(w, h)
+            return Action.defaultAc081xShared(w, h)
 
-        circle = Action._default_edge_anchored_circle_geometry(w, h, anchor="top")
+        circle = Action.defaultEdgeAnchoredCircleGeometry(w, h, anchor="top")
         cx = float(circle["cx"])
         cy = float(circle["cy"])
         r = float(circle["r"])
@@ -2734,7 +2734,7 @@ class Action:
         stem_width_max = max(1.0, float(w) * 0.105)
         stem_len = max(2.0, float(h) - (cy + r))
 
-        return Action._normalize_light_circle_colors({
+        return Action.normalizeLightCircleColors({
             "cx": cx,
             "cy": cy,
             "r": r,
@@ -2752,7 +2752,7 @@ class Action:
         })
 
     @staticmethod
-    def _estimate_upper_circle_from_foreground(img: np.ndarray, defaults: dict) -> tuple[float, float, float] | None:
+    def estimateUpperCircleFromForeground(img: np.ndarray, defaults: dict) -> tuple[float, float, float] | None:
         """Estimate circle geometry from the upper symbol region.
 
         AC0811_S is very small and Hough-based fitting can drift on anti-aliased
@@ -2799,13 +2799,13 @@ class Action:
         max_r = min(float(w) * 0.52, float(top_limit) * 0.58)
         if max_r < min_r:
             max_r = min_r
-        r = float(Action._clipScalar(r, min_r, max_r))
-        cx = float(Action._clipScalar(cx, 0.0, float(w - 1)))
-        cy = float(Action._clipScalar(cy, 0.0, float(h - 1)))
+        r = float(Action.clipScalar(r, min_r, max_r))
+        cx = float(Action.clipScalar(cx, 0.0, float(w - 1)))
+        cy = float(Action.clipScalar(cy, 0.0, float(h - 1)))
         return cx, cy, r
 
     @staticmethod
-    def _fit_ac0811_params_from_image(img: np.ndarray, defaults: dict) -> dict:
+    def fitAc0811ParamsFromImage(img: np.ndarray, defaults: dict) -> dict:
         """Fit AC0811 while keeping the vertical stem anchored to the lower edge.
 
         AC0811 source symbols are noisy for thin vertical lines. Generic stem fitting can
@@ -2814,7 +2814,7 @@ class Action:
         geometry constrained to the semantic template (centered under the circle, extending
         to the image bottom).
         """
-        params = Action._fit_semantic_badge_from_image(img, defaults)
+        params = Action.fitSemanticBadgeFromImage(img, defaults)
         h, w = img.shape[:2]
 
         raw_stem_width = float(params.get("stem_width", defaults.get("stem_width", max(1.0, float(w) * 0.10))))
@@ -2828,7 +2828,7 @@ class Action:
         # Foreground contour estimation helps stem-only badges, but for VOC/CO2
         # labels it can lock onto text blobs and shrink the fitted circle.
         allow_upper_circle_estimate = str(params.get("text_mode", "")).lower() not in {"voc", "co2"}
-        upper_circle = Action._estimate_upper_circle_from_foreground(img, defaults) if allow_upper_circle_estimate else None
+        upper_circle = Action.estimateUpperCircleFromForeground(img, defaults) if allow_upper_circle_estimate else None
         if upper_circle is not None:
             ecx, ecy, er = upper_circle
             # Prefer robust foreground estimate for tiny/narrow AC0811 variants.
@@ -2868,7 +2868,7 @@ class Action:
             default_cy = float(defaults.get("cy", cy))
             default_r = float(defaults.get("r", r))
             params["cx"] = default_cx
-            params["cy"] = float(Action._clipScalar(cy, default_cy - 1.0, default_cy + 1.0))
+            params["cy"] = float(Action.clipScalar(cy, default_cy - 1.0, default_cy + 1.0))
             r = float(max(r, default_r * 0.97))
             params["r"] = r
             params["lock_circle_cx"] = True
@@ -2882,7 +2882,7 @@ class Action:
         # shrinks both the circle and text size in variants such as AC0836_L.
         if str(params.get("text_mode", "")).lower() in {"voc", "co2"}:
             default_r = float(defaults.get("r", r))
-            r = float(Action._clipScalar(r, default_r * 0.95, default_r * 1.08))
+            r = float(Action.clipScalar(r, default_r * 0.95, default_r * 1.08))
             params["r"] = r
 
         # AC0811 stems are intentionally thin. The generic contour fit can over-estimate
@@ -2913,13 +2913,13 @@ class Action:
         params["stem_gray"] = int(round(params.get("stroke_gray", defaults.get("stroke_gray", 152))))
         if elongated_plain_badge:
             params["stem_len_min_ratio"] = float(max(float(params.get("stem_len_min_ratio", 0.0) or 0.0), 0.80))
-            Action._persist_connector_length_floor(params, "stem", default_ratio=0.80)
+            Action.persistConnectorLengthFloor(params, "stem", default_ratio=0.80)
 
-        return Action._normalize_light_circle_colors(params)
+        return Action.normalizeLightCircleColors(params)
 
     @staticmethod
-    def _default_ac0882_params(w: int, h: int) -> dict:
-        params = Action._default_ac081x_shared(w, h)
+    def defaultAc0882Params(w: int, h: int) -> dict:
+        params = Action.defaultAc081xShared(w, h)
         arm_x2 = params["cx"] - params["r"]
         arm_x1 = max(0.0, arm_x2 - params["stem_or_arm_len"])
         params.update(
@@ -2936,11 +2936,11 @@ class Action:
                 "s": 0.0088 * min(1.0, (min(w, h) / 25.0)) if min(w, h) > 0 else 0.0088,
             }
         )
-        Action._center_glyph_bbox(params)
+        Action.centerGlyphBbox(params)
         return params
 
     @staticmethod
-    def _apply_co2_label(params: dict) -> dict:
+    def applyCo2Label(params: dict) -> dict:
         params["draw_text"] = True
         params["text_mode"] = "co2"
         params["text_gray"] = int(round(params.get("stroke_gray", Action.LIGHT_CIRCLE_STROKE_GRAY)))
@@ -2959,7 +2959,7 @@ class Action:
         return params
 
     @staticmethod
-    def _co2_layout(params: dict) -> dict[str, float | str]:
+    def co2Layout(params: dict) -> dict[str, float | str]:
         """Compute renderer-independent CO₂ text metrics and placement."""
         cx = float(params.get("cx", 0.0))
         cy = float(params.get("cy", 0.0))
@@ -3161,7 +3161,7 @@ class Action:
         }
 
     @staticmethod
-    def _apply_voc_label(params: dict) -> dict:
+    def applyVocLabel(params: dict) -> dict:
         params["draw_text"] = True
         params["text_mode"] = "voc"
         params["text_gray"] = int(round(params.get("stroke_gray", Action.LIGHT_CIRCLE_STROKE_GRAY)))
@@ -3171,7 +3171,7 @@ class Action:
         return params
 
     @staticmethod
-    def _tune_ac0832_co2_badge(params: dict) -> dict:
+    def tuneAc0832Co2Badge(params: dict) -> dict:
         """AC0832 has a compact circle; keep CO₂ comfortably inside the ring."""
         p = dict(params)
         r = float(p.get("r", 0.0))
@@ -3187,7 +3187,7 @@ class Action:
         return p
 
     @staticmethod
-    def _tune_ac0831_co2_badge(params: dict) -> dict:
+    def tuneAc0831Co2Badge(params: dict) -> dict:
         """Stabilize AC0831 text placement for vertically elongated CO² badges."""
         p = dict(params)
         r = float(p.get("r", 0.0))
@@ -3232,7 +3232,7 @@ class Action:
         return p
 
     @staticmethod
-    def _tune_ac0835_voc_badge(params: dict, w: int, h: int) -> dict:
+    def tuneAc0835VocBadge(params: dict, w: int, h: int) -> dict:
         """Keep tiny AC0835 badges from rendering the VOC label too high."""
         p = dict(params)
         r = float(p.get("r", 0.0))
@@ -3248,9 +3248,9 @@ class Action:
         return p
 
     @staticmethod
-    def _tune_ac0833_co2_badge(params: dict) -> dict:
+    def tuneAc0833Co2Badge(params: dict) -> dict:
         """Tune AC0833 CO² badges so the trailing index stays superscript."""
-        p = Action._normalize_light_circle_colors(dict(params))
+        p = Action.normalizeLightCircleColors(dict(params))
         p["co2_anchor_mode"] = str(p.get("co2_anchor_mode", "cluster"))
         p["co2_index_mode"] = "superscript"
         p["co2_superscript_offset_scale"] = float(max(float(p.get("co2_superscript_offset_scale", 0.16)), 0.16))
@@ -3258,7 +3258,7 @@ class Action:
         return p
 
     @staticmethod
-    def _tune_ac0834_co2_badge(params: dict, w: int, h: int) -> dict:
+    def tuneAc0834Co2Badge(params: dict, w: int, h: int) -> dict:
         """Stabilize tiny AC0834 badges where fitting drifts the circle downward."""
         p = dict(params)
         p["stroke_gray"] = Action.LIGHT_CIRCLE_STROKE_GRAY
@@ -3284,12 +3284,12 @@ class Action:
         return p
 
     @staticmethod
-    def _default_ac0834_params(w: int, h: int) -> dict:
+    def defaultAc0834Params(w: int, h: int) -> dict:
         """Compatibility helper for AC0834 semantic tests and callers."""
-        return Action._tune_ac0834_co2_badge(Action._apply_co2_label(Action._default_ac0814_params(w, h)), w, h)
+        return Action.tuneAc0834Co2Badge(Action.applyCo2Label(Action.defaultAc0814Params(w, h)), w, h)
 
     @staticmethod
-    def _normalize_centered_co2_label(params: dict) -> dict:
+    def normalizeCenteredCo2Label(params: dict) -> dict:
         """Normalize CO₂ label sizing for plain circular badges.
 
         This keeps CO₂ text proportionate to the inner circle diameter for any
@@ -3324,10 +3324,10 @@ class Action:
         return p
 
     @staticmethod
-    def _default_ac0812_params(w: int, h: int) -> dict:
+    def defaultAc0812Params(w: int, h: int) -> dict:
         """AC0812 is horizontally elongated: left arm, circle on the right."""
         if w <= 0 or h <= 0:
-            return Action._default_ac081x_shared(w, h)
+            return Action.defaultAc081xShared(w, h)
 
         # Like AC0811/AC0813, size from the narrow side so tiny variants keep
         # the intended visual circle diameter.
@@ -3339,7 +3339,7 @@ class Action:
         cy = float(h) / 2.0
         arm_stroke = max(1.0, float(h) * 0.10)
 
-        return Action._normalize_light_circle_colors(
+        return Action.normalizeLightCircleColors(
             {
                 "cx": cx,
                 "cy": cy,
@@ -3359,9 +3359,9 @@ class Action:
         )
 
     @staticmethod
-    def _fit_ac0812_params_from_image(img: np.ndarray, defaults: dict) -> dict:
+    def fitAc0812ParamsFromImage(img: np.ndarray, defaults: dict) -> dict:
         """Fit AC0812 while keeping the horizontal arm anchored to the left edge."""
-        params = Action._fit_semantic_badge_from_image(img, defaults)
+        params = Action.fitSemanticBadgeFromImage(img, defaults)
         h, w = img.shape[:2]
         aspect_ratio = (float(w) / float(h)) if h > 0 else 1.0
 
@@ -3384,7 +3384,7 @@ class Action:
         # instead of variant-specific hard caps. This keeps elongated connector
         # symbols (including AC0812_L-like forms) free to grow when needed while
         # still avoiding runaway radii from anti-aliased merged contours.
-        canvas_r_limit = Action._max_circle_radius_inside_canvas(cx, cy, w, h, stroke_circle)
+        canvas_r_limit = Action.maxCircleRadiusInsideCanvas(cx, cy, w, h, stroke_circle)
         max_r = max(default_r * 1.45, default_r + 3.0)
         max_r = min(max_r, canvas_r_limit)
         r = min(r, max_r)
@@ -3437,10 +3437,10 @@ class Action:
         # circle and shortening the mandatory connector arm during optimization.
         max_r_from_arm_span = max(1.0, cx - params["arm_len_min"])
         params["max_circle_radius"] = float(min(canvas_r_limit, max_r_from_arm_span))
-        return Action._normalize_light_circle_colors(params)
+        return Action.normalizeLightCircleColors(params)
 
     @staticmethod
-    def _enforce_left_arm_badge_geometry(params: dict, w: int, h: int) -> dict:
+    def enforceLeftArmBadgeGeometry(params: dict, w: int, h: int) -> dict:
         """Ensure AC0812-like badges always keep a visible left connector arm."""
         p = dict(params)
         if not p.get("circle_enabled", True):
@@ -3469,7 +3469,7 @@ class Action:
         return p
 
     @staticmethod
-    def _enforce_right_arm_badge_geometry(params: dict, w: int, h: int) -> dict:
+    def enforceRightArmBadgeGeometry(params: dict, w: int, h: int) -> dict:
         """Ensure AC0810/AC0814-like badges always keep a visible right connector arm."""
         p = dict(params)
         if not p.get("circle_enabled", True):
@@ -3518,21 +3518,21 @@ class Action:
         return p
 
     @staticmethod
-    def _default_ac0813_params(w: int, h: int) -> dict:
+    def defaultAc0813Params(w: int, h: int) -> dict:
         """AC0813 is AC0812 rotated 90° clockwise (vertical arm from top to circle)."""
         if w <= 0 or h <= 0:
-            return Action._default_ac081x_shared(w, h)
+            return Action.defaultAc081xShared(w, h)
 
         # Like other edge-anchored connector badges, size from the narrow side and
         # keep a small optical clearance from the anchored edge.
-        circle = Action._default_edge_anchored_circle_geometry(w, h, anchor="bottom")
+        circle = Action.defaultEdgeAnchoredCircleGeometry(w, h, anchor="bottom")
         cx = float(circle["cx"])
         cy = float(circle["cy"])
         r = float(circle["r"])
         stroke_circle = float(circle["stroke_circle"])
         arm_stroke = max(1.0, float(w) * 0.10)
 
-        return Action._normalize_light_circle_colors(
+        return Action.normalizeLightCircleColors(
             {
                 "cx": cx,
                 "cy": cy,
@@ -3551,9 +3551,9 @@ class Action:
         )
 
     @staticmethod
-    def _fit_ac0813_params_from_image(img: np.ndarray, defaults: dict) -> dict:
+    def fitAc0813ParamsFromImage(img: np.ndarray, defaults: dict) -> dict:
         """Fit AC0813 while keeping the vertical arm anchored to the upper edge."""
-        params = Action._fit_semantic_badge_from_image(img, defaults)
+        params = Action.fitSemanticBadgeFromImage(img, defaults)
         h, w = img.shape[:2]
         aspect_ratio = (float(h) / float(w)) if w > 0 else 1.0
 
@@ -3593,7 +3593,7 @@ class Action:
             default_cy = float(defaults.get("cy", float(h) - (float(w) / 2.0)))
             default_r = float(defaults.get("r", float(w) * 0.4))
             params["cx"] = default_cx
-            params["cy"] = float(Action._clipScalar(cy, default_cy - 0.8, default_cy + 0.8))
+            params["cy"] = float(Action.clipScalar(cy, default_cy - 0.8, default_cy + 0.8))
             params["r"] = max(r, default_r * 0.94)
             params["lock_circle_cx"] = True
             params["lock_circle_cy"] = True
@@ -3608,29 +3608,29 @@ class Action:
         params["arm_y1"] = 0.0
         params["arm_x2"] = cx
         params["arm_y2"] = max(0.0, cy - r)
-        return Action._normalize_light_circle_colors(params)
+        return Action.normalizeLightCircleColors(params)
 
     @staticmethod
-    def _rotate_semantic_badge_clockwise(params: dict, w: int, h: int) -> dict:
+    def rotateSemanticBadgeClockwise(params: dict, w: int, h: int) -> dict:
         cx = float(w) / 2.0
         cy = float(h) / 2.0
 
-        def rotate_clockwise(x: float, y: float) -> tuple[float, float]:
+        def rotateClockwise(x: float, y: float) -> tuple[float, float]:
             # image-space clockwise description maps to mathematically counter-clockwise
             # because y grows downward in raster coordinates.
             return cx - (y - cy), cy + (x - cx)
 
         rotated = dict(params)
-        rotated["cx"], rotated["cy"] = rotate_clockwise(float(params["cx"]), float(params["cy"]))
-        rotated["arm_x1"], rotated["arm_y1"] = rotate_clockwise(float(params["arm_x1"]), float(params["arm_y1"]))
-        rotated["arm_x2"], rotated["arm_y2"] = rotate_clockwise(float(params["arm_x2"]), float(params["arm_y2"]))
+        rotated["cx"], rotated["cy"] = rotateClockwise(float(params["cx"]), float(params["cy"]))
+        rotated["arm_x1"], rotated["arm_y1"] = rotateClockwise(float(params["arm_x1"]), float(params["arm_y1"]))
+        rotated["arm_x2"], rotated["arm_y2"] = rotateClockwise(float(params["arm_x2"]), float(params["arm_y2"]))
         return rotated
 
     @staticmethod
-    def _default_ac0814_params(w: int, h: int) -> dict:
+    def defaultAc0814Params(w: int, h: int) -> dict:
         """AC0814 is horizontally elongated: circle on the left, arm to the right."""
         if w <= 0 or h <= 0:
-            return Action._default_ac081x_shared(w, h)
+            return Action.defaultAc081xShared(w, h)
 
         # AC0814_L-like originals use a noticeably larger ring than the earlier
         # generic AC081x template and keep a visible left margin before the
@@ -3642,7 +3642,7 @@ class Action:
         cy = float(h) / 2.0
         arm_stroke = max(1.0, stroke_circle)
 
-        return Action._normalize_light_circle_colors(
+        return Action.normalizeLightCircleColors(
             {
                 "cx": cx,
                 "cy": cy,
@@ -3663,9 +3663,9 @@ class Action:
         )
 
     @staticmethod
-    def _fit_ac0814_params_from_image(img: np.ndarray, defaults: dict) -> dict:
+    def fitAc0814ParamsFromImage(img: np.ndarray, defaults: dict) -> dict:
         """Fit AC0814 while keeping the horizontal arm anchored to the right edge."""
-        params = Action._fit_semantic_badge_from_image(img, defaults)
+        params = Action.fitSemanticBadgeFromImage(img, defaults)
         h, w = img.shape[:2]
         aspect_ratio = (float(w) / float(h)) if h > 0 else 1.0
 
@@ -3696,7 +3696,7 @@ class Action:
             # anchored to the semantic template and only allow a tiny vertical
             # correction for raster antialiasing.
             params["cx"] = default_cx
-            params["cy"] = float(Action._clipScalar(cy, default_cy - 0.5, default_cy + 0.5))
+            params["cy"] = float(Action.clipScalar(cy, default_cy - 0.5, default_cy + 0.5))
             params["lock_circle_cx"] = True
             params["lock_circle_cy"] = True
             params["lock_arm_center_to_circle"] = True
@@ -3724,11 +3724,11 @@ class Action:
             max_left_correction = max(0.0, default_r * 0.14) if medium_plain_canvas else 0.0
             corrected_cx = default_cx
             if max_left_correction > 0.0:
-                corrected_cx = float(Action._clipScalar(cx, default_cx - max_left_correction, default_cx))
+                corrected_cx = float(Action.clipScalar(cx, default_cx - max_left_correction, default_cx))
             params["cx"] = corrected_cx
             if medium_plain_canvas:
                 params["template_circle_cx"] = corrected_cx
-            params["cy"] = float(Action._clipScalar(cy, default_cy - 0.6, default_cy + 0.6))
+            params["cy"] = float(Action.clipScalar(cy, default_cy - 0.6, default_cy + 0.6))
             params["lock_circle_cx"] = True
             params["lock_circle_cy"] = True
             params["lock_arm_center_to_circle"] = True
@@ -3758,36 +3758,36 @@ class Action:
             current_arm_len * float(params["arm_len_min_ratio"]),
             semantic_arm_len_min,
         )
-        return Action._normalize_light_circle_colors(params)
+        return Action.normalizeLightCircleColors(params)
 
     @staticmethod
-    def _default_ac0810_params(w: int, h: int) -> dict:
+    def defaultAc0810Params(w: int, h: int) -> dict:
         """AC0810 uses the same right-arm geometry as AC0814 (circle on the left)."""
-        return Action._default_ac0814_params(w, h)
+        return Action.defaultAc0814Params(w, h)
 
     @staticmethod
-    def _fit_ac0810_params_from_image(img: np.ndarray, defaults: dict) -> dict:
+    def fitAc0810ParamsFromImage(img: np.ndarray, defaults: dict) -> dict:
         """Fit AC0810 with the same right-anchored arm behavior as AC0814."""
-        return Action._fit_ac0814_params_from_image(img, defaults)
+        return Action.fitAc0814ParamsFromImage(img, defaults)
 
     @staticmethod
-    def _glyph_bbox(text_mode: str) -> tuple[int, int, int, int]:
+    def glyphBbox(text_mode: str) -> tuple[int, int, int, int]:
         if text_mode == "path_t":
             return Action.T_XMIN, Action.T_YMIN, Action.T_XMAX, Action.T_YMAX
         return Action.M_XMIN, Action.M_YMIN, Action.M_XMAX, Action.M_YMAX
 
     @staticmethod
-    def _center_glyph_bbox(params: dict) -> None:
+    def centerGlyphBbox(params: dict) -> None:
         if "s" not in params or "cx" not in params or "cy" not in params:
             return
-        xmin, ymin, xmax, ymax = Action._glyph_bbox(params.get("text_mode", "path"))
+        xmin, ymin, xmax, ymax = Action.glyphBbox(params.get("text_mode", "path"))
         glyph_width = (xmax - xmin) * params["s"]
         glyph_height = (ymax - ymin) * params["s"]
         params["tx"] = float(params["cx"] - (glyph_width / 2.0))
         params["ty"] = float(params["cy"] - (glyph_height / 2.0))
 
     @staticmethod
-    def _stabilize_semantic_circle_pose(params: dict, defaults: dict, w: int, h: int) -> dict:
+    def stabilizeSemanticCirclePose(params: dict, defaults: dict, w: int, h: int) -> dict:
         """Bound fitted circle pose to semantic template geometry.
 
         Tiny, low-information raster variants are especially sensitive to JPEG
@@ -3829,7 +3829,7 @@ class Action:
         params["r"] = float(max(min_radius, min(max_radius, current_r)))
         return params
 
-    def _fit_ac0870_params_from_image(img: np.ndarray, defaults: dict) -> dict:
+    def fitAc0870ParamsFromImage(img: np.ndarray, defaults: dict) -> dict:
         params = dict(defaults)
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         h, w = gray.shape
@@ -3879,7 +3879,7 @@ class Action:
                     params["s"] = s
                     params["text_gray"] = int(np.median(gray[text_mask_u8 > 0]))
 
-            Action._center_glyph_bbox(params)
+            Action.centerGlyphBbox(params)
 
             params["fill_gray"] = int(np.median(inner_vals))
 
@@ -3889,7 +3889,7 @@ class Action:
         return params
 
     @staticmethod
-    def _fit_semantic_badge_from_image(img: np.ndarray, defaults: dict) -> dict:
+    def fitSemanticBadgeFromImage(img: np.ndarray, defaults: dict) -> dict:
         """Fit common semantic badge primitives (circle/stem/arm) directly from image content."""
         params = dict(defaults)
         if "r" in params and "template_circle_radius" not in params:
@@ -3971,7 +3971,7 @@ class Action:
                 params["cx"] = cx
                 params["cy"] = cy
                 params["r"] = r
-                est_fill, est_ring, est_stroke = Action._estimate_circle_tones_and_stroke(
+                est_fill, est_ring, est_stroke = Action.estimateCircleTonesAndStroke(
                     gray,
                     cx,
                     cy,
@@ -3984,12 +3984,12 @@ class Action:
                 has_text = bool(params.get("draw_text", False))
                 if not has_connector and not has_text:
                     params["stroke_circle"] = float(max(1.0, est_stroke))
-                    bg_gray = Action._estimate_border_background_gray(gray)
+                    bg_gray = Action.estimateBorderBackgroundGray(gray)
                     if bg_gray >= 240.0:
                         params["background_fill"] = "#ffffff"
 
         if not bool(params.get("arm_enabled") or params.get("stem_enabled")) and not bool(params.get("draw_text", False)):
-            fg_mask = Action._foregroundMask(img)
+            fg_mask = Action.foregroundMask(img)
             edge_touch_min = max(2, int(round(min_side * 0.20)))
             touches_all_edges = all(
                 int(np.count_nonzero(edge)) >= edge_touch_min
@@ -3998,7 +3998,7 @@ class Action:
             if not touches_all_edges:
                 # JPEG-soft tiny rings may miss foreground pixels on one edge.
                 # Use a grayscale border cue as permissive fallback.
-                bg_gray = Action._estimate_border_background_gray(gray)
+                bg_gray = Action.estimateBorderBackgroundGray(gray)
                 edge_dark_min = 1
                 touches_all_edges = all(
                     int(np.count_nonzero(edge <= (bg_gray - 6.0))) >= edge_dark_min
@@ -4038,7 +4038,7 @@ class Action:
                 radius_limit_y = max(1.0, min(cy, float(h) - cy) - (stroke / 2.0))
                 max_r = max(1.0, min(radius_limit_x, radius_limit_y))
                 min_r = min(max_r, max(1.0, default_r * min_ratio))
-                params["r"] = float(Action._clipScalar(float(params.get("r", default_r)), min_r, max_r))
+                params["r"] = float(Action.clipScalar(float(params.get("r", default_r)), min_r, max_r))
 
         if params.get("stem_enabled"):
             dark = gray <= min(225, int(np.percentile(gray, 75)))
@@ -4124,14 +4124,14 @@ class Action:
                         params["arm_y2"] = float(y1 + ry + rh)
                         params["arm_stroke"] = float(max(1.0, rw))
 
-        params = Action._stabilize_semantic_circle_pose(params, defaults, w, h)
+        params = Action.stabilizeSemanticCirclePose(params, defaults, w, h)
 
         if params.get("draw_text", True) and params.get("text_mode") in {"path", "path_t"}:
-            Action._center_glyph_bbox(params)
-        return Action._normalize_light_circle_colors(params)
+            Action.centerGlyphBbox(params)
+        return Action.normalizeLightCircleColors(params)
 
     @staticmethod
-    def make_badge_params(w: int, h: int, base_name: str, img: np.ndarray | None = None) -> dict | None:
+    def makeBadgeParams(w: int, h: int, base_name: str, img: np.ndarray | None = None) -> dict | None:
         name = getBaseNameFromFile(base_name).upper()
 
         if name == "AR0100":
@@ -4151,14 +4151,14 @@ class Action:
                 "label": "M",
                 "text_mode": "path",
             }
-            Action._center_glyph_bbox(params)
+            Action.centerGlyphBbox(params)
             return params
 
         if name == "AC0870":
-            defaults = Action._default_ac0870_params(w, h)
+            defaults = Action.defaultAc0870Params(w, h)
             if img is None:
-                return Action._finalizeAc08Style(name, defaults)
-            return Action._finalizeAc08Style(name, Action._fit_ac0870_params_from_image(img, defaults))
+                return Action.finalizeAc08Style(name, defaults)
+            return Action.finalizeAc08Style(name, Action.fitAc0870ParamsFromImage(img, defaults))
 
         if name == "AC0800":
             scale = min(w, h) / 30.0 if min(w, h) > 0 else 1.0
@@ -4172,105 +4172,105 @@ class Action:
                 "draw_text": False,
             }
             if img is None:
-                return Action._finalizeAc08Style(name, defaults)
-            return Action._finalizeAc08Style(name, Action._fit_semantic_badge_from_image(img, defaults))
+                return Action.finalizeAc08Style(name, defaults)
+            return Action.finalizeAc08Style(name, Action.fitSemanticBadgeFromImage(img, defaults))
 
         if name == "AC0811":
-            defaults = Action._default_ac0811_params(w, h)
+            defaults = Action.defaultAc0811Params(w, h)
             if img is None:
-                return Action._finalizeAc08Style(name, defaults)
-            return Action._finalizeAc08Style(name, Action._fit_ac0811_params_from_image(img, defaults))
+                return Action.finalizeAc08Style(name, defaults)
+            return Action.finalizeAc08Style(name, Action.fitAc0811ParamsFromImage(img, defaults))
 
         if name == "AC0810":
-            defaults = Action._default_ac0810_params(w, h)
+            defaults = Action.defaultAc0810Params(w, h)
             if img is None:
-                return Action._finalizeAc08Style(name, defaults)
-            return Action._finalizeAc08Style(name, Action._fit_ac0810_params_from_image(img, defaults))
+                return Action.finalizeAc08Style(name, defaults)
+            return Action.finalizeAc08Style(name, Action.fitAc0810ParamsFromImage(img, defaults))
 
         if name == "AC0812":
-            defaults = Action._default_ac0812_params(w, h)
+            defaults = Action.defaultAc0812Params(w, h)
             if img is None:
-                return Action._enforce_left_arm_badge_geometry(Action._finalizeAc08Style(name, defaults), w, h)
-            return Action._enforce_left_arm_badge_geometry(
-                Action._finalizeAc08Style(name, Action._fit_ac0812_params_from_image(img, defaults)),
+                return Action.enforceLeftArmBadgeGeometry(Action.finalizeAc08Style(name, defaults), w, h)
+            return Action.enforceLeftArmBadgeGeometry(
+                Action.finalizeAc08Style(name, Action.fitAc0812ParamsFromImage(img, defaults)),
                 w,
                 h,
             )
 
         if name == "AC0813":
-            defaults = Action._default_ac0813_params(w, h)
+            defaults = Action.defaultAc0813Params(w, h)
             if img is None:
-                return Action._finalizeAc08Style(name, defaults)
-            return Action._finalizeAc08Style(name, Action._fit_ac0813_params_from_image(img, defaults))
+                return Action.finalizeAc08Style(name, defaults)
+            return Action.finalizeAc08Style(name, Action.fitAc0813ParamsFromImage(img, defaults))
 
         if name == "AC0814":
-            defaults = Action._default_ac0814_params(w, h)
+            defaults = Action.defaultAc0814Params(w, h)
             if img is None:
-                return Action._finalizeAc08Style(name, defaults)
-            return Action._finalizeAc08Style(name, Action._fit_ac0814_params_from_image(img, defaults))
+                return Action.finalizeAc08Style(name, defaults)
+            return Action.finalizeAc08Style(name, Action.fitAc0814ParamsFromImage(img, defaults))
 
         if name == "AC0881":
-            defaults = Action._default_ac0881_params(w, h)
+            defaults = Action.defaultAc0881Params(w, h)
             if img is None:
-                return Action._finalizeAc08Style(name, defaults)
-            return Action._finalizeAc08Style(name, Action._fit_semantic_badge_from_image(img, defaults))
+                return Action.finalizeAc08Style(name, defaults)
+            return Action.finalizeAc08Style(name, Action.fitSemanticBadgeFromImage(img, defaults))
 
         if name == "AC0882":
-            defaults = Action._default_ac0882_params(w, h)
+            defaults = Action.defaultAc0882Params(w, h)
             if img is None:
-                return Action._enforce_left_arm_badge_geometry(Action._finalizeAc08Style(name, defaults), w, h)
-            return Action._enforce_left_arm_badge_geometry(
-                Action._finalizeAc08Style(name, Action._fit_semantic_badge_from_image(img, defaults)),
+                return Action.enforceLeftArmBadgeGeometry(Action.finalizeAc08Style(name, defaults), w, h)
+            return Action.enforceLeftArmBadgeGeometry(
+                Action.finalizeAc08Style(name, Action.fitSemanticBadgeFromImage(img, defaults)),
                 w,
                 h,
             )
 
         if name == "AC0820":
-            defaults = Action._apply_co2_label(Action._default_ac0870_params(w, h))
+            defaults = Action.applyCo2Label(Action.defaultAc0870Params(w, h))
             if img is None:
-                return Action._finalizeAc08Style(name, defaults)
-            return Action._finalizeAc08Style(name, Action._apply_co2_label(Action._fit_semantic_badge_from_image(img, defaults)))
+                return Action.finalizeAc08Style(name, defaults)
+            return Action.finalizeAc08Style(name, Action.applyCo2Label(Action.fitSemanticBadgeFromImage(img, defaults)))
 
         if name == "AC0831":
-            defaults = Action._apply_co2_label(Action._default_ac0881_params(w, h))
+            defaults = Action.applyCo2Label(Action.defaultAc0881Params(w, h))
             if img is None:
-                return Action._finalizeAc08Style(name, Action._tune_ac0831_co2_badge(defaults))
-            return Action._finalizeAc08Style(
+                return Action.finalizeAc08Style(name, Action.tuneAc0831Co2Badge(defaults))
+            return Action.finalizeAc08Style(
                 name,
-                Action._tune_ac0831_co2_badge(Action._fit_ac0811_params_from_image(img, defaults)),
+                Action.tuneAc0831Co2Badge(Action.fitAc0811ParamsFromImage(img, defaults)),
             )
 
         if name == "AC0832":
-            defaults = Action._apply_co2_label(Action._default_ac0812_params(w, h))
+            defaults = Action.applyCo2Label(Action.defaultAc0812Params(w, h))
             if img is None:
-                return Action._enforce_left_arm_badge_geometry(
-                    Action._finalizeAc08Style(name, Action._tune_ac0832_co2_badge(defaults)),
+                return Action.enforceLeftArmBadgeGeometry(
+                    Action.finalizeAc08Style(name, Action.tuneAc0832Co2Badge(defaults)),
                     w,
                     h,
                 )
-            return Action._enforce_left_arm_badge_geometry(
-                Action._finalizeAc08Style(
+            return Action.enforceLeftArmBadgeGeometry(
+                Action.finalizeAc08Style(
                     name,
-                    Action._tune_ac0832_co2_badge(Action._fit_ac0812_params_from_image(img, defaults)),
+                    Action.tuneAc0832Co2Badge(Action.fitAc0812ParamsFromImage(img, defaults)),
                 ),
                 w,
                 h,
             )
 
         if name == "AC0833":
-            defaults = Action._tune_ac0833_co2_badge(Action._apply_co2_label(Action._default_ac0813_params(w, h)))
+            defaults = Action.tuneAc0833Co2Badge(Action.applyCo2Label(Action.defaultAc0813Params(w, h)))
             if img is None:
-                return Action._finalizeAc08Style(name, defaults)
-            return Action._finalizeAc08Style(name, Action._tune_ac0833_co2_badge(Action._fit_ac0813_params_from_image(img, defaults)))
+                return Action.finalizeAc08Style(name, defaults)
+            return Action.finalizeAc08Style(name, Action.tuneAc0833Co2Badge(Action.fitAc0813ParamsFromImage(img, defaults)))
 
         if name == "AC0834":
-            defaults = Action._apply_co2_label(Action._default_ac0814_params(w, h))
+            defaults = Action.applyCo2Label(Action.defaultAc0814Params(w, h))
             if img is None:
-                return Action._finalizeAc08Style(name, Action._tune_ac0834_co2_badge(defaults, w, h))
-            return Action._finalizeAc08Style(
+                return Action.finalizeAc08Style(name, Action.tuneAc0834Co2Badge(defaults, w, h))
+            return Action.finalizeAc08Style(
                 name,
-                Action._tune_ac0834_co2_badge(
-                    Action._fit_ac0814_params_from_image(img, defaults),
+                Action.tuneAc0834Co2Badge(
+                    Action.fitAc0814ParamsFromImage(img, defaults),
                     w,
                     h,
                 ),
@@ -4278,30 +4278,30 @@ class Action:
 
         if name == "AC0835":
             # AC0835 belongs to the right-arm VOC connector family.
-            defaults = Action._apply_voc_label(Action._default_ac0814_params(w, h))
+            defaults = Action.applyVocLabel(Action.defaultAc0814Params(w, h))
             if img is None:
-                return Action._finalizeAc08Style(name, Action._tune_ac0835_voc_badge(defaults, w, h))
-            return Action._finalizeAc08Style(
+                return Action.finalizeAc08Style(name, Action.tuneAc0835VocBadge(defaults, w, h))
+            return Action.finalizeAc08Style(
                 name,
-                Action._tune_ac0835_voc_badge(
-                    Action._fit_ac0814_params_from_image(img, defaults),
+                Action.tuneAc0835VocBadge(
+                    Action.fitAc0814ParamsFromImage(img, defaults),
                     w,
                     h,
                 ),
             )
 
         if name == "AC0836":
-            defaults = Action._apply_voc_label(Action._default_ac0881_params(w, h))
+            defaults = Action.applyVocLabel(Action.defaultAc0881Params(w, h))
             if img is None:
-                return Action._finalizeAc08Style(name, defaults)
-            return Action._finalizeAc08Style(name, Action._fit_ac0811_params_from_image(img, defaults))
+                return Action.finalizeAc08Style(name, defaults)
+            return Action.finalizeAc08Style(name, Action.fitAc0811ParamsFromImage(img, defaults))
 
         if name == "AC0837":
-            defaults = Action._apply_voc_label(Action._default_ac0812_params(w, h))
+            defaults = Action.applyVocLabel(Action.defaultAc0812Params(w, h))
             if img is None:
-                return Action._enforce_left_arm_badge_geometry(Action._finalizeAc08Style(name, defaults), w, h)
-            return Action._enforce_left_arm_badge_geometry(
-                Action._finalizeAc08Style(name, Action._fit_ac0812_params_from_image(img, defaults)),
+                return Action.enforceLeftArmBadgeGeometry(Action.finalizeAc08Style(name, defaults), w, h)
+            return Action.enforceLeftArmBadgeGeometry(
+                Action.finalizeAc08Style(name, Action.fitAc0812ParamsFromImage(img, defaults)),
                 w,
                 h,
             )
@@ -4309,23 +4309,23 @@ class Action:
         if name == "AC0838":
             # AC0838 is part of the right-arm VOC family (same geometry class as
             # AC0814/AC0839), not the top-stem family.
-            defaults = Action._apply_voc_label(Action._default_ac0814_params(w, h))
+            defaults = Action.applyVocLabel(Action.defaultAc0814Params(w, h))
             if img is None:
-                return Action._finalizeAc08Style(name, defaults)
-            return Action._finalizeAc08Style(name, Action._fit_ac0814_params_from_image(img, defaults))
+                return Action.finalizeAc08Style(name, defaults)
+            return Action.finalizeAc08Style(name, Action.fitAc0814ParamsFromImage(img, defaults))
 
         if name == "AC0839":
-            defaults = Action._apply_voc_label(Action._default_ac0814_params(w, h))
+            defaults = Action.applyVocLabel(Action.defaultAc0814Params(w, h))
             if img is None:
-                return Action._finalizeAc08Style(name, defaults)
-            return Action._finalizeAc08Style(name, Action._fit_ac0814_params_from_image(img, defaults))
+                return Action.finalizeAc08Style(name, defaults)
+            return Action.finalizeAc08Style(name, Action.fitAc0814ParamsFromImage(img, defaults))
 
         return None
 
     @staticmethod
     def generateBadgeSvg(w: int, h: int, p: dict) -> str:
-        p = Action._align_stem_to_circle_center(dict(p))
-        p = Action._quantize_badge_params(p, w, h)
+        p = Action.alignStemToCircleCenter(dict(p))
+        p = Action.quantizeBadgeParams(p, w, h)
         elements = [
             f'<svg width="{w}px" height="{h}px" viewBox="0 0 {w} {h}" xmlns="http://www.w3.org/2000/svg">'
         ]
@@ -4337,10 +4337,10 @@ class Action:
             )
 
         if p.get("arm_enabled"):
-            arm_x1 = float(Action._clipScalar(float(p.get("arm_x1", 0.0)), 0.0, float(w)))
-            arm_y1 = float(Action._clipScalar(float(p.get("arm_y1", p.get("arm_y", 0.0))), 0.0, float(h)))
-            arm_x2 = float(Action._clipScalar(float(p.get("arm_x2", 0.0)), 0.0, float(w)))
-            arm_y2 = float(Action._clipScalar(float(p.get("arm_y2", p.get("arm_y", arm_y1))), 0.0, float(h)))
+            arm_x1 = float(Action.clipScalar(float(p.get("arm_x1", 0.0)), 0.0, float(w)))
+            arm_y1 = float(Action.clipScalar(float(p.get("arm_y1", p.get("arm_y", 0.0))), 0.0, float(h)))
+            arm_x2 = float(Action.clipScalar(float(p.get("arm_x2", 0.0)), 0.0, float(w)))
+            arm_y2 = float(Action.clipScalar(float(p.get("arm_y2", p.get("arm_y", arm_y1))), 0.0, float(h)))
             arm_stroke = float(p["arm_stroke"])
 
             elements.append(
@@ -4353,10 +4353,10 @@ class Action:
             )
 
         if p.get("stem_enabled"):
-            stem_x = float(Action._clipScalar(float(p.get("stem_x", 0.0)), 0.0, float(w)))
-            stem_top = float(Action._clipScalar(float(p.get("stem_top", 0.0)), 0.0, float(h)))
+            stem_x = float(Action.clipScalar(float(p.get("stem_x", 0.0)), 0.0, float(w)))
+            stem_top = float(Action.clipScalar(float(p.get("stem_top", 0.0)), 0.0, float(h)))
             stem_width = max(0.0, min(float(p.get("stem_width", 0.0)), max(0.0, float(w) - stem_x)))
-            stem_bottom = float(Action._clipScalar(float(p.get("stem_bottom", 0.0)), stem_top, float(h)))
+            stem_bottom = float(Action.clipScalar(float(p.get("stem_bottom", 0.0)), stem_top, float(h)))
             elements.append(
                 (
                     f'  <rect x="{stem_x:.4f}" y="{stem_top:.4f}" '
@@ -4385,7 +4385,7 @@ class Action:
                     )
                 )
             elif p.get("text_mode") == "co2":
-                layout = Action._co2_layout(p)
+                layout = Action.co2Layout(p)
                 font_size = float(layout["font_size"])
                 y_text = float(layout["y_base"])
                 width_scale = float(layout.get("width_scale", 1.0))
@@ -4434,7 +4434,7 @@ class Action:
         return "\n".join(elements)
 
     @staticmethod
-    def trace_image_segment(
+    def traceImageSegment(
         img_segment: np.ndarray,
         epsilon_factor: float,
         *,
@@ -4489,7 +4489,7 @@ class Action:
         return paths
 
     @staticmethod
-    def generate_composite_svg(w: int, h: int, params: dict, folder_path: str, epsilon: float) -> str:
+    def generateCompositeSvg(w: int, h: int, params: dict, folder_path: str, epsilon: float) -> str:
         svg_elements = [
             (
                 f'<svg width="{w}" height="{h}" viewBox="0 0 {w} {h}" '
@@ -4515,7 +4515,7 @@ class Action:
                 scale_x = w / ref_w if ref_w > 0 else 1.0
                 scale_y = target_top_h / cut_y if cut_y > 0 else 1.0
                 svg_elements.extend(
-                    Action.trace_image_segment(
+                    Action.traceImageSegment(
                         top_half_img,
                         epsilon,
                         scale_x=scale_x,
@@ -4544,10 +4544,10 @@ class Action:
     @staticmethod
     def renderSvgToNumpy(svg_string: str, size_w: int, size_h: int):
         if SVG_RENDER_SUBPROCESS_ENABLED:
-            rendered = _render_svg_to_numpy_via_subprocess(svg_string, size_w, size_h)
+            rendered = renderSvgToNumpyViaSubprocess(svg_string, size_w, size_h)
             if rendered is not None:
                 return rendered
-        return _renderSvgToNumpyInprocess(svg_string, size_w, size_h)
+        return renderSvgToNumpyInprocess(svg_string, size_w, size_h)
 
     @staticmethod
     def createDiffImage(
@@ -4618,7 +4618,7 @@ class Action:
         return float(np.mean(delta2)), float(np.std(delta2))
 
     @staticmethod
-    def _fit_to_original_size(img_orig: np.ndarray, img_svg: np.ndarray | None) -> np.ndarray | None:
+    def fitToOriginalSize(img_orig: np.ndarray, img_svg: np.ndarray | None) -> np.ndarray | None:
         if img_svg is None:
             return None
         if img_svg.shape[:2] == img_orig.shape[:2]:
@@ -4626,7 +4626,7 @@ class Action:
         return cv2.resize(img_svg, (img_orig.shape[1], img_orig.shape[0]), interpolation=cv2.INTER_AREA)
 
     @staticmethod
-    def _mask_centroid_radius(mask: np.ndarray) -> tuple[float, float, float] | None:
+    def maskCentroidRadius(mask: np.ndarray) -> tuple[float, float, float] | None:
         ys, xs = np.where(mask)
         if xs.size < 5:
             return None
@@ -4636,7 +4636,7 @@ class Action:
         return cx, cy, r
 
     @staticmethod
-    def _maskBbox(mask: np.ndarray) -> tuple[float, float, float, float] | None:
+    def maskBbox(mask: np.ndarray) -> tuple[float, float, float, float] | None:
         ys, xs = np.where(mask)
         if xs.size < 3:
             return None
@@ -4645,8 +4645,8 @@ class Action:
         return x1, y1, x2, y2
 
     @staticmethod
-    def _mask_center_size(mask: np.ndarray) -> tuple[float, float, float] | None:
-        bbox = Action._maskBbox(mask)
+    def maskCenterSize(mask: np.ndarray) -> tuple[float, float, float] | None:
+        bbox = Action.maskBbox(mask)
         if bbox is None:
             return None
         x1, y1, x2, y2 = bbox
@@ -4658,7 +4658,7 @@ class Action:
         return cx, cy, size
 
     @staticmethod
-    def _mask_min_rect_center_diag(mask: np.ndarray) -> tuple[float, float, float] | None:
+    def maskMinRectCenterDiag(mask: np.ndarray) -> tuple[float, float, float] | None:
         mask_u8 = (mask.astype(np.uint8)) * 255
         contours, _ = cv2.findContours(mask_u8, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
         if not contours:
@@ -4674,13 +4674,13 @@ class Action:
         return float(cx), float(cy), diag
 
     @staticmethod
-    def _element_bbox_change_is_plausible(
+    def elementBboxChangeIsPlausible(
         mask_orig: np.ndarray,
         mask_svg: np.ndarray,
     ) -> tuple[bool, str | None]:
         """Reject clearly implausible box drifts between source and converted element."""
-        orig_bbox = Action._maskBbox(mask_orig)
-        svg_bbox = Action._maskBbox(mask_svg)
+        orig_bbox = Action.maskBbox(mask_orig)
+        svg_bbox = Action.maskBbox(mask_svg)
         if orig_bbox is None or svg_bbox is None:
             return True, None
 
@@ -4726,7 +4726,7 @@ class Action:
         return True, None
 
     @staticmethod
-    def _apply_element_alignment_step(
+    def applyElementAlignmentStep(
         params: dict,
         element: str,
         center_dx: float,
@@ -4737,7 +4737,7 @@ class Action:
         apply_circle_geometry_penalty: bool = True,
     ) -> bool:
         changed = False
-        scale = float(Action._clipScalar(diag_scale, 0.85, 1.18))
+        scale = float(Action.clipScalar(diag_scale, 0.85, 1.18))
 
         if element == "circle" and apply_circle_geometry_penalty:
             old_cx = float(params["cx"])
@@ -4752,12 +4752,12 @@ class Action:
             if bool(params.get("lock_circle_cx", False)):
                 params["cx"] = old_cx
             else:
-                params["cx"] = float(Action._clipScalar(old_cx + center_dx * 0.65, 0.0, float(w - 1)))
+                params["cx"] = float(Action.clipScalar(old_cx + center_dx * 0.65, 0.0, float(w - 1)))
             if bool(params.get("lock_circle_cy", False)):
                 params["cy"] = old_cy
             else:
-                params["cy"] = float(Action._clipScalar(old_cy + center_dy * 0.65, 0.0, float(h - 1)))
-            params["r"] = float(Action._clipScalar(old_r * scale, min_r, max_r))
+                params["cy"] = float(Action.clipScalar(old_cy + center_dy * 0.65, 0.0, float(h - 1)))
+            params["r"] = float(Action.clipScalar(old_r * scale, min_r, max_r))
             changed = (
                 abs(params["cx"] - old_cx) > 0.02
                 or abs(params["cy"] - old_cy) > 0.02
@@ -4774,12 +4774,12 @@ class Action:
             if bool(params.get("lock_stem_center_to_circle", False)):
                 stem_cx = float(params.get("cx", stem_cx))
             else:
-                stem_cx = float(Action._clipScalar(stem_cx + center_dx * 0.75, 0.0, float(w - 1)))
-            new_w = float(Action._clipScalar(old_w * scale, 1.0, float(w) * 0.22))
+                stem_cx = float(Action.clipScalar(stem_cx + center_dx * 0.75, 0.0, float(w - 1)))
+            new_w = float(Action.clipScalar(old_w * scale, 1.0, float(w) * 0.22))
             params["stem_width"] = new_w
-            params["stem_x"] = float(Action._clipScalar(stem_cx - (new_w / 2.0), 0.0, float(w) - new_w))
-            params["stem_top"] = float(Action._clipScalar(old_top + center_dy * 0.45, 0.0, float(h - 2)))
-            params["stem_bottom"] = float(Action._clipScalar(old_bottom + center_dy * 0.25, params["stem_top"] + 1.0, float(h - 1)))
+            params["stem_x"] = float(Action.clipScalar(stem_cx - (new_w / 2.0), 0.0, float(w) - new_w))
+            params["stem_top"] = float(Action.clipScalar(old_top + center_dy * 0.45, 0.0, float(h - 2)))
+            params["stem_bottom"] = float(Action.clipScalar(old_bottom + center_dy * 0.25, params["stem_top"] + 1.0, float(h - 1)))
             changed = (
                 abs(params["stem_x"] - old_x) > 0.02
                 or abs(params["stem_width"] - old_w) > 0.02
@@ -4803,11 +4803,11 @@ class Action:
             vx = (ax2 - ax1) * scale
             vy = (ay2 - ay1) * scale
 
-            params["arm_x1"] = float(Action._clipScalar(acx - (vx / 2.0), 0.0, float(w - 1)))
-            params["arm_x2"] = float(Action._clipScalar(acx + (vx / 2.0), 0.0, float(w - 1)))
-            params["arm_y1"] = float(Action._clipScalar(acy - (vy / 2.0), 0.0, float(h - 1)))
-            params["arm_y2"] = float(Action._clipScalar(acy + (vy / 2.0), 0.0, float(h - 1)))
-            params["arm_stroke"] = float(Action._clipScalar(old_stroke * scale, 1.0, float(min(w, h)) * 0.18))
+            params["arm_x1"] = float(Action.clipScalar(acx - (vx / 2.0), 0.0, float(w - 1)))
+            params["arm_x2"] = float(Action.clipScalar(acx + (vx / 2.0), 0.0, float(w - 1)))
+            params["arm_y1"] = float(Action.clipScalar(acy - (vy / 2.0), 0.0, float(h - 1)))
+            params["arm_y2"] = float(Action.clipScalar(acy + (vy / 2.0), 0.0, float(h - 1)))
+            params["arm_stroke"] = float(Action.clipScalar(old_stroke * scale, 1.0, float(min(w, h)) * 0.18))
             changed = (
                 abs(params["arm_x1"] - old_x1) > 0.02
                 or abs(params["arm_x2"] - old_x2) > 0.02
@@ -4824,21 +4824,21 @@ class Action:
             # AC0820_L can converge against the source when "CO" drifts too high.
             if mode == "co2":
                 old_dy = float(params.get("co2_dy", 0.0))
-                params["co2_dy"] = float(Action._clipScalar(old_dy + center_dy * 0.75, -0.45 * r, 0.45 * r))
+                params["co2_dy"] = float(Action.clipScalar(old_dy + center_dy * 0.75, -0.45 * r, 0.45 * r))
                 changed = abs(params["co2_dy"] - old_dy) > 0.02
             elif mode == "voc":
                 old_dy = float(params.get("voc_dy", 0.0))
-                params["voc_dy"] = float(Action._clipScalar(old_dy + center_dy * 0.75, -0.45 * r, 0.45 * r))
+                params["voc_dy"] = float(Action.clipScalar(old_dy + center_dy * 0.75, -0.45 * r, 0.45 * r))
                 changed = abs(params["voc_dy"] - old_dy) > 0.02
             elif "ty" in params:
                 old_ty = float(params.get("ty", 0.0))
-                params["ty"] = float(Action._clipScalar(old_ty + center_dy * 0.75, 0.0, float(h - 1)))
+                params["ty"] = float(Action.clipScalar(old_ty + center_dy * 0.75, 0.0, float(h - 1)))
                 changed = abs(params["ty"] - old_ty) > 0.02
 
         return changed
 
     @staticmethod
-    def _estimate_vertical_stem_from_mask(
+    def estimateVerticalStemFromMask(
         mask: np.ndarray,
         expected_cx: float,
         y_start: int,
@@ -4926,7 +4926,7 @@ class Action:
         return est_cx, est_width
 
     @staticmethod
-    def _ring_and_fill_masks(h: int, w: int, params: dict) -> tuple[np.ndarray, np.ndarray]:
+    def ringAndFillMasks(h: int, w: int, params: dict) -> tuple[np.ndarray, np.ndarray]:
         yy, xx = np.indices((h, w))
         dist = np.sqrt((xx - params["cx"]) ** 2 + (yy - params["cy"]) ** 2)
         ring_half = max(0.7, params["stroke_circle"])
@@ -4935,7 +4935,7 @@ class Action:
         return ring, fill
 
     @staticmethod
-    def _mean_gray_for_mask(img: np.ndarray, mask: np.ndarray) -> float | None:
+    def meanGrayForMask(img: np.ndarray, mask: np.ndarray) -> float | None:
         if int(mask.sum()) == 0:
             return None
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -4945,7 +4945,7 @@ class Action:
         return float(np.mean(vals))
 
     @staticmethod
-    def _element_region_mask(
+    def elementRegionMask(
         h: int,
         w: int,
         params: dict,
@@ -4973,7 +4973,7 @@ class Action:
             pad = max(1.0, params.get("arm_stroke", params.get("stem_or_arm", 1.0)) * 0.8)
             return (xx >= (x1 - pad)) & (xx <= (x2 + pad)) & (yy >= (y1 - pad)) & (yy <= (y2 + pad))
         if element == "text" and params.get("draw_text", True):
-            x1, y1, x2, y2 = Action._text_bbox(params)
+            x1, y1, x2, y2 = Action.textBbox(params)
             x1 = max(0.0, x1 - context_pad)
             y1 = max(0.0, y1 - context_pad)
             x2 = min(float(w), x2 + context_pad)
@@ -4982,7 +4982,7 @@ class Action:
         return None
 
     @staticmethod
-    def _text_bbox(params: dict) -> tuple[float, float, float, float]:
+    def textBbox(params: dict) -> tuple[float, float, float, float]:
         """Approximate text bounding box for semantic badge text modes."""
         cx = float(params.get("cx", 0.0))
         cy = float(params.get("cy", 0.0))
@@ -4997,7 +4997,7 @@ class Action:
             return (cx - (width / 2.0), y - (height / 2.0), cx + (width / 2.0), y + (height / 2.0))
 
         if mode == "co2":
-            layout = Action._co2_layout(params)
+            layout = Action.co2Layout(params)
             x1 = float(layout["x1"])
             x2 = float(layout["x2"])
             y = float(layout["y_base"])
@@ -5008,7 +5008,7 @@ class Action:
         s = float(params.get("s", 0.0))
         tx = float(params.get("tx", cx))
         ty = float(params.get("ty", cy))
-        xmin, ymin, xmax, ymax = Action._glyph_bbox(params.get("text_mode", "path"))
+        xmin, ymin, xmax, ymax = Action.glyphBbox(params.get("text_mode", "path"))
         x1 = tx + (xmin * s)
         y1 = ty + (ymin * s)
         x2 = tx + (xmax * s)
@@ -5016,7 +5016,7 @@ class Action:
         return (x1, y1, x2, y2)
 
     @staticmethod
-    def _foregroundMask(img: np.ndarray) -> np.ndarray:
+    def foregroundMask(img: np.ndarray) -> np.ndarray:
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         _, fg_otsu = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
 
@@ -5036,7 +5036,7 @@ class Action:
         return fg_u8 > 0
 
     @staticmethod
-    def _circle_from_foreground_mask(fg_mask: np.ndarray) -> tuple[float, float, float] | None:
+    def circleFromForegroundMask(fg_mask: np.ndarray) -> tuple[float, float, float] | None:
         """Infer a coarse circle from the foreground mask when Hough is too brittle."""
         mask_u8 = (fg_mask.astype(np.uint8)) * 255
         contours, _ = cv2.findContours(mask_u8, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
@@ -5095,14 +5095,14 @@ class Action:
         return best[1], best[2], best[3]
 
     @staticmethod
-    def _mask_supports_circle(mask: np.ndarray | None) -> bool:
+    def maskSupportsCircle(mask: np.ndarray | None) -> bool:
         if mask is None:
             return False
         pixel_count = int(np.count_nonzero(mask))
         if pixel_count < 4:
             return False
 
-        bbox = Action._maskBbox(mask)
+        bbox = Action.maskBbox(mask)
         if bbox is None:
             return False
         x1, y1, x2, y2 = bbox
@@ -5150,13 +5150,13 @@ class Action:
         return circularity >= 0.28 and density <= 0.72
 
     @staticmethod
-    def extract_badge_element_mask(img_orig: np.ndarray, params: dict, element: str) -> np.ndarray | None:
+    def extractBadgeElementMask(img_orig: np.ndarray, params: dict, element: str) -> np.ndarray | None:
         h, w = img_orig.shape[:2]
-        region_mask = Action._element_region_mask(h, w, params, element)
+        region_mask = Action.elementRegionMask(h, w, params, element)
         if region_mask is None:
             return None
 
-        fg_bool = Action._foregroundMask(img_orig)
+        fg_bool = Action.foregroundMask(img_orig)
         mask = fg_bool & region_mask
 
         dilate_px = int(params.get("validation_mask_dilate_px", 0) or 0)
@@ -5171,7 +5171,7 @@ class Action:
         return mask
 
     @staticmethod
-    def _element_only_params(params: dict, element: str) -> dict:
+    def elementOnlyParams(params: dict, element: str) -> dict:
         only = dict(params)
         only["draw_text"] = bool(params.get("draw_text", True) and element == "text")
         only["circle_enabled"] = element == "circle"
@@ -5180,7 +5180,7 @@ class Action:
         return only
 
     @staticmethod
-    def _masked_error(img_orig: np.ndarray, img_svg: np.ndarray, mask: np.ndarray | None) -> float:
+    def maskedError(img_orig: np.ndarray, img_svg: np.ndarray, mask: np.ndarray | None) -> float:
         if img_svg is None or mask is None or int(mask.sum()) == 0:
             return float("inf")
         if img_svg.shape[:2] != img_orig.shape[:2]:
@@ -5193,14 +5193,14 @@ class Action:
         return float(np.sum(weighted))
 
     @staticmethod
-    def _union_bbox_from_masks(mask_a: np.ndarray | None, mask_b: np.ndarray | None) -> tuple[int, int, int, int] | None:
+    def unionBboxFromMasks(mask_a: np.ndarray | None, mask_b: np.ndarray | None) -> tuple[int, int, int, int] | None:
         boxes: list[tuple[float, float, float, float]] = []
         if mask_a is not None:
-            box_a = Action._maskBbox(mask_a)
+            box_a = Action.maskBbox(mask_a)
             if box_a is not None:
                 boxes.append(box_a)
         if mask_b is not None:
-            box_b = Action._maskBbox(mask_b)
+            box_b = Action.maskBbox(mask_b)
             if box_b is not None:
                 boxes.append(box_b)
         if not boxes:
@@ -5213,7 +5213,7 @@ class Action:
         return x1, y1, x2, y2
 
     @staticmethod
-    def _masked_union_error_in_bbox(
+    def maskedUnionErrorInBbox(
         img_orig: np.ndarray,
         img_svg: np.ndarray,
         mask_orig: np.ndarray | None,
@@ -5227,7 +5227,7 @@ class Action:
         if img_svg.shape[:2] != img_orig.shape[:2]:
             img_svg = cv2.resize(img_svg, (img_orig.shape[1], img_orig.shape[0]), interpolation=cv2.INTER_AREA)
 
-        bbox = Action._union_bbox_from_masks(mask_orig, mask_svg)
+        bbox = Action.unionBboxFromMasks(mask_orig, mask_svg)
         if bbox is None:
             return float("inf")
 
@@ -5248,7 +5248,7 @@ class Action:
         return float(np.sum(gray_diff * union_mask.astype(np.float32)))
 
     @staticmethod
-    def _element_match_error(
+    def elementMatchError(
         img_orig: np.ndarray,
         img_svg: np.ndarray,
         params: dict,
@@ -5273,8 +5273,8 @@ class Action:
         if img_svg.shape[:2] != img_orig.shape[:2]:
             img_svg = cv2.resize(img_svg, (img_orig.shape[1], img_orig.shape[0]), interpolation=cv2.INTER_AREA)
 
-        local_mask_orig = mask_orig if mask_orig is not None else Action.extract_badge_element_mask(img_orig, params, element)
-        local_mask_svg = mask_svg if mask_svg is not None else Action.extract_badge_element_mask(img_svg, params, element)
+        local_mask_orig = mask_orig if mask_orig is not None else Action.extractBadgeElementMask(img_orig, params, element)
+        local_mask_svg = mask_svg if mask_svg is not None else Action.extractBadgeElementMask(img_svg, params, element)
         if local_mask_orig is None or local_mask_svg is None:
             return float("inf")
 
@@ -5283,7 +5283,7 @@ class Action:
         if orig_area <= 0.0 or svg_area <= 0.0:
             return float("inf")
 
-        photo_err = float(Action._masked_union_error_in_bbox(img_orig, img_svg, local_mask_orig, local_mask_svg))
+        photo_err = float(Action.maskedUnionErrorInBbox(img_orig, img_svg, local_mask_orig, local_mask_svg))
         if not math.isfinite(photo_err):
             return float("inf")
 
@@ -5309,8 +5309,8 @@ class Action:
         # The mask overlap terms above are necessary but can be too permissive
         # when anti-aliased JPEG edges blur circle/connector boundaries.
         if element == "circle" and apply_circle_geometry_penalty:
-            src_circle = Action._mask_centroid_radius(local_mask_orig)
-            cand_circle = Action._mask_centroid_radius(local_mask_svg)
+            src_circle = Action.maskCentroidRadius(local_mask_orig)
+            cand_circle = Action.maskCentroidRadius(local_mask_svg)
             if src_circle is not None and cand_circle is not None:
                 src_cx, src_cy, src_r = src_circle
                 cand_cx, cand_cy, cand_r = cand_circle
@@ -5327,7 +5327,7 @@ class Action:
         return float(photo_norm + (38.0 * miss) + (24.0 * extra) + (18.0 * (1.0 - iou)))
 
     @staticmethod
-    def _capture_canonical_badge_colors(params: dict) -> dict:
+    def captureCanonicalBadgeColors(params: dict) -> dict:
         p = dict(params)
         p["target_fill_gray"] = int(round(float(p.get("fill_gray", Action.LIGHT_CIRCLE_FILL_GRAY))))
         p["target_stroke_gray"] = int(round(float(p.get("stroke_gray", Action.LIGHT_CIRCLE_STROKE_GRAY))))
@@ -5338,7 +5338,7 @@ class Action:
         return p
 
     @staticmethod
-    def _apply_canonical_badge_colors(params: dict) -> dict:
+    def applyCanonicalBadgeColors(params: dict) -> dict:
         p = dict(params)
         if "target_fill_gray" in p:
             p["fill_gray"] = int(p["target_fill_gray"])
@@ -5351,7 +5351,7 @@ class Action:
         return p
 
     @staticmethod
-    def _circle_bounds(params: dict, w: int, h: int) -> tuple[float, float, float, float, float, float]:
+    def circleBounds(params: dict, w: int, h: int) -> tuple[float, float, float, float, float, float]:
         min_r = float(max(1.0, params.get("min_circle_radius", 1.0)))
         if "circle_radius_lower_bound_px" in params:
             min_r = float(max(min_r, float(params.get("circle_radius_lower_bound_px", min_r))))
@@ -5363,15 +5363,15 @@ class Action:
         if allow_overflow:
             max_r = max(max_r, float(max(w, h)) * 1.25, min_r + 0.5)
         else:
-            max_r = min(max_r, Action._max_circle_radius_inside_canvas(cx, cy, w, h, stroke))
+            max_r = min(max_r, Action.maxCircleRadiusInsideCanvas(cx, cy, w, h, stroke))
         if "max_circle_radius" in params:
             max_r = min(max_r, float(params.get("max_circle_radius", max_r)))
         return 0.0, float(w - 1), 0.0, float(h - 1), min_r, max_r
 
     @staticmethod
-    def _global_parameter_vector_bounds(params: dict, w: int, h: int) -> dict[str, tuple[float, float, bool, str]]:
+    def globalParameterVectorBounds(params: dict, w: int, h: int) -> dict[str, tuple[float, float, bool, str]]:
         """Return central bounds/lock metadata for the shared optimization vector."""
-        x_low, x_high, y_low, y_high, r_low, r_high = Action._circle_bounds(params, w, h)
+        x_low, x_high, y_low, y_high, r_low, r_high = Action.circleBounds(params, w, h)
         max_x = float(max(0, w - 1))
         max_y = float(max(0, h - 1))
         text_scale = float(params.get("text_scale", 1.0))
@@ -5396,11 +5396,11 @@ class Action:
         }
 
     @staticmethod
-    def _log_global_parameter_vector(logs: list[str], params: dict, w: int, h: int, *, label: str) -> None:
-        vector = GlobalParameterVector.from_params(params)
-        bounds = Action._global_parameter_vector_bounds(params, w, h)
+    def logGlobalParameterVector(logs: list[str], params: dict, w: int, h: int, *, label: str) -> None:
+        vector = GlobalParameterVector.fromParams(params)
+        bounds = Action.globalParameterVectorBounds(params, w, h)
 
-        def _fmt_value(value: float | None) -> str:
+        def fmtValue(value: float | None) -> str:
             return "-" if value is None else f"{float(value):.3f}"
 
         entries = []
@@ -5429,7 +5429,7 @@ class Action:
         logs.append(f"{label}: global_vector " + "; ".join(entries))
 
     @staticmethod
-    def _stochastic_survivor_scalar(
+    def stochasticSurvivorScalar(
         current_value: float,
         low: float,
         high: float,
@@ -5440,13 +5440,13 @@ class Action:
         iterations: int = 20,
     ) -> tuple[float, float, bool]:
         """Random 3-candidate survivor search for a scalar parameter."""
-        cur = float(snap(float(Action._clipScalar(current_value, low, high))))
+        cur = float(snap(float(Action.clipScalar(current_value, low, high))))
         best_value = cur
         best_err = float(evaluate(best_value))
         if not math.isfinite(best_err):
             return best_value, best_err, False
 
-        rng = Action._make_rng(int(seed) + int(Action.STOCHASTIC_SEED_OFFSET))
+        rng = Action.makeRng(int(seed) + int(Action.STOCHASTIC_SEED_OFFSET))
         span = max(0.5, abs(high - low) * 0.22)
         improved = False
         stable_rounds = 0
@@ -5454,7 +5454,7 @@ class Action:
         for _ in range(max(1, iterations)):
             candidates = [best_value]
             for _j in range(2):
-                sample = float(Action._clipScalar(rng.normal(best_value, span), low, high))
+                sample = float(Action.clipScalar(rng.normal(best_value, span), low, high))
                 candidates.append(float(snap(sample)))
 
             scored: list[tuple[float, float]] = []
@@ -5480,7 +5480,7 @@ class Action:
         return best_value, best_err, improved
 
     @staticmethod
-    def _optimize_circle_pose_stochastic_survivor(
+    def optimizeCirclePoseStochasticSurvivor(
         img_orig: np.ndarray,
         params: dict,
         logs: list[str],
@@ -5496,21 +5496,21 @@ class Action:
             return False
 
         h, w = img_orig.shape[:2]
-        Action._log_global_parameter_vector(logs, params, w, h, label="circle: survivor-start")
-        x_low, x_high, y_low, y_high, r_low, r_high = Action._circle_bounds(params, w, h)
+        Action.logGlobalParameterVector(logs, params, w, h, label="circle: survivor-start")
+        x_low, x_high, y_low, y_high, r_low, r_high = Action.circleBounds(params, w, h)
         current = (
-            Action._snap_half(float(params.get("cx", (w - 1) / 2.0))),
-            Action._snap_half(float(params.get("cy", (h - 1) / 2.0))),
-            Action._snap_half(float(params.get("r", max(1.0, min(w, h) * 0.3)))),
+            Action.snapHalf(float(params.get("cx", (w - 1) / 2.0))),
+            Action.snapHalf(float(params.get("cy", (h - 1) / 2.0))),
+            Action.snapHalf(float(params.get("r", max(1.0, min(w, h) * 0.3)))),
         )
         lock_cx = bool(params.get("lock_circle_cx", False))
         lock_cy = bool(params.get("lock_circle_cy", False))
-        rng = Action._make_rng(835 + int(Action.STOCHASTIC_RUN_SEED) + int(Action.STOCHASTIC_SEED_OFFSET))
+        rng = Action.makeRng(835 + int(Action.STOCHASTIC_RUN_SEED) + int(Action.STOCHASTIC_SEED_OFFSET))
 
-        def eval_pose(candidate: tuple[float, float, float]) -> float:
+        def evalPose(candidate: tuple[float, float, float]) -> float:
             cx, cy, rad = candidate
             return float(
-                Action._element_error_for_circle_pose(
+                Action.elementErrorForCirclePose(
                     img_orig,
                     params,
                     cx_value=cx,
@@ -5520,7 +5520,7 @@ class Action:
             )
 
         best = current
-        best_err = eval_pose(best)
+        best_err = evalPose(best)
         if not math.isfinite(best_err):
             return False
 
@@ -5535,14 +5535,14 @@ class Action:
                 if lock_cx:
                     cx = best[0]
                 else:
-                    cx = Action._snap_half(float(Action._clipScalar(rng.normal(best[0], spread_xy), x_low, x_high)))
+                    cx = Action.snapHalf(float(Action.clipScalar(rng.normal(best[0], spread_xy), x_low, x_high)))
                 if lock_cy:
                     cy = best[1]
                 else:
-                    cy = Action._snap_half(float(Action._clipScalar(rng.normal(best[1], spread_xy), y_low, y_high)))
-                rad = Action._snap_half(float(Action._clipScalar(rng.normal(best[2], spread_r), r_low, r_high)))
+                    cy = Action.snapHalf(float(Action.clipScalar(rng.normal(best[1], spread_xy), y_low, y_high)))
+                rad = Action.snapHalf(float(Action.clipScalar(rng.normal(best[2], spread_r), r_low, r_high)))
                 cand = (cx, cy, rad)
-                candidates.append((cand, eval_pose(cand)))
+                candidates.append((cand, evalPose(cand)))
 
             finite = [pair for pair in candidates if math.isfinite(pair[1])]
             if not finite:
@@ -5565,21 +5565,21 @@ class Action:
             logs.append("circle: Stochastic-Survivor keine relevante Verbesserung")
             return False
 
-        updated_vector = GlobalParameterVector.from_params(params)
+        updated_vector = GlobalParameterVector.fromParams(params)
         updated_vector = dataclasses.replace(updated_vector, cx=best[0], cy=best[1], r=best[2])
-        params.update(updated_vector.apply_to_params(params))
+        params.update(updated_vector.applyToParams(params))
         if params.get("arm_enabled"):
-            Action._reanchor_arm_to_circle_edge(params, best[2])
+            Action.reanchorArmToCircleEdge(params, best[2])
         if params.get("stem_enabled"):
             params["stem_top"] = float(params.get("cy", 0.0)) + best[2]
-        Action._log_global_parameter_vector(logs, params, w, h, label="circle: survivor-final")
+        Action.logGlobalParameterVector(logs, params, w, h, label="circle: survivor-final")
         logs.append(
             f"circle: Stochastic-Survivor übernommen (cx={best[0]:.3f}, cy={best[1]:.3f}, r={best[2]:.3f}, err={best_err:.3f})"
         )
         return True
 
     @staticmethod
-    def _optimize_circle_pose_adaptive_domain(
+    def optimizeCirclePoseAdaptiveDomain(
         img_orig: np.ndarray,
         params: dict,
         logs: list[str],
@@ -5599,37 +5599,37 @@ class Action:
             return False
 
         h, w = img_orig.shape[:2]
-        Action._log_global_parameter_vector(logs, params, w, h, label="circle: adaptive-start")
-        x_low, x_high, y_low, y_high, r_low, r_high = Action._circle_bounds(params, w, h)
+        Action.logGlobalParameterVector(logs, params, w, h, label="circle: adaptive-start")
+        x_low, x_high, y_low, y_high, r_low, r_high = Action.circleBounds(params, w, h)
         lock_cx = bool(params.get("lock_circle_cx", False))
         lock_cy = bool(params.get("lock_circle_cy", False))
 
         current = (
-            Action._snap_half(float(params.get("cx", (w - 1) / 2.0))),
-            Action._snap_half(float(params.get("cy", (h - 1) / 2.0))),
-            Action._snap_half(float(params.get("r", max(1.0, min(w, h) * 0.3)))),
+            Action.snapHalf(float(params.get("cx", (w - 1) / 2.0))),
+            Action.snapHalf(float(params.get("cy", (h - 1) / 2.0))),
+            Action.snapHalf(float(params.get("r", max(1.0, min(w, h) * 0.3)))),
         )
 
-        def clamp_pose(candidate: tuple[float, float, float]) -> tuple[float, float, float]:
+        def clampPose(candidate: tuple[float, float, float]) -> tuple[float, float, float]:
             cx, cy, rad = candidate
             if lock_cx:
                 cx = current[0]
             else:
-                cx = Action._snap_half(float(Action._clipScalar(cx, x_low, x_high)))
+                cx = Action.snapHalf(float(Action.clipScalar(cx, x_low, x_high)))
             if lock_cy:
                 cy = current[1]
             else:
-                cy = Action._snap_half(float(Action._clipScalar(cy, y_low, y_high)))
-            rad = Action._snap_half(float(Action._clipScalar(rad, r_low, r_high)))
+                cy = Action.snapHalf(float(Action.clipScalar(cy, y_low, y_high)))
+            rad = Action.snapHalf(float(Action.clipScalar(rad, r_low, r_high)))
             return cx, cy, rad
 
         cache: dict[tuple[float, float, float], float] = {}
 
-        def eval_pose(candidate: tuple[float, float, float]) -> float:
-            pose = clamp_pose(candidate)
+        def evalPose(candidate: tuple[float, float, float]) -> float:
+            pose = clampPose(candidate)
             if pose not in cache:
                 cache[pose] = float(
-                    Action._element_error_for_circle_pose(
+                    Action.elementErrorForCirclePose(
                         img_orig,
                         params,
                         cx_value=pose[0],
@@ -5639,8 +5639,8 @@ class Action:
                 )
             return cache[pose]
 
-        best = clamp_pose(current)
-        best_err = eval_pose(best)
+        best = clampPose(current)
+        best_err = evalPose(best)
         if not math.isfinite(best_err):
             return False
 
@@ -5653,7 +5653,7 @@ class Action:
             "r_high": r_high,
         }
 
-        rng = Action._make_rng(2027 + int(Action.STOCHASTIC_RUN_SEED) + int(Action.STOCHASTIC_SEED_OFFSET))
+        rng = Action.makeRng(2027 + int(Action.STOCHASTIC_RUN_SEED) + int(Action.STOCHASTIC_SEED_OFFSET))
         improved = False
         flat_plateau_hits = 0
 
@@ -5679,8 +5679,8 @@ class Action:
                 else:
                     cy = float(rng.uniform(domain["cy_low"], domain["cy_high"]))
                 rad = float(rng.uniform(domain["r_low"], domain["r_high"]))
-                pose = clamp_pose((cx, cy, rad))
-                samples.append((pose, eval_pose(pose)))
+                pose = clampPose((cx, cy, rad))
+                samples.append((pose, evalPose(pose)))
 
             finite = [pair for pair in samples if math.isfinite(pair[1])]
             if not finite:
@@ -5701,8 +5701,8 @@ class Action:
             pmax_cx = max(p[0] for p in plateau_points)
             pmax_cy = max(p[1] for p in plateau_points)
             pmax_r = max(p[2] for p in plateau_points)
-            plateau_mid = clamp_pose(((pmin_cx + pmax_cx) / 2.0, (pmin_cy + pmax_cy) / 2.0, (pmin_r + pmax_r) / 2.0))
-            plateau_mid_err = eval_pose(plateau_mid)
+            plateau_mid = clampPose(((pmin_cx + pmax_cx) / 2.0, (pmin_cy + pmax_cy) / 2.0, (pmin_r + pmax_r) / 2.0))
+            plateau_mid_err = evalPose(plateau_mid)
 
             candidate_best = round_best
             candidate_err = round_best_err
@@ -5722,10 +5722,10 @@ class Action:
                     f"(cx={best[0]:.3f}, cy={best[1]:.3f}, r={best[2]:.3f})"
                 )
             )
-            round_vector = GlobalParameterVector.from_params(params)
+            round_vector = GlobalParameterVector.fromParams(params)
             round_vector = dataclasses.replace(round_vector, cx=best[0], cy=best[1], r=best[2])
-            round_params = round_vector.apply_to_params(params)
-            Action._log_global_parameter_vector(logs, round_params, w, h, label=f"circle: Runde {_round + 1}")
+            round_params = round_vector.applyToParams(params)
+            Action.logGlobalParameterVector(logs, round_params, w, h, label=f"circle: Runde {_round + 1}")
 
             # Iteratively shrink domain around the stable near-optimal region.
             shrink = 0.58
@@ -5757,14 +5757,14 @@ class Action:
             logs.append("circle: Adaptive-Domain-Suche keine relevante Verbesserung")
             return False
 
-        updated_vector = GlobalParameterVector.from_params(params)
+        updated_vector = GlobalParameterVector.fromParams(params)
         updated_vector = dataclasses.replace(updated_vector, cx=best[0], cy=best[1], r=best[2])
-        params.update(updated_vector.apply_to_params(params))
+        params.update(updated_vector.applyToParams(params))
         if params.get("arm_enabled"):
-            Action._reanchor_arm_to_circle_edge(params, best[2])
+            Action.reanchorArmToCircleEdge(params, best[2])
         if params.get("stem_enabled"):
             params["stem_top"] = float(params.get("cy", 0.0)) + best[2]
-        Action._log_global_parameter_vector(logs, params, w, h, label="circle: adaptive-final")
+        Action.logGlobalParameterVector(logs, params, w, h, label="circle: adaptive-final")
 
         boundary_hit = (
             (not lock_cx and (abs(best[0] - x_low) <= 0.01 or abs(best[0] - x_high) <= 0.01))
@@ -5781,10 +5781,10 @@ class Action:
         return True
 
     @staticmethod
-    def _full_badge_error_for_params(img_orig: np.ndarray, params: dict) -> float:
+    def fullBadgeErrorForParams(img_orig: np.ndarray, params: dict) -> float:
         """Evaluate full-image error for an already prepared badge parameter dict."""
         h, w = img_orig.shape[:2]
-        render = Action._fit_to_original_size(
+        render = Action.fitToOriginalSize(
             img_orig,
             Action.renderSvgToNumpy(Action.generateBadgeSvg(w, h, params), w, h),
         )
@@ -5793,7 +5793,7 @@ class Action:
         return float(Action.calculateError(img_orig, render))
 
     @staticmethod
-    def _optimize_global_parameter_vector_sampling(
+    def optimizeGlobalParameterVectorSampling(
         img_orig: np.ndarray,
         params: dict,
         logs: list[str],
@@ -5809,8 +5809,8 @@ class Action:
         near_optimum_eps_rel = 0.02
 
         h, w = img_orig.shape[:2]
-        bounds = Action._global_parameter_vector_bounds(params, w, h)
-        vector = GlobalParameterVector.from_params(params)
+        bounds = Action.globalParameterVectorBounds(params, w, h)
+        vector = GlobalParameterVector.fromParams(params)
 
         active_keys: list[str] = []
         for key in ("cx", "cy", "r", "stem_x", "stem_width", "text_x", "text_y", "text_scale"):
@@ -5828,31 +5828,31 @@ class Action:
             )
             return False
 
-        def clamp_vector(candidate: GlobalParameterVector) -> GlobalParameterVector:
+        def clampVector(candidate: GlobalParameterVector) -> GlobalParameterVector:
             data = dataclasses.asdict(candidate)
             for key in active_keys:
                 low, high, _locked, _source = bounds[key]
                 current_value = float(data[key])
-                clipped = float(Action._clipScalar(current_value, low, high))
+                clipped = float(Action.clipScalar(current_value, low, high))
                 if key in {"cx", "cy", "r", "stem_x", "stem_width", "text_x", "text_y"}:
-                    clipped = float(Action._snap_half(clipped))
+                    clipped = float(Action.snapHalf(clipped))
                 data[key] = clipped
             return GlobalParameterVector(**data)
 
-        def eval_vector(candidate: GlobalParameterVector) -> float:
-            probe = candidate.apply_to_params(params)
+        def evalVector(candidate: GlobalParameterVector) -> float:
+            probe = candidate.applyToParams(params)
             if probe.get("arm_enabled"):
-                Action._reanchor_arm_to_circle_edge(probe, float(probe.get("r", 0.0)))
+                Action.reanchorArmToCircleEdge(probe, float(probe.get("r", 0.0)))
             if probe.get("stem_enabled"):
                 probe["stem_top"] = float(probe.get("cy", 0.0)) + float(probe.get("r", 0.0))
                 if bool(probe.get("lock_stem_center_to_circle", False)):
                     stem_w = float(probe.get("stem_width", 1.0))
-                    probe["stem_x"] = Action._snap_half(
+                    probe["stem_x"] = Action.snapHalf(
                         max(0.0, min(float(w) - stem_w, float(probe.get("cx", 0.0)) - (stem_w / 2.0)))
                     )
-            return Action._full_badge_error_for_params(img_orig, probe)
+            return Action.fullBadgeErrorForParams(img_orig, probe)
 
-        def within_hard_bounds(candidate: GlobalParameterVector) -> tuple[bool, str]:
+        def withinHardBounds(candidate: GlobalParameterVector) -> tuple[bool, str]:
             for key in active_keys:
                 low, high, _locked, _source = bounds[key]
                 value = float(getattr(candidate, key))
@@ -5860,9 +5860,9 @@ class Action:
                     return False, f"{key}={value:.3f} außerhalb [{low:.3f}, {high:.3f}]"
             return True, "ok"
 
-        rng = Action._make_rng(4099 + int(Action.STOCHASTIC_RUN_SEED) + int(Action.STOCHASTIC_SEED_OFFSET))
-        best = clamp_vector(vector)
-        best_err = eval_vector(best)
+        rng = Action.makeRng(4099 + int(Action.STOCHASTIC_RUN_SEED) + int(Action.STOCHASTIC_SEED_OFFSET))
+        best = clampVector(vector)
+        best_err = evalVector(best)
         if not math.isfinite(best_err):
             return False
         improved = False
@@ -5884,9 +5884,9 @@ class Action:
                 for key in active_keys:
                     low, high, _locked, _source = bounds[key]
                     sigma = spans[key]
-                    sample_data[key] = float(Action._clipScalar(rng.normal(float(sample_data[key]), sigma), low, high))
-                candidate = clamp_vector(GlobalParameterVector(**sample_data))
-                candidate_err = eval_vector(candidate)
+                    sample_data[key] = float(Action.clipScalar(rng.normal(float(sample_data[key]), sigma), low, high))
+                candidate = clampVector(GlobalParameterVector(**sample_data))
+                candidate_err = evalVector(candidate)
                 if math.isfinite(candidate_err):
                     finite_round.append((candidate, candidate_err))
                 if math.isfinite(candidate_err) and candidate_err + 0.05 < best_err:
@@ -5927,14 +5927,14 @@ class Action:
                     for key in active_keys:
                         weighted_data[key] = float(weighted_data[key]) / (1.0 + weight_sum)
                     centroid_raw = GlobalParameterVector(**weighted_data)
-                    centroid = clamp_vector(centroid_raw)
-                    centroid_safe, centroid_msg = within_hard_bounds(centroid)
+                    centroid = clampVector(centroid_raw)
+                    centroid_safe, centroid_msg = withinHardBounds(centroid)
                     if not centroid_safe:
                         logs.append(
                             f"global-search: schwerpunkt verworfen (runde={round_idx + 1}, grund={centroid_msg})"
                         )
                     else:
-                        centroid_err = eval_vector(centroid)
+                        centroid_err = evalVector(centroid)
                         if math.isfinite(centroid_err):
                             near_best_margin = max(0.02, epsilon * 0.30)
                             if centroid_err <= round_best_err + near_best_margin and len(plateau) >= 3:
@@ -6008,17 +6008,17 @@ class Action:
 
         old_values = {key: float(getattr(vector, key)) for key in active_keys}
         new_values = {key: float(getattr(best, key)) for key in active_keys}
-        params.update(best.apply_to_params(params))
+        params.update(best.applyToParams(params))
         delta_labels = [
             f"{key} {old_values[key]:.3f}->{new_values[key]:.3f}"
             for key in active_keys
             if abs(new_values[key] - old_values[key]) >= 0.01
         ]
         if params.get("arm_enabled"):
-            Action._reanchor_arm_to_circle_edge(params, float(params.get("r", 0.0)))
+            Action.reanchorArmToCircleEdge(params, float(params.get("r", 0.0)))
         if params.get("stem_enabled"):
             params["stem_top"] = float(params.get("cy", 0.0)) + float(params.get("r", 0.0))
-        Action._log_global_parameter_vector(logs, params, w, h, label="global-search: final")
+        Action.logGlobalParameterVector(logs, params, w, h, label="global-search: final")
         logs.append(
             "global-search: übernommen "
             f"(best_err={best_err:.3f}, verbessert={', '.join(delta_labels) if delta_labels else 'keine sichtbare delta-liste'})"
@@ -6026,7 +6026,7 @@ class Action:
         return True
 
     @staticmethod
-    def _enforce_semantic_connector_expectation(base_name: str, semantic_elements: list[str], params: dict, w: int, h: int) -> dict:
+    def enforceSemanticConnectorExpectation(base_name: str, semantic_elements: list[str], params: dict, w: int, h: int) -> dict:
         """Restore mandatory connector geometry for directional semantic badges."""
         normalized_base = getBaseNameFromFile(str(base_name)).upper()
         normalized_elements = [str(elem).lower() for elem in (semantic_elements or [])]
@@ -6037,13 +6037,13 @@ class Action:
         # extraction temporarily drops arm flags, regenerate canonical connector geometry
         # from the fitted circle before final SVG serialization.
         if normalized_base in {"AC0812", "AC0837", "AC0882"} or expects_left_arm:
-            return Action._enforce_left_arm_badge_geometry(params, w, h)
+            return Action.enforceLeftArmBadgeGeometry(params, w, h)
         if normalized_base in {"AC0810", "AC0814", "AC0834", "AC0838", "AC0839"} or expects_right_arm:
-            return Action._enforce_right_arm_badge_geometry(params, w, h)
+            return Action.enforceRightArmBadgeGeometry(params, w, h)
         return params
 
     @staticmethod
-    def _element_width_key_and_bounds(
+    def elementWidthKeyAndBounds(
         element: str, params: dict, w: int, h: int, img_orig: np.ndarray | None = None
     ) -> tuple[str, float, float] | None:
         lock_strokes = bool(params.get("lock_stroke_widths"))
@@ -6088,8 +6088,8 @@ class Action:
                 # family constrains it via explicit min/max overrides.
                 high = 1.60
                 if img_orig is not None:
-                    text_mask = Action.extract_badge_element_mask(img_orig, params, "text")
-                    bbox = Action._maskBbox(text_mask) if text_mask is not None else None
+                    text_mask = Action.extractBadgeElementMask(img_orig, params, "text")
+                    bbox = Action.maskBbox(text_mask) if text_mask is not None else None
                     if bbox is not None:
                         x1, y1, x2, y2 = bbox
                         text_w = max(1.0, (float(x2) - float(x1)) + 1.0)
@@ -6122,27 +6122,27 @@ class Action:
         return None
 
     @staticmethod
-    def _element_error_for_width(img_orig: np.ndarray, params: dict, element: str, width_value: float) -> float:
+    def elementErrorForWidth(img_orig: np.ndarray, params: dict, element: str, width_value: float) -> float:
         h, w = img_orig.shape[:2]
         probe = dict(params)
-        info = Action._element_width_key_and_bounds(element, probe, w, h, img_orig=img_orig)
+        info = Action.elementWidthKeyAndBounds(element, probe, w, h, img_orig=img_orig)
         if info is None:
             return float("inf")
         key, low, high = info
-        probe[key] = float(Action._clipScalar(width_value, low, high))
+        probe[key] = float(Action.clipScalar(width_value, low, high))
         if key == "stem_width" and probe.get("stem_enabled"):
             probe["stem_x"] = float(probe.get("cx", probe.get("stem_x", 0.0))) - (probe["stem_width"] / 2.0)
-        elem_svg = Action.generateBadgeSvg(w, h, Action._element_only_params(probe, element))
-        elem_render = Action._fit_to_original_size(img_orig, Action.renderSvgToNumpy(elem_svg, w, h))
+        elem_svg = Action.generateBadgeSvg(w, h, Action.elementOnlyParams(probe, element))
+        elem_render = Action.fitToOriginalSize(img_orig, Action.renderSvgToNumpy(elem_svg, w, h))
         if elem_render is None:
             return float("inf")
-        mask_orig = Action.extract_badge_element_mask(img_orig, probe, element)
+        mask_orig = Action.extractBadgeElementMask(img_orig, probe, element)
         if mask_orig is None:
             return float("inf")
-        return Action._element_match_error(img_orig, elem_render, probe, element, mask_orig=mask_orig)
+        return Action.elementMatchError(img_orig, elem_render, probe, element, mask_orig=mask_orig)
 
     @staticmethod
-    def _element_error_for_circle_radius(img_orig: np.ndarray, params: dict, radius_value: float) -> float:
+    def elementErrorForCircleRadius(img_orig: np.ndarray, params: dict, radius_value: float) -> float:
         h, w = img_orig.shape[:2]
         if not params.get("circle_enabled", True):
             return float("inf")
@@ -6158,17 +6158,17 @@ class Action:
         max_r = max(min_r, (float(min(w, h)) * 0.48))
         if bool(probe.get("allow_circle_overflow", False)):
             max_r = max(max_r, float(max(w, h)) * 1.25, min_r + 0.5)
-        probe["r"] = float(Action._clipScalar(radius_value, min_r, max_r))
-        probe = Action._clamp_circle_inside_canvas(probe, w, h)
+        probe["r"] = float(Action.clipScalar(radius_value, min_r, max_r))
+        probe = Action.clampCircleInsideCanvas(probe, w, h)
 
         if probe.get("arm_enabled"):
-            Action._reanchor_arm_to_circle_edge(probe, float(probe["r"]))
+            Action.reanchorArmToCircleEdge(probe, float(probe["r"]))
 
         if probe.get("stem_enabled"):
             probe["stem_top"] = float(probe.get("cy", 0.0)) + float(probe["r"])
 
-        elem_svg = Action.generateBadgeSvg(w, h, Action._element_only_params(probe, "circle"))
-        elem_render = Action._fit_to_original_size(img_orig, Action.renderSvgToNumpy(elem_svg, w, h))
+        elem_svg = Action.generateBadgeSvg(w, h, Action.elementOnlyParams(probe, "circle"))
+        elem_render = Action.fitToOriginalSize(img_orig, Action.renderSvgToNumpy(elem_svg, w, h))
         if elem_render is None:
             return float("inf")
 
@@ -6180,18 +6180,18 @@ class Action:
         source_mask_params = dict(params)
         source_mask_params["r"] = max(float(params.get("r", 0.0)), float(probe["r"]))
         if source_mask_params.get("arm_enabled"):
-            Action._reanchor_arm_to_circle_edge(source_mask_params, float(source_mask_params["r"]))
+            Action.reanchorArmToCircleEdge(source_mask_params, float(source_mask_params["r"]))
         if source_mask_params.get("stem_enabled"):
             source_mask_params["stem_top"] = float(source_mask_params.get("cy", 0.0)) + float(source_mask_params["r"])
 
-        mask_orig = Action.extract_badge_element_mask(img_orig, source_mask_params, "circle")
+        mask_orig = Action.extractBadgeElementMask(img_orig, source_mask_params, "circle")
         if mask_orig is None:
             return float("inf")
-        mask_svg = Action.extract_badge_element_mask(elem_render, probe, "circle")
+        mask_svg = Action.extractBadgeElementMask(elem_render, probe, "circle")
         if mask_svg is None:
             return float("inf")
 
-        return Action._element_match_error(
+        return Action.elementMatchError(
             img_orig,
             elem_render,
             probe,
@@ -6201,7 +6201,7 @@ class Action:
         )
 
     @staticmethod
-    def _full_badge_error_for_circle_radius(img_orig: np.ndarray, params: dict, radius_value: float) -> float:
+    def fullBadgeErrorForCircleRadius(img_orig: np.ndarray, params: dict, radius_value: float) -> float:
         """Evaluate the full SVG roundtrip error for a specific circle radius."""
         h, w = img_orig.shape[:2]
         if not params.get("circle_enabled", True):
@@ -6218,22 +6218,22 @@ class Action:
         max_r = max(min_r, (float(min(w, h)) * 0.48))
         if bool(probe.get("allow_circle_overflow", False)):
             max_r = max(max_r, float(max(w, h)) * 1.25, min_r + 0.5)
-        probe["r"] = float(Action._clipScalar(radius_value, min_r, max_r))
-        probe = Action._clamp_circle_inside_canvas(probe, w, h)
+        probe["r"] = float(Action.clipScalar(radius_value, min_r, max_r))
+        probe = Action.clampCircleInsideCanvas(probe, w, h)
 
         if probe.get("arm_enabled"):
-            Action._reanchor_arm_to_circle_edge(probe, float(probe["r"]))
+            Action.reanchorArmToCircleEdge(probe, float(probe["r"]))
 
         if probe.get("stem_enabled"):
             probe["stem_top"] = float(probe.get("cy", 0.0)) + float(probe["r"])
 
-        render = Action._fit_to_original_size(img_orig, Action.renderSvgToNumpy(Action.generateBadgeSvg(w, h, probe), w, h))
+        render = Action.fitToOriginalSize(img_orig, Action.renderSvgToNumpy(Action.generateBadgeSvg(w, h, probe), w, h))
         if render is None:
             return float("inf")
         return float(Action.calculateError(img_orig, render))
 
     @staticmethod
-    def _select_circle_radius_plateau_candidate(
+    def selectCircleRadiusPlateauCandidate(
         img_orig: np.ndarray,
         params: dict,
         evaluations: dict[float, float],
@@ -6249,12 +6249,12 @@ class Action:
         plateau = [(radius, err) for radius, err in finite if err <= best_err + plateau_eps]
         if not plateau:
             try:
-                full_err = float(Action._full_badge_error_for_circle_radius(img_orig, params, best_radius))
+                full_err = float(Action.fullBadgeErrorForCircleRadius(img_orig, params, best_radius))
             except Exception:
                 full_err = float("inf")
             return best_radius, best_err, full_err
 
-        plateau_mid = Action._snap_half((plateau[0][0] + plateau[-1][0]) / 2.0)
+        plateau_mid = Action.snapHalf((plateau[0][0] + plateau[-1][0]) / 2.0)
         candidate_radii = {best_radius, plateau_mid}
         if len(plateau) >= 2:
             candidate_radii.add(plateau[-1][0])
@@ -6270,7 +6270,7 @@ class Action:
         if bool(params.get("allow_circle_overflow", False)):
             max_r = max(max_r, min_r + 0.5)
         bounded_candidates = sorted(
-            float(Action._clipScalar(Action._snap_half(float(radius)), min_r, max_r))
+            float(Action.clipScalar(Action.snapHalf(float(radius)), min_r, max_r))
             for radius in candidate_radii
         )
 
@@ -6280,11 +6280,11 @@ class Action:
                 elem_err = float(evaluations[radius])
             else:
                 try:
-                    elem_err = float(Action._element_error_for_circle_radius(img_orig, params, radius))
+                    elem_err = float(Action.elementErrorForCircleRadius(img_orig, params, radius))
                 except Exception:
                     elem_err = float("inf")
             try:
-                full_err = float(Action._full_badge_error_for_circle_radius(img_orig, params, radius))
+                full_err = float(Action.fullBadgeErrorForCircleRadius(img_orig, params, radius))
             except Exception:
                 full_err = float("inf")
             if not math.isfinite(elem_err) and not math.isfinite(full_err):
@@ -6308,7 +6308,7 @@ class Action:
 
 
     @staticmethod
-    def _element_error_for_circle_pose(
+    def elementErrorForCirclePose(
         img_orig: np.ndarray,
         params: dict,
         *,
@@ -6322,33 +6322,33 @@ class Action:
 
         probe = dict(params)
         max_r = max(1.0, (float(min(w, h)) * 0.48))
-        probe["cx"] = Action._snap_half(float(Action._clipScalar(cx_value, 0.0, float(w - 1))))
-        probe["cy"] = Action._snap_half(float(Action._clipScalar(cy_value, 0.0, float(h - 1))))
+        probe["cx"] = Action.snapHalf(float(Action.clipScalar(cx_value, 0.0, float(w - 1))))
+        probe["cy"] = Action.snapHalf(float(Action.clipScalar(cy_value, 0.0, float(h - 1))))
         min_r = float(max(1.0, probe.get("min_circle_radius", 1.0)))
-        probe["r"] = Action._snap_half(float(Action._clipScalar(radius_value, min_r, max_r)))
-        probe = Action._clamp_circle_inside_canvas(probe, w, h)
+        probe["r"] = Action.snapHalf(float(Action.clipScalar(radius_value, min_r, max_r)))
+        probe = Action.clampCircleInsideCanvas(probe, w, h)
 
         if probe.get("arm_enabled"):
-            Action._reanchor_arm_to_circle_edge(probe, float(probe["r"]))
+            Action.reanchorArmToCircleEdge(probe, float(probe["r"]))
 
         if probe.get("stem_enabled"):
             probe["stem_top"] = float(probe.get("cy", 0.0)) + float(probe["r"])
 
-        elem_svg = Action.generateBadgeSvg(w, h, Action._element_only_params(probe, "circle"))
-        elem_render = Action._fit_to_original_size(img_orig, Action.renderSvgToNumpy(elem_svg, w, h))
+        elem_svg = Action.generateBadgeSvg(w, h, Action.elementOnlyParams(probe, "circle"))
+        elem_render = Action.fitToOriginalSize(img_orig, Action.renderSvgToNumpy(elem_svg, w, h))
         if elem_render is None:
             return float("inf")
 
         # See `_element_error_for_circle_radius`: use a stable source mask that
         # is independent from the tested candidate pose.
-        mask_orig = Action.extract_badge_element_mask(img_orig, params, "circle")
+        mask_orig = Action.extractBadgeElementMask(img_orig, params, "circle")
         if mask_orig is None:
             return float("inf")
-        mask_svg = Action.extract_badge_element_mask(elem_render, probe, "circle")
+        mask_svg = Action.extractBadgeElementMask(elem_render, probe, "circle")
         if mask_svg is None:
             return float("inf")
 
-        return Action._element_match_error(
+        return Action.elementMatchError(
             img_orig,
             elem_render,
             probe,
@@ -6358,7 +6358,7 @@ class Action:
         )
 
     @staticmethod
-    def _reanchor_arm_to_circle_edge(params: dict, radius: float) -> None:
+    def reanchorArmToCircleEdge(params: dict, radius: float) -> None:
         """Keep arm orientation but snap the circle-side endpoint to the new radius."""
         if not params.get("arm_enabled"):
             return
@@ -6396,7 +6396,7 @@ class Action:
                 params["arm_y1"] = (cy - radius - attach_offset) if y2 <= cy else (cy + radius + attach_offset)
 
     @staticmethod
-    def _optimize_circle_center_bracket(img_orig: np.ndarray, params: dict, logs: list[str]) -> bool:
+    def optimizeCircleCenterBracket(img_orig: np.ndarray, params: dict, logs: list[str]) -> bool:
         if not params.get("circle_enabled", True):
             return False
 
@@ -6413,37 +6413,37 @@ class Action:
             return False
 
         max_shift = max(1.0, float(min(w, h)) * 0.16)
-        x_low = Action._snap_half(max(0.0, current_cx - max_shift))
-        x_high = Action._snap_half(min(float(w - 1), current_cx + max_shift))
-        y_low = Action._snap_half(max(0.0, current_cy - max_shift))
-        y_high = Action._snap_half(min(float(h - 1), current_cy + max_shift))
+        x_low = Action.snapHalf(max(0.0, current_cx - max_shift))
+        x_high = Action.snapHalf(min(float(w - 1), current_cx + max_shift))
+        y_low = Action.snapHalf(max(0.0, current_cy - max_shift))
+        y_high = Action.snapHalf(min(float(h - 1), current_cy + max_shift))
 
         evaluations: dict[tuple[float, float], float] = {}
 
-        def eval_center(cx_value: float, cy_value: float) -> float:
-            cx_snap = Action._snap_half(float(Action._clipScalar(cx_value, 0.0, float(w - 1))))
-            cy_snap = Action._snap_half(float(Action._clipScalar(cy_value, 0.0, float(h - 1))))
+        def evalCenter(cx_value: float, cy_value: float) -> float:
+            cx_snap = Action.snapHalf(float(Action.clipScalar(cx_value, 0.0, float(w - 1))))
+            cy_snap = Action.snapHalf(float(Action.clipScalar(cy_value, 0.0, float(h - 1))))
             key = (cx_snap, cy_snap)
             if key not in evaluations:
                 probe = dict(params)
                 probe["cx"] = cx_snap
                 probe["cy"] = cy_snap
-                evaluations[key] = float(Action._element_error_for_circle_radius(img_orig, probe, current_r))
+                evaluations[key] = float(Action.elementErrorForCircleRadius(img_orig, probe, current_r))
             return evaluations[key]
 
-        def optimize_axis(low: float, high: float, fixed: float, axis: str) -> float:
+        def optimizeAxis(low: float, high: float, fixed: float, axis: str) -> float:
             if high - low < 0.05:
-                return Action._snap_half((low + high) / 2.0)
-            mid = Action._snap_half((low + high) / 2.0)
+                return Action.snapHalf((low + high) / 2.0)
+            mid = Action.snapHalf((low + high) / 2.0)
             for _ in range(8):
                 if axis == "x":
-                    low_err = eval_center(low, fixed)
-                    mid_err = eval_center(mid, fixed)
-                    high_err = eval_center(high, fixed)
+                    low_err = evalCenter(low, fixed)
+                    mid_err = evalCenter(mid, fixed)
+                    high_err = evalCenter(high, fixed)
                 else:
-                    low_err = eval_center(fixed, low)
-                    mid_err = eval_center(fixed, mid)
-                    high_err = eval_center(fixed, high)
+                    low_err = evalCenter(fixed, low)
+                    mid_err = evalCenter(fixed, mid)
+                    high_err = evalCenter(fixed, high)
 
                 if not all(math.isfinite(v) for v in (low_err, mid_err, high_err)):
                     return mid
@@ -6460,23 +6460,23 @@ class Action:
 
                 if high - low < 0.05:
                     break
-                next_mid = Action._snap_half((low + high) / 2.0)
+                next_mid = Action.snapHalf((low + high) / 2.0)
                 if abs(next_mid - mid) < 0.02:
                     break
                 mid = next_mid
             points = [low, mid, high]
             if axis == "x":
-                return min(points, key=lambda v: eval_center(v, fixed))
-            return min(points, key=lambda v: eval_center(fixed, v))
+                return min(points, key=lambda v: evalCenter(v, fixed))
+            return min(points, key=lambda v: evalCenter(fixed, v))
 
         best_cx = current_cx
         best_cy = current_cy
         if not lock_cx:
-            best_cx = optimize_axis(x_low, x_high, current_cy, "x")
+            best_cx = optimizeAxis(x_low, x_high, current_cy, "x")
         if not lock_cy:
-            best_cy = optimize_axis(y_low, y_high, best_cx, "y")
+            best_cy = optimizeAxis(y_low, y_high, best_cx, "y")
 
-        best_err = eval_center(best_cx, best_cy)
+        best_err = evalCenter(best_cx, best_cy)
         if not math.isfinite(best_err):
             logs.append("circle: Mittelpunkt-Bracketing abgebrochen wegen nicht-finitem Fehler")
             return False
@@ -6490,12 +6490,12 @@ class Action:
         params["cx"] = best_cx
         params["cy"] = best_cy
         if params.get("arm_enabled"):
-            Action._reanchor_arm_to_circle_edge(params, current_r)
+            Action.reanchorArmToCircleEdge(params, current_r)
         if params.get("stem_enabled"):
             params["stem_top"] = float(params.get("cy", 0.0)) + current_r
             if bool(params.get("lock_stem_center_to_circle", False)):
                 stem_w = float(params.get("stem_width", 1.0))
-                params["stem_x"] = Action._snap_half(max(0.0, min(float(w) - stem_w, best_cx - (stem_w / 2.0))))
+                params["stem_x"] = Action.snapHalf(max(0.0, min(float(w) - stem_w, best_cx - (stem_w / 2.0))))
 
         logs.append(
             f"circle: Mittelpunkt-Bracketing cx {current_cx:.3f}->{best_cx:.3f}, cy {current_cy:.3f}->{best_cy:.3f} (best_err={best_err:.3f})"
@@ -6503,7 +6503,7 @@ class Action:
         return True
 
     @staticmethod
-    def _optimize_circle_radius_bracket(img_orig: np.ndarray, params: dict, logs: list[str]) -> bool:
+    def optimizeCircleRadiusBracket(img_orig: np.ndarray, params: dict, logs: list[str]) -> bool:
         if not params.get("circle_enabled", True):
             return False
 
@@ -6547,30 +6547,30 @@ class Action:
 
         low = math.floor(low_bound * 2.0) / 2.0
         high = math.ceil(high_bound * 2.0) / 2.0
-        low = float(Action._clipScalar(low, low_bound, high_bound))
-        high = float(Action._clipScalar(high, low_bound, high_bound))
-        mid = Action._snap_half(float(Action._clipScalar(current, low, high)))
-        mid = float(Action._clipScalar(mid, low, high))
+        low = float(Action.clipScalar(low, low_bound, high_bound))
+        high = float(Action.clipScalar(high, low_bound, high_bound))
+        mid = Action.snapHalf(float(Action.clipScalar(current, low, high)))
+        mid = float(Action.clipScalar(mid, low, high))
         if high - low < 0.05:
             return False
 
         evaluations: dict[float, float] = {}
 
-        def eval_radius(radius: float) -> float:
-            clipped = float(Action._clipScalar(radius, low_bound, high_bound))
+        def evalRadius(radius: float) -> float:
+            clipped = float(Action.clipScalar(radius, low_bound, high_bound))
             snapped = float(round(clipped, 3))
             if snapped not in evaluations:
                 try:
-                    evaluations[snapped] = float(Action._element_error_for_circle_radius(img_orig, params, snapped))
+                    evaluations[snapped] = float(Action.elementErrorForCircleRadius(img_orig, params, snapped))
                 except Exception:
                     evaluations[snapped] = float("inf")
             return evaluations[snapped]
 
         max_rounds = 12
         for _ in range(max_rounds):
-            low_err = eval_radius(low)
-            mid_err = eval_radius(mid)
-            high_err = eval_radius(high)
+            low_err = evalRadius(low)
+            mid_err = evalRadius(mid)
+            high_err = evalRadius(high)
             if not all(math.isfinite(v) for v in (low_err, mid_err, high_err)):
                 # Gracefully contract away from unsupported samples (e.g. in
                 # tests that patch radius evaluators for a sparse subset).
@@ -6599,12 +6599,12 @@ class Action:
 
             if high - low < 0.05:
                 break
-            next_mid = Action._snap_half((low + high) / 2.0)
+            next_mid = Action.snapHalf((low + high) / 2.0)
             if abs(next_mid - mid) < 0.02:
                 break
             mid = next_mid
 
-        best_r, best_err, best_full_err = Action._select_circle_radius_plateau_candidate(img_orig, params, evaluations, current)
+        best_r, best_err, best_full_err = Action.selectCircleRadiusPlateauCandidate(img_orig, params, evaluations, current)
         candidate_dump = ", ".join(f"{v:.3f}->{e:.3f}" for v, e in sorted(evaluations.items()))
         if abs(best_r - current) < 0.02:
             logs.append(
@@ -6616,7 +6616,7 @@ class Action:
         old_r = current
         params["r"] = best_r
         if params.get("arm_enabled"):
-            Action._reanchor_arm_to_circle_edge(params, best_r)
+            Action.reanchorArmToCircleEdge(params, best_r)
             # Preserve strictly vertical arm orientation for AC0813/AC0833-like
             # badges: the circle-side endpoint must stay exactly on the circle
             # edge after radius updates.
@@ -6645,7 +6645,7 @@ class Action:
         return True
 
     @staticmethod
-    def _optimize_circle_pose_multistart(img_orig: np.ndarray, params: dict, logs: list[str]) -> bool:
+    def optimizeCirclePoseMultistart(img_orig: np.ndarray, params: dict, logs: list[str]) -> bool:
         """Jointly optimize circle center+radius via a compact multi-start grid."""
         if not params.get("circle_enabled", True):
             return False
@@ -6662,7 +6662,7 @@ class Action:
 
         shift = max(0.5, float(min(w, h)) * 0.08)
         radius_span = max(0.5, current_r * 0.12)
-        _x_low, _x_high, _y_low, _y_high, min_r, max_r = Action._circle_bounds(params, w, h)
+        _x_low, _x_high, _y_low, _y_high, min_r, max_r = Action.circleBounds(params, w, h)
 
         fine_shift = min(1.0, shift)
         fine_radius = min(0.5, radius_span)
@@ -6671,29 +6671,29 @@ class Action:
             cx_candidates = [float(current_cx)]
         else:
             cx_candidates = [
-                float(Action._clipScalar(current_cx + offset, 0.0, float(w - 1)))
+                float(Action.clipScalar(current_cx + offset, 0.0, float(w - 1)))
                 for offset in (-shift, -fine_shift, 0.0, fine_shift, shift)
             ]
         if lock_cy:
             cy_candidates = [float(current_cy)]
         else:
             cy_candidates = [
-                float(Action._clipScalar(current_cy + offset, 0.0, float(h - 1)))
+                float(Action.clipScalar(current_cy + offset, 0.0, float(h - 1)))
                 for offset in (-shift, -fine_shift, 0.0, fine_shift, shift)
             ]
 
         r_candidates = [
-            float(Action._clipScalar(current_r + offset, min_r, max_r))
+            float(Action.clipScalar(current_r + offset, min_r, max_r))
             for offset in (-radius_span, -fine_radius, 0.0, fine_radius, radius_span)
         ]
 
         evaluations: dict[tuple[float, float, float], float] = {}
 
-        def eval_pose(cx: float, cy: float, rad: float) -> float:
+        def evalPose(cx: float, cy: float, rad: float) -> float:
             key = (cx, cy, rad)
             if key not in evaluations:
                 evaluations[key] = float(
-                    Action._element_error_for_circle_pose(
+                    Action.elementErrorForCirclePose(
                         img_orig,
                         params,
                         cx_value=cx,
@@ -6704,12 +6704,12 @@ class Action:
             return evaluations[key]
 
         best = (float(current_cx), float(current_cy), float(current_r))
-        best_err = eval_pose(*best)
+        best_err = evalPose(*best)
 
         for cx in cx_candidates:
             for cy in cy_candidates:
                 for rad in r_candidates:
-                    err = eval_pose(cx, cy, rad)
+                    err = evalPose(cx, cy, rad)
                     if math.isfinite(err) and err + 0.05 < best_err:
                         best = (cx, cy, rad)
                         best_err = err
@@ -6729,12 +6729,12 @@ class Action:
         params["cy"] = best_cy
         params["r"] = best_r
         if params.get("arm_enabled"):
-            Action._reanchor_arm_to_circle_edge(params, best_r)
+            Action.reanchorArmToCircleEdge(params, best_r)
         if params.get("stem_enabled"):
             params["stem_top"] = float(params.get("cy", 0.0)) + best_r
             if bool(params.get("lock_stem_center_to_circle", False)):
                 stem_w = float(params.get("stem_width", 1.0))
-                params["stem_x"] = Action._snap_half(max(0.0, min(float(w) - stem_w, best_cx - (stem_w / 2.0))))
+                params["stem_x"] = Action.snapHalf(max(0.0, min(float(w) - stem_w, best_cx - (stem_w / 2.0))))
 
         logs.append(
             f"circle: Joint-Multistart cx {current_cx:.3f}->{best_cx:.3f}, cy {current_cy:.3f}->{best_cy:.3f}, r {current_r:.3f}->{best_r:.3f} (best_err={best_err:.3f})"
@@ -6748,25 +6748,25 @@ class Action:
         )
         if at_boundary:
             logs.append("circle: Joint-Multistart liegt am Rand; starte adaptive Domain-Suche")
-            improved = Action._optimize_circle_pose_adaptive_domain(img_orig, params, logs)
+            improved = Action.optimizeCirclePoseAdaptiveDomain(img_orig, params, logs)
             if not improved:
                 logs.append("circle: Adaptive-Domain-Suche ohne Gewinn; fallback auf stochastic survivor")
-                Action._optimize_circle_pose_stochastic_survivor(img_orig, params, logs)
+                Action.optimizeCirclePoseStochasticSurvivor(img_orig, params, logs)
         return True
 
     @staticmethod
-    def _element_error_for_extent(img_orig: np.ndarray, params: dict, element: str, extent_value: float) -> float:
+    def elementErrorForExtent(img_orig: np.ndarray, params: dict, element: str, extent_value: float) -> float:
         h, w = img_orig.shape[:2]
         probe = dict(params)
 
         if element == "stem" and probe.get("stem_enabled"):
             min_len = 1.0
             max_len = float(h)
-            new_len = float(Action._clipScalar(extent_value, min_len, max_len))
+            new_len = float(Action.clipScalar(extent_value, min_len, max_len))
             center = (float(probe.get("stem_top", 0.0)) + float(probe.get("stem_bottom", 0.0))) / 2.0
             half = new_len / 2.0
-            probe["stem_top"] = float(Action._clipScalar(center - half, 0.0, float(h - 1)))
-            probe["stem_bottom"] = float(Action._clipScalar(center + half, probe["stem_top"] + 1.0, float(h)))
+            probe["stem_top"] = float(Action.clipScalar(center - half, 0.0, float(h - 1)))
+            probe["stem_bottom"] = float(Action.clipScalar(center + half, probe["stem_top"] + 1.0, float(h)))
 
         elif element == "arm" and probe.get("arm_enabled"):
             x1 = float(probe.get("arm_x1", 0.0))
@@ -6778,7 +6778,7 @@ class Action:
             cur_len = float(math.hypot(dx, dy))
             if cur_len <= 1e-6:
                 return float("inf")
-            new_len = float(Action._clipScalar(extent_value, 1.0, float(max(w, h))))
+            new_len = float(Action.clipScalar(extent_value, 1.0, float(max(w, h))))
             ux = dx / cur_len
             uy = dy / cur_len
 
@@ -6786,7 +6786,7 @@ class Action:
                 # Keep the endpoint at the circle edge fixed and optimize the free side
                 # length only. Symmetric center-scaling shortens both ends and can make
                 # AC0812/AC0814 horizontal connectors visibly too short.
-                Action._reanchor_arm_to_circle_edge(probe, float(probe.get("r", 0.0)))
+                Action.reanchorArmToCircleEdge(probe, float(probe.get("r", 0.0)))
                 ax1 = float(probe.get("arm_x1", x1))
                 ay1 = float(probe.get("arm_y1", y1))
                 ax2 = float(probe.get("arm_x2", x2))
@@ -6799,36 +6799,36 @@ class Action:
 
                 if d1 <= d2:
                     ix, iy = ax1, ay1
-                    probe["arm_x2"] = float(Action._clipScalar(ix + (ux * new_len), 0.0, float(w - 1)))
-                    probe["arm_y2"] = float(Action._clipScalar(iy + (uy * new_len), 0.0, float(h - 1)))
+                    probe["arm_x2"] = float(Action.clipScalar(ix + (ux * new_len), 0.0, float(w - 1)))
+                    probe["arm_y2"] = float(Action.clipScalar(iy + (uy * new_len), 0.0, float(h - 1)))
                 else:
                     ix, iy = ax2, ay2
-                    probe["arm_x1"] = float(Action._clipScalar(ix - (ux * new_len), 0.0, float(w - 1)))
-                    probe["arm_y1"] = float(Action._clipScalar(iy - (uy * new_len), 0.0, float(h - 1)))
+                    probe["arm_x1"] = float(Action.clipScalar(ix - (ux * new_len), 0.0, float(w - 1)))
+                    probe["arm_y1"] = float(Action.clipScalar(iy - (uy * new_len), 0.0, float(h - 1)))
             else:
                 cx = (x1 + x2) / 2.0
                 cy = (y1 + y2) / 2.0
                 half = new_len / 2.0
-                probe["arm_x1"] = float(Action._clipScalar(cx - (ux * half), 0.0, float(w - 1)))
-                probe["arm_y1"] = float(Action._clipScalar(cy - (uy * half), 0.0, float(h - 1)))
-                probe["arm_x2"] = float(Action._clipScalar(cx + (ux * half), 0.0, float(w - 1)))
-                probe["arm_y2"] = float(Action._clipScalar(cy + (uy * half), 0.0, float(h - 1)))
+                probe["arm_x1"] = float(Action.clipScalar(cx - (ux * half), 0.0, float(w - 1)))
+                probe["arm_y1"] = float(Action.clipScalar(cy - (uy * half), 0.0, float(h - 1)))
+                probe["arm_x2"] = float(Action.clipScalar(cx + (ux * half), 0.0, float(w - 1)))
+                probe["arm_y2"] = float(Action.clipScalar(cy + (uy * half), 0.0, float(h - 1)))
         else:
             return float("inf")
 
-        elem_svg = Action.generateBadgeSvg(w, h, Action._element_only_params(probe, element))
-        elem_render = Action._fit_to_original_size(img_orig, Action.renderSvgToNumpy(elem_svg, w, h))
+        elem_svg = Action.generateBadgeSvg(w, h, Action.elementOnlyParams(probe, element))
+        elem_render = Action.fitToOriginalSize(img_orig, Action.renderSvgToNumpy(elem_svg, w, h))
         if elem_render is None:
             return float("inf")
 
-        mask_orig = Action.extract_badge_element_mask(img_orig, probe, element)
+        mask_orig = Action.extractBadgeElementMask(img_orig, probe, element)
         if mask_orig is None:
             return float("inf")
 
-        return Action._element_match_error(img_orig, elem_render, probe, element, mask_orig=mask_orig)
+        return Action.elementMatchError(img_orig, elem_render, probe, element, mask_orig=mask_orig)
 
     @staticmethod
-    def _optimize_element_extent_bracket(img_orig: np.ndarray, params: dict, element: str, logs: list[str]) -> bool:
+    def optimizeElementExtentBracket(img_orig: np.ndarray, params: dict, element: str, logs: list[str]) -> bool:
         h, w = img_orig.shape[:2]
         if element == "stem" and params.get("stem_enabled"):
             current = float(params.get("stem_bottom", 0.0)) - float(params.get("stem_top", 0.0))
@@ -6908,15 +6908,15 @@ class Action:
 
         candidates = sorted(
             {
-                Action._snap_half(low),
-                Action._snap_half(low + (high - low) * 0.25),
-                Action._snap_half((low + high) / 2.0),
-                Action._snap_half(low + (high - low) * 0.75),
-                Action._snap_half(high),
-                Action._snap_half(Action._clipScalar(current, low, high)),
+                Action.snapHalf(low),
+                Action.snapHalf(low + (high - low) * 0.25),
+                Action.snapHalf((low + high) / 2.0),
+                Action.snapHalf(low + (high - low) * 0.75),
+                Action.snapHalf(high),
+                Action.snapHalf(Action.clipScalar(current, low, high)),
             }
         )
-        candidate_errors = [Action._element_error_for_extent(img_orig, params, element, v) for v in candidates]
+        candidate_errors = [Action.elementErrorForExtent(img_orig, params, element, v) for v in candidates]
         if not all(math.isfinite(e) for e in candidate_errors):
             logs.append(
                 f"{element}: Längen-Bracketing abgebrochen ({key_label}) wegen nicht-finiten Fehlern "
@@ -6924,17 +6924,17 @@ class Action:
             )
             return False
 
-        best_idx = Action._argmin_index(candidate_errors)
+        best_idx = Action.argminIndex(candidate_errors)
         best_len = float(candidates[best_idx])
 
         boundary_best = abs(best_len - low) < 0.02 or abs(best_len - high) < 0.02
         if boundary_best:
-            s_best, s_err, s_improved = Action._stochastic_survivor_scalar(
+            s_best, s_err, s_improved = Action.stochasticSurvivorScalar(
                 current,
                 low,
                 high,
-                lambda v: Action._element_error_for_extent(img_orig, params, element, float(v)),
-                snap=Action._snap_half,
+                lambda v: Action.elementErrorForExtent(img_orig, params, element, float(v)),
+                snap=Action.snapHalf,
                 seed=1103 if element == "stem" else 1109,
             )
             if s_improved:
@@ -6958,19 +6958,19 @@ class Action:
                 is_bottom_anchored = float(params.get("stem_bottom", 0.0)) >= float(h) - 0.5
                 if is_bottom_anchored and h <= 15 and not bool(params.get("draw_text", True)):
                     bottom = float(h)
-                    top = float(Action._clipScalar(bottom - best_len, 0.0, bottom - 1.0))
+                    top = float(Action.clipScalar(bottom - best_len, 0.0, bottom - 1.0))
                     params["stem_top"] = top
                     params["stem_bottom"] = bottom
                 else:
                     # Keep the stem attached to the circle edge and optimize only the free end.
-                    top = float(Action._clipScalar(float(params.get("cy", 0.0)) + float(params.get("r", 0.0)), 0.0, float(h - 1)))
+                    top = float(Action.clipScalar(float(params.get("cy", 0.0)) + float(params.get("r", 0.0)), 0.0, float(h - 1)))
                     params["stem_top"] = top
-                    params["stem_bottom"] = float(Action._clipScalar(top + best_len, top + 1.0, float(h)))
+                    params["stem_bottom"] = float(Action.clipScalar(top + best_len, top + 1.0, float(h)))
             else:
                 center = (float(params.get("stem_top", 0.0)) + float(params.get("stem_bottom", 0.0))) / 2.0
                 half = best_len / 2.0
-                params["stem_top"] = float(Action._clipScalar(center - half, 0.0, float(h - 1)))
-                params["stem_bottom"] = float(Action._clipScalar(center + half, params["stem_top"] + 1.0, float(h)))
+                params["stem_top"] = float(Action.clipScalar(center - half, 0.0, float(h - 1)))
+                params["stem_bottom"] = float(Action.clipScalar(center + half, params["stem_top"] + 1.0, float(h)))
         else:
             x1 = float(params.get("arm_x1", 0.0))
             y1 = float(params.get("arm_y1", 0.0))
@@ -6985,7 +6985,7 @@ class Action:
             uy = dy / cur_len
 
             if params.get("circle_enabled", True) and all(k in params for k in ("cx", "cy", "r")):
-                Action._reanchor_arm_to_circle_edge(params, float(params.get("r", 0.0)))
+                Action.reanchorArmToCircleEdge(params, float(params.get("r", 0.0)))
                 ax1 = float(params.get("arm_x1", x1))
                 ay1 = float(params.get("arm_y1", y1))
                 ax2 = float(params.get("arm_x2", x2))
@@ -7001,8 +7001,8 @@ class Action:
                     if abs(uy) <= 0.35:
                         iy = cy
                         ix = cx - float(params.get("r", 0.0)) if ix <= cx else cx + float(params.get("r", 0.0))
-                    params["arm_x2"] = float(Action._clipScalar(ix + (ux * best_len), 0.0, float(w - 1)))
-                    params["arm_y2"] = float(Action._clipScalar(iy + (uy * best_len), 0.0, float(h - 1)))
+                    params["arm_x2"] = float(Action.clipScalar(ix + (ux * best_len), 0.0, float(w - 1)))
+                    params["arm_y2"] = float(Action.clipScalar(iy + (uy * best_len), 0.0, float(h - 1)))
                     params["arm_x1"] = float(ix)
                     params["arm_y1"] = float(iy)
                 else:
@@ -7010,18 +7010,18 @@ class Action:
                     if abs(uy) <= 0.35:
                         iy = cy
                         ix = cx - float(params.get("r", 0.0)) if ix <= cx else cx + float(params.get("r", 0.0))
-                    params["arm_x1"] = float(Action._clipScalar(ix - (ux * best_len), 0.0, float(w - 1)))
-                    params["arm_y1"] = float(Action._clipScalar(iy - (uy * best_len), 0.0, float(h - 1)))
+                    params["arm_x1"] = float(Action.clipScalar(ix - (ux * best_len), 0.0, float(w - 1)))
+                    params["arm_y1"] = float(Action.clipScalar(iy - (uy * best_len), 0.0, float(h - 1)))
                     params["arm_x2"] = float(ix)
                     params["arm_y2"] = float(iy)
             else:
                 cx = (x1 + x2) / 2.0
                 cy = (y1 + y2) / 2.0
                 half = best_len / 2.0
-                params["arm_x1"] = float(Action._clipScalar(cx - (ux * half), 0.0, float(w - 1)))
-                params["arm_y1"] = float(Action._clipScalar(cy - (uy * half), 0.0, float(h - 1)))
-                params["arm_x2"] = float(Action._clipScalar(cx + (ux * half), 0.0, float(w - 1)))
-                params["arm_y2"] = float(Action._clipScalar(cy + (uy * half), 0.0, float(h - 1)))
+                params["arm_x1"] = float(Action.clipScalar(cx - (ux * half), 0.0, float(w - 1)))
+                params["arm_y1"] = float(Action.clipScalar(cy - (uy * half), 0.0, float(h - 1)))
+                params["arm_x2"] = float(Action.clipScalar(cx + (ux * half), 0.0, float(w - 1)))
+                params["arm_y2"] = float(Action.clipScalar(cy + (uy * half), 0.0, float(h - 1)))
 
         logs.append(
             f"{element}: Längen-Bracketing {key_label} {current:.3f}->{best_len:.3f}; Kandidaten="
@@ -7030,9 +7030,9 @@ class Action:
         return True
 
     @staticmethod
-    def _optimize_element_width_bracket(img_orig: np.ndarray, params: dict, element: str, logs: list[str]) -> bool:
+    def optimizeElementWidthBracket(img_orig: np.ndarray, params: dict, element: str, logs: list[str]) -> bool:
         h, w = img_orig.shape[:2]
-        info = Action._element_width_key_and_bounds(element, params, w, h, img_orig=img_orig)
+        info = Action.elementWidthKeyAndBounds(element, params, w, h, img_orig=img_orig)
         if info is None:
             return False
 
@@ -7069,15 +7069,15 @@ class Action:
         else:
             candidates = sorted(
                 {
-                    Action._snap_half(low),
-                    Action._snap_half(low + (high - low) * 0.25),
-                    Action._snap_half((low + high) / 2.0),
-                    Action._snap_half(low + (high - low) * 0.75),
-                    Action._snap_half(high),
-                    Action._snap_half(Action._clipScalar(current, low, high)),
+                    Action.snapHalf(low),
+                    Action.snapHalf(low + (high - low) * 0.25),
+                    Action.snapHalf((low + high) / 2.0),
+                    Action.snapHalf(low + (high - low) * 0.75),
+                    Action.snapHalf(high),
+                    Action.snapHalf(Action.clipScalar(current, low, high)),
                 }
             )
-        candidate_errors = [Action._element_error_for_width(img_orig, params, element, v) for v in candidates]
+        candidate_errors = [Action.elementErrorForWidth(img_orig, params, element, v) for v in candidates]
         if not all(math.isfinite(e) for e in candidate_errors):
             logs.append(
                 f"{element}: Breiten-Bracketing abgebrochen ({key}) wegen nicht-finiten Fehlern "
@@ -7085,17 +7085,17 @@ class Action:
             )
             return False
 
-        best_idx = Action._argmin_index(candidate_errors)
+        best_idx = Action.argminIndex(candidate_errors)
         best_width = candidates[best_idx]
 
         boundary_best = abs(float(best_width) - low) < 0.02 or abs(float(best_width) - high) < 0.02
         if boundary_best:
-            snap_fn = (lambda v: float(round(v, 3))) if key.endswith("_font_scale") else Action._snap_half
-            s_best, s_err, s_improved = Action._stochastic_survivor_scalar(
+            snap_fn = (lambda v: float(round(v, 3))) if key.endswith("_font_scale") else Action.snapHalf
+            s_best, s_err, s_improved = Action.stochasticSurvivorScalar(
                 current,
                 low,
                 high,
-                lambda v: Action._element_error_for_width(img_orig, params, element, float(v)),
+                lambda v: Action.elementErrorForWidth(img_orig, params, element, float(v)),
                 snap=snap_fn,
                 seed=1201,
             )
@@ -7117,15 +7117,15 @@ class Action:
             return False
 
         if key in {"stroke_circle", "arm_stroke", "stem_width"}:
-            best_width = Action._snap_int_px(best_width, minimum=1.0)
+            best_width = Action.snapIntPx(best_width, minimum=1.0)
         elif key.endswith("_font_scale"):
             best_width = float(round(best_width, 3))
         else:
-            best_width = Action._snap_half(best_width)
+            best_width = Action.snapHalf(best_width)
 
         params[key] = best_width
         if key == "stem_width" and params.get("stem_enabled"):
-            params["stem_x"] = Action._snap_half(float(params.get("cx", params.get("stem_x", 0.0))) - (params["stem_width"] / 2.0))
+            params["stem_x"] = Action.snapHalf(float(params.get("cx", params.get("stem_x", 0.0))) - (params["stem_width"] / 2.0))
         logs.append(
             f"{element}: Breiten-Bracketing {key} {old:.3f}->{best_width:.3f}; "
             f"Kandidaten="
@@ -7135,7 +7135,7 @@ class Action:
 
 
     @staticmethod
-    def _element_color_keys(element: str, params: dict) -> list[str]:
+    def elementColorKeys(element: str, params: dict) -> list[str]:
         if element == "circle" and params.get("circle_enabled", True):
             return ["fill_gray", "stroke_gray"]
         if element == "stem" and params.get("stem_enabled"):
@@ -7147,7 +7147,7 @@ class Action:
         return []
 
     @staticmethod
-    def _element_error_for_color(
+    def elementErrorForColor(
         img_orig: np.ndarray,
         params: dict,
         element: str,
@@ -7156,11 +7156,11 @@ class Action:
         mask_orig: np.ndarray,
     ) -> float:
         probe = dict(params)
-        probe[color_key] = int(Action._clipScalar(color_value, 0, 255))
+        probe[color_key] = int(Action.clipScalar(color_value, 0, 255))
 
         h, w = img_orig.shape[:2]
-        elem_svg = Action.generateBadgeSvg(w, h, Action._element_only_params(probe, element))
-        elem_render = Action._fit_to_original_size(img_orig, Action.renderSvgToNumpy(elem_svg, w, h))
+        elem_svg = Action.generateBadgeSvg(w, h, Action.elementOnlyParams(probe, element))
+        elem_render = Action.fitToOriginalSize(img_orig, Action.renderSvgToNumpy(elem_svg, w, h))
         if elem_render is None:
             return float("inf")
 
@@ -7168,9 +7168,9 @@ class Action:
             # Color-only circle probing should be photometric against a stable
             # source region. Do not let threshold-induced mask area changes in
             # candidate renders bias toward darker/larger-looking circles.
-            return Action._masked_union_error_in_bbox(img_orig, elem_render, mask_orig, mask_orig)
+            return Action.maskedUnionErrorInBbox(img_orig, elem_render, mask_orig, mask_orig)
 
-        return Action._element_match_error(
+        return Action.elementMatchError(
             img_orig,
             elem_render,
             probe,
@@ -7179,7 +7179,7 @@ class Action:
         )
 
     @staticmethod
-    def _optimize_element_color_bracket(
+    def optimizeElementColorBracket(
         img_orig: np.ndarray,
         params: dict,
         element: str,
@@ -7193,34 +7193,34 @@ class Action:
             return False
 
         changed_any = False
-        local_gray = Action._mean_gray_for_mask(img_orig, mask_orig)
+        local_gray = Action.meanGrayForMask(img_orig, mask_orig)
         sampled = int(round(local_gray)) if local_gray is not None else None
 
-        for color_key in Action._element_color_keys(element, params):
+        for color_key in Action.elementColorKeys(element, params):
             current = int(round(float(params.get(color_key, 128))))
-            low_limit = int(Action._clipScalar(int(params.get(f"{color_key}_min", 0)), 0, 255))
-            high_limit = int(Action._clipScalar(int(params.get(f"{color_key}_max", 255)), 0, 255))
+            low_limit = int(Action.clipScalar(int(params.get(f"{color_key}_min", 0)), 0, 255))
+            high_limit = int(Action.clipScalar(int(params.get(f"{color_key}_max", 255)), 0, 255))
             if low_limit > high_limit:
                 low_limit, high_limit = high_limit, low_limit
             candidates = {
-                int(Action._clipScalar(current - 32, low_limit, high_limit)),
-                int(Action._clipScalar(current - 16, low_limit, high_limit)),
-                int(Action._clipScalar(current - 8, low_limit, high_limit)),
-                int(Action._clipScalar(current, low_limit, high_limit)),
-                int(Action._clipScalar(current + 8, low_limit, high_limit)),
-                int(Action._clipScalar(current + 16, low_limit, high_limit)),
-                int(Action._clipScalar(current + 32, low_limit, high_limit)),
+                int(Action.clipScalar(current - 32, low_limit, high_limit)),
+                int(Action.clipScalar(current - 16, low_limit, high_limit)),
+                int(Action.clipScalar(current - 8, low_limit, high_limit)),
+                int(Action.clipScalar(current, low_limit, high_limit)),
+                int(Action.clipScalar(current + 8, low_limit, high_limit)),
+                int(Action.clipScalar(current + 16, low_limit, high_limit)),
+                int(Action.clipScalar(current + 32, low_limit, high_limit)),
             }
             if sampled is not None:
-                candidates.add(int(Action._clipScalar(sampled, low_limit, high_limit)))
+                candidates.add(int(Action.clipScalar(sampled, low_limit, high_limit)))
             if element == "circle" and color_key == "fill_gray":
-                candidates.update(int(Action._clipScalar(v, low_limit, high_limit)) for v in {200, 210, 220, 230, 240})
+                candidates.update(int(Action.clipScalar(v, low_limit, high_limit)) for v in {200, 210, 220, 230, 240})
             if color_key in {"stroke_gray", "stem_gray", "text_gray"}:
-                candidates.update(int(Action._clipScalar(v, low_limit, high_limit)) for v in {96, 112, 128, 144, 152, 160, 171})
+                candidates.update(int(Action.clipScalar(v, low_limit, high_limit)) for v in {96, 112, 128, 144, 152, 160, 171})
 
             values = sorted(v for v in candidates if low_limit <= v <= high_limit)
             errs = [
-                Action._element_error_for_color(img_orig, params, element, color_key, v, mask_orig)
+                Action.elementErrorForColor(img_orig, params, element, color_key, v, mask_orig)
                 for v in values
             ]
             if not all(math.isfinite(e) for e in errs):
@@ -7230,27 +7230,27 @@ class Action:
                 )
                 continue
 
-            best_idx = Action._argmin_index(errs)
+            best_idx = Action.argminIndex(errs)
             best_value = int(values[best_idx])
 
             if best_value == min(values) or best_value == max(values):
-                s_best, s_err, s_improved = Action._stochastic_survivor_scalar(
+                s_best, s_err, s_improved = Action.stochasticSurvivorScalar(
                     float(current),
                     float(min(values)),
                     float(max(values)),
-                    lambda v: Action._element_error_for_color(
+                    lambda v: Action.elementErrorForColor(
                         img_orig,
                         params,
                         element,
                         color_key,
-                        int(Action._clipScalar(int(round(v)), low_limit, high_limit)),
+                        int(Action.clipScalar(int(round(v)), low_limit, high_limit)),
                         mask_orig,
                     ),
-                    snap=lambda v: int(Action._clipScalar(int(round(v)), low_limit, high_limit)),
+                    snap=lambda v: int(Action.clipScalar(int(round(v)), low_limit, high_limit)),
                     seed=1301,
                 )
                 if s_improved:
-                    best_value = int(Action._clipScalar(int(round(s_best)), low_limit, high_limit))
+                    best_value = int(Action.clipScalar(int(round(s_best)), low_limit, high_limit))
                     logs.append(
                         f"{element}: Farb-Stochastic-Survivor aktiviert ({color_key}={best_value}, err={s_err:.3f})"
                     )
@@ -7272,10 +7272,10 @@ class Action:
         return changed_any
 
     @staticmethod
-    def _refine_stem_geometry_from_masks(params: dict, mask_orig: np.ndarray, mask_svg: np.ndarray, w: int) -> tuple[bool, str | None]:
+    def refineStemGeometryFromMasks(params: dict, mask_orig: np.ndarray, mask_svg: np.ndarray, w: int) -> tuple[bool, str | None]:
         """Refine stem width/position when validation detects a geometric mismatch."""
-        orig_bbox = Action._maskBbox(mask_orig)
-        svg_bbox = Action._maskBbox(mask_svg)
+        orig_bbox = Action.maskBbox(mask_orig)
+        svg_bbox = Action.maskBbox(mask_svg)
         if orig_bbox is None or svg_bbox is None:
             return False, None
 
@@ -7291,7 +7291,7 @@ class Action:
         # pixels do not inflate stem width estimation.
         y_start = float(params.get("stem_top", 0.0)) + max(1.0, stroke * 2.0)
         y_end = float(params.get("stem_bottom", mask_orig.shape[0]))
-        est = Action._estimate_vertical_stem_from_mask(mask_orig, expected_cx, int(y_start), int(y_end))
+        est = Action.estimateVerticalStemFromMask(mask_orig, expected_cx, int(y_start), int(y_end))
 
         if est is not None:
             est_cx, est_width = est
@@ -7307,7 +7307,7 @@ class Action:
             if bool(params.get("lock_stem_center_to_circle", False)):
                 circle_cx = float(params.get("cx", est_cx))
                 max_offset = float(params.get("stem_center_lock_max_offset", max(0.35, target_width * 0.75)))
-                target_cx = float(Action._clipScalar(est_cx, circle_cx - max_offset, circle_cx + max_offset))
+                target_cx = float(Action.clipScalar(est_cx, circle_cx - max_offset, circle_cx + max_offset))
             else:
                 target_cx = est_cx
             estimate_mode = "iter"
@@ -7329,10 +7329,10 @@ class Action:
 
         stem_width_cap = float(params.get("stem_width_max", float(w) * 0.20))
         target_width = min(target_width, stem_width_cap)
-        target_width = Action._snap_int_px(target_width, minimum=1.0)
+        target_width = Action.snapIntPx(target_width, minimum=1.0)
         old_x = float(params.get("stem_x", 0.0))
         old_w = float(params.get("stem_width", 1.0))
-        new_x = Action._snap_half(max(0.0, min(float(w) - target_width, target_cx - (target_width / 2.0))))
+        new_x = Action.snapHalf(max(0.0, min(float(w) - target_width, target_cx - (target_width / 2.0))))
         if abs(target_width - old_w) < 0.05 and abs(new_x - old_x) < 0.05:
             return False, None
         params["stem_width"] = target_width
@@ -7343,7 +7343,7 @@ class Action:
         )
 
     @staticmethod
-    def _expected_semantic_presence(semantic_elements: list[str]) -> dict[str, bool]:
+    def expectedSemanticPresence(semantic_elements: list[str]) -> dict[str, bool]:
         normalized = [str(elem).lower() for elem in semantic_elements]
         has_text = any(
             ("kreis + buchstabe" in elem)
@@ -7362,7 +7362,7 @@ class Action:
         }
 
     @staticmethod
-    def _semantic_presence_mismatches(expected: dict[str, bool], observed: dict[str, bool]) -> list[str]:
+    def semanticPresenceMismatches(expected: dict[str, bool], observed: dict[str, bool]) -> list[str]:
         labels = {
             "circle": "Kreis",
             "stem": "senkrechter Strich",
@@ -7380,7 +7380,7 @@ class Action:
         return issues
 
     @staticmethod
-    def _detect_semantic_primitives(
+    def detectSemanticPrimitives(
         img_orig: np.ndarray,
         badge_params: dict | None = None,
     ) -> dict[str, bool | int | str]:
@@ -7404,7 +7404,7 @@ class Action:
             }
 
         gray = cv2.cvtColor(img_orig, cv2.COLOR_BGR2GRAY)
-        fg_mask = Action._foregroundMask(img_orig).astype(np.uint8)
+        fg_mask = Action.foregroundMask(img_orig).astype(np.uint8)
         min_side = max(1, min(h, w))
         small_variant = bool((badge_params or {}).get("ac08_small_variant_mode", False))
         symbol_hint = str((badge_params or {}).get("badge_symbol_name", "")).upper()
@@ -7459,7 +7459,7 @@ class Action:
                 break
 
         if not has_circle:
-            fallback_circle = Action._circle_from_foreground_mask(fg_mask > 0)
+            fallback_circle = Action.circleFromForegroundMask(fg_mask > 0)
             if fallback_circle is not None:
                 has_circle = True
                 circle_geom = fallback_circle
@@ -7474,7 +7474,7 @@ class Action:
                 exp_cx = float(badge_params.get("cx", float(w) / 2.0))
                 exp_cy = float(badge_params.get("cy", float(h) / 2.0))
                 exp_r = float(badge_params.get("r", max(2.0, float(min_side) * 0.28)))
-                exp_r = float(Action._clipScalar(exp_r, 2.0, float(min_side) * 0.60))
+                exp_r = float(Action.clipScalar(exp_r, 2.0, float(min_side) * 0.60))
                 yy, xx = np.ogrid[:h, :w]
                 ring_tol = max(1.2, exp_r * 0.32)
                 ring = np.abs(np.sqrt((xx - exp_cx) ** 2 + (yy - exp_cy) ** 2) - exp_r) <= ring_tol
@@ -7640,30 +7640,30 @@ class Action:
         }
 
     @staticmethod
-    def validate_semantic_description_alignment(
+    def validateSemanticDescriptionAlignment(
         img_orig: np.ndarray,
         semantic_elements: list[str],
         badge_params: dict,
     ) -> list[str]:
-        expected = Action._expected_semantic_presence(semantic_elements)
+        expected = Action.expectedSemanticPresence(semantic_elements)
         expected_co2 = any("co_2" in str(elem).lower() or "co₂" in str(elem).lower() for elem in semantic_elements)
         try:
-            structural = Action._detect_semantic_primitives(img_orig, badge_params)
+            structural = Action.detectSemanticPrimitives(img_orig, badge_params)
         except TypeError:
             # Test doubles may still patch the legacy one-argument variant.
-            structural = Action._detect_semantic_primitives(img_orig)
-        circle_mask = Action.extract_badge_element_mask(img_orig, badge_params, "circle")
-        stem_mask = Action.extract_badge_element_mask(img_orig, badge_params, "stem")
-        arm_mask = Action.extract_badge_element_mask(img_orig, badge_params, "arm")
-        text_mask = Action.extract_badge_element_mask(img_orig, badge_params, "text")
+            structural = Action.detectSemanticPrimitives(img_orig)
+        circle_mask = Action.extractBadgeElementMask(img_orig, badge_params, "circle")
+        stem_mask = Action.extractBadgeElementMask(img_orig, badge_params, "stem")
+        arm_mask = Action.extractBadgeElementMask(img_orig, badge_params, "arm")
+        text_mask = Action.extractBadgeElementMask(img_orig, badge_params, "text")
 
-        def _mask_supports_element(mask: np.ndarray | None, element: str) -> bool:
+        def maskSupportsElement(mask: np.ndarray | None, element: str) -> bool:
             if mask is None:
                 return False
             pixel_count = int(np.count_nonzero(mask))
             if pixel_count < 3:
                 return False
-            bbox = Action._maskBbox(mask)
+            bbox = Action.maskBbox(mask)
             if bbox is None:
                 return False
             x1, y1, x2, y2 = bbox
@@ -7673,7 +7673,7 @@ class Action:
             density = float(pixel_count) / max(1.0, area)
             small_variant = bool(badge_params.get("ac08_small_variant_mode", False))
             if element == "circle":
-                if Action._mask_supports_circle(mask):
+                if Action.maskSupportsCircle(mask):
                     return True
                 if small_variant:
                     # `_S` AC08 crops frequently merge anti-aliased ring pixels into a
@@ -7721,20 +7721,20 @@ class Action:
             )
         )
         local_support = {
-            "circle": _mask_supports_element(circle_mask, "circle"),
+            "circle": maskSupportsElement(circle_mask, "circle"),
             "stem": bool(
-                _mask_supports_element(stem_mask, "stem")
+                maskSupportsElement(stem_mask, "stem")
                 or (
                     vertical_connector_family
                     and bool(badge_params.get("arm_enabled", False))
-                    and _mask_supports_element(arm_mask, "stem")
+                    and maskSupportsElement(arm_mask, "stem")
                 )
             ),
             "arm": bool(
                 not vertical_connector_family
-                and _mask_supports_element(arm_mask, "arm")
+                and maskSupportsElement(arm_mask, "arm")
             ),
-            "text": _mask_supports_element(text_mask, "text"),
+            "text": maskSupportsElement(text_mask, "text"),
         }
         allow_circle_mask_fallback = expected.get("circle", False) and not (
             expected.get("stem", False) or expected.get("arm", False) or expected.get("text", False)
@@ -7800,7 +7800,7 @@ class Action:
             ),
             "text": bool(local_support["text"] or (structural.get("text", False) and not plain_circle_badge)),
         }
-        issues = Action._semantic_presence_mismatches(expected, observed)
+        issues = Action.semanticPresenceMismatches(expected, observed)
         if expected.get("circle") and not observed["circle"]:
             issues.append("Strukturprüfung: Kein belastbarer Kreis-Kandidat im Rohbild erkannt")
         if expected.get("arm") and not observed["arm"]:
@@ -7817,7 +7817,7 @@ class Action:
                 else:
                     x1, x2 = int(xs.min()), int(xs.max())
                     y1, y2 = int(ys.min()), int(ys.max())
-                    roi = Action._foregroundMask(img_orig)[y1 : y2 + 1, x1 : x2 + 1].astype(np.uint8)
+                    roi = Action.foregroundMask(img_orig)[y1 : y2 + 1, x1 : x2 + 1].astype(np.uint8)
                     n_labels, _labels, stats, _centroids = cv2.connectedComponentsWithStats(roi, connectivity=8)
                     compact = 0
                     merged_text_blob = False
@@ -7851,7 +7851,7 @@ class Action:
         return issues
 
     @staticmethod
-    def validate_badge_by_elements(
+    def validateBadgeByElements(
         img_orig: np.ndarray,
         params: dict,
         *,
@@ -7884,7 +7884,7 @@ class Action:
                 f"stem_min_ratio={float(params.get('stem_len_min_ratio', 0.0)):.3f}"
             )
 
-        def _stagnation_fingerprint(current_params: dict) -> tuple[tuple[str, float], ...]:
+        def stagnationFingerprint(current_params: dict) -> tuple[tuple[str, float], ...]:
             tracked_keys = (
                 "cx",
                 "cy",
@@ -7909,7 +7909,7 @@ class Action:
         for round_idx in range(max_rounds):
             logs.append(f"Runde {round_idx + 1}: elementweise Validierung gestartet")
             full_svg = Action.generateBadgeSvg(w, h, params)
-            full_render = Action._fit_to_original_size(img_orig, Action.renderSvgToNumpy(full_svg, w, h))
+            full_render = Action.fitToOriginalSize(img_orig, Action.renderSvgToNumpy(full_svg, w, h))
             if full_render is None:
                 logs.append("Abbruch: SVG konnte nicht gerendert werden")
                 break
@@ -7920,58 +7920,58 @@ class Action:
 
             round_changed = False
             for element in elements:
-                elem_svg = Action.generateBadgeSvg(w, h, Action._element_only_params(params, element))
-                elem_render = Action._fit_to_original_size(img_orig, Action.renderSvgToNumpy(elem_svg, w, h))
+                elem_svg = Action.generateBadgeSvg(w, h, Action.elementOnlyParams(params, element))
+                elem_render = Action.fitToOriginalSize(img_orig, Action.renderSvgToNumpy(elem_svg, w, h))
                 if elem_render is None:
                     logs.append(f"{element}: Element-SVG konnte nicht gerendert werden")
                     continue
 
-                mask_orig = Action.extract_badge_element_mask(img_orig, params, element)
-                mask_svg = Action.extract_badge_element_mask(elem_render, params, element)
+                mask_orig = Action.extractBadgeElementMask(img_orig, params, element)
+                mask_svg = Action.extractBadgeElementMask(elem_render, params, element)
                 if mask_orig is None or mask_svg is None:
                     logs.append(f"{element}: Element konnte nicht extrahiert werden")
                     continue
 
                 if debug_out_dir:
-                    elem_focus_mask = Action._element_region_mask(h, w, params, element)
+                    elem_focus_mask = Action.elementRegionMask(h, w, params, element)
                     elem_diff = Action.createDiffImage(img_orig, elem_render, elem_focus_mask)
                     cv2.imwrite(
                         os.path.join(debug_out_dir, f"round_{round_idx + 1:02d}_{element}_diff.png"),
                         elem_diff,
                     )
 
-                elem_err = Action._element_match_error(img_orig, elem_render, params, element, mask_orig=mask_orig, mask_svg=mask_svg)
+                elem_err = Action.elementMatchError(img_orig, elem_render, params, element, mask_orig=mask_orig, mask_svg=mask_svg)
                 logs.append(f"{element}: Fehler={elem_err:.3f}")
 
                 if element == "stem" and params.get("stem_enabled"):
-                    changed, refine_log = Action._refine_stem_geometry_from_masks(params, mask_orig, mask_svg, w)
+                    changed, refine_log = Action.refineStemGeometryFromMasks(params, mask_orig, mask_svg, w)
                     if refine_log:
                         logs.append(refine_log)
                     if changed:
                         round_changed = True
                         logs.append("stem: Geometrie nach Elementabgleich aktualisiert")
 
-                width_changed = Action._optimize_element_width_bracket(img_orig, params, element, logs)
+                width_changed = Action.optimizeElementWidthBracket(img_orig, params, element, logs)
                 if width_changed:
                     round_changed = True
 
-                extent_changed = Action._optimize_element_extent_bracket(img_orig, params, element, logs)
+                extent_changed = Action.optimizeElementExtentBracket(img_orig, params, element, logs)
                 if extent_changed:
                     round_changed = True
 
                 circle_geometry_penalty_active = apply_circle_geometry_penalty and not fallback_search_active
                 if element == "circle" and circle_geometry_penalty_active:
-                    center_changed = Action._optimize_circle_center_bracket(img_orig, params, logs)
+                    center_changed = Action.optimizeCircleCenterBracket(img_orig, params, logs)
                     if center_changed:
                         round_changed = True
-                    radius_changed = Action._optimize_circle_radius_bracket(img_orig, params, logs)
+                    radius_changed = Action.optimizeCircleRadiusBracket(img_orig, params, logs)
                     if radius_changed:
                         round_changed = True
 
                 # Color fitting is intentionally deferred to the end so
                 # geometry convergence is not biased by temporary palette noise.
 
-            global_search_changed = Action._optimize_global_parameter_vector_sampling(
+            global_search_changed = Action.optimizeGlobalParameterVectorSampling(
                 img_orig,
                 params,
                 logs,
@@ -7980,14 +7980,14 @@ class Action:
                 round_changed = True
 
             full_svg = Action.generateBadgeSvg(w, h, params)
-            full_render = Action._fit_to_original_size(img_orig, Action.renderSvgToNumpy(full_svg, w, h))
+            full_render = Action.fitToOriginalSize(img_orig, Action.renderSvgToNumpy(full_svg, w, h))
             full_err = Action.calculateError(img_orig, full_render)
             logs.append(f"Runde {round_idx + 1}: Gesamtfehler={full_err:.3f}")
             if math.isfinite(full_err) and full_err < best_full_err:
                 best_full_err = full_err
                 best_params = copy.deepcopy(params)
 
-            current_round_state = (_stagnation_fingerprint(params), round(float(full_err), 6))
+            current_round_state = (stagnationFingerprint(params), round(float(full_err), 6))
             if previous_round_state is not None:
                 same_fingerprint = current_round_state[0] == previous_round_state[0]
                 nearly_same_error = abs(current_round_state[1] - previous_round_state[1]) <= 1e-6
@@ -7995,7 +7995,7 @@ class Action:
                     logs.append(
                         "stagnation_detected: identischer Parameter-Fingerprint und praktisch unveränderter Gesamtfehler"
                     )
-                    adaptive_unlock_applied = Action._activate_ac08_adaptive_locks(
+                    adaptive_unlock_applied = Action.activateAc08AdaptiveLocks(
                         params,
                         logs,
                         full_err=full_err,
@@ -8010,7 +8010,7 @@ class Action:
                             )
                             continue
                     if not fallback_search_active and round_idx + 1 < max_rounds:
-                        Action._release_ac08_adaptive_locks(
+                        Action.releaseAc08AdaptiveLocks(
                             params,
                             logs,
                             reason="stagnation_same_fingerprint",
@@ -8032,7 +8032,7 @@ class Action:
                     break
                 logs.append("Gesamtfehler unter Schwellwert, Suche nach besserem Optimum wird fortgesetzt")
             elif round_idx >= 1:
-                Action._release_ac08_adaptive_locks(
+                Action.releaseAc08AdaptiveLocks(
                     params,
                     logs,
                     reason="high_residual_error",
@@ -8043,7 +8043,7 @@ class Action:
                 break
 
             if not round_changed:
-                adaptive_unlock_applied = Action._activate_ac08_adaptive_locks(
+                adaptive_unlock_applied = Action.activateAc08AdaptiveLocks(
                     params,
                     logs,
                     full_err=full_err,
@@ -8058,7 +8058,7 @@ class Action:
                         )
                         continue
                 if not fallback_search_active and round_idx + 1 < max_rounds:
-                    Action._release_ac08_adaptive_locks(
+                    Action.releaseAc08AdaptiveLocks(
                         params,
                         logs,
                         reason="stagnation_no_geometry_change",
@@ -8082,19 +8082,19 @@ class Action:
         for element in elements:
             if element == "text" and not params.get("draw_text", True):
                 continue
-            mask_orig = Action.extract_badge_element_mask(img_orig, params, element)
+            mask_orig = Action.extractBadgeElementMask(img_orig, params, element)
             if mask_orig is None:
                 continue
-            color_changed = Action._optimize_element_color_bracket(img_orig, params, element, mask_orig, logs)
+            color_changed = Action.optimizeElementColorBracket(img_orig, params, element, mask_orig, logs)
             if color_changed:
                 logs.append(f"{element}: Farboptimierung in Abschlussphase angewendet")
 
-        params.update(Action._apply_canonical_badge_colors(params))
+        params.update(Action.applyCanonicalBadgeColors(params))
 
         return logs
 
 
-def _semantic_quality_flags(base_name: str, validation_logs: list[str]) -> list[str]:
+def semanticQualityFlags(base_name: str, validation_logs: list[str]) -> list[str]:
     """Derive non-fatal quality markers from semantic element-validation logs.
 
     Semantic structure checks can pass even when one fitted element is still a
@@ -8170,11 +8170,11 @@ def runIterationPipeline(
     h, w = perc.img.shape[:2]
 
     ref = Reflection(perc.raw_desc)
-    desc, params = ref.parse_description(perc.base_name, filename)
+    desc, params = ref.parseDescription(perc.base_name, filename)
     semantic_audit_targets = {"AC0811", "AC0812", "AC0813", "AC0814"}
     semantic_audit_row: dict[str, object] | None = None
     if getBaseNameFromFile(perc.base_name).upper() in semantic_audit_targets:
-        semantic_audit_row = _semantic_audit_record(
+        semantic_audit_row = semanticAuditRecord(
             base_name=perc.base_name,
             filename=filename,
             description_fragments=list(params.get("description_fragments", [])),
@@ -8203,7 +8203,7 @@ def runIterationPipeline(
     if reports_out_dir:
         log_path = os.path.join(reports_out_dir, f"{base}_element_validation.log")
 
-    def _write_validation_log(lines: list[str]) -> None:
+    def writeValidationLog(lines: list[str]) -> None:
         if not log_path:
             return
         payload = [
@@ -8218,12 +8218,12 @@ def runIterationPipeline(
         with open(log_path, "w", encoding="utf-8") as f:
             f.write("\n".join(payload).rstrip() + "\n")
 
-    def _params_snapshot(snapshot: dict[str, object]) -> str:
+    def paramsSnapshot(snapshot: dict[str, object]) -> str:
         return json.dumps(snapshot, ensure_ascii=False, sort_keys=True, default=str)
 
-    def _record_render_failure(reason: str, *, svg_content: str | None = None, params_snapshot: dict[str, object] | None = None) -> None:
+    def recordRenderFailure(reason: str, *, svg_content: str | None = None, params_snapshot: dict[str, object] | None = None) -> None:
         if svg_content:
-            _write_attempt_artifacts(svg_content, failed=True)
+            writeAttemptArtifacts(svg_content, failed=True)
         lines = [
             "status=render_failure",
             f"failure_reason={reason}",
@@ -8232,10 +8232,10 @@ def runIterationPipeline(
         if svg_content:
             lines.append(f"best_attempt_svg={base}_failed.svg")
         if params_snapshot is not None:
-            lines.append("params_snapshot=" + _params_snapshot(params_snapshot))
-        _write_validation_log(lines)
+            lines.append("params_snapshot=" + paramsSnapshot(params_snapshot))
+        writeValidationLog(lines)
 
-    def _write_attempt_artifacts(svg_content: str, rendered_img=None, diff_img=None, *, failed: bool = False) -> None:
+    def writeAttemptArtifacts(svg_content: str, rendered_img=None, diff_img=None, *, failed: bool = False) -> None:
         suffix = "_failed" if failed else ""
         svg_path = os.path.join(svg_out_dir, f"{base}{suffix}.svg")
         with open(svg_path, "w", encoding="utf-8") as f:
@@ -8255,7 +8255,7 @@ def runIterationPipeline(
         cv2.imwrite(os.path.join(diff_out_dir, f"{base}{suffix}_diff.png"), diff)
 
     if params["mode"] == "semantic_badge":
-        badge_params = Action.make_badge_params(w, h, perc.base_name, perc.img)
+        badge_params = Action.makeBadgeParams(w, h, perc.base_name, perc.img)
         if badge_params is None:
             return None
         # Persist source raster dimensions so variant-specific finalizers can
@@ -8266,15 +8266,15 @@ def runIterationPipeline(
         if isinstance(badge_overrides, dict):
             badge_params.update(badge_overrides)
 
-        semantic_issues = Action.validate_semantic_description_alignment(
+        semantic_issues = Action.validateSemanticDescriptionAlignment(
             perc.img,
             list(params.get("elements", [])),
             badge_params,
         )
         if semantic_issues:
             failed_svg = Action.generateBadgeSvg(w, h, badge_params)
-            _write_attempt_artifacts(failed_svg, failed=True)
-            structural = Action._detect_semantic_primitives(perc.img, badge_params)
+            writeAttemptArtifacts(failed_svg, failed=True)
+            structural = Action.detectSemanticPrimitives(perc.img, badge_params)
             connector_orientation = str(structural.get("connector_orientation", "unknown"))
             circle_source = str(structural.get("circle_detection_source", "unknown"))
             connector_debug_line = (
@@ -8289,7 +8289,7 @@ def runIterationPipeline(
             for issue in semantic_issues:
                 print(f"  - {issue}")
             if semantic_audit_row is not None:
-                semantic_audit_row = _semantic_audit_record(
+                semantic_audit_row = semanticAuditRecord(
                     base_name=perc.base_name,
                     filename=filename,
                     description_fragments=list(params.get("description_fragments", [])),
@@ -8300,7 +8300,7 @@ def runIterationPipeline(
                     semantic_conflicts=list(params.get("semantic_conflicts", [])),
                     semantic_sources=dict(params.get("semantic_sources", {})),
                 )
-            _write_validation_log(
+            writeValidationLog(
                 [
                     "status=semantic_mismatch",
                     f"best_attempt_svg={base}_failed.svg",
@@ -8350,28 +8350,28 @@ def runIterationPipeline(
                 + ")."
             )
         validation_logs.extend(
-            Action.validate_badge_by_elements(
+            Action.validateBadgeByElements(
             perc.img,
             badge_params,
             max_rounds=max(1, int(badge_validation_rounds)),
             debug_out_dir=debug_dir,
             )
         )
-        badge_params = Action._enforce_semantic_connector_expectation(
+        badge_params = Action.enforceSemanticConnectorExpectation(
             perc.base_name,
             list(params.get("elements", [])),
             badge_params,
             w,
             h,
         )
-        badge_params, redraw_variation_logs = Action.apply_redraw_variation(badge_params, w, h)
+        badge_params, redraw_variation_logs = Action.applyRedrawVariation(badge_params, w, h)
         if badge_params.get("arm_enabled"):
             validation_logs.append(
                 "semantic-guard: Erwartete Arm-Geometrie bestätigt/wiederhergestellt (z.B. AC0812 links)."
             )
-        quality_flags = _semantic_quality_flags(perc.base_name, validation_logs)
+        quality_flags = semanticQualityFlags(perc.base_name, validation_logs)
         if semantic_audit_row is not None:
-            semantic_audit_row = _semantic_audit_record(
+            semantic_audit_row = semanticAuditRecord(
                 base_name=perc.base_name,
                 filename=filename,
                 description_fragments=list(params.get("description_fragments", [])),
@@ -8381,7 +8381,7 @@ def runIterationPipeline(
                 semantic_conflicts=list(params.get("semantic_conflicts", [])),
                 semantic_sources=dict(params.get("semantic_sources", {})),
             )
-        _write_validation_log(
+        writeValidationLog(
             [
                 "status=semantic_ok",
                 *(
@@ -8415,13 +8415,13 @@ def runIterationPipeline(
         svg_content = Action.generateBadgeSvg(w, h, badge_params)
         svg_rendered = Action.renderSvgToNumpy(svg_content, w, h)
         if svg_rendered is None:
-            _record_render_failure(
+            recordRenderFailure(
                 "semantic_badge_final_render_failed",
                 svg_content=svg_content,
                 params_snapshot=badge_params,
             )
             return None
-        _write_attempt_artifacts(svg_content, svg_rendered)
+        writeAttemptArtifacts(svg_content, svg_rendered)
         if semantic_audit_row is not None:
             params = copy.deepcopy(params)
             params["semantic_audit"] = semantic_audit_row
@@ -8429,7 +8429,7 @@ def runIterationPipeline(
 
     if params["mode"] != "composite":
         print("  -> Überspringe Bild, da keine Zerschneide-Anweisung (Compositing) im Text vorliegt.")
-        _write_validation_log(["status=skipped_non_composite"])
+        writeValidationLog(["status=skipped_non_composite"])
         return None
 
     best_error = float("inf")
@@ -8445,11 +8445,11 @@ def runIterationPipeline(
     previous_error: float | None = None
     stop_reason = "max_iterations"
     for i, eps in enumerate(epsilon_factors):
-        svg_content = Action.generate_composite_svg(w, h, params, folder_path, float(eps))
+        svg_content = Action.generateCompositeSvg(w, h, params, folder_path, float(eps))
 
         svg_rendered = Action.renderSvgToNumpy(svg_content, w, h)
         if svg_rendered is None:
-            _record_render_failure(
+            recordRenderFailure(
                 "composite_iteration_render_failed",
                 svg_content=svg_content,
                 params_snapshot=params,
@@ -8490,9 +8490,9 @@ def runIterationPipeline(
         print("-> Konvergenzdiagnose: Iterationsbudget ausgeschöpft (Optimum unklar, ggf. Suchraum erweitern)")
 
     if best_svg:
-        _write_attempt_artifacts(best_svg, diff_img=best_diff)
+        writeAttemptArtifacts(best_svg, diff_img=best_diff)
 
-    _write_validation_log([
+    writeValidationLog([
         "status=composite_ok",
         f"convergence={stop_reason}",
         f"best_iter={int(best_iter)}",
@@ -8511,7 +8511,7 @@ def runIterationPipeline(
 
 
 
-def _extractSymbolFamily(name: str) -> str | None:
+def extractSymbolFamily(name: str) -> str | None:
     """Extract 2-3 letter corpus family prefixes such as AC, GE, DLG, or NAV."""
     match = re.match(r"^([A-Z]{2,3})\d{3,4}$", str(name).upper())
     if not match:
@@ -8525,7 +8525,7 @@ def _extractSymbolFamily(name: str) -> str | None:
 
 
 
-def _conversionRandom() -> random.Random:
+def conversionRandom() -> random.Random:
     """Return run-local RNG (seedable via env) for non-deterministic search order."""
     seed_raw = os.environ.get("TINY_ICC_RANDOM_SEED")
     if seed_raw is not None and str(seed_raw).strip() != "":
@@ -8535,16 +8535,16 @@ def _conversionRandom() -> random.Random:
             pass
     return random.Random(time.time_ns())
 
-def _defaultConvertedSymbolsRoot() -> str:
+def defaultConvertedSymbolsRoot() -> str:
     repo_root = Path(__file__).resolve().parents[3]
     return str(repo_root / "artifacts" / "converted_images")
 
 
-def _convertedSvgOutputDir(output_root: str) -> str:
+def convertedSvgOutputDir(output_root: str) -> str:
     return os.path.join(output_root, "converted_svgs")
 
 
-def _readValidationLogDetails(log_path: str) -> dict[str, str]:
+def readValidationLogDetails(log_path: str) -> dict[str, str]:
     if not os.path.exists(log_path):
         return {}
     details: dict[str, str] = {}
@@ -8563,7 +8563,7 @@ def _readValidationLogDetails(log_path: str) -> dict[str, str]:
     return details
 
 
-def _writeBatchFailureSummary(reports_out_dir: str, failures: list[dict[str, str]]) -> None:
+def writeBatchFailureSummary(reports_out_dir: str, failures: list[dict[str, str]]) -> None:
     summary_path = os.path.join(reports_out_dir, "batch_failure_summary.csv")
     with open(summary_path, "w", encoding="utf-8", newline="") as f:
         writer = csv.writer(f, delimiter=";")
@@ -8579,7 +8579,7 @@ def _writeBatchFailureSummary(reports_out_dir: str, failures: list[dict[str, str
 
 
 
-def _collect_description_fragments(raw_desc: dict[str, str], base_name: str, img_filename: str) -> list[dict[str, str]]:
+def collectDescriptionFragments(raw_desc: dict[str, str], base_name: str, img_filename: str) -> list[dict[str, str]]:
     """Return the ordered description fragments consulted for one variant lookup."""
     variant_name = os.path.splitext(img_filename)[0]
     canonical_base = getBaseNameFromFile(base_name).upper()
@@ -8608,7 +8608,7 @@ def _collect_description_fragments(raw_desc: dict[str, str], base_name: str, img
     return fragments
 
 
-def _semantic_audit_record(
+def semanticAuditRecord(
     *,
     base_name: str,
     filename: str,
@@ -8640,7 +8640,7 @@ def _semantic_audit_record(
     }
 
 
-def _writeSemanticAuditReport(reports_out_dir: str, audit_rows: list[dict[str, object]]) -> None:
+def writeSemanticAuditReport(reports_out_dir: str, audit_rows: list[dict[str, object]]) -> None:
     """Persist semantic audit rows as CSV/JSON for targeted AC0811..AC0814 review."""
     if not audit_rows:
         return
@@ -8683,15 +8683,15 @@ def _writeSemanticAuditReport(reports_out_dir: str, audit_rows: list[dict[str, o
         json.dump(audit_rows, f, ensure_ascii=False, indent=2)
 
 
-def _diffOutputDir(output_root: str) -> str:
+def diffOutputDir(output_root: str) -> str:
     return os.path.join(output_root, "diff_pngs")
 
 
-def _reportsOutputDir(output_root: str) -> str:
+def reportsOutputDir(output_root: str) -> str:
     return os.path.join(output_root, "reports")
 
 
-def _isSemanticTemplateVariant(base_name: str, params: dict[str, object] | None = None) -> bool:
+def isSemanticTemplateVariant(base_name: str, params: dict[str, object] | None = None) -> bool:
     """Return whether an existing converted SVG should participate as semantic donor."""
     normalized = str(getBaseNameFromFile(base_name or "")).upper()
     if not normalized:
@@ -8703,14 +8703,14 @@ def _isSemanticTemplateVariant(base_name: str, params: dict[str, object] | None 
     return False
 
 
-def _loadExistingConversionRows(output_root: str, folder_path: str) -> list[dict[str, object]]:
+def loadExistingConversionRows(output_root: str, folder_path: str) -> list[dict[str, object]]:
     """Load previously converted variants so they can act as donor templates.
 
     This lets an earlier conversion batch (for example the already converted
     ``AC08*`` symbols) improve later runs without requiring a fresh full pass.
     """
-    reports_path = Path(_reportsOutputDir(output_root)) / "Iteration_Log.csv"
-    svg_out_dir = Path(_convertedSvgOutputDir(output_root))
+    reports_path = Path(reportsOutputDir(output_root)) / "Iteration_Log.csv"
+    svg_out_dir = Path(convertedSvgOutputDir(output_root))
     if not reports_path.exists() or not svg_out_dir.exists():
         return []
 
@@ -8728,12 +8728,12 @@ def _loadExistingConversionRows(output_root: str, folder_path: str) -> list[dict
                 if not svg_path.exists():
                     continue
 
-                geometry = _readSvgGeometry(str(svg_path))
+                geometry = readSvgGeometry(str(svg_path))
                 if geometry is None:
                     continue
                 w, h, params = geometry
                 base = getBaseNameFromFile(variant).upper()
-                if _isSemanticTemplateVariant(base, params):
+                if isSemanticTemplateVariant(base, params):
                     params["mode"] = "semantic_badge"
 
                 error_per_pixel_raw = str(raw_row.get("FehlerProPixel", "")).strip().replace(",", ".")
@@ -8742,7 +8742,7 @@ def _loadExistingConversionRows(output_root: str, folder_path: str) -> list[dict
                 image_path = Path(folder_path) / filename
                 if image_path.exists():
                     try:
-                        width, height = _sniffRasterSize(image_path)
+                        width, height = sniffRasterSize(image_path)
                         w = int(width)
                         h = int(height)
                     except Exception:
@@ -8784,7 +8784,7 @@ def _loadExistingConversionRows(output_root: str, folder_path: str) -> list[dict
     ]
 
 
-def _sniffRasterSize(path: str | Path) -> tuple[int, int]:
+def sniffRasterSize(path: str | Path) -> tuple[int, int]:
     file_path = Path(path)
     with file_path.open("rb") as fh:
         header = fh.read(32)
@@ -8837,7 +8837,7 @@ def _sniffRasterSize(path: str | Path) -> tuple[int, int]:
     raise ValueError(f"Unsupported or unreadable raster image: {file_path}")
 
 
-def _svgHrefMimeType(path: str | Path) -> str:
+def svgHrefMimeType(path: str | Path) -> str:
     ext = Path(path).suffix.lower()
     return {
         ".jpg": "image/jpeg",
@@ -8848,11 +8848,11 @@ def _svgHrefMimeType(path: str | Path) -> str:
     }.get(ext, "application/octet-stream")
 
 
-def _renderEmbeddedRasterSvg(input_path: str | Path) -> str:
-    width, height = _sniffRasterSize(input_path)
+def renderEmbeddedRasterSvg(input_path: str | Path) -> str:
+    width, height = sniffRasterSize(input_path)
     raw = Path(input_path).read_bytes()
     encoded = base64.b64encode(raw).decode("ascii")
-    mime = _svgHrefMimeType(input_path)
+    mime = svgHrefMimeType(input_path)
     return (
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" '
         f'viewBox="0 0 {width} {height}">\n'
@@ -8861,12 +8861,12 @@ def _renderEmbeddedRasterSvg(input_path: str | Path) -> str:
     )
 
 
-def _qualityConfigPath(reports_out_dir: str) -> str:
+def qualityConfigPath(reports_out_dir: str) -> str:
     return os.path.join(reports_out_dir, "quality_tercile_config.json")
 
 
-def _loadQualityConfig(reports_out_dir: str) -> dict[str, object]:
-    path = _qualityConfigPath(reports_out_dir)
+def loadQualityConfig(reports_out_dir: str) -> dict[str, object]:
+    path = qualityConfigPath(reports_out_dir)
     if not os.path.exists(path):
         return {}
     try:
@@ -8877,14 +8877,14 @@ def _loadQualityConfig(reports_out_dir: str) -> dict[str, object]:
     return payload if isinstance(payload, dict) else {}
 
 
-def _writeQualityConfig(
+def writeQualityConfig(
     reports_out_dir: str,
     *,
     allowed_error_per_pixel: float,
     skipped_variants: list[str],
     source: str,
 ) -> None:
-    path = _qualityConfigPath(reports_out_dir)
+    path = qualityConfigPath(reports_out_dir)
     normalized_error_pp = float(allowed_error_per_pixel) if math.isfinite(allowed_error_per_pixel) else 0.0
     payload = {
         "allowed_error_per_pixel": float(max(0.0, normalized_error_pp)),
@@ -8900,7 +8900,7 @@ def _writeQualityConfig(
         f.write("\n")
 
 
-def _quality_sort_key(row: dict[str, object]) -> float:
+def qualitySortKey(row: dict[str, object]) -> float:
     value = float(row.get("error_per_pixel", float("inf")))
     if math.isfinite(value):
         return value
@@ -8909,7 +8909,7 @@ def _quality_sort_key(row: dict[str, object]) -> float:
 
 
 
-def _computeSuccessfulConversionsErrorThreshold(
+def computeSuccessfulConversionsErrorThreshold(
     rows: list[dict[str, object]],
     successful_variants: list[str] | tuple[str, ...] | None = None,
 ) -> float:
@@ -8940,16 +8940,16 @@ def _computeSuccessfulConversionsErrorThreshold(
     return float(mean_val + 2.0 * std_val)
 
 
-def _selectMiddleLowerTercile(rows: list[dict[str, object]]) -> list[dict[str, object]]:
+def selectMiddleLowerTercile(rows: list[dict[str, object]]) -> list[dict[str, object]]:
     if len(rows) < 3:
         return []
 
-    ranked = sorted(rows, key=_quality_sort_key)
+    ranked = sorted(rows, key=qualitySortKey)
     first_cut = max(1, len(ranked) // 3)
     return ranked[first_cut:]
 
 
-def _selectOpenQualityCases(
+def selectOpenQualityCases(
     rows: list[dict[str, object]],
     *,
     allowed_error_per_pixel: float,
@@ -8973,14 +8973,14 @@ def _selectOpenQualityCases(
             continue
         open_rows.append(row)
 
-    return sorted(open_rows, key=_quality_sort_key, reverse=True)
+    return sorted(open_rows, key=qualitySortKey, reverse=True)
 
 
 
 
 
 
-def _writeQualityPassReport(
+def writeQualityPassReport(
     reports_out_dir: str,
     pass_rows: list[dict[str, object]],
 ) -> None:
@@ -9019,14 +9019,14 @@ def _writeQualityPassReport(
 
 
 
-def _extractSvgInner(svg_text: str) -> str:
+def extractSvgInner(svg_text: str) -> str:
     match = re.search(r"<svg[^>]*>(.*)</svg>", svg_text, flags=re.DOTALL | re.IGNORECASE)
     if match:
         return match.group(1).strip()
     return svg_text
 
 
-def _buildTransformedSvgFromTemplate(
+def buildTransformedSvgFromTemplate(
     template_svg_text: str,
     target_w: int,
     target_h: int,
@@ -9034,7 +9034,7 @@ def _buildTransformedSvgFromTemplate(
     rotation_deg: int,
     scale: float,
 ) -> str:
-    inner = _extractSvgInner(template_svg_text)
+    inner = extractSvgInner(template_svg_text)
     # Keep donor stroke widths visually stable when trying scale-based transfers.
     # This mirrors the "M->S/L while preserving line thickness" workflow that is
     # often needed for noisy small/large bitmap variants.
@@ -9061,7 +9061,7 @@ def _buildTransformedSvgFromTemplate(
     )
 
 
-def _templateTransferScaleCandidates(base_scale: float) -> list[float]:
+def templateTransferScaleCandidates(base_scale: float) -> list[float]:
     """Build a compact scale ladder around an estimated best scale."""
     if not math.isfinite(base_scale) or base_scale <= 0.0:
         base_scale = 1.0
@@ -9085,7 +9085,7 @@ def _templateTransferScaleCandidates(base_scale: float) -> list[float]:
     return scales
 
 
-def _estimateTemplateTransferScale(
+def estimateTemplateTransferScale(
     img_orig: np.ndarray,
     donor_svg_text: str,
     target_w: int,
@@ -9095,7 +9095,7 @@ def _estimateTemplateTransferScale(
 ) -> float | None:
     """Estimate donor->target scale from foreground silhouette bboxes."""
     rendered = Action.renderSvgToNumpy(
-        _buildTransformedSvgFromTemplate(
+        buildTransformedSvgFromTemplate(
             donor_svg_text,
             target_w,
             target_h,
@@ -9108,10 +9108,10 @@ def _estimateTemplateTransferScale(
     if rendered is None:
         return None
 
-    target_mask = Action._foregroundMask(img_orig)
-    donor_mask = Action._foregroundMask(rendered)
-    target_bbox = Action._maskBbox(target_mask)
-    donor_bbox = Action._maskBbox(donor_mask)
+    target_mask = Action.foregroundMask(img_orig)
+    donor_mask = Action.foregroundMask(rendered)
+    target_bbox = Action.maskBbox(target_mask)
+    donor_bbox = Action.maskBbox(donor_mask)
     if target_bbox is None or donor_bbox is None:
         return None
 
@@ -9128,7 +9128,7 @@ def _estimateTemplateTransferScale(
     return float(min(1.90, max(0.65, scale)))
 
 
-def _templateTransferTransformCandidates(
+def templateTransferTransformCandidates(
     target_variant: str,
     donor_variant: str,
     *,
@@ -9143,7 +9143,7 @@ def _templateTransferTransformCandidates(
         estimated = None
         if estimated_scale_by_rotation is not None:
             estimated = estimated_scale_by_rotation.get(rotation)
-        for scale in _templateTransferScaleCandidates(estimated if estimated is not None else 1.0):
+        for scale in templateTransferScaleCandidates(estimated if estimated is not None else 1.0):
             candidate = (rotation, float(scale))
             key = (rotation, round(float(scale), 4))
             if key in seen:
@@ -9153,7 +9153,7 @@ def _templateTransferTransformCandidates(
     return candidates
 
 
-def _rankTemplateTransferDonors(
+def rankTemplateTransferDonors(
     target_row: dict[str, object],
     donor_rows: list[dict[str, object]],
 ) -> list[dict[str, object]]:
@@ -9162,7 +9162,7 @@ def _rankTemplateTransferDonors(
     target_sig: dict[str, float] | None = None
     target_params = target_row.get("params")
     if isinstance(target_params, dict):
-        target_sig = _normalizedGeometrySignature(
+        target_sig = normalizedGeometrySignature(
             int(target_row.get("w", 0)),
             int(target_row.get("h", 0)),
             dict(target_params),
@@ -9175,11 +9175,11 @@ def _rankTemplateTransferDonors(
         donor_sig: dict[str, float] | None = None
         donor_params = donor.get("params")
         if isinstance(donor_params, dict):
-            donor_sig = _normalizedGeometrySignature(int(donor.get("w", 0)), int(donor.get("h", 0)), dict(donor_params))
+            donor_sig = normalizedGeometrySignature(int(donor.get("w", 0)), int(donor.get("h", 0)), dict(donor_params))
 
         delta = float("inf")
         if target_sig is not None and donor_sig is not None:
-            delta = _maxSignatureDelta(target_sig, donor_sig)
+            delta = maxSignatureDelta(target_sig, donor_sig)
 
         key = (0.0 if donor_base == target_base else 1.0, delta, donor_error_pp)
         ranked.append((key, donor))
@@ -9188,7 +9188,7 @@ def _rankTemplateTransferDonors(
     return [donor for _, donor in ranked]
 
 
-def _templateTransferDonorFamilyCompatible(
+def templateTransferDonorFamilyCompatible(
     target_base: str,
     donor_base: str,
     *,
@@ -9199,8 +9199,8 @@ def _templateTransferDonorFamilyCompatible(
     if donor_base.upper() in alias_refs:
         return True
 
-    target_family = _extractSymbolFamily(target_base)
-    donor_family = _extractSymbolFamily(donor_base)
+    target_family = extractSymbolFamily(target_base)
+    donor_family = extractSymbolFamily(donor_base)
     if target_family is None or donor_family is None:
         # Keep legacy behavior for non-standard names where family extraction fails.
         return True
@@ -9215,7 +9215,7 @@ def _templateTransferDonorFamilyCompatible(
 
 
 
-def _semanticTransferIsCompatible(target_params: dict[str, object], donor_params: dict[str, object]) -> bool:
+def semanticTransferIsCompatible(target_params: dict[str, object], donor_params: dict[str, object]) -> bool:
     """Return whether donor semantics can preserve target semantic geometry."""
     target_has_arm = bool(target_params.get("arm_enabled", False))
     target_has_stem = bool(target_params.get("stem_enabled", False))
@@ -9243,14 +9243,14 @@ def _semanticTransferIsCompatible(target_params: dict[str, object], donor_params
     # Directional connector families (e.g. AC0810 right arm vs AC0812 left arm)
     # must keep side/orientation stable during semantic transfer.
     if target_has_arm and donor_has_arm:
-        target_arm_dir = _connectorArmDirection(target_params)
-        donor_arm_dir = _connectorArmDirection(donor_params)
+        target_arm_dir = connectorArmDirection(target_params)
+        donor_arm_dir = connectorArmDirection(donor_params)
         if target_arm_dir is not None and donor_arm_dir is not None and target_arm_dir != donor_arm_dir:
             return False
 
     if target_has_stem and donor_has_stem:
-        target_stem_dir = _connectorStemDirection(target_params)
-        donor_stem_dir = _connectorStemDirection(donor_params)
+        target_stem_dir = connectorStemDirection(target_params)
+        donor_stem_dir = connectorStemDirection(donor_params)
         if target_stem_dir is not None and donor_stem_dir is not None and target_stem_dir != donor_stem_dir:
             return False
 
@@ -9261,9 +9261,9 @@ def _semanticTransferIsCompatible(target_params: dict[str, object], donor_params
 
 
 
-def _semanticTransferScaleCandidates(base_scale: float) -> list[float]:
+def semanticTransferScaleCandidates(base_scale: float) -> list[float]:
     """Broader scale ladder for semantic badge transfer exploration."""
-    core = _templateTransferScaleCandidates(base_scale)
+    core = templateTransferScaleCandidates(base_scale)
     extra = [0.55, 0.65, 0.75, 0.85, 1.00, 1.15, 1.30, 1.50, 1.75, 2.00]
     values = []
     seen: set[float] = set()
@@ -9276,7 +9276,7 @@ def _semanticTransferScaleCandidates(base_scale: float) -> list[float]:
         values.append(key)
     return values
 
-def _semanticTransferBadgeParams(
+def semanticTransferBadgeParams(
     donor_params: dict[str, object],
     target_params: dict[str, object],
     *,
@@ -9311,7 +9311,7 @@ def _semanticTransferBadgeParams(
     ca = math.cos(angle)
     sa = math.sin(angle)
 
-    def _rotScalePoint(x: float, y: float) -> tuple[float, float]:
+    def rotScalePoint(x: float, y: float) -> tuple[float, float]:
         dx = (x - cx) * float(scale)
         dy = (y - cy) * float(scale)
         rx = (dx * ca) - (dy * sa)
@@ -9319,22 +9319,22 @@ def _semanticTransferBadgeParams(
         return tx + rx, ty + ry
 
     if p.get("arm_enabled"):
-        x1, y1 = _rotScalePoint(float(p.get("arm_x1", tx)), float(p.get("arm_y1", ty)))
-        x2, y2 = _rotScalePoint(float(p.get("arm_x2", tx)), float(p.get("arm_y2", ty)))
-        p["arm_x1"] = float(Action._clipScalar(x1, 0.0, max(0.0, float(target_w - 1))))
-        p["arm_y1"] = float(Action._clipScalar(y1, 0.0, max(0.0, float(target_h - 1))))
-        p["arm_x2"] = float(Action._clipScalar(x2, 0.0, max(0.0, float(target_w - 1))))
-        p["arm_y2"] = float(Action._clipScalar(y2, 0.0, max(0.0, float(target_h - 1))))
+        x1, y1 = rotScalePoint(float(p.get("arm_x1", tx)), float(p.get("arm_y1", ty)))
+        x2, y2 = rotScalePoint(float(p.get("arm_x2", tx)), float(p.get("arm_y2", ty)))
+        p["arm_x1"] = float(Action.clipScalar(x1, 0.0, max(0.0, float(target_w - 1))))
+        p["arm_y1"] = float(Action.clipScalar(y1, 0.0, max(0.0, float(target_h - 1))))
+        p["arm_x2"] = float(Action.clipScalar(x2, 0.0, max(0.0, float(target_w - 1))))
+        p["arm_y2"] = float(Action.clipScalar(y2, 0.0, max(0.0, float(target_h - 1))))
 
     if p.get("stem_enabled"):
         stem_x = float(p.get("stem_x", tx)) + (float(p.get("stem_width", 1.0)) / 2.0)
         top = float(p.get("stem_top", ty))
         bottom = float(p.get("stem_bottom", ty))
-        x1, y1 = _rotScalePoint(stem_x, top)
-        x2, y2 = _rotScalePoint(stem_x, bottom)
-        p["stem_x"] = float(Action._clipScalar((x1 + x2) / 2.0 - (float(p.get("stem_width", 1.0)) / 2.0), 0.0, float(target_w)))
-        p["stem_top"] = float(Action._clipScalar(min(y1, y2), 0.0, float(target_h)))
-        p["stem_bottom"] = float(Action._clipScalar(max(y1, y2), 0.0, float(target_h)))
+        x1, y1 = rotScalePoint(stem_x, top)
+        x2, y2 = rotScalePoint(stem_x, bottom)
+        p["stem_x"] = float(Action.clipScalar((x1 + x2) / 2.0 - (float(p.get("stem_width", 1.0)) / 2.0), 0.0, float(target_w)))
+        p["stem_top"] = float(Action.clipScalar(min(y1, y2), 0.0, float(target_h)))
+        p["stem_bottom"] = float(Action.clipScalar(max(y1, y2), 0.0, float(target_h)))
 
     # Keep text horizontally readable while preventing aggressive down-scaling
     # during template transfer. The historical sqrt(scale) shrink was often too
@@ -9353,10 +9353,10 @@ def _semanticTransferBadgeParams(
 
     symbol_name = str(target_params.get("label") or target_params.get("variant") or target_params.get("base") or "")
     if symbol_name:
-        p = Action._finalizeAc08Style(symbol_name, p)
+        p = Action.finalizeAc08Style(symbol_name, p)
     return p
 
-def _tryTemplateTransfer(
+def tryTemplateTransfer(
     *,
     target_row: dict[str, object],
     donor_rows: list[dict[str, object]],
@@ -9388,7 +9388,7 @@ def _tryTemplateTransfer(
     target_variant = str(target_row.get("variant", "")).upper()
     target_base = str(target_row.get("base", "")).upper()
     target_svg_path = os.path.join(svg_out_dir, f"{target_variant}.svg")
-    target_svg_geometry = _readSvgGeometry(target_svg_path)
+    target_svg_geometry = readSvgGeometry(target_svg_path)
     target_geom_params = dict(target_svg_geometry[2]) if target_svg_geometry is not None else None
     target_params_raw = target_row.get("params")
     target_alias_refs: set[str] = set()
@@ -9397,7 +9397,7 @@ def _tryTemplateTransfer(
         if isinstance(alias_values, list):
             target_alias_refs = {str(v).upper() for v in alias_values if str(v).strip()}
     target_is_semantic = isinstance(target_params_raw, dict) and str(target_params_raw.get("mode", "")) == "semantic_badge"
-    ordered_donors = _rankTemplateTransferDonors(target_row, donor_rows)
+    ordered_donors = rankTemplateTransferDonors(target_row, donor_rows)
     if rng is not None and len(ordered_donors) > 1:
         head = ordered_donors[:3]
         tail = ordered_donors[3:]
@@ -9408,7 +9408,7 @@ def _tryTemplateTransfer(
         donor_base = str(donor.get("base", "")).upper()
         if not donor_variant or donor_variant == target_variant:
             continue
-        if not target_is_semantic and not _templateTransferDonorFamilyCompatible(
+        if not target_is_semantic and not templateTransferDonorFamilyCompatible(
             target_base,
             donor_base,
             documented_alias_refs=target_alias_refs,
@@ -9422,11 +9422,11 @@ def _tryTemplateTransfer(
         except OSError:
             continue
 
-        donor_svg_geometry = _readSvgGeometry(donor_svg_path)
+        donor_svg_geometry = readSvgGeometry(donor_svg_path)
         donor_geom_params = dict(donor_svg_geometry[2]) if donor_svg_geometry is not None else None
 
         estimated_scales = {
-            rotation: _estimateTemplateTransferScale(
+            rotation: estimateTemplateTransferScale(
                 img_orig,
                 donor_svg_text,
                 w,
@@ -9447,18 +9447,18 @@ def _tryTemplateTransfer(
                 and donor_is_semantic
                 and target_geom_params is not None
                 and donor_geom_params is not None
-                and _semanticTransferIsCompatible(dict(target_params_raw), dict(donor_params_raw))
+                and semanticTransferIsCompatible(dict(target_params_raw), dict(donor_params_raw))
             ):
                 base_scale = float(min(w, h)) / max(1.0, float(min(int(donor.get("w", w)), int(donor.get("h", h)))))
-                semantic_scales = _semanticTransferScaleCandidates(base_scale)
+                semantic_scales = semanticTransferScaleCandidates(base_scale)
                 if rng is not None:
                     keep = semantic_scales[:2]
                     rest = semantic_scales[2:]
                     rng.shuffle(rest)
                     semantic_scales = keep + rest
-                for rotation in _semanticTransferRotations(dict(target_params_raw), dict(donor_params_raw)):
+                for rotation in semanticTransferRotations(dict(target_params_raw), dict(donor_params_raw)):
                     for scale in semantic_scales:
-                        candidate_params = _semanticTransferBadgeParams(
+                        candidate_params = semanticTransferBadgeParams(
                             dict(donor_geom_params),
                             dict(target_geom_params),
                             target_w=w,
@@ -9486,12 +9486,12 @@ def _tryTemplateTransfer(
             # Generic donor SVG transforms can remove those semantics.
             continue
 
-        for rotation, scale in _templateTransferTransformCandidates(
+        for rotation, scale in templateTransferTransformCandidates(
             target_variant,
             donor_variant,
             estimated_scale_by_rotation=estimated_scales,
         ):
-            candidate_svg = _buildTransformedSvgFromTemplate(
+            candidate_svg = buildTransformedSvgFromTemplate(
                 donor_svg_text,
                 w,
                 h,
@@ -9550,7 +9550,7 @@ def _tryTemplateTransfer(
 
 
 
-def _readSvgGeometry(svg_path: str) -> tuple[int, int, dict] | None:
+def readSvgGeometry(svg_path: str) -> tuple[int, int, dict] | None:
     if not os.path.exists(svg_path):
         return None
 
@@ -9562,7 +9562,7 @@ def _readSvgGeometry(svg_path: str) -> tuple[int, int, dict] | None:
     w = int(svg_match.group(1))
     h = int(svg_match.group(2))
 
-    def _grayFromHex(color: str, fallback: int) -> int:
+    def grayFromHex(color: str, fallback: int) -> int:
         m = re.match(r"#([0-9a-fA-F]{6})", color.strip())
         if not m:
             return fallback
@@ -9599,9 +9599,9 @@ def _readSvgGeometry(svg_path: str) -> tuple[int, int, dict] | None:
             fill_match = re.search(r'fill="(#[0-9a-fA-F]{6})"', circle_tag)
             stroke_match = re.search(r'stroke="(#[0-9a-fA-F]{6})"', circle_tag)
             if fill_match:
-                params["fill_gray"] = _grayFromHex(fill_match.group(1), int(params["fill_gray"]))
+                params["fill_gray"] = grayFromHex(fill_match.group(1), int(params["fill_gray"]))
             if stroke_match:
-                params["stroke_gray"] = _grayFromHex(stroke_match.group(1), int(params["stroke_gray"]))
+                params["stroke_gray"] = grayFromHex(stroke_match.group(1), int(params["stroke_gray"]))
 
     rect_match = re.search(
         r"<rect[^>]*x=\"([0-9.]+)\"[^>]*y=\"([0-9.]+)\"[^>]*width=\"([0-9.]+)\"[^>]*height=\"([0-9.]+)\"",
@@ -9621,7 +9621,7 @@ def _readSvgGeometry(svg_path: str) -> tuple[int, int, dict] | None:
         if rect_tag_match:
             rect_fill_match = re.search(r'fill="(#[0-9a-fA-F]{6})"', rect_tag_match.group(1))
             if rect_fill_match:
-                params["stem_gray"] = _grayFromHex(rect_fill_match.group(1), int(params["stroke_gray"]))
+                params["stem_gray"] = grayFromHex(rect_fill_match.group(1), int(params["stroke_gray"]))
             else:
                 params["stem_gray"] = int(params["stroke_gray"])
         else:
@@ -9644,7 +9644,7 @@ def _readSvgGeometry(svg_path: str) -> tuple[int, int, dict] | None:
         for text_tag, _text_content in text_matches:
             fill_match = re.search(r'fill="(#[0-9a-fA-F]{6})"', text_tag)
             if fill_match:
-                params["text_gray"] = _grayFromHex(fill_match.group(1), int(params["text_gray"]))
+                params["text_gray"] = grayFromHex(fill_match.group(1), int(params["text_gray"]))
                 break
 
         text_tokens: list[str] = []
@@ -9675,7 +9675,7 @@ def _readSvgGeometry(svg_path: str) -> tuple[int, int, dict] | None:
         fill_match = re.search(r'fill="(#[0-9a-fA-F]{6})"', path_tag)
         params["draw_text"] = True
         if fill_match:
-            params["text_gray"] = _grayFromHex(fill_match.group(1), int(params["text_gray"]))
+            params["text_gray"] = grayFromHex(fill_match.group(1), int(params["text_gray"]))
         if Action.T_PATH_D in path_tag:
             params["text_mode"] = "path_t"
         else:
@@ -9697,7 +9697,7 @@ def _readSvgGeometry(svg_path: str) -> tuple[int, int, dict] | None:
 
 
 
-def _scaleBadgeParams(
+def scaleBadgeParams(
     anchor: dict,
     anchor_w: int,
     anchor_h: int,
@@ -9749,7 +9749,7 @@ def _scaleBadgeParams(
             scaled[key] = float(anchor[key]) * float(factor)
 
     if scaled.get("circle_enabled", True):
-        overflow_guard = _needsLargeCircleOverflowGuard(scaled)
+        overflow_guard = needsLargeCircleOverflowGuard(scaled)
         required_r = (float(target_w) / 2.0) + 0.5 if overflow_guard else 1.0
         if overflow_guard:
             scaled["allow_circle_overflow"] = True
@@ -9772,14 +9772,14 @@ def _scaleBadgeParams(
         max_cy = float(target_h) - r - half_stroke
 
         if min_cx > max_cx:
-            cx = float(target_w) / 2.0 if not overflow_guard else float(Action._clipScalar(cx, 0.0, float(target_w)))
+            cx = float(target_w) / 2.0 if not overflow_guard else float(Action.clipScalar(cx, 0.0, float(target_w)))
         else:
-            cx = float(Action._clipScalar(cx, min_cx, max_cx))
+            cx = float(Action.clipScalar(cx, min_cx, max_cx))
 
         if min_cy > max_cy:
-            cy = float(target_h) / 2.0 if not overflow_guard else float(Action._clipScalar(cy, 0.0, float(target_h)))
+            cy = float(target_h) / 2.0 if not overflow_guard else float(Action.clipScalar(cy, 0.0, float(target_h)))
         else:
-            cy = float(Action._clipScalar(cy, min_cy, max_cy))
+            cy = float(Action.clipScalar(cy, min_cy, max_cy))
 
         if scaled.get("stem_enabled") and "stem_width" in scaled:
             stem_width = max(1e-6, float(scaled["stem_width"]))
@@ -9788,13 +9788,13 @@ def _scaleBadgeParams(
                 bottom_anchored = float(scaled.get("stem_bottom", 0.0)) >= (float(target_h) - 0.5)
                 reanchored_top = cy + r - (stem_width * 0.55)
                 if bottom_anchored:
-                    scaled["stem_top"] = float(Action._clipScalar(reanchored_top, 0.0, float(target_h)))
+                    scaled["stem_top"] = float(Action.clipScalar(reanchored_top, 0.0, float(target_h)))
                     scaled["stem_bottom"] = float(target_h)
                 else:
                     stem_len = max(1.0, float(scaled.get("stem_bottom", reanchored_top)) - float(scaled.get("stem_top", reanchored_top)))
-                    scaled["stem_top"] = float(Action._clipScalar(reanchored_top, 0.0, float(target_h - 1)))
+                    scaled["stem_top"] = float(Action.clipScalar(reanchored_top, 0.0, float(target_h - 1)))
                     scaled["stem_bottom"] = float(
-                        Action._clipScalar(float(scaled["stem_top"]) + stem_len, float(scaled["stem_top"]) + 1.0, float(target_h))
+                        Action.clipScalar(float(scaled["stem_top"]) + stem_len, float(scaled["stem_top"]) + 1.0, float(target_h))
                     )
 
         scaled["cx"] = cx
@@ -9804,7 +9804,7 @@ def _scaleBadgeParams(
     return scaled
 
 
-def _harmonization_anchor_priority(suffix: str, prefer_large: bool) -> int:
+def harmonizationAnchorPriority(suffix: str, prefer_large: bool) -> int:
     """Return size-priority rank for L/M/S harmonization anchors."""
     if prefer_large:
         # For connector families we keep L authoritative to avoid undersized
@@ -9816,7 +9816,7 @@ def _harmonization_anchor_priority(suffix: str, prefer_large: bool) -> int:
 
 
 
-def _familyHarmonizedBadgeColors(variant_rows: list[dict[str, object]]) -> dict[str, int]:
+def familyHarmonizedBadgeColors(variant_rows: list[dict[str, object]]) -> dict[str, int]:
     """Derive a family palette from L/M/S variants and slightly boost contrast."""
     buckets: dict[str, list[float]] = {
         "fill_gray": [],
@@ -9843,10 +9843,10 @@ def _familyHarmonizedBadgeColors(variant_rows: list[dict[str, object]]) -> dict[
     center = (fill_avg + stroke_avg) / 2.0
     delta = abs(fill_avg - stroke_avg)
     boosted_delta = max(18.0, delta * 1.12)
-    fill_gray = _clipGray(center + (boosted_delta / 2.0))
-    stroke_gray = _clipGray(center - (boosted_delta / 2.0))
+    fill_gray = clipGray(center + (boosted_delta / 2.0))
+    stroke_gray = clipGray(center - (boosted_delta / 2.0))
     if fill_gray <= stroke_gray:
-        fill_gray = _clipGray(max(fill_gray, stroke_gray + 1.0))
+        fill_gray = clipGray(max(fill_gray, stroke_gray + 1.0))
 
     colors = {
         "fill_gray": fill_gray,
@@ -9857,16 +9857,16 @@ def _familyHarmonizedBadgeColors(variant_rows: list[dict[str, object]]) -> dict[
 
     if buckets["text_gray"]:
         text_avg = sum(buckets["text_gray"]) / float(len(buckets["text_gray"]))
-        colors["text_gray"] = _clipGray(min(text_avg, float(stroke_gray)))
+        colors["text_gray"] = clipGray(min(text_avg, float(stroke_gray)))
 
     if buckets["stem_gray"]:
         stem_avg = sum(buckets["stem_gray"]) / float(len(buckets["stem_gray"]))
-        colors["stem_gray"] = _clipGray(min(stem_avg, float(stroke_gray)))
+        colors["stem_gray"] = clipGray(min(stem_avg, float(stroke_gray)))
 
     return colors
 
 
-def _harmonizeSemanticSizeVariants(
+def harmonizeSemanticSizeVariants(
     results: list[dict[str, object]],
     folder_path: str,
     svg_out_dir: str,
@@ -9889,7 +9889,7 @@ def _harmonizeSemanticSizeVariants(
             suffix = variant.rsplit("_", 1)[-1] if "_" in variant else ""
             if suffix not in {"L", "M", "S"}:
                 continue
-            parsed = _readSvgGeometry(os.path.join(svg_out_dir, f"{variant}.svg"))
+            parsed = readSvgGeometry(os.path.join(svg_out_dir, f"{variant}.svg"))
             if parsed is None:
                 continue
             w, h, params = parsed
@@ -9911,7 +9911,7 @@ def _harmonizeSemanticSizeVariants(
         category_logs.append(f"{base};{category};{variants_joined}")
 
         sigs = {
-            row["variant"]: _normalizedGeometrySignature(int(row["w"]), int(row["h"]), dict(row["params"]))
+            row["variant"]: normalizedGeometrySignature(int(row["w"]), int(row["h"]), dict(row["params"]))
             for row in variant_rows
         }
         max_delta = 0.0
@@ -9919,32 +9919,32 @@ def _harmonizeSemanticSizeVariants(
             for j in range(i + 1, len(variant_rows)):
                 vi = str(variant_rows[i]["variant"])
                 vj = str(variant_rows[j]["variant"])
-                max_delta = max(max_delta, _maxSignatureDelta(sigs[vi], sigs[vj]))
+                max_delta = max(max_delta, maxSignatureDelta(sigs[vi], sigs[vj]))
 
         # Do not skip families with one badly fitted outlier variant. We still
         # validate every harmonization candidate against raster error before write.
 
-        def _anchor_rank(row: dict[str, object]) -> tuple[int, float]:
+        def anchorRank(row: dict[str, object]) -> tuple[int, float]:
             suffix = str(row.get("suffix", ""))
             # Connector families ("Kellen") tend to under-fit large variants
             # when we derive L from M. Prefer L as harmonization anchor so the
             # largest geometry stays authoritative and M/S scale down from it.
-            priority = _harmonization_anchor_priority(suffix, prefer_large=has_connector)
+            priority = harmonizationAnchorPriority(suffix, prefer_large=has_connector)
             err = float(dict(row["entry"]).get("error", float("inf")))
             return priority, err
 
-        anchor = min(variant_rows, key=_anchor_rank)
+        anchor = min(variant_rows, key=anchorRank)
         anchor_variant = str(anchor["variant"])
         anchor_w = int(anchor["w"])
         anchor_h = int(anchor["h"])
         anchor_params = dict(anchor["params"])
-        family_colors = _familyHarmonizedBadgeColors(variant_rows)
+        family_colors = familyHarmonizedBadgeColors(variant_rows)
 
         for row in variant_rows:
             target_variant = str(row["variant"])
             target_w = int(row["w"])
             target_h = int(row["h"])
-            scaled = _scaleBadgeParams(
+            scaled = scaleBadgeParams(
                 anchor_params,
                 anchor_w,
                 anchor_h,
@@ -9997,7 +9997,7 @@ def _harmonizeSemanticSizeVariants(
             f.write("\n".join(category_logs).rstrip() + "\n")
 
 
-def _writeAc08RegressionManifest(
+def writeAc08RegressionManifest(
     reports_out_dir: str,
     *,
     folder_path: str,
@@ -10038,7 +10038,7 @@ def _writeAc08RegressionManifest(
         f.write("\n".join(summary_lines) + "\n")
 
 
-def _summarizePreviousGoodAc08Variants(reports_out_dir: str) -> dict[str, object]:
+def summarizePreviousGoodAc08Variants(reports_out_dir: str) -> dict[str, object]:
     """Summarize whether previously good AC08 variants stayed semantic_ok in the latest run."""
     preserved: list[str] = []
     regressed: list[str] = []
@@ -10064,7 +10064,7 @@ def _summarizePreviousGoodAc08Variants(reports_out_dir: str) -> dict[str, object
     }
 
 
-def _writeAc08SuccessCriteriaReport(
+def writeAc08SuccessCriteriaReport(
     reports_out_dir: str,
     *,
     selected_variants: list[str],
@@ -10136,7 +10136,7 @@ def _writeAc08SuccessCriteriaReport(
         else 0.0
     )
 
-    previous_good = _summarizePreviousGoodAc08Variants(reports_out_dir)
+    previous_good = summarizePreviousGoodAc08Variants(reports_out_dir)
     previous_good_preserved_count = len(previous_good["preserved"])
     previous_good_regressed_count = len(previous_good["regressed"])
     previous_good_missing_count = len(previous_good["missing"])
@@ -10236,7 +10236,7 @@ def _writeAc08SuccessCriteriaReport(
     }
 
 
-def _writeAc08WeakFamilyStatusReport(
+def writeAc08WeakFamilyStatusReport(
     reports_out_dir: str,
     *,
     selected_variants: list[str],
@@ -10358,7 +10358,7 @@ def _writeAc08WeakFamilyStatusReport(
         f.write("\n".join(summary_lines) + "\n")
 
 
-def _writePixelDelta2Ranking(folder_path: str, svg_out_dir: str, reports_out_dir: str, threshold: float = 18.0) -> None:
+def writePixelDelta2Ranking(folder_path: str, svg_out_dir: str, reports_out_dir: str, threshold: float = 18.0) -> None:
     ranking: list[dict[str, float | str]] = []
     for svg_name in sorted(f for f in os.listdir(svg_out_dir) if f.lower().endswith(".svg")):
         stem = os.path.splitext(svg_name)[0]
@@ -10411,7 +10411,7 @@ def _writePixelDelta2Ranking(folder_path: str, svg_out_dir: str, reports_out_dir
         f.write("\n".join(summary_lines) + "\n")
 
 
-def _loadIterationLogRows(reports_out_dir: str) -> dict[str, dict[str, str]]:
+def loadIterationLogRows(reports_out_dir: str) -> dict[str, dict[str, str]]:
     """Load Iteration_Log.csv keyed by uppercase filename stem."""
     path = os.path.join(reports_out_dir, "Iteration_Log.csv")
     if not os.path.exists(path):
@@ -10428,7 +10428,7 @@ def _loadIterationLogRows(reports_out_dir: str) -> dict[str, dict[str, str]]:
     return rows
 
 
-def _findImagePathByVariant(folder_path: str, variant: str) -> str | None:
+def findImagePathByVariant(folder_path: str, variant: str) -> str | None:
     """Return the raster image path for ``variant`` if present."""
     for ext in ('.jpg', '.png', '.bmp', '.gif'):
         candidate = os.path.join(folder_path, f'{variant}{ext}')
@@ -10453,14 +10453,14 @@ def collectSuccessfulConversionQualityMetrics(
         raise RuntimeError('Required image dependencies are missing: ' + ', '.join(missing))
 
     variants = [str(v).strip().upper() for v in (successful_variants or SUCCESSFUL_CONVERSIONS) if str(v).strip()]
-    iteration_rows = _loadIterationLogRows(reports_out_dir)
+    iteration_rows = loadIterationLogRows(reports_out_dir)
     metrics: list[dict[str, object]] = []
     seen: set[str] = set()
     for variant in variants:
         if variant in seen:
             continue
         seen.add(variant)
-        image_path = _findImagePathByVariant(folder_path, variant)
+        image_path = findImagePathByVariant(folder_path, variant)
         svg_path = os.path.join(svg_out_dir, f'{variant}.svg')
         log_path = os.path.join(reports_out_dir, f'{variant}_element_validation.log')
 
@@ -10479,7 +10479,7 @@ def collectSuccessfulConversionQualityMetrics(
             'std_delta2': float('nan'),
         }
 
-        details = _readValidationLogDetails(log_path) if os.path.exists(log_path) else {}
+        details = readValidationLogDetails(log_path) if os.path.exists(log_path) else {}
         row['status'] = details.get('status', '')
 
         iteration = iteration_rows.get(variant, {})
@@ -10520,7 +10520,7 @@ def collectSuccessfulConversionQualityMetrics(
     return metrics
 
 
-def _successfulConversionMetricsAvailable(metrics: dict[str, object]) -> bool:
+def successfulConversionMetricsAvailable(metrics: dict[str, object]) -> bool:
     """Return whether a metrics row contains fresh conversion data worth persisting."""
     status = str(metrics.get('status', '')).strip()
     if status:
@@ -10541,7 +10541,7 @@ def _successfulConversionMetricsAvailable(metrics: dict[str, object]) -> bool:
     return False
 
 
-def _parseSuccessfulConversionManifestLine(raw_line: str) -> tuple[str, dict[str, object]]:
+def parseSuccessfulConversionManifestLine(raw_line: str) -> tuple[str, dict[str, object]]:
     """Parse one successful-conversions manifest line into variant plus metrics."""
     stripped = raw_line.split('#', 1)[0].strip()
     if not stripped:
@@ -10571,26 +10571,26 @@ def _parseSuccessfulConversionManifestLine(raw_line: str) -> tuple[str, dict[str
     return variant, metrics
 
 
-def _readSuccessfulConversionManifestMetrics(manifest_path: Path) -> dict[str, dict[str, object]]:
+def readSuccessfulConversionManifestMetrics(manifest_path: Path) -> dict[str, dict[str, object]]:
     """Load persisted best-list metrics keyed by variant."""
     if not manifest_path.exists():
         return {}
 
     rows: dict[str, dict[str, object]] = {}
     for raw_line in manifest_path.read_text(encoding='utf-8').splitlines():
-        variant, metrics = _parseSuccessfulConversionManifestLine(raw_line)
+        variant, metrics = parseSuccessfulConversionManifestLine(raw_line)
         if variant:
             rows[variant] = metrics
     return rows
 
 
-def _successfulConversionSnapshotDir(reports_out_dir: str) -> Path:
+def successfulConversionSnapshotDir(reports_out_dir: str) -> Path:
     """Directory used to persist best-of artifacts for successful conversions."""
     return Path(reports_out_dir) / 'successful_conversions_bestlist'
 
 
-def _successfulConversionSnapshotPaths(reports_out_dir: str, variant: str) -> dict[str, Path]:
-    base_dir = _successfulConversionSnapshotDir(reports_out_dir)
+def successfulConversionSnapshotPaths(reports_out_dir: str, variant: str) -> dict[str, Path]:
+    base_dir = successfulConversionSnapshotDir(reports_out_dir)
     base_dir.mkdir(parents=True, exist_ok=True)
     return {
         'svg': base_dir / f'{variant}.svg',
@@ -10599,9 +10599,9 @@ def _successfulConversionSnapshotPaths(reports_out_dir: str, variant: str) -> di
     }
 
 
-def _restoreSuccessfulConversionSnapshot(variant: str, svg_out_dir: str, reports_out_dir: str) -> bool:
+def restoreSuccessfulConversionSnapshot(variant: str, svg_out_dir: str, reports_out_dir: str) -> bool:
     """Restore the previous best conversion for ``variant`` if a snapshot exists."""
-    snapshot_paths = _successfulConversionSnapshotPaths(reports_out_dir, variant)
+    snapshot_paths = successfulConversionSnapshotPaths(reports_out_dir, variant)
     restored = False
 
     target_svg = Path(svg_out_dir) / f'{variant}.svg'
@@ -10618,9 +10618,9 @@ def _restoreSuccessfulConversionSnapshot(variant: str, svg_out_dir: str, reports
     return restored
 
 
-def _storeSuccessfulConversionSnapshot(variant: str, metrics: dict[str, object], svg_out_dir: str, reports_out_dir: str) -> None:
+def storeSuccessfulConversionSnapshot(variant: str, metrics: dict[str, object], svg_out_dir: str, reports_out_dir: str) -> None:
     """Persist the current best conversion artifacts for later rollback/restoration."""
-    snapshot_paths = _successfulConversionSnapshotPaths(reports_out_dir, variant)
+    snapshot_paths = successfulConversionSnapshotPaths(reports_out_dir, variant)
     target_svg = Path(svg_out_dir) / f'{variant}.svg'
     if target_svg.exists():
         snapshot_paths['svg'].write_text(target_svg.read_text(encoding='utf-8'), encoding='utf-8')
@@ -10635,14 +10635,14 @@ def _storeSuccessfulConversionSnapshot(variant: str, metrics: dict[str, object],
     )
 
 
-def _isSuccessfulConversionCandidateBetter(
+def isSuccessfulConversionCandidateBetter(
     previous_metrics: dict[str, object] | None,
     candidate_metrics: dict[str, object],
 ) -> bool:
     """Accept a new best-list candidate only when it improves quality."""
-    if not _successfulConversionMetricsAvailable(candidate_metrics):
+    if not successfulConversionMetricsAvailable(candidate_metrics):
         return False
-    if not previous_metrics or not _successfulConversionMetricsAvailable(previous_metrics):
+    if not previous_metrics or not successfulConversionMetricsAvailable(previous_metrics):
         return True
 
     previous_status = str(previous_metrics.get('status', '')).strip().lower()
@@ -10652,7 +10652,7 @@ def _isSuccessfulConversionCandidateBetter(
     if previous_status != 'semantic_ok' and candidate_status == 'semantic_ok':
         return True
 
-    improved, _decision, _prev_error, _new_error, _prev_delta, _new_delta = _evaluateQualityPassCandidate(
+    improved, _decision, _prev_error, _new_error, _prev_delta, _new_delta = evaluateQualityPassCandidate(
         previous_metrics,
         candidate_metrics,
     )
@@ -10661,9 +10661,9 @@ def _isSuccessfulConversionCandidateBetter(
 
 
 
-def _formatSuccessfulConversionManifestLine(existing_line: str, metrics: dict[str, object]) -> str:
+def formatSuccessfulConversionManifestLine(existing_line: str, metrics: dict[str, object]) -> str:
     """Render one enriched successful-conversions manifest line."""
-    if not _successfulConversionMetricsAvailable(metrics):
+    if not successfulConversionMetricsAvailable(metrics):
         return existing_line.rstrip('\n')
 
     variant = str(metrics.get('variant', '')).strip().upper()
@@ -10702,7 +10702,7 @@ def _formatSuccessfulConversionManifestLine(existing_line: str, metrics: dict[st
     return line
 
 
-def _latestFailedConversionManifestEntry(reports_out_dir: str) -> dict[str, object] | None:
+def latestFailedConversionManifestEntry(reports_out_dir: str) -> dict[str, object] | None:
     """Return the most recent failed conversion as a manifest-like row."""
     summary_path = Path(reports_out_dir) / "batch_failure_summary.csv"
     if not summary_path.exists():
@@ -10753,12 +10753,12 @@ def updateSuccessfulConversionsManifestWithMetrics(
     if not resolved_manifest_path.exists():
         raise FileNotFoundError(f'Successful-conversions manifest not found: {resolved_manifest_path}')
 
-    previous_manifest_metrics = _readSuccessfulConversionManifestMetrics(resolved_manifest_path)
+    previous_manifest_metrics = readSuccessfulConversionManifestMetrics(resolved_manifest_path)
     metrics_rows = collectSuccessfulConversionQualityMetrics(
         folder_path=folder_path,
         svg_out_dir=svg_out_dir,
         reports_out_dir=reports_out_dir,
-        successful_variants=successful_variants or _load_successful_conversions(resolved_manifest_path),
+        successful_variants=successful_variants or loadSuccessfulConversions(resolved_manifest_path),
     )
 
     accepted_metrics_by_variant: dict[str, dict[str, object]] = {}
@@ -10767,18 +10767,18 @@ def updateSuccessfulConversionsManifestWithMetrics(
     for row in metrics_rows:
         variant = str(row['variant']).upper()
         previous_metrics = previous_manifest_metrics.get(variant)
-        if _isSuccessfulConversionCandidateBetter(previous_metrics, row):
+        if isSuccessfulConversionCandidateBetter(previous_metrics, row):
             accepted_metrics_by_variant[variant] = row
             effective_metrics_rows.append(row)
             accepted_improved_variants.add(variant)
-            _storeSuccessfulConversionSnapshot(variant, row, svg_out_dir, reports_out_dir)
+            storeSuccessfulConversionSnapshot(variant, row, svg_out_dir, reports_out_dir)
         else:
             if previous_metrics is not None:
                 accepted_metrics_by_variant[variant] = previous_metrics
-                effective_metrics_rows.append(_mergeSuccessfulConversionMetrics(row, previous_metrics))
+                effective_metrics_rows.append(mergeSuccessfulConversionMetrics(row, previous_metrics))
             else:
                 effective_metrics_rows.append(row)
-            _restoreSuccessfulConversionSnapshot(variant, svg_out_dir, reports_out_dir)
+            restoreSuccessfulConversionSnapshot(variant, svg_out_dir, reports_out_dir)
 
     updated_lines: list[str] = []
     manifest_variants: set[str] = set()
@@ -10793,7 +10793,7 @@ def updateSuccessfulConversionsManifestWithMetrics(
         if metrics is None:
             updated_lines.append(raw_line)
             continue
-        updated_lines.append(_formatSuccessfulConversionManifestLine(raw_line, metrics))
+        updated_lines.append(formatSuccessfulConversionManifestLine(raw_line, metrics))
 
     missing_variants = [
         variant
@@ -10805,13 +10805,13 @@ def updateSuccessfulConversionsManifestWithMetrics(
             updated_lines.append('')
         for variant in missing_variants:
             updated_lines.append(
-                _formatSuccessfulConversionManifestLine(
+                formatSuccessfulConversionManifestLine(
                     variant,
                     accepted_metrics_by_variant[variant],
                 )
             )
 
-    failed_entry = _latestFailedConversionManifestEntry(reports_out_dir)
+    failed_entry = latestFailedConversionManifestEntry(reports_out_dir)
     updated_without_failed = [
         line
         for line in updated_lines
@@ -10829,11 +10829,11 @@ def updateSuccessfulConversionsManifestWithMetrics(
         updated_lines.append(failed_line)
 
     resolved_manifest_path.write_text('\n'.join(updated_lines) + '\n', encoding='utf-8')
-    return resolved_manifest_path, _sortedSuccessfulConversionMetricsRows(effective_metrics_rows)
+    return resolved_manifest_path, sortedSuccessfulConversionMetricsRows(effective_metrics_rows)
 
 
 
-def _write_successful_conversion_csv_table(csv_path: str | os.PathLike[str], metrics: list[dict[str, object]]) -> str:
+def writeSuccessfulConversionCsvTable(csv_path: str | os.PathLike[str], metrics: list[dict[str, object]]) -> str:
     """Write the successful-conversions leaderboard as a CSV table."""
     csv_path = os.fspath(csv_path)
     os.makedirs(os.path.dirname(csv_path), exist_ok=True)
@@ -10843,7 +10843,7 @@ def _write_successful_conversion_csv_table(csv_path: str | os.PathLike[str], met
             'variant', 'status', 'image_found', 'svg_found', 'log_found', 'best_iteration',
             'diff_score', 'error_per_pixel', 'pixel_count', 'total_delta2', 'mean_delta2', 'std_delta2',
         ])
-        for row in _sortedSuccessfulConversionMetricsRows(metrics):
+        for row in sortedSuccessfulConversionMetricsRows(metrics):
             writer.writerow([
                 row['variant'],
                 row['status'],
@@ -10876,12 +10876,12 @@ def writeSuccessfulConversionQualityReport(
         successful_variants=successful_variants,
     )
 
-    sorted_metrics = _sortedSuccessfulConversionMetricsRows(metrics)
-    csv_path = _write_successful_conversion_csv_table(
+    sorted_metrics = sortedSuccessfulConversionMetricsRows(metrics)
+    csv_path = writeSuccessfulConversionCsvTable(
         os.path.join(reports_out_dir, f'{output_name}.csv'),
         sorted_metrics,
     )
-    leaderboard_csv_path = _write_successful_conversion_csv_table(
+    leaderboard_csv_path = writeSuccessfulConversionCsvTable(
         os.path.join(reports_out_dir, 'successful_conversions.csv'),
         sorted_metrics,
     )
@@ -10912,7 +10912,7 @@ class _TeeTextIO(io.TextIOBase):
             stream.flush()
 
 
-def _autoDetectCsvPath(folder_path: str) -> str | None:
+def autoDetectCsvPath(folder_path: str) -> str | None:
     """Best-effort table lookup for CLI compatibility mode.
 
     Priority:
@@ -10947,18 +10947,18 @@ def _autoDetectCsvPath(folder_path: str) -> str | None:
 
 
 
-def _dotted_attr_name(node: ast.AST) -> str:
+def dottedAttrName(node: ast.AST) -> str:
     if isinstance(node, ast.Name):
         return node.id
     if isinstance(node, ast.Attribute):
-        prefix = _dotted_attr_name(node.value)
+        prefix = dottedAttrName(node.value)
         if prefix:
             return f"{prefix}.{node.attr}"
         return node.attr
     return ""
 
 
-def _moduleCallEdgesForPath(module_path: str | os.PathLike[str]) -> tuple[dict[str, int], list[dict[str, object]]]:
+def moduleCallEdgesForPath(module_path: str | os.PathLike[str]) -> tuple[dict[str, int], list[dict[str, object]]]:
     """Return module-local callables and caller->callee edges for the given source file."""
     source_path = Path(module_path)
     source = source_path.read_text(encoding="utf-8")
@@ -10971,18 +10971,18 @@ def _moduleCallEdgesForPath(module_path: str | os.PathLike[str]) -> tuple[dict[s
         def __init__(self):
             self._class_stack: list[str] = []
 
-        def visit_ClassDef(self, node: ast.ClassDef):
+        def visitClassDef(self, node: ast.ClassDef):
             self._class_stack.append(node.name)
             self.generic_visit(node)
             self._class_stack.pop()
 
-        def visit_FunctionDef(self, node: ast.FunctionDef):
+        def visitFunctionDef(self, node: ast.FunctionDef):
             scoped_name = ".".join(self._class_stack + [node.name]) if self._class_stack else node.name
             callable_lines[scoped_name] = node.lineno
             local_function_names.add(node.name)
             self.generic_visit(node)
 
-        def visit_AsyncFunctionDef(self, node: ast.AsyncFunctionDef):
+        def visitAsyncFunctionDef(self, node: ast.AsyncFunctionDef):
             scoped_name = ".".join(self._class_stack + [node.name]) if self._class_stack else node.name
             callable_lines[scoped_name] = node.lineno
             local_function_names.add(node.name)
@@ -10996,35 +10996,35 @@ def _moduleCallEdgesForPath(module_path: str | os.PathLike[str]) -> tuple[dict[s
             self._scope_stack: list[str] = []
             self._class_stack: list[str] = []
 
-        def _current_scope(self) -> str:
+        def currentScope(self) -> str:
             return ".".join(self._scope_stack)
 
-        def visit_ClassDef(self, node: ast.ClassDef):
+        def visitClassDef(self, node: ast.ClassDef):
             self._class_stack.append(node.name)
             self.generic_visit(node)
             self._class_stack.pop()
 
-        def visit_FunctionDef(self, node: ast.FunctionDef):
+        def visitFunctionDef(self, node: ast.FunctionDef):
             scoped_name = ".".join(self._class_stack + [node.name]) if self._class_stack else node.name
             self._scope_stack.append(scoped_name)
             self.generic_visit(node)
             self._scope_stack.pop()
 
-        def visit_AsyncFunctionDef(self, node: ast.AsyncFunctionDef):
+        def visitAsyncFunctionDef(self, node: ast.AsyncFunctionDef):
             scoped_name = ".".join(self._class_stack + [node.name]) if self._class_stack else node.name
             self._scope_stack.append(scoped_name)
             self.generic_visit(node)
             self._scope_stack.pop()
 
-        def visit_call(self, node: ast.Call):
-            caller = self._current_scope()
+        def visitCall(self, node: ast.Call):
+            caller = self.currentScope()
             callee = ""
-            raw_callee = _dotted_attr_name(node.func)
+            raw_callee = dottedAttrName(node.func)
             if isinstance(node.func, ast.Name):
                 if node.func.id in local_function_names:
                     callee = node.func.id
             elif isinstance(node.func, ast.Attribute):
-                owner = _dotted_attr_name(node.func.value)
+                owner = dottedAttrName(node.func.value)
                 attr = node.func.attr
                 if owner in {"self", "cls"} and self._class_stack:
                     candidate = f"{self._class_stack[-1]}.{attr}"
@@ -11057,7 +11057,7 @@ def _moduleCallEdgesForPath(module_path: str | os.PathLike[str]) -> tuple[dict[s
 _MAINFILES_DIR = Path(__file__).resolve().parent
 
 
-def _snake_to_camel_filename(filename: str) -> str:
+def snakeToCamelFilename(filename: str) -> str:
     stem, suffix = filename.rsplit(".", 1)
     leading_underscores = len(stem) - len(stem.lstrip("_"))
     stem_without_prefix = stem[leading_underscores:]
@@ -11068,7 +11068,7 @@ def _snake_to_camel_filename(filename: str) -> str:
     return f"{'_' * leading_underscores}{camel_stem}.{suffix}"
 
 
-def _snake_to_camel_name(name: str) -> str:
+def snakeToCamelName(name: str) -> str:
     leading_underscores = len(name) - len(name.lstrip("_"))
     core = name[leading_underscores:]
     parts = [part for part in core.split("_") if part]
@@ -11078,11 +11078,11 @@ def _snake_to_camel_name(name: str) -> str:
     return ("_" * leading_underscores) + camel_core
 
 
-def _load_mainfile_function(func_name: str, filename: str):
+def loadMainfileFunction(func_name: str, filename: str):
     """Lade eine ausgelagerte Funktionsdefinition aus src/iccFs/mF in dieses Modul."""
     source_path = _MAINFILES_DIR / filename
     if not source_path.exists():
-        camel_source_path = _MAINFILES_DIR / _snake_to_camel_filename(filename)
+        camel_source_path = _MAINFILES_DIR / snakeToCamelFilename(filename)
         if camel_source_path.exists():
             source_path = camel_source_path
     namespace: dict[str, object] = {}
@@ -11090,32 +11090,32 @@ def _load_mainfile_function(func_name: str, filename: str):
     exec(code, globals(), namespace)
     loaded = namespace.get(func_name)
     if not callable(loaded):
-        loaded = namespace.get(_snake_to_camel_name(func_name))
+        loaded = namespace.get(snakeToCamelName(func_name))
     if not callable(loaded):
         raise RuntimeError(f"Funktion {func_name!r} konnte aus {source_path} nicht geladen werden")
     globals()[func_name] = loaded
     return loaded
 
 
-analyzeRange = _load_mainfile_function("analyze_range", "analyze_range.py")
-_loadDescriptionMapping = _load_mainfile_function("_load_description_mapping", "_load_description_mapping.py")
-_runSvgRenderSubprocessEntrypoint = _load_mainfile_function(
+analyzeRange = loadMainfileFunction("analyze_range", "analyze_range.py")
+loadDescriptionMapping = loadMainfileFunction("_load_description_mapping", "_load_description_mapping.py")
+runSvgRenderSubprocessEntrypoint = loadMainfileFunction(
     "_run_svg_render_subprocess_entrypoint", "_run_svg_render_subprocess_entrypoint.py"
 )
-_bootstrapRequiredImageDependencies = _load_mainfile_function(
+bootstrapRequiredImageDependencies = loadMainfileFunction(
     "_bootstrap_required_image_dependencies", "_bootstrap_required_image_dependencies.py"
 )
-buildLinuxVendorInstallCommand = _load_mainfile_function(
+buildLinuxVendorInstallCommand = loadMainfileFunction(
     "build_linux_vendor_install_command", "build_linux_vendor_install_command.py"
 )
-convertRange = _load_mainfile_function("convert_range", "convert_range.py")
-exportModuleCallTreeCsv = _load_mainfile_function("export_module_call_tree_csv", "export_module_call_tree_csv.py")
-parseArgs = _load_mainfile_function("parse_args", "parse_args.py")
-_optionalLogCapture = contextlib.contextmanager(
-    _load_mainfile_function("_optional_log_capture", "_optional_log_capture.py")
+convertRange = loadMainfileFunction("convert_range", "convert_range.py")
+exportModuleCallTreeCsv = loadMainfileFunction("export_module_call_tree_csv", "export_module_call_tree_csv.py")
+parseArgs = loadMainfileFunction("parse_args", "parse_args.py")
+optionalLogCapture = contextlib.contextmanager(
+    loadMainfileFunction("_optional_log_capture", "_optional_log_capture.py")
 )
-_resolveCliCsvAndOutput = _load_mainfile_function("_resolve_cli_csv_and_output", "_resolve_cli_csv_and_output.py")
-_formatUserDiagnostic = _load_mainfile_function("_format_user_diagnostic", "_format_user_diagnostic.py")
-_promptInteractiveRange = _load_mainfile_function("_prompt_interactive_range", "_prompt_interactive_range.py")
-convertImage = _load_mainfile_function("convert_image", "convert_image.py")
-convertImageVariants = _load_mainfile_function("convert_image_variants", "convert_image_variants.py")
+resolveCliCsvAndOutput = loadMainfileFunction("_resolve_cli_csv_and_output", "_resolve_cli_csv_and_output.py")
+formatUserDiagnostic = loadMainfileFunction("_format_user_diagnostic", "_format_user_diagnostic.py")
+promptInteractiveRange = loadMainfileFunction("_prompt_interactive_range", "_prompt_interactive_range.py")
+convertImage = loadMainfileFunction("convert_image", "convert_image.py")
+convertImageVariants = loadMainfileFunction("convert_image_variants", "convert_image_variants.py")

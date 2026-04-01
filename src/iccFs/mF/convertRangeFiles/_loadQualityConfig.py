@@ -1,5 +1,5 @@
-def _loadQualityConfig(reports_out_dir: str) -> dict[str, object]:
-    path = _qualityConfigPath(reports_out_dir)
+def loadQualityConfig(reports_out_dir: str) -> dict[str, object]:
+    path = qualityConfigPath(reports_out_dir)
     if not os.path.exists(path):
         return {}
     try:

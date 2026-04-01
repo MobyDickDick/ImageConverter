@@ -1,4 +1,4 @@
-def _mergeEntryAndImageDesc(entry_desc: str, image_desc: str) -> str:
+def mergeEntryAndImageDesc(entry_desc: str, image_desc: str) -> str:
     e = entry_desc.strip()
     i = image_desc.strip()
     if e and i and e != i:

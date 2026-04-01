@@ -1,4 +1,4 @@
-def _normalizedGeometrySignature(w: int, h: int, params: dict) -> dict[str, float]:
+def normalizedGeometrySignature(w: int, h: int, params: dict) -> dict[str, float]:
     sig: dict[str, float] = {}
     scale = max(1.0, float(min(w, h)))
 

@@ -1,4 +1,4 @@
-def _extractSvgInner(svg_text: str) -> str:
+def extractSvgInner(svg_text: str) -> str:
     match = re.search(r"<svg[^>]*>(.*)</svg>", svg_text, flags=re.DOTALL | re.IGNORECASE)
     if match:
         return match.group(1).strip()

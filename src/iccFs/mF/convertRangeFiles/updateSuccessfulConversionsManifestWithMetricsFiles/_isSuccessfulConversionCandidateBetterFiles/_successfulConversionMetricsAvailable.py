@@ -1,4 +1,4 @@
-def _successfulConversionMetricsAvailable(metrics: dict[str, object]) -> bool:
+def successfulConversionMetricsAvailable(metrics: dict[str, object]) -> bool:
     """Return whether a metrics row contains fresh conversion data worth persisting."""
     status = str(metrics.get('status', '')).strip()
     if status:

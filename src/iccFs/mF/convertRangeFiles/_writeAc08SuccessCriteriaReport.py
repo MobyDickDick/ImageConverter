@@ -1,4 +1,4 @@
-def _writeAc08SuccessCriteriaReport(
+def writeAc08SuccessCriteriaReport(
     reports_out_dir: str,
     *,
     selected_variants: list[str],
@@ -70,7 +70,7 @@ def _writeAc08SuccessCriteriaReport(
         else 0.0
     )
 
-    previous_good = _summarizePreviousGoodAc08Variants(reports_out_dir)
+    previous_good = summarizePreviousGoodAc08Variants(reports_out_dir)
     previous_good_preserved_count = len(previous_good["preserved"])
     previous_good_regressed_count = len(previous_good["regressed"])
     previous_good_missing_count = len(previous_good["missing"])

@@ -1,6 +1,6 @@
-def _storeSuccessfulConversionSnapshot(variant: str, metrics: dict[str, object], svg_out_dir: str, reports_out_dir: str) -> None:
+def storeSuccessfulConversionSnapshot(variant: str, metrics: dict[str, object], svg_out_dir: str, reports_out_dir: str) -> None:
     """Persist the current best conversion artifacts for later rollback/restoration."""
-    snapshot_paths = _successfulConversionSnapshotPaths(reports_out_dir, variant)
+    snapshot_paths = successfulConversionSnapshotPaths(reports_out_dir, variant)
     target_svg = Path(svg_out_dir) / f'{variant}.svg'
     if target_svg.exists():
         snapshot_paths['svg'].write_text(target_svg.read_text(encoding='utf-8'), encoding='utf-8')

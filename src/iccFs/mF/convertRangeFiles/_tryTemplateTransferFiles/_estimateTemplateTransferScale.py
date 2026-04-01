@@ -1,4 +1,4 @@
-def _estimateTemplateTransferScale(
+def estimateTemplateTransferScale(
     img_orig: np.ndarray,
     donor_svg_text: str,
     target_w: int,
@@ -8,7 +8,7 @@ def _estimateTemplateTransferScale(
 ) -> float | None:
     """Estimate donor->target scale from foreground silhouette bboxes."""
     rendered = Action.renderSvgToNumpy(
-        _buildTransformedSvgFromTemplate(
+        buildTransformedSvgFromTemplate(
             donor_svg_text,
             target_w,
             target_h,
@@ -21,10 +21,10 @@ def _estimateTemplateTransferScale(
     if rendered is None:
         return None
 
-    target_mask = Action._foregroundMask(img_orig)
-    donor_mask = Action._foregroundMask(rendered)
-    target_bbox = Action._maskBbox(target_mask)
-    donor_bbox = Action._maskBbox(donor_mask)
+    target_mask = Action.foregroundMask(img_orig)
+    donor_mask = Action.foregroundMask(rendered)
+    target_bbox = Action.maskBbox(target_mask)
+    donor_bbox = Action.maskBbox(donor_mask)
     if target_bbox is None or donor_bbox is None:
         return None
 

@@ -1,4 +1,4 @@
-def _scaleBadgeParams(
+def scaleBadgeParams(
     anchor: dict,
     anchor_w: int,
     anchor_h: int,
@@ -50,7 +50,7 @@ def _scaleBadgeParams(
             scaled[key] = float(anchor[key]) * float(factor)
 
     if scaled.get("circle_enabled", True):
-        overflow_guard = _needsLargeCircleOverflowGuard(scaled)
+        overflow_guard = needsLargeCircleOverflowGuard(scaled)
         required_r = (float(target_w) / 2.0) + 0.5 if overflow_guard else 1.0
         if overflow_guard:
             scaled["allow_circle_overflow"] = True
@@ -73,14 +73,14 @@ def _scaleBadgeParams(
         max_cy = float(target_h) - r - half_stroke
 
         if min_cx > max_cx:
-            cx = float(target_w) / 2.0 if not overflow_guard else float(Action._clipScalar(cx, 0.0, float(target_w)))
+            cx = float(target_w) / 2.0 if not overflow_guard else float(Action.clipScalar(cx, 0.0, float(target_w)))
         else:
-            cx = float(Action._clipScalar(cx, min_cx, max_cx))
+            cx = float(Action.clipScalar(cx, min_cx, max_cx))
 
         if min_cy > max_cy:
-            cy = float(target_h) / 2.0 if not overflow_guard else float(Action._clipScalar(cy, 0.0, float(target_h)))
+            cy = float(target_h) / 2.0 if not overflow_guard else float(Action.clipScalar(cy, 0.0, float(target_h)))
         else:
-            cy = float(Action._clipScalar(cy, min_cy, max_cy))
+            cy = float(Action.clipScalar(cy, min_cy, max_cy))
 
         if scaled.get("stem_enabled") and "stem_width" in scaled:
             stem_width = max(1e-6, float(scaled["stem_width"]))
@@ -89,13 +89,13 @@ def _scaleBadgeParams(
                 bottom_anchored = float(scaled.get("stem_bottom", 0.0)) >= (float(target_h) - 0.5)
                 reanchored_top = cy + r - (stem_width * 0.55)
                 if bottom_anchored:
-                    scaled["stem_top"] = float(Action._clipScalar(reanchored_top, 0.0, float(target_h)))
+                    scaled["stem_top"] = float(Action.clipScalar(reanchored_top, 0.0, float(target_h)))
                     scaled["stem_bottom"] = float(target_h)
                 else:
                     stem_len = max(1.0, float(scaled.get("stem_bottom", reanchored_top)) - float(scaled.get("stem_top", reanchored_top)))
-                    scaled["stem_top"] = float(Action._clipScalar(reanchored_top, 0.0, float(target_h - 1)))
+                    scaled["stem_top"] = float(Action.clipScalar(reanchored_top, 0.0, float(target_h - 1)))
                     scaled["stem_bottom"] = float(
-                        Action._clipScalar(float(scaled["stem_top"]) + stem_len, float(scaled["stem_top"]) + 1.0, float(target_h))
+                        Action.clipScalar(float(scaled["stem_top"]) + stem_len, float(scaled["stem_top"]) + 1.0, float(target_h))
                     )
 
         scaled["cx"] = cx

@@ -1,4 +1,4 @@
-def _templateTransferTransformCandidates(
+def templateTransferTransformCandidates(
     target_variant: str,
     donor_variant: str,
     *,
@@ -13,7 +13,7 @@ def _templateTransferTransformCandidates(
         estimated = None
         if estimated_scale_by_rotation is not None:
             estimated = estimated_scale_by_rotation.get(rotation)
-        for scale in _templateTransferScaleCandidates(estimated if estimated is not None else 1.0):
+        for scale in templateTransferScaleCandidates(estimated if estimated is not None else 1.0):
             candidate = (rotation, float(scale))
             key = (rotation, round(float(scale), 4))
             if key in seen:

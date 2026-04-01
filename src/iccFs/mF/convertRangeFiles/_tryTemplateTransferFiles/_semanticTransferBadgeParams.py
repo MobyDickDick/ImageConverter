@@ -1,4 +1,4 @@
-def _semanticTransferBadgeParams(
+def semanticTransferBadgeParams(
     donor_params: dict[str, object],
     target_params: dict[str, object],
     *,
@@ -33,7 +33,7 @@ def _semanticTransferBadgeParams(
     ca = math.cos(angle)
     sa = math.sin(angle)
 
-    def _rotScalePoint(x: float, y: float) -> tuple[float, float]:
+    def rotScalePoint(x: float, y: float) -> tuple[float, float]:
         dx = (x - cx) * float(scale)
         dy = (y - cy) * float(scale)
         rx = (dx * ca) - (dy * sa)
@@ -41,22 +41,22 @@ def _semanticTransferBadgeParams(
         return tx + rx, ty + ry
 
     if p.get("arm_enabled"):
-        x1, y1 = _rotScalePoint(float(p.get("arm_x1", tx)), float(p.get("arm_y1", ty)))
-        x2, y2 = _rotScalePoint(float(p.get("arm_x2", tx)), float(p.get("arm_y2", ty)))
-        p["arm_x1"] = float(Action._clipScalar(x1, 0.0, max(0.0, float(target_w - 1))))
-        p["arm_y1"] = float(Action._clipScalar(y1, 0.0, max(0.0, float(target_h - 1))))
-        p["arm_x2"] = float(Action._clipScalar(x2, 0.0, max(0.0, float(target_w - 1))))
-        p["arm_y2"] = float(Action._clipScalar(y2, 0.0, max(0.0, float(target_h - 1))))
+        x1, y1 = rotScalePoint(float(p.get("arm_x1", tx)), float(p.get("arm_y1", ty)))
+        x2, y2 = rotScalePoint(float(p.get("arm_x2", tx)), float(p.get("arm_y2", ty)))
+        p["arm_x1"] = float(Action.clipScalar(x1, 0.0, max(0.0, float(target_w - 1))))
+        p["arm_y1"] = float(Action.clipScalar(y1, 0.0, max(0.0, float(target_h - 1))))
+        p["arm_x2"] = float(Action.clipScalar(x2, 0.0, max(0.0, float(target_w - 1))))
+        p["arm_y2"] = float(Action.clipScalar(y2, 0.0, max(0.0, float(target_h - 1))))
 
     if p.get("stem_enabled"):
         stem_x = float(p.get("stem_x", tx)) + (float(p.get("stem_width", 1.0)) / 2.0)
         top = float(p.get("stem_top", ty))
         bottom = float(p.get("stem_bottom", ty))
-        x1, y1 = _rotScalePoint(stem_x, top)
-        x2, y2 = _rotScalePoint(stem_x, bottom)
-        p["stem_x"] = float(Action._clipScalar((x1 + x2) / 2.0 - (float(p.get("stem_width", 1.0)) / 2.0), 0.0, float(target_w)))
-        p["stem_top"] = float(Action._clipScalar(min(y1, y2), 0.0, float(target_h)))
-        p["stem_bottom"] = float(Action._clipScalar(max(y1, y2), 0.0, float(target_h)))
+        x1, y1 = rotScalePoint(stem_x, top)
+        x2, y2 = rotScalePoint(stem_x, bottom)
+        p["stem_x"] = float(Action.clipScalar((x1 + x2) / 2.0 - (float(p.get("stem_width", 1.0)) / 2.0), 0.0, float(target_w)))
+        p["stem_top"] = float(Action.clipScalar(min(y1, y2), 0.0, float(target_h)))
+        p["stem_bottom"] = float(Action.clipScalar(max(y1, y2), 0.0, float(target_h)))
 
     # Keep text horizontally readable while preventing aggressive down-scaling
     # during template transfer. The historical sqrt(scale) shrink was often too
@@ -75,5 +75,5 @@ def _semanticTransferBadgeParams(
 
     symbol_name = str(target_params.get("label") or target_params.get("variant") or target_params.get("base") or "")
     if symbol_name:
-        p = Action._finalizeAc08Style(symbol_name, p)
+        p = Action.finalizeAc08Style(symbol_name, p)
     return p
