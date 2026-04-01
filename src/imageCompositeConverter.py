@@ -8543,6 +8543,15 @@ def _normalizeRangeToken(value: str) -> str:
     return re.sub(r"[^A-Z0-9]", "", base)
 
 
+def _normalizeExplicitRangeToken(value: str) -> str:
+    raw = os.path.splitext(str(value or "").upper())[0]
+    return re.sub(r"[^A-Z0-9]", "", raw)
+
+
+def _isExplicitSizeVariantToken(token: str) -> bool:
+    return bool(re.match(r"^[A-Z]{2,3}\d{4}(?:[1-9]|[1-9]S|L|M|S|W|X)$", token))
+
+
 def _compactRangeToken(value: str) -> str:
     token = _normalizeRangeToken(value)
     match = re.match(r"^([A-Z]+)(\d+)$", token)
@@ -8606,6 +8615,16 @@ def _matchesExactPrefixFilter(filename: str, start_ref: str, end_ref: str) -> bo
     end_token = _normalizeRangeToken(end_ref)
     if not start_token or start_token != end_token:
         return False
+    explicit_start = _normalizeExplicitRangeToken(start_ref)
+    explicit_end = _normalizeExplicitRangeToken(end_ref)
+    explicit_stem = _normalizeExplicitRangeToken(filename)
+    if (
+        explicit_start
+        and explicit_start == explicit_end
+        and _isExplicitSizeVariantToken(explicit_start)
+        and explicit_start != start_token
+    ):
+        return explicit_stem == explicit_start
     stem = _normalizeRangeToken(getBaseNameFromFile(os.path.splitext(filename)[0]))
     if not stem:
         return False
@@ -8617,11 +8636,23 @@ def _inRequestedRange(filename: str, start_ref: str, end_ref: str) -> bool:
     stem_parts = _extractRefParts(stem)
     start_parts = _extractRefParts(start_ref)
     end_parts = _extractRefParts(end_ref)
+    explicit_start = _normalizeExplicitRangeToken(start_ref)
+    explicit_end = _normalizeExplicitRangeToken(end_ref)
+    normalized_start = _normalizeRangeToken(start_ref)
 
     # Identical start/end filters should also work as a prefix selector so an
     # input like AC081..AC081 includes AC0814_L, AC0813_M, etc.
-    if _matchesExactPrefixFilter(filename, start_ref, end_ref):
+    exact_prefix_match = _matchesExactPrefixFilter(filename, start_ref, end_ref)
+    if exact_prefix_match:
         return True
+    if (
+        explicit_start
+        and explicit_start == explicit_end
+        and _isExplicitSizeVariantToken(explicit_start)
+        and normalized_start
+        and explicit_start != normalized_start
+    ):
+        return False
 
     # If no parseable range bounds are provided, fall back to a shared partial
     # token filter. This keeps interactive batches small, e.g. AC08..A08 -> A08*.
@@ -11751,7 +11782,7 @@ def parseArgs(argv: list[str] | None = None) -> argparse.Namespace:
         help="Timeout pro isoliertem SVG-Render-Aufruf in Sekunden (Default: 20).",
     )
     parser.add_argument("--_render-svg-subprocess", action="store_true", help=argparse.SUPPRESS)
-    args = parser.parseArgs(argv)
+    args = parser.parse_args(argv)
     if args.iterations_override is not None:
         args.iterations = args.iterations_override
     delattr(args, "iterations_override")

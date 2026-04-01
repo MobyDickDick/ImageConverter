@@ -2013,6 +2013,12 @@ def test_in_requested_range_partial_filter_ignores_size_suffix_in_bounds() -> No
     assert image_composite_converter._inRequestedRange("AC0800_L.jpg", "AC080_L", "AC080_L") is True
 
 
+def test_in_requested_range_exact_variant_bounds_match_single_variant_only() -> None:
+    """Identical explicit variant bounds (e.g. AC0800_L) should not expand to sibling sizes."""
+    assert image_composite_converter._inRequestedRange("AC0800_L.jpg", "AC0800_L.jpg", "AC0800_L.jpg") is True
+    assert image_composite_converter._inRequestedRange("AC0800_M.jpg", "AC0800_L.jpg", "AC0800_L.jpg") is False
+
+
 def test_in_requested_range_supports_one_sided_bounds() -> None:
     """When one bound is invalid, the valid bound should still be applied."""
     assert image_composite_converter._inRequestedRange("AC0812_L.jpg", "", "AC0812") is True
