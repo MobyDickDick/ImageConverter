@@ -1,4 +1,4 @@
-def _latestFailedConversionManifestEntry(reports_out_dir: str) -> dict[str, object] | None:
+def latestFailedConversionManifestEntry(reports_out_dir: str) -> dict[str, object] | None:
     """Return the most recent failed conversion as a manifest-like row."""
     summary_path = Path(reports_out_dir) / "batch_failure_summary.csv"
     if not summary_path.exists():

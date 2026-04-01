@@ -1,4 +1,4 @@
-def _isSemanticTemplateVariant(base_name: str, params: dict[str, object] | None = None) -> bool:
+def isSemanticTemplateVariant(base_name: str, params: dict[str, object] | None = None) -> bool:
     """Return whether an existing converted SVG should participate as semantic donor."""
     normalized = str(getBaseNameFromFile(base_name or "")).upper()
     if not normalized:

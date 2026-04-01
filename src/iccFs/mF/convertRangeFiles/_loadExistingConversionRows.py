@@ -1,11 +1,11 @@
-def _loadExistingConversionRows(output_root: str, folder_path: str) -> list[dict[str, object]]:
+def loadExistingConversionRows(output_root: str, folder_path: str) -> list[dict[str, object]]:
     """Load previously converted variants so they can act as donor templates.
 
     This lets an earlier conversion batch (for example the already converted
     ``AC08*`` symbols) improve later runs without requiring a fresh full pass.
     """
-    reports_path = Path(_reportsOutputDir(output_root)) / "Iteration_Log.csv"
-    svg_out_dir = Path(_convertedSvgOutputDir(output_root))
+    reports_path = Path(reportsOutputDir(output_root)) / "Iteration_Log.csv"
+    svg_out_dir = Path(convertedSvgOutputDir(output_root))
     if not reports_path.exists() or not svg_out_dir.exists():
         return []
 
@@ -23,12 +23,12 @@ def _loadExistingConversionRows(output_root: str, folder_path: str) -> list[dict
                 if not svg_path.exists():
                     continue
 
-                geometry = _readSvgGeometry(str(svg_path))
+                geometry = readSvgGeometry(str(svg_path))
                 if geometry is None:
                     continue
                 w, h, params = geometry
                 base = getBaseNameFromFile(variant).upper()
-                if _isSemanticTemplateVariant(base, params):
+                if isSemanticTemplateVariant(base, params):
                     params["mode"] = "semantic_badge"
 
                 error_per_pixel_raw = str(raw_row.get("FehlerProPixel", "")).strip().replace(",", ".")
@@ -37,7 +37,7 @@ def _loadExistingConversionRows(output_root: str, folder_path: str) -> list[dict
                 image_path = Path(folder_path) / filename
                 if image_path.exists():
                     try:
-                        width, height = _sniffRasterSize(image_path)
+                        width, height = sniffRasterSize(image_path)
                         w = int(width)
                         h = int(height)
                     except Exception:

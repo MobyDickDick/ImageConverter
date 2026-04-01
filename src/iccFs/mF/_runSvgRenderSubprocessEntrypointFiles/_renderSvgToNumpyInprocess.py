@@ -1,4 +1,4 @@
-def _renderSvgToNumpyInprocess(svg_string: str, size_w: int, size_h: int):
+def renderSvgToNumpyInprocess(svg_string: str, size_w: int, size_h: int):
     if fitz is None or np is None or cv2 is None:
         return None
 

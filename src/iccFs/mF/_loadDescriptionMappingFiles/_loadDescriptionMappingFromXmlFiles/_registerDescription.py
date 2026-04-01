@@ -1,4 +1,4 @@
-def _registerDescription(raw_desc: dict[str, str], key: str, description: str) -> None:
+def registerDescription(raw_desc: dict[str, str], key: str, description: str) -> None:
     normalized_desc = str(description or "").strip()
     if not normalized_desc:
         return

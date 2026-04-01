@@ -1,4 +1,4 @@
-def _connectorStemDirection(params: dict[str, object]) -> int | None:
+def connectorStemDirection(params: dict[str, object]) -> int | None:
     """Return vertical stem direction: -1 up, +1 down, or None if unknown."""
     y1 = params.get("arm_y1")
     y2 = params.get("arm_y2")

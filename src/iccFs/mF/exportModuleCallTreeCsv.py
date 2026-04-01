@@ -3,7 +3,7 @@ def exportModuleCallTreeCsv(
     module_path: str | os.PathLike[str] = __file__,
 ) -> str:
     """Export a module-local call tree/table as CSV and return the written path."""
-    callable_lines, edges = _moduleCallEdgesForPath(module_path)
+    callable_lines, edges = moduleCallEdgesForPath(module_path)
     incoming: dict[str, int] = {name: 0 for name in callable_lines}
     adjacency: dict[str, set[str]] = {name: set() for name in callable_lines}
     for edge in edges:

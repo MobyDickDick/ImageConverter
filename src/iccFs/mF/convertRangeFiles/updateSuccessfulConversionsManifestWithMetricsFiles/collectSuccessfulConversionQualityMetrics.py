@@ -14,14 +14,14 @@ def collectSuccessfulConversionQualityMetrics(
         raise RuntimeError('Required image dependencies are missing: ' + ', '.join(missing))
 
     variants = [str(v).strip().upper() for v in (successful_variants or SUCCESSFUL_CONVERSIONS) if str(v).strip()]
-    iteration_rows = _loadIterationLogRows(reports_out_dir)
+    iteration_rows = loadIterationLogRows(reports_out_dir)
     metrics: list[dict[str, object]] = []
     seen: set[str] = set()
     for variant in variants:
         if variant in seen:
             continue
         seen.add(variant)
-        image_path = _findImagePathByVariant(folder_path, variant)
+        image_path = findImagePathByVariant(folder_path, variant)
         svg_path = os.path.join(svg_out_dir, f'{variant}.svg')
         log_path = os.path.join(reports_out_dir, f'{variant}_element_validation.log')
 
@@ -40,7 +40,7 @@ def collectSuccessfulConversionQualityMetrics(
             'std_delta2': float('nan'),
         }
 
-        details = _readValidationLogDetails(log_path) if os.path.exists(log_path) else {}
+        details = readValidationLogDetails(log_path) if os.path.exists(log_path) else {}
         row['status'] = details.get('status', '')
 
         iteration = iteration_rows.get(variant, {})

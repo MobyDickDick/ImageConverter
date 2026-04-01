@@ -1,4 +1,4 @@
-def _buildTransformedSvgFromTemplate(
+def buildTransformedSvgFromTemplate(
     template_svg_text: str,
     target_w: int,
     target_h: int,
@@ -6,7 +6,7 @@ def _buildTransformedSvgFromTemplate(
     rotation_deg: int,
     scale: float,
 ) -> str:
-    inner = _extractSvgInner(template_svg_text)
+    inner = extractSvgInner(template_svg_text)
     # Keep donor stroke widths visually stable when trying scale-based transfers.
     # This mirrors the "M->S/L while preserving line thickness" workflow that is
     # often needed for noisy small/large bitmap variants.

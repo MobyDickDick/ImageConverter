@@ -18,7 +18,7 @@ ANNOTATION_COLORS: dict[str, tuple[int, int, int]] = {
 }
 
 
-def _expand_bbox(bbox: tuple[int, int, int, int], width: int, height: int, pad: int = 1) -> tuple[int, int, int, int]:
+def expandBbox(bbox: tuple[int, int, int, int], width: int, height: int, pad: int = 1) -> tuple[int, int, int, int]:
     x0, y0, x1, y1 = bbox
     return (
         max(0, int(x0) - pad),
@@ -28,7 +28,7 @@ def _expand_bbox(bbox: tuple[int, int, int, int], width: int, height: int, pad: 
     )
 
 
-def _bbox_to_dict(label: str, bbox: tuple[int, int, int, int], color: tuple[int, int, int]) -> dict[str, object]:
+def bboxToDict(label: str, bbox: tuple[int, int, int, int], color: tuple[int, int, int]) -> dict[str, object]:
     x0, y0, x1, y1 = bbox
     return {
         "label": label,
@@ -73,8 +73,8 @@ def detectRelevantRegionsImpl(img, cv2_module, np_module) -> list[dict[str, obje
         radius = max(1, radius)
         circle_mask = np_module.zeros((height, width), dtype=np_module.uint8)
         cv2_module.circle(circle_mask, (cx, cy), radius + 1, 255, thickness=-1)
-        bbox = _expand_bbox((cx - radius, cy - radius, cx + radius, cy + radius), width, height, pad=1)
-        regions.append(_bbox_to_dict("circle", bbox, ANNOTATION_COLORS["circle"]))
+        bbox = expandBbox((cx - radius, cy - radius, cx + radius, cy + radius), width, height, pad=1)
+        regions.append(bboxToDict("circle", bbox, ANNOTATION_COLORS["circle"]))
         used_mask = cv2_module.bitwise_or(used_mask, circle_mask)
 
     residual = cv2_module.bitwise_and(binary_inv, cv2_module.bitwise_not(used_mask))
@@ -101,13 +101,13 @@ def detectRelevantRegionsImpl(img, cv2_module, np_module) -> list[dict[str, obje
         text_candidates.append(bbox)
 
     if stem_candidate is not None:
-        regions.append(_bbox_to_dict("stem", _expand_bbox(stem_candidate, width, height, pad=1), ANNOTATION_COLORS["stem"]))
+        regions.append(bboxToDict("stem", expandBbox(stem_candidate, width, height, pad=1), ANNOTATION_COLORS["stem"]))
     if text_candidates:
         x0 = min(b[0] for b in text_candidates)
         y0 = min(b[1] for b in text_candidates)
         x1 = max(b[2] for b in text_candidates)
         y1 = max(b[3] for b in text_candidates)
-        regions.append(_bbox_to_dict("text", _expand_bbox((x0, y0, x1, y1), width, height, pad=1), ANNOTATION_COLORS["text"]))
+        regions.append(bboxToDict("text", expandBbox((x0, y0, x1, y1), width, height, pad=1), ANNOTATION_COLORS["text"]))
     return regions
 
 
@@ -196,8 +196,8 @@ def analyzeRangeImpl(
 
 
 # Backward-compatible aliases
-_expand_bbox = _expand_bbox
-_bbox_to_dict = _bbox_to_dict
+expandBbox = expandBbox
+bboxToDict = bboxToDict
 detectRelevantRegionsImpl = detectRelevantRegionsImpl
 annotateImageRegionsImpl = annotateImageRegionsImpl
 analyzeRangeImpl = analyzeRangeImpl

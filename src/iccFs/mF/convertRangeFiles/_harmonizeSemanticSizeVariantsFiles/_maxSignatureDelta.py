@@ -1,4 +1,4 @@
-def _maxSignatureDelta(sig_a: dict[str, float], sig_b: dict[str, float]) -> float:
+def maxSignatureDelta(sig_a: dict[str, float], sig_b: dict[str, float]) -> float:
     keys = sorted(set(sig_a.keys()).intersection(sig_b.keys()))
     if not keys:
         return 1.0

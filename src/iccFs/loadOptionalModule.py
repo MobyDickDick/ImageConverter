@@ -13,9 +13,9 @@ def loadOptionalModule(moduleName: str):
         return module.importlib.import_module(moduleName)
     except Exception as exc:  # pragma: no cover
         lastExc: BaseException = exc
-        module._clear_partial_module_import(moduleName)
+        module.clearPartialModuleImport(moduleName)
 
-    for sitePackages in module._vendored_site_packages_dirs():
+    for sitePackages in module.vendoredSitePackagesDirs():
         attemptedPaths.append(sitePackages)
         pathStr = str(sitePackages)
         added = False
@@ -26,13 +26,13 @@ def loadOptionalModule(moduleName: str):
             return module.importlib.import_module(moduleName)
         except Exception as exc:  # pragma: no cover
             lastExc = exc
-            module._clear_partial_module_import(moduleName)
+            module.clearPartialModuleImport(moduleName)
         finally:
             if added:
                 with contextlib.suppress(ValueError):
                     module.sys.path.remove(pathStr)
 
-    module.OPTIONAL_DEPENDENCY_ERRORS[moduleName] = module._describe_optional_dependency_error(moduleName, lastExc, attemptedPaths)
+    module.OPTIONAL_DEPENDENCY_ERRORS[moduleName] = module.describeOptionalDependencyError(moduleName, lastExc, attemptedPaths)
     return None
 
 

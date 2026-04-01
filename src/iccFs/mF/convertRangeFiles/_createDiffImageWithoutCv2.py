@@ -1,4 +1,4 @@
-def _createDiffImageWithoutCv2(input_path: str | Path, svg_content: str):
+def createDiffImageWithoutCv2(input_path: str | Path, svg_content: str):
     """Create a normalized signed red/cyan diff image when numpy/opencv are unavailable."""
     if fitz is None:
         raise RuntimeError("Fallback diff generation requires fitz (PyMuPDF).")

@@ -1,4 +1,4 @@
-def _rankTemplateTransferDonors(
+def rankTemplateTransferDonors(
     target_row: dict[str, object],
     donor_rows: list[dict[str, object]],
 ) -> list[dict[str, object]]:
@@ -7,7 +7,7 @@ def _rankTemplateTransferDonors(
     target_sig: dict[str, float] | None = None
     target_params = target_row.get("params")
     if isinstance(target_params, dict):
-        target_sig = _normalizedGeometrySignature(
+        target_sig = normalizedGeometrySignature(
             int(target_row.get("w", 0)),
             int(target_row.get("h", 0)),
             dict(target_params),
@@ -20,11 +20,11 @@ def _rankTemplateTransferDonors(
         donor_sig: dict[str, float] | None = None
         donor_params = donor.get("params")
         if isinstance(donor_params, dict):
-            donor_sig = _normalizedGeometrySignature(int(donor.get("w", 0)), int(donor.get("h", 0)), dict(donor_params))
+            donor_sig = normalizedGeometrySignature(int(donor.get("w", 0)), int(donor.get("h", 0)), dict(donor_params))
 
         delta = float("inf")
         if target_sig is not None and donor_sig is not None:
-            delta = _maxSignatureDelta(target_sig, donor_sig)
+            delta = maxSignatureDelta(target_sig, donor_sig)
 
         key = (0.0 if donor_base == target_base else 1.0, delta, donor_error_pp)
         ranked.append((key, donor))

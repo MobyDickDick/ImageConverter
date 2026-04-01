@@ -1,4 +1,4 @@
-def _iterationStrategyForPass(pass_idx: int, base_iterations: int) -> tuple[int, int]:
+def iterationStrategyForPass(pass_idx: int, base_iterations: int) -> tuple[int, int]:
     """Adaptive per-pass search budget for unresolved quality cases."""
     p = max(1, int(pass_idx))
     base = max(1, int(base_iterations))

@@ -1,4 +1,4 @@
-def _connectorArmDirection(params: dict[str, object]) -> int | None:
+def connectorArmDirection(params: dict[str, object]) -> int | None:
     """Return horizontal arm side: -1 left of circle, +1 right, or None if unknown."""
     x1 = params.get("arm_x1")
     x2 = params.get("arm_x2")

@@ -1,6 +1,6 @@
-def _restoreSuccessfulConversionSnapshot(variant: str, svg_out_dir: str, reports_out_dir: str) -> bool:
+def restoreSuccessfulConversionSnapshot(variant: str, svg_out_dir: str, reports_out_dir: str) -> bool:
     """Restore the previous best conversion for ``variant`` if a snapshot exists."""
-    snapshot_paths = _successfulConversionSnapshotPaths(reports_out_dir, variant)
+    snapshot_paths = successfulConversionSnapshotPaths(reports_out_dir, variant)
     restored = False
 
     target_svg = Path(svg_out_dir) / f'{variant}.svg'

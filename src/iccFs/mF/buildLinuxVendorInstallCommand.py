@@ -23,5 +23,5 @@ def buildLinuxVendorInstallCommand(
         "--only-binary=:all:",
         "--upgrade-strategy",
         "eager",
-        *_requiredVendorPackages(),
+        *requiredVendorPackages(),
     ]

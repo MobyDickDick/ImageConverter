@@ -16,12 +16,12 @@ def updateSuccessfulConversionsManifestWithMetrics(
     if not resolved_manifest_path.exists():
         raise FileNotFoundError(f'Successful-conversions manifest not found: {resolved_manifest_path}')
 
-    previous_manifest_metrics = _readSuccessfulConversionManifestMetrics(resolved_manifest_path)
+    previous_manifest_metrics = readSuccessfulConversionManifestMetrics(resolved_manifest_path)
     metrics_rows = collectSuccessfulConversionQualityMetrics(
         folder_path=folder_path,
         svg_out_dir=svg_out_dir,
         reports_out_dir=reports_out_dir,
-        successful_variants=successful_variants or _load_successful_conversions(resolved_manifest_path),
+        successful_variants=successful_variants or loadSuccessfulConversions(resolved_manifest_path),
     )
 
     accepted_metrics_by_variant: dict[str, dict[str, object]] = {}
@@ -30,18 +30,18 @@ def updateSuccessfulConversionsManifestWithMetrics(
     for row in metrics_rows:
         variant = str(row['variant']).upper()
         previous_metrics = previous_manifest_metrics.get(variant)
-        if _isSuccessfulConversionCandidateBetter(previous_metrics, row):
+        if isSuccessfulConversionCandidateBetter(previous_metrics, row):
             accepted_metrics_by_variant[variant] = row
             effective_metrics_rows.append(row)
             accepted_improved_variants.add(variant)
-            _storeSuccessfulConversionSnapshot(variant, row, svg_out_dir, reports_out_dir)
+            storeSuccessfulConversionSnapshot(variant, row, svg_out_dir, reports_out_dir)
         else:
             if previous_metrics is not None:
                 accepted_metrics_by_variant[variant] = previous_metrics
-                effective_metrics_rows.append(_mergeSuccessfulConversionMetrics(row, previous_metrics))
+                effective_metrics_rows.append(mergeSuccessfulConversionMetrics(row, previous_metrics))
             else:
                 effective_metrics_rows.append(row)
-            _restoreSuccessfulConversionSnapshot(variant, svg_out_dir, reports_out_dir)
+            restoreSuccessfulConversionSnapshot(variant, svg_out_dir, reports_out_dir)
 
     updated_lines: list[str] = []
     manifest_variants: set[str] = set()
@@ -56,7 +56,7 @@ def updateSuccessfulConversionsManifestWithMetrics(
         if metrics is None:
             updated_lines.append(raw_line)
             continue
-        updated_lines.append(_formatSuccessfulConversionManifestLine(raw_line, metrics))
+        updated_lines.append(formatSuccessfulConversionManifestLine(raw_line, metrics))
 
     missing_variants = [
         variant
@@ -68,13 +68,13 @@ def updateSuccessfulConversionsManifestWithMetrics(
             updated_lines.append('')
         for variant in missing_variants:
             updated_lines.append(
-                _formatSuccessfulConversionManifestLine(
+                formatSuccessfulConversionManifestLine(
                     variant,
                     accepted_metrics_by_variant[variant],
                 )
             )
 
-    failed_entry = _latestFailedConversionManifestEntry(reports_out_dir)
+    failed_entry = latestFailedConversionManifestEntry(reports_out_dir)
     updated_without_failed = [
         line
         for line in updated_lines
@@ -92,4 +92,4 @@ def updateSuccessfulConversionsManifestWithMetrics(
         updated_lines.append(failed_line)
 
     resolved_manifest_path.write_text('\n'.join(updated_lines) + '\n', encoding='utf-8')
-    return resolved_manifest_path, _sortedSuccessfulConversionMetricsRows(effective_metrics_rows)
+    return resolved_manifest_path, sortedSuccessfulConversionMetricsRows(effective_metrics_rows)

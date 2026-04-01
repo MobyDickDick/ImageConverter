@@ -1,4 +1,4 @@
-def _parseSuccessfulConversionManifestLine(raw_line: str) -> tuple[str, dict[str, object]]:
+def parseSuccessfulConversionManifestLine(raw_line: str) -> tuple[str, dict[str, object]]:
     """Parse one successful-conversions manifest line into variant plus metrics."""
     stripped = raw_line.split('#', 1)[0].strip()
     if not stripped:

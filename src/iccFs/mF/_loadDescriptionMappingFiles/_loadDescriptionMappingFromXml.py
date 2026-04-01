@@ -1,6 +1,6 @@
-def _loadDescriptionMappingFromXml(path: str) -> dict[str, str]:
+def loadDescriptionMappingFromXml(path: str) -> dict[str, str]:
     raw_desc: dict[str, str] = {}
-    resolved_path = _resolveDescriptionXmlPath(path)
+    resolved_path = resolveDescriptionXmlPath(path)
     if resolved_path is None:
         return raw_desc
 
@@ -20,17 +20,17 @@ def _loadDescriptionMappingFromXml(path: str) -> dict[str, str]:
         key = str(entry.attrib.get("key", "")).strip()
 
         if root_form and desc:
-            _registerDescription(raw_desc, root_form, desc)
+            registerDescription(raw_desc, root_form, desc)
         if key and desc:
-            _registerDescription(raw_desc, key, desc)
+            registerDescription(raw_desc, key, desc)
 
         for image_tag in entry.findall("./bilder/bild"):
             image_name = (image_tag.text or "").strip()
             image_stem = os.path.splitext(image_name)[0].strip()
-            image_specific_desc = _extractImageSpecificDescription(entry, image_name)
-            merged_desc = _mergeEntryAndImageDesc(desc, image_specific_desc)
+            image_specific_desc = extractImageSpecificDescription(entry, image_name)
+            merged_desc = mergeEntryAndImageDesc(desc, image_specific_desc)
             if merged_desc:
-                _registerDescription(raw_desc, image_name, merged_desc)
-                _registerDescription(raw_desc, image_stem, merged_desc)
+                registerDescription(raw_desc, image_name, merged_desc)
+                registerDescription(raw_desc, image_stem, merged_desc)
 
     return raw_desc

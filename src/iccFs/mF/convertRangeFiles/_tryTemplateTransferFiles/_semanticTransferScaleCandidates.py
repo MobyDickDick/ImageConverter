@@ -1,6 +1,6 @@
-def _semanticTransferScaleCandidates(base_scale: float) -> list[float]:
+def semanticTransferScaleCandidates(base_scale: float) -> list[float]:
     """Broader scale ladder for semantic badge transfer exploration."""
-    core = _templateTransferScaleCandidates(base_scale)
+    core = templateTransferScaleCandidates(base_scale)
     extra = [0.55, 0.65, 0.75, 0.85, 1.00, 1.15, 1.30, 1.50, 1.75, 2.00]
     values = []
     seen: set[float] = set()

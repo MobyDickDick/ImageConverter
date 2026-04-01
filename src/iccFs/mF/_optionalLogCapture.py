@@ -1,4 +1,4 @@
-def _optionalLogCapture(log_path: str):
+def optionalLogCapture(log_path: str):
     """Duplicate stdout/stderr into ``log_path`` if configured."""
     if not log_path:
         yield

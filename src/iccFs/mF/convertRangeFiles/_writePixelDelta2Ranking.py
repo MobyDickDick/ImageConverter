@@ -1,4 +1,4 @@
-def _writePixelDelta2Ranking(folder_path: str, svg_out_dir: str, reports_out_dir: str, threshold: float = 18.0) -> None:
+def writePixelDelta2Ranking(folder_path: str, svg_out_dir: str, reports_out_dir: str, threshold: float = 18.0) -> None:
     ranking: list[dict[str, float | str]] = []
     for svg_name in sorted(f for f in os.listdir(svg_out_dir) if f.lower().endswith(".svg")):
         stem = os.path.splitext(svg_name)[0]

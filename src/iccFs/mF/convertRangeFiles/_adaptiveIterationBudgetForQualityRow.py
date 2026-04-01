@@ -1,4 +1,4 @@
-def _adaptiveIterationBudgetForQualityRow(row: dict[str, object], planned_budget: int) -> int:
+def adaptiveIterationBudgetForQualityRow(row: dict[str, object], planned_budget: int) -> int:
     """Tune per-row iteration budget using convergence/plateau quality signals.
 
     Heuristic goals:

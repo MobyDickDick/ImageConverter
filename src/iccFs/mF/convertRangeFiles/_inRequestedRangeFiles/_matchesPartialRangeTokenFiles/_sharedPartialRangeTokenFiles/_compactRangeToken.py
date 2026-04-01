@@ -1,10 +1,10 @@
 import re
 
-from .._normalizeRangeToken import _normalizeRangeToken
+from ..normalizeRangeToken import normalizeRangeToken
 
 
-def _compactRangeToken(value: str) -> str:
-    token = _normalizeRangeToken(value)
+def compactRangeToken(value: str) -> str:
+    token = normalizeRangeToken(value)
     match = re.match(r"^([A-Z]+)(\d+)$", token)
     if not match:
         return token
