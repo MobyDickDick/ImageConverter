@@ -37,6 +37,7 @@ if __package__ in {None, ""}:
         sys.path.insert(0, str(repo_root))
 
 from src.iccFs.optionalDependencyBaseDir import optionalDependencyBaseDir
+from src.iccFs.loadOptionalModule import loadOptionalModule
 from src.iccFs.mF.overviewTiles import generateConversionOverviews
 from src.iccFs.mF.imageCompositeConverterRegions import (
     ANNOTATION_COLORS,
@@ -44,7 +45,7 @@ from src.iccFs.mF.imageCompositeConverterRegions import (
     annotateImageRegionsImpl,
     detectRelevantRegionsImpl,
 )
-from src.iccFs.mF.convertRangeFiles.inRequestedRange import inRequestedRange
+from src.iccFs.mF.convertRangeFiles._inRequestedRange import inRequestedRange
 from src.iccFs.mF.convertRangeFiles._inRequestedRangeFiles.getBaseNameFromFile import getBaseNameFromFile
 from src.iccFs.mF.successfulConversions import (
     AC08_MITIGATION_STATUS,
@@ -56,19 +57,19 @@ from src.iccFs.mF.successfulConversions import (
     SUCCESSFUL_CONVERSIONS_MANIFEST,
     loadSuccessfulConversions,
 )
-from src.iccFs.mF.convertRangeFiles.adaptiveIterationBudgetForQualityRow import adaptiveIterationBudgetForQualityRow
-from src.iccFs.mF.convertRangeFiles.evaluateQualityPassCandidate import evaluateQualityPassCandidate
-from src.iccFs.mF.convertRangeFiles._harmonizeSemanticSizeVariantsFiles._familyHarmonizedBadgeColorsFiles.clipGray import clipGray
-from src.iccFs.mF.convertRangeFiles._harmonizeSemanticSizeVariantsFiles.maxSignatureDelta import maxSignatureDelta
-from src.iccFs.mF.convertRangeFiles._harmonizeSemanticSizeVariantsFiles.normalizedGeometrySignature import normalizedGeometrySignature
-from src.iccFs.mF.convertRangeFiles._harmonizeSemanticSizeVariantsFiles._scaleBadgeParamsFiles.needsLargeCircleOverflowGuard import needsLargeCircleOverflowGuard
-from src.iccFs.mF.convertRangeFiles.iterationStrategyForPass import iterationStrategyForPass
-from src.iccFs.mF.convertRangeFiles._tryTemplateTransferFiles._semanticTransferIsCompatibleFiles.connectorArmDirection import connectorArmDirection
-from src.iccFs.mF.convertRangeFiles._tryTemplateTransferFiles._semanticTransferIsCompatibleFiles.connectorStemDirection import connectorStemDirection
-from src.iccFs.mF.convertRangeFiles._tryTemplateTransferFiles.semanticTransferRotations import semanticTransferRotations
-from src.iccFs.mF.convertRangeFiles.updateSuccessfulConversionsManifestWithMetricsFiles.mergeSuccessfulConversionMetrics import mergeSuccessfulConversionMetrics
-from src.iccFs.mF.convertRangeFiles.updateSuccessfulConversionsManifestWithMetricsFiles.sortedSuccessfulConversionMetricsRows import sortedSuccessfulConversionMetricsRows
-from src.iccFs.mF.buildLinuxVendorInstallCommandFiles.requiredVendorPackages import requiredVendorPackages
+from src.iccFs.mF.convertRangeFiles._adaptiveIterationBudgetForQualityRow import adaptiveIterationBudgetForQualityRow
+from src.iccFs.mF.convertRangeFiles._evaluateQualityPassCandidate import evaluateQualityPassCandidate
+from src.iccFs.mF.convertRangeFiles._harmonizeSemanticSizeVariantsFiles._familyHarmonizedBadgeColorsFiles._clipGray import clipGray
+from src.iccFs.mF.convertRangeFiles._harmonizeSemanticSizeVariantsFiles._maxSignatureDelta import maxSignatureDelta
+from src.iccFs.mF.convertRangeFiles._harmonizeSemanticSizeVariantsFiles._normalizedGeometrySignature import normalizedGeometrySignature
+from src.iccFs.mF.convertRangeFiles._harmonizeSemanticSizeVariantsFiles._scaleBadgeParamsFiles._needsLargeCircleOverflowGuard import needsLargeCircleOverflowGuard
+from src.iccFs.mF.convertRangeFiles._iterationStrategyForPass import iterationStrategyForPass
+from src.iccFs.mF.convertRangeFiles._tryTemplateTransferFiles._semanticTransferIsCompatibleFiles._connectorArmDirection import connectorArmDirection
+from src.iccFs.mF.convertRangeFiles._tryTemplateTransferFiles._semanticTransferIsCompatibleFiles._connectorStemDirection import connectorStemDirection
+from src.iccFs.mF.convertRangeFiles._tryTemplateTransferFiles._semanticTransferRotations import semanticTransferRotations
+from src.iccFs.mF.convertRangeFiles.updateSuccessfulConversionsManifestWithMetricsFiles._mergeSuccessfulConversionMetrics import mergeSuccessfulConversionMetrics
+from src.iccFs.mF.convertRangeFiles.updateSuccessfulConversionsManifestWithMetricsFiles._sortedSuccessfulConversionMetricsRows import sortedSuccessfulConversionMetricsRows
+from src.iccFs.mF.buildLinuxVendorInstallCommandFiles._requiredVendorPackages import requiredVendorPackages
 
 # Keep regression variant list deterministic and duplicate-free for batch
 # selection/tests even when upstream manifests accidentally repeat entries.

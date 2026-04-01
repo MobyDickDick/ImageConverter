@@ -1,5 +1,5 @@
-from .normalizeRangeToken import normalizeRangeToken
-from ._sharedPartialRangeTokenFiles.compactRangeToken import compactRangeToken
+from ._normalizeRangeToken import normalizeRangeToken
+from ._sharedPartialRangeTokenFiles._compactRangeToken import compactRangeToken
 
 
 def sharedPartialRangeToken(start_ref: str, end_ref: str) -> str:
