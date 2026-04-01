@@ -34,6 +34,7 @@ focused on the actual project scope.
   - 2026-04-01: Semantische Template-Transfer-Helfer (`_semanticTransferRotations`, `_semanticTransferIsCompatible`, `_semanticTransferScaleCandidates`, `_semanticTransferBadgeParams` inkl. Richtungs-Helfer) in neues Modul `src/imageCompositeConverterTransfer.py` ausgelagert; der Monolith delegiert weiterhin kompatibel über Wrapper.
   - 2026-04-01: Semantische Presence-/Mismatch-Helfer (`_expectedSemanticPresence`, `_semanticPresenceMismatches`) in neues Modul `src/imageCompositeConverterSemanticValidation.py` ausgelagert; der Monolith delegiert weiterhin kompatibel über Wrapper.
   - 2026-04-01: Semantische Connector-Guard-Helfer (`_enforceLeftArmBadgeGeometry`, `_enforceRightArmBadgeGeometry`, `_enforceSemanticConnectorExpectation`) in neues Modul `src/imageCompositeConverterSemanticConnectors.py` ausgelagert; der Monolith delegiert weiterhin kompatibel über Wrapper.
+  - 2026-04-01: Semantik-Prüfblöcke (`_detectSemanticPrimitives`, `validateSemanticDescriptionAlignment`) in neues Modul `src/imageCompositeConverterSemanticChecks.py` ausgelagert; der Monolith delegiert weiterhin kompatibel über Wrapper.
   - Nächster geplanter Schritt: semantische Prüf- und Optimierungsblöcke in denselben kleinen Schritten extrahieren.
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.
