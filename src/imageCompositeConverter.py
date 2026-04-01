@@ -584,6 +584,11 @@ def scoreCandidate(target: list[list[int]], candidate: Candidate) -> float:
     return _iou(target, renderCandidateMask(candidate, len(target[0]), len(target)))
 
 
+def score_candidate(target: list[list[int]], candidate: Candidate) -> float:
+    """Snake-case compatibility wrapper for scoreCandidate."""
+    return scoreCandidate(target, candidate)
+
+
 def randomNeighbor(base: Candidate, scale: float, rng: random.Random) -> Candidate:
     return Candidate(base.shape, base.cx + rng.uniform(-scale, scale), base.cy + rng.uniform(-scale, scale), max(1.0, base.w + rng.uniform(-scale, scale) * 1.4), max(1.0, base.h + rng.uniform(-scale, scale) * 1.4))
 
@@ -605,6 +610,11 @@ def optimizeElement(target: list[list[int]], init: Candidate, *, max_iter: int, 
             scale = max(0.5, scale * 0.7)
             plateau = 0
     return best, best_score
+
+
+def optimize_element(target: list[list[int]], init: Candidate, *, max_iter: int, plateau_limit: int, seed: int) -> tuple[Candidate, float]:
+    """Snake-case compatibility wrapper for optimizeElement."""
+    return optimizeElement(target, init, max_iter=max_iter, plateau_limit=plateau_limit, seed=seed)
 
 
 def _grayToHex(v: float) -> str:
@@ -2727,7 +2737,7 @@ class Action:
         # Foreground contour estimation helps stem-only badges, but for VOC/CO2
         # labels it can lock onto text blobs and shrink the fitted circle.
         allow_upper_circle_estimate = str(params.get("text_mode", "")).lower() not in {"voc", "co2"}
-        upper_circle = Action._estimateUpperCircleFromForeground(img, defaults) if allow_upper_circle_estimate else None
+        upper_circle = Action._estimate_upper_circle_from_foreground(img, defaults) if allow_upper_circle_estimate else None
         if upper_circle is not None:
             ecx, ecy, er = upper_circle
             # Prefer robust foreground estimate for tiny/narrow AC0811 variants.
@@ -5205,8 +5215,8 @@ class Action:
         if img_svg.shape[:2] != img_orig.shape[:2]:
             img_svg = cv2.resize(img_svg, (img_orig.shape[1], img_orig.shape[0]), interpolation=cv2.INTER_AREA)
 
-        local_mask_orig = mask_orig if mask_orig is not None else Action.extractBadgeElementMask(img_orig, params, element)
-        local_mask_svg = mask_svg if mask_svg is not None else Action.extractBadgeElementMask(img_svg, params, element)
+        local_mask_orig = mask_orig if mask_orig is not None else Action.extract_badge_element_mask(img_orig, params, element)
+        local_mask_svg = mask_svg if mask_svg is not None else Action.extract_badge_element_mask(img_svg, params, element)
         if local_mask_orig is None or local_mask_svg is None:
             return float("inf")
 
@@ -6015,7 +6025,7 @@ class Action:
                 # family constrains it via explicit min/max overrides.
                 high = 1.60
                 if img_orig is not None:
-                    text_mask = Action.extractBadgeElementMask(img_orig, params, "text")
+                    text_mask = Action.extract_badge_element_mask(img_orig, params, "text")
                     bbox = Action._maskBbox(text_mask) if text_mask is not None else None
                     if bbox is not None:
                         x1, y1, x2, y2 = bbox
@@ -6261,21 +6271,21 @@ class Action:
         if probe.get("stem_enabled"):
             probe["stem_top"] = float(probe.get("cy", 0.0)) + float(probe["r"])
 
-        elem_svg = Action.generateBadgeSvg(w, h, Action._elementOnlyParams(probe, "circle"))
-        elem_render = Action._fitToOriginalSize(img_orig, Action.renderSvgToNumpy(elem_svg, w, h))
+        elem_svg = Action.generate_badge_svg(w, h, Action._element_only_params(probe, "circle"))
+        elem_render = Action._fit_to_original_size(img_orig, Action.render_svg_to_numpy(elem_svg, w, h))
         if elem_render is None:
             return float("inf")
 
         # See `_elementErrorForCircleRadius`: use a stable source mask that
         # is independent from the tested candidate pose.
-        mask_orig = Action.extractBadgeElementMask(img_orig, params, "circle")
+        mask_orig = Action.extract_badge_element_mask(img_orig, params, "circle")
         if mask_orig is None:
             return float("inf")
-        mask_svg = Action.extractBadgeElementMask(elem_render, probe, "circle")
+        mask_svg = Action.extract_badge_element_mask(elem_render, probe, "circle")
         if mask_svg is None:
             return float("inf")
 
-        return Action._elementMatchError(
+        return Action._element_match_error(
             img_orig,
             elem_render,
             probe,
@@ -6620,7 +6630,7 @@ class Action:
             key = (cx, cy, rad)
             if key not in evaluations:
                 evaluations[key] = float(
-                    Action._elementErrorForCirclePose(
+                    Action._element_error_for_circle_pose(
                         img_orig,
                         params,
                         cx_value=cx,
@@ -6748,11 +6758,11 @@ class Action:
         if elem_render is None:
             return float("inf")
 
-        mask_orig = Action.extractBadgeElementMask(img_orig, probe, element)
+        mask_orig = Action.extract_badge_element_mask(img_orig, probe, element)
         if mask_orig is None:
             return float("inf")
 
-        return Action._elementMatchError(img_orig, elem_render, probe, element, mask_orig=mask_orig)
+        return Action._element_match_error(img_orig, elem_render, probe, element, mask_orig=mask_orig)
 
     @staticmethod
     def _optimizeElementExtentBracket(img_orig: np.ndarray, params: dict, element: str, logs: list[str]) -> bool:
@@ -6843,7 +6853,7 @@ class Action:
                 Action._snapHalf(Action._clipScalar(current, low, high)),
             }
         )
-        candidate_errors = [Action._elementErrorForExtent(img_orig, params, element, v) for v in candidates]
+        candidate_errors = [Action._element_error_for_extent(img_orig, params, element, v) for v in candidates]
         if not all(math.isfinite(e) for e in candidate_errors):
             logs.append(
                 f"{element}: Längen-Bracketing abgebrochen ({key_label}) wegen nicht-finiten Fehlern "
@@ -6860,7 +6870,7 @@ class Action:
                 current,
                 low,
                 high,
-                lambda v: Action._elementErrorForExtent(img_orig, params, element, float(v)),
+                lambda v: Action._element_error_for_extent(img_orig, params, element, float(v)),
                 snap=Action._snapHalf,
                 seed=1103 if element == "stem" else 1109,
             )
@@ -8836,17 +8846,6 @@ def _tryTemplateTransfer(
         donor_svg_geometry = _readSvgGeometry(donor_svg_path)
         donor_geom_params = dict(donor_svg_geometry[2]) if donor_svg_geometry is not None else None
 
-        estimated_scales = {
-            rotation: _estimateTemplateTransferScale(
-                img_orig,
-                donor_svg_text,
-                w,
-                h,
-                rotation_deg=rotation,
-            )
-            for rotation in (0, 90, 180, 270)
-        }
-
         donor_params_raw = donor.get("params")
         donor_is_semantic = isinstance(donor_params_raw, dict) and str(donor_params_raw.get("mode", "")) == "semantic_badge"
         if target_is_semantic and not donor_is_semantic:
@@ -8896,6 +8895,17 @@ def _tryTemplateTransfer(
             # Semantic badges encode meaning in connector/text geometry.
             # Generic donor SVG transforms can remove those semantics.
             continue
+
+        estimated_scales = {
+            rotation: _estimateTemplateTransferScale(
+                img_orig,
+                donor_svg_text,
+                w,
+                h,
+                rotation_deg=rotation,
+            )
+            for rotation in (0, 90, 180, 270)
+        }
 
         for rotation, scale in _templateTransferTransformCandidates(
             target_variant,
@@ -11241,3 +11251,18 @@ if hasattr(GlobalParameterVector, "fromParams") and not hasattr(GlobalParameterV
     GlobalParameterVector.from_params = staticmethod(GlobalParameterVector.fromParams)
 if hasattr(GlobalParameterVector, "applyToParams") and not hasattr(GlobalParameterVector, "apply_to_params"):
     GlobalParameterVector.apply_to_params = GlobalParameterVector.applyToParams
+
+# Module-level camelCase -> snake_case aliases for legacy tests/tooling.
+for _name, _obj in list(globals().items()):
+    if _name.startswith("__") or not callable(_obj):
+        continue
+    if not any(ch.isupper() for ch in _name):
+        continue
+    _snake = []
+    for _idx, _ch in enumerate(_name):
+        if _ch.isupper() and _idx > 0 and _name[_idx - 1] != "_":
+            _snake.append("_")
+        _snake.append(_ch.lower())
+    _snake_name = "".join(_snake)
+    if _snake_name not in globals():
+        globals()[_snake_name] = _obj
