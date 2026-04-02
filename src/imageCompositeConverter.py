@@ -44,6 +44,7 @@ from src import imageCompositeConverterSemanticChecks as semantic_checks_helpers
 from src import imageCompositeConverterQuality as quality_helpers
 from src import imageCompositeConverterAudit as audit_helpers
 from src import imageCompositeConverterTransfer as transfer_helpers
+from src import imageCompositeConverterGeometryBrackets as geometry_bracket_helpers
 from src.successfulConversions import (
     AC08_MITIGATION_STATUS,
     AC08_PREVIOUSLY_GOOD_VARIANTS,
@@ -6382,252 +6383,28 @@ class Action:
 
     @staticmethod
     def _optimizeCircleCenterBracket(img_orig: np.ndarray, params: dict, logs: list[str]) -> bool:
-        if not params.get("circle_enabled", True):
-            return False
-
-        h, w = img_orig.shape[:2]
-        current_cx = float(params.get("cx", -1.0))
-        current_cy = float(params.get("cy", -1.0))
-        current_r = float(params.get("r", 0.0))
-        if current_r <= 0.0 or current_cx < 0.0 or current_cy < 0.0:
-            return False
-
-        lock_cx = bool(params.get("lock_circle_cx", False))
-        lock_cy = bool(params.get("lock_circle_cy", False))
-        if lock_cx and lock_cy:
-            return False
-
-        max_shift = max(1.0, float(min(w, h)) * 0.16)
-        x_low = Action._snapHalf(max(0.0, current_cx - max_shift))
-        x_high = Action._snapHalf(min(float(w - 1), current_cx + max_shift))
-        y_low = Action._snapHalf(max(0.0, current_cy - max_shift))
-        y_high = Action._snapHalf(min(float(h - 1), current_cy + max_shift))
-
-        evaluations: dict[tuple[float, float], float] = {}
-
-        def evalCenter(cx_value: float, cy_value: float) -> float:
-            cx_snap = Action._snapHalf(float(Action._clipScalar(cx_value, 0.0, float(w - 1))))
-            cy_snap = Action._snapHalf(float(Action._clipScalar(cy_value, 0.0, float(h - 1))))
-            key = (cx_snap, cy_snap)
-            if key not in evaluations:
-                probe = dict(params)
-                probe["cx"] = cx_snap
-                probe["cy"] = cy_snap
-                evaluations[key] = float(Action._elementErrorForCircleRadius(img_orig, probe, current_r))
-            return evaluations[key]
-
-        def optimizeAxis(low: float, high: float, fixed: float, axis: str) -> float:
-            if high - low < 0.05:
-                return Action._snapHalf((low + high) / 2.0)
-            mid = Action._snapHalf((low + high) / 2.0)
-            for _ in range(8):
-                if axis == "x":
-                    low_err = evalCenter(low, fixed)
-                    mid_err = evalCenter(mid, fixed)
-                    high_err = evalCenter(high, fixed)
-                else:
-                    low_err = evalCenter(fixed, low)
-                    mid_err = evalCenter(fixed, mid)
-                    high_err = evalCenter(fixed, high)
-
-                if not all(math.isfinite(v) for v in (low_err, mid_err, high_err)):
-                    return mid
-
-                if mid_err <= low_err and mid_err <= high_err:
-                    if low_err <= high_err:
-                        high = mid
-                    else:
-                        low = mid
-                elif low_err <= mid_err and low_err <= high_err:
-                    high = mid
-                else:
-                    low = mid
-
-                if high - low < 0.05:
-                    break
-                next_mid = Action._snapHalf((low + high) / 2.0)
-                if abs(next_mid - mid) < 0.02:
-                    break
-                mid = next_mid
-            points = [low, mid, high]
-            if axis == "x":
-                return min(points, key=lambda v: evalCenter(v, fixed))
-            return min(points, key=lambda v: evalCenter(fixed, v))
-
-        best_cx = current_cx
-        best_cy = current_cy
-        if not lock_cx:
-            best_cx = optimizeAxis(x_low, x_high, current_cy, "x")
-        if not lock_cy:
-            best_cy = optimizeAxis(y_low, y_high, best_cx, "y")
-
-        best_err = evalCenter(best_cx, best_cy)
-        if not math.isfinite(best_err):
-            logs.append("circle: Mittelpunkt-Bracketing abgebrochen wegen nicht-finitem Fehler")
-            return False
-
-        if abs(best_cx - current_cx) < 0.02 and abs(best_cy - current_cy) < 0.02:
-            logs.append(
-                f"circle: Mittelpunkt-Bracketing keine relevante Änderung (cx={current_cx:.3f}, cy={current_cy:.3f}, best_err={best_err:.3f})"
-            )
-            return False
-
-        params["cx"] = best_cx
-        params["cy"] = best_cy
-        if params.get("arm_enabled"):
-            Action._reanchorArmToCircleEdge(params, current_r)
-        if params.get("stem_enabled"):
-            params["stem_top"] = float(params.get("cy", 0.0)) + current_r
-            if bool(params.get("lock_stem_center_to_circle", False)):
-                stem_w = float(params.get("stem_width", 1.0))
-                params["stem_x"] = Action._snapHalf(max(0.0, min(float(w) - stem_w, best_cx - (stem_w / 2.0))))
-
-        logs.append(
-            f"circle: Mittelpunkt-Bracketing cx {current_cx:.3f}->{best_cx:.3f}, cy {current_cy:.3f}->{best_cy:.3f} (best_err={best_err:.3f})"
+        return geometry_bracket_helpers.optimizeCircleCenterBracketImpl(
+            img_orig,
+            params,
+            logs,
+            snap_half_fn=Action._snapHalf,
+            clip_scalar_fn=Action._clipScalar,
+            element_error_for_circle_radius_fn=Action._elementErrorForCircleRadius,
+            reanchor_arm_to_circle_edge_fn=Action._reanchorArmToCircleEdge,
         )
-        return True
 
     @staticmethod
     def _optimizeCircleRadiusBracket(img_orig: np.ndarray, params: dict, logs: list[str]) -> bool:
-        if not params.get("circle_enabled", True):
-            return False
-
-        h, w = img_orig.shape[:2]
-        current = float(params.get("r", 0.0))
-        if current <= 0.0:
-            return False
-
-        min_dim = float(min(w, h))
-        low_bound = max(1.0, min_dim * 0.14)
-        low_bound = max(low_bound, float(params.get("min_circle_radius", 1.0)))
-        low_bound = max(low_bound, float(params.get("circle_radius_lower_bound_px", 1.0)))
-        has_connector = bool(params.get("arm_enabled") or params.get("stem_enabled"))
-        if has_connector:
-            # Connector badges (AC081x/AC083x families) are geometrically tied to
-            # a semantic template. If radius bracketing can dive to the generic
-            # min-dimension floor, the circle may detach from that template and
-            # the connector degenerates into a tiny corner artifact.
-            template_r = float(params.get("template_circle_radius", current))
-            low_bound = max(low_bound, template_r * 0.88)
-            # Also prevent one-shot collapses from noisy element masks.
-            low_bound = max(low_bound, current * 0.90)
-        # Tiny badges are especially sensitive to anti-aliasing noise in the
-        # circle-only error mask. Prevent aggressive downward jumps that make
-        # AC0800_S noticeably smaller than the medium/large variants.
-        if min_dim <= 22.0:
-            low_bound = max(low_bound, current * 0.9)
-        allow_overflow = bool(params.get("allow_circle_overflow", False))
-        high_bound = min_dim * 0.48
-        if allow_overflow:
-            high_bound = max(high_bound, float(max(w, h)) * 1.25, low_bound + 0.5)
-        if "max_circle_radius" in params:
-            high_bound = min(high_bound, float(params.get("max_circle_radius", high_bound)))
-        if not has_connector:
-            # Plain circles should use a local bracket around the current
-            # estimate; broad global ranges are noisy on tiny crops.
-            low_bound = max(low_bound, current - 1.0)
-            high_bound = min(high_bound, current + 1.0)
-        if not low_bound < high_bound:
-            return False
-
-        low = math.floor(low_bound * 2.0) / 2.0
-        high = math.ceil(high_bound * 2.0) / 2.0
-        low = float(Action._clip_scalar(low, low_bound, high_bound))
-        high = float(Action._clip_scalar(high, low_bound, high_bound))
-        mid = Action._snap_half(float(Action._clip_scalar(current, low, high)))
-        mid = float(Action._clip_scalar(mid, low, high))
-        if high - low < 0.05:
-            return False
-
-        evaluations: dict[float, float] = {}
-
-        def evalRadius(radius: float) -> float:
-            clipped = float(Action._clip_scalar(radius, low_bound, high_bound))
-            snapped = float(round(clipped, 3))
-            if snapped not in evaluations:
-                try:
-                    evaluations[snapped] = float(Action._element_error_for_circle_radius(img_orig, params, snapped))
-                except Exception:
-                    evaluations[snapped] = float("inf")
-            return evaluations[snapped]
-
-        max_rounds = 12
-        for _ in range(max_rounds):
-            low_err = evalRadius(low)
-            mid_err = evalRadius(mid)
-            high_err = evalRadius(high)
-            if not all(math.isfinite(v) for v in (low_err, mid_err, high_err)):
-                # Gracefully contract away from unsupported samples (e.g. in
-                # tests that patch radius evaluators for a sparse subset).
-                if not math.isfinite(high_err) and math.isfinite(mid_err):
-                    high = mid
-                    continue
-                if not math.isfinite(low_err) and math.isfinite(mid_err):
-                    low = mid
-                    continue
-                logs.append(
-                    "circle: Radius-Bracketing abgebrochen wegen nicht-finiten Fehlern "
-                    + ", ".join(f"{v:.3f}->{e:.3f}" for v, e in sorted(evaluations.items()))
-                )
-                return False
-
-            # Drei-Punkt-Bracketing: immer den besten Punkt und seinen besseren Nachbarn behalten.
-            if mid_err <= low_err and mid_err <= high_err:
-                if low_err <= high_err:
-                    high = mid
-                else:
-                    low = mid
-            elif low_err <= mid_err and low_err <= high_err:
-                high = mid
-            else:
-                low = mid
-
-            if high - low < 0.05:
-                break
-            next_mid = Action._snap_half((low + high) / 2.0)
-            if abs(next_mid - mid) < 0.02:
-                break
-            mid = next_mid
-
-        best_r, best_err, best_full_err = Action._select_circle_radius_plateau_candidate(img_orig, params, evaluations, current)
-        candidate_dump = ", ".join(f"{v:.3f}->{e:.3f}" for v, e in sorted(evaluations.items()))
-        if abs(best_r - current) < 0.02:
-            logs.append(
-                f"circle: Radius-Bracketing keine relevante Änderung (r: {current:.3f}, best_err={best_err:.3f}, full_err={best_full_err:.3f}); Kandidaten="
-                + candidate_dump
-            )
-            return False
-
-        old_r = current
-        params["r"] = best_r
-        if params.get("arm_enabled"):
-            Action._reanchorArmToCircleEdge(params, best_r)
-            # Preserve strictly vertical arm orientation for AC0813/AC0833-like
-            # badges: the circle-side endpoint must stay exactly on the circle
-            # edge after radius updates.
-            ax1 = float(params.get("arm_x1", 0.0))
-            ay1 = float(params.get("arm_y1", 0.0))
-            ax2 = float(params.get("arm_x2", 0.0))
-            ay2 = float(params.get("arm_y2", 0.0))
-            if abs(ax1 - ax2) < 1e-6:
-                cx = float(params.get("cx", ax1))
-                cy = float(params.get("cy", 0.0))
-                top_edge = cy - best_r
-                bottom_edge = cy + best_r
-                params["arm_x1"] = cx
-                params["arm_x2"] = cx
-                if ay1 <= ay2:
-                    params["arm_y2"] = top_edge
-                else:
-                    params["arm_y1"] = bottom_edge
-        if params.get("stem_enabled"):
-            params["stem_top"] = float(params.get("cy", 0.0)) + best_r
-
-        logs.append(
-            f"circle: Radius-Bracketing r {old_r:.3f}->{best_r:.3f} (best_err={best_err:.3f}, full_err={best_full_err:.3f}); Kandidaten="
-            + candidate_dump
+        return geometry_bracket_helpers.optimizeCircleRadiusBracketImpl(
+            img_orig,
+            params,
+            logs,
+            clip_scalar_fn=Action._clip_scalar,
+            snap_half_fn=Action._snap_half,
+            element_error_for_circle_radius_fn=Action._element_error_for_circle_radius,
+            select_circle_radius_plateau_candidate_fn=Action._select_circle_radius_plateau_candidate,
+            reanchor_arm_to_circle_edge_fn=Action._reanchorArmToCircleEdge,
         )
-        return True
 
     @staticmethod
     def _optimizeCirclePoseMultistart(img_orig: np.ndarray, params: dict, logs: list[str]) -> bool:
