@@ -37,6 +37,7 @@ focused on the actual project scope.
   - 2026-04-01: Semantik-Prüfblöcke (`_detectSemanticPrimitives`, `validateSemanticDescriptionAlignment`) in neues Modul `src/imageCompositeConverterSemanticChecks.py` ausgelagert; der Monolith delegiert weiterhin kompatibel über Wrapper.
   - 2026-04-02: Kreis-Bracketing-Optimierer (`_optimizeCircleCenterBracket`, `_optimizeCircleRadiusBracket`) in neues Modul `src/imageCompositeConverterGeometryBrackets.py` ausgelagert; `src/imageCompositeConverter.py` delegiert weiter über kompatible Wrapper.
   - 2026-04-02: Farb-Bracketing-Helfer (`_elementColorKeys`, `_elementErrorForColor`, `_optimizeElementColorBracket`) in neues Modul `src/imageCompositeConverterOptimizationColor.py` ausgelagert; `src/imageCompositeConverter.py` delegiert weiter über kompatible Wrapper.
+  - 2026-04-02: Semantik-Fitting-Helfer (`_stabilizeSemanticCirclePose`, `_fitAc0870ParamsFromImage`, `_fitSemanticBadgeFromImage`) in neues Modul `src/imageCompositeConverterSemanticFitting.py` ausgelagert; `src/imageCompositeConverter.py` delegiert weiter über kompatible Wrapper.
   - Nächster geplanter Schritt: semantische Prüf- und Optimierungsblöcke in denselben kleinen Schritten extrahieren.
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.
