@@ -49,6 +49,7 @@ from src import imageCompositeConverterGeometryBrackets as geometry_bracket_help
 from src import imageCompositeConverterOptimizationGeometry as geometry_optimization_helpers
 from src import imageCompositeConverterOptimizationColor as color_optimization_helpers
 from src import imageCompositeConverterOptimizationPasses as optimization_pass_helpers
+from src import imageCompositeConverterTemplateTransfer as template_transfer_helpers
 from src.successfulConversions import (
     AC08_MITIGATION_STATUS,
     AC08_PREVIOUSLY_GOOD_VARIANTS,
@@ -7572,10 +7573,7 @@ def _evaluateQualityPassCandidate(
 
 
 def _extractSvgInner(svg_text: str) -> str:
-    match = re.search(r"<svg[^>]*>(.*)</svg>", svg_text, flags=re.DOTALL | re.IGNORECASE)
-    if match:
-        return match.group(1).strip()
-    return svg_text
+    return template_transfer_helpers.extractSvgInnerImpl(svg_text)
 
 
 def _buildTransformedSvgFromTemplate(
@@ -7586,55 +7584,18 @@ def _buildTransformedSvgFromTemplate(
     rotation_deg: int,
     scale: float,
 ) -> str:
-    inner = _extractSvgInner(template_svg_text)
-    # Keep donor stroke widths visually stable when trying scale-based transfers.
-    # This mirrors the "M->S/L while preserving line thickness" workflow that is
-    # often needed for noisy small/large bitmap variants.
-    inner = re.sub(
-        r"<(circle|ellipse|line|path|polygon|polyline|rect)\\b([^>]*)>",
-        lambda m: (
-            f"<{m.group(1)}{m.group(2)}>"
-            if "vector-effect=" in m.group(2)
-            else f"<{m.group(1)}{m.group(2)} vector-effect=\"non-scaling-stroke\">"
-        ),
-        inner,
-        flags=re.IGNORECASE,
-    )
-    cx = float(target_w) / 2.0
-    cy = float(target_h) / 2.0
-    return (
-        f'<svg width="{target_w}" height="{target_h}" viewBox="0 0 {target_w} {target_h}" '
-        'xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">\n'
-        f'  <g transform="translate({cx:.3f} {cy:.3f}) rotate({int(rotation_deg)}) scale({float(scale):.4f}) '
-        f'translate({-cx:.3f} {-cy:.3f})">\n'
-        f"{inner}\n"
-        "  </g>\n"
-        "</svg>"
+    return template_transfer_helpers.buildTransformedSvgFromTemplateImpl(
+        template_svg_text,
+        target_w,
+        target_h,
+        rotation_deg=rotation_deg,
+        scale=scale,
+        extract_svg_inner_fn=_extractSvgInner,
     )
 
 
 def _templateTransferScaleCandidates(base_scale: float) -> list[float]:
-    """Build a compact scale ladder around an estimated best scale."""
-    if not math.isfinite(base_scale) or base_scale <= 0.0:
-        base_scale = 1.0
-
-    multipliers = (1.00, 0.92, 1.08, 0.84, 1.18, 0.74, 1.35, 1.55)
-    scales: list[float] = []
-    seen: set[float] = set()
-    for mul in multipliers:
-        value = float(min(1.90, max(0.65, base_scale * mul)))
-        key = round(value, 4)
-        if key in seen:
-            continue
-        seen.add(key)
-        scales.append(key)
-
-    for fallback in (0.80, 0.90, 1.00, 1.10, 1.25):
-        key = round(float(fallback), 4)
-        if key not in seen:
-            seen.add(key)
-            scales.append(key)
-    return scales
+    return template_transfer_helpers.templateTransferScaleCandidatesImpl(base_scale)
 
 
 def _estimateTemplateTransferScale(
@@ -7645,39 +7606,17 @@ def _estimateTemplateTransferScale(
     *,
     rotation_deg: int,
 ) -> float | None:
-    """Estimate donor->target scale from foreground silhouette bboxes."""
-    rendered = Action.renderSvgToNumpy(
-        _buildTransformedSvgFromTemplate(
-            donor_svg_text,
-            target_w,
-            target_h,
-            rotation_deg=rotation_deg,
-            scale=1.0,
-        ),
+    return template_transfer_helpers.estimateTemplateTransferScaleImpl(
+        img_orig,
+        donor_svg_text,
         target_w,
         target_h,
+        rotation_deg=rotation_deg,
+        render_svg_to_numpy_fn=Action.renderSvgToNumpy,
+        build_transformed_svg_from_template_fn=_buildTransformedSvgFromTemplate,
+        foreground_mask_fn=Action._foregroundMask,
+        mask_bbox_fn=Action._maskBbox,
     )
-    if rendered is None:
-        return None
-
-    target_mask = Action._foregroundMask(img_orig)
-    donor_mask = Action._foregroundMask(rendered)
-    target_bbox = Action._maskBbox(target_mask)
-    donor_bbox = Action._maskBbox(donor_mask)
-    if target_bbox is None or donor_bbox is None:
-        return None
-
-    target_w_box = max(1e-6, float(target_bbox[2] - target_bbox[0] + 1.0))
-    target_h_box = max(1e-6, float(target_bbox[3] - target_bbox[1] + 1.0))
-    donor_w_box = max(1e-6, float(donor_bbox[2] - donor_bbox[0] + 1.0))
-    donor_h_box = max(1e-6, float(donor_bbox[3] - donor_bbox[1] + 1.0))
-
-    scale_w = target_w_box / donor_w_box
-    scale_h = target_h_box / donor_h_box
-    scale = math.sqrt(max(1e-6, scale_w * scale_h))
-    if not math.isfinite(scale):
-        return None
-    return float(min(1.90, max(0.65, scale)))
 
 
 def _templateTransferTransformCandidates(
@@ -7686,58 +7625,24 @@ def _templateTransferTransformCandidates(
     *,
     estimated_scale_by_rotation: dict[int, float] | None = None,
 ) -> list[tuple[int, float]]:
-    """Return ordered rotation/scale candidates for template-based fallback."""
-    del target_variant, donor_variant  # reserved for future metadata-based policies
-
-    candidates: list[tuple[int, float]] = []
-    seen: set[tuple[int, float]] = set()
-    for rotation in (0, 90, 180, 270):
-        estimated = None
-        if estimated_scale_by_rotation is not None:
-            estimated = estimated_scale_by_rotation.get(rotation)
-        for scale in _templateTransferScaleCandidates(estimated if estimated is not None else 1.0):
-            candidate = (rotation, float(scale))
-            key = (rotation, round(float(scale), 4))
-            if key in seen:
-                continue
-            seen.add(key)
-            candidates.append(candidate)
-    return candidates
+    return template_transfer_helpers.templateTransferTransformCandidatesImpl(
+        target_variant,
+        donor_variant,
+        estimated_scale_by_rotation=estimated_scale_by_rotation,
+        template_transfer_scale_candidates_fn=_templateTransferScaleCandidates,
+    )
 
 
 def _rankTemplateTransferDonors(
     target_row: dict[str, object],
     donor_rows: list[dict[str, object]],
 ) -> list[dict[str, object]]:
-    """Prioritize donors that are already good and geometrically close to target."""
-    target_base = str(target_row.get("base", "")).upper()
-    target_sig: dict[str, float] | None = None
-    target_params = target_row.get("params")
-    if isinstance(target_params, dict):
-        target_sig = _normalizedGeometrySignature(
-            int(target_row.get("w", 0)),
-            int(target_row.get("h", 0)),
-            dict(target_params),
-        )
-
-    ranked: list[tuple[tuple[float, float, float], dict[str, object]]] = []
-    for donor in donor_rows:
-        donor_base = str(donor.get("base", "")).upper()
-        donor_error_pp = float(donor.get("error_per_pixel", float("inf")))
-        donor_sig: dict[str, float] | None = None
-        donor_params = donor.get("params")
-        if isinstance(donor_params, dict):
-            donor_sig = _normalizedGeometrySignature(int(donor.get("w", 0)), int(donor.get("h", 0)), dict(donor_params))
-
-        delta = float("inf")
-        if target_sig is not None and donor_sig is not None:
-            delta = _maxSignatureDelta(target_sig, donor_sig)
-
-        key = (0.0 if donor_base == target_base else 1.0, delta, donor_error_pp)
-        ranked.append((key, donor))
-
-    ranked.sort(key=lambda item: item[0])
-    return [donor for _, donor in ranked]
+    return template_transfer_helpers.rankTemplateTransferDonorsImpl(
+        target_row,
+        donor_rows,
+        normalized_geometry_signature_fn=_normalizedGeometrySignature,
+        max_signature_delta_fn=_maxSignatureDelta,
+    )
 
 
 def _templateTransferDonorFamilyCompatible(
@@ -7746,17 +7651,12 @@ def _templateTransferDonorFamilyCompatible(
     *,
     documented_alias_refs: set[str] | None = None,
 ) -> bool:
-    """Allow fallback transfer within family, plus documented cross-family aliases."""
-    alias_refs = {str(v).upper() for v in (documented_alias_refs or set()) if str(v).strip()}
-    if donor_base.upper() in alias_refs:
-        return True
-
-    target_family = _extractSymbolFamily(target_base)
-    donor_family = _extractSymbolFamily(donor_base)
-    if target_family is None or donor_family is None:
-        # Keep legacy behavior for non-standard names where family extraction fails.
-        return True
-    return target_family == donor_family
+    return template_transfer_helpers.templateTransferDonorFamilyCompatibleImpl(
+        target_base,
+        donor_base,
+        documented_alias_refs=documented_alias_refs,
+        extract_symbol_family_fn=_extractSymbolFamily,
+    )
 
 
 
