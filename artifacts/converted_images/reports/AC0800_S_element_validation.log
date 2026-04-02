@@ -1,6 +1,6 @@
-run-meta: run_seed=702129614 pass_seed_offset=1 nonce_ns=1775145547466599800
+run-meta: run_seed=155707216 pass_seed_offset=0 nonce_ns=1775150858558738000
 status=semantic_ok
-redraw_variation: seed=708488889982 changed_params=cx:7.500->7.445 | cy:7.500->7.446 | r:6.500->6.618 | stroke_circle:1.000->0.979
+redraw_variation: seed=157240665622 changed_params=cx:7.500->7.610 | cy:7.500->7.463 | r:6.500->6.488 | stroke_circle:1.000->0.991
 semantic-guard: Text bewusst deaktiviert (plain-ring Familie ohne Buchstabe).
 small_variant_mode_active: reason=min_dim, min_dim=14.000, mask_dilate_px=1, text_mode=, arm_min_ratio=0.000, stem_min_ratio=0.000
 Runde 1: elementweise Validierung gestartet
@@ -33,11 +33,6 @@ circle: Fehler=30.626
 circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
 circle: Radius-Bracketing r 6.500->7.000 (best_err=28.400, full_err=13.058); Kandidaten=5.850->49.219, 6.500->30.626, 7.000->28.400
 Runde 6: Gesamtfehler=13.058
-Runde 7: elementweise Validierung gestartet
-circle: Fehler=28.400
-circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
-circle: Radius-Bracketing r 7.000->6.500 (best_err=33.704, full_err=13.058); Kandidaten=6.300->18.969, 6.500->33.704, 7.000->28.400
-Runde 7: Gesamtfehler=13.058
 circle: Farb-Bracketing fill_gray 242->240; Kandidaten=200->4206.000, 210->3671.000, 216->3369.000, 220->3193.000, 226->3015.000, 230->2926.000, 234->2829.000, 240->2735.000, 242->2755.000, 250->3193.000, 255->3511.000
 circle: Farb-Bracketing stroke_gray 127->171; Kandidaten=95->3557.000, 96->3529.000, 111->3080.000, 112->3068.000, 119->2893.000, 127->2735.000, 128->2716.000, 135->2592.000, 143->2441.000, 144->2425.000, 152->2280.000, 159->2155.000, 160->2135.000, 171->1983.000, 216->2858.000
 circle: Farboptimierung in Abschlussphase angewendet
