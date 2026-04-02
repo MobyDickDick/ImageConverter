@@ -46,6 +46,7 @@ from src import imageCompositeConverterQuality as quality_helpers
 from src import imageCompositeConverterAudit as audit_helpers
 from src import imageCompositeConverterTransfer as transfer_helpers
 from src import imageCompositeConverterGeometryBrackets as geometry_bracket_helpers
+from src import imageCompositeConverterOptimizationGeometry as geometry_optimization_helpers
 from src import imageCompositeConverterOptimizationColor as color_optimization_helpers
 from src.successfulConversions import (
     AC08_MITIGATION_STATUS,
@@ -6207,382 +6208,58 @@ class Action:
 
     @staticmethod
     def _elementErrorForExtent(img_orig: np.ndarray, params: dict, element: str, extent_value: float) -> float:
-        h, w = img_orig.shape[:2]
-        probe = dict(params)
-
-        if element == "stem" and probe.get("stem_enabled"):
-            min_len = 1.0
-            max_len = float(h)
-            new_len = float(Action._clipScalar(extent_value, min_len, max_len))
-            center = (float(probe.get("stem_top", 0.0)) + float(probe.get("stem_bottom", 0.0))) / 2.0
-            half = new_len / 2.0
-            probe["stem_top"] = float(Action._clipScalar(center - half, 0.0, float(h - 1)))
-            probe["stem_bottom"] = float(Action._clipScalar(center + half, probe["stem_top"] + 1.0, float(h)))
-
-        elif element == "arm" and probe.get("arm_enabled"):
-            x1 = float(probe.get("arm_x1", 0.0))
-            y1 = float(probe.get("arm_y1", 0.0))
-            x2 = float(probe.get("arm_x2", 0.0))
-            y2 = float(probe.get("arm_y2", 0.0))
-            dx = x2 - x1
-            dy = y2 - y1
-            cur_len = float(math.hypot(dx, dy))
-            if cur_len <= 1e-6:
-                return float("inf")
-            new_len = float(Action._clipScalar(extent_value, 1.0, float(max(w, h))))
-            ux = dx / cur_len
-            uy = dy / cur_len
-
-            if probe.get("circle_enabled", True) and all(k in probe for k in ("cx", "cy", "r")):
-                # Keep the endpoint at the circle edge fixed and optimize the free side
-                # length only. Symmetric center-scaling shortens both ends and can make
-                # AC0812/AC0814 horizontal connectors visibly too short.
-                Action._reanchorArmToCircleEdge(probe, float(probe.get("r", 0.0)))
-                ax1 = float(probe.get("arm_x1", x1))
-                ay1 = float(probe.get("arm_y1", y1))
-                ax2 = float(probe.get("arm_x2", x2))
-                ay2 = float(probe.get("arm_y2", y2))
-
-                cx = float(probe.get("cx", 0.0))
-                cy = float(probe.get("cy", 0.0))
-                d1 = float(math.hypot(ax1 - cx, ay1 - cy))
-                d2 = float(math.hypot(ax2 - cx, ay2 - cy))
-
-                if d1 <= d2:
-                    ix, iy = ax1, ay1
-                    probe["arm_x2"] = float(Action._clipScalar(ix + (ux * new_len), 0.0, float(w - 1)))
-                    probe["arm_y2"] = float(Action._clipScalar(iy + (uy * new_len), 0.0, float(h - 1)))
-                else:
-                    ix, iy = ax2, ay2
-                    probe["arm_x1"] = float(Action._clipScalar(ix - (ux * new_len), 0.0, float(w - 1)))
-                    probe["arm_y1"] = float(Action._clipScalar(iy - (uy * new_len), 0.0, float(h - 1)))
-            else:
-                cx = (x1 + x2) / 2.0
-                cy = (y1 + y2) / 2.0
-                half = new_len / 2.0
-                probe["arm_x1"] = float(Action._clipScalar(cx - (ux * half), 0.0, float(w - 1)))
-                probe["arm_y1"] = float(Action._clipScalar(cy - (uy * half), 0.0, float(h - 1)))
-                probe["arm_x2"] = float(Action._clipScalar(cx + (ux * half), 0.0, float(w - 1)))
-                probe["arm_y2"] = float(Action._clipScalar(cy + (uy * half), 0.0, float(h - 1)))
-        else:
-            return float("inf")
-
-        elem_svg = Action.generateBadgeSvg(w, h, Action._elementOnlyParams(probe, element))
-        elem_render = Action._fitToOriginalSize(img_orig, Action.renderSvgToNumpy(elem_svg, w, h))
-        if elem_render is None:
-            return float("inf")
-
-        mask_orig = Action.extract_badge_element_mask(img_orig, probe, element)
-        if mask_orig is None:
-            return float("inf")
-
-        return Action._element_match_error(img_orig, elem_render, probe, element, mask_orig=mask_orig)
+        return geometry_optimization_helpers.elementErrorForExtentImpl(
+            img_orig,
+            params,
+            element,
+            extent_value,
+            clip_scalar_fn=Action._clipScalar,
+            reanchor_arm_to_circle_edge_fn=Action._reanchorArmToCircleEdge,
+            generate_badge_svg_fn=Action.generateBadgeSvg,
+            element_only_params_fn=Action._elementOnlyParams,
+            fit_to_original_size_fn=Action._fitToOriginalSize,
+            render_svg_to_numpy_fn=Action.renderSvgToNumpy,
+            extract_badge_element_mask_fn=Action.extract_badge_element_mask,
+            element_match_error_fn=Action._element_match_error,
+        )
 
     @staticmethod
     def _optimizeElementExtentBracket(img_orig: np.ndarray, params: dict, element: str, logs: list[str]) -> bool:
-        h, w = img_orig.shape[:2]
-        if element == "stem" and params.get("stem_enabled"):
-            current = float(params.get("stem_bottom", 0.0)) - float(params.get("stem_top", 0.0))
-            key_label = "stem_len"
-            low_bound = 1.0
-            high_bound = float(h)
-            forced_abs_min = params.get("stem_len_min")
-            if forced_abs_min is not None:
-                low_bound = max(low_bound, float(forced_abs_min))
-            forced_min_ratio = params.get("stem_len_min_ratio")
-            if forced_min_ratio is not None:
-                min_ratio = float(max(0.0, min(1.0, float(forced_min_ratio))))
-                low_bound = max(low_bound, current * min_ratio)
-            if h <= 15 and not bool(params.get("draw_text", True)):
-                low_bound = max(low_bound, 5.5)
-            # Keep bottom-anchored stem variants (e.g. AC0811_S) from collapsing
-            # into near-invisible stubs when anti-aliased extraction under-segments
-            # thin line pixels in element-only masks.
-            is_bottom_anchored = float(params.get("stem_bottom", 0.0)) >= float(h) - 0.5
-            if (
-                forced_min_ratio is None
-                and is_bottom_anchored
-                and params.get("circle_enabled", True)
-                and all(k in params for k in ("cy", "r"))
-            ):
-                min_ratio = float(params.get("stem_len_min_ratio", 0.65))
-                low_bound = max(low_bound, current * max(0.0, min(1.0, min_ratio)))
-                # Tiny AC0811-like badges need a visibly readable stem even when
-                # contour extraction underestimates the semantic template length.
-                if h <= 15 and not bool(params.get("draw_text", True)):
-                    low_bound = max(low_bound, 5.5)
-        elif element == "arm" and params.get("arm_enabled"):
-            dx = float(params.get("arm_x2", 0.0)) - float(params.get("arm_x1", 0.0))
-            dy = float(params.get("arm_y2", 0.0)) - float(params.get("arm_y1", 0.0))
-            current = float(math.hypot(dx, dy))
-            key_label = "arm_len"
-            low_bound = 1.0
-            high_bound = float(max(w, h))
-            forced_abs_min = params.get("arm_len_min")
-            if forced_abs_min is not None:
-                low_bound = max(low_bound, float(forced_abs_min))
-            forced_min_ratio = params.get("arm_len_min_ratio")
-            if forced_min_ratio is not None:
-                min_ratio = float(max(0.0, min(1.0, float(forced_min_ratio))))
-                low_bound = max(low_bound, current * min_ratio)
-            # Keep edge-anchored connector variants (e.g. AC0832_S) from collapsing
-            # to tiny stubs when element-only error masks under-segment thin lines.
-            is_edge_anchored = any(
-                (
-                    float(params.get(key, 0.0)) <= 0.5
-                    or float(params.get(key, 0.0)) >= float(limit) - 0.5
-                )
-                for key, limit in (
-                    ("arm_x1", w),
-                    ("arm_x2", w),
-                    ("arm_y1", h),
-                    ("arm_y2", h),
-                )
-            )
-            if forced_min_ratio is None and is_edge_anchored and params.get("circle_enabled", True):
-                min_ratio = float(params.get("arm_len_min_ratio", 0.75))
-                low_bound = max(low_bound, current * max(0.0, min(1.0, min_ratio)))
-        else:
-            return False
-
-        if current <= 0.0:
-            return False
-
-        low = float(low_bound)
-        high = float(high_bound)
-        if not (low < high):
-            logs.append(
-                f"{element}: Längen-Bracketing übersprungen ({key_label}: current={current:.3f}, "
-                f"Range={low_bound:.3f}..{high_bound:.3f})"
-            )
-            return False
-
-        candidates = sorted(
-            {
-                Action._snapHalf(low),
-                Action._snapHalf(low + (high - low) * 0.25),
-                Action._snapHalf((low + high) / 2.0),
-                Action._snapHalf(low + (high - low) * 0.75),
-                Action._snapHalf(high),
-                Action._snapHalf(Action._clipScalar(current, low, high)),
-            }
+        return geometry_optimization_helpers.optimizeElementExtentBracketImpl(
+            img_orig,
+            params,
+            element,
+            logs,
+            clip_scalar_fn=Action._clipScalar,
+            snap_half_fn=Action._snapHalf,
+            element_error_for_extent_fn=Action._element_error_for_extent,
+            argmin_index_fn=Action._argminIndex,
+            stochastic_survivor_scalar_fn=Action._stochasticSurvivorScalar,
+            reanchor_arm_to_circle_edge_fn=Action._reanchorArmToCircleEdge,
         )
-        candidate_errors = [Action._element_error_for_extent(img_orig, params, element, v) for v in candidates]
-        if not all(math.isfinite(e) for e in candidate_errors):
-            logs.append(
-                f"{element}: Längen-Bracketing abgebrochen ({key_label}) wegen nicht-finiten Fehlern "
-                + ", ".join(f"{v:.3f}->{e:.3f}" for v, e in zip(candidates, candidate_errors, strict=False))
-            )
-            return False
-
-        best_idx = Action._argminIndex(candidate_errors)
-        best_len = float(candidates[best_idx])
-
-        boundary_best = abs(best_len - low) < 0.02 or abs(best_len - high) < 0.02
-        if boundary_best:
-            s_best, s_err, s_improved = Action._stochasticSurvivorScalar(
-                current,
-                low,
-                high,
-                lambda v: Action._element_error_for_extent(img_orig, params, element, float(v)),
-                snap=Action._snapHalf,
-                seed=1103 if element == "stem" else 1109,
-            )
-            if s_improved:
-                best_len = float(s_best)
-                logs.append(
-                    f"{element}: Längen-Stochastic-Survivor aktiviert (best_len={best_len:.3f}, err={s_err:.3f})"
-                )
-
-        if abs(best_len - current) < 0.02:
-            logs.append(
-                f"{element}: Längen-Bracketing keine relevante Änderung ({key_label}: {current:.3f}); "
-                f"Kandidaten="
-                + ", ".join(f"{v:.3f}->{e:.3f}" for v, e in zip(candidates, candidate_errors, strict=False))
-            )
-            return False
-
-        if element == "stem":
-            if params.get("circle_enabled", True) and all(k in params for k in ("cy", "r")):
-                # Keep tiny bottom-anchored stems visibly long by preserving the
-                # bottom anchor and moving the free top endpoint upward.
-                is_bottom_anchored = float(params.get("stem_bottom", 0.0)) >= float(h) - 0.5
-                if is_bottom_anchored and h <= 15 and not bool(params.get("draw_text", True)):
-                    bottom = float(h)
-                    top = float(Action._clipScalar(bottom - best_len, 0.0, bottom - 1.0))
-                    params["stem_top"] = top
-                    params["stem_bottom"] = bottom
-                else:
-                    # Keep the stem attached to the circle edge and optimize only the free end.
-                    top = float(Action._clipScalar(float(params.get("cy", 0.0)) + float(params.get("r", 0.0)), 0.0, float(h - 1)))
-                    params["stem_top"] = top
-                    params["stem_bottom"] = float(Action._clipScalar(top + best_len, top + 1.0, float(h)))
-            else:
-                center = (float(params.get("stem_top", 0.0)) + float(params.get("stem_bottom", 0.0))) / 2.0
-                half = best_len / 2.0
-                params["stem_top"] = float(Action._clipScalar(center - half, 0.0, float(h - 1)))
-                params["stem_bottom"] = float(Action._clipScalar(center + half, params["stem_top"] + 1.0, float(h)))
-        else:
-            x1 = float(params.get("arm_x1", 0.0))
-            y1 = float(params.get("arm_y1", 0.0))
-            x2 = float(params.get("arm_x2", 0.0))
-            y2 = float(params.get("arm_y2", 0.0))
-            dx = x2 - x1
-            dy = y2 - y1
-            cur_len = float(math.hypot(dx, dy))
-            if cur_len <= 1e-6:
-                return False
-            ux = dx / cur_len
-            uy = dy / cur_len
-
-            if params.get("circle_enabled", True) and all(k in params for k in ("cx", "cy", "r")):
-                Action._reanchorArmToCircleEdge(params, float(params.get("r", 0.0)))
-                ax1 = float(params.get("arm_x1", x1))
-                ay1 = float(params.get("arm_y1", y1))
-                ax2 = float(params.get("arm_x2", x2))
-                ay2 = float(params.get("arm_y2", y2))
-
-                cx = float(params.get("cx", 0.0))
-                cy = float(params.get("cy", 0.0))
-                d1 = float(math.hypot(ax1 - cx, ay1 - cy))
-                d2 = float(math.hypot(ax2 - cx, ay2 - cy))
-
-                if d1 <= d2:
-                    ix, iy = ax1, ay1
-                    if abs(uy) <= 0.35:
-                        iy = cy
-                        ix = cx - float(params.get("r", 0.0)) if ix <= cx else cx + float(params.get("r", 0.0))
-                    params["arm_x2"] = float(Action._clipScalar(ix + (ux * best_len), 0.0, float(w - 1)))
-                    params["arm_y2"] = float(Action._clipScalar(iy + (uy * best_len), 0.0, float(h - 1)))
-                    params["arm_x1"] = float(ix)
-                    params["arm_y1"] = float(iy)
-                else:
-                    ix, iy = ax2, ay2
-                    if abs(uy) <= 0.35:
-                        iy = cy
-                        ix = cx - float(params.get("r", 0.0)) if ix <= cx else cx + float(params.get("r", 0.0))
-                    params["arm_x1"] = float(Action._clipScalar(ix - (ux * best_len), 0.0, float(w - 1)))
-                    params["arm_y1"] = float(Action._clipScalar(iy - (uy * best_len), 0.0, float(h - 1)))
-                    params["arm_x2"] = float(ix)
-                    params["arm_y2"] = float(iy)
-            else:
-                cx = (x1 + x2) / 2.0
-                cy = (y1 + y2) / 2.0
-                half = best_len / 2.0
-                params["arm_x1"] = float(Action._clipScalar(cx - (ux * half), 0.0, float(w - 1)))
-                params["arm_y1"] = float(Action._clipScalar(cy - (uy * half), 0.0, float(h - 1)))
-                params["arm_x2"] = float(Action._clipScalar(cx + (ux * half), 0.0, float(w - 1)))
-                params["arm_y2"] = float(Action._clipScalar(cy + (uy * half), 0.0, float(h - 1)))
-
-        logs.append(
-            f"{element}: Längen-Bracketing {key_label} {current:.3f}->{best_len:.3f}; Kandidaten="
-            + ", ".join(f"{v:.3f}->{e:.3f}" for v, e in zip(candidates, candidate_errors, strict=False))
-        )
-        return True
 
     @staticmethod
     def _optimizeElementWidthBracket(img_orig: np.ndarray, params: dict, element: str, logs: list[str]) -> bool:
         h, w = img_orig.shape[:2]
-        info = Action._elementWidthKeyAndBounds(element, params, w, h, img_orig=img_orig)
-        if info is None:
-            return False
-
-        key, low_bound, high_bound = info
-        current = float(params.get(key, 0.0))
-        if current <= 0.0:
-            return False
-
-        # Breiteres Mehrpunkt-Bracketing über den gesamten plausiblen Bereich.
-        low = float(low_bound)
-        high = float(high_bound)
-        if not (low < high):
-            logs.append(
-                f"{element}: Breiten-Bracketing übersprungen ({key}: current={current:.3f}, "
-                f"Range={low_bound:.3f}..{high_bound:.3f})"
-            )
-            return False
-
-        if key.endswith("_font_scale"):
-            candidates = sorted(
-                {
-                    round(low, 3),
-                    round(low + (high - low) * 0.15, 3),
-                    round(low + (high - low) * 0.30, 3),
-                    round(low + (high - low) * 0.50, 3),
-                    round(low + (high - low) * 0.70, 3),
-                    round(low + (high - low) * 0.85, 3),
-                    round(high, 3),
-                    round(max(low, min(high, current * 0.85)), 3),
-                    round(max(low, min(high, current)), 3),
-                    round(max(low, min(high, current * 1.15)), 3),
-                }
-            )
-        else:
-            candidates = sorted(
-                {
-                    Action._snapHalf(low),
-                    Action._snapHalf(low + (high - low) * 0.25),
-                    Action._snapHalf((low + high) / 2.0),
-                    Action._snapHalf(low + (high - low) * 0.75),
-                    Action._snapHalf(high),
-                    Action._snapHalf(Action._clipScalar(current, low, high)),
-                }
-            )
-        candidate_errors = [Action._elementErrorForWidth(img_orig, params, element, v) for v in candidates]
-        if not all(math.isfinite(e) for e in candidate_errors):
-            logs.append(
-                f"{element}: Breiten-Bracketing abgebrochen ({key}) wegen nicht-finiten Fehlern "
-                + ", ".join(f"{v:.3f}->{e:.3f}" for v, e in zip(candidates, candidate_errors, strict=False))
-            )
-            return False
-
-        best_idx = Action._argminIndex(candidate_errors)
-        best_width = candidates[best_idx]
-
-        boundary_best = abs(float(best_width) - low) < 0.02 or abs(float(best_width) - high) < 0.02
-        if boundary_best:
-            snap_fn = (lambda v: float(round(v, 3))) if key.endswith("_font_scale") else Action._snapHalf
-            s_best, s_err, s_improved = Action._stochasticSurvivorScalar(
-                current,
-                low,
-                high,
-                lambda v: Action._elementErrorForWidth(img_orig, params, element, float(v)),
-                snap=snap_fn,
-                seed=1201,
-            )
-            if s_improved:
-                best_width = float(s_best)
-                logs.append(
-                    f"{element}: Breiten-Stochastic-Survivor aktiviert ({key}={best_width:.3f}, err={s_err:.3f})"
-                )
-
-        old = float(params.get(key, current))
-        if abs(best_width - old) < 0.02:
-            logs.append(
-                f"{element}: Breiten-Bracketing keine relevante Änderung ({key}: {old:.3f}); "
-                f"Kandidaten="
-                + ", ".join(
-                    f"{v:.3f}->{e:.3f}" for v, e in zip(candidates, candidate_errors, strict=False)
-                )
-            )
-            return False
-
-        if key in {"stroke_circle", "arm_stroke", "stem_width"}:
-            best_width = Action._snapIntPx(best_width, minimum=1.0)
-        elif key.endswith("_font_scale"):
-            best_width = float(round(best_width, 3))
-        else:
-            best_width = Action._snapHalf(best_width)
-
-        params[key] = best_width
-        if key == "stem_width" and params.get("stem_enabled"):
-            params["stem_x"] = Action._snapHalf(float(params.get("cx", params.get("stem_x", 0.0))) - (params["stem_width"] / 2.0))
-        logs.append(
-            f"{element}: Breiten-Bracketing {key} {old:.3f}->{best_width:.3f}; "
-            f"Kandidaten="
-            + ", ".join(f"{v:.3f}->{e:.3f}" for v, e in zip(candidates, candidate_errors, strict=False))
+        return geometry_optimization_helpers.optimizeElementWidthBracketImpl(
+            img_orig,
+            params,
+            element,
+            logs,
+            element_width_key_and_bounds_fn=lambda elem, p, width, height: Action._elementWidthKeyAndBounds(
+                elem,
+                p,
+                width,
+                height,
+                img_orig=img_orig,
+            ),
+            snap_half_fn=Action._snapHalf,
+            clip_scalar_fn=Action._clipScalar,
+            element_error_for_width_fn=Action._elementErrorForWidth,
+            argmin_index_fn=Action._argminIndex,
+            stochastic_survivor_scalar_fn=Action._stochasticSurvivorScalar,
+            snap_int_px_fn=lambda value: Action._snapIntPx(value, minimum=1.0),
         )
-        return True
 
 
     @staticmethod
