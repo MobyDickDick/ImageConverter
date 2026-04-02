@@ -62,19 +62,22 @@ AC08_REGRESSION_VARIANTS = tuple(dict.fromkeys(AC08_REGRESSION_VARIANTS))
 # criteria reports used by this converter/test suite.
 AC08_PREVIOUSLY_GOOD_VARIANTS = ("AC0800_L", "AC0800_M", "AC0800_S", "AC0811_L")
 
+_UNDER_PYTEST_RUNTIME = "pytest" in sys.modules or bool(os.environ.get("PYTEST_CURRENT_TEST"))
+
 SVG_RENDER_SUBPROCESS_ENABLED = os.environ.get("IMAGE_CONVERTER_ISOLATE_SVG_RENDER", "").strip().lower() in {
     "1",
     "true",
     "yes",
     "on",
 }
-if not SVG_RENDER_SUBPROCESS_ENABLED and "pytest" in sys.modules:
+if not SVG_RENDER_SUBPROCESS_ENABLED and _UNDER_PYTEST_RUNTIME:
     # PyMuPDF can intermittently segfault in long in-process render loops during
-    # the full test suite. Use the existing isolated renderer by default in
-    # pytest sessions unless explicitly disabled via env config.
+    # the full test suite. Use the existing isolated renderer by default for
+    # pytest-driven runs (including subprocess children inheriting pytest env)
+    # unless explicitly disabled via env config.
     SVG_RENDER_SUBPROCESS_ENABLED = True
 _default_svg_render_subprocess_timeout_sec = 20.0
-if "pytest" in sys.modules and "IMAGE_CONVERTER_ISOLATE_SVG_RENDER_TIMEOUT_SEC" not in os.environ:
+if _UNDER_PYTEST_RUNTIME and "IMAGE_CONVERTER_ISOLATE_SVG_RENDER_TIMEOUT_SEC" not in os.environ:
     # Test runs may trigger many render attempts; keep per-attempt subprocess
     # timeouts tighter to avoid long stalls when a renderer child gets wedged.
     _default_svg_render_subprocess_timeout_sec = 5.0
@@ -4529,7 +4532,7 @@ class Action:
             rendered = _render_svg_to_numpy_via_subprocess(svg_string, size_w, size_h)
             if rendered is not None:
                 return rendered
-            if "pytest" in sys.modules and not _is_inprocess_renderer_monkeypatched():
+            if _UNDER_PYTEST_RUNTIME and not _is_inprocess_renderer_monkeypatched():
                 # Avoid unstable in-process PyMuPDF fallback in long pytest
                 # sessions; dedicated tests can still exercise fallback by
                 # monkeypatching the in-process renderer helper.
