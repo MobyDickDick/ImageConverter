@@ -43,6 +43,7 @@ focused on the actual project scope.
   - 2026-04-02: Template-Transfer-Helfer (`_extractSvgInner`, `_buildTransformedSvgFromTemplate`, `_templateTransferScaleCandidates`, `_estimateTemplateTransferScale`, `_templateTransferTransformCandidates`, `_rankTemplateTransferDonors`, `_templateTransferDonorFamilyCompatible`) in neues Modul `src/imageCompositeConverterTemplateTransfer.py` ausgelagert; `src/imageCompositeConverter.py` delegiert weiter über kompatible Wrapper.
   - 2026-04-02: Stroke-/Text-Breiten-Helfer (`_elementWidthKeyAndBounds`, `_elementErrorForWidth`) in neues Modul `src/imageCompositeConverterOptimizationWidth.py` ausgelagert; `src/imageCompositeConverter.py` delegiert weiter über kompatible Wrapper.
   - 2026-04-02: Circle-Pose-Multistart-Helfer (`_optimizeCirclePoseMultistart`) in neues Modul `src/imageCompositeConverterOptimizationCirclePose.py` ausgelagert; `src/imageCompositeConverter.py` delegiert weiter über kompatible Wrapper.
+  - 2026-04-02: Qualitäts-Pass-Reporting-Helfer (`_writeQualityPassReport`, `_evaluateQualityPassCandidate`) in neues Modul `src/imageCompositeConverterOptimizationPassReporting.py` ausgelagert; `src/imageCompositeConverter.py` delegiert weiter über kompatible Wrapper.
   - Nächster geplanter Schritt: semantische Prüf- und Optimierungsblöcke in denselben kleinen Schritten extrahieren.
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.
