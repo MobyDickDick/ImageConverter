@@ -45,6 +45,7 @@ from src import imageCompositeConverterQuality as quality_helpers
 from src import imageCompositeConverterAudit as audit_helpers
 from src import imageCompositeConverterTransfer as transfer_helpers
 from src import imageCompositeConverterGeometryBrackets as geometry_bracket_helpers
+from src import imageCompositeConverterOptimizationColor as color_optimization_helpers
 from src.successfulConversions import (
     AC08_MITIGATION_STATUS,
     AC08_PREVIOUSLY_GOOD_VARIANTS,
@@ -6898,15 +6899,7 @@ class Action:
 
     @staticmethod
     def _elementColorKeys(element: str, params: dict) -> list[str]:
-        if element == "circle" and params.get("circle_enabled", True):
-            return ["fill_gray", "stroke_gray"]
-        if element == "stem" and params.get("stem_enabled"):
-            return ["stem_gray"]
-        if element == "arm" and params.get("arm_enabled"):
-            return ["stroke_gray"]
-        if element == "text" and params.get("draw_text", True):
-            return ["text_gray"]
-        return []
+        return color_optimization_helpers.elementColorKeysImpl(element, params)
 
     @staticmethod
     def _elementErrorForColor(
@@ -6917,27 +6910,20 @@ class Action:
         color_value: int,
         mask_orig: np.ndarray,
     ) -> float:
-        probe = dict(params)
-        probe[color_key] = int(Action._clip_scalar(color_value, 0, 255))
-
-        h, w = img_orig.shape[:2]
-        elem_svg = Action.generate_badge_svg(w, h, Action._elementOnlyParams(probe, element))
-        elem_render = Action._fit_to_original_size(img_orig, Action.render_svg_to_numpy(elem_svg, w, h))
-        if elem_render is None:
-            return float("inf")
-
-        if element == "circle":
-            # Color-only circle probing should be photometric against a stable
-            # source region. Do not let threshold-induced mask area changes in
-            # candidate renders bias toward darker/larger-looking circles.
-            return Action._masked_union_error_in_bbox(img_orig, elem_render, mask_orig, mask_orig)
-
-        return Action._element_match_error(
+        return color_optimization_helpers.elementErrorForColorImpl(
             img_orig,
-            elem_render,
-            probe,
+            params,
             element,
-            mask_orig=mask_orig,
+            color_key,
+            color_value,
+            mask_orig,
+            clip_scalar_fn=Action._clip_scalar,
+            generate_badge_svg_fn=Action.generate_badge_svg,
+            element_only_params_fn=Action._elementOnlyParams,
+            fit_to_original_size_fn=Action._fit_to_original_size,
+            render_svg_to_numpy_fn=Action.render_svg_to_numpy,
+            masked_union_error_in_bbox_fn=Action._masked_union_error_in_bbox,
+            element_match_error_fn=Action._element_match_error,
         )
 
     @staticmethod
@@ -6948,90 +6934,19 @@ class Action:
         mask_orig: np.ndarray,
         logs: list[str],
     ) -> bool:
-        if bool(params.get("lock_colors", False)):
-            logs.append(f"{element}: Farb-Bracketing übersprungen (Farben gesperrt)")
-            return False
-        if mask_orig is None or int(mask_orig.sum()) == 0:
-            return False
-
-        changed_any = False
-        local_gray = Action._mean_gray_for_mask(img_orig, mask_orig)
-        sampled = int(round(local_gray)) if local_gray is not None else None
-
-        for color_key in Action._elementColorKeys(element, params):
-            current = int(round(float(params.get(color_key, 128))))
-            low_limit = int(Action._clip_scalar(int(params.get(f"{color_key}_min", 0)), 0, 255))
-            high_limit = int(Action._clip_scalar(int(params.get(f"{color_key}_max", 255)), 0, 255))
-            if low_limit > high_limit:
-                low_limit, high_limit = high_limit, low_limit
-            candidates = {
-                int(Action._clip_scalar(current - 32, low_limit, high_limit)),
-                int(Action._clip_scalar(current - 16, low_limit, high_limit)),
-                int(Action._clip_scalar(current - 8, low_limit, high_limit)),
-                int(Action._clip_scalar(current, low_limit, high_limit)),
-                int(Action._clip_scalar(current + 8, low_limit, high_limit)),
-                int(Action._clip_scalar(current + 16, low_limit, high_limit)),
-                int(Action._clip_scalar(current + 32, low_limit, high_limit)),
-            }
-            if sampled is not None:
-                candidates.add(int(Action._clip_scalar(sampled, low_limit, high_limit)))
-            if element == "circle" and color_key == "fill_gray":
-                candidates.update(int(Action._clip_scalar(v, low_limit, high_limit)) for v in {200, 210, 220, 230, 240})
-            if color_key in {"stroke_gray", "stem_gray", "text_gray"}:
-                candidates.update(int(Action._clip_scalar(v, low_limit, high_limit)) for v in {96, 112, 128, 144, 152, 160, 171})
-
-            values = sorted(v for v in candidates if low_limit <= v <= high_limit)
-            errs = [
-                Action._element_error_for_color(img_orig, params, element, color_key, v, mask_orig)
-                for v in values
-            ]
-            if not all(math.isfinite(e) for e in errs):
-                logs.append(
-                    f"{element}: Farb-Bracketing abgebrochen ({color_key}) wegen nicht-finiten Fehlern "
-                    + ", ".join(f"{v}->{e:.3f}" for v, e in zip(values, errs, strict=False))
-                )
-                continue
-
-            best_idx = Action._argminIndex(errs)
-            best_value = int(values[best_idx])
-
-            if best_value == min(values) or best_value == max(values):
-                s_best, s_err, s_improved = Action._stochasticSurvivorScalar(
-                    float(current),
-                    float(min(values)),
-                    float(max(values)),
-                    lambda v: Action._element_error_for_color(
-                        img_orig,
-                        params,
-                        element,
-                        color_key,
-                        int(Action._clip_scalar(int(round(v)), low_limit, high_limit)),
-                        mask_orig,
-                    ),
-                    snap=lambda v: int(Action._clipScalar(int(round(v)), low_limit, high_limit)),
-                    seed=1301,
-                )
-                if s_improved:
-                    best_value = int(Action._clipScalar(int(round(s_best)), low_limit, high_limit))
-                    logs.append(
-                        f"{element}: Farb-Stochastic-Survivor aktiviert ({color_key}={best_value}, err={s_err:.3f})"
-                    )
-
-            if best_value == current:
-                logs.append(
-                    f"{element}: Farb-Bracketing keine relevante Änderung ({color_key}: {current}); Kandidaten="
-                    + ", ".join(f"{v}->{e:.3f}" for v, e in zip(values, errs, strict=False))
-                )
-                continue
-
-            params[color_key] = int(best_value)
-            changed_any = True
-            logs.append(
-                f"{element}: Farb-Bracketing {color_key} {current}->{best_value}; Kandidaten="
-                + ", ".join(f"{v}->{e:.3f}" for v, e in zip(values, errs, strict=False))
-            )
-
-        return changed_any
+        return color_optimization_helpers.optimizeElementColorBracketImpl(
+            img_orig,
+            params,
+            element,
+            mask_orig,
+            logs,
+            mean_gray_for_mask_fn=Action._mean_gray_for_mask,
+            clip_scalar_fn=Action._clip_scalar,
+            element_color_keys_fn=Action._elementColorKeys,
+            element_error_for_color_fn=Action._element_error_for_color,
+            argmin_index_fn=Action._argminIndex,
+            stochastic_survivor_scalar_fn=Action._stochasticSurvivorScalar,
+        )
 
     @staticmethod
     def _refineStemGeometryFromMasks(params: dict, mask_orig: np.ndarray, mask_svg: np.ndarray, w: int) -> tuple[bool, str | None]:
