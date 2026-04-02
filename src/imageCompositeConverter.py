@@ -10567,12 +10567,6 @@ def main(argv: list[str] | None = None) -> int:
             print(f"[ERROR] {_formatUserDiagnostic(exc)}")
             return 2
 
-
-if __name__ == "__main__":
-    raise SystemExit(main())
-
-
-
 def convertImage(input_path: str, output_path: str, *, max_iter: int = 120, plateau_limit: int = 14, seed: int = 42) -> Path:
     """Backward-compatible single-image entrypoint.
 
@@ -10694,3 +10688,7 @@ for _name, _obj in list(globals().items()):
     _snake_name = "".join(_snake)
     if _snake_name not in globals():
         globals()[_snake_name] = _obj
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
