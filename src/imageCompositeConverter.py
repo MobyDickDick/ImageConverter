@@ -50,6 +50,7 @@ from src import imageCompositeConverterOptimizationGeometry as geometry_optimiza
 from src import imageCompositeConverterOptimizationColor as color_optimization_helpers
 from src import imageCompositeConverterOptimizationWidth as width_optimization_helpers
 from src import imageCompositeConverterOptimizationPasses as optimization_pass_helpers
+from src import imageCompositeConverterOptimizationPassReporting as optimization_pass_reporting_helpers
 from src import imageCompositeConverterOptimizationCirclePose as circle_pose_optimization_helpers
 from src import imageCompositeConverterTemplateTransfer as template_transfer_helpers
 from src.successfulConversions import (
@@ -7361,37 +7362,7 @@ def _writeQualityPassReport(
     reports_out_dir: str,
     pass_rows: list[dict[str, object]],
 ) -> None:
-    if not pass_rows:
-        return
-
-    out_path = os.path.join(reports_out_dir, "quality_tercile_passes.csv")
-    with open(out_path, "w", encoding="utf-8", newline="") as f:
-        writer = csv.writer(f, delimiter=";")
-        writer.writerow([
-            "pass",
-            "filename",
-            "old_error_per_pixel",
-            "new_error_per_pixel",
-            "old_mean_delta2",
-            "new_mean_delta2",
-            "improved",
-            "decision",
-            "iteration_budget",
-            "badge_validation_rounds",
-        ])
-        for row in pass_rows:
-            writer.writerow([
-                row["pass"],
-                row["filename"],
-                f"{float(row['old_error_per_pixel']):.8f}",
-                f"{float(row['new_error_per_pixel']):.8f}",
-                f"{float(row.get('old_mean_delta2', float('inf'))):.6f}",
-                f"{float(row.get('new_mean_delta2', float('inf'))):.6f}",
-                "1" if bool(row["improved"]) else "0",
-                row.get("decision", "accepted_improvement" if bool(row["improved"]) else "rejected_regression"),
-                row["iteration_budget"],
-                row["badge_validation_rounds"],
-            ])
+    return optimization_pass_reporting_helpers.writeQualityPassReportImpl(reports_out_dir, pass_rows)
 
 
 def _evaluateQualityPassCandidate(
@@ -7407,15 +7378,7 @@ def _evaluateQualityPassCandidate(
     template transfers.
     """
 
-    prev_error_pp = float(old_row.get("error_per_pixel", float("inf")))
-    new_error_pp = float(new_row.get("error_per_pixel", float("inf")))
-    prev_mean_delta2 = float(old_row.get("mean_delta2", float("inf")))
-    new_mean_delta2 = float(new_row.get("mean_delta2", float("inf")))
-    error_improved = new_error_pp + 1e-9 < prev_error_pp
-    delta2_improved = new_mean_delta2 + 1e-6 < prev_mean_delta2
-    improved = error_improved or delta2_improved
-    decision = "accepted_improvement" if improved else "rejected_regression"
-    return improved, decision, prev_error_pp, new_error_pp, prev_mean_delta2, new_mean_delta2
+    return optimization_pass_reporting_helpers.evaluateQualityPassCandidateImpl(old_row, new_row)
 
 
 def _extractSvgInner(svg_text: str) -> str:
