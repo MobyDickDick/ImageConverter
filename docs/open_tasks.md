@@ -51,6 +51,7 @@ focused on the actual project scope.
   - 2026-04-03: Kreis-Suchhelfer (`_stochasticSurvivorScalar`, `_optimizeCirclePoseStochasticSurvivor`, `_optimizeCirclePoseAdaptiveDomain`) in neues Modul `src/imageCompositeConverterOptimizationCircleSearch.py` ausgelagert; `src/imageCompositeConverter.py` delegiert weiter über kompatible Wrapper.
   - 2026-04-03: Größenvarianten-Harmonisierung (`_harmonizeSemanticSizeVariants`) in `src/imageCompositeConverterSemanticHarmonization.py` ausgelagert; der Monolith delegiert über den neuen Modul-Entry-Point weiter kompatibel.
   - 2026-04-03: Die bereits extrahierten C1.1-Helfermodule werden jetzt zentral unter `src/iCCModules/` geführt; `src/imageCompositeConverter.py` importiert diese direkt aus dem neuen Ordner, die bisherigen Modulpfade unter `src/` bleiben als kompatible Wrapper bestehen.
+  - 2026-04-03: Masken-/BBox-Geometriehelfer (`_fitToOriginalSize`, `_maskCentroidRadius`, `_maskBbox`, `_maskCenterSize`, `_maskMinRectCenterDiag`, `_elementBboxChangeIsPlausible`) in neues Modul `src/iCCModules/imageCompositeConverterMaskGeometry.py` ausgelagert; `src/imageCompositeConverter.py` delegiert weiter über kompatible Wrapper.
   - Nächster geplanter Schritt: semantische Prüf- und weitere Optimierungsblöcke in denselben kleinen Schritten extrahieren.
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.
