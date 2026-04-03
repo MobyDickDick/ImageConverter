@@ -52,7 +52,12 @@ from src import imageCompositeConverterOptimizationWidth as width_optimization_h
 from src import imageCompositeConverterOptimizationPasses as optimization_pass_helpers
 from src import imageCompositeConverterOptimizationPassReporting as optimization_pass_reporting_helpers
 from src import imageCompositeConverterOptimizationCirclePose as circle_pose_optimization_helpers
+from src import imageCompositeConverterOptimizationCircleSearch as circle_search_optimization_helpers
+from src import imageCompositeConverterOptimizationCircleRadius as circle_radius_optimization_helpers
+from src import imageCompositeConverterOptimizationCircleGeometry as circle_geometry_optimization_helpers
+from src import imageCompositeConverterOptimizationGlobalVector as global_vector_optimization_helpers
 from src import imageCompositeConverterTemplateTransfer as template_transfer_helpers
+from src import imageCompositeConverterSemanticHarmonization as semantic_harmonization_helpers
 from src.successfulConversions import (
     AC08_MITIGATION_STATUS,
     AC08_PREVIOUSLY_GOOD_VARIANTS,
@@ -5038,81 +5043,33 @@ class Action:
 
     @staticmethod
     def _circleBounds(params: dict, w: int, h: int) -> tuple[float, float, float, float, float, float]:
-        min_r = float(max(1.0, params.get("min_circle_radius", 1.0)))
-        if "circle_radius_lower_bound_px" in params:
-            min_r = float(max(min_r, float(params.get("circle_radius_lower_bound_px", min_r))))
-        allow_overflow = bool(params.get("allow_circle_overflow", False))
-        max_r = max(min_r, float(min(w, h)) * 0.48)
-        cx = float(params.get("cx", float(w) / 2.0))
-        cy = float(params.get("cy", float(h) / 2.0))
-        stroke = float(params.get("stroke_circle", 0.0))
-        if allow_overflow:
-            max_r = max(max_r, float(max(w, h)) * 1.25, min_r + 0.5)
-        else:
-            max_r = min(max_r, Action._maxCircleRadiusInsideCanvas(cx, cy, w, h, stroke))
-        if "max_circle_radius" in params:
-            max_r = min(max_r, float(params.get("max_circle_radius", max_r)))
-        return 0.0, float(w - 1), 0.0, float(h - 1), min_r, max_r
+        return global_vector_optimization_helpers.circleBoundsImpl(
+            params,
+            w,
+            h,
+            max_circle_radius_inside_canvas_fn=Action._maxCircleRadiusInsideCanvas,
+        )
 
     @staticmethod
     def _globalParameterVectorBounds(params: dict, w: int, h: int) -> dict[str, tuple[float, float, bool, str]]:
-        """Return central bounds/lock metadata for the shared optimization vector."""
-        x_low, x_high, y_low, y_high, r_low, r_high = Action._circle_bounds(params, w, h)
-        max_x = float(max(0, w - 1))
-        max_y = float(max(0, h - 1))
-        text_scale = float(params.get("text_scale", 1.0))
-        text_scale_min = float(params.get("text_scale_min", max(0.2, text_scale * 0.5)))
-        text_scale_max = float(params.get("text_scale_max", max(text_scale_min, text_scale * 1.8)))
-        return {
-            "cx": (x_low, x_high, bool(params.get("lock_circle_cx", False)), "canvas"),
-            "cy": (y_low, y_high, bool(params.get("lock_circle_cy", False)), "canvas"),
-            "r": (r_low, r_high, False, "template/semantic"),
-            "arm_x1": (0.0, max_x, bool(params.get("lock_arm", False)), "canvas"),
-            "arm_y1": (0.0, max_y, bool(params.get("lock_arm", False)), "canvas"),
-            "arm_x2": (0.0, max_x, bool(params.get("lock_arm", False)), "template"),
-            "arm_y2": (0.0, max_y, bool(params.get("lock_arm", False)), "template"),
-            "arm_stroke": (1.0, max(1.0, min(float(min(w, h)) * 0.20, float(params.get("r", min(w, h))) * 0.9)), bool(params.get("lock_stroke_widths", False)), "semantic"),
-            "stem_x": (0.0, max_x, bool(params.get("lock_stem", False)), "template"),
-            "stem_top": (0.0, max_y, bool(params.get("lock_stem", False)), "template"),
-            "stem_bottom": (0.0, max_y, bool(params.get("lock_stem", False)), "template"),
-            "stem_width": (1.0, max(1.0, min(float(w) * 0.25, float(params.get("stem_width_max", float(w) * 0.25)))), bool(params.get("lock_stroke_widths", False)), "semantic"),
-            "text_x": (0.0, max_x, bool(params.get("lock_text_position", False)), "template"),
-            "text_y": (0.0, max_y, bool(params.get("lock_text_position", False)), "template"),
-            "text_scale": (text_scale_min, text_scale_max, bool(params.get("lock_text_scale", False)), "semantic"),
-        }
+        return global_vector_optimization_helpers.globalParameterVectorBoundsImpl(
+            params,
+            w,
+            h,
+            circle_bounds_fn=Action._circle_bounds,
+        )
 
     @staticmethod
     def _logGlobalParameterVector(logs: list[str], params: dict, w: int, h: int, *, label: str) -> None:
-        vector = GlobalParameterVector.fromParams(params)
-        bounds = Action._globalParameterVectorBounds(params, w, h)
-
-        def _fmtValue(value: float | None) -> str:
-            return "-" if value is None else f"{float(value):.3f}"
-
-        entries = []
-        for name in (
-            "cx",
-            "cy",
-            "r",
-            "arm_x1",
-            "arm_y1",
-            "arm_x2",
-            "arm_y2",
-            "arm_stroke",
-            "stem_x",
-            "stem_top",
-            "stem_bottom",
-            "stem_width",
-            "text_x",
-            "text_y",
-            "text_scale",
-        ):
-            low, high, locked, source = bounds[name]
-            value = getattr(vector, name)
-            entries.append(
-                f"{name}={_fmtValue(value)} [{low:.2f},{high:.2f}] lock={'ja' if locked else 'nein'} src={source}"
-            )
-        logs.append(f"{label}: global_vector " + "; ".join(entries))
+        global_vector_optimization_helpers.logGlobalParameterVectorImpl(
+            logs,
+            params,
+            w,
+            h,
+            label=label,
+            global_parameter_vector_cls=GlobalParameterVector,
+            global_parameter_vector_bounds_fn=Action._global_parameter_vector_bounds,
+        )
 
     @staticmethod
     def _stochasticSurvivorScalar(
@@ -5125,45 +5082,18 @@ class Action:
         seed: int,
         iterations: int = 20,
     ) -> tuple[float, float, bool]:
-        """Random 3-candidate survivor search for a scalar parameter."""
-        cur = float(snap(float(Action._clipScalar(current_value, low, high))))
-        best_value = cur
-        best_err = float(evaluate(best_value))
-        if not math.isfinite(best_err):
-            return best_value, best_err, False
-
-        rng = Action._makeRng(int(seed) + int(Action.STOCHASTIC_SEED_OFFSET))
-        span = max(0.5, abs(high - low) * 0.22)
-        improved = False
-        stable_rounds = 0
-
-        for _ in range(max(1, iterations)):
-            candidates = [best_value]
-            for _j in range(2):
-                sample = float(Action._clipScalar(rng.normal(best_value, span), low, high))
-                candidates.append(float(snap(sample)))
-
-            scored: list[tuple[float, float]] = []
-            for cand in candidates:
-                err = float(evaluate(cand))
-                if math.isfinite(err):
-                    scored.append((cand, err))
-            if not scored:
-                continue
-            scored.sort(key=lambda pair: pair[1])
-            cand_best, cand_err = scored[0]
-            if cand_err + 0.05 < best_err:
-                best_value, best_err = cand_best, cand_err
-                improved = True
-                stable_rounds = 0
-            else:
-                stable_rounds += 1
-
-            span = max(0.2, span * 0.90)
-            if stable_rounds >= 6:
-                break
-
-        return best_value, best_err, improved
+        return circle_search_optimization_helpers.stochasticSurvivorScalarImpl(
+            current_value,
+            low,
+            high,
+            evaluate,
+            snap=snap,
+            seed=seed,
+            make_rng_fn=Action._makeRng,
+            clip_scalar_fn=Action._clipScalar,
+            stochastic_seed_offset=Action.STOCHASTIC_SEED_OFFSET,
+            iterations=iterations,
+        )
 
     @staticmethod
     def _optimizeCirclePoseStochasticSurvivor(
@@ -5173,96 +5103,22 @@ class Action:
         *,
         iterations: int = 24,
     ) -> bool:
-        """Stochastic 3-candidate survivor search for circle pose.
-
-        Draw 3 random candidates per round, discard the worst, and continue from
-        the best survivor with shrinking perturbation.
-        """
-        if not params.get("circle_enabled", True):
-            return False
-
-        h, w = img_orig.shape[:2]
-        Action._logGlobalParameterVector(logs, params, w, h, label="circle: survivor-start")
-        x_low, x_high, y_low, y_high, r_low, r_high = Action._circleBounds(params, w, h)
-        current = (
-            Action._snap_half(float(params.get("cx", (w - 1) / 2.0))),
-            Action._snap_half(float(params.get("cy", (h - 1) / 2.0))),
-            Action._snap_half(float(params.get("r", max(1.0, min(w, h) * 0.3)))),
+        return circle_search_optimization_helpers.optimizeCirclePoseStochasticSurvivorImpl(
+            img_orig,
+            params,
+            logs,
+            snap_half_fn=Action._snapHalf,
+            clip_scalar_fn=Action._clipScalar,
+            make_rng_fn=Action._makeRng,
+            circle_bounds_fn=Action._circleBounds,
+            element_error_for_circle_pose_fn=Action._elementErrorForCirclePose,
+            log_global_parameter_vector_fn=Action._logGlobalParameterVector,
+            global_parameter_vector_cls=GlobalParameterVector,
+            reanchor_arm_to_circle_edge_fn=Action._reanchorArmToCircleEdge,
+            stochastic_run_seed=Action.STOCHASTIC_RUN_SEED,
+            stochastic_seed_offset=Action.STOCHASTIC_SEED_OFFSET,
+            iterations=iterations,
         )
-        lock_cx = bool(params.get("lock_circle_cx", False))
-        lock_cy = bool(params.get("lock_circle_cy", False))
-        rng = Action._makeRng(835 + int(Action.STOCHASTIC_RUN_SEED) + int(Action.STOCHASTIC_SEED_OFFSET))
-
-        def evalPose(candidate: tuple[float, float, float]) -> float:
-            cx, cy, rad = candidate
-            return float(
-                Action._elementErrorForCirclePose(
-                    img_orig,
-                    params,
-                    cx_value=cx,
-                    cy_value=cy,
-                    radius_value=rad,
-                )
-            )
-
-        best = current
-        best_err = evalPose(best)
-        if not math.isfinite(best_err):
-            return False
-
-        spread_xy = max(1.0, float(min(w, h)) * 0.10)
-        spread_r = max(0.6, float(best[2]) * 0.18)
-        improved = False
-        stable_rounds = 0
-
-        for _ in range(max(1, iterations)):
-            candidates: list[tuple[tuple[float, float, float], float]] = [(best, best_err)]
-            for _j in range(2):
-                if lock_cx:
-                    cx = best[0]
-                else:
-                    cx = Action._snapHalf(float(Action._clipScalar(rng.normal(best[0], spread_xy), x_low, x_high)))
-                if lock_cy:
-                    cy = best[1]
-                else:
-                    cy = Action._snapHalf(float(Action._clipScalar(rng.normal(best[1], spread_xy), y_low, y_high)))
-                rad = Action._snapHalf(float(Action._clipScalar(rng.normal(best[2], spread_r), r_low, r_high)))
-                cand = (cx, cy, rad)
-                candidates.append((cand, evalPose(cand)))
-
-            finite = [pair for pair in candidates if math.isfinite(pair[1])]
-            if not finite:
-                continue
-            finite.sort(key=lambda item: item[1])
-            round_best, round_err = finite[0]
-            if round_err + 0.05 < best_err:
-                best, best_err = round_best, round_err
-                improved = True
-                stable_rounds = 0
-            else:
-                stable_rounds += 1
-
-            spread_xy = max(0.4, spread_xy * 0.92)
-            spread_r = max(0.35, spread_r * 0.90)
-            if stable_rounds >= 7:
-                break
-
-        if not improved:
-            logs.append("circle: Stochastic-Survivor keine relevante Verbesserung")
-            return False
-
-        updated_vector = GlobalParameterVector.fromParams(params)
-        updated_vector = dataclasses.replace(updated_vector, cx=best[0], cy=best[1], r=best[2])
-        params.update(updated_vector.applyToParams(params))
-        if params.get("arm_enabled"):
-            Action._reanchorArmToCircleEdge(params, best[2])
-        if params.get("stem_enabled"):
-            params["stem_top"] = float(params.get("cy", 0.0)) + best[2]
-        Action._logGlobalParameterVector(logs, params, w, h, label="circle: survivor-final")
-        logs.append(
-            f"circle: Stochastic-Survivor übernommen (cx={best[0]:.3f}, cy={best[1]:.3f}, r={best[2]:.3f}, err={best_err:.3f})"
-        )
-        return True
 
     @staticmethod
     def _optimizeCirclePoseAdaptiveDomain(
@@ -5273,198 +5129,23 @@ class Action:
         rounds: int = 4,
         samples_per_round: int = 18,
     ) -> bool:
-        """Adaptive random-domain search with iterative domain shrinking.
-
-        Strategy:
-        1) Start from a broad but plausible 3D domain (cx, cy, r).
-        2) Evaluate random samples and keep a near-optimal plateau.
-        3) Estimate a surrogate minimum from the plateau center and best sample.
-        4) Shrink the domain and repeat.
-        """
-        if not params.get("circle_enabled", True):
-            return False
-
-        h, w = img_orig.shape[:2]
-        Action._logGlobalParameterVector(logs, params, w, h, label="circle: adaptive-start")
-        x_low, x_high, y_low, y_high, r_low, r_high = Action._circleBounds(params, w, h)
-        lock_cx = bool(params.get("lock_circle_cx", False))
-        lock_cy = bool(params.get("lock_circle_cy", False))
-
-        current = (
-            Action._snapHalf(float(params.get("cx", (w - 1) / 2.0))),
-            Action._snapHalf(float(params.get("cy", (h - 1) / 2.0))),
-            Action._snapHalf(float(params.get("r", max(1.0, min(w, h) * 0.3)))),
+        return circle_search_optimization_helpers.optimizeCirclePoseAdaptiveDomainImpl(
+            img_orig,
+            params,
+            logs,
+            snap_half_fn=Action._snapHalf,
+            clip_scalar_fn=Action._clipScalar,
+            make_rng_fn=Action._makeRng,
+            circle_bounds_fn=Action._circleBounds,
+            element_error_for_circle_pose_fn=Action._elementErrorForCirclePose,
+            log_global_parameter_vector_fn=Action._logGlobalParameterVector,
+            global_parameter_vector_cls=GlobalParameterVector,
+            reanchor_arm_to_circle_edge_fn=Action._reanchorArmToCircleEdge,
+            stochastic_run_seed=Action.STOCHASTIC_RUN_SEED,
+            stochastic_seed_offset=Action.STOCHASTIC_SEED_OFFSET,
+            rounds=rounds,
+            samples_per_round=samples_per_round,
         )
-
-        def clampPose(candidate: tuple[float, float, float]) -> tuple[float, float, float]:
-            cx, cy, rad = candidate
-            if lock_cx:
-                cx = current[0]
-            else:
-                cx = Action._snap_half(float(Action._clip_scalar(cx, x_low, x_high)))
-            if lock_cy:
-                cy = current[1]
-            else:
-                cy = Action._snap_half(float(Action._clip_scalar(cy, y_low, y_high)))
-            rad = Action._snap_half(float(Action._clip_scalar(rad, r_low, r_high)))
-            return cx, cy, rad
-
-        cache: dict[tuple[float, float, float], float] = {}
-
-        def evalPose(candidate: tuple[float, float, float]) -> float:
-            pose = clampPose(candidate)
-            if pose not in cache:
-                cache[pose] = float(
-                    Action._element_error_for_circle_pose(
-                        img_orig,
-                        params,
-                        cx_value=pose[0],
-                        cy_value=pose[1],
-                        radius_value=pose[2],
-                    )
-                )
-            return cache[pose]
-
-        best = clampPose(current)
-        best_err = evalPose(best)
-        if not math.isfinite(best_err):
-            return False
-
-        domain = {
-            "cx_low": x_low,
-            "cx_high": x_high,
-            "cy_low": y_low,
-            "cy_high": y_high,
-            "r_low": r_low,
-            "r_high": r_high,
-        }
-
-        rng = Action._make_rng(2027 + int(Action.STOCHASTIC_RUN_SEED) + int(Action.STOCHASTIC_SEED_OFFSET))
-        improved = False
-        flat_plateau_hits = 0
-
-        logs.append(
-            (
-                "circle: Adaptive-Domain-Suche gestartet "
-                f"(Möglichkeitsraum: cx=[{domain['cx_low']:.2f},{domain['cx_high']:.2f}], "
-                f"cy=[{domain['cy_low']:.2f},{domain['cy_high']:.2f}], "
-                f"r=[{domain['r_low']:.2f},{domain['r_high']:.2f}], "
-                f"samples_pro_runde={max(8, int(samples_per_round))})"
-            )
-        )
-
-        for _round in range(max(1, rounds)):
-            samples: list[tuple[tuple[float, float, float], float]] = [(best, best_err)]
-            for _ in range(max(8, int(samples_per_round))):
-                if lock_cx:
-                    cx = current[0]
-                else:
-                    cx = float(rng.uniform(domain["cx_low"], domain["cx_high"]))
-                if lock_cy:
-                    cy = current[1]
-                else:
-                    cy = float(rng.uniform(domain["cy_low"], domain["cy_high"]))
-                rad = float(rng.uniform(domain["r_low"], domain["r_high"]))
-                pose = clampPose((cx, cy, rad))
-                samples.append((pose, evalPose(pose)))
-
-            finite = [pair for pair in samples if math.isfinite(pair[1])]
-            if not finite:
-                continue
-            finite.sort(key=lambda item: item[1])
-            round_best, round_best_err = finite[0]
-
-            # Build a near-optimal plateau and use its center as a smooth surrogate.
-            plateau_eps = max(0.06, round_best_err * 0.02)
-            plateau = [pose for pose, err in finite if err <= round_best_err + plateau_eps]
-            if len(plateau) >= 4:
-                flat_plateau_hits += 1
-
-            plateau_points = plateau if plateau else [round_best]
-            pmin_cx = min(p[0] for p in plateau_points)
-            pmin_cy = min(p[1] for p in plateau_points)
-            pmin_r = min(p[2] for p in plateau_points)
-            pmax_cx = max(p[0] for p in plateau_points)
-            pmax_cy = max(p[1] for p in plateau_points)
-            pmax_r = max(p[2] for p in plateau_points)
-            plateau_mid = clampPose(((pmin_cx + pmax_cx) / 2.0, (pmin_cy + pmax_cy) / 2.0, (pmin_r + pmax_r) / 2.0))
-            plateau_mid_err = evalPose(plateau_mid)
-
-            candidate_best = round_best
-            candidate_err = round_best_err
-            if math.isfinite(plateau_mid_err) and plateau_mid_err < candidate_err:
-                candidate_best = plateau_mid
-                candidate_err = plateau_mid_err
-
-            if candidate_err + 0.05 < best_err:
-                best = candidate_best
-                best_err = candidate_err
-                improved = True
-
-            logs.append(
-                (
-                    f"circle: Runde {_round + 1} random-samples={len(samples) - 1}, "
-                    f"Error-Minimum={best_err:.3f} bei "
-                    f"(cx={best[0]:.3f}, cy={best[1]:.3f}, r={best[2]:.3f})"
-                )
-            )
-            round_vector = GlobalParameterVector.fromParams(params)
-            round_vector = dataclasses.replace(round_vector, cx=best[0], cy=best[1], r=best[2])
-            round_params = round_vector.applyToParams(params)
-            Action._logGlobalParameterVector(logs, round_params, w, h, label=f"circle: Runde {_round + 1}")
-
-            # Iteratively shrink domain around the stable near-optimal region.
-            shrink = 0.58
-            if not lock_cx:
-                half_span = max(0.5, float((domain["cx_high"] - domain["cx_low"]) * shrink * 0.5))
-                focus = float(best[0] if len(plateau) <= 1 else (pmin_cx + pmax_cx) / 2.0)
-                domain["cx_low"] = max(x_low, focus - half_span)
-                domain["cx_high"] = min(x_high, focus + half_span)
-            if not lock_cy:
-                half_span = max(0.5, float((domain["cy_high"] - domain["cy_low"]) * shrink * 0.5))
-                focus = float(best[1] if len(plateau) <= 1 else (pmin_cy + pmax_cy) / 2.0)
-                domain["cy_low"] = max(y_low, focus - half_span)
-                domain["cy_high"] = min(y_high, focus + half_span)
-            half_span_r = max(0.5, float((domain["r_high"] - domain["r_low"]) * shrink * 0.5))
-            focus_r = float(best[2] if len(plateau) <= 1 else (pmin_r + pmax_r) / 2.0)
-            domain["r_low"] = max(r_low, focus_r - half_span_r)
-            domain["r_high"] = min(r_high, focus_r + half_span_r)
-
-            logs.append(
-                (
-                    f"circle: Runde {_round + 1} Möglichkeitsraum eingegrenzt auf "
-                    f"cx=[{domain['cx_low']:.2f},{domain['cx_high']:.2f}], "
-                    f"cy=[{domain['cy_low']:.2f},{domain['cy_high']:.2f}], "
-                    f"r=[{domain['r_low']:.2f},{domain['r_high']:.2f}]"
-                )
-            )
-
-        if not improved:
-            logs.append("circle: Adaptive-Domain-Suche keine relevante Verbesserung")
-            return False
-
-        updated_vector = GlobalParameterVector.fromParams(params)
-        updated_vector = dataclasses.replace(updated_vector, cx=best[0], cy=best[1], r=best[2])
-        params.update(updated_vector.applyToParams(params))
-        if params.get("arm_enabled"):
-            Action._reanchorArmToCircleEdge(params, best[2])
-        if params.get("stem_enabled"):
-            params["stem_top"] = float(params.get("cy", 0.0)) + best[2]
-        Action._logGlobalParameterVector(logs, params, w, h, label="circle: adaptive-final")
-
-        boundary_hit = (
-            (not lock_cx and (abs(best[0] - x_low) <= 0.01 or abs(best[0] - x_high) <= 0.01))
-            or (not lock_cy and (abs(best[1] - y_low) <= 0.01 or abs(best[1] - y_high) <= 0.01))
-            or abs(best[2] - r_low) <= 0.01
-            or abs(best[2] - r_high) <= 0.01
-        )
-        flat_hint = flat_plateau_hits >= 2
-        logs.append(
-            "circle: Adaptive-Domain-Suche übernommen "
-            f"(cx={best[0]:.3f}, cy={best[1]:.3f}, r={best[2]:.3f}, err={best_err:.3f}, "
-            f"rand_optimum={'ja' if boundary_hit else 'nein'}, flaches_optimum={'ja' if flat_hint else 'nein'})"
-        )
-        return True
 
     @staticmethod
     def _fullBadgeErrorForParams(img_orig: np.ndarray, params: dict) -> float:
@@ -5763,94 +5444,36 @@ class Action:
 
     @staticmethod
     def _elementErrorForCircleRadius(img_orig: np.ndarray, params: dict, radius_value: float) -> float:
-        h, w = img_orig.shape[:2]
-        if not params.get("circle_enabled", True):
-            return float("inf")
-
-        probe = dict(params)
-        min_r = float(
-            max(
-                1.0,
-                float(probe.get("min_circle_radius", 1.0)),
-                float(probe.get("circle_radius_lower_bound_px", 1.0)),
-            )
-        )
-        max_r = max(min_r, (float(min(w, h)) * 0.48))
-        if bool(probe.get("allow_circle_overflow", False)):
-            max_r = max(max_r, float(max(w, h)) * 1.25, min_r + 0.5)
-        probe["r"] = float(Action._clip_scalar(radius_value, min_r, max_r))
-        probe = Action._clampCircleInsideCanvas(probe, w, h)
-
-        if probe.get("arm_enabled"):
-            Action._reanchorArmToCircleEdge(probe, float(probe["r"]))
-
-        if probe.get("stem_enabled"):
-            probe["stem_top"] = float(probe.get("cy", 0.0)) + float(probe["r"])
-
-        elem_svg = Action.generate_badge_svg(w, h, Action._elementOnlyParams(probe, "circle"))
-        elem_render = Action._fit_to_original_size(img_orig, Action.render_svg_to_numpy(elem_svg, w, h))
-        if elem_render is None:
-            return float("inf")
-
-        # Keep the source mask conservative across radius probes.
-        # - For shrink probes, stay anchored to the current radius so we don't
-        #   hide missing source pixels (collapse bias, observed on AC0833_L).
-        # - For growth probes, expand the source mask context to the larger
-        #   radius so underestimated starts (e.g. AC0812_L) can still move up.
-        source_mask_params = dict(params)
-        source_mask_params["r"] = max(float(params.get("r", 0.0)), float(probe["r"]))
-        if source_mask_params.get("arm_enabled"):
-            Action._reanchorArmToCircleEdge(source_mask_params, float(source_mask_params["r"]))
-        if source_mask_params.get("stem_enabled"):
-            source_mask_params["stem_top"] = float(source_mask_params.get("cy", 0.0)) + float(source_mask_params["r"])
-
-        mask_orig = Action.extract_badge_element_mask(img_orig, source_mask_params, "circle")
-        if mask_orig is None:
-            return float("inf")
-        mask_svg = Action.extract_badge_element_mask(elem_render, probe, "circle")
-        if mask_svg is None:
-            return float("inf")
-
-        return Action._element_match_error(
+        return circle_radius_optimization_helpers.elementErrorForCircleRadiusImpl(
             img_orig,
-            elem_render,
-            probe,
-            "circle",
-            mask_orig=mask_orig,
-            mask_svg=mask_svg,
+            params,
+            radius_value,
+            clip_scalar_fn=Action._clip_scalar,
+            clamp_circle_inside_canvas_fn=Action._clampCircleInsideCanvas,
+            reanchor_arm_to_circle_edge_fn=Action._reanchorArmToCircleEdge,
+            generate_badge_svg_fn=Action.generate_badge_svg,
+            element_only_params_fn=Action._elementOnlyParams,
+            fit_to_original_size_fn=Action._fit_to_original_size,
+            render_svg_to_numpy_fn=Action.render_svg_to_numpy,
+            extract_badge_element_mask_fn=Action.extract_badge_element_mask,
+            element_match_error_fn=Action._element_match_error,
         )
 
     @staticmethod
     def _fullBadgeErrorForCircleRadius(img_orig: np.ndarray, params: dict, radius_value: float) -> float:
         """Evaluate the full SVG roundtrip error for a specific circle radius."""
-        h, w = img_orig.shape[:2]
-        if not params.get("circle_enabled", True):
-            return float("inf")
-
-        probe = dict(params)
-        min_r = float(
-            max(
-                1.0,
-                float(probe.get("min_circle_radius", 1.0)),
-                float(probe.get("circle_radius_lower_bound_px", 1.0)),
-            )
+        return circle_radius_optimization_helpers.fullBadgeErrorForCircleRadiusImpl(
+            img_orig,
+            params,
+            radius_value,
+            clip_scalar_fn=Action._clipScalar,
+            clamp_circle_inside_canvas_fn=Action._clampCircleInsideCanvas,
+            reanchor_arm_to_circle_edge_fn=Action._reanchorArmToCircleEdge,
+            generate_badge_svg_fn=Action.generateBadgeSvg,
+            fit_to_original_size_fn=Action._fitToOriginalSize,
+            render_svg_to_numpy_fn=Action.renderSvgToNumpy,
+            calculate_error_fn=Action.calculateError,
         )
-        max_r = max(min_r, (float(min(w, h)) * 0.48))
-        if bool(probe.get("allow_circle_overflow", False)):
-            max_r = max(max_r, float(max(w, h)) * 1.25, min_r + 0.5)
-        probe["r"] = float(Action._clipScalar(radius_value, min_r, max_r))
-        probe = Action._clampCircleInsideCanvas(probe, w, h)
-
-        if probe.get("arm_enabled"):
-            Action._reanchorArmToCircleEdge(probe, float(probe["r"]))
-
-        if probe.get("stem_enabled"):
-            probe["stem_top"] = float(probe.get("cy", 0.0)) + float(probe["r"])
-
-        render = Action._fitToOriginalSize(img_orig, Action.renderSvgToNumpy(Action.generateBadgeSvg(w, h, probe), w, h))
-        if render is None:
-            return float("inf")
-        return float(Action.calculateError(img_orig, render))
 
     @staticmethod
     def _selectCircleRadiusPlateauCandidate(
@@ -5860,71 +5483,16 @@ class Action:
         current_radius: float,
     ) -> tuple[float, float, float]:
         """Pick a stable radius from a near-optimal plateau instead of a noisy local minimum."""
-        finite = sorted((float(radius), float(err)) for radius, err in evaluations.items() if math.isfinite(err))
-        if not finite:
-            return current_radius, float("inf"), float("inf")
-
-        best_radius, best_err = min(finite, key=lambda pair: pair[1])
-        plateau_eps = max(0.06, best_err * 0.02)
-        plateau = [(radius, err) for radius, err in finite if err <= best_err + plateau_eps]
-        if not plateau:
-            try:
-                full_err = float(Action._full_badge_error_for_circle_radius(img_orig, params, best_radius))
-            except Exception:
-                full_err = float("inf")
-            return best_radius, best_err, full_err
-
-        plateau_mid = Action._snapHalf((plateau[0][0] + plateau[-1][0]) / 2.0)
-        candidate_radii = {best_radius, plateau_mid}
-        if len(plateau) >= 2:
-            candidate_radii.add(plateau[-1][0])
-
-        min_r = float(
-            max(
-                1.0,
-                params.get("min_circle_radius", 1.0),
-                params.get("circle_radius_lower_bound_px", 1.0),
-            )
+        return circle_radius_optimization_helpers.selectCircleRadiusPlateauCandidateImpl(
+            img_orig,
+            params,
+            evaluations,
+            current_radius,
+            clip_scalar_fn=Action._clipScalar,
+            snap_half_fn=Action._snapHalf,
+            full_badge_error_for_circle_radius_fn=Action._full_badge_error_for_circle_radius,
+            element_error_for_circle_radius_fn=Action._element_error_for_circle_radius,
         )
-        max_r = float(params.get("max_circle_radius", max(radius for radius, _err in finite)))
-        if bool(params.get("allow_circle_overflow", False)):
-            max_r = max(max_r, min_r + 0.5)
-        bounded_candidates = sorted(
-            float(Action._clipScalar(Action._snapHalf(float(radius)), min_r, max_r))
-            for radius in candidate_radii
-        )
-
-        choice_pool: list[tuple[float, float, float, float]] = []
-        for radius in bounded_candidates:
-            if radius in evaluations:
-                elem_err = float(evaluations[radius])
-            else:
-                try:
-                    elem_err = float(Action._element_error_for_circle_radius(img_orig, params, radius))
-                except Exception:
-                    elem_err = float("inf")
-            try:
-                full_err = float(Action._full_badge_error_for_circle_radius(img_orig, params, radius))
-            except Exception:
-                full_err = float("inf")
-            if not math.isfinite(elem_err) and not math.isfinite(full_err):
-                continue
-            distance_to_mid = abs(radius - plateau_mid)
-            choice_pool.append((radius, elem_err, full_err, distance_to_mid))
-
-        if not choice_pool:
-            return current_radius, best_err, float("inf")
-
-        chosen_radius, chosen_elem_err, chosen_full_err, _distance_to_mid = min(
-            choice_pool,
-            key=lambda item: (
-                round(item[2], 6),
-                round(item[1], 6),
-                item[3],
-                abs(item[0] - current_radius),
-            ),
-        )
-        return chosen_radius, chosen_elem_err, chosen_full_err
 
 
     @staticmethod
@@ -5936,84 +5504,27 @@ class Action:
         cy_value: float,
         radius_value: float,
     ) -> float:
-        h, w = img_orig.shape[:2]
-        if not params.get("circle_enabled", True):
-            return float("inf")
-
-        probe = dict(params)
-        max_r = max(1.0, (float(min(w, h)) * 0.48))
-        probe["cx"] = Action._snapHalf(float(Action._clipScalar(cx_value, 0.0, float(w - 1))))
-        probe["cy"] = Action._snapHalf(float(Action._clipScalar(cy_value, 0.0, float(h - 1))))
-        min_r = float(max(1.0, probe.get("min_circle_radius", 1.0)))
-        probe["r"] = Action._snapHalf(float(Action._clipScalar(radius_value, min_r, max_r)))
-        probe = Action._clampCircleInsideCanvas(probe, w, h)
-
-        if probe.get("arm_enabled"):
-            Action._reanchorArmToCircleEdge(probe, float(probe["r"]))
-
-        if probe.get("stem_enabled"):
-            probe["stem_top"] = float(probe.get("cy", 0.0)) + float(probe["r"])
-
-        elem_svg = Action.generate_badge_svg(w, h, Action._element_only_params(probe, "circle"))
-        elem_render = Action._fit_to_original_size(img_orig, Action.render_svg_to_numpy(elem_svg, w, h))
-        if elem_render is None:
-            return float("inf")
-
-        # See `_elementErrorForCircleRadius`: use a stable source mask that
-        # is independent from the tested candidate pose.
-        mask_orig = Action.extract_badge_element_mask(img_orig, params, "circle")
-        if mask_orig is None:
-            return float("inf")
-        mask_svg = Action.extract_badge_element_mask(elem_render, probe, "circle")
-        if mask_svg is None:
-            return float("inf")
-
-        return Action._element_match_error(
+        return circle_geometry_optimization_helpers.elementErrorForCirclePoseImpl(
             img_orig,
-            elem_render,
-            probe,
-            "circle",
-            mask_orig=mask_orig,
-            mask_svg=mask_svg,
+            params,
+            cx_value=cx_value,
+            cy_value=cy_value,
+            radius_value=radius_value,
+            snap_half_fn=Action._snapHalf,
+            clip_scalar_fn=Action._clipScalar,
+            clamp_circle_inside_canvas_fn=Action._clampCircleInsideCanvas,
+            reanchor_arm_to_circle_edge_fn=Action._reanchorArmToCircleEdge,
+            generate_badge_svg_fn=Action.generate_badge_svg,
+            element_only_params_fn=Action._element_only_params,
+            fit_to_original_size_fn=Action._fit_to_original_size,
+            render_svg_to_numpy_fn=Action.render_svg_to_numpy,
+            extract_badge_element_mask_fn=Action.extract_badge_element_mask,
+            element_match_error_fn=Action._element_match_error,
         )
 
     @staticmethod
     def _reanchorArmToCircleEdge(params: dict, radius: float) -> None:
-        """Keep arm orientation but snap the circle-side endpoint to the new radius."""
-        if not params.get("arm_enabled"):
-            return
-        if not all(k in params for k in ("arm_x1", "arm_y1", "arm_x2", "arm_y2", "cx", "cy")):
-            return
-
-        cx = float(params.get("cx", 0.0))
-        cy = float(params.get("cy", 0.0))
-        x1 = float(params.get("arm_x1", cx))
-        y1 = float(params.get("arm_y1", cy))
-        x2 = float(params.get("arm_x2", cx))
-        y2 = float(params.get("arm_y2", cy))
-        arm_stroke = float(max(0.0, params.get("arm_stroke", 0.0)))
-        attach_offset = arm_stroke / 2.0
-
-        # Preserve dominant orientation (horizontal vs. vertical).
-        is_horizontal = abs(x2 - x1) >= abs(y2 - y1)
-        if is_horizontal:
-            params["arm_y1"] = cy
-            params["arm_y2"] = cy
-            p1_dist = abs(x1 - cx)
-            p2_dist = abs(x2 - cx)
-            if p2_dist <= p1_dist:
-                params["arm_x2"] = (cx - radius - attach_offset) if x1 <= cx else (cx + radius + attach_offset)
-            else:
-                params["arm_x1"] = (cx - radius - attach_offset) if x2 <= cx else (cx + radius + attach_offset)
-        else:
-            params["arm_x1"] = cx
-            params["arm_x2"] = cx
-            p1_dist = abs(y1 - cy)
-            p2_dist = abs(y2 - cy)
-            if p2_dist <= p1_dist:
-                params["arm_y2"] = (cy - radius - attach_offset) if y1 <= cy else (cy + radius + attach_offset)
-            else:
-                params["arm_y1"] = (cy - radius - attach_offset) if y2 <= cy else (cy + radius + attach_offset)
+        circle_geometry_optimization_helpers.reanchorArmToCircleEdgeImpl(params, radius)
 
     @staticmethod
     def _optimizeCircleCenterBracket(img_orig: np.ndarray, params: dict, logs: list[str]) -> bool:
@@ -8298,30 +7809,7 @@ def _maxSignatureDelta(sig_a: dict[str, float], sig_b: dict[str, float]) -> floa
 
 
 def _needsLargeCircleOverflowGuard(params: dict) -> bool:
-    """Return whether circle placement may intentionally exceed canvas bounds.
-
-    This is a generic geometry rule for large, centered CO² badges without
-    connectors. It replaces single-variant checks (for example ``AC0820_L``)
-    so future families with the same structure automatically get the same
-    robust radius handling.
-    """
-    if not bool(params.get("circle_enabled", True)):
-        return False
-    if bool(params.get("arm_enabled") or params.get("stem_enabled")):
-        return False
-    if not bool(params.get("draw_text", False)):
-        return False
-    if str(params.get("text_mode", "")).lower() != "co2":
-        return False
-
-    template_r = float(params.get("template_circle_radius", params.get("r", 0.0)) or 0.0)
-    current_r = float(params.get("r", 0.0) or 0.0)
-    width = float(params.get("width", params.get("badge_width", 0.0)) or 0.0)
-
-    large_template = template_r >= 10.0
-    large_current = current_r >= 10.0
-    wide_canvas = width >= 30.0
-    return bool(large_template or large_current or wide_canvas)
+    return semantic_harmonization_helpers.needsLargeCircleOverflowGuardImpl(params)
 
 
 def _scaleBadgeParams(
@@ -8333,166 +7821,27 @@ def _scaleBadgeParams(
     *,
     target_variant: str = "",
 ) -> dict:
-    scaled = dict(anchor)
-    scale = max(1e-6, float(min(target_w, target_h)) / max(1.0, float(min(anchor_w, anchor_h))))
-    scale_x = max(1e-6, float(target_w) / max(1.0, float(anchor_w)))
-    scale_y = max(1e-6, float(target_h) / max(1.0, float(anchor_h)))
-
-    if scaled.get("circle_enabled", True):
-        scaled["cx"] = float(anchor["cx"]) * scale_x
-        scaled["cy"] = float(anchor["cy"]) * scale_y
-        scaled["r"] = float(anchor["r"]) * scale
-        # Intentionally preserve stroke thickness across size variants.
-        scaled["stroke_circle"] = float(anchor["stroke_circle"])
-
-    if scaled.get("stem_enabled"):
-        scaled["stem_x"] = float(anchor["stem_x"]) * scale_x
-        scaled["stem_width"] = float(anchor["stem_width"])
-        scaled["stem_top"] = float(anchor["stem_top"]) * scale_y
-        scaled["stem_bottom"] = float(anchor["stem_bottom"]) * scale_y
-
-    if scaled.get("arm_enabled"):
-        scaled["arm_x1"] = float(anchor["arm_x1"]) * scale_x
-        scaled["arm_y1"] = float(anchor["arm_y1"]) * scale_y
-        scaled["arm_x2"] = float(anchor["arm_x2"]) * scale_x
-        scaled["arm_y2"] = float(anchor["arm_y2"]) * scale_y
-        scaled["arm_stroke"] = float(anchor["arm_stroke"])
-
-    template_scalars = {
-        "template_circle_cx": scale_x,
-        "template_circle_cy": scale_y,
-        "template_circle_radius": scale,
-        "template_stem_top": scale_y,
-        "template_stem_bottom": scale_y,
-        "template_arm_x1": scale_x,
-        "template_arm_y1": scale_y,
-        "template_arm_x2": scale_x,
-        "template_arm_y2": scale_y,
-        "stem_len_min": scale_y,
-        "arm_len_min": max(scale_x, scale_y),
-    }
-    for key, factor in template_scalars.items():
-        if key in scaled:
-            scaled[key] = float(anchor[key]) * float(factor)
-
-    if scaled.get("circle_enabled", True):
-        overflow_guard = _needsLargeCircleOverflowGuard(scaled)
-        required_r = (float(target_w) / 2.0) + 0.5 if overflow_guard else 1.0
-        if overflow_guard:
-            scaled["allow_circle_overflow"] = True
-            scaled["circle_radius_lower_bound_px"] = float(
-                max(float(scaled.get("circle_radius_lower_bound_px", 1.0)), required_r)
-            )
-        stroke = max(0.0, float(scaled.get("stroke_circle", 1.0)))
-        half_stroke = stroke / 2.0
-        cx = float(scaled.get("cx", target_w / 2.0))
-        cy = float(scaled.get("cy", target_h / 2.0))
-        r = max(1.0, float(scaled.get("r", 1.0)), required_r)
-
-        max_fit_r = max(1.0, (min(float(target_w), float(target_h)) / 2.0) - half_stroke)
-        if not overflow_guard and r > max_fit_r:
-            r = max_fit_r
-
-        min_cx = r + half_stroke
-        max_cx = float(target_w) - r - half_stroke
-        min_cy = r + half_stroke
-        max_cy = float(target_h) - r - half_stroke
-
-        if min_cx > max_cx:
-            cx = float(target_w) / 2.0 if not overflow_guard else float(Action._clipScalar(cx, 0.0, float(target_w)))
-        else:
-            cx = float(Action._clipScalar(cx, min_cx, max_cx))
-
-        if min_cy > max_cy:
-            cy = float(target_h) / 2.0 if not overflow_guard else float(Action._clipScalar(cy, 0.0, float(target_h)))
-        else:
-            cy = float(Action._clipScalar(cy, min_cy, max_cy))
-
-        if scaled.get("stem_enabled") and "stem_width" in scaled:
-            stem_width = max(1e-6, float(scaled["stem_width"]))
-            scaled["stem_x"] = cx - (stem_width / 2.0)
-            if "stem_top" in scaled:
-                bottom_anchored = float(scaled.get("stem_bottom", 0.0)) >= (float(target_h) - 0.5)
-                reanchored_top = cy + r - (stem_width * 0.55)
-                if bottom_anchored:
-                    scaled["stem_top"] = float(Action._clipScalar(reanchored_top, 0.0, float(target_h)))
-                    scaled["stem_bottom"] = float(target_h)
-                else:
-                    stem_len = max(1.0, float(scaled.get("stem_bottom", reanchored_top)) - float(scaled.get("stem_top", reanchored_top)))
-                    scaled["stem_top"] = float(Action._clipScalar(reanchored_top, 0.0, float(target_h - 1)))
-                    scaled["stem_bottom"] = float(
-                        Action._clipScalar(float(scaled["stem_top"]) + stem_len, float(scaled["stem_top"]) + 1.0, float(target_h))
-                    )
-
-        scaled["cx"] = cx
-        scaled["cy"] = cy
-        scaled["r"] = r
-
-    return scaled
+    return semantic_harmonization_helpers.scaleBadgeParamsImpl(
+        anchor,
+        anchor_w,
+        anchor_h,
+        target_w,
+        target_h,
+        clip_scalar_fn=Action._clipScalar,
+        needs_large_circle_overflow_guard_fn=_needsLargeCircleOverflowGuard,
+    )
 
 
 def _harmonizationAnchorPriority(suffix: str, prefer_large: bool) -> int:
-    """Return size-priority rank for L/M/S harmonization anchors."""
-    if prefer_large:
-        # For connector families we keep L authoritative to avoid undersized
-        # large variants caused by propagating medium geometry upwards.
-        return {"L": 0, "M": 1, "S": 2}.get(str(suffix), 3)
-    # Plain circles remain more stable when M is used as anchor.
-    return {"M": 0, "L": 1, "S": 2}.get(str(suffix), 3)
+    return semantic_harmonization_helpers.harmonizationAnchorPriorityImpl(suffix, prefer_large)
 
 
 def _clipGray(value: float) -> int:
-    return int(max(0, min(255, round(float(value)))))
+    return semantic_harmonization_helpers.clipGrayImpl(value)
 
 
 def _familyHarmonizedBadgeColors(variant_rows: list[dict[str, object]]) -> dict[str, int]:
-    """Derive a family palette from L/M/S variants and slightly boost contrast."""
-    buckets: dict[str, list[float]] = {
-        "fill_gray": [],
-        "stroke_gray": [],
-        "text_gray": [],
-        "stem_gray": [],
-    }
-    for row in variant_rows:
-        params = dict(row["params"])
-        for key in buckets:
-            value = params.get(key)
-            if value is None:
-                continue
-            try:
-                buckets[key].append(float(value))
-            except (TypeError, ValueError):
-                continue
-
-    fill_avg = sum(buckets["fill_gray"]) / max(1, len(buckets["fill_gray"]))
-    stroke_avg = sum(buckets["stroke_gray"]) / max(1, len(buckets["stroke_gray"]))
-    if fill_avg < stroke_avg:
-        fill_avg, stroke_avg = stroke_avg, fill_avg
-
-    center = (fill_avg + stroke_avg) / 2.0
-    delta = abs(fill_avg - stroke_avg)
-    boosted_delta = max(18.0, delta * 1.12)
-    fill_gray = _clipGray(center + (boosted_delta / 2.0))
-    stroke_gray = _clipGray(center - (boosted_delta / 2.0))
-    if fill_gray <= stroke_gray:
-        fill_gray = _clipGray(max(fill_gray, stroke_gray + 1.0))
-
-    colors = {
-        "fill_gray": fill_gray,
-        "stroke_gray": stroke_gray,
-        "text_gray": stroke_gray,
-        "stem_gray": stroke_gray,
-    }
-
-    if buckets["text_gray"]:
-        text_avg = sum(buckets["text_gray"]) / float(len(buckets["text_gray"]))
-        colors["text_gray"] = _clipGray(min(text_avg, float(stroke_gray)))
-
-    if buckets["stem_gray"]:
-        stem_avg = sum(buckets["stem_gray"]) / float(len(buckets["stem_gray"]))
-        colors["stem_gray"] = _clipGray(min(stem_avg, float(stroke_gray)))
-
-    return colors
+    return semantic_harmonization_helpers.familyHarmonizedBadgeColorsImpl(variant_rows)
 
 
 def _harmonizeSemanticSizeVariants(
