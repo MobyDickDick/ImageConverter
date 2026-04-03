@@ -1,4 +1,4 @@
-run-meta: run_seed=504635569 pass_seed_offset=0 nonce_ns=1775153038287694500
+run-meta: run_seed=588401603 pass_seed_offset=0 nonce_ns=1775221029508826600
 status=semantic_ok
 semantic_audit_status=semantic_ok
 semantic_audit_lookup_keys=AC0812 | AC0812_S | AC0812 | AC0812
@@ -6,7 +6,7 @@ semantic_audit_recognized_description_elements=Wie AC0811: Kelle mit Kreis oben 
 semantic_audit_derived_elements=SEMANTIC: Kreis ohne Buchstabe | SEMANTIC: waagrechter Strich links vom Kreis
 semantic_audit_priority_order=family_rule > layout_override > description_heuristic
 semantic_audit_conflicts=
-redraw_variation: seed=510038419646 changed_params=cx:17.000->17.210 | cy:7.500->7.580 | r:6.500->6.488 | stroke_circle:1.000->1.033 | arm_stroke:1.000->0.989
+redraw_variation: seed=593778940608 changed_params=cx:17.000->16.881 | cy:7.500->7.373 | r:6.500->6.607 | stroke_circle:1.000->1.019 | arm_stroke:1.000->0.960
 semantic-guard: Text bewusst deaktiviert (plain-ring Familie ohne Buchstabe).
 small_variant_mode_active: reason=min_dim, min_dim=12.000, mask_dilate_px=1, text_mode=, arm_min_ratio=0.750, stem_min_ratio=0.000
 Runde 1: elementweise Validierung gestartet
