@@ -19,7 +19,7 @@ focused on the actual project scope.
 
 ## Next tasks (added 2026-03-28)
 
-- [ ] D1: Familienübergreifende Harmonisierung für AC08-Protoformen ergänzen.
+- [x] D1: Familienübergreifende Harmonisierung für AC08-Protoformen ergänzen.
   - Scope: Neben der bestehenden L/M/S-Harmonisierung innerhalb einer Basis zusätzlich Cross-Family-Aliase berücksichtigen.
   - Kandidaten-Gruppen:
     - `AC0800_L/M/S` als reine Scale-Familie ohne Connector/Text-Rotation.
@@ -33,6 +33,9 @@ focused on the actual project scope.
     - Keine Regression der bereits als gut markierten AC08-Anker (`successful_conversions.txt`).
     - Neue Reportspalten für `prototype_group`, `geometry_signature_delta` und `text_orientation_policy`.
     - Dokumentierter Vorher/Nachher-Vergleich mindestens für `AC0800_*`, `AC0811_*`, `AC0814_*`, `AC0820_*`, `AC0831_*`, `AC0834_*`.
+  - 2026-04-03: Cross-Family-Proto-Gruppen (`ac08_plain_ring_scale`, `ac08_rot_mirror_alias`) eingeführt; Harmonisierung wählt Anker nun gruppenübergreifend statt strikt pro Basis.
+    Zusätzlich enthält `shape_catalog.csv` jetzt die Spalten `prototype_group`, `geometry_signature_delta` und `text_orientation_policy`,
+    und `variant_harmonization.log` protokolliert diese Felder pro harmonisierter Variante.
 
 - [ ] C1: `src/imageCompositeConverter.py` schrittweise in Module mit Blöcken von ca. 100 Zeilen aufteilen.
   - Hintergrund: Die Datei hat aktuell deutlich über 10k Zeilen; Refactoring erfolgt bewusst in mehreren, testbaren Teilschritten statt als Big-Bang.
