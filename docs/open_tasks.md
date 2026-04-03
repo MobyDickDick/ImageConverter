@@ -83,7 +83,10 @@ focused on the actual project scope.
   - Die Rendering-Stabilisierung muss den nativen Crash im Haupt-Renderpfad (`render_svg_to_numpy`) verhindern.
   - 2026-03-29: Optionaler Subprozess-Guard für `render_svg_to_numpy` ergänzt (`--isolate-svg-render`), inklusive Fallback auf In-Process-Render wenn der isolierte Worker fehlschlägt.
   - Offener Nachweis: Vollbereich `AC0800..AC0899` mit aktiviertem Guard erneut laufen lassen und Crash-Freiheit dokumentieren.
-- [ ] B3: Deterministischen Diagnosemodus für die Dateireihenfolge ergänzen (ohne `shuffle`), um schwer reproduzierbare Batchfehler schneller zu isolieren.
+- [x] B3: Deterministischen Diagnosemodus für die Dateireihenfolge ergänzen (ohne `shuffle`), um schwer reproduzierbare Batchfehler schneller zu isolieren.
+  - 2026-04-03: Neuer CLI-Schalter `--deterministic-order` ergänzt.
+  - Der Modus deaktiviert Shuffle bei Dateiliste, Quality-Pass-Kandidaten sowie Template-Transfer-Donor/Scale-Reihenfolge.
+  - Für reproduzierbare Läufe wird `Action.STOCHASTIC_RUN_SEED` in diesem Modus auf `0` gesetzt.
 
 
 
