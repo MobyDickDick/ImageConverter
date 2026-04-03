@@ -6,6 +6,24 @@ from collections.abc import Callable
 import os
 
 
+def _prototypeGroupForBase(base: str) -> str:
+    if base == "AC0800":
+        return "ac08_plain_ring_scale"
+
+    if base in {"AC0811", "AC0812", "AC0813", "AC0814", "AC0831", "AC0832", "AC0833", "AC0834"}:
+        return "ac08_rot_mirror_alias"
+
+    return f"base:{base}"
+
+
+def _textOrientationPolicyForBase(base: str) -> str:
+    if base in {"AC0831", "AC0832", "AC0833", "AC0834"}:
+        return "rotate_geometry_only"
+    if base in {"AC0811", "AC0812", "AC0813", "AC0814"}:
+        return "rotate_with_geometry"
+    return "inherit_variant"
+
+
 def needsLargeCircleOverflowGuardImpl(params: dict) -> bool:
     """Return whether circle placement may intentionally exceed canvas bounds."""
     if not bool(params.get("circle_enabled", True)):
@@ -226,13 +244,9 @@ def harmonizeSemanticSizeVariantsImpl(
         base = str(result.get("base", ""))
         grouped.setdefault(base, []).append(result)
 
-    harmonized_logs: list[str] = []
-    category_logs: list[str] = []
+    variant_rows_by_base: dict[str, list[dict[str, object]]] = {}
     for base, entries in sorted(grouped.items()):
-        if len(entries) < 2:
-            continue
-
-        variant_rows: list[dict[str, object]] = []
+        rows: list[dict[str, object]] = []
         for entry in entries:
             variant = str(entry["variant"])
             suffix = variant.rsplit("_", 1)[-1] if "_" in variant else ""
@@ -242,10 +256,24 @@ def harmonizeSemanticSizeVariantsImpl(
             if parsed is None:
                 continue
             w, h, params = parsed
-            variant_rows.append({"entry": entry, "variant": variant, "suffix": suffix, "w": w, "h": h, "params": params})
+            rows.append({"entry": entry, "variant": variant, "suffix": suffix, "w": w, "h": h, "params": params})
+        if rows:
+            variant_rows_by_base[base] = rows
 
+    grouped_prototype_rows: dict[str, list[dict[str, object]]] = {}
+    for base, rows in variant_rows_by_base.items():
+        prototype_group = _prototypeGroupForBase(base)
+        grouped_prototype_rows.setdefault(prototype_group, []).extend(rows)
+
+    harmonized_logs: list[str] = []
+    category_logs: list[str] = []
+    for base, variant_rows in sorted(variant_rows_by_base.items()):
         if len(variant_rows) < 2:
             continue
+
+        prototype_group = _prototypeGroupForBase(base)
+        text_orientation_policy = _textOrientationPolicyForBase(base)
+        prototype_rows = grouped_prototype_rows.get(prototype_group, variant_rows)
 
         has_text = any(bool(dict(row["params"]).get("draw_text", False)) for row in variant_rows)
         has_stem = any(bool(dict(row["params"]).get("stem_enabled", False)) for row in variant_rows)
@@ -257,11 +285,14 @@ def harmonizeSemanticSizeVariantsImpl(
             )
         )
         variants_joined = "|".join(sorted(str(r["variant"]) for r in variant_rows))
-        category_logs.append(f"{base};{category};{variants_joined}")
 
         sigs = {
-            row["variant"]: normalized_geometry_signature_fn(int(row["w"]), int(row["h"]), dict(row["params"]))
+            str(row["variant"]): normalized_geometry_signature_fn(int(row["w"]), int(row["h"]), dict(row["params"]))
             for row in variant_rows
+        }
+        prototype_sigs = {
+            str(row["variant"]): normalized_geometry_signature_fn(int(row["w"]), int(row["h"]), dict(row["params"]))
+            for row in prototype_rows
         }
         max_delta = 0.0
         for i in range(len(variant_rows)):
@@ -269,6 +300,21 @@ def harmonizeSemanticSizeVariantsImpl(
                 vi = str(variant_rows[i]["variant"])
                 vj = str(variant_rows[j]["variant"])
                 max_delta = max(max_delta, max_signature_delta_fn(sigs[vi], sigs[vj]))
+        prototype_delta = max_delta
+        if prototype_rows:
+            prototype_delta = 0.0
+            for target in variant_rows:
+                target_variant = str(target["variant"])
+                target_sig = sigs[target_variant]
+                deltas = [max_signature_delta_fn(target_sig, prototype_sigs[str(proto["variant"])]) for proto in prototype_rows]
+                if deltas:
+                    prototype_delta = max(prototype_delta, min(deltas))
+        category_logs.append(
+            (
+                f"{base};{category};{variants_joined};{prototype_group};"
+                f"{prototype_delta:.4f};{text_orientation_policy}"
+            )
+        )
 
         def _anchorRank(row: dict[str, object]) -> tuple[int, float]:
             suffix = str(row.get("suffix", ""))
@@ -276,7 +322,7 @@ def harmonizeSemanticSizeVariantsImpl(
             err = float(dict(row["entry"]).get("error", float("inf")))
             return priority, err
 
-        anchor = min(variant_rows, key=_anchorRank)
+        anchor = min(prototype_rows, key=_anchorRank)
         anchor_variant = str(anchor["variant"])
         anchor_w = int(anchor["w"])
         anchor_h = int(anchor["h"])
@@ -326,7 +372,9 @@ def harmonizeSemanticSizeVariantsImpl(
             harmonized_logs.append(
                 (
                     f"{base}: {target_variant} aus {anchor_variant} harmonisiert "
-                    f"(max_delta={max_delta:.4f}, Fehler {baseline_error:.2f}->{candidate_error:.2f}, "
+                    f"(prototype_group={prototype_group}, max_delta={prototype_delta:.4f}, "
+                    f"text_orientation_policy={text_orientation_policy}, "
+                    f"Fehler {baseline_error:.2f}->{candidate_error:.2f}, "
                     f"Farben fill/stroke={family_colors['fill_gray']}/{family_colors['stroke_gray']})"
                 )
             )
@@ -336,5 +384,5 @@ def harmonizeSemanticSizeVariantsImpl(
             f.write("\n".join(harmonized_logs).rstrip() + "\n")
     if category_logs:
         with open(os.path.join(reports_out_dir, "shape_catalog.csv"), "w", encoding="utf-8") as f:
-            f.write("base;category;variants\n")
+            f.write("base;category;variants;prototype_group;geometry_signature_delta;text_orientation_policy\n")
             f.write("\n".join(category_logs).rstrip() + "\n")
