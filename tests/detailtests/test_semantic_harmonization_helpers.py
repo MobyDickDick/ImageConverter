@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import os
 
-from src import imageCompositeConverterSemanticHarmonization as semantic_harmonization_helpers
+from src.iCCModules import imageCompositeConverterSemanticHarmonization as semantic_harmonization_helpers
 
 
 def test_needs_large_circle_overflow_guard_requires_large_co2_circle_without_connectors() -> None:

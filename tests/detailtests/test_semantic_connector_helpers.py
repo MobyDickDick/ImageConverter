@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from src import imageCompositeConverterSemanticConnectors as semantic_connector_helpers
+from src.iCCModules import imageCompositeConverterSemanticConnectors as semantic_connector_helpers
 
 
 def test_enforce_left_arm_badge_geometry_sets_visible_left_connector() -> None:

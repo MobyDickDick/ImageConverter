@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from src import imageCompositeConverterOptimizationPasses as pass_helpers
+from src.iCCModules import imageCompositeConverterOptimizationPasses as pass_helpers
 
 
 def test_select_open_quality_cases_filters_and_orders_descending() -> None:

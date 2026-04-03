@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from src import imageCompositeConverterSemanticValidation as semantic_validation_helpers
+from src.iCCModules import imageCompositeConverterSemanticValidation as semantic_validation_helpers
 
 
 def test_expected_semantic_presence_detects_circle_stem_and_text() -> None:
