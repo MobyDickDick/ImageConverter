@@ -1,6 +1,6 @@
-run-meta: run_seed=588401603 pass_seed_offset=0 nonce_ns=1775221055561470000
+run-meta: run_seed=989670027 pass_seed_offset=0 nonce_ns=1775234612436761200
 status=semantic_ok
-redraw_variation: seed=593831758926 changed_params=cx:9.500->9.276 | cy:14.000->13.752 | r:12.000->12.232 | stroke_circle:1.000->1.069
+redraw_variation: seed=998586976943 changed_params=cx:9.500->9.634 | cy:14.000->13.949 | r:12.000->12.128 | stroke_circle:1.000->1.039
 semantic-guard: Text bewusst deaktiviert (plain-ring Familie ohne Buchstabe).
 Runde 1: elementweise Validierung gestartet
 circle: Fehler=151.008
@@ -8,6 +8,7 @@ circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.
 circle: Mittelpunkt-Bracketing cx 14.500->9.500, cy 14.500->14.000 (best_err=127.261)
 circle: Radius-Bracketing r 12.200->12.000 (best_err=127.261, full_err=28.338); Kandidaten=11.200->127.261, 11.500->127.261, 12.000->127.261, 13.200->127.261
 text: Fehler=71.650
+global-search: übersprungen (zu wenige aktive Parameter; benötigt >=4)
 Runde 1: Gesamtfehler=28.338
 Runde 2: elementweise Validierung gestartet
 circle: Fehler=127.513
@@ -15,6 +16,7 @@ circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.
 circle: Mittelpunkt-Bracketing keine relevante Änderung (cx=9.500, cy=14.000, best_err=127.513)
 circle: Radius-Bracketing keine relevante Änderung (r: 12.000, best_err=127.513, full_err=28.338); Kandidaten=11.000->127.513, 11.500->127.513, 12.000->127.513, 13.000->127.513
 text: Fehler=71.650
+global-search: übersprungen (zu wenige aktive Parameter; benötigt >=4)
 Runde 2: Gesamtfehler=28.338
 stagnation_detected: identischer Parameter-Fingerprint und praktisch unveränderter Gesamtfehler
 switch_to_fallback_search: deaktiviere Circle-Geometry-Penalty für eine letzte Ausweichrunde
@@ -22,6 +24,7 @@ Runde 3: elementweise Validierung gestartet
 circle: Fehler=127.513
 circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
 text: Fehler=71.650
+global-search: übersprungen (zu wenige aktive Parameter; benötigt >=4)
 Runde 3: Gesamtfehler=28.338
 stagnation_detected: identischer Parameter-Fingerprint und praktisch unveränderter Gesamtfehler
 stopped_due_to_stagnation: Validierung vorzeitig beendet

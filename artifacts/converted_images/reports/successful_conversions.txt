@@ -17,11 +17,11 @@ AC0813_S ; status=semantic_ok ; best_iteration=1 ; diff_score=7.680000 ; error_p
 AC0814_L ; status=semantic_ok ; best_iteration=1 ; diff_score=6.220000 ; error_per_pixel=0.00553086 ; total_delta2=917784.000000 ; mean_delta2=815.807983 ; std_delta2=2673.526855 ; pixel_count=1125
 AC0814_M ; status=semantic_ok ; best_iteration=1 ; diff_score=8.500000 ; error_per_pixel=0.01214082 ; total_delta2=327156.000000 ; mean_delta2=467.365723 ; std_delta2=2034.149780 ; pixel_count=700
 AC0814_S ; status=semantic_ok ; best_iteration=1 ; diff_score=8.160000 ; error_per_pixel=0.02176711 ; total_delta2=304029.000000 ; mean_delta2=810.744019 ; std_delta2=2905.613770 ; pixel_count=375
-AC0820_L ; status=semantic_ok ; best_iteration=1 ; diff_score=36.920000 ; error_per_pixel=0.04102593 ; total_delta2=9140151.000000 ; mean_delta2=10155.723633 ; std_delta2=18070.943359 ; pixel_count=900
+AC0820_L ; status=semantic_ok ; best_iteration=1 ; diff_score=35.930000 ; error_per_pixel=0.03991975 ; total_delta2=8676261.000000 ; mean_delta2=9640.290039 ; std_delta2=16391.398438 ; pixel_count=900
 AC0820_M ; status=semantic_ok ; best_iteration=1 ; diff_score=25.750000 ; error_per_pixel=0.06436250 ; total_delta2=2534028.000000 ; mean_delta2=6335.069824 ; std_delta2=14144.242188 ; pixel_count=400
 AC0820_S ; status=semantic_ok ; best_iteration=1 ; diff_score=27.100000 ; error_per_pixel=0.12043457 ; total_delta2=1212612.000000 ; mean_delta2=5389.386719 ; std_delta2=8530.142578 ; pixel_count=225
 AC0831_L ; status=semantic_ok ; best_iteration=1 ; diff_score=14.170000 ; error_per_pixel=0.01259852 ; total_delta2=3913593.000000 ; mean_delta2=3478.749268 ; std_delta2=11130.620117 ; pixel_count=1125
-AC0831_M ; status=semantic_ok ; total_delta2=2398749.000000 ; mean_delta2=3426.784180 ; std_delta2=10796.594727 ; pixel_count=700
+AC0831_M ; status=semantic_ok ; best_iteration=1 ; diff_score=10.700000 ; error_per_pixel=0.01529184 ; total_delta2=1663491.000000 ; mean_delta2=2376.415771 ; std_delta2=9043.677734 ; pixel_count=700
 AC0831_S ; status=semantic_ok ; best_iteration=1 ; diff_score=19.860000 ; error_per_pixel=0.05295644 ; total_delta2=1627305.000000 ; mean_delta2=4339.479980 ; std_delta2=10820.428711 ; pixel_count=375
 
 AC0812_M ; status=semantic_ok ; best_iteration=1 ; diff_score=4.120000 ; error_per_pixel=0.00588980 ; total_delta2=343530.000000 ; mean_delta2=490.757141 ; std_delta2=2305.851807 ; pixel_count=700
@@ -30,6 +30,6 @@ AC0820_M ; status=semantic_ok ; best_iteration=1 ; diff_score=25.750000 ; error_
 
 AC0812_S ; status=semantic_ok ; best_iteration=1 ; diff_score=7.880000 ; error_per_pixel=0.02100622 ; total_delta2=261438.000000 ; mean_delta2=697.168030 ; std_delta2=1595.431396 ; pixel_count=375
 
-AC0820_L ; status=semantic_ok ; best_iteration=1 ; diff_score=36.920000 ; error_per_pixel=0.04102593 ; total_delta2=9140151.000000 ; mean_delta2=10155.723633 ; std_delta2=18070.943359 ; pixel_count=900
+AC0820_L ; status=semantic_ok ; best_iteration=1 ; diff_score=35.930000 ; error_per_pixel=0.03991975 ; total_delta2=8676261.000000 ; mean_delta2=9640.290039 ; std_delta2=16391.398438 ; pixel_count=900
 
-AC0838_M ; status=failed ; reason=semantic_mismatch
+AC0838_S ; status=failed ; reason=semantic_mismatch

@@ -1,17 +1,19 @@
-run-meta: run_seed=1028840329 pass_seed_offset=0 nonce_ns=1775152108580464600
+run-meta: run_seed=989670027 pass_seed_offset=0 nonce_ns=1775234071694218200
 status=semantic_ok
-redraw_variation: seed=1038253848289 changed_params=cx:15.000->14.901 | cy:15.000->14.774 | r:12.420->12.240 | stroke_circle:1.000->1.064
+redraw_variation: seed=998844302130 changed_params=cx:15.000->14.733 | cy:15.000->14.829 | r:12.420->12.354 | stroke_circle:1.000->0.889
 semantic-guard: Text bewusst deaktiviert (plain-ring Familie ohne Buchstabe).
 Runde 1: elementweise Validierung gestartet
 circle: Fehler=101.793
 circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
 circle: Radius-Bracketing keine relevante Änderung (r: 12.420, best_err=101.793, full_err=20.309); Kandidaten=11.420->158.894, 12.420->101.793
+global-search: übersprungen (zu wenige aktive Parameter; benötigt >=4)
 Runde 1: Gesamtfehler=20.309
 stagnation_detected: keine relevante Geometrieänderung in der letzten Validierungsrunde
 switch_to_fallback_search: deaktiviere Circle-Geometry-Penalty für eine letzte Ausweichrunde
 Runde 2: elementweise Validierung gestartet
 circle: Fehler=101.793
 circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
+global-search: übersprungen (zu wenige aktive Parameter; benötigt >=4)
 Runde 2: Gesamtfehler=20.309
 stagnation_detected: identischer Parameter-Fingerprint und praktisch unveränderter Gesamtfehler
 stopped_due_to_stagnation: Validierung vorzeitig beendet

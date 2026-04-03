@@ -1,6 +1,6 @@
-run-meta: run_seed=27071802 pass_seed_offset=0 nonce_ns=1775224364456811900
+run-meta: run_seed=989670027 pass_seed_offset=0 nonce_ns=1775234066879922100
 status=semantic_ok
-redraw_variation: seed=27345207654 changed_params=cx:17.000->17.098 | cy:12.500->12.526 | r:11.000->11.116 | stroke_circle:1.000->1.001 | arm_stroke:1.000->1.026
+redraw_variation: seed=999029843965 changed_params=cx:17.000->17.372 | cy:12.500->12.557 | r:11.000->10.980 | stroke_circle:1.000->0.908 | arm_stroke:1.000->0.983
 semantic-guard: Textmodus aktiv (voc).
 Runde 1: elementweise Validierung gestartet
 circle: Fehler=121.639
@@ -13,6 +13,7 @@ arm: Längen-Bracketing arm_len 15.500->11.500; Kandidaten=11.500->223.401, 15.5
 text: Fehler=161.361
 text: Breiten-Stochastic-Survivor aktiviert (voc_font_scale=0.968, err=151.971)
 text: Breiten-Bracketing voc_font_scale 0.562->0.968; Kandidaten=0.900->156.258, 1.125->156.354, 1.350->161.850, 1.650->186.011, 1.950->191.959, 2.175->193.428, 2.400->193.047
+global-search: übersprungen (zu wenige aktive Parameter; benötigt >=4)
 Runde 1: Gesamtfehler=30.136
 Runde 2: elementweise Validierung gestartet
 circle: Fehler=108.157
@@ -25,6 +26,7 @@ arm: Längen-Bracketing arm_len 12.000->23.000; Kandidaten=1.000->103.070, 12.00
 text: Fehler=128.376
 text: Breiten-Stochastic-Survivor aktiviert (voc_font_scale=0.900, err=127.907)
 text: Breiten-Bracketing voc_font_scale 0.968->0.900; Kandidaten=0.900->127.907, 0.968->128.376, 1.113->141.290, 1.125->141.821, 1.350->142.398, 1.650->158.483, 1.950->166.478, 2.175->173.149, 2.400->171.361
+global-search: übersprungen (zu wenige aktive Parameter; benötigt >=4)
 Runde 2: Gesamtfehler=19.306
 Runde 3: elementweise Validierung gestartet
 circle: Fehler=83.427
@@ -36,6 +38,7 @@ arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1
 arm: Längen-Bracketing keine relevante Änderung (arm_len: 16.000); Kandidaten=1.000->103.070, 12.000->67.763, 16.000->57.697, 23.000->57.697, 34.000->57.697, 45.000->57.697
 text: Fehler=127.907
 text: Breiten-Bracketing keine relevante Änderung (voc_font_scale: 0.900); Kandidaten=0.900->127.907, 1.035->130.020, 1.125->141.821, 1.350->142.398, 1.650->158.483, 1.950->166.478, 2.175->173.149, 2.400->171.361
+global-search: übersprungen (zu wenige aktive Parameter; benötigt >=4)
 Runde 3: Gesamtfehler=19.306
 stagnation_detected: identischer Parameter-Fingerprint und praktisch unveränderter Gesamtfehler
 switch_to_fallback_search: deaktiviere Circle-Geometry-Penalty für eine letzte Ausweichrunde
@@ -47,6 +50,7 @@ arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1
 arm: Längen-Bracketing keine relevante Änderung (arm_len: 16.000); Kandidaten=1.000->103.070, 12.000->67.763, 16.000->57.697, 23.000->57.697, 34.000->57.697, 45.000->57.697
 text: Fehler=127.907
 text: Breiten-Bracketing keine relevante Änderung (voc_font_scale: 0.900); Kandidaten=0.900->127.907, 1.035->130.020, 1.125->141.821, 1.350->142.398, 1.650->158.483, 1.950->166.478, 2.175->173.149, 2.400->171.361
+global-search: übersprungen (zu wenige aktive Parameter; benötigt >=4)
 Runde 4: Gesamtfehler=19.306
 stagnation_detected: identischer Parameter-Fingerprint und praktisch unveränderter Gesamtfehler
 stopped_due_to_stagnation: Validierung vorzeitig beendet

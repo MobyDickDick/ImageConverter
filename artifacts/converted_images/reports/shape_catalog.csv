@@ -1,4 +1,5 @@
-base;category;variants
-AC0811;Kellen ohne Buchstaben;AC0811_L|AC0811_S
-AC0814;Kellen ohne Buchstaben;AC0814_L|AC0814_S
-AC0820;Kellen ohne Buchstaben;AC0820_M|AC0820_S
+base;category;variants;prototype_group;geometry_signature_delta;text_orientation_policy
+AC0800;Kellen mit Buchstaben;AC0800_L|AC0800_M;ac08_plain_ring_scale;0.0000;inherit_variant
+AC0811;Kellen ohne Buchstaben;AC0811_M|AC0811_S;ac08_rot_mirror_alias;0.0000;rotate_with_geometry
+AC0837;Kellen mit Buchstaben;AC0837_L|AC0837_M;base:AC0837;0.0000;inherit_variant
+AC0870;Kreise ohne Buchstaben;AC0870_L|AC0870_M|AC0870_S;base:AC0870;0.0000;inherit_variant
