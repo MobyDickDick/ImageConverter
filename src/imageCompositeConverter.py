@@ -53,6 +53,7 @@ from src import imageCompositeConverterOptimizationPasses as optimization_pass_h
 from src import imageCompositeConverterOptimizationPassReporting as optimization_pass_reporting_helpers
 from src import imageCompositeConverterOptimizationCirclePose as circle_pose_optimization_helpers
 from src import imageCompositeConverterOptimizationCircleRadius as circle_radius_optimization_helpers
+from src import imageCompositeConverterOptimizationCircleGeometry as circle_geometry_optimization_helpers
 from src import imageCompositeConverterTemplateTransfer as template_transfer_helpers
 from src import imageCompositeConverterSemanticHarmonization as semantic_harmonization_helpers
 from src.successfulConversions import (
@@ -5825,84 +5826,27 @@ class Action:
         cy_value: float,
         radius_value: float,
     ) -> float:
-        h, w = img_orig.shape[:2]
-        if not params.get("circle_enabled", True):
-            return float("inf")
-
-        probe = dict(params)
-        max_r = max(1.0, (float(min(w, h)) * 0.48))
-        probe["cx"] = Action._snapHalf(float(Action._clipScalar(cx_value, 0.0, float(w - 1))))
-        probe["cy"] = Action._snapHalf(float(Action._clipScalar(cy_value, 0.0, float(h - 1))))
-        min_r = float(max(1.0, probe.get("min_circle_radius", 1.0)))
-        probe["r"] = Action._snapHalf(float(Action._clipScalar(radius_value, min_r, max_r)))
-        probe = Action._clampCircleInsideCanvas(probe, w, h)
-
-        if probe.get("arm_enabled"):
-            Action._reanchorArmToCircleEdge(probe, float(probe["r"]))
-
-        if probe.get("stem_enabled"):
-            probe["stem_top"] = float(probe.get("cy", 0.0)) + float(probe["r"])
-
-        elem_svg = Action.generate_badge_svg(w, h, Action._element_only_params(probe, "circle"))
-        elem_render = Action._fit_to_original_size(img_orig, Action.render_svg_to_numpy(elem_svg, w, h))
-        if elem_render is None:
-            return float("inf")
-
-        # See `_elementErrorForCircleRadius`: use a stable source mask that
-        # is independent from the tested candidate pose.
-        mask_orig = Action.extract_badge_element_mask(img_orig, params, "circle")
-        if mask_orig is None:
-            return float("inf")
-        mask_svg = Action.extract_badge_element_mask(elem_render, probe, "circle")
-        if mask_svg is None:
-            return float("inf")
-
-        return Action._element_match_error(
+        return circle_geometry_optimization_helpers.elementErrorForCirclePoseImpl(
             img_orig,
-            elem_render,
-            probe,
-            "circle",
-            mask_orig=mask_orig,
-            mask_svg=mask_svg,
+            params,
+            cx_value=cx_value,
+            cy_value=cy_value,
+            radius_value=radius_value,
+            snap_half_fn=Action._snapHalf,
+            clip_scalar_fn=Action._clipScalar,
+            clamp_circle_inside_canvas_fn=Action._clampCircleInsideCanvas,
+            reanchor_arm_to_circle_edge_fn=Action._reanchorArmToCircleEdge,
+            generate_badge_svg_fn=Action.generate_badge_svg,
+            element_only_params_fn=Action._element_only_params,
+            fit_to_original_size_fn=Action._fit_to_original_size,
+            render_svg_to_numpy_fn=Action.render_svg_to_numpy,
+            extract_badge_element_mask_fn=Action.extract_badge_element_mask,
+            element_match_error_fn=Action._element_match_error,
         )
 
     @staticmethod
     def _reanchorArmToCircleEdge(params: dict, radius: float) -> None:
-        """Keep arm orientation but snap the circle-side endpoint to the new radius."""
-        if not params.get("arm_enabled"):
-            return
-        if not all(k in params for k in ("arm_x1", "arm_y1", "arm_x2", "arm_y2", "cx", "cy")):
-            return
-
-        cx = float(params.get("cx", 0.0))
-        cy = float(params.get("cy", 0.0))
-        x1 = float(params.get("arm_x1", cx))
-        y1 = float(params.get("arm_y1", cy))
-        x2 = float(params.get("arm_x2", cx))
-        y2 = float(params.get("arm_y2", cy))
-        arm_stroke = float(max(0.0, params.get("arm_stroke", 0.0)))
-        attach_offset = arm_stroke / 2.0
-
-        # Preserve dominant orientation (horizontal vs. vertical).
-        is_horizontal = abs(x2 - x1) >= abs(y2 - y1)
-        if is_horizontal:
-            params["arm_y1"] = cy
-            params["arm_y2"] = cy
-            p1_dist = abs(x1 - cx)
-            p2_dist = abs(x2 - cx)
-            if p2_dist <= p1_dist:
-                params["arm_x2"] = (cx - radius - attach_offset) if x1 <= cx else (cx + radius + attach_offset)
-            else:
-                params["arm_x1"] = (cx - radius - attach_offset) if x2 <= cx else (cx + radius + attach_offset)
-        else:
-            params["arm_x1"] = cx
-            params["arm_x2"] = cx
-            p1_dist = abs(y1 - cy)
-            p2_dist = abs(y2 - cy)
-            if p2_dist <= p1_dist:
-                params["arm_y2"] = (cy - radius - attach_offset) if y1 <= cy else (cy + radius + attach_offset)
-            else:
-                params["arm_y1"] = (cy - radius - attach_offset) if y2 <= cy else (cy + radius + attach_offset)
+        circle_geometry_optimization_helpers.reanchorArmToCircleEdgeImpl(params, radius)
 
     @staticmethod
     def _optimizeCircleCenterBracket(img_orig: np.ndarray, params: dict, logs: list[str]) -> bool:
