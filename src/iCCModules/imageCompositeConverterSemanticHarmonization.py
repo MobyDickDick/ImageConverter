@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from collections.abc import Callable
+import os
 
 
 def needsLargeCircleOverflowGuardImpl(params: dict) -> bool:
@@ -201,3 +202,139 @@ def familyHarmonizedBadgeColorsImpl(variant_rows: list[dict[str, object]]) -> di
         colors["stem_gray"] = clipGrayImpl(min(stem_avg, float(stroke_gray)))
 
     return colors
+
+
+def harmonizeSemanticSizeVariantsImpl(
+    results: list[dict[str, object]],
+    folder_path: str,
+    svg_out_dir: str,
+    reports_out_dir: str,
+    *,
+    read_svg_geometry_fn: Callable[[str], tuple[int, int, dict] | None],
+    normalized_geometry_signature_fn: Callable[[int, int, dict], dict[str, float]],
+    max_signature_delta_fn: Callable[[dict[str, float], dict[str, float]], float],
+    harmonization_anchor_priority_fn: Callable[[str, bool], int],
+    family_harmonized_badge_colors_fn: Callable[[list[dict[str, object]]], dict[str, int]],
+    scale_badge_params_fn: Callable[..., dict],
+    generate_badge_svg_fn: Callable[[int, int, dict], str],
+    render_svg_to_numpy_fn: Callable[[str, int, int], object],
+    calculate_error_fn: Callable[[object, object], float],
+    cv2_module,
+) -> None:
+    grouped: dict[str, list[dict[str, object]]] = {}
+    for result in results:
+        base = str(result.get("base", ""))
+        grouped.setdefault(base, []).append(result)
+
+    harmonized_logs: list[str] = []
+    category_logs: list[str] = []
+    for base, entries in sorted(grouped.items()):
+        if len(entries) < 2:
+            continue
+
+        variant_rows: list[dict[str, object]] = []
+        for entry in entries:
+            variant = str(entry["variant"])
+            suffix = variant.rsplit("_", 1)[-1] if "_" in variant else ""
+            if suffix not in {"L", "M", "S"}:
+                continue
+            parsed = read_svg_geometry_fn(os.path.join(svg_out_dir, f"{variant}.svg"))
+            if parsed is None:
+                continue
+            w, h, params = parsed
+            variant_rows.append({"entry": entry, "variant": variant, "suffix": suffix, "w": w, "h": h, "params": params})
+
+        if len(variant_rows) < 2:
+            continue
+
+        has_text = any(bool(dict(row["params"]).get("draw_text", False)) for row in variant_rows)
+        has_stem = any(bool(dict(row["params"]).get("stem_enabled", False)) for row in variant_rows)
+        has_arm = any(bool(dict(row["params"]).get("arm_enabled", False)) for row in variant_rows)
+        has_connector = has_stem or has_arm
+        category = "Kreise mit Buchstaben" if has_text and not has_connector else (
+            "Kreise ohne Buchstaben" if (not has_text and not has_connector) else (
+                "Kellen mit Buchstaben" if has_text else "Kellen ohne Buchstaben"
+            )
+        )
+        variants_joined = "|".join(sorted(str(r["variant"]) for r in variant_rows))
+        category_logs.append(f"{base};{category};{variants_joined}")
+
+        sigs = {
+            row["variant"]: normalized_geometry_signature_fn(int(row["w"]), int(row["h"]), dict(row["params"]))
+            for row in variant_rows
+        }
+        max_delta = 0.0
+        for i in range(len(variant_rows)):
+            for j in range(i + 1, len(variant_rows)):
+                vi = str(variant_rows[i]["variant"])
+                vj = str(variant_rows[j]["variant"])
+                max_delta = max(max_delta, max_signature_delta_fn(sigs[vi], sigs[vj]))
+
+        def _anchorRank(row: dict[str, object]) -> tuple[int, float]:
+            suffix = str(row.get("suffix", ""))
+            priority = harmonization_anchor_priority_fn(suffix, has_connector)
+            err = float(dict(row["entry"]).get("error", float("inf")))
+            return priority, err
+
+        anchor = min(variant_rows, key=_anchorRank)
+        anchor_variant = str(anchor["variant"])
+        anchor_w = int(anchor["w"])
+        anchor_h = int(anchor["h"])
+        anchor_params = dict(anchor["params"])
+        family_colors = family_harmonized_badge_colors_fn(variant_rows)
+
+        for row in variant_rows:
+            target_variant = str(row["variant"])
+            target_w = int(row["w"])
+            target_h = int(row["h"])
+            scaled = scale_badge_params_fn(
+                anchor_params,
+                anchor_w,
+                anchor_h,
+                target_w,
+                target_h,
+                target_variant=target_variant,
+            )
+            scaled.update(family_colors)
+            if scaled.get("draw_text"):
+                scaled["text_gray"] = int(family_colors["text_gray"])
+            if scaled.get("stem_enabled"):
+                scaled["stem_gray"] = int(family_colors["stem_gray"])
+            svg = generate_badge_svg_fn(target_w, target_h, scaled)
+
+            target_filename = str(dict(row["entry"])["filename"])
+            target_path = os.path.join(folder_path, target_filename)
+            target_img = cv2_module.imread(target_path)
+            if target_img is None:
+                harmonized_logs.append(f"{base}: {target_variant} übersprungen (Bild fehlt: {target_filename})")
+                continue
+
+            rendered = render_svg_to_numpy_fn(svg, target_w, target_h)
+            candidate_error = calculate_error_fn(target_img, rendered)
+            baseline_error = float(dict(row["entry"]).get("error", float("inf")))
+            if candidate_error > baseline_error + 0.25:
+                harmonized_logs.append(
+                    (
+                        f"{base}: {target_variant} nicht harmonisiert "
+                        f"(Fehler {candidate_error:.2f} > Basis {baseline_error:.2f})"
+                    )
+                )
+                continue
+
+            with open(os.path.join(svg_out_dir, f"{target_variant}.svg"), "w", encoding="utf-8") as f:
+                f.write(svg)
+            harmonized_logs.append(
+                (
+                    f"{base}: {target_variant} aus {anchor_variant} harmonisiert "
+                    f"(max_delta={max_delta:.4f}, Fehler {baseline_error:.2f}->{candidate_error:.2f}, "
+                    f"Farben fill/stroke={family_colors['fill_gray']}/{family_colors['stroke_gray']})"
+                )
+            )
+
+    if harmonized_logs:
+        with open(os.path.join(reports_out_dir, "variant_harmonization.log"), "w", encoding="utf-8") as f:
+            f.write("\n".join(harmonized_logs).rstrip() + "\n")
+    if category_logs:
+        with open(os.path.join(reports_out_dir, "shape_catalog.csv"), "w", encoding="utf-8") as f:
+            f.write("base;category;variants\n")
+            f.write("\n".join(category_logs).rstrip() + "\n")
