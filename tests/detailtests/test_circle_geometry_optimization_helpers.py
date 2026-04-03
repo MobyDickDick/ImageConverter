@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from src import imageCompositeConverterOptimizationCircleGeometry as circle_geometry_helpers
+from src.iCCModules import imageCompositeConverterOptimizationCircleGeometry as circle_geometry_helpers
 
 
 class _FakeImage:

@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 MODULES: dict[str, list[str]] = {
     "src/imageCompositeConverter.py": ["main"],
-    "src/imageCompositeConverterRegions.py": ["analyzeRangeImpl"],
+    "src/iCCModules/imageCompositeConverterRegions.py": ["analyzeRangeImpl"],
     "src/overviewTiles.py": [
         "generateConversionOverviews",
         "createTiledOverviewImage",
