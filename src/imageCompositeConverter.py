@@ -7043,6 +7043,7 @@ def _tryTemplateTransfer(
     svg_out_dir: str,
     diff_out_dir: str,
     rng: random.Random | None = None,
+    deterministic_order: bool = False,
 ) -> tuple[dict[str, object] | None, dict[str, object] | None]:
     filename = str(target_row.get("filename", ""))
     if not filename:
@@ -7077,7 +7078,7 @@ def _tryTemplateTransfer(
             target_alias_refs = {str(v).upper() for v in alias_values if str(v).strip()}
     target_is_semantic = isinstance(target_params_raw, dict) and str(target_params_raw.get("mode", "")) == "semantic_badge"
     ordered_donors = _rankTemplateTransferDonors(target_row, donor_rows)
-    if rng is not None and len(ordered_donors) > 1:
+    if rng is not None and not deterministic_order and len(ordered_donors) > 1:
         head = ordered_donors[:3]
         tail = ordered_donors[3:]
         rng.shuffle(head)
@@ -7119,7 +7120,7 @@ def _tryTemplateTransfer(
             ):
                 base_scale = float(min(w, h)) / max(1.0, float(min(int(donor.get("w", w)), int(donor.get("h", h)))))
                 semantic_scales = _semanticTransferScaleCandidates(base_scale)
-                if rng is not None:
+                if rng is not None and not deterministic_order:
                     keep = semantic_scales[:2]
                     rest = semantic_scales[2:]
                     rng.shuffle(rest)
@@ -7237,6 +7238,7 @@ def convertRange(
     debug_element_diff_dir: str | None = None,
     output_root: str | None = None,
     selected_variants: set[str] | None = None,
+    deterministic_order: bool = False,
 ) -> str:
     out_root = output_root or _defaultConvertedSymbolsRoot()
     svg_out_dir = _convertedSvgOutputDir(out_root)
@@ -7280,10 +7282,11 @@ def convertRange(
         generateConversionOverviews(diff_out_dir, svg_out_dir, reports_out_dir)
         return out_root
     rng = _conversionRandom()
-    run_seed = rng.randrange(1 << 30)
+    run_seed = 0 if deterministic_order else rng.randrange(1 << 30)
     Action.STOCHASTIC_RUN_SEED = int(run_seed)
     process_files = list(files)
-    rng.shuffle(process_files)
+    if not deterministic_order:
+        rng.shuffle(process_files)
 
     base_iterations = max(1, int(iterations))
     # Continue quality iterations while a pass still improves at least one case.
@@ -7414,6 +7417,7 @@ def convertRange(
                 svg_out_dir=svg_out_dir,
                 diff_out_dir=diff_out_dir,
                 rng=rng,
+                deterministic_order=deterministic_order,
             )
             if transferred is not None and float(transferred.get("error_per_pixel", float("inf"))) + 1e-9 < float(row.get("error_per_pixel", float("inf"))):
                 row = transferred
@@ -7484,7 +7488,7 @@ def convertRange(
 
         improved_in_pass = False
         iteration_budget, badge_rounds = _iterationStrategyForPass(pass_idx, base_iterations)
-        if len(candidates) > 1:
+        if len(candidates) > 1 and not deterministic_order:
             rng.shuffle(candidates)
         for row in candidates:
             filename = str(row["filename"])
@@ -9027,6 +9031,14 @@ def parseArgs(argv: list[str] | None = None) -> argparse.Namespace:
         default=SVG_RENDER_SUBPROCESS_TIMEOUT_SEC,
         help="Timeout pro isoliertem SVG-Render-Aufruf in Sekunden (Default: 20).",
     )
+    parser.add_argument(
+        "--deterministic-order",
+        action="store_true",
+        help=(
+            "Deaktiviert Shuffle-Schritte bei Dateireihenfolge/Template-Donor-Auswahl "
+            "für reproduzierbare Diagnoseläufe."
+        ),
+    )
     parser.add_argument("--_render-svg-subprocess", action="store_true", help=argparse.SUPPRESS)
     args = parser.parse_args(argv)
     if args.iterations_override is not None:
@@ -9228,6 +9240,7 @@ def main(argv: list[str] | None = None) -> int:
                     args.debug_element_diff_dir,
                     output_dir,
                     selected_variants,
+                    bool(args.deterministic_order),
                 )
             print(f"\nAbgeschlossen! Ausgaben unter: {out_dir}")
             return 0

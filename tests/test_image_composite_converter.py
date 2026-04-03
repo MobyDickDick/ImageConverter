@@ -5979,6 +5979,60 @@ def test_parse_args_defaults_to_convert_mode() -> None:
     assert args.mode == "convert"
 
 
+def test_parse_args_accepts_deterministic_order_flag() -> None:
+    args = image_composite_converter.parseArgs(["--deterministic-order"])
+
+    assert args.deterministic_order is True
+
+
+def test_try_template_transfer_does_not_shuffle_when_deterministic_order_is_enabled(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+) -> None:
+    if image_composite_converter.np is None:
+        pytest.skip("numpy not available in this environment")
+
+    class _FakeCv2:
+        @staticmethod
+        def imread(_path: str):
+            return image_composite_converter.np.zeros((8, 8, 3), dtype=image_composite_converter.np.uint8)
+
+    class _FailOnShuffle:
+        def shuffle(self, _items) -> None:
+            raise AssertionError("shuffle must stay disabled in deterministic mode")
+
+    monkeypatch.setattr(image_composite_converter, "cv2", _FakeCv2())
+    monkeypatch.setattr(image_composite_converter, "_rankTemplateTransferDonors", lambda _target, donors: list(donors))
+
+    target_row = {
+        "filename": "AC0800_S.jpg",
+        "variant": "AC0800_S",
+        "base": "AC0800",
+        "params": {},
+        "best_error": 1.0,
+        "error_per_pixel": 0.01,
+        "mean_delta2": 1.0,
+        "std_delta2": 0.1,
+    }
+    donor_rows = [
+        {"variant": "AC0800_M", "base": "AC0800", "params": {}},
+        {"variant": "AC0800_L", "base": "AC0800", "params": {}},
+    ]
+
+    updated, detail = image_composite_converter._tryTemplateTransfer(
+        target_row=target_row,
+        donor_rows=donor_rows,
+        folder_path=str(tmp_path),
+        svg_out_dir=str(tmp_path / "svgs"),
+        diff_out_dir=str(tmp_path / "diff"),
+        rng=_FailOnShuffle(),
+        deterministic_order=True,
+    )
+
+    assert updated is None
+    assert detail is None
+
+
 def test_create_diff_image_without_cv2_writes_rgb_overlay(tmp_path: Path) -> None:
     src = tmp_path / "sample.jpg"
     shutil.copyfile("artifacts/images_to_convert/AC0010.jpg", src)
