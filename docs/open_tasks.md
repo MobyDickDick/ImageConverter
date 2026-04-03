@@ -71,6 +71,7 @@ focused on the actual project scope.
   - 2026-04-03: Die bereits extrahierten C1.1-Helfermodule werden jetzt zentral unter `src/iCCModules/` geführt; `src/imageCompositeConverter.py` importiert diese direkt aus dem neuen Ordner, die bisherigen Modulpfade unter `src/` bleiben als kompatible Wrapper bestehen.
   - 2026-04-03: Masken-/BBox-Geometriehelfer (`_fitToOriginalSize`, `_maskCentroidRadius`, `_maskBbox`, `_maskCenterSize`, `_maskMinRectCenterDiag`, `_elementBboxChangeIsPlausible`) in neues Modul `src/iCCModules/imageCompositeConverterMaskGeometry.py` ausgelagert; `src/imageCompositeConverter.py` delegiert weiter über kompatible Wrapper.
   - 2026-04-03: SVG-Rendering-Helfer (`_renderSvgToNumpyInprocess`, `_renderSvgToNumpyViaSubprocess`) in neues Modul `src/iCCModules/imageCompositeConverterRendering.py` ausgelagert; der Monolith behält kompatible Wrapper und delegiert auf den neuen Modul-Entry-Point.
+  - 2026-04-03: Batch-Reporting-Helfer (`_readValidationLogDetails`, `_writeBatchFailureSummary`) in neues Modul `src/iCCModules/imageCompositeConverterBatchReporting.py` ausgelagert; `src/imageCompositeConverter.py` delegiert weiter über kompatible Wrapper.
   - Nächster geplanter Schritt: semantische Prüf- und weitere Optimierungsblöcke in denselben kleinen Schritten extrahieren.
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.
