@@ -7,10 +7,10 @@ AC0800_M ; status=semantic_ok ; best_iteration=1 ; diff_score=2.360000 ; error_p
 AC0800_S ; status=semantic_ok ; best_iteration=1 ; diff_score=10.310000 ; error_per_pixel=0.04580741 ; total_delta2=202449.000000 ; mean_delta2=899.773315 ; std_delta2=1675.581177 ; pixel_count=225
 AC0811_L ; status=semantic_ok ; best_iteration=1 ; diff_score=4.610000 ; error_per_pixel=0.00409363 ; total_delta2=604233.000000 ; mean_delta2=537.096008 ; std_delta2=2425.146240 ; pixel_count=1125
 AC0811_M ; status=semantic_ok ; best_iteration=1 ; diff_score=8.440000 ; error_per_pixel=0.01205714 ; total_delta2=169920.000000 ; mean_delta2=242.742859 ; std_delta2=2583.608887 ; pixel_count=700
-AC0811_S ; status=semantic_ok ; total_delta2=377295.000000 ; mean_delta2=1006.119995 ; std_delta2=3388.176270 ; pixel_count=375
+AC0811_S ; status=semantic_ok ; best_iteration=1 ; diff_score=8.310000 ; error_per_pixel=0.02217244 ; total_delta2=347226.000000 ; mean_delta2=925.935974 ; std_delta2=3134.216553 ; pixel_count=375
 AC0812_L ; status=semantic_ok ; best_iteration=1 ; diff_score=6.310000 ; error_per_pixel=0.00561146 ; total_delta2=922200.000000 ; mean_delta2=819.733337 ; std_delta2=2630.451172 ; pixel_count=1125
 AC0812_M ; status=semantic_ok ; best_iteration=1 ; diff_score=4.120000 ; error_per_pixel=0.00588980 ; total_delta2=343530.000000 ; mean_delta2=490.757141 ; std_delta2=2305.851807 ; pixel_count=700
-AC0812_S ; status=semantic_ok ; total_delta2=261438.000000 ; mean_delta2=697.168030 ; std_delta2=1595.431396 ; pixel_count=375
+AC0812_S ; status=semantic_ok ; best_iteration=1 ; diff_score=7.880000 ; error_per_pixel=0.02100622 ; total_delta2=261438.000000 ; mean_delta2=697.168030 ; std_delta2=1595.431396 ; pixel_count=375
 AC0813_L ; status=semantic_ok ; best_iteration=1 ; diff_score=6.360000 ; error_per_pixel=0.00565175 ; total_delta2=932091.000000 ; mean_delta2=828.525330 ; std_delta2=2648.834717 ; pixel_count=1125
 AC0813_M ; status=semantic_ok ; best_iteration=1 ; diff_score=8.910000 ; error_per_pixel=0.01273469 ; total_delta2=1203450.000000 ; mean_delta2=1719.214233 ; std_delta2=6911.693848 ; pixel_count=700
 AC0813_S ; status=semantic_ok ; best_iteration=1 ; diff_score=7.680000 ; error_per_pixel=0.02047289 ; total_delta2=250137.000000 ; mean_delta2=667.031982 ; std_delta2=1509.199097 ; pixel_count=375
@@ -21,14 +21,14 @@ AC0820_L ; status=semantic_ok ; best_iteration=1 ; diff_score=36.920000 ; error_
 AC0820_M ; status=semantic_ok ; best_iteration=1 ; diff_score=25.750000 ; error_per_pixel=0.06436250 ; total_delta2=2534028.000000 ; mean_delta2=6335.069824 ; std_delta2=14144.242188 ; pixel_count=400
 AC0820_S ; status=semantic_ok ; best_iteration=1 ; diff_score=27.100000 ; error_per_pixel=0.12043457 ; total_delta2=1212612.000000 ; mean_delta2=5389.386719 ; std_delta2=8530.142578 ; pixel_count=225
 AC0831_L ; status=semantic_ok ; best_iteration=1 ; diff_score=14.170000 ; error_per_pixel=0.01259852 ; total_delta2=3913593.000000 ; mean_delta2=3478.749268 ; std_delta2=11130.620117 ; pixel_count=1125
-AC0831_M ; status=semantic_ok ; best_iteration=1 ; diff_score=15.550000 ; error_per_pixel=0.02221429 ; total_delta2=2465733.000000 ; mean_delta2=3522.475830 ; std_delta2=10101.586914 ; pixel_count=700
+AC0831_M ; status=semantic_ok ; total_delta2=2398749.000000 ; mean_delta2=3426.784180 ; std_delta2=10796.594727 ; pixel_count=700
 AC0831_S ; status=semantic_ok ; best_iteration=1 ; diff_score=19.860000 ; error_per_pixel=0.05295644 ; total_delta2=1627305.000000 ; mean_delta2=4339.479980 ; std_delta2=10820.428711 ; pixel_count=375
 
 AC0812_M ; status=semantic_ok ; best_iteration=1 ; diff_score=4.120000 ; error_per_pixel=0.00588980 ; total_delta2=343530.000000 ; mean_delta2=490.757141 ; std_delta2=2305.851807 ; pixel_count=700
 
 AC0820_M ; status=semantic_ok ; best_iteration=1 ; diff_score=25.750000 ; error_per_pixel=0.06436250 ; total_delta2=2534028.000000 ; mean_delta2=6335.069824 ; std_delta2=14144.242188 ; pixel_count=400
 
-AC0812_S ; status=semantic_ok ; total_delta2=261438.000000 ; mean_delta2=697.168030 ; std_delta2=1595.431396 ; pixel_count=375
+AC0812_S ; status=semantic_ok ; best_iteration=1 ; diff_score=7.880000 ; error_per_pixel=0.02100622 ; total_delta2=261438.000000 ; mean_delta2=697.168030 ; std_delta2=1595.431396 ; pixel_count=375
 
 AC0820_L ; status=semantic_ok ; best_iteration=1 ; diff_score=36.920000 ; error_per_pixel=0.04102593 ; total_delta2=9140151.000000 ; mean_delta2=10155.723633 ; std_delta2=18070.943359 ; pixel_count=900
 
