@@ -972,6 +972,14 @@ def test_finalize_non_ac0820_text_badge_keeps_radius_unbounded() -> None:
     assert "min_circle_radius" not in params
 
 
+def test_finalize_ac08_style_enables_global_search_mode_by_default() -> None:
+    params = Action._apply_co2_label(Action._default_ac0870_params(20, 20))
+
+    finalized = Action._finalize_ac08_style("AC0831", params)
+
+    assert bool(finalized.get("enable_global_search_mode")) is True
+
+
 def test_finalize_elongated_connector_badge_does_not_add_radius_floor() -> None:
     """Elongated connector badges should not receive a hard radius floor anymore."""
     params = Action._default_ac0811_params(30, 45)
@@ -3013,6 +3021,48 @@ def test_optimize_global_parameter_vector_sampling_uses_run_seed_offset(monkeypa
     Action._optimize_global_parameter_vector_sampling(img, params, logs, rounds=1, samples_per_round=8)
 
     assert captured == [4229]
+
+
+def test_optimize_global_parameter_vector_sampling_can_select_deterministic_track(monkeypatch: pytest.MonkeyPatch) -> None:
+    np = image_composite_converter.np
+    if np is None:
+        pytest.skip("numpy not available in this environment")
+    img = np.full((24, 24, 3), 220, dtype=np.uint8)
+    params = {
+        "enable_global_search_mode": True,
+        "circle_enabled": True,
+        "cx": 6.0,
+        "cy": 6.0,
+        "r": 3.0,
+        "stem_enabled": True,
+        "stem_x": 4.0,
+        "stem_top": 9.0,
+        "stem_bottom": 15.0,
+        "stem_width": 1.0,
+        "draw_text": True,
+        "text_x": 5.0,
+        "text_y": 5.0,
+        "text_scale": 0.8,
+        "min_circle_radius": 1.0,
+    }
+
+    target = {"cx": 12.0, "cy": 11.0, "r": 5.5, "text_x": 11.0, "text_y": 11.0, "text_scale": 1.0}
+
+    def fake_full_error(_img, candidate_params):
+        return float(sum(abs(float(candidate_params.get(key, 0.0)) - value) for key, value in target.items()))
+
+    class FrozenRng:
+        def normal(self, mean: float, _sigma: float) -> float:
+            return float(mean)
+
+    monkeypatch.setattr(Action, "_full_badge_error_for_params", staticmethod(fake_full_error))
+    monkeypatch.setattr(Action, "_make_rng", staticmethod(lambda _seed: FrozenRng()))
+
+    logs: list[str] = []
+    changed = Action._optimize_global_parameter_vector_sampling(img, params, logs, rounds=2, samples_per_round=10)
+
+    assert changed is True
+    assert any("track-vergleich" in line and "gewählt=deterministic" in line for line in logs)
 
 
 def test_optimize_global_parameter_vector_sampling_respects_locks_and_bounds(monkeypatch: pytest.MonkeyPatch) -> None:
