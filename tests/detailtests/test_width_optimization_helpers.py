@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from src import imageCompositeConverterOptimizationWidth as width_helpers
+from src.iCCModules import imageCompositeConverterOptimizationWidth as width_helpers
 
 
 class _FakeImage:

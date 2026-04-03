@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from src import imageCompositeConverterOptimizationGeometry as geometry_helpers
+from src.iCCModules import imageCompositeConverterOptimizationGeometry as geometry_helpers
 
 
 class _FakeImage:
