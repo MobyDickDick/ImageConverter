@@ -19,6 +19,21 @@ focused on the actual project scope.
 
 ## Next tasks (added 2026-03-28)
 
+- [ ] D1: Familienübergreifende Harmonisierung für AC08-Protoformen ergänzen.
+  - Scope: Neben der bestehenden L/M/S-Harmonisierung innerhalb einer Basis zusätzlich Cross-Family-Aliase berücksichtigen.
+  - Kandidaten-Gruppen:
+    - `AC0800_L/M/S` als reine Scale-Familie ohne Connector/Text-Rotation.
+    - `AC0811..AC0814` (jeweils `L/M/S`) als gemeinsame Rotations-/Spiegel-Protofamilie.
+    - `AC0831..AC0834` (jeweils `L/M/S`) als Alias-Protofamilie zu `AC0811..AC0814` mit nicht mitrotierender Beschriftung.
+  - Umsetzungsidee:
+    - Kanonische Form-Signatur je Variante erzeugen (rotation-/spiegel-normalisiert, textfrei).
+    - Beim Harmonisieren zuerst Proto-Anker pro Gruppe wählen, danach Größe + Text separat je Zielvariante fitten.
+    - Für Text einen "rotate-geometry-only"-Modus vorsehen, damit `AC083x` die gleiche Form wie `AC081x` nutzen kann, die Beschriftung aber in Leserichtung bleibt.
+  - Akzeptanzkriterien:
+    - Keine Regression der bereits als gut markierten AC08-Anker (`successful_conversions.txt`).
+    - Neue Reportspalten für `prototype_group`, `geometry_signature_delta` und `text_orientation_policy`.
+    - Dokumentierter Vorher/Nachher-Vergleich mindestens für `AC0800_*`, `AC0811_*`, `AC0814_*`, `AC0820_*`, `AC0831_*`, `AC0834_*`.
+
 - [ ] C1: `src/imageCompositeConverter.py` schrittweise in Module mit Blöcken von ca. 100 Zeilen aufteilen.
   - Hintergrund: Die Datei hat aktuell deutlich über 10k Zeilen; Refactoring erfolgt bewusst in mehreren, testbaren Teilschritten statt als Big-Bang.
   - Vorgehen: pro Teilbereich (z. B. Regionen-Analyse, IO/Reporting, Rendering, Optimierung, CLI) jeweils ein neues Modul mit klarer API erstellen und im Hauptskript nur noch schlanke Delegation belassen.
