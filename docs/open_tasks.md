@@ -48,6 +48,7 @@ focused on the actual project scope.
   - 2026-04-02: Semantische Größen-Harmonisierungshelfer (`_needsLargeCircleOverflowGuard`, `_scaleBadgeParams`, `_harmonizationAnchorPriority`, `_clipGray`, `_familyHarmonizedBadgeColors`) in neues Modul `src/imageCompositeConverterSemanticHarmonization.py` ausgelagert; `src/imageCompositeConverter.py` delegiert weiter über kompatible Wrapper.
   - 2026-04-03: Kreis-Geometriehelfer (`_elementErrorForCirclePose`, `_reanchorArmToCircleEdge`) in neues Modul `src/imageCompositeConverterOptimizationCircleGeometry.py` ausgelagert; `src/imageCompositeConverter.py` delegiert weiter über kompatible Wrapper.
   - 2026-04-03: Global-Vector-Helfer (`_circleBounds`, `_globalParameterVectorBounds`, `_logGlobalParameterVector`) in neues Modul `src/imageCompositeConverterOptimizationGlobalVector.py` ausgelagert; `src/imageCompositeConverter.py` delegiert weiter über kompatible Wrapper.
+  - 2026-04-03: Kreis-Suchhelfer (`_stochasticSurvivorScalar`, `_optimizeCirclePoseStochasticSurvivor`, `_optimizeCirclePoseAdaptiveDomain`) in neues Modul `src/imageCompositeConverterOptimizationCircleSearch.py` ausgelagert; `src/imageCompositeConverter.py` delegiert weiter über kompatible Wrapper.
   - Nächster geplanter Schritt: semantische Prüf- und weitere Optimierungsblöcke in denselben kleinen Schritten extrahieren.
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.
