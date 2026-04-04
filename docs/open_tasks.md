@@ -83,7 +83,7 @@ focused on the actual project scope.
   - 2026-04-04: Successful-Conversion-Reporting-Helfer (`_latestFailedConversionManifestEntry`, `_sortedSuccessfulConversionMetricsRows`, `_writeSuccessfulConversionCsvTable`) in `src/iCCModules/imageCompositeConverterSuccessfulConversions.py` ausgelagert; der Monolith delegiert weiterhin kompatibel über Wrapper.
   - 2026-04-04: Semantische Label-Helfer (`_applyCo2Label`, `_co2Layout`, `_applyVocLabel`, `_normalizeCenteredCo2Label`) in neues Modul `src/iCCModules/imageCompositeConverterSemanticLabels.py` ausgelagert; `src/imageCompositeConverter.py` delegiert weiterhin kompatibel über Wrapper.
   - 2026-04-04: Beschreibungsfragment-Helfer (`_collectDescriptionFragments`) in `src/iCCModules/imageCompositeConverterAudit.py` ausgelagert; `src/imageCompositeConverter.py` delegiert weiterhin kompatibel über Wrapper.
-  - 2026-04-04: Element-Alignment-Optimierungshelfer (`_applyElementAlignmentStep`, `_estimateVerticalStemFromMask`) in neues Modul `src/iCCModules/imageCompositeConverterOptimizationElementAlignment.py` ausgelagert; `src/imageCompositeConverter.py` delegiert weiterhin kompatibel über Wrapper.
+  - 2026-04-04: Element-Ausrichtungshelfer (`_applyElementAlignmentStep`) in `src/iCCModules/imageCompositeConverterElementValidation.py` ausgelagert; `src/imageCompositeConverter.py` delegiert weiterhin kompatibel über Wrapper.
   - Nächster geplanter Schritt: semantische Prüf- und weitere Optimierungsblöcke in denselben kleinen Schritten extrahieren.
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.

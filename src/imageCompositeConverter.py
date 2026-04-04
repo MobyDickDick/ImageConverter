@@ -4034,7 +4034,7 @@ class Action:
         h: int,
         apply_circle_geometry_penalty: bool = True,
     ) -> bool:
-        return element_alignment_optimization_helpers.applyElementAlignmentStepImpl(
+        return element_validation_helpers.applyElementAlignmentStepImpl(
             params,
             element,
             center_dx,
