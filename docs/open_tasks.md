@@ -90,7 +90,8 @@ focused on the actual project scope.
   - 2026-04-04: Element-Masken-/Foreground-Helfer (`_ringAndFillMasks`, `_meanGrayForMask`, `_elementRegionMask`, `_textBbox`, `_foregroundMask`, `_circleFromForegroundMask`, `_maskSupportsCircle`) in neues Modul `src/iCCModules/imageCompositeConverterElementMasks.py` ausgelagert; `src/imageCompositeConverter.py` delegiert weiterhin kompatibel über Wrapper.
   - 2026-04-04: Thresholding-/Mask-Overlap-Helfer (`_computeOtsuThreshold`, `_adaptiveThreshold`, `_iou`) in neues Modul `src/iCCModules/imageCompositeConverterThresholding.py` ausgelagert; `src/imageCompositeConverter.py` delegiert weiterhin kompatibel über Wrapper.
   - 2026-04-04: Element-Fehlermetrik-Helfer (`_elementOnlyParams`, `_maskedError`, `_unionBboxFromMasks`, `_maskedUnionErrorInBbox`) in neues Modul `src/iCCModules/imageCompositeConverterElementErrorMetrics.py` ausgelagert; `src/imageCompositeConverter.py` delegiert weiterhin kompatibel über Wrapper.
-  - Nächster geplanter Schritt: semantische Prüf- und weitere Optimierungsblöcke in denselben kleinen Schritten extrahieren.
+  - 2026-04-04: Skalare Optimierungs-/Kreis-Constraint-Helfer (`_makeRng`, `_argminIndex`, `_snapIntPx`, `_maxCircleRadiusInsideCanvas`, `_isCircleWithText`, `_applyCircleTextWidthConstraint`, `_applyCircleTextRadiusFloor`, `_clampCircleInsideCanvas`) in neues Modul `src/iCCModules/imageCompositeConverterOptimizationScalars.py` ausgelagert; `src/imageCompositeConverter.py` delegiert weiterhin kompatibel über Wrapper.
+  - Nächster geplanter Schritt: weitere Badge-Param-/Semantik-Teilstrecken in denselben kleinen Schritten extrahieren.
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.
   - `_create_diff_image_without_cv2` nutzt jetzt Context-Manager für beide `fitz.open(...)` Dokumente, damit Batch-Läufe keine unnötig offenen MuPDF-Dokumente ansammeln.

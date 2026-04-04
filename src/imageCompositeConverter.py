@@ -57,6 +57,7 @@ from src.iCCModules import imageCompositeConverterOptimizationCircleSearch as ci
 from src.iCCModules import imageCompositeConverterOptimizationCircleRadius as circle_radius_optimization_helpers
 from src.iCCModules import imageCompositeConverterOptimizationCircleGeometry as circle_geometry_optimization_helpers
 from src.iCCModules import imageCompositeConverterOptimizationElementAlignment as element_alignment_optimization_helpers
+from src.iCCModules import imageCompositeConverterOptimizationScalars as scalar_optimization_helpers
 from src.iCCModules import imageCompositeConverterOptimizationGlobalVector as global_vector_optimization_helpers
 from src.iCCModules import imageCompositeConverterOptimizationGlobalSearch as global_search_optimization_helpers
 from src.iCCModules import imageCompositeConverterMaskGeometry as mask_geometry_helpers
@@ -1268,97 +1269,46 @@ class Action:
             return hi
         return v
 
-    class _ScalarRng:
-        def __init__(self, seed: int) -> None:
-            self._rng = random.Random(int(seed))
-
-        def uniform(self, low: float, high: float) -> float:
-            return float(self._rng.uniform(float(low), float(high)))
-
-        def normal(self, mean: float, sigma: float) -> float:
-            return float(self._rng.gauss(float(mean), float(sigma)))
-
     @staticmethod
     def _makeRng(seed: int):
-        if np is not None:
-            return np.random.default_rng(int(seed))
-        return Action._ScalarRng(int(seed))
+        return scalar_optimization_helpers.makeRngImpl(seed, np_module=np)
 
     @staticmethod
     def _argminIndex(values: list[float]) -> int:
-        return min(range(len(values)), key=lambda i: float(values[i]))
+        return scalar_optimization_helpers.argminIndexImpl(values)
 
     @staticmethod
     def _snapIntPx(value: float, minimum: float = 1.0) -> float:
-        return float(max(int(round(float(minimum))), int(round(float(value)))))
+        return scalar_optimization_helpers.snapIntPxImpl(value, minimum=minimum)
 
     @staticmethod
     def _maxCircleRadiusInsideCanvas(cx: float, cy: float, w: int, h: int, stroke: float = 0.0) -> float:
-        """Return the largest circle radius that stays inside the SVG viewport."""
-        if w <= 0 or h <= 0:
-            return 1.0
-        edge_margin = min(float(cx), float(w) - float(cx), float(cy), float(h) - float(cy))
-        return float(max(1.0, edge_margin - (max(0.0, float(stroke)) / 2.0)))
+        return scalar_optimization_helpers.maxCircleRadiusInsideCanvasImpl(cx, cy, w, h, stroke)
 
     @staticmethod
     def _isCircleWithText(params: dict) -> bool:
-        """Return True when the badge encodes a circle-with-text shape."""
-        return bool(params.get("circle_enabled", True)) and bool(params.get("draw_text", False))
+        return scalar_optimization_helpers.isCircleWithTextImpl(params)
 
     @staticmethod
     def _applyCircleTextWidthConstraint(params: dict, radius: float, w: int) -> float:
-        """Enforce CircleWithText constraint: 2 * radius < image width."""
-        if not Action._isCircleWithText(params):
-            return float(radius)
-        # Keep a tiny strict margin so the optimized radius remains strictly below w/2.
-        width_cap = (float(w) / 2.0) - 1e-3
-        return float(min(float(radius), width_cap))
+        return scalar_optimization_helpers.applyCircleTextWidthConstraintImpl(params, radius, w)
 
     @staticmethod
     def _applyCircleTextRadiusFloor(params: dict, radius: float) -> float:
-        """Enforce CircleWithText lower bound: radius must exceed half text width."""
-        if not Action._isCircleWithText(params):
-            return float(radius)
-        x1, _y1, x2, _y2 = Action._textBbox(params)
-        text_width = max(0.0, float(x2) - float(x1))
-        if text_width <= 0.0:
-            return float(radius)
-        # Keep strict inequality: radius > (text_width / 2).
-        lower_bound = (text_width / 2.0) + 1e-3
-        return float(max(float(radius), lower_bound))
+        return scalar_optimization_helpers.applyCircleTextRadiusFloorImpl(
+            params,
+            radius,
+            text_bbox_fn=Action._textBbox,
+        )
 
     @staticmethod
     def _clampCircleInsideCanvas(params: dict, w: int, h: int) -> dict:
-        """Clamp circle center/radius so no part of the ring exceeds the viewport."""
-        p = dict(params)
-        if not p.get("circle_enabled", True):
-            return p
-        if "cx" not in p or "cy" not in p or "r" not in p:
-            return p
-
-        cx = float(max(0.0, min(float(w), float(p.get("cx", 0.0)))))
-        cy = float(max(0.0, min(float(h), float(p.get("cy", 0.0)))))
-        stroke = float(p.get("stroke_circle", 0.0))
-        max_r = Action._maxCircleRadiusInsideCanvas(cx, cy, w, h, stroke)
-        max_r = Action._applyCircleTextWidthConstraint(p, max_r, w)
-        min_r = float(
-            max(
-                1.0,
-                float(p.get("min_circle_radius", 1.0)),
-                float(p.get("circle_radius_lower_bound_px", 1.0)),
-            )
+        return scalar_optimization_helpers.clampCircleInsideCanvasImpl(
+            params,
+            w,
+            h,
+            text_bbox_fn=Action._textBbox,
         )
-        min_r = Action._applyCircleTextRadiusFloor(p, min_r)
-        if not bool(p.get("allow_circle_overflow", False)):
-            min_r = min(min_r, max_r)
-
-        p["cx"] = cx
-        p["cy"] = cy
-        if bool(p.get("allow_circle_overflow", False)):
-            p["r"] = float(max(min_r, float(p.get("r", min_r))))
-        else:
-            p["r"] = float(max(min_r, min(max_r, float(p.get("r", min_r)))))
-        return p
 
     @staticmethod
     def applyRedrawVariation(params: dict, w: int, h: int) -> tuple[dict, list[str]]:
