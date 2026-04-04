@@ -7286,36 +7286,7 @@ def _isConversionBestlistCandidateBetter(previous_row: dict[str, object] | None,
     )
 
 def _latestFailedConversionManifestEntry(reports_out_dir: str) -> dict[str, object] | None:
-    """Return the most recent failed conversion as a manifest-like row."""
-    summary_path = Path(reports_out_dir) / "batch_failure_summary.csv"
-    if not summary_path.exists():
-        return None
-
-    latest_row: dict[str, str] | None = None
-    try:
-        with summary_path.open("r", encoding="utf-8", newline="") as f:
-            reader = csv.DictReader(f, delimiter=";")
-            for row in reader:
-                filename = str(row.get("filename", "")).strip()
-                status = str(row.get("status", "")).strip().lower()
-                if not filename or status not in {"render_failure", "batch_error", "semantic_mismatch"}:
-                    continue
-                latest_row = row
-    except OSError:
-        return None
-
-    if latest_row is None:
-        return None
-
-    variant = Path(str(latest_row.get("filename", "")).strip()).stem.upper()
-    if not variant:
-        return None
-
-    return {
-        "variant": variant,
-        "status": "failed",
-        "failure_reason": str(latest_row.get("reason", "")).strip(),
-    }
+    return successful_conversions_helpers.latestFailedConversionManifestEntryImpl(reports_out_dir)
 
 
 def updateSuccessfulConversionsManifestWithMetrics(
@@ -7417,36 +7388,15 @@ def updateSuccessfulConversionsManifestWithMetrics(
 def _sortedSuccessfulConversionMetricsRows(
     metrics: list[dict[str, object]],
 ) -> list[dict[str, object]]:
-    """Sort successful-conversion rows by converted image name/variant."""
-    return sorted(metrics, key=lambda row: str(row.get('variant', '')).upper())
+    return successful_conversions_helpers.sortedSuccessfulConversionMetricsRowsImpl(metrics)
 
 
 def _writeSuccessfulConversionCsvTable(csv_path: str | os.PathLike[str], metrics: list[dict[str, object]]) -> str:
-    """Write the successful-conversions leaderboard as a CSV table."""
-    csv_path = os.fspath(csv_path)
-    os.makedirs(os.path.dirname(csv_path), exist_ok=True)
-    with open(csv_path, 'w', encoding='utf-8', newline='') as f:
-        writer = csv.writer(f, delimiter=';')
-        writer.writerow([
-            'variant', 'status', 'image_found', 'svg_found', 'log_found', 'best_iteration',
-            'diff_score', 'error_per_pixel', 'pixel_count', 'total_delta2', 'mean_delta2', 'std_delta2',
-        ])
-        for row in _sortedSuccessfulConversionMetricsRows(metrics):
-            writer.writerow([
-                row['variant'],
-                row['status'],
-                int(bool(row['image_found'])),
-                int(bool(row['svg_found'])),
-                int(bool(row['log_found'])),
-                row['best_iteration'],
-                '' if not math.isfinite(float(row['diff_score'])) else f"{float(row['diff_score']):.6f}",
-                '' if not math.isfinite(float(row['error_per_pixel'])) else f"{float(row['error_per_pixel']):.8f}",
-                int(row['pixel_count']),
-                '' if not math.isfinite(float(row['total_delta2'])) else f"{float(row['total_delta2']):.6f}",
-                '' if not math.isfinite(float(row['mean_delta2'])) else f"{float(row['mean_delta2']):.6f}",
-                '' if not math.isfinite(float(row['std_delta2'])) else f"{float(row['std_delta2']):.6f}",
-            ])
-    return csv_path
+    return successful_conversions_helpers.writeSuccessfulConversionCsvTableImpl(
+        csv_path=csv_path,
+        metrics=metrics,
+        sorted_rows_fn=_sortedSuccessfulConversionMetricsRows,
+    )
 
 
 def writeSuccessfulConversionQualityReport(
