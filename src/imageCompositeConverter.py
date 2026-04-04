@@ -67,6 +67,7 @@ from src.iCCModules import imageCompositeConverterConversionRows as conversion_r
 from src.iCCModules import imageCompositeConverterAc08Reporting as ac08_reporting_helpers
 from src.iCCModules import imageCompositeConverterRanking as ranking_helpers
 from src.iCCModules import imageCompositeConverterSuccessfulConversions as successful_conversions_helpers
+from src.iCCModules import imageCompositeConverterBestlist as conversion_bestlist_helpers
 from src.successfulConversions import (
     AC08_MITIGATION_STATUS,
     AC08_PREVIOUSLY_GOOD_VARIANTS,
@@ -6826,6 +6827,8 @@ def convertRange(
     max_quality_passes = 4
     quality_logs: list[dict[str, object]] = []
     result_map: dict[str, dict[str, object]] = {}
+    conversion_bestlist_path = _conversionBestlistManifestPath(reports_out_dir)
+    conversion_bestlist_rows = _readConversionBestlistMetrics(conversion_bestlist_path)
     batch_failures: list[dict[str, str]] = []
     stop_after_failure = False
     existing_donor_rows = _loadExistingConversionRows(out_root, folder_path)
@@ -6954,7 +6957,26 @@ def convertRange(
             if transferred is not None and float(transferred.get("error_per_pixel", float("inf"))) + 1e-9 < float(row.get("error_per_pixel", float("inf"))):
                 row = transferred
 
-        result_map[filename] = row
+        variant = str(row.get("variant", "")).strip().upper()
+        previous_row = conversion_bestlist_rows.get(variant)
+        if _isConversionBestlistCandidateBetter(previous_row, row):
+            result_map[filename] = row
+            conversion_bestlist_rows[variant] = dict(row)
+            _storeConversionBestlistSnapshot(variant, row, svg_out_dir, reports_out_dir)
+        else:
+            restored_row = _restoreConversionBestlistSnapshot(variant, svg_out_dir, reports_out_dir)
+            if previous_row is not None:
+                fallback_row = dict(row)
+                for key in ("best_iter", "best_error", "error_per_pixel", "mean_delta2", "std_delta2", "status"):
+                    if key in previous_row:
+                        fallback_row[key] = previous_row[key]
+                if isinstance(restored_row, dict):
+                    for key in ("best_iter", "best_error", "error_per_pixel", "mean_delta2", "std_delta2", "status"):
+                        if key in restored_row:
+                            fallback_row[key] = restored_row[key]
+                result_map[filename] = fallback_row
+            else:
+                result_map[filename] = row
 
     current_rows = [
         row
@@ -7039,6 +7061,14 @@ def convertRange(
             if improved:
                 result_map[filename] = new_row
                 improved_in_pass = True
+                variant = str(new_row.get("variant", "")).strip().upper()
+                if variant:
+                    conversion_bestlist_rows[variant] = dict(new_row)
+                    _storeConversionBestlistSnapshot(variant, new_row, svg_out_dir, reports_out_dir)
+            else:
+                variant = str(row.get("variant", "")).strip().upper()
+                if variant:
+                    _restoreConversionBestlistSnapshot(variant, svg_out_dir, reports_out_dir)
 
             quality_logs.append(
                 {
@@ -7060,6 +7090,7 @@ def convertRange(
             break
 
     _writeQualityPassReport(reports_out_dir, quality_logs)
+    _writeConversionBestlistMetrics(conversion_bestlist_path, conversion_bestlist_rows)
     _writeBatchFailureSummary(reports_out_dir, batch_failures)
     if strategy_logs:
         strategy_path = os.path.join(reports_out_dir, "strategy_switch_template_transfers.csv")
@@ -7517,6 +7548,35 @@ def _formatSuccessfulConversionManifestLine(existing_line: str, metrics: dict[st
         metrics_available_fn=_successfulConversionMetricsAvailable,
     )
 
+
+
+
+def _conversionBestlistManifestPath(reports_out_dir: str) -> Path:
+    return conversion_bestlist_helpers.conversionBestlistManifestPathImpl(reports_out_dir)
+
+
+def _readConversionBestlistMetrics(manifest_path: Path) -> dict[str, dict[str, object]]:
+    return conversion_bestlist_helpers.readConversionBestlistMetricsImpl(manifest_path)
+
+
+def _writeConversionBestlistMetrics(manifest_path: Path, rows: dict[str, dict[str, object]]) -> None:
+    conversion_bestlist_helpers.writeConversionBestlistMetricsImpl(manifest_path, rows)
+
+
+def _storeConversionBestlistSnapshot(variant: str, row: dict[str, object], svg_out_dir: str, reports_out_dir: str) -> None:
+    conversion_bestlist_helpers.storeConversionBestlistSnapshotImpl(variant, row, svg_out_dir, reports_out_dir)
+
+
+def _restoreConversionBestlistSnapshot(variant: str, svg_out_dir: str, reports_out_dir: str) -> dict[str, object] | None:
+    return conversion_bestlist_helpers.restoreConversionBestlistSnapshotImpl(variant, svg_out_dir, reports_out_dir)
+
+
+def _isConversionBestlistCandidateBetter(previous_row: dict[str, object] | None, candidate_row: dict[str, object]) -> bool:
+    return conversion_bestlist_helpers.isConversionBestlistCandidateBetterImpl(
+        previous_row,
+        candidate_row,
+        evaluate_candidate_fn=_evaluateQualityPassCandidate,
+    )
 
 def _latestFailedConversionManifestEntry(reports_out_dir: str) -> dict[str, object] | None:
     """Return the most recent failed conversion as a manifest-like row."""
