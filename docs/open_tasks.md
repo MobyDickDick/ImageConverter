@@ -79,6 +79,7 @@ focused on the actual project scope.
   - 2026-04-03: Global-Search-Optimierungsblock (`_optimizeGlobalParameterVectorSampling`) in neues Modul `src/iCCModules/imageCompositeConverterOptimizationGlobalSearch.py` ausgelagert; `src/imageCompositeConverter.py` delegiert weiter über kompatible Wrapper.
   - 2026-04-03: Conversion-Row-/Rastergrößen-Helfer (`_loadExistingConversionRows`, `_sniffRasterSize`) in neues Modul `src/iCCModules/imageCompositeConverterConversionRows.py` ausgelagert; `src/imageCompositeConverter.py` delegiert weiter über kompatible Wrapper.
   - 2026-04-04: Element-Validierungsblock (`_refineStemGeometryFromMasks`, `validateBadgeByElements`) in neues Modul `src/iCCModules/imageCompositeConverterElementValidation.py` ausgelagert; `src/imageCompositeConverter.py` delegiert weiter über kompatible Wrapper.
+  - 2026-04-04: Render-Runtime-Helfer (`_is_fitz_open_monkeypatched`, `_is_inprocess_renderer_monkeypatched`, `_bbox_to_dict`, `_runSvgRenderSubprocessEntrypoint`) in neues Modul `src/iCCModules/imageCompositeConverterRenderRuntime.py` ausgelagert; `src/imageCompositeConverter.py` delegiert weiter über kompatible Wrapper.
   - Nächster geplanter Schritt: semantische Prüf- und weitere Optimierungsblöcke in denselben kleinen Schritten extrahieren.
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.
