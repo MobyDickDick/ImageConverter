@@ -56,6 +56,7 @@ from src.iCCModules import imageCompositeConverterOptimizationCirclePose as circ
 from src.iCCModules import imageCompositeConverterOptimizationCircleSearch as circle_search_optimization_helpers
 from src.iCCModules import imageCompositeConverterOptimizationCircleRadius as circle_radius_optimization_helpers
 from src.iCCModules import imageCompositeConverterOptimizationCircleGeometry as circle_geometry_optimization_helpers
+from src.iCCModules import imageCompositeConverterOptimizationElementAlignment as element_alignment_optimization_helpers
 from src.iCCModules import imageCompositeConverterOptimizationGlobalVector as global_vector_optimization_helpers
 from src.iCCModules import imageCompositeConverterOptimizationGlobalSearch as global_search_optimization_helpers
 from src.iCCModules import imageCompositeConverterMaskGeometry as mask_geometry_helpers
@@ -4052,86 +4053,13 @@ class Action:
         y_start: int,
         y_end: int,
     ) -> tuple[float, float] | None:
-        """Estimate stem center/width from foreground mask rows.
-
-        The estimate is intentionally iterative: we repeatedly reject outliers around
-        the running median width so anti-aliased pixels at the circle junction do not
-        inflate the final width.
-        """
-        h, w = mask.shape[:2]
-        y1 = max(0, min(h, int(y_start)))
-        y2 = max(y1, min(h, int(y_end)))
-        if y2 <= y1:
-            return None
-
-        # The rows directly below the circle/stem junction are frequently widened
-        # by anti-aliased ring pixels. Bias the estimator towards the lower stem
-        # segment so thin stems (e.g. tall AC0811 variants) are not over-thickened.
-        span = y2 - y1
-        if span >= 8:
-            y1 = min(y2 - 1, y1 + int(round(span * 0.25)))
-
-        widths: list[float] = []
-        centers: list[float] = []
-        cx_idx = int(round(expected_cx))
-
-        for y in range(y1, y2):
-            row = mask[y]
-            xs = np.where(row)[0]
-            if xs.size == 0:
-                continue
-
-            split_points = np.where(np.diff(xs) > 1)[0]
-            runs = np.split(xs, split_points + 1)
-            if not runs:
-                continue
-
-            # Prefer the run that contains the expected center, otherwise nearest run.
-            chosen = None
-            nearest_dist = float("inf")
-            for run in runs:
-                rx1, rx2 = int(run[0]), int(run[-1])
-                if rx1 <= cx_idx <= rx2:
-                    chosen = run
-                    break
-                dist = min(abs(cx_idx - rx1), abs(cx_idx - rx2))
-                if dist < nearest_dist:
-                    nearest_dist = dist
-                    chosen = run
-
-            if chosen is None:
-                continue
-
-            rw = float((chosen[-1] - chosen[0]) + 1)
-            rcx = float((chosen[0] + chosen[-1]) / 2.0)
-            widths.append(rw)
-            centers.append(rcx)
-
-        if not widths:
-            return None
-
-        widths_arr = np.array(widths, dtype=np.float32)
-        centers_arr = np.array(centers, dtype=np.float32)
-        keep = np.ones(widths_arr.shape[0], dtype=bool)
-
-        for _ in range(3):
-            sel_w = widths_arr[keep]
-            if sel_w.size < 3:
-                break
-            med = float(np.median(sel_w))
-            tol = max(1.0, med * 0.35)
-            new_keep = keep & (np.abs(widths_arr - med) <= tol)
-            if int(np.sum(new_keep)) == int(np.sum(keep)):
-                break
-            keep = new_keep
-
-        if int(np.sum(keep)) == 0:
-            return None
-
-        est_width = float(np.median(widths_arr[keep]))
-        est_cx = float(np.median(centers_arr[keep]))
-        est_width = max(1.0, min(est_width, float(w)))
-        return est_cx, est_width
+        return element_alignment_optimization_helpers.estimateVerticalStemFromMaskImpl(
+            mask,
+            expected_cx,
+            y_start,
+            y_end,
+            np_module=np,
+        )
 
     @staticmethod
     def _ringAndFillMasks(h: int, w: int, params: dict) -> tuple[np.ndarray, np.ndarray]:
