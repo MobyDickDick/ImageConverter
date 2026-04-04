@@ -62,6 +62,7 @@ from src.iCCModules import imageCompositeConverterTemplateTransfer as template_t
 from src.iCCModules import imageCompositeConverterSemanticGeometry as semantic_geometry_helpers
 from src.iCCModules import imageCompositeConverterSemanticHarmonization as semantic_harmonization_helpers
 from src.iCCModules import imageCompositeConverterRendering as rendering_helpers
+from src.iCCModules import imageCompositeConverterRenderRuntime as rendering_runtime_helpers
 from src.iCCModules import imageCompositeConverterBatchReporting as batch_reporting_helpers
 from src.iCCModules import imageCompositeConverterConversionRows as conversion_row_helpers
 from src.iCCModules import imageCompositeConverterAc08Reporting as ac08_reporting_helpers
@@ -1205,67 +1206,29 @@ def _render_svg_to_numpy_via_subprocess(svg_string: str, size_w: int, size_h: in
 
 
 def _is_fitz_open_monkeypatched() -> bool:
-    """Detect test monkeypatching so render failure tests can exercise in-process behavior."""
-    if fitz is None:
-        return False
-    open_fn = getattr(fitz, "open", None)
-    if open_fn is None:
-        return False
-    expected_module = getattr(fitz, "__name__", "")
-    actual_module = getattr(open_fn, "__module__", "")
-    if not actual_module:
-        return False
-    allowed_modules = {expected_module, "pymupdf", "fitz"}
-    return actual_module not in allowed_modules
+    return rendering_runtime_helpers.is_fitz_open_monkeypatched(fitz_module=fitz)
 
 
 def _is_inprocess_renderer_monkeypatched() -> bool:
-    inprocess_fn = globals().get("_renderSvgToNumpyInprocess")
-    if inprocess_fn is None:
-        return False
-    module_name = getattr(inprocess_fn, "__module__", "")
-    return bool(module_name) and module_name != __name__
+    return rendering_runtime_helpers.is_inprocess_renderer_monkeypatched(
+        inprocess_fn=globals().get("_renderSvgToNumpyInprocess"),
+        module_name=__name__,
+    )
 
 
 def _bbox_to_dict(label: str, bbox: tuple[int, int, int, int], color: tuple[int, int, int]) -> dict[str, object]:
     """Snake-case compatibility helper kept for legacy tests and imports."""
-    x0, y0, x1, y1 = bbox
-    return {
-        "label": label,
-        "bbox": {
-            "x0": int(x0),
-            "y0": int(y0),
-            "x1": int(x1),
-            "y1": int(y1),
-            "width": int(x1 - x0 + 1),
-            "height": int(y1 - y0 + 1),
-        },
-        "color_bgr": [int(color[0]), int(color[1]), int(color[2])],
-    }
+    return rendering_runtime_helpers.bbox_to_dict(label, bbox, color)
 
 
 def _runSvgRenderSubprocessEntrypoint() -> int:
-    try:
-        payload = json.loads(sys.stdin.buffer.read().decode("utf-8"))
-    except Exception:
-        return 2
-    svg = str(payload.get("svg", ""))
-    w = int(payload.get("w", 0))
-    h = int(payload.get("h", 0))
-    if w <= 0 or h <= 0:
-        return 2
-    rendered = _renderSvgToNumpyInprocess(svg, w, h)
-    if rendered is None:
-        sys.stdout.write('{"ok": false}\n')
-        return 0
-    response = {
-        "ok": True,
-        "w": int(rendered.shape[1]),
-        "h": int(rendered.shape[0]),
-        "data": base64.b64encode(rendered.tobytes()).decode("ascii"),
-    }
-    sys.stdout.write(json.dumps(response, separators=(",", ":")))
-    return 0
+    status_code, response = rendering_runtime_helpers.run_svg_render_subprocess_entrypoint(
+        stdin_bytes=sys.stdin.buffer.read(),
+        render_svg_to_numpy_inprocess=_renderSvgToNumpyInprocess,
+    )
+    if response:
+        sys.stdout.write(response)
+    return status_code
 
 
 class Action:
