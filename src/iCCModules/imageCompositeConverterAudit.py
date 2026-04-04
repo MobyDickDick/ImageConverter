@@ -41,6 +41,41 @@ def semanticAuditRecordImpl(
     }
 
 
+def collectDescriptionFragmentsImpl(
+    raw_desc: dict[str, str],
+    *,
+    base_name: str,
+    img_filename: str,
+    get_base_name_fn: Callable[[str], str],
+) -> list[dict[str, str]]:
+    """Return ordered description fragments consulted for one variant lookup."""
+    variant_name = os.path.splitext(img_filename)[0]
+    canonical_base = get_base_name_fn(base_name).upper()
+    canonical_variant = get_base_name_fn(variant_name).upper()
+
+    lookup_keys = [
+        ("base_name", str(base_name)),
+        ("variant_name", str(variant_name)),
+        ("canonical_base", canonical_base),
+        ("canonical_variant", canonical_variant),
+    ]
+    fragments: list[dict[str, str]] = []
+    seen: set[tuple[str, str]] = set()
+    for source, key in lookup_keys:
+        normalized_key = str(key or "").strip()
+        if not normalized_key:
+            continue
+        marker = (source, normalized_key)
+        if marker in seen:
+            continue
+        seen.add(marker)
+        value = str(raw_desc.get(normalized_key, "") or "").strip()
+        if not value:
+            continue
+        fragments.append({"source": source, "key": normalized_key, "text": value})
+    return fragments
+
+
 def writeSemanticAuditReportImpl(reports_out_dir: str, audit_rows: list[dict[str, object]]) -> None:
     """Persist semantic audit rows as CSV/JSON for targeted AC0811..AC0814 review."""
     if not audit_rows:
