@@ -925,6 +925,16 @@ def test_parse_description_recognizes_co2_with_caret_notation() -> None:
     assert "SEMANTIC: senkrechter Strich hinter dem Kreis" in list(params.get("elements", []))
 
 
+def test_parse_description_recognizes_co2_with_superscript_two() -> None:
+    """Descriptions using literal CO² notation must activate the CO₂ semantic label."""
+    raw = {"AC0820": "Im Kreis ist CO² enthalten."}
+
+    _desc, params = image_composite_converter.Reflection(raw).parse_description("AC0820_L", "AC0820_L.jpg")
+
+    assert params["mode"] == "semantic_badge"
+    assert "SEMANTIC: Kreis + Buchstabe CO_2" in list(params.get("elements", []))
+
+
 def test_parse_description_does_not_misread_ac0130_text_as_top_source_ref() -> None:
     """AC0130 mentions 'oben mitte' and 'in beiden Diagonalen' but has no donor image reference."""
     raw = image_composite_converter._loadDescriptionMapping(

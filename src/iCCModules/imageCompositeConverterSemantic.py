@@ -50,7 +50,7 @@ def parse_semantic_badge_layout_overrides(text: str) -> dict[str, float | str]:
         overrides["co2_dy"] = 0.0
         overrides["co2_optical_bias"] = 0.0
 
-    if re.search(r"\bco(?:[_\s-]*2|₂)\b[^.\n]*horizontal\s+zentriert", normalized):
+    if re.search(r"\bco(?:[_\s-]*2|[₂²])\b[^.\n]*horizontal\s+zentriert", normalized):
         overrides["co2_anchor_mode"] = "cluster"
         overrides["co2_dx"] = 0.0
 
@@ -75,7 +75,7 @@ def apply_semantic_badge_family_rules(
     if base_upper in {"AC0800", "AC0810", "AC0811", "AC0812", "AC0813", "AC0814"}:
         family_elements.append("SEMANTIC: Kreis ohne Buchstabe")
         params["label"] = ""
-    elif re.search(r"\bco(?:[_\s\-\^]*2|₂)\b", desc):
+    elif re.search(r"\bco(?:[_\s\-\^]*2|[₂²])\b", desc):
         heuristic_elements.append("SEMANTIC: Kreis + Buchstabe CO_2")
         params["label"] = "CO_2"
     elif re.search(r"\bco\b", desc):
