@@ -73,6 +73,7 @@ from src.iCCModules import imageCompositeConverterSuccessfulConversions as succe
 from src.iCCModules import imageCompositeConverterSuccessfulConversionQuality as successful_conversion_quality_helpers
 from src.iCCModules import imageCompositeConverterBestlist as conversion_bestlist_helpers
 from src.iCCModules import imageCompositeConverterElementValidation as element_validation_helpers
+from src.iCCModules import imageCompositeConverterElementMasks as element_mask_helpers
 from src.successfulConversions import (
     AC08_MITIGATION_STATUS,
     AC08_PREVIOUSLY_GOOD_VARIANTS,
@@ -4064,22 +4065,11 @@ class Action:
 
     @staticmethod
     def _ringAndFillMasks(h: int, w: int, params: dict) -> tuple[np.ndarray, np.ndarray]:
-        yy, xx = np.indices((h, w))
-        dist = np.sqrt((xx - params["cx"]) ** 2 + (yy - params["cy"]) ** 2)
-        ring_half = max(0.7, params["stroke_circle"])
-        ring = np.abs(dist - params["r"]) <= ring_half
-        fill = dist <= max(0.5, params["r"] - ring_half)
-        return ring, fill
+        return element_mask_helpers.ringAndFillMasksImpl(h, w, params, np_module=np)
 
     @staticmethod
     def _meanGrayForMask(img: np.ndarray, mask: np.ndarray) -> float | None:
-        if int(mask.sum()) == 0:
-            return None
-        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-        vals = gray[mask]
-        if vals.size == 0:
-            return None
-        return float(np.mean(vals))
+        return element_mask_helpers.meanGrayForMaskImpl(img, mask, cv2_module=cv2, np_module=np)
 
     @staticmethod
     def _elementRegionMask(
@@ -4089,202 +4079,46 @@ class Action:
         element: str,
         apply_circle_geometry_penalty: bool = True,
     ) -> np.ndarray | None:
-        yy, xx = np.indices((h, w))
-        context_pad = max(2.0, float(min(h, w)) * 0.12)
-        if element == "circle" and apply_circle_geometry_penalty:
-            radius_with_context = params["r"] + context_pad
-            circle = (xx - params["cx"]) ** 2 + (yy - params["cy"]) ** 2 <= radius_with_context**2
-            top = yy <= (params["cy"] + params["r"] + context_pad)
-            return circle & top
-        if element == "stem" and params.get("stem_enabled"):
-            x1 = max(0.0, params["stem_x"] - context_pad)
-            x2 = min(float(w), params["stem_x"] + params["stem_width"] + context_pad)
-            y1 = max(0.0, params["stem_top"] - context_pad)
-            y2 = min(float(h), params["stem_bottom"] + context_pad)
-            return (xx >= x1) & (xx <= x2) & (yy >= y1) & (yy <= y2)
-        if element == "arm" and params.get("arm_enabled"):
-            x1 = max(0.0, min(params.get("arm_x1", 0.0), params.get("arm_x2", 0.0)) - context_pad)
-            x2 = min(float(w), max(params.get("arm_x1", 0.0), params.get("arm_x2", 0.0)) + context_pad)
-            y1 = max(0.0, min(params.get("arm_y1", 0.0), params.get("arm_y2", 0.0)) - context_pad)
-            y2 = min(float(h), max(params.get("arm_y1", 0.0), params.get("arm_y2", 0.0)) + context_pad)
-            pad = max(1.0, params.get("arm_stroke", params.get("stem_or_arm", 1.0)) * 0.8)
-            return (xx >= (x1 - pad)) & (xx <= (x2 + pad)) & (yy >= (y1 - pad)) & (yy <= (y2 + pad))
-        if element == "text" and params.get("draw_text", True):
-            x1, y1, x2, y2 = Action._textBbox(params)
-            x1 = max(0.0, x1 - context_pad)
-            y1 = max(0.0, y1 - context_pad)
-            x2 = min(float(w), x2 + context_pad)
-            y2 = min(float(h), y2 + context_pad)
-            return (xx >= x1) & (xx <= x2) & (yy >= y1) & (yy <= y2)
-        return None
+        return element_mask_helpers.elementRegionMaskImpl(
+            h,
+            w,
+            params,
+            element,
+            np_module=np,
+            text_bbox_fn=Action._textBbox,
+            apply_circle_geometry_penalty=apply_circle_geometry_penalty,
+        )
 
     @staticmethod
     def _textBbox(params: dict) -> tuple[float, float, float, float]:
-        """Approximate text bounding box for semantic badge text modes."""
-        cx = float(params.get("cx", 0.0))
-        cy = float(params.get("cy", 0.0))
-        r = max(1.0, float(params.get("r", 1.0)))
-        mode = str(params.get("text_mode", "")).lower()
-
-        if mode == "voc":
-            font_size = max(4.0, r * float(params.get("voc_font_scale", 0.52)))
-            width = font_size * 1.95
-            height = font_size * 0.90
-            y = cy + float(params.get("voc_dy", 0.0))
-            return (cx - (width / 2.0), y - (height / 2.0), cx + (width / 2.0), y + (height / 2.0))
-
-        if mode == "co2":
-            layout = Action._co2Layout(params)
-            x1 = float(layout["x1"])
-            x2 = float(layout["x2"])
-            y = float(layout["y_base"])
-            height = float(layout["height"])
-            return (x1, y - (height / 2.0), x2, y + (height / 2.0))
-
-        # path/path_t fallback via known glyph bounds.
-        s = float(params.get("s", 0.0))
-        tx = float(params.get("tx", cx))
-        ty = float(params.get("ty", cy))
-        xmin, ymin, xmax, ymax = Action._glyphBbox(params.get("text_mode", "path"))
-        x1 = tx + (xmin * s)
-        y1 = ty + (ymin * s)
-        x2 = tx + (xmax * s)
-        y2 = ty + (ymax * s)
-        return (x1, y1, x2, y2)
+        return element_mask_helpers.textBboxImpl(
+            params,
+            co2_layout_fn=Action._co2Layout,
+            glyph_bbox_fn=Action._glyphBbox,
+        )
 
     @staticmethod
     def _foregroundMask(img: np.ndarray) -> np.ndarray:
-        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-        _, fg_otsu = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
-
-        # Tiny anti-aliased badges can have only a few gray levels; a pure Otsu
-        # split then frequently drops the ring entirely. Blend in a gentle local
-        # contrast cue so faint circular strokes remain available to downstream
-        # semantic checks without over-activating the white background.
-        blur = cv2.GaussianBlur(gray, (3, 3), 0)
-        local_contrast = cv2.absdiff(gray, blur)
-        contrast_thresh = max(2, int(round(float(np.percentile(local_contrast, 82)))))
-        fg_contrast = local_contrast >= contrast_thresh
-
-        fg = (fg_otsu > 0) | fg_contrast
-        fg_u8 = fg.astype(np.uint8) * 255
-        kernel = np.ones((2, 2), dtype=np.uint8)
-        fg_u8 = cv2.morphologyEx(fg_u8, cv2.MORPH_CLOSE, kernel, iterations=1)
-        return fg_u8 > 0
+        return element_mask_helpers.foregroundMaskImpl(img, cv2_module=cv2, np_module=np)
 
     @staticmethod
     def _circleFromForegroundMask(fg_mask: np.ndarray) -> tuple[float, float, float] | None:
-        """Infer a coarse circle from the foreground mask when Hough is too brittle."""
-        mask_u8 = (fg_mask.astype(np.uint8)) * 255
-        contours, _ = cv2.findContours(mask_u8, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-        if not contours:
-            return None
-
-        h, w = fg_mask.shape[:2]
-        min_side = float(max(1, min(h, w)))
-        best: tuple[float, float, float, float] | None = None
-
-        for cnt in contours:
-            area = float(cv2.contourArea(cnt))
-            if area < max(4.0, min_side * 0.35):
-                continue
-            x, y, bw, bh = cv2.boundingRect(cnt)
-            if bw < 3 or bh < 3:
-                continue
-            aspect = float(bw) / max(1.0, float(bh))
-            if not (0.65 <= aspect <= 1.35):
-                continue
-
-            (cx, cy), radius = cv2.minEnclosingCircle(cnt)
-            radius = float(radius)
-            if radius < max(2.5, min_side * 0.10) or radius > max(8.0, min_side * 0.55):
-                continue
-
-            dist = np.sqrt((cnt[:, 0, 0].astype(np.float32) - cx) ** 2 + (cnt[:, 0, 1].astype(np.float32) - cy) ** 2)
-            if dist.size == 0:
-                continue
-            radial_residual = float(np.mean(np.abs(dist - radius)))
-            circle_area = math.pi * radius * radius
-            fill_ratio = area / max(1.0, circle_area)
-            if fill_ratio < 0.30:
-                continue
-            bins = 12
-            coverage_bins = np.zeros(bins, dtype=np.uint8)
-            for px, py in cnt[:, 0, :]:
-                ang = math.atan2(float(py) - cy, float(px) - cx)
-                idx = int(((ang + math.pi) / (2.0 * math.pi)) * bins) % bins
-                coverage_bins[idx] = 1
-            coverage = int(np.sum(coverage_bins))
-            if coverage < 6:
-                continue
-
-            bbox_fill_ratio = area / max(1.0, float(bw * bh))
-            # Favor thin ring-like circles or broadly circular contour support.
-            if bbox_fill_ratio > 0.82 and radial_residual > max(1.0, radius * 0.22):
-                continue
-
-            score = radial_residual + abs(1.0 - aspect) * 3.0 + max(0, 7 - coverage) * 0.75
-            if best is None or score < best[0]:
-                best = (score, float(cx), float(cy), radius)
-
-        if best is None:
-            return None
-        return best[1], best[2], best[3]
+        return element_mask_helpers.circleFromForegroundMaskImpl(
+            fg_mask,
+            cv2_module=cv2,
+            np_module=np,
+            math_module=math,
+        )
 
     @staticmethod
     def _maskSupportsCircle(mask: np.ndarray | None) -> bool:
-        if mask is None:
-            return False
-        pixel_count = int(np.count_nonzero(mask))
-        if pixel_count < 4:
-            return False
-
-        bbox = Action._maskBbox(mask)
-        if bbox is None:
-            return False
-        x1, y1, x2, y2 = bbox
-        width = max(1.0, (x2 - x1) + 1.0)
-        height = max(1.0, (y2 - y1) + 1.0)
-        if not (0.60 <= (width / height) <= 1.40):
-            return False
-
-        cx = (x1 + x2) / 2.0
-        cy = (y1 + y2) / 2.0
-        approx_radius = max(1.0, (width + height) * 0.25)
-        area = width * height
-        density = float(pixel_count) / max(1.0, area)
-        if density < 0.04:
-            return False
-
-        ys, xs = np.where(mask)
-        bins = 12
-        coverage_bins = np.zeros(bins, dtype=np.uint8)
-        ring_tol = max(1.2, approx_radius * 0.45)
-        near_ring = 0
-        for py, px in zip(ys, xs, strict=False):
-            dist = math.hypot(float(px) - cx, float(py) - cy)
-            if abs(dist - approx_radius) > ring_tol:
-                continue
-            near_ring += 1
-            ang = math.atan2(float(py) - cy, float(px) - cx)
-            idx = int(((ang + math.pi) / (2.0 * math.pi)) * bins) % bins
-            coverage_bins[idx] = 1
-
-        coverage = int(np.sum(coverage_bins))
-        if coverage >= 4 and near_ring >= max(4, int(round(pixel_count * 0.35))):
-            return True
-
-        mask_u8 = (mask.astype(np.uint8)) * 255
-        contours, _ = cv2.findContours(mask_u8, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-        if not contours:
-            return False
-        cnt = max(contours, key=cv2.contourArea)
-        perimeter = float(cv2.arcLength(cnt, True))
-        if perimeter <= 0.0:
-            return False
-        contour_area = float(cv2.contourArea(cnt))
-        circularity = (4.0 * math.pi * contour_area) / max(1e-6, perimeter * perimeter)
-        return circularity >= 0.28 and density <= 0.72
+        return element_mask_helpers.maskSupportsCircleImpl(
+            mask,
+            mask_bbox_fn=Action._maskBbox,
+            cv2_module=cv2,
+            np_module=np,
+            math_module=math,
+        )
 
     @staticmethod
     def extractBadgeElementMask(img_orig: np.ndarray, params: dict, element: str) -> np.ndarray | None:
