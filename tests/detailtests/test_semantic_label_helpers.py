@@ -55,3 +55,30 @@ def test_normalize_centered_co2_label_adjusts_label_metrics() -> None:
     assert abs(float(normalized["co2_dx"])) <= 0.18 * 9.0
     assert abs(float(normalized["co2_dy"])) <= 0.20 * 9.0
     assert normalized["text_gray"] == 155
+
+
+def test_tune_ac0831_co2_badge_enforces_vertical_cluster_defaults() -> None:
+    tuned = semantic_label_helpers.tuneAc0831Co2BadgeImpl(
+        {"r": 7.0, "width": 15.0, "height": 15.0, "co2_dy": 0.0},
+        ac08_stroke_width_px=1,
+    )
+
+    assert tuned["co2_anchor_mode"] == "cluster"
+    assert tuned["co2_index_mode"] == "superscript"
+    assert float(tuned["co2_dy"]) >= 0.35
+    assert float(tuned["co2_superscript_min_gap_scale"]) >= 0.19
+
+
+def test_tune_ac0834_co2_badge_keeps_tiny_geometry_centered() -> None:
+    tuned = semantic_label_helpers.tuneAc0834Co2BadgeImpl(
+        {"cx": 8.0, "r": 2.0},
+        16,
+        12,
+        light_circle_stroke_gray=152,
+        ac08_stroke_width_px=1,
+    )
+
+    assert tuned["cy"] == 6.0
+    assert float(tuned["r"]) >= 12 * 0.4 * 0.95
+    assert tuned["arm_y1"] == 6.0
+    assert tuned["arm_x2"] == 16.0
