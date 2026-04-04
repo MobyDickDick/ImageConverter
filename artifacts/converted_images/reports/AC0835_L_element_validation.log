@@ -1,6 +1,6 @@
-run-meta: run_seed=124664291 pass_seed_offset=0 nonce_ns=1774772718656496000
+run-meta: run_seed=605903549 pass_seed_offset=0 nonce_ns=1775326107523767600
 status=semantic_ok
-redraw_variation: seed=126019064377 changed_params=cx:20.000->19.862 | cy:12.500->12.685 | r:11.000->10.986 | stroke_circle:1.000->0.962 | arm_stroke:1.000->1.058
+redraw_variation: seed=611452662276 changed_params=cx:20.000->19.957 | cy:12.500->12.342 | r:11.000->11.136 | stroke_circle:1.000->0.922 | arm_stroke:1.000->1.067
 semantic-guard: Textmodus aktiv (voc).
 Runde 1: elementweise Validierung gestartet
 circle: Fehler=132.945
@@ -11,6 +11,7 @@ arm: Element konnte nicht extrahiert werden
 text: Fehler=133.084
 text: Breiten-Stochastic-Survivor aktiviert (voc_font_scale=1.012, err=144.550)
 text: Breiten-Bracketing voc_font_scale 0.600->1.012; Kandidaten=0.900->147.332, 1.125->148.209, 1.350->155.379, 1.650->157.941, 1.950->156.036, 2.175->149.777, 2.400->153.879
+global-search: übersprungen (zu wenige aktive Parameter; benötigt >=4)
 Runde 1: Gesamtfehler=41.069
 Runde 2: elementweise Validierung gestartet
 circle: Fehler=119.275
@@ -20,6 +21,7 @@ circle: Radius-Bracketing keine relevante Änderung (r: 11.000, best_err=119.275
 arm: Element konnte nicht extrahiert werden
 text: Fehler=144.550
 text: Breiten-Bracketing keine relevante Änderung (voc_font_scale: 1.012); Kandidaten=0.900->147.332, 1.012->144.550, 1.125->148.209, 1.164->151.107, 1.350->155.379, 1.650->157.941, 1.950->156.036, 2.175->149.777, 2.400->153.879
+global-search: übersprungen (zu wenige aktive Parameter; benötigt >=4)
 Runde 2: Gesamtfehler=41.069
 stagnation_detected: identischer Parameter-Fingerprint und praktisch unveränderter Gesamtfehler
 switch_to_fallback_search: deaktiviere Circle-Geometry-Penalty für eine letzte Ausweichrunde
@@ -29,6 +31,7 @@ circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.
 arm: Element konnte nicht extrahiert werden
 text: Fehler=144.550
 text: Breiten-Bracketing keine relevante Änderung (voc_font_scale: 1.012); Kandidaten=0.900->147.332, 1.012->144.550, 1.125->148.209, 1.164->151.107, 1.350->155.379, 1.650->157.941, 1.950->156.036, 2.175->149.777, 2.400->153.879
+global-search: übersprungen (zu wenige aktive Parameter; benötigt >=4)
 Runde 3: Gesamtfehler=41.069
 stagnation_detected: identischer Parameter-Fingerprint und praktisch unveränderter Gesamtfehler
 stopped_due_to_stagnation: Validierung vorzeitig beendet
