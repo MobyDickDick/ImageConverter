@@ -86,6 +86,7 @@ focused on the actual project scope.
   - 2026-04-04: Beschreibungsfragment-Helfer (`_collectDescriptionFragments`) in `src/iCCModules/imageCompositeConverterAudit.py` ausgelagert; `src/imageCompositeConverter.py` delegiert weiterhin kompatibel über Wrapper.
   - 2026-04-04: Element-Ausrichtungshelfer (`_applyElementAlignmentStep`) in `src/iCCModules/imageCompositeConverterElementValidation.py` ausgelagert; `src/imageCompositeConverter.py` delegiert weiterhin kompatibel über Wrapper.
   - 2026-04-04: Successful-Conversion-Qualitätshelfer (`_loadIterationLogRows`, `_findImagePathByVariant`) in neues Modul `src/iCCModules/imageCompositeConverterSuccessfulConversionQuality.py` ausgelagert; `src/imageCompositeConverter.py` delegiert weiterhin kompatibel über Wrapper.
+  - 2026-04-04: Successful-Conversion-Qualitäts-Metrikblock (`collectSuccessfulConversionQualityMetrics`) in `src/iCCModules/imageCompositeConverterSuccessfulConversionQuality.py` ausgelagert; `src/imageCompositeConverter.py` delegiert weiterhin kompatibel über den Modul-Entry-Point.
   - Nächster geplanter Schritt: semantische Prüf- und weitere Optimierungsblöcke in denselben kleinen Schritten extrahieren.
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.
