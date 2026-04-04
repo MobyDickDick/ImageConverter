@@ -1,6 +1,6 @@
-run-meta: run_seed=308696112 pass_seed_offset=0 nonce_ns=1775237376106573300
+run-meta: run_seed=763528838 pass_seed_offset=0 nonce_ns=1775290632790442300
 status=semantic_ok
-redraw_variation: seed=312153807167 changed_params=cx:7.500->7.544 | cy:8.000->8.174 | r:7.000->7.061 | stroke_circle:1.000->0.922 | stem_width:1.000->1.030
+redraw_variation: seed=770763460902 changed_params=cx:7.500->7.378 | cy:8.000->7.917 | r:7.000->6.884 | stroke_circle:1.000->0.882 | stem_width:1.000->0.946
 semantic-guard: Text bewusst deaktiviert (plain-ring Familie ohne Buchstabe).
 small_variant_mode_active: reason=min_dim, min_dim=14.000, mask_dilate_px=1, text_mode=path_t, arm_min_ratio=0.000, stem_min_ratio=0.700
 Runde 1: elementweise Validierung gestartet
@@ -23,9 +23,9 @@ global-search: Runde 2 best_err=10.557, akzeptierte_kandidaten=0, sigma_mittel=1
 global-search: near-optimum-plateau (runde=2, punkte=1, epsilon=0.211, mittlere_spannweite=0.000, stabilitaet=stabil, spannweite=cx:0.000; cy:0.000; r:0.000; stem_x:0.000)
 global-search: plateau-repräsentant (runde=2, kandidat=best_sample, err=10.557, begründung=niedrigster Fehler in dieser Runde)
 global-search: Runde 3 best_err=10.557, akzeptierte_kandidaten=0, sigma_mittel=1.376
-global-search: near-optimum-plateau (runde=3, punkte=1, epsilon=0.211, mittlere_spannweite=0.000, stabilitaet=stabil, spannweite=cx:0.000; cy:0.000; r:0.000; stem_x:0.000)
+global-search: near-optimum-plateau (runde=3, punkte=2, epsilon=0.211, mittlere_spannweite=0.125, stabilitaet=stabil, spannweite=cx:0.000; cy:0.000; r:0.500; stem_x:0.000)
 global-search: plateau-repräsentant (runde=3, kandidat=best_sample, err=10.557, begründung=niedrigster Fehler in dieser Runde)
-global-search: deterministischer track gestartet (seed=308700211, schritte=3, start_err=10.557)
+global-search: deterministischer track gestartet (seed=763532937, schritte=3, start_err=10.557)
 global-search: deterministischer track (pass=1, verbesserungen=0, best_err=10.557)
 global-search: deterministischer track (pass=2, verbesserungen=0, best_err=10.557)
 global-search: track-vergleich (stochastic_err=10.557, deterministic_err=10.557, gewählt=stochastic)
@@ -51,9 +51,9 @@ global-search: Runde 2 best_err=10.557, akzeptierte_kandidaten=0, sigma_mittel=1
 global-search: near-optimum-plateau (runde=2, punkte=1, epsilon=0.211, mittlere_spannweite=0.000, stabilitaet=stabil, spannweite=cx:0.000; cy:0.000; r:0.000; stem_x:0.000)
 global-search: plateau-repräsentant (runde=2, kandidat=best_sample, err=10.557, begründung=niedrigster Fehler in dieser Runde)
 global-search: Runde 3 best_err=10.557, akzeptierte_kandidaten=0, sigma_mittel=1.376
-global-search: near-optimum-plateau (runde=3, punkte=1, epsilon=0.211, mittlere_spannweite=0.000, stabilitaet=stabil, spannweite=cx:0.000; cy:0.000; r:0.000; stem_x:0.000)
+global-search: near-optimum-plateau (runde=3, punkte=2, epsilon=0.211, mittlere_spannweite=0.125, stabilitaet=stabil, spannweite=cx:0.000; cy:0.000; r:0.500; stem_x:0.000)
 global-search: plateau-repräsentant (runde=3, kandidat=best_sample, err=10.557, begründung=niedrigster Fehler in dieser Runde)
-global-search: deterministischer track gestartet (seed=308700211, schritte=3, start_err=10.557)
+global-search: deterministischer track gestartet (seed=763532937, schritte=3, start_err=10.557)
 global-search: deterministischer track (pass=1, verbesserungen=0, best_err=10.557)
 global-search: deterministischer track (pass=2, verbesserungen=0, best_err=10.557)
 global-search: track-vergleich (stochastic_err=10.557, deterministic_err=10.557, gewählt=stochastic)
@@ -79,9 +79,9 @@ global-search: Runde 2 best_err=10.557, akzeptierte_kandidaten=0, sigma_mittel=1
 global-search: near-optimum-plateau (runde=2, punkte=1, epsilon=0.211, mittlere_spannweite=0.000, stabilitaet=stabil, spannweite=cx:0.000; cy:0.000; r:0.000; stem_x:0.000)
 global-search: plateau-repräsentant (runde=2, kandidat=best_sample, err=10.557, begründung=niedrigster Fehler in dieser Runde)
 global-search: Runde 3 best_err=10.557, akzeptierte_kandidaten=0, sigma_mittel=1.376
-global-search: near-optimum-plateau (runde=3, punkte=1, epsilon=0.211, mittlere_spannweite=0.000, stabilitaet=stabil, spannweite=cx:0.000; cy:0.000; r:0.000; stem_x:0.000)
+global-search: near-optimum-plateau (runde=3, punkte=2, epsilon=0.211, mittlere_spannweite=0.125, stabilitaet=stabil, spannweite=cx:0.000; cy:0.000; r:0.500; stem_x:0.000)
 global-search: plateau-repräsentant (runde=3, kandidat=best_sample, err=10.557, begründung=niedrigster Fehler in dieser Runde)
-global-search: deterministischer track gestartet (seed=308700211, schritte=3, start_err=10.557)
+global-search: deterministischer track gestartet (seed=763532937, schritte=3, start_err=10.557)
 global-search: deterministischer track (pass=1, verbesserungen=0, best_err=10.557)
 global-search: deterministischer track (pass=2, verbesserungen=0, best_err=10.557)
 global-search: track-vergleich (stochastic_err=10.557, deterministic_err=10.557, gewählt=stochastic)
