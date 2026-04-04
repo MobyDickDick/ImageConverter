@@ -1,45 +1,45 @@
 [
   {
-    "filename": "AC0812_S.jpg",
-    "base_name": "AC0812",
+    "filename": "AC0814_L.jpg",
+    "base_name": "AC0814",
     "description_fragments": [
       {
         "source": "base_name",
-        "key": "AC0812",
-        "text": "Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 90° nach links gedreht."
+        "key": "AC0814",
+        "text": "Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 90° nach rechts gedreht."
       },
       {
         "source": "variant_name",
-        "key": "AC0812_S",
-        "text": "Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 90° nach links gedreht."
+        "key": "AC0814_L",
+        "text": "Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 90° nach rechts gedreht."
       },
       {
         "source": "canonical_base",
-        "key": "AC0812",
-        "text": "Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 90° nach links gedreht."
+        "key": "AC0814",
+        "text": "Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 90° nach rechts gedreht."
       },
       {
         "source": "canonical_variant",
-        "key": "AC0812",
-        "text": "Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 90° nach links gedreht."
+        "key": "AC0814",
+        "text": "Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 90° nach rechts gedreht."
       }
     ],
     "recognized_description_elements": [
-      "Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 90° nach links gedreht.",
-      "Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 90° nach links gedreht.",
-      "Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 90° nach links gedreht.",
-      "Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 90° nach links gedreht."
+      "Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 90° nach rechts gedreht.",
+      "Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 90° nach rechts gedreht.",
+      "Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 90° nach rechts gedreht.",
+      "Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 90° nach rechts gedreht."
     ],
     "description_lookup_keys": [
-      "AC0812",
-      "AC0812_S",
-      "AC0812",
-      "AC0812"
+      "AC0814",
+      "AC0814_L",
+      "AC0814",
+      "AC0814"
     ],
-    "description_text": "Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 90° nach links gedreht. Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 90° nach links gedreht. Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 90° nach links gedreht. Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 90° nach links gedreht.",
+    "description_text": "Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 90° nach rechts gedreht. Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 90° nach rechts gedreht. Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 90° nach rechts gedreht. Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 90° nach rechts gedreht.",
     "derived_elements": [
       "SEMANTIC: Kreis ohne Buchstabe",
-      "SEMANTIC: waagrechter Strich links vom Kreis"
+      "SEMANTIC: waagrechter Strich rechts vom Kreis"
     ],
     "semantic_priority_order": [
       "family_rule",
@@ -50,7 +50,7 @@
     "semantic_sources": {
       "family_rule": [
         "SEMANTIC: Kreis ohne Buchstabe",
-        "SEMANTIC: waagrechter Strich links vom Kreis"
+        "SEMANTIC: waagrechter Strich rechts vom Kreis"
       ],
       "description_heuristic": []
     },
