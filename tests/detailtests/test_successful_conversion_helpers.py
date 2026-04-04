@@ -72,3 +72,64 @@ def test_store_and_restore_successful_snapshot_roundtrip(tmp_path: Path) -> None
 
     assert restored is True
     assert (svg_out / f"{variant}.svg").read_text(encoding="utf-8") == "<svg>new</svg>"
+
+
+def test_latest_failed_manifest_entry_prefers_last_relevant_row(tmp_path: Path) -> None:
+    reports = tmp_path / "reports"
+    reports.mkdir()
+    (reports / "batch_failure_summary.csv").write_text(
+        "filename;status;reason\n"
+        "AC0800_L.jpg;ok;\n"
+        "AC0838_S.jpg;semantic_mismatch;missing circle\n"
+        "AC0839_M.jpg;batch_error;renderer crash\n",
+        encoding="utf-8",
+    )
+
+    entry = success_helpers.latestFailedConversionManifestEntryImpl(str(reports))
+
+    assert entry == {
+        "variant": "AC0839_M",
+        "status": "failed",
+        "failure_reason": "renderer crash",
+    }
+
+
+def test_write_successful_conversion_csv_table_sorts_and_formats(tmp_path: Path) -> None:
+    csv_path = tmp_path / "reports" / "successful_conversions.csv"
+    rows = [
+        {
+            "variant": "AC0831_S",
+            "status": "semantic_ok",
+            "image_found": True,
+            "svg_found": True,
+            "log_found": True,
+            "best_iteration": "12",
+            "diff_score": 1.0,
+            "error_per_pixel": 0.125,
+            "pixel_count": 10,
+            "total_delta2": 2.0,
+            "mean_delta2": 0.2,
+            "std_delta2": 0.05,
+        },
+        {
+            "variant": "AC0800_M",
+            "status": "semantic_ok",
+            "image_found": True,
+            "svg_found": True,
+            "log_found": True,
+            "best_iteration": "5",
+            "diff_score": 0.5,
+            "error_per_pixel": 0.02,
+            "pixel_count": 20,
+            "total_delta2": 1.0,
+            "mean_delta2": 0.05,
+            "std_delta2": 0.01,
+        },
+    ]
+
+    success_helpers.writeSuccessfulConversionCsvTableImpl(csv_path, rows)
+    written = csv_path.read_text(encoding="utf-8").splitlines()
+
+    assert written[0].startswith("variant;status;image_found")
+    assert written[1].startswith("AC0800_M;semantic_ok;1;1;1;5;0.500000;0.02000000")
+    assert written[2].startswith("AC0831_S;semantic_ok;1;1;1;12;1.000000;0.12500000")
