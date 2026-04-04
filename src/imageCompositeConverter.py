@@ -68,6 +68,7 @@ from src.iCCModules import imageCompositeConverterAc08Reporting as ac08_reportin
 from src.iCCModules import imageCompositeConverterRanking as ranking_helpers
 from src.iCCModules import imageCompositeConverterSuccessfulConversions as successful_conversions_helpers
 from src.iCCModules import imageCompositeConverterBestlist as conversion_bestlist_helpers
+from src.iCCModules import imageCompositeConverterElementValidation as element_validation_helpers
 from src.successfulConversions import (
     AC08_MITIGATION_STATUS,
     AC08_PREVIOUSLY_GOOD_VARIANTS,
@@ -5346,73 +5347,16 @@ class Action:
 
     @staticmethod
     def _refineStemGeometryFromMasks(params: dict, mask_orig: np.ndarray, mask_svg: np.ndarray, w: int) -> tuple[bool, str | None]:
-        """Refine stem width/position when validation detects a geometric mismatch."""
-        orig_bbox = Action._maskBbox(mask_orig)
-        svg_bbox = Action._maskBbox(mask_svg)
-        if orig_bbox is None or svg_bbox is None:
-            return False, None
-
-        ox1, _oy1, ox2, _oy2 = orig_bbox
-        sx1, _sy1, sx2, _sy2 = svg_bbox
-        orig_w = max(1.0, (ox2 - ox1) + 1.0)
-        svg_w = max(1.0, (sx2 - sx1) + 1.0)
-        ratio = svg_w / orig_w
-
-        expected_cx = float(params.get("cx", (ox1 + ox2) / 2.0))
-        stroke = float(params.get("stroke_circle", 1.0))
-        # Skip a small band right below the circle edge so anti-aliased ring/fill
-        # pixels do not inflate stem width estimation.
-        y_start = float(params.get("stem_top", 0.0)) + max(1.0, stroke * 2.0)
-        y_end = float(params.get("stem_bottom", mask_orig.shape[0]))
-        est = Action._estimateVerticalStemFromMask(mask_orig, expected_cx, int(y_start), int(y_end))
-
-        if est is not None:
-            est_cx, est_width = est
-            min_w = max(1.0, float(params.get("stroke_circle", 1.0)) * 0.70)
-            max_w = max(
-                min_w,
-                min(
-                    float(params.get("stem_width_max", float(w) * 0.18)),
-                    min(float(w) * 0.18, float(params.get("r", 1.0)) * 0.80),
-                ),
-            )
-            target_width = max(min_w, min(est_width, max_w))
-            if bool(params.get("lock_stem_center_to_circle", False)):
-                circle_cx = float(params.get("cx", est_cx))
-                max_offset = float(params.get("stem_center_lock_max_offset", max(0.35, target_width * 0.75)))
-                target_cx = float(Action._clipScalar(est_cx, circle_cx - max_offset, circle_cx + max_offset))
-            else:
-                target_cx = est_cx
-            estimate_mode = "iter"
-        else:
-            if 0.95 <= ratio <= 1.05:
-                return False, None
-            target_width = float(params.get("stem_width", svg_w)) * (orig_w / svg_w)
-            stem_width_cap = float(params.get("stem_width_max", float(w) * 0.20))
-            target_width = max(1.0, min(target_width, min(float(w) * 0.20, stem_width_cap)))
-            target_cx = (ox1 + ox2) / 2.0
-            estimate_mode = "bbox"
-
-        old_width = float(params.get("stem_width", svg_w))
-        width_delta = abs(target_width - old_width)
-        ratio_after = target_width / max(1.0, orig_w)
-
-        if width_delta < 0.05 and 0.90 <= ratio_after <= 1.12:
-            return False, None
-
-        stem_width_cap = float(params.get("stem_width_max", float(w) * 0.20))
-        target_width = min(target_width, stem_width_cap)
-        target_width = Action._snapIntPx(target_width, minimum=1.0)
-        old_x = float(params.get("stem_x", 0.0))
-        old_w = float(params.get("stem_width", 1.0))
-        new_x = Action._snapHalf(max(0.0, min(float(w) - target_width, target_cx - (target_width / 2.0))))
-        if abs(target_width - old_w) < 0.05 and abs(new_x - old_x) < 0.05:
-            return False, None
-        params["stem_width"] = target_width
-        params["stem_x"] = new_x
-        return True, (
-            f"stem: Breitenkorrektur mode={estimate_mode}, ratio={ratio:.3f}, "
-            f"alt={old_width:.3f}, neu={target_width:.3f}"
+        return element_validation_helpers.refineStemGeometryFromMasksImpl(
+            params,
+            mask_orig,
+            mask_svg,
+            w,
+            mask_bbox_fn=Action._maskBbox,
+            estimate_vertical_stem_from_mask_fn=Action._estimateVerticalStemFromMask,
+            clip_scalar_fn=Action._clipScalar,
+            snap_int_px_fn=Action._snapIntPx,
+            snap_half_fn=Action._snapHalf,
         )
 
     @staticmethod
@@ -5475,238 +5419,38 @@ class Action:
         apply_circle_geometry_penalty: bool = True,
         stop_when_error_below_threshold: bool = False,
     ) -> list[str]:
-        h, w = img_orig.shape[:2]
-        logs: list[str] = []
-        elements = ["circle"]
-        if params.get("stem_enabled"):
-            elements.append("stem")
-        if params.get("arm_enabled"):
-            elements.append("arm")
-        if params.get("draw_text", True):
-            elements.append("text")
-        best_params = copy.deepcopy(params)
-        best_full_err = float("inf")
-        previous_round_state: tuple[tuple[tuple[str, float], ...], float] | None = None
-        fallback_search_active = False
-        if bool(params.get("ac08_small_variant_mode", False)):
-            logs.append(
-                "small_variant_mode_active: "
-                f"reason={params.get('ac08_small_variant_reason', 'unknown')}, "
-                f"min_dim={float(params.get('ac08_small_variant_min_dim', 0.0)):.3f}, "
-                f"mask_dilate_px={int(params.get('validation_mask_dilate_px', 0) or 0)}, "
-                f"text_mode={params.get('text_mode', '')}, "
-                f"arm_min_ratio={float(params.get('arm_len_min_ratio', 0.0)):.3f}, "
-                f"stem_min_ratio={float(params.get('stem_len_min_ratio', 0.0)):.3f}"
-            )
-
-        def _stagnationFingerprint(current_params: dict) -> tuple[tuple[str, float], ...]:
-            tracked_keys = (
-                "cx",
-                "cy",
-                "r",
-                "arm_len",
-                "stem_width",
-                "arm_stroke",
-                "text_scale",
-                "co2_font_scale",
-                "voc_scale",
-            )
-            fingerprint: list[tuple[str, float]] = []
-            for key in tracked_keys:
-                value = current_params.get(key)
-                try:
-                    numeric_value = float(value)
-                except (TypeError, ValueError):
-                    continue
-                fingerprint.append((key, round(numeric_value, 4)))
-            return tuple(fingerprint)
-
-        for round_idx in range(max_rounds):
-            logs.append(f"Runde {round_idx + 1}: elementweise Validierung gestartet")
-            full_svg = Action.generate_badge_svg(w, h, params)
-            full_render = Action._fit_to_original_size(img_orig, Action.render_svg_to_numpy(full_svg, w, h))
-            if full_render is None:
-                logs.append("Abbruch: SVG konnte nicht gerendert werden")
-                break
-
-            if debug_out_dir:
-                full_diff = Action.create_diff_image(img_orig, full_render)
-                cv2.imwrite(os.path.join(debug_out_dir, f"round_{round_idx + 1:02d}_full_diff.png"), full_diff)
-
-            round_changed = False
-            for element in elements:
-                elem_svg = Action.generate_badge_svg(w, h, Action._elementOnlyParams(params, element))
-                elem_render = Action._fit_to_original_size(img_orig, Action.render_svg_to_numpy(elem_svg, w, h))
-                if elem_render is None:
-                    logs.append(f"{element}: Element-SVG konnte nicht gerendert werden")
-                    continue
-
-                mask_orig = Action.extract_badge_element_mask(img_orig, params, element)
-                mask_svg = Action.extract_badge_element_mask(elem_render, params, element)
-                if mask_orig is None or mask_svg is None:
-                    logs.append(f"{element}: Element konnte nicht extrahiert werden")
-                    continue
-
-                if debug_out_dir:
-                    elem_focus_mask = Action._elementRegionMask(h, w, params, element)
-                    elem_diff = Action.create_diff_image(img_orig, elem_render, elem_focus_mask)
-                    cv2.imwrite(
-                        os.path.join(debug_out_dir, f"round_{round_idx + 1:02d}_{element}_diff.png"),
-                        elem_diff,
-                    )
-
-                elem_err = Action._element_match_error(img_orig, elem_render, params, element, mask_orig=mask_orig, mask_svg=mask_svg)
-                logs.append(f"{element}: Fehler={elem_err:.3f}")
-
-                if element == "stem" and params.get("stem_enabled"):
-                    changed, refine_log = Action._refineStemGeometryFromMasks(params, mask_orig, mask_svg, w)
-                    if refine_log:
-                        logs.append(refine_log)
-                    if changed:
-                        round_changed = True
-                        logs.append("stem: Geometrie nach Elementabgleich aktualisiert")
-
-                width_changed = Action._optimize_element_width_bracket(img_orig, params, element, logs)
-                if width_changed:
-                    round_changed = True
-
-                extent_changed = Action._optimize_element_extent_bracket(img_orig, params, element, logs)
-                if extent_changed:
-                    round_changed = True
-
-                circle_geometry_penalty_active = apply_circle_geometry_penalty and not fallback_search_active
-                if element == "circle" and circle_geometry_penalty_active:
-                    center_changed = Action._optimize_circle_center_bracket(img_orig, params, logs)
-                    if center_changed:
-                        round_changed = True
-                    radius_changed = Action._optimize_circle_radius_bracket(img_orig, params, logs)
-                    if radius_changed:
-                        round_changed = True
-
-                # Color fitting is intentionally deferred to the end so
-                # geometry convergence is not biased by temporary palette noise.
-
-            global_search_changed = Action._optimize_global_parameter_vector_sampling(
-                img_orig,
-                params,
-                logs,
-            )
-            if global_search_changed:
-                round_changed = True
-
-            full_svg = Action.generate_badge_svg(w, h, params)
-            full_render = Action._fit_to_original_size(img_orig, Action.render_svg_to_numpy(full_svg, w, h))
-            full_err = Action.calculate_error(img_orig, full_render)
-            logs.append(f"Runde {round_idx + 1}: Gesamtfehler={full_err:.3f}")
-            if math.isfinite(full_err) and full_err < best_full_err:
-                best_full_err = full_err
-                best_params = copy.deepcopy(params)
-
-            current_round_state = (_stagnationFingerprint(params), round(float(full_err), 6))
-            if previous_round_state is not None:
-                same_fingerprint = current_round_state[0] == previous_round_state[0]
-                nearly_same_error = abs(current_round_state[1] - previous_round_state[1]) <= 1e-6
-                if same_fingerprint and nearly_same_error:
-                    logs.append(
-                        "stagnation_detected: identischer Parameter-Fingerprint und praktisch unveränderter Gesamtfehler"
-                    )
-                    adaptive_unlock_applied = Action._activateAc08AdaptiveLocks(
-                        params,
-                        logs,
-                        full_err=full_err,
-                        reason="identical_fingerprint",
-                    )
-                    if adaptive_unlock_applied:
-                        previous_round_state = None
-                        fallback_search_active = True
-                        if round_idx + 1 < max_rounds:
-                            logs.append(
-                                "switch_to_fallback_search: adaptive family-unlocks aktiviert und Circle-Geometry-Penalty deaktiviert"
-                            )
-                            continue
-                    if not fallback_search_active and round_idx + 1 < max_rounds:
-                        Action._releaseAc08AdaptiveLocks(
-                            params,
-                            logs,
-                            reason="stagnation_same_fingerprint",
-                            current_error=full_err,
-                        )
-                        fallback_search_active = True
-                        logs.append(
-                            "switch_to_fallback_search: deaktiviere Circle-Geometry-Penalty für eine letzte Ausweichrunde"
-                        )
-                        previous_round_state = current_round_state
-                        continue
-                    logs.append("stopped_due_to_stagnation: Validierung vorzeitig beendet")
-                    break
-            previous_round_state = current_round_state
-
-            if full_err <= 8.0:
-                if stop_when_error_below_threshold:
-                    logs.append("Gesamtfehler unter Schwellwert, Validierung beendet")
-                    break
-                logs.append("Gesamtfehler unter Schwellwert, Suche nach besserem Optimum wird fortgesetzt")
-            elif round_idx >= 1:
-                Action._releaseAc08AdaptiveLocks(
-                    params,
-                    logs,
-                    reason="high_residual_error",
-                    current_error=full_err,
-                )
-
-            if round_idx + 1 >= max_rounds:
-                break
-
-            if not round_changed:
-                adaptive_unlock_applied = Action._activateAc08AdaptiveLocks(
-                    params,
-                    logs,
-                    full_err=full_err,
-                    reason="no_geometry_movement",
-                )
-                if adaptive_unlock_applied:
-                    previous_round_state = None
-                    fallback_search_active = True
-                    if round_idx + 1 < max_rounds:
-                        logs.append(
-                            "switch_to_fallback_search: adaptive family-unlocks aktiviert und Circle-Geometry-Penalty deaktiviert"
-                        )
-                        continue
-                if not fallback_search_active and round_idx + 1 < max_rounds:
-                    Action._release_ac08_adaptive_locks(
-                        params,
-                        logs,
-                        reason="stagnation_no_geometry_change",
-                        current_error=full_err,
-                    )
-                    fallback_search_active = True
-                    logs.append(
-                        "stagnation_detected: keine relevante Geometrieänderung in der letzten Validierungsrunde"
-                    )
-                    logs.append(
-                        "switch_to_fallback_search: deaktiviere Circle-Geometry-Penalty für eine letzte Ausweichrunde"
-                    )
-                    continue
-                logs.append("stopped_due_to_stagnation: keine weitere Parameterbewegung erkennbar")
-                break
-
-        if math.isfinite(best_full_err):
-            params.clear()
-            params.update(best_params)
-
-        for element in elements:
-            if element == "text" and not params.get("draw_text", True):
-                continue
-            mask_orig = Action.extract_badge_element_mask(img_orig, params, element)
-            if mask_orig is None:
-                continue
-            color_changed = Action._optimize_element_color_bracket(img_orig, params, element, mask_orig, logs)
-            if color_changed:
-                logs.append(f"{element}: Farboptimierung in Abschlussphase angewendet")
-
-        params.update(Action._apply_canonical_badge_colors(params))
-
-        return logs
+        return element_validation_helpers.validateBadgeByElementsImpl(
+            img_orig,
+            params,
+            max_rounds=max_rounds,
+            debug_out_dir=debug_out_dir,
+            apply_circle_geometry_penalty=apply_circle_geometry_penalty,
+            stop_when_error_below_threshold=stop_when_error_below_threshold,
+            cv2_module=cv2,
+            copy_module=copy,
+            math_module=math,
+            os_module=os,
+            generate_badge_svg_fn=Action.generate_badge_svg,
+            fit_to_original_size_fn=Action._fit_to_original_size,
+            render_svg_to_numpy_fn=Action.render_svg_to_numpy,
+            create_diff_image_fn=Action.create_diff_image,
+            write_debug_image_fn=cv2.imwrite,
+            element_only_params_fn=Action._elementOnlyParams,
+            extract_badge_element_mask_fn=Action.extract_badge_element_mask,
+            element_region_mask_fn=Action._elementRegionMask,
+            element_match_error_fn=Action._element_match_error,
+            refine_stem_geometry_from_masks_fn=Action._refineStemGeometryFromMasks,
+            optimize_element_width_bracket_fn=Action._optimize_element_width_bracket,
+            optimize_element_extent_bracket_fn=Action._optimize_element_extent_bracket,
+            optimize_circle_center_bracket_fn=Action._optimize_circle_center_bracket,
+            optimize_circle_radius_bracket_fn=Action._optimize_circle_radius_bracket,
+            optimize_global_parameter_vector_sampling_fn=Action._optimize_global_parameter_vector_sampling,
+            calculate_error_fn=Action.calculate_error,
+            activate_ac08_adaptive_locks_fn=Action._activateAc08AdaptiveLocks,
+            release_ac08_adaptive_locks_fn=Action._release_ac08_adaptive_locks,
+            optimize_element_color_bracket_fn=Action._optimize_element_color_bracket,
+            apply_canonical_badge_colors_fn=Action._apply_canonical_badge_colors,
+        )
 
 
 def _semanticQualityFlags(base_name: str, validation_logs: list[str]) -> list[str]:
