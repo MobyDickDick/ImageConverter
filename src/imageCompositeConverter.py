@@ -56,12 +56,17 @@ from src.iCCModules import imageCompositeConverterOptimizationCircleSearch as ci
 from src.iCCModules import imageCompositeConverterOptimizationCircleRadius as circle_radius_optimization_helpers
 from src.iCCModules import imageCompositeConverterOptimizationCircleGeometry as circle_geometry_optimization_helpers
 from src.iCCModules import imageCompositeConverterOptimizationGlobalVector as global_vector_optimization_helpers
+from src.iCCModules import imageCompositeConverterOptimizationGlobalSearch as global_search_optimization_helpers
 from src.iCCModules import imageCompositeConverterMaskGeometry as mask_geometry_helpers
 from src.iCCModules import imageCompositeConverterTemplateTransfer as template_transfer_helpers
 from src.iCCModules import imageCompositeConverterSemanticGeometry as semantic_geometry_helpers
 from src.iCCModules import imageCompositeConverterSemanticHarmonization as semantic_harmonization_helpers
 from src.iCCModules import imageCompositeConverterRendering as rendering_helpers
 from src.iCCModules import imageCompositeConverterBatchReporting as batch_reporting_helpers
+from src.iCCModules import imageCompositeConverterConversionRows as conversion_row_helpers
+from src.iCCModules import imageCompositeConverterAc08Reporting as ac08_reporting_helpers
+from src.iCCModules import imageCompositeConverterRanking as ranking_helpers
+from src.iCCModules import imageCompositeConverterSuccessfulConversions as successful_conversions_helpers
 from src.successfulConversions import (
     AC08_MITIGATION_STATUS,
     AC08_PREVIOUSLY_GOOD_VARIANTS,
@@ -5039,298 +5044,23 @@ class Action:
         rounds: int = 3,
         samples_per_round: int = 16,
     ) -> bool:
-        """Global multi-parameter baseline search over the shared vector."""
-        if not bool(params.get("enable_global_search_mode", False)):
-            return False
-
-        near_optimum_eps_floor = 0.06
-        near_optimum_eps_rel = 0.02
-
-        h, w = img_orig.shape[:2]
-        bounds = Action._globalParameterVectorBounds(params, w, h)
-        vector = GlobalParameterVector.fromParams(params)
-
-        active_keys: list[str] = []
-        for key in ("cx", "cy", "r", "stem_x", "stem_width", "text_x", "text_y", "text_scale"):
-            value = getattr(vector, key)
-            if value is None:
-                continue
-            _low, _high, locked, _source = bounds[key]
-            if locked:
-                continue
-            active_keys.append(key)
-
-        if len(active_keys) < 4:
-            logs.append(
-                "global-search: übersprungen (zu wenige aktive Parameter; benötigt >=4)"
-            )
-            return False
-
-        def clampVector(candidate: GlobalParameterVector) -> GlobalParameterVector:
-            data = dataclasses.asdict(candidate)
-            for key in active_keys:
-                low, high, _locked, _source = bounds[key]
-                current_value = float(data[key])
-                clipped = float(Action._clip_scalar(current_value, low, high))
-                if key in {"cx", "cy", "r", "stem_x", "stem_width", "text_x", "text_y"}:
-                    clipped = float(Action._snap_half(clipped))
-                data[key] = clipped
-            return GlobalParameterVector(**data)
-
-        def evalVector(candidate: GlobalParameterVector) -> float:
-            probe = candidate.apply_to_params(params)
-            if probe.get("arm_enabled"):
-                Action._reanchorArmToCircleEdge(probe, float(probe.get("r", 0.0)))
-            if probe.get("stem_enabled"):
-                probe["stem_top"] = float(probe.get("cy", 0.0)) + float(probe.get("r", 0.0))
-                if bool(probe.get("lock_stem_center_to_circle", False)):
-                    stem_w = float(probe.get("stem_width", 1.0))
-                    probe["stem_x"] = Action._snap_half(
-                        max(0.0, min(float(w) - stem_w, float(probe.get("cx", 0.0)) - (stem_w / 2.0)))
-                    )
-            return Action._full_badge_error_for_params(img_orig, probe)
-
-        def withinHardBounds(candidate: GlobalParameterVector) -> tuple[bool, str]:
-            for key in active_keys:
-                low, high, _locked, _source = bounds[key]
-                value = float(getattr(candidate, key))
-                if value < low - 1e-6 or value > high + 1e-6:
-                    return False, f"{key}={value:.3f} außerhalb [{low:.3f}, {high:.3f}]"
-            return True, "ok"
-
-        seed = 4099 + int(Action.STOCHASTIC_RUN_SEED) + int(Action.STOCHASTIC_SEED_OFFSET)
-        rng = Action._make_rng(seed)
-        start_vector = clampVector(vector)
-        start_err = evalVector(start_vector)
-        if not math.isfinite(start_err):
-            return False
-
-        def runStochasticTrack() -> tuple[GlobalParameterVector, float, bool]:
-            best = start_vector
-            best_err = start_err
-            improved = False
-            spans = {key: max(0.25, float(bounds[key][1] - bounds[key][0]) * 0.20) for key in active_keys}
-            plateau_rounds: list[dict[str, float | int]] = []
-            logs.append(
-                f"global-search: gestartet (aktive_parameter={','.join(active_keys)}, samples_pro_runde={max(8, int(samples_per_round))}, start_err={best_err:.3f})"
-            )
-            logs.append(
-                f"global-search: near-optimum-definition (err <= best_err + epsilon, epsilon=max({near_optimum_eps_floor:.2f}, best_err*{near_optimum_eps_rel:.2f}))"
-            )
-
-            for round_idx in range(max(1, int(rounds))):
-                accepted = 0
-                finite_round: list[tuple[GlobalParameterVector, float]] = [(best, best_err)]
-                for _ in range(max(8, int(samples_per_round))):
-                    sample_data = dataclasses.asdict(best)
-                    for key in active_keys:
-                        low, high, _locked, _source = bounds[key]
-                        sigma = spans[key]
-                        sample_data[key] = float(Action._clip_scalar(rng.normal(float(sample_data[key]), sigma), low, high))
-                    candidate = clampVector(GlobalParameterVector(**sample_data))
-                    candidate_err = evalVector(candidate)
-                    if math.isfinite(candidate_err):
-                        finite_round.append((candidate, candidate_err))
-                    if math.isfinite(candidate_err) and candidate_err + 0.05 < best_err:
-                        best = candidate
-                        best_err = candidate_err
-                        accepted += 1
-                        improved = True
-
-                round_best_err = min(err for _cand, err in finite_round)
-                round_best = min(finite_round, key=lambda item: item[1])[0]
-                epsilon = max(near_optimum_eps_floor, round_best_err * near_optimum_eps_rel)
-                plateau = [(cand, err) for cand, err in finite_round if err <= round_best_err + epsilon]
-                span_labels: list[str] = []
-                mean_span = 0.0
-                if plateau:
-                    span_values: list[float] = []
-                    for key in active_keys:
-                        key_values = [float(getattr(cand, key)) for cand, _err in plateau]
-                        key_span = max(key_values) - min(key_values)
-                        span_values.append(key_span)
-                        span_labels.append(f"{key}:{key_span:.3f}")
-                    mean_span = sum(span_values) / max(1, len(span_values))
-
-                representative = round_best
-                representative_err = round_best_err
-                representative_source = "best_sample"
-                representative_reason = "niedrigster Fehler in dieser Runde"
-
-                if plateau:
-                    weighted_data = dataclasses.asdict(round_best)
-                    weight_sum = 0.0
-                    for cand, cand_err in plateau:
-                        weight = 1.0 / (1.0 + max(0.0, float(cand_err) - round_best_err))
-                        weight_sum += weight
-                        for key in active_keys:
-                            weighted_data[key] = float(weighted_data[key]) + (float(getattr(cand, key)) * weight)
-                    if weight_sum > 0.0:
-                        for key in active_keys:
-                            weighted_data[key] = float(weighted_data[key]) / (1.0 + weight_sum)
-                        centroid_raw = GlobalParameterVector(**weighted_data)
-                        centroid = clampVector(centroid_raw)
-                        centroid_safe, centroid_msg = withinHardBounds(centroid)
-                        if not centroid_safe:
-                            logs.append(
-                                f"global-search: schwerpunkt verworfen (runde={round_idx + 1}, grund={centroid_msg})"
-                            )
-                        else:
-                            centroid_err = evalVector(centroid)
-                            if math.isfinite(centroid_err):
-                                near_best_margin = max(0.02, epsilon * 0.30)
-                                if centroid_err <= round_best_err + near_best_margin and len(plateau) >= 3:
-                                    representative = centroid
-                                    representative_err = centroid_err
-                                    representative_source = "schwerpunkt"
-                                    representative_reason = (
-                                        "nahe am Bestpunkt und robuster Zentrumskandidat des Plateau-Bereichs"
-                                    )
-                                elif centroid_err < round_best_err:
-                                    representative = centroid
-                                    representative_err = centroid_err
-                                    representative_source = "schwerpunkt"
-                                    representative_reason = "geringerer Fehler als best_sample"
-                            else:
-                                logs.append(
-                                    "global-search: schwerpunkt verworfen "
-                                    f"(runde={round_idx + 1}, grund=fehlerbewertung nicht endlich)"
-                                )
-
-                if representative_source == "schwerpunkt":
-                    if representative_err <= best_err + 0.02:
-                        best = representative
-                        best_err = representative_err
-                        improved = True
-                elif representative_err + 0.01 < best_err:
-                    best = representative
-                    best_err = representative_err
-                    improved = True
-
-                stability = "n/a"
-                if plateau_rounds:
-                    prev_center = float(plateau_rounds[-1]["center_mean"])
-                    center_now = 0.0
-                    if plateau:
-                        center_now = sum(
-                            float(getattr(plateau[0][0], key) if len(plateau) == 1 else (min(float(getattr(cand, key)) for cand, _ in plateau) + max(float(getattr(cand, key)) for cand, _ in plateau)) / 2.0)
-                            for key in active_keys
-                        ) / max(1, len(active_keys))
-                    center_shift = abs(center_now - prev_center)
-                    stability = "stabil" if center_shift <= 0.35 else "dynamisch"
-                    plateau_rounds.append({"size": len(plateau), "mean_span": mean_span, "center_mean": center_now})
-                else:
-                    center_now = 0.0
-                    if plateau:
-                        center_now = sum(
-                            float(getattr(plateau[0][0], key) if len(plateau) == 1 else (min(float(getattr(cand, key)) for cand, _ in plateau) + max(float(getattr(cand, key)) for cand, _ in plateau)) / 2.0)
-                            for key in active_keys
-                        ) / max(1, len(active_keys))
-                    plateau_rounds.append({"size": len(plateau), "mean_span": mean_span, "center_mean": center_now})
-                for key in active_keys:
-                    spans[key] = max(0.12, spans[key] * 0.78)
-                logs.append(
-                    f"global-search: Runde {round_idx + 1} best_err={best_err:.3f}, akzeptierte_kandidaten={accepted}, sigma_mittel={sum(spans.values()) / max(1, len(spans)):.3f}"
-                )
-                logs.append(
-                    "global-search: near-optimum-plateau "
-                    f"(runde={round_idx + 1}, punkte={len(plateau)}, epsilon={epsilon:.3f}, "
-                    f"mittlere_spannweite={mean_span:.3f}, stabilitaet={stability}, "
-                    f"spannweite={'; '.join(span_labels) if span_labels else 'n/a'})"
-                )
-                logs.append(
-                    "global-search: plateau-repräsentant "
-                    f"(runde={round_idx + 1}, kandidat={representative_source}, err={representative_err:.3f}, "
-                    f"begründung={representative_reason})"
-                )
-            return best, best_err, improved
-
-        def runDeterministicTrack() -> tuple[GlobalParameterVector, float, bool]:
-            best = start_vector
-            best_err = start_err
-            improved = False
-            rounded_keys = {"cx", "cy", "r", "stem_x", "stem_width", "text_x", "text_y"}
-            step_sizes = {
-                key: max(0.10, (0.5 if key in rounded_keys else 0.10), float(bounds[key][1] - bounds[key][0]) * 0.18)
-                for key in active_keys
-            }
-            logs.append(
-                "global-search: deterministischer track gestartet "
-                f"(seed={int(seed)}, schritte={max(2, int(rounds))}, start_err={best_err:.3f})"
-            )
-            for pass_idx in range(max(2, int(rounds))):
-                pass_improved = 0
-                for key in active_keys:
-                    step = step_sizes[key]
-                    if key in rounded_keys:
-                        step = max(0.5, round(step * 2.0) / 2.0)
-                    else:
-                        step = max(0.10, step)
-                    candidates: list[tuple[GlobalParameterVector, float]] = []
-                    for direction in (-1.0, 1.0):
-                        cand_data = dataclasses.asdict(best)
-                        cand_data[key] = float(cand_data[key]) + (direction * step)
-                        cand = clampVector(GlobalParameterVector(**cand_data))
-                        cand_err = evalVector(cand)
-                        if math.isfinite(cand_err):
-                            candidates.append((cand, cand_err))
-                    if not candidates:
-                        continue
-                    cand_best, cand_best_err = min(candidates, key=lambda item: item[1])
-                    if cand_best_err + 0.01 < best_err:
-                        best = cand_best
-                        best_err = cand_best_err
-                        improved = True
-                        pass_improved += 1
-                    step_sizes[key] = max(0.10 if key not in rounded_keys else 0.5, step_sizes[key] * (0.70 if pass_improved else 0.82))
-                logs.append(
-                    "global-search: deterministischer track "
-                    f"(pass={pass_idx + 1}, verbesserungen={pass_improved}, best_err={best_err:.3f})"
-                )
-                if pass_improved == 0 and pass_idx >= 1:
-                    break
-            return best, best_err, improved
-
-        stochastic_best, stochastic_err, stochastic_improved = runStochasticTrack()
-        deterministic_best, deterministic_err, deterministic_improved = runDeterministicTrack()
-
-        winner_name = "stochastic"
-        winner = stochastic_best
-        winner_err = stochastic_err
-        winner_improved = stochastic_improved
-        if math.isfinite(deterministic_err) and (not math.isfinite(winner_err) or deterministic_err + 1e-6 < winner_err):
-            winner_name = "deterministic"
-            winner = deterministic_best
-            winner_err = deterministic_err
-            winner_improved = deterministic_improved
-
-        logs.append(
-            "global-search: track-vergleich "
-            f"(stochastic_err={stochastic_err:.3f}, deterministic_err={deterministic_err:.3f}, gewählt={winner_name})"
+        return global_search_optimization_helpers.optimizeGlobalParameterVectorSamplingImpl(
+            img_orig,
+            params,
+            logs,
+            rounds=rounds,
+            samples_per_round=samples_per_round,
+            global_parameter_vector_cls=GlobalParameterVector,
+            global_parameter_vector_bounds_fn=Action._globalParameterVectorBounds,
+            clip_scalar_fn=Action._clip_scalar,
+            snap_half_fn=Action._snap_half,
+            make_rng_fn=Action._make_rng,
+            reanchor_arm_to_circle_edge_fn=Action._reanchorArmToCircleEdge,
+            full_badge_error_for_params_fn=Action._full_badge_error_for_params,
+            log_global_parameter_vector_fn=Action._logGlobalParameterVector,
+            stochastic_run_seed=Action.STOCHASTIC_RUN_SEED,
+            stochastic_seed_offset=Action.STOCHASTIC_SEED_OFFSET,
         )
-
-        if not winner_improved and winner_err >= start_err - 0.01:
-            logs.append("global-search: keine relevante Verbesserung")
-            return False
-
-        old_values = {key: float(getattr(vector, key)) for key in active_keys}
-        new_values = {key: float(getattr(winner, key)) for key in active_keys}
-        params.update(winner.applyToParams(params))
-        delta_labels = [
-            f"{key} {old_values[key]:.3f}->{new_values[key]:.3f}"
-            for key in active_keys
-            if abs(new_values[key] - old_values[key]) >= 0.01
-        ]
-        if params.get("arm_enabled"):
-            Action._reanchorArmToCircleEdge(params, float(params.get("r", 0.0)))
-        if params.get("stem_enabled"):
-            params["stem_top"] = float(params.get("cy", 0.0)) + float(params.get("r", 0.0))
-        Action._logGlobalParameterVector(logs, params, w, h, label=f"global-search: final ({winner_name})")
-        logs.append(
-            "global-search: übernommen "
-            f"(best_err={winner_err:.3f}, track={winner_name}, verbessert={', '.join(delta_labels) if delta_labels else 'keine sichtbare delta-liste'})"
-        )
-        return True
 
     @staticmethod
     def _enforceSemanticConnectorExpectation(base_name: str, semantic_elements: list[str], params: dict, w: int, h: int) -> dict:
@@ -6540,132 +6270,20 @@ def _loadExistingConversionRows(output_root: str, folder_path: str) -> list[dict
     This lets an earlier conversion batch (for example the already converted
     ``AC08*`` symbols) improve later runs without requiring a fresh full pass.
     """
-    reports_path = Path(_reportsOutputDir(output_root)) / "Iteration_Log.csv"
-    svg_out_dir = Path(_convertedSvgOutputDir(output_root))
-    if not reports_path.exists() or not svg_out_dir.exists():
-        return []
-
-    rows: list[dict[str, object]] = []
-    try:
-        with reports_path.open("r", encoding="utf-8-sig", newline="") as f:
-            reader = csv.DictReader(f, delimiter=";")
-            for raw_row in reader:
-                filename = str(raw_row.get("Dateiname", "")).strip()
-                if not filename:
-                    continue
-
-                variant = os.path.splitext(filename)[0].upper()
-                svg_path = svg_out_dir / f"{variant}.svg"
-                if not svg_path.exists():
-                    continue
-
-                geometry = _readSvgGeometry(str(svg_path))
-                if geometry is None:
-                    continue
-                w, h, params = geometry
-                base = getBaseNameFromFile(variant).upper()
-                if _isSemanticTemplateVariant(base, params):
-                    params["mode"] = "semantic_badge"
-
-                error_per_pixel_raw = str(raw_row.get("FehlerProPixel", "")).strip().replace(",", ".")
-                diff_score_raw = str(raw_row.get("Diff-Score", "")).strip().replace(",", ".")
-                best_iter_raw = str(raw_row.get("Beste Iteration", "")).strip()
-                image_path = Path(folder_path) / filename
-                if image_path.exists():
-                    try:
-                        width, height = _sniffRasterSize(image_path)
-                        w = int(width)
-                        h = int(height)
-                    except Exception:
-                        pass
-
-                try:
-                    error_per_pixel = float(error_per_pixel_raw)
-                except ValueError:
-                    error_per_pixel = float("inf")
-                try:
-                    best_error = float(diff_score_raw)
-                except ValueError:
-                    best_error = float("inf")
-                try:
-                    best_iter = int(best_iter_raw)
-                except ValueError:
-                    best_iter = 0
-
-                rows.append(
-                    {
-                        "filename": filename,
-                        "params": params,
-                        "best_iter": best_iter,
-                        "best_error": best_error,
-                        "error_per_pixel": error_per_pixel,
-                        "w": int(w),
-                        "h": int(h),
-                        "base": base,
-                        "variant": variant,
-                    }
-                )
-    except OSError:
-        return []
-
-    return [
-        row
-        for row in rows
-        if math.isfinite(float(row.get("error_per_pixel", float("inf"))))
-    ]
+    return conversion_row_helpers.loadExistingConversionRowsImpl(
+        output_root=output_root,
+        folder_path=folder_path,
+        reports_output_dir_fn=_reportsOutputDir,
+        converted_svg_output_dir_fn=_convertedSvgOutputDir,
+        read_svg_geometry_fn=_readSvgGeometry,
+        get_base_name_fn=getBaseNameFromFile,
+        is_semantic_template_variant_fn=_isSemanticTemplateVariant,
+        sniff_raster_size_fn=_sniffRasterSize,
+    )
 
 
 def _sniffRasterSize(path: str | Path) -> tuple[int, int]:
-    file_path = Path(path)
-    with file_path.open("rb") as fh:
-        header = fh.read(32)
-
-    if header.startswith(b"\x89PNG\r\n\x1a\n") and len(header) >= 24:
-        return struct.unpack(">II", header[16:24])
-
-    if header[:6] in {b"GIF87a", b"GIF89a"} and len(header) >= 10:
-        return struct.unpack("<HH", header[6:10])
-
-    if header.startswith(b"BM"):
-        with file_path.open("rb") as fh:
-            fh.seek(18)
-            dib = fh.read(8)
-        if len(dib) == 8:
-            width, height = struct.unpack("<ii", dib)
-            return abs(int(width)), abs(int(height))
-
-    if header.startswith(b"\xff\xd8"):
-        with file_path.open("rb") as fh:
-            fh.seek(2)
-            while True:
-                marker_prefix = fh.read(1)
-                if not marker_prefix:
-                    break
-                if marker_prefix != b"\xff":
-                    continue
-                marker = fh.read(1)
-                while marker == b"\xff":
-                    marker = fh.read(1)
-                if marker in {b"\xd8", b"\xd9"}:
-                    continue
-                size_bytes = fh.read(2)
-                if len(size_bytes) != 2:
-                    break
-                segment_size = struct.unpack(">H", size_bytes)[0]
-                if marker in {
-                    b"\xc0", b"\xc1", b"\xc2", b"\xc3",
-                    b"\xc5", b"\xc6", b"\xc7",
-                    b"\xc9", b"\xca", b"\xcb",
-                    b"\xcd", b"\xce", b"\xcf",
-                }:
-                    payload = fh.read(5)
-                    if len(payload) != 5:
-                        break
-                    height, width = struct.unpack(">HH", payload[1:5])
-                    return int(width), int(height)
-                fh.seek(max(0, segment_size - 2), os.SEEK_CUR)
-
-    raise ValueError(f"Unsupported or unreadable raster image: {file_path}")
+    return conversion_row_helpers.sniffRasterSizeImpl(path)
 
 
 def _svgHrefMimeType(path: str | Path) -> str:
@@ -7641,63 +7259,23 @@ def _writeAc08RegressionManifest(
     iterations: int,
     selected_variants: list[str],
 ) -> None:
-    """Write a reproducible manifest for the fixed AC08 regression subset."""
-    if sorted(selected_variants) != sorted(AC08_REGRESSION_VARIANTS):
-        return
-
-    csv_manifest_path = os.path.join(reports_out_dir, "ac08_regression_set.csv")
-    with open(csv_manifest_path, "w", encoding="utf-8", newline="") as f:
-        writer = csv.writer(f, delimiter=";")
-        writer.writerow(["set", "variant", "focus", "reason"])
-        for case in AC08_REGRESSION_CASES:
-            variant = str(case["variant"])
-            focus = str(case["focus"])
-            reason = str(case["reason"])
-            if variant == "AC0811_L" and focus == "stable_good":
-                reason = "Known regression-safe good conversion anchor"
-            writer.writerow([AC08_REGRESSION_SET_NAME, variant, focus, reason])
-
-    summary_lines = [
-        f"set={AC08_REGRESSION_SET_NAME}",
-        f"images_total={len(AC08_REGRESSION_CASES)}",
-        f"iterations={int(iterations)}",
-        f"folder_path={folder_path}",
-        f"csv_path={csv_path}",
-        "expected_reports=Iteration_Log.csv,quality_tercile_passes.csv,pixel_delta2_ranking.csv,pixel_delta2_summary.txt,ac08_weak_family_status.csv,ac08_weak_family_status.txt,ac08_success_metrics.csv,ac08_success_criteria.txt",
-        "expected_logs=variant_harmonization.log,shape_catalog.csv",
-        (
-            "recommended_command=python -m src.imageCompositeConverter "
-            f"{folder_path} --csv-path {csv_path} --ac08-regression-set {int(iterations)}"
-        ),
-    ]
-    with open(os.path.join(reports_out_dir, "ac08_regression_summary.txt"), "w", encoding="utf-8") as f:
-        f.write("\n".join(summary_lines) + "\n")
+    ac08_reporting_helpers.writeAc08RegressionManifestImpl(
+        reports_out_dir,
+        folder_path=folder_path,
+        csv_path=csv_path,
+        iterations=iterations,
+        selected_variants=selected_variants,
+        ac08_regression_variants=AC08_REGRESSION_VARIANTS,
+        ac08_regression_cases=AC08_REGRESSION_CASES,
+        ac08_regression_set_name=AC08_REGRESSION_SET_NAME,
+    )
 
 
 def _summarizePreviousGoodAc08Variants(reports_out_dir: str) -> dict[str, object]:
-    """Summarize whether previously good AC08 variants stayed semantic_ok in the latest run."""
-    preserved: list[str] = []
-    regressed: list[str] = []
-    missing: list[str] = []
-
-    for variant in AC08_PREVIOUSLY_GOOD_VARIANTS:
-        log_path = os.path.join(reports_out_dir, f"{variant}_element_validation.log")
-        if not os.path.exists(log_path):
-            missing.append(variant)
-            continue
-        with open(log_path, "r", encoding="utf-8") as f:
-            log_text = f.read()
-        if "status=semantic_ok" in log_text and "status=semantic_mismatch" not in log_text:
-            preserved.append(variant)
-        else:
-            regressed.append(variant)
-
-    return {
-        "expected": list(AC08_PREVIOUSLY_GOOD_VARIANTS),
-        "preserved": preserved,
-        "regressed": regressed,
-        "missing": missing,
-    }
+    return ac08_reporting_helpers.summarizePreviousGoodAc08VariantsImpl(
+        reports_out_dir,
+        previous_good_variants=AC08_PREVIOUSLY_GOOD_VARIANTS,
+    )
 
 
 def _writeAc08SuccessCriteriaReport(
@@ -7705,171 +7283,13 @@ def _writeAc08SuccessCriteriaReport(
     *,
     selected_variants: list[str],
 ) -> dict[str, object] | None:
-    """Persist the written AC08 success criteria and the current measured status."""
-    if sorted(selected_variants) != sorted(AC08_REGRESSION_VARIANTS):
-        return None
-
-    expected_variants = sorted(selected_variants)
-    iteration_rows: list[dict[str, str]] = []
-    iteration_log_path = os.path.join(reports_out_dir, "Iteration_Log.csv")
-    if os.path.exists(iteration_log_path):
-        with open(iteration_log_path, "r", encoding="utf-8-sig", newline="") as f:
-            iteration_rows = list(csv.DictReader(f, delimiter=";"))
-
-    quality_rows: list[dict[str, str]] = []
-    quality_path = os.path.join(reports_out_dir, "quality_tercile_passes.csv")
-    if os.path.exists(quality_path):
-        with open(quality_path, "r", encoding="utf-8", newline="") as f:
-            quality_rows = list(csv.DictReader(f, delimiter=";"))
-
-    converted_variants = {
-        os.path.splitext(str(row.get("Dateiname", "")).strip())[0].upper()
-        for row in iteration_rows
-        if str(row.get("Dateiname", "")).strip()
-    }
-    missing_variants = [variant for variant in expected_variants if variant not in converted_variants]
-
-    improved_error_count = 0
-    improved_mean_delta2_count = 0
-    rejected_regression_count = 0
-    accepted_regression_count = 0
-    for row in quality_rows:
-        decision = str(row.get("decision", "")).strip()
-        old_error = float(row.get("old_error_per_pixel", "inf"))
-        new_error = float(row.get("new_error_per_pixel", "inf"))
-        old_delta2 = float(row.get("old_mean_delta2", "inf"))
-        new_delta2 = float(row.get("new_mean_delta2", "inf"))
-        if math.isfinite(old_error) and math.isfinite(new_error) and new_error + 1e-9 < old_error:
-            improved_error_count += 1
-        if math.isfinite(old_delta2) and math.isfinite(new_delta2) and new_delta2 + 1e-6 < old_delta2:
-            improved_mean_delta2_count += 1
-        if decision == "rejected_regression":
-            rejected_regression_count += 1
-        if decision == "accepted_regression":
-            accepted_regression_count += 1
-
-    semantic_mismatch_count = 0
-    render_failure_count = 0
-    validation_round_counts: list[int] = []
-    for variant in expected_variants:
-        log_path = os.path.join(reports_out_dir, f"{variant}_element_validation.log")
-        if not os.path.exists(log_path):
-            continue
-        with open(log_path, "r", encoding="utf-8") as f:
-            log_text = f.read()
-        if "status=semantic_mismatch" in log_text:
-            semantic_mismatch_count += 1
-        if "konnte nicht gerendert werden" in log_text or "Abbruch: SVG konnte nicht gerendert werden" in log_text:
-            render_failure_count += 1
-        rounds = len(re.findall(r"^Runde\s+\d+: elementweise Validierung gestartet$", log_text, flags=re.MULTILINE))
-        if rounds > 0:
-            validation_round_counts.append(rounds)
-
-    batch_abort_count = len(missing_variants) + render_failure_count
-    mean_validation_rounds = (
-        sum(validation_round_counts) / float(len(validation_round_counts))
-        if validation_round_counts
-        else 0.0
+    return ac08_reporting_helpers.writeAc08SuccessCriteriaReportImpl(
+        reports_out_dir,
+        selected_variants=selected_variants,
+        ac08_regression_variants=AC08_REGRESSION_VARIANTS,
+        ac08_regression_set_name=AC08_REGRESSION_SET_NAME,
+        summarize_previous_good_fn=_summarizePreviousGoodAc08Variants,
     )
-
-    previous_good = _summarizePreviousGoodAc08Variants(reports_out_dir)
-    previous_good_preserved_count = len(previous_good["preserved"])
-    previous_good_regressed_count = len(previous_good["regressed"])
-    previous_good_missing_count = len(previous_good["missing"])
-
-    regression_set_improved = improved_error_count > 0 or improved_mean_delta2_count > 0
-    no_new_batch_aborts = batch_abort_count == 0
-    no_accepted_regressions = accepted_regression_count == 0
-    validation_rounds_recorded = mean_validation_rounds > 0.0
-    stable_families_not_worse = (
-        no_accepted_regressions
-        and previous_good_regressed_count == 0
-        and previous_good_missing_count == 0
-    )
-    overall_success = (
-        no_new_batch_aborts
-        and no_accepted_regressions
-        and validation_rounds_recorded
-        and regression_set_improved
-        and stable_families_not_worse
-    )
-
-    metrics_path = os.path.join(reports_out_dir, "ac08_success_metrics.csv")
-    with open(metrics_path, "w", encoding="utf-8", newline="") as f:
-        writer = csv.writer(f, delimiter=";")
-        writer.writerow(["metric", "value"])
-        writer.writerow(["regression_set", AC08_REGRESSION_SET_NAME])
-        writer.writerow(["images_expected", len(expected_variants)])
-        writer.writerow(["images_converted", len(converted_variants)])
-        writer.writerow(["images_missing", len(missing_variants)])
-        writer.writerow(["improved_error_per_pixel_count", improved_error_count])
-        writer.writerow(["improved_mean_delta2_count", improved_mean_delta2_count])
-        writer.writerow(["semantic_mismatch_count", semantic_mismatch_count])
-        writer.writerow(["batch_abort_or_render_failure_count", batch_abort_count])
-        writer.writerow(["rejected_regression_count", rejected_regression_count])
-        writer.writerow(["accepted_regression_count", accepted_regression_count])
-        writer.writerow(["previous_good_expected", len(previous_good["expected"])])
-        writer.writerow(["previous_good_preserved_count", previous_good_preserved_count])
-        writer.writerow(["previous_good_regressed_count", previous_good_regressed_count])
-        writer.writerow(["previous_good_missing_count", previous_good_missing_count])
-        writer.writerow(["mean_validation_rounds_per_file", f"{mean_validation_rounds:.3f}"])
-        writer.writerow(["criterion_no_new_batch_aborts", int(no_new_batch_aborts)])
-        writer.writerow(["criterion_no_accepted_regressions", int(no_accepted_regressions)])
-        writer.writerow(["criterion_validation_rounds_recorded", int(validation_rounds_recorded)])
-        writer.writerow(["criterion_regression_set_improved", int(regression_set_improved)])
-        writer.writerow(["criterion_stable_families_not_worse", int(stable_families_not_worse)])
-        writer.writerow(["overall_success", int(overall_success)])
-
-    summary_lines = [
-        f"set={AC08_REGRESSION_SET_NAME}",
-        "goal=Abschluss einer AC08-Maßnahme objektiv bewerten",
-        "success_metrics=improved_error_per_pixel_count,improved_mean_delta2_count,semantic_mismatch_count,batch_abort_or_render_failure_count,mean_validation_rounds_per_file",
-        (
-            "success_definition=no_new_batch_aborts && no_accepted_regressions "
-            "&& validation_rounds_recorded && regression_set_improved && stable_families_not_worse"
-        ),
-        f"images_expected={len(expected_variants)}",
-        f"images_converted={len(converted_variants)}",
-        f"images_missing={len(missing_variants)}",
-        f"improved_error_per_pixel_count={improved_error_count}",
-        f"improved_mean_delta2_count={improved_mean_delta2_count}",
-        f"semantic_mismatch_count={semantic_mismatch_count}",
-        f"batch_abort_or_render_failure_count={batch_abort_count}",
-        f"rejected_regression_count={rejected_regression_count}",
-        f"accepted_regression_count={accepted_regression_count}",
-        f"previous_good_expected={len(previous_good['expected'])}",
-        f"previous_good_preserved_count={previous_good_preserved_count}",
-        f"previous_good_regressed_count={previous_good_regressed_count}",
-        f"previous_good_missing_count={previous_good_missing_count}",
-        f"mean_validation_rounds_per_file={mean_validation_rounds:.3f}",
-        f"criterion_no_new_batch_aborts={int(no_new_batch_aborts)}",
-        f"criterion_no_accepted_regressions={int(no_accepted_regressions)}",
-        f"criterion_validation_rounds_recorded={int(validation_rounds_recorded)}",
-        f"criterion_regression_set_improved={int(regression_set_improved)}",
-        f"criterion_stable_families_not_worse={int(stable_families_not_worse)}",
-        f"overall_success={int(overall_success)}",
-    ]
-    if missing_variants:
-        summary_lines.append("missing_variants=" + ",".join(missing_variants))
-    if previous_good["preserved"]:
-        summary_lines.append("previous_good_preserved=" + ",".join(previous_good["preserved"]))
-    if previous_good["regressed"]:
-        summary_lines.append("previous_good_regressed=" + ",".join(previous_good["regressed"]))
-    if previous_good["missing"]:
-        summary_lines.append("previous_good_missing=" + ",".join(previous_good["missing"]))
-
-    with open(os.path.join(reports_out_dir, "ac08_success_criteria.txt"), "w", encoding="utf-8") as f:
-        f.write("\n".join(summary_lines) + "\n")
-
-    return {
-        "overall_success": overall_success,
-        "criterion_no_new_batch_aborts": no_new_batch_aborts,
-        "criterion_no_accepted_regressions": no_accepted_regressions,
-        "criterion_validation_rounds_recorded": validation_rounds_recorded,
-        "criterion_regression_set_improved": regression_set_improved,
-        "criterion_stable_families_not_worse": stable_families_not_worse,
-        "mean_validation_rounds_per_file": mean_validation_rounds,
-    }
 
 
 def _writeAc08WeakFamilyStatusReport(
@@ -7878,173 +7298,25 @@ def _writeAc08WeakFamilyStatusReport(
     selected_variants: list[str],
     ranking_threshold: float = 18.0,
 ) -> None:
-    """Summarize currently weak AC08 families and the mitigation status implemented in code."""
-    normalized_variants = sorted({str(variant).strip().upper() for variant in selected_variants if str(variant).strip()})
-    if not normalized_variants or any(not variant.startswith("AC08") for variant in normalized_variants):
-        return
-
-    ranking_rows: list[dict[str, str]] = []
-    ranking_path = os.path.join(reports_out_dir, "pixel_delta2_ranking.csv")
-    if os.path.exists(ranking_path):
-        with open(ranking_path, "r", encoding="utf-8", newline="") as f:
-            ranking_rows = list(csv.DictReader(f, delimiter=";"))
-
-    ranking_by_variant: dict[str, dict[str, str]] = {}
-    for row in ranking_rows:
-        image_name = str(row.get("image", "")).strip()
-        if not image_name:
-            continue
-        variant = os.path.splitext(image_name)[0].upper()
-        ranking_by_variant[variant] = row
-
-    focus_by_variant = {case["variant"].upper(): case["focus"] for case in AC08_REGRESSION_CASES}
-    weak_rows: list[dict[str, str]] = []
-    for variant in normalized_variants:
-        base = variant.split("_", 1)[0]
-        ranking_row = ranking_by_variant.get(variant, {})
-        mean_delta2_raw = str(ranking_row.get("mean_delta2", "")).strip()
-        try:
-            mean_delta2 = float(mean_delta2_raw) if mean_delta2_raw else float("nan")
-        except ValueError:
-            mean_delta2 = float("nan")
-        is_weak = (not math.isfinite(mean_delta2)) or mean_delta2 > ranking_threshold
-        if not is_weak:
-            continue
-
-        mitigation = AC08_MITIGATION_STATUS.get(base, {})
-        log_path = os.path.join(reports_out_dir, f"{variant}_element_validation.log")
-        log_text = ""
-        if os.path.exists(log_path):
-            with open(log_path, "r", encoding="utf-8") as f:
-                log_text = f.read()
-
-        active_markers: list[str] = []
-        if "adaptive_unlock_applied" in log_text:
-            active_markers.append("adaptive_unlock_applied")
-        if "small_variant_mode_active" in log_text:
-            active_markers.append("small_variant_mode_active")
-        if "semantic_audit_status=" in log_text:
-            active_markers.append("semantic_audit_logged")
-        if "stopped_due_to_stagnation" in log_text:
-            active_markers.append("stagnation_guard_triggered")
-
-        weak_rows.append({
-            "variant": variant,
-            "base_family": base,
-            "focus": focus_by_variant.get(variant, "review"),
-            "mean_delta2": "nan" if not math.isfinite(mean_delta2) else f"{mean_delta2:.6f}",
-            "risk": str(mitigation.get("risk", "unknown")),
-            "family_group": str(mitigation.get("family", "unknown")),
-            "implemented_mitigations": str(mitigation.get("implemented", "manual_review")),
-            "active_log_markers": ",".join(active_markers) if active_markers else "none_observed",
-            "status": str(mitigation.get("status", "No family-specific mitigation documented yet; inspect logs and ranking manually.")),
-        })
-
-    weak_rows.sort(
-        key=lambda row: (
-            -float("inf") if row["mean_delta2"] == "nan" else float(row["mean_delta2"]),
-            row["variant"],
-        ),
-        reverse=True,
+    ac08_reporting_helpers.writeAc08WeakFamilyStatusReportImpl(
+        reports_out_dir,
+        selected_variants=selected_variants,
+        ac08_regression_cases=AC08_REGRESSION_CASES,
+        ac08_mitigation_status=AC08_MITIGATION_STATUS,
+        ranking_threshold=ranking_threshold,
     )
-
-    csv_path = os.path.join(reports_out_dir, "ac08_weak_family_status.csv")
-    with open(csv_path, "w", encoding="utf-8", newline="") as f:
-        writer = csv.writer(f, delimiter=";")
-        writer.writerow([
-            "variant",
-            "base_family",
-            "focus",
-            "mean_delta2",
-            "risk",
-            "family_group",
-            "implemented_mitigations",
-            "active_log_markers",
-            "status",
-        ])
-        for row in weak_rows:
-            writer.writerow([
-                row["variant"],
-                row["base_family"],
-                row["focus"],
-                row["mean_delta2"],
-                row["risk"],
-                row["family_group"],
-                row["implemented_mitigations"],
-                row["active_log_markers"],
-                row["status"],
-            ])
-
-    summary_lines = [
-        f"ranking_threshold_mean_delta2={ranking_threshold:.3f}",
-        f"weak_variants={len(weak_rows)}",
-        "goal=Verbleibende AC08-Schwachfamilien und ihren aktuellen Mitigation-Status dokumentieren",
-    ]
-    if weak_rows:
-        summary_lines.append("variants=" + ",".join(row["variant"] for row in weak_rows))
-        for row in weak_rows:
-            summary_lines.append(
-                f"{row['variant']}: mean_delta2={row['mean_delta2']}; risk={row['risk']}; markers={row['active_log_markers']}; status={row['status']}"
-            )
-    else:
-        summary_lines.append("variants=none")
-        summary_lines.append("All selected AC08 variants are currently at or below the weak-family threshold.")
-
-    with open(os.path.join(reports_out_dir, "ac08_weak_family_status.txt"), "w", encoding="utf-8") as f:
-        f.write("\n".join(summary_lines) + "\n")
 
 
 def _writePixelDelta2Ranking(folder_path: str, svg_out_dir: str, reports_out_dir: str, threshold: float = 18.0) -> None:
-    ranking: list[dict[str, float | str]] = []
-    for svg_name in sorted(f for f in os.listdir(svg_out_dir) if f.lower().endswith(".svg")):
-        stem = os.path.splitext(svg_name)[0]
-        orig_path = None
-        for ext in (".jpg", ".png", ".bmp"):
-            candidate = os.path.join(folder_path, f"{stem}{ext}")
-            if os.path.exists(candidate):
-                orig_path = candidate
-                break
-        if orig_path is None:
-            continue
-
-        img_orig = cv2.imread(orig_path)
-        if img_orig is None:
-            continue
-
-        with open(os.path.join(svg_out_dir, svg_name), "r", encoding="utf-8") as f:
-            svg_content = f.read()
-
-        h, w = img_orig.shape[:2]
-        rendered = Action.render_svg_to_numpy(svg_content, w, h)
-        if rendered is None:
-            continue
-
-        mean_delta2, std_delta2 = Action.calculateDelta2Stats(img_orig, rendered)
-        ranking.append(
-            {
-                "image": os.path.basename(orig_path),
-                "mean_delta2": float(mean_delta2),
-                "std_delta2": float(std_delta2),
-            }
-        )
-
-    ranking.sort(key=lambda row: float(row["mean_delta2"]), reverse=True)
-    csv_path = os.path.join(reports_out_dir, "pixel_delta2_ranking.csv")
-    with open(csv_path, "w", encoding="utf-8", newline="") as f:
-        writer = csv.writer(f, delimiter=";")
-        writer.writerow(["image", "mean_delta2", "std_delta2"])
-        for row in ranking:
-            writer.writerow([row["image"], f"{float(row['mean_delta2']):.6f}", f"{float(row['std_delta2']):.6f}"])
-
-    valid = [row for row in ranking if math.isfinite(float(row["mean_delta2"]))]
-    count_ok = sum(1 for row in valid if float(row["mean_delta2"]) <= threshold)
-    summary_lines = [
-        f"images_total={len(valid)}",
-        f"threshold_mean_delta2={threshold:.3f}",
-        f"images_with_mean_delta2_le_threshold={count_ok}",
-    ]
-    with open(os.path.join(reports_out_dir, "pixel_delta2_summary.txt"), "w", encoding="utf-8") as f:
-        f.write("\n".join(summary_lines) + "\n")
+    ranking_helpers.writePixelDelta2RankingImpl(
+        folder_path=folder_path,
+        svg_out_dir=svg_out_dir,
+        reports_out_dir=reports_out_dir,
+        threshold=threshold,
+        cv2_module=cv2,
+        render_svg_to_numpy_fn=Action.render_svg_to_numpy,
+        calculate_delta2_stats_fn=Action.calculateDelta2Stats,
+    )
 
 
 def _loadIterationLogRows(reports_out_dir: str) -> dict[str, dict[str, str]]:
@@ -8178,96 +7450,44 @@ def _successfulConversionMetricsAvailable(metrics: dict[str, object]) -> bool:
 
 
 def _parseSuccessfulConversionManifestLine(raw_line: str) -> tuple[str, dict[str, object]]:
-    """Parse one successful-conversions manifest line into variant plus metrics."""
-    stripped = raw_line.split('#', 1)[0].strip()
-    if not stripped:
-        return '', {}
-
-    parts = [part.strip() for part in stripped.split(';') if part.strip()]
-    if not parts:
-        return '', {}
-
-    variant = parts[0].upper()
-    metrics: dict[str, object] = {'variant': variant}
-    for field in parts[1:]:
-        if '=' not in field:
-            continue
-        key, value = [token.strip() for token in field.split('=', 1)]
-        if not key:
-            continue
-        if key == 'pixel_count':
-            with contextlib.suppress(ValueError):
-                metrics[key] = int(value)
-            continue
-        if key in {'diff_score', 'error_per_pixel', 'total_delta2', 'mean_delta2', 'std_delta2'}:
-            with contextlib.suppress(ValueError):
-                metrics[key] = float(value.replace(',', '.'))
-            continue
-        metrics[key] = value
-    return variant, metrics
+    return successful_conversions_helpers.parseSuccessfulConversionManifestLineImpl(raw_line)
 
 
 def _readSuccessfulConversionManifestMetrics(manifest_path: Path) -> dict[str, dict[str, object]]:
-    """Load persisted best-list metrics keyed by variant."""
-    if not manifest_path.exists():
-        return {}
-
-    rows: dict[str, dict[str, object]] = {}
-    for raw_line in manifest_path.read_text(encoding='utf-8').splitlines():
-        variant, metrics = _parseSuccessfulConversionManifestLine(raw_line)
-        if variant:
-            rows[variant] = metrics
-    return rows
+    return successful_conversions_helpers.readSuccessfulConversionManifestMetricsImpl(
+        manifest_path,
+        parse_manifest_line_fn=_parseSuccessfulConversionManifestLine,
+    )
 
 
 def _successfulConversionSnapshotDir(reports_out_dir: str) -> Path:
-    """Directory used to persist best-of artifacts for successful conversions."""
-    return Path(reports_out_dir) / 'successful_conversions_bestlist'
+    return successful_conversions_helpers.successfulConversionSnapshotDirImpl(reports_out_dir)
 
 
 def _successfulConversionSnapshotPaths(reports_out_dir: str, variant: str) -> dict[str, Path]:
-    base_dir = _successfulConversionSnapshotDir(reports_out_dir)
-    base_dir.mkdir(parents=True, exist_ok=True)
-    return {
-        'svg': base_dir / f'{variant}.svg',
-        'log': base_dir / f'{variant}_element_validation.log',
-        'metrics': base_dir / f'{variant}.json',
-    }
+    return successful_conversions_helpers.successfulConversionSnapshotPathsImpl(
+        reports_out_dir,
+        variant,
+        snapshot_dir_fn=_successfulConversionSnapshotDir,
+    )
 
 
 def _restoreSuccessfulConversionSnapshot(variant: str, svg_out_dir: str, reports_out_dir: str) -> bool:
-    """Restore the previous best conversion for ``variant`` if a snapshot exists."""
-    snapshot_paths = _successfulConversionSnapshotPaths(reports_out_dir, variant)
-    restored = False
-
-    target_svg = Path(svg_out_dir) / f'{variant}.svg'
-    if snapshot_paths['svg'].exists():
-        target_svg.parent.mkdir(parents=True, exist_ok=True)
-        target_svg.write_text(snapshot_paths['svg'].read_text(encoding='utf-8'), encoding='utf-8')
-        restored = True
-
-    target_log = Path(reports_out_dir) / f'{variant}_element_validation.log'
-    if snapshot_paths['log'].exists():
-        target_log.write_text(snapshot_paths['log'].read_text(encoding='utf-8'), encoding='utf-8')
-        restored = True
-
-    return restored
+    return successful_conversions_helpers.restoreSuccessfulConversionSnapshotImpl(
+        variant=variant,
+        svg_out_dir=svg_out_dir,
+        reports_out_dir=reports_out_dir,
+        snapshot_paths_fn=_successfulConversionSnapshotPaths,
+    )
 
 
 def _storeSuccessfulConversionSnapshot(variant: str, metrics: dict[str, object], svg_out_dir: str, reports_out_dir: str) -> None:
-    """Persist the current best conversion artifacts for later rollback/restoration."""
-    snapshot_paths = _successfulConversionSnapshotPaths(reports_out_dir, variant)
-    target_svg = Path(svg_out_dir) / f'{variant}.svg'
-    if target_svg.exists():
-        snapshot_paths['svg'].write_text(target_svg.read_text(encoding='utf-8'), encoding='utf-8')
-
-    target_log = Path(reports_out_dir) / f'{variant}_element_validation.log'
-    if target_log.exists():
-        snapshot_paths['log'].write_text(target_log.read_text(encoding='utf-8'), encoding='utf-8')
-
-    snapshot_paths['metrics'].write_text(
-        json.dumps(metrics, ensure_ascii=False, indent=2, sort_keys=True),
-        encoding='utf-8',
+    return successful_conversions_helpers.storeSuccessfulConversionSnapshotImpl(
+        variant=variant,
+        metrics=metrics,
+        svg_out_dir=svg_out_dir,
+        reports_out_dir=reports_out_dir,
+        snapshot_paths_fn=_successfulConversionSnapshotPaths,
     )
 
 
@@ -8275,79 +7495,27 @@ def _isSuccessfulConversionCandidateBetter(
     previous_metrics: dict[str, object] | None,
     candidate_metrics: dict[str, object],
 ) -> bool:
-    """Accept a new best-list candidate only when it improves quality."""
-    if not _successfulConversionMetricsAvailable(candidate_metrics):
-        return False
-    if not previous_metrics or not _successfulConversionMetricsAvailable(previous_metrics):
-        return True
-
-    previous_status = str(previous_metrics.get('status', '')).strip().lower()
-    candidate_status = str(candidate_metrics.get('status', '')).strip().lower()
-    if previous_status == 'semantic_ok' and candidate_status != 'semantic_ok':
-        return False
-    if previous_status != 'semantic_ok' and candidate_status == 'semantic_ok':
-        return True
-
-    improved, _decision, _prev_error, _new_error, _prev_delta, _new_delta = _evaluateQualityPassCandidate(
-        previous_metrics,
-        candidate_metrics,
+    return successful_conversions_helpers.isSuccessfulConversionCandidateBetterImpl(
+        previous_metrics=previous_metrics,
+        candidate_metrics=candidate_metrics,
+        metrics_available_fn=_successfulConversionMetricsAvailable,
+        evaluate_candidate_fn=_evaluateQualityPassCandidate,
     )
-    return improved
 
 
 def _mergeSuccessfulConversionMetrics(
     baseline: dict[str, object],
     override: dict[str, object],
 ) -> dict[str, object]:
-    """Merge ``override`` into ``baseline`` while keeping row-level defaults."""
-    merged = dict(baseline)
-    for key, value in override.items():
-        if key == 'variant':
-            continue
-        merged[key] = value
-    merged['variant'] = str(override.get('variant', baseline.get('variant', ''))).strip().upper()
-    return merged
+    return successful_conversions_helpers.mergeSuccessfulConversionMetricsImpl(baseline, override)
 
 
 def _formatSuccessfulConversionManifestLine(existing_line: str, metrics: dict[str, object]) -> str:
-    """Render one enriched successful-conversions manifest line."""
-    if not _successfulConversionMetricsAvailable(metrics):
-        return existing_line.rstrip('\n')
-
-    variant = str(metrics.get('variant', '')).strip().upper()
-    prefix, comment = existing_line, ''
-    if '#' in existing_line:
-        prefix, comment = existing_line.split('#', 1)
-        comment = '#' + comment.rstrip('\n').rstrip('\r').rstrip()
-    prefix = prefix.strip()
-    if not prefix:
-        return existing_line.rstrip('\n')
-
-    fields = [variant]
-    status = str(metrics.get('status', '')).strip()
-    if status:
-        fields.append(f'status={status}')
-    best_iteration = str(metrics.get('best_iteration', '')).strip()
-    if best_iteration:
-        fields.append(f'best_iteration={best_iteration}')
-    for key, precision in (
-        ('diff_score', 6),
-        ('error_per_pixel', 8),
-        ('total_delta2', 6),
-        ('mean_delta2', 6),
-        ('std_delta2', 6),
-    ):
-        value = float(metrics.get(key, float('nan')))
-        if math.isfinite(value):
-            fields.append(f'{key}={value:.{precision}f}')
-    pixel_count = int(metrics.get('pixel_count', 0) or 0)
-    if pixel_count > 0:
-        fields.append(f'pixel_count={pixel_count}')
-
-    line = ' ; '.join(fields)
-    if comment:
-        line += '  ' + comment
-    return line
+    return successful_conversions_helpers.formatSuccessfulConversionManifestLineImpl(
+        existing_line=existing_line,
+        metrics=metrics,
+        metrics_available_fn=_successfulConversionMetricsAvailable,
+    )
 
 
 def _latestFailedConversionManifestEntry(reports_out_dir: str) -> dict[str, object] | None:
