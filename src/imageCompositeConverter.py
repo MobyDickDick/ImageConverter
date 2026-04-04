@@ -70,6 +70,7 @@ from src.iCCModules import imageCompositeConverterConversionRows as conversion_r
 from src.iCCModules import imageCompositeConverterAc08Reporting as ac08_reporting_helpers
 from src.iCCModules import imageCompositeConverterRanking as ranking_helpers
 from src.iCCModules import imageCompositeConverterSuccessfulConversions as successful_conversions_helpers
+from src.iCCModules import imageCompositeConverterSuccessfulConversionQuality as successful_conversion_quality_helpers
 from src.iCCModules import imageCompositeConverterBestlist as conversion_bestlist_helpers
 from src.iCCModules import imageCompositeConverterElementValidation as element_validation_helpers
 from src.successfulConversions import (
@@ -6642,29 +6643,11 @@ def _writePixelDelta2Ranking(folder_path: str, svg_out_dir: str, reports_out_dir
 
 
 def _loadIterationLogRows(reports_out_dir: str) -> dict[str, dict[str, str]]:
-    """Load Iteration_Log.csv keyed by uppercase filename stem."""
-    path = os.path.join(reports_out_dir, "Iteration_Log.csv")
-    if not os.path.exists(path):
-        return {}
-
-    rows: dict[str, dict[str, str]] = {}
-    with open(path, 'r', encoding='utf-8-sig', newline='') as f:
-        reader = csv.DictReader(f, delimiter=';')
-        for row in reader:
-            filename = str(row.get('Dateiname', '')).strip()
-            if not filename:
-                continue
-            rows[os.path.splitext(filename)[0].upper()] = dict(row)
-    return rows
+    return successful_conversion_quality_helpers.loadIterationLogRowsImpl(reports_out_dir)
 
 
 def _findImagePathByVariant(folder_path: str, variant: str) -> str | None:
-    """Return the raster image path for ``variant`` if present."""
-    for ext in ('.jpg', '.png', '.bmp', '.gif'):
-        candidate = os.path.join(folder_path, f'{variant}{ext}')
-        if os.path.exists(candidate):
-            return candidate
-    return None
+    return successful_conversion_quality_helpers.findImagePathByVariantImpl(folder_path, variant)
 
 
 def collectSuccessfulConversionQualityMetrics(
