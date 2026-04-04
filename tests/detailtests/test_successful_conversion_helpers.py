@@ -133,3 +133,11 @@ def test_write_successful_conversion_csv_table_sorts_and_formats(tmp_path: Path)
     assert written[0].startswith("variant;status;image_found")
     assert written[1].startswith("AC0800_M;semantic_ok;1;1;1;5;0.500000;0.02000000")
     assert written[2].startswith("AC0831_S;semantic_ok;1;1;1;12;1.000000;0.12500000")
+
+
+def test_successful_conversion_metrics_available_detects_payload_fields() -> None:
+    assert success_helpers.successfulConversionMetricsAvailableImpl({}) is False
+    assert success_helpers.successfulConversionMetricsAvailableImpl({"status": "semantic_ok"}) is True
+    assert success_helpers.successfulConversionMetricsAvailableImpl({"best_iteration": "7"}) is True
+    assert success_helpers.successfulConversionMetricsAvailableImpl({"pixel_count": 1}) is True
+    assert success_helpers.successfulConversionMetricsAvailableImpl({"mean_delta2": 0.125}) is True
