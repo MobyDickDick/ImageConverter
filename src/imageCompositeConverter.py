@@ -2568,7 +2568,13 @@ class Action:
     @staticmethod
     def _defaultAc0834Params(w: int, h: int) -> dict:
         """Compatibility helper for AC0834 semantic tests and callers."""
-        return Action._tuneAc0834Co2Badge(Action._applyCo2Label(Action._defaultAc0814Params(w, h)), w, h)
+        return semantic_label_helpers.defaultAc0834ParamsImpl(
+            w,
+            h,
+            default_ac0814_params_fn=Action._defaultAc0814Params,
+            apply_co2_label_fn=Action._applyCo2Label,
+            tune_ac0834_co2_badge_fn=Action._tuneAc0834Co2Badge,
+        )
 
     @staticmethod
     def _normalizeCenteredCo2Label(params: dict) -> dict:

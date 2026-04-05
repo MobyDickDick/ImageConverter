@@ -348,3 +348,17 @@ def tuneAc0834Co2BadgeImpl(
         p["co2_font_scale"] = min(float(p.get("co2_font_scale", 0.82)), 0.86)
         p["co2_sub_font_scale"] = min(float(p.get("co2_sub_font_scale", 66.0)), 64.0)
     return p
+
+
+def defaultAc0834ParamsImpl(
+    w: int,
+    h: int,
+    *,
+    default_ac0814_params_fn,
+    apply_co2_label_fn,
+    tune_ac0834_co2_badge_fn,
+) -> dict:
+    """Build AC0834 semantic defaults via the AC0814 base + CO₂ tuning."""
+    params = default_ac0814_params_fn(w, h)
+    params = apply_co2_label_fn(params)
+    return tune_ac0834_co2_badge_fn(params, w, h)
