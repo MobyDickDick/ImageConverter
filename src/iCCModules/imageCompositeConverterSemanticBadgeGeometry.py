@@ -44,3 +44,16 @@ def centerGlyphBboxImpl(params: dict, *, glyph_bbox_fn) -> None:
     glyph_height = (ymax - ymin) * params["s"]
     params["tx"] = float(params["cx"] - (glyph_width / 2.0))
     params["ty"] = float(params["cy"] - (glyph_height / 2.0))
+
+
+def alignStemToCircleCenterImpl(params: dict, *, default_stroke_width: float) -> dict:
+    """Align vertical connector stems to the semantic circle centerline."""
+    aligned = dict(params)
+    if not aligned.get("stem_enabled") or not aligned.get("circle_enabled", True):
+        return aligned
+    if "stem_width" in aligned and "cx" in aligned:
+        aligned["stem_x"] = float(aligned["cx"]) - (float(aligned["stem_width"]) / 2.0)
+    if "cy" in aligned and "r" in aligned:
+        stem_width = float(aligned.get("stem_width", aligned.get("stroke_circle", default_stroke_width)))
+        aligned["stem_top"] = float(aligned["cy"]) + float(aligned["r"]) - (stem_width * 0.55)
+    return aligned
