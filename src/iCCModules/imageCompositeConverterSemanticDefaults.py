@@ -42,6 +42,28 @@ def defaultAc0881ParamsImpl(w: int, h: int, *, default_ac0870_params) -> dict:
     return params
 
 
+def defaultAc081xSharedImpl(w: int, h: int) -> dict:
+    scale = min(1.0, (min(w, h) / 25.0)) if min(w, h) > 0 else 1.0
+    cx = float(w) / 2.0
+    cy = float(h) / 2.0
+    # AC081x reference bitmaps use a slightly larger circle than AR0100/AC0870.
+    r = 9.2 * scale
+    stroke_circle = 1.5 * scale
+    stem_or_arm = 2.0 * scale
+    # Keep connector lines long enough to match the raster source symbols.
+    stem_or_arm_len = 9.0 * scale
+    return {
+        "cx": cx,
+        "cy": cy,
+        "r": r,
+        "stroke_circle": stroke_circle,
+        "stroke_gray": 152,
+        "fill_gray": 220,
+        "stem_or_arm": stem_or_arm,
+        "stem_or_arm_len": stem_or_arm_len,
+    }
+
+
 def defaultAc0882ParamsImpl(
     w: int,
     h: int,
