@@ -94,6 +94,7 @@ focused on the actual project scope.
   - 2026-04-04: AC083x-Label-Tuning-Helfer (`_tuneAc0832Co2Badge`, `_tuneAc0831Co2Badge`, `_tuneAc0835VocBadge`, `_tuneAc0833Co2Badge`, `_tuneAc0834Co2Badge`) in `src/iCCModules/imageCompositeConverterSemanticLabels.py` ausgelagert; `src/imageCompositeConverter.py` delegiert weiterhin kompatibel über Wrapper.
   - 2026-04-05: Default-Parameter-Helfer (`_defaultAc0870Params`, `_defaultAc0881Params`, `_defaultAc0882Params`) in neues Modul `src/iCCModules/imageCompositeConverterSemanticDefaults.py` ausgelagert; `src/imageCompositeConverter.py` delegiert weiterhin kompatibel über Wrapper.
   - 2026-04-05: Shared-AC081x-Default-Helfer (`_defaultAc081xShared`) in `src/iCCModules/imageCompositeConverterSemanticDefaults.py` ausgelagert; `src/imageCompositeConverter.py` delegiert weiterhin kompatibel über Wrapper.
+  - 2026-04-05: AC0811-Parametrik-/Fitting-Helfer (`_defaultEdgeAnchoredCircleGeometry`, `_defaultAc0811Params`, `_estimateUpperCircleFromForeground`, `_fitAc0811ParamsFromImage`) in neues Modul `src/iCCModules/imageCompositeConverterSemanticAc0811.py` ausgelagert; `src/imageCompositeConverter.py` delegiert weiterhin kompatibel über Wrapper.
   - Nächster geplanter Schritt: weitere Badge-Param-/Semantik-Teilstrecken in denselben kleinen Schritten extrahieren.
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.
