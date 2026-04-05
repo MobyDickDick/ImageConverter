@@ -82,3 +82,34 @@ def test_tune_ac0834_co2_badge_keeps_tiny_geometry_centered() -> None:
     assert float(tuned["r"]) >= 12 * 0.4 * 0.95
     assert tuned["arm_y1"] == 6.0
     assert tuned["arm_x2"] == 16.0
+
+
+def test_default_ac0834_params_impl_delegates_in_sequence() -> None:
+    calls: list[str] = []
+
+    def _default_ac0814_params(w: int, h: int) -> dict:
+        calls.append(f"default:{w}x{h}")
+        return {"base": True}
+
+    def _apply_co2_label(params: dict) -> dict:
+        calls.append("apply")
+        updated = dict(params)
+        updated["co2"] = True
+        return updated
+
+    def _tune_ac0834(params: dict, w: int, h: int) -> dict:
+        calls.append(f"tune:{w}x{h}")
+        updated = dict(params)
+        updated["tuned"] = True
+        return updated
+
+    result = semantic_label_helpers.defaultAc0834ParamsImpl(
+        25,
+        15,
+        default_ac0814_params_fn=_default_ac0814_params,
+        apply_co2_label_fn=_apply_co2_label,
+        tune_ac0834_co2_badge_fn=_tune_ac0834,
+    )
+
+    assert result == {"base": True, "co2": True, "tuned": True}
+    assert calls == ["default:25x15", "apply", "tune:25x15"]
