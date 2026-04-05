@@ -46,6 +46,7 @@ from src.iCCModules import imageCompositeConverterSemanticLabels as semantic_lab
 from src.iCCModules import imageCompositeConverterSemanticDefaults as semantic_default_helpers
 from src.iCCModules import imageCompositeConverterSemanticAc0811 as semantic_ac0811_helpers
 from src.iCCModules import imageCompositeConverterSemanticAc0812 as semantic_ac0812_helpers
+from src.iCCModules import imageCompositeConverterSemanticAc0813 as semantic_ac0813_helpers
 from src.iCCModules import imageCompositeConverterQuality as quality_helpers
 from src.iCCModules import imageCompositeConverterAudit as audit_helpers
 from src.iCCModules import imageCompositeConverterTransfer as transfer_helpers
@@ -2616,96 +2617,25 @@ class Action:
 
     @staticmethod
     def _defaultAc0813Params(w: int, h: int) -> dict:
-        """AC0813 is AC0812 rotated 90° clockwise (vertical arm from top to circle)."""
-        if w <= 0 or h <= 0:
-            return Action._defaultAc081xShared(w, h)
-
-        # Like other edge-anchored connector badges, size from the narrow side and
-        # keep a small optical clearance from the anchored edge.
-        circle = Action._defaultEdgeAnchoredCircleGeometry(w, h, anchor="bottom")
-        cx = float(circle["cx"])
-        cy = float(circle["cy"])
-        r = float(circle["r"])
-        stroke_circle = float(circle["stroke_circle"])
-        arm_stroke = max(1.0, float(w) * 0.10)
-
-        return Action._normalizeLightCircleColors(
-            {
-                "cx": cx,
-                "cy": cy,
-                "r": r,
-                "stroke_circle": stroke_circle,
-                "stroke_gray": Action.LIGHT_CIRCLE_STROKE_GRAY,
-                "fill_gray": Action.LIGHT_CIRCLE_FILL_GRAY,
-                "draw_text": False,
-                "arm_enabled": True,
-                "arm_x1": cx,
-                "arm_y1": 0.0,
-                "arm_x2": cx,
-                "arm_y2": max(0.0, cy - r),
-                "arm_stroke": arm_stroke,
-            }
+        return semantic_ac0813_helpers.defaultAc0813ParamsImpl(
+            w,
+            h,
+            default_ac081x_shared=Action._defaultAc081xShared,
+            default_edge_anchored_circle_geometry_fn=Action._defaultEdgeAnchoredCircleGeometry,
+            normalize_light_circle_colors_fn=Action._normalizeLightCircleColors,
+            light_circle_stroke_gray=Action.LIGHT_CIRCLE_STROKE_GRAY,
+            light_circle_fill_gray=Action.LIGHT_CIRCLE_FILL_GRAY,
         )
 
     @staticmethod
     def _fitAc0813ParamsFromImage(img: np.ndarray, defaults: dict) -> dict:
-        """Fit AC0813 while keeping the vertical arm anchored to the upper edge."""
-        params = Action._fit_semantic_badge_from_image(img, defaults)
-        h, w = img.shape[:2]
-        aspect_ratio = (float(h) / float(w)) if w > 0 else 1.0
-
-        raw_arm_stroke = float(params.get("arm_stroke", defaults.get("arm_stroke", max(1.0, float(w) * 0.10))))
-        cx = float(params.get("cx", defaults.get("cx", float(w) / 2.0)))
-        cy = float(params.get("cy", defaults.get("cy", float(h) - (float(w) / 2.0))))
-        r = float(params.get("r", defaults.get("r", float(w) * 0.4)))
-        stroke_circle = float(params.get("stroke_circle", defaults.get("stroke_circle", max(0.9, float(w) / 15.0))))
-        default_r = float(defaults.get("r", float(w) * 0.4))
-
-        min_arm_stroke = max(1.0, stroke_circle * 0.75)
-        max_arm_stroke = max(min_arm_stroke, min(float(w) * 0.14, stroke_circle * 1.6))
-        arm_stroke = max(min_arm_stroke, min(raw_arm_stroke, max_arm_stroke))
-
-        if w <= 15 and not bool(params.get("draw_text", True)):
-            # Tiny plain connector badges can lose roughly one anti-aliased ring
-            # pixel in contour/Hough fitting; keep them near template size.
-            r = max(r, default_r * 0.98)
-
-        elongated_plain_badge = aspect_ratio >= 1.60 and w >= 20 and not bool(params.get("draw_text", True))
-        if elongated_plain_badge:
-            # AC0813_L-like forms are the vertical counterpart of AC0812_L/AC0814_L:
-            # JPEG antialiasing around the top connector often biases the detected
-            # ring inward, so preserve a tighter semantic radius floor here too.
-            r = max(r, default_r * 0.95)
-            params["min_circle_radius"] = float(max(float(params.get("min_circle_radius", 1.0)), default_r * 0.95))
-
-        params["r"] = r
-
-        # Tiny vertical badges with text overlays (e.g. AC0833_S / AC0838_S)
-        # tend to be over-influenced by anti-aliased text pixels during contour
-        # fitting. This can pull the circle downward and shrink its radius, which
-        # shortens the visible top connector. Keep small variants close to the
-        # semantic template geometry and only allow minimal vertical drift.
-        if w <= 15 and bool(params.get("draw_text", False)):
-            default_cx = float(defaults.get("cx", float(w) / 2.0))
-            default_cy = float(defaults.get("cy", float(h) - (float(w) / 2.0)))
-            default_r = float(defaults.get("r", float(w) * 0.4))
-            params["cx"] = default_cx
-            params["cy"] = float(Action._clipScalar(cy, default_cy - 0.8, default_cy + 0.8))
-            params["r"] = max(r, default_r * 0.94)
-            params["lock_circle_cx"] = True
-            params["lock_circle_cy"] = True
-            params["lock_arm_center_to_circle"] = True
-            cx = float(params["cx"])
-            cy = float(params["cy"])
-            r = float(params["r"])
-
-        params["arm_enabled"] = True
-        params["arm_stroke"] = arm_stroke
-        params["arm_x1"] = cx
-        params["arm_y1"] = 0.0
-        params["arm_x2"] = cx
-        params["arm_y2"] = max(0.0, cy - r)
-        return Action._normalizeLightCircleColors(params)
+        return semantic_ac0813_helpers.fitAc0813ParamsFromImageImpl(
+            img,
+            defaults,
+            fit_semantic_badge_from_image_fn=Action._fit_semantic_badge_from_image,
+            clip_scalar_fn=Action._clipScalar,
+            normalize_light_circle_colors_fn=Action._normalizeLightCircleColors,
+        )
 
     @staticmethod
     def _rotateSemanticBadgeClockwise(params: dict, w: int, h: int) -> dict:
@@ -2725,137 +2655,24 @@ class Action:
 
     @staticmethod
     def _defaultAc0814Params(w: int, h: int) -> dict:
-        """AC0814 is horizontally elongated: circle on the left, arm to the right."""
-        if w <= 0 or h <= 0:
-            return Action._defaultAc081xShared(w, h)
-
-        # AC0814_L-like originals use a noticeably larger ring than the earlier
-        # generic AC081x template and keep a visible left margin before the
-        # circle. A tighter template gets much closer to the hand-traced sample.
-        r = float(h) * 0.46
-        stroke_circle = max(0.9, float(h) / 25.0)
-        left_margin = max(stroke_circle * 0.5, float(h) * 0.18)
-        cx = r + left_margin
-        cy = float(h) / 2.0
-        arm_stroke = max(1.0, stroke_circle)
-
-        return Action._normalizeLightCircleColors(
-            {
-                "cx": cx,
-                "cy": cy,
-                "r": r,
-                "stroke_circle": stroke_circle,
-                "stroke_gray": Action.LIGHT_CIRCLE_STROKE_GRAY,
-                "fill_gray": Action.LIGHT_CIRCLE_FILL_GRAY,
-                "draw_text": False,
-                "arm_enabled": True,
-                "arm_x1": min(float(w), cx + r),
-                "arm_y1": cy,
-                "arm_x2": float(w),
-                "arm_y2": cy,
-                "arm_stroke": arm_stroke,
-                "arm_len_min": max(1.0, (float(w) - min(float(w), cx + r)) * 0.75),
-                "arm_len_min_ratio": 0.75,
-            }
+        return semantic_ac0813_helpers.defaultAc0814ParamsImpl(
+            w,
+            h,
+            default_ac081x_shared=Action._defaultAc081xShared,
+            normalize_light_circle_colors_fn=Action._normalizeLightCircleColors,
+            light_circle_stroke_gray=Action.LIGHT_CIRCLE_STROKE_GRAY,
+            light_circle_fill_gray=Action.LIGHT_CIRCLE_FILL_GRAY,
         )
 
     @staticmethod
     def _fitAc0814ParamsFromImage(img: np.ndarray, defaults: dict) -> dict:
-        """Fit AC0814 while keeping the horizontal arm anchored to the right edge."""
-        params = Action._fit_semantic_badge_from_image(img, defaults)
-        h, w = img.shape[:2]
-        aspect_ratio = (float(w) / float(h)) if h > 0 else 1.0
-
-        raw_arm_stroke = float(params.get("arm_stroke", defaults.get("arm_stroke", max(1.0, float(h) * 0.10))))
-        cx = float(params.get("cx", defaults.get("cx", float(w) / 2.0)))
-        cy = float(params.get("cy", defaults.get("cy", float(h) / 2.0)))
-        r = float(params.get("r", defaults.get("r", float(h) * 0.4)))
-        stroke_circle = float(params.get("stroke_circle", defaults.get("stroke_circle", max(0.9, float(h) / 15.0))))
-        default_r = float(defaults.get("r", float(h) * 0.4))
-
-        min_arm_stroke = max(1.0, stroke_circle * 0.75)
-        max_arm_stroke = max(min_arm_stroke, min(float(h) * 0.14, stroke_circle * 1.6))
-        arm_stroke = max(min_arm_stroke, min(raw_arm_stroke, max_arm_stroke))
-
-        cx = float(params.get("cx", defaults.get("cx", float(h) / 2.0)))
-        cy = float(params.get("cy", defaults.get("cy", float(h) / 2.0)))
-        r = float(params.get("r", defaults.get("r", float(h) * 0.4)))
-
-        tiny_plain_badge = h <= 18 and not bool(params.get("draw_text", True))
-        if tiny_plain_badge:
-            # Tiny plain connector badges can lose roughly one anti-aliased ring
-            # pixel in contour/Hough fitting; keep them near template size.
-            r = max(r, default_r * 0.98)
-            default_cx = float(defaults.get("cx", float(w) / 2.0))
-            default_cy = float(defaults.get("cy", float(h) / 2.0))
-            # AC0814_S has very little empty space around the ring. Even a
-            # sub-pixel pose drift is visually obvious, so keep the traced circle
-            # anchored to the semantic template and only allow a tiny vertical
-            # correction for raster antialiasing.
-            params["cx"] = default_cx
-            params["cy"] = float(Action._clipScalar(cy, default_cy - 0.5, default_cy + 0.5))
-            params["lock_circle_cx"] = True
-            params["lock_circle_cy"] = True
-            params["lock_arm_center_to_circle"] = True
-            cx = float(params["cx"])
-            cy = float(params["cy"])
-
-        elongated_plain_badge = aspect_ratio >= 1.60 and h >= 20 and not bool(params.get("draw_text", True))
-        if elongated_plain_badge:
-            # AC0814_L-like forms are the mirrored counterpart of AC0812_L: JPEG
-            # antialiasing near the connector often makes the ring fit under-size.
-            # Keep a tighter semantic floor so later validation cannot preserve an
-            # already shrunken circle as the new optimum.
-            r = max(r, default_r * 0.95)
-            params["min_circle_radius"] = float(max(float(params.get("min_circle_radius", 1.0)), default_r * 0.95))
-
-            default_cx = float(defaults.get("cx", float(w) / 2.0))
-            default_cy = float(defaults.get("cy", float(h) / 2.0))
-            # AC0814_M was hand-traced with a noticeably stable left circle margin
-            # and a perfectly horizontal connector. In medium/large plain variants
-            # the raster fit can still drift the ring toward the connector. Keep
-            # the circle near the semantic template, but allow a bounded leftward
-            # correction for medium canvases where the traced source circle sits
-            # slightly further left than the generic template baseline.
-            medium_plain_canvas = h <= 22 and w <= 38
-            max_left_correction = max(0.0, default_r * 0.14) if medium_plain_canvas else 0.0
-            corrected_cx = default_cx
-            if max_left_correction > 0.0:
-                corrected_cx = float(Action._clipScalar(cx, default_cx - max_left_correction, default_cx))
-            params["cx"] = corrected_cx
-            if medium_plain_canvas:
-                params["template_circle_cx"] = corrected_cx
-            params["cy"] = float(Action._clipScalar(cy, default_cy - 0.6, default_cy + 0.6))
-            params["lock_circle_cx"] = True
-            params["lock_circle_cy"] = True
-            params["lock_arm_center_to_circle"] = True
-            cx = float(params["cx"])
-            cy = float(params["cy"])
-
-        params["r"] = r
-
-        params["arm_enabled"] = True
-        params["arm_stroke"] = arm_stroke
-        params["arm_x1"] = min(float(w), cx + r)
-        params["arm_y1"] = cy
-        params["arm_x2"] = float(w)
-        params["arm_y2"] = cy
-        current_arm_len = float(math.hypot(params["arm_x2"] - params["arm_x1"], params["arm_y2"] - params["arm_y1"]))
-        default_arm_len = max(
-            0.0,
-            float(w) - (float(defaults.get("cx", float(h) / 2.0)) + float(defaults.get("r", float(h) * 0.4))),
+        return semantic_ac0813_helpers.fitAc0814ParamsFromImageImpl(
+            img,
+            defaults,
+            fit_semantic_badge_from_image_fn=Action._fit_semantic_badge_from_image,
+            clip_scalar_fn=Action._clipScalar,
+            normalize_light_circle_colors_fn=Action._normalizeLightCircleColors,
         )
-        semantic_arm_len_min = max(1.0, default_arm_len * 0.75)
-        min_arm_len_ratio = 0.75
-        if elongated_plain_badge:
-            min_arm_len_ratio = 0.82
-        params["arm_len_min_ratio"] = float(max(float(params.get("arm_len_min_ratio", min_arm_len_ratio)), min_arm_len_ratio))
-        params["arm_len_min"] = max(
-            1.0,
-            current_arm_len * float(params["arm_len_min_ratio"]),
-            semantic_arm_len_min,
-        )
-        return Action._normalizeLightCircleColors(params)
 
     @staticmethod
     def _defaultAc0810Params(w: int, h: int) -> dict:
