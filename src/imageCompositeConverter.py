@@ -2071,13 +2071,10 @@ class Action:
         connector start to the circle edge so quantization does not leave a
         visible gap between circle and stem.
         """
-        if params.get("stem_enabled") and params.get("circle_enabled", True):
-            if "stem_width" in params and "cx" in params:
-                params["stem_x"] = float(params["cx"]) - (float(params["stem_width"]) / 2.0)
-            if "cy" in params and "r" in params:
-                stem_width = float(params.get("stem_width", params.get("stroke_circle", Action.AC08_STROKE_WIDTH_PX)))
-                params["stem_top"] = float(params["cy"]) + float(params["r"]) - (stem_width * 0.55)
-        return params
+        return semantic_badge_geometry_helpers.alignStemToCircleCenterImpl(
+            params,
+            default_stroke_width=Action.AC08_STROKE_WIDTH_PX,
+        )
 
     @staticmethod
     def _defaultAc0870Params(w: int, h: int) -> dict:
