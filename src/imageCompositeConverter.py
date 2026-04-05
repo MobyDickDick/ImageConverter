@@ -45,6 +45,7 @@ from src.iCCModules import imageCompositeConverterSemanticFitting as semantic_fi
 from src.iCCModules import imageCompositeConverterSemanticLabels as semantic_label_helpers
 from src.iCCModules import imageCompositeConverterSemanticDefaults as semantic_default_helpers
 from src.iCCModules import imageCompositeConverterSemanticAc0811 as semantic_ac0811_helpers
+from src.iCCModules import imageCompositeConverterSemanticAc0812 as semantic_ac0812_helpers
 from src.iCCModules import imageCompositeConverterQuality as quality_helpers
 from src.iCCModules import imageCompositeConverterAudit as audit_helpers
 from src.iCCModules import imageCompositeConverterTransfer as transfer_helpers
@@ -2577,119 +2578,24 @@ class Action:
 
     @staticmethod
     def _defaultAc0812Params(w: int, h: int) -> dict:
-        """AC0812 is horizontally elongated: left arm, circle on the right."""
-        if w <= 0 or h <= 0:
-            return Action._defaultAc081xShared(w, h)
-
-        # Like AC0811/AC0813, size from the narrow side so tiny variants keep
-        # the intended visual circle diameter.
-        # AC0812 source rasters leave a slightly larger vertical margin around the
-        # ring than AC0811/AC0813. Using 0.40*h tends to over-size the circle.
-        r = float(h) * 0.36
-        stroke_circle = max(0.9, float(h) / 15.0)
-        cx = float(w) - (float(h) / 2.0)
-        cy = float(h) / 2.0
-        arm_stroke = max(1.0, float(h) * 0.10)
-
-        return Action._normalizeLightCircleColors(
-            {
-                "cx": cx,
-                "cy": cy,
-                "r": r,
-                "stroke_circle": stroke_circle,
-                "stroke_gray": Action.LIGHT_CIRCLE_STROKE_GRAY,
-                "fill_gray": Action.LIGHT_CIRCLE_FILL_GRAY,
-                "draw_text": False,
-                "arm_enabled": True,
-                "arm_x1": 0.0,
-                "arm_y1": cy,
-                "arm_x2": max(0.0, cx - r - (arm_stroke / 2.0)),
-                "arm_y2": cy,
-                "arm_stroke": arm_stroke,
-                "arm_len_min_ratio": 0.75,
-            }
+        return semantic_ac0812_helpers.defaultAc0812ParamsImpl(
+            w,
+            h,
+            default_ac081x_shared=Action._defaultAc081xShared,
+            normalize_light_circle_colors_fn=Action._normalizeLightCircleColors,
+            light_circle_stroke_gray=Action.LIGHT_CIRCLE_STROKE_GRAY,
+            light_circle_fill_gray=Action.LIGHT_CIRCLE_FILL_GRAY,
         )
 
     @staticmethod
     def _fitAc0812ParamsFromImage(img: np.ndarray, defaults: dict) -> dict:
-        """Fit AC0812 while keeping the horizontal arm anchored to the left edge."""
-        params = Action._fit_semantic_badge_from_image(img, defaults)
-        h, w = img.shape[:2]
-        aspect_ratio = (float(w) / float(h)) if h > 0 else 1.0
-
-        raw_arm_stroke = float(params.get("arm_stroke", defaults.get("arm_stroke", max(1.0, float(h) * 0.10))))
-        cx = float(params.get("cx", defaults.get("cx", float(w) / 2.0)))
-        cy = float(params.get("cy", defaults.get("cy", float(h) / 2.0)))
-        r = float(params.get("r", defaults.get("r", float(h) * 0.4)))
-        stroke_circle = float(params.get("stroke_circle", defaults.get("stroke_circle", max(0.9, float(h) / 15.0))))
-
-        min_arm_stroke = max(1.0, stroke_circle * 0.75)
-        max_arm_stroke = max(min_arm_stroke, min(float(h) * 0.14, stroke_circle * 1.6))
-        arm_stroke = max(min_arm_stroke, min(raw_arm_stroke, max_arm_stroke))
-
-        default_r = float(defaults.get("r", float(h) * 0.4))
-        # Why circles can become too large here:
-        # - AC0812 has a circle touching the right side and an extra left arm.
-        # - On anti-aliased rasters, contour/Hough fitting may merge ring edge,
-        #   arm and border pixels into one oversized blob.
-        # Keep fitting adaptive, but bounded by generic geometric plausibility
-        # instead of variant-specific hard caps. This keeps elongated connector
-        # symbols (including AC0812_L-like forms) free to grow when needed while
-        # still avoiding runaway radii from anti-aliased merged contours.
-        canvas_r_limit = Action._maxCircleRadiusInsideCanvas(cx, cy, w, h, stroke_circle)
-        max_r = max(default_r * 1.45, default_r + 3.0)
-        max_r = min(max_r, canvas_r_limit)
-        r = min(r, max_r)
-
-        if h <= 15 and not bool(params.get("draw_text", True)):
-            # Tiny plain connector badges can lose roughly one anti-aliased ring
-            # pixel in contour/Hough fitting; keep them close to template size.
-            r = max(r, default_r * 0.98)
-
-        # Elongated connector badges are prone to under-estimating the ring when
-        # the connector bleeds into the contour mask. Apply a generic floor for
-        # broad, no-text forms rather than pinning a single SKU.
-        if aspect_ratio >= 1.60 and h >= 20 and not bool(params.get("draw_text", True)):
-            r = max(r, default_r * 0.95)
-
-        params["r"] = r
-
-        params["arm_enabled"] = True
-        params["arm_stroke"] = arm_stroke
-        params["arm_x1"] = 0.0
-        params["arm_y1"] = cy
-        attach_offset = max(0.0, arm_stroke / 2.0)
-        params["arm_x2"] = max(0.0, cx - r - attach_offset)
-        params["arm_y2"] = cy
-        current_arm_len = float(math.hypot(params["arm_x2"] - params["arm_x1"], params["arm_y2"] - params["arm_y1"]))
-        default_arm_len = max(
-            0.0,
-            float(defaults.get("cx", float(w) / 2.0)) - float(defaults.get("r", float(h) * 0.4)),
+        return semantic_ac0812_helpers.fitAc0812ParamsFromImageImpl(
+            img,
+            defaults,
+            fit_semantic_badge_from_image_fn=Action._fit_semantic_badge_from_image,
+            max_circle_radius_inside_canvas_fn=Action._maxCircleRadiusInsideCanvas,
+            normalize_light_circle_colors_fn=Action._normalizeLightCircleColors,
         )
-        # Keep AC0812 connector geometry anchored to the semantic template. If we
-        # derive the minimum arm length from an already-overgrown fitted circle,
-        # later circle optimization can converge to the same unstable large-radius
-        # solution. Use the template arm span as the lower bound baseline instead.
-        semantic_arm_len_min = max(1.0, default_arm_len * 0.75)
-        params["arm_len_min"] = max(1.0, current_arm_len * 0.75, semantic_arm_len_min)
-        min_arm_len_ratio = 0.75
-        # For elongated AC0812 variants (L-like forms), preserve a visibly long
-        # connector arm so circle-fitting noise cannot eat too much horizontal
-        # span. This keeps the left arm close to the semantic template.
-        if aspect_ratio >= 1.60 and h >= 20 and not bool(params.get("draw_text", True)):
-            min_arm_len_ratio = 0.82
-        params["arm_len_min_ratio"] = float(max(float(params.get("arm_len_min_ratio", min_arm_len_ratio)), min_arm_len_ratio))
-        params["arm_len_min"] = max(
-            float(params["arm_len_min"]),
-            max(1.0, current_arm_len * float(params["arm_len_min_ratio"]), semantic_arm_len_min),
-        )
-
-        # Expose a stable upper radius bound for later stochastic/adaptive circle
-        # searches. This prevents left-arm AC0812 variants from re-growing the
-        # circle and shortening the mandatory connector arm during optimization.
-        max_r_from_arm_span = max(1.0, cx - params["arm_len_min"])
-        params["max_circle_radius"] = float(min(canvas_r_limit, max_r_from_arm_span))
-        return Action._normalizeLightCircleColors(params)
 
     @staticmethod
     def _enforceLeftArmBadgeGeometry(params: dict, w: int, h: int) -> dict:
