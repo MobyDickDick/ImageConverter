@@ -342,6 +342,14 @@ def validateSemanticDescriptionAlignmentImpl(
         and local_support["circle"]
         and not local_support["arm"]
     )
+    horizontal_connector_circle_mask_fallback = bool(
+        expected.get("circle", False)
+        and not vertical_connector_family
+        and expected.get("arm", False)
+        and local_support["arm"]
+        and bool(structural.get("circle", False))
+        and str(badge_params.get("text_mode", "")).lower() in {"co2", "voc"}
+    )
     small_connector_circle_mask_fallback = bool(
         expected.get("circle", False)
         and bool(badge_params.get("ac08_small_variant_mode", False))
@@ -358,7 +366,9 @@ def validateSemanticDescriptionAlignmentImpl(
         and not bool(badge_params.get("draw_text", False))
     )
     require_circle_mask_confirmation = expected.get("circle", False) and not (
-        allow_circle_mask_fallback or connector_circle_mask_fallback
+        allow_circle_mask_fallback
+        or connector_circle_mask_fallback
+        or horizontal_connector_circle_mask_fallback
     )
     suppress_structural_stem_for_horizontal_connector = bool(
         expected.get("arm", False)
@@ -371,6 +381,7 @@ def validateSemanticDescriptionAlignmentImpl(
             (structural.get("circle", False) and (local_support["circle"] if require_circle_mask_confirmation else True))
             or (allow_circle_mask_fallback and local_support["circle"])
             or connector_circle_mask_fallback
+            or horizontal_connector_circle_mask_fallback
             or small_connector_circle_mask_fallback
         ),
         "stem": bool(

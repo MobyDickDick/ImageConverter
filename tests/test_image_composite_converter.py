@@ -4986,6 +4986,27 @@ def test_validate_semantic_alignment_accepts_ac0870_small_circle_text_variant() 
     assert "Strukturprüfung: Kein belastbarer Kreis-Kandidat im Rohbild erkannt" not in issues
 
 
+def test_validate_semantic_alignment_accepts_ac0838_large_right_arm_voc_variant() -> None:
+    """AC0838_L should keep circle+right-arm VOC semantics despite weak local circle mask extraction."""
+    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+        pytest.skip("numpy/cv2 not available in this environment")
+
+    cv2 = image_composite_converter.cv2
+    img = cv2.imread("artifacts/images_to_convert/AC0838_L.jpg")
+    assert img is not None
+
+    params = Action.make_badge_params(img.shape[1], img.shape[0], "AC0838", img)
+    issues = Action.validate_semantic_description_alignment(
+        img,
+        ["SEMANTIC: waagrechter Strich rechts vom Kreis", "SEMANTIC: Kreis + Buchstabe VOC"],
+        params,
+    )
+
+    assert "Beschreibung erwartet Kreis, im Bild aber nicht robust erkennbar" not in issues
+    assert "Strukturprüfung: Kein belastbarer Kreis-Kandidat im Rohbild erkannt" not in issues
+    assert "Beschreibung erwartet waagrechter Strich, im Bild aber nicht robust erkennbar" not in issues
+
+
 def test_detect_semantic_primitives_reports_family_circle_fallback_source(monkeypatch: pytest.MonkeyPatch) -> None:
     """Semantic primitive detection should expose when AC08 small-family fallback provided circle evidence."""
     if image_composite_converter.np is None or image_composite_converter.cv2 is None:
