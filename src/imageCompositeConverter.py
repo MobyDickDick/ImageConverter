@@ -47,6 +47,7 @@ from src.iCCModules import imageCompositeConverterSemanticDefaults as semantic_d
 from src.iCCModules import imageCompositeConverterSemanticAc0811 as semantic_ac0811_helpers
 from src.iCCModules import imageCompositeConverterSemanticAc0812 as semantic_ac0812_helpers
 from src.iCCModules import imageCompositeConverterSemanticAc0813 as semantic_ac0813_helpers
+from src.iCCModules import imageCompositeConverterSemanticAc08Params as semantic_ac08_param_helpers
 from src.iCCModules import imageCompositeConverterSemanticBadgeGeometry as semantic_badge_geometry_helpers
 from src.iCCModules import imageCompositeConverterSemanticAc08SmallVariants as semantic_ac08_small_variant_helpers
 from src.iCCModules import imageCompositeConverterSemanticAc08Families as semantic_ac08_family_helpers
@@ -2446,172 +2447,38 @@ class Action:
             Action._centerGlyphBbox(params)
             return params
 
-        if name == "AC0870":
-            defaults = Action._defaultAc0870Params(w, h)
-            if img is None:
-                return Action._finalizeAc08Style(name, defaults)
-            return Action._finalizeAc08Style(name, Action._fitAc0870ParamsFromImage(img, defaults))
-
-        if name == "AC0800":
-            scale = min(w, h) / 30.0 if min(w, h) > 0 else 1.0
-            defaults = {
-                "cx": 15.0 * scale,
-                "cy": 15.0 * scale,
-                "r": 10.8 * scale,
-                "stroke_circle": 1.5 * scale,
-                "fill_gray": 220,
-                "stroke_gray": 152,
-                "draw_text": False,
-            }
-            if img is None:
-                return Action._finalizeAc08Style(name, defaults)
-            return Action._finalizeAc08Style(name, Action._fit_semantic_badge_from_image(img, defaults))
-
-        if name == "AC0811":
-            defaults = Action._defaultAc0811Params(w, h)
-            if img is None:
-                return Action._finalizeAc08Style(name, defaults)
-            return Action._finalizeAc08Style(name, Action._fit_ac0811_params_from_image(img, defaults))
-
-        if name == "AC0810":
-            defaults = Action._defaultAc0810Params(w, h)
-            if img is None:
-                return Action._finalizeAc08Style(name, defaults)
-            return Action._finalizeAc08Style(name, Action._fitAc0810ParamsFromImage(img, defaults))
-
-        if name == "AC0812":
-            defaults = Action._defaultAc0812Params(w, h)
-            if img is None:
-                return Action._enforceLeftArmBadgeGeometry(Action._finalizeAc08Style(name, defaults), w, h)
-            return Action._enforceLeftArmBadgeGeometry(
-                Action._finalizeAc08Style(name, Action._fit_ac0812_params_from_image(img, defaults)),
-                w,
-                h,
-            )
-
-        if name == "AC0813":
-            defaults = Action._defaultAc0813Params(w, h)
-            if img is None:
-                return Action._finalizeAc08Style(name, defaults)
-            return Action._finalizeAc08Style(name, Action._fitAc0813ParamsFromImage(img, defaults))
-
-        if name == "AC0814":
-            defaults = Action._defaultAc0814Params(w, h)
-            if img is None:
-                return Action._finalizeAc08Style(name, defaults)
-            return Action._finalizeAc08Style(name, Action._fit_ac0814_params_from_image(img, defaults))
-
-        if name == "AC0881":
-            defaults = Action._defaultAc0881Params(w, h)
-            if img is None:
-                return Action._finalizeAc08Style(name, defaults)
-            return Action._finalizeAc08Style(name, Action._fit_semantic_badge_from_image(img, defaults))
-
-        if name == "AC0882":
-            defaults = Action._defaultAc0882Params(w, h)
-            if img is None:
-                return Action._enforceLeftArmBadgeGeometry(Action._finalizeAc08Style(name, defaults), w, h)
-            return Action._enforceLeftArmBadgeGeometry(
-                Action._finalizeAc08Style(name, Action._fit_semantic_badge_from_image(img, defaults)),
-                w,
-                h,
-            )
-
-        if name == "AC0820":
-            defaults = Action._applyCo2Label(Action._defaultAc0870Params(w, h))
-            if img is None:
-                return Action._finalizeAc08Style(name, defaults)
-            return Action._finalizeAc08Style(name, Action._applyCo2Label(Action._fit_semantic_badge_from_image(img, defaults)))
-
-        if name == "AC0831":
-            defaults = Action._applyCo2Label(Action._defaultAc0881Params(w, h))
-            if img is None:
-                return Action._finalizeAc08Style(name, Action._tuneAc0831Co2Badge(defaults))
-            return Action._finalizeAc08Style(
-                name,
-                Action._tuneAc0831Co2Badge(Action._fit_ac0811_params_from_image(img, defaults)),
-            )
-
-        if name == "AC0832":
-            defaults = Action._applyCo2Label(Action._defaultAc0812Params(w, h))
-            if img is None:
-                return Action._enforceLeftArmBadgeGeometry(
-                    Action._finalizeAc08Style(name, Action._tuneAc0832Co2Badge(defaults)),
-                    w,
-                    h,
-                )
-            return Action._enforceLeftArmBadgeGeometry(
-                Action._finalizeAc08Style(
-                    name,
-                    Action._tuneAc0832Co2Badge(Action._fit_ac0812_params_from_image(img, defaults)),
-                ),
-                w,
-                h,
-            )
-
-        if name == "AC0833":
-            defaults = Action._tuneAc0833Co2Badge(Action._applyCo2Label(Action._defaultAc0813Params(w, h)))
-            if img is None:
-                return Action._finalizeAc08Style(name, defaults)
-            return Action._finalizeAc08Style(name, Action._tuneAc0833Co2Badge(Action._fitAc0813ParamsFromImage(img, defaults)))
-
-        if name == "AC0834":
-            defaults = Action._applyCo2Label(Action._defaultAc0814Params(w, h))
-            if img is None:
-                return Action._finalizeAc08Style(name, Action._tuneAc0834Co2Badge(defaults, w, h))
-            return Action._finalizeAc08Style(
-                name,
-                Action._tuneAc0834Co2Badge(
-                    Action._fit_ac0814_params_from_image(img, defaults),
-                    w,
-                    h,
-                ),
-            )
-
-        if name == "AC0835":
-            # AC0835 belongs to the right-arm VOC connector family.
-            defaults = Action._applyVocLabel(Action._defaultAc0814Params(w, h))
-            if img is None:
-                return Action._finalizeAc08Style(name, Action._tuneAc0835VocBadge(defaults, w, h))
-            return Action._finalizeAc08Style(
-                name,
-                Action._tuneAc0835VocBadge(
-                    Action._fit_ac0814_params_from_image(img, defaults),
-                    w,
-                    h,
-                ),
-            )
-
-        if name == "AC0836":
-            defaults = Action._applyVocLabel(Action._defaultAc0881Params(w, h))
-            if img is None:
-                return Action._finalizeAc08Style(name, defaults)
-            return Action._finalizeAc08Style(name, Action._fit_ac0811_params_from_image(img, defaults))
-
-        if name == "AC0837":
-            defaults = Action._applyVocLabel(Action._defaultAc0812Params(w, h))
-            if img is None:
-                return Action._enforceLeftArmBadgeGeometry(Action._finalizeAc08Style(name, defaults), w, h)
-            return Action._enforceLeftArmBadgeGeometry(
-                Action._finalizeAc08Style(name, Action._fit_ac0812_params_from_image(img, defaults)),
-                w,
-                h,
-            )
-
-        if name == "AC0838":
-            # AC0838 is part of the right-arm VOC family (same geometry class as
-            # AC0814/AC0839), not the top-stem family.
-            defaults = Action._applyVocLabel(Action._defaultAc0814Params(w, h))
-            if img is None:
-                return Action._finalizeAc08Style(name, defaults)
-            return Action._finalizeAc08Style(name, Action._fit_ac0814_params_from_image(img, defaults))
-
-        if name == "AC0839":
-            defaults = Action._applyVocLabel(Action._defaultAc0814Params(w, h))
-            if img is None:
-                return Action._finalizeAc08Style(name, defaults)
-            return Action._finalizeAc08Style(name, Action._fit_ac0814_params_from_image(img, defaults))
-
+        ac08_params = semantic_ac08_param_helpers.makeAc08BadgeParamsImpl(
+            w,
+            h,
+            name,
+            img,
+            default_ac0870_params_fn=Action._defaultAc0870Params,
+            default_ac0811_params_fn=Action._defaultAc0811Params,
+            default_ac0810_params_fn=Action._defaultAc0810Params,
+            default_ac0812_params_fn=Action._defaultAc0812Params,
+            default_ac0813_params_fn=Action._defaultAc0813Params,
+            default_ac0814_params_fn=Action._defaultAc0814Params,
+            default_ac0881_params_fn=Action._defaultAc0881Params,
+            default_ac0882_params_fn=Action._defaultAc0882Params,
+            fit_ac0870_params_from_image_fn=Action._fitAc0870ParamsFromImage,
+            fit_semantic_badge_from_image_fn=Action._fit_semantic_badge_from_image,
+            fit_ac0811_params_from_image_fn=Action._fit_ac0811_params_from_image,
+            fit_ac0810_params_from_image_fn=Action._fitAc0810ParamsFromImage,
+            fit_ac0812_params_from_image_fn=Action._fit_ac0812_params_from_image,
+            fit_ac0813_params_from_image_fn=Action._fitAc0813ParamsFromImage,
+            fit_ac0814_params_from_image_fn=Action._fit_ac0814_params_from_image,
+            apply_co2_label_fn=Action._applyCo2Label,
+            apply_voc_label_fn=Action._applyVocLabel,
+            tune_ac0831_co2_badge_fn=Action._tuneAc0831Co2Badge,
+            tune_ac0832_co2_badge_fn=Action._tuneAc0832Co2Badge,
+            tune_ac0833_co2_badge_fn=Action._tuneAc0833Co2Badge,
+            tune_ac0834_co2_badge_fn=Action._tuneAc0834Co2Badge,
+            tune_ac0835_voc_badge_fn=Action._tuneAc0835VocBadge,
+            finalize_ac08_style_fn=Action._finalizeAc08Style,
+            enforce_left_arm_badge_geometry_fn=Action._enforceLeftArmBadgeGeometry,
+        )
+        if ac08_params is not None:
+            return ac08_params
         return None
 
     @staticmethod
