@@ -43,6 +43,7 @@ from src.iCCModules import imageCompositeConverterSemanticValidation as semantic
 from src.iCCModules import imageCompositeConverterSemanticChecks as semantic_checks_helpers
 from src.iCCModules import imageCompositeConverterSemanticFitting as semantic_fitting_helpers
 from src.iCCModules import imageCompositeConverterSemanticLabels as semantic_label_helpers
+from src.iCCModules import imageCompositeConverterSemanticDefaults as semantic_default_helpers
 from src.iCCModules import imageCompositeConverterQuality as quality_helpers
 from src.iCCModules import imageCompositeConverterAudit as audit_helpers
 from src.iCCModules import imageCompositeConverterTransfer as transfer_helpers
@@ -2413,35 +2414,21 @@ class Action:
 
     @staticmethod
     def _defaultAc0870Params(w: int, h: int) -> dict:
-        scale = min(w, h) / 30.0 if min(w, h) > 0 else 1.0
-        b = Action.AC0870_BASE
-        params = {
-            "cx": b["cx"] * scale,
-            "cy": b["cy"] * scale,
-            "r": b["r"] * scale,
-            "stroke_circle": b["stroke_width"] * scale,
-            "fill_gray": b["fill_gray"],
-            "stroke_gray": b["stroke_gray"],
-            "text_gray": b["text_gray"],
-            "label": b["label"],
-            "tx": 8.7 * scale,
-            "ty": 6.5 * scale,
-            "s": 0.0100 * scale,
-            "text_mode": "path_t",
-        }
-        Action._centerGlyphBbox(params)
-        return Action._normalizeLightCircleColors(params)
+        return semantic_default_helpers.defaultAc0870ParamsImpl(
+            w,
+            h,
+            ac0870_base=Action.AC0870_BASE,
+            center_glyph_bbox=Action._centerGlyphBbox,
+            normalize_light_circle_colors=Action._normalizeLightCircleColors,
+        )
 
     @staticmethod
     def _defaultAc0881Params(w: int, h: int) -> dict:
-        params = Action._defaultAc0870Params(w, h)
-        params["stem_enabled"] = True
-        params["stem_width"] = max(1.0, params["r"] * 0.30)
-        params["stem_x"] = params["cx"] - (params["stem_width"] / 2.0)
-        params["stem_top"] = params["cy"] + (params["r"] * 0.60)
-        params["stem_bottom"] = float(h)
-        params["stem_gray"] = params["stroke_gray"]
-        return params
+        return semantic_default_helpers.defaultAc0881ParamsImpl(
+            w,
+            h,
+            default_ac0870_params=Action._defaultAc0870Params,
+        )
 
     @staticmethod
     def _defaultAc081xShared(w: int, h: int) -> dict:
@@ -2713,25 +2700,12 @@ class Action:
 
     @staticmethod
     def _defaultAc0882Params(w: int, h: int) -> dict:
-        params = Action._defaultAc081xShared(w, h)
-        arm_x2 = params["cx"] - params["r"]
-        arm_x1 = max(0.0, arm_x2 - params["stem_or_arm_len"])
-        params.update(
-            {
-                "text_gray": 98,
-                "label": "T",
-                "text_mode": "path_t",
-                "arm_enabled": True,
-                "arm_x1": arm_x1,
-                "arm_y1": params["cy"],
-                "arm_x2": arm_x2,
-                "arm_y2": params["cy"],
-                "arm_stroke": params["stem_or_arm"],
-                "s": 0.0088 * min(1.0, (min(w, h) / 25.0)) if min(w, h) > 0 else 0.0088,
-            }
+        return semantic_default_helpers.defaultAc0882ParamsImpl(
+            w,
+            h,
+            default_ac081x_shared=Action._defaultAc081xShared,
+            center_glyph_bbox=Action._centerGlyphBbox,
         )
-        Action._centerGlyphBbox(params)
-        return params
 
     @staticmethod
     def _applyCo2Label(params: dict) -> dict:
