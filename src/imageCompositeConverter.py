@@ -48,6 +48,7 @@ from src.iCCModules import imageCompositeConverterSemanticAc0811 as semantic_ac0
 from src.iCCModules import imageCompositeConverterSemanticAc0812 as semantic_ac0812_helpers
 from src.iCCModules import imageCompositeConverterSemanticAc0813 as semantic_ac0813_helpers
 from src.iCCModules import imageCompositeConverterSemanticBadgeGeometry as semantic_badge_geometry_helpers
+from src.iCCModules import imageCompositeConverterSemanticAc08Families as semantic_ac08_family_helpers
 from src.iCCModules import imageCompositeConverterQuality as quality_helpers
 from src.iCCModules import imageCompositeConverterAudit as audit_helpers
 from src.iCCModules import imageCompositeConverterTransfer as transfer_helpers
@@ -1683,405 +1684,67 @@ class Action:
 
     @staticmethod
     def _enforceTemplateCircleEdgeExtent(params: dict, w: int, h: int, *, anchor: str, retain_ratio: float = 0.97) -> dict:
-        """Keep edge-anchored circles close to template edge reach.
-
-        Generic safeguard for all edge-anchored connector families:
-        if optimization shortens the anchored side too much (e.g. right arc on
-        AC0812-like badges), raise `min_circle_radius` so the anchored contour
-        keeps at least `retain_ratio` of the template extent.
-        """
-        p = dict(params)
-        if not p.get("circle_enabled", True):
-            return p
-        if "cx" not in p or "r" not in p:
-            return p
-        if "template_circle_cx" not in p or "template_circle_radius" not in p:
-            return p
-
-        retain_ratio = float(max(0.90, min(1.00, retain_ratio)))
-        cx = float(p["cx"])
-        template_cx = float(p["template_circle_cx"])
-        template_r = max(1.0, float(p["template_circle_radius"]))
-        stroke = float(max(0.0, p.get("stroke_circle", 0.0)))
-        canvas_cap = float(Action._maxCircleRadiusInsideCanvas(cx, float(p.get("cy", float(h) / 2.0)), w, h, stroke))
-
-        if anchor == "right":
-            template_extent = template_cx + template_r
-            required_extent = template_extent * retain_ratio
-            required_r = required_extent - cx
-        elif anchor == "left":
-            template_extent = template_cx - template_r
-            required_extent = template_extent + ((1.0 - retain_ratio) * abs(template_extent))
-            required_r = cx - required_extent
-        else:
-            return p
-
-        required_r = float(max(1.0, min(canvas_cap, required_r)))
-        if required_r > 1.0:
-            p["min_circle_radius"] = float(max(float(p.get("min_circle_radius", 1.0)), required_r))
-        return p
+        return semantic_ac08_family_helpers.enforceTemplateCircleEdgeExtentImpl(
+            params,
+            w,
+            h,
+            anchor=anchor,
+            retain_ratio=retain_ratio,
+            max_circle_radius_inside_canvas_fn=Action._maxCircleRadiusInsideCanvas,
+        )
 
 
     @staticmethod
     def _tuneAc08LeftConnectorFamily(name: str, params: dict) -> dict:
-        """Apply shared guardrails for left-connector AC08 families.
-
-        Aufgabe 4.1 groups AC0812, AC0832, AC0837 and AC0882 because they all
-        combine a circle on the right with a left-facing horizontal connector.
-        The shared failure modes are:
-        - the circle drifting left into the connector,
-        - the arm collapsing until it becomes barely visible, and
-        - text badges shrinking/offsetting once the circle geometry drifts.
-
-        Keep those families on a common semantic baseline before variant-specific
-        fine-tuning runs.
-        """
-        p = dict(params)
-        symbol_name = getBaseNameFromFile(str(name)).upper().split("_", 1)[0]
-        if symbol_name not in {"AC0812", "AC0832", "AC0837", "AC0882"}:
-            return p
-
-        p["connector_family_group"] = "ac08_left_connector"
-        p["connector_family_direction"] = "left"
-        p["lock_circle_cx"] = True
-        p["lock_circle_cy"] = True
-        if "template_circle_cx" in p:
-            p["cx"] = float(p["template_circle_cx"])
-        if "template_circle_cy" in p:
-            p["cy"] = float(p["template_circle_cy"])
-
-        has_text = bool(p.get("draw_text", False))
-        text_mode = str(p.get("text_mode", "")).lower()
-        is_small, _reason, min_dim = Action._isAc08SmallVariant(str(name), p)
-        arm_ratio_floor = 0.82
-        if has_text or text_mode == "path_t":
-            arm_ratio_floor = 0.84
-        if is_small:
-            arm_ratio_floor = max(arm_ratio_floor, 0.86)
-        p["arm_len_min_ratio"] = float(max(float(p.get("arm_len_min_ratio", arm_ratio_floor)), arm_ratio_floor))
-
-        template_r = float(p.get("template_circle_radius", p.get("r", 1.0)))
-        radius_floor_ratio = 0.95 if not has_text else 0.93
-        if is_small:
-            radius_floor_ratio = max(radius_floor_ratio, 0.96 if not has_text else 0.94)
-        p["min_circle_radius"] = float(max(float(p.get("min_circle_radius", 1.0)), template_r * radius_floor_ratio))
-        p = Action._enforceTemplateCircleEdgeExtent(
-            p,
-            int(round(float(p.get("width", 0.0) or 0.0))) or int(round(float(p.get("badge_width", 0.0) or 0.0))) or 1,
-            int(round(float(p.get("height", 0.0) or 0.0))) or int(round(float(p.get("badge_height", 0.0) or 0.0))) or 1,
-            anchor="right",
-            retain_ratio=0.97 if not is_small else 0.96,
+        return semantic_ac08_family_helpers.tuneAc08LeftConnectorFamilyImpl(
+            name,
+            params,
+            get_base_name_from_file_fn=getBaseNameFromFile,
+            is_ac08_small_variant_fn=Action._isAc08SmallVariant,
+            enforce_template_circle_edge_extent_fn=Action._enforceTemplateCircleEdgeExtent,
+            enforce_left_arm_badge_geometry_fn=Action._enforceLeftArmBadgeGeometry,
+            center_glyph_bbox_fn=Action._centerGlyphBbox,
         )
-
-        p = Action._enforceLeftArmBadgeGeometry(
-            p,
-            int(round(float(p.get("width", 0.0) or 0.0))) or int(round(float(p.get("badge_width", 0.0) or 0.0))) or 1,
-            int(round(float(p.get("height", 0.0) or 0.0))) or int(round(float(p.get("badge_height", 0.0) or 0.0))) or 1,
-        )
-
-        if p.get("arm_enabled") and "cx" in p:
-            max_from_arm_floor = max(1.0, float(p["cx"]) - float(p.get("arm_len_min", 1.0)))
-            existing_max = float(p.get("max_circle_radius", 0.0) or 0.0)
-            if existing_max > 0.0:
-                p["max_circle_radius"] = float(min(existing_max, max_from_arm_floor))
-            else:
-                p["max_circle_radius"] = float(max_from_arm_floor)
-
-        text_mode = str(p.get("text_mode", "")).lower()
-        if text_mode == "co2":
-            base_scale = float(p.get("co2_font_scale", 0.82))
-            p["lock_text_scale"] = False
-            p["co2_font_scale_min"] = float(max(float(p.get("co2_font_scale_min", base_scale)), max(0.78, base_scale * 0.94)))
-            p["co2_font_scale_max"] = float(min(float(p.get("co2_font_scale_max", 1.12)), min(1.12, base_scale * 1.15)))
-            p["co2_anchor_mode"] = str(p.get("co2_anchor_mode", "cluster"))
-        elif text_mode == "voc":
-            base_scale = float(p.get("voc_font_scale", 0.52))
-            p["lock_text_scale"] = False
-            p["voc_font_scale_min"] = float(max(float(p.get("voc_font_scale_min", base_scale)), max(0.50, base_scale * 0.94)))
-            p["voc_font_scale_max"] = float(min(float(p.get("voc_font_scale_max", 0.98)), min(0.98, base_scale * 1.14)))
-        elif str(p.get("text_mode", "")).lower() == "path_t":
-            p["s"] = float(max(float(p.get("s", 0.0)), 0.0088 if min_dim >= 18.0 else 0.0082))
-            Action._centerGlyphBbox(p)
-        return p
 
     @staticmethod
     def _tuneAc08RightConnectorFamily(name: str, params: dict) -> dict:
-        """Apply shared guardrails for mirrored right-connector AC08 families.
-
-        Aufgabe 4.2 groups AC0810, AC0814, AC0834, AC0838 and AC0839
-        because they all place the circle on the left and extend the connector
-        toward the right canvas edge. Their common regressions mirror the left
-        connector family:
-        - the circle drifts right into the connector span,
-        - the arm collapses until the badge looks almost circular, and
-        - tiny right-arm text badges drift down/right when text pixels dominate.
-
-        Keep those mirrored families on one semantic baseline before applying
-        family-specific CO₂/VOC or small-variant adjustments.
-        """
-        p = dict(params)
-        symbol_name = getBaseNameFromFile(str(name)).upper().split("_", 1)[0]
-        if symbol_name not in {"AC0810", "AC0814", "AC0834", "AC0838", "AC0839"}:
-            return p
-
-        p["connector_family_group"] = "ac08_right_connector"
-        p["connector_family_direction"] = "right"
-        p["lock_circle_cx"] = True
-        p["lock_circle_cy"] = True
-        if "template_circle_cx" in p:
-            p["cx"] = float(p["template_circle_cx"])
-        if "template_circle_cy" in p:
-            p["cy"] = float(p["template_circle_cy"])
-
-        has_text = bool(p.get("draw_text", False))
-        text_mode = str(p.get("text_mode", "")).lower()
-        is_small, _reason, min_dim = Action._isAc08SmallVariant(str(name), p)
-        arm_ratio_floor = 0.82
-        if has_text or text_mode == "path_t":
-            arm_ratio_floor = 0.84
-        if is_small:
-            arm_ratio_floor = max(arm_ratio_floor, 0.86)
-        p["arm_len_min_ratio"] = float(max(float(p.get("arm_len_min_ratio", arm_ratio_floor)), arm_ratio_floor))
-
-        template_r = float(p.get("template_circle_radius", p.get("r", 1.0)))
-        radius_floor_ratio = 0.95 if not has_text else 0.93
-        if is_small:
-            radius_floor_ratio = max(radius_floor_ratio, 0.96 if not has_text else 0.94)
-        p["min_circle_radius"] = float(max(float(p.get("min_circle_radius", 1.0)), template_r * radius_floor_ratio))
-        p = Action._enforceTemplateCircleEdgeExtent(
-            p,
-            int(round(float(p.get("width", 0.0) or 0.0))) or int(round(float(p.get("badge_width", 0.0) or 0.0))) or 1,
-            int(round(float(p.get("height", 0.0) or 0.0))) or int(round(float(p.get("badge_height", 0.0) or 0.0))) or 1,
-            anchor="left",
-            retain_ratio=0.97 if not is_small else 0.96,
+        return semantic_ac08_family_helpers.tuneAc08RightConnectorFamilyImpl(
+            name,
+            params,
+            get_base_name_from_file_fn=getBaseNameFromFile,
+            is_ac08_small_variant_fn=Action._isAc08SmallVariant,
+            enforce_template_circle_edge_extent_fn=Action._enforceTemplateCircleEdgeExtent,
+            enforce_right_arm_badge_geometry_fn=Action._enforceRightArmBadgeGeometry,
         )
-
-        p = Action._enforceRightArmBadgeGeometry(
-            p,
-            int(round(float(p.get("width", 0.0) or 0.0))) or int(round(float(p.get("badge_width", 0.0) or 0.0))) or 1,
-            int(round(float(p.get("height", 0.0) or 0.0))) or int(round(float(p.get("badge_height", 0.0) or 0.0))) or 1,
-        )
-
-        if p.get("arm_enabled") and "cx" in p and "r" in p:
-            canvas_width = float(p.get("width", 0.0) or p.get("badge_width", 0.0) or p.get("arm_x2", 0.0) or 1.0)
-            right_extent = max(float(p["cx"]) + float(p["r"]), 0.0)
-            max_from_arm_floor = max(1.0, canvas_width - float(p.get("arm_len_min", 1.0)) - float(p["cx"]))
-            existing_max = float(p.get("max_circle_radius", 0.0) or 0.0)
-            bounded_max = min(max_from_arm_floor, max(1.0, right_extent))
-            if existing_max > 0.0:
-                p["max_circle_radius"] = float(min(existing_max, bounded_max))
-            else:
-                p["max_circle_radius"] = float(bounded_max)
-
-        text_mode = str(p.get("text_mode", "")).lower()
-        if text_mode == "co2":
-            base_scale = float(p.get("co2_font_scale", 0.82))
-            p["lock_text_scale"] = False
-            p["co2_font_scale_min"] = float(max(float(p.get("co2_font_scale_min", base_scale)), max(0.78, base_scale * 0.94)))
-            p["co2_font_scale_max"] = float(min(float(p.get("co2_font_scale_max", 1.12)), min(1.12, base_scale * 1.15)))
-            p["co2_anchor_mode"] = str(p.get("co2_anchor_mode", "cluster"))
-        elif text_mode == "voc":
-            base_scale = float(p.get("voc_font_scale", 0.52))
-            p["lock_text_scale"] = False
-            p["voc_font_scale_min"] = float(max(float(p.get("voc_font_scale_min", base_scale)), max(0.50, base_scale * 0.94)))
-            p["voc_font_scale_max"] = float(min(float(p.get("voc_font_scale_max", 0.98)), min(0.98, base_scale * 1.14)))
-        return p
 
     @staticmethod
     def _enforceVerticalConnectorBadgeGeometry(params: dict, w: int, h: int) -> dict:
-        """Ensure AC0811/AC0813-like badges keep a centered visible vertical connector."""
-        p = dict(params)
-        if not p.get("circle_enabled", True):
-            return p
-        if "cx" not in p or "cy" not in p or "r" not in p:
-            return p
-
-        cx = float(p["cx"])
-        cy = float(p["cy"])
-        r = float(p["r"])
-        canvas_height = max(
-            float(h),
-            float(p.get("height", 0.0) or 0.0),
-            float(p.get("badge_height", 0.0) or 0.0),
-            float(p.get("stem_bottom", 0.0) or 0.0),
-            cy + r,
+        return semantic_ac08_family_helpers.enforceVerticalConnectorBadgeGeometryImpl(
+            params,
+            w,
+            h,
+            ac08_stroke_width_px=Action.AC08_STROKE_WIDTH_PX,
         )
-
-        if p.get("stem_enabled"):
-            stem_width = float(max(1.0, p.get("stem_width", p.get("stroke_circle", Action.AC08_STROKE_WIDTH_PX))))
-            p["stem_enabled"] = True
-            p["stem_width"] = stem_width
-            p["stem_x"] = cx - (stem_width / 2.0)
-            p["stem_top"] = cy + r - (stem_width * 0.55)
-            p["stem_bottom"] = canvas_height
-            stem_len = float(max(0.0, canvas_height - (cy + r)))
-            ratio = float(max(0.0, min(1.0, float(p.get("stem_len_min_ratio", 0.65)))))
-            p["stem_len_min_ratio"] = ratio
-            p["stem_len_min"] = float(max(1.0, float(p.get("stem_len_min", 1.0)), stem_len * ratio))
-
-        if p.get("arm_enabled"):
-            arm_stroke = float(max(1.0, p.get("arm_stroke", Action.AC08_STROKE_WIDTH_PX)))
-            top_extent = max(0.0, cy - r)
-            p["arm_enabled"] = True
-            p["arm_stroke"] = arm_stroke
-            p["arm_x1"] = cx
-            p["arm_x2"] = cx
-            p["arm_y1"] = 0.0
-            p["arm_y2"] = top_extent
-            arm_len = float(max(0.0, top_extent))
-            ratio = float(max(0.0, min(1.0, float(p.get("arm_len_min_ratio", 0.75)))))
-            p["arm_len_min_ratio"] = ratio
-            p["arm_len_min"] = float(max(1.0, float(p.get("arm_len_min", 1.0)), arm_len * ratio))
-        return p
 
     @staticmethod
     def _tuneAc08VerticalConnectorFamily(name: str, params: dict) -> dict:
-        """Apply shared guardrails for AC08 families with vertical connectors.
-
-        Aufgabe 4.3 groups AC0811, AC0813, AC0831, AC0833, AC0836 and AC0881 because
-        they all depend on a vertical connector staying centered relative to the
-        circle. Their main shared regressions are:
-        - the stem/arm drifting sideways relative to the circle,
-        - the vertical connector shrinking until the badge reads as plain circle,
-        - text badges becoming top-heavy once circle and connector alignment drifts.
-        """
-        p = dict(params)
-        symbol_name = getBaseNameFromFile(str(name)).upper().split("_", 1)[0]
-        if symbol_name not in {"AC0811", "AC0813", "AC0831", "AC0833", "AC0836", "AC0881"}:
-            return p
-
-        p["connector_family_group"] = "ac08_vertical_connector"
-        p["connector_family_direction"] = "vertical"
-        if symbol_name in {"AC0811", "AC0831", "AC0836", "AC0881"}:
-            p["stem_enabled"] = True
-            p.pop("arm_enabled", None)
-        elif symbol_name in {"AC0813", "AC0833"}:
-            p["arm_enabled"] = True
-        p["lock_circle_cx"] = True
-        p["lock_circle_cy"] = True
-        p["lock_stem_center_to_circle"] = bool(p.get("stem_enabled", False))
-        p["lock_arm_center_to_circle"] = bool(p.get("arm_enabled", False))
-        if "template_circle_cx" in p:
-            p["cx"] = float(p["template_circle_cx"])
-        if "template_circle_cy" in p:
-            p["cy"] = float(p["template_circle_cy"])
-
-        has_text = bool(p.get("draw_text", False))
-        is_small, _reason, min_dim = Action._isAc08SmallVariant(str(name), p)
-        template_r = float(p.get("template_circle_radius", p.get("r", 1.0)))
-        radius_floor_ratio = 0.95 if not has_text else 0.93
-        if is_small:
-            radius_floor_ratio = max(radius_floor_ratio, 0.96 if not has_text else 0.95)
-        p["min_circle_radius"] = float(max(float(p.get("min_circle_radius", 1.0)), template_r * radius_floor_ratio))
-
-        if p.get("stem_enabled"):
-            stem_ratio_floor = 0.70 if not has_text else 0.72
-            if is_small:
-                stem_ratio_floor = max(stem_ratio_floor, 0.74)
-            p["stem_len_min_ratio"] = float(max(float(p.get("stem_len_min_ratio", stem_ratio_floor)), stem_ratio_floor))
-        if p.get("arm_enabled"):
-            arm_ratio_floor = 0.78 if not has_text else 0.80
-            if is_small:
-                arm_ratio_floor = max(arm_ratio_floor, 0.82)
-            p["arm_len_min_ratio"] = float(max(float(p.get("arm_len_min_ratio", arm_ratio_floor)), arm_ratio_floor))
-
-        p = Action._enforceVerticalConnectorBadgeGeometry(
-            p,
-            int(round(float(p.get("width", 0.0) or 0.0))) or int(round(float(p.get("badge_width", 0.0) or 0.0))) or 1,
-            int(round(float(p.get("height", 0.0) or 0.0))) or int(round(float(p.get("badge_height", 0.0) or 0.0))) or 1,
+        return semantic_ac08_family_helpers.tuneAc08VerticalConnectorFamilyImpl(
+            name,
+            params,
+            get_base_name_from_file_fn=getBaseNameFromFile,
+            is_ac08_small_variant_fn=Action._isAc08SmallVariant,
+            enforce_vertical_connector_badge_geometry_fn=Action._enforceVerticalConnectorBadgeGeometry,
         )
-
-        text_mode = str(p.get("text_mode", "")).lower()
-        if text_mode == "co2":
-            base_scale = float(p.get("co2_font_scale", 0.82))
-            p["lock_text_scale"] = False
-            p["co2_anchor_mode"] = "cluster"
-            p["co2_optical_bias"] = float(max(float(p.get("co2_optical_bias", 0.10)), 0.10))
-            p["co2_dy"] = float(max(float(p.get("co2_dy", 0.0)), 0.05 * template_r if min_dim > 0.0 else 0.0))
-            p["co2_font_scale_min"] = float(max(float(p.get("co2_font_scale_min", base_scale)), max(0.78, base_scale * 0.94)))
-            p["co2_font_scale_max"] = float(min(float(p.get("co2_font_scale_max", 1.12)), min(1.12, base_scale * 1.15)))
-        elif text_mode == "voc":
-            base_scale = float(p.get("voc_font_scale", 0.52))
-            p["lock_text_scale"] = False
-            p["voc_font_scale_min"] = float(max(float(p.get("voc_font_scale_min", base_scale)), max(0.50, base_scale * 0.94)))
-            p["voc_font_scale_max"] = float(min(float(p.get("voc_font_scale_max", 0.98)), min(0.98, base_scale * 1.14)))
-        return p
 
     @staticmethod
     def _tuneAc08CircleTextFamily(name: str, params: dict) -> dict:
-        """Apply shared guardrails for connector-free AC08 circle/text badges.
-
-        Aufgabe 4.4 groups AC0820, AC0835 and AC0870 because they all:
-        - have no connector geometry that should influence circle fitting,
-        - regress when text blobs pull the circle away from the semantic center,
-        - need stable text scaling without letting the ring collapse or overgrow.
-        """
-        p = dict(params)
-        symbol_name = getBaseNameFromFile(str(name)).upper().split("_", 1)[0]
-        if symbol_name not in {"AC0820", "AC0835", "AC0870"}:
-            return p
-
-        p["connector_family_group"] = "ac08_circle_text"
-        p["connector_family_direction"] = "centered"
-        p["lock_circle_cx"] = True
-        p["lock_circle_cy"] = True
-
-        if "template_circle_cx" in p:
-            p["cx"] = float(p["template_circle_cx"])
-        if "template_circle_cy" in p:
-            p["cy"] = float(p["template_circle_cy"])
-
-        template_r = float(p.get("template_circle_radius", p.get("r", 1.0)))
-        min_dim = float(
-            min(
-                float(p.get("width", 0.0) or 0.0),
-                float(p.get("height", 0.0) or 0.0),
-            )
+        return semantic_ac08_family_helpers.tuneAc08CircleTextFamilyImpl(
+            name,
+            params,
+            get_base_name_from_file_fn=getBaseNameFromFile,
+            max_circle_radius_inside_canvas_fn=Action._maxCircleRadiusInsideCanvas,
+            center_glyph_bbox_fn=Action._centerGlyphBbox,
         )
-        if min_dim <= 0.0:
-            min_dim = max(1.0, template_r * 2.0)
-
-        text_mode = str(p.get("text_mode", "")).lower()
-        radius_floor_ratio = 0.94 if text_mode in {"co2", "voc"} else 0.96
-        p["min_circle_radius"] = float(max(float(p.get("min_circle_radius", 1.0)), template_r * radius_floor_ratio))
-
-        canvas_w = int(round(float(p.get("width", 0.0) or p.get("badge_width", 0.0) or min_dim)))
-        canvas_h = int(round(float(p.get("height", 0.0) or p.get("badge_height", 0.0) or min_dim)))
-        if canvas_w > 0 and canvas_h > 0 and "cx" in p and "cy" in p:
-            canvas_cap = Action._maxCircleRadiusInsideCanvas(
-                float(p["cx"]),
-                float(p["cy"]),
-                canvas_w,
-                canvas_h,
-                float(p.get("stroke_circle", 1.0)),
-            )
-            relaxed_cap = max(template_r * 1.08, float(p.get("max_circle_radius", 0.0) or 0.0))
-            p["max_circle_radius"] = float(min(canvas_cap, relaxed_cap)) if canvas_cap > 0.0 else float(relaxed_cap)
-
-        if text_mode == "co2":
-            base_scale = float(p.get("co2_font_scale", 0.94 if symbol_name == "AC0820" else 0.88))
-            p["lock_text_scale"] = False
-            p["co2_anchor_mode"] = "cluster"
-            p["co2_optical_bias"] = float(max(float(p.get("co2_optical_bias", 0.125)), 0.125 if symbol_name == "AC0820" else 0.10))
-            p["co2_dy"] = float(max(-0.06 * template_r, min(0.16 * template_r, float(p.get("co2_dy", 0.03 * template_r)))))
-            p["co2_font_scale_min"] = float(max(float(p.get("co2_font_scale_min", base_scale)), max(0.84, base_scale * 0.92)))
-            p["co2_font_scale_max"] = float(min(float(p.get("co2_font_scale_max", 1.12)), min(1.12, base_scale * 1.18)))
-        elif text_mode == "voc":
-            base_scale = float(p.get("voc_font_scale", 0.52))
-            p["lock_text_scale"] = False
-            p["voc_dy"] = float(max(-0.06 * template_r, min(0.08 * template_r, float(p.get("voc_dy", 0.0)))))
-            if min_dim <= 15.5:
-                p["voc_font_scale_min"] = float(max(float(p.get("voc_font_scale_min", base_scale)), max(0.50, base_scale * 0.96)))
-                p["voc_font_scale_max"] = float(min(float(p.get("voc_font_scale_max", 0.92)), min(0.92, max(base_scale, 0.52) * 1.05)))
-            else:
-                p["voc_font_scale"] = float(max(base_scale, 0.60))
-                p["voc_font_scale_min"] = float(max(float(p.get("voc_font_scale_min", p["voc_font_scale"])), 0.60))
-                p["voc_font_scale_max"] = float(min(float(p.get("voc_font_scale_max", 1.02)), 1.02))
-        else:
-            p["s"] = float(max(float(p.get("s", 0.0100)), 0.0100))
-            Action._centerGlyphBbox(p)
-
-        return p
 
     @staticmethod
     def _finalizeAc08Style(name: str, params: dict) -> dict:
