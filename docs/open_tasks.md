@@ -100,6 +100,7 @@ focused on the actual project scope.
   - 2026-04-05: AC0810-Parametrik-/Fitting-Delegation (`_defaultAc0810Params`, `_fitAc0810ParamsFromImage`) in `src/iCCModules/imageCompositeConverterSemanticAc0813.py` zentralisiert; `src/imageCompositeConverter.py` delegiert weiterhin kompatibel über Wrapper.
   - 2026-04-05: Badge-Geometrie-/Glyph-Helfer (`_rotateSemanticBadgeClockwise`, `_glyphBbox`, `_centerGlyphBbox`) in neues Modul `src/iCCModules/imageCompositeConverterSemanticBadgeGeometry.py` ausgelagert; `src/imageCompositeConverter.py` delegiert weiterhin kompatibel über Wrapper.
   - 2026-04-05: AC0834-Default-Badge-Parametrik (`_defaultAc0834Params`) in `src/iCCModules/imageCompositeConverterSemanticLabels.py` zentralisiert; `src/imageCompositeConverter.py` delegiert weiterhin kompatibel über Wrapper.
+  - 2026-04-05: AC08-Familien-Tuning-/Guard-Helfer (`_enforceTemplateCircleEdgeExtent`, `_tuneAc08LeftConnectorFamily`, `_tuneAc08RightConnectorFamily`, `_enforceVerticalConnectorBadgeGeometry`, `_tuneAc08VerticalConnectorFamily`, `_tuneAc08CircleTextFamily`) in neues Modul `src/iCCModules/imageCompositeConverterSemanticAc08Families.py` ausgelagert; `src/imageCompositeConverter.py` delegiert weiterhin kompatibel über Wrapper.
   - Nächster geplanter Schritt: weitere Badge-Param-/Semantik-Teilstrecken in denselben kleinen Schritten extrahieren.
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.
