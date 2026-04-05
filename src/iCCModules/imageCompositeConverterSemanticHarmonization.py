@@ -24,6 +24,37 @@ def _textOrientationPolicyForBase(base: str) -> str:
     return "inherit_variant"
 
 
+
+
+def captureCanonicalBadgeColorsImpl(
+    params: dict,
+    light_circle_fill_gray: int,
+    light_circle_stroke_gray: int,
+    light_circle_text_gray: int,
+) -> dict:
+    p = dict(params)
+    p["target_fill_gray"] = int(round(float(p.get("fill_gray", light_circle_fill_gray))))
+    p["target_stroke_gray"] = int(round(float(p.get("stroke_gray", light_circle_stroke_gray))))
+    if p.get("stem_enabled"):
+        p["target_stem_gray"] = int(round(float(p.get("stem_gray", p["target_stroke_gray"]))))
+    if p.get("draw_text", True) and "text_gray" in p:
+        p["target_text_gray"] = int(round(float(p.get("text_gray", light_circle_text_gray))))
+    return p
+
+
+def applyCanonicalBadgeColorsImpl(params: dict) -> dict:
+    p = dict(params)
+    if "target_fill_gray" in p:
+        p["fill_gray"] = int(p["target_fill_gray"])
+    if "target_stroke_gray" in p:
+        p["stroke_gray"] = int(p["target_stroke_gray"])
+    if p.get("stem_enabled") and "target_stem_gray" in p:
+        p["stem_gray"] = int(p["target_stem_gray"])
+    if p.get("draw_text", True) and "target_text_gray" in p:
+        p["text_gray"] = int(p["target_text_gray"])
+    return p
+
+
 def needsLargeCircleOverflowGuardImpl(params: dict) -> bool:
     """Return whether circle placement may intentionally exceed canvas bounds."""
     if not bool(params.get("circle_enabled", True)):

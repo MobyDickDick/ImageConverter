@@ -3182,27 +3182,11 @@ class Action:
 
     @staticmethod
     def _captureCanonicalBadgeColors(params: dict) -> dict:
-        p = dict(params)
-        p["target_fill_gray"] = int(round(float(p.get("fill_gray", Action.LIGHT_CIRCLE_FILL_GRAY))))
-        p["target_stroke_gray"] = int(round(float(p.get("stroke_gray", Action.LIGHT_CIRCLE_STROKE_GRAY))))
-        if p.get("stem_enabled"):
-            p["target_stem_gray"] = int(round(float(p.get("stem_gray", p["target_stroke_gray"]))))
-        if p.get("draw_text", True) and "text_gray" in p:
-            p["target_text_gray"] = int(round(float(p.get("text_gray", Action.LIGHT_CIRCLE_TEXT_GRAY))))
-        return p
+        return _captureCanonicalBadgeColors(params)
 
     @staticmethod
     def _applyCanonicalBadgeColors(params: dict) -> dict:
-        p = dict(params)
-        if "target_fill_gray" in p:
-            p["fill_gray"] = int(p["target_fill_gray"])
-        if "target_stroke_gray" in p:
-            p["stroke_gray"] = int(p["target_stroke_gray"])
-        if p.get("stem_enabled") and "target_stem_gray" in p:
-            p["stem_gray"] = int(p["target_stem_gray"])
-        if p.get("draw_text", True) and "target_text_gray" in p:
-            p["text_gray"] = int(p["target_text_gray"])
-        return p
+        return _applyCanonicalBadgeColors(params)
 
     @staticmethod
     def _circleBounds(params: dict, w: int, h: int) -> tuple[float, float, float, float, float, float]:
@@ -5261,6 +5245,19 @@ def _harmonizationAnchorPriority(suffix: str, prefer_large: bool) -> int:
 
 def _clipGray(value: float) -> int:
     return semantic_harmonization_helpers.clipGrayImpl(value)
+
+
+def _captureCanonicalBadgeColors(params: dict) -> dict:
+    return semantic_harmonization_helpers.captureCanonicalBadgeColorsImpl(
+        params,
+        light_circle_fill_gray=Action.LIGHT_CIRCLE_FILL_GRAY,
+        light_circle_stroke_gray=Action.LIGHT_CIRCLE_STROKE_GRAY,
+        light_circle_text_gray=Action.LIGHT_CIRCLE_TEXT_GRAY,
+    )
+
+
+def _applyCanonicalBadgeColors(params: dict) -> dict:
+    return semantic_harmonization_helpers.applyCanonicalBadgeColorsImpl(params)
 
 
 def _familyHarmonizedBadgeColors(variant_rows: list[dict[str, object]]) -> dict[str, int]:
