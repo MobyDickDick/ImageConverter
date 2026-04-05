@@ -44,6 +44,7 @@ from src.iCCModules import imageCompositeConverterSemanticChecks as semantic_che
 from src.iCCModules import imageCompositeConverterSemanticFitting as semantic_fitting_helpers
 from src.iCCModules import imageCompositeConverterSemanticLabels as semantic_label_helpers
 from src.iCCModules import imageCompositeConverterSemanticDefaults as semantic_default_helpers
+from src.iCCModules import imageCompositeConverterSemanticAc0811 as semantic_ac0811_helpers
 from src.iCCModules import imageCompositeConverterQuality as quality_helpers
 from src.iCCModules import imageCompositeConverterAudit as audit_helpers
 from src.iCCModules import imageCompositeConverterTransfer as transfer_helpers
@@ -2445,240 +2446,49 @@ class Action:
         edge_clearance_ratio: float = 0.08,
         edge_clearance_stroke_factor: float = 0.75,
     ) -> dict[str, float]:
-        """Return circle geometry for connector badges anchored near one canvas edge.
-
-        Elongated AC08 connector badges use a circle that is sized from the narrow
-        canvas dimension and visually offset away from the edge where the connector
-        originates. Using the same clearance rule for each anchor direction keeps
-        the ring from appearing clipped without baking variant-specific offsets into
-        one SKU.
-        """
-        narrow = float(min(w, h))
-        stroke_circle = max(0.9, narrow / stroke_divisor)
-        r = narrow * radius_ratio
-        cx = float(w) / 2.0
-        cy = float(h) / 2.0
-        edge_clearance = max(stroke_circle * edge_clearance_stroke_factor, narrow * edge_clearance_ratio)
-
-        anchor_key = anchor.lower()
-        if anchor_key == "top":
-            cy = r + edge_clearance
-        elif anchor_key == "bottom":
-            cy = float(h) - (r + edge_clearance)
-        elif anchor_key == "left":
-            cx = r + edge_clearance
-        elif anchor_key == "right":
-            cx = float(w) - (r + edge_clearance)
-        else:
-            raise ValueError(f"Unsupported anchor: {anchor}")
-
-        return {
-            "cx": cx,
-            "cy": cy,
-            "r": r,
-            "stroke_circle": stroke_circle,
-        }
+        return semantic_ac0811_helpers.defaultEdgeAnchoredCircleGeometryImpl(
+            w,
+            h,
+            anchor=anchor,
+            radius_ratio=radius_ratio,
+            stroke_divisor=stroke_divisor,
+            edge_clearance_ratio=edge_clearance_ratio,
+            edge_clearance_stroke_factor=edge_clearance_stroke_factor,
+        )
 
     @staticmethod
     def _defaultAc0811Params(w: int, h: int) -> dict:
-        """AC0811 is vertically elongated: circle sits in the upper square area."""
-        if w <= 0 or h <= 0:
-            return Action._defaultAc081xShared(w, h)
-
-        circle = Action._defaultEdgeAnchoredCircleGeometry(w, h, anchor="top")
-        cx = float(circle["cx"])
-        cy = float(circle["cy"])
-        r = float(circle["r"])
-        stroke_circle = float(circle["stroke_circle"])
-        stem_width = max(1.0, float(w) * 0.10)
-        # AC0811 reference symbols use a visually slim vertical handle.
-        # Persist an explicit width ceiling so later fitting/validation
-        # steps cannot widen the stem beyond the template's intent.
-        stem_width_max = max(1.0, float(w) * 0.105)
-        stem_len = max(2.0, float(h) - (cy + r))
-
-        return Action._normalizeLightCircleColors({
-            "cx": cx,
-            "cy": cy,
-            "r": r,
-            "stroke_circle": stroke_circle,
-            "stroke_gray": Action.LIGHT_CIRCLE_STROKE_GRAY,
-            "fill_gray": Action.LIGHT_CIRCLE_FILL_GRAY,
-            "draw_text": False,
-            "stem_enabled": True,
-            "stem_width": stem_width,
-            "stem_width_max": stem_width_max,
-            "stem_x": cx - (stem_width / 2.0),
-            "stem_top": cy + r,
-            "stem_bottom": min(float(h), (cy + r) + stem_len),
-            "stem_gray": Action.LIGHT_CIRCLE_STROKE_GRAY,
-        })
+        return semantic_ac0811_helpers.defaultAc0811ParamsImpl(
+            w,
+            h,
+            default_ac081x_shared=Action._defaultAc081xShared,
+            default_edge_anchored_circle_geometry=Action._defaultEdgeAnchoredCircleGeometry,
+            normalize_light_circle_colors=Action._normalizeLightCircleColors,
+            light_circle_stroke_gray=Action.LIGHT_CIRCLE_STROKE_GRAY,
+            light_circle_fill_gray=Action.LIGHT_CIRCLE_FILL_GRAY,
+        )
 
     @staticmethod
     def _estimateUpperCircleFromForeground(img: np.ndarray, defaults: dict) -> tuple[float, float, float] | None:
-        """Estimate circle geometry from the upper symbol region.
-
-        AC0811_S is very small and Hough-based fitting can drift on anti-aliased
-        edges. This fallback uses a simple foreground extraction in the upper part
-        of the symbol and derives a robust enclosing circle from the largest blob.
-        """
-        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-        h, w = gray.shape
-        if h <= 0 or w <= 0:
-            return None
-
-        _, fg = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
-        top_limit = int(round(min(float(h), float(defaults.get("cy", h / 2.0)) + float(defaults.get("r", w / 3.0)) * 1.15)))
-        top_limit = max(3, min(h, top_limit))
-        roi = fg[:top_limit, :]
-        if roi.size == 0:
-            return None
-
-        contours, _ = cv2.findContours(roi, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-        if not contours:
-            return None
-
-        best = None
-        for cnt in contours:
-            area = float(cv2.contourArea(cnt))
-            if area < 8.0:
-                continue
-            perimeter = float(cv2.arcLength(cnt, True))
-            if perimeter <= 0.0:
-                continue
-            circularity = 4.0 * np.pi * area / max(1e-6, perimeter * perimeter)
-            if circularity < 0.35:
-                continue
-            score = area * (0.5 + circularity)
-            if best is None or score > best[0]:
-                best = (score, cnt)
-
-        if best is None:
-            return None
-
-        (_score, cnt) = best
-        (cx, cy), r = cv2.minEnclosingCircle(cnt)
-        min_r = max(2.0, float(w) * 0.24)
-        max_r = min(float(w) * 0.52, float(top_limit) * 0.58)
-        if max_r < min_r:
-            max_r = min_r
-        r = float(Action._clipScalar(r, min_r, max_r))
-        cx = float(Action._clipScalar(cx, 0.0, float(w - 1)))
-        cy = float(Action._clipScalar(cy, 0.0, float(h - 1)))
-        return cx, cy, r
+        return semantic_ac0811_helpers.estimateUpperCircleFromForegroundImpl(
+            img,
+            defaults,
+            cv2_module=cv2,
+            np_module=np,
+            clip_scalar_fn=Action._clipScalar,
+        )
 
     @staticmethod
     def _fitAc0811ParamsFromImage(img: np.ndarray, defaults: dict) -> dict:
-        """Fit AC0811 while keeping the vertical stem anchored to the lower edge.
-
-        AC0811 source symbols are noisy for thin vertical lines. Generic stem fitting can
-        under-segment the line so the generated SVG misses parts of the lower connector.
-        For this family we therefore fit the circle/tones from the image, but keep the stem
-        geometry constrained to the semantic template (centered under the circle, extending
-        to the image bottom).
-        """
-        params = Action._fit_semantic_badge_from_image(img, defaults)
-        h, w = img.shape[:2]
-
-        raw_stem_width = float(params.get("stem_width", defaults.get("stem_width", max(1.0, float(w) * 0.10))))
-        cx = float(params.get("cx", defaults.get("cx", float(w) / 2.0)))
-        cy = float(params.get("cy", defaults.get("cy", float(w) / 2.0)))
-        r = float(params.get("r", defaults.get("r", float(w) * 0.4)))
-        stroke_circle = float(params.get("stroke_circle", defaults.get("stroke_circle", max(0.9, float(w) / 15.0))))
-        aspect_ratio = (float(h) / float(w)) if w > 0 else 1.0
-        elongated_plain_badge = aspect_ratio >= 1.60 and not bool(params.get("draw_text", False))
-
-        # Foreground contour estimation helps stem-only badges, but for VOC/CO2
-        # labels it can lock onto text blobs and shrink the fitted circle.
-        allow_upper_circle_estimate = str(params.get("text_mode", "")).lower() not in {"voc", "co2"}
-        upper_circle = Action._estimate_upper_circle_from_foreground(img, defaults) if allow_upper_circle_estimate else None
-        if upper_circle is not None:
-            ecx, ecy, er = upper_circle
-            # Prefer robust foreground estimate for tiny/narrow AC0811 variants.
-            trust = 0.85 if w <= 18 else 0.55
-            cx = (cx * (1.0 - trust)) + (ecx * trust)
-            cy = (cy * (1.0 - trust)) + (ecy * trust)
-            r = (r * (1.0 - trust)) + (er * trust)
-            params["cx"] = cx
-            params["cy"] = cy
-            params["r"] = r
-
-        if w <= 18:
-            default_cx = float(defaults.get("cx", float(w) / 2.0))
-            default_cy = float(defaults.get("cy", float(w) / 2.0))
-
-            # Ensure the fitted circle remains fully inside the canvas with stroke taken
-            # into account so it is not clipped at the edges.
-            radius_limit_x = max(1.0, min(default_cx, float(w) - default_cx) - (stroke_circle / 2.0))
-            radius_limit_y = max(1.0, min(default_cy, float(h) - default_cy) - (stroke_circle / 2.0))
-            r = float(min(r, radius_limit_x, radius_limit_y))
-
-            params["cx"] = default_cx
-            params["cy"] = cy
-            params["r"] = r
-            # Keep tiny AC0811 variants horizontally anchored; anti-aliased
-            # min-rect alignment can otherwise pull circle/stem to one side.
-            params["lock_circle_cx"] = True
-            params["lock_stem_center_to_circle"] = True
-
-        # Keep elongated plain AC0811 variants close to their semantic template.
-        # The stem occupies only a thin column of dark pixels, so the generic
-        # circle/stem error tends to over-value shorter stems once the circle is
-        # nudged downward. Re-anchor the circle vertically and persist a stronger
-        # template-based stem floor so AC0811_L keeps a visibly long connector.
-        if elongated_plain_badge:
-            default_cx = float(defaults.get("cx", cx))
-            default_cy = float(defaults.get("cy", cy))
-            default_r = float(defaults.get("r", r))
-            params["cx"] = default_cx
-            params["cy"] = float(Action._clipScalar(cy, default_cy - 1.0, default_cy + 1.0))
-            r = float(max(r, default_r * 0.97))
-            params["r"] = r
-            params["lock_circle_cx"] = True
-            params["lock_circle_cy"] = True
-            params["lock_stem_center_to_circle"] = True
-            params["stem_len_min_ratio"] = float(max(float(params.get("stem_len_min_ratio", 0.0) or 0.0), 0.80))
-            cx = float(params["cx"])
-            cy = float(params["cy"])
-
-        # Keep text badges close to template radius; otherwise under-estimation
-        # shrinks both the circle and text size in variants such as AC0836_L.
-        if str(params.get("text_mode", "")).lower() in {"voc", "co2"}:
-            default_r = float(defaults.get("r", r))
-            r = float(Action._clipScalar(r, default_r * 0.95, default_r * 1.08))
-            params["r"] = r
-
-        # AC0811 stems are intentionally thin. The generic contour fit can over-estimate
-        # width when anti-aliased circle pixels bleed into the stem ROI, especially on
-        # larger "_L" variants. Keep the fitted value but clamp it to a narrow, plausible
-        # band derived from the circle stroke and image width.
-        min_stem_width = max(1.0, stroke_circle * 0.72)
-        default_stem_width_max = max(min_stem_width, min(float(w) * 0.12, stroke_circle * 1.35))
-        max_stem_width = max(
-            min_stem_width,
-            min(float(defaults.get("stem_width_max", default_stem_width_max)), default_stem_width_max),
+        return semantic_ac0811_helpers.fitAc0811ParamsFromImageImpl(
+            img,
+            defaults,
+            fit_semantic_badge_from_image_fn=Action._fit_semantic_badge_from_image,
+            estimate_upper_circle_from_foreground_fn=Action._estimate_upper_circle_from_foreground,
+            clip_scalar_fn=Action._clipScalar,
+            normalize_light_circle_colors_fn=Action._normalizeLightCircleColors,
+            persist_connector_length_floor_fn=Action._persistConnectorLengthFloor,
         )
-        stem_width = max(min_stem_width, min(raw_stem_width, max_stem_width))
-
-        params["stem_enabled"] = True
-        params["stem_width"] = stem_width
-        params["stem_width_max"] = max_stem_width
-        params["stem_x"] = cx - (params["stem_width"] / 2.0)
-        min_stem_len = 1.0 if h <= 18 else 2.0
-        max_r_for_visible_stem = max(1.0, float(h) - cy - min_stem_len)
-        if r > max_r_for_visible_stem:
-            r = max_r_for_visible_stem
-            params["r"] = r
-        stem_top = cy + r
-        stem_top = max(0.0, min(float(h) - min_stem_len, stem_top))
-        params["stem_top"] = stem_top
-        params["stem_bottom"] = float(h)
-        params["stem_gray"] = int(round(params.get("stroke_gray", defaults.get("stroke_gray", 152))))
-        if elongated_plain_badge:
-            params["stem_len_min_ratio"] = float(max(float(params.get("stem_len_min_ratio", 0.0) or 0.0), 0.80))
-            Action._persistConnectorLengthFloor(params, "stem", default_ratio=0.80)
-
-        return Action._normalizeLightCircleColors(params)
 
     @staticmethod
     def _defaultAc0882Params(w: int, h: int) -> dict:
