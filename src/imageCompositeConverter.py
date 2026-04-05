@@ -47,6 +47,7 @@ from src.iCCModules import imageCompositeConverterSemanticDefaults as semantic_d
 from src.iCCModules import imageCompositeConverterSemanticAc0811 as semantic_ac0811_helpers
 from src.iCCModules import imageCompositeConverterSemanticAc0812 as semantic_ac0812_helpers
 from src.iCCModules import imageCompositeConverterSemanticAc0813 as semantic_ac0813_helpers
+from src.iCCModules import imageCompositeConverterSemanticBadgeGeometry as semantic_badge_geometry_helpers
 from src.iCCModules import imageCompositeConverterQuality as quality_helpers
 from src.iCCModules import imageCompositeConverterAudit as audit_helpers
 from src.iCCModules import imageCompositeConverterTransfer as transfer_helpers
@@ -2639,19 +2640,7 @@ class Action:
 
     @staticmethod
     def _rotateSemanticBadgeClockwise(params: dict, w: int, h: int) -> dict:
-        cx = float(w) / 2.0
-        cy = float(h) / 2.0
-
-        def rotateClockwise(x: float, y: float) -> tuple[float, float]:
-            # image-space clockwise description maps to mathematically counter-clockwise
-            # because y grows downward in raster coordinates.
-            return cx - (y - cy), cy + (x - cx)
-
-        rotated = dict(params)
-        rotated["cx"], rotated["cy"] = rotateClockwise(float(params["cx"]), float(params["cy"]))
-        rotated["arm_x1"], rotated["arm_y1"] = rotateClockwise(float(params["arm_x1"]), float(params["arm_y1"]))
-        rotated["arm_x2"], rotated["arm_y2"] = rotateClockwise(float(params["arm_x2"]), float(params["arm_y2"]))
-        return rotated
+        return semantic_badge_geometry_helpers.rotateSemanticBadgeClockwiseImpl(params, w, h)
 
     @staticmethod
     def _defaultAc0814Params(w: int, h: int) -> dict:
@@ -2692,19 +2681,24 @@ class Action:
 
     @staticmethod
     def _glyphBbox(text_mode: str) -> tuple[int, int, int, int]:
-        if text_mode == "path_t":
-            return Action.T_XMIN, Action.T_YMIN, Action.T_XMAX, Action.T_YMAX
-        return Action.M_XMIN, Action.M_YMIN, Action.M_XMAX, Action.M_YMAX
+        return semantic_badge_geometry_helpers.glyphBboxImpl(
+            text_mode,
+            t_xmin=Action.T_XMIN,
+            t_ymin=Action.T_YMIN,
+            t_xmax=Action.T_XMAX,
+            t_ymax=Action.T_YMAX,
+            m_xmin=Action.M_XMIN,
+            m_ymin=Action.M_YMIN,
+            m_xmax=Action.M_XMAX,
+            m_ymax=Action.M_YMAX,
+        )
 
     @staticmethod
     def _centerGlyphBbox(params: dict) -> None:
-        if "s" not in params or "cx" not in params or "cy" not in params:
-            return
-        xmin, ymin, xmax, ymax = Action._glyphBbox(params.get("text_mode", "path"))
-        glyph_width = (xmax - xmin) * params["s"]
-        glyph_height = (ymax - ymin) * params["s"]
-        params["tx"] = float(params["cx"] - (glyph_width / 2.0))
-        params["ty"] = float(params["cy"] - (glyph_height / 2.0))
+        semantic_badge_geometry_helpers.centerGlyphBboxImpl(
+            params,
+            glyph_bbox_fn=Action._glyphBbox,
+        )
 
     @staticmethod
     def _stabilizeSemanticCirclePose(params: dict, defaults: dict, w: int, h: int) -> dict:
