@@ -230,3 +230,23 @@ def fitAc0814ParamsFromImageImpl(
         semantic_arm_len_min,
     )
     return normalize_light_circle_colors_fn(params)
+
+
+def defaultAc0810ParamsImpl(
+    w: int,
+    h: int,
+    *,
+    default_ac0814_params_fn,
+) -> dict:
+    """AC0810 uses the same right-arm geometry as AC0814 (circle on the left)."""
+    return default_ac0814_params_fn(w, h)
+
+
+def fitAc0810ParamsFromImageImpl(
+    img,
+    defaults: dict,
+    *,
+    fit_ac0814_params_from_image_fn,
+) -> dict:
+    """Fit AC0810 with the same right-anchored arm behavior as AC0814."""
+    return fit_ac0814_params_from_image_fn(img, defaults)

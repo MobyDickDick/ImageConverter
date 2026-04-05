@@ -2676,13 +2676,19 @@ class Action:
 
     @staticmethod
     def _defaultAc0810Params(w: int, h: int) -> dict:
-        """AC0810 uses the same right-arm geometry as AC0814 (circle on the left)."""
-        return Action._defaultAc0814Params(w, h)
+        return semantic_ac0813_helpers.defaultAc0810ParamsImpl(
+            w,
+            h,
+            default_ac0814_params_fn=Action._defaultAc0814Params,
+        )
 
     @staticmethod
     def _fitAc0810ParamsFromImage(img: np.ndarray, defaults: dict) -> dict:
-        """Fit AC0810 with the same right-anchored arm behavior as AC0814."""
-        return Action._fit_ac0814_params_from_image(img, defaults)
+        return semantic_ac0813_helpers.fitAc0810ParamsFromImageImpl(
+            img,
+            defaults,
+            fit_ac0814_params_from_image_fn=Action._fit_ac0814_params_from_image,
+        )
 
     @staticmethod
     def _glyphBbox(text_mode: str) -> tuple[int, int, int, int]:
