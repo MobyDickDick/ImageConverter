@@ -2333,7 +2333,8 @@ class Action:
             apply_circle_geometry_penalty=apply_circle_geometry_penalty,
             cv2_module=cv2,
             np_module=np,
-            extract_badge_element_mask_fn=Action.extract_badge_element_mask,
+            math_module=math,
+            extract_badge_element_mask_fn=Action.extractBadgeElementMask,
             masked_union_error_in_bbox_fn=Action._maskedUnionErrorInBbox,
             mask_centroid_radius_fn=Action._maskCentroidRadius,
         )

@@ -105,26 +105,69 @@ def test_calculate_delta2_stats_impl_returns_mean_and_std() -> None:
     assert std_delta2 > 0.0
 
 
-def test_element_match_error_impl_penalizes_undersized_circle() -> None:
-    img_orig = np.zeros((10, 10, 3), dtype=np.uint8)
-    img_svg = np.zeros((10, 10, 3), dtype=np.uint8)
-    mask_orig = np.zeros((10, 10), dtype=bool)
-    mask_svg = np.zeros((10, 10), dtype=bool)
-    mask_orig[2:8, 2:8] = True
-    mask_svg[3:7, 3:7] = True
+def test_element_match_error_impl_returns_finite_score_for_overlap() -> None:
+    img_orig = np.zeros((5, 5, 3), dtype=np.uint8)
+    img_svg = np.zeros((5, 5, 3), dtype=np.uint8)
+    params: dict[str, float | bool] = {}
+    mask = np.zeros((5, 5), dtype=bool)
+    mask[1:4, 1:4] = True
 
-    err = error_metric_helpers.elementMatchErrorImpl(
+    score = error_metric_helpers.elementMatchErrorImpl(
         img_orig,
         img_svg,
-        params={},
-        element="circle",
-        mask_orig=mask_orig,
-        mask_svg=mask_svg,
+        params,
+        "circle",
+        mask_orig=mask,
+        mask_svg=mask,
         cv2_module=_FakeCv2,
         np_module=np,
-        extract_badge_element_mask_fn=lambda *_args, **_kwargs: None,
+        math_module=__import__("math"),
+        extract_badge_element_mask_fn=lambda *_args, **_kwargs: mask,
         masked_union_error_in_bbox_fn=lambda *_args, **_kwargs: 0.0,
-        mask_centroid_radius_fn=lambda m: (5.0, 5.0, 3.0) if int(m.sum()) > 20 else (5.0, 5.0, 2.0),
+        mask_centroid_radius_fn=lambda _m: (2.0, 2.0, 1.0),
     )
 
-    assert err > 0.0
+    assert np.isfinite(score)
+    assert score == 0.0
+
+
+def test_element_match_error_impl_applies_circle_undersize_penalty() -> None:
+    img_orig = np.zeros((5, 5, 3), dtype=np.uint8)
+    img_svg = np.zeros((5, 5, 3), dtype=np.uint8)
+    mask_orig = np.zeros((5, 5), dtype=bool)
+    mask_orig[1:4, 1:4] = True
+    mask_svg = np.zeros((5, 5), dtype=bool)
+    mask_svg[1:4, 1:4] = True
+
+    no_penalty = error_metric_helpers.elementMatchErrorImpl(
+        img_orig,
+        img_svg,
+        {},
+        "circle",
+        mask_orig=mask_orig,
+        mask_svg=mask_svg,
+        apply_circle_geometry_penalty=False,
+        cv2_module=_FakeCv2,
+        np_module=np,
+        math_module=__import__("math"),
+        extract_badge_element_mask_fn=lambda *_args, **_kwargs: mask_orig,
+        masked_union_error_in_bbox_fn=lambda *_args, **_kwargs: 0.0,
+        mask_centroid_radius_fn=lambda _m: (2.0, 2.0, 1.0),
+    )
+    with_penalty = error_metric_helpers.elementMatchErrorImpl(
+        img_orig,
+        img_svg,
+        {},
+        "circle",
+        mask_orig=mask_orig,
+        mask_svg=mask_svg,
+        apply_circle_geometry_penalty=True,
+        cv2_module=_FakeCv2,
+        np_module=np,
+        math_module=__import__("math"),
+        extract_badge_element_mask_fn=lambda *_args, **_kwargs: mask_orig,
+        masked_union_error_in_bbox_fn=lambda *_args, **_kwargs: 0.0,
+        mask_centroid_radius_fn=lambda _m: (2.0, 2.0, 1.0) if _m is mask_orig else (2.0, 2.0, 0.5),
+    )
+
+    assert with_penalty > no_penalty
