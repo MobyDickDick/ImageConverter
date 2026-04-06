@@ -56,6 +56,7 @@ from src.iCCModules import imageCompositeConverterSemanticAc08Families as semant
 from src.iCCModules import imageCompositeConverterSemanticAc08Finalization as semantic_ac08_finalization_helpers
 from src.iCCModules import imageCompositeConverterSemanticAdaptiveLocks as semantic_adaptive_lock_helpers
 from src.iCCModules import imageCompositeConverterSemanticCircleStyle as semantic_circle_style_helpers
+from src.iCCModules import imageCompositeConverterSemanticRedrawVariation as semantic_redraw_variation_helpers
 from src.iCCModules import imageCompositeConverterQuality as quality_helpers
 from src.iCCModules import imageCompositeConverterAudit as audit_helpers
 from src.iCCModules import imageCompositeConverterTransfer as transfer_helpers
@@ -80,6 +81,7 @@ from src.iCCModules import imageCompositeConverterSemanticGeometry as semantic_g
 from src.iCCModules import imageCompositeConverterSemanticHarmonization as semantic_harmonization_helpers
 from src.iCCModules import imageCompositeConverterRendering as rendering_helpers
 from src.iCCModules import imageCompositeConverterRenderRuntime as rendering_runtime_helpers
+from src.iCCModules import imageCompositeConverterRenderDispatch as render_dispatch_helpers
 from src.iCCModules import imageCompositeConverterBatchReporting as batch_reporting_helpers
 from src.iCCModules import imageCompositeConverterConversionRows as conversion_row_helpers
 from src.iCCModules import imageCompositeConverterAc08Reporting as ac08_reporting_helpers
@@ -92,6 +94,7 @@ from src.iCCModules import imageCompositeConverterElementValidation as element_v
 from src.iCCModules import imageCompositeConverterElementMasks as element_mask_helpers
 from src.iCCModules import imageCompositeConverterElementErrorMetrics as element_error_metric_helpers
 from src.iCCModules import imageCompositeConverterCompositeSvg as composite_svg_helpers
+from src.iCCModules import imageCompositeConverterDiffing as diffing_helpers
 from src.successfulConversions import (
     AC08_MITIGATION_STATUS,
     AC08_PREVIOUSLY_GOOD_VARIANTS,
@@ -1351,66 +1354,17 @@ class Action:
 
     @staticmethod
     def applyRedrawVariation(params: dict, w: int, h: int) -> tuple[dict, list[str]]:
-        """Apply a slight per-run redraw jitter and describe it for the log."""
-        p = copy.deepcopy(params)
-        variation_logs: list[str] = []
-        if w <= 0 or h <= 0:
-            return p, variation_logs
-
-        seed = (
-            int(Action.STOCHASTIC_RUN_SEED) * 1009
-            + int(Action.STOCHASTIC_SEED_OFFSET) * 101
-            + int(time.time_ns() % 1_000_000_007)
+        return semantic_redraw_variation_helpers.applyRedrawVariationImpl(
+            params,
+            w,
+            h,
+            stochastic_run_seed=Action.STOCHASTIC_RUN_SEED,
+            stochastic_seed_offset=Action.STOCHASTIC_SEED_OFFSET,
+            time_ns_fn=time.time_ns,
+            make_rng_fn=Action._makeRng,
+            clamp_circle_inside_canvas_fn=Action._clampCircleInsideCanvas,
+            reanchor_arm_to_circle_edge_fn=Action._reanchorArmToCircleEdge,
         )
-        rng = Action._makeRng(seed)
-
-        def _uniform(delta: float) -> float:
-            return float(rng.uniform(-abs(float(delta)), abs(float(delta))))
-
-        jitter_entries: list[str] = []
-
-        def _applyNumericJitter(key: str, delta: float, *, minimum: float | None = None, maximum: float | None = None) -> None:
-            if key not in p:
-                return
-            try:
-                old_float = float(p.get(key))
-            except (TypeError, ValueError):
-                return
-            new_value = old_float + _uniform(delta)
-            if minimum is not None:
-                new_value = max(float(minimum), new_value)
-            if maximum is not None:
-                new_value = min(float(maximum), new_value)
-            p[key] = float(new_value)
-            jitter_entries.append(f"{key}:{old_float:.3f}->{new_value:.3f}")
-
-        _applyNumericJitter("cx", max(0.15, float(w) * 0.01), minimum=0.0, maximum=float(w))
-        _applyNumericJitter("cy", max(0.15, float(h) * 0.01), minimum=0.0, maximum=float(h))
-        _applyNumericJitter("r", max(0.10, float(min(w, h)) * 0.008), minimum=1.0)
-        _applyNumericJitter("stroke_circle", 0.12, minimum=0.4)
-        _applyNumericJitter("arm_len", max(0.12, float(w) * 0.012), minimum=0.5, maximum=float(max(w, h)))
-        _applyNumericJitter("arm_stroke", 0.12, minimum=0.4)
-        _applyNumericJitter("stem_height", max(0.12, float(h) * 0.012), minimum=0.5, maximum=float(max(w, h)))
-        _applyNumericJitter("stem_width", 0.12, minimum=0.4, maximum=float(max(1, w)))
-        _applyNumericJitter("text_scale", 0.03, minimum=0.35, maximum=4.0)
-        _applyNumericJitter("text_x", max(0.10, float(w) * 0.01), minimum=0.0, maximum=float(w))
-        _applyNumericJitter("text_y", max(0.10, float(h) * 0.01), minimum=0.0, maximum=float(h))
-        _applyNumericJitter("co2_dx", 0.08)
-        _applyNumericJitter("co2_dy", 0.08)
-        _applyNumericJitter("voc_scale", 0.03, minimum=0.35, maximum=4.0)
-
-        p = Action._clampCircleInsideCanvas(p, w, h)
-        if p.get("arm_enabled"):
-            Action._reanchorArmToCircleEdge(p, float(p.get("r", 1.0)))
-        if p.get("stem_enabled") and "cy" in p and "r" in p:
-            p["stem_top"] = float(p.get("cy", 0.0)) + float(p.get("r", 0.0))
-
-        if jitter_entries:
-            variation_logs.append(
-                "redraw_variation: seed="
-                f"{seed} changed_params=" + " | ".join(jitter_entries)
-            )
-        return p, variation_logs
 
     @staticmethod
     def _enforceCircleConnectorSymmetry(params: dict, w: int, h: int) -> dict:
@@ -2127,16 +2081,17 @@ class Action:
 
     @staticmethod
     def renderSvgToNumpy(svg_string: str, size_w: int, size_h: int):
-        if SVG_RENDER_SUBPROCESS_ENABLED and not _is_fitz_open_monkeypatched():
-            rendered = _render_svg_to_numpy_via_subprocess(svg_string, size_w, size_h)
-            if rendered is not None:
-                return rendered
-            if _UNDER_PYTEST_RUNTIME and not _is_inprocess_renderer_monkeypatched():
-                # Avoid unstable in-process PyMuPDF fallback in long pytest
-                # sessions; dedicated tests can still exercise fallback by
-                # monkeypatching the in-process renderer helper.
-                return None
-        return _render_svg_to_numpy_inprocess(svg_string, size_w, size_h)
+        return render_dispatch_helpers.renderSvgToNumpyImpl(
+            svg_string,
+            size_w,
+            size_h,
+            svg_render_subprocess_enabled=SVG_RENDER_SUBPROCESS_ENABLED,
+            under_pytest_runtime=_UNDER_PYTEST_RUNTIME,
+            is_fitz_open_monkeypatched_fn=_is_fitz_open_monkeypatched,
+            render_svg_to_numpy_via_subprocess_fn=_render_svg_to_numpy_via_subprocess,
+            is_inprocess_renderer_monkeypatched_fn=_is_inprocess_renderer_monkeypatched,
+            render_svg_to_numpy_inprocess_fn=_render_svg_to_numpy_inprocess,
+        )
 
     @staticmethod
     def createDiffImage(
@@ -2144,67 +2099,31 @@ class Action:
         img_svg: np.ndarray,
         focus_mask: np.ndarray | None = None,
     ) -> np.ndarray:
-        if img_svg.shape[:2] != img_orig.shape[:2]:
-            img_svg = cv2.resize(img_svg, (img_orig.shape[1], img_orig.shape[0]), interpolation=cv2.INTER_AREA)
-        orig = img_orig.astype(np.int16)
-        svg = img_svg.astype(np.int16)
-        # Signed RGB sum difference as requested by the user:
-        # dx = (r2-r1) + (g2-g1) + (b2-b1), normalized to [-1, 1].
-        dx = np.sum(svg - orig, axis=2, dtype=np.int32).astype(np.float32)
-        norm = np.clip(dx / (3.0 * 255.0), -1.0, 1.0)
-
-        mask = None
-        if focus_mask is not None:
-            if focus_mask.shape[:2] != img_orig.shape[:2]:
-                focus_mask = cv2.resize(
-                    focus_mask.astype(np.uint8),
-                    (img_orig.shape[1], img_orig.shape[0]),
-                    interpolation=cv2.INTER_NEAREST,
-                )
-            mask = focus_mask > 0
-            norm = np.where(mask, norm, 0.0)
-
-        # Base tone comes from the mean luminance of both pixels.
-        # This keeps identical bright pixels white, while identical dark pixels
-        # stay dark instead of being forced to black or white.
-        mean_tone = np.mean(np.concatenate((orig, svg), axis=2), axis=2).astype(np.float32)
-        magnitude = np.clip(np.abs(norm), 0.0, 1.0)
-        positive = norm >= 0.0
-
-        # Interpolate from grayscale base tone towards signed endpoint colors.
-        up = mean_tone + magnitude * (255.0 - mean_tone)
-        down = mean_tone * (1.0 - magnitude)
-
-        diff = np.zeros_like(img_orig)
-        diff[:, :, 0] = np.where(positive, up, down).astype(np.uint8)
-        diff[:, :, 1] = np.where(positive, up, down).astype(np.uint8)
-        diff[:, :, 2] = np.where(positive, down, up).astype(np.uint8)
-        if mask is not None:
-            diff = np.where(mask[:, :, None], diff, 0)
-        return diff
+        return diffing_helpers.createDiffImageImpl(
+            img_orig,
+            img_svg,
+            cv2_module=cv2,
+            np_module=np,
+            focus_mask=focus_mask,
+        )
 
     @staticmethod
     def calculateError(img_orig: np.ndarray, img_svg: np.ndarray) -> float:
-        if img_svg is None:
-            return float("inf")
-        if img_svg.shape[:2] != img_orig.shape[:2]:
-            img_svg = cv2.resize(img_svg, (img_orig.shape[1], img_orig.shape[0]), interpolation=cv2.INTER_AREA)
-        return float(np.mean(cv2.absdiff(img_orig, img_svg)))
+        return diffing_helpers.calculateErrorImpl(
+            img_orig,
+            img_svg,
+            cv2_module=cv2,
+            np_module=np,
+        )
 
     @staticmethod
     def calculateDelta2Stats(img_orig: np.ndarray, img_svg: np.ndarray) -> tuple[float, float]:
-        """Return mean/std of per-pixel squared RGB deltas.
-
-        Per-pixel metric:
-            delta2 = (ΔR)^2 + (ΔG)^2 + (ΔB)^2
-        """
-        if img_svg is None:
-            return float("inf"), float("inf")
-        if img_svg.shape[:2] != img_orig.shape[:2]:
-            img_svg = cv2.resize(img_svg, (img_orig.shape[1], img_orig.shape[0]), interpolation=cv2.INTER_AREA)
-        diff = img_orig.astype(np.float32) - img_svg.astype(np.float32)
-        delta2 = np.sum(diff * diff, axis=2)
-        return float(np.mean(delta2)), float(np.std(delta2))
+        return element_error_metric_helpers.calculateDelta2StatsImpl(
+            img_orig,
+            img_svg,
+            cv2_module=cv2,
+            np_module=np,
+        )
 
     @staticmethod
     def _fitToOriginalSize(img_orig: np.ndarray, img_svg: np.ndarray | None) -> np.ndarray | None:
