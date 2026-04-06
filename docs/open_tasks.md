@@ -113,6 +113,7 @@ focused on the actual project scope.
   - 2026-04-06: Quantisierungs-/Symmetrie-Helfer (`_enforceCircleConnectorSymmetry`, `_quantizeBadgeParams`) in neues Modul `src/iCCModules/imageCompositeConverterOptimizationQuantization.py` ausgelagert; `src/imageCompositeConverter.py` delegiert weiterhin kompatibel über Wrapper.
   - 2026-04-06: Kreis-Stil-/Tonwert-Helfer (`_normalizeLightCircleColors`, `_normalizeAc08LineWidths`, `_estimateBorderBackgroundGray`, `_estimateCircleTonesAndStroke`) in neues Modul `src/iCCModules/imageCompositeConverterSemanticCircleStyle.py` ausgelagert; `src/imageCompositeConverter.py` delegiert weiterhin kompatibel über Wrapper.
   - 2026-04-06: Delta2-Metrik-Helfer (`calculateDelta2Stats`) in `src/iCCModules/imageCompositeConverterElementErrorMetrics.py` zentralisiert; `src/imageCompositeConverter.py` delegiert weiterhin kompatibel über Wrapper.
+  - 2026-04-06: Diff-/Fehlermetrik-Helfer (`createDiffImage`, `calculateError`) in neues Modul `src/iCCModules/imageCompositeConverterDiffing.py` ausgelagert; `src/imageCompositeConverter.py` delegiert weiterhin kompatibel über Wrapper.
   - Nächster geplanter Schritt: weitere Badge-Param-/Semantik-Teilstrecken in denselben kleinen Schritten extrahieren.
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.
