@@ -109,6 +109,7 @@ focused on the actual project scope.
   - 2026-04-05: Kanonische Badge-Farbziel-Helfer (`_captureCanonicalBadgeColors`, `_applyCanonicalBadgeColors`) in `src/iCCModules/imageCompositeConverterSemanticHarmonization.py` zentralisiert; `src/imageCompositeConverter.py` delegiert weiterhin kompatibel über Wrapper.
   - 2026-04-05: AC08-Badge-Param-Dispatch (`makeBadgeParams`-Zweig `AC0870..AC0839`) in neues Modul `src/iCCModules/imageCompositeConverterSemanticAc08Params.py` ausgelagert; der Monolith delegiert über einen kompatiblen Modul-Entry-Point und behält AR0100/Fallback-Verhalten unverändert.
   - 2026-04-05: AR0100-Badge-Parametrik aus `makeBadgeParams` in neues Modul `src/iCCModules/imageCompositeConverterSemanticAr0100.py` ausgelagert (`buildAr0100BadgeParamsImpl`); `src/imageCompositeConverter.py` delegiert kompatibel über den neuen Helper.
+  - 2026-04-06: Composite-SVG-Helfer (`traceImageSegment`, `generateCompositeSvg`) in neues Modul `src/iCCModules/imageCompositeConverterCompositeSvg.py` ausgelagert; `src/imageCompositeConverter.py` delegiert weiterhin kompatibel über Wrapper.
   - Nächster geplanter Schritt: weitere Badge-Param-/Semantik-Teilstrecken in denselben kleinen Schritten extrahieren.
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.

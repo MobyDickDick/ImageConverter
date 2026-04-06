@@ -89,6 +89,7 @@ from src.iCCModules import imageCompositeConverterBestlist as conversion_bestlis
 from src.iCCModules import imageCompositeConverterElementValidation as element_validation_helpers
 from src.iCCModules import imageCompositeConverterElementMasks as element_mask_helpers
 from src.iCCModules import imageCompositeConverterElementErrorMetrics as element_error_metric_helpers
+from src.iCCModules import imageCompositeConverterCompositeSvg as composite_svg_helpers
 from src.successfulConversions import (
     AC08_MITIGATION_STATUS,
     AC08_PREVIOUSLY_GOOD_VARIANTS,
@@ -2234,103 +2235,30 @@ class Action:
         offset_x: float = 0.0,
         offset_y: float = 0.0,
     ) -> list[str]:
-        if img_segment is None or img_segment.size == 0:
-            return []
-
-        data = np.float32(img_segment).reshape((-1, 3))
-        criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 20, 0.001)
-        _, labels, centers = cv2.kmeans(data, 4, None, criteria, 10, cv2.KMEANS_RANDOM_CENTERS)
-        centers = np.uint8(centers)
-        img_quant = centers[labels.flatten()].reshape(img_segment.shape)
-
-        unique, counts = np.unique(img_quant.reshape(-1, 3), axis=0, return_counts=True)
-        bg_color = unique[np.argmax(counts)]
-
-        paths: list[str] = []
-        for color in unique:
-            if np.array_equal(color, bg_color):
-                continue
-
-            mask = cv2.inRange(img_quant, color, color)
-            # Keep the raw contour points and let approxPolyDP control how much
-            # simplification is applied via `epsilon_factor`.
-            #
-            # With CHAIN_APPROX_SIMPLE, OpenCV already drops many intermediate
-            # points, which can make the iterative epsilon sweep effectively a
-            # no-op (same polygon across all iterations).
-            contours, _ = cv2.findContours(mask, cv2.RETR_CCOMP, cv2.CHAIN_APPROX_NONE)
-            hex_color = rgbToHex(color[::-1])
-
-            for contour in contours:
-                if cv2.contourArea(contour) < 10:
-                    continue
-
-                epsilon = epsilon_factor * cv2.arcLength(contour, True)
-                approx = cv2.approxPolyDP(contour, epsilon, True)
-                path_d = "M " + " L ".join(
-                    [
-                        (
-                            f"{(pt[0][0] * scale_x) + offset_x:.3f},"
-                            f"{(pt[0][1] * scale_y) + offset_y:.3f}"
-                        )
-                        for pt in approx
-                    ]
-                ) + " Z"
-                paths.append(f'  <path d="{path_d}" fill="{hex_color}" stroke="none" />')
-        return paths
+        return composite_svg_helpers.traceImageSegmentImpl(
+            img_segment,
+            epsilon_factor,
+            scale_x=scale_x,
+            scale_y=scale_y,
+            offset_x=offset_x,
+            offset_y=offset_y,
+            cv2_module=cv2,
+            np_module=np,
+            rgb_to_hex_fn=rgbToHex,
+        )
 
     @staticmethod
     def generateCompositeSvg(w: int, h: int, params: dict, folder_path: str, epsilon: float) -> str:
-        svg_elements = [
-            (
-                f'<svg width="{w}" height="{h}" viewBox="0 0 {w} {h}" '
-                'xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">'
-            )
-        ]
-
-        if params["top_source_ref"]:
-            ref_path = None
-            for ext in [".jpg", ".JPG", ".jpeg", ".JPEG", ".bmp", ".png", ".PNG"]:
-                p = os.path.join(folder_path, params["top_source_ref"] + ext)
-                if os.path.exists(p):
-                    ref_path = p
-                    break
-
-            if ref_path:
-                ref_img = cv2.imread(ref_path)
-                ref_h, ref_w = ref_img.shape[:2]
-                cut_ratio = 0.55
-                cut_y = max(1, int(round(ref_h * cut_ratio)))
-                top_half_img = ref_img[0:cut_y, 0:ref_w]
-                target_top_h = max(1, int(round(h * cut_ratio)))
-                scale_x = w / ref_w if ref_w > 0 else 1.0
-                scale_y = target_top_h / cut_y if cut_y > 0 else 1.0
-                svg_elements.extend(
-                    Action.traceImageSegment(
-                        top_half_img,
-                        epsilon,
-                        scale_x=scale_x,
-                        scale_y=scale_y,
-                    )
-                )
-
-        if params["bottom_shape"] == "square_cross":
-            cx = w / 2
-            cy = h * 0.75
-            s = min(w, h) * 0.15
-            sw = w * 0.02
-            svg_elements.append(
-                f'  <rect x="{cx-s}" y="{cy-s}" width="{s*2}" height="{s*2}" fill="#e6e6e6" stroke="#4d4d4d" stroke-width="{sw}"/>'
-            )
-            svg_elements.append(
-                f'  <line x1="{cx-s}" y1="{cy-s}" x2="{cx+s}" y2="{cy+s}" stroke="#4d4d4d" stroke-width="{sw}"/>'
-            )
-            svg_elements.append(
-                f'  <line x1="{cx+s}" y1="{cy-s}" x2="{cx-s}" y2="{cy+s}" stroke="#4d4d4d" stroke-width="{sw}"/>'
-            )
-
-        svg_elements.append("</svg>")
-        return "\n".join(svg_elements)
+        return composite_svg_helpers.generateCompositeSvgImpl(
+            w,
+            h,
+            params,
+            folder_path,
+            epsilon,
+            os_module=os,
+            cv2_module=cv2,
+            trace_image_segment_fn=Action.traceImageSegment,
+        )
 
     @staticmethod
     def renderSvgToNumpy(svg_string: str, size_w: int, size_h: int):
