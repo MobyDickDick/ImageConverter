@@ -47,7 +47,16 @@ from src.iCCModules import imageCompositeConverterSemanticDefaults as semantic_d
 from src.iCCModules import imageCompositeConverterSemanticAc0811 as semantic_ac0811_helpers
 from src.iCCModules import imageCompositeConverterSemanticAc0812 as semantic_ac0812_helpers
 from src.iCCModules import imageCompositeConverterSemanticAc0813 as semantic_ac0813_helpers
+from src.iCCModules import imageCompositeConverterSemanticAc08Params as semantic_ac08_param_helpers
+from src.iCCModules import imageCompositeConverterSemanticAr0100 as semantic_ar0100_helpers
 from src.iCCModules import imageCompositeConverterSemanticBadgeGeometry as semantic_badge_geometry_helpers
+from src.iCCModules import imageCompositeConverterSemanticBadgeSvg as semantic_badge_svg_helpers
+from src.iCCModules import imageCompositeConverterSemanticAc08SmallVariants as semantic_ac08_small_variant_helpers
+from src.iCCModules import imageCompositeConverterSemanticAc08Families as semantic_ac08_family_helpers
+from src.iCCModules import imageCompositeConverterSemanticAc08Finalization as semantic_ac08_finalization_helpers
+from src.iCCModules import imageCompositeConverterSemanticAdaptiveLocks as semantic_adaptive_lock_helpers
+from src.iCCModules import imageCompositeConverterSemanticCircleStyle as semantic_circle_style_helpers
+from src.iCCModules import imageCompositeConverterSemanticRedrawVariation as semantic_redraw_variation_helpers
 from src.iCCModules import imageCompositeConverterQuality as quality_helpers
 from src.iCCModules import imageCompositeConverterAudit as audit_helpers
 from src.iCCModules import imageCompositeConverterTransfer as transfer_helpers
@@ -63,6 +72,7 @@ from src.iCCModules import imageCompositeConverterOptimizationCircleRadius as ci
 from src.iCCModules import imageCompositeConverterOptimizationCircleGeometry as circle_geometry_optimization_helpers
 from src.iCCModules import imageCompositeConverterOptimizationElementAlignment as element_alignment_optimization_helpers
 from src.iCCModules import imageCompositeConverterOptimizationScalars as scalar_optimization_helpers
+from src.iCCModules import imageCompositeConverterOptimizationQuantization as quantization_optimization_helpers
 from src.iCCModules import imageCompositeConverterOptimizationGlobalVector as global_vector_optimization_helpers
 from src.iCCModules import imageCompositeConverterOptimizationGlobalSearch as global_search_optimization_helpers
 from src.iCCModules import imageCompositeConverterMaskGeometry as mask_geometry_helpers
@@ -71,6 +81,7 @@ from src.iCCModules import imageCompositeConverterSemanticGeometry as semantic_g
 from src.iCCModules import imageCompositeConverterSemanticHarmonization as semantic_harmonization_helpers
 from src.iCCModules import imageCompositeConverterRendering as rendering_helpers
 from src.iCCModules import imageCompositeConverterRenderRuntime as rendering_runtime_helpers
+from src.iCCModules import imageCompositeConverterRenderDispatch as render_dispatch_helpers
 from src.iCCModules import imageCompositeConverterBatchReporting as batch_reporting_helpers
 from src.iCCModules import imageCompositeConverterConversionRows as conversion_row_helpers
 from src.iCCModules import imageCompositeConverterAc08Reporting as ac08_reporting_helpers
@@ -82,6 +93,8 @@ from src.iCCModules import imageCompositeConverterBestlist as conversion_bestlis
 from src.iCCModules import imageCompositeConverterElementValidation as element_validation_helpers
 from src.iCCModules import imageCompositeConverterElementMasks as element_mask_helpers
 from src.iCCModules import imageCompositeConverterElementErrorMetrics as element_error_metric_helpers
+from src.iCCModules import imageCompositeConverterCompositeSvg as composite_svg_helpers
+from src.iCCModules import imageCompositeConverterDiffing as diffing_helpers
 from src.successfulConversions import (
     AC08_MITIGATION_STATUS,
     AC08_PREVIOUSLY_GOOD_VARIANTS,
@@ -1107,6 +1120,13 @@ class Reflection:
         ):
             return desc, params
 
+        non_traceable_hint = Reflection._detect_non_traceable_hint(desc)
+        if non_traceable_hint:
+            params["mode"] = "manual_review"
+            params["review_reason"] = non_traceable_hint
+            params["elements"].append(f"MANUELL: {non_traceable_hint}")
+            return desc, params
+
         match = re.search(r"\boven\b.*?\bwie(?:\s+in)?\s+([a-z]{2}\d{3,4})\b", desc)
         if match:
             params["mode"] = "composite"
@@ -1132,6 +1152,23 @@ class Reflection:
     @staticmethod
     def _extract_documented_alias_refs(text: str) -> set[str]:
         return Reflection._extractDocumentedAliasRefs(text)
+
+    @staticmethod
+    def _detect_non_traceable_hint(text: str) -> str | None:
+        normalized = re.sub(r"\s+", " ", str(text or "").lower()).strip()
+        if not normalized:
+            return None
+        hint_patterns = [
+            (r"nicht automatisch nachzeichnbar", "Beschreibung markiert Symbol als nicht automatisch nachzeichnbar."),
+            (r"nur eingeschränkt.*reproduzierbar", "Beschreibung markiert Symbol als nur eingeschränkt reproduzierbar."),
+            (r"außerhalb der robust unterstützten standard-geometrien", "Beschreibung markiert Symbol außerhalb der robust unterstützten Standard-Geometrien."),
+            (r"bitte einer finalen wurzelform-kategorie zuordnen", "Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie."),
+            (r"noch nicht fachlich klassifiziert", "Beschreibung markiert Symbol als fachlich noch nicht klassifiziert."),
+        ]
+        for pattern, message in hint_patterns:
+            if re.search(pattern, normalized):
+                return message
+        return None
 
     @staticmethod
     def _parseSemanticBadgeLayoutOverrides(text: str) -> dict[str, float | str]:
@@ -1317,250 +1354,55 @@ class Action:
 
     @staticmethod
     def applyRedrawVariation(params: dict, w: int, h: int) -> tuple[dict, list[str]]:
-        """Apply a slight per-run redraw jitter and describe it for the log."""
-        p = copy.deepcopy(params)
-        variation_logs: list[str] = []
-        if w <= 0 or h <= 0:
-            return p, variation_logs
-
-        seed = (
-            int(Action.STOCHASTIC_RUN_SEED) * 1009
-            + int(Action.STOCHASTIC_SEED_OFFSET) * 101
-            + int(time.time_ns() % 1_000_000_007)
+        return semantic_redraw_variation_helpers.applyRedrawVariationImpl(
+            params,
+            w,
+            h,
+            stochastic_run_seed=Action.STOCHASTIC_RUN_SEED,
+            stochastic_seed_offset=Action.STOCHASTIC_SEED_OFFSET,
+            time_ns_fn=time.time_ns,
+            make_rng_fn=Action._makeRng,
+            clamp_circle_inside_canvas_fn=Action._clampCircleInsideCanvas,
+            reanchor_arm_to_circle_edge_fn=Action._reanchorArmToCircleEdge,
         )
-        rng = Action._makeRng(seed)
-
-        def _uniform(delta: float) -> float:
-            return float(rng.uniform(-abs(float(delta)), abs(float(delta))))
-
-        jitter_entries: list[str] = []
-
-        def _applyNumericJitter(key: str, delta: float, *, minimum: float | None = None, maximum: float | None = None) -> None:
-            if key not in p:
-                return
-            try:
-                old_float = float(p.get(key))
-            except (TypeError, ValueError):
-                return
-            new_value = old_float + _uniform(delta)
-            if minimum is not None:
-                new_value = max(float(minimum), new_value)
-            if maximum is not None:
-                new_value = min(float(maximum), new_value)
-            p[key] = float(new_value)
-            jitter_entries.append(f"{key}:{old_float:.3f}->{new_value:.3f}")
-
-        _applyNumericJitter("cx", max(0.15, float(w) * 0.01), minimum=0.0, maximum=float(w))
-        _applyNumericJitter("cy", max(0.15, float(h) * 0.01), minimum=0.0, maximum=float(h))
-        _applyNumericJitter("r", max(0.10, float(min(w, h)) * 0.008), minimum=1.0)
-        _applyNumericJitter("stroke_circle", 0.12, minimum=0.4)
-        _applyNumericJitter("arm_len", max(0.12, float(w) * 0.012), minimum=0.5, maximum=float(max(w, h)))
-        _applyNumericJitter("arm_stroke", 0.12, minimum=0.4)
-        _applyNumericJitter("stem_height", max(0.12, float(h) * 0.012), minimum=0.5, maximum=float(max(w, h)))
-        _applyNumericJitter("stem_width", 0.12, minimum=0.4, maximum=float(max(1, w)))
-        _applyNumericJitter("text_scale", 0.03, minimum=0.35, maximum=4.0)
-        _applyNumericJitter("text_x", max(0.10, float(w) * 0.01), minimum=0.0, maximum=float(w))
-        _applyNumericJitter("text_y", max(0.10, float(h) * 0.01), minimum=0.0, maximum=float(h))
-        _applyNumericJitter("co2_dx", 0.08)
-        _applyNumericJitter("co2_dy", 0.08)
-        _applyNumericJitter("voc_scale", 0.03, minimum=0.35, maximum=4.0)
-
-        p = Action._clampCircleInsideCanvas(p, w, h)
-        if p.get("arm_enabled"):
-            Action._reanchorArmToCircleEdge(p, float(p.get("r", 1.0)))
-        if p.get("stem_enabled") and "cy" in p and "r" in p:
-            p["stem_top"] = float(p.get("cy", 0.0)) + float(p.get("r", 0.0))
-
-        if jitter_entries:
-            variation_logs.append(
-                "redraw_variation: seed="
-                f"{seed} changed_params=" + " | ".join(jitter_entries)
-            )
-        return p, variation_logs
 
     @staticmethod
     def _enforceCircleConnectorSymmetry(params: dict, w: int, h: int) -> dict:
-        """Keep circle+connector "lollipop" geometry centered around the connector axis."""
-        p = dict(params)
-        if not p.get("circle_enabled", True):
-            return p
-        if "cx" not in p or "cy" not in p or "r" not in p:
-            return p
-
-        cx = float(p["cx"])
-        cy = float(p["cy"])
-        r = float(p["r"])
-
-        if p.get("stem_enabled") and "stem_width" in p:
-            p["stem_x"] = cx - (float(p["stem_width"]) / 2.0)
-
-        if p.get("arm_enabled") and all(k in p for k in ("arm_x1", "arm_y1", "arm_x2", "arm_y2")):
-            x1 = float(p["arm_x1"])
-            y1 = float(p["arm_y1"])
-            x2 = float(p["arm_x2"])
-            y2 = float(p["arm_y2"])
-
-            vertical = abs(x2 - x1) <= abs(y2 - y1)
-            if vertical:
-                p["arm_x1"] = cx
-                p["arm_x2"] = cx
-                end_is_p2 = abs(y2 - cy) <= abs(y1 - cy)
-                if end_is_p2:
-                    p["arm_y2"] = cy - r if y1 <= cy else cy + r
-                else:
-                    p["arm_y1"] = cy - r if y2 <= cy else cy + r
-            else:
-                p["arm_y1"] = cy
-                p["arm_y2"] = cy
-                end_is_p2 = abs(x2 - cx) <= abs(x1 - cx)
-                if end_is_p2:
-                    p["arm_x2"] = cx - r if x1 <= cx else cx + r
-                else:
-                    p["arm_x1"] = cx - r if x2 <= cx else cx + r
-
-        if "stem_x" in p and "stem_width" in p:
-            p["stem_x"] = max(0.0, min(float(w) - float(p["stem_width"]), float(p["stem_x"])))
-        for key in ("arm_x1", "arm_x2"):
-            if key in p:
-                p[key] = max(0.0, min(float(w), float(p[key])))
-        for key in ("arm_y1", "arm_y2"):
-            if key in p:
-                p[key] = max(0.0, min(float(h), float(p[key])))
-        return p
+        return quantization_optimization_helpers.enforceCircleConnectorSymmetryImpl(params, w, h)
 
     @staticmethod
     def _quantizeBadgeParams(params: dict, w: int, h: int) -> dict:
-        """Quantize geometry for bitmap-like sources.
-
-        - Coordinates/lengths use 0.5px steps.
-        - Line widths use integer pixel steps.
-        """
-        p = dict(params)
-        raw_circle_radius = float(p["r"]) if p.get("circle_enabled", True) and "r" in p else None
-
-        half_keys = (
-            "cx",
-            "cy",
-            "r",
-            "stem_x",
-            "stem_top",
-            "stem_bottom",
-            "arm_x1",
-            "arm_y1",
-            "arm_x2",
-            "arm_y2",
-            "tx",
-            "ty",
-            "co2_dy",
+        return quantization_optimization_helpers.quantizeBadgeParamsImpl(
+            params,
+            w,
+            h,
+            snap_half_fn=Action._snapHalf,
+            snap_int_px_fn=Action._snapIntPx,
+            enforce_circle_connector_symmetry_fn=Action._enforceCircleConnectorSymmetry,
+            clamp_circle_inside_canvas_fn=Action._clampCircleInsideCanvas,
+            max_circle_radius_inside_canvas_fn=Action._maxCircleRadiusInsideCanvas,
         )
-        for key in half_keys:
-            if key in p:
-                p[key] = Action._snapHalf(float(p[key]))
-
-        int_width_keys = ("stroke_circle", "arm_stroke", "stem_width")
-        for key in int_width_keys:
-            if key in p:
-                p[key] = Action._snapIntPx(float(p[key]), minimum=1.0)
-
-        if "stem_width_max" in p:
-            p["stem_width_max"] = max(1.0, Action._snapHalf(float(p["stem_width_max"])))
-
-        if p.get("stem_enabled") and "cx" in p and "stem_width" in p:
-            p["stem_x"] = Action._snapHalf(float(p["cx"]) - (float(p["stem_width"]) / 2.0))
-
-        if "stem_x" in p and "stem_width" in p:
-            p["stem_x"] = max(0.0, min(float(w) - float(p["stem_width"]), float(p["stem_x"])))
-        if "stem_top" in p:
-            p["stem_top"] = max(0.0, min(float(h), float(p["stem_top"])))
-        if "stem_bottom" in p:
-            p["stem_bottom"] = max(0.0, min(float(h), float(p["stem_bottom"])))
-
-        p = Action._enforceCircleConnectorSymmetry(p, w, h)
-        p = Action._clampCircleInsideCanvas(p, w, h)
-
-        if (
-            raw_circle_radius is not None
-            and "cx" in p
-            and "cy" in p
-            and "r" in p
-        ):
-            canvas_fit_r = float(
-                Action._maxCircleRadiusInsideCanvas(
-                    float(p["cx"]),
-                    float(p["cy"]),
-                    w,
-                    h,
-                    float(p.get("stroke_circle", 0.0)),
-                )
-            )
-            snapped_canvas_fit_r = float(Action._snapHalf(canvas_fit_r))
-            radius_gap_to_canvas = canvas_fit_r - raw_circle_radius
-            if (
-                snapped_canvas_fit_r > float(p["r"])
-                and radius_gap_to_canvas >= 0.0
-                and radius_gap_to_canvas <= 0.5
-                and (canvas_fit_r - float(p["r"])) <= 0.5
-            ):
-                p["r"] = float(
-                    max(
-                        float(p.get("min_circle_radius", 1.0)),
-                        min(snapped_canvas_fit_r, canvas_fit_r),
-                    )
-                )
-
-        # Symmetry enforcement may reintroduce non-snapped values.
-        for key in half_keys:
-            if key in p:
-                p[key] = Action._snapHalf(float(p[key]))
-
-        return p
 
     @staticmethod
     def _normalizeLightCircleColors(params: dict) -> dict:
-        params["fill_gray"] = Action.LIGHT_CIRCLE_FILL_GRAY
-        params["stroke_gray"] = Action.LIGHT_CIRCLE_STROKE_GRAY
-        if params.get("stem_enabled"):
-            params["stem_gray"] = Action.LIGHT_CIRCLE_STROKE_GRAY
-        if params.get("draw_text", True) and "text_gray" in params:
-            params["text_gray"] = Action.LIGHT_CIRCLE_TEXT_GRAY
-        return params
+        return semantic_circle_style_helpers.normalizeLightCircleColorsImpl(
+            params,
+            light_circle_fill_gray=Action.LIGHT_CIRCLE_FILL_GRAY,
+            light_circle_stroke_gray=Action.LIGHT_CIRCLE_STROKE_GRAY,
+            light_circle_text_gray=Action.LIGHT_CIRCLE_TEXT_GRAY,
+        )
 
     @staticmethod
     def _normalizeAc08LineWidths(params: dict) -> dict:
-        """For AC08xx symbols: prefer a uniform 1px circle/connector stroke."""
-        p = dict(params)
-        prev_circle_stroke = float(p.get("stroke_circle", Action.AC08_STROKE_WIDTH_PX))
-        p["stroke_circle"] = Action.AC08_STROKE_WIDTH_PX
-        if bool(p.pop("preserve_outer_diameter_on_stroke_normalization", False)) and p.get("circle_enabled", True) and "r" in p and prev_circle_stroke > 0.0:
-            # Keep the visual outer diameter stable when normalizing to the
-            # canonical AC08 1px stroke. Otherwise tiny plain-ring badges can
-            # lose more than a pixel of diameter even if the fitted geometry
-            # correctly reached the canvas border.
-            outer_radius = float(p["r"]) + (prev_circle_stroke / 2.0)
-            p["r"] = max(1.0, outer_radius - (Action.AC08_STROKE_WIDTH_PX / 2.0))
-        # Keep semantic AC08xx families on their canonical stroke thickness.
-        # The later pixel-error bracketing step can otherwise over-fit anti-aliased
-        # ring edges and inflate widths (e.g. 1px -> 6px for tiny circles).
-        p["lock_stroke_widths"] = True
-        if p.get("arm_enabled"):
-            p["arm_stroke"] = Action.AC08_STROKE_WIDTH_PX
-        if p.get("stem_enabled"):
-            p["stem_width"] = Action.AC08_STROKE_WIDTH_PX
-            if "cx" in p:
-                p["stem_x"] = float(p["cx"]) - (Action.AC08_STROKE_WIDTH_PX / 2.0)
-            p["stem_gray"] = int(p.get("stroke_gray", Action.LIGHT_CIRCLE_STROKE_GRAY))
-        return p
+        return semantic_circle_style_helpers.normalizeAc08LineWidthsImpl(
+            params,
+            ac08_stroke_width_px=Action.AC08_STROKE_WIDTH_PX,
+            light_circle_stroke_gray=Action.LIGHT_CIRCLE_STROKE_GRAY,
+        )
 
     @staticmethod
     def _estimateBorderBackgroundGray(gray: np.ndarray) -> float:
-        """Estimate badge background tone from the outer image border pixels."""
-        if gray.size == 0:
-            return 255.0
-        h, w = gray.shape
-        if h < 2 or w < 2:
-            return float(np.median(gray))
-        border = np.concatenate((gray[0, :], gray[h - 1, :], gray[:, 0], gray[:, w - 1]))
-        return float(np.median(border))
+        return semantic_circle_style_helpers.estimateBorderBackgroundGrayImpl(gray, np_module=np)
 
     @staticmethod
     def _estimateCircleTonesAndStroke(
@@ -1570,813 +1412,114 @@ class Action:
         r: float,
         stroke_hint: float,
     ) -> tuple[float, float, float]:
-        """Estimate fill/ring grayscale and stroke width for circular ring-like badges."""
-        yy, xx = np.indices(gray.shape)
-        dist = np.sqrt((xx - float(cx)) ** 2 + (yy - float(cy)) ** 2)
-
-        inner_mask = dist <= max(1.0, float(r) * 0.78)
-        fill_gray = float(np.median(gray[inner_mask])) if np.any(inner_mask) else float(np.median(gray))
-
-        search_band = max(2.0, min(float(r) * 0.30, 5.0))
-        ring_search = np.abs(dist - float(r)) <= search_band
-        ring_vals = gray[ring_search] if np.any(ring_search) else gray
-        ring_gray = float(np.median(ring_vals))
-
-        # Prefer the darker contour around the estimated radius when present.
-        dark_cut = fill_gray - 2.0
-        dark_ring = ring_search & (gray <= dark_cut)
-        if np.any(dark_ring):
-            ring_gray = float(np.median(gray[dark_ring]))
-            d = np.abs(dist - float(r))[dark_ring]
-            stroke_est = float(max(1.0, min(6.0, np.percentile(d, 72) * 2.0)))
-        else:
-            stroke_est = float(max(1.0, min(6.0, stroke_hint)))
-
-        return fill_gray, ring_gray, stroke_est
+        return semantic_circle_style_helpers.estimateCircleTonesAndStrokeImpl(
+            gray,
+            cx,
+            cy,
+            r,
+            stroke_hint,
+            np_module=np,
+        )
 
     @staticmethod
     def _persistConnectorLengthFloor(params: dict, element: str, default_ratio: float) -> None:
-        """Persist a robust minimum connector length for later validation stages."""
-        if element == "stem":
-            length = float(params.get("stem_bottom", 0.0)) - float(params.get("stem_top", 0.0))
-            min_key = "stem_len_min"
-            ratio_key = "stem_len_min_ratio"
-            template_length = float(params.get("template_stem_bottom", 0.0)) - float(params.get("template_stem_top", 0.0))
-        elif element == "arm":
-            x1 = float(params.get("arm_x1", 0.0))
-            y1 = float(params.get("arm_y1", 0.0))
-            x2 = float(params.get("arm_x2", 0.0))
-            y2 = float(params.get("arm_y2", 0.0))
-            length = float(math.hypot(x2 - x1, y2 - y1))
-            min_key = "arm_len_min"
-            ratio_key = "arm_len_min_ratio"
-            tx1 = float(params.get("template_arm_x1", x1))
-            ty1 = float(params.get("template_arm_y1", y1))
-            tx2 = float(params.get("template_arm_x2", x2))
-            ty2 = float(params.get("template_arm_y2", y2))
-            template_length = float(math.hypot(tx2 - tx1, ty2 - ty1))
-        else:
-            return
-
-        if length <= 0.0:
-            return
-
-        ratio = float(max(0.0, min(1.0, float(params.get(ratio_key, default_ratio)))))
-        params[ratio_key] = ratio
-        params[min_key] = float(max(float(params.get(min_key, 1.0)), length * ratio, template_length * ratio, 1.0))
+        semantic_ac08_small_variant_helpers.persistConnectorLengthFloorImpl(params, element, default_ratio)
 
     @staticmethod
     def _isAc08SmallVariant(name: str, params: dict) -> tuple[bool, str, float]:
-        """Classify tiny AC08 variants so validation can use tighter `_S` heuristics."""
-        normalized_name = str(name).upper()
-        min_dim = float(min(float(params.get("width", 0.0) or 0.0), float(params.get("height", 0.0) or 0.0)))
-        if min_dim <= 0.0:
-            min_dim = max(1.0, float(params.get("r", 1.0)) * 2.0)
-
-        variant_suffix = normalized_name.endswith("_S")
-        dimension_small = min_dim <= 15.5
-        is_small = variant_suffix or dimension_small
-        if variant_suffix and dimension_small:
-            reason = "variant_suffix+min_dim"
-        elif variant_suffix:
-            reason = "variant_suffix"
-        elif dimension_small:
-            reason = "min_dim"
-        else:
-            reason = "standard"
-        return is_small, reason, min_dim
+        return semantic_ac08_small_variant_helpers.isAc08SmallVariantImpl(name, params)
 
     @staticmethod
     def _configureAc08SmallVariantMode(name: str, params: dict) -> dict:
-        """Apply `_S`-specific AC08 tuning for text, connector floors, and masks."""
-        p = dict(params)
-        is_small, reason, min_dim = Action._isAc08SmallVariant(name, p)
-        p["ac08_small_variant_mode"] = bool(is_small)
-        p["ac08_small_variant_reason"] = reason
-        p["ac08_small_variant_min_dim"] = float(min_dim)
-        if not is_small:
-            return p
-
-        p["validation_mask_dilate_px"] = int(max(1, int(p.get("validation_mask_dilate_px", 1))))
-        p["small_variant_antialias_bias"] = float(max(0.0, float(p.get("small_variant_antialias_bias", 0.08))))
-
-        if p.get("arm_enabled"):
-            p["arm_len_min_ratio"] = float(max(float(p.get("arm_len_min_ratio", 0.75)), 0.78))
-            Action._persistConnectorLengthFloor(p, "arm", default_ratio=0.78)
-        if p.get("stem_enabled"):
-            p["stem_len_min_ratio"] = float(max(float(p.get("stem_len_min_ratio", 0.65)), 0.70))
-            Action._persistConnectorLengthFloor(p, "stem", default_ratio=0.70)
-
-        text_mode = str(p.get("text_mode", "")).lower()
-        if text_mode == "co2":
-            base_scale = float(p.get("co2_font_scale", 0.82))
-            p["lock_text_scale"] = False
-            p["co2_font_scale_min"] = float(max(float(p.get("co2_font_scale_min", base_scale)), max(0.74, base_scale * 0.92)))
-            p["co2_font_scale_max"] = float(min(float(p.get("co2_font_scale_max", 1.18)), min(1.10, base_scale * 1.12)))
-            p["co2_subscript_offset_scale"] = float(min(float(p.get("co2_subscript_offset_scale", 0.24)), 0.24))
-        elif text_mode == "voc":
-            base_scale = float(p.get("voc_font_scale", 0.52))
-            p["lock_text_scale"] = False
-            p["voc_font_scale_min"] = float(max(float(p.get("voc_font_scale_min", base_scale)), max(0.46, base_scale * 0.92)))
-            p["voc_font_scale_max"] = float(min(float(p.get("voc_font_scale_max", 0.96)), min(0.96, base_scale * 1.10)))
-        return p
+        return semantic_ac08_small_variant_helpers.configureAc08SmallVariantModeImpl(
+            name,
+            params,
+            is_ac08_small_variant_fn=Action._isAc08SmallVariant,
+            persist_connector_length_floor_fn=Action._persistConnectorLengthFloor,
+        )
 
     @staticmethod
     def _enforceTemplateCircleEdgeExtent(params: dict, w: int, h: int, *, anchor: str, retain_ratio: float = 0.97) -> dict:
-        """Keep edge-anchored circles close to template edge reach.
-
-        Generic safeguard for all edge-anchored connector families:
-        if optimization shortens the anchored side too much (e.g. right arc on
-        AC0812-like badges), raise `min_circle_radius` so the anchored contour
-        keeps at least `retain_ratio` of the template extent.
-        """
-        p = dict(params)
-        if not p.get("circle_enabled", True):
-            return p
-        if "cx" not in p or "r" not in p:
-            return p
-        if "template_circle_cx" not in p or "template_circle_radius" not in p:
-            return p
-
-        retain_ratio = float(max(0.90, min(1.00, retain_ratio)))
-        cx = float(p["cx"])
-        template_cx = float(p["template_circle_cx"])
-        template_r = max(1.0, float(p["template_circle_radius"]))
-        stroke = float(max(0.0, p.get("stroke_circle", 0.0)))
-        canvas_cap = float(Action._maxCircleRadiusInsideCanvas(cx, float(p.get("cy", float(h) / 2.0)), w, h, stroke))
-
-        if anchor == "right":
-            template_extent = template_cx + template_r
-            required_extent = template_extent * retain_ratio
-            required_r = required_extent - cx
-        elif anchor == "left":
-            template_extent = template_cx - template_r
-            required_extent = template_extent + ((1.0 - retain_ratio) * abs(template_extent))
-            required_r = cx - required_extent
-        else:
-            return p
-
-        required_r = float(max(1.0, min(canvas_cap, required_r)))
-        if required_r > 1.0:
-            p["min_circle_radius"] = float(max(float(p.get("min_circle_radius", 1.0)), required_r))
-        return p
+        return semantic_ac08_family_helpers.enforceTemplateCircleEdgeExtentImpl(
+            params,
+            w,
+            h,
+            anchor=anchor,
+            retain_ratio=retain_ratio,
+            max_circle_radius_inside_canvas_fn=Action._maxCircleRadiusInsideCanvas,
+        )
 
 
     @staticmethod
     def _tuneAc08LeftConnectorFamily(name: str, params: dict) -> dict:
-        """Apply shared guardrails for left-connector AC08 families.
-
-        Aufgabe 4.1 groups AC0812, AC0832, AC0837 and AC0882 because they all
-        combine a circle on the right with a left-facing horizontal connector.
-        The shared failure modes are:
-        - the circle drifting left into the connector,
-        - the arm collapsing until it becomes barely visible, and
-        - text badges shrinking/offsetting once the circle geometry drifts.
-
-        Keep those families on a common semantic baseline before variant-specific
-        fine-tuning runs.
-        """
-        p = dict(params)
-        symbol_name = getBaseNameFromFile(str(name)).upper().split("_", 1)[0]
-        if symbol_name not in {"AC0812", "AC0832", "AC0837", "AC0882"}:
-            return p
-
-        p["connector_family_group"] = "ac08_left_connector"
-        p["connector_family_direction"] = "left"
-        p["lock_circle_cx"] = True
-        p["lock_circle_cy"] = True
-        if "template_circle_cx" in p:
-            p["cx"] = float(p["template_circle_cx"])
-        if "template_circle_cy" in p:
-            p["cy"] = float(p["template_circle_cy"])
-
-        has_text = bool(p.get("draw_text", False))
-        text_mode = str(p.get("text_mode", "")).lower()
-        is_small, _reason, min_dim = Action._isAc08SmallVariant(str(name), p)
-        arm_ratio_floor = 0.82
-        if has_text or text_mode == "path_t":
-            arm_ratio_floor = 0.84
-        if is_small:
-            arm_ratio_floor = max(arm_ratio_floor, 0.86)
-        p["arm_len_min_ratio"] = float(max(float(p.get("arm_len_min_ratio", arm_ratio_floor)), arm_ratio_floor))
-
-        template_r = float(p.get("template_circle_radius", p.get("r", 1.0)))
-        radius_floor_ratio = 0.95 if not has_text else 0.93
-        if is_small:
-            radius_floor_ratio = max(radius_floor_ratio, 0.96 if not has_text else 0.94)
-        p["min_circle_radius"] = float(max(float(p.get("min_circle_radius", 1.0)), template_r * radius_floor_ratio))
-        p = Action._enforceTemplateCircleEdgeExtent(
-            p,
-            int(round(float(p.get("width", 0.0) or 0.0))) or int(round(float(p.get("badge_width", 0.0) or 0.0))) or 1,
-            int(round(float(p.get("height", 0.0) or 0.0))) or int(round(float(p.get("badge_height", 0.0) or 0.0))) or 1,
-            anchor="right",
-            retain_ratio=0.97 if not is_small else 0.96,
+        return semantic_ac08_family_helpers.tuneAc08LeftConnectorFamilyImpl(
+            name,
+            params,
+            get_base_name_from_file_fn=getBaseNameFromFile,
+            is_ac08_small_variant_fn=Action._isAc08SmallVariant,
+            enforce_template_circle_edge_extent_fn=Action._enforceTemplateCircleEdgeExtent,
+            enforce_left_arm_badge_geometry_fn=Action._enforceLeftArmBadgeGeometry,
+            center_glyph_bbox_fn=Action._centerGlyphBbox,
         )
-
-        p = Action._enforceLeftArmBadgeGeometry(
-            p,
-            int(round(float(p.get("width", 0.0) or 0.0))) or int(round(float(p.get("badge_width", 0.0) or 0.0))) or 1,
-            int(round(float(p.get("height", 0.0) or 0.0))) or int(round(float(p.get("badge_height", 0.0) or 0.0))) or 1,
-        )
-
-        if p.get("arm_enabled") and "cx" in p:
-            max_from_arm_floor = max(1.0, float(p["cx"]) - float(p.get("arm_len_min", 1.0)))
-            existing_max = float(p.get("max_circle_radius", 0.0) or 0.0)
-            if existing_max > 0.0:
-                p["max_circle_radius"] = float(min(existing_max, max_from_arm_floor))
-            else:
-                p["max_circle_radius"] = float(max_from_arm_floor)
-
-        text_mode = str(p.get("text_mode", "")).lower()
-        if text_mode == "co2":
-            base_scale = float(p.get("co2_font_scale", 0.82))
-            p["lock_text_scale"] = False
-            p["co2_font_scale_min"] = float(max(float(p.get("co2_font_scale_min", base_scale)), max(0.78, base_scale * 0.94)))
-            p["co2_font_scale_max"] = float(min(float(p.get("co2_font_scale_max", 1.12)), min(1.12, base_scale * 1.15)))
-            p["co2_anchor_mode"] = str(p.get("co2_anchor_mode", "cluster"))
-        elif text_mode == "voc":
-            base_scale = float(p.get("voc_font_scale", 0.52))
-            p["lock_text_scale"] = False
-            p["voc_font_scale_min"] = float(max(float(p.get("voc_font_scale_min", base_scale)), max(0.50, base_scale * 0.94)))
-            p["voc_font_scale_max"] = float(min(float(p.get("voc_font_scale_max", 0.98)), min(0.98, base_scale * 1.14)))
-        elif str(p.get("text_mode", "")).lower() == "path_t":
-            p["s"] = float(max(float(p.get("s", 0.0)), 0.0088 if min_dim >= 18.0 else 0.0082))
-            Action._centerGlyphBbox(p)
-        return p
 
     @staticmethod
     def _tuneAc08RightConnectorFamily(name: str, params: dict) -> dict:
-        """Apply shared guardrails for mirrored right-connector AC08 families.
-
-        Aufgabe 4.2 groups AC0810, AC0814, AC0834, AC0838 and AC0839
-        because they all place the circle on the left and extend the connector
-        toward the right canvas edge. Their common regressions mirror the left
-        connector family:
-        - the circle drifts right into the connector span,
-        - the arm collapses until the badge looks almost circular, and
-        - tiny right-arm text badges drift down/right when text pixels dominate.
-
-        Keep those mirrored families on one semantic baseline before applying
-        family-specific CO₂/VOC or small-variant adjustments.
-        """
-        p = dict(params)
-        symbol_name = getBaseNameFromFile(str(name)).upper().split("_", 1)[0]
-        if symbol_name not in {"AC0810", "AC0814", "AC0834", "AC0838", "AC0839"}:
-            return p
-
-        p["connector_family_group"] = "ac08_right_connector"
-        p["connector_family_direction"] = "right"
-        p["lock_circle_cx"] = True
-        p["lock_circle_cy"] = True
-        if "template_circle_cx" in p:
-            p["cx"] = float(p["template_circle_cx"])
-        if "template_circle_cy" in p:
-            p["cy"] = float(p["template_circle_cy"])
-
-        has_text = bool(p.get("draw_text", False))
-        text_mode = str(p.get("text_mode", "")).lower()
-        is_small, _reason, min_dim = Action._isAc08SmallVariant(str(name), p)
-        arm_ratio_floor = 0.82
-        if has_text or text_mode == "path_t":
-            arm_ratio_floor = 0.84
-        if is_small:
-            arm_ratio_floor = max(arm_ratio_floor, 0.86)
-        p["arm_len_min_ratio"] = float(max(float(p.get("arm_len_min_ratio", arm_ratio_floor)), arm_ratio_floor))
-
-        template_r = float(p.get("template_circle_radius", p.get("r", 1.0)))
-        radius_floor_ratio = 0.95 if not has_text else 0.93
-        if is_small:
-            radius_floor_ratio = max(radius_floor_ratio, 0.96 if not has_text else 0.94)
-        p["min_circle_radius"] = float(max(float(p.get("min_circle_radius", 1.0)), template_r * radius_floor_ratio))
-        p = Action._enforceTemplateCircleEdgeExtent(
-            p,
-            int(round(float(p.get("width", 0.0) or 0.0))) or int(round(float(p.get("badge_width", 0.0) or 0.0))) or 1,
-            int(round(float(p.get("height", 0.0) or 0.0))) or int(round(float(p.get("badge_height", 0.0) or 0.0))) or 1,
-            anchor="left",
-            retain_ratio=0.97 if not is_small else 0.96,
+        return semantic_ac08_family_helpers.tuneAc08RightConnectorFamilyImpl(
+            name,
+            params,
+            get_base_name_from_file_fn=getBaseNameFromFile,
+            is_ac08_small_variant_fn=Action._isAc08SmallVariant,
+            enforce_template_circle_edge_extent_fn=Action._enforceTemplateCircleEdgeExtent,
+            enforce_right_arm_badge_geometry_fn=Action._enforceRightArmBadgeGeometry,
         )
-
-        p = Action._enforceRightArmBadgeGeometry(
-            p,
-            int(round(float(p.get("width", 0.0) or 0.0))) or int(round(float(p.get("badge_width", 0.0) or 0.0))) or 1,
-            int(round(float(p.get("height", 0.0) or 0.0))) or int(round(float(p.get("badge_height", 0.0) or 0.0))) or 1,
-        )
-
-        if p.get("arm_enabled") and "cx" in p and "r" in p:
-            canvas_width = float(p.get("width", 0.0) or p.get("badge_width", 0.0) or p.get("arm_x2", 0.0) or 1.0)
-            right_extent = max(float(p["cx"]) + float(p["r"]), 0.0)
-            max_from_arm_floor = max(1.0, canvas_width - float(p.get("arm_len_min", 1.0)) - float(p["cx"]))
-            existing_max = float(p.get("max_circle_radius", 0.0) or 0.0)
-            bounded_max = min(max_from_arm_floor, max(1.0, right_extent))
-            if existing_max > 0.0:
-                p["max_circle_radius"] = float(min(existing_max, bounded_max))
-            else:
-                p["max_circle_radius"] = float(bounded_max)
-
-        text_mode = str(p.get("text_mode", "")).lower()
-        if text_mode == "co2":
-            base_scale = float(p.get("co2_font_scale", 0.82))
-            p["lock_text_scale"] = False
-            p["co2_font_scale_min"] = float(max(float(p.get("co2_font_scale_min", base_scale)), max(0.78, base_scale * 0.94)))
-            p["co2_font_scale_max"] = float(min(float(p.get("co2_font_scale_max", 1.12)), min(1.12, base_scale * 1.15)))
-            p["co2_anchor_mode"] = str(p.get("co2_anchor_mode", "cluster"))
-        elif text_mode == "voc":
-            base_scale = float(p.get("voc_font_scale", 0.52))
-            p["lock_text_scale"] = False
-            p["voc_font_scale_min"] = float(max(float(p.get("voc_font_scale_min", base_scale)), max(0.50, base_scale * 0.94)))
-            p["voc_font_scale_max"] = float(min(float(p.get("voc_font_scale_max", 0.98)), min(0.98, base_scale * 1.14)))
-        return p
 
     @staticmethod
     def _enforceVerticalConnectorBadgeGeometry(params: dict, w: int, h: int) -> dict:
-        """Ensure AC0811/AC0813-like badges keep a centered visible vertical connector."""
-        p = dict(params)
-        if not p.get("circle_enabled", True):
-            return p
-        if "cx" not in p or "cy" not in p or "r" not in p:
-            return p
-
-        cx = float(p["cx"])
-        cy = float(p["cy"])
-        r = float(p["r"])
-        canvas_height = max(
-            float(h),
-            float(p.get("height", 0.0) or 0.0),
-            float(p.get("badge_height", 0.0) or 0.0),
-            float(p.get("stem_bottom", 0.0) or 0.0),
-            cy + r,
+        return semantic_ac08_family_helpers.enforceVerticalConnectorBadgeGeometryImpl(
+            params,
+            w,
+            h,
+            ac08_stroke_width_px=Action.AC08_STROKE_WIDTH_PX,
         )
-
-        if p.get("stem_enabled"):
-            stem_width = float(max(1.0, p.get("stem_width", p.get("stroke_circle", Action.AC08_STROKE_WIDTH_PX))))
-            p["stem_enabled"] = True
-            p["stem_width"] = stem_width
-            p["stem_x"] = cx - (stem_width / 2.0)
-            p["stem_top"] = cy + r - (stem_width * 0.55)
-            p["stem_bottom"] = canvas_height
-            stem_len = float(max(0.0, canvas_height - (cy + r)))
-            ratio = float(max(0.0, min(1.0, float(p.get("stem_len_min_ratio", 0.65)))))
-            p["stem_len_min_ratio"] = ratio
-            p["stem_len_min"] = float(max(1.0, float(p.get("stem_len_min", 1.0)), stem_len * ratio))
-
-        if p.get("arm_enabled"):
-            arm_stroke = float(max(1.0, p.get("arm_stroke", Action.AC08_STROKE_WIDTH_PX)))
-            top_extent = max(0.0, cy - r)
-            p["arm_enabled"] = True
-            p["arm_stroke"] = arm_stroke
-            p["arm_x1"] = cx
-            p["arm_x2"] = cx
-            p["arm_y1"] = 0.0
-            p["arm_y2"] = top_extent
-            arm_len = float(max(0.0, top_extent))
-            ratio = float(max(0.0, min(1.0, float(p.get("arm_len_min_ratio", 0.75)))))
-            p["arm_len_min_ratio"] = ratio
-            p["arm_len_min"] = float(max(1.0, float(p.get("arm_len_min", 1.0)), arm_len * ratio))
-        return p
 
     @staticmethod
     def _tuneAc08VerticalConnectorFamily(name: str, params: dict) -> dict:
-        """Apply shared guardrails for AC08 families with vertical connectors.
-
-        Aufgabe 4.3 groups AC0811, AC0813, AC0831, AC0833, AC0836 and AC0881 because
-        they all depend on a vertical connector staying centered relative to the
-        circle. Their main shared regressions are:
-        - the stem/arm drifting sideways relative to the circle,
-        - the vertical connector shrinking until the badge reads as plain circle,
-        - text badges becoming top-heavy once circle and connector alignment drifts.
-        """
-        p = dict(params)
-        symbol_name = getBaseNameFromFile(str(name)).upper().split("_", 1)[0]
-        if symbol_name not in {"AC0811", "AC0813", "AC0831", "AC0833", "AC0836", "AC0881"}:
-            return p
-
-        p["connector_family_group"] = "ac08_vertical_connector"
-        p["connector_family_direction"] = "vertical"
-        if symbol_name in {"AC0811", "AC0831", "AC0836", "AC0881"}:
-            p["stem_enabled"] = True
-            p.pop("arm_enabled", None)
-        elif symbol_name in {"AC0813", "AC0833"}:
-            p["arm_enabled"] = True
-        p["lock_circle_cx"] = True
-        p["lock_circle_cy"] = True
-        p["lock_stem_center_to_circle"] = bool(p.get("stem_enabled", False))
-        p["lock_arm_center_to_circle"] = bool(p.get("arm_enabled", False))
-        if "template_circle_cx" in p:
-            p["cx"] = float(p["template_circle_cx"])
-        if "template_circle_cy" in p:
-            p["cy"] = float(p["template_circle_cy"])
-
-        has_text = bool(p.get("draw_text", False))
-        is_small, _reason, min_dim = Action._isAc08SmallVariant(str(name), p)
-        template_r = float(p.get("template_circle_radius", p.get("r", 1.0)))
-        radius_floor_ratio = 0.95 if not has_text else 0.93
-        if is_small:
-            radius_floor_ratio = max(radius_floor_ratio, 0.96 if not has_text else 0.95)
-        p["min_circle_radius"] = float(max(float(p.get("min_circle_radius", 1.0)), template_r * radius_floor_ratio))
-
-        if p.get("stem_enabled"):
-            stem_ratio_floor = 0.70 if not has_text else 0.72
-            if is_small:
-                stem_ratio_floor = max(stem_ratio_floor, 0.74)
-            p["stem_len_min_ratio"] = float(max(float(p.get("stem_len_min_ratio", stem_ratio_floor)), stem_ratio_floor))
-        if p.get("arm_enabled"):
-            arm_ratio_floor = 0.78 if not has_text else 0.80
-            if is_small:
-                arm_ratio_floor = max(arm_ratio_floor, 0.82)
-            p["arm_len_min_ratio"] = float(max(float(p.get("arm_len_min_ratio", arm_ratio_floor)), arm_ratio_floor))
-
-        p = Action._enforceVerticalConnectorBadgeGeometry(
-            p,
-            int(round(float(p.get("width", 0.0) or 0.0))) or int(round(float(p.get("badge_width", 0.0) or 0.0))) or 1,
-            int(round(float(p.get("height", 0.0) or 0.0))) or int(round(float(p.get("badge_height", 0.0) or 0.0))) or 1,
+        return semantic_ac08_family_helpers.tuneAc08VerticalConnectorFamilyImpl(
+            name,
+            params,
+            get_base_name_from_file_fn=getBaseNameFromFile,
+            is_ac08_small_variant_fn=Action._isAc08SmallVariant,
+            enforce_vertical_connector_badge_geometry_fn=Action._enforceVerticalConnectorBadgeGeometry,
         )
-
-        text_mode = str(p.get("text_mode", "")).lower()
-        if text_mode == "co2":
-            base_scale = float(p.get("co2_font_scale", 0.82))
-            p["lock_text_scale"] = False
-            p["co2_anchor_mode"] = "cluster"
-            p["co2_optical_bias"] = float(max(float(p.get("co2_optical_bias", 0.10)), 0.10))
-            p["co2_dy"] = float(max(float(p.get("co2_dy", 0.0)), 0.05 * template_r if min_dim > 0.0 else 0.0))
-            p["co2_font_scale_min"] = float(max(float(p.get("co2_font_scale_min", base_scale)), max(0.78, base_scale * 0.94)))
-            p["co2_font_scale_max"] = float(min(float(p.get("co2_font_scale_max", 1.12)), min(1.12, base_scale * 1.15)))
-        elif text_mode == "voc":
-            base_scale = float(p.get("voc_font_scale", 0.52))
-            p["lock_text_scale"] = False
-            p["voc_font_scale_min"] = float(max(float(p.get("voc_font_scale_min", base_scale)), max(0.50, base_scale * 0.94)))
-            p["voc_font_scale_max"] = float(min(float(p.get("voc_font_scale_max", 0.98)), min(0.98, base_scale * 1.14)))
-        return p
 
     @staticmethod
     def _tuneAc08CircleTextFamily(name: str, params: dict) -> dict:
-        """Apply shared guardrails for connector-free AC08 circle/text badges.
-
-        Aufgabe 4.4 groups AC0820, AC0835 and AC0870 because they all:
-        - have no connector geometry that should influence circle fitting,
-        - regress when text blobs pull the circle away from the semantic center,
-        - need stable text scaling without letting the ring collapse or overgrow.
-        """
-        p = dict(params)
-        symbol_name = getBaseNameFromFile(str(name)).upper().split("_", 1)[0]
-        if symbol_name not in {"AC0820", "AC0835", "AC0870"}:
-            return p
-
-        p["connector_family_group"] = "ac08_circle_text"
-        p["connector_family_direction"] = "centered"
-        p["lock_circle_cx"] = True
-        p["lock_circle_cy"] = True
-
-        if "template_circle_cx" in p:
-            p["cx"] = float(p["template_circle_cx"])
-        if "template_circle_cy" in p:
-            p["cy"] = float(p["template_circle_cy"])
-
-        template_r = float(p.get("template_circle_radius", p.get("r", 1.0)))
-        min_dim = float(
-            min(
-                float(p.get("width", 0.0) or 0.0),
-                float(p.get("height", 0.0) or 0.0),
-            )
+        return semantic_ac08_family_helpers.tuneAc08CircleTextFamilyImpl(
+            name,
+            params,
+            get_base_name_from_file_fn=getBaseNameFromFile,
+            max_circle_radius_inside_canvas_fn=Action._maxCircleRadiusInsideCanvas,
+            center_glyph_bbox_fn=Action._centerGlyphBbox,
         )
-        if min_dim <= 0.0:
-            min_dim = max(1.0, template_r * 2.0)
-
-        text_mode = str(p.get("text_mode", "")).lower()
-        radius_floor_ratio = 0.94 if text_mode in {"co2", "voc"} else 0.96
-        p["min_circle_radius"] = float(max(float(p.get("min_circle_radius", 1.0)), template_r * radius_floor_ratio))
-
-        canvas_w = int(round(float(p.get("width", 0.0) or p.get("badge_width", 0.0) or min_dim)))
-        canvas_h = int(round(float(p.get("height", 0.0) or p.get("badge_height", 0.0) or min_dim)))
-        if canvas_w > 0 and canvas_h > 0 and "cx" in p and "cy" in p:
-            canvas_cap = Action._maxCircleRadiusInsideCanvas(
-                float(p["cx"]),
-                float(p["cy"]),
-                canvas_w,
-                canvas_h,
-                float(p.get("stroke_circle", 1.0)),
-            )
-            relaxed_cap = max(template_r * 1.08, float(p.get("max_circle_radius", 0.0) or 0.0))
-            p["max_circle_radius"] = float(min(canvas_cap, relaxed_cap)) if canvas_cap > 0.0 else float(relaxed_cap)
-
-        if text_mode == "co2":
-            base_scale = float(p.get("co2_font_scale", 0.94 if symbol_name == "AC0820" else 0.88))
-            p["lock_text_scale"] = False
-            p["co2_anchor_mode"] = "cluster"
-            p["co2_optical_bias"] = float(max(float(p.get("co2_optical_bias", 0.125)), 0.125 if symbol_name == "AC0820" else 0.10))
-            p["co2_dy"] = float(max(-0.06 * template_r, min(0.16 * template_r, float(p.get("co2_dy", 0.03 * template_r)))))
-            p["co2_font_scale_min"] = float(max(float(p.get("co2_font_scale_min", base_scale)), max(0.84, base_scale * 0.92)))
-            p["co2_font_scale_max"] = float(min(float(p.get("co2_font_scale_max", 1.12)), min(1.12, base_scale * 1.18)))
-        elif text_mode == "voc":
-            base_scale = float(p.get("voc_font_scale", 0.52))
-            p["lock_text_scale"] = False
-            p["voc_dy"] = float(max(-0.06 * template_r, min(0.08 * template_r, float(p.get("voc_dy", 0.0)))))
-            if min_dim <= 15.5:
-                p["voc_font_scale_min"] = float(max(float(p.get("voc_font_scale_min", base_scale)), max(0.50, base_scale * 0.96)))
-                p["voc_font_scale_max"] = float(min(float(p.get("voc_font_scale_max", 0.92)), min(0.92, max(base_scale, 0.52) * 1.05)))
-            else:
-                p["voc_font_scale"] = float(max(base_scale, 0.60))
-                p["voc_font_scale_min"] = float(max(float(p.get("voc_font_scale_min", p["voc_font_scale"])), 0.60))
-                p["voc_font_scale_max"] = float(min(float(p.get("voc_font_scale_max", 1.02)), 1.02))
-        else:
-            p["s"] = float(max(float(p.get("s", 0.0100)), 0.0100))
-            Action._centerGlyphBbox(p)
-
-        return p
 
     @staticmethod
     def _finalizeAc08Style(name: str, params: dict) -> dict:
-        """Apply AC08xx palette/stroke conventions globally for semantic conversions."""
-        canonical_name = str(name).upper()
-        symbol_name = canonical_name.split("_", 1)[0]
-        if not symbol_name.startswith("AC08"):
-            return params
-        p = Action._captureCanonicalBadgeColors(Action._normalizeLightCircleColors(dict(params)))
-        p["badge_symbol_name"] = symbol_name
-        # Enable global multi-parameter search by default for semantic AC08
-        # badges so stochastic and deterministic tracks are actually compared in
-        # real validation runs.
-        p.setdefault("enable_global_search_mode", True)
-        # During geometry fitting we intentionally keep auto-estimated colors.
-        # Canonical palette values are re-applied once fitting converged.
-        p = Action._normalizeAc08LineWidths(p)
-        p["lock_colors"] = True
-        p = Action._normalizeCenteredCo2Label(p)
-        if symbol_name == "AC0831" and str(p.get("text_mode", "")).lower() == "co2":
-            p["fill_gray"] = 238
-            p["stroke_gray"] = 155
-            p["text_gray"] = 155
-            if p.get("stem_enabled"):
-                p["stem_gray"] = 155
-        if symbol_name == "AC0833" and str(p.get("text_mode", "")).lower() == "co2":
-            p = Action._tuneAc0833Co2Badge(p)
-        if symbol_name == "AC0820" and str(p.get("text_mode", "")).lower() == "co2":
-            # AC0820 variants (L/M/S): keep CO² superscript rendering, but do
-            # not force a centered anchor mode. The optimizer may keep center_co
-            # or drift via co2_dx/co2_dy to best match the source glyph raster.
-            p["co2_anchor_mode"] = str(p.get("co2_anchor_mode", "center_co"))
-            # AC0820 references render CO² with a raised "2" (superscript),
-            # including AC0820_L where a subscript drifts visually too low.
-            p["co2_index_mode"] = "superscript"
-            p["co2_superscript_offset_scale"] = float(min(float(p.get("co2_superscript_offset_scale", 0.16)), 0.18))
-            # Keep the raised "2" detached from the trailing "O" in AC0820_M/S
-            # where antialiasing can visually merge both glyphs.
-            p["co2_superscript_min_gap_scale"] = float(max(float(p.get("co2_superscript_min_gap_scale", 0.16)), 0.16))
-            p["co2_optical_bias"] = 0.125
-            r = max(1.0, float(p.get("r", 1.0)))
-            # Keep AC0820 text close to the cap-height used by centered path
-            # glyph labels (e.g. single C) so the leading "C" is no longer
-            # undersized compared to the original badge family.
-            if r >= 10.0:
-                p["co2_font_scale"] = 0.82
-            elif r >= 6.0:
-                p["co2_font_scale"] = 0.84
-            else:
-                p["co2_font_scale"] = 0.86
-            # Keep AC0820_M/S adjustable in validation: the tiny CO run can still
-            # be slightly undersized after geometric fitting, but we do not want
-            # unconstrained growth that reintroduces prior over-scaling regressions.
-            base_scale = float(p["co2_font_scale"])
-            p["co2_font_scale_min"] = float(max(0.84, base_scale * 0.92))
-            p["co2_font_scale_max"] = float(min(1.12, base_scale * 1.22))
-            # AC0820 references use a slightly narrower CO² wordmark than the
-            # generic Arial fallback. Apply a mild horizontal squeeze so the
-            # reconstructed text width tracks the source more closely.
-            if r >= 10.0:
-                p["co2_width_scale"] = float(min(float(p.get("co2_width_scale", 0.90)), 0.90))
-            elif r >= 6.0:
-                p["co2_width_scale"] = float(min(float(p.get("co2_width_scale", 0.92)), 0.92))
-            else:
-                p["co2_width_scale"] = float(min(float(p.get("co2_width_scale", 0.94)), 0.94))
-            p["co2_sub_font_scale"] = float(p.get("co2_sub_font_scale", 66.0))
-            p["co2_subscript_offset_scale"] = 0.27
-            template_r = float(p.get("template_circle_radius", r))
-            # AC0820_L can otherwise collapse to a tiny ring in unconstrained
-            # rounds. Keep the rendered radius close to the source template
-            # without reintroducing global min/max guardrail metadata.
-            min_radius_ratio = 1.0 if template_r >= 10.0 else 0.95
-            p["r"] = float(max(float(p.get("r", template_r)), template_r * min_radius_ratio))
-            image_width = float(p.get("width", p.get("badge_width", 0.0)) or 0.0)
-            # General large-badge tuning (not variant-specific): for centered
-            # CO² labels without connectors, a mildly tighter/lower baseline
-            # produces better visual agreement across anti-aliased inputs.
-            large_centered_co2 = (
-                bool(p.get("circle_enabled", True))
-                and not bool(p.get("arm_enabled") or p.get("stem_enabled"))
-                and str(p.get("co2_anchor_mode", "center_co")).lower() == "center_co"
-                and template_r >= 10.0
-            )
-            if large_centered_co2:
-                p["co2_width_scale"] = float(min(float(p.get("co2_width_scale", 0.89)), 0.89))
-                p["co2_dy"] = float(max(float(p.get("co2_dy", 0.0)), 0.03 * template_r))
-                p["co2_center_co_bias"] = float(min(float(p.get("co2_center_co_bias", -0.05)), -0.05))
-            if _needsLargeCircleOverflowGuard(p) and image_width > 0.0:
-                # Generic large centered CO² rule: keep circle radius template-led
-                # while enforcing the product constraint that the diameter stays
-                # larger than half the badge width.
-                #   2r > (w / 2)  =>  r > (w / 4)
-                required_r = (image_width / 4.0) + 1e-3
-                p["r"] = float(max(float(p.get("r", template_r)), template_r * 0.98, required_r))
-                p["circle_radius_lower_bound_px"] = float(
-                    max(float(p.get("circle_radius_lower_bound_px", 1.0)), required_r)
-                )
-        if p.get("circle_enabled", True):
-            has_connector = bool(p.get("arm_enabled") or p.get("stem_enabled"))
-            has_text = bool(p.get("draw_text", False))
-            aspect_ratio = 1.0
-            badge_w = float(p.get("badge_width", 0.0))
-            badge_h = float(p.get("badge_height", 0.0))
-            if badge_w <= 0.0 or badge_h <= 0.0:
-                circle_diameter = max(1.0, float(p.get("r", 1.0)) * 2.0)
-                extent_w = circle_diameter
-                extent_h = circle_diameter
-                if p.get("stem_enabled"):
-                    stem_top = float(p.get("stem_top", float(p.get("cy", 0.0)) + float(p.get("r", 0.0))))
-                    stem_bottom = float(p.get("stem_bottom", stem_top))
-                    extent_h = max(extent_h, max(1.0, stem_bottom))
-                if p.get("arm_enabled"):
-                    arm_x1 = float(p.get("arm_x1", float(p.get("cx", 0.0)) - float(p.get("r", 0.0))))
-                    arm_x2 = float(p.get("arm_x2", float(p.get("cx", 0.0)) + float(p.get("r", 0.0))))
-                    arm_y1 = float(p.get("arm_y1", float(p.get("cy", 0.0))))
-                    arm_y2 = float(p.get("arm_y2", float(p.get("cy", 0.0))))
-                    extent_w = max(extent_w, abs(arm_x2 - arm_x1), max(abs(arm_x1), abs(arm_x2)))
-                    extent_h = max(extent_h, abs(arm_y2 - arm_y1), max(abs(arm_y1), abs(arm_y2)))
-                badge_w = extent_w
-                badge_h = extent_h
-            if badge_w > 0.0 and badge_h > 0.0:
-                aspect_ratio = badge_w / badge_h
-
-            # For all semantic AC08xx badges, keep a robust radius floor anchored
-            # to the template geometry. This prevents degenerate late-stage fits
-            # where noisy masks shrink circles far below their known base size.
-            template_r = float(p.get("template_circle_radius", p.get("r", 1.0)))
-            current_r = float(p.get("r", template_r))
-            base_r = max(1.0, template_r, current_r)
-            min_ratio = 0.88
-            if has_text:
-                # Text badges are especially sensitive to circle shrink because
-                # the label scales relative to the interior diameter.
-                min_ratio = 0.92 if symbol_name == "AC0820" else 0.90
-            elif has_connector and (aspect_ratio >= 1.60 or aspect_ratio <= (1.0 / 1.60)):
-                # Strongly elongated connector badges are vulnerable to the
-                # circle-only mask under-estimating the ring and collapsing the
-                # circle toward the connector. Keep them closer to the semantic
-                # template while still allowing modest adaptation.
-                min_ratio = 0.95
-            p["min_circle_radius"] = float(max(float(p.get("min_circle_radius", 1.0)), base_r * min_ratio))
-
-            # Plain centered badges should keep their circle optically centered.
-            # Otherwise min-rect alignment may drift the ring into a corner,
-            # which also makes CO/VOC labels look far too small.
-            if not has_connector:
-                p["lock_circle_cx"] = True
-                p["lock_circle_cy"] = True
-
-            # Connector-only and connector+text badges can both lose connector
-            # extraction in noisy JPEGs. Without geometric anchors the circle
-            # optimizer may collapse toward unrelated border blobs (for plain
-            # symbols) or text blobs (for labeled symbols). Keep the center and
-            # connector alignment locked to template semantics for all connector
-            # families so rotations/reflections/scales remain stable.
-            if has_connector:
-                p["lock_circle_cx"] = True
-                p["lock_circle_cy"] = True
-                if p.get("stem_enabled"):
-                    p["lock_stem_center_to_circle"] = True
-                    p["stem_center_lock_max_offset"] = float(max(0.35, float(p.get("stroke_circle", 1.0)) * 0.6))
-                    p["allow_stem_width_tuning"] = True
-                    p["stem_width_tuning_px"] = 1.0
-                if p.get("arm_enabled"):
-                    p["lock_arm_center_to_circle"] = True
-
-            geometry_reanchored_to_template = False
-            if bool(p.get("lock_circle_cx", False)) and "template_circle_cx" in p:
-                p["cx"] = float(p["template_circle_cx"])
-                geometry_reanchored_to_template = True
-            if bool(p.get("lock_circle_cy", False)) and "template_circle_cy" in p:
-                p["cy"] = float(p["template_circle_cy"])
-                geometry_reanchored_to_template = True
-            if geometry_reanchored_to_template and p.get("circle_enabled", True):
-                if p.get("stem_enabled"):
-                    p = Action._alignStemToCircleCenter(p)
-                if p.get("arm_enabled"):
-                    Action._reanchorArmToCircleEdge(p, float(p.get("r", 0.0)))
-        if p.get("stem_enabled"):
-            Action._persistConnectorLengthFloor(p, "stem", default_ratio=0.65)
-        if p.get("arm_enabled"):
-            Action._persistConnectorLengthFloor(p, "arm", default_ratio=0.75)
-        if str(p.get("text_mode", "")).lower() == "co2":
-            min_dim = float(min(float(p.get("width", 0.0) or 0.0), float(p.get("height", 0.0) or 0.0)))
-            if min_dim <= 0.0:
-                # Fallback for call sites that only pass geometry parameters.
-                min_dim = max(1.0, float(p.get("r", 1.0)) * 2.0)
-
-            # Keep AC0820 variants tunable (bounded via *_min/*_max overrides).
-            # Very small CO₂ badges from other AC08xx families (e.g. AC0833_S)
-            # can exhibit the same undersizing behavior after anti-aliased fitting,
-            # so unlock bounded tuning for tiny variants in general.
-            tiny_co2_variant = min_dim <= 15.5
-            p["lock_text_scale"] = not (symbol_name == "AC0820" or tiny_co2_variant)
-            if tiny_co2_variant:
-                base_scale = float(p.get("co2_font_scale", 0.82))
-                p["co2_font_scale_min"] = float(max(0.74, base_scale * 0.90))
-                p["co2_font_scale_max"] = float(min(1.18, base_scale * 1.25))
-        if str(p.get("text_mode", "")).lower() == "voc":
-            min_dim = float(min(float(p.get("width", 0.0) or 0.0), float(p.get("height", 0.0) or 0.0)))
-            if min_dim <= 0.0:
-                min_dim = max(1.0, float(p.get("r", 1.0)) * 2.0)
-            if symbol_name == "AC0835":
-                # AC0835 variants use a freer VOC fitting policy than the CO₂
-                # families: keep text scaling unlocked and bias the medium+
-                # badges toward a readable baseline.
-                p["lock_text_scale"] = False
-                if min_dim <= 15.5:
-                    # AC0835_S tends to over-scale VOC during text bracketing,
-                    # producing a visibly heavy label compared to the source icon.
-                    # Keep the historical small-badge cap stable regardless of
-                    # global baseline uplifts so regression bounds remain intact.
-                    legacy_base_scale = 0.52
-                    p.setdefault("voc_font_scale_min", float(max(0.58, legacy_base_scale * 0.90)))
-                    p.setdefault("voc_font_scale_max", float(min(0.92, legacy_base_scale * 1.05)))
-                else:
-                    # Medium/Large variants can start too small; pin a minimum
-                    # readable baseline while still allowing upward tuning.
-                    p["voc_font_scale"] = float(max(float(p.get("voc_font_scale", 0.52)), 0.60))
-                    p.setdefault("voc_font_scale_min", 0.60)
-                    p.pop("voc_font_scale_max", None)
-        p = Action._configureAc08SmallVariantMode(name, p)
-        preserve_plain_ring_geometry = symbol_name == "AC0800"
-        preserved_plain_ring_keys = {
-            key: p[key]
-            for key in ("lock_circle_cx", "lock_circle_cy", "min_circle_radius", "max_circle_radius")
-            if preserve_plain_ring_geometry and key in p
-        }
-        for key in (
-            "lock_circle_cx",
-            "lock_circle_cy",
-            "lock_stem_center_to_circle",
-            "lock_arm_center_to_circle",
-            "lock_text_scale",
-            "lock_colors",
-            "min_circle_radius",
-            "max_circle_radius",
-            "co2_font_scale_min",
-            "co2_font_scale_max",
-            "voc_font_scale_min",
-            "voc_font_scale_max",
-            "fill_gray_min",
-            "fill_gray_max",
-            "stroke_gray_min",
-            "stroke_gray_max",
-            "stem_gray_min",
-            "stem_gray_max",
-            "text_gray_min",
-            "text_gray_max",
-            "arm_len_min",
-            "arm_len_min_ratio",
-            "connector_family_group",
-            "connector_family_direction",
-        ):
-            p.pop(key, None)
-        if preserve_plain_ring_geometry:
-            p.update(preserved_plain_ring_keys)
-            if "template_circle_cx" in p:
-                p["cx"] = float(p["template_circle_cx"])
-            if "template_circle_cy" in p:
-                p["cy"] = float(p["template_circle_cy"])
-            template_r = float(p.get("template_circle_radius", p.get("r", 1.0)))
-            min_radius_ratio = 0.96
-            if bool(p.get("ac08_small_variant_mode", False)):
-                # AC0800_S is visually very sensitive to anti-aliased radius
-                # shrinkage. Keep the small plain-ring variant at least at the
-                # template radius so later validation rounds cannot undershoot
-                # the original circle diameter.
-                min_radius_ratio = 1.0
-            # AC0800 plain rings should derive the radius floor strictly from
-            # the template, not from an overgrown fitted radius estimate.
-            p["min_circle_radius"] = float(max(1.0, template_r * min_radius_ratio))
-            cx = float(p.get("cx", p.get("template_circle_cx", template_r)))
-            cy = float(p.get("cy", p.get("template_circle_cy", template_r)))
-            canvas_w = float(p.get("width", p.get("badge_width", 0.0)) or 0.0)
-            canvas_h = float(p.get("height", p.get("badge_height", 0.0)) or 0.0)
-            if canvas_w <= 0.0:
-                canvas_w = max(float(cx * 2.0), template_r * 2.0)
-            if canvas_h <= 0.0:
-                canvas_h = max(float(cy * 2.0), template_r * 2.0)
-            canvas_fit_r = max(1.0, min(cx, canvas_w - cx, cy, canvas_h - cy) - 0.5)
-            if bool(p.get("ac08_small_variant_mode", False)):
-                p["max_circle_radius"] = float(max(template_r, template_r * 1.15, canvas_fit_r))
-            else:
-                p["max_circle_radius"] = float(max(template_r, template_r * 1.15))
-            min_r = float(max(1.0, p.get("min_circle_radius", 1.0)))
-            max_r = float(max(min_r, p.get("max_circle_radius", min_r)))
-            p["max_circle_radius"] = max_r
-            # Keep AC0800 geometry immediately inside semantic bounds. Without
-            # this clamp, fitted large variants can start validation already
-            # above the plain-ring cap and never re-enter the guarded range.
-            p["r"] = float(Action._clipScalar(float(p.get("r", template_r)), min_r, max_r))
-        if p.get("draw_text", True) and "text_gray" in p:
-            p["text_gray"] = int(p.get("stroke_gray", Action.LIGHT_CIRCLE_STROKE_GRAY))
-        return p
+        return semantic_ac08_finalization_helpers.finalizeAc08StyleImpl(
+            name,
+            params,
+            light_circle_stroke_gray=Action.LIGHT_CIRCLE_STROKE_GRAY,
+            capture_canonical_badge_colors_fn=Action._captureCanonicalBadgeColors,
+            normalize_light_circle_colors_fn=Action._normalizeLightCircleColors,
+            normalize_ac08_line_widths_fn=Action._normalizeAc08LineWidths,
+            normalize_centered_co2_label_fn=Action._normalizeCenteredCo2Label,
+            tune_ac0833_co2_badge_fn=Action._tuneAc0833Co2Badge,
+            needs_large_circle_overflow_guard_fn=_needsLargeCircleOverflowGuard,
+            align_stem_to_circle_center_fn=Action._alignStemToCircleCenter,
+            reanchor_arm_to_circle_edge_fn=Action._reanchorArmToCircleEdge,
+            persist_connector_length_floor_fn=Action._persistConnectorLengthFloor,
+            configure_ac08_small_variant_mode_fn=Action._configureAc08SmallVariantMode,
+            clip_scalar_fn=Action._clipScalar,
+        )
 
     @staticmethod
     def _activateAc08AdaptiveLocks(
@@ -2386,8 +1529,12 @@ class Action:
         full_err: float,
         reason: str,
     ) -> bool:
-        """Adaptive AC08 locks are disabled so semantic badge fitting stays unconstrained."""
-        return False
+        return semantic_adaptive_lock_helpers.activateAc08AdaptiveLocksImpl(
+            params,
+            logs,
+            full_err=full_err,
+            reason=reason,
+        )
 
     @staticmethod
     def _releaseAc08AdaptiveLocks(
@@ -2397,8 +1544,12 @@ class Action:
         reason: str,
         current_error: float,
     ) -> bool:
-        """Adaptive AC08 lock release is disabled because there are no AC08 locks to release."""
-        return False
+        return semantic_adaptive_lock_helpers.releaseAc08AdaptiveLocksImpl(
+            params,
+            logs,
+            reason=reason,
+            current_error=current_error,
+        )
 
     @staticmethod
     def _alignStemToCircleCenter(params: dict) -> dict:
@@ -2408,13 +1559,10 @@ class Action:
         connector start to the circle edge so quantization does not leave a
         visible gap between circle and stem.
         """
-        if params.get("stem_enabled") and params.get("circle_enabled", True):
-            if "stem_width" in params and "cx" in params:
-                params["stem_x"] = float(params["cx"]) - (float(params["stem_width"]) / 2.0)
-            if "cy" in params and "r" in params:
-                stem_width = float(params.get("stem_width", params.get("stroke_circle", Action.AC08_STROKE_WIDTH_PX)))
-                params["stem_top"] = float(params["cy"]) + float(params["r"]) - (stem_width * 0.55)
-        return params
+        return semantic_badge_geometry_helpers.alignStemToCircleCenterImpl(
+            params,
+            default_stroke_width=Action.AC08_STROKE_WIDTH_PX,
+        )
 
     @staticmethod
     def _defaultAc0870Params(w: int, h: int) -> dict:
@@ -2836,303 +1984,65 @@ class Action:
         name = getBaseNameFromFile(base_name).upper()
 
         if name == "AR0100":
-            scale = min(w, h) / 25.0 if min(w, h) > 0 else 1.0
-            b = Action.AR0100_BASE
-            params = {
-                "cx": b["cx"] * scale,
-                "cy": b["cy"] * scale,
-                "r": b["r"] * scale,
-                "stroke_circle": b["stroke_width"] * scale,
-                "fill_gray": b["fill_gray"],
-                "stroke_gray": b["stroke_gray"],
-                "text_gray": b["text_gray"],
-                "tx": b["tx"] * scale,
-                "ty": b["ty"] * scale,
-                "s": b["s"] * scale,
-                "label": "M",
-                "text_mode": "path",
-            }
-            Action._centerGlyphBbox(params)
-            return params
-
-        if name == "AC0870":
-            defaults = Action._defaultAc0870Params(w, h)
-            if img is None:
-                return Action._finalizeAc08Style(name, defaults)
-            return Action._finalizeAc08Style(name, Action._fitAc0870ParamsFromImage(img, defaults))
-
-        if name == "AC0800":
-            scale = min(w, h) / 30.0 if min(w, h) > 0 else 1.0
-            defaults = {
-                "cx": 15.0 * scale,
-                "cy": 15.0 * scale,
-                "r": 10.8 * scale,
-                "stroke_circle": 1.5 * scale,
-                "fill_gray": 220,
-                "stroke_gray": 152,
-                "draw_text": False,
-            }
-            if img is None:
-                return Action._finalizeAc08Style(name, defaults)
-            return Action._finalizeAc08Style(name, Action._fit_semantic_badge_from_image(img, defaults))
-
-        if name == "AC0811":
-            defaults = Action._defaultAc0811Params(w, h)
-            if img is None:
-                return Action._finalizeAc08Style(name, defaults)
-            return Action._finalizeAc08Style(name, Action._fit_ac0811_params_from_image(img, defaults))
-
-        if name == "AC0810":
-            defaults = Action._defaultAc0810Params(w, h)
-            if img is None:
-                return Action._finalizeAc08Style(name, defaults)
-            return Action._finalizeAc08Style(name, Action._fitAc0810ParamsFromImage(img, defaults))
-
-        if name == "AC0812":
-            defaults = Action._defaultAc0812Params(w, h)
-            if img is None:
-                return Action._enforceLeftArmBadgeGeometry(Action._finalizeAc08Style(name, defaults), w, h)
-            return Action._enforceLeftArmBadgeGeometry(
-                Action._finalizeAc08Style(name, Action._fit_ac0812_params_from_image(img, defaults)),
+            return semantic_ar0100_helpers.buildAr0100BadgeParamsImpl(
                 w,
                 h,
+                ar0100_base=Action.AR0100_BASE,
+                center_glyph_bbox_fn=Action._centerGlyphBbox,
             )
 
-        if name == "AC0813":
-            defaults = Action._defaultAc0813Params(w, h)
-            if img is None:
-                return Action._finalizeAc08Style(name, defaults)
-            return Action._finalizeAc08Style(name, Action._fitAc0813ParamsFromImage(img, defaults))
-
-        if name == "AC0814":
-            defaults = Action._defaultAc0814Params(w, h)
-            if img is None:
-                return Action._finalizeAc08Style(name, defaults)
-            return Action._finalizeAc08Style(name, Action._fit_ac0814_params_from_image(img, defaults))
-
-        if name == "AC0881":
-            defaults = Action._defaultAc0881Params(w, h)
-            if img is None:
-                return Action._finalizeAc08Style(name, defaults)
-            return Action._finalizeAc08Style(name, Action._fit_semantic_badge_from_image(img, defaults))
-
-        if name == "AC0882":
-            defaults = Action._defaultAc0882Params(w, h)
-            if img is None:
-                return Action._enforceLeftArmBadgeGeometry(Action._finalizeAc08Style(name, defaults), w, h)
-            return Action._enforceLeftArmBadgeGeometry(
-                Action._finalizeAc08Style(name, Action._fit_semantic_badge_from_image(img, defaults)),
-                w,
-                h,
-            )
-
-        if name == "AC0820":
-            defaults = Action._applyCo2Label(Action._defaultAc0870Params(w, h))
-            if img is None:
-                return Action._finalizeAc08Style(name, defaults)
-            return Action._finalizeAc08Style(name, Action._applyCo2Label(Action._fit_semantic_badge_from_image(img, defaults)))
-
-        if name == "AC0831":
-            defaults = Action._applyCo2Label(Action._defaultAc0881Params(w, h))
-            if img is None:
-                return Action._finalizeAc08Style(name, Action._tuneAc0831Co2Badge(defaults))
-            return Action._finalizeAc08Style(
-                name,
-                Action._tuneAc0831Co2Badge(Action._fit_ac0811_params_from_image(img, defaults)),
-            )
-
-        if name == "AC0832":
-            defaults = Action._applyCo2Label(Action._defaultAc0812Params(w, h))
-            if img is None:
-                return Action._enforceLeftArmBadgeGeometry(
-                    Action._finalizeAc08Style(name, Action._tuneAc0832Co2Badge(defaults)),
-                    w,
-                    h,
-                )
-            return Action._enforceLeftArmBadgeGeometry(
-                Action._finalizeAc08Style(
-                    name,
-                    Action._tuneAc0832Co2Badge(Action._fit_ac0812_params_from_image(img, defaults)),
-                ),
-                w,
-                h,
-            )
-
-        if name == "AC0833":
-            defaults = Action._tuneAc0833Co2Badge(Action._applyCo2Label(Action._defaultAc0813Params(w, h)))
-            if img is None:
-                return Action._finalizeAc08Style(name, defaults)
-            return Action._finalizeAc08Style(name, Action._tuneAc0833Co2Badge(Action._fitAc0813ParamsFromImage(img, defaults)))
-
-        if name == "AC0834":
-            defaults = Action._applyCo2Label(Action._defaultAc0814Params(w, h))
-            if img is None:
-                return Action._finalizeAc08Style(name, Action._tuneAc0834Co2Badge(defaults, w, h))
-            return Action._finalizeAc08Style(
-                name,
-                Action._tuneAc0834Co2Badge(
-                    Action._fit_ac0814_params_from_image(img, defaults),
-                    w,
-                    h,
-                ),
-            )
-
-        if name == "AC0835":
-            # AC0835 belongs to the right-arm VOC connector family.
-            defaults = Action._applyVocLabel(Action._defaultAc0814Params(w, h))
-            if img is None:
-                return Action._finalizeAc08Style(name, Action._tuneAc0835VocBadge(defaults, w, h))
-            return Action._finalizeAc08Style(
-                name,
-                Action._tuneAc0835VocBadge(
-                    Action._fit_ac0814_params_from_image(img, defaults),
-                    w,
-                    h,
-                ),
-            )
-
-        if name == "AC0836":
-            defaults = Action._applyVocLabel(Action._defaultAc0881Params(w, h))
-            if img is None:
-                return Action._finalizeAc08Style(name, defaults)
-            return Action._finalizeAc08Style(name, Action._fit_ac0811_params_from_image(img, defaults))
-
-        if name == "AC0837":
-            defaults = Action._applyVocLabel(Action._defaultAc0812Params(w, h))
-            if img is None:
-                return Action._enforceLeftArmBadgeGeometry(Action._finalizeAc08Style(name, defaults), w, h)
-            return Action._enforceLeftArmBadgeGeometry(
-                Action._finalizeAc08Style(name, Action._fit_ac0812_params_from_image(img, defaults)),
-                w,
-                h,
-            )
-
-        if name == "AC0838":
-            # AC0838 is part of the right-arm VOC family (same geometry class as
-            # AC0814/AC0839), not the top-stem family.
-            defaults = Action._applyVocLabel(Action._defaultAc0814Params(w, h))
-            if img is None:
-                return Action._finalizeAc08Style(name, defaults)
-            return Action._finalizeAc08Style(name, Action._fit_ac0814_params_from_image(img, defaults))
-
-        if name == "AC0839":
-            defaults = Action._applyVocLabel(Action._defaultAc0814Params(w, h))
-            if img is None:
-                return Action._finalizeAc08Style(name, defaults)
-            return Action._finalizeAc08Style(name, Action._fit_ac0814_params_from_image(img, defaults))
-
+        ac08_params = semantic_ac08_param_helpers.makeAc08BadgeParamsImpl(
+            w,
+            h,
+            name,
+            img,
+            default_ac0870_params_fn=Action._defaultAc0870Params,
+            default_ac0811_params_fn=Action._defaultAc0811Params,
+            default_ac0810_params_fn=Action._defaultAc0810Params,
+            default_ac0812_params_fn=Action._defaultAc0812Params,
+            default_ac0813_params_fn=Action._defaultAc0813Params,
+            default_ac0814_params_fn=Action._defaultAc0814Params,
+            default_ac0881_params_fn=Action._defaultAc0881Params,
+            default_ac0882_params_fn=Action._defaultAc0882Params,
+            fit_ac0870_params_from_image_fn=Action._fitAc0870ParamsFromImage,
+            fit_semantic_badge_from_image_fn=Action._fit_semantic_badge_from_image,
+            fit_ac0811_params_from_image_fn=Action._fit_ac0811_params_from_image,
+            fit_ac0810_params_from_image_fn=Action._fitAc0810ParamsFromImage,
+            fit_ac0812_params_from_image_fn=Action._fit_ac0812_params_from_image,
+            fit_ac0813_params_from_image_fn=Action._fitAc0813ParamsFromImage,
+            fit_ac0814_params_from_image_fn=Action._fit_ac0814_params_from_image,
+            apply_co2_label_fn=Action._applyCo2Label,
+            apply_voc_label_fn=Action._applyVocLabel,
+            tune_ac0831_co2_badge_fn=Action._tuneAc0831Co2Badge,
+            tune_ac0832_co2_badge_fn=Action._tuneAc0832Co2Badge,
+            tune_ac0833_co2_badge_fn=Action._tuneAc0833Co2Badge,
+            tune_ac0834_co2_badge_fn=Action._tuneAc0834Co2Badge,
+            tune_ac0835_voc_badge_fn=Action._tuneAc0835VocBadge,
+            finalize_ac08_style_fn=Action._finalizeAc08Style,
+            enforce_left_arm_badge_geometry_fn=Action._enforceLeftArmBadgeGeometry,
+        )
+        if ac08_params is not None:
+            return ac08_params
         return None
 
     @staticmethod
     def generateBadgeSvg(w: int, h: int, p: dict) -> str:
-        p = Action._alignStemToCircleCenter(dict(p))
-        p = Action._quantizeBadgeParams(p, w, h)
-        elements = [
-            f'<svg width="{w}px" height="{h}px" viewBox="0 0 {w} {h}" xmlns="http://www.w3.org/2000/svg">'
-        ]
-
-        background_fill = p.get("background_fill")
-        if background_fill:
-            elements.append(
-                f'  <rect x="0" y="0" width="{float(w):.4f}" height="{float(h):.4f}" fill="{background_fill}"/>'
-            )
-
-        if p.get("arm_enabled"):
-            arm_x1 = float(Action._clipScalar(float(p.get("arm_x1", 0.0)), 0.0, float(w)))
-            arm_y1 = float(Action._clipScalar(float(p.get("arm_y1", p.get("arm_y", 0.0))), 0.0, float(h)))
-            arm_x2 = float(Action._clipScalar(float(p.get("arm_x2", 0.0)), 0.0, float(w)))
-            arm_y2 = float(Action._clipScalar(float(p.get("arm_y2", p.get("arm_y", arm_y1))), 0.0, float(h)))
-            arm_stroke = float(p["arm_stroke"])
-
-            elements.append(
-                (
-                    f'  <line x1="{arm_x1:.4f}" y1="{arm_y1:.4f}" '
-                    f'x2="{arm_x2:.4f}" y2="{arm_y2:.4f}" '
-                    f'stroke="{Action.grayhex(p.get("stroke_gray", 152))}" '
-                    f'stroke-width="{arm_stroke:.4f}" stroke-linecap="round"/>'
-                )
-            )
-
-        if p.get("stem_enabled"):
-            stem_x = float(Action._clipScalar(float(p.get("stem_x", 0.0)), 0.0, float(w)))
-            stem_top = float(Action._clipScalar(float(p.get("stem_top", 0.0)), 0.0, float(h)))
-            stem_width = max(0.0, min(float(p.get("stem_width", 0.0)), max(0.0, float(w) - stem_x)))
-            stem_bottom = float(Action._clipScalar(float(p.get("stem_bottom", 0.0)), stem_top, float(h)))
-            elements.append(
-                (
-                    f'  <rect x="{stem_x:.4f}" y="{stem_top:.4f}" '
-                    f'width="{stem_width:.4f}" height="{max(0.0, stem_bottom - stem_top):.4f}" '
-                    f'fill="{Action.grayhex(p.get("stem_gray", p["stroke_gray"]))}"/>'
-                )
-            )
-
-        if p.get("circle_enabled", True):
-            elements.append(
-                (
-                    f'  <circle cx="{p["cx"]:.4f}" cy="{p["cy"]:.4f}" r="{p["r"]:.4f}" '
-                    f'fill="{Action.grayhex(p["fill_gray"])}" stroke="{Action.grayhex(p["stroke_gray"])}" '
-                    f'stroke-width="{p["stroke_circle"]:.4f}"/>'
-                )
-            )
-
-        if p.get("draw_text", True):
-            if p.get("text_mode") == "path_t":
-                elements.append(
-                    (
-                        f'  <path d="{Action.T_PATH_D}" fill="{Action.grayhex(p["text_gray"])}" '
-                        f'transform="translate({p["tx"]:.4f},{p["ty"]:.4f}) '
-                        f'scale({p["s"]:.6f},{-p["s"]:.6f}) '
-                        f'translate({-Action.T_XMIN},{-Action.T_YMAX})"/>'
-                    )
-                )
-            elif p.get("text_mode") == "co2":
-                layout = Action._co2Layout(p)
-                font_size = float(layout["font_size"])
-                y_text = float(layout["y_base"])
-                width_scale = float(layout.get("width_scale", 1.0))
-                elements.append(
-                    (
-                        f'  <text x="{float(layout["co_x"]):.4f}" y="{y_text:.4f}" fill="{Action.grayhex(p["text_gray"])}" '
-                        f'font-family="Arial, Helvetica, sans-serif" font-size="{font_size:.4f}px" '
-                        f'font-style="normal" font-weight="600" text-anchor="middle" dominant-baseline="middle" '
-                        f'transform="translate({float(layout["co_x"]):.4f} {y_text:.4f}) scale({width_scale:.4f} 1) '
-                        f'translate({-float(layout["co_x"]):.4f} {-y_text:.4f})">CO</text>'
-                    )
-                )
-                elements.append(
-                    (
-                        f'  <text x="{float(layout["subscript_x"]):.4f}" y="{float(layout["subscript_y"]):.4f}" fill="{Action.grayhex(p["text_gray"])}" '
-                        f'font-family="Arial, Helvetica, sans-serif" font-size="{float(layout["sub_font_px"]):.4f}px" '
-                        f'font-style="normal" font-weight="600" text-anchor="start" dominant-baseline="middle" '
-                        f'transform="translate({float(layout["subscript_x"]):.4f} {float(layout["subscript_y"]):.4f}) scale({width_scale:.4f} 1) '
-                        f'translate({-float(layout["subscript_x"]):.4f} {-float(layout["subscript_y"]):.4f})">2</text>'
-                    )
-                )
-            elif p.get("text_mode") == "voc":
-                radius = p.get("r", min(w, h) * 0.4)
-                font_size = max(4.0, radius * p.get("voc_font_scale", 0.52))
-                voc_dy = p.get("voc_dy", 0.0)
-                voc_weight = int(p.get("voc_weight", 600))
-                elements.append(
-                    (
-                        f'  <text x="{p["cx"]:.4f}" y="{(p["cy"] + voc_dy):.4f}" fill="{Action.grayhex(p["text_gray"])}" '
-                        f'font-family="Arial, Helvetica, sans-serif" font-size="{font_size:.4f}px" '
-                        f'font-style="normal" font-weight="{voc_weight}" letter-spacing="0.01em" '
-                        f'text-anchor="middle" dominant-baseline="middle">VOC</text>'
-                    )
-                )
-            else:
-                elements.append(
-                    (
-                        f'  <path d="{Action.M_PATH_D}" fill="{Action.grayhex(p["text_gray"])}" '
-                        f'transform="translate({p["tx"]:.4f},{p["ty"]:.4f}) '
-                        f'scale({p["s"]:.6f},{-p["s"]:.6f}) '
-                        f'translate({-Action.M_XMIN},{-Action.M_YMAX})"/>'
-                    )
-                )
-
-        elements.append("</svg>")
-        return "\n".join(elements)
+        return semantic_badge_svg_helpers.generateBadgeSvgImpl(
+            w,
+            h,
+            p,
+            align_stem_to_circle_center_fn=Action._alignStemToCircleCenter,
+            quantize_badge_params_fn=Action._quantizeBadgeParams,
+            clip_scalar_fn=Action._clipScalar,
+            grayhex_fn=Action.grayhex,
+            co2_layout_fn=Action._co2Layout,
+            t_path_d=Action.T_PATH_D,
+            t_xmin=Action.T_XMIN,
+            t_ymax=Action.T_YMAX,
+            m_path_d=Action.M_PATH_D,
+            m_xmin=Action.M_XMIN,
+            m_ymax=Action.M_YMAX,
+        )
 
     @staticmethod
     def traceImageSegment(
@@ -3144,116 +2054,44 @@ class Action:
         offset_x: float = 0.0,
         offset_y: float = 0.0,
     ) -> list[str]:
-        if img_segment is None or img_segment.size == 0:
-            return []
-
-        data = np.float32(img_segment).reshape((-1, 3))
-        criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 20, 0.001)
-        _, labels, centers = cv2.kmeans(data, 4, None, criteria, 10, cv2.KMEANS_RANDOM_CENTERS)
-        centers = np.uint8(centers)
-        img_quant = centers[labels.flatten()].reshape(img_segment.shape)
-
-        unique, counts = np.unique(img_quant.reshape(-1, 3), axis=0, return_counts=True)
-        bg_color = unique[np.argmax(counts)]
-
-        paths: list[str] = []
-        for color in unique:
-            if np.array_equal(color, bg_color):
-                continue
-
-            mask = cv2.inRange(img_quant, color, color)
-            # Keep the raw contour points and let approxPolyDP control how much
-            # simplification is applied via `epsilon_factor`.
-            #
-            # With CHAIN_APPROX_SIMPLE, OpenCV already drops many intermediate
-            # points, which can make the iterative epsilon sweep effectively a
-            # no-op (same polygon across all iterations).
-            contours, _ = cv2.findContours(mask, cv2.RETR_CCOMP, cv2.CHAIN_APPROX_NONE)
-            hex_color = rgbToHex(color[::-1])
-
-            for contour in contours:
-                if cv2.contourArea(contour) < 10:
-                    continue
-
-                epsilon = epsilon_factor * cv2.arcLength(contour, True)
-                approx = cv2.approxPolyDP(contour, epsilon, True)
-                path_d = "M " + " L ".join(
-                    [
-                        (
-                            f"{(pt[0][0] * scale_x) + offset_x:.3f},"
-                            f"{(pt[0][1] * scale_y) + offset_y:.3f}"
-                        )
-                        for pt in approx
-                    ]
-                ) + " Z"
-                paths.append(f'  <path d="{path_d}" fill="{hex_color}" stroke="none" />')
-        return paths
+        return composite_svg_helpers.traceImageSegmentImpl(
+            img_segment,
+            epsilon_factor,
+            scale_x=scale_x,
+            scale_y=scale_y,
+            offset_x=offset_x,
+            offset_y=offset_y,
+            cv2_module=cv2,
+            np_module=np,
+            rgb_to_hex_fn=rgbToHex,
+        )
 
     @staticmethod
     def generateCompositeSvg(w: int, h: int, params: dict, folder_path: str, epsilon: float) -> str:
-        svg_elements = [
-            (
-                f'<svg width="{w}" height="{h}" viewBox="0 0 {w} {h}" '
-                'xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">'
-            )
-        ]
-
-        if params["top_source_ref"]:
-            ref_path = None
-            for ext in [".jpg", ".JPG", ".jpeg", ".JPEG", ".bmp", ".png", ".PNG"]:
-                p = os.path.join(folder_path, params["top_source_ref"] + ext)
-                if os.path.exists(p):
-                    ref_path = p
-                    break
-
-            if ref_path:
-                ref_img = cv2.imread(ref_path)
-                ref_h, ref_w = ref_img.shape[:2]
-                cut_ratio = 0.55
-                cut_y = max(1, int(round(ref_h * cut_ratio)))
-                top_half_img = ref_img[0:cut_y, 0:ref_w]
-                target_top_h = max(1, int(round(h * cut_ratio)))
-                scale_x = w / ref_w if ref_w > 0 else 1.0
-                scale_y = target_top_h / cut_y if cut_y > 0 else 1.0
-                svg_elements.extend(
-                    Action.traceImageSegment(
-                        top_half_img,
-                        epsilon,
-                        scale_x=scale_x,
-                        scale_y=scale_y,
-                    )
-                )
-
-        if params["bottom_shape"] == "square_cross":
-            cx = w / 2
-            cy = h * 0.75
-            s = min(w, h) * 0.15
-            sw = w * 0.02
-            svg_elements.append(
-                f'  <rect x="{cx-s}" y="{cy-s}" width="{s*2}" height="{s*2}" fill="#e6e6e6" stroke="#4d4d4d" stroke-width="{sw}"/>'
-            )
-            svg_elements.append(
-                f'  <line x1="{cx-s}" y1="{cy-s}" x2="{cx+s}" y2="{cy+s}" stroke="#4d4d4d" stroke-width="{sw}"/>'
-            )
-            svg_elements.append(
-                f'  <line x1="{cx+s}" y1="{cy-s}" x2="{cx-s}" y2="{cy+s}" stroke="#4d4d4d" stroke-width="{sw}"/>'
-            )
-
-        svg_elements.append("</svg>")
-        return "\n".join(svg_elements)
+        return composite_svg_helpers.generateCompositeSvgImpl(
+            w,
+            h,
+            params,
+            folder_path,
+            epsilon,
+            os_module=os,
+            cv2_module=cv2,
+            trace_image_segment_fn=Action.traceImageSegment,
+        )
 
     @staticmethod
     def renderSvgToNumpy(svg_string: str, size_w: int, size_h: int):
-        if SVG_RENDER_SUBPROCESS_ENABLED and not _is_fitz_open_monkeypatched():
-            rendered = _render_svg_to_numpy_via_subprocess(svg_string, size_w, size_h)
-            if rendered is not None:
-                return rendered
-            if _UNDER_PYTEST_RUNTIME and not _is_inprocess_renderer_monkeypatched():
-                # Avoid unstable in-process PyMuPDF fallback in long pytest
-                # sessions; dedicated tests can still exercise fallback by
-                # monkeypatching the in-process renderer helper.
-                return None
-        return _render_svg_to_numpy_inprocess(svg_string, size_w, size_h)
+        return render_dispatch_helpers.renderSvgToNumpyImpl(
+            svg_string,
+            size_w,
+            size_h,
+            svg_render_subprocess_enabled=SVG_RENDER_SUBPROCESS_ENABLED,
+            under_pytest_runtime=_UNDER_PYTEST_RUNTIME,
+            is_fitz_open_monkeypatched_fn=_is_fitz_open_monkeypatched,
+            render_svg_to_numpy_via_subprocess_fn=_render_svg_to_numpy_via_subprocess,
+            is_inprocess_renderer_monkeypatched_fn=_is_inprocess_renderer_monkeypatched,
+            render_svg_to_numpy_inprocess_fn=_render_svg_to_numpy_inprocess,
+        )
 
     @staticmethod
     def createDiffImage(
@@ -3261,67 +2099,31 @@ class Action:
         img_svg: np.ndarray,
         focus_mask: np.ndarray | None = None,
     ) -> np.ndarray:
-        if img_svg.shape[:2] != img_orig.shape[:2]:
-            img_svg = cv2.resize(img_svg, (img_orig.shape[1], img_orig.shape[0]), interpolation=cv2.INTER_AREA)
-        orig = img_orig.astype(np.int16)
-        svg = img_svg.astype(np.int16)
-        # Signed RGB sum difference as requested by the user:
-        # dx = (r2-r1) + (g2-g1) + (b2-b1), normalized to [-1, 1].
-        dx = np.sum(svg - orig, axis=2, dtype=np.int32).astype(np.float32)
-        norm = np.clip(dx / (3.0 * 255.0), -1.0, 1.0)
-
-        mask = None
-        if focus_mask is not None:
-            if focus_mask.shape[:2] != img_orig.shape[:2]:
-                focus_mask = cv2.resize(
-                    focus_mask.astype(np.uint8),
-                    (img_orig.shape[1], img_orig.shape[0]),
-                    interpolation=cv2.INTER_NEAREST,
-                )
-            mask = focus_mask > 0
-            norm = np.where(mask, norm, 0.0)
-
-        # Base tone comes from the mean luminance of both pixels.
-        # This keeps identical bright pixels white, while identical dark pixels
-        # stay dark instead of being forced to black or white.
-        mean_tone = np.mean(np.concatenate((orig, svg), axis=2), axis=2).astype(np.float32)
-        magnitude = np.clip(np.abs(norm), 0.0, 1.0)
-        positive = norm >= 0.0
-
-        # Interpolate from grayscale base tone towards signed endpoint colors.
-        up = mean_tone + magnitude * (255.0 - mean_tone)
-        down = mean_tone * (1.0 - magnitude)
-
-        diff = np.zeros_like(img_orig)
-        diff[:, :, 0] = np.where(positive, up, down).astype(np.uint8)
-        diff[:, :, 1] = np.where(positive, up, down).astype(np.uint8)
-        diff[:, :, 2] = np.where(positive, down, up).astype(np.uint8)
-        if mask is not None:
-            diff = np.where(mask[:, :, None], diff, 0)
-        return diff
+        return diffing_helpers.createDiffImageImpl(
+            img_orig,
+            img_svg,
+            cv2_module=cv2,
+            np_module=np,
+            focus_mask=focus_mask,
+        )
 
     @staticmethod
     def calculateError(img_orig: np.ndarray, img_svg: np.ndarray) -> float:
-        if img_svg is None:
-            return float("inf")
-        if img_svg.shape[:2] != img_orig.shape[:2]:
-            img_svg = cv2.resize(img_svg, (img_orig.shape[1], img_orig.shape[0]), interpolation=cv2.INTER_AREA)
-        return float(np.mean(cv2.absdiff(img_orig, img_svg)))
+        return diffing_helpers.calculateErrorImpl(
+            img_orig,
+            img_svg,
+            cv2_module=cv2,
+            np_module=np,
+        )
 
     @staticmethod
     def calculateDelta2Stats(img_orig: np.ndarray, img_svg: np.ndarray) -> tuple[float, float]:
-        """Return mean/std of per-pixel squared RGB deltas.
-
-        Per-pixel metric:
-            delta2 = (ΔR)^2 + (ΔG)^2 + (ΔB)^2
-        """
-        if img_svg is None:
-            return float("inf"), float("inf")
-        if img_svg.shape[:2] != img_orig.shape[:2]:
-            img_svg = cv2.resize(img_svg, (img_orig.shape[1], img_orig.shape[0]), interpolation=cv2.INTER_AREA)
-        diff = img_orig.astype(np.float32) - img_svg.astype(np.float32)
-        delta2 = np.sum(diff * diff, axis=2)
-        return float(np.mean(delta2)), float(np.std(delta2))
+        return element_error_metric_helpers.calculateDelta2StatsImpl(
+            img_orig,
+            img_svg,
+            cv2_module=cv2,
+            np_module=np,
+        )
 
     @staticmethod
     def _fitToOriginalSize(img_orig: np.ndarray, img_svg: np.ndarray | None) -> np.ndarray | None:
@@ -3591,27 +2393,11 @@ class Action:
 
     @staticmethod
     def _captureCanonicalBadgeColors(params: dict) -> dict:
-        p = dict(params)
-        p["target_fill_gray"] = int(round(float(p.get("fill_gray", Action.LIGHT_CIRCLE_FILL_GRAY))))
-        p["target_stroke_gray"] = int(round(float(p.get("stroke_gray", Action.LIGHT_CIRCLE_STROKE_GRAY))))
-        if p.get("stem_enabled"):
-            p["target_stem_gray"] = int(round(float(p.get("stem_gray", p["target_stroke_gray"]))))
-        if p.get("draw_text", True) and "text_gray" in p:
-            p["target_text_gray"] = int(round(float(p.get("text_gray", Action.LIGHT_CIRCLE_TEXT_GRAY))))
-        return p
+        return _captureCanonicalBadgeColors(params)
 
     @staticmethod
     def _applyCanonicalBadgeColors(params: dict) -> dict:
-        p = dict(params)
-        if "target_fill_gray" in p:
-            p["fill_gray"] = int(p["target_fill_gray"])
-        if "target_stroke_gray" in p:
-            p["stroke_gray"] = int(p["target_stroke_gray"])
-        if p.get("stem_enabled") and "target_stem_gray" in p:
-            p["stem_gray"] = int(p["target_stem_gray"])
-        if p.get("draw_text", True) and "target_text_gray" in p:
-            p["text_gray"] = int(p["target_text_gray"])
-        return p
+        return _applyCanonicalBadgeColors(params)
 
     @staticmethod
     def _circleBounds(params: dict, w: int, h: int) -> tuple[float, float, float, float, float, float]:
@@ -4218,6 +3004,14 @@ def runIterationPipeline(
         return None
 
     print(f"\n--- Verarbeite {filename} ---")
+    description_fragments = params.get("description_fragments", [])
+    description_text = " ".join(
+        str(fragment.get("text", "")).strip()
+        for fragment in description_fragments
+        if isinstance(fragment, dict)
+    ).strip()
+    if description_text:
+        print(f"Bildbeschreibung: {description_text}")
     elements = ", ".join(params["elements"]) if params["elements"] else "Kein Compositing-Befehl gefunden"
     print(f"Befehl erkannt: {elements}")
 
@@ -4456,8 +3250,18 @@ def runIterationPipeline(
         return base, desc, params, 1, Action.calculate_error(perc.img, svg_rendered)
 
     if params["mode"] != "composite":
-        print("  -> Überspringe Bild, da keine Zerschneide-Anweisung (Compositing) im Text vorliegt.")
-        _writeValidationLog(["status=skipped_non_composite"])
+        if params["mode"] == "manual_review":
+            reason = str(params.get("review_reason", "Manuelle Prüfung erforderlich.")).strip()
+            print(f"  -> Überspringe Bild: {reason}")
+            _writeValidationLog(
+                [
+                    "status=skipped_manual_review",
+                    f"manual_review_reason={reason}",
+                ]
+            )
+        else:
+            print("  -> Überspringe Bild, da keine Zerschneide-Anweisung (Compositing) im Text vorliegt.")
+            _writeValidationLog(["status=skipped_non_composite"])
         return None
 
     best_error = float("inf")
@@ -5670,6 +4474,19 @@ def _harmonizationAnchorPriority(suffix: str, prefer_large: bool) -> int:
 
 def _clipGray(value: float) -> int:
     return semantic_harmonization_helpers.clipGrayImpl(value)
+
+
+def _captureCanonicalBadgeColors(params: dict) -> dict:
+    return semantic_harmonization_helpers.captureCanonicalBadgeColorsImpl(
+        params,
+        light_circle_fill_gray=Action.LIGHT_CIRCLE_FILL_GRAY,
+        light_circle_stroke_gray=Action.LIGHT_CIRCLE_STROKE_GRAY,
+        light_circle_text_gray=Action.LIGHT_CIRCLE_TEXT_GRAY,
+    )
+
+
+def _applyCanonicalBadgeColors(params: dict) -> dict:
+    return semantic_harmonization_helpers.applyCanonicalBadgeColorsImpl(params)
 
 
 def _familyHarmonizedBadgeColors(variant_rows: list[dict[str, object]]) -> dict[str, int]:

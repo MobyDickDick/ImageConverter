@@ -51,3 +51,30 @@ def test_center_glyph_bbox_sets_tx_ty_for_centered_label() -> None:
 
     assert params["tx"] == 6.0
     assert params["ty"] == 2.0
+
+
+def test_align_stem_to_circle_center_reanchors_stem_geometry() -> None:
+    aligned = semantic_badge_geometry_helpers.alignStemToCircleCenterImpl(
+        {
+            "stem_enabled": True,
+            "circle_enabled": True,
+            "cx": 42.0,
+            "cy": 38.0,
+            "r": 9.0,
+            "stem_width": 6.0,
+        },
+        default_stroke_width=4.0,
+    )
+
+    assert aligned["stem_x"] == 39.0
+    assert aligned["stem_top"] == 43.7
+
+
+def test_align_stem_to_circle_center_keeps_non_stem_badges_unchanged() -> None:
+    params = {"stem_enabled": False, "cx": 10.0, "cy": 20.0, "r": 5.0}
+    aligned = semantic_badge_geometry_helpers.alignStemToCircleCenterImpl(
+        params,
+        default_stroke_width=3.0,
+    )
+
+    assert aligned == params
