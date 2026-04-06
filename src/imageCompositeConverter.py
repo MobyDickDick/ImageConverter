@@ -2088,24 +2088,15 @@ class Action:
 
     @staticmethod
     def extractBadgeElementMask(img_orig: np.ndarray, params: dict, element: str) -> np.ndarray | None:
-        h, w = img_orig.shape[:2]
-        region_mask = Action._elementRegionMask(h, w, params, element)
-        if region_mask is None:
-            return None
-
-        fg_bool = Action._foregroundMask(img_orig)
-        mask = fg_bool & region_mask
-
-        dilate_px = int(params.get("validation_mask_dilate_px", 0) or 0)
-        if dilate_px > 0 and bool(params.get("ac08_small_variant_mode", False)):
-            kernel_size = max(2, (dilate_px * 2) + 1)
-            kernel = np.ones((kernel_size, kernel_size), dtype=np.uint8)
-            mask = cv2.dilate(mask.astype(np.uint8) * 255, kernel, iterations=1) > 0
-            mask &= region_mask
-
-        if int(mask.sum()) < 3:
-            return None
-        return mask
+        return element_mask_helpers.extractBadgeElementMaskImpl(
+            img_orig,
+            params,
+            element,
+            element_region_mask_fn=Action._elementRegionMask,
+            foreground_mask_fn=Action._foregroundMask,
+            cv2_module=cv2,
+            np_module=np,
+        )
 
     @staticmethod
     def _elementOnlyParams(params: dict, element: str) -> dict:
