@@ -1,0 +1,43 @@
+from src.iCCModules import imageCompositeConverterSemanticParams as helpers
+
+
+def test_make_badge_params_prefers_ar0100_when_available() -> None:
+    calls: list[str] = []
+
+    def _build_ar0100(w: int, h: int, name: str):
+        calls.append(f"ar0100:{w}x{h}:{name}")
+        return {"family": name, "from": "ar0100"}
+
+    def _build_ac08(_w: int, _h: int, _name: str, _img):
+        calls.append("ac08")
+        return {"from": "ac08"}
+
+    result = helpers.makeBadgeParamsImpl(
+        10,
+        20,
+        "ar0100_example",
+        img=None,
+        get_base_name_fn=lambda base_name: base_name.split("_")[0],
+        build_ar0100_badge_params_fn=_build_ar0100,
+        make_ac08_badge_params_fn=_build_ac08,
+    )
+
+    assert result == {"family": "AR0100", "from": "ar0100"}
+    assert calls == ["ar0100:10x20:AR0100"]
+
+
+def test_make_badge_params_falls_back_to_ac08_when_ar0100_missing() -> None:
+    calls: list[str] = []
+
+    result = helpers.makeBadgeParamsImpl(
+        30,
+        40,
+        "ac0836_variant",
+        img={"raw": True},
+        get_base_name_fn=lambda base_name: base_name.split("_")[0],
+        build_ar0100_badge_params_fn=lambda _w, _h, name: calls.append(f"ar0100:{name}") or None,
+        make_ac08_badge_params_fn=lambda _w, _h, name, img: calls.append(f"ac08:{name}:{bool(img)}") or {"family": name},
+    )
+
+    assert result == {"family": "AC0836"}
+    assert calls == ["ar0100:AC0836", "ac08:AC0836:True"]

@@ -49,6 +49,7 @@ from src.iCCModules import imageCompositeConverterSemanticAc0812 as semantic_ac0
 from src.iCCModules import imageCompositeConverterSemanticAc0813 as semantic_ac0813_helpers
 from src.iCCModules import imageCompositeConverterSemanticAc08Params as semantic_ac08_param_helpers
 from src.iCCModules import imageCompositeConverterSemanticAr0100 as semantic_ar0100_helpers
+from src.iCCModules import imageCompositeConverterSemanticParams as semantic_param_helpers
 from src.iCCModules import imageCompositeConverterSemanticBadgeGeometry as semantic_badge_geometry_helpers
 from src.iCCModules import imageCompositeConverterSemanticBadgeSvg as semantic_badge_svg_helpers
 from src.iCCModules import imageCompositeConverterSemanticAc08SmallVariants as semantic_ac08_small_variant_helpers
@@ -1816,49 +1817,53 @@ class Action:
 
     @staticmethod
     def makeBadgeParams(w: int, h: int, base_name: str, img: np.ndarray | None = None) -> dict | None:
-        name = getBaseNameFromFile(base_name).upper()
-
-        if name == "AR0100":
-            return semantic_ar0100_helpers.buildAr0100BadgeParamsImpl(
-                w,
-                h,
-                ar0100_base=Action.AR0100_BASE,
-                center_glyph_bbox_fn=Action._centerGlyphBbox,
-            )
-
-        ac08_params = semantic_ac08_param_helpers.makeAc08BadgeParamsImpl(
+        return semantic_param_helpers.makeBadgeParamsImpl(
             w,
             h,
-            name,
+            base_name,
             img,
-            default_ac0870_params_fn=Action._defaultAc0870Params,
-            default_ac0811_params_fn=Action._defaultAc0811Params,
-            default_ac0810_params_fn=Action._defaultAc0810Params,
-            default_ac0812_params_fn=Action._defaultAc0812Params,
-            default_ac0813_params_fn=Action._defaultAc0813Params,
-            default_ac0814_params_fn=Action._defaultAc0814Params,
-            default_ac0881_params_fn=Action._defaultAc0881Params,
-            default_ac0882_params_fn=Action._defaultAc0882Params,
-            fit_ac0870_params_from_image_fn=Action._fitAc0870ParamsFromImage,
-            fit_semantic_badge_from_image_fn=Action._fit_semantic_badge_from_image,
-            fit_ac0811_params_from_image_fn=Action._fit_ac0811_params_from_image,
-            fit_ac0810_params_from_image_fn=Action._fitAc0810ParamsFromImage,
-            fit_ac0812_params_from_image_fn=Action._fit_ac0812_params_from_image,
-            fit_ac0813_params_from_image_fn=Action._fitAc0813ParamsFromImage,
-            fit_ac0814_params_from_image_fn=Action._fit_ac0814_params_from_image,
-            apply_co2_label_fn=Action._applyCo2Label,
-            apply_voc_label_fn=Action._applyVocLabel,
-            tune_ac0831_co2_badge_fn=Action._tuneAc0831Co2Badge,
-            tune_ac0832_co2_badge_fn=Action._tuneAc0832Co2Badge,
-            tune_ac0833_co2_badge_fn=Action._tuneAc0833Co2Badge,
-            tune_ac0834_co2_badge_fn=Action._tuneAc0834Co2Badge,
-            tune_ac0835_voc_badge_fn=Action._tuneAc0835VocBadge,
-            finalize_ac08_style_fn=Action._finalizeAc08Style,
-            enforce_left_arm_badge_geometry_fn=Action._enforceLeftArmBadgeGeometry,
+            get_base_name_fn=getBaseNameFromFile,
+            build_ar0100_badge_params_fn=lambda _w, _h, name: (
+                semantic_ar0100_helpers.buildAr0100BadgeParamsImpl(
+                    _w,
+                    _h,
+                    ar0100_base=Action.AR0100_BASE,
+                    center_glyph_bbox_fn=Action._centerGlyphBbox,
+                )
+                if name == "AR0100"
+                else None
+            ),
+            make_ac08_badge_params_fn=lambda _w, _h, name, _img: semantic_ac08_param_helpers.makeAc08BadgeParamsImpl(
+                _w,
+                _h,
+                name,
+                _img,
+                default_ac0870_params_fn=Action._defaultAc0870Params,
+                default_ac0811_params_fn=Action._defaultAc0811Params,
+                default_ac0810_params_fn=Action._defaultAc0810Params,
+                default_ac0812_params_fn=Action._defaultAc0812Params,
+                default_ac0813_params_fn=Action._defaultAc0813Params,
+                default_ac0814_params_fn=Action._defaultAc0814Params,
+                default_ac0881_params_fn=Action._defaultAc0881Params,
+                default_ac0882_params_fn=Action._defaultAc0882Params,
+                fit_ac0870_params_from_image_fn=Action._fitAc0870ParamsFromImage,
+                fit_semantic_badge_from_image_fn=Action._fit_semantic_badge_from_image,
+                fit_ac0811_params_from_image_fn=Action._fit_ac0811_params_from_image,
+                fit_ac0810_params_from_image_fn=Action._fitAc0810ParamsFromImage,
+                fit_ac0812_params_from_image_fn=Action._fit_ac0812_params_from_image,
+                fit_ac0813_params_from_image_fn=Action._fitAc0813ParamsFromImage,
+                fit_ac0814_params_from_image_fn=Action._fit_ac0814_params_from_image,
+                apply_co2_label_fn=Action._applyCo2Label,
+                apply_voc_label_fn=Action._applyVocLabel,
+                tune_ac0831_co2_badge_fn=Action._tuneAc0831Co2Badge,
+                tune_ac0832_co2_badge_fn=Action._tuneAc0832Co2Badge,
+                tune_ac0833_co2_badge_fn=Action._tuneAc0833Co2Badge,
+                tune_ac0834_co2_badge_fn=Action._tuneAc0834Co2Badge,
+                tune_ac0835_voc_badge_fn=Action._tuneAc0835VocBadge,
+                finalize_ac08_style_fn=Action._finalizeAc08Style,
+                enforce_left_arm_badge_geometry_fn=Action._enforceLeftArmBadgeGeometry,
+            ),
         )
-        if ac08_params is not None:
-            return ac08_params
-        return None
 
     @staticmethod
     def generateBadgeSvg(w: int, h: int, p: dict) -> str:
