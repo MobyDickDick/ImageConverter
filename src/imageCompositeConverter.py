@@ -54,6 +54,7 @@ from src.iCCModules import imageCompositeConverterSemanticBadgeSvg as semantic_b
 from src.iCCModules import imageCompositeConverterSemanticAc08SmallVariants as semantic_ac08_small_variant_helpers
 from src.iCCModules import imageCompositeConverterSemanticAc08Families as semantic_ac08_family_helpers
 from src.iCCModules import imageCompositeConverterSemanticAc08Finalization as semantic_ac08_finalization_helpers
+from src.iCCModules import imageCompositeConverterSemanticAdaptiveLocks as semantic_adaptive_lock_helpers
 from src.iCCModules import imageCompositeConverterQuality as quality_helpers
 from src.iCCModules import imageCompositeConverterAudit as audit_helpers
 from src.iCCModules import imageCompositeConverterTransfer as transfer_helpers
@@ -1708,8 +1709,12 @@ class Action:
         full_err: float,
         reason: str,
     ) -> bool:
-        """Adaptive AC08 locks are disabled so semantic badge fitting stays unconstrained."""
-        return False
+        return semantic_adaptive_lock_helpers.activateAc08AdaptiveLocksImpl(
+            params,
+            logs,
+            full_err=full_err,
+            reason=reason,
+        )
 
     @staticmethod
     def _releaseAc08AdaptiveLocks(
@@ -1719,8 +1724,12 @@ class Action:
         reason: str,
         current_error: float,
     ) -> bool:
-        """Adaptive AC08 lock release is disabled because there are no AC08 locks to release."""
-        return False
+        return semantic_adaptive_lock_helpers.releaseAc08AdaptiveLocksImpl(
+            params,
+            logs,
+            reason=reason,
+            current_error=current_error,
+        )
 
     @staticmethod
     def _alignStemToCircleCenter(params: dict) -> dict:
