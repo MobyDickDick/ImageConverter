@@ -1,6 +1,6 @@
-run-meta: run_seed=588401603 pass_seed_offset=0 nonce_ns=1775224210839080600
+run-meta: run_seed=1023084643 pass_seed_offset=0 nonce_ns=1775480541717003700
 status=semantic_ok
-redraw_variation: seed=594109206241 changed_params=cx:17.000->17.147 | cy:7.500->7.493 | r:7.000->7.004 | stroke_circle:1.000->0.883 | arm_stroke:1.000->0.882
+redraw_variation: seed=1032580688284 changed_params=cx:17.000->17.118 | cy:7.500->7.625 | r:7.000->7.008 | stroke_circle:1.000->1.091 | arm_stroke:1.000->0.927
 semantic-guard: Text bewusst deaktiviert (plain-ring Familie ohne Buchstabe).
 small_variant_mode_active: reason=min_dim, min_dim=12.100, mask_dilate_px=1, text_mode=path_t, arm_min_ratio=0.750, stem_min_ratio=0.000
 Runde 1: elementweise Validierung gestartet
@@ -13,6 +13,7 @@ arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1
 arm: Längen-Stochastic-Survivor aktiviert (best_len=6.000, err=165.036)
 arm: Längen-Bracketing arm_len 8.000->6.000; Kandidaten=6.000->165.036, 8.000->173.036, 11.000->173.036, 15.500->173.036, 20.000->173.036, 25.000->173.036
 text: Fehler=55.359
+global-search: übersprungen (zu wenige aktive Parameter; benötigt >=4)
 Runde 1: Gesamtfehler=31.715
 Runde 2: elementweise Validierung gestartet
 circle: Fehler=66.427
@@ -23,6 +24,7 @@ arm: Fehler=51.461
 arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
 arm: Längen-Bracketing arm_len 7.000->10.000; Kandidaten=5.000->53.115, 7.000->51.461, 10.000->45.086, 15.000->45.086, 20.000->45.086, 25.000->45.086
 text: Fehler=55.359
+global-search: übersprungen (zu wenige aktive Parameter; benötigt >=4)
 Runde 2: Gesamtfehler=16.424
 Runde 3: elementweise Validierung gestartet
 circle: Fehler=49.789
@@ -33,6 +35,7 @@ arm: Fehler=46.471
 arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
 arm: Längen-Bracketing keine relevante Änderung (arm_len: 10.000); Kandidaten=7.500->49.711, 10.000->45.086, 12.000->45.086, 16.000->45.086, 20.500->45.086, 25.000->45.086
 text: Fehler=55.359
+global-search: übersprungen (zu wenige aktive Parameter; benötigt >=4)
 Runde 3: Gesamtfehler=16.424
 stagnation_detected: identischer Parameter-Fingerprint und praktisch unveränderter Gesamtfehler
 switch_to_fallback_search: deaktiviere Circle-Geometry-Penalty für eine letzte Ausweichrunde
@@ -43,6 +46,7 @@ arm: Fehler=46.471
 arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
 arm: Längen-Bracketing keine relevante Änderung (arm_len: 10.000); Kandidaten=7.500->49.711, 10.000->45.086, 12.000->45.086, 16.000->45.086, 20.500->45.086, 25.000->45.086
 text: Fehler=55.359
+global-search: übersprungen (zu wenige aktive Parameter; benötigt >=4)
 Runde 4: Gesamtfehler=16.424
 stagnation_detected: identischer Parameter-Fingerprint und praktisch unveränderter Gesamtfehler
 stopped_due_to_stagnation: Validierung vorzeitig beendet
