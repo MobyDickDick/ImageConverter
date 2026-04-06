@@ -325,3 +325,23 @@ def optimizeGlobalParameterVectorSamplingImpl(
         f"(best_err={winner_err:.3f}, track={winner_name}, verbessert={', '.join(delta_labels) if delta_labels else 'keine sichtbare delta-liste'})"
     )
     return True
+
+
+def fullBadgeErrorForParamsImpl(
+    img_orig,
+    params: dict,
+    *,
+    fit_to_original_size_fn,
+    render_svg_to_numpy_fn,
+    generate_badge_svg_fn,
+    calculate_error_fn,
+) -> float:
+    """Evaluate full-image error for an already prepared badge parameter dict."""
+    h, w = img_orig.shape[:2]
+    render = fit_to_original_size_fn(
+        img_orig,
+        render_svg_to_numpy_fn(generate_badge_svg_fn(w, h, params), w, h),
+    )
+    if render is None:
+        return float("inf")
+    return float(calculate_error_fn(img_orig, render))

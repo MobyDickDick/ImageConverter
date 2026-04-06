@@ -2455,15 +2455,14 @@ class Action:
 
     @staticmethod
     def _fullBadgeErrorForParams(img_orig: np.ndarray, params: dict) -> float:
-        """Evaluate full-image error for an already prepared badge parameter dict."""
-        h, w = img_orig.shape[:2]
-        render = Action._fitToOriginalSize(
+        return global_search_optimization_helpers.fullBadgeErrorForParamsImpl(
             img_orig,
-            Action.renderSvgToNumpy(Action.generateBadgeSvg(w, h, params), w, h),
+            params,
+            fit_to_original_size_fn=Action._fitToOriginalSize,
+            render_svg_to_numpy_fn=Action.renderSvgToNumpy,
+            generate_badge_svg_fn=Action.generateBadgeSvg,
+            calculate_error_fn=Action.calculateError,
         )
-        if render is None:
-            return float("inf")
-        return float(Action.calculateError(img_orig, render))
 
     @staticmethod
     def _optimizeGlobalParameterVectorSampling(
