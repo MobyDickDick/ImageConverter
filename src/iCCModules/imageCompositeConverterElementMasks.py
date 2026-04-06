@@ -229,3 +229,33 @@ def maskSupportsCircleImpl(
     contour_area = float(cv2_module.contourArea(cnt))
     circularity = (4.0 * math_module.pi * contour_area) / max(1e-6, perimeter * perimeter)
     return circularity >= 0.28 and density <= 0.72
+
+
+def extractBadgeElementMaskImpl(
+    img_orig,
+    params: dict,
+    element: str,
+    *,
+    element_region_mask_fn,
+    foreground_mask_fn,
+    cv2_module,
+    np_module,
+):
+    h, w = img_orig.shape[:2]
+    region_mask = element_region_mask_fn(h, w, params, element)
+    if region_mask is None:
+        return None
+
+    fg_bool = foreground_mask_fn(img_orig)
+    mask = fg_bool & region_mask
+
+    dilate_px = int(params.get("validation_mask_dilate_px", 0) or 0)
+    if dilate_px > 0 and bool(params.get("ac08_small_variant_mode", False)):
+        kernel_size = max(2, (dilate_px * 2) + 1)
+        kernel = np_module.ones((kernel_size, kernel_size), dtype=np_module.uint8)
+        mask = cv2_module.dilate(mask.astype(np_module.uint8) * 255, kernel, iterations=1) > 0
+        mask &= region_mask
+
+    if int(mask.sum()) < 3:
+        return None
+    return mask
