@@ -92,6 +92,7 @@ from src.iCCModules import imageCompositeConverterElementValidation as element_v
 from src.iCCModules import imageCompositeConverterElementMasks as element_mask_helpers
 from src.iCCModules import imageCompositeConverterElementErrorMetrics as element_error_metric_helpers
 from src.iCCModules import imageCompositeConverterCompositeSvg as composite_svg_helpers
+from src.iCCModules import imageCompositeConverterDiffing as diffing_helpers
 from src.successfulConversions import (
     AC08_MITIGATION_STATUS,
     AC08_PREVIOUSLY_GOOD_VARIANTS,
@@ -2144,52 +2145,22 @@ class Action:
         img_svg: np.ndarray,
         focus_mask: np.ndarray | None = None,
     ) -> np.ndarray:
-        if img_svg.shape[:2] != img_orig.shape[:2]:
-            img_svg = cv2.resize(img_svg, (img_orig.shape[1], img_orig.shape[0]), interpolation=cv2.INTER_AREA)
-        orig = img_orig.astype(np.int16)
-        svg = img_svg.astype(np.int16)
-        # Signed RGB sum difference as requested by the user:
-        # dx = (r2-r1) + (g2-g1) + (b2-b1), normalized to [-1, 1].
-        dx = np.sum(svg - orig, axis=2, dtype=np.int32).astype(np.float32)
-        norm = np.clip(dx / (3.0 * 255.0), -1.0, 1.0)
-
-        mask = None
-        if focus_mask is not None:
-            if focus_mask.shape[:2] != img_orig.shape[:2]:
-                focus_mask = cv2.resize(
-                    focus_mask.astype(np.uint8),
-                    (img_orig.shape[1], img_orig.shape[0]),
-                    interpolation=cv2.INTER_NEAREST,
-                )
-            mask = focus_mask > 0
-            norm = np.where(mask, norm, 0.0)
-
-        # Base tone comes from the mean luminance of both pixels.
-        # This keeps identical bright pixels white, while identical dark pixels
-        # stay dark instead of being forced to black or white.
-        mean_tone = np.mean(np.concatenate((orig, svg), axis=2), axis=2).astype(np.float32)
-        magnitude = np.clip(np.abs(norm), 0.0, 1.0)
-        positive = norm >= 0.0
-
-        # Interpolate from grayscale base tone towards signed endpoint colors.
-        up = mean_tone + magnitude * (255.0 - mean_tone)
-        down = mean_tone * (1.0 - magnitude)
-
-        diff = np.zeros_like(img_orig)
-        diff[:, :, 0] = np.where(positive, up, down).astype(np.uint8)
-        diff[:, :, 1] = np.where(positive, up, down).astype(np.uint8)
-        diff[:, :, 2] = np.where(positive, down, up).astype(np.uint8)
-        if mask is not None:
-            diff = np.where(mask[:, :, None], diff, 0)
-        return diff
+        return diffing_helpers.createDiffImageImpl(
+            img_orig,
+            img_svg,
+            cv2_module=cv2,
+            np_module=np,
+            focus_mask=focus_mask,
+        )
 
     @staticmethod
     def calculateError(img_orig: np.ndarray, img_svg: np.ndarray) -> float:
-        if img_svg is None:
-            return float("inf")
-        if img_svg.shape[:2] != img_orig.shape[:2]:
-            img_svg = cv2.resize(img_svg, (img_orig.shape[1], img_orig.shape[0]), interpolation=cv2.INTER_AREA)
-        return float(np.mean(cv2.absdiff(img_orig, img_svg)))
+        return diffing_helpers.calculateErrorImpl(
+            img_orig,
+            img_svg,
+            cv2_module=cv2,
+            np_module=np,
+        )
 
     @staticmethod
     def calculateDelta2Stats(img_orig: np.ndarray, img_svg: np.ndarray) -> tuple[float, float]:
