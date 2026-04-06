@@ -103,3 +103,28 @@ def test_calculate_delta2_stats_impl_returns_mean_and_std() -> None:
     # delta2 values per pixel: [14, 0, 0, 0]
     assert mean_delta2 == 3.5
     assert std_delta2 > 0.0
+
+
+def test_element_match_error_impl_penalizes_undersized_circle() -> None:
+    img_orig = np.zeros((10, 10, 3), dtype=np.uint8)
+    img_svg = np.zeros((10, 10, 3), dtype=np.uint8)
+    mask_orig = np.zeros((10, 10), dtype=bool)
+    mask_svg = np.zeros((10, 10), dtype=bool)
+    mask_orig[2:8, 2:8] = True
+    mask_svg[3:7, 3:7] = True
+
+    err = error_metric_helpers.elementMatchErrorImpl(
+        img_orig,
+        img_svg,
+        params={},
+        element="circle",
+        mask_orig=mask_orig,
+        mask_svg=mask_svg,
+        cv2_module=_FakeCv2,
+        np_module=np,
+        extract_badge_element_mask_fn=lambda *_args, **_kwargs: None,
+        masked_union_error_in_bbox_fn=lambda *_args, **_kwargs: 0.0,
+        mask_centroid_radius_fn=lambda m: (5.0, 5.0, 3.0) if int(m.sum()) > 20 else (5.0, 5.0, 2.0),
+    )
+
+    assert err > 0.0
