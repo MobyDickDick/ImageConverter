@@ -48,6 +48,7 @@ from src.iCCModules import imageCompositeConverterSemanticAc0811 as semantic_ac0
 from src.iCCModules import imageCompositeConverterSemanticAc0812 as semantic_ac0812_helpers
 from src.iCCModules import imageCompositeConverterSemanticAc0813 as semantic_ac0813_helpers
 from src.iCCModules import imageCompositeConverterSemanticAc08Params as semantic_ac08_param_helpers
+from src.iCCModules import imageCompositeConverterSemanticAr0100 as semantic_ar0100_helpers
 from src.iCCModules import imageCompositeConverterSemanticBadgeGeometry as semantic_badge_geometry_helpers
 from src.iCCModules import imageCompositeConverterSemanticAc08SmallVariants as semantic_ac08_small_variant_helpers
 from src.iCCModules import imageCompositeConverterSemanticAc08Families as semantic_ac08_family_helpers
@@ -2428,24 +2429,12 @@ class Action:
         name = getBaseNameFromFile(base_name).upper()
 
         if name == "AR0100":
-            scale = min(w, h) / 25.0 if min(w, h) > 0 else 1.0
-            b = Action.AR0100_BASE
-            params = {
-                "cx": b["cx"] * scale,
-                "cy": b["cy"] * scale,
-                "r": b["r"] * scale,
-                "stroke_circle": b["stroke_width"] * scale,
-                "fill_gray": b["fill_gray"],
-                "stroke_gray": b["stroke_gray"],
-                "text_gray": b["text_gray"],
-                "tx": b["tx"] * scale,
-                "ty": b["ty"] * scale,
-                "s": b["s"] * scale,
-                "label": "M",
-                "text_mode": "path",
-            }
-            Action._centerGlyphBbox(params)
-            return params
+            return semantic_ar0100_helpers.buildAr0100BadgeParamsImpl(
+                w,
+                h,
+                ar0100_base=Action.AR0100_BASE,
+                center_glyph_bbox_fn=Action._centerGlyphBbox,
+            )
 
         ac08_params = semantic_ac08_param_helpers.makeAc08BadgeParamsImpl(
             w,
