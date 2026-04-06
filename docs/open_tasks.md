@@ -116,6 +116,7 @@ focused on the actual project scope.
   - 2026-04-06: Diff-/Fehlermetrik-Helfer (`createDiffImage`, `calculateError`) in neues Modul `src/iCCModules/imageCompositeConverterDiffing.py` ausgelagert; `src/imageCompositeConverter.py` delegiert weiterhin kompatibel über Wrapper.
   - 2026-04-06: SVG-Render-Dispatch (`renderSvgToNumpy`) in neues Modul `src/iCCModules/imageCompositeConverterRenderDispatch.py` ausgelagert; `src/imageCompositeConverter.py` delegiert weiterhin kompatibel über den neuen Modul-Entry-Point.
   - 2026-04-06: Redraw-Variationsblock (`applyRedrawVariation`) in neues Modul `src/iCCModules/imageCompositeConverterSemanticRedrawVariation.py` ausgelagert; `src/imageCompositeConverter.py` delegiert weiterhin kompatibel über den neuen Modul-Entry-Point.
+  - 2026-04-06: Element-Matching-Score (`_elementMatchError`) in `src/iCCModules/imageCompositeConverterElementErrorMetrics.py` zentralisiert; `src/imageCompositeConverter.py` delegiert weiterhin kompatibel über Wrapper.
   - Nächster geplanter Schritt: weitere Badge-Param-/Semantik-Teilstrecken in denselben kleinen Schritten extrahieren.
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.

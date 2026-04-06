@@ -2323,73 +2323,21 @@ class Action:
         mask_svg: np.ndarray | None = None,
         apply_circle_geometry_penalty: bool = True,
     ) -> float:
-        """Element score for optimization: localization + redraw + symmetric compare.
-
-        The score combines:
-        - photometric difference in the union bbox of source/candidate element masks
-        - overlap quality (IoU)
-        - explicit penalties for missing source pixels and extra candidate pixels
-
-        This keeps exploration broad, but accepts candidates only when the element
-        truly matches better (not merely by shrinking or drifting outside the source mask).
-        """
-        if img_svg is None:
-            return float("inf")
-        if img_svg.shape[:2] != img_orig.shape[:2]:
-            img_svg = cv2.resize(img_svg, (img_orig.shape[1], img_orig.shape[0]), interpolation=cv2.INTER_AREA)
-
-        local_mask_orig = mask_orig if mask_orig is not None else Action.extract_badge_element_mask(img_orig, params, element)
-        local_mask_svg = mask_svg if mask_svg is not None else Action.extract_badge_element_mask(img_svg, params, element)
-        if local_mask_orig is None or local_mask_svg is None:
-            return float("inf")
-
-        orig_area = float(np.sum(local_mask_orig))
-        svg_area = float(np.sum(local_mask_svg))
-        if orig_area <= 0.0 or svg_area <= 0.0:
-            return float("inf")
-
-        photo_err = float(Action._maskedUnionErrorInBbox(img_orig, img_svg, local_mask_orig, local_mask_svg))
-        if not math.isfinite(photo_err):
-            return float("inf")
-
-        inter = float(np.sum(local_mask_orig & local_mask_svg))
-        union = float(np.sum(local_mask_orig | local_mask_svg))
-        if union <= 0.0:
-            return float("inf")
-
-        miss = float(np.sum(local_mask_orig & (~local_mask_svg))) / orig_area
-        extra = float(np.sum(local_mask_svg & (~local_mask_orig))) / orig_area
-        if bool(params.get("ac08_small_variant_mode", False)):
-            aa_bias = float(max(0.0, params.get("small_variant_antialias_bias", 0.0)))
-            miss = max(0.0, miss - aa_bias)
-            extra = max(0.0, extra - (aa_bias * 0.75))
-        iou = inter / union
-
-        # Normalize photometric term by source element area so comparisons stay
-        # meaningful across sizes (S/M/L variants).
-        photo_norm = photo_err / max(1.0, orig_area)
-
-        # Circle optimization should prefer concentric matches and avoid shrinking
-        # to the smallest ring that still overlaps the arm/label neighborhood.
-        # The mask overlap terms above are necessary but can be too permissive
-        # when anti-aliased JPEG edges blur circle/connector boundaries.
-        if element == "circle" and apply_circle_geometry_penalty:
-            src_circle = Action._maskCentroidRadius(local_mask_orig)
-            cand_circle = Action._maskCentroidRadius(local_mask_svg)
-            if src_circle is not None and cand_circle is not None:
-                src_cx, src_cy, src_r = src_circle
-                cand_cx, cand_cy, cand_r = cand_circle
-                center_dist = float(math.hypot(cand_cx - src_cx, cand_cy - src_cy))
-                center_norm = center_dist / max(1.0, src_r)
-                # Penalize undersized rings more strongly than oversized ones so
-                # AC0812-like badges keep a readable radius in optimization.
-                undersize_ratio = max(0.0, (src_r - cand_r) / max(1.0, src_r))
-                extra += undersize_ratio * 0.35
-                miss += undersize_ratio * 0.45
-                iou = max(0.0, iou - min(0.35, undersize_ratio * 0.55))
-                photo_norm += center_norm * 2.8
-
-        return float(photo_norm + (38.0 * miss) + (24.0 * extra) + (18.0 * (1.0 - iou)))
+        return element_error_metric_helpers.elementMatchErrorImpl(
+            img_orig,
+            img_svg,
+            params,
+            element,
+            mask_orig=mask_orig,
+            mask_svg=mask_svg,
+            apply_circle_geometry_penalty=apply_circle_geometry_penalty,
+            cv2_module=cv2,
+            np_module=np,
+            math_module=math,
+            extract_badge_element_mask_fn=Action.extractBadgeElementMask,
+            masked_union_error_in_bbox_fn=Action._maskedUnionErrorInBbox,
+            mask_centroid_radius_fn=Action._maskCentroidRadius,
+        )
 
     @staticmethod
     def _captureCanonicalBadgeColors(params: dict) -> dict:
