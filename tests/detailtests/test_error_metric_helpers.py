@@ -86,3 +86,20 @@ def test_masked_error_impl_handles_empty_mask() -> None:
     err = error_metric_helpers.maskedErrorImpl(img, img, mask, cv2_module=_FakeCv2, np_module=np)
 
     assert np.isinf(err)
+
+
+def test_calculate_delta2_stats_impl_returns_mean_and_std() -> None:
+    img_orig = np.zeros((2, 2, 3), dtype=np.uint8)
+    img_svg = np.zeros((2, 2, 3), dtype=np.uint8)
+    img_svg[0, 0, :] = [1, 2, 3]
+
+    mean_delta2, std_delta2 = error_metric_helpers.calculateDelta2StatsImpl(
+        img_orig,
+        img_svg,
+        cv2_module=_FakeCv2,
+        np_module=np,
+    )
+
+    # delta2 values per pixel: [14, 0, 0, 0]
+    assert mean_delta2 == 3.5
+    assert std_delta2 > 0.0
