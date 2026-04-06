@@ -55,6 +55,7 @@ from src.iCCModules import imageCompositeConverterSemanticAc08SmallVariants as s
 from src.iCCModules import imageCompositeConverterSemanticAc08Families as semantic_ac08_family_helpers
 from src.iCCModules import imageCompositeConverterSemanticAc08Finalization as semantic_ac08_finalization_helpers
 from src.iCCModules import imageCompositeConverterSemanticAdaptiveLocks as semantic_adaptive_lock_helpers
+from src.iCCModules import imageCompositeConverterSemanticCircleStyle as semantic_circle_style_helpers
 from src.iCCModules import imageCompositeConverterQuality as quality_helpers
 from src.iCCModules import imageCompositeConverterAudit as audit_helpers
 from src.iCCModules import imageCompositeConverterTransfer as transfer_helpers
@@ -1430,50 +1431,24 @@ class Action:
 
     @staticmethod
     def _normalizeLightCircleColors(params: dict) -> dict:
-        params["fill_gray"] = Action.LIGHT_CIRCLE_FILL_GRAY
-        params["stroke_gray"] = Action.LIGHT_CIRCLE_STROKE_GRAY
-        if params.get("stem_enabled"):
-            params["stem_gray"] = Action.LIGHT_CIRCLE_STROKE_GRAY
-        if params.get("draw_text", True) and "text_gray" in params:
-            params["text_gray"] = Action.LIGHT_CIRCLE_TEXT_GRAY
-        return params
+        return semantic_circle_style_helpers.normalizeLightCircleColorsImpl(
+            params,
+            light_circle_fill_gray=Action.LIGHT_CIRCLE_FILL_GRAY,
+            light_circle_stroke_gray=Action.LIGHT_CIRCLE_STROKE_GRAY,
+            light_circle_text_gray=Action.LIGHT_CIRCLE_TEXT_GRAY,
+        )
 
     @staticmethod
     def _normalizeAc08LineWidths(params: dict) -> dict:
-        """For AC08xx symbols: prefer a uniform 1px circle/connector stroke."""
-        p = dict(params)
-        prev_circle_stroke = float(p.get("stroke_circle", Action.AC08_STROKE_WIDTH_PX))
-        p["stroke_circle"] = Action.AC08_STROKE_WIDTH_PX
-        if bool(p.pop("preserve_outer_diameter_on_stroke_normalization", False)) and p.get("circle_enabled", True) and "r" in p and prev_circle_stroke > 0.0:
-            # Keep the visual outer diameter stable when normalizing to the
-            # canonical AC08 1px stroke. Otherwise tiny plain-ring badges can
-            # lose more than a pixel of diameter even if the fitted geometry
-            # correctly reached the canvas border.
-            outer_radius = float(p["r"]) + (prev_circle_stroke / 2.0)
-            p["r"] = max(1.0, outer_radius - (Action.AC08_STROKE_WIDTH_PX / 2.0))
-        # Keep semantic AC08xx families on their canonical stroke thickness.
-        # The later pixel-error bracketing step can otherwise over-fit anti-aliased
-        # ring edges and inflate widths (e.g. 1px -> 6px for tiny circles).
-        p["lock_stroke_widths"] = True
-        if p.get("arm_enabled"):
-            p["arm_stroke"] = Action.AC08_STROKE_WIDTH_PX
-        if p.get("stem_enabled"):
-            p["stem_width"] = Action.AC08_STROKE_WIDTH_PX
-            if "cx" in p:
-                p["stem_x"] = float(p["cx"]) - (Action.AC08_STROKE_WIDTH_PX / 2.0)
-            p["stem_gray"] = int(p.get("stroke_gray", Action.LIGHT_CIRCLE_STROKE_GRAY))
-        return p
+        return semantic_circle_style_helpers.normalizeAc08LineWidthsImpl(
+            params,
+            ac08_stroke_width_px=Action.AC08_STROKE_WIDTH_PX,
+            light_circle_stroke_gray=Action.LIGHT_CIRCLE_STROKE_GRAY,
+        )
 
     @staticmethod
     def _estimateBorderBackgroundGray(gray: np.ndarray) -> float:
-        """Estimate badge background tone from the outer image border pixels."""
-        if gray.size == 0:
-            return 255.0
-        h, w = gray.shape
-        if h < 2 or w < 2:
-            return float(np.median(gray))
-        border = np.concatenate((gray[0, :], gray[h - 1, :], gray[:, 0], gray[:, w - 1]))
-        return float(np.median(border))
+        return semantic_circle_style_helpers.estimateBorderBackgroundGrayImpl(gray, np_module=np)
 
     @staticmethod
     def _estimateCircleTonesAndStroke(
@@ -1483,29 +1458,14 @@ class Action:
         r: float,
         stroke_hint: float,
     ) -> tuple[float, float, float]:
-        """Estimate fill/ring grayscale and stroke width for circular ring-like badges."""
-        yy, xx = np.indices(gray.shape)
-        dist = np.sqrt((xx - float(cx)) ** 2 + (yy - float(cy)) ** 2)
-
-        inner_mask = dist <= max(1.0, float(r) * 0.78)
-        fill_gray = float(np.median(gray[inner_mask])) if np.any(inner_mask) else float(np.median(gray))
-
-        search_band = max(2.0, min(float(r) * 0.30, 5.0))
-        ring_search = np.abs(dist - float(r)) <= search_band
-        ring_vals = gray[ring_search] if np.any(ring_search) else gray
-        ring_gray = float(np.median(ring_vals))
-
-        # Prefer the darker contour around the estimated radius when present.
-        dark_cut = fill_gray - 2.0
-        dark_ring = ring_search & (gray <= dark_cut)
-        if np.any(dark_ring):
-            ring_gray = float(np.median(gray[dark_ring]))
-            d = np.abs(dist - float(r))[dark_ring]
-            stroke_est = float(max(1.0, min(6.0, np.percentile(d, 72) * 2.0)))
-        else:
-            stroke_est = float(max(1.0, min(6.0, stroke_hint)))
-
-        return fill_gray, ring_gray, stroke_est
+        return semantic_circle_style_helpers.estimateCircleTonesAndStrokeImpl(
+            gray,
+            cx,
+            cy,
+            r,
+            stroke_hint,
+            np_module=np,
+        )
 
     @staticmethod
     def _persistConnectorLengthFloor(params: dict, element: str, default_ratio: float) -> None:
