@@ -1115,6 +1115,13 @@ class Reflection:
         ):
             return desc, params
 
+        non_traceable_hint = Reflection._detect_non_traceable_hint(desc)
+        if non_traceable_hint:
+            params["mode"] = "manual_review"
+            params["review_reason"] = non_traceable_hint
+            params["elements"].append(f"MANUELL: {non_traceable_hint}")
+            return desc, params
+
         match = re.search(r"\boven\b.*?\bwie(?:\s+in)?\s+([a-z]{2}\d{3,4})\b", desc)
         if match:
             params["mode"] = "composite"
@@ -1140,6 +1147,23 @@ class Reflection:
     @staticmethod
     def _extract_documented_alias_refs(text: str) -> set[str]:
         return Reflection._extractDocumentedAliasRefs(text)
+
+    @staticmethod
+    def _detect_non_traceable_hint(text: str) -> str | None:
+        normalized = re.sub(r"\s+", " ", str(text or "").lower()).strip()
+        if not normalized:
+            return None
+        hint_patterns = [
+            (r"nicht automatisch nachzeichnbar", "Beschreibung markiert Symbol als nicht automatisch nachzeichnbar."),
+            (r"nur eingeschränkt.*reproduzierbar", "Beschreibung markiert Symbol als nur eingeschränkt reproduzierbar."),
+            (r"außerhalb der robust unterstützten standard-geometrien", "Beschreibung markiert Symbol außerhalb der robust unterstützten Standard-Geometrien."),
+            (r"bitte einer finalen wurzelform-kategorie zuordnen", "Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie."),
+            (r"noch nicht fachlich klassifiziert", "Beschreibung markiert Symbol als fachlich noch nicht klassifiziert."),
+        ]
+        for pattern, message in hint_patterns:
+            if re.search(pattern, normalized):
+                return message
+        return None
 
     @staticmethod
     def _parseSemanticBadgeLayoutOverrides(text: str) -> dict[str, float | str]:
@@ -3220,6 +3244,14 @@ def runIterationPipeline(
         return None
 
     print(f"\n--- Verarbeite {filename} ---")
+    description_fragments = params.get("description_fragments", [])
+    description_text = " ".join(
+        str(fragment.get("text", "")).strip()
+        for fragment in description_fragments
+        if isinstance(fragment, dict)
+    ).strip()
+    if description_text:
+        print(f"Bildbeschreibung: {description_text}")
     elements = ", ".join(params["elements"]) if params["elements"] else "Kein Compositing-Befehl gefunden"
     print(f"Befehl erkannt: {elements}")
 
@@ -3458,8 +3490,18 @@ def runIterationPipeline(
         return base, desc, params, 1, Action.calculate_error(perc.img, svg_rendered)
 
     if params["mode"] != "composite":
-        print("  -> Überspringe Bild, da keine Zerschneide-Anweisung (Compositing) im Text vorliegt.")
-        _writeValidationLog(["status=skipped_non_composite"])
+        if params["mode"] == "manual_review":
+            reason = str(params.get("review_reason", "Manuelle Prüfung erforderlich.")).strip()
+            print(f"  -> Überspringe Bild: {reason}")
+            _writeValidationLog(
+                [
+                    "status=skipped_manual_review",
+                    f"manual_review_reason={reason}",
+                ]
+            )
+        else:
+            print("  -> Überspringe Bild, da keine Zerschneide-Anweisung (Compositing) im Text vorliegt.")
+            _writeValidationLog(["status=skipped_non_composite"])
         return None
 
     best_error = float("inf")
