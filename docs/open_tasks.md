@@ -121,6 +121,7 @@ focused on the actual project scope.
   - 2026-04-06: Description-Mapping-Ladepfad (`SourceSpan`, `DescriptionMappingError`, `_loadDescriptionMapping*`, `_resolveDescriptionXmlPath`) in neues Modul `src/iCCModules/imageCompositeConverterDescriptions.py` ausgelagert; `src/imageCompositeConverter.py` behält kompatible Delegations-Wrapper für CSV/XML-Callsites und Tests.
   - 2026-04-06: Element-Masken-Extraktion (`extractBadgeElementMask`) in `src/iCCModules/imageCompositeConverterElementMasks.py` ausgelagert; `src/imageCompositeConverter.py` delegiert weiterhin kompatibel über den Modul-Helper.
   - 2026-04-06: Successful-Conversion-Manifest-Update (`updateSuccessfulConversionsManifestWithMetrics`) in `src/iCCModules/imageCompositeConverterSuccessfulConversions.py` ausgelagert; `src/imageCompositeConverter.py` delegiert weiterhin kompatibel über den Modul-Entry-Point.
+  - 2026-04-06: Badge-Param-Dispatch (`makeBadgeParams`) in neues Modul `src/iCCModules/imageCompositeConverterSemanticParams.py` ausgelagert; `src/imageCompositeConverter.py` delegiert kompatibel über den neuen Modul-Entry-Point und kapselt AR0100-/AC08-Dispatch in injizierbaren Helferaufrufen.
   - Nächster geplanter Schritt: weitere Badge-Param-/Semantik-Teilstrecken in denselben kleinen Schritten extrahieren.
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.
