@@ -80,6 +80,7 @@ from src.iCCModules import imageCompositeConverterSemanticGeometry as semantic_g
 from src.iCCModules import imageCompositeConverterSemanticHarmonization as semantic_harmonization_helpers
 from src.iCCModules import imageCompositeConverterRendering as rendering_helpers
 from src.iCCModules import imageCompositeConverterRenderRuntime as rendering_runtime_helpers
+from src.iCCModules import imageCompositeConverterRenderDispatch as render_dispatch_helpers
 from src.iCCModules import imageCompositeConverterBatchReporting as batch_reporting_helpers
 from src.iCCModules import imageCompositeConverterConversionRows as conversion_row_helpers
 from src.iCCModules import imageCompositeConverterAc08Reporting as ac08_reporting_helpers
@@ -2128,16 +2129,17 @@ class Action:
 
     @staticmethod
     def renderSvgToNumpy(svg_string: str, size_w: int, size_h: int):
-        if SVG_RENDER_SUBPROCESS_ENABLED and not _is_fitz_open_monkeypatched():
-            rendered = _render_svg_to_numpy_via_subprocess(svg_string, size_w, size_h)
-            if rendered is not None:
-                return rendered
-            if _UNDER_PYTEST_RUNTIME and not _is_inprocess_renderer_monkeypatched():
-                # Avoid unstable in-process PyMuPDF fallback in long pytest
-                # sessions; dedicated tests can still exercise fallback by
-                # monkeypatching the in-process renderer helper.
-                return None
-        return _render_svg_to_numpy_inprocess(svg_string, size_w, size_h)
+        return render_dispatch_helpers.renderSvgToNumpyImpl(
+            svg_string,
+            size_w,
+            size_h,
+            svg_render_subprocess_enabled=SVG_RENDER_SUBPROCESS_ENABLED,
+            under_pytest_runtime=_UNDER_PYTEST_RUNTIME,
+            is_fitz_open_monkeypatched_fn=_is_fitz_open_monkeypatched,
+            render_svg_to_numpy_via_subprocess_fn=_render_svg_to_numpy_via_subprocess,
+            is_inprocess_renderer_monkeypatched_fn=_is_inprocess_renderer_monkeypatched,
+            render_svg_to_numpy_inprocess_fn=_render_svg_to_numpy_inprocess,
+        )
 
     @staticmethod
     def createDiffImage(
