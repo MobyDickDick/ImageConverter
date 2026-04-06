@@ -2193,18 +2193,12 @@ class Action:
 
     @staticmethod
     def calculateDelta2Stats(img_orig: np.ndarray, img_svg: np.ndarray) -> tuple[float, float]:
-        """Return mean/std of per-pixel squared RGB deltas.
-
-        Per-pixel metric:
-            delta2 = (ΔR)^2 + (ΔG)^2 + (ΔB)^2
-        """
-        if img_svg is None:
-            return float("inf"), float("inf")
-        if img_svg.shape[:2] != img_orig.shape[:2]:
-            img_svg = cv2.resize(img_svg, (img_orig.shape[1], img_orig.shape[0]), interpolation=cv2.INTER_AREA)
-        diff = img_orig.astype(np.float32) - img_svg.astype(np.float32)
-        delta2 = np.sum(diff * diff, axis=2)
-        return float(np.mean(delta2)), float(np.std(delta2))
+        return element_error_metric_helpers.calculateDelta2StatsImpl(
+            img_orig,
+            img_svg,
+            cv2_module=cv2,
+            np_module=np,
+        )
 
     @staticmethod
     def _fitToOriginalSize(img_orig: np.ndarray, img_svg: np.ndarray | None) -> np.ndarray | None:

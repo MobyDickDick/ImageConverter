@@ -80,3 +80,18 @@ def maskedUnionErrorInBboxImpl(
 
     gray_diff = cv2_module.cvtColor(cv2_module.absdiff(orig_crop, svg_crop), cv2_module.COLOR_BGR2GRAY).astype(np_module.float32)
     return float(np_module.sum(gray_diff * union_mask.astype(np_module.float32)))
+
+
+def calculateDelta2StatsImpl(img_orig, img_svg, *, cv2_module, np_module) -> tuple[float, float]:
+    """Return mean/std of per-pixel squared RGB deltas."""
+    if img_svg is None:
+        return float("inf"), float("inf")
+    if img_svg.shape[:2] != img_orig.shape[:2]:
+        img_svg = cv2_module.resize(
+            img_svg,
+            (img_orig.shape[1], img_orig.shape[0]),
+            interpolation=cv2_module.INTER_AREA,
+        )
+    diff = img_orig.astype(np_module.float32) - img_svg.astype(np_module.float32)
+    delta2 = np_module.sum(diff * diff, axis=2)
+    return float(np_module.mean(delta2)), float(np_module.std(delta2))
