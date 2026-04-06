@@ -298,3 +298,109 @@ def successfulConversionMetricsAvailableImpl(metrics: dict[str, object]) -> bool
         if math.isfinite(value):
             return True
     return False
+
+
+def updateSuccessfulConversionsManifestWithMetricsImpl(
+    folder_path: str,
+    svg_out_dir: str,
+    reports_out_dir: str,
+    collect_quality_metrics_fn,
+    load_successful_conversions_fn,
+    read_manifest_metrics_fn,
+    is_candidate_better_fn,
+    store_snapshot_fn,
+    merge_metrics_fn,
+    restore_snapshot_fn,
+    format_manifest_line_fn,
+    latest_failed_entry_fn,
+    sorted_rows_fn,
+    manifest_path: Path | None = None,
+    successful_variants: list[str] | tuple[str, ...] | None = None,
+) -> tuple[Path, list[dict[str, object]]]:
+    """Update ``successful_conversions.txt`` as an in-place best list."""
+    resolved_manifest_path = (
+        Path(manifest_path)
+        if manifest_path is not None
+        else Path(reports_out_dir) / "successful_conversions.txt"
+    )
+    if not resolved_manifest_path.exists():
+        raise FileNotFoundError(
+            f"Successful-conversions manifest not found: {resolved_manifest_path}"
+        )
+
+    previous_manifest_metrics = read_manifest_metrics_fn(resolved_manifest_path)
+    metrics_rows = collect_quality_metrics_fn(
+        folder_path=folder_path,
+        svg_out_dir=svg_out_dir,
+        reports_out_dir=reports_out_dir,
+        successful_variants=successful_variants
+        or load_successful_conversions_fn(resolved_manifest_path),
+    )
+
+    accepted_metrics_by_variant: dict[str, dict[str, object]] = {}
+    effective_metrics_rows: list[dict[str, object]] = []
+    for row in metrics_rows:
+        variant = str(row["variant"]).upper()
+        previous_metrics = previous_manifest_metrics.get(variant)
+        if is_candidate_better_fn(previous_metrics, row):
+            accepted_metrics_by_variant[variant] = row
+            effective_metrics_rows.append(row)
+            store_snapshot_fn(variant, row, svg_out_dir, reports_out_dir)
+        else:
+            if previous_metrics is not None:
+                accepted_metrics_by_variant[variant] = previous_metrics
+                effective_metrics_rows.append(merge_metrics_fn(row, previous_metrics))
+            else:
+                effective_metrics_rows.append(row)
+            restore_snapshot_fn(variant, svg_out_dir, reports_out_dir)
+
+    updated_lines: list[str] = []
+    manifest_variants: set[str] = set()
+    for raw_line in resolved_manifest_path.read_text(encoding="utf-8").splitlines():
+        stripped = raw_line.split("#", 1)[0].strip()
+        if not stripped:
+            updated_lines.append(raw_line)
+            continue
+        variant = stripped.split(";", 1)[0].strip().upper()
+        manifest_variants.add(variant)
+        metrics = accepted_metrics_by_variant.get(variant)
+        if metrics is None:
+            updated_lines.append(raw_line)
+            continue
+        updated_lines.append(format_manifest_line_fn(raw_line, metrics))
+
+    missing_variants = [
+        variant
+        for variant in sorted(accepted_metrics_by_variant)
+        if variant not in manifest_variants
+    ]
+    if missing_variants:
+        if updated_lines and updated_lines[-1].strip():
+            updated_lines.append("")
+        for variant in missing_variants:
+            updated_lines.append(
+                format_manifest_line_fn(
+                    variant,
+                    accepted_metrics_by_variant[variant],
+                )
+            )
+
+    failed_entry = latest_failed_entry_fn(reports_out_dir)
+    updated_without_failed = [
+        line
+        for line in updated_lines
+        if "status=failed" not in line.lower()
+    ]
+    updated_lines = updated_without_failed
+    if failed_entry is not None:
+        failed_variant = str(failed_entry.get("variant", "")).strip().upper()
+        failure_reason = str(failed_entry.get("failure_reason", "")).strip()
+        if updated_lines and updated_lines[-1].strip():
+            updated_lines.append("")
+        failed_line = f"{failed_variant} ; status=failed"
+        if failure_reason:
+            failed_line += f" ; reason={failure_reason}"
+        updated_lines.append(failed_line)
+
+    resolved_manifest_path.write_text("\n".join(updated_lines) + "\n", encoding="utf-8")
+    return resolved_manifest_path, sorted_rows_fn(effective_metrics_rows)
