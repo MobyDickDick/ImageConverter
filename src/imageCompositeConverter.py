@@ -55,6 +55,7 @@ from src.iCCModules import imageCompositeConverterSemanticAc08SmallVariants as s
 from src.iCCModules import imageCompositeConverterSemanticAc08Families as semantic_ac08_family_helpers
 from src.iCCModules import imageCompositeConverterSemanticAc08Finalization as semantic_ac08_finalization_helpers
 from src.iCCModules import imageCompositeConverterSemanticAdaptiveLocks as semantic_adaptive_lock_helpers
+from src.iCCModules import imageCompositeConverterSemanticCircleStyle as semantic_circle_style_helpers
 from src.iCCModules import imageCompositeConverterQuality as quality_helpers
 from src.iCCModules import imageCompositeConverterAudit as audit_helpers
 from src.iCCModules import imageCompositeConverterTransfer as transfer_helpers
@@ -70,6 +71,7 @@ from src.iCCModules import imageCompositeConverterOptimizationCircleRadius as ci
 from src.iCCModules import imageCompositeConverterOptimizationCircleGeometry as circle_geometry_optimization_helpers
 from src.iCCModules import imageCompositeConverterOptimizationElementAlignment as element_alignment_optimization_helpers
 from src.iCCModules import imageCompositeConverterOptimizationScalars as scalar_optimization_helpers
+from src.iCCModules import imageCompositeConverterOptimizationQuantization as quantization_optimization_helpers
 from src.iCCModules import imageCompositeConverterOptimizationGlobalVector as global_vector_optimization_helpers
 from src.iCCModules import imageCompositeConverterOptimizationGlobalSearch as global_search_optimization_helpers
 from src.iCCModules import imageCompositeConverterMaskGeometry as mask_geometry_helpers
@@ -1115,6 +1117,13 @@ class Reflection:
         ):
             return desc, params
 
+        non_traceable_hint = Reflection._detect_non_traceable_hint(desc)
+        if non_traceable_hint:
+            params["mode"] = "manual_review"
+            params["review_reason"] = non_traceable_hint
+            params["elements"].append(f"MANUELL: {non_traceable_hint}")
+            return desc, params
+
         match = re.search(r"\boven\b.*?\bwie(?:\s+in)?\s+([a-z]{2}\d{3,4})\b", desc)
         if match:
             params["mode"] = "composite"
@@ -1140,6 +1149,23 @@ class Reflection:
     @staticmethod
     def _extract_documented_alias_refs(text: str) -> set[str]:
         return Reflection._extractDocumentedAliasRefs(text)
+
+    @staticmethod
+    def _detect_non_traceable_hint(text: str) -> str | None:
+        normalized = re.sub(r"\s+", " ", str(text or "").lower()).strip()
+        if not normalized:
+            return None
+        hint_patterns = [
+            (r"nicht automatisch nachzeichnbar", "Beschreibung markiert Symbol als nicht automatisch nachzeichnbar."),
+            (r"nur eingeschränkt.*reproduzierbar", "Beschreibung markiert Symbol als nur eingeschränkt reproduzierbar."),
+            (r"außerhalb der robust unterstützten standard-geometrien", "Beschreibung markiert Symbol außerhalb der robust unterstützten Standard-Geometrien."),
+            (r"bitte einer finalen wurzelform-kategorie zuordnen", "Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie."),
+            (r"noch nicht fachlich klassifiziert", "Beschreibung markiert Symbol als fachlich noch nicht klassifiziert."),
+        ]
+        for pattern, message in hint_patterns:
+            if re.search(pattern, normalized):
+                return message
+        return None
 
     @staticmethod
     def _parseSemanticBadgeLayoutOverrides(text: str) -> dict[str, float | str]:
@@ -1388,187 +1414,41 @@ class Action:
 
     @staticmethod
     def _enforceCircleConnectorSymmetry(params: dict, w: int, h: int) -> dict:
-        """Keep circle+connector "lollipop" geometry centered around the connector axis."""
-        p = dict(params)
-        if not p.get("circle_enabled", True):
-            return p
-        if "cx" not in p or "cy" not in p or "r" not in p:
-            return p
-
-        cx = float(p["cx"])
-        cy = float(p["cy"])
-        r = float(p["r"])
-
-        if p.get("stem_enabled") and "stem_width" in p:
-            p["stem_x"] = cx - (float(p["stem_width"]) / 2.0)
-
-        if p.get("arm_enabled") and all(k in p for k in ("arm_x1", "arm_y1", "arm_x2", "arm_y2")):
-            x1 = float(p["arm_x1"])
-            y1 = float(p["arm_y1"])
-            x2 = float(p["arm_x2"])
-            y2 = float(p["arm_y2"])
-
-            vertical = abs(x2 - x1) <= abs(y2 - y1)
-            if vertical:
-                p["arm_x1"] = cx
-                p["arm_x2"] = cx
-                end_is_p2 = abs(y2 - cy) <= abs(y1 - cy)
-                if end_is_p2:
-                    p["arm_y2"] = cy - r if y1 <= cy else cy + r
-                else:
-                    p["arm_y1"] = cy - r if y2 <= cy else cy + r
-            else:
-                p["arm_y1"] = cy
-                p["arm_y2"] = cy
-                end_is_p2 = abs(x2 - cx) <= abs(x1 - cx)
-                if end_is_p2:
-                    p["arm_x2"] = cx - r if x1 <= cx else cx + r
-                else:
-                    p["arm_x1"] = cx - r if x2 <= cx else cx + r
-
-        if "stem_x" in p and "stem_width" in p:
-            p["stem_x"] = max(0.0, min(float(w) - float(p["stem_width"]), float(p["stem_x"])))
-        for key in ("arm_x1", "arm_x2"):
-            if key in p:
-                p[key] = max(0.0, min(float(w), float(p[key])))
-        for key in ("arm_y1", "arm_y2"):
-            if key in p:
-                p[key] = max(0.0, min(float(h), float(p[key])))
-        return p
+        return quantization_optimization_helpers.enforceCircleConnectorSymmetryImpl(params, w, h)
 
     @staticmethod
     def _quantizeBadgeParams(params: dict, w: int, h: int) -> dict:
-        """Quantize geometry for bitmap-like sources.
-
-        - Coordinates/lengths use 0.5px steps.
-        - Line widths use integer pixel steps.
-        """
-        p = dict(params)
-        raw_circle_radius = float(p["r"]) if p.get("circle_enabled", True) and "r" in p else None
-
-        half_keys = (
-            "cx",
-            "cy",
-            "r",
-            "stem_x",
-            "stem_top",
-            "stem_bottom",
-            "arm_x1",
-            "arm_y1",
-            "arm_x2",
-            "arm_y2",
-            "tx",
-            "ty",
-            "co2_dy",
+        return quantization_optimization_helpers.quantizeBadgeParamsImpl(
+            params,
+            w,
+            h,
+            snap_half_fn=Action._snapHalf,
+            snap_int_px_fn=Action._snapIntPx,
+            enforce_circle_connector_symmetry_fn=Action._enforceCircleConnectorSymmetry,
+            clamp_circle_inside_canvas_fn=Action._clampCircleInsideCanvas,
+            max_circle_radius_inside_canvas_fn=Action._maxCircleRadiusInsideCanvas,
         )
-        for key in half_keys:
-            if key in p:
-                p[key] = Action._snapHalf(float(p[key]))
-
-        int_width_keys = ("stroke_circle", "arm_stroke", "stem_width")
-        for key in int_width_keys:
-            if key in p:
-                p[key] = Action._snapIntPx(float(p[key]), minimum=1.0)
-
-        if "stem_width_max" in p:
-            p["stem_width_max"] = max(1.0, Action._snapHalf(float(p["stem_width_max"])))
-
-        if p.get("stem_enabled") and "cx" in p and "stem_width" in p:
-            p["stem_x"] = Action._snapHalf(float(p["cx"]) - (float(p["stem_width"]) / 2.0))
-
-        if "stem_x" in p and "stem_width" in p:
-            p["stem_x"] = max(0.0, min(float(w) - float(p["stem_width"]), float(p["stem_x"])))
-        if "stem_top" in p:
-            p["stem_top"] = max(0.0, min(float(h), float(p["stem_top"])))
-        if "stem_bottom" in p:
-            p["stem_bottom"] = max(0.0, min(float(h), float(p["stem_bottom"])))
-
-        p = Action._enforceCircleConnectorSymmetry(p, w, h)
-        p = Action._clampCircleInsideCanvas(p, w, h)
-
-        if (
-            raw_circle_radius is not None
-            and "cx" in p
-            and "cy" in p
-            and "r" in p
-        ):
-            canvas_fit_r = float(
-                Action._maxCircleRadiusInsideCanvas(
-                    float(p["cx"]),
-                    float(p["cy"]),
-                    w,
-                    h,
-                    float(p.get("stroke_circle", 0.0)),
-                )
-            )
-            snapped_canvas_fit_r = float(Action._snapHalf(canvas_fit_r))
-            radius_gap_to_canvas = canvas_fit_r - raw_circle_radius
-            if (
-                snapped_canvas_fit_r > float(p["r"])
-                and radius_gap_to_canvas >= 0.0
-                and radius_gap_to_canvas <= 0.5
-                and (canvas_fit_r - float(p["r"])) <= 0.5
-            ):
-                p["r"] = float(
-                    max(
-                        float(p.get("min_circle_radius", 1.0)),
-                        min(snapped_canvas_fit_r, canvas_fit_r),
-                    )
-                )
-
-        # Symmetry enforcement may reintroduce non-snapped values.
-        for key in half_keys:
-            if key in p:
-                p[key] = Action._snapHalf(float(p[key]))
-
-        return p
 
     @staticmethod
     def _normalizeLightCircleColors(params: dict) -> dict:
-        params["fill_gray"] = Action.LIGHT_CIRCLE_FILL_GRAY
-        params["stroke_gray"] = Action.LIGHT_CIRCLE_STROKE_GRAY
-        if params.get("stem_enabled"):
-            params["stem_gray"] = Action.LIGHT_CIRCLE_STROKE_GRAY
-        if params.get("draw_text", True) and "text_gray" in params:
-            params["text_gray"] = Action.LIGHT_CIRCLE_TEXT_GRAY
-        return params
+        return semantic_circle_style_helpers.normalizeLightCircleColorsImpl(
+            params,
+            light_circle_fill_gray=Action.LIGHT_CIRCLE_FILL_GRAY,
+            light_circle_stroke_gray=Action.LIGHT_CIRCLE_STROKE_GRAY,
+            light_circle_text_gray=Action.LIGHT_CIRCLE_TEXT_GRAY,
+        )
 
     @staticmethod
     def _normalizeAc08LineWidths(params: dict) -> dict:
-        """For AC08xx symbols: prefer a uniform 1px circle/connector stroke."""
-        p = dict(params)
-        prev_circle_stroke = float(p.get("stroke_circle", Action.AC08_STROKE_WIDTH_PX))
-        p["stroke_circle"] = Action.AC08_STROKE_WIDTH_PX
-        if bool(p.pop("preserve_outer_diameter_on_stroke_normalization", False)) and p.get("circle_enabled", True) and "r" in p and prev_circle_stroke > 0.0:
-            # Keep the visual outer diameter stable when normalizing to the
-            # canonical AC08 1px stroke. Otherwise tiny plain-ring badges can
-            # lose more than a pixel of diameter even if the fitted geometry
-            # correctly reached the canvas border.
-            outer_radius = float(p["r"]) + (prev_circle_stroke / 2.0)
-            p["r"] = max(1.0, outer_radius - (Action.AC08_STROKE_WIDTH_PX / 2.0))
-        # Keep semantic AC08xx families on their canonical stroke thickness.
-        # The later pixel-error bracketing step can otherwise over-fit anti-aliased
-        # ring edges and inflate widths (e.g. 1px -> 6px for tiny circles).
-        p["lock_stroke_widths"] = True
-        if p.get("arm_enabled"):
-            p["arm_stroke"] = Action.AC08_STROKE_WIDTH_PX
-        if p.get("stem_enabled"):
-            p["stem_width"] = Action.AC08_STROKE_WIDTH_PX
-            if "cx" in p:
-                p["stem_x"] = float(p["cx"]) - (Action.AC08_STROKE_WIDTH_PX / 2.0)
-            p["stem_gray"] = int(p.get("stroke_gray", Action.LIGHT_CIRCLE_STROKE_GRAY))
-        return p
+        return semantic_circle_style_helpers.normalizeAc08LineWidthsImpl(
+            params,
+            ac08_stroke_width_px=Action.AC08_STROKE_WIDTH_PX,
+            light_circle_stroke_gray=Action.LIGHT_CIRCLE_STROKE_GRAY,
+        )
 
     @staticmethod
     def _estimateBorderBackgroundGray(gray: np.ndarray) -> float:
-        """Estimate badge background tone from the outer image border pixels."""
-        if gray.size == 0:
-            return 255.0
-        h, w = gray.shape
-        if h < 2 or w < 2:
-            return float(np.median(gray))
-        border = np.concatenate((gray[0, :], gray[h - 1, :], gray[:, 0], gray[:, w - 1]))
-        return float(np.median(border))
+        return semantic_circle_style_helpers.estimateBorderBackgroundGrayImpl(gray, np_module=np)
 
     @staticmethod
     def _estimateCircleTonesAndStroke(
@@ -1578,29 +1458,14 @@ class Action:
         r: float,
         stroke_hint: float,
     ) -> tuple[float, float, float]:
-        """Estimate fill/ring grayscale and stroke width for circular ring-like badges."""
-        yy, xx = np.indices(gray.shape)
-        dist = np.sqrt((xx - float(cx)) ** 2 + (yy - float(cy)) ** 2)
-
-        inner_mask = dist <= max(1.0, float(r) * 0.78)
-        fill_gray = float(np.median(gray[inner_mask])) if np.any(inner_mask) else float(np.median(gray))
-
-        search_band = max(2.0, min(float(r) * 0.30, 5.0))
-        ring_search = np.abs(dist - float(r)) <= search_band
-        ring_vals = gray[ring_search] if np.any(ring_search) else gray
-        ring_gray = float(np.median(ring_vals))
-
-        # Prefer the darker contour around the estimated radius when present.
-        dark_cut = fill_gray - 2.0
-        dark_ring = ring_search & (gray <= dark_cut)
-        if np.any(dark_ring):
-            ring_gray = float(np.median(gray[dark_ring]))
-            d = np.abs(dist - float(r))[dark_ring]
-            stroke_est = float(max(1.0, min(6.0, np.percentile(d, 72) * 2.0)))
-        else:
-            stroke_est = float(max(1.0, min(6.0, stroke_hint)))
-
-        return fill_gray, ring_gray, stroke_est
+        return semantic_circle_style_helpers.estimateCircleTonesAndStrokeImpl(
+            gray,
+            cx,
+            cy,
+            r,
+            stroke_hint,
+            np_module=np,
+        )
 
     @staticmethod
     def _persistConnectorLengthFloor(params: dict, element: str, default_ratio: float) -> None:
@@ -3220,6 +3085,14 @@ def runIterationPipeline(
         return None
 
     print(f"\n--- Verarbeite {filename} ---")
+    description_fragments = params.get("description_fragments", [])
+    description_text = " ".join(
+        str(fragment.get("text", "")).strip()
+        for fragment in description_fragments
+        if isinstance(fragment, dict)
+    ).strip()
+    if description_text:
+        print(f"Bildbeschreibung: {description_text}")
     elements = ", ".join(params["elements"]) if params["elements"] else "Kein Compositing-Befehl gefunden"
     print(f"Befehl erkannt: {elements}")
 
@@ -3458,8 +3331,18 @@ def runIterationPipeline(
         return base, desc, params, 1, Action.calculate_error(perc.img, svg_rendered)
 
     if params["mode"] != "composite":
-        print("  -> Überspringe Bild, da keine Zerschneide-Anweisung (Compositing) im Text vorliegt.")
-        _writeValidationLog(["status=skipped_non_composite"])
+        if params["mode"] == "manual_review":
+            reason = str(params.get("review_reason", "Manuelle Prüfung erforderlich.")).strip()
+            print(f"  -> Überspringe Bild: {reason}")
+            _writeValidationLog(
+                [
+                    "status=skipped_manual_review",
+                    f"manual_review_reason={reason}",
+                ]
+            )
+        else:
+            print("  -> Überspringe Bild, da keine Zerschneide-Anweisung (Compositing) im Text vorliegt.")
+            _writeValidationLog(["status=skipped_non_composite"])
         return None
 
     best_error = float("inf")
