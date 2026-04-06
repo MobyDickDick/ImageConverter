@@ -56,6 +56,7 @@ from src.iCCModules import imageCompositeConverterSemanticAc08Families as semant
 from src.iCCModules import imageCompositeConverterSemanticAc08Finalization as semantic_ac08_finalization_helpers
 from src.iCCModules import imageCompositeConverterSemanticAdaptiveLocks as semantic_adaptive_lock_helpers
 from src.iCCModules import imageCompositeConverterSemanticCircleStyle as semantic_circle_style_helpers
+from src.iCCModules import imageCompositeConverterSemanticRedrawVariation as semantic_redraw_variation_helpers
 from src.iCCModules import imageCompositeConverterQuality as quality_helpers
 from src.iCCModules import imageCompositeConverterAudit as audit_helpers
 from src.iCCModules import imageCompositeConverterTransfer as transfer_helpers
@@ -1353,66 +1354,17 @@ class Action:
 
     @staticmethod
     def applyRedrawVariation(params: dict, w: int, h: int) -> tuple[dict, list[str]]:
-        """Apply a slight per-run redraw jitter and describe it for the log."""
-        p = copy.deepcopy(params)
-        variation_logs: list[str] = []
-        if w <= 0 or h <= 0:
-            return p, variation_logs
-
-        seed = (
-            int(Action.STOCHASTIC_RUN_SEED) * 1009
-            + int(Action.STOCHASTIC_SEED_OFFSET) * 101
-            + int(time.time_ns() % 1_000_000_007)
+        return semantic_redraw_variation_helpers.applyRedrawVariationImpl(
+            params,
+            w,
+            h,
+            stochastic_run_seed=Action.STOCHASTIC_RUN_SEED,
+            stochastic_seed_offset=Action.STOCHASTIC_SEED_OFFSET,
+            time_ns_fn=time.time_ns,
+            make_rng_fn=Action._makeRng,
+            clamp_circle_inside_canvas_fn=Action._clampCircleInsideCanvas,
+            reanchor_arm_to_circle_edge_fn=Action._reanchorArmToCircleEdge,
         )
-        rng = Action._makeRng(seed)
-
-        def _uniform(delta: float) -> float:
-            return float(rng.uniform(-abs(float(delta)), abs(float(delta))))
-
-        jitter_entries: list[str] = []
-
-        def _applyNumericJitter(key: str, delta: float, *, minimum: float | None = None, maximum: float | None = None) -> None:
-            if key not in p:
-                return
-            try:
-                old_float = float(p.get(key))
-            except (TypeError, ValueError):
-                return
-            new_value = old_float + _uniform(delta)
-            if minimum is not None:
-                new_value = max(float(minimum), new_value)
-            if maximum is not None:
-                new_value = min(float(maximum), new_value)
-            p[key] = float(new_value)
-            jitter_entries.append(f"{key}:{old_float:.3f}->{new_value:.3f}")
-
-        _applyNumericJitter("cx", max(0.15, float(w) * 0.01), minimum=0.0, maximum=float(w))
-        _applyNumericJitter("cy", max(0.15, float(h) * 0.01), minimum=0.0, maximum=float(h))
-        _applyNumericJitter("r", max(0.10, float(min(w, h)) * 0.008), minimum=1.0)
-        _applyNumericJitter("stroke_circle", 0.12, minimum=0.4)
-        _applyNumericJitter("arm_len", max(0.12, float(w) * 0.012), minimum=0.5, maximum=float(max(w, h)))
-        _applyNumericJitter("arm_stroke", 0.12, minimum=0.4)
-        _applyNumericJitter("stem_height", max(0.12, float(h) * 0.012), minimum=0.5, maximum=float(max(w, h)))
-        _applyNumericJitter("stem_width", 0.12, minimum=0.4, maximum=float(max(1, w)))
-        _applyNumericJitter("text_scale", 0.03, minimum=0.35, maximum=4.0)
-        _applyNumericJitter("text_x", max(0.10, float(w) * 0.01), minimum=0.0, maximum=float(w))
-        _applyNumericJitter("text_y", max(0.10, float(h) * 0.01), minimum=0.0, maximum=float(h))
-        _applyNumericJitter("co2_dx", 0.08)
-        _applyNumericJitter("co2_dy", 0.08)
-        _applyNumericJitter("voc_scale", 0.03, minimum=0.35, maximum=4.0)
-
-        p = Action._clampCircleInsideCanvas(p, w, h)
-        if p.get("arm_enabled"):
-            Action._reanchorArmToCircleEdge(p, float(p.get("r", 1.0)))
-        if p.get("stem_enabled") and "cy" in p and "r" in p:
-            p["stem_top"] = float(p.get("cy", 0.0)) + float(p.get("r", 0.0))
-
-        if jitter_entries:
-            variation_logs.append(
-                "redraw_variation: seed="
-                f"{seed} changed_params=" + " | ".join(jitter_entries)
-            )
-        return p, variation_logs
 
     @staticmethod
     def _enforceCircleConnectorSymmetry(params: dict, w: int, h: int) -> dict:
