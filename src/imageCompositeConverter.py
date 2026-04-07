@@ -95,6 +95,7 @@ from src.iCCModules import imageCompositeConverterBestlist as conversion_bestlis
 from src.iCCModules import imageCompositeConverterCli as cli_helpers
 from src.iCCModules import imageCompositeConverterOutputPaths as output_path_helpers
 from src.iCCModules import imageCompositeConverterIterationArtifacts as iteration_artifact_helpers
+from src.iCCModules import imageCompositeConverterRandom as random_helpers
 from src.iCCModules import imageCompositeConverterElementValidation as element_validation_helpers
 from src.iCCModules import imageCompositeConverterElementMasks as element_mask_helpers
 from src.iCCModules import imageCompositeConverterElementErrorMetrics as element_error_metric_helpers
@@ -3132,14 +3133,7 @@ def _inRequestedRange(filename: str, start_ref: str, end_ref: str) -> bool:
 
 
 def _conversionRandom() -> random.Random:
-    """Return run-local RNG (seedable via env) for non-deterministic search order."""
-    seed_raw = os.environ.get("TINY_ICC_RANDOM_SEED")
-    if seed_raw is not None and str(seed_raw).strip() != "":
-        try:
-            return random.Random(int(str(seed_raw).strip()))
-        except ValueError:
-            pass
-    return random.Random(time.time_ns())
+    return random_helpers.conversionRandomImpl(seed_env_var="TINY_ICC_RANDOM_SEED")
 
 def _defaultConvertedSymbolsRoot() -> str:
     return output_path_helpers.defaultConvertedSymbolsRootImpl(module_file=__file__)
