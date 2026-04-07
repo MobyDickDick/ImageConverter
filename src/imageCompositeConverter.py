@@ -3938,18 +3938,7 @@ def convertRange(
             _storeConversionBestlistSnapshot(variant, row, svg_out_dir, reports_out_dir)
         else:
             restored_row = _restoreConversionBestlistSnapshot(variant, svg_out_dir, reports_out_dir)
-            if previous_row is not None:
-                fallback_row = dict(row)
-                for key in ("best_iter", "best_error", "error_per_pixel", "mean_delta2", "std_delta2", "status"):
-                    if key in previous_row:
-                        fallback_row[key] = previous_row[key]
-                if isinstance(restored_row, dict):
-                    for key in ("best_iter", "best_error", "error_per_pixel", "mean_delta2", "std_delta2", "status"):
-                        if key in restored_row:
-                            fallback_row[key] = restored_row[key]
-                result_map[filename] = fallback_row
-            else:
-                result_map[filename] = row
+            result_map[filename] = _chooseConversionBestlistRow(row, previous_row, restored_row)
 
     current_rows = [
         row
@@ -4374,6 +4363,18 @@ def _isConversionBestlistCandidateBetter(previous_row: dict[str, object] | None,
         previous_row,
         candidate_row,
         evaluate_candidate_fn=_evaluateQualityPassCandidate,
+    )
+
+
+def _chooseConversionBestlistRow(
+    candidate_row: dict[str, object],
+    previous_row: dict[str, object] | None,
+    restored_row: dict[str, object] | None,
+) -> dict[str, object]:
+    return conversion_bestlist_helpers.chooseConversionBestlistRowImpl(
+        candidate_row=candidate_row,
+        previous_row=previous_row,
+        restored_row=restored_row,
     )
 
 def _latestFailedConversionManifestEntry(reports_out_dir: str) -> dict[str, object] | None:
