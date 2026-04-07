@@ -105,6 +105,7 @@ from src.iCCModules import imageCompositeConverterConversionReporting as convers
 from src.iCCModules import imageCompositeConverterRandom as random_helpers
 from src.iCCModules import imageCompositeConverterLegacyApi as legacy_api_helpers
 from src.iCCModules import imageCompositeConverterElementValidation as element_validation_helpers
+from src.iCCModules import imageCompositeConverterOptimizationElementSearch as element_search_optimization_helpers
 from src.iCCModules import imageCompositeConverterElementMasks as element_mask_helpers
 from src.iCCModules import imageCompositeConverterElementErrorMetrics as element_error_metric_helpers
 from src.iCCModules import imageCompositeConverterCompositeSvg as composite_svg_helpers
@@ -421,16 +422,11 @@ def loadBinaryImageWithMode(path: Path, *, threshold: int = 220, mode: str = "gl
 
 
 def renderCandidateMask(candidate: Candidate, width: int, height: int) -> list[list[int]]:
-    mask = [[0 for _ in range(width)] for _ in range(height)]
-    rx = max(1.0, (candidate.w + candidate.h) / 4.0) if candidate.shape == 'circle' else max(1.0, candidate.w / 2.0)
-    ry = rx if candidate.shape == 'circle' else max(1.0, candidate.h / 2.0)
-    inv_rx2 = 1.0 / (rx * rx)
-    inv_ry2 = 1.0 / (ry * ry)
-    for y in range(height):
-        for x in range(width):
-            if ((x - candidate.cx) ** 2) * inv_rx2 + ((y - candidate.cy) ** 2) * inv_ry2 <= 1.0:
-                mask[y][x] = 1
-    return mask
+    return element_search_optimization_helpers.renderCandidateMaskImpl(
+        candidate,
+        width,
+        height,
+    )
 
 
 def _iou(a: list[list[int]], b: list[list[int]]) -> float:
@@ -438,7 +434,12 @@ def _iou(a: list[list[int]], b: list[list[int]]) -> float:
 
 
 def scoreCandidate(target: list[list[int]], candidate: Candidate) -> float:
-    return _iou(target, renderCandidateMask(candidate, len(target[0]), len(target)))
+    return element_search_optimization_helpers.scoreCandidateImpl(
+        target,
+        candidate,
+        render_candidate_mask_fn=renderCandidateMask,
+        iou_fn=_iou,
+    )
 
 
 def score_candidate(target: list[list[int]], candidate: Candidate) -> float:
@@ -447,26 +448,24 @@ def score_candidate(target: list[list[int]], candidate: Candidate) -> float:
 
 
 def randomNeighbor(base: Candidate, scale: float, rng: random.Random) -> Candidate:
-    return Candidate(base.shape, base.cx + rng.uniform(-scale, scale), base.cy + rng.uniform(-scale, scale), max(1.0, base.w + rng.uniform(-scale, scale) * 1.4), max(1.0, base.h + rng.uniform(-scale, scale) * 1.4))
+    return element_search_optimization_helpers.randomNeighborImpl(
+        base,
+        scale,
+        rng,
+        candidate_factory=Candidate,
+    )
 
 
 def optimizeElement(target: list[list[int]], init: Candidate, *, max_iter: int, plateau_limit: int, seed: int) -> tuple[Candidate, float]:
-    rng = random.Random(seed)
-    best = init
-    best_score = scoreCandidate(target, best)
-    scale = max(1.0, max(best.w, best.h) * 0.2)
-    plateau = 0
-    for _ in range(max_iter):
-        cand = randomNeighbor(best, scale, rng)
-        s = scoreCandidate(target, cand)
-        if s >= best_score:
-            best, best_score, plateau = cand, s, 0
-        else:
-            plateau += 1
-        if plateau > plateau_limit:
-            scale = max(0.5, scale * 0.7)
-            plateau = 0
-    return best, best_score
+    return element_search_optimization_helpers.optimizeElementImpl(
+        target,
+        init,
+        max_iter=max_iter,
+        plateau_limit=plateau_limit,
+        seed=seed,
+        score_candidate_fn=scoreCandidate,
+        random_neighbor_fn=randomNeighbor,
+    )
 
 
 def optimize_element(target: list[list[int]], init: Candidate, *, max_iter: int, plateau_limit: int, seed: int) -> tuple[Candidate, float]:

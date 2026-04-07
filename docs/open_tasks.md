@@ -145,6 +145,7 @@ focused on the actual project scope.
   - 2026-04-07: Quality-Pass-Iterationsschleife aus `convertRange` in neues Modul `src/iCCModules/imageCompositeConverterConversionQualityPass.py` ausgelagert (`runQualityPassesImpl`); `src/imageCompositeConverter.py` delegiert die Kandidatenselektion/Verbesserungslogik weiterhin kompatibel über injizierte Snapshot-/Bewertungs-Hooks.
   - 2026-04-07: Embedded-Raster-Fallbackpfad aus `convertRange` in neues Modul `src/iCCModules/imageCompositeConverterFallback.py` ausgelagert (`runEmbeddedRasterFallbackImpl`); `src/imageCompositeConverter.py` delegiert den No-`numpy`/`opencv`-Pfad weiterhin kompatibel über den neuen Wrapper `_runEmbeddedRasterFallback`.
   - 2026-04-07: Formales Geometriemodell (`RGBWert`, `Punkt`, `Kreis`, `Griff`, `Kelle`, `abstand`, `buildOrientedKelle`) in neues Modul `src/iCCModules/imageCompositeConverterForms.py` ausgelagert; `src/imageCompositeConverter.py` stellt die bisherigen API-Namen weiterhin kompatibel über Alias-Delegation bereit.
+  - 2026-04-07: Primitive Element-Suchhelfer (`renderCandidateMask`, `scoreCandidate`, `randomNeighbor`, `optimizeElement`) in neues Modul `src/iCCModules/imageCompositeConverterOptimizationElementSearch.py` ausgelagert; `src/imageCompositeConverter.py` delegiert weiterhin kompatibel über Wrapper (`camelCase` + `snake_case`).
   - Nächster geplanter Schritt: weitere IO-/Reporting-Teilstrecken in denselben kleinen Schritten extrahieren.
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.
