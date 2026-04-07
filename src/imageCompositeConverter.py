@@ -94,6 +94,7 @@ from src.iCCModules import imageCompositeConverterSuccessfulConversionQuality as
 from src.iCCModules import imageCompositeConverterSuccessfulConversionReport as successful_conversion_report_helpers
 from src.iCCModules import imageCompositeConverterBestlist as conversion_bestlist_helpers
 from src.iCCModules import imageCompositeConverterCli as cli_helpers
+from src.iCCModules import imageCompositeConverterIterationArtifacts as iteration_artifact_helpers
 from src.iCCModules import imageCompositeConverterElementValidation as element_validation_helpers
 from src.iCCModules import imageCompositeConverterElementMasks as element_mask_helpers
 from src.iCCModules import imageCompositeConverterElementErrorMetrics as element_error_metric_helpers
@@ -2762,19 +2763,13 @@ def runIterationPipeline(
         log_path = os.path.join(reports_out_dir, f"{base}_element_validation.log")
 
     def _writeValidationLog(lines: list[str]) -> None:
-        if not log_path:
-            return
-        payload = [
-            (
-                "run-meta: "
-                f"run_seed={int(Action.STOCHASTIC_RUN_SEED)} "
-                f"pass_seed_offset={int(Action.STOCHASTIC_SEED_OFFSET)} "
-                f"nonce_ns={time.time_ns()}"
-            )
-        ]
-        payload.extend(str(line) for line in lines)
-        with open(log_path, "w", encoding="utf-8") as f:
-            f.write("\n".join(payload).rstrip() + "\n")
+        iteration_artifact_helpers.writeValidationLogImpl(
+            log_path=log_path,
+            lines=lines,
+            run_seed=int(Action.STOCHASTIC_RUN_SEED),
+            pass_seed_offset=int(Action.STOCHASTIC_SEED_OFFSET),
+            time_ns_fn=time.time_ns,
+        )
 
     def _paramsSnapshot(snapshot: dict[str, object]) -> str:
         return json.dumps(snapshot, ensure_ascii=False, sort_keys=True, default=str)
@@ -2794,23 +2789,19 @@ def runIterationPipeline(
         _writeValidationLog(lines)
 
     def _writeAttemptArtifacts(svg_content: str, rendered_img=None, diff_img=None, *, failed: bool = False) -> None:
-        suffix = "_failed" if failed else ""
-        svg_path = os.path.join(svg_out_dir, f"{base}{suffix}.svg")
-        with open(svg_path, "w", encoding="utf-8") as f:
-            f.write(svg_content)
-
-        # Failed attempts are tracked in logs/leaderboard but should not emit
-        # additional diff artifacts.
-        if failed:
-            return
-
-        render = rendered_img
-        if render is None:
-            render = Action.render_svg_to_numpy(svg_content, w, h)
-        if render is None:
-            return
-        diff = diff_img if diff_img is not None else Action.create_diff_image(perc.img, render)
-        cv2.imwrite(os.path.join(diff_out_dir, f"{base}{suffix}_diff.png"), diff)
+        iteration_artifact_helpers.writeAttemptArtifactsImpl(
+            svg_out_dir=svg_out_dir,
+            diff_out_dir=diff_out_dir,
+            base_name=base,
+            svg_content=svg_content,
+            target_img=perc.img,
+            render_svg_to_numpy_fn=lambda svg: Action.render_svg_to_numpy(svg, w, h),
+            create_diff_image_fn=Action.create_diff_image,
+            cv2_module=cv2,
+            rendered_img=rendered_img,
+            diff_img=diff_img,
+            failed=failed,
+        )
 
     if params["mode"] == "semantic_badge":
         badge_params = Action.make_badge_params(w, h, perc.base_name, perc.img)
