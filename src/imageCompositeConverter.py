@@ -85,6 +85,7 @@ from src.iCCModules import imageCompositeConverterRendering as rendering_helpers
 from src.iCCModules import imageCompositeConverterRenderRuntime as rendering_runtime_helpers
 from src.iCCModules import imageCompositeConverterRenderDispatch as render_dispatch_helpers
 from src.iCCModules import imageCompositeConverterBatchReporting as batch_reporting_helpers
+from src.iCCModules import imageCompositeConverterConversionExecution as conversion_execution_helpers
 from src.iCCModules import imageCompositeConverterConversionRows as conversion_row_helpers
 from src.iCCModules import imageCompositeConverterAc08Reporting as ac08_reporting_helpers
 from src.iCCModules import imageCompositeConverterAc08Gate as ac08_gate_helpers
@@ -3637,100 +3638,26 @@ def convertRange(
     existing_donor_rows = _loadExistingConversionRows(out_root, folder_path)
 
     def _convertOne(filename: str, iteration_budget: int, badge_rounds: int) -> tuple[dict[str, object] | None, bool]:
-        image_path = os.path.join(folder_path, filename)
-        base = os.path.splitext(filename)[0]
-        log_file = os.path.join(reports_out_dir, f"{base}_element_validation.log")
-        try:
-            res = runIterationPipeline(
-                image_path,
-                csv_path,
-                max(1, int(iteration_budget)),
-                svg_out_dir,
-                diff_out_dir,
-                reports_out_dir,
-                debug_ac0811_dir,
-                debug_element_diff_dir,
-                badge_validation_rounds=max(1, int(badge_rounds)),
-            )
-        except Exception as exc:
-            batch_failures.append(
-                {
-                    "filename": filename,
-                    "status": "batch_error",
-                    "reason": type(exc).__name__,
-                    "details": str(exc),
-                    "log_file": os.path.basename(log_file),
-                }
-            )
-            with open(log_file, "w", encoding="utf-8") as f:
-                f.write(f"status=batch_error\nfilename={filename}\nreason={type(exc).__name__}\ndetails={exc}\n")
-            print(f"[WARN] {filename}: Batchlauf setzt nach Fehler fort ({type(exc).__name__}: {exc})")
-            return None, True
-        if not res:
-            details = _readValidationLogDetails(log_file)
-            status = details.get("status", "")
-            if status in {"render_failure", "batch_error"}:
-                batch_failures.append(
-                    {
-                        "filename": filename,
-                        "status": status,
-                        "reason": details.get("failure_reason", details.get("reason", "unknown")),
-                        "details": details.get("params_snapshot", details.get("details", "")),
-                        "log_file": os.path.basename(log_file),
-                    }
-                )
-                print(f"[WARN] {filename}: Fehler protokolliert, Batchlauf wird fortgesetzt ({status}).")
-                return None, True
-            if status == "semantic_mismatch":
-                batch_failures.append(
-                    {
-                        "filename": filename,
-                        "status": status,
-                        "reason": "semantic_mismatch",
-                        "details": details.get("issue", ""),
-                        "log_file": os.path.basename(log_file),
-                    }
-                )
-                print(f"[WARN] {filename}: Semantischer Fehlmatch, Batchlauf stoppt nach diesem Fehler.")
-                return None, True
-            return None, False
-
-        _base, _desc, params, best_iter, best_error = res
-        details = _readValidationLogDetails(log_file)
-        img = cv2.imread(image_path)
-        pixel_count = 1.0
-        width = 0
-        height = 0
-        mean_delta2 = float("inf")
-        std_delta2 = float("inf")
-        if img is not None:
-            height, width = img.shape[:2]
-            pixel_count = float(max(1, width * height))
-            svg_path = os.path.join(svg_out_dir, f"{os.path.splitext(filename)[0]}.svg")
-            if os.path.exists(svg_path):
-                try:
-                    with open(svg_path, "r", encoding="utf-8") as f:
-                        svg_content = f.read()
-                except OSError:
-                    svg_content = ""
-                if svg_content:
-                    rendered = Action.renderSvgToNumpy(svg_content, width, height)
-                    mean_delta2, std_delta2 = Action.calculateDelta2Stats(img, rendered)
-
-        return {
-            "filename": filename,
-            "params": params,
-            "best_iter": int(best_iter),
-            "best_error": float(best_error),
-            "convergence": str(details.get("convergence", "")).strip().lower(),
-            "error_per_pixel": float(best_error) / pixel_count,
-            "mean_delta2": float(mean_delta2),
-            "std_delta2": float(std_delta2),
-            "w": int(width),
-            "h": int(height),
-            "base": getBaseNameFromFile(os.path.splitext(filename)[0]).upper(),
-            "variant": os.path.splitext(filename)[0].upper(),
-        }, False
+        return conversion_execution_helpers.convertOneImpl(
+            filename=filename,
+            folder_path=folder_path,
+            csv_path=csv_path,
+            iteration_budget=iteration_budget,
+            badge_rounds=badge_rounds,
+            svg_out_dir=svg_out_dir,
+            diff_out_dir=diff_out_dir,
+            reports_out_dir=reports_out_dir,
+            debug_ac0811_dir=debug_ac0811_dir,
+            debug_element_diff_dir=debug_element_diff_dir,
+            run_iteration_pipeline_fn=runIterationPipeline,
+            read_validation_log_details_fn=_readValidationLogDetails,
+            render_svg_to_numpy_fn=Action.renderSvgToNumpy,
+            calculate_delta2_stats_fn=Action.calculateDelta2Stats,
+            get_base_name_from_file_fn=getBaseNameFromFile,
+            cv2_module=cv2,
+            append_batch_failure_fn=batch_failures.append,
+            print_fn=print,
+        )
 
     # Initial conversion pass for all forms.
     for filename in process_files:
