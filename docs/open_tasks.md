@@ -131,6 +131,7 @@ focused on the actual project scope.
   - 2026-04-07: Optionales CLI-Log-Capturing (`_optionalLogCapture` inkl. Tee-Stream) in `src/iCCModules/imageCompositeConverterCli.py` ausgelagert; `src/imageCompositeConverter.py` delegiert weiterhin kompatibel über den Modul-Context-Manager.
   - 2026-04-07: CLI-Diagnose-/Interaktiv-Helfer (`_formatUserDiagnostic`, `_promptInteractiveRange`) in `src/iCCModules/imageCompositeConverterCli.py` ausgelagert; der Monolith delegiert weiterhin kompatibel über Wrapper und Callback-Injektion.
   - 2026-04-07: Strategie-Switch-Reporting (`strategy_switch_template_transfers.csv`) in `src/iCCModules/imageCompositeConverterBatchReporting.py` ausgelagert (`writeStrategySwitchTemplateTransfersImpl`); `src/imageCompositeConverter.py` delegiert weiterhin kompatibel über den neuen Wrapper `_writeStrategySwitchTemplateTransfersReport`.
+  - 2026-04-07: Randomisierungs-Helfer (`_conversionRandom`) in neues Modul `src/iCCModules/imageCompositeConverterRandom.py` ausgelagert; `src/imageCompositeConverter.py` delegiert weiterhin kompatibel über Wrapper.
   - Nächster geplanter Schritt: weitere IO-/Reporting-Teilstrecken in denselben kleinen Schritten extrahieren.
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.
