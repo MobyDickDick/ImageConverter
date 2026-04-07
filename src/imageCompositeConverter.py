@@ -86,6 +86,7 @@ from src.iCCModules import imageCompositeConverterRenderRuntime as rendering_run
 from src.iCCModules import imageCompositeConverterRenderDispatch as render_dispatch_helpers
 from src.iCCModules import imageCompositeConverterBatchReporting as batch_reporting_helpers
 from src.iCCModules import imageCompositeConverterConversionExecution as conversion_execution_helpers
+from src.iCCModules import imageCompositeConverterConversionQualityPass as conversion_quality_pass_helpers
 from src.iCCModules import imageCompositeConverterConversionRows as conversion_row_helpers
 from src.iCCModules import imageCompositeConverterAc08Reporting as ac08_reporting_helpers
 from src.iCCModules import imageCompositeConverterAc08Gate as ac08_gate_helpers
@@ -3723,75 +3724,36 @@ def convertRange(
     # Iteratively refine unresolved quality cases while preserving all already
     # successful outputs (replace only when strictly better).
     strategy_logs: list[dict[str, object]] = []
-    for pass_idx in range(1, max_quality_passes + 1):
-        if stop_after_failure:
-            break
-        Action.STOCHASTIC_SEED_OFFSET = pass_idx
-        current_rows = [
-            row
-            for row in result_map.values()
-            if math.isfinite(float(row.get("error_per_pixel", float("inf"))))
-        ]
-        candidates = _selectOpenQualityCases(
-            current_rows,
-            allowed_error_per_pixel=allowed_error_pp,
-            skip_variants=skip_variants,
-        )
-        # Fallback to the historical selection when no explicit open set exists
-        # (e.g. without threshold config).
-        if not candidates:
-            candidates = _selectMiddleLowerTercile(current_rows)
-        if not candidates:
-            break
-
-        improved_in_pass = False
-        iteration_budget, badge_rounds = _iterationStrategyForPass(pass_idx, base_iterations)
-        if len(candidates) > 1 and not deterministic_order:
-            rng.shuffle(candidates)
-        for row in candidates:
-            filename = str(row["filename"])
-            adaptive_iteration_budget = _adaptiveIterationBudgetForQualityRow(row, iteration_budget)
-            new_row, failed = _convertOne(filename, iteration_budget=adaptive_iteration_budget, badge_rounds=badge_rounds)
-            if failed:
-                stop_after_failure = True
-                break
-            if new_row is None:
-                continue
-
-            improved, decision, prev_error_pp, new_error_pp, prev_mean_delta2, new_mean_delta2 = _evaluateQualityPassCandidate(
-                row,
-                new_row,
-            )
-            if improved:
-                result_map[filename] = new_row
-                improved_in_pass = True
-                variant = str(new_row.get("variant", "")).strip().upper()
-                if variant:
-                    conversion_bestlist_rows[variant] = dict(new_row)
-                    _storeConversionBestlistSnapshot(variant, new_row, svg_out_dir, reports_out_dir)
-            else:
-                variant = str(row.get("variant", "")).strip().upper()
-                if variant:
-                    _restoreConversionBestlistSnapshot(variant, svg_out_dir, reports_out_dir)
-
-            quality_logs.append(
-                {
-                    "pass": pass_idx,
-                    "filename": filename,
-                    "old_error_per_pixel": prev_error_pp,
-                    "new_error_per_pixel": new_error_pp,
-                    "old_mean_delta2": prev_mean_delta2,
-                    "new_mean_delta2": new_mean_delta2,
-                    "improved": improved,
-                    "decision": decision,
-                    "iteration_budget": adaptive_iteration_budget,
-                    "badge_validation_rounds": badge_rounds,
-                }
-            )
-
-        # Stop as soon as a full pass yields no strict improvement.
-        if stop_after_failure or not improved_in_pass:
-            break
+    stop_after_failure = conversion_quality_pass_helpers.runQualityPassesImpl(
+        max_quality_passes=max_quality_passes,
+        stop_after_failure=stop_after_failure,
+        deterministic_order=deterministic_order,
+        rng=rng,
+        base_iterations=base_iterations,
+        allowed_error_per_pixel=allowed_error_pp,
+        skip_variants=skip_variants,
+        result_map=result_map,
+        quality_logs=quality_logs,
+        conversion_bestlist_rows=conversion_bestlist_rows,
+        convert_one_fn=_convertOne,
+        select_open_quality_cases_fn=_selectOpenQualityCases,
+        select_middle_lower_tercile_fn=_selectMiddleLowerTercile,
+        iteration_strategy_for_pass_fn=_iterationStrategyForPass,
+        adaptive_iteration_budget_for_quality_row_fn=_adaptiveIterationBudgetForQualityRow,
+        evaluate_quality_pass_candidate_fn=_evaluateQualityPassCandidate,
+        store_conversion_bestlist_snapshot_fn=lambda variant, row: _storeConversionBestlistSnapshot(
+            variant,
+            row,
+            svg_out_dir,
+            reports_out_dir,
+        ),
+        restore_conversion_bestlist_snapshot_fn=lambda variant: _restoreConversionBestlistSnapshot(
+            variant,
+            svg_out_dir,
+            reports_out_dir,
+        ),
+        before_pass_fn=lambda pass_idx: setattr(Action, "STOCHASTIC_SEED_OFFSET", pass_idx),
+    )
 
     _writeQualityPassReport(reports_out_dir, quality_logs)
     _writeConversionBestlistMetrics(conversion_bestlist_path, conversion_bestlist_rows)
