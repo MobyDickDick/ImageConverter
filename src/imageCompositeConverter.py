@@ -3157,6 +3157,13 @@ def _writeBatchFailureSummary(reports_out_dir: str, failures: list[dict[str, str
     return batch_reporting_helpers.writeBatchFailureSummaryImpl(reports_out_dir, failures)
 
 
+def _writeStrategySwitchTemplateTransfersReport(
+    reports_out_dir: str,
+    strategy_rows: list[dict[str, object]],
+) -> None:
+    return batch_reporting_helpers.writeStrategySwitchTemplateTransfersImpl(reports_out_dir, strategy_rows)
+
+
 
 def _collectDescriptionFragments(raw_desc: dict[str, str], base_name: str, img_filename: str) -> list[dict[str, str]]:
     return audit_helpers.collectDescriptionFragmentsImpl(
@@ -4016,26 +4023,7 @@ def convertRange(
     _writeConversionBestlistMetrics(conversion_bestlist_path, conversion_bestlist_rows)
     _writeBatchFailureSummary(reports_out_dir, batch_failures)
     if strategy_logs:
-        strategy_path = os.path.join(reports_out_dir, "strategy_switch_template_transfers.csv")
-        with open(strategy_path, "w", encoding="utf-8", newline="") as f:
-            writer = csv.writer(f, delimiter=";")
-            writer.writerow([
-                "filename",
-                "donor_variant",
-                "rotation_deg",
-                "scale",
-                "old_error_per_pixel",
-                "new_error_per_pixel",
-            ])
-            for row in strategy_logs:
-                writer.writerow([
-                    row["filename"],
-                    row["donor_variant"],
-                    row["rotation_deg"],
-                    f"{float(row['scale']):.4f}",
-                    f"{float(row['old_error_per_pixel']):.8f}",
-                    f"{float(row['new_error_per_pixel']):.8f}",
-                ])
+        _writeStrategySwitchTemplateTransfersReport(reports_out_dir, strategy_logs)
 
     log_path = os.path.join(reports_out_dir, "Iteration_Log.csv")
     semantic_results: list[dict[str, object]] = []
