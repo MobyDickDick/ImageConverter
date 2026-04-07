@@ -95,6 +95,7 @@ from src.iCCModules import imageCompositeConverterBestlist as conversion_bestlis
 from src.iCCModules import imageCompositeConverterCli as cli_helpers
 from src.iCCModules import imageCompositeConverterOutputPaths as output_path_helpers
 from src.iCCModules import imageCompositeConverterIterationArtifacts as iteration_artifact_helpers
+from src.iCCModules import imageCompositeConverterIterationLog as iteration_log_helpers
 from src.iCCModules import imageCompositeConverterRandom as random_helpers
 from src.iCCModules import imageCompositeConverterElementValidation as element_validation_helpers
 from src.iCCModules import imageCompositeConverterElementMasks as element_mask_helpers
@@ -3135,6 +3136,19 @@ def _inRequestedRange(filename: str, start_ref: str, end_ref: str) -> bool:
 def _conversionRandom() -> random.Random:
     return random_helpers.conversionRandomImpl(seed_env_var="TINY_ICC_RANDOM_SEED")
 
+
+def _writeIterationLogAndCollectSemanticResults(
+    files: list[str],
+    result_map: dict[str, dict[str, object]],
+    log_path: str,
+) -> list[dict[str, object]]:
+    return iteration_log_helpers.writeIterationLogAndCollectSemanticImpl(
+        files=files,
+        result_map=result_map,
+        log_path=log_path,
+    )
+
+
 def _defaultConvertedSymbolsRoot() -> str:
     return output_path_helpers.defaultConvertedSymbolsRootImpl(module_file=__file__)
 
@@ -4020,34 +4034,7 @@ def convertRange(
         _writeStrategySwitchTemplateTransfersReport(reports_out_dir, strategy_logs)
 
     log_path = os.path.join(reports_out_dir, "Iteration_Log.csv")
-    semantic_results: list[dict[str, object]] = []
-    with open(log_path, mode="w", encoding="utf-8-sig", newline="") as f:
-        writer = csv.writer(f, delimiter=";")
-        writer.writerow(["Dateiname", "Gefundene Elemente", "Beste Iteration", "Diff-Score", "FehlerProPixel"])
-        for filename in files:
-            row = result_map.get(filename)
-            if row is None:
-                continue
-            params = dict(row["params"])
-            writer.writerow([
-                filename,
-                " + ".join(params.get("elements", [])),
-                int(row["best_iter"]),
-                f"{float(row['best_error']):.2f}",
-                f"{float(row['error_per_pixel']):.8f}",
-            ])
-
-            if params.get("mode") == "semantic_badge":
-                semantic_results.append(
-                    {
-                        "filename": filename,
-                        "base": row["base"],
-                        "variant": row["variant"],
-                        "w": int(row.get("w", 0)),
-                        "h": int(row.get("h", 0)),
-                        "error": float(row["best_error"]),
-                    }
-                )
+    semantic_results = _writeIterationLogAndCollectSemanticResults(files, result_map, log_path)
 
     _harmonizeSemanticSizeVariants(semantic_results, folder_path, svg_out_dir, reports_out_dir)
     semantic_audit_rows = [
