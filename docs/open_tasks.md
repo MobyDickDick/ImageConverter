@@ -123,7 +123,8 @@ focused on the actual project scope.
   - 2026-04-06: Successful-Conversion-Manifest-Update (`updateSuccessfulConversionsManifestWithMetrics`) in `src/iCCModules/imageCompositeConverterSuccessfulConversions.py` ausgelagert; `src/imageCompositeConverter.py` delegiert weiterhin kompatibel über den Modul-Entry-Point.
   - 2026-04-06: Badge-Param-Dispatch (`makeBadgeParams`) in neues Modul `src/iCCModules/imageCompositeConverterSemanticParams.py` ausgelagert; `src/imageCompositeConverter.py` delegiert kompatibel über den neuen Modul-Entry-Point und kapselt AR0100-/AC08-Dispatch in injizierbaren Helferaufrufen.
   - 2026-04-07: Fallback-Diff-Rendering (`_createDiffImageWithoutCv2`) in `src/iCCModules/imageCompositeConverterDiffing.py` ausgelagert; `src/imageCompositeConverter.py` behält den kompatiblen Wrapper und delegiert auf den neuen Modul-Helper.
-  - Nächster geplanter Schritt: weitere Badge-Param-/Semantik-Teilstrecken in denselben kleinen Schritten extrahieren.
+  - 2026-04-07: Raster-Embedding-/Quality-Config-Helfer (`_svgHrefMimeType`, `_renderEmbeddedRasterSvg`, `_qualityConfigPath`, `_loadQualityConfig`, `_writeQualityConfig`) in neues Modul `src/iCCModules/imageCompositeConverterQualityConfig.py` ausgelagert; `src/imageCompositeConverter.py` delegiert weiterhin kompatibel über Wrapper.
+  - Nächster geplanter Schritt: weitere IO-/Reporting-Teilstrecken in denselben kleinen Schritten extrahieren.
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.
   - `_create_diff_image_without_cv2` nutzt jetzt Context-Manager für beide `fitz.open(...)` Dokumente, damit Batch-Läufe keine unnötig offenen MuPDF-Dokumente ansammeln.
