@@ -628,42 +628,37 @@ def decomposeCircleWithStem(grayscale: list[list[int]], element: Element, candid
     return [rect, circle]
 
 def _missingRequiredImageDependencies() -> list[str]:
-    missing: list[str] = []
-    if cv2 is None:
-        missing.append("opencv-python-headless")
-    if np is None:
-        missing.append("numpy")
-    return missing
+    return dependency_helpers.missingRequiredImageDependenciesImpl(cv2_module=cv2, np_module=np)
 
 
 def _bootstrapRequiredImageDependencies() -> list[str]:
     missing = _missingRequiredImageDependencies()
-    if not missing:
-        return []
-
-    cmd = [sys.executable, "-m", "pip", "install", *missing]
-    print(f"[INFO] Fehlende Bild-Abhängigkeiten gefunden: {', '.join(missing)}")
-    print(f"[INFO] Installiere via: {' '.join(cmd)}")
-    try:
-        subprocess.run(cmd, check=True)
-    except subprocess.CalledProcessError as exc:
-        raise RuntimeError(
-            "Automatische Installation fehlgeschlagen. "
-            "Bitte Abhängigkeiten manuell installieren oder Proxy/Netzwerk prüfen."
-        ) from exc
-
-    # Re-import in current process so conversion can run without restart.
-    global cv2, np
-    if "opencv-python-headless" in missing:
+    def _load_cv2_module():
         import cv2 as _cv2
 
-        cv2 = _cv2
-    if "numpy" in missing:
+        return _cv2
+
+    def _load_np_module():
         import numpy as _np
 
-        np = _np
+        return _np
 
-    return missing
+    def _set_modules(*, cv2_module, np_module) -> None:
+        global cv2, np
+        if cv2_module is not None:
+            cv2 = cv2_module
+        if np_module is not None:
+            np = np_module
+
+    return dependency_helpers.bootstrapRequiredImageDependenciesImpl(
+        missing=missing,
+        sys_executable=sys.executable,
+        run_fn=subprocess.run,
+        print_fn=print,
+        load_cv2_fn=_load_cv2_module,
+        load_np_fn=_load_np_module,
+        set_modules_fn=_set_modules,
+    )
 
 
 def rgbToHex(rgb: np.ndarray) -> str:
