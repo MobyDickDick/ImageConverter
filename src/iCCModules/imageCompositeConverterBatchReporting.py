@@ -40,3 +40,33 @@ def writeBatchFailureSummaryImpl(reports_out_dir: str, failures: list[dict[str, 
                     failure.get("log_file", ""),
                 ]
             )
+
+
+def writeStrategySwitchTemplateTransfersImpl(
+    reports_out_dir: str,
+    strategy_rows: list[dict[str, object]],
+) -> None:
+    strategy_path = os.path.join(reports_out_dir, "strategy_switch_template_transfers.csv")
+    with open(strategy_path, "w", encoding="utf-8", newline="") as f:
+        writer = csv.writer(f, delimiter=";")
+        writer.writerow(
+            [
+                "filename",
+                "donor_variant",
+                "rotation_deg",
+                "scale",
+                "old_error_per_pixel",
+                "new_error_per_pixel",
+            ]
+        )
+        for row in strategy_rows:
+            writer.writerow(
+                [
+                    row.get("filename", ""),
+                    row.get("donor_variant", ""),
+                    row.get("rotation_deg", ""),
+                    f"{float(row.get('scale', 0.0)):.4f}",
+                    f"{float(row.get('old_error_per_pixel', 0.0)):.8f}",
+                    f"{float(row.get('new_error_per_pixel', 0.0)):.8f}",
+                ]
+            )
