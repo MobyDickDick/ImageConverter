@@ -87,6 +87,7 @@ from src.iCCModules import imageCompositeConverterRenderDispatch as render_dispa
 from src.iCCModules import imageCompositeConverterBatchReporting as batch_reporting_helpers
 from src.iCCModules import imageCompositeConverterConversionExecution as conversion_execution_helpers
 from src.iCCModules import imageCompositeConverterConversionQualityPass as conversion_quality_pass_helpers
+from src.iCCModules import imageCompositeConverterFallback as fallback_helpers
 from src.iCCModules import imageCompositeConverterConversionRows as conversion_row_helpers
 from src.iCCModules import imageCompositeConverterAc08Reporting as ac08_reporting_helpers
 from src.iCCModules import imageCompositeConverterAc08Gate as ac08_gate_helpers
@@ -3566,6 +3567,27 @@ def _tryTemplateTransfer(
     )
 
 
+def _runEmbeddedRasterFallback(
+    *,
+    files: list[str],
+    folder_path: str,
+    svg_out_dir: str,
+    diff_out_dir: str,
+    reports_out_dir: str,
+) -> None:
+    fallback_helpers.runEmbeddedRasterFallbackImpl(
+        files=files,
+        folder_path=folder_path,
+        svg_out_dir=svg_out_dir,
+        diff_out_dir=diff_out_dir,
+        reports_out_dir=reports_out_dir,
+        render_embedded_raster_svg_fn=_renderEmbeddedRasterSvg,
+        create_diff_image_without_cv2_fn=_createDiffImageWithoutCv2,
+        generate_conversion_overviews_fn=generateConversionOverviews,
+        fitz_module=fitz,
+    )
+
+
 def convertRange(
     folder_path: str,
     csv_path: str,
@@ -3596,28 +3618,13 @@ def convertRange(
         and (not normalized_selected_variants or os.path.splitext(f)[0].upper() in normalized_selected_variants)
     )
     if cv2 is None or np is None:
-        log_path = os.path.join(reports_out_dir, "Iteration_Log.csv")
-        with open(log_path, mode="w", encoding="utf-8-sig", newline="") as f:
-            writer = csv.writer(f, delimiter=";")
-            writer.writerow(["Dateiname", "Gefundene Elemente", "Beste Iteration", "Diff-Score", "FehlerProPixel"])
-            for filename in files:
-                stem = os.path.splitext(filename)[0]
-                image_path = os.path.join(folder_path, filename)
-                svg_content = _renderEmbeddedRasterSvg(image_path)
-                svg_path = os.path.join(svg_out_dir, f"{stem}.svg")
-                with open(svg_path, "w", encoding="utf-8") as svg_file:
-                    svg_file.write(svg_content)
-                if fitz is not None:
-                    diff = _createDiffImageWithoutCv2(image_path, svg_content)
-                    diff.save(os.path.join(diff_out_dir, f"{stem}_diff.png"))
-                writer.writerow([filename, "embedded-raster", 0, "0.00", "0.00000000"])
-        with open(os.path.join(reports_out_dir, "fallback_mode.txt"), "w", encoding="utf-8") as f:
-            f.write(
-                "Fallback-Modus aktiv: fehlende numpy/opencv-Abhängigkeiten; "
-                "SVG-Dateien wurden als eingebettete Rasterbilder erzeugt"
-                + (" und Differenzbilder via Pillow/PyMuPDF geschrieben.\n" if fitz is not None else ".\n")
-            )
-        generateConversionOverviews(diff_out_dir, svg_out_dir, reports_out_dir)
+        _runEmbeddedRasterFallback(
+            files=files,
+            folder_path=folder_path,
+            svg_out_dir=svg_out_dir,
+            diff_out_dir=diff_out_dir,
+            reports_out_dir=reports_out_dir,
+        )
         return out_root
     rng = _conversionRandom()
     run_seed = 0 if deterministic_order else rng.randrange(1 << 30)
