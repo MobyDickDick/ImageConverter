@@ -94,6 +94,7 @@ from src.iCCModules import imageCompositeConverterSuccessfulConversionQuality as
 from src.iCCModules import imageCompositeConverterSuccessfulConversionReport as successful_conversion_report_helpers
 from src.iCCModules import imageCompositeConverterBestlist as conversion_bestlist_helpers
 from src.iCCModules import imageCompositeConverterCli as cli_helpers
+from src.iCCModules import imageCompositeConverterOutputPaths as output_path_helpers
 from src.iCCModules import imageCompositeConverterIterationArtifacts as iteration_artifact_helpers
 from src.iCCModules import imageCompositeConverterElementValidation as element_validation_helpers
 from src.iCCModules import imageCompositeConverterElementMasks as element_mask_helpers
@@ -3142,12 +3143,11 @@ def _conversionRandom() -> random.Random:
     return random.Random(time.time_ns())
 
 def _defaultConvertedSymbolsRoot() -> str:
-    repo_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    return os.path.join(repo_root, "artifacts", "converted_images")
+    return output_path_helpers.defaultConvertedSymbolsRootImpl(module_file=__file__)
 
 
 def _convertedSvgOutputDir(output_root: str) -> str:
-    return os.path.join(output_root, "converted_svgs")
+    return output_path_helpers.convertedSvgOutputDirImpl(output_root)
 
 
 def _readValidationLogDetails(log_path: str) -> dict[str, str]:
@@ -3199,11 +3199,11 @@ def _writeSemanticAuditReport(reports_out_dir: str, audit_rows: list[dict[str, o
 
 
 def _diffOutputDir(output_root: str) -> str:
-    return os.path.join(output_root, "diff_pngs")
+    return output_path_helpers.diffOutputDirImpl(output_root)
 
 
 def _reportsOutputDir(output_root: str) -> str:
-    return os.path.join(output_root, "reports")
+    return output_path_helpers.reportsOutputDirImpl(output_root)
 
 
 def _isSemanticTemplateVariant(base_name: str, params: dict[str, object] | None = None) -> bool:
