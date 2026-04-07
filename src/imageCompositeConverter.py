@@ -60,6 +60,7 @@ from src.iCCModules import imageCompositeConverterSemanticCircleStyle as semanti
 from src.iCCModules import imageCompositeConverterSemanticRedrawVariation as semantic_redraw_variation_helpers
 from src.iCCModules import imageCompositeConverterQuality as quality_helpers
 from src.iCCModules import imageCompositeConverterQualityConfig as quality_config_helpers
+from src.iCCModules import imageCompositeConverterQualityThreshold as quality_threshold_helpers
 from src.iCCModules import imageCompositeConverterAudit as audit_helpers
 from src.iCCModules import imageCompositeConverterTransfer as transfer_helpers
 from src.iCCModules import imageCompositeConverterGeometryBrackets as geometry_bracket_helpers
@@ -3303,6 +3304,18 @@ def _writeQualityConfig(
     )
 
 
+def _resolveAllowedErrorPerPixel(
+    current_rows: list[dict[str, object]],
+    cfg: dict[str, object],
+) -> tuple[float, str, float, float]:
+    return quality_threshold_helpers.resolveAllowedErrorPerPixelImpl(
+        current_rows,
+        cfg,
+        quality_sort_key_fn=_qualitySortKey,
+        successful_threshold_fn=_computeSuccessfulConversionsErrorThreshold,
+    )
+
+
 def _qualitySortKey(row: dict[str, object]) -> float:
     return optimization_pass_helpers.qualitySortKeyImpl(row)
 
@@ -3769,26 +3782,11 @@ def convertRange(
         for row in result_map.values()
         if math.isfinite(float(row.get("error_per_pixel", float("inf"))))
     ]
-    ranked_rows = sorted(current_rows, key=_qualitySortKey)
-    first_cut = max(1, len(ranked_rows) // 3) if ranked_rows else 0
-    initial_top_tercile = ranked_rows[:first_cut]
-    initial_threshold = float(initial_top_tercile[-1]["error_per_pixel"]) if initial_top_tercile else float("inf")
-
-    successful_threshold = _computeSuccessfulConversionsErrorThreshold(current_rows)
-    threshold_source = "successful-conversions-mean-plus-2std"
-    if not math.isfinite(successful_threshold):
-        successful_threshold = initial_threshold
-        threshold_source = "initial-first-tercile"
-
     cfg = _loadQualityConfig(reports_out_dir)
-    allowed_error_pp = successful_threshold
-    cfg_value = cfg.get("allowed_error_per_pixel")
-    if cfg_value is not None:
-        try:
-            allowed_error_pp = max(0.0, float(cfg_value))
-            threshold_source = "manual-config"
-        except (TypeError, ValueError):
-            allowed_error_pp = successful_threshold
+    allowed_error_pp, threshold_source, _successful_threshold, _initial_threshold = _resolveAllowedErrorPerPixel(
+        current_rows,
+        cfg,
+    )
 
     # Global policy: do not freeze individual variants. Every quality pass keeps
     # all variants eligible so each run can re-evaluate with stochastic search
