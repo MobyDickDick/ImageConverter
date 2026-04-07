@@ -71,3 +71,33 @@ def test_store_and_restore_bestlist_snapshot_roundtrip(tmp_path: Path) -> None:
     assert (svg_out / f"{variant}.svg").read_text(encoding="utf-8") == "<svg>best</svg>"
     assert isinstance(restored, dict)
     assert restored.get("status") == "semantic_ok"
+
+
+def test_choose_conversion_bestlist_row_prefers_previous_and_restored_values() -> None:
+    selected = bestlist_helpers.chooseConversionBestlistRowImpl(
+        candidate_row={
+            "variant": "AC0800_S",
+            "best_iter": 7,
+            "best_error": 10.0,
+            "error_per_pixel": 0.1,
+            "mean_delta2": 2.0,
+            "std_delta2": 0.5,
+            "status": "semantic_mismatch",
+        },
+        previous_row={
+            "best_iter": 3,
+            "best_error": 5.0,
+            "error_per_pixel": 0.05,
+            "status": "semantic_ok",
+        },
+        restored_row={
+            "best_error": 4.0,
+            "mean_delta2": 1.1,
+        },
+    )
+
+    assert selected["best_iter"] == 3
+    assert selected["best_error"] == 4.0
+    assert selected["error_per_pixel"] == 0.05
+    assert selected["mean_delta2"] == 1.1
+    assert selected["status"] == "semantic_ok"

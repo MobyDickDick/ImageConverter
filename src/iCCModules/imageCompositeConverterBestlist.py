@@ -153,3 +153,22 @@ def isConversionBestlistCandidateBetterImpl(
 
     improved, *_ = evaluate_candidate_fn(previous_row, candidate_row)
     return bool(improved)
+
+
+def chooseConversionBestlistRowImpl(
+    candidate_row: dict[str, object],
+    previous_row: dict[str, object] | None,
+    restored_row: dict[str, object] | None,
+) -> dict[str, object]:
+    if previous_row is None:
+        return dict(candidate_row)
+
+    selected_row = dict(candidate_row)
+    for key in ("best_iter", "best_error", "error_per_pixel", "mean_delta2", "std_delta2", "status"):
+        if key in previous_row:
+            selected_row[key] = previous_row[key]
+    if isinstance(restored_row, dict):
+        for key in ("best_iter", "best_error", "error_per_pixel", "mean_delta2", "std_delta2", "status"):
+            if key in restored_row:
+                selected_row[key] = restored_row[key]
+    return selected_row
