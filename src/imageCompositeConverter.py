@@ -103,6 +103,7 @@ from src.iCCModules import imageCompositeConverterOutputPaths as output_path_hel
 from src.iCCModules import imageCompositeConverterIterationArtifacts as iteration_artifact_helpers
 from src.iCCModules import imageCompositeConverterIterationLog as iteration_log_helpers
 from src.iCCModules import imageCompositeConverterConversionReporting as conversion_reporting_helpers
+from src.iCCModules import imageCompositeConverterConversionFinalization as conversion_finalization_helpers
 from src.iCCModules import imageCompositeConverterRandom as random_helpers
 from src.iCCModules import imageCompositeConverterLegacyApi as legacy_api_helpers
 from src.iCCModules import imageCompositeConverterElementValidation as element_validation_helpers
@@ -3628,25 +3629,28 @@ def convertRange(
         before_pass_fn=lambda pass_idx: setattr(Action, "STOCHASTIC_SEED_OFFSET", pass_idx),
     )
 
-    _writeQualityPassReport(reports_out_dir, quality_logs)
-    _writeConversionBestlistMetrics(conversion_bestlist_path, conversion_bestlist_rows)
-    _writeBatchFailureSummary(reports_out_dir, batch_failures)
-    if strategy_logs:
-        _writeStrategySwitchTemplateTransfersReport(reports_out_dir, strategy_logs)
-
-    log_path = os.path.join(reports_out_dir, "Iteration_Log.csv")
-    semantic_results = _writeIterationLogAndCollectSemanticResults(files, result_map, log_path)
-
-    _harmonizeSemanticSizeVariants(semantic_results, folder_path, svg_out_dir, reports_out_dir)
-    _runPostConversionReporting(
+    conversion_finalization_helpers.runConversionFinalizationImpl(
+        reports_out_dir=reports_out_dir,
+        quality_logs=quality_logs,
+        conversion_bestlist_path=conversion_bestlist_path,
+        conversion_bestlist_rows=conversion_bestlist_rows,
+        batch_failures=batch_failures,
+        strategy_logs=strategy_logs,
+        files=files,
+        result_map=result_map,
         folder_path=folder_path,
         csv_path=csv_path,
         iterations=iterations,
         svg_out_dir=svg_out_dir,
         diff_out_dir=diff_out_dir,
-        reports_out_dir=reports_out_dir,
         normalized_selected_variants=normalized_selected_variants,
-        result_map=result_map,
+        write_quality_pass_report_fn=_writeQualityPassReport,
+        write_conversion_bestlist_metrics_fn=_writeConversionBestlistMetrics,
+        write_batch_failure_summary_fn=_writeBatchFailureSummary,
+        write_strategy_switch_template_transfers_report_fn=_writeStrategySwitchTemplateTransfersReport,
+        write_iteration_log_and_collect_semantic_results_fn=_writeIterationLogAndCollectSemanticResults,
+        harmonize_semantic_size_variants_fn=_harmonizeSemanticSizeVariants,
+        run_post_conversion_reporting_fn=_runPostConversionReporting,
     )
 
     Action.STOCHASTIC_SEED_OFFSET = 0
