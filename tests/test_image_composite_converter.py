@@ -254,6 +254,48 @@ def test_convert_image_svg_target_uses_embedded_raster_fallback(monkeypatch: pyt
     assert dst.read_text(encoding="utf-8") == "<svg>ok</svg>"
 
 
+def test_convert_range_uses_embedded_raster_fallback_without_numpy_cv2(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+) -> None:
+    images_dir = tmp_path / "images"
+    images_dir.mkdir()
+    (images_dir / "AC0812_L.jpg").write_bytes(b"jpg")
+    csv_path = tmp_path / "mapping.csv"
+    csv_path.write_text("Wurzelform;Beschreibung\nAC0812;fallback\n", encoding="utf-8")
+    output_root = tmp_path / "out"
+
+    monkeypatch.setattr(image_composite_converter, "cv2", None)
+    monkeypatch.setattr(image_composite_converter, "np", None)
+    monkeypatch.setattr(image_composite_converter, "fitz", None)
+    monkeypatch.setattr(image_composite_converter, "_inRequestedRange", lambda *_args, **_kwargs: True)
+    monkeypatch.setattr(image_composite_converter, "_renderEmbeddedRasterSvg", lambda _path: "<svg/>")
+
+    calls: dict[str, str] = {}
+
+    def fake_overviews(diff_dir: str, svg_dir: str, reports_dir: str):
+        calls["diff"] = diff_dir
+        calls["svg"] = svg_dir
+        calls["reports"] = reports_dir
+        return {}
+
+    monkeypatch.setattr(image_composite_converter, "generateConversionOverviews", fake_overviews)
+
+    result = image_composite_converter.convertRange(
+        str(images_dir),
+        str(csv_path),
+        iterations=1,
+        start_ref="AC0812",
+        end_ref="AC0812",
+        output_root=str(output_root),
+    )
+
+    assert result == str(output_root)
+    assert (output_root / "converted_svgs" / "AC0812_L.svg").read_text(encoding="utf-8") == "<svg/>"
+    assert (output_root / "reports" / "fallback_mode.txt").exists()
+    assert calls["reports"] == str(output_root / "reports")
+
+
 def test_convert_image_variants_delegates_to_convert_range(monkeypatch: pytest.MonkeyPatch) -> None:
     """Legacy variants shim should forward positional/keyword args to convertRange."""
     calls: list[tuple[tuple[object, ...], dict[str, object]]] = []
