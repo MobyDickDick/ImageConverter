@@ -4508,31 +4508,18 @@ def _resolveCliCsvAndOutput(args: argparse.Namespace) -> tuple[str, str | None]:
 
 
 def _formatUserDiagnostic(exc: BaseException) -> str:
-    """Render structured loader/runtime errors into one compact CLI message."""
-    if isinstance(exc, DescriptionMappingError):
-        if exc.span is not None:
-            return f"{exc.message} Ort: {exc.span.format()}."
-        return exc.message
-    return str(exc)
+    return cli_helpers.formatUserDiagnosticImpl(
+        exc,
+        description_mapping_error_type=DescriptionMappingError,
+    )
 
 
 def _promptInteractiveRange(args: argparse.Namespace) -> tuple[str, str]:
-    current_start = str(args.start or "").strip()
-    current_end = str(args.end or "").strip()
-    prompt_start = f"Namen von [{current_start}]: " if current_start else "Namen von: "
-    prompt_end = f"Namen bis [{current_end}]: " if current_end else "Namen bis: "
-
-    start_value = input(prompt_start).strip() or current_start
-    end_value = input(prompt_end).strip() or current_end
-    if not end_value:
-        end_value = start_value
-
-    shared = _sharedPartialRangeToken(start_value, end_value)
-    if shared and _extractRefParts(start_value) is None and _extractRefParts(end_value) is None:
-        print(f"[INFO] Verwende Teilstring-Filter '{shared}' für die Auswahl der Bilder.")
-    else:
-        print(f"[INFO] Verwende Bereich von '{start_value or '(Anfang)'}' bis '{end_value or '(Ende)'}'.")
-    return start_value, end_value
+    return cli_helpers.promptInteractiveRangeImpl(
+        args,
+        shared_partial_range_token_fn=_sharedPartialRangeToken,
+        extract_ref_parts_fn=_extractRefParts,
+    )
 
 
 def main(argv: list[str] | None = None) -> int:

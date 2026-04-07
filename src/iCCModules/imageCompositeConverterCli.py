@@ -224,6 +224,45 @@ def resolveCliCsvAndOutputImpl(
     return csv_path, output_dir
 
 
+def formatUserDiagnosticImpl(
+    exc: BaseException,
+    *,
+    description_mapping_error_type,
+) -> str:
+    """Render structured loader/runtime errors into one compact CLI message."""
+    if isinstance(exc, description_mapping_error_type):
+        span = getattr(exc, "span", None)
+        if span is not None:
+            return f"{exc.message} Ort: {span.format()}."
+        return str(getattr(exc, "message", str(exc)))
+    return str(exc)
+
+
+def promptInteractiveRangeImpl(
+    args: argparse.Namespace,
+    *,
+    shared_partial_range_token_fn,
+    extract_ref_parts_fn,
+) -> tuple[str, str]:
+    """Prompt the user for start/end filters while preserving existing defaults."""
+    current_start = str(args.start or "").strip()
+    current_end = str(args.end or "").strip()
+    prompt_start = f"Namen von [{current_start}]: " if current_start else "Namen von: "
+    prompt_end = f"Namen bis [{current_end}]: " if current_end else "Namen bis: "
+
+    start_value = input(prompt_start).strip() or current_start
+    end_value = input(prompt_end).strip() or current_end
+    if not end_value:
+        end_value = start_value
+
+    shared = shared_partial_range_token_fn(start_value, end_value)
+    if shared and extract_ref_parts_fn(start_value) is None and extract_ref_parts_fn(end_value) is None:
+        print(f"[INFO] Verwende Teilstring-Filter '{shared}' für die Auswahl der Bilder.")
+    else:
+        print(f"[INFO] Verwende Bereich von '{start_value or '(Anfang)'}' bis '{end_value or '(Ende)'}'.")
+    return start_value, end_value
+
+
 class TeeTextIO(io.TextIOBase):
     """Mirror text writes to multiple streams."""
 

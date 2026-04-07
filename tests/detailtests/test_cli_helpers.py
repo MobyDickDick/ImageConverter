@@ -5,6 +5,7 @@ import contextlib
 import io
 import sys
 from pathlib import Path
+from unittest import mock
 
 from src.iCCModules import imageCompositeConverterCli as cli_helpers
 
@@ -64,3 +65,35 @@ def test_optional_log_capture_impl_writes_stdout_and_stderr(tmp_path: Path) -> N
     assert "hello-out" in log_content
     assert "hello-err" in log_content
     assert "capture.log" in log_content
+
+
+def test_format_user_diagnostic_impl_formats_mapping_span() -> None:
+    class FakeSpan:
+        def format(self) -> str:
+            return "input.csv:4:2"
+
+    class FakeMappingError(Exception):
+        def __init__(self) -> None:
+            super().__init__("failed")
+            self.message = "Ungültige Zeile"
+            self.span = FakeSpan()
+
+    rendered = cli_helpers.formatUserDiagnosticImpl(
+        FakeMappingError(),
+        description_mapping_error_type=FakeMappingError,
+    )
+    assert rendered == "Ungültige Zeile Ort: input.csv:4:2."
+
+
+def test_prompt_interactive_range_impl_uses_substring_filter_message(capsys) -> None:
+    args = argparse.Namespace(start="", end="")
+    with mock.patch("builtins.input", side_effect=["AC08", "A08"]):
+        start_value, end_value = cli_helpers.promptInteractiveRangeImpl(
+            args,
+            shared_partial_range_token_fn=lambda _start, _end: "A08",
+            extract_ref_parts_fn=lambda _value: None,
+        )
+
+    assert (start_value, end_value) == ("AC08", "A08")
+    captured = capsys.readouterr()
+    assert "Teilstring-Filter 'A08'" in captured.out
