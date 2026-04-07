@@ -147,6 +147,7 @@ focused on the actual project scope.
   - 2026-04-07: Formales Geometriemodell (`RGBWert`, `Punkt`, `Kreis`, `Griff`, `Kelle`, `abstand`, `buildOrientedKelle`) in neues Modul `src/iCCModules/imageCompositeConverterForms.py` ausgelagert; `src/imageCompositeConverter.py` stellt die bisherigen API-Namen weiterhin kompatibel über Alias-Delegation bereit.
   - 2026-04-07: Primitive Element-Suchhelfer (`renderCandidateMask`, `scoreCandidate`, `randomNeighbor`, `optimizeElement`) in neues Modul `src/iCCModules/imageCompositeConverterOptimizationElementSearch.py` ausgelagert; `src/imageCompositeConverter.py` delegiert weiterhin kompatibel über Wrapper (`camelCase` + `snake_case`).
   - 2026-04-07: Runtime-Dependency-Bootstrap (`_missingRequiredImageDependencies`, `_bootstrapRequiredImageDependencies`) in `src/iCCModules/imageCompositeConverterDependencies.py` ausgelagert; `src/imageCompositeConverter.py` delegiert weiterhin kompatibel über Wrapper/Callback-Injektion für Re-Import und Global-Update.
+  - 2026-04-07: Initiale Batch-Konvertierungsschleife aus `convertRange` in neues Modul `src/iCCModules/imageCompositeConverterConversionInitialPass.py` ausgelagert (`runInitialConversionPassImpl`); `src/imageCompositeConverter.py` delegiert den Erstpass (Donor-Auswahl, Template-Transfer, Bestlist-Snapshot-Fallback) weiterhin kompatibel über injizierte Hooks.
   - Nächster geplanter Schritt: weitere IO-/Reporting-Teilstrecken in denselben kleinen Schritten extrahieren.
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.

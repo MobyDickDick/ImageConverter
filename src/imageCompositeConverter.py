@@ -86,6 +86,7 @@ from src.iCCModules import imageCompositeConverterRenderRuntime as rendering_run
 from src.iCCModules import imageCompositeConverterRenderDispatch as render_dispatch_helpers
 from src.iCCModules import imageCompositeConverterBatchReporting as batch_reporting_helpers
 from src.iCCModules import imageCompositeConverterConversionExecution as conversion_execution_helpers
+from src.iCCModules import imageCompositeConverterConversionInitialPass as conversion_initial_pass_helpers
 from src.iCCModules import imageCompositeConverterConversionQualityPass as conversion_quality_pass_helpers
 from src.iCCModules import imageCompositeConverterFallback as fallback_helpers
 from src.iCCModules import imageCompositeConverterConversionRows as conversion_row_helpers
@@ -3542,42 +3543,33 @@ def convertRange(
         )
 
     # Initial conversion pass for all forms.
-    for filename in process_files:
-        row, failed = _convertOne(filename, iteration_budget=base_iterations, badge_rounds=6)
-        if failed:
-            stop_after_failure = True
-            break
-        if row is None:
-            continue
-
-        donor_rows = [
-            prev
-            for key, prev in result_map.items()
-            if key != filename and math.isfinite(float(prev.get("error_per_pixel", float("inf"))))
-        ]
-        donor_rows.extend(prev for prev in existing_donor_rows if str(prev.get("filename", "")) != filename)
-        if donor_rows:
-            transferred, _detail = _tryTemplateTransfer(
-                target_row=row,
-                donor_rows=donor_rows,
-                folder_path=folder_path,
-                svg_out_dir=svg_out_dir,
-                diff_out_dir=diff_out_dir,
-                rng=rng,
-                deterministic_order=deterministic_order,
-            )
-            if transferred is not None and float(transferred.get("error_per_pixel", float("inf"))) + 1e-9 < float(row.get("error_per_pixel", float("inf"))):
-                row = transferred
-
-        variant = str(row.get("variant", "")).strip().upper()
-        previous_row = conversion_bestlist_rows.get(variant)
-        if _isConversionBestlistCandidateBetter(previous_row, row):
-            result_map[filename] = row
-            conversion_bestlist_rows[variant] = dict(row)
-            _storeConversionBestlistSnapshot(variant, row, svg_out_dir, reports_out_dir)
-        else:
-            restored_row = _restoreConversionBestlistSnapshot(variant, svg_out_dir, reports_out_dir)
-            result_map[filename] = _chooseConversionBestlistRow(row, previous_row, restored_row)
+    stop_after_failure = conversion_initial_pass_helpers.runInitialConversionPassImpl(
+        process_files=process_files,
+        result_map=result_map,
+        existing_donor_rows=existing_donor_rows,
+        conversion_bestlist_rows=conversion_bestlist_rows,
+        folder_path=folder_path,
+        svg_out_dir=svg_out_dir,
+        diff_out_dir=diff_out_dir,
+        rng=rng,
+        deterministic_order=deterministic_order,
+        base_iterations=base_iterations,
+        convert_one_fn=_convertOne,
+        try_template_transfer_fn=_tryTemplateTransfer,
+        is_conversion_bestlist_candidate_better_fn=_isConversionBestlistCandidateBetter,
+        store_conversion_bestlist_snapshot_fn=lambda variant, row: _storeConversionBestlistSnapshot(
+            variant,
+            row,
+            svg_out_dir,
+            reports_out_dir,
+        ),
+        restore_conversion_bestlist_snapshot_fn=lambda variant: _restoreConversionBestlistSnapshot(
+            variant,
+            svg_out_dir,
+            reports_out_dir,
+        ),
+        choose_conversion_bestlist_row_fn=_chooseConversionBestlistRow,
+    )
 
     current_rows = [
         row
