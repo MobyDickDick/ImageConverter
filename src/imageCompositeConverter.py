@@ -59,6 +59,7 @@ from src.iCCModules import imageCompositeConverterSemanticAdaptiveLocks as seman
 from src.iCCModules import imageCompositeConverterSemanticCircleStyle as semantic_circle_style_helpers
 from src.iCCModules import imageCompositeConverterSemanticRedrawVariation as semantic_redraw_variation_helpers
 from src.iCCModules import imageCompositeConverterQuality as quality_helpers
+from src.iCCModules import imageCompositeConverterQualityConfig as quality_config_helpers
 from src.iCCModules import imageCompositeConverterAudit as audit_helpers
 from src.iCCModules import imageCompositeConverterTransfer as transfer_helpers
 from src.iCCModules import imageCompositeConverterGeometryBrackets as geometry_bracket_helpers
@@ -3243,43 +3244,25 @@ def _sniffRasterSize(path: str | Path) -> tuple[int, int]:
 
 
 def _svgHrefMimeType(path: str | Path) -> str:
-    ext = Path(path).suffix.lower()
-    return {
-        ".jpg": "image/jpeg",
-        ".jpeg": "image/jpeg",
-        ".png": "image/png",
-        ".gif": "image/gif",
-        ".bmp": "image/bmp",
-    }.get(ext, "application/octet-stream")
+    return quality_config_helpers.svgHrefMimeTypeImpl(path)
 
 
 def _renderEmbeddedRasterSvg(input_path: str | Path) -> str:
-    width, height = _sniffRasterSize(input_path)
-    raw = Path(input_path).read_bytes()
-    encoded = base64.b64encode(raw).decode("ascii")
-    mime = _svgHrefMimeType(input_path)
-    return (
-        f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" '
-        f'viewBox="0 0 {width} {height}">\n'
-        f'  <image width="{width}" height="{height}" href="data:{mime};base64,{encoded}"/>\n'
-        "</svg>\n"
+    return quality_config_helpers.renderEmbeddedRasterSvgImpl(
+        input_path,
+        sniff_raster_size_fn=_sniffRasterSize,
     )
 
 
 def _qualityConfigPath(reports_out_dir: str) -> str:
-    return os.path.join(reports_out_dir, "quality_tercile_config.json")
+    return quality_config_helpers.qualityConfigPathImpl(reports_out_dir)
 
 
 def _loadQualityConfig(reports_out_dir: str) -> dict[str, object]:
-    path = _qualityConfigPath(reports_out_dir)
-    if not os.path.exists(path):
-        return {}
-    try:
-        with open(path, "r", encoding="utf-8") as f:
-            payload = json.load(f)
-    except (json.JSONDecodeError, OSError):
-        return {}
-    return payload if isinstance(payload, dict) else {}
+    return quality_config_helpers.loadQualityConfigImpl(
+        reports_out_dir,
+        quality_config_path_fn=_qualityConfigPath,
+    )
 
 
 def _writeQualityConfig(
@@ -3289,20 +3272,13 @@ def _writeQualityConfig(
     skipped_variants: list[str],
     source: str,
 ) -> None:
-    path = _qualityConfigPath(reports_out_dir)
-    normalized_error_pp = float(allowed_error_per_pixel) if math.isfinite(allowed_error_per_pixel) else 0.0
-    payload = {
-        "allowed_error_per_pixel": float(max(0.0, normalized_error_pp)),
-        "skip_variants": sorted(set(skipped_variants)),
-        "notes": (
-            "Varianten in skip_variants werden in Folge-Pässen nicht erneut konvertiert. "
-            "Loeschen der Datei setzt den Ablauf zurueck, dann werden wieder alle Bitmaps bearbeitet."
-        ),
-        "source": source,
-    }
-    with open(path, "w", encoding="utf-8") as f:
-        json.dump(payload, f, ensure_ascii=False, indent=2)
-        f.write("\n")
+    quality_config_helpers.writeQualityConfigImpl(
+        reports_out_dir,
+        allowed_error_per_pixel=allowed_error_per_pixel,
+        skipped_variants=skipped_variants,
+        source=source,
+        quality_config_path_fn=_qualityConfigPath,
+    )
 
 
 def _qualitySortKey(row: dict[str, object]) -> float:
