@@ -2628,6 +2628,38 @@ def test_summarize_previous_good_ac08_variants_detects_regressions(tmp_path: Pat
     assert summary["missing"] == ["AC0811_L"]
 
 
+def test_emit_ac08_success_gate_status_warns_for_failed_criteria(capsys: pytest.CaptureFixture[str]) -> None:
+    image_composite_converter._emitAc08SuccessGateStatus(
+        {
+            "criterion_no_new_batch_aborts": False,
+            "criterion_no_accepted_regressions": True,
+            "criterion_validation_rounds_recorded": False,
+            "criterion_regression_set_improved": True,
+            "criterion_stable_families_not_worse": True,
+            "mean_validation_rounds_per_file": 1.25,
+        }
+    )
+    out = capsys.readouterr().out
+    assert "[WARN] AC08 success gate failed:" in out
+    assert "criterion_no_new_batch_aborts, criterion_validation_rounds_recorded" in out
+    assert "mean_validation_rounds_per_file=1.250" in out
+
+
+def test_emit_ac08_success_gate_status_infos_for_passing_gate(capsys: pytest.CaptureFixture[str]) -> None:
+    image_composite_converter._emitAc08SuccessGateStatus(
+        {
+            "criterion_no_new_batch_aborts": True,
+            "criterion_no_accepted_regressions": True,
+            "criterion_validation_rounds_recorded": True,
+            "criterion_regression_set_improved": True,
+            "criterion_stable_families_not_worse": True,
+            "mean_validation_rounds_per_file": 2.0,
+        }
+    )
+    out = capsys.readouterr().out
+    assert "[INFO] AC08 success gate passed (mean_validation_rounds_per_file=2.000)." in out
+
+
 def test_parse_description_extracts_documented_alias_refs() -> None:
     raw = {"GE0000": "Kreisform wie AC0010 und Kante wie in AC0501"}
     _desc, params = image_composite_converter.Reflection(raw).parse_description("GE0000", "GE0000_S.jpg")

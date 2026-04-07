@@ -86,6 +86,7 @@ from src.iCCModules import imageCompositeConverterRenderDispatch as render_dispa
 from src.iCCModules import imageCompositeConverterBatchReporting as batch_reporting_helpers
 from src.iCCModules import imageCompositeConverterConversionRows as conversion_row_helpers
 from src.iCCModules import imageCompositeConverterAc08Reporting as ac08_reporting_helpers
+from src.iCCModules import imageCompositeConverterAc08Gate as ac08_gate_helpers
 from src.iCCModules import imageCompositeConverterRanking as ranking_helpers
 from src.iCCModules import imageCompositeConverterThresholding as thresholding_helpers
 from src.iCCModules import imageCompositeConverterSuccessfulConversions as successful_conversions_helpers
@@ -4060,29 +4061,7 @@ def convertRange(
         reports_out_dir,
         selected_variants=sorted(normalized_selected_variants),
     )
-    if ac08_success_gate is not None:
-        failed_criteria = [
-            key
-            for key in (
-                "criterion_no_new_batch_aborts",
-                "criterion_no_accepted_regressions",
-                "criterion_validation_rounds_recorded",
-                "criterion_regression_set_improved",
-                "criterion_stable_families_not_worse",
-            )
-            if not bool(ac08_success_gate.get(key, False))
-        ]
-        if failed_criteria:
-            print(
-                "[WARN] AC08 success gate failed: "
-                + ", ".join(failed_criteria)
-                + f" (mean_validation_rounds_per_file={float(ac08_success_gate.get('mean_validation_rounds_per_file', 0.0)):.3f})"
-            )
-        else:
-            print(
-                "[INFO] AC08 success gate passed "
-                f"(mean_validation_rounds_per_file={float(ac08_success_gate.get('mean_validation_rounds_per_file', 0.0)):.3f})."
-            )
+    _emitAc08SuccessGateStatus(ac08_success_gate)
     if SUCCESSFUL_CONVERSIONS_MANIFEST.exists():
         updateSuccessfulConversionsManifestWithMetrics(
             folder_path=folder_path,
@@ -4226,6 +4205,10 @@ def _writeAc08SuccessCriteriaReport(
         ac08_regression_set_name=AC08_REGRESSION_SET_NAME,
         summarize_previous_good_fn=_summarizePreviousGoodAc08Variants,
     )
+
+
+def _emitAc08SuccessGateStatus(ac08_success_gate: dict[str, object] | None) -> None:
+    ac08_gate_helpers.emitAc08SuccessGateStatusImpl(ac08_success_gate, print_fn=print)
 
 
 def _writeAc08WeakFamilyStatusReport(
