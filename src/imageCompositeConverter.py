@@ -99,6 +99,7 @@ from src.iCCModules import imageCompositeConverterIterationArtifacts as iteratio
 from src.iCCModules import imageCompositeConverterIterationLog as iteration_log_helpers
 from src.iCCModules import imageCompositeConverterConversionReporting as conversion_reporting_helpers
 from src.iCCModules import imageCompositeConverterRandom as random_helpers
+from src.iCCModules import imageCompositeConverterLegacyApi as legacy_api_helpers
 from src.iCCModules import imageCompositeConverterElementValidation as element_validation_helpers
 from src.iCCModules import imageCompositeConverterElementMasks as element_mask_helpers
 from src.iCCModules import imageCompositeConverterElementErrorMetrics as element_error_metric_helpers
@@ -4576,26 +4577,20 @@ def convertImage(input_path: str, output_path: str, *, max_iter: int = 120, plat
     - For SVG targets or missing image deps, preserve the historical embedded-raster fallback.
     """
     del max_iter, plateau_limit, seed
-    target = Path(output_path)
-    target.parent.mkdir(parents=True, exist_ok=True)
-
-    if target.suffix.lower() == ".svg" or cv2 is None or np is None:
-        target.write_text(_renderEmbeddedRasterSvg(input_path), encoding="utf-8")
-        return target
-
-    img = cv2.imread(str(input_path))
-    if img is None:
-        raise FileNotFoundError(f"Bild konnte nicht gelesen werden: {input_path}")
-    regions = detectRelevantRegions(img)
-    annotated = annotateImageRegions(img, regions)
-    cv2.imwrite(str(target), annotated)
-    target.with_suffix(".json").write_text(json.dumps(regions, ensure_ascii=False, indent=2), encoding="utf-8")
-    return target
+    return legacy_api_helpers.convertImageImpl(
+        input_path=input_path,
+        output_path=output_path,
+        render_embedded_raster_svg_fn=_renderEmbeddedRasterSvg,
+        detect_relevant_regions_fn=detectRelevantRegions,
+        annotate_image_regions_fn=annotateImageRegions,
+        cv2_module=cv2,
+        np_module=np,
+    )
 
 
 def convertImageVariants(*args, **kwargs):
     """Compatibility shim kept for tooling imports."""
-    return convertRange(*args, **kwargs)
+    return legacy_api_helpers.convertImageVariantsImpl(*args, convert_range_fn=convertRange, **kwargs)
 OPTIONAL_DEPENDENCY_ERRORS = dependency_helpers.OPTIONAL_DEPENDENCY_ERRORS
 
 # Backward-compatible snake_case aliases expected by legacy tests/tooling.
