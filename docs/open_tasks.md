@@ -134,6 +134,7 @@ focused on the actual project scope.
   - 2026-04-07: Randomisierungs-Helfer (`_conversionRandom`) in neues Modul `src/iCCModules/imageCompositeConverterRandom.py` ausgelagert; `src/imageCompositeConverter.py` delegiert weiterhin kompatibel über Wrapper.
   - 2026-04-07: Iteration-Log-/Semantik-Result-Helfer (`_writeIterationLogAndCollectSemanticResults`) in neues Modul `src/iCCModules/imageCompositeConverterIterationLog.py` ausgelagert; `convertRange` delegiert weiterhin kompatibel über den neuen Wrapper und die Log/Reporting-Regression ist per Detailtest abgesichert.
   - 2026-04-07: AC08-Gate-Statusausgabe (Warn-/Info-Konsolenmeldung inkl. stabiler Kriterienreihenfolge) in neues Modul `src/iCCModules/imageCompositeConverterAc08Gate.py` ausgelagert; `convertRange` delegiert weiterhin kompatibel über den neuen Wrapper `_emitAc08SuccessGateStatus`.
+  - 2026-04-07: Post-Conversion-Reporting-Block (Semantic-Audit, AC08-Manifest/Gate, Successful-Conversion-Manifest-Refresh, Overview-Kacheln) in neues Modul `src/iCCModules/imageCompositeConverterConversionReporting.py` ausgelagert; `convertRange` delegiert weiterhin kompatibel über den neuen Wrapper `_runPostConversionReporting`.
   - Nächster geplanter Schritt: weitere IO-/Reporting-Teilstrecken in denselben kleinen Schritten extrahieren.
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.

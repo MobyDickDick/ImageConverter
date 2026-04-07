@@ -97,6 +97,7 @@ from src.iCCModules import imageCompositeConverterCli as cli_helpers
 from src.iCCModules import imageCompositeConverterOutputPaths as output_path_helpers
 from src.iCCModules import imageCompositeConverterIterationArtifacts as iteration_artifact_helpers
 from src.iCCModules import imageCompositeConverterIterationLog as iteration_log_helpers
+from src.iCCModules import imageCompositeConverterConversionReporting as conversion_reporting_helpers
 from src.iCCModules import imageCompositeConverterRandom as random_helpers
 from src.iCCModules import imageCompositeConverterElementValidation as element_validation_helpers
 from src.iCCModules import imageCompositeConverterElementMasks as element_mask_helpers
@@ -3150,6 +3151,39 @@ def _writeIterationLogAndCollectSemanticResults(
     )
 
 
+def _runPostConversionReporting(
+    *,
+    folder_path: str,
+    csv_path: str,
+    iterations: int,
+    svg_out_dir: str,
+    diff_out_dir: str,
+    reports_out_dir: str,
+    normalized_selected_variants: set[str],
+    result_map: dict[str, dict[str, object]],
+) -> dict[str, str]:
+    return conversion_reporting_helpers.runPostConversionReportingImpl(
+        folder_path=folder_path,
+        csv_path=csv_path,
+        iterations=iterations,
+        svg_out_dir=svg_out_dir,
+        diff_out_dir=diff_out_dir,
+        reports_out_dir=reports_out_dir,
+        normalized_selected_variants=normalized_selected_variants,
+        result_map=result_map,
+        write_semantic_audit_report_fn=_writeSemanticAuditReport,
+        write_pixel_delta2_ranking_fn=_writePixelDelta2Ranking,
+        write_ac08_weak_family_status_report_fn=_writeAc08WeakFamilyStatusReport,
+        write_ac08_regression_manifest_fn=_writeAc08RegressionManifest,
+        write_ac08_success_criteria_report_fn=_writeAc08SuccessCriteriaReport,
+        emit_ac08_success_gate_status_fn=_emitAc08SuccessGateStatus,
+        successful_conversions_manifest=SUCCESSFUL_CONVERSIONS_MANIFEST,
+        update_successful_conversions_manifest_fn=updateSuccessfulConversionsManifestWithMetrics,
+        generate_conversion_overviews_fn=generateConversionOverviews,
+        print_fn=print,
+    )
+
+
 def _defaultConvertedSymbolsRoot() -> str:
     return output_path_helpers.defaultConvertedSymbolsRootImpl(module_file=__file__)
 
@@ -4038,43 +4072,16 @@ def convertRange(
     semantic_results = _writeIterationLogAndCollectSemanticResults(files, result_map, log_path)
 
     _harmonizeSemanticSizeVariants(semantic_results, folder_path, svg_out_dir, reports_out_dir)
-    semantic_audit_rows = [
-        dict(audit)
-        for row in result_map.values()
-        for audit in [dict(row.get("params", {}).get("semantic_audit", {}))]
-        if audit
-    ]
-    _writeSemanticAuditReport(reports_out_dir, semantic_audit_rows)
-    _writePixelDelta2Ranking(folder_path, svg_out_dir, reports_out_dir)
-    _writeAc08WeakFamilyStatusReport(
-        reports_out_dir,
-        selected_variants=sorted(normalized_selected_variants),
-    )
-    _writeAc08RegressionManifest(
-        reports_out_dir,
+    _runPostConversionReporting(
         folder_path=folder_path,
         csv_path=csv_path,
         iterations=iterations,
-        selected_variants=sorted(normalized_selected_variants),
+        svg_out_dir=svg_out_dir,
+        diff_out_dir=diff_out_dir,
+        reports_out_dir=reports_out_dir,
+        normalized_selected_variants=normalized_selected_variants,
+        result_map=result_map,
     )
-    ac08_success_gate = _writeAc08SuccessCriteriaReport(
-        reports_out_dir,
-        selected_variants=sorted(normalized_selected_variants),
-    )
-    _emitAc08SuccessGateStatus(ac08_success_gate)
-    if SUCCESSFUL_CONVERSIONS_MANIFEST.exists():
-        updateSuccessfulConversionsManifestWithMetrics(
-            folder_path=folder_path,
-            svg_out_dir=svg_out_dir,
-            reports_out_dir=reports_out_dir,
-            manifest_path=SUCCESSFUL_CONVERSIONS_MANIFEST,
-        )
-    generated_overviews = generateConversionOverviews(diff_out_dir, svg_out_dir, reports_out_dir)
-    if generated_overviews:
-        print(
-            "[INFO] Übersichts-Kacheln erzeugt: "
-            + ", ".join(f"{key}={path}" for key, path in sorted(generated_overviews.items()))
-        )
 
     Action.STOCHASTIC_SEED_OFFSET = 0
     Action.STOCHASTIC_RUN_SEED = 0
