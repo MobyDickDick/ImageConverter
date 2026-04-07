@@ -24,7 +24,6 @@ import sys
 from dataclasses import dataclass
 from pathlib import Path
 import importlib
-import io
 import struct
 import statistics
 from src.overviewTiles import generateConversionOverviews
@@ -4490,37 +4489,10 @@ def parseArgs(argv: list[str] | None = None) -> argparse.Namespace:
     )
 
 
-class _TeeTextIO(io.TextIOBase):
-    """Mirror text writes to multiple streams."""
-
-    def __init__(self, *streams: io.TextIOBase):
-        self._streams = streams
-
-    def write(self, s: str) -> int:
-        for stream in self._streams:
-            stream.write(s)
-        return len(s)
-
-    def flush(self) -> None:
-        for stream in self._streams:
-            stream.flush()
-
-
 @contextlib.contextmanager
 def _optionalLogCapture(log_path: str):
-    """Duplicate stdout/stderr into ``log_path`` if configured."""
-    if not log_path:
+    with cli_helpers.optionalLogCaptureImpl(log_path):
         yield
-        return
-
-    path = Path(log_path)
-    path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("w", encoding="utf-8") as logfile:
-        tee_stdout = _TeeTextIO(sys.stdout, logfile)
-        tee_stderr = _TeeTextIO(sys.stderr, logfile)
-        with contextlib.redirect_stdout(tee_stdout), contextlib.redirect_stderr(tee_stderr):
-            print(f"[INFO] Schreibe Konsolen-Output nach: {path}")
-            yield
 
 
 def _autoDetectCsvPath(folder_path: str) -> str | None:
