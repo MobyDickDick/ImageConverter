@@ -35,6 +35,7 @@ from src.iCCModules.imageCompositeConverterRegions import (
 )
 from src.iCCModules import imageCompositeConverterRange as range_helpers
 from src.iCCModules import imageCompositeConverterDependencies as dependency_helpers
+from src.iCCModules import imageCompositeConverterVendorInstall as vendor_install_helpers
 from src.iCCModules import imageCompositeConverterDescriptions as description_mapping_helpers
 from src.iCCModules import imageCompositeConverterSemantic as semantic_helpers
 from src.iCCModules import imageCompositeConverterSemanticConnectors as semantic_connector_helpers
@@ -839,12 +840,7 @@ def _resolveDescriptionXmlPath(path: str) -> str | None:
 
 
 def _requiredVendorPackages() -> list[str]:
-    return [
-        "numpy",
-        "opencv-python-headless",
-        "Pillow",
-        "PyMuPDF",
-    ]
+    return vendor_install_helpers.requiredVendorPackagesImpl()
 
 
 def buildLinuxVendorInstallCommand(
@@ -852,28 +848,11 @@ def buildLinuxVendorInstallCommand(
     platform_tag: str = "manylinux2014_x86_64",
     python_version: str | None = None,
 ) -> list[str]:
-    if python_version is None:
-        python_version = f"{sys.version_info.major}{sys.version_info.minor}"
-
-    return [
-        sys.executable,
-        "-m",
-        "pip",
-        "install",
-        "--upgrade",
-        "--target",
-        vendor_dir,
-        "--platform",
-        platform_tag,
-        "--implementation",
-        "cp",
-        "--python-version",
-        python_version,
-        "--only-binary=:all:",
-        "--upgrade-strategy",
-        "eager",
-        *_requiredVendorPackages(),
-    ]
+    return vendor_install_helpers.buildLinuxVendorInstallCommandImpl(
+        vendor_dir=vendor_dir,
+        platform_tag=platform_tag,
+        python_version=python_version,
+    )
 
 
 class Reflection:

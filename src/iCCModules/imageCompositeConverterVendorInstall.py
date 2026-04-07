@@ -1,0 +1,43 @@
+"""Helpers for dependency vendor-install command generation."""
+
+from __future__ import annotations
+
+import sys
+
+
+def requiredVendorPackagesImpl() -> list[str]:
+    return [
+        "numpy",
+        "opencv-python-headless",
+        "Pillow",
+        "PyMuPDF",
+    ]
+
+
+def buildLinuxVendorInstallCommandImpl(
+    vendor_dir: str = "vendor",
+    platform_tag: str = "manylinux2014_x86_64",
+    python_version: str | None = None,
+) -> list[str]:
+    if python_version is None:
+        python_version = f"{sys.version_info.major}{sys.version_info.minor}"
+
+    return [
+        sys.executable,
+        "-m",
+        "pip",
+        "install",
+        "--upgrade",
+        "--target",
+        vendor_dir,
+        "--platform",
+        platform_tag,
+        "--implementation",
+        "cp",
+        "--python-version",
+        python_version,
+        "--only-binary=:all:",
+        "--upgrade-strategy",
+        "eager",
+        *requiredVendorPackagesImpl(),
+    ]

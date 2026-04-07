@@ -138,6 +138,7 @@ focused on the actual project scope.
   - 2026-04-07: Conversion-Bestlist-Row-Fallback (`_chooseConversionBestlistRow`) in `src/iCCModules/imageCompositeConverterBestlist.py` ausgelagert; `convertRange` delegiert bei nicht übernommenen Kandidaten weiterhin kompatibel über den neuen Wrapper und der Fallback-Prioritätspfad ist per Detailtest abgesichert.
   - 2026-04-07: Legacy-API-Einstiegspunkte (`convertImage`, `convertImageVariants`) in neues Modul `src/iCCModules/imageCompositeConverterLegacyApi.py` ausgelagert; `src/imageCompositeConverter.py` delegiert weiterhin kompatibel über Wrapper inklusive Embedded-Raster-SVG-Fallback und `convertRange`-Weiterleitung.
   - 2026-04-07: Template-Transfer-Ausführungsblock (`_tryTemplateTransfer`) in `src/iCCModules/imageCompositeConverterTemplateTransfer.py` ausgelagert; `src/imageCompositeConverter.py` delegiert weiterhin kompatibel über Wrapper und übergibt die bisherigen Action-/Rendering-Hooks injizierbar an den Modul-Entry-Point.
+  - 2026-04-07: Vendor-Install-Helfer (`_requiredVendorPackages`, `buildLinuxVendorInstallCommand`) in neues Modul `src/iCCModules/imageCompositeConverterVendorInstall.py` ausgelagert; `src/imageCompositeConverter.py` delegiert weiterhin kompatibel über Wrapper.
   - Nächster geplanter Schritt: weitere IO-/Reporting-Teilstrecken in denselben kleinen Schritten extrahieren.
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.
