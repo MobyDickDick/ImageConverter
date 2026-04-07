@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import os
+import json
 import time
 from typing import Callable
 
@@ -60,3 +61,32 @@ def writeAttemptArtifactsImpl(
 
     diff = diff_img if diff_img is not None else create_diff_image_fn(target_img, render)
     cv2_module.imwrite(os.path.join(diff_out_dir, f"{base_name}{suffix}_diff.png"), diff)
+
+
+def paramsSnapshotImpl(snapshot: dict[str, object]) -> str:
+    return json.dumps(snapshot, ensure_ascii=False, sort_keys=True, default=str)
+
+
+def writeRenderFailureLogImpl(
+    *,
+    reason: str,
+    filename: str,
+    base_name: str,
+    write_attempt_artifacts_fn: Callable[..., None],
+    write_validation_log_fn: Callable[[list[str]], None],
+    svg_content: str | None = None,
+    params_snapshot: dict[str, object] | None = None,
+    params_snapshot_serializer: Callable[[dict[str, object]], str] = paramsSnapshotImpl,
+) -> None:
+    if svg_content:
+        write_attempt_artifacts_fn(svg_content, failed=True)
+    lines = [
+        "status=render_failure",
+        f"failure_reason={reason}",
+        f"filename={filename}",
+    ]
+    if svg_content:
+        lines.append(f"best_attempt_svg={base_name}_failed.svg")
+    if params_snapshot is not None:
+        lines.append("params_snapshot=" + params_snapshot_serializer(params_snapshot))
+    write_validation_log_fn(lines)

@@ -140,6 +140,7 @@ focused on the actual project scope.
   - 2026-04-07: Template-Transfer-Ausführungsblock (`_tryTemplateTransfer`) in `src/iCCModules/imageCompositeConverterTemplateTransfer.py` ausgelagert; `src/imageCompositeConverter.py` delegiert weiterhin kompatibel über Wrapper und übergibt die bisherigen Action-/Rendering-Hooks injizierbar an den Modul-Entry-Point.
   - 2026-04-07: Vendor-Install-Helfer (`_requiredVendorPackages`, `buildLinuxVendorInstallCommand`) in neues Modul `src/iCCModules/imageCompositeConverterVendorInstall.py` ausgelagert; `src/imageCompositeConverter.py` delegiert weiterhin kompatibel über Wrapper.
   - 2026-04-07: Quality-Threshold-Resolving (`_resolveAllowedErrorPerPixel` inkl. Initial-Tercile-/Successful-Threshold-/Manual-Config-Dispatch) in neues Modul `src/iCCModules/imageCompositeConverterQualityThreshold.py` ausgelagert; `convertRange` delegiert den Schwellenwert-Pfad weiterhin kompatibel über den neuen Wrapper.
+  - 2026-04-07: Render-Failure-Logging-Helfer (`_paramsSnapshot`, `_recordRenderFailure`) in `src/iCCModules/imageCompositeConverterIterationArtifacts.py` zentralisiert (`paramsSnapshotImpl`, `writeRenderFailureLogImpl`); `runIterationPipeline` delegiert weiterhin kompatibel über lokale Wrapper/Callbacks.
   - Nächster geplanter Schritt: weitere IO-/Reporting-Teilstrecken in denselben kleinen Schritten extrahieren.
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.

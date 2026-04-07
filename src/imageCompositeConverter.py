@@ -13,7 +13,6 @@ import copy
 import csv
 import dataclasses
 import gc
-import json
 import math
 import os
 import random
@@ -2756,22 +2755,16 @@ def runIterationPipeline(
             time_ns_fn=time.time_ns,
         )
 
-    def _paramsSnapshot(snapshot: dict[str, object]) -> str:
-        return json.dumps(snapshot, ensure_ascii=False, sort_keys=True, default=str)
-
     def _recordRenderFailure(reason: str, *, svg_content: str | None = None, params_snapshot: dict[str, object] | None = None) -> None:
-        if svg_content:
-            _writeAttemptArtifacts(svg_content, failed=True)
-        lines = [
-            "status=render_failure",
-            f"failure_reason={reason}",
-            f"filename={filename}",
-        ]
-        if svg_content:
-            lines.append(f"best_attempt_svg={base}_failed.svg")
-        if params_snapshot is not None:
-            lines.append("params_snapshot=" + _paramsSnapshot(params_snapshot))
-        _writeValidationLog(lines)
+        iteration_artifact_helpers.writeRenderFailureLogImpl(
+            reason=reason,
+            filename=filename,
+            base_name=base,
+            write_attempt_artifacts_fn=_writeAttemptArtifacts,
+            write_validation_log_fn=_writeValidationLog,
+            svg_content=svg_content,
+            params_snapshot=params_snapshot,
+        )
 
     def _writeAttemptArtifacts(svg_content: str, rendered_img=None, diff_img=None, *, failed: bool = False) -> None:
         iteration_artifact_helpers.writeAttemptArtifactsImpl(
