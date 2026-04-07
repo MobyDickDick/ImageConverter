@@ -91,6 +91,7 @@ from src.iCCModules import imageCompositeConverterRanking as ranking_helpers
 from src.iCCModules import imageCompositeConverterThresholding as thresholding_helpers
 from src.iCCModules import imageCompositeConverterSuccessfulConversions as successful_conversions_helpers
 from src.iCCModules import imageCompositeConverterSuccessfulConversionQuality as successful_conversion_quality_helpers
+from src.iCCModules import imageCompositeConverterSuccessfulConversionReport as successful_conversion_report_helpers
 from src.iCCModules import imageCompositeConverterBestlist as conversion_bestlist_helpers
 from src.iCCModules import imageCompositeConverterElementValidation as element_validation_helpers
 from src.iCCModules import imageCompositeConverterElementMasks as element_mask_helpers
@@ -4476,29 +4477,16 @@ def writeSuccessfulConversionQualityReport(
     output_name: str = 'successful_conversion_quality',
 ) -> tuple[str, str, list[dict[str, object]]]:
     """Backward-compatible wrapper that now also refreshes the manifest."""
-    manifest_path, metrics = updateSuccessfulConversionsManifestWithMetrics(
+    return successful_conversion_report_helpers.writeSuccessfulConversionQualityReportImpl(
         folder_path=folder_path,
         svg_out_dir=svg_out_dir,
         reports_out_dir=reports_out_dir,
+        update_manifest_fn=updateSuccessfulConversionsManifestWithMetrics,
+        sort_rows_fn=_sortedSuccessfulConversionMetricsRows,
+        write_csv_fn=_writeSuccessfulConversionCsvTable,
         successful_variants=successful_variants,
+        output_name=output_name,
     )
-
-    sorted_metrics = _sortedSuccessfulConversionMetricsRows(metrics)
-    csv_path = _writeSuccessfulConversionCsvTable(
-        os.path.join(reports_out_dir, f'{output_name}.csv'),
-        sorted_metrics,
-    )
-    leaderboard_csv_path = _writeSuccessfulConversionCsvTable(
-        os.path.join(reports_out_dir, 'successful_conversions.csv'),
-        sorted_metrics,
-    )
-    txt_path = os.path.join(reports_out_dir, f'{output_name}.txt')
-
-    with open(txt_path, 'w', encoding='utf-8') as f:
-        f.write(f'manifest_path={manifest_path}\n')
-        f.write(f'leaderboard_csv_path={leaderboard_csv_path}\n')
-        f.write(f'variants_updated={len(sorted_metrics)}\n')
-    return csv_path, txt_path, sorted_metrics
 
 
 def parseArgs(argv: list[str] | None = None) -> argparse.Namespace:
