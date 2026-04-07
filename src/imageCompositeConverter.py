@@ -99,6 +99,7 @@ from src.iCCModules import imageCompositeConverterIterationArtifacts as iteratio
 from src.iCCModules import imageCompositeConverterIterationLog as iteration_log_helpers
 from src.iCCModules import imageCompositeConverterConversionReporting as conversion_reporting_helpers
 from src.iCCModules import imageCompositeConverterRandom as random_helpers
+from src.iCCModules import imageCompositeConverterLegacyApi as legacy_api_helpers
 from src.iCCModules import imageCompositeConverterElementValidation as element_validation_helpers
 from src.iCCModules import imageCompositeConverterElementMasks as element_mask_helpers
 from src.iCCModules import imageCompositeConverterElementErrorMetrics as element_error_metric_helpers
@@ -3551,187 +3552,31 @@ def _tryTemplateTransfer(
     rng: random.Random | None = None,
     deterministic_order: bool = False,
 ) -> tuple[dict[str, object] | None, dict[str, object] | None]:
-    filename = str(target_row.get("filename", ""))
-    if not filename:
-        return None, None
-
-    img_path = os.path.join(folder_path, filename)
-    img_orig = cv2.imread(img_path)
-    if img_orig is None:
-        return None, None
-
-    h, w = img_orig.shape[:2]
-    pixel_count = float(max(1, w * h))
-    prev_error_pp = float(target_row.get("error_per_pixel", float("inf")))
-
-    best_svg: str | None = None
-    best_error = float(target_row.get("best_error", float("inf")))
-    best_error_pp = prev_error_pp
-    best_donor = ""
-    best_rotation = 0
-    best_scale = 1.0
-
-    target_variant = str(target_row.get("variant", "")).upper()
-    target_base = str(target_row.get("base", "")).upper()
-    target_svg_path = os.path.join(svg_out_dir, f"{target_variant}.svg")
-    target_svg_geometry = _readSvgGeometry(target_svg_path)
-    target_geom_params = dict(target_svg_geometry[2]) if target_svg_geometry is not None else None
-    target_params_raw = target_row.get("params")
-    target_alias_refs: set[str] = set()
-    if isinstance(target_params_raw, dict):
-        alias_values = target_params_raw.get("documented_alias_refs", [])
-        if isinstance(alias_values, list):
-            target_alias_refs = {str(v).upper() for v in alias_values if str(v).strip()}
-    target_is_semantic = isinstance(target_params_raw, dict) and str(target_params_raw.get("mode", "")) == "semantic_badge"
-    ordered_donors = _rankTemplateTransferDonors(target_row, donor_rows)
-    if rng is not None and not deterministic_order and len(ordered_donors) > 1:
-        head = ordered_donors[:3]
-        tail = ordered_donors[3:]
-        rng.shuffle(head)
-        ordered_donors = head + tail
-    for donor in ordered_donors:
-        donor_variant = str(donor.get("variant", "")).upper()
-        donor_base = str(donor.get("base", "")).upper()
-        if not donor_variant or donor_variant == target_variant:
-            continue
-        if not target_is_semantic and not _templateTransferDonorFamilyCompatible(
-            target_base,
-            donor_base,
-            documented_alias_refs=target_alias_refs,
-        ):
-            continue
-        donor_svg_path = os.path.join(svg_out_dir, f"{donor_variant}.svg")
-        if not os.path.exists(donor_svg_path):
-            continue
-        try:
-            donor_svg_text = open(donor_svg_path, "r", encoding="utf-8").read()
-        except OSError:
-            continue
-
-        donor_svg_geometry = _readSvgGeometry(donor_svg_path)
-        donor_geom_params = dict(donor_svg_geometry[2]) if donor_svg_geometry is not None else None
-
-        donor_params_raw = donor.get("params")
-        donor_is_semantic = isinstance(donor_params_raw, dict) and str(donor_params_raw.get("mode", "")) == "semantic_badge"
-        if target_is_semantic and not donor_is_semantic:
-            continue
-
-        if isinstance(target_params_raw, dict) and isinstance(donor_params_raw, dict):
-            if (
-                target_is_semantic
-                and donor_is_semantic
-                and target_geom_params is not None
-                and donor_geom_params is not None
-                and _semanticTransferIsCompatible(dict(target_params_raw), dict(donor_params_raw))
-            ):
-                base_scale = float(min(w, h)) / max(1.0, float(min(int(donor.get("w", w)), int(donor.get("h", h)))))
-                semantic_scales = _semanticTransferScaleCandidates(base_scale)
-                if rng is not None and not deterministic_order:
-                    keep = semantic_scales[:2]
-                    rest = semantic_scales[2:]
-                    rng.shuffle(rest)
-                    semantic_scales = keep + rest
-                for rotation in _semanticTransferRotations(dict(target_params_raw), dict(donor_params_raw)):
-                    for scale in semantic_scales:
-                        candidate_params = _semanticTransferBadgeParams(
-                            dict(donor_geom_params),
-                            dict(target_geom_params),
-                            target_w=w,
-                            target_h=h,
-                            rotation_deg=rotation,
-                            scale=float(scale),
-                        )
-                        try:
-                            candidate_svg = Action.generateBadgeSvg(w, h, candidate_params)
-                            rendered = Action.renderSvgToNumpy(candidate_svg, w, h)
-                        except Exception:
-                            continue
-                        error = Action.calculateError(img_orig, rendered)
-                        error_pp = float(error) / pixel_count
-                        if error_pp + 1e-9 < best_error_pp:
-                            best_error = float(error)
-                            best_error_pp = error_pp
-                            best_svg = candidate_svg
-                            best_donor = donor_variant
-                            best_rotation = rotation
-                            best_scale = float(scale)
-
-        if target_is_semantic:
-            # Semantic badges encode meaning in connector/text geometry.
-            # Generic donor SVG transforms can remove those semantics.
-            continue
-
-        estimated_scales = {
-            rotation: _estimateTemplateTransferScale(
-                img_orig,
-                donor_svg_text,
-                w,
-                h,
-                rotation_deg=rotation,
-            )
-            for rotation in (0, 90, 180, 270)
-        }
-
-        for rotation, scale in _templateTransferTransformCandidates(
-            target_variant,
-            donor_variant,
-            estimated_scale_by_rotation=estimated_scales,
-        ):
-            candidate_svg = _buildTransformedSvgFromTemplate(
-                donor_svg_text,
-                w,
-                h,
-                rotation_deg=rotation,
-                scale=scale,
-            )
-            rendered = Action.renderSvgToNumpy(candidate_svg, w, h)
-            error = Action.calculateError(img_orig, rendered)
-            error_pp = float(error) / pixel_count
-            if error_pp + 1e-9 < best_error_pp:
-                best_error = float(error)
-                best_error_pp = error_pp
-                best_svg = candidate_svg
-                best_donor = donor_variant
-                best_rotation = rotation
-                best_scale = scale
-
-    if best_svg is None:
-        return None, None
-
-    stem = os.path.splitext(filename)[0]
-    svg_path = os.path.join(svg_out_dir, f"{stem}.svg")
-    with open(svg_path, "w", encoding="utf-8") as f:
-        f.write(best_svg)
-
-    rendered = Action.renderSvgToNumpy(best_svg, w, h)
-    mean_delta2 = float(target_row.get("mean_delta2", float("inf")))
-    std_delta2 = float(target_row.get("std_delta2", float("inf")))
-    if rendered is not None:
-        diff = Action.createDiffImage(img_orig, rendered)
-        cv2.imwrite(os.path.join(diff_out_dir, f"{stem}_diff.png"), diff)
-        try:
-            mean_delta2, std_delta2 = Action.calculateDelta2Stats(img_orig, rendered)
-        except Exception:
-            mean_delta2 = float(target_row.get("mean_delta2", float("inf")))
-            std_delta2 = float(target_row.get("std_delta2", float("inf")))
-
-    updated_row = dict(target_row)
-    updated_row["best_error"] = float(best_error)
-    updated_row["error_per_pixel"] = float(best_error_pp)
-    updated_row["mean_delta2"] = float(mean_delta2)
-    updated_row["std_delta2"] = float(std_delta2)
-
-    detail = {
-        "filename": filename,
-        "donor_variant": best_donor,
-        "rotation_deg": int(best_rotation),
-        "scale": float(best_scale),
-        "old_error_per_pixel": float(prev_error_pp),
-        "new_error_per_pixel": float(best_error_pp),
-        "old_mean_delta2": float(target_row.get("mean_delta2", float("inf"))),
-        "new_mean_delta2": float(mean_delta2),
-    }
-    return updated_row, detail
+    return template_transfer_helpers.tryTemplateTransferImpl(
+        target_row=target_row,
+        donor_rows=donor_rows,
+        folder_path=folder_path,
+        svg_out_dir=svg_out_dir,
+        diff_out_dir=diff_out_dir,
+        rng=rng,
+        deterministic_order=deterministic_order,
+        cv2_module=cv2,
+        read_svg_geometry_fn=_readSvgGeometry,
+        rank_template_transfer_donors_fn=_rankTemplateTransferDonors,
+        template_transfer_donor_family_compatible_fn=_templateTransferDonorFamilyCompatible,
+        semantic_transfer_is_compatible_fn=_semanticTransferIsCompatible,
+        semantic_transfer_scale_candidates_fn=_semanticTransferScaleCandidates,
+        semantic_transfer_rotations_fn=_semanticTransferRotations,
+        semantic_transfer_badge_params_fn=_semanticTransferBadgeParams,
+        estimate_template_transfer_scale_fn=_estimateTemplateTransferScale,
+        template_transfer_transform_candidates_fn=_templateTransferTransformCandidates,
+        build_transformed_svg_from_template_fn=_buildTransformedSvgFromTemplate,
+        render_svg_to_numpy_fn=Action.renderSvgToNumpy,
+        calculate_error_fn=Action.calculateError,
+        create_diff_image_fn=Action.createDiffImage,
+        calculate_delta2_stats_fn=Action.calculateDelta2Stats,
+        generate_badge_svg_fn=Action.generateBadgeSvg,
+    )
 
 
 def convertRange(
@@ -4576,26 +4421,20 @@ def convertImage(input_path: str, output_path: str, *, max_iter: int = 120, plat
     - For SVG targets or missing image deps, preserve the historical embedded-raster fallback.
     """
     del max_iter, plateau_limit, seed
-    target = Path(output_path)
-    target.parent.mkdir(parents=True, exist_ok=True)
-
-    if target.suffix.lower() == ".svg" or cv2 is None or np is None:
-        target.write_text(_renderEmbeddedRasterSvg(input_path), encoding="utf-8")
-        return target
-
-    img = cv2.imread(str(input_path))
-    if img is None:
-        raise FileNotFoundError(f"Bild konnte nicht gelesen werden: {input_path}")
-    regions = detectRelevantRegions(img)
-    annotated = annotateImageRegions(img, regions)
-    cv2.imwrite(str(target), annotated)
-    target.with_suffix(".json").write_text(json.dumps(regions, ensure_ascii=False, indent=2), encoding="utf-8")
-    return target
+    return legacy_api_helpers.convertImageImpl(
+        input_path=input_path,
+        output_path=output_path,
+        render_embedded_raster_svg_fn=_renderEmbeddedRasterSvg,
+        detect_relevant_regions_fn=detectRelevantRegions,
+        annotate_image_regions_fn=annotateImageRegions,
+        cv2_module=cv2,
+        np_module=np,
+    )
 
 
 def convertImageVariants(*args, **kwargs):
     """Compatibility shim kept for tooling imports."""
-    return convertRange(*args, **kwargs)
+    return legacy_api_helpers.convertImageVariantsImpl(*args, convert_range_fn=convertRange, **kwargs)
 OPTIONAL_DEPENDENCY_ERRORS = dependency_helpers.OPTIONAL_DEPENDENCY_ERRORS
 
 # Backward-compatible snake_case aliases expected by legacy tests/tooling.

@@ -240,6 +240,36 @@ def test_source_loads_numpy_before_cv2() -> None:
     assert numpy_pos < cv2_pos
 
 
+def test_convert_image_svg_target_uses_embedded_raster_fallback(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
+    """SVG targets should still use the legacy embedded-raster fallback path."""
+    src = tmp_path / "in.png"
+    src.write_bytes(b"fake")
+    dst = tmp_path / "out.svg"
+
+    monkeypatch.setattr(image_composite_converter, "_renderEmbeddedRasterSvg", lambda _path: "<svg>ok</svg>")
+
+    written = image_composite_converter.convertImage(str(src), str(dst))
+
+    assert written == dst
+    assert dst.read_text(encoding="utf-8") == "<svg>ok</svg>"
+
+
+def test_convert_image_variants_delegates_to_convert_range(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Legacy variants shim should forward positional/keyword args to convertRange."""
+    calls: list[tuple[tuple[object, ...], dict[str, object]]] = []
+
+    def fake_convert_range(*args, **kwargs):
+        calls.append((args, kwargs))
+        return "delegated"
+
+    monkeypatch.setattr(image_composite_converter, "convertRange", fake_convert_range)
+
+    result = image_composite_converter.convertImageVariants("folder", "map.csv", iterations=5)
+
+    assert result == "delegated"
+    assert calls == [(("folder", "map.csv"), {"iterations": 5})]
+
+
 def test_family_harmonized_badge_colors_averages_family_palette() -> None:
     """L/M/S families should use averaged grayscale values as harmonization base."""
     rows = [
