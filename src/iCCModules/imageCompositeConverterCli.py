@@ -1,7 +1,11 @@
 from __future__ import annotations
 
 import argparse
+import contextlib
+import io
 import os
+import sys
+from pathlib import Path
 
 
 def parseArgsImpl(
@@ -218,3 +222,36 @@ def resolveCliCsvAndOutputImpl(
         csv_path = resolve_xml_path_fn(csv_path) or csv_path
 
     return csv_path, output_dir
+
+
+class TeeTextIO(io.TextIOBase):
+    """Mirror text writes to multiple streams."""
+
+    def __init__(self, *streams: io.TextIOBase):
+        self._streams = streams
+
+    def write(self, s: str) -> int:
+        for stream in self._streams:
+            stream.write(s)
+        return len(s)
+
+    def flush(self) -> None:
+        for stream in self._streams:
+            stream.flush()
+
+
+@contextlib.contextmanager
+def optionalLogCaptureImpl(log_path: str):
+    """Duplicate stdout/stderr into ``log_path`` if configured."""
+    if not log_path:
+        yield
+        return
+
+    path = Path(log_path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w", encoding="utf-8") as logfile:
+        tee_stdout = TeeTextIO(sys.stdout, logfile)
+        tee_stderr = TeeTextIO(sys.stderr, logfile)
+        with contextlib.redirect_stdout(tee_stdout), contextlib.redirect_stderr(tee_stderr):
+            print(f"[INFO] Schreibe Konsolen-Output nach: {path}")
+            yield

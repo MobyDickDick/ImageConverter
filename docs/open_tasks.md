@@ -128,6 +128,7 @@ focused on the actual project scope.
   - 2026-04-07: CLI-/CSV-Resolving-Helfer (`parseArgs`, `_autoDetectCsvPath`, `_resolveCliCsvAndOutput`) in neues Modul `src/iCCModules/imageCompositeConverterCli.py` ausgelagert; `src/imageCompositeConverter.py` delegiert weiterhin kompatibel über Wrapper.
   - 2026-04-07: Iterations-Artefakt-IO-Helfer (`_writeValidationLog`, `_writeAttemptArtifacts`) in neues Modul `src/iCCModules/imageCompositeConverterIterationArtifacts.py` ausgelagert; `runIterationPipeline` delegiert weiterhin kompatibel über lokale Wrapper.
   - 2026-04-07: Output-Verzeichnis-Helfer (`_defaultConvertedSymbolsRoot`, `_convertedSvgOutputDir`, `_diffOutputDir`, `_reportsOutputDir`) in neues Modul `src/iCCModules/imageCompositeConverterOutputPaths.py` ausgelagert; `src/imageCompositeConverter.py` delegiert weiterhin kompatibel über Wrapper.
+  - 2026-04-07: Optionales CLI-Log-Capturing (`_optionalLogCapture` inkl. Tee-Stream) in `src/iCCModules/imageCompositeConverterCli.py` ausgelagert; `src/imageCompositeConverter.py` delegiert weiterhin kompatibel über den Modul-Context-Manager.
   - Nächster geplanter Schritt: weitere IO-/Reporting-Teilstrecken in denselben kleinen Schritten extrahieren.
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.
