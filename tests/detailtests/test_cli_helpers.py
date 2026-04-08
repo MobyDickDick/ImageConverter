@@ -97,3 +97,106 @@ def test_prompt_interactive_range_impl_uses_substring_filter_message(capsys) -> 
     assert (start_value, end_value) == ("AC08", "A08")
     captured = capsys.readouterr()
     assert "Teilstring-Filter 'A08'" in captured.out
+
+
+def test_run_main_impl_prints_vendor_command_and_exits() -> None:
+    args = argparse.Namespace(
+        _render_svg_subprocess=False,
+        isolate_svg_render=False,
+        isolate_svg_render_timeout_sec=7.0,
+        log_file="",
+        ac08_regression_set=False,
+        print_linux_vendor_command=True,
+        vendor_dir="vendor",
+        vendor_platform="manylinux",
+        vendor_python_version="310",
+        interactive_range=False,
+        start="AC0001",
+        end="AC0002",
+        mode="convert",
+        bootstrap_deps=False,
+        folder_path="images",
+        iterations=1,
+        debug_ac0811_dir=None,
+        debug_element_diff_dir=None,
+        deterministic_order=False,
+    )
+    stdout = io.StringIO()
+
+    with contextlib.redirect_stdout(stdout):
+        rc = cli_helpers.runMainImpl(
+            args,
+            run_svg_render_subprocess_entrypoint_fn=lambda: 11,
+            set_svg_render_subprocess_enabled_fn=lambda _enabled: None,
+            set_svg_render_subprocess_timeout_fn=lambda _timeout: None,
+            optional_log_capture_fn=contextlib.nullcontext,
+            build_linux_vendor_install_command_fn=lambda **_kwargs: ["pip", "install", "x"],
+            prompt_interactive_range_fn=lambda _args: ("AC0001", "AC0002"),
+            resolve_cli_csv_and_output_fn=lambda _args: ("", None),
+            load_description_mapping_fn=lambda _path: None,
+            bootstrap_required_image_dependencies_fn=lambda: [],
+            analyze_range_fn=lambda *_args, **_kwargs: "annotated",
+            convert_range_fn=lambda *_args, **_kwargs: "converted",
+            format_user_diagnostic_fn=lambda exc: str(exc),
+            description_mapping_error_type=RuntimeError,
+            ac08_regression_set_name="set",
+            ac08_regression_variants=("AC0800_L",),
+        )
+
+    assert rc == 0
+    assert "pip install x" in stdout.getvalue()
+
+
+def test_run_main_impl_convert_mode_invokes_convert_with_selected_variants() -> None:
+    args = argparse.Namespace(
+        _render_svg_subprocess=False,
+        isolate_svg_render=True,
+        isolate_svg_render_timeout_sec=3.0,
+        log_file="",
+        ac08_regression_set=True,
+        print_linux_vendor_command=False,
+        vendor_dir="vendor",
+        vendor_platform="manylinux",
+        vendor_python_version="310",
+        interactive_range=False,
+        start=None,
+        end=None,
+        mode="convert",
+        bootstrap_deps=False,
+        folder_path="images",
+        iterations=5,
+        debug_ac0811_dir="dbg0811",
+        debug_element_diff_dir="dbg-elem",
+        deterministic_order=True,
+    )
+    calls: dict[str, object] = {}
+
+    with mock.patch("os.path.exists", return_value=True):
+        rc = cli_helpers.runMainImpl(
+            args,
+            run_svg_render_subprocess_entrypoint_fn=lambda: 11,
+            set_svg_render_subprocess_enabled_fn=lambda enabled: calls.__setitem__("enabled", enabled),
+            set_svg_render_subprocess_timeout_fn=lambda timeout: calls.__setitem__("timeout", timeout),
+            optional_log_capture_fn=contextlib.nullcontext,
+            build_linux_vendor_install_command_fn=lambda **_kwargs: ["pip"],
+            prompt_interactive_range_fn=lambda _args: ("AC0800", "AC0899"),
+            resolve_cli_csv_and_output_fn=lambda _args: ("descriptions.csv", "out"),
+            load_description_mapping_fn=lambda path: calls.__setitem__("csv", path),
+            bootstrap_required_image_dependencies_fn=lambda: [],
+            analyze_range_fn=lambda *_args, **_kwargs: "annotated",
+            convert_range_fn=lambda *fn_args, **_kwargs: calls.__setitem__("convert_args", fn_args) or "converted",
+            format_user_diagnostic_fn=lambda exc: str(exc),
+            description_mapping_error_type=RuntimeError,
+            ac08_regression_set_name="ac08-set",
+            ac08_regression_variants=("AC0800_L", "AC0811_L"),
+        )
+
+    assert rc == 0
+    assert calls["enabled"] is True
+    assert calls["timeout"] == 3.0
+    assert calls["csv"] == "descriptions.csv"
+    convert_args = calls["convert_args"]
+    assert convert_args[0] == "images"
+    assert convert_args[1] == "descriptions.csv"
+    assert convert_args[8] == {"AC0800_L", "AC0811_L"}
+    assert convert_args[9] is True

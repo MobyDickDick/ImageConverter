@@ -5,6 +5,7 @@ from __future__ import annotations
 import contextlib
 import importlib
 import os
+import subprocess
 import sys
 from pathlib import Path
 
@@ -142,3 +143,47 @@ def import_with_vendored_fallback(
                     sys.path.remove(path_str)
 
     raise last_exc
+
+
+def missingRequiredImageDependenciesImpl(cv2_module, np_module) -> list[str]:
+    """Return pip package names for currently missing image runtime dependencies."""
+    missing: list[str] = []
+    if cv2_module is None:
+        missing.append("opencv-python-headless")
+    if np_module is None:
+        missing.append("numpy")
+    return missing
+
+
+def bootstrapRequiredImageDependenciesImpl(
+    *,
+    missing: list[str],
+    sys_executable: str,
+    run_fn=subprocess.run,
+    print_fn=print,
+    load_cv2_fn=None,
+    load_np_fn=None,
+    set_modules_fn=None,
+) -> list[str]:
+    """Install and re-import missing image dependencies into the current process."""
+    if not missing:
+        return []
+
+    cmd = [sys_executable, "-m", "pip", "install", *missing]
+    print_fn(f"[INFO] Fehlende Bild-Abhängigkeiten gefunden: {', '.join(missing)}")
+    print_fn(f"[INFO] Installiere via: {' '.join(cmd)}")
+    try:
+        run_fn(cmd, check=True)
+    except subprocess.CalledProcessError as exc:
+        raise RuntimeError(
+            "Automatische Installation fehlgeschlagen. "
+            "Bitte Abhängigkeiten manuell installieren oder Proxy/Netzwerk prüfen."
+        ) from exc
+
+    loaded_cv2 = load_cv2_fn() if "opencv-python-headless" in missing and callable(load_cv2_fn) else None
+    loaded_np = load_np_fn() if "numpy" in missing and callable(load_np_fn) else None
+
+    if callable(set_modules_fn):
+        set_modules_fn(cv2_module=loaded_cv2, np_module=loaded_np)
+
+    return missing

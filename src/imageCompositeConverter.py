@@ -13,7 +13,6 @@ import copy
 import csv
 import dataclasses
 import gc
-import json
 import math
 import os
 import random
@@ -35,6 +34,7 @@ from src.iCCModules.imageCompositeConverterRegions import (
 )
 from src.iCCModules import imageCompositeConverterRange as range_helpers
 from src.iCCModules import imageCompositeConverterDependencies as dependency_helpers
+from src.iCCModules import imageCompositeConverterVendorInstall as vendor_install_helpers
 from src.iCCModules import imageCompositeConverterDescriptions as description_mapping_helpers
 from src.iCCModules import imageCompositeConverterSemantic as semantic_helpers
 from src.iCCModules import imageCompositeConverterSemanticConnectors as semantic_connector_helpers
@@ -59,6 +59,7 @@ from src.iCCModules import imageCompositeConverterSemanticCircleStyle as semanti
 from src.iCCModules import imageCompositeConverterSemanticRedrawVariation as semantic_redraw_variation_helpers
 from src.iCCModules import imageCompositeConverterQuality as quality_helpers
 from src.iCCModules import imageCompositeConverterQualityConfig as quality_config_helpers
+from src.iCCModules import imageCompositeConverterQualityThreshold as quality_threshold_helpers
 from src.iCCModules import imageCompositeConverterAudit as audit_helpers
 from src.iCCModules import imageCompositeConverterTransfer as transfer_helpers
 from src.iCCModules import imageCompositeConverterGeometryBrackets as geometry_bracket_helpers
@@ -84,6 +85,11 @@ from src.iCCModules import imageCompositeConverterRendering as rendering_helpers
 from src.iCCModules import imageCompositeConverterRenderRuntime as rendering_runtime_helpers
 from src.iCCModules import imageCompositeConverterRenderDispatch as render_dispatch_helpers
 from src.iCCModules import imageCompositeConverterBatchReporting as batch_reporting_helpers
+from src.iCCModules import imageCompositeConverterConversionInputs as conversion_input_helpers
+from src.iCCModules import imageCompositeConverterConversionExecution as conversion_execution_helpers
+from src.iCCModules import imageCompositeConverterConversionInitialPass as conversion_initial_pass_helpers
+from src.iCCModules import imageCompositeConverterConversionQualityPass as conversion_quality_pass_helpers
+from src.iCCModules import imageCompositeConverterFallback as fallback_helpers
 from src.iCCModules import imageCompositeConverterConversionRows as conversion_row_helpers
 from src.iCCModules import imageCompositeConverterAc08Reporting as ac08_reporting_helpers
 from src.iCCModules import imageCompositeConverterAc08Gate as ac08_gate_helpers
@@ -98,13 +104,17 @@ from src.iCCModules import imageCompositeConverterOutputPaths as output_path_hel
 from src.iCCModules import imageCompositeConverterIterationArtifacts as iteration_artifact_helpers
 from src.iCCModules import imageCompositeConverterIterationLog as iteration_log_helpers
 from src.iCCModules import imageCompositeConverterConversionReporting as conversion_reporting_helpers
+from src.iCCModules import imageCompositeConverterConversionFinalization as conversion_finalization_helpers
 from src.iCCModules import imageCompositeConverterRandom as random_helpers
 from src.iCCModules import imageCompositeConverterLegacyApi as legacy_api_helpers
 from src.iCCModules import imageCompositeConverterElementValidation as element_validation_helpers
+from src.iCCModules import imageCompositeConverterOptimizationElementSearch as element_search_optimization_helpers
 from src.iCCModules import imageCompositeConverterElementMasks as element_mask_helpers
 from src.iCCModules import imageCompositeConverterElementErrorMetrics as element_error_metric_helpers
 from src.iCCModules import imageCompositeConverterCompositeSvg as composite_svg_helpers
 from src.iCCModules import imageCompositeConverterDiffing as diffing_helpers
+from src.iCCModules import imageCompositeConverterForms as forms_helpers
+from src.iCCModules import imageCompositeConverterColorUtils as color_utils_helpers
 from src.successfulConversions import (
     AC08_MITIGATION_STATUS,
     AC08_PREVIOUSLY_GOOD_VARIANTS,
@@ -276,146 +286,23 @@ fitz = _load_optional_module("fitz")  # PyMuPDF for native SVG rendering
 
 
 def _clip(value, low, high):
-    """Clip scalar/array values without hard-requiring numpy at runtime."""
-    if np is not None:
-        return np.clip(value, low, high)
-    if isinstance(value, (int, float)):
-        return Action._clipScalar(float(value), float(low), float(high))
-    raise RuntimeError("numpy is required for non-scalar clip operations")
-
-
-
-
-
-@dataclass(frozen=True)
-class RGBWert:
-    """RGB value constrained to Nummer(256) semantics (0..255)."""
-
-    r: int
-    g: int
-    b: int
-
-    def __post_init__(self) -> None:
-        for channel_name, channel in (("r", self.r), ("g", self.g), ("b", self.b)):
-            if not isinstance(channel, int):
-                raise TypeError(f"RGB channel '{channel_name}' must be an integer.")
-            if channel < 0 or channel >= 256:
-                raise ValueError(f"RGB channel '{channel_name}' must satisfy 0 <= x < 256.")
-
-    def toHex(self) -> str:
-        return f"#{self.r:02x}{self.g:02x}{self.b:02x}"
-
-
-@dataclass(frozen=True)
-class Punkt:
-    x: float
-    y: float
-
-
-@dataclass(frozen=True)
-class Kreis:
-    mittelpunkt: Punkt
-    radius: float
-    randbreite: float
-    rand_farbe: RGBWert
-    hintergrundfarbe: RGBWert
-
-    def __post_init__(self) -> None:
-        if float(self.radius) <= 0:
-            raise ValueError("Kreis.radius must be > 0.")
-        if float(self.randbreite) < 0:
-            raise ValueError("Kreis.randbreite must be >= 0.")
-        if float(self.randbreite) > float(self.radius):
-            raise ValueError("Constraint verletzt: Randbreite <= Radius.")
-
-
-@dataclass(frozen=True)
-class Griff:
-    anfang: Punkt
-    ende: Punkt
-
-    @property
-    def laenge(self) -> float:
-        return abstand(self.anfang, self.ende)
-
-
-@dataclass(frozen=True)
-class Kelle:
-    griff: Griff
-    kreis: Kreis
-
-    def __post_init__(self) -> None:
-        if self.griff.anfang != self.kreis.mittelpunkt:
-            raise ValueError("Constraint verletzt: Griff.Anfang == Kreis.Mittelpunkt.")
-        if self.griff.laenge <= float(self.kreis.radius):
-            raise ValueError("Constraint verletzt: Griff.Länge > Kreis.Radius.")
-
-    def toSvg(self, width: int, height: int, *, clip_to_canvas: bool = True) -> str:
-        """Render the ladle as SVG. Handle is drawn first (background), then circle."""
-        handle_stroke = max(1.0, float(self.kreis.randbreite))
-        cx = float(self.kreis.mittelpunkt.x)
-        cy = float(self.kreis.mittelpunkt.y)
-        radius = float(self.kreis.radius)
-        handle = (
-            f'<line x1="{self.griff.anfang.x:.2f}" y1="{self.griff.anfang.y:.2f}" '
-            f'x2="{self.griff.ende.x:.2f}" y2="{self.griff.ende.y:.2f}" '
-            f'stroke="{self.kreis.rand_farbe.toHex()}" stroke-width="{handle_stroke:.2f}" stroke-linecap="round"/>'
-        )
-        circle = (
-            f'<circle cx="{cx:.2f}" cy="{cy:.2f}" r="{radius:.2f}" '
-            f'fill="{self.kreis.hintergrundfarbe.toHex()}" stroke="{self.kreis.rand_farbe.toHex()}" '
-            f'stroke-width="{float(self.kreis.randbreite):.2f}"/>'
-        )
-        if not clip_to_canvas:
-            body = f"{handle}{circle}"
-            return f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">{body}</svg>'
-
-        clip_id = "canvasClip"
-        body = (
-            f'<defs><clipPath id="{clip_id}"><rect x="0" y="0" width="{width}" height="{height}" /></clipPath></defs>'
-            f'<g clip-path="url(#{clip_id})">{handle}{circle}</g>'
-        )
-        return f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">{body}</svg>'
-
-
-def abstand(punkt1: Punkt, punkt2: Punkt) -> float:
-    return math.hypot(float(punkt1.x) - float(punkt2.x), float(punkt1.y) - float(punkt2.y))
-
-
-def buildOrientedKelle(
-    orientation: str,
-    *,
-    mittelpunkt: Punkt,
-    radius: float,
-    griff_laenge: float,
-    randbreite: float,
-    rand_farbe: RGBWert,
-    hintergrundfarbe: RGBWert,
-) -> Kelle:
-    """Create a Kelle with handle orientation in {left, right, top, bottom/down}."""
-    orient = str(orientation).strip().lower()
-    if orient in {"bottom", "down", "unten"}:
-        endpunkt = Punkt(mittelpunkt.x, mittelpunkt.y + float(griff_laenge))
-    elif orient in {"top", "up", "oben"}:
-        endpunkt = Punkt(mittelpunkt.x, mittelpunkt.y - float(griff_laenge))
-    elif orient in {"left", "links"}:
-        endpunkt = Punkt(mittelpunkt.x - float(griff_laenge), mittelpunkt.y)
-    elif orient in {"right", "rechts"}:
-        endpunkt = Punkt(mittelpunkt.x + float(griff_laenge), mittelpunkt.y)
-    else:
-        raise ValueError("orientation must be one of: left, right, top/up, bottom/down")
-
-    kelle = Kelle(
-        griff=Griff(anfang=mittelpunkt, ende=endpunkt),
-        kreis=Kreis(
-            mittelpunkt=mittelpunkt,
-            radius=float(radius),
-            randbreite=float(randbreite),
-            rand_farbe=rand_farbe,
-            hintergrundfarbe=hintergrundfarbe,
-        ),
+    return color_utils_helpers.clipImpl(
+        value,
+        low,
+        high,
+        np_module=np,
+        clip_scalar_fn=Action._clipScalar,
     )
-    return kelle
+
+
+RGBWert = forms_helpers.RGBWert
+Punkt = forms_helpers.Punkt
+Kreis = forms_helpers.Kreis
+Griff = forms_helpers.Griff
+Kelle = forms_helpers.Kelle
+abstand = forms_helpers.abstand
+buildOrientedKelle = forms_helpers.buildOrientedKelle
+
 
 @dataclass
 class Element:
@@ -537,16 +424,11 @@ def loadBinaryImageWithMode(path: Path, *, threshold: int = 220, mode: str = "gl
 
 
 def renderCandidateMask(candidate: Candidate, width: int, height: int) -> list[list[int]]:
-    mask = [[0 for _ in range(width)] for _ in range(height)]
-    rx = max(1.0, (candidate.w + candidate.h) / 4.0) if candidate.shape == 'circle' else max(1.0, candidate.w / 2.0)
-    ry = rx if candidate.shape == 'circle' else max(1.0, candidate.h / 2.0)
-    inv_rx2 = 1.0 / (rx * rx)
-    inv_ry2 = 1.0 / (ry * ry)
-    for y in range(height):
-        for x in range(width):
-            if ((x - candidate.cx) ** 2) * inv_rx2 + ((y - candidate.cy) ** 2) * inv_ry2 <= 1.0:
-                mask[y][x] = 1
-    return mask
+    return element_search_optimization_helpers.renderCandidateMaskImpl(
+        candidate,
+        width,
+        height,
+    )
 
 
 def _iou(a: list[list[int]], b: list[list[int]]) -> float:
@@ -554,7 +436,12 @@ def _iou(a: list[list[int]], b: list[list[int]]) -> float:
 
 
 def scoreCandidate(target: list[list[int]], candidate: Candidate) -> float:
-    return _iou(target, renderCandidateMask(candidate, len(target[0]), len(target)))
+    return element_search_optimization_helpers.scoreCandidateImpl(
+        target,
+        candidate,
+        render_candidate_mask_fn=renderCandidateMask,
+        iou_fn=_iou,
+    )
 
 
 def score_candidate(target: list[list[int]], candidate: Candidate) -> float:
@@ -563,26 +450,24 @@ def score_candidate(target: list[list[int]], candidate: Candidate) -> float:
 
 
 def randomNeighbor(base: Candidate, scale: float, rng: random.Random) -> Candidate:
-    return Candidate(base.shape, base.cx + rng.uniform(-scale, scale), base.cy + rng.uniform(-scale, scale), max(1.0, base.w + rng.uniform(-scale, scale) * 1.4), max(1.0, base.h + rng.uniform(-scale, scale) * 1.4))
+    return element_search_optimization_helpers.randomNeighborImpl(
+        base,
+        scale,
+        rng,
+        candidate_factory=Candidate,
+    )
 
 
 def optimizeElement(target: list[list[int]], init: Candidate, *, max_iter: int, plateau_limit: int, seed: int) -> tuple[Candidate, float]:
-    rng = random.Random(seed)
-    best = init
-    best_score = scoreCandidate(target, best)
-    scale = max(1.0, max(best.w, best.h) * 0.2)
-    plateau = 0
-    for _ in range(max_iter):
-        cand = randomNeighbor(best, scale, rng)
-        s = scoreCandidate(target, cand)
-        if s >= best_score:
-            best, best_score, plateau = cand, s, 0
-        else:
-            plateau += 1
-        if plateau > plateau_limit:
-            scale = max(0.5, scale * 0.7)
-            plateau = 0
-    return best, best_score
+    return element_search_optimization_helpers.optimizeElementImpl(
+        target,
+        init,
+        max_iter=max_iter,
+        plateau_limit=plateau_limit,
+        seed=seed,
+        score_candidate_fn=scoreCandidate,
+        random_neighbor_fn=randomNeighbor,
+    )
 
 
 def optimize_element(target: list[list[int]], init: Candidate, *, max_iter: int, plateau_limit: int, seed: int) -> tuple[Candidate, float]:
@@ -591,8 +476,7 @@ def optimize_element(target: list[list[int]], init: Candidate, *, max_iter: int,
 
 
 def _grayToHex(v: float) -> str:
-    g = max(0, min(255, int(round(v))))
-    return f"#{g:02x}{g:02x}{g:02x}"
+    return color_utils_helpers.grayToHexImpl(v)
 
 
 def estimateStrokeStyle(grayscale: list[list[int]], element: Element, candidate: Candidate) -> tuple[str, str | None, float | None]:
@@ -745,42 +629,37 @@ def decomposeCircleWithStem(grayscale: list[list[int]], element: Element, candid
     return [rect, circle]
 
 def _missingRequiredImageDependencies() -> list[str]:
-    missing: list[str] = []
-    if cv2 is None:
-        missing.append("opencv-python-headless")
-    if np is None:
-        missing.append("numpy")
-    return missing
+    return dependency_helpers.missingRequiredImageDependenciesImpl(cv2_module=cv2, np_module=np)
 
 
 def _bootstrapRequiredImageDependencies() -> list[str]:
     missing = _missingRequiredImageDependencies()
-    if not missing:
-        return []
-
-    cmd = [sys.executable, "-m", "pip", "install", *missing]
-    print(f"[INFO] Fehlende Bild-Abhängigkeiten gefunden: {', '.join(missing)}")
-    print(f"[INFO] Installiere via: {' '.join(cmd)}")
-    try:
-        subprocess.run(cmd, check=True)
-    except subprocess.CalledProcessError as exc:
-        raise RuntimeError(
-            "Automatische Installation fehlgeschlagen. "
-            "Bitte Abhängigkeiten manuell installieren oder Proxy/Netzwerk prüfen."
-        ) from exc
-
-    # Re-import in current process so conversion can run without restart.
-    global cv2, np
-    if "opencv-python-headless" in missing:
+    def _load_cv2_module():
         import cv2 as _cv2
 
-        cv2 = _cv2
-    if "numpy" in missing:
+        return _cv2
+
+    def _load_np_module():
         import numpy as _np
 
-        np = _np
+        return _np
 
-    return missing
+    def _set_modules(*, cv2_module, np_module) -> None:
+        global cv2, np
+        if cv2_module is not None:
+            cv2 = cv2_module
+        if np_module is not None:
+            np = np_module
+
+    return dependency_helpers.bootstrapRequiredImageDependenciesImpl(
+        missing=missing,
+        sys_executable=sys.executable,
+        run_fn=subprocess.run,
+        print_fn=print,
+        load_cv2_fn=_load_cv2_module,
+        load_np_fn=_load_np_module,
+        set_modules_fn=_set_modules,
+    )
 
 
 def rgbToHex(rgb: np.ndarray) -> str:
@@ -839,12 +718,7 @@ def _resolveDescriptionXmlPath(path: str) -> str | None:
 
 
 def _requiredVendorPackages() -> list[str]:
-    return [
-        "numpy",
-        "opencv-python-headless",
-        "Pillow",
-        "PyMuPDF",
-    ]
+    return vendor_install_helpers.requiredVendorPackagesImpl()
 
 
 def buildLinuxVendorInstallCommand(
@@ -852,28 +726,11 @@ def buildLinuxVendorInstallCommand(
     platform_tag: str = "manylinux2014_x86_64",
     python_version: str | None = None,
 ) -> list[str]:
-    if python_version is None:
-        python_version = f"{sys.version_info.major}{sys.version_info.minor}"
-
-    return [
-        sys.executable,
-        "-m",
-        "pip",
-        "install",
-        "--upgrade",
-        "--target",
-        vendor_dir,
-        "--platform",
-        platform_tag,
-        "--implementation",
-        "cp",
-        "--python-version",
-        python_version,
-        "--only-binary=:all:",
-        "--upgrade-strategy",
-        "eager",
-        *_requiredVendorPackages(),
-    ]
+    return vendor_install_helpers.buildLinuxVendorInstallCommandImpl(
+        vendor_dir=vendor_dir,
+        platform_tag=platform_tag,
+        python_version=python_version,
+    )
 
 
 class Reflection:
@@ -2776,22 +2633,16 @@ def runIterationPipeline(
             time_ns_fn=time.time_ns,
         )
 
-    def _paramsSnapshot(snapshot: dict[str, object]) -> str:
-        return json.dumps(snapshot, ensure_ascii=False, sort_keys=True, default=str)
-
     def _recordRenderFailure(reason: str, *, svg_content: str | None = None, params_snapshot: dict[str, object] | None = None) -> None:
-        if svg_content:
-            _writeAttemptArtifacts(svg_content, failed=True)
-        lines = [
-            "status=render_failure",
-            f"failure_reason={reason}",
-            f"filename={filename}",
-        ]
-        if svg_content:
-            lines.append(f"best_attempt_svg={base}_failed.svg")
-        if params_snapshot is not None:
-            lines.append("params_snapshot=" + _paramsSnapshot(params_snapshot))
-        _writeValidationLog(lines)
+        iteration_artifact_helpers.writeRenderFailureLogImpl(
+            reason=reason,
+            filename=filename,
+            base_name=base,
+            write_attempt_artifacts_fn=_writeAttemptArtifacts,
+            write_validation_log_fn=_writeValidationLog,
+            svg_content=svg_content,
+            params_snapshot=params_snapshot,
+        )
 
     def _writeAttemptArtifacts(svg_content: str, rendered_img=None, diff_img=None, *, failed: bool = False) -> None:
         iteration_artifact_helpers.writeAttemptArtifactsImpl(
@@ -3324,6 +3175,18 @@ def _writeQualityConfig(
     )
 
 
+def _resolveAllowedErrorPerPixel(
+    current_rows: list[dict[str, object]],
+    cfg: dict[str, object],
+) -> tuple[float, str, float, float]:
+    return quality_threshold_helpers.resolveAllowedErrorPerPixelImpl(
+        current_rows,
+        cfg,
+        quality_sort_key_fn=_qualitySortKey,
+        successful_threshold_fn=_computeSuccessfulConversionsErrorThreshold,
+    )
+
+
 def _qualitySortKey(row: dict[str, object]) -> float:
     return optimization_pass_helpers.qualitySortKeyImpl(row)
 
@@ -3579,6 +3442,43 @@ def _tryTemplateTransfer(
     )
 
 
+def _runEmbeddedRasterFallback(
+    *,
+    files: list[str],
+    folder_path: str,
+    svg_out_dir: str,
+    diff_out_dir: str,
+    reports_out_dir: str,
+) -> None:
+    fallback_helpers.runEmbeddedRasterFallbackImpl(
+        files=files,
+        folder_path=folder_path,
+        svg_out_dir=svg_out_dir,
+        diff_out_dir=diff_out_dir,
+        reports_out_dir=reports_out_dir,
+        render_embedded_raster_svg_fn=_renderEmbeddedRasterSvg,
+        create_diff_image_without_cv2_fn=_createDiffImageWithoutCv2,
+        generate_conversion_overviews_fn=generateConversionOverviews,
+        fitz_module=fitz,
+    )
+
+
+def _listRequestedImageFiles(
+    folder_path: str,
+    start_ref: str,
+    end_ref: str,
+    *,
+    selected_variants: set[str] | None,
+) -> tuple[set[str], list[str]]:
+    return conversion_input_helpers.listRequestedImageFilesImpl(
+        folder_path=folder_path,
+        start_ref=start_ref,
+        end_ref=end_ref,
+        selected_variants=selected_variants,
+        in_requested_range_fn=_inRequestedRange,
+    )
+
+
 def convertRange(
     folder_path: str,
     csv_path: str,
@@ -3600,37 +3500,20 @@ def convertRange(
     os.makedirs(diff_out_dir, exist_ok=True)
     os.makedirs(reports_out_dir, exist_ok=True)
 
-    normalized_selected_variants = {str(v).upper() for v in (selected_variants or set()) if str(v).strip()}
-    files = sorted(
-        f
-        for f in os.listdir(folder_path)
-        if f.lower().endswith((".bmp", ".jpg", ".png", ".gif"))
-        and _inRequestedRange(f, start_ref, end_ref)
-        and (not normalized_selected_variants or os.path.splitext(f)[0].upper() in normalized_selected_variants)
+    normalized_selected_variants, files = _listRequestedImageFiles(
+        folder_path,
+        start_ref,
+        end_ref,
+        selected_variants=selected_variants,
     )
     if cv2 is None or np is None:
-        log_path = os.path.join(reports_out_dir, "Iteration_Log.csv")
-        with open(log_path, mode="w", encoding="utf-8-sig", newline="") as f:
-            writer = csv.writer(f, delimiter=";")
-            writer.writerow(["Dateiname", "Gefundene Elemente", "Beste Iteration", "Diff-Score", "FehlerProPixel"])
-            for filename in files:
-                stem = os.path.splitext(filename)[0]
-                image_path = os.path.join(folder_path, filename)
-                svg_content = _renderEmbeddedRasterSvg(image_path)
-                svg_path = os.path.join(svg_out_dir, f"{stem}.svg")
-                with open(svg_path, "w", encoding="utf-8") as svg_file:
-                    svg_file.write(svg_content)
-                if fitz is not None:
-                    diff = _createDiffImageWithoutCv2(image_path, svg_content)
-                    diff.save(os.path.join(diff_out_dir, f"{stem}_diff.png"))
-                writer.writerow([filename, "embedded-raster", 0, "0.00", "0.00000000"])
-        with open(os.path.join(reports_out_dir, "fallback_mode.txt"), "w", encoding="utf-8") as f:
-            f.write(
-                "Fallback-Modus aktiv: fehlende numpy/opencv-Abhängigkeiten; "
-                "SVG-Dateien wurden als eingebettete Rasterbilder erzeugt"
-                + (" und Differenzbilder via Pillow/PyMuPDF geschrieben.\n" if fitz is not None else ".\n")
-            )
-        generateConversionOverviews(diff_out_dir, svg_out_dir, reports_out_dir)
+        _runEmbeddedRasterFallback(
+            files=files,
+            folder_path=folder_path,
+            svg_out_dir=svg_out_dir,
+            diff_out_dir=diff_out_dir,
+            reports_out_dir=reports_out_dir,
+        )
         return out_root
     rng = _conversionRandom()
     run_seed = 0 if deterministic_order else rng.randrange(1 << 30)
@@ -3652,164 +3535,66 @@ def convertRange(
     existing_donor_rows = _loadExistingConversionRows(out_root, folder_path)
 
     def _convertOne(filename: str, iteration_budget: int, badge_rounds: int) -> tuple[dict[str, object] | None, bool]:
-        image_path = os.path.join(folder_path, filename)
-        base = os.path.splitext(filename)[0]
-        log_file = os.path.join(reports_out_dir, f"{base}_element_validation.log")
-        try:
-            res = runIterationPipeline(
-                image_path,
-                csv_path,
-                max(1, int(iteration_budget)),
-                svg_out_dir,
-                diff_out_dir,
-                reports_out_dir,
-                debug_ac0811_dir,
-                debug_element_diff_dir,
-                badge_validation_rounds=max(1, int(badge_rounds)),
-            )
-        except Exception as exc:
-            batch_failures.append(
-                {
-                    "filename": filename,
-                    "status": "batch_error",
-                    "reason": type(exc).__name__,
-                    "details": str(exc),
-                    "log_file": os.path.basename(log_file),
-                }
-            )
-            with open(log_file, "w", encoding="utf-8") as f:
-                f.write(f"status=batch_error\nfilename={filename}\nreason={type(exc).__name__}\ndetails={exc}\n")
-            print(f"[WARN] {filename}: Batchlauf setzt nach Fehler fort ({type(exc).__name__}: {exc})")
-            return None, True
-        if not res:
-            details = _readValidationLogDetails(log_file)
-            status = details.get("status", "")
-            if status in {"render_failure", "batch_error"}:
-                batch_failures.append(
-                    {
-                        "filename": filename,
-                        "status": status,
-                        "reason": details.get("failure_reason", details.get("reason", "unknown")),
-                        "details": details.get("params_snapshot", details.get("details", "")),
-                        "log_file": os.path.basename(log_file),
-                    }
-                )
-                print(f"[WARN] {filename}: Fehler protokolliert, Batchlauf wird fortgesetzt ({status}).")
-                return None, True
-            if status == "semantic_mismatch":
-                batch_failures.append(
-                    {
-                        "filename": filename,
-                        "status": status,
-                        "reason": "semantic_mismatch",
-                        "details": details.get("issue", ""),
-                        "log_file": os.path.basename(log_file),
-                    }
-                )
-                print(f"[WARN] {filename}: Semantischer Fehlmatch, Batchlauf stoppt nach diesem Fehler.")
-                return None, True
-            return None, False
-
-        _base, _desc, params, best_iter, best_error = res
-        details = _readValidationLogDetails(log_file)
-        img = cv2.imread(image_path)
-        pixel_count = 1.0
-        width = 0
-        height = 0
-        mean_delta2 = float("inf")
-        std_delta2 = float("inf")
-        if img is not None:
-            height, width = img.shape[:2]
-            pixel_count = float(max(1, width * height))
-            svg_path = os.path.join(svg_out_dir, f"{os.path.splitext(filename)[0]}.svg")
-            if os.path.exists(svg_path):
-                try:
-                    with open(svg_path, "r", encoding="utf-8") as f:
-                        svg_content = f.read()
-                except OSError:
-                    svg_content = ""
-                if svg_content:
-                    rendered = Action.renderSvgToNumpy(svg_content, width, height)
-                    mean_delta2, std_delta2 = Action.calculateDelta2Stats(img, rendered)
-
-        return {
-            "filename": filename,
-            "params": params,
-            "best_iter": int(best_iter),
-            "best_error": float(best_error),
-            "convergence": str(details.get("convergence", "")).strip().lower(),
-            "error_per_pixel": float(best_error) / pixel_count,
-            "mean_delta2": float(mean_delta2),
-            "std_delta2": float(std_delta2),
-            "w": int(width),
-            "h": int(height),
-            "base": getBaseNameFromFile(os.path.splitext(filename)[0]).upper(),
-            "variant": os.path.splitext(filename)[0].upper(),
-        }, False
+        return conversion_execution_helpers.convertOneImpl(
+            filename=filename,
+            folder_path=folder_path,
+            csv_path=csv_path,
+            iteration_budget=iteration_budget,
+            badge_rounds=badge_rounds,
+            svg_out_dir=svg_out_dir,
+            diff_out_dir=diff_out_dir,
+            reports_out_dir=reports_out_dir,
+            debug_ac0811_dir=debug_ac0811_dir,
+            debug_element_diff_dir=debug_element_diff_dir,
+            run_iteration_pipeline_fn=runIterationPipeline,
+            read_validation_log_details_fn=_readValidationLogDetails,
+            render_svg_to_numpy_fn=Action.renderSvgToNumpy,
+            calculate_delta2_stats_fn=Action.calculateDelta2Stats,
+            get_base_name_from_file_fn=getBaseNameFromFile,
+            cv2_module=cv2,
+            append_batch_failure_fn=batch_failures.append,
+            print_fn=print,
+        )
 
     # Initial conversion pass for all forms.
-    for filename in process_files:
-        row, failed = _convertOne(filename, iteration_budget=base_iterations, badge_rounds=6)
-        if failed:
-            stop_after_failure = True
-            break
-        if row is None:
-            continue
-
-        donor_rows = [
-            prev
-            for key, prev in result_map.items()
-            if key != filename and math.isfinite(float(prev.get("error_per_pixel", float("inf"))))
-        ]
-        donor_rows.extend(prev for prev in existing_donor_rows if str(prev.get("filename", "")) != filename)
-        if donor_rows:
-            transferred, _detail = _tryTemplateTransfer(
-                target_row=row,
-                donor_rows=donor_rows,
-                folder_path=folder_path,
-                svg_out_dir=svg_out_dir,
-                diff_out_dir=diff_out_dir,
-                rng=rng,
-                deterministic_order=deterministic_order,
-            )
-            if transferred is not None and float(transferred.get("error_per_pixel", float("inf"))) + 1e-9 < float(row.get("error_per_pixel", float("inf"))):
-                row = transferred
-
-        variant = str(row.get("variant", "")).strip().upper()
-        previous_row = conversion_bestlist_rows.get(variant)
-        if _isConversionBestlistCandidateBetter(previous_row, row):
-            result_map[filename] = row
-            conversion_bestlist_rows[variant] = dict(row)
-            _storeConversionBestlistSnapshot(variant, row, svg_out_dir, reports_out_dir)
-        else:
-            restored_row = _restoreConversionBestlistSnapshot(variant, svg_out_dir, reports_out_dir)
-            result_map[filename] = _chooseConversionBestlistRow(row, previous_row, restored_row)
+    stop_after_failure = conversion_initial_pass_helpers.runInitialConversionPassImpl(
+        process_files=process_files,
+        result_map=result_map,
+        existing_donor_rows=existing_donor_rows,
+        conversion_bestlist_rows=conversion_bestlist_rows,
+        folder_path=folder_path,
+        svg_out_dir=svg_out_dir,
+        diff_out_dir=diff_out_dir,
+        rng=rng,
+        deterministic_order=deterministic_order,
+        base_iterations=base_iterations,
+        convert_one_fn=_convertOne,
+        try_template_transfer_fn=_tryTemplateTransfer,
+        is_conversion_bestlist_candidate_better_fn=_isConversionBestlistCandidateBetter,
+        store_conversion_bestlist_snapshot_fn=lambda variant, row: _storeConversionBestlistSnapshot(
+            variant,
+            row,
+            svg_out_dir,
+            reports_out_dir,
+        ),
+        restore_conversion_bestlist_snapshot_fn=lambda variant: _restoreConversionBestlistSnapshot(
+            variant,
+            svg_out_dir,
+            reports_out_dir,
+        ),
+        choose_conversion_bestlist_row_fn=_chooseConversionBestlistRow,
+    )
 
     current_rows = [
         row
         for row in result_map.values()
         if math.isfinite(float(row.get("error_per_pixel", float("inf"))))
     ]
-    ranked_rows = sorted(current_rows, key=_qualitySortKey)
-    first_cut = max(1, len(ranked_rows) // 3) if ranked_rows else 0
-    initial_top_tercile = ranked_rows[:first_cut]
-    initial_threshold = float(initial_top_tercile[-1]["error_per_pixel"]) if initial_top_tercile else float("inf")
-
-    successful_threshold = _computeSuccessfulConversionsErrorThreshold(current_rows)
-    threshold_source = "successful-conversions-mean-plus-2std"
-    if not math.isfinite(successful_threshold):
-        successful_threshold = initial_threshold
-        threshold_source = "initial-first-tercile"
-
     cfg = _loadQualityConfig(reports_out_dir)
-    allowed_error_pp = successful_threshold
-    cfg_value = cfg.get("allowed_error_per_pixel")
-    if cfg_value is not None:
-        try:
-            allowed_error_pp = max(0.0, float(cfg_value))
-            threshold_source = "manual-config"
-        except (TypeError, ValueError):
-            allowed_error_pp = successful_threshold
+    allowed_error_pp, threshold_source, _successful_threshold, _initial_threshold = _resolveAllowedErrorPerPixel(
+        current_rows,
+        cfg,
+    )
 
     # Global policy: do not freeze individual variants. Every quality pass keeps
     # all variants eligible so each run can re-evaluate with stochastic search
@@ -3826,95 +3611,59 @@ def convertRange(
     # Iteratively refine unresolved quality cases while preserving all already
     # successful outputs (replace only when strictly better).
     strategy_logs: list[dict[str, object]] = []
-    for pass_idx in range(1, max_quality_passes + 1):
-        if stop_after_failure:
-            break
-        Action.STOCHASTIC_SEED_OFFSET = pass_idx
-        current_rows = [
-            row
-            for row in result_map.values()
-            if math.isfinite(float(row.get("error_per_pixel", float("inf"))))
-        ]
-        candidates = _selectOpenQualityCases(
-            current_rows,
-            allowed_error_per_pixel=allowed_error_pp,
-            skip_variants=skip_variants,
-        )
-        # Fallback to the historical selection when no explicit open set exists
-        # (e.g. without threshold config).
-        if not candidates:
-            candidates = _selectMiddleLowerTercile(current_rows)
-        if not candidates:
-            break
+    stop_after_failure = conversion_quality_pass_helpers.runQualityPassesImpl(
+        max_quality_passes=max_quality_passes,
+        stop_after_failure=stop_after_failure,
+        deterministic_order=deterministic_order,
+        rng=rng,
+        base_iterations=base_iterations,
+        allowed_error_per_pixel=allowed_error_pp,
+        skip_variants=skip_variants,
+        result_map=result_map,
+        quality_logs=quality_logs,
+        conversion_bestlist_rows=conversion_bestlist_rows,
+        convert_one_fn=_convertOne,
+        select_open_quality_cases_fn=_selectOpenQualityCases,
+        select_middle_lower_tercile_fn=_selectMiddleLowerTercile,
+        iteration_strategy_for_pass_fn=_iterationStrategyForPass,
+        adaptive_iteration_budget_for_quality_row_fn=_adaptiveIterationBudgetForQualityRow,
+        evaluate_quality_pass_candidate_fn=_evaluateQualityPassCandidate,
+        store_conversion_bestlist_snapshot_fn=lambda variant, row: _storeConversionBestlistSnapshot(
+            variant,
+            row,
+            svg_out_dir,
+            reports_out_dir,
+        ),
+        restore_conversion_bestlist_snapshot_fn=lambda variant: _restoreConversionBestlistSnapshot(
+            variant,
+            svg_out_dir,
+            reports_out_dir,
+        ),
+        before_pass_fn=lambda pass_idx: setattr(Action, "STOCHASTIC_SEED_OFFSET", pass_idx),
+    )
 
-        improved_in_pass = False
-        iteration_budget, badge_rounds = _iterationStrategyForPass(pass_idx, base_iterations)
-        if len(candidates) > 1 and not deterministic_order:
-            rng.shuffle(candidates)
-        for row in candidates:
-            filename = str(row["filename"])
-            adaptive_iteration_budget = _adaptiveIterationBudgetForQualityRow(row, iteration_budget)
-            new_row, failed = _convertOne(filename, iteration_budget=adaptive_iteration_budget, badge_rounds=badge_rounds)
-            if failed:
-                stop_after_failure = True
-                break
-            if new_row is None:
-                continue
-
-            improved, decision, prev_error_pp, new_error_pp, prev_mean_delta2, new_mean_delta2 = _evaluateQualityPassCandidate(
-                row,
-                new_row,
-            )
-            if improved:
-                result_map[filename] = new_row
-                improved_in_pass = True
-                variant = str(new_row.get("variant", "")).strip().upper()
-                if variant:
-                    conversion_bestlist_rows[variant] = dict(new_row)
-                    _storeConversionBestlistSnapshot(variant, new_row, svg_out_dir, reports_out_dir)
-            else:
-                variant = str(row.get("variant", "")).strip().upper()
-                if variant:
-                    _restoreConversionBestlistSnapshot(variant, svg_out_dir, reports_out_dir)
-
-            quality_logs.append(
-                {
-                    "pass": pass_idx,
-                    "filename": filename,
-                    "old_error_per_pixel": prev_error_pp,
-                    "new_error_per_pixel": new_error_pp,
-                    "old_mean_delta2": prev_mean_delta2,
-                    "new_mean_delta2": new_mean_delta2,
-                    "improved": improved,
-                    "decision": decision,
-                    "iteration_budget": adaptive_iteration_budget,
-                    "badge_validation_rounds": badge_rounds,
-                }
-            )
-
-        # Stop as soon as a full pass yields no strict improvement.
-        if stop_after_failure or not improved_in_pass:
-            break
-
-    _writeQualityPassReport(reports_out_dir, quality_logs)
-    _writeConversionBestlistMetrics(conversion_bestlist_path, conversion_bestlist_rows)
-    _writeBatchFailureSummary(reports_out_dir, batch_failures)
-    if strategy_logs:
-        _writeStrategySwitchTemplateTransfersReport(reports_out_dir, strategy_logs)
-
-    log_path = os.path.join(reports_out_dir, "Iteration_Log.csv")
-    semantic_results = _writeIterationLogAndCollectSemanticResults(files, result_map, log_path)
-
-    _harmonizeSemanticSizeVariants(semantic_results, folder_path, svg_out_dir, reports_out_dir)
-    _runPostConversionReporting(
+    conversion_finalization_helpers.runConversionFinalizationImpl(
+        reports_out_dir=reports_out_dir,
+        quality_logs=quality_logs,
+        conversion_bestlist_path=conversion_bestlist_path,
+        conversion_bestlist_rows=conversion_bestlist_rows,
+        batch_failures=batch_failures,
+        strategy_logs=strategy_logs,
+        files=files,
+        result_map=result_map,
         folder_path=folder_path,
         csv_path=csv_path,
         iterations=iterations,
         svg_out_dir=svg_out_dir,
         diff_out_dir=diff_out_dir,
-        reports_out_dir=reports_out_dir,
         normalized_selected_variants=normalized_selected_variants,
-        result_map=result_map,
+        write_quality_pass_report_fn=_writeQualityPassReport,
+        write_conversion_bestlist_metrics_fn=_writeConversionBestlistMetrics,
+        write_batch_failure_summary_fn=_writeBatchFailureSummary,
+        write_strategy_switch_template_transfers_report_fn=_writeStrategySwitchTemplateTransfersReport,
+        write_iteration_log_and_collect_semantic_results_fn=_writeIterationLogAndCollectSemanticResults,
+        harmonize_semantic_size_variants_fn=_harmonizeSemanticSizeVariants,
+        run_post_conversion_reporting_fn=_runPostConversionReporting,
     )
 
     Action.STOCHASTIC_SEED_OFFSET = 0
@@ -4329,90 +4078,24 @@ def _promptInteractiveRange(args: argparse.Namespace) -> tuple[str, str]:
 
 def main(argv: list[str] | None = None) -> int:
     args = parseArgs(argv)
-    if bool(getattr(args, "_render_svg_subprocess", False)):
-        return _runSvgRenderSubprocessEntrypoint()
-    global SVG_RENDER_SUBPROCESS_ENABLED, SVG_RENDER_SUBPROCESS_TIMEOUT_SEC
-    if bool(args.isolate_svg_render):
-        SVG_RENDER_SUBPROCESS_ENABLED = True
-    SVG_RENDER_SUBPROCESS_TIMEOUT_SEC = max(1.0, float(args.isolate_svg_render_timeout_sec))
-    log_path = str(args.log_file or "").strip()
-    with _optionalLogCapture(log_path):
-        try:
-            if args.ac08_regression_set:
-                args.start = "AC0000"
-                args.end = "ZZ9999"
-
-            if args.print_linux_vendor_command:
-                print(
-                    " ".join(
-                        buildLinuxVendorInstallCommand(
-                            vendor_dir=args.vendor_dir,
-                            platform_tag=args.vendor_platform,
-                            python_version=args.vendor_python_version,
-                        )
-                    )
-                )
-                return 0
-
-            if args.interactive_range or args.start is None or args.end is None:
-                args.start, args.end = _promptInteractiveRange(args)
-            else:
-                args.start = str(args.start or "").strip()
-                args.end = str(args.end or "ZZZZZZ").strip() or args.start
-
-            csv_path, output_dir = _resolveCliCsvAndOutput(args)
-
-            if not csv_path:
-                print("[WARN] Keine CSV/TSV/XML angegeben oder gefunden. Einige Symbole können ohne Beschreibung übersprungen werden.")
-            elif not os.path.exists(csv_path):
-                print(f"[WARN] CSV/TSV/XML-Datei nicht gefunden: {csv_path}")
-            elif args.mode == "convert":
-                # Validate user-supplied description data before the batch starts so
-                # malformed files fail with a precise source location even when the
-                # selected image range happens to be empty.
-                _loadDescriptionMapping(csv_path)
-
-            if args.bootstrap_deps:
-                try:
-                    installed = _bootstrapRequiredImageDependencies()
-                except RuntimeError as exc:
-                    print(f"[ERROR] {exc}")
-                    return 2
-                if installed:
-                    print(f"[INFO] Installiert: {', '.join(installed)}")
-
-            if args.ac08_regression_set:
-                print(
-                    "[INFO] Verwende festes AC08-Regression-Set "
-                    f"{AC08_REGRESSION_SET_NAME}: {', '.join(AC08_REGRESSION_VARIANTS)}"
-                )
-            selected_variants = set(AC08_REGRESSION_VARIANTS) if args.ac08_regression_set else None
-
-            if args.mode == "annotate":
-                out_dir = analyzeRange(
-                    args.folder_path,
-                    output_root=output_dir,
-                    start_ref=args.start,
-                    end_ref=args.end,
-                )
-            else:
-                out_dir = convertRange(
-                    args.folder_path,
-                    csv_path,
-                    args.iterations,
-                    args.start,
-                    args.end,
-                    args.debug_ac0811_dir,
-                    args.debug_element_diff_dir,
-                    output_dir,
-                    selected_variants,
-                    bool(args.deterministic_order),
-                )
-            print(f"\nAbgeschlossen! Ausgaben unter: {out_dir}")
-            return 0
-        except DescriptionMappingError as exc:
-            print(f"[ERROR] {_formatUserDiagnostic(exc)}")
-            return 2
+    return cli_helpers.runMainImpl(
+        args,
+        run_svg_render_subprocess_entrypoint_fn=_runSvgRenderSubprocessEntrypoint,
+        set_svg_render_subprocess_enabled_fn=lambda enabled: globals().__setitem__("SVG_RENDER_SUBPROCESS_ENABLED", bool(enabled)),
+        set_svg_render_subprocess_timeout_fn=lambda timeout: globals().__setitem__("SVG_RENDER_SUBPROCESS_TIMEOUT_SEC", float(timeout)),
+        optional_log_capture_fn=_optionalLogCapture,
+        build_linux_vendor_install_command_fn=buildLinuxVendorInstallCommand,
+        prompt_interactive_range_fn=_promptInteractiveRange,
+        resolve_cli_csv_and_output_fn=_resolveCliCsvAndOutput,
+        load_description_mapping_fn=_loadDescriptionMapping,
+        bootstrap_required_image_dependencies_fn=_bootstrapRequiredImageDependencies,
+        analyze_range_fn=analyzeRange,
+        convert_range_fn=convertRange,
+        format_user_diagnostic_fn=_formatUserDiagnostic,
+        description_mapping_error_type=DescriptionMappingError,
+        ac08_regression_set_name=AC08_REGRESSION_SET_NAME,
+        ac08_regression_variants=AC08_REGRESSION_VARIANTS,
+    )
 
 def convertImage(input_path: str, output_path: str, *, max_iter: int = 120, plateau_limit: int = 14, seed: int = 42) -> Path:
     """Backward-compatible single-image entrypoint.
