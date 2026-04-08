@@ -1,0 +1,1745 @@
+timestamp_utc: 2026-04-08T15:55:15.590873+00:00
+source: src/imageCompositeConverter.py
+target_module: src/iCCModules/imageCompositeConverterRemaining.py
+verify_cmds: ['python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py']
+planned_functions: 158
+successful: 0
+failed: 158
+
+[failed] detectRelevantRegions
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function detectRelevantRegions --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] annotateImageRegions
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function annotateImageRegions --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] analyzeRange
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function analyzeRange --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _optionalDependencyBaseDir
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _optionalDependencyBaseDir --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _vendoredSitePackagesDirs
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _vendoredSitePackagesDirs --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _clearPartialModuleImport
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _clearPartialModuleImport --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _describeOptionalDependencyError
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _describeOptionalDependencyError --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _loadOptionalModule
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _loadOptionalModule --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _importWithVendoredFallback
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _importWithVendoredFallback --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _optional_dependency_base_dir
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _optional_dependency_base_dir --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _vendored_site_packages_dirs
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _vendored_site_packages_dirs --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _describe_optional_dependency_error
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _describe_optional_dependency_error --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _load_optional_module
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _load_optional_module --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _import_with_vendored_fallback
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _import_with_vendored_fallback --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _clip
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _clip --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] loadGrayscaleImage
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function loadGrayscaleImage --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _createDiffImageWithoutCv2
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _createDiffImageWithoutCv2 --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _computeOtsuThreshold
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _computeOtsuThreshold --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _adaptiveThreshold
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _adaptiveThreshold --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] loadBinaryImageWithMode
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function loadBinaryImageWithMode --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] renderCandidateMask
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function renderCandidateMask --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _iou
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _iou --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] scoreCandidate
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function scoreCandidate --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] score_candidate
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function score_candidate --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] randomNeighbor
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function randomNeighbor --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] optimizeElement
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function optimizeElement --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] optimize_element
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function optimize_element --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _grayToHex
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _grayToHex --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] estimateStrokeStyle
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function estimateStrokeStyle --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] candidateToSvg
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function candidateToSvg --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] decomposeCircleWithStem
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function decomposeCircleWithStem --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _missingRequiredImageDependencies
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _missingRequiredImageDependencies --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _bootstrapRequiredImageDependencies
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _bootstrapRequiredImageDependencies --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] rgbToHex
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function rgbToHex --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] getBaseNameFromFile
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function getBaseNameFromFile --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _loadDescriptionMapping
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _loadDescriptionMapping --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _loadDescriptionMappingFromCsv
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _loadDescriptionMappingFromCsv --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _loadDescriptionMappingFromXml
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _loadDescriptionMappingFromXml --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _resolveDescriptionXmlPath
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _resolveDescriptionXmlPath --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _requiredVendorPackages
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _requiredVendorPackages --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] buildLinuxVendorInstallCommand
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function buildLinuxVendorInstallCommand --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _renderSvgToNumpyInprocess
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _renderSvgToNumpyInprocess --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _renderSvgToNumpyViaSubprocess
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _renderSvgToNumpyViaSubprocess --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _render_svg_to_numpy_inprocess
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _render_svg_to_numpy_inprocess --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _render_svg_to_numpy_via_subprocess
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _render_svg_to_numpy_via_subprocess --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _is_fitz_open_monkeypatched
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _is_fitz_open_monkeypatched --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _is_inprocess_renderer_monkeypatched
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _is_inprocess_renderer_monkeypatched --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _bbox_to_dict
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _bbox_to_dict --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _runSvgRenderSubprocessEntrypoint
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _runSvgRenderSubprocessEntrypoint --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _semanticQualityFlags
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _semanticQualityFlags --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] runIterationPipeline
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function runIterationPipeline --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _extractRefParts
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _extractRefParts --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _normalizeRangeToken
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _normalizeRangeToken --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _normalizeExplicitRangeToken
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _normalizeExplicitRangeToken --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _isExplicitSizeVariantToken
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _isExplicitSizeVariantToken --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _compactRangeToken
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _compactRangeToken --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _sharedPartialRangeToken
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _sharedPartialRangeToken --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _matchesPartialRangeToken
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _matchesPartialRangeToken --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _extractSymbolFamily
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _extractSymbolFamily --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _matchesExactPrefixFilter
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _matchesExactPrefixFilter --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _inRequestedRange
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _inRequestedRange --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _conversionRandom
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _conversionRandom --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _writeIterationLogAndCollectSemanticResults
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _writeIterationLogAndCollectSemanticResults --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _runPostConversionReporting
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _runPostConversionReporting --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _defaultConvertedSymbolsRoot
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _defaultConvertedSymbolsRoot --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _convertedSvgOutputDir
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _convertedSvgOutputDir --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _readValidationLogDetails
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _readValidationLogDetails --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _writeBatchFailureSummary
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _writeBatchFailureSummary --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _writeStrategySwitchTemplateTransfersReport
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _writeStrategySwitchTemplateTransfersReport --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _collectDescriptionFragments
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _collectDescriptionFragments --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _semanticAuditRecord
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _semanticAuditRecord --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _writeSemanticAuditReport
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _writeSemanticAuditReport --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _diffOutputDir
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _diffOutputDir --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _reportsOutputDir
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _reportsOutputDir --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _isSemanticTemplateVariant
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _isSemanticTemplateVariant --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _loadExistingConversionRows
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _loadExistingConversionRows --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _sniffRasterSize
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _sniffRasterSize --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _svgHrefMimeType
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _svgHrefMimeType --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _renderEmbeddedRasterSvg
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _renderEmbeddedRasterSvg --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _qualityConfigPath
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _qualityConfigPath --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _loadQualityConfig
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _loadQualityConfig --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _writeQualityConfig
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _writeQualityConfig --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _resolveAllowedErrorPerPixel
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _resolveAllowedErrorPerPixel --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _qualitySortKey
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _qualitySortKey --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _computeSuccessfulConversionsErrorThreshold
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _computeSuccessfulConversionsErrorThreshold --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _selectMiddleLowerTercile
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _selectMiddleLowerTercile --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _selectOpenQualityCases
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _selectOpenQualityCases --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _iterationStrategyForPass
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _iterationStrategyForPass --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _adaptiveIterationBudgetForQualityRow
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _adaptiveIterationBudgetForQualityRow --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _writeQualityPassReport
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _writeQualityPassReport --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _evaluateQualityPassCandidate
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _evaluateQualityPassCandidate --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _extractSvgInner
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _extractSvgInner --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _buildTransformedSvgFromTemplate
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _buildTransformedSvgFromTemplate --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _templateTransferScaleCandidates
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _templateTransferScaleCandidates --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _estimateTemplateTransferScale
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _estimateTemplateTransferScale --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _templateTransferTransformCandidates
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _templateTransferTransformCandidates --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _rankTemplateTransferDonors
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _rankTemplateTransferDonors --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _templateTransferDonorFamilyCompatible
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _templateTransferDonorFamilyCompatible --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _semanticTransferRotations
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _semanticTransferRotations --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _semanticTransferIsCompatible
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _semanticTransferIsCompatible --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _connectorArmDirection
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _connectorArmDirection --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _connectorStemDirection
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _connectorStemDirection --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _semanticTransferScaleCandidates
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _semanticTransferScaleCandidates --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _semanticTransferBadgeParams
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _semanticTransferBadgeParams --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _tryTemplateTransfer
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _tryTemplateTransfer --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _runEmbeddedRasterFallback
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _runEmbeddedRasterFallback --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _listRequestedImageFiles
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _listRequestedImageFiles --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] convertRange
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function convertRange --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _readSvgGeometry
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _readSvgGeometry --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _normalizedGeometrySignature
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _normalizedGeometrySignature --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _maxSignatureDelta
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _maxSignatureDelta --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _needsLargeCircleOverflowGuard
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _needsLargeCircleOverflowGuard --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _scaleBadgeParams
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _scaleBadgeParams --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _harmonizationAnchorPriority
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _harmonizationAnchorPriority --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _clipGray
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _clipGray --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _captureCanonicalBadgeColors
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _captureCanonicalBadgeColors --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _applyCanonicalBadgeColors
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _applyCanonicalBadgeColors --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _familyHarmonizedBadgeColors
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _familyHarmonizedBadgeColors --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _harmonizeSemanticSizeVariants
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _harmonizeSemanticSizeVariants --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _writeAc08RegressionManifest
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _writeAc08RegressionManifest --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _summarizePreviousGoodAc08Variants
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _summarizePreviousGoodAc08Variants --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _writeAc08SuccessCriteriaReport
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _writeAc08SuccessCriteriaReport --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _emitAc08SuccessGateStatus
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _emitAc08SuccessGateStatus --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _writeAc08WeakFamilyStatusReport
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _writeAc08WeakFamilyStatusReport --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _writePixelDelta2Ranking
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _writePixelDelta2Ranking --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _loadIterationLogRows
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _loadIterationLogRows --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _findImagePathByVariant
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _findImagePathByVariant --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] collectSuccessfulConversionQualityMetrics
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function collectSuccessfulConversionQualityMetrics --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _successfulConversionMetricsAvailable
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _successfulConversionMetricsAvailable --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _parseSuccessfulConversionManifestLine
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _parseSuccessfulConversionManifestLine --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _readSuccessfulConversionManifestMetrics
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _readSuccessfulConversionManifestMetrics --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _successfulConversionSnapshotDir
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _successfulConversionSnapshotDir --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _successfulConversionSnapshotPaths
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _successfulConversionSnapshotPaths --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _restoreSuccessfulConversionSnapshot
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _restoreSuccessfulConversionSnapshot --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _storeSuccessfulConversionSnapshot
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _storeSuccessfulConversionSnapshot --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _isSuccessfulConversionCandidateBetter
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _isSuccessfulConversionCandidateBetter --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _mergeSuccessfulConversionMetrics
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _mergeSuccessfulConversionMetrics --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _formatSuccessfulConversionManifestLine
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _formatSuccessfulConversionManifestLine --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _conversionBestlistManifestPath
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _conversionBestlistManifestPath --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _readConversionBestlistMetrics
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _readConversionBestlistMetrics --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _writeConversionBestlistMetrics
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _writeConversionBestlistMetrics --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _storeConversionBestlistSnapshot
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _storeConversionBestlistSnapshot --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _restoreConversionBestlistSnapshot
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _restoreConversionBestlistSnapshot --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _isConversionBestlistCandidateBetter
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _isConversionBestlistCandidateBetter --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _chooseConversionBestlistRow
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _chooseConversionBestlistRow --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _latestFailedConversionManifestEntry
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _latestFailedConversionManifestEntry --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] updateSuccessfulConversionsManifestWithMetrics
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function updateSuccessfulConversionsManifestWithMetrics --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _sortedSuccessfulConversionMetricsRows
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _sortedSuccessfulConversionMetricsRows --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _writeSuccessfulConversionCsvTable
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _writeSuccessfulConversionCsvTable --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] writeSuccessfulConversionQualityReport
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function writeSuccessfulConversionQualityReport --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] parseArgs
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function parseArgs --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _optionalLogCapture
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _optionalLogCapture --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _autoDetectCsvPath
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _autoDetectCsvPath --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _resolveCliCsvAndOutput
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _resolveCliCsvAndOutput --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _formatUserDiagnostic
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _formatUserDiagnostic --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] _promptInteractiveRange
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _promptInteractiveRange --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] convertImage
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function convertImage --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
+
+[failed] convertImageVariants
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function convertImageVariants --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 1
+  stdout:
+    Extraction rolled back because verification failed.
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+      File "src/imageCompositeConverter.py", line 30
+        from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
+        ^^^^
+    SyntaxError: invalid syntax
