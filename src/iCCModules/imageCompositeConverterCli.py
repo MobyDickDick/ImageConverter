@@ -341,8 +341,17 @@ def runMainImpl(
                 )
                 return 0
 
-            if args.interactive_range or args.start is None or args.end is None:
+            needs_prompt = bool(args.interactive_range or args.start is None or args.end is None)
+            can_prompt = bool(getattr(sys.stdin, "isatty", lambda: False)())
+            if needs_prompt and can_prompt:
                 args.start, args.end = prompt_interactive_range_fn(args)
+            elif needs_prompt:
+                args.start = str(args.start or "").strip()
+                args.end = str(args.end or "ZZZZZZ").strip() or args.start
+                print(
+                    "[INFO] Kein interaktives Terminal erkannt; "
+                    f"verwende Bereich von '{args.start or '(Anfang)'}' bis '{args.end or '(Ende)'}'."
+                )
             else:
                 args.start = str(args.start or "").strip()
                 args.end = str(args.end or "ZZZZZZ").strip() or args.start
