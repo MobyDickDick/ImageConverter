@@ -85,6 +85,7 @@ from src.iCCModules import imageCompositeConverterRendering as rendering_helpers
 from src.iCCModules import imageCompositeConverterRenderRuntime as rendering_runtime_helpers
 from src.iCCModules import imageCompositeConverterRenderDispatch as render_dispatch_helpers
 from src.iCCModules import imageCompositeConverterBatchReporting as batch_reporting_helpers
+from src.iCCModules import imageCompositeConverterConversionInputs as conversion_input_helpers
 from src.iCCModules import imageCompositeConverterConversionExecution as conversion_execution_helpers
 from src.iCCModules import imageCompositeConverterConversionInitialPass as conversion_initial_pass_helpers
 from src.iCCModules import imageCompositeConverterConversionQualityPass as conversion_quality_pass_helpers
@@ -3462,6 +3463,22 @@ def _runEmbeddedRasterFallback(
     )
 
 
+def _listRequestedImageFiles(
+    folder_path: str,
+    start_ref: str,
+    end_ref: str,
+    *,
+    selected_variants: set[str] | None,
+) -> tuple[set[str], list[str]]:
+    return conversion_input_helpers.listRequestedImageFilesImpl(
+        folder_path=folder_path,
+        start_ref=start_ref,
+        end_ref=end_ref,
+        selected_variants=selected_variants,
+        in_requested_range_fn=_inRequestedRange,
+    )
+
+
 def convertRange(
     folder_path: str,
     csv_path: str,
@@ -3483,13 +3500,11 @@ def convertRange(
     os.makedirs(diff_out_dir, exist_ok=True)
     os.makedirs(reports_out_dir, exist_ok=True)
 
-    normalized_selected_variants = {str(v).upper() for v in (selected_variants or set()) if str(v).strip()}
-    files = sorted(
-        f
-        for f in os.listdir(folder_path)
-        if f.lower().endswith((".bmp", ".jpg", ".png", ".gif"))
-        and _inRequestedRange(f, start_ref, end_ref)
-        and (not normalized_selected_variants or os.path.splitext(f)[0].upper() in normalized_selected_variants)
+    normalized_selected_variants, files = _listRequestedImageFiles(
+        folder_path,
+        start_ref,
+        end_ref,
+        selected_variants=selected_variants,
     )
     if cv2 is None or np is None:
         _runEmbeddedRasterFallback(
