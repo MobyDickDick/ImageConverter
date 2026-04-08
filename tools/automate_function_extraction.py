@@ -105,14 +105,34 @@ def _append_or_replace_function(module_text: str, function_text: str, function_n
 def _ensure_import(source_text: str, import_line: str) -> str:
     if import_line in source_text:
         return source_text
+
     lines = source_text.splitlines()
     insert_at = 0
-    for i, line in enumerate(lines):
-        stripped = line.strip()
-        if stripped.startswith("import ") or stripped.startswith("from "):
-            insert_at = i + 1
-        elif insert_at and stripped and not stripped.startswith("#"):
+    try:
+        tree = ast.parse(source_text)
+    except SyntaxError:
+        tree = None
+
+    if tree is not None:
+        body = list(tree.body)
+        if body and isinstance(body[0], ast.Expr) and isinstance(getattr(body[0], "value", None), ast.Constant):
+            if isinstance(body[0].value.value, str):
+                insert_at = getattr(body[0], "end_lineno", body[0].lineno)
+                body = body[1:]
+
+        for stmt in body:
+            if isinstance(stmt, (ast.Import, ast.ImportFrom)):
+                insert_at = getattr(stmt, "end_lineno", stmt.lineno)
+                continue
             break
+    else:
+        for i, line in enumerate(lines):
+            stripped = line.strip()
+            if stripped.startswith("import ") or stripped.startswith("from "):
+                insert_at = i + 1
+            elif insert_at and stripped and not stripped.startswith("#"):
+                break
+
     lines.insert(insert_at, import_line)
     return "\n".join(lines) + "\n"
 
