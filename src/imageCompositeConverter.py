@@ -106,6 +106,7 @@ from src.iCCModules import imageCompositeConverterIterationLog as iteration_log_
 from src.iCCModules import imageCompositeConverterConversionReporting as conversion_reporting_helpers
 from src.iCCModules import imageCompositeConverterConversionFinalization as conversion_finalization_helpers
 from src.iCCModules import imageCompositeConverterRandom as random_helpers
+from src.iCCModules import imageCompositeConverterConversionComposite as conversion_composite_helpers
 from src.iCCModules import imageCompositeConverterLegacyApi as legacy_api_helpers
 from src.iCCModules import imageCompositeConverterElementValidation as element_validation_helpers
 from src.iCCModules import imageCompositeConverterOptimizationElementSearch as element_search_optimization_helpers
@@ -2847,72 +2848,25 @@ def runIterationPipeline(
             _writeValidationLog(["status=skipped_non_composite"])
         return None
 
-    best_error = float("inf")
-    best_svg = ""
-    best_diff = None
-    best_iter = 0
-
-    epsilon_factors = np.linspace(0.05, 0.0005, max_iterations)
-    plateau_tolerance = 1e-6
-    min_plateau_iterations = min(max_iterations, 12)
-    plateau_patience = min(max_iterations, max(8, max_iterations // 6))
-    plateau_streak = 0
-    previous_error: float | None = None
-    stop_reason = "max_iterations"
-    for i, eps in enumerate(epsilon_factors):
-        svg_content = Action.generate_composite_svg(w, h, params, folder_path, float(eps))
-
-        svg_rendered = Action.render_svg_to_numpy(svg_content, w, h)
-        if svg_rendered is None:
-            _recordRenderFailure(
-                "composite_iteration_render_failed",
-                svg_content=svg_content,
-                params_snapshot=params,
-            )
-            return None
-        error = Action.calculate_error(perc.img, svg_rendered)
-
-        if previous_error is not None and abs(error - previous_error) <= plateau_tolerance:
-            plateau_streak += 1
-        else:
-            plateau_streak = 0
-
-        improved = error < best_error
-        if improved or i == 0 or (i + 1) == max_iterations:
-            print(f"  [Iter {i+1}/{max_iterations}] Epsilon={eps:.4f} -> Diff-Fehler: {error:.2f}")
-
-        if improved:
-            best_error, best_svg, best_iter = error, svg_content, i + 1
-            best_diff = Action.create_diff_image(perc.img, svg_rendered)
-
-        previous_error = error
-
-        if (i + 1) >= min_plateau_iterations and plateau_streak >= plateau_patience:
-            print(
-                "  -> Früher Abbruch: Diff-Fehler blieb "
-                f"{plateau_streak + 1} Iterationen innerhalb ±{plateau_tolerance:.0e}"
-            )
-            stop_reason = "plateau"
-            break
-
-    print(f"-> Bester Match in Iteration {best_iter} (Fehler auf {best_error:.2f} reduziert)")
-    if stop_reason == "plateau":
-        if best_iter <= 1:
-            print("-> Konvergenzdiagnose: Plateau ohne messbare Verbesserung (Parameterraum ggf. erweitern)")
-        else:
-            print("-> Konvergenzdiagnose: Plateau nach Verbesserung erreicht (lokales Optimum wahrscheinlich)")
-    else:
-        print("-> Konvergenzdiagnose: Iterationsbudget ausgeschöpft (Optimum unklar, ggf. Suchraum erweitern)")
-
-    if best_svg:
-        _writeAttemptArtifacts(best_svg, diff_img=best_diff)
-
-    _writeValidationLog([
-        "status=composite_ok",
-        f"convergence={stop_reason}",
-        f"best_iter={int(best_iter)}",
-        f"best_error={float(best_error):.6f}",
-    ])
+    best_iter, best_error = conversion_composite_helpers.runCompositeIterationImpl(
+        max_iterations=max_iterations,
+        width=w,
+        height=h,
+        params=params,
+        folder_path=folder_path,
+        target_img=perc.img,
+        np_module=np,
+        generate_composite_svg_fn=Action.generate_composite_svg,
+        render_svg_to_numpy_fn=Action.render_svg_to_numpy,
+        calculate_error_fn=Action.calculate_error,
+        create_diff_image_fn=Action.create_diff_image,
+        write_attempt_artifacts_fn=_writeAttemptArtifacts,
+        write_validation_log_fn=_writeValidationLog,
+        record_render_failure_fn=_recordRenderFailure,
+        print_fn=print,
+    )
+    if not math.isfinite(float(best_error)):
+        return None
     return base, desc, params, best_iter, best_error
 
 
