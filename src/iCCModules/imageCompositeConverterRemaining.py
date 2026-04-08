@@ -1,5 +1,10 @@
 from __future__ import annotations
 
+import importlib
+from pathlib import Path
+
+from src.iCCModules import imageCompositeConverterDependencies as dependency_helpers
+
 def detectRelevantRegions(img) -> list[dict[str, object]]:
     return detectRelevantRegionsImpl(img, cv2_module=cv2, np_module=np)
 
