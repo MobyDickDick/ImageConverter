@@ -2247,6 +2247,7 @@ class Action:
             copy_module=copy,
             math_module=math,
             os_module=os,
+            time_module=time,
             generate_badge_svg_fn=Action.generate_badge_svg,
             fit_to_original_size_fn=Action._fit_to_original_size,
             render_svg_to_numpy_fn=Action.render_svg_to_numpy,
