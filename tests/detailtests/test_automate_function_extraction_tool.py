@@ -87,3 +87,48 @@ def test_rolls_back_when_verification_fails(tmp_path: Path) -> None:
     assert proc.returncode == 1
     assert source.read_text(encoding="utf-8") == original
     assert target.read_text(encoding="utf-8") == ""
+
+
+def test_inserts_import_after_multiline_import_block(tmp_path: Path) -> None:
+    source = tmp_path / "source.py"
+    target = tmp_path / "helpers.py"
+    source.write_text(
+        """
+from pkg import (
+    first,
+    second,
+)
+
+
+def move_me(x: int) -> int:
+    return x + first() + second()
+""".strip()
+        + "\n",
+        encoding="utf-8",
+    )
+
+    proc = _run_tool(
+        "--source",
+        str(source),
+        "--function",
+        "move_me",
+        "--target-module",
+        str(target),
+        "--import-line",
+        "import helpers as helper_mod",
+        "--module-alias",
+        "helper_mod",
+        "--verify-cmd",
+        f"{sys.executable} -m py_compile source.py helpers.py",
+        cwd=tmp_path,
+    )
+
+    assert proc.returncode == 0, proc.stdout + proc.stderr
+    source_text = source.read_text(encoding="utf-8")
+    assert (
+        "from pkg import (\n"
+        "    first,\n"
+        "    second,\n"
+        ")\n"
+        "import helpers as helper_mod\n"
+    ) in source_text
