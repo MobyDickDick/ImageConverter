@@ -113,6 +113,7 @@ from src.iCCModules import imageCompositeConverterElementErrorMetrics as element
 from src.iCCModules import imageCompositeConverterCompositeSvg as composite_svg_helpers
 from src.iCCModules import imageCompositeConverterDiffing as diffing_helpers
 from src.iCCModules import imageCompositeConverterForms as forms_helpers
+from src.iCCModules import imageCompositeConverterColorUtils as color_utils_helpers
 from src.successfulConversions import (
     AC08_MITIGATION_STATUS,
     AC08_PREVIOUSLY_GOOD_VARIANTS,
@@ -284,15 +285,13 @@ fitz = _load_optional_module("fitz")  # PyMuPDF for native SVG rendering
 
 
 def _clip(value, low, high):
-    """Clip scalar/array values without hard-requiring numpy at runtime."""
-    if np is not None:
-        return np.clip(value, low, high)
-    if isinstance(value, (int, float)):
-        return Action._clipScalar(float(value), float(low), float(high))
-    raise RuntimeError("numpy is required for non-scalar clip operations")
-
-
-
+    return color_utils_helpers.clipImpl(
+        value,
+        low,
+        high,
+        np_module=np,
+        clip_scalar_fn=Action._clipScalar,
+    )
 
 
 RGBWert = forms_helpers.RGBWert
@@ -476,8 +475,7 @@ def optimize_element(target: list[list[int]], init: Candidate, *, max_iter: int,
 
 
 def _grayToHex(v: float) -> str:
-    g = max(0, min(255, int(round(v))))
-    return f"#{g:02x}{g:02x}{g:02x}"
+    return color_utils_helpers.grayToHexImpl(v)
 
 
 def estimateStrokeStyle(grayscale: list[list[int]], element: Element, candidate: Candidate) -> tuple[str, str | None, float | None]:
