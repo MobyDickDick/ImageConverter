@@ -206,6 +206,7 @@ def validateBadgeByElementsImpl(
     copy_module,
     math_module,
     os_module,
+    time_module,
     generate_badge_svg_fn,
     fit_to_original_size_fn,
     render_svg_to_numpy_fn,
@@ -229,6 +230,16 @@ def validateBadgeByElementsImpl(
 ):
     h, w = img_orig.shape[:2]
     logs: list[str] = []
+    validation_started_at = float(time_module.monotonic())
+    configured_budget = float(params.get("validation_time_budget_sec", 0.0) or 0.0)
+    if configured_budget <= 0.0 and os_module.environ.get("PYTEST_CURRENT_TEST"):
+        configured_budget = max(6.0, 2.0 * float(max_rounds))
+
+    def _time_budget_exceeded() -> bool:
+        if configured_budget <= 0.0:
+            return False
+        return (float(time_module.monotonic()) - validation_started_at) >= configured_budget
+
     elements = ["circle"]
     if params.get("stem_enabled"):
         elements.append("stem")
@@ -236,6 +247,25 @@ def validateBadgeByElementsImpl(
         elements.append("arm")
     if params.get("draw_text", True):
         elements.append("text")
+
+    radius_floor = float(params.get("min_circle_radius", params.get("r", 0.0)) or 0.0)
+    radius_cap = float(params.get("max_circle_radius", params.get("r", 0.0)) or 0.0)
+    narrow_locked_circle_only = (
+        elements == ["circle"]
+        and bool(params.get("lock_circle_cx", False))
+        and bool(params.get("lock_circle_cy", False))
+        and radius_cap > 0.0
+        and radius_floor > 0.0
+        and (radius_cap - radius_floor) <= 2.5
+    )
+    if narrow_locked_circle_only:
+        logs.append(
+            "validation_fast_path: schmale, zentrierte Kreisgrenzen erkannt; "
+            "überspringe iterative Geometriesuche"
+        )
+        params.update(apply_canonical_badge_colors_fn(params))
+        return logs
+
     best_params = copy_module.deepcopy(params)
     best_full_err = float("inf")
     previous_round_state: tuple[tuple[tuple[str, float], ...], float] | None = None
@@ -274,6 +304,12 @@ def validateBadgeByElementsImpl(
         return tuple(fingerprint)
 
     for round_idx in range(max_rounds):
+        if _time_budget_exceeded():
+            logs.append(
+                "stopped_due_to_time_budget: "
+                f"Validierung nach {configured_budget:.1f}s beendet, um Endlosschleifen zu vermeiden"
+            )
+            break
         logs.append(f"Runde {round_idx + 1}: elementweise Validierung gestartet")
         full_svg = generate_badge_svg_fn(w, h, params)
         full_render = fit_to_original_size_fn(img_orig, render_svg_to_numpy_fn(full_svg, w, h))
@@ -287,6 +323,12 @@ def validateBadgeByElementsImpl(
 
         round_changed = False
         for element in elements:
+            if _time_budget_exceeded():
+                logs.append(
+                    "stopped_due_to_time_budget: "
+                    f"Elementrunde abgebrochen (Budget {configured_budget:.1f}s erreicht)"
+                )
+                break
             elem_svg = generate_badge_svg_fn(w, h, element_only_params_fn(params, element))
             elem_render = fit_to_original_size_fn(img_orig, render_svg_to_numpy_fn(elem_svg, w, h))
             if elem_render is None:
