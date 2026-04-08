@@ -106,6 +106,7 @@ from src.iCCModules import imageCompositeConverterIterationLog as iteration_log_
 from src.iCCModules import imageCompositeConverterConversionReporting as conversion_reporting_helpers
 from src.iCCModules import imageCompositeConverterConversionFinalization as conversion_finalization_helpers
 from src.iCCModules import imageCompositeConverterRandom as random_helpers
+from src.iCCModules import imageCompositeConverterConversionComposite as conversion_composite_helpers
 from src.iCCModules import imageCompositeConverterLegacyApi as legacy_api_helpers
 from src.iCCModules import imageCompositeConverterElementValidation as element_validation_helpers
 from src.iCCModules import imageCompositeConverterOptimizationElementSearch as element_search_optimization_helpers
@@ -125,6 +126,7 @@ from src.successfulConversions import (
     SUCCESSFUL_CONVERSIONS_MANIFEST,
     _loadSuccessfulConversions,
 )
+from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
 
 # Keep regression variant list deterministic and duplicate-free for batch
 # selection/tests even when upstream manifests accidentally repeat entries.
@@ -202,78 +204,59 @@ AC08_ADAPTIVE_LOCK_PROFILES: dict[str, dict[str, float | bool]] = {
 
 
 def detectRelevantRegions(img) -> list[dict[str, object]]:
-    return detectRelevantRegionsImpl(img, cv2_module=cv2, np_module=np)
+    return imageCompositeConverterRemaining_helpers.detectRelevantRegions(img)
 
 
 def annotateImageRegions(img, regions: list[dict[str, object]]):
-    return annotateImageRegionsImpl(img, regions, cv2_module=cv2)
+    return imageCompositeConverterRemaining_helpers.annotateImageRegions(img, regions)
 
 
 def analyzeRange(folder_path: str, output_root: str | None = None, start_ref: str = "", end_ref: str = "ZZZZZZ") -> str:
-    return analyzeRangeImpl(
-        folder_path=folder_path,
-        output_root=output_root,
-        start_ref=start_ref,
-        end_ref=end_ref,
-        default_output_root_fn=_defaultConvertedSymbolsRoot,
-        in_requested_range_fn=_inRequestedRange,
-        detect_regions_fn=detectRelevantRegions,
-        annotate_regions_fn=annotateImageRegions,
-        cv2_module=cv2,
-        np_module=np,
-    )
+    return imageCompositeConverterRemaining_helpers.analyzeRange(folder_path, output_root, start_ref, end_ref)
 
 
 def _optionalDependencyBaseDir() -> Path:
-    return _optional_dependency_base_dir()
+    return imageCompositeConverterRemaining_helpers._optionalDependencyBaseDir()
 
 
 def _vendoredSitePackagesDirs() -> list[Path]:
-    return _vendored_site_packages_dirs()
+    return imageCompositeConverterRemaining_helpers._vendoredSitePackagesDirs()
 
 
 def _clearPartialModuleImport(module_name: str) -> None:
-    dependency_helpers.clear_partial_module_import(module_name)
+    return imageCompositeConverterRemaining_helpers._clearPartialModuleImport(module_name)
 
 
 def _describeOptionalDependencyError(module_name: str, exc: BaseException, attempted_paths: list[Path]) -> str:
-    return _describe_optional_dependency_error(module_name, exc, attempted_paths)
+    return imageCompositeConverterRemaining_helpers._describeOptionalDependencyError(module_name, exc, attempted_paths)
 
 
 def _loadOptionalModule(module_name: str):
-    return _load_optional_module(module_name)
+    return imageCompositeConverterRemaining_helpers._loadOptionalModule(module_name)
 
 
 def _importWithVendoredFallback(module_name: str):
-    return _import_with_vendored_fallback(module_name)
+    return imageCompositeConverterRemaining_helpers._importWithVendoredFallback(module_name)
 
 
 def _optional_dependency_base_dir() -> Path:
-    return dependency_helpers.optional_dependency_base_dir()
+    return imageCompositeConverterRemaining_helpers._optional_dependency_base_dir()
 
 
 def _vendored_site_packages_dirs() -> list[Path]:
-    return dependency_helpers.vendored_site_packages_dirs(base_dir_fn=_optional_dependency_base_dir)
+    return imageCompositeConverterRemaining_helpers._vendored_site_packages_dirs()
 
 
 def _describe_optional_dependency_error(module_name: str, exc: BaseException, attempted_paths: list[Path]) -> str:
-    return dependency_helpers.describe_optional_dependency_error(module_name, exc, attempted_paths)
+    return imageCompositeConverterRemaining_helpers._describe_optional_dependency_error(module_name, exc, attempted_paths)
 
 
 def _load_optional_module(module_name: str):
-    return dependency_helpers.load_optional_module(
-        module_name,
-        vendored_dirs_fn=_vendored_site_packages_dirs,
-        import_module_fn=importlib.import_module,
-    )
+    return imageCompositeConverterRemaining_helpers._load_optional_module(module_name)
 
 
 def _import_with_vendored_fallback(module_name: str):
-    return dependency_helpers.import_with_vendored_fallback(
-        module_name,
-        vendored_dirs_fn=_vendored_site_packages_dirs,
-        import_module_fn=importlib.import_module,
-    )
+    return imageCompositeConverterRemaining_helpers._import_with_vendored_fallback(module_name)
 
 
 # Load numpy before cv2: OpenCV's Python bindings import numpy at module-import
@@ -286,13 +269,7 @@ fitz = _load_optional_module("fitz")  # PyMuPDF for native SVG rendering
 
 
 def _clip(value, low, high):
-    return color_utils_helpers.clipImpl(
-        value,
-        low,
-        high,
-        np_module=np,
-        clip_scalar_fn=Action._clipScalar,
-    )
+    return imageCompositeConverterRemaining_helpers._clip(value, low, high)
 
 
 RGBWert = forms_helpers.RGBWert
@@ -387,294 +364,82 @@ class GlobalParameterVector:
         return out
 
 def loadGrayscaleImage(path: Path) -> list[list[int]]:
-    image_module = _importWithVendoredFallback("PIL.Image")
-    gray = image_module.open(path).convert("L")
-    w, h = gray.size
-    px = gray.load()
-    return [[int(px[x, y]) for x in range(w)] for y in range(h)]
+    return imageCompositeConverterRemaining_helpers.loadGrayscaleImage(path)
 
 
 def _createDiffImageWithoutCv2(input_path: str | Path, svg_content: str):
-    return diffing_helpers.createDiffImageWithoutCv2Impl(
-        input_path,
-        svg_content,
-        fitz_module=fitz,
-    )
+    return imageCompositeConverterRemaining_helpers._createDiffImageWithoutCv2(input_path, svg_content)
 
 
 def _computeOtsuThreshold(grayscale: list[list[int]]) -> int:
-    return thresholding_helpers.computeOtsuThresholdImpl(grayscale)
+    return imageCompositeConverterRemaining_helpers._computeOtsuThreshold(grayscale)
 
 
 def _adaptiveThreshold(grayscale: list[list[int]], block_size: int = 15, c: int = 5) -> list[list[int]]:
-    return thresholding_helpers.adaptiveThresholdImpl(grayscale, block_size=block_size, c=c)
+    return imageCompositeConverterRemaining_helpers._adaptiveThreshold(grayscale, block_size, c)
 
 
 def loadBinaryImageWithMode(path: Path, *, threshold: int = 220, mode: str = "global") -> list[list[int]]:
-    grayscale = loadGrayscaleImage(path)
-    m = str(mode).lower()
-    if m == 'global':
-        return [[1 if v < threshold else 0 for v in row] for row in grayscale]
-    if m == 'otsu':
-        t = _computeOtsuThreshold(grayscale)
-        return [[1 if v < t else 0 for v in row] for row in grayscale]
-    if m == 'adaptive':
-        return _adaptiveThreshold(grayscale)
-    raise ValueError(f"Unknown threshold mode '{mode}'.")
+    return imageCompositeConverterRemaining_helpers.loadBinaryImageWithMode(path, threshold=threshold, mode=mode)
 
 
 def renderCandidateMask(candidate: Candidate, width: int, height: int) -> list[list[int]]:
-    return element_search_optimization_helpers.renderCandidateMaskImpl(
-        candidate,
-        width,
-        height,
-    )
+    return imageCompositeConverterRemaining_helpers.renderCandidateMask(candidate, width, height)
 
 
 def _iou(a: list[list[int]], b: list[list[int]]) -> float:
-    return thresholding_helpers.iouImpl(a, b)
+    return imageCompositeConverterRemaining_helpers._iou(a, b)
 
 
 def scoreCandidate(target: list[list[int]], candidate: Candidate) -> float:
-    return element_search_optimization_helpers.scoreCandidateImpl(
-        target,
-        candidate,
-        render_candidate_mask_fn=renderCandidateMask,
-        iou_fn=_iou,
-    )
+    return imageCompositeConverterRemaining_helpers.scoreCandidate(target, candidate)
 
 
 def score_candidate(target: list[list[int]], candidate: Candidate) -> float:
-    """Snake-case compatibility wrapper for scoreCandidate."""
-    return scoreCandidate(target, candidate)
+    return imageCompositeConverterRemaining_helpers.score_candidate(target, candidate)
 
 
 def randomNeighbor(base: Candidate, scale: float, rng: random.Random) -> Candidate:
-    return element_search_optimization_helpers.randomNeighborImpl(
-        base,
-        scale,
-        rng,
-        candidate_factory=Candidate,
-    )
+    return imageCompositeConverterRemaining_helpers.randomNeighbor(base, scale, rng)
 
 
 def optimizeElement(target: list[list[int]], init: Candidate, *, max_iter: int, plateau_limit: int, seed: int) -> tuple[Candidate, float]:
-    return element_search_optimization_helpers.optimizeElementImpl(
-        target,
-        init,
-        max_iter=max_iter,
-        plateau_limit=plateau_limit,
-        seed=seed,
-        score_candidate_fn=scoreCandidate,
-        random_neighbor_fn=randomNeighbor,
-    )
+    return imageCompositeConverterRemaining_helpers.optimizeElement(target, init, max_iter=max_iter, plateau_limit=plateau_limit, seed=seed)
 
 
 def optimize_element(target: list[list[int]], init: Candidate, *, max_iter: int, plateau_limit: int, seed: int) -> tuple[Candidate, float]:
-    """Snake-case compatibility wrapper for optimizeElement."""
-    return optimizeElement(target, init, max_iter=max_iter, plateau_limit=plateau_limit, seed=seed)
+    return imageCompositeConverterRemaining_helpers.optimize_element(target, init, max_iter=max_iter, plateau_limit=plateau_limit, seed=seed)
 
 
 def _grayToHex(v: float) -> str:
-    return color_utils_helpers.grayToHexImpl(v)
+    return imageCompositeConverterRemaining_helpers._grayToHex(v)
 
 
 def estimateStrokeStyle(grayscale: list[list[int]], element: Element, candidate: Candidate) -> tuple[str, str | None, float | None]:
-    vals = [grayscale[y + element.y0][x + element.x0] for y,row in enumerate(element.pixels) for x,v in enumerate(row) if v]
-    fill = _grayToHex(sum(vals) / max(1, len(vals)))
-    if candidate.shape != 'circle':
-        return fill, None, None
-    r = max(1.0, (candidate.w + candidate.h) / 4.0)
-    inner=[]; outer=[]
-    for y,row in enumerate(element.pixels):
-        for x,v in enumerate(row):
-            if not v: continue
-            d=((x-candidate.cx)**2 + (y-candidate.cy)**2) ** 0.5
-            px = grayscale[y + element.y0][x + element.x0]
-            if d >= r*0.84:
-                outer.append(px)
-            elif d <= r*0.65:
-                inner.append(px)
-    if outer and inner and (sum(outer)/len(outer)) < (sum(inner)/len(inner)) - 10:
-        return _grayToHex(sum(inner)/len(inner)), _grayToHex(sum(outer)/len(outer)), max(1.0, r*0.2)
-    return fill, None, None
+    return imageCompositeConverterRemaining_helpers.estimateStrokeStyle(grayscale, element, candidate)
 
 
 def candidateToSvg(candidate: Candidate, gx: int, gy: int, fill_color: str, stroke_color: str | None = None, stroke_width: float | None = None) -> str:
-    if candidate.shape == 'circle':
-        r = max(1.0, (candidate.w + candidate.h) / 4.0)
-        if stroke_color is not None and stroke_width is not None:
-            r = max(0.5, r - (float(stroke_width) / 2.0))
-        stroke_attr = '' if stroke_color is None else f' stroke="{stroke_color}" stroke-width="{float(stroke_width or 1.0):.2f}"'
-        return f'<circle cx="{candidate.cx + gx:.2f}" cy="{candidate.cy + gy:.2f}" r="{r:.2f}" fill="{fill_color}"{stroke_attr} />'
-    rx = max(1.0, candidate.w / 2.0)
-    ry = max(1.0, candidate.h / 2.0)
-    return f'<ellipse cx="{candidate.cx + gx:.2f}" cy="{candidate.cy + gy:.2f}" rx="{rx:.2f}" ry="{ry:.2f}" fill="{fill_color}" />'
+    return imageCompositeConverterRemaining_helpers.candidateToSvg(candidate, gx, gy, fill_color, stroke_color, stroke_width)
 
 
 def decomposeCircleWithStem(grayscale: list[list[int]], element: Element, candidate: Candidate) -> list[str] | None:
-    if not element.pixels or not element.pixels[0]:
-        return None
-
-    r = max(1.0, (candidate.w + candidate.h) / 4.0)
-    cx = float(candidate.cx)
-    cy = float(candidate.cy)
-
-    # Residual foreground outside the candidate circle corresponds to connectors.
-    residual: list[tuple[int, int]] = []
-    circle_pixels: list[tuple[int, int]] = []
-    for y, row in enumerate(element.pixels):
-        for x, v in enumerate(row):
-            if not v:
-                continue
-            d = math.hypot(float(x) - cx, float(y) - cy)
-            if d <= (r * 1.02):
-                circle_pixels.append((x, y))
-            elif d >= (r * 0.90):
-                residual.append((x, y))
-
-    if not residual:
-        return None
-
-    # Keep only the dominant connected residual cluster.
-    residual_set = set(residual)
-    visited: set[tuple[int, int]] = set()
-    best_cluster: list[tuple[int, int]] = []
-    for seed in residual:
-        if seed in visited:
-            continue
-        stack = [seed]
-        cluster: list[tuple[int, int]] = []
-        visited.add(seed)
-        while stack:
-            px, py = stack.pop()
-            cluster.append((px, py))
-            for nx, ny in ((px + 1, py), (px - 1, py), (px, py + 1), (px, py - 1)):
-                if (nx, ny) in residual_set and (nx, ny) not in visited:
-                    visited.add((nx, ny))
-                    stack.append((nx, ny))
-        if len(cluster) > len(best_cluster):
-            best_cluster = cluster
-
-    if not best_cluster:
-        return None
-
-    xs = [x for x, _ in best_cluster]
-    ys = [y for _, y in best_cluster]
-    sx0, sx1 = min(xs), max(xs)
-    sy0, sy1 = min(ys), max(ys)
-    stem_w = max(1, sx1 - sx0 + 1)
-    stem_h = max(1, sy1 - sy0 + 1)
-
-    # infer connector orientation relative to circle center.
-    mean_x = sum(xs) / max(1, len(xs))
-    mean_y = sum(ys) / max(1, len(ys))
-    dx = abs(mean_x - cx)
-    dy = abs(mean_y - cy)
-    if dx >= dy:
-        stem_direction = "right" if mean_x >= cx else "left"
-    else:
-        stem_direction = "bottom" if mean_y >= cy else "top"
-
-    stem_values = [grayscale[element.y0 + y][element.x0 + x] for x, y in best_cluster]
-    stem_color = _grayToHex(round(sum(stem_values) / max(1, len(stem_values))))
-
-    fill_color, stroke_color, stroke_width = estimateStrokeStyle(grayscale, element, candidate)
-
-    stem_x = float(element.x0 + sx0)
-    stem_y = float(element.y0 + sy0)
-    stem_wf = float(stem_w)
-    stem_hf = float(stem_h)
-    overlap = max(0.6, float(stroke_width or 0.0) * 0.55)
-
-    if stem_direction in {"bottom", "top"}:
-        circle_cx = float(element.x0) + cx
-        circle_cy = float(element.y0) + cy
-        stem_x = circle_cx - (stem_wf / 2.0)
-        old_bottom = float(element.y0 + sy1 + 1)
-        old_top = float(element.y0 + sy0)
-        if stem_direction == "bottom":
-            stem_y = circle_cy + r - overlap
-            stem_hf = max(1.0, old_bottom - stem_y)
-        else:
-            stem_y = old_top
-            stem_hf = max(1.0, (circle_cy - r + overlap) - stem_y)
-    else:
-        circle_cx = float(element.x0) + cx
-        circle_cy = float(element.y0) + cy
-        stem_y = circle_cy - (stem_hf / 2.0)
-        old_right = float(element.x0 + sx1 + 1)
-        old_left = float(element.x0 + sx0)
-        overlap_lr = min(0.2, overlap)
-        if stem_direction == "right":
-            stem_x = circle_cx + r - overlap_lr
-            stem_wf = max(1.0, old_right - stem_x)
-        else:
-            stem_x = old_left
-            stem_wf = max(1.0, (circle_cx - r + overlap_lr) - stem_x)
-
-    rect = (
-        f'<rect x="{stem_x:.2f}" y="{stem_y:.2f}" '
-        f'width="{stem_wf:.2f}" height="{stem_hf:.2f}" fill="{stem_color}"/>'
-    )
-    circle_vals = [grayscale[element.y0 + y][element.x0 + x] for x, y in circle_pixels] or stem_values
-    circle = candidateToSvg(
-        candidate,
-        element.x0,
-        element.y0,
-        fill_color if fill_color else _grayToHex(sum(circle_vals) / max(1, len(circle_vals))),
-        stroke_color,
-        stroke_width,
-    )
-    return [rect, circle]
+    return imageCompositeConverterRemaining_helpers.decomposeCircleWithStem(grayscale, element, candidate)
 
 def _missingRequiredImageDependencies() -> list[str]:
-    return dependency_helpers.missingRequiredImageDependenciesImpl(cv2_module=cv2, np_module=np)
+    return imageCompositeConverterRemaining_helpers._missingRequiredImageDependencies()
 
 
 def _bootstrapRequiredImageDependencies() -> list[str]:
-    missing = _missingRequiredImageDependencies()
-    def _load_cv2_module():
-        import cv2 as _cv2
-
-        return _cv2
-
-    def _load_np_module():
-        import numpy as _np
-
-        return _np
-
-    def _set_modules(*, cv2_module, np_module) -> None:
-        global cv2, np
-        if cv2_module is not None:
-            cv2 = cv2_module
-        if np_module is not None:
-            np = np_module
-
-    return dependency_helpers.bootstrapRequiredImageDependenciesImpl(
-        missing=missing,
-        sys_executable=sys.executable,
-        run_fn=subprocess.run,
-        print_fn=print,
-        load_cv2_fn=_load_cv2_module,
-        load_np_fn=_load_np_module,
-        set_modules_fn=_set_modules,
-    )
+    return imageCompositeConverterRemaining_helpers._bootstrapRequiredImageDependencies()
 
 
 def rgbToHex(rgb: np.ndarray) -> str:
-    return "#{:02x}{:02x}{:02x}".format(int(rgb[0]), int(rgb[1]), int(rgb[2]))
+    return imageCompositeConverterRemaining_helpers.rgbToHex(rgb)
 
 
 def getBaseNameFromFile(filename: str) -> str:
-    name = os.path.splitext(filename)[0]
-    name = re.sub(r"(-\d+)$", "", name)
-    while True:
-        prev = name
-        name = re.sub(r"_([1-9]|L|M|S|[1-9]S|W|X)$", "", name, flags=re.IGNORECASE)
-        if name == prev:
-            break
-    return name
+    return imageCompositeConverterRemaining_helpers.getBaseNameFromFile(filename)
 
 
 @dataclass
@@ -696,29 +461,23 @@ DescriptionMappingError = description_mapping_helpers.DescriptionMappingError
 
 
 def _loadDescriptionMapping(path: str) -> dict[str, str]:
-    return description_mapping_helpers.loadDescriptionMappingImpl(
-        path,
-        get_base_name_from_file_fn=getBaseNameFromFile,
-    )
+    return imageCompositeConverterRemaining_helpers._loadDescriptionMapping(path)
 
 
 def _loadDescriptionMappingFromCsv(path: str) -> dict[str, str]:
-    return description_mapping_helpers.loadDescriptionMappingFromCsvImpl(path)
+    return imageCompositeConverterRemaining_helpers._loadDescriptionMappingFromCsv(path)
 
 
 def _loadDescriptionMappingFromXml(path: str) -> dict[str, str]:
-    return description_mapping_helpers.loadDescriptionMappingFromXmlImpl(
-        path,
-        get_base_name_from_file_fn=getBaseNameFromFile,
-    )
+    return imageCompositeConverterRemaining_helpers._loadDescriptionMappingFromXml(path)
 
 
 def _resolveDescriptionXmlPath(path: str) -> str | None:
-    return description_mapping_helpers.resolveDescriptionXmlPathImpl(path)
+    return imageCompositeConverterRemaining_helpers._resolveDescriptionXmlPath(path)
 
 
 def _requiredVendorPackages() -> list[str]:
-    return vendor_install_helpers.requiredVendorPackagesImpl()
+    return imageCompositeConverterRemaining_helpers._requiredVendorPackages()
 
 
 def buildLinuxVendorInstallCommand(
@@ -726,11 +485,7 @@ def buildLinuxVendorInstallCommand(
     platform_tag: str = "manylinux2014_x86_64",
     python_version: str | None = None,
 ) -> list[str]:
-    return vendor_install_helpers.buildLinuxVendorInstallCommandImpl(
-        vendor_dir=vendor_dir,
-        platform_tag=platform_tag,
-        python_version=python_version,
-    )
+    return imageCompositeConverterRemaining_helpers.buildLinuxVendorInstallCommand(vendor_dir, platform_tag, python_version)
 
 
 class Reflection:
@@ -835,60 +590,35 @@ class Reflection:
     def _parse_semantic_badge_layout_overrides(text: str) -> dict[str, float | str]:
         return Reflection._parseSemanticBadgeLayoutOverrides(text)
 def _renderSvgToNumpyInprocess(svg_string: str, size_w: int, size_h: int):
-    return rendering_helpers.render_svg_to_numpy_inprocess(
-        svg_string,
-        size_w,
-        size_h,
-        fitz_module=fitz,
-        np_module=np,
-        cv2_module=cv2,
-    )
+    return imageCompositeConverterRemaining_helpers._renderSvgToNumpyInprocess(svg_string, size_w, size_h)
 
 
 def _renderSvgToNumpyViaSubprocess(svg_string: str, size_w: int, size_h: int):
-    return rendering_helpers.render_svg_to_numpy_via_subprocess(
-        svg_string,
-        size_w,
-        size_h,
-        np_module=np,
-        timeout_sec=SVG_RENDER_SUBPROCESS_TIMEOUT_SEC,
-    )
+    return imageCompositeConverterRemaining_helpers._renderSvgToNumpyViaSubprocess(svg_string, size_w, size_h)
 
 
 def _render_svg_to_numpy_inprocess(svg_string: str, size_w: int, size_h: int):
-    """Snake-case compatibility wrapper for tests and helper call sites."""
-    return _renderSvgToNumpyInprocess(svg_string, size_w, size_h)
+    return imageCompositeConverterRemaining_helpers._render_svg_to_numpy_inprocess(svg_string, size_w, size_h)
 
 
 def _render_svg_to_numpy_via_subprocess(svg_string: str, size_w: int, size_h: int):
-    """Snake-case compatibility wrapper for tests and helper call sites."""
-    return _renderSvgToNumpyViaSubprocess(svg_string, size_w, size_h)
+    return imageCompositeConverterRemaining_helpers._render_svg_to_numpy_via_subprocess(svg_string, size_w, size_h)
 
 
 def _is_fitz_open_monkeypatched() -> bool:
-    return rendering_runtime_helpers.is_fitz_open_monkeypatched(fitz_module=fitz)
+    return imageCompositeConverterRemaining_helpers._is_fitz_open_monkeypatched()
 
 
 def _is_inprocess_renderer_monkeypatched() -> bool:
-    return rendering_runtime_helpers.is_inprocess_renderer_monkeypatched(
-        inprocess_fn=globals().get("_renderSvgToNumpyInprocess"),
-        module_name=__name__,
-    )
+    return imageCompositeConverterRemaining_helpers._is_inprocess_renderer_monkeypatched()
 
 
 def _bbox_to_dict(label: str, bbox: tuple[int, int, int, int], color: tuple[int, int, int]) -> dict[str, object]:
-    """Snake-case compatibility helper kept for legacy tests and imports."""
-    return rendering_runtime_helpers.bbox_to_dict(label, bbox, color)
+    return imageCompositeConverterRemaining_helpers._bbox_to_dict(label, bbox, color)
 
 
 def _runSvgRenderSubprocessEntrypoint() -> int:
-    status_code, response = rendering_runtime_helpers.run_svg_render_subprocess_entrypoint(
-        stdin_bytes=sys.stdin.buffer.read(),
-        render_svg_to_numpy_inprocess=_renderSvgToNumpyInprocess,
-    )
-    if response:
-        sys.stdout.write(response)
-    return status_code
+    return imageCompositeConverterRemaining_helpers._runSvgRenderSubprocessEntrypoint()
 
 
 class Action:
@@ -2533,18 +2263,7 @@ class Action:
 
 
 def _semanticQualityFlags(base_name: str, validation_logs: list[str]) -> list[str]:
-    """Derive non-fatal quality markers from semantic element-validation logs.
-
-    Semantic structure checks can pass even when one fitted element is still a
-    visually weak match. We keep the conversion successful, but annotate such
-    cases in the per-image validation log so downstream review can spot them.
-    """
-
-    return quality_helpers.semanticQualityFlagsImpl(
-        base_name=base_name,
-        validation_logs=validation_logs,
-        get_base_name_fn=getBaseNameFromFile,
-    )
+    return imageCompositeConverterRemaining_helpers._semanticQualityFlags(base_name, validation_logs)
 
 
 def runIterationPipeline(
@@ -2558,437 +2277,51 @@ def runIterationPipeline(
     debug_element_diff_dir: str | None = None,
     badge_validation_rounds: int = 6,
 ):
-    if cv2 is None or np is None:
-        missing = []
-        if cv2 is None:
-            missing.append("cv2")
-        if np is None:
-            missing.append("numpy")
-        raise RuntimeError(
-            "Required image dependencies are missing: " + ", ".join(missing) + ". "
-            "Install dependencies before running the conversion pipeline."
-        )
-    if fitz is None:
-        raise RuntimeError(
-            "Required SVG renderer dependency is missing: fitz (PyMuPDF). "
-            "Install PyMuPDF before running the conversion pipeline."
-        )
-
-    folder_path = os.path.dirname(img_path)
-    filename = os.path.basename(img_path)
-
-    perc = Perception(img_path, csv_path)
-    if perc.img is None:
-        return None
-    h, w = perc.img.shape[:2]
-
-    ref = Reflection(perc.raw_desc)
-    desc, params = ref.parse_description(perc.base_name, filename)
-    semantic_audit_targets = {"AC0811", "AC0812", "AC0813", "AC0814"}
-    semantic_audit_row: dict[str, object] | None = None
-    if getBaseNameFromFile(perc.base_name).upper() in semantic_audit_targets:
-        semantic_audit_row = _semanticAuditRecord(
-            base_name=perc.base_name,
-            filename=filename,
-            description_fragments=list(params.get("description_fragments", [])),
-            semantic_elements=list(params.get("elements", [])),
-            status="semantic_pending",
-            semantic_priority_order=list(params.get("semantic_priority_order", [])),
-            semantic_conflicts=list(params.get("semantic_conflicts", [])),
-            semantic_sources=dict(params.get("semantic_sources", {})),
-        )
-
-    if not desc.strip() and params["mode"] != "semantic_badge":
-        print("  -> Überspringe Bild, da keine begleitende textliche Beschreibung vorliegt.")
-        return None
-
-    print(f"\n--- Verarbeite {filename} ---")
-    description_fragments = params.get("description_fragments", [])
-    description_text = " ".join(
-        str(fragment.get("text", "")).strip()
-        for fragment in description_fragments
-        if isinstance(fragment, dict)
-    ).strip()
-    if description_text:
-        print(f"Bildbeschreibung: {description_text}")
-    elements = ", ".join(params["elements"]) if params["elements"] else "Kein Compositing-Befehl gefunden"
-    print(f"Befehl erkannt: {elements}")
-
-    os.makedirs(svg_out_dir, exist_ok=True)
-    os.makedirs(diff_out_dir, exist_ok=True)
-    if reports_out_dir:
-        os.makedirs(reports_out_dir, exist_ok=True)
-
-    base = os.path.splitext(filename)[0]
-    log_path = None
-    if reports_out_dir:
-        log_path = os.path.join(reports_out_dir, f"{base}_element_validation.log")
-
-    def _writeValidationLog(lines: list[str]) -> None:
-        iteration_artifact_helpers.writeValidationLogImpl(
-            log_path=log_path,
-            lines=lines,
-            run_seed=int(Action.STOCHASTIC_RUN_SEED),
-            pass_seed_offset=int(Action.STOCHASTIC_SEED_OFFSET),
-            time_ns_fn=time.time_ns,
-        )
-
-    def _recordRenderFailure(reason: str, *, svg_content: str | None = None, params_snapshot: dict[str, object] | None = None) -> None:
-        iteration_artifact_helpers.writeRenderFailureLogImpl(
-            reason=reason,
-            filename=filename,
-            base_name=base,
-            write_attempt_artifacts_fn=_writeAttemptArtifacts,
-            write_validation_log_fn=_writeValidationLog,
-            svg_content=svg_content,
-            params_snapshot=params_snapshot,
-        )
-
-    def _writeAttemptArtifacts(svg_content: str, rendered_img=None, diff_img=None, *, failed: bool = False) -> None:
-        iteration_artifact_helpers.writeAttemptArtifactsImpl(
-            svg_out_dir=svg_out_dir,
-            diff_out_dir=diff_out_dir,
-            base_name=base,
-            svg_content=svg_content,
-            target_img=perc.img,
-            render_svg_to_numpy_fn=lambda svg: Action.render_svg_to_numpy(svg, w, h),
-            create_diff_image_fn=Action.create_diff_image,
-            cv2_module=cv2,
-            rendered_img=rendered_img,
-            diff_img=diff_img,
-            failed=failed,
-        )
-
-    if params["mode"] == "semantic_badge":
-        badge_params = Action.make_badge_params(w, h, perc.base_name, perc.img)
-        if badge_params is None:
-            return None
-        # Persist source raster dimensions so variant-specific finalizers can
-        # enforce width/height-relative geometry rules reliably.
-        badge_params.setdefault("width", float(w))
-        badge_params.setdefault("height", float(h))
-        badge_overrides = params.get("badge_overrides")
-        if isinstance(badge_overrides, dict):
-            badge_params.update(badge_overrides)
-
-        semantic_issues = Action.validate_semantic_description_alignment(
-            perc.img,
-            list(params.get("elements", [])),
-            badge_params,
-        )
-        if semantic_issues:
-            failed_svg = Action.generate_badge_svg(w, h, badge_params)
-            _writeAttemptArtifacts(failed_svg, failed=True)
-            structural = Action._detect_semantic_primitives(perc.img, badge_params)
-            connector_orientation = str(structural.get("connector_orientation", "unknown"))
-            circle_source = str(structural.get("circle_detection_source", "unknown"))
-            connector_debug_line = (
-                "semantic_connector_classification="
-                f"{connector_orientation};"
-                f"circle_source={circle_source};"
-                f"horizontal_candidates={int(structural.get('horizontal_line_candidates', 0) or 0)};"
-                f"vertical_candidates={int(structural.get('vertical_line_candidates', 0) or 0)}"
-            )
-            print("[ERROR] Semantik-Abgleich fehlgeschlagen:")
-            print(f"  - {connector_debug_line}")
-            for issue in semantic_issues:
-                print(f"  - {issue}")
-            if semantic_audit_row is not None:
-                semantic_audit_row = _semanticAuditRecord(
-                    base_name=perc.base_name,
-                    filename=filename,
-                    description_fragments=list(params.get("description_fragments", [])),
-                    semantic_elements=list(params.get("elements", [])),
-                    status="semantic_mismatch",
-                    mismatch_reasons=semantic_issues,
-                    semantic_priority_order=list(params.get("semantic_priority_order", [])),
-                    semantic_conflicts=list(params.get("semantic_conflicts", [])),
-                    semantic_sources=dict(params.get("semantic_sources", {})),
-                )
-            _writeValidationLog(
-                [
-                    "status=semantic_mismatch",
-                    f"best_attempt_svg={base}_failed.svg",
-                    connector_debug_line,
-                    *(
-                        [
-                            f"semantic_audit_status={semantic_audit_row.get('status', '')}",
-                            "semantic_audit_lookup_keys=" + " | ".join(
-                                str(value) for value in semantic_audit_row.get("description_lookup_keys", [])
-                            ),
-                            "semantic_audit_recognized_description_elements=" + " | ".join(
-                                str(value) for value in semantic_audit_row.get("recognized_description_elements", [])
-                            ),
-                            "semantic_audit_derived_elements=" + " | ".join(
-                                str(value) for value in semantic_audit_row.get("derived_elements", [])
-                            ),
-                            "semantic_audit_priority_order=" + " > ".join(
-                                str(value) for value in semantic_audit_row.get("semantic_priority_order", [])
-                            ),
-                            "semantic_audit_conflicts=" + " | ".join(
-                                str(value) for value in semantic_audit_row.get("semantic_conflicts", [])
-                            ),
-                            f"semantic_audit_mismatch_reason={semantic_audit_row.get('mismatch_reason', '')}",
-                        ]
-                        if semantic_audit_row is not None
-                        else []
-                    ),
-                    *[f"issue={issue}" for issue in semantic_issues],
-                ]
-            )
-            return None
-
-        validation_logs: list[str] = []
-        debug_dir = None
-        if debug_element_diff_dir:
-            debug_dir = os.path.join(debug_element_diff_dir, os.path.splitext(filename)[0])
-            os.makedirs(debug_dir, exist_ok=True)
-        elif debug_ac0811_dir and perc.base_name.upper() == "AC0811":
-            debug_dir = os.path.join(debug_ac0811_dir, os.path.splitext(filename)[0])
-            os.makedirs(debug_dir, exist_ok=True)
-        if not bool(badge_params.get("draw_text", False)):
-            validation_logs.append("semantic-guard: Text bewusst deaktiviert (plain-ring Familie ohne Buchstabe).")
-        else:
-            validation_logs.append(
-                "semantic-guard: Textmodus aktiv ("
-                + str(badge_params.get("text_mode", "unknown"))
-                + ")."
-            )
-        validation_logs.extend(
-            Action.validate_badge_by_elements(
-            perc.img,
-            badge_params,
-            max_rounds=max(1, int(badge_validation_rounds)),
-            debug_out_dir=debug_dir,
-            )
-        )
-        badge_params = Action._enforce_semantic_connector_expectation(
-            perc.base_name,
-            list(params.get("elements", [])),
-            badge_params,
-            w,
-            h,
-        )
-        badge_params, redraw_variation_logs = Action.apply_redraw_variation(badge_params, w, h)
-        if badge_params.get("arm_enabled"):
-            validation_logs.append(
-                "semantic-guard: Erwartete Arm-Geometrie bestätigt/wiederhergestellt (z.B. AC0812 links)."
-            )
-        quality_flags = _semanticQualityFlags(perc.base_name, validation_logs)
-        if semantic_audit_row is not None:
-            semantic_audit_row = _semanticAuditRecord(
-                base_name=perc.base_name,
-                filename=filename,
-                description_fragments=list(params.get("description_fragments", [])),
-                semantic_elements=list(params.get("elements", [])),
-                status="semantic_ok",
-                semantic_priority_order=list(params.get("semantic_priority_order", [])),
-                semantic_conflicts=list(params.get("semantic_conflicts", [])),
-                semantic_sources=dict(params.get("semantic_sources", {})),
-            )
-        _writeValidationLog(
-            [
-                "status=semantic_ok",
-                *(
-                    [
-                        f"semantic_audit_status={semantic_audit_row.get('status', '')}",
-                        "semantic_audit_lookup_keys=" + " | ".join(
-                            str(value) for value in semantic_audit_row.get("description_lookup_keys", [])
-                        ),
-                        "semantic_audit_recognized_description_elements=" + " | ".join(
-                            str(value) for value in semantic_audit_row.get("recognized_description_elements", [])
-                        ),
-                        "semantic_audit_derived_elements=" + " | ".join(
-                            str(value) for value in semantic_audit_row.get("derived_elements", [])
-                        ),
-                        "semantic_audit_priority_order=" + " > ".join(
-                            str(value) for value in semantic_audit_row.get("semantic_priority_order", [])
-                        ),
-                        "semantic_audit_conflicts=" + " | ".join(
-                            str(value) for value in semantic_audit_row.get("semantic_conflicts", [])
-                        ),
-                    ]
-                    if semantic_audit_row is not None
-                    else []
-                ),
-                *quality_flags,
-                *redraw_variation_logs,
-                *validation_logs,
-            ]
-        )
-
-        svg_content = Action.generate_badge_svg(w, h, badge_params)
-        svg_rendered = Action.render_svg_to_numpy(svg_content, w, h)
-        if svg_rendered is None:
-            _recordRenderFailure(
-                "semantic_badge_final_render_failed",
-                svg_content=svg_content,
-                params_snapshot=badge_params,
-            )
-            return None
-        _writeAttemptArtifacts(svg_content, svg_rendered)
-        if semantic_audit_row is not None:
-            params = copy.deepcopy(params)
-            params["semantic_audit"] = semantic_audit_row
-        return base, desc, params, 1, Action.calculate_error(perc.img, svg_rendered)
-
-    if params["mode"] != "composite":
-        if params["mode"] == "manual_review":
-            reason = str(params.get("review_reason", "Manuelle Prüfung erforderlich.")).strip()
-            print(f"  -> Überspringe Bild: {reason}")
-            _writeValidationLog(
-                [
-                    "status=skipped_manual_review",
-                    f"manual_review_reason={reason}",
-                ]
-            )
-        else:
-            print("  -> Überspringe Bild, da keine Zerschneide-Anweisung (Compositing) im Text vorliegt.")
-            _writeValidationLog(["status=skipped_non_composite"])
-        return None
-
-    best_error = float("inf")
-    best_svg = ""
-    best_diff = None
-    best_iter = 0
-
-    epsilon_factors = np.linspace(0.05, 0.0005, max_iterations)
-    plateau_tolerance = 1e-6
-    min_plateau_iterations = min(max_iterations, 12)
-    plateau_patience = min(max_iterations, max(8, max_iterations // 6))
-    plateau_streak = 0
-    previous_error: float | None = None
-    stop_reason = "max_iterations"
-    for i, eps in enumerate(epsilon_factors):
-        svg_content = Action.generate_composite_svg(w, h, params, folder_path, float(eps))
-
-        svg_rendered = Action.render_svg_to_numpy(svg_content, w, h)
-        if svg_rendered is None:
-            _recordRenderFailure(
-                "composite_iteration_render_failed",
-                svg_content=svg_content,
-                params_snapshot=params,
-            )
-            return None
-        error = Action.calculate_error(perc.img, svg_rendered)
-
-        if previous_error is not None and abs(error - previous_error) <= plateau_tolerance:
-            plateau_streak += 1
-        else:
-            plateau_streak = 0
-
-        improved = error < best_error
-        if improved or i == 0 or (i + 1) == max_iterations:
-            print(f"  [Iter {i+1}/{max_iterations}] Epsilon={eps:.4f} -> Diff-Fehler: {error:.2f}")
-
-        if improved:
-            best_error, best_svg, best_iter = error, svg_content, i + 1
-            best_diff = Action.create_diff_image(perc.img, svg_rendered)
-
-        previous_error = error
-
-        if (i + 1) >= min_plateau_iterations and plateau_streak >= plateau_patience:
-            print(
-                "  -> Früher Abbruch: Diff-Fehler blieb "
-                f"{plateau_streak + 1} Iterationen innerhalb ±{plateau_tolerance:.0e}"
-            )
-            stop_reason = "plateau"
-            break
-
-    print(f"-> Bester Match in Iteration {best_iter} (Fehler auf {best_error:.2f} reduziert)")
-    if stop_reason == "plateau":
-        if best_iter <= 1:
-            print("-> Konvergenzdiagnose: Plateau ohne messbare Verbesserung (Parameterraum ggf. erweitern)")
-        else:
-            print("-> Konvergenzdiagnose: Plateau nach Verbesserung erreicht (lokales Optimum wahrscheinlich)")
-    else:
-        print("-> Konvergenzdiagnose: Iterationsbudget ausgeschöpft (Optimum unklar, ggf. Suchraum erweitern)")
-
-    if best_svg:
-        _writeAttemptArtifacts(best_svg, diff_img=best_diff)
-
-    _writeValidationLog([
-        "status=composite_ok",
-        f"convergence={stop_reason}",
-        f"best_iter={int(best_iter)}",
-        f"best_error={float(best_error):.6f}",
-    ])
-    return base, desc, params, best_iter, best_error
+    return imageCompositeConverterRemaining_helpers.runIterationPipeline(img_path, csv_path, max_iterations, svg_out_dir, diff_out_dir, reports_out_dir, debug_ac0811_dir, debug_element_diff_dir, badge_validation_rounds)
 
 
 def _extractRefParts(name: str) -> tuple[str, int] | None:
-    return range_helpers.extractRefPartsImpl(name)
+    return imageCompositeConverterRemaining_helpers._extractRefParts(name)
 
 
 def _normalizeRangeToken(value: str) -> str:
-    return range_helpers.normalizeRangeTokenImpl(value, get_base_name_fn=getBaseNameFromFile)
+    return imageCompositeConverterRemaining_helpers._normalizeRangeToken(value)
 
 
 def _normalizeExplicitRangeToken(value: str) -> str:
-    return range_helpers.normalizeExplicitRangeTokenImpl(value)
+    return imageCompositeConverterRemaining_helpers._normalizeExplicitRangeToken(value)
 
 
 def _isExplicitSizeVariantToken(token: str) -> bool:
-    return range_helpers.isExplicitSizeVariantTokenImpl(token)
+    return imageCompositeConverterRemaining_helpers._isExplicitSizeVariantToken(token)
 
 
 def _compactRangeToken(value: str) -> str:
-    return range_helpers.compactRangeTokenImpl(value, normalize_range_token_fn=_normalizeRangeToken)
+    return imageCompositeConverterRemaining_helpers._compactRangeToken(value)
 
 
 def _sharedPartialRangeToken(start_ref: str, end_ref: str) -> str:
-    return range_helpers.sharedPartialRangeTokenImpl(
-        start_ref,
-        end_ref,
-        normalize_range_token_fn=_normalizeRangeToken,
-        compact_range_token_fn=_compactRangeToken,
-    )
+    return imageCompositeConverterRemaining_helpers._sharedPartialRangeToken(start_ref, end_ref)
 
 
 def _matchesPartialRangeToken(filename: str, start_ref: str, end_ref: str) -> bool:
-    return range_helpers.matchesPartialRangeTokenImpl(
-        filename,
-        start_ref,
-        end_ref,
-        shared_partial_range_token_fn=_sharedPartialRangeToken,
-        normalize_range_token_fn=_normalizeRangeToken,
-        get_base_name_fn=getBaseNameFromFile,
-    )
+    return imageCompositeConverterRemaining_helpers._matchesPartialRangeToken(filename, start_ref, end_ref)
 
 
 def _extractSymbolFamily(name: str) -> str | None:
-    return range_helpers.extractSymbolFamilyImpl(name)
+    return imageCompositeConverterRemaining_helpers._extractSymbolFamily(name)
 
 
 def _matchesExactPrefixFilter(filename: str, start_ref: str, end_ref: str) -> bool:
-    return range_helpers.matchesExactPrefixFilterImpl(
-        filename,
-        start_ref,
-        end_ref,
-        normalize_range_token_fn=_normalizeRangeToken,
-        normalize_explicit_range_token_fn=_normalizeExplicitRangeToken,
-        is_explicit_size_variant_token_fn=_isExplicitSizeVariantToken,
-        get_base_name_fn=getBaseNameFromFile,
-    )
+    return imageCompositeConverterRemaining_helpers._matchesExactPrefixFilter(filename, start_ref, end_ref)
 
 
 def _inRequestedRange(filename: str, start_ref: str, end_ref: str) -> bool:
-    return range_helpers.inRequestedRangeImpl(
-        filename,
-        start_ref,
-        end_ref,
-        get_base_name_fn=getBaseNameFromFile,
-        extract_ref_parts_fn=_extractRefParts,
-        normalize_explicit_range_token_fn=_normalizeExplicitRangeToken,
-        normalize_range_token_fn=_normalizeRangeToken,
-        matches_exact_prefix_filter_fn=_matchesExactPrefixFilter,
-        is_explicit_size_variant_token_fn=_isExplicitSizeVariantToken,
-        matches_partial_range_token_fn=_matchesPartialRangeToken,
-    )
+    return imageCompositeConverterRemaining_helpers._inRequestedRange(filename, start_ref, end_ref)
 
 
 def _conversionRandom() -> random.Random:
-    return random_helpers.conversionRandomImpl(seed_env_var="TINY_ICC_RANDOM_SEED")
+    return imageCompositeConverterRemaining_helpers._conversionRandom()
 
 
 def _writeIterationLogAndCollectSemanticResults(
@@ -2996,11 +2329,7 @@ def _writeIterationLogAndCollectSemanticResults(
     result_map: dict[str, dict[str, object]],
     log_path: str,
 ) -> list[dict[str, object]]:
-    return iteration_log_helpers.writeIterationLogAndCollectSemanticImpl(
-        files=files,
-        result_map=result_map,
-        log_path=log_path,
-    )
+    return imageCompositeConverterRemaining_helpers._writeIterationLogAndCollectSemanticResults(files, result_map, log_path)
 
 
 def _runPostConversionReporting(
@@ -3014,59 +2343,35 @@ def _runPostConversionReporting(
     normalized_selected_variants: set[str],
     result_map: dict[str, dict[str, object]],
 ) -> dict[str, str]:
-    return conversion_reporting_helpers.runPostConversionReportingImpl(
-        folder_path=folder_path,
-        csv_path=csv_path,
-        iterations=iterations,
-        svg_out_dir=svg_out_dir,
-        diff_out_dir=diff_out_dir,
-        reports_out_dir=reports_out_dir,
-        normalized_selected_variants=normalized_selected_variants,
-        result_map=result_map,
-        write_semantic_audit_report_fn=_writeSemanticAuditReport,
-        write_pixel_delta2_ranking_fn=_writePixelDelta2Ranking,
-        write_ac08_weak_family_status_report_fn=_writeAc08WeakFamilyStatusReport,
-        write_ac08_regression_manifest_fn=_writeAc08RegressionManifest,
-        write_ac08_success_criteria_report_fn=_writeAc08SuccessCriteriaReport,
-        emit_ac08_success_gate_status_fn=_emitAc08SuccessGateStatus,
-        successful_conversions_manifest=SUCCESSFUL_CONVERSIONS_MANIFEST,
-        update_successful_conversions_manifest_fn=updateSuccessfulConversionsManifestWithMetrics,
-        generate_conversion_overviews_fn=generateConversionOverviews,
-        print_fn=print,
-    )
+    return imageCompositeConverterRemaining_helpers._runPostConversionReporting(folder_path=folder_path, csv_path=csv_path, iterations=iterations, svg_out_dir=svg_out_dir, diff_out_dir=diff_out_dir, reports_out_dir=reports_out_dir, normalized_selected_variants=normalized_selected_variants, result_map=result_map)
 
 
 def _defaultConvertedSymbolsRoot() -> str:
-    return output_path_helpers.defaultConvertedSymbolsRootImpl(module_file=__file__)
+    return imageCompositeConverterRemaining_helpers._defaultConvertedSymbolsRoot()
 
 
 def _convertedSvgOutputDir(output_root: str) -> str:
-    return output_path_helpers.convertedSvgOutputDirImpl(output_root)
+    return imageCompositeConverterRemaining_helpers._convertedSvgOutputDir(output_root)
 
 
 def _readValidationLogDetails(log_path: str) -> dict[str, str]:
-    return batch_reporting_helpers.readValidationLogDetailsImpl(log_path)
+    return imageCompositeConverterRemaining_helpers._readValidationLogDetails(log_path)
 
 
 def _writeBatchFailureSummary(reports_out_dir: str, failures: list[dict[str, str]]) -> None:
-    return batch_reporting_helpers.writeBatchFailureSummaryImpl(reports_out_dir, failures)
+    return imageCompositeConverterRemaining_helpers._writeBatchFailureSummary(reports_out_dir, failures)
 
 
 def _writeStrategySwitchTemplateTransfersReport(
     reports_out_dir: str,
     strategy_rows: list[dict[str, object]],
 ) -> None:
-    return batch_reporting_helpers.writeStrategySwitchTemplateTransfersImpl(reports_out_dir, strategy_rows)
+    return imageCompositeConverterRemaining_helpers._writeStrategySwitchTemplateTransfersReport(reports_out_dir, strategy_rows)
 
 
 
 def _collectDescriptionFragments(raw_desc: dict[str, str], base_name: str, img_filename: str) -> list[dict[str, str]]:
-    return audit_helpers.collectDescriptionFragmentsImpl(
-        raw_desc,
-        base_name=base_name,
-        img_filename=img_filename,
-        get_base_name_fn=getBaseNameFromFile,
-    )
+    return imageCompositeConverterRemaining_helpers._collectDescriptionFragments(raw_desc, base_name, img_filename)
 
 
 def _semanticAuditRecord(
@@ -3081,82 +2386,47 @@ def _semanticAuditRecord(
     semantic_conflicts: list[str] | None = None,
     semantic_sources: dict[str, object] | None = None,
 ) -> dict[str, object]:
-    return audit_helpers.semanticAuditRecordImpl(
-        base_name=base_name,
-        filename=filename,
-        description_fragments=description_fragments,
-        semantic_elements=semantic_elements,
-        status=status,
-        mismatch_reasons=mismatch_reasons,
-        semantic_priority_order=semantic_priority_order,
-        semantic_conflicts=semantic_conflicts,
-        semantic_sources=semantic_sources,
-        get_base_name_fn=getBaseNameFromFile,
-    )
+    return imageCompositeConverterRemaining_helpers._semanticAuditRecord(base_name=base_name, filename=filename, description_fragments=description_fragments, semantic_elements=semantic_elements, status=status, mismatch_reasons=mismatch_reasons, semantic_priority_order=semantic_priority_order, semantic_conflicts=semantic_conflicts, semantic_sources=semantic_sources)
 
 
 def _writeSemanticAuditReport(reports_out_dir: str, audit_rows: list[dict[str, object]]) -> None:
-    return audit_helpers.writeSemanticAuditReportImpl(reports_out_dir, audit_rows)
+    return imageCompositeConverterRemaining_helpers._writeSemanticAuditReport(reports_out_dir, audit_rows)
 
 
 def _diffOutputDir(output_root: str) -> str:
-    return output_path_helpers.diffOutputDirImpl(output_root)
+    return imageCompositeConverterRemaining_helpers._diffOutputDir(output_root)
 
 
 def _reportsOutputDir(output_root: str) -> str:
-    return output_path_helpers.reportsOutputDirImpl(output_root)
+    return imageCompositeConverterRemaining_helpers._reportsOutputDir(output_root)
 
 
 def _isSemanticTemplateVariant(base_name: str, params: dict[str, object] | None = None) -> bool:
-    return audit_helpers.isSemanticTemplateVariantImpl(
-        base_name=base_name,
-        params=params,
-        get_base_name_fn=getBaseNameFromFile,
-    )
+    return imageCompositeConverterRemaining_helpers._isSemanticTemplateVariant(base_name, params)
 
 
 def _loadExistingConversionRows(output_root: str, folder_path: str) -> list[dict[str, object]]:
-    """Load previously converted variants so they can act as donor templates.
-
-    This lets an earlier conversion batch (for example the already converted
-    ``AC08*`` symbols) improve later runs without requiring a fresh full pass.
-    """
-    return conversion_row_helpers.loadExistingConversionRowsImpl(
-        output_root=output_root,
-        folder_path=folder_path,
-        reports_output_dir_fn=_reportsOutputDir,
-        converted_svg_output_dir_fn=_convertedSvgOutputDir,
-        read_svg_geometry_fn=_readSvgGeometry,
-        get_base_name_fn=getBaseNameFromFile,
-        is_semantic_template_variant_fn=_isSemanticTemplateVariant,
-        sniff_raster_size_fn=_sniffRasterSize,
-    )
+    return imageCompositeConverterRemaining_helpers._loadExistingConversionRows(output_root, folder_path)
 
 
 def _sniffRasterSize(path: str | Path) -> tuple[int, int]:
-    return conversion_row_helpers.sniffRasterSizeImpl(path)
+    return imageCompositeConverterRemaining_helpers._sniffRasterSize(path)
 
 
 def _svgHrefMimeType(path: str | Path) -> str:
-    return quality_config_helpers.svgHrefMimeTypeImpl(path)
+    return imageCompositeConverterRemaining_helpers._svgHrefMimeType(path)
 
 
 def _renderEmbeddedRasterSvg(input_path: str | Path) -> str:
-    return quality_config_helpers.renderEmbeddedRasterSvgImpl(
-        input_path,
-        sniff_raster_size_fn=_sniffRasterSize,
-    )
+    return imageCompositeConverterRemaining_helpers._renderEmbeddedRasterSvg(input_path)
 
 
 def _qualityConfigPath(reports_out_dir: str) -> str:
-    return quality_config_helpers.qualityConfigPathImpl(reports_out_dir)
+    return imageCompositeConverterRemaining_helpers._qualityConfigPath(reports_out_dir)
 
 
 def _loadQualityConfig(reports_out_dir: str) -> dict[str, object]:
-    return quality_config_helpers.loadQualityConfigImpl(
-        reports_out_dir,
-        quality_config_path_fn=_qualityConfigPath,
-    )
+    return imageCompositeConverterRemaining_helpers._loadQualityConfig(reports_out_dir)
 
 
 def _writeQualityConfig(
@@ -3166,29 +2436,18 @@ def _writeQualityConfig(
     skipped_variants: list[str],
     source: str,
 ) -> None:
-    quality_config_helpers.writeQualityConfigImpl(
-        reports_out_dir,
-        allowed_error_per_pixel=allowed_error_per_pixel,
-        skipped_variants=skipped_variants,
-        source=source,
-        quality_config_path_fn=_qualityConfigPath,
-    )
+    return imageCompositeConverterRemaining_helpers._writeQualityConfig(reports_out_dir, allowed_error_per_pixel=allowed_error_per_pixel, skipped_variants=skipped_variants, source=source)
 
 
 def _resolveAllowedErrorPerPixel(
     current_rows: list[dict[str, object]],
     cfg: dict[str, object],
 ) -> tuple[float, str, float, float]:
-    return quality_threshold_helpers.resolveAllowedErrorPerPixelImpl(
-        current_rows,
-        cfg,
-        quality_sort_key_fn=_qualitySortKey,
-        successful_threshold_fn=_computeSuccessfulConversionsErrorThreshold,
-    )
+    return imageCompositeConverterRemaining_helpers._resolveAllowedErrorPerPixel(current_rows, cfg)
 
 
 def _qualitySortKey(row: dict[str, object]) -> float:
-    return optimization_pass_helpers.qualitySortKeyImpl(row)
+    return imageCompositeConverterRemaining_helpers._qualitySortKey(row)
 
 
 
@@ -3197,20 +2456,11 @@ def _computeSuccessfulConversionsErrorThreshold(
     rows: list[dict[str, object]],
     successful_variants: list[str] | tuple[str, ...] | None = None,
 ) -> float:
-    """Return mean(error_per_pixel) + 2*std(error_per_pixel) for successful rows.
-
-    The successful set is sourced from ``successful_conversions.txt`` (via
-    ``SUCCESSFUL_CONVERSIONS``) unless explicitly provided. Returns ``inf`` when
-    no finite samples are available.
-    """
-    return optimization_pass_helpers.computeSuccessfulConversionsErrorThresholdImpl(
-        rows,
-        successful_variants=successful_variants or SUCCESSFUL_CONVERSIONS,
-    )
+    return imageCompositeConverterRemaining_helpers._computeSuccessfulConversionsErrorThreshold(rows, successful_variants)
 
 
 def _selectMiddleLowerTercile(rows: list[dict[str, object]]) -> list[dict[str, object]]:
-    return optimization_pass_helpers.selectMiddleLowerTercileImpl(rows)
+    return imageCompositeConverterRemaining_helpers._selectMiddleLowerTercile(rows)
 
 
 def _selectOpenQualityCases(
@@ -3219,51 +2469,33 @@ def _selectOpenQualityCases(
     allowed_error_per_pixel: float,
     skip_variants: set[str] | None = None,
 ) -> list[dict[str, object]]:
-    """Return unresolved quality cases sorted from worst to best.
-
-    "Open" means the case is finite, not explicitly skipped, and still above the
-    accepted quality threshold.
-    """
-    return optimization_pass_helpers.selectOpenQualityCasesImpl(
-        rows,
-        allowed_error_per_pixel=allowed_error_per_pixel,
-        skip_variants=skip_variants,
-    )
+    return imageCompositeConverterRemaining_helpers._selectOpenQualityCases(rows, allowed_error_per_pixel=allowed_error_per_pixel, skip_variants=skip_variants)
 
 
 def _iterationStrategyForPass(pass_idx: int, base_iterations: int) -> tuple[int, int]:
-    return optimization_pass_helpers.iterationStrategyForPassImpl(pass_idx, base_iterations)
+    return imageCompositeConverterRemaining_helpers._iterationStrategyForPass(pass_idx, base_iterations)
 
 
 def _adaptiveIterationBudgetForQualityRow(row: dict[str, object], planned_budget: int) -> int:
-    return optimization_pass_helpers.adaptiveIterationBudgetForQualityRowImpl(row, planned_budget)
+    return imageCompositeConverterRemaining_helpers._adaptiveIterationBudgetForQualityRow(row, planned_budget)
 
 
 def _writeQualityPassReport(
     reports_out_dir: str,
     pass_rows: list[dict[str, object]],
 ) -> None:
-    return optimization_pass_reporting_helpers.writeQualityPassReportImpl(reports_out_dir, pass_rows)
+    return imageCompositeConverterRemaining_helpers._writeQualityPassReport(reports_out_dir, pass_rows)
 
 
 def _evaluateQualityPassCandidate(
     old_row: dict[str, object],
     new_row: dict[str, object],
 ) -> tuple[bool, str, float, float, float, float]:
-    """Return whether a quality-pass candidate should replace the previous result.
-
-    The acceptance rule mirrors AC08 task 1.1: keep the new candidate only when
-    at least one core quality metric improves (`error_per_pixel` or
-    `mean_delta2`). The caller also receives the normalized metrics so reporting
-    can use one consistent decision path for stochastic re-runs and fallback
-    template transfers.
-    """
-
-    return optimization_pass_reporting_helpers.evaluateQualityPassCandidateImpl(old_row, new_row)
+    return imageCompositeConverterRemaining_helpers._evaluateQualityPassCandidate(old_row, new_row)
 
 
 def _extractSvgInner(svg_text: str) -> str:
-    return template_transfer_helpers.extractSvgInnerImpl(svg_text)
+    return imageCompositeConverterRemaining_helpers._extractSvgInner(svg_text)
 
 
 def _buildTransformedSvgFromTemplate(
@@ -3274,18 +2506,11 @@ def _buildTransformedSvgFromTemplate(
     rotation_deg: int,
     scale: float,
 ) -> str:
-    return template_transfer_helpers.buildTransformedSvgFromTemplateImpl(
-        template_svg_text,
-        target_w,
-        target_h,
-        rotation_deg=rotation_deg,
-        scale=scale,
-        extract_svg_inner_fn=_extractSvgInner,
-    )
+    return imageCompositeConverterRemaining_helpers._buildTransformedSvgFromTemplate(template_svg_text, target_w, target_h, rotation_deg=rotation_deg, scale=scale)
 
 
 def _templateTransferScaleCandidates(base_scale: float) -> list[float]:
-    return template_transfer_helpers.templateTransferScaleCandidatesImpl(base_scale)
+    return imageCompositeConverterRemaining_helpers._templateTransferScaleCandidates(base_scale)
 
 
 def _estimateTemplateTransferScale(
@@ -3296,17 +2521,7 @@ def _estimateTemplateTransferScale(
     *,
     rotation_deg: int,
 ) -> float | None:
-    return template_transfer_helpers.estimateTemplateTransferScaleImpl(
-        img_orig,
-        donor_svg_text,
-        target_w,
-        target_h,
-        rotation_deg=rotation_deg,
-        render_svg_to_numpy_fn=Action.renderSvgToNumpy,
-        build_transformed_svg_from_template_fn=_buildTransformedSvgFromTemplate,
-        foreground_mask_fn=Action._foregroundMask,
-        mask_bbox_fn=Action._maskBbox,
-    )
+    return imageCompositeConverterRemaining_helpers._estimateTemplateTransferScale(img_orig, donor_svg_text, target_w, target_h, rotation_deg=rotation_deg)
 
 
 def _templateTransferTransformCandidates(
@@ -3315,24 +2530,14 @@ def _templateTransferTransformCandidates(
     *,
     estimated_scale_by_rotation: dict[int, float] | None = None,
 ) -> list[tuple[int, float]]:
-    return template_transfer_helpers.templateTransferTransformCandidatesImpl(
-        target_variant,
-        donor_variant,
-        estimated_scale_by_rotation=estimated_scale_by_rotation,
-        template_transfer_scale_candidates_fn=_templateTransferScaleCandidates,
-    )
+    return imageCompositeConverterRemaining_helpers._templateTransferTransformCandidates(target_variant, donor_variant, estimated_scale_by_rotation=estimated_scale_by_rotation)
 
 
 def _rankTemplateTransferDonors(
     target_row: dict[str, object],
     donor_rows: list[dict[str, object]],
 ) -> list[dict[str, object]]:
-    return template_transfer_helpers.rankTemplateTransferDonorsImpl(
-        target_row,
-        donor_rows,
-        normalized_geometry_signature_fn=_normalizedGeometrySignature,
-        max_signature_delta_fn=_maxSignatureDelta,
-    )
+    return imageCompositeConverterRemaining_helpers._rankTemplateTransferDonors(target_row, donor_rows)
 
 
 def _templateTransferDonorFamilyCompatible(
@@ -3341,18 +2546,13 @@ def _templateTransferDonorFamilyCompatible(
     *,
     documented_alias_refs: set[str] | None = None,
 ) -> bool:
-    return template_transfer_helpers.templateTransferDonorFamilyCompatibleImpl(
-        target_base,
-        donor_base,
-        documented_alias_refs=documented_alias_refs,
-        extract_symbol_family_fn=_extractSymbolFamily,
-    )
+    return imageCompositeConverterRemaining_helpers._templateTransferDonorFamilyCompatible(target_base, donor_base, documented_alias_refs=documented_alias_refs)
 
 
 
 
 def _semanticTransferRotations(target_params: dict[str, object], donor_params: dict[str, object]) -> tuple[int, ...]:
-    return transfer_helpers.semanticTransferRotationsImpl(target_params, donor_params)
+    return imageCompositeConverterRemaining_helpers._semanticTransferRotations(target_params, donor_params)
 
 
 
@@ -3360,27 +2560,19 @@ def _semanticTransferRotations(target_params: dict[str, object], donor_params: d
 
 
 def _semanticTransferIsCompatible(target_params: dict[str, object], donor_params: dict[str, object]) -> bool:
-    return transfer_helpers.semanticTransferIsCompatibleImpl(
-        target_params,
-        donor_params,
-        connector_arm_direction_fn=_connectorArmDirection,
-        connector_stem_direction_fn=_connectorStemDirection,
-    )
+    return imageCompositeConverterRemaining_helpers._semanticTransferIsCompatible(target_params, donor_params)
 
 
 def _connectorArmDirection(params: dict[str, object]) -> int | None:
-    return transfer_helpers.connectorArmDirectionImpl(params)
+    return imageCompositeConverterRemaining_helpers._connectorArmDirection(params)
 
 
 def _connectorStemDirection(params: dict[str, object]) -> int | None:
-    return transfer_helpers.connectorStemDirectionImpl(params)
+    return imageCompositeConverterRemaining_helpers._connectorStemDirection(params)
 
 
 def _semanticTransferScaleCandidates(base_scale: float) -> list[float]:
-    return transfer_helpers.semanticTransferScaleCandidatesImpl(
-        base_scale,
-        template_transfer_scale_candidates_fn=_templateTransferScaleCandidates,
-    )
+    return imageCompositeConverterRemaining_helpers._semanticTransferScaleCandidates(base_scale)
 
 def _semanticTransferBadgeParams(
     donor_params: dict[str, object],
@@ -3391,19 +2583,7 @@ def _semanticTransferBadgeParams(
     rotation_deg: int,
     scale: float,
 ) -> dict[str, object]:
-    return transfer_helpers.semanticTransferBadgeParamsImpl(
-        donor_params,
-        target_params,
-        target_w=target_w,
-        target_h=target_h,
-        rotation_deg=rotation_deg,
-        scale=scale,
-        light_circle_fill_gray=Action.LIGHT_CIRCLE_FILL_GRAY,
-        light_circle_stroke_gray=Action.LIGHT_CIRCLE_STROKE_GRAY,
-        light_circle_text_gray=Action.LIGHT_CIRCLE_TEXT_GRAY,
-        clip_scalar_fn=Action._clipScalar,
-        finalize_ac08_style_fn=Action._finalizeAc08Style,
-    )
+    return imageCompositeConverterRemaining_helpers._semanticTransferBadgeParams(donor_params, target_params, target_w=target_w, target_h=target_h, rotation_deg=rotation_deg, scale=scale)
 
 def _tryTemplateTransfer(
     *,
@@ -3415,31 +2595,7 @@ def _tryTemplateTransfer(
     rng: random.Random | None = None,
     deterministic_order: bool = False,
 ) -> tuple[dict[str, object] | None, dict[str, object] | None]:
-    return template_transfer_helpers.tryTemplateTransferImpl(
-        target_row=target_row,
-        donor_rows=donor_rows,
-        folder_path=folder_path,
-        svg_out_dir=svg_out_dir,
-        diff_out_dir=diff_out_dir,
-        rng=rng,
-        deterministic_order=deterministic_order,
-        cv2_module=cv2,
-        read_svg_geometry_fn=_readSvgGeometry,
-        rank_template_transfer_donors_fn=_rankTemplateTransferDonors,
-        template_transfer_donor_family_compatible_fn=_templateTransferDonorFamilyCompatible,
-        semantic_transfer_is_compatible_fn=_semanticTransferIsCompatible,
-        semantic_transfer_scale_candidates_fn=_semanticTransferScaleCandidates,
-        semantic_transfer_rotations_fn=_semanticTransferRotations,
-        semantic_transfer_badge_params_fn=_semanticTransferBadgeParams,
-        estimate_template_transfer_scale_fn=_estimateTemplateTransferScale,
-        template_transfer_transform_candidates_fn=_templateTransferTransformCandidates,
-        build_transformed_svg_from_template_fn=_buildTransformedSvgFromTemplate,
-        render_svg_to_numpy_fn=Action.renderSvgToNumpy,
-        calculate_error_fn=Action.calculateError,
-        create_diff_image_fn=Action.createDiffImage,
-        calculate_delta2_stats_fn=Action.calculateDelta2Stats,
-        generate_badge_svg_fn=Action.generateBadgeSvg,
-    )
+    return imageCompositeConverterRemaining_helpers._tryTemplateTransfer(target_row=target_row, donor_rows=donor_rows, folder_path=folder_path, svg_out_dir=svg_out_dir, diff_out_dir=diff_out_dir, rng=rng, deterministic_order=deterministic_order)
 
 
 def _runEmbeddedRasterFallback(
@@ -3450,17 +2606,7 @@ def _runEmbeddedRasterFallback(
     diff_out_dir: str,
     reports_out_dir: str,
 ) -> None:
-    fallback_helpers.runEmbeddedRasterFallbackImpl(
-        files=files,
-        folder_path=folder_path,
-        svg_out_dir=svg_out_dir,
-        diff_out_dir=diff_out_dir,
-        reports_out_dir=reports_out_dir,
-        render_embedded_raster_svg_fn=_renderEmbeddedRasterSvg,
-        create_diff_image_without_cv2_fn=_createDiffImageWithoutCv2,
-        generate_conversion_overviews_fn=generateConversionOverviews,
-        fitz_module=fitz,
-    )
+    return imageCompositeConverterRemaining_helpers._runEmbeddedRasterFallback(files=files, folder_path=folder_path, svg_out_dir=svg_out_dir, diff_out_dir=diff_out_dir, reports_out_dir=reports_out_dir)
 
 
 def _listRequestedImageFiles(
@@ -3470,13 +2616,7 @@ def _listRequestedImageFiles(
     *,
     selected_variants: set[str] | None,
 ) -> tuple[set[str], list[str]]:
-    return conversion_input_helpers.listRequestedImageFilesImpl(
-        folder_path=folder_path,
-        start_ref=start_ref,
-        end_ref=end_ref,
-        selected_variants=selected_variants,
-        in_requested_range_fn=_inRequestedRange,
-    )
+    return imageCompositeConverterRemaining_helpers._listRequestedImageFiles(folder_path, start_ref, end_ref, selected_variants=selected_variants)
 
 
 def convertRange(
@@ -3491,200 +2631,23 @@ def convertRange(
     selected_variants: set[str] | None = None,
     deterministic_order: bool = False,
 ) -> str:
-    out_root = output_root or _defaultConvertedSymbolsRoot()
-    svg_out_dir = _convertedSvgOutputDir(out_root)
-    diff_out_dir = _diffOutputDir(out_root)
-    reports_out_dir = _reportsOutputDir(out_root)
-
-    os.makedirs(svg_out_dir, exist_ok=True)
-    os.makedirs(diff_out_dir, exist_ok=True)
-    os.makedirs(reports_out_dir, exist_ok=True)
-
-    normalized_selected_variants, files = _listRequestedImageFiles(
-        folder_path,
-        start_ref,
-        end_ref,
-        selected_variants=selected_variants,
-    )
-    if cv2 is None or np is None:
-        _runEmbeddedRasterFallback(
-            files=files,
-            folder_path=folder_path,
-            svg_out_dir=svg_out_dir,
-            diff_out_dir=diff_out_dir,
-            reports_out_dir=reports_out_dir,
-        )
-        return out_root
-    rng = _conversionRandom()
-    run_seed = 0 if deterministic_order else rng.randrange(1 << 30)
-    Action.STOCHASTIC_RUN_SEED = int(run_seed)
-    process_files = list(files)
-    if not deterministic_order:
-        rng.shuffle(process_files)
-
-    base_iterations = max(1, int(iterations))
-    # Continue quality iterations while a pass still improves at least one case.
-    # Abort as soon as the next pass cannot beat the previous state.
-    max_quality_passes = 4
-    quality_logs: list[dict[str, object]] = []
-    result_map: dict[str, dict[str, object]] = {}
-    conversion_bestlist_path = _conversionBestlistManifestPath(reports_out_dir)
-    conversion_bestlist_rows = _readConversionBestlistMetrics(conversion_bestlist_path)
-    batch_failures: list[dict[str, str]] = []
-    stop_after_failure = False
-    existing_donor_rows = _loadExistingConversionRows(out_root, folder_path)
-
-    def _convertOne(filename: str, iteration_budget: int, badge_rounds: int) -> tuple[dict[str, object] | None, bool]:
-        return conversion_execution_helpers.convertOneImpl(
-            filename=filename,
-            folder_path=folder_path,
-            csv_path=csv_path,
-            iteration_budget=iteration_budget,
-            badge_rounds=badge_rounds,
-            svg_out_dir=svg_out_dir,
-            diff_out_dir=diff_out_dir,
-            reports_out_dir=reports_out_dir,
-            debug_ac0811_dir=debug_ac0811_dir,
-            debug_element_diff_dir=debug_element_diff_dir,
-            run_iteration_pipeline_fn=runIterationPipeline,
-            read_validation_log_details_fn=_readValidationLogDetails,
-            render_svg_to_numpy_fn=Action.renderSvgToNumpy,
-            calculate_delta2_stats_fn=Action.calculateDelta2Stats,
-            get_base_name_from_file_fn=getBaseNameFromFile,
-            cv2_module=cv2,
-            append_batch_failure_fn=batch_failures.append,
-            print_fn=print,
-        )
-
-    # Initial conversion pass for all forms.
-    stop_after_failure = conversion_initial_pass_helpers.runInitialConversionPassImpl(
-        process_files=process_files,
-        result_map=result_map,
-        existing_donor_rows=existing_donor_rows,
-        conversion_bestlist_rows=conversion_bestlist_rows,
-        folder_path=folder_path,
-        svg_out_dir=svg_out_dir,
-        diff_out_dir=diff_out_dir,
-        rng=rng,
-        deterministic_order=deterministic_order,
-        base_iterations=base_iterations,
-        convert_one_fn=_convertOne,
-        try_template_transfer_fn=_tryTemplateTransfer,
-        is_conversion_bestlist_candidate_better_fn=_isConversionBestlistCandidateBetter,
-        store_conversion_bestlist_snapshot_fn=lambda variant, row: _storeConversionBestlistSnapshot(
-            variant,
-            row,
-            svg_out_dir,
-            reports_out_dir,
-        ),
-        restore_conversion_bestlist_snapshot_fn=lambda variant: _restoreConversionBestlistSnapshot(
-            variant,
-            svg_out_dir,
-            reports_out_dir,
-        ),
-        choose_conversion_bestlist_row_fn=_chooseConversionBestlistRow,
-    )
-
-    current_rows = [
-        row
-        for row in result_map.values()
-        if math.isfinite(float(row.get("error_per_pixel", float("inf"))))
-    ]
-    cfg = _loadQualityConfig(reports_out_dir)
-    allowed_error_pp, threshold_source, _successful_threshold, _initial_threshold = _resolveAllowedErrorPerPixel(
-        current_rows,
-        cfg,
-    )
-
-    # Global policy: do not freeze individual variants. Every quality pass keeps
-    # all variants eligible so each run can re-evaluate with stochastic search
-    # while still converging by only accepting strict improvements.
-    skip_variants: set[str] = set()
-
-    _writeQualityConfig(
-        reports_out_dir,
-        allowed_error_per_pixel=allowed_error_pp,
-        skipped_variants=sorted(v for v in skip_variants if v),
-        source=threshold_source,
-    )
-
-    # Iteratively refine unresolved quality cases while preserving all already
-    # successful outputs (replace only when strictly better).
-    strategy_logs: list[dict[str, object]] = []
-    stop_after_failure = conversion_quality_pass_helpers.runQualityPassesImpl(
-        max_quality_passes=max_quality_passes,
-        stop_after_failure=stop_after_failure,
-        deterministic_order=deterministic_order,
-        rng=rng,
-        base_iterations=base_iterations,
-        allowed_error_per_pixel=allowed_error_pp,
-        skip_variants=skip_variants,
-        result_map=result_map,
-        quality_logs=quality_logs,
-        conversion_bestlist_rows=conversion_bestlist_rows,
-        convert_one_fn=_convertOne,
-        select_open_quality_cases_fn=_selectOpenQualityCases,
-        select_middle_lower_tercile_fn=_selectMiddleLowerTercile,
-        iteration_strategy_for_pass_fn=_iterationStrategyForPass,
-        adaptive_iteration_budget_for_quality_row_fn=_adaptiveIterationBudgetForQualityRow,
-        evaluate_quality_pass_candidate_fn=_evaluateQualityPassCandidate,
-        store_conversion_bestlist_snapshot_fn=lambda variant, row: _storeConversionBestlistSnapshot(
-            variant,
-            row,
-            svg_out_dir,
-            reports_out_dir,
-        ),
-        restore_conversion_bestlist_snapshot_fn=lambda variant: _restoreConversionBestlistSnapshot(
-            variant,
-            svg_out_dir,
-            reports_out_dir,
-        ),
-        before_pass_fn=lambda pass_idx: setattr(Action, "STOCHASTIC_SEED_OFFSET", pass_idx),
-    )
-
-    conversion_finalization_helpers.runConversionFinalizationImpl(
-        reports_out_dir=reports_out_dir,
-        quality_logs=quality_logs,
-        conversion_bestlist_path=conversion_bestlist_path,
-        conversion_bestlist_rows=conversion_bestlist_rows,
-        batch_failures=batch_failures,
-        strategy_logs=strategy_logs,
-        files=files,
-        result_map=result_map,
-        folder_path=folder_path,
-        csv_path=csv_path,
-        iterations=iterations,
-        svg_out_dir=svg_out_dir,
-        diff_out_dir=diff_out_dir,
-        normalized_selected_variants=normalized_selected_variants,
-        write_quality_pass_report_fn=_writeQualityPassReport,
-        write_conversion_bestlist_metrics_fn=_writeConversionBestlistMetrics,
-        write_batch_failure_summary_fn=_writeBatchFailureSummary,
-        write_strategy_switch_template_transfers_report_fn=_writeStrategySwitchTemplateTransfersReport,
-        write_iteration_log_and_collect_semantic_results_fn=_writeIterationLogAndCollectSemanticResults,
-        harmonize_semantic_size_variants_fn=_harmonizeSemanticSizeVariants,
-        run_post_conversion_reporting_fn=_runPostConversionReporting,
-    )
-
-    Action.STOCHASTIC_SEED_OFFSET = 0
-    Action.STOCHASTIC_RUN_SEED = 0
-    return out_root
+    return imageCompositeConverterRemaining_helpers.convertRange(folder_path, csv_path, iterations, start_ref, end_ref, debug_ac0811_dir, debug_element_diff_dir, output_root, selected_variants, deterministic_order)
 
 
 def _readSvgGeometry(svg_path: str) -> tuple[int, int, dict] | None:
-    return semantic_geometry_helpers.readSvgGeometryImpl(svg_path, action_t_path_d=Action.T_PATH_D)
+    return imageCompositeConverterRemaining_helpers._readSvgGeometry(svg_path)
 
 
 def _normalizedGeometrySignature(w: int, h: int, params: dict) -> dict[str, float]:
-    return semantic_geometry_helpers.normalizedGeometrySignatureImpl(w, h, params)
+    return imageCompositeConverterRemaining_helpers._normalizedGeometrySignature(w, h, params)
 
 
 def _maxSignatureDelta(sig_a: dict[str, float], sig_b: dict[str, float]) -> float:
-    return semantic_geometry_helpers.maxSignatureDeltaImpl(sig_a, sig_b)
+    return imageCompositeConverterRemaining_helpers._maxSignatureDelta(sig_a, sig_b)
 
 
 def _needsLargeCircleOverflowGuard(params: dict) -> bool:
-    return semantic_harmonization_helpers.needsLargeCircleOverflowGuardImpl(params)
+    return imageCompositeConverterRemaining_helpers._needsLargeCircleOverflowGuard(params)
 
 
 def _scaleBadgeParams(
@@ -3696,40 +2659,27 @@ def _scaleBadgeParams(
     *,
     target_variant: str = "",
 ) -> dict:
-    return semantic_harmonization_helpers.scaleBadgeParamsImpl(
-        anchor,
-        anchor_w,
-        anchor_h,
-        target_w,
-        target_h,
-        clip_scalar_fn=Action._clipScalar,
-        needs_large_circle_overflow_guard_fn=_needsLargeCircleOverflowGuard,
-    )
+    return imageCompositeConverterRemaining_helpers._scaleBadgeParams(anchor, anchor_w, anchor_h, target_w, target_h, target_variant=target_variant)
 
 
 def _harmonizationAnchorPriority(suffix: str, prefer_large: bool) -> int:
-    return semantic_harmonization_helpers.harmonizationAnchorPriorityImpl(suffix, prefer_large)
+    return imageCompositeConverterRemaining_helpers._harmonizationAnchorPriority(suffix, prefer_large)
 
 
 def _clipGray(value: float) -> int:
-    return semantic_harmonization_helpers.clipGrayImpl(value)
+    return imageCompositeConverterRemaining_helpers._clipGray(value)
 
 
 def _captureCanonicalBadgeColors(params: dict) -> dict:
-    return semantic_harmonization_helpers.captureCanonicalBadgeColorsImpl(
-        params,
-        light_circle_fill_gray=Action.LIGHT_CIRCLE_FILL_GRAY,
-        light_circle_stroke_gray=Action.LIGHT_CIRCLE_STROKE_GRAY,
-        light_circle_text_gray=Action.LIGHT_CIRCLE_TEXT_GRAY,
-    )
+    return imageCompositeConverterRemaining_helpers._captureCanonicalBadgeColors(params)
 
 
 def _applyCanonicalBadgeColors(params: dict) -> dict:
-    return semantic_harmonization_helpers.applyCanonicalBadgeColorsImpl(params)
+    return imageCompositeConverterRemaining_helpers._applyCanonicalBadgeColors(params)
 
 
 def _familyHarmonizedBadgeColors(variant_rows: list[dict[str, object]]) -> dict[str, int]:
-    return semantic_harmonization_helpers.familyHarmonizedBadgeColorsImpl(variant_rows)
+    return imageCompositeConverterRemaining_helpers._familyHarmonizedBadgeColors(variant_rows)
 
 
 def _harmonizeSemanticSizeVariants(
@@ -3738,22 +2688,7 @@ def _harmonizeSemanticSizeVariants(
     svg_out_dir: str,
     reports_out_dir: str,
 ) -> None:
-    semantic_harmonization_helpers.harmonizeSemanticSizeVariantsImpl(
-        results=results,
-        folder_path=folder_path,
-        svg_out_dir=svg_out_dir,
-        reports_out_dir=reports_out_dir,
-        read_svg_geometry_fn=_readSvgGeometry,
-        normalized_geometry_signature_fn=_normalizedGeometrySignature,
-        max_signature_delta_fn=_maxSignatureDelta,
-        harmonization_anchor_priority_fn=_harmonizationAnchorPriority,
-        family_harmonized_badge_colors_fn=_familyHarmonizedBadgeColors,
-        scale_badge_params_fn=_scaleBadgeParams,
-        generate_badge_svg_fn=Action.generateBadgeSvg,
-        render_svg_to_numpy_fn=Action.renderSvgToNumpy,
-        calculate_error_fn=Action.calculateError,
-        cv2_module=cv2,
-    )
+    return imageCompositeConverterRemaining_helpers._harmonizeSemanticSizeVariants(results, folder_path, svg_out_dir, reports_out_dir)
 
 
 def _writeAc08RegressionManifest(
@@ -3764,23 +2699,11 @@ def _writeAc08RegressionManifest(
     iterations: int,
     selected_variants: list[str],
 ) -> None:
-    ac08_reporting_helpers.writeAc08RegressionManifestImpl(
-        reports_out_dir,
-        folder_path=folder_path,
-        csv_path=csv_path,
-        iterations=iterations,
-        selected_variants=selected_variants,
-        ac08_regression_variants=AC08_REGRESSION_VARIANTS,
-        ac08_regression_cases=AC08_REGRESSION_CASES,
-        ac08_regression_set_name=AC08_REGRESSION_SET_NAME,
-    )
+    return imageCompositeConverterRemaining_helpers._writeAc08RegressionManifest(reports_out_dir, folder_path=folder_path, csv_path=csv_path, iterations=iterations, selected_variants=selected_variants)
 
 
 def _summarizePreviousGoodAc08Variants(reports_out_dir: str) -> dict[str, object]:
-    return ac08_reporting_helpers.summarizePreviousGoodAc08VariantsImpl(
-        reports_out_dir,
-        previous_good_variants=AC08_PREVIOUSLY_GOOD_VARIANTS,
-    )
+    return imageCompositeConverterRemaining_helpers._summarizePreviousGoodAc08Variants(reports_out_dir)
 
 
 def _writeAc08SuccessCriteriaReport(
@@ -3788,17 +2711,11 @@ def _writeAc08SuccessCriteriaReport(
     *,
     selected_variants: list[str],
 ) -> dict[str, object] | None:
-    return ac08_reporting_helpers.writeAc08SuccessCriteriaReportImpl(
-        reports_out_dir,
-        selected_variants=selected_variants,
-        ac08_regression_variants=AC08_REGRESSION_VARIANTS,
-        ac08_regression_set_name=AC08_REGRESSION_SET_NAME,
-        summarize_previous_good_fn=_summarizePreviousGoodAc08Variants,
-    )
+    return imageCompositeConverterRemaining_helpers._writeAc08SuccessCriteriaReport(reports_out_dir, selected_variants=selected_variants)
 
 
 def _emitAc08SuccessGateStatus(ac08_success_gate: dict[str, object] | None) -> None:
-    ac08_gate_helpers.emitAc08SuccessGateStatusImpl(ac08_success_gate, print_fn=print)
+    return imageCompositeConverterRemaining_helpers._emitAc08SuccessGateStatus(ac08_success_gate)
 
 
 def _writeAc08WeakFamilyStatusReport(
@@ -3807,33 +2724,19 @@ def _writeAc08WeakFamilyStatusReport(
     selected_variants: list[str],
     ranking_threshold: float = 18.0,
 ) -> None:
-    ac08_reporting_helpers.writeAc08WeakFamilyStatusReportImpl(
-        reports_out_dir,
-        selected_variants=selected_variants,
-        ac08_regression_cases=AC08_REGRESSION_CASES,
-        ac08_mitigation_status=AC08_MITIGATION_STATUS,
-        ranking_threshold=ranking_threshold,
-    )
+    return imageCompositeConverterRemaining_helpers._writeAc08WeakFamilyStatusReport(reports_out_dir, selected_variants=selected_variants, ranking_threshold=ranking_threshold)
 
 
 def _writePixelDelta2Ranking(folder_path: str, svg_out_dir: str, reports_out_dir: str, threshold: float = 18.0) -> None:
-    ranking_helpers.writePixelDelta2RankingImpl(
-        folder_path=folder_path,
-        svg_out_dir=svg_out_dir,
-        reports_out_dir=reports_out_dir,
-        threshold=threshold,
-        cv2_module=cv2,
-        render_svg_to_numpy_fn=Action.render_svg_to_numpy,
-        calculate_delta2_stats_fn=Action.calculateDelta2Stats,
-    )
+    return imageCompositeConverterRemaining_helpers._writePixelDelta2Ranking(folder_path, svg_out_dir, reports_out_dir, threshold)
 
 
 def _loadIterationLogRows(reports_out_dir: str) -> dict[str, dict[str, str]]:
-    return successful_conversion_quality_helpers.loadIterationLogRowsImpl(reports_out_dir)
+    return imageCompositeConverterRemaining_helpers._loadIterationLogRows(reports_out_dir)
 
 
 def _findImagePathByVariant(folder_path: str, variant: str) -> str | None:
-    return successful_conversion_quality_helpers.findImagePathByVariantImpl(folder_path, variant)
+    return imageCompositeConverterRemaining_helpers._findImagePathByVariant(folder_path, variant)
 
 
 def collectSuccessfulConversionQualityMetrics(
@@ -3842,122 +2745,79 @@ def collectSuccessfulConversionQualityMetrics(
     reports_out_dir: str,
     successful_variants: list[str] | tuple[str, ...] | None = None,
 ) -> list[dict[str, object]]:
-    return successful_conversion_quality_helpers.collectSuccessfulConversionQualityMetricsImpl(
-        folder_path=folder_path,
-        svg_out_dir=svg_out_dir,
-        reports_out_dir=reports_out_dir,
-        successful_variants=successful_variants or SUCCESSFUL_CONVERSIONS,
-        successful_conversions=SUCCESSFUL_CONVERSIONS,
-        load_iteration_log_rows_fn=_loadIterationLogRows,
-        find_image_path_by_variant_fn=_findImagePathByVariant,
-        read_validation_log_details_fn=_readValidationLogDetails,
-        render_svg_to_numpy_fn=Action.render_svg_to_numpy,
-        cv2_module=cv2,
-        np_module=np,
-    )
+    return imageCompositeConverterRemaining_helpers.collectSuccessfulConversionQualityMetrics(folder_path, svg_out_dir, reports_out_dir, successful_variants)
 
 
 def _successfulConversionMetricsAvailable(metrics: dict[str, object]) -> bool:
-    return successful_conversions_helpers.successfulConversionMetricsAvailableImpl(metrics)
+    return imageCompositeConverterRemaining_helpers._successfulConversionMetricsAvailable(metrics)
 
 
 def _parseSuccessfulConversionManifestLine(raw_line: str) -> tuple[str, dict[str, object]]:
-    return successful_conversions_helpers.parseSuccessfulConversionManifestLineImpl(raw_line)
+    return imageCompositeConverterRemaining_helpers._parseSuccessfulConversionManifestLine(raw_line)
 
 
 def _readSuccessfulConversionManifestMetrics(manifest_path: Path) -> dict[str, dict[str, object]]:
-    return successful_conversions_helpers.readSuccessfulConversionManifestMetricsImpl(
-        manifest_path,
-        parse_manifest_line_fn=_parseSuccessfulConversionManifestLine,
-    )
+    return imageCompositeConverterRemaining_helpers._readSuccessfulConversionManifestMetrics(manifest_path)
 
 
 def _successfulConversionSnapshotDir(reports_out_dir: str) -> Path:
-    return successful_conversions_helpers.successfulConversionSnapshotDirImpl(reports_out_dir)
+    return imageCompositeConverterRemaining_helpers._successfulConversionSnapshotDir(reports_out_dir)
 
 
 def _successfulConversionSnapshotPaths(reports_out_dir: str, variant: str) -> dict[str, Path]:
-    return successful_conversions_helpers.successfulConversionSnapshotPathsImpl(
-        reports_out_dir,
-        variant,
-        snapshot_dir_fn=_successfulConversionSnapshotDir,
-    )
+    return imageCompositeConverterRemaining_helpers._successfulConversionSnapshotPaths(reports_out_dir, variant)
 
 
 def _restoreSuccessfulConversionSnapshot(variant: str, svg_out_dir: str, reports_out_dir: str) -> bool:
-    return successful_conversions_helpers.restoreSuccessfulConversionSnapshotImpl(
-        variant=variant,
-        svg_out_dir=svg_out_dir,
-        reports_out_dir=reports_out_dir,
-        snapshot_paths_fn=_successfulConversionSnapshotPaths,
-    )
+    return imageCompositeConverterRemaining_helpers._restoreSuccessfulConversionSnapshot(variant, svg_out_dir, reports_out_dir)
 
 
 def _storeSuccessfulConversionSnapshot(variant: str, metrics: dict[str, object], svg_out_dir: str, reports_out_dir: str) -> None:
-    return successful_conversions_helpers.storeSuccessfulConversionSnapshotImpl(
-        variant=variant,
-        metrics=metrics,
-        svg_out_dir=svg_out_dir,
-        reports_out_dir=reports_out_dir,
-        snapshot_paths_fn=_successfulConversionSnapshotPaths,
-    )
+    return imageCompositeConverterRemaining_helpers._storeSuccessfulConversionSnapshot(variant, metrics, svg_out_dir, reports_out_dir)
 
 
 def _isSuccessfulConversionCandidateBetter(
     previous_metrics: dict[str, object] | None,
     candidate_metrics: dict[str, object],
 ) -> bool:
-    return successful_conversions_helpers.isSuccessfulConversionCandidateBetterImpl(
-        previous_metrics=previous_metrics,
-        candidate_metrics=candidate_metrics,
-        metrics_available_fn=_successfulConversionMetricsAvailable,
-        evaluate_candidate_fn=_evaluateQualityPassCandidate,
-    )
+    return imageCompositeConverterRemaining_helpers._isSuccessfulConversionCandidateBetter(previous_metrics, candidate_metrics)
 
 
 def _mergeSuccessfulConversionMetrics(
     baseline: dict[str, object],
     override: dict[str, object],
 ) -> dict[str, object]:
-    return successful_conversions_helpers.mergeSuccessfulConversionMetricsImpl(baseline, override)
+    return imageCompositeConverterRemaining_helpers._mergeSuccessfulConversionMetrics(baseline, override)
 
 
 def _formatSuccessfulConversionManifestLine(existing_line: str, metrics: dict[str, object]) -> str:
-    return successful_conversions_helpers.formatSuccessfulConversionManifestLineImpl(
-        existing_line=existing_line,
-        metrics=metrics,
-        metrics_available_fn=_successfulConversionMetricsAvailable,
-    )
+    return imageCompositeConverterRemaining_helpers._formatSuccessfulConversionManifestLine(existing_line, metrics)
 
 
 
 
 def _conversionBestlistManifestPath(reports_out_dir: str) -> Path:
-    return conversion_bestlist_helpers.conversionBestlistManifestPathImpl(reports_out_dir)
+    return imageCompositeConverterRemaining_helpers._conversionBestlistManifestPath(reports_out_dir)
 
 
 def _readConversionBestlistMetrics(manifest_path: Path) -> dict[str, dict[str, object]]:
-    return conversion_bestlist_helpers.readConversionBestlistMetricsImpl(manifest_path)
+    return imageCompositeConverterRemaining_helpers._readConversionBestlistMetrics(manifest_path)
 
 
 def _writeConversionBestlistMetrics(manifest_path: Path, rows: dict[str, dict[str, object]]) -> None:
-    conversion_bestlist_helpers.writeConversionBestlistMetricsImpl(manifest_path, rows)
+    return imageCompositeConverterRemaining_helpers._writeConversionBestlistMetrics(manifest_path, rows)
 
 
 def _storeConversionBestlistSnapshot(variant: str, row: dict[str, object], svg_out_dir: str, reports_out_dir: str) -> None:
-    conversion_bestlist_helpers.storeConversionBestlistSnapshotImpl(variant, row, svg_out_dir, reports_out_dir)
+    return imageCompositeConverterRemaining_helpers._storeConversionBestlistSnapshot(variant, row, svg_out_dir, reports_out_dir)
 
 
 def _restoreConversionBestlistSnapshot(variant: str, svg_out_dir: str, reports_out_dir: str) -> dict[str, object] | None:
-    return conversion_bestlist_helpers.restoreConversionBestlistSnapshotImpl(variant, svg_out_dir, reports_out_dir)
+    return imageCompositeConverterRemaining_helpers._restoreConversionBestlistSnapshot(variant, svg_out_dir, reports_out_dir)
 
 
 def _isConversionBestlistCandidateBetter(previous_row: dict[str, object] | None, candidate_row: dict[str, object]) -> bool:
-    return conversion_bestlist_helpers.isConversionBestlistCandidateBetterImpl(
-        previous_row,
-        candidate_row,
-        evaluate_candidate_fn=_evaluateQualityPassCandidate,
-    )
+    return imageCompositeConverterRemaining_helpers._isConversionBestlistCandidateBetter(previous_row, candidate_row)
 
 
 def _chooseConversionBestlistRow(
@@ -3965,14 +2825,10 @@ def _chooseConversionBestlistRow(
     previous_row: dict[str, object] | None,
     restored_row: dict[str, object] | None,
 ) -> dict[str, object]:
-    return conversion_bestlist_helpers.chooseConversionBestlistRowImpl(
-        candidate_row=candidate_row,
-        previous_row=previous_row,
-        restored_row=restored_row,
-    )
+    return imageCompositeConverterRemaining_helpers._chooseConversionBestlistRow(candidate_row, previous_row, restored_row)
 
 def _latestFailedConversionManifestEntry(reports_out_dir: str) -> dict[str, object] | None:
-    return successful_conversions_helpers.latestFailedConversionManifestEntryImpl(reports_out_dir)
+    return imageCompositeConverterRemaining_helpers._latestFailedConversionManifestEntry(reports_out_dir)
 
 
 def updateSuccessfulConversionsManifestWithMetrics(
@@ -3982,36 +2838,16 @@ def updateSuccessfulConversionsManifestWithMetrics(
     manifest_path: Path | None = None,
     successful_variants: list[str] | tuple[str, ...] | None = None,
 ) -> tuple[Path, list[dict[str, object]]]:
-    return successful_conversions_helpers.updateSuccessfulConversionsManifestWithMetricsImpl(
-        folder_path=folder_path,
-        svg_out_dir=svg_out_dir,
-        reports_out_dir=reports_out_dir,
-        collect_quality_metrics_fn=collectSuccessfulConversionQualityMetrics,
-        load_successful_conversions_fn=_loadSuccessfulConversions,
-        read_manifest_metrics_fn=_readSuccessfulConversionManifestMetrics,
-        is_candidate_better_fn=_isSuccessfulConversionCandidateBetter,
-        store_snapshot_fn=_storeSuccessfulConversionSnapshot,
-        merge_metrics_fn=_mergeSuccessfulConversionMetrics,
-        restore_snapshot_fn=_restoreSuccessfulConversionSnapshot,
-        format_manifest_line_fn=_formatSuccessfulConversionManifestLine,
-        latest_failed_entry_fn=_latestFailedConversionManifestEntry,
-        sorted_rows_fn=_sortedSuccessfulConversionMetricsRows,
-        manifest_path=manifest_path,
-        successful_variants=successful_variants,
-    )
+    return imageCompositeConverterRemaining_helpers.updateSuccessfulConversionsManifestWithMetrics(folder_path, svg_out_dir, reports_out_dir, manifest_path, successful_variants)
 
 def _sortedSuccessfulConversionMetricsRows(
     metrics: list[dict[str, object]],
 ) -> list[dict[str, object]]:
-    return successful_conversions_helpers.sortedSuccessfulConversionMetricsRowsImpl(metrics)
+    return imageCompositeConverterRemaining_helpers._sortedSuccessfulConversionMetricsRows(metrics)
 
 
 def _writeSuccessfulConversionCsvTable(csv_path: str | os.PathLike[str], metrics: list[dict[str, object]]) -> str:
-    return successful_conversions_helpers.writeSuccessfulConversionCsvTableImpl(
-        csv_path=csv_path,
-        metrics=metrics,
-        sorted_rows_fn=_sortedSuccessfulConversionMetricsRows,
-    )
+    return imageCompositeConverterRemaining_helpers._writeSuccessfulConversionCsvTable(csv_path, metrics)
 
 
 def writeSuccessfulConversionQualityReport(
@@ -4021,59 +2857,32 @@ def writeSuccessfulConversionQualityReport(
     successful_variants: list[str] | tuple[str, ...] | None = None,
     output_name: str = 'successful_conversion_quality',
 ) -> tuple[str, str, list[dict[str, object]]]:
-    """Backward-compatible wrapper that now also refreshes the manifest."""
-    return successful_conversion_report_helpers.writeSuccessfulConversionQualityReportImpl(
-        folder_path=folder_path,
-        svg_out_dir=svg_out_dir,
-        reports_out_dir=reports_out_dir,
-        update_manifest_fn=updateSuccessfulConversionsManifestWithMetrics,
-        sort_rows_fn=_sortedSuccessfulConversionMetricsRows,
-        write_csv_fn=_writeSuccessfulConversionCsvTable,
-        successful_variants=successful_variants,
-        output_name=output_name,
-    )
+    return imageCompositeConverterRemaining_helpers.writeSuccessfulConversionQualityReport(folder_path, svg_out_dir, reports_out_dir, successful_variants, output_name)
 
 
 def parseArgs(argv: list[str] | None = None) -> argparse.Namespace:
-    return cli_helpers.parseArgsImpl(
-        argv=argv,
-        ac08_regression_set_name=AC08_REGRESSION_SET_NAME,
-        ac08_regression_variants=AC08_REGRESSION_VARIANTS,
-        svg_render_subprocess_timeout_sec=SVG_RENDER_SUBPROCESS_TIMEOUT_SEC,
-    )
+    return imageCompositeConverterRemaining_helpers.parseArgs(argv)
 
 
 @contextlib.contextmanager
 def _optionalLogCapture(log_path: str):
-    with cli_helpers.optionalLogCaptureImpl(log_path):
-        yield
+    return imageCompositeConverterRemaining_helpers._optionalLogCapture(log_path)
 
 
 def _autoDetectCsvPath(folder_path: str) -> str | None:
-    return cli_helpers.autoDetectCsvPathImpl(folder_path)
+    return imageCompositeConverterRemaining_helpers._autoDetectCsvPath(folder_path)
 
 
 def _resolveCliCsvAndOutput(args: argparse.Namespace) -> tuple[str, str | None]:
-    return cli_helpers.resolveCliCsvAndOutputImpl(
-        args,
-        auto_detect_csv_path_fn=_autoDetectCsvPath,
-        resolve_xml_path_fn=_resolveDescriptionXmlPath,
-    )
+    return imageCompositeConverterRemaining_helpers._resolveCliCsvAndOutput(args)
 
 
 def _formatUserDiagnostic(exc: BaseException) -> str:
-    return cli_helpers.formatUserDiagnosticImpl(
-        exc,
-        description_mapping_error_type=DescriptionMappingError,
-    )
+    return imageCompositeConverterRemaining_helpers._formatUserDiagnostic(exc)
 
 
 def _promptInteractiveRange(args: argparse.Namespace) -> tuple[str, str]:
-    return cli_helpers.promptInteractiveRangeImpl(
-        args,
-        shared_partial_range_token_fn=_sharedPartialRangeToken,
-        extract_ref_parts_fn=_extractRefParts,
-    )
+    return imageCompositeConverterRemaining_helpers._promptInteractiveRange(args)
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -4098,26 +2907,11 @@ def main(argv: list[str] | None = None) -> int:
     )
 
 def convertImage(input_path: str, output_path: str, *, max_iter: int = 120, plateau_limit: int = 14, seed: int = 42) -> Path:
-    """Backward-compatible single-image entrypoint.
-
-    - For raster targets (e.g. ``.png``), write an annotated image plus JSON coordinates.
-    - For SVG targets or missing image deps, preserve the historical embedded-raster fallback.
-    """
-    del max_iter, plateau_limit, seed
-    return legacy_api_helpers.convertImageImpl(
-        input_path=input_path,
-        output_path=output_path,
-        render_embedded_raster_svg_fn=_renderEmbeddedRasterSvg,
-        detect_relevant_regions_fn=detectRelevantRegions,
-        annotate_image_regions_fn=annotateImageRegions,
-        cv2_module=cv2,
-        np_module=np,
-    )
+    return imageCompositeConverterRemaining_helpers.convertImage(input_path, output_path, max_iter=max_iter, plateau_limit=plateau_limit, seed=seed)
 
 
 def convertImageVariants(*args, **kwargs):
-    """Compatibility shim kept for tooling imports."""
-    return legacy_api_helpers.convertImageVariantsImpl(*args, convert_range_fn=convertRange, **kwargs)
+    return imageCompositeConverterRemaining_helpers.convertImageVariants(*args, **kwargs)
 OPTIONAL_DEPENDENCY_ERRORS = dependency_helpers.OPTIONAL_DEPENDENCY_ERRORS
 
 # Backward-compatible snake_case aliases expected by legacy tests/tooling.
