@@ -4065,90 +4065,24 @@ def _promptInteractiveRange(args: argparse.Namespace) -> tuple[str, str]:
 
 def main(argv: list[str] | None = None) -> int:
     args = parseArgs(argv)
-    if bool(getattr(args, "_render_svg_subprocess", False)):
-        return _runSvgRenderSubprocessEntrypoint()
-    global SVG_RENDER_SUBPROCESS_ENABLED, SVG_RENDER_SUBPROCESS_TIMEOUT_SEC
-    if bool(args.isolate_svg_render):
-        SVG_RENDER_SUBPROCESS_ENABLED = True
-    SVG_RENDER_SUBPROCESS_TIMEOUT_SEC = max(1.0, float(args.isolate_svg_render_timeout_sec))
-    log_path = str(args.log_file or "").strip()
-    with _optionalLogCapture(log_path):
-        try:
-            if args.ac08_regression_set:
-                args.start = "AC0000"
-                args.end = "ZZ9999"
-
-            if args.print_linux_vendor_command:
-                print(
-                    " ".join(
-                        buildLinuxVendorInstallCommand(
-                            vendor_dir=args.vendor_dir,
-                            platform_tag=args.vendor_platform,
-                            python_version=args.vendor_python_version,
-                        )
-                    )
-                )
-                return 0
-
-            if args.interactive_range or args.start is None or args.end is None:
-                args.start, args.end = _promptInteractiveRange(args)
-            else:
-                args.start = str(args.start or "").strip()
-                args.end = str(args.end or "ZZZZZZ").strip() or args.start
-
-            csv_path, output_dir = _resolveCliCsvAndOutput(args)
-
-            if not csv_path:
-                print("[WARN] Keine CSV/TSV/XML angegeben oder gefunden. Einige Symbole können ohne Beschreibung übersprungen werden.")
-            elif not os.path.exists(csv_path):
-                print(f"[WARN] CSV/TSV/XML-Datei nicht gefunden: {csv_path}")
-            elif args.mode == "convert":
-                # Validate user-supplied description data before the batch starts so
-                # malformed files fail with a precise source location even when the
-                # selected image range happens to be empty.
-                _loadDescriptionMapping(csv_path)
-
-            if args.bootstrap_deps:
-                try:
-                    installed = _bootstrapRequiredImageDependencies()
-                except RuntimeError as exc:
-                    print(f"[ERROR] {exc}")
-                    return 2
-                if installed:
-                    print(f"[INFO] Installiert: {', '.join(installed)}")
-
-            if args.ac08_regression_set:
-                print(
-                    "[INFO] Verwende festes AC08-Regression-Set "
-                    f"{AC08_REGRESSION_SET_NAME}: {', '.join(AC08_REGRESSION_VARIANTS)}"
-                )
-            selected_variants = set(AC08_REGRESSION_VARIANTS) if args.ac08_regression_set else None
-
-            if args.mode == "annotate":
-                out_dir = analyzeRange(
-                    args.folder_path,
-                    output_root=output_dir,
-                    start_ref=args.start,
-                    end_ref=args.end,
-                )
-            else:
-                out_dir = convertRange(
-                    args.folder_path,
-                    csv_path,
-                    args.iterations,
-                    args.start,
-                    args.end,
-                    args.debug_ac0811_dir,
-                    args.debug_element_diff_dir,
-                    output_dir,
-                    selected_variants,
-                    bool(args.deterministic_order),
-                )
-            print(f"\nAbgeschlossen! Ausgaben unter: {out_dir}")
-            return 0
-        except DescriptionMappingError as exc:
-            print(f"[ERROR] {_formatUserDiagnostic(exc)}")
-            return 2
+    return cli_helpers.runMainImpl(
+        args,
+        run_svg_render_subprocess_entrypoint_fn=_runSvgRenderSubprocessEntrypoint,
+        set_svg_render_subprocess_enabled_fn=lambda enabled: globals().__setitem__("SVG_RENDER_SUBPROCESS_ENABLED", bool(enabled)),
+        set_svg_render_subprocess_timeout_fn=lambda timeout: globals().__setitem__("SVG_RENDER_SUBPROCESS_TIMEOUT_SEC", float(timeout)),
+        optional_log_capture_fn=_optionalLogCapture,
+        build_linux_vendor_install_command_fn=buildLinuxVendorInstallCommand,
+        prompt_interactive_range_fn=_promptInteractiveRange,
+        resolve_cli_csv_and_output_fn=_resolveCliCsvAndOutput,
+        load_description_mapping_fn=_loadDescriptionMapping,
+        bootstrap_required_image_dependencies_fn=_bootstrapRequiredImageDependencies,
+        analyze_range_fn=analyzeRange,
+        convert_range_fn=convertRange,
+        format_user_diagnostic_fn=_formatUserDiagnostic,
+        description_mapping_error_type=DescriptionMappingError,
+        ac08_regression_set_name=AC08_REGRESSION_SET_NAME,
+        ac08_regression_variants=AC08_REGRESSION_VARIANTS,
+    )
 
 def convertImage(input_path: str, output_path: str, *, max_iter: int = 120, plateau_limit: int = 14, seed: int = 42) -> Path:
     """Backward-compatible single-image entrypoint.
