@@ -1,0 +1,1113 @@
+timestamp_utc: 2026-04-08T16:05:40.443921+00:00
+source: src/imageCompositeConverter.py
+target_module: src/iCCModules/imageCompositeConverterRemaining.py
+verify_cmds: ['python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py']
+planned_functions: 158
+successful: 158
+failed: 0
+
+[success] detectRelevantRegions
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function detectRelevantRegions --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function detectRelevantRegions -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] annotateImageRegions
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function annotateImageRegions --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function annotateImageRegions -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] analyzeRange
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function analyzeRange --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function analyzeRange -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _optionalDependencyBaseDir
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _optionalDependencyBaseDir --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _optionalDependencyBaseDir -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _vendoredSitePackagesDirs
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _vendoredSitePackagesDirs --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _vendoredSitePackagesDirs -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _clearPartialModuleImport
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _clearPartialModuleImport --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _clearPartialModuleImport -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _describeOptionalDependencyError
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _describeOptionalDependencyError --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _describeOptionalDependencyError -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _loadOptionalModule
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _loadOptionalModule --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _loadOptionalModule -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _importWithVendoredFallback
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _importWithVendoredFallback --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _importWithVendoredFallback -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _optional_dependency_base_dir
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _optional_dependency_base_dir --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _optional_dependency_base_dir -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _vendored_site_packages_dirs
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _vendored_site_packages_dirs --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _vendored_site_packages_dirs -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _describe_optional_dependency_error
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _describe_optional_dependency_error --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _describe_optional_dependency_error -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _load_optional_module
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _load_optional_module --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _load_optional_module -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _import_with_vendored_fallback
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _import_with_vendored_fallback --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _import_with_vendored_fallback -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _clip
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _clip --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _clip -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] loadGrayscaleImage
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function loadGrayscaleImage --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function loadGrayscaleImage -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _createDiffImageWithoutCv2
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _createDiffImageWithoutCv2 --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _createDiffImageWithoutCv2 -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _computeOtsuThreshold
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _computeOtsuThreshold --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _computeOtsuThreshold -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _adaptiveThreshold
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _adaptiveThreshold --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _adaptiveThreshold -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] loadBinaryImageWithMode
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function loadBinaryImageWithMode --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function loadBinaryImageWithMode -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] renderCandidateMask
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function renderCandidateMask --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function renderCandidateMask -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _iou
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _iou --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _iou -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] scoreCandidate
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function scoreCandidate --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function scoreCandidate -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] score_candidate
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function score_candidate --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function score_candidate -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] randomNeighbor
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function randomNeighbor --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function randomNeighbor -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] optimizeElement
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function optimizeElement --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function optimizeElement -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] optimize_element
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function optimize_element --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function optimize_element -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _grayToHex
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _grayToHex --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _grayToHex -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] estimateStrokeStyle
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function estimateStrokeStyle --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function estimateStrokeStyle -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] candidateToSvg
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function candidateToSvg --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function candidateToSvg -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] decomposeCircleWithStem
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function decomposeCircleWithStem --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function decomposeCircleWithStem -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _missingRequiredImageDependencies
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _missingRequiredImageDependencies --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _missingRequiredImageDependencies -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _bootstrapRequiredImageDependencies
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _bootstrapRequiredImageDependencies --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _bootstrapRequiredImageDependencies -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] rgbToHex
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function rgbToHex --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function rgbToHex -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] getBaseNameFromFile
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function getBaseNameFromFile --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function getBaseNameFromFile -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _loadDescriptionMapping
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _loadDescriptionMapping --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _loadDescriptionMapping -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _loadDescriptionMappingFromCsv
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _loadDescriptionMappingFromCsv --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _loadDescriptionMappingFromCsv -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _loadDescriptionMappingFromXml
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _loadDescriptionMappingFromXml --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _loadDescriptionMappingFromXml -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _resolveDescriptionXmlPath
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _resolveDescriptionXmlPath --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _resolveDescriptionXmlPath -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _requiredVendorPackages
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _requiredVendorPackages --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _requiredVendorPackages -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] buildLinuxVendorInstallCommand
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function buildLinuxVendorInstallCommand --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function buildLinuxVendorInstallCommand -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _renderSvgToNumpyInprocess
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _renderSvgToNumpyInprocess --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _renderSvgToNumpyInprocess -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _renderSvgToNumpyViaSubprocess
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _renderSvgToNumpyViaSubprocess --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _renderSvgToNumpyViaSubprocess -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _render_svg_to_numpy_inprocess
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _render_svg_to_numpy_inprocess --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _render_svg_to_numpy_inprocess -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _render_svg_to_numpy_via_subprocess
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _render_svg_to_numpy_via_subprocess --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _render_svg_to_numpy_via_subprocess -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _is_fitz_open_monkeypatched
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _is_fitz_open_monkeypatched --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _is_fitz_open_monkeypatched -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _is_inprocess_renderer_monkeypatched
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _is_inprocess_renderer_monkeypatched --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _is_inprocess_renderer_monkeypatched -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _bbox_to_dict
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _bbox_to_dict --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _bbox_to_dict -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _runSvgRenderSubprocessEntrypoint
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _runSvgRenderSubprocessEntrypoint --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _runSvgRenderSubprocessEntrypoint -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _semanticQualityFlags
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _semanticQualityFlags --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _semanticQualityFlags -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] runIterationPipeline
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function runIterationPipeline --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function runIterationPipeline -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _extractRefParts
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _extractRefParts --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _extractRefParts -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _normalizeRangeToken
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _normalizeRangeToken --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _normalizeRangeToken -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _normalizeExplicitRangeToken
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _normalizeExplicitRangeToken --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _normalizeExplicitRangeToken -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _isExplicitSizeVariantToken
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _isExplicitSizeVariantToken --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _isExplicitSizeVariantToken -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _compactRangeToken
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _compactRangeToken --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _compactRangeToken -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _sharedPartialRangeToken
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _sharedPartialRangeToken --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _sharedPartialRangeToken -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _matchesPartialRangeToken
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _matchesPartialRangeToken --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _matchesPartialRangeToken -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _extractSymbolFamily
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _extractSymbolFamily --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _extractSymbolFamily -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _matchesExactPrefixFilter
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _matchesExactPrefixFilter --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _matchesExactPrefixFilter -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _inRequestedRange
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _inRequestedRange --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _inRequestedRange -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _conversionRandom
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _conversionRandom --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _conversionRandom -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _writeIterationLogAndCollectSemanticResults
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _writeIterationLogAndCollectSemanticResults --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _writeIterationLogAndCollectSemanticResults -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _runPostConversionReporting
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _runPostConversionReporting --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _runPostConversionReporting -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _defaultConvertedSymbolsRoot
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _defaultConvertedSymbolsRoot --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _defaultConvertedSymbolsRoot -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _convertedSvgOutputDir
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _convertedSvgOutputDir --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _convertedSvgOutputDir -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _readValidationLogDetails
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _readValidationLogDetails --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _readValidationLogDetails -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _writeBatchFailureSummary
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _writeBatchFailureSummary --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _writeBatchFailureSummary -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _writeStrategySwitchTemplateTransfersReport
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _writeStrategySwitchTemplateTransfersReport --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _writeStrategySwitchTemplateTransfersReport -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _collectDescriptionFragments
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _collectDescriptionFragments --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _collectDescriptionFragments -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _semanticAuditRecord
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _semanticAuditRecord --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _semanticAuditRecord -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _writeSemanticAuditReport
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _writeSemanticAuditReport --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _writeSemanticAuditReport -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _diffOutputDir
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _diffOutputDir --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _diffOutputDir -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _reportsOutputDir
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _reportsOutputDir --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _reportsOutputDir -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _isSemanticTemplateVariant
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _isSemanticTemplateVariant --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _isSemanticTemplateVariant -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _loadExistingConversionRows
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _loadExistingConversionRows --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _loadExistingConversionRows -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _sniffRasterSize
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _sniffRasterSize --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _sniffRasterSize -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _svgHrefMimeType
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _svgHrefMimeType --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _svgHrefMimeType -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _renderEmbeddedRasterSvg
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _renderEmbeddedRasterSvg --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _renderEmbeddedRasterSvg -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _qualityConfigPath
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _qualityConfigPath --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _qualityConfigPath -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _loadQualityConfig
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _loadQualityConfig --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _loadQualityConfig -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _writeQualityConfig
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _writeQualityConfig --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _writeQualityConfig -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _resolveAllowedErrorPerPixel
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _resolveAllowedErrorPerPixel --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _resolveAllowedErrorPerPixel -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _qualitySortKey
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _qualitySortKey --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _qualitySortKey -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _computeSuccessfulConversionsErrorThreshold
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _computeSuccessfulConversionsErrorThreshold --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _computeSuccessfulConversionsErrorThreshold -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _selectMiddleLowerTercile
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _selectMiddleLowerTercile --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _selectMiddleLowerTercile -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _selectOpenQualityCases
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _selectOpenQualityCases --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _selectOpenQualityCases -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _iterationStrategyForPass
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _iterationStrategyForPass --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _iterationStrategyForPass -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _adaptiveIterationBudgetForQualityRow
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _adaptiveIterationBudgetForQualityRow --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _adaptiveIterationBudgetForQualityRow -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _writeQualityPassReport
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _writeQualityPassReport --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _writeQualityPassReport -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _evaluateQualityPassCandidate
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _evaluateQualityPassCandidate --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _evaluateQualityPassCandidate -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _extractSvgInner
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _extractSvgInner --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _extractSvgInner -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _buildTransformedSvgFromTemplate
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _buildTransformedSvgFromTemplate --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _buildTransformedSvgFromTemplate -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _templateTransferScaleCandidates
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _templateTransferScaleCandidates --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _templateTransferScaleCandidates -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _estimateTemplateTransferScale
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _estimateTemplateTransferScale --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _estimateTemplateTransferScale -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _templateTransferTransformCandidates
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _templateTransferTransformCandidates --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _templateTransferTransformCandidates -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _rankTemplateTransferDonors
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _rankTemplateTransferDonors --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _rankTemplateTransferDonors -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _templateTransferDonorFamilyCompatible
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _templateTransferDonorFamilyCompatible --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _templateTransferDonorFamilyCompatible -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _semanticTransferRotations
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _semanticTransferRotations --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _semanticTransferRotations -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _semanticTransferIsCompatible
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _semanticTransferIsCompatible --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _semanticTransferIsCompatible -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _connectorArmDirection
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _connectorArmDirection --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _connectorArmDirection -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _connectorStemDirection
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _connectorStemDirection --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _connectorStemDirection -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _semanticTransferScaleCandidates
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _semanticTransferScaleCandidates --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _semanticTransferScaleCandidates -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _semanticTransferBadgeParams
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _semanticTransferBadgeParams --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _semanticTransferBadgeParams -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _tryTemplateTransfer
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _tryTemplateTransfer --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _tryTemplateTransfer -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _runEmbeddedRasterFallback
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _runEmbeddedRasterFallback --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _runEmbeddedRasterFallback -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _listRequestedImageFiles
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _listRequestedImageFiles --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _listRequestedImageFiles -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] convertRange
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function convertRange --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function convertRange -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _readSvgGeometry
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _readSvgGeometry --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _readSvgGeometry -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _normalizedGeometrySignature
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _normalizedGeometrySignature --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _normalizedGeometrySignature -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _maxSignatureDelta
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _maxSignatureDelta --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _maxSignatureDelta -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _needsLargeCircleOverflowGuard
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _needsLargeCircleOverflowGuard --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _needsLargeCircleOverflowGuard -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _scaleBadgeParams
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _scaleBadgeParams --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _scaleBadgeParams -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _harmonizationAnchorPriority
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _harmonizationAnchorPriority --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _harmonizationAnchorPriority -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _clipGray
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _clipGray --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _clipGray -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _captureCanonicalBadgeColors
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _captureCanonicalBadgeColors --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _captureCanonicalBadgeColors -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _applyCanonicalBadgeColors
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _applyCanonicalBadgeColors --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _applyCanonicalBadgeColors -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _familyHarmonizedBadgeColors
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _familyHarmonizedBadgeColors --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _familyHarmonizedBadgeColors -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _harmonizeSemanticSizeVariants
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _harmonizeSemanticSizeVariants --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _harmonizeSemanticSizeVariants -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _writeAc08RegressionManifest
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _writeAc08RegressionManifest --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _writeAc08RegressionManifest -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _summarizePreviousGoodAc08Variants
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _summarizePreviousGoodAc08Variants --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _summarizePreviousGoodAc08Variants -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _writeAc08SuccessCriteriaReport
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _writeAc08SuccessCriteriaReport --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _writeAc08SuccessCriteriaReport -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _emitAc08SuccessGateStatus
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _emitAc08SuccessGateStatus --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _emitAc08SuccessGateStatus -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _writeAc08WeakFamilyStatusReport
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _writeAc08WeakFamilyStatusReport --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _writeAc08WeakFamilyStatusReport -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _writePixelDelta2Ranking
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _writePixelDelta2Ranking --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _writePixelDelta2Ranking -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _loadIterationLogRows
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _loadIterationLogRows --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _loadIterationLogRows -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _findImagePathByVariant
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _findImagePathByVariant --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _findImagePathByVariant -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] collectSuccessfulConversionQualityMetrics
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function collectSuccessfulConversionQualityMetrics --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function collectSuccessfulConversionQualityMetrics -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _successfulConversionMetricsAvailable
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _successfulConversionMetricsAvailable --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _successfulConversionMetricsAvailable -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _parseSuccessfulConversionManifestLine
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _parseSuccessfulConversionManifestLine --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _parseSuccessfulConversionManifestLine -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _readSuccessfulConversionManifestMetrics
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _readSuccessfulConversionManifestMetrics --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _readSuccessfulConversionManifestMetrics -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _successfulConversionSnapshotDir
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _successfulConversionSnapshotDir --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _successfulConversionSnapshotDir -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _successfulConversionSnapshotPaths
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _successfulConversionSnapshotPaths --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _successfulConversionSnapshotPaths -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _restoreSuccessfulConversionSnapshot
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _restoreSuccessfulConversionSnapshot --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _restoreSuccessfulConversionSnapshot -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _storeSuccessfulConversionSnapshot
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _storeSuccessfulConversionSnapshot --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _storeSuccessfulConversionSnapshot -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _isSuccessfulConversionCandidateBetter
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _isSuccessfulConversionCandidateBetter --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _isSuccessfulConversionCandidateBetter -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _mergeSuccessfulConversionMetrics
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _mergeSuccessfulConversionMetrics --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _mergeSuccessfulConversionMetrics -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _formatSuccessfulConversionManifestLine
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _formatSuccessfulConversionManifestLine --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _formatSuccessfulConversionManifestLine -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _conversionBestlistManifestPath
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _conversionBestlistManifestPath --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _conversionBestlistManifestPath -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _readConversionBestlistMetrics
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _readConversionBestlistMetrics --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _readConversionBestlistMetrics -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _writeConversionBestlistMetrics
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _writeConversionBestlistMetrics --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _writeConversionBestlistMetrics -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _storeConversionBestlistSnapshot
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _storeConversionBestlistSnapshot --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _storeConversionBestlistSnapshot -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _restoreConversionBestlistSnapshot
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _restoreConversionBestlistSnapshot --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _restoreConversionBestlistSnapshot -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _isConversionBestlistCandidateBetter
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _isConversionBestlistCandidateBetter --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _isConversionBestlistCandidateBetter -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _chooseConversionBestlistRow
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _chooseConversionBestlistRow --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _chooseConversionBestlistRow -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _latestFailedConversionManifestEntry
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _latestFailedConversionManifestEntry --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _latestFailedConversionManifestEntry -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] updateSuccessfulConversionsManifestWithMetrics
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function updateSuccessfulConversionsManifestWithMetrics --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function updateSuccessfulConversionsManifestWithMetrics -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _sortedSuccessfulConversionMetricsRows
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _sortedSuccessfulConversionMetricsRows --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _sortedSuccessfulConversionMetricsRows -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _writeSuccessfulConversionCsvTable
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _writeSuccessfulConversionCsvTable --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _writeSuccessfulConversionCsvTable -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] writeSuccessfulConversionQualityReport
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function writeSuccessfulConversionQualityReport --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function writeSuccessfulConversionQualityReport -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] parseArgs
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function parseArgs --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function parseArgs -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _optionalLogCapture
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _optionalLogCapture --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _optionalLogCapture -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _autoDetectCsvPath
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _autoDetectCsvPath --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _autoDetectCsvPath -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _resolveCliCsvAndOutput
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _resolveCliCsvAndOutput --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _resolveCliCsvAndOutput -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _formatUserDiagnostic
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _formatUserDiagnostic --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _formatUserDiagnostic -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] _promptInteractiveRange
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function _promptInteractiveRange --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function _promptInteractiveRange -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] convertImage
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function convertImage --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function convertImage -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+
+[success] convertImageVariants
+  command: /root/.pyenv/versions/3.10.19/bin/python /workspace/ImageConverter/tools/automate_function_extraction.py --source src/imageCompositeConverter.py --function convertImageVariants --target-module src/iCCModules/imageCompositeConverterRemaining.py --verify-cmd python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
+  returncode: 0
+  stdout:
+    Extracted function convertImageVariants -> src/iCCModules/imageCompositeConverterRemaining.py
+    $ python -m py_compile src/imageCompositeConverter.py src/iCCModules/imageCompositeConverterRemaining.py
