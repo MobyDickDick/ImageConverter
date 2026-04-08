@@ -294,3 +294,106 @@ def optionalLogCaptureImpl(log_path: str):
         with contextlib.redirect_stdout(tee_stdout), contextlib.redirect_stderr(tee_stderr):
             print(f"[INFO] Schreibe Konsolen-Output nach: {path}")
             yield
+
+
+def runMainImpl(
+    args: argparse.Namespace,
+    *,
+    run_svg_render_subprocess_entrypoint_fn,
+    set_svg_render_subprocess_enabled_fn,
+    set_svg_render_subprocess_timeout_fn,
+    optional_log_capture_fn,
+    build_linux_vendor_install_command_fn,
+    prompt_interactive_range_fn,
+    resolve_cli_csv_and_output_fn,
+    load_description_mapping_fn,
+    bootstrap_required_image_dependencies_fn,
+    analyze_range_fn,
+    convert_range_fn,
+    format_user_diagnostic_fn,
+    description_mapping_error_type,
+    ac08_regression_set_name: str,
+    ac08_regression_variants: tuple[str, ...],
+) -> int:
+    if bool(getattr(args, "_render_svg_subprocess", False)):
+        return run_svg_render_subprocess_entrypoint_fn()
+
+    if bool(args.isolate_svg_render):
+        set_svg_render_subprocess_enabled_fn(True)
+    set_svg_render_subprocess_timeout_fn(max(1.0, float(args.isolate_svg_render_timeout_sec)))
+
+    log_path = str(args.log_file or "").strip()
+    with optional_log_capture_fn(log_path):
+        try:
+            if args.ac08_regression_set:
+                args.start = "AC0000"
+                args.end = "ZZ9999"
+
+            if args.print_linux_vendor_command:
+                print(
+                    " ".join(
+                        build_linux_vendor_install_command_fn(
+                            vendor_dir=args.vendor_dir,
+                            platform_tag=args.vendor_platform,
+                            python_version=args.vendor_python_version,
+                        )
+                    )
+                )
+                return 0
+
+            if args.interactive_range or args.start is None or args.end is None:
+                args.start, args.end = prompt_interactive_range_fn(args)
+            else:
+                args.start = str(args.start or "").strip()
+                args.end = str(args.end or "ZZZZZZ").strip() or args.start
+
+            csv_path, output_dir = resolve_cli_csv_and_output_fn(args)
+
+            if not csv_path:
+                print("[WARN] Keine CSV/TSV/XML angegeben oder gefunden. Einige Symbole können ohne Beschreibung übersprungen werden.")
+            elif not os.path.exists(csv_path):
+                print(f"[WARN] CSV/TSV/XML-Datei nicht gefunden: {csv_path}")
+            elif args.mode == "convert":
+                load_description_mapping_fn(csv_path)
+
+            if args.bootstrap_deps:
+                try:
+                    installed = bootstrap_required_image_dependencies_fn()
+                except RuntimeError as exc:
+                    print(f"[ERROR] {exc}")
+                    return 2
+                if installed:
+                    print(f"[INFO] Installiert: {', '.join(installed)}")
+
+            if args.ac08_regression_set:
+                print(
+                    "[INFO] Verwende festes AC08-Regression-Set "
+                    f"{ac08_regression_set_name}: {', '.join(ac08_regression_variants)}"
+                )
+            selected_variants = set(ac08_regression_variants) if args.ac08_regression_set else None
+
+            if args.mode == "annotate":
+                out_dir = analyze_range_fn(
+                    args.folder_path,
+                    output_root=output_dir,
+                    start_ref=args.start,
+                    end_ref=args.end,
+                )
+            else:
+                out_dir = convert_range_fn(
+                    args.folder_path,
+                    csv_path,
+                    args.iterations,
+                    args.start,
+                    args.end,
+                    args.debug_ac0811_dir,
+                    args.debug_element_diff_dir,
+                    output_dir,
+                    selected_variants,
+                    bool(args.deterministic_order),
+                )
+            print(f"\nAbgeschlossen! Ausgaben unter: {out_dir}")
+            return 0
+        except description_mapping_error_type as exc:
+            print(f"[ERROR] {format_user_diagnostic_fn(exc)}")
+            return 2
