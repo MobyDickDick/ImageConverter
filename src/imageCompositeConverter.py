@@ -216,47 +216,55 @@ def analyzeRange(folder_path: str, output_root: str | None = None, start_ref: st
 
 
 def _optionalDependencyBaseDir() -> Path:
-    return imageCompositeConverterRemaining_helpers._optionalDependencyBaseDir()
+    return _optional_dependency_base_dir()
 
 
 def _vendoredSitePackagesDirs() -> list[Path]:
-    return imageCompositeConverterRemaining_helpers._vendoredSitePackagesDirs()
+    return _vendored_site_packages_dirs()
 
 
 def _clearPartialModuleImport(module_name: str) -> None:
-    return imageCompositeConverterRemaining_helpers._clearPartialModuleImport(module_name)
+    dependency_helpers.clear_partial_module_import(module_name)
 
 
 def _describeOptionalDependencyError(module_name: str, exc: BaseException, attempted_paths: list[Path]) -> str:
-    return imageCompositeConverterRemaining_helpers._describeOptionalDependencyError(module_name, exc, attempted_paths)
+    return _describe_optional_dependency_error(module_name, exc, attempted_paths)
 
 
 def _loadOptionalModule(module_name: str):
-    return imageCompositeConverterRemaining_helpers._loadOptionalModule(module_name)
+    return _load_optional_module(module_name)
 
 
 def _importWithVendoredFallback(module_name: str):
-    return imageCompositeConverterRemaining_helpers._importWithVendoredFallback(module_name)
+    return _import_with_vendored_fallback(module_name)
 
 
 def _optional_dependency_base_dir() -> Path:
-    return imageCompositeConverterRemaining_helpers._optional_dependency_base_dir()
+    return dependency_helpers.optional_dependency_base_dir()
 
 
 def _vendored_site_packages_dirs() -> list[Path]:
-    return imageCompositeConverterRemaining_helpers._vendored_site_packages_dirs()
+    return dependency_helpers.vendored_site_packages_dirs(base_dir_fn=_optional_dependency_base_dir)
 
 
 def _describe_optional_dependency_error(module_name: str, exc: BaseException, attempted_paths: list[Path]) -> str:
-    return imageCompositeConverterRemaining_helpers._describe_optional_dependency_error(module_name, exc, attempted_paths)
+    return dependency_helpers.describe_optional_dependency_error(module_name, exc, attempted_paths)
 
 
 def _load_optional_module(module_name: str):
-    return imageCompositeConverterRemaining_helpers._load_optional_module(module_name)
+    return dependency_helpers.load_optional_module(
+        module_name,
+        vendored_dirs_fn=_vendored_site_packages_dirs,
+        import_module_fn=importlib.import_module,
+    )
 
 
 def _import_with_vendored_fallback(module_name: str):
-    return imageCompositeConverterRemaining_helpers._import_with_vendored_fallback(module_name)
+    return dependency_helpers.import_with_vendored_fallback(
+        module_name,
+        vendored_dirs_fn=_vendored_site_packages_dirs,
+        import_module_fn=importlib.import_module,
+    )
 
 
 # Load numpy before cv2: OpenCV's Python bindings import numpy at module-import
@@ -2991,6 +2999,12 @@ if hasattr(GlobalParameterVector, "fromParams") and not hasattr(GlobalParameterV
     GlobalParameterVector.from_params = staticmethod(GlobalParameterVector.fromParams)
 if hasattr(GlobalParameterVector, "applyToParams") and not hasattr(GlobalParameterVector, "apply_to_params"):
     GlobalParameterVector.apply_to_params = GlobalParameterVector.applyToParams
+
+# The extracted "remaining" helper module executes in its own global namespace
+# but still references converter-level symbols (classes/helpers/modules).
+# Keep that namespace synchronized without overriding implementation functions.
+for _ctx_name, _ctx_value in list(globals().items()):
+    imageCompositeConverterRemaining_helpers.__dict__.setdefault(_ctx_name, _ctx_value)
 
 # Module-level camelCase -> snake_case aliases for legacy tests/tooling.
 for _name, _obj in list(globals().items()):
