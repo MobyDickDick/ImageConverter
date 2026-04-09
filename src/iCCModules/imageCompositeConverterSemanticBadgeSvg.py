@@ -26,6 +26,17 @@ def generateBadgeSvgImpl(
     p = align_stem_to_circle_center_fn(dict(params))
     p = quantize_badge_params_fn(p, w, h)
     elements = [f'<svg width="{w}px" height="{h}px" viewBox="0 0 {w} {h}" xmlns="http://www.w3.org/2000/svg">']
+    defs: list[str] = []
+
+    if str(p.get("head_style", "")).lower() == "ac0223_triple_valve":
+        defs.append("  <linearGradient id=\"ac0223ValveGradient\" x1=\"1\" y1=\"0\" x2=\"0\" y2=\"1\">")
+        defs.append(f'    <stop offset="0%" stop-color="{str(p.get("head_gradient_dark", "#b2b2b3"))}"/>')
+        defs.append(f'    <stop offset="100%" stop-color="{str(p.get("head_gradient_light", "#d9d9d9"))}"/>')
+        defs.append("  </linearGradient>")
+    if defs:
+        elements.append("  <defs>")
+        elements.extend(defs)
+        elements.append("  </defs>")
 
     background_fill = p.get("background_fill")
     if background_fill:
@@ -42,7 +53,7 @@ def generateBadgeSvgImpl(
             (
                 f'  <line x1="{arm_x1:.4f}" y1="{arm_y1:.4f}" '
                 f'x2="{arm_x2:.4f}" y2="{arm_y2:.4f}" '
-                f'stroke="{grayhex_fn(p.get("stroke_gray", 152))}" '
+                f'stroke="{str(p.get("arm_color", grayhex_fn(p.get("stroke_gray", 152))))}" '
                 f'stroke-width="{arm_stroke:.4f}" stroke-linecap="round"/>'
             )
         )
@@ -68,6 +79,31 @@ def generateBadgeSvgImpl(
                 f'stroke-width="{p["stroke_circle"]:.4f}"/>'
             )
         )
+
+    if str(p.get("head_style", "")).lower() == "ac0223_triple_valve":
+        sx = float(w) / 50.0 if w > 0 else 1.0
+        sy = float(h) / 75.0 if h > 0 else 1.0
+        head_stroke = str(p.get("head_stroke", "#808080"))
+        head_hub_fill = str(p.get("head_hub_fill", "#7f7f7f"))
+        elements.append(f'  <g transform="scale({sx:.6f} {sy:.6f})">')
+        elements.append(
+            '    <path d="M 36.492188 3.0410156 L 13.505859 3.1347656 L 23.417969 22.871094 '
+            'A 2.5 2.500001 0 0 0 22.748047 23.722656 L 2.0195312 13.308594 L 2.1113281 36.294922 '
+            'L 22.75 25.882812 A 2.5 2.500001 0 0 0 25 27.300781 A 2.5 2.500001 0 0 0 27.207031 25.962891 '
+            'L 47.78125 36.294922 L 47.873047 13.308594 L 27.212891 23.640625 A 2.5 2.500001 0 0 0 26.580078 '
+            '22.863281 L 36.492188 3.0410156 z" fill="url(#ac0223ValveGradient)" stroke="none"/>'
+        )
+        elements.append(
+            f'    <path d="M 24.893241,24.801712 47.873657,13.308749 47.780747,36.294676 Z" fill="#d9d9d9" stroke="{head_stroke}" stroke-width="1"/>'
+        )
+        elements.append(
+            f'    <path d="M 24.999095,26.021627 36.492058,3.04121 13.506131,3.13412 Z" fill="#d9d9d9" stroke="{head_stroke}" stroke-width="1"/>'
+        )
+        elements.append(
+            f'    <path d="M 24.893241,24.801712 2.0195838,13.308749 2.112065,36.294676 Z" fill="#d9d9d9" stroke="{head_stroke}" stroke-width="1"/>'
+        )
+        elements.append(f'    <ellipse cx="25" cy="24.801712" rx="2.5" ry="2.500001" fill="{head_hub_fill}" stroke="{head_stroke}" stroke-width="1"/>')
+        elements.append("  </g>")
 
     if p.get("draw_text", True):
         if p.get("text_mode") == "path_t":

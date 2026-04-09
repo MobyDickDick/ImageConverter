@@ -12,6 +12,7 @@ def makeBadgeParamsImpl(
     *,
     get_base_name_fn,
     build_ar0100_badge_params_fn,
+    build_ac0223_badge_params_fn,
     make_ac08_badge_params_fn,
 ):
     """Build badge parameters for supported semantic families.
@@ -25,6 +26,10 @@ def makeBadgeParamsImpl(
     ar0100_params = build_ar0100_badge_params_fn(w, h, name)
     if ar0100_params is not None:
         return ar0100_params
+
+    ac0223_params = build_ac0223_badge_params_fn(w, h, name, img)
+    if ac0223_params is not None:
+        return ac0223_params
 
     ac08_params = make_ac08_badge_params_fn(w, h, name, img)
     if ac08_params is not None:

@@ -11,6 +11,7 @@ SEMANTIC_BADGE_FAMILIES: set[str] = {
     "AC0812",
     "AC0813",
     "AC0814",
+    "AC0223",
     "AC0820",
     "AC0831",
     "AC0832",
@@ -72,7 +73,7 @@ def apply_semantic_badge_family_rules(
     family_elements: list[str] = []
     heuristic_elements: list[str] = []
 
-    if base_upper in {"AC0800", "AC0810", "AC0811", "AC0812", "AC0813", "AC0814"}:
+    if base_upper in {"AC0800", "AC0810", "AC0811", "AC0812", "AC0813", "AC0814", "AC0223"}:
         family_elements.append("SEMANTIC: Kreis ohne Buchstabe")
         params["label"] = ""
     elif re.search(r"\bco(?:[_\s\-\^]*2|[₂²])\b", desc):
@@ -95,8 +96,10 @@ def apply_semantic_badge_family_rules(
         family_elements.append("SEMANTIC: waagrechter Strich rechts vom Kreis")
     if base_upper in {"AC0811", "AC0881", "AC0831", "AC0836"}:
         family_elements.append("SEMANTIC: senkrechter Strich hinter dem Kreis")
-    if base_upper in {"AC0813", "AC0833"}:
+    if base_upper in {"AC0813", "AC0833", "AC0223"}:
         family_elements.append("SEMANTIC: senkrechter Strich oben vom Kreis")
+    if base_upper == "AC0223":
+        family_elements.append("SEMANTIC: Ventilkopf mit drei Dreiecken oberhalb des Stiels")
     if base_upper in {"AC0812", "AC0832", "AC0837", "AC0882"}:
         family_elements.append("SEMANTIC: waagrechter Strich links vom Kreis")
 
