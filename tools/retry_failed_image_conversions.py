@@ -138,7 +138,7 @@ def retry_failed_conversions(
             continue
 
         source_raster = _resolve_source_raster(source_dir, stem)
-        target_svg = output_dir / f"{stem}.svg"
+        target_svg = output_dir / f"failed_{stem}.svg"
 
         if source_raster is None:
             results.append(RetryResult(stem=stem, status="missing_source", reason=str(source_dir / f"{stem}.*")))
