@@ -91,3 +91,34 @@ def test_run_conversion_finalization_skips_strategy_report_when_no_rows(tmp_path
     )
 
     assert "strategy_switch" not in called
+
+
+def test_svg_embedded_raster_detection_supports_png_data_without_mime(tmp_path):
+    svg_path = tmp_path / "AC0800_L.svg"
+    svg_path.write_text(
+        '<svg xmlns="http://www.w3.org/2000/svg"><image href="data:;base64,iVBORw0KGgoAAAANSUhEUgAA"/></svg>',
+        encoding="utf-8",
+    )
+
+    assert finalization_helpers._svgContainsEmbeddedRaster(svg_path) is True
+
+
+def test_mark_poor_conversions_renames_svg_when_embedded_png_detected(tmp_path):
+    svg_dir = tmp_path / "svg"
+    svg_dir.mkdir()
+    (svg_dir / "AC0800_L.svg").write_text(
+        '<svg xmlns="http://www.w3.org/2000/svg"><image xlink:href="data:;base64,iVBORw0KGgoAAAANSUhEUgAA"/></svg>',
+        encoding="utf-8",
+    )
+    reports_dir = tmp_path / "reports"
+    reports_dir.mkdir()
+    (reports_dir / "successful_conversions.txt").write_text("", encoding="utf-8")
+
+    finalization_helpers._markPoorConversionsWithFailedPrefix(
+        svg_out_dir=str(svg_dir),
+        result_map={"AC0800_L.jpg": {"variant": "AC0800_L", "mean_delta2": 0.0}},
+        reports_out_dir=str(reports_dir),
+    )
+
+    assert (svg_dir / "Failed_AC0800_L.svg").exists()
+    assert not (svg_dir / "AC0800_L.svg").exists()
