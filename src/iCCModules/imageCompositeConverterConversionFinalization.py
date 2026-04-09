@@ -2,7 +2,114 @@
 
 from __future__ import annotations
 
+import math
 import os
+from pathlib import Path
+import statistics
+
+
+def _parseSemicolonKeyValueLine(raw_line: str) -> tuple[str, dict[str, str]]:
+    stripped = raw_line.split("#", 1)[0].strip()
+    if not stripped:
+        return "", {}
+    parts = [part.strip() for part in stripped.split(";") if part.strip()]
+    if not parts:
+        return "", {}
+    variant = parts[0].upper()
+    payload: dict[str, str] = {}
+    for part in parts[1:]:
+        if "=" not in part:
+            continue
+        key, value = part.split("=", 1)
+        payload[key.strip()] = value.strip()
+    return variant, payload
+
+
+def _computeDynamicAc08MeanDelta2Threshold(reports_out_dir: str) -> float:
+    """Build a dynamic AC08 quality threshold from report-listed good conversions."""
+    manifest_path = Path(reports_out_dir) / "successful_conversions.txt"
+    if not manifest_path.exists():
+        return float("inf")
+
+    mean_delta2_values: list[float] = []
+    try:
+        lines = manifest_path.read_text(encoding="utf-8").splitlines()
+    except OSError:
+        return float("inf")
+
+    for raw_line in lines:
+        variant, payload = _parseSemicolonKeyValueLine(raw_line)
+        if not variant.startswith("AC08"):
+            continue
+        status = str(payload.get("status", "")).strip().lower()
+        if status != "semantic_ok":
+            continue
+        raw_value = str(payload.get("mean_delta2", "")).strip().replace(",", ".")
+        if not raw_value:
+            continue
+        try:
+            value = float(raw_value)
+        except ValueError:
+            continue
+        if math.isfinite(value):
+            mean_delta2_values.append(value)
+
+    if len(mean_delta2_values) < 3:
+        return float("inf")
+
+    # Robust outlier-tolerant threshold:
+    # baseline = median(mean_delta2), spread = 1.5 * IQR.
+    # This adapts to current run quality while remaining stable against a few outliers.
+    quartiles = statistics.quantiles(mean_delta2_values, n=4, method="inclusive")
+    q1 = float(quartiles[0])
+    q3 = float(quartiles[2])
+    iqr = max(0.0, q3 - q1)
+    return max(0.0, statistics.median(mean_delta2_values) + (1.5 * iqr))
+
+
+def _svgContainsEmbeddedRaster(svg_path: Path) -> bool:
+    try:
+        content = svg_path.read_text(encoding="utf-8").lower()
+    except OSError:
+        return False
+    return ("data:image/png" in content) or ("<image" in content and ".png" in content)
+
+
+def _markPoorConversionsWithFailedPrefix(
+    *,
+    svg_out_dir: str,
+    result_map: dict[str, dict[str, object]],
+    reports_out_dir: str,
+) -> None:
+    threshold = _computeDynamicAc08MeanDelta2Threshold(reports_out_dir)
+    svg_dir = Path(svg_out_dir)
+    if not svg_dir.exists():
+        return
+
+    for row in result_map.values():
+        variant = str(row.get("variant", "")).strip().upper()
+        if not variant:
+            continue
+
+        base_svg = svg_dir / f"{variant}.svg"
+        failed_svg = svg_dir / f"Failed_{variant}.svg"
+        svg_path = base_svg if base_svg.exists() else failed_svg
+        if not svg_path.exists():
+            continue
+
+        mean_delta2 = float(row.get("mean_delta2", float("inf")))
+        quality_fail = math.isfinite(mean_delta2) and math.isfinite(threshold) and mean_delta2 > threshold
+        raster_fail = _svgContainsEmbeddedRaster(svg_path)
+        should_fail = bool(quality_fail or raster_fail)
+
+        if should_fail and svg_path != failed_svg:
+            if failed_svg.exists():
+                failed_svg.unlink()
+            base_svg.rename(failed_svg)
+        elif (not should_fail) and svg_path == failed_svg:
+            if base_svg.exists():
+                base_svg.unlink()
+            failed_svg.rename(base_svg)
 
 def runConversionFinalizationImpl(
     *,
@@ -48,5 +155,10 @@ def runConversionFinalizationImpl(
         reports_out_dir=reports_out_dir,
         normalized_selected_variants=normalized_selected_variants,
         result_map=result_map,
+    )
+    _markPoorConversionsWithFailedPrefix(
+        svg_out_dir=svg_out_dir,
+        result_map=result_map,
+        reports_out_dir=reports_out_dir,
     )
     return semantic_results
