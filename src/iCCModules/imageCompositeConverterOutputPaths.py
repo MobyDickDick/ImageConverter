@@ -13,7 +13,7 @@ def defaultConvertedSymbolsRootImpl(*, module_file: str) -> str:
 def convertedSvgOutputDirImpl(output_root: str) -> str:
     # Keep the historical folder name with the current typo because downstream
     # adjustment tooling expects this exact directory.
-    return os.path.join(output_root, "converterted_svgs")
+    return os.path.join(output_root, "converted_svgs")
 
 
 def diffOutputDirImpl(output_root: str) -> str:

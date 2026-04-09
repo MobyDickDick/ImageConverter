@@ -291,7 +291,7 @@ def test_convert_range_uses_embedded_raster_fallback_without_numpy_cv2(
     )
 
     assert result == str(output_root)
-    assert (output_root / "converterted_svgs" / "AC0812_L.svg").read_text(encoding="utf-8") == "<svg/>"
+    assert (output_root / "converted_svgs" / "AC0812_L.svg").read_text(encoding="utf-8") == "<svg/>"
     assert (output_root / "reports" / "fallback_mode.txt").exists()
     assert calls["reports"] == str(output_root / "reports")
 
@@ -2523,7 +2523,7 @@ def test_convert_range_writes_svgs_and_diffs_to_dedicated_subfolders(
     )
 
     assert result == str(output_root)
-    assert (output_root / "converterted_svgs" / "AC0812_L.svg").exists()
+    assert (output_root / "converted_svgs" / "AC0812_L.svg").exists()
     assert (output_root / "diff_pngs" / "AC0812_L_diff.png").exists()
     assert (output_root / "reports" / "Iteration_Log.csv").exists()
 
@@ -5669,7 +5669,7 @@ def test_default_converted_symbols_root_points_to_converted_images() -> None:
 def test_conversion_output_subdirectories_live_below_root() -> None:
     root = Path("/tmp/example-output")
 
-    assert Path(conv._convertedSvgOutputDir(str(root))) == root / "converterted_svgs"
+    assert Path(conv._convertedSvgOutputDir(str(root))) == root / "converted_svgs"
     assert Path(conv._diffOutputDir(str(root))) == root / "diff_pngs"
     assert Path(conv._reportsOutputDir(str(root))) == root / "reports"
 
@@ -5741,7 +5741,7 @@ def test_load_description_mapping_from_xml_reads_wurzelform_key_and_images(tmp_p
 def test_load_existing_conversion_rows_reads_prior_iteration_log(tmp_path: Path) -> None:
     output_root = tmp_path / "converted"
     reports_dir = output_root / "reports"
-    svg_dir = output_root / "converterted_svgs"
+    svg_dir = output_root / "converted_svgs"
     images_dir = tmp_path / "images"
     reports_dir.mkdir(parents=True)
     svg_dir.mkdir(parents=True)
@@ -6356,7 +6356,7 @@ def test_convert_range_fallback_writes_diff_pngs_when_cv2_missing(monkeypatch: p
         output_root=str(tmp_path / "out"),
     )
 
-    assert (Path(out_dir) / "converterted_svgs" / "AC0010.svg").exists()
+    assert (Path(out_dir) / "converted_svgs" / "AC0010.svg").exists()
     assert (Path(out_dir) / "diff_pngs" / "AC0010_diff.png").exists()
 
 
@@ -6623,7 +6623,7 @@ def test_ac0811_l_conversion_preserves_long_bottom_stem(tmp_path: Path) -> None:
     )
 
     assert result == str(output_root)
-    svg_text = (output_root / "converterted_svgs" / "AC0811_L.svg").read_text(encoding="utf-8")
+    svg_text = (output_root / "converted_svgs" / "AC0811_L.svg").read_text(encoding="utf-8")
 
     import re
 
@@ -6709,8 +6709,8 @@ def test_ac08_semantic_anchor_variants_convert_without_failed_svg(tmp_path: Path
     )
 
     assert result_ac0811 == str(output_ac0811)
-    assert (output_ac0811 / "converterted_svgs" / "AC0811_L.svg").exists()
-    assert not (output_ac0811 / "converterted_svgs" / "AC0811_L_failed.svg").exists()
+    assert (output_ac0811 / "converted_svgs" / "AC0811_L.svg").exists()
+    assert not (output_ac0811 / "converted_svgs" / "AC0811_L_failed.svg").exists()
     log_ac0811_l = (output_ac0811 / "reports" / "AC0811_L_element_validation.log").read_text(encoding="utf-8")
     assert "status=semantic_ok" in log_ac0811_l
 
@@ -6725,8 +6725,8 @@ def test_ac08_semantic_anchor_variants_convert_without_failed_svg(tmp_path: Path
     )
 
     assert result_ac0812 == str(output_ac0812)
-    assert (output_ac0812 / "converterted_svgs" / "AC0812_M.svg").exists()
-    assert not (output_ac0812 / "converterted_svgs" / "AC0812_M_failed.svg").exists()
+    assert (output_ac0812 / "converted_svgs" / "AC0812_M.svg").exists()
+    assert not (output_ac0812 / "converted_svgs" / "AC0812_M_failed.svg").exists()
     log_ac0812_m = (output_ac0812 / "reports" / "AC0812_M_element_validation.log").read_text(encoding="utf-8")
     assert "status=semantic_ok" in log_ac0812_m
 
@@ -6919,7 +6919,7 @@ def test_generate_conversion_overviews_creates_diff_and_svg_tiles(tmp_path: Path
         pytest.skip("numpy/cv2 not available in this environment")
 
     diff_dir = tmp_path / "diff_pngs"
-    svg_dir = tmp_path / "converterted_svgs"
+    svg_dir = tmp_path / "converted_svgs"
     reports_dir = tmp_path / "reports"
     diff_dir.mkdir()
     svg_dir.mkdir()
@@ -7000,5 +7000,5 @@ def test_convert_range_invokes_overview_generation(tmp_path: Path, monkeypatch: 
 
     assert result == str(output_root)
     assert called["diff"] == str(output_root / "diff_pngs")
-    assert called["svg"] == str(output_root / "converterted_svgs")
+    assert called["svg"] == str(output_root / "converted_svgs")
     assert called["reports"] == str(output_root / "reports")
