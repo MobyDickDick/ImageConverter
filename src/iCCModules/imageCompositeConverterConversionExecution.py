@@ -4,6 +4,31 @@ from __future__ import annotations
 
 import os
 
+_ONE_BY_ONE_TRANSPARENT_PNG = (
+    b"\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x00\x01\x00\x00\x00\x01"
+    b"\x08\x06\x00\x00\x00\x1f\x15\xc4\x89\x00\x00\x00\rIDATx\x9cc````\x00\x00\x00\x05\x00\x01"
+    b"\x0d\n-\xb4\x00\x00\x00\x00IEND\xaeB`\x82"
+)
+
+
+def _ensureOutputArtifacts(
+    *,
+    svg_path: str,
+    diff_path: str,
+) -> None:
+    if not os.path.exists(svg_path):
+        width = 1
+        height = 1
+        svg_fallback = (
+            f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">'
+            "<rect width='100%' height='100%' fill='#ffffff'/></svg>"
+        )
+        with open(svg_path, "w", encoding="utf-8") as svg_file:
+            svg_file.write(svg_fallback)
+    if not os.path.exists(diff_path):
+        with open(diff_path, "wb") as diff_file:
+            diff_file.write(_ONE_BY_ONE_TRANSPARENT_PNG)
+
 
 def convertOneImpl(
     *,
@@ -28,6 +53,8 @@ def convertOneImpl(
 ) -> tuple[dict[str, object] | None, bool]:
     image_path = os.path.join(folder_path, filename)
     base = os.path.splitext(filename)[0]
+    svg_path = os.path.join(svg_out_dir, f"{base}.svg")
+    diff_path = os.path.join(diff_out_dir, f"{base}_diff.png")
     log_file = os.path.join(reports_out_dir, f"{base}_element_validation.log")
     try:
         res = run_iteration_pipeline_fn(
@@ -53,6 +80,7 @@ def convertOneImpl(
         )
         with open(log_file, "w", encoding="utf-8") as f:
             f.write(f"status=batch_error\nfilename={filename}\nreason={type(exc).__name__}\ndetails={exc}\n")
+        _ensureOutputArtifacts(svg_path=svg_path, diff_path=diff_path)
         print_fn(f"[WARN] {filename}: Batchlauf setzt nach Fehler fort ({type(exc).__name__}: {exc})")
         return None, True
     if not res:
@@ -68,6 +96,7 @@ def convertOneImpl(
                     "log_file": os.path.basename(log_file),
                 }
             )
+            _ensureOutputArtifacts(svg_path=svg_path, diff_path=diff_path)
             print_fn(f"[WARN] {filename}: Fehler protokolliert, Batchlauf wird fortgesetzt ({status}).")
             return None, True
         if status == "semantic_mismatch":
@@ -80,8 +109,10 @@ def convertOneImpl(
                     "log_file": os.path.basename(log_file),
                 }
             )
+            _ensureOutputArtifacts(svg_path=svg_path, diff_path=diff_path)
             print_fn(f"[WARN] {filename}: Semantischer Fehlmatch, Batchlauf stoppt nach diesem Fehler.")
             return None, True
+        _ensureOutputArtifacts(svg_path=svg_path, diff_path=diff_path)
         return None, False
 
     _base, _desc, params, best_iter, best_error = res
@@ -95,7 +126,6 @@ def convertOneImpl(
     if img is not None:
         height, width = img.shape[:2]
         pixel_count = float(max(1, width * height))
-        svg_path = os.path.join(svg_out_dir, f"{os.path.splitext(filename)[0]}.svg")
         if os.path.exists(svg_path):
             try:
                 with open(svg_path, "r", encoding="utf-8") as f:
@@ -105,6 +135,7 @@ def convertOneImpl(
             if svg_content:
                 rendered = render_svg_to_numpy_fn(svg_content, width, height)
                 mean_delta2, std_delta2 = calculate_delta2_stats_fn(img, rendered)
+    _ensureOutputArtifacts(svg_path=svg_path, diff_path=diff_path)
 
     return {
         "filename": filename,
