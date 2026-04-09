@@ -20,7 +20,7 @@ AC0814_S ; status=semantic_ok ; total_delta2=280770.000000 ; mean_delta2=748.719
 AC0820_L ; status=semantic_ok ; best_iteration=1 ; diff_score=35.930000 ; error_per_pixel=0.03991975 ; total_delta2=8676261.000000 ; mean_delta2=9640.290039 ; std_delta2=16391.398438 ; pixel_count=900
 AC0820_M ; status=semantic_ok ; total_delta2=2473497.000000 ; mean_delta2=6183.742676 ; std_delta2=12556.661133 ; pixel_count=400
 AC0820_S ; status=semantic_ok ; best_iteration=1 ; diff_score=27.100000 ; error_per_pixel=0.12043457 ; total_delta2=1212612.000000 ; mean_delta2=5389.386719 ; std_delta2=8530.142578 ; pixel_count=225
-AC0831_L ; status=semantic_ok ; best_iteration=1 ; diff_score=12.380000 ; error_per_pixel=0.01100484 ; total_delta2=3492816.000000 ; mean_delta2=3104.725342 ; std_delta2=11031.684570 ; pixel_count=1125
+AC0831_L ; status=semantic_ok ; total_delta2=6305988.000000 ; mean_delta2=5605.322754 ; std_delta2=13214.397461 ; pixel_count=1125
 AC0831_M ; status=semantic_ok ; best_iteration=1 ; diff_score=10.700000 ; error_per_pixel=0.01529184 ; total_delta2=1663491.000000 ; mean_delta2=2376.415771 ; std_delta2=9043.677734 ; pixel_count=700
 AC0831_S ; status=semantic_ok ; total_delta2=1199205.000000 ; mean_delta2=3197.879883 ; std_delta2=8867.850586 ; pixel_count=375
 
@@ -32,8 +32,10 @@ AC0812_S ; status=semantic_ok ; best_iteration=1 ; diff_score=7.880000 ; error_p
 
 AC0820_L ; status=semantic_ok ; best_iteration=1 ; diff_score=35.930000 ; error_per_pixel=0.03991975 ; total_delta2=8676261.000000 ; mean_delta2=9640.290039 ; std_delta2=16391.398438 ; pixel_count=900
 
-AC0836_L ; status=batch_error ; total_delta2=5585277.000000 ; mean_delta2=4964.690430 ; std_delta2=11328.686523 ; pixel_count=1125
+AC0836_L ; status=semantic_ok ; total_delta2=5740719.000000 ; mean_delta2=5102.861328 ; std_delta2=12403.771484 ; pixel_count=1125
 
-AC0836_L ; status=batch_error ; total_delta2=5585277.000000 ; mean_delta2=4964.690430 ; std_delta2=11328.686523 ; pixel_count=1125
+AC0836_L ; status=semantic_ok ; total_delta2=5740719.000000 ; mean_delta2=5102.861328 ; std_delta2=12403.771484 ; pixel_count=1125
 
-AC0831_L ; status=failed ; reason=TypeError
+AC0831_L ; status=semantic_ok ; total_delta2=6305988.000000 ; mean_delta2=5605.322754 ; std_delta2=13214.397461 ; pixel_count=1125
+
+AC0820_S ; status=failed ; reason=semantic_mismatch
