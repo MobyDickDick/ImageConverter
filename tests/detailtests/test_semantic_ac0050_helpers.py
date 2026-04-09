@@ -8,6 +8,17 @@ from src.iCCModules import imageCompositeConverterSemanticAc0050 as ac0050_helpe
 cv2 = pytest.importorskip("cv2")
 
 
+def _hex_to_bgr(hex_color: str) -> tuple[int, int, int]:
+    s = str(hex_color).strip()
+    return (int(s[5:7], 16), int(s[3:5], 16), int(s[1:3], 16))
+
+
+def _hex_channel_distance(a: str, b: str) -> int:
+    aa = a.strip().lstrip("#")
+    bb = b.strip().lstrip("#")
+    return max(abs(int(aa[i : i + 2], 16) - int(bb[i : i + 2], 16)) for i in (0, 2, 4))
+
+
 def _synthetic_input(width: int, height: int, geometry: ac0050_helpers.Ac0050Geometry) -> np.ndarray:
     img = np.full((height, width, 3), 255, dtype=np.uint8)
     lw = int(round(geometry.line_width))
@@ -15,14 +26,14 @@ def _synthetic_input(width: int, height: int, geometry: ac0050_helpers.Ac0050Geo
         img,
         (int(round(geometry.left_x)), int(round(geometry.line_top))),
         (int(round(geometry.left_x)), int(round(geometry.line_bottom))),
-        (87, 91, 232),
+        _hex_to_bgr(geometry.left_line_color),
         lw,
     )
     cv2.line(
         img,
         (int(round(geometry.right_x)), int(round(geometry.line_top))),
         (int(round(geometry.right_x)), int(round(geometry.line_bottom))),
-        (193, 147, 78),
+        _hex_to_bgr(geometry.right_line_color),
         lw,
     )
     left_tri = np.array(
@@ -41,8 +52,8 @@ def _synthetic_input(width: int, height: int, geometry: ac0050_helpers.Ac0050Geo
         ],
         dtype=np.int32,
     )
-    cv2.fillPoly(img, [left_tri], (6, 5, 250))
-    cv2.fillPoly(img, [right_tri], (173, 111, 19))
+    cv2.fillPoly(img, [left_tri], _hex_to_bgr(geometry.left_triangle_color))
+    cv2.fillPoly(img, [right_tri], _hex_to_bgr(geometry.right_triangle_color))
     return img
 
 
@@ -156,3 +167,49 @@ def test_iterative_refinement_improves_projection_error() -> None:
     assert refined.line_bottom >= start.line_bottom
     assert "ac0050: iterative start_err=" in logs[0]
     assert "<svg" in svg
+
+
+def test_iterative_refinement_can_optimize_colors() -> None:
+    known = ac0050_helpers.Ac0050Geometry(
+        left_x=6.0,
+        right_x=34.0,
+        line_top=0.0,
+        line_bottom=130.0,
+        line_width=2.0,
+        triangle_half_base=5.0,
+        triangle_height=10.0,
+        left_line_color="#44aa22",
+        right_line_color="#1155cc",
+        left_triangle_color="#cc3344",
+        right_triangle_color="#7733aa",
+    )
+    img = _synthetic_input(40, 140, known)
+
+    start = ac0050_helpers.Ac0050Geometry(
+        left_x=9.0,
+        right_x=31.0,
+        line_top=0.0,
+        line_bottom=124.0,
+        line_width=3.0,
+        triangle_half_base=4.0,
+        triangle_height=7.0,
+        left_line_color="#111111",
+        right_line_color="#111111",
+        left_triangle_color="#111111",
+        right_triangle_color="#111111",
+    )
+
+    refined, _svg, logs = ac0050_helpers.refineAc0050GeometryIterativeImpl(
+        img,
+        start,
+        cv2_module=cv2,
+        np_module=np,
+        rounds=5,
+        optimize_colors=True,
+    )
+
+    assert _hex_channel_distance(refined.left_line_color, known.left_line_color) <= 2
+    assert _hex_channel_distance(refined.right_line_color, known.right_line_color) <= 2
+    assert _hex_channel_distance(refined.left_triangle_color, known.left_triangle_color) <= 2
+    assert _hex_channel_distance(refined.right_triangle_color, known.right_triangle_color) <= 2
+    assert any("color left_line_color" in line for line in logs)

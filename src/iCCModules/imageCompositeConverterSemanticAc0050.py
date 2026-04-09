@@ -132,6 +132,19 @@ def _bgrToHex(bgr: tuple[int, int, int] | None, fallback_hex: str) -> str:
     return f"#{r:02x}{g:02x}{b:02x}"
 
 
+def _hexToBgr(hex_color: str, *, fallback: tuple[int, int, int]) -> tuple[int, int, int]:
+    s = str(hex_color or "").strip()
+    if len(s) == 7 and s.startswith("#"):
+        try:
+            r = int(s[1:3], 16)
+            g = int(s[3:5], 16)
+            b = int(s[5:7], 16)
+            return (b, g, r)
+        except ValueError:
+            pass
+    return fallback
+
+
 def _applySymmetryIfRequested(geometry: Ac0050Geometry, *, width: int, enabled: bool) -> Ac0050Geometry:
     if not enabled:
         return geometry
@@ -314,6 +327,87 @@ def _clampGeometry(geometry: Ac0050Geometry, *, width: int, height: int) -> Ac00
     )
 
 
+def _renderAc0050RegionMasks(width: int, height: int, geometry: Ac0050Geometry, *, cv2_module, np_module) -> dict[str, object]:
+    masks = {
+        "left_line_color": np_module.zeros((height, width), dtype=np_module.uint8),
+        "right_line_color": np_module.zeros((height, width), dtype=np_module.uint8),
+        "left_triangle_color": np_module.zeros((height, width), dtype=np_module.uint8),
+        "right_triangle_color": np_module.zeros((height, width), dtype=np_module.uint8),
+    }
+    lw = max(1, int(round(geometry.line_width)))
+    cv2_module.line(
+        masks["left_line_color"],
+        (int(round(geometry.left_x)), int(round(geometry.line_top))),
+        (int(round(geometry.left_x)), int(round(geometry.line_bottom))),
+        255,
+        lw,
+    )
+    cv2_module.line(
+        masks["right_line_color"],
+        (int(round(geometry.right_x)), int(round(geometry.line_top))),
+        (int(round(geometry.right_x)), int(round(geometry.line_bottom))),
+        255,
+        lw,
+    )
+
+    def _triangle(cx: float):
+        base_y = float(geometry.line_bottom)
+        apex_y = base_y + float(geometry.triangle_height)
+        half_base = float(geometry.triangle_half_base)
+        return np_module.array(
+            [
+                [int(round(cx - half_base)), int(round(base_y))],
+                [int(round(cx + half_base)), int(round(base_y))],
+                [int(round(cx)), int(round(apex_y))],
+            ],
+            dtype=np_module.int32,
+        )
+
+    cv2_module.fillPoly(masks["left_triangle_color"], [_triangle(geometry.left_x)], 255)
+    cv2_module.fillPoly(masks["right_triangle_color"], [_triangle(geometry.right_x)], 255)
+    return masks
+
+
+def _colorErrorForRegion(img, region_mask, color_hex: str, *, np_module) -> float:
+    if img is None or region_mask is None or getattr(region_mask, "size", 0) == 0:
+        return float("inf")
+    ys, xs = np_module.where(region_mask > 0)
+    if ys.size == 0:
+        return float("inf")
+    target = img[ys, xs].astype(np_module.float32)
+    bgr = _hexToBgr(color_hex, fallback=(128, 128, 128))
+    candidate = np_module.array(bgr, dtype=np_module.float32).reshape(1, 3)
+    diff = target - candidate
+    return float(np_module.mean(diff * diff))
+
+
+def _refineColorForRegion(img, region_mask, color_hex: str, *, np_module) -> tuple[str, float, bool]:
+    current_bgr = _hexToBgr(color_hex, fallback=(128, 128, 128))
+
+    def _err(bgr: tuple[int, int, int]) -> float:
+        return _colorErrorForRegion(img, region_mask, _bgrToHex(bgr, "#808080"), np_module=np_module)
+
+    best = tuple(int(v) for v in current_bgr)
+    best_err = _err(best)
+    improved = False
+    for step in (48, 24, 12, 6, 3, 1):
+        local_improved = True
+        while local_improved:
+            local_improved = False
+            for channel in range(3):
+                for direction in (-1, 1):
+                    probe = list(best)
+                    probe[channel] = max(0, min(255, int(probe[channel] + (direction * step))))
+                    candidate = (probe[0], probe[1], probe[2])
+                    err = _err(candidate)
+                    if err + 1e-6 < best_err:
+                        best = candidate
+                        best_err = err
+                        improved = True
+                        local_improved = True
+    return _bgrToHex(best, color_hex), best_err, improved
+
+
 def refineAc0050GeometryIterativeImpl(
     img,
     initial_geometry: Ac0050Geometry,
@@ -322,6 +416,7 @@ def refineAc0050GeometryIterativeImpl(
     np_module,
     rounds: int = 3,
     config: Ac0050DetectionConfig | None = None,
+    optimize_colors: bool = True,
 ) -> tuple[Ac0050Geometry, str, list[str]]:
     """Coordinate-wise iterative refinement against a generic foreground mask."""
     cfg = config or Ac0050DetectionConfig()
@@ -364,6 +459,22 @@ def refineAc0050GeometryIterativeImpl(
                     best_err = err
                     improved = True
                     logs.append(f"ac0050: r{round_idx + 1} improved {key} -> {value:.2f}, err={err:.4f}")
+        if bool(optimize_colors) and img is not None and len(img.shape) == 3:
+            region_masks = _renderAc0050RegionMasks(w, h, best, cv2_module=cv2_module, np_module=np_module)
+            color_changed = False
+            for color_key, region_mask in region_masks.items():
+                refined_hex, color_err, changed = _refineColorForRegion(
+                    img,
+                    region_mask,
+                    str(getattr(best, color_key)),
+                    np_module=np_module,
+                )
+                if changed and refined_hex != str(getattr(best, color_key)):
+                    best = Ac0050Geometry(**{**best.__dict__, color_key: refined_hex})
+                    color_changed = True
+                    logs.append(f"ac0050: r{round_idx + 1} color {color_key} -> {refined_hex}, err={color_err:.4f}")
+            improved = improved or color_changed
+
         if not improved:
             logs.append(f"ac0050: r{round_idx + 1} no improvement")
             break
