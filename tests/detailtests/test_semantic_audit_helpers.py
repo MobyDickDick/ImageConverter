@@ -19,11 +19,10 @@ def test_collect_description_fragments_keeps_lookup_order() -> None:
     assert rows == [
         {"source": "base_name", "key": "AC0811", "text": "base"},
         {"source": "variant_name", "key": "ac0811_s", "text": "variant"},
-        {"source": "canonical_base", "key": "AC0811", "text": "base"},
     ]
 
 
-def test_collect_description_fragments_skips_duplicate_lookup_keys() -> None:
+def test_collect_description_fragments_skips_duplicate_lookup_keys_and_texts() -> None:
     rows = audit_helpers.collectDescriptionFragmentsImpl(
         {"AC0800": "ring family"},
         base_name="AC0800",
@@ -33,7 +32,4 @@ def test_collect_description_fragments_skips_duplicate_lookup_keys() -> None:
 
     assert rows == [
         {"source": "base_name", "key": "AC0800", "text": "ring family"},
-        {"source": "variant_name", "key": "AC0800", "text": "ring family"},
-        {"source": "canonical_base", "key": "AC0800", "text": "ring family"},
-        {"source": "canonical_variant", "key": "AC0800", "text": "ring family"},
     ]
