@@ -1020,6 +1020,17 @@ def test_parse_description_does_not_misread_ac0130_text_as_top_source_ref() -> N
     assert "OBEN: Geschnitten aus Originaldatei BEIDEN" not in list(params.get("elements", []))
 
 
+def test_parse_description_keeps_alias_without_compositing_instruction_in_auto_mode() -> None:
+    """Alias-only hints like 'wie SE0041' should not force manual-review mode."""
+    raw = {"SE0082": "Wie SE0041, aber nach rechts gekippt. M steht waagrecht geschrieben."}
+
+    _desc, params = image_composite_converter.Reflection(raw).parse_description("SE0082", "SE0082.jpg")
+
+    assert params["mode"] == "auto"
+    assert params["top_source_ref"] is None
+    assert "SE0041" in list(params.get("documented_alias_refs", []))
+
+
 def test_finalize_ac0820_leaves_plain_circle_unlocked() -> None:
     """AC0820 should no longer inject circle-center or radius guardrails."""
     params = Action._apply_co2_label(Action._default_ac0870_params(20, 20))
@@ -1806,6 +1817,49 @@ def test_run_iteration_pipeline_writes_failed_best_attempt_artifacts_for_semanti
     assert "semantic_audit_derived_elements=SEMANTIC: Kreis ohne Buchstabe" in log_text
     assert "semantic_audit_mismatch_reason=circle missing" in log_text
     assert "semantic_connector_classification=vertical;circle_source=unknown;horizontal_candidates=0;vertical_candidates=2" in log_text
+
+
+def test_run_iteration_pipeline_converts_non_composite_as_embedded_svg(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Non-composite descriptions should still emit a usable fallback SVG."""
+    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+        pytest.skip("numpy/cv2 not available in this environment")
+
+    np = image_composite_converter.np
+    if np is None:
+        pytest.skip("numpy not available in this environment")
+    cv2 = image_composite_converter.cv2
+
+    img = np.full((10, 16, 3), 245, dtype=np.uint8)
+    img_path = tmp_path / "SE0082.jpg"
+    csv_path = tmp_path / "data.csv"
+    svg_dir = tmp_path / "svg"
+    diff_dir = tmp_path / "diff"
+    reports_dir = tmp_path / "reports"
+    csv_path.write_text("Wurzelform;Beschreibung\nSE0082;Wie SE0041, aber nach rechts gekippt.\n", encoding="utf-8")
+    assert cv2.imwrite(str(img_path), img)
+
+    monkeypatch.setattr(
+        image_composite_converter.Reflection,
+        "parse_description",
+        lambda *_args, **_kwargs: ("wie se0041", {"mode": "auto", "elements": [], "label": "M"}),
+    )
+
+    res = image_composite_converter.runIterationPipeline(
+        str(img_path),
+        str(csv_path),
+        2,
+        str(svg_dir),
+        str(diff_dir),
+        str(reports_dir),
+    )
+
+    assert res is not None
+    assert (svg_dir / "SE0082.svg").exists()
+    log_text = (reports_dir / "SE0082_element_validation.log").read_text(encoding="utf-8")
+    assert "status=non_composite_embedded_svg" in log_text
 
 
 def test_write_semantic_audit_report_persists_csv_and_json(tmp_path: Path) -> None:
