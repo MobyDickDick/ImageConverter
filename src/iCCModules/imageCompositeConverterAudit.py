@@ -60,18 +60,22 @@ def collectDescriptionFragmentsImpl(
         ("canonical_variant", canonical_variant),
     ]
     fragments: list[dict[str, str]] = []
-    seen: set[tuple[str, str]] = set()
+    seen_lookup_keys: set[str] = set()
+    seen_texts: set[str] = set()
     for source, key in lookup_keys:
         normalized_key = str(key or "").strip()
         if not normalized_key:
             continue
-        marker = (source, normalized_key)
-        if marker in seen:
+        if normalized_key in seen_lookup_keys:
             continue
-        seen.add(marker)
+        seen_lookup_keys.add(normalized_key)
         value = str(raw_desc.get(normalized_key, "") or "").strip()
         if not value:
             continue
+        normalized_value = " ".join(value.split())
+        if normalized_value in seen_texts:
+            continue
+        seen_texts.add(normalized_value)
         fragments.append({"source": source, "key": normalized_key, "text": value})
     return fragments
 
