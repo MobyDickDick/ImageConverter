@@ -19,6 +19,7 @@ def test_make_badge_params_prefers_ar0100_when_available() -> None:
         img=None,
         get_base_name_fn=lambda base_name: base_name.split("_")[0],
         build_ar0100_badge_params_fn=_build_ar0100,
+        build_ac0223_badge_params_fn=lambda _w, _h, _name, _img: {"from": "ac0223"},
         make_ac08_badge_params_fn=_build_ac08,
     )
 
@@ -36,8 +37,9 @@ def test_make_badge_params_falls_back_to_ac08_when_ar0100_missing() -> None:
         img={"raw": True},
         get_base_name_fn=lambda base_name: base_name.split("_")[0],
         build_ar0100_badge_params_fn=lambda _w, _h, name: calls.append(f"ar0100:{name}") or None,
+        build_ac0223_badge_params_fn=lambda _w, _h, name, _img: calls.append(f"ac0223:{name}") or None,
         make_ac08_badge_params_fn=lambda _w, _h, name, img: calls.append(f"ac08:{name}:{bool(img)}") or {"family": name},
     )
 
     assert result == {"family": "AC0836"}
-    assert calls == ["ar0100:AC0836", "ac08:AC0836:True"]
+    assert calls == ["ar0100:AC0836", "ac0223:AC0836", "ac08:AC0836:True"]

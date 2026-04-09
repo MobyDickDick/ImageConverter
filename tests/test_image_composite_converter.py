@@ -5053,6 +5053,40 @@ def test_parse_description_marks_ac0811_as_semantic_badge() -> None:
     assert "SEMANTIC: senkrechter Strich hinter dem Kreis" in params["elements"]
 
 
+def test_parse_description_marks_ac0223_as_semantic_badge() -> None:
+    """AC0223 should use the semantic badge path with top connector + valve-head hint."""
+    desc, params = image_composite_converter.Reflection({}).parse_description("AC0223", "AC0223_L.jpg")
+
+    assert desc == ""
+    assert params["mode"] == "semantic_badge"
+    assert "SEMANTIC: Kreis ohne Buchstabe" in params["elements"]
+    assert "SEMANTIC: senkrechter Strich oben vom Kreis" in params["elements"]
+    assert "SEMANTIC: Ventilkopf mit drei Dreiecken oberhalb des Stiels" in params["elements"]
+
+
+def test_make_badge_params_supports_ac0223_valve_head() -> None:
+    """AC0223 defaults should carry the dedicated triple-valve head style metadata."""
+    params = Action.make_badge_params(50, 75, "AC0223")
+
+    assert params is not None
+    assert params.get("head_style") == "ac0223_triple_valve"
+    assert params.get("draw_text") is False
+    assert params.get("arm_color") == "#136fad"
+
+
+def test_generate_badge_svg_renders_ac0223_valve_head_gradient() -> None:
+    """The AC0223 renderer should emit gradient + valve-head geometry markers."""
+    params = Action.make_badge_params(50, 75, "AC0223")
+    assert params is not None
+
+    svg = Action.generate_badge_svg(50, 75, params)
+
+    assert "ac0223ValveGradient" in svg
+    assert "head_style" not in svg
+    assert 'fill="url(#ac0223ValveGradient)"' in svg
+    assert "#136fad" in svg
+
+
 def test_parse_description_keeps_ac0814_family_rule_over_text_heuristic() -> None:
     """AC0811-AC0814 family rules must outrank soft description hints about badge text."""
     raw = {
