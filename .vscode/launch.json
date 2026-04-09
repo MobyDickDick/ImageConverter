@@ -30,6 +30,26 @@
         "--interactive-range"
       ],
       "justMyCode": false
+    },
+    {
+      "name": "ImageConverter: convert all SVGs",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "src.imageCompositeConverter",
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "args": [
+        "artifacts/images_to_convert",
+        "--descriptions-path",
+        "artifacts/descriptions/Finale_Wurzelformen_V3.xml",
+        "--output-dir",
+        "artifacts/converted_images",
+        "--start",
+        "AC0000",
+        "--end",
+        "ZZ9999"
+      ],
+      "justMyCode": false
     }
   ]
 }
