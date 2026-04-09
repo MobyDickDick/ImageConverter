@@ -46,6 +46,7 @@ from src.iCCModules import imageCompositeConverterSemanticDefaults as semantic_d
 from src.iCCModules import imageCompositeConverterSemanticAc0811 as semantic_ac0811_helpers
 from src.iCCModules import imageCompositeConverterSemanticAc0812 as semantic_ac0812_helpers
 from src.iCCModules import imageCompositeConverterSemanticAc0813 as semantic_ac0813_helpers
+from src.iCCModules import imageCompositeConverterSemanticAc0223 as semantic_ac0223_helpers
 from src.iCCModules import imageCompositeConverterSemanticAc08Params as semantic_ac08_param_helpers
 from src.iCCModules import imageCompositeConverterSemanticAr0100 as semantic_ar0100_helpers
 from src.iCCModules import imageCompositeConverterSemanticParams as semantic_param_helpers
@@ -1201,6 +1202,27 @@ class Action:
                     center_glyph_bbox_fn=Action._centerGlyphBbox,
                 )
                 if name == "AR0100"
+                else None
+            ),
+            build_ac0223_badge_params_fn=lambda _w, _h, name, _img: (
+                (
+                    semantic_ac0223_helpers.defaultAc0223ParamsImpl(
+                        _w,
+                        _h,
+                        default_ac0813_params_fn=Action._defaultAc0813Params,
+                    )
+                    if _img is None
+                    else semantic_ac0223_helpers.fitAc0223ParamsFromImageImpl(
+                        _img,
+                        semantic_ac0223_helpers.defaultAc0223ParamsImpl(
+                            _w,
+                            _h,
+                            default_ac0813_params_fn=Action._defaultAc0813Params,
+                        ),
+                        fit_ac0813_params_from_image_fn=Action._fitAc0813ParamsFromImage,
+                    )
+                )
+                if name == "AC0223"
                 else None
             ),
             make_ac08_badge_params_fn=lambda _w, _h, name, _img: semantic_ac08_param_helpers.makeAc08BadgeParamsImpl(
