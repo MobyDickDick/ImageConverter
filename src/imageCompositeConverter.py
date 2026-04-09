@@ -116,6 +116,7 @@ from src.iCCModules import imageCompositeConverterCompositeSvg as composite_svg_
 from src.iCCModules import imageCompositeConverterDiffing as diffing_helpers
 from src.iCCModules import imageCompositeConverterForms as forms_helpers
 from src.iCCModules import imageCompositeConverterCoreClasses as core_class_helpers
+from src.iCCModules.imageCompositeConverterPerceptionReflection import Perception, Reflection
 from src.iCCModules import imageCompositeConverterColorUtils as color_utils_helpers
 from src.successfulConversions import (
     AC08_MITIGATION_STATUS,
@@ -374,18 +375,6 @@ def getBaseNameFromFile(filename: str) -> str:
     return imageCompositeConverterRemaining_helpers.getBaseNameFromFile(filename)
 
 
-@dataclass
-class Perception:
-    img_path: str
-    csv_path: str
-
-    def __post_init__(self) -> None:
-        self.base_name = getBaseNameFromFile(os.path.basename(self.img_path))
-        self.img = cv2.imread(self.img_path)
-        self.raw_desc = self._loadDescriptions()
-
-    def _loadDescriptions(self) -> dict[str, str]:
-        return _loadDescriptionMapping(self.csv_path)
 
 
 SourceSpan = description_mapping_helpers.SourceSpan
@@ -419,108 +408,6 @@ def buildLinuxVendorInstallCommand(
 ) -> list[str]:
     return imageCompositeConverterRemaining_helpers.buildLinuxVendorInstallCommand(vendor_dir, platform_tag, python_version)
 
-
-class Reflection:
-    def __init__(self, raw_desc: dict[str, str]):
-        self.raw_desc = raw_desc
-
-    def parseDescription(self, base_name: str, img_filename: str):
-        canonical_base = getBaseNameFromFile(base_name).upper()
-        if not canonical_base:
-            canonical_base = getBaseNameFromFile(img_filename).upper()
-        description_fragments = _collectDescriptionFragments(self.raw_desc, base_name, img_filename)
-        desc_raw = " ".join(fragment["text"] for fragment in description_fragments)
-        desc = desc_raw.lower().strip()
-        base_upper = canonical_base or base_name.upper()
-        symbol_upper = canonical_base or base_upper
-
-        params = {
-            "mode": "auto",
-            "top_source_ref": None,
-            "bottom_shape": None,
-            "elements": [],
-            "label": "M",
-            "variant_name": os.path.splitext(str(img_filename))[0].upper(),
-            "documented_alias_refs": sorted(Reflection._extractDocumentedAliasRefs(desc)),
-            "description_fragments": description_fragments,
-            "semantic_priority_order": [
-                "family_rule",
-                "layout_override",
-                "description_heuristic",
-            ],
-            "semantic_conflicts": [],
-            "semantic_sources": {},
-        }
-
-        semantic_symbol = symbol_upper.startswith("AC08") or symbol_upper == "AR0100"
-        if semantic_symbol:
-            params["mode"] = "semantic_badge"
-
-        if semantic_helpers.apply_semantic_badge_family_rules(
-            base_upper=base_upper,
-            symbol_upper=symbol_upper,
-            desc=desc,
-            params=params,
-        ):
-            return desc, params
-
-        non_traceable_hint = Reflection._detect_non_traceable_hint(desc)
-        if non_traceable_hint:
-            params["mode"] = "manual_review"
-            params["review_reason"] = non_traceable_hint
-            params["elements"].append(f"MANUELL: {non_traceable_hint}")
-            return desc, params
-
-        match = re.search(r"\boven\b.*?\bwie(?:\s+in)?\s+([a-z]{2}\d{3,4})\b", desc)
-        if match:
-            params["mode"] = "composite"
-            params["top_source_ref"] = match.group(1).upper()
-            params["elements"].append(
-                f"OBEN: Geschnitten aus Originaldatei {params['top_source_ref']}"
-            )
-
-        if "unten" in desc and "viereck" in desc and "kreuz" in desc:
-            params["mode"] = "composite"
-            params["bottom_shape"] = "square_cross"
-            params["elements"].append("UNTEN: Parametrisch generiertes Viereck mit Kreuz")
-
-        return desc, params
-
-    def parse_description(self, base_name: str, img_filename: str):
-        return self.parseDescription(base_name, img_filename)
-
-    @staticmethod
-    def _extractDocumentedAliasRefs(text: str) -> set[str]:
-        return semantic_helpers.extract_documented_alias_refs(text)
-
-    @staticmethod
-    def _extract_documented_alias_refs(text: str) -> set[str]:
-        return Reflection._extractDocumentedAliasRefs(text)
-
-    @staticmethod
-    def _detect_non_traceable_hint(text: str) -> str | None:
-        normalized = re.sub(r"\s+", " ", str(text or "").lower()).strip()
-        if not normalized:
-            return None
-        hint_patterns = [
-            (r"nicht automatisch nachzeichnbar", "Beschreibung markiert Symbol als nicht automatisch nachzeichnbar."),
-            (r"nur eingeschränkt.*reproduzierbar", "Beschreibung markiert Symbol als nur eingeschränkt reproduzierbar."),
-            (r"außerhalb der robust unterstützten standard-geometrien", "Beschreibung markiert Symbol außerhalb der robust unterstützten Standard-Geometrien."),
-            (r"bitte einer finalen wurzelform-kategorie zuordnen", "Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie."),
-            (r"noch nicht fachlich klassifiziert", "Beschreibung markiert Symbol als fachlich noch nicht klassifiziert."),
-        ]
-        for pattern, message in hint_patterns:
-            if re.search(pattern, normalized):
-                return message
-        return None
-
-    @staticmethod
-    def _parseSemanticBadgeLayoutOverrides(text: str) -> dict[str, float | str]:
-        return semantic_helpers.parse_semantic_badge_layout_overrides(text)
-
-    @staticmethod
-    def _parse_semantic_badge_layout_overrides(text: str) -> dict[str, float | str]:
-        return Reflection._parseSemanticBadgeLayoutOverrides(text)
 def _renderSvgToNumpyInprocess(svg_string: str, size_w: int, size_h: int):
     return imageCompositeConverterRemaining_helpers._renderSvgToNumpyInprocess(svg_string, size_w, size_h)
 
