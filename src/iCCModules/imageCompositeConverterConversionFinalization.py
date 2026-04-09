@@ -5,6 +5,7 @@ from __future__ import annotations
 import math
 import os
 from pathlib import Path
+import re
 import statistics
 
 
@@ -72,7 +73,19 @@ def _svgContainsEmbeddedRaster(svg_path: Path) -> bool:
         content = svg_path.read_text(encoding="utf-8").lower()
     except OSError:
         return False
-    return ("data:image/png" in content) or ("<image" in content and ".png" in content)
+    if "data:image/png" in content:
+        return True
+
+    if "<image" not in content:
+        return False
+
+    href_values = re.findall(r"(?:href|xlink:href)\s*=\s*['\"]([^'\"]+)['\"]", content)
+    for href in href_values:
+        if "data:image/png" in href or ".png" in href:
+            return True
+        if href.startswith("data:") and "base64," in href and "ivborw0kggo" in href:
+            return True
+    return False
 
 
 def _markPoorConversionsWithFailedPrefix(
