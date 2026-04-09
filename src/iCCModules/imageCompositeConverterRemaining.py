@@ -4,6 +4,7 @@ import importlib
 from pathlib import Path
 
 from src.iCCModules import imageCompositeConverterDependencies as dependency_helpers
+from src.iCCModules.imageCompositeConverterPerceptionReflection import Perception, Reflection
 
 def detectRelevantRegions(img) -> list[dict[str, object]]:
     return detectRelevantRegionsImpl(img, cv2_module=cv2, np_module=np)
@@ -737,10 +738,21 @@ def runIterationPipeline(
                     f"manual_review_reason={reason}",
                 ]
             )
+            return None
         else:
-            print("  -> Überspringe Bild, da keine Zerschneide-Anweisung (Compositing) im Text vorliegt.")
-            _writeValidationLog(["status=skipped_non_composite"])
-        return None
+            print("  -> Kein Compositing-Befehl erkannt: verwende Einzelbild-Konvertierung (embedded raster SVG).")
+            svg_content = _renderEmbeddedRasterSvg(img_path)
+            svg_rendered = Action.render_svg_to_numpy(svg_content, w, h)
+            if svg_rendered is None:
+                _recordRenderFailure(
+                    "non_composite_embedded_render_failed",
+                    svg_content=svg_content,
+                    params_snapshot=params,
+                )
+                return None
+            _writeAttemptArtifacts(svg_content, svg_rendered)
+            _writeValidationLog(["status=non_composite_embedded_svg"])
+            return base, desc, params, 1, Action.calculate_error(perc.img, svg_rendered)
 
     best_iter, best_error = conversion_composite_helpers.runCompositeIterationImpl(
         max_iterations=max_iterations,
