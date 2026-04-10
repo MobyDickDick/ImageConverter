@@ -1348,6 +1348,7 @@ def convertRange(
             calculate_delta2_stats_fn=Action.calculateDelta2Stats,
             get_base_name_from_file_fn=getBaseNameFromFile,
             cv2_module=cv2,
+            render_embedded_raster_svg_fn=_renderEmbeddedRasterSvg,
             append_batch_failure_fn=batch_failures.append,
             print_fn=print,
         )
