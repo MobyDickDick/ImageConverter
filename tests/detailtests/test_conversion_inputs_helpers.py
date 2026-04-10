@@ -10,6 +10,7 @@ def test_list_requested_image_files_filters_extension_range_and_variants(monkeyp
         lambda _folder: [
             "AC0800_L.jpg",
             "AC0800_S.jpg",
+            "AC0801_M.jpeg",
             "AC0811_M.png",
             "AC0812_M.gif",
             "AR0101.jpg",
@@ -33,7 +34,7 @@ def test_list_requested_image_files_returns_all_in_range_when_no_selection(monke
     monkeypatch.setattr(
         conversion_input_helpers.os,
         "listdir",
-        lambda _folder: ["AC0800_L.jpg", "AC0800_M.jpg", "AC0900_M.jpg", "ignored.bmp.tmp"],
+        lambda _folder: ["AC0800_L.jpg", "AC0800_M.jpeg", "AC0900_M.jpg", "ignored.bmp.tmp"],
     )
 
     normalized_variants, files = conversion_input_helpers.listRequestedImageFilesImpl(
@@ -45,4 +46,19 @@ def test_list_requested_image_files_returns_all_in_range_when_no_selection(monke
     )
 
     assert normalized_variants == set()
-    assert files == ["AC0800_L.jpg", "AC0800_M.jpg"]
+    assert files == ["AC0800_L.jpg", "AC0800_M.jpeg"]
+
+
+def test_input_selection_summary_contains_hints() -> None:
+    summary = conversion_input_helpers.inputSelectionSummaryImpl(
+        folder_path="input",
+        start_ref="AC0800",
+        end_ref="AC0899",
+        selected_variants={"ac0801_l"},
+        matched_files=[],
+    )
+
+    assert "Keine Eingabedateien für die Konvertierung gefunden." in summary
+    assert "Range: AC0800..AC0899" in summary
+    assert "Ausgewählte Varianten: AC0801_L" in summary
+    assert ".jpeg" in summary
