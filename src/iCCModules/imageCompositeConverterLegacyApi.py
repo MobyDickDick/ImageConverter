@@ -3,7 +3,18 @@
 from __future__ import annotations
 
 import json
+import re
 from pathlib import Path
+
+
+def _normalizeFailedSvgTarget(target: Path) -> Path:
+    """Return SVG output path with canonical ``Failed_`` prefix for fallback renders."""
+    if target.suffix.lower() != ".svg":
+        return target
+    if re.match(r"(?i)^failed_", target.name):
+        normalized_name = re.sub(r"(?i)^failed_", "Failed_", target.name, count=1)
+        return target.with_name(normalized_name)
+    return target.with_name(f"Failed_{target.name}")
 
 
 def convertImageImpl(
@@ -21,6 +32,8 @@ def convertImageImpl(
     target.parent.mkdir(parents=True, exist_ok=True)
 
     if target.suffix.lower() == ".svg" or cv2_module is None or np_module is None:
+        target = _normalizeFailedSvgTarget(target)
+        target.parent.mkdir(parents=True, exist_ok=True)
         target.write_text(render_embedded_raster_svg_fn(input_path), encoding="utf-8")
         return target
 
