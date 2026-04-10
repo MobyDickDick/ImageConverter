@@ -98,7 +98,15 @@ def _svgIsTrivialFallback(svg_path: Path) -> bool:
 
     compact = re.sub(r"\s+", "", content)
     has_minimal_canvas = 'width="1"' in compact and 'height="1"' in compact and "viewbox=\"0011\"" in compact
-    has_white_rect = "<rect" in compact and "fill='#ffffff'" in compact and "width='100%'" in compact and "height='100%'" in compact
+    rect_match = re.search(r"<rect([^>]*)>", compact)
+    rect_attrs = rect_match.group(1) if rect_match else ""
+    has_white_rect = bool(rect_match) and bool(
+        re.search(r"width=(['\"])100%\1", rect_attrs)
+    ) and bool(
+        re.search(r"height=(['\"])100%\1", rect_attrs)
+    ) and bool(
+        re.search(r"fill=(['\"])#ffffff\1", rect_attrs)
+    )
     return has_minimal_canvas and has_white_rect
 
 
