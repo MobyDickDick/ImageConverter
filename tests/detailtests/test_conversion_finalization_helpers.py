@@ -143,3 +143,25 @@ def test_mark_poor_conversions_renames_svg_when_embedded_jpeg_detected(tmp_path)
 
     assert (svg_dir / "Failed_AC0801_L.svg").exists()
     assert not (svg_dir / "AC0801_L.svg").exists()
+
+
+def test_canonicalize_failed_attempt_svg_names_from_suffix_format(tmp_path):
+    svg_dir = tmp_path / "svg"
+    svg_dir.mkdir()
+    (svg_dir / "AC0302_2_M_failed.svg").write_text("<svg/>", encoding="utf-8")
+
+    finalization_helpers._canonicalizeFailedAttemptSvgNames(svg_out_dir=str(svg_dir))
+
+    assert (svg_dir / "Failed_AC0302_2_M.svg").exists()
+    assert not (svg_dir / "AC0302_2_M_failed.svg").exists()
+
+
+def test_canonicalize_failed_attempt_svg_names_from_lowercase_prefix(tmp_path):
+    svg_dir = tmp_path / "svg"
+    svg_dir.mkdir()
+    (svg_dir / "failed_AC0302_2_M.svg").write_text("<svg/>", encoding="utf-8")
+
+    finalization_helpers._canonicalizeFailedAttemptSvgNames(svg_out_dir=str(svg_dir))
+
+    assert (svg_dir / "Failed_AC0302_2_M.svg").exists()
+    assert not (svg_dir / "failed_AC0302_2_M.svg").exists()

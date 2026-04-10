@@ -126,6 +126,34 @@ def _markPoorConversionsWithFailedPrefix(
                 base_svg.unlink()
             failed_svg.rename(base_svg)
 
+
+def _canonicalizeFailedAttemptSvgNames(
+    *,
+    svg_out_dir: str,
+) -> None:
+    """Normalize failed-attempt SVG names to the canonical ``Failed_<variant>.svg`` format."""
+    svg_dir = Path(svg_out_dir)
+    if not svg_dir.exists():
+        return
+
+    for candidate in svg_dir.glob("*_failed.svg"):
+        variant = candidate.stem[: -len("_failed")]
+        if not variant:
+            continue
+        normalized = svg_dir / f"Failed_{variant}.svg"
+        if normalized.exists():
+            normalized.unlink()
+        candidate.rename(normalized)
+
+    for candidate in svg_dir.glob("failed_*.svg"):
+        variant = candidate.stem[len("failed_") :]
+        if not variant:
+            continue
+        normalized = svg_dir / f"Failed_{variant}.svg"
+        if normalized.exists():
+            normalized.unlink()
+        candidate.rename(normalized)
+
 def runConversionFinalizationImpl(
     *,
     reports_out_dir: str,
@@ -171,6 +199,7 @@ def runConversionFinalizationImpl(
         normalized_selected_variants=normalized_selected_variants,
         result_map=result_map,
     )
+    _canonicalizeFailedAttemptSvgNames(svg_out_dir=svg_out_dir)
     _markPoorConversionsWithFailedPrefix(
         svg_out_dir=svg_out_dir,
         result_map=result_map,
