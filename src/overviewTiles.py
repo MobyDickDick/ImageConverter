@@ -5,6 +5,8 @@ from __future__ import annotations
 import math
 import os
 import sys
+import binascii
+import struct
 from pathlib import Path
 from typing import Callable
 
@@ -39,6 +41,9 @@ def _readRaster(path: Path):
 
 def _readRasterWithoutStderrNoise(path: Path):
     """Read raster input while suppressing noisy decoder stderr output."""
+    if path.suffix.lower() == ".png" and not _hasValidPngStructure(path):
+        return None
+
     stderr = sys.stderr
     fileno = getattr(stderr, "fileno", None)
     if fileno is None:
@@ -56,6 +61,35 @@ def _readRasterWithoutStderrNoise(path: Path):
     finally:
         os.dup2(saved_fd, stderr_fd)
         os.close(saved_fd)
+
+
+def _hasValidPngStructure(path: Path) -> bool:
+    try:
+        payload = path.read_bytes()
+    except OSError:
+        return False
+
+    if not payload.startswith(b"\x89PNG\r\n\x1a\n"):
+        return False
+
+    cursor = 8
+    payload_len = len(payload)
+    while cursor + 12 <= payload_len:
+        chunk_len = struct.unpack(">I", payload[cursor : cursor + 4])[0]
+        chunk_type = payload[cursor + 4 : cursor + 8]
+        chunk_data_end = cursor + 8 + chunk_len
+        chunk_crc_end = chunk_data_end + 4
+        if chunk_crc_end > payload_len:
+            return False
+        chunk_data = payload[cursor + 8 : chunk_data_end]
+        expected_crc = struct.unpack(">I", payload[chunk_data_end:chunk_crc_end])[0]
+        actual_crc = binascii.crc32(chunk_type + chunk_data) & 0xFFFFFFFF
+        if actual_crc != expected_crc:
+            return False
+        cursor = chunk_crc_end
+        if chunk_type == b"IEND":
+            return cursor == payload_len
+    return False
 
 
 def _renderSvg(path: Path):
