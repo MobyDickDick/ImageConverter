@@ -1,0 +1,38 @@
+{
+  "base": "SE0074",
+  "best_error": 0.0,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.0,
+  "filename": "SE0074.jpg",
+  "h": 25,
+  "mean_delta2": 0.0,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "SE0074",
+        "source": "base_name",
+        "text": "Wie SE0073, aber nach rechts gekippt. \"T\" steht waagrecht geschrieben."
+      }
+    ],
+    "documented_alias_refs": [
+      "SE0073"
+    ],
+    "elements": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "SE0074"
+  },
+  "std_delta2": 0.0,
+  "variant": "SE0074",
+  "w": 36
+}
