@@ -30,6 +30,26 @@ def _ensureOutputArtifacts(
             diff_file.write(_ONE_BY_ONE_TRANSPARENT_PNG)
 
 
+def _writeFailedEmbeddedSvgArtifact(
+    *,
+    svg_out_dir: str,
+    filename: str,
+    image_path: str,
+    render_embedded_raster_svg_fn,
+    print_fn=print,
+) -> str | None:
+    base = os.path.splitext(filename)[0]
+    failed_svg_path = os.path.join(svg_out_dir, f"Failed_{base}.svg")
+    try:
+        svg_content = render_embedded_raster_svg_fn(image_path)
+        with open(failed_svg_path, "w", encoding="utf-8") as failed_svg_file:
+            failed_svg_file.write(svg_content)
+        return failed_svg_path
+    except Exception as exc:  # noqa: BLE001 - must not break batch flow when fallback artifact fails.
+        print_fn(f"[WARN] {filename}: Konnte Failed-Embedded-SVG nicht schreiben ({type(exc).__name__}: {exc})")
+        return None
+
+
 def convertOneImpl(
     *,
     filename: str,
@@ -48,6 +68,7 @@ def convertOneImpl(
     calculate_delta2_stats_fn,
     get_base_name_from_file_fn,
     cv2_module,
+    render_embedded_raster_svg_fn,
     append_batch_failure_fn,
     print_fn=print,
 ) -> tuple[dict[str, object] | None, bool]:
@@ -69,6 +90,13 @@ def convertOneImpl(
             badge_validation_rounds=max(1, int(badge_rounds)),
         )
     except Exception as exc:  # noqa: BLE001 - keeps batch execution resilient per image.
+        failed_svg_path = _writeFailedEmbeddedSvgArtifact(
+            svg_out_dir=svg_out_dir,
+            filename=filename,
+            image_path=image_path,
+            render_embedded_raster_svg_fn=render_embedded_raster_svg_fn,
+            print_fn=print_fn,
+        )
         append_batch_failure_fn(
             {
                 "filename": filename,
@@ -76,6 +104,7 @@ def convertOneImpl(
                 "reason": type(exc).__name__,
                 "details": str(exc),
                 "log_file": os.path.basename(log_file),
+                "failed_svg": os.path.basename(failed_svg_path) if failed_svg_path else "",
             }
         )
         with open(log_file, "w", encoding="utf-8") as f:
@@ -87,6 +116,13 @@ def convertOneImpl(
         details = read_validation_log_details_fn(log_file)
         status = details.get("status", "")
         if status in {"render_failure", "batch_error"}:
+            failed_svg_path = _writeFailedEmbeddedSvgArtifact(
+                svg_out_dir=svg_out_dir,
+                filename=filename,
+                image_path=image_path,
+                render_embedded_raster_svg_fn=render_embedded_raster_svg_fn,
+                print_fn=print_fn,
+            )
             append_batch_failure_fn(
                 {
                     "filename": filename,
@@ -94,12 +130,20 @@ def convertOneImpl(
                     "reason": details.get("failure_reason", details.get("reason", "unknown")),
                     "details": details.get("params_snapshot", details.get("details", "")),
                     "log_file": os.path.basename(log_file),
+                    "failed_svg": os.path.basename(failed_svg_path) if failed_svg_path else "",
                 }
             )
             _ensureOutputArtifacts(svg_path=svg_path, diff_path=diff_path)
             print_fn(f"[WARN] {filename}: Fehler protokolliert, Batchlauf wird fortgesetzt ({status}).")
             return None, True
         if status == "semantic_mismatch":
+            failed_svg_path = _writeFailedEmbeddedSvgArtifact(
+                svg_out_dir=svg_out_dir,
+                filename=filename,
+                image_path=image_path,
+                render_embedded_raster_svg_fn=render_embedded_raster_svg_fn,
+                print_fn=print_fn,
+            )
             append_batch_failure_fn(
                 {
                     "filename": filename,
@@ -107,6 +151,7 @@ def convertOneImpl(
                     "reason": "semantic_mismatch",
                     "details": details.get("issue", ""),
                     "log_file": os.path.basename(log_file),
+                    "failed_svg": os.path.basename(failed_svg_path) if failed_svg_path else "",
                 }
             )
             _ensureOutputArtifacts(svg_path=svg_path, diff_path=diff_path)

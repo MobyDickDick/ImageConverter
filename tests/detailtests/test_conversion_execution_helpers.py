@@ -48,6 +48,7 @@ def test_convert_one_impl_success_reads_convergence_and_delta2(tmp_path: Path) -
         calculate_delta2_stats_fn=lambda _img, _rendered: (1.25, 0.75),
         get_base_name_from_file_fn=lambda stem: stem.split("_")[0],
         cv2_module=_Cv2Stub(_ImageStub((4, 3, 3))),
+        render_embedded_raster_svg_fn=lambda _path: "<svg/>",
         append_batch_failure_fn=batch_failures.append,
         print_fn=lambda _msg: None,
     )
@@ -82,6 +83,7 @@ def test_convert_one_impl_semantic_mismatch_is_reported_as_failure(tmp_path: Pat
         calculate_delta2_stats_fn=lambda _img, _rendered: (0.0, 0.0),
         get_base_name_from_file_fn=lambda stem: stem,
         cv2_module=_Cv2Stub(None),
+        render_embedded_raster_svg_fn=lambda _path: "<svg/>",
         append_batch_failure_fn=batch_failures.append,
         print_fn=lambda _msg: None,
     )
@@ -89,3 +91,4 @@ def test_convert_one_impl_semantic_mismatch_is_reported_as_failure(tmp_path: Pat
     assert row is None
     assert failed is True
     assert batch_failures and batch_failures[0]["status"] == "semantic_mismatch"
+    assert (tmp_path / "Failed_AC0838_S.svg").read_text(encoding="utf-8") == "<svg/>"
