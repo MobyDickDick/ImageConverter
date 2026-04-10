@@ -85,7 +85,11 @@ def generateBadgeSvgImpl(
         sy = float(h) / 75.0 if h > 0 else 1.0
         head_stroke = str(p.get("head_stroke", "#808080"))
         head_hub_fill = str(p.get("head_hub_fill", "#7f7f7f"))
-        elements.append(f'  <g transform="scale({sx:.6f} {sy:.6f})">')
+        hub_cx = float(p.get("head_hub_cx", p.get("arm_x2", p.get("cx", float(w) / 2.0))))
+        hub_cy = float(p.get("head_hub_cy", p.get("arm_y2", 25.153 * sy)))
+        tx = hub_cx - (25.0 * sx)
+        ty = hub_cy - (25.153 * sy)
+        elements.append(f'  <g transform="translate({tx:.6f} {ty:.6f}) scale({sx:.6f} {sy:.6f})">')
         elements.append(
             '    <path d="M 36.492188 3.0410156 L 13.505859 3.1347656 L 23.417969 22.871094 '
             'A 2.5 2.500001 0 0 0 22.748047 23.722656 L 2.0195312 13.308594 L 2.1113281 36.294922 '
@@ -94,15 +98,9 @@ def generateBadgeSvgImpl(
             '22.863281 L 36.492188 3.0410156 z" fill="url(#ac0223ValveGradient)" stroke="none"/>'
         )
         elements.append(
-            f'    <path d="M 24.893241,24.801712 47.873657,13.308749 47.780747,36.294676 Z" fill="#d9d9d9" stroke="{head_stroke}" stroke-width="1"/>'
+            f'    <polygon points="36.492188,2.6959677 47.87305,12.963546 47.78125,35.949874 2.1132824,35.949874 2.0195324,12.963546 13.50586,2.7897177" fill="#d9d9d9" stroke="{head_stroke}" stroke-width="1"/>'
         )
-        elements.append(
-            f'    <path d="M 24.999095,26.021627 36.492058,3.04121 13.506131,3.13412 Z" fill="#d9d9d9" stroke="{head_stroke}" stroke-width="1"/>'
-        )
-        elements.append(
-            f'    <path d="M 24.893241,24.801712 2.0195838,13.308749 2.112065,36.294676 Z" fill="#d9d9d9" stroke="{head_stroke}" stroke-width="1"/>'
-        )
-        elements.append(f'    <ellipse cx="25" cy="24.801712" rx="2.5" ry="2.500001" fill="{head_hub_fill}" stroke="{head_stroke}" stroke-width="1"/>')
+        elements.append(f'    <ellipse cx="25" cy="25.153" rx="2.5" ry="2.500001" fill="{head_hub_fill}" stroke="{head_stroke}" stroke-width="1"/>')
         elements.append("  </g>")
 
     if p.get("draw_text", True):

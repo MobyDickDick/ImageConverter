@@ -100,6 +100,8 @@ def apply_semantic_badge_family_rules(
         family_elements.append("SEMANTIC: senkrechter Strich oben vom Kreis")
     if base_upper == "AC0223":
         family_elements.append("SEMANTIC: Ventilkopf mit drei Dreiecken oberhalb des Stiels")
+        family_elements.append("SEMANTIC: Dreiecks-Spitzen treffen zentriert am oberen Stielende zusammen")
+        family_elements.append("SEMANTIC: Drei Dreiecke sind zu einem Polygon vereint")
     if base_upper in {"AC0812", "AC0832", "AC0837", "AC0882"}:
         family_elements.append("SEMANTIC: waagrechter Strich links vom Kreis")
 
