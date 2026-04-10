@@ -74,6 +74,19 @@ def _svgContainsEmbeddedRasterArtifact(svg_path: str) -> bool:
     return False
 
 
+def _svgIsTrivialFallbackArtifact(svg_path: str) -> bool:
+    try:
+        with open(svg_path, "r", encoding="utf-8") as svg_file:
+            content = svg_file.read().lower()
+    except OSError:
+        return False
+
+    compact = re.sub(r"\s+", "", content)
+    has_minimal_canvas = 'width="1"' in compact and 'height="1"' in compact and "viewbox=\"0011\"" in compact
+    has_white_rect = "<rect" in compact and "fill='#ffffff'" in compact and "width='100%'" in compact and "height='100%'" in compact
+    return has_minimal_canvas and has_white_rect
+
+
 def convertOneImpl(
     *,
     filename: str,
@@ -219,12 +232,29 @@ def convertOneImpl(
     _base, _desc, params, best_iter, best_error = res
     details = read_validation_log_details_fn(log_file)
     failed_svg_path = os.path.join(svg_out_dir, f"Failed_{base}.svg")
-    should_use_failed_name = os.path.exists(svg_path) and _svgContainsEmbeddedRasterArtifact(svg_path)
+    has_svg = os.path.exists(svg_path)
+    should_use_failed_name = has_svg and (
+        _svgContainsEmbeddedRasterArtifact(svg_path) or _svgIsTrivialFallbackArtifact(svg_path)
+    )
     if should_use_failed_name:
         if os.path.exists(failed_svg_path):
             os.unlink(failed_svg_path)
         os.rename(svg_path, failed_svg_path)
         svg_path = failed_svg_path
+    if _svgIsTrivialFallbackArtifact(svg_path):
+        append_batch_failure_fn(
+            {
+                "filename": filename,
+                "status": "poor_conversion_placeholder_svg",
+                "reason": "trivial_placeholder_svg",
+                "details": "Detected 1x1 white placeholder SVG output.",
+                "log_file": os.path.basename(log_file),
+                "failed_svg": os.path.basename(svg_path),
+            }
+        )
+        _ensureOutputArtifacts(svg_path=svg_path, diff_path=diff_path)
+        print_fn(f"[WARN] {filename}: Triviale 1x1-Placeholder-SVG erkannt, als fehlgeschlagen markiert.")
+        return None, True
     img = cv2_module.imread(image_path)
     pixel_count = 1.0
     width = 0
