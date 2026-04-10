@@ -1,22 +1,5 @@
-run-meta: run_seed=1018056722 pass_seed_offset=0 nonce_ns=1775584453458993900
+run-meta: run_seed=703233956 pass_seed_offset=0 nonce_ns=1775808070657634600
 status=semantic_ok
-redraw_variation: seed=1027248646611 changed_params=cx:10.000->9.836 | cy:10.000->9.804 | r:8.280->8.339 | stroke_circle:1.000->0.882
+redraw_variation: seed=709592487898 changed_params=cx:10.000->10.097 | cy:10.000->9.952 | r:8.280->8.230 | stroke_circle:1.000->1.005
 semantic-guard: Text bewusst deaktiviert (plain-ring Familie ohne Buchstabe).
-Runde 1: elementweise Validierung gestartet
-circle: Fehler=65.476
-circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
-circle: Radius-Bracketing keine relevante Änderung (r: 8.280, best_err=65.476, full_err=15.065); Kandidaten=7.452->160.157, 8.280->65.476
-global-search: übersprungen (zu wenige aktive Parameter; benötigt >=4)
-Runde 1: Gesamtfehler=15.065
-stagnation_detected: keine relevante Geometrieänderung in der letzten Validierungsrunde
-switch_to_fallback_search: deaktiviere Circle-Geometry-Penalty für eine letzte Ausweichrunde
-Runde 2: elementweise Validierung gestartet
-circle: Fehler=65.476
-circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
-global-search: übersprungen (zu wenige aktive Parameter; benötigt >=4)
-Runde 2: Gesamtfehler=15.065
-stagnation_detected: identischer Parameter-Fingerprint und praktisch unveränderter Gesamtfehler
-stopped_due_to_stagnation: Validierung vorzeitig beendet
-circle: Farb-Bracketing fill_gray 242->250; Kandidaten=200->4800.000, 205->4690.000, 210->4583.000, 220->4371.000, 226->4241.000, 230->4154.000, 234->4063.000, 240->3939.000, 242->3903.000, 250->3867.000, 255->3878.000
-circle: Farb-Bracketing stroke_gray 127->160; Kandidaten=95->4389.000, 96->4371.000, 111->4094.000, 112->4073.000, 119->3958.000, 127->3867.000, 128->3856.000, 135->3788.000, 143->3719.000, 144->3706.000, 152->3654.000, 159->3625.000, 160->3620.000, 171->3687.000, 205->4139.000
-circle: Farboptimierung in Abschlussphase angewendet
+validation_fast_path: schmale, zentrierte Kreisgrenzen erkannt; überspringe iterative Geometriesuche
