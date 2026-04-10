@@ -157,8 +157,40 @@ def convertOneImpl(
             _ensureOutputArtifacts(svg_path=svg_path, diff_path=diff_path)
             print_fn(f"[WARN] {filename}: Semantischer Fehlmatch, Batchlauf stoppt nach diesem Fehler.")
             return None, True
+        if status.startswith("skipped_"):
+            _ensureOutputArtifacts(svg_path=svg_path, diff_path=diff_path)
+            return None, False
+
+        failed_svg_path = _writeFailedEmbeddedSvgArtifact(
+            svg_out_dir=svg_out_dir,
+            filename=filename,
+            image_path=image_path,
+            render_embedded_raster_svg_fn=render_embedded_raster_svg_fn,
+            print_fn=print_fn,
+        )
+        failure_status = status or "conversion_failed"
+        failure_reason = details.get("failure_reason", details.get("reason", "no_result"))
+        append_batch_failure_fn(
+            {
+                "filename": filename,
+                "status": failure_status,
+                "reason": failure_reason,
+                "details": details.get("issue", details.get("details", "")),
+                "log_file": os.path.basename(log_file),
+                "failed_svg": os.path.basename(failed_svg_path) if failed_svg_path else "",
+            }
+        )
+        if not os.path.exists(log_file):
+            with open(log_file, "w", encoding="utf-8") as f:
+                f.write(
+                    f"status={failure_status}\n"
+                    f"filename={filename}\n"
+                    f"reason={failure_reason}\n"
+                    "details=no_result_returned\n"
+                )
         _ensureOutputArtifacts(svg_path=svg_path, diff_path=diff_path)
-        return None, False
+        print_fn(f"[WARN] {filename}: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert ({failure_status}).")
+        return None, True
 
     _base, _desc, params, best_iter, best_error = res
     details = read_validation_log_details_fn(log_file)

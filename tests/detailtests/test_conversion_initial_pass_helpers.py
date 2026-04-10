@@ -87,3 +87,34 @@ def test_initial_pass_uses_restored_bestlist_row_when_candidate_not_better() -> 
     assert stop_after_failure is False
     assert restored_variants == ["AC0800_S"]
     assert result_map["AC0800_S.jpg"]["error_per_pixel"] == 1.0
+
+
+def test_initial_pass_continues_after_failed_file() -> None:
+    result_map: dict[str, dict[str, object]] = {}
+
+    def _convert_one(filename: str, *, iteration_budget: int, badge_rounds: int):
+        if filename == "AC0800_S.jpg":
+            return None, True
+        return ({"filename": filename, "variant": "AC0801_S", "error_per_pixel": 1.0}, False)
+
+    stop_after_failure = initial_pass_helpers.runInitialConversionPassImpl(
+        process_files=["AC0800_S.jpg", "AC0801_S.jpg"],
+        result_map=result_map,
+        existing_donor_rows=[],
+        conversion_bestlist_rows={},
+        folder_path="in",
+        svg_out_dir="svg",
+        diff_out_dir="diff",
+        rng=object(),
+        deterministic_order=True,
+        base_iterations=2,
+        convert_one_fn=_convert_one,
+        try_template_transfer_fn=lambda **_kwargs: (None, None),
+        is_conversion_bestlist_candidate_better_fn=lambda _previous, _candidate: True,
+        store_conversion_bestlist_snapshot_fn=lambda _variant, _row: None,
+        restore_conversion_bestlist_snapshot_fn=lambda _variant: None,
+        choose_conversion_bestlist_row_fn=lambda row, _previous, _restored: row,
+    )
+
+    assert stop_after_failure is True
+    assert "AC0801_S.jpg" in result_map
