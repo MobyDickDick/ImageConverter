@@ -90,6 +90,18 @@ def _svgContainsEmbeddedRaster(svg_path: Path) -> bool:
     return False
 
 
+def _svgIsTrivialFallback(svg_path: Path) -> bool:
+    try:
+        content = svg_path.read_text(encoding="utf-8").lower()
+    except OSError:
+        return False
+
+    compact = re.sub(r"\s+", "", content)
+    has_minimal_canvas = 'width="1"' in compact and 'height="1"' in compact and "viewbox=\"0011\"" in compact
+    has_white_rect = "<rect" in compact and "fill='#ffffff'" in compact and "width='100%'" in compact and "height='100%'" in compact
+    return has_minimal_canvas and has_white_rect
+
+
 def _markPoorConversionsWithFailedPrefix(
     *,
     svg_out_dir: str,
@@ -129,7 +141,8 @@ def _markPoorConversionsWithFailedPrefix(
         mean_delta2 = float(row.get("mean_delta2", float("inf")))
         quality_fail = math.isfinite(mean_delta2) and math.isfinite(threshold) and mean_delta2 > threshold
         raster_fail = _svgContainsEmbeddedRaster(svg_path)
-        should_fail = bool(quality_fail or raster_fail)
+        trivial_fail = _svgIsTrivialFallback(svg_path)
+        should_fail = bool(quality_fail or raster_fail or trivial_fail)
         has_run_metrics = variant in rows_by_variant
 
         if should_fail and svg_path != failed_svg:
