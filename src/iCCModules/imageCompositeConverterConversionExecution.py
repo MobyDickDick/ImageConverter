@@ -31,6 +31,13 @@ def _ensureOutputArtifacts(
             diff_file.write(_ONE_BY_ONE_TRANSPARENT_PNG)
 
 
+def _resolveFailureSvgPath(default_svg_path: str, failed_svg_path: str | None) -> str:
+    """Use canonical failed SVG path when a failed artifact already exists."""
+    if failed_svg_path and os.path.exists(failed_svg_path):
+        return failed_svg_path
+    return default_svg_path
+
+
 def _writeFailedEmbeddedSvgArtifact(
     *,
     svg_out_dir: str,
@@ -146,7 +153,10 @@ def convertOneImpl(
         )
         with open(log_file, "w", encoding="utf-8") as f:
             f.write(f"status=batch_error\nfilename={filename}\nreason={type(exc).__name__}\ndetails={exc}\n")
-        _ensureOutputArtifacts(svg_path=svg_path, diff_path=diff_path)
+        _ensureOutputArtifacts(
+            svg_path=_resolveFailureSvgPath(svg_path, failed_svg_path),
+            diff_path=diff_path,
+        )
         print_fn(f"[WARN] {filename}: Batchlauf setzt nach Fehler fort ({type(exc).__name__}: {exc})")
         return None, True
     if not res:
@@ -170,7 +180,10 @@ def convertOneImpl(
                     "failed_svg": os.path.basename(failed_svg_path) if failed_svg_path else "",
                 }
             )
-            _ensureOutputArtifacts(svg_path=svg_path, diff_path=diff_path)
+            _ensureOutputArtifacts(
+                svg_path=_resolveFailureSvgPath(svg_path, failed_svg_path),
+                diff_path=diff_path,
+            )
             print_fn(f"[WARN] {filename}: Fehler protokolliert, Batchlauf wird fortgesetzt ({status}).")
             return None, True
         if status == "semantic_mismatch":
@@ -191,7 +204,10 @@ def convertOneImpl(
                     "failed_svg": os.path.basename(failed_svg_path) if failed_svg_path else "",
                 }
             )
-            _ensureOutputArtifacts(svg_path=svg_path, diff_path=diff_path)
+            _ensureOutputArtifacts(
+                svg_path=_resolveFailureSvgPath(svg_path, failed_svg_path),
+                diff_path=diff_path,
+            )
             print_fn(f"[WARN] {filename}: Semantischer Fehlmatch, Batchlauf stoppt nach diesem Fehler.")
             return None, True
         if status.startswith("skipped_"):
@@ -225,7 +241,10 @@ def convertOneImpl(
                     f"reason={failure_reason}\n"
                     "details=no_result_returned\n"
                 )
-        _ensureOutputArtifacts(svg_path=svg_path, diff_path=diff_path)
+        _ensureOutputArtifacts(
+            svg_path=_resolveFailureSvgPath(svg_path, failed_svg_path),
+            diff_path=diff_path,
+        )
         print_fn(f"[WARN] {filename}: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert ({failure_status}).")
         return None, True
 
