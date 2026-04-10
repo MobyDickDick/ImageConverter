@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import math
+import os
 import sys
 from pathlib import Path
 from typing import Callable
@@ -32,8 +33,29 @@ def _readRaster(path: Path):
     _resolveOptionalDependencies()
     if cv2 is None:
         return None
-    img = cv2.imread(str(path), cv2.IMREAD_COLOR)
+    img = _readRasterWithoutStderrNoise(path)
     return img
+
+
+def _readRasterWithoutStderrNoise(path: Path):
+    """Read raster input while suppressing noisy decoder stderr output."""
+    stderr = sys.stderr
+    fileno = getattr(stderr, "fileno", None)
+    if fileno is None:
+        return cv2.imread(str(path), cv2.IMREAD_COLOR)
+    try:
+        stderr_fd = fileno()
+    except (OSError, ValueError):
+        return cv2.imread(str(path), cv2.IMREAD_COLOR)
+
+    saved_fd = os.dup(stderr_fd)
+    try:
+        with open(os.devnull, "w", encoding="utf-8") as devnull:
+            os.dup2(devnull.fileno(), stderr_fd)
+            return cv2.imread(str(path), cv2.IMREAD_COLOR)
+    finally:
+        os.dup2(saved_fd, stderr_fd)
+        os.close(saved_fd)
 
 
 def _renderSvg(path: Path):

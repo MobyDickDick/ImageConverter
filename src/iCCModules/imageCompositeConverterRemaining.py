@@ -1331,7 +1331,13 @@ def convertRange(
     base_iterations = max(1, int(iterations))
     # Continue quality iterations while a pass still improves at least one case.
     # Abort as soon as the next pass cannot beat the previous state.
-    max_quality_passes = 4
+    # Single-reference diagnostics should finish quickly, therefore we skip
+    # extra quality passes when only one variant or one exact reference is
+    # requested.
+    normalized_start_ref = str(start_ref or "").strip().upper()
+    normalized_end_ref = str(end_ref or "").strip().upper()
+    is_single_reference_run = bool(normalized_start_ref) and normalized_start_ref == normalized_end_ref
+    max_quality_passes = 0 if (len(process_files) <= 1 or is_single_reference_run) else 4
     quality_logs: list[dict[str, object]] = []
     result_map: dict[str, dict[str, object]] = {}
     conversion_bestlist_path = _conversionBestlistManifestPath(reports_out_dir)
@@ -1418,36 +1424,37 @@ def convertRange(
     # Iteratively refine unresolved quality cases while preserving all already
     # successful outputs (replace only when strictly better).
     strategy_logs: list[dict[str, object]] = []
-    stop_after_failure = conversion_quality_pass_helpers.runQualityPassesImpl(
-        max_quality_passes=max_quality_passes,
-        stop_after_failure=stop_after_failure,
-        deterministic_order=deterministic_order,
-        rng=rng,
-        base_iterations=base_iterations,
-        allowed_error_per_pixel=allowed_error_pp,
-        skip_variants=skip_variants,
-        result_map=result_map,
-        quality_logs=quality_logs,
-        conversion_bestlist_rows=conversion_bestlist_rows,
-        convert_one_fn=_convertOne,
-        select_open_quality_cases_fn=_selectOpenQualityCases,
-        select_middle_lower_tercile_fn=_selectMiddleLowerTercile,
-        iteration_strategy_for_pass_fn=_iterationStrategyForPass,
-        adaptive_iteration_budget_for_quality_row_fn=_adaptiveIterationBudgetForQualityRow,
-        evaluate_quality_pass_candidate_fn=_evaluateQualityPassCandidate,
-        store_conversion_bestlist_snapshot_fn=lambda variant, row: _storeConversionBestlistSnapshot(
-            variant,
-            row,
-            svg_out_dir,
-            reports_out_dir,
-        ),
-        restore_conversion_bestlist_snapshot_fn=lambda variant: _restoreConversionBestlistSnapshot(
-            variant,
-            svg_out_dir,
-            reports_out_dir,
-        ),
-        before_pass_fn=lambda pass_idx: setattr(Action, "STOCHASTIC_SEED_OFFSET", pass_idx),
-    )
+    if max_quality_passes > 0:
+        stop_after_failure = conversion_quality_pass_helpers.runQualityPassesImpl(
+            max_quality_passes=max_quality_passes,
+            stop_after_failure=stop_after_failure,
+            deterministic_order=deterministic_order,
+            rng=rng,
+            base_iterations=base_iterations,
+            allowed_error_per_pixel=allowed_error_pp,
+            skip_variants=skip_variants,
+            result_map=result_map,
+            quality_logs=quality_logs,
+            conversion_bestlist_rows=conversion_bestlist_rows,
+            convert_one_fn=_convertOne,
+            select_open_quality_cases_fn=_selectOpenQualityCases,
+            select_middle_lower_tercile_fn=_selectMiddleLowerTercile,
+            iteration_strategy_for_pass_fn=_iterationStrategyForPass,
+            adaptive_iteration_budget_for_quality_row_fn=_adaptiveIterationBudgetForQualityRow,
+            evaluate_quality_pass_candidate_fn=_evaluateQualityPassCandidate,
+            store_conversion_bestlist_snapshot_fn=lambda variant, row: _storeConversionBestlistSnapshot(
+                variant,
+                row,
+                svg_out_dir,
+                reports_out_dir,
+            ),
+            restore_conversion_bestlist_snapshot_fn=lambda variant: _restoreConversionBestlistSnapshot(
+                variant,
+                svg_out_dir,
+                reports_out_dir,
+            ),
+            before_pass_fn=lambda pass_idx: setattr(Action, "STOCHASTIC_SEED_OFFSET", pass_idx),
+        )
 
     conversion_finalization_helpers.runConversionFinalizationImpl(
         reports_out_dir=reports_out_dir,
