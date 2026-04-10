@@ -37,7 +37,7 @@ def test_retry_failed_conversions_creates_embedded_svg(tmp_path: Path) -> None:
     assert len(results) == 1
     assert results[0].status == "recovered"
 
-    svg_path = output_dir / "failed_AC0001.svg"
+    svg_path = output_dir / "Failed_AC0001.svg"
     assert svg_path.exists()
     content = svg_path.read_text(encoding="utf-8")
     assert '<image href="data:image/png;base64,' in content
@@ -63,7 +63,7 @@ def test_retry_failed_conversions_accepts_jpg_sources(tmp_path: Path) -> None:
 
     assert len(results) == 1
     assert results[0].status == "recovered"
-    svg_path = output_dir / "failed_AC0002.svg"
+    svg_path = output_dir / "Failed_AC0002.svg"
     assert svg_path.exists()
     content = svg_path.read_text(encoding="utf-8")
     assert '<image href="data:image/jpeg;base64,' in content
