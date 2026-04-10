@@ -6,7 +6,7 @@ import os
 
 
 def defaultConvertedSymbolsRootImpl(*, module_file: str) -> str:
-    repo_root = os.path.dirname(os.path.dirname(os.path.abspath(module_file)))
+    repo_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(module_file))))
     return os.path.join(repo_root, "artifacts", "converted_images")
 
 

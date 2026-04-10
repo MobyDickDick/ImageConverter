@@ -6,11 +6,12 @@ from src.iCCModules import imageCompositeConverterOutputPaths as output_path_hel
 
 
 def test_default_converted_symbols_root_impl_resolves_repo_relative_path() -> None:
-    module_file = str(Path("src") / "imageCompositeConverter.py")
+    module_file = str(Path("src") / "iCCModules" / "imageCompositeConverterOutputPaths.py")
 
     resolved = output_path_helpers.defaultConvertedSymbolsRootImpl(module_file=module_file)
 
-    assert resolved.endswith("artifacts/converted_images")
+    expected = Path(module_file).resolve().parents[2] / "artifacts" / "converted_images"
+    assert Path(resolved) == expected
 
 
 def test_output_subdir_helpers_use_expected_folder_names() -> None:
