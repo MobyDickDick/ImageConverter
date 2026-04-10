@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import os
+import re
 
 _ONE_BY_ONE_TRANSPARENT_PNG = (
     b"\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x00\x01\x00\x00\x00\x01"
@@ -48,6 +49,29 @@ def _writeFailedEmbeddedSvgArtifact(
     except Exception as exc:  # noqa: BLE001 - must not break batch flow when fallback artifact fails.
         print_fn(f"[WARN] {filename}: Konnte Failed-Embedded-SVG nicht schreiben ({type(exc).__name__}: {exc})")
         return None
+
+
+def _svgContainsEmbeddedRasterArtifact(svg_path: str) -> bool:
+    try:
+        with open(svg_path, "r", encoding="utf-8") as svg_file:
+            content = svg_file.read().lower()
+    except OSError:
+        return False
+
+    if "data:image/" in content:
+        return True
+    if "<image" not in content:
+        return False
+
+    href_values = re.findall(r"(?:href|xlink:href)\s*=\s*['\"]([^'\"]+)['\"]", content)
+    for href in href_values:
+        if href.startswith("data:image/"):
+            return True
+        if re.search(r"\.(png|jpe?g|gif|webp|bmp|tiff?)(?:$|[?#])", href):
+            return True
+        if href.startswith("data:") and "base64," in href and "ivborw0kggo" in href:
+            return True
+    return False
 
 
 def convertOneImpl(
@@ -194,6 +218,13 @@ def convertOneImpl(
 
     _base, _desc, params, best_iter, best_error = res
     details = read_validation_log_details_fn(log_file)
+    failed_svg_path = os.path.join(svg_out_dir, f"Failed_{base}.svg")
+    should_use_failed_name = os.path.exists(svg_path) and _svgContainsEmbeddedRasterArtifact(svg_path)
+    if should_use_failed_name:
+        if os.path.exists(failed_svg_path):
+            os.unlink(failed_svg_path)
+        os.rename(svg_path, failed_svg_path)
+        svg_path = failed_svg_path
     img = cv2_module.imread(image_path)
     pixel_count = 1.0
     width = 0

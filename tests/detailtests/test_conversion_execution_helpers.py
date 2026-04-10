@@ -178,3 +178,89 @@ def test_convert_one_impl_skipped_status_stays_non_failure(tmp_path: Path) -> No
     assert row is None
     assert failed is False
     assert batch_failures == []
+
+
+def test_convert_one_impl_non_composite_success_renames_svg_to_failed_prefix(tmp_path: Path) -> None:
+    folder = tmp_path / "images"
+    svg_out = tmp_path / "svg"
+    diff_out = tmp_path / "diff"
+    reports = tmp_path / "reports"
+    for path in (folder, svg_out, diff_out, reports):
+        path.mkdir()
+
+    filename = "AC0704_S.jpg"
+    (folder / filename).write_bytes(b"fake")
+    (svg_out / "AC0704_S.svg").write_text(
+        '<svg xmlns="http://www.w3.org/2000/svg"><image href="data:image/jpeg;base64,/9j/4AAQ"/></svg>',
+        encoding="utf-8",
+    )
+
+    row, failed = conversion_execution_helpers.convertOneImpl(
+        filename=filename,
+        folder_path=str(folder),
+        csv_path="descriptions.csv",
+        iteration_budget=3,
+        badge_rounds=5,
+        svg_out_dir=str(svg_out),
+        diff_out_dir=str(diff_out),
+        reports_out_dir=str(reports),
+        debug_ac0811_dir=None,
+        debug_element_diff_dir=None,
+        run_iteration_pipeline_fn=lambda *_args, **_kwargs: ("AC0704_S", "desc", {"mode": "non_composite"}, 1, 1.0),
+        read_validation_log_details_fn=lambda _path: {"status": "non_composite_embedded_svg", "convergence": "n/a"},
+        render_svg_to_numpy_fn=lambda _svg, _w, _h: object(),
+        calculate_delta2_stats_fn=lambda _img, _rendered: (0.1, 0.0),
+        get_base_name_from_file_fn=lambda stem: stem.split("_")[0],
+        cv2_module=_Cv2Stub(_ImageStub((5, 7, 3))),
+        render_embedded_raster_svg_fn=lambda _path: "<svg/>",
+        append_batch_failure_fn=lambda _row: None,
+        print_fn=lambda _msg: None,
+    )
+
+    assert failed is False
+    assert row is not None
+    assert (svg_out / "Failed_AC0704_S.svg").exists()
+    assert not (svg_out / "AC0704_S.svg").exists()
+
+
+def test_convert_one_impl_embedded_svg_uses_failed_prefix_independent_of_status(tmp_path: Path) -> None:
+    folder = tmp_path / "images"
+    svg_out = tmp_path / "svg"
+    diff_out = tmp_path / "diff"
+    reports = tmp_path / "reports"
+    for path in (folder, svg_out, diff_out, reports):
+        path.mkdir()
+
+    filename = "AC0805_M.jpg"
+    (folder / filename).write_bytes(b"fake")
+    (svg_out / "AC0805_M.svg").write_text(
+        '<svg xmlns="http://www.w3.org/2000/svg"><image href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA"/></svg>',
+        encoding="utf-8",
+    )
+
+    row, failed = conversion_execution_helpers.convertOneImpl(
+        filename=filename,
+        folder_path=str(folder),
+        csv_path="descriptions.csv",
+        iteration_budget=3,
+        badge_rounds=5,
+        svg_out_dir=str(svg_out),
+        diff_out_dir=str(diff_out),
+        reports_out_dir=str(reports),
+        debug_ac0811_dir=None,
+        debug_element_diff_dir=None,
+        run_iteration_pipeline_fn=lambda *_args, **_kwargs: ("AC0805_M", "desc", {"mode": "semantic_badge"}, 1, 1.0),
+        read_validation_log_details_fn=lambda _path: {"status": "semantic_ok", "convergence": "stable"},
+        render_svg_to_numpy_fn=lambda _svg, _w, _h: object(),
+        calculate_delta2_stats_fn=lambda _img, _rendered: (0.1, 0.0),
+        get_base_name_from_file_fn=lambda stem: stem.split("_")[0],
+        cv2_module=_Cv2Stub(_ImageStub((8, 6, 3))),
+        render_embedded_raster_svg_fn=lambda _path: "<svg/>",
+        append_batch_failure_fn=lambda _row: None,
+        print_fn=lambda _msg: None,
+    )
+
+    assert failed is False
+    assert row is not None
+    assert (svg_out / "Failed_AC0805_M.svg").exists()
+    assert not (svg_out / "AC0805_M.svg").exists()
