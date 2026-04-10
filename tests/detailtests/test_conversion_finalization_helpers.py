@@ -166,6 +166,28 @@ def test_mark_poor_conversions_detects_embedded_raster_even_without_result_row(t
     assert not (svg_dir / "GE9024_7S.svg").exists()
 
 
+def test_mark_poor_conversions_renames_trivial_white_fallback_svg(tmp_path):
+    svg_dir = tmp_path / "svg"
+    svg_dir.mkdir()
+    (svg_dir / "GE0111_S.svg").write_text(
+        "\"\n<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1\" height=\"1\" viewBox=\"0 0 1 1\">"
+        "<rect width=\"100%\" height=\"100%\" fill=\"#ffffff\"/></svg>\n\"",
+        encoding="utf-8",
+    )
+    reports_dir = tmp_path / "reports"
+    reports_dir.mkdir()
+    (reports_dir / "successful_conversions.txt").write_text("", encoding="utf-8")
+
+    finalization_helpers._markPoorConversionsWithFailedPrefix(
+        svg_out_dir=str(svg_dir),
+        result_map={},
+        reports_out_dir=str(reports_dir),
+    )
+
+    assert (svg_dir / "Failed_GE0111_S.svg").exists()
+    assert not (svg_dir / "GE0111_S.svg").exists()
+
+
 def test_canonicalize_failed_attempt_svg_names_from_suffix_format(tmp_path):
     svg_dir = tmp_path / "svg"
     svg_dir.mkdir()
