@@ -101,10 +101,24 @@ def _markPoorConversionsWithFailedPrefix(
     if not svg_dir.exists():
         return
 
+    rows_by_variant: dict[str, dict[str, object]] = {}
     for row in result_map.values():
         variant = str(row.get("variant", "")).strip().upper()
         if not variant:
             continue
+        rows_by_variant[variant] = row
+
+    variants_from_svg_names: set[str] = set()
+    for svg_path in svg_dir.glob("*.svg"):
+        stem = svg_path.stem
+        if stem.lower().startswith("failed_"):
+            stem = stem[len("failed_") :]
+        normalized = stem.strip().upper()
+        if normalized:
+            variants_from_svg_names.add(normalized)
+
+    for variant in sorted(set(rows_by_variant) | variants_from_svg_names):
+        row = rows_by_variant.get(variant, {})
 
         base_svg = svg_dir / f"{variant}.svg"
         failed_svg = svg_dir / f"Failed_{variant}.svg"
@@ -116,12 +130,13 @@ def _markPoorConversionsWithFailedPrefix(
         quality_fail = math.isfinite(mean_delta2) and math.isfinite(threshold) and mean_delta2 > threshold
         raster_fail = _svgContainsEmbeddedRaster(svg_path)
         should_fail = bool(quality_fail or raster_fail)
+        has_run_metrics = variant in rows_by_variant
 
         if should_fail and svg_path != failed_svg:
             if failed_svg.exists():
                 failed_svg.unlink()
             base_svg.rename(failed_svg)
-        elif (not should_fail) and svg_path == failed_svg:
+        elif has_run_metrics and (not should_fail) and svg_path == failed_svg:
             if base_svg.exists():
                 base_svg.unlink()
             failed_svg.rename(base_svg)

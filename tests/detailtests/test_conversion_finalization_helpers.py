@@ -145,6 +145,27 @@ def test_mark_poor_conversions_renames_svg_when_embedded_jpeg_detected(tmp_path)
     assert not (svg_dir / "AC0801_L.svg").exists()
 
 
+def test_mark_poor_conversions_detects_embedded_raster_even_without_result_row(tmp_path):
+    svg_dir = tmp_path / "svg"
+    svg_dir.mkdir()
+    (svg_dir / "GE9024_7S.svg").write_text(
+        '<svg xmlns="http://www.w3.org/2000/svg"><image href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD"/></svg>',
+        encoding="utf-8",
+    )
+    reports_dir = tmp_path / "reports"
+    reports_dir.mkdir()
+    (reports_dir / "successful_conversions.txt").write_text("", encoding="utf-8")
+
+    finalization_helpers._markPoorConversionsWithFailedPrefix(
+        svg_out_dir=str(svg_dir),
+        result_map={},
+        reports_out_dir=str(reports_dir),
+    )
+
+    assert (svg_dir / "Failed_GE9024_7S.svg").exists()
+    assert not (svg_dir / "GE9024_7S.svg").exists()
+
+
 def test_canonicalize_failed_attempt_svg_names_from_suffix_format(tmp_path):
     svg_dir = tmp_path / "svg"
     svg_dir.mkdir()
