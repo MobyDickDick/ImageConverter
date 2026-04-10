@@ -161,6 +161,8 @@ def _markPoorConversionsWithFailedPrefix(
             if base_svg.exists():
                 base_svg.unlink()
             failed_svg.rename(base_svg)
+        elif has_run_metrics and (not should_fail) and base_svg.exists() and failed_svg.exists():
+            failed_svg.unlink()
 
 
 def _canonicalizeFailedAttemptSvgNames(

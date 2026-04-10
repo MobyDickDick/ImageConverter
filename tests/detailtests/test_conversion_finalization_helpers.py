@@ -166,6 +166,25 @@ def test_mark_poor_conversions_detects_embedded_raster_even_without_result_row(t
     assert not (svg_dir / "GE9024_7S.svg").exists()
 
 
+def test_mark_poor_conversions_removes_stale_failed_svg_after_successful_result(tmp_path):
+    svg_dir = tmp_path / "svg"
+    svg_dir.mkdir()
+    (svg_dir / "AC0123.svg").write_text("<svg><rect width='10' height='10'/></svg>", encoding="utf-8")
+    (svg_dir / "Failed_AC0123.svg").write_text("<svg><image href='data:image/png;base64,abc'/></svg>", encoding="utf-8")
+    reports_dir = tmp_path / "reports"
+    reports_dir.mkdir()
+    (reports_dir / "successful_conversions.txt").write_text("", encoding="utf-8")
+
+    finalization_helpers._markPoorConversionsWithFailedPrefix(
+        svg_out_dir=str(svg_dir),
+        result_map={"AC0123.jpg": {"variant": "AC0123", "mean_delta2": 0.0}},
+        reports_out_dir=str(reports_dir),
+    )
+
+    assert (svg_dir / "AC0123.svg").exists()
+    assert not (svg_dir / "Failed_AC0123.svg").exists()
+
+
 def test_mark_poor_conversions_renames_trivial_white_fallback_svg(tmp_path):
     svg_dir = tmp_path / "svg"
     svg_dir.mkdir()
