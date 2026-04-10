@@ -284,12 +284,21 @@ class TeeTextIO(io.TextIOBase):
 
     def write(self, s: str) -> int:
         for stream in self._streams:
+            if getattr(stream, "closed", False):
+                continue
             stream.write(s)
         return len(s)
 
     def flush(self) -> None:
         for stream in self._streams:
-            stream.flush()
+            if getattr(stream, "closed", False):
+                continue
+            try:
+                stream.flush()
+            except ValueError:
+                # Some wrapped streams may already be finalized/closed when Python
+                # implicitly flushes TextIO objects during interpreter shutdown.
+                continue
 
 
 @contextlib.contextmanager

@@ -80,6 +80,18 @@ def test_optional_log_capture_impl_writes_stdout_and_stderr(tmp_path: Path) -> N
     assert "capture.log" in log_content
 
 
+def test_tee_text_io_flush_ignores_closed_streams() -> None:
+    open_stream = io.StringIO()
+    closed_stream = io.StringIO()
+    closed_stream.close()
+    tee = cli_helpers.TeeTextIO(open_stream, closed_stream)
+
+    tee.write("hello")
+    tee.flush()
+
+    assert open_stream.getvalue() == "hello"
+
+
 def test_format_user_diagnostic_impl_formats_mapping_span() -> None:
     class FakeSpan:
         def format(self) -> str:
