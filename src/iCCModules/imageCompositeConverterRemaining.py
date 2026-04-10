@@ -4,6 +4,7 @@ import importlib
 from pathlib import Path
 
 from src.iCCModules import imageCompositeConverterDependencies as dependency_helpers
+from src.iCCModules import imageCompositeConverterGradientStripeStrategy as gradient_stripe_strategy_helpers
 from src.iCCModules.imageCompositeConverterPerceptionReflection import Perception, Reflection
 
 def detectRelevantRegions(img) -> list[dict[str, object]]:
@@ -740,8 +741,24 @@ def runIterationPipeline(
             )
             return None
         else:
-            print("  -> Kein Compositing-Befehl erkannt: verwende Einzelbild-Konvertierung (embedded raster SVG).")
-            svg_content = _renderEmbeddedRasterSvg(img_path)
+            stripe_strategy = gradient_stripe_strategy_helpers.detectGradientStripeStrategyImpl(
+                perc.img,
+                np_module=np,
+            )
+            if stripe_strategy:
+                print("  -> Kein Compositing-Befehl erkannt: verwende Gradient-Stripe-Strategie.")
+                svg_content = gradient_stripe_strategy_helpers.buildGradientStripeSvgImpl(w, h, stripe_strategy)
+                strategy_stop_count = len(list(stripe_strategy.get("stops", [])))
+                _writeValidationLog(
+                    [
+                        "status=non_composite_gradient_stripe",
+                        f"strategy=gradient_stripe;stop_count={strategy_stop_count}",
+                    ]
+                )
+            else:
+                print("  -> Kein Compositing-Befehl erkannt: verwende Einzelbild-Konvertierung (embedded raster SVG).")
+                svg_content = _renderEmbeddedRasterSvg(img_path)
+                _writeValidationLog(["status=non_composite_embedded_svg"])
             svg_rendered = Action.render_svg_to_numpy(svg_content, w, h)
             if svg_rendered is None:
                 _recordRenderFailure(
@@ -751,7 +768,6 @@ def runIterationPipeline(
                 )
                 return None
             _writeAttemptArtifacts(svg_content, svg_rendered)
-            _writeValidationLog(["status=non_composite_embedded_svg"])
             return base, desc, params, 1, Action.calculate_error(perc.img, svg_rendered)
 
     best_iter, best_error = conversion_composite_helpers.runCompositeIterationImpl(
