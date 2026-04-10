@@ -1,0 +1,36 @@
+{
+  "base": "AC0030",
+  "best_error": 0.0,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.0,
+  "filename": "AC0030_L.jpg",
+  "h": 140,
+  "mean_delta2": 0.0,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "AC0030",
+        "source": "base_name",
+        "text": "Kühlelement, graues Rechteck, Minus-Minus-Zeichen oben Mitte, Farbverlauf horizontal dunkel-hell-dunkel, graue Linien in beiden Diagonalen"
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "AC0030_L"
+  },
+  "std_delta2": 0.0,
+  "variant": "AC0030_L",
+  "w": 40
+}

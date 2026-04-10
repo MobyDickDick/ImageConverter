@@ -1,0 +1,36 @@
+{
+  "base": "WEATHER03",
+  "best_error": 0.5119591507659231,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.00013758644202255393,
+  "filename": "weather03.jpg",
+  "h": 61,
+  "mean_delta2": 4.676968574523926,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "weather03",
+        "source": "base_name",
+        "text": "Wie weather01, jedoch mit zwei Eiskristallen+C267, welche aus der Wolcke fallen"
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "WEATHER03"
+  },
+  "std_delta2": 18.941442489624023,
+  "variant": "WEATHER03",
+  "w": 61
+}

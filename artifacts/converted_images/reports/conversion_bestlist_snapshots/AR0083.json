@@ -1,0 +1,38 @@
+{
+  "base": "AR0083",
+  "best_error": 0.0,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.0,
+  "filename": "AR0083.jpg",
+  "h": 46,
+  "mean_delta2": 0.0,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "AR0083",
+        "source": "base_name",
+        "text": "Wie AR0082, nach rechts gedreht, Text \"M\" horizontal"
+      }
+    ],
+    "documented_alias_refs": [
+      "AR0082"
+    ],
+    "elements": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "AR0083"
+  },
+  "std_delta2": 0.0,
+  "variant": "AR0083",
+  "w": 33
+}

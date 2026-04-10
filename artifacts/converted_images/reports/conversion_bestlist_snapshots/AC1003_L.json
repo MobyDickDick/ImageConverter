@@ -1,0 +1,39 @@
+{
+  "base": "AC1003",
+  "best_error": 0.0,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.0,
+  "filename": "AC1003_L.jpg",
+  "h": 45,
+  "mean_delta2": 0.0,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "AC1003",
+        "source": "base_name",
+        "text": "Wie AC1001: Wie AC1000, jedoch mit Kelle (graue horizontale Linie) nach unten. Geometrische Variante: 180° gedreht."
+      }
+    ],
+    "documented_alias_refs": [
+      "AC1000",
+      "AC1001"
+    ],
+    "elements": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "AC1003_L"
+  },
+  "std_delta2": 0.0,
+  "variant": "AC1003_L",
+  "w": 25
+}
