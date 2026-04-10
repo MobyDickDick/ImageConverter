@@ -70,6 +70,24 @@ def readConversionBestlistMetricsImpl(manifest_path: Path) -> dict[str, dict[str
     return rows
 
 
+def pruneConversionBestlistRowsWithoutSvgImpl(
+    rows: dict[str, dict[str, object]],
+    svg_out_dir: str,
+) -> dict[str, dict[str, object]]:
+    svg_dir = Path(svg_out_dir)
+    if not rows:
+        return {}
+
+    pruned: dict[str, dict[str, object]] = {}
+    for variant, row in rows.items():
+        normalized_variant = str(variant).strip().upper()
+        if not normalized_variant:
+            continue
+        if (svg_dir / f"{normalized_variant}.svg").exists():
+            pruned[normalized_variant] = row
+    return pruned
+
+
 def writeConversionBestlistMetricsImpl(manifest_path: Path, rows: dict[str, dict[str, object]]) -> None:
     manifest_path.parent.mkdir(parents=True, exist_ok=True)
     with manifest_path.open("w", encoding="utf-8", newline="") as f:

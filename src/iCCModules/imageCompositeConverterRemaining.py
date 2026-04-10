@@ -1325,7 +1325,7 @@ def convertRange(
     quality_logs: list[dict[str, object]] = []
     result_map: dict[str, dict[str, object]] = {}
     conversion_bestlist_path = _conversionBestlistManifestPath(reports_out_dir)
-    conversion_bestlist_rows = _readConversionBestlistMetrics(conversion_bestlist_path)
+    conversion_bestlist_rows = _readConversionBestlistMetrics(conversion_bestlist_path, svg_out_dir)
     batch_failures: list[dict[str, str]] = []
     stop_after_failure = False
     existing_donor_rows = _loadExistingConversionRows(out_root, folder_path)
@@ -1699,8 +1699,9 @@ def _formatSuccessfulConversionManifestLine(existing_line: str, metrics: dict[st
 def _conversionBestlistManifestPath(reports_out_dir: str) -> Path:
     return conversion_bestlist_helpers.conversionBestlistManifestPathImpl(reports_out_dir)
 
-def _readConversionBestlistMetrics(manifest_path: Path) -> dict[str, dict[str, object]]:
-    return conversion_bestlist_helpers.readConversionBestlistMetricsImpl(manifest_path)
+def _readConversionBestlistMetrics(manifest_path: Path, svg_out_dir: str) -> dict[str, dict[str, object]]:
+    rows = conversion_bestlist_helpers.readConversionBestlistMetricsImpl(manifest_path)
+    return conversion_bestlist_helpers.pruneConversionBestlistRowsWithoutSvgImpl(rows, svg_out_dir)
 
 def _writeConversionBestlistMetrics(manifest_path: Path, rows: dict[str, dict[str, object]]) -> None:
     conversion_bestlist_helpers.writeConversionBestlistMetricsImpl(manifest_path, rows)

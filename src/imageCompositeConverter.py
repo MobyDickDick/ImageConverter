@@ -2642,8 +2642,8 @@ def _conversionBestlistManifestPath(reports_out_dir: str) -> Path:
     return imageCompositeConverterRemaining_helpers._conversionBestlistManifestPath(reports_out_dir)
 
 
-def _readConversionBestlistMetrics(manifest_path: Path) -> dict[str, dict[str, object]]:
-    return imageCompositeConverterRemaining_helpers._readConversionBestlistMetrics(manifest_path)
+def _readConversionBestlistMetrics(manifest_path: Path, svg_out_dir: str) -> dict[str, dict[str, object]]:
+    return imageCompositeConverterRemaining_helpers._readConversionBestlistMetrics(manifest_path, svg_out_dir)
 
 
 def _writeConversionBestlistMetrics(manifest_path: Path, rows: dict[str, dict[str, object]]) -> None:
