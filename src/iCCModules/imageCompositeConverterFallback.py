@@ -26,7 +26,7 @@ def runEmbeddedRasterFallbackImpl(
             stem = os.path.splitext(filename)[0]
             image_path = os.path.join(folder_path, filename)
             svg_content = render_embedded_raster_svg_fn(image_path)
-            svg_path = os.path.join(svg_out_dir, f"{stem}.svg")
+            svg_path = os.path.join(svg_out_dir, f"Failed_{stem}.svg")
             with open(svg_path, "w", encoding="utf-8") as svg_file:
                 svg_file.write(svg_content)
             if fitz_module is not None:
