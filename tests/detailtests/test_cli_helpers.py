@@ -33,6 +33,19 @@ def test_auto_detect_csv_path_prefers_reference_like_names(tmp_path: Path) -> No
     assert detected.endswith("reference_roundtrip.csv")
 
 
+
+
+def test_auto_detect_csv_path_finds_descriptions_sibling_folder(tmp_path: Path) -> None:
+    images_dir = tmp_path / "images_to_convert"
+    images_dir.mkdir()
+    descriptions_dir = tmp_path / "descriptions"
+    descriptions_dir.mkdir()
+    expected = descriptions_dir / "Finale_Wurzelformen_V3.xml"
+    expected.write_text("<root/>", encoding="utf-8")
+
+    detected = cli_helpers.autoDetectCsvPathImpl(str(images_dir))
+    assert detected == str(expected)
+
 def test_resolve_cli_csv_and_output_impl_resolves_xml_paths() -> None:
     args = argparse.Namespace(
         csv_path="descriptions.xml",

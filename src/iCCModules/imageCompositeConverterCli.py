@@ -171,10 +171,20 @@ def parseArgsImpl(
 def autoDetectCsvPathImpl(folder_path: str) -> str | None:
     """Best-effort table lookup for CLI compatibility mode."""
     candidates: list[str] = []
-    roots = [folder_path, os.path.dirname(folder_path)]
+    folder_abs = os.path.abspath(folder_path)
+    parent = os.path.dirname(folder_abs)
+    roots = [
+        folder_abs,
+        parent,
+        os.path.join(parent, "descriptions"),
+        os.path.join(folder_abs, "descriptions"),
+    ]
+
+    seen_roots: set[str] = set()
     for root in roots:
-        if not root or not os.path.isdir(root):
+        if not root or root in seen_roots or not os.path.isdir(root):
             continue
+        seen_roots.add(root)
         for name in sorted(os.listdir(root)):
             lower = name.lower()
             if lower.endswith(".csv") or lower.endswith(".tsv") or lower.endswith(".xml"):
@@ -188,7 +198,10 @@ def autoDetectCsvPathImpl(folder_path: str) -> str | None:
     preferred = [
         p
         for p in candidates
-        if any(tag in os.path.basename(p).lower() for tag in ("reference", "roundtrip", "export", "mapping"))
+        if any(
+            tag in os.path.basename(p).lower()
+            for tag in ("reference", "roundtrip", "export", "mapping", "wurzelformen", "finale")
+        )
     ]
     return preferred[0] if preferred else candidates[0]
 
