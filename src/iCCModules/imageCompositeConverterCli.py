@@ -323,6 +323,12 @@ def runMainImpl(
     set_svg_render_subprocess_timeout_fn(max(1.0, float(args.isolate_svg_render_timeout_sec)))
 
     log_path = str(args.log_file or "").strip()
+    if not log_path:
+        under_pytest_runtime = "pytest" in sys.modules or bool(os.environ.get("PYTEST_CURRENT_TEST"))
+        if not under_pytest_runtime:
+            # Temporary fallback diagnostics for local CLI runs: mirror complete
+            # console output into a stable log file in the project root.
+            log_path = str(Path.cwd() / "imageCompositeConverter.local.log")
     with optional_log_capture_fn(log_path):
         try:
             if args.ac08_regression_set:
