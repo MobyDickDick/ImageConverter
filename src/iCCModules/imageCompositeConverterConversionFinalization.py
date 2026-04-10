@@ -156,18 +156,22 @@ def _canonicalizeFailedAttemptSvgNames(
         if not variant:
             continue
         normalized = svg_dir / f"Failed_{variant}.svg"
-        if normalized.exists():
+        same_target = candidate == normalized
+        if normalized.exists() and not same_target:
             normalized.unlink()
-        candidate.rename(normalized)
+        if not same_target:
+            candidate.rename(normalized)
 
     for candidate in svg_dir.glob("failed_*.svg"):
         variant = candidate.stem[len("failed_") :]
         if not variant:
             continue
         normalized = svg_dir / f"Failed_{variant}.svg"
-        if normalized.exists():
+        same_target = candidate == normalized
+        if normalized.exists() and not same_target:
             normalized.unlink()
-        candidate.rename(normalized)
+        if not same_target:
+            candidate.rename(normalized)
 
 def runConversionFinalizationImpl(
     *,
