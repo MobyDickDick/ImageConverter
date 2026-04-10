@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import binascii
+import struct
 from pathlib import Path
 
 from src.iCCModules import imageCompositeConverterConversionExecution as conversion_execution_helpers
@@ -16,6 +18,25 @@ class _Cv2Stub:
 class _ImageStub:
     def __init__(self, shape: tuple[int, int, int]) -> None:
         self.shape = shape
+
+
+def test_placeholder_diff_png_has_valid_chunk_crc() -> None:
+    payload = conversion_execution_helpers._ONE_BY_ONE_TRANSPARENT_PNG
+    assert payload.startswith(b"\x89PNG\r\n\x1a\n")
+
+    cursor = 8
+    while cursor < len(payload):
+        chunk_len = struct.unpack(">I", payload[cursor : cursor + 4])[0]
+        chunk_type = payload[cursor + 4 : cursor + 8]
+        chunk_data = payload[cursor + 8 : cursor + 8 + chunk_len]
+        expected_crc = struct.unpack(">I", payload[cursor + 8 + chunk_len : cursor + 12 + chunk_len])[0]
+        actual_crc = binascii.crc32(chunk_type + chunk_data) & 0xFFFFFFFF
+        assert actual_crc == expected_crc
+        cursor += 12 + chunk_len
+        if chunk_type == b"IEND":
+            break
+
+    assert cursor == len(payload)
 
 
 def test_convert_one_impl_success_reads_convergence_and_delta2(tmp_path: Path) -> None:
