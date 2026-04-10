@@ -16,6 +16,8 @@ def defaultAc0223ParamsImpl(
     scale_x = (float(w) / 50.0) if w > 0 else 1.0
     scale_y = (float(h) / 75.0) if h > 0 else 1.0
     head_base_y = 39.922279 * scale_y
+    valve_center_y = 25.153 * scale_y
+    cx = float(params.get("cx", (float(w) / 2.0)))
 
     params.update(
         {
@@ -26,7 +28,12 @@ def defaultAc0223ParamsImpl(
             "head_stroke": "#808080",
             "head_hub_fill": "#7f7f7f",
             "arm_color": "#136fad",
+            "arm_x1": cx,
+            "arm_x2": cx,
             "arm_y1": head_base_y,
+            "arm_y2": valve_center_y,
+            "head_hub_cx": cx,
+            "head_hub_cy": valve_center_y,
         }
     )
     return params
@@ -43,8 +50,14 @@ def fitAc0223ParamsFromImageImpl(
     h, _w = img.shape[:2]
     scale_y = (float(h) / 75.0) if h > 0 else 1.0
     head_base_y = 39.922279 * scale_y
-    arm_y2 = float(params.get("arm_y2", defaults.get("arm_y2", head_base_y)))
-    params["arm_y1"] = min(head_base_y, arm_y2)
+    valve_center_y = 25.153 * scale_y
+    cx = float(params.get("cx", defaults.get("cx", float(img.shape[1]) / 2.0)))
+
+    params["arm_x1"] = cx
+    params["arm_x2"] = cx
+    params["arm_y2"] = float(params.get("head_hub_cy", defaults.get("head_hub_cy", valve_center_y)))
+    params["arm_y2"] = min(head_base_y, params["arm_y2"])
+    params["arm_y1"] = max(params["arm_y2"], float(params.get("cy", defaults.get("cy", head_base_y))) - float(params.get("r", defaults.get("r", 0.0))))
     params["draw_text"] = False
     params["head_style"] = "ac0223_triple_valve"
     params["head_gradient_dark"] = str(defaults.get("head_gradient_dark", "#b2b2b3"))
@@ -52,4 +65,6 @@ def fitAc0223ParamsFromImageImpl(
     params["head_stroke"] = str(defaults.get("head_stroke", "#808080"))
     params["head_hub_fill"] = str(defaults.get("head_hub_fill", "#7f7f7f"))
     params["arm_color"] = str(defaults.get("arm_color", "#136fad"))
+    params["head_hub_cx"] = cx
+    params["head_hub_cy"] = float(params["arm_y2"])
     return params
