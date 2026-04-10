@@ -250,8 +250,10 @@ def test_convert_image_svg_target_uses_embedded_raster_fallback(monkeypatch: pyt
 
     written = image_composite_converter.convertImage(str(src), str(dst))
 
-    assert written == dst
-    assert dst.read_text(encoding="utf-8") == "<svg>ok</svg>"
+    failed_dst = tmp_path / "Failed_out.svg"
+    assert written == failed_dst
+    assert failed_dst.read_text(encoding="utf-8") == "<svg>ok</svg>"
+    assert not dst.exists()
 
 
 def test_convert_range_uses_embedded_raster_fallback_without_numpy_cv2(
