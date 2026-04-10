@@ -73,6 +73,21 @@ def test_store_and_restore_bestlist_snapshot_roundtrip(tmp_path: Path) -> None:
     assert restored.get("status") == "semantic_ok"
 
 
+def test_prune_bestlist_rows_without_existing_svg(tmp_path: Path) -> None:
+    svg_out = tmp_path / "svg"
+    svg_out.mkdir()
+    (svg_out / "AC0800_S.svg").write_text("<svg/>", encoding="utf-8")
+
+    rows = {
+        "AC0800_S": {"variant": "AC0800_S", "filename": "AC0800_S.jpg"},
+        "AC0834_S": {"variant": "AC0834_S", "filename": "AC0834_S.jpg"},
+    }
+
+    pruned = bestlist_helpers.pruneConversionBestlistRowsWithoutSvgImpl(rows, str(svg_out))
+
+    assert list(pruned) == ["AC0800_S"]
+
+
 def test_choose_conversion_bestlist_row_prefers_previous_and_restored_values() -> None:
     selected = bestlist_helpers.chooseConversionBestlistRowImpl(
         candidate_row={
