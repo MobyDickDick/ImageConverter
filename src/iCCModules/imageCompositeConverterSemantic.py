@@ -76,6 +76,11 @@ def apply_semantic_badge_family_rules(
     if base_upper in {"AC0800", "AC0810", "AC0811", "AC0812", "AC0813", "AC0814", "AC0223"}:
         family_elements.append("SEMANTIC: Kreis ohne Buchstabe")
         params["label"] = ""
+    elif base_upper in {"AC0820"}:
+        # AC0820 is the plain CO₂ family. Keep CO₂ as a robust default even when
+        # the textual description omits the explicit label token.
+        heuristic_elements.append("SEMANTIC: Kreis + Buchstabe CO_2")
+        params["label"] = "CO_2"
     elif re.search(r"\bco(?:[_\s\-\^]*2|[₂²])\b", desc):
         heuristic_elements.append("SEMANTIC: Kreis + Buchstabe CO_2")
         params["label"] = "CO_2"
