@@ -1302,6 +1302,16 @@ def convertRange(
         end_ref,
         selected_variants=selected_variants,
     )
+    if not files:
+        summary_text = conversion_input_helpers.inputSelectionSummaryImpl(
+            folder_path=folder_path,
+            start_ref=start_ref,
+            end_ref=end_ref,
+            selected_variants=normalized_selected_variants,
+            matched_files=files,
+        )
+        (Path(reports_out_dir) / "input_selection_summary.txt").write_text(summary_text, encoding="utf-8")
+        print(summary_text.rstrip())
     if cv2 is None or np is None:
         _runEmbeddedRasterFallback(
             files=files,
