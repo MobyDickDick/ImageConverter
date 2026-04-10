@@ -73,7 +73,7 @@ def _svgContainsEmbeddedRaster(svg_path: Path) -> bool:
         content = svg_path.read_text(encoding="utf-8").lower()
     except OSError:
         return False
-    if "data:image/png" in content:
+    if "data:image/" in content:
         return True
 
     if "<image" not in content:
@@ -81,7 +81,9 @@ def _svgContainsEmbeddedRaster(svg_path: Path) -> bool:
 
     href_values = re.findall(r"(?:href|xlink:href)\s*=\s*['\"]([^'\"]+)['\"]", content)
     for href in href_values:
-        if "data:image/png" in href or ".png" in href:
+        if href.startswith("data:image/"):
+            return True
+        if re.search(r"\.(png|jpe?g|gif|webp|bmp|tiff?)(?:$|[?#])", href):
             return True
         if href.startswith("data:") and "base64," in href and "ivborw0kggo" in href:
             return True
