@@ -217,17 +217,31 @@ def resolveCliCsvAndOutputImpl(
     output_dir = args.output_dir
     if args.csv_or_output:
         candidate = str(args.csv_or_output)
-        looks_like_csv = (
-            candidate.lower().endswith(".csv")
-            or candidate.lower().endswith(".tsv")
-            or candidate.lower().endswith(".xml")
-        )
-        if csv_path is None and looks_like_csv:
-            csv_path = candidate
-        elif output_dir is None and not looks_like_csv:
-            output_dir = candidate
-        elif csv_path is None:
-            csv_path = candidate
+        if (
+            csv_path is None
+            and output_dir is None
+            and candidate.isdigit()
+            and int(candidate) > 0
+        ):
+            # Compatibility fallback: older local calls sometimes passed only one
+            # positional numeric value after ``folder_path`` to set iterations.
+            # Since ``csv_or_output`` was introduced, such calls were interpreted
+            # as output directory names (e.g. "128"), which made reports/diffs
+            # appear "missing" from the expected default output folder.
+            args.iterations = int(candidate)
+            candidate = ""
+        if candidate:
+            looks_like_csv = (
+                candidate.lower().endswith(".csv")
+                or candidate.lower().endswith(".tsv")
+                or candidate.lower().endswith(".xml")
+            )
+            if csv_path is None and looks_like_csv:
+                csv_path = candidate
+            elif output_dir is None and not looks_like_csv:
+                output_dir = candidate
+            elif csv_path is None:
+                csv_path = candidate
 
     if csv_path is None:
         csv_path = auto_detect_csv_path_fn(args.folder_path) or ""

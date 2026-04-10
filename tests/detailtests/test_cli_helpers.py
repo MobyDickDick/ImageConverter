@@ -64,6 +64,26 @@ def test_resolve_cli_csv_and_output_impl_resolves_xml_paths() -> None:
     assert resolved_output is None
 
 
+def test_resolve_cli_csv_and_output_impl_treats_numeric_second_positional_as_iterations() -> None:
+    args = argparse.Namespace(
+        csv_path=None,
+        output_dir=None,
+        csv_or_output="256",
+        folder_path="images",
+        iterations=128,
+    )
+
+    resolved_csv, resolved_output = cli_helpers.resolveCliCsvAndOutputImpl(
+        args,
+        auto_detect_csv_path_fn=lambda _folder: "auto.csv",
+        resolve_xml_path_fn=lambda path: path,
+    )
+
+    assert resolved_csv == "auto.csv"
+    assert resolved_output is None
+    assert args.iterations == 256
+
+
 def test_optional_log_capture_impl_writes_stdout_and_stderr(tmp_path: Path) -> None:
     log_path = tmp_path / "logs" / "capture.log"
     stdout_buffer = io.StringIO()
