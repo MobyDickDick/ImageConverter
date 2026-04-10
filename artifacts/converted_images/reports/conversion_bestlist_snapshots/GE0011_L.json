@@ -1,0 +1,38 @@
+{
+  "base": "GE0011",
+  "best_error": 0.0,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.0,
+  "filename": "GE0011_L.jpg",
+  "h": 70,
+  "mean_delta2": 0.0,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "GE0011",
+        "source": "base_name",
+        "text": "Wie GE0010: grauer Hintergrund links blaue Fläche mit vertikalem Farbverlauf oben dunkel, unten ein wenig heller und rechts geschwungene Linie (Wellenform mit 1-Ausbuchtung nach und 1-Ausbuchtung nach rechts). Auf der linken Seite ist noch eine Art Sichelform und ganz links eine einzelne weiße Linie. . Geometrische Variante: identisch zur Referenz."
+      }
+    ],
+    "documented_alias_refs": [
+      "GE0010"
+    ],
+    "elements": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "GE0011_L"
+  },
+  "std_delta2": 0.0,
+  "variant": "GE0011_L",
+  "w": 70
+}

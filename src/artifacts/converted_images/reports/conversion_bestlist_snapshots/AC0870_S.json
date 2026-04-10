@@ -1,0 +1,58 @@
+{
+  "base": "AC0870",
+  "best_error": 34.035555555555554,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.15126913580246912,
+  "filename": "AC0870_S.jpg",
+  "h": 15,
+  "mean_delta2": 6616.7998046875,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "AC0870",
+        "source": "base_name",
+        "text": "Kreisförmiges Badge. Abweichung: mit Text \"T\" (Temperatur)"
+      },
+      {
+        "key": "AC0870_S",
+        "source": "variant_name",
+        "text": "Kreisförmiges Badge. Abweichung: mit Text \"T\" (Temperatur)"
+      },
+      {
+        "key": "AC0870",
+        "source": "canonical_base",
+        "text": "Kreisförmiges Badge. Abweichung: mit Text \"T\" (Temperatur)"
+      },
+      {
+        "key": "AC0870",
+        "source": "canonical_variant",
+        "text": "Kreisförmiges Badge. Abweichung: mit Text \"T\" (Temperatur)"
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [
+      "SEMANTIC: Kreis + Buchstabe"
+    ],
+    "label": "T",
+    "mode": "semantic_badge",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {
+      "description_heuristic": [
+        "SEMANTIC: Kreis + Buchstabe"
+      ],
+      "family_rule": []
+    },
+    "top_source_ref": null,
+    "variant_name": "AC0870_S"
+  },
+  "std_delta2": 9320.3671875,
+  "variant": "AC0870_S",
+  "w": 15
+}

@@ -1,0 +1,38 @@
+{
+  "base": "GE0023",
+  "best_error": 0.0,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.0,
+  "filename": "GE0023_1_L.jpg",
+  "h": 70,
+  "mean_delta2": 0.0,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "GE0023",
+        "source": "base_name",
+        "text": "Wie GE0021: Dicker Pfeil nach oben vor blaugrauem Hintergrund. Hintergrund GE0999. Geometrische Variante: 180° gedreht."
+      }
+    ],
+    "documented_alias_refs": [
+      "GE0021"
+    ],
+    "elements": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "GE0023_1_L"
+  },
+  "std_delta2": 0.0,
+  "variant": "GE0023_1_L",
+  "w": 70
+}

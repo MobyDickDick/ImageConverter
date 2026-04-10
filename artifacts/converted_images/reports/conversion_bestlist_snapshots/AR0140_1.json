@@ -1,0 +1,36 @@
+{
+  "base": "AR0140",
+  "best_error": 2.326041666666667,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.0014537760416666668,
+  "filename": "AR0140_1.jpg",
+  "h": 40,
+  "mean_delta2": 46.19562530517578,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "AR0140",
+        "source": "base_name",
+        "text": "Klappensymbol: Rechteck hochkant, graue Umrandung. Graue Diagonale von unten links nach oben Rechts, in der Mitte ein dunkelgrauer Punkt. Farbverlauf Hintergrund: Dunkelgrau, hellgrau, dunkelgrau. üAhnlich AC501, jedoch in der Höhe gestaucht"
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "AR0140_1"
+  },
+  "std_delta2": 104.57982635498047,
+  "variant": "AR0140_1",
+  "w": 40
+}

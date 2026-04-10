@@ -1,0 +1,36 @@
+{
+  "base": "AC0152",
+  "best_error": 0.00013596491228070175,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 1.789012003693444e-09,
+  "filename": "AC0152_L.jpg",
+  "h": 400,
+  "mean_delta2": 0.0004078947240486741,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "AC0152",
+        "source": "base_name",
+        "text": "Wie AC0151_L, aber rechts mit grauer Kelle und dem Buchstaben „M“."
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "AC0152_L"
+  },
+  "std_delta2": 0.020192284137010574,
+  "variant": "AC0152_L",
+  "w": 190
+}

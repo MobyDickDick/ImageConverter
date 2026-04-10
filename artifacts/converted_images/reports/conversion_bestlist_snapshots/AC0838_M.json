@@ -1,0 +1,48 @@
+{
+  "base": "AC0838",
+  "best_error": 29.48857142857143,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.042126530612244896,
+  "filename": "AC0838_M.jpg",
+  "h": 35,
+  "mean_delta2": 8880.9345703125,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "AC0838",
+        "source": "base_name",
+        "text": "Wie AC0836, jedoch in der gegenüberliegenden Drehlage. Der Griff bleibt als klarer Zusatzarm am Kreis erkennbar, der Text \"VOC\" bleibt horizontal lesbar."
+      }
+    ],
+    "documented_alias_refs": [
+      "AC0836"
+    ],
+    "elements": [
+      "SEMANTIC: waagrechter Strich rechts vom Kreis",
+      "SEMANTIC: Kreis + Buchstabe VOC"
+    ],
+    "label": "VOC",
+    "mode": "semantic_badge",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {
+      "description_heuristic": [
+        "SEMANTIC: Kreis + Buchstabe VOC"
+      ],
+      "family_rule": [
+        "SEMANTIC: waagrechter Strich rechts vom Kreis"
+      ]
+    },
+    "top_source_ref": null,
+    "variant_name": "AC0838_M"
+  },
+  "std_delta2": 17040.689453125,
+  "variant": "AC0838_M",
+  "w": 20
+}

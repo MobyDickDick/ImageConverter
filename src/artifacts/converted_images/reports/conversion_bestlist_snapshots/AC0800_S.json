@@ -1,0 +1,58 @@
+{
+  "base": "AC0800",
+  "best_error": 10.337777777777777,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.045945679012345676,
+  "filename": "AC0800_S.jpg",
+  "h": 15,
+  "mean_delta2": 908.693359375,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "AC0800",
+        "source": "base_name",
+        "text": "Kreisförmiges Badge."
+      },
+      {
+        "key": "AC0800_S",
+        "source": "variant_name",
+        "text": "Kreisförmiges Badge."
+      },
+      {
+        "key": "AC0800",
+        "source": "canonical_base",
+        "text": "Kreisförmiges Badge."
+      },
+      {
+        "key": "AC0800",
+        "source": "canonical_variant",
+        "text": "Kreisförmiges Badge."
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [
+      "SEMANTIC: Kreis ohne Buchstabe"
+    ],
+    "label": "",
+    "mode": "semantic_badge",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {
+      "description_heuristic": [],
+      "family_rule": [
+        "SEMANTIC: Kreis ohne Buchstabe"
+      ]
+    },
+    "top_source_ref": null,
+    "variant_name": "AC0800_S"
+  },
+  "std_delta2": 1689.380859375,
+  "variant": "AC0800_S",
+  "w": 15
+}

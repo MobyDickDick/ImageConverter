@@ -1,0 +1,36 @@
+{
+  "base": "SEMALE3",
+  "best_error": 0.8231722127762934,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 2.221607461680008e-05,
+  "filename": "SemALE3.jpg",
+  "h": 207,
+  "mean_delta2": 11.984697341918945,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "SemALE3",
+        "source": "base_name",
+        "text": "sehr komplexe Form, wahrscheinlich sehr schwierig zum nachzeichnen. Form wie ALE3"
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "SEMALE3"
+  },
+  "std_delta2": 40.13845443725586,
+  "variant": "SEMALE3",
+  "w": 179
+}

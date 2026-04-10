@@ -1,0 +1,39 @@
+{
+  "base": "AC0404",
+  "best_error": 0.0,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.0,
+  "filename": "AC0404_1_L.jpg",
+  "h": 40,
+  "mean_delta2": 0.0,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "AC0404",
+        "source": "base_name",
+        "text": "Wie AC0401: Wie AC0251, jedoch Hintergrund Kreis ein wenig dunkler. . Geometrische Variante: 90° nach rechts gedreht."
+      }
+    ],
+    "documented_alias_refs": [
+      "AC0251",
+      "AC0401"
+    ],
+    "elements": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "AC0404_1_L"
+  },
+  "std_delta2": 0.0,
+  "variant": "AC0404_1_L",
+  "w": 40
+}

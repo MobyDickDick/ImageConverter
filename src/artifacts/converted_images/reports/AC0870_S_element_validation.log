@@ -1,0 +1,36 @@
+run-meta: run_seed=282573177 pass_seed_offset=0 nonce_ns=1775717389836265700
+status=semantic_ok
+redraw_variation: seed=285521843854 changed_params=cx:5.000->4.927 | cy:7.500->7.554 | r:5.500->5.530 | stroke_circle:1.000->0.951
+semantic-guard: Text bewusst deaktiviert (plain-ring Familie ohne Buchstabe).
+small_variant_mode_active: reason=min_dim, min_dim=10.400, mask_dilate_px=1, text_mode=path_t, arm_min_ratio=0.000, stem_min_ratio=0.000
+Runde 1: elementweise Validierung gestartet
+circle: Fehler=79.257
+circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
+circle: Mittelpunkt-Bracketing cx 6.500->5.000, cy 6.500->7.500 (best_err=54.487)
+circle: Radius-Bracketing r 5.200->5.500 (best_err=54.487, full_err=34.036); Kandidaten=4.680->54.487, 5.000->54.487, 6.200->54.487
+text: Fehler=60.180
+global-search: übersprungen (zu wenige aktive Parameter; benötigt >=4)
+Runde 1: Gesamtfehler=34.036
+Runde 2: elementweise Validierung gestartet
+circle: Fehler=52.733
+circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
+circle: Mittelpunkt-Bracketing keine relevante Änderung (cx=5.000, cy=7.500, best_err=55.551)
+circle: Radius-Bracketing keine relevante Änderung (r: 5.500, best_err=55.551, full_err=34.036); Kandidaten=4.950->55.551, 5.000->55.551, 5.500->55.551, 6.500->55.551
+text: Fehler=60.180
+global-search: übersprungen (zu wenige aktive Parameter; benötigt >=4)
+Runde 2: Gesamtfehler=34.036
+stagnation_detected: identischer Parameter-Fingerprint und praktisch unveränderter Gesamtfehler
+switch_to_fallback_search: deaktiviere Circle-Geometry-Penalty für eine letzte Ausweichrunde
+Runde 3: elementweise Validierung gestartet
+circle: Fehler=52.733
+circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
+text: Fehler=60.180
+global-search: übersprungen (zu wenige aktive Parameter; benötigt >=4)
+Runde 3: Gesamtfehler=34.036
+stagnation_detected: identischer Parameter-Fingerprint und praktisch unveränderter Gesamtfehler
+stopped_due_to_stagnation: Validierung vorzeitig beendet
+circle: Farb-Bracketing fill_gray 242->220; Kandidaten=200->5515.000, 207->5493.000, 210->5490.000, 220->5468.000, 226->5477.000, 230->5485.000, 234->5505.000, 240->5549.000, 242->5577.000, 250->5812.000, 255->5973.000
+circle: Farb-Bracketing stroke_gray 127->171; Kandidaten=95->6114.000, 96->6090.000, 111->5788.000, 112->5771.000, 119->5630.000, 127->5468.000, 128->5448.000, 135->5316.000, 143->5185.000, 144->5173.000, 152->5049.000, 159->4960.000, 160->4952.000, 171->4856.000, 207->4875.000
+circle: Farboptimierung in Abschlussphase angewendet
+text: Farb-Bracketing text_gray 127->152; Kandidaten=95->63.262, 96->63.196, 111->60.995, 112->62.153, 119->60.230, 127->60.180, 128->61.327, 135->59.328, 143->59.321, 144->59.277, 152->58.501, 159->58.690, 160->58.701, 171->58.992, 199->60.634
+text: Farboptimierung in Abschlussphase angewendet

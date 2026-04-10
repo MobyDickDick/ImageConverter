@@ -1,0 +1,48 @@
+{
+  "base": "AC0837",
+  "best_error": 28.688,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.07650133333333332,
+  "filename": "AC0837_S.jpg",
+  "h": 15,
+  "mean_delta2": 7265.9677734375,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "AC0837",
+        "source": "base_name",
+        "text": "Wie AC0836, jedoch 90° nach links gedreht. Der Griff verläuft waagrecht nach links, der Text \"VOC\" bleibt horizontal lesbar."
+      }
+    ],
+    "documented_alias_refs": [
+      "AC0836"
+    ],
+    "elements": [
+      "SEMANTIC: waagrechter Strich links vom Kreis",
+      "SEMANTIC: Kreis + Buchstabe VOC"
+    ],
+    "label": "VOC",
+    "mode": "semantic_badge",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {
+      "description_heuristic": [
+        "SEMANTIC: Kreis + Buchstabe VOC"
+      ],
+      "family_rule": [
+        "SEMANTIC: waagrechter Strich links vom Kreis"
+      ]
+    },
+    "top_source_ref": null,
+    "variant_name": "AC0837_S"
+  },
+  "std_delta2": 14058.1142578125,
+  "variant": "AC0837_S",
+  "w": 25
+}

@@ -1,0 +1,116 @@
+[
+  {
+    "filename": "AC0811_S.jpg",
+    "base_name": "AC0811",
+    "description_fragments": [
+      {
+        "source": "base_name",
+        "key": "AC0811",
+        "text": "Kelle mit Kreis oben und Griff nach unten."
+      }
+    ],
+    "recognized_description_elements": [
+      "Kelle mit Kreis oben und Griff nach unten."
+    ],
+    "description_lookup_keys": [
+      "AC0811"
+    ],
+    "description_text": "Kelle mit Kreis oben und Griff nach unten.",
+    "derived_elements": [
+      "SEMANTIC: Kreis ohne Buchstabe",
+      "SEMANTIC: senkrechter Strich hinter dem Kreis"
+    ],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_conflicts": [],
+    "semantic_sources": {
+      "family_rule": [
+        "SEMANTIC: Kreis ohne Buchstabe",
+        "SEMANTIC: senkrechter Strich hinter dem Kreis"
+      ],
+      "description_heuristic": []
+    },
+    "status": "semantic_ok",
+    "mismatch_reason": "",
+    "mismatch_reasons": []
+  },
+  {
+    "filename": "AC0811_M.jpg",
+    "base_name": "AC0811",
+    "description_fragments": [
+      {
+        "source": "base_name",
+        "key": "AC0811",
+        "text": "Kelle mit Kreis oben und Griff nach unten."
+      }
+    ],
+    "recognized_description_elements": [
+      "Kelle mit Kreis oben und Griff nach unten."
+    ],
+    "description_lookup_keys": [
+      "AC0811"
+    ],
+    "description_text": "Kelle mit Kreis oben und Griff nach unten.",
+    "derived_elements": [
+      "SEMANTIC: Kreis ohne Buchstabe",
+      "SEMANTIC: senkrechter Strich hinter dem Kreis"
+    ],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_conflicts": [],
+    "semantic_sources": {
+      "family_rule": [
+        "SEMANTIC: Kreis ohne Buchstabe",
+        "SEMANTIC: senkrechter Strich hinter dem Kreis"
+      ],
+      "description_heuristic": []
+    },
+    "status": "semantic_ok",
+    "mismatch_reason": "",
+    "mismatch_reasons": []
+  },
+  {
+    "filename": "AC0811_L.jpg",
+    "base_name": "AC0811",
+    "description_fragments": [
+      {
+        "source": "base_name",
+        "key": "AC0811",
+        "text": "Kelle mit Kreis oben und Griff nach unten."
+      }
+    ],
+    "recognized_description_elements": [
+      "Kelle mit Kreis oben und Griff nach unten."
+    ],
+    "description_lookup_keys": [
+      "AC0811"
+    ],
+    "description_text": "Kelle mit Kreis oben und Griff nach unten.",
+    "derived_elements": [
+      "SEMANTIC: Kreis ohne Buchstabe",
+      "SEMANTIC: senkrechter Strich hinter dem Kreis"
+    ],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_conflicts": [],
+    "semantic_sources": {
+      "family_rule": [
+        "SEMANTIC: Kreis ohne Buchstabe",
+        "SEMANTIC: senkrechter Strich hinter dem Kreis"
+      ],
+      "description_heuristic": []
+    },
+    "status": "semantic_ok",
+    "mismatch_reason": "",
+    "mismatch_reasons": []
+  }
+]

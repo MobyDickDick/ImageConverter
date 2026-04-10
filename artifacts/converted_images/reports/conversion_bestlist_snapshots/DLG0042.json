@@ -1,0 +1,36 @@
+{
+  "base": "DLG0042",
+  "best_error": 1.568,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.002090666666666667,
+  "filename": "DLG0042.jpg",
+  "h": 25,
+  "mean_delta2": 30.562665939331055,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "DLG0042",
+        "source": "base_name",
+        "text": "\"Vorsicht\"-Zeichen: Schwarzes Ausrufezeichen vor abgerundetes Dreieck, schwarze Umrandung, innen feine Punktierung"
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "DLG0042"
+  },
+  "std_delta2": 58.03532791137695,
+  "variant": "DLG0042",
+  "w": 30
+}

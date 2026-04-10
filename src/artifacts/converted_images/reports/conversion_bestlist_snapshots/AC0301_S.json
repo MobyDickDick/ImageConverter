@@ -1,0 +1,51 @@
+{
+  "base": "AC0301",
+  "best_error": 0.0,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.0,
+  "filename": "AC0301_S.jpg",
+  "h": 40,
+  "mean_delta2": 0.0,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "AC0301",
+        "source": "base_name",
+        "text": "Kompresor grauer Hintergrund nach oben"
+      },
+      {
+        "key": "AC0301_S",
+        "source": "variant_name",
+        "text": "Kompresor grauer Hintergrund nach oben"
+      },
+      {
+        "key": "AC0301",
+        "source": "canonical_base",
+        "text": "Kompresor grauer Hintergrund nach oben"
+      },
+      {
+        "key": "AC0301",
+        "source": "canonical_variant",
+        "text": "Kompresor grauer Hintergrund nach oben"
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "AC0301_S"
+  },
+  "std_delta2": 0.0,
+  "variant": "AC0301_S",
+  "w": 40
+}
