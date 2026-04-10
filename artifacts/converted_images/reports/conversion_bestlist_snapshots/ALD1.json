@@ -1,0 +1,36 @@
+{
+  "base": "ALD1",
+  "best_error": 0.6541563786008231,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.00016152009348168473,
+  "filename": "ALD1.jpg",
+  "h": 135,
+  "mean_delta2": 6.882963180541992,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "ALD1",
+        "source": "base_name",
+        "text": "sehr komplexe Form, wahrscheinlich sehr schwierig zum nachzeichnen. Es ist ein Photo eines einphasigen elektrischen Energiezählers. Wahrscheinlich sollte das stark schematisiert nachgezheichnet werden."
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "ALD1"
+  },
+  "std_delta2": 18.093914031982422,
+  "variant": "ALD1",
+  "w": 30
+}

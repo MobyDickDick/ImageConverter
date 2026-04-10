@@ -1,0 +1,53 @@
+{
+  "base": "GE0014",
+  "best_error": 0.0,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.0,
+  "filename": "GE0014_S.jpg",
+  "h": 50,
+  "mean_delta2": 0.0,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "GE0014",
+        "source": "base_name",
+        "text": "Uhr: Zeigerpositon seht auf 15 Uhr. Dunkelblaue Zahlen 3, 6, 9, 12 Weisse 5-Minuten-Striche bei 5 und 10 Minuten und dann +15, +30, +45 Minuten. Hintergrund wie GE0999 aber nach rechts gedreht"
+      },
+      {
+        "key": "GE0014_S",
+        "source": "variant_name",
+        "text": "Uhr: Zeigerpositon seht auf 15 Uhr. Dunkelblaue Zahlen 3, 6, 9, 12 Weisse 5-Minuten-Striche bei 5 und 10 Minuten und dann +15, +30, +45 Minuten. Hintergrund wie GE0999 aber nach rechts gedreht"
+      },
+      {
+        "key": "GE0014",
+        "source": "canonical_base",
+        "text": "Uhr: Zeigerpositon seht auf 15 Uhr. Dunkelblaue Zahlen 3, 6, 9, 12 Weisse 5-Minuten-Striche bei 5 und 10 Minuten und dann +15, +30, +45 Minuten. Hintergrund wie GE0999 aber nach rechts gedreht"
+      },
+      {
+        "key": "GE0014",
+        "source": "canonical_variant",
+        "text": "Uhr: Zeigerpositon seht auf 15 Uhr. Dunkelblaue Zahlen 3, 6, 9, 12 Weisse 5-Minuten-Striche bei 5 und 10 Minuten und dann +15, +30, +45 Minuten. Hintergrund wie GE0999 aber nach rechts gedreht"
+      }
+    ],
+    "documented_alias_refs": [
+      "GE0999"
+    ],
+    "elements": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "GE0014_S"
+  },
+  "std_delta2": 0.0,
+  "variant": "GE0014_S",
+  "w": 50
+}

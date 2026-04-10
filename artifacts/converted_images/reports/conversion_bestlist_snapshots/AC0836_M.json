@@ -1,0 +1,63 @@
+{
+  "base": "AC0836",
+  "best_error": 18.402857142857144,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.02628979591836735,
+  "filename": "AC0836_M.jpg",
+  "h": 35,
+  "mean_delta2": 3962.228515625,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "AC0836",
+        "source": "base_name",
+        "text": "Wie AC0835, jedoch mit senkrechtem Griff nach unten (dunkelgraue Linie hinter dem Kreis). Text im Kreis: \"VOC\"."
+      },
+      {
+        "key": "AC0836_M",
+        "source": "variant_name",
+        "text": "Wie AC0835, jedoch mit senkrechtem Griff nach unten (dunkelgraue Linie hinter dem Kreis). Text im Kreis: \"VOC\"."
+      },
+      {
+        "key": "AC0836",
+        "source": "canonical_base",
+        "text": "Wie AC0835, jedoch mit senkrechtem Griff nach unten (dunkelgraue Linie hinter dem Kreis). Text im Kreis: \"VOC\"."
+      },
+      {
+        "key": "AC0836",
+        "source": "canonical_variant",
+        "text": "Wie AC0835, jedoch mit senkrechtem Griff nach unten (dunkelgraue Linie hinter dem Kreis). Text im Kreis: \"VOC\"."
+      }
+    ],
+    "documented_alias_refs": [
+      "AC0835"
+    ],
+    "elements": [
+      "SEMANTIC: senkrechter Strich hinter dem Kreis",
+      "SEMANTIC: Kreis + Buchstabe VOC"
+    ],
+    "label": "VOC",
+    "mode": "semantic_badge",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {
+      "description_heuristic": [
+        "SEMANTIC: Kreis + Buchstabe VOC"
+      ],
+      "family_rule": [
+        "SEMANTIC: senkrechter Strich hinter dem Kreis"
+      ]
+    },
+    "top_source_ref": null,
+    "variant_name": "AC0836_M"
+  },
+  "std_delta2": 9479.5205078125,
+  "variant": "AC0836_M",
+  "w": 20
+}

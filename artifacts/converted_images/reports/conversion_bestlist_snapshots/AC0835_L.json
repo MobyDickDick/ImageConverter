@@ -1,0 +1,58 @@
+{
+  "base": "AC0835",
+  "best_error": 39.5856,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.06333696,
+  "filename": "AC0835_L.jpg",
+  "h": 25,
+  "mean_delta2": 11007.0478515625,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "AC0835",
+        "source": "base_name",
+        "text": "Grauer Kreis mit grauem Rand und hellgrauem Hintergrund. Text im Kreis: \"VOC\". Kein Griff, keine Kelle und keine weiteren Anbauteile."
+      },
+      {
+        "key": "AC0835_L",
+        "source": "variant_name",
+        "text": "Grauer Kreis mit grauem Rand und hellgrauem Hintergrund. Text im Kreis: \"VOC\". Kein Griff, keine Kelle und keine weiteren Anbauteile."
+      },
+      {
+        "key": "AC0835",
+        "source": "canonical_base",
+        "text": "Grauer Kreis mit grauem Rand und hellgrauem Hintergrund. Text im Kreis: \"VOC\". Kein Griff, keine Kelle und keine weiteren Anbauteile."
+      },
+      {
+        "key": "AC0835",
+        "source": "canonical_variant",
+        "text": "Grauer Kreis mit grauem Rand und hellgrauem Hintergrund. Text im Kreis: \"VOC\". Kein Griff, keine Kelle und keine weiteren Anbauteile."
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [
+      "SEMANTIC: Kreis + Buchstabe VOC"
+    ],
+    "label": "VOC",
+    "mode": "semantic_badge",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {
+      "description_heuristic": [
+        "SEMANTIC: Kreis + Buchstabe VOC"
+      ],
+      "family_rule": []
+    },
+    "top_source_ref": null,
+    "variant_name": "AC0835_L"
+  },
+  "std_delta2": 18603.345703125,
+  "variant": "AC0835_L",
+  "w": 25
+}

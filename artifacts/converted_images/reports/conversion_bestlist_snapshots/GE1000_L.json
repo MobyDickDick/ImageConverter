@@ -1,0 +1,51 @@
+{
+  "base": "GE1000",
+  "best_error": 0.0,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.0,
+  "filename": "GE1000_L.jpg",
+  "h": 30,
+  "mean_delta2": 0.0,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "GE1000",
+        "source": "base_name",
+        "text": "Grau umrandetes Quadrat. Horizontaler Farbverlauf (links weiss, rechts grau)"
+      },
+      {
+        "key": "GE1000_L",
+        "source": "variant_name",
+        "text": "Grau umrandetes Quadrat. Horizontaler Farbverlauf (links weiss, rechts grau)"
+      },
+      {
+        "key": "GE1000",
+        "source": "canonical_base",
+        "text": "Grau umrandetes Quadrat. Horizontaler Farbverlauf (links weiss, rechts grau)"
+      },
+      {
+        "key": "GE1000",
+        "source": "canonical_variant",
+        "text": "Grau umrandetes Quadrat. Horizontaler Farbverlauf (links weiss, rechts grau)"
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "GE1000_L"
+  },
+  "std_delta2": 0.0,
+  "variant": "GE1000_L",
+  "w": 30
+}

@@ -1,0 +1,36 @@
+{
+  "base": "L60X_TS",
+  "best_error": 0.023433333333333334,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 2.3433333333333335e-06,
+  "filename": "L60x_TS.jpg",
+  "h": 100,
+  "mean_delta2": 0.10369999706745148,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "L60x_TS",
+        "source": "base_name",
+        "text": "sehr komplexe Form, wahrscheinlich sehr schwierig zum nachzeichnen."
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "L60X_TS"
+  },
+  "std_delta2": 0.674348771572113,
+  "variant": "L60X_TS",
+  "w": 100
+}

@@ -1,0 +1,36 @@
+{
+  "base": "LOGO",
+  "best_error": 0.2562354660819879,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 8.512240584744797e-07,
+  "filename": "LOGO.JPG",
+  "h": 519,
+  "mean_delta2": 1.9634509086608887,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "LOGO",
+        "source": "base_name",
+        "text": "sehr komplexe Form, wahrscheinlich sehr schwierig zum nachzeichnen. Das ist eine Abbildung, welche auf dem Netz zu finden ist, jedoch verkleinert wurde. Es zeigt 6 kleine Bildschirme um einen zentralen grösseren Bildschrim. Der zentrale Bildschirm hat eine Tastatur und einen dunkelblauen Untergrund. Alle Bildeschirme sind parallel angeordnet."
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "LOGO"
+  },
+  "std_delta2": 10.7257719039917,
+  "variant": "LOGO",
+  "w": 580
+}

@@ -1,0 +1,53 @@
+{
+  "base": "DLG0001",
+  "best_error": 0.0,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.0,
+  "filename": "DLG0001.JPG",
+  "h": 1200,
+  "mean_delta2": 0.0,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "DLG0001",
+        "source": "base_name",
+        "text": "Wie AC0010: Heizelement, graues Rechteck, Plus-Minus-Zeichen oben links, Farbverlauf horizontal dunkel-hell-dunkel graue Diagonale oben rechts nach unten links. Geometrische Variante: identisch zur Referenz."
+      },
+      {
+        "key": "DLG0001",
+        "source": "variant_name",
+        "text": "Wie AC0010: Heizelement, graues Rechteck, Plus-Minus-Zeichen oben links, Farbverlauf horizontal dunkel-hell-dunkel graue Diagonale oben rechts nach unten links. Geometrische Variante: identisch zur Referenz."
+      },
+      {
+        "key": "DLG0001",
+        "source": "canonical_base",
+        "text": "Wie AC0010: Heizelement, graues Rechteck, Plus-Minus-Zeichen oben links, Farbverlauf horizontal dunkel-hell-dunkel graue Diagonale oben rechts nach unten links. Geometrische Variante: identisch zur Referenz."
+      },
+      {
+        "key": "DLG0001",
+        "source": "canonical_variant",
+        "text": "Wie AC0010: Heizelement, graues Rechteck, Plus-Minus-Zeichen oben links, Farbverlauf horizontal dunkel-hell-dunkel graue Diagonale oben rechts nach unten links. Geometrische Variante: identisch zur Referenz."
+      }
+    ],
+    "documented_alias_refs": [
+      "AC0010"
+    ],
+    "elements": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "DLG0001"
+  },
+  "std_delta2": 0.0,
+  "variant": "DLG0001",
+  "w": 1600
+}

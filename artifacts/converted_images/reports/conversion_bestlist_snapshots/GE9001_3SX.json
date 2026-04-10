@@ -1,0 +1,36 @@
+{
+  "base": "GE9001_3SX",
+  "best_error": 0.478405017921147,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.00012860349944116855,
+  "filename": "GE9001_3Sx.jpg",
+  "h": 60,
+  "mean_delta2": 9.519623756408691,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "GE9001_3Sx",
+        "source": "base_name",
+        "text": "stillisierte Röhre. Im Prinzip sehr dünnes Rechteck, hochkant, horizontaler Farbverlauf rot/grau/rot"
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "GE9001_3SX"
+  },
+  "std_delta2": 47.60188674926758,
+  "variant": "GE9001_3SX",
+  "w": 62
+}

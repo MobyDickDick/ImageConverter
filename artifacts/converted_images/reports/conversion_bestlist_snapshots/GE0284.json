@@ -1,0 +1,36 @@
+{
+  "base": "GE0284",
+  "best_error": 2.7770219198790627,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.0062971018591361965,
+  "filename": "GE0284.jpg",
+  "h": 21,
+  "mean_delta2": 63.587303161621094,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "GE0284",
+        "source": "base_name",
+        "text": "roter Kugelform (roter Kreis mit radialem Farbverlauf, aussen dunkel, innen hell)"
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "GE0284"
+  },
+  "std_delta2": 193.31324768066406,
+  "variant": "GE0284",
+  "w": 21
+}

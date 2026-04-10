@@ -1,0 +1,36 @@
+{
+  "base": "NAV0017",
+  "best_error": 1.0750617283950616,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.000796342021033379,
+  "filename": "NAV0017.JPG",
+  "h": 30,
+  "mean_delta2": 15.75851821899414,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "NAV0017",
+        "source": "base_name",
+        "text": "Hintergrund NAV0010. Schraubenschlüssel und Schraubendreher wie bei GE0349"
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "NAV0017"
+  },
+  "std_delta2": 50.93856430053711,
+  "variant": "NAV0017",
+  "w": 45
+}

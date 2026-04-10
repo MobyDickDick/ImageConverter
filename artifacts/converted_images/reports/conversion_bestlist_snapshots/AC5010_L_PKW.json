@@ -1,0 +1,36 @@
+{
+  "base": "AC5010_L_PKW",
+  "best_error": 0.6528584995251662,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 1.8599957251429235e-05,
+  "filename": "AC5010_L_PKW.jpg",
+  "h": 260,
+  "mean_delta2": 5.579885959625244,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "AC5010_L_PKW",
+        "source": "base_name",
+        "text": "Wassererhitzer (komplexe Zeichnung). Prinzip: Graues Rechteck, aber oben ein wenig rund, unten auch abgerudnet aber weniger. Innen eine weiße umrandung einer unten blaue, oben rotge Fläche, in der der Mitte Farbübergang. Innendrin 3 schematissche Heizspiralen."
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "AC5010_L_PKW"
+  },
+  "std_delta2": 16.65467071533203,
+  "variant": "AC5010_L_PKW",
+  "w": 135
+}

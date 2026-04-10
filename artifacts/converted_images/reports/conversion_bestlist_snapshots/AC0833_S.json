@@ -1,0 +1,61 @@
+{
+  "base": "AC0833",
+  "best_error": 21.237333333333332,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.056632888888888885,
+  "filename": "AC0833_S.jpg",
+  "h": 25,
+  "mean_delta2": 4444.3837890625,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "AC0833",
+        "source": "base_name",
+        "text": "Kelle mit senkrechtem Griff nach oben (oben am Kreis). Text im Kreis: CO² (2 als Superskript)."
+      },
+      {
+        "key": "AC0833_S",
+        "source": "variant_name",
+        "text": "Kelle mit senkrechtem Griff nach oben (oben am Kreis). Text im Kreis: CO² (2 als Superskript)."
+      },
+      {
+        "key": "AC0833",
+        "source": "canonical_base",
+        "text": "Kelle mit senkrechtem Griff nach oben (oben am Kreis). Text im Kreis: CO² (2 als Superskript)."
+      },
+      {
+        "key": "AC0833",
+        "source": "canonical_variant",
+        "text": "Kelle mit senkrechtem Griff nach oben (oben am Kreis). Text im Kreis: CO² (2 als Superskript)."
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [
+      "SEMANTIC: senkrechter Strich oben vom Kreis",
+      "SEMANTIC: Kreis + Buchstabe CO_2"
+    ],
+    "label": "CO_2",
+    "mode": "semantic_badge",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {
+      "description_heuristic": [
+        "SEMANTIC: Kreis + Buchstabe CO_2"
+      ],
+      "family_rule": [
+        "SEMANTIC: senkrechter Strich oben vom Kreis"
+      ]
+    },
+    "top_source_ref": null,
+    "variant_name": "AC0833_S"
+  },
+  "std_delta2": 9978.1376953125,
+  "variant": "AC0833_S",
+  "w": 15
+}

@@ -1,0 +1,24 @@
+run-meta: run_seed=671905962 pass_seed_offset=0 nonce_ns=1775302488236663600
+status=semantic_ok
+redraw_variation: seed=678762202633 changed_params=cx:15.000->15.081 | cy:15.000->15.072 | r:12.420->12.228 | stroke_circle:1.000->0.888
+semantic-guard: Text bewusst deaktiviert (plain-ring Familie ohne Buchstabe).
+Runde 1: elementweise Validierung gestartet
+circle: Fehler=101.793
+circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
+circle: Radius-Bracketing keine relevante Änderung (r: 12.420, best_err=101.793, full_err=20.309); Kandidaten=11.420->158.894, 12.420->101.793
+global-search: übersprungen (zu wenige aktive Parameter; benötigt >=4)
+Runde 1: Gesamtfehler=20.309
+stagnation_detected: keine relevante Geometrieänderung in der letzten Validierungsrunde
+switch_to_fallback_search: deaktiviere Circle-Geometry-Penalty für eine letzte Ausweichrunde
+Runde 2: elementweise Validierung gestartet
+circle: Fehler=101.793
+circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
+global-search: übersprungen (zu wenige aktive Parameter; benötigt >=4)
+Runde 2: Gesamtfehler=20.309
+stagnation_detected: identischer Parameter-Fingerprint und praktisch unveränderter Gesamtfehler
+stopped_due_to_stagnation: Validierung vorzeitig beendet
+circle: Farb-Stochastic-Survivor aktiviert (fill_gray=255, err=13265.000)
+circle: Farb-Bracketing fill_gray 242->255; Kandidaten=198->14365.000, 200->14309.000, 210->14074.000, 220->13827.000, 226->13688.000, 230->13593.000, 234->13497.000, 240->13347.000, 242->13311.000, 250->13285.000, 255->13265.000
+circle: Farb-Stochastic-Survivor aktiviert (stroke_gray=197, err=12250.000)
+circle: Farb-Bracketing stroke_gray 127->197; Kandidaten=95->14199.000, 96->14171.000, 111->13705.000, 112->13674.000, 119->13489.000, 127->13265.000, 128->13253.000, 135->13051.000, 143->12837.000, 144->12808.000, 152->12613.000, 159->12469.000, 160->12449.000, 171->12311.000, 198->12258.000
+circle: Farboptimierung in Abschlussphase angewendet

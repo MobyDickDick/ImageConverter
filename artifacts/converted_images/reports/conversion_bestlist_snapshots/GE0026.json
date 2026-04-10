@@ -1,0 +1,36 @@
+{
+  "base": "GE0026",
+  "best_error": 0.7431663226371427,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.0001394569943023349,
+  "filename": "GE0026.jpg",
+  "h": 73,
+  "mean_delta2": 7.0487895011901855,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "GE0026",
+        "source": "base_name",
+        "text": "Hintergrund: GE0999. Halt-Button (Quadreat)"
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "GE0026"
+  },
+  "std_delta2": 19.132917404174805,
+  "variant": "GE0026",
+  "w": 73
+}

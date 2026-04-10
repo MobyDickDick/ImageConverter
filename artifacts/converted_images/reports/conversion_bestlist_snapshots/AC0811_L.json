@@ -1,0 +1,119 @@
+{
+  "base": "AC0811",
+  "best_error": 4.614222222222222,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.00410153086419753,
+  "filename": "AC0811_L.jpg",
+  "h": 45,
+  "mean_delta2": 541.8319702148438,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "AC0811",
+        "source": "base_name",
+        "text": "Kelle mit Kreis oben und Griff nach unten."
+      },
+      {
+        "key": "AC0811_L",
+        "source": "variant_name",
+        "text": "Kelle mit Kreis oben und Griff nach unten."
+      },
+      {
+        "key": "AC0811",
+        "source": "canonical_base",
+        "text": "Kelle mit Kreis oben und Griff nach unten."
+      },
+      {
+        "key": "AC0811",
+        "source": "canonical_variant",
+        "text": "Kelle mit Kreis oben und Griff nach unten."
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [
+      "SEMANTIC: Kreis ohne Buchstabe",
+      "SEMANTIC: senkrechter Strich hinter dem Kreis"
+    ],
+    "label": "",
+    "mode": "semantic_badge",
+    "semantic_audit": {
+      "base_name": "AC0811",
+      "derived_elements": [
+        "SEMANTIC: Kreis ohne Buchstabe",
+        "SEMANTIC: senkrechter Strich hinter dem Kreis"
+      ],
+      "description_fragments": [
+        {
+          "key": "AC0811",
+          "source": "base_name",
+          "text": "Kelle mit Kreis oben und Griff nach unten."
+        },
+        {
+          "key": "AC0811_L",
+          "source": "variant_name",
+          "text": "Kelle mit Kreis oben und Griff nach unten."
+        },
+        {
+          "key": "AC0811",
+          "source": "canonical_base",
+          "text": "Kelle mit Kreis oben und Griff nach unten."
+        },
+        {
+          "key": "AC0811",
+          "source": "canonical_variant",
+          "text": "Kelle mit Kreis oben und Griff nach unten."
+        }
+      ],
+      "description_lookup_keys": [
+        "AC0811",
+        "AC0811_L",
+        "AC0811",
+        "AC0811"
+      ],
+      "description_text": "Kelle mit Kreis oben und Griff nach unten. Kelle mit Kreis oben und Griff nach unten. Kelle mit Kreis oben und Griff nach unten. Kelle mit Kreis oben und Griff nach unten.",
+      "filename": "AC0811_L.jpg",
+      "mismatch_reason": "",
+      "mismatch_reasons": [],
+      "recognized_description_elements": [
+        "Kelle mit Kreis oben und Griff nach unten.",
+        "Kelle mit Kreis oben und Griff nach unten.",
+        "Kelle mit Kreis oben und Griff nach unten.",
+        "Kelle mit Kreis oben und Griff nach unten."
+      ],
+      "semantic_conflicts": [],
+      "semantic_priority_order": [
+        "family_rule",
+        "layout_override",
+        "description_heuristic"
+      ],
+      "semantic_sources": {
+        "description_heuristic": [],
+        "family_rule": [
+          "SEMANTIC: Kreis ohne Buchstabe",
+          "SEMANTIC: senkrechter Strich hinter dem Kreis"
+        ]
+      },
+      "status": "semantic_ok"
+    },
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {
+      "description_heuristic": [],
+      "family_rule": [
+        "SEMANTIC: Kreis ohne Buchstabe",
+        "SEMANTIC: senkrechter Strich hinter dem Kreis"
+      ]
+    },
+    "top_source_ref": null,
+    "variant_name": "AC0811_L"
+  },
+  "std_delta2": 2448.126220703125,
+  "variant": "AC0811_L",
+  "w": 25
+}

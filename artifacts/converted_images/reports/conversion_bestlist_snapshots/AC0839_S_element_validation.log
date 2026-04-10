@@ -1,0 +1,65 @@
+run-meta: run_seed=1018056722 pass_seed_offset=0 nonce_ns=1775583188624200800
+status=semantic_ok
+redraw_variation: seed=1027403003566 changed_params=cx:8.000->7.833 | cy:7.500->7.481 | r:6.500->6.573 | stroke_circle:1.000->0.912 | arm_stroke:1.000->0.996
+semantic-guard: Textmodus aktiv (voc).
+small_variant_mode_active: reason=min_dim, min_dim=14.100, mask_dilate_px=1, text_mode=voc, arm_min_ratio=0.000, stem_min_ratio=0.000
+Runde 1: elementweise Validierung gestartet
+circle: Fehler=74.661
+circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
+circle: Mittelpunkt-Bracketing cx 9.600->8.000, cy 7.500->7.500 (best_err=51.591)
+circle: Radius-Bracketing r 7.050->6.500 (best_err=53.152, full_err=18.525); Kandidaten=6.345->50.567, 6.500->53.152, 7.000->51.591, 7.200->51.591
+arm: Fehler=52.965
+arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
+arm: Längen-Bracketing keine relevante Änderung (arm_len: 10.000); Kandidaten=7.500->58.150, 10.000->54.724, 12.000->54.724, 16.000->54.724, 20.500->54.724, 25.000->54.724
+text: Fehler=69.334
+text: Breiten-Stochastic-Survivor aktiviert (voc_font_scale=0.972, err=69.699)
+text: Breiten-Bracketing voc_font_scale 0.562->0.972; Kandidaten=0.900->72.494, 1.125->73.707, 1.350->76.042, 1.650->84.502, 1.950->91.287, 2.175->94.606, 2.400->99.044
+global-search: übersprungen (zu wenige aktive Parameter; benötigt >=4)
+Runde 1: Gesamtfehler=21.771
+Runde 2: elementweise Validierung gestartet
+circle: Fehler=51.522
+circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
+circle: Mittelpunkt-Bracketing keine relevante Änderung (cx=8.000, cy=7.500, best_err=51.522)
+circle: Radius-Bracketing r 6.500->7.000 (best_err=50.525, full_err=21.771); Kandidaten=6.072->66.410, 6.500->51.522, 7.000->50.525, 7.200->50.525
+arm: Fehler=50.885
+arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
+arm: Längen-Bracketing keine relevante Änderung (arm_len: 9.500); Kandidaten=7.000->56.718, 9.500->52.864, 11.500->52.864, 16.000->52.864, 20.500->52.864, 25.000->52.864
+text: Fehler=72.305
+text: Breiten-Bracketing voc_font_scale 0.972->1.118; Kandidaten=0.900->70.379, 0.972->72.305, 1.118->68.307, 1.125->70.490, 1.350->77.102, 1.650->85.710, 1.950->94.398, 2.175->95.380, 2.400->98.981
+global-search: übersprungen (zu wenige aktive Parameter; benötigt >=4)
+Runde 2: Gesamtfehler=23.661
+Runde 3: elementweise Validierung gestartet
+circle: Fehler=50.525
+circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
+circle: Mittelpunkt-Bracketing keine relevante Änderung (cx=8.000, cy=7.500, best_err=50.525)
+circle: Radius-Bracketing keine relevante Änderung (r: 7.000, best_err=50.525, full_err=23.661); Kandidaten=6.300->50.756, 7.000->50.525, 7.200->50.525
+arm: Fehler=50.885
+arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
+arm: Längen-Bracketing keine relevante Änderung (arm_len: 9.500); Kandidaten=7.000->56.718, 9.500->52.864, 11.500->52.864, 16.000->52.864, 20.500->52.864, 25.000->52.864
+text: Fehler=68.307
+text: Breiten-Bracketing keine relevante Änderung (voc_font_scale: 1.118); Kandidaten=0.900->70.379, 0.950->71.768, 1.118->68.307, 1.125->70.490, 1.286->77.152, 1.350->77.102, 1.650->85.710, 1.950->94.398, 2.175->95.380, 2.400->98.981
+global-search: übersprungen (zu wenige aktive Parameter; benötigt >=4)
+Runde 3: Gesamtfehler=23.661
+stagnation_detected: identischer Parameter-Fingerprint und praktisch unveränderter Gesamtfehler
+switch_to_fallback_search: deaktiviere Circle-Geometry-Penalty für eine letzte Ausweichrunde
+Runde 4: elementweise Validierung gestartet
+circle: Fehler=50.525
+circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
+arm: Fehler=50.885
+arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
+arm: Längen-Bracketing keine relevante Änderung (arm_len: 9.500); Kandidaten=7.000->56.718, 9.500->52.864, 11.500->52.864, 16.000->52.864, 20.500->52.864, 25.000->52.864
+text: Fehler=68.307
+text: Breiten-Bracketing keine relevante Änderung (voc_font_scale: 1.118); Kandidaten=0.900->70.379, 0.950->71.768, 1.118->68.307, 1.125->70.490, 1.286->77.152, 1.350->77.102, 1.650->85.710, 1.950->94.398, 2.175->95.380, 2.400->98.981
+global-search: übersprungen (zu wenige aktive Parameter; benötigt >=4)
+Runde 4: Gesamtfehler=23.661
+stagnation_detected: identischer Parameter-Fingerprint und praktisch unveränderter Gesamtfehler
+stopped_due_to_stagnation: Validierung vorzeitig beendet
+circle: Farb-Bracketing fill_gray 242->220; Kandidaten=200->6438.000, 204->6334.000, 210->6193.000, 220->6120.000, 226->6161.000, 230->6235.000, 234->6331.000, 240->6532.000, 242->6652.000, 250->7505.000, 255->8090.000
+circle: Farb-Bracketing stroke_gray 127->152; Kandidaten=95->7095.000, 96->7059.000, 111->6539.000, 112->6503.000, 119->6301.000, 127->6120.000, 128->6098.000, 135->5982.000, 143->5895.000, 144->5881.000, 152->5831.000, 159->5836.000, 160->5841.000, 171->5865.000, 204->6369.000
+circle: Farboptimierung in Abschlussphase angewendet
+arm: Farb-Bracketing stroke_gray 152->128; Kandidaten=96->58.558, 112->55.669, 120->54.224, 128->52.780, 136->54.298, 144->55.817, 152->59.257, 160->60.776, 168->62.294, 171->62.850, 184->65.313, 199->68.164
+arm: Farboptimierung in Abschlussphase angewendet
+text: Farb-Stochastic-Survivor aktiviert (text_gray=190, err=68.005)
+text: Farb-Bracketing text_gray 127->190; Kandidaten=95->72.969, 96->72.148, 111->71.246, 112->71.184, 119->70.318, 127->69.699, 128->69.652, 135->69.962, 143->68.835, 144->68.828, 152->68.543, 159->68.325, 160->68.311, 171->68.196, 199->68.053
+text: Farboptimierung in Abschlussphase angewendet
+semantic-guard: Erwartete Arm-Geometrie bestätigt/wiederhergestellt (z.B. AC0812 links).

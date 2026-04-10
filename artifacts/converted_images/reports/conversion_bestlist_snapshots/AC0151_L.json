@@ -1,0 +1,51 @@
+{
+  "base": "AC0151",
+  "best_error": 0.00032291666666666666,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 1.0091145833333333e-08,
+  "filename": "AC0151_L.jpg",
+  "h": 400,
+  "mean_delta2": 0.0009687499841675162,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "AC0151",
+        "source": "base_name",
+        "text": "Röhre oben und unten grau; vertikaler Verlauf von gelbgrün nach dunkelgrün. Gesamter Farbverlauf: links dunkel, Mitte hell, rechts dunkel (Röhreneffekt)"
+      },
+      {
+        "key": "AC0151_L",
+        "source": "variant_name",
+        "text": "Röhre oben und unten grau; vertikaler Verlauf von gelbgrün nach dunkelgrün. Gesamter Farbverlauf: links dunkel, Mitte hell, rechts dunkel (Röhreneffekt)"
+      },
+      {
+        "key": "AC0151",
+        "source": "canonical_base",
+        "text": "Röhre oben und unten grau; vertikaler Verlauf von gelbgrün nach dunkelgrün. Gesamter Farbverlauf: links dunkel, Mitte hell, rechts dunkel (Röhreneffekt)"
+      },
+      {
+        "key": "AC0151",
+        "source": "canonical_variant",
+        "text": "Röhre oben und unten grau; vertikaler Verlauf von gelbgrün nach dunkelgrün. Gesamter Farbverlauf: links dunkel, Mitte hell, rechts dunkel (Röhreneffekt)"
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "AC0151_L"
+  },
+  "std_delta2": 0.03110967017710209,
+  "variant": "AC0151_L",
+  "w": 80
+}

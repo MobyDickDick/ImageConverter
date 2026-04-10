@@ -1,0 +1,121 @@
+{
+  "base": "AC0813",
+  "best_error": 8.914285714285715,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.012734693877551021,
+  "filename": "AC0813_M.jpg",
+  "h": 35,
+  "mean_delta2": 1719.2142333984375,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "AC0813",
+        "source": "base_name",
+        "text": "Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 180° gedreht."
+      },
+      {
+        "key": "AC0813_M",
+        "source": "variant_name",
+        "text": "Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 180° gedreht."
+      },
+      {
+        "key": "AC0813",
+        "source": "canonical_base",
+        "text": "Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 180° gedreht."
+      },
+      {
+        "key": "AC0813",
+        "source": "canonical_variant",
+        "text": "Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 180° gedreht."
+      }
+    ],
+    "documented_alias_refs": [
+      "AC0811"
+    ],
+    "elements": [
+      "SEMANTIC: Kreis ohne Buchstabe",
+      "SEMANTIC: senkrechter Strich oben vom Kreis"
+    ],
+    "label": "",
+    "mode": "semantic_badge",
+    "semantic_audit": {
+      "base_name": "AC0813",
+      "derived_elements": [
+        "SEMANTIC: Kreis ohne Buchstabe",
+        "SEMANTIC: senkrechter Strich oben vom Kreis"
+      ],
+      "description_fragments": [
+        {
+          "key": "AC0813",
+          "source": "base_name",
+          "text": "Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 180° gedreht."
+        },
+        {
+          "key": "AC0813_M",
+          "source": "variant_name",
+          "text": "Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 180° gedreht."
+        },
+        {
+          "key": "AC0813",
+          "source": "canonical_base",
+          "text": "Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 180° gedreht."
+        },
+        {
+          "key": "AC0813",
+          "source": "canonical_variant",
+          "text": "Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 180° gedreht."
+        }
+      ],
+      "description_lookup_keys": [
+        "AC0813",
+        "AC0813_M",
+        "AC0813",
+        "AC0813"
+      ],
+      "description_text": "Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 180° gedreht. Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 180° gedreht. Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 180° gedreht. Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 180° gedreht.",
+      "filename": "AC0813_M.jpg",
+      "mismatch_reason": "",
+      "mismatch_reasons": [],
+      "recognized_description_elements": [
+        "Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 180° gedreht.",
+        "Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 180° gedreht.",
+        "Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 180° gedreht.",
+        "Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 180° gedreht."
+      ],
+      "semantic_conflicts": [],
+      "semantic_priority_order": [
+        "family_rule",
+        "layout_override",
+        "description_heuristic"
+      ],
+      "semantic_sources": {
+        "description_heuristic": [],
+        "family_rule": [
+          "SEMANTIC: Kreis ohne Buchstabe",
+          "SEMANTIC: senkrechter Strich oben vom Kreis"
+        ]
+      },
+      "status": "semantic_ok"
+    },
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {
+      "description_heuristic": [],
+      "family_rule": [
+        "SEMANTIC: Kreis ohne Buchstabe",
+        "SEMANTIC: senkrechter Strich oben vom Kreis"
+      ]
+    },
+    "top_source_ref": null,
+    "variant_name": "AC0813_M"
+  },
+  "std_delta2": 6911.69384765625,
+  "variant": "AC0813_M",
+  "w": 20
+}

@@ -1,0 +1,51 @@
+{
+  "base": "L60X_TSPF",
+  "best_error": 0.0302,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 3.0200000000000003e-06,
+  "filename": "L60x_TSPF.jpg",
+  "h": 100,
+  "mean_delta2": 0.13439999520778656,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "L60x_TSPF",
+        "source": "base_name",
+        "text": "sehr komplexe Form, wahrscheinlich sehr schwierig zum nachzeichnen."
+      },
+      {
+        "key": "L60x_TSPF",
+        "source": "variant_name",
+        "text": "sehr komplexe Form, wahrscheinlich sehr schwierig zum nachzeichnen."
+      },
+      {
+        "key": "L60X_TSPF",
+        "source": "canonical_base",
+        "text": "sehr komplexe Form, wahrscheinlich sehr schwierig zum nachzeichnen."
+      },
+      {
+        "key": "L60X_TSPF",
+        "source": "canonical_variant",
+        "text": "sehr komplexe Form, wahrscheinlich sehr schwierig zum nachzeichnen."
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "L60X_TSPF"
+  },
+  "std_delta2": 0.7837963104248047,
+  "variant": "L60X_TSPF",
+  "w": 100
+}
