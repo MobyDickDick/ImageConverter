@@ -26,8 +26,10 @@ def runInitialConversionPassImpl(
     for filename in process_files:
         row, failed = convert_one_fn(filename, iteration_budget=base_iterations, badge_rounds=6)
         if failed:
+            # Batchläufe sollen alle angeforderten Dateien abarbeiten und
+            # fehlerhafte Konvertierungen nur protokollieren.
             stop_after_failure = True
-            break
+            continue
         if row is None:
             continue
 

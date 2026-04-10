@@ -92,3 +92,68 @@ def test_convert_one_impl_semantic_mismatch_is_reported_as_failure(tmp_path: Pat
     assert failed is True
     assert batch_failures and batch_failures[0]["status"] == "semantic_mismatch"
     assert (tmp_path / "Failed_AC0838_S.svg").read_text(encoding="utf-8") == "<svg/>"
+
+
+def test_convert_one_impl_unknown_status_is_recorded_as_failure(tmp_path: Path) -> None:
+    reports = tmp_path / "reports"
+    reports.mkdir()
+    batch_failures: list[dict[str, str]] = []
+
+    row, failed = conversion_execution_helpers.convertOneImpl(
+        filename="AC0840_M.jpg",
+        folder_path=str(tmp_path),
+        csv_path="descriptions.csv",
+        iteration_budget=3,
+        badge_rounds=6,
+        svg_out_dir=str(tmp_path),
+        diff_out_dir=str(tmp_path),
+        reports_out_dir=str(reports),
+        debug_ac0811_dir=None,
+        debug_element_diff_dir=None,
+        run_iteration_pipeline_fn=lambda *_args, **_kwargs: None,
+        read_validation_log_details_fn=lambda _path: {"status": "non_composite_embedded_svg"},
+        render_svg_to_numpy_fn=lambda _svg, _w, _h: None,
+        calculate_delta2_stats_fn=lambda _img, _rendered: (0.0, 0.0),
+        get_base_name_from_file_fn=lambda stem: stem,
+        cv2_module=_Cv2Stub(None),
+        render_embedded_raster_svg_fn=lambda _path: "<svg/>",
+        append_batch_failure_fn=batch_failures.append,
+        print_fn=lambda _msg: None,
+    )
+
+    assert row is None
+    assert failed is True
+    assert batch_failures and batch_failures[0]["status"] == "non_composite_embedded_svg"
+    assert (tmp_path / "Failed_AC0840_M.svg").read_text(encoding="utf-8") == "<svg/>"
+
+
+def test_convert_one_impl_skipped_status_stays_non_failure(tmp_path: Path) -> None:
+    reports = tmp_path / "reports"
+    reports.mkdir()
+    batch_failures: list[dict[str, str]] = []
+
+    row, failed = conversion_execution_helpers.convertOneImpl(
+        filename="AC0999_X.jpg",
+        folder_path=str(tmp_path),
+        csv_path="descriptions.csv",
+        iteration_budget=3,
+        badge_rounds=6,
+        svg_out_dir=str(tmp_path),
+        diff_out_dir=str(tmp_path),
+        reports_out_dir=str(reports),
+        debug_ac0811_dir=None,
+        debug_element_diff_dir=None,
+        run_iteration_pipeline_fn=lambda *_args, **_kwargs: None,
+        read_validation_log_details_fn=lambda _path: {"status": "skipped_manual_review"},
+        render_svg_to_numpy_fn=lambda _svg, _w, _h: None,
+        calculate_delta2_stats_fn=lambda _img, _rendered: (0.0, 0.0),
+        get_base_name_from_file_fn=lambda stem: stem,
+        cv2_module=_Cv2Stub(None),
+        render_embedded_raster_svg_fn=lambda _path: "<svg/>",
+        append_batch_failure_fn=batch_failures.append,
+        print_fn=lambda _msg: None,
+    )
+
+    assert row is None
+    assert failed is False
+    assert batch_failures == []

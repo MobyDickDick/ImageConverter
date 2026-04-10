@@ -53,7 +53,7 @@ def runQualityPassesImpl(
             new_row, failed = convert_one_fn(filename, iteration_budget=adaptive_iteration_budget, badge_rounds=badge_rounds)
             if failed:
                 stop_after_failure = True
-                break
+                continue
             if new_row is None:
                 continue
 
@@ -88,7 +88,7 @@ def runQualityPassesImpl(
                 }
             )
 
-        if stop_after_failure or not improved_in_pass:
+        if not improved_in_pass:
             break
 
     return stop_after_failure

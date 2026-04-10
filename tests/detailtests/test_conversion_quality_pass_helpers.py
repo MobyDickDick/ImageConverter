@@ -83,3 +83,39 @@ def test_run_quality_passes_restores_snapshot_when_not_improved() -> None:
 
     assert stop is False
     assert restored == ["AC0838_M"]
+
+
+def test_run_quality_passes_continues_after_failed_candidate() -> None:
+    result_map = {
+        "AC0800_S.jpg": {"filename": "AC0800_S.jpg", "variant": "AC0800_S", "error_per_pixel": 0.8, "mean_delta2": 10.0},
+        "AC0801_S.jpg": {"filename": "AC0801_S.jpg", "variant": "AC0801_S", "error_per_pixel": 0.9, "mean_delta2": 11.0},
+    }
+
+    def _convert_one(filename: str, **_kwargs):
+        if filename == "AC0800_S.jpg":
+            return None, True
+        return ({"filename": filename, "variant": "AC0801_S", "error_per_pixel": 0.3, "mean_delta2": 4.0}, False)
+
+    stop = conversion_quality_pass_helpers.runQualityPassesImpl(
+        max_quality_passes=1,
+        stop_after_failure=False,
+        deterministic_order=True,
+        rng=object(),
+        base_iterations=5,
+        allowed_error_per_pixel=0.5,
+        skip_variants=set(),
+        result_map=result_map,
+        quality_logs=[],
+        conversion_bestlist_rows={},
+        convert_one_fn=_convert_one,
+        select_open_quality_cases_fn=lambda rows, **_kwargs: rows,
+        select_middle_lower_tercile_fn=lambda _rows: [],
+        iteration_strategy_for_pass_fn=lambda _pass_idx, _base: (7, 8),
+        adaptive_iteration_budget_for_quality_row_fn=lambda _row, planned: planned,
+        evaluate_quality_pass_candidate_fn=lambda _old, new: (True, "improved", 0.9, float(new["error_per_pixel"]), 11.0, 4.0),
+        store_conversion_bestlist_snapshot_fn=lambda _variant, _row: None,
+        restore_conversion_bestlist_snapshot_fn=lambda _variant: None,
+    )
+
+    assert stop is True
+    assert result_map["AC0801_S.jpg"]["error_per_pixel"] == 0.3
