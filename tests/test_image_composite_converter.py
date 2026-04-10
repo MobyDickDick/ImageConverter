@@ -5062,6 +5062,8 @@ def test_parse_description_marks_ac0223_as_semantic_badge() -> None:
     assert "SEMANTIC: Kreis ohne Buchstabe" in params["elements"]
     assert "SEMANTIC: senkrechter Strich oben vom Kreis" in params["elements"]
     assert "SEMANTIC: Ventilkopf mit drei Dreiecken oberhalb des Stiels" in params["elements"]
+    assert "SEMANTIC: Dreiecks-Spitzen treffen zentriert am oberen Stielende zusammen" in params["elements"]
+    assert "SEMANTIC: Drei Dreiecke sind zu einem Polygon vereint" in params["elements"]
 
 
 def test_make_badge_params_supports_ac0223_valve_head() -> None:
@@ -5072,6 +5074,9 @@ def test_make_badge_params_supports_ac0223_valve_head() -> None:
     assert params.get("head_style") == "ac0223_triple_valve"
     assert params.get("draw_text") is False
     assert params.get("arm_color") == "#136fad"
+    assert float(params.get("arm_x1", -1.0)) == float(params.get("head_hub_cx", -2.0))
+    assert float(params.get("arm_x2", -1.0)) == float(params.get("head_hub_cx", -2.0))
+    assert float(params.get("arm_y2", -1.0)) == float(params.get("head_hub_cy", -2.0))
 
 
 def test_generate_badge_svg_renders_ac0223_valve_head_gradient() -> None:
@@ -5085,6 +5090,8 @@ def test_generate_badge_svg_renders_ac0223_valve_head_gradient() -> None:
     assert "head_style" not in svg
     assert 'fill="url(#ac0223ValveGradient)"' in svg
     assert "#136fad" in svg
+    assert "<polygon" in svg
+    assert 'ellipse cx="25" cy="25.153"' in svg
 
 
 def test_parse_description_keeps_ac0814_family_rule_over_text_heuristic() -> None:
