@@ -25,7 +25,12 @@ def enforceCircleConnectorSymmetryImpl(params: dict, w: int, h: int) -> dict:
         y2 = float(p["arm_y2"])
 
         vertical = abs(x2 - x1) <= abs(y2 - y1)
-        if vertical:
+        if str(p.get("head_style", "")).lower() == "ac0223_triple_valve" and vertical:
+            # AC0223 uses a dedicated top valve-head anchor. Keep the fitted
+            # vertical span untouched so the stem reaches the valve center.
+            p["arm_x1"] = cx
+            p["arm_x2"] = cx
+        elif vertical:
             p["arm_x1"] = cx
             p["arm_x2"] = cx
             end_is_p2 = abs(y2 - cy) <= abs(y1 - cy)
