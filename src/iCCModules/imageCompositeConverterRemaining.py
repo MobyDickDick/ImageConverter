@@ -444,6 +444,29 @@ def _semanticQualityFlags(base_name: str, validation_logs: list[str]) -> list[st
         get_base_name_fn=getBaseNameFromFile,
     )
 
+
+def _looksLikeElongatedForegroundRect(img, *, white_threshold: int = 245) -> bool:
+    if img is None or np is None:
+        return False
+    h, w = img.shape[:2]
+    if h <= 0 or w <= 0:
+        return False
+    mask = (img < int(white_threshold)).any(axis=2)
+    ys, xs = np.where(mask)
+    if len(xs) == 0 or len(ys) == 0:
+        return False
+    x0 = int(xs.min())
+    x1 = int(xs.max())
+    y0 = int(ys.min())
+    y1 = int(ys.max())
+    bw = x1 - x0 + 1
+    bh = y1 - y0 + 1
+    if bw <= 0 or bh <= 0:
+        return False
+    aspect = float(max(bw, bh)) / max(1.0, float(min(bw, bh)))
+    fill_ratio = float(np.count_nonzero(mask[y0 : y1 + 1, x0 : x1 + 1])) / float(max(1, bw * bh))
+    return bool(aspect >= 3.2 and fill_ratio >= 0.45)
+
 def runIterationPipeline(
     img_path: str,
     csv_path: str,
@@ -481,6 +504,10 @@ def runIterationPipeline(
 
     ref = Reflection(perc.raw_desc)
     desc, params = ref.parse_description(perc.base_name, filename)
+    stripe_strategy = gradient_stripe_strategy_helpers.detectGradientStripeStrategyImpl(
+        perc.img,
+        np_module=np,
+    )
     semantic_audit_targets = {"AC0811", "AC0812", "AC0813", "AC0814"}
     semantic_audit_row: dict[str, object] | None = None
     if getBaseNameFromFile(perc.base_name).upper() in semantic_audit_targets:
@@ -554,6 +581,21 @@ def runIterationPipeline(
             rendered_img=rendered_img,
             diff_img=diff_img,
             failed=failed,
+        )
+
+    elongated_rect_geometry = _looksLikeElongatedForegroundRect(perc.img)
+    semantic_mode_visual_override = params["mode"] == "semantic_badge" and (
+        stripe_strategy is not None or elongated_rect_geometry
+    )
+    if semantic_mode_visual_override:
+        params = copy.deepcopy(params)
+        params["mode"] = "non_composite_visual_override"
+        params["visual_override_reason"] = (
+            "gradient_stripe_geometry_detected" if stripe_strategy is not None else "elongated_rect_geometry_detected"
+        )
+        print(
+            "  -> Geometrie-Override: Semantik deutet auf Badge, "
+            "Bildinhalt ist jedoch eine längliche rechteckige Geometrie."
         )
 
     if params["mode"] == "semantic_badge":
@@ -741,17 +783,18 @@ def runIterationPipeline(
             )
             return None
         else:
-            stripe_strategy = gradient_stripe_strategy_helpers.detectGradientStripeStrategyImpl(
-                perc.img,
-                np_module=np,
-            )
             if stripe_strategy:
                 print("  -> Kein Compositing-Befehl erkannt: verwende Gradient-Stripe-Strategie.")
                 svg_content = gradient_stripe_strategy_helpers.buildGradientStripeSvgImpl(w, h, stripe_strategy)
                 strategy_stop_count = len(list(stripe_strategy.get("stops", [])))
+                log_status = (
+                    "non_composite_gradient_stripe_visual_override"
+                    if semantic_mode_visual_override
+                    else "non_composite_gradient_stripe"
+                )
                 _writeValidationLog(
                     [
-                        "status=non_composite_gradient_stripe",
+                        f"status={log_status}",
                         f"strategy=gradient_stripe;stop_count={strategy_stop_count}",
                     ]
                 )

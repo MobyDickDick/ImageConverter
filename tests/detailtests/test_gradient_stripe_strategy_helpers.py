@@ -47,3 +47,13 @@ def test_build_gradient_stripe_svg_renders_gradient_stops() -> None:
     assert 'offset="40.000%" stop-color="#445566"' in svg
     assert 'offset="100.000%" stop-color="#778899"' in svg
     assert 'rect x="1.0000" y="2.0000" width="30.0000" height="4.0000"' in svg
+
+
+def test_detect_gradient_stripe_strategy_skips_tiny_canvas_height() -> None:
+    img = np.full((6, 80, 3), 255, dtype=np.uint8)
+    for x in range(8, 72):
+        img[2:4, x] = np.array([170, 180, 190], dtype=np.uint8)
+
+    strategy = helpers.detectGradientStripeStrategyImpl(img, np_module=np)
+
+    assert strategy is None
