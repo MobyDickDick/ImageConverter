@@ -173,6 +173,15 @@ def finalizeAc08StyleImpl(
                 width_fill_floor,
             )
         )
+        if symbol_name == "AC0838" and str(p.get("text_mode", "")).lower() == "voc":
+            # AC0838_M often underfits the ring to satisfy noisy masks around the
+            # vertical connector. Keep the circle close to template scale so the
+            # VOC badge does not collapse visibly below the source glyph.
+            ac0838_radius_floor = max(1.0, template_r * 0.96)
+            p["min_circle_radius"] = float(max(float(p.get("min_circle_radius", 1.0)), ac0838_radius_floor))
+            p["circle_radius_lower_bound_px"] = float(
+                max(float(p.get("circle_radius_lower_bound_px", 1.0)), ac0838_radius_floor)
+            )
 
         if not has_connector:
             p["lock_circle_cx"] = True
