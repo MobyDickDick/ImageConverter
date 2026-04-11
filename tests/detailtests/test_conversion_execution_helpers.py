@@ -178,6 +178,7 @@ def test_convert_one_impl_skipped_status_stays_non_failure(tmp_path: Path) -> No
     assert row is None
     assert failed is False
     assert batch_failures == []
+    assert (tmp_path / "AC0999_X.svg").read_text(encoding="utf-8") == "<svg/>"
 
 
 def test_convert_one_impl_non_composite_success_renames_svg_to_failed_prefix(tmp_path: Path) -> None:
@@ -264,6 +265,49 @@ def test_convert_one_impl_embedded_svg_uses_failed_prefix_independent_of_status(
     assert row is not None
     assert (svg_out / "Failed_AC0805_M.svg").exists()
     assert not (svg_out / "AC0805_M.svg").exists()
+
+
+def test_convert_one_impl_skipped_status_with_result_keeps_normal_svg_name(tmp_path: Path) -> None:
+    folder = tmp_path / "images"
+    svg_out = tmp_path / "svg"
+    diff_out = tmp_path / "diff"
+    reports = tmp_path / "reports"
+    for path in (folder, svg_out, diff_out, reports):
+        path.mkdir()
+
+    filename = "AC0503_1M_sia.jpeg"
+    (folder / filename).write_bytes(b"fake")
+    (svg_out / "AC0503_1M_sia.svg").write_text(
+        '<svg xmlns="http://www.w3.org/2000/svg"><image href="data:image/jpeg;base64,/9j/4AAQ"/></svg>',
+        encoding="utf-8",
+    )
+
+    row, failed = conversion_execution_helpers.convertOneImpl(
+        filename=filename,
+        folder_path=str(folder),
+        csv_path="descriptions.csv",
+        iteration_budget=3,
+        badge_rounds=5,
+        svg_out_dir=str(svg_out),
+        diff_out_dir=str(diff_out),
+        reports_out_dir=str(reports),
+        debug_ac0811_dir=None,
+        debug_element_diff_dir=None,
+        run_iteration_pipeline_fn=lambda *_args, **_kwargs: ("AC0503_1M_sia", "desc", {"mode": "semantic_badge"}, 1, 1.0),
+        read_validation_log_details_fn=lambda _path: {"status": "skipped_manual_review", "convergence": "n/a"},
+        render_svg_to_numpy_fn=lambda _svg, _w, _h: object(),
+        calculate_delta2_stats_fn=lambda _img, _rendered: (0.1, 0.0),
+        get_base_name_from_file_fn=lambda stem: stem.split("_")[0],
+        cv2_module=_Cv2Stub(_ImageStub((8, 6, 3))),
+        render_embedded_raster_svg_fn=lambda _path: "<svg/>",
+        append_batch_failure_fn=lambda _row: None,
+        print_fn=lambda _msg: None,
+    )
+
+    assert row is None
+    assert failed is False
+    assert (svg_out / "AC0503_1M_sia.svg").exists()
+    assert not (svg_out / "Failed_AC0503_1M_sia.svg").exists()
 
 
 def test_convert_one_impl_trivial_placeholder_svg_is_marked_failed(tmp_path: Path) -> None:

@@ -187,6 +187,31 @@ def test_mark_poor_conversions_detects_embedded_raster_for_lowercase_variant_nam
     assert not (svg_dir / "b_info.svg").exists()
 
 
+def test_mark_poor_conversions_keeps_skipped_manual_review_svg_name(tmp_path):
+    svg_dir = tmp_path / "svg"
+    svg_dir.mkdir()
+    (svg_dir / "AC0503_1M_sia.svg").write_text(
+        '<svg xmlns="http://www.w3.org/2000/svg"><image href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD"/></svg>',
+        encoding="utf-8",
+    )
+    reports_dir = tmp_path / "reports"
+    reports_dir.mkdir()
+    (reports_dir / "successful_conversions.txt").write_text("", encoding="utf-8")
+    (reports_dir / "AC0503_1M_sia_element_validation.log").write_text(
+        "status=skipped_manual_review\n",
+        encoding="utf-8",
+    )
+
+    finalization_helpers._markPoorConversionsWithFailedPrefix(
+        svg_out_dir=str(svg_dir),
+        result_map={},
+        reports_out_dir=str(reports_dir),
+    )
+
+    assert (svg_dir / "AC0503_1M_sia.svg").exists()
+    assert not (svg_dir / "Failed_AC0503_1M_SIA.svg").exists()
+
+
 def test_mark_poor_conversions_removes_stale_failed_svg_after_successful_result(tmp_path):
     svg_dir = tmp_path / "svg"
     svg_dir.mkdir()

@@ -16,8 +16,9 @@ def _ensureOutputArtifacts(
     *,
     svg_path: str,
     diff_path: str,
+    create_svg_fallback: bool = True,
 ) -> None:
-    if not os.path.exists(svg_path):
+    if create_svg_fallback and not os.path.exists(svg_path):
         width = 1
         height = 1
         svg_fallback = (
@@ -29,6 +30,29 @@ def _ensureOutputArtifacts(
     if not os.path.exists(diff_path):
         with open(diff_path, "wb") as diff_file:
             diff_file.write(_ONE_BY_ONE_TRANSPARENT_PNG)
+
+
+def _ensureEmbeddedSvgAtPath(
+    *,
+    svg_path: str,
+    image_path: str,
+    render_embedded_raster_svg_fn,
+    print_fn=print,
+) -> bool:
+    if os.path.exists(svg_path) and not _svgIsTrivialFallbackArtifact(svg_path):
+        return True
+    try:
+        svg_content = render_embedded_raster_svg_fn(image_path)
+    except Exception as exc:  # noqa: BLE001 - skipped variants must not break the batch flow.
+        print_fn(f"[WARN] {os.path.basename(image_path)}: Konnte Embedded-SVG für Skip-Status nicht erzeugen ({type(exc).__name__}: {exc})")
+        return False
+    try:
+        with open(svg_path, "w", encoding="utf-8") as svg_file:
+            svg_file.write(svg_content)
+        return True
+    except OSError as exc:
+        print_fn(f"[WARN] {os.path.basename(image_path)}: Konnte Embedded-SVG für Skip-Status nicht schreiben ({type(exc).__name__}: {exc})")
+        return False
 
 
 def _resolveFailureSvgPath(default_svg_path: str, failed_svg_path: str | None) -> str:
@@ -211,7 +235,13 @@ def convertOneImpl(
             print_fn(f"[WARN] {filename}: Semantischer Fehlmatch, Batchlauf stoppt nach diesem Fehler.")
             return None, True
         if status.startswith("skipped_"):
-            _ensureOutputArtifacts(svg_path=svg_path, diff_path=diff_path)
+            _ensureEmbeddedSvgAtPath(
+                svg_path=svg_path,
+                image_path=image_path,
+                render_embedded_raster_svg_fn=render_embedded_raster_svg_fn,
+                print_fn=print_fn,
+            )
+            _ensureOutputArtifacts(svg_path=svg_path, diff_path=diff_path, create_svg_fallback=False)
             return None, False
 
         failed_svg_path = _writeFailedEmbeddedSvgArtifact(
@@ -250,6 +280,16 @@ def convertOneImpl(
 
     _base, _desc, params, best_iter, best_error = res
     details = read_validation_log_details_fn(log_file)
+    status = str(details.get("status", ""))
+    if status.startswith("skipped_"):
+        _ensureEmbeddedSvgAtPath(
+            svg_path=svg_path,
+            image_path=image_path,
+            render_embedded_raster_svg_fn=render_embedded_raster_svg_fn,
+            print_fn=print_fn,
+        )
+        _ensureOutputArtifacts(svg_path=svg_path, diff_path=diff_path, create_svg_fallback=False)
+        return None, False
     failed_svg_path = os.path.join(svg_out_dir, f"Failed_{base}.svg")
     has_svg = os.path.exists(svg_path)
     should_use_failed_name = has_svg and (
