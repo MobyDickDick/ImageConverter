@@ -190,12 +190,12 @@ def makeAc08BadgeParamsImpl(
         )
 
     if name == "AC0838":
-        # AC0838 is part of the right-arm VOC family (same geometry class as
-        # AC0814/AC0839), not the top-stem family.
-        defaults = apply_voc_label_fn(default_ac0814_params_fn(w, h))
+        # AC0838 mirrors AC0836 into the "vertical connector above circle"
+        # geometry class (same family as AC0813/AC0833) while keeping VOC text.
+        defaults = apply_voc_label_fn(default_ac0813_params_fn(w, h))
         if img is None:
             return finalize_ac08_style_fn(name, defaults)
-        return finalize_ac08_style_fn(name, fit_ac0814_params_from_image_fn(img, defaults))
+        return finalize_ac08_style_fn(name, fit_ac0813_params_from_image_fn(img, defaults))
 
     if name == "AC0839":
         defaults = apply_voc_label_fn(default_ac0814_params_fn(w, h))

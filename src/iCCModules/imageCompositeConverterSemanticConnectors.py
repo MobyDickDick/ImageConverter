@@ -110,6 +110,6 @@ def enforceSemanticConnectorExpectationImpl(
 
     if normalized_base in {"AC0812", "AC0837", "AC0882"} or expects_left_arm:
         return enforce_left_fn(params)
-    if normalized_base in {"AC0810", "AC0814", "AC0834", "AC0838", "AC0839"} or expects_right_arm:
+    if normalized_base in {"AC0810", "AC0814", "AC0834", "AC0839"} or expects_right_arm:
         return enforce_right_fn(params)
     return params
