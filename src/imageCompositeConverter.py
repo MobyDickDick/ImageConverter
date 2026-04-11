@@ -996,6 +996,7 @@ class Action:
             defaults,
             fit_semantic_badge_from_image_fn=Action._fit_semantic_badge_from_image,
             clip_scalar_fn=Action._clipScalar,
+            enforce_directional_circle_side_fn=semantic_fitting_helpers.enforceDirectionalCircleSideImpl,
             normalize_light_circle_colors_fn=Action._normalizeLightCircleColors,
         )
 
@@ -1021,6 +1022,7 @@ class Action:
             defaults,
             fit_semantic_badge_from_image_fn=Action._fit_semantic_badge_from_image,
             clip_scalar_fn=Action._clipScalar,
+            enforce_directional_circle_side_fn=semantic_fitting_helpers.enforceDirectionalCircleSideImpl,
             normalize_light_circle_colors_fn=Action._normalizeLightCircleColors,
         )
 
@@ -1724,6 +1726,11 @@ class Action:
             normalize_base_name_fn=getBaseNameFromFile,
             enforce_left_fn=lambda p: Action._enforceLeftArmBadgeGeometry(p, w, h),
             enforce_right_fn=lambda p: Action._enforceRightArmBadgeGeometry(p, w, h),
+            enforce_top_fn=lambda p: semantic_connector_helpers.enforceTopStemBadgeGeometryImpl(
+                p,
+                h=h,
+                ac08_stroke_width_px=Action.AC08_STROKE_WIDTH_PX,
+            ),
         )
 
     @staticmethod

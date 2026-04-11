@@ -51,12 +51,15 @@ def fitAc0813ParamsFromImageImpl(
     *,
     fit_semantic_badge_from_image_fn,
     clip_scalar_fn,
+    enforce_directional_circle_side_fn,
     normalize_light_circle_colors_fn,
 ) -> dict:
     """Fit AC0813 while keeping the vertical arm anchored to the upper edge."""
     params = fit_semantic_badge_from_image_fn(img, defaults)
     h, w = img.shape[:2]
     aspect_ratio = (float(h) / float(w)) if w > 0 else 1.0
+
+    params = enforce_directional_circle_side_fn(params, defaults, w, h)
 
     raw_arm_stroke = float(params.get("arm_stroke", defaults.get("arm_stroke", max(1.0, float(w) * 0.10))))
     cx = float(params.get("cx", defaults.get("cx", float(w) / 2.0)))
@@ -149,12 +152,15 @@ def fitAc0814ParamsFromImageImpl(
     *,
     fit_semantic_badge_from_image_fn,
     clip_scalar_fn,
+    enforce_directional_circle_side_fn,
     normalize_light_circle_colors_fn,
 ) -> dict:
     """Fit AC0814 while keeping the horizontal arm anchored to the right edge."""
     params = fit_semantic_badge_from_image_fn(img, defaults)
     h, w = img.shape[:2]
     aspect_ratio = (float(w) / float(h)) if h > 0 else 1.0
+
+    params = enforce_directional_circle_side_fn(params, defaults, w, h)
 
     raw_arm_stroke = float(params.get("arm_stroke", defaults.get("arm_stroke", max(1.0, float(h) * 0.10))))
     cx = float(params.get("cx", defaults.get("cx", float(w) / 2.0)))
