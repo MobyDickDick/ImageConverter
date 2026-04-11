@@ -92,6 +92,32 @@ def test_tune_vertical_connector_family_sets_text_and_stem_defaults():
     assert tuned["co2_font_scale_min"] >= 0.78
 
 
+def test_tune_vertical_connector_family_treats_ac0838_as_top_arm_variant():
+    def _enforce_vertical(params: dict, _w: int, _h: int):
+        patched = dict(params)
+        patched["geometry_enforced"] = True
+        return patched
+
+    tuned = helpers.tuneAc08VerticalConnectorFamilyImpl(
+        "AC0838_M",
+        {
+            "template_circle_cx": 8,
+            "template_circle_cy": 8,
+            "template_circle_radius": 7,
+            "text_mode": "voc",
+            "voc_font_scale": 0.52,
+        },
+        get_base_name_from_file_fn=_base_name,
+        is_ac08_small_variant_fn=lambda *_: (False, "", 20.0),
+        enforce_vertical_connector_badge_geometry_fn=_enforce_vertical,
+    )
+
+    assert tuned["connector_family_direction"] == "vertical"
+    assert tuned["arm_enabled"] is True
+    assert tuned["lock_arm_center_to_circle"] is True
+    assert tuned["geometry_enforced"] is True
+
+
 def test_tune_circle_text_family_applies_voc_bounds_for_small_badges():
     tuned = helpers.tuneAc08CircleTextFamilyImpl(
         "AC0835_S",

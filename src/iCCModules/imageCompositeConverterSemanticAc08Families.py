@@ -190,7 +190,7 @@ def tuneAc08RightConnectorFamilyImpl(
     """Apply shared guardrails for mirrored right-connector AC08 families."""
     p = dict(params)
     symbol_name = get_base_name_from_file_fn(str(name)).upper().split("_", 1)[0]
-    if symbol_name not in {"AC0810", "AC0814", "AC0834", "AC0838", "AC0839"}:
+    if symbol_name not in {"AC0810", "AC0814", "AC0834", "AC0839"}:
         return p
 
     p["connector_family_group"] = "ac08_right_connector"
@@ -268,7 +268,7 @@ def tuneAc08VerticalConnectorFamilyImpl(
     """Apply shared guardrails for AC08 families with vertical connectors."""
     p = dict(params)
     symbol_name = get_base_name_from_file_fn(str(name)).upper().split("_", 1)[0]
-    if symbol_name not in {"AC0811", "AC0813", "AC0831", "AC0833", "AC0836", "AC0881"}:
+    if symbol_name not in {"AC0811", "AC0813", "AC0831", "AC0833", "AC0836", "AC0838", "AC0881"}:
         return p
 
     p["connector_family_group"] = "ac08_vertical_connector"
@@ -276,7 +276,7 @@ def tuneAc08VerticalConnectorFamilyImpl(
     if symbol_name in {"AC0811", "AC0831", "AC0836", "AC0881"}:
         p["stem_enabled"] = True
         p.pop("arm_enabled", None)
-    elif symbol_name in {"AC0813", "AC0833"}:
+    elif symbol_name in {"AC0813", "AC0833", "AC0838"}:
         p["arm_enabled"] = True
     p["lock_circle_cx"] = True
     p["lock_circle_cy"] = True

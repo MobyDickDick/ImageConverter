@@ -57,3 +57,16 @@ def test_enforce_semantic_connector_expectation_routes_to_left_and_right_handler
     assert left["route"] == "left"
     assert right["route"] == "right"
     assert called == {"left": 1, "right": 1}
+
+
+def test_enforce_semantic_connector_expectation_does_not_force_right_for_ac0838_without_hint() -> None:
+    result = semantic_connector_helpers.enforceSemanticConnectorExpectationImpl(
+        "AC0838_M.jpg",
+        ["SEMANTIC: senkrechter Strich oben vom Kreis"],
+        {"route": "unchanged"},
+        normalize_base_name_fn=lambda name: name.split("_")[0],
+        enforce_left_fn=lambda p: {**p, "route": "left"},
+        enforce_right_fn=lambda p: {**p, "route": "right"},
+    )
+
+    assert result["route"] == "unchanged"
