@@ -124,10 +124,53 @@ def finalizeAc08StyleImpl(
         template_floor_ratio = 0.90 if has_text else 0.92
         if has_connector:
             template_floor_ratio = max(template_floor_ratio, 0.93)
+        width_fill_floor = 1.0
+        if has_connector and has_text and p.get("arm_enabled"):
+            # Vertical top/bottom connector families (e.g. AC0813/AC0833/AC0838)
+            # usually use a near full-width circle. Enforce a geometric lower
+            # bound from the available lateral clearance so weak-mask fits do not
+            # collapse to undersized circles.
+            arm_x1 = float(p.get("arm_x1", p.get("cx", 0.0)))
+            arm_x2 = float(p.get("arm_x2", arm_x1))
+            cx_now = float(p.get("cx", 0.0))
+            cy_now = float(p.get("cy", 0.0))
+            canvas_w = float(p.get("width", p.get("badge_width", 0.0)) or 0.0)
+            canvas_h = float(p.get("height", p.get("badge_height", 0.0)) or 0.0)
+            stroke = max(0.0, float(p.get("stroke_circle", 0.0)))
+            is_vertical_connector = abs(arm_x1 - arm_x2) <= max(0.25, stroke * 0.6)
+            if canvas_w <= 0.0:
+                template_cx = float(p.get("template_circle_cx", cx_now))
+                template_r = float(p.get("template_circle_radius", p.get("r", 1.0)))
+                canvas_w = max(
+                    0.0,
+                    float(p.get("arm_x1", 0.0)),
+                    float(p.get("arm_x2", 0.0)),
+                    cx_now + template_r + (stroke / 2.0),
+                    template_cx * 2.0,
+                    cx_now * 2.0,
+                )
+            if canvas_h <= 0.0:
+                template_cy = float(p.get("template_circle_cy", cy_now))
+                template_r = float(p.get("template_circle_radius", p.get("r", 1.0)))
+                arm_y1 = float(p.get("arm_y1", 0.0))
+                arm_y2 = float(p.get("arm_y2", 0.0))
+                canvas_h = max(
+                    0.0,
+                    cy_now + template_r + (stroke / 2.0),
+                    template_cy + template_r + (stroke / 2.0),
+                    arm_y1,
+                    arm_y2,
+                    max(arm_y1, arm_y2) + template_r,
+                )
+            if is_vertical_connector and canvas_w > 0.0 and canvas_h > 0.0 and cx_now > 0.0 and cy_now > 0.0:
+                lateral_clearance = max(1.0, min(cx_now, canvas_w - cx_now) - (stroke / 2.0))
+                vertical_clearance = max(1.0, min(cy_now, canvas_h - cy_now) - (stroke / 2.0))
+                width_fill_floor = max(1.0, min(lateral_clearance, vertical_clearance))
         p["circle_radius_lower_bound_px"] = float(
             max(
                 float(p.get("circle_radius_lower_bound_px", 1.0)),
                 max(1.0, template_r * template_floor_ratio),
+                width_fill_floor,
             )
         )
 

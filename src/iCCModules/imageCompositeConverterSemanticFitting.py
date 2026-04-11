@@ -28,14 +28,36 @@ def stabilizeSemanticCirclePoseImpl(params: dict, defaults: dict, w: int, h: int
         params["lock_circle_cy"] = True
         return params
 
-    cx_tolerance = max(1.5, float(min(w, h)) * 0.18)
-    cy_tolerance = max(1.5, float(min(w, h)) * 0.18)
+    min_side = float(min(w, h))
+    cx_tolerance = max(1.5, min_side * 0.18)
+    cy_tolerance = max(1.5, min_side * 0.18)
+    min_radius_ratio = 0.80
+    max_radius_ratio = 1.45
+
+    if has_text:
+        # Connector+text badges are more drift-prone because partial text/ring
+        # evidence can dominate local losses; keep the pose close to template.
+        cx_tolerance = min(cx_tolerance, max(0.9, min_side * 0.10))
+        cy_tolerance = min(cy_tolerance, max(1.1, min_side * 0.12))
+        min_radius_ratio = max(min_radius_ratio, 0.90)
+        max_radius_ratio = min(max_radius_ratio, 1.20)
+
+        arm_x1 = float(params.get("arm_x1", default_cx))
+        arm_x2 = float(params.get("arm_x2", default_cx))
+        stroke = max(0.0, float(params.get("stroke_circle", defaults.get("stroke_circle", 1.0))))
+        is_vertical_connector = abs(arm_x1 - arm_x2) <= max(0.25, stroke * 0.6)
+        if is_vertical_connector:
+            cx_tolerance = min(cx_tolerance, max(0.45, min_side * 0.03))
+            cy_tolerance = min(cy_tolerance, max(0.8, min_side * 0.06))
+            min_radius_ratio = max(min_radius_ratio, 0.93)
+            max_radius_ratio = min(max_radius_ratio, 1.15)
+
     current_cx = float(params.get("cx", default_cx))
     current_cy = float(params.get("cy", default_cy))
     params["cx"] = float(max(default_cx - cx_tolerance, min(default_cx + cx_tolerance, current_cx)))
     params["cy"] = float(max(default_cy - cy_tolerance, min(default_cy + cy_tolerance, current_cy)))
-    min_radius = max(1.0, default_r * 0.80)
-    max_radius = max(min_radius, default_r * 1.45)
+    min_radius = max(1.0, default_r * min_radius_ratio)
+    max_radius = max(min_radius, default_r * max_radius_ratio)
     current_r = float(params.get("r", default_r))
     params["r"] = float(max(min_radius, min(max_radius, current_r)))
     return params
