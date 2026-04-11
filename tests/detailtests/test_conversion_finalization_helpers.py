@@ -253,6 +253,27 @@ def test_mark_poor_conversions_renames_trivial_white_fallback_svg(tmp_path):
     assert not (svg_dir / "GE0111_S.svg").exists()
 
 
+def test_mark_poor_conversions_renames_image_only_svg_without_detectable_raster_href(tmp_path):
+    svg_dir = tmp_path / "svg"
+    svg_dir.mkdir()
+    (svg_dir / "AC0414_2_M.svg").write_text(
+        '<svg xmlns="http://www.w3.org/2000/svg"><image href="cid:inline-asset"/></svg>',
+        encoding="utf-8",
+    )
+    reports_dir = tmp_path / "reports"
+    reports_dir.mkdir()
+    (reports_dir / "successful_conversions.txt").write_text("", encoding="utf-8")
+
+    finalization_helpers._markPoorConversionsWithFailedPrefix(
+        svg_out_dir=str(svg_dir),
+        result_map={},
+        reports_out_dir=str(reports_dir),
+    )
+
+    assert (svg_dir / "Failed_AC0414_2_M.svg").exists()
+    assert not (svg_dir / "AC0414_2_M.svg").exists()
+
+
 def test_canonicalize_failed_attempt_svg_names_from_suffix_format(tmp_path):
     svg_dir = tmp_path / "svg"
     svg_dir.mkdir()
