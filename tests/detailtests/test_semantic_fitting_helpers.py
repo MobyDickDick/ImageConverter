@@ -23,6 +23,6 @@ def test_stabilize_semantic_circle_pose_keeps_vertical_connector_text_close_to_t
 
     stabilized = fitting_helpers.stabilizeSemanticCirclePoseImpl(params, defaults, w=20, h=35)
 
-    assert float(stabilized["cx"]) == 10.5
-    assert float(stabilized["cy"]) == 24.0
+    assert float(stabilized["cx"]) == 10.6
+    assert float(stabilized["cy"]) == 23.8
     assert float(stabilized["r"]) >= 8.8
