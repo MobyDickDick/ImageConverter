@@ -1,68 +1,66 @@
-run-meta: run_seed=298714960 pass_seed_offset=0 nonce_ns=1775937282407985200
+run-meta: run_seed=680442808 pass_seed_offset=0 nonce_ns=1775939451669471000
 status=semantic_ok
-redraw_variation: seed=302379534757 changed_params=cx:25.000->25.310 | cy:57.000->56.929 | r:21.500->21.348 | stroke_circle:2.000->2.099 | arm_stroke:2.000->1.885
+redraw_variation: seed=686804034399 changed_params=cx:25.000->25.401 | cy:57.500->57.485 | r:21.500->21.584 | stroke_circle:2.000->2.100 | arm_stroke:2.000->1.913
 semantic-guard: Text bewusst deaktiviert (plain-ring Familie ohne Buchstabe).
 Runde 1: elementweise Validierung gestartet
-circle: Fehler=91.130
-circle: Breiten-Stochastic-Survivor aktiviert (stroke_circle=2.000, err=89.475)
-circle: Breiten-Bracketing stroke_circle 3.333->2.000; Kandidaten=2.000->89.475, 3.500->125.972, 4.000->125.972, 6.500->125.230, 9.000->191.063, 11.000->226.124
-circle: Mittelpunkt-Bracketing cx 25.000->25.000, cy 55.500->57.000 (best_err=88.636)
-circle: Radius-Bracketing r 17.200->21.500 (best_err=88.636, full_err=25.070); Kandidaten=18.920->88.636, 19.000->88.636, 24.000->88.636
-arm: Fehler=149.930
-arm: Breiten-Bracketing arm_stroke 5.333->2.000; Kandidaten=1.500->131.598, 3.500->149.666, 5.500->160.187, 8.000->165.735, 10.000->167.067
-arm: Längen-Bracketing arm_len 53.347->40.000; Kandidaten=40.000->70.301, 49.000->70.301, 53.500->70.301, 57.500->70.301, 66.500->70.301, 75.000->70.301
-Runde 1: Gesamtfehler=25.308
+circle: Fehler=105.731
+circle: Breiten-Stochastic-Survivor aktiviert (stroke_circle=2.000, err=104.838)
+circle: Breiten-Bracketing stroke_circle 3.333->2.000; Kandidaten=2.000->104.838, 3.500->148.474, 4.000->148.474, 6.500->164.733, 9.000->193.215, 11.000->191.005
+circle: Mittelpunkt-Bracketing cx 25.000->25.000, cy 55.500->57.500 (best_err=71.083)
+circle: Radius-Bracketing r 17.200->21.500 (best_err=71.083, full_err=80.132); Kandidaten=18.920->71.083, 19.000->71.083, 24.000->71.083
+arm: Fehler=210.304
+arm: Breiten-Bracketing arm_stroke 5.333->2.000; Kandidaten=1.500->185.070, 3.500->194.446, 5.500->210.000, 8.000->222.444, 10.000->222.942
+arm: Längen-Bracketing arm_len 53.847->40.500; Kandidaten=40.500->190.246, 49.000->190.246, 54.000->190.246, 57.500->190.246, 66.500->190.246, 75.000->190.246
+Runde 1: Gesamtfehler=80.269
 Runde 2: elementweise Validierung gestartet
-circle: Fehler=97.351
-circle: Breiten-Bracketing stroke_circle 2.000->4.000; Kandidaten=1.000->117.757, 2.000->97.351, 3.500->73.117, 6.000->113.641, 8.500->150.433, 11.000->192.392
-circle: Mittelpunkt-Bracketing cx 25.000->25.000, cy 57.000->49.000 (best_err=143.806)
-circle: Radius-Bracketing r 21.500->21.000 (best_err=143.213, full_err=33.229); Kandidaten=19.350->149.000, 20.500->144.854, 21.000->143.213, 21.500->143.806, 24.000->149.083
-arm: Fehler=118.030
-arm: Breiten-Bracketing arm_stroke 2.000->2.000; Kandidaten=2.500->123.229, 4.500->128.764, 6.500->137.701, 8.000->146.160, 10.000->151.981
-arm: Längen-Bracketing arm_len 70.000->52.500; Kandidaten=52.500->55.427, 58.000->55.427, 64.000->55.427, 69.500->55.427, 70.000->55.427, 75.000->55.427
-Runde 2: Gesamtfehler=33.229
+circle: Fehler=123.661
+circle: Breiten-Bracketing keine relevante Änderung (stroke_circle: 2.000); Kandidaten=1.000->143.902, 2.000->123.661, 3.500->138.222, 6.000->162.022, 8.500->198.545, 11.000->156.967
+circle: Mittelpunkt-Bracketing cx 25.000->25.000, cy 57.500->50.000 (best_err=196.910)
+circle: Radius-Bracketing r 21.500->20.500 (best_err=193.530, full_err=85.463); Kandidaten=19.350->189.855, 19.500->190.567, 20.000->192.147, 20.500->193.530, 21.500->196.910, 24.000->220.028
+arm: Fehler=178.531
+arm: Breiten-Bracketing arm_stroke 2.000->2.000; Kandidaten=1.500->178.531, 2.000->178.531, 3.500->185.894, 5.500->199.729, 8.000->212.697, 10.000->220.216
+arm: Längen-Bracketing arm_len 70.500->53.000; Kandidaten=53.000->196.431, 58.500->196.431, 64.000->196.431, 69.500->196.431, 70.500->196.431, 75.000->196.431
+Runde 2: Gesamtfehler=85.463
 Runde 3: elementweise Validierung gestartet
-circle: Fehler=144.264
-circle: Breiten-Bracketing stroke_circle 4.000->2.000; Kandidaten=2.500->130.610, 4.000->144.264, 4.500->144.264, 6.500->166.678, 9.000->204.020, 11.000->220.634
-circle: Mittelpunkt-Bracketing cx 25.000->25.000, cy 49.000->41.000 (best_err=129.192)
-circle: Radius-Bracketing r 21.000->23.000 (best_err=126.976, full_err=31.351); Kandidaten=18.920->131.168, 21.000->129.192, 22.500->127.480, 23.000->126.976, 23.500->126.728, 24.000->126.274
-arm: Fehler=90.558
-arm: Breiten-Bracketing arm_stroke 2.000->2.000; Kandidaten=1.500->90.558, 2.000->90.558, 3.500->129.135, 5.500->136.713, 8.000->144.360, 10.000->151.197
-arm: Längen-Bracketing arm_len 64.000->48.000; Kandidaten=48.000->49.304, 55.000->49.304, 61.500->49.304, 64.000->49.304, 68.000->49.304, 75.000->49.304
-Runde 3: Gesamtfehler=31.351
+circle: Fehler=194.272
+circle: Breiten-Bracketing stroke_circle 2.000->1.000; Kandidaten=1.000->184.979, 2.000->194.272, 3.500->196.665, 6.000->201.131, 8.500->210.983, 11.000->215.632
+circle: Mittelpunkt-Bracketing cx 25.000->25.000, cy 50.000->52.500 (best_err=183.877)
+circle: Radius-Bracketing r 20.500->19.000 (best_err=175.145, full_err=83.192); Kandidaten=18.920->175.145, 19.000->175.145, 19.500->176.122, 20.500->183.877, 24.000->201.505
+arm: Fehler=178.531
+arm: Breiten-Bracketing arm_stroke 2.000->1.000; Kandidaten=1.000->178.531, 2.000->178.531, 3.000->185.894, 5.500->199.683, 8.000->212.311, 10.000->219.719
+arm: Längen-Bracketing arm_len 71.500->53.500; Kandidaten=53.500->193.614, 59.000->193.614, 64.500->193.614, 69.500->193.614, 71.500->193.614, 75.000->193.614
+Runde 3: Gesamtfehler=83.192
 Runde 4: elementweise Validierung gestartet
-circle: Fehler=126.976
-circle: Breiten-Bracketing stroke_circle 2.000->1.000; Kandidaten=1.000->94.211, 2.000->126.976, 3.500->140.297, 6.000->152.022, 8.500->162.901, 11.000->178.244
-circle: Mittelpunkt-Bracketing cx 25.000->25.000, cy 41.000->33.000 (best_err=85.258)
-circle: Radius-Bracketing r 23.000->23.500 (best_err=84.952, full_err=29.428); Kandidaten=20.700->86.371, 23.000->85.258, 23.500->84.952, 24.000->86.196
-arm: Fehler=80.279
-arm: Breiten-Stochastic-Survivor aktiviert (arm_stroke=1.000, err=74.534)
-arm: Breiten-Bracketing arm_stroke 2.000->1.000; Kandidaten=1.000->74.534, 2.000->80.279, 3.000->85.407, 5.500->126.597, 8.000->134.434, 10.000->140.155
-arm: Längen-Bracketing arm_len 56.500->42.500; Kandidaten=42.500->50.409, 50.500->50.409, 56.500->50.409, 58.500->50.409, 67.000->50.409, 75.000->50.409
-Runde 4: Gesamtfehler=29.343
+circle: Fehler=172.708
+circle: Breiten-Bracketing keine relevante Änderung (stroke_circle: 1.000); Kandidaten=1.000->172.708, 3.500->187.588, 6.000->203.136, 8.500->202.957, 11.000->199.863
+circle: Mittelpunkt-Bracketing cx 25.000->25.000, cy 52.500->57.500 (best_err=101.835)
+circle: Radius-Bracketing r 19.000->21.500 (best_err=101.835, full_err=81.528); Kandidaten=18.920->101.835, 19.000->101.835, 24.000->101.835
+arm: Fehler=178.497
+arm: Breiten-Stochastic-Survivor aktiviert (arm_stroke=1.500, err=178.372)
+arm: Breiten-Bracketing arm_stroke 1.000->2.000; Kandidaten=1.000->178.497, 3.000->185.296, 5.500->198.328, 8.000->211.815, 10.000->219.274
+arm: Längen-Bracketing arm_len 79.000->59.000; Kandidaten=59.000->190.246, 63.000->190.246, 67.000->190.246, 71.000->190.246, 75.000->190.246
+Runde 4: Gesamtfehler=81.652
 Runde 5: elementweise Validierung gestartet
-circle: Fehler=84.952
-circle: Breiten-Bracketing keine relevante Änderung (stroke_circle: 1.000); Kandidaten=1.000->84.952, 3.500->128.262, 6.000->135.280, 8.500->141.911, 11.000->149.532
-circle: Mittelpunkt-Bracketing cx 25.000->25.000, cy 33.000->26.000 (best_err=83.869)
-circle: Radius-Bracketing keine relevante Änderung (r: 23.500, best_err=83.869, full_err=29.187); Kandidaten=21.150->83.895, 22.500->85.370, 23.000->85.107, 23.500->83.869, 24.000->85.885
-arm: Fehler=55.583
-arm: Breiten-Bracketing keine relevante Änderung (arm_stroke: 1.000); Kandidaten=1.000->55.583, 3.000->59.303, 5.500->61.089, 8.000->67.416, 10.000->82.047
-arm: Längen-Stochastic-Survivor aktiviert (best_len=1.500, err=55.208)
-arm: Längen-Bracketing arm_len 2.000->1.500; Kandidaten=1.500->55.208, 2.000->55.583, 20.000->55.583, 38.000->55.583, 56.500->55.583, 75.000->55.583
-Runde 5: Gesamtfehler=29.176
+circle: Fehler=143.902
+circle: Breiten-Bracketing stroke_circle 1.000->4.000; Kandidaten=1.000->143.902, 3.500->138.222, 6.000->162.022, 8.500->198.545, 11.000->156.967
+circle: Mittelpunkt-Bracketing cx 25.000->25.000, cy 57.500->52.500 (best_err=197.755)
+circle: Radius-Bracketing r 21.500->19.500 (best_err=188.354, full_err=89.280); Kandidaten=19.350->188.902, 19.500->188.354, 20.000->197.438, 20.500->197.755, 21.500->197.755, 24.000->197.755
+arm: Fehler=178.531
+arm: Breiten-Bracketing arm_stroke 2.000->2.000; Kandidaten=2.500->185.894, 4.500->192.717, 6.500->206.545, 8.000->212.540, 10.000->219.804
+arm: Längen-Bracketing arm_len 72.000->54.000; Kandidaten=54.000->194.279, 59.000->194.279, 64.500->194.279, 70.000->194.279, 72.000->194.279, 75.000->194.279
+Runde 5: Gesamtfehler=89.280
 Runde 6: elementweise Validierung gestartet
-circle: Fehler=83.869
-circle: Breiten-Bracketing keine relevante Änderung (stroke_circle: 1.000); Kandidaten=1.000->83.869, 3.500->119.916, 6.000->124.304, 8.500->126.797, 11.000->126.897
-circle: Mittelpunkt-Bracketing cx 25.000->25.000, cy 26.000->21.500 (best_err=81.952)
-circle: Radius-Bracketing r 23.500->22.500 (best_err=81.952, full_err=29.498); Kandidaten=21.150->81.952, 21.500->81.952, 22.000->81.952, 22.500->81.952, 23.500->81.952, 24.000->81.952
-arm: Fehler=61.322
-arm: Breiten-Bracketing keine relevante Änderung (arm_stroke: 1.000); Kandidaten=1.000->61.322, 3.000->63.159, 5.500->65.720, 8.000->66.314, 10.000->78.660
-arm: Längen-Bracketing arm_len 1.500->1.000; Kandidaten=1.000->57.558, 1.500->57.558, 19.500->57.558, 38.000->57.558, 56.500->57.558, 75.000->57.558
-Runde 6: Gesamtfehler=29.498
-circle: Farb-Stochastic-Survivor aktiviert (fill_gray=189, err=24924.000)
-circle: Farb-Bracketing fill_gray 242->189; Kandidaten=189->24924.000, 200->25367.000, 210->25885.000, 220->26504.000, 226->26936.000, 230->27244.000, 234->27578.000, 240->28171.000, 242->28429.000, 250->30126.000, 255->31277.000
-circle: Farb-Bracketing stroke_gray 127->144; Kandidaten=95->29171.000, 96->29024.000, 111->26915.000, 112->26775.000, 119->25823.000, 127->24924.000, 128->24823.000, 135->24603.000, 143->24506.000, 144->24497.000, 152->24522.000, 159->24587.000, 160->24602.000, 171->24868.000, 189->25557.000
+circle: Fehler=189.461
+circle: Breiten-Bracketing stroke_circle 4.000->2.000; Kandidaten=2.500->180.158, 4.000->189.461, 4.500->189.461, 6.500->200.358, 9.000->197.757, 11.000->197.270
+circle: Mittelpunkt-Bracketing cx 25.000->25.000, cy 52.500->56.500 (best_err=129.420)
+circle: Radius-Bracketing r 19.500->21.500 (best_err=129.420, full_err=84.445); Kandidaten=18.920->129.420, 19.000->129.420, 19.500->129.420, 24.000->129.420
+arm: Fehler=178.541
+arm: Breiten-Bracketing arm_stroke 2.000->2.000; Kandidaten=1.500->178.541, 2.000->178.541, 3.500->185.720, 5.500->198.931, 8.000->211.833, 10.000->219.838
+arm: Längen-Bracketing arm_len 78.000->58.500; Kandidaten=58.500->192.891, 62.500->192.891, 67.000->192.891, 71.000->192.891, 75.000->192.891
+Runde 6: Gesamtfehler=84.503
+circle: Farb-Bracketing fill_gray 242->200; Kandidaten=187->30575.000, 200->30564.000, 210->30622.000, 220->30724.000, 226->30845.000, 230->30934.000, 234->31043.000, 240->31269.000, 242->31409.000, 250->32541.000, 255->33373.000
+circle: Farb-Bracketing stroke_gray 127->135; Kandidaten=95->34373.000, 96->34234.000, 111->32272.000, 112->32149.000, 119->31334.000, 127->30564.000, 128->30505.000, 135->30420.000, 143->30485.000, 144->30511.000, 152->30671.000, 159->30903.000, 160->30951.000, 171->31461.000, 187->32481.000
 circle: Farboptimierung in Abschlussphase angewendet
-arm: Farb-Bracketing stroke_gray 144->96; Kandidaten=96->70.301, 112->70.301, 128->70.301, 136->70.301, 144->70.301, 152->70.301, 160->70.301, 171->70.301, 175->70.301, 176->70.301
+arm: Farb-Bracketing stroke_gray 135->96; Kandidaten=96->190.246, 103->190.246, 112->190.246, 119->190.246, 127->190.246, 128->190.246, 135->190.246, 143->190.246, 144->190.246, 151->190.246, 152->190.246, 160->190.246, 167->190.246, 171->190.246, 175->190.246
 arm: Farboptimierung in Abschlussphase angewendet
 semantic-guard: Erwartete Arm-Geometrie bestätigt/wiederhergestellt (z.B. AC0812 links).
