@@ -5185,6 +5185,29 @@ def test_make_badge_params_keeps_ac0223_m_circle_in_lower_half() -> None:
     assert float(params["cy"]) >= float(img.shape[0]) * 0.6
 
 
+def test_quantize_badge_params_keeps_ac0223_top_stem_span() -> None:
+    """AC0223 stem must keep the valve-head anchor instead of collapsing to the circle edge."""
+    raw = {
+        "circle_enabled": True,
+        "arm_enabled": True,
+        "cx": 24.7,
+        "cy": 41.2,
+        "r": 12.1,
+        "arm_x1": 24.7,
+        "arm_y1": 30.0,
+        "arm_x2": 24.7,
+        "arm_y2": 14.5,
+        "head_style": "ac0223_triple_valve",
+    }
+
+    quantized = Action._quantizeBadgeParams(raw, 50, 75)
+
+    assert quantized["arm_x1"] == quantized["cx"]
+    assert quantized["arm_x2"] == quantized["cx"]
+    assert float(quantized["arm_y1"]) == pytest.approx(30.0)
+    assert float(quantized["arm_y2"]) == pytest.approx(14.5)
+
+
 def test_parse_description_keeps_ac0814_family_rule_over_text_heuristic() -> None:
     """AC0811-AC0814 family rules must outrank soft description hints about badge text."""
     raw = {
