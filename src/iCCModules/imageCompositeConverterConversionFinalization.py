@@ -129,6 +129,7 @@ def _markPoorConversionsWithFailedPrefix(
         rows_by_variant[variant] = row
 
     variants_from_svg_names: set[str] = set()
+    svg_paths_by_variant: dict[str, Path] = {}
     for svg_path in svg_dir.glob("*.svg"):
         stem = svg_path.stem
         if stem.lower().startswith("failed_"):
@@ -136,13 +137,17 @@ def _markPoorConversionsWithFailedPrefix(
         normalized = stem.strip().upper()
         if normalized:
             variants_from_svg_names.add(normalized)
+            svg_paths_by_variant[normalized] = svg_path
 
     for variant in sorted(set(rows_by_variant) | variants_from_svg_names):
         row = rows_by_variant.get(variant, {})
 
         base_svg = svg_dir / f"{variant}.svg"
         failed_svg = svg_dir / f"Failed_{variant}.svg"
+        existing_svg = svg_paths_by_variant.get(variant)
         svg_path = base_svg if base_svg.exists() else failed_svg
+        if not svg_path.exists() and existing_svg is not None:
+            svg_path = existing_svg
         if not svg_path.exists():
             continue
 
@@ -156,7 +161,7 @@ def _markPoorConversionsWithFailedPrefix(
         if should_fail and svg_path != failed_svg:
             if failed_svg.exists():
                 failed_svg.unlink()
-            base_svg.rename(failed_svg)
+            svg_path.rename(failed_svg)
         elif has_run_metrics and (not should_fail) and svg_path == failed_svg:
             if base_svg.exists():
                 base_svg.unlink()

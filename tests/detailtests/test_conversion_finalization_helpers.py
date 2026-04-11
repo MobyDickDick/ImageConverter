@@ -166,6 +166,27 @@ def test_mark_poor_conversions_detects_embedded_raster_even_without_result_row(t
     assert not (svg_dir / "GE9024_7S.svg").exists()
 
 
+def test_mark_poor_conversions_detects_embedded_raster_for_lowercase_variant_names(tmp_path):
+    svg_dir = tmp_path / "svg"
+    svg_dir.mkdir()
+    (svg_dir / "b_info.svg").write_text(
+        '<svg xmlns="http://www.w3.org/2000/svg"><image href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD"/></svg>',
+        encoding="utf-8",
+    )
+    reports_dir = tmp_path / "reports"
+    reports_dir.mkdir()
+    (reports_dir / "successful_conversions.txt").write_text("", encoding="utf-8")
+
+    finalization_helpers._markPoorConversionsWithFailedPrefix(
+        svg_out_dir=str(svg_dir),
+        result_map={},
+        reports_out_dir=str(reports_dir),
+    )
+
+    assert (svg_dir / "Failed_B_INFO.svg").exists()
+    assert not (svg_dir / "b_info.svg").exists()
+
+
 def test_mark_poor_conversions_removes_stale_failed_svg_after_successful_result(tmp_path):
     svg_dir = tmp_path / "svg"
     svg_dir.mkdir()
