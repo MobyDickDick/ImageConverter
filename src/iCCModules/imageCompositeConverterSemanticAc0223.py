@@ -17,11 +17,15 @@ def defaultAc0223ParamsImpl(
     scale_y = (float(h) / 75.0) if h > 0 else 1.0
     head_base_y = 39.922279 * scale_y
     valve_center_y = 25.153 * scale_y
-    cx = float(params.get("cx", (float(w) / 2.0)))
+    cx = float(w) / 2.0 if w > 0 else float(params.get("cx", 0.0))
 
     params.update(
         {
             "draw_text": False,
+            "cx": cx,
+            "template_circle_cx": cx,
+            "lock_circle_cx": True,
+            "lock_arm_center_to_circle": True,
             "head_style": "ac0223_triple_valve",
             "head_gradient_dark": "#b2b2b3",
             "head_gradient_light": "#d9d9d9",
@@ -51,7 +55,14 @@ def fitAc0223ParamsFromImageImpl(
     scale_y = (float(h) / 75.0) if h > 0 else 1.0
     head_base_y = 39.922279 * scale_y
     valve_center_y = 25.153 * scale_y
-    cx = float(params.get("cx", defaults.get("cx", float(img.shape[1]) / 2.0)))
+    # AC0223 uses a symmetric valve-head template. Re-anchor to the template
+    # center so medium/small variants keep stem + head alignment even when the
+    # circle fitter drifts horizontally.
+    cx = float(defaults.get("cx", float(img.shape[1]) / 2.0))
+    params["cx"] = cx
+    params["template_circle_cx"] = cx
+    params["lock_circle_cx"] = True
+    params["lock_arm_center_to_circle"] = True
 
     current_cy = float(params.get("cy", defaults.get("cy", head_base_y)))
     current_r = float(params.get("r", defaults.get("r", 0.0)))

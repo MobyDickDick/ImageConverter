@@ -5183,6 +5183,9 @@ def test_make_badge_params_keeps_ac0223_m_circle_in_lower_half() -> None:
 
     assert params is not None
     assert float(params["cy"]) >= float(img.shape[0]) * 0.6
+    assert float(params["cx"]) == pytest.approx(float(img.shape[1]) / 2.0, abs=0.01)
+    assert float(params["arm_x1"]) == pytest.approx(float(params["cx"]), abs=0.01)
+    assert float(params["head_hub_cx"]) == pytest.approx(float(params["cx"]), abs=0.01)
 
 
 def test_quantize_badge_params_keeps_ac0223_top_stem_span() -> None:
