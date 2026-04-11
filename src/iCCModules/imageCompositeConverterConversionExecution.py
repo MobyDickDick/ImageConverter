@@ -91,7 +91,8 @@ def _svgContainsEmbeddedRasterArtifact(svg_path: str) -> bool:
 
     if "data:image/" in content:
         return True
-    if "<image" not in content:
+    has_image_tag = "<image" in content
+    if not has_image_tag:
         return False
 
     href_values = re.findall(r"(?:href|xlink:href)\s*=\s*['\"]([^'\"]+)['\"]", content)
@@ -102,7 +103,9 @@ def _svgContainsEmbeddedRasterArtifact(svg_path: str) -> bool:
             return True
         if href.startswith("data:") and "base64," in href and "ivborw0kggo" in href:
             return True
-    return False
+    # Generic fallback: treat standalone SVG <image> payloads as raster artifacts
+    # even when href does not expose a file extension/mime marker.
+    return True
 
 
 def _svgIsTrivialFallbackArtifact(svg_path: str) -> bool:
