@@ -93,6 +93,40 @@ def enforceRightArmBadgeGeometryImpl(
     return p
 
 
+def enforceTopStemBadgeGeometryImpl(
+    params: dict[str, object],
+    *,
+    h: int,
+    ac08_stroke_width_px: float,
+) -> dict[str, object]:
+    """Ensure AC0813-like badges keep a visible vertical top connector."""
+    p = dict(params)
+    if not p.get("circle_enabled", True):
+        return p
+    if "cx" not in p or "cy" not in p or "r" not in p:
+        return p
+
+    cx = float(p["cx"])
+    cy = float(p["cy"])
+    r = float(p["r"])
+    default_cy = float(p.get("template_circle_cy", cy))
+    # Generic guardrail for top-stem families: keep the circle in the lower part
+    # of the badge, otherwise tiny crops can flip into an upper-half optimum.
+    min_cy = min(float(h) - 1.0, max(default_cy - max(1.0, float(min(h, max(1, int(2 * r)))) * 0.12), float(h) * 0.55))
+    if cy < min_cy:
+        cy = min(float(h) - 1.0, default_cy)
+        p["cy"] = cy
+    arm_stroke = float(max(1.0, p.get("arm_stroke", ac08_stroke_width_px)))
+
+    p["arm_enabled"] = True
+    p["arm_x1"] = cx
+    p["arm_y1"] = max(0.0, cy - r)
+    p["arm_x2"] = cx
+    p["arm_y2"] = 0.0
+    p["arm_stroke"] = arm_stroke
+    return p
+
+
 def enforceSemanticConnectorExpectationImpl(
     base_name: str,
     semantic_elements: list[str],
@@ -101,15 +135,19 @@ def enforceSemanticConnectorExpectationImpl(
     normalize_base_name_fn: Callable[[str], str],
     enforce_left_fn: Callable[[dict[str, object]], dict[str, object]],
     enforce_right_fn: Callable[[dict[str, object]], dict[str, object]],
+    enforce_top_fn: Callable[[dict[str, object]], dict[str, object]],
 ) -> dict[str, object]:
     """Restore mandatory connector geometry for directional semantic badges."""
     normalized_base = normalize_base_name_fn(str(base_name)).upper()
     normalized_elements = [str(elem).lower() for elem in (semantic_elements or [])]
     expects_left_arm = any("waagrechter strich links" in elem for elem in normalized_elements)
     expects_right_arm = any("waagrechter strich rechts" in elem for elem in normalized_elements)
+    expects_top_stem = any("senkrechter strich oben" in elem for elem in normalized_elements)
 
     if normalized_base in {"AC0812", "AC0837", "AC0882"} or expects_left_arm:
         return enforce_left_fn(params)
     if normalized_base in {"AC0810", "AC0814", "AC0834", "AC0839"} or expects_right_arm:
         return enforce_right_fn(params)
+    if normalized_base in {"AC0813", "AC0833", "AC0838", "AC0223"} or expects_top_stem:
+        return enforce_top_fn(params)
     return params

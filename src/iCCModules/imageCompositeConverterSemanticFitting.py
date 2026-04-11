@@ -63,6 +63,50 @@ def stabilizeSemanticCirclePoseImpl(params: dict, defaults: dict, w: int, h: int
     return params
 
 
+def enforceDirectionalCircleSideImpl(params: dict, defaults: dict, w: int, h: int) -> dict:
+    """Keep circle on the expected side of directional connectors (generic AC08 guardrail)."""
+    if not params.get("arm_enabled"):
+        return params
+    if "cx" not in defaults or "cy" not in defaults or "r" not in defaults:
+        return params
+
+    default_cx = float(defaults.get("cx", float(w) / 2.0))
+    default_cy = float(defaults.get("cy", float(h) / 2.0))
+    default_r = float(defaults.get("r", 0.0))
+    if default_r <= 0.0:
+        return params
+
+    dx = float(defaults.get("arm_x2", default_cx)) - float(defaults.get("arm_x1", default_cx))
+    dy = float(defaults.get("arm_y2", default_cy)) - float(defaults.get("arm_y1", default_cy))
+    orientation_vertical = abs(dx) <= abs(dy)
+
+    current_cx = float(params.get("cx", default_cx))
+    current_cy = float(params.get("cy", default_cy))
+    current_r = float(params.get("r", default_r))
+    min_side = float(max(1, min(w, h)))
+
+    if orientation_vertical:
+        connector_y = min(float(defaults.get("arm_y1", default_cy)), float(defaults.get("arm_y2", default_cy)))
+        circle_is_below_connector = default_cy >= (connector_y + default_r * 0.55)
+        if circle_is_below_connector:
+            min_cy = default_cy - max(1.0, min_side * 0.10)
+            if current_cy < min_cy:
+                params["cy"] = default_cy
+                params["cx"] = default_cx
+                params["r"] = max(current_r, default_r * 0.92)
+    else:
+        connector_x = max(float(defaults.get("arm_x1", default_cx)), float(defaults.get("arm_x2", default_cx)))
+        circle_is_left_of_connector = default_cx <= (connector_x - default_r * 0.55)
+        if circle_is_left_of_connector:
+            max_cx = default_cx + max(1.0, min_side * 0.10)
+            if current_cx > max_cx:
+                params["cx"] = default_cx
+                params["cy"] = default_cy
+                params["r"] = max(current_r, default_r * 0.92)
+
+    return params
+
+
 def fitAc0870ParamsFromImageImpl(
     img,
     defaults: dict,

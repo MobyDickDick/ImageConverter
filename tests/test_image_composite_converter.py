@@ -5171,6 +5171,20 @@ def test_generate_badge_svg_renders_ac0223_valve_head_gradient() -> None:
     assert 'ellipse cx="25" cy="25.153"' in svg
 
 
+def test_make_badge_params_keeps_ac0223_m_circle_in_lower_half() -> None:
+    """AC0223_M should not drift into the upper-half circle false optimum."""
+    if image_composite_converter.cv2 is None:
+        pytest.skip("opencv not available in this environment")
+
+    img = image_composite_converter.cv2.imread("artifacts/images_to_convert/AC0223_M.jpg")
+    assert img is not None
+
+    params = Action.make_badge_params(img.shape[1], img.shape[0], "AC0223", img)
+
+    assert params is not None
+    assert float(params["cy"]) >= float(img.shape[0]) * 0.6
+
+
 def test_parse_description_keeps_ac0814_family_rule_over_text_heuristic() -> None:
     """AC0811-AC0814 family rules must outrank soft description hints about badge text."""
     raw = {

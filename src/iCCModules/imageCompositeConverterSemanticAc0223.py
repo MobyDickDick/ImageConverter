@@ -53,11 +53,14 @@ def fitAc0223ParamsFromImageImpl(
     valve_center_y = 25.153 * scale_y
     cx = float(params.get("cx", defaults.get("cx", float(img.shape[1]) / 2.0)))
 
+    current_cy = float(params.get("cy", defaults.get("cy", head_base_y)))
+    current_r = float(params.get("r", defaults.get("r", 0.0)))
+
     params["arm_x1"] = cx
     params["arm_x2"] = cx
     params["arm_y2"] = float(params.get("head_hub_cy", defaults.get("head_hub_cy", valve_center_y)))
     params["arm_y2"] = min(head_base_y, params["arm_y2"])
-    params["arm_y1"] = max(params["arm_y2"], float(params.get("cy", defaults.get("cy", head_base_y))) - float(params.get("r", defaults.get("r", 0.0))))
+    params["arm_y1"] = max(params["arm_y2"], current_cy - current_r)
     params["draw_text"] = False
     params["head_style"] = "ac0223_triple_valve"
     params["head_gradient_dark"] = str(defaults.get("head_gradient_dark", "#b2b2b3"))
