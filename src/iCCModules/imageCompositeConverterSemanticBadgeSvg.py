@@ -24,6 +24,30 @@ def generateBadgeSvgImpl(
 ) -> str:
     """Build a semantic badge SVG from quantized parameters."""
     p = align_stem_to_circle_center_fn(dict(params))
+    variant_ref = str(p.get("variant_name", p.get("base_name", ""))).upper()
+    if variant_ref.startswith("AC0223"):
+        # AC0223 must always retain its valve-head geometry. Some late-stage
+        # optimization/fallback paths can strip the dedicated styling keys;
+        # restore safe defaults so the output remains semantically correct.
+        sy = float(h) / 75.0 if h > 0 else 1.0
+        head_base_y = 39.922279 * sy
+        hub_y = float(p.get("head_hub_cy", 25.153 * sy))
+        hub_y = max(0.0, min(head_base_y, hub_y))
+        circle_top = float(p.get("cy", head_base_y)) - float(p.get("r", 0.0))
+        p.setdefault("head_style", "ac0223_triple_valve")
+        p.setdefault("head_gradient_dark", "#b2b2b3")
+        p.setdefault("head_gradient_light", "#d9d9d9")
+        p.setdefault("head_stroke", "#808080")
+        p.setdefault("head_hub_fill", "#7f7f7f")
+        p.setdefault("arm_color", "#136fad")
+        p.setdefault("arm_stroke", 2.0)
+        p["arm_enabled"] = True
+        p["head_hub_cy"] = hub_y
+        p["arm_x1"] = float(p.get("cx", float(w) / 2.0))
+        p["arm_x2"] = float(p.get("cx", float(w) / 2.0))
+        p["arm_y2"] = hub_y
+        p["arm_y1"] = max(hub_y, min(head_base_y, circle_top))
+
     p = quantize_badge_params_fn(p, w, h)
     elements = [f'<svg width="{w}px" height="{h}px" viewBox="0 0 {w} {h}" xmlns="http://www.w3.org/2000/svg">']
     defs: list[str] = []
@@ -98,7 +122,7 @@ def generateBadgeSvgImpl(
             '22.863281 L 36.492188 3.0410156 z" fill="url(#ac0223ValveGradient)" stroke="none"/>'
         )
         elements.append(
-            f'    <polygon points="36.492188,2.6959677 47.87305,12.963546 47.78125,35.949874 2.1132824,35.949874 2.0195324,12.963546 13.50586,2.7897177" fill="#d9d9d9" stroke="{head_stroke}" stroke-width="1"/>'
+            f'    <polygon points="36.492188,2.6959677 47.87305,12.963546 47.78125,35.949874 2.1132824,35.949874 2.0195324,12.963546 13.50586,2.7897177" fill="url(#ac0223ValveGradient)" stroke="{head_stroke}" stroke-width="1"/>'
         )
         elements.append(f'    <ellipse cx="25" cy="25.153" rx="2.5" ry="2.500001" fill="{head_hub_fill}" stroke="{head_stroke}" stroke-width="1"/>')
         elements.append("  </g>")

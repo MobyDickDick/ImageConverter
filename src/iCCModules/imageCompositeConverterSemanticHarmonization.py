@@ -299,6 +299,11 @@ def harmonizeSemanticSizeVariantsImpl(
     harmonized_logs: list[str] = []
     category_logs: list[str] = []
     for base, variant_rows in sorted(variant_rows_by_base.items()):
+        if str(base).upper() == "AC0223":
+            # AC0223 has a dedicated valve-head overlay that is not represented
+            # in generic geometry signatures; skip cross-size harmonization to
+            # avoid collapsing the valve head into plain circle+stem output.
+            continue
         if len(variant_rows) < 2:
             continue
 
