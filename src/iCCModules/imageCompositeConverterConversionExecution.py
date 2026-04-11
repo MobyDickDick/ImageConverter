@@ -62,6 +62,26 @@ def _resolveFailureSvgPath(default_svg_path: str, failed_svg_path: str | None) -
     return default_svg_path
 
 
+def _normalizeSvgToFailedPrefixIfRasterArtifact(
+    *,
+    svg_out_dir: str,
+    base_name: str,
+    svg_path: str,
+) -> str:
+    """Rename ``<variant>.svg`` to ``Failed_<variant>.svg`` when SVG is raster-only/trivial."""
+    failed_svg_path = os.path.join(svg_out_dir, f"Failed_{base_name}.svg")
+    has_svg = os.path.exists(svg_path)
+    should_use_failed_name = has_svg and (
+        _svgContainsEmbeddedRasterArtifact(svg_path) or _svgIsTrivialFallbackArtifact(svg_path)
+    )
+    if should_use_failed_name and svg_path != failed_svg_path:
+        if os.path.exists(failed_svg_path):
+            os.unlink(failed_svg_path)
+        os.rename(svg_path, failed_svg_path)
+        return failed_svg_path
+    return svg_path
+
+
 def _writeFailedEmbeddedSvgArtifact(
     *,
     svg_out_dir: str,
@@ -244,6 +264,11 @@ def convertOneImpl(
                 render_embedded_raster_svg_fn=render_embedded_raster_svg_fn,
                 print_fn=print_fn,
             )
+            svg_path = _normalizeSvgToFailedPrefixIfRasterArtifact(
+                svg_out_dir=svg_out_dir,
+                base_name=base,
+                svg_path=svg_path,
+            )
             _ensureOutputArtifacts(svg_path=svg_path, diff_path=diff_path, create_svg_fallback=False)
             return None, False
 
@@ -291,18 +316,18 @@ def convertOneImpl(
             render_embedded_raster_svg_fn=render_embedded_raster_svg_fn,
             print_fn=print_fn,
         )
+        svg_path = _normalizeSvgToFailedPrefixIfRasterArtifact(
+            svg_out_dir=svg_out_dir,
+            base_name=base,
+            svg_path=svg_path,
+        )
         _ensureOutputArtifacts(svg_path=svg_path, diff_path=diff_path, create_svg_fallback=False)
         return None, False
-    failed_svg_path = os.path.join(svg_out_dir, f"Failed_{base}.svg")
-    has_svg = os.path.exists(svg_path)
-    should_use_failed_name = has_svg and (
-        _svgContainsEmbeddedRasterArtifact(svg_path) or _svgIsTrivialFallbackArtifact(svg_path)
+    svg_path = _normalizeSvgToFailedPrefixIfRasterArtifact(
+        svg_out_dir=svg_out_dir,
+        base_name=base,
+        svg_path=svg_path,
     )
-    if should_use_failed_name:
-        if os.path.exists(failed_svg_path):
-            os.unlink(failed_svg_path)
-        os.rename(svg_path, failed_svg_path)
-        svg_path = failed_svg_path
     if _svgIsTrivialFallbackArtifact(svg_path):
         append_batch_failure_fn(
             {
