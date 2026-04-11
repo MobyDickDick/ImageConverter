@@ -5233,6 +5233,23 @@ def test_validate_semantic_alignment_accepts_ac0838_large_top_connector_voc_vari
     assert "Strukturprüfung: Kein belastbarer waagrechter Linien-Kandidat im Rohbild erkannt" not in issues
 
 
+def test_make_badge_params_keeps_ac0838_m_circle_near_full_width_for_voc_layout() -> None:
+    """AC0838_M should preserve the dominant near-full-width VOC circle instead of collapsing."""
+    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+        pytest.skip("numpy/cv2 not available in this environment")
+
+    cv2 = image_composite_converter.cv2
+    img = cv2.imread("artifacts/images_to_convert/AC0838_M.jpg")
+    assert img is not None
+
+    params = Action.make_badge_params(img.shape[1], img.shape[0], "AC0838", img)
+    Action.validateBadgeByElements(img, params, max_rounds=6)
+
+    assert float(params["r"]) >= 9.0
+    assert float(params["cx"]) == pytest.approx(10.0, abs=0.6)
+    assert float(params["cy"]) >= 24.0
+
+
 def test_detect_semantic_primitives_reports_family_circle_fallback_source(monkeypatch: pytest.MonkeyPatch) -> None:
     """Semantic primitive detection should expose when AC08 small-family fallback provided circle evidence."""
     if image_composite_converter.np is None or image_composite_converter.cv2 is None:

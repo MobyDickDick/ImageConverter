@@ -29,12 +29,89 @@ def optimizeCircleCenterBracketImpl(
     lock_cy = bool(params.get("lock_circle_cy", False))
     if lock_cx and lock_cy:
         return False
+    effective_lock_cx = lock_cx
+    effective_lock_cy = lock_cy
+    collapsed_axis_reasons: list[str] = []
 
     max_shift = max(1.0, float(min(w, h)) * 0.16)
     x_low = snap_half_fn(max(0.0, current_cx - max_shift))
     x_high = snap_half_fn(min(float(w - 1), current_cx + max_shift))
     y_low = snap_half_fn(max(0.0, current_cy - max_shift))
     y_high = snap_half_fn(min(float(h - 1), current_cy + max_shift))
+
+    # Keep center-search candidates compatible with the semantic radius floor.
+    # Otherwise the center optimizer can drift toward an edge, and later
+    # clamp-to-canvas steps will silently collapse the circle radius.
+    stroke = max(0.0, float(params.get("stroke_circle", 0.0)))
+    required_radius = float(
+        max(
+            1.0,
+            float(params.get("min_circle_radius", 1.0)),
+            float(params.get("circle_radius_lower_bound_px", 1.0)),
+        )
+    )
+    has_connector = bool(params.get("arm_enabled") or params.get("stem_enabled"))
+    if has_connector:
+        required_radius = max(required_radius, current_r * 0.90)
+
+    required_clearance = required_radius + (stroke / 2.0)
+    if not bool(params.get("allow_circle_overflow", False)):
+        cx_min = snap_half_fn(max(0.0, required_clearance))
+        cx_max = snap_half_fn(min(float(w - 1), float(w) - required_clearance))
+        cy_min = snap_half_fn(max(0.0, required_clearance))
+        cy_max = snap_half_fn(min(float(h - 1), float(h) - required_clearance))
+        x_low = max(x_low, cx_min)
+        x_high = min(x_high, cx_max)
+        y_low = max(y_low, cy_min)
+        y_high = min(y_high, cy_max)
+        if x_low >= x_high:
+            effective_lock_cx = True
+            collapsed_axis_reasons.append("x-axis collapsed after radius-clearance corridor")
+        if y_low >= y_high:
+            effective_lock_cy = True
+            collapsed_axis_reasons.append("y-axis collapsed after radius-clearance corridor")
+        if effective_lock_cx and effective_lock_cy:
+            if collapsed_axis_reasons:
+                logs.append("circle: Mittelpunkt-Bracketing abgebrochen (" + "; ".join(dict.fromkeys(collapsed_axis_reasons)) + ")")
+            return False
+
+    # Text-on-circle connector badges are especially sensitive to center drift:
+    # keep the search localized around the template center when available.
+    has_connector = bool(params.get("arm_enabled") or params.get("stem_enabled"))
+    has_text = bool(params.get("draw_text", False))
+    if has_connector and has_text and "template_circle_cx" in params and "template_circle_cy" in params:
+        template_cx = float(params.get("template_circle_cx", current_cx))
+        template_cy = float(params.get("template_circle_cy", current_cy))
+        stroke = float(params.get("stroke_circle", 1.0))
+        arm_x1 = float(params.get("arm_x1", template_cx))
+        arm_x2 = float(params.get("arm_x2", template_cx))
+        is_vertical_connector = abs(arm_x1 - arm_x2) <= max(0.25, stroke * 0.6)
+        x_window = max(0.75, stroke * 1.5)
+        y_window = max(0.75, stroke * 1.5)
+        if is_vertical_connector:
+            x_window = max(0.25, stroke * 0.25)
+            y_window = max(0.75, stroke * 1.0)
+        x_low = max(x_low, snap_half_fn(template_cx - x_window))
+        x_high = min(x_high, snap_half_fn(template_cx + x_window))
+        y_low = max(y_low, snap_half_fn(template_cy - y_window))
+        y_high = min(y_high, snap_half_fn(template_cy + y_window))
+        if x_low >= x_high:
+            effective_lock_cx = True
+            collapsed_axis_reasons.append("x-axis collapsed by template-centered window")
+        if y_low >= y_high:
+            effective_lock_cy = True
+            collapsed_axis_reasons.append("y-axis collapsed by template-centered window")
+        if effective_lock_cx and effective_lock_cy:
+            if collapsed_axis_reasons:
+                logs.append("circle: Mittelpunkt-Bracketing abgebrochen (" + "; ".join(dict.fromkeys(collapsed_axis_reasons)) + ")")
+            return False
+
+    if collapsed_axis_reasons:
+        logs.append(
+            "circle: Mittelpunkt-Bracketing Achse fixiert ("
+            + "; ".join(dict.fromkeys(collapsed_axis_reasons))
+            + ")"
+        )
 
     evaluations: dict[tuple[float, float], float] = {}
 
@@ -89,9 +166,9 @@ def optimizeCircleCenterBracketImpl(
 
     best_cx = current_cx
     best_cy = current_cy
-    if not lock_cx:
+    if not effective_lock_cx:
         best_cx = optimize_axis(x_low, x_high, current_cy, "x")
-    if not lock_cy:
+    if not effective_lock_cy:
         best_cy = optimize_axis(y_low, y_high, best_cx, "y")
 
     best_err = eval_center(best_cx, best_cy)
