@@ -110,6 +110,33 @@ def _svgIsTrivialFallback(svg_path: Path) -> bool:
     return has_minimal_canvas and has_white_rect
 
 
+def _collectValidationStatusesByVariant(reports_out_dir: str) -> dict[str, str]:
+    reports_dir = Path(reports_out_dir)
+    if not reports_dir.exists():
+        return {}
+
+    statuses: dict[str, str] = {}
+    for log_path in reports_dir.glob("*_element_validation.log"):
+        stem = log_path.stem
+        if not stem.endswith("_element_validation"):
+            continue
+        variant = stem[: -len("_element_validation")].strip().upper()
+        if not variant:
+            continue
+        status = ""
+        try:
+            for raw_line in log_path.read_text(encoding="utf-8").splitlines():
+                line = raw_line.strip()
+                if line.lower().startswith("status="):
+                    status = line.split("=", 1)[1].strip().lower()
+                    break
+        except OSError:
+            continue
+        if status:
+            statuses[variant] = status
+    return statuses
+
+
 def _markPoorConversionsWithFailedPrefix(
     *,
     svg_out_dir: str,
@@ -117,6 +144,7 @@ def _markPoorConversionsWithFailedPrefix(
     reports_out_dir: str,
 ) -> None:
     threshold = _computeDynamicAc08MeanDelta2Threshold(reports_out_dir)
+    status_by_variant = _collectValidationStatusesByVariant(reports_out_dir)
     svg_dir = Path(svg_out_dir)
     if not svg_dir.exists():
         return
@@ -155,6 +183,11 @@ def _markPoorConversionsWithFailedPrefix(
         quality_fail = math.isfinite(mean_delta2) and math.isfinite(threshold) and mean_delta2 > threshold
         raster_fail = _svgContainsEmbeddedRaster(svg_path)
         trivial_fail = _svgIsTrivialFallback(svg_path)
+        is_skipped_variant = str(status_by_variant.get(variant, "")).startswith("skipped_")
+        if is_skipped_variant:
+            quality_fail = False
+            raster_fail = False
+            trivial_fail = False
         should_fail = bool(quality_fail or raster_fail or trivial_fail)
         has_run_metrics = variant in rows_by_variant
 
