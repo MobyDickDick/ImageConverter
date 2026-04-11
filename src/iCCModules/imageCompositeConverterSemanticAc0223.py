@@ -53,11 +53,28 @@ def fitAc0223ParamsFromImageImpl(
     valve_center_y = 25.153 * scale_y
     cx = float(params.get("cx", defaults.get("cx", float(img.shape[1]) / 2.0)))
 
+    default_cx = float(defaults.get("cx", cx))
+    default_cy = float(defaults.get("cy", head_base_y))
+    default_r = float(defaults.get("r", 0.0))
+    current_cy = float(params.get("cy", default_cy))
+    current_r = float(params.get("r", default_r))
+
+    # AC0223 has a stable silhouette (circle in lower half + top valve head).
+    # Tiny crops (notably *_M/*_S) can flip into a wrong local optimum where the
+    # circle is detected in the upper half. In that case, fall back to defaults.
+    if h > 0 and current_cy < (float(h) * 0.6):
+        params["cx"] = default_cx
+        params["cy"] = default_cy
+        params["r"] = default_r
+        cx = default_cx
+        current_cy = default_cy
+        current_r = default_r
+
     params["arm_x1"] = cx
     params["arm_x2"] = cx
     params["arm_y2"] = float(params.get("head_hub_cy", defaults.get("head_hub_cy", valve_center_y)))
     params["arm_y2"] = min(head_base_y, params["arm_y2"])
-    params["arm_y1"] = max(params["arm_y2"], float(params.get("cy", defaults.get("cy", head_base_y))) - float(params.get("r", defaults.get("r", 0.0))))
+    params["arm_y1"] = max(params["arm_y2"], current_cy - current_r)
     params["draw_text"] = False
     params["head_style"] = "ac0223_triple_valve"
     params["head_gradient_dark"] = str(defaults.get("head_gradient_dark", "#b2b2b3"))
