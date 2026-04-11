@@ -6114,6 +6114,19 @@ def test_parse_description_uses_xml_loaded_variant_descriptions() -> None:
     assert "rohr" in desc
 
 
+def test_parse_description_manual_review_clears_default_label_for_unclassified_sia_symbol() -> None:
+    mapping = conv._loadDescriptionMappingFromXml(
+        "artifacts/images_to_convert/Finale_Wurzelformen_V3.xml"
+    )
+    ref = conv.Reflection(mapping)
+
+    _desc, params = ref.parse_description("AC0561_sia_S", "AC0561_sia_S.jpeg")
+
+    assert params["mode"] == "manual_review"
+    assert params["label"] == ""
+    assert "familienzuordnung" in str(params.get("review_reason", "")).lower()
+
+
 def test_load_description_mapping_from_xml_falls_back_to_descriptions_directory() -> None:
     mapping = conv._loadDescriptionMappingFromXml(
         "artifacts/images_to_convert/Finale_Wurzelformen_V3.xml"

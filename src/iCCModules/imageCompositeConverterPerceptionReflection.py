@@ -99,6 +99,7 @@ class Reflection:
         if non_traceable_hint:
             params["mode"] = "manual_review"
             params["review_reason"] = non_traceable_hint
+            params["label"] = ""
             params["elements"].append(f"MANUELL: {non_traceable_hint}")
             return desc, params
 
@@ -137,6 +138,8 @@ class Reflection:
             (r"außerhalb der robust unterstützten standard-geometrien", "Beschreibung markiert Symbol außerhalb der robust unterstützten Standard-Geometrien."),
             (r"bitte einer finalen wurzelform-kategorie zuordnen", "Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie."),
             (r"noch nicht fachlich klassifiziert", "Beschreibung markiert Symbol als fachlich noch nicht klassifiziert."),
+            (r"ohne finale familienzuordnung", "Beschreibung markiert Symbol ohne finale Familienzuordnung."),
+            (r"unzugeordnete wurzelform", "Beschreibung markiert Symbol als unzugeordnete Wurzelform."),
         ]
         for pattern, message in hint_patterns:
             if re.search(pattern, normalized):
