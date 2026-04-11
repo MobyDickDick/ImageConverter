@@ -116,6 +116,20 @@ def finalizeAc08StyleImpl(
         elif has_connector and (aspect_ratio >= 1.60 or aspect_ratio <= (1.0 / 1.60)):
             min_ratio = 0.95
         p["min_circle_radius"] = float(max(float(p.get("min_circle_radius", 1.0)), base_r * min_ratio))
+        # Keep a generic, non-family-specific lower bound even when adaptive lock
+        # keys are stripped below. This prevents underfitting rings in weak-mask
+        # cases (e.g. thin anti-aliased circles) without reintroducing hard locks.
+        # We intentionally use template-based geometry so it remains stable across
+        # variants and image-specific outliers.
+        template_floor_ratio = 0.90 if has_text else 0.92
+        if has_connector:
+            template_floor_ratio = max(template_floor_ratio, 0.93)
+        p["circle_radius_lower_bound_px"] = float(
+            max(
+                float(p.get("circle_radius_lower_bound_px", 1.0)),
+                max(1.0, template_r * template_floor_ratio),
+            )
+        )
 
         if not has_connector:
             p["lock_circle_cx"] = True

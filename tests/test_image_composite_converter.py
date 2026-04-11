@@ -924,22 +924,22 @@ def test_parse_description_marks_ac0813_with_top_vertical_connector() -> None:
     assert "SEMANTIC: senkrechter Strich oben vom Kreis" in list(params.get("elements", []))
 
 
-def test_parse_description_marks_ac0838_with_right_horizontal_arm() -> None:
-    """AC0838 belongs to the right-arm VOC family and must include that semantic element."""
+def test_parse_description_marks_ac0838_with_top_vertical_connector() -> None:
+    """AC0838 belongs to the top-connector VOC family and must include that semantic element."""
     ref = image_composite_converter.Reflection({})
 
     _desc, params = ref.parse_description("AC0838", "AC0838_L.jpg")
 
-    assert "SEMANTIC: waagrechter Strich rechts vom Kreis" in list(params.get("elements", []))
+    assert "SEMANTIC: senkrechter Strich oben vom Kreis" in list(params.get("elements", []))
 
 
-def test_make_badge_params_ac0838_uses_right_horizontal_connector_geometry() -> None:
-    """AC0838 defaults must follow the right-arm connector family."""
+def test_make_badge_params_ac0838_uses_top_vertical_connector_geometry() -> None:
+    """AC0838 defaults must follow the top-connector family."""
     params = image_composite_converter.Action.make_badge_params(24, 24, "AC0838")
 
     assert params is not None
     assert bool(params.get("arm_enabled", False))
-    assert abs(float(params.get("arm_x2", 0.0)) - float(params.get("arm_x1", 0.0))) >= abs(
+    assert abs(float(params.get("arm_x2", 0.0)) - float(params.get("arm_x1", 0.0))) <= abs(
         float(params.get("arm_y2", 0.0)) - float(params.get("arm_y1", 0.0))
     )
 
@@ -1096,6 +1096,18 @@ def test_finalize_elongated_connector_badge_does_not_add_radius_floor() -> None:
     params = Action._finalize_ac08_style("AC0811_L", params)
 
     assert "min_circle_radius" not in params
+
+
+def test_finalize_ac08_style_persists_soft_circle_radius_floor_without_lock_keys() -> None:
+    """AC08 finalization should preserve a generic radius floor even after lock cleanup."""
+    params = Action._apply_voc_label(Action._default_ac0813_params(20, 20))
+    params["template_circle_radius"] = float(params["r"])
+    params["r"] = float(params["template_circle_radius"]) * 0.70
+
+    params = Action._finalize_ac08_style("AC0838_M", params)
+
+    assert "min_circle_radius" not in params
+    assert float(params["circle_radius_lower_bound_px"]) >= float(params["template_circle_radius"]) * 0.93 - 0.01
 
 
 def test_scale_badge_params_reanchors_vertical_stem_after_circle_canvas_fit() -> None:
@@ -5199,8 +5211,8 @@ def test_validate_semantic_alignment_accepts_ac0870_small_circle_text_variant() 
     assert "Strukturprüfung: Kein belastbarer Kreis-Kandidat im Rohbild erkannt" not in issues
 
 
-def test_validate_semantic_alignment_accepts_ac0838_large_right_arm_voc_variant() -> None:
-    """AC0838_L should keep circle+right-arm VOC semantics despite weak local circle mask extraction."""
+def test_validate_semantic_alignment_accepts_ac0838_large_top_connector_voc_variant() -> None:
+    """AC0838_L should keep circle+top-connector VOC semantics despite weak local circle mask extraction."""
     if image_composite_converter.np is None or image_composite_converter.cv2 is None:
         pytest.skip("numpy/cv2 not available in this environment")
 
@@ -5211,13 +5223,14 @@ def test_validate_semantic_alignment_accepts_ac0838_large_right_arm_voc_variant(
     params = Action.make_badge_params(img.shape[1], img.shape[0], "AC0838", img)
     issues = Action.validate_semantic_description_alignment(
         img,
-        ["SEMANTIC: waagrechter Strich rechts vom Kreis", "SEMANTIC: Kreis + Buchstabe VOC"],
+        ["SEMANTIC: senkrechter Strich oben vom Kreis", "SEMANTIC: Kreis + Buchstabe VOC"],
         params,
     )
 
     assert "Beschreibung erwartet Kreis, im Bild aber nicht robust erkennbar" not in issues
     assert "Strukturprüfung: Kein belastbarer Kreis-Kandidat im Rohbild erkannt" not in issues
-    assert "Beschreibung erwartet waagrechter Strich, im Bild aber nicht robust erkennbar" not in issues
+    assert "Beschreibung erwartet senkrechter Strich, im Bild aber nicht robust erkennbar" not in issues
+    assert "Strukturprüfung: Kein belastbarer waagrechter Linien-Kandidat im Rohbild erkannt" not in issues
 
 
 def test_detect_semantic_primitives_reports_family_circle_fallback_source(monkeypatch: pytest.MonkeyPatch) -> None:
