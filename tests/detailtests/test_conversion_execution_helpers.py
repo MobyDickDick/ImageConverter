@@ -267,7 +267,7 @@ def test_convert_one_impl_embedded_svg_uses_failed_prefix_independent_of_status(
     assert not (svg_out / "AC0805_M.svg").exists()
 
 
-def test_convert_one_impl_skipped_status_with_result_keeps_normal_svg_name(tmp_path: Path) -> None:
+def test_convert_one_impl_skipped_status_with_result_marks_embedded_svg_as_failed(tmp_path: Path) -> None:
     folder = tmp_path / "images"
     svg_out = tmp_path / "svg"
     diff_out = tmp_path / "diff"
@@ -306,8 +306,8 @@ def test_convert_one_impl_skipped_status_with_result_keeps_normal_svg_name(tmp_p
 
     assert row is None
     assert failed is False
-    assert (svg_out / "AC0503_1M_sia.svg").exists()
-    assert not (svg_out / "Failed_AC0503_1M_sia.svg").exists()
+    assert not (svg_out / "AC0503_1M_sia.svg").exists()
+    assert (svg_out / "Failed_AC0503_1M_sia.svg").exists()
 
 
 def test_convert_one_impl_trivial_placeholder_svg_is_marked_failed(tmp_path: Path) -> None:

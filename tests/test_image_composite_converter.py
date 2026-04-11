@@ -5760,8 +5760,10 @@ def test_convert_image_fallback_writes_embedded_svg(tmp_path: Path, monkeypatch:
 
     result = conv.convert_image(jpg_path, out_path)
 
-    assert result == out_path
-    text = out_path.read_text(encoding="utf-8")
+    failed_out_path = tmp_path / "Failed_sample.svg"
+    assert result == failed_out_path
+    assert not out_path.exists()
+    text = failed_out_path.read_text(encoding="utf-8")
     assert 'viewBox="0 0 5 4"' in text
     assert "data:image/jpeg;base64," in text
 
