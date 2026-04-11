@@ -69,9 +69,13 @@ def fitAc0223ParamsFromImageImpl(
 
     params["arm_x1"] = cx
     params["arm_x2"] = cx
-    params["arm_y2"] = float(params.get("head_hub_cy", defaults.get("head_hub_cy", valve_center_y)))
-    params["arm_y2"] = min(head_base_y, params["arm_y2"])
+    # Keep AC0223's connector anchored between valve hub and circle top edge.
+    # This avoids regressions where iterative geometry search stretches the arm
+    # to the canvas top instead of the valve center.
+    params["arm_y2"] = float(defaults.get("head_hub_cy", valve_center_y))
+    params["arm_y2"] = max(0.0, min(head_base_y, params["arm_y2"]))
     params["arm_y1"] = max(params["arm_y2"], current_cy - current_r)
+    params["arm_y1"] = min(head_base_y, params["arm_y1"])
     params["draw_text"] = False
     params["head_style"] = "ac0223_triple_valve"
     params["head_gradient_dark"] = str(defaults.get("head_gradient_dark", "#b2b2b3"))

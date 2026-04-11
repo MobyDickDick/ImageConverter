@@ -23,16 +23,24 @@ def makeBadgeParamsImpl(
 
     name = str(get_base_name_fn(base_name)).upper()
 
+    def _annotate(params):
+        if params is None:
+            return None
+        annotated = dict(params)
+        annotated.setdefault("base_name", name)
+        annotated.setdefault("variant_name", str(base_name))
+        return annotated
+
     ar0100_params = build_ar0100_badge_params_fn(w, h, name)
     if ar0100_params is not None:
-        return ar0100_params
+        return _annotate(ar0100_params)
 
     ac0223_params = build_ac0223_badge_params_fn(w, h, name, img)
     if ac0223_params is not None:
-        return ac0223_params
+        return _annotate(ac0223_params)
 
     ac08_params = make_ac08_badge_params_fn(w, h, name, img)
     if ac08_params is not None:
-        return ac08_params
+        return _annotate(ac08_params)
 
     return None
