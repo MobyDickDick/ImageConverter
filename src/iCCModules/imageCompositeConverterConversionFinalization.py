@@ -185,9 +185,9 @@ def _markPoorConversionsWithFailedPrefix(
         trivial_fail = _svgIsTrivialFallback(svg_path)
         is_skipped_variant = str(status_by_variant.get(variant, "")).startswith("skipped_")
         if is_skipped_variant:
+            # Skipped variants have no fresh quality metric from this run,
+            # but existing fallback SVG payloads should still be normalized.
             quality_fail = False
-            raster_fail = False
-            trivial_fail = False
         should_fail = bool(quality_fail or raster_fail or trivial_fail)
         has_run_metrics = variant in rows_by_variant
 

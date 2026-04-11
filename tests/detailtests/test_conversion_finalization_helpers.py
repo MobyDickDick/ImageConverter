@@ -187,7 +187,7 @@ def test_mark_poor_conversions_detects_embedded_raster_for_lowercase_variant_nam
     assert not (svg_dir / "b_info.svg").exists()
 
 
-def test_mark_poor_conversions_keeps_skipped_manual_review_svg_name(tmp_path):
+def test_mark_poor_conversions_marks_skipped_manual_review_embedded_svg_as_failed(tmp_path):
     svg_dir = tmp_path / "svg"
     svg_dir.mkdir()
     (svg_dir / "AC0503_1M_sia.svg").write_text(
@@ -208,8 +208,8 @@ def test_mark_poor_conversions_keeps_skipped_manual_review_svg_name(tmp_path):
         reports_out_dir=str(reports_dir),
     )
 
-    assert (svg_dir / "AC0503_1M_sia.svg").exists()
-    assert not (svg_dir / "Failed_AC0503_1M_SIA.svg").exists()
+    assert not (svg_dir / "AC0503_1M_sia.svg").exists()
+    assert (svg_dir / "Failed_AC0503_1M_SIA.svg").exists()
 
 
 def test_mark_poor_conversions_removes_stale_failed_svg_after_successful_result(tmp_path):
