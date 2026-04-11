@@ -1,0 +1,54 @@
+{
+  "base": "AC0223",
+  "best_error": 33.010666666666665,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.008802844444444444,
+  "filename": "AC0223_L.jpg",
+  "h": 75,
+  "mean_delta2": 6035.6689453125,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "AC0223",
+        "source": "base_name",
+        "text": "Wie AC0221: Wie AC0231, jedoch ohne \"M\" in der Kelle oben. Geometrische Variante: 180° gedreht."
+      }
+    ],
+    "documented_alias_refs": [
+      "AC0221",
+      "AC0231"
+    ],
+    "elements": [
+      "SEMANTIC: Kreis ohne Buchstabe",
+      "SEMANTIC: senkrechter Strich oben vom Kreis",
+      "SEMANTIC: Ventilkopf mit drei Dreiecken oberhalb des Stiels",
+      "SEMANTIC: Dreiecks-Spitzen treffen zentriert am oberen Stielende zusammen",
+      "SEMANTIC: Drei Dreiecke sind zu einem Polygon vereint"
+    ],
+    "label": "",
+    "mode": "semantic_badge",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {
+      "description_heuristic": [],
+      "family_rule": [
+        "SEMANTIC: Kreis ohne Buchstabe",
+        "SEMANTIC: senkrechter Strich oben vom Kreis",
+        "SEMANTIC: Ventilkopf mit drei Dreiecken oberhalb des Stiels",
+        "SEMANTIC: Dreiecks-Spitzen treffen zentriert am oberen Stielende zusammen",
+        "SEMANTIC: Drei Dreiecke sind zu einem Polygon vereint"
+      ]
+    },
+    "top_source_ref": null,
+    "variant_name": "AC0223_L"
+  },
+  "std_delta2": 10078.45703125,
+  "variant": "AC0223_L",
+  "w": 50
+}
