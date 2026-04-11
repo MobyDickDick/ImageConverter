@@ -18,12 +18,19 @@ def detectGradientStripeStrategyImpl(
     min_relative_width: float = 0.30,
     max_relative_height: float = 0.45,
     max_stops: int = 6,
+    min_canvas_height: int = 8,
 ) -> dict[str, Any] | None:
     """Detect a mostly flat stripe and derive gradient stop colors + offsets."""
     if img is None:
         return None
     h, w = img.shape[:2]
     if h <= 0 or w <= 0:
+        return None
+    # Very short rasters (e.g. 6px height) tend to collapse into a few
+    # quantized gradient stops and look like caricatures. For these tiny
+    # canvases we keep the higher-fidelity embedded-raster fallback instead of
+    # forcing a synthetic gradient stripe.
+    if h < int(min_canvas_height):
         return None
 
     # BGR image: detect non-background region.

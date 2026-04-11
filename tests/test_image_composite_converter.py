@@ -1888,6 +1888,57 @@ def test_run_iteration_pipeline_converts_non_composite_as_embedded_svg(
     assert "status=non_composite_embedded_svg" in log_text
 
 
+def test_run_iteration_pipeline_overrides_semantic_badge_for_detected_gradient_stripe(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+        pytest.skip("numpy/cv2 not available in this environment")
+
+    np = image_composite_converter.np
+    if np is None:
+        pytest.skip("numpy not available in this environment")
+    cv2 = image_composite_converter.cv2
+
+    img = np.full((20, 120, 3), 255, dtype=np.uint8)
+    for x in range(10, 111):
+        t = (x - 10) / 100.0
+        img[4:9, x] = np.array(
+            [
+                int(230 - 55 * t),
+                int(170 + 20 * t),
+                int(160 + 35 * t),
+            ],
+            dtype=np.uint8,
+        )
+    img_path = tmp_path / "Z_203.jpg"
+    csv_path = tmp_path / "data.csv"
+    svg_dir = tmp_path / "svg"
+    diff_dir = tmp_path / "diff"
+    reports_dir = tmp_path / "reports"
+    csv_path.write_text("Wurzelform;Beschreibung\nZ_203;Rechteck mit vertikalem Farbverlauf.\n", encoding="utf-8")
+    assert cv2.imwrite(str(img_path), img)
+
+    monkeypatch.setattr(
+        image_composite_converter.Reflection,
+        "parse_description",
+        lambda *_args, **_kwargs: ("badge erkannt", {"mode": "semantic_badge", "elements": ["SEMANTIC: Kreis ohne Buchstabe"]}),
+    )
+
+    res = image_composite_converter.runIterationPipeline(
+        str(img_path),
+        str(csv_path),
+        2,
+        str(svg_dir),
+        str(diff_dir),
+        str(reports_dir),
+    )
+
+    assert res is not None
+    log_text = (reports_dir / "Z_203_element_validation.log").read_text(encoding="utf-8")
+    assert "status=non_composite_gradient_stripe_visual_override" in log_text
+
+
 def test_write_semantic_audit_report_persists_csv_and_json(tmp_path: Path) -> None:
     """Semantic audit exports should summarize AC0811-AC0814 review data in CSV and JSON."""
     reports_dir = tmp_path / "reports"
