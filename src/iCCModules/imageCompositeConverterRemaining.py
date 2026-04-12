@@ -6,6 +6,7 @@ from pathlib import Path
 from src.iCCModules import imageCompositeConverterDependencies as dependency_helpers
 from src.iCCModules import imageCompositeConverterDualArrowBadge as dual_arrow_badge_helpers
 from src.iCCModules import imageCompositeConverterGradientStripeStrategy as gradient_stripe_strategy_helpers
+from src.iCCModules import imageCompositeConverterImageLoading as image_loading_helpers
 from src.iCCModules import imageCompositeConverterPerceptionGeometry as perception_geometry_helpers
 from src.iCCModules.imageCompositeConverterPerceptionReflection import Perception, Reflection
 
@@ -80,11 +81,10 @@ def _clip(value, low, high):
     )
 
 def loadGrayscaleImage(path: Path) -> list[list[int]]:
-    image_module = _importWithVendoredFallback("PIL.Image")
-    gray = image_module.open(path).convert("L")
-    w, h = gray.size
-    px = gray.load()
-    return [[int(px[x, y]) for x in range(w)] for y in range(h)]
+    return image_loading_helpers.loadGrayscaleImageImpl(
+        path,
+        import_with_vendored_fallback_fn=_importWithVendoredFallback,
+    )
 
 def _createDiffImageWithoutCv2(input_path: str | Path, svg_content: str):
     return diffing_helpers.createDiffImageWithoutCv2Impl(
@@ -100,16 +100,14 @@ def _adaptiveThreshold(grayscale: list[list[int]], block_size: int = 15, c: int 
     return thresholding_helpers.adaptiveThresholdImpl(grayscale, block_size=block_size, c=c)
 
 def loadBinaryImageWithMode(path: Path, *, threshold: int = 220, mode: str = "global") -> list[list[int]]:
-    grayscale = loadGrayscaleImage(path)
-    m = str(mode).lower()
-    if m == 'global':
-        return [[1 if v < threshold else 0 for v in row] for row in grayscale]
-    if m == 'otsu':
-        t = _computeOtsuThreshold(grayscale)
-        return [[1 if v < t else 0 for v in row] for row in grayscale]
-    if m == 'adaptive':
-        return _adaptiveThreshold(grayscale)
-    raise ValueError(f"Unknown threshold mode '{mode}'.")
+    return image_loading_helpers.loadBinaryImageWithModeImpl(
+        path,
+        threshold=threshold,
+        mode=mode,
+        load_grayscale_image_fn=loadGrayscaleImage,
+        compute_otsu_threshold_fn=_computeOtsuThreshold,
+        adaptive_threshold_fn=_adaptiveThreshold,
+    )
 
 def renderCandidateMask(candidate: Candidate, width: int, height: int) -> list[list[int]]:
     return element_search_optimization_helpers.renderCandidateMaskImpl(
