@@ -30,3 +30,7 @@ def test_gray_to_hex_impl_clamps_and_rounds() -> None:
     assert color_utils_helpers.grayToHexImpl(128.4) == "#808080"
     assert color_utils_helpers.grayToHexImpl(-10.0) == "#000000"
     assert color_utils_helpers.grayToHexImpl(999.0) == "#ffffff"
+
+
+def test_rgb_to_hex_impl_formats_channels() -> None:
+    assert color_utils_helpers.rgbToHexImpl([16, 32, 255]) == "#1020ff"
