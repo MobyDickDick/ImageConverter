@@ -34,7 +34,10 @@ def enforceCircleConnectorSymmetryImpl(params: dict, w: int, h: int) -> dict:
             scale_y = (float(h) / 75.0) if h > 0 else 1.0
             hub_y = float(p.get("head_hub_cy", p.get("arm_y2", 25.153 * scale_y)))
             hub_y = max(0.0, min(float(h), hub_y))
-            circle_top = cy - r
+            if str(p.get("ac0223_handle_style", "")).lower() == "square_diagonals":
+                circle_top = 41.518044 * scale_y
+            else:
+                circle_top = cy - r
             p["arm_y2"] = hub_y
             p["arm_y1"] = max(hub_y, min(float(h), circle_top))
             p["head_hub_cy"] = hub_y

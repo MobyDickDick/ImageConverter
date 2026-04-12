@@ -47,6 +47,11 @@ def generateBadgeSvgImpl(
         p["arm_x2"] = float(p.get("cx", float(w) / 2.0))
         p["arm_y2"] = hub_y
         p["arm_y1"] = max(hub_y, min(head_base_y, circle_top))
+        is_sia = "_SIA" in variant_ref
+        p["ac0223_handle_style"] = "square_diagonals" if is_sia else "circle"
+        if is_sia:
+            square_top = 41.518044 * sy
+            p["arm_y1"] = max(hub_y, min(float(h), square_top))
 
     p = quantize_badge_params_fn(p, w, h)
     elements = [f'<svg width="{w}px" height="{h}px" viewBox="0 0 {w} {h}" xmlns="http://www.w3.org/2000/svg">']
@@ -95,13 +100,40 @@ def generateBadgeSvgImpl(
             )
         )
 
-    if p.get("circle_enabled", True):
+    if p.get("circle_enabled", True) and str(p.get("ac0223_handle_style", "")).lower() != "square_diagonals":
         elements.append(
             (
                 f'  <circle cx="{p["cx"]:.4f}" cy="{p["cy"]:.4f}" r="{p["r"]:.4f}" '
                 f'fill="{grayhex_fn(p["fill_gray"])}" stroke="{grayhex_fn(p["stroke_gray"])}" '
                 f'stroke-width="{p["stroke_circle"]:.4f}"/>'
             )
+        )
+
+    if str(p.get("ac0223_handle_style", "")).lower() == "square_diagonals":
+        sx = float(w) / 50.0 if w > 0 else 1.0
+        sy = float(h) / 75.0 if h > 0 else 1.0
+        rect_x = 14.104116 * sx
+        rect_y = 41.518044 * sy
+        rect_w = 21.791766 * sx
+        rect_h = 21.767669 * sy
+        rect_stroke = max(1.0, round(min(sx, sy), 4))
+        rect_color = "#7f7f7f"
+        rect_fill = "#d2d2d2"
+        x2 = rect_x + rect_w
+        y2 = rect_y + rect_h
+        elements.append(
+            (
+                f'  <rect x="{rect_x:.4f}" y="{rect_y:.4f}" width="{rect_w:.4f}" height="{rect_h:.4f}" '
+                f'fill="{rect_fill}" stroke="{rect_color}" stroke-width="{rect_stroke:.4f}"/>'
+            )
+        )
+        elements.append(
+            f'  <line x1="{rect_x:.4f}" y1="{rect_y:.4f}" x2="{x2:.4f}" y2="{y2:.4f}" '
+            f'stroke="{rect_color}" stroke-width="{rect_stroke:.4f}"/>'
+        )
+        elements.append(
+            f'  <line x1="{rect_x:.4f}" y1="{y2:.4f}" x2="{x2:.4f}" y2="{rect_y:.4f}" '
+            f'stroke="{rect_color}" stroke-width="{rect_stroke:.4f}"/>'
         )
 
     if str(p.get("head_style", "")).lower() == "ac0223_triple_valve":
