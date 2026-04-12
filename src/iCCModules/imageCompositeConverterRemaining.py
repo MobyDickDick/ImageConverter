@@ -15,6 +15,7 @@ from src.iCCModules import imageCompositeConverterSemanticAc0223Runtime as seman
 from src.iCCModules import imageCompositeConverterSemanticValidationContext as semantic_validation_context_helpers
 from src.iCCModules import imageCompositeConverterSemanticValidationLogging as semantic_validation_logging_helpers
 from src.iCCModules import imageCompositeConverterSemanticValidationRuntime as semantic_validation_runtime_helpers
+from src.iCCModules import imageCompositeConverterSemanticValidationFinalization as semantic_validation_finalization_helpers
 from src.iCCModules import imageCompositeConverterSemanticMismatchReporting as semantic_mismatch_reporting_helpers
 from src.iCCModules import imageCompositeConverterSemanticAuditRuntime as semantic_audit_runtime_helpers
 from src.iCCModules.imageCompositeConverterPerceptionReflection import Perception, Reflection
@@ -540,29 +541,27 @@ def runIterationPipeline(
             h,
         )
         badge_params, redraw_variation_logs = Action.apply_redraw_variation(badge_params, w, h)
-        if badge_params.get("arm_enabled"):
-            validation_logs.append(
-                "semantic-guard: Erwartete Arm-Geometrie bestätigt/wiederhergestellt (z.B. AC0812 links)."
-            )
-        quality_flags = _semanticQualityFlags(perc.base_name, validation_logs)
-        if semantic_audit_row is not None:
-            semantic_audit_row = _semanticAuditRecord(
+        validation_logs = semantic_validation_finalization_helpers.appendSemanticConnectorExpectationLogImpl(
+            validation_logs=validation_logs,
+            badge_params=badge_params,
+        )
+        semantic_audit_row, semantic_ok_validation_lines = (
+            semantic_validation_finalization_helpers.buildSemanticOkValidationOutcomeImpl(
                 base_name=perc.base_name,
-                **semantic_audit_runtime_helpers.buildSemanticAuditRecordKwargsImpl(
-                    filename=filename,
-                    params=params,
-                    status="semantic_ok",
-                ),
-            )
-        _writeValidationLog(
-            semantic_validation_logging_helpers.buildSemanticOkValidationLogLinesImpl(
-                semantic_audit_lines=semantic_audit_logging_helpers.buildSemanticAuditLogLinesImpl(
-                    semantic_audit_row,
-                ),
-                quality_flags=quality_flags,
-                redraw_variation_logs=redraw_variation_logs,
+                filename=filename,
+                params=params,
+                semantic_audit_row=semantic_audit_row,
                 validation_logs=validation_logs,
+                redraw_variation_logs=redraw_variation_logs,
+                semantic_quality_flags_fn=_semanticQualityFlags,
+                semantic_audit_record_fn=_semanticAuditRecord,
+                build_semantic_audit_record_kwargs_fn=semantic_audit_runtime_helpers.buildSemanticAuditRecordKwargsImpl,
+                build_semantic_audit_log_lines_fn=semantic_audit_logging_helpers.buildSemanticAuditLogLinesImpl,
+                build_semantic_ok_validation_log_lines_fn=semantic_validation_logging_helpers.buildSemanticOkValidationLogLinesImpl,
             )
+        )
+        _writeValidationLog(
+            semantic_ok_validation_lines
         )
 
         badge_params = semantic_ac0223_runtime_helpers.finalizeAc0223BadgeParamsImpl(
