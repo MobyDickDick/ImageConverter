@@ -27,18 +27,16 @@ def enforceCircleConnectorSymmetryImpl(params: dict, w: int, h: int) -> dict:
         vertical = abs(x2 - x1) <= abs(y2 - y1)
         if str(p.get("head_style", "")).lower() == "ac0223_triple_valve" and vertical:
             # AC0223 requires a short vertical connector between the circle top
-            # and the valve hub. Keep it centered and clamp it to the template
-            # envelope so iterative searches cannot stretch it to y=0.
+            # and the valve hub. Keep it centered and clamp it to the canvas
+            # so iterative searches cannot stretch it to y=0.
             p["arm_x1"] = cx
             p["arm_x2"] = cx
             scale_y = (float(h) / 75.0) if h > 0 else 1.0
-            head_base_y = 39.922279 * scale_y
             hub_y = float(p.get("head_hub_cy", p.get("arm_y2", 25.153 * scale_y)))
-            hub_y = max(0.0, min(head_base_y, hub_y))
+            hub_y = max(0.0, min(float(h), hub_y))
             circle_top = cy - r
-            current_circle_end = float(p.get("arm_y1", circle_top))
             p["arm_y2"] = hub_y
-            p["arm_y1"] = max(hub_y, min(head_base_y, current_circle_end))
+            p["arm_y1"] = max(hub_y, min(float(h), circle_top))
             p["head_hub_cy"] = hub_y
         elif vertical:
             p["arm_x1"] = cx

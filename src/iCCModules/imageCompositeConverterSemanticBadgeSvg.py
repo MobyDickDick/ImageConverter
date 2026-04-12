@@ -39,7 +39,7 @@ def generateBadgeSvgImpl(
         p.setdefault("head_gradient_light", "#d9d9d9")
         p.setdefault("head_stroke", "#808080")
         p.setdefault("head_hub_fill", "#7f7f7f")
-        p.setdefault("arm_color", "#136fad")
+        p.setdefault("arm_color", "#606060")
         p.setdefault("arm_stroke", 2.0)
         p["arm_enabled"] = True
         p["head_hub_cy"] = hub_y
@@ -122,7 +122,8 @@ def generateBadgeSvgImpl(
             '22.863281 L 36.492188 3.0410156 z" fill="url(#ac0223ValveGradient)" stroke="none"/>'
         )
         elements.append(
-            f'    <polygon points="36.492188,2.6959677 47.87305,12.963546 47.78125,35.949874 2.1132824,35.949874 2.0195324,12.963546 13.50586,2.7897177" fill="url(#ac0223ValveGradient)" stroke="{head_stroke}" stroke-width="1"/>'
+            f'    <path d="M 36.492188,2.6959677 25,25 47.87305,12.963546 47.78125,35.949874 25,25 2.1132824,35.949874 '
+            f'2.0195324,12.963546 25,25 13.50586,2.7897177 Z" fill="url(#ac0223ValveGradient)" stroke="{head_stroke}" stroke-width="1"/>'
         )
         elements.append(f'    <ellipse cx="25" cy="25.153" rx="2.5" ry="2.500001" fill="{head_hub_fill}" stroke="{head_stroke}" stroke-width="1"/>')
         elements.append("  </g>")

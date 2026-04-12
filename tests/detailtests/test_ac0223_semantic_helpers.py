@@ -30,7 +30,7 @@ def test_fit_ac0223_params_keeps_valve_connector_anchored() -> None:
     )
 
     assert params["arm_y2"] == defaults["head_hub_cy"]
-    assert params["arm_y1"] == 39.922279
+    assert params["arm_y1"] == 40.0
 
 
 def test_generate_badge_svg_ac0223_polygon_uses_gradient_fill() -> None:
@@ -94,7 +94,10 @@ def test_generate_badge_svg_restores_ac0223_head_when_style_keys_missing() -> No
     )
 
     assert "ac0223ValveGradient" in svg
-    assert "<polygon" in svg
+    assert '<line x1="25.0000"' in svg
+    assert 'stroke="#606060"' in svg
+    assert "<circle" in svg
+    assert svg.index("<line") < svg.index("<circle")
     assert "<line" in svg
 
 
@@ -120,4 +123,4 @@ def test_ac0223_symmetry_enforces_short_hub_connector() -> None:
     assert params["arm_x1"] == 25.0
     assert params["arm_x2"] == 25.0
     assert params["arm_y2"] == 25.153
-    assert params["arm_y1"] == 39.922279
+    assert params["arm_y1"] == 41.5
