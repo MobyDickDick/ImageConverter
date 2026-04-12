@@ -7399,3 +7399,41 @@ def test_dual_arrow_badge_detection_handles_equal_tip_widths() -> None:
     assert fitted is not None
     assert fitted["triangle_tip_y"] == 11.0
     assert fitted["line_y1"] == 0.0
+
+
+def test_dual_arrow_badge_detection_forces_opposite_arrow_directions() -> None:
+    np = image_composite_converter.np
+    if np is None:
+        pytest.skip("numpy not available in this environment")
+    from src.iCCModules import imageCompositeConverterDualArrowBadge as dual_arrow_helpers
+
+    img = np.full((32, 22, 3), 255, dtype=np.uint8)
+    # Blue (left): ambiguous upward triangle with tiny stem at the bottom.
+    for y in range(3, 24):
+        half = max(1, (y - 3) // 3)
+        img[y, 6 - half : 6 + half + 1] = (255, 0, 0)
+    img[24:28, 5:7] = (255, 0, 0)
+    # Red (right): clear down arrow.
+    img[2:22, 15:17] = (0, 0, 255)
+    for y in range(22, 31):
+        half = max(1, (y - 22) // 2)
+        img[y, 16 - half : 16 + half + 1] = (0, 0, 255)
+
+    params = dual_arrow_helpers.detectDualArrowBadgeParamsFromImageImpl(img, np_module=np)
+    assert params is not None
+    left = params["left"]
+    right = params["right"]
+    assert float(left["triangle_tip_y"]) < float(left["triangle_base_y"])
+    assert float(right["triangle_tip_y"]) > float(right["triangle_base_y"])
+    assert float(left["line_y1"]) == float(right["line_y1"])
+    assert float(left["line_y2"]) == float(right["line_y2"])
+    assert float(left["line_width"]) == float(right["line_width"])
+    assert float(left["triangle_half_width"]) == float(right["triangle_half_width"])
+    assert abs(
+        abs(float(left["triangle_tip_y"]) - float(left["triangle_base_y"]))
+        - abs(float(right["triangle_tip_y"]) - float(right["triangle_base_y"]))
+    ) < 1e-6
+    assert float(left["line_y2"]) < float(left["triangle_tip_y"])
+
+    svg = dual_arrow_helpers.generateDualArrowBadgeSvgImpl(22, 32, params)
+    assert 'stroke-linecap="butt"' in svg
