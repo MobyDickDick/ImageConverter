@@ -7378,3 +7378,53 @@ def test_dual_arrow_badge_detection_and_svg_generation() -> None:
     assert "<polygon" in svg
     assert "#2f6bff" in svg
     assert "#e53935" in svg
+
+
+def test_dual_arrow_badge_detection_handles_equal_tip_widths() -> None:
+    np = image_composite_converter.np
+    if np is None:
+        pytest.skip("numpy not available in this environment")
+    from src.iCCModules import imageCompositeConverterDualArrowBadge as dual_arrow_helpers
+
+    mask = np.zeros((12, 8), dtype=bool)
+    # thin stem with equal tip widths (1px) at top and bottom, but with
+    # broadened rows only near the bottom => down-arrow.
+    mask[0:8, 3] = True
+    mask[8, 2:5] = True
+    mask[9, 2:5] = True
+    mask[10, 1:6] = True
+    mask[11, 3] = True
+
+    fitted = dual_arrow_helpers._fitArrowFromMask(mask, np_module=np)
+    assert fitted is not None
+    assert fitted["triangle_tip_y"] == 11.0
+    assert fitted["line_y1"] == 0.0
+
+
+def test_dual_arrow_badge_detection_forces_opposite_arrow_directions() -> None:
+    np = image_composite_converter.np
+    if np is None:
+        pytest.skip("numpy not available in this environment")
+    from src.iCCModules import imageCompositeConverterDualArrowBadge as dual_arrow_helpers
+
+    img = np.full((32, 22, 3), 255, dtype=np.uint8)
+    # Blue (left): ambiguous upward triangle with tiny stem at the bottom.
+    for y in range(3, 24):
+        half = max(1, (y - 3) // 3)
+        img[y, 6 - half : 6 + half + 1] = (255, 0, 0)
+    img[24:28, 5:7] = (255, 0, 0)
+    # Red (right): clear down arrow.
+    img[2:22, 15:17] = (0, 0, 255)
+    for y in range(22, 31):
+        half = max(1, (y - 22) // 2)
+        img[y, 16 - half : 16 + half + 1] = (0, 0, 255)
+
+    params = dual_arrow_helpers.detectDualArrowBadgeParamsFromImageImpl(img, np_module=np)
+    assert params is not None
+    left = params["left"]
+    right = params["right"]
+    assert float(left["triangle_tip_y"]) < float(left["triangle_base_y"])
+    assert float(right["triangle_tip_y"]) > float(right["triangle_base_y"])
+
+    svg = dual_arrow_helpers.generateDualArrowBadgeSvgImpl(22, 32, params)
+    assert 'stroke-linecap="butt"' in svg

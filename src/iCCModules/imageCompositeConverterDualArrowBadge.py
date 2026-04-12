@@ -42,6 +42,11 @@ def detectDualArrowBadgeParamsFromImageImpl(
     right = _fitArrowFromMask(red_mask, np_module=np)
     if left is None or right is None:
         return None
+    if _arrowPointsDown(left) == _arrowPointsDown(right):
+        # Dual-arrow badges encode opposite directions. If both detections
+        # collapse to the same orientation (common with compressed tips),
+        # keep the right/red arrow and mirror the left/blue arrow.
+        left = _flipArrowDirection(left)
 
     return {
         "mode": "dual_arrow_badge",
@@ -74,16 +79,30 @@ def _fitArrowFromMask(mask, *, np_module: Any) -> dict[str, float] | None:
     top_w = row_widths[0][1]
     bottom_w = row_widths[-1][1]
     down = bool(bottom_w > top_w)
+    if top_w == bottom_w:
+        # Some JPEG-compressed arrow tips are only one pixel wide at both ends.
+        # In those cases, infer direction from where wider rows cluster.
+        y_mid = (y_min + y_max) / 2.0
+        weighted_sum = 0.0
+        weight_total = 0.0
+        for y, width in row_widths:
+            if width <= 1:
+                continue
+            weight = float(width - 1)
+            weighted_sum += float(y) * weight
+            weight_total += weight
+        if weight_total > 0:
+            down = (weighted_sum / weight_total) > y_mid
     splits = [y for y, width in row_widths if width >= tri_threshold]
     if down:
         split = splits[0] if splits else int((y_min + y_max) / 2)
         line_y1 = float(y_min)
-        line_y2 = float(max(y_min, split - 1))
+        line_y2 = float(max(y_min, split))
         tip_y = float(y_max)
         base_y = float(split)
     else:
         split = splits[-1] if splits else int((y_min + y_max) / 2)
-        line_y1 = float(min(y_max, split + 1))
+        line_y1 = float(min(y_max, split))
         line_y2 = float(y_max)
         tip_y = float(y_min)
         base_y = float(split)
@@ -97,6 +116,28 @@ def _fitArrowFromMask(mask, *, np_module: Any) -> dict[str, float] | None:
         "triangle_base_y": base_y,
         "triangle_half_width": float(max(non_zero)) / 2.0,
     }
+
+
+def _arrowPointsDown(arrow: dict[str, float]) -> bool:
+    return float(arrow["triangle_tip_y"]) > float(arrow["triangle_base_y"])
+
+
+def _flipArrowDirection(arrow: dict[str, float]) -> dict[str, float]:
+    flipped = dict(arrow)
+    line_y1 = float(arrow["line_y1"])
+    line_y2 = float(arrow["line_y2"])
+    y_min = min(line_y1, line_y2, float(arrow["triangle_tip_y"]), float(arrow["triangle_base_y"]))
+    y_max = max(line_y1, line_y2, float(arrow["triangle_tip_y"]), float(arrow["triangle_base_y"]))
+    base_y = float(arrow["triangle_base_y"])
+    if _arrowPointsDown(arrow):
+        flipped["triangle_tip_y"] = y_min
+        flipped["line_y1"] = min(y_max, base_y)
+        flipped["line_y2"] = y_max
+    else:
+        flipped["triangle_tip_y"] = y_max
+        flipped["line_y1"] = y_min
+        flipped["line_y2"] = max(y_min, base_y)
+    return flipped
 
 
 def generateDualArrowBadgeSvgImpl(
@@ -126,14 +167,14 @@ def generateDualArrowBadgeSvgImpl(
         f'<svg width="{w}px" height="{h}px" viewBox="0 0 {w} {h}" xmlns="http://www.w3.org/2000/svg">\n'
         f'  <line x1="{float(left["center_x"]):.4f}" y1="{float(left["line_y1"]):.4f}" '
         f'x2="{float(left["center_x"]):.4f}" y2="{float(left["line_y2"]):.4f}" '
-        f'stroke="{left_color}" stroke-width="{float(left["line_width"]):.4f}" stroke-linecap="round"/>\n'
+        f'stroke="{left_color}" stroke-width="{float(left["line_width"]):.4f}" stroke-linecap="butt"/>\n'
         f'  <polygon points="{float(left["center_x"]):.4f},{float(left["triangle_tip_y"]):.4f} '
         f'{float(left["center_x"]) - float(left["triangle_half_width"]):.4f},{float(left["triangle_base_y"]):.4f} '
         f'{float(left["center_x"]) + float(left["triangle_half_width"]):.4f},{float(left["triangle_base_y"]):.4f}" '
         f'fill="{left_color}"/>\n'
         f'  <line x1="{float(right["center_x"]):.4f}" y1="{float(right["line_y1"]):.4f}" '
         f'x2="{float(right["center_x"]):.4f}" y2="{float(right["line_y2"]):.4f}" '
-        f'stroke="{right_color}" stroke-width="{float(right["line_width"]):.4f}" stroke-linecap="round"/>\n'
+        f'stroke="{right_color}" stroke-width="{float(right["line_width"]):.4f}" stroke-linecap="butt"/>\n'
         f'  <polygon points="{float(right["center_x"]):.4f},{float(right["triangle_tip_y"]):.4f} '
         f'{float(right["center_x"]) - float(right["triangle_half_width"]):.4f},{float(right["triangle_base_y"]):.4f} '
         f'{float(right["center_x"]) + float(right["triangle_half_width"]):.4f},{float(right["triangle_base_y"]):.4f}" '
