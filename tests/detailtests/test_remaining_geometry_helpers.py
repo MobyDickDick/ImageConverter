@@ -1,8 +1,9 @@
 from __future__ import annotations
 
+import src.imageCompositeConverter as converter
 from src.iCCModules import imageCompositeConverterRemaining as helpers
 
-np = helpers.np
+np = converter._importWithVendoredFallback("numpy")
 
 
 def test_looks_like_elongated_foreground_rect_detects_wide_bar() -> None:

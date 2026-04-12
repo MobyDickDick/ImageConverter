@@ -203,6 +203,7 @@ focused on the actual project scope.
   - 2026-04-08: Dateiauswahl-/Variantennormalisierungs-I/O aus `convertRange` in neues Modul `src/iCCModules/imageCompositeConverterConversionInputs.py` ausgelagert (`listRequestedImageFilesImpl`, `normalizeSelectedVariantsImpl`); `src/imageCompositeConverter.py` delegiert die Bereichs-/Extensions-/Variantenselektion weiterhin kompatibel über den neuen Wrapper `_listRequestedImageFiles`.
   - 2026-04-08: Composite-Iterationsschleife aus `runIterationPipeline` in neues Modul `src/iCCModules/imageCompositeConverterConversionComposite.py` ausgelagert (`runCompositeIterationImpl`); `src/imageCompositeConverter.py` delegiert den Epsilon-/Plateau-/Konvergenzpfad weiterhin kompatibel inkl. Render-Failure-Logging und Validation-Log-Flush.
   - 2026-04-08: Neues Tool `tools/automate_function_extraction.py` ergänzt, das eine ausgewählte Top-Level-Funktion automatisch in ein Zielmodul kopiert, im Monolithen auf einen delegierenden Wrapper umstellt und danach Verifikationskommandos ausführt; bei fehlgeschlagener Verifikation werden alle Änderungen automatisch zurückgerollt.
+  - 2026-04-12: Wahrnehmungs-Geometriehelfer (`_looksLikeElongatedForegroundRect`) in neues Modul `src/iCCModules/imageCompositeConverterPerceptionGeometry.py` ausgelagert; `src/iCCModules/imageCompositeConverterRemaining.py` delegiert weiterhin kompatibel über Wrapper.
   - Nächster geplanter Schritt: weitere IO-/Reporting-Teilstrecken in denselben kleinen Schritten extrahieren.
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.
