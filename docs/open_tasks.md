@@ -208,6 +208,8 @@ focused on the actual project scope.
   - 2026-04-12: Dateinamen-/Varianten-Normalisierung (`getBaseNameFromFile`) in neues Modul `src/iCCModules/imageCompositeConverterNaming.py` ausgelagert; `src/iCCModules/imageCompositeConverterRemaining.py` delegiert weiterhin kompatibel über Wrapper und neue Detailtests decken die Suffix-Normalisierung (`_L/_M/_S`, `_sia`, numerische Varianten) ab.
   - [x] C1.2: Farb-Hex-Helfer (`rgbToHex`) aus `src/iCCModules/imageCompositeConverterRemaining.py` in `src/iCCModules/imageCompositeConverterColorUtils.py` ausgelagert; `src/iCCModules/imageCompositeConverterRemaining.py` delegiert weiterhin kompatibel über Wrapper und neue Detailtests decken die Hex-Formatierung ab.
   - 2026-04-12: Umsetzung abgeschlossen inkl. Test `test_rgb_to_hex_impl_formats_channels`.
+  - [x] C1.3: Circle-Decomposition-Helfer (`estimateStrokeStyle`, `candidateToSvg`, `decomposeCircleWithStem`) aus `src/iCCModules/imageCompositeConverterRemaining.py` in neues Modul `src/iCCModules/imageCompositeConverterElementDecomposition.py` ausgelagert; `src/iCCModules/imageCompositeConverterRemaining.py` delegiert weiterhin kompatibel über Wrapper und neue Detailtests decken SVG-/Stroke-Verhalten ab.
+  - 2026-04-12: Umsetzung abgeschlossen inkl. Tests `test_candidate_to_svg_impl_generates_circle_with_stroke` und `test_estimate_stroke_style_impl_detects_circle_ring`.
   - Nächster geplanter Schritt: weitere IO-/Reporting-Teilstrecken in denselben kleinen Schritten extrahieren.
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.
