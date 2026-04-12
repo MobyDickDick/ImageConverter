@@ -160,6 +160,14 @@ def parseArgsImpl(
             "für reproduzierbare Diagnoseläufe."
         ),
     )
+    parser.add_argument(
+        "--repair-ac0223-bestlist",
+        action="store_true",
+        help=(
+            "Bereinigt einmalig veraltete AC0223-Bestlist/Snapshot-Artefakte "
+            "(L/M/S ohne Ventilkopf-Metadaten) im Ausgabeverzeichnis und beendet danach."
+        ),
+    )
     parser.add_argument("--_render-svg-subprocess", action="store_true", help=argparse.SUPPRESS)
     args = parser.parse_args(argv)
     if args.iterations_override is not None:
@@ -346,6 +354,7 @@ def runMainImpl(
     bootstrap_required_image_dependencies_fn,
     analyze_range_fn,
     convert_range_fn,
+    repair_ac0223_bestlist_fn,
     format_user_diagnostic_fn,
     description_mapping_error_type,
     ac08_regression_set_name: str,
@@ -399,6 +408,19 @@ def runMainImpl(
                 args.end = str(args.end or "ZZZZZZ").strip() or args.start
 
             csv_path, output_dir = resolve_cli_csv_and_output_fn(args)
+
+            if bool(getattr(args, "repair_ac0223_bestlist", False)):
+                target_output_root = str(output_dir or "artifacts/converted_images")
+                repair_result = repair_ac0223_bestlist_fn(target_output_root)
+                removed = int(repair_result.get("removed_count", 0) or 0)
+                variants = ", ".join(str(v) for v in repair_result.get("removed_variants", []))
+                print(
+                    "[INFO] AC0223-Bestlist-Reparatur abgeschlossen: "
+                    f"entfernte Varianten={removed}"
+                    + (f" ({variants})" if variants else "")
+                )
+                print(f"\nAbgeschlossen! Ausgaben unter: {target_output_root}")
+                return 0
 
             if not csv_path:
                 print("[WARN] Keine CSV/TSV/XML angegeben oder gefunden. Einige Symbole können ohne Beschreibung übersprungen werden.")

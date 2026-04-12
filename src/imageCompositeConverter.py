@@ -2734,6 +2734,10 @@ def _promptInteractiveRange(args: argparse.Namespace) -> tuple[str, str]:
     return imageCompositeConverterRemaining_helpers._promptInteractiveRange(args)
 
 
+def repairAc0223BestlistArtifacts(output_root: str) -> dict[str, object]:
+    return imageCompositeConverterRemaining_helpers.repairAc0223BestlistArtifacts(output_root)
+
+
 def main(argv: list[str] | None = None) -> int:
     args = parseArgs(argv)
     return cli_helpers.runMainImpl(
@@ -2749,6 +2753,7 @@ def main(argv: list[str] | None = None) -> int:
         bootstrap_required_image_dependencies_fn=_bootstrapRequiredImageDependencies,
         analyze_range_fn=analyzeRange,
         convert_range_fn=convertRange,
+        repair_ac0223_bestlist_fn=repairAc0223BestlistArtifacts,
         format_user_diagnostic_fn=_formatUserDiagnostic,
         description_mapping_error_type=DescriptionMappingError,
         ac08_regression_set_name=AC08_REGRESSION_SET_NAME,

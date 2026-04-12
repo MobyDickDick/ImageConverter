@@ -169,6 +169,22 @@ def isConversionBestlistCandidateBetterImpl(
     if prev_status != "semantic_ok" and cand_status == "semantic_ok":
         return True
 
+    def _has_ac0223_valve_head(row: dict[str, object] | None) -> bool:
+        if not isinstance(row, dict):
+            return False
+        base = str(row.get("base", "")).upper()
+        if base != "AC0223":
+            return False
+        params = row.get("params")
+        if not isinstance(params, dict):
+            return False
+        return str(params.get("head_style", "")).lower() == "ac0223_triple_valve"
+
+    if _has_ac0223_valve_head(candidate_row) and not _has_ac0223_valve_head(previous_row):
+        # AC0223 ohne Ventilkopf ist semantisch falsch, selbst wenn der reine
+        # Pixel-Fehler zufällig niedriger ausfällt.
+        return True
+
     improved, *_ = evaluate_candidate_fn(previous_row, candidate_row)
     return bool(improved)
 
@@ -190,3 +206,75 @@ def chooseConversionBestlistRowImpl(
             if key in restored_row:
                 selected_row[key] = restored_row[key]
     return selected_row
+
+
+def repairAc0223BestlistArtifactsImpl(output_root: str) -> dict[str, object]:
+    """Remove stale AC0223 bestlist artifacts that miss valve-head semantics."""
+    root = Path(output_root)
+    svg_out_dir = root / "converted_svgs"
+    reports_out_dir = root / "reports"
+    manifest_path = conversionBestlistManifestPathImpl(str(reports_out_dir))
+
+    rows = readConversionBestlistMetricsImpl(manifest_path)
+    targets = ("AC0223_L", "AC0223_M", "AC0223_S")
+    removed_variants: list[str] = []
+
+    for variant in targets:
+        snapshot_paths = conversionBestlistSnapshotPathsImpl(str(reports_out_dir), variant)
+        has_any_artifact = (
+            variant in rows
+            or snapshot_paths["svg"].exists()
+            or snapshot_paths["log"].exists()
+            or snapshot_paths["row"].exists()
+            or (svg_out_dir / f"{variant}.svg").exists()
+            or (reports_out_dir / f"{variant}_element_validation.log").exists()
+            or (root / "diff_pngs" / f"{variant}_diff.png").exists()
+        )
+        if not has_any_artifact:
+            continue
+
+        snapshot_row = None
+        try:
+            if snapshot_paths["row"].exists():
+                payload = json.loads(snapshot_paths["row"].read_text(encoding="utf-8"))
+                if isinstance(payload, dict):
+                    snapshot_row = payload
+        except (OSError, json.JSONDecodeError):
+            snapshot_row = None
+
+        params = snapshot_row.get("params") if isinstance(snapshot_row, dict) else None
+        has_valve_head = isinstance(params, dict) and str(params.get("head_style", "")).lower() == "ac0223_triple_valve"
+        if has_valve_head:
+            continue
+
+        removed_variants.append(variant)
+        rows.pop(variant, None)
+
+        runtime_svg = svg_out_dir / f"{variant}.svg"
+        runtime_log = reports_out_dir / f"{variant}_element_validation.log"
+        runtime_diff = root / "diff_pngs" / f"{variant}_diff.png"
+        for path in (
+            snapshot_paths["svg"],
+            snapshot_paths["log"],
+            snapshot_paths["row"],
+            runtime_svg,
+            runtime_log,
+            runtime_diff,
+        ):
+            try:
+                path.unlink()
+            except FileNotFoundError:
+                pass
+            except OSError:
+                # Keep repair resilient in partially locked local workdirs.
+                pass
+
+    if removed_variants:
+        writeConversionBestlistMetricsImpl(manifest_path, rows)
+
+    return {
+        "output_root": str(root),
+        "checked_variants": list(targets),
+        "removed_variants": removed_variants,
+        "removed_count": len(removed_variants),
+    }

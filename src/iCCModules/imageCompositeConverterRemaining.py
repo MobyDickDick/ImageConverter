@@ -1827,6 +1827,10 @@ def _chooseConversionBestlistRow(
         restored_row=restored_row,
     )
 
+
+def repairAc0223BestlistArtifacts(output_root: str) -> dict[str, object]:
+    return conversion_bestlist_helpers.repairAc0223BestlistArtifactsImpl(output_root)
+
 def _latestFailedConversionManifestEntry(reports_out_dir: str) -> dict[str, object] | None:
     return successful_conversions_helpers.latestFailedConversionManifestEntryImpl(reports_out_dir)
 
