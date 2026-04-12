@@ -7,6 +7,7 @@ from dataclasses import dataclass
 
 from src.iCCModules import imageCompositeConverterAudit as audit_helpers
 from src.iCCModules import imageCompositeConverterDescriptions as description_mapping_helpers
+from src.iCCModules import imageCompositeConverterDualArrowBadge as dual_arrow_badge_helpers
 from src.iCCModules import imageCompositeConverterSemantic as semantic_helpers
 
 
@@ -94,6 +95,12 @@ class Reflection:
             desc=desc,
             params=params,
         ):
+            return desc, params
+
+        if dual_arrow_badge_helpers.looksLikeDualArrowDescriptionImpl(desc):
+            params["mode"] = "dual_arrow_badge"
+            params["elements"].append("SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch)")
+            params["label"] = ""
             return desc, params
 
         non_traceable_hint = Reflection._detect_non_traceable_hint(desc)

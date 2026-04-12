@@ -4,6 +4,7 @@ import importlib
 from pathlib import Path
 
 from src.iCCModules import imageCompositeConverterDependencies as dependency_helpers
+from src.iCCModules import imageCompositeConverterDualArrowBadge as dual_arrow_badge_helpers
 from src.iCCModules import imageCompositeConverterGradientStripeStrategy as gradient_stripe_strategy_helpers
 from src.iCCModules.imageCompositeConverterPerceptionReflection import Perception, Reflection
 
@@ -791,6 +792,29 @@ def runIterationPipeline(
         if semantic_audit_row is not None:
             params = copy.deepcopy(params)
             params["semantic_audit"] = semantic_audit_row
+        return base, desc, params, 1, Action.calculate_error(perc.img, svg_rendered)
+
+    if params["mode"] == "dual_arrow_badge":
+        badge_params = dual_arrow_badge_helpers.detectDualArrowBadgeParamsFromImageImpl(perc.img, np_module=np)
+        if badge_params is None:
+            # Fallback to embedded raster if detection cannot robustly isolate
+            # the dual-arrow primitives.
+            svg_content = _renderEmbeddedRasterSvg(img_path)
+            _writeValidationLog(["status=dual_arrow_badge_detection_failed_fallback_embedded_svg"])
+        else:
+            badge_params["variant_name"] = str(filename).rsplit(".", 1)[0]
+            badge_params["base_name"] = str(perc.base_name).upper()
+            svg_content = dual_arrow_badge_helpers.generateDualArrowBadgeSvgImpl(w, h, badge_params)
+            _writeValidationLog(["status=dual_arrow_badge_ok"])
+        svg_rendered = Action.render_svg_to_numpy(svg_content, w, h)
+        if svg_rendered is None:
+            _recordRenderFailure(
+                "dual_arrow_badge_final_render_failed",
+                svg_content=svg_content,
+                params_snapshot=badge_params if badge_params is not None else params,
+            )
+            return None
+        _writeAttemptArtifacts(svg_content, svg_rendered)
         return base, desc, params, 1, Action.calculate_error(perc.img, svg_rendered)
 
     if params["mode"] != "composite":
