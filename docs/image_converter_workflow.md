@@ -3,6 +3,13 @@
 Diese Kurzanleitung bündelt die aktuell empfohlenen lokalen Befehle für den
 ImageConverter.
 
+## Verbindlicher Abschluss je Aufgabe
+
+Um zu vermeiden, dass bei Neuerungen einzelne Aspekte verschlechtert werden,
+wird vor Abschluss **jeder** Aufgabe mindestens der vollständige Check-Block aus
+Schritt 1 ausgeführt. Bei Änderungen an der Konvertierungslogik sollten
+zusätzlich die Regression-Checks aus Schritt 3 und Schritt 4 laufen.
+
 ## 1. Syntax- und Test-Checks
 
 ```bash
