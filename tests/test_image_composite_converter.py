@@ -7264,3 +7264,39 @@ def test_convert_range_invokes_overview_generation(tmp_path: Path, monkeypatch: 
     assert called["diff"] == str(output_root / "diff_pngs")
     assert called["svg"] == str(output_root / "converted_svgs")
     assert called["reports"] == str(output_root / "reports")
+
+
+def test_parse_description_detects_dual_arrow_badge_mode() -> None:
+    mapping = {
+        "AC0023": "zwei vertikale Striche links blau, rechts rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben"
+    }
+    desc, params = image_composite_converter.Reflection(mapping).parse_description("AC0023", "AC0023.jpg")
+    assert "zwei vertikale striche" in desc
+    assert params["mode"] == "dual_arrow_badge"
+    assert params["label"] == ""
+
+
+def test_dual_arrow_badge_detection_and_svg_generation() -> None:
+    np = image_composite_converter.np
+    if np is None:
+        pytest.skip("numpy not available in this environment")
+    from src.iCCModules import imageCompositeConverterDualArrowBadge as dual_arrow_helpers
+
+    img = np.full((35, 20, 3), 255, dtype=np.uint8)
+    # left blue down-arrow
+    img[2:16, 6:8] = (255, 0, 0)
+    for y in range(18, 32):
+        half = max(1, (y - 18) // 2)
+        img[y, 7 - half : 7 + half + 1] = (255, 0, 0)
+    # right red up-arrow
+    img[19:33, 13:15] = (0, 0, 255)
+    for y in range(4, 18):
+        half = max(1, (17 - y) // 2)
+        img[y, 14 - half : 14 + half + 1] = (0, 0, 255)
+
+    params = dual_arrow_helpers.detectDualArrowBadgeParamsFromImageImpl(img, np_module=np)
+    assert params is not None
+    svg = dual_arrow_helpers.generateDualArrowBadgeSvgImpl(20, 35, params)
+    assert "<polygon" in svg
+    assert "#2f6bff" in svg
+    assert "#e53935" in svg
