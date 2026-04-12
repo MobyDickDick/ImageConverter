@@ -74,7 +74,7 @@ focused on the actual project scope.
     und schreibt Telemetrie (`requests`, `cache_hits`, `hit_rate`, `render_aufrufe`) in die Validation-Logs.
     Zusätzlich läuft `gc.collect()` im In-Process-Renderer nur noch periodisch (alle 25 Renderaufrufe) statt pro Kandidat.
 
-- [ ] D5: Metrik-Fortsetzung als Multi-Objective-Prototyp evaluieren.
+- [x] D5: Metrik-Fortsetzung als Multi-Objective-Prototyp evaluieren.
   - Hintergrund: Reiner Pixel-Fehler kann Anti-Aliasing-Effekte übergewichten und so semantisch plausible Geometrie verdrängen.
   - Umsetzungsidee:
     - Experimenteller Score: `pixel_error + geometry_penalty + semantic_penalty` (gewichtete Summe).
@@ -82,6 +82,9 @@ focused on the actual project scope.
   - Akzeptanzkriterien:
     - Dokumentierter Vorher/Nachher-Vergleich in `docs/` inkl. Parametergewichten, Gewinnerliste und Fehlertypen.
     - Kein Rückschritt beim AC08-Success-Gate.
+  - 2026-04-12: Prototyp-Auswertung per Tooling ergänzt (`tools/evaluate_multi_objective_prototype.py`),
+    Ergebnisdokumentation unter `docs/multi_objective_prototype_2026-04-12.md` inkl. Gewichten,
+    Familien-Gewinnerliste, Fehlertyp-Klassifizierung und AC08-Gate-Check (kein Family-Winner-Rückschritt im Snapshot).
 
 - [ ] C1: `src/imageCompositeConverter.py` schrittweise in Module mit Blöcken von ca. 100 Zeilen aufteilen.
   - Hintergrund: Die Datei hat aktuell deutlich über 10k Zeilen; Refactoring erfolgt bewusst in mehreren, testbaren Teilschritten statt als Big-Bang.
