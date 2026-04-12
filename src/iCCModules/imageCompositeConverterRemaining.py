@@ -10,6 +10,7 @@ from src.iCCModules import imageCompositeConverterGradientStripeStrategy as grad
 from src.iCCModules import imageCompositeConverterImageLoading as image_loading_helpers
 from src.iCCModules import imageCompositeConverterNaming as naming_helpers
 from src.iCCModules import imageCompositeConverterPerceptionGeometry as perception_geometry_helpers
+from src.iCCModules import imageCompositeConverterSemanticAuditLogging as semantic_audit_logging_helpers
 from src.iCCModules.imageCompositeConverterPerceptionReflection import Perception, Reflection
 
 def detectRelevantRegions(img) -> list[dict[str, object]]:
@@ -511,28 +512,9 @@ def runIterationPipeline(
                     "status=semantic_mismatch",
                     f"best_attempt_svg={base}_failed.svg",
                     connector_debug_line,
-                    *(
-                        [
-                            f"semantic_audit_status={semantic_audit_row.get('status', '')}",
-                            "semantic_audit_lookup_keys=" + " | ".join(
-                                str(value) for value in semantic_audit_row.get("description_lookup_keys", [])
-                            ),
-                            "semantic_audit_recognized_description_elements=" + " | ".join(
-                                str(value) for value in semantic_audit_row.get("recognized_description_elements", [])
-                            ),
-                            "semantic_audit_derived_elements=" + " | ".join(
-                                str(value) for value in semantic_audit_row.get("derived_elements", [])
-                            ),
-                            "semantic_audit_priority_order=" + " > ".join(
-                                str(value) for value in semantic_audit_row.get("semantic_priority_order", [])
-                            ),
-                            "semantic_audit_conflicts=" + " | ".join(
-                                str(value) for value in semantic_audit_row.get("semantic_conflicts", [])
-                            ),
-                            f"semantic_audit_mismatch_reason={semantic_audit_row.get('mismatch_reason', '')}",
-                        ]
-                        if semantic_audit_row is not None
-                        else []
+                    *semantic_audit_logging_helpers.buildSemanticAuditLogLinesImpl(
+                        semantic_audit_row,
+                        include_mismatch_reason=True,
                     ),
                     *[f"issue={issue}" for issue in semantic_issues],
                 ]
@@ -590,27 +572,8 @@ def runIterationPipeline(
         _writeValidationLog(
             [
                 "status=semantic_ok",
-                *(
-                    [
-                        f"semantic_audit_status={semantic_audit_row.get('status', '')}",
-                        "semantic_audit_lookup_keys=" + " | ".join(
-                            str(value) for value in semantic_audit_row.get("description_lookup_keys", [])
-                        ),
-                        "semantic_audit_recognized_description_elements=" + " | ".join(
-                            str(value) for value in semantic_audit_row.get("recognized_description_elements", [])
-                        ),
-                        "semantic_audit_derived_elements=" + " | ".join(
-                            str(value) for value in semantic_audit_row.get("derived_elements", [])
-                        ),
-                        "semantic_audit_priority_order=" + " > ".join(
-                            str(value) for value in semantic_audit_row.get("semantic_priority_order", [])
-                        ),
-                        "semantic_audit_conflicts=" + " | ".join(
-                            str(value) for value in semantic_audit_row.get("semantic_conflicts", [])
-                        ),
-                    ]
-                    if semantic_audit_row is not None
-                    else []
+                *semantic_audit_logging_helpers.buildSemanticAuditLogLinesImpl(
+                    semantic_audit_row,
                 ),
                 *quality_flags,
                 *redraw_variation_logs,
