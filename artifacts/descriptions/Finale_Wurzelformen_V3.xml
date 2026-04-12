@@ -2708,7 +2708,7 @@
     <entry kind="wurzelform" key="AC0223">
       <source_rows>134,135,136,137,138,139</source_rows>
       <wurzelform>AC0223</wurzelform>
-      <beschreibung>3-Wege-Ventilkopf oben (drei spitze Ventilflügel mit gemeinsamem Verlauf von dunkelgrau nach hellgrau), darunter ein grauer Kreis mit grauem Rand auf hellgrauem Hintergrund. Kein "M"-Text im Kreis. Der senkrechte Griff ist dunkelgrau und liegt hinter dem Kreisrand (vom oberen Kreisrand bis zur Ventilnabe).</beschreibung>
+      <beschreibung>3-Wege-Ventilkopf oben (drei spitze Ventilflügel mit gemeinsamem Verlauf von dunkelgrau nach hellgrau), darunter ein dunkelgrauer senkrechter Griff (vom Ventilzentrum nach unten) auf hellgrauem Hintergrund. Kein "M"-Text im Badge.</beschreibung>
       <bilder>
         <bild>AC0223_L.jpg</bild>
         <bild>AC0223_L_sia.jpg</bild>
@@ -2717,6 +2717,14 @@
         <bild>AC0223_S.jpg</bild>
         <bild>AC0223_S_sia.jpg</bild>
       </bilder>
+      <bildbeschreibungen>
+        <bildbeschreibung bild="AC0223_L.jpg">Unterteil: grauer Kreis mit grauem Rand (klassische Kelle).</bildbeschreibung>
+        <bildbeschreibung bild="AC0223_M.jpg">Unterteil: grauer Kreis mit grauem Rand (klassische Kelle).</bildbeschreibung>
+        <bildbeschreibung bild="AC0223_S.jpg">Unterteil: grauer Kreis mit grauem Rand (klassische Kelle).</bildbeschreibung>
+        <bildbeschreibung bild="AC0223_L_sia.jpg">Unterteil: statt der Kelle ein hellgraues Quadrat mit grauem Rand; beide Diagonalen sind als graue Linien eingezeichnet.</bildbeschreibung>
+        <bildbeschreibung bild="AC0223_M_sia.jpg">Unterteil: statt der Kelle ein hellgraues Quadrat mit grauem Rand; beide Diagonalen sind als graue Linien eingezeichnet.</bildbeschreibung>
+        <bildbeschreibung bild="AC0223_S_sia.jpg">Unterteil: statt der Kelle ein hellgraues Quadrat mit grauem Rand; beide Diagonalen sind als graue Linien eingezeichnet.</bildbeschreibung>
+      </bildbeschreibungen>
     </entry>
     <entry kind="wurzelform" key="AC0224">
       <source_rows>140,141,142,143,144,145</source_rows>

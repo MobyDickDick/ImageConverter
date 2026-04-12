@@ -117,21 +117,25 @@ def loadDescriptionMappingFromXmlImpl(path: str, *, get_base_name_from_file_fn) 
 
     root = tree.getroot()
 
-    def _register_description(key: str, description: str) -> None:
+    def _register_description(key: str, description: str, *, include_base_aliases: bool = True) -> None:
         normalized_desc = str(description or "").strip()
         if not normalized_desc:
             return
+
+        base_aliases = {
+            get_base_name_from_file_fn(str(key or "").strip()),
+            get_base_name_from_file_fn(str(key or "").strip()).upper(),
+            get_base_name_from_file_fn(str(key or "").strip()).lower(),
+        } if include_base_aliases else set()
 
         for candidate in {
             str(key or "").strip(),
             str(key or "").strip().upper(),
             str(key or "").strip().lower(),
-            get_base_name_from_file_fn(str(key or "").strip()),
-            get_base_name_from_file_fn(str(key or "").strip()).upper(),
-            get_base_name_from_file_fn(str(key or "").strip()).lower(),
             os.path.splitext(str(key or "").strip())[0],
             os.path.splitext(str(key or "").strip())[0].upper(),
             os.path.splitext(str(key or "").strip())[0].lower(),
+            *base_aliases,
         }:
             if candidate:
                 raw_desc[candidate] = normalized_desc
@@ -139,8 +143,8 @@ def loadDescriptionMappingFromXmlImpl(path: str, *, get_base_name_from_file_fn) 
     def _merge_entry_and_image_desc(entry_desc: str, image_desc: str) -> str:
         e = entry_desc.strip()
         i = image_desc.strip()
-        if e and i and e != i:
-            return f"{e} {i}".strip()
+        # Base entries are already registered separately. Keep image-specific
+        # descriptions focused to avoid duplicating shared text fragments.
         return i or e
 
     def _extract_image_specific_description(entry: ET.Element, image_name: str) -> str:
@@ -182,8 +186,8 @@ def loadDescriptionMappingFromXmlImpl(path: str, *, get_base_name_from_file_fn) 
             image_specific_desc = _extract_image_specific_description(entry, image_name)
             merged_desc = _merge_entry_and_image_desc(desc, image_specific_desc)
             if merged_desc:
-                _register_description(image_name, merged_desc)
-                _register_description(image_stem, merged_desc)
+                _register_description(image_name, merged_desc, include_base_aliases=False)
+                _register_description(image_stem, merged_desc, include_base_aliases=False)
 
     return raw_desc
 
