@@ -6295,6 +6295,67 @@ def test_validate_badge_by_elements_activates_ac08_adaptive_unlocks_on_stagnatio
     assert not any("adaptive_unlock_applied" in line for line in logs)
 
 
+def test_validate_badge_by_elements_runs_ac0838_phase2_unlock_and_relock(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+        pytest.skip("numpy/cv2 not available in this environment")
+
+    np = image_composite_converter.np
+    if np is None:
+        pytest.skip("numpy not available in this environment")
+
+    params = Action._finalize_ac08_style(
+        "AC0838",
+        {
+            "width": 24,
+            "height": 24,
+            "circle_enabled": True,
+            "stem_enabled": True,
+            "arm_enabled": True,
+            "draw_text": True,
+            "text_mode": "voc",
+            "cx": 12.0,
+            "cy": 10.0,
+            "r": 6.0,
+            "stem_x": 11.5,
+            "stem_top": 16.0,
+            "stem_bottom": 23.0,
+            "stem_width": 1.0,
+            "arm_x1": 12.0,
+            "arm_y1": 1.0,
+            "arm_x2": 12.0,
+            "arm_y2": 8.0,
+            "arm_stroke": 1.0,
+            "fill_gray": 220,
+            "stroke_gray": 152,
+            "text_gray": 152,
+            "voc_font_scale": 1.0,
+        },
+    )
+    params["enable_global_search_mode"] = False
+    img = np.zeros((24, 24, 3), dtype=np.uint8)
+
+    monkeypatch.setattr(conv.Action, "generate_badge_svg", staticmethod(lambda *_args, **_kwargs: "<svg />"))
+    monkeypatch.setattr(conv.Action, "render_svg_to_numpy", staticmethod(lambda *_args, **_kwargs: img.copy()))
+    monkeypatch.setattr(conv.Action, "_fit_to_original_size", staticmethod(lambda _orig, rendered: rendered))
+    monkeypatch.setattr(conv.Action, "create_diff_image", staticmethod(lambda *_args, **_kwargs: img.copy()))
+    monkeypatch.setattr(conv.Action, "extract_badge_element_mask", staticmethod(lambda *_args, **_kwargs: np.ones((24, 24), dtype=bool)))
+    monkeypatch.setattr(conv.Action, "_element_match_error", staticmethod(lambda *_args, **_kwargs: 1.0))
+    monkeypatch.setattr(conv.Action, "_optimize_element_width_bracket", staticmethod(lambda *_args, **_kwargs: False))
+    monkeypatch.setattr(conv.Action, "_optimize_element_extent_bracket", staticmethod(lambda *_args, **_kwargs: False))
+    monkeypatch.setattr(conv.Action, "_optimize_circle_center_bracket", staticmethod(lambda *_args, **_kwargs: False))
+    monkeypatch.setattr(conv.Action, "_optimize_circle_radius_bracket", staticmethod(lambda *_args, **_kwargs: False))
+    monkeypatch.setattr(conv.Action, "_optimize_element_color_bracket", staticmethod(lambda *_args, **_kwargs: False))
+    monkeypatch.setattr(conv.Action, "_apply_canonical_badge_colors", staticmethod(lambda current: current))
+    monkeypatch.setattr(conv.Action, "calculate_error", staticmethod(lambda *_args, **_kwargs: 28.0))
+
+    logs = conv.Action.validate_badge_by_elements(img, params, max_rounds=4)
+
+    assert any("adaptive_unlock_applied: phase=2 family=AC0838" in line for line in logs)
+    assert any("adaptive_relock_applied: phase=1 restored" in line for line in logs)
+
+
 def test_resolve_cli_csv_and_output_accepts_xml_as_table_path(tmp_path: Path) -> None:
     in_dir = tmp_path / "images"
     in_dir.mkdir()
