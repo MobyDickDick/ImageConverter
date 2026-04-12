@@ -254,6 +254,12 @@ def tryTemplateTransferImpl(
     target_svg_geometry = read_svg_geometry_fn(target_svg_path)
     target_geom_params = dict(target_svg_geometry[2]) if target_svg_geometry is not None else None
     target_params_raw = target_row.get("params")
+    if isinstance(target_params_raw, dict) and str(target_params_raw.get("mode", "")) == "dual_arrow_badge":
+        # AC002x dual-arrow badges are fully semantics-driven. Generic template
+        # transfer can replace them with unrelated AC donors (for example
+        # AC0223 valve heads) when historical bestlist rows exist.
+        return None, None
+
     target_alias_refs: set[str] = set()
     if isinstance(target_params_raw, dict):
         alias_values = target_params_raw.get("documented_alias_refs", [])

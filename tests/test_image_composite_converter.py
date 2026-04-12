@@ -5541,6 +5541,84 @@ def test_template_transfer_skips_semantic_but_incompatible_donors_for_connector_
     assert detail is None
 
 
+
+
+def test_template_transfer_skips_dual_arrow_badge_target(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Dual-arrow badges (e.g. AC0023) must never be replaced by donor templates."""
+    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+        pytest.skip("numpy/cv2 not available in this environment")
+
+    np = image_composite_converter.np
+    if np is None:
+        pytest.skip("numpy not available in this environment")
+    cv2 = image_composite_converter.cv2
+
+    folder = tmp_path / "images"
+    svg_dir = tmp_path / "svg"
+    diff_dir = tmp_path / "diff"
+    folder.mkdir()
+    svg_dir.mkdir()
+    diff_dir.mkdir()
+
+    img = np.full((35, 20, 3), 240, dtype=np.uint8)
+    target_filename = "AC0023.jpg"
+    cv2.imwrite(str(folder / target_filename), img)
+
+    target_params = {
+        "mode": "dual_arrow_badge",
+        "variant_name": "AC0023",
+        "base_name": "AC0023",
+    }
+    (svg_dir / "AC0023.svg").write_text(
+        '<svg width="20" height="35" xmlns="http://www.w3.org/2000/svg"></svg>',
+        encoding="utf-8",
+    )
+
+    donor_params = Action.make_badge_params(50, 75, "AC0223")
+    assert donor_params is not None
+    donor_params["mode"] = "semantic_badge"
+    (svg_dir / "AC0223_M_sia.svg").write_text(Action.generate_badge_svg(50, 75, donor_params), encoding="utf-8")
+
+    monkeypatch.setattr(Action, "render_svg_to_numpy", staticmethod(lambda _svg, w, h: np.full((h, w, 3), 240, dtype=np.uint8)))
+    monkeypatch.setattr(Action, "calculate_error", staticmethod(lambda _a, _b: 0.0))
+    monkeypatch.setattr(Action, "create_diff_image", staticmethod(lambda a, _b: a.copy()))
+
+    target_row = {
+        "filename": target_filename,
+        "variant": "AC0023",
+        "base": "AC0023",
+        "params": target_params,
+        "best_error": 9999.0,
+        "error_per_pixel": 1.0,
+        "w": 20,
+        "h": 35,
+    }
+    donor_rows = [
+        {
+            "variant": "AC0223_M_SIA",
+            "base": "AC0223",
+            "params": donor_params,
+            "error_per_pixel": 0.01,
+            "w": 50,
+            "h": 75,
+        }
+    ]
+
+    updated_row, detail = image_composite_converter._tryTemplateTransfer(
+        target_row=target_row,
+        donor_rows=donor_rows,
+        folder_path=str(folder),
+        svg_out_dir=str(svg_dir),
+        diff_out_dir=str(diff_dir),
+        rng=None,
+    )
+
+    assert updated_row is None
+    assert detail is None
+
+
 def test_template_transfer_skips_ac0223_to_preserve_valve_head(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
