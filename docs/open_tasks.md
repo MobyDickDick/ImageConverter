@@ -220,6 +220,8 @@ focused on the actual project scope.
   - 2026-04-12: Umsetzung abgeschlossen inkl. Detailtests `test_build_semantic_text_mode_validation_log_line_impl_reports_plain_ring` und `test_collect_semantic_badge_validation_logs_impl_uses_guard_line_and_round_floor`.
   - [x] C1.8: Semantik-Mismatch-Reporting (Connector-Debug-Zeile + Konsolenmeldungsreihenfolge) aus `runIterationPipeline` in neues Modul `src/iCCModules/imageCompositeConverterSemanticMismatchReporting.py` ausgelagert; `src/iCCModules/imageCompositeConverterRemaining.py` delegiert die Formatierung jetzt über Modul-Helper und bleibt API-kompatibel.
   - 2026-04-12: Umsetzung abgeschlossen inkl. Detailtests `test_build_semantic_connector_debug_line_impl_formats_all_fields` und `test_build_semantic_mismatch_console_lines_impl_lists_issues_in_order`.
+  - [x] C1.9: AC0223-Post-Validation-Finalisierung (Ventilkopf-/Top-Stem-Defaults nach `validate_badge_by_elements`) aus `runIterationPipeline` in neues Modul `src/iCCModules/imageCompositeConverterSemanticAc0223Runtime.py` ausgelagert; `src/iCCModules/imageCompositeConverterRemaining.py` delegiert jetzt über den neuen Modul-Helper und bleibt API-kompatibel.
+  - 2026-04-12: Umsetzung abgeschlossen inkl. Detailtests `test_finalize_ac0223_badge_params_impl_applies_valve_head_defaults` und `test_finalize_ac0223_badge_params_impl_is_noop_for_other_families`.
   - Nächster geplanter Schritt: weitere semantische Post-Validation-/Reporting-Teilstrecken in denselben kleinen Schritten extrahieren.
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.
