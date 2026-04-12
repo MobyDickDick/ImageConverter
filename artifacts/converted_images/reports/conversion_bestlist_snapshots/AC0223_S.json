@@ -1,12 +1,12 @@
 {
   "base": "AC0223",
-  "best_error": 51.327777777777776,
+  "best_error": 43.62777777777778,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.08554629629629629,
+  "error_per_pixel": 0.07271296296296297,
   "filename": "AC0223_S.jpg",
   "h": 30,
-  "mean_delta2": 20522.693359375,
+  "mean_delta2": 18989.54296875,
   "params": {
     "bottom_shape": null,
     "description_fragments": [
@@ -18,7 +18,7 @@
       {
         "key": "AC0223_S",
         "source": "variant_name",
-        "text": "Unterteil: grauer Kreis mit grauem Rand (klassische Kelle)."
+        "text": "Unterteil: grauer Kreis mit grauem Rand (klassische Kelle) mit schmalem, zentriertem Griff; das Symbol ist horizontal symmetrisch."
       }
     ],
     "documented_alias_refs": [],
@@ -50,7 +50,7 @@
     "top_source_ref": null,
     "variant_name": "AC0223_S"
   },
-  "std_delta2": 37680.9375,
+  "std_delta2": 38005.75,
   "variant": "AC0223_S",
   "w": 20
 }
