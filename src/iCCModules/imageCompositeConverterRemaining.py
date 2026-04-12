@@ -14,6 +14,7 @@ from src.iCCModules import imageCompositeConverterSemanticAuditLogging as semant
 from src.iCCModules import imageCompositeConverterSemanticValidationContext as semantic_validation_context_helpers
 from src.iCCModules import imageCompositeConverterSemanticValidationLogging as semantic_validation_logging_helpers
 from src.iCCModules import imageCompositeConverterSemanticValidationRuntime as semantic_validation_runtime_helpers
+from src.iCCModules import imageCompositeConverterSemanticMismatchReporting as semantic_mismatch_reporting_helpers
 from src.iCCModules.imageCompositeConverterPerceptionReflection import Perception, Reflection
 
 def detectRelevantRegions(img) -> list[dict[str, object]]:
@@ -485,19 +486,14 @@ def runIterationPipeline(
             failed_svg = Action.generate_badge_svg(w, h, badge_params)
             _writeAttemptArtifacts(failed_svg, failed=True)
             structural = Action._detect_semantic_primitives(perc.img, badge_params)
-            connector_orientation = str(structural.get("connector_orientation", "unknown"))
-            circle_source = str(structural.get("circle_detection_source", "unknown"))
-            connector_debug_line = (
-                "semantic_connector_classification="
-                f"{connector_orientation};"
-                f"circle_source={circle_source};"
-                f"horizontal_candidates={int(structural.get('horizontal_line_candidates', 0) or 0)};"
-                f"vertical_candidates={int(structural.get('vertical_line_candidates', 0) or 0)}"
+            connector_debug_line = semantic_mismatch_reporting_helpers.buildSemanticConnectorDebugLineImpl(
+                structural=structural,
             )
-            print("[ERROR] Semantik-Abgleich fehlgeschlagen:")
-            print(f"  - {connector_debug_line}")
-            for issue in semantic_issues:
-                print(f"  - {issue}")
+            for console_line in semantic_mismatch_reporting_helpers.buildSemanticMismatchConsoleLinesImpl(
+                connector_debug_line=connector_debug_line,
+                semantic_issues=semantic_issues,
+            ):
+                print(console_line)
             if semantic_audit_row is not None:
                 semantic_audit_row = _semanticAuditRecord(
                     base_name=perc.base_name,

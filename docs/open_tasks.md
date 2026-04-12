@@ -218,6 +218,8 @@ focused on the actual project scope.
   - 2026-04-12: Umsetzung abgeschlossen inkl. Detailtests `test_resolve_semantic_validation_debug_dir_impl_prefers_element_debug_dir`, `test_resolve_semantic_validation_debug_dir_impl_uses_ac0811_fallback` und `test_build_non_composite_gradient_stripe_validation_log_lines_impl_marks_override`.
   - [x] C1.7: Semantik-Validation-Guard-/Element-Log-Sammlung (Textmoduszeile + `validate_badge_by_elements`-Dispatch) aus `runIterationPipeline` in neues Modul `src/iCCModules/imageCompositeConverterSemanticValidationRuntime.py` ausgelagert; `src/iCCModules/imageCompositeConverterRemaining.py` delegiert jetzt die Log-Sammlung über den neuen Modul-Helper und bleibt API-kompatibel.
   - 2026-04-12: Umsetzung abgeschlossen inkl. Detailtests `test_build_semantic_text_mode_validation_log_line_impl_reports_plain_ring` und `test_collect_semantic_badge_validation_logs_impl_uses_guard_line_and_round_floor`.
+  - [x] C1.8: Semantik-Mismatch-Reporting (Connector-Debug-Zeile + Konsolenmeldungsreihenfolge) aus `runIterationPipeline` in neues Modul `src/iCCModules/imageCompositeConverterSemanticMismatchReporting.py` ausgelagert; `src/iCCModules/imageCompositeConverterRemaining.py` delegiert die Formatierung jetzt über Modul-Helper und bleibt API-kompatibel.
+  - 2026-04-12: Umsetzung abgeschlossen inkl. Detailtests `test_build_semantic_connector_debug_line_impl_formats_all_fields` und `test_build_semantic_mismatch_console_lines_impl_lists_issues_in_order`.
   - Nächster geplanter Schritt: weitere semantische Post-Validation-/Reporting-Teilstrecken in denselben kleinen Schritten extrahieren.
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.
