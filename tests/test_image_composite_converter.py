@@ -7425,6 +7425,15 @@ def test_dual_arrow_badge_detection_forces_opposite_arrow_directions() -> None:
     right = params["right"]
     assert float(left["triangle_tip_y"]) < float(left["triangle_base_y"])
     assert float(right["triangle_tip_y"]) > float(right["triangle_base_y"])
+    assert float(left["line_y1"]) == float(right["line_y1"])
+    assert float(left["line_y2"]) == float(right["line_y2"])
+    assert float(left["line_width"]) == float(right["line_width"])
+    assert float(left["triangle_half_width"]) == float(right["triangle_half_width"])
+    assert abs(
+        abs(float(left["triangle_tip_y"]) - float(left["triangle_base_y"]))
+        - abs(float(right["triangle_tip_y"]) - float(right["triangle_base_y"]))
+    ) < 1e-6
+    assert float(left["line_y2"]) < float(left["triangle_tip_y"])
 
     svg = dual_arrow_helpers.generateDualArrowBadgeSvgImpl(22, 32, params)
     assert 'stroke-linecap="butt"' in svg

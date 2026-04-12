@@ -47,6 +47,7 @@ def detectDualArrowBadgeParamsFromImageImpl(
         # collapse to the same orientation (common with compressed tips),
         # keep the right/red arrow and mirror the left/blue arrow.
         left = _flipArrowDirection(left)
+    left, right = _normalizeDualArrowPairGeometry(left, right, h)
 
     return {
         "mode": "dual_arrow_badge",
@@ -138,6 +139,48 @@ def _flipArrowDirection(arrow: dict[str, float]) -> dict[str, float]:
         flipped["line_y1"] = y_min
         flipped["line_y2"] = max(y_min, base_y)
     return flipped
+
+
+def _normalizeDualArrowPairGeometry(
+    left: dict[str, float],
+    right: dict[str, float],
+    height: int,
+) -> tuple[dict[str, float], dict[str, float]]:
+    normalized_left = dict(left)
+    normalized_right = dict(right)
+
+    line_top = float(min(left["line_y1"], right["line_y1"]))
+    gap = 1.0
+    left_base = float(left["triangle_base_y"])
+    right_base = float(right["triangle_base_y"])
+    triangle_top = float(max(0.0, min(left_base, right_base)))
+    line_bottom = float(max(line_top, triangle_top - gap))
+
+    tri_heights = [
+        abs(float(left["triangle_tip_y"]) - float(left["triangle_base_y"])),
+        abs(float(right["triangle_tip_y"]) - float(right["triangle_base_y"])),
+    ]
+    shared_tri_height = float(max(2.0, min(tri_heights)))
+    shared_tri_height = float(min(shared_tri_height, max(2.0, float(height) * 0.22)))
+
+    shared_half_width = (float(left["triangle_half_width"]) + float(right["triangle_half_width"])) / 2.0
+    shared_line_width = (float(left["line_width"]) + float(right["line_width"])) / 2.0
+
+    normalized_left["line_y1"] = line_top
+    normalized_left["line_y2"] = line_bottom
+    normalized_left["line_width"] = shared_line_width
+    normalized_left["triangle_tip_y"] = triangle_top
+    normalized_left["triangle_base_y"] = triangle_top + shared_tri_height
+    normalized_left["triangle_half_width"] = shared_half_width
+
+    normalized_right["line_y1"] = line_top
+    normalized_right["line_y2"] = line_bottom
+    normalized_right["line_width"] = shared_line_width
+    normalized_right["triangle_base_y"] = triangle_top
+    normalized_right["triangle_tip_y"] = triangle_top + shared_tri_height
+    normalized_right["triangle_half_width"] = shared_half_width
+
+    return normalized_left, normalized_right
 
 
 def generateDualArrowBadgeSvgImpl(
