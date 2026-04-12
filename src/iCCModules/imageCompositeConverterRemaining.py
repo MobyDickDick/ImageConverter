@@ -17,6 +17,7 @@ from src.iCCModules import imageCompositeConverterSemanticValidationLogging as s
 from src.iCCModules import imageCompositeConverterSemanticValidationRuntime as semantic_validation_runtime_helpers
 from src.iCCModules import imageCompositeConverterSemanticValidationFinalization as semantic_validation_finalization_helpers
 from src.iCCModules import imageCompositeConverterSemanticMismatchReporting as semantic_mismatch_reporting_helpers
+from src.iCCModules import imageCompositeConverterSemanticMismatchRuntime as semantic_mismatch_runtime_helpers
 from src.iCCModules import imageCompositeConverterSemanticAuditRuntime as semantic_audit_runtime_helpers
 from src.iCCModules.imageCompositeConverterPerceptionReflection import Perception, Reflection
 
@@ -488,36 +489,28 @@ def runIterationPipeline(
         if semantic_issues:
             failed_svg = Action.generate_badge_svg(w, h, badge_params)
             _writeAttemptArtifacts(failed_svg, failed=True)
-            structural = Action._detect_semantic_primitives(perc.img, badge_params)
-            connector_debug_line = semantic_mismatch_reporting_helpers.buildSemanticConnectorDebugLineImpl(
-                structural=structural,
-            )
-            for console_line in semantic_mismatch_reporting_helpers.buildSemanticMismatchConsoleLinesImpl(
-                connector_debug_line=connector_debug_line,
-                semantic_issues=semantic_issues,
-            ):
-                print(console_line)
-            if semantic_audit_row is not None:
-                semantic_audit_row = _semanticAuditRecord(
-                    base_name=perc.base_name,
-                    **semantic_audit_runtime_helpers.buildSemanticAuditRecordKwargsImpl(
-                        filename=filename,
-                        params=params,
-                        status="semantic_mismatch",
-                        mismatch_reasons=semantic_issues,
-                    ),
-                )
-            _writeValidationLog(
-                semantic_validation_logging_helpers.buildSemanticMismatchValidationLogLinesImpl(
+            semantic_audit_row, mismatch_console_lines, mismatch_validation_lines = (
+                semantic_mismatch_runtime_helpers.buildSemanticMismatchOutcomeImpl(
                     base_name=base,
+                    audit_base_name=perc.base_name,
+                    filename=filename,
+                    params=params,
+                    perc_img=perc.img,
+                    badge_params=badge_params,
                     semantic_issues=semantic_issues,
-                    connector_debug_line=connector_debug_line,
-                    semantic_audit_lines=semantic_audit_logging_helpers.buildSemanticAuditLogLinesImpl(
-                        semantic_audit_row,
-                        include_mismatch_reason=True,
-                    ),
+                    semantic_audit_row=semantic_audit_row,
+                    detect_semantic_primitives_fn=Action._detect_semantic_primitives,
+                    build_semantic_connector_debug_line_fn=semantic_mismatch_reporting_helpers.buildSemanticConnectorDebugLineImpl,
+                    build_semantic_mismatch_console_lines_fn=semantic_mismatch_reporting_helpers.buildSemanticMismatchConsoleLinesImpl,
+                    build_semantic_mismatch_validation_log_lines_fn=semantic_validation_logging_helpers.buildSemanticMismatchValidationLogLinesImpl,
+                    build_semantic_audit_log_lines_fn=semantic_audit_logging_helpers.buildSemanticAuditLogLinesImpl,
+                    build_semantic_audit_record_kwargs_fn=semantic_audit_runtime_helpers.buildSemanticAuditRecordKwargsImpl,
+                    semantic_audit_record_fn=_semanticAuditRecord,
                 )
             )
+            for console_line in mismatch_console_lines:
+                print(console_line)
+            _writeValidationLog(mismatch_validation_lines)
             return None
 
         debug_dir = semantic_validation_context_helpers.resolveSemanticValidationDebugDirImpl(
