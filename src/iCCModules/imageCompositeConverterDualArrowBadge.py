@@ -74,6 +74,20 @@ def _fitArrowFromMask(mask, *, np_module: Any) -> dict[str, float] | None:
     top_w = row_widths[0][1]
     bottom_w = row_widths[-1][1]
     down = bool(bottom_w > top_w)
+    if top_w == bottom_w:
+        # Some JPEG-compressed arrow tips are only one pixel wide at both ends.
+        # In those cases, infer direction from where wider rows cluster.
+        y_mid = (y_min + y_max) / 2.0
+        weighted_sum = 0.0
+        weight_total = 0.0
+        for y, width in row_widths:
+            if width <= 1:
+                continue
+            weight = float(width - 1)
+            weighted_sum += float(y) * weight
+            weight_total += weight
+        if weight_total > 0:
+            down = (weighted_sum / weight_total) > y_mid
     splits = [y for y, width in row_widths if width >= tri_threshold]
     if down:
         split = splits[0] if splits else int((y_min + y_max) / 2)
