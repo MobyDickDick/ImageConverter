@@ -13,6 +13,7 @@ from src.iCCModules import imageCompositeConverterPerceptionGeometry as percepti
 from src.iCCModules import imageCompositeConverterSemanticAuditLogging as semantic_audit_logging_helpers
 from src.iCCModules import imageCompositeConverterSemanticValidationContext as semantic_validation_context_helpers
 from src.iCCModules import imageCompositeConverterSemanticValidationLogging as semantic_validation_logging_helpers
+from src.iCCModules import imageCompositeConverterSemanticValidationRuntime as semantic_validation_runtime_helpers
 from src.iCCModules.imageCompositeConverterPerceptionReflection import Perception, Reflection
 
 def detectRelevantRegions(img) -> list[dict[str, object]]:
@@ -522,28 +523,18 @@ def runIterationPipeline(
             )
             return None
 
-        validation_logs: list[str] = []
         debug_dir = semantic_validation_context_helpers.resolveSemanticValidationDebugDirImpl(
             debug_element_diff_dir=debug_element_diff_dir,
             debug_ac0811_dir=debug_ac0811_dir,
             filename=filename,
             base_name=perc.base_name,
         )
-        if not bool(badge_params.get("draw_text", False)):
-            validation_logs.append("semantic-guard: Text bewusst deaktiviert (plain-ring Familie ohne Buchstabe).")
-        else:
-            validation_logs.append(
-                "semantic-guard: Textmodus aktiv ("
-                + str(badge_params.get("text_mode", "unknown"))
-                + ")."
-            )
-        validation_logs.extend(
-            Action.validate_badge_by_elements(
-            perc.img,
-            badge_params,
-            max_rounds=max(1, int(badge_validation_rounds)),
-            debug_out_dir=debug_dir,
-            )
+        validation_logs = semantic_validation_runtime_helpers.collectSemanticBadgeValidationLogsImpl(
+            perc_img=perc.img,
+            badge_params=badge_params,
+            badge_validation_rounds=badge_validation_rounds,
+            debug_dir=debug_dir,
+            validate_badge_by_elements_fn=Action.validate_badge_by_elements,
         )
         badge_params = Action._enforce_semantic_connector_expectation(
             perc.base_name,
