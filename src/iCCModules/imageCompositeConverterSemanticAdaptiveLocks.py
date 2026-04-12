@@ -12,6 +12,12 @@ _ADAPTIVE_CORRIDOR_KEYS = (
     "ac08_phase2_cy_min",
     "ac08_phase2_cy_max",
 )
+_ADAPTIVE_UNLOCK_FAMILIES = {"AC0838", "AC0870", "AC0882"}
+_ADAPTIVE_MIN_ERROR_BY_FAMILY = {
+    "AC0838": 18.0,
+    "AC0870": 16.0,
+    "AC0882": 16.0,
+}
 
 
 def activateAc08AdaptiveLocksImpl(
@@ -21,11 +27,9 @@ def activateAc08AdaptiveLocksImpl(
     full_err: float,
     reason: str,
 ) -> bool:
-    """Activate a narrow AC0838 phase-2 unlock corridor when stagnation is detected."""
+    """Activate a narrow AC08 phase-2 unlock corridor when stagnation is detected."""
     symbol_name = str(params.get("badge_symbol_name", "")).upper()
-    if symbol_name != "AC0838":
-        return False
-    if str(params.get("text_mode", "")).lower() != "voc":
+    if symbol_name not in _ADAPTIVE_UNLOCK_FAMILIES:
         return False
     if not bool(params.get("circle_enabled", True)):
         return False
@@ -36,7 +40,8 @@ def activateAc08AdaptiveLocksImpl(
         full_err_value = float(full_err)
     except (TypeError, ValueError):
         return False
-    if not math.isfinite(full_err_value) or full_err_value < 18.0:
+    min_error = float(_ADAPTIVE_MIN_ERROR_BY_FAMILY.get(symbol_name, 18.0))
+    if not math.isfinite(full_err_value) or full_err_value < min_error:
         return False
 
     original_lock_cx = bool(params.get("lock_circle_cx", False))
@@ -71,9 +76,11 @@ def activateAc08AdaptiveLocksImpl(
         "lock_arm_center_to_circle": original_lock_arm_center,
         "lock_stem_center_to_circle": original_lock_stem_center,
         "unlock_baseline_error": full_err_value,
+        "family": symbol_name,
     }
     logs.append(
-        "adaptive_unlock_applied: phase=2 family=AC0838 "
+        "adaptive_unlock_applied: phase=2 "
+        f"family={symbol_name} "
         f"(reason={reason}, full_err={full_err_value:.3f}, "
         f"cx_range=[{corridor['ac08_phase2_cx_min']:.3f},{corridor['ac08_phase2_cx_max']:.3f}], "
         f"cy_range=[{corridor['ac08_phase2_cy_min']:.3f},{corridor['ac08_phase2_cy_max']:.3f}])"
@@ -88,7 +95,7 @@ def releaseAc08AdaptiveLocksImpl(
     reason: str,
     current_error: float,
 ) -> bool:
-    """Re-apply AC0838 phase-2 locks once the fallback round has completed."""
+    """Re-apply AC08 phase-2 locks once the fallback round has completed."""
     state = params.get(_ADAPTIVE_STATE_KEY)
     if not isinstance(state, dict):
         return False
@@ -118,8 +125,9 @@ def releaseAc08AdaptiveLocksImpl(
     params.pop(_ADAPTIVE_STATE_KEY, None)
     for key in _ADAPTIVE_CORRIDOR_KEYS:
         params.pop(key, None)
+    family = str(state.get("family", "AC08"))
     logs.append(
         "adaptive_relock_applied: phase=1 restored "
-        f"(reason={reason}, current_error={current_error_value:.3f})"
+        f"(family={family}, reason={reason}, current_error={current_error_value:.3f})"
     )
     return True
