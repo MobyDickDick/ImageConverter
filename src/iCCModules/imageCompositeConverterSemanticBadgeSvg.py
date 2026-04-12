@@ -30,6 +30,8 @@ def generateBadgeSvgImpl(
         # optimization/fallback paths can strip the dedicated styling keys;
         # restore safe defaults so the output remains semantically correct.
         sy = float(h) / 75.0 if h > 0 else 1.0
+        centered_cx = float(w) / 2.0 if w > 0 else float(p.get("cx", 0.0))
+        p["cx"] = centered_cx
         head_base_y = 39.922279 * sy
         hub_y = float(p.get("head_hub_cy", 25.153 * sy))
         hub_y = max(0.0, min(head_base_y, hub_y))
@@ -40,11 +42,11 @@ def generateBadgeSvgImpl(
         p.setdefault("head_stroke", "#808080")
         p.setdefault("head_hub_fill", "#7f7f7f")
         p.setdefault("arm_color", "#606060")
-        p.setdefault("arm_stroke", 2.0)
+        p["arm_stroke"] = 1.0
         p["arm_enabled"] = True
         p["head_hub_cy"] = hub_y
-        p["arm_x1"] = float(p.get("cx", float(w) / 2.0))
-        p["arm_x2"] = float(p.get("cx", float(w) / 2.0))
+        p["arm_x1"] = centered_cx
+        p["arm_x2"] = centered_cx
         p["arm_y2"] = hub_y
         p["arm_y1"] = max(hub_y, min(head_base_y, circle_top))
         is_sia = "_SIA" in variant_ref
