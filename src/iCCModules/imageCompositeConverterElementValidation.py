@@ -435,6 +435,7 @@ def validateBadgeByElementsImpl(
                     reason="identical_fingerprint",
                 )
                 if adaptive_unlock_applied:
+                    logs.append("phase2_status: activated")
                     previous_round_state = None
                     fallback_search_active = True
                     if round_idx + 1 < max_rounds:
@@ -483,6 +484,7 @@ def validateBadgeByElementsImpl(
                 reason="no_geometry_movement",
             )
             if adaptive_unlock_applied:
+                logs.append("phase2_status: activated")
                 previous_round_state = None
                 fallback_search_active = True
                 if round_idx + 1 < max_rounds:
@@ -508,22 +510,30 @@ def validateBadgeByElementsImpl(
             logs.append("stopped_due_to_stagnation: keine weitere Parameterbewegung erkennbar")
             break
 
-    release_ac08_adaptive_locks_fn(
+    phase2_released = release_ac08_adaptive_locks_fn(
         params,
         logs,
         reason="validation_end",
         current_error=best_full_err if math_module.isfinite(best_full_err) else float("inf"),
     )
+    if phase2_released:
+        logs.append("phase2_status: deactivated")
 
     if math_module.isfinite(best_full_err):
+        rollback_applied = params != best_params
         params.clear()
         params.update(best_params)
-        release_ac08_adaptive_locks_fn(
+        best_restore_released = release_ac08_adaptive_locks_fn(
             params,
             logs,
             reason="best_state_restore",
             current_error=best_full_err,
         )
+        if best_restore_released:
+            logs.append("phase2_status: deactivated")
+        logs.append(f"phase2_rollback: {'yes' if rollback_applied else 'no'}")
+    else:
+        logs.append("phase2_rollback: no")
 
     for element in elements:
         if element == "text" and not params.get("draw_text", True):

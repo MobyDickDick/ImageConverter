@@ -4966,6 +4966,44 @@ def test_activate_ac08_adaptive_locks_is_disabled_without_guardrails() -> None:
     assert logs == []
 
 
+def test_activate_ac08_adaptive_locks_supports_ac0882_family() -> None:
+    """Adaptive AC08 unlock corridor should also activate for AC0882 stagnation cases."""
+    params = Action._finalize_ac08_style(
+        "AC0882",
+        {
+            "width": 22,
+            "height": 22,
+            "circle_enabled": True,
+            "arm_enabled": True,
+            "draw_text": True,
+            "text_mode": "co2",
+            "cx": 11.0,
+            "cy": 11.0,
+            "r": 5.0,
+            "arm_x1": 6.0,
+            "arm_y1": 11.0,
+            "arm_x2": 16.0,
+            "arm_y2": 11.0,
+            "arm_stroke": 1.0,
+            "fill_gray": 220,
+            "stroke_gray": 152,
+            "text_gray": 152,
+            "co2_font_scale": 0.9,
+        },
+    )
+    logs: list[str] = []
+
+    changed = Action._activate_ac08_adaptive_locks(
+        params,
+        logs,
+        full_err=17.5,
+        reason="unit_test",
+    )
+
+    assert changed is True
+    assert any("adaptive_unlock_applied: phase=2 family=AC0882" in line for line in logs)
+
+
 def test_optimize_element_color_bracket_respects_adaptive_color_corridor(monkeypatch: pytest.MonkeyPatch) -> None:
     """Adaptive unlock color tuning must stay inside the configured narrow palette corridor."""
     np = image_composite_converter.np
@@ -6354,6 +6392,9 @@ def test_validate_badge_by_elements_runs_ac0838_phase2_unlock_and_relock(
 
     assert any("adaptive_unlock_applied: phase=2 family=AC0838" in line for line in logs)
     assert any("adaptive_relock_applied: phase=1 restored" in line for line in logs)
+    assert any("phase2_status: activated" in line for line in logs)
+    assert any("phase2_status: deactivated" in line for line in logs)
+    assert any("phase2_rollback:" in line for line in logs)
 
 
 def test_resolve_cli_csv_and_output_accepts_xml_as_table_path(tmp_path: Path) -> None:
