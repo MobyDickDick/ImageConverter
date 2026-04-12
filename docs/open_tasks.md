@@ -50,7 +50,7 @@ focused on the actual project scope.
   - 2026-04-12: Pilot für `AC0838_*` implementiert (`adaptive_unlock_applied` + `adaptive_relock_applied`, enger `cx/cy`-Korridor während Phase 2). Breiter Rollout auf weitere Familien bleibt offen.
   - 2026-04-12: Rollout auf `AC0870_*` und `AC0882_*` ergänzt; Validation-Logs enthalten zusätzlich explizite Marker `phase2_status: activated/deactivated` und `phase2_rollback: yes/no`.
 
-- [ ] D3: Global-Search-Gating für kleine aktive Parametermengen erweitern.
+- [x] D3: Global-Search-Gating für kleine aktive Parametermengen erweitern.
   - Hintergrund: Der aktuelle globale Suchpfad bricht bei `<4` aktiven Parametern ab; dadurch entfällt oft die einzige joint-Optimierung bei AC08.
   - Umsetzungsidee:
     - Reduzierte Global-/Joint-Suche auch für 2–3 aktive Parameter erlauben (z. B. `cx/r`, `cy/r`, `text_x/text_scale`).
@@ -58,6 +58,8 @@ focused on the actual project scope.
   - Akzeptanzkriterien:
     - `global-search: übersprungen (zu wenige aktive Parameter...)` tritt im AC08-Regression-Set deutlich seltener auf.
     - Keine Verletzung bestehender Bounds-/Lock-Invarianten (Regressionstests erweitern).
+  - 2026-04-12: Gating von `>=4` auf `>=2` aktive Parameter erweitert; `2-3` aktive Parameter laufen jetzt im reduzierten Global-Search-Modus.
+    Zusätzliche Instrumentierung protokolliert `modus=voll|reduziert` inkl. aktiver Schlüssel, und Detailtests decken Skip- (`<2`) sowie Reduced-Mode-Logging ab.
 
 - [ ] D4: Evaluate-Kosten im Render-/Scoring-Loop reduzieren (Memoization + sparsame GC).
   - Hintergrund: Jede Kandidatenbewertung rendert SVG->Pixmap->NumPy; der Hotpath räumt aktuell pro Versuch per `gc.collect()` auf.

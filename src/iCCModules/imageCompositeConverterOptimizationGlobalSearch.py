@@ -45,9 +45,19 @@ def optimizeGlobalParameterVectorSamplingImpl(
             continue
         active_keys.append(key)
 
-    if len(active_keys) < 4:
-        logs.append("global-search: übersprungen (zu wenige aktive Parameter; benötigt >=4)")
+    min_active_keys = 2
+    search_mode = "voll" if len(active_keys) >= 4 else "reduziert"
+    if len(active_keys) < min_active_keys:
+        logs.append(
+            "global-search: übersprungen "
+            f"(zu wenige aktive Parameter; benötigt >={min_active_keys}, aktiv={len(active_keys)})"
+        )
         return False
+
+    logs.append(
+        "global-search: konfiguration "
+        f"(modus={search_mode}, aktive_parameter={len(active_keys)}, keys={','.join(active_keys)})"
+    )
 
     def clampVector(candidate):
         data = dataclasses.asdict(candidate)
@@ -95,7 +105,9 @@ def optimizeGlobalParameterVectorSamplingImpl(
         spans = {key: max(0.25, float(bounds[key][1] - bounds[key][0]) * 0.20) for key in active_keys}
         plateau_rounds: list[dict[str, float | int]] = []
         logs.append(
-            f"global-search: gestartet (aktive_parameter={','.join(active_keys)}, samples_pro_runde={max(8, int(samples_per_round))}, start_err={best_err:.3f})"
+            "global-search: gestartet "
+            f"(modus={search_mode}, aktive_parameter={','.join(active_keys)}, "
+            f"samples_pro_runde={max(8, int(samples_per_round))}, start_err={best_err:.3f})"
         )
         logs.append(
             f"global-search: near-optimum-definition (err <= best_err + epsilon, epsilon=max({near_optimum_eps_floor:.2f}, best_err*{near_optimum_eps_rel:.2f}))"
@@ -247,7 +259,7 @@ def optimizeGlobalParameterVectorSamplingImpl(
         }
         logs.append(
             "global-search: deterministischer track gestartet "
-            f"(seed={int(seed)}, schritte={max(2, int(rounds))}, start_err={best_err:.3f})"
+            f"(modus={search_mode}, seed={int(seed)}, schritte={max(2, int(rounds))}, start_err={best_err:.3f})"
         )
         for pass_idx in range(max(2, int(rounds))):
             pass_improved = 0
