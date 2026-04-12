@@ -9,6 +9,9 @@ import re
 import subprocess
 import sys
 
+_INPROCESS_RENDER_COUNT = 0
+_INPROCESS_GC_PERIOD = 25
+
 
 def render_svg_to_numpy_inprocess(
     svg_string: str,
@@ -32,6 +35,7 @@ def render_svg_to_numpy_inprocess(
         attempts.append(normalized_svg)
 
     for candidate_svg in attempts:
+        global _INPROCESS_RENDER_COUNT
         page = None
         pix = None
         try:
@@ -55,7 +59,9 @@ def render_svg_to_numpy_inprocess(
                 del pix
             if page is not None:
                 del page
-            gc.collect()
+            _INPROCESS_RENDER_COUNT += 1
+            if _INPROCESS_RENDER_COUNT % _INPROCESS_GC_PERIOD == 0:
+                gc.collect()
     return None
 
 

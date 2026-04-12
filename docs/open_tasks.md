@@ -61,7 +61,7 @@ focused on the actual project scope.
   - 2026-04-12: Gating von `>=4` auf `>=2` aktive Parameter erweitert; `2-3` aktive Parameter laufen jetzt im reduzierten Global-Search-Modus.
     Zusätzliche Instrumentierung protokolliert `modus=voll|reduziert` inkl. aktiver Schlüssel, und Detailtests decken Skip- (`<2`) sowie Reduced-Mode-Logging ab.
 
-- [ ] D4: Evaluate-Kosten im Render-/Scoring-Loop reduzieren (Memoization + sparsame GC).
+- [x] D4: Evaluate-Kosten im Render-/Scoring-Loop reduzieren (Memoization + sparsame GC).
   - Hintergrund: Jede Kandidatenbewertung rendert SVG->Pixmap->NumPy; der Hotpath räumt aktuell pro Versuch per `gc.collect()` auf.
   - Umsetzungsidee:
     - Parameter-Fingerprint-basierte Render-Cache-Schicht für identische Kandidaten innerhalb einer Runde.
@@ -70,6 +70,9 @@ focused on the actual project scope.
   - Akzeptanzkriterien:
     - Laufzeit für repräsentative Teilmengen (`AC0838`, `AC0223`) sinkt messbar bei gleicher/verbesserter Qualität.
     - Keine neue Instabilität im MuPDF-Pfad.
+  - 2026-04-12: Global-Search-Evaluierung nutzt jetzt einen Probe-Fingerprint-Cache für wiederholte Kandidaten
+    und schreibt Telemetrie (`requests`, `cache_hits`, `hit_rate`, `render_aufrufe`) in die Validation-Logs.
+    Zusätzlich läuft `gc.collect()` im In-Process-Renderer nur noch periodisch (alle 25 Renderaufrufe) statt pro Kandidat.
 
 - [ ] D5: Metrik-Fortsetzung als Multi-Objective-Prototyp evaluieren.
   - Hintergrund: Reiner Pixel-Fehler kann Anti-Aliasing-Effekte übergewichten und so semantisch plausible Geometrie verdrängen.

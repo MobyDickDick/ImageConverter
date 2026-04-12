@@ -6,6 +6,26 @@ import dataclasses
 import math
 
 
+def _freeze_eval_value(value):
+    if isinstance(value, bool):
+        return ("bool", value)
+    if isinstance(value, int):
+        return ("int", int(value))
+    if isinstance(value, float):
+        if math.isnan(value):
+            return ("float", "nan")
+        if math.isinf(value):
+            return ("float", "inf" if value > 0 else "-inf")
+        return ("float", round(value, 6))
+    if isinstance(value, str):
+        return ("str", value)
+    return ("repr", repr(value))
+
+
+def _probe_cache_key(probe: dict) -> tuple:
+    return tuple(sorted((str(key), _freeze_eval_value(value)) for key, value in probe.items()))
+
+
 def optimizeGlobalParameterVectorSamplingImpl(
     img_orig,
     params: dict,
@@ -58,6 +78,17 @@ def optimizeGlobalParameterVectorSamplingImpl(
         "global-search: konfiguration "
         f"(modus={search_mode}, aktive_parameter={len(active_keys)}, keys={','.join(active_keys)})"
     )
+    eval_cache: dict[tuple, float] = {}
+    eval_requests = 0
+    eval_hits = 0
+
+    def log_eval_telemetry():
+        cache_hit_rate = (eval_hits / eval_requests) if eval_requests else 0.0
+        logs.append(
+            "global-search: evaluate-telemetrie "
+            f"(requests={eval_requests}, cache_hits={eval_hits}, hit_rate={cache_hit_rate:.3f}, "
+            f"render_aufrufe={eval_requests - eval_hits})"
+        )
 
     def clampVector(candidate):
         data = dataclasses.asdict(candidate)
@@ -71,6 +102,8 @@ def optimizeGlobalParameterVectorSamplingImpl(
         return global_parameter_vector_cls(**data)
 
     def evalVector(candidate) -> float:
+        nonlocal eval_hits, eval_requests
+        eval_requests += 1
         probe = candidate.apply_to_params(params)
         if probe.get("arm_enabled"):
             reanchor_arm_to_circle_edge_fn(probe, float(probe.get("r", 0.0)))
@@ -81,7 +114,14 @@ def optimizeGlobalParameterVectorSamplingImpl(
                 probe["stem_x"] = snap_half_fn(
                     max(0.0, min(float(w) - stem_w, float(probe.get("cx", 0.0)) - (stem_w / 2.0)))
                 )
-        return full_badge_error_for_params_fn(img_orig, probe)
+        cache_key = _probe_cache_key(probe)
+        cached = eval_cache.get(cache_key)
+        if cached is not None:
+            eval_hits += 1
+            return cached
+        err = float(full_badge_error_for_params_fn(img_orig, probe))
+        eval_cache[cache_key] = err
+        return err
 
     def withinHardBounds(candidate) -> tuple[bool, str]:
         for key in active_keys:
@@ -317,6 +357,7 @@ def optimizeGlobalParameterVectorSamplingImpl(
 
     if not winner_improved and winner_err >= start_err - 0.01:
         logs.append("global-search: keine relevante Verbesserung")
+        log_eval_telemetry()
         return False
 
     old_values = {key: float(getattr(vector, key)) for key in active_keys}
@@ -336,6 +377,7 @@ def optimizeGlobalParameterVectorSamplingImpl(
         "global-search: übernommen "
         f"(best_err={winner_err:.3f}, track={winner_name}, verbessert={', '.join(delta_labels) if delta_labels else 'keine sichtbare delta-liste'})"
     )
+    log_eval_telemetry()
     return True
 
 
