@@ -338,7 +338,7 @@ def _bootstrapRequiredImageDependencies() -> list[str]:
     )
 
 def rgbToHex(rgb: np.ndarray) -> str:
-    return "#{:02x}{:02x}{:02x}".format(int(rgb[0]), int(rgb[1]), int(rgb[2]))
+    return color_utils_helpers.rgbToHexImpl(rgb)
 
 def getBaseNameFromFile(filename: str) -> str:
     return naming_helpers.getBaseNameFromFileImpl(filename)

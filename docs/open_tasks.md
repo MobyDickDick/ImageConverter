@@ -206,6 +206,8 @@ focused on the actual project scope.
   - 2026-04-12: Wahrnehmungs-Geometriehelfer (`_looksLikeElongatedForegroundRect`) in neues Modul `src/iCCModules/imageCompositeConverterPerceptionGeometry.py` ausgelagert; `src/iCCModules/imageCompositeConverterRemaining.py` delegiert weiterhin kompatibel über Wrapper.
   - 2026-04-12: Bildlade-/Binarisierungshelfer (`loadGrayscaleImage`, `loadBinaryImageWithMode`) in neues Modul `src/iCCModules/imageCompositeConverterImageLoading.py` ausgelagert; `src/iCCModules/imageCompositeConverterRemaining.py` delegiert weiterhin kompatibel über Wrapper und neue Detailtests sichern Global-/Otsu-/Adaptive-Modi sowie Fehlermeldungen ab.
   - 2026-04-12: Dateinamen-/Varianten-Normalisierung (`getBaseNameFromFile`) in neues Modul `src/iCCModules/imageCompositeConverterNaming.py` ausgelagert; `src/iCCModules/imageCompositeConverterRemaining.py` delegiert weiterhin kompatibel über Wrapper und neue Detailtests decken die Suffix-Normalisierung (`_L/_M/_S`, `_sia`, numerische Varianten) ab.
+  - [x] C1.2: Farb-Hex-Helfer (`rgbToHex`) aus `src/iCCModules/imageCompositeConverterRemaining.py` in `src/iCCModules/imageCompositeConverterColorUtils.py` ausgelagert; `src/iCCModules/imageCompositeConverterRemaining.py` delegiert weiterhin kompatibel über Wrapper und neue Detailtests decken die Hex-Formatierung ab.
+  - 2026-04-12: Umsetzung abgeschlossen inkl. Test `test_rgb_to_hex_impl_formats_channels`.
   - Nächster geplanter Schritt: weitere IO-/Reporting-Teilstrecken in denselben kleinen Schritten extrahieren.
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.

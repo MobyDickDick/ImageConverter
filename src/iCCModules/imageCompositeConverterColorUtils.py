@@ -15,3 +15,7 @@ def clipImpl(value, low, high, *, np_module, clip_scalar_fn):
 def grayToHexImpl(v: float) -> str:
     g = max(0, min(255, int(round(v))))
     return f"#{g:02x}{g:02x}{g:02x}"
+
+
+def rgbToHexImpl(rgb) -> str:
+    return "#{:02x}{:02x}{:02x}".format(int(rgb[0]), int(rgb[1]), int(rgb[2]))
