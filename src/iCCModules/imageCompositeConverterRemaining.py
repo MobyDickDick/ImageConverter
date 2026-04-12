@@ -11,6 +11,7 @@ from src.iCCModules import imageCompositeConverterImageLoading as image_loading_
 from src.iCCModules import imageCompositeConverterNaming as naming_helpers
 from src.iCCModules import imageCompositeConverterPerceptionGeometry as perception_geometry_helpers
 from src.iCCModules import imageCompositeConverterSemanticAuditLogging as semantic_audit_logging_helpers
+from src.iCCModules import imageCompositeConverterSemanticValidationContext as semantic_validation_context_helpers
 from src.iCCModules import imageCompositeConverterSemanticValidationLogging as semantic_validation_logging_helpers
 from src.iCCModules.imageCompositeConverterPerceptionReflection import Perception, Reflection
 
@@ -522,13 +523,12 @@ def runIterationPipeline(
             return None
 
         validation_logs: list[str] = []
-        debug_dir = None
-        if debug_element_diff_dir:
-            debug_dir = os.path.join(debug_element_diff_dir, os.path.splitext(filename)[0])
-            os.makedirs(debug_dir, exist_ok=True)
-        elif debug_ac0811_dir and perc.base_name.upper() == "AC0811":
-            debug_dir = os.path.join(debug_ac0811_dir, os.path.splitext(filename)[0])
-            os.makedirs(debug_dir, exist_ok=True)
+        debug_dir = semantic_validation_context_helpers.resolveSemanticValidationDebugDirImpl(
+            debug_element_diff_dir=debug_element_diff_dir,
+            debug_ac0811_dir=debug_ac0811_dir,
+            filename=filename,
+            base_name=perc.base_name,
+        )
         if not bool(badge_params.get("draw_text", False)):
             validation_logs.append("semantic-guard: Text bewusst deaktiviert (plain-ring Familie ohne Buchstabe).")
         else:
@@ -655,16 +655,11 @@ def runIterationPipeline(
                 print("  -> Kein Compositing-Befehl erkannt: verwende Gradient-Stripe-Strategie.")
                 svg_content = gradient_stripe_strategy_helpers.buildGradientStripeSvgImpl(w, h, stripe_strategy)
                 strategy_stop_count = len(list(stripe_strategy.get("stops", [])))
-                log_status = (
-                    "non_composite_gradient_stripe_visual_override"
-                    if semantic_mode_visual_override
-                    else "non_composite_gradient_stripe"
-                )
                 _writeValidationLog(
-                    [
-                        f"status={log_status}",
-                        f"strategy=gradient_stripe;stop_count={strategy_stop_count}",
-                    ]
+                    semantic_validation_context_helpers.buildNonCompositeGradientStripeValidationLogLinesImpl(
+                        semantic_mode_visual_override=semantic_mode_visual_override,
+                        strategy_stop_count=strategy_stop_count,
+                    )
                 )
             else:
                 print("  -> Kein Compositing-Befehl erkannt: verwende Einzelbild-Konvertierung (embedded raster SVG).")
