@@ -1,4 +1,15 @@
 <svg width="30px" height="45px" viewBox="0 0 30 45" xmlns="http://www.w3.org/2000/svg">
-  <line x1="14.5000" y1="23.5000" x2="14.5000" y2="14.0000" stroke="#606060" stroke-width="1.0000" stroke-linecap="round"/>
-  <circle cx="14.5000" cy="33.5000" r="10.0000" fill="#c8c8c8" stroke="#606060" stroke-width="1.0000"/>
+  <defs>
+  <linearGradient id="ac0223ValveGradient" x1="1" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#b2b2b3"/>
+    <stop offset="100%" stop-color="#d9d9d9"/>
+  </linearGradient>
+  </defs>
+  <line x1="15.0000" y1="24.5000" x2="15.0000" y2="15.0000" stroke="#606060" stroke-width="2.0000" stroke-linecap="round"/>
+  <circle cx="15.0000" cy="34.5000" r="10.0000" fill="#c8c8c8" stroke="#606060" stroke-width="1.0000"/>
+  <g transform="translate(0.000000 0.000000) scale(0.600000 0.600000)">
+    <path d="M 36.492188 3.0410156 L 13.505859 3.1347656 L 23.417969 22.871094 A 2.5 2.500001 0 0 0 22.748047 23.722656 L 2.0195312 13.308594 L 2.1113281 36.294922 L 22.75 25.882812 A 2.5 2.500001 0 0 0 25 27.300781 A 2.5 2.500001 0 0 0 27.207031 25.962891 L 47.78125 36.294922 L 47.873047 13.308594 L 27.212891 23.640625 A 2.5 2.500001 0 0 0 26.580078 22.863281 L 36.492188 3.0410156 z" fill="url(#ac0223ValveGradient)" stroke="none"/>
+    <path d="M 36.492188,2.6959677 25,25 47.87305,12.963546 47.78125,35.949874 25,25 2.1132824,35.949874 2.0195324,12.963546 25,25 13.50586,2.7897177 Z" fill="url(#ac0223ValveGradient)" stroke="#808080" stroke-width="1"/>
+    <ellipse cx="25" cy="25.153" rx="2.5" ry="2.500001" fill="#7f7f7f" stroke="#808080" stroke-width="1"/>
+  </g>
 </svg>

@@ -1,2 +1,50 @@
-run-meta: run_seed=680442808 pass_seed_offset=0 nonce_ns=1775939416217664500
-status=non_composite_embedded_svg
+run-meta: run_seed=882736832 pass_seed_offset=0 nonce_ns=1775983321453855700
+status=semantic_ok
+redraw_variation: seed=890702857425 changed_params=cx:25.000->24.741 | cy:49.500->49.576 | r:19.000->19.111 | stroke_circle:1.000->0.948 | arm_stroke:1.000->1.079
+semantic-guard: Text bewusst deaktiviert (plain-ring Familie ohne Buchstabe).
+Runde 1: elementweise Validierung gestartet
+circle: Fehler=148.496
+circle: Breiten-Stochastic-Survivor aktiviert (stroke_circle=2.000, err=140.733)
+circle: Breiten-Bracketing stroke_circle 3.333->2.000; Kandidaten=2.000->140.733, 3.500->154.822, 4.000->154.822, 6.500->171.555, 9.000->199.792, 11.000->217.657
+circle: Mittelpunkt-Bracketing keine relevante Änderung (cx=25.000, cy=44.500, best_err=140.733)
+circle: Radius-Bracketing r 17.200->19.000 (best_err=140.417, full_err=50.673); Kandidaten=18.920->140.103, 19.000->140.417, 24.000->157.874
+arm: Fehler=110.023
+arm: Breiten-Bracketing arm_stroke 5.333->2.000; Kandidaten=1.500->85.664, 3.500->94.859, 5.500->109.398, 8.000->117.942, 10.000->125.209
+arm: Längen-Bracketing arm_len 0.347->1.000; Kandidaten=1.000->86.802, 19.500->104.161, 38.000->107.234, 56.500->107.234, 75.000->107.234
+Runde 1: Gesamtfehler=50.673
+Runde 2: elementweise Validierung gestartet
+circle: Fehler=140.417
+circle: Breiten-Bracketing stroke_circle 2.000->1.000; Kandidaten=1.000->135.777, 2.000->140.417, 3.500->154.228, 6.000->174.014, 8.500->200.194, 11.000->234.577
+circle: Mittelpunkt-Bracketing keine relevante Änderung (cx=25.000, cy=44.500, best_err=135.777)
+circle: Radius-Bracketing keine relevante Änderung (r: 19.000, best_err=135.777, full_err=49.086); Kandidaten=18.920->135.591, 19.000->135.777, 24.000->148.013
+arm: Fehler=86.802
+arm: Breiten-Stochastic-Survivor aktiviert (arm_stroke=1.000, err=85.762)
+arm: Breiten-Bracketing arm_stroke 2.000->1.000; Kandidaten=1.000->85.762, 2.000->86.802, 3.000->94.846, 5.500->109.657, 8.000->118.017, 10.000->125.184
+arm: Längen-Bracketing keine relevante Änderung (arm_len: 1.000); Kandidaten=1.000->85.762, 19.500->103.923, 38.000->107.323, 56.500->107.323, 75.000->107.323
+Runde 2: Gesamtfehler=49.086
+Runde 3: elementweise Validierung gestartet
+circle: Fehler=135.777
+circle: Breiten-Bracketing keine relevante Änderung (stroke_circle: 1.000); Kandidaten=1.000->135.777, 3.500->154.228, 6.000->174.014, 8.500->200.194, 11.000->234.577
+circle: Mittelpunkt-Bracketing keine relevante Änderung (cx=25.000, cy=44.500, best_err=135.777)
+circle: Radius-Bracketing keine relevante Änderung (r: 19.000, best_err=135.777, full_err=49.086); Kandidaten=18.920->135.591, 19.000->135.777, 24.000->148.013
+arm: Fehler=85.762
+arm: Breiten-Bracketing keine relevante Änderung (arm_stroke: 1.000); Kandidaten=1.000->85.762, 3.000->94.846, 5.500->109.657, 8.000->118.017, 10.000->125.184
+arm: Längen-Bracketing keine relevante Änderung (arm_len: 1.000); Kandidaten=1.000->85.762, 19.500->103.923, 38.000->107.323, 56.500->107.323, 75.000->107.323
+Runde 3: Gesamtfehler=49.086
+stagnation_detected: identischer Parameter-Fingerprint und praktisch unveränderter Gesamtfehler
+switch_to_fallback_search: deaktiviere Circle-Geometry-Penalty für eine letzte Ausweichrunde
+Runde 4: elementweise Validierung gestartet
+circle: Fehler=135.777
+circle: Breiten-Bracketing keine relevante Änderung (stroke_circle: 1.000); Kandidaten=1.000->135.777, 3.500->154.228, 6.000->174.014, 8.500->200.194, 11.000->234.577
+arm: Fehler=85.762
+arm: Breiten-Bracketing keine relevante Änderung (arm_stroke: 1.000); Kandidaten=1.000->85.762, 3.000->94.846, 5.500->109.657, 8.000->118.017, 10.000->125.184
+arm: Längen-Bracketing keine relevante Änderung (arm_len: 1.000); Kandidaten=1.000->85.762, 19.500->103.923, 38.000->107.323, 56.500->107.323, 75.000->107.323
+Runde 4: Gesamtfehler=49.086
+stagnation_detected: identischer Parameter-Fingerprint und praktisch unveränderter Gesamtfehler
+stopped_due_to_stagnation: Validierung vorzeitig beendet
+circle: Farb-Bracketing fill_gray 242->200; Kandidaten=190->57977.000, 200->57812.000, 210->58630.000, 220->59599.000, 226->60216.000, 230->60647.000, 234->61085.000, 240->61780.000, 242->62132.000, 250->64686.000, 255->66503.000
+circle: Farb-Bracketing stroke_gray 127->152; Kandidaten=95->58339.000, 96->58318.000, 111->57990.000, 112->57973.000, 119->57868.000, 127->57812.000, 128->57806.000, 135->57782.000, 143->57751.000, 144->57753.000, 152->57747.000, 159->57799.000, 160->57811.000, 171->57944.000, 190->58186.000
+circle: Farboptimierung in Abschlussphase angewendet
+arm: Farb-Bracketing stroke_gray 152->96; Kandidaten=96->85.762, 112->85.762, 120->85.762, 128->85.762, 136->85.762, 144->85.762, 152->85.762, 160->85.762, 168->85.762, 171->85.762, 182->85.762, 184->85.762
+arm: Farboptimierung in Abschlussphase angewendet
+semantic-guard: Erwartete Arm-Geometrie bestätigt/wiederhergestellt (z.B. AC0812 links).

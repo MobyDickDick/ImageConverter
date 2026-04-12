@@ -1,2 +1,42 @@
-run-meta: run_seed=680442808 pass_seed_offset=0 nonce_ns=1775939464339586100
-status=non_composite_embedded_svg
+run-meta: run_seed=882736832 pass_seed_offset=0 nonce_ns=1775983297762015600
+status=semantic_ok
+redraw_variation: seed=891011004093 changed_params=cx:10.000->10.177 | cy:22.000->22.211 | r:8.500->8.344 | stroke_circle:1.000->0.911 | arm_stroke:2.000->2.082
+semantic-guard: Text bewusst deaktiviert (plain-ring Familie ohne Buchstabe).
+Runde 1: elementweise Validierung gestartet
+circle: Fehler=113.211
+circle: Breiten-Bracketing stroke_circle 1.333->1.000; Kandidaten=1.000->113.211, 1.500->146.671, 2.500->146.671, 3.500->225.170, 4.500->225.170
+circle: Mittelpunkt-Bracketing cx 10.000->10.000, cy 20.500->22.000 (best_err=110.832)
+circle: Radius-Bracketing r 6.880->8.500 (best_err=111.931, full_err=55.398); Kandidaten=7.568->111.931, 9.600->111.931
+arm: Fehler=95.934
+arm: Breiten-Stochastic-Survivor aktiviert (arm_stroke=1.500, err=89.351)
+arm: Breiten-Bracketing arm_stroke 2.000->2.000; Kandidaten=1.000->92.017, 2.000->95.934, 2.500->95.051, 3.000->96.658, 4.000->102.493
+arm: Längen-Bracketing arm_len 20.439->15.500; Kandidaten=15.500->90.884, 19.000->90.884, 20.500->90.884, 22.500->90.884, 26.500->90.884, 30.000->90.884
+Runde 1: Gesamtfehler=55.362
+Runde 2: elementweise Validierung gestartet
+circle: Fehler=101.442
+circle: Breiten-Bracketing keine relevante Änderung (stroke_circle: 1.000); Kandidaten=1.000->101.442, 1.500->118.058, 2.500->118.058, 3.500->147.189, 4.500->147.189
+circle: Mittelpunkt-Bracketing keine relevante Änderung (cx=10.000, cy=22.000, best_err=108.925)
+circle: Radius-Bracketing keine relevante Änderung (r: 8.500, best_err=108.925, full_err=55.398); Kandidaten=7.650->108.925, 8.000->108.925, 8.500->108.925, 9.600->108.925
+arm: Fehler=90.884
+arm: Breiten-Bracketing keine relevante Änderung (arm_stroke: 2.000); Kandidaten=1.000->94.381, 2.000->90.884, 2.500->90.884, 3.000->93.472, 4.000->98.804
+arm: Längen-Bracketing arm_len 12.500->9.500; Kandidaten=9.500->90.884, 12.500->90.884, 14.500->90.884, 19.500->90.884, 25.000->90.884, 30.000->90.884
+Runde 2: Gesamtfehler=55.362
+stagnation_detected: identischer Parameter-Fingerprint und praktisch unveränderter Gesamtfehler
+switch_to_fallback_search: deaktiviere Circle-Geometry-Penalty für eine letzte Ausweichrunde
+Runde 3: elementweise Validierung gestartet
+circle: Fehler=101.442
+circle: Breiten-Bracketing keine relevante Änderung (stroke_circle: 1.000); Kandidaten=1.000->101.442, 1.500->118.058, 2.500->118.058, 3.500->147.189, 4.500->147.189
+arm: Fehler=90.884
+arm: Breiten-Bracketing keine relevante Änderung (arm_stroke: 2.000); Kandidaten=1.000->94.381, 2.000->90.884, 2.500->90.884, 3.000->93.472, 4.000->98.804
+arm: Längen-Stochastic-Survivor aktiviert (best_len=3.000, err=83.543)
+arm: Längen-Bracketing arm_len 9.500->3.000; Kandidaten=1.000->85.477, 8.000->96.729, 9.500->90.884, 15.500->90.884, 23.000->90.884, 30.000->90.884
+Runde 3: Gesamtfehler=55.362
+stagnation_detected: identischer Parameter-Fingerprint und praktisch unveränderter Gesamtfehler
+stopped_due_to_stagnation: Validierung vorzeitig beendet
+circle: Farb-Bracketing fill_gray 242->220; Kandidaten=200->3826.000, 209->3611.000, 210->3588.000, 220->3395.000, 226->3538.000, 230->3714.000, 234->3911.000, 240->4217.000, 242->4332.000, 250->4978.000, 255->5416.000
+circle: Farb-Stochastic-Survivor aktiviert (stroke_gray=209, err=3113.000)
+circle: Farb-Bracketing stroke_gray 127->209; Kandidaten=95->3576.000, 96->3570.000, 111->3486.000, 112->3481.000, 119->3442.000, 127->3395.000, 128->3389.000, 135->3352.000, 143->3305.000, 144->3298.000, 152->3256.000, 159->3212.000, 160->3208.000, 171->3180.000, 209->3113.000
+circle: Farboptimierung in Abschlussphase angewendet
+arm: Farb-Bracketing stroke_gray 209->96; Kandidaten=96->90.884, 112->90.884, 128->90.884, 144->90.884, 152->90.884, 160->90.884, 171->90.884, 177->90.884, 191->90.884, 193->90.884, 201->90.884, 209->90.884, 217->90.884, 225->90.884, 241->90.884
+arm: Farboptimierung in Abschlussphase angewendet
+semantic-guard: Erwartete Arm-Geometrie bestätigt/wiederhergestellt (z.B. AC0812 links).

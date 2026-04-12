@@ -1,25 +1,27 @@
 {
   "base": "AC0223",
-  "best_error": 36.218577777777774,
+  "best_error": 46.41688888888889,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.009658287407407406,
+  "error_per_pixel": 0.012377837037037038,
   "filename": "AC0223_L.jpg",
   "h": 75,
-  "mean_delta2": 9586.80078125,
+  "mean_delta2": 21255.85546875,
   "params": {
     "bottom_shape": null,
     "description_fragments": [
       {
         "key": "AC0223",
         "source": "base_name",
-        "text": "Wie AC0221: Wie AC0231, jedoch ohne \"M\" in der Kelle oben. Geometrische Variante: 180° gedreht."
+        "text": "3-Wege-Ventilkopf oben (drei spitze Ventilflügel mit gemeinsamem Verlauf von dunkelgrau nach hellgrau), darunter ein dunkelgrauer senkrechter Griff (vom Ventilzentrum nach unten) auf hellgrauem Hintergrund. Kein \"M\"-Text im Badge."
+      },
+      {
+        "key": "AC0223_L",
+        "source": "variant_name",
+        "text": "Unterteil: grauer Kreis mit grauem Rand (klassische Kelle)."
       }
     ],
-    "documented_alias_refs": [
-      "AC0221",
-      "AC0231"
-    ],
+    "documented_alias_refs": [],
     "elements": [
       "SEMANTIC: Kreis ohne Buchstabe",
       "SEMANTIC: senkrechter Strich oben vom Kreis",
@@ -48,7 +50,7 @@
     "top_source_ref": null,
     "variant_name": "AC0223_L"
   },
-  "std_delta2": 14622.4619140625,
+  "std_delta2": 40670.9375,
   "variant": "AC0223_L",
   "w": 50
 }

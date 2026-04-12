@@ -1,39 +1,56 @@
 {
-  "base": "AC0223_L_SIA",
-  "best_error": 0.0,
+  "base": "AC0223",
+  "best_error": 42.63013333333333,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.0,
+  "error_per_pixel": 0.011368035555555555,
   "filename": "AC0223_L_sia.jpg",
   "h": 75,
-  "mean_delta2": 0.0,
+  "mean_delta2": 19607.068359375,
   "params": {
     "bottom_shape": null,
     "description_fragments": [
       {
-        "key": "AC0223_L_sia",
+        "key": "AC0223",
         "source": "base_name",
-        "text": "Wie AC0221: Wie AC0231, jedoch ohne \"M\" in der Kelle oben. Geometrische Variante: 180° gedreht."
+        "text": "3-Wege-Ventilkopf oben (drei spitze Ventilflügel mit gemeinsamem Verlauf von dunkelgrau nach hellgrau), darunter ein dunkelgrauer senkrechter Griff (vom Ventilzentrum nach unten) auf hellgrauem Hintergrund. Kein \"M\"-Text im Badge."
+      },
+      {
+        "key": "AC0223_L_sia",
+        "source": "variant_name",
+        "text": "Unterteil: statt der Kelle ein hellgraues Quadrat mit grauem Rand; beide Diagonalen sind als graue Linien eingezeichnet."
       }
     ],
-    "documented_alias_refs": [
-      "AC0221",
-      "AC0231"
+    "documented_alias_refs": [],
+    "elements": [
+      "SEMANTIC: Kreis ohne Buchstabe",
+      "SEMANTIC: senkrechter Strich oben vom Kreis",
+      "SEMANTIC: Ventilkopf mit drei Dreiecken oberhalb des Stiels",
+      "SEMANTIC: Dreiecks-Spitzen treffen zentriert am oberen Stielende zusammen",
+      "SEMANTIC: Drei Dreiecke sind zu einem Polygon vereint"
     ],
-    "elements": [],
-    "label": "M",
-    "mode": "auto",
+    "label": "",
+    "mode": "semantic_badge",
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
       "layout_override",
       "description_heuristic"
     ],
-    "semantic_sources": {},
+    "semantic_sources": {
+      "description_heuristic": [],
+      "family_rule": [
+        "SEMANTIC: Kreis ohne Buchstabe",
+        "SEMANTIC: senkrechter Strich oben vom Kreis",
+        "SEMANTIC: Ventilkopf mit drei Dreiecken oberhalb des Stiels",
+        "SEMANTIC: Dreiecks-Spitzen treffen zentriert am oberen Stielende zusammen",
+        "SEMANTIC: Drei Dreiecke sind zu einem Polygon vereint"
+      ]
+    },
     "top_source_ref": null,
     "variant_name": "AC0223_L_SIA"
   },
-  "std_delta2": 0.0,
+  "std_delta2": 40329.53515625,
   "variant": "AC0223_L_SIA",
   "w": 50
 }
