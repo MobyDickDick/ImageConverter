@@ -210,6 +210,8 @@ focused on the actual project scope.
   - 2026-04-12: Umsetzung abgeschlossen inkl. Test `test_rgb_to_hex_impl_formats_channels`.
   - [x] C1.3: Circle-Decomposition-Helfer (`estimateStrokeStyle`, `candidateToSvg`, `decomposeCircleWithStem`) aus `src/iCCModules/imageCompositeConverterRemaining.py` in neues Modul `src/iCCModules/imageCompositeConverterElementDecomposition.py` ausgelagert; `src/iCCModules/imageCompositeConverterRemaining.py` delegiert weiterhin kompatibel über Wrapper und neue Detailtests decken SVG-/Stroke-Verhalten ab.
   - 2026-04-12: Umsetzung abgeschlossen inkl. Tests `test_candidate_to_svg_impl_generates_circle_with_stroke` und `test_estimate_stroke_style_impl_detects_circle_ring`.
+  - [x] C1.4: Semantik-Audit-Validation-Log-Formatierung (`semantic_audit_*`-Zeilen) aus `runIterationPipeline` in neues Modul `src/iCCModules/imageCompositeConverterSemanticAuditLogging.py` ausgelagert; `src/iCCModules/imageCompositeConverterRemaining.py` nutzt jetzt den Modul-Helper statt doppelter Inline-Listen und bleibt API-kompatibel.
+  - 2026-04-12: Umsetzung abgeschlossen inkl. Detailtest `test_build_semantic_audit_log_lines_includes_mismatch_reason_when_requested`.
   - Nächster geplanter Schritt: weitere IO-/Reporting-Teilstrecken in denselben kleinen Schritten extrahieren.
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.
