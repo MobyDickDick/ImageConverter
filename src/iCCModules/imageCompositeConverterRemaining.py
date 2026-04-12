@@ -16,6 +16,7 @@ from src.iCCModules import imageCompositeConverterSemanticValidationContext as s
 from src.iCCModules import imageCompositeConverterSemanticValidationLogging as semantic_validation_logging_helpers
 from src.iCCModules import imageCompositeConverterSemanticValidationRuntime as semantic_validation_runtime_helpers
 from src.iCCModules import imageCompositeConverterSemanticMismatchReporting as semantic_mismatch_reporting_helpers
+from src.iCCModules import imageCompositeConverterSemanticAuditRuntime as semantic_audit_runtime_helpers
 from src.iCCModules.imageCompositeConverterPerceptionReflection import Perception, Reflection
 
 def detectRelevantRegions(img) -> list[dict[str, object]]:
@@ -376,18 +377,18 @@ def runIterationPipeline(
         perc.img,
         np_module=np,
     )
-    semantic_audit_targets = {"AC0811", "AC0812", "AC0813", "AC0814"}
     semantic_audit_row: dict[str, object] | None = None
-    if getBaseNameFromFile(perc.base_name).upper() in semantic_audit_targets:
+    if semantic_audit_runtime_helpers.shouldCreateSemanticAuditForBaseNameImpl(
+        perc.base_name,
+        get_base_name_from_file_fn=getBaseNameFromFile,
+    ):
         semantic_audit_row = _semanticAuditRecord(
             base_name=perc.base_name,
-            filename=filename,
-            description_fragments=list(params.get("description_fragments", [])),
-            semantic_elements=list(params.get("elements", [])),
-            status="semantic_pending",
-            semantic_priority_order=list(params.get("semantic_priority_order", [])),
-            semantic_conflicts=list(params.get("semantic_conflicts", [])),
-            semantic_sources=dict(params.get("semantic_sources", {})),
+            **semantic_audit_runtime_helpers.buildSemanticAuditRecordKwargsImpl(
+                filename=filename,
+                params=params,
+                status="semantic_pending",
+            ),
         )
 
     if not desc.strip() and params["mode"] != "semantic_badge":
@@ -498,14 +499,12 @@ def runIterationPipeline(
             if semantic_audit_row is not None:
                 semantic_audit_row = _semanticAuditRecord(
                     base_name=perc.base_name,
-                    filename=filename,
-                    description_fragments=list(params.get("description_fragments", [])),
-                    semantic_elements=list(params.get("elements", [])),
-                    status="semantic_mismatch",
-                    mismatch_reasons=semantic_issues,
-                    semantic_priority_order=list(params.get("semantic_priority_order", [])),
-                    semantic_conflicts=list(params.get("semantic_conflicts", [])),
-                    semantic_sources=dict(params.get("semantic_sources", {})),
+                    **semantic_audit_runtime_helpers.buildSemanticAuditRecordKwargsImpl(
+                        filename=filename,
+                        params=params,
+                        status="semantic_mismatch",
+                        mismatch_reasons=semantic_issues,
+                    ),
                 )
             _writeValidationLog(
                 semantic_validation_logging_helpers.buildSemanticMismatchValidationLogLinesImpl(
@@ -549,13 +548,11 @@ def runIterationPipeline(
         if semantic_audit_row is not None:
             semantic_audit_row = _semanticAuditRecord(
                 base_name=perc.base_name,
-                filename=filename,
-                description_fragments=list(params.get("description_fragments", [])),
-                semantic_elements=list(params.get("elements", [])),
-                status="semantic_ok",
-                semantic_priority_order=list(params.get("semantic_priority_order", [])),
-                semantic_conflicts=list(params.get("semantic_conflicts", [])),
-                semantic_sources=dict(params.get("semantic_sources", {})),
+                **semantic_audit_runtime_helpers.buildSemanticAuditRecordKwargsImpl(
+                    filename=filename,
+                    params=params,
+                    status="semantic_ok",
+                ),
             )
         _writeValidationLog(
             semantic_validation_logging_helpers.buildSemanticOkValidationLogLinesImpl(
