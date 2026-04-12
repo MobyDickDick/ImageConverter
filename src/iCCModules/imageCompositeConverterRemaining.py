@@ -7,6 +7,7 @@ from src.iCCModules import imageCompositeConverterDependencies as dependency_hel
 from src.iCCModules import imageCompositeConverterDualArrowBadge as dual_arrow_badge_helpers
 from src.iCCModules import imageCompositeConverterGradientStripeStrategy as gradient_stripe_strategy_helpers
 from src.iCCModules import imageCompositeConverterImageLoading as image_loading_helpers
+from src.iCCModules import imageCompositeConverterNaming as naming_helpers
 from src.iCCModules import imageCompositeConverterPerceptionGeometry as perception_geometry_helpers
 from src.iCCModules.imageCompositeConverterPerceptionReflection import Perception, Reflection
 
@@ -340,15 +341,7 @@ def rgbToHex(rgb: np.ndarray) -> str:
     return "#{:02x}{:02x}{:02x}".format(int(rgb[0]), int(rgb[1]), int(rgb[2]))
 
 def getBaseNameFromFile(filename: str) -> str:
-    name = os.path.splitext(filename)[0]
-    name = re.sub(r"(-\d+)$", "", name)
-    while True:
-        prev = name
-        name = re.sub(r"_sia$", "", name, flags=re.IGNORECASE)
-        name = re.sub(r"_([1-9]|L|M|S|[1-9]S|W|X)$", "", name, flags=re.IGNORECASE)
-        if name == prev:
-            break
-    return name
+    return naming_helpers.getBaseNameFromFileImpl(filename)
 
 def _loadDescriptionMapping(path: str) -> dict[str, str]:
     return description_mapping_helpers.loadDescriptionMappingImpl(
