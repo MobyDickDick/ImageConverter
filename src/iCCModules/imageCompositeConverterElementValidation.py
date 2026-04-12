@@ -303,6 +303,29 @@ def validateBadgeByElementsImpl(
             fingerprint.append((key, round(numeric_value, 4)))
         return tuple(fingerprint)
 
+    def _applyAdaptiveSearchCorridor(current_params: dict) -> bool:
+        if "cx" not in current_params or "cy" not in current_params:
+            return False
+        required_keys = (
+            "ac08_phase2_cx_min",
+            "ac08_phase2_cx_max",
+            "ac08_phase2_cy_min",
+            "ac08_phase2_cy_max",
+        )
+        if not all(key in current_params for key in required_keys):
+            return False
+        old_cx = float(current_params["cx"])
+        old_cy = float(current_params["cy"])
+        cx_min = float(current_params["ac08_phase2_cx_min"])
+        cx_max = float(current_params["ac08_phase2_cx_max"])
+        cy_min = float(current_params["ac08_phase2_cy_min"])
+        cy_max = float(current_params["ac08_phase2_cy_max"])
+        new_cx = float(max(cx_min, min(cx_max, old_cx)))
+        new_cy = float(max(cy_min, min(cy_max, old_cy)))
+        current_params["cx"] = new_cx
+        current_params["cy"] = new_cy
+        return abs(new_cx - old_cx) > 1e-6 or abs(new_cy - old_cy) > 1e-6
+
     for round_idx in range(max_rounds):
         if _time_budget_exceeded():
             logs.append(
@@ -384,6 +407,10 @@ def validateBadgeByElementsImpl(
         )
         if global_search_changed:
             round_changed = True
+
+        if _applyAdaptiveSearchCorridor(params):
+            round_changed = True
+            logs.append("adaptive_unlock_corridor_clip: phase-2 center movement auf Korridor begrenzt")
 
         full_svg = generate_badge_svg_fn(w, h, params)
         full_render = fit_to_original_size_fn(img_orig, render_svg_to_numpy_fn(full_svg, w, h))
@@ -481,9 +508,22 @@ def validateBadgeByElementsImpl(
             logs.append("stopped_due_to_stagnation: keine weitere Parameterbewegung erkennbar")
             break
 
+    release_ac08_adaptive_locks_fn(
+        params,
+        logs,
+        reason="validation_end",
+        current_error=best_full_err if math_module.isfinite(best_full_err) else float("inf"),
+    )
+
     if math_module.isfinite(best_full_err):
         params.clear()
         params.update(best_params)
+        release_ac08_adaptive_locks_fn(
+            params,
+            logs,
+            reason="best_state_restore",
+            current_error=best_full_err,
+        )
 
     for element in elements:
         if element == "text" and not params.get("draw_text", True):

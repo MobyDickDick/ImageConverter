@@ -1,0 +1,129 @@
+{
+  "report_dirs": [
+    "/workspace/ImageConverter/src/artifacts/converted_images/reports",
+    "/workspace/ImageConverter/artifacts/converted_images/reports"
+  ],
+  "log_count": 103,
+  "family_summaries": {
+    "AC08": {
+      "count": 71,
+      "global_skip_ratio": 0.5352112676056338,
+      "width_skip_ratio": 0.6901408450704225,
+      "stagnation_ratio": 0.5492957746478874,
+      "early_stop_ratio": 0.5492957746478874,
+      "median_rounds": 4,
+      "max_rounds": 6,
+      "median_relative_gain": 0.08874208475401849,
+      "mean_relative_gain": 0.14751699424471743
+    },
+    "AC0223": {
+      "count": 3,
+      "global_skip_ratio": 0.0,
+      "width_skip_ratio": 0.0,
+      "stagnation_ratio": 0.3333333333333333,
+      "early_stop_ratio": 0.3333333333333333,
+      "median_rounds": 6,
+      "max_rounds": 6,
+      "median_relative_gain": 0.0,
+      "mean_relative_gain": 0.0
+    },
+    "AC0023": {
+      "count": 0
+    },
+    "AC0823": {
+      "count": 0
+    }
+  },
+  "ac08_worst_by_error_per_pixel": [
+    {
+      "variant": "AC0870_S",
+      "error_per_pixel": 0.15126914,
+      "mean_delta2": 6616.799805,
+      "round_count": 3,
+      "stagnation": true,
+      "global_skipped": true,
+      "width_skipped": true
+    },
+    {
+      "variant": "AC0834_S",
+      "error_per_pixel": 0.04832711,
+      "mean_delta2": 3926.959961,
+      "round_count": 4,
+      "stagnation": true,
+      "global_skipped": true,
+      "width_skipped": true
+    },
+    {
+      "variant": "AC0800_S",
+      "error_per_pixel": 0.04594568,
+      "mean_delta2": 908.693359,
+      "round_count": 0,
+      "stagnation": false,
+      "global_skipped": false,
+      "width_skipped": false
+    },
+    {
+      "variant": "AC0882_M",
+      "error_per_pixel": 0.03499592,
+      "mean_delta2": 6716.562988,
+      "round_count": 5,
+      "stagnation": true,
+      "global_skipped": true,
+      "width_skipped": true
+    },
+    {
+      "variant": "AC0870_L",
+      "error_per_pixel": 0.0317679,
+      "mean_delta2": 6839.046875,
+      "round_count": 3,
+      "stagnation": true,
+      "global_skipped": true,
+      "width_skipped": true
+    },
+    {
+      "variant": "AC0811_S",
+      "error_per_pixel": 0.02479644,
+      "mean_delta2": 1066.456055,
+      "round_count": 3,
+      "stagnation": true,
+      "global_skipped": false,
+      "width_skipped": true
+    },
+    {
+      "variant": "AC0811_M",
+      "error_per_pixel": 0.01306531,
+      "mean_delta2": 1455.942871,
+      "round_count": 6,
+      "stagnation": true,
+      "global_skipped": false,
+      "width_skipped": true
+    },
+    {
+      "variant": "AC0882_L",
+      "error_per_pixel": 0.01167012,
+      "mean_delta2": 2773.642578,
+      "round_count": 5,
+      "stagnation": true,
+      "global_skipped": true,
+      "width_skipped": true
+    },
+    {
+      "variant": "AC0800_L",
+      "error_per_pixel": 0.00769012,
+      "mean_delta2": 631.343323,
+      "round_count": 0,
+      "stagnation": false,
+      "global_skipped": false,
+      "width_skipped": false
+    },
+    {
+      "variant": "AC0800_M",
+      "error_per_pixel": 0.0060125,
+      "mean_delta2": 53.91,
+      "round_count": 0,
+      "stagnation": false,
+      "global_skipped": false,
+      "width_skipped": false
+    }
+  ]
+}

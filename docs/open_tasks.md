@@ -37,6 +37,46 @@ focused on the actual project scope.
     Zusätzlich enthält `shape_catalog.csv` jetzt die Spalten `prototype_group`, `geometry_signature_delta` und `text_orientation_policy`,
     und `variant_harmonization.log` protokolliert diese Felder pro harmonisierter Variante.
 
+- [ ] D2: Stagnationsbasierte Zwei-Phasen-Optimierung für AC08 einführen (Lock-Relax + Re-Lock).
+  - Hintergrund: In der Bottleneck-Analyse treten bei AC08 häufig `stagnation_detected`/`stopped_due_to_stagnation` auf; gleichzeitig sind zentrale Geometrieparameter oft gelockt.
+  - Umsetzungsidee:
+    - Phase 1: bestehender semantisch-strenger Suchraum (Status quo).
+    - Phase 2 (nur bei Stagnation + hoher Restfehler): temporär enge Freigabe von `cx/cy` bzw. ausgewählten Width-Parametern innerhalb kleiner Korridore.
+    - Nach der Ausweichrunde: Semantik erneut validieren und bei Regelverletzung auf letzte stabile Parameter zurückrollen.
+  - Akzeptanzkriterien:
+    - Keine Regression bei bereits stabilen AC08-Ankern im Success-Gate.
+    - Für die priorisierten Problemfälle (`AC0838_*`, `AC0870_*`, `AC0882_*`) sinkt `error_per_pixel` oder `mean_delta2` reproduzierbar.
+    - Validation-Logs enthalten explizite Marker für „Phase 2 aktiviert/deaktiviert“ und „Rollback ja/nein“.
+  - 2026-04-12: Pilot für `AC0838_*` implementiert (`adaptive_unlock_applied` + `adaptive_relock_applied`, enger `cx/cy`-Korridor während Phase 2). Breiter Rollout auf weitere Familien bleibt offen.
+
+- [ ] D3: Global-Search-Gating für kleine aktive Parametermengen erweitern.
+  - Hintergrund: Der aktuelle globale Suchpfad bricht bei `<4` aktiven Parametern ab; dadurch entfällt oft die einzige joint-Optimierung bei AC08.
+  - Umsetzungsidee:
+    - Reduzierte Global-/Joint-Suche auch für 2–3 aktive Parameter erlauben (z. B. `cx/r`, `cy/r`, `text_x/text_scale`).
+    - Einheitliche Instrumentierung, damit klar bleibt, ob voller oder reduzierter Global-Search gelaufen ist.
+  - Akzeptanzkriterien:
+    - `global-search: übersprungen (zu wenige aktive Parameter...)` tritt im AC08-Regression-Set deutlich seltener auf.
+    - Keine Verletzung bestehender Bounds-/Lock-Invarianten (Regressionstests erweitern).
+
+- [ ] D4: Evaluate-Kosten im Render-/Scoring-Loop reduzieren (Memoization + sparsame GC).
+  - Hintergrund: Jede Kandidatenbewertung rendert SVG->Pixmap->NumPy; der Hotpath räumt aktuell pro Versuch per `gc.collect()` auf.
+  - Umsetzungsidee:
+    - Parameter-Fingerprint-basierte Render-Cache-Schicht für identische Kandidaten innerhalb einer Runde.
+    - `gc.collect()` nur noch periodisch oder am Rundenende statt pro Kandidat.
+    - Telemetrie: Cache-Hit-Rate, Render-Aufrufe pro Datei, Zeit pro Runde.
+  - Akzeptanzkriterien:
+    - Laufzeit für repräsentative Teilmengen (`AC0838`, `AC0223`) sinkt messbar bei gleicher/verbesserter Qualität.
+    - Keine neue Instabilität im MuPDF-Pfad.
+
+- [ ] D5: Metrik-Fortsetzung als Multi-Objective-Prototyp evaluieren.
+  - Hintergrund: Reiner Pixel-Fehler kann Anti-Aliasing-Effekte übergewichten und so semantisch plausible Geometrie verdrängen.
+  - Umsetzungsidee:
+    - Experimenteller Score: `pixel_error + geometry_penalty + semantic_penalty` (gewichtete Summe).
+    - A/B-Vergleich gegen den aktuellen Score auf einer fixierten Problemfallliste.
+  - Akzeptanzkriterien:
+    - Dokumentierter Vorher/Nachher-Vergleich in `docs/` inkl. Parametergewichten, Gewinnerliste und Fehlertypen.
+    - Kein Rückschritt beim AC08-Success-Gate.
+
 - [ ] C1: `src/imageCompositeConverter.py` schrittweise in Module mit Blöcken von ca. 100 Zeilen aufteilen.
   - Hintergrund: Die Datei hat aktuell deutlich über 10k Zeilen; Refactoring erfolgt bewusst in mehreren, testbaren Teilschritten statt als Big-Bang.
   - Vorgehen: pro Teilbereich (z. B. Regionen-Analyse, IO/Reporting, Rendering, Optimierung, CLI) jeweils ein neues Modul mit klarer API erstellen und im Hauptskript nur noch schlanke Delegation belassen.
