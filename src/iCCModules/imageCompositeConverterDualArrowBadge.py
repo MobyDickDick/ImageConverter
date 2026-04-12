@@ -27,9 +27,12 @@ def detectDualArrowBadgeParamsFromImageImpl(
     if h <= 0 or w <= 0:
         return None
 
-    b = img[:, :, 0]
-    g = img[:, :, 1]
-    r = img[:, :, 2]
+    # Cast to signed ints before channel-delta comparisons. With uint8,
+    # expressions like ``r + 18`` wrap at 255 and can classify bright
+    # background pixels as colored foreground.
+    b = img[:, :, 0].astype(np.int16)
+    g = img[:, :, 1].astype(np.int16)
+    r = img[:, :, 2].astype(np.int16)
     blue_mask = (b > 90) & (b > r + 18) & (b > g + 10)
     red_mask = (r > 90) & (r > b + 18) & (r > g + 10)
     if int(np.count_nonzero(blue_mask)) < 8 or int(np.count_nonzero(red_mask)) < 8:
