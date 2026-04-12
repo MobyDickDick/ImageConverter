@@ -36,8 +36,9 @@ def enforceCircleConnectorSymmetryImpl(params: dict, w: int, h: int) -> dict:
             hub_y = float(p.get("head_hub_cy", p.get("arm_y2", 25.153 * scale_y)))
             hub_y = max(0.0, min(head_base_y, hub_y))
             circle_top = cy - r
+            current_circle_end = float(p.get("arm_y1", circle_top))
             p["arm_y2"] = hub_y
-            p["arm_y1"] = max(hub_y, min(head_base_y, circle_top))
+            p["arm_y1"] = max(hub_y, min(head_base_y, current_circle_end))
             p["head_hub_cy"] = hub_y
         elif vertical:
             p["arm_x1"] = cx

@@ -245,6 +245,11 @@ def tryTemplateTransferImpl(
 
     target_variant = str(target_row.get("variant", "")).upper()
     target_base = str(target_row.get("base", "")).upper()
+    if target_base == "AC0223":
+        # AC0223 includes a dedicated valve-head overlay that is not encoded in
+        # generic geometry extraction. Transferring donor templates can drop the
+        # polygon/hub semantics, so keep native conversion output only.
+        return None, None
     target_svg_path = os.path.join(svg_out_dir, f"{target_variant}.svg")
     target_svg_geometry = read_svg_geometry_fn(target_svg_path)
     target_geom_params = dict(target_svg_geometry[2]) if target_svg_geometry is not None else None

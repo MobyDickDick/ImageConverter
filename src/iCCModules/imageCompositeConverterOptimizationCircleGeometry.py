@@ -20,6 +20,18 @@ def reanchorArmToCircleEdgeImpl(params: dict, radius: float) -> None:
     attach_offset = arm_stroke / 2.0
 
     is_horizontal = abs(x2 - x1) >= abs(y2 - y1)
+    if str(params.get("head_style", "")).lower() == "ac0223_triple_valve" and not is_horizontal:
+        # AC0223's top connector must remain anchored between the circle edge
+        # and the valve-hub center. Generic arm re-anchoring can accidentally
+        # move the hub endpoint onto the circle edge which removes the valve
+        # head in later semantic/template transfer passes.
+        hub_y = float(params.get("head_hub_cy", y2))
+        params["arm_x1"] = cx
+        params["arm_x2"] = cx
+        params["arm_y2"] = hub_y
+        params["arm_y1"] = max(hub_y, cy - float(radius) - attach_offset)
+        return
+
     if is_horizontal:
         params["arm_y1"] = cy
         params["arm_y2"] = cy

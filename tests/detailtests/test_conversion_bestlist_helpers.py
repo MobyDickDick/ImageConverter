@@ -22,6 +22,25 @@ def test_candidate_prefers_semantic_ok() -> None:
     assert better is True
 
 
+def test_candidate_prefers_ac0223_with_valve_head_metadata() -> None:
+    better = bestlist_helpers.isConversionBestlistCandidateBetterImpl(
+        previous_row={
+            "base": "AC0223",
+            "status": "semantic_ok",
+            "params": {"arm_enabled": True},
+            "error_per_pixel": 0.02,
+        },
+        candidate_row={
+            "base": "AC0223",
+            "status": "semantic_ok",
+            "params": {"head_style": "ac0223_triple_valve", "arm_enabled": True},
+            "error_per_pixel": 0.03,
+        },
+        evaluate_candidate_fn=lambda _a, _b: (False, "", 0.0, 0.0, 0.0, 0.0),
+    )
+    assert better is True
+
+
 def test_bestlist_manifest_read_write_roundtrip(tmp_path: Path) -> None:
     manifest = tmp_path / "conversion_bestlist.csv"
     rows = {
@@ -116,3 +135,44 @@ def test_choose_conversion_bestlist_row_prefers_previous_and_restored_values() -
     assert selected["error_per_pixel"] == 0.05
     assert selected["mean_delta2"] == 1.1
     assert selected["status"] == "semantic_ok"
+
+
+def test_repair_ac0223_bestlist_artifacts_removes_stale_snapshots(tmp_path: Path) -> None:
+    out_root = tmp_path / "converted"
+    reports = out_root / "reports"
+    snap = reports / "conversion_bestlist_snapshots"
+    svg_dir = out_root / "converted_svgs"
+    diff_dir = out_root / "diff_pngs"
+    for path in (reports, snap, svg_dir, diff_dir):
+        path.mkdir(parents=True, exist_ok=True)
+
+    bestlist = reports / "conversion_bestlist.csv"
+    bestlist.write_text(
+        "\n".join(
+            [
+                "variant;filename;status;best_iter;best_error;error_per_pixel;mean_delta2;std_delta2",
+                "AC0223_L;AC0223_L.jpg;semantic_ok;1;10.0;0.01;1.0;0.2",
+                "AC0223_M;AC0223_M.jpg;semantic_ok;1;11.0;0.02;1.1;0.3",
+            ]
+        ),
+        encoding="utf-8",
+    )
+
+    (snap / "AC0223_L.json").write_text('{"params":{"arm_enabled":true}}', encoding="utf-8")
+    (snap / "AC0223_M.json").write_text('{"params":{"head_style":"ac0223_triple_valve"}}', encoding="utf-8")
+    for variant in ("AC0223_L", "AC0223_M"):
+        (snap / f"{variant}.svg").write_text("<svg/>", encoding="utf-8")
+        (snap / f"{variant}_element_validation.log").write_text("status=semantic_ok", encoding="utf-8")
+        (svg_dir / f"{variant}.svg").write_text("<svg/>", encoding="utf-8")
+        (reports / f"{variant}_element_validation.log").write_text("status=semantic_ok", encoding="utf-8")
+        (diff_dir / f"{variant}_diff.png").write_bytes(b"\x89PNG\r\n\x1a\n")
+
+    result = bestlist_helpers.repairAc0223BestlistArtifactsImpl(str(out_root))
+
+    assert result["removed_count"] == 1
+    assert result["removed_variants"] == ["AC0223_L"]
+    assert not (snap / "AC0223_L.json").exists()
+    assert (snap / "AC0223_M.json").exists()
+    manifest = bestlist.read_text(encoding="utf-8")
+    assert "AC0223_L;" not in manifest
+    assert "AC0223_M;" in manifest
