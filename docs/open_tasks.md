@@ -205,6 +205,7 @@ focused on the actual project scope.
   - 2026-04-08: Neues Tool `tools/automate_function_extraction.py` ergänzt, das eine ausgewählte Top-Level-Funktion automatisch in ein Zielmodul kopiert, im Monolithen auf einen delegierenden Wrapper umstellt und danach Verifikationskommandos ausführt; bei fehlgeschlagener Verifikation werden alle Änderungen automatisch zurückgerollt.
   - 2026-04-12: Wahrnehmungs-Geometriehelfer (`_looksLikeElongatedForegroundRect`) in neues Modul `src/iCCModules/imageCompositeConverterPerceptionGeometry.py` ausgelagert; `src/iCCModules/imageCompositeConverterRemaining.py` delegiert weiterhin kompatibel über Wrapper.
   - 2026-04-12: Bildlade-/Binarisierungshelfer (`loadGrayscaleImage`, `loadBinaryImageWithMode`) in neues Modul `src/iCCModules/imageCompositeConverterImageLoading.py` ausgelagert; `src/iCCModules/imageCompositeConverterRemaining.py` delegiert weiterhin kompatibel über Wrapper und neue Detailtests sichern Global-/Otsu-/Adaptive-Modi sowie Fehlermeldungen ab.
+  - 2026-04-12: Dateinamen-/Varianten-Normalisierung (`getBaseNameFromFile`) in neues Modul `src/iCCModules/imageCompositeConverterNaming.py` ausgelagert; `src/iCCModules/imageCompositeConverterRemaining.py` delegiert weiterhin kompatibel über Wrapper und neue Detailtests decken die Suffix-Normalisierung (`_L/_M/_S`, `_sia`, numerische Varianten) ab.
   - Nächster geplanter Schritt: weitere IO-/Reporting-Teilstrecken in denselben kleinen Schritten extrahieren.
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.
