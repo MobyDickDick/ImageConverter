@@ -11,6 +11,7 @@ from src.iCCModules import imageCompositeConverterImageLoading as image_loading_
 from src.iCCModules import imageCompositeConverterNaming as naming_helpers
 from src.iCCModules import imageCompositeConverterPerceptionGeometry as perception_geometry_helpers
 from src.iCCModules import imageCompositeConverterSemanticAuditLogging as semantic_audit_logging_helpers
+from src.iCCModules import imageCompositeConverterSemanticValidationLogging as semantic_validation_logging_helpers
 from src.iCCModules.imageCompositeConverterPerceptionReflection import Perception, Reflection
 
 def detectRelevantRegions(img) -> list[dict[str, object]]:
@@ -508,16 +509,15 @@ def runIterationPipeline(
                     semantic_sources=dict(params.get("semantic_sources", {})),
                 )
             _writeValidationLog(
-                [
-                    "status=semantic_mismatch",
-                    f"best_attempt_svg={base}_failed.svg",
-                    connector_debug_line,
-                    *semantic_audit_logging_helpers.buildSemanticAuditLogLinesImpl(
+                semantic_validation_logging_helpers.buildSemanticMismatchValidationLogLinesImpl(
+                    base_name=base,
+                    semantic_issues=semantic_issues,
+                    connector_debug_line=connector_debug_line,
+                    semantic_audit_lines=semantic_audit_logging_helpers.buildSemanticAuditLogLinesImpl(
                         semantic_audit_row,
                         include_mismatch_reason=True,
                     ),
-                    *[f"issue={issue}" for issue in semantic_issues],
-                ]
+                )
             )
             return None
 
@@ -570,15 +570,14 @@ def runIterationPipeline(
                 semantic_sources=dict(params.get("semantic_sources", {})),
             )
         _writeValidationLog(
-            [
-                "status=semantic_ok",
-                *semantic_audit_logging_helpers.buildSemanticAuditLogLinesImpl(
+            semantic_validation_logging_helpers.buildSemanticOkValidationLogLinesImpl(
+                semantic_audit_lines=semantic_audit_logging_helpers.buildSemanticAuditLogLinesImpl(
                     semantic_audit_row,
                 ),
-                *quality_flags,
-                *redraw_variation_logs,
-                *validation_logs,
-            ]
+                quality_flags=quality_flags,
+                redraw_variation_logs=redraw_variation_logs,
+                validation_logs=validation_logs,
+            )
         )
 
         if str(perc.base_name).upper() == "AC0223":
