@@ -7378,3 +7378,24 @@ def test_dual_arrow_badge_detection_and_svg_generation() -> None:
     assert "<polygon" in svg
     assert "#2f6bff" in svg
     assert "#e53935" in svg
+
+
+def test_dual_arrow_badge_detection_handles_equal_tip_widths() -> None:
+    np = image_composite_converter.np
+    if np is None:
+        pytest.skip("numpy not available in this environment")
+    from src.iCCModules import imageCompositeConverterDualArrowBadge as dual_arrow_helpers
+
+    mask = np.zeros((12, 8), dtype=bool)
+    # thin stem with equal tip widths (1px) at top and bottom, but with
+    # broadened rows only near the bottom => down-arrow.
+    mask[0:8, 3] = True
+    mask[8, 2:5] = True
+    mask[9, 2:5] = True
+    mask[10, 1:6] = True
+    mask[11, 3] = True
+
+    fitted = dual_arrow_helpers._fitArrowFromMask(mask, np_module=np)
+    assert fitted is not None
+    assert fitted["triangle_tip_y"] == 11.0
+    assert fitted["line_y1"] == 0.0
