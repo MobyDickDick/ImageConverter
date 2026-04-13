@@ -23,6 +23,7 @@ from src.iCCModules import imageCompositeConverterSemanticAuditBootstrap as sema
 from src.iCCModules import imageCompositeConverterSemanticIterationFinalization as semantic_iteration_finalization_helpers
 from src.iCCModules import imageCompositeConverterSemanticPostValidation as semantic_post_validation_helpers
 from src.iCCModules import imageCompositeConverterSemanticVisualOverride as semantic_visual_override_helpers
+from src.iCCModules import imageCompositeConverterSemanticBadgeRuntime as semantic_badge_runtime_helpers
 from src.iCCModules import imageCompositeConverterDualArrowRuntime as dual_arrow_runtime_helpers
 from src.iCCModules import imageCompositeConverterNonCompositeRuntime as non_composite_runtime_helpers
 from src.iCCModules.imageCompositeConverterPerceptionReflection import Perception, Reflection
@@ -465,112 +466,53 @@ def runIterationPipeline(
     )
 
     if params["mode"] == "semantic_badge":
-        badge_params = Action.make_badge_params(w, h, perc.base_name, perc.img)
-        if badge_params is None:
-            return None
-        # Persist source raster dimensions so variant-specific finalizers can
-        # enforce width/height-relative geometry rules reliably.
-        badge_params.setdefault("width", float(w))
-        badge_params.setdefault("height", float(h))
-        badge_overrides = params.get("badge_overrides")
-        if isinstance(badge_overrides, dict):
-            badge_params.update(badge_overrides)
-
-        semantic_issues = Action.validate_semantic_description_alignment(
-            perc.img,
-            list(params.get("elements", [])),
-            badge_params,
-        )
-        if semantic_issues:
-            failed_svg = Action.generate_badge_svg(w, h, badge_params)
-            _writeAttemptArtifacts(failed_svg, failed=True)
-            semantic_audit_row, mismatch_console_lines, mismatch_validation_lines = (
-                semantic_mismatch_runtime_helpers.buildSemanticMismatchOutcomeImpl(
-                    base_name=base,
-                    audit_base_name=perc.base_name,
-                    filename=filename,
-                    params=params,
-                    perc_img=perc.img,
-                    badge_params=badge_params,
-                    semantic_issues=semantic_issues,
-                    semantic_audit_row=semantic_audit_row,
-                    detect_semantic_primitives_fn=Action._detect_semantic_primitives,
-                    build_semantic_connector_debug_line_fn=semantic_mismatch_reporting_helpers.buildSemanticConnectorDebugLineImpl,
-                    build_semantic_mismatch_console_lines_fn=semantic_mismatch_reporting_helpers.buildSemanticMismatchConsoleLinesImpl,
-                    build_semantic_mismatch_validation_log_lines_fn=semantic_validation_logging_helpers.buildSemanticMismatchValidationLogLinesImpl,
-                    build_semantic_audit_log_lines_fn=semantic_audit_logging_helpers.buildSemanticAuditLogLinesImpl,
-                    build_semantic_audit_record_kwargs_fn=semantic_audit_runtime_helpers.buildSemanticAuditRecordKwargsImpl,
-                    semantic_audit_record_fn=_semanticAuditRecord,
-                )
-            )
-            for console_line in mismatch_console_lines:
-                print(console_line)
-            _writeValidationLog(mismatch_validation_lines)
-            return None
-
-        debug_dir = semantic_validation_context_helpers.resolveSemanticValidationDebugDirImpl(
-            debug_element_diff_dir=debug_element_diff_dir,
-            debug_ac0811_dir=debug_ac0811_dir,
-            filename=filename,
-            base_name=perc.base_name,
-        )
-        validation_logs = semantic_validation_runtime_helpers.collectSemanticBadgeValidationLogsImpl(
-            perc_img=perc.img,
-            badge_params=badge_params,
-            badge_validation_rounds=badge_validation_rounds,
-            debug_dir=debug_dir,
-            validate_badge_by_elements_fn=Action.validate_badge_by_elements,
-        )
-        badge_params, validation_logs, redraw_variation_logs = (
-            semantic_post_validation_helpers.prepareSemanticBadgePostValidationImpl(
-                base_name=str(perc.base_name),
-                elements=list(params.get("elements", [])),
-                badge_params=badge_params,
-                width=w,
-                height=h,
-                validation_logs=validation_logs,
-                enforce_semantic_connector_expectation_fn=Action._enforce_semantic_connector_expectation,
-                apply_redraw_variation_fn=Action.apply_redraw_variation,
-                append_semantic_connector_expectation_log_fn=semantic_validation_finalization_helpers.appendSemanticConnectorExpectationLogImpl,
-            )
-        )
-        semantic_audit_row, semantic_ok_validation_lines = (
-            semantic_validation_finalization_helpers.buildSemanticOkValidationOutcomeImpl(
-                base_name=perc.base_name,
-                filename=filename,
-                params=params,
-                semantic_audit_row=semantic_audit_row,
-                validation_logs=validation_logs,
-                redraw_variation_logs=redraw_variation_logs,
-                semantic_quality_flags_fn=_semanticQualityFlags,
-                semantic_audit_record_fn=_semanticAuditRecord,
-                build_semantic_audit_record_kwargs_fn=semantic_audit_runtime_helpers.buildSemanticAuditRecordKwargsImpl,
-                build_semantic_audit_log_lines_fn=semantic_audit_logging_helpers.buildSemanticAuditLogLinesImpl,
-                build_semantic_ok_validation_log_lines_fn=semantic_validation_logging_helpers.buildSemanticOkValidationLogLinesImpl,
-            )
-        )
-        return semantic_iteration_finalization_helpers.finalizeSemanticBadgeRunImpl(
-            base=base,
-            desc=desc,
-            perc_base_name=str(perc.base_name),
-            filename=filename,
+        return semantic_badge_runtime_helpers.runSemanticBadgeIterationImpl(
             width=w,
             height=h,
-            badge_params=badge_params,
+            perc_img=perc.img,
+            perc_base_name=perc.base_name,
+            filename=filename,
+            base=base,
+            description=desc,
             params=params,
             semantic_audit_row=semantic_audit_row,
-            semantic_ok_validation_lines=semantic_ok_validation_lines,
-            perc_img=perc.img,
+            badge_validation_rounds=badge_validation_rounds,
+            debug_element_diff_dir=debug_element_diff_dir,
+            debug_ac0811_dir=debug_ac0811_dir,
+            write_attempt_artifacts_fn=_writeAttemptArtifacts,
             write_validation_log_fn=_writeValidationLog,
-            finalize_semantic_badge_iteration_result_fn=lambda **kwargs: semantic_validation_runtime_helpers.finalizeSemanticBadgeIterationResultImpl(
+            record_render_failure_fn=_recordRenderFailure,
+            make_badge_params_fn=Action.make_badge_params,
+            generate_badge_svg_fn=Action.generate_badge_svg,
+            validate_semantic_description_alignment_fn=Action.validate_semantic_description_alignment,
+            detect_semantic_primitives_fn=Action._detect_semantic_primitives,
+            build_semantic_connector_debug_line_fn=semantic_mismatch_reporting_helpers.buildSemanticConnectorDebugLineImpl,
+            build_semantic_mismatch_console_lines_fn=semantic_mismatch_reporting_helpers.buildSemanticMismatchConsoleLinesImpl,
+            build_semantic_mismatch_validation_log_lines_fn=semantic_validation_logging_helpers.buildSemanticMismatchValidationLogLinesImpl,
+            build_semantic_mismatch_outcome_fn=semantic_mismatch_runtime_helpers.buildSemanticMismatchOutcomeImpl,
+            build_semantic_audit_log_lines_fn=semantic_audit_logging_helpers.buildSemanticAuditLogLinesImpl,
+            build_semantic_audit_record_kwargs_fn=semantic_audit_runtime_helpers.buildSemanticAuditRecordKwargsImpl,
+            semantic_audit_record_fn=_semanticAuditRecord,
+            resolve_semantic_validation_debug_dir_fn=semantic_validation_context_helpers.resolveSemanticValidationDebugDirImpl,
+            collect_semantic_badge_validation_logs_fn=lambda **kwargs: semantic_validation_runtime_helpers.collectSemanticBadgeValidationLogsImpl(
                 **kwargs,
-                finalize_ac0223_badge_params_fn=semantic_ac0223_runtime_helpers.finalizeAc0223BadgeParamsImpl,
-                generate_badge_svg_fn=Action.generate_badge_svg,
-                render_svg_to_numpy_fn=Action.render_svg_to_numpy,
-                write_attempt_artifacts_fn=_writeAttemptArtifacts,
-                record_render_failure_fn=_recordRenderFailure,
-                calculate_error_fn=Action.calculate_error,
+                validate_badge_by_elements_fn=Action.validate_badge_by_elements,
             ),
+            prepare_semantic_badge_post_validation_fn=semantic_post_validation_helpers.prepareSemanticBadgePostValidationImpl,
+            append_semantic_connector_expectation_log_fn=semantic_validation_finalization_helpers.appendSemanticConnectorExpectationLogImpl,
+            build_semantic_ok_validation_outcome_fn=lambda **kwargs: semantic_validation_finalization_helpers.buildSemanticOkValidationOutcomeImpl(
+                **kwargs,
+                build_semantic_ok_validation_log_lines_fn=semantic_validation_logging_helpers.buildSemanticOkValidationLogLinesImpl,
+            ),
+            semantic_quality_flags_fn=_semanticQualityFlags,
+            finalize_semantic_badge_run_fn=semantic_iteration_finalization_helpers.finalizeSemanticBadgeRunImpl,
+            finalize_semantic_badge_iteration_result_fn=semantic_validation_runtime_helpers.finalizeSemanticBadgeIterationResultImpl,
+            finalize_ac0223_badge_params_fn=semantic_ac0223_runtime_helpers.finalizeAc0223BadgeParamsImpl,
+            render_svg_to_numpy_fn=Action.render_svg_to_numpy,
+            calculate_error_fn=Action.calculate_error,
+            enforce_semantic_connector_expectation_fn=Action._enforce_semantic_connector_expectation,
+            apply_redraw_variation_fn=Action.apply_redraw_variation,
+            print_fn=print,
         )
 
     if params["mode"] == "dual_arrow_badge":
