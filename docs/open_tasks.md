@@ -242,6 +242,8 @@ focused on the actual project scope.
   - 2026-04-13: Umsetzung abgeschlossen inkl. Detailtests `test_run_dual_arrow_badge_iteration_impl_uses_fallback_when_detection_fails` und `test_run_dual_arrow_badge_iteration_impl_records_render_failure_with_badge_params`.
   - [x] C1.19: Semantik-Visual-Override-Dispatch (Gradient-Stripe-/Elongated-Rect-Umschaltung + Konsolenhinweis) aus `runIterationPipeline` in neues Modul `src/iCCModules/imageCompositeConverterSemanticVisualOverride.py` ausgelagert; `src/iCCModules/imageCompositeConverterRemaining.py` delegiert die Override-Entscheidung jetzt über den neuen Modul-Helper und bleibt API-kompatibel.
   - 2026-04-13: Umsetzung abgeschlossen inkl. Detailtests `test_apply_semantic_visual_override_impl_switches_mode_for_gradient_stripe` und `test_apply_semantic_visual_override_impl_keeps_params_when_not_needed`.
+  - [x] C1.20: Semantik-Badge-Runtime-Orchestrierung (Mismatch-/Validation-/Finalisierungs-Dispatch für `mode=semantic_badge`) aus `runIterationPipeline` in neues Modul `src/iCCModules/imageCompositeConverterSemanticBadgeRuntime.py` ausgelagert; `src/iCCModules/imageCompositeConverterRemaining.py` delegiert die Ausführung jetzt über den neuen Modul-Helper und bleibt API-kompatibel.
+  - 2026-04-13: Umsetzung abgeschlossen inkl. Detailtests `test_run_semantic_badge_iteration_impl_returns_none_for_semantic_mismatch` und `test_run_semantic_badge_iteration_impl_finalizes_semantic_ok`.
   - Nächster geplanter Schritt: weitere semantische Post-Validation-/Reporting-Teilstrecken in denselben kleinen Schritten extrahieren.
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.
