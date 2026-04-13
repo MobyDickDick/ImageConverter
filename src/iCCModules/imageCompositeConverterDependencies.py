@@ -155,6 +155,25 @@ def missingRequiredImageDependenciesImpl(cv2_module, np_module) -> list[str]:
     return missing
 
 
+def ensureConversionRuntimeDependenciesImpl(cv2_module, np_module, fitz_module) -> None:
+    """Raise a stable runtime error when required conversion dependencies are unavailable."""
+    missing_modules: list[str] = []
+    if cv2_module is None:
+        missing_modules.append("cv2")
+    if np_module is None:
+        missing_modules.append("numpy")
+    if missing_modules:
+        raise RuntimeError(
+            "Required image dependencies are missing: " + ", ".join(missing_modules) + ". "
+            "Install dependencies before running the conversion pipeline."
+        )
+    if fitz_module is None:
+        raise RuntimeError(
+            "Required SVG renderer dependency is missing: fitz (PyMuPDF). "
+            "Install PyMuPDF before running the conversion pipeline."
+        )
+
+
 def bootstrapRequiredImageDependenciesImpl(
     *,
     missing: list[str],

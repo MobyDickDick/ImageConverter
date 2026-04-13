@@ -356,21 +356,11 @@ def runIterationPipeline(
     debug_element_diff_dir: str | None = None,
     badge_validation_rounds: int = 6,
 ):
-    if cv2 is None or np is None:
-        missing = []
-        if cv2 is None:
-            missing.append("cv2")
-        if np is None:
-            missing.append("numpy")
-        raise RuntimeError(
-            "Required image dependencies are missing: " + ", ".join(missing) + ". "
-            "Install dependencies before running the conversion pipeline."
-        )
-    if fitz is None:
-        raise RuntimeError(
-            "Required SVG renderer dependency is missing: fitz (PyMuPDF). "
-            "Install PyMuPDF before running the conversion pipeline."
-        )
+    dependency_helpers.ensureConversionRuntimeDependenciesImpl(
+        cv2_module=cv2,
+        np_module=np,
+        fitz_module=fitz,
+    )
 
     folder_path = os.path.dirname(img_path)
     filename = os.path.basename(img_path)
