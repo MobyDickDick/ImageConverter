@@ -20,6 +20,7 @@ from src.iCCModules import imageCompositeConverterSemanticMismatchReporting as s
 from src.iCCModules import imageCompositeConverterSemanticMismatchRuntime as semantic_mismatch_runtime_helpers
 from src.iCCModules import imageCompositeConverterSemanticAuditRuntime as semantic_audit_runtime_helpers
 from src.iCCModules import imageCompositeConverterSemanticIterationFinalization as semantic_iteration_finalization_helpers
+from src.iCCModules import imageCompositeConverterSemanticPostValidation as semantic_post_validation_helpers
 from src.iCCModules.imageCompositeConverterPerceptionReflection import Perception, Reflection
 
 def detectRelevantRegions(img) -> list[dict[str, object]]:
@@ -527,17 +528,18 @@ def runIterationPipeline(
             debug_dir=debug_dir,
             validate_badge_by_elements_fn=Action.validate_badge_by_elements,
         )
-        badge_params = Action._enforce_semantic_connector_expectation(
-            perc.base_name,
-            list(params.get("elements", [])),
-            badge_params,
-            w,
-            h,
-        )
-        badge_params, redraw_variation_logs = Action.apply_redraw_variation(badge_params, w, h)
-        validation_logs = semantic_validation_finalization_helpers.appendSemanticConnectorExpectationLogImpl(
-            validation_logs=validation_logs,
-            badge_params=badge_params,
+        badge_params, validation_logs, redraw_variation_logs = (
+            semantic_post_validation_helpers.prepareSemanticBadgePostValidationImpl(
+                base_name=str(perc.base_name),
+                elements=list(params.get("elements", [])),
+                badge_params=badge_params,
+                width=w,
+                height=h,
+                validation_logs=validation_logs,
+                enforce_semantic_connector_expectation_fn=Action._enforce_semantic_connector_expectation,
+                apply_redraw_variation_fn=Action.apply_redraw_variation,
+                append_semantic_connector_expectation_log_fn=semantic_validation_finalization_helpers.appendSemanticConnectorExpectationLogImpl,
+            )
         )
         semantic_audit_row, semantic_ok_validation_lines = (
             semantic_validation_finalization_helpers.buildSemanticOkValidationOutcomeImpl(
