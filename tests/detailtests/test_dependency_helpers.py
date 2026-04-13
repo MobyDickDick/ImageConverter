@@ -56,3 +56,25 @@ def test_bootstrap_required_image_dependencies_impl_raises_runtime_error_on_pip_
             sys_executable="pythonX",
             run_fn=_run,
         )
+
+
+def test_ensure_conversion_runtime_dependencies_impl_requires_cv2_numpy_and_fitz() -> None:
+    with pytest.raises(RuntimeError, match="Required image dependencies are missing: cv2, numpy"):
+        dependency_helpers.ensureConversionRuntimeDependenciesImpl(
+            cv2_module=None,
+            np_module=None,
+            fitz_module=object(),
+        )
+
+    with pytest.raises(RuntimeError, match="Required SVG renderer dependency is missing: fitz"):
+        dependency_helpers.ensureConversionRuntimeDependenciesImpl(
+            cv2_module=object(),
+            np_module=object(),
+            fitz_module=None,
+        )
+
+    dependency_helpers.ensureConversionRuntimeDependenciesImpl(
+        cv2_module=object(),
+        np_module=object(),
+        fitz_module=object(),
+    )
