@@ -22,6 +22,7 @@ from src.iCCModules import imageCompositeConverterSemanticAuditRuntime as semant
 from src.iCCModules import imageCompositeConverterSemanticAuditBootstrap as semantic_audit_bootstrap_helpers
 from src.iCCModules import imageCompositeConverterSemanticIterationFinalization as semantic_iteration_finalization_helpers
 from src.iCCModules import imageCompositeConverterSemanticPostValidation as semantic_post_validation_helpers
+from src.iCCModules import imageCompositeConverterSemanticVisualOverride as semantic_visual_override_helpers
 from src.iCCModules import imageCompositeConverterDualArrowRuntime as dual_arrow_runtime_helpers
 from src.iCCModules import imageCompositeConverterNonCompositeRuntime as non_composite_runtime_helpers
 from src.iCCModules.imageCompositeConverterPerceptionReflection import Perception, Reflection
@@ -456,19 +457,12 @@ def runIterationPipeline(
         )
 
     elongated_rect_geometry = _looksLikeElongatedForegroundRect(perc.img)
-    semantic_mode_visual_override = params["mode"] == "semantic_badge" and (
-        stripe_strategy is not None or elongated_rect_geometry
+    params, semantic_mode_visual_override = semantic_visual_override_helpers.applySemanticVisualOverrideImpl(
+        params=params,
+        stripe_strategy=stripe_strategy,
+        elongated_rect_geometry=elongated_rect_geometry,
+        print_fn=print,
     )
-    if semantic_mode_visual_override:
-        params = copy.deepcopy(params)
-        params["mode"] = "non_composite_visual_override"
-        params["visual_override_reason"] = (
-            "gradient_stripe_geometry_detected" if stripe_strategy is not None else "elongated_rect_geometry_detected"
-        )
-        print(
-            "  -> Geometrie-Override: Semantik deutet auf Badge, "
-            "Bildinhalt ist jedoch eine längliche rechteckige Geometrie."
-        )
 
     if params["mode"] == "semantic_badge":
         badge_params = Action.make_badge_params(w, h, perc.base_name, perc.img)
