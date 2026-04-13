@@ -8,6 +8,7 @@ from src.iCCModules import imageCompositeConverterDualArrowBadge as dual_arrow_b
 from src.iCCModules import imageCompositeConverterElementDecomposition as element_decomposition_helpers
 from src.iCCModules import imageCompositeConverterGradientStripeStrategy as gradient_stripe_strategy_helpers
 from src.iCCModules import imageCompositeConverterImageLoading as image_loading_helpers
+from src.iCCModules import imageCompositeConverterIterationPreparation as iteration_preparation_helpers
 from src.iCCModules import imageCompositeConverterIterationRuntime as iteration_runtime_helpers
 from src.iCCModules import imageCompositeConverterIterationSetup as iteration_setup_helpers
 from src.iCCModules import imageCompositeConverterNaming as naming_helpers
@@ -364,33 +365,31 @@ def runIterationPipeline(
         fitz_module=fitz,
     )
 
-    folder_path = os.path.dirname(img_path)
-    filename = os.path.basename(img_path)
-
-    perc = Perception(img_path, csv_path)
-    if perc.img is None:
-        return None
-    h, w = perc.img.shape[:2]
-
-    ref = Reflection(perc.raw_desc)
-    desc, params = ref.parse_description(perc.base_name, filename)
-    stripe_strategy = gradient_stripe_strategy_helpers.detectGradientStripeStrategyImpl(
-        perc.img,
-        np_module=np,
-    )
-    semantic_audit_row: dict[str, object] | None = semantic_audit_bootstrap_helpers.buildPendingSemanticAuditRowImpl(
-        base_name=perc.base_name,
-        filename=filename,
-        params=params,
+    iteration_inputs = iteration_preparation_helpers.prepareIterationInputsImpl(
+        img_path=img_path,
+        csv_path=csv_path,
+        perception_cls=Perception,
+        reflection_cls=Reflection,
+        detect_gradient_stripe_strategy_fn=gradient_stripe_strategy_helpers.detectGradientStripeStrategyImpl,
+        build_pending_semantic_audit_row_fn=semantic_audit_bootstrap_helpers.buildPendingSemanticAuditRowImpl,
         should_create_semantic_audit_for_base_name_fn=semantic_audit_runtime_helpers.shouldCreateSemanticAuditForBaseNameImpl,
         get_base_name_from_file_fn=getBaseNameFromFile,
         build_semantic_audit_record_kwargs_fn=semantic_audit_runtime_helpers.buildSemanticAuditRecordKwargsImpl,
         semantic_audit_record_fn=_semanticAuditRecord,
+        np_module=np,
+        print_fn=print,
     )
-
-    if not desc.strip() and params["mode"] != "semantic_badge":
-        print("  -> Überspringe Bild, da keine begleitende textliche Beschreibung vorliegt.")
+    if iteration_inputs is None:
         return None
+    folder_path = iteration_inputs["folder_path"]
+    filename = iteration_inputs["filename"]
+    perc = iteration_inputs["perception"]
+    w = iteration_inputs["width"]
+    h = iteration_inputs["height"]
+    desc = iteration_inputs["description"]
+    params = iteration_inputs["params"]
+    stripe_strategy = iteration_inputs["stripe_strategy"]
+    semantic_audit_row = iteration_inputs["semantic_audit_row"]
 
     iteration_setup_helpers.emitIterationDescriptionHeaderImpl(
         filename=filename,
