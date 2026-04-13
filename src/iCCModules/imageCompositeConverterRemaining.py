@@ -9,6 +9,7 @@ from src.iCCModules import imageCompositeConverterElementDecomposition as elemen
 from src.iCCModules import imageCompositeConverterGradientStripeStrategy as gradient_stripe_strategy_helpers
 from src.iCCModules import imageCompositeConverterImageLoading as image_loading_helpers
 from src.iCCModules import imageCompositeConverterIterationDispatch as iteration_dispatch_helpers
+from src.iCCModules import imageCompositeConverterIterationFinalization as iteration_finalization_helpers
 from src.iCCModules import imageCompositeConverterIterationPreparation as iteration_preparation_helpers
 from src.iCCModules import imageCompositeConverterIterationRuntime as iteration_runtime_helpers
 from src.iCCModules import imageCompositeConverterIterationSetup as iteration_setup_helpers
@@ -518,15 +519,11 @@ def runIterationPipeline(
         calculate_error_fn=Action.calculate_error,
         print_fn=print,
     )
-    if mode_result is None:
-        return None
-    best_iter = mode_result[3]
-    best_error = mode_result[4]
-    if str(params.get("mode", "")) != "composite":
-        return mode_result
-    if not math.isfinite(float(best_error)):
-        return None
-    return mode_result
+    return iteration_finalization_helpers.finalizeIterationResultImpl(
+        mode=str(params.get("mode", "")),
+        mode_result=mode_result,
+        math_module=math,
+    )
 
 def _extractRefParts(name: str) -> tuple[str, int] | None:
     return range_helpers.extractRefPartsImpl(name)

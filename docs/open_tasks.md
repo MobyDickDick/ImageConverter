@@ -254,6 +254,8 @@ focused on the actual project scope.
   - 2026-04-13: Umsetzung abgeschlossen inkl. Detailtests `test_prepare_iteration_inputs_impl_builds_iteration_context` und `test_prepare_iteration_inputs_impl_returns_none_for_missing_description_non_semantic_badge`.
   - [x] C1.25: Mode-Dispatch-Orchestrierung (`semantic_badge`/`dual_arrow_badge`/`non_composite`/`composite`) aus `runIterationPipeline` in neues Modul `src/iCCModules/imageCompositeConverterIterationDispatch.py` ausgelagert; `src/iCCModules/imageCompositeConverterRemaining.py` delegiert die Verzweigung jetzt über den neuen Modul-Helper und bleibt API-kompatibel.
   - 2026-04-13: Umsetzung abgeschlossen inkl. Detailtests `test_run_prepared_iteration_mode_impl_routes_semantic_badge_with_core_fields` und `test_run_prepared_iteration_mode_impl_routes_composite_with_iteration_context`.
+  - [x] C1.26: Iterations-Ergebnisfinalisierung (Composite-Only-Finite-Error-Guard nach Mode-Dispatch) aus `runIterationPipeline` in neues Modul `src/iCCModules/imageCompositeConverterIterationFinalization.py` ausgelagert; `src/iCCModules/imageCompositeConverterRemaining.py` delegiert den Rückgabepfad jetzt über den neuen Modul-Helper und bleibt API-kompatibel.
+  - 2026-04-13: Umsetzung abgeschlossen inkl. Detailtests `test_finalize_iteration_result_impl_returns_non_composite_result_unchanged` und `test_finalize_iteration_result_impl_drops_non_finite_composite_error`.
   - Nächster geplanter Schritt: weitere Initialisierungs-/Reporting-Teilstrecken aus `runIterationPipeline` in denselben kleinen Schritten extrahieren.
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.
