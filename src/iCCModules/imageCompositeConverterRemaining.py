@@ -8,6 +8,7 @@ from src.iCCModules import imageCompositeConverterDualArrowBadge as dual_arrow_b
 from src.iCCModules import imageCompositeConverterElementDecomposition as element_decomposition_helpers
 from src.iCCModules import imageCompositeConverterGradientStripeStrategy as gradient_stripe_strategy_helpers
 from src.iCCModules import imageCompositeConverterImageLoading as image_loading_helpers
+from src.iCCModules import imageCompositeConverterIterationDispatch as iteration_dispatch_helpers
 from src.iCCModules import imageCompositeConverterIterationPreparation as iteration_preparation_helpers
 from src.iCCModules import imageCompositeConverterIterationRuntime as iteration_runtime_helpers
 from src.iCCModules import imageCompositeConverterIterationSetup as iteration_setup_helpers
@@ -436,23 +437,30 @@ def runIterationPipeline(
         print_fn=print,
     )
 
-    if params["mode"] == "semantic_badge":
-        return semantic_badge_runtime_helpers.runSemanticBadgeIterationImpl(
-            width=w,
-            height=h,
-            perc_img=perc.img,
-            perc_base_name=perc.base_name,
-            filename=filename,
-            base=base,
-            description=desc,
-            params=params,
-            semantic_audit_row=semantic_audit_row,
-            badge_validation_rounds=badge_validation_rounds,
-            debug_element_diff_dir=debug_element_diff_dir,
-            debug_ac0811_dir=debug_ac0811_dir,
-            write_attempt_artifacts_fn=_writeAttemptArtifacts,
-            write_validation_log_fn=_writeValidationLog,
-            record_render_failure_fn=_recordRenderFailure,
+    mode_result = iteration_dispatch_helpers.runPreparedIterationModeImpl(
+        mode=str(params.get("mode", "")),
+        width=w,
+        height=h,
+        params=params,
+        stripe_strategy=stripe_strategy,
+        semantic_mode_visual_override=semantic_mode_visual_override,
+        folder_path=folder_path,
+        img_path=img_path,
+        filename=filename,
+        base_name=base,
+        description=desc,
+        perc_img=perc.img,
+        perc_base_name=perc.base_name,
+        semantic_audit_row=semantic_audit_row,
+        max_iterations=max_iterations,
+        badge_validation_rounds=badge_validation_rounds,
+        debug_element_diff_dir=debug_element_diff_dir,
+        debug_ac0811_dir=debug_ac0811_dir,
+        write_validation_log_fn=_writeValidationLog,
+        write_attempt_artifacts_fn=_writeAttemptArtifacts,
+        record_render_failure_fn=_recordRenderFailure,
+        run_semantic_badge_iteration_fn=lambda **kwargs: semantic_badge_runtime_helpers.runSemanticBadgeIterationImpl(
+            **kwargs,
             make_badge_params_fn=Action.make_badge_params,
             generate_badge_svg_fn=Action.generate_badge_svg,
             validate_semantic_description_alignment_fn=Action.validate_semantic_description_alignment,
@@ -465,14 +473,14 @@ def runIterationPipeline(
             build_semantic_audit_record_kwargs_fn=semantic_audit_runtime_helpers.buildSemanticAuditRecordKwargsImpl,
             semantic_audit_record_fn=_semanticAuditRecord,
             resolve_semantic_validation_debug_dir_fn=semantic_validation_context_helpers.resolveSemanticValidationDebugDirImpl,
-            collect_semantic_badge_validation_logs_fn=lambda **kwargs: semantic_validation_runtime_helpers.collectSemanticBadgeValidationLogsImpl(
-                **kwargs,
+            collect_semantic_badge_validation_logs_fn=lambda **log_kwargs: semantic_validation_runtime_helpers.collectSemanticBadgeValidationLogsImpl(
+                **log_kwargs,
                 validate_badge_by_elements_fn=Action.validate_badge_by_elements,
             ),
             prepare_semantic_badge_post_validation_fn=semantic_post_validation_helpers.prepareSemanticBadgePostValidationImpl,
             append_semantic_connector_expectation_log_fn=semantic_validation_finalization_helpers.appendSemanticConnectorExpectationLogImpl,
-            build_semantic_ok_validation_outcome_fn=lambda **kwargs: semantic_validation_finalization_helpers.buildSemanticOkValidationOutcomeImpl(
-                **kwargs,
+            build_semantic_ok_validation_outcome_fn=lambda **result_kwargs: semantic_validation_finalization_helpers.buildSemanticOkValidationOutcomeImpl(
+                **result_kwargs,
                 build_semantic_ok_validation_log_lines_fn=semantic_validation_logging_helpers.buildSemanticOkValidationLogLinesImpl,
             ),
             semantic_quality_flags_fn=_semanticQualityFlags,
@@ -484,70 +492,41 @@ def runIterationPipeline(
             enforce_semantic_connector_expectation_fn=Action._enforce_semantic_connector_expectation,
             apply_redraw_variation_fn=Action.apply_redraw_variation,
             print_fn=print,
-        )
-
-    if params["mode"] == "dual_arrow_badge":
-        return dual_arrow_runtime_helpers.runDualArrowBadgeIterationImpl(
-            perc_img=perc.img,
-            filename=filename,
-            base_name=base,
-            description=desc,
-            params=params,
-            width=w,
-            height=h,
+        ),
+        run_dual_arrow_badge_iteration_fn=lambda **kwargs: dual_arrow_runtime_helpers.runDualArrowBadgeIterationImpl(
+            **kwargs,
             detect_dual_arrow_badge_params_fn=lambda img: dual_arrow_badge_helpers.detectDualArrowBadgeParamsFromImageImpl(img, np_module=np),
             generate_dual_arrow_badge_svg_fn=dual_arrow_badge_helpers.generateDualArrowBadgeSvgImpl,
             render_embedded_raster_svg_fn=lambda: _renderEmbeddedRasterSvg(img_path),
-            write_validation_log_fn=_writeValidationLog,
             render_svg_to_numpy_fn=Action.render_svg_to_numpy,
-            record_render_failure_fn=_recordRenderFailure,
-            write_attempt_artifacts_fn=_writeAttemptArtifacts,
-            calculate_error_fn=Action.calculate_error,
-        )
-
-    if params["mode"] != "composite":
-        return non_composite_runtime_helpers.runNonCompositeIterationImpl(
-            mode=str(params.get("mode", "")),
-            params=params,
-            stripe_strategy=stripe_strategy,
-            semantic_mode_visual_override=semantic_mode_visual_override,
-            width=w,
-            height=h,
-            base_name=base,
-            description=desc,
-            perc_img=perc.img,
-            img_path=img_path,
-            print_fn=print,
+        ),
+        run_non_composite_iteration_fn=lambda **kwargs: non_composite_runtime_helpers.runNonCompositeIterationImpl(
+            **kwargs,
             render_embedded_raster_svg_fn=_renderEmbeddedRasterSvg,
             build_gradient_stripe_svg_fn=gradient_stripe_strategy_helpers.buildGradientStripeSvgImpl,
             build_gradient_stripe_validation_log_lines_fn=semantic_validation_context_helpers.buildNonCompositeGradientStripeValidationLogLinesImpl,
-            write_validation_log_fn=_writeValidationLog,
             render_svg_to_numpy_fn=Action.render_svg_to_numpy,
-            record_render_failure_fn=_recordRenderFailure,
-            write_attempt_artifacts_fn=_writeAttemptArtifacts,
+        ),
+        run_composite_iteration_fn=lambda **kwargs: conversion_composite_helpers.runCompositeIterationImpl(
+            **kwargs,
+            np_module=np,
+            generate_composite_svg_fn=Action.generate_composite_svg,
+            render_svg_to_numpy_fn=Action.render_svg_to_numpy,
             calculate_error_fn=Action.calculate_error,
-        )
-
-    best_iter, best_error = conversion_composite_helpers.runCompositeIterationImpl(
-        max_iterations=max_iterations,
-        width=w,
-        height=h,
-        params=params,
-        folder_path=folder_path,
-        target_img=perc.img,
-        np_module=np,
-        generate_composite_svg_fn=Action.generate_composite_svg,
-        render_svg_to_numpy_fn=Action.render_svg_to_numpy,
+            create_diff_image_fn=Action.create_diff_image,
+        ),
         calculate_error_fn=Action.calculate_error,
-        create_diff_image_fn=Action.create_diff_image,
-        write_attempt_artifacts_fn=_writeAttemptArtifacts,
-        write_validation_log_fn=_writeValidationLog,
-        record_render_failure_fn=_recordRenderFailure,
         print_fn=print,
     )
+    if mode_result is None:
+        return None
+    best_iter = mode_result[3]
+    best_error = mode_result[4]
+    if str(params.get("mode", "")) != "composite":
+        return mode_result
     if not math.isfinite(float(best_error)):
         return None
-    return base, desc, params, best_iter, best_error
+    return mode_result
 
 def _extractRefParts(name: str) -> tuple[str, int] | None:
     return range_helpers.extractRefPartsImpl(name)
