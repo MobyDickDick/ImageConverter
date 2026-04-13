@@ -8,6 +8,7 @@ from src.iCCModules import imageCompositeConverterDualArrowBadge as dual_arrow_b
 from src.iCCModules import imageCompositeConverterElementDecomposition as element_decomposition_helpers
 from src.iCCModules import imageCompositeConverterGradientStripeStrategy as gradient_stripe_strategy_helpers
 from src.iCCModules import imageCompositeConverterImageLoading as image_loading_helpers
+from src.iCCModules import imageCompositeConverterIterationRuntime as iteration_runtime_helpers
 from src.iCCModules import imageCompositeConverterIterationSetup as iteration_setup_helpers
 from src.iCCModules import imageCompositeConverterNaming as naming_helpers
 from src.iCCModules import imageCompositeConverterPerceptionGeometry as perception_geometry_helpers
@@ -408,40 +409,25 @@ def runIterationPipeline(
         reports_out_dir=reports_out_dir,
     )
 
-    def _writeValidationLog(lines: list[str]) -> None:
-        iteration_artifact_helpers.writeValidationLogImpl(
-            log_path=log_path,
-            lines=lines,
-            run_seed=int(Action.STOCHASTIC_RUN_SEED),
-            pass_seed_offset=int(Action.STOCHASTIC_SEED_OFFSET),
-            time_ns_fn=time.time_ns,
-        )
-
-    def _recordRenderFailure(reason: str, *, svg_content: str | None = None, params_snapshot: dict[str, object] | None = None) -> None:
-        iteration_artifact_helpers.writeRenderFailureLogImpl(
-            reason=reason,
-            filename=filename,
-            base_name=base,
-            write_attempt_artifacts_fn=_writeAttemptArtifacts,
-            write_validation_log_fn=_writeValidationLog,
-            svg_content=svg_content,
-            params_snapshot=params_snapshot,
-        )
-
-    def _writeAttemptArtifacts(svg_content: str, rendered_img=None, diff_img=None, *, failed: bool = False) -> None:
-        iteration_artifact_helpers.writeAttemptArtifactsImpl(
-            svg_out_dir=svg_out_dir,
-            diff_out_dir=diff_out_dir,
-            base_name=base,
-            svg_content=svg_content,
-            target_img=perc.img,
-            render_svg_to_numpy_fn=lambda svg: Action.render_svg_to_numpy(svg, w, h),
-            create_diff_image_fn=Action.create_diff_image,
-            cv2_module=cv2,
-            rendered_img=rendered_img,
-            diff_img=diff_img,
-            failed=failed,
-        )
+    iteration_artifact_callbacks = iteration_runtime_helpers.buildIterationArtifactCallbacksImpl(
+        filename=filename,
+        base_name=base,
+        log_path=log_path,
+        svg_out_dir=svg_out_dir,
+        diff_out_dir=diff_out_dir,
+        target_img=perc.img,
+        width=w,
+        height=h,
+        run_seed=int(Action.STOCHASTIC_RUN_SEED),
+        pass_seed_offset=int(Action.STOCHASTIC_SEED_OFFSET),
+        time_ns_fn=time.time_ns,
+        render_svg_to_numpy_fn=Action.render_svg_to_numpy,
+        create_diff_image_fn=Action.create_diff_image,
+        cv2_module=cv2,
+    )
+    _writeValidationLog = iteration_artifact_callbacks["write_validation_log"]
+    _writeAttemptArtifacts = iteration_artifact_callbacks["write_attempt_artifacts"]
+    _recordRenderFailure = iteration_artifact_callbacks["record_render_failure"]
 
     elongated_rect_geometry = _looksLikeElongatedForegroundRect(perc.img)
     params, semantic_mode_visual_override = semantic_visual_override_helpers.applySemanticVisualOverrideImpl(
