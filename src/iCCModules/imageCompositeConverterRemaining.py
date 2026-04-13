@@ -21,6 +21,7 @@ from src.iCCModules import imageCompositeConverterSemanticMismatchRuntime as sem
 from src.iCCModules import imageCompositeConverterSemanticAuditRuntime as semantic_audit_runtime_helpers
 from src.iCCModules import imageCompositeConverterSemanticIterationFinalization as semantic_iteration_finalization_helpers
 from src.iCCModules import imageCompositeConverterSemanticPostValidation as semantic_post_validation_helpers
+from src.iCCModules import imageCompositeConverterNonCompositeRuntime as non_composite_runtime_helpers
 from src.iCCModules.imageCompositeConverterPerceptionReflection import Perception, Reflection
 
 def detectRelevantRegions(img) -> list[dict[str, object]]:
@@ -604,41 +605,27 @@ def runIterationPipeline(
         return base, desc, params, 1, Action.calculate_error(perc.img, svg_rendered)
 
     if params["mode"] != "composite":
-        if params["mode"] == "manual_review":
-            reason = str(params.get("review_reason", "Manuelle Prüfung erforderlich.")).strip()
-            print(f"  -> Überspringe Bild: {reason}")
-            _writeValidationLog(
-                [
-                    "status=skipped_manual_review",
-                    f"manual_review_reason={reason}",
-                ]
-            )
-            return None
-        else:
-            if stripe_strategy:
-                print("  -> Kein Compositing-Befehl erkannt: verwende Gradient-Stripe-Strategie.")
-                svg_content = gradient_stripe_strategy_helpers.buildGradientStripeSvgImpl(w, h, stripe_strategy)
-                strategy_stop_count = len(list(stripe_strategy.get("stops", [])))
-                _writeValidationLog(
-                    semantic_validation_context_helpers.buildNonCompositeGradientStripeValidationLogLinesImpl(
-                        semantic_mode_visual_override=semantic_mode_visual_override,
-                        strategy_stop_count=strategy_stop_count,
-                    )
-                )
-            else:
-                print("  -> Kein Compositing-Befehl erkannt: verwende Einzelbild-Konvertierung (embedded raster SVG).")
-                svg_content = _renderEmbeddedRasterSvg(img_path)
-                _writeValidationLog(["status=non_composite_embedded_svg"])
-            svg_rendered = Action.render_svg_to_numpy(svg_content, w, h)
-            if svg_rendered is None:
-                _recordRenderFailure(
-                    "non_composite_embedded_render_failed",
-                    svg_content=svg_content,
-                    params_snapshot=params,
-                )
-                return None
-            _writeAttemptArtifacts(svg_content, svg_rendered)
-            return base, desc, params, 1, Action.calculate_error(perc.img, svg_rendered)
+        return non_composite_runtime_helpers.runNonCompositeIterationImpl(
+            mode=str(params.get("mode", "")),
+            params=params,
+            stripe_strategy=stripe_strategy,
+            semantic_mode_visual_override=semantic_mode_visual_override,
+            width=w,
+            height=h,
+            base_name=base,
+            description=desc,
+            perc_img=perc.img,
+            img_path=img_path,
+            print_fn=print,
+            render_embedded_raster_svg_fn=_renderEmbeddedRasterSvg,
+            build_gradient_stripe_svg_fn=gradient_stripe_strategy_helpers.buildGradientStripeSvgImpl,
+            build_gradient_stripe_validation_log_lines_fn=semantic_validation_context_helpers.buildNonCompositeGradientStripeValidationLogLinesImpl,
+            write_validation_log_fn=_writeValidationLog,
+            render_svg_to_numpy_fn=Action.render_svg_to_numpy,
+            record_render_failure_fn=_recordRenderFailure,
+            write_attempt_artifacts_fn=_writeAttemptArtifacts,
+            calculate_error_fn=Action.calculate_error,
+        )
 
     best_iter, best_error = conversion_composite_helpers.runCompositeIterationImpl(
         max_iterations=max_iterations,

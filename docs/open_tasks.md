@@ -234,6 +234,8 @@ focused on the actual project scope.
   - 2026-04-13: Umsetzung abgeschlossen inkl. Detailtests `test_finalize_semantic_badge_run_impl_returns_iteration_tuple` und `test_finalize_semantic_badge_run_impl_returns_none_on_failed_finalize`.
   - [x] C1.15: Semantik-Post-Validation-Orchestrierung (Connector-Guard + Redraw-Variation + Connector-Guard-Log) aus `runIterationPipeline` in neues Modul `src/iCCModules/imageCompositeConverterSemanticPostValidation.py` ausgelagert; `src/iCCModules/imageCompositeConverterRemaining.py` delegiert die Sequenz jetzt über den neuen Modul-Helper und bleibt API-kompatibel.
   - 2026-04-13: Umsetzung abgeschlossen inkl. Detailtest `test_prepare_semantic_badge_post_validation_impl_applies_guard_redraw_and_log`.
+  - [x] C1.16: Non-Composite-Runtimepfad (Manual-Review-/Gradient-Stripe-/Embedded-SVG-Handling inkl. Render-Fehlerpfad) aus `runIterationPipeline` in neues Modul `src/iCCModules/imageCompositeConverterNonCompositeRuntime.py` ausgelagert; `src/iCCModules/imageCompositeConverterRemaining.py` delegiert den gesamten Non-Composite-Zweig jetzt über den neuen Modul-Helper und bleibt API-kompatibel.
+  - 2026-04-13: Umsetzung abgeschlossen inkl. Detailtests `test_run_non_composite_iteration_impl_manual_review_writes_skip_log` und `test_run_non_composite_iteration_impl_gradient_stripe_returns_iteration_tuple`.
   - Nächster geplanter Schritt: weitere semantische Post-Validation-/Reporting-Teilstrecken in denselben kleinen Schritten extrahieren.
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.
