@@ -22,6 +22,7 @@ from src.iCCModules import imageCompositeConverterSemanticAuditRuntime as semant
 from src.iCCModules import imageCompositeConverterSemanticAuditBootstrap as semantic_audit_bootstrap_helpers
 from src.iCCModules import imageCompositeConverterSemanticIterationFinalization as semantic_iteration_finalization_helpers
 from src.iCCModules import imageCompositeConverterSemanticPostValidation as semantic_post_validation_helpers
+from src.iCCModules import imageCompositeConverterDualArrowRuntime as dual_arrow_runtime_helpers
 from src.iCCModules import imageCompositeConverterNonCompositeRuntime as non_composite_runtime_helpers
 from src.iCCModules.imageCompositeConverterPerceptionReflection import Perception, Reflection
 
@@ -579,27 +580,23 @@ def runIterationPipeline(
         )
 
     if params["mode"] == "dual_arrow_badge":
-        badge_params = dual_arrow_badge_helpers.detectDualArrowBadgeParamsFromImageImpl(perc.img, np_module=np)
-        if badge_params is None:
-            # Fallback to embedded raster if detection cannot robustly isolate
-            # the dual-arrow primitives.
-            svg_content = _renderEmbeddedRasterSvg(img_path)
-            _writeValidationLog(["status=dual_arrow_badge_detection_failed_fallback_embedded_svg"])
-        else:
-            badge_params["variant_name"] = str(filename).rsplit(".", 1)[0]
-            badge_params["base_name"] = str(perc.base_name).upper()
-            svg_content = dual_arrow_badge_helpers.generateDualArrowBadgeSvgImpl(w, h, badge_params)
-            _writeValidationLog(["status=dual_arrow_badge_ok"])
-        svg_rendered = Action.render_svg_to_numpy(svg_content, w, h)
-        if svg_rendered is None:
-            _recordRenderFailure(
-                "dual_arrow_badge_final_render_failed",
-                svg_content=svg_content,
-                params_snapshot=badge_params if badge_params is not None else params,
-            )
-            return None
-        _writeAttemptArtifacts(svg_content, svg_rendered)
-        return base, desc, params, 1, Action.calculate_error(perc.img, svg_rendered)
+        return dual_arrow_runtime_helpers.runDualArrowBadgeIterationImpl(
+            perc_img=perc.img,
+            filename=filename,
+            base_name=base,
+            description=desc,
+            params=params,
+            width=w,
+            height=h,
+            detect_dual_arrow_badge_params_fn=lambda img: dual_arrow_badge_helpers.detectDualArrowBadgeParamsFromImageImpl(img, np_module=np),
+            generate_dual_arrow_badge_svg_fn=dual_arrow_badge_helpers.generateDualArrowBadgeSvgImpl,
+            render_embedded_raster_svg_fn=lambda: _renderEmbeddedRasterSvg(img_path),
+            write_validation_log_fn=_writeValidationLog,
+            render_svg_to_numpy_fn=Action.render_svg_to_numpy,
+            record_render_failure_fn=_recordRenderFailure,
+            write_attempt_artifacts_fn=_writeAttemptArtifacts,
+            calculate_error_fn=Action.calculate_error,
+        )
 
     if params["mode"] != "composite":
         return non_composite_runtime_helpers.runNonCompositeIterationImpl(
