@@ -246,6 +246,8 @@ focused on the actual project scope.
   - 2026-04-13: Umsetzung abgeschlossen inkl. Detailtests `test_run_semantic_badge_iteration_impl_returns_none_for_semantic_mismatch` und `test_run_semantic_badge_iteration_impl_finalizes_semantic_ok`.
   - [x] C1.21: Laufzeit-Dependency-Guard aus `runIterationPipeline` in `src/iCCModules/imageCompositeConverterDependencies.py` zentralisiert (`ensureConversionRuntimeDependenciesImpl`); `src/iCCModules/imageCompositeConverterRemaining.py` delegiert den Start-Guard jetzt über den Modul-Helper und bleibt API-kompatibel.
   - 2026-04-13: Umsetzung abgeschlossen inkl. Detailtest `test_ensure_conversion_runtime_dependencies_impl_requires_cv2_numpy_and_fitz`.
+  - [x] C1.22: Iterations-Setup/Output-Initialisierung (Header-Ausgabe + Output-Verzeichnisse + Validation-Log-Pfad) aus `runIterationPipeline` in neues Modul `src/iCCModules/imageCompositeConverterIterationSetup.py` ausgelagert; `src/iCCModules/imageCompositeConverterRemaining.py` delegiert diese Initialisierungs-/Reporting-Teilstrecke jetzt über den neuen Modul-Helper und bleibt API-kompatibel.
+  - 2026-04-13: Umsetzung abgeschlossen inkl. Detailtests `test_ensure_iteration_output_dirs_impl_creates_all_expected_dirs`, `test_build_iteration_base_and_log_path_impl_formats_log_name` und `test_emit_iteration_description_header_impl_prints_description_and_fallback_elements`.
   - Nächster geplanter Schritt: weitere Initialisierungs-/Reporting-Teilstrecken aus `runIterationPipeline` in denselben kleinen Schritten extrahieren.
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.

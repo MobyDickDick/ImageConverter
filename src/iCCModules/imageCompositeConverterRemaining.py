@@ -8,6 +8,7 @@ from src.iCCModules import imageCompositeConverterDualArrowBadge as dual_arrow_b
 from src.iCCModules import imageCompositeConverterElementDecomposition as element_decomposition_helpers
 from src.iCCModules import imageCompositeConverterGradientStripeStrategy as gradient_stripe_strategy_helpers
 from src.iCCModules import imageCompositeConverterImageLoading as image_loading_helpers
+from src.iCCModules import imageCompositeConverterIterationSetup as iteration_setup_helpers
 from src.iCCModules import imageCompositeConverterNaming as naming_helpers
 from src.iCCModules import imageCompositeConverterPerceptionGeometry as perception_geometry_helpers
 from src.iCCModules import imageCompositeConverterSemanticAuditLogging as semantic_audit_logging_helpers
@@ -390,27 +391,22 @@ def runIterationPipeline(
         print("  -> Überspringe Bild, da keine begleitende textliche Beschreibung vorliegt.")
         return None
 
-    print(f"\n--- Verarbeite {filename} ---")
-    description_fragments = params.get("description_fragments", [])
-    description_text = " ".join(
-        str(fragment.get("text", "")).strip()
-        for fragment in description_fragments
-        if isinstance(fragment, dict)
-    ).strip()
-    if description_text:
-        print(f"Bildbeschreibung: {description_text}")
-    elements = ", ".join(params["elements"]) if params["elements"] else "Kein Compositing-Befehl gefunden"
-    print(f"Befehl erkannt: {elements}")
+    iteration_setup_helpers.emitIterationDescriptionHeaderImpl(
+        filename=filename,
+        params=params,
+        print_fn=print,
+    )
 
-    os.makedirs(svg_out_dir, exist_ok=True)
-    os.makedirs(diff_out_dir, exist_ok=True)
-    if reports_out_dir:
-        os.makedirs(reports_out_dir, exist_ok=True)
+    iteration_setup_helpers.ensureIterationOutputDirsImpl(
+        svg_out_dir=svg_out_dir,
+        diff_out_dir=diff_out_dir,
+        reports_out_dir=reports_out_dir,
+    )
 
-    base = os.path.splitext(filename)[0]
-    log_path = None
-    if reports_out_dir:
-        log_path = os.path.join(reports_out_dir, f"{base}_element_validation.log")
+    base, log_path = iteration_setup_helpers.buildIterationBaseAndLogPathImpl(
+        filename=filename,
+        reports_out_dir=reports_out_dir,
+    )
 
     def _writeValidationLog(lines: list[str]) -> None:
         iteration_artifact_helpers.writeValidationLogImpl(
