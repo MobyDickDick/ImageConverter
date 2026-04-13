@@ -19,6 +19,7 @@ from src.iCCModules import imageCompositeConverterSemanticValidationFinalization
 from src.iCCModules import imageCompositeConverterSemanticMismatchReporting as semantic_mismatch_reporting_helpers
 from src.iCCModules import imageCompositeConverterSemanticMismatchRuntime as semantic_mismatch_runtime_helpers
 from src.iCCModules import imageCompositeConverterSemanticAuditRuntime as semantic_audit_runtime_helpers
+from src.iCCModules import imageCompositeConverterSemanticAuditBootstrap as semantic_audit_bootstrap_helpers
 from src.iCCModules import imageCompositeConverterSemanticIterationFinalization as semantic_iteration_finalization_helpers
 from src.iCCModules import imageCompositeConverterSemanticPostValidation as semantic_post_validation_helpers
 from src.iCCModules import imageCompositeConverterNonCompositeRuntime as non_composite_runtime_helpers
@@ -382,19 +383,15 @@ def runIterationPipeline(
         perc.img,
         np_module=np,
     )
-    semantic_audit_row: dict[str, object] | None = None
-    if semantic_audit_runtime_helpers.shouldCreateSemanticAuditForBaseNameImpl(
-        perc.base_name,
+    semantic_audit_row: dict[str, object] | None = semantic_audit_bootstrap_helpers.buildPendingSemanticAuditRowImpl(
+        base_name=perc.base_name,
+        filename=filename,
+        params=params,
+        should_create_semantic_audit_for_base_name_fn=semantic_audit_runtime_helpers.shouldCreateSemanticAuditForBaseNameImpl,
         get_base_name_from_file_fn=getBaseNameFromFile,
-    ):
-        semantic_audit_row = _semanticAuditRecord(
-            base_name=perc.base_name,
-            **semantic_audit_runtime_helpers.buildSemanticAuditRecordKwargsImpl(
-                filename=filename,
-                params=params,
-                status="semantic_pending",
-            ),
-        )
+        build_semantic_audit_record_kwargs_fn=semantic_audit_runtime_helpers.buildSemanticAuditRecordKwargsImpl,
+        semantic_audit_record_fn=_semanticAuditRecord,
+    )
 
     if not desc.strip() and params["mode"] != "semantic_badge":
         print("  -> Überspringe Bild, da keine begleitende textliche Beschreibung vorliegt.")
