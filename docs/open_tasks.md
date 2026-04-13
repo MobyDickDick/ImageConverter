@@ -256,6 +256,8 @@ focused on the actual project scope.
   - 2026-04-13: Umsetzung abgeschlossen inkl. Detailtests `test_run_prepared_iteration_mode_impl_routes_semantic_badge_with_core_fields` und `test_run_prepared_iteration_mode_impl_routes_composite_with_iteration_context`.
   - [x] C1.26: Iterations-Ergebnisfinalisierung (Composite-Only-Finite-Error-Guard nach Mode-Dispatch) aus `runIterationPipeline` in neues Modul `src/iCCModules/imageCompositeConverterIterationFinalization.py` ausgelagert; `src/iCCModules/imageCompositeConverterRemaining.py` delegiert den Rückgabepfad jetzt über den neuen Modul-Helper und bleibt API-kompatibel.
   - 2026-04-13: Umsetzung abgeschlossen inkl. Detailtests `test_finalize_iteration_result_impl_returns_non_composite_result_unchanged` und `test_finalize_iteration_result_impl_drops_non_finite_composite_error`.
+  - [x] C1.27: Masken-IoU-Helfer (`_iou`) aus `src/iCCModules/imageCompositeConverterRemaining.py` in neues Modul `src/iCCModules/imageCompositeConverterMaskMetrics.py` ausgelagert; `src/iCCModules/imageCompositeConverterRemaining.py` delegiert den Wrapper jetzt über den neuen Modul-Helper und bleibt API-kompatibel.
+  - 2026-04-13: Umsetzung abgeschlossen inkl. Detailtest `test_iou_impl_returns_overlap_ratio`.
   - Nächster geplanter Schritt: weitere Initialisierungs-/Reporting-Teilstrecken aus `runIterationPipeline` in denselben kleinen Schritten extrahieren.
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.

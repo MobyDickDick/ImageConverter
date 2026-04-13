@@ -14,6 +14,7 @@ from src.iCCModules import imageCompositeConverterIterationPreparation as iterat
 from src.iCCModules import imageCompositeConverterIterationRuntime as iteration_runtime_helpers
 from src.iCCModules import imageCompositeConverterIterationSetup as iteration_setup_helpers
 from src.iCCModules import imageCompositeConverterNaming as naming_helpers
+from src.iCCModules import imageCompositeConverterMaskMetrics as mask_metrics_helpers
 from src.iCCModules import imageCompositeConverterPerceptionGeometry as perception_geometry_helpers
 from src.iCCModules import imageCompositeConverterSemanticAuditLogging as semantic_audit_logging_helpers
 from src.iCCModules import imageCompositeConverterSemanticAc0223Runtime as semantic_ac0223_runtime_helpers
@@ -140,7 +141,7 @@ def renderCandidateMask(candidate: Candidate, width: int, height: int) -> list[l
     )
 
 def _iou(a: list[list[int]], b: list[list[int]]) -> float:
-    return thresholding_helpers.iouImpl(a, b)
+    return mask_metrics_helpers.iouImpl(a, b)
 
 def scoreCandidate(target: list[list[int]], candidate: Candidate) -> float:
     return element_search_optimization_helpers.scoreCandidateImpl(
