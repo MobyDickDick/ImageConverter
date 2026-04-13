@@ -8,6 +8,7 @@ from src.iCCModules import imageCompositeConverterDualArrowBadge as dual_arrow_b
 from src.iCCModules import imageCompositeConverterElementDecomposition as element_decomposition_helpers
 from src.iCCModules import imageCompositeConverterGradientStripeStrategy as gradient_stripe_strategy_helpers
 from src.iCCModules import imageCompositeConverterImageLoading as image_loading_helpers
+from src.iCCModules import imageCompositeConverterIterationInitialization as iteration_initialization_helpers
 from src.iCCModules import imageCompositeConverterIterationDispatch as iteration_dispatch_helpers
 from src.iCCModules import imageCompositeConverterIterationFinalization as iteration_finalization_helpers
 from src.iCCModules import imageCompositeConverterIterationPreparation as iteration_preparation_helpers
@@ -394,27 +395,10 @@ def runIterationPipeline(
     stripe_strategy = iteration_inputs["stripe_strategy"]
     semantic_audit_row = iteration_inputs["semantic_audit_row"]
 
-    iteration_setup_helpers.emitIterationDescriptionHeaderImpl(
+    iteration_runtime_state = iteration_initialization_helpers.prepareIterationRuntimeImpl(
         filename=filename,
         params=params,
-        print_fn=print,
-    )
-
-    iteration_setup_helpers.ensureIterationOutputDirsImpl(
-        svg_out_dir=svg_out_dir,
-        diff_out_dir=diff_out_dir,
         reports_out_dir=reports_out_dir,
-    )
-
-    base, log_path = iteration_setup_helpers.buildIterationBaseAndLogPathImpl(
-        filename=filename,
-        reports_out_dir=reports_out_dir,
-    )
-
-    iteration_artifact_callbacks = iteration_runtime_helpers.buildIterationArtifactCallbacksImpl(
-        filename=filename,
-        base_name=base,
-        log_path=log_path,
         svg_out_dir=svg_out_dir,
         diff_out_dir=diff_out_dir,
         target_img=perc.img,
@@ -426,7 +410,12 @@ def runIterationPipeline(
         render_svg_to_numpy_fn=Action.render_svg_to_numpy,
         create_diff_image_fn=Action.create_diff_image,
         cv2_module=cv2,
+        iteration_setup_helpers=iteration_setup_helpers,
+        iteration_runtime_helpers=iteration_runtime_helpers,
+        print_fn=print,
     )
+    base = iteration_runtime_state["base_name"]
+    iteration_artifact_callbacks = iteration_runtime_state["artifact_callbacks"]
     _writeValidationLog = iteration_artifact_callbacks["write_validation_log"]
     _writeAttemptArtifacts = iteration_artifact_callbacks["write_attempt_artifacts"]
     _recordRenderFailure = iteration_artifact_callbacks["record_render_failure"]

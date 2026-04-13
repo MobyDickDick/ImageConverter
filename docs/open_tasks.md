@@ -258,6 +258,8 @@ focused on the actual project scope.
   - 2026-04-13: Umsetzung abgeschlossen inkl. Detailtests `test_finalize_iteration_result_impl_returns_non_composite_result_unchanged` und `test_finalize_iteration_result_impl_drops_non_finite_composite_error`.
   - [x] C1.27: Masken-IoU-Helfer (`_iou`) aus `src/iCCModules/imageCompositeConverterRemaining.py` in neues Modul `src/iCCModules/imageCompositeConverterMaskMetrics.py` ausgelagert; `src/iCCModules/imageCompositeConverterRemaining.py` delegiert den Wrapper jetzt über den neuen Modul-Helper und bleibt API-kompatibel.
   - 2026-04-13: Umsetzung abgeschlossen inkl. Detailtest `test_iou_impl_returns_overlap_ratio`.
+  - [x] C1.28: Iterations-Initialisierungs-/Reporting-Teilstrecke (Header-Ausgabe + Output-Verzeichnis-Setup + Base/Log/Artifact-Callback-Wiring) aus `runIterationPipeline` in neues Modul `src/iCCModules/imageCompositeConverterIterationInitialization.py` ausgelagert; `src/iCCModules/imageCompositeConverterRemaining.py` delegiert die Initialisierung jetzt über den neuen Modul-Helper und bleibt API-kompatibel.
+  - 2026-04-13: Umsetzung abgeschlossen inkl. Detailtest `test_prepare_iteration_runtime_impl_builds_base_and_callbacks`.
   - Nächster geplanter Schritt: weitere Initialisierungs-/Reporting-Teilstrecken aus `runIterationPipeline` in denselben kleinen Schritten extrahieren.
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.
