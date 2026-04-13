@@ -240,6 +240,8 @@ focused on the actual project scope.
   - 2026-04-13: Umsetzung abgeschlossen inkl. Detailtests `test_build_pending_semantic_audit_row_impl_returns_none_when_base_not_targeted` und `test_build_pending_semantic_audit_row_impl_builds_pending_row`.
   - [x] C1.18: Dual-Arrow-Laufzeitpfad (`mode=dual_arrow_badge`: Detektion/Fallback/Final-Render + Fehlerpfad) aus `runIterationPipeline` in neues Modul `src/iCCModules/imageCompositeConverterDualArrowRuntime.py` ausgelagert; `src/iCCModules/imageCompositeConverterRemaining.py` delegiert jetzt über den neuen Modul-Helper und bleibt API-kompatibel.
   - 2026-04-13: Umsetzung abgeschlossen inkl. Detailtests `test_run_dual_arrow_badge_iteration_impl_uses_fallback_when_detection_fails` und `test_run_dual_arrow_badge_iteration_impl_records_render_failure_with_badge_params`.
+  - [x] C1.19: Semantik-Visual-Override-Dispatch (Gradient-Stripe-/Elongated-Rect-Umschaltung + Konsolenhinweis) aus `runIterationPipeline` in neues Modul `src/iCCModules/imageCompositeConverterSemanticVisualOverride.py` ausgelagert; `src/iCCModules/imageCompositeConverterRemaining.py` delegiert die Override-Entscheidung jetzt über den neuen Modul-Helper und bleibt API-kompatibel.
+  - 2026-04-13: Umsetzung abgeschlossen inkl. Detailtests `test_apply_semantic_visual_override_impl_switches_mode_for_gradient_stripe` und `test_apply_semantic_visual_override_impl_keeps_params_when_not_needed`.
   - Nächster geplanter Schritt: weitere semantische Post-Validation-/Reporting-Teilstrecken in denselben kleinen Schritten extrahieren.
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.
