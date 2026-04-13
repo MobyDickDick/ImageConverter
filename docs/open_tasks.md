@@ -238,6 +238,8 @@ focused on the actual project scope.
   - 2026-04-13: Umsetzung abgeschlossen inkl. Detailtests `test_run_non_composite_iteration_impl_manual_review_writes_skip_log` und `test_run_non_composite_iteration_impl_gradient_stripe_returns_iteration_tuple`.
   - [x] C1.17: Semantik-Audit-Bootstrap (initialer `semantic_pending`-Record in `runIterationPipeline`) in neues Modul `src/iCCModules/imageCompositeConverterSemanticAuditBootstrap.py` ausgelagert; `src/iCCModules/imageCompositeConverterRemaining.py` delegiert die Initialisierung jetzt über den neuen Modul-Helper und bleibt API-kompatibel.
   - 2026-04-13: Umsetzung abgeschlossen inkl. Detailtests `test_build_pending_semantic_audit_row_impl_returns_none_when_base_not_targeted` und `test_build_pending_semantic_audit_row_impl_builds_pending_row`.
+  - [x] C1.18: Dual-Arrow-Laufzeitpfad (`mode=dual_arrow_badge`: Detektion/Fallback/Final-Render + Fehlerpfad) aus `runIterationPipeline` in neues Modul `src/iCCModules/imageCompositeConverterDualArrowRuntime.py` ausgelagert; `src/iCCModules/imageCompositeConverterRemaining.py` delegiert jetzt über den neuen Modul-Helper und bleibt API-kompatibel.
+  - 2026-04-13: Umsetzung abgeschlossen inkl. Detailtests `test_run_dual_arrow_badge_iteration_impl_uses_fallback_when_detection_fails` und `test_run_dual_arrow_badge_iteration_impl_records_render_failure_with_badge_params`.
   - Nächster geplanter Schritt: weitere semantische Post-Validation-/Reporting-Teilstrecken in denselben kleinen Schritten extrahieren.
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.
