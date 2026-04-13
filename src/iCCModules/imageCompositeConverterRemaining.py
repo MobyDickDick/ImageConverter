@@ -557,28 +557,26 @@ def runIterationPipeline(
             semantic_ok_validation_lines
         )
 
-        badge_params = semantic_ac0223_runtime_helpers.finalizeAc0223BadgeParamsImpl(
+        semantic_badge_result = semantic_validation_runtime_helpers.finalizeSemanticBadgeIterationResultImpl(
             base_name=str(perc.base_name),
             filename=filename,
             width=w,
             height=h,
             badge_params=badge_params,
+            params=params,
+            semantic_audit_row=semantic_audit_row,
+            target_img=perc.img,
+            finalize_ac0223_badge_params_fn=semantic_ac0223_runtime_helpers.finalizeAc0223BadgeParamsImpl,
+            generate_badge_svg_fn=Action.generate_badge_svg,
+            render_svg_to_numpy_fn=Action.render_svg_to_numpy,
+            write_attempt_artifacts_fn=_writeAttemptArtifacts,
+            record_render_failure_fn=_recordRenderFailure,
+            calculate_error_fn=Action.calculate_error,
         )
-
-        svg_content = Action.generate_badge_svg(w, h, badge_params)
-        svg_rendered = Action.render_svg_to_numpy(svg_content, w, h)
-        if svg_rendered is None:
-            _recordRenderFailure(
-                "semantic_badge_final_render_failed",
-                svg_content=svg_content,
-                params_snapshot=badge_params,
-            )
+        if semantic_badge_result is None:
             return None
-        _writeAttemptArtifacts(svg_content, svg_rendered)
-        if semantic_audit_row is not None:
-            params = copy.deepcopy(params)
-            params["semantic_audit"] = semantic_audit_row
-        return base, desc, params, 1, Action.calculate_error(perc.img, svg_rendered)
+        result_params, semantic_badge_error = semantic_badge_result
+        return base, desc, result_params, 1, semantic_badge_error
 
     if params["mode"] == "dual_arrow_badge":
         badge_params = dual_arrow_badge_helpers.detectDualArrowBadgeParamsFromImageImpl(perc.img, np_module=np)
