@@ -230,6 +230,8 @@ focused on the actual project scope.
   - 2026-04-12: Umsetzung abgeschlossen inkl. Detailtests `test_build_semantic_mismatch_outcome_impl_with_audit_row` und `test_build_semantic_mismatch_outcome_impl_without_audit_row`.
   - [x] C1.13: Semantik-Badge-Post-Validation-Renderpfad (AC0223-Finalisierung + Final-Render/Artifact-Write) aus `runIterationPipeline` in `src/iCCModules/imageCompositeConverterSemanticValidationRuntime.py` ausgelagert; `src/iCCModules/imageCompositeConverterRemaining.py` delegiert den Abschluss jetzt über den neuen Modul-Helper und bleibt API-kompatibel.
   - 2026-04-13: Umsetzung abgeschlossen inkl. Detailtests `test_finalize_semantic_badge_iteration_result_impl_attaches_audit_and_error` und `test_finalize_semantic_badge_iteration_result_impl_records_render_failure`.
+  - [x] C1.14: Semantische Iterations-Finalisierung (Validation-Log-Flush + Ergebnis-Weitergabe) aus `runIterationPipeline` in neues Modul `src/iCCModules/imageCompositeConverterSemanticIterationFinalization.py` ausgelagert; `src/iCCModules/imageCompositeConverterRemaining.py` delegiert den Abschluss jetzt über den neuen Modul-Helper und bleibt API-kompatibel.
+  - 2026-04-13: Umsetzung abgeschlossen inkl. Detailtests `test_finalize_semantic_badge_run_impl_returns_iteration_tuple` und `test_finalize_semantic_badge_run_impl_returns_none_on_failed_finalize`.
   - Nächster geplanter Schritt: weitere semantische Post-Validation-/Reporting-Teilstrecken in denselben kleinen Schritten extrahieren.
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.

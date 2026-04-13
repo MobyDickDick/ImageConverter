@@ -19,6 +19,7 @@ from src.iCCModules import imageCompositeConverterSemanticValidationFinalization
 from src.iCCModules import imageCompositeConverterSemanticMismatchReporting as semantic_mismatch_reporting_helpers
 from src.iCCModules import imageCompositeConverterSemanticMismatchRuntime as semantic_mismatch_runtime_helpers
 from src.iCCModules import imageCompositeConverterSemanticAuditRuntime as semantic_audit_runtime_helpers
+from src.iCCModules import imageCompositeConverterSemanticIterationFinalization as semantic_iteration_finalization_helpers
 from src.iCCModules.imageCompositeConverterPerceptionReflection import Perception, Reflection
 
 def detectRelevantRegions(img) -> list[dict[str, object]]:
@@ -553,30 +554,29 @@ def runIterationPipeline(
                 build_semantic_ok_validation_log_lines_fn=semantic_validation_logging_helpers.buildSemanticOkValidationLogLinesImpl,
             )
         )
-        _writeValidationLog(
-            semantic_ok_validation_lines
-        )
-
-        semantic_badge_result = semantic_validation_runtime_helpers.finalizeSemanticBadgeIterationResultImpl(
-            base_name=str(perc.base_name),
+        return semantic_iteration_finalization_helpers.finalizeSemanticBadgeRunImpl(
+            base=base,
+            desc=desc,
+            perc_base_name=str(perc.base_name),
             filename=filename,
             width=w,
             height=h,
             badge_params=badge_params,
             params=params,
             semantic_audit_row=semantic_audit_row,
-            target_img=perc.img,
-            finalize_ac0223_badge_params_fn=semantic_ac0223_runtime_helpers.finalizeAc0223BadgeParamsImpl,
-            generate_badge_svg_fn=Action.generate_badge_svg,
-            render_svg_to_numpy_fn=Action.render_svg_to_numpy,
-            write_attempt_artifacts_fn=_writeAttemptArtifacts,
-            record_render_failure_fn=_recordRenderFailure,
-            calculate_error_fn=Action.calculate_error,
+            semantic_ok_validation_lines=semantic_ok_validation_lines,
+            perc_img=perc.img,
+            write_validation_log_fn=_writeValidationLog,
+            finalize_semantic_badge_iteration_result_fn=lambda **kwargs: semantic_validation_runtime_helpers.finalizeSemanticBadgeIterationResultImpl(
+                **kwargs,
+                finalize_ac0223_badge_params_fn=semantic_ac0223_runtime_helpers.finalizeAc0223BadgeParamsImpl,
+                generate_badge_svg_fn=Action.generate_badge_svg,
+                render_svg_to_numpy_fn=Action.render_svg_to_numpy,
+                write_attempt_artifacts_fn=_writeAttemptArtifacts,
+                record_render_failure_fn=_recordRenderFailure,
+                calculate_error_fn=Action.calculate_error,
+            ),
         )
-        if semantic_badge_result is None:
-            return None
-        result_params, semantic_badge_error = semantic_badge_result
-        return base, desc, result_params, 1, semantic_badge_error
 
     if params["mode"] == "dual_arrow_badge":
         badge_params = dual_arrow_badge_helpers.detectDualArrowBadgeParamsFromImageImpl(perc.img, np_module=np)
