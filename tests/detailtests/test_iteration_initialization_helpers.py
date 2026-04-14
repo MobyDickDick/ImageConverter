@@ -57,3 +57,23 @@ def test_prepare_iteration_runtime_impl_builds_base_and_callbacks() -> None:
     assert setup_helpers.calls[2] == ("base", "AC0800_S.jpg", "reports")
     assert runtime_helpers.kwargs["base_name"] == "AC0800_S"
     assert runtime_helpers.kwargs["log_path"] == "reports/AC0800_S_element_validation.log"
+
+
+def test_extract_iteration_runtime_bindings_impl_exposes_runtime_callbacks() -> None:
+    state = {
+        "base_name": "AC0811_M",
+        "artifact_callbacks": {
+            "write_validation_log": "write-log",
+            "write_attempt_artifacts": "write-artifacts",
+            "record_render_failure": "record-failure",
+        },
+    }
+
+    bindings = iteration_initialization_helpers.extractIterationRuntimeBindingsImpl(
+        iteration_runtime_state=state
+    )
+
+    assert bindings["base_name"] == "AC0811_M"
+    assert bindings["write_validation_log"] == "write-log"
+    assert bindings["write_attempt_artifacts"] == "write-artifacts"
+    assert bindings["record_render_failure"] == "record-failure"
