@@ -11,6 +11,7 @@ from src.iCCModules import imageCompositeConverterImageLoading as image_loading_
 from src.iCCModules import imageCompositeConverterIterationInitialization as iteration_initialization_helpers
 from src.iCCModules import imageCompositeConverterIterationContext as iteration_context_helpers
 from src.iCCModules import imageCompositeConverterIterationDispatch as iteration_dispatch_helpers
+from src.iCCModules import imageCompositeConverterIterationExecution as iteration_execution_helpers
 from src.iCCModules import imageCompositeConverterIterationFinalization as iteration_finalization_helpers
 from src.iCCModules import imageCompositeConverterIterationModeRuntime as iteration_mode_runtime_helpers
 from src.iCCModules import imageCompositeConverterIterationModeDependencies as iteration_mode_dependency_helpers
@@ -476,36 +477,36 @@ def runIterationPipeline(
     semantic_mode_visual_override = iteration_mode_runtime_bindings["semantic_mode_visual_override"]
     mode_runners = iteration_mode_runtime_bindings["mode_runners"]
 
-    prepared_mode_kwargs = iteration_context_helpers.buildPreparedIterationModeKwargsImpl(
+    return iteration_execution_helpers.runPreparedIterationAndFinalizeImpl(
         params=params,
-        width=w,
-        height=h,
-        stripe_strategy=stripe_strategy,
-        semantic_mode_visual_override=semantic_mode_visual_override,
-        folder_path=folder_path,
-        img_path=img_path,
-        filename=filename,
-        base_name=base,
-        description=desc,
-        perc_img=perc.img,
-        perc_base_name=perc.base_name,
-        semantic_audit_row=semantic_audit_row,
-        max_iterations=max_iterations,
-        badge_validation_rounds=badge_validation_rounds,
-        debug_element_diff_dir=debug_element_diff_dir,
-        debug_ac0811_dir=debug_ac0811_dir,
-        write_validation_log_fn=_writeValidationLog,
-        write_attempt_artifacts_fn=_writeAttemptArtifacts,
-        record_render_failure_fn=_recordRenderFailure,
-        mode_runners=mode_runners,
-        calculate_error_fn=Action.calculate_error,
-        print_fn=print,
-    )
-
-    mode_result = iteration_dispatch_helpers.runPreparedIterationModeImpl(**prepared_mode_kwargs)
-    return iteration_finalization_helpers.finalizeIterationResultImpl(
-        mode=str(params.get("mode", "")),
-        mode_result=mode_result,
+        prepared_mode_builder_kwargs={
+            "params": params,
+            "width": w,
+            "height": h,
+            "stripe_strategy": stripe_strategy,
+            "semantic_mode_visual_override": semantic_mode_visual_override,
+            "folder_path": folder_path,
+            "img_path": img_path,
+            "filename": filename,
+            "base_name": base,
+            "description": desc,
+            "perc_img": perc.img,
+            "perc_base_name": perc.base_name,
+            "semantic_audit_row": semantic_audit_row,
+            "max_iterations": max_iterations,
+            "badge_validation_rounds": badge_validation_rounds,
+            "debug_element_diff_dir": debug_element_diff_dir,
+            "debug_ac0811_dir": debug_ac0811_dir,
+            "write_validation_log_fn": _writeValidationLog,
+            "write_attempt_artifacts_fn": _writeAttemptArtifacts,
+            "record_render_failure_fn": _recordRenderFailure,
+            "mode_runners": mode_runners,
+            "calculate_error_fn": Action.calculate_error,
+            "print_fn": print,
+        },
+        build_prepared_iteration_mode_kwargs_fn=iteration_context_helpers.buildPreparedIterationModeKwargsImpl,
+        run_prepared_iteration_mode_fn=iteration_dispatch_helpers.runPreparedIterationModeImpl,
+        finalize_iteration_result_fn=iteration_finalization_helpers.finalizeIterationResultImpl,
         math_module=math,
     )
 
