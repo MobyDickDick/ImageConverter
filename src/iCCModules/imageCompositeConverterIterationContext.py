@@ -1,6 +1,34 @@
 from __future__ import annotations
 
 
+def extractIterationInputBindingsImpl(
+    *,
+    iteration_inputs: dict[str, object],
+) -> dict[str, object]:
+    return {
+        "folder_path": iteration_inputs["folder_path"],
+        "filename": iteration_inputs["filename"],
+        "perception": iteration_inputs["perception"],
+        "width": iteration_inputs["width"],
+        "height": iteration_inputs["height"],
+        "description": iteration_inputs["description"],
+        "params": iteration_inputs["params"],
+        "stripe_strategy": iteration_inputs["stripe_strategy"],
+        "semantic_audit_row": iteration_inputs["semantic_audit_row"],
+    }
+
+
+def extractIterationModeRuntimeBindingsImpl(
+    *,
+    mode_runtime: dict[str, object],
+) -> dict[str, object]:
+    return {
+        "params": mode_runtime["params"],
+        "semantic_mode_visual_override": mode_runtime["semantic_mode_visual_override"],
+        "mode_runners": mode_runtime["mode_runners"],
+    }
+
+
 def buildPreparedIterationModeKwargsImpl(
     *,
     params: dict[str, object],

@@ -389,15 +389,18 @@ def runIterationPipeline(
     )
     if iteration_inputs is None:
         return None
-    folder_path = iteration_inputs["folder_path"]
-    filename = iteration_inputs["filename"]
-    perc = iteration_inputs["perception"]
-    w = iteration_inputs["width"]
-    h = iteration_inputs["height"]
-    desc = iteration_inputs["description"]
-    params = iteration_inputs["params"]
-    stripe_strategy = iteration_inputs["stripe_strategy"]
-    semantic_audit_row = iteration_inputs["semantic_audit_row"]
+    iteration_input_bindings = iteration_context_helpers.extractIterationInputBindingsImpl(
+        iteration_inputs=iteration_inputs,
+    )
+    folder_path = iteration_input_bindings["folder_path"]
+    filename = iteration_input_bindings["filename"]
+    perc = iteration_input_bindings["perception"]
+    w = iteration_input_bindings["width"]
+    h = iteration_input_bindings["height"]
+    desc = iteration_input_bindings["description"]
+    params = iteration_input_bindings["params"]
+    stripe_strategy = iteration_input_bindings["stripe_strategy"]
+    semantic_audit_row = iteration_input_bindings["semantic_audit_row"]
 
     iteration_runtime_state = iteration_initialization_helpers.prepareIterationRuntimeImpl(
         filename=filename,
@@ -478,9 +481,12 @@ def runIterationPipeline(
             run_composite_iteration_fn=conversion_composite_helpers.runCompositeIterationImpl,
         ),
     )
-    params = mode_runtime["params"]
-    semantic_mode_visual_override = mode_runtime["semantic_mode_visual_override"]
-    mode_runners = mode_runtime["mode_runners"]
+    iteration_mode_runtime_bindings = iteration_context_helpers.extractIterationModeRuntimeBindingsImpl(
+        mode_runtime=mode_runtime,
+    )
+    params = iteration_mode_runtime_bindings["params"]
+    semantic_mode_visual_override = iteration_mode_runtime_bindings["semantic_mode_visual_override"]
+    mode_runners = iteration_mode_runtime_bindings["mode_runners"]
 
     prepared_mode_kwargs = iteration_context_helpers.buildPreparedIterationModeKwargsImpl(
         params=params,
