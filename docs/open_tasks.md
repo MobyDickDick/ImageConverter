@@ -266,6 +266,8 @@ focused on the actual project scope.
   - 2026-04-14: Umsetzung abgeschlossen inkl. Detailtests `test_build_iteration_mode_runners_impl_wires_semantic_validation_collector` und `test_build_iteration_mode_runners_impl_wires_dual_arrow_detector_with_numpy_module`.
   - [x] C1.31: Iterations-Mode-Orchestrierung (Elongated-Rect-Check + Semantik-Visual-Override + Mode-Runner-Build) aus `runIterationPipeline` in neues Modul `src/iCCModules/imageCompositeConverterIterationOrchestration.py` ausgelagert; `src/iCCModules/imageCompositeConverterRemaining.py` delegiert diese Vorbereitungssequenz jetzt über den neuen Modul-Helper und bleibt API-kompatibel.
   - 2026-04-14: Umsetzung abgeschlossen inkl. Detailtest `test_prepare_iteration_mode_runtime_impl_applies_visual_override_then_builds_runners`.
+  - [x] C1.32: Mode-Dispatch-Argumentaufbau aus `runIterationPipeline` in neues Modul `src/iCCModules/imageCompositeConverterIterationContext.py` ausgelagert; `src/iCCModules/imageCompositeConverterRemaining.py` delegiert den großen `runPreparedIterationModeImpl`-Kwargs-Aufbau jetzt über den neuen Modul-Helper und bleibt API-kompatibel.
+  - 2026-04-14: Umsetzung abgeschlossen inkl. Detailtest `test_build_prepared_iteration_mode_kwargs_impl_maps_mode_runners_and_callbacks`.
   - Nächster geplanter Schritt: weitere Initialisierungs-/Reporting-Teilstrecken aus `runIterationPipeline` in denselben kleinen Schritten extrahieren.
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.

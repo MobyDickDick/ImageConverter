@@ -9,6 +9,7 @@ from src.iCCModules import imageCompositeConverterElementDecomposition as elemen
 from src.iCCModules import imageCompositeConverterGradientStripeStrategy as gradient_stripe_strategy_helpers
 from src.iCCModules import imageCompositeConverterImageLoading as image_loading_helpers
 from src.iCCModules import imageCompositeConverterIterationInitialization as iteration_initialization_helpers
+from src.iCCModules import imageCompositeConverterIterationContext as iteration_context_helpers
 from src.iCCModules import imageCompositeConverterIterationDispatch as iteration_dispatch_helpers
 from src.iCCModules import imageCompositeConverterIterationFinalization as iteration_finalization_helpers
 from src.iCCModules import imageCompositeConverterIterationModeRuntime as iteration_mode_runtime_helpers
@@ -480,11 +481,10 @@ def runIterationPipeline(
     semantic_mode_visual_override = mode_runtime["semantic_mode_visual_override"]
     mode_runners = mode_runtime["mode_runners"]
 
-    mode_result = iteration_dispatch_helpers.runPreparedIterationModeImpl(
-        mode=str(params.get("mode", "")),
+    prepared_mode_kwargs = iteration_context_helpers.buildPreparedIterationModeKwargsImpl(
+        params=params,
         width=w,
         height=h,
-        params=params,
         stripe_strategy=stripe_strategy,
         semantic_mode_visual_override=semantic_mode_visual_override,
         folder_path=folder_path,
@@ -502,13 +502,12 @@ def runIterationPipeline(
         write_validation_log_fn=_writeValidationLog,
         write_attempt_artifacts_fn=_writeAttemptArtifacts,
         record_render_failure_fn=_recordRenderFailure,
-        run_semantic_badge_iteration_fn=mode_runners["run_semantic_badge_iteration"],
-        run_dual_arrow_badge_iteration_fn=mode_runners["run_dual_arrow_badge_iteration"],
-        run_non_composite_iteration_fn=mode_runners["run_non_composite_iteration"],
-        run_composite_iteration_fn=mode_runners["run_composite_iteration"],
+        mode_runners=mode_runners,
         calculate_error_fn=Action.calculate_error,
         print_fn=print,
     )
+
+    mode_result = iteration_dispatch_helpers.runPreparedIterationModeImpl(**prepared_mode_kwargs)
     return iteration_finalization_helpers.finalizeIterationResultImpl(
         mode=str(params.get("mode", "")),
         mode_result=mode_result,
