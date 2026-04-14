@@ -14,6 +14,7 @@ from src.iCCModules import imageCompositeConverterIterationDispatch as iteration
 from src.iCCModules import imageCompositeConverterIterationFinalization as iteration_finalization_helpers
 from src.iCCModules import imageCompositeConverterIterationModeRuntime as iteration_mode_runtime_helpers
 from src.iCCModules import imageCompositeConverterIterationModeDependencies as iteration_mode_dependency_helpers
+from src.iCCModules import imageCompositeConverterIterationModeDependencySetup as iteration_mode_dependency_setup_helpers
 from src.iCCModules import imageCompositeConverterIterationOrchestration as iteration_orchestration_helpers
 from src.iCCModules import imageCompositeConverterIterationPreparation as iteration_preparation_helpers
 from src.iCCModules import imageCompositeConverterIterationRuntime as iteration_runtime_helpers
@@ -429,6 +430,33 @@ def runIterationPipeline(
     _writeAttemptArtifacts = iteration_runtime_bindings["write_attempt_artifacts"]
     _recordRenderFailure = iteration_runtime_bindings["record_render_failure"]
 
+    mode_runner_dependencies = iteration_mode_dependency_setup_helpers.buildIterationModeRunnerDependenciesForRunImpl(
+        np_module=np,
+        action_cls=Action,
+        semantic_mismatch_reporting_helpers=semantic_mismatch_reporting_helpers,
+        semantic_validation_logging_helpers=semantic_validation_logging_helpers,
+        semantic_mismatch_runtime_helpers=semantic_mismatch_runtime_helpers,
+        semantic_audit_logging_helpers=semantic_audit_logging_helpers,
+        semantic_audit_runtime_helpers=semantic_audit_runtime_helpers,
+        semantic_validation_context_helpers=semantic_validation_context_helpers,
+        semantic_validation_runtime_helpers=semantic_validation_runtime_helpers,
+        semantic_post_validation_helpers=semantic_post_validation_helpers,
+        semantic_validation_finalization_helpers=semantic_validation_finalization_helpers,
+        semantic_iteration_finalization_helpers=semantic_iteration_finalization_helpers,
+        semantic_ac0223_runtime_helpers=semantic_ac0223_runtime_helpers,
+        dual_arrow_badge_helpers=dual_arrow_badge_helpers,
+        dual_arrow_runtime_helpers=dual_arrow_runtime_helpers,
+        gradient_stripe_strategy_helpers=gradient_stripe_strategy_helpers,
+        non_composite_runtime_helpers=non_composite_runtime_helpers,
+        conversion_composite_helpers=conversion_composite_helpers,
+        semantic_badge_runtime_helpers=semantic_badge_runtime_helpers,
+        semantic_audit_record_fn=_semanticAuditRecord,
+        semantic_quality_flags_fn=_semanticQualityFlags,
+        render_embedded_raster_svg_fn=_renderEmbeddedRasterSvg,
+        print_fn=print,
+        build_iteration_mode_runner_dependencies_fn=iteration_mode_dependency_helpers.buildIterationModeRunnerDependenciesImpl,
+    )
+
     mode_runtime = iteration_orchestration_helpers.prepareIterationModeRuntimeImpl(
         perception_image=perc.img,
         params=params,
@@ -439,47 +467,7 @@ def runIterationPipeline(
             print_fn=print,
         ),
         build_iteration_mode_runners_fn=iteration_mode_runtime_helpers.buildIterationModeRunnersImpl,
-        mode_runner_dependencies=iteration_mode_dependency_helpers.buildIterationModeRunnerDependenciesImpl(
-            np_module=np,
-            make_badge_params_fn=Action.make_badge_params,
-            generate_badge_svg_fn=Action.generate_badge_svg,
-            validate_semantic_description_alignment_fn=Action.validate_semantic_description_alignment,
-            detect_semantic_primitives_fn=Action._detect_semantic_primitives,
-            build_semantic_connector_debug_line_fn=semantic_mismatch_reporting_helpers.buildSemanticConnectorDebugLineImpl,
-            build_semantic_mismatch_console_lines_fn=semantic_mismatch_reporting_helpers.buildSemanticMismatchConsoleLinesImpl,
-            build_semantic_mismatch_validation_log_lines_fn=semantic_validation_logging_helpers.buildSemanticMismatchValidationLogLinesImpl,
-            build_semantic_mismatch_outcome_fn=semantic_mismatch_runtime_helpers.buildSemanticMismatchOutcomeImpl,
-            build_semantic_audit_log_lines_fn=semantic_audit_logging_helpers.buildSemanticAuditLogLinesImpl,
-            build_semantic_audit_record_kwargs_fn=semantic_audit_runtime_helpers.buildSemanticAuditRecordKwargsImpl,
-            semantic_audit_record_fn=_semanticAuditRecord,
-            resolve_semantic_validation_debug_dir_fn=semantic_validation_context_helpers.resolveSemanticValidationDebugDirImpl,
-            collect_semantic_badge_validation_logs_fn=semantic_validation_runtime_helpers.collectSemanticBadgeValidationLogsImpl,
-            validate_badge_by_elements_fn=Action.validate_badge_by_elements,
-            prepare_semantic_badge_post_validation_fn=semantic_post_validation_helpers.prepareSemanticBadgePostValidationImpl,
-            append_semantic_connector_expectation_log_fn=semantic_validation_finalization_helpers.appendSemanticConnectorExpectationLogImpl,
-            build_semantic_ok_validation_outcome_fn=semantic_validation_finalization_helpers.buildSemanticOkValidationOutcomeImpl,
-            build_semantic_ok_validation_log_lines_fn=semantic_validation_logging_helpers.buildSemanticOkValidationLogLinesImpl,
-            semantic_quality_flags_fn=_semanticQualityFlags,
-            finalize_semantic_badge_run_fn=semantic_iteration_finalization_helpers.finalizeSemanticBadgeRunImpl,
-            finalize_semantic_badge_iteration_result_fn=semantic_validation_runtime_helpers.finalizeSemanticBadgeIterationResultImpl,
-            finalize_ac0223_badge_params_fn=semantic_ac0223_runtime_helpers.finalizeAc0223BadgeParamsImpl,
-            render_svg_to_numpy_fn=Action.render_svg_to_numpy,
-            calculate_error_fn=Action.calculate_error,
-            enforce_semantic_connector_expectation_fn=Action._enforce_semantic_connector_expectation,
-            apply_redraw_variation_fn=Action.apply_redraw_variation,
-            print_fn=print,
-            run_semantic_badge_iteration_fn=semantic_badge_runtime_helpers.runSemanticBadgeIterationImpl,
-            detect_dual_arrow_badge_params_fn=dual_arrow_badge_helpers.detectDualArrowBadgeParamsFromImageImpl,
-            generate_dual_arrow_badge_svg_fn=dual_arrow_badge_helpers.generateDualArrowBadgeSvgImpl,
-            run_dual_arrow_badge_iteration_fn=dual_arrow_runtime_helpers.runDualArrowBadgeIterationImpl,
-            render_embedded_raster_svg_fn=_renderEmbeddedRasterSvg,
-            build_gradient_stripe_svg_fn=gradient_stripe_strategy_helpers.buildGradientStripeSvgImpl,
-            build_gradient_stripe_validation_log_lines_fn=semantic_validation_context_helpers.buildNonCompositeGradientStripeValidationLogLinesImpl,
-            run_non_composite_iteration_fn=non_composite_runtime_helpers.runNonCompositeIterationImpl,
-            generate_composite_svg_fn=Action.generate_composite_svg,
-            create_diff_image_fn=Action.create_diff_image,
-            run_composite_iteration_fn=conversion_composite_helpers.runCompositeIterationImpl,
-        ),
+        mode_runner_dependencies=mode_runner_dependencies,
     )
     iteration_mode_runtime_bindings = iteration_context_helpers.extractIterationModeRuntimeBindingsImpl(
         mode_runtime=mode_runtime,
