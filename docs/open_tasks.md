@@ -270,6 +270,8 @@ focused on the actual project scope.
   - 2026-04-14: Umsetzung abgeschlossen inkl. Detailtest `test_build_prepared_iteration_mode_kwargs_impl_maps_mode_runners_and_callbacks`.
   - [x] C1.33: Mode-Runner-Dependency-Mapping aus `runIterationPipeline` in neues Modul `src/iCCModules/imageCompositeConverterIterationModeDependencies.py` ausgelagert; `src/iCCModules/imageCompositeConverterRemaining.py` delegiert den 40-Felder-Dependency-Block jetzt über den neuen Modul-Helper und bleibt API-kompatibel.
   - 2026-04-14: Umsetzung abgeschlossen inkl. Detailtest `test_build_iteration_mode_runner_dependencies_impl_maps_all_runtime_hooks`.
+  - [x] C1.34: Iteration-Context-Binding-Extraktion (Input-/Mode-Runtime-Entpacken) aus `runIterationPipeline` in `src/iCCModules/imageCompositeConverterIterationContext.py` ausgelagert; `src/iCCModules/imageCompositeConverterRemaining.py` delegiert die Dict-Entpackung jetzt über die neuen Modul-Helper und bleibt API-kompatibel.
+  - 2026-04-14: Umsetzung abgeschlossen inkl. Detailtests `test_extract_iteration_input_bindings_impl_maps_prepare_output_keys` und `test_extract_iteration_mode_runtime_bindings_impl_exposes_mode_runtime_fields`.
   - Nächster geplanter Schritt: weitere Initialisierungs-/Reporting-Teilstrecken aus `runIterationPipeline` in denselben kleinen Schritten extrahieren.
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.
