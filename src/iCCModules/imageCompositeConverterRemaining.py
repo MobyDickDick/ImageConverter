@@ -414,11 +414,13 @@ def runIterationPipeline(
         iteration_runtime_helpers=iteration_runtime_helpers,
         print_fn=print,
     )
-    base = iteration_runtime_state["base_name"]
-    iteration_artifact_callbacks = iteration_runtime_state["artifact_callbacks"]
-    _writeValidationLog = iteration_artifact_callbacks["write_validation_log"]
-    _writeAttemptArtifacts = iteration_artifact_callbacks["write_attempt_artifacts"]
-    _recordRenderFailure = iteration_artifact_callbacks["record_render_failure"]
+    iteration_runtime_bindings = iteration_initialization_helpers.extractIterationRuntimeBindingsImpl(
+        iteration_runtime_state=iteration_runtime_state,
+    )
+    base = iteration_runtime_bindings["base_name"]
+    _writeValidationLog = iteration_runtime_bindings["write_validation_log"]
+    _writeAttemptArtifacts = iteration_runtime_bindings["write_attempt_artifacts"]
+    _recordRenderFailure = iteration_runtime_bindings["record_render_failure"]
 
     elongated_rect_geometry = _looksLikeElongatedForegroundRect(perc.img)
     params, semantic_mode_visual_override = semantic_visual_override_helpers.applySemanticVisualOverrideImpl(

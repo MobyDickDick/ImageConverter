@@ -260,6 +260,8 @@ focused on the actual project scope.
   - 2026-04-13: Umsetzung abgeschlossen inkl. Detailtest `test_iou_impl_returns_overlap_ratio`.
   - [x] C1.28: Iterations-Initialisierungs-/Reporting-Teilstrecke (Header-Ausgabe + Output-Verzeichnis-Setup + Base/Log/Artifact-Callback-Wiring) aus `runIterationPipeline` in neues Modul `src/iCCModules/imageCompositeConverterIterationInitialization.py` ausgelagert; `src/iCCModules/imageCompositeConverterRemaining.py` delegiert die Initialisierung jetzt über den neuen Modul-Helper und bleibt API-kompatibel.
   - 2026-04-13: Umsetzung abgeschlossen inkl. Detailtest `test_prepare_iteration_runtime_impl_builds_base_and_callbacks`.
+  - [x] C1.29: Runtime-Binding-Extraktion (Base-Name + Artefakt-Callbacks) aus `runIterationPipeline` in `src/iCCModules/imageCompositeConverterIterationInitialization.py` ausgelagert; `src/iCCModules/imageCompositeConverterRemaining.py` delegiert das Callback-Unpacking jetzt über den neuen Modul-Helper und bleibt API-kompatibel.
+  - 2026-04-13: Umsetzung abgeschlossen inkl. Detailtest `test_extract_iteration_runtime_bindings_impl_exposes_runtime_callbacks`.
   - Nächster geplanter Schritt: weitere Initialisierungs-/Reporting-Teilstrecken aus `runIterationPipeline` in denselben kleinen Schritten extrahieren.
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.

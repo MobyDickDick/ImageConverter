@@ -8,6 +8,10 @@ class IterationInitializationResult(dict):
     """Dictionary-like container for initialized iteration runtime artifacts."""
 
 
+class IterationRuntimeBindingsResult(dict):
+    """Dictionary-like container for extracted iteration runtime callback bindings."""
+
+
 def prepareIterationRuntimeImpl(
     *,
     filename: str,
@@ -62,4 +66,17 @@ def prepareIterationRuntimeImpl(
         base_name=base_name,
         log_path=log_path,
         artifact_callbacks=artifact_callbacks,
+    )
+
+
+def extractIterationRuntimeBindingsImpl(
+    *,
+    iteration_runtime_state: dict[str, object],
+) -> IterationRuntimeBindingsResult:
+    artifact_callbacks = dict(iteration_runtime_state.get("artifact_callbacks") or {})
+    return IterationRuntimeBindingsResult(
+        base_name=str(iteration_runtime_state.get("base_name") or ""),
+        write_validation_log=artifact_callbacks.get("write_validation_log"),
+        write_attempt_artifacts=artifact_callbacks.get("write_attempt_artifacts"),
+        record_render_failure=artifact_callbacks.get("record_render_failure"),
     )
