@@ -264,6 +264,8 @@ focused on the actual project scope.
   - 2026-04-13: Umsetzung abgeschlossen inkl. Detailtest `test_extract_iteration_runtime_bindings_impl_exposes_runtime_callbacks`.
   - [x] C1.30: Mode-Runner-Dependency-Wiring (`semantic_badge`/`dual_arrow_badge`/`non_composite`/`composite`) aus `runIterationPipeline` in neues Modul `src/iCCModules/imageCompositeConverterIterationModeRuntime.py` ausgelagert; `src/iCCModules/imageCompositeConverterRemaining.py` delegiert das Lambda-Wiring jetzt über den neuen Modul-Helper und bleibt API-kompatibel.
   - 2026-04-14: Umsetzung abgeschlossen inkl. Detailtests `test_build_iteration_mode_runners_impl_wires_semantic_validation_collector` und `test_build_iteration_mode_runners_impl_wires_dual_arrow_detector_with_numpy_module`.
+  - [x] C1.31: Iterations-Mode-Orchestrierung (Elongated-Rect-Check + Semantik-Visual-Override + Mode-Runner-Build) aus `runIterationPipeline` in neues Modul `src/iCCModules/imageCompositeConverterIterationOrchestration.py` ausgelagert; `src/iCCModules/imageCompositeConverterRemaining.py` delegiert diese Vorbereitungssequenz jetzt über den neuen Modul-Helper und bleibt API-kompatibel.
+  - 2026-04-14: Umsetzung abgeschlossen inkl. Detailtest `test_prepare_iteration_mode_runtime_impl_applies_visual_override_then_builds_runners`.
   - Nächster geplanter Schritt: weitere Initialisierungs-/Reporting-Teilstrecken aus `runIterationPipeline` in denselben kleinen Schritten extrahieren.
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.
