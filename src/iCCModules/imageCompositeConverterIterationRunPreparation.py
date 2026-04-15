@@ -3,6 +3,78 @@ from __future__ import annotations
 from typing import Any, Callable
 
 
+def buildPrepareIterationInputRuntimeForRunKwargsImpl(
+    *,
+    img_path: str,
+    csv_path: str,
+    perception_cls,
+    reflection_cls,
+    detect_gradient_stripe_strategy_fn,
+    build_pending_semantic_audit_row_fn,
+    should_create_semantic_audit_for_base_name_fn,
+    get_base_name_from_file_fn,
+    build_semantic_audit_record_kwargs_fn,
+    semantic_audit_record_fn,
+    np_module,
+    print_fn,
+) -> dict[str, Any]:
+    return {
+        "img_path": img_path,
+        "csv_path": csv_path,
+        "perception_cls": perception_cls,
+        "reflection_cls": reflection_cls,
+        "detect_gradient_stripe_strategy_fn": detect_gradient_stripe_strategy_fn,
+        "build_pending_semantic_audit_row_fn": build_pending_semantic_audit_row_fn,
+        "should_create_semantic_audit_for_base_name_fn": should_create_semantic_audit_for_base_name_fn,
+        "get_base_name_from_file_fn": get_base_name_from_file_fn,
+        "build_semantic_audit_record_kwargs_fn": build_semantic_audit_record_kwargs_fn,
+        "semantic_audit_record_fn": semantic_audit_record_fn,
+        "np_module": np_module,
+        "print_fn": print_fn,
+    }
+
+
+def buildPrepareIterationRuntimeCallbacksForRunKwargsImpl(
+    *,
+    filename: str,
+    params: dict[str, Any],
+    reports_out_dir: str | None,
+    svg_out_dir: str,
+    diff_out_dir: str,
+    target_img,
+    width: int,
+    height: int,
+    run_seed: int,
+    pass_seed_offset: int,
+    time_ns_fn,
+    render_svg_to_numpy_fn,
+    create_diff_image_fn,
+    cv2_module,
+    iteration_setup_helpers,
+    iteration_runtime_helpers,
+    print_fn,
+) -> dict[str, Any]:
+    return {
+        "filename": filename,
+        "params": params,
+        "reports_out_dir": reports_out_dir,
+        "svg_out_dir": svg_out_dir,
+        "diff_out_dir": diff_out_dir,
+        "target_img": target_img,
+        "width": width,
+        "height": height,
+        "run_seed": run_seed,
+        "pass_seed_offset": pass_seed_offset,
+        "time_ns_fn": time_ns_fn,
+        "render_svg_to_numpy_fn": render_svg_to_numpy_fn,
+        "create_diff_image_fn": create_diff_image_fn,
+        "cv2_module": cv2_module,
+        "iteration_setup_helpers": iteration_setup_helpers,
+        "iteration_runtime_helpers": iteration_runtime_helpers,
+        "print_fn": print_fn,
+    }
+
+
 def prepareIterationInputRuntimeForRunImpl(
     *,
     prepare_iteration_inputs_fn: Callable[..., dict[str, Any] | None],

@@ -1,6 +1,59 @@
 from src.iCCModules import imageCompositeConverterIterationRunPreparation as helpers
 
 
+def test_build_prepare_iteration_input_runtime_for_run_kwargs_impl_maps_all_fields() -> None:
+    marker = object()
+    kwargs = helpers.buildPrepareIterationInputRuntimeForRunKwargsImpl(
+        img_path="images/AC0800_L.jpg",
+        csv_path="descriptions.csv",
+        perception_cls=marker,
+        reflection_cls=str,
+        detect_gradient_stripe_strategy_fn=marker,
+        build_pending_semantic_audit_row_fn=marker,
+        should_create_semantic_audit_for_base_name_fn=marker,
+        get_base_name_from_file_fn=marker,
+        build_semantic_audit_record_kwargs_fn=marker,
+        semantic_audit_record_fn=marker,
+        np_module=marker,
+        print_fn=print,
+    )
+
+    assert kwargs["img_path"] == "images/AC0800_L.jpg"
+    assert kwargs["csv_path"] == "descriptions.csv"
+    assert kwargs["perception_cls"] is marker
+    assert kwargs["semantic_audit_record_fn"] is marker
+    assert kwargs["print_fn"] is print
+
+
+def test_build_prepare_iteration_runtime_callbacks_for_run_kwargs_impl_maps_all_fields() -> None:
+    marker = object()
+    kwargs = helpers.buildPrepareIterationRuntimeCallbacksForRunKwargsImpl(
+        filename="AC0800_L.jpg",
+        params={"mode": "semantic_badge"},
+        reports_out_dir="reports",
+        svg_out_dir="svg",
+        diff_out_dir="diff",
+        target_img=marker,
+        width=128,
+        height=64,
+        run_seed=1,
+        pass_seed_offset=2,
+        time_ns_fn=marker,
+        render_svg_to_numpy_fn=marker,
+        create_diff_image_fn=marker,
+        cv2_module=marker,
+        iteration_setup_helpers=marker,
+        iteration_runtime_helpers=marker,
+        print_fn=print,
+    )
+
+    assert kwargs["filename"] == "AC0800_L.jpg"
+    assert kwargs["params"]["mode"] == "semantic_badge"
+    assert kwargs["run_seed"] == 1
+    assert kwargs["pass_seed_offset"] == 2
+    assert kwargs["print_fn"] is print
+
+
 def test_prepare_iteration_input_runtime_for_run_impl_returns_none_when_inputs_missing() -> None:
     calls: list[str] = []
 
