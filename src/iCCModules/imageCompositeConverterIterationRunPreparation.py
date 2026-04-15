@@ -109,3 +109,54 @@ def prepareIterationRuntimeCallbacksForRunImpl(
     return extract_iteration_runtime_callbacks_fn(
         iteration_runtime_bindings=iteration_runtime_bindings,
     )
+
+
+def prepareRunIterationPipelineLocalsImpl(
+    *,
+    prepare_iteration_input_runtime_for_run_fn: Callable[..., dict[str, Any] | None],
+    extract_iteration_input_runtime_locals_fn: Callable[..., dict[str, Any]],
+    prepare_iteration_runtime_callbacks_for_run_fn: Callable[..., dict[str, Any]],
+    extract_iteration_runtime_callback_locals_fn: Callable[..., dict[str, Any]],
+    prepare_iteration_mode_runtime_locals_for_run_fn: Callable[..., dict[str, Any]],
+    extract_run_iteration_pipeline_locals_fn: Callable[..., dict[str, Any]],
+    prepare_iteration_input_runtime_for_run_kwargs: dict[str, Any],
+    prepare_iteration_runtime_callbacks_for_run_kwargs_builder_fn: Callable[..., dict[str, Any]],
+    prepare_iteration_runtime_callbacks_for_run_shared_kwargs: dict[str, Any],
+    prepare_iteration_mode_runtime_locals_for_run_kwargs_builder_fn: Callable[..., dict[str, Any]],
+    prepare_iteration_mode_runtime_locals_for_run_shared_kwargs: dict[str, Any],
+) -> dict[str, Any] | None:
+    iteration_input_runtime_fields = prepare_iteration_input_runtime_for_run_fn(
+        **prepare_iteration_input_runtime_for_run_kwargs,
+    )
+    if iteration_input_runtime_fields is None:
+        return None
+
+    iteration_input_runtime_locals = extract_iteration_input_runtime_locals_fn(
+        iteration_input_runtime_fields=iteration_input_runtime_fields,
+    )
+    iteration_runtime_callbacks = prepare_iteration_runtime_callbacks_for_run_fn(
+        prepare_iteration_runtime_kwargs=prepare_iteration_runtime_callbacks_for_run_kwargs_builder_fn(
+            filename=iteration_input_runtime_locals["filename"],
+            params=iteration_input_runtime_locals["params"],
+            target_img=iteration_input_runtime_locals["perception"].img,
+            width=iteration_input_runtime_locals["width"],
+            height=iteration_input_runtime_locals["height"],
+            **prepare_iteration_runtime_callbacks_for_run_shared_kwargs,
+        ),
+    )
+    iteration_runtime_callback_locals = extract_iteration_runtime_callback_locals_fn(
+        iteration_runtime_callbacks=iteration_runtime_callbacks,
+    )
+    iteration_mode_runtime_locals = prepare_iteration_mode_runtime_locals_for_run_fn(
+        **prepare_iteration_mode_runtime_locals_for_run_kwargs_builder_fn(
+            params=iteration_input_runtime_locals["params"],
+            perception_image=iteration_input_runtime_locals["perception"].img,
+            stripe_strategy=iteration_input_runtime_locals["stripe_strategy"],
+            **prepare_iteration_mode_runtime_locals_for_run_shared_kwargs,
+        ),
+    )
+    return extract_run_iteration_pipeline_locals_fn(
+        iteration_input_runtime_locals=iteration_input_runtime_locals,
+        iteration_runtime_callback_locals=iteration_runtime_callback_locals,
+        iteration_mode_runtime_locals=iteration_mode_runtime_locals,
+    )
