@@ -133,3 +133,30 @@ def test_prepare_iteration_mode_runtime_bindings_for_run_impl_builds_mode_setup_
     assert captured["build_kwargs"]["build_iteration_mode_runner_dependencies_fn"] == "build_deps"
     assert result["params"] == {"mode": "composite"}
     assert sorted(result["mode_runners"].keys()) == ["composite"]
+
+
+def test_prepare_iteration_mode_runtime_locals_for_run_impl_prepares_and_extracts_locals():
+    captured = {}
+
+    def _prepare_runtime_bindings_for_run(**kwargs):
+        captured["prepare_kwargs"] = kwargs
+        return {
+            "params": {"mode": "semantic_badge"},
+            "semantic_mode_visual_override": "override",
+            "mode_runners": {"semantic_badge": object()},
+        }
+
+    def _extract_locals(*, iteration_mode_runtime_fields):
+        captured["extract_fields"] = iteration_mode_runtime_fields
+        return {"mode_runners": iteration_mode_runtime_fields["mode_runners"], "extra": True}
+
+    result = helpers.prepareIterationModeRuntimeLocalsForRunImpl(
+        prepare_iteration_mode_runtime_bindings_for_run_fn=_prepare_runtime_bindings_for_run,
+        extract_iteration_mode_runtime_locals_fn=_extract_locals,
+        prepare_iteration_mode_runtime_bindings_for_run_kwargs={"alpha": 1, "beta": 2},
+    )
+
+    assert captured["prepare_kwargs"] == {"alpha": 1, "beta": 2}
+    assert captured["extract_fields"]["semantic_mode_visual_override"] == "override"
+    assert sorted(result["mode_runners"].keys()) == ["semantic_badge"]
+    assert result["extra"] is True

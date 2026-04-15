@@ -176,3 +176,17 @@ def prepareIterationModeRuntimeBindingsForRunImpl(
             "print_fn": print_fn,
         },
     )
+
+
+def prepareIterationModeRuntimeLocalsForRunImpl(
+    *,
+    prepare_iteration_mode_runtime_bindings_for_run_fn,
+    extract_iteration_mode_runtime_locals_fn,
+    prepare_iteration_mode_runtime_bindings_for_run_kwargs: dict[str, object],
+) -> dict[str, object]:
+    iteration_mode_runtime_fields = prepare_iteration_mode_runtime_bindings_for_run_fn(
+        **prepare_iteration_mode_runtime_bindings_for_run_kwargs,
+    )
+    return extract_iteration_mode_runtime_locals_fn(
+        iteration_mode_runtime_fields=iteration_mode_runtime_fields,
+    )

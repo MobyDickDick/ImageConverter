@@ -440,8 +440,10 @@ def runIterationPipeline(
         iteration_runtime_callbacks=iteration_runtime_callbacks,
     )
 
-    iteration_mode_runtime_fields = iteration_mode_runtime_preparation_helpers.prepareIterationModeRuntimeBindingsForRunImpl(
-        **iteration_mode_runtime_preparation_helpers.buildPrepareIterationModeRuntimeBindingsForRunKwargsImpl(
+    iteration_mode_runtime_locals = iteration_mode_runtime_preparation_helpers.prepareIterationModeRuntimeLocalsForRunImpl(
+        prepare_iteration_mode_runtime_bindings_for_run_fn=iteration_mode_runtime_preparation_helpers.prepareIterationModeRuntimeBindingsForRunImpl,
+        extract_iteration_mode_runtime_locals_fn=iteration_bindings_helpers.extractIterationModeRuntimeLocalsImpl,
+        prepare_iteration_mode_runtime_bindings_for_run_kwargs=iteration_mode_runtime_preparation_helpers.buildPrepareIterationModeRuntimeBindingsForRunKwargsImpl(
             build_prepare_iteration_mode_runtime_for_run_kwargs_fn=iteration_mode_setup_helpers.buildPrepareIterationModeRuntimeForRunKwargsImpl,
             prepare_iteration_mode_runtime_for_run_fn=iteration_mode_preparation_helpers.prepareIterationModeRuntimeForRunImpl,
             np_module=np,
@@ -478,9 +480,6 @@ def runIterationPipeline(
             render_embedded_raster_svg_fn=_renderEmbeddedRasterSvg,
             print_fn=print,
         ),
-    )
-    iteration_mode_runtime_locals = iteration_bindings_helpers.extractIterationModeRuntimeLocalsImpl(
-        iteration_mode_runtime_fields=iteration_mode_runtime_fields,
     )
     run_locals = iteration_bindings_helpers.extractRunIterationPipelineLocalsImpl(
         iteration_input_runtime_locals=iteration_input_runtime_locals,
