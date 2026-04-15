@@ -440,7 +440,7 @@ def runIterationPipeline(
     _writeAttemptArtifacts = iteration_runtime_callbacks["write_attempt_artifacts"]
     _recordRenderFailure = iteration_runtime_callbacks["record_render_failure"]
 
-    iteration_mode_runtime_bindings = iteration_mode_runtime_preparation_helpers.prepareIterationModeRuntimeBindingsForRunImpl(
+    iteration_mode_runtime_fields = iteration_mode_runtime_preparation_helpers.prepareIterationModeRuntimeBindingsForRunImpl(
         build_prepare_iteration_mode_runtime_for_run_kwargs_fn=iteration_mode_setup_helpers.buildPrepareIterationModeRuntimeForRunKwargsImpl,
         prepare_iteration_mode_runtime_for_run_fn=iteration_mode_preparation_helpers.prepareIterationModeRuntimeForRunImpl,
         np_module=np,
@@ -476,9 +476,6 @@ def runIterationPipeline(
         semantic_quality_flags_fn=_semanticQualityFlags,
         render_embedded_raster_svg_fn=_renderEmbeddedRasterSvg,
         print_fn=print,
-    )
-    iteration_mode_runtime_fields = iteration_bindings_helpers.extractIterationModeRuntimeBindingsImpl(
-        iteration_mode_runtime_bindings=iteration_mode_runtime_bindings,
     )
     params = iteration_mode_runtime_fields["params"]
     semantic_mode_visual_override = iteration_mode_runtime_fields["semantic_mode_visual_override"]
