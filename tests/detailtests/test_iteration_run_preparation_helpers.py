@@ -93,3 +93,73 @@ def test_prepare_iteration_runtime_callbacks_for_run_impl_wires_extraction_seque
     )
 
     assert result["base_name"] == "AC0800_L"
+
+
+def test_prepare_run_iteration_pipeline_locals_impl_merges_all_runtime_sections() -> None:
+    marker_img = object()
+
+    class _Perception:
+        img = marker_img
+
+    def _prepare_input_runtime(**kwargs):
+        assert kwargs == {"input": "kwargs"}
+        return {"input_runtime": "fields"}
+
+    def _extract_input_runtime_locals(**kwargs):
+        assert kwargs["iteration_input_runtime_fields"] == {"input_runtime": "fields"}
+        return {
+            "filename": "AC0800_L.jpg",
+            "params": {"mode": "semantic_badge"},
+            "perception": _Perception(),
+            "width": 64,
+            "height": 32,
+            "stripe_strategy": "adaptive",
+        }
+
+    def _build_runtime_kwargs(**kwargs):
+        assert kwargs["filename"] == "AC0800_L.jpg"
+        assert kwargs["params"] == {"mode": "semantic_badge"}
+        assert kwargs["target_img"] is marker_img
+        assert kwargs["width"] == 64
+        assert kwargs["height"] == 32
+        assert kwargs["extra"] == "runtime"
+        return {"runtime": "kwargs"}
+
+    def _prepare_runtime_callbacks(**kwargs):
+        assert kwargs["prepare_iteration_runtime_kwargs"] == {"runtime": "kwargs"}
+        return {"callbacks": "fields"}
+
+    def _extract_runtime_callback_locals(**kwargs):
+        assert kwargs["iteration_runtime_callbacks"] == {"callbacks": "fields"}
+        return {"write_validation_log": object()}
+
+    def _build_mode_kwargs(**kwargs):
+        assert kwargs["params"] == {"mode": "semantic_badge"}
+        assert kwargs["perception_image"] is marker_img
+        assert kwargs["stripe_strategy"] == "adaptive"
+        assert kwargs["extra"] == "mode"
+        return {"mode": "kwargs"}
+
+    def _prepare_mode_locals(**kwargs):
+        assert kwargs == {"mode": "kwargs"}
+        return {"mode_locals": "ok"}
+
+    def _extract_run_locals(**kwargs):
+        assert kwargs["iteration_mode_runtime_locals"] == {"mode_locals": "ok"}
+        return {"merged": "locals"}
+
+    result = helpers.prepareRunIterationPipelineLocalsImpl(
+        prepare_iteration_input_runtime_for_run_fn=_prepare_input_runtime,
+        extract_iteration_input_runtime_locals_fn=_extract_input_runtime_locals,
+        prepare_iteration_runtime_callbacks_for_run_fn=_prepare_runtime_callbacks,
+        extract_iteration_runtime_callback_locals_fn=_extract_runtime_callback_locals,
+        prepare_iteration_mode_runtime_locals_for_run_fn=_prepare_mode_locals,
+        extract_run_iteration_pipeline_locals_fn=_extract_run_locals,
+        prepare_iteration_input_runtime_for_run_kwargs={"input": "kwargs"},
+        prepare_iteration_runtime_callbacks_for_run_kwargs_builder_fn=_build_runtime_kwargs,
+        prepare_iteration_runtime_callbacks_for_run_shared_kwargs={"extra": "runtime"},
+        prepare_iteration_mode_runtime_locals_for_run_kwargs_builder_fn=_build_mode_kwargs,
+        prepare_iteration_mode_runtime_locals_for_run_shared_kwargs={"extra": "mode"},
+    )
+
+    assert result == {"merged": "locals"}
