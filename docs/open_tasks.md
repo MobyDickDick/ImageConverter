@@ -290,6 +290,8 @@ focused on the actual project scope.
   - 2026-04-15: Umsetzung abgeschlossen inkl. Detailtest `test_prepare_iteration_mode_runtime_bindings_impl_builds_kwargs_and_extracts_bindings`.
   - [x] C1.43: Aufbau der Mode-Setup-Kwargs für die Runtime-Bindings aus `runIterationPipeline` in `src/iCCModules/imageCompositeConverterIterationModeRuntimePreparation.py` zentralisiert (`prepareIterationModeRuntimeBindingsForRunImpl`); `src/iCCModules/imageCompositeConverterRemaining.py` delegiert den bisherigen Inline-`dict`-Block jetzt über den neuen Helper und bleibt API-kompatibel.
   - 2026-04-15: Umsetzung abgeschlossen inkl. Detailtest `test_prepare_iteration_mode_runtime_bindings_for_run_impl_builds_mode_setup_kwargs`.
+  - [x] C1.44: Iterations-Mode-Runtime-Binding-Extraktion (`params`, `semantic_mode_visual_override`, `mode_runners`) aus `runIterationPipeline` in `src/iCCModules/imageCompositeConverterIterationBindings.py` ausgelagert; `src/iCCModules/imageCompositeConverterRemaining.py` delegiert die Feldauswahl jetzt über den neuen Modul-Helper und bleibt API-kompatibel.
+  - 2026-04-15: Umsetzung abgeschlossen inkl. Detailtest `test_extract_iteration_mode_runtime_bindings_impl_maps_expected_keys`.
   - Nächster geplanter Schritt: weitere Ausführungs-/Kontext-Teilstrecken aus `runIterationPipeline` in denselben kleinen Schritten extrahieren.
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.

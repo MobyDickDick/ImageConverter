@@ -477,9 +477,12 @@ def runIterationPipeline(
         render_embedded_raster_svg_fn=_renderEmbeddedRasterSvg,
         print_fn=print,
     )
-    params = iteration_mode_runtime_bindings["params"]
-    semantic_mode_visual_override = iteration_mode_runtime_bindings["semantic_mode_visual_override"]
-    mode_runners = iteration_mode_runtime_bindings["mode_runners"]
+    iteration_mode_runtime_fields = iteration_bindings_helpers.extractIterationModeRuntimeBindingsImpl(
+        iteration_mode_runtime_bindings=iteration_mode_runtime_bindings,
+    )
+    params = iteration_mode_runtime_fields["params"]
+    semantic_mode_visual_override = iteration_mode_runtime_fields["semantic_mode_visual_override"]
+    mode_runners = iteration_mode_runtime_fields["mode_runners"]
 
     prepared_mode_builder_kwargs = iteration_execution_helpers.buildPreparedModeBuilderKwargsImpl(
         params=params,

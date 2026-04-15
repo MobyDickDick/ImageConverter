@@ -30,3 +30,14 @@ def extractIterationRuntimeCallbacksImpl(
         "write_attempt_artifacts": iteration_runtime_bindings["write_attempt_artifacts"],
         "record_render_failure": iteration_runtime_bindings["record_render_failure"],
     }
+
+
+def extractIterationModeRuntimeBindingsImpl(
+    *,
+    iteration_mode_runtime_bindings: dict[str, Any],
+) -> dict[str, Any]:
+    return {
+        "params": iteration_mode_runtime_bindings["params"],
+        "semantic_mode_visual_override": iteration_mode_runtime_bindings["semantic_mode_visual_override"],
+        "mode_runners": iteration_mode_runtime_bindings["mode_runners"],
+    }

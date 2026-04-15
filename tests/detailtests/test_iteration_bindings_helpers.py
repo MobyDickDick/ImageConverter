@@ -53,3 +53,23 @@ def test_extract_iteration_runtime_callbacks_impl_maps_expected_keys() -> None:
         "record_render_failure",
     }
     assert result["base_name"] == "AC0811_M"
+
+
+def test_extract_iteration_mode_runtime_bindings_impl_maps_expected_keys() -> None:
+    source = {
+        "params": {"mode": "semantic_badge"},
+        "semantic_mode_visual_override": True,
+        "mode_runners": {"semantic_badge": object()},
+        "unused": "value",
+    }
+
+    result = helpers.extractIterationModeRuntimeBindingsImpl(
+        iteration_mode_runtime_bindings=source,
+    )
+
+    assert set(result.keys()) == {
+        "params",
+        "semantic_mode_visual_override",
+        "mode_runners",
+    }
+    assert result["semantic_mode_visual_override"] is True
