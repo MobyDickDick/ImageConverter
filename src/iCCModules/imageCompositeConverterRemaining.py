@@ -21,6 +21,7 @@ from src.iCCModules import imageCompositeConverterIterationModePreparation as it
 from src.iCCModules import imageCompositeConverterIterationModeSetup as iteration_mode_setup_helpers
 from src.iCCModules import imageCompositeConverterIterationOrchestration as iteration_orchestration_helpers
 from src.iCCModules import imageCompositeConverterIterationPreparation as iteration_preparation_helpers
+from src.iCCModules import imageCompositeConverterIterationRunPreparation as iteration_run_preparation_helpers
 from src.iCCModules import imageCompositeConverterIterationRuntime as iteration_runtime_helpers
 from src.iCCModules import imageCompositeConverterIterationSetup as iteration_setup_helpers
 from src.iCCModules import imageCompositeConverterNaming as naming_helpers
@@ -378,28 +379,27 @@ def runIterationPipeline(
         fitz_module=fitz,
     )
 
-    iteration_inputs = iteration_preparation_helpers.prepareIterationInputsImpl(
-        img_path=img_path,
-        csv_path=csv_path,
-        perception_cls=Perception,
-        reflection_cls=Reflection,
-        detect_gradient_stripe_strategy_fn=gradient_stripe_strategy_helpers.detectGradientStripeStrategyImpl,
-        build_pending_semantic_audit_row_fn=semantic_audit_bootstrap_helpers.buildPendingSemanticAuditRowImpl,
-        should_create_semantic_audit_for_base_name_fn=semantic_audit_runtime_helpers.shouldCreateSemanticAuditForBaseNameImpl,
-        get_base_name_from_file_fn=getBaseNameFromFile,
-        build_semantic_audit_record_kwargs_fn=semantic_audit_runtime_helpers.buildSemanticAuditRecordKwargsImpl,
-        semantic_audit_record_fn=_semanticAuditRecord,
-        np_module=np,
-        print_fn=print,
+    iteration_input_runtime_fields = iteration_run_preparation_helpers.prepareIterationInputRuntimeForRunImpl(
+        prepare_iteration_inputs_fn=iteration_preparation_helpers.prepareIterationInputsImpl,
+        extract_iteration_input_bindings_fn=iteration_context_helpers.extractIterationInputBindingsImpl,
+        extract_iteration_input_runtime_fields_fn=iteration_bindings_helpers.extractIterationInputRuntimeFieldsImpl,
+        prepare_iteration_inputs_kwargs={
+            "img_path": img_path,
+            "csv_path": csv_path,
+            "perception_cls": Perception,
+            "reflection_cls": Reflection,
+            "detect_gradient_stripe_strategy_fn": gradient_stripe_strategy_helpers.detectGradientStripeStrategyImpl,
+            "build_pending_semantic_audit_row_fn": semantic_audit_bootstrap_helpers.buildPendingSemanticAuditRowImpl,
+            "should_create_semantic_audit_for_base_name_fn": semantic_audit_runtime_helpers.shouldCreateSemanticAuditForBaseNameImpl,
+            "get_base_name_from_file_fn": getBaseNameFromFile,
+            "build_semantic_audit_record_kwargs_fn": semantic_audit_runtime_helpers.buildSemanticAuditRecordKwargsImpl,
+            "semantic_audit_record_fn": _semanticAuditRecord,
+            "np_module": np,
+            "print_fn": print,
+        },
     )
-    if iteration_inputs is None:
+    if iteration_input_runtime_fields is None:
         return None
-    iteration_input_bindings = iteration_context_helpers.extractIterationInputBindingsImpl(
-        iteration_inputs=iteration_inputs,
-    )
-    iteration_input_runtime_fields = iteration_bindings_helpers.extractIterationInputRuntimeFieldsImpl(
-        iteration_input_bindings=iteration_input_bindings,
-    )
     folder_path = iteration_input_runtime_fields["folder_path"]
     filename = iteration_input_runtime_fields["filename"]
     perc = iteration_input_runtime_fields["perception"]
@@ -410,30 +410,29 @@ def runIterationPipeline(
     stripe_strategy = iteration_input_runtime_fields["stripe_strategy"]
     semantic_audit_row = iteration_input_runtime_fields["semantic_audit_row"]
 
-    iteration_runtime_state = iteration_initialization_helpers.prepareIterationRuntimeImpl(
-        filename=filename,
-        params=params,
-        reports_out_dir=reports_out_dir,
-        svg_out_dir=svg_out_dir,
-        diff_out_dir=diff_out_dir,
-        target_img=perc.img,
-        width=w,
-        height=h,
-        run_seed=int(Action.STOCHASTIC_RUN_SEED),
-        pass_seed_offset=int(Action.STOCHASTIC_SEED_OFFSET),
-        time_ns_fn=time.time_ns,
-        render_svg_to_numpy_fn=Action.render_svg_to_numpy,
-        create_diff_image_fn=Action.create_diff_image,
-        cv2_module=cv2,
-        iteration_setup_helpers=iteration_setup_helpers,
-        iteration_runtime_helpers=iteration_runtime_helpers,
-        print_fn=print,
-    )
-    iteration_runtime_bindings = iteration_initialization_helpers.extractIterationRuntimeBindingsImpl(
-        iteration_runtime_state=iteration_runtime_state,
-    )
-    iteration_runtime_callbacks = iteration_bindings_helpers.extractIterationRuntimeCallbacksImpl(
-        iteration_runtime_bindings=iteration_runtime_bindings,
+    iteration_runtime_callbacks = iteration_run_preparation_helpers.prepareIterationRuntimeCallbacksForRunImpl(
+        prepare_iteration_runtime_fn=iteration_initialization_helpers.prepareIterationRuntimeImpl,
+        extract_iteration_runtime_bindings_fn=iteration_initialization_helpers.extractIterationRuntimeBindingsImpl,
+        extract_iteration_runtime_callbacks_fn=iteration_bindings_helpers.extractIterationRuntimeCallbacksImpl,
+        prepare_iteration_runtime_kwargs={
+            "filename": filename,
+            "params": params,
+            "reports_out_dir": reports_out_dir,
+            "svg_out_dir": svg_out_dir,
+            "diff_out_dir": diff_out_dir,
+            "target_img": perc.img,
+            "width": w,
+            "height": h,
+            "run_seed": int(Action.STOCHASTIC_RUN_SEED),
+            "pass_seed_offset": int(Action.STOCHASTIC_SEED_OFFSET),
+            "time_ns_fn": time.time_ns,
+            "render_svg_to_numpy_fn": Action.render_svg_to_numpy,
+            "create_diff_image_fn": Action.create_diff_image,
+            "cv2_module": cv2,
+            "iteration_setup_helpers": iteration_setup_helpers,
+            "iteration_runtime_helpers": iteration_runtime_helpers,
+            "print_fn": print,
+        },
     )
     base = iteration_runtime_callbacks["base_name"]
     _writeValidationLog = iteration_runtime_callbacks["write_validation_log"]
