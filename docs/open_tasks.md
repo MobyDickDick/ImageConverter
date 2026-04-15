@@ -300,6 +300,8 @@ focused on the actual project scope.
   - 2026-04-15: Umsetzung abgeschlossen inkl. Detailtests `test_extract_iteration_input_runtime_locals_impl_maps_expected_keys`, `test_extract_iteration_runtime_callback_locals_impl_maps_expected_keys` und `test_extract_iteration_mode_runtime_locals_impl_maps_expected_keys`.
   - [x] C1.48: Run-Finalisierungs-Kwargs (`runPreparedIterationAndFinalize`) aus `runIterationPipeline` in neues Modul `src/iCCModules/imageCompositeConverterIterationExecutionContext.py` ausgelagert; `src/iCCModules/imageCompositeConverterRemaining.py` delegiert den bisherigen Inline-Kwargs-Block jetzt über den neuen Modul-Helper und bleibt API-kompatibel.
   - 2026-04-15: Umsetzung abgeschlossen inkl. Detailtest `test_build_run_prepared_iteration_and_finalize_kwargs_impl_maps_expected_keys`.
+  - [x] C1.49: Run-Lokalsammlung (Input-/Callback-/Mode-Runtime-Merge) aus `runIterationPipeline` in `src/iCCModules/imageCompositeConverterIterationBindings.py` zentralisiert (`extractRunIterationPipelineLocalsImpl`); `src/iCCModules/imageCompositeConverterRemaining.py` delegiert den bisherigen lokalen Entpack-/Zuordnungsblock jetzt über den neuen Modul-Helper und bleibt API-kompatibel.
+  - 2026-04-15: Umsetzung abgeschlossen inkl. Detailtest `test_extract_run_iteration_pipeline_locals_impl_maps_expected_keys`.
   - Nächster geplanter Schritt: weitere Ausführungs-/Kontext-Teilstrecken aus `runIterationPipeline` in denselben kleinen Schritten extrahieren.
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.

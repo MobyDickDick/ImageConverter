@@ -81,3 +81,28 @@ def extractIterationModeRuntimeLocalsImpl(
         "semantic_mode_visual_override": iteration_mode_runtime_fields["semantic_mode_visual_override"],
         "mode_runners": iteration_mode_runtime_fields["mode_runners"],
     }
+
+
+def extractRunIterationPipelineLocalsImpl(
+    *,
+    iteration_input_runtime_locals: dict[str, Any],
+    iteration_runtime_callback_locals: dict[str, Any],
+    iteration_mode_runtime_locals: dict[str, Any],
+) -> dict[str, Any]:
+    return {
+        "folder_path": iteration_input_runtime_locals["folder_path"],
+        "filename": iteration_input_runtime_locals["filename"],
+        "perception": iteration_input_runtime_locals["perception"],
+        "width": iteration_input_runtime_locals["width"],
+        "height": iteration_input_runtime_locals["height"],
+        "description": iteration_input_runtime_locals["description"],
+        "params": iteration_mode_runtime_locals["params"],
+        "stripe_strategy": iteration_input_runtime_locals["stripe_strategy"],
+        "semantic_audit_row": iteration_input_runtime_locals["semantic_audit_row"],
+        "base_name": iteration_runtime_callback_locals["base_name"],
+        "write_validation_log": iteration_runtime_callback_locals["write_validation_log"],
+        "write_attempt_artifacts": iteration_runtime_callback_locals["write_attempt_artifacts"],
+        "record_render_failure": iteration_runtime_callback_locals["record_render_failure"],
+        "semantic_mode_visual_override": iteration_mode_runtime_locals["semantic_mode_visual_override"],
+        "mode_runners": iteration_mode_runtime_locals["mode_runners"],
+    }
