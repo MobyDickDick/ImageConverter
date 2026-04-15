@@ -20,6 +20,23 @@ def extractIterationInputRuntimeFieldsImpl(
     }
 
 
+def extractIterationInputRuntimeLocalsImpl(
+    *,
+    iteration_input_runtime_fields: dict[str, Any],
+) -> dict[str, Any]:
+    return {
+        "folder_path": iteration_input_runtime_fields["folder_path"],
+        "filename": iteration_input_runtime_fields["filename"],
+        "perception": iteration_input_runtime_fields["perception"],
+        "width": iteration_input_runtime_fields["width"],
+        "height": iteration_input_runtime_fields["height"],
+        "description": iteration_input_runtime_fields["description"],
+        "params": iteration_input_runtime_fields["params"],
+        "stripe_strategy": iteration_input_runtime_fields["stripe_strategy"],
+        "semantic_audit_row": iteration_input_runtime_fields["semantic_audit_row"],
+    }
+
+
 def extractIterationRuntimeCallbacksImpl(
     *,
     iteration_runtime_bindings: dict[str, Any],
@@ -32,6 +49,18 @@ def extractIterationRuntimeCallbacksImpl(
     }
 
 
+def extractIterationRuntimeCallbackLocalsImpl(
+    *,
+    iteration_runtime_callbacks: dict[str, Any],
+) -> dict[str, Any]:
+    return {
+        "base_name": iteration_runtime_callbacks["base_name"],
+        "write_validation_log": iteration_runtime_callbacks["write_validation_log"],
+        "write_attempt_artifacts": iteration_runtime_callbacks["write_attempt_artifacts"],
+        "record_render_failure": iteration_runtime_callbacks["record_render_failure"],
+    }
+
+
 def extractIterationModeRuntimeBindingsImpl(
     *,
     iteration_mode_runtime_bindings: dict[str, Any],
@@ -40,4 +69,15 @@ def extractIterationModeRuntimeBindingsImpl(
         "params": iteration_mode_runtime_bindings["params"],
         "semantic_mode_visual_override": iteration_mode_runtime_bindings["semantic_mode_visual_override"],
         "mode_runners": iteration_mode_runtime_bindings["mode_runners"],
+    }
+
+
+def extractIterationModeRuntimeLocalsImpl(
+    *,
+    iteration_mode_runtime_fields: dict[str, Any],
+) -> dict[str, Any]:
+    return {
+        "params": iteration_mode_runtime_fields["params"],
+        "semantic_mode_visual_override": iteration_mode_runtime_fields["semantic_mode_visual_override"],
+        "mode_runners": iteration_mode_runtime_fields["mode_runners"],
     }

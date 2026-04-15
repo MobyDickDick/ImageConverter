@@ -296,6 +296,8 @@ focused on the actual project scope.
   - 2026-04-15: Umsetzung abgeschlossen; `runIterationPipeline` nutzt den Rückgabewert aus `imageCompositeConverterIterationModeRuntimePreparation.py` ohne zusätzlichen Zwischen-Schritt.
   - [x] C1.46: Aufbau der Run-Preparation-Kwargs (`prepareIterationInputs` + `prepareIterationRuntime`) aus `runIterationPipeline` in `src/iCCModules/imageCompositeConverterIterationRunPreparation.py` zentralisiert; `src/iCCModules/imageCompositeConverterRemaining.py` delegiert die beiden großen Inline-Dict-Blöcke jetzt über neue Modul-Helper und bleibt API-kompatibel.
   - 2026-04-15: Umsetzung abgeschlossen inkl. Detailtests `test_build_prepare_iteration_input_runtime_for_run_kwargs_impl_maps_all_fields` und `test_build_prepare_iteration_runtime_callbacks_for_run_kwargs_impl_maps_all_fields`.
+  - [x] C1.47: Runtime-Binding-Entpackung (Input-/Callback-/Mode-Felder) aus `runIterationPipeline` in `src/iCCModules/imageCompositeConverterIterationBindings.py` zentralisiert; `src/iCCModules/imageCompositeConverterRemaining.py` delegiert die drei lokalen Feld-Mappings jetzt über neue Modul-Helper und bleibt API-kompatibel.
+  - 2026-04-15: Umsetzung abgeschlossen inkl. Detailtests `test_extract_iteration_input_runtime_locals_impl_maps_expected_keys`, `test_extract_iteration_runtime_callback_locals_impl_maps_expected_keys` und `test_extract_iteration_mode_runtime_locals_impl_maps_expected_keys`.
   - Nächster geplanter Schritt: weitere Ausführungs-/Kontext-Teilstrecken aus `runIterationPipeline` in denselben kleinen Schritten extrahieren.
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.

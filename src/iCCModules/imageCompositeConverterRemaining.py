@@ -401,15 +401,18 @@ def runIterationPipeline(
     )
     if iteration_input_runtime_fields is None:
         return None
-    folder_path = iteration_input_runtime_fields["folder_path"]
-    filename = iteration_input_runtime_fields["filename"]
-    perc = iteration_input_runtime_fields["perception"]
-    w = iteration_input_runtime_fields["width"]
-    h = iteration_input_runtime_fields["height"]
-    desc = iteration_input_runtime_fields["description"]
-    params = iteration_input_runtime_fields["params"]
-    stripe_strategy = iteration_input_runtime_fields["stripe_strategy"]
-    semantic_audit_row = iteration_input_runtime_fields["semantic_audit_row"]
+    iteration_input_runtime_locals = iteration_bindings_helpers.extractIterationInputRuntimeLocalsImpl(
+        iteration_input_runtime_fields=iteration_input_runtime_fields,
+    )
+    folder_path = iteration_input_runtime_locals["folder_path"]
+    filename = iteration_input_runtime_locals["filename"]
+    perc = iteration_input_runtime_locals["perception"]
+    w = iteration_input_runtime_locals["width"]
+    h = iteration_input_runtime_locals["height"]
+    desc = iteration_input_runtime_locals["description"]
+    params = iteration_input_runtime_locals["params"]
+    stripe_strategy = iteration_input_runtime_locals["stripe_strategy"]
+    semantic_audit_row = iteration_input_runtime_locals["semantic_audit_row"]
 
     iteration_runtime_callbacks = iteration_run_preparation_helpers.prepareIterationRuntimeCallbacksForRunImpl(
         prepare_iteration_runtime_fn=iteration_initialization_helpers.prepareIterationRuntimeImpl,
@@ -435,10 +438,13 @@ def runIterationPipeline(
             print_fn=print,
         ),
     )
-    base = iteration_runtime_callbacks["base_name"]
-    _writeValidationLog = iteration_runtime_callbacks["write_validation_log"]
-    _writeAttemptArtifacts = iteration_runtime_callbacks["write_attempt_artifacts"]
-    _recordRenderFailure = iteration_runtime_callbacks["record_render_failure"]
+    iteration_runtime_callback_locals = iteration_bindings_helpers.extractIterationRuntimeCallbackLocalsImpl(
+        iteration_runtime_callbacks=iteration_runtime_callbacks,
+    )
+    base = iteration_runtime_callback_locals["base_name"]
+    _writeValidationLog = iteration_runtime_callback_locals["write_validation_log"]
+    _writeAttemptArtifacts = iteration_runtime_callback_locals["write_attempt_artifacts"]
+    _recordRenderFailure = iteration_runtime_callback_locals["record_render_failure"]
 
     iteration_mode_runtime_fields = iteration_mode_runtime_preparation_helpers.prepareIterationModeRuntimeBindingsForRunImpl(
         build_prepare_iteration_mode_runtime_for_run_kwargs_fn=iteration_mode_setup_helpers.buildPrepareIterationModeRuntimeForRunKwargsImpl,
@@ -477,9 +483,12 @@ def runIterationPipeline(
         render_embedded_raster_svg_fn=_renderEmbeddedRasterSvg,
         print_fn=print,
     )
-    params = iteration_mode_runtime_fields["params"]
-    semantic_mode_visual_override = iteration_mode_runtime_fields["semantic_mode_visual_override"]
-    mode_runners = iteration_mode_runtime_fields["mode_runners"]
+    iteration_mode_runtime_locals = iteration_bindings_helpers.extractIterationModeRuntimeLocalsImpl(
+        iteration_mode_runtime_fields=iteration_mode_runtime_fields,
+    )
+    params = iteration_mode_runtime_locals["params"]
+    semantic_mode_visual_override = iteration_mode_runtime_locals["semantic_mode_visual_override"]
+    mode_runners = iteration_mode_runtime_locals["mode_runners"]
 
     prepared_mode_builder_kwargs = iteration_execution_helpers.buildPreparedModeBuilderKwargsImpl(
         params=params,
