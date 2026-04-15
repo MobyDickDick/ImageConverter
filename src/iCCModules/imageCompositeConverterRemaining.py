@@ -487,8 +487,8 @@ def runIterationPipeline(
         iteration_mode_runtime_locals=iteration_mode_runtime_locals,
     )
 
-    prepared_mode_builder_kwargs = iteration_execution_helpers.buildPreparedModeBuilderKwargsImpl(
-        **iteration_execution_context_helpers.buildPreparedModeBuilderKwargsForRunImpl(
+    prepared_mode_builder_kwargs = (
+        iteration_execution_context_helpers.buildPreparedModeBuilderKwargsForRunPipelineImpl(
             run_locals=run_locals,
             img_path=img_path,
             max_iterations=max_iterations,
@@ -497,7 +497,9 @@ def runIterationPipeline(
             debug_ac0811_dir=debug_ac0811_dir,
             calculate_error_fn=Action.calculate_error,
             print_fn=print,
-        ),
+            build_prepared_mode_builder_kwargs_for_run_fn=iteration_execution_context_helpers.buildPreparedModeBuilderKwargsForRunImpl,
+            build_prepared_mode_builder_kwargs_fn=iteration_execution_helpers.buildPreparedModeBuilderKwargsImpl,
+        )
     )
 
     return iteration_execution_context_helpers.runPreparedIterationAndFinalizeForRunImpl(

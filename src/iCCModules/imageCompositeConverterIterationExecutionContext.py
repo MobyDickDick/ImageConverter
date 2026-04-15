@@ -60,6 +60,33 @@ def buildRunPreparedIterationAndFinalizeKwargsImpl(
     }
 
 
+def buildPreparedModeBuilderKwargsForRunPipelineImpl(
+    *,
+    run_locals: dict[str, Any],
+    img_path: str,
+    max_iterations: int,
+    badge_validation_rounds: int,
+    debug_element_diff_dir: str | None,
+    debug_ac0811_dir: str | None,
+    calculate_error_fn,
+    print_fn,
+    build_prepared_mode_builder_kwargs_for_run_fn,
+    build_prepared_mode_builder_kwargs_fn,
+):
+    return build_prepared_mode_builder_kwargs_fn(
+        **build_prepared_mode_builder_kwargs_for_run_fn(
+            run_locals=run_locals,
+            img_path=img_path,
+            max_iterations=max_iterations,
+            badge_validation_rounds=badge_validation_rounds,
+            debug_element_diff_dir=debug_element_diff_dir,
+            debug_ac0811_dir=debug_ac0811_dir,
+            calculate_error_fn=calculate_error_fn,
+            print_fn=print_fn,
+        )
+    )
+
+
 def runPreparedIterationAndFinalizeForRunImpl(
     *,
     params: dict[str, Any],

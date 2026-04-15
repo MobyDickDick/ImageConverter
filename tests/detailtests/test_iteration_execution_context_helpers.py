@@ -100,3 +100,36 @@ def test_run_prepared_iteration_and_finalize_for_run_impl_builds_kwargs_and_runs
     assert result is expected
     assert calls and calls[0]["params"] is params
     assert calls[0]["prepared_mode_builder_kwargs"] is prepared_mode_builder_kwargs
+
+
+def test_build_prepared_mode_builder_kwargs_for_run_pipeline_impl_delegates_in_sequence() -> None:
+    run_locals = {"params": {"mode": "semantic_badge"}}
+    expected_kwargs = {"base_name": "AC0831_L"}
+    expected_result = object()
+    calls: list[tuple[str, dict[str, object]]] = []
+
+    def _build_for_run(**kwargs):
+        calls.append(("build_for_run", kwargs))
+        return expected_kwargs
+
+    def _build_prepared(**kwargs):
+        calls.append(("build_prepared", kwargs))
+        assert kwargs == expected_kwargs
+        return expected_result
+
+    result = helpers.buildPreparedModeBuilderKwargsForRunPipelineImpl(
+        run_locals=run_locals,
+        img_path="/tmp/input/AC0831_L.jpg",
+        max_iterations=12,
+        badge_validation_rounds=5,
+        debug_element_diff_dir="/tmp/debug",
+        debug_ac0811_dir="/tmp/ac0811",
+        calculate_error_fn=object(),
+        print_fn=print,
+        build_prepared_mode_builder_kwargs_for_run_fn=_build_for_run,
+        build_prepared_mode_builder_kwargs_fn=_build_prepared,
+    )
+
+    assert result is expected_result
+    assert [entry[0] for entry in calls] == ["build_for_run", "build_prepared"]
+    assert calls[0][1]["run_locals"] is run_locals
