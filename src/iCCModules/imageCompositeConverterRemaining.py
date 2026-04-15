@@ -18,6 +18,7 @@ from src.iCCModules import imageCompositeConverterIterationModeRuntime as iterat
 from src.iCCModules import imageCompositeConverterIterationModeDependencies as iteration_mode_dependency_helpers
 from src.iCCModules import imageCompositeConverterIterationModeDependencySetup as iteration_mode_dependency_setup_helpers
 from src.iCCModules import imageCompositeConverterIterationModePreparation as iteration_mode_preparation_helpers
+from src.iCCModules import imageCompositeConverterIterationModeRuntimePreparation as iteration_mode_runtime_preparation_helpers
 from src.iCCModules import imageCompositeConverterIterationModeSetup as iteration_mode_setup_helpers
 from src.iCCModules import imageCompositeConverterIterationOrchestration as iteration_orchestration_helpers
 from src.iCCModules import imageCompositeConverterIterationPreparation as iteration_preparation_helpers
@@ -439,43 +440,44 @@ def runIterationPipeline(
     _writeAttemptArtifacts = iteration_runtime_callbacks["write_attempt_artifacts"]
     _recordRenderFailure = iteration_runtime_callbacks["record_render_failure"]
 
-    iteration_mode_runtime_kwargs = iteration_mode_setup_helpers.buildPrepareIterationModeRuntimeForRunKwargsImpl(
-        np_module=np,
-        action_cls=Action,
-        params=params,
-        perception_image=perc.img,
-        stripe_strategy=stripe_strategy,
-        looks_like_elongated_foreground_rect_fn=_looksLikeElongatedForegroundRect,
-        semantic_visual_override_helpers=semantic_visual_override_helpers,
-        iteration_mode_dependency_setup_helpers=iteration_mode_dependency_setup_helpers,
-        iteration_mode_runtime_helpers=iteration_mode_runtime_helpers,
-        iteration_orchestration_helpers=iteration_orchestration_helpers,
-        iteration_context_helpers=iteration_context_helpers,
-        semantic_mismatch_reporting_helpers=semantic_mismatch_reporting_helpers,
-        semantic_validation_logging_helpers=semantic_validation_logging_helpers,
-        semantic_mismatch_runtime_helpers=semantic_mismatch_runtime_helpers,
-        semantic_audit_logging_helpers=semantic_audit_logging_helpers,
-        semantic_audit_runtime_helpers=semantic_audit_runtime_helpers,
-        semantic_validation_context_helpers=semantic_validation_context_helpers,
-        semantic_validation_runtime_helpers=semantic_validation_runtime_helpers,
-        semantic_post_validation_helpers=semantic_post_validation_helpers,
-        semantic_validation_finalization_helpers=semantic_validation_finalization_helpers,
-        semantic_iteration_finalization_helpers=semantic_iteration_finalization_helpers,
-        semantic_ac0223_runtime_helpers=semantic_ac0223_runtime_helpers,
-        dual_arrow_badge_helpers=dual_arrow_badge_helpers,
-        dual_arrow_runtime_helpers=dual_arrow_runtime_helpers,
-        gradient_stripe_strategy_helpers=gradient_stripe_strategy_helpers,
-        non_composite_runtime_helpers=non_composite_runtime_helpers,
-        conversion_composite_helpers=conversion_composite_helpers,
-        semantic_badge_runtime_helpers=semantic_badge_runtime_helpers,
-        build_iteration_mode_runner_dependencies_fn=iteration_mode_dependency_helpers.buildIterationModeRunnerDependenciesImpl,
-        semantic_audit_record_fn=_semanticAuditRecord,
-        semantic_quality_flags_fn=_semanticQualityFlags,
-        render_embedded_raster_svg_fn=_renderEmbeddedRasterSvg,
-        print_fn=print,
-    )
-    iteration_mode_runtime_bindings = iteration_mode_preparation_helpers.prepareIterationModeRuntimeForRunImpl(
-        **iteration_mode_runtime_kwargs,
+    iteration_mode_runtime_bindings = iteration_mode_runtime_preparation_helpers.prepareIterationModeRuntimeBindingsImpl(
+        build_prepare_iteration_mode_runtime_for_run_kwargs_fn=iteration_mode_setup_helpers.buildPrepareIterationModeRuntimeForRunKwargsImpl,
+        prepare_iteration_mode_runtime_for_run_fn=iteration_mode_preparation_helpers.prepareIterationModeRuntimeForRunImpl,
+        build_prepare_iteration_mode_runtime_for_run_kwargs_kwargs={
+            "np_module": np,
+            "action_cls": Action,
+            "params": params,
+            "perception_image": perc.img,
+            "stripe_strategy": stripe_strategy,
+            "looks_like_elongated_foreground_rect_fn": _looksLikeElongatedForegroundRect,
+            "semantic_visual_override_helpers": semantic_visual_override_helpers,
+            "iteration_mode_dependency_setup_helpers": iteration_mode_dependency_setup_helpers,
+            "iteration_mode_runtime_helpers": iteration_mode_runtime_helpers,
+            "iteration_orchestration_helpers": iteration_orchestration_helpers,
+            "iteration_context_helpers": iteration_context_helpers,
+            "semantic_mismatch_reporting_helpers": semantic_mismatch_reporting_helpers,
+            "semantic_validation_logging_helpers": semantic_validation_logging_helpers,
+            "semantic_mismatch_runtime_helpers": semantic_mismatch_runtime_helpers,
+            "semantic_audit_logging_helpers": semantic_audit_logging_helpers,
+            "semantic_audit_runtime_helpers": semantic_audit_runtime_helpers,
+            "semantic_validation_context_helpers": semantic_validation_context_helpers,
+            "semantic_validation_runtime_helpers": semantic_validation_runtime_helpers,
+            "semantic_post_validation_helpers": semantic_post_validation_helpers,
+            "semantic_validation_finalization_helpers": semantic_validation_finalization_helpers,
+            "semantic_iteration_finalization_helpers": semantic_iteration_finalization_helpers,
+            "semantic_ac0223_runtime_helpers": semantic_ac0223_runtime_helpers,
+            "dual_arrow_badge_helpers": dual_arrow_badge_helpers,
+            "dual_arrow_runtime_helpers": dual_arrow_runtime_helpers,
+            "gradient_stripe_strategy_helpers": gradient_stripe_strategy_helpers,
+            "non_composite_runtime_helpers": non_composite_runtime_helpers,
+            "conversion_composite_helpers": conversion_composite_helpers,
+            "semantic_badge_runtime_helpers": semantic_badge_runtime_helpers,
+            "build_iteration_mode_runner_dependencies_fn": iteration_mode_dependency_helpers.buildIterationModeRunnerDependenciesImpl,
+            "semantic_audit_record_fn": _semanticAuditRecord,
+            "semantic_quality_flags_fn": _semanticQualityFlags,
+            "render_embedded_raster_svg_fn": _renderEmbeddedRasterSvg,
+            "print_fn": print,
+        },
     )
     params = iteration_mode_runtime_bindings["params"]
     semantic_mode_visual_override = iteration_mode_runtime_bindings["semantic_mode_visual_override"]
