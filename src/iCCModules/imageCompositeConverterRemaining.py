@@ -405,15 +405,12 @@ def runIterationPipeline(
     iteration_input_runtime_locals = iteration_bindings_helpers.extractIterationInputRuntimeLocalsImpl(
         iteration_input_runtime_fields=iteration_input_runtime_fields,
     )
-    folder_path = iteration_input_runtime_locals["folder_path"]
     filename = iteration_input_runtime_locals["filename"]
     perc = iteration_input_runtime_locals["perception"]
+    params = iteration_input_runtime_locals["params"]
     w = iteration_input_runtime_locals["width"]
     h = iteration_input_runtime_locals["height"]
-    desc = iteration_input_runtime_locals["description"]
-    params = iteration_input_runtime_locals["params"]
     stripe_strategy = iteration_input_runtime_locals["stripe_strategy"]
-    semantic_audit_row = iteration_input_runtime_locals["semantic_audit_row"]
 
     iteration_runtime_callbacks = iteration_run_preparation_helpers.prepareIterationRuntimeCallbacksForRunImpl(
         prepare_iteration_runtime_fn=iteration_initialization_helpers.prepareIterationRuntimeImpl,
@@ -442,10 +439,6 @@ def runIterationPipeline(
     iteration_runtime_callback_locals = iteration_bindings_helpers.extractIterationRuntimeCallbackLocalsImpl(
         iteration_runtime_callbacks=iteration_runtime_callbacks,
     )
-    base = iteration_runtime_callback_locals["base_name"]
-    _writeValidationLog = iteration_runtime_callback_locals["write_validation_log"]
-    _writeAttemptArtifacts = iteration_runtime_callback_locals["write_attempt_artifacts"]
-    _recordRenderFailure = iteration_runtime_callback_locals["record_render_failure"]
 
     iteration_mode_runtime_fields = iteration_mode_runtime_preparation_helpers.prepareIterationModeRuntimeBindingsForRunImpl(
         build_prepare_iteration_mode_runtime_for_run_kwargs_fn=iteration_mode_setup_helpers.buildPrepareIterationModeRuntimeForRunKwargsImpl,
@@ -487,39 +480,41 @@ def runIterationPipeline(
     iteration_mode_runtime_locals = iteration_bindings_helpers.extractIterationModeRuntimeLocalsImpl(
         iteration_mode_runtime_fields=iteration_mode_runtime_fields,
     )
-    params = iteration_mode_runtime_locals["params"]
-    semantic_mode_visual_override = iteration_mode_runtime_locals["semantic_mode_visual_override"]
-    mode_runners = iteration_mode_runtime_locals["mode_runners"]
+    run_locals = iteration_bindings_helpers.extractRunIterationPipelineLocalsImpl(
+        iteration_input_runtime_locals=iteration_input_runtime_locals,
+        iteration_runtime_callback_locals=iteration_runtime_callback_locals,
+        iteration_mode_runtime_locals=iteration_mode_runtime_locals,
+    )
 
     prepared_mode_builder_kwargs = iteration_execution_helpers.buildPreparedModeBuilderKwargsImpl(
-        params=params,
-        width=w,
-        height=h,
-        stripe_strategy=stripe_strategy,
-        semantic_mode_visual_override=semantic_mode_visual_override,
-        folder_path=folder_path,
+        params=run_locals["params"],
+        width=run_locals["width"],
+        height=run_locals["height"],
+        stripe_strategy=run_locals["stripe_strategy"],
+        semantic_mode_visual_override=run_locals["semantic_mode_visual_override"],
+        folder_path=run_locals["folder_path"],
         img_path=img_path,
-        filename=filename,
-        base_name=base,
-        description=desc,
-        perc_img=perc.img,
-        perc_base_name=perc.base_name,
-        semantic_audit_row=semantic_audit_row,
+        filename=run_locals["filename"],
+        base_name=run_locals["base_name"],
+        description=run_locals["description"],
+        perc_img=run_locals["perception"].img,
+        perc_base_name=run_locals["perception"].base_name,
+        semantic_audit_row=run_locals["semantic_audit_row"],
         max_iterations=max_iterations,
         badge_validation_rounds=badge_validation_rounds,
         debug_element_diff_dir=debug_element_diff_dir,
         debug_ac0811_dir=debug_ac0811_dir,
-        write_validation_log_fn=_writeValidationLog,
-        write_attempt_artifacts_fn=_writeAttemptArtifacts,
-        record_render_failure_fn=_recordRenderFailure,
-        mode_runners=mode_runners,
+        write_validation_log_fn=run_locals["write_validation_log"],
+        write_attempt_artifacts_fn=run_locals["write_attempt_artifacts"],
+        record_render_failure_fn=run_locals["record_render_failure"],
+        mode_runners=run_locals["mode_runners"],
         calculate_error_fn=Action.calculate_error,
         print_fn=print,
     )
 
     return iteration_execution_helpers.runPreparedIterationAndFinalizeImpl(
         **iteration_execution_context_helpers.buildRunPreparedIterationAndFinalizeKwargsImpl(
-            params=params,
+            params=run_locals["params"],
             prepared_mode_builder_kwargs=prepared_mode_builder_kwargs,
             build_prepared_iteration_mode_kwargs_fn=iteration_context_helpers.buildPreparedIterationModeKwargsImpl,
             run_prepared_iteration_mode_fn=iteration_dispatch_helpers.runPreparedIterationModeImpl,

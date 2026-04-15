@@ -147,3 +147,53 @@ def test_extract_iteration_mode_runtime_locals_impl_maps_expected_keys() -> None
         "mode_runners",
     }
     assert result["semantic_mode_visual_override"] is False
+
+
+def test_extract_run_iteration_pipeline_locals_impl_maps_expected_keys() -> None:
+    input_runtime = {
+        "folder_path": "images",
+        "filename": "AC0800_L.jpg",
+        "perception": object(),
+        "width": 120,
+        "height": 80,
+        "description": "desc",
+        "params": {"mode": "composite"},
+        "stripe_strategy": "none",
+        "semantic_audit_row": {"status": "semantic_pending"},
+    }
+    runtime_callbacks = {
+        "base_name": "AC0800_L",
+        "write_validation_log": lambda *_args, **_kwargs: None,
+        "write_attempt_artifacts": lambda *_args, **_kwargs: None,
+        "record_render_failure": lambda *_args, **_kwargs: None,
+    }
+    mode_runtime = {
+        "params": {"mode": "semantic_badge"},
+        "semantic_mode_visual_override": True,
+        "mode_runners": {"semantic_badge": object()},
+    }
+
+    result = helpers.extractRunIterationPipelineLocalsImpl(
+        iteration_input_runtime_locals=input_runtime,
+        iteration_runtime_callback_locals=runtime_callbacks,
+        iteration_mode_runtime_locals=mode_runtime,
+    )
+
+    assert set(result.keys()) == {
+        "folder_path",
+        "filename",
+        "perception",
+        "width",
+        "height",
+        "description",
+        "params",
+        "stripe_strategy",
+        "semantic_audit_row",
+        "base_name",
+        "write_validation_log",
+        "write_attempt_artifacts",
+        "record_render_failure",
+        "semantic_mode_visual_override",
+        "mode_runners",
+    }
+    assert result["params"] == {"mode": "semantic_badge"}
