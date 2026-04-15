@@ -13,6 +13,7 @@ from src.iCCModules import imageCompositeConverterIterationBindings as iteration
 from src.iCCModules import imageCompositeConverterIterationContext as iteration_context_helpers
 from src.iCCModules import imageCompositeConverterIterationDispatch as iteration_dispatch_helpers
 from src.iCCModules import imageCompositeConverterIterationExecution as iteration_execution_helpers
+from src.iCCModules import imageCompositeConverterIterationExecutionContext as iteration_execution_context_helpers
 from src.iCCModules import imageCompositeConverterIterationFinalization as iteration_finalization_helpers
 from src.iCCModules import imageCompositeConverterIterationModeRuntime as iteration_mode_runtime_helpers
 from src.iCCModules import imageCompositeConverterIterationModeDependencies as iteration_mode_dependency_helpers
@@ -517,12 +518,14 @@ def runIterationPipeline(
     )
 
     return iteration_execution_helpers.runPreparedIterationAndFinalizeImpl(
-        params=params,
-        prepared_mode_builder_kwargs=prepared_mode_builder_kwargs,
-        build_prepared_iteration_mode_kwargs_fn=iteration_context_helpers.buildPreparedIterationModeKwargsImpl,
-        run_prepared_iteration_mode_fn=iteration_dispatch_helpers.runPreparedIterationModeImpl,
-        finalize_iteration_result_fn=iteration_finalization_helpers.finalizeIterationResultImpl,
-        math_module=math,
+        **iteration_execution_context_helpers.buildRunPreparedIterationAndFinalizeKwargsImpl(
+            params=params,
+            prepared_mode_builder_kwargs=prepared_mode_builder_kwargs,
+            build_prepared_iteration_mode_kwargs_fn=iteration_context_helpers.buildPreparedIterationModeKwargsImpl,
+            run_prepared_iteration_mode_fn=iteration_dispatch_helpers.runPreparedIterationModeImpl,
+            finalize_iteration_result_fn=iteration_finalization_helpers.finalizeIterationResultImpl,
+            math_module=math,
+        ),
     )
 
 def _extractRefParts(name: str) -> tuple[str, int] | None:
