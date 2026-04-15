@@ -133,3 +133,44 @@ def test_build_prepared_mode_builder_kwargs_for_run_pipeline_impl_delegates_in_s
     assert result is expected_result
     assert [entry[0] for entry in calls] == ["build_for_run", "build_prepared"]
     assert calls[0][1]["run_locals"] is run_locals
+
+
+def test_execute_run_iteration_pipeline_impl_delegates_build_then_run() -> None:
+    run_locals = {"params": {"mode": "semantic_badge"}}
+    prepared_mode_builder_kwargs = {"base_name": "AC0831_L"}
+    expected_result = object()
+    calls: list[tuple[str, dict[str, object]]] = []
+
+    def _build_pipeline(**kwargs):
+        calls.append(("build_pipeline", kwargs))
+        return prepared_mode_builder_kwargs
+
+    def _run_pipeline(**kwargs):
+        calls.append(("run_pipeline", kwargs))
+        assert kwargs["params"] is run_locals["params"]
+        assert kwargs["prepared_mode_builder_kwargs"] is prepared_mode_builder_kwargs
+        return expected_result
+
+    result = helpers.executeRunIterationPipelineImpl(
+        run_locals=run_locals,
+        img_path="/tmp/input/AC0831_L.jpg",
+        max_iterations=12,
+        badge_validation_rounds=5,
+        debug_element_diff_dir="/tmp/debug",
+        debug_ac0811_dir="/tmp/ac0811",
+        calculate_error_fn=object(),
+        print_fn=print,
+        build_prepared_mode_builder_kwargs_for_run_pipeline_fn=_build_pipeline,
+        build_prepared_mode_builder_kwargs_for_run_fn=object(),
+        build_prepared_mode_builder_kwargs_fn=object(),
+        run_prepared_iteration_and_finalize_for_run_fn=_run_pipeline,
+        build_run_prepared_iteration_and_finalize_kwargs_fn=object(),
+        run_prepared_iteration_and_finalize_fn=object(),
+        build_prepared_iteration_mode_kwargs_fn=object(),
+        run_prepared_iteration_mode_fn=object(),
+        finalize_iteration_result_fn=object(),
+        math_module=object(),
+    )
+
+    assert result is expected_result
+    assert [entry[0] for entry in calls] == ["build_pipeline", "run_pipeline"]

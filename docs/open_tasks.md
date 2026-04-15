@@ -312,6 +312,8 @@ focused on the actual project scope.
   - 2026-04-15: Umsetzung abgeschlossen inkl. Detailtest `test_prepare_iteration_mode_runtime_locals_for_run_impl_prepares_and_extracts_locals`.
   - [x] C1.54: Ausführungs-Kontextbrücke für `prepared_mode_builder_kwargs` aus `runIterationPipeline` in `src/iCCModules/imageCompositeConverterIterationExecutionContext.py` zentralisiert (`buildPreparedModeBuilderKwargsForRunPipelineImpl`); `src/iCCModules/imageCompositeConverterRemaining.py` delegiert die Sequenz jetzt über den neuen Modul-Helper und bleibt API-kompatibel.
   - 2026-04-15: Umsetzung abgeschlossen inkl. Detailtest `test_build_prepared_mode_builder_kwargs_for_run_pipeline_impl_delegates_in_sequence`.
+  - [x] C1.55: Ausführungs-Sequenz (Prepared-Mode-Kwargs bauen + `runPreparedIterationAndFinalize` ausführen) aus `runIterationPipeline` in `src/iCCModules/imageCompositeConverterIterationExecutionContext.py` zentralisiert (`executeRunIterationPipelineImpl`); `src/iCCModules/imageCompositeConverterRemaining.py` delegiert den bisherigen Inline-Block jetzt über den neuen Modul-Helper und bleibt API-kompatibel.
+  - 2026-04-15: Umsetzung abgeschlossen inkl. Detailtest `test_execute_run_iteration_pipeline_impl_delegates_build_then_run`.
   - Nächster geplanter Schritt: weitere Ausführungs-/Kontext-Teilstrecken aus `runIterationPipeline` in denselben kleinen Schritten extrahieren.
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.
