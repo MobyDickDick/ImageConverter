@@ -9,6 +9,7 @@ from src.iCCModules import imageCompositeConverterElementDecomposition as elemen
 from src.iCCModules import imageCompositeConverterGradientStripeStrategy as gradient_stripe_strategy_helpers
 from src.iCCModules import imageCompositeConverterImageLoading as image_loading_helpers
 from src.iCCModules import imageCompositeConverterIterationInitialization as iteration_initialization_helpers
+from src.iCCModules import imageCompositeConverterIterationBindings as iteration_bindings_helpers
 from src.iCCModules import imageCompositeConverterIterationContext as iteration_context_helpers
 from src.iCCModules import imageCompositeConverterIterationDispatch as iteration_dispatch_helpers
 from src.iCCModules import imageCompositeConverterIterationExecution as iteration_execution_helpers
@@ -394,15 +395,18 @@ def runIterationPipeline(
     iteration_input_bindings = iteration_context_helpers.extractIterationInputBindingsImpl(
         iteration_inputs=iteration_inputs,
     )
-    folder_path = iteration_input_bindings["folder_path"]
-    filename = iteration_input_bindings["filename"]
-    perc = iteration_input_bindings["perception"]
-    w = iteration_input_bindings["width"]
-    h = iteration_input_bindings["height"]
-    desc = iteration_input_bindings["description"]
-    params = iteration_input_bindings["params"]
-    stripe_strategy = iteration_input_bindings["stripe_strategy"]
-    semantic_audit_row = iteration_input_bindings["semantic_audit_row"]
+    iteration_input_runtime_fields = iteration_bindings_helpers.extractIterationInputRuntimeFieldsImpl(
+        iteration_input_bindings=iteration_input_bindings,
+    )
+    folder_path = iteration_input_runtime_fields["folder_path"]
+    filename = iteration_input_runtime_fields["filename"]
+    perc = iteration_input_runtime_fields["perception"]
+    w = iteration_input_runtime_fields["width"]
+    h = iteration_input_runtime_fields["height"]
+    desc = iteration_input_runtime_fields["description"]
+    params = iteration_input_runtime_fields["params"]
+    stripe_strategy = iteration_input_runtime_fields["stripe_strategy"]
+    semantic_audit_row = iteration_input_runtime_fields["semantic_audit_row"]
 
     iteration_runtime_state = iteration_initialization_helpers.prepareIterationRuntimeImpl(
         filename=filename,
@@ -426,10 +430,13 @@ def runIterationPipeline(
     iteration_runtime_bindings = iteration_initialization_helpers.extractIterationRuntimeBindingsImpl(
         iteration_runtime_state=iteration_runtime_state,
     )
-    base = iteration_runtime_bindings["base_name"]
-    _writeValidationLog = iteration_runtime_bindings["write_validation_log"]
-    _writeAttemptArtifacts = iteration_runtime_bindings["write_attempt_artifacts"]
-    _recordRenderFailure = iteration_runtime_bindings["record_render_failure"]
+    iteration_runtime_callbacks = iteration_bindings_helpers.extractIterationRuntimeCallbacksImpl(
+        iteration_runtime_bindings=iteration_runtime_bindings,
+    )
+    base = iteration_runtime_callbacks["base_name"]
+    _writeValidationLog = iteration_runtime_callbacks["write_validation_log"]
+    _writeAttemptArtifacts = iteration_runtime_callbacks["write_attempt_artifacts"]
+    _recordRenderFailure = iteration_runtime_callbacks["record_render_failure"]
 
     mode_runner_dependencies = iteration_mode_dependency_setup_helpers.buildIterationModeRunnerDependenciesForRunImpl(
         np_module=np,

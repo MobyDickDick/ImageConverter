@@ -278,6 +278,8 @@ focused on the actual project scope.
   - 2026-04-14: Umsetzung abgeschlossen inkl. Detailtest `test_run_prepared_iteration_and_finalize_impl_builds_runs_and_finalizes`.
   - [x] C1.37: Vorbereitung der `buildPreparedIterationModeKwargs`-Eingabedaten aus `runIterationPipeline` in `src/iCCModules/imageCompositeConverterIterationExecution.py` ausgelagert (`buildPreparedModeBuilderKwargsImpl`); `src/iCCModules/imageCompositeConverterRemaining.py` delegiert den großen Runtime-Kwargs-Aufbau jetzt über den neuen Modul-Helper und bleibt API-kompatibel.
   - 2026-04-14: Umsetzung abgeschlossen inkl. Detailtest `test_build_prepared_mode_builder_kwargs_impl_collects_runtime_fields`.
+  - [x] C1.38: Iterations-Binding-Extraktion (Input-/Runtime-Subset für `runIterationPipeline`) in neues Modul `src/iCCModules/imageCompositeConverterIterationBindings.py` ausgelagert; `src/iCCModules/imageCompositeConverterRemaining.py` delegiert die Feldselektion jetzt über Modul-Helper und bleibt API-kompatibel.
+  - 2026-04-15: Umsetzung abgeschlossen inkl. Detailtests `test_extract_iteration_input_runtime_fields_impl_maps_expected_keys` und `test_extract_iteration_runtime_callbacks_impl_maps_expected_keys`.
   - Nächster geplanter Schritt: weitere Initialisierungs-/Reporting-Teilstrecken aus `runIterationPipeline` in denselben kleinen Schritten extrahieren.
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.
