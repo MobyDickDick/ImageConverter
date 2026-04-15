@@ -108,3 +108,48 @@ def runPreparedIterationAndFinalizeForRunImpl(
             math_module=math_module,
         )
     )
+
+
+def executeRunIterationPipelineImpl(
+    *,
+    run_locals: dict[str, Any],
+    img_path: str,
+    max_iterations: int,
+    badge_validation_rounds: int,
+    debug_element_diff_dir: str | None,
+    debug_ac0811_dir: str | None,
+    calculate_error_fn,
+    print_fn,
+    build_prepared_mode_builder_kwargs_for_run_pipeline_fn,
+    build_prepared_mode_builder_kwargs_for_run_fn,
+    build_prepared_mode_builder_kwargs_fn,
+    run_prepared_iteration_and_finalize_for_run_fn,
+    build_run_prepared_iteration_and_finalize_kwargs_fn,
+    run_prepared_iteration_and_finalize_fn,
+    build_prepared_iteration_mode_kwargs_fn,
+    run_prepared_iteration_mode_fn,
+    finalize_iteration_result_fn,
+    math_module,
+):
+    prepared_mode_builder_kwargs = build_prepared_mode_builder_kwargs_for_run_pipeline_fn(
+        run_locals=run_locals,
+        img_path=img_path,
+        max_iterations=max_iterations,
+        badge_validation_rounds=badge_validation_rounds,
+        debug_element_diff_dir=debug_element_diff_dir,
+        debug_ac0811_dir=debug_ac0811_dir,
+        calculate_error_fn=calculate_error_fn,
+        print_fn=print_fn,
+        build_prepared_mode_builder_kwargs_for_run_fn=build_prepared_mode_builder_kwargs_for_run_fn,
+        build_prepared_mode_builder_kwargs_fn=build_prepared_mode_builder_kwargs_fn,
+    )
+    return run_prepared_iteration_and_finalize_for_run_fn(
+        params=run_locals["params"],
+        prepared_mode_builder_kwargs=prepared_mode_builder_kwargs,
+        build_run_prepared_iteration_and_finalize_kwargs_fn=build_run_prepared_iteration_and_finalize_kwargs_fn,
+        run_prepared_iteration_and_finalize_fn=run_prepared_iteration_and_finalize_fn,
+        build_prepared_iteration_mode_kwargs_fn=build_prepared_iteration_mode_kwargs_fn,
+        run_prepared_iteration_mode_fn=run_prepared_iteration_mode_fn,
+        finalize_iteration_result_fn=finalize_iteration_result_fn,
+        math_module=math_module,
+    )

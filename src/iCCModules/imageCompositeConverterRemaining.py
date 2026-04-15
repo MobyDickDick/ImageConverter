@@ -487,24 +487,19 @@ def runIterationPipeline(
         iteration_mode_runtime_locals=iteration_mode_runtime_locals,
     )
 
-    prepared_mode_builder_kwargs = (
-        iteration_execution_context_helpers.buildPreparedModeBuilderKwargsForRunPipelineImpl(
-            run_locals=run_locals,
-            img_path=img_path,
-            max_iterations=max_iterations,
-            badge_validation_rounds=badge_validation_rounds,
-            debug_element_diff_dir=debug_element_diff_dir,
-            debug_ac0811_dir=debug_ac0811_dir,
-            calculate_error_fn=Action.calculate_error,
-            print_fn=print,
-            build_prepared_mode_builder_kwargs_for_run_fn=iteration_execution_context_helpers.buildPreparedModeBuilderKwargsForRunImpl,
-            build_prepared_mode_builder_kwargs_fn=iteration_execution_helpers.buildPreparedModeBuilderKwargsImpl,
-        )
-    )
-
-    return iteration_execution_context_helpers.runPreparedIterationAndFinalizeForRunImpl(
-        params=run_locals["params"],
-        prepared_mode_builder_kwargs=prepared_mode_builder_kwargs,
+    return iteration_execution_context_helpers.executeRunIterationPipelineImpl(
+        run_locals=run_locals,
+        img_path=img_path,
+        max_iterations=max_iterations,
+        badge_validation_rounds=badge_validation_rounds,
+        debug_element_diff_dir=debug_element_diff_dir,
+        debug_ac0811_dir=debug_ac0811_dir,
+        calculate_error_fn=Action.calculate_error,
+        print_fn=print,
+        build_prepared_mode_builder_kwargs_for_run_pipeline_fn=iteration_execution_context_helpers.buildPreparedModeBuilderKwargsForRunPipelineImpl,
+        build_prepared_mode_builder_kwargs_for_run_fn=iteration_execution_context_helpers.buildPreparedModeBuilderKwargsForRunImpl,
+        build_prepared_mode_builder_kwargs_fn=iteration_execution_helpers.buildPreparedModeBuilderKwargsImpl,
+        run_prepared_iteration_and_finalize_for_run_fn=iteration_execution_context_helpers.runPreparedIterationAndFinalizeForRunImpl,
         build_run_prepared_iteration_and_finalize_kwargs_fn=iteration_execution_context_helpers.buildRunPreparedIterationAndFinalizeKwargsImpl,
         run_prepared_iteration_and_finalize_fn=iteration_execution_helpers.runPreparedIterationAndFinalizeImpl,
         build_prepared_iteration_mode_kwargs_fn=iteration_context_helpers.buildPreparedIterationModeKwargsImpl,
