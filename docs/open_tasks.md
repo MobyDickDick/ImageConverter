@@ -306,6 +306,8 @@ focused on the actual project scope.
   - 2026-04-15: Umsetzung abgeschlossen inkl. Detailtest `test_build_prepared_mode_builder_kwargs_for_run_impl_maps_expected_keys`.
   - [x] C1.51: Aufrufsequenz für `runPreparedIterationAndFinalize` aus `runIterationPipeline` in `src/iCCModules/imageCompositeConverterIterationExecutionContext.py` zentralisiert (`runPreparedIterationAndFinalizeForRunImpl`); `src/iCCModules/imageCompositeConverterRemaining.py` delegiert den bisherigen Inline-Aufruf jetzt über den neuen Modul-Helper und bleibt API-kompatibel.
   - 2026-04-15: Umsetzung abgeschlossen inkl. Detailtest `test_run_prepared_iteration_and_finalize_for_run_impl_builds_kwargs_and_runs`.
+  - [x] C1.52: Aufbau der Aufruf-Kwargs für `prepareIterationModeRuntimeBindingsForRunImpl` aus `runIterationPipeline` in `src/iCCModules/imageCompositeConverterIterationModeRuntimePreparation.py` zentralisiert (`buildPrepareIterationModeRuntimeBindingsForRunKwargsImpl`); `src/iCCModules/imageCompositeConverterRemaining.py` delegiert den bisherigen großen Inline-Aufruf jetzt über den neuen Modul-Helper und bleibt API-kompatibel.
+  - 2026-04-15: Umsetzung abgeschlossen inkl. Detailtest `test_build_prepare_iteration_mode_runtime_bindings_for_run_kwargs_impl_maps_expected_keys`.
   - Nächster geplanter Schritt: weitere Ausführungs-/Kontext-Teilstrecken aus `runIterationPipeline` in denselben kleinen Schritten extrahieren.
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.
