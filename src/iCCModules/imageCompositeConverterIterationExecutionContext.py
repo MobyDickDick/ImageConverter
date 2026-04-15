@@ -58,3 +58,26 @@ def buildRunPreparedIterationAndFinalizeKwargsImpl(
         "finalize_iteration_result_fn": finalize_iteration_result_fn,
         "math_module": math_module,
     }
+
+
+def runPreparedIterationAndFinalizeForRunImpl(
+    *,
+    params: dict[str, Any],
+    prepared_mode_builder_kwargs: dict[str, Any],
+    build_run_prepared_iteration_and_finalize_kwargs_fn,
+    run_prepared_iteration_and_finalize_fn,
+    build_prepared_iteration_mode_kwargs_fn,
+    run_prepared_iteration_mode_fn,
+    finalize_iteration_result_fn,
+    math_module,
+):
+    return run_prepared_iteration_and_finalize_fn(
+        **build_run_prepared_iteration_and_finalize_kwargs_fn(
+            params=params,
+            prepared_mode_builder_kwargs=prepared_mode_builder_kwargs,
+            build_prepared_iteration_mode_kwargs_fn=build_prepared_iteration_mode_kwargs_fn,
+            run_prepared_iteration_mode_fn=run_prepared_iteration_mode_fn,
+            finalize_iteration_result_fn=finalize_iteration_result_fn,
+            math_module=math_module,
+        )
+    )

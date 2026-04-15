@@ -69,3 +69,34 @@ def test_build_prepared_mode_builder_kwargs_for_run_impl_maps_expected_keys() ->
     assert result["max_iterations"] == 12
     assert result["badge_validation_rounds"] == 5
     assert result["mode_runners"] is run_locals["mode_runners"]
+
+
+def test_run_prepared_iteration_and_finalize_for_run_impl_builds_kwargs_and_runs() -> None:
+    params = {"mode": "semantic_badge"}
+    prepared_mode_builder_kwargs = {"base_name": "AC0831_L"}
+    expected = object()
+
+    calls: list[dict[str, object]] = []
+
+    def _build_kwargs(**kwargs):
+        calls.append(kwargs)
+        return {"token": "ok"}
+
+    def _run_prepared_iteration_and_finalize(**kwargs):
+        assert kwargs == {"token": "ok"}
+        return expected
+
+    result = helpers.runPreparedIterationAndFinalizeForRunImpl(
+        params=params,
+        prepared_mode_builder_kwargs=prepared_mode_builder_kwargs,
+        build_run_prepared_iteration_and_finalize_kwargs_fn=_build_kwargs,
+        run_prepared_iteration_and_finalize_fn=_run_prepared_iteration_and_finalize,
+        build_prepared_iteration_mode_kwargs_fn=object(),
+        run_prepared_iteration_mode_fn=object(),
+        finalize_iteration_result_fn=object(),
+        math_module=object(),
+    )
+
+    assert result is expected
+    assert calls and calls[0]["params"] is params
+    assert calls[0]["prepared_mode_builder_kwargs"] is prepared_mode_builder_kwargs
