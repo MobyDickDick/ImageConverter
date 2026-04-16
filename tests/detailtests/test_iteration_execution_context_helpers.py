@@ -441,3 +441,48 @@ def test_run_iteration_pipeline_for_run_locals_impl_dispatches_with_same_argumen
     assert calls[0]["run_prepared_iteration_mode_fn"] is run_prepared_iteration_mode
     assert calls[0]["finalize_iteration_result_fn"] is finalize_iteration_result
     assert calls[0]["math_module"] is math_module
+
+
+def test_run_iteration_pipeline_for_run_impl_delegates_builder_then_runner() -> None:
+    run_locals = {"params": {"mode": "semantic_badge"}}
+    expected_kwargs = {"token": "kwargs"}
+    expected_result = object()
+    calls: list[tuple[str, dict[str, object]]] = []
+
+    def _build_run_locals_kwargs(**kwargs):
+        calls.append(("build", kwargs))
+        return expected_kwargs
+
+    def _run_with_run_locals(**kwargs):
+        calls.append(("run", kwargs))
+        return expected_result
+
+    original_build = helpers.buildRunIterationPipelineForRunLocalsKwargsForRunImpl
+    original_run = helpers.runIterationPipelineForRunLocalsImpl
+    helpers.buildRunIterationPipelineForRunLocalsKwargsForRunImpl = _build_run_locals_kwargs
+    helpers.runIterationPipelineForRunLocalsImpl = _run_with_run_locals
+    try:
+        result = helpers.runIterationPipelineForRunImpl(
+            run_locals=run_locals,
+            img_path="/tmp/input/AC0831_L.jpg",
+            max_iterations=12,
+            badge_validation_rounds=5,
+            debug_element_diff_dir="/tmp/debug",
+            debug_ac0811_dir="/tmp/ac0811",
+            calculate_error_fn=object(),
+            print_fn=print,
+            build_prepared_mode_builder_kwargs_fn=object(),
+            run_prepared_iteration_and_finalize_fn=object(),
+            build_prepared_iteration_mode_kwargs_fn=object(),
+            run_prepared_iteration_mode_fn=object(),
+            finalize_iteration_result_fn=object(),
+            math_module=object(),
+        )
+    finally:
+        helpers.buildRunIterationPipelineForRunLocalsKwargsForRunImpl = original_build
+        helpers.runIterationPipelineForRunLocalsImpl = original_run
+
+    assert result is expected_result
+    assert [entry[0] for entry in calls] == ["build", "run"]
+    assert calls[0][1]["run_locals"] is run_locals
+    assert calls[1][1] == expected_kwargs
