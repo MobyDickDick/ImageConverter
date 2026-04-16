@@ -122,8 +122,10 @@ def prepareRunIterationPipelineLocalsImpl(
     prepare_iteration_input_runtime_for_run_kwargs: dict[str, Any],
     prepare_iteration_runtime_callbacks_for_run_kwargs_builder_fn: Callable[..., dict[str, Any]],
     prepare_iteration_runtime_callbacks_for_run_shared_kwargs: dict[str, Any],
+    prepare_iteration_runtime_callbacks_for_run_impl_kwargs: dict[str, Any],
     prepare_iteration_mode_runtime_locals_for_run_kwargs_builder_fn: Callable[..., dict[str, Any]],
     prepare_iteration_mode_runtime_locals_for_run_shared_kwargs: dict[str, Any],
+    prepare_iteration_mode_runtime_locals_for_run_impl_kwargs: dict[str, Any],
 ) -> dict[str, Any] | None:
     iteration_input_runtime_fields = prepare_iteration_input_runtime_for_run_fn(
         **prepare_iteration_input_runtime_for_run_kwargs,
@@ -135,6 +137,7 @@ def prepareRunIterationPipelineLocalsImpl(
         iteration_input_runtime_fields=iteration_input_runtime_fields,
     )
     iteration_runtime_callbacks = prepare_iteration_runtime_callbacks_for_run_fn(
+        **prepare_iteration_runtime_callbacks_for_run_impl_kwargs,
         prepare_iteration_runtime_kwargs=prepare_iteration_runtime_callbacks_for_run_kwargs_builder_fn(
             filename=iteration_input_runtime_locals["filename"],
             params=iteration_input_runtime_locals["params"],
@@ -148,7 +151,8 @@ def prepareRunIterationPipelineLocalsImpl(
         iteration_runtime_callbacks=iteration_runtime_callbacks,
     )
     iteration_mode_runtime_locals = prepare_iteration_mode_runtime_locals_for_run_fn(
-        **prepare_iteration_mode_runtime_locals_for_run_kwargs_builder_fn(
+        **prepare_iteration_mode_runtime_locals_for_run_impl_kwargs,
+        prepare_iteration_mode_runtime_bindings_for_run_kwargs=prepare_iteration_mode_runtime_locals_for_run_kwargs_builder_fn(
             params=iteration_input_runtime_locals["params"],
             perception_image=iteration_input_runtime_locals["perception"].img,
             stripe_strategy=iteration_input_runtime_locals["stripe_strategy"],
@@ -173,8 +177,10 @@ def buildPrepareRunIterationPipelineLocalsKwargsImpl(
     prepare_iteration_input_runtime_for_run_kwargs,
     prepare_iteration_runtime_callbacks_for_run_kwargs_builder_fn,
     prepare_iteration_runtime_callbacks_for_run_shared_kwargs,
+    prepare_iteration_runtime_callbacks_for_run_impl_kwargs,
     prepare_iteration_mode_runtime_locals_for_run_kwargs_builder_fn,
     prepare_iteration_mode_runtime_locals_for_run_shared_kwargs,
+    prepare_iteration_mode_runtime_locals_for_run_impl_kwargs,
 ) -> dict[str, Any]:
     return {
         "prepare_iteration_input_runtime_for_run_fn": prepare_iteration_input_runtime_for_run_fn,
@@ -186,8 +192,10 @@ def buildPrepareRunIterationPipelineLocalsKwargsImpl(
         "prepare_iteration_input_runtime_for_run_kwargs": prepare_iteration_input_runtime_for_run_kwargs,
         "prepare_iteration_runtime_callbacks_for_run_kwargs_builder_fn": prepare_iteration_runtime_callbacks_for_run_kwargs_builder_fn,
         "prepare_iteration_runtime_callbacks_for_run_shared_kwargs": prepare_iteration_runtime_callbacks_for_run_shared_kwargs,
+        "prepare_iteration_runtime_callbacks_for_run_impl_kwargs": prepare_iteration_runtime_callbacks_for_run_impl_kwargs,
         "prepare_iteration_mode_runtime_locals_for_run_kwargs_builder_fn": prepare_iteration_mode_runtime_locals_for_run_kwargs_builder_fn,
         "prepare_iteration_mode_runtime_locals_for_run_shared_kwargs": prepare_iteration_mode_runtime_locals_for_run_shared_kwargs,
+        "prepare_iteration_mode_runtime_locals_for_run_impl_kwargs": prepare_iteration_mode_runtime_locals_for_run_impl_kwargs,
     }
 
 
@@ -214,6 +222,7 @@ def buildPrepareRunIterationPipelineLocalsKwargsForRunImpl(
     time_ns_fn,
     iteration_run_preparation_helpers,
     iteration_bindings_helpers,
+    iteration_initialization_helpers,
     iteration_setup_helpers,
     iteration_runtime_helpers,
     iteration_mode_runtime_preparation_helpers,
@@ -272,6 +281,11 @@ def buildPrepareRunIterationPipelineLocalsKwargsForRunImpl(
             ),
         },
         prepare_iteration_runtime_callbacks_for_run_kwargs_builder_fn=iteration_run_preparation_helpers.buildPrepareIterationRuntimeCallbacksForRunKwargsImpl,
+        prepare_iteration_runtime_callbacks_for_run_impl_kwargs={
+            "prepare_iteration_runtime_fn": iteration_initialization_helpers.prepareIterationRuntimeImpl,
+            "extract_iteration_runtime_bindings_fn": iteration_initialization_helpers.extractIterationRuntimeBindingsImpl,
+            "extract_iteration_runtime_callbacks_fn": iteration_bindings_helpers.extractIterationRuntimeCallbacksImpl,
+        },
         prepare_iteration_runtime_callbacks_for_run_shared_kwargs={
             "reports_out_dir": reports_out_dir,
             "svg_out_dir": svg_out_dir,
@@ -287,9 +301,11 @@ def buildPrepareRunIterationPipelineLocalsKwargsForRunImpl(
             "print_fn": print_fn,
         },
         prepare_iteration_mode_runtime_locals_for_run_kwargs_builder_fn=iteration_mode_runtime_preparation_helpers.buildPrepareIterationModeRuntimeBindingsForRunKwargsImpl,
-        prepare_iteration_mode_runtime_locals_for_run_shared_kwargs={
+        prepare_iteration_mode_runtime_locals_for_run_impl_kwargs={
             "prepare_iteration_mode_runtime_bindings_for_run_fn": iteration_mode_runtime_preparation_helpers.prepareIterationModeRuntimeBindingsForRunImpl,
             "extract_iteration_mode_runtime_locals_fn": iteration_bindings_helpers.extractIterationModeRuntimeLocalsImpl,
+        },
+        prepare_iteration_mode_runtime_locals_for_run_shared_kwargs={
             "build_prepare_iteration_mode_runtime_for_run_kwargs_fn": iteration_mode_setup_helpers.buildPrepareIterationModeRuntimeForRunKwargsImpl,
             "prepare_iteration_mode_runtime_for_run_fn": iteration_mode_preparation_helpers.prepareIterationModeRuntimeForRunImpl,
             "np_module": np_module,
@@ -349,6 +365,7 @@ def prepareRunIterationPipelineLocalsForRunImpl(
     time_ns_fn,
     iteration_run_preparation_helpers,
     iteration_bindings_helpers,
+    iteration_initialization_helpers,
     iteration_setup_helpers,
     iteration_runtime_helpers,
     iteration_mode_runtime_preparation_helpers,
@@ -403,6 +420,7 @@ def prepareRunIterationPipelineLocalsForRunImpl(
             time_ns_fn=time_ns_fn,
             iteration_run_preparation_helpers=iteration_run_preparation_helpers,
             iteration_bindings_helpers=iteration_bindings_helpers,
+            iteration_initialization_helpers=iteration_initialization_helpers,
             iteration_setup_helpers=iteration_setup_helpers,
             iteration_runtime_helpers=iteration_runtime_helpers,
             iteration_mode_runtime_preparation_helpers=iteration_mode_runtime_preparation_helpers,

@@ -127,6 +127,7 @@ def test_prepare_run_iteration_pipeline_locals_impl_merges_all_runtime_sections(
 
     def _prepare_runtime_callbacks(**kwargs):
         assert kwargs["prepare_iteration_runtime_kwargs"] == {"runtime": "kwargs"}
+        assert kwargs["prepare_flag"] == "runtime"
         return {"callbacks": "fields"}
 
     def _extract_runtime_callback_locals(**kwargs):
@@ -141,7 +142,10 @@ def test_prepare_run_iteration_pipeline_locals_impl_merges_all_runtime_sections(
         return {"mode": "kwargs"}
 
     def _prepare_mode_locals(**kwargs):
-        assert kwargs == {"mode": "kwargs"}
+        assert kwargs == {
+            "prepare_iteration_mode_runtime_bindings_for_run_kwargs": {"mode": "kwargs"},
+            "mode_flag": "locals",
+        }
         return {"mode_locals": "ok"}
 
     def _extract_run_locals(**kwargs):
@@ -158,8 +162,10 @@ def test_prepare_run_iteration_pipeline_locals_impl_merges_all_runtime_sections(
         prepare_iteration_input_runtime_for_run_kwargs={"input": "kwargs"},
         prepare_iteration_runtime_callbacks_for_run_kwargs_builder_fn=_build_runtime_kwargs,
         prepare_iteration_runtime_callbacks_for_run_shared_kwargs={"extra": "runtime"},
+        prepare_iteration_runtime_callbacks_for_run_impl_kwargs={"prepare_flag": "runtime"},
         prepare_iteration_mode_runtime_locals_for_run_kwargs_builder_fn=_build_mode_kwargs,
         prepare_iteration_mode_runtime_locals_for_run_shared_kwargs={"extra": "mode"},
+        prepare_iteration_mode_runtime_locals_for_run_impl_kwargs={"mode_flag": "locals"},
     )
 
     assert result == {"merged": "locals"}
@@ -177,14 +183,18 @@ def test_build_prepare_run_iteration_pipeline_locals_kwargs_impl_maps_all_fields
         prepare_iteration_input_runtime_for_run_kwargs={"input": "kwargs"},
         prepare_iteration_runtime_callbacks_for_run_kwargs_builder_fn=marker,
         prepare_iteration_runtime_callbacks_for_run_shared_kwargs={"runtime": "shared"},
+        prepare_iteration_runtime_callbacks_for_run_impl_kwargs={"runtime": "impl"},
         prepare_iteration_mode_runtime_locals_for_run_kwargs_builder_fn=marker,
         prepare_iteration_mode_runtime_locals_for_run_shared_kwargs={"mode": "shared"},
+        prepare_iteration_mode_runtime_locals_for_run_impl_kwargs={"mode": "impl"},
     )
 
     assert kwargs["prepare_iteration_input_runtime_for_run_fn"] is marker
     assert kwargs["prepare_iteration_input_runtime_for_run_kwargs"] == {"input": "kwargs"}
     assert kwargs["prepare_iteration_runtime_callbacks_for_run_shared_kwargs"] == {"runtime": "shared"}
+    assert kwargs["prepare_iteration_runtime_callbacks_for_run_impl_kwargs"] == {"runtime": "impl"}
     assert kwargs["prepare_iteration_mode_runtime_locals_for_run_shared_kwargs"] == {"mode": "shared"}
+    assert kwargs["prepare_iteration_mode_runtime_locals_for_run_impl_kwargs"] == {"mode": "impl"}
 
 
 def test_build_prepare_run_iteration_pipeline_locals_kwargs_for_run_impl_builds_nested_context() -> None:
@@ -202,9 +212,14 @@ def test_build_prepare_run_iteration_pipeline_locals_kwargs_for_run_impl_builds_
     class _Bindings:
         extractIterationInputRuntimeLocalsImpl = marker
         extractIterationRuntimeCallbackLocalsImpl = marker
+        extractIterationRuntimeCallbacksImpl = marker
         extractRunIterationPipelineLocalsImpl = marker
         extractIterationInputRuntimeFieldsImpl = marker
         extractIterationModeRuntimeLocalsImpl = marker
+
+    class _Initialization:
+        prepareIterationRuntimeImpl = marker
+        extractIterationRuntimeBindingsImpl = marker
 
     class _ModeRuntimePreparation:
         prepareIterationModeRuntimeLocalsForRunImpl = marker
@@ -258,6 +273,7 @@ def test_build_prepare_run_iteration_pipeline_locals_kwargs_for_run_impl_builds_
         time_ns_fn=marker,
         iteration_run_preparation_helpers=_RunPreparation,
         iteration_bindings_helpers=_Bindings,
+        iteration_initialization_helpers=_Initialization,
         iteration_setup_helpers=marker,
         iteration_runtime_helpers=marker,
         iteration_mode_runtime_preparation_helpers=_ModeRuntimePreparation,
@@ -297,6 +313,11 @@ def test_build_prepare_run_iteration_pipeline_locals_kwargs_for_run_impl_builds_
     assert nested["prepare_iteration_inputs_kwargs"]["csv_path"] == "descriptions.csv"
     assert kwargs["prepare_iteration_runtime_callbacks_for_run_shared_kwargs"]["run_seed"] == 1
     assert kwargs["prepare_iteration_runtime_callbacks_for_run_shared_kwargs"]["pass_seed_offset"] == 2
+    assert kwargs["prepare_iteration_runtime_callbacks_for_run_impl_kwargs"]["prepare_iteration_runtime_fn"] is marker
+    assert kwargs["prepare_iteration_runtime_callbacks_for_run_impl_kwargs"]["extract_iteration_runtime_bindings_fn"] is marker
+    assert kwargs["prepare_iteration_runtime_callbacks_for_run_impl_kwargs"]["extract_iteration_runtime_callbacks_fn"] is marker
+    assert kwargs["prepare_iteration_mode_runtime_locals_for_run_impl_kwargs"]["prepare_iteration_mode_runtime_bindings_for_run_fn"] is marker
+    assert kwargs["prepare_iteration_mode_runtime_locals_for_run_impl_kwargs"]["extract_iteration_mode_runtime_locals_fn"] is marker
     assert kwargs["prepare_iteration_mode_runtime_locals_for_run_shared_kwargs"]["action_cls"] is _Action
 
 
@@ -343,6 +364,7 @@ def test_prepare_run_iteration_pipeline_locals_for_run_impl_delegates_builder_th
             time_ns_fn=marker,
             iteration_run_preparation_helpers=marker,
             iteration_bindings_helpers=marker,
+            iteration_initialization_helpers=marker,
             iteration_setup_helpers=marker,
             iteration_runtime_helpers=marker,
             iteration_mode_runtime_preparation_helpers=marker,
