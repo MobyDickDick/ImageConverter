@@ -103,10 +103,14 @@ def runIterationPipelineOrchestrationImpl(
 ):
     """Run dependency bootstrap + run-locals preparation + execution dispatch."""
 
-    ensure_conversion_runtime_dependencies_fn(
+    ensure_dependency_kwargs = buildEnsureConversionRuntimeDependenciesKwargsImpl(
         cv2_module=cv2_module,
         np_module=np_module,
         fitz_module=fitz_module,
+    )
+    executeEnsureConversionRuntimeDependenciesImpl(
+        ensure_dependency_kwargs=ensure_dependency_kwargs,
+        ensure_conversion_runtime_dependencies_fn=ensure_conversion_runtime_dependencies_fn,
     )
 
     prepare_run_locals_call_kwargs = buildPrepareRunLocalsForRunCallKwargsImpl(
@@ -195,10 +199,26 @@ def buildPrepareRunLocalsForRunCallKwargsImpl(**kwargs) -> dict[str, object]:
     return dict(kwargs)
 
 
+def buildEnsureConversionRuntimeDependenciesKwargsImpl(**kwargs) -> dict[str, object]:
+    """Return the input mapping for dependency-bootstrap call-kwargs builders."""
+
+    return dict(kwargs)
+
+
 def buildRunIterationPipelineDispatchKwargsImpl(**kwargs) -> dict[str, object]:
     """Return the input mapping for run-dispatch call-kwargs builders."""
 
     return dict(kwargs)
+
+
+def executeEnsureConversionRuntimeDependenciesImpl(
+    *,
+    ensure_dependency_kwargs: dict[str, object],
+    ensure_conversion_runtime_dependencies_fn,
+) -> None:
+    """Execute runtime dependency bootstrap with the prepared kwargs mapping."""
+
+    ensure_conversion_runtime_dependencies_fn(**ensure_dependency_kwargs)
 
 
 def executeRunIterationPipelineDispatchImpl(

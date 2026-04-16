@@ -150,6 +150,15 @@ def test_build_prepare_run_locals_for_run_call_kwargs_impl_returns_copy() -> Non
     assert result is not kwargs
 
 
+def test_build_ensure_conversion_runtime_dependencies_kwargs_impl_returns_copy() -> None:
+    kwargs = {"cv2_module": "cv2", "np_module": "np", "fitz_module": "fitz"}
+
+    result = helpers.buildEnsureConversionRuntimeDependenciesKwargsImpl(**kwargs)
+
+    assert result == kwargs
+    assert result is not kwargs
+
+
 def test_build_run_iteration_pipeline_dispatch_kwargs_impl_returns_copy() -> None:
     kwargs = {"img_path": "img.jpg", "max_iterations": 5}
 
@@ -157,6 +166,20 @@ def test_build_run_iteration_pipeline_dispatch_kwargs_impl_returns_copy() -> Non
 
     assert result == kwargs
     assert result is not kwargs
+
+
+def test_execute_ensure_conversion_runtime_dependencies_impl_delegates_runner() -> None:
+    captured: dict[str, object] = {}
+
+    def _ensure_conversion_runtime_dependencies_fn(**kwargs):
+        captured["kwargs"] = kwargs
+
+    helpers.executeEnsureConversionRuntimeDependenciesImpl(
+        ensure_dependency_kwargs={"cv2_module": "cv2", "np_module": "np", "fitz_module": "fitz"},
+        ensure_conversion_runtime_dependencies_fn=_ensure_conversion_runtime_dependencies_fn,
+    )
+
+    assert captured["kwargs"] == {"cv2_module": "cv2", "np_module": "np", "fitz_module": "fitz"}
 
 
 def test_execute_run_iteration_pipeline_dispatch_impl_delegates_builder_then_runner() -> None:
