@@ -342,7 +342,9 @@ focused on the actual project scope.
   - 2026-04-16: Umsetzung abgeschlossen inkl. Detailtest-Anpassung `tests/detailtests/test_optimization_element_search_helpers.py` (IoU nun über `imageCompositeConverterMaskMetrics.iouImpl` statt lokaler Test-Hilfsfunktion).
   - [x] C1.69: Run-Preparation-Aufrufbrücke aus `runIterationPipeline` in `src/iCCModules/imageCompositeConverterIterationRunPreparation.py` zentralisiert (`buildPrepareRunIterationPipelineLocalsForRunCallKwargsImpl`); `src/iCCModules/imageCompositeConverterRemaining.py` delegiert den bisherigen großen `prepareRunIterationPipelineLocalsForRunImpl`-Aufruf jetzt über den neuen Modul-Helper und bleibt API-kompatibel.
   - 2026-04-16: Umsetzung abgeschlossen inkl. Detailtests `test_prepare_run_iteration_pipeline_locals_for_run_impl_delegates_builder_then_prepare` und `test_build_prepare_run_iteration_pipeline_locals_for_run_call_kwargs_impl_delegates`.
-  - Nächster geplanter Schritt: weitere verbleibende Orchestrierungs-Sequenzen aus `runIterationPipeline` in kleinen, testbaren Schritten extrahieren (C1.70+).
+  - [x] C1.70: Run-Dispatch-Aufruf-Kwargs aus `runIterationPipeline` in `src/iCCModules/imageCompositeConverterIterationExecutionContext.py` zentralisiert (`buildRunIterationPipelineForRunCallKwargsImpl`); `src/iCCModules/imageCompositeConverterRemaining.py` delegiert den bisherigen Inline-Aufruf jetzt über den neuen Modul-Helper und bleibt API-kompatibel.
+  - 2026-04-16: Umsetzung abgeschlossen inkl. Detailtest `test_build_run_iteration_pipeline_for_run_call_kwargs_impl_maps_expected_keys`.
+  - Nächster geplanter Schritt: weitere verbleibende Orchestrierungs-Sequenzen aus `runIterationPipeline` in kleinen, testbaren Schritten extrahieren (C1.71+).
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.
   - `_create_diff_image_without_cv2` nutzt jetzt Context-Manager für beide `fitz.open(...)` Dokumente, damit Batch-Läufe keine unnötig offenen MuPDF-Dokumente ansammeln.

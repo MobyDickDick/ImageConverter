@@ -486,3 +486,47 @@ def test_run_iteration_pipeline_for_run_impl_delegates_builder_then_runner() -> 
     assert [entry[0] for entry in calls] == ["build", "run"]
     assert calls[0][1]["run_locals"] is run_locals
     assert calls[1][1] == expected_kwargs
+
+
+def test_build_run_iteration_pipeline_for_run_call_kwargs_impl_maps_expected_keys() -> None:
+    run_locals = {"params": {"mode": "semantic_badge"}}
+
+    result = helpers.buildRunIterationPipelineForRunCallKwargsImpl(
+        run_locals=run_locals,
+        img_path="/tmp/input/AC0831_L.jpg",
+        max_iterations=12,
+        badge_validation_rounds=5,
+        debug_element_diff_dir="/tmp/debug",
+        debug_ac0811_dir="/tmp/ac0811",
+        calculate_error_fn=object(),
+        print_fn=print,
+        build_prepared_mode_builder_kwargs_fn=object(),
+        run_prepared_iteration_and_finalize_fn=object(),
+        build_prepared_iteration_mode_kwargs_fn=object(),
+        run_prepared_iteration_mode_fn=object(),
+        finalize_iteration_result_fn=object(),
+        math_module=object(),
+    )
+
+    assert result["run_locals"] is run_locals
+    assert result["img_path"] == "/tmp/input/AC0831_L.jpg"
+    assert result["max_iterations"] == 12
+    assert result["badge_validation_rounds"] == 5
+    assert result["debug_element_diff_dir"] == "/tmp/debug"
+    assert result["debug_ac0811_dir"] == "/tmp/ac0811"
+    assert set(result.keys()) == {
+        "run_locals",
+        "img_path",
+        "max_iterations",
+        "badge_validation_rounds",
+        "debug_element_diff_dir",
+        "debug_ac0811_dir",
+        "calculate_error_fn",
+        "print_fn",
+        "build_prepared_mode_builder_kwargs_fn",
+        "run_prepared_iteration_and_finalize_fn",
+        "build_prepared_iteration_mode_kwargs_fn",
+        "run_prepared_iteration_mode_fn",
+        "finalize_iteration_result_fn",
+        "math_module",
+    }
