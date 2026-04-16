@@ -228,6 +228,54 @@ def test_build_execute_run_iteration_pipeline_kwargs_impl_maps_expected_keys() -
     }
 
 
+def test_build_run_iteration_pipeline_for_run_locals_kwargs_impl_maps_expected_keys() -> None:
+    run_locals = {"params": {"mode": "semantic_badge"}}
+    execute_run_iteration_pipeline_for_run = object()
+
+    result = helpers.buildRunIterationPipelineForRunLocalsKwargsImpl(
+        run_locals=run_locals,
+        img_path="/tmp/input/AC0831_L.jpg",
+        max_iterations=12,
+        badge_validation_rounds=5,
+        debug_element_diff_dir="/tmp/debug",
+        debug_ac0811_dir="/tmp/ac0811",
+        calculate_error_fn=object(),
+        print_fn=print,
+        build_prepared_mode_builder_kwargs_fn=object(),
+        run_prepared_iteration_and_finalize_fn=object(),
+        build_prepared_iteration_mode_kwargs_fn=object(),
+        run_prepared_iteration_mode_fn=object(),
+        finalize_iteration_result_fn=object(),
+        math_module=object(),
+        execute_run_iteration_pipeline_for_run_fn=execute_run_iteration_pipeline_for_run,
+    )
+
+    assert result["run_locals"] is run_locals
+    assert result["img_path"] == "/tmp/input/AC0831_L.jpg"
+    assert result["max_iterations"] == 12
+    assert result["badge_validation_rounds"] == 5
+    assert result["debug_element_diff_dir"] == "/tmp/debug"
+    assert result["debug_ac0811_dir"] == "/tmp/ac0811"
+    assert result["execute_run_iteration_pipeline_for_run_fn"] is execute_run_iteration_pipeline_for_run
+    assert set(result.keys()) == {
+        "run_locals",
+        "img_path",
+        "max_iterations",
+        "badge_validation_rounds",
+        "debug_element_diff_dir",
+        "debug_ac0811_dir",
+        "calculate_error_fn",
+        "print_fn",
+        "build_prepared_mode_builder_kwargs_fn",
+        "run_prepared_iteration_and_finalize_fn",
+        "build_prepared_iteration_mode_kwargs_fn",
+        "run_prepared_iteration_mode_fn",
+        "finalize_iteration_result_fn",
+        "math_module",
+        "execute_run_iteration_pipeline_for_run_fn",
+    }
+
+
 def test_execute_run_iteration_pipeline_for_run_impl_delegates_to_execute_with_run_defaults() -> None:
     run_locals = {"params": {"mode": "semantic_badge"}}
     expected_kwargs = {"token": "kwargs"}
