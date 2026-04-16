@@ -202,3 +202,25 @@ def test_execute_run_iteration_pipeline_dispatch_impl_delegates_builder_then_run
     assert captured["builder_kwargs"] == {"run_locals": "prepared", "max_iterations": 6}
     assert captured["runner_kwargs"] == {"dispatch": "kwargs"}
     assert result == {"result": "ok"}
+
+
+def test_execute_prepare_run_locals_for_run_impl_delegates_builder_then_runner() -> None:
+    captured: dict[str, object] = {}
+
+    def _build_prepare_run_locals_for_run_call_kwargs_fn(**kwargs):
+        captured["builder_kwargs"] = kwargs
+        return {"prepared": "kwargs"}
+
+    def _prepare_run_locals_for_run_fn(**kwargs):
+        captured["runner_kwargs"] = kwargs
+        return {"run_locals": "prepared"}
+
+    result = helpers.executePrepareRunLocalsForRunImpl(
+        prepare_run_locals_call_kwargs={"img_path": "img.jpg", "run_seed": 7},
+        build_prepare_run_locals_for_run_call_kwargs_fn=_build_prepare_run_locals_for_run_call_kwargs_fn,
+        prepare_run_locals_for_run_fn=_prepare_run_locals_for_run_fn,
+    )
+
+    assert captured["builder_kwargs"] == {"img_path": "img.jpg", "run_seed": 7}
+    assert captured["runner_kwargs"] == {"prepared": "kwargs"}
+    assert result == {"run_locals": "prepared"}

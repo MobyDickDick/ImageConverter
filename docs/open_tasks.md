@@ -352,7 +352,9 @@ focused on the actual project scope.
   - 2026-04-16: Umsetzung abgeschlossen inkl. Detailtest `test_execute_run_iteration_pipeline_dispatch_impl_delegates_builder_then_runner`.
   - [x] C1.74: Runtime-Dependency-Bootstrap-Aufruf aus `runIterationPipelineOrchestrationImpl` in `src/iCCModules/imageCompositeConverterIterationOrchestration.py` weiter modularisiert (`buildEnsureConversionRuntimeDependenciesKwargsImpl`, `executeEnsureConversionRuntimeDependenciesImpl`); die Orchestrierung delegiert den bisherigen direkten `ensureConversionRuntimeDependencies`-Inline-Aufruf jetzt über die neuen Modul-Helper und bleibt API-kompatibel.
   - 2026-04-16: Umsetzung abgeschlossen inkl. Detailtests `test_build_ensure_conversion_runtime_dependencies_kwargs_impl_returns_copy` und `test_execute_ensure_conversion_runtime_dependencies_impl_delegates_runner`.
-  - Nächster geplanter Schritt: weitere verbleibende Orchestrierungs-Sequenzen aus `runIterationPipeline` in kleinen, testbaren Schritten extrahieren (C1.75+).
+  - [x] C1.75: Run-Locals-Ausführungssequenz (Prepare-Run-Locals-Kwargs-Builder + Runner-Aufruf) aus `runIterationPipelineOrchestrationImpl` in `src/iCCModules/imageCompositeConverterIterationOrchestration.py` weiter modularisiert (`executePrepareRunLocalsForRunImpl`); die Orchestrierung delegiert den bisherigen Inline-Aufruf jetzt über den neuen Modul-Helper und bleibt API-kompatibel.
+  - 2026-04-16: Umsetzung abgeschlossen inkl. Detailtest `test_execute_prepare_run_locals_for_run_impl_delegates_builder_then_runner`.
+  - Nächster geplanter Schritt: weitere verbleibende Orchestrierungs-Sequenzen aus `runIterationPipeline` in kleinen, testbaren Schritten extrahieren (C1.76+).
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.
   - `_create_diff_image_without_cv2` nutzt jetzt Context-Manager für beide `fitz.open(...)` Dokumente, damit Batch-Läufe keine unnötig offenen MuPDF-Dokumente ansammeln.
