@@ -226,3 +226,54 @@ def test_build_execute_run_iteration_pipeline_kwargs_impl_maps_expected_keys() -
         "finalize_iteration_result_fn",
         "math_module",
     }
+
+
+def test_execute_run_iteration_pipeline_for_run_impl_delegates_to_execute_with_run_defaults() -> None:
+    run_locals = {"params": {"mode": "semantic_badge"}}
+    expected_kwargs = {"token": "kwargs"}
+    expected_result = object()
+    calls: list[tuple[str, dict[str, object]]] = []
+
+    def _build_execute_kwargs(**kwargs):
+        calls.append(("build", kwargs))
+        return expected_kwargs
+
+    def _execute_pipeline(**kwargs):
+        calls.append(("execute", kwargs))
+        return expected_result
+
+    original_build = helpers.buildExecuteRunIterationPipelineKwargsImpl
+    original_execute = helpers.executeRunIterationPipelineImpl
+    helpers.buildExecuteRunIterationPipelineKwargsImpl = _build_execute_kwargs
+    helpers.executeRunIterationPipelineImpl = _execute_pipeline
+    try:
+        result = helpers.executeRunIterationPipelineForRunImpl(
+            run_locals=run_locals,
+            img_path="/tmp/input/AC0831_L.jpg",
+            max_iterations=12,
+            badge_validation_rounds=5,
+            debug_element_diff_dir="/tmp/debug",
+            debug_ac0811_dir="/tmp/ac0811",
+            calculate_error_fn=object(),
+            print_fn=print,
+            build_prepared_mode_builder_kwargs_fn=object(),
+            run_prepared_iteration_and_finalize_fn=object(),
+            build_prepared_iteration_mode_kwargs_fn=object(),
+            run_prepared_iteration_mode_fn=object(),
+            finalize_iteration_result_fn=object(),
+            math_module=object(),
+        )
+    finally:
+        helpers.buildExecuteRunIterationPipelineKwargsImpl = original_build
+        helpers.executeRunIterationPipelineImpl = original_execute
+
+    assert result is expected_result
+    assert [entry[0] for entry in calls] == ["build", "execute"]
+    assert calls[0][1]["run_locals"] is run_locals
+    assert calls[0][1]["build_prepared_mode_builder_kwargs_for_run_pipeline_fn"] is (
+        helpers.buildPreparedModeBuilderKwargsForRunPipelineImpl
+    )
+    assert calls[0][1]["run_prepared_iteration_and_finalize_for_run_fn"] is (
+        helpers.runPreparedIterationAndFinalizeForRunImpl
+    )
+    assert calls[1][1] == expected_kwargs

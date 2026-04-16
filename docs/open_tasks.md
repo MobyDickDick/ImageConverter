@@ -322,6 +322,8 @@ focused on the actual project scope.
   - 2026-04-15: Umsetzung abgeschlossen inkl. Detailtest `test_build_prepare_run_iteration_pipeline_locals_kwargs_impl_maps_all_fields`.
   - [x] C1.59: Komplette Run-Locals-Setup-Konfiguration (Input-/Callback-/Mode-Shared-Kwargs) aus `runIterationPipeline` in `src/iCCModules/imageCompositeConverterIterationRunPreparation.py` zentralisiert (`buildPrepareRunIterationPipelineLocalsKwargsForRunImpl`); `src/iCCModules/imageCompositeConverterRemaining.py` delegiert die zuvor große Inline-Konfiguration jetzt über den neuen Modul-Helper und bleibt API-kompatibel.
   - 2026-04-16: Umsetzung abgeschlossen inkl. Detailtest `test_build_prepare_run_iteration_pipeline_locals_kwargs_for_run_impl_builds_nested_context`.
+  - [x] C1.60: Execute-Dispatch-Sequenz (`buildExecuteRunIterationPipelineKwargsImpl` + `executeRunIterationPipelineImpl`) aus `runIterationPipeline` in `src/iCCModules/imageCompositeConverterIterationExecutionContext.py` zentralisiert (`executeRunIterationPipelineForRunImpl`); `src/iCCModules/imageCompositeConverterRemaining.py` delegiert den bisherigen Inline-Dispatch jetzt über den neuen Modul-Helper und bleibt API-kompatibel.
+  - 2026-04-16: Umsetzung abgeschlossen inkl. Detailtest `test_execute_run_iteration_pipeline_for_run_impl_delegates_to_execute_with_run_defaults`.
   - Nächster geplanter Schritt: weitere verbleibende Orchestrierungs-Sequenzen aus `runIterationPipeline` in kleinen, testbaren Schritten extrahieren.
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.
