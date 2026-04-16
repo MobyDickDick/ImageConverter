@@ -322,7 +322,7 @@ def renderCandidateMask(candidate: Candidate, width: int, height: int) -> list[l
 
 
 def _iou(a: list[list[int]], b: list[list[int]]) -> float:
-    return imageCompositeConverterRemaining_helpers._iou(a, b)
+    return mask_metrics_helpers.iouImpl(a, b)
 
 
 def scoreCandidate(target: list[list[int]], candidate: Candidate) -> float:

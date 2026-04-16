@@ -161,7 +161,7 @@ def scoreCandidate(target: list[list[int]], candidate: Candidate) -> float:
         target,
         candidate,
         render_candidate_mask_fn=renderCandidateMask,
-        iou_fn=_iou,
+        iou_fn=mask_metrics_helpers.iouImpl,
     )
 
 def score_candidate(target: list[list[int]], candidate: Candidate) -> float:

@@ -3,6 +3,7 @@ from __future__ import annotations
 import random
 from dataclasses import dataclass
 
+from src.iCCModules import imageCompositeConverterMaskMetrics as mask_metrics_helpers
 from src.iCCModules import imageCompositeConverterOptimizationElementSearch as helpers
 
 
@@ -15,24 +16,15 @@ class _Candidate:
     h: float
 
 
-def _iou(a: list[list[int]], b: list[list[int]]) -> float:
-    inter = 0
-    union = 0
-    for y in range(len(a)):
-        for x in range(len(a[0])):
-            av = bool(a[y][x])
-            bv = bool(b[y][x])
-            if av and bv:
-                inter += 1
-            if av or bv:
-                union += 1
-    return float(inter) / float(union or 1)
-
-
 def test_render_candidate_mask_and_score() -> None:
     candidate = _Candidate("rect", 3.0, 3.0, 4.0, 4.0)
     mask = helpers.renderCandidateMaskImpl(candidate, width=8, height=8)
-    score = helpers.scoreCandidateImpl(mask, candidate, render_candidate_mask_fn=helpers.renderCandidateMaskImpl, iou_fn=_iou)
+    score = helpers.scoreCandidateImpl(
+        mask,
+        candidate,
+        render_candidate_mask_fn=helpers.renderCandidateMaskImpl,
+        iou_fn=mask_metrics_helpers.iouImpl,
+    )
     assert sum(sum(row) for row in mask) > 0
     assert score == 1.0
 
@@ -53,7 +45,7 @@ def test_optimize_element_impl_improves_score() -> None:
             t,
             c,
             render_candidate_mask_fn=helpers.renderCandidateMaskImpl,
-            iou_fn=_iou,
+            iou_fn=mask_metrics_helpers.iouImpl,
         ),
         random_neighbor_fn=lambda base, scale, rng: helpers.randomNeighborImpl(
             base,
