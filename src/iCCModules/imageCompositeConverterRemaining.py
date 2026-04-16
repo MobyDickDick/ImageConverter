@@ -436,7 +436,7 @@ def runIterationPipeline(
         dual_arrow_runtime_helpers=dual_arrow_runtime_helpers,
     )
     return iteration_execution_context_helpers.runIterationPipelineForRunLocalsImpl(
-        **iteration_execution_context_helpers.buildRunIterationPipelineForRunLocalsKwargsImpl(
+        **iteration_execution_context_helpers.buildRunIterationPipelineForRunLocalsKwargsForRunImpl(
             run_locals=run_locals,
             img_path=img_path,
             max_iterations=max_iterations,
@@ -451,7 +451,6 @@ def runIterationPipeline(
             run_prepared_iteration_mode_fn=iteration_dispatch_helpers.runPreparedIterationModeImpl,
             finalize_iteration_result_fn=iteration_finalization_helpers.finalizeIterationResultImpl,
             math_module=math,
-            execute_run_iteration_pipeline_for_run_fn=iteration_execution_context_helpers.executeRunIterationPipelineForRunImpl,
         )
     )
 

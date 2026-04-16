@@ -334,6 +334,8 @@ focused on the actual project scope.
   - 2026-04-16: Umsetzung abgeschlossen inkl. Detailtest `test_build_run_iteration_pipeline_for_run_locals_kwargs_impl_maps_expected_keys`.
   - [x] C1.65: Runtime-Callback-Wiring für `prepareIterationRuntimeCallbacksForRunImpl` im Run-Preparation-Builder vervollständigt; `prepare_iteration_runtime_fn`, `extract_iteration_runtime_bindings_fn` und `extract_iteration_runtime_callbacks_fn` werden jetzt zentral über `buildPrepareRunIterationPipelineLocalsKwargsForRunImpl` durchgereicht, damit `runIterationPipeline` wieder ohne `TypeError` läuft.
   - 2026-04-16: Umsetzung abgeschlossen inkl. Detailtest-Update `test_build_prepare_run_iteration_pipeline_locals_kwargs_for_run_impl_builds_nested_context` (prüft die drei neuen Callback-Wiring-Felder).
+  - [x] C1.66: Run-Dispatch-Kwargs-Aufrufbrücke (`buildRunIterationPipelineForRunLocalsKwargsImpl`) aus `runIterationPipeline` in `src/iCCModules/imageCompositeConverterIterationExecutionContext.py` zentralisiert (`buildRunIterationPipelineForRunLocalsKwargsForRunImpl`); `src/iCCModules/imageCompositeConverterRemaining.py` delegiert den bisherigen Inline-Aufruf jetzt über den neuen Modul-Helper und bleibt API-kompatibel.
+  - 2026-04-16: Umsetzung abgeschlossen inkl. Detailtest `test_build_run_iteration_pipeline_for_run_locals_kwargs_for_run_impl_uses_run_defaults`.
   - Nächster geplanter Schritt: weitere verbleibende Orchestrierungs-Sequenzen aus `runIterationPipeline` in kleinen, testbaren Schritten extrahieren.
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.
