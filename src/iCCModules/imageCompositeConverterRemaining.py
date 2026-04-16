@@ -403,6 +403,7 @@ def runIterationPipeline(
         time_ns_fn=time.time_ns,
         iteration_run_preparation_helpers=iteration_run_preparation_helpers,
         iteration_bindings_helpers=iteration_bindings_helpers,
+        iteration_initialization_helpers=iteration_initialization_helpers,
         iteration_setup_helpers=iteration_setup_helpers,
         iteration_runtime_helpers=iteration_runtime_helpers,
         iteration_mode_runtime_preparation_helpers=iteration_mode_runtime_preparation_helpers,
