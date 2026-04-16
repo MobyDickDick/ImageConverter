@@ -157,3 +157,25 @@ def test_build_run_iteration_pipeline_dispatch_kwargs_impl_returns_copy() -> Non
 
     assert result == kwargs
     assert result is not kwargs
+
+
+def test_execute_run_iteration_pipeline_dispatch_impl_delegates_builder_then_runner() -> None:
+    captured: dict[str, object] = {}
+
+    def _build_run_iteration_pipeline_for_run_call_kwargs_fn(**kwargs):
+        captured["builder_kwargs"] = kwargs
+        return {"dispatch": "kwargs"}
+
+    def _run_iteration_pipeline_for_run_fn(**kwargs):
+        captured["runner_kwargs"] = kwargs
+        return {"result": "ok"}
+
+    result = helpers.executeRunIterationPipelineDispatchImpl(
+        run_iteration_dispatch_kwargs={"run_locals": "prepared", "max_iterations": 6},
+        build_run_iteration_pipeline_for_run_call_kwargs_fn=_build_run_iteration_pipeline_for_run_call_kwargs_fn,
+        run_iteration_pipeline_for_run_fn=_run_iteration_pipeline_for_run_fn,
+    )
+
+    assert captured["builder_kwargs"] == {"run_locals": "prepared", "max_iterations": 6}
+    assert captured["runner_kwargs"] == {"dispatch": "kwargs"}
+    assert result == {"result": "ok"}
