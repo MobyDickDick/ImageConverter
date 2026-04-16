@@ -337,9 +337,9 @@ def test_prepare_run_iteration_pipeline_locals_for_run_impl_delegates_builder_th
         captured_prepare_kwargs.update(kwargs)
         return {"run": "locals"}
 
-    original_build = helpers.buildPrepareRunIterationPipelineLocalsKwargsForRunImpl
+    original_build = helpers.buildPrepareRunIterationPipelineLocalsForRunCallKwargsImpl
     original_prepare = helpers.prepareRunIterationPipelineLocalsImpl
-    helpers.buildPrepareRunIterationPipelineLocalsKwargsForRunImpl = _build_prepare_run_kwargs_for_run
+    helpers.buildPrepareRunIterationPipelineLocalsForRunCallKwargsImpl = _build_prepare_run_kwargs_for_run
     helpers.prepareRunIterationPipelineLocalsImpl = _prepare_run_locals
     try:
         result = helpers.prepareRunIterationPipelineLocalsForRunImpl(
@@ -397,7 +397,7 @@ def test_prepare_run_iteration_pipeline_locals_for_run_impl_delegates_builder_th
             dual_arrow_runtime_helpers=marker,
         )
     finally:
-        helpers.buildPrepareRunIterationPipelineLocalsKwargsForRunImpl = original_build
+        helpers.buildPrepareRunIterationPipelineLocalsForRunCallKwargsImpl = original_build
         helpers.prepareRunIterationPipelineLocalsImpl = original_prepare
 
     assert result == {"run": "locals"}
@@ -405,3 +405,76 @@ def test_prepare_run_iteration_pipeline_locals_for_run_impl_delegates_builder_th
     assert captured_builder_kwargs["run_seed"] == 7
     assert captured_builder_kwargs["pass_seed_offset"] == 3
     assert captured_prepare_kwargs == {"nested": "kwargs"}
+
+
+def test_build_prepare_run_iteration_pipeline_locals_for_run_call_kwargs_impl_delegates() -> None:
+    marker = object()
+    captured_kwargs: dict[str, object] = {}
+
+    def _build_prepare_run_kwargs_for_run(**kwargs):
+        captured_kwargs.update(kwargs)
+        return {"prepared": "kwargs"}
+
+    original = helpers.buildPrepareRunIterationPipelineLocalsKwargsForRunImpl
+    helpers.buildPrepareRunIterationPipelineLocalsKwargsForRunImpl = _build_prepare_run_kwargs_for_run
+    try:
+        result = helpers.buildPrepareRunIterationPipelineLocalsForRunCallKwargsImpl(
+            img_path="images/AC0800_L.jpg",
+            csv_path="descriptions.csv",
+            reports_out_dir="reports",
+            svg_out_dir="svg",
+            diff_out_dir="diff",
+            run_seed=11,
+            pass_seed_offset=5,
+            action_cls=marker,
+            perception_cls=marker,
+            reflection_cls=marker,
+            get_base_name_from_file_fn=marker,
+            semantic_audit_record_fn=marker,
+            semantic_quality_flags_fn=marker,
+            looks_like_elongated_foreground_rect_fn=marker,
+            render_embedded_raster_svg_fn=marker,
+            np_module=marker,
+            cv2_module=marker,
+            print_fn=print,
+            time_ns_fn=marker,
+            iteration_run_preparation_helpers=marker,
+            iteration_bindings_helpers=marker,
+            iteration_initialization_helpers=marker,
+            iteration_setup_helpers=marker,
+            iteration_runtime_helpers=marker,
+            iteration_mode_runtime_preparation_helpers=marker,
+            iteration_mode_setup_helpers=marker,
+            iteration_mode_preparation_helpers=marker,
+            iteration_mode_dependency_setup_helpers=marker,
+            iteration_mode_dependency_helpers=marker,
+            iteration_mode_runtime_helpers=marker,
+            iteration_orchestration_helpers=marker,
+            iteration_context_helpers=marker,
+            iteration_preparation_helpers=marker,
+            gradient_stripe_strategy_helpers=marker,
+            semantic_audit_bootstrap_helpers=marker,
+            semantic_audit_logging_helpers=marker,
+            semantic_audit_runtime_helpers=marker,
+            semantic_mismatch_reporting_helpers=marker,
+            semantic_validation_logging_helpers=marker,
+            semantic_mismatch_runtime_helpers=marker,
+            semantic_validation_context_helpers=marker,
+            semantic_validation_runtime_helpers=marker,
+            semantic_post_validation_helpers=marker,
+            semantic_validation_finalization_helpers=marker,
+            semantic_iteration_finalization_helpers=marker,
+            semantic_ac0223_runtime_helpers=marker,
+            semantic_visual_override_helpers=marker,
+            non_composite_runtime_helpers=marker,
+            conversion_composite_helpers=marker,
+            semantic_badge_runtime_helpers=marker,
+            dual_arrow_badge_helpers=marker,
+            dual_arrow_runtime_helpers=marker,
+        )
+    finally:
+        helpers.buildPrepareRunIterationPipelineLocalsKwargsForRunImpl = original
+
+    assert result == {"prepared": "kwargs"}
+    assert captured_kwargs["run_seed"] == 11
+    assert captured_kwargs["pass_seed_offset"] == 5
