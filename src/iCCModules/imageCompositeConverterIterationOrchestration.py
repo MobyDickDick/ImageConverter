@@ -253,3 +253,18 @@ def executeRunIterationPipelineDispatchImpl(
     return run_iteration_pipeline_for_run_fn(
         **build_run_iteration_pipeline_for_run_call_kwargs_fn(**run_iteration_dispatch_kwargs)
     )
+
+
+def executeRunIterationPipelineOrchestrationForRunImpl(
+    *,
+    run_iteration_pipeline_orchestration_kwargs: dict[str, object],
+    build_run_iteration_pipeline_orchestration_kwargs_for_run_fn,
+    run_iteration_pipeline_orchestration_fn,
+):
+    """Build top-level orchestration kwargs and execute the orchestration call."""
+
+    return run_iteration_pipeline_orchestration_fn(
+        **build_run_iteration_pipeline_orchestration_kwargs_for_run_fn(
+            **run_iteration_pipeline_orchestration_kwargs
+        )
+    )

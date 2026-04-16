@@ -233,3 +233,27 @@ def test_execute_prepare_run_locals_for_run_impl_delegates_builder_then_runner()
     assert captured["builder_kwargs"] == {"img_path": "img.jpg", "run_seed": 7}
     assert captured["runner_kwargs"] == {"prepared": "kwargs"}
     assert result == {"run_locals": "prepared"}
+
+
+def test_execute_run_iteration_pipeline_orchestration_for_run_impl_delegates_builder_then_runner() -> None:
+    captured: dict[str, object] = {}
+
+    def _build_run_iteration_pipeline_orchestration_kwargs_for_run_fn(**kwargs):
+        captured["builder_kwargs"] = kwargs
+        return {"orchestration": "kwargs"}
+
+    def _run_iteration_pipeline_orchestration_fn(**kwargs):
+        captured["runner_kwargs"] = kwargs
+        return {"result": "ok"}
+
+    result = helpers.executeRunIterationPipelineOrchestrationForRunImpl(
+        run_iteration_pipeline_orchestration_kwargs={"img_path": "img.jpg", "max_iterations": 7},
+        build_run_iteration_pipeline_orchestration_kwargs_for_run_fn=(
+            _build_run_iteration_pipeline_orchestration_kwargs_for_run_fn
+        ),
+        run_iteration_pipeline_orchestration_fn=_run_iteration_pipeline_orchestration_fn,
+    )
+
+    assert captured["builder_kwargs"] == {"img_path": "img.jpg", "max_iterations": 7}
+    assert captured["runner_kwargs"] == {"orchestration": "kwargs"}
+    assert result == {"result": "ok"}
