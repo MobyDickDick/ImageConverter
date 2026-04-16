@@ -435,21 +435,23 @@ def runIterationPipeline(
         dual_arrow_runtime_helpers=dual_arrow_runtime_helpers,
     )
     return iteration_execution_context_helpers.runIterationPipelineForRunLocalsImpl(
-        run_locals=run_locals,
-        img_path=img_path,
-        max_iterations=max_iterations,
-        badge_validation_rounds=badge_validation_rounds,
-        debug_element_diff_dir=debug_element_diff_dir,
-        debug_ac0811_dir=debug_ac0811_dir,
-        calculate_error_fn=Action.calculate_error,
-        print_fn=print,
-        build_prepared_mode_builder_kwargs_fn=iteration_execution_helpers.buildPreparedModeBuilderKwargsImpl,
-        run_prepared_iteration_and_finalize_fn=iteration_execution_helpers.runPreparedIterationAndFinalizeImpl,
-        build_prepared_iteration_mode_kwargs_fn=iteration_context_helpers.buildPreparedIterationModeKwargsImpl,
-        run_prepared_iteration_mode_fn=iteration_dispatch_helpers.runPreparedIterationModeImpl,
-        finalize_iteration_result_fn=iteration_finalization_helpers.finalizeIterationResultImpl,
-        math_module=math,
-        execute_run_iteration_pipeline_for_run_fn=iteration_execution_context_helpers.executeRunIterationPipelineForRunImpl,
+        **iteration_execution_context_helpers.buildRunIterationPipelineForRunLocalsKwargsImpl(
+            run_locals=run_locals,
+            img_path=img_path,
+            max_iterations=max_iterations,
+            badge_validation_rounds=badge_validation_rounds,
+            debug_element_diff_dir=debug_element_diff_dir,
+            debug_ac0811_dir=debug_ac0811_dir,
+            calculate_error_fn=Action.calculate_error,
+            print_fn=print,
+            build_prepared_mode_builder_kwargs_fn=iteration_execution_helpers.buildPreparedModeBuilderKwargsImpl,
+            run_prepared_iteration_and_finalize_fn=iteration_execution_helpers.runPreparedIterationAndFinalizeImpl,
+            build_prepared_iteration_mode_kwargs_fn=iteration_context_helpers.buildPreparedIterationModeKwargsImpl,
+            run_prepared_iteration_mode_fn=iteration_dispatch_helpers.runPreparedIterationModeImpl,
+            finalize_iteration_result_fn=iteration_finalization_helpers.finalizeIterationResultImpl,
+            math_module=math,
+            execute_run_iteration_pipeline_for_run_fn=iteration_execution_context_helpers.executeRunIterationPipelineForRunImpl,
+        )
     )
 
 def _extractRefParts(name: str) -> tuple[str, int] | None:
