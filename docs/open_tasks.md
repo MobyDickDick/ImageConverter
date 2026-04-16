@@ -328,6 +328,8 @@ focused on the actual project scope.
   - 2026-04-16: Umsetzung abgeschlossen; API-Signatur (`max_iter`, `plateau_limit`, `seed`) bleibt vollständig kompatibel und wird unverändert durchgereicht.
   - [x] C1.62: Run-Locals-Aufrufbrücke (`buildPrepareRunIterationPipelineLocalsKwargsForRunImpl` + `prepareRunIterationPipelineLocalsImpl`) aus `runIterationPipeline` in `src/iCCModules/imageCompositeConverterIterationRunPreparation.py` zentralisiert (`prepareRunIterationPipelineLocalsForRunImpl`); `src/iCCModules/imageCompositeConverterRemaining.py` delegiert den bisherigen Doppelaufruf jetzt über den neuen Modul-Helper und bleibt API-kompatibel.
   - 2026-04-16: Umsetzung abgeschlossen inkl. Detailtest `test_prepare_run_iteration_pipeline_locals_for_run_impl_delegates_builder_then_prepare`.
+  - [x] C1.63: Run-Locals-Guard/Execute-Dispatch aus `runIterationPipeline` in `src/iCCModules/imageCompositeConverterIterationExecutionContext.py` zentralisiert (`runIterationPipelineForRunLocalsImpl`); `src/iCCModules/imageCompositeConverterRemaining.py` delegiert jetzt auch den bisherigen `None`-Guard plus Ausführungsaufruf über den neuen Modul-Helper und bleibt API-kompatibel.
+  - 2026-04-16: Umsetzung abgeschlossen inkl. Detailtests `test_run_iteration_pipeline_for_run_locals_impl_returns_none_without_dispatch` und `test_run_iteration_pipeline_for_run_locals_impl_dispatches_with_same_arguments`.
   - Nächster geplanter Schritt: weitere verbleibende Orchestrierungs-Sequenzen aus `runIterationPipeline` in kleinen, testbaren Schritten extrahieren.
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.

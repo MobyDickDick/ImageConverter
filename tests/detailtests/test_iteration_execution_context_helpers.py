@@ -277,3 +277,78 @@ def test_execute_run_iteration_pipeline_for_run_impl_delegates_to_execute_with_r
         helpers.runPreparedIterationAndFinalizeForRunImpl
     )
     assert calls[1][1] == expected_kwargs
+
+
+def test_run_iteration_pipeline_for_run_locals_impl_returns_none_without_dispatch() -> None:
+    calls: list[dict[str, object]] = []
+
+    def _execute_run_iteration_pipeline_for_run(**kwargs):
+        calls.append(kwargs)
+        return object()
+
+    result = helpers.runIterationPipelineForRunLocalsImpl(
+        run_locals=None,
+        img_path="/tmp/input/AC0831_L.jpg",
+        max_iterations=12,
+        badge_validation_rounds=5,
+        debug_element_diff_dir="/tmp/debug",
+        debug_ac0811_dir="/tmp/ac0811",
+        calculate_error_fn=object(),
+        print_fn=print,
+        build_prepared_mode_builder_kwargs_fn=object(),
+        run_prepared_iteration_and_finalize_fn=object(),
+        build_prepared_iteration_mode_kwargs_fn=object(),
+        run_prepared_iteration_mode_fn=object(),
+        finalize_iteration_result_fn=object(),
+        math_module=object(),
+        execute_run_iteration_pipeline_for_run_fn=_execute_run_iteration_pipeline_for_run,
+    )
+
+    assert result is None
+    assert calls == []
+
+
+def test_run_iteration_pipeline_for_run_locals_impl_dispatches_with_same_arguments() -> None:
+    run_locals = {"params": {"mode": "semantic_badge"}}
+    expected_result = object()
+    calls: list[dict[str, object]] = []
+    calculate_error = object()
+    build_prepared_mode_builder_kwargs = object()
+    run_prepared_iteration_and_finalize = object()
+    build_prepared_iteration_mode_kwargs = object()
+    run_prepared_iteration_mode = object()
+    finalize_iteration_result = object()
+    math_module = object()
+
+    def _execute_run_iteration_pipeline_for_run(**kwargs):
+        calls.append(kwargs)
+        return expected_result
+
+    result = helpers.runIterationPipelineForRunLocalsImpl(
+        run_locals=run_locals,
+        img_path="/tmp/input/AC0831_L.jpg",
+        max_iterations=12,
+        badge_validation_rounds=5,
+        debug_element_diff_dir="/tmp/debug",
+        debug_ac0811_dir="/tmp/ac0811",
+        calculate_error_fn=calculate_error,
+        print_fn=print,
+        build_prepared_mode_builder_kwargs_fn=build_prepared_mode_builder_kwargs,
+        run_prepared_iteration_and_finalize_fn=run_prepared_iteration_and_finalize,
+        build_prepared_iteration_mode_kwargs_fn=build_prepared_iteration_mode_kwargs,
+        run_prepared_iteration_mode_fn=run_prepared_iteration_mode,
+        finalize_iteration_result_fn=finalize_iteration_result,
+        math_module=math_module,
+        execute_run_iteration_pipeline_for_run_fn=_execute_run_iteration_pipeline_for_run,
+    )
+
+    assert result is expected_result
+    assert len(calls) == 1
+    assert calls[0]["run_locals"] is run_locals
+    assert calls[0]["calculate_error_fn"] is calculate_error
+    assert calls[0]["build_prepared_mode_builder_kwargs_fn"] is build_prepared_mode_builder_kwargs
+    assert calls[0]["run_prepared_iteration_and_finalize_fn"] is run_prepared_iteration_and_finalize
+    assert calls[0]["build_prepared_iteration_mode_kwargs_fn"] is build_prepared_iteration_mode_kwargs
+    assert calls[0]["run_prepared_iteration_mode_fn"] is run_prepared_iteration_mode
+    assert calls[0]["finalize_iteration_result_fn"] is finalize_iteration_result
+    assert calls[0]["math_module"] is math_module
