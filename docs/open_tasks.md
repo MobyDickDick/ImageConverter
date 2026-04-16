@@ -326,6 +326,8 @@ focused on the actual project scope.
   - 2026-04-16: Umsetzung abgeschlossen inkl. Detailtest `test_execute_run_iteration_pipeline_for_run_impl_delegates_to_execute_with_run_defaults`.
   - [x] C1.61: Legacy-Single-Image-Entrypoint `convertImage` im Monolithen auf den zentralen Modul-Entry-Point in `src/iCCModules/imageCompositeConverterRemaining.py` vereinheitlicht; `src/imageCompositeConverter.py` delegiert jetzt ohne eigene Fallback-/Dependency-Wiring-Duplikation.
   - 2026-04-16: Umsetzung abgeschlossen; API-Signatur (`max_iter`, `plateau_limit`, `seed`) bleibt vollständig kompatibel und wird unverändert durchgereicht.
+  - [x] C1.62: Run-Locals-Aufrufbrücke (`buildPrepareRunIterationPipelineLocalsKwargsForRunImpl` + `prepareRunIterationPipelineLocalsImpl`) aus `runIterationPipeline` in `src/iCCModules/imageCompositeConverterIterationRunPreparation.py` zentralisiert (`prepareRunIterationPipelineLocalsForRunImpl`); `src/iCCModules/imageCompositeConverterRemaining.py` delegiert den bisherigen Doppelaufruf jetzt über den neuen Modul-Helper und bleibt API-kompatibel.
+  - 2026-04-16: Umsetzung abgeschlossen inkl. Detailtest `test_prepare_run_iteration_pipeline_locals_for_run_impl_delegates_builder_then_prepare`.
   - Nächster geplanter Schritt: weitere verbleibende Orchestrierungs-Sequenzen aus `runIterationPipeline` in kleinen, testbaren Schritten extrahieren.
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.
