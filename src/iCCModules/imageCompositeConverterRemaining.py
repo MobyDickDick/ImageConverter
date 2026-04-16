@@ -448,7 +448,15 @@ def runIterationPipeline(
         dual_arrow_runtime_helpers=dual_arrow_runtime_helpers,
         )
     )
-    return iteration_orchestration_helpers.runIterationPipelineOrchestrationImpl(**orchestration_kwargs)
+    return iteration_orchestration_helpers.executeRunIterationPipelineOrchestrationForRunImpl(
+        run_iteration_pipeline_orchestration_kwargs=orchestration_kwargs,
+        build_run_iteration_pipeline_orchestration_kwargs_for_run_fn=(
+            iteration_orchestration_helpers.buildRunIterationPipelineOrchestrationKwargsForRunImpl
+        ),
+        run_iteration_pipeline_orchestration_fn=(
+            iteration_orchestration_helpers.runIterationPipelineOrchestrationImpl
+        ),
+    )
 
 def _extractRefParts(name: str) -> tuple[str, int] | None:
     return range_helpers.extractRefPartsImpl(name)
