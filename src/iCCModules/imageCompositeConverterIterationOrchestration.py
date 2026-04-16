@@ -167,8 +167,10 @@ def runIterationPipelineOrchestrationImpl(
         dual_arrow_badge_helpers=dual_arrow_badge_helpers,
         dual_arrow_runtime_helpers=dual_arrow_runtime_helpers,
     )
-    run_locals = prepare_run_locals_for_run_fn(
-        **build_prepare_run_locals_for_run_call_kwargs_fn(**prepare_run_locals_call_kwargs)
+    run_locals = executePrepareRunLocalsForRunImpl(
+        prepare_run_locals_call_kwargs=prepare_run_locals_call_kwargs,
+        build_prepare_run_locals_for_run_call_kwargs_fn=build_prepare_run_locals_for_run_call_kwargs_fn,
+        prepare_run_locals_for_run_fn=prepare_run_locals_for_run_fn,
     )
     run_iteration_dispatch_kwargs = buildRunIterationPipelineDispatchKwargsImpl(
         run_locals=run_locals,
@@ -219,6 +221,19 @@ def executeEnsureConversionRuntimeDependenciesImpl(
     """Execute runtime dependency bootstrap with the prepared kwargs mapping."""
 
     ensure_conversion_runtime_dependencies_fn(**ensure_dependency_kwargs)
+
+
+def executePrepareRunLocalsForRunImpl(
+    *,
+    prepare_run_locals_call_kwargs: dict[str, object],
+    build_prepare_run_locals_for_run_call_kwargs_fn,
+    prepare_run_locals_for_run_fn,
+):
+    """Build run-local kwargs and execute run-local preparation."""
+
+    return prepare_run_locals_for_run_fn(
+        **build_prepare_run_locals_for_run_call_kwargs_fn(**prepare_run_locals_call_kwargs)
+    )
 
 
 def executeRunIterationPipelineDispatchImpl(
