@@ -338,6 +338,8 @@ focused on the actual project scope.
   - 2026-04-16: Umsetzung abgeschlossen inkl. Detailtest `test_build_run_iteration_pipeline_for_run_locals_kwargs_for_run_impl_uses_run_defaults`.
   - [x] C1.67: Run-Dispatch-Sequenz (`buildRunIterationPipelineForRunLocalsKwargsForRunImpl` + `runIterationPipelineForRunLocalsImpl`) aus `runIterationPipeline` in `src/iCCModules/imageCompositeConverterIterationExecutionContext.py` zentralisiert (`runIterationPipelineForRunImpl`); `src/iCCModules/imageCompositeConverterRemaining.py` delegiert den bisherigen Doppelaufruf jetzt über den neuen Modul-Helper und bleibt API-kompatibel.
   - 2026-04-16: Umsetzung abgeschlossen inkl. Detailtest `test_run_iteration_pipeline_for_run_impl_delegates_builder_then_runner`.
+  - [x] C1.68: IoU-Verdrahtung im Primitive-Element-Scoring entkoppelt; `scoreCandidate` in `src/iCCModules/imageCompositeConverterRemaining.py` nutzt jetzt direkt `mask_metrics_helpers.iouImpl`, und der Monolith-Wrapper `_iou` delegiert ohne Zwischen-Wrapper direkt auf das Mask-Metrik-Modul.
+  - 2026-04-16: Umsetzung abgeschlossen inkl. Detailtest-Anpassung `tests/detailtests/test_optimization_element_search_helpers.py` (IoU nun über `imageCompositeConverterMaskMetrics.iouImpl` statt lokaler Test-Hilfsfunktion).
   - Nächster geplanter Schritt: weitere verbleibende Orchestrierungs-Sequenzen aus `runIterationPipeline` in kleinen, testbaren Schritten extrahieren.
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.
