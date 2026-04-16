@@ -375,7 +375,8 @@ def runIterationPipeline(
     debug_element_diff_dir: str | None = None,
     badge_validation_rounds: int = 6,
 ):
-    return iteration_orchestration_helpers.runIterationPipelineOrchestrationImpl(
+    orchestration_kwargs = (
+        iteration_orchestration_helpers.buildRunIterationPipelineOrchestrationKwargsForRunImpl(
         img_path=img_path,
         csv_path=csv_path,
         max_iterations=max_iterations,
@@ -445,7 +446,9 @@ def runIterationPipeline(
         semantic_badge_runtime_helpers=semantic_badge_runtime_helpers,
         dual_arrow_badge_helpers=dual_arrow_badge_helpers,
         dual_arrow_runtime_helpers=dual_arrow_runtime_helpers,
+        )
     )
+    return iteration_orchestration_helpers.runIterationPipelineOrchestrationImpl(**orchestration_kwargs)
 
 def _extractRefParts(name: str) -> tuple[str, int] | None:
     return range_helpers.extractRefPartsImpl(name)

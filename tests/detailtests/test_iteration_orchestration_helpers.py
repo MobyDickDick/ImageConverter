@@ -150,6 +150,15 @@ def test_build_prepare_run_locals_for_run_call_kwargs_impl_returns_copy() -> Non
     assert result is not kwargs
 
 
+def test_build_run_iteration_pipeline_orchestration_kwargs_for_run_impl_returns_copy() -> None:
+    kwargs = {"img_path": "img.jpg", "max_iterations": 7}
+
+    result = helpers.buildRunIterationPipelineOrchestrationKwargsForRunImpl(**kwargs)
+
+    assert result == kwargs
+    assert result is not kwargs
+
+
 def test_build_ensure_conversion_runtime_dependencies_kwargs_impl_returns_copy() -> None:
     kwargs = {"cv2_module": "cv2", "np_module": "np", "fitz_module": "fitz"}
 
