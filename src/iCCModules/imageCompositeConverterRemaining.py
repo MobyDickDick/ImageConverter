@@ -434,10 +434,7 @@ def runIterationPipeline(
         dual_arrow_badge_helpers=dual_arrow_badge_helpers,
         dual_arrow_runtime_helpers=dual_arrow_runtime_helpers,
     )
-    if run_locals is None:
-        return None
-
-    return iteration_execution_context_helpers.executeRunIterationPipelineForRunImpl(
+    return iteration_execution_context_helpers.runIterationPipelineForRunLocalsImpl(
         run_locals=run_locals,
         img_path=img_path,
         max_iterations=max_iterations,
@@ -452,6 +449,7 @@ def runIterationPipeline(
         run_prepared_iteration_mode_fn=iteration_dispatch_helpers.runPreparedIterationModeImpl,
         finalize_iteration_result_fn=iteration_finalization_helpers.finalizeIterationResultImpl,
         math_module=math,
+        execute_run_iteration_pipeline_for_run_fn=iteration_execution_context_helpers.executeRunIterationPipelineForRunImpl,
     )
 
 def _extractRefParts(name: str) -> tuple[str, int] | None:
