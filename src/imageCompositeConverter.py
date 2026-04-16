@@ -2761,8 +2761,7 @@ def main(argv: list[str] | None = None) -> int:
     )
 
 def convertImage(input_path: str, output_path: str, *, max_iter: int = 120, plateau_limit: int = 14, seed: int = 42) -> Path:
-    del max_iter, plateau_limit, seed
-    return legacy_api_helpers.convertImageImpl(
+    return imageCompositeConverterRemaining_helpers.convertImageWithRuntimeBindings(
         input_path=input_path,
         output_path=output_path,
         render_embedded_raster_svg_fn=_renderEmbeddedRasterSvg,
@@ -2770,6 +2769,9 @@ def convertImage(input_path: str, output_path: str, *, max_iter: int = 120, plat
         annotate_image_regions_fn=annotateImageRegions,
         cv2_module=cv2,
         np_module=np,
+        max_iter=max_iter,
+        plateau_limit=plateau_limit,
+        seed=seed,
     )
 
 
