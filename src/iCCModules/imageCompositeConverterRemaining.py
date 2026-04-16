@@ -1543,6 +1543,31 @@ def convertImage(input_path: str, output_path: str, *, max_iter: int = 120, plat
         np_module=np,
     )
 
+def convertImageWithRuntimeBindings(
+    input_path: str,
+    output_path: str,
+    *,
+    render_embedded_raster_svg_fn,
+    detect_relevant_regions_fn,
+    annotate_image_regions_fn,
+    cv2_module,
+    np_module,
+    max_iter: int = 120,
+    plateau_limit: int = 14,
+    seed: int = 42,
+) -> Path:
+    """Compatibility helper to keep legacy runtime monkeypatch hooks in the caller module."""
+    del max_iter, plateau_limit, seed
+    return legacy_api_helpers.convertImageImpl(
+        input_path=input_path,
+        output_path=output_path,
+        render_embedded_raster_svg_fn=render_embedded_raster_svg_fn,
+        detect_relevant_regions_fn=detect_relevant_regions_fn,
+        annotate_image_regions_fn=annotate_image_regions_fn,
+        cv2_module=cv2_module,
+        np_module=np_module,
+    )
+
 def convertImageVariants(*args, **kwargs):
     """Compatibility shim kept for tooling imports."""
     return legacy_api_helpers.convertImageVariantsImpl(*args, convert_range_fn=convertRange, **kwargs)

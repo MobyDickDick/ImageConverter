@@ -256,6 +256,38 @@ def test_convert_image_svg_target_uses_embedded_raster_fallback(monkeypatch: pyt
     assert not dst.exists()
 
 
+def test_convert_image_delegates_to_runtime_binding_helper(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
+    src = tmp_path / "in.png"
+    src.write_bytes(b"fake")
+    dst = tmp_path / "out.svg"
+
+    captured: dict[str, object] = {}
+
+    def fake_convert_image_with_runtime_bindings(**kwargs):
+        captured.update(kwargs)
+        return Path(kwargs["output_path"])
+
+    monkeypatch.setattr(
+        image_composite_converter.imageCompositeConverterRemaining_helpers,
+        "convertImageWithRuntimeBindings",
+        fake_convert_image_with_runtime_bindings,
+    )
+
+    written = image_composite_converter.convertImage(str(src), str(dst), max_iter=77, plateau_limit=8, seed=123)
+
+    assert written == dst
+    assert captured["input_path"] == str(src)
+    assert captured["output_path"] == str(dst)
+    assert captured["render_embedded_raster_svg_fn"] is image_composite_converter._renderEmbeddedRasterSvg
+    assert captured["detect_relevant_regions_fn"] is image_composite_converter.detectRelevantRegions
+    assert captured["annotate_image_regions_fn"] is image_composite_converter.annotateImageRegions
+    assert captured["cv2_module"] is image_composite_converter.cv2
+    assert captured["np_module"] is image_composite_converter.np
+    assert captured["max_iter"] == 77
+    assert captured["plateau_limit"] == 8
+    assert captured["seed"] == 123
+
+
 def test_convert_range_uses_embedded_raster_fallback_without_numpy_cv2(
     monkeypatch: pytest.MonkeyPatch,
     tmp_path: Path,
