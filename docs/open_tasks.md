@@ -385,6 +385,12 @@ focused on the actual project scope.
   - Qualitätsvergleich gegen den vorherigen Commit-Stand (`pixel_delta2_ranking.csv`, nur `AC08*`):
     `51` gemeinsame Varianten, davon `50` unverändert und `1` verbessert (`AC0800_S`: `4980.680176` -> `1429.839966`),
     **keine** verschlechterte Variante.
+  - 2026-04-16 (Lauf G, isolierter Renderer + deterministische Reihenfolge):
+    gleicher Vollbereichs-Befehl mit `--isolate-svg-render --deterministic-order` per `tee` ausgeführt;
+    Prozess endet mit Exit-Code `0` ohne MuPDF-Segfault, aber der gesamte Batch ist durch einen Runtime-Fehler blockiert
+    (`TypeError: prepareRunIterationPipelineLocalsForRunImpl() got an unexpected keyword argument 'prepare_iteration_input_runtime_for_run_fn'`).
+  - Dokumentation für Lauf G: `docs/ac0800_ac0899_runG_2026-04-16_summary.md`
+    (inkl. Kommando, Exit-Code, Logpfad und Blocker-Fehlerbild).
   - Status: Crash-Freiheit für den Vollbereich ist **nicht** nachgewiesen; B2 bleibt offen bis der Lauf stabil Exit-Code `0` liefert.
 - [ ] B2.1: MuPDF-Stackoverflow/Segfault im Vollbereich `AC0800..AC0899` isolieren und robusten Guard ergänzen.
   - Die bisherigen B1-Fixes (Context-Manager im Fallback-Diff-Pfad) reichen für den Vollbereich noch nicht aus.
