@@ -182,8 +182,10 @@ def runIterationPipelineOrchestrationImpl(
         finalize_iteration_result_fn=finalize_iteration_result_fn,
         math_module=math_module,
     )
-    return run_iteration_pipeline_for_run_fn(
-        **build_run_iteration_pipeline_for_run_call_kwargs_fn(**run_iteration_dispatch_kwargs)
+    return executeRunIterationPipelineDispatchImpl(
+        run_iteration_dispatch_kwargs=run_iteration_dispatch_kwargs,
+        build_run_iteration_pipeline_for_run_call_kwargs_fn=build_run_iteration_pipeline_for_run_call_kwargs_fn,
+        run_iteration_pipeline_for_run_fn=run_iteration_pipeline_for_run_fn,
     )
 
 
@@ -197,3 +199,16 @@ def buildRunIterationPipelineDispatchKwargsImpl(**kwargs) -> dict[str, object]:
     """Return the input mapping for run-dispatch call-kwargs builders."""
 
     return dict(kwargs)
+
+
+def executeRunIterationPipelineDispatchImpl(
+    *,
+    run_iteration_dispatch_kwargs: dict[str, object],
+    build_run_iteration_pipeline_for_run_call_kwargs_fn,
+    run_iteration_pipeline_for_run_fn,
+):
+    """Build run-dispatch call kwargs and execute the run-dispatch function."""
+
+    return run_iteration_pipeline_for_run_fn(
+        **build_run_iteration_pipeline_for_run_call_kwargs_fn(**run_iteration_dispatch_kwargs)
+    )
