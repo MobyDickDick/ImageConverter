@@ -139,3 +139,21 @@ def test_run_iteration_pipeline_orchestration_impl_wires_prepare_and_dispatch() 
     assert captured["dispatch_builder_kwargs"]["run_locals"] == {"run_locals": "prepared"}
     assert captured["dispatch_run_kwargs"] == {"dispatch": "builder-kwargs"}
     assert result == {"status": "ok"}
+
+
+def test_build_prepare_run_locals_for_run_call_kwargs_impl_returns_copy() -> None:
+    kwargs = {"img_path": "img.jpg", "run_seed": 7}
+
+    result = helpers.buildPrepareRunLocalsForRunCallKwargsImpl(**kwargs)
+
+    assert result == kwargs
+    assert result is not kwargs
+
+
+def test_build_run_iteration_pipeline_dispatch_kwargs_impl_returns_copy() -> None:
+    kwargs = {"img_path": "img.jpg", "max_iterations": 5}
+
+    result = helpers.buildRunIterationPipelineDispatchKwargsImpl(**kwargs)
+
+    assert result == kwargs
+    assert result is not kwargs
