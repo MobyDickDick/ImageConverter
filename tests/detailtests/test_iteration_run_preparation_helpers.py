@@ -185,3 +185,116 @@ def test_build_prepare_run_iteration_pipeline_locals_kwargs_impl_maps_all_fields
     assert kwargs["prepare_iteration_input_runtime_for_run_kwargs"] == {"input": "kwargs"}
     assert kwargs["prepare_iteration_runtime_callbacks_for_run_shared_kwargs"] == {"runtime": "shared"}
     assert kwargs["prepare_iteration_mode_runtime_locals_for_run_shared_kwargs"] == {"mode": "shared"}
+
+
+def test_build_prepare_run_iteration_pipeline_locals_kwargs_for_run_impl_builds_nested_context() -> None:
+    marker = object()
+
+    class _Action:
+        render_svg_to_numpy = marker
+        create_diff_image = marker
+
+    class _RunPreparation:
+        prepareIterationInputRuntimeForRunImpl = marker
+        prepareIterationRuntimeCallbacksForRunImpl = marker
+        buildPrepareIterationRuntimeCallbacksForRunKwargsImpl = marker
+
+    class _Bindings:
+        extractIterationInputRuntimeLocalsImpl = marker
+        extractIterationRuntimeCallbackLocalsImpl = marker
+        extractRunIterationPipelineLocalsImpl = marker
+        extractIterationInputRuntimeFieldsImpl = marker
+        extractIterationModeRuntimeLocalsImpl = marker
+
+    class _ModeRuntimePreparation:
+        prepareIterationModeRuntimeLocalsForRunImpl = marker
+        buildPrepareIterationModeRuntimeBindingsForRunKwargsImpl = marker
+        prepareIterationModeRuntimeBindingsForRunImpl = marker
+
+    class _IterationPreparation:
+        prepareIterationInputsImpl = marker
+
+    class _IterationContext:
+        extractIterationInputBindingsImpl = marker
+
+    class _GradientStripe:
+        detectGradientStripeStrategyImpl = marker
+
+    class _SemanticAuditBootstrap:
+        buildPendingSemanticAuditRowImpl = marker
+
+    class _SemanticAuditRuntime:
+        shouldCreateSemanticAuditForBaseNameImpl = marker
+        buildSemanticAuditRecordKwargsImpl = marker
+
+    class _ModeSetup:
+        buildPrepareIterationModeRuntimeForRunKwargsImpl = marker
+
+    class _ModePreparation:
+        prepareIterationModeRuntimeForRunImpl = marker
+
+    class _ModeDependencyHelpers:
+        buildIterationModeRunnerDependenciesImpl = marker
+
+    kwargs = helpers.buildPrepareRunIterationPipelineLocalsKwargsForRunImpl(
+        img_path="images/AC0800_L.jpg",
+        csv_path="descriptions.csv",
+        reports_out_dir="reports",
+        svg_out_dir="svg",
+        diff_out_dir="diff",
+        run_seed=1,
+        pass_seed_offset=2,
+        action_cls=_Action,
+        perception_cls=marker,
+        reflection_cls=marker,
+        get_base_name_from_file_fn=marker,
+        semantic_audit_record_fn=marker,
+        semantic_quality_flags_fn=marker,
+        looks_like_elongated_foreground_rect_fn=marker,
+        render_embedded_raster_svg_fn=marker,
+        np_module=marker,
+        cv2_module=marker,
+        print_fn=print,
+        time_ns_fn=marker,
+        iteration_run_preparation_helpers=_RunPreparation,
+        iteration_bindings_helpers=_Bindings,
+        iteration_setup_helpers=marker,
+        iteration_runtime_helpers=marker,
+        iteration_mode_runtime_preparation_helpers=_ModeRuntimePreparation,
+        iteration_mode_setup_helpers=_ModeSetup,
+        iteration_mode_preparation_helpers=_ModePreparation,
+        iteration_mode_dependency_setup_helpers=marker,
+        iteration_mode_dependency_helpers=_ModeDependencyHelpers,
+        iteration_mode_runtime_helpers=marker,
+        iteration_orchestration_helpers=marker,
+        iteration_context_helpers=_IterationContext,
+        iteration_preparation_helpers=_IterationPreparation,
+        gradient_stripe_strategy_helpers=_GradientStripe,
+        semantic_audit_bootstrap_helpers=_SemanticAuditBootstrap,
+        semantic_audit_logging_helpers=marker,
+        semantic_audit_runtime_helpers=_SemanticAuditRuntime,
+        semantic_mismatch_reporting_helpers=marker,
+        semantic_validation_logging_helpers=marker,
+        semantic_mismatch_runtime_helpers=marker,
+        semantic_validation_context_helpers=marker,
+        semantic_validation_runtime_helpers=marker,
+        semantic_post_validation_helpers=marker,
+        semantic_validation_finalization_helpers=marker,
+        semantic_iteration_finalization_helpers=marker,
+        semantic_ac0223_runtime_helpers=marker,
+        semantic_visual_override_helpers=marker,
+        non_composite_runtime_helpers=marker,
+        conversion_composite_helpers=marker,
+        semantic_badge_runtime_helpers=marker,
+        dual_arrow_badge_helpers=marker,
+        dual_arrow_runtime_helpers=marker,
+    )
+
+    nested = kwargs["prepare_iteration_input_runtime_for_run_kwargs"]
+    assert nested["prepare_iteration_inputs_fn"] is marker
+    assert nested["extract_iteration_input_bindings_fn"] is marker
+    assert nested["prepare_iteration_inputs_kwargs"]["img_path"] == "images/AC0800_L.jpg"
+    assert nested["prepare_iteration_inputs_kwargs"]["csv_path"] == "descriptions.csv"
+    assert kwargs["prepare_iteration_runtime_callbacks_for_run_shared_kwargs"]["run_seed"] == 1
+    assert kwargs["prepare_iteration_runtime_callbacks_for_run_shared_kwargs"]["pass_seed_offset"] == 2
+    assert kwargs["prepare_iteration_mode_runtime_locals_for_run_shared_kwargs"]["action_cls"] is _Action
