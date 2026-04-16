@@ -163,3 +163,25 @@ def test_prepare_run_iteration_pipeline_locals_impl_merges_all_runtime_sections(
     )
 
     assert result == {"merged": "locals"}
+
+
+def test_build_prepare_run_iteration_pipeline_locals_kwargs_impl_maps_all_fields() -> None:
+    marker = object()
+    kwargs = helpers.buildPrepareRunIterationPipelineLocalsKwargsImpl(
+        prepare_iteration_input_runtime_for_run_fn=marker,
+        extract_iteration_input_runtime_locals_fn=marker,
+        prepare_iteration_runtime_callbacks_for_run_fn=marker,
+        extract_iteration_runtime_callback_locals_fn=marker,
+        prepare_iteration_mode_runtime_locals_for_run_fn=marker,
+        extract_run_iteration_pipeline_locals_fn=marker,
+        prepare_iteration_input_runtime_for_run_kwargs={"input": "kwargs"},
+        prepare_iteration_runtime_callbacks_for_run_kwargs_builder_fn=marker,
+        prepare_iteration_runtime_callbacks_for_run_shared_kwargs={"runtime": "shared"},
+        prepare_iteration_mode_runtime_locals_for_run_kwargs_builder_fn=marker,
+        prepare_iteration_mode_runtime_locals_for_run_shared_kwargs={"mode": "shared"},
+    )
+
+    assert kwargs["prepare_iteration_input_runtime_for_run_fn"] is marker
+    assert kwargs["prepare_iteration_input_runtime_for_run_kwargs"] == {"input": "kwargs"}
+    assert kwargs["prepare_iteration_runtime_callbacks_for_run_shared_kwargs"] == {"runtime": "shared"}
+    assert kwargs["prepare_iteration_mode_runtime_locals_for_run_shared_kwargs"] == {"mode": "shared"}

@@ -160,3 +160,32 @@ def prepareRunIterationPipelineLocalsImpl(
         iteration_runtime_callback_locals=iteration_runtime_callback_locals,
         iteration_mode_runtime_locals=iteration_mode_runtime_locals,
     )
+
+
+def buildPrepareRunIterationPipelineLocalsKwargsImpl(
+    *,
+    prepare_iteration_input_runtime_for_run_fn,
+    extract_iteration_input_runtime_locals_fn,
+    prepare_iteration_runtime_callbacks_for_run_fn,
+    extract_iteration_runtime_callback_locals_fn,
+    prepare_iteration_mode_runtime_locals_for_run_fn,
+    extract_run_iteration_pipeline_locals_fn,
+    prepare_iteration_input_runtime_for_run_kwargs,
+    prepare_iteration_runtime_callbacks_for_run_kwargs_builder_fn,
+    prepare_iteration_runtime_callbacks_for_run_shared_kwargs,
+    prepare_iteration_mode_runtime_locals_for_run_kwargs_builder_fn,
+    prepare_iteration_mode_runtime_locals_for_run_shared_kwargs,
+) -> dict[str, Any]:
+    return {
+        "prepare_iteration_input_runtime_for_run_fn": prepare_iteration_input_runtime_for_run_fn,
+        "extract_iteration_input_runtime_locals_fn": extract_iteration_input_runtime_locals_fn,
+        "prepare_iteration_runtime_callbacks_for_run_fn": prepare_iteration_runtime_callbacks_for_run_fn,
+        "extract_iteration_runtime_callback_locals_fn": extract_iteration_runtime_callback_locals_fn,
+        "prepare_iteration_mode_runtime_locals_for_run_fn": prepare_iteration_mode_runtime_locals_for_run_fn,
+        "extract_run_iteration_pipeline_locals_fn": extract_run_iteration_pipeline_locals_fn,
+        "prepare_iteration_input_runtime_for_run_kwargs": prepare_iteration_input_runtime_for_run_kwargs,
+        "prepare_iteration_runtime_callbacks_for_run_kwargs_builder_fn": prepare_iteration_runtime_callbacks_for_run_kwargs_builder_fn,
+        "prepare_iteration_runtime_callbacks_for_run_shared_kwargs": prepare_iteration_runtime_callbacks_for_run_shared_kwargs,
+        "prepare_iteration_mode_runtime_locals_for_run_kwargs_builder_fn": prepare_iteration_mode_runtime_locals_for_run_kwargs_builder_fn,
+        "prepare_iteration_mode_runtime_locals_for_run_shared_kwargs": prepare_iteration_mode_runtime_locals_for_run_shared_kwargs,
+    }
