@@ -195,6 +195,12 @@ def runIterationPipelineOrchestrationImpl(
     )
 
 
+def buildRunIterationPipelineOrchestrationKwargsForRunImpl(**kwargs) -> dict[str, object]:
+    """Return the input mapping for the top-level orchestration call."""
+
+    return dict(kwargs)
+
+
 def buildPrepareRunLocalsForRunCallKwargsImpl(**kwargs) -> dict[str, object]:
     """Return the input mapping for run-locals call-kwargs builders."""
 
