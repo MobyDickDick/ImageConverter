@@ -406,7 +406,9 @@ focused on the actual project scope.
   - 2026-04-17: Umsetzung abgeschlossen inkl. Detailtest `test_build_run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_for_run_call_kwargs_for_run_impl_returns_mapping`.
   - [x] C1.101: Top-Level-For-Run-Call-Abschlusssequenz aus `runIterationPipelineImpl` in `src/iCCModules/imageCompositeConverterIterationPipeline.py` weiter modularisiert (`runIterationPipelineFromInputsViaOrchestrationForRunCallForRunCallForRunImpl`); der Modul-Entry-Point delegiert den bisherigen abschließenden Inline-Ablauf (For-Run-Call-Kwargs-Build + Runner-Aufruf) jetzt über den neuen Sequenz-Helper und bleibt API-kompatibel.
   - 2026-04-17: Umsetzung abgeschlossen inkl. Detailtest `test_run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_for_run_call_for_run_impl_delegates_builder_then_runner`.
-  - Nächster geplanter Schritt: weitere verbleibende Orchestrierungs-Sequenzen aus `runIterationPipeline` in kleinen, testbaren Schritten extrahieren (C1.102+).
+  - [x] C1.102: Top-Level-Run-Call-Kwargs-Verdrahtung aus `runIterationPipelineImpl` in `src/iCCModules/imageCompositeConverterIterationPipeline.py` weiter modularisiert (`buildRunIterationPipelineFromInputsViaOrchestrationForRunFromInputsCallKwargsImpl`); der Modul-Entry-Point delegiert den bisherigen direkten Aufruf von `runIterationPipelineFromInputsViaOrchestrationKwargsForRunCallImpl` jetzt über den neuen Helper und bleibt API-kompatibel.
+  - 2026-04-17: Umsetzung abgeschlossen inkl. Detailtest `test_build_run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_call_kwargs_impl_delegates_builder`.
+  - Nächster geplanter Schritt: weitere verbleibende Orchestrierungs-Sequenzen aus `runIterationPipeline` in kleinen, testbaren Schritten extrahieren (C1.103+).
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.
   - `_create_diff_image_without_cv2` nutzt jetzt Context-Manager für beide `fitz.open(...)` Dokumente, damit Batch-Läufe keine unnötig offenen MuPDF-Dokumente ansammeln.
