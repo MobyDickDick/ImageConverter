@@ -431,6 +431,47 @@ def test_build_run_iteration_pipeline_from_inputs_via_orchestration_kwargs_for_r
     assert result == {"from_inputs": "final"}
 
 
+
+
+def test_build_run_iteration_pipeline_from_inputs_via_orchestration_kwargs_for_run_from_inputs_kwargs_impl_returns_copy() -> None:
+    kwargs = {"run_iteration_pipeline_orchestration_kwargs": {"orchestration": "kwargs"}}
+
+    result = (
+        helpers.buildRunIterationPipelineFromInputsViaOrchestrationKwargsForRunFromInputsKwargsImpl(
+            **kwargs
+        )
+    )
+
+    assert result == kwargs
+    assert result is not kwargs
+
+
+def test_run_iteration_pipeline_from_inputs_via_orchestration_kwargs_for_run_from_inputs_impl_delegates_builder_then_runner() -> None:
+    calls: dict[str, object] = {}
+
+    def _build_call_kwargs(**kwargs):
+        calls["build_call_kwargs"] = kwargs
+        return {"mapped": "kwargs"}
+
+    def _run_from_inputs_kwargs(**kwargs):
+        calls["run_from_inputs_kwargs"] = kwargs
+        return {"status": "ok"}
+
+    result = (
+        helpers.runIterationPipelineFromInputsViaOrchestrationKwargsForRunFromInputsImpl(
+            build_run_iteration_pipeline_from_inputs_via_orchestration_kwargs_for_run_from_inputs_kwargs_fn=_build_call_kwargs,
+            run_iteration_pipeline_from_inputs_via_orchestration_kwargs_for_run_from_inputs_kwargs={
+                "alpha": 1,
+                "beta": "two",
+            },
+            build_run_iteration_pipeline_from_inputs_via_orchestration_kwargs_for_run_fn=_run_from_inputs_kwargs,
+        )
+    )
+
+    assert calls["build_call_kwargs"] == {"alpha": 1, "beta": "two"}
+    assert calls["run_from_inputs_kwargs"] == {"mapped": "kwargs"}
+    assert result == {"status": "ok"}
+
 def test_execute_run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_impl_delegates_builder_then_runner() -> None:
     calls: dict[str, object] = {}
 
