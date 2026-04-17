@@ -1,6 +1,15 @@
 from __future__ import annotations
 
 
+def buildRunIterationPipelineFromInputsViaOrchestrationForRunCallKwargsImpl(
+    **kwargs,
+) -> dict[str, object]:
+    """Return the input mapping for the top-level from-inputs orchestration run call."""
+
+    return dict(kwargs)
+
+
+
 def runIterationPipelineImpl(
     *,
     img_path: str,
@@ -155,7 +164,7 @@ def runIterationPipelineImpl(
         )
     )
 
-    return iteration_orchestration_helpers.runIterationPipelineFromInputsViaOrchestrationForRunCallImpl(
+    run_call_kwargs = buildRunIterationPipelineFromInputsViaOrchestrationForRunCallKwargsImpl(
         run_iteration_pipeline_from_inputs_via_orchestration_kwargs=(
             run_iteration_pipeline_from_inputs_via_orchestration_kwargs
         ),
@@ -180,4 +189,8 @@ def runIterationPipelineImpl(
         execute_run_iteration_pipeline_from_inputs_via_orchestration_for_run_fn=(
             iteration_orchestration_helpers.executeRunIterationPipelineFromInputsViaOrchestrationForRunImpl
         ),
+    )
+
+    return iteration_orchestration_helpers.runIterationPipelineFromInputsViaOrchestrationForRunCallImpl(
+        **run_call_kwargs
     )
