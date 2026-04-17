@@ -279,10 +279,34 @@ def runIterationPipelineViaOrchestrationForRunImpl(
 ):
     """Execute the full top-level orchestration flow for runIterationPipeline."""
 
-    return execute_run_iteration_pipeline_orchestration_for_run_fn(
+    via_orchestration_call_kwargs = buildRunIterationPipelineViaOrchestrationCallKwargsImpl(
         run_iteration_pipeline_orchestration_kwargs=run_iteration_pipeline_orchestration_kwargs,
         build_run_iteration_pipeline_orchestration_kwargs_for_run_fn=(
             build_run_iteration_pipeline_orchestration_kwargs_for_run_fn
         ),
         run_iteration_pipeline_orchestration_fn=run_iteration_pipeline_orchestration_fn,
+    )
+    return executeRunIterationPipelineViaOrchestrationImpl(
+        run_iteration_pipeline_via_orchestration_call_kwargs=via_orchestration_call_kwargs,
+        execute_run_iteration_pipeline_orchestration_for_run_fn=(
+            execute_run_iteration_pipeline_orchestration_for_run_fn
+        ),
+    )
+
+
+def buildRunIterationPipelineViaOrchestrationCallKwargsImpl(**kwargs) -> dict[str, object]:
+    """Return the input mapping for the via-orchestration executor call."""
+
+    return dict(kwargs)
+
+
+def executeRunIterationPipelineViaOrchestrationImpl(
+    *,
+    run_iteration_pipeline_via_orchestration_call_kwargs: dict[str, object],
+    execute_run_iteration_pipeline_orchestration_for_run_fn,
+):
+    """Execute the via-orchestration flow with prepared executor kwargs."""
+
+    return execute_run_iteration_pipeline_orchestration_for_run_fn(
+        **run_iteration_pipeline_via_orchestration_call_kwargs
     )
