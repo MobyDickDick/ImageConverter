@@ -17,6 +17,14 @@ def buildRunIterationPipelineOrchestrationKwargsForRunCallKwargsImpl(
     return dict(kwargs)
 
 
+def buildRunIterationPipelineFromInputsViaOrchestrationKwargsForRunCallKwargsImpl(
+    **kwargs,
+) -> dict[str, object]:
+    """Return the input mapping for the from-inputs orchestration kwargs builder call."""
+
+    return dict(kwargs)
+
+
 
 def runIterationPipelineImpl(
     *,
@@ -165,8 +173,8 @@ def runIterationPipelineImpl(
         )
     )
 
-    run_iteration_pipeline_from_inputs_via_orchestration_kwargs = (
-        iteration_orchestration_helpers.buildRunIterationPipelineFromInputsViaOrchestrationKwargsImpl(
+    from_inputs_call_kwargs = (
+        buildRunIterationPipelineFromInputsViaOrchestrationKwargsForRunCallKwargsImpl(
             run_iteration_pipeline_orchestration_kwargs=orchestration_kwargs,
             build_run_iteration_pipeline_orchestration_kwargs_for_run_fn=(
                 iteration_orchestration_helpers.buildRunIterationPipelineOrchestrationKwargsForRunImpl
@@ -177,6 +185,12 @@ def runIterationPipelineImpl(
             execute_run_iteration_pipeline_orchestration_for_run_fn=(
                 iteration_orchestration_helpers.executeRunIterationPipelineOrchestrationForRunImpl
             ),
+        )
+    )
+
+    run_iteration_pipeline_from_inputs_via_orchestration_kwargs = (
+        iteration_orchestration_helpers.buildRunIterationPipelineFromInputsViaOrchestrationKwargsImpl(
+            **from_inputs_call_kwargs
         )
     )
 

@@ -380,7 +380,9 @@ focused on the actual project scope.
   - 2026-04-17: Umsetzung abgeschlossen inkl. Detailtests `test_run_iteration_pipeline_impl_delegates_orchestration_wiring` und `test_build_run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_kwargs_impl_returns_copy`.
   - [x] C1.88: Top-Level-Orchestrierungs-Call-Mapping aus `runIterationPipelineImpl` in `src/iCCModules/imageCompositeConverterIterationPipeline.py` weiter modularisiert (`buildRunIterationPipelineOrchestrationKwargsForRunCallKwargsImpl`); der Modul-Entry-Point delegiert den bisherigen Inline-Aufruf von `buildRunIterationPipelineOrchestrationKwargsForRunImpl` jetzt über den neuen Builder-Helper und bleibt API-kompatibel.
   - 2026-04-17: Umsetzung abgeschlossen inkl. Detailtest `test_build_run_iteration_pipeline_orchestration_kwargs_for_run_call_kwargs_impl_returns_copy`.
-  - Nächster geplanter Schritt: weitere verbleibende Orchestrierungs-Sequenzen aus `runIterationPipeline` in kleinen, testbaren Schritten extrahieren (C1.89+).
+  - [x] C1.89: Top-Level-From-Inputs-Orchestrierungs-Call-Mapping aus `runIterationPipelineImpl` in `src/iCCModules/imageCompositeConverterIterationPipeline.py` weiter modularisiert (`buildRunIterationPipelineFromInputsViaOrchestrationKwargsForRunCallKwargsImpl`); der Modul-Entry-Point delegiert den bisherigen Inline-Aufruf von `buildRunIterationPipelineFromInputsViaOrchestrationKwargsImpl` jetzt über den neuen Builder-Helper und bleibt API-kompatibel.
+  - 2026-04-17: Umsetzung abgeschlossen inkl. Detailtest `test_build_run_iteration_pipeline_from_inputs_via_orchestration_kwargs_for_run_call_kwargs_impl_returns_copy`.
+  - Nächster geplanter Schritt: weitere verbleibende Orchestrierungs-Sequenzen aus `runIterationPipeline` in kleinen, testbaren Schritten extrahieren (C1.90+).
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.
   - `_create_diff_image_without_cv2` nutzt jetzt Context-Manager für beide `fitz.open(...)` Dokumente, damit Batch-Läufe keine unnötig offenen MuPDF-Dokumente ansammeln.
