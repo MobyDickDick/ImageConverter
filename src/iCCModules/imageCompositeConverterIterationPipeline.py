@@ -158,6 +158,35 @@ def buildRunIterationPipelineFromInputsViaOrchestrationKwargsForRunImpl(
     )
 
 
+
+
+def buildRunIterationPipelineFromInputsViaOrchestrationKwargsForRunFromInputsKwargsImpl(
+    **kwargs,
+) -> dict[str, object]:
+    """Return the input mapping for the top-level from-inputs orchestration kwargs sequence."""
+
+    return dict(kwargs)
+
+
+def runIterationPipelineFromInputsViaOrchestrationKwargsForRunFromInputsImpl(
+    *,
+    build_run_iteration_pipeline_from_inputs_via_orchestration_kwargs_for_run_from_inputs_kwargs_fn,
+    run_iteration_pipeline_from_inputs_via_orchestration_kwargs_for_run_from_inputs_kwargs: dict[
+        str, object
+    ],
+    build_run_iteration_pipeline_from_inputs_via_orchestration_kwargs_for_run_fn,
+):
+    """Build and execute the top-level from-inputs orchestration kwargs sequence."""
+
+    call_kwargs = (
+        build_run_iteration_pipeline_from_inputs_via_orchestration_kwargs_for_run_from_inputs_kwargs_fn(
+            **run_iteration_pipeline_from_inputs_via_orchestration_kwargs_for_run_from_inputs_kwargs
+        )
+    )
+    return build_run_iteration_pipeline_from_inputs_via_orchestration_kwargs_for_run_fn(
+        **call_kwargs
+    )
+
 def executeRunIterationPipelineFromInputsViaOrchestrationForRunCallImpl(
     *,
     run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_kwargs: dict[str, object],
@@ -784,25 +813,33 @@ def runIterationPipelineImpl(
     )
 
     run_iteration_pipeline_from_inputs_via_orchestration_kwargs = (
-        buildRunIterationPipelineFromInputsViaOrchestrationKwargsForRunImpl(
-            run_iteration_pipeline_orchestration_kwargs=orchestration_kwargs,
-            build_run_iteration_pipeline_orchestration_kwargs_for_run_fn=(
-                iteration_orchestration_helpers.buildRunIterationPipelineOrchestrationKwargsForRunImpl
+        runIterationPipelineFromInputsViaOrchestrationKwargsForRunFromInputsImpl(
+            build_run_iteration_pipeline_from_inputs_via_orchestration_kwargs_for_run_from_inputs_kwargs_fn=(
+                buildRunIterationPipelineFromInputsViaOrchestrationKwargsForRunFromInputsKwargsImpl
             ),
-            run_iteration_pipeline_orchestration_fn=(
-                iteration_orchestration_helpers.runIterationPipelineOrchestrationImpl
-            ),
-            execute_run_iteration_pipeline_orchestration_for_run_fn=(
-                iteration_orchestration_helpers.executeRunIterationPipelineOrchestrationForRunImpl
-            ),
-            build_run_iteration_pipeline_from_inputs_via_orchestration_call_kwargs_fn=(
-                buildRunIterationPipelineFromInputsViaOrchestrationKwargsForRunCallKwargsImpl
-            ),
-            execute_run_iteration_pipeline_from_inputs_via_orchestration_kwargs_builder_for_run_fn=(
-                executeRunIterationPipelineFromInputsViaOrchestrationKwargsBuilderForRunImpl
-            ),
-            build_run_iteration_pipeline_from_inputs_via_orchestration_kwargs_fn=(
-                iteration_orchestration_helpers.buildRunIterationPipelineFromInputsViaOrchestrationKwargsImpl
+            run_iteration_pipeline_from_inputs_via_orchestration_kwargs_for_run_from_inputs_kwargs={
+                "run_iteration_pipeline_orchestration_kwargs": orchestration_kwargs,
+                "build_run_iteration_pipeline_orchestration_kwargs_for_run_fn": (
+                    iteration_orchestration_helpers.buildRunIterationPipelineOrchestrationKwargsForRunImpl
+                ),
+                "run_iteration_pipeline_orchestration_fn": (
+                    iteration_orchestration_helpers.runIterationPipelineOrchestrationImpl
+                ),
+                "execute_run_iteration_pipeline_orchestration_for_run_fn": (
+                    iteration_orchestration_helpers.executeRunIterationPipelineOrchestrationForRunImpl
+                ),
+                "build_run_iteration_pipeline_from_inputs_via_orchestration_call_kwargs_fn": (
+                    buildRunIterationPipelineFromInputsViaOrchestrationKwargsForRunCallKwargsImpl
+                ),
+                "execute_run_iteration_pipeline_from_inputs_via_orchestration_kwargs_builder_for_run_fn": (
+                    executeRunIterationPipelineFromInputsViaOrchestrationKwargsBuilderForRunImpl
+                ),
+                "build_run_iteration_pipeline_from_inputs_via_orchestration_kwargs_fn": (
+                    iteration_orchestration_helpers.buildRunIterationPipelineFromInputsViaOrchestrationKwargsImpl
+                ),
+            },
+            build_run_iteration_pipeline_from_inputs_via_orchestration_kwargs_for_run_fn=(
+                buildRunIterationPipelineFromInputsViaOrchestrationKwargsForRunImpl
             ),
         )
     )
