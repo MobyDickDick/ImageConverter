@@ -636,3 +636,41 @@ def test_run_iteration_pipeline_from_inputs_via_orchestration_kwargs_for_run_cal
         "run_iteration_pipeline_from_inputs_via_orchestration_for_run_fn": "run_for_run",
         "execute_run_iteration_pipeline_from_inputs_via_orchestration_for_run_fn": "execute_for_run",
     }
+
+
+def test_build_run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_call_kwargs_impl_delegates_builder() -> None:
+    result = (
+        helpers.buildRunIterationPipelineFromInputsViaOrchestrationForRunFromInputsCallKwargsImpl(
+            run_iteration_pipeline_from_inputs_via_orchestration_kwargs={
+                "from_inputs": "kwargs"
+            },
+            build_run_iteration_pipeline_via_orchestration_for_run_call_kwargs_fn=(
+                "build_via"
+            ),
+            run_iteration_pipeline_via_orchestration_for_run_fn="run_via",
+            run_iteration_pipeline_from_inputs_via_orchestration_fn="run_from_inputs",
+            execute_run_iteration_pipeline_from_inputs_via_orchestration_fn=(
+                "execute_from_inputs"
+            ),
+            build_run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_kwargs_fn=(
+                "build_for_run"
+            ),
+            run_iteration_pipeline_from_inputs_via_orchestration_for_run_fn="run_for_run",
+            execute_run_iteration_pipeline_from_inputs_via_orchestration_for_run_fn=(
+                "execute_for_run"
+            ),
+        )
+    )
+
+    assert result == {
+        "run_iteration_pipeline_from_inputs_via_orchestration_kwargs": {
+            "from_inputs": "kwargs"
+        },
+        "build_run_iteration_pipeline_via_orchestration_for_run_call_kwargs_fn": "build_via",
+        "run_iteration_pipeline_via_orchestration_for_run_fn": "run_via",
+        "run_iteration_pipeline_from_inputs_via_orchestration_fn": "run_from_inputs",
+        "execute_run_iteration_pipeline_from_inputs_via_orchestration_fn": "execute_from_inputs",
+        "build_run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_kwargs_fn": "build_for_run",
+        "run_iteration_pipeline_from_inputs_via_orchestration_for_run_fn": "run_for_run",
+        "execute_run_iteration_pipeline_from_inputs_via_orchestration_for_run_fn": "execute_for_run",
+    }
