@@ -674,3 +674,54 @@ def test_build_run_iteration_pipeline_from_inputs_via_orchestration_for_run_from
         "run_iteration_pipeline_from_inputs_via_orchestration_for_run_fn": "run_for_run",
         "execute_run_iteration_pipeline_from_inputs_via_orchestration_for_run_fn": "execute_for_run",
     }
+
+
+def test_run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_call_impl_delegates_builder_then_runner() -> None:
+    calls: dict[str, object] = {}
+
+    def _run_for_run_call_for_run(**kwargs):
+        calls["runner_kwargs"] = kwargs
+        return {"status": "ok"}
+
+    result = helpers.runIterationPipelineFromInputsViaOrchestrationForRunFromInputsCallImpl(
+        run_iteration_pipeline_from_inputs_via_orchestration_kwargs={
+            "from_inputs": "kwargs"
+        },
+        build_run_iteration_pipeline_via_orchestration_for_run_call_kwargs_fn="build_via",
+        run_iteration_pipeline_via_orchestration_for_run_fn="run_via",
+        run_iteration_pipeline_from_inputs_via_orchestration_fn="run_from_inputs",
+        execute_run_iteration_pipeline_from_inputs_via_orchestration_fn="execute_from_inputs",
+        build_run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_kwargs_fn=(
+            "build_for_run"
+        ),
+        run_iteration_pipeline_from_inputs_via_orchestration_for_run_fn="run_for_run",
+        execute_run_iteration_pipeline_from_inputs_via_orchestration_for_run_fn=(
+            "execute_for_run"
+        ),
+        run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_fn=(
+            "run_for_run_call"
+        ),
+        execute_run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_fn=(
+            _run_for_run_call_for_run
+        ),
+    )
+
+    assert calls["runner_kwargs"] == {
+        "run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_kwargs": {
+            "run_iteration_pipeline_from_inputs_via_orchestration_kwargs": {
+                "from_inputs": "kwargs"
+            },
+            "build_run_iteration_pipeline_via_orchestration_for_run_call_kwargs_fn": "build_via",
+            "run_iteration_pipeline_via_orchestration_for_run_fn": "run_via",
+            "run_iteration_pipeline_from_inputs_via_orchestration_fn": "run_from_inputs",
+            "execute_run_iteration_pipeline_from_inputs_via_orchestration_fn": "execute_from_inputs",
+            "build_run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_kwargs_fn": "build_for_run",
+            "run_iteration_pipeline_from_inputs_via_orchestration_for_run_fn": "run_for_run",
+            "execute_run_iteration_pipeline_from_inputs_via_orchestration_for_run_fn": "execute_for_run",
+        },
+        "build_run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_kwargs_fn": (
+            helpers.buildRunIterationPipelineFromInputsViaOrchestrationForRunCallKwargsImpl
+        ),
+        "run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_fn": "run_for_run_call",
+    }
+    assert result == {"status": "ok"}
