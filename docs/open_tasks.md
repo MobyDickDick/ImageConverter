@@ -358,7 +358,9 @@ focused on the actual project scope.
   - 2026-04-16: Umsetzung abgeschlossen inkl. Detailtest `test_build_run_iteration_pipeline_orchestration_kwargs_for_run_impl_returns_copy`.
   - [x] C1.77: Top-Level-Orchestrierungs-Ausführungssequenz aus `runIterationPipeline` in `src/iCCModules/imageCompositeConverterIterationOrchestration.py` modularisiert (`executeRunIterationPipelineOrchestrationForRunImpl`); `src/iCCModules/imageCompositeConverterRemaining.py` delegiert den bisherigen Builder+Runner-Aufruf jetzt über den neuen Modul-Helper und bleibt API-kompatibel.
   - 2026-04-16: Umsetzung abgeschlossen inkl. Detailtest `test_execute_run_iteration_pipeline_orchestration_for_run_impl_delegates_builder_then_runner`.
-  - Nächster geplanter Schritt: weitere verbleibende Orchestrierungs-Sequenzen aus `runIterationPipeline` in kleinen, testbaren Schritten extrahieren (C1.78+).
+  - [x] C1.78: Run-Preparation-Call-Kwargs-Mapping für den Orchestrierungsaufruf korrigiert; `buildPrepareRunIterationPipelineLocalsForRunCallKwargsImpl` in `src/iCCModules/imageCompositeConverterIterationRunPreparation.py` liefert jetzt wieder den direkten Parameter-Satz für `prepareRunIterationPipelineLocalsForRunImpl` statt bereits vorbereiteter Nested-Kwargs für `prepareRunIterationPipelineLocalsImpl`.
+  - 2026-04-16: Umsetzung abgeschlossen inkl. Detailtest `test_build_prepare_run_iteration_pipeline_locals_for_run_call_kwargs_impl_returns_run_call_mapping` (zusätzlich Guard gegen das fälschliche Key `prepare_iteration_input_runtime_for_run_fn`).
+  - Nächster geplanter Schritt: weitere verbleibende Orchestrierungs-Sequenzen aus `runIterationPipeline` in kleinen, testbaren Schritten extrahieren (C1.79+).
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.
   - `_create_diff_image_without_cv2` nutzt jetzt Context-Manager für beide `fitz.open(...)` Dokumente, damit Batch-Läufe keine unnötig offenen MuPDF-Dokumente ansammeln.
@@ -391,6 +393,17 @@ focused on the actual project scope.
     (`TypeError: prepareRunIterationPipelineLocalsForRunImpl() got an unexpected keyword argument 'prepare_iteration_input_runtime_for_run_fn'`).
   - Dokumentation für Lauf G: `docs/ac0800_ac0899_runG_2026-04-16_summary.md`
     (inkl. Kommando, Exit-Code, Logpfad und Blocker-Fehlerbild).
+  - 2026-04-16 (Lauf H, Verifikation nach C1.78-Fix):
+    gleicher Vollbereichs-Befehl mit `--isolate-svg-render --deterministic-order` per `tee` ausgeführt;
+    Prozess endet erneut mit Exit-Code `0` ohne MuPDF-Segfault, der Batch bleibt aber weiterhin durch denselben Runtime-Fehler blockiert.
+  - Dokumentation für Lauf H: `docs/ac0800_ac0899_runH_2026-04-16_summary.md`
+    (inkl. Kommando, Exit-Code, Logpfad und bestätigtem Blocker-Fehlerbild).
+  - 2026-04-16 (Lauf I, Verifikation nach zusätzlicher Run-Preparation-Verdrahtung):
+    gleicher Vollbereichs-Befehl mit `--isolate-svg-render --deterministic-order` per `tee` ausgeführt;
+    Prozess endet mit Exit-Code `0` ohne MuPDF-Segfault, der ursprüngliche `prepare_iteration_input_runtime_for_run_fn`-Fehler tritt nicht mehr auf,
+    stattdessen blockiert ein nachgelagerter Fehler (`TypeError: prepareRunIterationPipelineLocalsImpl() got an unexpected keyword argument 'img_path'`).
+  - Dokumentation für Lauf I: `docs/ac0800_ac0899_runI_2026-04-16_summary.md`
+    (inkl. Kommando, Exit-Code, Logpfad und aktualisiertem Blocker-Fehlerbild).
   - Status: Crash-Freiheit für den Vollbereich ist **nicht** nachgewiesen; B2 bleibt offen bis der Lauf stabil Exit-Code `0` liefert.
 - [ ] B2.1: MuPDF-Stackoverflow/Segfault im Vollbereich `AC0800..AC0899` isolieren und robusten Guard ergänzen.
   - Die bisherigen B1-Fixes (Context-Manager im Fallback-Diff-Pfad) reichen für den Vollbereich noch nicht aus.

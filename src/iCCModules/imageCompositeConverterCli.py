@@ -354,11 +354,11 @@ def runMainImpl(
     bootstrap_required_image_dependencies_fn,
     analyze_range_fn,
     convert_range_fn,
-    repair_ac0223_bestlist_fn,
     format_user_diagnostic_fn,
     description_mapping_error_type,
     ac08_regression_set_name: str,
     ac08_regression_variants: tuple[str, ...],
+    repair_ac0223_bestlist_fn=None,
 ) -> int:
     if bool(getattr(args, "_render_svg_subprocess", False)):
         return run_svg_render_subprocess_entrypoint_fn()
@@ -410,6 +410,12 @@ def runMainImpl(
             csv_path, output_dir = resolve_cli_csv_and_output_fn(args)
 
             if bool(getattr(args, "repair_ac0223_bestlist", False)):
+                if repair_ac0223_bestlist_fn is None:
+                    print(
+                        "[ERROR] AC0223-Bestlist-Reparatur ist angefordert, "
+                        "aber kein repair_ac0223_bestlist_fn-Callback wurde übergeben."
+                    )
+                    return 2
                 target_output_root = str(output_dir or "artifacts/converted_images")
                 repair_result = repair_ac0223_bestlist_fn(target_output_root)
                 removed = int(repair_result.get("removed_count", 0) or 0)
