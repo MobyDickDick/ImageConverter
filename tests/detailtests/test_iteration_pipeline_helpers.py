@@ -367,6 +367,32 @@ def test_run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_for_r
     assert result == {"status": "executed"}
 
 
+def test_run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_for_run_kwargs_impl_delegates_builder() -> None:
+    result = (
+        helpers.runIterationPipelineFromInputsViaOrchestrationForRunCallForRunKwargsImpl(
+            run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_kwargs={
+                "payload": "call"
+            },
+            build_run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_kwargs_fn=(
+                "builder"
+            ),
+            run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_fn="runner",
+            execute_run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_fn=(
+                "executor"
+            ),
+        )
+    )
+
+    assert result == {
+        "run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_kwargs": {
+            "payload": "call"
+        },
+        "build_run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_kwargs_fn": "builder",
+        "run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_fn": "runner",
+        "execute_run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_fn": "executor",
+    }
+
+
 def test_run_iteration_pipeline_from_inputs_via_orchestration_kwargs_for_run_call_impl_delegates_builder() -> None:
     result = (
         helpers.runIterationPipelineFromInputsViaOrchestrationKwargsForRunCallImpl(
