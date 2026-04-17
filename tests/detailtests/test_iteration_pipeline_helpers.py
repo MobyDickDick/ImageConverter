@@ -161,3 +161,64 @@ def test_build_run_iteration_pipeline_from_inputs_via_orchestration_kwargs_for_r
 
     assert result == kwargs
     assert result is not kwargs
+
+
+def test_build_run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_kwargs_for_run_impl_returns_copy() -> None:
+    kwargs = {"run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_kwargs": {"alpha": 1}}
+
+    result = helpers.buildRunIterationPipelineFromInputsViaOrchestrationForRunCallKwargsForRunImpl(
+        **kwargs
+    )
+
+    assert result == kwargs
+    assert result is not kwargs
+
+
+def test_execute_run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_impl_delegates_builder_then_runner() -> None:
+    calls: dict[str, object] = {}
+
+    def _builder(**kwargs):
+        calls["builder_kwargs"] = kwargs
+        return {"payload": "built"}
+
+    def _runner(**kwargs):
+        calls["runner_kwargs"] = kwargs
+        return {"status": "ok"}
+
+    result = helpers.executeRunIterationPipelineFromInputsViaOrchestrationForRunCallImpl(
+        run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_kwargs={
+            "payload": "raw"
+        },
+        build_run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_kwargs_fn=_builder,
+        run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_fn=_runner,
+    )
+
+    assert calls["builder_kwargs"] == {"payload": "raw"}
+    assert calls["runner_kwargs"] == {"payload": "built"}
+    assert result == {"status": "ok"}
+
+
+def test_run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_for_run_impl_delegates_executor() -> None:
+    calls: dict[str, object] = {}
+
+    def _executor(**kwargs):
+        calls["executor_kwargs"] = kwargs
+        return {"status": "executed"}
+
+    result = helpers.runIterationPipelineFromInputsViaOrchestrationForRunCallForRunImpl(
+        run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_kwargs={
+            "payload": "call"
+        },
+        build_run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_kwargs_fn="builder",
+        run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_fn="runner",
+        execute_run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_fn=_executor,
+    )
+
+    assert calls["executor_kwargs"] == {
+        "run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_kwargs": {
+            "payload": "call"
+        },
+        "build_run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_kwargs_fn": "builder",
+        "run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_fn": "runner",
+    }
+    assert result == {"status": "executed"}
