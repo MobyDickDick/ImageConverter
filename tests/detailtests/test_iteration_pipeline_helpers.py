@@ -174,6 +174,31 @@ def test_build_run_iteration_pipeline_from_inputs_via_orchestration_for_run_call
     assert result is not kwargs
 
 
+def test_build_run_iteration_pipeline_orchestration_call_kwargs_impl_returns_copy() -> None:
+    kwargs = {"img_path": "img.png", "csv_path": "meta.csv"}
+
+    result = helpers.buildRunIterationPipelineOrchestrationCallKwargsImpl(**kwargs)
+
+    assert result == kwargs
+    assert result is not kwargs
+
+
+def test_execute_build_run_iteration_pipeline_orchestration_kwargs_for_run_impl_delegates_builder() -> None:
+    calls: dict[str, object] = {}
+
+    def _builder(**kwargs):
+        calls["builder_kwargs"] = kwargs
+        return {"orchestration": "built"}
+
+    result = helpers.executeBuildRunIterationPipelineOrchestrationKwargsForRunImpl(
+        run_iteration_pipeline_orchestration_call_kwargs={"img_path": "img.png"},
+        build_run_iteration_pipeline_orchestration_kwargs_for_run_fn=_builder,
+    )
+
+    assert calls["builder_kwargs"] == {"img_path": "img.png"}
+    assert result == {"orchestration": "built"}
+
+
 def test_execute_run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_impl_delegates_builder_then_runner() -> None:
     calls: dict[str, object] = {}
 
