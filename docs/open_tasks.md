@@ -366,7 +366,9 @@ focused on the actual project scope.
   - 2026-04-17: Umsetzung abgeschlossen inkl. Detailtests `test_build_run_iteration_pipeline_via_orchestration_call_kwargs_impl_returns_copy` und `test_execute_run_iteration_pipeline_via_orchestration_impl_delegates_executor`.
   - [x] C1.81: Top-Level-Via-Orchestrierung-Call-Mapping aus `runIterationPipeline` in `src/iCCModules/imageCompositeConverterIterationOrchestration.py` modularisiert (`buildRunIterationPipelineViaOrchestrationForRunCallKwargsImpl`); `src/iCCModules/imageCompositeConverterRemaining.py` delegiert den bisherigen Inline-Aufruf von `runIterationPipelineViaOrchestrationForRunImpl` jetzt über den neuen Modul-Helper und bleibt API-kompatibel.
   - 2026-04-17: Umsetzung abgeschlossen inkl. Detailtest `test_build_run_iteration_pipeline_via_orchestration_for_run_call_kwargs_impl_returns_copy`.
-  - Nächster geplanter Schritt: weitere verbleibende Orchestrierungs-Sequenzen aus `runIterationPipeline` in kleinen, testbaren Schritten extrahieren (C1.82+).
+  - [x] C1.82: Top-Level-Via-Orchestrierung-Ausführungssequenz aus `runIterationPipeline` in `src/iCCModules/imageCompositeConverterIterationOrchestration.py` modularisiert (`buildRunIterationPipelineFromInputsViaOrchestrationKwargsImpl`, `runIterationPipelineFromInputsViaOrchestrationImpl`); `src/iCCModules/imageCompositeConverterRemaining.py` delegiert den bisherigen Inline-Builder+Runner-Aufruf jetzt über den neuen Modul-Helper und bleibt API-kompatibel.
+  - 2026-04-17: Umsetzung abgeschlossen inkl. Detailtests `test_build_run_iteration_pipeline_from_inputs_via_orchestration_kwargs_impl_returns_copy` und `test_run_iteration_pipeline_from_inputs_via_orchestration_impl_delegates_builder_then_runner`.
+  - Nächster geplanter Schritt: weitere verbleibende Orchestrierungs-Sequenzen aus `runIterationPipeline` in kleinen, testbaren Schritten extrahieren (C1.83+).
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.
   - `_create_diff_image_without_cv2` nutzt jetzt Context-Manager für beide `fitz.open(...)` Dokumente, damit Batch-Läufe keine unnötig offenen MuPDF-Dokumente ansammeln.
