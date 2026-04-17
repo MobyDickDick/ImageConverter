@@ -434,3 +434,45 @@ def test_execute_run_iteration_pipeline_from_inputs_via_orchestration_for_run_im
 
     assert captured["runner_kwargs"] == {"mapped": "kwargs"}
     assert result == {"status": "ok"}
+
+
+def test_run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_impl_delegates_builder_then_executor() -> None:
+    captured: dict[str, object] = {}
+
+    def _build_run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_kwargs_fn(**kwargs):
+        captured["builder_kwargs"] = kwargs
+        return {"for_run": "call_kwargs"}
+
+    def _execute_run_iteration_pipeline_from_inputs_via_orchestration_for_run_fn(**kwargs):
+        captured["executor_kwargs"] = kwargs
+        return {"status": "ok"}
+
+    result = helpers.runIterationPipelineFromInputsViaOrchestrationForRunCallImpl(
+        run_iteration_pipeline_from_inputs_via_orchestration_kwargs={"img_path": "img.jpg"},
+        build_run_iteration_pipeline_via_orchestration_for_run_call_kwargs_fn="via_builder",
+        run_iteration_pipeline_via_orchestration_for_run_fn="via_runner",
+        run_iteration_pipeline_from_inputs_via_orchestration_fn="from_inputs_runner",
+        execute_run_iteration_pipeline_from_inputs_via_orchestration_fn="from_inputs_executor",
+        build_run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_kwargs_fn=(
+            _build_run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_kwargs_fn
+        ),
+        run_iteration_pipeline_from_inputs_via_orchestration_for_run_fn="for_run_runner",
+        execute_run_iteration_pipeline_from_inputs_via_orchestration_for_run_fn=(
+            _execute_run_iteration_pipeline_from_inputs_via_orchestration_for_run_fn
+        ),
+    )
+
+    assert captured["builder_kwargs"] == {
+        "run_iteration_pipeline_from_inputs_via_orchestration_kwargs": {"img_path": "img.jpg"},
+        "build_run_iteration_pipeline_via_orchestration_for_run_call_kwargs_fn": "via_builder",
+        "run_iteration_pipeline_via_orchestration_for_run_fn": "via_runner",
+        "run_iteration_pipeline_from_inputs_via_orchestration_fn": "from_inputs_runner",
+        "execute_run_iteration_pipeline_from_inputs_via_orchestration_fn": "from_inputs_executor",
+    }
+    assert captured["executor_kwargs"] == {
+        "run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_kwargs": {
+            "for_run": "call_kwargs"
+        },
+        "run_iteration_pipeline_from_inputs_via_orchestration_for_run_fn": "for_run_runner",
+    }
+    assert result == {"status": "ok"}
