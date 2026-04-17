@@ -448,8 +448,8 @@ def runIterationPipeline(
         dual_arrow_runtime_helpers=dual_arrow_runtime_helpers,
         )
     )
-    run_iteration_pipeline_via_orchestration_for_run_call_kwargs = (
-        iteration_orchestration_helpers.buildRunIterationPipelineViaOrchestrationForRunCallKwargsImpl(
+    run_iteration_pipeline_from_inputs_via_orchestration_kwargs = (
+        iteration_orchestration_helpers.buildRunIterationPipelineFromInputsViaOrchestrationKwargsImpl(
             run_iteration_pipeline_orchestration_kwargs=orchestration_kwargs,
             build_run_iteration_pipeline_orchestration_kwargs_for_run_fn=(
                 iteration_orchestration_helpers.buildRunIterationPipelineOrchestrationKwargsForRunImpl
@@ -462,8 +462,16 @@ def runIterationPipeline(
             ),
         )
     )
-    return iteration_orchestration_helpers.runIterationPipelineViaOrchestrationForRunImpl(
-        **run_iteration_pipeline_via_orchestration_for_run_call_kwargs
+    return iteration_orchestration_helpers.runIterationPipelineFromInputsViaOrchestrationImpl(
+        run_iteration_pipeline_from_inputs_via_orchestration_kwargs=(
+            run_iteration_pipeline_from_inputs_via_orchestration_kwargs
+        ),
+        build_run_iteration_pipeline_via_orchestration_for_run_call_kwargs_fn=(
+            iteration_orchestration_helpers.buildRunIterationPipelineViaOrchestrationForRunCallKwargsImpl
+        ),
+        run_iteration_pipeline_via_orchestration_for_run_fn=(
+            iteration_orchestration_helpers.runIterationPipelineViaOrchestrationForRunImpl
+        ),
     )
 
 def _extractRefParts(name: str) -> tuple[str, int] | None:

@@ -276,6 +276,32 @@ def buildRunIterationPipelineViaOrchestrationForRunCallKwargsImpl(**kwargs) -> d
     """Return the input mapping for the run-level via-orchestration call."""
 
     return dict(kwargs)
+
+
+def buildRunIterationPipelineFromInputsViaOrchestrationKwargsImpl(**kwargs) -> dict[str, object]:
+    """Return the input mapping for the top-level runIterationPipeline orchestration bridge."""
+
+    return dict(kwargs)
+
+
+def runIterationPipelineFromInputsViaOrchestrationImpl(
+    *,
+    run_iteration_pipeline_from_inputs_via_orchestration_kwargs: dict[str, object],
+    build_run_iteration_pipeline_via_orchestration_for_run_call_kwargs_fn,
+    run_iteration_pipeline_via_orchestration_for_run_fn,
+):
+    """Build via-orchestration kwargs from runIterationPipeline inputs and execute the flow."""
+
+    run_iteration_pipeline_via_orchestration_call_kwargs = (
+        build_run_iteration_pipeline_via_orchestration_for_run_call_kwargs_fn(
+            **run_iteration_pipeline_from_inputs_via_orchestration_kwargs
+        )
+    )
+    return run_iteration_pipeline_via_orchestration_for_run_fn(
+        **run_iteration_pipeline_via_orchestration_call_kwargs
+    )
+
+
 def runIterationPipelineViaOrchestrationForRunImpl(
     *,
     run_iteration_pipeline_orchestration_kwargs: dict[str, object],
