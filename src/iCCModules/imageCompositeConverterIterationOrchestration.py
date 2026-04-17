@@ -351,6 +351,26 @@ def runIterationPipelineFromInputsViaOrchestrationForRunImpl(
     )
 
 
+def buildRunIterationPipelineFromInputsViaOrchestrationForRunCallKwargsImpl(
+    **kwargs,
+) -> dict[str, object]:
+    """Return the input mapping for the from-inputs-via-orchestration for-run helper call."""
+
+    return dict(kwargs)
+
+
+def executeRunIterationPipelineFromInputsViaOrchestrationForRunImpl(
+    *,
+    run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_kwargs: dict[str, object],
+    run_iteration_pipeline_from_inputs_via_orchestration_for_run_fn,
+):
+    """Execute the from-inputs-via-orchestration for-run flow with prepared kwargs."""
+
+    return run_iteration_pipeline_from_inputs_via_orchestration_for_run_fn(
+        **run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_kwargs
+    )
+
+
 def runIterationPipelineViaOrchestrationForRunImpl(
     *,
     run_iteration_pipeline_orchestration_kwargs: dict[str, object],
