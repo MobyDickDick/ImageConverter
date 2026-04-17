@@ -257,3 +257,27 @@ def test_execute_run_iteration_pipeline_orchestration_for_run_impl_delegates_bui
     assert captured["builder_kwargs"] == {"img_path": "img.jpg", "max_iterations": 7}
     assert captured["runner_kwargs"] == {"orchestration": "kwargs"}
     assert result == {"result": "ok"}
+
+
+def test_run_iteration_pipeline_via_orchestration_for_run_impl_delegates_executor() -> None:
+    captured: dict[str, object] = {}
+
+    def _execute_run_iteration_pipeline_orchestration_for_run_fn(**kwargs):
+        captured["executor_kwargs"] = kwargs
+        return {"status": "ok"}
+
+    result = helpers.runIterationPipelineViaOrchestrationForRunImpl(
+        run_iteration_pipeline_orchestration_kwargs={"img_path": "img.jpg"},
+        build_run_iteration_pipeline_orchestration_kwargs_for_run_fn="builder",
+        run_iteration_pipeline_orchestration_fn="runner",
+        execute_run_iteration_pipeline_orchestration_for_run_fn=(
+            _execute_run_iteration_pipeline_orchestration_for_run_fn
+        ),
+    )
+
+    assert captured["executor_kwargs"] == {
+        "run_iteration_pipeline_orchestration_kwargs": {"img_path": "img.jpg"},
+        "build_run_iteration_pipeline_orchestration_kwargs_for_run_fn": "builder",
+        "run_iteration_pipeline_orchestration_fn": "runner",
+    }
+    assert result == {"status": "ok"}
