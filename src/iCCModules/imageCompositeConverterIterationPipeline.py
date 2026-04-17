@@ -41,6 +41,14 @@ def buildRunIterationPipelineOrchestrationCallKwargsImpl(
     return dict(kwargs)
 
 
+def buildRunIterationPipelineFromInputsViaOrchestrationCallKwargsImpl(
+    **kwargs,
+) -> dict[str, object]:
+    """Return the input mapping for the top-level from-inputs orchestration builder invocation."""
+
+    return dict(kwargs)
+
+
 def executeBuildRunIterationPipelineOrchestrationKwargsForRunImpl(
     *,
     run_iteration_pipeline_orchestration_call_kwargs: dict[str, object],
@@ -50,6 +58,18 @@ def executeBuildRunIterationPipelineOrchestrationKwargsForRunImpl(
 
     return build_run_iteration_pipeline_orchestration_kwargs_for_run_fn(
         **run_iteration_pipeline_orchestration_call_kwargs
+    )
+
+
+def executeRunIterationPipelineFromInputsViaOrchestrationKwargsBuilderForRunImpl(
+    *,
+    run_iteration_pipeline_from_inputs_via_orchestration_call_kwargs: dict[str, object],
+    build_run_iteration_pipeline_from_inputs_via_orchestration_kwargs_fn,
+):
+    """Build from-inputs orchestration kwargs for the top-level run via delegated builder."""
+
+    return build_run_iteration_pipeline_from_inputs_via_orchestration_kwargs_fn(
+        **run_iteration_pipeline_from_inputs_via_orchestration_call_kwargs
     )
 
 
@@ -252,9 +272,18 @@ def runIterationPipelineImpl(
         )
     )
 
+    from_inputs_builder_call_kwargs = (
+        buildRunIterationPipelineFromInputsViaOrchestrationCallKwargsImpl(
+            run_iteration_pipeline_from_inputs_via_orchestration_call_kwargs=from_inputs_call_kwargs,
+            build_run_iteration_pipeline_from_inputs_via_orchestration_kwargs_fn=(
+                iteration_orchestration_helpers.buildRunIterationPipelineFromInputsViaOrchestrationKwargsImpl
+            ),
+        )
+    )
+
     run_iteration_pipeline_from_inputs_via_orchestration_kwargs = (
-        iteration_orchestration_helpers.buildRunIterationPipelineFromInputsViaOrchestrationKwargsImpl(
-            **from_inputs_call_kwargs
+        executeRunIterationPipelineFromInputsViaOrchestrationKwargsBuilderForRunImpl(
+            **from_inputs_builder_call_kwargs
         )
     )
 
