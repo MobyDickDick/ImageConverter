@@ -270,6 +270,12 @@ def executeRunIterationPipelineOrchestrationForRunImpl(
     )
 
 
+
+
+def buildRunIterationPipelineViaOrchestrationForRunCallKwargsImpl(**kwargs) -> dict[str, object]:
+    """Return the input mapping for the run-level via-orchestration call."""
+
+    return dict(kwargs)
 def runIterationPipelineViaOrchestrationForRunImpl(
     *,
     run_iteration_pipeline_orchestration_kwargs: dict[str, object],
