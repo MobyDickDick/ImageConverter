@@ -520,6 +520,37 @@ def test_build_run_iteration_pipeline_from_inputs_via_orchestration_for_run_call
     assert result is not kwargs
 
 
+def test_build_run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_for_run_call_kwargs_for_run_impl_returns_mapping() -> None:
+    result = (
+        helpers.buildRunIterationPipelineFromInputsViaOrchestrationForRunCallForRunCallKwargsForRunImpl(
+            run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_kwargs={
+                "payload": "run-call"
+            },
+            run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_fn=(
+                "run_for_run_call_fn"
+            ),
+            execute_run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_fn=(
+                "execute_for_run_call_fn"
+            ),
+        )
+    )
+
+    assert result == {
+        "run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_kwargs": {
+            "payload": "run-call"
+        },
+        "build_run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_kwargs_fn": (
+            helpers.buildRunIterationPipelineFromInputsViaOrchestrationForRunCallKwargsImpl
+        ),
+        "run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_fn": (
+            "run_for_run_call_fn"
+        ),
+        "execute_run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_fn": (
+            "execute_for_run_call_fn"
+        ),
+    }
+
+
 def test_run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_for_run_call_impl_delegates_builder_then_runner() -> None:
     calls: dict[str, object] = {}
 
