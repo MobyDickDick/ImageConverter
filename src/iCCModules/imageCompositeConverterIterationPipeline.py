@@ -73,6 +73,24 @@ def executeRunIterationPipelineFromInputsViaOrchestrationKwargsBuilderForRunImpl
     )
 
 
+def runIterationPipelineOrchestrationKwargsForRunImpl(
+    *,
+    run_iteration_pipeline_orchestration_call_kwargs: dict[str, object],
+    build_run_iteration_pipeline_orchestration_kwargs_for_run_fn,
+    execute_build_run_iteration_pipeline_orchestration_kwargs_for_run_fn,
+):
+    """Build top-level orchestration kwargs via delegated executor."""
+
+    return execute_build_run_iteration_pipeline_orchestration_kwargs_for_run_fn(
+        run_iteration_pipeline_orchestration_call_kwargs=(
+            run_iteration_pipeline_orchestration_call_kwargs
+        ),
+        build_run_iteration_pipeline_orchestration_kwargs_for_run_fn=(
+            build_run_iteration_pipeline_orchestration_kwargs_for_run_fn
+        ),
+    )
+
+
 def buildRunIterationPipelineFromInputsViaOrchestrationKwargsForRunImpl(
     *,
     run_iteration_pipeline_orchestration_kwargs: dict[str, object],
@@ -292,10 +310,13 @@ def runIterationPipelineImpl(
         dual_arrow_runtime_helpers=dual_arrow_runtime_helpers,
     )
 
-    orchestration_kwargs = executeBuildRunIterationPipelineOrchestrationKwargsForRunImpl(
+    orchestration_kwargs = runIterationPipelineOrchestrationKwargsForRunImpl(
         run_iteration_pipeline_orchestration_call_kwargs=orchestration_call_kwargs,
         build_run_iteration_pipeline_orchestration_kwargs_for_run_fn=(
             iteration_orchestration_helpers.buildRunIterationPipelineOrchestrationKwargsForRunImpl
+        ),
+        execute_build_run_iteration_pipeline_orchestration_kwargs_for_run_fn=(
+            executeBuildRunIterationPipelineOrchestrationKwargsForRunImpl
         ),
     )
 
