@@ -150,3 +150,14 @@ def test_build_run_iteration_pipeline_orchestration_kwargs_for_run_call_kwargs_i
 
     assert result == kwargs
     assert result is not kwargs
+
+
+def test_build_run_iteration_pipeline_from_inputs_via_orchestration_kwargs_for_run_call_kwargs_impl_returns_copy() -> None:
+    kwargs = {"run_iteration_pipeline_orchestration_kwargs": {"orchestration": "kwargs"}}
+
+    result = helpers.buildRunIterationPipelineFromInputsViaOrchestrationKwargsForRunCallKwargsImpl(
+        **kwargs
+    )
+
+    assert result == kwargs
+    assert result is not kwargs
