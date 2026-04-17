@@ -170,6 +170,47 @@ def runIterationPipelineFromInputsViaOrchestrationForRunCallForRunImpl(
     )
 
 
+def runIterationPipelineFromInputsViaOrchestrationKwargsForRunCallImpl(
+    *,
+    run_iteration_pipeline_from_inputs_via_orchestration_kwargs: dict[str, object],
+    build_run_iteration_pipeline_via_orchestration_for_run_call_kwargs_fn,
+    run_iteration_pipeline_via_orchestration_for_run_fn,
+    run_iteration_pipeline_from_inputs_via_orchestration_fn,
+    execute_run_iteration_pipeline_from_inputs_via_orchestration_fn,
+    build_run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_kwargs_fn,
+    run_iteration_pipeline_from_inputs_via_orchestration_for_run_fn,
+    execute_run_iteration_pipeline_from_inputs_via_orchestration_for_run_fn,
+):
+    """Build top-level from-inputs orchestration run-call kwargs."""
+
+    return buildRunIterationPipelineFromInputsViaOrchestrationForRunCallKwargsImpl(
+        run_iteration_pipeline_from_inputs_via_orchestration_kwargs=(
+            run_iteration_pipeline_from_inputs_via_orchestration_kwargs
+        ),
+        build_run_iteration_pipeline_via_orchestration_for_run_call_kwargs_fn=(
+            build_run_iteration_pipeline_via_orchestration_for_run_call_kwargs_fn
+        ),
+        run_iteration_pipeline_via_orchestration_for_run_fn=(
+            run_iteration_pipeline_via_orchestration_for_run_fn
+        ),
+        run_iteration_pipeline_from_inputs_via_orchestration_fn=(
+            run_iteration_pipeline_from_inputs_via_orchestration_fn
+        ),
+        execute_run_iteration_pipeline_from_inputs_via_orchestration_fn=(
+            execute_run_iteration_pipeline_from_inputs_via_orchestration_fn
+        ),
+        build_run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_kwargs_fn=(
+            build_run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_kwargs_fn
+        ),
+        run_iteration_pipeline_from_inputs_via_orchestration_for_run_fn=(
+            run_iteration_pipeline_from_inputs_via_orchestration_for_run_fn
+        ),
+        execute_run_iteration_pipeline_from_inputs_via_orchestration_for_run_fn=(
+            execute_run_iteration_pipeline_from_inputs_via_orchestration_for_run_fn
+        ),
+    )
+
+
 
 def runIterationPipelineImpl(
     *,
@@ -344,7 +385,7 @@ def runIterationPipelineImpl(
         )
     )
 
-    run_call_kwargs = buildRunIterationPipelineFromInputsViaOrchestrationForRunCallKwargsImpl(
+    run_call_kwargs = runIterationPipelineFromInputsViaOrchestrationKwargsForRunCallImpl(
         run_iteration_pipeline_from_inputs_via_orchestration_kwargs=(
             run_iteration_pipeline_from_inputs_via_orchestration_kwargs
         ),
