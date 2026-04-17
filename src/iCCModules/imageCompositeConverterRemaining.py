@@ -22,6 +22,7 @@ from src.iCCModules import imageCompositeConverterIterationModePreparation as it
 from src.iCCModules import imageCompositeConverterIterationModeRuntimePreparation as iteration_mode_runtime_preparation_helpers
 from src.iCCModules import imageCompositeConverterIterationModeSetup as iteration_mode_setup_helpers
 from src.iCCModules import imageCompositeConverterIterationOrchestration as iteration_orchestration_helpers
+from src.iCCModules import imageCompositeConverterIterationPipeline as iteration_pipeline_helpers
 from src.iCCModules import imageCompositeConverterIterationPreparation as iteration_preparation_helpers
 from src.iCCModules import imageCompositeConverterIterationRunPreparation as iteration_run_preparation_helpers
 from src.iCCModules import imageCompositeConverterIterationRuntime as iteration_runtime_helpers
@@ -375,8 +376,7 @@ def runIterationPipeline(
     debug_element_diff_dir: str | None = None,
     badge_validation_rounds: int = 6,
 ):
-    orchestration_kwargs = (
-        iteration_orchestration_helpers.buildRunIterationPipelineOrchestrationKwargsForRunImpl(
+    return iteration_pipeline_helpers.runIterationPipelineImpl(
         img_path=img_path,
         csv_path=csv_path,
         max_iterations=max_iterations,
@@ -386,34 +386,13 @@ def runIterationPipeline(
         debug_ac0811_dir=debug_ac0811_dir,
         debug_element_diff_dir=debug_element_diff_dir,
         badge_validation_rounds=badge_validation_rounds,
-        ensure_conversion_runtime_dependencies_fn=dependency_helpers.ensureConversionRuntimeDependenciesImpl,
-        cv2_module=cv2,
-        np_module=np,
-        fitz_module=fitz,
-        prepare_run_locals_for_run_fn=iteration_run_preparation_helpers.prepareRunIterationPipelineLocalsForRunImpl,
-        build_prepare_run_locals_for_run_call_kwargs_fn=iteration_run_preparation_helpers.buildPrepareRunIterationPipelineLocalsForRunCallKwargsImpl,
-        build_run_iteration_pipeline_for_run_call_kwargs_fn=iteration_execution_context_helpers.buildRunIterationPipelineForRunCallKwargsImpl,
-        run_iteration_pipeline_for_run_fn=iteration_execution_context_helpers.runIterationPipelineForRunImpl,
-        run_seed=int(Action.STOCHASTIC_RUN_SEED),
-        pass_seed_offset=int(Action.STOCHASTIC_SEED_OFFSET),
-        action_cls=Action,
-        perception_cls=Perception,
-        reflection_cls=Reflection,
-        get_base_name_from_file_fn=getBaseNameFromFile,
-        semantic_audit_record_fn=_semanticAuditRecord,
-        semantic_quality_flags_fn=_semanticQualityFlags,
-        looks_like_elongated_foreground_rect_fn=_looksLikeElongatedForegroundRect,
-        render_embedded_raster_svg_fn=_renderEmbeddedRasterSvg,
-        print_fn=print,
-        time_ns_fn=time.time_ns,
-        calculate_error_fn=Action.calculate_error,
-        build_prepared_mode_builder_kwargs_fn=iteration_execution_helpers.buildPreparedModeBuilderKwargsImpl,
-        run_prepared_iteration_and_finalize_fn=iteration_execution_helpers.runPreparedIterationAndFinalizeImpl,
-        build_prepared_iteration_mode_kwargs_fn=iteration_context_helpers.buildPreparedIterationModeKwargsImpl,
-        run_prepared_iteration_mode_fn=iteration_dispatch_helpers.runPreparedIterationModeImpl,
-        finalize_iteration_result_fn=iteration_finalization_helpers.finalizeIterationResultImpl,
-        math_module=math,
+        iteration_orchestration_helpers=iteration_orchestration_helpers,
         iteration_run_preparation_helpers=iteration_run_preparation_helpers,
+        iteration_execution_context_helpers=iteration_execution_context_helpers,
+        iteration_execution_helpers=iteration_execution_helpers,
+        iteration_context_helpers=iteration_context_helpers,
+        iteration_dispatch_helpers=iteration_dispatch_helpers,
+        iteration_finalization_helpers=iteration_finalization_helpers,
         iteration_bindings_helpers=iteration_bindings_helpers,
         iteration_initialization_helpers=iteration_initialization_helpers,
         iteration_setup_helpers=iteration_setup_helpers,
@@ -424,8 +403,6 @@ def runIterationPipeline(
         iteration_mode_dependency_setup_helpers=iteration_mode_dependency_setup_helpers,
         iteration_mode_dependency_helpers=iteration_mode_dependency_helpers,
         iteration_mode_runtime_helpers=iteration_mode_runtime_helpers,
-        iteration_orchestration_helpers=iteration_orchestration_helpers,
-        iteration_context_helpers=iteration_context_helpers,
         iteration_preparation_helpers=iteration_preparation_helpers,
         gradient_stripe_strategy_helpers=gradient_stripe_strategy_helpers,
         semantic_audit_bootstrap_helpers=semantic_audit_bootstrap_helpers,
@@ -446,47 +423,24 @@ def runIterationPipeline(
         semantic_badge_runtime_helpers=semantic_badge_runtime_helpers,
         dual_arrow_badge_helpers=dual_arrow_badge_helpers,
         dual_arrow_runtime_helpers=dual_arrow_runtime_helpers,
-        )
-    )
-    run_iteration_pipeline_from_inputs_via_orchestration_kwargs = (
-        iteration_orchestration_helpers.buildRunIterationPipelineFromInputsViaOrchestrationKwargsImpl(
-            run_iteration_pipeline_orchestration_kwargs=orchestration_kwargs,
-            build_run_iteration_pipeline_orchestration_kwargs_for_run_fn=(
-                iteration_orchestration_helpers.buildRunIterationPipelineOrchestrationKwargsForRunImpl
-            ),
-            run_iteration_pipeline_orchestration_fn=(
-                iteration_orchestration_helpers.runIterationPipelineOrchestrationImpl
-            ),
-            execute_run_iteration_pipeline_orchestration_for_run_fn=(
-                iteration_orchestration_helpers.executeRunIterationPipelineOrchestrationForRunImpl
-            ),
-        )
-    )
-    return iteration_orchestration_helpers.runIterationPipelineFromInputsViaOrchestrationForRunCallImpl(
-        run_iteration_pipeline_from_inputs_via_orchestration_kwargs=(
-            run_iteration_pipeline_from_inputs_via_orchestration_kwargs
-        ),
-        build_run_iteration_pipeline_via_orchestration_for_run_call_kwargs_fn=(
-            iteration_orchestration_helpers.buildRunIterationPipelineViaOrchestrationForRunCallKwargsImpl
-        ),
-        run_iteration_pipeline_via_orchestration_for_run_fn=(
-            iteration_orchestration_helpers.runIterationPipelineViaOrchestrationForRunImpl
-        ),
-        run_iteration_pipeline_from_inputs_via_orchestration_fn=(
-            iteration_orchestration_helpers.runIterationPipelineFromInputsViaOrchestrationImpl
-        ),
-        execute_run_iteration_pipeline_from_inputs_via_orchestration_fn=(
-            iteration_orchestration_helpers.executeRunIterationPipelineFromInputsViaOrchestrationImpl
-        ),
-        build_run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_kwargs_fn=(
-            iteration_orchestration_helpers.buildRunIterationPipelineFromInputsViaOrchestrationForRunCallKwargsImpl
-        ),
-        run_iteration_pipeline_from_inputs_via_orchestration_for_run_fn=(
-            iteration_orchestration_helpers.runIterationPipelineFromInputsViaOrchestrationForRunImpl
-        ),
-        execute_run_iteration_pipeline_from_inputs_via_orchestration_for_run_fn=(
-            iteration_orchestration_helpers.executeRunIterationPipelineFromInputsViaOrchestrationForRunImpl
-        ),
+        ensure_conversion_runtime_dependencies_fn=dependency_helpers.ensureConversionRuntimeDependenciesImpl,
+        cv2_module=cv2,
+        np_module=np,
+        fitz_module=fitz,
+        run_seed=int(Action.STOCHASTIC_RUN_SEED),
+        pass_seed_offset=int(Action.STOCHASTIC_SEED_OFFSET),
+        action_cls=Action,
+        perception_cls=Perception,
+        reflection_cls=Reflection,
+        get_base_name_from_file_fn=getBaseNameFromFile,
+        semantic_audit_record_fn=_semanticAuditRecord,
+        semantic_quality_flags_fn=_semanticQualityFlags,
+        looks_like_elongated_foreground_rect_fn=_looksLikeElongatedForegroundRect,
+        render_embedded_raster_svg_fn=_renderEmbeddedRasterSvg,
+        print_fn=print,
+        time_ns_fn=time.time_ns,
+        calculate_error_fn=Action.calculate_error,
+        math_module=math,
     )
 
 def _extractRefParts(name: str) -> tuple[str, int] | None:
