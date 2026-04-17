@@ -132,3 +132,12 @@ def test_run_iteration_pipeline_impl_delegates_orchestration_wiring() -> None:
         "from_inputs": "kwargs"
     }
     assert result == {"status": "ok"}
+
+
+def test_build_run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_kwargs_impl_returns_copy() -> None:
+    kwargs = {"alpha": 1, "beta": "two"}
+
+    result = helpers.buildRunIterationPipelineFromInputsViaOrchestrationForRunCallKwargsImpl(**kwargs)
+
+    assert result == kwargs
+    assert result is not kwargs
