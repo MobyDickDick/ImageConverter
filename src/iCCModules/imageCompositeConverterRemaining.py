@@ -462,7 +462,7 @@ def runIterationPipeline(
             ),
         )
     )
-    return iteration_orchestration_helpers.runIterationPipelineFromInputsViaOrchestrationImpl(
+    return iteration_orchestration_helpers.runIterationPipelineFromInputsViaOrchestrationForRunImpl(
         run_iteration_pipeline_from_inputs_via_orchestration_kwargs=(
             run_iteration_pipeline_from_inputs_via_orchestration_kwargs
         ),
@@ -471,6 +471,12 @@ def runIterationPipeline(
         ),
         run_iteration_pipeline_via_orchestration_for_run_fn=(
             iteration_orchestration_helpers.runIterationPipelineViaOrchestrationForRunImpl
+        ),
+        run_iteration_pipeline_from_inputs_via_orchestration_fn=(
+            iteration_orchestration_helpers.runIterationPipelineFromInputsViaOrchestrationImpl
+        ),
+        execute_run_iteration_pipeline_from_inputs_via_orchestration_fn=(
+            iteration_orchestration_helpers.executeRunIterationPipelineFromInputsViaOrchestrationImpl
         ),
     )
 
