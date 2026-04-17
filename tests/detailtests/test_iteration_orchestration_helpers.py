@@ -281,3 +281,30 @@ def test_run_iteration_pipeline_via_orchestration_for_run_impl_delegates_executo
         "run_iteration_pipeline_orchestration_fn": "runner",
     }
     assert result == {"status": "ok"}
+
+
+def test_build_run_iteration_pipeline_via_orchestration_call_kwargs_impl_returns_copy() -> None:
+    kwargs = {"run_iteration_pipeline_orchestration_kwargs": {"img_path": "img.jpg"}}
+
+    result = helpers.buildRunIterationPipelineViaOrchestrationCallKwargsImpl(**kwargs)
+
+    assert result == kwargs
+    assert result is not kwargs
+
+
+def test_execute_run_iteration_pipeline_via_orchestration_impl_delegates_executor() -> None:
+    captured: dict[str, object] = {}
+
+    def _execute_run_iteration_pipeline_orchestration_for_run_fn(**kwargs):
+        captured["executor_kwargs"] = kwargs
+        return {"status": "ok"}
+
+    result = helpers.executeRunIterationPipelineViaOrchestrationImpl(
+        run_iteration_pipeline_via_orchestration_call_kwargs={"mapped": "kwargs"},
+        execute_run_iteration_pipeline_orchestration_for_run_fn=(
+            _execute_run_iteration_pipeline_orchestration_for_run_fn
+        ),
+    )
+
+    assert captured["executor_kwargs"] == {"mapped": "kwargs"}
+    assert result == {"status": "ok"}
