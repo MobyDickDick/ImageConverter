@@ -91,6 +91,31 @@ def runIterationPipelineOrchestrationKwargsForRunImpl(
     )
 
 
+def runIterationPipelineOrchestrationKwargsForRunCallImpl(
+    *,
+    build_run_iteration_pipeline_orchestration_call_kwargs_fn,
+    run_iteration_pipeline_orchestration_call_kwargs: dict[str, object],
+    build_run_iteration_pipeline_orchestration_kwargs_for_run_fn,
+    execute_build_run_iteration_pipeline_orchestration_kwargs_for_run_fn,
+):
+    """Build and execute top-level orchestration kwargs resolution for the run entrypoint."""
+
+    orchestration_call_kwargs = (
+        build_run_iteration_pipeline_orchestration_call_kwargs_fn(
+            **run_iteration_pipeline_orchestration_call_kwargs
+        )
+    )
+    return runIterationPipelineOrchestrationKwargsForRunImpl(
+        run_iteration_pipeline_orchestration_call_kwargs=orchestration_call_kwargs,
+        build_run_iteration_pipeline_orchestration_kwargs_for_run_fn=(
+            build_run_iteration_pipeline_orchestration_kwargs_for_run_fn
+        ),
+        execute_build_run_iteration_pipeline_orchestration_kwargs_for_run_fn=(
+            execute_build_run_iteration_pipeline_orchestration_kwargs_for_run_fn
+        ),
+    )
+
+
 def buildRunIterationPipelineFromInputsViaOrchestrationKwargsForRunImpl(
     *,
     run_iteration_pipeline_orchestration_kwargs: dict[str, object],
@@ -279,80 +304,113 @@ def runIterationPipelineImpl(
     calculate_error_fn,
     math_module,
 ):
-    orchestration_call_kwargs = buildRunIterationPipelineOrchestrationCallKwargsImpl(
-        img_path=img_path,
-        csv_path=csv_path,
-        max_iterations=max_iterations,
-        svg_out_dir=svg_out_dir,
-        diff_out_dir=diff_out_dir,
-        reports_out_dir=reports_out_dir,
-        debug_ac0811_dir=debug_ac0811_dir,
-        debug_element_diff_dir=debug_element_diff_dir,
-        badge_validation_rounds=badge_validation_rounds,
-        ensure_conversion_runtime_dependencies_fn=ensure_conversion_runtime_dependencies_fn,
-        cv2_module=cv2_module,
-        np_module=np_module,
-        fitz_module=fitz_module,
-        prepare_run_locals_for_run_fn=iteration_run_preparation_helpers.prepareRunIterationPipelineLocalsForRunImpl,
-        build_prepare_run_locals_for_run_call_kwargs_fn=iteration_run_preparation_helpers.buildPrepareRunIterationPipelineLocalsForRunCallKwargsImpl,
-        build_run_iteration_pipeline_for_run_call_kwargs_fn=iteration_execution_context_helpers.buildRunIterationPipelineForRunCallKwargsImpl,
-        run_iteration_pipeline_for_run_fn=iteration_execution_context_helpers.runIterationPipelineForRunImpl,
-        run_seed=run_seed,
-        pass_seed_offset=pass_seed_offset,
-        action_cls=action_cls,
-        perception_cls=perception_cls,
-        reflection_cls=reflection_cls,
-        get_base_name_from_file_fn=get_base_name_from_file_fn,
-        semantic_audit_record_fn=semantic_audit_record_fn,
-        semantic_quality_flags_fn=semantic_quality_flags_fn,
-        looks_like_elongated_foreground_rect_fn=looks_like_elongated_foreground_rect_fn,
-        render_embedded_raster_svg_fn=render_embedded_raster_svg_fn,
-        print_fn=print_fn,
-        time_ns_fn=time_ns_fn,
-        calculate_error_fn=calculate_error_fn,
-        build_prepared_mode_builder_kwargs_fn=iteration_execution_helpers.buildPreparedModeBuilderKwargsImpl,
-        run_prepared_iteration_and_finalize_fn=iteration_execution_helpers.runPreparedIterationAndFinalizeImpl,
-        build_prepared_iteration_mode_kwargs_fn=iteration_context_helpers.buildPreparedIterationModeKwargsImpl,
-        run_prepared_iteration_mode_fn=iteration_dispatch_helpers.runPreparedIterationModeImpl,
-        finalize_iteration_result_fn=iteration_finalization_helpers.finalizeIterationResultImpl,
-        math_module=math_module,
-        iteration_run_preparation_helpers=iteration_run_preparation_helpers,
-        iteration_bindings_helpers=iteration_bindings_helpers,
-        iteration_initialization_helpers=iteration_initialization_helpers,
-        iteration_setup_helpers=iteration_setup_helpers,
-        iteration_runtime_helpers=iteration_runtime_helpers,
-        iteration_mode_runtime_preparation_helpers=iteration_mode_runtime_preparation_helpers,
-        iteration_mode_setup_helpers=iteration_mode_setup_helpers,
-        iteration_mode_preparation_helpers=iteration_mode_preparation_helpers,
-        iteration_mode_dependency_setup_helpers=iteration_mode_dependency_setup_helpers,
-        iteration_mode_dependency_helpers=iteration_mode_dependency_helpers,
-        iteration_mode_runtime_helpers=iteration_mode_runtime_helpers,
-        iteration_orchestration_helpers=iteration_orchestration_helpers,
-        iteration_context_helpers=iteration_context_helpers,
-        iteration_preparation_helpers=iteration_preparation_helpers,
-        gradient_stripe_strategy_helpers=gradient_stripe_strategy_helpers,
-        semantic_audit_bootstrap_helpers=semantic_audit_bootstrap_helpers,
-        semantic_audit_logging_helpers=semantic_audit_logging_helpers,
-        semantic_audit_runtime_helpers=semantic_audit_runtime_helpers,
-        semantic_mismatch_reporting_helpers=semantic_mismatch_reporting_helpers,
-        semantic_validation_logging_helpers=semantic_validation_logging_helpers,
-        semantic_mismatch_runtime_helpers=semantic_mismatch_runtime_helpers,
-        semantic_validation_context_helpers=semantic_validation_context_helpers,
-        semantic_validation_runtime_helpers=semantic_validation_runtime_helpers,
-        semantic_post_validation_helpers=semantic_post_validation_helpers,
-        semantic_validation_finalization_helpers=semantic_validation_finalization_helpers,
-        semantic_iteration_finalization_helpers=semantic_iteration_finalization_helpers,
-        semantic_ac0223_runtime_helpers=semantic_ac0223_runtime_helpers,
-        semantic_visual_override_helpers=semantic_visual_override_helpers,
-        non_composite_runtime_helpers=non_composite_runtime_helpers,
-        conversion_composite_helpers=conversion_composite_helpers,
-        semantic_badge_runtime_helpers=semantic_badge_runtime_helpers,
-        dual_arrow_badge_helpers=dual_arrow_badge_helpers,
-        dual_arrow_runtime_helpers=dual_arrow_runtime_helpers,
-    )
-
-    orchestration_kwargs = runIterationPipelineOrchestrationKwargsForRunImpl(
-        run_iteration_pipeline_orchestration_call_kwargs=orchestration_call_kwargs,
+    orchestration_kwargs = runIterationPipelineOrchestrationKwargsForRunCallImpl(
+        build_run_iteration_pipeline_orchestration_call_kwargs_fn=(
+            buildRunIterationPipelineOrchestrationCallKwargsImpl
+        ),
+        run_iteration_pipeline_orchestration_call_kwargs={
+            "img_path": img_path,
+            "csv_path": csv_path,
+            "max_iterations": max_iterations,
+            "svg_out_dir": svg_out_dir,
+            "diff_out_dir": diff_out_dir,
+            "reports_out_dir": reports_out_dir,
+            "debug_ac0811_dir": debug_ac0811_dir,
+            "debug_element_diff_dir": debug_element_diff_dir,
+            "badge_validation_rounds": badge_validation_rounds,
+            "ensure_conversion_runtime_dependencies_fn": ensure_conversion_runtime_dependencies_fn,
+            "cv2_module": cv2_module,
+            "np_module": np_module,
+            "fitz_module": fitz_module,
+            "prepare_run_locals_for_run_fn": (
+                iteration_run_preparation_helpers.prepareRunIterationPipelineLocalsForRunImpl
+            ),
+            "build_prepare_run_locals_for_run_call_kwargs_fn": (
+                iteration_run_preparation_helpers.buildPrepareRunIterationPipelineLocalsForRunCallKwargsImpl
+            ),
+            "build_run_iteration_pipeline_for_run_call_kwargs_fn": (
+                iteration_execution_context_helpers.buildRunIterationPipelineForRunCallKwargsImpl
+            ),
+            "run_iteration_pipeline_for_run_fn": (
+                iteration_execution_context_helpers.runIterationPipelineForRunImpl
+            ),
+            "run_seed": run_seed,
+            "pass_seed_offset": pass_seed_offset,
+            "action_cls": action_cls,
+            "perception_cls": perception_cls,
+            "reflection_cls": reflection_cls,
+            "get_base_name_from_file_fn": get_base_name_from_file_fn,
+            "semantic_audit_record_fn": semantic_audit_record_fn,
+            "semantic_quality_flags_fn": semantic_quality_flags_fn,
+            "looks_like_elongated_foreground_rect_fn": (
+                looks_like_elongated_foreground_rect_fn
+            ),
+            "render_embedded_raster_svg_fn": render_embedded_raster_svg_fn,
+            "print_fn": print_fn,
+            "time_ns_fn": time_ns_fn,
+            "calculate_error_fn": calculate_error_fn,
+            "build_prepared_mode_builder_kwargs_fn": (
+                iteration_execution_helpers.buildPreparedModeBuilderKwargsImpl
+            ),
+            "run_prepared_iteration_and_finalize_fn": (
+                iteration_execution_helpers.runPreparedIterationAndFinalizeImpl
+            ),
+            "build_prepared_iteration_mode_kwargs_fn": (
+                iteration_context_helpers.buildPreparedIterationModeKwargsImpl
+            ),
+            "run_prepared_iteration_mode_fn": (
+                iteration_dispatch_helpers.runPreparedIterationModeImpl
+            ),
+            "finalize_iteration_result_fn": (
+                iteration_finalization_helpers.finalizeIterationResultImpl
+            ),
+            "math_module": math_module,
+            "iteration_run_preparation_helpers": iteration_run_preparation_helpers,
+            "iteration_bindings_helpers": iteration_bindings_helpers,
+            "iteration_initialization_helpers": iteration_initialization_helpers,
+            "iteration_setup_helpers": iteration_setup_helpers,
+            "iteration_runtime_helpers": iteration_runtime_helpers,
+            "iteration_mode_runtime_preparation_helpers": (
+                iteration_mode_runtime_preparation_helpers
+            ),
+            "iteration_mode_setup_helpers": iteration_mode_setup_helpers,
+            "iteration_mode_preparation_helpers": iteration_mode_preparation_helpers,
+            "iteration_mode_dependency_setup_helpers": (
+                iteration_mode_dependency_setup_helpers
+            ),
+            "iteration_mode_dependency_helpers": iteration_mode_dependency_helpers,
+            "iteration_mode_runtime_helpers": iteration_mode_runtime_helpers,
+            "iteration_orchestration_helpers": iteration_orchestration_helpers,
+            "iteration_context_helpers": iteration_context_helpers,
+            "iteration_preparation_helpers": iteration_preparation_helpers,
+            "gradient_stripe_strategy_helpers": gradient_stripe_strategy_helpers,
+            "semantic_audit_bootstrap_helpers": semantic_audit_bootstrap_helpers,
+            "semantic_audit_logging_helpers": semantic_audit_logging_helpers,
+            "semantic_audit_runtime_helpers": semantic_audit_runtime_helpers,
+            "semantic_mismatch_reporting_helpers": semantic_mismatch_reporting_helpers,
+            "semantic_validation_logging_helpers": (
+                semantic_validation_logging_helpers
+            ),
+            "semantic_mismatch_runtime_helpers": semantic_mismatch_runtime_helpers,
+            "semantic_validation_context_helpers": (
+                semantic_validation_context_helpers
+            ),
+            "semantic_validation_runtime_helpers": semantic_validation_runtime_helpers,
+            "semantic_post_validation_helpers": semantic_post_validation_helpers,
+            "semantic_validation_finalization_helpers": (
+                semantic_validation_finalization_helpers
+            ),
+            "semantic_iteration_finalization_helpers": (
+                semantic_iteration_finalization_helpers
+            ),
+            "semantic_ac0223_runtime_helpers": semantic_ac0223_runtime_helpers,
+            "semantic_visual_override_helpers": semantic_visual_override_helpers,
+            "non_composite_runtime_helpers": non_composite_runtime_helpers,
+            "conversion_composite_helpers": conversion_composite_helpers,
+            "semantic_badge_runtime_helpers": semantic_badge_runtime_helpers,
+            "dual_arrow_badge_helpers": dual_arrow_badge_helpers,
+            "dual_arrow_runtime_helpers": dual_arrow_runtime_helpers,
+        },
         build_run_iteration_pipeline_orchestration_kwargs_for_run_fn=(
             iteration_orchestration_helpers.buildRunIterationPipelineOrchestrationKwargsForRunImpl
         ),
