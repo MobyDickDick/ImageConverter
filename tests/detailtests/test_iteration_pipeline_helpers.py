@@ -871,6 +871,52 @@ def test_build_run_iteration_pipeline_from_inputs_via_orchestration_for_run_from
     assert result is not kwargs
 
 
+def test_build_run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_call_for_run_call_for_run_kwargs_impl_delegates_wiring() -> None:
+    stub = _OrchestrationHelpersStub()
+
+    result = (
+        helpers.buildRunIterationPipelineFromInputsViaOrchestrationForRunFromInputsCallForRunCallForRunKwargsImpl(
+            run_iteration_pipeline_from_inputs_via_orchestration_kwargs={
+                "orchestration": "kwargs"
+            },
+            iteration_orchestration_helpers=stub,
+        )
+    )
+
+    assert result == {
+        "run_iteration_pipeline_from_inputs_via_orchestration_kwargs": {
+            "orchestration": "kwargs"
+        },
+        "build_run_iteration_pipeline_via_orchestration_for_run_call_kwargs_fn": (
+            stub.buildRunIterationPipelineViaOrchestrationForRunCallKwargsImpl
+        ),
+        "run_iteration_pipeline_via_orchestration_for_run_fn": (
+            stub.runIterationPipelineViaOrchestrationForRunImpl
+        ),
+        "run_iteration_pipeline_from_inputs_via_orchestration_fn": (
+            stub.runIterationPipelineFromInputsViaOrchestrationImpl
+        ),
+        "execute_run_iteration_pipeline_from_inputs_via_orchestration_fn": (
+            stub.executeRunIterationPipelineFromInputsViaOrchestrationImpl
+        ),
+        "build_run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_kwargs_fn": (
+            stub.buildRunIterationPipelineFromInputsViaOrchestrationForRunCallKwargsImpl
+        ),
+        "run_iteration_pipeline_from_inputs_via_orchestration_for_run_fn": (
+            stub.runIterationPipelineFromInputsViaOrchestrationForRunImpl
+        ),
+        "execute_run_iteration_pipeline_from_inputs_via_orchestration_for_run_fn": (
+            stub.executeRunIterationPipelineFromInputsViaOrchestrationForRunImpl
+        ),
+        "run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_fn": (
+            stub.runIterationPipelineFromInputsViaOrchestrationForRunCallImpl
+        ),
+        "execute_run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_fn": (
+            helpers.executeRunIterationPipelineFromInputsViaOrchestrationForRunCallImpl
+        ),
+    }
+
+
 def test_run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_call_for_run_impl_delegates_builder_then_runner() -> None:
     calls: dict[str, object] = {}
 
