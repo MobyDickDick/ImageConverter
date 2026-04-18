@@ -1040,3 +1040,31 @@ def test_run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_input
     assert calls["builder_kwargs"] == {"alpha": 1, "beta": "two"}
     assert calls["runner_kwargs"] == {"mapped": "dispatch"}
     assert result == {"status": "ok"}
+
+
+def test_build_run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_dispatch_call_kwargs_for_run_impl_delegates_wiring() -> None:
+    result = (
+        helpers.buildRunIterationPipelineFromInputsViaOrchestrationForRunFromInputsDispatchCallKwargsForRunImpl(
+            run_from_inputs_call_for_run_call_kwargs={"mapped": "call"},
+        )
+    )
+
+    assert result == {
+        "build_run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_dispatch_kwargs_fn": (
+            helpers.buildRunIterationPipelineFromInputsViaOrchestrationForRunFromInputsDispatchKwargsImpl
+        ),
+        "run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_dispatch_kwargs": {
+            "build_run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_call_for_run_call_kwargs_fn": (
+                helpers.buildRunIterationPipelineFromInputsViaOrchestrationForRunFromInputsCallForRunCallKwargsImpl
+            ),
+            "run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_call_for_run_call_kwargs": {
+                "mapped": "call"
+            },
+            "run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_call_fn": (
+                helpers.runIterationPipelineFromInputsViaOrchestrationForRunFromInputsCallImpl
+            ),
+        },
+        "run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_fn": (
+            helpers.runIterationPipelineFromInputsViaOrchestrationForRunFromInputsCallForRunImpl
+        ),
+    }
