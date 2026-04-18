@@ -550,7 +550,7 @@ def runIterationPipelineFromInputsViaOrchestrationForRunFromInputsCallImpl(
             buildRunIterationPipelineFromInputsViaOrchestrationForRunFromInputsCallForRunKwargsImpl
         ),
         run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_call_for_run_kwargs=(
-            buildRunIterationPipelineFromInputsViaOrchestrationForRunFromInputsCallForRunKwargsImpl(
+            buildRunIterationPipelineFromInputsViaOrchestrationForRunFromInputsCallForRunKwargsForRunImpl(
                 run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_kwargs=(
                     run_call_kwargs
                 ),
@@ -590,6 +590,29 @@ def buildRunIterationPipelineFromInputsViaOrchestrationForRunFromInputsCallForRu
     """Return the input mapping for the top-level run-from-inputs for-run-call sequence."""
 
     return dict(kwargs)
+
+
+def buildRunIterationPipelineFromInputsViaOrchestrationForRunFromInputsCallForRunKwargsForRunImpl(
+    *,
+    run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_kwargs: dict[
+        str, object
+    ],
+    run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_fn,
+    execute_run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_fn,
+) -> dict[str, object]:
+    """Build for-run kwargs wiring for the top-level run-from-inputs dispatch sequence."""
+
+    return buildRunIterationPipelineFromInputsViaOrchestrationForRunFromInputsCallForRunKwargsImpl(
+        run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_kwargs=(
+            run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_kwargs
+        ),
+        run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_fn=(
+            run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_fn
+        ),
+        execute_run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_fn=(
+            execute_run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_fn
+        ),
+    )
 
 
 def buildRunIterationPipelineFromInputsViaOrchestrationForRunFromInputsCallForRunCallForRunKwargsImpl(

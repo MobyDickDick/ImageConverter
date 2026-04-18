@@ -882,6 +882,26 @@ def test_build_run_iteration_pipeline_from_inputs_via_orchestration_for_run_from
     assert result is not kwargs
 
 
+def test_build_run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_call_for_run_kwargs_for_run_impl_delegates_wiring() -> None:
+    result = (
+        helpers.buildRunIterationPipelineFromInputsViaOrchestrationForRunFromInputsCallForRunKwargsForRunImpl(
+            run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_kwargs={
+                "mapped": "call"
+            },
+            run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_fn="runner",
+            execute_run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_fn="execute",
+        )
+    )
+
+    assert result == {
+        "run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_kwargs": {
+            "mapped": "call"
+        },
+        "run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_fn": "runner",
+        "execute_run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_fn": "execute",
+    }
+
+
 def test_build_run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_call_for_run_call_for_run_kwargs_impl_delegates_wiring() -> None:
     stub = _OrchestrationHelpersStub()
 
