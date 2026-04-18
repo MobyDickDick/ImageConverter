@@ -1161,6 +1161,22 @@ def test_build_run_iteration_pipeline_impl_orchestration_call_kwargs_for_run_imp
     assert result is not kwargs
 
 
+def test_build_run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_dispatch_call_for_run_from_inputs_kwargs_impl_returns_copy() -> None:
+    kwargs = {
+        "orchestration_kwargs": {"orchestration": "kwargs"},
+        "iteration_orchestration_helpers": "helpers",
+    }
+
+    result = (
+        helpers.buildRunIterationPipelineFromInputsViaOrchestrationForRunFromInputsDispatchCallForRunFromInputsKwargsImpl(
+            **kwargs
+        )
+    )
+
+    assert result == kwargs
+    assert result is not kwargs
+
+
 def test_build_run_iteration_pipeline_impl_from_inputs_dispatch_call_kwargs_for_run_impl_returns_copy() -> None:
     kwargs = {"orchestration_kwargs": {"orchestration": "kwargs"}}
 
@@ -1170,6 +1186,20 @@ def test_build_run_iteration_pipeline_impl_from_inputs_dispatch_call_kwargs_for_
 
     assert result == kwargs
     assert result is not kwargs
+
+
+def test_build_run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_dispatch_call_for_run_from_inputs_kwargs_for_run_impl_delegates_builder() -> None:
+    result = (
+        helpers.buildRunIterationPipelineFromInputsViaOrchestrationForRunFromInputsDispatchCallForRunFromInputsKwargsForRunImpl(
+            orchestration_kwargs={"orchestration": "kwargs"},
+            iteration_orchestration_helpers="helpers",
+        )
+    )
+
+    assert result == {
+        "orchestration_kwargs": {"orchestration": "kwargs"},
+        "iteration_orchestration_helpers": "helpers",
+    }
 
 
 def test_build_run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_call_kwargs_impl_returns_copy() -> None:
