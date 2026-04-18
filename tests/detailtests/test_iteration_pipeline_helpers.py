@@ -984,6 +984,26 @@ def test_build_run_iteration_pipeline_from_inputs_via_orchestration_for_run_from
     assert result is not kwargs
 
 
+def test_build_run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_dispatch_kwargs_for_run_impl_delegates_wiring() -> None:
+    result = (
+        helpers.buildRunIterationPipelineFromInputsViaOrchestrationForRunFromInputsDispatchKwargsForRunImpl(
+            run_from_inputs_call_for_run_call_kwargs={"mapped": "call"},
+        )
+    )
+
+    assert result == {
+        "build_run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_call_for_run_call_kwargs_fn": (
+            helpers.buildRunIterationPipelineFromInputsViaOrchestrationForRunFromInputsCallForRunCallKwargsImpl
+        ),
+        "run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_call_for_run_call_kwargs": {
+            "mapped": "call"
+        },
+        "run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_call_fn": (
+            helpers.runIterationPipelineFromInputsViaOrchestrationForRunFromInputsCallImpl
+        ),
+    }
+
+
 def test_run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_dispatch_impl_delegates_builder_then_runner() -> None:
     calls: dict[str, object] = {}
 
