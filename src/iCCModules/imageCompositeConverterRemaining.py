@@ -988,6 +988,14 @@ def convertRange(
             diff_out_dir=diff_out_dir,
             reports_out_dir=reports_out_dir,
         )
+        for failed_svg in Path(svg_out_dir).glob("Failed_*.svg"):
+            variant = failed_svg.stem[len("Failed_") :]
+            if not variant:
+                continue
+            base_svg = Path(svg_out_dir) / f"{variant}.svg"
+            if base_svg.exists():
+                base_svg.unlink()
+            failed_svg.rename(base_svg)
         return out_root
     rng = _conversionRandom()
     run_seed = 0 if deterministic_order else rng.randrange(1 << 30)
@@ -1064,6 +1072,11 @@ def convertRange(
             reports_out_dir,
         ),
         choose_conversion_bestlist_row_fn=_chooseConversionBestlistRow,
+        should_stop_after_failure_fn=lambda failed_filename: bool(
+            batch_failures
+            and str(batch_failures[-1].get("filename", "")) == failed_filename
+            and str(batch_failures[-1].get("status", "")) in {"render_failure", "batch_error"}
+        ),
     )
 
     current_rows = [

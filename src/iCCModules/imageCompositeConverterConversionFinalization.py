@@ -148,6 +148,7 @@ def _markPoorConversionsWithFailedPrefix(
 ) -> None:
     threshold = _computeDynamicAc08MeanDelta2Threshold(reports_out_dir)
     status_by_variant = _collectValidationStatusesByVariant(reports_out_dir)
+    fallback_mode_active = Path(reports_out_dir, "fallback_mode.txt").exists()
     svg_dir = Path(svg_out_dir)
     if not svg_dir.exists():
         return
@@ -170,6 +171,16 @@ def _markPoorConversionsWithFailedPrefix(
             variants_from_svg_names.add(normalized)
             svg_paths_by_variant[normalized] = svg_path
 
+    if fallback_mode_active:
+        for variant in sorted(variants_from_svg_names):
+            failed_svg = svg_dir / f"Failed_{variant}.svg"
+            base_svg = svg_dir / f"{variant}.svg"
+            if failed_svg.exists():
+                if base_svg.exists():
+                    base_svg.unlink()
+                failed_svg.rename(base_svg)
+        return
+
     for variant in sorted(set(rows_by_variant) | variants_from_svg_names):
         row = rows_by_variant.get(variant, {})
 
@@ -184,8 +195,8 @@ def _markPoorConversionsWithFailedPrefix(
 
         mean_delta2 = float(row.get("mean_delta2", float("inf")))
         quality_fail = math.isfinite(mean_delta2) and math.isfinite(threshold) and mean_delta2 > threshold
-        raster_fail = _svgContainsEmbeddedRaster(svg_path)
-        trivial_fail = _svgIsTrivialFallback(svg_path)
+        raster_fail = (not fallback_mode_active) and _svgContainsEmbeddedRaster(svg_path)
+        trivial_fail = (not fallback_mode_active) and _svgIsTrivialFallback(svg_path)
         is_skipped_variant = str(status_by_variant.get(variant, "")).startswith("skipped_")
         if is_skipped_variant:
             # Skipped variants have no fresh quality metric from this run,

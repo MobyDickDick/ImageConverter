@@ -1265,6 +1265,28 @@ def buildRunIterationPipelineImplFromInputsDispatchCallForRunDispatchCallBuilder
     )
 
 
+def buildRunIterationPipelineImplFromInputsDispatchCallForRunDispatchCallKwargsImpl(
+    **kwargs,
+) -> dict[str, object]:
+    """Return kwargs for executing the top-level from-inputs dispatch call."""
+
+    return dict(kwargs)
+
+
+def buildRunIterationPipelineImplFromInputsDispatchCallForRunDispatchCallKwargsForRunImpl(
+    *,
+    build_run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_dispatch_call_kwargs_fn,
+    run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_dispatch_call_kwargs: dict[
+        str, object
+    ],
+):
+    """Build final dispatch-call kwargs via delegated mapping helper."""
+
+    return build_run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_dispatch_call_kwargs_fn(
+        **run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_dispatch_call_kwargs
+    )
+
+
 def runIterationPipelineImplOrchestrationCallForRunImpl(
     *,
     run_iteration_pipeline_orchestration_kwargs_for_run_from_inputs_fn,
@@ -1297,9 +1319,14 @@ def runIterationPipelineImplFromInputsDispatchCallForRunImpl(
             )
         ),
     )
-    run_from_inputs_dispatch_call_for_run_kwargs = (
-        build_run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_dispatch_call_for_run_kwargs_fn(
-            **dispatch_call_builder_kwargs
+    run_from_inputs_dispatch_call_for_run_kwargs = buildRunIterationPipelineImplFromInputsDispatchCallForRunDispatchCallKwargsForRunImpl(
+        build_run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_dispatch_call_kwargs_fn=(
+            build_run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_dispatch_call_for_run_kwargs_fn
+        ),
+        run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_dispatch_call_kwargs=(
+            buildRunIterationPipelineImplFromInputsDispatchCallForRunDispatchCallKwargsImpl(
+                **dispatch_call_builder_kwargs
+            )
         )
     )
     return (

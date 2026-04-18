@@ -2126,7 +2126,11 @@ def runIterationPipeline(
     debug_element_diff_dir: str | None = None,
     badge_validation_rounds: int = 6,
 ):
-    return imageCompositeConverterRemaining_helpers.runIterationPipeline(img_path, csv_path, max_iterations, svg_out_dir, diff_out_dir, reports_out_dir, debug_ac0811_dir, debug_element_diff_dir, badge_validation_rounds)
+    previous_bindings = _syncRemainingRuntimeBindings()
+    try:
+        return imageCompositeConverterRemaining_helpers.runIterationPipeline(img_path, csv_path, max_iterations, svg_out_dir, diff_out_dir, reports_out_dir, debug_ac0811_dir, debug_element_diff_dir, badge_validation_rounds)
+    finally:
+        _restoreRemainingRuntimeBindings(previous_bindings)
 
 
 def _extractRefParts(name: str) -> tuple[str, int] | None:
@@ -2480,7 +2484,11 @@ def convertRange(
     selected_variants: set[str] | None = None,
     deterministic_order: bool = False,
 ) -> str:
-    return imageCompositeConverterRemaining_helpers.convertRange(folder_path, csv_path, iterations, start_ref, end_ref, debug_ac0811_dir, debug_element_diff_dir, output_root, selected_variants, deterministic_order)
+    previous_bindings = _syncRemainingRuntimeBindings()
+    try:
+        return imageCompositeConverterRemaining_helpers.convertRange(folder_path, csv_path, iterations, start_ref, end_ref, debug_ac0811_dir, debug_element_diff_dir, output_root, selected_variants, deterministic_order)
+    finally:
+        _restoreRemainingRuntimeBindings(previous_bindings)
 
 
 def _readSvgGeometry(svg_path: str) -> tuple[int, int, dict] | None:
@@ -2776,7 +2784,11 @@ def convertImage(input_path: str, output_path: str, *, max_iter: int = 120, plat
 
 
 def convertImageVariants(*args, **kwargs):
-    return imageCompositeConverterRemaining_helpers.convertImageVariants(*args, **kwargs)
+    return legacy_api_helpers.convertImageVariantsImpl(
+        *args,
+        convert_range_fn=convertRange,
+        **kwargs,
+    )
 OPTIONAL_DEPENDENCY_ERRORS = dependency_helpers.OPTIONAL_DEPENDENCY_ERRORS
 
 # Backward-compatible snake_case aliases expected by legacy tests/tooling.
@@ -2862,6 +2874,53 @@ if hasattr(GlobalParameterVector, "applyToParams") and not hasattr(GlobalParamet
 # Keep that namespace synchronized without overriding implementation functions.
 for _ctx_name, _ctx_value in list(globals().items()):
     imageCompositeConverterRemaining_helpers.__dict__.setdefault(_ctx_name, _ctx_value)
+
+
+def _syncRemainingRuntimeBindings() -> dict[str, object]:
+    """Sync monkeypatched runtime symbols to the extracted remaining module."""
+
+    remaining_globals = imageCompositeConverterRemaining_helpers.__dict__
+    previous: dict[str, object] = {}
+    for name, baselines in _REMAINING_RUNTIME_BINDING_TARGETS.items():
+        local_baseline, remaining_baseline = baselines
+        previous[name] = remaining_globals.get(name)
+        current = globals().get(name, remaining_baseline)
+        remaining_globals[name] = (
+            remaining_baseline if current is local_baseline else current
+        )
+    return previous
+
+
+def _restoreRemainingRuntimeBindings(previous_bindings: dict[str, object]) -> None:
+    """Restore remaining-module bindings after a temporary runtime sync."""
+
+    remaining_globals = imageCompositeConverterRemaining_helpers.__dict__
+    for name, previous in previous_bindings.items():
+        remaining_globals[name] = previous
+
+
+_REMAINING_RUNTIME_BINDING_TARGETS = {
+    name: (globals().get(name), imageCompositeConverterRemaining_helpers.__dict__.get(name))
+    for name in (
+        "cv2",
+        "np",
+        "fitz",
+        "_conversionRandom",
+        "_inRequestedRange",
+        "_renderEmbeddedRasterSvg",
+        "generateConversionOverviews",
+        "_loadQualityConfig",
+        "_writeQualityConfig",
+        "_writeQualityPassReport",
+        "_harmonizeSemanticSizeVariants",
+        "_writePixelDelta2Ranking",
+        "_selectOpenQualityCases",
+        "_selectMiddleLowerTercile",
+        "_tryTemplateTransfer",
+        "_defaultConvertedSymbolsRoot",
+        "runIterationPipeline",
+    )
+}
 
 # Module-level camelCase -> snake_case aliases for legacy tests/tooling.
 for _name, _obj in list(globals().items()):
