@@ -791,6 +791,27 @@ def runIterationPipelineFromInputsViaOrchestrationForRunFromInputsDispatchCallFo
     )
 
 
+def buildRunIterationPipelineFromInputsViaOrchestrationForRunFromInputsDispatchCallForRunFromInputsKwargsImpl(
+    **kwargs,
+) -> dict[str, object]:
+    """Return the input mapping for top-level from-inputs kwargs in the dispatch-call for-run sequence."""
+
+    return dict(kwargs)
+
+
+def buildRunIterationPipelineFromInputsViaOrchestrationForRunFromInputsDispatchCallForRunFromInputsKwargsForRunImpl(
+    *,
+    orchestration_kwargs: dict[str, object],
+    iteration_orchestration_helpers,
+) -> dict[str, object]:
+    """Build kwargs wiring for the top-level from-inputs dispatch-call sequence."""
+
+    return buildRunIterationPipelineFromInputsViaOrchestrationForRunFromInputsDispatchCallForRunFromInputsKwargsImpl(
+        orchestration_kwargs=orchestration_kwargs,
+        iteration_orchestration_helpers=iteration_orchestration_helpers,
+    )
+
+
 def buildRunIterationPipelineFromInputsViaOrchestrationForRunFromInputsDispatchCallForRunKwargsImpl(
     *,
     orchestration_kwargs: dict[str, object],
@@ -798,10 +819,15 @@ def buildRunIterationPipelineFromInputsViaOrchestrationForRunFromInputsDispatchC
 ) -> dict[str, object]:
     """Build top-level kwargs for the final run-from-inputs dispatch call."""
 
-    run_iteration_pipeline_from_inputs_via_orchestration_kwargs = (
-        buildRunIterationPipelineFromInputsViaOrchestrationKwargsForRunFromInputsCallForRunImpl(
+    run_from_inputs_kwargs = (
+        buildRunIterationPipelineFromInputsViaOrchestrationForRunFromInputsDispatchCallForRunFromInputsKwargsForRunImpl(
             orchestration_kwargs=orchestration_kwargs,
             iteration_orchestration_helpers=iteration_orchestration_helpers,
+        )
+    )
+    run_iteration_pipeline_from_inputs_via_orchestration_kwargs = (
+        buildRunIterationPipelineFromInputsViaOrchestrationKwargsForRunFromInputsCallForRunImpl(
+            **run_from_inputs_kwargs
         )
     )
     run_from_inputs_call_for_run_call_kwargs = (
