@@ -1172,6 +1172,22 @@ def test_build_run_iteration_pipeline_impl_from_inputs_dispatch_call_kwargs_for_
     assert result is not kwargs
 
 
+def test_build_run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_call_kwargs_impl_returns_copy() -> None:
+    kwargs = {
+        "orchestration_kwargs": {"orchestration": "kwargs"},
+        "iteration_orchestration_helpers": "helpers",
+    }
+
+    result = (
+        helpers.buildRunIterationPipelineImplFromInputsDispatchCallForRunCallKwargsImpl(
+            **kwargs
+        )
+    )
+
+    assert result == kwargs
+    assert result is not kwargs
+
+
 def test_build_run_iteration_pipeline_impl_orchestration_call_for_run_kwargs_impl_returns_copy() -> None:
     kwargs = {
         "build_run_iteration_pipeline_orchestration_call_kwargs_for_run_fn": "builder",
