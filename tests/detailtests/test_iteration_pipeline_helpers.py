@@ -1148,3 +1148,14 @@ def test_run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_input
         "run_iteration_pipeline_from_inputs_via_orchestration_kwargs"
     ] == {"from_inputs": "kwargs"}
     assert result == {"status": "ok"}
+
+
+def test_build_run_iteration_pipeline_impl_orchestration_call_kwargs_for_run_impl_returns_copy() -> None:
+    kwargs = {"img_path": "one.png", "max_iterations": 3}
+
+    result = helpers.buildRunIterationPipelineImplOrchestrationCallKwargsForRunImpl(
+        **kwargs
+    )
+
+    assert result == kwargs
+    assert result is not kwargs

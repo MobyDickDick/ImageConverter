@@ -438,7 +438,9 @@ focused on the actual project scope.
   - 2026-04-18: Umsetzung abgeschlossen inkl. Detailtest `test_run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_dispatch_call_for_run_impl_delegates_dispatch_runner`.
   - [x] C1.117: Top-Level-RunFromInputs-Dispatch-Call-Kwargs-Aufbau aus `runIterationPipelineImpl` in `src/iCCModules/imageCompositeConverterIterationPipeline.py` weiter modularisiert (`buildRunIterationPipelineFromInputsViaOrchestrationForRunFromInputsDispatchCallForRunKwargsImpl`); der Modul-Entry-Point delegiert den bisherigen zweistufigen Inline-Aufbau (`orchestration_kwargs` → `run_from_inputs_call_for_run_call_kwargs`) jetzt über den neuen Sequenz-Helper und bleibt API-kompatibel.
   - 2026-04-18: Umsetzung abgeschlossen inkl. Detailtest `test_build_run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_dispatch_call_for_run_kwargs_impl_delegates_sequence`.
-  - Nächster geplanter Schritt: weitere verbleibende Orchestrierungs-Sequenzen aus `runIterationPipeline` in kleinen, testbaren Schritten extrahieren (C1.118+).
+  - [x] C1.118: Top-Level-Orchestrierungs-Call-Kwargs aus `runIterationPipelineImpl` in `src/iCCModules/imageCompositeConverterIterationPipeline.py` weiter modularisiert (`buildRunIterationPipelineImplOrchestrationCallKwargsForRunImpl`); der Modul-Entry-Point delegiert den bisherigen direkten Inline-Kwargs-Aufbau für `buildRunIterationPipelineOrchestrationKwargsForRunFromInputsImpl` jetzt über den neuen Mapping-Helper und bleibt API-kompatibel.
+  - 2026-04-18: Umsetzung abgeschlossen inkl. Detailtest `test_build_run_iteration_pipeline_impl_orchestration_call_kwargs_for_run_impl_returns_copy`.
+  - Nächster geplanter Schritt: weitere verbleibende Orchestrierungs-Sequenzen aus `runIterationPipeline` in kleinen, testbaren Schritten extrahieren (C1.119+).
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.
   - `_create_diff_image_without_cv2` nutzt jetzt Context-Manager für beide `fitz.open(...)` Dokumente, damit Batch-Läufe keine unnötig offenen MuPDF-Dokumente ansammeln.
