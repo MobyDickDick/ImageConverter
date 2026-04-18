@@ -1218,6 +1218,20 @@ def test_build_run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_cal
     assert result is not kwargs
 
 
+def test_build_run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_dispatch_call_builder_kwargs_impl_returns_copy() -> None:
+    kwargs = {
+        "orchestration_kwargs": {"foo": "bar"},
+        "iteration_orchestration_helpers": "helpers",
+    }
+
+    result = helpers.buildRunIterationPipelineImplFromInputsDispatchCallForRunDispatchCallBuilderKwargsImpl(
+        **kwargs
+    )
+
+    assert result == kwargs
+    assert result is not kwargs
+
+
 def test_build_run_iteration_pipeline_impl_orchestration_call_for_run_kwargs_impl_returns_copy() -> None:
     kwargs = {
         "build_run_iteration_pipeline_orchestration_call_kwargs_for_run_fn": "builder",
@@ -1248,6 +1262,28 @@ def test_run_iteration_pipeline_impl_orchestration_call_for_run_impl_delegates_b
 
     assert calls["run_orchestration_call"] == {"img_path": "raw.png"}
     assert result == {"orchestration": "kwargs"}
+
+
+def test_build_run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_dispatch_call_builder_kwargs_for_run_impl_delegates_builder() -> None:
+    calls: dict[str, object] = {}
+
+    def _build_dispatch_call_builder_kwargs(**kwargs):
+        calls["build_dispatch_call_builder_kwargs"] = kwargs
+        return {"dispatch_builder": "kwargs"}
+
+    result = helpers.buildRunIterationPipelineImplFromInputsDispatchCallForRunDispatchCallBuilderKwargsForRunImpl(
+        build_run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_dispatch_call_builder_kwargs_fn=(
+            _build_dispatch_call_builder_kwargs
+        ),
+        run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_dispatch_call_builder_kwargs={
+            "orchestration_kwargs": {"x": 1}
+        },
+    )
+
+    assert calls["build_dispatch_call_builder_kwargs"] == {
+        "orchestration_kwargs": {"x": 1}
+    }
+    assert result == {"dispatch_builder": "kwargs"}
 
 
 def test_run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_impl_delegates_builder_then_runner() -> None:
