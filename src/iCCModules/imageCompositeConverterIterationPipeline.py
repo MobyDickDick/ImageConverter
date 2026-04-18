@@ -1287,6 +1287,28 @@ def buildRunIterationPipelineImplFromInputsDispatchCallForRunDispatchCallKwargsF
     )
 
 
+def buildRunIterationPipelineImplFromInputsDispatchCallForRunCallRunnerKwargsImpl(
+    **kwargs,
+) -> dict[str, object]:
+    """Return kwargs for the final run-from-inputs dispatch runner call."""
+
+    return dict(kwargs)
+
+
+def runIterationPipelineImplFromInputsDispatchCallForRunCallForRunImpl(
+    *,
+    run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_dispatch_call_for_run_fn,
+    run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_call_runner_kwargs: dict[
+        str, object
+    ],
+):
+    """Execute the final run-from-inputs dispatch runner call."""
+
+    return run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_dispatch_call_for_run_fn(
+        **run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_call_runner_kwargs
+    )
+
+
 def runIterationPipelineImplOrchestrationCallForRunImpl(
     *,
     run_iteration_pipeline_orchestration_kwargs_for_run_from_inputs_fn,
@@ -1329,8 +1351,13 @@ def runIterationPipelineImplFromInputsDispatchCallForRunImpl(
             )
         )
     )
-    return (
-        run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_dispatch_call_for_run_fn(
-            **run_from_inputs_dispatch_call_for_run_kwargs
+    return runIterationPipelineImplFromInputsDispatchCallForRunCallForRunImpl(
+        run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_dispatch_call_for_run_fn=(
+            run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_dispatch_call_for_run_fn
+        ),
+        run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_call_runner_kwargs=(
+            buildRunIterationPipelineImplFromInputsDispatchCallForRunCallRunnerKwargsImpl(
+                **run_from_inputs_dispatch_call_for_run_kwargs
+            )
         )
     )
