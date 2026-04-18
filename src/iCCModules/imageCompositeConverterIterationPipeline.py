@@ -775,6 +775,22 @@ def buildRunIterationPipelineFromInputsViaOrchestrationForRunFromInputsDispatchC
         ),
     )
 
+
+def runIterationPipelineFromInputsViaOrchestrationForRunFromInputsDispatchCallForRunImpl(
+    *,
+    run_from_inputs_call_for_run_call_kwargs: dict[str, object],
+):
+    """Build dispatch-call kwargs and execute the top-level run-from-inputs dispatch."""
+
+    return runIterationPipelineFromInputsViaOrchestrationForRunFromInputsDispatchImpl(
+        **buildRunIterationPipelineFromInputsViaOrchestrationForRunFromInputsDispatchCallKwargsForRunImpl(
+            run_from_inputs_call_for_run_call_kwargs=(
+                run_from_inputs_call_for_run_call_kwargs
+            )
+        )
+    )
+
+
 def buildRunIterationPipelineOrchestrationKwargsForRunFromInputsImpl(
     *,
     img_path: str,
@@ -1122,13 +1138,8 @@ def runIterationPipelineImpl(
         )
     )
 
-    dispatch_call_kwargs = (
-        buildRunIterationPipelineFromInputsViaOrchestrationForRunFromInputsDispatchCallKwargsForRunImpl(
-            run_from_inputs_call_for_run_call_kwargs=(
-                run_from_inputs_call_for_run_call_kwargs
-            )
+    return runIterationPipelineFromInputsViaOrchestrationForRunFromInputsDispatchCallForRunImpl(
+        run_from_inputs_call_for_run_call_kwargs=(
+            run_from_inputs_call_for_run_call_kwargs
         )
-    )
-    return runIterationPipelineFromInputsViaOrchestrationForRunFromInputsDispatchImpl(
-        **dispatch_call_kwargs
     )

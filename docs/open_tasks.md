@@ -434,7 +434,9 @@ focused on the actual project scope.
   - 2026-04-18: Umsetzung abgeschlossen inkl. Detailtest `test_build_run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_dispatch_call_kwargs_for_run_impl_delegates_wiring`.
   - [x] C1.115: Top-Level-RunFromInputs-For-Run-Kwargs-Verdrahtung aus `runIterationPipelineFromInputsViaOrchestrationForRunFromInputsCallImpl` in `src/iCCModules/imageCompositeConverterIterationPipeline.py` modularisiert (`buildRunIterationPipelineFromInputsViaOrchestrationForRunFromInputsCallForRunKwargsForRunImpl`); der Modul-Entry-Point delegiert den bisherigen Inline-Kwargs-Aufbau für den Abschlussaufruf jetzt über den neuen Wiring-Helper und bleibt API-kompatibel.
   - 2026-04-18: Umsetzung abgeschlossen inkl. Detailtest `test_build_run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_call_for_run_kwargs_for_run_impl_delegates_wiring`.
-  - Nächster geplanter Schritt: weitere verbleibende Orchestrierungs-Sequenzen aus `runIterationPipeline` in kleinen, testbaren Schritten extrahieren (C1.116+).
+  - [x] C1.116: Top-Level-RunFromInputs-Dispatch-Call-Sequenz aus `runIterationPipelineImpl` in `src/iCCModules/imageCompositeConverterIterationPipeline.py` weiter modularisiert (`runIterationPipelineFromInputsViaOrchestrationForRunFromInputsDispatchCallForRunImpl`); der Modul-Entry-Point delegiert den bisherigen abschließenden Inline-Dispatch-Aufruf jetzt über den neuen Sequenz-Helper und bleibt API-kompatibel.
+  - 2026-04-18: Umsetzung abgeschlossen inkl. Detailtest `test_run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_dispatch_call_for_run_impl_delegates_dispatch_runner`.
+  - Nächster geplanter Schritt: weitere verbleibende Orchestrierungs-Sequenzen aus `runIterationPipeline` in kleinen, testbaren Schritten extrahieren (C1.117+).
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.
   - `_create_diff_image_without_cv2` nutzt jetzt Context-Manager für beide `fitz.open(...)` Dokumente, damit Batch-Läufe keine unnötig offenen MuPDF-Dokumente ansammeln.
