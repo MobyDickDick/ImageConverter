@@ -845,6 +845,19 @@ def test_build_run_iteration_pipeline_from_inputs_via_orchestration_for_run_from
     assert result is not kwargs
 
 
+def test_build_run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_call_for_run_call_kwargs_for_run_impl_returns_copy() -> None:
+    kwargs = {"alpha": 1, "beta": "two"}
+
+    result = (
+        helpers.buildRunIterationPipelineFromInputsViaOrchestrationForRunFromInputsCallForRunCallKwargsForRunImpl(
+            **kwargs
+        )
+    )
+
+    assert result == kwargs
+    assert result is not kwargs
+
+
 def test_run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_call_for_run_impl_delegates_builder_then_runner() -> None:
     calls: dict[str, object] = {}
 
