@@ -21,14 +21,15 @@ def runInitialConversionPassImpl(
     store_conversion_bestlist_snapshot_fn,
     restore_conversion_bestlist_snapshot_fn,
     choose_conversion_bestlist_row_fn,
+    should_stop_after_failure_fn=None,
 ) -> bool:
     stop_after_failure = False
     for filename in process_files:
         row, failed = convert_one_fn(filename, iteration_budget=base_iterations, badge_rounds=6)
         if failed:
-            # Batchläufe sollen alle angeforderten Dateien abarbeiten und
-            # fehlerhafte Konvertierungen nur protokollieren.
             stop_after_failure = True
+            if should_stop_after_failure_fn is not None and should_stop_after_failure_fn(filename):
+                break
             continue
         if row is None:
             continue
