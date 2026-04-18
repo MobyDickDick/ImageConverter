@@ -805,3 +805,28 @@ def test_run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_input
         "run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_fn": "run_for_run_call",
     }
     assert result == {"status": "ok"}
+
+
+def test_build_run_iteration_pipeline_from_inputs_via_orchestration_kwargs_for_run_from_inputs_call_for_run_impl_delegates_sequence() -> None:
+    stub = _OrchestrationHelpersStub()
+
+    result = (
+        helpers.buildRunIterationPipelineFromInputsViaOrchestrationKwargsForRunFromInputsCallForRunImpl(
+            orchestration_kwargs={"orchestration": "kwargs"},
+            iteration_orchestration_helpers=stub,
+        )
+    )
+
+    assert stub.captured["from_inputs_builder_kwargs"] == {
+        "run_iteration_pipeline_orchestration_kwargs": {"orchestration": "kwargs"},
+        "build_run_iteration_pipeline_orchestration_kwargs_for_run_fn": (
+            stub.buildRunIterationPipelineOrchestrationKwargsForRunImpl
+        ),
+        "run_iteration_pipeline_orchestration_fn": (
+            stub.runIterationPipelineOrchestrationImpl
+        ),
+        "execute_run_iteration_pipeline_orchestration_for_run_fn": (
+            stub.executeRunIterationPipelineOrchestrationForRunImpl
+        ),
+    }
+    assert result == {"from_inputs": "kwargs"}
