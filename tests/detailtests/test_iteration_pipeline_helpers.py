@@ -858,6 +858,19 @@ def test_build_run_iteration_pipeline_from_inputs_via_orchestration_for_run_from
     assert result is not kwargs
 
 
+def test_build_run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_call_for_run_kwargs_impl_returns_copy() -> None:
+    kwargs = {"alpha": 1, "beta": "two"}
+
+    result = (
+        helpers.buildRunIterationPipelineFromInputsViaOrchestrationForRunFromInputsCallForRunKwargsImpl(
+            **kwargs
+        )
+    )
+
+    assert result == kwargs
+    assert result is not kwargs
+
+
 def test_run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_call_for_run_impl_delegates_builder_then_runner() -> None:
     calls: dict[str, object] = {}
 
@@ -882,4 +895,31 @@ def test_run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_input
 
     assert calls["builder_kwargs"] == {"alpha": 1, "beta": "two"}
     assert calls["runner_kwargs"] == {"mapped": "call"}
+    assert result == {"status": "ok"}
+
+
+def test_run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_call_for_run_call_for_run_impl_delegates_builder_then_runner() -> None:
+    calls: dict[str, object] = {}
+
+    def _builder(**kwargs):
+        calls["builder_kwargs"] = kwargs
+        return {"mapped": "for-run-call"}
+
+    def _runner(**kwargs):
+        calls["runner_kwargs"] = kwargs
+        return {"status": "ok"}
+
+    result = (
+        helpers.runIterationPipelineFromInputsViaOrchestrationForRunFromInputsCallForRunCallForRunImpl(
+            build_run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_call_for_run_kwargs_fn=_builder,
+            run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_call_for_run_kwargs={
+                "alpha": 1,
+                "beta": "two",
+            },
+            run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_call_for_run_fn=_runner,
+        )
+    )
+
+    assert calls["builder_kwargs"] == {"alpha": 1, "beta": "two"}
+    assert calls["runner_kwargs"] == {"mapped": "for-run-call"}
     assert result == {"status": "ok"}
