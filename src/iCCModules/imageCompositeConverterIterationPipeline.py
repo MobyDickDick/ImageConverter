@@ -1123,8 +1123,8 @@ def runIterationPipelineImpl(
     calculate_error_fn,
     math_module,
 ):
-    orchestration_kwargs = runIterationPipelineImplOrchestrationDispatchForRunImpl(
-        **runIterationPipelineImplOrchestrationDispatchKwargsForRunImpl(
+    orchestration_kwargs = runIterationPipelineImplOrchestrationDispatchForRunCallForRunImpl(
+        **buildRunIterationPipelineImplOrchestrationDispatchForRunCallKwargsImpl(
             img_path=img_path,
             csv_path=csv_path,
             max_iterations=max_iterations,
@@ -1204,7 +1204,13 @@ def runIterationPipelineImpl(
             build_run_iteration_pipeline_orchestration_kwargs_for_run_fn=(
                 iteration_orchestration_helpers.buildRunIterationPipelineOrchestrationKwargsForRunImpl
             ),
-        )
+            build_run_iteration_pipeline_impl_orchestration_dispatch_kwargs_for_run_fn=(
+                runIterationPipelineImplOrchestrationDispatchKwargsForRunImpl
+            ),
+            run_iteration_pipeline_impl_orchestration_dispatch_for_run_fn=(
+                runIterationPipelineImplOrchestrationDispatchForRunImpl
+            ),
+        ),
     )
 
     return runIterationPipelineImplFromInputsDispatchCallForRunImpl(
@@ -1218,6 +1224,32 @@ def runIterationPipelineImpl(
                 runIterationPipelineFromInputsViaOrchestrationForRunFromInputsDispatchCallForRunImpl
             ),
         )
+    )
+
+
+def buildRunIterationPipelineImplOrchestrationDispatchForRunCallKwargsImpl(
+    **kwargs,
+) -> dict[str, object]:
+    """Return kwargs for top-level orchestration dispatch call execution."""
+
+    return dict(kwargs)
+
+
+def runIterationPipelineImplOrchestrationDispatchForRunCallForRunImpl(
+    *,
+    build_run_iteration_pipeline_impl_orchestration_dispatch_kwargs_for_run_fn,
+    run_iteration_pipeline_impl_orchestration_dispatch_for_run_fn,
+    **kwargs,
+):
+    """Build orchestration-dispatch kwargs and run the top-level dispatch call."""
+
+    run_iteration_pipeline_impl_orchestration_dispatch_kwargs = (
+        build_run_iteration_pipeline_impl_orchestration_dispatch_kwargs_for_run_fn(
+            **kwargs
+        )
+    )
+    return run_iteration_pipeline_impl_orchestration_dispatch_for_run_fn(
+        **run_iteration_pipeline_impl_orchestration_dispatch_kwargs
     )
 
 
