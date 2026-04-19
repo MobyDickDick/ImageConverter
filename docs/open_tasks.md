@@ -462,6 +462,11 @@ focused on the actual project scope.
     `buildRunIterationPipelineFromInputsViaOrchestrationForRunFromInputsDispatchCallForRunCallKwargsForRunImpl`
     extrahiert und per Detailtests abgesichert.
   - 2026-04-19: Vorherige Extraktion wurde nach Vollsuite-Regression temporär zurückgenommen (siehe T1), um die kritische Orchestrierungsaufrufkette wieder zu stabilisieren.
+  - [x] C1.128: Dispatch-Call-Builder-Sequenz aus `runIterationPipelineImplFromInputsDispatchCallForRunImpl` modularisieren.
+  - 2026-04-19: Umsetzung abgeschlossen; neuer Sequenz-Helper
+    `runIterationPipelineImplFromInputsDispatchCallForRunDispatchCallBuilderForRunImpl`
+    extrahiert den bisherigen Inline-Aufbau von `dispatch_call_builder_kwargs` und wird
+    per Detailtest auf korrekte Delegation geprüft.
   - Nächster geplanter Schritt: weitere verbleibende Orchestrierungs-Sequenzen aus `runIterationPipeline` in kleinen, testbaren Schritten extrahieren (ab C1.127, nach Stabilisierung der T-Serie).
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.
