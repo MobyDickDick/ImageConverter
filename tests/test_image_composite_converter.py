@@ -53,6 +53,8 @@ def test_load_optional_module_recovers_after_failed_partial_package(monkeypatch:
     vendor_dir.mkdir(parents=True)
     windows_dir.mkdir(parents=True)
     expected = object()
+    existing_cv2 = sys.modules.get("cv2")
+    existing_cv2_typing = sys.modules.get("cv2.typing")
     calls: list[tuple[str, tuple[str, ...]]] = []
 
     def fake_import(name: str):
@@ -64,8 +66,14 @@ def test_load_optional_module_recovers_after_failed_partial_package(monkeypatch:
             sys.modules["cv2.typing"] = object()
             raise ImportError("broken Windows wheel")
         if str(vendor_dir) in sys.path:
-            assert "cv2" not in sys.modules
-            assert "cv2.typing" not in sys.modules
+            if existing_cv2 is None:
+                assert "cv2" not in sys.modules
+            else:
+                assert sys.modules.get("cv2") is existing_cv2
+            if existing_cv2_typing is None:
+                assert "cv2.typing" not in sys.modules
+            else:
+                assert sys.modules.get("cv2.typing") is existing_cv2_typing
             return expected
         raise ModuleNotFoundError(name)
 
@@ -76,6 +84,41 @@ def test_load_optional_module_recovers_after_failed_partial_package(monkeypatch:
 
     assert result is expected
     assert len(calls) >= 2
+
+
+def test_load_optional_module_keeps_existing_sys_modules_entry_after_failed_retry(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+) -> None:
+    """Fallback retries must not drop already loaded module objects from sys.modules."""
+    vendor_dir = tmp_path / "vendor" / "linux-py310" / "site-packages"
+    windows_dir = tmp_path / ".venv" / "Lib" / "site-packages"
+    vendor_dir.mkdir(parents=True)
+    windows_dir.mkdir(parents=True)
+    existing_cv2 = object()
+    existing_cv2_typing = object()
+    monkeypatch.setitem(sys.modules, "cv2", existing_cv2)
+    monkeypatch.setitem(sys.modules, "cv2.typing", existing_cv2_typing)
+
+    def fake_import(name: str):
+        if name != "cv2":
+            raise AssertionError(f"unexpected module request: {name}")
+        if str(windows_dir) in sys.path and str(vendor_dir) not in sys.path:
+            sys.modules["cv2"] = object()
+            sys.modules["cv2.typing"] = object()
+            raise ImportError("broken Windows wheel")
+        if str(vendor_dir) in sys.path:
+            return object()
+        return existing_cv2
+
+    monkeypatch.setattr(image_composite_converter, "_optional_dependency_base_dir", lambda: tmp_path)
+    monkeypatch.setattr(image_composite_converter.importlib, "import_module", fake_import)
+
+    image_composite_converter._load_optional_module("cv2")
+
+    assert sys.modules.get("cv2") is existing_cv2
+    assert sys.modules.get("cv2.typing") is existing_cv2_typing
+
 
 def test_optional_dependency_error_reports_windows_bundle_hint() -> None:
     """Dependency diagnostics should explain when a bundled Windows wheel is unusable on Linux."""
