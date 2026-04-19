@@ -1494,6 +1494,45 @@ def test_run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_call_runn
     assert result == {"status": "ok"}
 
 
+def test_run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_call_runner_sequence_for_run_impl_delegates_builder_then_runner() -> None:
+    calls: dict[str, object] = {}
+
+    def _build_runner_for_run_kwargs(**kwargs):
+        calls["build_runner_for_run_kwargs"] = kwargs
+        return {"runner": "kwargs"}
+
+    def _run_runner_for_run(**kwargs):
+        calls["run_runner_for_run"] = kwargs
+        return {"status": "ok"}
+
+    result = (
+        helpers.runIterationPipelineImplFromInputsDispatchCallForRunCallRunnerSequenceForRunImpl(
+            run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_dispatch_call_for_run_fn=(
+                "runner_fn"
+            ),
+            run_from_inputs_dispatch_call_for_run_kwargs={"dispatch": "kwargs"},
+            build_run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_call_runner_for_run_kwargs_for_run_fn=(
+                _build_runner_for_run_kwargs
+            ),
+            run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_call_runner_for_run_fn=(
+                _run_runner_for_run
+            ),
+        )
+    )
+
+    assert calls["build_runner_for_run_kwargs"] == {
+        "run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_call_runner_for_run_kwargs": {
+            "run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_dispatch_call_for_run_fn": "runner_fn",
+            "run_from_inputs_dispatch_call_for_run_kwargs": {"dispatch": "kwargs"},
+        },
+        "build_run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_call_runner_for_run_kwargs_fn": (
+            helpers.buildRunIterationPipelineImplFromInputsDispatchCallForRunCallRunnerForRunKwargsImpl
+        ),
+    }
+    assert calls["run_runner_for_run"] == {"runner": "kwargs"}
+    assert result == {"status": "ok"}
+
+
 def test_run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_call_runner_kwargs_for_run_impl_builds_nested_runner_kwargs() -> None:
     result = (
         helpers.runIterationPipelineImplFromInputsDispatchCallForRunCallRunnerKwargsForRunImpl(
