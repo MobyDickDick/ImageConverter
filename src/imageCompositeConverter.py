@@ -430,7 +430,10 @@ def _is_fitz_open_monkeypatched() -> bool:
 
 
 def _is_inprocess_renderer_monkeypatched() -> bool:
-    return imageCompositeConverterRemaining_helpers._is_inprocess_renderer_monkeypatched()
+    return rendering_runtime_helpers.is_inprocess_renderer_monkeypatched(
+        inprocess_fn=globals().get("_renderSvgToNumpyInprocess"),
+        module_name=__name__,
+    )
 
 
 def _bbox_to_dict(label: str, bbox: tuple[int, int, int, int], color: tuple[int, int, int]) -> dict[str, object]:
@@ -1324,7 +1327,7 @@ class Action:
             is_fitz_open_monkeypatched_fn=_is_fitz_open_monkeypatched,
             render_svg_to_numpy_via_subprocess_fn=_render_svg_to_numpy_via_subprocess,
             is_inprocess_renderer_monkeypatched_fn=_is_inprocess_renderer_monkeypatched,
-            render_svg_to_numpy_inprocess_fn=_render_svg_to_numpy_inprocess,
+            render_svg_to_numpy_inprocess_fn=_renderSvgToNumpyInprocess,
         )
 
     @staticmethod
