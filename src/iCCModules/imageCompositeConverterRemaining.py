@@ -4,6 +4,7 @@ import importlib
 from pathlib import Path
 
 from src.iCCModules import imageCompositeConverterDependencies as dependency_helpers
+from src.iCCModules import imageCompositeConverterDependencyBootstrapRuntime as dependency_bootstrap_runtime_helpers
 from src.iCCModules import imageCompositeConverterDualArrowBadge as dual_arrow_badge_helpers
 from src.iCCModules import imageCompositeConverterElementDecomposition as element_decomposition_helpers
 from src.iCCModules import imageCompositeConverterGradientStripeStrategy as gradient_stripe_strategy_helpers
@@ -228,16 +229,8 @@ def _missingRequiredImageDependencies() -> list[str]:
     return dependency_helpers.missingRequiredImageDependenciesImpl(cv2_module=cv2, np_module=np)
 
 def _bootstrapRequiredImageDependencies() -> list[str]:
-    missing = _missingRequiredImageDependencies()
-    def _load_cv2_module():
-        import cv2 as _cv2
-
-        return _cv2
-
-    def _load_np_module():
-        import numpy as _np
-
-        return _np
+    def _import_module(module_name: str):
+        return importlib.import_module(module_name)
 
     def _set_modules(*, cv2_module, np_module) -> None:
         global cv2, np
@@ -246,13 +239,15 @@ def _bootstrapRequiredImageDependencies() -> list[str]:
         if np_module is not None:
             np = np_module
 
-    return dependency_helpers.bootstrapRequiredImageDependenciesImpl(
-        missing=missing,
-        sys_executable=sys.executable,
-        run_fn=subprocess.run,
-        print_fn=print,
-        load_cv2_fn=_load_cv2_module,
-        load_np_fn=_load_np_module,
+    return dependency_bootstrap_runtime_helpers.bootstrapRequiredImageDependenciesForRuntimeImpl(
+        missing_dependencies_fn=_missingRequiredImageDependencies,
+        bootstrap_dependencies_fn=lambda **kwargs: dependency_helpers.bootstrapRequiredImageDependenciesImpl(
+            sys_executable=sys.executable,
+            run_fn=subprocess.run,
+            print_fn=print,
+            **kwargs,
+        ),
+        import_module_fn=_import_module,
         set_modules_fn=_set_modules,
     )
 
