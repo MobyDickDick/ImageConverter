@@ -1340,6 +1340,28 @@ def buildRunIterationPipelineImplFromInputsDispatchCallForRunCallRunnerKwargsImp
     return dict(kwargs)
 
 
+def buildRunIterationPipelineImplFromInputsDispatchCallForRunCallRunnerForRunKwargsImpl(
+    **kwargs,
+) -> dict[str, object]:
+    """Return kwargs for invoking the final run-from-inputs dispatch runner sequence."""
+
+    return dict(kwargs)
+
+
+def buildRunIterationPipelineImplFromInputsDispatchCallForRunCallRunnerForRunKwargsForRunImpl(
+    *,
+    build_run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_call_runner_for_run_kwargs_fn,
+    run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_call_runner_for_run_kwargs: dict[
+        str, object
+    ],
+):
+    """Build kwargs for the final runner sequence via delegated mapping helper."""
+
+    return build_run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_call_runner_for_run_kwargs_fn(
+        **run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_call_runner_for_run_kwargs
+    )
+
+
 def runIterationPipelineImplFromInputsDispatchCallForRunCallForRunImpl(
     *,
     run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_dispatch_call_for_run_fn,
@@ -1476,10 +1498,19 @@ def runIterationPipelineImplFromInputsDispatchCallForRunImpl(
         )
     )
     return runIterationPipelineImplFromInputsDispatchCallForRunCallRunnerForRunImpl(
-        run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_dispatch_call_for_run_fn=(
-            run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_dispatch_call_for_run_fn
-        ),
-        run_from_inputs_dispatch_call_for_run_kwargs=(
-            run_from_inputs_dispatch_call_for_run_kwargs
-        ),
+        **buildRunIterationPipelineImplFromInputsDispatchCallForRunCallRunnerForRunKwargsForRunImpl(
+            build_run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_call_runner_for_run_kwargs_fn=(
+                buildRunIterationPipelineImplFromInputsDispatchCallForRunCallRunnerForRunKwargsImpl
+            ),
+            run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_call_runner_for_run_kwargs=(
+                buildRunIterationPipelineImplFromInputsDispatchCallForRunCallRunnerForRunKwargsImpl(
+                    run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_dispatch_call_for_run_fn=(
+                        run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_dispatch_call_for_run_fn
+                    ),
+                    run_from_inputs_dispatch_call_for_run_kwargs=(
+                        run_from_inputs_dispatch_call_for_run_kwargs
+                    ),
+                )
+            ),
+        )
     )

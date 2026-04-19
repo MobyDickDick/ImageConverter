@@ -1421,6 +1421,39 @@ def test_build_run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_cal
     assert result is not kwargs
 
 
+def test_build_run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_call_runner_for_run_kwargs_impl_returns_copy() -> None:
+    kwargs = {"dispatch": "kwargs"}
+
+    result = helpers.buildRunIterationPipelineImplFromInputsDispatchCallForRunCallRunnerForRunKwargsImpl(
+        **kwargs
+    )
+
+    assert result == kwargs
+    assert result is not kwargs
+
+
+def test_build_run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_call_runner_for_run_kwargs_for_run_impl_delegates_builder() -> None:
+    calls: dict[str, object] = {}
+
+    def _build_for_run_kwargs(**kwargs):
+        calls["build_for_run_kwargs"] = kwargs
+        return {"runner_for_run": "kwargs"}
+
+    result = (
+        helpers.buildRunIterationPipelineImplFromInputsDispatchCallForRunCallRunnerForRunKwargsForRunImpl(
+            build_run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_call_runner_for_run_kwargs_fn=(
+                _build_for_run_kwargs
+            ),
+            run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_call_runner_for_run_kwargs={
+                "dispatch": "kwargs"
+            },
+        )
+    )
+
+    assert calls["build_for_run_kwargs"] == {"dispatch": "kwargs"}
+    assert result == {"runner_for_run": "kwargs"}
+
+
 def test_run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_call_for_run_impl_delegates_runner() -> None:
     calls: dict[str, object] = {}
 
