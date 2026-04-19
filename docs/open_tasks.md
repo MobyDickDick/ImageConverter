@@ -456,7 +456,9 @@ focused on the actual project scope.
   - 2026-04-18: Umsetzung abgeschlossen inkl. Detailtests `test_build_run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_call_runner_kwargs_impl_returns_copy` und `test_run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_call_for_run_impl_delegates_runner`.
   - [x] C1.126: Top-Level-Orchestrierungs-Dispatch-Sequenz aus `runIterationPipelineImpl` in `src/iCCModules/imageCompositeConverterIterationPipeline.py` modularisiert (`buildRunIterationPipelineImplOrchestrationDispatchKwargsImpl`, `buildRunIterationPipelineImplOrchestrationDispatchForRunKwargsImpl`, `runIterationPipelineImplOrchestrationDispatchForRunImpl`); der Entry-Point delegiert den bisherigen verschachtelten Inline-Aufruf (`build...CallKwargs` + `run...Call`) jetzt über den neuen Sequenz-Helper und bleibt API-kompatibel.
   - 2026-04-19: Umsetzung abgeschlossen inkl. Detailtests `test_build_run_iteration_pipeline_impl_orchestration_dispatch_kwargs_impl_returns_copy`, `test_build_run_iteration_pipeline_impl_orchestration_dispatch_for_run_kwargs_impl_returns_copy` und `test_run_iteration_pipeline_impl_orchestration_dispatch_for_run_impl_delegates_builder_then_runner`.
-  - Nächster geplanter Schritt: weitere verbleibende Orchestrierungs-Sequenzen aus `runIterationPipeline` in kleinen, testbaren Schritten extrahieren (C1.127+).
+  - [ ] C1.127: Run-From-Inputs-Dispatch-Call-Mapping aus `buildRunIterationPipelineFromInputsViaOrchestrationForRunFromInputsDispatchCallForRunKwargsImpl` modularisieren.
+  - 2026-04-19: Vorherige Extraktion wurde nach Vollsuite-Regression temporär zurückgenommen (siehe T1), um die kritische Orchestrierungsaufrufkette wieder zu stabilisieren.
+  - Nächster geplanter Schritt: weitere verbleibende Orchestrierungs-Sequenzen aus `runIterationPipeline` in kleinen, testbaren Schritten extrahieren (ab C1.127, nach Stabilisierung der T-Serie).
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.
   - `_create_diff_image_without_cv2` nutzt jetzt Context-Manager für beide `fitz.open(...)` Dokumente, damit Batch-Läufe keine unnötig offenen MuPDF-Dokumente ansammeln.
@@ -510,6 +512,28 @@ focused on the actual project scope.
   - 2026-04-03: Neuer CLI-Schalter `--deterministic-order` ergänzt.
   - Der Modus deaktiviert Shuffle bei Dateiliste, Quality-Pass-Kandidaten sowie Template-Transfer-Donor/Scale-Reihenfolge.
   - Für reproduzierbare Läufe wird `Action.STOCHASTIC_RUN_SEED` in diesem Modus auf `0` gesetzt.
+
+## Test-Fehler aus Vollsuite-Lauf (2026-04-19)
+
+- [x] T1: Erste Vollsuite-Regression beheben (`test_run_iteration_pipeline_element_validation_log_contains_run_meta`).
+  - Symptom im Gesamtlauf: `runIterationPipeline(...)` liefert `None` statt Ergebnis-Tuple.
+  - Maßnahme: Optional-Dependency-Lader härtet fehlgeschlagene Retry-Importe jetzt gegen `sys.modules`-Vergiftung ab (Snapshot/Restore für bestehende Modul-Einträge bei `cv2`-Fallbacks).
+  - 2026-04-19: Umsetzung erfolgt inkl. neuem Regressionstest für den Erhalt bestehender `sys.modules["cv2"]`-/`sys.modules["cv2.typing"]`-Einträge.
+- [ ] T2: Folgefehler mit fehlenden Artefakten/`None`-Ergebnissen in `runIterationPipeline` und `convertRange` clustern und beheben.
+  - Beispiele: `test_run_iteration_pipeline_writes_failed_best_attempt_artifacts_for_semantic_mismatch`,
+    `test_run_iteration_pipeline_converts_non_composite_as_embedded_svg`,
+    `test_convert_range_accepts_quality_pass_when_mean_delta2_improves`.
+- [ ] T3: Quality-Pass-Schwellenwert-/Reporting-Regression untersuchen.
+  - Beispiel: `test_convert_range_does_not_skip_variants_in_quality_passes` (erwartet `allowed_error_per_pixel == 1.0`, beobachtet `0.25`).
+- [ ] T4: Rendering-/Fallback-Pfad-Regression untersuchen.
+  - Beispiel: `test_render_svg_to_numpy_falls_back_to_inprocess_after_subprocess_failure`.
+- [ ] T5: XML-Beschreibungs-Mapping-Regression untersuchen.
+  - Beispiele: `test_load_description_mapping_from_xml_prefers_image_specific_detail`,
+    `test_load_description_mapping_from_xml_reads_bild_attribute_description`.
+- [ ] T6: AC08-Regressionen aus der Vollsuite separat stabilisieren.
+  - Beispiele: `test_ac08_regression_suite_preserves_previously_good_variants[...]`,
+    `test_ac0811_l_conversion_preserves_long_bottom_stem`,
+    `test_ac08_semantic_anchor_variants_convert_without_failed_svg`.
 
 
 

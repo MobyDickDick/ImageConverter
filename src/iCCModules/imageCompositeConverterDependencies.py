@@ -12,6 +12,21 @@ from pathlib import Path
 OPTIONAL_DEPENDENCY_ERRORS: dict[str, str] = {}
 
 
+def _snapshot_module_entries(module_name: str) -> dict[str, object]:
+    """Capture currently loaded module entries for a package prefix."""
+    return {
+        name: module
+        for name, module in sys.modules.items()
+        if name == module_name or name.startswith(f"{module_name}.")
+    }
+
+
+def _restore_module_entries(snapshot: dict[str, object]) -> None:
+    """Restore previously loaded module entries after a failed import attempt."""
+    for name, module in snapshot.items():
+        sys.modules[name] = module
+
+
 def optional_dependency_base_dir() -> Path:
     """Return the repository root used for vendored dependency discovery."""
     return Path(__file__).resolve().parents[2]
@@ -86,11 +101,13 @@ def describe_optional_dependency_error(module_name: str, exc: BaseException, att
 def load_optional_module(module_name: str, *, vendored_dirs_fn=vendored_site_packages_dirs, import_module_fn=importlib.import_module):
     """Import optional dependencies, including repo-vendored site-packages."""
     attempted_paths: list[Path] = []
+    baseline_modules = _snapshot_module_entries(module_name)
     try:
         return import_module_fn(module_name)
     except Exception as exc:  # pragma: no cover - exercised only in dependency-missing envs
         last_exc: BaseException = exc
         clear_partial_module_import(module_name)
+        _restore_module_entries(baseline_modules)
 
     for site_packages in vendored_dirs_fn():
         attempted_paths.append(site_packages)
@@ -104,6 +121,7 @@ def load_optional_module(module_name: str, *, vendored_dirs_fn=vendored_site_pac
         except Exception as exc:  # pragma: no cover - exercised only in dependency-missing envs
             last_exc = exc
             clear_partial_module_import(module_name)
+            _restore_module_entries(baseline_modules)
         finally:
             if added:
                 with contextlib.suppress(ValueError):
@@ -120,11 +138,13 @@ def import_with_vendored_fallback(
     import_module_fn=importlib.import_module,
 ):
     """Import a module, retrying with repo-vendored site-packages on sys.path."""
+    baseline_modules = _snapshot_module_entries(module_name)
     try:
         return import_module_fn(module_name)
     except Exception as exc:
         last_exc: BaseException = exc
         clear_partial_module_import(module_name)
+        _restore_module_entries(baseline_modules)
 
     for site_packages in vendored_dirs_fn():
         path_str = str(site_packages)
@@ -137,6 +157,7 @@ def import_with_vendored_fallback(
         except Exception as exc:
             last_exc = exc
             clear_partial_module_import(module_name)
+            _restore_module_entries(baseline_modules)
         finally:
             if added:
                 with contextlib.suppress(ValueError):
