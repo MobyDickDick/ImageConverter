@@ -4,6 +4,8 @@ from __future__ import annotations
 
 import math
 
+AUTO_ALLOWED_ERROR_FLOOR = 1.0
+
 
 def resolveAllowedErrorPerPixelImpl(
     current_rows: list[dict[str, object]],
@@ -25,9 +27,8 @@ def resolveAllowedErrorPerPixelImpl(
     threshold_source = "successful-conversions-mean-plus-2std"
     if not math.isfinite(successful_threshold):
         successful_threshold = initial_threshold
-        threshold_source = "initial-first-tercile"
 
-    allowed_error_pp = successful_threshold
+    allowed_error_pp = max(AUTO_ALLOWED_ERROR_FLOOR, successful_threshold)
     cfg_value = cfg.get("allowed_error_per_pixel")
     if cfg_value is not None:
         try:

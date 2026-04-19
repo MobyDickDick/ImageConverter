@@ -17,7 +17,7 @@ def test_resolve_allowed_error_uses_successful_threshold_by_default() -> None:
         successful_threshold_fn=lambda _rows: 0.25,
     )
 
-    assert allowed == 0.25
+    assert allowed == 1.0
     assert source == "successful-conversions-mean-plus-2std"
     assert successful == 0.25
     assert initial == 0.1
@@ -36,8 +36,8 @@ def test_resolve_allowed_error_falls_back_to_initial_and_manual_override() -> No
         quality_sort_key_fn=lambda row: float(row["error_per_pixel"]),
         successful_threshold_fn=lambda _rows: float("inf"),
     )
-    assert allowed_fallback == 0.3
-    assert source_fallback == "initial-first-tercile"
+    assert allowed_fallback == 1.0
+    assert source_fallback == "successful-conversions-mean-plus-2std"
     assert successful_fallback == 0.3
     assert initial_fallback == 0.3
 
