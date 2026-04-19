@@ -2136,3 +2136,66 @@ def test_build_run_iteration_pipeline_impl_from_inputs_dispatch_call_sequence_fo
             helpers.runIterationPipelineImplFromInputsDispatchCallForRunCallForRunImpl
         ),
     }
+
+
+def test_build_run_iteration_pipeline_impl_from_inputs_dispatch_call_sequence_call_kwargs_for_run_impl_wraps_sequence_call() -> None:
+    result = (
+        helpers.buildRunIterationPipelineImplFromInputsDispatchCallSequenceCallKwargsForRunImpl(
+            orchestration_kwargs={"orchestration": "kwargs"},
+            iteration_orchestration_helpers="orchestration_helpers",
+        )
+    )
+
+    assert result == {
+        "run_iteration_pipeline_impl_from_inputs_dispatch_call_sequence_for_run_kwargs": {
+            "run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_call_kwargs": {
+                "orchestration_kwargs": {"orchestration": "kwargs"},
+                "iteration_orchestration_helpers": "orchestration_helpers",
+                "build_run_iteration_pipeline_impl_from_inputs_dispatch_call_kwargs_for_run_fn": (
+                    helpers.buildRunIterationPipelineImplFromInputsDispatchCallKwargsForRunImpl
+                ),
+                "run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_fn": (
+                    helpers.runIterationPipelineImplFromInputsDispatchCallForRunImpl
+                ),
+                "build_run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_dispatch_call_for_run_kwargs_fn": (
+                    helpers.buildRunIterationPipelineFromInputsViaOrchestrationForRunFromInputsDispatchCallForRunKwargsImpl
+                ),
+                "run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_dispatch_call_for_run_fn": (
+                    helpers.runIterationPipelineFromInputsViaOrchestrationForRunFromInputsDispatchCallForRunImpl
+                ),
+            },
+            "build_run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_call_sequence_for_run_kwargs_fn": (
+                helpers.buildRunIterationPipelineImplFromInputsDispatchCallForRunCallSequenceForRunKwargsImpl
+            ),
+            "run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_call_sequence_for_run_fn": (
+                helpers.runIterationPipelineImplFromInputsDispatchCallForRunCallSequenceForRunImpl
+            ),
+            "build_run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_call_for_run_kwargs_fn": (
+                helpers.buildRunIterationPipelineImplFromInputsDispatchCallForRunCallForRunKwargsImpl
+            ),
+            "run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_call_for_run_fn": (
+                helpers.runIterationPipelineImplFromInputsDispatchCallForRunCallForRunImpl
+            ),
+        },
+        "run_iteration_pipeline_impl_from_inputs_dispatch_call_sequence_for_run_fn": (
+            helpers.runIterationPipelineImplFromInputsDispatchCallSequenceForRunImpl
+        ),
+    }
+
+
+def test_run_iteration_pipeline_impl_from_inputs_dispatch_call_sequence_call_for_run_impl_executes_with_built_kwargs() -> None:
+    observed: dict[str, object] = {}
+
+    def _runner(**kwargs):
+        observed.update(kwargs)
+        return "sequenced"
+
+    result = helpers.runIterationPipelineImplFromInputsDispatchCallSequenceCallForRunImpl(
+        run_iteration_pipeline_impl_from_inputs_dispatch_call_sequence_for_run_kwargs={
+            "value": "payload"
+        },
+        run_iteration_pipeline_impl_from_inputs_dispatch_call_sequence_for_run_fn=_runner,
+    )
+
+    assert result == "sequenced"
+    assert observed == {"value": "payload"}
