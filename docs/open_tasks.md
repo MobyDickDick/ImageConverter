@@ -546,9 +546,12 @@ focused on the actual project scope.
   - 2026-04-19: Regression behoben; `Action.renderSvgToNumpy` verwendet für den Fallback wieder den kompatiblen
     CamelCase-Entry-Point (`_renderSvgToNumpyInprocess`) und die Monkeypatch-Erkennung prüft nun das Top-Level-Modul,
     sodass der Pytest-Fallbackpfad zuverlässig greift.
-- [ ] T5: XML-Beschreibungs-Mapping-Regression untersuchen.
+- [x] T5: XML-Beschreibungs-Mapping-Regression untersuchen.
   - Beispiele: `test_load_description_mapping_from_xml_prefers_image_specific_detail`,
     `test_load_description_mapping_from_xml_reads_bild_attribute_description`.
+  - 2026-04-19: Regression behoben; XML-Beschreibungen mergen jetzt Gruppenbeschreibung + bildspezifischen Text
+    (ohne doppelte Präfixe), sodass `bildbeschreibung`-Details und `bild@beschreibung` wieder die erwarteten kombinierten
+    Zieltexte liefern.
 - [ ] T6: AC08-Regressionen aus der Vollsuite separat stabilisieren.
   - Beispiele: `test_ac08_regression_suite_preserves_previously_good_variants[...]`,
     `test_ac0811_l_conversion_preserves_long_bottom_stem`,

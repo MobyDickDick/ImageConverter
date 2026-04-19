@@ -143,8 +143,10 @@ def loadDescriptionMappingFromXmlImpl(path: str, *, get_base_name_from_file_fn) 
     def _merge_entry_and_image_desc(entry_desc: str, image_desc: str) -> str:
         e = entry_desc.strip()
         i = image_desc.strip()
-        # Base entries are already registered separately. Keep image-specific
-        # descriptions focused to avoid duplicating shared text fragments.
+        if e and i:
+            if i.startswith(e):
+                return i
+            return f"{e} {i}".strip()
         return i or e
 
     def _extract_image_specific_description(entry: ET.Element, image_name: str) -> str:
