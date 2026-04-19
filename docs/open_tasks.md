@@ -528,10 +528,14 @@ focused on the actual project scope.
   - Symptom im Gesamtlauf: `runIterationPipeline(...)` liefert `None` statt Ergebnis-Tuple.
   - Maßnahme: Optional-Dependency-Lader härtet fehlgeschlagene Retry-Importe jetzt gegen `sys.modules`-Vergiftung ab (Snapshot/Restore für bestehende Modul-Einträge bei `cv2`-Fallbacks).
   - 2026-04-19: Umsetzung erfolgt inkl. neuem Regressionstest für den Erhalt bestehender `sys.modules["cv2"]`-/`sys.modules["cv2.typing"]`-Einträge.
-- [ ] T2: Folgefehler mit fehlenden Artefakten/`None`-Ergebnissen in `runIterationPipeline` und `convertRange` clustern und beheben.
+- [x] T2: Folgefehler mit fehlenden Artefakten/`None`-Ergebnissen in `runIterationPipeline` und `convertRange` clustern und beheben.
   - Beispiele: `test_run_iteration_pipeline_writes_failed_best_attempt_artifacts_for_semantic_mismatch`,
     `test_run_iteration_pipeline_converts_non_composite_as_embedded_svg`,
     `test_convert_range_accepts_quality_pass_when_mean_delta2_improves`.
+  - 2026-04-19: Regression im Single-Reference-Quality-Pass-Gating behoben
+    (`max_quality_passes` nicht mehr auf `0` für Einzel-/Exact-Range-Läufe);
+    dadurch greifen Mean-Delta2-Verbesserungen wieder auch in fokussierten Runs
+    und Quality-Pass-Reports werden konsistent geschrieben.
 - [ ] T3: Quality-Pass-Schwellenwert-/Reporting-Regression untersuchen.
   - Beispiel: `test_convert_range_does_not_skip_variants_in_quality_passes` (erwartet `allowed_error_per_pixel == 1.0`, beobachtet `0.25`).
 - [ ] T4: Rendering-/Fallback-Pfad-Regression untersuchen.
