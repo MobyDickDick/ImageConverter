@@ -541,8 +541,11 @@ focused on the actual project scope.
   - 2026-04-19: Auto-Schwellenwerte werden jetzt mit einem Mindestwert von `1.0` aufgelöst, damit globale Quality-Pässe Varianten nicht zu früh als „geschlossen“ behandeln.
     Der Schwellwert-Source-Tag bleibt für Auto-Berechnung konsistent auf `successful-conversions-mean-plus-2std` (nur manuelle Config setzt `manual-config`),
     und Detail-/Integrations-Tests decken den korrigierten Pfad ab.
-- [ ] T4: Rendering-/Fallback-Pfad-Regression untersuchen.
+- [x] T4: Rendering-/Fallback-Pfad-Regression untersuchen.
   - Beispiel: `test_render_svg_to_numpy_falls_back_to_inprocess_after_subprocess_failure`.
+  - 2026-04-19: Regression behoben; `Action.renderSvgToNumpy` verwendet für den Fallback wieder den kompatiblen
+    CamelCase-Entry-Point (`_renderSvgToNumpyInprocess`) und die Monkeypatch-Erkennung prüft nun das Top-Level-Modul,
+    sodass der Pytest-Fallbackpfad zuverlässig greift.
 - [ ] T5: XML-Beschreibungs-Mapping-Regression untersuchen.
   - Beispiele: `test_load_description_mapping_from_xml_prefers_image_specific_detail`,
     `test_load_description_mapping_from_xml_reads_bild_attribute_description`.
