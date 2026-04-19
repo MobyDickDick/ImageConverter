@@ -1007,13 +1007,14 @@ def convertRange(
     base_iterations = max(1, int(iterations))
     # Continue quality iterations while a pass still improves at least one case.
     # Abort as soon as the next pass cannot beat the previous state.
-    # Single-reference diagnostics should finish quickly, therefore we skip
-    # extra quality passes when only one variant or one exact reference is
-    # requested.
-    normalized_start_ref = str(start_ref or "").strip().upper()
-    normalized_end_ref = str(end_ref or "").strip().upper()
-    is_single_reference_run = bool(normalized_start_ref) and normalized_start_ref == normalized_end_ref
-    max_quality_passes = 0 if (len(process_files) <= 1 or is_single_reference_run) else 4
+    #
+    # Regression note (2026-04-19):
+    # The temporary "single-reference shortcut" (0 passes for one-file / exact
+    # range runs) suppressed quality-pass reporting and prevented legitimate
+    # mean-delta2-driven replacements in tests and diagnostics. Keep one global
+    # policy for all run sizes so quality behavior stays deterministic and
+    # observable across full batches and focused runs alike.
+    max_quality_passes = 4
     quality_logs: list[dict[str, object]] = []
     result_map: dict[str, dict[str, object]] = {}
     conversion_bestlist_path = _conversionBestlistManifestPath(reports_out_dir)
