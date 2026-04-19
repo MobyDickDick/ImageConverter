@@ -1441,6 +1441,26 @@ def test_run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_call_for_
     assert result == {"status": "ok"}
 
 
+def test_run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_call_runner_for_run_impl_delegates_builder_then_runner() -> None:
+    calls: dict[str, object] = {}
+
+    def _run_dispatch_call(**kwargs):
+        calls["run_dispatch_call"] = kwargs
+        return {"status": "ok"}
+
+    result = (
+        helpers.runIterationPipelineImplFromInputsDispatchCallForRunCallRunnerForRunImpl(
+            run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_dispatch_call_for_run_fn=(
+                _run_dispatch_call
+            ),
+            run_from_inputs_dispatch_call_for_run_kwargs={"dispatch": "kwargs"},
+        )
+    )
+
+    assert calls["run_dispatch_call"] == {"dispatch": "kwargs"}
+    assert result == {"status": "ok"}
+
+
 def test_run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_dispatch_call_builder_for_run_impl_delegates_builder() -> None:
     calls: dict[str, object] = {}
 

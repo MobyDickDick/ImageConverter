@@ -473,6 +473,13 @@ focused on the actual project scope.
     extrahiert den bisherigen Inline-Aufbau von
     `run_from_inputs_dispatch_call_for_run_kwargs` und wird per Detailtest auf
     korrekte Delegation geprüft.
+  - [x] C1.130: Finale Runner-Kwargs-Sequenz aus `runIterationPipelineImplFromInputsDispatchCallForRunImpl` modularisieren.
+  - 2026-04-19: Umsetzung abgeschlossen; neuer Sequenz-Helper
+    `runIterationPipelineImplFromInputsDispatchCallForRunCallRunnerForRunImpl`
+    extrahiert den bisherigen Inline-Aufbau von
+    `run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_call_runner_kwargs`
+    und delegiert den Abschlussaufruf weiter API-kompatibel über den vorhandenen
+    Runner-Entry-Point.
   - Nächster geplanter Schritt: weitere verbleibende Orchestrierungs-Sequenzen aus `runIterationPipeline` in kleinen, testbaren Schritten extrahieren (ab C1.127, nach Stabilisierung der T-Serie).
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.
