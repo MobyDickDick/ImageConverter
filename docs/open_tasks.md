@@ -560,7 +560,14 @@ focused on the actual project scope.
     kapselt das bisher direkte Inline-Einbetten von
     `buildRunIterationPipelineImplFromInputsDispatchCallSequenceInputKwargsForRunImpl`
     in einen separaten, detailtestabgedeckten Wrapper-Schritt.
-  - Nächster geplanter Schritt: weitere verbleibende Sequenzen aus `runIterationPipeline` in kleinen, testbaren Schritten extrahieren (ab C1.142).
+  - [x] C1.142: Top-Level-From-Inputs-Dispatch-Sequence-Call-Kwargs aus `runIterationPipelineImpl` weiter modularisieren.
+  - 2026-04-19: Umsetzung abgeschlossen; neuer Helper
+    `buildRunIterationPipelineImplFromInputsDispatchCallSequenceForRunCallKwargsForRunImpl`
+    kapselt den bisher direkten Inline-Aufruf
+    (`buildRunIterationPipelineImplFromInputsDispatchCallSequenceForRunInputKwargsForRunImpl` +
+    `buildRunIterationPipelineImplFromInputsDispatchCallSequenceForRunKwargsImpl`) in einen
+    separaten, detailtestabgedeckten Sequenz-Schritt.
+  - Nächster geplanter Schritt: weitere verbleibende Sequenzen aus `runIterationPipeline` in kleinen, testbaren Schritten extrahieren (ab C1.143).
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.
   - `_create_diff_image_without_cv2` nutzt jetzt Context-Manager für beide `fitz.open(...)` Dokumente, damit Batch-Läufe keine unnötig offenen MuPDF-Dokumente ansammeln.
