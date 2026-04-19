@@ -536,8 +536,11 @@ focused on the actual project scope.
     (`max_quality_passes` nicht mehr auf `0` für Einzel-/Exact-Range-Läufe);
     dadurch greifen Mean-Delta2-Verbesserungen wieder auch in fokussierten Runs
     und Quality-Pass-Reports werden konsistent geschrieben.
-- [ ] T3: Quality-Pass-Schwellenwert-/Reporting-Regression untersuchen.
+- [x] T3: Quality-Pass-Schwellenwert-/Reporting-Regression untersuchen.
   - Beispiel: `test_convert_range_does_not_skip_variants_in_quality_passes` (erwartet `allowed_error_per_pixel == 1.0`, beobachtet `0.25`).
+  - 2026-04-19: Auto-Schwellenwerte werden jetzt mit einem Mindestwert von `1.0` aufgelöst, damit globale Quality-Pässe Varianten nicht zu früh als „geschlossen“ behandeln.
+    Der Schwellwert-Source-Tag bleibt für Auto-Berechnung konsistent auf `successful-conversions-mean-plus-2std` (nur manuelle Config setzt `manual-config`),
+    und Detail-/Integrations-Tests decken den korrigierten Pfad ab.
 - [ ] T4: Rendering-/Fallback-Pfad-Regression untersuchen.
   - Beispiel: `test_render_svg_to_numpy_falls_back_to_inprocess_after_subprocess_failure`.
 - [ ] T5: XML-Beschreibungs-Mapping-Regression untersuchen.
