@@ -480,7 +480,13 @@ focused on the actual project scope.
     `run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_call_runner_kwargs`
     und delegiert den Abschlussaufruf weiter API-kompatibel über den vorhandenen
     Runner-Entry-Point.
-  - Nächster geplanter Schritt: weitere verbleibende Orchestrierungs-Sequenzen aus `runIterationPipeline` in kleinen, testbaren Schritten extrahieren (ab C1.127, nach Stabilisierung der T-Serie).
+  - [x] C1.131: Finale Runner-For-Run-Kwargs-Verdrahtung aus `runIterationPipelineImplFromInputsDispatchCallForRunImpl` modularisieren.
+  - 2026-04-19: Umsetzung abgeschlossen; neues Mapping-Helperpaar
+    `buildRunIterationPipelineImplFromInputsDispatchCallForRunCallRunnerForRunKwargsImpl` /
+    `buildRunIterationPipelineImplFromInputsDispatchCallForRunCallRunnerForRunKwargsForRunImpl`
+    extrahiert den bisherigen Abschluss-Keyword-Aufbau für den Runner-Aufruf
+    in einen separaten, detailtestabgedeckten Mapping-Schritt.
+  - Nächster geplanter Schritt: weitere verbleibende Orchestrierungs-Sequenzen aus `runIterationPipeline` in kleinen, testbaren Schritten extrahieren (ab C1.132).
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.
   - `_create_diff_image_without_cv2` nutzt jetzt Context-Manager für beide `fitz.open(...)` Dokumente, damit Batch-Läufe keine unnötig offenen MuPDF-Dokumente ansammeln.
