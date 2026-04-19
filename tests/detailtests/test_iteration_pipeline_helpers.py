@@ -1684,3 +1684,46 @@ def test_run_iteration_pipeline_impl_orchestration_dispatch_kwargs_for_run_impl_
     assert result["run_iteration_pipeline_orchestration_kwargs_for_run_from_inputs_fn"] == (
         helpers.buildRunIterationPipelineOrchestrationKwargsForRunFromInputsImpl
     )
+
+
+def test_build_run_iteration_pipeline_impl_orchestration_dispatch_for_run_call_kwargs_impl_returns_copy() -> None:
+    kwargs = {"alpha": 1, "beta": "two"}
+
+    result = (
+        helpers.buildRunIterationPipelineImplOrchestrationDispatchForRunCallKwargsImpl(
+            **kwargs
+        )
+    )
+
+    assert result == kwargs
+    assert result is not kwargs
+
+
+def test_run_iteration_pipeline_impl_orchestration_dispatch_for_run_call_for_run_impl_delegates_builder_then_runner() -> None:
+    calls: dict[str, object] = {}
+
+    def _build_dispatch_kwargs_for_run(**kwargs):
+        calls["build_dispatch_kwargs_for_run"] = kwargs
+        return {"dispatch": "kwargs"}
+
+    def _run_dispatch_for_run(**kwargs):
+        calls["run_dispatch_for_run"] = kwargs
+        return {"status": "ok"}
+
+    result = helpers.runIterationPipelineImplOrchestrationDispatchForRunCallForRunImpl(
+        img_path="img.png",
+        max_iterations=8,
+        build_run_iteration_pipeline_impl_orchestration_dispatch_kwargs_for_run_fn=(
+            _build_dispatch_kwargs_for_run
+        ),
+        run_iteration_pipeline_impl_orchestration_dispatch_for_run_fn=(
+            _run_dispatch_for_run
+        ),
+    )
+
+    assert calls["build_dispatch_kwargs_for_run"] == {
+        "img_path": "img.png",
+        "max_iterations": 8,
+    }
+    assert calls["run_dispatch_for_run"] == {"dispatch": "kwargs"}
+    assert result == {"status": "ok"}
