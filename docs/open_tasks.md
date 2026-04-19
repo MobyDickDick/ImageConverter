@@ -456,7 +456,11 @@ focused on the actual project scope.
   - 2026-04-18: Umsetzung abgeschlossen inkl. Detailtests `test_build_run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_call_runner_kwargs_impl_returns_copy` und `test_run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_call_for_run_impl_delegates_runner`.
   - [x] C1.126: Top-Level-Orchestrierungs-Dispatch-Sequenz aus `runIterationPipelineImpl` in `src/iCCModules/imageCompositeConverterIterationPipeline.py` modularisiert (`buildRunIterationPipelineImplOrchestrationDispatchKwargsImpl`, `buildRunIterationPipelineImplOrchestrationDispatchForRunKwargsImpl`, `runIterationPipelineImplOrchestrationDispatchForRunImpl`); der Entry-Point delegiert den bisherigen verschachtelten Inline-Aufruf (`build...CallKwargs` + `run...Call`) jetzt über den neuen Sequenz-Helper und bleibt API-kompatibel.
   - 2026-04-19: Umsetzung abgeschlossen inkl. Detailtests `test_build_run_iteration_pipeline_impl_orchestration_dispatch_kwargs_impl_returns_copy`, `test_build_run_iteration_pipeline_impl_orchestration_dispatch_for_run_kwargs_impl_returns_copy` und `test_run_iteration_pipeline_impl_orchestration_dispatch_for_run_impl_delegates_builder_then_runner`.
-  - [ ] C1.127: Run-From-Inputs-Dispatch-Call-Mapping aus `buildRunIterationPipelineFromInputsViaOrchestrationForRunFromInputsDispatchCallForRunKwargsImpl` modularisieren.
+  - [x] C1.127: Run-From-Inputs-Dispatch-Call-Mapping aus `buildRunIterationPipelineFromInputsViaOrchestrationForRunFromInputsDispatchCallForRunKwargsImpl` modularisieren.
+  - 2026-04-19: Umsetzung abgeschlossen; neues Mapping-Helperpaar
+    `buildRunIterationPipelineFromInputsViaOrchestrationForRunFromInputsDispatchCallForRunCallKwargsImpl` /
+    `buildRunIterationPipelineFromInputsViaOrchestrationForRunFromInputsDispatchCallForRunCallKwargsForRunImpl`
+    extrahiert und per Detailtests abgesichert.
   - 2026-04-19: Vorherige Extraktion wurde nach Vollsuite-Regression temporär zurückgenommen (siehe T1), um die kritische Orchestrierungsaufrufkette wieder zu stabilisieren.
   - Nächster geplanter Schritt: weitere verbleibende Orchestrierungs-Sequenzen aus `runIterationPipeline` in kleinen, testbaren Schritten extrahieren (ab C1.127, nach Stabilisierung der T-Serie).
 

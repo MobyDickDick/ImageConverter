@@ -1125,6 +1125,30 @@ def test_build_run_iteration_pipeline_from_inputs_via_orchestration_for_run_from
     )
 
 
+def test_build_run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_dispatch_call_for_run_call_kwargs_impl_returns_copy() -> None:
+    result = (
+        helpers.buildRunIterationPipelineFromInputsViaOrchestrationForRunFromInputsDispatchCallForRunCallKwargsImpl(
+            alpha=1,
+            beta="two",
+        )
+    )
+
+    assert result == {"alpha": 1, "beta": "two"}
+    assert result is not None
+
+
+def test_build_run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_dispatch_call_for_run_call_kwargs_for_run_impl_delegates_builder() -> None:
+    result = (
+        helpers.buildRunIterationPipelineFromInputsViaOrchestrationForRunFromInputsDispatchCallForRunCallKwargsForRunImpl(
+            run_from_inputs_call_for_run_call_kwargs={"mapped": "call"},
+        )
+    )
+
+    assert result == {
+        "run_from_inputs_call_for_run_call_kwargs": {"mapped": "call"}
+    }
+
+
 def test_run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_dispatch_call_for_run_impl_delegates_dispatch_runner() -> None:
     stub = _OrchestrationHelpersStub()
     run_from_inputs_call_for_run_call_kwargs = (
