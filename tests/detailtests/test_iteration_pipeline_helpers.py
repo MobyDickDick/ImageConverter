@@ -1591,3 +1591,96 @@ def test_run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_impl_dele
     }
     assert calls["run_dispatch_call"] == {"dispatch": "kwargs"}
     assert result == {"status": "ok"}
+
+
+def test_run_iteration_pipeline_impl_orchestration_dispatch_kwargs_for_run_impl_builds_nested_dispatch_kwargs() -> None:
+    result = helpers.runIterationPipelineImplOrchestrationDispatchKwargsForRunImpl(
+        img_path="img.png",
+        csv_path="meta.csv",
+        max_iterations=8,
+        svg_out_dir="svg",
+        diff_out_dir="diff",
+        reports_out_dir="reports",
+        debug_ac0811_dir="debug-ac0811",
+        debug_element_diff_dir="debug-diff",
+        badge_validation_rounds=5,
+        ensure_conversion_runtime_dependencies_fn="ensure_deps",
+        cv2_module="cv2",
+        np_module="np",
+        fitz_module="fitz",
+        iteration_run_preparation_helpers="run_prep",
+        iteration_execution_context_helpers="exec_ctx",
+        run_seed=13,
+        pass_seed_offset=21,
+        action_cls="Action",
+        perception_cls="Perception",
+        reflection_cls="Reflection",
+        get_base_name_from_file_fn="get_base",
+        semantic_audit_record_fn="audit_record",
+        semantic_quality_flags_fn="quality_flags",
+        looks_like_elongated_foreground_rect_fn="looks_like_rect",
+        render_embedded_raster_svg_fn="render_raster",
+        print_fn="print",
+        time_ns_fn="time_ns",
+        calculate_error_fn="calculate_error",
+        iteration_execution_helpers="exec_helpers",
+        iteration_context_helpers="iter_ctx",
+        iteration_dispatch_helpers="dispatch_helpers",
+        iteration_finalization_helpers="finalization_helpers",
+        math_module="math",
+        iteration_bindings_helpers="bindings",
+        iteration_initialization_helpers="initialization",
+        iteration_setup_helpers="setup",
+        iteration_runtime_helpers="runtime",
+        iteration_mode_runtime_preparation_helpers="mode_runtime_prep",
+        iteration_mode_setup_helpers="mode_setup",
+        iteration_mode_preparation_helpers="mode_prep",
+        iteration_mode_dependency_setup_helpers="mode_dep_setup",
+        iteration_mode_dependency_helpers="mode_dep",
+        iteration_mode_runtime_helpers="mode_runtime",
+        iteration_orchestration_helpers="orchestration_helpers",
+        iteration_preparation_helpers="iteration_prep",
+        gradient_stripe_strategy_helpers="gradient",
+        semantic_audit_bootstrap_helpers="audit_bootstrap",
+        semantic_audit_logging_helpers="audit_logging",
+        semantic_audit_runtime_helpers="audit_runtime",
+        semantic_mismatch_reporting_helpers="mismatch_reporting",
+        semantic_validation_logging_helpers="validation_logging",
+        semantic_mismatch_runtime_helpers="mismatch_runtime",
+        semantic_validation_context_helpers="validation_context",
+        semantic_validation_runtime_helpers="validation_runtime",
+        semantic_post_validation_helpers="post_validation",
+        semantic_validation_finalization_helpers="validation_final",
+        semantic_iteration_finalization_helpers="iteration_final",
+        semantic_ac0223_runtime_helpers="ac0223_runtime",
+        semantic_visual_override_helpers="visual_override",
+        non_composite_runtime_helpers="non_composite",
+        conversion_composite_helpers="conversion_composite",
+        semantic_badge_runtime_helpers="badge_runtime",
+        dual_arrow_badge_helpers="dual_arrow_badge",
+        dual_arrow_runtime_helpers="dual_arrow_runtime",
+        build_run_iteration_pipeline_orchestration_kwargs_for_run_fn=(
+            "build_orchestration_kwargs_for_run"
+        ),
+    )
+
+    assert result["build_run_iteration_pipeline_impl_orchestration_dispatch_kwargs_fn"] == (
+        helpers.buildRunIterationPipelineImplOrchestrationCallKwargsForRunImpl
+    )
+    dispatch_kwargs = result["run_iteration_pipeline_impl_orchestration_dispatch_kwargs"]
+    assert dispatch_kwargs["img_path"] == "img.png"
+    assert dispatch_kwargs["build_run_iteration_pipeline_orchestration_call_kwargs_fn"] == (
+        helpers.buildRunIterationPipelineOrchestrationCallKwargsImpl
+    )
+    assert dispatch_kwargs["execute_build_run_iteration_pipeline_orchestration_kwargs_for_run_fn"] == (
+        helpers.executeBuildRunIterationPipelineOrchestrationKwargsForRunImpl
+    )
+    assert dispatch_kwargs["build_run_iteration_pipeline_orchestration_kwargs_for_run_fn"] == (
+        "build_orchestration_kwargs_for_run"
+    )
+    assert result["run_iteration_pipeline_impl_orchestration_call_for_run_fn"] == (
+        helpers.runIterationPipelineImplOrchestrationCallForRunImpl
+    )
+    assert result["run_iteration_pipeline_orchestration_kwargs_for_run_from_inputs_fn"] == (
+        helpers.buildRunIterationPipelineOrchestrationKwargsForRunFromInputsImpl
+    )
