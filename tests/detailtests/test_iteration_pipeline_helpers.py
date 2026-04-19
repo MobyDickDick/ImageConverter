@@ -1246,6 +1246,35 @@ def test_build_run_iteration_pipeline_impl_orchestration_call_for_run_kwargs_imp
     assert result is not kwargs
 
 
+def test_build_run_iteration_pipeline_impl_orchestration_dispatch_kwargs_impl_returns_copy() -> None:
+    kwargs = {"img_path": "raw.png", "csv_path": "descriptions.csv"}
+
+    result = helpers.buildRunIterationPipelineImplOrchestrationDispatchKwargsImpl(
+        **kwargs
+    )
+
+    assert result == kwargs
+    assert result is not kwargs
+
+
+def test_build_run_iteration_pipeline_impl_orchestration_dispatch_for_run_kwargs_impl_returns_copy() -> None:
+    kwargs = {
+        "build_run_iteration_pipeline_impl_orchestration_dispatch_kwargs_fn": "builder",
+        "run_iteration_pipeline_impl_orchestration_dispatch_kwargs": {
+            "img_path": "raw.png"
+        },
+    }
+
+    result = (
+        helpers.buildRunIterationPipelineImplOrchestrationDispatchForRunKwargsImpl(
+            **kwargs
+        )
+    )
+
+    assert result == kwargs
+    assert result is not kwargs
+
+
 def test_run_iteration_pipeline_impl_orchestration_call_for_run_impl_delegates_builder_then_runner() -> None:
     calls: dict[str, object] = {}
 
@@ -1261,6 +1290,42 @@ def test_run_iteration_pipeline_impl_orchestration_call_for_run_impl_delegates_b
     )
 
     assert calls["run_orchestration_call"] == {"img_path": "raw.png"}
+    assert result == {"orchestration": "kwargs"}
+
+
+def test_run_iteration_pipeline_impl_orchestration_dispatch_for_run_impl_delegates_builder_then_runner() -> None:
+    calls: dict[str, object] = {}
+
+    def _build_dispatch_kwargs(**kwargs):
+        calls["build_dispatch_kwargs"] = kwargs
+        return {"img_path": "raw.png"}
+
+    def _run_orchestration_call(**kwargs):
+        calls["run_orchestration_call"] = kwargs
+        return {"orchestration": "kwargs"}
+
+    result = helpers.runIterationPipelineImplOrchestrationDispatchForRunImpl(
+        build_run_iteration_pipeline_impl_orchestration_dispatch_kwargs_fn=(
+            _build_dispatch_kwargs
+        ),
+        run_iteration_pipeline_impl_orchestration_dispatch_kwargs={"img_path": "raw.png"},
+        run_iteration_pipeline_impl_orchestration_call_for_run_fn=(
+            _run_orchestration_call
+        ),
+        run_iteration_pipeline_orchestration_kwargs_for_run_from_inputs_fn=(
+            "from_inputs_builder"
+        ),
+    )
+
+    assert calls["build_dispatch_kwargs"] == {"img_path": "raw.png"}
+    assert calls["run_orchestration_call"] == {
+        "run_iteration_pipeline_orchestration_kwargs_for_run_from_inputs_fn": (
+            "from_inputs_builder"
+        ),
+        "run_iteration_pipeline_impl_orchestration_call_kwargs": {
+            "img_path": "raw.png"
+        },
+    }
     assert result == {"orchestration": "kwargs"}
 
 

@@ -1100,13 +1100,13 @@ def runIterationPipelineImpl(
     calculate_error_fn,
     math_module,
 ):
-    orchestration_kwargs = runIterationPipelineImplOrchestrationCallForRunImpl(
-        **buildRunIterationPipelineImplOrchestrationCallForRunKwargsImpl(
-            run_iteration_pipeline_orchestration_kwargs_for_run_from_inputs_fn=(
-                buildRunIterationPipelineOrchestrationKwargsForRunFromInputsImpl
+    orchestration_kwargs = runIterationPipelineImplOrchestrationDispatchForRunImpl(
+        **buildRunIterationPipelineImplOrchestrationDispatchForRunKwargsImpl(
+            build_run_iteration_pipeline_impl_orchestration_dispatch_kwargs_fn=(
+                buildRunIterationPipelineImplOrchestrationCallKwargsForRunImpl
             ),
-            run_iteration_pipeline_impl_orchestration_call_kwargs=(
-                buildRunIterationPipelineImplOrchestrationCallKwargsForRunImpl(
+            run_iteration_pipeline_impl_orchestration_dispatch_kwargs=(
+                buildRunIterationPipelineImplOrchestrationDispatchKwargsImpl(
             img_path=img_path,
             csv_path=csv_path,
             max_iterations=max_iterations,
@@ -1194,6 +1194,12 @@ def runIterationPipelineImpl(
             ),
                 )
             ),
+            run_iteration_pipeline_impl_orchestration_call_for_run_fn=(
+                runIterationPipelineImplOrchestrationCallForRunImpl
+            ),
+            run_iteration_pipeline_orchestration_kwargs_for_run_from_inputs_fn=(
+                buildRunIterationPipelineOrchestrationKwargsForRunFromInputsImpl
+            ),
         )
     )
 
@@ -1223,6 +1229,22 @@ def buildRunIterationPipelineImplOrchestrationCallForRunKwargsImpl(
     **kwargs,
 ) -> dict[str, object]:
     """Return kwargs for orchestration call execution in runIterationPipelineImpl."""
+
+    return dict(kwargs)
+
+
+def buildRunIterationPipelineImplOrchestrationDispatchKwargsImpl(
+    **kwargs,
+) -> dict[str, object]:
+    """Return kwargs for the top-level orchestration dispatch sequence."""
+
+    return dict(kwargs)
+
+
+def buildRunIterationPipelineImplOrchestrationDispatchForRunKwargsImpl(
+    **kwargs,
+) -> dict[str, object]:
+    """Return kwargs for executing orchestration dispatch in runIterationPipelineImpl."""
 
     return dict(kwargs)
 
@@ -1318,6 +1340,32 @@ def runIterationPipelineImplOrchestrationCallForRunImpl(
 
     return run_iteration_pipeline_orchestration_kwargs_for_run_from_inputs_fn(
         **run_iteration_pipeline_impl_orchestration_call_kwargs
+    )
+
+
+def runIterationPipelineImplOrchestrationDispatchForRunImpl(
+    *,
+    build_run_iteration_pipeline_impl_orchestration_dispatch_kwargs_fn,
+    run_iteration_pipeline_impl_orchestration_dispatch_kwargs: dict[str, object],
+    run_iteration_pipeline_impl_orchestration_call_for_run_fn,
+    run_iteration_pipeline_orchestration_kwargs_for_run_from_inputs_fn,
+):
+    """Run orchestration dispatch for runIterationPipelineImpl via delegated mapping and runner."""
+
+    orchestration_call_kwargs = (
+        build_run_iteration_pipeline_impl_orchestration_dispatch_kwargs_fn(
+            **run_iteration_pipeline_impl_orchestration_dispatch_kwargs
+        )
+    )
+    return run_iteration_pipeline_impl_orchestration_call_for_run_fn(
+        **buildRunIterationPipelineImplOrchestrationCallForRunKwargsImpl(
+            run_iteration_pipeline_orchestration_kwargs_for_run_from_inputs_fn=(
+                run_iteration_pipeline_orchestration_kwargs_for_run_from_inputs_fn
+            ),
+            run_iteration_pipeline_impl_orchestration_call_kwargs=(
+                orchestration_call_kwargs
+            ),
+        )
     )
 
 
