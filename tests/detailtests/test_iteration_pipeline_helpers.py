@@ -1729,6 +1729,53 @@ def test_run_iteration_pipeline_impl_orchestration_dispatch_for_run_call_for_run
     assert result == {"status": "ok"}
 
 
+def test_build_run_iteration_pipeline_impl_orchestration_dispatch_for_run_call_for_run_kwargs_impl_returns_copy() -> None:
+    kwargs = {"alpha": 1, "beta": "two"}
+
+    result = (
+        helpers.buildRunIterationPipelineImplOrchestrationDispatchForRunCallForRunKwargsImpl(
+            **kwargs
+        )
+    )
+
+    assert result == kwargs
+    assert result is not kwargs
+
+
+def test_run_iteration_pipeline_impl_orchestration_dispatch_for_run_call_sequence_for_run_impl_delegates_builder_then_runner() -> None:
+    calls: dict[str, object] = {}
+
+    def _build_dispatch_call_for_run_kwargs(**kwargs):
+        calls["build_dispatch_call_for_run_kwargs"] = kwargs
+        return {"dispatch_call": "kwargs"}
+
+    def _run_dispatch_call_for_run(**kwargs):
+        calls["run_dispatch_call_for_run"] = kwargs
+        return {"status": "ok"}
+
+    result = (
+        helpers.runIterationPipelineImplOrchestrationDispatchForRunCallSequenceForRunImpl(
+            run_iteration_pipeline_impl_orchestration_dispatch_for_run_call_for_run_kwargs={
+                "img_path": "img.png",
+                "max_iterations": 8,
+            },
+            build_run_iteration_pipeline_impl_orchestration_dispatch_for_run_call_for_run_kwargs_fn=(
+                _build_dispatch_call_for_run_kwargs
+            ),
+            run_iteration_pipeline_impl_orchestration_dispatch_for_run_call_for_run_fn=(
+                _run_dispatch_call_for_run
+            ),
+        )
+    )
+
+    assert calls["build_dispatch_call_for_run_kwargs"] == {
+        "img_path": "img.png",
+        "max_iterations": 8,
+    }
+    assert calls["run_dispatch_call_for_run"] == {"dispatch_call": "kwargs"}
+    assert result == {"status": "ok"}
+
+
 def test_build_run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_call_kwargs_impl_returns_copy() -> None:
     kwargs = {"alpha": 1, "beta": "two"}
 
