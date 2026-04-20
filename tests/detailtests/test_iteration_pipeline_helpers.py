@@ -1843,6 +1843,46 @@ def test_run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_impl_dele
     assert result == {"status": "ok"}
 
 
+def test_run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_kwargs_for_run_impl_delegates_dispatch_builder() -> None:
+    calls: dict[str, object] = {}
+
+    def _build_dispatch_call_kwargs(**kwargs):
+        calls["build_dispatch_call_kwargs"] = kwargs
+        return {"dispatch": "kwargs"}
+
+    result = helpers.runIterationPipelineImplFromInputsDispatchCallForRunKwargsForRunImpl(
+        orchestration_kwargs={"orchestration": "kwargs"},
+        iteration_orchestration_helpers="orchestration_helpers",
+        build_run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_dispatch_call_for_run_kwargs_fn=(
+            _build_dispatch_call_kwargs
+        ),
+    )
+
+    assert calls["build_dispatch_call_kwargs"] == {
+        "orchestration_kwargs": {"orchestration": "kwargs"},
+        "iteration_orchestration_helpers": "orchestration_helpers",
+    }
+    assert result == {"dispatch": "kwargs"}
+
+
+def test_run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_sequence_for_run_impl_delegates_final_sequence() -> None:
+    calls: dict[str, object] = {}
+
+    def _run_dispatch_call(**kwargs):
+        calls["run_dispatch_call"] = kwargs
+        return {"status": "ok"}
+
+    result = helpers.runIterationPipelineImplFromInputsDispatchCallForRunSequenceForRunImpl(
+        run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_dispatch_call_for_run_fn=(
+            _run_dispatch_call
+        ),
+        run_from_inputs_dispatch_call_for_run_kwargs={"dispatch": "kwargs"},
+    )
+
+    assert calls["run_dispatch_call"] == {"dispatch": "kwargs"}
+    assert result == {"status": "ok"}
+
+
 def test_run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_final_sequence_for_run_impl_delegates_runner_sequence() -> None:
     calls: dict[str, object] = {}
 
