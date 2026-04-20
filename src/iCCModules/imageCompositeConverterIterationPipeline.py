@@ -2009,13 +2009,34 @@ def runIterationPipelineImplOrchestrationDispatchCallForRunKwargsForRunImpl(
 
 def runIterationPipelineImplOrchestrationDispatchForRunCallSequenceForRunImpl(
     *,
-    run_iteration_pipeline_impl_orchestration_call_for_run_fn,
-    orchestration_call_for_run_kwargs: dict[str, object],
+    run_iteration_pipeline_impl_orchestration_dispatch_for_run_call_for_run_kwargs: dict[
+        str, object
+    ] | None = None,
+    build_run_iteration_pipeline_impl_orchestration_dispatch_for_run_call_for_run_kwargs_fn=None,
+    run_iteration_pipeline_impl_orchestration_dispatch_for_run_call_for_run_fn=None,
+    run_iteration_pipeline_impl_orchestration_call_for_run_fn=None,
+    orchestration_call_for_run_kwargs: dict[str, object] | None = None,
 ):
-    """Run the final orchestration-dispatch call sequence for runIterationPipelineImpl."""
+    """Run orchestration-dispatch call sequencing for runIterationPipelineImpl.
 
-    return run_iteration_pipeline_impl_orchestration_call_for_run_fn(
-        **orchestration_call_for_run_kwargs
+    Supports both legacy builder+runner sequencing and direct runner invocation.
+    """
+
+    if run_iteration_pipeline_impl_orchestration_call_for_run_fn is not None:
+        return run_iteration_pipeline_impl_orchestration_call_for_run_fn(
+            **(orchestration_call_for_run_kwargs or {})
+        )
+
+    run_iteration_pipeline_impl_orchestration_dispatch_for_run_call_for_run_call_kwargs = (
+        build_run_iteration_pipeline_impl_orchestration_dispatch_for_run_call_for_run_kwargs_fn(
+            **(
+                run_iteration_pipeline_impl_orchestration_dispatch_for_run_call_for_run_kwargs
+                or {}
+            )
+        )
+    )
+    return run_iteration_pipeline_impl_orchestration_dispatch_for_run_call_for_run_fn(
+        **run_iteration_pipeline_impl_orchestration_dispatch_for_run_call_for_run_call_kwargs
     )
 
 

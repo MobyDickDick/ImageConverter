@@ -555,6 +555,15 @@ focused on the actual project scope.
     und
     `test_run_iteration_pipeline_impl_from_inputs_dispatch_call_sequence_for_run_call_sequence_for_run_impl_delegates_runner`.
 
+  - [x] C1.140: Orchestrierungs-Dispatch-Call-Sequenz-Helper auf Dual-Signatur (Builder+Runner und Direkt-Runner) kompatibilisieren.
+  - 2026-04-20: Laufzeit-Regression behoben; `runIterationPipelineImplOrchestrationDispatchForRunCallSequenceForRunImpl` akzeptiert
+    jetzt wieder sowohl den Builder+Runner-Pfad (`run_iteration_pipeline_impl_orchestration_dispatch_for_run_call_for_run_kwargs` …)
+    als auch den direkten Runner-Pfad (`run_iteration_pipeline_impl_orchestration_call_for_run_fn` + `orchestration_call_for_run_kwargs`).
+    Abgesichert durch Detailtests
+    `test_run_iteration_pipeline_impl_orchestration_dispatch_for_run_call_sequence_for_run_impl_delegates_runner`
+    und
+    `test_run_iteration_pipeline_impl_orchestration_dispatch_for_run_call_sequence_for_run_impl_delegates_builder_then_runner`.
+
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.
   - `_create_diff_image_without_cv2` nutzt jetzt Context-Manager für beide `fitz.open(...)` Dokumente, damit Batch-Läufe keine unnötig offenen MuPDF-Dokumente ansammeln.
   - Ziel: Stabilere AC08-Serienläufe ohne native MuPDF-Stackoverflow-Ausreißer durch Ressourcenaufbau über viele Dateien.
@@ -597,6 +606,17 @@ focused on the actual project scope.
     stattdessen blockiert ein nachgelagerter Fehler (`TypeError: prepareRunIterationPipelineLocalsImpl() got an unexpected keyword argument 'img_path'`).
   - Dokumentation für Lauf I: `docs/ac0800_ac0899_runI_2026-04-16_summary.md`
     (inkl. Kommando, Exit-Code, Logpfad und aktualisiertem Blocker-Fehlerbild).
+  - 2026-04-20 (Lauf J, Verifikation nach C1.140-Fix):
+    gleicher Vollbereichs-Befehl mit `--isolate-svg-render --deterministic-order` per `tee` ausgeführt;
+    Prozess endet mit Exit-Code `0` ohne MuPDF-Segfault, aber weiterhin mit Runtime-Blocker direkt zu Laufbeginn
+    (`TypeError: runIterationPipelineImplOrchestrationDispatchForRunCallSequenceForRunImpl() got an unexpected keyword argument 'run_iteration_pipeline_impl_orchestration_dispatch_for_run_call_for_run_kwargs'`).
+  - Dokumentation für Lauf J: `docs/ac0800_ac0899_runJ_2026-04-20_summary.md`
+    (inkl. Kommando, Exit-Code, Logpfad und Blocker-Fehlerbild).
+  - 2026-04-20 (Lauf K, Smoke-Verifikation nach Signatur-Fix):
+    gleicher Vollbereichs-Befehl erneut gestartet; AC0800-L/M/S und AC0811_L liefen sichtbar an,
+    der Lauf wurde in dieser Session aus Zeitgründen manuell gestoppt (kein Segfault bis zum Abbruch beobachtet).
+  - Dokumentation für Lauf K: `docs/ac0800_ac0899_runK_2026-04-20_summary.md`
+    (inkl. Kommando, Teilfortschritt und Hinweis auf manuellen Abbruch).
   - Status: Crash-Freiheit für den Vollbereich ist **nicht** nachgewiesen; B2 bleibt offen bis der Lauf stabil Exit-Code `0` liefert.
 - [ ] B2.1: MuPDF-Stackoverflow/Segfault im Vollbereich `AC0800..AC0899` isolieren und robusten Guard ergänzen.
   - Die bisherigen B1-Fixes (Context-Manager im Fallback-Diff-Pfad) reichen für den Vollbereich noch nicht aus.
