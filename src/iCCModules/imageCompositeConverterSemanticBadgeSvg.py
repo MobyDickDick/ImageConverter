@@ -56,6 +56,13 @@ def generateBadgeSvgImpl(
             p["arm_y1"] = max(hub_y, min(float(h), square_top))
 
     p = quantize_badge_params_fn(p, w, h)
+    # Some optimization probes pass sparse circle-only parameter dicts.
+    # Ensure required grayscale/stroke defaults exist so SVG generation
+    # remains robust for adaptive search paths.
+    p.setdefault("stroke_gray", 152.0)
+    p.setdefault("fill_gray", 220.0)
+    p.setdefault("stroke_circle", 1.0)
+    p.setdefault("text_gray", p["stroke_gray"])
     elements = [f'<svg width="{w}px" height="{h}px" viewBox="0 0 {w} {h}" xmlns="http://www.w3.org/2000/svg">']
     defs: list[str] = []
 

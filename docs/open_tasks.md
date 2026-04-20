@@ -29,9 +29,10 @@ focused on the actual project scope.
   - Aktueller Fehler: `IndexError` in `src/iCCModules/imageCompositeConverterIterationFinalization.py` (`best_error = mode_result[4]`).
   - 2026-04-20: Finalisierung extrahiert den Composite-Fehler jetzt formatrobust für Legacy- (`(..., best_iter, best_error)`) und Kurzformat-Resultate (`(best_iter, best_error)`); Composite-Dispatch normalisiert Kurzresultate wieder auf das öffentliche 5-Tuple-Format.
 
-- [ ] T3: Adaptive-Circle-Pose-Optimierung gegen fehlende Badge-Defaultparameter absichern.
+- [x] T3: Adaptive-Circle-Pose-Optimierung gegen fehlende Badge-Defaultparameter absichern.
   - Fehlgeschlagener Test: `tests/test_image_composite_converter.py::test_optimize_circle_pose_adaptive_domain_improves_and_logs`
   - Aktueller Fehler: `KeyError: 'fill_gray'` beim SVG-Badge-Aufbau in `src/iCCModules/imageCompositeConverterSemanticBadgeSvg.py`.
+  - 2026-04-20: SVG-Badge-Generierung setzt nach der Quantisierung robuste Fallback-Defaults für sparse Optimierungs-Parameter (`stroke_gray`, `fill_gray`, `stroke_circle`, `text_gray`) und vermeidet so `KeyError` im Adaptive-Circle-Pose-Pfad.
 
 ## Next tasks (added 2026-03-28)
 
