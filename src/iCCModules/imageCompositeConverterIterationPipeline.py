@@ -2005,6 +2005,29 @@ def runIterationPipelineImplFromInputsDispatchCallForRunDispatchAndRunnerForRunI
     )
 
 
+def runIterationPipelineImplFromInputsDispatchCallForRunFinalSequenceForRunImpl(
+    *,
+    run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_dispatch_call_for_run_fn,
+    run_from_inputs_dispatch_call_for_run_kwargs,
+):
+    """Run the final from-inputs runner sequence for runIterationPipelineImpl."""
+
+    return runIterationPipelineImplFromInputsDispatchCallForRunCallRunnerSequenceForRunImpl(
+        run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_dispatch_call_for_run_fn=(
+            run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_dispatch_call_for_run_fn
+        ),
+        run_from_inputs_dispatch_call_for_run_kwargs=(
+            run_from_inputs_dispatch_call_for_run_kwargs
+        ),
+        build_run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_call_runner_for_run_kwargs_for_run_fn=(
+            buildRunIterationPipelineImplFromInputsDispatchCallForRunCallRunnerForRunKwargsForRunImpl
+        ),
+        run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_call_runner_for_run_fn=(
+            runIterationPipelineImplFromInputsDispatchCallForRunCallRunnerForRunImpl
+        ),
+    )
+
+
 def runIterationPipelineImplFromInputsDispatchCallForRunImpl(
     *,
     orchestration_kwargs,
@@ -2023,17 +2046,11 @@ def runIterationPipelineImplFromInputsDispatchCallForRunImpl(
             ),
         )
     )
-    return runIterationPipelineImplFromInputsDispatchCallForRunCallRunnerSequenceForRunImpl(
+    return runIterationPipelineImplFromInputsDispatchCallForRunFinalSequenceForRunImpl(
         run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_dispatch_call_for_run_fn=(
             run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_dispatch_call_for_run_fn
         ),
         run_from_inputs_dispatch_call_for_run_kwargs=(
             run_from_inputs_dispatch_call_for_run_kwargs
-        ),
-        build_run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_call_runner_for_run_kwargs_for_run_fn=(
-            buildRunIterationPipelineImplFromInputsDispatchCallForRunCallRunnerForRunKwargsForRunImpl
-        ),
-        run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_call_runner_for_run_fn=(
-            runIterationPipelineImplFromInputsDispatchCallForRunCallRunnerForRunImpl
         ),
     )
