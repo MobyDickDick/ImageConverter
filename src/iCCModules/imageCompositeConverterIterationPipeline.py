@@ -1915,8 +1915,11 @@ def runIterationPipelineImplOrchestrationDispatchForRunImpl(
             ),
         )
     )
-    return run_iteration_pipeline_impl_orchestration_call_for_run_fn(
-        **orchestration_call_for_run_kwargs
+    return runIterationPipelineImplOrchestrationDispatchForRunCallSequenceForRunImpl(
+        run_iteration_pipeline_impl_orchestration_call_for_run_fn=(
+            run_iteration_pipeline_impl_orchestration_call_for_run_fn
+        ),
+        orchestration_call_for_run_kwargs=orchestration_call_for_run_kwargs,
     )
 
 
@@ -1955,6 +1958,18 @@ def runIterationPipelineImplOrchestrationDispatchCallForRunKwargsForRunImpl(
         run_iteration_pipeline_impl_orchestration_call_kwargs=(
             orchestration_call_kwargs
         ),
+    )
+
+
+def runIterationPipelineImplOrchestrationDispatchForRunCallSequenceForRunImpl(
+    *,
+    run_iteration_pipeline_impl_orchestration_call_for_run_fn,
+    orchestration_call_for_run_kwargs: dict[str, object],
+):
+    """Run the final orchestration-dispatch call sequence for runIterationPipelineImpl."""
+
+    return run_iteration_pipeline_impl_orchestration_call_for_run_fn(
+        **orchestration_call_for_run_kwargs
     )
 
 
