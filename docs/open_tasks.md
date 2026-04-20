@@ -603,6 +603,16 @@ focused on the actual project scope.
     `test_run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_dispatch_and_runner_kwargs_for_run_impl_builds_nested_kwargs`
     und
     `test_run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_dispatch_and_runner_sequence_for_run_impl_delegates_dispatch_sequence`.
+  - [x] C1.145: Top-Level-Orchestration-Kwargs-Sequenz aus `runIterationPipelineOrchestrationKwargsForRunCallImpl` weiter modularisieren.
+  - 2026-04-20: Umsetzung abgeschlossen; neue Sequenz-Helfer
+    `buildRunIterationPipelineOrchestrationKwargsForRunCallKwargsForRunImpl`
+    und
+    `runIterationPipelineOrchestrationKwargsForRunCallSequenceForRunImpl`
+    kapseln den bisherigen Inline-Aufbau + Folgeaufruf API-kompatibel.
+    Abgesichert durch Detailtests
+    `test_build_run_iteration_pipeline_orchestration_kwargs_for_run_call_kwargs_for_run_impl_builds_call_kwargs`
+    und
+    `test_run_iteration_pipeline_orchestration_kwargs_for_run_call_sequence_for_run_impl_delegates_builder_then_executor`.
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.
   - `_create_diff_image_without_cv2` nutzt jetzt Context-Manager für beide `fitz.open(...)` Dokumente, damit Batch-Läufe keine unnötig offenen MuPDF-Dokumente ansammeln.
