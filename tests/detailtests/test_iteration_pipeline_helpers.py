@@ -1353,6 +1353,26 @@ def test_run_iteration_pipeline_impl_orchestration_dispatch_for_run_impl_delegat
     assert result == {"orchestration": "kwargs"}
 
 
+def test_run_iteration_pipeline_impl_orchestration_dispatch_call_for_run_kwargs_for_run_impl_builds_mapping() -> None:
+    result = (
+        helpers.runIterationPipelineImplOrchestrationDispatchCallForRunKwargsForRunImpl(
+            run_iteration_pipeline_orchestration_kwargs_for_run_from_inputs_fn=(
+                "from_inputs_builder"
+            ),
+            orchestration_call_kwargs={"img_path": "raw.png"},
+        )
+    )
+
+    assert result == {
+        "run_iteration_pipeline_orchestration_kwargs_for_run_from_inputs_fn": (
+            "from_inputs_builder"
+        ),
+        "run_iteration_pipeline_impl_orchestration_call_kwargs": {
+            "img_path": "raw.png"
+        },
+    }
+
+
 def test_build_run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_dispatch_call_builder_kwargs_for_run_impl_delegates_builder() -> None:
     calls: dict[str, object] = {}
 
