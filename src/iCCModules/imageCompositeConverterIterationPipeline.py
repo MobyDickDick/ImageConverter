@@ -1833,6 +1833,23 @@ def runIterationPipelineImplFromInputsDispatchCallForRunCallRunnerForRunImpl(
     )
 
 
+def runIterationPipelineImplFromInputsDispatchCallForRunCallRunnerKwargsForRunImpl(
+    *,
+    run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_dispatch_call_for_run_fn,
+    run_from_inputs_dispatch_call_for_run_kwargs: dict[str, object],
+) -> dict[str, object]:
+    """Build nested kwargs for the final runner-sequence helper."""
+
+    return buildRunIterationPipelineImplFromInputsDispatchCallForRunCallRunnerForRunKwargsImpl(
+        run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_dispatch_call_for_run_fn=(
+            run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_dispatch_call_for_run_fn
+        ),
+        run_from_inputs_dispatch_call_for_run_kwargs=(
+            run_from_inputs_dispatch_call_for_run_kwargs
+        ),
+    )
+
+
 def runIterationPipelineImplFromInputsDispatchCallForRunCallRunnerSequenceForRunImpl(
     *,
     run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_dispatch_call_for_run_fn,
