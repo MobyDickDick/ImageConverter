@@ -85,3 +85,37 @@ def test_run_prepared_iteration_mode_impl_routes_composite_with_iteration_contex
     assert captured["max_iterations"] == 12
     assert captured["folder_path"] == "input-folder"
     assert callable(captured["write_attempt_artifacts_fn"])
+
+
+def test_run_prepared_iteration_mode_impl_normalizes_short_composite_result_shape() -> None:
+    result = iteration_dispatch_helpers.runPreparedIterationModeImpl(
+        mode="composite",
+        width=64,
+        height=64,
+        params={"mode": "composite"},
+        stripe_strategy=None,
+        semantic_mode_visual_override=False,
+        folder_path="input-folder",
+        img_path="input/AC0001_S.jpg",
+        filename="AC0001_S.jpg",
+        base_name="AC0001_S",
+        description="desc",
+        perc_img=[[1]],
+        perc_base_name="AC0001_S",
+        semantic_audit_row=None,
+        max_iterations=12,
+        badge_validation_rounds=4,
+        debug_element_diff_dir=None,
+        debug_ac0811_dir=None,
+        write_validation_log_fn=lambda _lines: None,
+        write_attempt_artifacts_fn=lambda _svg, _rendered=None: None,
+        record_render_failure_fn=lambda _reason, **_kwargs: None,
+        run_semantic_badge_iteration_fn=lambda **_kwargs: None,
+        run_dual_arrow_badge_iteration_fn=lambda **_kwargs: None,
+        run_non_composite_iteration_fn=lambda **_kwargs: None,
+        run_composite_iteration_fn=lambda **_kwargs: (3, 0.25),
+        calculate_error_fn=lambda _a, _b: 0.0,
+        print_fn=lambda _message: None,
+    )
+
+    assert result == ("AC0001_S", "desc", {"mode": "composite"}, 3, 0.25)
