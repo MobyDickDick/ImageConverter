@@ -2114,6 +2114,70 @@ def test_run_iteration_pipeline_impl_from_inputs_dispatch_call_sequence_for_run_
     assert result == {"status": "ok"}
 
 
+def test_run_iteration_pipeline_impl_from_inputs_dispatch_call_sequence_for_run_call_kwargs_for_run_impl_builds_mapping() -> None:
+    calls: dict[str, object] = {}
+
+    def _build_dispatch_call_sequence_kwargs(**kwargs):
+        calls["build_dispatch_call_sequence_kwargs"] = kwargs
+        return {"dispatch_call_sequence": "kwargs"}
+
+    result = (
+        helpers.runIterationPipelineImplFromInputsDispatchCallSequenceForRunCallKwargsForRunImpl(
+            run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_call_kwargs={
+                "orchestration_kwargs": {"orchestration": "kwargs"},
+                "iteration_orchestration_helpers": "orchestration_helpers",
+            },
+            build_run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_call_sequence_for_run_kwargs_fn=(
+                _build_dispatch_call_sequence_kwargs
+            ),
+            build_run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_call_for_run_kwargs_fn=(
+                "build_dispatch_call_for_run_kwargs"
+            ),
+            run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_call_for_run_fn=(
+                "run_dispatch_call_for_run"
+            ),
+        )
+    )
+
+    assert calls["build_dispatch_call_sequence_kwargs"] == {
+        "run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_call_for_run_kwargs": {
+            "orchestration_kwargs": {"orchestration": "kwargs"},
+            "iteration_orchestration_helpers": "orchestration_helpers",
+        },
+        "build_run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_call_for_run_kwargs_fn": (
+            "build_dispatch_call_for_run_kwargs"
+        ),
+        "run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_call_for_run_fn": (
+            "run_dispatch_call_for_run"
+        ),
+    }
+    assert result == {"dispatch_call_sequence": "kwargs"}
+
+
+def test_run_iteration_pipeline_impl_from_inputs_dispatch_call_sequence_for_run_call_sequence_for_run_impl_delegates_runner() -> None:
+    calls: dict[str, object] = {}
+
+    def _run_dispatch_call_sequence(**kwargs):
+        calls["run_dispatch_call_sequence"] = kwargs
+        return {"status": "ok"}
+
+    result = (
+        helpers.runIterationPipelineImplFromInputsDispatchCallSequenceForRunCallSequenceForRunImpl(
+            run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_call_sequence_for_run_fn=(
+                _run_dispatch_call_sequence
+            ),
+            run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_call_sequence_for_run_kwargs={
+                "dispatch_call_sequence": "kwargs"
+            },
+        )
+    )
+
+    assert calls["run_dispatch_call_sequence"] == {
+        "dispatch_call_sequence": "kwargs"
+    }
+    assert result == {"status": "ok"}
+
+
 def test_build_run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_call_for_run_kwargs_impl_returns_copy() -> None:
     kwargs = {"alpha": 1, "beta": "two"}
 
