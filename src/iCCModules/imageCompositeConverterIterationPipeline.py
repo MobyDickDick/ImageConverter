@@ -1902,21 +1902,42 @@ def runIterationPipelineImplOrchestrationDispatchForRunImpl(
 ):
     """Run orchestration dispatch for runIterationPipelineImpl via delegated mapping and runner."""
 
+    orchestration_call_for_run_kwargs = (
+        runIterationPipelineImplOrchestrationDispatchResolutionForRunImpl(
+            build_run_iteration_pipeline_impl_orchestration_dispatch_kwargs_fn=(
+                build_run_iteration_pipeline_impl_orchestration_dispatch_kwargs_fn
+            ),
+            run_iteration_pipeline_impl_orchestration_dispatch_kwargs=(
+                run_iteration_pipeline_impl_orchestration_dispatch_kwargs
+            ),
+            run_iteration_pipeline_orchestration_kwargs_for_run_from_inputs_fn=(
+                run_iteration_pipeline_orchestration_kwargs_for_run_from_inputs_fn
+            ),
+        )
+    )
+    return run_iteration_pipeline_impl_orchestration_call_for_run_fn(
+        **orchestration_call_for_run_kwargs
+    )
+
+
+def runIterationPipelineImplOrchestrationDispatchResolutionForRunImpl(
+    *,
+    build_run_iteration_pipeline_impl_orchestration_dispatch_kwargs_fn,
+    run_iteration_pipeline_impl_orchestration_dispatch_kwargs: dict[str, object],
+    run_iteration_pipeline_orchestration_kwargs_for_run_from_inputs_fn,
+):
+    """Resolve orchestration dispatch call kwargs for runIterationPipelineImpl."""
+
     orchestration_call_kwargs = (
         build_run_iteration_pipeline_impl_orchestration_dispatch_kwargs_fn(
             **run_iteration_pipeline_impl_orchestration_dispatch_kwargs
         )
     )
-    orchestration_call_for_run_kwargs = (
-        runIterationPipelineImplOrchestrationDispatchCallForRunKwargsForRunImpl(
-            run_iteration_pipeline_orchestration_kwargs_for_run_from_inputs_fn=(
-                run_iteration_pipeline_orchestration_kwargs_for_run_from_inputs_fn
-            ),
-            orchestration_call_kwargs=orchestration_call_kwargs,
-        )
-    )
-    return run_iteration_pipeline_impl_orchestration_call_for_run_fn(
-        **orchestration_call_for_run_kwargs
+    return runIterationPipelineImplOrchestrationDispatchCallForRunKwargsForRunImpl(
+        run_iteration_pipeline_orchestration_kwargs_for_run_from_inputs_fn=(
+            run_iteration_pipeline_orchestration_kwargs_for_run_from_inputs_fn
+        ),
+        orchestration_call_kwargs=orchestration_call_kwargs,
     )
 
 

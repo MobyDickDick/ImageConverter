@@ -1353,6 +1353,36 @@ def test_run_iteration_pipeline_impl_orchestration_dispatch_for_run_impl_delegat
     assert result == {"orchestration": "kwargs"}
 
 
+def test_run_iteration_pipeline_impl_orchestration_dispatch_resolution_for_run_impl_builds_call_kwargs() -> None:
+    calls: dict[str, object] = {}
+
+    def _build_dispatch_kwargs(**kwargs):
+        calls["build_dispatch_kwargs"] = kwargs
+        return {"img_path": "resolved.png"}
+
+    result = (
+        helpers.runIterationPipelineImplOrchestrationDispatchResolutionForRunImpl(
+            build_run_iteration_pipeline_impl_orchestration_dispatch_kwargs_fn=(
+                _build_dispatch_kwargs
+            ),
+            run_iteration_pipeline_impl_orchestration_dispatch_kwargs={"img_path": "raw.png"},
+            run_iteration_pipeline_orchestration_kwargs_for_run_from_inputs_fn=(
+                "from_inputs_builder"
+            ),
+        )
+    )
+
+    assert calls["build_dispatch_kwargs"] == {"img_path": "raw.png"}
+    assert result == {
+        "run_iteration_pipeline_orchestration_kwargs_for_run_from_inputs_fn": (
+            "from_inputs_builder"
+        ),
+        "run_iteration_pipeline_impl_orchestration_call_kwargs": {
+            "img_path": "resolved.png"
+        },
+    }
+
+
 def test_run_iteration_pipeline_impl_orchestration_dispatch_call_for_run_kwargs_for_run_impl_builds_mapping() -> None:
     result = (
         helpers.runIterationPipelineImplOrchestrationDispatchCallForRunKwargsForRunImpl(
