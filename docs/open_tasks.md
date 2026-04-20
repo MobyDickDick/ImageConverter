@@ -17,6 +17,20 @@ focused on the actual project scope.
 - The refresh run currently covers the most recently touched connector/circle families present in `artifacts/converted_images/reports` (`AC0811`, `AC0832`, `AC0835`, `AC0836`, `AC0870`, `AC0882`).
 - Continue to add new work items here before implementation starts, then mark them in-place when they are done.
 
+## Test-Follow-ups (added 2026-04-20)
+
+- [ ] T1: Fehlender Helper-Export in `src/iCCModules/imageCompositeConverterIterationPipeline.py` beheben.
+  - Fehlgeschlagener Test: `tests/detailtests/test_iteration_pipeline_helpers.py::test_run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_call_runner_kwargs_for_run_impl_builds_nested_runner_kwargs`
+  - Aktueller Fehler: `AttributeError` für `runIterationPipelineImplFromInputsDispatchCallForRunCallRunnerKwargsForRunImpl` (Helper existiert/nicht exportiert).
+
+- [ ] T2: Composite-Iteration-Finalisierung auf variable Result-Tuple-Längen robust machen.
+  - Fehlgeschlagener Test: `tests/test_image_composite_converter.py::test_run_iteration_pipeline_breaks_early_on_flat_composite_error`
+  - Aktueller Fehler: `IndexError` in `src/iCCModules/imageCompositeConverterIterationFinalization.py` (`best_error = mode_result[4]`).
+
+- [ ] T3: Adaptive-Circle-Pose-Optimierung gegen fehlende Badge-Defaultparameter absichern.
+  - Fehlgeschlagener Test: `tests/test_image_composite_converter.py::test_optimize_circle_pose_adaptive_domain_improves_and_logs`
+  - Aktueller Fehler: `KeyError: 'fill_gray'` beim SVG-Badge-Aufbau in `src/iCCModules/imageCompositeConverterSemanticBadgeSvg.py`.
+
 ## Next tasks (added 2026-03-28)
 
 - [x] D1: Familienübergreifende Harmonisierung für AC08-Protoformen ergänzen.
