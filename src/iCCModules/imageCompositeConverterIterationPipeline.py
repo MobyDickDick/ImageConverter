@@ -325,12 +325,50 @@ def runIterationPipelineFromInputsViaOrchestrationForRunCallForRunCallImpl(
     """Build and execute the top-level from-inputs for-run call sequence."""
 
     call_kwargs = (
-        build_run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_for_run_kwargs_fn(
-            **run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_for_run_kwargs
+        runIterationPipelineFromInputsViaOrchestrationForRunCallForRunCallCallKwargsForRunImpl(
+            build_run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_for_run_kwargs_fn=(
+                build_run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_for_run_kwargs_fn
+            ),
+            run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_for_run_kwargs=(
+                run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_for_run_kwargs
+            ),
         )
     )
+    return runIterationPipelineFromInputsViaOrchestrationForRunCallForRunCallCallSequenceForRunImpl(
+        run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_for_run_fn=(
+            run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_for_run_fn
+        ),
+        run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_for_run_call_kwargs=(
+            call_kwargs
+        ),
+    )
+
+
+def runIterationPipelineFromInputsViaOrchestrationForRunCallForRunCallCallKwargsForRunImpl(
+    *,
+    build_run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_for_run_kwargs_fn,
+    run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_for_run_kwargs: dict[
+        str, object
+    ],
+) -> dict[str, object]:
+    """Build the call kwargs for the top-level from-inputs for-run call sequence."""
+
+    return build_run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_for_run_kwargs_fn(
+        **run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_for_run_kwargs
+    )
+
+
+def runIterationPipelineFromInputsViaOrchestrationForRunCallForRunCallCallSequenceForRunImpl(
+    *,
+    run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_for_run_fn,
+    run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_for_run_call_kwargs: dict[
+        str, object
+    ],
+):
+    """Execute the top-level from-inputs for-run call sequence with prepared kwargs."""
+
     return run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_for_run_fn(
-        **call_kwargs
+        **run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_for_run_call_kwargs
     )
 
 
