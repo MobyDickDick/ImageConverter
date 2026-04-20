@@ -100,13 +100,51 @@ def runIterationPipelineOrchestrationKwargsForRunCallImpl(
 ):
     """Build and execute top-level orchestration kwargs resolution for the run entrypoint."""
 
-    orchestration_call_kwargs = (
-        build_run_iteration_pipeline_orchestration_call_kwargs_fn(
-            **run_iteration_pipeline_orchestration_call_kwargs
+    call_kwargs = (
+        buildRunIterationPipelineOrchestrationKwargsForRunCallKwargsForRunImpl(
+            build_run_iteration_pipeline_orchestration_call_kwargs_fn=(
+                build_run_iteration_pipeline_orchestration_call_kwargs_fn
+            ),
+            run_iteration_pipeline_orchestration_call_kwargs=(
+                run_iteration_pipeline_orchestration_call_kwargs
+            ),
         )
     )
+    return runIterationPipelineOrchestrationKwargsForRunCallSequenceForRunImpl(
+        run_iteration_pipeline_orchestration_call_kwargs=call_kwargs,
+        build_run_iteration_pipeline_orchestration_kwargs_for_run_fn=(
+            build_run_iteration_pipeline_orchestration_kwargs_for_run_fn
+        ),
+        execute_build_run_iteration_pipeline_orchestration_kwargs_for_run_fn=(
+            execute_build_run_iteration_pipeline_orchestration_kwargs_for_run_fn
+        ),
+    )
+
+
+def buildRunIterationPipelineOrchestrationKwargsForRunCallKwargsForRunImpl(
+    *,
+    build_run_iteration_pipeline_orchestration_call_kwargs_fn,
+    run_iteration_pipeline_orchestration_call_kwargs: dict[str, object],
+) -> dict[str, object]:
+    """Build call kwargs for the top-level orchestration run-kwargs sequence."""
+
+    return build_run_iteration_pipeline_orchestration_call_kwargs_fn(
+        **run_iteration_pipeline_orchestration_call_kwargs
+    )
+
+
+def runIterationPipelineOrchestrationKwargsForRunCallSequenceForRunImpl(
+    *,
+    run_iteration_pipeline_orchestration_call_kwargs: dict[str, object],
+    build_run_iteration_pipeline_orchestration_kwargs_for_run_fn,
+    execute_build_run_iteration_pipeline_orchestration_kwargs_for_run_fn,
+):
+    """Execute the top-level orchestration run-kwargs sequence."""
+
     return runIterationPipelineOrchestrationKwargsForRunImpl(
-        run_iteration_pipeline_orchestration_call_kwargs=orchestration_call_kwargs,
+        run_iteration_pipeline_orchestration_call_kwargs=(
+            run_iteration_pipeline_orchestration_call_kwargs
+        ),
         build_run_iteration_pipeline_orchestration_kwargs_for_run_fn=(
             build_run_iteration_pipeline_orchestration_kwargs_for_run_fn
         ),
