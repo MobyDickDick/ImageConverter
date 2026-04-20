@@ -19,9 +19,10 @@ focused on the actual project scope.
 
 ## Test-Follow-ups (added 2026-04-20)
 
-- [ ] T1: Fehlender Helper-Export in `src/iCCModules/imageCompositeConverterIterationPipeline.py` beheben.
+- [x] T1: Fehlender Helper-Export in `src/iCCModules/imageCompositeConverterIterationPipeline.py` beheben.
   - Fehlgeschlagener Test: `tests/detailtests/test_iteration_pipeline_helpers.py::test_run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_call_runner_kwargs_for_run_impl_builds_nested_runner_kwargs`
   - Aktueller Fehler: `AttributeError` für `runIterationPipelineImplFromInputsDispatchCallForRunCallRunnerKwargsForRunImpl` (Helper existiert/nicht exportiert).
+  - 2026-04-20: Fehlenden Helper `runIterationPipelineImplFromInputsDispatchCallForRunCallRunnerKwargsForRunImpl` ergänzt; der Helper liefert jetzt die erwarteten verschachtelten Runner-Kwargs.
 
 - [ ] T2: Composite-Iteration-Finalisierung auf variable Result-Tuple-Längen robust machen.
   - Fehlgeschlagener Test: `tests/test_image_composite_converter.py::test_run_iteration_pipeline_breaks_early_on_flat_composite_error`
