@@ -538,7 +538,14 @@ focused on the actual project scope.
     und hält den Ablauf API-kompatibel.
     Abgesichert durch Detailtest
     `test_run_iteration_pipeline_impl_orchestration_dispatch_resolution_for_run_impl_builds_call_kwargs`.
-  - Nächster geplanter Schritt: weitere verbleibende Orchestrierungs-Sequenzen aus `runIterationPipeline` in kleinen, testbaren Schritten extrahieren (ab C1.138).
+  - [x] C1.138: Orchestrierungs-Dispatch-Runnersequenz aus `runIterationPipelineImplOrchestrationDispatchForRunImpl` modularisieren.
+  - 2026-04-20: Umsetzung abgeschlossen; neuer Sequenz-Helper
+    `runIterationPipelineImplOrchestrationDispatchForRunCallSequenceForRunImpl`
+    kapselt den bisherigen abschließenden Inline-Runner-Aufruf
+    und hält die API-Verdrahtung kompatibel.
+    Abgesichert durch Detailtest
+    `test_run_iteration_pipeline_impl_orchestration_dispatch_for_run_call_sequence_for_run_impl_delegates_runner`.
+  - Nächster geplanter Schritt: weitere verbleibende Orchestrierungs-Sequenzen aus `runIterationPipeline` in kleinen, testbaren Schritten extrahieren (ab C1.139).
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.
   - `_create_diff_image_without_cv2` nutzt jetzt Context-Manager für beide `fitz.open(...)` Dokumente, damit Batch-Läufe keine unnötig offenen MuPDF-Dokumente ansammeln.
