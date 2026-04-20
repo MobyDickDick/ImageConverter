@@ -84,7 +84,7 @@ def runPreparedIterationModeImpl(
             calculate_error_fn=calculate_error_fn,
         )
 
-    return run_composite_iteration_fn(
+    composite_result = run_composite_iteration_fn(
         max_iterations=max_iterations,
         width=width,
         height=height,
@@ -96,3 +96,17 @@ def runPreparedIterationModeImpl(
         write_validation_log_fn=write_validation_log_fn,
         record_render_failure_fn=record_render_failure_fn,
     )
+    if composite_result is None:
+        return None
+    if (
+        isinstance(composite_result, tuple)
+        and len(composite_result) >= 5
+    ):
+        return composite_result
+    if (
+        isinstance(composite_result, tuple)
+        and len(composite_result) >= 2
+    ):
+        best_iter, best_error = composite_result[0], composite_result[1]
+        return base_name, description, params, int(best_iter), float(best_error)
+    return None

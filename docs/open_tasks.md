@@ -24,9 +24,10 @@ focused on the actual project scope.
   - Aktueller Fehler: `AttributeError` für `runIterationPipelineImplFromInputsDispatchCallForRunCallRunnerKwargsForRunImpl` (Helper existiert/nicht exportiert).
   - 2026-04-20: Fehlenden Helper `runIterationPipelineImplFromInputsDispatchCallForRunCallRunnerKwargsForRunImpl` ergänzt; der Helper liefert jetzt die erwarteten verschachtelten Runner-Kwargs.
 
-- [ ] T2: Composite-Iteration-Finalisierung auf variable Result-Tuple-Längen robust machen.
+- [x] T2: Composite-Iteration-Finalisierung auf variable Result-Tuple-Längen robust machen.
   - Fehlgeschlagener Test: `tests/test_image_composite_converter.py::test_run_iteration_pipeline_breaks_early_on_flat_composite_error`
   - Aktueller Fehler: `IndexError` in `src/iCCModules/imageCompositeConverterIterationFinalization.py` (`best_error = mode_result[4]`).
+  - 2026-04-20: Finalisierung extrahiert den Composite-Fehler jetzt formatrobust für Legacy- (`(..., best_iter, best_error)`) und Kurzformat-Resultate (`(best_iter, best_error)`); Composite-Dispatch normalisiert Kurzresultate wieder auf das öffentliche 5-Tuple-Format.
 
 - [ ] T3: Adaptive-Circle-Pose-Optimierung gegen fehlende Badge-Defaultparameter absichern.
   - Fehlgeschlagener Test: `tests/test_image_composite_converter.py::test_optimize_circle_pose_adaptive_domain_improves_and_logs`

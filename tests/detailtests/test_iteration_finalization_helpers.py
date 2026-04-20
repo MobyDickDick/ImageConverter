@@ -23,3 +23,15 @@ def test_finalize_iteration_result_impl_drops_non_finite_composite_error() -> No
     )
 
     assert result is None
+
+
+def test_finalize_iteration_result_impl_accepts_short_composite_tuple_shape() -> None:
+    mode_result = (7, 0.125)
+
+    result = iteration_finalization_helpers.finalizeIterationResultImpl(
+        mode="composite",
+        mode_result=mode_result,
+        math_module=__import__("math"),
+    )
+
+    assert result is mode_result
