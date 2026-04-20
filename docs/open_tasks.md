@@ -492,7 +492,14 @@ focused on the actual project scope.
     weiterhin API-kompatibel über den bestehenden Runner-Entry-Point.
   - [x] C1.133: Runtime-Dependency-Bootstrap-Wrapper (`_bootstrapRequiredImageDependencies`) aus `src/iCCModules/imageCompositeConverterRemaining.py` in neues Modul `src/iCCModules/imageCompositeConverterDependencyBootstrapRuntime.py` auslagern; `src/iCCModules/imageCompositeConverterRemaining.py` delegiert den Ablauf jetzt über den neuen Modul-Helper und bleibt API-kompatibel.
   - 2026-04-19: Umsetzung abgeschlossen inkl. Detailtests `test_bootstrap_required_image_dependencies_for_runtime_impl_installs_and_sets_modules` und `test_bootstrap_required_image_dependencies_for_runtime_impl_uses_custom_module_names`.
-  - Nächster geplanter Schritt: weitere verbleibende Orchestrierungs-Sequenzen aus `runIterationPipeline` in kleinen, testbaren Schritten extrahieren (ab C1.134, nach Stabilisierung der T-Serie).
+  - [x] C1.134: Dispatch-/Runner-Verdrahtungssequenz aus `runIterationPipelineImplFromInputsDispatchCallForRunImpl` modularisieren.
+  - 2026-04-19: Umsetzung abgeschlossen; neuer Sequenz-Helper
+    `runIterationPipelineImplFromInputsDispatchCallForRunDispatchAndRunnerForRunImpl`
+    kapselt den bisherigen Inline-Aufruf der Dispatch-Call-Sequenz und liefert
+    die Runner-Kwargs weiterhin API-kompatibel für den abschließenden Runner-Dispatch.
+    Abgesichert durch Detailtest
+    `test_run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_dispatch_and_runner_for_run_impl_delegates_sequence`.
+  - Nächster geplanter Schritt: weitere verbleibende Orchestrierungs-Sequenzen aus `runIterationPipeline` in kleinen, testbaren Schritten extrahieren (ab C1.135, nach Stabilisierung der T-Serie).
 
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.
   - `_create_diff_image_without_cv2` nutzt jetzt Context-Manager für beide `fitz.open(...)` Dokumente, damit Batch-Läufe keine unnötig offenen MuPDF-Dokumente ansammeln.
