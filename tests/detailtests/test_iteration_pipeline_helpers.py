@@ -668,6 +668,46 @@ def test_run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_for_r
     assert result == {"status": "ok"}
 
 
+def test_run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_for_run_call_call_kwargs_for_run_impl_builds_call_kwargs() -> None:
+    calls: dict[str, object] = {}
+
+    def _builder(**kwargs):
+        calls["builder_kwargs"] = kwargs
+        return {"payload": "built"}
+
+    result = (
+        helpers.runIterationPipelineFromInputsViaOrchestrationForRunCallForRunCallCallKwargsForRunImpl(
+            build_run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_for_run_kwargs_fn=_builder,
+            run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_for_run_kwargs={
+                "payload": "raw"
+            },
+        )
+    )
+
+    assert calls["builder_kwargs"] == {"payload": "raw"}
+    assert result == {"payload": "built"}
+
+
+def test_run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_for_run_call_call_sequence_for_run_impl_delegates_runner() -> None:
+    calls: dict[str, object] = {}
+
+    def _runner(**kwargs):
+        calls["runner_kwargs"] = kwargs
+        return {"status": "ok"}
+
+    result = (
+        helpers.runIterationPipelineFromInputsViaOrchestrationForRunCallForRunCallCallSequenceForRunImpl(
+            run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_for_run_fn=_runner,
+            run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_for_run_call_kwargs={
+                "payload": "built"
+            },
+        )
+    )
+
+    assert calls["runner_kwargs"] == {"payload": "built"}
+    assert result == {"status": "ok"}
+
+
 def test_run_iteration_pipeline_from_inputs_via_orchestration_for_run_call_for_run_call_for_run_impl_delegates_builder_then_runner() -> None:
     calls: dict[str, object] = {}
 
