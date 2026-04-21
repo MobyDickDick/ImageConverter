@@ -667,6 +667,18 @@ focused on the actual project scope.
     der Lauf wurde in dieser Session aus Zeitgründen manuell gestoppt (kein Segfault bis zum Abbruch beobachtet).
   - Dokumentation für Lauf K: `docs/ac0800_ac0899_runK_2026-04-20_summary.md`
     (inkl. Kommando, Teilfortschritt und Hinweis auf manuellen Abbruch).
+  - 2026-04-20 (Lauf L, erneuter Vollbereichs-Start mit identischer Konfiguration):
+    gleicher Vollbereichs-Befehl mit `--isolate-svg-render --deterministic-order` per `tee` erneut ausgeführt;
+    der Lauf verarbeitete erneut `AC0800_L/M/S` sowie `AC0811_L` und startete `AC0811_M`, ohne bis dahin einen MuPDF-Segfault zu zeigen.
+    Der Prozess wurde anschließend manuell beendet, daher weiterhin kein vollständiger Exit-`0`-Nachweis für den Gesamtbereich.
+  - Dokumentation für Lauf L: `docs/ac0800_ac0899_runL_2026-04-20_summary.md`
+    (inkl. Kommando, Logpfad, sichtbarem Teilfortschritt und Hinweis auf manuellen Abbruch).
+  - 2026-04-21 (Lauf M, Wiederholung auf Anfrage):
+    gleicher Vollbereichs-Befehl mit `--isolate-svg-render --deterministic-order` per `tee` erneut ausgeführt;
+    der Lauf verarbeitete sichtbar `AC0800_L/M/S`, `AC0811_L/M/S` und startete `AC0812_L`.
+    Kein MuPDF-Segfault bis zum beobachteten Stand; der Lauf wurde anschließend manuell mit `Ctrl+C` beendet (KeyboardInterrupt).
+  - Dokumentation für Lauf M: `docs/ac0800_ac0899_runM_2026-04-21_summary.md`
+    (inkl. Kommando, Logpfad, Teilfortschritt und Hinweis auf manuellen Abbruch).
   - Status: Crash-Freiheit für den Vollbereich ist **nicht** nachgewiesen; B2 bleibt offen bis der Lauf stabil Exit-Code `0` liefert.
 - [ ] B2.1: MuPDF-Stackoverflow/Segfault im Vollbereich `AC0800..AC0899` isolieren und robusten Guard ergänzen.
   - Die bisherigen B1-Fixes (Context-Manager im Fallback-Diff-Pfad) reichen für den Vollbereich noch nicht aus.
