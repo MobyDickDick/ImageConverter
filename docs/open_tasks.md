@@ -34,6 +34,11 @@ focused on the actual project scope.
   - Aktueller Fehler: `KeyError: 'fill_gray'` beim SVG-Badge-Aufbau in `src/iCCModules/imageCompositeConverterSemanticBadgeSvg.py`.
   - 2026-04-20: SVG-Badge-Generierung setzt nach der Quantisierung robuste Fallback-Defaults für sparse Optimierungs-Parameter (`stroke_gray`, `fill_gray`, `stroke_circle`, `text_gray`) und vermeidet so `KeyError` im Adaptive-Circle-Pose-Pfad.
 
+- [x] T4: Run-Sequence-Helper in `imageCompositeConverterIterationPipeline` gegen Signatur-Kollision absichern.
+  - Fehlgeschlagener Test: `tests/detailtests/test_iteration_pipeline_helpers.py::test_run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_sequence_for_run_impl_delegates_builder_then_runner`
+  - Aktueller Fehler: Doppelter Funktionsname `runIterationPipelineImplFromInputsDispatchCallForRunSequenceForRunImpl` überschreibt den Builder+Runner-Helper mit einer inkompatiblen Runner-Signatur.
+  - 2026-04-21: Runner-only-Variante in `runIterationPipelineImplFromInputsDispatchCallForRunFinalRunnerSequenceForRunImpl` umbenannt; der öffentliche Sequence-Helper unterstützt jetzt sowohl den Builder+Runner- als auch den direkten Runner-Pfad kompatibel.
+
 ## Next tasks (added 2026-03-28)
 
 - [x] D1: Familienübergreifende Harmonisierung für AC08-Protoformen ergänzen.
