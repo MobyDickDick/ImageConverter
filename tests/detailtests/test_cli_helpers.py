@@ -247,6 +247,57 @@ def test_run_main_impl_convert_mode_invokes_convert_with_selected_variants() -> 
     assert convert_args[9] is True
 
 
+def test_run_main_impl_auto_enables_isolated_render_for_ac08_regression_set() -> None:
+    args = argparse.Namespace(
+        _render_svg_subprocess=False,
+        isolate_svg_render=False,
+        isolate_svg_render_timeout_sec=5.0,
+        log_file="",
+        ac08_regression_set=True,
+        print_linux_vendor_command=False,
+        vendor_dir="vendor",
+        vendor_platform="manylinux",
+        vendor_python_version="310",
+        interactive_range=False,
+        start="AC0001",
+        end="AC0002",
+        mode="analyze",
+        bootstrap_deps=False,
+        folder_path="images",
+        iterations=1,
+        debug_ac0811_dir=None,
+        debug_element_diff_dir=None,
+        deterministic_order=False,
+    )
+    calls: dict[str, object] = {}
+    stdout = io.StringIO()
+
+    with contextlib.redirect_stdout(stdout):
+        rc = cli_helpers.runMainImpl(
+            args,
+            run_svg_render_subprocess_entrypoint_fn=lambda: 11,
+            set_svg_render_subprocess_enabled_fn=lambda enabled: calls.__setitem__("enabled", enabled),
+            set_svg_render_subprocess_timeout_fn=lambda timeout: calls.__setitem__("timeout", timeout),
+            optional_log_capture_fn=contextlib.nullcontext,
+            build_linux_vendor_install_command_fn=lambda **_kwargs: ["pip"],
+            prompt_interactive_range_fn=lambda _args: ("AC0001", "AC0002"),
+            resolve_cli_csv_and_output_fn=lambda _args: ("", None),
+            load_description_mapping_fn=lambda _path: None,
+            bootstrap_required_image_dependencies_fn=lambda: [],
+            analyze_range_fn=lambda *_args, **_kwargs: "annotated",
+            convert_range_fn=lambda *_args, **_kwargs: "converted",
+            format_user_diagnostic_fn=lambda exc: str(exc),
+            description_mapping_error_type=RuntimeError,
+            ac08_regression_set_name="ac08-set",
+            ac08_regression_variants=("AC0800_L",),
+        )
+
+    assert rc == 0
+    assert calls["enabled"] is True
+    assert calls["timeout"] == 5.0
+    assert "aktiviert isoliertes SVG-Rendering automatisch" in stdout.getvalue()
+
+
 def test_run_main_impl_repair_mode_requires_repair_callback() -> None:
     args = argparse.Namespace(
         _render_svg_subprocess=False,

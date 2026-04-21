@@ -363,8 +363,14 @@ def runMainImpl(
     if bool(getattr(args, "_render_svg_subprocess", False)):
         return run_svg_render_subprocess_entrypoint_fn()
 
-    if bool(args.isolate_svg_render):
+    auto_enable_isolated_render = bool(getattr(args, "ac08_regression_set", False))
+    if bool(args.isolate_svg_render) or auto_enable_isolated_render:
         set_svg_render_subprocess_enabled_fn(True)
+        if auto_enable_isolated_render and not bool(args.isolate_svg_render):
+            print(
+                "[INFO] AC08-Regression aktiviert isoliertes SVG-Rendering automatisch "
+                "(entspricht --isolate-svg-render)."
+            )
     set_svg_render_subprocess_timeout_fn(max(1.0, float(args.isolate_svg_render_timeout_sec)))
 
     log_path = str(args.log_file or "").strip()
