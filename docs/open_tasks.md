@@ -700,6 +700,10 @@ focused on the actual project scope.
   - Die bisherigen B1-Fixes (Context-Manager im Fallback-Diff-Pfad) reichen für den Vollbereich noch nicht aus.
   - Die Rendering-Stabilisierung muss den nativen Crash im Haupt-Renderpfad (`render_svg_to_numpy`) verhindern.
   - 2026-03-29: Optionaler Subprozess-Guard für `render_svg_to_numpy` ergänzt (`--isolate-svg-render`), inklusive Fallback auf In-Process-Render wenn der isolierte Worker fehlschlägt.
+  - 2026-04-21: AC08-Regression-Set ohne `--isolate-svg-render` erneut reproduzierbar mit nativer MuPDF-Fehlermeldung abgestürzt
+    (`MuPDF error: exception stack overflow!`, Exit-Code `139`; Log: `/tmp/ac08_regression_2026-04-21.log`).
+  - 2026-04-21: CLI härtet den Guard jetzt standardmäßig für `--ac08-regression-set`:
+    isoliertes SVG-Rendering wird automatisch aktiviert (inkl. Info-Hinweis), auch wenn der Flag nicht explizit gesetzt ist.
   - Offener Nachweis: Vollbereich `AC0800..AC0899` mit aktiviertem Guard erneut laufen lassen und Crash-Freiheit dokumentieren.
 - [x] B3: Deterministischen Diagnosemodus für die Dateireihenfolge ergänzen (ohne `shuffle`), um schwer reproduzierbare Batchfehler schneller zu isolieren.
   - 2026-04-03: Neuer CLI-Schalter `--deterministic-order` ergänzt.
@@ -740,6 +744,8 @@ focused on the actual project scope.
   - Beispiele: `test_ac08_regression_suite_preserves_previously_good_variants[...]`,
     `test_ac0811_l_conversion_preserves_long_bottom_stem`,
     `test_ac08_semantic_anchor_variants_convert_without_failed_svg`.
+  - 2026-04-21: AC08-Detailtests (`pytest -q tests/detailtests -k ac08`) laufen grün (`20 passed`).
+    Der schwere Integrationspfad bleibt separat offen; dort ist zunächst der neue Auto-Guard aus B2.1 im Vollbereichslauf zu verifizieren.
 
 
 
