@@ -1789,11 +1789,35 @@ def buildRunIterationPipelineImplFromInputsDispatchCallForRunCallKwargsForRunImp
 
 def runIterationPipelineImplFromInputsDispatchCallForRunSequenceForRunImpl(
     *,
-    build_run_iteration_pipeline_impl_from_inputs_dispatch_call_kwargs_for_run_fn,
-    run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_fn,
+    build_run_iteration_pipeline_impl_from_inputs_dispatch_call_kwargs_for_run_fn=None,
+    run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_fn=None,
+    run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_dispatch_call_for_run_fn=None,
+    run_from_inputs_dispatch_call_for_run_kwargs=None,
     **kwargs,
 ):
-    """Build from-inputs dispatch kwargs and run the top-level dispatch call."""
+    """Run top-level from-inputs dispatch sequencing (builder+runner or direct runner path)."""
+
+    if (
+        build_run_iteration_pipeline_impl_from_inputs_dispatch_call_kwargs_for_run_fn
+        is None
+        and run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_fn is None
+    ):
+        return runIterationPipelineImplFromInputsDispatchCallForRunFinalRunnerSequenceForRunImpl(
+            run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_dispatch_call_for_run_fn=(
+                run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_dispatch_call_for_run_fn
+            ),
+            run_from_inputs_dispatch_call_for_run_kwargs=(
+                run_from_inputs_dispatch_call_for_run_kwargs
+            ),
+        )
+
+    if (
+        run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_dispatch_call_for_run_fn
+        is not None
+    ):
+        kwargs[
+            "run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_dispatch_call_for_run_fn"
+        ] = run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_dispatch_call_for_run_fn
 
     run_iteration_pipeline_impl_from_inputs_dispatch_call_kwargs = (
         build_run_iteration_pipeline_impl_from_inputs_dispatch_call_kwargs_for_run_fn(
@@ -2378,7 +2402,7 @@ def runIterationPipelineImplFromInputsDispatchCallForRunImpl(
             ),
         )
     )
-    return runIterationPipelineImplFromInputsDispatchCallForRunSequenceForRunImpl(
+    return runIterationPipelineImplFromInputsDispatchCallForRunFinalRunnerSequenceForRunImpl(
         run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_dispatch_call_for_run_fn=(
             run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_dispatch_call_for_run_fn
         ),
@@ -2405,7 +2429,7 @@ def runIterationPipelineImplFromInputsDispatchCallForRunKwargsForRunImpl(
     )
 
 
-def runIterationPipelineImplFromInputsDispatchCallForRunSequenceForRunImpl(
+def runIterationPipelineImplFromInputsDispatchCallForRunFinalRunnerSequenceForRunImpl(
     *,
     run_iteration_pipeline_from_inputs_via_orchestration_for_run_from_inputs_dispatch_call_for_run_fn,
     run_from_inputs_dispatch_call_for_run_kwargs,
