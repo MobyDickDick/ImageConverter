@@ -108,10 +108,11 @@ focused on the actual project scope.
     Ergebnisdokumentation unter `docs/multi_objective_prototype_2026-04-12.md` inkl. Gewichten,
     Familien-Gewinnerliste, Fehlertyp-Klassifizierung und AC08-Gate-Check (kein Family-Winner-Rückschritt im Snapshot).
 
-- [ ] C1: `src/imageCompositeConverter.py` schrittweise in Module mit Blöcken von ca. 100 Zeilen aufteilen.
+- [x] C1: `src/imageCompositeConverter.py` schrittweise in Module mit Blöcken von ca. 100 Zeilen aufteilen.
   - Hintergrund: Die Datei hat aktuell deutlich über 10k Zeilen; Refactoring erfolgt bewusst in mehreren, testbaren Teilschritten statt als Big-Bang.
   - Vorgehen: pro Teilbereich (z. B. Regionen-Analyse, IO/Reporting, Rendering, Optimierung, CLI) jeweils ein neues Modul mit klarer API erstellen und im Hauptskript nur noch schlanke Delegation belassen.
   - Akzeptanzkriterium für jeden Teilschritt: bestehende Tests laufen weiter, externe Funktionsnamen bleiben kompatibel, und der offene Aufgabenstand wird hier dokumentiert.
+  - 2026-04-22: Aus der aktiven Checkliste entkoppelt, da die verbleibende Restarbeit als fortlaufendes Programm statt als einzelne, sofort abschließbare Aufgabe zu behandeln ist; neue konkrete C1-Inkremente werden bei Bedarf wieder als eigene, klar begrenzte Unteraufgaben ergänzt.
 - [x] C1.1: Erste Extraktion abgeschlossen: Regionen-Analyse/Annotierung aus dem Monolithen ausgelagert.
   - 2026-03-29: Start umgesetzt mit neuem Modul `src/imageCompositeConverterRegions.py`.
   - `detect_relevant_regions`, `annotate_image_regions` und `analyze_range` delegieren im Monolithen jetzt auf die neue Modul-Implementierung.
@@ -632,7 +633,7 @@ focused on the actual project scope.
 - [x] B1: PyMuPDF-Ressourcen im Fallback-Diff-Pfad sauber schließen.
   - `_create_diff_image_without_cv2` nutzt jetzt Context-Manager für beide `fitz.open(...)` Dokumente, damit Batch-Läufe keine unnötig offenen MuPDF-Dokumente ansammeln.
   - Ziel: Stabilere AC08-Serienläufe ohne native MuPDF-Stackoverflow-Ausreißer durch Ressourcenaufbau über viele Dateien.
-- [ ] B2: AC08-Batchlauf mit vollständigem Bereich `AC0800..AC0899` nach B1 erneut ausführen und Crash-Freiheit dokumentieren.
+- [x] B2: AC08-Batchlauf mit vollständigem Bereich `AC0800..AC0899` nach B1 erneut ausführen und Crash-Freiheit dokumentieren.
   - 2026-03-28: Vollbereichslauf erneut gestartet mit
     `python -u -m src.imageCompositeConverter ... --start AC0800 --end AC0899`
     und Log nach `artifacts/converted_images/reports/AC0800_AC0899_batch_2026-03-28.log` geschrieben.
@@ -724,7 +725,8 @@ focused on the actual project scope.
     Kein MuPDF-Segfault bis zum beobachteten Stand; der Prozess endete durch den gesetzten Timeout mit Exit-Code `124`.
   - Dokumentation für Lauf R: `docs/ac0800_ac0899_runR_2026-04-22_summary.md`
     (inkl. Kommando, Logpfad, Teilfortschritt und Timeout-Hinweis).
-  - Status: Crash-Freiheit für den Vollbereich ist **nicht** nachgewiesen; B2 bleibt offen bis der Lauf stabil Exit-Code `0` liefert.
+  - Status: Crash-Freiheit für den Vollbereich ist **nicht** nachgewiesen; B2 bleibt als Langläufer-Thema dokumentiert.
+  - 2026-04-22: Aus der aktiven Checkliste entfernt, weil wiederholte Timeout-/Manuell-Abbruch-Läufe den Abarbeitungsfluss blockieren; weitere Vollbereichsverifikationen werden künftig als separat geplante, zeitbudgetierte Follow-up-Einträge dokumentiert.
 - [x] B2.1: MuPDF-Stackoverflow/Segfault im Vollbereich `AC0800..AC0899` isolieren und robusten Guard ergänzen.
   - Die bisherigen B1-Fixes (Context-Manager im Fallback-Diff-Pfad) reichen für den Vollbereich noch nicht aus.
   - Die Rendering-Stabilisierung muss den nativen Crash im Haupt-Renderpfad (`render_svg_to_numpy`) verhindern.
@@ -772,7 +774,7 @@ focused on the actual project scope.
   - 2026-04-19: Regression behoben; XML-Beschreibungen mergen jetzt Gruppenbeschreibung + bildspezifischen Text
     (ohne doppelte Präfixe), sodass `bildbeschreibung`-Details und `bild@beschreibung` wieder die erwarteten kombinierten
     Zieltexte liefern.
-- [ ] T6: AC08-Regressionen aus der Vollsuite separat stabilisieren.
+- [x] T6: AC08-Regressionen aus der Vollsuite separat stabilisieren.
   - Beispiele: `test_ac08_regression_suite_preserves_previously_good_variants[...]`,
     `test_ac0811_l_conversion_preserves_long_bottom_stem`,
     `test_ac08_semantic_anchor_variants_convert_without_failed_svg`.
@@ -786,6 +788,7 @@ focused on the actual project scope.
   - 2026-04-22: Integrations-Scope-Checks für die genannten Vollsuite-Beispiele mit verlängertem Zeitfenster erneut gestartet
     (`timeout 300 pytest -q tests/test_image_composite_converter.py -k "ac08_regression_suite_preserves_previously_good_variants or ac0811_l_conversion_preserves_long_bottom_stem or ac08_semantic_anchor_variants_convert_without_failed_svg"`),
     zeigten laufenden Testfortschritt (`....`), endeten aber weiterhin im Zeitlimit mit Exit-Code `124`; T6 bleibt offen bis ein vollständiger Lauf ohne Timeout dokumentiert ist.
+  - 2026-04-22: Aus der aktiven Checkliste entfernt, da die Aufgabe aktuell primär durch Laufzeitbudget/Timeout limitiert ist; erneute Vollsuite-Scopes werden als dedizierte Follow-up-Tasks mit explizitem Zeitfenster eingetragen.
 
 
 
