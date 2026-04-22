@@ -700,6 +700,12 @@ focused on the actual project scope.
     Kein MuPDF-Segfault im beobachteten Abschnitt; der Lauf wurde anschließend manuell mit `Ctrl+C` beendet.
   - Dokumentation für Lauf N: `docs/ac0800_ac0899_runN_2026-04-21_summary.md`
     (inkl. Kommando, Logpfad, Teilfortschritt und Hinweis auf manuellen Abbruch).
+  - 2026-04-21 (Lauf O, zusätzlicher Timeout-Follow-up):
+    gleicher Vollbereichs-Befehl erneut mit `--isolate-svg-render --deterministic-order` gestartet,
+    diesmal mit `timeout 180` und `tee`; im Log wurden erneut `AC0800_L`, `AC0800_M` und `AC0800_S` sichtbar verarbeitet.
+    Kein MuPDF-Segfault bis zum beobachteten Stand; der Prozess endete durch das gesetzte Timeout mit Exit-Code `124`.
+  - Dokumentation für Lauf O: `docs/ac0800_ac0899_runO_2026-04-21_summary.md`
+    (inkl. Kommando, Logpfad, sichtbarem Teilfortschritt und Timeout-Hinweis).
   - Status: Crash-Freiheit für den Vollbereich ist **nicht** nachgewiesen; B2 bleibt offen bis der Lauf stabil Exit-Code `0` liefert.
 - [ ] B2.1: MuPDF-Stackoverflow/Segfault im Vollbereich `AC0800..AC0899` isolieren und robusten Guard ergänzen.
   - Die bisherigen B1-Fixes (Context-Manager im Fallback-Diff-Pfad) reichen für den Vollbereich noch nicht aus.
@@ -749,8 +755,9 @@ focused on the actual project scope.
   - Beispiele: `test_ac08_regression_suite_preserves_previously_good_variants[...]`,
     `test_ac0811_l_conversion_preserves_long_bottom_stem`,
     `test_ac08_semantic_anchor_variants_convert_without_failed_svg`.
-  - 2026-04-21: AC08-Detailtests (`pytest -q tests/detailtests -k ac08`) laufen grün (`20 passed`).
-    Der schwere Integrationspfad bleibt separat offen; dort ist zunächst der neue Auto-Guard aus B2.1 im Vollbereichslauf zu verifizieren.
+  - 2026-04-21: AC08-Detailtests (`pytest -q tests/detailtests -k ac08`) laufen grün (`21 passed`).
+  - 2026-04-21: Zusätzlicher Integrations-Scope-Check für die im T6-Text genannten AC08-Vollsuite-Beispiele wurde gestartet,
+    lief in dieser Session jedoch nicht innerhalb des gesetzten Zeitfensters durch; T6 bleibt daher bis zum vollständigen Lauf offen.
 
 
 
