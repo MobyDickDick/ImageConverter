@@ -712,6 +712,12 @@ focused on the actual project scope.
     Kein MuPDF-Segfault bis zum beobachteten Stand; der Prozess endete durch den gesetzten Timeout mit Exit-Code `124`.
   - Dokumentation für Lauf P: `docs/ac0800_ac0899_runP_2026-04-22_summary.md`
     (inkl. Kommando, Logpfad, sichtbarem Teilfortschritt und Timeout-Hinweis).
+  - 2026-04-22 (Lauf Q, Timeout-Follow-up mit längerem Zeitfenster):
+    gleicher Vollbereichs-Befehl erneut mit `--isolate-svg-render --deterministic-order` per `tee` ausgeführt,
+    diesmal mit `timeout 240`; im Log wurden `AC0800_L`, `AC0800_M`, `AC0800_S` und der Start von `AC0811_L` sichtbar verarbeitet.
+    Kein MuPDF-Segfault bis zum beobachteten Stand; der Prozess endete durch den gesetzten Timeout mit Exit-Code `124`.
+  - Dokumentation für Lauf Q: `docs/ac0800_ac0899_runQ_2026-04-22_summary.md`
+    (inkl. Kommando, Logpfad, erweitertem Teilfortschritt und Timeout-Hinweis).
   - Status: Crash-Freiheit für den Vollbereich ist **nicht** nachgewiesen; B2 bleibt offen bis der Lauf stabil Exit-Code `0` liefert.
 - [ ] B2.1: MuPDF-Stackoverflow/Segfault im Vollbereich `AC0800..AC0899` isolieren und robusten Guard ergänzen.
   - Die bisherigen B1-Fixes (Context-Manager im Fallback-Diff-Pfad) reichen für den Vollbereich noch nicht aus.
@@ -764,6 +770,10 @@ focused on the actual project scope.
   - 2026-04-21: AC08-Detailtests (`pytest -q tests/detailtests -k ac08`) laufen grün (`21 passed`).
   - 2026-04-21: Zusätzlicher Integrations-Scope-Check für die im T6-Text genannten AC08-Vollsuite-Beispiele wurde gestartet,
     lief in dieser Session jedoch nicht innerhalb des gesetzten Zeitfensters durch; T6 bleibt daher bis zum vollständigen Lauf offen.
+  - 2026-04-22: AC08-Detailtests erneut verifiziert (`pytest -q tests/detailtests -k ac08` → `21 passed`).
+  - 2026-04-22: Integrations-Scope-Checks für die genannten Vollsuite-Beispiele erneut mit `timeout` gestartet
+    (`pytest -q tests/test_image_composite_converter.py -k "ac08_regression_suite_preserves_previously_good_variants or ac0811_l_conversion_preserves_long_bottom_stem or ac08_semantic_anchor_variants_convert_without_failed_svg"`),
+    endeten im Zeitlimit mit Exit-Code `124`; T6 bleibt offen bis ein vollständiger Lauf ohne Timeout dokumentiert ist.
 
 
 
