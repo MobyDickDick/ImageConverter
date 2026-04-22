@@ -340,6 +340,12 @@ def optionalLogCaptureImpl(log_path: str):
             yield
 
 
+def _isFullAc08Range(args: argparse.Namespace) -> bool:
+    start = str(getattr(args, "start", "") or "").strip().upper()
+    end = str(getattr(args, "end", "") or "").strip().upper()
+    return start == "AC0800" and end == "AC0899"
+
+
 def runMainImpl(
     args: argparse.Namespace,
     *,
@@ -363,14 +369,20 @@ def runMainImpl(
     if bool(getattr(args, "_render_svg_subprocess", False)):
         return run_svg_render_subprocess_entrypoint_fn()
 
-    auto_enable_isolated_render = bool(getattr(args, "ac08_regression_set", False))
+    auto_enable_isolated_render = bool(getattr(args, "ac08_regression_set", False) or _isFullAc08Range(args))
     if bool(args.isolate_svg_render) or auto_enable_isolated_render:
         set_svg_render_subprocess_enabled_fn(True)
         if auto_enable_isolated_render and not bool(args.isolate_svg_render):
-            print(
-                "[INFO] AC08-Regression aktiviert isoliertes SVG-Rendering automatisch "
-                "(entspricht --isolate-svg-render)."
-            )
+            if bool(getattr(args, "ac08_regression_set", False)):
+                print(
+                    "[INFO] AC08-Regression aktiviert isoliertes SVG-Rendering automatisch "
+                    "(entspricht --isolate-svg-render)."
+                )
+            else:
+                print(
+                    "[INFO] Vollbereich AC0800..AC0899 aktiviert isoliertes SVG-Rendering automatisch "
+                    "(entspricht --isolate-svg-render)."
+                )
     set_svg_render_subprocess_timeout_fn(max(1.0, float(args.isolate_svg_render_timeout_sec)))
 
     log_path = str(args.log_file or "").strip()

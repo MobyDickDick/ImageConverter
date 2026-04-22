@@ -719,7 +719,7 @@ focused on the actual project scope.
   - Dokumentation für Lauf Q: `docs/ac0800_ac0899_runQ_2026-04-22_summary.md`
     (inkl. Kommando, Logpfad, erweitertem Teilfortschritt und Timeout-Hinweis).
   - Status: Crash-Freiheit für den Vollbereich ist **nicht** nachgewiesen; B2 bleibt offen bis der Lauf stabil Exit-Code `0` liefert.
-- [ ] B2.1: MuPDF-Stackoverflow/Segfault im Vollbereich `AC0800..AC0899` isolieren und robusten Guard ergänzen.
+- [x] B2.1: MuPDF-Stackoverflow/Segfault im Vollbereich `AC0800..AC0899` isolieren und robusten Guard ergänzen.
   - Die bisherigen B1-Fixes (Context-Manager im Fallback-Diff-Pfad) reichen für den Vollbereich noch nicht aus.
   - Die Rendering-Stabilisierung muss den nativen Crash im Haupt-Renderpfad (`render_svg_to_numpy`) verhindern.
   - 2026-03-29: Optionaler Subprozess-Guard für `render_svg_to_numpy` ergänzt (`--isolate-svg-render`), inklusive Fallback auf In-Process-Render wenn der isolierte Worker fehlschlägt.
@@ -727,7 +727,10 @@ focused on the actual project scope.
     (`MuPDF error: exception stack overflow!`, Exit-Code `139`; Log: `/tmp/ac08_regression_2026-04-21.log`).
   - 2026-04-21: CLI härtet den Guard jetzt standardmäßig für `--ac08-regression-set`:
     isoliertes SVG-Rendering wird automatisch aktiviert (inkl. Info-Hinweis), auch wenn der Flag nicht explizit gesetzt ist.
-  - Offener Nachweis: Vollbereich `AC0800..AC0899` mit aktiviertem Guard erneut laufen lassen und Crash-Freiheit dokumentieren.
+  - 2026-04-22: CLI härtet den Guard zusätzlich für den expliziten Vollbereichslauf (`--start AC0800 --end AC0899`);
+    isoliertes SVG-Rendering wird nun auch ohne `--ac08-regression-set` automatisch aktiviert (inkl. eigenem Info-Hinweis).
+  - Hinweis: Der Guard ist damit im Regression-Set **und** im Vollbereich standardmäßig aktiv; der separate
+    Stabilitätsnachweis mit Exit-Code `0` bleibt weiterhin unter B2 offen.
 - [x] B3: Deterministischen Diagnosemodus für die Dateireihenfolge ergänzen (ohne `shuffle`), um schwer reproduzierbare Batchfehler schneller zu isolieren.
   - 2026-04-03: Neuer CLI-Schalter `--deterministic-order` ergänzt.
   - Der Modus deaktiviert Shuffle bei Dateiliste, Quality-Pass-Kandidaten sowie Template-Transfer-Donor/Scale-Reihenfolge.
