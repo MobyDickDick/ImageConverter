@@ -706,6 +706,12 @@ focused on the actual project scope.
     Kein MuPDF-Segfault bis zum beobachteten Stand; der Prozess endete durch das gesetzte Timeout mit Exit-Code `124`.
   - Dokumentation für Lauf O: `docs/ac0800_ac0899_runO_2026-04-21_summary.md`
     (inkl. Kommando, Logpfad, sichtbarem Teilfortschritt und Timeout-Hinweis).
+  - 2026-04-22 (Lauf P, nächster Timeout-Follow-up):
+    gleicher Vollbereichs-Befehl erneut mit `--isolate-svg-render --deterministic-order` per `tee` ausgeführt,
+    wieder mit `timeout 180`; im Log wurden `AC0800_L`, `AC0800_M` und `AC0800_S` sichtbar verarbeitet.
+    Kein MuPDF-Segfault bis zum beobachteten Stand; der Prozess endete durch den gesetzten Timeout mit Exit-Code `124`.
+  - Dokumentation für Lauf P: `docs/ac0800_ac0899_runP_2026-04-22_summary.md`
+    (inkl. Kommando, Logpfad, sichtbarem Teilfortschritt und Timeout-Hinweis).
   - Status: Crash-Freiheit für den Vollbereich ist **nicht** nachgewiesen; B2 bleibt offen bis der Lauf stabil Exit-Code `0` liefert.
 - [ ] B2.1: MuPDF-Stackoverflow/Segfault im Vollbereich `AC0800..AC0899` isolieren und robusten Guard ergänzen.
   - Die bisherigen B1-Fixes (Context-Manager im Fallback-Diff-Pfad) reichen für den Vollbereich noch nicht aus.
