@@ -27,6 +27,7 @@ focused on the actual project scope.
   - 2026-04-23: Run V erneut ohne `timeout` gestartet; sichtbarer Fortschritt bis `AC0800_S`, danach ohne weiteren sichtbaren Fortschritt manuell per `Ctrl-C` beendet (Shell-Exit `1`, kein finaler Exit-`0`).
   - 2026-04-23: Run W ohne `timeout` gestartet; sichtbarer Fortschritt bis `AC0811_S`, danach ohne weiteren sichtbaren Fortschritt manuell per `pkill` beendet (kein finaler Exit-`0` dokumentiert).
   - 2026-04-23: Run X ohne `timeout` gestartet; sichtbarer Fortschritt bis `AC0811_L`, danach ohne weiteren sichtbaren Fortschritt manuell per `pkill` beendet (kein finaler Exit-`0` dokumentiert).
+  - 2026-04-23: Run Y mit `timeout 420` gestartet; sichtbarer Fortschritt bis `AC0811_L`, dann Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runY_2026-04-23_summary.md`).
   - Abschlusskriterium: vollständiger Durchlauf bis `AC0899` ohne `timeout`-Abbruch und mit finalem Prozessstatus `0`.
 
 - [ ] N2: Stabilitätsnachweis für den Vollbereich dokumentieren.
@@ -37,6 +38,7 @@ focused on the actual project scope.
   - 2026-04-23: Run V zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0800_S`; Abbruchursache und Status in `docs/ac0800_ac0899_runV_2026-04-23_summary.md` dokumentiert.
   - 2026-04-23: Run W zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_S`; Abbruchursache und Status in `docs/ac0800_ac0899_runW_2026-04-23_summary.md` dokumentiert.
   - 2026-04-23: Run X zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Abbruchursache und Status in `docs/ac0800_ac0899_runX_2026-04-23_summary.md` dokumentiert.
+  - 2026-04-23: Run Y zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Timeout-Status in `docs/ac0800_ac0899_runY_2026-04-23_summary.md` dokumentiert.
 
 - [x] N3: Neue Laufzusammenfassung im Run-Format ergänzen.
   - Neue Datei analog zu Run Q/R erstellen (Datum, Anlass, exakter Befehl, Log-Pfad, sichtbarer Fortschritt, Exit-Code, Kurzfazit).
@@ -49,6 +51,7 @@ focused on the actual project scope.
   - 2026-04-23: Zwischenstand nach Run V nachgepflegt; N1/N2/N4 bleiben weiterhin offen.
   - 2026-04-23: Zwischenstand nach Run W nachgepflegt; N1/N2/N4 bleiben weiterhin offen.
   - 2026-04-23: Zwischenstand nach Run X nachgepflegt; N1/N2/N4 bleiben weiterhin offen.
+  - 2026-04-23: Zwischenstand nach Run Y nachgepflegt; N1/N2/N4 bleiben weiterhin offen (erneut kein Exit-`0`).
 
 ## Test-Follow-ups (added 2026-04-20)
 
