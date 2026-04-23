@@ -17,6 +17,23 @@ focused on the actual project scope.
 - The refresh run currently covers the most recently touched connector/circle families present in `artifacts/converted_images/reports` (`AC0811`, `AC0832`, `AC0835`, `AC0836`, `AC0870`, `AC0882`).
 - Continue to add new work items here before implementation starts, then mark them in-place when they are done.
 
+## Next execution tasks (added 2026-04-23)
+
+- [ ] N1: B2 vollständig abschließen: Vollbereichslauf `AC0800..AC0899` mit Exit-Code `0` nachweisen.
+  - 2026-04-23: Startkommando als Run S angestoßen; Log-Datei: `artifacts/converted_images/reports/AC0800_AC0899_batch_2026-04-23_runS.log`.
+  - 2026-04-23: Run S nach dokumentiertem Teilfortschritt (`AC0800_*`, Start `AC0811_L`) manuell mit Exit `143` beendet, um Aufgaben-/Run-Doku im selben Arbeitsgang zu aktualisieren.
+  - Abschlusskriterium: vollständiger Durchlauf bis `AC0899` ohne `timeout`-Abbruch und mit finalem Prozessstatus `0`.
+
+- [ ] N2: Stabilitätsnachweis für den Vollbereich dokumentieren.
+  - Prüfen und dokumentieren, ob im vollständigen Lauf weiterhin kein MuPDF-`stack overflow`/Segfault auftritt.
+  - Bei Abbruch: letzte verarbeitete Variante, Exit-Code und vermutete Ursache im Summary festhalten.
+
+- [ ] N3: Neue Laufzusammenfassung im Run-Format ergänzen.
+  - Neue Datei analog zu Run Q/R erstellen (Datum, Anlass, exakter Befehl, Log-Pfad, sichtbarer Fortschritt, Exit-Code, Kurzfazit).
+
+- [ ] N4: Rückpflege in diese Aufgabenliste nach Abschluss.
+  - Erledigte N-Aufgaben auf `[x]` setzen und mit kurzem Datum-/Ergebnisvermerk ergänzen.
+
 ## Test-Follow-ups (added 2026-04-20)
 
 - [x] T1: Fehlender Helper-Export in `src/iCCModules/imageCompositeConverterIterationPipeline.py` beheben.
