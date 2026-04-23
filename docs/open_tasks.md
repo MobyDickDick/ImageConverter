@@ -24,6 +24,7 @@ focused on the actual project scope.
   - 2026-04-23: Run S nach dokumentiertem Teilfortschritt (`AC0800_*`, Start `AC0811_L`) manuell mit Exit `143` beendet, um Aufgaben-/Run-Doku im selben Arbeitsgang zu aktualisieren.
   - 2026-04-23: Run T ohne `timeout` gestartet; dokumentierter Fortschritt bis `AC0811_M`, danach manuell per `pkill` beendet (kein finaler Exit-`0`).
   - 2026-04-23: Run U ohne `timeout` erneut gestartet; sichtbarer Fortschritt bis `AC0811_L`, danach ohne weiteren sichtbaren Fortschritt manuell per `pkill` beendet (kein finaler Exit-`0`).
+  - 2026-04-23: Run V erneut ohne `timeout` gestartet; sichtbarer Fortschritt bis `AC0800_S`, danach ohne weiteren sichtbaren Fortschritt manuell per `Ctrl-C` beendet (Shell-Exit `1`, kein finaler Exit-`0`).
   - Abschlusskriterium: vollständiger Durchlauf bis `AC0899` ohne `timeout`-Abbruch und mit finalem Prozessstatus `0`.
 
 - [ ] N2: Stabilitätsnachweis für den Vollbereich dokumentieren.
@@ -31,6 +32,7 @@ focused on the actual project scope.
   - Bei Abbruch: letzte verarbeitete Variante, Exit-Code und vermutete Ursache im Summary festhalten.
   - 2026-04-23: In Run T bis einschließlich `AC0811_M` kein MuPDF-`stack overflow`/Segfault; Abbruchursache und Status in `docs/ac0800_ac0899_runT_2026-04-23_summary.md` dokumentiert.
   - 2026-04-23: Run U bestätigt erneut keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Abbruchursache und Status in `docs/ac0800_ac0899_runU_2026-04-23_summary.md` dokumentiert.
+  - 2026-04-23: Run V zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0800_S`; Abbruchursache und Status in `docs/ac0800_ac0899_runV_2026-04-23_summary.md` dokumentiert.
 
 - [x] N3: Neue Laufzusammenfassung im Run-Format ergänzen.
   - Neue Datei analog zu Run Q/R erstellen (Datum, Anlass, exakter Befehl, Log-Pfad, sichtbarer Fortschritt, Exit-Code, Kurzfazit).
@@ -40,6 +42,7 @@ focused on the actual project scope.
   - Erledigte N-Aufgaben auf `[x]` setzen und mit kurzem Datum-/Ergebnisvermerk ergänzen.
   - 2026-04-23: Zwischenstand nach Run T nachgepflegt; N1/N2/N4 bleiben bis zum Exit-`0`-Vollbereichslauf offen.
   - 2026-04-23: Zwischenstand nach Run U nachgepflegt; N1/N2/N4 bleiben weiterhin offen.
+  - 2026-04-23: Zwischenstand nach Run V nachgepflegt; N1/N2/N4 bleiben weiterhin offen.
 
 ## Test-Follow-ups (added 2026-04-20)
 
