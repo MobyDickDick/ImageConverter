@@ -1,0 +1,40 @@
+{
+  "base": "AC0080",
+  "best_error": 15.520606060606061,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.004703213957759413,
+  "filename": "AC0080_M.jpg",
+  "h": 110,
+  "mean_delta2": 5603.96044921875,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "AC0080",
+        "source": "base_name",
+        "text": "Wie AC0020: zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben. Geometrische Variante: identisch zur Referenz."
+      }
+    ],
+    "documented_alias_refs": [
+      "AC0020"
+    ],
+    "elements": [
+      "SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch)"
+    ],
+    "label": "",
+    "mode": "dual_arrow_badge",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "AC0080_M"
+  },
+  "std_delta2": 17097.66015625,
+  "variant": "AC0080_M",
+  "w": 30
+}

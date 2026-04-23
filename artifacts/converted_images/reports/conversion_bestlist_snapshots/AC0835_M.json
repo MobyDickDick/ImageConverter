@@ -1,0 +1,43 @@
+{
+  "base": "AC0835",
+  "best_error": 32.2975,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.08074375,
+  "filename": "AC0835_M.jpg",
+  "h": 20,
+  "mean_delta2": 6839.00244140625,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "AC0835",
+        "source": "base_name",
+        "text": "Grauer Kreis mit grauem Rand und hellgrauem Hintergrund. Text im Kreis: \"VOC\". Kein Griff, keine Kelle und keine weiteren Anbauteile."
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [
+      "SEMANTIC: Kreis + Buchstabe VOC"
+    ],
+    "label": "VOC",
+    "mode": "semantic_badge",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {
+      "description_heuristic": [
+        "SEMANTIC: Kreis + Buchstabe VOC"
+      ],
+      "family_rule": []
+    },
+    "top_source_ref": null,
+    "variant_name": "AC0835_M"
+  },
+  "std_delta2": 10820.1640625,
+  "variant": "AC0835_M",
+  "w": 20
+}

@@ -1,0 +1,48 @@
+{
+  "base": "AC0834",
+  "best_error": 14.282666666666668,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.012695703703703704,
+  "filename": "AC0834_L.jpg",
+  "h": 25,
+  "mean_delta2": 3256.730712890625,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "AC0834",
+        "source": "base_name",
+        "text": "Wie AC080, jedoch Griff unten (als Kelle ausfeführt) Abweichung: nach links gedreht, Text immer noch horizontal"
+      }
+    ],
+    "documented_alias_refs": [
+      "AC080"
+    ],
+    "elements": [
+      "SEMANTIC: waagrechter Strich rechts vom Kreis",
+      "SEMANTIC: Kreis + Buchstabe"
+    ],
+    "label": "T",
+    "mode": "semantic_badge",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {
+      "description_heuristic": [
+        "SEMANTIC: Kreis + Buchstabe"
+      ],
+      "family_rule": [
+        "SEMANTIC: waagrechter Strich rechts vom Kreis"
+      ]
+    },
+    "top_source_ref": null,
+    "variant_name": "AC0834_L"
+  },
+  "std_delta2": 10061.13671875,
+  "variant": "AC0834_L",
+  "w": 45
+}
