@@ -23,12 +23,14 @@ focused on the actual project scope.
   - 2026-04-23: Startkommando als Run S angestoßen; Log-Datei: `artifacts/converted_images/reports/AC0800_AC0899_batch_2026-04-23_runS.log`.
   - 2026-04-23: Run S nach dokumentiertem Teilfortschritt (`AC0800_*`, Start `AC0811_L`) manuell mit Exit `143` beendet, um Aufgaben-/Run-Doku im selben Arbeitsgang zu aktualisieren.
   - 2026-04-23: Run T ohne `timeout` gestartet; dokumentierter Fortschritt bis `AC0811_M`, danach manuell per `pkill` beendet (kein finaler Exit-`0`).
+  - 2026-04-23: Run U ohne `timeout` erneut gestartet; sichtbarer Fortschritt bis `AC0811_L`, danach ohne weiteren sichtbaren Fortschritt manuell per `pkill` beendet (kein finaler Exit-`0`).
   - Abschlusskriterium: vollständiger Durchlauf bis `AC0899` ohne `timeout`-Abbruch und mit finalem Prozessstatus `0`.
 
 - [ ] N2: Stabilitätsnachweis für den Vollbereich dokumentieren.
   - Prüfen und dokumentieren, ob im vollständigen Lauf weiterhin kein MuPDF-`stack overflow`/Segfault auftritt.
   - Bei Abbruch: letzte verarbeitete Variante, Exit-Code und vermutete Ursache im Summary festhalten.
   - 2026-04-23: In Run T bis einschließlich `AC0811_M` kein MuPDF-`stack overflow`/Segfault; Abbruchursache und Status in `docs/ac0800_ac0899_runT_2026-04-23_summary.md` dokumentiert.
+  - 2026-04-23: Run U bestätigt erneut keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Abbruchursache und Status in `docs/ac0800_ac0899_runU_2026-04-23_summary.md` dokumentiert.
 
 - [x] N3: Neue Laufzusammenfassung im Run-Format ergänzen.
   - Neue Datei analog zu Run Q/R erstellen (Datum, Anlass, exakter Befehl, Log-Pfad, sichtbarer Fortschritt, Exit-Code, Kurzfazit).
@@ -37,6 +39,7 @@ focused on the actual project scope.
 - [ ] N4: Rückpflege in diese Aufgabenliste nach Abschluss.
   - Erledigte N-Aufgaben auf `[x]` setzen und mit kurzem Datum-/Ergebnisvermerk ergänzen.
   - 2026-04-23: Zwischenstand nach Run T nachgepflegt; N1/N2/N4 bleiben bis zum Exit-`0`-Vollbereichslauf offen.
+  - 2026-04-23: Zwischenstand nach Run U nachgepflegt; N1/N2/N4 bleiben weiterhin offen.
 
 ## Test-Follow-ups (added 2026-04-20)
 
