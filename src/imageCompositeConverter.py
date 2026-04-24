@@ -2865,8 +2865,11 @@ if hasattr(Action, "traceImageSegment") and not hasattr(Action, "trace_image_seg
     Action.trace_image_segment = staticmethod(Action.traceImageSegment)
 if hasattr(Action, "generateCompositeSvg") and not hasattr(Action, "generate_composite_svg"):
     Action.generate_composite_svg = staticmethod(Action.generateCompositeSvg)
-if "ScalarRng" in globals() and not hasattr(Action, "_ScalarRng"):
-    Action._ScalarRng = ScalarRng
+if not hasattr(Action, "_ScalarRng"):
+    if hasattr(scalar_optimization_helpers, "ScalarRng"):
+        Action._ScalarRng = scalar_optimization_helpers.ScalarRng
+    elif "ScalarRng" in globals():
+        Action._ScalarRng = ScalarRng
 if hasattr(GlobalParameterVector, "fromParams") and not hasattr(GlobalParameterVector, "from_params"):
     GlobalParameterVector.from_params = staticmethod(GlobalParameterVector.fromParams)
 if hasattr(GlobalParameterVector, "applyToParams") and not hasattr(GlobalParameterVector, "apply_to_params"):
