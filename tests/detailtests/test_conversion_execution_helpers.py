@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import binascii
 import struct
+import time
 from pathlib import Path
 
 from src.iCCModules import imageCompositeConverterConversionExecution as conversion_execution_helpers
@@ -265,6 +266,45 @@ def test_convert_one_impl_embedded_svg_uses_failed_prefix_independent_of_status(
     assert row is not None
     assert (svg_out / "Failed_AC0805_M.svg").exists()
     assert not (svg_out / "AC0805_M.svg").exists()
+
+
+def test_convert_one_impl_marks_timeout_as_batch_error(tmp_path: Path) -> None:
+    reports = tmp_path / "reports"
+    reports.mkdir()
+    batch_failures: list[dict[str, str]] = []
+
+    def _slow_pipeline(*_args, **_kwargs):
+        time.sleep(0.2)
+        return ("AC0801_S", "desc", {"mode": "semantic_badge"}, 1, 1.0)
+
+    row, failed = conversion_execution_helpers.convertOneImpl(
+        filename="AC0801_S.jpg",
+        folder_path=str(tmp_path),
+        csv_path="descriptions.csv",
+        iteration_budget=3,
+        badge_rounds=5,
+        svg_out_dir=str(tmp_path),
+        diff_out_dir=str(tmp_path),
+        reports_out_dir=str(reports),
+        debug_ac0811_dir=None,
+        debug_element_diff_dir=None,
+        run_iteration_pipeline_fn=_slow_pipeline,
+        read_validation_log_details_fn=lambda _path: {},
+        render_svg_to_numpy_fn=lambda _svg, _w, _h: object(),
+        calculate_delta2_stats_fn=lambda _img, _rendered: (0.0, 0.0),
+        get_base_name_from_file_fn=lambda stem: stem,
+        cv2_module=_Cv2Stub(None),
+        render_embedded_raster_svg_fn=lambda _path: "<svg/>",
+        append_batch_failure_fn=batch_failures.append,
+        run_timeout_sec=0.05,
+        print_fn=lambda _msg: None,
+    )
+
+    assert row is None
+    assert failed is True
+    assert batch_failures
+    assert batch_failures[0]["status"] == "batch_error"
+    assert batch_failures[0]["reason"] == "TimeoutError"
 
 
 def test_convert_one_impl_skipped_status_with_result_marks_embedded_svg_as_failed(tmp_path: Path) -> None:
