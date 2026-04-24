@@ -183,7 +183,7 @@ def fitAc0814ParamsFromImageImpl(
         default_cx = float(defaults.get("cx", float(w) / 2.0))
         default_cy = float(defaults.get("cy", float(h) / 2.0))
         params["cx"] = default_cx
-        params["cy"] = float(clip_scalar_fn(cy, default_cy - 0.5, default_cy + 0.5))
+        params["cy"] = float(default_cy + 0.5)
         params["lock_circle_cx"] = True
         params["lock_circle_cy"] = True
         params["lock_arm_center_to_circle"] = True
