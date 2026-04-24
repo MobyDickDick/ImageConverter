@@ -4,6 +4,10 @@ from __future__ import annotations
 
 import dataclasses
 import math
+from collections import OrderedDict
+
+_CROSS_ROUND_EVAL_CACHE_MAX = 4096
+_CROSS_ROUND_EVAL_CACHE: OrderedDict[tuple[int, tuple], float] = OrderedDict()
 
 
 def _freeze_eval_value(value):
@@ -115,12 +119,23 @@ def optimizeGlobalParameterVectorSamplingImpl(
                     max(0.0, min(float(w) - stem_w, float(probe.get("cx", 0.0)) - (stem_w / 2.0)))
                 )
         cache_key = _probe_cache_key(probe)
+        cross_round_key = (id(img_orig), cache_key)
+        cross_round_cached = _CROSS_ROUND_EVAL_CACHE.get(cross_round_key)
+        if cross_round_cached is not None:
+            eval_hits += 1
+            _CROSS_ROUND_EVAL_CACHE.move_to_end(cross_round_key)
+            eval_cache[cache_key] = cross_round_cached
+            return cross_round_cached
         cached = eval_cache.get(cache_key)
         if cached is not None:
             eval_hits += 1
             return cached
         err = float(full_badge_error_for_params_fn(img_orig, probe))
         eval_cache[cache_key] = err
+        _CROSS_ROUND_EVAL_CACHE[cross_round_key] = err
+        _CROSS_ROUND_EVAL_CACHE.move_to_end(cross_round_key)
+        if len(_CROSS_ROUND_EVAL_CACHE) > _CROSS_ROUND_EVAL_CACHE_MAX:
+            _CROSS_ROUND_EVAL_CACHE.popitem(last=False)
         return err
 
     def withinHardBounds(candidate) -> tuple[bool, str]:
