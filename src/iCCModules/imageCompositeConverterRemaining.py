@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import importlib
+import os
 from pathlib import Path
 
 from src.iCCModules import imageCompositeConverterDependencies as dependency_helpers
@@ -1017,6 +1018,7 @@ def convertRange(
     batch_failures: list[dict[str, str]] = []
     stop_after_failure = False
     existing_donor_rows = _loadExistingConversionRows(out_root, folder_path)
+    conversion_timeout_sec = max(0.0, float(os.environ.get("ICC_CONVERSION_TIMEOUT_SEC", "0") or "0"))
 
     def _convertOne(filename: str, iteration_budget: int, badge_rounds: int) -> tuple[dict[str, object] | None, bool]:
         return conversion_execution_helpers.convertOneImpl(
@@ -1038,6 +1040,7 @@ def convertRange(
             cv2_module=cv2,
             render_embedded_raster_svg_fn=_renderEmbeddedRasterSvg,
             append_batch_failure_fn=batch_failures.append,
+            run_timeout_sec=conversion_timeout_sec,
             print_fn=print,
         )
 

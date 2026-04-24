@@ -4,12 +4,41 @@ from __future__ import annotations
 
 import os
 import re
+import signal
+from contextlib import contextmanager
 
 _ONE_BY_ONE_TRANSPARENT_PNG = (
     b"\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x00\x01\x00\x00\x00\x01"
     b"\x08\x06\x00\x00\x00\x1f\x15\xc4\x89\x00\x00\x00\x0bIDATx\x9cc`\x00\x02\x00\x00\x05\x00\x01"
     b"z^\xab?\x00\x00\x00\x00IEND\xaeB`\x82"
 )
+
+
+@contextmanager
+def _wallClockTimeout(timeout_sec: float | int | None):
+    """Raise ``TimeoutError`` when a block exceeds ``timeout_sec`` on Unix hosts."""
+    if timeout_sec is None:
+        yield
+        return
+    timeout_value = float(timeout_sec)
+    if timeout_value <= 0:
+        yield
+        return
+    if not hasattr(signal, "setitimer"):
+        yield
+        return
+    previous_handler = signal.getsignal(signal.SIGALRM)
+
+    def _raise_timeout(_signum, _frame):  # pragma: no cover - signal callback.
+        raise TimeoutError(f"Conversion exceeded wall-clock timeout ({timeout_value:.1f}s).")
+
+    signal.signal(signal.SIGALRM, _raise_timeout)
+    signal.setitimer(signal.ITIMER_REAL, timeout_value)
+    try:
+        yield
+    finally:
+        signal.setitimer(signal.ITIMER_REAL, 0.0)
+        signal.signal(signal.SIGALRM, previous_handler)
 
 
 def _ensureOutputArtifacts(
@@ -161,6 +190,7 @@ def convertOneImpl(
     cv2_module,
     render_embedded_raster_svg_fn,
     append_batch_failure_fn,
+    run_timeout_sec: float | int | None = None,
     print_fn=print,
 ) -> tuple[dict[str, object] | None, bool]:
     image_path = os.path.join(folder_path, filename)
@@ -169,17 +199,18 @@ def convertOneImpl(
     diff_path = os.path.join(diff_out_dir, f"{base}_diff.png")
     log_file = os.path.join(reports_out_dir, f"{base}_element_validation.log")
     try:
-        res = run_iteration_pipeline_fn(
-            image_path,
-            csv_path,
-            max(1, int(iteration_budget)),
-            svg_out_dir,
-            diff_out_dir,
-            reports_out_dir,
-            debug_ac0811_dir,
-            debug_element_diff_dir,
-            badge_validation_rounds=max(1, int(badge_rounds)),
-        )
+        with _wallClockTimeout(run_timeout_sec):
+            res = run_iteration_pipeline_fn(
+                image_path,
+                csv_path,
+                max(1, int(iteration_budget)),
+                svg_out_dir,
+                diff_out_dir,
+                reports_out_dir,
+                debug_ac0811_dir,
+                debug_element_diff_dir,
+                badge_validation_rounds=max(1, int(badge_rounds)),
+            )
     except Exception as exc:  # noqa: BLE001 - keeps batch execution resilient per image.
         failed_svg_path = _writeFailedEmbeddedSvgArtifact(
             svg_out_dir=svg_out_dir,
