@@ -33,6 +33,7 @@ focused on the actual project scope.
   - 2026-04-24: Run AB mit `timeout 300` gestartet; sichtbarer Fortschritt bis `AC0811_L`, dann Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runAB_2026-04-24_summary.md`).
   - 2026-04-24: Run AC mit `timeout 300` gestartet; sichtbarer Fortschritt bis `AC0811_L`, dann Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runAC_2026-04-24_summary.md`).
   - 2026-04-24: Run AD ohne `timeout` gestartet; sichtbarer Fortschritt bis `AC0811_L`, danach manuell per `Ctrl-C` beendet (Shell-Exit `1`, kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runAD_2026-04-24_summary.md`).
+  - 2026-04-24: Run AE ohne `timeout` gestartet; sichtbarer Fortschritt bis `AC0811_S`, danach manuell per `Ctrl-C` beendet (Shell-Exit `1`, kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runAE_2026-04-24_summary.md`).
   - Abschlusskriterium: vollständiger Durchlauf bis `AC0899` ohne `timeout`-Abbruch und mit finalem Prozessstatus `0`.
 
 - [ ] N2: Stabilitätsnachweis für den Vollbereich dokumentieren.
@@ -49,6 +50,7 @@ focused on the actual project scope.
   - 2026-04-24: Run AB zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Timeout-Status in `docs/ac0800_ac0899_runAB_2026-04-24_summary.md` dokumentiert.
   - 2026-04-24: Run AC zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Timeout-Status in `docs/ac0800_ac0899_runAC_2026-04-24_summary.md` dokumentiert.
   - 2026-04-24: Run AD zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; manueller Abbruch/Status in `docs/ac0800_ac0899_runAD_2026-04-24_summary.md` dokumentiert.
+  - 2026-04-24: Run AE zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_S`; manueller Abbruch/Status in `docs/ac0800_ac0899_runAE_2026-04-24_summary.md` dokumentiert.
 
 - [x] N3: Neue Laufzusammenfassung im Run-Format ergänzen.
   - Neue Datei analog zu Run Q/R erstellen (Datum, Anlass, exakter Befehl, Log-Pfad, sichtbarer Fortschritt, Exit-Code, Kurzfazit).
@@ -67,6 +69,7 @@ focused on the actual project scope.
   - 2026-04-24: Zwischenstand nach Run AB nachgepflegt; N1/N2/N4 bleiben weiterhin offen (Timeout-Exit `124`, weiterhin kein Exit-`0`).
   - 2026-04-24: Zwischenstand nach Run AC nachgepflegt; N1/N2/N4 bleiben weiterhin offen (Timeout-Exit `124`, weiterhin kein Exit-`0`).
   - 2026-04-24: Zwischenstand nach Run AD nachgepflegt; N1/N2/N4 bleiben weiterhin offen (manueller Abbruch mit Shell-Exit `1`, weiterhin kein Exit-`0`).
+  - 2026-04-24: Zwischenstand nach Run AE nachgepflegt; N1/N2/N4 bleiben weiterhin offen (manueller Abbruch mit Shell-Exit `1`, weiterhin kein Exit-`0`).
 
 ## Test-Follow-ups (added 2026-04-20)
 
