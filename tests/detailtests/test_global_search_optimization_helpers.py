@@ -254,3 +254,59 @@ def test_global_search_caches_duplicate_evaluations() -> None:
     cache_hits = int(telemetry_line.split("cache_hits=")[1].split(",")[0])
     assert cache_hits > 0
     assert render_calls < requests
+
+
+def test_global_search_reuses_cache_across_invocations_for_same_image() -> None:
+    helpers._CROSS_ROUND_EVAL_CACHE.clear()
+    img = _Image(10, 10)
+    params = {
+        "enable_global_search_mode": True,
+        "cx": 5.0,
+        "cy": 5.0,
+        "r": 3.0,
+    }
+    render_calls = 0
+
+    def _full_badge_error(_img, _probe):
+        nonlocal render_calls
+        render_calls += 1
+        return 1.0
+
+    helpers.optimizeGlobalParameterVectorSamplingImpl(
+        img,
+        dict(params),
+        [],
+        rounds=1,
+        samples_per_round=5,
+        global_parameter_vector_cls=_Vector,
+        global_parameter_vector_bounds_fn=_bounds,
+        clip_scalar_fn=lambda value, low, high: max(low, min(high, value)),
+        snap_half_fn=lambda value: round(value * 2.0) / 2.0,
+        make_rng_fn=lambda _seed: _Rng(),
+        reanchor_arm_to_circle_edge_fn=lambda _probe, _r: None,
+        full_badge_error_for_params_fn=_full_badge_error,
+        log_global_parameter_vector_fn=lambda _logs, _params, _w, _h, label: None,
+        stochastic_run_seed=0,
+        stochastic_seed_offset=0,
+    )
+    calls_after_first_run = render_calls
+    helpers.optimizeGlobalParameterVectorSamplingImpl(
+        img,
+        dict(params),
+        [],
+        rounds=1,
+        samples_per_round=5,
+        global_parameter_vector_cls=_Vector,
+        global_parameter_vector_bounds_fn=_bounds,
+        clip_scalar_fn=lambda value, low, high: max(low, min(high, value)),
+        snap_half_fn=lambda value: round(value * 2.0) / 2.0,
+        make_rng_fn=lambda _seed: _Rng(),
+        reanchor_arm_to_circle_edge_fn=lambda _probe, _r: None,
+        full_badge_error_for_params_fn=_full_badge_error,
+        log_global_parameter_vector_fn=lambda _logs, _params, _w, _h, label: None,
+        stochastic_run_seed=0,
+        stochastic_seed_offset=0,
+    )
+
+    assert calls_after_first_run > 1
+    assert render_calls == calls_after_first_run
