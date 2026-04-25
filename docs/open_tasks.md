@@ -151,6 +151,7 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
   - 2026-04-24: Volltestlauf `pytest` (801 Tests) gestartet; im Verlauf ab ~78% mehrere Fehlschläge in `tests/test_image_composite_converter.py` sichtbar (`F...`), daher kein vollständig erfolgreicher Gesamtlauf.
   - 2026-04-24: Separater Lauf der übrigen Top-Level-Dateien (`tests/test_image_composite_converter_element_decomposition.py`, `tests/test_image_composite_converter_naming.py`, `tests/test_retry_failed_image_conversions.py`) ist vollständig grün (`7 passed`).
   - Nächster Schritt: Fehlschläge aus `tests/test_image_composite_converter.py` einzeln isolieren (z. B. `-x`/`--lf`) und pro Root-Cause als eigene Unteraufgaben dokumentieren.
+  - 2026-04-25: Erneute Isolation mit `python -m pytest tests/test_image_composite_converter.py -x`; erster aktueller Abbruch bei `test_make_badge_params_keeps_ac0838_m_circle_near_full_width_for_voc_layout` (`params["cy"] == 23.0`, erwartet `>= 24.0`).
   - [x] T5.1: Extent-Bracketing-Log für Line-Elemente in Badge-Validierung wiederherstellen oder Testerwartung aktualisieren.
     - Fehlgeschlagener Test: `tests/test_image_composite_converter.py::test_validate_badge_logs_extent_bracketing_for_line_elements`
     - Aktueller Fehler: Erwartete Logzeile `"arm: Längen-Bracketing"` fehlt in `Action.validate_badge_by_elements(..., max_rounds=1)`; `assert any(...)` schlägt fehl.
@@ -174,6 +175,32 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
       fälschlich auf den Circle-Top zurückgesetzt statt den vorhandenen Connector-Span robust zu erhalten.
     - 2026-04-25: AC0223-Head-Overlay wieder mit explizitem `<polygon ...>`-Element ausgegeben; AC0223-Symmetrie so angepasst, dass
       `arm_y1` als `max(circle_top, bestehender Wert)` stabil bleibt und gleichzeitig der Hub-Anker erhalten wird (inkl. grünem Detailtest für den Hub-Connector).
+  - [ ] T5.6: AC0838_M-VOC-Layout stabilisieren (`cy`-Unterkante der Vollbreiten-Kreislage).
+    - Fehlgeschlagener Test: `tests/test_image_composite_converter.py::test_make_badge_params_keeps_ac0838_m_circle_near_full_width_for_voc_layout`
+    - Aktueller Fehler: Nach `Action.validateBadgeByElements(..., max_rounds=6)` fällt `params["cy"]` auf `23.0`; erwartet wird `>= 24.0`, damit der dominante Kreis nicht zu weit nach oben driftet.
+    - Nächster Schritt: Ursachenanalyse der `AC0838_M`-spezifischen Quantisierungs-/Validation-Pfade und gezielter Fix mit grünem Regressionstest.
+
+- [ ] T6: Für jede aktuell unzureichende Konvertierung (`status=conversion_failed`) eine dedizierte Nacharbeitsaufgabe führen.
+  - Quelle: `artifacts/converted_images/reports/*_element_validation.log` (Snapshot 2026-04-25, 19 Varianten mit `status=conversion_failed`).
+  - [ ] T6.1: `AC0840_L` – Root-Cause isolieren und Fixstrategie dokumentieren.
+  - [ ] T6.2: `AC0840_S` – Root-Cause isolieren und Fixstrategie dokumentieren.
+  - [ ] T6.3: `AC0841_L` – Root-Cause isolieren und Fixstrategie dokumentieren.
+  - [ ] T6.4: `AC0842_L` – Root-Cause isolieren und Fixstrategie dokumentieren.
+  - [ ] T6.5: `AC0842_M` – Root-Cause isolieren und Fixstrategie dokumentieren.
+  - [ ] T6.6: `AC0843_M` – Root-Cause isolieren und Fixstrategie dokumentieren.
+  - [ ] T6.7: `AC0843_S` – Root-Cause isolieren und Fixstrategie dokumentieren.
+  - [ ] T6.8: `AC0850_L` – Root-Cause isolieren und Fixstrategie dokumentieren.
+  - [ ] T6.9: `AC0861_L` – Root-Cause isolieren und Fixstrategie dokumentieren.
+  - [ ] T6.10: `AC0861_M` – Root-Cause isolieren und Fixstrategie dokumentieren.
+  - [ ] T6.11: `AC0861_S` – Root-Cause isolieren und Fixstrategie dokumentieren.
+  - [ ] T6.12: `AC0862_L` – Root-Cause isolieren und Fixstrategie dokumentieren.
+  - [ ] T6.13: `AC0862_M` – Root-Cause isolieren und Fixstrategie dokumentieren.
+  - [ ] T6.14: `AC0863_M` – Root-Cause isolieren und Fixstrategie dokumentieren.
+  - [ ] T6.15: `AC0864_L` – Root-Cause isolieren und Fixstrategie dokumentieren.
+  - [ ] T6.16: `AC0884_L` – Root-Cause isolieren und Fixstrategie dokumentieren.
+  - [ ] T6.17: `AC0890_L` – Root-Cause isolieren und Fixstrategie dokumentieren.
+  - [ ] T6.18: `AC0890_M` – Root-Cause isolieren und Fixstrategie dokumentieren.
+  - [ ] T6.19: `AC0890_S` – Root-Cause isolieren und Fixstrategie dokumentieren.
 
 ## Next tasks (added 2026-03-28)
 
