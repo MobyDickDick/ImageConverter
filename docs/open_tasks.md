@@ -184,7 +184,7 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
     - Ziel: Für jeden aktiven Geometrieparameter genau eine dedizierte Optimierungsaufgabe mit messbarem Kriterium pflegen ("einen Parameter variieren").
     - Aufgabenliste (in Reihenfolge):
       - [x] T5.7a: `cx`/`cy`/`r` (Kreismittelpunkt + Radius) im Global-Search als eigenständige Suchdimensionen bestätigen und dokumentieren.
-      - [ ] T5.7b: `arm_x1` variieren (Ankerpunkt am Arm) und Einfluss auf Elementfehler messen.
+      - [x] T5.7b: `arm_x1` variieren (Ankerpunkt am Arm) und Einfluss auf Elementfehler messen.
       - [ ] T5.7c: `arm_y1` variieren (vertikale Arm-Ankerlage) und Einfluss auf Elementfehler messen.
       - [ ] T5.7d: `arm_x2` variieren (Arm-Endpunkt X) und Einfluss auf Elementfehler messen.
       - [ ] T5.7e: `arm_y2` variieren (Arm-Endpunkt Y) und Einfluss auf Elementfehler messen.
@@ -197,6 +197,21 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
       - [ ] T5.7l: `text_y` variieren (Textanker Y) und Einfluss auf Text-/Gesamtfehler messen.
       - [ ] T5.7m: `text_scale` variieren (Textmaßstab) und Einfluss auf Text-/Gesamtfehler messen.
     - 2026-04-25: T5.7a umgesetzt: Global-Search berücksichtigt nun alle im Vektor verfügbaren und freigegebenen Parameter dimensionweise statt nur einer Teilmenge.
+    - 2026-04-25: T5.7b umgesetzt: Neuer Detailtest zeigt deterministisch, dass `arm_x1` als aktive Suchdimension den Elementfehler reduziert und als Delta (`arm_x1 1.000->7.000`) im Global-Search-Log protokolliert wird.
+  - [ ] T5.8: Aktuelle Full-Pytest-Abbrüche aus `tests/test_image_composite_converter.py` gezielt isolieren und beheben.
+    - 2026-04-25: Lauf `python -m pytest tests/test_image_composite_converter.py --maxfail=3 -q` endet mit `3 failed, 283 passed, 1 skipped`; die folgenden Unteraufgaben wurden daraus abgeleitet.
+    - [ ] T5.8a: Interaktive Bereichsabfrage in `main()` trotz Non-TTY-Testkontext korrekt anstoßen oder Teststrategie klar trennen.
+      - Fehlgeschlagener Test: `tests/test_image_composite_converter.py::test_main_prompts_for_range_when_start_and_end_are_missing`
+      - Beobachtung: `prompts` bleibt leer; stattdessen wird im Testlauf direkt der Non-TTY-Fallback-Pfad mit `"(Anfang)".."(Ende)"` verwendet.
+      - Nächster Schritt: Entscheidungslogik für interaktive Eingabe (`input(...)`) vs. Non-TTY-Fallback so eingrenzen, dass der explizit erwartete Prompt-Pfad unter kontrollierten Tests wieder reproduzierbar ist.
+    - [ ] T5.8b: Legacy-Fallbackpfad von `convert_image(...)` bzgl. Rückgabepfad/Dateiname konsistent festlegen.
+      - Fehlgeschlagener Test: `tests/test_image_composite_converter.py::test_convert_image_fallback_writes_embedded_svg`
+      - Beobachtung: Rückgabe ist aktuell `sample.svg`; Test erwartet weiterhin `Failed_sample.svg`.
+      - Nächster Schritt: Gewünschtes Contract-Verhalten final entscheiden (Originalpfad vs. `Failed_`-Pfad), Implementation + Tests auf dieselbe Regel bringen und in `docs/` kurz dokumentieren.
+    - [ ] T5.8c: Donor-Transfer-Aufrufkette in `convertRange(...)` wieder deterministisch triggern.
+      - Fehlgeschlagener Test: `tests/test_image_composite_converter.py::test_convert_range_uses_existing_conversion_rows_as_template_donors`
+      - Beobachtung: `_tryTemplateTransfer(...)` wird im aktuellen Pfad nicht aufgerufen (`calls == []`), obwohl bestehende Donor-`conversion_rows` bereitgestellt werden.
+      - Nächster Schritt: Guard-/Short-Circuit-Bedingungen in der Donor-Selektion prüfen und gezielt absichern, dass bei vorhandenem Donor-Snapshot der Template-Transfer-Pfad tatsächlich ausgeführt wird.
 
 - [ ] T6: Für jede aktuell unzureichende Konvertierung (`status=conversion_failed`) eine dedizierte Nacharbeitsaufgabe führen.
   - Quelle: `artifacts/converted_images/reports/*_element_validation.log` (Snapshot 2026-04-25, 19 Varianten mit `status=conversion_failed`).
