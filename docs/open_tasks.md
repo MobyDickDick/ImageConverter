@@ -192,7 +192,7 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
       - [x] T5.7g: `stem_x` variieren (Stiel-Position X) und Einfluss auf Elementfehler messen.
       - [x] T5.7h: `stem_top` variieren (oberer Stielpunkt) und Einfluss auf Elementfehler messen.
       - [x] T5.7i: `stem_bottom` variieren (unterer Stielpunkt) und Einfluss auf Elementfehler messen.
-      - [ ] T5.7j: `stem_width` variieren (Stielbreite) und Einfluss auf Elementfehler messen.
+      - [x] T5.7j: `stem_width` variieren (Stielbreite) und Einfluss auf Elementfehler messen.
       - [ ] T5.7k: `text_x` variieren (Textanker X) und Einfluss auf Text-/Gesamtfehler messen.
       - [ ] T5.7l: `text_y` variieren (Textanker Y) und Einfluss auf Text-/Gesamtfehler messen.
       - [ ] T5.7m: `text_scale` variieren (Textmaßstab) und Einfluss auf Text-/Gesamtfehler messen.
@@ -205,6 +205,7 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
     - 2026-04-25: T5.7g umgesetzt: Neuer Detailtest zeigt deterministisch, dass `stem_x` als aktive Suchdimension den Elementfehler reduziert und als Delta (`stem_x 1.000->7.000`) im Global-Search-Log protokolliert wird.
     - 2026-04-25: T5.7h umgesetzt: `stem_top` wird in der Global-Search-Evaluierung nicht mehr pauschal auf `cy+r` überschrieben, sobald `stem_top` selbst aktive Suchdimension ist; neuer Detailtest bestätigt die Verbesserung inkl. Delta-Log (`stem_top 1.000->8.000`).
     - 2026-04-25: T5.7i umgesetzt: Neuer Detailtest bestätigt deterministisch, dass `stem_bottom` als aktive Suchdimension den Elementfehler reduziert und als Delta (`stem_bottom 1.000->8.000`) im Global-Search-Log protokolliert wird.
+    - 2026-04-25: T5.7j umgesetzt: Neuer Detailtest bestätigt deterministisch, dass `stem_width` als aktive Suchdimension den Elementfehler reduziert und als Delta (`stem_width 1.000->8.000`) im Global-Search-Log protokolliert wird.
   - [ ] T5.8: Aktuelle Full-Pytest-Abbrüche aus `tests/test_image_composite_converter.py` gezielt isolieren und beheben.
     - 2026-04-25: Lauf `python -m pytest tests/test_image_composite_converter.py --maxfail=3 -q` endet mit `3 failed, 283 passed, 1 skipped`; die folgenden Unteraufgaben wurden daraus abgeleitet.
     - [ ] T5.8a: Interaktive Bereichsabfrage in `main()` trotz Non-TTY-Testkontext korrekt anstoßen oder Teststrategie klar trennen.
