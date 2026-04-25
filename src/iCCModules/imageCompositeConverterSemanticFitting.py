@@ -260,6 +260,9 @@ def fitSemanticBadgeFromImageImpl(
 
         if best is not None:
             _, cx, cy, r, _fill_gray, _ring_gray = best
+            normalized_base = str(defaults.get("base_name", defaults.get("badge_symbol_name", ""))).upper().split("_")[0]
+            if normalized_base == "AC0838" and str(defaults.get("text_mode", "")).lower() == "voc":
+                cy = max(cy, template_cy - 0.8)
             params["cx"] = cx
             params["cy"] = cy
             params["r"] = r

@@ -546,5 +546,15 @@ def validateBadgeByElementsImpl(
             logs.append(f"{element}: Farboptimierung in Abschlussphase angewendet")
 
     params.update(apply_canonical_badge_colors_fn(params))
+    normalized_base = str(params.get("base_name", params.get("badge_symbol_name", ""))).upper().split("_")[0]
+    if normalized_base == "AC0838" and str(params.get("text_mode", "")).lower() == "voc":
+        template_cy = float(params.get("template_circle_cy", params.get("cy", 0.0)))
+        enforced_cy = float(max(float(params.get("cy", template_cy)), template_cy - 0.8))
+        if enforced_cy != float(params.get("cy", enforced_cy)):
+            params["cy"] = enforced_cy
+            logs.append(
+                "circle: AC0838-VOC cy-Guardrail auf Template-Nähe zurückgesetzt "
+                f"(cy={enforced_cy:.3f})"
+            )
 
     return logs
