@@ -186,7 +186,7 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
       - [x] T5.7a: `cx`/`cy`/`r` (Kreismittelpunkt + Radius) im Global-Search als eigenständige Suchdimensionen bestätigen und dokumentieren.
       - [x] T5.7b: `arm_x1` variieren (Ankerpunkt am Arm) und Einfluss auf Elementfehler messen.
       - [x] T5.7c: `arm_y1` variieren (vertikale Arm-Ankerlage) und Einfluss auf Elementfehler messen.
-      - [ ] T5.7d: `arm_x2` variieren (Arm-Endpunkt X) und Einfluss auf Elementfehler messen.
+      - [x] T5.7d: `arm_x2` variieren (Arm-Endpunkt X) und Einfluss auf Elementfehler messen.
       - [ ] T5.7e: `arm_y2` variieren (Arm-Endpunkt Y) und Einfluss auf Elementfehler messen.
       - [ ] T5.7f: `arm_stroke` variieren (Arm-/Randbreite) und Einfluss auf Elementfehler messen.
       - [ ] T5.7g: `stem_x` variieren (Stiel-Position X) und Einfluss auf Elementfehler messen.
@@ -199,6 +199,7 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
     - 2026-04-25: T5.7a umgesetzt: Global-Search berücksichtigt nun alle im Vektor verfügbaren und freigegebenen Parameter dimensionweise statt nur einer Teilmenge.
     - 2026-04-25: T5.7b umgesetzt: Neuer Detailtest zeigt deterministisch, dass `arm_x1` als aktive Suchdimension den Elementfehler reduziert und als Delta (`arm_x1 1.000->7.000`) im Global-Search-Log protokolliert wird.
     - 2026-04-25: T5.7c umgesetzt: Neuer Detailtest zeigt deterministisch, dass `arm_y1` als aktive Suchdimension den Elementfehler reduziert und als Delta (`arm_y1 1.000->8.000`) im Global-Search-Log protokolliert wird.
+    - 2026-04-25: T5.7d umgesetzt: Neuer Detailtest zeigt deterministisch, dass `arm_x2` als aktive Suchdimension den Elementfehler reduziert und als Delta (`arm_x2 1.000->9.000`) im Global-Search-Log protokolliert wird.
   - [ ] T5.8: Aktuelle Full-Pytest-Abbrüche aus `tests/test_image_composite_converter.py` gezielt isolieren und beheben.
     - 2026-04-25: Lauf `python -m pytest tests/test_image_composite_converter.py --maxfail=3 -q` endet mit `3 failed, 283 passed, 1 skipped`; die folgenden Unteraufgaben wurden daraus abgeleitet.
     - [ ] T5.8a: Interaktive Bereichsabfrage in `main()` trotz Non-TTY-Testkontext korrekt anstoßen oder Teststrategie klar trennen.
