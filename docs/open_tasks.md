@@ -156,6 +156,13 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
     - Fehlgeschlagener Test: `tests/test_image_composite_converter.py::test_make_badge_params_supports_ac0223_valve_head`
     - Aktueller Fehler: `Action.make_badge_params(..., "AC0223")` liefert derzeit `arm_color="#606060"` statt erwarteter `"#136fad"`.
     - 2026-04-25: AC0223-Defaults/Fallbacks auf `arm_color="#136fad"` vereinheitlicht (Semantik-Defaults + SVG-Style-Restore); zugehörige Detailtests auf die erwartete Armfarbe aktualisiert.
+  - [x] T5.5: AC0223-Regressionen bei Valve-Head-SVG und Stem-Quantisierung stabilisieren.
+    - Fehlgeschlagene Tests: `tests/test_image_composite_converter.py::test_generate_badge_svg_renders_ac0223_valve_head_gradient`,
+      `tests/test_image_composite_converter.py::test_quantize_badge_params_keeps_ac0223_top_stem_span`.
+    - Aktuelle Fehler: `<polygon>`-Marker fehlte im AC0223-SVG; zusätzlich wurde `arm_y1` in der AC0223-Symmetrie nach der Quantisierung
+      fälschlich auf den Circle-Top zurückgesetzt statt den vorhandenen Connector-Span robust zu erhalten.
+    - 2026-04-25: AC0223-Head-Overlay wieder mit explizitem `<polygon ...>`-Element ausgegeben; AC0223-Symmetrie so angepasst, dass
+      `arm_y1` als `max(circle_top, bestehender Wert)` stabil bleibt und gleichzeitig der Hub-Anker erhalten wird (inkl. grünem Detailtest für den Hub-Connector).
 
 ## Next tasks (added 2026-03-28)
 
