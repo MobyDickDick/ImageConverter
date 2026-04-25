@@ -179,6 +179,23 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
     - Fehlgeschlagener Test: `tests/test_image_composite_converter.py::test_make_badge_params_keeps_ac0838_m_circle_near_full_width_for_voc_layout`
     - Aktueller Fehler: Nach `Action.validateBadgeByElements(..., max_rounds=6)` fällt `params["cy"]` auf `23.0`; erwartet wird `>= 24.0`, damit der dominante Kreis nicht zu weit nach oben driftet.
     - Nächster Schritt: Ursachenanalyse der `AC0838_M`-spezifischen Quantisierungs-/Validation-Pfade und gezielter Fix mit grünem Regressionstest.
+  - [ ] T5.7: Parameterweise Optimierungsaufgaben für alle Geometrieparameter führen und sukzessive abarbeiten.
+    - Ziel: Für jeden aktiven Geometrieparameter genau eine dedizierte Optimierungsaufgabe mit messbarem Kriterium pflegen ("einen Parameter variieren").
+    - Aufgabenliste (in Reihenfolge):
+      - [x] T5.7a: `cx`/`cy`/`r` (Kreismittelpunkt + Radius) im Global-Search als eigenständige Suchdimensionen bestätigen und dokumentieren.
+      - [ ] T5.7b: `arm_x1` variieren (Ankerpunkt am Arm) und Einfluss auf Elementfehler messen.
+      - [ ] T5.7c: `arm_y1` variieren (vertikale Arm-Ankerlage) und Einfluss auf Elementfehler messen.
+      - [ ] T5.7d: `arm_x2` variieren (Arm-Endpunkt X) und Einfluss auf Elementfehler messen.
+      - [ ] T5.7e: `arm_y2` variieren (Arm-Endpunkt Y) und Einfluss auf Elementfehler messen.
+      - [ ] T5.7f: `arm_stroke` variieren (Arm-/Randbreite) und Einfluss auf Elementfehler messen.
+      - [ ] T5.7g: `stem_x` variieren (Stiel-Position X) und Einfluss auf Elementfehler messen.
+      - [ ] T5.7h: `stem_top` variieren (oberer Stielpunkt) und Einfluss auf Elementfehler messen.
+      - [ ] T5.7i: `stem_bottom` variieren (unterer Stielpunkt) und Einfluss auf Elementfehler messen.
+      - [ ] T5.7j: `stem_width` variieren (Stielbreite) und Einfluss auf Elementfehler messen.
+      - [ ] T5.7k: `text_x` variieren (Textanker X) und Einfluss auf Text-/Gesamtfehler messen.
+      - [ ] T5.7l: `text_y` variieren (Textanker Y) und Einfluss auf Text-/Gesamtfehler messen.
+      - [ ] T5.7m: `text_scale` variieren (Textmaßstab) und Einfluss auf Text-/Gesamtfehler messen.
+    - 2026-04-25: T5.7a umgesetzt: Global-Search berücksichtigt nun alle im Vektor verfügbaren und freigegebenen Parameter dimensionweise statt nur einer Teilmenge.
 
 - [ ] T6: Für jede aktuell unzureichende Konvertierung (`status=conversion_failed`) eine dedizierte Nacharbeitsaufgabe führen.
   - Quelle: `artifacts/converted_images/reports/*_element_validation.log` (Snapshot 2026-04-25, 19 Varianten mit `status=conversion_failed`).
