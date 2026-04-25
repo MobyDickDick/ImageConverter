@@ -110,6 +110,17 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
   - 2026-04-24: Zwischenstand nach Run AM nachgepflegt; N1/N2/N4 bleiben weiterhin offen (Prozess per `pkill` signalbedingt beendet, weiterhin kein Exit-`0`).
   - 2026-04-25: Zwischenstand nach Run AN nachgepflegt; N1/N2/N4 bleiben weiterhin offen (Timeout-Exit `124`, weiterhin kein Exit-`0`).
 
+## Architektur-Backlog (added 2026-04-25)
+
+- [ ] A1: Optimierungsteil als eigenständiges Tool modularisieren.
+  - Ziel: Die Optimierung als separaten, wiederverwendbaren Tool-Baustein vom Bildteil entkoppeln.
+  - Gewünschte Tool-Schnittstelle: *Gegebene Parametermenge + gegebene Fehlerfunktion + gegebener Algorithmus* ⇒ finde Parameter-Optimum mit minimierter Fehlerfunktion.
+  - Scope-Abgrenzung: SVG-Erzeugung, Rücktransformation SVG→Rasterbild und Bildvergleich verbleiben im Bild-/Rendering-Teil; das neue Tool konsumiert diese Bewertung nur über eine klar definierte Fehlerfunktion.
+  - Akzeptanzkriterien:
+    - Klare API/Interface-Definition (Inputs/Outputs, Nebenbedingungen, Abbruchkriterien).
+    - Mindestens ein bestehender Optimierungspfad nutzt die Tool-Schnittstelle statt direkter In-Place-Optimierungslogik.
+    - Dokumentation in `docs/` mit Architekturdiagramm oder Ablaufbeschreibung (`image part` ↔ `optimization tool`).
+
 ## Test-Follow-ups (added 2026-04-20)
 
 > **Aktive Bearbeitungsreihenfolge innerhalb dieses Blocks:** `T5.1` → weitere
