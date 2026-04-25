@@ -115,26 +115,6 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
 > **Aktive Bearbeitungsreihenfolge innerhalb dieses Blocks:** `T5.1` → weitere
 > neu isolierte `T5.x`-Punkte → danach optional erneuter Volltestlauf.
 
-### Testausführungs-Matrix (nachgeführt am 2026-04-25)
-
-| Test/Scope | Kategorie | Ausführen? | Letzter Stand | Hinweis |
-| --- | --- | --- | --- | --- |
-| `tests/test_image_composite_converter_element_decomposition.py` | korrekt durchgelaufen | ja | 2026-04-25: `passed` | Teil der stabilen Top-Level-Suite (`7 passed` zusammen mit den zwei folgenden Dateien). |
-| `tests/test_image_composite_converter_naming.py` | korrekt durchgelaufen | ja | 2026-04-25: `passed` | Teil der stabilen Top-Level-Suite (`7 passed` zusammen mit den zwei benachbarten Dateien). |
-| `tests/test_retry_failed_image_conversions.py` | korrekt durchgelaufen | ja | 2026-04-25: `passed` | Teil der stabilen Top-Level-Suite (`7 passed` zusammen mit den zwei benachbarten Dateien). |
-| `tests/test_image_composite_converter.py::test_quantize_badge_params_keeps_ac0223_top_stem_span` | aufgabenspezifisch | ja | 2026-04-25: `passed` | Spezifischer Regressionstest für den AC0223-Quantisierungsfix (T5.5). |
-| `tests/test_image_composite_converter.py::test_validate_badge_logs_extent_bracketing_for_line_elements` | historisch fehlerhaft (T5.1) | nein | 2026-04-25: als behoben dokumentiert | Wird im aktuellen Minimal-Run bewusst **nicht** erneut ausgeführt, solange kein neuer Bezug zur Aufgabe besteht. |
-| `tests/test_image_composite_converter.py::test_convert_image_writes_svg` | historisch fehlerhaft (T5.2) | nein | 2026-04-25: als behoben dokumentiert | Wird im aktuellen Minimal-Run bewusst **nicht** erneut ausgeführt, solange kein neuer Bezug zur Aufgabe besteht. |
-| `tests/test_image_composite_converter.py::test_decompose_circle_with_stem_detects_bottom_stem` | historisch fehlerhaft (T5.3) | nein | 2026-04-25: als behoben dokumentiert | Wird im aktuellen Minimal-Run bewusst **nicht** erneut ausgeführt, solange kein neuer Bezug zur Aufgabe besteht. |
-| `tests/test_image_composite_converter.py::test_make_badge_params_supports_ac0223_valve_head` | historisch fehlerhaft (T5.4) | nein | 2026-04-25: als behoben dokumentiert | Wird im aktuellen Minimal-Run bewusst **nicht** erneut ausgeführt, solange kein neuer Bezug zur Aufgabe besteht. |
-| `tests/test_image_composite_converter.py::test_generate_badge_svg_renders_ac0223_valve_head_gradient` | historisch fehlerhaft (T5.5) | nein | 2026-04-25: als behoben dokumentiert | Wird im aktuellen Minimal-Run bewusst **nicht** erneut ausgeführt, solange kein neuer Bezug zur Aufgabe besteht. |
-| Vollsuite `pytest` (`tests/`, ~801 Tests) | überlesen/nicht ausgeführt | nein | 2026-04-25: bewusst ausgelassen | Gemäß aktueller Arbeitsstrategie: nur grüne Basissuite + aufgabenspezifischer Test. |
-
-**Ausführungsregel für kommende Sessions:**
-- Pflichtlauf: alle aktuell als „korrekt durchgelaufen“ markierten Tests.
-- Zusatzlauf: genau der zur jeweiligen Aufgabe passende spezifische Test.
-- Nicht laufen lassen: als „überlesen/nicht ausgeführt“ markierte Tests sowie historisch fehlerhafte Tests ohne unmittelbaren Aufgabenbezug.
-
 - [x] T1: Fehlender Helper-Export in `src/iCCModules/imageCompositeConverterIterationPipeline.py` beheben.
   - Fehlgeschlagener Test: `tests/detailtests/test_iteration_pipeline_helpers.py::test_run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_call_runner_kwargs_for_run_impl_builds_nested_runner_kwargs`
   - Aktueller Fehler: `AttributeError` für `runIterationPipelineImplFromInputsDispatchCallForRunCallRunnerKwargsForRunImpl` (Helper existiert/nicht exportiert).
