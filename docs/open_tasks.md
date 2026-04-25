@@ -175,10 +175,11 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
       fälschlich auf den Circle-Top zurückgesetzt statt den vorhandenen Connector-Span robust zu erhalten.
     - 2026-04-25: AC0223-Head-Overlay wieder mit explizitem `<polygon ...>`-Element ausgegeben; AC0223-Symmetrie so angepasst, dass
       `arm_y1` als `max(circle_top, bestehender Wert)` stabil bleibt und gleichzeitig der Hub-Anker erhalten wird (inkl. grünem Detailtest für den Hub-Connector).
-  - [ ] T5.6: AC0838_M-VOC-Layout stabilisieren (`cy`-Unterkante der Vollbreiten-Kreislage).
+  - [x] T5.6: AC0838_M-VOC-Layout stabilisieren (`cy`-Unterkante der Vollbreiten-Kreislage).
     - Fehlgeschlagener Test: `tests/test_image_composite_converter.py::test_make_badge_params_keeps_ac0838_m_circle_near_full_width_for_voc_layout`
     - Aktueller Fehler: Nach `Action.validateBadgeByElements(..., max_rounds=6)` fällt `params["cy"]` auf `23.0`; erwartet wird `>= 24.0`, damit der dominante Kreis nicht zu weit nach oben driftet.
     - Nächster Schritt: Ursachenanalyse der `AC0838_M`-spezifischen Quantisierungs-/Validation-Pfade und gezielter Fix mit grünem Regressionstest.
+    - 2026-04-25: Re-Test mit `python -m pytest tests/test_image_composite_converter.py::test_make_badge_params_keeps_ac0838_m_circle_near_full_width_for_voc_layout -q` ist grün (`1 passed`); Task als erledigt markiert.
   - [ ] T5.7: Parameterweise Optimierungsaufgaben für alle Geometrieparameter führen und sukzessive abarbeiten.
     - Ziel: Für jeden aktiven Geometrieparameter genau eine dedizierte Optimierungsaufgabe mit messbarem Kriterium pflegen ("einen Parameter variieren").
     - Aufgabenliste (in Reihenfolge):
