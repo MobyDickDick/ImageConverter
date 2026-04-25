@@ -100,6 +100,8 @@ def optimizeGlobalParameterVectorSamplingImpl(
             continue
         active_keys.append(key)
 
+    active_key_set = set(active_keys)
+
     min_active_keys = 2
     search_mode = "voll" if len(active_keys) >= 4 else "reduziert"
     if len(active_keys) < min_active_keys:
@@ -143,7 +145,8 @@ def optimizeGlobalParameterVectorSamplingImpl(
         if probe.get("arm_enabled"):
             reanchor_arm_to_circle_edge_fn(probe, float(probe.get("r", 0.0)))
         if probe.get("stem_enabled"):
-            probe["stem_top"] = float(probe.get("cy", 0.0)) + float(probe.get("r", 0.0))
+            if "stem_top" not in active_key_set:
+                probe["stem_top"] = float(probe.get("cy", 0.0)) + float(probe.get("r", 0.0))
             if bool(probe.get("lock_stem_center_to_circle", False)):
                 stem_w = float(probe.get("stem_width", 1.0))
                 probe["stem_x"] = snap_half_fn(
@@ -416,7 +419,7 @@ def optimizeGlobalParameterVectorSamplingImpl(
     ]
     if params.get("arm_enabled"):
         reanchor_arm_to_circle_edge_fn(params, float(params.get("r", 0.0)))
-    if params.get("stem_enabled"):
+    if params.get("stem_enabled") and "stem_top" not in active_key_set:
         params["stem_top"] = float(params.get("cy", 0.0)) + float(params.get("r", 0.0))
     log_global_parameter_vector_fn(logs, params, w, h, label=f"global-search: final ({winner_name})")
     logs.append(
