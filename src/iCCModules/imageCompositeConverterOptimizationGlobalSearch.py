@@ -59,8 +59,39 @@ def optimizeGlobalParameterVectorSamplingImpl(
     bounds = global_parameter_vector_bounds_fn(params, w, h)
     vector = global_parameter_vector_cls.fromParams(params)
 
+    candidate_key_order = (
+        "cx",
+        "cy",
+        "r",
+        "arm_x1",
+        "arm_y1",
+        "arm_x2",
+        "arm_y2",
+        "arm_stroke",
+        "stem_x",
+        "stem_top",
+        "stem_bottom",
+        "stem_width",
+        "text_x",
+        "text_y",
+        "text_scale",
+    )
+
+    def _key_applicable(key: str) -> bool:
+        if key.startswith("arm_"):
+            return bool(params.get("arm_enabled", False))
+        if key.startswith("stem_"):
+            return bool(params.get("stem_enabled", False))
+        if key.startswith("text_"):
+            return bool(params.get("draw_text", True))
+        return True
+
     active_keys: list[str] = []
-    for key in ("cx", "cy", "r", "stem_x", "stem_width", "text_x", "text_y", "text_scale"):
+    for key in candidate_key_order:
+        if key not in bounds or not hasattr(vector, key):
+            continue
+        if not _key_applicable(key):
+            continue
         value = getattr(vector, key)
         if value is None:
             continue
