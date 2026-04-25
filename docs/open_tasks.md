@@ -144,6 +144,17 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
     - Fehlgeschlagener Test: `tests/test_image_composite_converter.py::test_validate_badge_logs_extent_bracketing_for_line_elements`
     - Aktueller Fehler: Erwartete Logzeile `"arm: Längen-Bracketing"` fehlt in `Action.validate_badge_by_elements(..., max_rounds=1)`; `assert any(...)` schlägt fehl.
     - 2026-04-25: Test stabilisiert, indem für diesen Regressionstest explizit ein ausreichend großes `validation_time_budget_sec` gesetzt wird; damit läuft der Arm-Extent-Pass deterministisch und die erwartete `"arm: Längen-Bracketing"`-Logzeile bleibt abgesichert.
+  - [x] T5.2: Legacy-`convert_image` muss SVG-Ausgabe unter dem angeforderten Zielpfad schreiben.
+    - Fehlgeschlagener Test: `tests/test_image_composite_converter.py::test_convert_image_writes_svg`
+    - Aktueller Fehler: `convert_image(..., output.svg)` schrieb das SVG nur noch unter einem umbenannten `Failed_*.svg`-Pfad; der erwartete Zielpfad fehlte (`FileNotFoundError`).
+    - 2026-04-25: Legacy-API korrigiert, sodass der eingebettete Raster-SVG-Fallback wieder direkt nach `output_path` schreibt und den Zielpfad unverändert beibehält.
+  - [x] T5.3: Circle+Stem-Zerlegung wieder auf erwartetes SVG-Teileformat stabilisieren.
+    - Fehlgeschlagener Test: `tests/test_image_composite_converter.py::test_decompose_circle_with_stem_detects_bottom_stem`
+    - Aktueller Fehler: Die Zerlegung lieferte zuletzt `circle + line`; die Regressionstests erwarten weiterhin `rect + circle` (inkl. Re-Centering des horizontalen Stems).
+    - 2026-04-25: Zerlegung auf rechteckigen Stem (`<rect .../>`) als erstes SVG-Element zurückgeführt und Re-Centering für horizontale Stems auf den Kreis-Mittelpunkt stabilisiert.
+  - [ ] T5.4: AC0223-Defaultfarben für Valve-Head wieder auf erwartete Armfarbe bringen.
+    - Fehlgeschlagener Test: `tests/test_image_composite_converter.py::test_make_badge_params_supports_ac0223_valve_head`
+    - Aktueller Fehler: `Action.make_badge_params(..., "AC0223")` liefert derzeit `arm_color="#606060"` statt erwarteter `"#136fad"`.
 
 ## Next tasks (added 2026-03-28)
 

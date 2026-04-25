@@ -108,31 +108,19 @@ def decomposeCircleWithStemImpl(grayscale, element, candidate, *, candidate_to_s
             return None
         x_min, x_max = min(xs), max(xs)
         y_mid = sum(ys) / len(ys)
-        sign = -1.0 if x_max < cx else (1.0 if x_min > cx else 0.0)
-        if sign == 0.0:
-            sign = -1.0 if (cx - x_min) > (x_max - cx) else 1.0
-        line_y = y_mid
-        line_x1 = cx + sign * r * 0.95
-        line_x2 = float(x_min) if sign < 0 else float(x_max)
-        if abs(line_x2 - line_x1) < max(2.0, r * 0.2):
-            line_x2 = cx + sign * max(r * 1.35, abs(line_x2 - cx))
-        stroke = max(1.0, min(float(bbox_h), r * 0.45))
-        stem_svg = f'<line x1="{line_x1 + element.x0:.2f}" y1="{line_y + element.y0:.2f}" x2="{line_x2 + element.x0:.2f}" y2="{line_y + element.y0:.2f}" stroke="#000000" stroke-width="{stroke:.2f}" stroke-linecap="round" />'
+        stem_x = float(x_min) + element.x0
+        stem_w = float(max(1, bbox_w))
+        stem_h = float(max(1, bbox_h))
+        stem_y = float(cy - (stem_h / 2.0)) + element.y0
     else:
         if bbox_h < r * 0.35 or bbox_w > r * 1.05:
             return None
-        y_min, y_max = min(ys), max(ys)
+        y_min = min(ys)
         x_mid = sum(xs) / len(xs)
-        sign = -1.0 if y_max < cy else (1.0 if y_min > cy else 0.0)
-        if sign == 0.0:
-            sign = -1.0 if (cy - y_min) > (y_max - cy) else 1.0
-        line_x = x_mid
-        line_y1 = cy + sign * r * 0.95
-        line_y2 = float(y_min) if sign < 0 else float(y_max)
-        if abs(line_y2 - line_y1) < max(2.0, r * 0.2):
-            line_y2 = cy + sign * max(r * 1.35, abs(line_y2 - cy))
-        stroke = max(1.0, min(float(bbox_w), r * 0.45))
-        stem_svg = f'<line x1="{line_x + element.x0:.2f}" y1="{line_y1 + element.y0:.2f}" x2="{line_x + element.x0:.2f}" y2="{line_y2 + element.y0:.2f}" stroke="#000000" stroke-width="{stroke:.2f}" stroke-linecap="round" />'
+        stem_x = float(x_mid - (bbox_w / 2.0)) + element.x0
+        stem_w = float(max(1, bbox_w))
+        stem_h = float(max(1, bbox_h))
+        stem_y = float(y_min) + element.y0
 
     coverage = len(best_cluster) / max(1.0, len(circle_pixels))
     if coverage > 0.75 and radial_span < max(2.0, r * 0.35):
@@ -140,6 +128,10 @@ def decomposeCircleWithStemImpl(grayscale, element, candidate, *, candidate_to_s
     if abs(mean_r - r) > max(2.5, r * 0.45):
         return None
 
+    stem_svg = (
+        f'<rect x="{stem_x:.2f}" y="{stem_y:.2f}" width="{stem_w:.2f}" '
+        f'height="{stem_h:.2f}" fill="#000000" />'
+    )
     fill_color, stroke_color, stroke_width = estimate_stroke_style_fn(grayscale, element, candidate)
     circle_svg = candidate_to_svg_fn(candidate, element.x0, element.y0, fill_color, stroke_color, stroke_width)
-    return [circle_svg, stem_svg]
+    return [stem_svg, circle_svg]
