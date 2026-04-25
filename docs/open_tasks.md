@@ -17,7 +17,19 @@ focused on the actual project scope.
 - The refresh run currently covers the most recently touched connector/circle families present in `artifacts/converted_images/reports` (`AC0811`, `AC0832`, `AC0835`, `AC0836`, `AC0870`, `AC0882`).
 - Continue to add new work items here before implementation starts, then mark them in-place when they are done.
 
-## Next execution tasks (added 2026-04-23)
+## Next execution tasks (re-priorisiert am 2026-04-25)
+
+Arbeitsreihenfolge für die nächsten Sessions (von „hohe Abschlusschance“ nach
+„abhängig von langen Vollbereichsläufen“):
+
+1. **T5.x zuerst abschließen** (isolierte, kurze, reproduzierbare Testfehler).
+2. **N3/N4 bei jedem Lauf direkt mitpflegen** (Dokumentation sofort konsistent halten).
+3. **N1/N2 erst danach erneut anstoßen** (Vollbereichslauf als Verifikationsschritt, nicht als erster Schritt).
+
+Begründung: Die bisherigen Vollbereichs-Runs endeten wiederholt ohne Exit `0`.
+Mit der Reihenfolge „erst kurze, klare Root-Causes beheben, dann Vollbereich
+verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und auf
+`[x]` gesetzt werden können.
 
 - [ ] N1: B2 vollständig abschließen: Vollbereichslauf `AC0800..AC0899` mit Exit-Code `0` nachweisen.
   - 2026-04-23: Startkommando als Run S angestoßen; Log-Datei: `artifacts/converted_images/reports/AC0800_AC0899_batch_2026-04-23_runS.log`.
@@ -42,6 +54,7 @@ focused on the actual project scope.
   - 2026-04-24: Run AK ohne `timeout` gestartet; sichtbarer Fortschritt bis `AC0811_L`, danach ohne weiteren sichtbaren Fortschritt manuell per `Ctrl-C` beendet (Shell-Exit `1`, kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runAK_2026-04-24_summary.md`).
   - 2026-04-24: Run AL mit `timeout 900` gestartet; sichtbarer Fortschritt bis `AC0811_L`, danach ohne weiteren sichtbaren Fortschritt per `pkill -f src.imageCompositeConverter` beendet (Prozessstatus signalbedingt `-1`, kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runAL_2026-04-24_summary.md`).
   - 2026-04-24: Run AM ohne `timeout` gestartet; sichtbarer Fortschritt bis `AC0811_L`, danach ohne weiteren sichtbaren Fortschritt per `pkill` beendet (Prozessstatus signalbedingt `-1`, kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runAM_2026-04-24_summary.md`).
+  - 2026-04-25: Run AN mit `timeout 420` gestartet; sichtbarer Fortschritt bis `AC0811_M`, dann Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runAN_2026-04-25_summary.md`).
   - Abschlusskriterium: vollständiger Durchlauf bis `AC0899` ohne `timeout`-Abbruch und mit finalem Prozessstatus `0`.
 
 - [ ] N2: Stabilitätsnachweis für den Vollbereich dokumentieren.
@@ -67,6 +80,7 @@ focused on the actual project scope.
   - 2026-04-24: Run AK zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; manueller Abbruch/Status in `docs/ac0800_ac0899_runAK_2026-04-24_summary.md` dokumentiert.
   - 2026-04-24: Run AL zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Abbruch per `pkill`/Status in `docs/ac0800_ac0899_runAL_2026-04-24_summary.md` dokumentiert.
   - 2026-04-24: Run AM zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Abbruch per `pkill`/Status in `docs/ac0800_ac0899_runAM_2026-04-24_summary.md` dokumentiert.
+  - 2026-04-25: Run AN zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_M`; Timeout-Status in `docs/ac0800_ac0899_runAN_2026-04-25_summary.md` dokumentiert.
 
 - [x] N3: Neue Laufzusammenfassung im Run-Format ergänzen.
   - Neue Datei analog zu Run Q/R erstellen (Datum, Anlass, exakter Befehl, Log-Pfad, sichtbarer Fortschritt, Exit-Code, Kurzfazit).
@@ -94,8 +108,12 @@ focused on the actual project scope.
   - 2026-04-24: Zwischenstand nach Run AK nachgepflegt; N1/N2/N4 bleiben weiterhin offen (manueller Abbruch mit Shell-Exit `1`, weiterhin kein Exit-`0`).
   - 2026-04-24: Zwischenstand nach Run AL nachgepflegt; N1/N2/N4 bleiben weiterhin offen (Prozess per `pkill` signalbedingt beendet, weiterhin kein Exit-`0`).
   - 2026-04-24: Zwischenstand nach Run AM nachgepflegt; N1/N2/N4 bleiben weiterhin offen (Prozess per `pkill` signalbedingt beendet, weiterhin kein Exit-`0`).
+  - 2026-04-25: Zwischenstand nach Run AN nachgepflegt; N1/N2/N4 bleiben weiterhin offen (Timeout-Exit `124`, weiterhin kein Exit-`0`).
 
 ## Test-Follow-ups (added 2026-04-20)
+
+> **Aktive Bearbeitungsreihenfolge innerhalb dieses Blocks:** `T5.1` → weitere
+> neu isolierte `T5.x`-Punkte → danach optional erneuter Volltestlauf.
 
 - [x] T1: Fehlender Helper-Export in `src/iCCModules/imageCompositeConverterIterationPipeline.py` beheben.
   - Fehlgeschlagener Test: `tests/detailtests/test_iteration_pipeline_helpers.py::test_run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_call_runner_kwargs_for_run_impl_builds_nested_runner_kwargs`
@@ -122,6 +140,9 @@ focused on the actual project scope.
   - 2026-04-24: Volltestlauf `pytest` (801 Tests) gestartet; im Verlauf ab ~78% mehrere Fehlschläge in `tests/test_image_composite_converter.py` sichtbar (`F...`), daher kein vollständig erfolgreicher Gesamtlauf.
   - 2026-04-24: Separater Lauf der übrigen Top-Level-Dateien (`tests/test_image_composite_converter_element_decomposition.py`, `tests/test_image_composite_converter_naming.py`, `tests/test_retry_failed_image_conversions.py`) ist vollständig grün (`7 passed`).
   - Nächster Schritt: Fehlschläge aus `tests/test_image_composite_converter.py` einzeln isolieren (z. B. `-x`/`--lf`) und pro Root-Cause als eigene Unteraufgaben dokumentieren.
+  - [ ] T5.1: Extent-Bracketing-Log für Line-Elemente in Badge-Validierung wiederherstellen oder Testerwartung aktualisieren.
+    - Fehlgeschlagener Test: `tests/test_image_composite_converter.py::test_validate_badge_logs_extent_bracketing_for_line_elements`
+    - Aktueller Fehler: Erwartete Logzeile `"arm: Längen-Bracketing"` fehlt in `Action.validate_badge_by_elements(..., max_rounds=1)`; `assert any(...)` schlägt fehl.
 
 ## Next tasks (added 2026-03-28)
 
