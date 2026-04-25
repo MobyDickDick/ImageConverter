@@ -95,7 +95,7 @@ def test_generate_badge_svg_restores_ac0223_head_when_style_keys_missing() -> No
 
     assert "ac0223ValveGradient" in svg
     assert '<line x1="25.0000"' in svg
-    assert 'stroke="#606060"' in svg
+    assert 'stroke="#136fad"' in svg
     assert "<circle" in svg
     assert svg.index("<line") < svg.index("<circle")
     assert "<line" in svg

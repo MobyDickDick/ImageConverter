@@ -30,7 +30,7 @@ def defaultAc0223ParamsImpl(
             "head_gradient_light": "#d9d9d9",
             "head_stroke": "#808080",
             "head_hub_fill": "#7f7f7f",
-            "arm_color": "#606060",
+            "arm_color": "#136fad",
             "arm_x1": cx,
             "arm_x2": cx,
             "arm_y1": max(valve_center_y, float(params.get("cy", 0.0)) - float(params.get("r", 0.0))),
@@ -80,7 +80,7 @@ def fitAc0223ParamsFromImageImpl(
     params["head_gradient_light"] = str(defaults.get("head_gradient_light", "#d9d9d9"))
     params["head_stroke"] = str(defaults.get("head_stroke", "#808080"))
     params["head_hub_fill"] = str(defaults.get("head_hub_fill", "#7f7f7f"))
-    params["arm_color"] = str(defaults.get("arm_color", "#606060"))
+    params["arm_color"] = str(defaults.get("arm_color", "#136fad"))
     params["head_hub_cx"] = cx
     params["head_hub_cy"] = float(params["arm_y2"])
     return params

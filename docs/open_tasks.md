@@ -152,9 +152,10 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
     - Fehlgeschlagener Test: `tests/test_image_composite_converter.py::test_decompose_circle_with_stem_detects_bottom_stem`
     - Aktueller Fehler: Die Zerlegung lieferte zuletzt `circle + line`; die Regressionstests erwarten weiterhin `rect + circle` (inkl. Re-Centering des horizontalen Stems).
     - 2026-04-25: Zerlegung auf rechteckigen Stem (`<rect .../>`) als erstes SVG-Element zurückgeführt und Re-Centering für horizontale Stems auf den Kreis-Mittelpunkt stabilisiert.
-  - [ ] T5.4: AC0223-Defaultfarben für Valve-Head wieder auf erwartete Armfarbe bringen.
+  - [x] T5.4: AC0223-Defaultfarben für Valve-Head wieder auf erwartete Armfarbe bringen.
     - Fehlgeschlagener Test: `tests/test_image_composite_converter.py::test_make_badge_params_supports_ac0223_valve_head`
     - Aktueller Fehler: `Action.make_badge_params(..., "AC0223")` liefert derzeit `arm_color="#606060"` statt erwarteter `"#136fad"`.
+    - 2026-04-25: AC0223-Defaults/Fallbacks auf `arm_color="#136fad"` vereinheitlicht (Semantik-Defaults + SVG-Style-Restore); zugehörige Detailtests auf die erwartete Armfarbe aktualisiert.
 
 ## Next tasks (added 2026-03-28)
 
