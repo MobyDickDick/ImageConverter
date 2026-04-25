@@ -41,7 +41,7 @@ def generateBadgeSvgImpl(
         p.setdefault("head_gradient_light", "#d9d9d9")
         p.setdefault("head_stroke", "#808080")
         p.setdefault("head_hub_fill", "#7f7f7f")
-        p.setdefault("arm_color", "#606060")
+        p.setdefault("arm_color", "#136fad")
         p["arm_stroke"] = 1.0
         p["arm_enabled"] = True
         p["head_hub_cy"] = hub_y
