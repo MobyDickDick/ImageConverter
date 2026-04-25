@@ -41,6 +41,7 @@ focused on the actual project scope.
   - 2026-04-24: Run AJ ohne `timeout` gestartet; sichtbarer Fortschritt bis `AC0811_L`, danach ohne weiteren sichtbaren Fortschritt manuell per `Ctrl-C` beendet (Shell-Exit `1`, kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runAJ_2026-04-24_summary.md`).
   - 2026-04-24: Run AK ohne `timeout` gestartet; sichtbarer Fortschritt bis `AC0811_L`, danach ohne weiteren sichtbaren Fortschritt manuell per `Ctrl-C` beendet (Shell-Exit `1`, kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runAK_2026-04-24_summary.md`).
   - 2026-04-24: Run AL mit `timeout 900` gestartet; sichtbarer Fortschritt bis `AC0811_L`, danach ohne weiteren sichtbaren Fortschritt per `pkill -f src.imageCompositeConverter` beendet (Prozessstatus signalbedingt `-1`, kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runAL_2026-04-24_summary.md`).
+  - 2026-04-24: Run AM ohne `timeout` gestartet; sichtbarer Fortschritt bis `AC0811_L`, danach ohne weiteren sichtbaren Fortschritt per `pkill` beendet (Prozessstatus signalbedingt `-1`, kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runAM_2026-04-24_summary.md`).
   - Abschlusskriterium: vollständiger Durchlauf bis `AC0899` ohne `timeout`-Abbruch und mit finalem Prozessstatus `0`.
 
 - [ ] N2: Stabilitätsnachweis für den Vollbereich dokumentieren.
@@ -65,6 +66,7 @@ focused on the actual project scope.
   - 2026-04-24: Run AJ zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; manueller Abbruch/Status in `docs/ac0800_ac0899_runAJ_2026-04-24_summary.md` dokumentiert.
   - 2026-04-24: Run AK zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; manueller Abbruch/Status in `docs/ac0800_ac0899_runAK_2026-04-24_summary.md` dokumentiert.
   - 2026-04-24: Run AL zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Abbruch per `pkill`/Status in `docs/ac0800_ac0899_runAL_2026-04-24_summary.md` dokumentiert.
+  - 2026-04-24: Run AM zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Abbruch per `pkill`/Status in `docs/ac0800_ac0899_runAM_2026-04-24_summary.md` dokumentiert.
 
 - [x] N3: Neue Laufzusammenfassung im Run-Format ergänzen.
   - Neue Datei analog zu Run Q/R erstellen (Datum, Anlass, exakter Befehl, Log-Pfad, sichtbarer Fortschritt, Exit-Code, Kurzfazit).
@@ -91,6 +93,7 @@ focused on the actual project scope.
   - 2026-04-24: Zwischenstand nach Run AJ nachgepflegt; N1/N2/N4 bleiben weiterhin offen (manueller Abbruch mit Shell-Exit `1`, weiterhin kein Exit-`0`).
   - 2026-04-24: Zwischenstand nach Run AK nachgepflegt; N1/N2/N4 bleiben weiterhin offen (manueller Abbruch mit Shell-Exit `1`, weiterhin kein Exit-`0`).
   - 2026-04-24: Zwischenstand nach Run AL nachgepflegt; N1/N2/N4 bleiben weiterhin offen (Prozess per `pkill` signalbedingt beendet, weiterhin kein Exit-`0`).
+  - 2026-04-24: Zwischenstand nach Run AM nachgepflegt; N1/N2/N4 bleiben weiterhin offen (Prozess per `pkill` signalbedingt beendet, weiterhin kein Exit-`0`).
 
 ## Test-Follow-ups (added 2026-04-20)
 
@@ -113,6 +116,12 @@ focused on the actual project scope.
   - Fehlgeschlagener Test: `tests/detailtests/test_iteration_pipeline_helpers.py::test_run_iteration_pipeline_impl_from_inputs_dispatch_call_for_run_sequence_for_run_impl_delegates_builder_then_runner`
   - Aktueller Fehler: Doppelter Funktionsname `runIterationPipelineImplFromInputsDispatchCallForRunSequenceForRunImpl` überschreibt den Builder+Runner-Helper mit einer inkompatiblen Runner-Signatur.
   - 2026-04-21: Runner-only-Variante in `runIterationPipelineImplFromInputsDispatchCallForRunFinalRunnerSequenceForRunImpl` umbenannt; der öffentliche Sequence-Helper unterstützt jetzt sowohl den Builder+Runner- als auch den direkten Runner-Pfad kompatibel.
+
+
+- [ ] T5: Fehlgeschlagene Regressionen im Volltestlauf systematisch aufarbeiten.
+  - 2026-04-24: Volltestlauf `pytest` (801 Tests) gestartet; im Verlauf ab ~78% mehrere Fehlschläge in `tests/test_image_composite_converter.py` sichtbar (`F...`), daher kein vollständig erfolgreicher Gesamtlauf.
+  - 2026-04-24: Separater Lauf der übrigen Top-Level-Dateien (`tests/test_image_composite_converter_element_decomposition.py`, `tests/test_image_composite_converter_naming.py`, `tests/test_retry_failed_image_conversions.py`) ist vollständig grün (`7 passed`).
+  - Nächster Schritt: Fehlschläge aus `tests/test_image_composite_converter.py` einzeln isolieren (z. B. `-x`/`--lf`) und pro Root-Cause als eigene Unteraufgaben dokumentieren.
 
 ## Next tasks (added 2026-03-28)
 
