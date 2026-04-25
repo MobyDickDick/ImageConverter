@@ -140,9 +140,10 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
   - 2026-04-24: Volltestlauf `pytest` (801 Tests) gestartet; im Verlauf ab ~78% mehrere Fehlschläge in `tests/test_image_composite_converter.py` sichtbar (`F...`), daher kein vollständig erfolgreicher Gesamtlauf.
   - 2026-04-24: Separater Lauf der übrigen Top-Level-Dateien (`tests/test_image_composite_converter_element_decomposition.py`, `tests/test_image_composite_converter_naming.py`, `tests/test_retry_failed_image_conversions.py`) ist vollständig grün (`7 passed`).
   - Nächster Schritt: Fehlschläge aus `tests/test_image_composite_converter.py` einzeln isolieren (z. B. `-x`/`--lf`) und pro Root-Cause als eigene Unteraufgaben dokumentieren.
-  - [ ] T5.1: Extent-Bracketing-Log für Line-Elemente in Badge-Validierung wiederherstellen oder Testerwartung aktualisieren.
+  - [x] T5.1: Extent-Bracketing-Log für Line-Elemente in Badge-Validierung wiederherstellen oder Testerwartung aktualisieren.
     - Fehlgeschlagener Test: `tests/test_image_composite_converter.py::test_validate_badge_logs_extent_bracketing_for_line_elements`
     - Aktueller Fehler: Erwartete Logzeile `"arm: Längen-Bracketing"` fehlt in `Action.validate_badge_by_elements(..., max_rounds=1)`; `assert any(...)` schlägt fehl.
+    - 2026-04-25: Test stabilisiert, indem für diesen Regressionstest explizit ein ausreichend großes `validation_time_budget_sec` gesetzt wird; damit läuft der Arm-Extent-Pass deterministisch und die erwartete `"arm: Längen-Bracketing"`-Logzeile bleibt abgesichert.
 
 ## Next tasks (added 2026-03-28)
 

@@ -3944,6 +3944,10 @@ def test_validate_badge_logs_extent_bracketing_for_line_elements() -> None:
 
     h, w = img.shape[:2]
     params = Action._finalize_ac08_style("AC0812", Action._default_ac0812_params(w, h))
+    # Keep this regression deterministic under pytest: with very tight fallback
+    # budgets the element loop may stop after circle-only processing before the
+    # arm extent pass is reached.
+    params["validation_time_budget_sec"] = 120.0
     logs = Action.validate_badge_by_elements(img, params, max_rounds=1)
 
     assert any("arm: Längen-Bracketing" in line for line in logs)
