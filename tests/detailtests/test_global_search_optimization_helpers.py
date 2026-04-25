@@ -908,3 +908,89 @@ def test_global_search_can_improve_error_by_varying_stem_top() -> None:
     assert improved is True
     assert float(params["stem_top"]) == 8.0
     assert any("stem_top 1.000->8.000" in line for line in logs)
+
+
+def test_global_search_can_improve_error_by_varying_stem_bottom() -> None:
+    @dataclass(frozen=True)
+    class _StemVector:
+        cx: float
+        cy: float
+        r: float
+        stem_bottom: float
+        text_x: float
+
+        @staticmethod
+        def fromParams(params: dict) -> "_StemVector":
+            return _StemVector(
+                cx=float(params["cx"]),
+                cy=float(params["cy"]),
+                r=float(params["r"]),
+                stem_bottom=float(params["stem_bottom"]),
+                text_x=float(params["text_x"]),
+            )
+
+        def applyToParams(self, params: dict) -> dict:
+            out = dict(params)
+            out.update(
+                {
+                    "cx": float(self.cx),
+                    "cy": float(self.cy),
+                    "r": float(self.r),
+                    "stem_bottom": float(self.stem_bottom),
+                    "text_x": float(self.text_x),
+                }
+            )
+            return out
+
+        def apply_to_params(self, params: dict) -> dict:
+            return self.applyToParams(params)
+
+    class _TargetRng:
+        def normal(self, loc: float, _sigma: float) -> float:
+            if abs(loc - 2.0) < 1e-6:
+                return loc
+            return 8.0
+
+    def _stem_bounds(_params: dict, _w: int, _h: int) -> dict:
+        return {
+            "cx": (5.0, 5.0, True, "locked"),
+            "cy": (5.0, 5.0, True, "locked"),
+            "r": (2.0, 2.0, True, "locked"),
+            "stem_bottom": (0.0, 10.0, False, "test"),
+            "text_x": (2.0, 2.0, False, "fixed-secondary-dimension"),
+        }
+
+    img = _Image(10, 10)
+    logs: list[str] = []
+    params = {
+        "enable_global_search_mode": True,
+        "stem_enabled": True,
+        "lock_stem_center_to_circle": False,
+        "cx": 5.0,
+        "cy": 5.0,
+        "r": 2.0,
+        "stem_bottom": 1.0,
+        "text_x": 2.0,
+    }
+
+    improved = helpers.optimizeGlobalParameterVectorSamplingImpl(
+        img,
+        params,
+        logs,
+        rounds=2,
+        samples_per_round=3,
+        global_parameter_vector_cls=_StemVector,
+        global_parameter_vector_bounds_fn=_stem_bounds,
+        clip_scalar_fn=lambda value, low, high: max(low, min(high, value)),
+        snap_half_fn=lambda value: round(value * 2.0) / 2.0,
+        make_rng_fn=lambda _seed: _TargetRng(),
+        reanchor_arm_to_circle_edge_fn=lambda _probe, _r: None,
+        full_badge_error_for_params_fn=lambda _img, probe: abs(float(probe["stem_bottom"]) - 8.0),
+        log_global_parameter_vector_fn=lambda _logs, _params, _w, _h, label: _logs.append(label),
+        stochastic_run_seed=0,
+        stochastic_seed_offset=0,
+    )
+
+    assert improved is True
+    assert float(params["stem_bottom"]) == 8.0
+    assert any("stem_bottom 1.000->8.000" in line for line in logs)
