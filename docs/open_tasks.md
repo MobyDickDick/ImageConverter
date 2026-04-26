@@ -203,7 +203,7 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
       - [x] T5.7i: `stem_bottom` variieren (unterer Stielpunkt) und Einfluss auf Elementfehler messen.
       - [x] T5.7j: `stem_width` variieren (Stielbreite) und Einfluss auf Elementfehler messen.
       - [x] T5.7k: `text_x` variieren (Textanker X) und Einfluss auf Text-/Gesamtfehler messen.
-      - [ ] T5.7l: `text_y` variieren (Textanker Y) und Einfluss auf Text-/Gesamtfehler messen.
+      - [x] T5.7l: `text_y` variieren (Textanker Y) und Einfluss auf Text-/Gesamtfehler messen.
       - [ ] T5.7m: `text_scale` variieren (Textmaßstab) und Einfluss auf Text-/Gesamtfehler messen.
     - 2026-04-25: T5.7a umgesetzt: Global-Search berücksichtigt nun alle im Vektor verfügbaren und freigegebenen Parameter dimensionweise statt nur einer Teilmenge.
     - 2026-04-25: T5.7b umgesetzt: Neuer Detailtest zeigt deterministisch, dass `arm_x1` als aktive Suchdimension den Elementfehler reduziert und als Delta (`arm_x1 1.000->7.000`) im Global-Search-Log protokolliert wird.
@@ -216,6 +216,7 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
     - 2026-04-25: T5.7i umgesetzt: Neuer Detailtest bestätigt deterministisch, dass `stem_bottom` als aktive Suchdimension den Elementfehler reduziert und als Delta (`stem_bottom 1.000->8.000`) im Global-Search-Log protokolliert wird.
     - 2026-04-25: T5.7j umgesetzt: Neuer Detailtest bestätigt deterministisch, dass `stem_width` als aktive Suchdimension den Elementfehler reduziert und als Delta (`stem_width 1.000->8.000`) im Global-Search-Log protokolliert wird.
     - 2026-04-26: T5.7k umgesetzt: Neuer Detailtest bestätigt deterministisch, dass `text_x` als aktive Suchdimension den Text-/Gesamtfehler reduziert und als Delta (`text_x 1.000->9.000`) im Global-Search-Log protokolliert wird.
+    - 2026-04-26: T5.7l umgesetzt: Neuer Detailtest bestätigt deterministisch, dass `text_y` als aktive Suchdimension den Text-/Gesamtfehler reduziert und als Delta (`text_y 1.000->8.000`) im Global-Search-Log protokolliert wird.
   - [ ] T5.8: Aktuelle Full-Pytest-Abbrüche aus `tests/test_image_composite_converter.py` gezielt isolieren und beheben.
     - 2026-04-25: Lauf `python -m pytest tests/test_image_composite_converter.py --maxfail=3 -q` endet mit `3 failed, 283 passed, 1 skipped`; die folgenden Unteraufgaben wurden daraus abgeleitet.
     - [ ] T5.8a: Interaktive Bereichsabfrage in `main()` trotz Non-TTY-Testkontext korrekt anstoßen oder Teststrategie klar trennen.
