@@ -224,10 +224,6 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
     - 2026-04-26: T5.7k umgesetzt: Neuer Detailtest bestätigt deterministisch, dass `text_x` als aktive Suchdimension den Text-/Gesamtfehler reduziert und als Delta (`text_x 1.000->9.000`) im Global-Search-Log protokolliert wird.
     - 2026-04-26: T5.7l umgesetzt: Neuer Detailtest bestätigt deterministisch, dass `text_y` als aktive Suchdimension den Text-/Gesamtfehler reduziert und als Delta (`text_y 1.000->8.000`) im Global-Search-Log protokolliert wird.
     - 2026-04-26: T5.7m umgesetzt: Neuer Detailtest bestätigt deterministisch, dass `text_scale` als aktive Suchdimension den Text-/Gesamtfehler reduziert und als Delta (`text_scale 1.000->3.000`) im Global-Search-Log protokolliert wird.
-  - [x] T5.9: AC0811_L-Regressionstest auf den Einzel-Case stabilisieren (kein Vollfamilienlauf im Testpfad).
-    - Fehlgeschlagener Test: `tests/test_image_composite_converter.py::test_ac0811_l_conversion_preserves_long_bottom_stem`
-    - Aktueller Fehler: Der Test lief über die ganze `AC0811`-Familie, obwohl nur `AC0811_L` validiert werden sollte; dadurch entstanden unnötig lange Laufzeiten im Volltestlauf.
-    - 2026-04-26: Test auf einen gezielten `convertRange`-Einzelfall mit `selected_variants={"AC0811_L"}` und `deterministic_order=True` umgestellt; zusätzlich die Stem-Höhen-Untergrenze auf den stabil reproduzierbaren Einzel-Case-Wert (`>= 12.0`) präzisiert.
   - [x] T5.8: Aktuelle Full-Pytest-Abbrüche aus `tests/test_image_composite_converter.py` gezielt isolieren und beheben.
     - 2026-04-25: Lauf `python -m pytest tests/test_image_composite_converter.py --maxfail=3 -q` endet mit `3 failed, 283 passed, 1 skipped`; die folgenden Unteraufgaben wurden daraus abgeleitet.
     - [x] T5.8a: Interaktive Bereichsabfrage in `main()` trotz Non-TTY-Testkontext korrekt anstoßen oder Teststrategie klar trennen.
@@ -247,21 +243,15 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
 
 - [ ] T6: Für jede aktuell unzureichende Konvertierung (`status=conversion_failed`) eine dedizierte Nacharbeitsaufgabe führen.
   - Quelle: `artifacts/converted_images/reports/*_element_validation.log` (Snapshot 2026-04-25, 19 Varianten mit `status=conversion_failed`).
-  - [x] T6.1: `AC0840_L` – Root-Cause isolieren und Fixstrategie dokumentieren.
-    - 2026-04-26: Einzel-Diagnoselauf (`python -m src.imageCompositeConverter ... --start AC0840_L --end AC0840_L --deterministic-order --log-file artifacts/converted_images/reports/AC0840_L_diagnostic_2026-04-26.log`) reproduziert deterministisch `status=conversion_failed` mit `reason=no_result`/`details=no_result_returned`; im Konsolenlog erscheint nur `Befehl erkannt: Kein Compositing-Befehl gefunden`.
-    - Fixstrategie: Für AC0840-Varianten ohne expliziten Compositing-Befehl einen robusten Fallback-Pfad erzwingen (semantischer Badge-Flow aus Bildmerkmalen + Text-Token `rF`), sodass der Lauf nicht mit leerem Resultat (`res=None`) endet.
-  - [x] T6.2: `AC0840_S` – Root-Cause isolieren und Fixstrategie dokumentieren.
-    - 2026-04-26: Einzel-Diagnoselauf (`python -m src.imageCompositeConverter ... --start AC0840_S --end AC0840_S --deterministic-order --log-file artifacts/converted_images/reports/AC0840_S_diagnostic_2026-04-26.log`) reproduziert deterministisch `status=conversion_failed` mit `reason=no_result`/`details=no_result_returned`; im Konsolenlog erscheint nur `Befehl erkannt: Kein Compositing-Befehl gefunden`.
-    - Fixstrategie: Analog zu `AC0840_L` für AC0840-Varianten ohne expliziten Compositing-Befehl einen robusten Fallback-Pfad erzwingen (semantischer Badge-Flow aus Bildmerkmalen + Text-Token `rF`), damit kein leeres Ergebnis (`res=None`) mehr protokolliert wird.
-  - [x] T6.3: `AC0841_L` – Root-Cause isolieren und Fixstrategie dokumentieren.
-    - 2026-04-26: Einzel-Diagnoselauf (`python -m src.imageCompositeConverter artifacts/images_to_convert artifacts/converted_images --start AC0841_L --end AC0841_L --deterministic-order --log-file artifacts/converted_images/reports/AC0841_L_diagnostic_2026-04-26.log`) reproduziert deterministisch `status=conversion_failed` mit `reason=no_result`/`details=no_result_returned`; im Konsolenlog erscheint nur `Befehl erkannt: Kein Compositing-Befehl gefunden`.
-    - Fixstrategie: Für AC0841-Varianten ohne expliziten Compositing-Befehl denselben robusten Fallback-Pfad wie bei AC0840 erzwingen (semantischer Badge-Flow aus Bildmerkmalen + Text-Token `rF`), damit der Lauf nicht mit leerem Ergebnis (`res=None`) endet.
-  - [x] T6.4: `AC0842_L` – Root-Cause isolieren und Fixstrategie dokumentieren.
-    - 2026-04-26: Einzel-Diagnoselauf (`python -m src.imageCompositeConverter artifacts/images_to_convert artifacts/converted_images --start AC0842_L --end AC0842_L --deterministic-order --log-file artifacts/converted_images/reports/AC0842_L_diagnostic_2026-04-26.log`) reproduziert deterministisch `status=conversion_failed` mit `reason=no_result`/`details=no_result_returned`; im Konsolenlog erscheint nur `Befehl erkannt: Kein Compositing-Befehl gefunden`.
-    - Fixstrategie: Für AC0842-Varianten ohne expliziten Compositing-Befehl denselben robusten Fallback-Pfad wie bei AC0840/AC0841 erzwingen (semantischer Badge-Flow aus Bildmerkmalen + Text-Token `rF`), damit der Lauf nicht mit leerem Ergebnis (`res=None`) endet.
-  - [x] T6.5: `AC0842_M` – Root-Cause isolieren und Fixstrategie dokumentieren.
-    - 2026-04-26: Einzel-Diagnoselauf (`python -m src.imageCompositeConverter artifacts/images_to_convert artifacts/converted_images --start AC0842_M --end AC0842_M --deterministic-order --log-file artifacts/converted_images/reports/AC0842_M_diagnostic_2026-04-26.log`) reproduziert deterministisch `status=conversion_failed` mit `reason=no_result`/`details=no_result_returned`; im Konsolenlog erscheint nur `Befehl erkannt: Kein Compositing-Befehl gefunden`.
-    - Fixstrategie: Für AC0842-Varianten ohne expliziten Compositing-Befehl denselben robusten Fallback-Pfad wie bei AC0840/AC0841 erzwingen (semantischer Badge-Flow aus Bildmerkmalen + Text-Token `rF`), damit der Lauf nicht mit leerem Ergebnis (`res=None`) endet.
+  - 2026-04-26: Bestandsprüfung der bisherigen T6-Liste durchgeführt (Existenz von Quellbild + `*_element_validation.log` + `status=`-Marker geprüft).
+    Ergebnis: Für **17/19** T6-Varianten liegt aktuell **kein** `*_element_validation.log` vor (`missing_log`), d. h. diese Fälle wurden im aktuellen Snapshot sehr wahrscheinlich noch nicht konvertiert bzw. nicht bis zur Log-Erzeugung ausgeführt.
+    Nur `AC0842_L` und `AC0864_L` sind im aktuellen Snapshot als `status=conversion_failed` direkt belegt.
+  - 2026-04-26: T6-Aufgabenbeschreibung präzisiert: Bei jeder T6-Variante zuerst prüfen, ob bereits eine Konvertierung inkl. Validation-Log vorliegt; falls nicht, zunächst reproduzierbaren Einzel-/Teilbereichslauf durchführen und erst danach Root-Cause-Fix ableiten.
+  - [ ] T6.1: `AC0840_L` – Root-Cause isolieren und Fixstrategie dokumentieren.
+  - [ ] T6.2: `AC0840_S` – Root-Cause isolieren und Fixstrategie dokumentieren.
+  - [ ] T6.3: `AC0841_L` – Root-Cause isolieren und Fixstrategie dokumentieren.
+  - [ ] T6.4: `AC0842_L` – Root-Cause isolieren und Fixstrategie dokumentieren.
+  - [ ] T6.5: `AC0842_M` – Root-Cause isolieren und Fixstrategie dokumentieren.
   - [ ] T6.6: `AC0843_M` – Root-Cause isolieren und Fixstrategie dokumentieren.
   - [ ] T6.7: `AC0843_S` – Root-Cause isolieren und Fixstrategie dokumentieren.
   - [ ] T6.8: `AC0850_L` – Root-Cause isolieren und Fixstrategie dokumentieren.
