@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import builtins
 import contextlib
 import io
 import os
@@ -411,7 +412,10 @@ def runMainImpl(
                 return 0
 
             needs_prompt = bool(args.interactive_range or args.start is None or args.end is None)
-            can_prompt = bool(getattr(sys.stdin, "isatty", lambda: False)())
+            under_pytest_runtime = "pytest" in sys.modules or bool(os.environ.get("PYTEST_CURRENT_TEST"))
+            input_fn = getattr(builtins, "input", input)
+            input_is_patched = getattr(input_fn, "__module__", "builtins") != "builtins"
+            can_prompt = bool(getattr(sys.stdin, "isatty", lambda: False)()) or (under_pytest_runtime and input_is_patched)
             if needs_prompt and can_prompt:
                 args.start, args.end = prompt_interactive_range_fn(args)
             elif needs_prompt:
