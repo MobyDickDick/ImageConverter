@@ -203,4 +203,22 @@ def makeAc08BadgeParamsImpl(
             return finalize_ac08_style_fn(name, defaults)
         return finalize_ac08_style_fn(name, fit_ac0814_params_from_image_fn(img, defaults))
 
+    if name == "AC0842":
+        # AC0842 follows the left-arm connector geometry (same arm placement as AC0812).
+        defaults = default_ac0812_params_fn(w, h)
+        defaults["draw_text"] = True
+        defaults["text_mode"] = "rf"
+        defaults["label"] = "rF"
+        defaults["text_gray"] = int(round(defaults.get("stroke_gray", defaults.get("text_gray", 98))))
+        defaults["rf_font_scale"] = float(defaults.get("rf_font_scale", 0.58))
+        defaults["rf_dy"] = float(defaults.get("rf_dy", -0.02 * float(defaults.get("r", 0.0))))
+        defaults["rf_weight"] = int(defaults.get("rf_weight", 600))
+        if img is None:
+            return enforce_left_arm_badge_geometry_fn(finalize_ac08_style_fn(name, defaults), w, h)
+        return enforce_left_arm_badge_geometry_fn(
+            finalize_ac08_style_fn(name, fit_ac0812_params_from_image_fn(img, defaults)),
+            w,
+            h,
+        )
+
     return None

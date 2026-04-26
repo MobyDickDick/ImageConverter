@@ -52,3 +52,23 @@ def test_make_badge_params_falls_back_to_ac08_when_ar0100_missing() -> None:
         "variant_name": "ac0836_variant",
     }
     assert calls == ["ar0100:AC0836", "ac0223:AC0836", "ac08:AC0836:True"]
+
+
+def test_make_badge_params_supports_ac0842_family_dispatch() -> None:
+    result = helpers.makeBadgeParamsImpl(
+        24,
+        24,
+        "AC0842_M",
+        img=None,
+        get_base_name_fn=lambda base_name: base_name.split("_")[0],
+        build_ar0100_badge_params_fn=lambda *_args, **_kwargs: None,
+        build_ac0223_badge_params_fn=lambda *_args, **_kwargs: None,
+        make_ac08_badge_params_fn=lambda _w, _h, name, _img: {"family": name, "ok": True},
+    )
+
+    assert result == {
+        "family": "AC0842",
+        "ok": True,
+        "base_name": "AC0842",
+        "variant_name": "AC0842_M",
+    }

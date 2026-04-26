@@ -1,0 +1,85 @@
+{
+  "base": "AC0812",
+  "best_error": 8.734285714285715,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.012477551020408165,
+  "filename": "AC0812_M.jpg",
+  "h": 20,
+  "mean_delta2": 1687.8685302734375,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "AC0812",
+        "source": "base_name",
+        "text": "Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 90° nach links gedreht."
+      }
+    ],
+    "documented_alias_refs": [
+      "AC0811"
+    ],
+    "elements": [
+      "SEMANTIC: Kreis ohne Buchstabe",
+      "SEMANTIC: waagrechter Strich links vom Kreis"
+    ],
+    "label": "",
+    "mode": "semantic_badge",
+    "semantic_audit": {
+      "base_name": "AC0812",
+      "derived_elements": [
+        "SEMANTIC: Kreis ohne Buchstabe",
+        "SEMANTIC: waagrechter Strich links vom Kreis"
+      ],
+      "description_fragments": [
+        {
+          "key": "AC0812",
+          "source": "base_name",
+          "text": "Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 90° nach links gedreht."
+        }
+      ],
+      "description_lookup_keys": [
+        "AC0812"
+      ],
+      "description_text": "Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 90° nach links gedreht.",
+      "filename": "AC0812_M.jpg",
+      "mismatch_reason": "",
+      "mismatch_reasons": [],
+      "recognized_description_elements": [
+        "Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 90° nach links gedreht."
+      ],
+      "semantic_conflicts": [],
+      "semantic_priority_order": [
+        "family_rule",
+        "layout_override",
+        "description_heuristic"
+      ],
+      "semantic_sources": {
+        "description_heuristic": [],
+        "family_rule": [
+          "SEMANTIC: Kreis ohne Buchstabe",
+          "SEMANTIC: waagrechter Strich links vom Kreis"
+        ]
+      },
+      "status": "semantic_ok"
+    },
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {
+      "description_heuristic": [],
+      "family_rule": [
+        "SEMANTIC: Kreis ohne Buchstabe",
+        "SEMANTIC: waagrechter Strich links vom Kreis"
+      ]
+    },
+    "top_source_ref": null,
+    "variant_name": "AC0812_M"
+  },
+  "std_delta2": 6916.19970703125,
+  "variant": "AC0812_M",
+  "w": 35
+}

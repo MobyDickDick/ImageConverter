@@ -1,6 +1,6 @@
-run-meta: run_seed=479234574 pass_seed_offset=0 nonce_ns=1776940744221696800
+run-meta: run_seed=430953015 pass_seed_offset=0 nonce_ns=1777124895061664500
 status=semantic_ok
-redraw_variation: seed=484329741649 changed_params=cx:8.000->7.775 | cy:7.500->7.586 | r:6.500->6.381 | stroke_circle:1.000->1.095 | arm_stroke:1.000->0.927 | co2_dx:0.000->-0.001 | co2_dy:0.000->-0.006
+redraw_variation: seed=435452989161 changed_params=cx:8.000->8.229 | cy:7.500->7.373 | r:6.500->6.553 | stroke_circle:1.000->0.894 | arm_stroke:1.000->1.097 | co2_dx:0.000->-0.008 | co2_dy:0.000->-0.007
 semantic-guard: Textmodus aktiv (co2).
 small_variant_mode_active: reason=min_dim, min_dim=14.100, mask_dilate_px=1, text_mode=co2, arm_min_ratio=0.000, stem_min_ratio=0.000
 Runde 1: elementweise Validierung gestartet
@@ -25,12 +25,12 @@ global-search: plateau-repräsentant (runde=2, kandidat=best_sample, err=19.760,
 global-search: Runde 3 best_err=19.760, akzeptierte_kandidaten=0, sigma_mittel=1.242
 global-search: near-optimum-plateau (runde=3, punkte=1, epsilon=0.395, mittlere_spannweite=0.000, stabilitaet=stabil, spannweite=cx:0.000; cy:0.000; r:0.000)
 global-search: plateau-repräsentant (runde=3, kandidat=best_sample, err=19.760, begründung=niedrigster Fehler in dieser Runde)
-global-search: deterministischer track gestartet (modus=reduziert, seed=479238673, schritte=3, start_err=19.760)
+global-search: deterministischer track gestartet (modus=reduziert, seed=430957114, schritte=3, start_err=19.760)
 global-search: deterministischer track (pass=1, verbesserungen=0, best_err=19.760)
 global-search: deterministischer track (pass=2, verbesserungen=0, best_err=19.760)
 global-search: track-vergleich (stochastic_err=19.760, deterministic_err=19.760, gewählt=stochastic)
 global-search: keine relevante Verbesserung
-global-search: evaluate-telemetrie (requests=64, cache_hits=12, hit_rate=0.188, render_aufrufe=52)
+global-search: evaluate-telemetrie (requests=64, cache_hits=10, hit_rate=0.156, render_aufrufe=54)
 Runde 1: Gesamtfehler=19.760
 Runde 2: elementweise Validierung gestartet
 circle: Fehler=48.842
@@ -54,12 +54,12 @@ global-search: plateau-repräsentant (runde=2, kandidat=best_sample, err=19.760,
 global-search: Runde 3 best_err=19.760, akzeptierte_kandidaten=0, sigma_mittel=1.242
 global-search: near-optimum-plateau (runde=3, punkte=1, epsilon=0.395, mittlere_spannweite=0.000, stabilitaet=stabil, spannweite=cx:0.000; cy:0.000; r:0.000)
 global-search: plateau-repräsentant (runde=3, kandidat=best_sample, err=19.760, begründung=niedrigster Fehler in dieser Runde)
-global-search: deterministischer track gestartet (modus=reduziert, seed=479238673, schritte=3, start_err=19.760)
+global-search: deterministischer track gestartet (modus=reduziert, seed=430957114, schritte=3, start_err=19.760)
 global-search: deterministischer track (pass=1, verbesserungen=0, best_err=19.760)
 global-search: deterministischer track (pass=2, verbesserungen=0, best_err=19.760)
 global-search: track-vergleich (stochastic_err=19.760, deterministic_err=19.760, gewählt=stochastic)
 global-search: keine relevante Verbesserung
-global-search: evaluate-telemetrie (requests=64, cache_hits=12, hit_rate=0.188, render_aufrufe=52)
+global-search: evaluate-telemetrie (requests=64, cache_hits=10, hit_rate=0.156, render_aufrufe=54)
 Runde 2: Gesamtfehler=19.760
 Runde 3: elementweise Validierung gestartet
 circle: Fehler=48.842
@@ -83,12 +83,12 @@ global-search: plateau-repräsentant (runde=2, kandidat=best_sample, err=19.760,
 global-search: Runde 3 best_err=19.760, akzeptierte_kandidaten=0, sigma_mittel=1.242
 global-search: near-optimum-plateau (runde=3, punkte=1, epsilon=0.395, mittlere_spannweite=0.000, stabilitaet=stabil, spannweite=cx:0.000; cy:0.000; r:0.000)
 global-search: plateau-repräsentant (runde=3, kandidat=best_sample, err=19.760, begründung=niedrigster Fehler in dieser Runde)
-global-search: deterministischer track gestartet (modus=reduziert, seed=479238673, schritte=3, start_err=19.760)
+global-search: deterministischer track gestartet (modus=reduziert, seed=430957114, schritte=3, start_err=19.760)
 global-search: deterministischer track (pass=1, verbesserungen=0, best_err=19.760)
 global-search: deterministischer track (pass=2, verbesserungen=0, best_err=19.760)
 global-search: track-vergleich (stochastic_err=19.760, deterministic_err=19.760, gewählt=stochastic)
 global-search: keine relevante Verbesserung
-global-search: evaluate-telemetrie (requests=64, cache_hits=12, hit_rate=0.188, render_aufrufe=52)
+global-search: evaluate-telemetrie (requests=64, cache_hits=64, hit_rate=1.000, render_aufrufe=0)
 Runde 3: Gesamtfehler=19.760
 stagnation_detected: identischer Parameter-Fingerprint und praktisch unveränderter Gesamtfehler
 switch_to_fallback_search: deaktiviere Circle-Geometry-Penalty für eine letzte Ausweichrunde
@@ -112,12 +112,12 @@ global-search: plateau-repräsentant (runde=2, kandidat=best_sample, err=19.760,
 global-search: Runde 3 best_err=19.760, akzeptierte_kandidaten=0, sigma_mittel=1.242
 global-search: near-optimum-plateau (runde=3, punkte=1, epsilon=0.395, mittlere_spannweite=0.000, stabilitaet=stabil, spannweite=cx:0.000; cy:0.000; r:0.000)
 global-search: plateau-repräsentant (runde=3, kandidat=best_sample, err=19.760, begründung=niedrigster Fehler in dieser Runde)
-global-search: deterministischer track gestartet (modus=reduziert, seed=479238673, schritte=3, start_err=19.760)
+global-search: deterministischer track gestartet (modus=reduziert, seed=430957114, schritte=3, start_err=19.760)
 global-search: deterministischer track (pass=1, verbesserungen=0, best_err=19.760)
 global-search: deterministischer track (pass=2, verbesserungen=0, best_err=19.760)
 global-search: track-vergleich (stochastic_err=19.760, deterministic_err=19.760, gewählt=stochastic)
 global-search: keine relevante Verbesserung
-global-search: evaluate-telemetrie (requests=64, cache_hits=12, hit_rate=0.188, render_aufrufe=52)
+global-search: evaluate-telemetrie (requests=64, cache_hits=64, hit_rate=1.000, render_aufrufe=0)
 Runde 4: Gesamtfehler=19.760
 stagnation_detected: identischer Parameter-Fingerprint und praktisch unveränderter Gesamtfehler
 stopped_due_to_stagnation: Validierung vorzeitig beendet
