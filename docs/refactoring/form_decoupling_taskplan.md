@@ -132,7 +132,7 @@ Für **jede** Form/Familie exakt dieses Vorgehen:
 ---
 
 ## Konkrete nächste 10 Tasks (umsetzungsbereit)
-1. [ ] `form_code_inventory.csv` automatisch erzeugen.
+1. [x] `form_code_inventory.csv` automatisch erzeugen. (2026-04-26: `python tools/generate_form_code_inventory.py`)
 2. [ ] Runtime-Module in "erlaubt/nicht erlaubt" markieren.
 3. [ ] Schema v1 für Umsetzungsbeschreibungen festschreiben.
 4. [ ] Loader + Schema-Validierung implementieren.
