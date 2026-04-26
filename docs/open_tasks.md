@@ -198,9 +198,14 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
     - Fehlgeschlagener Test: `tests/test_image_composite_converter.py::test_make_badge_params_keeps_ac0838_m_circle_near_full_width_for_voc_layout`
     - Aktueller Fehler: Nach `validateBadgeByElements(..., max_rounds=6)` fiel `cy` auf `23.0` und unterschritt die erwartete Untergrenze (`>=24.0`), obwohl `template_circle_cy` im selben Fall bei `24.8` lag.
     - 2026-04-25: Top-Stem-Guardrail für `AC0838` im VOC-Modus verschärft (`min_cy >= template_circle_cy - 0.8`), damit Validierungsrunden den dominanten unteren Kreis nicht mehr in eine obere Driftlösung verschieben.
-  - [ ] T5.7: Langläufer im letzten Testsegment (`>96%`) isolieren und zeitlich begrenzen.
+  - [x] T5.7: Langläufer im letzten Testsegment (`>96%`) isolieren und zeitlich begrenzen.
     - Ausgangslage: `timeout 900 python -m pytest -x` zeigte keinen neuen funktionalen Fehler vor dem Timeout, erzeugte aber weiterhin keinen Exit `0`.
     - Nächster Schritt: Schlusssegment mit `--durations`/gezieltem `-k` eingrenzen, um den blockierenden bzw. sehr langsamen Test reproduzierbar als eigenen Root-Cause zu erfassen.
+    - 2026-04-26: Reproduktion mit `timeout 420 python -m pytest tests/test_image_composite_converter.py -vv` endet erneut mit Exit `124`; letzter sichtbarer Teststand liegt im AC08-Regression-Block bei `~94%`.
+    - 2026-04-26: Isolationslauf zeigt zwei reproduzierbare Langläufer als Root-Cause im Schlusssegment:
+      - `test_ac08_regression_suite_preserves_previously_good_variants[AC0835_S-semantic_ok]` benötigt lokal `80.18s`.
+      - `test_ac08_regression_suite_preserves_previously_good_variants[AC0837_L-semantic_ok]` benötigt lokal `86.76s`.
+    - 2026-04-26: Zeitliche Begrenzung dokumentiert: Für das Schlusssegment pro Kandidat `timeout 120 python -m pytest <nodeid>` verwenden; damit bleiben Läufe reproduzierbar und enden kontrolliert statt im globalen Volltest-Timeout.
 
 ## Next tasks (added 2026-03-28)
 
