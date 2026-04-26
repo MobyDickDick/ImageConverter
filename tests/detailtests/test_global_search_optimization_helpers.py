@@ -1257,3 +1257,95 @@ def test_global_search_can_improve_error_by_varying_text_y() -> None:
     assert improved is True
     assert float(params["text_y"]) == 8.0
     assert any("text_y 1.000->8.000" in line for line in logs)
+
+
+def test_global_search_can_improve_error_by_varying_text_scale() -> None:
+    @dataclass(frozen=True)
+    class _TextVector:
+        cx: float
+        cy: float
+        r: float
+        text_x: float
+        text_y: float
+        text_scale: float
+
+        @staticmethod
+        def fromParams(params: dict) -> "_TextVector":
+            return _TextVector(
+                cx=float(params["cx"]),
+                cy=float(params["cy"]),
+                r=float(params["r"]),
+                text_x=float(params["text_x"]),
+                text_y=float(params["text_y"]),
+                text_scale=float(params["text_scale"]),
+            )
+
+        def applyToParams(self, params: dict) -> dict:
+            out = dict(params)
+            out.update(
+                {
+                    "cx": float(self.cx),
+                    "cy": float(self.cy),
+                    "r": float(self.r),
+                    "text_x": float(self.text_x),
+                    "text_y": float(self.text_y),
+                    "text_scale": float(self.text_scale),
+                }
+            )
+            return out
+
+        def apply_to_params(self, params: dict) -> dict:
+            return self.applyToParams(params)
+
+    class _TargetRng:
+        def normal(self, loc: float, _sigma: float) -> float:
+            if abs(loc - 2.0) < 1e-6:
+                return loc
+            if abs(loc - 5.0) < 1e-6:
+                return loc
+            return 3.0
+
+    def _text_bounds(_params: dict, _w: int, _h: int) -> dict:
+        return {
+            "cx": (5.0, 5.0, True, "locked"),
+            "cy": (5.0, 5.0, True, "locked"),
+            "r": (2.0, 2.0, True, "locked"),
+            "text_x": (5.0, 5.0, False, "fixed-secondary-dimension"),
+            "text_y": (2.0, 2.0, False, "fixed-secondary-dimension"),
+            "text_scale": (0.5, 3.0, False, "test"),
+        }
+
+    img = _Image(10, 10)
+    logs: list[str] = []
+    params = {
+        "enable_global_search_mode": True,
+        "cx": 5.0,
+        "cy": 5.0,
+        "r": 2.0,
+        "draw_text": True,
+        "text_x": 5.0,
+        "text_y": 2.0,
+        "text_scale": 1.0,
+    }
+
+    improved = helpers.optimizeGlobalParameterVectorSamplingImpl(
+        img,
+        params,
+        logs,
+        rounds=2,
+        samples_per_round=3,
+        global_parameter_vector_cls=_TextVector,
+        global_parameter_vector_bounds_fn=_text_bounds,
+        clip_scalar_fn=lambda value, low, high: max(low, min(high, value)),
+        snap_half_fn=lambda value: round(value * 2.0) / 2.0,
+        make_rng_fn=lambda _seed: _TargetRng(),
+        reanchor_arm_to_circle_edge_fn=lambda _probe, _r: None,
+        full_badge_error_for_params_fn=lambda _img, probe: abs(float(probe["text_scale"]) - 3.0),
+        log_global_parameter_vector_fn=lambda _logs, _params, _w, _h, label: _logs.append(label),
+        stochastic_run_seed=0,
+        stochastic_seed_offset=0,
+    )
+
+    assert improved is True
+    assert float(params["text_scale"]) == 3.0
+    assert any("text_scale 1.000->3.000" in line for line in logs)
