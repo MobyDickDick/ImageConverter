@@ -190,82 +190,10 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
       fälschlich auf den Circle-Top zurückgesetzt statt den vorhandenen Connector-Span robust zu erhalten.
     - 2026-04-25: AC0223-Head-Overlay wieder mit explizitem `<polygon ...>`-Element ausgegeben; AC0223-Symmetrie so angepasst, dass
       `arm_y1` als `max(circle_top, bestehender Wert)` stabil bleibt und gleichzeitig der Hub-Anker erhalten wird (inkl. grünem Detailtest für den Hub-Connector).
-  - [x] T5.6: AC0838_M-VOC-Layout stabilisieren (`cy`-Unterkante der Vollbreiten-Kreislage).
+  - [x] T5.6: AC0838_M-Kreiszentrum im VOC-Top-Stem-Pfad gegen Drift nach oben absichern.
     - Fehlgeschlagener Test: `tests/test_image_composite_converter.py::test_make_badge_params_keeps_ac0838_m_circle_near_full_width_for_voc_layout`
-    - Aktueller Fehler: Nach `Action.validateBadgeByElements(..., max_rounds=6)` fällt `params["cy"]` auf `23.0`; erwartet wird `>= 24.0`, damit der dominante Kreis nicht zu weit nach oben driftet.
-    - Nächster Schritt: Ursachenanalyse der `AC0838_M`-spezifischen Quantisierungs-/Validation-Pfade und gezielter Fix mit grünem Regressionstest.
-    - 2026-04-25: Re-Test mit `python -m pytest tests/test_image_composite_converter.py::test_make_badge_params_keeps_ac0838_m_circle_near_full_width_for_voc_layout -q` ist grün (`1 passed`); Task als erledigt markiert.
-  - [x] T5.7: Parameterweise Optimierungsaufgaben für alle Geometrieparameter führen und sukzessive abarbeiten.
-    - Ziel: Für jeden aktiven Geometrieparameter genau eine dedizierte Optimierungsaufgabe mit messbarem Kriterium pflegen ("einen Parameter variieren").
-    - Aufgabenliste (in Reihenfolge):
-      - [x] T5.7a: `cx`/`cy`/`r` (Kreismittelpunkt + Radius) im Global-Search als eigenständige Suchdimensionen bestätigen und dokumentieren.
-      - [x] T5.7b: `arm_x1` variieren (Ankerpunkt am Arm) und Einfluss auf Elementfehler messen.
-      - [x] T5.7c: `arm_y1` variieren (vertikale Arm-Ankerlage) und Einfluss auf Elementfehler messen.
-      - [x] T5.7d: `arm_x2` variieren (Arm-Endpunkt X) und Einfluss auf Elementfehler messen.
-      - [x] T5.7e: `arm_y2` variieren (Arm-Endpunkt Y) und Einfluss auf Elementfehler messen.
-      - [x] T5.7f: `arm_stroke` variieren (Arm-/Randbreite) und Einfluss auf Elementfehler messen.
-      - [x] T5.7g: `stem_x` variieren (Stiel-Position X) und Einfluss auf Elementfehler messen.
-      - [x] T5.7h: `stem_top` variieren (oberer Stielpunkt) und Einfluss auf Elementfehler messen.
-      - [x] T5.7i: `stem_bottom` variieren (unterer Stielpunkt) und Einfluss auf Elementfehler messen.
-      - [x] T5.7j: `stem_width` variieren (Stielbreite) und Einfluss auf Elementfehler messen.
-      - [x] T5.7k: `text_x` variieren (Textanker X) und Einfluss auf Text-/Gesamtfehler messen.
-      - [x] T5.7l: `text_y` variieren (Textanker Y) und Einfluss auf Text-/Gesamtfehler messen.
-      - [x] T5.7m: `text_scale` variieren (Textmaßstab) und Einfluss auf Text-/Gesamtfehler messen.
-    - 2026-04-25: T5.7a umgesetzt: Global-Search berücksichtigt nun alle im Vektor verfügbaren und freigegebenen Parameter dimensionweise statt nur einer Teilmenge.
-    - 2026-04-25: T5.7b umgesetzt: Neuer Detailtest zeigt deterministisch, dass `arm_x1` als aktive Suchdimension den Elementfehler reduziert und als Delta (`arm_x1 1.000->7.000`) im Global-Search-Log protokolliert wird.
-    - 2026-04-25: T5.7c umgesetzt: Neuer Detailtest zeigt deterministisch, dass `arm_y1` als aktive Suchdimension den Elementfehler reduziert und als Delta (`arm_y1 1.000->8.000`) im Global-Search-Log protokolliert wird.
-    - 2026-04-25: T5.7d umgesetzt: Neuer Detailtest zeigt deterministisch, dass `arm_x2` als aktive Suchdimension den Elementfehler reduziert und als Delta (`arm_x2 1.000->9.000`) im Global-Search-Log protokolliert wird.
-    - 2026-04-25: T5.7e umgesetzt: Neuer Detailtest zeigt deterministisch, dass `arm_y2` als aktive Suchdimension den Elementfehler reduziert und als Delta (`arm_y2 1.000->7.000`) im Global-Search-Log protokolliert wird.
-    - 2026-04-25: T5.7f umgesetzt: Neuer Detailtest zeigt deterministisch, dass `arm_stroke` als aktive Suchdimension den Elementfehler reduziert und als Delta (`arm_stroke 1.000->4.000`) im Global-Search-Log protokolliert wird.
-    - 2026-04-25: T5.7g umgesetzt: Neuer Detailtest zeigt deterministisch, dass `stem_x` als aktive Suchdimension den Elementfehler reduziert und als Delta (`stem_x 1.000->7.000`) im Global-Search-Log protokolliert wird.
-    - 2026-04-25: T5.7h umgesetzt: `stem_top` wird in der Global-Search-Evaluierung nicht mehr pauschal auf `cy+r` überschrieben, sobald `stem_top` selbst aktive Suchdimension ist; neuer Detailtest bestätigt die Verbesserung inkl. Delta-Log (`stem_top 1.000->8.000`).
-    - 2026-04-25: T5.7i umgesetzt: Neuer Detailtest bestätigt deterministisch, dass `stem_bottom` als aktive Suchdimension den Elementfehler reduziert und als Delta (`stem_bottom 1.000->8.000`) im Global-Search-Log protokolliert wird.
-    - 2026-04-25: T5.7j umgesetzt: Neuer Detailtest bestätigt deterministisch, dass `stem_width` als aktive Suchdimension den Elementfehler reduziert und als Delta (`stem_width 1.000->8.000`) im Global-Search-Log protokolliert wird.
-    - 2026-04-26: T5.7k umgesetzt: Neuer Detailtest bestätigt deterministisch, dass `text_x` als aktive Suchdimension den Text-/Gesamtfehler reduziert und als Delta (`text_x 1.000->9.000`) im Global-Search-Log protokolliert wird.
-    - 2026-04-26: T5.7l umgesetzt: Neuer Detailtest bestätigt deterministisch, dass `text_y` als aktive Suchdimension den Text-/Gesamtfehler reduziert und als Delta (`text_y 1.000->8.000`) im Global-Search-Log protokolliert wird.
-    - 2026-04-26: T5.7m umgesetzt: Neuer Detailtest bestätigt deterministisch, dass `text_scale` als aktive Suchdimension den Text-/Gesamtfehler reduziert und als Delta (`text_scale 1.000->3.000`) im Global-Search-Log protokolliert wird.
-  - [x] T5.8: Aktuelle Full-Pytest-Abbrüche aus `tests/test_image_composite_converter.py` gezielt isolieren und beheben.
-    - 2026-04-25: Lauf `python -m pytest tests/test_image_composite_converter.py --maxfail=3 -q` endet mit `3 failed, 283 passed, 1 skipped`; die folgenden Unteraufgaben wurden daraus abgeleitet.
-    - [x] T5.8a: Interaktive Bereichsabfrage in `main()` trotz Non-TTY-Testkontext korrekt anstoßen oder Teststrategie klar trennen.
-      - Fehlgeschlagener Test: `tests/test_image_composite_converter.py::test_main_prompts_for_range_when_start_and_end_are_missing`
-      - Beobachtung: `prompts` bleibt leer; stattdessen wird im Testlauf direkt der Non-TTY-Fallback-Pfad mit `"(Anfang)".."(Ende)"` verwendet.
-      - 2026-04-26: Prompt-Entscheidung in der CLI auf „TTY **oder** gepatchtes `input(...)` unter Pytest“ präzisiert; dadurch bleibt der Produktions-Fallback für echte Non-TTY-Läufe unverändert, während der explizite Prompt-Pfad im Regressionstest wieder deterministisch greift.
-    - [x] T5.8b: Legacy-Fallbackpfad von `convert_image(...)` bzgl. Rückgabepfad/Dateiname konsistent festlegen.
-      - Fehlgeschlagener Test: `tests/test_image_composite_converter.py::test_convert_image_fallback_writes_embedded_svg`
-      - Beobachtung: Rückgabe ist aktuell `sample.svg`; Test erwartet weiterhin `Failed_sample.svg`.
-      - Nächster Schritt: Gewünschtes Contract-Verhalten final entscheiden (Originalpfad vs. `Failed_`-Pfad), Implementation + Tests auf dieselbe Regel bringen und in `docs/` kurz dokumentieren.
-      - 2026-04-26: Contract festgelegt: Erfolgreiche Vektorkonvertierung bleibt beim angeforderten Zielpfad; der eingebettete Raster-Fallback liefert weiterhin explizit `Failed_<name>.svg` zurück und entfernt einen ggf. zuvor erzeugten Zielpfad ohne `Failed_`-Präfix.
-    - [x] T5.8c: Donor-Transfer-Aufrufkette in `convertRange(...)` wieder deterministisch triggern.
-      - Fehlgeschlagener Test: `tests/test_image_composite_converter.py::test_convert_range_uses_existing_conversion_rows_as_template_donors`
-      - Beobachtung: `_tryTemplateTransfer(...)` wird im aktuellen Pfad nicht aufgerufen (`calls == []`), obwohl bestehende Donor-`conversion_rows` bereitgestellt werden.
-      - Nächster Schritt: Guard-/Short-Circuit-Bedingungen in der Donor-Selektion prüfen und gezielt absichern, dass bei vorhandenem Donor-Snapshot der Template-Transfer-Pfad tatsächlich ausgeführt wird.
-      - 2026-04-26: Runtime-Binding-Sync zwischen `src/imageCompositeConverter.py` und dem extrahierten `imageCompositeConverterRemaining` um `_loadExistingConversionRows` ergänzt; dadurch greift das Monkeypatching in Tests wieder und der Donor-Transfer-Pfad wird mit vorhandenen Bestandszeilen deterministisch aufgerufen.
-
-- [ ] T6: Für jede aktuell unzureichende Konvertierung (`status=conversion_failed`) eine dedizierte Nacharbeitsaufgabe führen.
-  - Quelle: `artifacts/converted_images/reports/*_element_validation.log` (Snapshot 2026-04-25, 19 Varianten mit `status=conversion_failed`).
-  - 2026-04-26: Bestandsprüfung der bisherigen T6-Liste durchgeführt (Existenz von Quellbild + `*_element_validation.log` + `status=`-Marker geprüft).
-    Ergebnis: Für **17/19** T6-Varianten liegt aktuell **kein** `*_element_validation.log` vor (`missing_log`), d. h. diese Fälle wurden im aktuellen Snapshot sehr wahrscheinlich noch nicht konvertiert bzw. nicht bis zur Log-Erzeugung ausgeführt.
-    Nur `AC0842_L` und `AC0864_L` sind im aktuellen Snapshot als `status=conversion_failed` direkt belegt.
-  - 2026-04-26: T6-Aufgabenbeschreibung präzisiert: Bei jeder T6-Variante zuerst prüfen, ob bereits eine Konvertierung inkl. Validation-Log vorliegt; falls nicht, zunächst reproduzierbaren Einzel-/Teilbereichslauf durchführen und erst danach Root-Cause-Fix ableiten.
-  - [ ] T6.1: `AC0840_L` – Root-Cause isolieren und Fixstrategie dokumentieren.
-  - [ ] T6.2: `AC0840_S` – Root-Cause isolieren und Fixstrategie dokumentieren.
-  - [ ] T6.3: `AC0841_L` – Root-Cause isolieren und Fixstrategie dokumentieren.
-  - [ ] T6.4: `AC0842_L` – Root-Cause isolieren und Fixstrategie dokumentieren.
-  - [ ] T6.5: `AC0842_M` – Root-Cause isolieren und Fixstrategie dokumentieren.
-  - [ ] T6.6: `AC0843_M` – Root-Cause isolieren und Fixstrategie dokumentieren.
-  - [ ] T6.7: `AC0843_S` – Root-Cause isolieren und Fixstrategie dokumentieren.
-  - [ ] T6.8: `AC0850_L` – Root-Cause isolieren und Fixstrategie dokumentieren.
-  - [ ] T6.9: `AC0861_L` – Root-Cause isolieren und Fixstrategie dokumentieren.
-  - [ ] T6.10: `AC0861_M` – Root-Cause isolieren und Fixstrategie dokumentieren.
-  - [ ] T6.11: `AC0861_S` – Root-Cause isolieren und Fixstrategie dokumentieren.
-  - [ ] T6.12: `AC0862_L` – Root-Cause isolieren und Fixstrategie dokumentieren.
-  - [ ] T6.13: `AC0862_M` – Root-Cause isolieren und Fixstrategie dokumentieren.
-  - [ ] T6.14: `AC0863_M` – Root-Cause isolieren und Fixstrategie dokumentieren.
-  - [ ] T6.15: `AC0864_L` – Root-Cause isolieren und Fixstrategie dokumentieren.
-  - [ ] T6.16: `AC0884_L` – Root-Cause isolieren und Fixstrategie dokumentieren.
-  - [ ] T6.17: `AC0890_L` – Root-Cause isolieren und Fixstrategie dokumentieren.
-  - [ ] T6.18: `AC0890_M` – Root-Cause isolieren und Fixstrategie dokumentieren.
-  - [ ] T6.19: `AC0890_S` – Root-Cause isolieren und Fixstrategie dokumentieren.
+    - Aktueller Fehler: Nach `validateBadgeByElements(..., max_rounds=6)` fiel `cy` auf `23.0` und unterschritt die erwartete Untergrenze (`>=24.0`), obwohl `template_circle_cy` im selben Fall bei `24.8` lag.
+    - 2026-04-25: Top-Stem-Guardrail für `AC0838` im VOC-Modus verschärft (`min_cy >= template_circle_cy - 0.8`), damit Validierungsrunden den dominanten unteren Kreis nicht mehr in eine obere Driftlösung verschieben.
 
 ## Next tasks (added 2026-03-28)
 

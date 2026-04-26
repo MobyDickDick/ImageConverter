@@ -110,9 +110,17 @@ def enforceTopStemBadgeGeometryImpl(
     cy = float(p["cy"])
     r = float(p["r"])
     default_cy = float(p.get("template_circle_cy", cy))
+    normalized_base = str(p.get("base_name", p.get("badge_symbol_name", ""))).upper()
+    normalized_base_root = normalized_base.split("_")[0]
+    text_mode = str(p.get("text_mode", "")).lower()
     # Generic guardrail for top-stem families: keep the circle in the lower part
     # of the badge, otherwise tiny crops can flip into an upper-half optimum.
     min_cy = min(float(h) - 1.0, max(default_cy - max(1.0, float(min(h, max(1, int(2 * r)))) * 0.12), float(h) * 0.55))
+    if normalized_base_root == "AC0838" and text_mode == "voc":
+        # AC0838 VOC variants rely on a low-placed near-full-width circle. Keep
+        # the center close to the template value so validation rounds do not
+        # drift into a visibly collapsed upper-circle placement.
+        min_cy = min(float(h) - 1.0, max(min_cy, default_cy - 0.8))
     if cy < min_cy:
         cy = min(float(h) - 1.0, default_cy)
         p["cy"] = cy
