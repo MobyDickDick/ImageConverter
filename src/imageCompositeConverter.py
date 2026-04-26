@@ -2953,6 +2953,7 @@ _REMAINING_RUNTIME_BINDING_TARGETS = {
         "_writeQualityPassReport",
         "_harmonizeSemanticSizeVariants",
         "_writePixelDelta2Ranking",
+        "_loadExistingConversionRows",
         "_selectOpenQualityCases",
         "_selectMiddleLowerTercile",
         "_tryTemplateTransfer",
