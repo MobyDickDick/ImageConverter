@@ -218,7 +218,7 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
     - 2026-04-26: T5.7k umgesetzt: Neuer Detailtest bestätigt deterministisch, dass `text_x` als aktive Suchdimension den Text-/Gesamtfehler reduziert und als Delta (`text_x 1.000->9.000`) im Global-Search-Log protokolliert wird.
     - 2026-04-26: T5.7l umgesetzt: Neuer Detailtest bestätigt deterministisch, dass `text_y` als aktive Suchdimension den Text-/Gesamtfehler reduziert und als Delta (`text_y 1.000->8.000`) im Global-Search-Log protokolliert wird.
     - 2026-04-26: T5.7m umgesetzt: Neuer Detailtest bestätigt deterministisch, dass `text_scale` als aktive Suchdimension den Text-/Gesamtfehler reduziert und als Delta (`text_scale 1.000->3.000`) im Global-Search-Log protokolliert wird.
-  - [ ] T5.8: Aktuelle Full-Pytest-Abbrüche aus `tests/test_image_composite_converter.py` gezielt isolieren und beheben.
+  - [x] T5.8: Aktuelle Full-Pytest-Abbrüche aus `tests/test_image_composite_converter.py` gezielt isolieren und beheben.
     - 2026-04-25: Lauf `python -m pytest tests/test_image_composite_converter.py --maxfail=3 -q` endet mit `3 failed, 283 passed, 1 skipped`; die folgenden Unteraufgaben wurden daraus abgeleitet.
     - [x] T5.8a: Interaktive Bereichsabfrage in `main()` trotz Non-TTY-Testkontext korrekt anstoßen oder Teststrategie klar trennen.
       - Fehlgeschlagener Test: `tests/test_image_composite_converter.py::test_main_prompts_for_range_when_start_and_end_are_missing`
@@ -229,13 +229,18 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
       - Beobachtung: Rückgabe ist aktuell `sample.svg`; Test erwartet weiterhin `Failed_sample.svg`.
       - Nächster Schritt: Gewünschtes Contract-Verhalten final entscheiden (Originalpfad vs. `Failed_`-Pfad), Implementation + Tests auf dieselbe Regel bringen und in `docs/` kurz dokumentieren.
       - 2026-04-26: Contract festgelegt: Erfolgreiche Vektorkonvertierung bleibt beim angeforderten Zielpfad; der eingebettete Raster-Fallback liefert weiterhin explizit `Failed_<name>.svg` zurück und entfernt einen ggf. zuvor erzeugten Zielpfad ohne `Failed_`-Präfix.
-    - [ ] T5.8c: Donor-Transfer-Aufrufkette in `convertRange(...)` wieder deterministisch triggern.
+    - [x] T5.8c: Donor-Transfer-Aufrufkette in `convertRange(...)` wieder deterministisch triggern.
       - Fehlgeschlagener Test: `tests/test_image_composite_converter.py::test_convert_range_uses_existing_conversion_rows_as_template_donors`
       - Beobachtung: `_tryTemplateTransfer(...)` wird im aktuellen Pfad nicht aufgerufen (`calls == []`), obwohl bestehende Donor-`conversion_rows` bereitgestellt werden.
       - Nächster Schritt: Guard-/Short-Circuit-Bedingungen in der Donor-Selektion prüfen und gezielt absichern, dass bei vorhandenem Donor-Snapshot der Template-Transfer-Pfad tatsächlich ausgeführt wird.
+      - 2026-04-26: Runtime-Binding-Sync zwischen `src/imageCompositeConverter.py` und dem extrahierten `imageCompositeConverterRemaining` um `_loadExistingConversionRows` ergänzt; dadurch greift das Monkeypatching in Tests wieder und der Donor-Transfer-Pfad wird mit vorhandenen Bestandszeilen deterministisch aufgerufen.
 
 - [ ] T6: Für jede aktuell unzureichende Konvertierung (`status=conversion_failed`) eine dedizierte Nacharbeitsaufgabe führen.
   - Quelle: `artifacts/converted_images/reports/*_element_validation.log` (Snapshot 2026-04-25, 19 Varianten mit `status=conversion_failed`).
+  - 2026-04-26: Bestandsprüfung der bisherigen T6-Liste durchgeführt (Existenz von Quellbild + `*_element_validation.log` + `status=`-Marker geprüft).
+    Ergebnis: Für **17/19** T6-Varianten liegt aktuell **kein** `*_element_validation.log` vor (`missing_log`), d. h. diese Fälle wurden im aktuellen Snapshot sehr wahrscheinlich noch nicht konvertiert bzw. nicht bis zur Log-Erzeugung ausgeführt.
+    Nur `AC0842_L` und `AC0864_L` sind im aktuellen Snapshot als `status=conversion_failed` direkt belegt.
+  - 2026-04-26: T6-Aufgabenbeschreibung präzisiert: Bei jeder T6-Variante zuerst prüfen, ob bereits eine Konvertierung inkl. Validation-Log vorliegt; falls nicht, zunächst reproduzierbaren Einzel-/Teilbereichslauf durchführen und erst danach Root-Cause-Fix ableiten.
   - [ ] T6.1: `AC0840_L` – Root-Cause isolieren und Fixstrategie dokumentieren.
   - [ ] T6.2: `AC0840_S` – Root-Cause isolieren und Fixstrategie dokumentieren.
   - [ ] T6.3: `AC0841_L` – Root-Cause isolieren und Fixstrategie dokumentieren.
