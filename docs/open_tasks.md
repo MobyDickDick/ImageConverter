@@ -220,10 +220,10 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
     - 2026-04-26: T5.7m umgesetzt: Neuer Detailtest bestätigt deterministisch, dass `text_scale` als aktive Suchdimension den Text-/Gesamtfehler reduziert und als Delta (`text_scale 1.000->3.000`) im Global-Search-Log protokolliert wird.
   - [ ] T5.8: Aktuelle Full-Pytest-Abbrüche aus `tests/test_image_composite_converter.py` gezielt isolieren und beheben.
     - 2026-04-25: Lauf `python -m pytest tests/test_image_composite_converter.py --maxfail=3 -q` endet mit `3 failed, 283 passed, 1 skipped`; die folgenden Unteraufgaben wurden daraus abgeleitet.
-    - [ ] T5.8a: Interaktive Bereichsabfrage in `main()` trotz Non-TTY-Testkontext korrekt anstoßen oder Teststrategie klar trennen.
+    - [x] T5.8a: Interaktive Bereichsabfrage in `main()` trotz Non-TTY-Testkontext korrekt anstoßen oder Teststrategie klar trennen.
       - Fehlgeschlagener Test: `tests/test_image_composite_converter.py::test_main_prompts_for_range_when_start_and_end_are_missing`
       - Beobachtung: `prompts` bleibt leer; stattdessen wird im Testlauf direkt der Non-TTY-Fallback-Pfad mit `"(Anfang)".."(Ende)"` verwendet.
-      - Nächster Schritt: Entscheidungslogik für interaktive Eingabe (`input(...)`) vs. Non-TTY-Fallback so eingrenzen, dass der explizit erwartete Prompt-Pfad unter kontrollierten Tests wieder reproduzierbar ist.
+      - 2026-04-26: Prompt-Entscheidung in der CLI auf „TTY **oder** gepatchtes `input(...)` unter Pytest“ präzisiert; dadurch bleibt der Produktions-Fallback für echte Non-TTY-Läufe unverändert, während der explizite Prompt-Pfad im Regressionstest wieder deterministisch greift.
     - [ ] T5.8b: Legacy-Fallbackpfad von `convert_image(...)` bzgl. Rückgabepfad/Dateiname konsistent festlegen.
       - Fehlgeschlagener Test: `tests/test_image_composite_converter.py::test_convert_image_fallback_writes_embedded_svg`
       - Beobachtung: Rückgabe ist aktuell `sample.svg`; Test erwartet weiterhin `Failed_sample.svg`.
