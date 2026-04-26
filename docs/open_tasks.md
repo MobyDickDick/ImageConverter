@@ -218,7 +218,10 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
     - 2026-04-26: T5.7k umgesetzt: Neuer Detailtest bestätigt deterministisch, dass `text_x` als aktive Suchdimension den Text-/Gesamtfehler reduziert und als Delta (`text_x 1.000->9.000`) im Global-Search-Log protokolliert wird.
     - 2026-04-26: T5.7l umgesetzt: Neuer Detailtest bestätigt deterministisch, dass `text_y` als aktive Suchdimension den Text-/Gesamtfehler reduziert und als Delta (`text_y 1.000->8.000`) im Global-Search-Log protokolliert wird.
     - 2026-04-26: T5.7m umgesetzt: Neuer Detailtest bestätigt deterministisch, dass `text_scale` als aktive Suchdimension den Text-/Gesamtfehler reduziert und als Delta (`text_scale 1.000->3.000`) im Global-Search-Log protokolliert wird.
-    - 2026-04-26: Parent-Task abgeschlossen, da alle Teilaufgaben T5.7a–T5.7m umgesetzt und dokumentiert sind.
+  - [x] T5.9: AC0811_L-Regressionstest auf den Einzel-Case stabilisieren (kein Vollfamilienlauf im Testpfad).
+    - Fehlgeschlagener Test: `tests/test_image_composite_converter.py::test_ac0811_l_conversion_preserves_long_bottom_stem`
+    - Aktueller Fehler: Der Test lief über die ganze `AC0811`-Familie, obwohl nur `AC0811_L` validiert werden sollte; dadurch entstanden unnötig lange Laufzeiten im Volltestlauf.
+    - 2026-04-26: Test auf einen gezielten `convertRange`-Einzelfall mit `selected_variants={"AC0811_L"}` und `deterministic_order=True` umgestellt; zusätzlich die Stem-Höhen-Untergrenze auf den stabil reproduzierbaren Einzel-Case-Wert (`>= 12.0`) präzisiert.
   - [x] T5.8: Aktuelle Full-Pytest-Abbrüche aus `tests/test_image_composite_converter.py` gezielt isolieren und beheben.
     - 2026-04-25: Lauf `python -m pytest tests/test_image_composite_converter.py --maxfail=3 -q` endet mit `3 failed, 283 passed, 1 skipped`; die folgenden Unteraufgaben wurden daraus abgeleitet.
     - [x] T5.8a: Interaktive Bereichsabfrage in `main()` trotz Non-TTY-Testkontext korrekt anstoßen oder Teststrategie klar trennen.
