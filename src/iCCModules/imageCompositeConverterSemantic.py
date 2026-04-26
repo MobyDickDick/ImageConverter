@@ -22,6 +22,7 @@ SEMANTIC_BADGE_FAMILIES: set[str] = {
     "AC0837",
     "AC0838",
     "AC0839",
+    "AC0842",
     "AC0870",
     "AC0881",
     "AC0882",
@@ -87,6 +88,9 @@ def apply_semantic_badge_family_rules(
     elif re.search(r"\bco\b", desc):
         heuristic_elements.append("SEMANTIC: Kreis + Buchstabe CO")
         params["label"] = "CO"
+    elif re.search(r"\brf\b", desc) or "relative feuchtigkeit" in desc:
+        heuristic_elements.append("SEMANTIC: Kreis + Buchstabe rF")
+        params["label"] = "rF"
     elif "voc" in desc:
         heuristic_elements.append("SEMANTIC: Kreis + Buchstabe VOC")
         params["label"] = "VOC"
@@ -107,7 +111,7 @@ def apply_semantic_badge_family_rules(
         family_elements.append("SEMANTIC: Ventilkopf mit drei Dreiecken oberhalb des Stiels")
         family_elements.append("SEMANTIC: Dreiecks-Spitzen treffen zentriert am oberen Stielende zusammen")
         family_elements.append("SEMANTIC: Drei Dreiecke sind zu einem Polygon vereint")
-    if base_upper in {"AC0812", "AC0832", "AC0837", "AC0882"}:
+    if base_upper in {"AC0812", "AC0832", "AC0837", "AC0842", "AC0882"}:
         family_elements.append("SEMANTIC: waagrechter Strich links vom Kreis")
 
     if "waagrechter strich rechts" in desc:

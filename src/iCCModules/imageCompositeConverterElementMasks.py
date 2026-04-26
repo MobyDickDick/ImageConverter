@@ -76,6 +76,13 @@ def textBboxImpl(params: dict, *, co2_layout_fn, glyph_bbox_fn) -> tuple[float, 
         y = cy + float(params.get("voc_dy", 0.0))
         return (cx - (width / 2.0), y - (height / 2.0), cx + (width / 2.0), y + (height / 2.0))
 
+    if mode == "rf":
+        font_size = max(4.0, r * float(params.get("rf_font_scale", 0.58)))
+        width = font_size * 1.30
+        height = font_size * 0.95
+        y = cy + float(params.get("rf_dy", 0.0))
+        return (cx - (width / 2.0), y - (height / 2.0), cx + (width / 2.0), y + (height / 2.0))
+
     if mode == "co2":
         layout = co2_layout_fn(params)
         x1 = float(layout["x1"])
