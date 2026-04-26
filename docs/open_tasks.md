@@ -247,7 +247,9 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
   - [x] T6.1: `AC0840_L` – Root-Cause isolieren und Fixstrategie dokumentieren.
     - 2026-04-26: Einzel-Diagnoselauf (`python -m src.imageCompositeConverter ... --start AC0840_L --end AC0840_L --deterministic-order --log-file artifacts/converted_images/reports/AC0840_L_diagnostic_2026-04-26.log`) reproduziert deterministisch `status=conversion_failed` mit `reason=no_result`/`details=no_result_returned`; im Konsolenlog erscheint nur `Befehl erkannt: Kein Compositing-Befehl gefunden`.
     - Fixstrategie: Für AC0840-Varianten ohne expliziten Compositing-Befehl einen robusten Fallback-Pfad erzwingen (semantischer Badge-Flow aus Bildmerkmalen + Text-Token `rF`), sodass der Lauf nicht mit leerem Resultat (`res=None`) endet.
-  - [ ] T6.2: `AC0840_S` – Root-Cause isolieren und Fixstrategie dokumentieren.
+  - [x] T6.2: `AC0840_S` – Root-Cause isolieren und Fixstrategie dokumentieren.
+    - 2026-04-26: Einzel-Diagnoselauf (`python -m src.imageCompositeConverter ... --start AC0840_S --end AC0840_S --deterministic-order --log-file artifacts/converted_images/reports/AC0840_S_diagnostic_2026-04-26.log`) reproduziert deterministisch `status=conversion_failed` mit `reason=no_result`/`details=no_result_returned`; im Konsolenlog erscheint nur `Befehl erkannt: Kein Compositing-Befehl gefunden`.
+    - Fixstrategie: Analog zu `AC0840_L` für AC0840-Varianten ohne expliziten Compositing-Befehl einen robusten Fallback-Pfad erzwingen (semantischer Badge-Flow aus Bildmerkmalen + Text-Token `rF`), damit kein leeres Ergebnis (`res=None`) mehr protokolliert wird.
   - [ ] T6.3: `AC0841_L` – Root-Cause isolieren und Fixstrategie dokumentieren.
   - [ ] T6.4: `AC0842_L` – Root-Cause isolieren und Fixstrategie dokumentieren.
   - [ ] T6.5: `AC0842_M` – Root-Cause isolieren und Fixstrategie dokumentieren.
