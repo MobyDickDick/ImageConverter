@@ -224,10 +224,11 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
       - Fehlgeschlagener Test: `tests/test_image_composite_converter.py::test_main_prompts_for_range_when_start_and_end_are_missing`
       - Beobachtung: `prompts` bleibt leer; stattdessen wird im Testlauf direkt der Non-TTY-Fallback-Pfad mit `"(Anfang)".."(Ende)"` verwendet.
       - 2026-04-26: Prompt-Entscheidung in der CLI auf „TTY **oder** gepatchtes `input(...)` unter Pytest“ präzisiert; dadurch bleibt der Produktions-Fallback für echte Non-TTY-Läufe unverändert, während der explizite Prompt-Pfad im Regressionstest wieder deterministisch greift.
-    - [ ] T5.8b: Legacy-Fallbackpfad von `convert_image(...)` bzgl. Rückgabepfad/Dateiname konsistent festlegen.
+    - [x] T5.8b: Legacy-Fallbackpfad von `convert_image(...)` bzgl. Rückgabepfad/Dateiname konsistent festlegen.
       - Fehlgeschlagener Test: `tests/test_image_composite_converter.py::test_convert_image_fallback_writes_embedded_svg`
       - Beobachtung: Rückgabe ist aktuell `sample.svg`; Test erwartet weiterhin `Failed_sample.svg`.
       - Nächster Schritt: Gewünschtes Contract-Verhalten final entscheiden (Originalpfad vs. `Failed_`-Pfad), Implementation + Tests auf dieselbe Regel bringen und in `docs/` kurz dokumentieren.
+      - 2026-04-26: Contract festgelegt: Erfolgreiche Vektorkonvertierung bleibt beim angeforderten Zielpfad; der eingebettete Raster-Fallback liefert weiterhin explizit `Failed_<name>.svg` zurück und entfernt einen ggf. zuvor erzeugten Zielpfad ohne `Failed_`-Präfix.
     - [ ] T5.8c: Donor-Transfer-Aufrufkette in `convertRange(...)` wieder deterministisch triggern.
       - Fehlgeschlagener Test: `tests/test_image_composite_converter.py::test_convert_range_uses_existing_conversion_rows_as_template_donors`
       - Beobachtung: `_tryTemplateTransfer(...)` wird im aktuellen Pfad nicht aufgerufen (`calls == []`), obwohl bestehende Donor-`conversion_rows` bereitgestellt werden.
