@@ -310,3 +310,778 @@ def test_global_search_reuses_cache_across_invocations_for_same_image() -> None:
 
     assert calls_after_first_run > 1
     assert render_calls == calls_after_first_run
+
+
+def test_global_search_can_improve_error_by_varying_arm_x1() -> None:
+    @dataclass(frozen=True)
+    class _ArmVector:
+        cx: float
+        cy: float
+        r: float
+        arm_x1: float
+        text_x: float
+
+        @staticmethod
+        def fromParams(params: dict) -> "_ArmVector":
+            return _ArmVector(
+                cx=float(params["cx"]),
+                cy=float(params["cy"]),
+                r=float(params["r"]),
+                arm_x1=float(params["arm_x1"]),
+                text_x=float(params["text_x"]),
+            )
+
+        def applyToParams(self, params: dict) -> dict:
+            out = dict(params)
+            out.update(
+                {
+                    "cx": float(self.cx),
+                    "cy": float(self.cy),
+                    "r": float(self.r),
+                    "arm_x1": float(self.arm_x1),
+                    "text_x": float(self.text_x),
+                }
+            )
+            return out
+
+        def apply_to_params(self, params: dict) -> dict:
+            return self.applyToParams(params)
+
+    class _TargetRng:
+        def normal(self, loc: float, _sigma: float) -> float:
+            if abs(loc - 2.0) < 1e-6:
+                return loc
+            return 7.0
+
+    def _arm_bounds(_params: dict, _w: int, _h: int) -> dict:
+        return {
+            "cx": (5.0, 5.0, True, "locked"),
+            "cy": (5.0, 5.0, True, "locked"),
+            "r": (2.0, 2.0, True, "locked"),
+            "arm_x1": (0.0, 10.0, False, "test"),
+            "text_x": (2.0, 2.0, False, "fixed-secondary-dimension"),
+        }
+
+    img = _Image(10, 10)
+    logs: list[str] = []
+    params = {
+        "enable_global_search_mode": True,
+        "arm_enabled": True,
+        "cx": 5.0,
+        "cy": 5.0,
+        "r": 2.0,
+        "arm_x1": 1.0,
+        "text_x": 2.0,
+    }
+
+    improved = helpers.optimizeGlobalParameterVectorSamplingImpl(
+        img,
+        params,
+        logs,
+        rounds=2,
+        samples_per_round=3,
+        global_parameter_vector_cls=_ArmVector,
+        global_parameter_vector_bounds_fn=_arm_bounds,
+        clip_scalar_fn=lambda value, low, high: max(low, min(high, value)),
+        snap_half_fn=lambda value: round(value * 2.0) / 2.0,
+        make_rng_fn=lambda _seed: _TargetRng(),
+        reanchor_arm_to_circle_edge_fn=lambda _probe, _r: None,
+        full_badge_error_for_params_fn=lambda _img, probe: abs(float(probe["arm_x1"]) - 7.0),
+        log_global_parameter_vector_fn=lambda _logs, _params, _w, _h, label: _logs.append(label),
+        stochastic_run_seed=0,
+        stochastic_seed_offset=0,
+    )
+
+    assert improved is True
+    assert float(params["arm_x1"]) == 7.0
+    assert any("arm_x1 1.000->7.000" in line for line in logs)
+
+
+def test_global_search_can_improve_error_by_varying_arm_y1() -> None:
+    @dataclass(frozen=True)
+    class _ArmVector:
+        cx: float
+        cy: float
+        r: float
+        arm_y1: float
+        text_x: float
+
+        @staticmethod
+        def fromParams(params: dict) -> "_ArmVector":
+            return _ArmVector(
+                cx=float(params["cx"]),
+                cy=float(params["cy"]),
+                r=float(params["r"]),
+                arm_y1=float(params["arm_y1"]),
+                text_x=float(params["text_x"]),
+            )
+
+        def applyToParams(self, params: dict) -> dict:
+            out = dict(params)
+            out.update(
+                {
+                    "cx": float(self.cx),
+                    "cy": float(self.cy),
+                    "r": float(self.r),
+                    "arm_y1": float(self.arm_y1),
+                    "text_x": float(self.text_x),
+                }
+            )
+            return out
+
+        def apply_to_params(self, params: dict) -> dict:
+            return self.applyToParams(params)
+
+    class _TargetRng:
+        def normal(self, loc: float, _sigma: float) -> float:
+            if abs(loc - 2.0) < 1e-6:
+                return loc
+            return 8.0
+
+    def _arm_bounds(_params: dict, _w: int, _h: int) -> dict:
+        return {
+            "cx": (5.0, 5.0, True, "locked"),
+            "cy": (5.0, 5.0, True, "locked"),
+            "r": (2.0, 2.0, True, "locked"),
+            "arm_y1": (0.0, 10.0, False, "test"),
+            "text_x": (2.0, 2.0, False, "fixed-secondary-dimension"),
+        }
+
+    img = _Image(10, 10)
+    logs: list[str] = []
+    params = {
+        "enable_global_search_mode": True,
+        "arm_enabled": True,
+        "cx": 5.0,
+        "cy": 5.0,
+        "r": 2.0,
+        "arm_y1": 1.0,
+        "text_x": 2.0,
+    }
+
+    improved = helpers.optimizeGlobalParameterVectorSamplingImpl(
+        img,
+        params,
+        logs,
+        rounds=2,
+        samples_per_round=3,
+        global_parameter_vector_cls=_ArmVector,
+        global_parameter_vector_bounds_fn=_arm_bounds,
+        clip_scalar_fn=lambda value, low, high: max(low, min(high, value)),
+        snap_half_fn=lambda value: round(value * 2.0) / 2.0,
+        make_rng_fn=lambda _seed: _TargetRng(),
+        reanchor_arm_to_circle_edge_fn=lambda _probe, _r: None,
+        full_badge_error_for_params_fn=lambda _img, probe: abs(float(probe["arm_y1"]) - 8.0),
+        log_global_parameter_vector_fn=lambda _logs, _params, _w, _h, label: _logs.append(label),
+        stochastic_run_seed=0,
+        stochastic_seed_offset=0,
+    )
+
+    assert improved is True
+    assert float(params["arm_y1"]) == 8.0
+    assert any("arm_y1 1.000->8.000" in line for line in logs)
+
+
+def test_global_search_can_improve_error_by_varying_arm_x2() -> None:
+    @dataclass(frozen=True)
+    class _ArmVector:
+        cx: float
+        cy: float
+        r: float
+        arm_x2: float
+        text_x: float
+
+        @staticmethod
+        def fromParams(params: dict) -> "_ArmVector":
+            return _ArmVector(
+                cx=float(params["cx"]),
+                cy=float(params["cy"]),
+                r=float(params["r"]),
+                arm_x2=float(params["arm_x2"]),
+                text_x=float(params["text_x"]),
+            )
+
+        def applyToParams(self, params: dict) -> dict:
+            out = dict(params)
+            out.update(
+                {
+                    "cx": float(self.cx),
+                    "cy": float(self.cy),
+                    "r": float(self.r),
+                    "arm_x2": float(self.arm_x2),
+                    "text_x": float(self.text_x),
+                }
+            )
+            return out
+
+        def apply_to_params(self, params: dict) -> dict:
+            return self.applyToParams(params)
+
+    class _TargetRng:
+        def normal(self, loc: float, _sigma: float) -> float:
+            if abs(loc - 2.0) < 1e-6:
+                return loc
+            return 9.0
+
+    def _arm_bounds(_params: dict, _w: int, _h: int) -> dict:
+        return {
+            "cx": (5.0, 5.0, True, "locked"),
+            "cy": (5.0, 5.0, True, "locked"),
+            "r": (2.0, 2.0, True, "locked"),
+            "arm_x2": (0.0, 10.0, False, "test"),
+            "text_x": (2.0, 2.0, False, "fixed-secondary-dimension"),
+        }
+
+    img = _Image(10, 10)
+    logs: list[str] = []
+    params = {
+        "enable_global_search_mode": True,
+        "arm_enabled": True,
+        "cx": 5.0,
+        "cy": 5.0,
+        "r": 2.0,
+        "arm_x2": 1.0,
+        "text_x": 2.0,
+    }
+
+    improved = helpers.optimizeGlobalParameterVectorSamplingImpl(
+        img,
+        params,
+        logs,
+        rounds=2,
+        samples_per_round=3,
+        global_parameter_vector_cls=_ArmVector,
+        global_parameter_vector_bounds_fn=_arm_bounds,
+        clip_scalar_fn=lambda value, low, high: max(low, min(high, value)),
+        snap_half_fn=lambda value: round(value * 2.0) / 2.0,
+        make_rng_fn=lambda _seed: _TargetRng(),
+        reanchor_arm_to_circle_edge_fn=lambda _probe, _r: None,
+        full_badge_error_for_params_fn=lambda _img, probe: abs(float(probe["arm_x2"]) - 9.0),
+        log_global_parameter_vector_fn=lambda _logs, _params, _w, _h, label: _logs.append(label),
+        stochastic_run_seed=0,
+        stochastic_seed_offset=0,
+    )
+
+    assert improved is True
+    assert float(params["arm_x2"]) == 9.0
+    assert any("arm_x2 1.000->9.000" in line for line in logs)
+
+
+def test_global_search_can_improve_error_by_varying_arm_y2() -> None:
+    @dataclass(frozen=True)
+    class _ArmVector:
+        cx: float
+        cy: float
+        r: float
+        arm_y2: float
+        text_x: float
+
+        @staticmethod
+        def fromParams(params: dict) -> "_ArmVector":
+            return _ArmVector(
+                cx=float(params["cx"]),
+                cy=float(params["cy"]),
+                r=float(params["r"]),
+                arm_y2=float(params["arm_y2"]),
+                text_x=float(params["text_x"]),
+            )
+
+        def applyToParams(self, params: dict) -> dict:
+            out = dict(params)
+            out.update(
+                {
+                    "cx": float(self.cx),
+                    "cy": float(self.cy),
+                    "r": float(self.r),
+                    "arm_y2": float(self.arm_y2),
+                    "text_x": float(self.text_x),
+                }
+            )
+            return out
+
+        def apply_to_params(self, params: dict) -> dict:
+            return self.applyToParams(params)
+
+    class _TargetRng:
+        def normal(self, loc: float, _sigma: float) -> float:
+            if abs(loc - 2.0) < 1e-6:
+                return loc
+            return 7.0
+
+    def _arm_bounds(_params: dict, _w: int, _h: int) -> dict:
+        return {
+            "cx": (5.0, 5.0, True, "locked"),
+            "cy": (5.0, 5.0, True, "locked"),
+            "r": (2.0, 2.0, True, "locked"),
+            "arm_y2": (0.0, 10.0, False, "test"),
+            "text_x": (2.0, 2.0, False, "fixed-secondary-dimension"),
+        }
+
+    img = _Image(10, 10)
+    logs: list[str] = []
+    params = {
+        "enable_global_search_mode": True,
+        "arm_enabled": True,
+        "cx": 5.0,
+        "cy": 5.0,
+        "r": 2.0,
+        "arm_y2": 1.0,
+        "text_x": 2.0,
+    }
+
+    improved = helpers.optimizeGlobalParameterVectorSamplingImpl(
+        img,
+        params,
+        logs,
+        rounds=2,
+        samples_per_round=3,
+        global_parameter_vector_cls=_ArmVector,
+        global_parameter_vector_bounds_fn=_arm_bounds,
+        clip_scalar_fn=lambda value, low, high: max(low, min(high, value)),
+        snap_half_fn=lambda value: round(value * 2.0) / 2.0,
+        make_rng_fn=lambda _seed: _TargetRng(),
+        reanchor_arm_to_circle_edge_fn=lambda _probe, _r: None,
+        full_badge_error_for_params_fn=lambda _img, probe: abs(float(probe["arm_y2"]) - 7.0),
+        log_global_parameter_vector_fn=lambda _logs, _params, _w, _h, label: _logs.append(label),
+        stochastic_run_seed=0,
+        stochastic_seed_offset=0,
+    )
+
+    assert improved is True
+    assert float(params["arm_y2"]) == 7.0
+    assert any("arm_y2 1.000->7.000" in line for line in logs)
+
+
+
+def test_global_search_can_improve_error_by_varying_arm_stroke() -> None:
+    @dataclass(frozen=True)
+    class _ArmVector:
+        cx: float
+        cy: float
+        r: float
+        arm_stroke: float
+        text_x: float
+
+        @staticmethod
+        def fromParams(params: dict) -> "_ArmVector":
+            return _ArmVector(
+                cx=float(params["cx"]),
+                cy=float(params["cy"]),
+                r=float(params["r"]),
+                arm_stroke=float(params["arm_stroke"]),
+                text_x=float(params["text_x"]),
+            )
+
+        def applyToParams(self, params: dict) -> dict:
+            out = dict(params)
+            out.update(
+                {
+                    "cx": float(self.cx),
+                    "cy": float(self.cy),
+                    "r": float(self.r),
+                    "arm_stroke": float(self.arm_stroke),
+                    "text_x": float(self.text_x),
+                }
+            )
+            return out
+
+        def apply_to_params(self, params: dict) -> dict:
+            return self.applyToParams(params)
+
+    class _TargetRng:
+        def normal(self, loc: float, _sigma: float) -> float:
+            if abs(loc - 2.0) < 1e-6:
+                return loc
+            return 4.0
+
+    def _arm_bounds(_params: dict, _w: int, _h: int) -> dict:
+        return {
+            "cx": (5.0, 5.0, True, "locked"),
+            "cy": (5.0, 5.0, True, "locked"),
+            "r": (2.0, 2.0, True, "locked"),
+            "arm_stroke": (1.0, 6.0, False, "test"),
+            "text_x": (2.0, 2.0, False, "fixed-secondary-dimension"),
+        }
+
+    img = _Image(10, 10)
+    logs: list[str] = []
+    params = {
+        "enable_global_search_mode": True,
+        "arm_enabled": True,
+        "cx": 5.0,
+        "cy": 5.0,
+        "r": 2.0,
+        "arm_stroke": 1.0,
+        "text_x": 2.0,
+    }
+
+    improved = helpers.optimizeGlobalParameterVectorSamplingImpl(
+        img,
+        params,
+        logs,
+        rounds=2,
+        samples_per_round=3,
+        global_parameter_vector_cls=_ArmVector,
+        global_parameter_vector_bounds_fn=_arm_bounds,
+        clip_scalar_fn=lambda value, low, high: max(low, min(high, value)),
+        snap_half_fn=lambda value: round(value * 2.0) / 2.0,
+        make_rng_fn=lambda _seed: _TargetRng(),
+        reanchor_arm_to_circle_edge_fn=lambda _probe, _r: None,
+        full_badge_error_for_params_fn=lambda _img, probe: abs(float(probe["arm_stroke"]) - 4.0),
+        log_global_parameter_vector_fn=lambda _logs, _params, _w, _h, label: _logs.append(label),
+        stochastic_run_seed=0,
+        stochastic_seed_offset=0,
+    )
+
+    assert improved is True
+    assert float(params["arm_stroke"]) == 4.0
+    assert any("arm_stroke 1.000->4.000" in line for line in logs)
+
+
+def test_global_search_can_improve_error_by_varying_stem_x() -> None:
+    @dataclass(frozen=True)
+    class _StemVector:
+        cx: float
+        cy: float
+        r: float
+        stem_x: float
+        text_x: float
+
+        @staticmethod
+        def fromParams(params: dict) -> "_StemVector":
+            return _StemVector(
+                cx=float(params["cx"]),
+                cy=float(params["cy"]),
+                r=float(params["r"]),
+                stem_x=float(params["stem_x"]),
+                text_x=float(params["text_x"]),
+            )
+
+        def applyToParams(self, params: dict) -> dict:
+            out = dict(params)
+            out.update(
+                {
+                    "cx": float(self.cx),
+                    "cy": float(self.cy),
+                    "r": float(self.r),
+                    "stem_x": float(self.stem_x),
+                    "text_x": float(self.text_x),
+                }
+            )
+            return out
+
+        def apply_to_params(self, params: dict) -> dict:
+            return self.applyToParams(params)
+
+    class _TargetRng:
+        def normal(self, loc: float, _sigma: float) -> float:
+            if abs(loc - 2.0) < 1e-6:
+                return loc
+            return 7.0
+
+    def _stem_bounds(_params: dict, _w: int, _h: int) -> dict:
+        return {
+            "cx": (5.0, 5.0, True, "locked"),
+            "cy": (5.0, 5.0, True, "locked"),
+            "r": (2.0, 2.0, True, "locked"),
+            "stem_x": (0.0, 10.0, False, "test"),
+            "text_x": (2.0, 2.0, False, "fixed-secondary-dimension"),
+        }
+
+    img = _Image(10, 10)
+    logs: list[str] = []
+    params = {
+        "enable_global_search_mode": True,
+        "stem_enabled": True,
+        "lock_stem_center_to_circle": False,
+        "cx": 5.0,
+        "cy": 5.0,
+        "r": 2.0,
+        "stem_x": 1.0,
+        "text_x": 2.0,
+    }
+
+    improved = helpers.optimizeGlobalParameterVectorSamplingImpl(
+        img,
+        params,
+        logs,
+        rounds=2,
+        samples_per_round=3,
+        global_parameter_vector_cls=_StemVector,
+        global_parameter_vector_bounds_fn=_stem_bounds,
+        clip_scalar_fn=lambda value, low, high: max(low, min(high, value)),
+        snap_half_fn=lambda value: round(value * 2.0) / 2.0,
+        make_rng_fn=lambda _seed: _TargetRng(),
+        reanchor_arm_to_circle_edge_fn=lambda _probe, _r: None,
+        full_badge_error_for_params_fn=lambda _img, probe: abs(float(probe["stem_x"]) - 7.0),
+        log_global_parameter_vector_fn=lambda _logs, _params, _w, _h, label: _logs.append(label),
+        stochastic_run_seed=0,
+        stochastic_seed_offset=0,
+    )
+
+    assert improved is True
+    assert float(params["stem_x"]) == 7.0
+    assert any("stem_x 1.000->7.000" in line for line in logs)
+
+
+def test_global_search_can_improve_error_by_varying_stem_top() -> None:
+    @dataclass(frozen=True)
+    class _StemVector:
+        cx: float
+        cy: float
+        r: float
+        stem_top: float
+        text_x: float
+
+        @staticmethod
+        def fromParams(params: dict) -> "_StemVector":
+            return _StemVector(
+                cx=float(params["cx"]),
+                cy=float(params["cy"]),
+                r=float(params["r"]),
+                stem_top=float(params["stem_top"]),
+                text_x=float(params["text_x"]),
+            )
+
+        def applyToParams(self, params: dict) -> dict:
+            out = dict(params)
+            out.update(
+                {
+                    "cx": float(self.cx),
+                    "cy": float(self.cy),
+                    "r": float(self.r),
+                    "stem_top": float(self.stem_top),
+                    "text_x": float(self.text_x),
+                }
+            )
+            return out
+
+        def apply_to_params(self, params: dict) -> dict:
+            return self.applyToParams(params)
+
+    class _TargetRng:
+        def normal(self, loc: float, _sigma: float) -> float:
+            if abs(loc - 2.0) < 1e-6:
+                return loc
+            return 8.0
+
+    def _stem_bounds(_params: dict, _w: int, _h: int) -> dict:
+        return {
+            "cx": (5.0, 5.0, True, "locked"),
+            "cy": (5.0, 5.0, True, "locked"),
+            "r": (2.0, 2.0, True, "locked"),
+            "stem_top": (0.0, 10.0, False, "test"),
+            "text_x": (2.0, 2.0, False, "fixed-secondary-dimension"),
+        }
+
+    img = _Image(10, 10)
+    logs: list[str] = []
+    params = {
+        "enable_global_search_mode": True,
+        "stem_enabled": True,
+        "lock_stem_center_to_circle": False,
+        "cx": 5.0,
+        "cy": 5.0,
+        "r": 2.0,
+        "stem_top": 1.0,
+        "text_x": 2.0,
+    }
+
+    improved = helpers.optimizeGlobalParameterVectorSamplingImpl(
+        img,
+        params,
+        logs,
+        rounds=2,
+        samples_per_round=3,
+        global_parameter_vector_cls=_StemVector,
+        global_parameter_vector_bounds_fn=_stem_bounds,
+        clip_scalar_fn=lambda value, low, high: max(low, min(high, value)),
+        snap_half_fn=lambda value: round(value * 2.0) / 2.0,
+        make_rng_fn=lambda _seed: _TargetRng(),
+        reanchor_arm_to_circle_edge_fn=lambda _probe, _r: None,
+        full_badge_error_for_params_fn=lambda _img, probe: abs(float(probe["stem_top"]) - 8.0),
+        log_global_parameter_vector_fn=lambda _logs, _params, _w, _h, label: _logs.append(label),
+        stochastic_run_seed=0,
+        stochastic_seed_offset=0,
+    )
+
+    assert improved is True
+    assert float(params["stem_top"]) == 8.0
+    assert any("stem_top 1.000->8.000" in line for line in logs)
+
+
+def test_global_search_can_improve_error_by_varying_stem_bottom() -> None:
+    @dataclass(frozen=True)
+    class _StemVector:
+        cx: float
+        cy: float
+        r: float
+        stem_bottom: float
+        text_x: float
+
+        @staticmethod
+        def fromParams(params: dict) -> "_StemVector":
+            return _StemVector(
+                cx=float(params["cx"]),
+                cy=float(params["cy"]),
+                r=float(params["r"]),
+                stem_bottom=float(params["stem_bottom"]),
+                text_x=float(params["text_x"]),
+            )
+
+        def applyToParams(self, params: dict) -> dict:
+            out = dict(params)
+            out.update(
+                {
+                    "cx": float(self.cx),
+                    "cy": float(self.cy),
+                    "r": float(self.r),
+                    "stem_bottom": float(self.stem_bottom),
+                    "text_x": float(self.text_x),
+                }
+            )
+            return out
+
+        def apply_to_params(self, params: dict) -> dict:
+            return self.applyToParams(params)
+
+    class _TargetRng:
+        def normal(self, loc: float, _sigma: float) -> float:
+            if abs(loc - 2.0) < 1e-6:
+                return loc
+            return 8.0
+
+    def _stem_bounds(_params: dict, _w: int, _h: int) -> dict:
+        return {
+            "cx": (5.0, 5.0, True, "locked"),
+            "cy": (5.0, 5.0, True, "locked"),
+            "r": (2.0, 2.0, True, "locked"),
+            "stem_bottom": (0.0, 10.0, False, "test"),
+            "text_x": (2.0, 2.0, False, "fixed-secondary-dimension"),
+        }
+
+    img = _Image(10, 10)
+    logs: list[str] = []
+    params = {
+        "enable_global_search_mode": True,
+        "stem_enabled": True,
+        "lock_stem_center_to_circle": False,
+        "cx": 5.0,
+        "cy": 5.0,
+        "r": 2.0,
+        "stem_bottom": 1.0,
+        "text_x": 2.0,
+    }
+
+    improved = helpers.optimizeGlobalParameterVectorSamplingImpl(
+        img,
+        params,
+        logs,
+        rounds=2,
+        samples_per_round=3,
+        global_parameter_vector_cls=_StemVector,
+        global_parameter_vector_bounds_fn=_stem_bounds,
+        clip_scalar_fn=lambda value, low, high: max(low, min(high, value)),
+        snap_half_fn=lambda value: round(value * 2.0) / 2.0,
+        make_rng_fn=lambda _seed: _TargetRng(),
+        reanchor_arm_to_circle_edge_fn=lambda _probe, _r: None,
+        full_badge_error_for_params_fn=lambda _img, probe: abs(float(probe["stem_bottom"]) - 8.0),
+        log_global_parameter_vector_fn=lambda _logs, _params, _w, _h, label: _logs.append(label),
+        stochastic_run_seed=0,
+        stochastic_seed_offset=0,
+    )
+
+    assert improved is True
+    assert float(params["stem_bottom"]) == 8.0
+    assert any("stem_bottom 1.000->8.000" in line for line in logs)
+
+
+def test_global_search_can_improve_error_by_varying_stem_width() -> None:
+    @dataclass(frozen=True)
+    class _StemVector:
+        cx: float
+        cy: float
+        r: float
+        stem_x: float
+        stem_width: float
+        text_x: float
+
+        @staticmethod
+        def fromParams(params: dict) -> "_StemVector":
+            return _StemVector(
+                cx=float(params["cx"]),
+                cy=float(params["cy"]),
+                r=float(params["r"]),
+                stem_x=float(params["stem_x"]),
+                stem_width=float(params["stem_width"]),
+                text_x=float(params["text_x"]),
+            )
+
+        def applyToParams(self, params: dict) -> dict:
+            out = dict(params)
+            out.update(
+                {
+                    "cx": float(self.cx),
+                    "cy": float(self.cy),
+                    "r": float(self.r),
+                    "stem_x": float(self.stem_x),
+                    "stem_width": float(self.stem_width),
+                    "text_x": float(self.text_x),
+                }
+            )
+            return out
+
+        def apply_to_params(self, params: dict) -> dict:
+            return self.applyToParams(params)
+
+    class _TargetRng:
+        def normal(self, loc: float, _sigma: float) -> float:
+            if abs(loc - 2.0) < 1e-6:
+                return loc
+            return 8.0
+
+    def _stem_bounds(_params: dict, _w: int, _h: int) -> dict:
+        return {
+            "cx": (5.0, 5.0, True, "locked"),
+            "cy": (5.0, 5.0, True, "locked"),
+            "r": (2.0, 2.0, True, "locked"),
+            "stem_x": (0.0, 10.0, False, "test"),
+            "stem_width": (0.0, 10.0, False, "test"),
+            "text_x": (2.0, 2.0, False, "fixed-secondary-dimension"),
+        }
+
+    img = _Image(10, 10)
+    logs: list[str] = []
+    params = {
+        "enable_global_search_mode": True,
+        "stem_enabled": True,
+        "lock_stem_center_to_circle": True,
+        "cx": 5.0,
+        "cy": 5.0,
+        "r": 2.0,
+        "stem_x": 4.0,
+        "stem_width": 1.0,
+        "text_x": 2.0,
+    }
+
+    improved = helpers.optimizeGlobalParameterVectorSamplingImpl(
+        img,
+        params,
+        logs,
+        rounds=2,
+        samples_per_round=3,
+        global_parameter_vector_cls=_StemVector,
+        global_parameter_vector_bounds_fn=_stem_bounds,
+        clip_scalar_fn=lambda value, low, high: max(low, min(high, value)),
+        snap_half_fn=lambda value: round(value * 2.0) / 2.0,
+        make_rng_fn=lambda _seed: _TargetRng(),
+        reanchor_arm_to_circle_edge_fn=lambda _probe, _r: None,
+        full_badge_error_for_params_fn=lambda _img, probe: abs(float(probe["stem_width"]) - 8.0),
+        log_global_parameter_vector_fn=lambda _logs, _params, _w, _h, label: _logs.append(label),
+        stochastic_run_seed=0,
+        stochastic_seed_offset=0,
+    )
+
+    assert improved is True
+    assert float(params["stem_width"]) == 8.0
+    assert any("stem_width 1.000->8.000" in line for line in logs)

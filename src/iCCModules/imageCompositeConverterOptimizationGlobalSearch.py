@@ -59,8 +59,39 @@ def optimizeGlobalParameterVectorSamplingImpl(
     bounds = global_parameter_vector_bounds_fn(params, w, h)
     vector = global_parameter_vector_cls.fromParams(params)
 
+    candidate_key_order = (
+        "cx",
+        "cy",
+        "r",
+        "arm_x1",
+        "arm_y1",
+        "arm_x2",
+        "arm_y2",
+        "arm_stroke",
+        "stem_x",
+        "stem_top",
+        "stem_bottom",
+        "stem_width",
+        "text_x",
+        "text_y",
+        "text_scale",
+    )
+
+    def _key_applicable(key: str) -> bool:
+        if key.startswith("arm_"):
+            return bool(params.get("arm_enabled", False))
+        if key.startswith("stem_"):
+            return bool(params.get("stem_enabled", False))
+        if key.startswith("text_"):
+            return bool(params.get("draw_text", True))
+        return True
+
     active_keys: list[str] = []
-    for key in ("cx", "cy", "r", "stem_x", "stem_width", "text_x", "text_y", "text_scale"):
+    for key in candidate_key_order:
+        if key not in bounds or not hasattr(vector, key):
+            continue
+        if not _key_applicable(key):
+            continue
         value = getattr(vector, key)
         if value is None:
             continue
@@ -68,6 +99,8 @@ def optimizeGlobalParameterVectorSamplingImpl(
         if locked:
             continue
         active_keys.append(key)
+
+    active_key_set = set(active_keys)
 
     min_active_keys = 2
     search_mode = "voll" if len(active_keys) >= 4 else "reduziert"
@@ -112,7 +145,8 @@ def optimizeGlobalParameterVectorSamplingImpl(
         if probe.get("arm_enabled"):
             reanchor_arm_to_circle_edge_fn(probe, float(probe.get("r", 0.0)))
         if probe.get("stem_enabled"):
-            probe["stem_top"] = float(probe.get("cy", 0.0)) + float(probe.get("r", 0.0))
+            if "stem_top" not in active_key_set:
+                probe["stem_top"] = float(probe.get("cy", 0.0)) + float(probe.get("r", 0.0))
             if bool(probe.get("lock_stem_center_to_circle", False)):
                 stem_w = float(probe.get("stem_width", 1.0))
                 probe["stem_x"] = snap_half_fn(
@@ -385,7 +419,7 @@ def optimizeGlobalParameterVectorSamplingImpl(
     ]
     if params.get("arm_enabled"):
         reanchor_arm_to_circle_edge_fn(params, float(params.get("r", 0.0)))
-    if params.get("stem_enabled"):
+    if params.get("stem_enabled") and "stem_top" not in active_key_set:
         params["stem_top"] = float(params.get("cy", 0.0)) + float(params.get("r", 0.0))
     log_global_parameter_vector_fn(logs, params, w, h, label=f"global-search: final ({winner_name})")
     logs.append(
