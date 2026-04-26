@@ -111,7 +111,7 @@ def tuneAc08LeftConnectorFamilyImpl(
     """Apply shared guardrails for left-connector AC08 families."""
     p = dict(params)
     symbol_name = get_base_name_from_file_fn(str(name)).upper().split("_", 1)[0]
-    if symbol_name not in {"AC0812", "AC0832", "AC0837", "AC0882"}:
+    if symbol_name not in {"AC0812", "AC0832", "AC0837", "AC0842", "AC0882"}:
         return p
 
     p["connector_family_group"] = "ac08_left_connector"

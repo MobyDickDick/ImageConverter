@@ -52,3 +52,24 @@ def test_generate_badge_svg_impl_renders_voc_text() -> None:
     )
 
     assert ">VOC</text>" in svg
+
+
+def test_generate_badge_svg_impl_renders_rf_text() -> None:
+    svg = semantic_badge_svg_helpers.generateBadgeSvgImpl(
+        40,
+        40,
+        {"cx": 20.0, "cy": 20.0, "r": 10.0, "stroke_circle": 1.2, "fill_gray": 220, "stroke_gray": 152, "draw_text": True, "text_mode": "rf", "text_gray": 152, "label": "rF"},
+        align_stem_to_circle_center_fn=lambda p: dict(p),
+        quantize_badge_params_fn=lambda p, _w, _h: dict(p),
+        clip_scalar_fn=lambda value, lower, upper: min(max(value, lower), upper),
+        grayhex_fn=lambda _value: "#808080",
+        co2_layout_fn=lambda _p: {},
+        t_path_d="T",
+        t_xmin=0.0,
+        t_ymax=0.0,
+        m_path_d="M",
+        m_xmin=0.0,
+        m_ymax=0.0,
+    )
+
+    assert ">rF</text>" in svg

@@ -216,6 +216,20 @@ def generateBadgeSvgImpl(
                     f'text-anchor="middle" dominant-baseline="middle">VOC</text>'
                 )
             )
+        elif p.get("text_mode") == "rf":
+            radius = p.get("r", min(w, h) * 0.4)
+            font_size = max(4.0, radius * p.get("rf_font_scale", 0.58))
+            rf_dy = p.get("rf_dy", 0.0)
+            rf_weight = int(p.get("rf_weight", 600))
+            rf_label = str(p.get("label", "rF"))
+            elements.append(
+                (
+                    f'  <text x="{p["cx"]:.4f}" y="{(p["cy"] + rf_dy):.4f}" fill="{grayhex_fn(p["text_gray"])}" '
+                    f'font-family="Arial, Helvetica, sans-serif" font-size="{font_size:.4f}px" '
+                    f'font-style="normal" font-weight="{rf_weight}" letter-spacing="0.00em" '
+                    f'text-anchor="middle" dominant-baseline="middle">{rf_label}</text>'
+                )
+            )
         else:
             elements.append(
                 (
