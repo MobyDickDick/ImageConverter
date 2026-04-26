@@ -189,7 +189,7 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
     - Aktueller Fehler: Nach `Action.validateBadgeByElements(..., max_rounds=6)` fällt `params["cy"]` auf `23.0`; erwartet wird `>= 24.0`, damit der dominante Kreis nicht zu weit nach oben driftet.
     - Nächster Schritt: Ursachenanalyse der `AC0838_M`-spezifischen Quantisierungs-/Validation-Pfade und gezielter Fix mit grünem Regressionstest.
     - 2026-04-25: Re-Test mit `python -m pytest tests/test_image_composite_converter.py::test_make_badge_params_keeps_ac0838_m_circle_near_full_width_for_voc_layout -q` ist grün (`1 passed`); Task als erledigt markiert.
-  - [ ] T5.7: Parameterweise Optimierungsaufgaben für alle Geometrieparameter führen und sukzessive abarbeiten.
+  - [x] T5.7: Parameterweise Optimierungsaufgaben für alle Geometrieparameter führen und sukzessive abarbeiten.
     - Ziel: Für jeden aktiven Geometrieparameter genau eine dedizierte Optimierungsaufgabe mit messbarem Kriterium pflegen ("einen Parameter variieren").
     - Aufgabenliste (in Reihenfolge):
       - [x] T5.7a: `cx`/`cy`/`r` (Kreismittelpunkt + Radius) im Global-Search als eigenständige Suchdimensionen bestätigen und dokumentieren.
@@ -218,6 +218,7 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
     - 2026-04-26: T5.7k umgesetzt: Neuer Detailtest bestätigt deterministisch, dass `text_x` als aktive Suchdimension den Text-/Gesamtfehler reduziert und als Delta (`text_x 1.000->9.000`) im Global-Search-Log protokolliert wird.
     - 2026-04-26: T5.7l umgesetzt: Neuer Detailtest bestätigt deterministisch, dass `text_y` als aktive Suchdimension den Text-/Gesamtfehler reduziert und als Delta (`text_y 1.000->8.000`) im Global-Search-Log protokolliert wird.
     - 2026-04-26: T5.7m umgesetzt: Neuer Detailtest bestätigt deterministisch, dass `text_scale` als aktive Suchdimension den Text-/Gesamtfehler reduziert und als Delta (`text_scale 1.000->3.000`) im Global-Search-Log protokolliert wird.
+    - 2026-04-26: Parent-Task abgeschlossen, da alle Teilaufgaben T5.7a–T5.7m umgesetzt und dokumentiert sind.
   - [x] T5.8: Aktuelle Full-Pytest-Abbrüche aus `tests/test_image_composite_converter.py` gezielt isolieren und beheben.
     - 2026-04-25: Lauf `python -m pytest tests/test_image_composite_converter.py --maxfail=3 -q` endet mit `3 failed, 283 passed, 1 skipped`; die folgenden Unteraufgaben wurden daraus abgeleitet.
     - [x] T5.8a: Interaktive Bereichsabfrage in `main()` trotz Non-TTY-Testkontext korrekt anstoßen oder Teststrategie klar trennen.
