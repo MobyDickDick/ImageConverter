@@ -170,6 +170,7 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
   - 2026-04-24: Separater Lauf der übrigen Top-Level-Dateien (`tests/test_image_composite_converter_element_decomposition.py`, `tests/test_image_composite_converter_naming.py`, `tests/test_retry_failed_image_conversions.py`) ist vollständig grün (`7 passed`).
   - Nächster Schritt: Fehlschläge aus `tests/test_image_composite_converter.py` einzeln isolieren (z. B. `-x`/`--lf`) und pro Root-Cause als eigene Unteraufgaben dokumentieren.
   - 2026-04-25: Erneute Isolation mit `python -m pytest tests/test_image_composite_converter.py -x`; erster aktueller Abbruch bei `test_make_badge_params_keeps_ac0838_m_circle_near_full_width_for_voc_layout` (`params["cy"] == 23.0`, erwartet `>= 24.0`).
+  - 2026-04-26: Erneuter Isolationslauf mit `timeout 900 python -m pytest -x`; bis in den >`96%`-Bereich kein neuer Assertion-Fehler sichtbar, aber Lauf endet mit Timeout-Exit `124` (weiterhin kein vollständig grüner Gesamtlauf mit Exit `0`).
   - [x] T5.1: Extent-Bracketing-Log für Line-Elemente in Badge-Validierung wiederherstellen oder Testerwartung aktualisieren.
     - Fehlgeschlagener Test: `tests/test_image_composite_converter.py::test_validate_badge_logs_extent_bracketing_for_line_elements`
     - Aktueller Fehler: Erwartete Logzeile `"arm: Längen-Bracketing"` fehlt in `Action.validate_badge_by_elements(..., max_rounds=1)`; `assert any(...)` schlägt fehl.
@@ -197,6 +198,9 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
     - Fehlgeschlagener Test: `tests/test_image_composite_converter.py::test_make_badge_params_keeps_ac0838_m_circle_near_full_width_for_voc_layout`
     - Aktueller Fehler: Nach `validateBadgeByElements(..., max_rounds=6)` fiel `cy` auf `23.0` und unterschritt die erwartete Untergrenze (`>=24.0`), obwohl `template_circle_cy` im selben Fall bei `24.8` lag.
     - 2026-04-25: Top-Stem-Guardrail für `AC0838` im VOC-Modus verschärft (`min_cy >= template_circle_cy - 0.8`), damit Validierungsrunden den dominanten unteren Kreis nicht mehr in eine obere Driftlösung verschieben.
+  - [ ] T5.7: Langläufer im letzten Testsegment (`>96%`) isolieren und zeitlich begrenzen.
+    - Ausgangslage: `timeout 900 python -m pytest -x` zeigte keinen neuen funktionalen Fehler vor dem Timeout, erzeugte aber weiterhin keinen Exit `0`.
+    - Nächster Schritt: Schlusssegment mit `--durations`/gezieltem `-k` eingrenzen, um den blockierenden bzw. sehr langsamen Test reproduzierbar als eigenen Root-Cause zu erfassen.
 
 ## Next tasks (added 2026-03-28)
 
