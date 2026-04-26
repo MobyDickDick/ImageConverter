@@ -1,4 +1,4 @@
-run-meta: run_seed=479234574 pass_seed_offset=0 nonce_ns=1776940781036308700
+run-meta: run_seed=430953015 pass_seed_offset=0 nonce_ns=1777124791298524600
 status=semantic_ok
 semantic_audit_status=semantic_ok
 semantic_audit_lookup_keys=AC0811
@@ -9,7 +9,7 @@ semantic_audit_conflicts=
 quality=borderline
 quality_reason=semantic_ok_trotz_hohem_elementfehler:stem=35.782
 quality_elevated_elements=circle,stem
-redraw_variation: seed=484137124290 changed_params=cx:7.500->7.424 | cy:7.500->7.469 | r:7.000->7.004 | stroke_circle:1.000->1.086 | stem_width:1.000->0.985
+redraw_variation: seed=435679607789 changed_params=cx:7.500->7.455 | cy:7.500->7.673 | r:7.000->6.964 | stroke_circle:1.000->0.974 | stem_width:1.000->1.013
 semantic-guard: Text bewusst deaktiviert (plain-ring Familie ohne Buchstabe).
 small_variant_mode_active: reason=min_dim, min_dim=14.000, mask_dilate_px=1, text_mode=, arm_min_ratio=0.000, stem_min_ratio=0.800
 Runde 1: elementweise Validierung gestartet
@@ -26,20 +26,21 @@ global-search: konfiguration (modus=voll, aktive_parameter=4, keys=cx,cy,r,stem_
 global-search: gestartet (modus=voll, aktive_parameter=cx,cy,r,stem_x, samples_pro_runde=16, start_err=9.299)
 global-search: near-optimum-definition (err <= best_err + epsilon, epsilon=max(0.06, best_err*0.02))
 global-search: Runde 1 best_err=9.299, akzeptierte_kandidaten=0, sigma_mittel=2.077
-global-search: near-optimum-plateau (runde=1, punkte=2, epsilon=0.186, mittlere_spannweite=0.625, stabilitaet=n/a, spannweite=cx:0.000; cy:0.500; r:0.000; stem_x:2.000)
+global-search: near-optimum-plateau (runde=1, punkte=1, epsilon=0.186, mittlere_spannweite=0.000, stabilitaet=n/a, spannweite=cx:0.000; cy:0.000; r:0.000; stem_x:0.000)
 global-search: plateau-repräsentant (runde=1, kandidat=best_sample, err=9.299, begründung=niedrigster Fehler in dieser Runde)
 global-search: Runde 2 best_err=9.299, akzeptierte_kandidaten=0, sigma_mittel=1.620
 global-search: near-optimum-plateau (runde=2, punkte=1, epsilon=0.186, mittlere_spannweite=0.000, stabilitaet=stabil, spannweite=cx:0.000; cy:0.000; r:0.000; stem_x:0.000)
 global-search: plateau-repräsentant (runde=2, kandidat=best_sample, err=9.299, begründung=niedrigster Fehler in dieser Runde)
 global-search: Runde 3 best_err=9.299, akzeptierte_kandidaten=0, sigma_mittel=1.264
-global-search: near-optimum-plateau (runde=3, punkte=1, epsilon=0.186, mittlere_spannweite=0.000, stabilitaet=stabil, spannweite=cx:0.000; cy:0.000; r:0.000; stem_x:0.000)
-global-search: plateau-repräsentant (runde=3, kandidat=best_sample, err=9.299, begründung=niedrigster Fehler in dieser Runde)
-global-search: deterministischer track gestartet (modus=voll, seed=479238673, schritte=3, start_err=9.299)
+global-search: near-optimum-plateau (runde=3, punkte=4, epsilon=0.186, mittlere_spannweite=0.375, stabilitaet=stabil, spannweite=cx:0.000; cy:0.500; r:0.000; stem_x:1.000)
+global-search: plateau-repräsentant (runde=3, kandidat=schwerpunkt, err=9.299, begründung=nahe am Bestpunkt und robuster Zentrumskandidat des Plateau-Bereichs)
+global-search: deterministischer track gestartet (modus=voll, seed=430957114, schritte=3, start_err=9.299)
 global-search: deterministischer track (pass=1, verbesserungen=0, best_err=9.299)
 global-search: deterministischer track (pass=2, verbesserungen=0, best_err=9.299)
 global-search: track-vergleich (stochastic_err=9.299, deterministic_err=9.299, gewählt=stochastic)
-global-search: keine relevante Verbesserung
-global-search: evaluate-telemetrie (requests=68, cache_hits=5, hit_rate=0.074, render_aufrufe=63)
+global-search: final (stochastic): global_vector cx=7.500 [0.00,14.00] lock=nein src=canvas; cy=7.500 [0.00,24.00] lock=nein src=canvas; r=7.000 [6.00,7.00] lock=nein src=template/semantic; arm_x1=- [0.00,14.00] lock=nein src=canvas; arm_y1=- [0.00,24.00] lock=nein src=canvas; arm_x2=- [0.00,14.00] lock=nein src=template; arm_y2=- [0.00,24.00] lock=nein src=template; arm_stroke=- [1.00,3.00] lock=ja src=semantic; stem_x=7.500 [0.00,14.00] lock=nein src=template; stem_top=14.500 [0.00,24.00] lock=nein src=template; stem_bottom=25.000 [0.00,24.00] lock=nein src=template; stem_width=1.000 [1.00,1.35] lock=ja src=semantic; text_x=- [0.00,14.00] lock=nein src=template; text_y=- [0.00,24.00] lock=nein src=template; text_scale=- [0.50,1.80] lock=nein src=semantic
+global-search: übernommen (best_err=9.299, track=stochastic, verbessert=keine sichtbare delta-liste)
+global-search: evaluate-telemetrie (requests=68, cache_hits=7, hit_rate=0.103, render_aufrufe=61)
 Runde 1: Gesamtfehler=9.299
 Runde 2: elementweise Validierung gestartet
 circle: Fehler=19.567
@@ -53,20 +54,21 @@ global-search: konfiguration (modus=voll, aktive_parameter=4, keys=cx,cy,r,stem_
 global-search: gestartet (modus=voll, aktive_parameter=cx,cy,r,stem_x, samples_pro_runde=16, start_err=9.299)
 global-search: near-optimum-definition (err <= best_err + epsilon, epsilon=max(0.06, best_err*0.02))
 global-search: Runde 1 best_err=9.299, akzeptierte_kandidaten=0, sigma_mittel=2.077
-global-search: near-optimum-plateau (runde=1, punkte=2, epsilon=0.186, mittlere_spannweite=0.625, stabilitaet=n/a, spannweite=cx:0.000; cy:0.500; r:0.000; stem_x:2.000)
+global-search: near-optimum-plateau (runde=1, punkte=1, epsilon=0.186, mittlere_spannweite=0.000, stabilitaet=n/a, spannweite=cx:0.000; cy:0.000; r:0.000; stem_x:0.000)
 global-search: plateau-repräsentant (runde=1, kandidat=best_sample, err=9.299, begründung=niedrigster Fehler in dieser Runde)
 global-search: Runde 2 best_err=9.299, akzeptierte_kandidaten=0, sigma_mittel=1.620
 global-search: near-optimum-plateau (runde=2, punkte=1, epsilon=0.186, mittlere_spannweite=0.000, stabilitaet=stabil, spannweite=cx:0.000; cy:0.000; r:0.000; stem_x:0.000)
 global-search: plateau-repräsentant (runde=2, kandidat=best_sample, err=9.299, begründung=niedrigster Fehler in dieser Runde)
 global-search: Runde 3 best_err=9.299, akzeptierte_kandidaten=0, sigma_mittel=1.264
-global-search: near-optimum-plateau (runde=3, punkte=1, epsilon=0.186, mittlere_spannweite=0.000, stabilitaet=stabil, spannweite=cx:0.000; cy:0.000; r:0.000; stem_x:0.000)
-global-search: plateau-repräsentant (runde=3, kandidat=best_sample, err=9.299, begründung=niedrigster Fehler in dieser Runde)
-global-search: deterministischer track gestartet (modus=voll, seed=479238673, schritte=3, start_err=9.299)
+global-search: near-optimum-plateau (runde=3, punkte=4, epsilon=0.186, mittlere_spannweite=0.375, stabilitaet=stabil, spannweite=cx:0.000; cy:0.500; r:0.000; stem_x:1.000)
+global-search: plateau-repräsentant (runde=3, kandidat=schwerpunkt, err=9.299, begründung=nahe am Bestpunkt und robuster Zentrumskandidat des Plateau-Bereichs)
+global-search: deterministischer track gestartet (modus=voll, seed=430957114, schritte=3, start_err=9.299)
 global-search: deterministischer track (pass=1, verbesserungen=0, best_err=9.299)
 global-search: deterministischer track (pass=2, verbesserungen=0, best_err=9.299)
 global-search: track-vergleich (stochastic_err=9.299, deterministic_err=9.299, gewählt=stochastic)
-global-search: keine relevante Verbesserung
-global-search: evaluate-telemetrie (requests=68, cache_hits=5, hit_rate=0.074, render_aufrufe=63)
+global-search: final (stochastic): global_vector cx=7.500 [0.00,14.00] lock=nein src=canvas; cy=7.500 [0.00,24.00] lock=nein src=canvas; r=7.000 [6.00,7.00] lock=nein src=template/semantic; arm_x1=- [0.00,14.00] lock=nein src=canvas; arm_y1=- [0.00,24.00] lock=nein src=canvas; arm_x2=- [0.00,14.00] lock=nein src=template; arm_y2=- [0.00,24.00] lock=nein src=template; arm_stroke=- [1.00,3.00] lock=ja src=semantic; stem_x=7.500 [0.00,14.00] lock=nein src=template; stem_top=14.500 [0.00,24.00] lock=nein src=template; stem_bottom=25.000 [0.00,24.00] lock=nein src=template; stem_width=1.000 [1.00,1.35] lock=ja src=semantic; text_x=- [0.00,14.00] lock=nein src=template; text_y=- [0.00,24.00] lock=nein src=template; text_scale=- [0.50,1.80] lock=nein src=semantic
+global-search: übernommen (best_err=9.299, track=stochastic, verbessert=keine sichtbare delta-liste)
+global-search: evaluate-telemetrie (requests=68, cache_hits=68, hit_rate=1.000, render_aufrufe=0)
 Runde 2: Gesamtfehler=9.299
 stagnation_detected: identischer Parameter-Fingerprint und praktisch unveränderter Gesamtfehler
 switch_to_fallback_search: deaktiviere Circle-Geometry-Penalty für eine letzte Ausweichrunde
@@ -80,20 +82,21 @@ global-search: konfiguration (modus=voll, aktive_parameter=4, keys=cx,cy,r,stem_
 global-search: gestartet (modus=voll, aktive_parameter=cx,cy,r,stem_x, samples_pro_runde=16, start_err=9.299)
 global-search: near-optimum-definition (err <= best_err + epsilon, epsilon=max(0.06, best_err*0.02))
 global-search: Runde 1 best_err=9.299, akzeptierte_kandidaten=0, sigma_mittel=2.077
-global-search: near-optimum-plateau (runde=1, punkte=2, epsilon=0.186, mittlere_spannweite=0.625, stabilitaet=n/a, spannweite=cx:0.000; cy:0.500; r:0.000; stem_x:2.000)
+global-search: near-optimum-plateau (runde=1, punkte=1, epsilon=0.186, mittlere_spannweite=0.000, stabilitaet=n/a, spannweite=cx:0.000; cy:0.000; r:0.000; stem_x:0.000)
 global-search: plateau-repräsentant (runde=1, kandidat=best_sample, err=9.299, begründung=niedrigster Fehler in dieser Runde)
 global-search: Runde 2 best_err=9.299, akzeptierte_kandidaten=0, sigma_mittel=1.620
 global-search: near-optimum-plateau (runde=2, punkte=1, epsilon=0.186, mittlere_spannweite=0.000, stabilitaet=stabil, spannweite=cx:0.000; cy:0.000; r:0.000; stem_x:0.000)
 global-search: plateau-repräsentant (runde=2, kandidat=best_sample, err=9.299, begründung=niedrigster Fehler in dieser Runde)
 global-search: Runde 3 best_err=9.299, akzeptierte_kandidaten=0, sigma_mittel=1.264
-global-search: near-optimum-plateau (runde=3, punkte=1, epsilon=0.186, mittlere_spannweite=0.000, stabilitaet=stabil, spannweite=cx:0.000; cy:0.000; r:0.000; stem_x:0.000)
-global-search: plateau-repräsentant (runde=3, kandidat=best_sample, err=9.299, begründung=niedrigster Fehler in dieser Runde)
-global-search: deterministischer track gestartet (modus=voll, seed=479238673, schritte=3, start_err=9.299)
+global-search: near-optimum-plateau (runde=3, punkte=4, epsilon=0.186, mittlere_spannweite=0.375, stabilitaet=stabil, spannweite=cx:0.000; cy:0.500; r:0.000; stem_x:1.000)
+global-search: plateau-repräsentant (runde=3, kandidat=schwerpunkt, err=9.299, begründung=nahe am Bestpunkt und robuster Zentrumskandidat des Plateau-Bereichs)
+global-search: deterministischer track gestartet (modus=voll, seed=430957114, schritte=3, start_err=9.299)
 global-search: deterministischer track (pass=1, verbesserungen=0, best_err=9.299)
 global-search: deterministischer track (pass=2, verbesserungen=0, best_err=9.299)
 global-search: track-vergleich (stochastic_err=9.299, deterministic_err=9.299, gewählt=stochastic)
-global-search: keine relevante Verbesserung
-global-search: evaluate-telemetrie (requests=68, cache_hits=5, hit_rate=0.074, render_aufrufe=63)
+global-search: final (stochastic): global_vector cx=7.500 [0.00,14.00] lock=nein src=canvas; cy=7.500 [0.00,24.00] lock=nein src=canvas; r=7.000 [6.00,7.00] lock=nein src=template/semantic; arm_x1=- [0.00,14.00] lock=nein src=canvas; arm_y1=- [0.00,24.00] lock=nein src=canvas; arm_x2=- [0.00,14.00] lock=nein src=template; arm_y2=- [0.00,24.00] lock=nein src=template; arm_stroke=- [1.00,3.00] lock=ja src=semantic; stem_x=7.500 [0.00,14.00] lock=nein src=template; stem_top=14.500 [0.00,24.00] lock=nein src=template; stem_bottom=25.000 [0.00,24.00] lock=nein src=template; stem_width=1.000 [1.00,1.35] lock=ja src=semantic; text_x=- [0.00,14.00] lock=nein src=template; text_y=- [0.00,24.00] lock=nein src=template; text_scale=- [0.50,1.80] lock=nein src=semantic
+global-search: übernommen (best_err=9.299, track=stochastic, verbessert=keine sichtbare delta-liste)
+global-search: evaluate-telemetrie (requests=68, cache_hits=68, hit_rate=1.000, render_aufrufe=0)
 Runde 3: Gesamtfehler=9.299
 stagnation_detected: identischer Parameter-Fingerprint und praktisch unveränderter Gesamtfehler
 stopped_due_to_stagnation: Validierung vorzeitig beendet
