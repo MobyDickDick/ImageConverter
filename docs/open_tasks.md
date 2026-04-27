@@ -133,6 +133,7 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
   - 2026-04-26: Zwischenstand nach Run AR nachgepflegt; N1/N2/N4 bleiben weiterhin offen (Timeout-Exit `124`, weiterhin kein Exit-`0`).
   - 2026-04-27: Zwischenstand nach Run AS nachgepflegt; N1/N2/N4 bleiben weiterhin offen (Timeout-Exit `124`, weiterhin kein Exit-`0`).
   - 2026-04-27: Zwischenstand nach Run AT nachgepflegt; N1/N2/N4 bleiben weiterhin offen (Timeout-Exit `124`, weiterhin kein Exit-`0`).
+  - 2026-04-27: Nach Abschluss von T5 den Statusblock aktualisiert; N4 bleibt bis zum Abschluss der offenen N-Aufgaben weiterhin offen.
 
 ## Architektur-Backlog (added 2026-04-25)
 
@@ -171,7 +172,7 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
   - 2026-04-21: Runner-only-Variante in `runIterationPipelineImplFromInputsDispatchCallForRunFinalRunnerSequenceForRunImpl` umbenannt; der öffentliche Sequence-Helper unterstützt jetzt sowohl den Builder+Runner- als auch den direkten Runner-Pfad kompatibel.
 
 
-- [ ] T5: Fehlgeschlagene Regressionen im Volltestlauf systematisch aufarbeiten.
+- [x] T5: Fehlgeschlagene Regressionen im Volltestlauf systematisch aufarbeiten.
   - 2026-04-24: Volltestlauf `pytest` (801 Tests) gestartet; im Verlauf ab ~78% mehrere Fehlschläge in `tests/test_image_composite_converter.py` sichtbar (`F...`), daher kein vollständig erfolgreicher Gesamtlauf.
   - 2026-04-24: Separater Lauf der übrigen Top-Level-Dateien (`tests/test_image_composite_converter_element_decomposition.py`, `tests/test_image_composite_converter_naming.py`, `tests/test_retry_failed_image_conversions.py`) ist vollständig grün (`7 passed`).
   - Nächster Schritt: Fehlschläge aus `tests/test_image_composite_converter.py` einzeln isolieren (z. B. `-x`/`--lf`) und pro Root-Cause als eigene Unteraufgaben dokumentieren.
@@ -212,6 +213,7 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
       - `test_ac08_regression_suite_preserves_previously_good_variants[AC0835_S-semantic_ok]` benötigt lokal `80.18s`.
       - `test_ac08_regression_suite_preserves_previously_good_variants[AC0837_L-semantic_ok]` benötigt lokal `86.76s`.
     - 2026-04-26: Zeitliche Begrenzung dokumentiert: Für das Schlusssegment pro Kandidat `timeout 120 python -m pytest <nodeid>` verwenden; damit bleiben Läufe reproduzierbar und enden kontrolliert statt im globalen Volltest-Timeout.
+  - 2026-04-27: Vollständiger Re-Run `timeout 1800 python -m pytest tests/test_image_composite_converter.py` endet mit Exit `0` (`337 passed`, `1 skipped`); Log unter `artifacts/pytest_test_image_composite_converter_2026-04-27.log`.
 
 ## Next tasks (added 2026-03-28)
 
