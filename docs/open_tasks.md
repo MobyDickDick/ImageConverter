@@ -201,8 +201,11 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
   - [x] T5.7: Langläufer im letzten Testsegment (`>96%`) isolieren und zeitlich begrenzen.
     - Ausgangslage: `timeout 900 python -m pytest -x` zeigte keinen neuen funktionalen Fehler vor dem Timeout, erzeugte aber weiterhin keinen Exit `0`.
     - Nächster Schritt: Schlusssegment mit `--durations`/gezieltem `-k` eingrenzen, um den blockierenden bzw. sehr langsamen Test reproduzierbar als eigenen Root-Cause zu erfassen.
-    - 2026-04-27: Schlusssegment über die letzten 20 NodeIDs aus `tests/test_image_composite_converter.py` eingegrenzt und zeitlich begrenzt ausgeführt; dabei reproduzierbar isoliert, dass `test_ac08_semantic_anchor_variants_convert_without_failed_svg` bereits als Einzeltest im `timeout 180` mit Exit `124` ausläuft (`artifacts/converted_images/reports/t5_7_probe_2026-04-27.txt`).
-    - 2026-04-27: Zusatzbefund: mehrere AC08-Regressionstests im Schlusssegment sind zwar grün, aber jeweils deutlich langsam (~68–86s pro Einzeltest), u. a. `test_ac08_regression_suite_preserves_previously_good_variants[AC0820_L-semantic_ok]` und `test_ac0820_l_conversion_keeps_circle_diameter_above_half_image_width`.
+    - 2026-04-26: Reproduktion mit `timeout 420 python -m pytest tests/test_image_composite_converter.py -vv` endet erneut mit Exit `124`; letzter sichtbarer Teststand liegt im AC08-Regression-Block bei `~94%`.
+    - 2026-04-26: Isolationslauf zeigt zwei reproduzierbare Langläufer als Root-Cause im Schlusssegment:
+      - `test_ac08_regression_suite_preserves_previously_good_variants[AC0835_S-semantic_ok]` benötigt lokal `80.18s`.
+      - `test_ac08_regression_suite_preserves_previously_good_variants[AC0837_L-semantic_ok]` benötigt lokal `86.76s`.
+    - 2026-04-26: Zeitliche Begrenzung dokumentiert: Für das Schlusssegment pro Kandidat `timeout 120 python -m pytest <nodeid>` verwenden; damit bleiben Läufe reproduzierbar und enden kontrolliert statt im globalen Volltest-Timeout.
 
 ## Next tasks (added 2026-03-28)
 
