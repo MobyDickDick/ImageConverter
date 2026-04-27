@@ -198,9 +198,11 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
     - Fehlgeschlagener Test: `tests/test_image_composite_converter.py::test_make_badge_params_keeps_ac0838_m_circle_near_full_width_for_voc_layout`
     - Aktueller Fehler: Nach `validateBadgeByElements(..., max_rounds=6)` fiel `cy` auf `23.0` und unterschritt die erwartete Untergrenze (`>=24.0`), obwohl `template_circle_cy` im selben Fall bei `24.8` lag.
     - 2026-04-25: Top-Stem-Guardrail für `AC0838` im VOC-Modus verschärft (`min_cy >= template_circle_cy - 0.8`), damit Validierungsrunden den dominanten unteren Kreis nicht mehr in eine obere Driftlösung verschieben.
-  - [ ] T5.7: Langläufer im letzten Testsegment (`>96%`) isolieren und zeitlich begrenzen.
+  - [x] T5.7: Langläufer im letzten Testsegment (`>96%`) isolieren und zeitlich begrenzen.
     - Ausgangslage: `timeout 900 python -m pytest -x` zeigte keinen neuen funktionalen Fehler vor dem Timeout, erzeugte aber weiterhin keinen Exit `0`.
     - Nächster Schritt: Schlusssegment mit `--durations`/gezieltem `-k` eingrenzen, um den blockierenden bzw. sehr langsamen Test reproduzierbar als eigenen Root-Cause zu erfassen.
+    - 2026-04-27: Schlusssegment über die letzten 20 NodeIDs aus `tests/test_image_composite_converter.py` eingegrenzt und zeitlich begrenzt ausgeführt; dabei reproduzierbar isoliert, dass `test_ac08_semantic_anchor_variants_convert_without_failed_svg` bereits als Einzeltest im `timeout 180` mit Exit `124` ausläuft (`artifacts/converted_images/reports/t5_7_probe_2026-04-27.txt`).
+    - 2026-04-27: Zusatzbefund: mehrere AC08-Regressionstests im Schlusssegment sind zwar grün, aber jeweils deutlich langsam (~68–86s pro Einzeltest), u. a. `test_ac08_regression_suite_preserves_previously_good_variants[AC0820_L-semantic_ok]` und `test_ac0820_l_conversion_keeps_circle_diameter_above_half_image_width`.
 
 ## Next tasks (added 2026-03-28)
 
