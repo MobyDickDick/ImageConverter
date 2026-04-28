@@ -5441,6 +5441,59 @@ def test_validate_semantic_alignment_accepts_ac0838_large_top_connector_voc_vari
     assert "Strukturprüfung: Kein belastbarer waagrechter Linien-Kandidat im Rohbild erkannt" not in issues
 
 
+
+
+def test_validate_badge_by_elements_raises_timeout_error_when_budget_exceeded() -> None:
+    """Element validation should raise when the configured validation time budget is exhausted."""
+    if image_composite_converter.np is None:
+        pytest.skip("numpy not available in this environment")
+
+    from src.iCCModules import imageCompositeConverterElementValidation as validation_helpers
+
+    class _FakeTime:
+        def __init__(self) -> None:
+            self._values = iter((0.0, 0.02, 0.02, 0.02))
+
+        def monotonic(self) -> float:
+            return next(self._values)
+
+    img = image_composite_converter.np.zeros((4, 4, 3), dtype=image_composite_converter.np.uint8)
+    params = {"validation_time_budget_sec": 0.01}
+
+    with pytest.raises(TimeoutError, match="validation_time_budget_exceeded"):
+        validation_helpers.validateBadgeByElementsImpl(
+            img,
+            params,
+            max_rounds=1,
+            debug_out_dir=None,
+            apply_circle_geometry_penalty=True,
+            stop_when_error_below_threshold=False,
+            cv2_module=image_composite_converter.cv2,
+            copy_module=image_composite_converter.copy,
+            math_module=image_composite_converter.math,
+            os_module=image_composite_converter.os,
+            time_module=_FakeTime(),
+            generate_badge_svg_fn=lambda *_a, **_k: "",
+            fit_to_original_size_fn=lambda *_a, **_k: None,
+            render_svg_to_numpy_fn=lambda *_a, **_k: None,
+            create_diff_image_fn=lambda *_a, **_k: None,
+            write_debug_image_fn=lambda *_a, **_k: None,
+            element_only_params_fn=lambda *_a, **_k: {},
+            extract_badge_element_mask_fn=lambda *_a, **_k: None,
+            element_region_mask_fn=lambda *_a, **_k: None,
+            element_match_error_fn=lambda *_a, **_k: 0.0,
+            refine_stem_geometry_from_masks_fn=lambda *_a, **_k: (False, None),
+            optimize_element_width_bracket_fn=lambda *_a, **_k: False,
+            optimize_element_extent_bracket_fn=lambda *_a, **_k: False,
+            optimize_circle_center_bracket_fn=lambda *_a, **_k: False,
+            optimize_circle_radius_bracket_fn=lambda *_a, **_k: False,
+            optimize_global_parameter_vector_sampling_fn=lambda *_a, **_k: False,
+            calculate_error_fn=lambda *_a, **_k: 0.0,
+            activate_ac08_adaptive_locks_fn=lambda *_a, **_k: False,
+            release_ac08_adaptive_locks_fn=lambda *_a, **_k: False,
+            optimize_element_color_bracket_fn=lambda *_a, **_k: False,
+            apply_canonical_badge_colors_fn=lambda _p: {},
+        )
 def test_make_badge_params_keeps_ac0838_m_circle_near_full_width_for_voc_layout() -> None:
     """AC0838_M should preserve the dominant near-full-width VOC circle instead of collapsing."""
     if image_composite_converter.np is None or image_composite_converter.cv2 is None:

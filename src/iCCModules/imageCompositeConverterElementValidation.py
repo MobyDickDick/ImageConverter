@@ -232,13 +232,23 @@ def validateBadgeByElementsImpl(
     logs: list[str] = []
     validation_started_at = float(time_module.monotonic())
     configured_budget = float(params.get("validation_time_budget_sec", 0.0) or 0.0)
-    if configured_budget <= 0.0 and os_module.environ.get("PYTEST_CURRENT_TEST"):
-        configured_budget = max(6.0, 2.0 * float(max_rounds))
+    if configured_budget <= 0.0:
+        configured_budget = max(15.0, 3.0 * float(max_rounds))
+        if os_module.environ.get("PYTEST_CURRENT_TEST"):
+            configured_budget = max(configured_budget, 6.0)
 
     def _time_budget_exceeded() -> bool:
         if configured_budget <= 0.0:
             return False
         return (float(time_module.monotonic()) - validation_started_at) >= configured_budget
+
+    def _raise_time_budget_exceeded(*, phase: str, round_number: int, element: str | None = None) -> None:
+        elapsed = float(time_module.monotonic()) - validation_started_at
+        detail = f", element={element}" if element else ""
+        raise TimeoutError(
+            "validation_time_budget_exceeded: "
+            f"phase={phase}, round={round_number}, elapsed={elapsed:.2f}s, budget={configured_budget:.2f}s{detail}"
+        )
 
     elements = ["circle"]
     if params.get("stem_enabled"):
@@ -328,11 +338,7 @@ def validateBadgeByElementsImpl(
 
     for round_idx in range(max_rounds):
         if _time_budget_exceeded():
-            logs.append(
-                "stopped_due_to_time_budget: "
-                f"Validierung nach {configured_budget:.1f}s beendet, um Endlosschleifen zu vermeiden"
-            )
-            break
+            _raise_time_budget_exceeded(phase="round_start", round_number=round_idx + 1)
         logs.append(f"Runde {round_idx + 1}: elementweise Validierung gestartet")
         full_svg = generate_badge_svg_fn(w, h, params)
         full_render = fit_to_original_size_fn(img_orig, render_svg_to_numpy_fn(full_svg, w, h))
@@ -347,11 +353,11 @@ def validateBadgeByElementsImpl(
         round_changed = False
         for element in elements:
             if _time_budget_exceeded():
-                logs.append(
-                    "stopped_due_to_time_budget: "
-                    f"Elementrunde abgebrochen (Budget {configured_budget:.1f}s erreicht)"
+                _raise_time_budget_exceeded(
+                    phase="element_loop",
+                    round_number=round_idx + 1,
+                    element=element,
                 )
-                break
             elem_svg = generate_badge_svg_fn(w, h, element_only_params_fn(params, element))
             elem_render = fit_to_original_size_fn(img_orig, render_svg_to_numpy_fn(elem_svg, w, h))
             if elem_render is None:
