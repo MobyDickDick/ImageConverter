@@ -571,6 +571,91 @@ def test_global_search_can_improve_error_by_varying_arm_x2() -> None:
     assert any("arm_x2 1.000->9.000" in line for line in logs)
 
 
+def test_global_search_skips_deterministic_track_after_strong_stochastic_gain() -> None:
+    @dataclass(frozen=True)
+    class _ArmVector:
+        cx: float
+        cy: float
+        r: float
+        arm_x1: float
+        text_x: float
+
+        @staticmethod
+        def fromParams(params: dict) -> "_ArmVector":
+            return _ArmVector(
+                cx=float(params["cx"]),
+                cy=float(params["cy"]),
+                r=float(params["r"]),
+                arm_x1=float(params["arm_x1"]),
+                text_x=float(params["text_x"]),
+            )
+
+        def applyToParams(self, params: dict) -> dict:
+            out = dict(params)
+            out.update(
+                {
+                    "cx": float(self.cx),
+                    "cy": float(self.cy),
+                    "r": float(self.r),
+                    "arm_x1": float(self.arm_x1),
+                    "text_x": float(self.text_x),
+                }
+            )
+            return out
+
+        def apply_to_params(self, params: dict) -> dict:
+            return self.applyToParams(params)
+
+    class _TargetRng:
+        def normal(self, loc: float, _sigma: float) -> float:
+            if abs(loc - 2.0) < 1e-6:
+                return loc
+            return 7.0
+
+    def _arm_bounds(_params: dict, _w: int, _h: int) -> dict:
+        return {
+            "cx": (5.0, 5.0, True, "locked"),
+            "cy": (5.0, 5.0, True, "locked"),
+            "r": (2.0, 2.0, True, "locked"),
+            "arm_x1": (0.0, 10.0, False, "test"),
+            "text_x": (2.0, 2.0, False, "fixed-secondary-dimension"),
+        }
+
+    img = _Image(10, 10)
+    logs: list[str] = []
+    params = {
+        "enable_global_search_mode": True,
+        "arm_enabled": True,
+        "cx": 5.0,
+        "cy": 5.0,
+        "r": 2.0,
+        "arm_x1": 1.0,
+        "text_x": 2.0,
+    }
+
+    improved = helpers.optimizeGlobalParameterVectorSamplingImpl(
+        img,
+        params,
+        logs,
+        rounds=3,
+        samples_per_round=3,
+        global_parameter_vector_cls=_ArmVector,
+        global_parameter_vector_bounds_fn=_arm_bounds,
+        clip_scalar_fn=lambda value, low, high: max(low, min(high, value)),
+        snap_half_fn=lambda value: round(value * 2.0) / 2.0,
+        make_rng_fn=lambda _seed: _TargetRng(),
+        reanchor_arm_to_circle_edge_fn=lambda _probe, _r: None,
+        full_badge_error_for_params_fn=lambda _img, probe: abs(float(probe["arm_x1"]) - 7.0),
+        log_global_parameter_vector_fn=lambda _logs, _params, _w, _h, label: _logs.append(label),
+        stochastic_run_seed=0,
+        stochastic_seed_offset=0,
+    )
+
+    assert improved is True
+    assert float(params["arm_x1"]) == 7.0
+    assert any("deterministischer track übersprungen" in line for line in logs)
+
+
 def test_global_search_can_improve_error_by_varying_arm_y2() -> None:
     @dataclass(frozen=True)
     class _ArmVector:
