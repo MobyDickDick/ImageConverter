@@ -165,6 +165,7 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
   - 2026-04-28: Zwischenstand nach Run BA nachgepflegt; N1/N2/N4 bleiben weiterhin offen (Exit `0`, aber weiterhin kein Vollbereichsnachweis bis `AC0899`).
   - 2026-04-28: Zwischenstand nach Run BB nachgepflegt; N1/N2/N4 bleiben weiterhin offen (Exit `0`, aber weiterhin kein Vollbereichsnachweis bis `AC0899`).
   - 2026-04-28: Zwischenstand nach Run BC nachgepflegt; N1/N2/N4 bleiben weiterhin offen (Exit `0`, aber weiterhin kein Vollbereichsnachweis bis `AC0899`).
+  - 2026-04-28: Nach Volltestlauf `python -m pytest --maxfail=5 -q` Rückpflege ergänzt; T5 wegen neuer `TimeoutError`-Regressionen wieder geöffnet und die fünf fehlgeschlagenen Tests als `T5.8` bis `T5.12` mit hoher Priorität dokumentiert.
   - 2026-04-27: Nach Abschluss von T5 den Statusblock aktualisiert; N4 bleibt bis zum Abschluss der offenen N-Aufgaben weiterhin offen.
 
 ## Architektur-Backlog (added 2026-04-25)
@@ -204,7 +205,7 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
   - 2026-04-21: Runner-only-Variante in `runIterationPipelineImplFromInputsDispatchCallForRunFinalRunnerSequenceForRunImpl` umbenannt; der öffentliche Sequence-Helper unterstützt jetzt sowohl den Builder+Runner- als auch den direkten Runner-Pfad kompatibel.
 
 
-- [x] T5: Fehlgeschlagene Regressionen im Volltestlauf systematisch aufarbeiten.
+- [ ] T5: Fehlgeschlagene Regressionen im Volltestlauf systematisch aufarbeiten.
   - 2026-04-24: Volltestlauf `pytest` (801 Tests) gestartet; im Verlauf ab ~78% mehrere Fehlschläge in `tests/test_image_composite_converter.py` sichtbar (`F...`), daher kein vollständig erfolgreicher Gesamtlauf.
   - 2026-04-24: Separater Lauf der übrigen Top-Level-Dateien (`tests/test_image_composite_converter_element_decomposition.py`, `tests/test_image_composite_converter_naming.py`, `tests/test_retry_failed_image_conversions.py`) ist vollständig grün (`7 passed`).
   - Nächster Schritt: Fehlschläge aus `tests/test_image_composite_converter.py` einzeln isolieren (z. B. `-x`/`--lf`) und pro Root-Cause als eigene Unteraufgaben dokumentieren.
@@ -246,6 +247,22 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
       - `test_ac08_regression_suite_preserves_previously_good_variants[AC0837_L-semantic_ok]` benötigt lokal `86.76s`.
     - 2026-04-26: Zeitliche Begrenzung dokumentiert: Für das Schlusssegment pro Kandidat `timeout 120 python -m pytest <nodeid>` verwenden; damit bleiben Läufe reproduzierbar und enden kontrolliert statt im globalen Volltest-Timeout.
   - 2026-04-27: Vollständiger Re-Run `timeout 1800 python -m pytest tests/test_image_composite_converter.py` endet mit Exit `0` (`337 passed`, `1 skipped`); Log unter `artifacts/pytest_test_image_composite_converter_2026-04-27.log`.
+  - 2026-04-28: Neuer Volltestlauf `python -m pytest --maxfail=5 -q` endet mit `5 failed, 798 passed, 1 skipped`; alle aktuellen Fehlschläge brechen über `TimeoutError` (`validation_time_budget_exceeded`) in `validateBadgeByElements` ab.
+  - [ ] T5.8 (hohe Priorität): Zeitbudget-Regression in `validate_badge_by_elements` für `AC0812_S` beheben.
+    - Fehlgeschlagener Test: `tests/test_image_composite_converter.py::test_validate_badge_can_expand_ac0812_tiny_circle_radius`
+    - Aktueller Fehler: `TimeoutError` vor Runde 2 (`elapsed=54.65s`, `budget=15.00s`) statt Radius-Korrektur.
+  - [ ] T5.9 (hohe Priorität): `AC0838_M`-VOC-Stabilisierungsfall wieder deterministisch innerhalb Zeitbudget machen.
+    - Fehlgeschlagener Test: `tests/test_image_composite_converter.py::test_make_badge_params_keeps_ac0838_m_circle_near_full_width_for_voc_layout`
+    - Aktueller Fehler: `TimeoutError` vor Runde 2 (`elapsed=46.76s`, `budget=18.00s`) während `validateBadgeByElements(..., max_rounds=6)`.
+  - [ ] T5.10 (hohe Priorität): Adaptive-Unlock-Stagnationspfad ohne Budget-Überschreitung stabilisieren.
+    - Fehlgeschlagener Test: `tests/test_image_composite_converter.py::test_validate_badge_by_elements_activates_ac08_adaptive_unlocks_on_stagnation`
+    - Aktueller Fehler: `TimeoutError` vor Runde 2 (`elapsed=33.55s`, `budget=15.00s`) trotz gemockter schneller Optimierungs-Hooks.
+  - [ ] T5.11 (hohe Priorität): AC08-Regressionstest `AC0820_L` wieder grün machen.
+    - Fehlgeschlagener Test: `tests/test_image_composite_converter.py::test_ac08_regression_suite_preserves_previously_good_variants[AC0820_L-semantic_ok]`
+    - Aktueller Fehler: Pipeline bricht im Semantic-Badge-Validierungspfad mit `TimeoutError` vor Runde 2 ab (`elapsed=38.03s`, `budget=18.00s`).
+  - [ ] T5.12 (hohe Priorität): AC08-Regressionstest `AC0835_S` wieder grün machen.
+    - Fehlgeschlagener Test: `tests/test_image_composite_converter.py::test_ac08_regression_suite_preserves_previously_good_variants[AC0835_S-semantic_ok]`
+    - Aktueller Fehler: Pipeline bricht im Semantic-Badge-Validierungspfad mit `TimeoutError` vor Runde 2 ab (`elapsed=48.09s`, `budget=18.00s`).
 
 ## Next tasks (added 2026-03-28)
 
