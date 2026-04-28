@@ -193,6 +193,7 @@ def optimizeGlobalParameterVectorSamplingImpl(
         improved = False
         spans = {key: max(0.25, float(bounds[key][1] - bounds[key][0]) * 0.20) for key in active_keys}
         plateau_rounds: list[dict[str, float | int]] = []
+        no_improvement_rounds = 0
         logs.append(
             "global-search: gestartet "
             f"(modus={search_mode}, aktive_parameter={','.join(active_keys)}, "
@@ -227,11 +228,13 @@ def optimizeGlobalParameterVectorSamplingImpl(
             plateau = [(cand, err) for cand, err in finite_round if err <= round_best_err + epsilon]
             span_labels: list[str] = []
             mean_span = 0.0
+            plateau_spans: dict[str, float] = {}
             if plateau:
                 span_values: list[float] = []
                 for key in active_keys:
                     key_values = [float(getattr(cand, key)) for cand, _err in plateau]
                     key_span = max(key_values) - min(key_values)
+                    plateau_spans[key] = key_span
                     span_values.append(key_span)
                     span_labels.append(f"{key}:{key_span:.3f}")
                 mean_span = sum(span_values) / max(1, len(span_values))
@@ -283,13 +286,17 @@ def optimizeGlobalParameterVectorSamplingImpl(
 
             if representative_source == "schwerpunkt":
                 if representative_err <= best_err + 0.02:
+                    best_before = best_err
                     best = representative
                     best_err = representative_err
-                    improved = True
+                    if best_err + 0.01 < best_before:
+                        improved = True
+                        no_improvement_rounds = 0
             elif representative_err + 0.01 < best_err:
                 best = representative
                 best_err = representative_err
                 improved = True
+                no_improvement_rounds = 0
 
             stability = "n/a"
             if plateau_rounds:
@@ -319,8 +326,21 @@ def optimizeGlobalParameterVectorSamplingImpl(
                         for key in active_keys
                     ) / max(1, len(active_keys))
                 plateau_rounds.append({"size": len(plateau), "mean_span": mean_span, "center_mean": center_now})
+
+            if accepted == 0 and round_best_err + 0.01 >= best_err:
+                no_improvement_rounds += 1
+            else:
+                no_improvement_rounds = 0
+
             for key in active_keys:
-                spans[key] = max(0.12, spans[key] * 0.78)
+                local_floor = 0.12
+                if key in plateau_spans:
+                    local_floor = max(local_floor, float(plateau_spans[key]) * 0.35)
+                if key in plateau_spans:
+                    planned_span = (spans[key] * 0.72) + (float(plateau_spans[key]) * 0.40)
+                else:
+                    planned_span = spans[key] * 0.78
+                spans[key] = max(local_floor, planned_span)
             logs.append(
                 f"global-search: Runde {round_idx + 1} best_err={best_err:.3f}, akzeptierte_kandidaten={accepted}, sigma_mittel={sum(spans.values()) / max(1, len(spans)):.3f}"
             )
@@ -335,6 +355,19 @@ def optimizeGlobalParameterVectorSamplingImpl(
                 f"(runde={round_idx + 1}, kandidat={representative_source}, err={representative_err:.3f}, "
                 f"begründung={representative_reason})"
             )
+            should_stop_early = (
+                round_idx >= 2
+                and no_improvement_rounds >= 2
+                and len(plateau) >= max(3, len(active_keys))
+                and mean_span <= 0.40
+            )
+            if should_stop_early:
+                logs.append(
+                    "global-search: frühabbruch "
+                    f"(runde={round_idx + 1}, grund=stabiles_plateau_ohne_relevante_verbesserung, "
+                    f"no_improvement_rounds={no_improvement_rounds}, mean_span={mean_span:.3f})"
+                )
+                break
         return best, best_err, improved
 
     def runDeterministicTrack():
@@ -387,7 +420,15 @@ def optimizeGlobalParameterVectorSamplingImpl(
         return best, best_err, improved
 
     stochastic_best, stochastic_err, stochastic_improved = runStochasticTrack()
-    deterministic_best, deterministic_err, deterministic_improved = runDeterministicTrack()
+    skip_deterministic_track = bool(stochastic_improved and (start_err - stochastic_err) >= 0.10 and int(rounds) >= 3)
+    if skip_deterministic_track:
+        deterministic_best, deterministic_err, deterministic_improved = stochastic_best, float("inf"), False
+        logs.append(
+            "global-search: deterministischer track übersprungen "
+            f"(grund=stochastic-konvergiert, delta_err={start_err - stochastic_err:.3f})"
+        )
+    else:
+        deterministic_best, deterministic_err, deterministic_improved = runDeterministicTrack()
 
     winner_name = "stochastic"
     winner = stochastic_best
