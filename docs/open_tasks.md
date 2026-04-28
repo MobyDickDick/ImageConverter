@@ -62,6 +62,7 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
   - 2026-04-27: Run AT mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_M`, dann Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runAT_2026-04-27_summary.md`).
   - 2026-04-27: Run AU mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_M`, dann Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runAU_2026-04-27_summary.md`).
   - 2026-04-28: Run AV mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_L`, Prozessende mit Exit `0`, aber ohne Vollbereichsnachweis bis `AC0899` (Summary: `docs/ac0800_ac0899_runAV_2026-04-28_summary.md`).
+  - 2026-04-28: Run AW mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_L`, Prozessende mit Exit `0`, aber ohne Vollbereichsnachweis bis `AC0899` (Summary: `docs/ac0800_ac0899_runAW_2026-04-28_summary.md`).
   - Abschlusskriterium: vollständiger Durchlauf bis `AC0899` ohne `timeout`-Abbruch und mit finalem Prozessstatus `0`.
 
 - [ ] N2: Stabilitätsnachweis für den Vollbereich dokumentieren.
@@ -95,6 +96,7 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
   - 2026-04-27: Run AT zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_M`; Timeout-Status in `docs/ac0800_ac0899_runAT_2026-04-27_summary.md` dokumentiert.
   - 2026-04-27: Run AU zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_M`; Timeout-Status in `docs/ac0800_ac0899_runAU_2026-04-27_summary.md` dokumentiert.
   - 2026-04-28: Run AV zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Status (Exit `0` ohne Vollbereichsnachweis) in `docs/ac0800_ac0899_runAV_2026-04-28_summary.md` dokumentiert.
+  - 2026-04-28: Run AW zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Status (Exit `0` ohne Vollbereichsnachweis) in `docs/ac0800_ac0899_runAW_2026-04-28_summary.md` dokumentiert.
 
 - [x] N3: Neue Laufzusammenfassung im Run-Format ergänzen.
   - Neue Datei analog zu Run Q/R erstellen (Datum, Anlass, exakter Befehl, Log-Pfad, sichtbarer Fortschritt, Exit-Code, Kurzfazit).
@@ -108,6 +110,11 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
   - Teil A (Parameterfächer): Mehrere Parameter einzelner Elemente (z. B. Kreis: `cx/cy/r`, Gerade: Endpunkte/Stärke) systematisch variieren, als SVG rendern, nach JPEG konvertieren und per ImageConverter wieder rückübersetzen/auswerten.
   - Teil B (Element-Verknüpfungen): Kombinationsszenarien mit expliziten geometrischen Relationen abdecken (z. B. Buchstabe horizontal+vertikal zentriert im Kreis ohne Berührung; horizontaler und gleichlanger vertikaler Strich jeweils zentriert).
   - Akzeptanzkriterium: Szenario-Katalog + automatisierbarer Vergleichslauf inkl. Qualitätsmetriken pro Szenario.
+
+- [ ] N7: AC08-Zeitfehler aus Volltests gezielt nachfahren (bildspezifische Konvertierung).
+  - Dokumentierte Fehlerliste: `docs/ac08_timeout_failures_2026-04-28.md` (inkl. betroffener Tests und Varianten).
+  - Für die dort gelisteten Referenzen (`AC0811`, `AC0812`, `AC0820`, `AC0835`, `AC0837`, `AC0838`) jeweils Einzel-Läufe `--start <REF> --end <REF>` durchführen und Exit/Artefakte dokumentieren.
+  - Akzeptanzkriterium: Pro Referenz mindestens ein reproduzierbarer Diagnoselauf mit Log und kurzem Ergebnisvermerk in den Run-Notizen.
 
 - [ ] N4: Rückpflege in diese Aufgabenliste nach Abschluss.
   - Erledigte N-Aufgaben auf `[x]` setzen und mit kurzem Datum-/Ergebnisvermerk ergänzen.
@@ -139,6 +146,7 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
   - 2026-04-27: Zwischenstand nach Run AT nachgepflegt; N1/N2/N4 bleiben weiterhin offen (Timeout-Exit `124`, weiterhin kein Exit-`0`).
   - 2026-04-27: Zwischenstand nach Run AU nachgepflegt; N1/N2/N4 bleiben weiterhin offen (Timeout-Exit `124`, weiterhin kein Exit-`0`).
   - 2026-04-28: Zwischenstand nach Run AV nachgepflegt; N1/N2/N4 bleiben weiterhin offen (Exit `0`, aber weiterhin kein Vollbereichsnachweis bis `AC0899`).
+  - 2026-04-28: Zwischenstand nach Run AW nachgepflegt; N1/N2/N4 bleiben weiterhin offen (Exit `0`, aber weiterhin kein Vollbereichsnachweis bis `AC0899`).
   - 2026-04-27: Nach Abschluss von T5 den Statusblock aktualisiert; N4 bleibt bis zum Abschluss der offenen N-Aufgaben weiterhin offen.
 
 ## Architektur-Backlog (added 2026-04-25)
