@@ -63,6 +63,7 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
   - 2026-04-27: Run AU mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_M`, dann Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runAU_2026-04-27_summary.md`).
   - 2026-04-28: Run AV mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_L`, Prozessende mit Exit `0`, aber ohne Vollbereichsnachweis bis `AC0899` (Summary: `docs/ac0800_ac0899_runAV_2026-04-28_summary.md`).
   - 2026-04-28: Run AW mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_L`, Prozessende mit Exit `0`, aber ohne Vollbereichsnachweis bis `AC0899` (Summary: `docs/ac0800_ac0899_runAW_2026-04-28_summary.md`).
+  - 2026-04-28: Run AX mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_L`, Prozessende mit Exit `0`, aber ohne Vollbereichsnachweis bis `AC0899` (Summary: `docs/ac0800_ac0899_runAX_2026-04-28_summary.md`).
   - Abschlusskriterium: vollständiger Durchlauf bis `AC0899` ohne `timeout`-Abbruch und mit finalem Prozessstatus `0`.
 
 - [ ] N2: Stabilitätsnachweis für den Vollbereich dokumentieren.
@@ -97,6 +98,7 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
   - 2026-04-27: Run AU zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_M`; Timeout-Status in `docs/ac0800_ac0899_runAU_2026-04-27_summary.md` dokumentiert.
   - 2026-04-28: Run AV zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Status (Exit `0` ohne Vollbereichsnachweis) in `docs/ac0800_ac0899_runAV_2026-04-28_summary.md` dokumentiert.
   - 2026-04-28: Run AW zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Status (Exit `0` ohne Vollbereichsnachweis) in `docs/ac0800_ac0899_runAW_2026-04-28_summary.md` dokumentiert.
+  - 2026-04-28: Run AX zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Status (Exit `0` ohne Vollbereichsnachweis) in `docs/ac0800_ac0899_runAX_2026-04-28_summary.md` dokumentiert.
 
 - [x] N3: Neue Laufzusammenfassung im Run-Format ergänzen.
   - Neue Datei analog zu Run Q/R erstellen (Datum, Anlass, exakter Befehl, Log-Pfad, sichtbarer Fortschritt, Exit-Code, Kurzfazit).
@@ -147,6 +149,7 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
   - 2026-04-27: Zwischenstand nach Run AU nachgepflegt; N1/N2/N4 bleiben weiterhin offen (Timeout-Exit `124`, weiterhin kein Exit-`0`).
   - 2026-04-28: Zwischenstand nach Run AV nachgepflegt; N1/N2/N4 bleiben weiterhin offen (Exit `0`, aber weiterhin kein Vollbereichsnachweis bis `AC0899`).
   - 2026-04-28: Zwischenstand nach Run AW nachgepflegt; N1/N2/N4 bleiben weiterhin offen (Exit `0`, aber weiterhin kein Vollbereichsnachweis bis `AC0899`).
+  - 2026-04-28: Zwischenstand nach Run AX nachgepflegt; N1/N2/N4 bleiben weiterhin offen (Exit `0`, aber weiterhin kein Vollbereichsnachweis bis `AC0899`).
   - 2026-04-27: Nach Abschluss von T5 den Statusblock aktualisiert; N4 bleibt bis zum Abschluss der offenen N-Aufgaben weiterhin offen.
 
 ## Architektur-Backlog (added 2026-04-25)
