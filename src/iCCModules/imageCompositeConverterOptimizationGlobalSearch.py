@@ -204,6 +204,7 @@ def optimizeGlobalParameterVectorSamplingImpl(
         )
 
         for round_idx in range(max(1, int(rounds))):
+            round_entry_best_err = best_err
             accepted = 0
             finite_round = [(best, best_err)]
             for _ in range(max(8, int(samples_per_round))):
@@ -327,7 +328,8 @@ def optimizeGlobalParameterVectorSamplingImpl(
                     ) / max(1, len(active_keys))
                 plateau_rounds.append({"size": len(plateau), "mean_span": mean_span, "center_mean": center_now})
 
-            if accepted == 0 and round_best_err + 0.01 >= best_err:
+            round_had_relevant_improvement = best_err + 0.01 < round_entry_best_err
+            if (not round_had_relevant_improvement) and accepted == 0:
                 no_improvement_rounds += 1
             else:
                 no_improvement_rounds = 0
