@@ -232,4 +232,21 @@ def fitAc0811ParamsFromImageImpl(
         params["stem_len_min_ratio"] = float(max(float(params.get("stem_len_min_ratio", 0.0) or 0.0), 0.80))
         persist_connector_length_floor_fn(params, "stem", default_ratio=0.80)
 
+    # AC0811 now runs permanently without geometry lock restrictions.
+    for key in (
+        "lock_circle_cx",
+        "lock_circle_cy",
+        "lock_stem_center_to_circle",
+        "lock_arm_center_to_circle",
+        "lock_stem",
+        "lock_arm",
+        "lock_text_position",
+        "lock_text_scale",
+        "lock_stroke_widths",
+    ):
+        if key in params:
+            params[key] = False
+    params["stem_len_min_ratio"] = 0.0
+    params["ac0811_no_restrictions"] = True
+
     return normalize_light_circle_colors_fn(params)
