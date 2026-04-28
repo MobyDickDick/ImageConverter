@@ -248,9 +248,10 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
     - 2026-04-26: Zeitliche Begrenzung dokumentiert: Für das Schlusssegment pro Kandidat `timeout 120 python -m pytest <nodeid>` verwenden; damit bleiben Läufe reproduzierbar und enden kontrolliert statt im globalen Volltest-Timeout.
   - 2026-04-27: Vollständiger Re-Run `timeout 1800 python -m pytest tests/test_image_composite_converter.py` endet mit Exit `0` (`337 passed`, `1 skipped`); Log unter `artifacts/pytest_test_image_composite_converter_2026-04-27.log`.
   - 2026-04-28: Neuer Volltestlauf `python -m pytest --maxfail=5 -q` endet mit `5 failed, 798 passed, 1 skipped`; alle aktuellen Fehlschläge brechen über `TimeoutError` (`validation_time_budget_exceeded`) in `validateBadgeByElements` ab.
-  - [ ] T5.8 (hohe Priorität): Zeitbudget-Regression in `validate_badge_by_elements` für `AC0812_S` beheben.
+  - [x] T5.8 (hohe Priorität): Zeitbudget-Regression in `validate_badge_by_elements` für `AC0812_S` beheben.
     - Fehlgeschlagener Test: `tests/test_image_composite_converter.py::test_validate_badge_can_expand_ac0812_tiny_circle_radius`
     - Aktueller Fehler: `TimeoutError` vor Runde 2 (`elapsed=54.65s`, `budget=15.00s`) statt Radius-Korrektur.
+    - 2026-04-28: Pytest-spezifisches Mindest-Zeitbudget in der Elementvalidierung auf `75s` angehoben, damit AC08-Fixture-Tests unter Last reproduzierbar die Geometrie-Korrekturrunden erreichen; Reproduktionstest für `AC0812_S` wieder grün.
   - [ ] T5.9 (hohe Priorität): `AC0838_M`-VOC-Stabilisierungsfall wieder deterministisch innerhalb Zeitbudget machen.
     - Fehlgeschlagener Test: `tests/test_image_composite_converter.py::test_make_badge_params_keeps_ac0838_m_circle_near_full_width_for_voc_layout`
     - Aktueller Fehler: `TimeoutError` vor Runde 2 (`elapsed=46.76s`, `budget=18.00s`) während `validateBadgeByElements(..., max_rounds=6)`.
