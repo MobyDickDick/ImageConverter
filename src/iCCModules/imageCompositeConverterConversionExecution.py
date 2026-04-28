@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 import os
 import re
 import signal
@@ -170,6 +171,42 @@ def _svgIsTrivialFallbackArtifact(svg_path: str) -> bool:
     return has_minimal_canvas and has_white_rect
 
 
+def _safeReadTextFile(path: str) -> str:
+    try:
+        with open(path, "r", encoding="utf-8") as handle:
+            return handle.read()
+    except OSError:
+        return ""
+
+
+def _emitVariantDebugDump(
+    *,
+    debug_root_dir: str | None,
+    base_name: str,
+    variant: str,
+    stage: str,
+    payload: dict[str, object],
+    print_fn=print,
+) -> None:
+    if not debug_root_dir:
+        return
+    if str(base_name).upper() != "AC0811":
+        return
+    variant_name = str(variant).upper()
+    debug_dir = os.path.join(debug_root_dir, variant_name)
+    os.makedirs(debug_dir, exist_ok=True)
+    dump_path = os.path.join(debug_dir, f"{variant_name}_conversion_debug.json")
+    data = dict(payload)
+    data.setdefault("variant", variant_name)
+    data.setdefault("base_name", str(base_name).upper())
+    data.setdefault("stage", stage)
+    try:
+        with open(dump_path, "w", encoding="utf-8") as handle:
+            json.dump(data, handle, ensure_ascii=False, indent=2, sort_keys=True)
+    except OSError as exc:
+        print_fn(f"[WARN] {variant_name}: Debug-Dump konnte nicht geschrieben werden ({type(exc).__name__}: {exc})")
+
+
 def convertOneImpl(
     *,
     filename: str,
@@ -195,6 +232,7 @@ def convertOneImpl(
 ) -> tuple[dict[str, object] | None, bool]:
     image_path = os.path.join(folder_path, filename)
     base = os.path.splitext(filename)[0]
+    base_name = str(get_base_name_from_file_fn(base)).upper()
     svg_path = os.path.join(svg_out_dir, f"{base}.svg")
     diff_path = os.path.join(diff_out_dir, f"{base}_diff.png")
     log_file = os.path.join(reports_out_dir, f"{base}_element_validation.log")
@@ -231,6 +269,24 @@ def convertOneImpl(
         )
         with open(log_file, "w", encoding="utf-8") as f:
             f.write(f"status=batch_error\nfilename={filename}\nreason={type(exc).__name__}\ndetails={exc}\n")
+        _emitVariantDebugDump(
+            debug_root_dir=debug_ac0811_dir,
+            base_name=base_name,
+            variant=base,
+            stage="exception",
+            payload={
+                "filename": filename,
+                "image_path": image_path,
+                "log_file": log_file,
+                "run_timeout_sec": float(run_timeout_sec or 0.0),
+                "iteration_budget": int(iteration_budget),
+                "badge_rounds": int(badge_rounds),
+                "exception_type": type(exc).__name__,
+                "exception_message": str(exc),
+                "validation_log_text": _safeReadTextFile(log_file),
+            },
+            print_fn=print_fn,
+        )
         _ensureOutputArtifacts(
             svg_path=_resolveFailureSvgPath(svg_path, failed_svg_path),
             diff_path=diff_path,
@@ -335,6 +391,22 @@ def convertOneImpl(
             diff_path=diff_path,
         )
         print_fn(f"[WARN] {filename}: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert ({failure_status}).")
+        _emitVariantDebugDump(
+            debug_root_dir=debug_ac0811_dir,
+            base_name=base_name,
+            variant=base,
+            stage="no_result",
+            payload={
+                "filename": filename,
+                "image_path": image_path,
+                "log_file": log_file,
+                "status": failure_status,
+                "reason": failure_reason,
+                "validation_details": details,
+                "validation_log_text": _safeReadTextFile(log_file),
+            },
+            print_fn=print_fn,
+        )
         return None, True
 
     _base, _desc, params, best_iter, best_error = res
@@ -392,8 +464,7 @@ def convertOneImpl(
                 rendered = render_svg_to_numpy_fn(svg_content, width, height)
                 mean_delta2, std_delta2 = calculate_delta2_stats_fn(img, rendered)
     _ensureOutputArtifacts(svg_path=svg_path, diff_path=diff_path)
-
-    return {
+    row = {
         "filename": filename,
         "params": params,
         "best_iter": int(best_iter),
@@ -404,6 +475,30 @@ def convertOneImpl(
         "std_delta2": float(std_delta2),
         "w": int(width),
         "h": int(height),
-        "base": get_base_name_from_file_fn(os.path.splitext(filename)[0]).upper(),
+        "base": base_name,
         "variant": os.path.splitext(filename)[0].upper(),
-    }, False
+    }
+    _emitVariantDebugDump(
+        debug_root_dir=debug_ac0811_dir,
+        base_name=base_name,
+        variant=base,
+        stage="success",
+        payload={
+            "filename": filename,
+            "image_path": image_path,
+            "svg_path": svg_path,
+            "diff_path": diff_path,
+            "log_file": log_file,
+            "status": status,
+            "convergence": str(details.get("convergence", "")).strip().lower(),
+            "iteration_budget": int(iteration_budget),
+            "badge_rounds": int(badge_rounds),
+            "best_iter": int(best_iter),
+            "best_error": float(best_error),
+            "result_row": row,
+            "validation_details": details,
+            "validation_log_text": _safeReadTextFile(log_file),
+        },
+        print_fn=print_fn,
+    )
+    return row, False

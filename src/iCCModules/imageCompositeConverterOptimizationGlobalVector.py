@@ -41,7 +41,7 @@ def globalParameterVectorBoundsImpl(
     text_scale = float(params.get("text_scale", 1.0))
     text_scale_min = float(params.get("text_scale_min", max(0.2, text_scale * 0.5)))
     text_scale_max = float(params.get("text_scale_max", max(text_scale_min, text_scale * 1.8)))
-    return {
+    bounds = {
         "cx": (x_low, x_high, bool(params.get("lock_circle_cx", False)), "canvas"),
         "cy": (y_low, y_high, bool(params.get("lock_circle_cy", False)), "canvas"),
         "r": (r_low, r_high, False, "template/semantic"),
@@ -68,6 +68,21 @@ def globalParameterVectorBoundsImpl(
         "text_y": (0.0, max_y, bool(params.get("lock_text_position", False)), "template"),
         "text_scale": (text_scale_min, text_scale_max, bool(params.get("lock_text_scale", False)), "semantic"),
     }
+    if bool(params.get("ac0811_no_restrictions", False)):
+        # Exploratory AC0811 mode: unlock all global-vector dimensions and relax
+        # range limits so the optimizer can leave template guardrails entirely.
+        bounds["r"] = (max(1.0, r_low * 0.65), max(r_high, float(min(w, h)) * 0.75), False, "unrestricted")
+        bounds["arm_stroke"] = (1.0, max(1.0, float(min(w, h)) * 0.35), False, "unrestricted")
+        bounds["stem_width"] = (
+            1.0,
+            max(1.0, min(float(w) * 0.45, float(params.get("stem_width_max", float(w) * 0.45)))),
+            False,
+            "unrestricted",
+        )
+        for key in ("cx", "cy", "arm_x1", "arm_y1", "arm_x2", "arm_y2", "stem_x", "stem_top", "stem_bottom", "text_x", "text_y", "text_scale"):
+            low, high, _locked, source = bounds[key]
+            bounds[key] = (low, high, False, "unrestricted" if source != "unrestricted" else source)
+    return bounds
 
 
 def logGlobalParameterVectorImpl(

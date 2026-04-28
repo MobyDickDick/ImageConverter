@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import binascii
+import json
 import struct
 import time
 from pathlib import Path
@@ -434,3 +435,52 @@ def test_convert_one_impl_marks_image_only_svg_without_raster_extension_as_faile
     assert row is not None
     assert (svg_out / "Failed_AC0414_2_M.svg").exists()
     assert not (svg_out / "AC0414_2_M.svg").exists()
+
+
+def test_convert_one_impl_writes_ac0811_debug_dump_on_success(tmp_path: Path) -> None:
+    folder = tmp_path / "images"
+    svg_out = tmp_path / "svg"
+    diff_out = tmp_path / "diff"
+    reports = tmp_path / "reports"
+    debug_dir = tmp_path / "debug_ac0811"
+    for path in (folder, svg_out, diff_out, reports, debug_dir):
+        path.mkdir()
+
+    filename = "AC0811_L.jpg"
+    (folder / filename).write_bytes(b"fake")
+    (svg_out / "AC0811_L.svg").write_text("<svg/>", encoding="utf-8")
+    (reports / "AC0811_L_element_validation.log").write_text(
+        "status=semantic_ok\nconvergence=stable\n",
+        encoding="utf-8",
+    )
+
+    row, failed = conversion_execution_helpers.convertOneImpl(
+        filename=filename,
+        folder_path=str(folder),
+        csv_path="descriptions.csv",
+        iteration_budget=4,
+        badge_rounds=6,
+        svg_out_dir=str(svg_out),
+        diff_out_dir=str(diff_out),
+        reports_out_dir=str(reports),
+        debug_ac0811_dir=str(debug_dir),
+        debug_element_diff_dir=None,
+        run_iteration_pipeline_fn=lambda *_args, **_kwargs: ("AC0811_L", "desc", {"mode": "semantic_badge"}, 2, 8.0),
+        read_validation_log_details_fn=lambda _path: {"status": "semantic_ok", "convergence": "stable"},
+        render_svg_to_numpy_fn=lambda _svg, _w, _h: object(),
+        calculate_delta2_stats_fn=lambda _img, _rendered: (1.0, 0.2),
+        get_base_name_from_file_fn=lambda stem: stem.split("_")[0],
+        cv2_module=_Cv2Stub(_ImageStub((4, 3, 3))),
+        render_embedded_raster_svg_fn=lambda _path: "<svg/>",
+        append_batch_failure_fn=lambda _row: None,
+        print_fn=lambda _msg: None,
+    )
+
+    assert failed is False
+    assert row is not None
+    dump_path = debug_dir / "AC0811_L" / "AC0811_L_conversion_debug.json"
+    assert dump_path.exists()
+    dump = json.loads(dump_path.read_text(encoding="utf-8"))
+    assert dump["stage"] == "success"
+    assert dump["result_row"]["variant"] == "AC0811_L"
+    assert "status=semantic_ok" in dump["validation_log_text"]
