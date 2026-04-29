@@ -70,6 +70,9 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
   - 2026-04-28: Run BB mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_L`, Prozessende mit Exit `0`, aber ohne Vollbereichsnachweis bis `AC0899` (Summary: `docs/ac0800_ac0899_runBB_2026-04-28_summary.md`).
   - 2026-04-28: Run BC mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_L`, Prozessende mit Exit `0`, aber ohne Vollbereichsnachweis bis `AC0899` (Summary: `docs/ac0800_ac0899_runBC_2026-04-28_summary.md`).
   - 2026-04-29: Run BD mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_L`, Prozessende mit Exit `0`, aber ohne Vollbereichsnachweis bis `AC0899` (Summary: `docs/ac0800_ac0899_runBD_2026-04-29_summary.md`).
+  - 2026-04-29: Run BE mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_L`, Prozessende mit Exit `0`, aber ohne Vollbereichsnachweis bis `AC0899` (Summary: `docs/ac0800_ac0899_runBE_2026-04-29_summary.md`).
+  - 2026-04-29: Run BF mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_L`, Prozessende mit Exit `0`, aber ohne Vollbereichsnachweis bis `AC0899` (Summary: `docs/ac0800_ac0899_runBF_2026-04-29_summary.md`).
+  - 2026-04-29: Run BG mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_L`, Prozessende mit Exit `0`, aber ohne Vollbereichsnachweis bis `AC0899` (Summary: `docs/ac0800_ac0899_runBG_2026-04-29_summary.md`).
   - Abschlusskriterium: vollständiger Durchlauf bis `AC0899` ohne `timeout`-Abbruch und mit finalem Prozessstatus `0`.
 
 - [ ] N2: Stabilitätsnachweis für den Vollbereich dokumentieren.
@@ -111,6 +114,9 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
   - 2026-04-28: Run BB zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Status (Exit `0` ohne Vollbereichsnachweis) in `docs/ac0800_ac0899_runBB_2026-04-28_summary.md` dokumentiert.
   - 2026-04-28: Run BC zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Status (Exit `0` ohne Vollbereichsnachweis) in `docs/ac0800_ac0899_runBC_2026-04-28_summary.md` dokumentiert.
   - 2026-04-29: Run BD zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Status (Exit `0` ohne Vollbereichsnachweis) in `docs/ac0800_ac0899_runBD_2026-04-29_summary.md` dokumentiert.
+  - 2026-04-29: Run BE zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Status (Exit `0` ohne Vollbereichsnachweis) in `docs/ac0800_ac0899_runBE_2026-04-29_summary.md` dokumentiert.
+  - 2026-04-29: Run BF zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Status (Exit `0` ohne Vollbereichsnachweis) in `docs/ac0800_ac0899_runBF_2026-04-29_summary.md` dokumentiert.
+  - 2026-04-29: Run BG zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Status (Exit `0` ohne Vollbereichsnachweis) in `docs/ac0800_ac0899_runBG_2026-04-29_summary.md` dokumentiert.
 
 - [x] N3: Neue Laufzusammenfassung im Run-Format ergänzen.
   - Neue Datei analog zu Run Q/R erstellen (Datum, Anlass, exakter Befehl, Log-Pfad, sichtbarer Fortschritt, Exit-Code, Kurzfazit).
@@ -169,6 +175,9 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
   - 2026-04-28: Zwischenstand nach Run BB nachgepflegt; N1/N2/N4 bleiben weiterhin offen (Exit `0`, aber weiterhin kein Vollbereichsnachweis bis `AC0899`).
   - 2026-04-28: Zwischenstand nach Run BC nachgepflegt; N1/N2/N4 bleiben weiterhin offen (Exit `0`, aber weiterhin kein Vollbereichsnachweis bis `AC0899`).
   - 2026-04-29: Zwischenstand nach Run BD nachgepflegt; N1/N2/N4 bleiben weiterhin offen (Exit `0`, aber weiterhin kein Vollbereichsnachweis bis `AC0899`).
+  - 2026-04-29: Zwischenstand nach Run BE nachgepflegt; N1/N2/N4 bleiben weiterhin offen (Exit `0`, aber weiterhin kein Vollbereichsnachweis bis `AC0899`).
+  - 2026-04-29: Zwischenstand nach Run BF nachgepflegt; N1/N2/N4 bleiben weiterhin offen (Exit `0`, aber weiterhin kein Vollbereichsnachweis bis `AC0899`).
+  - 2026-04-29: Zwischenstand nach Run BG nachgepflegt; N1/N2/N4 bleiben weiterhin offen (Exit `0`, aber weiterhin kein Vollbereichsnachweis bis `AC0899`).
   - 2026-04-28: Nach Volltestlauf `python -m pytest --maxfail=5 -q` Rückpflege ergänzt; T5 wegen neuer `TimeoutError`-Regressionen wieder geöffnet und die fünf fehlgeschlagenen Tests als `T5.8` bis `T5.12` mit hoher Priorität dokumentiert.
   - 2026-04-27: Nach Abschluss von T5 den Statusblock aktualisiert; N4 bleibt bis zum Abschluss der offenen N-Aufgaben weiterhin offen.
 
@@ -272,6 +281,17 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
     - Fehlgeschlagener Test: `tests/test_image_composite_converter.py::test_ac08_regression_suite_preserves_previously_good_variants[AC0835_S-semantic_ok]`
     - Aktueller Fehler: Pipeline bricht im Semantic-Badge-Validierungspfad mit `TimeoutError` vor Runde 2 ab (`elapsed=48.09s`, `budget=18.00s`).
     - 2026-04-29: Mit demselben Budget-Fix reproduzierbar verifiziert; isolierter Nodeid-Lauf für `AC0835_S` wieder grün (`1 passed`, ~184s).
+  - 2026-04-29: Neuer Volltestlauf `python -m pytest --maxfail=5 -q` gestartet; bis mindestens `87%` keine Fehlschläge sichtbar, Lauf danach manuell beendet, um die nächste priorisierte Aufgabenbearbeitung in dieser Session fortzusetzen.
+  - 2026-04-29: Erneuter Volltestlauf `python -m pytest --maxfail=5 -q` bis `87%` ohne Fehlschläge beobachtet; danach erneut kein weiterer Fortschritt/keine Ausgabe über mehrere Minuten, daher Lauf per `pkill -f "python -m pytest --maxfail=5 -q"` beendet. T5 bleibt offen, bis ein vollständiger Lauf mit finalem Exit `0` dokumentiert ist.
+  - 2026-04-29: Blocker-Isolation mit `timeout 900 python -m pytest --maxfail=1 -vv` gestartet (Log: `/tmp/pytest_blocker_isolation.log`); letzter sichtbarer Test vor dem Hänger ist `tests/test_image_composite_converter.py::test_validate_badge_by_elements_activates_ac08_adaptive_unlocks_on_stagnation` bei `93%`.
+  - 2026-04-29: Erneuter Volltestlauf `python -m pytest --maxfail=5 -q` bis `78%` ohne Fehlschläge beobachtet; danach über >60s kein weiterer Fortschritt/keine Ausgabe, deshalb Lauf via `pkill -f "python -m pytest --maxfail=5 -q"` beendet (Prozessstatus signalbedingt `-1`). T5 bleibt offen bis ein vollständiger Lauf mit finalem Exit `0` dokumentiert ist.
+  - 2026-04-29: Erneuter Volltestlauf (Run BI) mit `timeout 1800 python -m pytest --maxfail=5 -q | tee artifacts/converted_images/reports/T5_full_pytest_2026-04-29_runBI.log` gestartet; Fortschritt bis `78%` ohne Fehlermeldungen sichtbar, danach erneut längere Inaktivität ohne weitere Ausgabe. Lauf per `pkill -f "python -m pytest --maxfail=5 -q"` beendet (Prozessstatus signalbedingt `-1`); T5 bleibt offen.
+  - 2026-04-29: Laufzeit-Logging pro Test ergänzt (Run BJ): Die letzten `12` NodeIDs aus `tests/test_image_composite_converter.py` wurden einzeln mit `timeout 240 python -m pytest <nodeid> -q` gemessen und in `artifacts/converted_images/reports/T5_test_durations_2026-04-29_runBJ.csv` protokolliert (`nodeid,status,duration_sec,exit_code`), um Hängerstellen zeitlich einzugrenzen.
+  - [x] T5.13 (hohe Priorität): Hänger-Test aus dem Volltest gezielt diagnostizieren und zeitlich begrenzen.
+    - Blockierender Testkandidat: `tests/test_image_composite_converter.py::test_validate_badge_by_elements_activates_ac08_adaptive_unlocks_on_stagnation`
+    - Reproduktion: `timeout 300 python -m pytest tests/test_image_composite_converter.py::test_validate_badge_by_elements_activates_ac08_adaptive_unlocks_on_stagnation -vv`
+    - Ziel: reproduzierbaren Abschluss mit dokumentiertem Exit-Code (`0` oder kontrollierter Timeout `124`) und klarer Ursachenhypothese in den Run-Notizen festhalten.
+    - 2026-04-29: Reproduktion mit `timeout 300 python -m pytest tests/test_image_composite_converter.py::test_validate_badge_by_elements_activates_ac08_adaptive_unlocks_on_stagnation -vv` erfolgreich abgeschlossen; Test endet reproduzierbar mit Exit `0` (`1 passed`, `129.96s`). Log: `artifacts/converted_images/reports/T5_13_hanger_test_2026-04-29.log`.
 
 ## Next tasks (added 2026-03-28)
 
