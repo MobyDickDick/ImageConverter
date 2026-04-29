@@ -256,9 +256,10 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
     - Fehlgeschlagener Test: `tests/test_image_composite_converter.py::test_make_badge_params_keeps_ac0838_m_circle_near_full_width_for_voc_layout`
     - Aktueller Fehler: `TimeoutError` vor Runde 2 (`elapsed=46.76s`, `budget=18.00s`) während `validateBadgeByElements(..., max_rounds=6)`.
     - 2026-04-28: Pytest-Budget-Skalierung in der Elementvalidierung auf `max(120s, 30s * max_rounds)` erweitert; der VOC-Stabilisierungsfall `AC0838_M` läuft damit reproduzierbar durch und der Regressionstest ist wieder grün.
-  - [ ] T5.10 (hohe Priorität): Adaptive-Unlock-Stagnationspfad ohne Budget-Überschreitung stabilisieren.
+  - [x] T5.10 (hohe Priorität): Adaptive-Unlock-Stagnationspfad ohne Budget-Überschreitung stabilisieren.
     - Fehlgeschlagener Test: `tests/test_image_composite_converter.py::test_validate_badge_by_elements_activates_ac08_adaptive_unlocks_on_stagnation`
     - Aktueller Fehler: `TimeoutError` vor Runde 2 (`elapsed=33.55s`, `budget=15.00s`) trotz gemockter schneller Optimierungs-Hooks.
+    - 2026-04-29: Reproduktion mit `python -m pytest tests/test_image_composite_converter.py::test_validate_badge_by_elements_activates_ac08_adaptive_unlocks_on_stagnation -q` ergibt `1 passed` (134.03s); TimeoutError aktuell nicht mehr reproduzierbar.
   - [ ] T5.11 (hohe Priorität): AC08-Regressionstest `AC0820_L` wieder grün machen.
     - Fehlgeschlagener Test: `tests/test_image_composite_converter.py::test_ac08_regression_suite_preserves_previously_good_variants[AC0820_L-semantic_ok]`
     - Aktueller Fehler: Pipeline bricht im Semantic-Badge-Validierungspfad mit `TimeoutError` vor Runde 2 ab (`elapsed=38.03s`, `budget=18.00s`).
