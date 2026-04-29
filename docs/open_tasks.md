@@ -135,6 +135,7 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
   - Dokumentierte Fehlerliste: `docs/ac08_timeout_failures_2026-04-28.md` (inkl. betroffener Tests und Varianten).
   - Für die dort gelisteten Referenzen (`AC0811`, `AC0812`, `AC0820`, `AC0835`, `AC0837`, `AC0838`) jeweils Einzel-Läufe `--start <REF> --end <REF>` durchführen und Exit/Artefakte dokumentieren.
   - Akzeptanzkriterium: Pro Referenz mindestens ein reproduzierbarer Diagnoselauf mit Log und kurzem Ergebnisvermerk in den Run-Notizen.
+  - 2026-04-29: `AC0811` als gezielter Einzel-Lauf (Run BH) nachgefahren; Shell-Exit `0`, aber reproduzierbarer `TimeoutError` in Runde 2 für `AC0811_L` dokumentiert (`docs/ac0811_targeted_runBH_2026-04-29.md`, Log: `artifacts/converted_images/reports/AC0811_targeted_2026-04-29_runBH.log`).
 
 - [ ] N4: Rückpflege in diese Aufgabenliste nach Abschluss.
   - Erledigte N-Aufgaben auf `[x]` setzen und mit kurzem Datum-/Ergebnisvermerk ergänzen.
@@ -280,6 +281,7 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
     - Fehlgeschlagener Test: `tests/test_image_composite_converter.py::test_ac08_regression_suite_preserves_previously_good_variants[AC0835_S-semantic_ok]`
     - Aktueller Fehler: Pipeline bricht im Semantic-Badge-Validierungspfad mit `TimeoutError` vor Runde 2 ab (`elapsed=48.09s`, `budget=18.00s`).
     - 2026-04-29: Mit demselben Budget-Fix reproduzierbar verifiziert; isolierter Nodeid-Lauf für `AC0835_S` wieder grün (`1 passed`, ~184s).
+  - 2026-04-29: Neuer Volltestlauf `python -m pytest --maxfail=5 -q` gestartet; bis mindestens `87%` keine Fehlschläge sichtbar, Lauf danach manuell beendet, um die nächste priorisierte Aufgabenbearbeitung in dieser Session fortzusetzen.
 
 ## Next tasks (added 2026-03-28)
 
