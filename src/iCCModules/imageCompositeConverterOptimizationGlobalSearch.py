@@ -111,9 +111,19 @@ def optimizeGlobalParameterVectorSamplingImpl(
         )
         return False
 
+    effective_rounds = max(1, int(rounds))
+    effective_samples_per_round = max(4, int(samples_per_round))
+    if len(active_keys) <= 5:
+        # For the current badge families we rarely need broad high-cost global
+        # exploration in low-dimensional spaces. Use a tighter schedule to keep
+        # validation responsive without disabling global search entirely.
+        effective_rounds = min(effective_rounds, 2)
+        effective_samples_per_round = min(effective_samples_per_round, 8)
+
     logs.append(
         "global-search: konfiguration "
-        f"(modus={search_mode}, aktive_parameter={len(active_keys)}, keys={','.join(active_keys)})"
+        f"(modus={search_mode}, aktive_parameter={len(active_keys)}, rounds={effective_rounds}, "
+        f"samples={effective_samples_per_round}, keys={','.join(active_keys)})"
     )
     eval_cache: dict[tuple, float] = {}
     eval_requests = 0
@@ -197,17 +207,17 @@ def optimizeGlobalParameterVectorSamplingImpl(
         logs.append(
             "global-search: gestartet "
             f"(modus={search_mode}, aktive_parameter={','.join(active_keys)}, "
-            f"samples_pro_runde={max(8, int(samples_per_round))}, start_err={best_err:.3f})"
+            f"samples_pro_runde={effective_samples_per_round}, start_err={best_err:.3f})"
         )
         logs.append(
             f"global-search: near-optimum-definition (err <= best_err + epsilon, epsilon=max({near_optimum_eps_floor:.2f}, best_err*{near_optimum_eps_rel:.2f}))"
         )
 
-        for round_idx in range(max(1, int(rounds))):
+        for round_idx in range(effective_rounds):
             round_entry_best_err = best_err
             accepted = 0
             finite_round = [(best, best_err)]
-            for _ in range(max(8, int(samples_per_round))):
+            for _ in range(effective_samples_per_round):
                 sample_data = dataclasses.asdict(best)
                 for key in active_keys:
                     low, high, _locked, _source = bounds[key]
@@ -383,9 +393,9 @@ def optimizeGlobalParameterVectorSamplingImpl(
         }
         logs.append(
             "global-search: deterministischer track gestartet "
-            f"(modus={search_mode}, seed={int(seed)}, schritte={max(2, int(rounds))}, start_err={best_err:.3f})"
+            f"(modus={search_mode}, seed={int(seed)}, schritte={max(2, effective_rounds)}, start_err={best_err:.3f})"
         )
-        for pass_idx in range(max(2, int(rounds))):
+        for pass_idx in range(max(2, effective_rounds)):
             pass_improved = 0
             for key in active_keys:
                 step = step_sizes[key]
@@ -422,7 +432,9 @@ def optimizeGlobalParameterVectorSamplingImpl(
         return best, best_err, improved
 
     stochastic_best, stochastic_err, stochastic_improved = runStochasticTrack()
-    skip_deterministic_track = bool(stochastic_improved and (start_err - stochastic_err) >= 0.10 and int(rounds) >= 3)
+    skip_deterministic_track = bool(
+        stochastic_improved and (start_err - stochastic_err) >= 0.10 and effective_rounds >= 3
+    )
     if skip_deterministic_track:
         deterministic_best, deterministic_err, deterministic_improved = stochastic_best, float("inf"), False
         logs.append(
