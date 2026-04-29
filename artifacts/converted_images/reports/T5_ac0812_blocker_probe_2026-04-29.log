@@ -1,0 +1,23 @@
+============================= test session starts ==============================
+platform linux -- Python 3.10.19, pytest-9.0.2, pluggy-1.6.0 -- /root/.pyenv/versions/3.10.19/bin/python
+cachedir: .pytest_cache
+rootdir: /workspace/ImageConverter
+configfile: pytest.ini
+collecting ... collected 1 item
+
+tests/test_image_composite_converter.py::test_validate_badge_can_expand_ac0812_tiny_circle_radius PASSED
+
+=============================== warnings summary ===============================
+<frozen importlib._bootstrap>:241
+<frozen importlib._bootstrap>:241
+  <frozen importlib._bootstrap>:241: DeprecationWarning: builtin type SwigPyPacked has no __module__ attribute
+
+<frozen importlib._bootstrap>:241
+<frozen importlib._bootstrap>:241
+  <frozen importlib._bootstrap>:241: DeprecationWarning: builtin type SwigPyObject has no __module__ attribute
+
+<frozen importlib._bootstrap>:241
+  <frozen importlib._bootstrap>:241: DeprecationWarning: builtin type swigvarlink has no __module__ attribute
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+================== 1 passed, 5 warnings in 130.13s (0:02:10) ===================
