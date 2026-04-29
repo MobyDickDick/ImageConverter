@@ -1698,8 +1698,8 @@ class Action:
         params: dict,
         logs: list[str],
         *,
-        rounds: int = 3,
-        samples_per_round: int = 16,
+        rounds: int = 2,
+        samples_per_round: int = 8,
     ) -> bool:
         return global_search_optimization_helpers.optimizeGlobalParameterVectorSamplingImpl(
             img_orig,

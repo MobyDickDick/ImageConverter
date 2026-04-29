@@ -259,6 +259,11 @@ def validateBadgeByElementsImpl(
             f"phase={phase}, round={round_number}, elapsed={elapsed:.2f}s, budget={configured_budget:.2f}s{detail}"
         )
 
+    def _remaining_budget_seconds() -> float:
+        if configured_budget <= 0.0:
+            return float("inf")
+        return max(0.0, configured_budget - (float(time_module.monotonic()) - validation_started_at))
+
     elements = ["circle"]
     if params.get("stem_enabled"):
         elements.append("stem")
@@ -415,13 +420,26 @@ def validateBadgeByElementsImpl(
                 if radius_changed:
                     round_changed = True
 
-        global_search_changed = optimize_global_parameter_vector_sampling_fn(
-            img_orig,
-            params,
-            logs,
-        )
-        if global_search_changed:
-            round_changed = True
+        # The global vector sampling step is the single most expensive operation
+        # in the validation loop. If the remaining wall-clock budget is already
+        # low, running it often causes apparent "hangs" near the end of long
+        # regression tests without improving stability. In that case, prefer a
+        # controlled skip and finish the current round deterministically.
+        remaining_budget = _remaining_budget_seconds()
+        min_required_for_global_search = max(12.0, 0.15 * configured_budget) if configured_budget > 0.0 else 0.0
+        if configured_budget > 0.0 and remaining_budget < min_required_for_global_search:
+            logs.append(
+                "global_search_skipped_due_to_budget: "
+                f"remaining={remaining_budget:.2f}s < required={min_required_for_global_search:.2f}s"
+            )
+        else:
+            global_search_changed = optimize_global_parameter_vector_sampling_fn(
+                img_orig,
+                params,
+                logs,
+            )
+            if global_search_changed:
+                round_changed = True
 
         if _applyAdaptiveSearchCorridor(params):
             round_changed = True
