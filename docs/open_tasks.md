@@ -284,10 +284,11 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
   - 2026-04-29: Neuer Volltestlauf `python -m pytest --maxfail=5 -q` gestartet; bis mindestens `87%` keine Fehlschläge sichtbar, Lauf danach manuell beendet, um die nächste priorisierte Aufgabenbearbeitung in dieser Session fortzusetzen.
   - 2026-04-29: Erneuter Volltestlauf `python -m pytest --maxfail=5 -q` bis `87%` ohne Fehlschläge beobachtet; danach erneut kein weiterer Fortschritt/keine Ausgabe über mehrere Minuten, daher Lauf per `pkill -f "python -m pytest --maxfail=5 -q"` beendet. T5 bleibt offen, bis ein vollständiger Lauf mit finalem Exit `0` dokumentiert ist.
   - 2026-04-29: Blocker-Isolation mit `timeout 900 python -m pytest --maxfail=1 -vv` gestartet (Log: `/tmp/pytest_blocker_isolation.log`); letzter sichtbarer Test vor dem Hänger ist `tests/test_image_composite_converter.py::test_validate_badge_by_elements_activates_ac08_adaptive_unlocks_on_stagnation` bei `93%`.
-  - [ ] T5.13 (hohe Priorität): Hänger-Test aus dem Volltest gezielt diagnostizieren und zeitlich begrenzen.
+  - [x] T5.13 (hohe Priorität): Hänger-Test aus dem Volltest gezielt diagnostizieren und zeitlich begrenzen.
     - Blockierender Testkandidat: `tests/test_image_composite_converter.py::test_validate_badge_by_elements_activates_ac08_adaptive_unlocks_on_stagnation`
     - Reproduktion: `timeout 300 python -m pytest tests/test_image_composite_converter.py::test_validate_badge_by_elements_activates_ac08_adaptive_unlocks_on_stagnation -vv`
     - Ziel: reproduzierbaren Abschluss mit dokumentiertem Exit-Code (`0` oder kontrollierter Timeout `124`) und klarer Ursachenhypothese in den Run-Notizen festhalten.
+    - 2026-04-29: Reproduktion mit `timeout 300 python -m pytest tests/test_image_composite_converter.py::test_validate_badge_by_elements_activates_ac08_adaptive_unlocks_on_stagnation -vv` erfolgreich abgeschlossen; Test endet reproduzierbar mit Exit `0` (`1 passed`, `129.96s`). Log: `artifacts/converted_images/reports/T5_13_hanger_test_2026-04-29.log`.
 
 ## Next tasks (added 2026-03-28)
 
