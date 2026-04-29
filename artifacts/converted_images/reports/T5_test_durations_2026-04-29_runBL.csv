@@ -1,0 +1,7 @@
+nodeid,status,duration_sec,exit_code
+tests/test_image_composite_converter.py::test_fit_ac0812_caps_radius_to_template,passed,1.07,0
+tests/test_image_composite_converter.py::test_fit_ac0812_elongated_variant_uses_stronger_min_arm_ratio,passed,1.02,0
+tests/test_image_composite_converter.py::test_fit_ac0814_tiny_plain_variant_reanchors_circle_to_template,passed,1.02,0
+tests/test_image_composite_converter.py::test_fit_ac0814_tiny_plain_variant_reanchors_arm_to_adjusted_circle,passed,1.08,0
+tests/test_image_composite_converter.py::test_validate_badge_can_expand_ac0812_tiny_circle_radius,passed,128.73,0
+tests/test_image_composite_converter.py::test_validate_badge_by_elements_activates_ac08_adaptive_unlocks_on_stagnation,passed,131.79,0
