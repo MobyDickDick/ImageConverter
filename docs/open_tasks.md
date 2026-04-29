@@ -251,10 +251,11 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
   - [x] T5.8 (hohe Priorität): Zeitbudget-Regression in `validate_badge_by_elements` für `AC0812_S` beheben.
     - Fehlgeschlagener Test: `tests/test_image_composite_converter.py::test_validate_badge_can_expand_ac0812_tiny_circle_radius`
     - Aktueller Fehler: `TimeoutError` vor Runde 2 (`elapsed=54.65s`, `budget=15.00s`) statt Radius-Korrektur.
-    - 2026-04-28: Pytest-spezifisches Mindest-Zeitbudget in der Elementvalidierung auf `75s` angehoben, damit AC08-Fixture-Tests unter Last reproduzierbar die Geometrie-Korrekturrunden erreichen; Reproduktionstest für `AC0812_S` wieder grün.
-  - [ ] T5.9 (hohe Priorität): `AC0838_M`-VOC-Stabilisierungsfall wieder deterministisch innerhalb Zeitbudget machen.
+    - 2026-04-28: Pytest-spezifisches Mindest-Zeitbudget in der Elementvalidierung auf `120s` angehoben, damit AC08-Fixture-Tests unter Last reproduzierbar die Geometrie-Korrekturrunden erreichen; Reproduktionstest für `AC0812_S` wieder grün.
+  - [x] T5.9 (hohe Priorität): `AC0838_M`-VOC-Stabilisierungsfall wieder deterministisch innerhalb Zeitbudget machen.
     - Fehlgeschlagener Test: `tests/test_image_composite_converter.py::test_make_badge_params_keeps_ac0838_m_circle_near_full_width_for_voc_layout`
     - Aktueller Fehler: `TimeoutError` vor Runde 2 (`elapsed=46.76s`, `budget=18.00s`) während `validateBadgeByElements(..., max_rounds=6)`.
+    - 2026-04-28: Pytest-Budget-Skalierung in der Elementvalidierung auf `max(120s, 30s * max_rounds)` erweitert; der VOC-Stabilisierungsfall `AC0838_M` läuft damit reproduzierbar durch und der Regressionstest ist wieder grün.
   - [ ] T5.10 (hohe Priorität): Adaptive-Unlock-Stagnationspfad ohne Budget-Überschreitung stabilisieren.
     - Fehlgeschlagener Test: `tests/test_image_composite_converter.py::test_validate_badge_by_elements_activates_ac08_adaptive_unlocks_on_stagnation`
     - Aktueller Fehler: `TimeoutError` vor Runde 2 (`elapsed=33.55s`, `budget=15.00s`) trotz gemockter schneller Optimierungs-Hooks.
