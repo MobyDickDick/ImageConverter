@@ -1,0 +1,245 @@
+============================= test session starts ==============================
+platform linux -- Python 3.10.19, pytest-9.0.2, pluggy-1.6.0 -- /root/.pyenv/versions/3.10.19/bin/python
+cachedir: .pytest_cache
+rootdir: /workspace/ImageConverter
+configfile: pytest.ini
+testpaths: tests
+collecting ... collected 827 items
+
+tests/detailtests/test_ac0223_runtime_helpers.py::test_finalize_ac0223_badge_params_impl_applies_valve_head_defaults PASSED [  0%]
+tests/detailtests/test_ac0223_runtime_helpers.py::test_finalize_ac0223_badge_params_impl_is_noop_for_other_families PASSED [  0%]
+tests/detailtests/test_ac0223_semantic_helpers.py::test_fit_ac0223_params_keeps_valve_connector_anchored PASSED [  0%]
+tests/detailtests/test_ac0223_semantic_helpers.py::test_generate_badge_svg_ac0223_polygon_uses_gradient_fill PASSED [  0%]
+tests/detailtests/test_ac0223_semantic_helpers.py::test_generate_badge_svg_restores_ac0223_head_when_style_keys_missing PASSED [  0%]
+tests/detailtests/test_ac0223_semantic_helpers.py::test_ac0223_symmetry_enforces_short_hub_connector PASSED [  0%]
+tests/detailtests/test_automate_function_extraction_tool.py::test_extracts_function_and_replaces_with_wrapper PASSED [  0%]
+tests/detailtests/test_automate_function_extraction_tool.py::test_rolls_back_when_verification_fails PASSED [  0%]
+tests/detailtests/test_automate_function_extraction_tool.py::test_inserts_import_after_multiline_import_block PASSED [  1%]
+tests/detailtests/test_batch_reporting_helpers.py::test_write_batch_failure_summary_writes_expected_columns PASSED [  1%]
+tests/detailtests/test_batch_reporting_helpers.py::test_write_strategy_switch_template_transfers_report_formats_values PASSED [  1%]
+tests/detailtests/test_circle_geometry_optimization_helpers.py::test_reanchor_arm_to_circle_edge_keeps_horizontal_arm PASSED [  1%]
+tests/detailtests/test_circle_geometry_optimization_helpers.py::test_element_error_for_circle_pose_returns_inf_when_circle_disabled PASSED [  1%]
+tests/detailtests/test_circle_radius_optimization_helpers.py::test_element_error_for_circle_radius_returns_inf_without_circle PASSED [  1%]
+tests/detailtests/test_circle_radius_optimization_helpers.py::test_select_circle_radius_plateau_candidate_prefers_best_full_error PASSED [  1%]
+tests/detailtests/test_cli_helpers.py::test_parse_args_impl_applies_named_iterations_override PASSED [  1%]
+tests/detailtests/test_cli_helpers.py::test_auto_detect_csv_path_prefers_reference_like_names PASSED [  2%]
+tests/detailtests/test_cli_helpers.py::test_auto_detect_csv_path_finds_descriptions_sibling_folder PASSED [  2%]
+tests/detailtests/test_cli_helpers.py::test_resolve_cli_csv_and_output_impl_resolves_xml_paths PASSED [  2%]
+tests/detailtests/test_cli_helpers.py::test_resolve_cli_csv_and_output_impl_treats_numeric_second_positional_as_iterations PASSED [  2%]
+tests/detailtests/test_cli_helpers.py::test_optional_log_capture_impl_writes_stdout_and_stderr PASSED [  2%]
+tests/detailtests/test_cli_helpers.py::test_tee_text_io_flush_ignores_closed_streams PASSED [  2%]
+tests/detailtests/test_cli_helpers.py::test_format_user_diagnostic_impl_formats_mapping_span PASSED [  2%]
+tests/detailtests/test_cli_helpers.py::test_prompt_interactive_range_impl_uses_substring_filter_message PASSED [  2%]
+tests/detailtests/test_cli_helpers.py::test_run_main_impl_prints_vendor_command_and_exits PASSED [  3%]
+tests/detailtests/test_cli_helpers.py::test_run_main_impl_convert_mode_invokes_convert_with_selected_variants PASSED [  3%]
+tests/detailtests/test_cli_helpers.py::test_run_main_impl_auto_enables_isolated_render_for_ac08_regression_set PASSED [  3%]
+tests/detailtests/test_cli_helpers.py::test_run_main_impl_auto_enables_isolated_render_for_full_ac08_range PASSED [  3%]
+tests/detailtests/test_cli_helpers.py::test_run_main_impl_repair_mode_requires_repair_callback PASSED [  3%]
+tests/detailtests/test_color_utils_helpers.py::test_clip_impl_uses_numpy_when_available PASSED [  3%]
+tests/detailtests/test_color_utils_helpers.py::test_clip_impl_uses_scalar_fallback_without_numpy PASSED [  3%]
+tests/detailtests/test_color_utils_helpers.py::test_clip_impl_raises_for_non_scalar_without_numpy PASSED [  3%]
+tests/detailtests/test_color_utils_helpers.py::test_gray_to_hex_impl_clamps_and_rounds PASSED [  3%]
+tests/detailtests/test_color_utils_helpers.py::test_rgb_to_hex_impl_formats_channels PASSED [  4%]
+tests/detailtests/test_composite_svg_helpers.py::test_trace_image_segment_impl_returns_svg_paths PASSED [  4%]
+tests/detailtests/test_composite_svg_helpers.py::test_generate_composite_svg_impl_uses_top_ref_and_square_cross PASSED [  4%]
+tests/detailtests/test_conversion_bestlist_helpers.py::test_candidate_better_when_no_previous PASSED [  4%]
+tests/detailtests/test_conversion_bestlist_helpers.py::test_candidate_prefers_semantic_ok PASSED [  4%]
+tests/detailtests/test_conversion_bestlist_helpers.py::test_candidate_prefers_ac0223_with_valve_head_metadata PASSED [  4%]
+tests/detailtests/test_conversion_bestlist_helpers.py::test_bestlist_manifest_read_write_roundtrip PASSED [  4%]
+tests/detailtests/test_conversion_bestlist_helpers.py::test_store_and_restore_bestlist_snapshot_roundtrip PASSED [  4%]
+tests/detailtests/test_conversion_bestlist_helpers.py::test_prune_bestlist_rows_without_existing_svg PASSED [  5%]
+tests/detailtests/test_conversion_bestlist_helpers.py::test_choose_conversion_bestlist_row_prefers_previous_and_restored_values PASSED [  5%]
+tests/detailtests/test_conversion_bestlist_helpers.py::test_repair_ac0223_bestlist_artifacts_removes_stale_snapshots PASSED [  5%]
+tests/detailtests/test_conversion_composite_helpers.py::test_run_composite_iteration_impl_uses_plateau_and_logs PASSED [  5%]
+tests/detailtests/test_conversion_execution_helpers.py::test_placeholder_diff_png_has_valid_chunk_crc PASSED [  5%]
+tests/detailtests/test_conversion_execution_helpers.py::test_convert_one_impl_success_reads_convergence_and_delta2 PASSED [  5%]
+tests/detailtests/test_conversion_execution_helpers.py::test_convert_one_impl_semantic_mismatch_is_reported_as_failure PASSED [  5%]
+tests/detailtests/test_conversion_execution_helpers.py::test_convert_one_impl_unknown_status_is_recorded_as_failure PASSED [  5%]
+tests/detailtests/test_conversion_execution_helpers.py::test_convert_one_impl_skipped_status_stays_non_failure PASSED [  6%]
+tests/detailtests/test_conversion_execution_helpers.py::test_convert_one_impl_non_composite_success_renames_svg_to_failed_prefix PASSED [  6%]
+tests/detailtests/test_conversion_execution_helpers.py::test_convert_one_impl_embedded_svg_uses_failed_prefix_independent_of_status PASSED [  6%]
+tests/detailtests/test_conversion_execution_helpers.py::test_convert_one_impl_marks_timeout_as_batch_error PASSED [  6%]
+tests/detailtests/test_conversion_execution_helpers.py::test_convert_one_impl_skipped_status_with_result_marks_embedded_svg_as_failed PASSED [  6%]
+tests/detailtests/test_conversion_execution_helpers.py::test_convert_one_impl_trivial_placeholder_svg_is_marked_failed PASSED [  6%]
+tests/detailtests/test_conversion_execution_helpers.py::test_convert_one_impl_marks_image_only_svg_without_raster_extension_as_failed PASSED [  6%]
+tests/detailtests/test_conversion_execution_helpers.py::test_convert_one_impl_writes_ac0811_debug_dump_on_success PASSED [  6%]
+tests/detailtests/test_conversion_finalization_helpers.py::test_run_conversion_finalization_executes_all_steps_and_returns_semantic_results PASSED [  7%]
+tests/detailtests/test_conversion_finalization_helpers.py::test_run_conversion_finalization_skips_strategy_report_when_no_rows PASSED [  7%]
+tests/detailtests/test_conversion_finalization_helpers.py::test_svg_embedded_raster_detection_supports_png_data_without_mime PASSED [  7%]
+tests/detailtests/test_conversion_finalization_helpers.py::test_mark_poor_conversions_renames_svg_when_embedded_png_detected PASSED [  7%]
+tests/detailtests/test_conversion_finalization_helpers.py::test_mark_poor_conversions_renames_svg_when_embedded_jpeg_detected PASSED [  7%]
+tests/detailtests/test_conversion_finalization_helpers.py::test_mark_poor_conversions_detects_embedded_raster_even_without_result_row PASSED [  7%]
+tests/detailtests/test_conversion_finalization_helpers.py::test_mark_poor_conversions_detects_embedded_raster_for_lowercase_variant_names PASSED [  7%]
+tests/detailtests/test_conversion_finalization_helpers.py::test_mark_poor_conversions_marks_skipped_manual_review_embedded_svg_as_failed PASSED [  7%]
+tests/detailtests/test_conversion_finalization_helpers.py::test_mark_poor_conversions_removes_stale_failed_svg_after_successful_result PASSED [  7%]
+tests/detailtests/test_conversion_finalization_helpers.py::test_mark_poor_conversions_renames_trivial_white_fallback_svg PASSED [  8%]
+tests/detailtests/test_conversion_finalization_helpers.py::test_mark_poor_conversions_renames_image_only_svg_without_detectable_raster_href PASSED [  8%]
+tests/detailtests/test_conversion_finalization_helpers.py::test_canonicalize_failed_attempt_svg_names_from_suffix_format PASSED [  8%]
+tests/detailtests/test_conversion_finalization_helpers.py::test_canonicalize_failed_attempt_svg_names_from_lowercase_prefix PASSED [  8%]
+tests/detailtests/test_conversion_initial_pass_helpers.py::test_initial_pass_prefers_template_transfer_and_updates_bestlist PASSED [  8%]
+tests/detailtests/test_conversion_initial_pass_helpers.py::test_initial_pass_uses_restored_bestlist_row_when_candidate_not_better PASSED [  8%]
+tests/detailtests/test_conversion_initial_pass_helpers.py::test_initial_pass_continues_after_failed_file PASSED [  8%]
+tests/detailtests/test_conversion_inputs_helpers.py::test_list_requested_image_files_filters_extension_range_and_variants PASSED [  8%]
+tests/detailtests/test_conversion_inputs_helpers.py::test_list_requested_image_files_returns_all_in_range_when_no_selection PASSED [  9%]
+tests/detailtests/test_conversion_inputs_helpers.py::test_input_selection_summary_contains_hints PASSED [  9%]
+tests/detailtests/test_conversion_quality_pass_helpers.py::test_run_quality_passes_updates_result_map_and_bestlist PASSED [  9%]
+tests/detailtests/test_conversion_quality_pass_helpers.py::test_run_quality_passes_restores_snapshot_when_not_improved PASSED [  9%]
+tests/detailtests/test_conversion_quality_pass_helpers.py::test_run_quality_passes_continues_after_failed_candidate PASSED [  9%]
+tests/detailtests/test_conversion_random_helpers.py::test_conversion_random_impl_uses_seed_env PASSED [  9%]
+tests/detailtests/test_conversion_random_helpers.py::test_conversion_random_impl_falls_back_to_time_ns_for_invalid_seed PASSED [  9%]
+tests/detailtests/test_conversion_reporting_helpers.py::test_run_post_conversion_reporting_writes_reports_and_manifest PASSED [  9%]
+tests/detailtests/test_conversion_reporting_helpers.py::test_run_post_conversion_reporting_skips_manifest_refresh_when_missing PASSED [ 10%]
+tests/detailtests/test_dependency_bootstrap_runtime_helpers.py::test_bootstrap_required_image_dependencies_for_runtime_impl_installs_and_sets_modules PASSED [ 10%]
+tests/detailtests/test_dependency_bootstrap_runtime_helpers.py::test_bootstrap_required_image_dependencies_for_runtime_impl_uses_custom_module_names PASSED [ 10%]
+tests/detailtests/test_dependency_helpers.py::test_missing_required_image_dependencies_impl PASSED [ 10%]
+tests/detailtests/test_dependency_helpers.py::test_bootstrap_required_image_dependencies_impl_runs_install_and_sets_modules PASSED [ 10%]
+tests/detailtests/test_dependency_helpers.py::test_bootstrap_required_image_dependencies_impl_raises_runtime_error_on_pip_failure PASSED [ 10%]
+tests/detailtests/test_dependency_helpers.py::test_ensure_conversion_runtime_dependencies_impl_requires_cv2_numpy_and_fitz PASSED [ 10%]
+tests/detailtests/test_diffing_helpers.py::test_calculate_error_impl_returns_inf_for_missing_svg PASSED [ 10%]
+tests/detailtests/test_diffing_helpers.py::test_calculate_error_impl_uses_mean_absdiff PASSED [ 11%]
+tests/detailtests/test_diffing_helpers.py::test_create_diff_image_impl_applies_focus_mask PASSED [ 11%]
+tests/detailtests/test_dual_arrow_runtime_helpers.py::test_run_dual_arrow_badge_iteration_impl_uses_fallback_when_detection_fails PASSED [ 11%]
+tests/detailtests/test_dual_arrow_runtime_helpers.py::test_run_dual_arrow_badge_iteration_impl_records_render_failure_with_badge_params PASSED [ 11%]
+tests/detailtests/test_element_mask_helpers.py::test_extract_badge_element_mask_returns_none_for_missing_region PASSED [ 11%]
+tests/detailtests/test_element_mask_helpers.py::test_extract_badge_element_mask_intersects_region_and_foreground PASSED [ 11%]
+tests/detailtests/test_element_validation_helpers.py::test_apply_element_alignment_step_updates_circle_geometry PASSED [ 11%]
+tests/detailtests/test_element_validation_helpers.py::test_apply_element_alignment_step_honors_locked_circle_center PASSED [ 11%]
+tests/detailtests/test_error_metric_helpers.py::test_element_only_params_impl PASSED [ 11%]
+tests/detailtests/test_error_metric_helpers.py::test_union_bbox_from_masks_impl_combines_boxes PASSED [ 12%]
+tests/detailtests/test_error_metric_helpers.py::test_masked_union_error_in_bbox_impl_returns_finite_value PASSED [ 12%]
+tests/detailtests/test_error_metric_helpers.py::test_masked_error_impl_handles_empty_mask PASSED [ 12%]
+tests/detailtests/test_error_metric_helpers.py::test_calculate_delta2_stats_impl_returns_mean_and_std PASSED [ 12%]
+tests/detailtests/test_error_metric_helpers.py::test_element_match_error_impl_returns_finite_score_for_overlap PASSED [ 12%]
+tests/detailtests/test_error_metric_helpers.py::test_element_match_error_impl_applies_circle_undersize_penalty PASSED [ 12%]
+tests/detailtests/test_extract_remaining_functions_batch_tool.py::test_extracts_only_non_delegating_functions_and_writes_logs PASSED [ 12%]
+tests/detailtests/test_fallback_helpers.py::test_run_embedded_raster_fallback_writes_failed_prefixed_svg PASSED [ 12%]
+tests/detailtests/test_fill_missing_parameters_tool.py::test_fill_missing_parameters_updates_signature_and_calls PASSED [ 13%]
+tests/detailtests/test_filling_parameter_tool.py::test_fill_missing_parameters_updates_signature_and_calls <- tests/detailtests/test_fill_missing_parameters_tool.py PASSED [ 13%]
+tests/detailtests/test_forms_symmetric_chords_helpers.py::test_derive_symmetric_chord_spec_impl_extracts_angle_and_offset PASSED [ 13%]
+tests/detailtests/test_forms_symmetric_chords_helpers.py::test_render_symmetric_chord_circle_svg_impl_adds_inner_clip_and_round_caps PASSED [ 13%]
+tests/detailtests/test_forms_symmetric_chords_helpers.py::test_render_symmetric_chord_circle_svg_impl_can_disable_inner_clipping PASSED [ 13%]
+tests/detailtests/test_generate_function_modularization_plan_tool.py::test_generate_function_modularization_plan PASSED [ 13%]
+tests/detailtests/test_geometry_brackets_helpers.py::test_optimize_circle_center_bracket_respects_radius_floor_clearance PASSED [ 13%]
+tests/detailtests/test_geometry_brackets_helpers.py::test_optimize_circle_center_bracket_allows_y_refine_when_text_window_collapses_x PASSED [ 13%]
+tests/detailtests/test_geometry_optimization_helpers.py::test_optimize_element_width_bracket_updates_stem_width_and_center PASSED [ 14%]
+tests/detailtests/test_geometry_optimization_helpers.py::test_element_error_for_extent_returns_inf_for_unknown_element PASSED [ 14%]
+tests/detailtests/test_global_search_optimization_helpers.py::test_full_badge_error_for_params_returns_inf_when_render_is_none PASSED [ 14%]
+tests/detailtests/test_global_search_optimization_helpers.py::test_full_badge_error_for_params_uses_render_pipeline_result PASSED [ 14%]
+tests/detailtests/test_global_search_optimization_helpers.py::test_global_search_skips_when_less_than_two_parameters_are_active PASSED [ 14%]
+tests/detailtests/test_global_search_optimization_helpers.py::test_global_search_logs_reduced_mode_for_two_or_three_active_parameters PASSED [ 14%]
+tests/detailtests/test_global_search_optimization_helpers.py::test_global_search_logs_evaluate_telemetry_when_no_improvement PASSED [ 14%]
+tests/detailtests/test_global_search_optimization_helpers.py::test_global_search_caches_duplicate_evaluations PASSED [ 14%]
+tests/detailtests/test_global_search_optimization_helpers.py::test_global_search_reuses_cache_across_invocations_for_same_image PASSED [ 14%]
+tests/detailtests/test_global_search_optimization_helpers.py::test_global_search_can_improve_error_by_varying_arm_x1 PASSED [ 15%]
+tests/detailtests/test_global_search_optimization_helpers.py::test_global_search_can_improve_error_by_varying_arm_y1 PASSED [ 15%]
+tests/detailtests/test_global_search_optimization_helpers.py::test_global_search_can_improve_error_by_varying_arm_x2 PASSED [ 15%]
+tests/detailtests/test_global_search_optimization_helpers.py::test_global_search_skips_deterministic_track_after_strong_stochastic_gain FAILED [ 15%]
+
+=================================== FAILURES ===================================
+__ test_global_search_skips_deterministic_track_after_strong_stochastic_gain ___
+
+    def test_global_search_skips_deterministic_track_after_strong_stochastic_gain() -> None:
+        @dataclass(frozen=True)
+        class _ArmVector:
+            cx: float
+            cy: float
+            r: float
+            arm_x1: float
+            text_x: float
+    
+            @staticmethod
+            def fromParams(params: dict) -> "_ArmVector":
+                return _ArmVector(
+                    cx=float(params["cx"]),
+                    cy=float(params["cy"]),
+                    r=float(params["r"]),
+                    arm_x1=float(params["arm_x1"]),
+                    text_x=float(params["text_x"]),
+                )
+    
+            def applyToParams(self, params: dict) -> dict:
+                out = dict(params)
+                out.update(
+                    {
+                        "cx": float(self.cx),
+                        "cy": float(self.cy),
+                        "r": float(self.r),
+                        "arm_x1": float(self.arm_x1),
+                        "text_x": float(self.text_x),
+                    }
+                )
+                return out
+    
+            def apply_to_params(self, params: dict) -> dict:
+                return self.applyToParams(params)
+    
+        class _TargetRng:
+            def normal(self, loc: float, _sigma: float) -> float:
+                if abs(loc - 2.0) < 1e-6:
+                    return loc
+                return 7.0
+    
+        def _arm_bounds(_params: dict, _w: int, _h: int) -> dict:
+            return {
+                "cx": (5.0, 5.0, True, "locked"),
+                "cy": (5.0, 5.0, True, "locked"),
+                "r": (2.0, 2.0, True, "locked"),
+                "arm_x1": (0.0, 10.0, False, "test"),
+                "text_x": (2.0, 2.0, False, "fixed-secondary-dimension"),
+            }
+    
+        img = _Image(10, 10)
+        logs: list[str] = []
+        params = {
+            "enable_global_search_mode": True,
+            "arm_enabled": True,
+            "cx": 5.0,
+            "cy": 5.0,
+            "r": 2.0,
+            "arm_x1": 1.0,
+            "text_x": 2.0,
+        }
+    
+        improved = helpers.optimizeGlobalParameterVectorSamplingImpl(
+            img,
+            params,
+            logs,
+            rounds=3,
+            samples_per_round=3,
+            global_parameter_vector_cls=_ArmVector,
+            global_parameter_vector_bounds_fn=_arm_bounds,
+            clip_scalar_fn=lambda value, low, high: max(low, min(high, value)),
+            snap_half_fn=lambda value: round(value * 2.0) / 2.0,
+            make_rng_fn=lambda _seed: _TargetRng(),
+            reanchor_arm_to_circle_edge_fn=lambda _probe, _r: None,
+            full_badge_error_for_params_fn=lambda _img, probe: abs(float(probe["arm_x1"]) - 7.0),
+            log_global_parameter_vector_fn=lambda _logs, _params, _w, _h, label: _logs.append(label),
+            stochastic_run_seed=0,
+            stochastic_seed_offset=0,
+        )
+    
+        assert improved is True
+        assert float(params["arm_x1"]) == 7.0
+>       assert any("deterministischer track übersprungen" in line for line in logs)
+E       assert False
+E        +  where False = any(<generator object test_global_search_skips_deterministic_track_after_strong_stochastic_gain.<locals>.<genexpr> at 0x7f882ff28660>)
+
+tests/detailtests/test_global_search_optimization_helpers.py:656: AssertionError
+=============================== warnings summary ===============================
+<frozen importlib._bootstrap>:241
+<frozen importlib._bootstrap>:241
+  <frozen importlib._bootstrap>:241: DeprecationWarning: builtin type SwigPyPacked has no __module__ attribute
+
+<frozen importlib._bootstrap>:241
+<frozen importlib._bootstrap>:241
+  <frozen importlib._bootstrap>:241: DeprecationWarning: builtin type SwigPyObject has no __module__ attribute
+
+<frozen importlib._bootstrap>:241
+  <frozen importlib._bootstrap>:241: DeprecationWarning: builtin type swigvarlink has no __module__ attribute
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/detailtests/test_global_search_optimization_helpers.py::test_global_search_skips_deterministic_track_after_strong_stochastic_gain - assert False
+ +  where False = any(<generator object test_global_search_skips_deterministic_track_after_strong_stochastic_gain.<locals>.<genexpr> at 0x7f882ff28660>)
+!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!
+================== 1 failed, 127 passed, 5 warnings in 3.78s ===================

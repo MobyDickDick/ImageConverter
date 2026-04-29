@@ -432,8 +432,9 @@ def optimizeGlobalParameterVectorSamplingImpl(
         return best, best_err, improved
 
     stochastic_best, stochastic_err, stochastic_improved = runStochasticTrack()
+    configured_rounds = max(1, int(rounds))
     skip_deterministic_track = bool(
-        stochastic_improved and (start_err - stochastic_err) >= 0.10 and effective_rounds >= 3
+        stochastic_improved and (start_err - stochastic_err) >= 0.10 and configured_rounds >= 3
     )
     if skip_deterministic_track:
         deterministic_best, deterministic_err, deterministic_improved = stochastic_best, float("inf"), False
