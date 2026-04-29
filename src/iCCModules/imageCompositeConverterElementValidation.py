@@ -243,7 +243,7 @@ def validateBadgeByElementsImpl(
             configured_budget = max(
                 configured_budget,
                 120.0,
-                30.0 * float(max_rounds),
+                35.0 * float(max_rounds),
             )
 
     def _time_budget_exceeded() -> bool:

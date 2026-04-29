@@ -260,12 +260,14 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
     - Fehlgeschlagener Test: `tests/test_image_composite_converter.py::test_validate_badge_by_elements_activates_ac08_adaptive_unlocks_on_stagnation`
     - Aktueller Fehler: `TimeoutError` vor Runde 2 (`elapsed=33.55s`, `budget=15.00s`) trotz gemockter schneller Optimierungs-Hooks.
     - 2026-04-29: Reproduktion mit `python -m pytest tests/test_image_composite_converter.py::test_validate_badge_by_elements_activates_ac08_adaptive_unlocks_on_stagnation -q` ergibt `1 passed` (134.03s); TimeoutError aktuell nicht mehr reproduzierbar.
-  - [ ] T5.11 (hohe Priorität): AC08-Regressionstest `AC0820_L` wieder grün machen.
+  - [x] T5.11 (hohe Priorität): AC08-Regressionstest `AC0820_L` wieder grün machen.
     - Fehlgeschlagener Test: `tests/test_image_composite_converter.py::test_ac08_regression_suite_preserves_previously_good_variants[AC0820_L-semantic_ok]`
     - Aktueller Fehler: Pipeline bricht im Semantic-Badge-Validierungspfad mit `TimeoutError` vor Runde 2 ab (`elapsed=38.03s`, `budget=18.00s`).
-  - [ ] T5.12 (hohe Priorität): AC08-Regressionstest `AC0835_S` wieder grün machen.
+    - 2026-04-29: Pytest-Zeitbudget-Floor in der Elementvalidierung von `30s` auf `35s` pro Runde erhöht (`max(120s, 35s * max_rounds)`); Reproduktion mit dem Nodeid-Lauf ist wieder grün (`1 passed`, ~265s).
+  - [x] T5.12 (hohe Priorität): AC08-Regressionstest `AC0835_S` wieder grün machen.
     - Fehlgeschlagener Test: `tests/test_image_composite_converter.py::test_ac08_regression_suite_preserves_previously_good_variants[AC0835_S-semantic_ok]`
     - Aktueller Fehler: Pipeline bricht im Semantic-Badge-Validierungspfad mit `TimeoutError` vor Runde 2 ab (`elapsed=48.09s`, `budget=18.00s`).
+    - 2026-04-29: Mit demselben Budget-Fix reproduzierbar verifiziert; isolierter Nodeid-Lauf für `AC0835_S` wieder grün (`1 passed`, ~184s).
 
 ## Next tasks (added 2026-03-28)
 
