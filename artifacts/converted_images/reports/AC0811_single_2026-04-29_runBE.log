@@ -1,0 +1,8 @@
+[INFO] Schreibe Konsolen-Output nach: /workspace/ImageConverter/imageCompositeConverter.local.log
+
+--- Verarbeite AC0811_L.jpg ---
+Bildbeschreibung: Kelle, ohne Text Kreis oben, Griff nach unten (dunkelgraue Liine)
+Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe, SEMANTIC: senkrechter Strich hinter dem Kreis
+[WARN] AC0811_L.jpg: Batchlauf setzt nach Fehler fort (TimeoutError: validation_time_budget_exceeded: phase=round_start, round=2, elapsed=67.14s, budget=18.00s)
+
+Abgeschlossen! Ausgaben unter: /tmp/imageconverter_runBE_AC0811
