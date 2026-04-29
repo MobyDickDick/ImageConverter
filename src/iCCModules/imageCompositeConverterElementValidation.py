@@ -240,7 +240,11 @@ def validateBadgeByElementsImpl(
             # than micro-bench unit stubs. Keep a deterministic floor so
             # integration-style regression tests do not fail spuriously with a
             # wall-clock timeout before geometry corrections can complete.
-            configured_budget = max(configured_budget, 75.0)
+            configured_budget = max(
+                configured_budget,
+                120.0,
+                30.0 * float(max_rounds),
+            )
 
     def _time_budget_exceeded() -> bool:
         if configured_budget <= 0.0:
