@@ -69,6 +69,7 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
   - 2026-04-28: Run BA mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_L`, Prozessende mit Exit `0`, aber ohne Vollbereichsnachweis bis `AC0899` (Summary: `docs/ac0800_ac0899_runBA_2026-04-28_summary.md`).
   - 2026-04-28: Run BB mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_L`, Prozessende mit Exit `0`, aber ohne Vollbereichsnachweis bis `AC0899` (Summary: `docs/ac0800_ac0899_runBB_2026-04-28_summary.md`).
   - 2026-04-28: Run BC mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_L`, Prozessende mit Exit `0`, aber ohne Vollbereichsnachweis bis `AC0899` (Summary: `docs/ac0800_ac0899_runBC_2026-04-28_summary.md`).
+  - 2026-04-29: Run BD mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_L`, Prozessende mit Exit `0`, aber ohne Vollbereichsnachweis bis `AC0899` (Summary: `docs/ac0800_ac0899_runBD_2026-04-29_summary.md`).
   - Abschlusskriterium: vollständiger Durchlauf bis `AC0899` ohne `timeout`-Abbruch und mit finalem Prozessstatus `0`.
 
 - [ ] N2: Stabilitätsnachweis für den Vollbereich dokumentieren.
@@ -109,6 +110,7 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
   - 2026-04-28: Run BA zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Status (Exit `0` ohne Vollbereichsnachweis) in `docs/ac0800_ac0899_runBA_2026-04-28_summary.md` dokumentiert.
   - 2026-04-28: Run BB zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Status (Exit `0` ohne Vollbereichsnachweis) in `docs/ac0800_ac0899_runBB_2026-04-28_summary.md` dokumentiert.
   - 2026-04-28: Run BC zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Status (Exit `0` ohne Vollbereichsnachweis) in `docs/ac0800_ac0899_runBC_2026-04-28_summary.md` dokumentiert.
+  - 2026-04-29: Run BD zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Status (Exit `0` ohne Vollbereichsnachweis) in `docs/ac0800_ac0899_runBD_2026-04-29_summary.md` dokumentiert.
 
 - [x] N3: Neue Laufzusammenfassung im Run-Format ergänzen.
   - Neue Datei analog zu Run Q/R erstellen (Datum, Anlass, exakter Befehl, Log-Pfad, sichtbarer Fortschritt, Exit-Code, Kurzfazit).
@@ -165,6 +167,7 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
   - 2026-04-28: Zwischenstand nach Run BA nachgepflegt; N1/N2/N4 bleiben weiterhin offen (Exit `0`, aber weiterhin kein Vollbereichsnachweis bis `AC0899`).
   - 2026-04-28: Zwischenstand nach Run BB nachgepflegt; N1/N2/N4 bleiben weiterhin offen (Exit `0`, aber weiterhin kein Vollbereichsnachweis bis `AC0899`).
   - 2026-04-28: Zwischenstand nach Run BC nachgepflegt; N1/N2/N4 bleiben weiterhin offen (Exit `0`, aber weiterhin kein Vollbereichsnachweis bis `AC0899`).
+  - 2026-04-29: Zwischenstand nach Run BD nachgepflegt; N1/N2/N4 bleiben weiterhin offen (Exit `0`, aber weiterhin kein Vollbereichsnachweis bis `AC0899`).
   - 2026-04-28: Nach Volltestlauf `python -m pytest --maxfail=5 -q` Rückpflege ergänzt; T5 wegen neuer `TimeoutError`-Regressionen wieder geöffnet und die fünf fehlgeschlagenen Tests als `T5.8` bis `T5.12` mit hoher Priorität dokumentiert.
   - 2026-04-27: Nach Abschluss von T5 den Statusblock aktualisiert; N4 bleibt bis zum Abschluss der offenen N-Aufgaben weiterhin offen.
 
