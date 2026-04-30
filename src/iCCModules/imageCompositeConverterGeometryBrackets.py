@@ -130,7 +130,8 @@ def optimizeCircleCenterBracketImpl(
         if high - low < 0.05:
             return snap_half_fn((low + high) / 2.0)
         mid = snap_half_fn((low + high) / 2.0)
-        for _ in range(8):
+        max_iterations = int(max(1, params.get("circle_center_bracket_iterations", 8)))
+        for _ in range(max_iterations):
             if axis == "x":
                 low_err = eval_center(low, fixed)
                 mid_err = eval_center(mid, fixed)
