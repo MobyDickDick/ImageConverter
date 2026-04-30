@@ -277,6 +277,62 @@ def validateBadgeByElementsImpl(
             return float("inf")
         return max(0.0, configured_budget - (float(time_module.monotonic()) - validation_started_at))
 
+
+    heartbeat_interval_sec = 10.0
+    last_heartbeat_at = float(validation_started_at)
+
+    def _maybe_anchor_heartbeat(*, phase: str, round_number: int, element: str | None = None) -> None:
+        nonlocal last_heartbeat_at
+        if not is_anchor_telemetry_test:
+            return
+        now = float(time_module.monotonic())
+        if (now - last_heartbeat_at) < heartbeat_interval_sec:
+            return
+        last_heartbeat_at = now
+        elapsed = now - validation_started_at
+        remaining = _remaining_budget_seconds()
+        detail = f", element={element}" if element else ""
+        logs.append(
+            f"{anchor_telemetry_prefix} HEARTBEAT phase={phase}, round={round_number}, "
+            f"elapsed={elapsed:.2f}s, remaining={remaining:.2f}s{detail}"
+        )
+
+    def _run_budget_micro_search(round_number: int) -> bool:
+        if not is_anchor_telemetry_test:
+            return False
+        if not bool(params.get("enable_global_search_mode", False)):
+            return False
+        if _remaining_budget_seconds() < 8.0:
+            logs.append(f"{anchor_telemetry_prefix} micro_search_skipped_due_to_budget")
+            return False
+        base_cx = float(params.get("cx", 0.0))
+        base_cy = float(params.get("cy", 0.0))
+        base_r = float(params.get("r", 0.0))
+        deltas = [(0.0,0.0,0.0),(-0.5,0.0,0.0),(0.5,0.0,0.0),(0.0,-0.5,0.0),(0.0,0.5,0.0),(0.0,0.0,-0.5),(0.0,0.0,0.5)]
+        def _eval_current() -> float:
+            svg = generate_badge_svg_fn(w, h, params)
+            render = fit_to_original_size_fn(img_orig, render_svg_to_numpy_fn(svg, w, h))
+            if render is None:
+                return float('inf')
+            return float(calculate_error_fn(img_orig, render))
+        best_err = _eval_current()
+        best = (base_cx, base_cy, base_r)
+        for dcx, dcy, dr in deltas[1:]:
+            _maybe_anchor_heartbeat(phase="micro_search", round_number=round_number)
+            cand_cx, cand_cy, cand_r = base_cx + dcx, base_cy + dcy, max(0.5, base_r + dr)
+            params["cx"], params["cy"], params["r"] = cand_cx, cand_cy, cand_r
+            cand_err = _eval_current()
+            if cand_err < best_err:
+                best_err = cand_err
+                best = (cand_cx, cand_cy, cand_r)
+        changed = best != (base_cx, base_cy, base_r)
+        params["cx"], params["cy"], params["r"] = best
+        logs.append(
+            f"{anchor_telemetry_prefix} micro_search round={round_number} changed={str(changed).lower()} "
+            f"best_err={best_err:.3f}"
+        )
+        return changed
+
     elements = ["circle"]
     if params.get("stem_enabled"):
         elements.append("stem")
@@ -366,6 +422,7 @@ def validateBadgeByElementsImpl(
     for round_idx in range(max_rounds):
         if is_anchor_telemetry_test:
             logs.append(f"{anchor_telemetry_prefix} PHASE round_start round={round_idx + 1}")
+        _maybe_anchor_heartbeat(phase="round_start", round_number=round_idx + 1)
         if _time_budget_exceeded():
             _raise_time_budget_exceeded(phase="round_start", round_number=round_idx + 1)
         logs.append(f"Runde {round_idx + 1}: elementweise Validierung gestartet")
@@ -383,6 +440,7 @@ def validateBadgeByElementsImpl(
         for element in elements:
             if is_anchor_telemetry_test:
                 logs.append(f"{anchor_telemetry_prefix} PHASE element_start round={round_idx + 1} element={element}")
+            _maybe_anchor_heartbeat(phase="element_loop", round_number=round_idx + 1, element=element)
             if _time_budget_exceeded():
                 _raise_time_budget_exceeded(
                     phase="element_loop",
@@ -451,6 +509,9 @@ def validateBadgeByElementsImpl(
                 "global_search_skipped_due_to_budget: "
                 f"remaining={remaining_budget:.2f}s < required={min_required_for_global_search:.2f}s"
             )
+            micro_changed = _run_budget_micro_search(round_idx + 1)
+            if micro_changed:
+                round_changed = True
         else:
             if is_anchor_telemetry_test:
                 logs.append(f"{anchor_telemetry_prefix} PHASE global_search_start round={round_idx + 1}")
