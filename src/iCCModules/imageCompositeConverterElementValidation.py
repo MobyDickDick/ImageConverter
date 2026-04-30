@@ -231,6 +231,10 @@ def validateBadgeByElementsImpl(
     h, w = img_orig.shape[:2]
     logs: list[str] = []
     validation_started_at = float(time_module.monotonic())
+    current_test_id = str(os_module.environ.get("PYTEST_CURRENT_TEST", ""))
+    is_anchor_telemetry_test = "test_ac08_semantic_anchor_variants_convert_without_failed_svg" in current_test_id
+    variant_name = str(params.get("variant_name", params.get("base_name", "unknown")))
+    anchor_telemetry_prefix = f"anchor_telemetry[{variant_name}]"
     configured_budget = float(params.get("validation_time_budget_sec", 0.0) or 0.0)
     if configured_budget <= 0.0:
         configured_budget = max(15.0, 3.0 * float(max_rounds))
@@ -245,13 +249,15 @@ def validateBadgeByElementsImpl(
                 120.0,
                 35.0 * float(max_rounds),
             )
-            current_test_id = str(os_module.environ.get("PYTEST_CURRENT_TEST", ""))
             if "test_ac08_semantic_anchor_variants_convert_without_failed_svg" in current_test_id:
                 # This end-to-end anchor regression runs two full AC08 family
                 # conversions in sequence. A very high per-validation budget
                 # can make the test appear stalled for several minutes without
                 # adding meaningful signal for this smoke-style assertion.
                 configured_budget = min(configured_budget, 90.0)
+
+    if is_anchor_telemetry_test:
+        logs.append(f"{anchor_telemetry_prefix} START budget={configured_budget:.2f}s max_rounds={int(max_rounds)}")
 
     def _time_budget_exceeded() -> bool:
         if configured_budget <= 0.0:
@@ -358,6 +364,8 @@ def validateBadgeByElementsImpl(
         return abs(new_cx - old_cx) > 1e-6 or abs(new_cy - old_cy) > 1e-6
 
     for round_idx in range(max_rounds):
+        if is_anchor_telemetry_test:
+            logs.append(f"{anchor_telemetry_prefix} PHASE round_start round={round_idx + 1}")
         if _time_budget_exceeded():
             _raise_time_budget_exceeded(phase="round_start", round_number=round_idx + 1)
         logs.append(f"Runde {round_idx + 1}: elementweise Validierung gestartet")
@@ -373,6 +381,8 @@ def validateBadgeByElementsImpl(
 
         round_changed = False
         for element in elements:
+            if is_anchor_telemetry_test:
+                logs.append(f"{anchor_telemetry_prefix} PHASE element_start round={round_idx + 1} element={element}")
             if _time_budget_exceeded():
                 _raise_time_budget_exceeded(
                     phase="element_loop",
@@ -426,6 +436,8 @@ def validateBadgeByElementsImpl(
                 radius_changed = optimize_circle_radius_bracket_fn(img_orig, params, logs)
                 if radius_changed:
                     round_changed = True
+            if is_anchor_telemetry_test:
+                logs.append(f"{anchor_telemetry_prefix} PHASE element_end round={round_idx + 1} element={element}")
 
         # The global vector sampling step is the single most expensive operation
         # in the validation loop. If the remaining wall-clock budget is already
@@ -440,11 +452,15 @@ def validateBadgeByElementsImpl(
                 f"remaining={remaining_budget:.2f}s < required={min_required_for_global_search:.2f}s"
             )
         else:
+            if is_anchor_telemetry_test:
+                logs.append(f"{anchor_telemetry_prefix} PHASE global_search_start round={round_idx + 1}")
             global_search_changed = optimize_global_parameter_vector_sampling_fn(
                 img_orig,
                 params,
                 logs,
             )
+            if is_anchor_telemetry_test:
+                logs.append(f"{anchor_telemetry_prefix} PHASE global_search_end round={round_idx + 1}")
             if global_search_changed:
                 round_changed = True
 
@@ -578,6 +594,8 @@ def validateBadgeByElementsImpl(
     remaining_budget = _remaining_budget_seconds()
     min_required_for_final_color_pass = max(10.0, 0.12 * configured_budget) if configured_budget > 0.0 else 0.0
     if configured_budget > 0.0 and remaining_budget < min_required_for_final_color_pass:
+        if is_anchor_telemetry_test:
+            logs.append(f"{anchor_telemetry_prefix} PHASE final_color_pass_budget_fallback")
         logs.append(
             "final_color_pass_statistical_fallback_due_to_budget: "
             f"remaining={remaining_budget:.2f}s < required={min_required_for_final_color_pass:.2f}s"
@@ -649,6 +667,8 @@ def validateBadgeByElementsImpl(
                     f"(target={target_gray}, mean={gray_mean:.1f}, std={gray_std:.1f})"
                 )
     else:
+        if is_anchor_telemetry_test:
+            logs.append(f"{anchor_telemetry_prefix} PHASE final_color_pass_start")
         for element in elements:
             if element == "text" and not params.get("draw_text", True):
                 continue
@@ -658,6 +678,8 @@ def validateBadgeByElementsImpl(
             color_changed = optimize_element_color_bracket_fn(img_orig, params, element, mask_orig, logs)
             if color_changed:
                 logs.append(f"{element}: Farboptimierung in Abschlussphase angewendet")
+        if is_anchor_telemetry_test:
+            logs.append(f"{anchor_telemetry_prefix} PHASE final_color_pass_end")
 
     params.update(apply_canonical_badge_colors_fn(params))
     normalized_base = str(params.get("base_name", params.get("badge_symbol_name", ""))).upper().split("_")[0]
@@ -670,5 +692,9 @@ def validateBadgeByElementsImpl(
                 "circle: AC0838-VOC cy-Guardrail auf Template-Nähe zurückgesetzt "
                 f"(cy={enforced_cy:.3f})"
             )
+
+    if is_anchor_telemetry_test:
+        elapsed = float(time_module.monotonic()) - validation_started_at
+        logs.append(f"{anchor_telemetry_prefix} END elapsed={elapsed:.2f}s")
 
     return logs
