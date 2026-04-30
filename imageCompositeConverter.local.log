@@ -1,16 +1,8 @@
 [INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\ImageConverter\imageCompositeConverter.local.log
 Namen von: Namen bis: [INFO] Verwende Teilstring-Filter 'AC08' für die Auswahl der Bilder.
 
---- Verarbeite AC0832_L.jpg ---
-Bildbeschreibung: Wie AC0832, jedoch nach rechts gedreht, Text immer noch horizontal
-Befehl erkannt: SEMANTIC: waagrechter Strich links vom Kreis, SEMANTIC: Kreis + Buchstabe
-
---- Verarbeite AC0800_L.jpg ---
-Bildbeschreibung: Kreisförmiges Badge.
-Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe
-
---- Verarbeite AC0538_L_sia.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0538_S_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0538_L_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen.
+--- Verarbeite AC0849_M.jpg ---
+Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0849. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0849. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die mittlere Variante (M). Bitte einer finalen Wurzelform-Kategorie zuordnen.
 Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
   -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
 
@@ -23,178 +15,95 @@ Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "rF" (relative Feuc
 Befehl erkannt: Kein Compositing-Befehl gefunden
 [WARN] AC0850_S.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
 
---- Verarbeite AC0844_M.jpg ---
-Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "rF" (relative Feuchtigkeit) Abweichung: mit Griff (dunkelgraue Linie nach unten) Abweichung: nach links gedreht, Text immer noch horizontal.
+--- Verarbeite AC0850_M.jpg ---
+Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "rF" (relative Feuchtigkeit)
 Befehl erkannt: Kein Compositing-Befehl gefunden
-[WARN] AC0844_M.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
-
---- Verarbeite AC0841_S.jpg ---
-Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "rF" (relative Feuchtigkeit) Abweichung: mit Griff (dunkelgraue Linie nach unten)
-Befehl erkannt: Kein Compositing-Befehl gefunden
-[WARN] AC0841_S.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
-
---- Verarbeite AC0841_M.jpg ---
-Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "rF" (relative Feuchtigkeit) Abweichung: mit Griff (dunkelgraue Linie nach unten)
-Befehl erkannt: Kein Compositing-Befehl gefunden
-[WARN] AC0841_M.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
-
---- Verarbeite AC0847_L.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0847. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0847. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die große Variante (L). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0813_M.jpg ---
-Bildbeschreibung: Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 180° gedreht.
-Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe, SEMANTIC: senkrechter Strich oben vom Kreis
-
---- Verarbeite AC0870_M.jpg ---
-Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "T" (Temperatur)
-Befehl erkannt: SEMANTIC: Kreis + Buchstabe
-
---- Verarbeite AC0831_L.jpg ---
-Bildbeschreibung: Wie AC080, jedoch Griff unten (als Kelle ausfeführt)
-Befehl erkannt: SEMANTIC: senkrechter Strich hinter dem Kreis, SEMANTIC: Kreis + Buchstabe
-
---- Verarbeite AC0862_S.jpg ---
-Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "rF" (relative Feuchtigkeit) Abweichung: mit Griff (dunkelgraue Linie nach unten) Abweichung: nach rechts gedreht, Text immer noch horizontal
-Befehl erkannt: Kein Compositing-Befehl gefunden
-[WARN] AC0862_S.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
-
---- Verarbeite AC0883_S.jpg ---
-Bildbeschreibung: Wie AC0881: Wie AC0870, jedoch mit Griff (dunkelgraue Linie nach unten). Geometrische Variante: 180° gedreht.
-Befehl erkannt: Kein Compositing-Befehl gefunden
-[WARN] AC0883_S.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
-
---- Verarbeite AC0538_2S_sia.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0538_S_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0538_2S_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0884_L.jpg ---
-Bildbeschreibung: Wie AC0882: Wie AC0881, jedoch nach rechts gedreht, Text immer noch horizontal. Geometrische Variante: 180° gedreht.
-Befehl erkannt: Kein Compositing-Befehl gefunden
-[WARN] AC0884_L.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
-
---- Verarbeite AC0881_L.jpg ---
-Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "T" (Temperatur) Abweichung: mit Griff (dunkelgraue Linie nach unten)
-Befehl erkannt: SEMANTIC: senkrechter Strich hinter dem Kreis, SEMANTIC: Kreis + Buchstabe
-
---- Verarbeite AC0842_S.jpg ---
-Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "rF" (relative Feuchtigkeit) Abweichung: mit Griff (dunkelgraue Linie nach unten) Abweichung: nach rechts gedreht, Text immer noch horizontal
-Befehl erkannt: Kein Compositing-Befehl gefunden
-[WARN] AC0842_S.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
-
---- Verarbeite AC0847_S.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0847. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0836_M.jpg ---
-Bildbeschreibung: Wie AC0835, jedoch mit senkrechtem Griff nach unten (dunkelgraue Linie hinter dem Kreis). Text im Kreis: "VOC".
-Befehl erkannt: SEMANTIC: senkrechter Strich hinter dem Kreis, SEMANTIC: Kreis + Buchstabe VOC
-
---- Verarbeite AC0884_M.jpg ---
-Bildbeschreibung: Wie AC0882: Wie AC0881, jedoch nach rechts gedreht, Text immer noch horizontal. Geometrische Variante: 180° gedreht.
-Befehl erkannt: Kein Compositing-Befehl gefunden
-[WARN] AC0884_M.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
-
---- Verarbeite AC0834_L.jpg ---
-Bildbeschreibung: Wie AC080, jedoch Griff unten (als Kelle ausfeführt) Abweichung: nach links gedreht, Text immer noch horizontal
-Befehl erkannt: SEMANTIC: waagrechter Strich rechts vom Kreis, SEMANTIC: Kreis + Buchstabe
-
---- Verarbeite AC0811_S.jpg ---
-Bildbeschreibung: Kelle mit Kreis oben und Griff nach unten.
-Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe, SEMANTIC: senkrechter Strich hinter dem Kreis
-
---- Verarbeite AC0813_L.jpg ---
-Bildbeschreibung: Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 180° gedreht.
-Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe, SEMANTIC: senkrechter Strich oben vom Kreis
-
---- Verarbeite AC0833_L.jpg ---
-Bildbeschreibung: Kelle mit senkrechtem Griff nach oben (oben am Kreis). Text im Kreis: CO² (2 als Superskript).
-Befehl erkannt: SEMANTIC: senkrechter Strich oben vom Kreis, SEMANTIC: Kreis + Buchstabe CO_2
-
---- Verarbeite AC0864_M.jpg ---
-Bildbeschreibung: Wie AC0862: Wie AC0841, jedoch nach rechts gedreht, Text immer noch horizontal. Geometrische Variante: Horizontal gespiegelt.
-Befehl erkannt: Kein Compositing-Befehl gefunden
-[WARN] AC0864_M.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
-
---- Verarbeite AC0846_S.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0846. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0820_S.jpg ---
-Bildbeschreibung: Wie AC0800, mit Text "$CO_2$" (2 tiefgestellt).
-Befehl erkannt: SEMANTIC: Kreis + Buchstabe CO_2
-
---- Verarbeite AC0835_L.jpg ---
-Bildbeschreibung: Grauer Kreis mit grauem Rand und hellgrauem Hintergrund. Text im Kreis: "VOC". Kein Griff, keine Kelle und keine weiteren Anbauteile.
-Befehl erkannt: SEMANTIC: Kreis + Buchstabe VOC
-
---- Verarbeite AC0838_L.jpg ---
-Bildbeschreibung: Wie AC0836, jedoch in der gegenüberliegenden Drehlage. Der Griff bleibt als klarer Zusatzarm am Kreis erkennbar, der Text "VOC" bleibt horizontal lesbar.
-Befehl erkannt: SEMANTIC: senkrechter Strich oben vom Kreis, SEMANTIC: Kreis + Buchstabe VOC
-
---- Verarbeite AC0838_M.jpg ---
-Bildbeschreibung: Wie AC0836, jedoch in der gegenüberliegenden Drehlage. Der Griff bleibt als klarer Zusatzarm am Kreis erkennbar, der Text "VOC" bleibt horizontal lesbar.
-Befehl erkannt: SEMANTIC: senkrechter Strich oben vom Kreis, SEMANTIC: Kreis + Buchstabe VOC
-
---- Verarbeite AC0835_S.jpg ---
-Bildbeschreibung: Grauer Kreis mit grauem Rand und hellgrauem Hintergrund. Text im Kreis: "VOC". Kein Griff, keine Kelle und keine weiteren Anbauteile.
-Befehl erkannt: SEMANTIC: Kreis + Buchstabe VOC
-
---- Verarbeite AC0870_L.jpg ---
-Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "T" (Temperatur)
-Befehl erkannt: SEMANTIC: Kreis + Buchstabe
-
---- Verarbeite AC0839_S.jpg ---
-Bildbeschreibung: Wie AC0836, jedoch 90° nach rechts gedreht. Der Griff verläuft waagrecht nach rechts, der Text "VOC" bleibt horizontal lesbar.
-Befehl erkannt: SEMANTIC: waagrechter Strich rechts vom Kreis, SEMANTIC: Kreis + Buchstabe VOC
+[WARN] AC0850_M.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
 
 --- Verarbeite AC0845_L.jpg ---
 Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0845. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0845. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die große Variante (L). Bitte einer finalen Wurzelform-Kategorie zuordnen.
 Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
   -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
 
---- Verarbeite AC0538_M_sia.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0538_S_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0538_M_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen.
+--- Verarbeite AC0838_L.jpg ---
+Bildbeschreibung: Wie AC0836, jedoch in der gegenüberliegenden Drehlage. Der Griff bleibt als klarer Zusatzarm am Kreis erkennbar, der Text "VOC" bleibt horizontal lesbar.
+Befehl erkannt: SEMANTIC: senkrechter Strich oben vom Kreis, SEMANTIC: Kreis + Buchstabe VOC
+
+--- Verarbeite AC0847_L.jpg ---
+Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0847. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0847. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die große Variante (L). Bitte einer finalen Wurzelform-Kategorie zuordnen.
 Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
   -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
 
---- Verarbeite AC0882_M.jpg ---
-Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "T" (Temperatur) Abweichung: mit Griff (dunkelgraue Linie nach unten) Abweichung: nach rechts gedreht, Text immer noch horizontal
-Befehl erkannt: SEMANTIC: waagrechter Strich links vom Kreis, SEMANTIC: Kreis + Buchstabe
+--- Verarbeite AC0814_M.jpg ---
+Bildbeschreibung: Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 90° nach rechts gedreht.
+Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe, SEMANTIC: waagrechter Strich rechts vom Kreis
 
---- Verarbeite AC0833_S.jpg ---
-Bildbeschreibung: Kelle mit senkrechtem Griff nach oben (oben am Kreis). Text im Kreis: CO² (2 als Superskript).
-Befehl erkannt: SEMANTIC: senkrechter Strich oben vom Kreis, SEMANTIC: Kreis + Buchstabe CO_2
-
---- Verarbeite AC0840_L.jpg ---
-Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "rF" (relative Feuchtigkeit)
+--- Verarbeite AC0883_S.jpg ---
+Bildbeschreibung: Wie AC0881: Wie AC0870, jedoch mit Griff (dunkelgraue Linie nach unten). Geometrische Variante: 180° gedreht.
 Befehl erkannt: Kein Compositing-Befehl gefunden
-[WARN] AC0840_L.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+[WARN] AC0883_S.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
 
---- Verarbeite AC0813_S.jpg ---
+--- Verarbeite AC0883_M.jpg ---
+Bildbeschreibung: Wie AC0881: Wie AC0870, jedoch mit Griff (dunkelgraue Linie nach unten). Geometrische Variante: 180° gedreht.
+Befehl erkannt: Kein Compositing-Befehl gefunden
+[WARN] AC0883_M.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+
+--- Verarbeite AC0870_M.jpg ---
+Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "T" (Temperatur)
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe
+
+--- Verarbeite AC0837_S.jpg ---
+Bildbeschreibung: Wie AC0836, jedoch 90° nach links gedreht. Der Griff verläuft waagrecht nach links, der Text "VOC" bleibt horizontal lesbar.
+Befehl erkannt: SEMANTIC: waagrechter Strich links vom Kreis, SEMANTIC: Kreis + Buchstabe VOC
+
+--- Verarbeite AC0831_M.jpg ---
+Bildbeschreibung: Wie AC080, jedoch Griff unten (als Kelle ausfeführt)
+Befehl erkannt: SEMANTIC: senkrechter Strich hinter dem Kreis, SEMANTIC: Kreis + Buchstabe
+
+--- Verarbeite AC0834_M.jpg ---
+Bildbeschreibung: Wie AC080, jedoch Griff unten (als Kelle ausfeführt) Abweichung: nach links gedreht, Text immer noch horizontal
+Befehl erkannt: SEMANTIC: waagrechter Strich rechts vom Kreis, SEMANTIC: Kreis + Buchstabe
+
+--- Verarbeite AC0813_M.jpg ---
 Bildbeschreibung: Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 180° gedreht.
 Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe, SEMANTIC: senkrechter Strich oben vom Kreis
 
---- Verarbeite AC0811_L.jpg ---
+--- Verarbeite AC0814_L.jpg ---
+Bildbeschreibung: Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 90° nach rechts gedreht.
+Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe, SEMANTIC: waagrechter Strich rechts vom Kreis
+
+--- Verarbeite AC0811_S.jpg ---
 Bildbeschreibung: Kelle mit Kreis oben und Griff nach unten.
 Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe, SEMANTIC: senkrechter Strich hinter dem Kreis
 
---- Verarbeite AC0890_S.jpg ---
-Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "T" (Temperatur) Abweichung: links mit einer Form dünne graue vertikale Linie, dann ca. 8 dünne graue diagonale linien (von oben links nach unten rechts, dann ein graues Rechteck, dann die Temperaturmessung. Symbolisiert einen Temperaturfühler, welcher an einer Wand besfestigt ist.
+--- Verarbeite AC0864_S.jpg ---
+Bildbeschreibung: Wie AC0862: Wie AC0841, jedoch nach rechts gedreht, Text immer noch horizontal. Geometrische Variante: Horizontal gespiegelt.
 Befehl erkannt: Kein Compositing-Befehl gefunden
-[WARN] AC0890_S.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+[WARN] AC0864_S.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
 
---- Verarbeite AC0890_L.jpg ---
-Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "T" (Temperatur) Abweichung: links mit einer Form dünne graue vertikale Linie, dann ca. 8 dünne graue diagonale linien (von oben links nach unten rechts, dann ein graues Rechteck, dann die Temperaturmessung. Symbolisiert einen Temperaturfühler, welcher an einer Wand besfestigt ist.
-Befehl erkannt: Kein Compositing-Befehl gefunden
-[WARN] AC0890_L.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+--- Verarbeite AC0820_S.jpg ---
+Bildbeschreibung: Wie AC0800, mit Text "$CO_2$" (2 tiefgestellt).
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe CO_2
 
 --- Verarbeite AC0846_M.jpg ---
 Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0846. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0846. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die mittlere Variante (M). Bitte einer finalen Wurzelform-Kategorie zuordnen.
+Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
+  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
+
+--- Verarbeite AC0881_M.jpg ---
+Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "T" (Temperatur) Abweichung: mit Griff (dunkelgraue Linie nach unten)
+Befehl erkannt: SEMANTIC: senkrechter Strich hinter dem Kreis, SEMANTIC: Kreis + Buchstabe
+
+--- Verarbeite AC0836_L.jpg ---
+Bildbeschreibung: Wie AC0835, jedoch mit senkrechtem Griff nach unten (dunkelgraue Linie hinter dem Kreis). Text im Kreis: "VOC".
+Befehl erkannt: SEMANTIC: senkrechter Strich hinter dem Kreis, SEMANTIC: Kreis + Buchstabe VOC
+
+--- Verarbeite AC0839_L.jpg ---
+Bildbeschreibung: Wie AC0836, jedoch 90° nach rechts gedreht. Der Griff verläuft waagrecht nach rechts, der Text "VOC" bleibt horizontal lesbar.
+Befehl erkannt: SEMANTIC: waagrechter Strich rechts vom Kreis, SEMANTIC: Kreis + Buchstabe VOC
+
+--- Verarbeite AC0538_1L_sia.jpg ---
+Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0538_1L_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen.
 Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
   -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
 
@@ -203,346 +112,434 @@ Bildbeschreibung: Wie AC0842, jecoch nach rechts gedreht, Text immer noch horizo
 Befehl erkannt: Kein Compositing-Befehl gefunden
 [WARN] AC0843_S.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
 
---- Verarbeite AC0834_S.jpg ---
-Bildbeschreibung: Wie AC080, jedoch Griff unten (als Kelle ausfeführt) Abweichung: nach links gedreht, Text immer noch horizontal
-Befehl erkannt: SEMANTIC: waagrechter Strich rechts vom Kreis, SEMANTIC: Kreis + Buchstabe
-
---- Verarbeite AC0849_L.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0849. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0849. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die große Variante (L). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0883_L.jpg ---
-Bildbeschreibung: Wie AC0881: Wie AC0870, jedoch mit Griff (dunkelgraue Linie nach unten). Geometrische Variante: 180° gedreht.
-Befehl erkannt: Kein Compositing-Befehl gefunden
-[WARN] AC0883_L.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
-
---- Verarbeite AC0814_L.jpg ---
+--- Verarbeite AC0814_S.jpg ---
 Bildbeschreibung: Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 90° nach rechts gedreht.
 Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe, SEMANTIC: waagrechter Strich rechts vom Kreis
-
---- Verarbeite AC0836_L.jpg ---
-Bildbeschreibung: Wie AC0835, jedoch mit senkrechtem Griff nach unten (dunkelgraue Linie hinter dem Kreis). Text im Kreis: "VOC".
-Befehl erkannt: SEMANTIC: senkrechter Strich hinter dem Kreis, SEMANTIC: Kreis + Buchstabe VOC
-
---- Verarbeite AC0840_S.jpg ---
-Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "rF" (relative Feuchtigkeit)
-Befehl erkannt: Kein Compositing-Befehl gefunden
-[WARN] AC0840_S.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
-
---- Verarbeite AC0850_L.jpg ---
-Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "rF" (relative Feuchtigkeit)
-Befehl erkannt: Kein Compositing-Befehl gefunden
-[WARN] AC0850_L.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
-
---- Verarbeite AC0838_S.jpg ---
-Bildbeschreibung: Wie AC0836, jedoch in der gegenüberliegenden Drehlage. Der Griff bleibt als klarer Zusatzarm am Kreis erkennbar, der Text "VOC" bleibt horizontal lesbar.
-Befehl erkannt: SEMANTIC: senkrechter Strich oben vom Kreis, SEMANTIC: Kreis + Buchstabe VOC
-
---- Verarbeite AC0848_S.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0848. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0837_L.jpg ---
-Bildbeschreibung: Wie AC0836, jedoch 90° nach links gedreht. Der Griff verläuft waagrecht nach links, der Text "VOC" bleibt horizontal lesbar.
-Befehl erkannt: SEMANTIC: waagrechter Strich links vom Kreis, SEMANTIC: Kreis + Buchstabe VOC
-
---- Verarbeite AC0836_S.jpg ---
-Bildbeschreibung: Wie AC0835, jedoch mit senkrechtem Griff nach unten (dunkelgraue Linie hinter dem Kreis). Text im Kreis: "VOC".
-Befehl erkannt: SEMANTIC: senkrechter Strich hinter dem Kreis, SEMANTIC: Kreis + Buchstabe VOC
-
---- Verarbeite AC0861_M.jpg ---
-Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "rF" (relative Feuchtigkeit) Abweichung: mit Griff (dunkelgraue Linie nach unten)
-Befehl erkannt: Kein Compositing-Befehl gefunden
-[WARN] AC0861_M.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
-
---- Verarbeite AC0864_L.jpg ---
-Bildbeschreibung: Wie AC0862: Wie AC0841, jedoch nach rechts gedreht, Text immer noch horizontal. Geometrische Variante: Horizontal gespiegelt.
-Befehl erkannt: Kein Compositing-Befehl gefunden
-[WARN] AC0864_L.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
-
---- Verarbeite AC0841_L.jpg ---
-Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "rF" (relative Feuchtigkeit) Abweichung: mit Griff (dunkelgraue Linie nach unten)
-Befehl erkannt: Kein Compositing-Befehl gefunden
-[WARN] AC0841_L.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
-
---- Verarbeite AC0538_1L_sia.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0538_1L_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0843_L.jpg ---
-Bildbeschreibung: Wie AC0842, jecoch nach rechts gedreht, Text immer noch horizontal
-Befehl erkannt: Kein Compositing-Befehl gefunden
-[WARN] AC0843_L.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
-
---- Verarbeite AC0863_S.jpg ---
-Bildbeschreibung: Wie AC0842, jecoch nach rechts gedreht, Text immer noch horizontal
-Befehl erkannt: Kein Compositing-Befehl gefunden
-[WARN] AC0863_S.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
-
---- Verarbeite AC0832_M.jpg ---
-Bildbeschreibung: Wie AC0832, jedoch nach rechts gedreht, Text immer noch horizontal
-Befehl erkannt: SEMANTIC: waagrechter Strich links vom Kreis, SEMANTIC: Kreis + Buchstabe
-
---- Verarbeite AC0846_L.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0846. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0846. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die große Variante (L). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0080_L.jpg ---
-Bildbeschreibung: Wie AC0020: zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben. Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch)
-
---- Verarbeite AC0080_S.jpg ---
-Bildbeschreibung: Wie AC0020: zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben. Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch)
-
---- Verarbeite AC0882_L.jpg ---
-Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "T" (Temperatur) Abweichung: mit Griff (dunkelgraue Linie nach unten) Abweichung: nach rechts gedreht, Text immer noch horizontal
-Befehl erkannt: SEMANTIC: waagrechter Strich links vom Kreis, SEMANTIC: Kreis + Buchstabe
-
---- Verarbeite AC0862_L.jpg ---
-Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "rF" (relative Feuchtigkeit) Abweichung: mit Griff (dunkelgraue Linie nach unten) Abweichung: nach rechts gedreht, Text immer noch horizontal
-Befehl erkannt: Kein Compositing-Befehl gefunden
-[WARN] AC0862_L.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
-
---- Verarbeite AC0811_M.jpg ---
-Bildbeschreibung: Kelle mit Kreis oben und Griff nach unten.
-Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe, SEMANTIC: senkrechter Strich hinter dem Kreis
-
---- Verarbeite AC0842_L.jpg ---
-Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "rF" (relative Feuchtigkeit) Abweichung: mit Griff (dunkelgraue Linie nach unten) Abweichung: nach rechts gedreht, Text immer noch horizontal
-Befehl erkannt: Kein Compositing-Befehl gefunden
-[WARN] AC0842_L.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
-
---- Verarbeite AC0863_L.jpg ---
-Bildbeschreibung: Wie AC0842, jecoch nach rechts gedreht, Text immer noch horizontal
-Befehl erkannt: Kein Compositing-Befehl gefunden
-[WARN] AC0863_L.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
 
 --- Verarbeite AC0837_M.jpg ---
 Bildbeschreibung: Wie AC0836, jedoch 90° nach links gedreht. Der Griff verläuft waagrecht nach links, der Text "VOC" bleibt horizontal lesbar.
 Befehl erkannt: SEMANTIC: waagrechter Strich links vom Kreis, SEMANTIC: Kreis + Buchstabe VOC
 
---- Verarbeite AC0861_S.jpg ---
-Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "rF" (relative Feuchtigkeit) Abweichung: mit Griff (dunkelgraue Linie nach unten)
-Befehl erkannt: Kein Compositing-Befehl gefunden
-[WARN] AC0861_S.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
-
---- Verarbeite AC0839_M.jpg ---
-Bildbeschreibung: Wie AC0836, jedoch 90° nach rechts gedreht. Der Griff verläuft waagrecht nach rechts, der Text "VOC" bleibt horizontal lesbar.
-Befehl erkannt: SEMANTIC: waagrechter Strich rechts vom Kreis, SEMANTIC: Kreis + Buchstabe VOC
-
---- Verarbeite AC0844_L.jpg ---
+--- Verarbeite AC0844_M.jpg ---
 Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "rF" (relative Feuchtigkeit) Abweichung: mit Griff (dunkelgraue Linie nach unten) Abweichung: nach links gedreht, Text immer noch horizontal.
 Befehl erkannt: Kein Compositing-Befehl gefunden
-[WARN] AC0844_L.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
-
---- Verarbeite AC0832_S.jpg ---
-Bildbeschreibung: Wie AC0832, jedoch nach rechts gedreht, Text immer noch horizontal
-Befehl erkannt: SEMANTIC: waagrechter Strich links vom Kreis, SEMANTIC: Kreis + Buchstabe
-
---- Verarbeite AC0884_S.jpg ---
-Bildbeschreibung: Wie AC0882: Wie AC0881, jedoch nach rechts gedreht, Text immer noch horizontal. Geometrische Variante: 180° gedreht.
-Befehl erkannt: Kein Compositing-Befehl gefunden
-[WARN] AC0884_S.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
-
---- Verarbeite AC0834_M.jpg ---
-Bildbeschreibung: Wie AC080, jedoch Griff unten (als Kelle ausfeführt) Abweichung: nach links gedreht, Text immer noch horizontal
-Befehl erkannt: SEMANTIC: waagrechter Strich rechts vom Kreis, SEMANTIC: Kreis + Buchstabe
-
---- Verarbeite AC0843_M.jpg ---
-Bildbeschreibung: Wie AC0842, jecoch nach rechts gedreht, Text immer noch horizontal
-Befehl erkannt: Kein Compositing-Befehl gefunden
-[WARN] AC0843_M.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+[WARN] AC0844_M.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
 
 --- Verarbeite AC0844_S.jpg ---
 Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "rF" (relative Feuchtigkeit) Abweichung: mit Griff (dunkelgraue Linie nach unten) Abweichung: nach links gedreht, Text immer noch horizontal.
 Befehl erkannt: Kein Compositing-Befehl gefunden
 [WARN] AC0844_S.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
 
---- Verarbeite AC0881_M.jpg ---
-Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "T" (Temperatur) Abweichung: mit Griff (dunkelgraue Linie nach unten)
-Befehl erkannt: SEMANTIC: senkrechter Strich hinter dem Kreis, SEMANTIC: Kreis + Buchstabe
+--- Verarbeite AC0837_L.jpg ---
+Bildbeschreibung: Wie AC0836, jedoch 90° nach links gedreht. Der Griff verläuft waagrecht nach links, der Text "VOC" bleibt horizontal lesbar.
+Befehl erkannt: SEMANTIC: waagrechter Strich links vom Kreis, SEMANTIC: Kreis + Buchstabe VOC
 
---- Verarbeite AC0849_S.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0849. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0890_M.jpg ---
-Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "T" (Temperatur) Abweichung: links mit einer Form dünne graue vertikale Linie, dann ca. 8 dünne graue diagonale linien (von oben links nach unten rechts, dann ein graues Rechteck, dann die Temperaturmessung. Symbolisiert einen Temperaturfühler, welcher an einer Wand besfestigt ist.
-Befehl erkannt: Kein Compositing-Befehl gefunden
-[WARN] AC0890_M.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
-
---- Verarbeite AC0800_S.jpg ---
-Bildbeschreibung: Kreisförmiges Badge.
-Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe
-
---- Verarbeite AC0812_M.jpg ---
-Bildbeschreibung: Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 90° nach links gedreht.
-Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe, SEMANTIC: waagrechter Strich links vom Kreis
-
---- Verarbeite AC0800_M.jpg ---
-Bildbeschreibung: Kreisförmiges Badge.
-Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe
-
---- Verarbeite AC0820_M.jpg ---
-Bildbeschreibung: Wie AC0800, mit Text "$CO_2$" (2 tiefgestellt).
-Befehl erkannt: SEMANTIC: Kreis + Buchstabe CO_2
-
---- Verarbeite AC0842_M.jpg ---
-Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "rF" (relative Feuchtigkeit) Abweichung: mit Griff (dunkelgraue Linie nach unten) Abweichung: nach rechts gedreht, Text immer noch horizontal
-Befehl erkannt: Kein Compositing-Befehl gefunden
-[WARN] AC0842_M.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
-
---- Verarbeite AC0861_L.jpg ---
-Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "rF" (relative Feuchtigkeit) Abweichung: mit Griff (dunkelgraue Linie nach unten)
-Befehl erkannt: Kein Compositing-Befehl gefunden
-[WARN] AC0861_L.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
-
---- Verarbeite AC0840_M.jpg ---
-Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "rF" (relative Feuchtigkeit)
-Befehl erkannt: Kein Compositing-Befehl gefunden
-[WARN] AC0840_M.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
-
---- Verarbeite AC0831_M.jpg ---
-Bildbeschreibung: Wie AC080, jedoch Griff unten (als Kelle ausfeführt)
-Befehl erkannt: SEMANTIC: senkrechter Strich hinter dem Kreis, SEMANTIC: Kreis + Buchstabe
-
---- Verarbeite AC0538_S_sia.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0538_S_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0845_S.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0845. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0538_2M_sia.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0538_2M_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0814_M.jpg ---
-Bildbeschreibung: Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 90° nach rechts gedreht.
-Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe, SEMANTIC: waagrechter Strich rechts vom Kreis
-
---- Verarbeite AC0820_L.jpg ---
-Bildbeschreibung: Wie AC0800, mit Text "$CO_2$" (2 tiefgestellt).
-Befehl erkannt: SEMANTIC: Kreis + Buchstabe CO_2
-
---- Verarbeite AC0862_M.jpg ---
-Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "rF" (relative Feuchtigkeit) Abweichung: mit Griff (dunkelgraue Linie nach unten) Abweichung: nach rechts gedreht, Text immer noch horizontal
-Befehl erkannt: Kein Compositing-Befehl gefunden
-[WARN] AC0862_M.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
-
---- Verarbeite AC0864_S.jpg ---
-Bildbeschreibung: Wie AC0862: Wie AC0841, jedoch nach rechts gedreht, Text immer noch horizontal. Geometrische Variante: Horizontal gespiegelt.
-Befehl erkannt: Kein Compositing-Befehl gefunden
-[WARN] AC0864_S.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
-
---- Verarbeite AC0538_1S_sia.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0538_S_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0538_1S_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0847_M.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0847. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0847. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die mittlere Variante (M). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
+--- Verarbeite AC0080_L.jpg ---
+Bildbeschreibung: Wie AC0020: zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben. Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch)
 
 --- Verarbeite AC0863_M.jpg ---
 Bildbeschreibung: Wie AC0842, jecoch nach rechts gedreht, Text immer noch horizontal
 Befehl erkannt: Kein Compositing-Befehl gefunden
 [WARN] AC0863_M.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
 
---- Verarbeite AC0835_M.jpg ---
-Bildbeschreibung: Grauer Kreis mit grauem Rand und hellgrauem Hintergrund. Text im Kreis: "VOC". Kein Griff, keine Kelle und keine weiteren Anbauteile.
-Befehl erkannt: SEMANTIC: Kreis + Buchstabe VOC
-
---- Verarbeite AC0538_1M_sia.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0538_1M_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen.
+--- Verarbeite AC0538_S_sia.jpg ---
+Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0538_S_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen.
 Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
   -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
 
---- Verarbeite AC0870_S.jpg ---
-Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "T" (Temperatur)
-Befehl erkannt: SEMANTIC: Kreis + Buchstabe
-
---- Verarbeite AC0839_L.jpg ---
-Bildbeschreibung: Wie AC0836, jedoch 90° nach rechts gedreht. Der Griff verläuft waagrecht nach rechts, der Text "VOC" bleibt horizontal lesbar.
-Befehl erkannt: SEMANTIC: waagrechter Strich rechts vom Kreis, SEMANTIC: Kreis + Buchstabe VOC
-
---- Verarbeite AC0831_S.jpg ---
-Bildbeschreibung: Wie AC080, jedoch Griff unten (als Kelle ausfeführt)
-Befehl erkannt: SEMANTIC: senkrechter Strich hinter dem Kreis, SEMANTIC: Kreis + Buchstabe
-
---- Verarbeite AC0538_2L_sia.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0538_2L_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0883_M.jpg ---
-Bildbeschreibung: Wie AC0881: Wie AC0870, jedoch mit Griff (dunkelgraue Linie nach unten). Geometrische Variante: 180° gedreht.
+--- Verarbeite AC0841_L.jpg ---
+Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "rF" (relative Feuchtigkeit) Abweichung: mit Griff (dunkelgraue Linie nach unten)
 Befehl erkannt: Kein Compositing-Befehl gefunden
-[WARN] AC0883_M.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+[WARN] AC0841_L.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
 
---- Verarbeite AC0080_M.jpg ---
-Bildbeschreibung: Wie AC0020: zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben. Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch)
-
---- Verarbeite AC0812_L.jpg ---
-Bildbeschreibung: Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 90° nach links gedreht.
-Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe, SEMANTIC: waagrechter Strich links vom Kreis
-
---- Verarbeite AC0845_M.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0845. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0845. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die mittlere Variante (M). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0837_S.jpg ---
-Bildbeschreibung: Wie AC0836, jedoch 90° nach links gedreht. Der Griff verläuft waagrecht nach links, der Text "VOC" bleibt horizontal lesbar.
-Befehl erkannt: SEMANTIC: waagrechter Strich links vom Kreis, SEMANTIC: Kreis + Buchstabe VOC
+--- Verarbeite AC0838_M.jpg ---
+Bildbeschreibung: Wie AC0836, jedoch in der gegenüberliegenden Drehlage. Der Griff bleibt als klarer Zusatzarm am Kreis erkennbar, der Text "VOC" bleibt horizontal lesbar.
+Befehl erkannt: SEMANTIC: senkrechter Strich oben vom Kreis, SEMANTIC: Kreis + Buchstabe VOC
 
 --- Verarbeite AC0812_S.jpg ---
 Bildbeschreibung: Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 90° nach links gedreht.
 Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe, SEMANTIC: waagrechter Strich links vom Kreis
 
---- Verarbeite AC0848_L.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0848. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0848. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die große Variante (L). Bitte einer finalen Wurzelform-Kategorie zuordnen.
+--- Verarbeite AC0835_M.jpg ---
+Bildbeschreibung: Grauer Kreis mit grauem Rand und hellgrauem Hintergrund. Text im Kreis: "VOC". Kein Griff, keine Kelle und keine weiteren Anbauteile.
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe VOC
+
+--- Verarbeite AC0800_M.jpg ---
+Bildbeschreibung: Kreisförmiges Badge.
+Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe
+
+--- Verarbeite AC0843_M.jpg ---
+Bildbeschreibung: Wie AC0842, jecoch nach rechts gedreht, Text immer noch horizontal
+Befehl erkannt: Kein Compositing-Befehl gefunden
+[WARN] AC0843_M.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+
+--- Verarbeite AC0538_2M_sia.jpg ---
+Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0538_2M_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen.
 Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
   -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
 
---- Verarbeite AC0849_M.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0849. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0849. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die mittlere Variante (M). Bitte einer finalen Wurzelform-Kategorie zuordnen.
+--- Verarbeite AC0849_S.jpg ---
+Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0849. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen.
 Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
   -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
 
---- Verarbeite AC0882_S.jpg ---
-Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "T" (Temperatur) Abweichung: mit Griff (dunkelgraue Linie nach unten) Abweichung: nach rechts gedreht, Text immer noch horizontal
-Befehl erkannt: SEMANTIC: waagrechter Strich links vom Kreis, SEMANTIC: Kreis + Buchstabe
+--- Verarbeite AC0538_1S_sia.jpg ---
+Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0538_S_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0538_1S_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen.
+Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
+  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
 
---- Verarbeite AC0850_M.jpg ---
+--- Verarbeite AC0861_L.jpg ---
+Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "rF" (relative Feuchtigkeit) Abweichung: mit Griff (dunkelgraue Linie nach unten)
+Befehl erkannt: Kein Compositing-Befehl gefunden
+[WARN] AC0861_L.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+
+--- Verarbeite AC0849_L.jpg ---
+Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0849. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0849. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die große Variante (L). Bitte einer finalen Wurzelform-Kategorie zuordnen.
+Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
+  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
+
+--- Verarbeite AC0841_S.jpg ---
+Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "rF" (relative Feuchtigkeit) Abweichung: mit Griff (dunkelgraue Linie nach unten)
+Befehl erkannt: Kein Compositing-Befehl gefunden
+[WARN] AC0841_S.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+
+--- Verarbeite AC0836_M.jpg ---
+Bildbeschreibung: Wie AC0835, jedoch mit senkrechtem Griff nach unten (dunkelgraue Linie hinter dem Kreis). Text im Kreis: "VOC".
+Befehl erkannt: SEMANTIC: senkrechter Strich hinter dem Kreis, SEMANTIC: Kreis + Buchstabe VOC
+
+--- Verarbeite AC0842_L.jpg ---
+Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "rF" (relative Feuchtigkeit) Abweichung: mit Griff (dunkelgraue Linie nach unten) Abweichung: nach rechts gedreht, Text immer noch horizontal
+Befehl erkannt: SEMANTIC: waagrechter Strich links vom Kreis, SEMANTIC: Kreis + Buchstabe rF
+
+--- Verarbeite AC0870_S.jpg ---
+Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "T" (Temperatur)
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe
+
+--- Verarbeite AC0800_L.jpg ---
+Bildbeschreibung: Kreisförmiges Badge.
+Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe
+
+--- Verarbeite AC0839_S.jpg ---
+Bildbeschreibung: Wie AC0836, jedoch 90° nach rechts gedreht. Der Griff verläuft waagrecht nach rechts, der Text "VOC" bleibt horizontal lesbar.
+Befehl erkannt: SEMANTIC: waagrechter Strich rechts vom Kreis, SEMANTIC: Kreis + Buchstabe VOC
+
+--- Verarbeite AC0080_S.jpg ---
+Bildbeschreibung: Wie AC0020: zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben. Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch)
+
+--- Verarbeite AC0863_S.jpg ---
+Bildbeschreibung: Wie AC0842, jecoch nach rechts gedreht, Text immer noch horizontal
+Befehl erkannt: Kein Compositing-Befehl gefunden
+[WARN] AC0863_S.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+
+--- Verarbeite AC0835_S.jpg ---
+Bildbeschreibung: Grauer Kreis mit grauem Rand und hellgrauem Hintergrund. Text im Kreis: "VOC". Kein Griff, keine Kelle und keine weiteren Anbauteile.
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe VOC
+
+--- Verarbeite AC0812_L.jpg ---
+Bildbeschreibung: Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 90° nach links gedreht.
+Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe, SEMANTIC: waagrechter Strich links vom Kreis
+
+--- Verarbeite AC0847_M.jpg ---
+Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0847. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0847. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die mittlere Variante (M). Bitte einer finalen Wurzelform-Kategorie zuordnen.
+Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
+  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
+
+--- Verarbeite AC0861_M.jpg ---
+Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "rF" (relative Feuchtigkeit) Abweichung: mit Griff (dunkelgraue Linie nach unten)
+Befehl erkannt: Kein Compositing-Befehl gefunden
+[WARN] AC0861_M.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+
+--- Verarbeite AC0811_L.jpg ---
+Bildbeschreibung: Kelle mit Kreis oben und Griff nach unten.
+Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe, SEMANTIC: senkrechter Strich hinter dem Kreis
+
+--- Verarbeite AC0861_S.jpg ---
+Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "rF" (relative Feuchtigkeit) Abweichung: mit Griff (dunkelgraue Linie nach unten)
+Befehl erkannt: Kein Compositing-Befehl gefunden
+[WARN] AC0861_S.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+
+--- Verarbeite AC0800_S.jpg ---
+Bildbeschreibung: Kreisförmiges Badge.
+Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe
+
+--- Verarbeite AC0864_L.jpg ---
+Bildbeschreibung: Wie AC0862: Wie AC0841, jedoch nach rechts gedreht, Text immer noch horizontal. Geometrische Variante: Horizontal gespiegelt.
+Befehl erkannt: Kein Compositing-Befehl gefunden
+[WARN] AC0864_L.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+
+--- Verarbeite AC0833_L.jpg ---
+Bildbeschreibung: Kelle mit senkrechtem Griff nach oben (oben am Kreis). Text im Kreis: CO² (2 als Superskript).
+Befehl erkannt: SEMANTIC: senkrechter Strich oben vom Kreis, SEMANTIC: Kreis + Buchstabe CO_2
+
+--- Verarbeite AC0890_M.jpg ---
+Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "T" (Temperatur) Abweichung: links mit einer Form dünne graue vertikale Linie, dann ca. 8 dünne graue diagonale linien (von oben links nach unten rechts, dann ein graues Rechteck, dann die Temperaturmessung. Symbolisiert einen Temperaturfühler, welcher an einer Wand besfestigt ist.
+Befehl erkannt: Kein Compositing-Befehl gefunden
+[WARN] AC0890_M.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+
+--- Verarbeite AC0842_M.jpg ---
+Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "rF" (relative Feuchtigkeit) Abweichung: mit Griff (dunkelgraue Linie nach unten) Abweichung: nach rechts gedreht, Text immer noch horizontal
+Befehl erkannt: SEMANTIC: waagrechter Strich links vom Kreis, SEMANTIC: Kreis + Buchstabe rF
+
+--- Verarbeite AC0845_S.jpg ---
+Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0845. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen.
+Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
+  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
+
+--- Verarbeite AC0884_L.jpg ---
+Bildbeschreibung: Wie AC0882: Wie AC0881, jedoch nach rechts gedreht, Text immer noch horizontal. Geometrische Variante: 180° gedreht.
+Befehl erkannt: Kein Compositing-Befehl gefunden
+[WARN] AC0884_L.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+
+--- Verarbeite AC0840_S.jpg ---
 Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "rF" (relative Feuchtigkeit)
 Befehl erkannt: Kein Compositing-Befehl gefunden
-[WARN] AC0850_M.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+[WARN] AC0840_S.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
 
 --- Verarbeite AC0848_M.jpg ---
 Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0848. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0848. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die mittlere Variante (M). Bitte einer finalen Wurzelform-Kategorie zuordnen.
 Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
   -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
 
+--- Verarbeite AC0538_L_sia.jpg ---
+Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0538_S_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0538_L_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen.
+Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
+  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
+
+--- Verarbeite AC0845_M.jpg ---
+Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0845. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0845. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die mittlere Variante (M). Bitte einer finalen Wurzelform-Kategorie zuordnen.
+Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
+  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
+
+--- Verarbeite AC0863_L.jpg ---
+Bildbeschreibung: Wie AC0842, jecoch nach rechts gedreht, Text immer noch horizontal
+Befehl erkannt: Kein Compositing-Befehl gefunden
+[WARN] AC0863_L.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+
+--- Verarbeite AC0831_S.jpg ---
+Bildbeschreibung: Wie AC080, jedoch Griff unten (als Kelle ausfeführt)
+Befehl erkannt: SEMANTIC: senkrechter Strich hinter dem Kreis, SEMANTIC: Kreis + Buchstabe
+
+--- Verarbeite AC0870_L.jpg ---
+Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "T" (Temperatur)
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe
+
+--- Verarbeite AC0890_L.jpg ---
+Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "T" (Temperatur) Abweichung: links mit einer Form dünne graue vertikale Linie, dann ca. 8 dünne graue diagonale linien (von oben links nach unten rechts, dann ein graues Rechteck, dann die Temperaturmessung. Symbolisiert einen Temperaturfühler, welcher an einer Wand besfestigt ist.
+Befehl erkannt: Kein Compositing-Befehl gefunden
+[WARN] AC0890_L.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+
+--- Verarbeite AC0820_M.jpg ---
+Bildbeschreibung: Wie AC0800, mit Text "$CO_2$" (2 tiefgestellt).
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe CO_2
+
+--- Verarbeite AC0538_M_sia.jpg ---
+Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0538_S_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0538_M_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen.
+Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
+  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
+
+--- Verarbeite AC0813_S.jpg ---
+Bildbeschreibung: Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 180° gedreht.
+Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe, SEMANTIC: senkrechter Strich oben vom Kreis
+
+--- Verarbeite AC0882_M.jpg ---
+Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "T" (Temperatur) Abweichung: mit Griff (dunkelgraue Linie nach unten) Abweichung: nach rechts gedreht, Text immer noch horizontal
+Befehl erkannt: SEMANTIC: waagrechter Strich links vom Kreis, SEMANTIC: Kreis + Buchstabe
+
+--- Verarbeite AC0883_L.jpg ---
+Bildbeschreibung: Wie AC0881: Wie AC0870, jedoch mit Griff (dunkelgraue Linie nach unten). Geometrische Variante: 180° gedreht.
+Befehl erkannt: Kein Compositing-Befehl gefunden
+[WARN] AC0883_L.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+
+--- Verarbeite AC0884_M.jpg ---
+Bildbeschreibung: Wie AC0882: Wie AC0881, jedoch nach rechts gedreht, Text immer noch horizontal. Geometrische Variante: 180° gedreht.
+Befehl erkannt: Kein Compositing-Befehl gefunden
+[WARN] AC0884_M.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+
+--- Verarbeite AC0848_S.jpg ---
+Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0848. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen.
+Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
+  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
+
+--- Verarbeite AC0862_M.jpg ---
+Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "rF" (relative Feuchtigkeit) Abweichung: mit Griff (dunkelgraue Linie nach unten) Abweichung: nach rechts gedreht, Text immer noch horizontal
+Befehl erkannt: Kein Compositing-Befehl gefunden
+[WARN] AC0862_M.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+
+--- Verarbeite AC0538_2S_sia.jpg ---
+Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0538_S_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0538_2S_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen.
+Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
+  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
+
+--- Verarbeite AC0832_S.jpg ---
+Bildbeschreibung: Wie AC0832, jedoch nach rechts gedreht, Text immer noch horizontal
+Befehl erkannt: SEMANTIC: waagrechter Strich links vom Kreis, SEMANTIC: Kreis + Buchstabe
+
+--- Verarbeite AC0846_S.jpg ---
+Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0846. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen.
+Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
+  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
+
+--- Verarbeite AC0884_S.jpg ---
+Bildbeschreibung: Wie AC0882: Wie AC0881, jedoch nach rechts gedreht, Text immer noch horizontal. Geometrische Variante: 180° gedreht.
+Befehl erkannt: Kein Compositing-Befehl gefunden
+[WARN] AC0884_S.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+
+--- Verarbeite AC0080_M.jpg ---
+Bildbeschreibung: Wie AC0020: zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben. Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch)
+
+--- Verarbeite AC0839_M.jpg ---
+Bildbeschreibung: Wie AC0836, jedoch 90° nach rechts gedreht. Der Griff verläuft waagrecht nach rechts, der Text "VOC" bleibt horizontal lesbar.
+Befehl erkannt: SEMANTIC: waagrechter Strich rechts vom Kreis, SEMANTIC: Kreis + Buchstabe VOC
+
+--- Verarbeite AC0812_M.jpg ---
+Bildbeschreibung: Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 90° nach links gedreht.
+Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe, SEMANTIC: waagrechter Strich links vom Kreis
+
+--- Verarbeite AC0840_M.jpg ---
+Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "rF" (relative Feuchtigkeit)
+Befehl erkannt: Kein Compositing-Befehl gefunden
+[WARN] AC0840_M.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+
+--- Verarbeite AC0847_S.jpg ---
+Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0847. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen.
+Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
+  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
+
+--- Verarbeite AC0864_M.jpg ---
+Bildbeschreibung: Wie AC0862: Wie AC0841, jedoch nach rechts gedreht, Text immer noch horizontal. Geometrische Variante: Horizontal gespiegelt.
+Befehl erkannt: Kein Compositing-Befehl gefunden
+[WARN] AC0864_M.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+
+--- Verarbeite AC0890_S.jpg ---
+Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "T" (Temperatur) Abweichung: links mit einer Form dünne graue vertikale Linie, dann ca. 8 dünne graue diagonale linien (von oben links nach unten rechts, dann ein graues Rechteck, dann die Temperaturmessung. Symbolisiert einen Temperaturfühler, welcher an einer Wand besfestigt ist.
+Befehl erkannt: Kein Compositing-Befehl gefunden
+[WARN] AC0890_S.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+
+--- Verarbeite AC0832_L.jpg ---
+Bildbeschreibung: Wie AC0832, jedoch nach rechts gedreht, Text immer noch horizontal
+Befehl erkannt: SEMANTIC: waagrechter Strich links vom Kreis, SEMANTIC: Kreis + Buchstabe
+
+--- Verarbeite AC0836_S.jpg ---
+Bildbeschreibung: Wie AC0835, jedoch mit senkrechtem Griff nach unten (dunkelgraue Linie hinter dem Kreis). Text im Kreis: "VOC".
+Befehl erkannt: SEMANTIC: senkrechter Strich hinter dem Kreis, SEMANTIC: Kreis + Buchstabe VOC
+
+--- Verarbeite AC0850_L.jpg ---
+Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "rF" (relative Feuchtigkeit)
+Befehl erkannt: Kein Compositing-Befehl gefunden
+[WARN] AC0850_L.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+
+--- Verarbeite AC0862_S.jpg ---
+Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "rF" (relative Feuchtigkeit) Abweichung: mit Griff (dunkelgraue Linie nach unten) Abweichung: nach rechts gedreht, Text immer noch horizontal
+Befehl erkannt: Kein Compositing-Befehl gefunden
+[WARN] AC0862_S.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+
+--- Verarbeite AC0846_L.jpg ---
+Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0846. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0846. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die große Variante (L). Bitte einer finalen Wurzelform-Kategorie zuordnen.
+Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
+  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
+
+--- Verarbeite AC0832_M.jpg ---
+Bildbeschreibung: Wie AC0832, jedoch nach rechts gedreht, Text immer noch horizontal
+Befehl erkannt: SEMANTIC: waagrechter Strich links vom Kreis, SEMANTIC: Kreis + Buchstabe
+
+--- Verarbeite AC0840_L.jpg ---
+Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "rF" (relative Feuchtigkeit)
+Befehl erkannt: Kein Compositing-Befehl gefunden
+[WARN] AC0840_L.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+
+--- Verarbeite AC0848_L.jpg ---
+Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0848. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0848. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die große Variante (L). Bitte einer finalen Wurzelform-Kategorie zuordnen.
+Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
+  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
+
+--- Verarbeite AC0882_L.jpg ---
+Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "T" (Temperatur) Abweichung: mit Griff (dunkelgraue Linie nach unten) Abweichung: nach rechts gedreht, Text immer noch horizontal
+Befehl erkannt: SEMANTIC: waagrechter Strich links vom Kreis, SEMANTIC: Kreis + Buchstabe
+
+--- Verarbeite AC0813_L.jpg ---
+Bildbeschreibung: Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 180° gedreht.
+Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe, SEMANTIC: senkrechter Strich oben vom Kreis
+
+--- Verarbeite AC0882_S.jpg ---
+Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "T" (Temperatur) Abweichung: mit Griff (dunkelgraue Linie nach unten) Abweichung: nach rechts gedreht, Text immer noch horizontal
+Befehl erkannt: SEMANTIC: waagrechter Strich links vom Kreis, SEMANTIC: Kreis + Buchstabe
+
+--- Verarbeite AC0841_M.jpg ---
+Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "rF" (relative Feuchtigkeit) Abweichung: mit Griff (dunkelgraue Linie nach unten)
+Befehl erkannt: Kein Compositing-Befehl gefunden
+[WARN] AC0841_M.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+
+--- Verarbeite AC0835_L.jpg ---
+Bildbeschreibung: Grauer Kreis mit grauem Rand und hellgrauem Hintergrund. Text im Kreis: "VOC". Kein Griff, keine Kelle und keine weiteren Anbauteile.
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe VOC
+
+--- Verarbeite AC0820_L.jpg ---
+Bildbeschreibung: Wie AC0800, mit Text "$CO_2$" (2 tiefgestellt).
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe CO_2
+
 --- Verarbeite AC0833_M.jpg ---
 Bildbeschreibung: Kelle mit senkrechtem Griff nach oben (oben am Kreis). Text im Kreis: CO² (2 als Superskript).
 Befehl erkannt: SEMANTIC: senkrechter Strich oben vom Kreis, SEMANTIC: Kreis + Buchstabe CO_2
 
---- Verarbeite AC0814_S.jpg ---
-Bildbeschreibung: Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 90° nach rechts gedreht.
-Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe, SEMANTIC: waagrechter Strich rechts vom Kreis
+--- Verarbeite AC0833_S.jpg ---
+Bildbeschreibung: Kelle mit senkrechtem Griff nach oben (oben am Kreis). Text im Kreis: CO² (2 als Superskript).
+Befehl erkannt: SEMANTIC: senkrechter Strich oben vom Kreis, SEMANTIC: Kreis + Buchstabe CO_2
+
+--- Verarbeite AC0834_S.jpg ---
+Bildbeschreibung: Wie AC080, jedoch Griff unten (als Kelle ausfeführt) Abweichung: nach links gedreht, Text immer noch horizontal
+Befehl erkannt: SEMANTIC: waagrechter Strich rechts vom Kreis, SEMANTIC: Kreis + Buchstabe
+
+--- Verarbeite AC0538_2L_sia.jpg ---
+Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0538_2L_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen.
+Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
+  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
+
+--- Verarbeite AC0831_L.jpg ---
+Bildbeschreibung: Wie AC080, jedoch Griff unten (als Kelle ausfeführt)
+Befehl erkannt: SEMANTIC: senkrechter Strich hinter dem Kreis, SEMANTIC: Kreis + Buchstabe
+
+--- Verarbeite AC0843_L.jpg ---
+Bildbeschreibung: Wie AC0842, jecoch nach rechts gedreht, Text immer noch horizontal
+Befehl erkannt: Kein Compositing-Befehl gefunden
+[WARN] AC0843_L.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+
+--- Verarbeite AC0844_L.jpg ---
+Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "rF" (relative Feuchtigkeit) Abweichung: mit Griff (dunkelgraue Linie nach unten) Abweichung: nach links gedreht, Text immer noch horizontal.
+Befehl erkannt: Kein Compositing-Befehl gefunden
+[WARN] AC0844_L.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+
+--- Verarbeite AC0811_M.jpg ---
+Bildbeschreibung: Kelle mit Kreis oben und Griff nach unten.
+Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe, SEMANTIC: senkrechter Strich hinter dem Kreis
+
+--- Verarbeite AC0538_1M_sia.jpg ---
+Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0538_1M_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen.
+Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
+  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
+
+--- Verarbeite AC0881_L.jpg ---
+Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "T" (Temperatur) Abweichung: mit Griff (dunkelgraue Linie nach unten)
+Befehl erkannt: SEMANTIC: senkrechter Strich hinter dem Kreis, SEMANTIC: Kreis + Buchstabe
+
+--- Verarbeite AC0834_L.jpg ---
+Bildbeschreibung: Wie AC080, jedoch Griff unten (als Kelle ausfeführt) Abweichung: nach links gedreht, Text immer noch horizontal
+Befehl erkannt: SEMANTIC: waagrechter Strich rechts vom Kreis, SEMANTIC: Kreis + Buchstabe
+
+--- Verarbeite AC0842_S.jpg ---
+Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "rF" (relative Feuchtigkeit) Abweichung: mit Griff (dunkelgraue Linie nach unten) Abweichung: nach rechts gedreht, Text immer noch horizontal
+Befehl erkannt: SEMANTIC: waagrechter Strich links vom Kreis, SEMANTIC: Kreis + Buchstabe rF
+
+--- Verarbeite AC0862_L.jpg ---
+Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "rF" (relative Feuchtigkeit) Abweichung: mit Griff (dunkelgraue Linie nach unten) Abweichung: nach rechts gedreht, Text immer noch horizontal
+Befehl erkannt: Kein Compositing-Befehl gefunden
+[WARN] AC0862_L.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+
+--- Verarbeite AC0838_S.jpg ---
+Bildbeschreibung: Wie AC0836, jedoch in der gegenüberliegenden Drehlage. Der Griff bleibt als klarer Zusatzarm am Kreis erkennbar, der Text "VOC" bleibt horizontal lesbar.
+Befehl erkannt: SEMANTIC: senkrechter Strich oben vom Kreis, SEMANTIC: Kreis + Buchstabe VOC
 [INFO] Übersichts-Kacheln erzeugt: diff=C:\Users\marku\myCloud\ImageConverter\artifacts\converted_images\reports\overview_diff_tiles.png, svg=C:\Users\marku\myCloud\ImageConverter\artifacts\converted_images\reports\overview_svg_tiles.png
 
 Abgeschlossen! Ausgaben unter: C:\Users\marku\myCloud\ImageConverter\artifacts\converted_images

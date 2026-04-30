@@ -1,0 +1,46 @@
+{
+  "base": "AC0842",
+  "best_error": 25.597142857142856,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.03656734693877551,
+  "filename": "AC0842_M.jpg",
+  "h": 20,
+  "mean_delta2": 7184.43408203125,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "AC0842",
+        "source": "base_name",
+        "text": "Kreisförmiges Badge. Abweichung: mit Text \"rF\" (relative Feuchtigkeit) Abweichung: mit Griff (dunkelgraue Linie nach unten) Abweichung: nach rechts gedreht, Text immer noch horizontal"
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [
+      "SEMANTIC: waagrechter Strich links vom Kreis",
+      "SEMANTIC: Kreis + Buchstabe rF"
+    ],
+    "label": "rF",
+    "mode": "semantic_badge",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {
+      "description_heuristic": [
+        "SEMANTIC: Kreis + Buchstabe rF"
+      ],
+      "family_rule": [
+        "SEMANTIC: waagrechter Strich links vom Kreis"
+      ]
+    },
+    "top_source_ref": null,
+    "variant_name": "AC0842_M"
+  },
+  "std_delta2": 15197.4111328125,
+  "variant": "AC0842_M",
+  "w": 35
+}
