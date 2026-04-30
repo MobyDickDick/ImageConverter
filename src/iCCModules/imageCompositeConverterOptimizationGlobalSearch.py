@@ -387,10 +387,12 @@ def optimizeGlobalParameterVectorSamplingImpl(
         best_err = start_err
         improved = False
         rounded_keys = {"cx", "cy", "r", "stem_x", "stem_width", "text_x", "text_y"}
+        min_step_for_key = {key: (0.5 if key in rounded_keys else 0.10) for key in active_keys}
         step_sizes = {
-            key: max(0.10, (0.5 if key in rounded_keys else 0.10), float(bounds[key][1] - bounds[key][0]) * 0.18)
+            key: max(min_step_for_key[key], float(bounds[key][1] - bounds[key][0]) * 0.18)
             for key in active_keys
         }
+        max_bisection_iters = 3
         logs.append(
             "global-search: deterministischer track gestartet "
             f"(modus={search_mode}, seed={int(seed)}, schritte={max(2, effective_rounds)}, start_err={best_err:.3f})"
@@ -398,31 +400,49 @@ def optimizeGlobalParameterVectorSamplingImpl(
         for pass_idx in range(max(2, effective_rounds)):
             pass_improved = 0
             for key in active_keys:
-                step = step_sizes[key]
+                local_step = step_sizes[key]
                 if key in rounded_keys:
-                    step = max(0.5, round(step * 2.0) / 2.0)
+                    local_step = max(0.5, round(local_step * 2.0) / 2.0)
                 else:
-                    step = max(0.10, step)
-                candidates = []
-                for direction in (-1.0, 1.0):
-                    cand_data = dataclasses.asdict(best)
-                    cand_data[key] = float(cand_data[key]) + (direction * step)
-                    cand = clampVector(global_parameter_vector_cls(**cand_data))
-                    cand_err = evalVector(cand)
-                    if math.isfinite(cand_err):
-                        candidates.append((cand, cand_err))
-                if not candidates:
-                    continue
-                cand_best, cand_best_err = min(candidates, key=lambda item: item[1])
-                if cand_best_err + 0.01 < best_err:
-                    best = cand_best
-                    best_err = cand_best_err
-                    improved = True
-                    pass_improved += 1
-                step_sizes[key] = max(
-                    0.10 if key not in rounded_keys else 0.5,
-                    step_sizes[key] * (0.70 if pass_improved else 0.82),
-                )
+                    local_step = max(0.10, local_step)
+
+                key_improved = False
+                bisection_iters = 0
+                while bisection_iters < max_bisection_iters and local_step >= min_step_for_key[key] - 1e-9:
+                    candidates = []
+                    for direction in (-1.0, 1.0):
+                        cand_data = dataclasses.asdict(best)
+                        cand_data[key] = float(cand_data[key]) + (direction * local_step)
+                        cand = clampVector(global_parameter_vector_cls(**cand_data))
+                        cand_err = evalVector(cand)
+                        if math.isfinite(cand_err):
+                            candidates.append((cand, cand_err, direction))
+                    if not candidates:
+                        break
+
+                    cand_best, cand_best_err, _best_dir = min(candidates, key=lambda item: item[1])
+                    if cand_best_err + 0.01 < best_err:
+                        best = cand_best
+                        best_err = cand_best_err
+                        improved = True
+                        key_improved = True
+                        pass_improved += 1
+                        # Continue from improved point with same step before shrinking.
+                        bisection_iters += 1
+                        continue
+
+                    if local_step <= min_step_for_key[key] + 1e-9:
+                        break
+                    local_step = max(min_step_for_key[key], local_step * 0.5)
+                    bisection_iters += 1
+
+                if not key_improved:
+                    logs.append(
+                        "global-search: intervallhalbierung "
+                        f"(pass={pass_idx + 1}, key={key}, final_step={local_step:.3f}, iters={bisection_iters})"
+                    )
+                step_sizes[key] = max(min_step_for_key[key], local_step * (0.75 if key_improved else 0.90))
+
             logs.append(
                 "global-search: deterministischer track "
                 f"(pass={pass_idx + 1}, verbesserungen={pass_improved}, best_err={best_err:.3f})"
@@ -430,6 +450,7 @@ def optimizeGlobalParameterVectorSamplingImpl(
             if pass_improved == 0 and pass_idx >= 1:
                 break
         return best, best_err, improved
+
 
     stochastic_best, stochastic_err, stochastic_improved = runStochasticTrack()
     configured_rounds = max(1, int(rounds))
