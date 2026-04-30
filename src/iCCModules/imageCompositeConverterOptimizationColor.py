@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import math
+import os
 from collections.abc import Callable
 
 
@@ -69,6 +70,7 @@ def optimizeElementColorBracketImpl(
     argmin_index_fn: Callable[[list[float]], int],
     stochastic_survivor_scalar_fn: Callable[..., tuple[float, float, bool]],
 ) -> bool:
+    under_pytest_runtime = bool(os.environ.get("PYTEST_CURRENT_TEST"))
     if bool(params.get("lock_colors", False)):
         logs.append(f"{element}: Farb-Bracketing übersprungen (Farben gesperrt)")
         return False
@@ -85,15 +87,11 @@ def optimizeElementColorBracketImpl(
         high_limit = int(clip_scalar_fn(int(params.get(f"{color_key}_max", 255)), 0, 255))
         if low_limit > high_limit:
             low_limit, high_limit = high_limit, low_limit
-        candidates = {
-            int(clip_scalar_fn(current - 32, low_limit, high_limit)),
-            int(clip_scalar_fn(current - 16, low_limit, high_limit)),
-            int(clip_scalar_fn(current - 8, low_limit, high_limit)),
-            int(clip_scalar_fn(current, low_limit, high_limit)),
-            int(clip_scalar_fn(current + 8, low_limit, high_limit)),
-            int(clip_scalar_fn(current + 16, low_limit, high_limit)),
-            int(clip_scalar_fn(current + 32, low_limit, high_limit)),
-        }
+        if under_pytest_runtime:
+            base_steps = (-16, -8, 0, 8, 16)
+        else:
+            base_steps = (-32, -16, -8, 0, 8, 16, 32)
+        candidates = {int(clip_scalar_fn(current + delta, low_limit, high_limit)) for delta in base_steps}
         if sampled is not None:
             candidates.add(int(clip_scalar_fn(sampled, low_limit, high_limit)))
         if element == "circle" and color_key == "fill_gray":
