@@ -1,0 +1,124 @@
+============================= test session starts ==============================
+platform linux -- Python 3.10.19, pytest-9.0.2, pluggy-1.6.0 -- /root/.pyenv/versions/3.10.19/bin/python
+cachedir: .pytest_cache
+rootdir: /workspace/ImageConverter
+configfile: pytest.ini
+collecting ... collected 1 item
+
+tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_convert_without_failed_svg 
+--- Verarbeite AC0811_S.jpg ---
+Bildbeschreibung: Kelle, ohne Text Kreis oben, Griff nach unten (dunkelgraue Liine)
+Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe, SEMANTIC: senkrechter Strich hinter dem Kreis
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] HEARTBEAT phase=round_start, round=2, elapsed=27.02s, remaining=62.98s
+
+--- Verarbeite AC0811_L.jpg ---
+Bildbeschreibung: Kelle, ohne Text Kreis oben, Griff nach unten (dunkelgraue Liine)
+Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe, SEMANTIC: senkrechter Strich hinter dem Kreis
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] HEARTBEAT phase=round_start, round=2, elapsed=33.45s, remaining=56.55s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] HEARTBEAT phase=round_start, round=3, elapsed=63.63s, remaining=26.37s
+Fatal Python error: Aborted
+
+Current thread 0x00007fbf6743db80 (most recent call first):
+  File "/root/.pyenv/versions/3.10.19/lib/python3.10/selectors.py", line 416 in select
+  File "/root/.pyenv/versions/3.10.19/lib/python3.10/subprocess.py", line 2021 in _communicate
+  File "/root/.pyenv/versions/3.10.19/lib/python3.10/subprocess.py", line 1154 in communicate
+  File "/root/.pyenv/versions/3.10.19/lib/python3.10/subprocess.py", line 505 in run
+  File "/workspace/ImageConverter/src/iCCModules/imageCompositeConverterRendering.py", line 91 in render_svg_to_numpy_via_subprocess
+  File "/workspace/ImageConverter/src/iCCModules/imageCompositeConverterRemaining.py", line 304 in _renderSvgToNumpyViaSubprocess
+  File "/workspace/ImageConverter/src/iCCModules/imageCompositeConverterRemaining.py", line 318 in _render_svg_to_numpy_via_subprocess
+  File "/workspace/ImageConverter/src/imageCompositeConverter.py", line 425 in _render_svg_to_numpy_via_subprocess
+  File "/workspace/ImageConverter/src/iCCModules/imageCompositeConverterRenderDispatch.py", line 31 in renderSvgToNumpyImpl
+  File "/workspace/ImageConverter/src/imageCompositeConverter.py", line 1321 in renderSvgToNumpy
+  File "/workspace/ImageConverter/src/imageCompositeConverter.py", line 1139 in render_svg_to_numpy
+  File "/workspace/ImageConverter/src/iCCModules/imageCompositeConverterOptimizationCircleRadius.py", line 49 in elementErrorForCircleRadiusImpl
+  File "/workspace/ImageConverter/src/imageCompositeConverter.py", line 1779 in _elementErrorForCircleRadius
+  File "/workspace/ImageConverter/src/iCCModules/imageCompositeConverterGeometryBrackets.py", line 126 in eval_center
+  File "/workspace/ImageConverter/src/iCCModules/imageCompositeConverterGeometryBrackets.py", line 136 in optimize_axis
+  File "/workspace/ImageConverter/src/iCCModules/imageCompositeConverterGeometryBrackets.py", line 171 in optimizeCircleCenterBracketImpl
+  File "/workspace/ImageConverter/src/imageCompositeConverter.py", line 1863 in _optimizeCircleCenterBracket
+  File "/workspace/ImageConverter/src/iCCModules/imageCompositeConverterElementValidation.py", line 514 in validateBadgeByElementsImpl
+  File "/workspace/ImageConverter/src/imageCompositeConverter.py", line 2082 in validateBadgeByElements
+  File "/workspace/ImageConverter/src/imageCompositeConverter.py", line 1125 in validate_badge_by_elements
+  File "/workspace/ImageConverter/src/iCCModules/imageCompositeConverterSemanticValidationRuntime.py", line 27 in collectSemanticBadgeValidationLogsImpl
+  File "/workspace/ImageConverter/src/iCCModules/imageCompositeConverterIterationModeRuntime.py", line 72 in <lambda>
+  File "/workspace/ImageConverter/src/iCCModules/imageCompositeConverterSemanticBadgeRuntime.py", line 95 in runSemanticBadgeIterationImpl
+  File "/workspace/ImageConverter/src/iCCModules/imageCompositeConverterIterationModeRuntime.py", line 58 in run_semantic_badge_iteration
+  File "/workspace/ImageConverter/src/iCCModules/imageCompositeConverterIterationDispatch.py", line 35 in runPreparedIterationModeImpl
+  File "/workspace/ImageConverter/src/iCCModules/imageCompositeConverterIterationExecution.py", line 71 in runPreparedIterationAndFinalizeImpl
+  File "/workspace/ImageConverter/src/iCCModules/imageCompositeConverterIterationExecutionContext.py", line 101 in runPreparedIterationAndFinalizeForRunImpl
+  File "/workspace/ImageConverter/src/iCCModules/imageCompositeConverterIterationExecutionContext.py", line 146 in executeRunIterationPipelineImpl
+  File "/workspace/ImageConverter/src/iCCModules/imageCompositeConverterIterationExecutionContext.py", line 218 in executeRunIterationPipelineForRunImpl
+  File "/workspace/ImageConverter/src/iCCModules/imageCompositeConverterIterationExecutionContext.py", line 335 in runIterationPipelineForRunLocalsImpl
+  File "/workspace/ImageConverter/src/iCCModules/imageCompositeConverterIterationExecutionContext.py", line 370 in runIterationPipelineForRunImpl
+  File "/workspace/ImageConverter/src/iCCModules/imageCompositeConverterIterationOrchestration.py", line 253 in executeRunIterationPipelineDispatchImpl
+  File "/workspace/ImageConverter/src/iCCModules/imageCompositeConverterIterationOrchestration.py", line 191 in runIterationPipelineOrchestrationImpl
+  File "/workspace/ImageConverter/src/iCCModules/imageCompositeConverterIterationOrchestration.py", line 266 in executeRunIterationPipelineOrchestrationForRunImpl
+  File "/workspace/ImageConverter/src/iCCModules/imageCompositeConverterIterationOrchestration.py", line 453 in executeRunIterationPipelineViaOrchestrationImpl
+  File "/workspace/ImageConverter/src/iCCModules/imageCompositeConverterIterationOrchestration.py", line 432 in runIterationPipelineViaOrchestrationForRunImpl
+  File "/workspace/ImageConverter/src/iCCModules/imageCompositeConverterIterationOrchestration.py", line 300 in runIterationPipelineFromInputsViaOrchestrationImpl
+  File "/workspace/ImageConverter/src/iCCModules/imageCompositeConverterIterationOrchestration.py", line 320 in executeRunIterationPipelineFromInputsViaOrchestrationImpl
+  File "/workspace/ImageConverter/src/iCCModules/imageCompositeConverterIterationOrchestration.py", line 346 in runIterationPipelineFromInputsViaOrchestrationForRunImpl
+  File "/workspace/ImageConverter/src/iCCModules/imageCompositeConverterIterationOrchestration.py", line 369 in executeRunIterationPipelineFromInputsViaOrchestrationForRunImpl
+  File "/workspace/ImageConverter/src/iCCModules/imageCompositeConverterIterationOrchestration.py", line 406 in runIterationPipelineFromInputsViaOrchestrationForRunCallImpl
+  File "/workspace/ImageConverter/src/iCCModules/imageCompositeConverterIterationPipeline.py", line 314 in executeRunIterationPipelineFromInputsViaOrchestrationForRunCallImpl
+  File "/workspace/ImageConverter/src/iCCModules/imageCompositeConverterIterationPipeline.py", line 330 in runIterationPipelineFromInputsViaOrchestrationForRunCallForRunImpl
+  File "/workspace/ImageConverter/src/iCCModules/imageCompositeConverterIterationPipeline.py", line 457 in runIterationPipelineFromInputsViaOrchestrationForRunCallForRunCallCallSequenceForRunImpl
+  File "/workspace/ImageConverter/src/iCCModules/imageCompositeConverterIterationPipeline.py", line 424 in runIterationPipelineFromInputsViaOrchestrationForRunCallForRunCallImpl
+  File "/workspace/ImageConverter/src/iCCModules/imageCompositeConverterIterationPipeline.py", line 486 in runIterationPipelineFromInputsViaOrchestrationForRunCallForRunCallForRunImpl
+  File "/workspace/ImageConverter/src/iCCModules/imageCompositeConverterIterationPipeline.py", line 864 in runIterationPipelineFromInputsViaOrchestrationForRunFromInputsCallForRunCallForRunImpl
+  File "/workspace/ImageConverter/src/iCCModules/imageCompositeConverterIterationPipeline.py", line 728 in runIterationPipelineFromInputsViaOrchestrationForRunFromInputsCallCallSequenceForRunImpl
+  File "/workspace/ImageConverter/src/iCCModules/imageCompositeConverterIterationPipeline.py", line 686 in runIterationPipelineFromInputsViaOrchestrationForRunFromInputsCallImpl
+  File "/workspace/ImageConverter/src/iCCModules/imageCompositeConverterIterationPipeline.py", line 844 in runIterationPipelineFromInputsViaOrchestrationForRunFromInputsCallForRunImpl
+  File "/workspace/ImageConverter/src/iCCModules/imageCompositeConverterIterationPipeline.py", line 919 in runIterationPipelineFromInputsViaOrchestrationForRunFromInputsDispatchImpl
+  File "/workspace/ImageConverter/src/iCCModules/imageCompositeConverterIterationPipeline.py", line 955 in runIterationPipelineFromInputsViaOrchestrationForRunFromInputsDispatchCallForRunImpl
+  File "/workspace/ImageConverter/src/iCCModules/imageCompositeConverterIterationPipeline.py", line 2052 in runIterationPipelineImplFromInputsDispatchCallForRunCallForRunImpl
+  File "/workspace/ImageConverter/src/iCCModules/imageCompositeConverterIterationPipeline.py", line 2064 in runIterationPipelineImplFromInputsDispatchCallForRunCallRunnerForRunImpl
+  File "/workspace/ImageConverter/src/iCCModules/imageCompositeConverterIterationPipeline.py", line 2119 in runIterationPipelineImplFromInputsDispatchCallForRunCallRunnerSequenceForRunImpl
+  File "/workspace/ImageConverter/src/iCCModules/imageCompositeConverterIterationPipeline.py", line 2371 in runIterationPipelineImplFromInputsDispatchCallForRunFinalSequenceForRunImpl
+  File "/workspace/ImageConverter/src/iCCModules/imageCompositeConverterIterationPipeline.py", line 2439 in runIterationPipelineImplFromInputsDispatchCallForRunFinalRunnerSequenceForRunImpl
+  File "/workspace/ImageConverter/src/iCCModules/imageCompositeConverterIterationPipeline.py", line 2405 in runIterationPipelineImplFromInputsDispatchCallForRunImpl
+  File "/workspace/ImageConverter/src/iCCModules/imageCompositeConverterIterationPipeline.py", line 2041 in runIterationPipelineImplFromInputsDispatchCallForRunCallForRunImpl
+  File "/workspace/ImageConverter/src/iCCModules/imageCompositeConverterIterationPipeline.py", line 1863 in runIterationPipelineImplFromInputsDispatchCallForRunCallSequenceForRunImpl
+  File "/workspace/ImageConverter/src/iCCModules/imageCompositeConverterIterationPipeline.py", line 1748 in runIterationPipelineImplFromInputsDispatchCallSequenceForRunCallSequenceForRunImpl
+  File "/workspace/ImageConverter/src/iCCModules/imageCompositeConverterIterationPipeline.py", line 1705 in runIterationPipelineImplFromInputsDispatchCallSequenceForRunImpl
+  File "/workspace/ImageConverter/src/iCCModules/imageCompositeConverterIterationPipeline.py", line 1574 in runIterationPipelineImplFromInputsDispatchCallSequenceCallForRunImpl
+  File "/workspace/ImageConverter/src/iCCModules/imageCompositeConverterIterationPipeline.py", line 1562 in runIterationPipelineImplFromInputsDispatchCallSequenceCallForRunCallForRunImpl
+  File "/workspace/ImageConverter/src/iCCModules/imageCompositeConverterIterationPipeline.py", line 1475 in runIterationPipelineImpl
+  File "/workspace/ImageConverter/src/iCCModules/imageCompositeConverterRemaining.py", line 375 in runIterationPipeline
+  File "/workspace/ImageConverter/src/iCCModules/imageCompositeConverterConversionExecution.py", line 241 in convertOneImpl
+  File "/workspace/ImageConverter/src/iCCModules/imageCompositeConverterRemaining.py", line 1024 in _convertOne
+  File "/workspace/ImageConverter/src/iCCModules/imageCompositeConverterConversionInitialPass.py", line 28 in runInitialConversionPassImpl
+  File "/workspace/ImageConverter/src/iCCModules/imageCompositeConverterRemaining.py", line 1048 in convertRange
+  File "/workspace/ImageConverter/src/imageCompositeConverter.py", line 2492 in convertRange
+  File "/workspace/ImageConverter/tests/test_image_composite_converter.py", line 7281 in test_ac08_semantic_anchor_variants_convert_without_failed_svg
+  File "/root/.pyenv/versions/3.10.19/lib/python3.10/site-packages/_pytest/python.py", line 166 in pytest_pyfunc_call
+  File "/root/.pyenv/versions/3.10.19/lib/python3.10/site-packages/pluggy/_callers.py", line 121 in _multicall
+  File "/root/.pyenv/versions/3.10.19/lib/python3.10/site-packages/pluggy/_manager.py", line 120 in _hookexec
+  File "/root/.pyenv/versions/3.10.19/lib/python3.10/site-packages/pluggy/_hooks.py", line 512 in __call__
+  File "/root/.pyenv/versions/3.10.19/lib/python3.10/site-packages/_pytest/python.py", line 1720 in runtest
+  File "/root/.pyenv/versions/3.10.19/lib/python3.10/site-packages/_pytest/runner.py", line 179 in pytest_runtest_call
+  File "/root/.pyenv/versions/3.10.19/lib/python3.10/site-packages/pluggy/_callers.py", line 121 in _multicall
+  File "/root/.pyenv/versions/3.10.19/lib/python3.10/site-packages/pluggy/_manager.py", line 120 in _hookexec
+  File "/root/.pyenv/versions/3.10.19/lib/python3.10/site-packages/pluggy/_hooks.py", line 512 in __call__
+  File "/root/.pyenv/versions/3.10.19/lib/python3.10/site-packages/_pytest/runner.py", line 245 in <lambda>
+  File "/root/.pyenv/versions/3.10.19/lib/python3.10/site-packages/_pytest/runner.py", line 353 in from_call
+  File "/root/.pyenv/versions/3.10.19/lib/python3.10/site-packages/_pytest/runner.py", line 244 in call_and_report
+  File "/root/.pyenv/versions/3.10.19/lib/python3.10/site-packages/_pytest/runner.py", line 137 in runtestprotocol
+  File "/root/.pyenv/versions/3.10.19/lib/python3.10/site-packages/_pytest/runner.py", line 118 in pytest_runtest_protocol
+  File "/root/.pyenv/versions/3.10.19/lib/python3.10/site-packages/pluggy/_callers.py", line 121 in _multicall
+  File "/root/.pyenv/versions/3.10.19/lib/python3.10/site-packages/pluggy/_manager.py", line 120 in _hookexec
+  File "/root/.pyenv/versions/3.10.19/lib/python3.10/site-packages/pluggy/_hooks.py", line 512 in __call__
+  File "/root/.pyenv/versions/3.10.19/lib/python3.10/site-packages/_pytest/main.py", line 396 in pytest_runtestloop
+  File "/root/.pyenv/versions/3.10.19/lib/python3.10/site-packages/pluggy/_callers.py", line 121 in _multicall
+  File "/root/.pyenv/versions/3.10.19/lib/python3.10/site-packages/pluggy/_manager.py", line 120 in _hookexec
+  File "/root/.pyenv/versions/3.10.19/lib/python3.10/site-packages/pluggy/_hooks.py", line 512 in __call__
+  File "/root/.pyenv/versions/3.10.19/lib/python3.10/site-packages/_pytest/main.py", line 372 in _main
+  File "/root/.pyenv/versions/3.10.19/lib/python3.10/site-packages/_pytest/main.py", line 318 in wrap_session
+  File "/root/.pyenv/versions/3.10.19/lib/python3.10/site-packages/_pytest/main.py", line 365 in pytest_cmdline_main
+  File "/root/.pyenv/versions/3.10.19/lib/python3.10/site-packages/pluggy/_callers.py", line 121 in _multicall
+  File "/root/.pyenv/versions/3.10.19/lib/python3.10/site-packages/pluggy/_manager.py", line 120 in _hookexec
+  File "/root/.pyenv/versions/3.10.19/lib/python3.10/site-packages/pluggy/_hooks.py", line 512 in __call__
+  File "/root/.pyenv/versions/3.10.19/lib/python3.10/site-packages/_pytest/config/__init__.py", line 199 in main
+  ...
+
+Extension modules: numpy._core._multiarray_umath, numpy.linalg._umath_linalg, pymupdf._extra, pymupdf._mupdf, numpy.random._common, numpy.random.bit_generator, numpy.random._bounded_integers, numpy.random._mt19937, numpy.random.mtrand, numpy.random._philox, numpy.random._pcg64, numpy.random._sfc64, numpy.random._generator (total: 13)

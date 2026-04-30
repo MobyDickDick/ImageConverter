@@ -260,6 +260,12 @@ def validateBadgeByElementsImpl(
         logs.append(f"{anchor_telemetry_prefix} START budget={configured_budget:.2f}s max_rounds={int(max_rounds)}")
         params.setdefault("circle_center_bracket_iterations", 3)
 
+    def _emit_anchor_debug(message: str) -> None:
+        if not is_anchor_telemetry_test:
+            return
+        logs.append(message)
+        print(f"[ANCHOR_DEBUG] {message}", flush=True)
+
     def _time_budget_exceeded() -> bool:
         if configured_budget <= 0.0:
             return False
@@ -268,6 +274,10 @@ def validateBadgeByElementsImpl(
     def _raise_time_budget_exceeded(*, phase: str, round_number: int, element: str | None = None) -> None:
         elapsed = float(time_module.monotonic()) - validation_started_at
         detail = f", element={element}" if element else ""
+        _emit_anchor_debug(
+            f"{anchor_telemetry_prefix} TIMEOUT phase={phase}, round={round_number}, "
+            f"elapsed={elapsed:.2f}s, budget={configured_budget:.2f}s{detail}"
+        )
         raise TimeoutError(
             "validation_time_budget_exceeded: "
             f"phase={phase}, round={round_number}, elapsed={elapsed:.2f}s, budget={configured_budget:.2f}s{detail}"
@@ -293,7 +303,7 @@ def validateBadgeByElementsImpl(
         elapsed = now - validation_started_at
         remaining = _remaining_budget_seconds()
         detail = f", element={element}" if element else ""
-        logs.append(
+        _emit_anchor_debug(
             f"{anchor_telemetry_prefix} HEARTBEAT phase={phase}, round={round_number}, "
             f"elapsed={elapsed:.2f}s, remaining={remaining:.2f}s{detail}"
         )
@@ -306,6 +316,8 @@ def validateBadgeByElementsImpl(
         if _remaining_budget_seconds() < 8.0:
             logs.append(f"{anchor_telemetry_prefix} micro_search_skipped_due_to_budget")
             return False
+        lock_circle_cx = bool(params.get("lock_circle_cx", False))
+        lock_circle_cy = bool(params.get("lock_circle_cy", False))
         base_cx = float(params.get("cx", 0.0))
         base_cy = float(params.get("cy", 0.0))
         base_r = float(params.get("r", 0.0))
@@ -320,7 +332,9 @@ def validateBadgeByElementsImpl(
         best = (base_cx, base_cy, base_r)
         for dcx, dcy, dr in deltas[1:]:
             _maybe_anchor_heartbeat(phase="micro_search", round_number=round_number)
-            cand_cx, cand_cy, cand_r = base_cx + dcx, base_cy + dcy, max(0.5, base_r + dr)
+            cand_cx = base_cx if lock_circle_cx else (base_cx + dcx)
+            cand_cy = base_cy if lock_circle_cy else (base_cy + dcy)
+            cand_r = max(0.5, base_r + dr)
             params["cx"], params["cy"], params["r"] = cand_cx, cand_cy, cand_r
             cand_err = _eval_current()
             if cand_err < best_err:

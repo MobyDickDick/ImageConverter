@@ -5,9 +5,11 @@ from __future__ import annotations
 import base64
 import gc
 import json
+import os
 import re
 import subprocess
 import sys
+import time
 
 _INPROCESS_RENDER_COUNT = 0
 _INPROCESS_GC_PERIOD = 25
@@ -80,6 +82,11 @@ def render_svg_to_numpy_via_subprocess(
         ensure_ascii=False,
     ).encode("utf-8")
     cmd = [sys.executable, "-m", "src.imageCompositeConverter", "--_render-svg-subprocess"]
+    debug_render_timeout = (
+        os.environ.get("ICC_DEBUG_RENDER_TIMEOUT", "").strip().lower() in {"1", "true", "yes", "on"}
+        or "pytest" in sys.modules
+    )
+    started = time.monotonic()
     try:
         completed = subprocess.run(
             cmd,
@@ -89,6 +96,18 @@ def render_svg_to_numpy_via_subprocess(
             check=False,
             timeout=timeout_sec,
         )
+    except subprocess.TimeoutExpired:
+        if debug_render_timeout:
+            elapsed = time.monotonic() - started
+            print(
+                (
+                    "[ICC_RENDER_TIMEOUT] render subprocess exceeded timeout "
+                    f"({elapsed:.2f}s > {timeout_sec:.2f}s, size={size_w}x{size_h}, payload_bytes={len(payload)})"
+                ),
+                file=sys.stderr,
+                flush=True,
+            )
+        return None
     except Exception:
         return None
     if completed.returncode != 0 or not completed.stdout:
