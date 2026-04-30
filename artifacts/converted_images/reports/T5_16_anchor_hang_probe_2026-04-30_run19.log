@@ -1,0 +1,51 @@
+============================= test session starts ==============================
+platform linux -- Python 3.10.19, pytest-9.0.2, pluggy-1.6.0 -- /root/.pyenv/versions/3.10.19/bin/python
+cachedir: .pytest_cache
+rootdir: /workspace/ImageConverter
+configfile: pytest.ini
+collecting ... collected 1 item
+
+tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_convert_without_failed_svg 
+--- Verarbeite AC0811_L.jpg ---
+Bildbeschreibung: Kelle, ohne Text Kreis oben, Griff nach unten (dunkelgraue Liine)
+Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe, SEMANTIC: senkrechter Strich hinter dem Kreis
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] HEARTBEAT phase=round_start, round=2, elapsed=44.02s, remaining=45.98s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] HEARTBEAT phase=round_start, round=3, elapsed=84.05s, remaining=5.95s
+
+--- Verarbeite AC0811_M.jpg ---
+Bildbeschreibung: Kelle, ohne Text Kreis oben, Griff nach unten (dunkelgraue Liine)
+Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe, SEMANTIC: senkrechter Strich hinter dem Kreis
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] HEARTBEAT phase=round_start, round=2, elapsed=42.30s, remaining=47.70s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] HEARTBEAT phase=round_start, round=3, elapsed=74.46s, remaining=15.54s
+
+--- Verarbeite AC0811_S.jpg ---
+Bildbeschreibung: Kelle, ohne Text Kreis oben, Griff nach unten (dunkelgraue Liine)
+Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe, SEMANTIC: senkrechter Strich hinter dem Kreis
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] HEARTBEAT phase=round_start, round=2, elapsed=34.97s, remaining=55.03s
+
+--- Verarbeite AC0811_S.jpg ---
+Bildbeschreibung: Kelle, ohne Text Kreis oben, Griff nach unten (dunkelgraue Liine)
+Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe, SEMANTIC: senkrechter Strich hinter dem Kreis
+
+--- Verarbeite AC0811_M.jpg ---
+Bildbeschreibung: Kelle, ohne Text Kreis oben, Griff nach unten (dunkelgraue Liine)
+Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe, SEMANTIC: senkrechter Strich hinter dem Kreis
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] HEARTBEAT phase=round_start, round=3, elapsed=19.75s, remaining=70.25s
+[INFO] Übersichts-Kacheln erzeugt: diff=/tmp/pytest-of-root/pytest-0/test_ac08_semantic_anchor_vari0/ac0811_out/reports/overview_diff_tiles.png, svg=/tmp/pytest-of-root/pytest-0/test_ac08_semantic_anchor_vari0/ac0811_out/reports/overview_svg_tiles.png
+
+--- Verarbeite AC0812_M.jpg ---
+Bildbeschreibung: Wie AC0811: Kelle, ohne Text Kreis oben, Griff nach unten (dunkelgraue Liine). Geometrische Variante: 90° nach links gedreht.
+Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe, SEMANTIC: waagrechter Strich links vom Kreis
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] HEARTBEAT phase=round_start, round=2, elapsed=35.94s, remaining=54.06s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] HEARTBEAT phase=round_start, round=3, elapsed=65.52s, remaining=24.48s
+
+--- Verarbeite AC0812_L.jpg ---
+Bildbeschreibung: Wie AC0811: Kelle, ohne Text Kreis oben, Griff nach unten (dunkelgraue Liine). Geometrische Variante: 90° nach links gedreht.
+Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe, SEMANTIC: waagrechter Strich links vom Kreis
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] HEARTBEAT phase=round_start, round=2, elapsed=37.32s, remaining=52.68s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] HEARTBEAT phase=round_start, round=3, elapsed=66.50s, remaining=23.50s
+
+--- Verarbeite AC0812_S.jpg ---
+Bildbeschreibung: Wie AC0811: Kelle, ohne Text Kreis oben, Griff nach unten (dunkelgraue Liine). Geometrische Variante: 90° nach links gedreht.
+Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe, SEMANTIC: waagrechter Strich links vom Kreis
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] HEARTBEAT phase=round_start, round=2, elapsed=30.73s, remaining=59.27s
