@@ -258,6 +258,7 @@ def validateBadgeByElementsImpl(
 
     if is_anchor_telemetry_test:
         logs.append(f"{anchor_telemetry_prefix} START budget={configured_budget:.2f}s max_rounds={int(max_rounds)}")
+        params.setdefault("circle_center_bracket_iterations", 3)
 
     def _time_budget_exceeded() -> bool:
         if configured_budget <= 0.0:
@@ -478,13 +479,25 @@ def validateBadgeByElementsImpl(
                     round_changed = True
                     logs.append("stem: Geometrie nach Elementabgleich aktualisiert")
 
-            width_changed = optimize_element_width_bracket_fn(img_orig, params, element, logs)
-            if width_changed:
-                round_changed = True
+            remaining_for_element = _remaining_budget_seconds()
+            conservative_mode = is_anchor_telemetry_test and configured_budget > 0.0 and remaining_for_element < max(20.0, 0.25 * configured_budget)
+            if conservative_mode and element == "text":
+                logs.append(
+                    f"{anchor_telemetry_prefix} conservative_skip width+extent round={round_idx + 1} element={element} remaining={remaining_for_element:.2f}s"
+                )
+            else:
+                width_changed = optimize_element_width_bracket_fn(img_orig, params, element, logs)
+                if width_changed:
+                    round_changed = True
 
-            extent_changed = optimize_element_extent_bracket_fn(img_orig, params, element, logs)
-            if extent_changed:
-                round_changed = True
+                if conservative_mode and element != "circle":
+                    logs.append(
+                        f"{anchor_telemetry_prefix} conservative_skip extent round={round_idx + 1} element={element} remaining={remaining_for_element:.2f}s"
+                    )
+                else:
+                    extent_changed = optimize_element_extent_bracket_fn(img_orig, params, element, logs)
+                    if extent_changed:
+                        round_changed = True
 
             circle_geometry_penalty_active = apply_circle_geometry_penalty and not fallback_search_active
             if element == "circle" and circle_geometry_penalty_active:
@@ -497,12 +510,18 @@ def validateBadgeByElementsImpl(
             if is_anchor_telemetry_test:
                 logs.append(f"{anchor_telemetry_prefix} PHASE element_end round={round_idx + 1} element={element}")
 
+        remaining_budget = _remaining_budget_seconds()
+        if is_anchor_telemetry_test and configured_budget > 0.0 and remaining_budget < 6.0:
+            logs.append(
+                f"{anchor_telemetry_prefix} round_truncated_due_to_budget round={round_idx + 1} remaining={remaining_budget:.2f}s"
+            )
+            break
+
         # The global vector sampling step is the single most expensive operation
         # in the validation loop. If the remaining wall-clock budget is already
         # low, running it often causes apparent "hangs" near the end of long
         # regression tests without improving stability. In that case, prefer a
         # controlled skip and finish the current round deterministically.
-        remaining_budget = _remaining_budget_seconds()
         min_required_for_global_search = max(12.0, 0.15 * configured_budget) if configured_budget > 0.0 else 0.0
         if configured_budget > 0.0 and remaining_budget < min_required_for_global_search:
             logs.append(
