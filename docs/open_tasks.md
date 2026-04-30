@@ -73,6 +73,7 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
   - 2026-04-29: Run BE mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_L`, Prozessende mit Exit `0`, aber ohne Vollbereichsnachweis bis `AC0899` (Summary: `docs/ac0800_ac0899_runBE_2026-04-29_summary.md`).
   - 2026-04-29: Run BF mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_L`, Prozessende mit Exit `0`, aber ohne Vollbereichsnachweis bis `AC0899` (Summary: `docs/ac0800_ac0899_runBF_2026-04-29_summary.md`).
   - 2026-04-29: Run BG mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_L`, Prozessende mit Exit `0`, aber ohne Vollbereichsnachweis bis `AC0899` (Summary: `docs/ac0800_ac0899_runBG_2026-04-29_summary.md`).
+  - 2026-04-30: Run BH mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_L`, Prozessende mit Exit `0`, aber ohne Vollbereichsnachweis bis `AC0899` (Summary: `docs/ac0800_ac0899_runBH_2026-04-30_summary.md`).
   - Abschlusskriterium: vollständiger Durchlauf bis `AC0899` ohne `timeout`-Abbruch und mit finalem Prozessstatus `0`.
 
 - [ ] N2: Stabilitätsnachweis für den Vollbereich dokumentieren.
@@ -117,6 +118,7 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
   - 2026-04-29: Run BE zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Status (Exit `0` ohne Vollbereichsnachweis) in `docs/ac0800_ac0899_runBE_2026-04-29_summary.md` dokumentiert.
   - 2026-04-29: Run BF zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Status (Exit `0` ohne Vollbereichsnachweis) in `docs/ac0800_ac0899_runBF_2026-04-29_summary.md` dokumentiert.
   - 2026-04-29: Run BG zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Status (Exit `0` ohne Vollbereichsnachweis) in `docs/ac0800_ac0899_runBG_2026-04-29_summary.md` dokumentiert.
+  - 2026-04-30: Run BH zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Status (Exit `0` ohne Vollbereichsnachweis) in `docs/ac0800_ac0899_runBH_2026-04-30_summary.md` dokumentiert.
 
 - [x] N3: Neue Laufzusammenfassung im Run-Format ergänzen.
   - Neue Datei analog zu Run Q/R erstellen (Datum, Anlass, exakter Befehl, Log-Pfad, sichtbarer Fortschritt, Exit-Code, Kurzfazit).
