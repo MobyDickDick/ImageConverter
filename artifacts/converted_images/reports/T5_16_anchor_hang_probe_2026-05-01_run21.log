@@ -1,0 +1,114 @@
+============================= test session starts ==============================
+platform linux -- Python 3.10.19, pytest-9.0.2, pluggy-1.6.0 -- /root/.pyenv/versions/3.10.19/bin/python
+cachedir: .pytest_cache
+rootdir: /workspace/ImageConverter
+configfile: pytest.ini
+collecting ... collected 1 item
+
+tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_convert_without_failed_svg 
+--- Verarbeite AC0811_M.jpg ---
+Bildbeschreibung: Kelle, ohne Text Kreis oben, Griff nach unten (dunkelgraue Liine)
+Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe, SEMANTIC: senkrechter Strich hinter dem Kreis
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] full_render round=1, elapsed=0.67s, state=cx=10.000, cy=10.200, r=8.833, stem_width=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] element_render round=1, element=circle, elapsed=0.64s, state=cx=10.000, cy=10.200, r=8.833, stem_width=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_center_start round=1, remaining=88.69s, state=cx=10.000, cy=10.200, r=8.833, stem_width=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_center_end round=1, elapsed=5.42s, remaining=83.26s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_radius_start round=1, remaining=83.26s, state=cx=10.000, cy=12.000, r=8.833, stem_width=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_radius_end round=1, elapsed=2.52s, remaining=80.74s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] element_render round=1, element=stem, elapsed=0.60s, state=cx=10.000, cy=12.000, r=9.000, stem_width=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] HEARTBEAT phase=round_start, round=2, elapsed=41.73s, remaining=48.27s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] full_render round=2, elapsed=0.00s, state=cx=10.500, cy=12.000, r=8.500, stem_width=2.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] element_render round=2, element=circle, elapsed=0.58s, state=cx=10.500, cy=12.000, r=8.500, stem_width=2.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_center_start round=2, remaining=47.68s, state=cx=10.500, cy=12.000, r=8.500, stem_width=2.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_center_end round=2, elapsed=5.50s, remaining=42.18s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_radius_start round=2, remaining=42.18s, state=cx=10.500, cy=12.000, r=8.500, stem_width=2.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_radius_end round=2, elapsed=0.61s, remaining=41.57s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] element_render round=2, element=stem, elapsed=0.60s, state=cx=10.500, cy=12.000, r=8.500, stem_width=2.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] HEARTBEAT phase=round_start, round=3, elapsed=72.73s, remaining=17.27s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] full_render round=3, elapsed=0.00s, state=cx=10.500, cy=12.000, r=8.500, stem_width=2.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] element_render round=3, element=circle, elapsed=0.00s, state=cx=10.500, cy=12.000, r=8.500, stem_width=2.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] element_render round=3, element=stem, elapsed=0.00s, state=cx=10.500, cy=12.000, r=8.500, stem_width=2.000
+
+--- Verarbeite AC0811_L.jpg ---
+Bildbeschreibung: Kelle, ohne Text Kreis oben, Griff nach unten (dunkelgraue Liine)
+Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe, SEMANTIC: senkrechter Strich hinter dem Kreis
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] full_render round=1, elapsed=0.60s, state=cx=12.500, cy=12.750, r=11.667, stem_width=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] element_render round=1, element=circle, elapsed=0.61s, state=cx=12.500, cy=12.750, r=11.667, stem_width=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_center_start round=1, remaining=88.79s, state=cx=12.500, cy=12.750, r=11.667, stem_width=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_center_end round=1, elapsed=5.40s, remaining=83.39s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_radius_start round=1, remaining=83.39s, state=cx=11.000, cy=16.000, r=11.667, stem_width=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_radius_end round=1, elapsed=0.64s, remaining=82.75s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] element_render round=1, element=stem, elapsed=0.61s, state=cx=11.000, cy=16.000, r=11.000, stem_width=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] HEARTBEAT phase=round_start, round=2, elapsed=42.88s, remaining=47.12s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] full_render round=2, elapsed=0.00s, state=cx=12.500, cy=16.000, r=11.000, stem_width=1.500
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] element_render round=2, element=circle, elapsed=0.62s, state=cx=12.500, cy=16.000, r=11.000, stem_width=1.500
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_center_start round=2, remaining=46.50s, state=cx=12.500, cy=16.000, r=11.000, stem_width=1.500
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_center_end round=2, elapsed=5.65s, remaining=40.85s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_radius_start round=2, remaining=40.85s, state=cx=12.500, cy=16.000, r=11.000, stem_width=1.500
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_radius_end round=2, elapsed=1.24s, remaining=39.61s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] element_render round=2, element=stem, elapsed=0.61s, state=cx=12.500, cy=16.000, r=11.000, stem_width=1.500
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] HEARTBEAT phase=round_start, round=3, elapsed=82.19s, remaining=7.81s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] full_render round=3, elapsed=0.00s, state=cx=12.500, cy=16.000, r=11.000, stem_width=2.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] element_render round=3, element=circle, elapsed=0.00s, state=cx=12.500, cy=16.000, r=11.000, stem_width=2.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_center_start round=3, remaining=7.81s, state=cx=12.500, cy=16.000, r=11.000, stem_width=2.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_center_end round=3, elapsed=0.01s, remaining=7.80s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_radius_start round=3, remaining=7.80s, state=cx=12.500, cy=16.000, r=11.000, stem_width=2.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_radius_end round=3, elapsed=0.00s, remaining=7.80s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] element_render round=3, element=stem, elapsed=0.00s, state=cx=12.500, cy=16.000, r=11.000, stem_width=2.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] full_render round=4, elapsed=0.00s, state=cx=12.500, cy=16.000, r=11.000, stem_width=2.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] element_render round=4, element=circle, elapsed=0.00s, state=cx=12.500, cy=16.000, r=11.000, stem_width=2.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] element_render round=4, element=stem, elapsed=0.00s, state=cx=12.500, cy=16.000, r=11.000, stem_width=2.000
+
+--- Verarbeite AC0811_S.jpg ---
+Bildbeschreibung: Kelle, ohne Text Kreis oben, Griff nach unten (dunkelgraue Liine)
+Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe, SEMANTIC: senkrechter Strich hinter dem Kreis
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] full_render round=1, elapsed=0.62s, state=cx=7.500, cy=7.650, r=7.000, stem_width=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] element_render round=1, element=circle, elapsed=0.58s, state=cx=7.500, cy=7.650, r=7.000, stem_width=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_center_start round=1, remaining=88.79s, state=cx=7.500, cy=7.650, r=7.000, stem_width=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_center_end round=1, elapsed=3.59s, remaining=85.20s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_radius_start round=1, remaining=85.20s, state=cx=7.500, cy=7.500, r=7.000, stem_width=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_radius_end round=1, elapsed=0.63s, remaining=84.58s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] element_render round=1, element=stem, elapsed=0.67s, state=cx=7.500, cy=7.500, r=7.000, stem_width=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] HEARTBEAT phase=round_start, round=2, elapsed=35.08s, remaining=54.92s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] full_render round=2, elapsed=0.00s, state=cx=7.500, cy=7.500, r=7.000, stem_width=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] element_render round=2, element=circle, elapsed=0.00s, state=cx=7.500, cy=7.500, r=7.000, stem_width=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_center_start round=2, remaining=54.91s, state=cx=7.500, cy=7.500, r=7.000, stem_width=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_center_end round=2, elapsed=0.01s, remaining=54.91s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_radius_start round=2, remaining=54.91s, state=cx=7.500, cy=7.500, r=7.000, stem_width=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_radius_end round=2, elapsed=0.00s, remaining=54.90s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] element_render round=2, element=stem, elapsed=0.00s, state=cx=7.500, cy=7.500, r=7.000, stem_width=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] full_render round=3, elapsed=0.00s, state=cx=7.500, cy=7.500, r=7.000, stem_width=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] element_render round=3, element=circle, elapsed=0.00s, state=cx=7.500, cy=7.500, r=7.000, stem_width=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] element_render round=3, element=stem, elapsed=0.00s, state=cx=7.500, cy=7.500, r=7.000, stem_width=1.000
+
+--- Verarbeite AC0811_S.jpg ---
+Bildbeschreibung: Kelle, ohne Text Kreis oben, Griff nach unten (dunkelgraue Liine)
+Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe, SEMANTIC: senkrechter Strich hinter dem Kreis
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] full_render round=1, elapsed=0.00s, state=cx=7.500, cy=7.650, r=7.000, stem_width=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] element_render round=1, element=circle, elapsed=0.00s, state=cx=7.500, cy=7.650, r=7.000, stem_width=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_center_start round=1, remaining=90.00s, state=cx=7.500, cy=7.650, r=7.000, stem_width=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_center_end round=1, elapsed=0.01s, remaining=89.99s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_radius_start round=1, remaining=89.99s, state=cx=7.500, cy=7.500, r=7.000, stem_width=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_radius_end round=1, elapsed=0.00s, remaining=89.99s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] element_render round=1, element=stem, elapsed=0.00s, state=cx=7.500, cy=7.500, r=7.000, stem_width=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] full_render round=2, elapsed=0.00s, state=cx=7.500, cy=7.500, r=7.000, stem_width=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] element_render round=2, element=circle, elapsed=0.00s, state=cx=7.500, cy=7.500, r=7.000, stem_width=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_center_start round=2, remaining=80.33s, state=cx=7.500, cy=7.500, r=7.000, stem_width=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_center_end round=2, elapsed=0.01s, remaining=80.32s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_radius_start round=2, remaining=80.32s, state=cx=7.500, cy=7.500, r=7.000, stem_width=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_radius_end round=2, elapsed=0.00s, remaining=80.32s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] element_render round=2, element=stem, elapsed=0.00s, state=cx=7.500, cy=7.500, r=7.000, stem_width=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] full_render round=3, elapsed=0.00s, state=cx=7.500, cy=7.500, r=7.000, stem_width=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] element_render round=3, element=circle, elapsed=0.00s, state=cx=7.500, cy=7.500, r=7.000, stem_width=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] element_render round=3, element=stem, elapsed=0.00s, state=cx=7.500, cy=7.500, r=7.000, stem_width=1.000
+
+--- Verarbeite AC0811_M.jpg ---
+Bildbeschreibung: Kelle, ohne Text Kreis oben, Griff nach unten (dunkelgraue Liine)
+Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe, SEMANTIC: senkrechter Strich hinter dem Kreis
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] full_render round=1, elapsed=0.00s, state=cx=10.000, cy=10.200, r=8.833, stem_width=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] element_render round=1, element=circle, elapsed=0.00s, state=cx=10.000, cy=10.200, r=8.833, stem_width=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_center_start round=1, remaining=90.00s, state=cx=10.000, cy=10.200, r=8.833, stem_width=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_center_end round=1, elapsed=0.01s, remaining=89.99s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_radius_start round=1, remaining=89.99s, state=cx=10.000, cy=12.000, r=8.833, stem_width=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_radius_end round=1, elapsed=0.00s, remaining=89.98s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] element_render round=1, element=stem, elapsed=0.00s, state=cx=10.000, cy=12.000, r=9.000, stem_width=1.000
