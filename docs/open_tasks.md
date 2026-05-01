@@ -380,9 +380,12 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
 
   
   - 2026-05-01: Validierungsloop ergänzt um strukturierte `validation_abort_decision`-Logevents (u. a. für Budget- und Stagnationsabbrüche sowie Schwellwert-Stopp), damit T5.16-Probeläufe maschinenlesbar auswertbar sind.
-- [ ] T5.16.C (hohe Priorität): Frühabbruch bei stabiler Nicht-Verbesserung implementieren.
+- [x] T5.16.C (hohe Priorität): Frühabbruch bei stabiler Nicht-Verbesserung implementieren.
     - Ziel: Nach konfigurierbarer Anzahl Runden ohne signifikante Fehlerverbesserung (und bereits ausgeführten Unlock-/Fallback-Schritten) die Variante deterministisch beenden.
     - Akzeptanzkriterium: Weniger Folgerunden ohne Qualitätsgewinn in T5.16-Probeläufen; keine Regression in bestehenden AC08-Detailtests.
+
+  
+    - 2026-05-01: Validierungsloop um stabilen Frühabbruch ergänzt (`stopped_due_to_stable_non_improvement` + strukturierte `validation_abort_decision: ... reason=stable_non_improvement`). Schwellwerte sind parametrisierbar über `validation_stable_improvement_epsilon` und `validation_stable_no_improvement_rounds`; neuer Detailtest bestätigt den kontrollierten Abbruchpfad.
 
   - [ ] T5.16.D (hohe Priorität): Micro-Eval-Deduplizierung ergänzen.
     - Ziel: Wiederholte identische Kandidatenbewertung innerhalb derselben Runde per Fingerprint erkennen und überspringen.
