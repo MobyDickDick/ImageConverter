@@ -344,7 +344,20 @@ def validateBadgeByElementsImpl(
         base_cy = float(params.get("cy", 0.0))
         base_r = float(params.get("r", 0.0))
         deltas = [(0.0,0.0,0.0),(-0.5,0.0,0.0),(0.5,0.0,0.0),(0.0,-0.5,0.0),(0.0,0.5,0.0),(0.0,0.0,-0.5),(0.0,0.0,0.5)]
+        seen_fingerprints: set[tuple[float, float, float]] = set()
         def _eval_current(*, phase: str) -> float:
+            fingerprint = (
+                round(float(params.get("cx", 0.0)), 4),
+                round(float(params.get("cy", 0.0)), 4),
+                round(float(params.get("r", 0.0)), 4),
+            )
+            if fingerprint in seen_fingerprints:
+                logs.append(
+                    f"{anchor_telemetry_prefix} micro_eval_skipped_duplicate "
+                    f"phase={phase}, round={round_number}, fingerprint={fingerprint}"
+                )
+                return float("inf")
+            seen_fingerprints.add(fingerprint)
             eval_started_at = float(time_module.monotonic())
             svg = generate_badge_svg_fn(w, h, params)
             render = fit_to_original_size_fn(img_orig, render_svg_to_numpy_fn(svg, w, h))
