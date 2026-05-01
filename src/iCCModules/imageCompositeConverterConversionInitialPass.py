@@ -27,13 +27,18 @@ def runInitialConversionPassImpl(
     current_test_id = str(__import__("os").environ.get("PYTEST_CURRENT_TEST", ""))
     anchor_test_active = "test_ac08_semantic_anchor_variants_convert_without_failed_svg" in current_test_id
     seen_variants: set[str] = set()
-    for filename in process_files:
+    total_variants = max(1, len(process_files))
+    for variant_idx, filename in enumerate(process_files, start=1):
         if anchor_test_active:
             variant = str(filename).rsplit(".", 1)[0].upper()
             if variant in seen_variants:
                 print(f"[ANCHOR_DEBUG] duplicate_variant_detected name={variant} source=initial_pass", flush=True)
                 continue
             seen_variants.add(variant)
+        if anchor_test_active:
+            os_module = __import__("os")
+            os_module.environ["ICC_ANCHOR_VARIANT_IDX"] = str(variant_idx)
+            os_module.environ["ICC_ANCHOR_VARIANT_TOTAL"] = str(total_variants)
         row, failed = convert_one_fn(filename, iteration_budget=base_iterations, badge_rounds=6)
         if failed:
             stop_after_failure = True
