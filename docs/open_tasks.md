@@ -364,6 +364,34 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
   - 2026-05-01: Datenerhebung 1 nachgeschärft: `variant_done` wird jetzt konsistent über **alle** frühen Rückgabepfade (u. a. `skipped_*`, `semantic_mismatch`, Placeholder-/Render-Fehler) emittiert; zusätzlich wird `attempt_idx` über `ICC_ANCHOR_ATTEMPT_IDX` übernommen, um Mehrfachläufe eindeutig zu korrelieren.
 
   - 2026-05-01: Folge-Isolationsprobe (Run 27) mit aktueller `variant_*`/`render_probe`-Telemetrie ausgeführt (`set -o pipefail; timeout 240 python -m pytest tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_convert_without_failed_svg -vv -s --durations=0 | tee artifacts/converted_images/reports/T5_16_anchor_hang_probe_2026-05-01_run27.log`). Ergebnis erneut `EXIT:124`; diesmal sind `variant_done` für `AC0811_S` und `AC0811_M` klar sichtbar, anschließend startet `AC0811_L`, erreicht `round=2` (inkl. `circle_center_end`/`circle_radius_end`) und läuft danach ohne weiteren Variantenabschluss ins Timeout. Zusätzlich zeigen alle `render_probe_aggregate`-Blöcke weiterhin `timeouts=0` bei ~`0.63s` mittlerer Renderdauer; der Blocker liegt damit weiterhin im AC0811-L-Ablauf-/Steuerpfad statt in harten Render-Timeouts.
+  - 2026-05-01: Folge-Isolationsprobe (Run 28) mit kompaktem Repro-Befehl ausgeführt (`set -o pipefail; timeout 420 python -m pytest tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_convert_without_failed_svg -q | tee artifacts/converted_images/reports/T5_16_anchor_hang_probe_2026-05-01_run28.log`). Ergebnis weiterhin reproduzierbar `EXIT:124`; trotz erweitertem Zeitfenster kein Testabschluss. T5.16 bleibt offen und priorisiert den AC0811-L-Steuerpfad als nächsten Debug-Fokus.
+  - 2026-05-01: Optimierungsansatz umgesetzt: Für den Anchor-Telemetriepfad wurde die Budgetschwelle vor `global_search` verschärft (`required >= max(22s, 30% vom Budget)`), damit späte Runden häufiger deterministisch/mikro-basiert abschließen statt in teure Sampling-Phasen zu laufen.
+  - 2026-05-01: Folge-Isolationsprobe (Run 30) mit derselben NodeID nach Schwellenanpassung ausgeführt (`set -o pipefail; timeout 300 python -m pytest tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_convert_without_failed_svg -q | tee artifacts/converted_images/reports/T5_16_anchor_hang_probe_2026-05-01_run30.log`). Ergebnis weiterhin `EXIT:124`; Timeout bleibt reproduzierbar.
+  - 2026-05-01: Telemetrieprobe (Run 31) mit Verbose-Logs nach Schwellenanpassung ausgeführt (`set -o pipefail; timeout 180 python -m pytest tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_convert_without_failed_svg -vv -s --durations=0 | tee artifacts/converted_images/reports/T5_16_anchor_hang_probe_2026-05-01_run31.log`). Ergebnis `EXIT:124`, aber mit neuen Signalen: `micro_eval`-Phasen sind sichtbar und `render_probe_aggregate` bleibt ohne Render-Timeouts (`slow_calls_gt_1s=0`, `timeouts=0`), wodurch sich das verbleibende Potenzial auf Variantensteuerung/Abbruchkriterien statt Render-Subprozess eingrenzen lässt.
+
+  - [ ] T5.16.A (sehr hohe Priorität): Varianten-Steuerfluss vollständig instrumentieren.
+    - Ziel: Für jede Variante neben `variant_start`/`variant_done` zusätzliche Abschlussmarker pro Phase (`round_done`, `post_round_finalize_done`, `variant_finalize_done`) loggen.
+    - Akzeptanzkriterium: In einem Isolationslauf ist für jede gestartete Variante eindeutig erkennbar, welche Phase zuletzt erreicht und abgeschlossen wurde.
+
+  - [ ] T5.16.B (sehr hohe Priorität): Strukturierte Abbruchentscheidungen im Validierungsloop ergänzen.
+    - Ziel: Pro Runde maschinenlesbar loggen, warum weiter iteriert wird (`reason=improved|stagnation_retry|unlock_retry|micro_search_retry`) bzw. warum beendet wird.
+    - Akzeptanzkriterium: Lauf-Log enthält pro Runde genau einen `continue_or_stop`-Entscheidungseintrag mit Begründung und Restbudget.
+
+  - [ ] T5.16.C (hohe Priorität): Frühabbruch bei stabiler Nicht-Verbesserung implementieren.
+    - Ziel: Nach konfigurierbarer Anzahl Runden ohne signifikante Fehlerverbesserung (und bereits ausgeführten Unlock-/Fallback-Schritten) die Variante deterministisch beenden.
+    - Akzeptanzkriterium: Weniger Folgerunden ohne Qualitätsgewinn in T5.16-Probeläufen; keine Regression in bestehenden AC08-Detailtests.
+
+  - [ ] T5.16.D (hohe Priorität): Micro-Eval-Deduplizierung ergänzen.
+    - Ziel: Wiederholte identische Kandidatenbewertung innerhalb derselben Runde per Fingerprint erkennen und überspringen.
+    - Akzeptanzkriterium: Logs zeigen `micro_eval_skipped_duplicate`-Ereignisse; Render-Call-Anzahl pro Runde sinkt gegenüber Run 31.
+
+  - [ ] T5.16.E (hohe Priorität): Variantenbudget pro Anchor-Lauf einführen.
+    - Ziel: Pro Variante ein hartes Teilbudget ableiten (statt nur globalem Testbudget), damit einzelne Varianten den Gesamtabschluss nicht blockieren.
+    - Akzeptanzkriterium: Bei Budgetüberschreitung kontrollierter Variantenabschluss mit dokumentiertem Status statt Gesamttest-Timeout.
+
+  - [ ] T5.16.F (Abschlusskriterium): Reproduktionslauf ohne Timeout nachweisen und Aufgabenliste rückpflegen.
+    - Repro-Befehl: `set -o pipefail; timeout 420 python -m pytest tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_convert_without_failed_svg -vv -s --durations=0`.
+    - Akzeptanzkriterium: Test endet mit Exit `0`; T5.16 und Teilaufgaben A-E auf `[x]` setzen und Ergebnis kurz dokumentieren.
 
 
 ## Next tasks (added 2026-03-28)
