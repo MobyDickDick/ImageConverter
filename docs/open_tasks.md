@@ -392,9 +392,11 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
     - Akzeptanzkriterium: Logs zeigen `micro_eval_skipped_duplicate`-Ereignisse; Render-Call-Anzahl pro Runde sinkt gegenüber Run 31.
     - 2026-05-01: Micro-Eval-Fingerprint-Cache in `validateBadgeByElements` ergänzt (`cx/cy/r`-Fingerprint pro Runde); doppelte Kandidaten werden jetzt mit `micro_eval_skipped_duplicate` geloggt und ohne zusätzlichen Render-Call übersprungen.
 
-  - [ ] T5.16.E (hohe Priorität): Variantenbudget pro Anchor-Lauf einführen.
+  - [x] T5.16.E (hohe Priorität): Variantenbudget pro Anchor-Lauf einführen.
     - Ziel: Pro Variante ein hartes Teilbudget ableiten (statt nur globalem Testbudget), damit einzelne Varianten den Gesamtabschluss nicht blockieren.
     - Akzeptanzkriterium: Bei Budgetüberschreitung kontrollierter Variantenabschluss mit dokumentiertem Status statt Gesamttest-Timeout.
+
+    - 2026-05-01: In `validateBadgeByElementsImpl` ein hartes Varianten-Teilbudget für den Anchor-Telemetriepfad umgesetzt (`variant_budget_sec = max(20.0, configured_budget / variant_total)`), inkl. `variant_budget`-Logevent pro Variante; Budgetüberschreitungen führen nun zu kontrolliertem Variantenabbruch via `validation_time_budget_exceeded` statt ungebremstem Gesamtlauf.
 
   - [ ] T5.16.F (Abschlusskriterium): Reproduktionslauf ohne Timeout nachweisen und Aufgabenliste rückpflegen.
     - Repro-Befehl: `set -o pipefail; timeout 420 python -m pytest tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_convert_without_failed_svg -vv -s --durations=0`.
