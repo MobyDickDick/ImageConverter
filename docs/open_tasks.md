@@ -339,6 +339,8 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
     - Reproduktion: `timeout 300 python -m pytest tests/test_image_composite_converter.py::test_validate_badge_by_elements_activates_ac08_adaptive_unlocks_on_stagnation -vv`
     - Ziel: reproduzierbaren Abschluss mit dokumentiertem Exit-Code (`0` oder kontrollierter Timeout `124`) und klarer Ursachenhypothese in den Run-Notizen festhalten.
     - 2026-04-29: Reproduktion mit `timeout 300 python -m pytest tests/test_image_composite_converter.py::test_validate_badge_by_elements_activates_ac08_adaptive_unlocks_on_stagnation -vv` erfolgreich abgeschlossen; Test endet reproduzierbar mit Exit `0` (`1 passed`, `129.96s`). Log: `artifacts/converted_images/reports/T5_13_hanger_test_2026-04-29.log`.
+  - 2026-05-01: T5.16-Folgeprobe des Kandidaten `test_validate_badge_by_elements_activates_ac08_adaptive_unlocks_on_stagnation` mit `timeout 300 ... -vv` durchgeführt; Log: `artifacts/converted_images/reports/T5_16_adaptive_unlock_probe_2026-05-01.log`, Ergebnis `EXIT:0` (`1 passed in 52.38s`), daher aktuell kein Hänger-Root-Cause.
+
 
 ## Next tasks (added 2026-03-28)
 
