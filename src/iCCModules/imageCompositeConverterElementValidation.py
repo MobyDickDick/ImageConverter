@@ -410,6 +410,9 @@ def validateBadgeByElementsImpl(
     best_full_err = float("inf")
     previous_round_state: tuple[tuple[tuple[str, float], ...], float] | None = None
     fallback_search_active = False
+    stable_no_improvement_rounds = 0
+    stable_improvement_epsilon = float(params.get("validation_stable_improvement_epsilon", 0.02) or 0.02)
+    stable_no_improvement_limit = int(params.get("validation_stable_no_improvement_rounds", 2) or 2)
     if bool(params.get("ac08_small_variant_mode", False)):
         logs.append(
             "small_variant_mode_active: "
@@ -689,9 +692,42 @@ def validateBadgeByElementsImpl(
         full_render = fit_to_original_size_fn(img_orig, render_svg_to_numpy_fn(full_svg, w, h))
         full_err = calculate_error_fn(img_orig, full_render)
         logs.append(f"Runde {round_idx + 1}: Gesamtfehler={full_err:.3f}")
+        previous_best_err = best_full_err
+        improved_this_round = False
         if math_module.isfinite(full_err) and full_err < best_full_err:
             best_full_err = full_err
             best_params = copy_module.deepcopy(params)
+            improved_this_round = (not math_module.isfinite(previous_best_err)) or ((previous_best_err - full_err) > stable_improvement_epsilon)
+
+        if (fallback_search_active or bool(params.get("ac08_adaptive_unlock_applied", False))) and stable_no_improvement_limit > 0:
+            if improved_this_round:
+                stable_no_improvement_rounds = 0
+            else:
+                stable_no_improvement_rounds += 1
+            logs.append(
+                "stable_improvement_probe: "
+                f"round={round_idx + 1}, improved={str(improved_this_round).lower()}, "
+                f"count={stable_no_improvement_rounds}/{stable_no_improvement_limit}, "
+                f"eps={stable_improvement_epsilon:.4f}"
+            )
+            if stable_no_improvement_rounds >= stable_no_improvement_limit and round_idx + 1 < max_rounds:
+                logs.append(
+                    "stopped_due_to_stable_non_improvement: "
+                    f"count={stable_no_improvement_rounds}, limit={stable_no_improvement_limit}, "
+                    f"eps={stable_improvement_epsilon:.4f}"
+                )
+                _log_abort_decision(
+                    "round_loop",
+                    "stable_non_improvement",
+                    round=round_idx + 1,
+                    count=stable_no_improvement_rounds,
+                    limit=stable_no_improvement_limit,
+                    eps=f"{stable_improvement_epsilon:.4f}",
+                    error=f"{full_err:.3f}",
+                )
+                break
+        else:
+            stable_no_improvement_rounds = 0
 
         current_round_state = (_stagnationFingerprint(params), round(float(full_err), 6))
         if previous_round_state is not None:
