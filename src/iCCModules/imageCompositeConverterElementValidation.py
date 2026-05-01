@@ -443,6 +443,12 @@ def validateBadgeByElementsImpl(
             fingerprint.append((key, round(numeric_value, 4)))
         return tuple(fingerprint)
 
+
+    def _log_abort_decision(stage: str, reason: str, **fields: object) -> None:
+        payload = ", ".join(f"{k}={fields[k]}" for k in sorted(fields))
+        suffix = f", {payload}" if payload else ""
+        logs.append(f"validation_abort_decision: stage={stage}, reason={reason}{suffix}")
+
     def _applyAdaptiveSearchCorridor(current_params: dict) -> bool:
         if "cx" not in current_params or "cy" not in current_params:
             return False
@@ -634,6 +640,7 @@ def validateBadgeByElementsImpl(
             logs.append(
                 f"{anchor_telemetry_prefix} round_truncated_due_to_budget round={round_idx + 1} remaining={remaining_budget:.2f}s"
             )
+            _log_abort_decision("round_loop", "remaining_budget_too_low", round=round_idx + 1, remaining=f"{remaining_budget:.2f}")
             break
 
         # The global vector sampling step is the single most expensive operation
@@ -723,12 +730,14 @@ def validateBadgeByElementsImpl(
                     previous_round_state = current_round_state
                     continue
                 logs.append("stopped_due_to_stagnation: Validierung vorzeitig beendet")
+                _log_abort_decision("round_loop", "stagnation_identical_fingerprint", round=round_idx + 1, error=f"{full_err:.3f}")
                 break
         previous_round_state = current_round_state
 
         if full_err <= 8.0:
             if stop_when_error_below_threshold:
                 logs.append("Gesamtfehler unter Schwellwert, Validierung beendet")
+                _log_abort_decision("round_loop", "error_below_threshold", round=round_idx + 1, error=f"{full_err:.3f}")
                 break
             logs.append("Gesamtfehler unter Schwellwert, Suche nach besserem Optimum wird fortgesetzt")
         elif round_idx >= 1:
@@ -774,6 +783,7 @@ def validateBadgeByElementsImpl(
                 )
                 continue
             logs.append("stopped_due_to_stagnation: keine weitere Parameterbewegung erkennbar")
+            _log_abort_decision("round_loop", "stagnation_no_geometry_movement", round=round_idx + 1, error=f"{full_err:.3f}")
             break
 
         if is_anchor_telemetry_test:
