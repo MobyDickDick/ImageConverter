@@ -776,6 +776,15 @@ def validateBadgeByElementsImpl(
             logs.append("stopped_due_to_stagnation: keine weitere Parameterbewegung erkennbar")
             break
 
+        if is_anchor_telemetry_test:
+            logs.append(
+                f"{anchor_telemetry_prefix} PHASE round_done round={round_idx + 1} "
+                f"changed={str(round_changed).lower()} status=in_progress"
+            )
+
+    if is_anchor_telemetry_test:
+        logs.append(f"{anchor_telemetry_prefix} PHASE post_round_finalize_start")
+
     phase2_released = release_ac08_adaptive_locks_fn(
         params,
         logs,
@@ -800,6 +809,8 @@ def validateBadgeByElementsImpl(
         logs.append(f"phase2_rollback: {'yes' if rollback_applied else 'no'}")
     else:
         logs.append("phase2_rollback: no")
+    if is_anchor_telemetry_test:
+        logs.append(f"{anchor_telemetry_prefix} PHASE post_round_finalize_done")
 
     remaining_budget = _remaining_budget_seconds()
     min_required_for_final_color_pass = max(10.0, 0.12 * configured_budget) if configured_budget > 0.0 else 0.0
@@ -904,6 +915,7 @@ def validateBadgeByElementsImpl(
             )
 
     if is_anchor_telemetry_test:
+        logs.append(f"{anchor_telemetry_prefix} PHASE validation_finalize_done")
         elapsed = float(time_module.monotonic()) - validation_started_at
         logs.append(f"{anchor_telemetry_prefix} END elapsed={elapsed:.2f}s")
 

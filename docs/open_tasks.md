@@ -369,9 +369,10 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
   - 2026-05-01: Folge-Isolationsprobe (Run 30) mit derselben NodeID nach Schwellenanpassung ausgeführt (`set -o pipefail; timeout 300 python -m pytest tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_convert_without_failed_svg -q | tee artifacts/converted_images/reports/T5_16_anchor_hang_probe_2026-05-01_run30.log`). Ergebnis weiterhin `EXIT:124`; Timeout bleibt reproduzierbar.
   - 2026-05-01: Telemetrieprobe (Run 31) mit Verbose-Logs nach Schwellenanpassung ausgeführt (`set -o pipefail; timeout 180 python -m pytest tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_convert_without_failed_svg -vv -s --durations=0 | tee artifacts/converted_images/reports/T5_16_anchor_hang_probe_2026-05-01_run31.log`). Ergebnis `EXIT:124`, aber mit neuen Signalen: `micro_eval`-Phasen sind sichtbar und `render_probe_aggregate` bleibt ohne Render-Timeouts (`slow_calls_gt_1s=0`, `timeouts=0`), wodurch sich das verbleibende Potenzial auf Variantensteuerung/Abbruchkriterien statt Render-Subprozess eingrenzen lässt.
 
-  - [ ] T5.16.A (sehr hohe Priorität): Varianten-Steuerfluss vollständig instrumentieren.
+  - [x] T5.16.A (sehr hohe Priorität): Varianten-Steuerfluss vollständig instrumentieren.
     - Ziel: Für jede Variante neben `variant_start`/`variant_done` zusätzliche Abschlussmarker pro Phase (`round_done`, `post_round_finalize_done`, `variant_finalize_done`) loggen.
     - Akzeptanzkriterium: In einem Isolationslauf ist für jede gestartete Variante eindeutig erkennbar, welche Phase zuletzt erreicht und abgeschlossen wurde.
+    - 2026-05-01: `validateBadgeByElements` ergänzt jetzt im Anchor-Telemetriepfad die Phasenmarker `round_done`, `post_round_finalize_start`, `post_round_finalize_done` und `validation_finalize_done`; damit ist die letzte erreichte Abschlussphase pro Variante im Log klar nachvollziehbar.
 
   - [ ] T5.16.B (sehr hohe Priorität): Strukturierte Abbruchentscheidungen im Validierungsloop ergänzen.
     - Ziel: Pro Runde maschinenlesbar loggen, warum weiter iteriert wird (`reason=improved|stagnation_retry|unlock_retry|micro_search_retry`) bzw. warum beendet wird.
