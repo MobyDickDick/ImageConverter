@@ -266,6 +266,28 @@ def validateBadgeByElementsImpl(
         logs.append(message)
         print(f"[ANCHOR_DEBUG] {message}", flush=True)
 
+    def _snapshot_anchor_state() -> str:
+        keys = (
+            "cx",
+            "cy",
+            "r",
+            "arm_len",
+            "stem_width",
+            "arm_stroke",
+            "text_scale",
+            "co2_font_scale",
+            "voc_scale",
+        )
+        parts: list[str] = []
+        for key in keys:
+            value = params.get(key)
+            try:
+                numeric_value = float(value)
+            except (TypeError, ValueError):
+                continue
+            parts.append(f"{key}={numeric_value:.3f}")
+        return ", ".join(parts) if parts else "no_numeric_state"
+
     def _time_budget_exceeded() -> bool:
         if configured_budget <= 0.0:
             return False
@@ -322,21 +344,31 @@ def validateBadgeByElementsImpl(
         base_cy = float(params.get("cy", 0.0))
         base_r = float(params.get("r", 0.0))
         deltas = [(0.0,0.0,0.0),(-0.5,0.0,0.0),(0.5,0.0,0.0),(0.0,-0.5,0.0),(0.0,0.5,0.0),(0.0,0.0,-0.5),(0.0,0.0,0.5)]
-        def _eval_current() -> float:
+        def _eval_current(*, phase: str) -> float:
+            eval_started_at = float(time_module.monotonic())
             svg = generate_badge_svg_fn(w, h, params)
             render = fit_to_original_size_fn(img_orig, render_svg_to_numpy_fn(svg, w, h))
             if render is None:
+                _emit_anchor_debug(
+                    f"{anchor_telemetry_prefix} micro_eval phase={phase}, elapsed="
+                    f"{(float(time_module.monotonic()) - eval_started_at):.2f}s, render=none"
+                )
                 return float('inf')
-            return float(calculate_error_fn(img_orig, render))
-        best_err = _eval_current()
+            err = float(calculate_error_fn(img_orig, render))
+            _emit_anchor_debug(
+                f"{anchor_telemetry_prefix} micro_eval phase={phase}, elapsed="
+                f"{(float(time_module.monotonic()) - eval_started_at):.2f}s, err={err:.3f}"
+            )
+            return err
+        best_err = _eval_current(phase="baseline")
         best = (base_cx, base_cy, base_r)
-        for dcx, dcy, dr in deltas[1:]:
+        for step_idx, (dcx, dcy, dr) in enumerate(deltas[1:], start=1):
             _maybe_anchor_heartbeat(phase="micro_search", round_number=round_number)
             cand_cx = base_cx if lock_circle_cx else (base_cx + dcx)
             cand_cy = base_cy if lock_circle_cy else (base_cy + dcy)
             cand_r = max(0.5, base_r + dr)
             params["cx"], params["cy"], params["r"] = cand_cx, cand_cy, cand_r
-            cand_err = _eval_current()
+            cand_err = _eval_current(phase=f"candidate_{step_idx}")
             if cand_err < best_err:
                 best_err = cand_err
                 best = (cand_cx, cand_cy, cand_r)
@@ -442,7 +474,13 @@ def validateBadgeByElementsImpl(
             _raise_time_budget_exceeded(phase="round_start", round_number=round_idx + 1)
         logs.append(f"Runde {round_idx + 1}: elementweise Validierung gestartet")
         full_svg = generate_badge_svg_fn(w, h, params)
+        full_render_started_at = float(time_module.monotonic())
         full_render = fit_to_original_size_fn(img_orig, render_svg_to_numpy_fn(full_svg, w, h))
+        if is_anchor_telemetry_test:
+            _emit_anchor_debug(
+                f"{anchor_telemetry_prefix} full_render round={round_idx + 1}, elapsed="
+                f"{(float(time_module.monotonic()) - full_render_started_at):.2f}s, state={_snapshot_anchor_state()}"
+            )
         if full_render is None:
             logs.append("Abbruch: SVG konnte nicht gerendert werden")
             break
@@ -463,7 +501,13 @@ def validateBadgeByElementsImpl(
                     element=element,
                 )
             elem_svg = generate_badge_svg_fn(w, h, element_only_params_fn(params, element))
+            elem_render_started_at = float(time_module.monotonic())
             elem_render = fit_to_original_size_fn(img_orig, render_svg_to_numpy_fn(elem_svg, w, h))
+            if is_anchor_telemetry_test:
+                _emit_anchor_debug(
+                    f"{anchor_telemetry_prefix} element_render round={round_idx + 1}, element={element}, elapsed="
+                    f"{(float(time_module.monotonic()) - elem_render_started_at):.2f}s, state={_snapshot_anchor_state()}"
+                )
             if elem_render is None:
                 logs.append(f"{element}: Element-SVG konnte nicht gerendert werden")
                 continue
