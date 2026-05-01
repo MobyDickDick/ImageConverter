@@ -589,10 +589,41 @@ def validateBadgeByElementsImpl(
 
             circle_geometry_penalty_active = apply_circle_geometry_penalty and not fallback_search_active
             if element == "circle" and circle_geometry_penalty_active:
+                if is_anchor_telemetry_test:
+                    _emit_anchor_debug(
+                        f"{anchor_telemetry_prefix} circle_center_start round={round_idx + 1}, "
+                        f"remaining={_remaining_budget_seconds():.2f}s, state={_snapshot_anchor_state()}"
+                    )
+                circle_center_started_at = float(time_module.monotonic())
                 center_changed = optimize_circle_center_bracket_fn(img_orig, params, logs)
+                circle_center_elapsed = float(time_module.monotonic()) - circle_center_started_at
+                logs.append(
+                    f"perf_probe: circle_center_elapsed round={round_idx + 1} elapsed={circle_center_elapsed:.2f}s"
+                )
+                if is_anchor_telemetry_test:
+                    _emit_anchor_debug(
+                        f"{anchor_telemetry_prefix} circle_center_end round={round_idx + 1}, elapsed="
+                        f"{circle_center_elapsed:.2f}s, remaining={_remaining_budget_seconds():.2f}s"
+                    )
                 if center_changed:
                     round_changed = True
+
+                if is_anchor_telemetry_test:
+                    _emit_anchor_debug(
+                        f"{anchor_telemetry_prefix} circle_radius_start round={round_idx + 1}, "
+                        f"remaining={_remaining_budget_seconds():.2f}s, state={_snapshot_anchor_state()}"
+                    )
+                circle_radius_started_at = float(time_module.monotonic())
                 radius_changed = optimize_circle_radius_bracket_fn(img_orig, params, logs)
+                circle_radius_elapsed = float(time_module.monotonic()) - circle_radius_started_at
+                logs.append(
+                    f"perf_probe: circle_radius_elapsed round={round_idx + 1} elapsed={circle_radius_elapsed:.2f}s"
+                )
+                if is_anchor_telemetry_test:
+                    _emit_anchor_debug(
+                        f"{anchor_telemetry_prefix} circle_radius_end round={round_idx + 1}, elapsed="
+                        f"{circle_radius_elapsed:.2f}s, remaining={_remaining_budget_seconds():.2f}s"
+                    )
                 if radius_changed:
                     round_changed = True
             if is_anchor_telemetry_test:
