@@ -236,6 +236,19 @@ def convertOneImpl(
     svg_path = os.path.join(svg_out_dir, f"{base}.svg")
     diff_path = os.path.join(diff_out_dir, f"{base}_diff.png")
     log_file = os.path.join(reports_out_dir, f"{base}_element_validation.log")
+    current_test_id = str(os.environ.get("PYTEST_CURRENT_TEST", ""))
+    anchor_test_active = "test_ac08_semantic_anchor_variants_convert_without_failed_svg" in current_test_id
+    attempt_idx = int(os.environ.get("ICC_ANCHOR_ATTEMPT_IDX", "1") or "1")
+
+    def _emit_anchor_variant_event(event: str, **fields: object) -> None:
+        if not anchor_test_active:
+            return
+        extras = " ".join(f"{key}={value}" for key, value in fields.items())
+        suffix = f" {extras}" if extras else ""
+        print_fn(f"[ANCHOR_DEBUG] {event} name={base}{suffix}")
+
+    if anchor_test_active:
+        _emit_anchor_variant_event("variant_start", attempt_idx=attempt_idx)
     try:
         with _wallClockTimeout(run_timeout_sec):
             res = run_iteration_pipeline_fn(
@@ -292,6 +305,7 @@ def convertOneImpl(
             diff_path=diff_path,
         )
         print_fn(f"[WARN] {filename}: Batchlauf setzt nach Fehler fort ({type(exc).__name__}: {exc})")
+        _emit_anchor_variant_event("variant_done", status="exception", reason=type(exc).__name__)
         return None, True
     if not res:
         details = read_validation_log_details_fn(log_file)
@@ -319,6 +333,7 @@ def convertOneImpl(
                 diff_path=diff_path,
             )
             print_fn(f"[WARN] {filename}: Fehler protokolliert, Batchlauf wird fortgesetzt ({status}).")
+            _emit_anchor_variant_event("variant_done", status=status or "render_failure")
             return None, True
         if status == "semantic_mismatch":
             failed_svg_path = _writeFailedEmbeddedSvgArtifact(
@@ -343,6 +358,7 @@ def convertOneImpl(
                 diff_path=diff_path,
             )
             print_fn(f"[WARN] {filename}: Semantischer Fehlmatch, Batchlauf stoppt nach diesem Fehler.")
+            _emit_anchor_variant_event("variant_done", status="semantic_mismatch")
             return None, True
         if status.startswith("skipped_"):
             _ensureEmbeddedSvgAtPath(
@@ -357,6 +373,7 @@ def convertOneImpl(
                 svg_path=svg_path,
             )
             _ensureOutputArtifacts(svg_path=svg_path, diff_path=diff_path, create_svg_fallback=False)
+            _emit_anchor_variant_event("variant_done", status=status)
             return None, False
 
         failed_svg_path = _writeFailedEmbeddedSvgArtifact(
@@ -407,6 +424,7 @@ def convertOneImpl(
             },
             print_fn=print_fn,
         )
+        _emit_anchor_variant_event("variant_done", status=failure_status)
         return None, True
 
     _base, _desc, params, best_iter, best_error = res
@@ -425,6 +443,7 @@ def convertOneImpl(
             svg_path=svg_path,
         )
         _ensureOutputArtifacts(svg_path=svg_path, diff_path=diff_path, create_svg_fallback=False)
+        _emit_anchor_variant_event("variant_done", status=status)
         return None, False
     svg_path = _normalizeSvgToFailedPrefixIfRasterArtifact(
         svg_out_dir=svg_out_dir,
@@ -444,6 +463,7 @@ def convertOneImpl(
         )
         _ensureOutputArtifacts(svg_path=svg_path, diff_path=diff_path)
         print_fn(f"[WARN] {filename}: Triviale 1x1-Placeholder-SVG erkannt, als fehlgeschlagen markiert.")
+        _emit_anchor_variant_event("variant_done", status="poor_conversion_placeholder_svg")
         return None, True
     img = cv2_module.imread(image_path)
     pixel_count = 1.0
@@ -501,4 +521,5 @@ def convertOneImpl(
         },
         print_fn=print_fn,
     )
+    _emit_anchor_variant_event("variant_done", status="ok")
     return row, False
