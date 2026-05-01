@@ -374,11 +374,13 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
     - Akzeptanzkriterium: In einem Isolationslauf ist für jede gestartete Variante eindeutig erkennbar, welche Phase zuletzt erreicht und abgeschlossen wurde.
     - 2026-05-01: `validateBadgeByElements` ergänzt jetzt im Anchor-Telemetriepfad die Phasenmarker `round_done`, `post_round_finalize_start`, `post_round_finalize_done` und `validation_finalize_done`; damit ist die letzte erreichte Abschlussphase pro Variante im Log klar nachvollziehbar.
 
-  - [ ] T5.16.B (sehr hohe Priorität): Strukturierte Abbruchentscheidungen im Validierungsloop ergänzen.
+  - [x] T5.16.B (sehr hohe Priorität): Strukturierte Abbruchentscheidungen im Validierungsloop ergänzen.
     - Ziel: Pro Runde maschinenlesbar loggen, warum weiter iteriert wird (`reason=improved|stagnation_retry|unlock_retry|micro_search_retry`) bzw. warum beendet wird.
     - Akzeptanzkriterium: Lauf-Log enthält pro Runde genau einen `continue_or_stop`-Entscheidungseintrag mit Begründung und Restbudget.
 
-  - [ ] T5.16.C (hohe Priorität): Frühabbruch bei stabiler Nicht-Verbesserung implementieren.
+  
+  - 2026-05-01: Validierungsloop ergänzt um strukturierte `validation_abort_decision`-Logevents (u. a. für Budget- und Stagnationsabbrüche sowie Schwellwert-Stopp), damit T5.16-Probeläufe maschinenlesbar auswertbar sind.
+- [ ] T5.16.C (hohe Priorität): Frühabbruch bei stabiler Nicht-Verbesserung implementieren.
     - Ziel: Nach konfigurierbarer Anzahl Runden ohne signifikante Fehlerverbesserung (und bereits ausgeführten Unlock-/Fallback-Schritten) die Variante deterministisch beenden.
     - Akzeptanzkriterium: Weniger Folgerunden ohne Qualitätsgewinn in T5.16-Probeläufen; keine Regression in bestehenden AC08-Detailtests.
 
