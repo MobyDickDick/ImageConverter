@@ -363,6 +363,8 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
   - 2026-05-01: T5.16-Datenerhebung 1 weiter umgesetzt: `convertOneImpl` emittiert im Anchor-Regressionstest jetzt explizite `variant_start`-/`variant_done`-Events inklusive `name`, `attempt_idx` und finalem Status (`ok`, `exception`, Fehlerstatus), damit pro Variante klar erkennbar ist, ob der Variantenlauf abgeschlossen wurde oder im Ablauf hängen bleibt.
   - 2026-05-01: Datenerhebung 1 nachgeschärft: `variant_done` wird jetzt konsistent über **alle** frühen Rückgabepfade (u. a. `skipped_*`, `semantic_mismatch`, Placeholder-/Render-Fehler) emittiert; zusätzlich wird `attempt_idx` über `ICC_ANCHOR_ATTEMPT_IDX` übernommen, um Mehrfachläufe eindeutig zu korrelieren.
 
+  - 2026-05-01: Folge-Isolationsprobe (Run 27) mit aktueller `variant_*`/`render_probe`-Telemetrie ausgeführt (`set -o pipefail; timeout 240 python -m pytest tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_convert_without_failed_svg -vv -s --durations=0 | tee artifacts/converted_images/reports/T5_16_anchor_hang_probe_2026-05-01_run27.log`). Ergebnis erneut `EXIT:124`; diesmal sind `variant_done` für `AC0811_S` und `AC0811_M` klar sichtbar, anschließend startet `AC0811_L`, erreicht `round=2` (inkl. `circle_center_end`/`circle_radius_end`) und läuft danach ohne weiteren Variantenabschluss ins Timeout. Zusätzlich zeigen alle `render_probe_aggregate`-Blöcke weiterhin `timeouts=0` bei ~`0.63s` mittlerer Renderdauer; der Blocker liegt damit weiterhin im AC0811-L-Ablauf-/Steuerpfad statt in harten Render-Timeouts.
+
 
 ## Next tasks (added 2026-03-28)
 
