@@ -13,6 +13,13 @@ import time
 
 _INPROCESS_RENDER_COUNT = 0
 _INPROCESS_GC_PERIOD = 25
+_SUBPROCESS_RENDER_CALL_ID = 0
+_SUBPROCESS_RENDER_AGG = {
+    "calls": 0,
+    "slow_calls": 0,
+    "timeouts": 0,
+    "elapsed_sum": 0.0,
+}
 
 
 def render_svg_to_numpy_inprocess(
@@ -82,6 +89,12 @@ def render_svg_to_numpy_via_subprocess(
         ensure_ascii=False,
     ).encode("utf-8")
     cmd = [sys.executable, "-m", "src.imageCompositeConverter", "--_render-svg-subprocess"]
+    anchor_test_active = "test_ac08_semantic_anchor_variants_convert_without_failed_svg" in str(
+        os.environ.get("PYTEST_CURRENT_TEST", "")
+    )
+    global _SUBPROCESS_RENDER_CALL_ID
+    _SUBPROCESS_RENDER_CALL_ID += 1
+    call_id = int(_SUBPROCESS_RENDER_CALL_ID)
     debug_render_timeout = (
         os.environ.get("ICC_DEBUG_RENDER_TIMEOUT", "").strip().lower() in {"1", "true", "yes", "on"}
         or "pytest" in sys.modules
@@ -97,8 +110,11 @@ def render_svg_to_numpy_via_subprocess(
             timeout=timeout_sec,
         )
     except subprocess.TimeoutExpired:
+        elapsed = time.monotonic() - started
+        _SUBPROCESS_RENDER_AGG["calls"] += 1
+        _SUBPROCESS_RENDER_AGG["timeouts"] += 1
+        _SUBPROCESS_RENDER_AGG["elapsed_sum"] += float(elapsed)
         if debug_render_timeout:
-            elapsed = time.monotonic() - started
             print(
                 (
                     "[ICC_RENDER_TIMEOUT] render subprocess exceeded timeout "
@@ -107,9 +123,37 @@ def render_svg_to_numpy_via_subprocess(
                 file=sys.stderr,
                 flush=True,
             )
+        if anchor_test_active:
+            print(
+                "[ANCHOR_DEBUG] render_probe "
+                f"call_id={call_id} status=timeout timeout_sec={timeout_sec:.2f} "
+                f"size={size_w}x{size_h} payload_bytes={len(payload)} elapsed={elapsed:.2f}s",
+                flush=True,
+            )
         return None
     except Exception:
         return None
+    elapsed = time.monotonic() - started
+    _SUBPROCESS_RENDER_AGG["calls"] += 1
+    _SUBPROCESS_RENDER_AGG["elapsed_sum"] += float(elapsed)
+    if elapsed > 1.0:
+        _SUBPROCESS_RENDER_AGG["slow_calls"] += 1
+    if anchor_test_active:
+        print(
+            "[ANCHOR_DEBUG] render_probe "
+            f"call_id={call_id} status=done returncode={completed.returncode} timeout_sec={timeout_sec:.2f} "
+            f"size={size_w}x{size_h} payload_bytes={len(payload)} elapsed={elapsed:.2f}s",
+            flush=True,
+        )
+    if _SUBPROCESS_RENDER_AGG["calls"] % 25 == 0 and anchor_test_active:
+        calls = int(_SUBPROCESS_RENDER_AGG["calls"])
+        mean_elapsed = float(_SUBPROCESS_RENDER_AGG["elapsed_sum"]) / float(max(1, calls))
+        print(
+            "[ANCHOR_DEBUG] render_probe_aggregate "
+            f"calls={calls} slow_calls_gt_1s={int(_SUBPROCESS_RENDER_AGG['slow_calls'])} "
+            f"timeouts={int(_SUBPROCESS_RENDER_AGG['timeouts'])} mean_elapsed={mean_elapsed:.2f}s",
+            flush=True,
+        )
     if completed.returncode != 0 or not completed.stdout:
         return None
     try:
