@@ -1,0 +1,20 @@
+[INFO] Schreibe Konsolen-Output nach: /workspace/ImageConverter/imageCompositeConverter.local.log
+
+--- Verarbeite AC0800_L.jpg ---
+Bildbeschreibung: Grauer Kreis mit grauem Rand und hellgrauem Hintergrund
+Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe
+
+--- Verarbeite AC0800_M.jpg ---
+Bildbeschreibung: Grauer Kreis mit grauem Rand und hellgrauem Hintergrund
+Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe
+
+--- Verarbeite AC0800_S.jpg ---
+Bildbeschreibung: Grauer Kreis mit grauem Rand und hellgrauem Hintergrund
+Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe
+
+--- Verarbeite AC0811_L.jpg ---
+Bildbeschreibung: Kelle, ohne Text Kreis oben, Griff nach unten (dunkelgraue Liine)
+Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe, SEMANTIC: senkrechter Strich hinter dem Kreis
+[WARN] AC0811_L.jpg: Batchlauf setzt nach Fehler fort (TimeoutError: validation_time_budget_exceeded: phase=element_loop, round=2, elapsed=20.74s, budget=18.00s, element=stem)
+
+Abgeschlossen! Ausgaben unter: /tmp/imageconverter_runBJ
