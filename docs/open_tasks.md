@@ -387,9 +387,10 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
   
     - 2026-05-01: Validierungsloop um stabilen Frühabbruch ergänzt (`stopped_due_to_stable_non_improvement` + strukturierte `validation_abort_decision: ... reason=stable_non_improvement`). Schwellwerte sind parametrisierbar über `validation_stable_improvement_epsilon` und `validation_stable_no_improvement_rounds`; neuer Detailtest bestätigt den kontrollierten Abbruchpfad.
 
-  - [ ] T5.16.D (hohe Priorität): Micro-Eval-Deduplizierung ergänzen.
+  - [x] T5.16.D (hohe Priorität): Micro-Eval-Deduplizierung ergänzen.
     - Ziel: Wiederholte identische Kandidatenbewertung innerhalb derselben Runde per Fingerprint erkennen und überspringen.
     - Akzeptanzkriterium: Logs zeigen `micro_eval_skipped_duplicate`-Ereignisse; Render-Call-Anzahl pro Runde sinkt gegenüber Run 31.
+    - 2026-05-01: Micro-Eval-Fingerprint-Cache in `validateBadgeByElements` ergänzt (`cx/cy/r`-Fingerprint pro Runde); doppelte Kandidaten werden jetzt mit `micro_eval_skipped_duplicate` geloggt und ohne zusätzlichen Render-Call übersprungen.
 
   - [ ] T5.16.E (hohe Priorität): Variantenbudget pro Anchor-Lauf einführen.
     - Ziel: Pro Variante ein hartes Teilbudget ableiten (statt nur globalem Testbudget), damit einzelne Varianten den Gesamtabschluss nicht blockieren.
