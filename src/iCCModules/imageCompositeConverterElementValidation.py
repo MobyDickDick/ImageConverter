@@ -256,8 +256,24 @@ def validateBadgeByElementsImpl(
                 # adding meaningful signal for this smoke-style assertion.
                 configured_budget = min(configured_budget, 90.0)
 
+    variant_budget_sec = configured_budget
+    if is_anchor_telemetry_test and configured_budget > 0.0:
+        try:
+            variant_idx = int(os_module.environ.get("ICC_ANCHOR_VARIANT_IDX", "1") or "1")
+            variant_total = max(1, int(os_module.environ.get("ICC_ANCHOR_VARIANT_TOTAL", "1") or "1"))
+        except ValueError:
+            variant_idx = 1
+            variant_total = 1
+        # Hard per-variant cap for anchor-run stability: each variant receives
+        # only its proportional share of the configured per-validation budget.
+        variant_budget_sec = max(20.0, configured_budget / float(variant_total))
+        logs.append(
+            f"{anchor_telemetry_prefix} variant_budget idx={variant_idx}/{variant_total} "
+            f"allocated={variant_budget_sec:.2f}s source_budget={configured_budget:.2f}s"
+        )
+
     if is_anchor_telemetry_test:
-        logs.append(f"{anchor_telemetry_prefix} START budget={configured_budget:.2f}s max_rounds={int(max_rounds)}")
+        logs.append(f"{anchor_telemetry_prefix} START budget={variant_budget_sec:.2f}s max_rounds={int(max_rounds)}")
         params.setdefault("circle_center_bracket_iterations", 3)
 
     def _emit_anchor_debug(message: str) -> None:
@@ -291,24 +307,24 @@ def validateBadgeByElementsImpl(
     def _time_budget_exceeded() -> bool:
         if configured_budget <= 0.0:
             return False
-        return (float(time_module.monotonic()) - validation_started_at) >= configured_budget
+        return (float(time_module.monotonic()) - validation_started_at) >= variant_budget_sec
 
     def _raise_time_budget_exceeded(*, phase: str, round_number: int, element: str | None = None) -> None:
         elapsed = float(time_module.monotonic()) - validation_started_at
         detail = f", element={element}" if element else ""
         _emit_anchor_debug(
             f"{anchor_telemetry_prefix} TIMEOUT phase={phase}, round={round_number}, "
-            f"elapsed={elapsed:.2f}s, budget={configured_budget:.2f}s{detail}"
+            f"elapsed={elapsed:.2f}s, budget={variant_budget_sec:.2f}s{detail}"
         )
         raise TimeoutError(
             "validation_time_budget_exceeded: "
-            f"phase={phase}, round={round_number}, elapsed={elapsed:.2f}s, budget={configured_budget:.2f}s{detail}"
+            f"phase={phase}, round={round_number}, elapsed={elapsed:.2f}s, budget={variant_budget_sec:.2f}s{detail}"
         )
 
     def _remaining_budget_seconds() -> float:
         if configured_budget <= 0.0:
             return float("inf")
-        return max(0.0, configured_budget - (float(time_module.monotonic()) - validation_started_at))
+        return max(0.0, variant_budget_sec - (float(time_module.monotonic()) - validation_started_at))
 
 
     heartbeat_interval_sec = 10.0
