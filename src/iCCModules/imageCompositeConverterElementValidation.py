@@ -473,6 +473,11 @@ def validateBadgeByElementsImpl(
         if _time_budget_exceeded():
             _raise_time_budget_exceeded(phase="round_start", round_number=round_idx + 1)
         logs.append(f"Runde {round_idx + 1}: elementweise Validierung gestartet")
+        if configured_budget > 0.0:
+            logs.append(
+                f"budget_snapshot: round={round_idx + 1}, remaining={_remaining_budget_seconds():.2f}s, "
+                f"total={configured_budget:.2f}s"
+            )
         full_svg = generate_badge_svg_fn(w, h, params)
         full_render_started_at = float(time_module.monotonic())
         full_render = fit_to_original_size_fn(img_orig, render_svg_to_numpy_fn(full_svg, w, h))
@@ -500,13 +505,25 @@ def validateBadgeByElementsImpl(
                     round_number=round_idx + 1,
                     element=element,
                 )
+            remaining_for_element = _remaining_budget_seconds()
+            conservative_mode = (
+                is_anchor_telemetry_test
+                and configured_budget > 0.0
+                and remaining_for_element < max(20.0, 0.25 * configured_budget)
+            )
             elem_svg = generate_badge_svg_fn(w, h, element_only_params_fn(params, element))
             elem_render_started_at = float(time_module.monotonic())
             elem_render = fit_to_original_size_fn(img_orig, render_svg_to_numpy_fn(elem_svg, w, h))
+            elem_render_elapsed = float(time_module.monotonic()) - elem_render_started_at
+            if elem_render_elapsed >= 5.0:
+                logs.append(
+                    f"perf_probe: element_render_slow round={round_idx + 1} element={element} "
+                    f"elapsed={elem_render_elapsed:.2f}s"
+                )
             if is_anchor_telemetry_test:
                 _emit_anchor_debug(
                     f"{anchor_telemetry_prefix} element_render round={round_idx + 1}, element={element}, elapsed="
-                    f"{(float(time_module.monotonic()) - elem_render_started_at):.2f}s, state={_snapshot_anchor_state()}"
+                    f"{elem_render_elapsed:.2f}s, state={_snapshot_anchor_state()}"
                 )
             if elem_render is None:
                 logs.append(f"{element}: Element-SVG konnte nicht gerendert werden")
@@ -537,14 +554,20 @@ def validateBadgeByElementsImpl(
                     round_changed = True
                     logs.append("stem: Geometrie nach Elementabgleich aktualisiert")
 
-            remaining_for_element = _remaining_budget_seconds()
-            conservative_mode = is_anchor_telemetry_test and configured_budget > 0.0 and remaining_for_element < max(20.0, 0.25 * configured_budget)
-            if conservative_mode and element == "text":
+            if conservative_mode:
                 logs.append(
-                    f"{anchor_telemetry_prefix} conservative_skip width+extent round={round_idx + 1} element={element} remaining={remaining_for_element:.2f}s"
+                    f"{anchor_telemetry_prefix} conservative_skip width+extent round={round_idx + 1} "
+                    f"element={element} remaining={remaining_for_element:.2f}s"
                 )
             else:
+                width_opt_started_at = float(time_module.monotonic())
                 width_changed = optimize_element_width_bracket_fn(img_orig, params, element, logs)
+                width_opt_elapsed = float(time_module.monotonic()) - width_opt_started_at
+                if width_opt_elapsed >= 5.0:
+                    logs.append(
+                        f"perf_probe: width_opt_slow round={round_idx + 1} element={element} "
+                        f"elapsed={width_opt_elapsed:.2f}s"
+                    )
                 if width_changed:
                     round_changed = True
 
@@ -553,7 +576,14 @@ def validateBadgeByElementsImpl(
                         f"{anchor_telemetry_prefix} conservative_skip extent round={round_idx + 1} element={element} remaining={remaining_for_element:.2f}s"
                     )
                 else:
+                    extent_opt_started_at = float(time_module.monotonic())
                     extent_changed = optimize_element_extent_bracket_fn(img_orig, params, element, logs)
+                    extent_opt_elapsed = float(time_module.monotonic()) - extent_opt_started_at
+                    if extent_opt_elapsed >= 5.0:
+                        logs.append(
+                            f"perf_probe: extent_opt_slow round={round_idx + 1} element={element} "
+                            f"elapsed={extent_opt_elapsed:.2f}s"
+                        )
                     if extent_changed:
                         round_changed = True
 
@@ -592,10 +622,15 @@ def validateBadgeByElementsImpl(
         else:
             if is_anchor_telemetry_test:
                 logs.append(f"{anchor_telemetry_prefix} PHASE global_search_start round={round_idx + 1}")
+            global_search_started_at = float(time_module.monotonic())
             global_search_changed = optimize_global_parameter_vector_sampling_fn(
                 img_orig,
                 params,
                 logs,
+            )
+            global_search_elapsed = float(time_module.monotonic()) - global_search_started_at
+            logs.append(
+                f"perf_probe: global_search_elapsed round={round_idx + 1} elapsed={global_search_elapsed:.2f}s"
             )
             if is_anchor_telemetry_test:
                 logs.append(f"{anchor_telemetry_prefix} PHASE global_search_end round={round_idx + 1}")
