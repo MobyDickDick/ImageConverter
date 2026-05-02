@@ -236,6 +236,7 @@ def validateBadgeByElementsImpl(
     variant_name = str(params.get("variant_name", params.get("base_name", "unknown")))
     anchor_telemetry_prefix = f"anchor_telemetry[{variant_name}]"
     configured_budget = float(params.get("validation_time_budget_sec", 0.0) or 0.0)
+    variant_name_upper = variant_name.upper()
     if configured_budget <= 0.0:
         configured_budget = max(15.0, 3.0 * float(max_rounds))
         if os_module.environ.get("PYTEST_CURRENT_TEST"):
@@ -255,6 +256,13 @@ def validateBadgeByElementsImpl(
                 # can make the test appear stalled for several minutes without
                 # adding meaningful signal for this smoke-style assertion.
                 configured_budget = min(configured_budget, 90.0)
+
+    if variant_name_upper == "AC0811_L" and configured_budget > 0.0:
+        # AC0811_L is the first documented AC08 variant to exceed the
+        # validation budget in full-range runs. Give this single variant a
+        # slightly higher floor so element-search rounds can finish instead of
+        # timing out at round boundaries.
+        configured_budget = max(configured_budget, 48.0)
 
     variant_budget_sec = configured_budget
     if is_anchor_telemetry_test and configured_budget > 0.0:
@@ -303,6 +311,33 @@ def validateBadgeByElementsImpl(
                 continue
             parts.append(f"{key}={numeric_value:.3f}")
         return ", ".join(parts) if parts else "no_numeric_state"
+
+    deep_trace_enabled = variant_name_upper == "AC0811_L"
+
+    def _snapshot_numeric_params() -> str:
+        numeric_items: list[tuple[str, float]] = []
+        for key, value in params.items():
+            try:
+                numeric_items.append((str(key), float(value)))
+            except (TypeError, ValueError):
+                continue
+        numeric_items.sort(key=lambda item: item[0])
+        return "; ".join(f"{k}={v:.6f}" for k, v in numeric_items) if numeric_items else "no_numeric_params"
+
+    def _log_deep_trace(stage: str, *, round_number: int, element: str | None = None) -> None:
+        if not deep_trace_enabled:
+            return
+        full_svg_trace = generate_badge_svg_fn(w, h, params)
+        full_render_trace = fit_to_original_size_fn(img_orig, render_svg_to_numpy_fn(full_svg_trace, w, h))
+        full_error_trace = float("inf")
+        if full_render_trace is not None:
+            full_error_trace = float(calculate_error_fn(img_orig, full_render_trace))
+        detail = f", element={element}" if element else ""
+        logs.append(
+            "ac0811_l_deep_trace: "
+            f"stage={stage}, round={round_number}{detail}, full_error={full_error_trace:.6f}, "
+            f"params={_snapshot_numeric_params()}"
+        )
 
     def _time_budget_exceeded() -> bool:
         if configured_budget <= 0.0:
@@ -511,6 +546,7 @@ def validateBadgeByElementsImpl(
         if _time_budget_exceeded():
             _raise_time_budget_exceeded(phase="round_start", round_number=round_idx + 1)
         logs.append(f"Runde {round_idx + 1}: elementweise Validierung gestartet")
+        _log_deep_trace("round_start", round_number=round_idx + 1)
         if configured_budget > 0.0:
             logs.append(
                 f"budget_snapshot: round={round_idx + 1}, remaining={_remaining_budget_seconds():.2f}s, "
@@ -664,6 +700,7 @@ def validateBadgeByElementsImpl(
                     )
                 if radius_changed:
                     round_changed = True
+            _log_deep_trace("element_end", round_number=round_idx + 1, element=element)
             if is_anchor_telemetry_test:
                 logs.append(f"{anchor_telemetry_prefix} PHASE element_end round={round_idx + 1} element={element}")
 
@@ -721,6 +758,7 @@ def validateBadgeByElementsImpl(
         full_render = fit_to_original_size_fn(img_orig, render_svg_to_numpy_fn(full_svg, w, h))
         full_err = calculate_error_fn(img_orig, full_render)
         logs.append(f"Runde {round_idx + 1}: Gesamtfehler={full_err:.3f}")
+        _log_deep_trace("round_end", round_number=round_idx + 1)
         previous_best_err = best_full_err
         improved_this_round = False
         if math_module.isfinite(full_err) and full_err < best_full_err:
