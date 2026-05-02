@@ -179,6 +179,56 @@ def _safeReadTextFile(path: str) -> str:
         return ""
 
 
+def _formatFailureTelemetry(details: dict[str, object] | None) -> str:
+    if not details:
+        return ""
+    telemetry_keys = (
+        "best_error",
+        "error_per_pixel",
+        "mean_delta2",
+        "std_delta2",
+        "best_iter",
+        "last_iter",
+        "params_snapshot",
+    )
+    parts: list[str] = []
+    for key in telemetry_keys:
+        raw = details.get(key)
+        if raw is None:
+            continue
+        value = str(raw).strip()
+        if not value:
+            continue
+        parts.append(f"{key}={value}")
+    return "; ".join(parts)
+
+
+def _formatFailureTelemetryJson(details: dict[str, object] | None) -> str:
+    if not details:
+        return ""
+    telemetry_keys = (
+        "best_error",
+        "error_per_pixel",
+        "mean_delta2",
+        "std_delta2",
+        "best_iter",
+        "last_iter",
+        "params_snapshot",
+    )
+    payload: dict[str, str] = {}
+    for key in telemetry_keys:
+        raw = details.get(key)
+        if raw is None:
+            continue
+        value = str(raw).strip()
+        if not value:
+            continue
+        payload[key] = value
+    if not payload:
+        return ""
+    return json.dumps(payload, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+
+
 def _emitVariantDebugDump(
     *,
     debug_root_dir: str | None,
@@ -273,18 +323,28 @@ def convertOneImpl(
             render_embedded_raster_svg_fn=render_embedded_raster_svg_fn,
             print_fn=print_fn,
         )
+        details = read_validation_log_details_fn(log_file) if os.path.exists(log_file) else {}
+        failure_telemetry = _formatFailureTelemetry(details)
+        failure_telemetry_json = _formatFailureTelemetryJson(details)
         append_batch_failure_fn(
             {
                 "filename": filename,
                 "status": "batch_error",
                 "reason": type(exc).__name__,
-                "details": str(exc),
+                "details": failure_telemetry_json or failure_telemetry or str(exc),
                 "log_file": os.path.basename(log_file),
                 "failed_svg": os.path.basename(failed_svg_path) if failed_svg_path else "",
             }
         )
+        prior_log_text = _safeReadTextFile(log_file) if os.path.exists(log_file) else ""
         with open(log_file, "w", encoding="utf-8") as f:
+            if prior_log_text:
+                f.write(prior_log_text.rstrip() + "\n")
             f.write(f"status=batch_error\nfilename={filename}\nreason={type(exc).__name__}\ndetails={exc}\n")
+            if failure_telemetry:
+                f.write(f"failure_telemetry={failure_telemetry}\n")
+            if failure_telemetry_json:
+                f.write(f"failure_telemetry_json={failure_telemetry_json}\n")
         _emitVariantDebugDump(
             debug_root_dir=debug_ac0811_dir,
             base_name=base_name,
@@ -299,6 +359,8 @@ def convertOneImpl(
                 "badge_rounds": int(badge_rounds),
                 "exception_type": type(exc).__name__,
                 "exception_message": str(exc),
+                "failure_telemetry": failure_telemetry,
+                "failure_telemetry_json": failure_telemetry_json,
                 "validation_log_text": _safeReadTextFile(log_file),
             },
             print_fn=print_fn,
@@ -307,7 +369,8 @@ def convertOneImpl(
             svg_path=_resolveFailureSvgPath(svg_path, failed_svg_path),
             diff_path=diff_path,
         )
-        print_fn(f"[WARN] {filename}: Batchlauf setzt nach Fehler fort ({type(exc).__name__}: {exc})")
+        telemetry_suffix = f" | telemetry: {failure_telemetry}" if failure_telemetry else ""
+        print_fn(f"[WARN] {filename}: Batchlauf setzt nach Fehler fort ({type(exc).__name__}: {exc}){telemetry_suffix}")
         _emit_anchor_variant_event("variant_done", status="exception", reason=type(exc).__name__)
         return None, True
     if not res:
