@@ -32,6 +32,9 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
 `[x]` gesetzt werden können.
 
 - [ ] N1: B2 vollständig abschließen: Vollbereichslauf `AC0800..AC0899` mit Exit-Code `0` nachweisen.
+  - Blockierungsverlauf (Kurztrend):
+    - 2026-05-01 (Run BJ): Exit `0`, sichtbarer Fortschritt nur bis `AC0811_L` → **Stagnation**.
+    - 2026-05-02 (Run BK): Exit `0`, erneut nur bis `AC0811_L` mit `validation_time_budget_exceeded` → **weiterhin Stagnation**.
   - 2026-04-23: Startkommando als Run S angestoßen; Log-Datei: `artifacts/converted_images/reports/AC0800_AC0899_batch_2026-04-23_runS.log`.
   - 2026-04-23: Run S nach dokumentiertem Teilfortschritt (`AC0800_*`, Start `AC0811_L`) manuell mit Exit `143` beendet, um Aufgaben-/Run-Doku im selben Arbeitsgang zu aktualisieren.
   - 2026-04-23: Run T ohne `timeout` gestartet; dokumentierter Fortschritt bis `AC0811_M`, danach manuell per `pkill` beendet (kein finaler Exit-`0`).
@@ -76,6 +79,7 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
   - 2026-04-30: Run BH mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_L`, Prozessende mit Exit `0`, aber ohne Vollbereichsnachweis bis `AC0899` (Summary: `docs/ac0800_ac0899_runBH_2026-04-30_summary.md`).
   - 2026-05-01: Run BI mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_L`, Prozessende mit Exit `0`, aber ohne Vollbereichsnachweis bis `AC0899` (Summary: `docs/ac0800_ac0899_runBI_2026-05-01_summary.md`).
   - 2026-05-01: Run BJ mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_L`, Prozessende mit Exit `0`, aber ohne Vollbereichsnachweis bis `AC0899` (Summary: `docs/ac0800_ac0899_runBJ_2026-05-01_summary.md`).
+  - 2026-05-02: Run BK mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_L`, Prozessende mit Exit `0`, aber ohne Vollbereichsnachweis bis `AC0899` (Summary: `docs/ac0800_ac0899_runBK_2026-05-02_summary.md`).
   - Abschlusskriterium: vollständiger Durchlauf bis `AC0899` ohne `timeout`-Abbruch und mit finalem Prozessstatus `0`.
 
 - [ ] N2: Stabilitätsnachweis für den Vollbereich dokumentieren.
@@ -123,6 +127,7 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
   - 2026-04-30: Run BH zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Status (Exit `0` ohne Vollbereichsnachweis) in `docs/ac0800_ac0899_runBH_2026-04-30_summary.md` dokumentiert.
   - 2026-05-01: Run BI zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Status (Exit `0` ohne Vollbereichsnachweis) in `docs/ac0800_ac0899_runBI_2026-05-01_summary.md` dokumentiert.
   - 2026-05-01: Run BJ zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Status (Exit `0` ohne Vollbereichsnachweis) in `docs/ac0800_ac0899_runBJ_2026-05-01_summary.md` dokumentiert.
+  - 2026-05-02: Run BK zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Status (Exit `0` ohne Vollbereichsnachweis) in `docs/ac0800_ac0899_runBK_2026-05-02_summary.md` dokumentiert.
 
 - [x] N3: Neue Laufzusammenfassung im Run-Format ergänzen.
   - Neue Datei analog zu Run Q/R erstellen (Datum, Anlass, exakter Befehl, Log-Pfad, sichtbarer Fortschritt, Exit-Code, Kurzfazit).
@@ -188,6 +193,7 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
   - 2026-04-29: Zwischenstand nach Run BN nachgepflegt; T5-Volltestlauf erneut bis `78%` sichtbar ohne Fehlermeldungen, danach wegen Inaktivität per `pkill` beendet (Prozessstatus signalbedingt `-1`), daher bleibt N4 offen.
   - 2026-05-01: Zwischenstand nach Run BI nachgepflegt; Exit `0` erneut ohne Vollbereichsnachweis bis `AC0899` (letzter sichtbarer Fortschritt `AC0811_L` mit `validation_time_budget_exceeded`), daher bleiben N1/N2/N4 offen.
   - 2026-05-01: Zwischenstand nach Run BJ nachgepflegt; Exit `0` erneut ohne Vollbereichsnachweis bis `AC0899` (letzter sichtbarer Fortschritt `AC0811_L` mit `validation_time_budget_exceeded`), daher bleiben N1/N2/N4 offen.
+  - 2026-05-02: Zwischenstand nach Run BK nachgepflegt; Exit `0` erneut ohne Vollbereichsnachweis bis `AC0899` (letzter sichtbarer Fortschritt `AC0811_L` mit `validation_time_budget_exceeded`), daher bleibt der Blockierungsverlauf aktuell stagnierend und N1/N2/N4 offen.
   - 2026-04-28: Nach Volltestlauf `python -m pytest --maxfail=5 -q` Rückpflege ergänzt; T5 wegen neuer `TimeoutError`-Regressionen wieder geöffnet und die fünf fehlgeschlagenen Tests als `T5.8` bis `T5.12` mit hoher Priorität dokumentiert.
   - 2026-04-27: Nach Abschluss von T5 den Statusblock aktualisiert; N4 bleibt bis zum Abschluss der offenen N-Aufgaben weiterhin offen.
 
@@ -354,6 +360,8 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
     - Ziel: reproduzierbaren Abschluss mit dokumentiertem Exit-Code (`0` oder kontrollierter Timeout `124`) und klarer Ursachenhypothese in den Run-Notizen festhalten.
     - 2026-04-29: Reproduktion mit `timeout 300 python -m pytest tests/test_image_composite_converter.py::test_validate_badge_by_elements_activates_ac08_adaptive_unlocks_on_stagnation -vv` erfolgreich abgeschlossen; Test endet reproduzierbar mit Exit `0` (`1 passed`, `129.96s`). Log: `artifacts/converted_images/reports/T5_13_hanger_test_2026-04-29.log`.
   - 2026-05-01: T5.16-Folgeprobe des Kandidaten `test_validate_badge_by_elements_activates_ac08_adaptive_unlocks_on_stagnation` mit `timeout 300 ... -vv` durchgeführt; Log: `artifacts/converted_images/reports/T5_16_adaptive_unlock_probe_2026-05-01.log`, Ergebnis `EXIT:0` (`1 passed in 52.38s`), daher aktuell kein Hänger-Root-Cause.
+  - 2026-05-02: Erweiterte Anchor-Debugprobe ausgeführt (`timeout 420 ... test_ac08_semantic_anchor_variants_convert_without_failed_svg -vv -s --durations=0`); Log: `artifacts/converted_images/reports/T5_16_anchor_debug_2026-05-02_run01.log`, Summary: `docs/t5_16_anchor_debug_2026-05-02_summary.md`. Neue Evidenz: kein Render-Timeout (`render_probe_aggregate` bis `calls=475`, `timeouts=0`), aber auffälliger Varianten-Wiederanlauf (`AC0811_S` startet nach abgeschlossenem `AC0811_L` erneut) und wiederholte Budget-Heartbeats im AC08-Steuerpfad.
+  - 2026-05-02: Steuerfluss-Diagnose mit neuem `context`-Feld in `variant_start`/`variant_done` ergänzt und per Run 02 verifiziert (`artifacts/converted_images/reports/T5_16_anchor_debug_2026-05-02_run02.log`, Summary: `docs/t5_16_anchor_debug_2026-05-02_run02_summary.md`). Ergebnis: Re-Start ist der reguläre Übergang in den Quality-Pass (`quality_pass:1;candidate=AC0811_M;candidates=2`) und nicht derselbe Initial-Pass-Loop.
   - 2026-05-01: Weitere T5.16-Isolationsprobe des Zieltests mit Laufzeittelemetrie ausgeführt (`set -o pipefail; timeout 240 python -m pytest tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_convert_without_failed_svg -vv -s --durations=0 | tee artifacts/converted_images/reports/T5_16_anchor_hang_probe_2026-05-01_run22.log`). Ergebnis erneut `EXIT:124`; sichtbarer Fortschritt bis `AC0811_L` mit Heartbeats bis Runde 3, danach kein Testabschluss innerhalb des Timeouts.
   - 2026-05-01: Folge-Isolationsprobe (Run 23) mit erweitertem Zeitfenster ausgeführt (`set -o pipefail; timeout 300 python -m pytest tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_convert_without_failed_svg -vv -s --durations=0 | tee artifacts/converted_images/reports/T5_16_anchor_hang_probe_2026-05-01_run23.log`). Ergebnis weiterhin `EXIT:124`; sichtbarer Fortschritt über `AC0811_S` → `AC0811_L` (Heartbeats bis Runde 3) und anschließend Start von `AC0811_M`, aber kein Testabschluss innerhalb des Timeouts.
   - 2026-05-01: Folge-Isolationsprobe (Run 24) mit weiter erhöhtem Zeitfenster ausgeführt (`set -o pipefail; timeout 360 python -m pytest tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_convert_without_failed_svg -vv -s --durations=0 | tee artifacts/converted_images/reports/T5_16_anchor_hang_probe_2026-05-01_run24.log`). Ergebnis weiterhin `EXIT:124`; reproduzierbarer Fortschritt über alle `AC0811`-Varianten (`S` → `L` → `M` inkl. Heartbeats bis Runde 3), danach erneuter Timeout ohne Testabschluss. Damit bleibt T5.16 als Laufzeit-Blocker offen; der Hänger liegt weiterhin im AC0811-Mehrvariantenpfad und nicht in einem isolierten Einzeltest mit sofortigem Stillstand.
