@@ -1,0 +1,820 @@
+============================= test session starts ==============================
+platform linux -- Python 3.10.19, pytest-9.0.2, pluggy-1.6.0 -- /root/.pyenv/versions/3.10.19/bin/python
+cachedir: .pytest_cache
+rootdir: /workspace/ImageConverter
+configfile: pytest.ini
+collecting ... collected 1 item
+
+tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_convert_without_failed_svg [ANCHOR_DEBUG] variant_start name=AC0811_S attempt_idx=1
+
+--- Verarbeite AC0811_S.jpg ---
+Bildbeschreibung: Kelle, ohne Text Kreis oben, Griff nach unten (dunkelgraue Liine)
+Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe, SEMANTIC: senkrechter Strich hinter dem Kreis
+[ANCHOR_DEBUG] render_probe call_id=1 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=337 elapsed=0.58s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] full_render round=1, elapsed=0.58s, state=cx=7.500, cy=7.650, r=7.000, stem_width=1.000
+[ANCHOR_DEBUG] render_probe call_id=2 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=246 elapsed=0.57s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] element_render round=1, element=circle, elapsed=0.57s, state=cx=7.500, cy=7.650, r=7.000, stem_width=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_center_start round=1, remaining=28.84s, state=cx=7.500, cy=7.650, r=7.000, stem_width=1.000
+[ANCHOR_DEBUG] render_probe call_id=3 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=246 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe call_id=4 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=246 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=5 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=246 elapsed=0.61s
+[ANCHOR_DEBUG] render_probe call_id=6 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=246 elapsed=0.58s
+[ANCHOR_DEBUG] render_probe call_id=7 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=247 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe call_id=8 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=246 elapsed=0.55s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_center_end round=1, elapsed=3.53s, remaining=25.31s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_radius_start round=1, remaining=25.31s, state=cx=7.500, cy=7.500, r=7.000, stem_width=1.000
+[ANCHOR_DEBUG] render_probe call_id=9 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=246 elapsed=0.57s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_radius_end round=1, elapsed=0.58s, remaining=24.73s
+[ANCHOR_DEBUG] render_probe call_id=10 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=223 elapsed=0.61s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] element_render round=1, element=stem, elapsed=0.61s, state=cx=7.500, cy=7.500, r=7.000, stem_width=1.000
+[ANCHOR_DEBUG] render_probe call_id=11 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=222 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=12 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=223 elapsed=0.63s
+[ANCHOR_DEBUG] render_probe call_id=13 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=223 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe call_id=14 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=222 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe call_id=15 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=222 elapsed=0.60s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] micro_eval phase=baseline, elapsed=0.00s, err=9.299
+[ANCHOR_DEBUG] render_probe call_id=16 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=337 elapsed=0.59s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] micro_eval phase=candidate_1, elapsed=0.59s, err=12.795
+[ANCHOR_DEBUG] render_probe call_id=17 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=337 elapsed=0.59s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] micro_eval phase=candidate_2, elapsed=0.59s, err=12.139
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] HEARTBEAT phase=micro_search, round=1, elapsed=10.15s, remaining=19.85s
+[ANCHOR_DEBUG] render_probe call_id=18 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=337 elapsed=0.59s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] micro_eval phase=candidate_3, elapsed=0.59s, err=12.096
+[ANCHOR_DEBUG] render_probe call_id=19 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=337 elapsed=0.60s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] micro_eval phase=candidate_4, elapsed=0.60s, err=9.307
+[ANCHOR_DEBUG] render_probe call_id=20 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=337 elapsed=0.63s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] micro_eval phase=candidate_5, elapsed=0.63s, err=9.299
+[ANCHOR_DEBUG] render_probe call_id=21 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=337 elapsed=0.60s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] micro_eval phase=candidate_6, elapsed=0.60s, err=9.307
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] full_render round=2, elapsed=0.00s, state=cx=7.500, cy=7.500, r=7.000, stem_width=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] element_render round=2, element=circle, elapsed=0.00s, state=cx=7.500, cy=7.500, r=7.000, stem_width=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_center_start round=2, remaining=17.42s, state=cx=7.500, cy=7.500, r=7.000, stem_width=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_center_end round=2, elapsed=0.01s, remaining=17.42s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_radius_start round=2, remaining=17.42s, state=cx=7.500, cy=7.500, r=7.000, stem_width=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_radius_end round=2, elapsed=0.00s, remaining=17.41s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] element_render round=2, element=stem, elapsed=0.00s, state=cx=7.500, cy=7.500, r=7.000, stem_width=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] micro_eval phase=baseline, elapsed=0.00s, err=9.299
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] micro_eval phase=candidate_1, elapsed=0.00s, err=12.795
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] micro_eval phase=candidate_2, elapsed=0.00s, err=12.139
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] micro_eval phase=candidate_3, elapsed=0.00s, err=12.096
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] micro_eval phase=candidate_4, elapsed=0.00s, err=9.307
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] micro_eval phase=candidate_5, elapsed=0.00s, err=9.299
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] micro_eval phase=candidate_6, elapsed=0.00s, err=9.307
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] full_render round=3, elapsed=0.00s, state=cx=7.500, cy=7.500, r=7.000, stem_width=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] element_render round=3, element=circle, elapsed=0.00s, state=cx=7.500, cy=7.500, r=7.000, stem_width=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] element_render round=3, element=stem, elapsed=0.00s, state=cx=7.500, cy=7.500, r=7.000, stem_width=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] micro_eval phase=baseline, elapsed=0.00s, err=9.299
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] micro_eval phase=candidate_1, elapsed=0.00s, err=12.795
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] micro_eval phase=candidate_2, elapsed=0.00s, err=12.139
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] micro_eval phase=candidate_3, elapsed=0.00s, err=12.096
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] micro_eval phase=candidate_4, elapsed=0.00s, err=9.307
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] micro_eval phase=candidate_5, elapsed=0.00s, err=9.299
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] micro_eval phase=candidate_6, elapsed=0.00s, err=9.307
+[ANCHOR_DEBUG] render_probe call_id=22 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=246 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe call_id=23 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=246 elapsed=0.58s
+[ANCHOR_DEBUG] render_probe call_id=24 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=246 elapsed=0.66s
+[ANCHOR_DEBUG] render_probe call_id=25 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=246 elapsed=0.61s
+[ANCHOR_DEBUG] render_probe_aggregate calls=25 slow_calls_gt_1s=0 timeouts=0 mean_elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=26 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=246 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=27 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=246 elapsed=0.61s
+[ANCHOR_DEBUG] render_probe call_id=28 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=246 elapsed=0.66s
+[ANCHOR_DEBUG] render_probe call_id=29 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=246 elapsed=0.62s
+[ANCHOR_DEBUG] render_probe call_id=30 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=246 elapsed=0.61s
+[ANCHOR_DEBUG] render_probe call_id=31 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=246 elapsed=0.62s
+[ANCHOR_DEBUG] render_probe call_id=32 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=246 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=33 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=246 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe call_id=34 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=246 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe call_id=35 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=246 elapsed=0.61s
+[ANCHOR_DEBUG] render_probe call_id=36 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=246 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe call_id=37 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=246 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=38 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=246 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe call_id=39 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=246 elapsed=0.58s
+[ANCHOR_DEBUG] render_probe call_id=40 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=246 elapsed=0.58s
+[ANCHOR_DEBUG] render_probe call_id=41 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=246 elapsed=0.64s
+[ANCHOR_DEBUG] render_probe call_id=42 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=246 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=43 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=246 elapsed=0.64s
+[ANCHOR_DEBUG] render_probe call_id=44 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=223 elapsed=0.66s
+[ANCHOR_DEBUG] render_probe call_id=45 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=223 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=46 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=223 elapsed=0.61s
+[ANCHOR_DEBUG] render_probe call_id=47 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=223 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe call_id=48 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=223 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=49 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=223 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=50 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=223 elapsed=0.62s
+[ANCHOR_DEBUG] render_probe_aggregate calls=50 slow_calls_gt_1s=0 timeouts=0 mean_elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=51 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=223 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=52 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=223 elapsed=0.58s
+[ANCHOR_DEBUG] render_probe call_id=53 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=223 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe call_id=54 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=223 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe call_id=55 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=223 elapsed=0.60s
+[ANCHOR_DEBUG] variant_done name=AC0811_S status=ok
+[ANCHOR_DEBUG] variant_start name=AC0811_M attempt_idx=1
+
+--- Verarbeite AC0811_M.jpg ---
+Bildbeschreibung: Kelle, ohne Text Kreis oben, Griff nach unten (dunkelgraue Liine)
+Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe, SEMANTIC: senkrechter Strich hinter dem Kreis
+[ANCHOR_DEBUG] render_probe call_id=56 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=339 elapsed=0.59s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] full_render round=1, elapsed=0.59s, state=cx=10.000, cy=10.200, r=8.833, stem_width=1.000
+[ANCHOR_DEBUG] render_probe call_id=57 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=248 elapsed=0.60s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] element_render round=1, element=circle, elapsed=0.60s, state=cx=10.000, cy=10.200, r=8.833, stem_width=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_center_start round=1, remaining=28.80s, state=cx=10.000, cy=10.200, r=8.833, stem_width=1.000
+[ANCHOR_DEBUG] render_probe call_id=58 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=247 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=59 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=248 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=60 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=247 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=61 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=247 elapsed=0.61s
+[ANCHOR_DEBUG] render_probe call_id=62 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=247 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe call_id=63 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=248 elapsed=0.58s
+[ANCHOR_DEBUG] render_probe call_id=64 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=248 elapsed=0.61s
+[ANCHOR_DEBUG] render_probe call_id=65 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=248 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=66 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=248 elapsed=0.60s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_center_end round=1, elapsed=5.41s, remaining=23.39s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_radius_start round=1, remaining=23.39s, state=cx=10.000, cy=12.000, r=8.833, stem_width=1.000
+[ANCHOR_DEBUG] render_probe call_id=67 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=248 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe call_id=68 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=248 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=69 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=339 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=70 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=339 elapsed=0.59s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_radius_end round=1, elapsed=2.40s, remaining=21.00s
+[ANCHOR_DEBUG] render_probe call_id=71 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=223 elapsed=0.59s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] element_render round=1, element=stem, elapsed=0.59s, state=cx=10.000, cy=12.000, r=9.000, stem_width=1.000
+[ANCHOR_DEBUG] render_probe call_id=72 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=339 elapsed=0.60s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] micro_eval phase=baseline, elapsed=0.61s, err=9.274
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] HEARTBEAT phase=micro_search, round=1, elapsed=10.20s, remaining=19.80s
+[ANCHOR_DEBUG] render_probe call_id=73 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=338 elapsed=0.59s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] micro_eval phase=candidate_1, elapsed=0.59s, err=8.886
+[ANCHOR_DEBUG] render_probe call_id=74 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=339 elapsed=0.60s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] micro_eval phase=candidate_2, elapsed=0.60s, err=8.440
+[ANCHOR_DEBUG] render_probe call_id=75 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=339 elapsed=0.63s
+[ANCHOR_DEBUG] render_probe_aggregate calls=75 slow_calls_gt_1s=0 timeouts=0 mean_elapsed=0.60s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] micro_eval phase=candidate_3, elapsed=0.63s, err=9.066
+[ANCHOR_DEBUG] render_probe call_id=76 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=339 elapsed=0.61s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] micro_eval phase=candidate_4, elapsed=0.61s, err=9.123
+[ANCHOR_DEBUG] render_probe call_id=77 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=339 elapsed=0.59s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] micro_eval phase=candidate_5, elapsed=0.59s, err=8.533
+[ANCHOR_DEBUG] render_probe call_id=78 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=339 elapsed=0.61s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] micro_eval phase=candidate_6, elapsed=0.61s, err=9.274
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] full_render round=2, elapsed=0.00s, state=cx=10.500, cy=12.000, r=9.000, stem_width=2.000
+[ANCHOR_DEBUG] render_probe call_id=79 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=248 elapsed=0.62s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] element_render round=2, element=circle, elapsed=0.62s, state=cx=10.500, cy=12.000, r=9.000, stem_width=2.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_center_start round=2, remaining=15.54s, state=cx=10.500, cy=12.000, r=9.000, stem_width=2.000
+[ANCHOR_DEBUG] render_probe call_id=80 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=247 elapsed=0.61s
+[ANCHOR_DEBUG] render_probe call_id=81 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=248 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe call_id=82 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=248 elapsed=0.58s
+[ANCHOR_DEBUG] render_probe call_id=83 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=247 elapsed=0.58s
+[ANCHOR_DEBUG] render_probe call_id=84 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=248 elapsed=0.58s
+[ANCHOR_DEBUG] render_probe call_id=85 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=248 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=86 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=248 elapsed=0.61s
+[ANCHOR_DEBUG] render_probe call_id=87 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=248 elapsed=0.59s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_center_end round=2, elapsed=4.76s, remaining=10.78s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_radius_start round=2, remaining=10.78s, state=cx=10.500, cy=12.000, r=9.000, stem_width=2.000
+[ANCHOR_DEBUG] render_probe call_id=88 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=248 elapsed=0.60s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_radius_end round=2, elapsed=0.61s, remaining=10.17s
+[ANCHOR_DEBUG] render_probe call_id=89 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=223 elapsed=0.60s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] element_render round=2, element=stem, elapsed=0.60s, state=cx=10.500, cy=12.000, r=9.500, stem_width=2.000
+[ANCHOR_DEBUG] render_probe call_id=90 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=339 elapsed=0.59s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] micro_eval phase=baseline, elapsed=0.59s, err=8.444
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] HEARTBEAT phase=micro_search, round=2, elapsed=21.02s, remaining=8.98s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] micro_eval phase=candidate_1, elapsed=0.00s, err=9.274
+[ANCHOR_DEBUG] render_probe call_id=91 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=340 elapsed=0.61s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] micro_eval phase=candidate_2, elapsed=0.61s, err=15.750
+[ANCHOR_DEBUG] render_probe call_id=92 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=339 elapsed=0.63s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] micro_eval phase=candidate_3, elapsed=0.63s, err=9.730
+[ANCHOR_DEBUG] render_probe call_id=93 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=339 elapsed=0.57s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] micro_eval phase=candidate_4, elapsed=0.58s, err=11.009
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] micro_eval phase=candidate_5, elapsed=0.00s, err=8.440
+[ANCHOR_DEBUG] render_probe call_id=94 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=339 elapsed=0.59s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] micro_eval phase=candidate_6, elapsed=0.59s, err=8.449
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] full_render round=3, elapsed=0.00s, state=cx=10.500, cy=12.000, r=9.000, stem_width=2.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] element_render round=3, element=circle, elapsed=0.00s, state=cx=10.500, cy=12.000, r=9.000, stem_width=2.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] element_render round=3, element=stem, elapsed=0.00s, state=cx=10.500, cy=12.000, r=9.000, stem_width=2.000
+[ANCHOR_DEBUG] render_probe call_id=95 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=339 elapsed=0.62s
+[ANCHOR_DEBUG] variant_done name=AC0811_M status=ok
+[ANCHOR_DEBUG] render_probe call_id=96 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=340 elapsed=0.61s
+[ANCHOR_DEBUG] render_probe call_id=97 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=340 elapsed=0.61s
+[ANCHOR_DEBUG] render_probe call_id=98 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=340 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe call_id=99 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=340 elapsed=0.56s
+[ANCHOR_DEBUG] render_probe call_id=100 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=339 elapsed=0.58s
+[ANCHOR_DEBUG] render_probe_aggregate calls=100 slow_calls_gt_1s=0 timeouts=0 mean_elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=101 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=340 elapsed=0.66s
+[ANCHOR_DEBUG] render_probe call_id=102 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=340 elapsed=0.58s
+[ANCHOR_DEBUG] render_probe call_id=103 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=339 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe call_id=104 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=340 elapsed=0.58s
+[ANCHOR_DEBUG] render_probe call_id=105 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=340 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=106 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=340 elapsed=0.61s
+[ANCHOR_DEBUG] render_probe call_id=107 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=340 elapsed=0.61s
+[ANCHOR_DEBUG] render_probe call_id=108 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=339 elapsed=0.61s
+[ANCHOR_DEBUG] render_probe call_id=109 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=340 elapsed=0.58s
+[ANCHOR_DEBUG] render_probe call_id=110 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=340 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=111 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=340 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=112 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=340 elapsed=0.61s
+[ANCHOR_DEBUG] render_probe call_id=113 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=340 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe call_id=114 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=339 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe call_id=115 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=339 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe call_id=116 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=339 elapsed=0.61s
+[ANCHOR_DEBUG] render_probe call_id=117 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=339 elapsed=0.61s
+[ANCHOR_DEBUG] render_probe call_id=118 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=339 elapsed=0.61s
+[ANCHOR_DEBUG] render_probe call_id=119 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=339 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe call_id=120 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=339 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=121 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=339 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe call_id=122 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=339 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe call_id=123 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=339 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe call_id=124 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=339 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=125 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=339 elapsed=0.58s
+[ANCHOR_DEBUG] render_probe_aggregate calls=125 slow_calls_gt_1s=0 timeouts=0 mean_elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=126 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=339 elapsed=0.58s
+[ANCHOR_DEBUG] render_probe call_id=127 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=339 elapsed=0.57s
+[ANCHOR_DEBUG] render_probe call_id=128 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=339 elapsed=0.62s
+[ANCHOR_DEBUG] render_probe call_id=129 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=339 elapsed=0.69s
+[ANCHOR_DEBUG] render_probe call_id=130 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=339 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=131 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=339 elapsed=0.61s
+[ANCHOR_DEBUG] render_probe call_id=132 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=339 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe call_id=133 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=339 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=134 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=339 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe call_id=135 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=339 elapsed=0.60s
+[ANCHOR_DEBUG] variant_start name=AC0811_L attempt_idx=1
+
+--- Verarbeite AC0811_L.jpg ---
+Bildbeschreibung: Kelle, ohne Text Kreis oben, Griff nach unten (dunkelgraue Liine)
+Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe, SEMANTIC: senkrechter Strich hinter dem Kreis
+[ANCHOR_DEBUG] render_probe call_id=136 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=341 elapsed=0.60s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] full_render round=1, elapsed=0.60s, state=cx=12.500, cy=12.750, r=11.667, stem_width=1.000
+[ANCHOR_DEBUG] render_probe call_id=137 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=249 elapsed=0.60s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] element_render round=1, element=circle, elapsed=0.60s, state=cx=12.500, cy=12.750, r=11.667, stem_width=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_center_start round=1, remaining=28.80s, state=cx=12.500, cy=12.750, r=11.667, stem_width=1.000
+[ANCHOR_DEBUG] render_probe call_id=138 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=249 elapsed=0.65s
+[ANCHOR_DEBUG] render_probe call_id=139 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=249 elapsed=0.63s
+[ANCHOR_DEBUG] render_probe call_id=140 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=249 elapsed=0.61s
+[ANCHOR_DEBUG] render_probe call_id=141 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=249 elapsed=0.61s
+[ANCHOR_DEBUG] render_probe call_id=142 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=249 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe call_id=143 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=249 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe call_id=144 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=249 elapsed=0.65s
+[ANCHOR_DEBUG] render_probe call_id=145 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=249 elapsed=0.66s
+[ANCHOR_DEBUG] render_probe call_id=146 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=249 elapsed=0.60s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_center_end round=1, elapsed=5.61s, remaining=23.19s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_radius_start round=1, remaining=23.19s, state=cx=11.000, cy=16.000, r=11.667, stem_width=1.000
+[ANCHOR_DEBUG] render_probe call_id=147 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=341 elapsed=0.63s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_radius_end round=1, elapsed=0.64s, remaining=22.55s
+[ANCHOR_DEBUG] render_probe call_id=148 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=224 elapsed=0.60s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] element_render round=1, element=stem, elapsed=0.60s, state=cx=11.000, cy=16.000, r=11.000, stem_width=1.000
+[ANCHOR_DEBUG] render_probe call_id=149 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=224 elapsed=0.61s
+[ANCHOR_DEBUG] render_probe call_id=150 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=224 elapsed=0.69s
+[ANCHOR_DEBUG] render_probe_aggregate calls=150 slow_calls_gt_1s=0 timeouts=0 mean_elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=151 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=224 elapsed=0.63s
+[ANCHOR_DEBUG] render_probe call_id=152 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=224 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe call_id=153 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=224 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe call_id=154 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=224 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=155 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=341 elapsed=0.59s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] micro_eval phase=baseline, elapsed=0.59s, err=15.532
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] HEARTBEAT phase=micro_search, round=1, elapsed=12.38s, remaining=17.62s
+[ANCHOR_DEBUG] render_probe call_id=156 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=341 elapsed=0.60s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] micro_eval phase=candidate_1, elapsed=0.60s, err=18.322
+[ANCHOR_DEBUG] render_probe call_id=157 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=341 elapsed=0.60s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] micro_eval phase=candidate_2, elapsed=0.61s, err=13.395
+[ANCHOR_DEBUG] render_probe call_id=158 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=341 elapsed=0.60s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] micro_eval phase=candidate_3, elapsed=0.60s, err=15.948
+[ANCHOR_DEBUG] render_probe call_id=159 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=341 elapsed=0.59s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] micro_eval phase=candidate_4, elapsed=0.59s, err=15.557
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] micro_eval phase=candidate_5, elapsed=0.00s, err=15.533
+[ANCHOR_DEBUG] render_probe call_id=160 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=341 elapsed=0.61s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] micro_eval phase=candidate_6, elapsed=0.61s, err=15.529
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] full_render round=2, elapsed=0.00s, state=cx=11.500, cy=16.000, r=11.000, stem_width=1.000
+[ANCHOR_DEBUG] render_probe call_id=161 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=249 elapsed=0.59s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] element_render round=2, element=circle, elapsed=0.59s, state=cx=11.500, cy=16.000, r=11.000, stem_width=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_center_start round=2, remaining=14.01s, state=cx=11.500, cy=16.000, r=11.000, stem_width=1.000
+[ANCHOR_DEBUG] render_probe call_id=162 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=249 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=163 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=249 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=164 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=249 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe call_id=165 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=249 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=166 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=249 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=167 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=249 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=168 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=249 elapsed=0.58s
+[ANCHOR_DEBUG] render_probe call_id=169 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=249 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe call_id=170 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=249 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=171 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=249 elapsed=0.59s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_center_end round=2, elapsed=5.98s, remaining=8.03s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_radius_start round=2, remaining=8.03s, state=cx=12.500, cy=16.000, r=11.000, stem_width=1.000
+[ANCHOR_DEBUG] render_probe call_id=172 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=249 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=173 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=249 elapsed=0.62s
+[ANCHOR_DEBUG] render_probe call_id=174 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=341 elapsed=0.59s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_radius_end round=2, elapsed=1.81s, remaining=6.21s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] HEARTBEAT phase=element_loop, round=2, elapsed=23.79s, remaining=6.21s, element=stem
+[ANCHOR_DEBUG] render_probe call_id=175 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=224 elapsed=0.61s
+[ANCHOR_DEBUG] render_probe_aggregate calls=175 slow_calls_gt_1s=0 timeouts=0 mean_elapsed=0.60s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] element_render round=2, element=stem, elapsed=0.61s, state=cx=12.500, cy=16.000, r=11.000, stem_width=1.000
+[ANCHOR_DEBUG] variant_done name=AC0811_L status=ok
+[ANCHOR_DEBUG] render_probe call_id=176 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=341 elapsed=0.58s
+[ANCHOR_DEBUG] render_probe call_id=177 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=341 elapsed=0.62s
+[ANCHOR_DEBUG] render_probe call_id=178 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=341 elapsed=0.65s
+[ANCHOR_DEBUG] render_probe call_id=179 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=340 elapsed=0.57s
+[ANCHOR_DEBUG] render_probe call_id=180 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=340 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe call_id=181 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=340 elapsed=0.58s
+[ANCHOR_DEBUG] render_probe call_id=182 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=340 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=183 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=341 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=184 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=340 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe call_id=185 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=341 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=186 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=340 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=187 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=340 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe call_id=188 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=341 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe call_id=189 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=339 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe call_id=190 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=341 elapsed=0.57s
+[ANCHOR_DEBUG] render_probe call_id=191 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=340 elapsed=0.58s
+[ANCHOR_DEBUG] render_probe call_id=192 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=341 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe call_id=193 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=341 elapsed=0.64s
+[ANCHOR_DEBUG] render_probe call_id=194 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=341 elapsed=0.63s
+[ANCHOR_DEBUG] render_probe call_id=195 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=341 elapsed=0.62s
+[ANCHOR_DEBUG] render_probe call_id=196 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=340 elapsed=0.61s
+[ANCHOR_DEBUG] render_probe call_id=197 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=340 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe call_id=198 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=340 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=199 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=339 elapsed=0.62s
+[ANCHOR_DEBUG] render_probe call_id=200 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=339 elapsed=0.58s
+[ANCHOR_DEBUG] render_probe_aggregate calls=200 slow_calls_gt_1s=0 timeouts=0 mean_elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=201 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=339 elapsed=0.58s
+[ANCHOR_DEBUG] render_probe call_id=202 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=339 elapsed=0.61s
+[ANCHOR_DEBUG] render_probe call_id=203 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=340 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe call_id=204 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=339 elapsed=0.61s
+[ANCHOR_DEBUG] render_probe call_id=205 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=340 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe call_id=206 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=339 elapsed=0.62s
+[ANCHOR_DEBUG] render_probe call_id=207 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=339 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=208 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=340 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=209 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=339 elapsed=0.62s
+[ANCHOR_DEBUG] render_probe call_id=210 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=340 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=211 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=339 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=212 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=340 elapsed=0.58s
+[ANCHOR_DEBUG] render_probe call_id=213 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=340 elapsed=0.61s
+[ANCHOR_DEBUG] render_probe call_id=214 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=340 elapsed=0.58s
+[ANCHOR_DEBUG] render_probe call_id=215 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=340 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=216 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=341 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe call_id=217 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=341 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=218 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=340 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=219 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=340 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=220 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=339 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=221 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=341 elapsed=0.61s
+[ANCHOR_DEBUG] render_probe call_id=222 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=340 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe call_id=223 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=341 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=224 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=341 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=225 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=341 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe_aggregate calls=225 slow_calls_gt_1s=0 timeouts=0 mean_elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=226 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=339 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe call_id=227 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=341 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe call_id=228 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=339 elapsed=0.64s
+[ANCHOR_DEBUG] render_probe call_id=229 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=341 elapsed=0.69s
+[ANCHOR_DEBUG] render_probe call_id=230 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=339 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe call_id=231 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=340 elapsed=0.61s
+[ANCHOR_DEBUG] render_probe call_id=232 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=340 elapsed=0.58s
+[ANCHOR_DEBUG] render_probe call_id=233 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=340 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=234 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=339 elapsed=0.61s
+[ANCHOR_DEBUG] render_probe call_id=235 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=340 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=236 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=340 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=237 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=340 elapsed=0.61s
+[ANCHOR_DEBUG] render_probe call_id=238 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=339 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=239 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=339 elapsed=0.57s
+[ANCHOR_DEBUG] render_probe call_id=240 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=339 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=241 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=340 elapsed=0.61s
+[ANCHOR_DEBUG] render_probe call_id=242 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=339 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe call_id=243 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=340 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe call_id=244 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=340 elapsed=0.61s
+[ANCHOR_DEBUG] render_probe call_id=245 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=340 elapsed=0.65s
+[ANCHOR_DEBUG] render_probe call_id=246 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=339 elapsed=0.67s
+[ANCHOR_DEBUG] render_probe call_id=247 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=340 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe call_id=248 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=339 elapsed=0.58s
+[ANCHOR_DEBUG] render_probe call_id=249 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=339 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=250 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=339 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe_aggregate calls=250 slow_calls_gt_1s=0 timeouts=0 mean_elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=251 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=339 elapsed=0.66s
+[ANCHOR_DEBUG] render_probe call_id=252 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=339 elapsed=0.62s
+[ANCHOR_DEBUG] render_probe call_id=253 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=339 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=254 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=339 elapsed=0.59s
+[ANCHOR_DEBUG] variant_start name=AC0811_S attempt_idx=1
+
+--- Verarbeite AC0811_S.jpg ---
+Bildbeschreibung: Kelle, ohne Text Kreis oben, Griff nach unten (dunkelgraue Liine)
+Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe, SEMANTIC: senkrechter Strich hinter dem Kreis
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] full_render round=1, elapsed=0.00s, state=cx=7.500, cy=7.650, r=7.000, stem_width=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] element_render round=1, element=circle, elapsed=0.00s, state=cx=7.500, cy=7.650, r=7.000, stem_width=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_center_start round=1, remaining=30.00s, state=cx=7.500, cy=7.650, r=7.000, stem_width=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_center_end round=1, elapsed=0.01s, remaining=29.99s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_radius_start round=1, remaining=29.99s, state=cx=7.500, cy=7.500, r=7.000, stem_width=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_radius_end round=1, elapsed=0.00s, remaining=29.99s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] element_render round=1, element=stem, elapsed=0.00s, state=cx=7.500, cy=7.500, r=7.000, stem_width=1.000
+[ANCHOR_DEBUG] render_probe call_id=255 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=337 elapsed=0.57s
+[ANCHOR_DEBUG] render_probe call_id=256 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=337 elapsed=0.61s
+[ANCHOR_DEBUG] render_probe call_id=257 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=337 elapsed=0.65s
+[ANCHOR_DEBUG] render_probe call_id=258 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=336 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe call_id=259 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=337 elapsed=0.61s
+[ANCHOR_DEBUG] render_probe call_id=260 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=338 elapsed=0.64s
+[ANCHOR_DEBUG] render_probe call_id=261 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=336 elapsed=0.70s
+[ANCHOR_DEBUG] render_probe call_id=262 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=336 elapsed=0.64s
+[ANCHOR_DEBUG] render_probe call_id=263 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=336 elapsed=0.62s
+[ANCHOR_DEBUG] render_probe call_id=264 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=337 elapsed=0.57s
+[ANCHOR_DEBUG] render_probe call_id=265 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=337 elapsed=0.61s
+[ANCHOR_DEBUG] render_probe call_id=266 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=336 elapsed=0.61s
+[ANCHOR_DEBUG] render_probe call_id=267 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=336 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=268 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=337 elapsed=0.65s
+[ANCHOR_DEBUG] render_probe call_id=269 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=336 elapsed=0.61s
+[ANCHOR_DEBUG] render_probe call_id=270 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=337 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=271 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=336 elapsed=0.63s
+[ANCHOR_DEBUG] render_probe call_id=272 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=337 elapsed=0.61s
+[ANCHOR_DEBUG] render_probe call_id=273 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=338 elapsed=0.61s
+[ANCHOR_DEBUG] render_probe call_id=274 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=337 elapsed=0.61s
+[ANCHOR_DEBUG] render_probe call_id=275 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=337 elapsed=0.61s
+[ANCHOR_DEBUG] render_probe_aggregate calls=275 slow_calls_gt_1s=0 timeouts=0 mean_elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=276 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=337 elapsed=0.63s
+[ANCHOR_DEBUG] render_probe call_id=277 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=337 elapsed=0.63s
+[ANCHOR_DEBUG] render_probe call_id=278 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=336 elapsed=0.63s
+[ANCHOR_DEBUG] render_probe call_id=279 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=337 elapsed=0.65s
+[ANCHOR_DEBUG] render_probe call_id=280 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=337 elapsed=0.62s
+[ANCHOR_DEBUG] render_probe call_id=281 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=337 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=282 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=337 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=283 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=337 elapsed=0.61s
+[ANCHOR_DEBUG] render_probe call_id=284 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=336 elapsed=0.63s
+[ANCHOR_DEBUG] render_probe call_id=285 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=337 elapsed=0.61s
+[ANCHOR_DEBUG] render_probe call_id=286 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=336 elapsed=0.64s
+[ANCHOR_DEBUG] render_probe call_id=287 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=337 elapsed=0.61s
+[ANCHOR_DEBUG] render_probe call_id=288 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=336 elapsed=0.61s
+[ANCHOR_DEBUG] render_probe call_id=289 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=336 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe call_id=290 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=336 elapsed=0.63s
+[ANCHOR_DEBUG] render_probe call_id=291 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=336 elapsed=0.58s
+[ANCHOR_DEBUG] render_probe call_id=292 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=337 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe call_id=293 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=337 elapsed=0.62s
+[ANCHOR_DEBUG] render_probe call_id=294 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=336 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=295 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=336 elapsed=0.62s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] HEARTBEAT phase=round_start, round=2, elapsed=25.28s, remaining=4.72s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] full_render round=2, elapsed=0.00s, state=cx=7.500, cy=7.500, r=7.000, stem_width=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] element_render round=2, element=circle, elapsed=0.00s, state=cx=7.500, cy=7.500, r=7.000, stem_width=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_center_start round=2, remaining=4.72s, state=cx=7.500, cy=7.500, r=7.000, stem_width=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_center_end round=2, elapsed=0.01s, remaining=4.71s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_radius_start round=2, remaining=4.71s, state=cx=7.500, cy=7.500, r=7.000, stem_width=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_radius_end round=2, elapsed=0.00s, remaining=4.70s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] element_render round=2, element=stem, elapsed=0.00s, state=cx=7.500, cy=7.500, r=7.000, stem_width=1.000
+[ANCHOR_DEBUG] variant_done name=AC0811_S status=ok
+[ANCHOR_DEBUG] variant_start name=AC0811_M attempt_idx=1
+
+--- Verarbeite AC0811_M.jpg ---
+Bildbeschreibung: Kelle, ohne Text Kreis oben, Griff nach unten (dunkelgraue Liine)
+Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe, SEMANTIC: senkrechter Strich hinter dem Kreis
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] full_render round=1, elapsed=0.00s, state=cx=10.000, cy=10.200, r=8.833, stem_width=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] element_render round=1, element=circle, elapsed=0.00s, state=cx=10.000, cy=10.200, r=8.833, stem_width=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_center_start round=1, remaining=30.00s, state=cx=10.000, cy=10.200, r=8.833, stem_width=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_center_end round=1, elapsed=0.01s, remaining=29.99s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_radius_start round=1, remaining=29.99s, state=cx=10.000, cy=12.000, r=8.833, stem_width=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_radius_end round=1, elapsed=0.00s, remaining=29.98s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] element_render round=1, element=stem, elapsed=0.00s, state=cx=10.000, cy=12.000, r=9.000, stem_width=1.000
+[ANCHOR_DEBUG] render_probe call_id=296 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=223 elapsed=0.65s
+[ANCHOR_DEBUG] render_probe call_id=297 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=223 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe call_id=298 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=223 elapsed=0.57s
+[ANCHOR_DEBUG] render_probe call_id=299 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=223 elapsed=0.61s
+[ANCHOR_DEBUG] render_probe call_id=300 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=223 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe_aggregate calls=300 slow_calls_gt_1s=0 timeouts=0 mean_elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=301 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=223 elapsed=0.58s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] micro_eval phase=baseline, elapsed=0.00s, err=9.274
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] micro_eval phase=candidate_1, elapsed=0.00s, err=8.886
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] micro_eval phase=candidate_2, elapsed=0.00s, err=8.440
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] micro_eval phase=candidate_3, elapsed=0.00s, err=9.066
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] micro_eval phase=candidate_4, elapsed=0.00s, err=9.123
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] micro_eval phase=candidate_5, elapsed=0.00s, err=8.533
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] micro_eval phase=candidate_6, elapsed=0.00s, err=9.274
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] full_render round=2, elapsed=0.00s, state=cx=10.500, cy=12.000, r=9.000, stem_width=2.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] element_render round=2, element=circle, elapsed=0.00s, state=cx=10.500, cy=12.000, r=9.000, stem_width=2.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_center_start round=2, remaining=26.37s, state=cx=10.500, cy=12.000, r=9.000, stem_width=2.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_center_end round=2, elapsed=0.01s, remaining=26.36s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_radius_start round=2, remaining=26.36s, state=cx=10.500, cy=12.000, r=9.000, stem_width=2.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] circle_radius_end round=2, elapsed=0.00s, remaining=26.36s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] element_render round=2, element=stem, elapsed=0.00s, state=cx=10.500, cy=12.000, r=9.500, stem_width=2.000
+[ANCHOR_DEBUG] render_probe call_id=302 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=224 elapsed=0.57s
+[ANCHOR_DEBUG] render_probe call_id=303 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=223 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=304 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=223 elapsed=0.64s
+[ANCHOR_DEBUG] render_probe call_id=305 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=223 elapsed=0.63s
+[ANCHOR_DEBUG] render_probe call_id=306 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=223 elapsed=0.62s
+[ANCHOR_DEBUG] render_probe call_id=307 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=223 elapsed=0.62s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] micro_eval phase=baseline, elapsed=0.00s, err=8.444
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] micro_eval phase=candidate_1, elapsed=0.00s, err=9.274
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] micro_eval phase=candidate_2, elapsed=0.00s, err=15.750
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] micro_eval phase=candidate_3, elapsed=0.00s, err=9.730
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] micro_eval phase=candidate_4, elapsed=0.00s, err=11.009
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] micro_eval phase=candidate_5, elapsed=0.00s, err=8.440
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] micro_eval phase=candidate_6, elapsed=0.00s, err=8.449
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] full_render round=3, elapsed=0.00s, state=cx=10.500, cy=12.000, r=9.000, stem_width=2.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] element_render round=3, element=circle, elapsed=0.00s, state=cx=10.500, cy=12.000, r=9.000, stem_width=2.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] element_render round=3, element=stem, elapsed=0.00s, state=cx=10.500, cy=12.000, r=9.000, stem_width=2.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] micro_eval phase=baseline, elapsed=0.00s, err=8.440
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] micro_eval phase=candidate_1, elapsed=0.00s, err=9.274
+[ANCHOR_DEBUG] render_probe call_id=308 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=340 elapsed=0.59s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] micro_eval phase=candidate_2, elapsed=0.59s, err=15.759
+[ANCHOR_DEBUG] render_probe call_id=309 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=339 elapsed=0.61s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] micro_eval phase=candidate_3, elapsed=0.61s, err=9.730
+[ANCHOR_DEBUG] render_probe call_id=310 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=339 elapsed=0.61s
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] micro_eval phase=candidate_4, elapsed=0.61s, err=11.009
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] micro_eval phase=candidate_5, elapsed=0.00s, err=8.440
+[ANCHOR_DEBUG] anchor_telemetry[AC0811] micro_eval phase=candidate_6, elapsed=0.00s, err=8.444
+[ANCHOR_DEBUG] render_probe call_id=311 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=248 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=312 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=248 elapsed=0.63s
+[ANCHOR_DEBUG] render_probe call_id=313 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=248 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=314 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=248 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=315 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=248 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=316 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=248 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=317 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=248 elapsed=0.61s
+[ANCHOR_DEBUG] render_probe call_id=318 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=248 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe call_id=319 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=248 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=320 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=248 elapsed=0.58s
+[ANCHOR_DEBUG] render_probe call_id=321 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=248 elapsed=0.61s
+[ANCHOR_DEBUG] render_probe call_id=322 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=248 elapsed=0.64s
+[ANCHOR_DEBUG] render_probe call_id=323 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=248 elapsed=0.63s
+[ANCHOR_DEBUG] render_probe call_id=324 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=248 elapsed=0.61s
+[ANCHOR_DEBUG] render_probe call_id=325 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=248 elapsed=0.58s
+[ANCHOR_DEBUG] render_probe_aggregate calls=325 slow_calls_gt_1s=0 timeouts=0 mean_elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=326 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=248 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe call_id=327 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=248 elapsed=0.71s
+[ANCHOR_DEBUG] render_probe call_id=328 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=248 elapsed=0.63s
+[ANCHOR_DEBUG] render_probe call_id=329 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=248 elapsed=0.58s
+[ANCHOR_DEBUG] render_probe call_id=330 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=248 elapsed=0.61s
+[ANCHOR_DEBUG] render_probe call_id=331 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=248 elapsed=0.62s
+[ANCHOR_DEBUG] render_probe call_id=332 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=248 elapsed=0.61s
+[ANCHOR_DEBUG] render_probe call_id=333 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=223 elapsed=0.57s
+[ANCHOR_DEBUG] render_probe call_id=334 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=223 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe call_id=335 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=223 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe call_id=336 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=223 elapsed=0.65s
+[ANCHOR_DEBUG] render_probe call_id=337 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=223 elapsed=0.56s
+[ANCHOR_DEBUG] render_probe call_id=338 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=223 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe call_id=339 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=223 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe call_id=340 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=223 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe call_id=341 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=223 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=342 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=223 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=343 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=223 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=344 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=223 elapsed=0.64s
+[ANCHOR_DEBUG] render_probe call_id=345 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=223 elapsed=0.68s
+[ANCHOR_DEBUG] variant_done name=AC0811_M status=ok
+[ANCHOR_DEBUG] render_probe call_id=346 status=done returncode=0 timeout_sec=5.00 size=25x45 payload_bytes=341 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=347 status=done returncode=0 timeout_sec=5.00 size=20x35 payload_bytes=338 elapsed=0.58s
+[ANCHOR_DEBUG] render_probe call_id=348 status=done returncode=0 timeout_sec=5.00 size=15x25 payload_bytes=336 elapsed=0.60s
+[INFO] Übersichts-Kacheln erzeugt: diff=/tmp/pytest-of-root/pytest-0/test_ac08_semantic_anchor_vari0/ac0811_out/reports/overview_diff_tiles.png, svg=/tmp/pytest-of-root/pytest-0/test_ac08_semantic_anchor_vari0/ac0811_out/reports/overview_svg_tiles.png
+[ANCHOR_DEBUG] variant_start name=AC0812_L attempt_idx=1
+
+--- Verarbeite AC0812_L.jpg ---
+Bildbeschreibung: Wie AC0811: Kelle, ohne Text Kreis oben, Griff nach unten (dunkelgraue Liine). Geometrische Variante: 90° nach links gedreht.
+Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe, SEMANTIC: waagrechter Strich links vom Kreis
+[ANCHOR_DEBUG] render_probe call_id=349 status=done returncode=0 timeout_sec=5.00 size=45x25 payload_bytes=387 elapsed=0.69s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] full_render round=1, elapsed=0.69s, state=cx=32.500, cy=12.500, r=10.667, arm_stroke=1.000
+[ANCHOR_DEBUG] render_probe call_id=350 status=done returncode=0 timeout_sec=5.00 size=45x25 payload_bytes=249 elapsed=0.62s
+[ANCHOR_DEBUG] render_probe_aggregate calls=350 slow_calls_gt_1s=0 timeouts=0 mean_elapsed=0.60s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] element_render round=1, element=circle, elapsed=0.62s, state=cx=32.500, cy=12.500, r=10.667, arm_stroke=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] circle_center_start round=1, remaining=28.69s, state=cx=32.500, cy=12.500, r=10.667, arm_stroke=1.000
+[ANCHOR_DEBUG] render_probe call_id=351 status=done returncode=0 timeout_sec=5.00 size=45x25 payload_bytes=249 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=352 status=done returncode=0 timeout_sec=5.00 size=45x25 payload_bytes=249 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=353 status=done returncode=0 timeout_sec=5.00 size=45x25 payload_bytes=248 elapsed=0.61s
+[ANCHOR_DEBUG] render_probe call_id=354 status=done returncode=0 timeout_sec=5.00 size=45x25 payload_bytes=249 elapsed=0.62s
+[ANCHOR_DEBUG] render_probe call_id=355 status=done returncode=0 timeout_sec=5.00 size=45x25 payload_bytes=249 elapsed=0.62s
+[ANCHOR_DEBUG] render_probe call_id=356 status=done returncode=0 timeout_sec=5.00 size=45x25 payload_bytes=248 elapsed=0.63s
+[ANCHOR_DEBUG] render_probe call_id=357 status=done returncode=0 timeout_sec=5.00 size=45x25 payload_bytes=248 elapsed=0.61s
+[ANCHOR_DEBUG] render_probe call_id=358 status=done returncode=0 timeout_sec=5.00 size=45x25 payload_bytes=249 elapsed=0.62s
+[ANCHOR_DEBUG] render_probe call_id=359 status=done returncode=0 timeout_sec=5.00 size=45x25 payload_bytes=249 elapsed=0.60s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] circle_center_end round=1, elapsed=5.53s, remaining=23.16s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] circle_radius_start round=1, remaining=23.16s, state=cx=28.500, cy=12.500, r=10.667, arm_stroke=1.000
+[ANCHOR_DEBUG] render_probe call_id=360 status=done returncode=0 timeout_sec=5.00 size=45x25 payload_bytes=248 elapsed=0.58s
+[ANCHOR_DEBUG] render_probe call_id=361 status=done returncode=0 timeout_sec=5.00 size=45x25 payload_bytes=249 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=362 status=done returncode=0 timeout_sec=5.00 size=45x25 payload_bytes=249 elapsed=0.61s
+[ANCHOR_DEBUG] render_probe call_id=363 status=done returncode=0 timeout_sec=5.00 size=45x25 payload_bytes=387 elapsed=0.59s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] circle_radius_end round=1, elapsed=2.39s, remaining=20.77s
+[ANCHOR_DEBUG] render_probe call_id=364 status=done returncode=0 timeout_sec=5.00 size=45x25 payload_bytes=270 elapsed=0.60s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] element_render round=1, element=arm, elapsed=0.60s, state=cx=28.500, cy=12.500, r=11.000, arm_stroke=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] micro_eval phase=baseline, elapsed=0.00s, err=7.020
+[ANCHOR_DEBUG] render_probe call_id=365 status=done returncode=0 timeout_sec=5.00 size=45x25 payload_bytes=387 elapsed=0.62s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] micro_eval phase=candidate_1, elapsed=0.62s, err=9.762
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] HEARTBEAT phase=micro_search, round=1, elapsed=10.45s, remaining=19.55s
+[ANCHOR_DEBUG] render_probe call_id=366 status=done returncode=0 timeout_sec=5.00 size=45x25 payload_bytes=387 elapsed=0.59s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] micro_eval phase=candidate_2, elapsed=0.59s, err=6.350
+[ANCHOR_DEBUG] render_probe call_id=367 status=done returncode=0 timeout_sec=5.00 size=45x25 payload_bytes=387 elapsed=0.64s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] micro_eval phase=candidate_3, elapsed=0.64s, err=8.490
+[ANCHOR_DEBUG] render_probe call_id=368 status=done returncode=0 timeout_sec=5.00 size=45x25 payload_bytes=387 elapsed=0.59s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] micro_eval phase=candidate_4, elapsed=0.59s, err=8.250
+[ANCHOR_DEBUG] render_probe call_id=369 status=done returncode=0 timeout_sec=5.00 size=45x25 payload_bytes=387 elapsed=0.64s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] micro_eval phase=candidate_5, elapsed=0.64s, err=12.170
+[ANCHOR_DEBUG] render_probe call_id=370 status=done returncode=0 timeout_sec=5.00 size=45x25 payload_bytes=387 elapsed=0.63s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] micro_eval phase=candidate_6, elapsed=0.63s, err=12.542
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] full_render round=2, elapsed=0.00s, state=cx=29.000, cy=12.500, r=11.000, arm_stroke=1.000
+[ANCHOR_DEBUG] render_probe call_id=371 status=done returncode=0 timeout_sec=5.00 size=45x25 payload_bytes=249 elapsed=0.63s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] element_render round=2, element=circle, elapsed=0.63s, state=cx=29.000, cy=12.500, r=11.000, arm_stroke=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] circle_center_start round=2, remaining=15.82s, state=cx=29.000, cy=12.500, r=11.000, arm_stroke=1.000
+[ANCHOR_DEBUG] render_probe call_id=372 status=done returncode=0 timeout_sec=5.00 size=45x25 payload_bytes=249 elapsed=0.64s
+[ANCHOR_DEBUG] render_probe call_id=373 status=done returncode=0 timeout_sec=5.00 size=45x25 payload_bytes=249 elapsed=0.61s
+[ANCHOR_DEBUG] render_probe call_id=374 status=done returncode=0 timeout_sec=5.00 size=45x25 payload_bytes=249 elapsed=0.63s
+[ANCHOR_DEBUG] render_probe call_id=375 status=done returncode=0 timeout_sec=5.00 size=45x25 payload_bytes=249 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe_aggregate calls=375 slow_calls_gt_1s=0 timeouts=0 mean_elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=376 status=done returncode=0 timeout_sec=5.00 size=45x25 payload_bytes=249 elapsed=0.61s
+[ANCHOR_DEBUG] render_probe call_id=377 status=done returncode=0 timeout_sec=5.00 size=45x25 payload_bytes=249 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe call_id=378 status=done returncode=0 timeout_sec=5.00 size=45x25 payload_bytes=249 elapsed=0.58s
+[ANCHOR_DEBUG] render_probe call_id=379 status=done returncode=0 timeout_sec=5.00 size=45x25 payload_bytes=249 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe call_id=380 status=done returncode=0 timeout_sec=5.00 size=45x25 payload_bytes=249 elapsed=0.60s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] circle_center_end round=2, elapsed=5.48s, remaining=10.35s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] circle_radius_start round=2, remaining=10.35s, state=cx=29.000, cy=12.500, r=11.000, arm_stroke=1.000
+[ANCHOR_DEBUG] render_probe call_id=381 status=done returncode=0 timeout_sec=5.00 size=45x25 payload_bytes=249 elapsed=0.63s
+[ANCHOR_DEBUG] render_probe call_id=382 status=done returncode=0 timeout_sec=5.00 size=45x25 payload_bytes=249 elapsed=0.62s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] circle_radius_end round=2, elapsed=1.25s, remaining=9.10s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] HEARTBEAT phase=element_loop, round=2, elapsed=20.90s, remaining=9.10s, element=arm
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] element_render round=2, element=arm, elapsed=0.00s, state=cx=29.000, cy=12.500, r=11.000, arm_stroke=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] micro_eval phase=baseline, elapsed=0.00s, err=6.350
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] micro_eval phase=candidate_1, elapsed=0.00s, err=7.020
+[ANCHOR_DEBUG] render_probe call_id=383 status=done returncode=0 timeout_sec=5.00 size=45x25 payload_bytes=387 elapsed=0.63s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] micro_eval phase=candidate_2, elapsed=0.63s, err=8.617
+[ANCHOR_DEBUG] render_probe call_id=384 status=done returncode=0 timeout_sec=5.00 size=45x25 payload_bytes=387 elapsed=0.59s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] micro_eval phase=candidate_3, elapsed=0.59s, err=8.191
+[ANCHOR_DEBUG] render_probe call_id=385 status=done returncode=0 timeout_sec=5.00 size=45x25 payload_bytes=387 elapsed=0.60s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] micro_eval phase=candidate_4, elapsed=0.60s, err=7.955
+[ANCHOR_DEBUG] render_probe call_id=386 status=done returncode=0 timeout_sec=5.00 size=45x25 payload_bytes=387 elapsed=0.59s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] micro_eval phase=candidate_5, elapsed=0.59s, err=12.525
+[ANCHOR_DEBUG] render_probe call_id=387 status=done returncode=0 timeout_sec=5.00 size=45x25 payload_bytes=387 elapsed=0.62s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] micro_eval phase=candidate_6, elapsed=0.62s, err=12.365
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] full_render round=3, elapsed=0.00s, state=cx=29.000, cy=12.500, r=11.000, arm_stroke=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] element_render round=3, element=circle, elapsed=0.00s, state=cx=29.000, cy=12.500, r=11.000, arm_stroke=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] element_render round=3, element=arm, elapsed=0.00s, state=cx=29.000, cy=12.500, r=11.000, arm_stroke=1.000
+[ANCHOR_DEBUG] variant_done name=AC0812_L status=ok
+[ANCHOR_DEBUG] variant_start name=AC0812_S attempt_idx=1
+
+--- Verarbeite AC0812_S.jpg ---
+Bildbeschreibung: Wie AC0811: Kelle, ohne Text Kreis oben, Griff nach unten (dunkelgraue Liine). Geometrische Variante: 90° nach links gedreht.
+Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe, SEMANTIC: waagrechter Strich links vom Kreis
+[ANCHOR_DEBUG] render_probe call_id=388 status=done returncode=0 timeout_sec=5.00 size=25x15 payload_bytes=383 elapsed=0.61s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] full_render round=1, elapsed=0.61s, state=cx=17.500, cy=7.500, r=6.000, arm_stroke=1.000
+[ANCHOR_DEBUG] render_probe call_id=389 status=done returncode=0 timeout_sec=5.00 size=25x15 payload_bytes=247 elapsed=0.56s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] element_render round=1, element=circle, elapsed=0.56s, state=cx=17.500, cy=7.500, r=6.000, arm_stroke=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] circle_center_start round=1, remaining=28.82s, state=cx=17.500, cy=7.500, r=6.000, arm_stroke=1.000
+[ANCHOR_DEBUG] render_probe call_id=390 status=done returncode=0 timeout_sec=5.00 size=25x15 payload_bytes=247 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe call_id=391 status=done returncode=0 timeout_sec=5.00 size=25x15 payload_bytes=247 elapsed=0.63s
+[ANCHOR_DEBUG] render_probe call_id=392 status=done returncode=0 timeout_sec=5.00 size=25x15 payload_bytes=247 elapsed=0.58s
+[ANCHOR_DEBUG] render_probe call_id=393 status=done returncode=0 timeout_sec=5.00 size=25x15 payload_bytes=247 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=394 status=done returncode=0 timeout_sec=5.00 size=25x15 payload_bytes=247 elapsed=0.61s
+[ANCHOR_DEBUG] render_probe call_id=395 status=done returncode=0 timeout_sec=5.00 size=25x15 payload_bytes=247 elapsed=0.61s
+[ANCHOR_DEBUG] render_probe call_id=396 status=done returncode=0 timeout_sec=5.00 size=25x15 payload_bytes=247 elapsed=0.60s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] circle_center_end round=1, elapsed=4.23s, remaining=24.59s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] circle_radius_start round=1, remaining=24.59s, state=cx=18.000, cy=7.500, r=6.000, arm_stroke=1.000
+[ANCHOR_DEBUG] render_probe call_id=397 status=done returncode=0 timeout_sec=5.00 size=25x15 payload_bytes=247 elapsed=0.61s
+[ANCHOR_DEBUG] render_probe call_id=398 status=done returncode=0 timeout_sec=5.00 size=25x15 payload_bytes=383 elapsed=0.60s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] circle_radius_end round=1, elapsed=1.22s, remaining=23.37s
+[ANCHOR_DEBUG] render_probe call_id=399 status=done returncode=0 timeout_sec=5.00 size=25x15 payload_bytes=268 elapsed=0.59s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] element_render round=1, element=arm, elapsed=0.59s, state=cx=18.000, cy=7.500, r=6.000, arm_stroke=1.000
+[ANCHOR_DEBUG] render_probe call_id=400 status=done returncode=0 timeout_sec=5.00 size=25x15 payload_bytes=268 elapsed=0.62s
+[ANCHOR_DEBUG] render_probe_aggregate calls=400 slow_calls_gt_1s=0 timeouts=0 mean_elapsed=0.60s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] micro_eval phase=baseline, elapsed=0.00s, err=15.059
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] micro_eval phase=candidate_1, elapsed=0.00s, err=16.331
+[ANCHOR_DEBUG] render_probe call_id=401 status=done returncode=0 timeout_sec=5.00 size=25x15 payload_bytes=383 elapsed=0.61s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] micro_eval phase=candidate_2, elapsed=0.61s, err=17.947
+[ANCHOR_DEBUG] render_probe call_id=402 status=done returncode=0 timeout_sec=5.00 size=25x15 payload_bytes=383 elapsed=0.62s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] micro_eval phase=candidate_3, elapsed=0.62s, err=18.133
+[ANCHOR_DEBUG] render_probe call_id=403 status=done returncode=0 timeout_sec=5.00 size=25x15 payload_bytes=383 elapsed=0.60s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] micro_eval phase=candidate_4, elapsed=0.60s, err=17.429
+[ANCHOR_DEBUG] render_probe call_id=404 status=done returncode=0 timeout_sec=5.00 size=25x15 payload_bytes=383 elapsed=0.61s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] micro_eval phase=candidate_5, elapsed=0.61s, err=19.019
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] HEARTBEAT phase=micro_search, round=1, elapsed=10.29s, remaining=19.71s
+[ANCHOR_DEBUG] render_probe call_id=405 status=done returncode=0 timeout_sec=5.00 size=25x15 payload_bytes=383 elapsed=0.62s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] micro_eval phase=candidate_6, elapsed=0.62s, err=15.056
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] full_render round=2, elapsed=0.00s, state=cx=18.000, cy=7.500, r=6.500, arm_stroke=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] element_render round=2, element=circle, elapsed=0.00s, state=cx=18.000, cy=7.500, r=6.500, arm_stroke=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] circle_center_start round=2, remaining=19.09s, state=cx=18.000, cy=7.500, r=6.500, arm_stroke=1.000
+[ANCHOR_DEBUG] render_probe call_id=406 status=done returncode=0 timeout_sec=5.00 size=25x15 payload_bytes=247 elapsed=0.64s
+[ANCHOR_DEBUG] render_probe call_id=407 status=done returncode=0 timeout_sec=5.00 size=25x15 payload_bytes=247 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=408 status=done returncode=0 timeout_sec=5.00 size=25x15 payload_bytes=247 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=409 status=done returncode=0 timeout_sec=5.00 size=25x15 payload_bytes=247 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=410 status=done returncode=0 timeout_sec=5.00 size=25x15 payload_bytes=247 elapsed=0.61s
+[ANCHOR_DEBUG] render_probe call_id=411 status=done returncode=0 timeout_sec=5.00 size=25x15 payload_bytes=247 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=412 status=done returncode=0 timeout_sec=5.00 size=25x15 payload_bytes=247 elapsed=0.60s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] circle_center_end round=2, elapsed=4.26s, remaining=14.83s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] circle_radius_start round=2, remaining=14.83s, state=cx=17.000, cy=7.500, r=6.500, arm_stroke=1.000
+[ANCHOR_DEBUG] render_probe call_id=413 status=done returncode=0 timeout_sec=5.00 size=25x15 payload_bytes=383 elapsed=0.59s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] circle_radius_end round=2, elapsed=0.60s, remaining=14.23s
+[ANCHOR_DEBUG] render_probe call_id=414 status=done returncode=0 timeout_sec=5.00 size=25x15 payload_bytes=268 elapsed=0.61s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] element_render round=2, element=arm, elapsed=0.61s, state=cx=17.000, cy=7.500, r=6.500, arm_stroke=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] micro_eval phase=baseline, elapsed=0.00s, err=8.216
+[ANCHOR_DEBUG] render_probe call_id=415 status=done returncode=0 timeout_sec=5.00 size=25x15 payload_bytes=383 elapsed=0.61s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] micro_eval phase=candidate_1, elapsed=0.61s, err=11.875
+[ANCHOR_DEBUG] render_probe call_id=416 status=done returncode=0 timeout_sec=5.00 size=25x15 payload_bytes=383 elapsed=0.60s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] micro_eval phase=candidate_2, elapsed=0.61s, err=10.536
+[ANCHOR_DEBUG] render_probe call_id=417 status=done returncode=0 timeout_sec=5.00 size=25x15 payload_bytes=383 elapsed=0.61s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] micro_eval phase=candidate_3, elapsed=0.61s, err=12.667
+[ANCHOR_DEBUG] render_probe call_id=418 status=done returncode=0 timeout_sec=5.00 size=25x15 payload_bytes=383 elapsed=0.57s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] micro_eval phase=candidate_4, elapsed=0.57s, err=12.181
+[ANCHOR_DEBUG] render_probe call_id=419 status=done returncode=0 timeout_sec=5.00 size=25x15 payload_bytes=383 elapsed=0.60s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] micro_eval phase=candidate_5, elapsed=0.60s, err=17.160
+[ANCHOR_DEBUG] render_probe call_id=420 status=done returncode=0 timeout_sec=5.00 size=25x15 payload_bytes=383 elapsed=0.59s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] micro_eval phase=candidate_6, elapsed=0.59s, err=8.216
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] full_render round=3, elapsed=0.00s, state=cx=17.000, cy=7.500, r=6.500, arm_stroke=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] element_render round=3, element=circle, elapsed=0.00s, state=cx=17.000, cy=7.500, r=6.500, arm_stroke=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] circle_center_start round=3, remaining=10.03s, state=cx=17.000, cy=7.500, r=6.500, arm_stroke=1.000
+[ANCHOR_DEBUG] render_probe call_id=421 status=done returncode=0 timeout_sec=5.00 size=25x15 payload_bytes=247 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=422 status=done returncode=0 timeout_sec=5.00 size=25x15 payload_bytes=247 elapsed=0.60s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] circle_center_end round=3, elapsed=1.21s, remaining=8.81s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] circle_radius_start round=3, remaining=8.81s, state=cx=17.000, cy=7.500, r=6.500, arm_stroke=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] circle_radius_end round=3, elapsed=0.01s, remaining=8.81s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] HEARTBEAT phase=element_loop, round=3, elapsed=21.19s, remaining=8.81s, element=arm
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] element_render round=3, element=arm, elapsed=0.00s, state=cx=17.000, cy=7.500, r=6.500, arm_stroke=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] micro_eval phase=baseline, elapsed=0.00s, err=8.216
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] micro_eval phase=candidate_1, elapsed=0.00s, err=11.875
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] micro_eval phase=candidate_2, elapsed=0.00s, err=10.536
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] micro_eval phase=candidate_3, elapsed=0.00s, err=12.667
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] micro_eval phase=candidate_4, elapsed=0.00s, err=12.181
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] micro_eval phase=candidate_5, elapsed=0.00s, err=17.160
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] micro_eval phase=candidate_6, elapsed=0.00s, err=8.216
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] full_render round=4, elapsed=0.00s, state=cx=17.000, cy=7.500, r=6.500, arm_stroke=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] element_render round=4, element=circle, elapsed=0.00s, state=cx=17.000, cy=7.500, r=6.500, arm_stroke=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] element_render round=4, element=arm, elapsed=0.00s, state=cx=17.000, cy=7.500, r=6.500, arm_stroke=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] micro_eval phase=baseline, elapsed=0.00s, err=8.216
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] micro_eval phase=candidate_1, elapsed=0.00s, err=11.875
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] micro_eval phase=candidate_2, elapsed=0.00s, err=10.536
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] micro_eval phase=candidate_3, elapsed=0.00s, err=12.667
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] micro_eval phase=candidate_4, elapsed=0.00s, err=12.181
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] micro_eval phase=candidate_5, elapsed=0.00s, err=17.160
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] micro_eval phase=candidate_6, elapsed=0.00s, err=8.216
+[ANCHOR_DEBUG] variant_done name=AC0812_S status=ok
+[ANCHOR_DEBUG] render_probe call_id=423 status=done returncode=0 timeout_sec=5.00 size=25x15 payload_bytes=382 elapsed=0.64s
+[ANCHOR_DEBUG] render_probe call_id=424 status=done returncode=0 timeout_sec=5.00 size=25x15 payload_bytes=383 elapsed=0.62s
+[ANCHOR_DEBUG] render_probe call_id=425 status=done returncode=0 timeout_sec=5.00 size=25x15 payload_bytes=382 elapsed=0.61s
+[ANCHOR_DEBUG] render_probe_aggregate calls=425 slow_calls_gt_1s=0 timeouts=0 mean_elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=426 status=done returncode=0 timeout_sec=5.00 size=25x15 payload_bytes=382 elapsed=0.68s
+[ANCHOR_DEBUG] render_probe call_id=427 status=done returncode=0 timeout_sec=5.00 size=25x15 payload_bytes=382 elapsed=0.63s
+[ANCHOR_DEBUG] render_probe call_id=428 status=done returncode=0 timeout_sec=5.00 size=25x15 payload_bytes=382 elapsed=0.61s
+[ANCHOR_DEBUG] render_probe call_id=429 status=done returncode=0 timeout_sec=5.00 size=25x15 payload_bytes=382 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=430 status=done returncode=0 timeout_sec=5.00 size=25x15 payload_bytes=382 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe call_id=431 status=done returncode=0 timeout_sec=5.00 size=25x15 payload_bytes=384 elapsed=0.61s
+[ANCHOR_DEBUG] render_probe call_id=432 status=done returncode=0 timeout_sec=5.00 size=25x15 payload_bytes=382 elapsed=0.65s
+[ANCHOR_DEBUG] render_probe call_id=433 status=done returncode=0 timeout_sec=5.00 size=25x15 payload_bytes=382 elapsed=0.62s
+[ANCHOR_DEBUG] render_probe call_id=434 status=done returncode=0 timeout_sec=5.00 size=25x15 payload_bytes=382 elapsed=0.61s
+[ANCHOR_DEBUG] render_probe call_id=435 status=done returncode=0 timeout_sec=5.00 size=25x15 payload_bytes=384 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe call_id=436 status=done returncode=0 timeout_sec=5.00 size=25x15 payload_bytes=384 elapsed=0.61s
+[ANCHOR_DEBUG] render_probe call_id=437 status=done returncode=0 timeout_sec=5.00 size=25x15 payload_bytes=384 elapsed=0.62s
+[ANCHOR_DEBUG] render_probe call_id=438 status=done returncode=0 timeout_sec=5.00 size=25x15 payload_bytes=384 elapsed=0.62s
+[ANCHOR_DEBUG] render_probe call_id=439 status=done returncode=0 timeout_sec=5.00 size=25x15 payload_bytes=384 elapsed=0.61s
+[ANCHOR_DEBUG] render_probe call_id=440 status=done returncode=0 timeout_sec=5.00 size=25x15 payload_bytes=386 elapsed=0.62s
+[ANCHOR_DEBUG] render_probe call_id=441 status=done returncode=0 timeout_sec=5.00 size=25x15 payload_bytes=386 elapsed=0.61s
+[ANCHOR_DEBUG] render_probe call_id=442 status=done returncode=0 timeout_sec=5.00 size=25x15 payload_bytes=386 elapsed=0.61s
+[ANCHOR_DEBUG] variant_start name=AC0812_M attempt_idx=1
+
+--- Verarbeite AC0812_M.jpg ---
+Bildbeschreibung: Wie AC0811: Kelle, ohne Text Kreis oben, Griff nach unten (dunkelgraue Liine). Geometrische Variante: 90° nach links gedreht.
+Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe, SEMANTIC: waagrechter Strich links vom Kreis
+[ANCHOR_DEBUG] render_probe call_id=443 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=386 elapsed=0.63s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] full_render round=1, elapsed=0.63s, state=cx=25.000, cy=10.000, r=8.833, arm_stroke=1.000
+[ANCHOR_DEBUG] render_probe call_id=444 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=248 elapsed=0.67s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] element_render round=1, element=circle, elapsed=0.67s, state=cx=25.000, cy=10.000, r=8.833, arm_stroke=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] circle_center_start round=1, remaining=28.69s, state=cx=25.000, cy=10.000, r=8.833, arm_stroke=1.000
+[ANCHOR_DEBUG] render_probe call_id=445 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=248 elapsed=0.63s
+[ANCHOR_DEBUG] render_probe call_id=446 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=248 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=447 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=248 elapsed=0.62s
+[ANCHOR_DEBUG] render_probe call_id=448 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=248 elapsed=0.61s
+[ANCHOR_DEBUG] render_probe call_id=449 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=248 elapsed=0.58s
+[ANCHOR_DEBUG] render_probe call_id=450 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=247 elapsed=0.58s
+[ANCHOR_DEBUG] render_probe_aggregate calls=450 slow_calls_gt_1s=0 timeouts=0 mean_elapsed=0.61s
+[ANCHOR_DEBUG] render_probe call_id=451 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=248 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe call_id=452 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=248 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=453 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=248 elapsed=0.62s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] circle_center_end round=1, elapsed=5.45s, remaining=23.24s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] circle_radius_start round=1, remaining=23.24s, state=cx=23.000, cy=10.000, r=8.833, arm_stroke=1.000
+[ANCHOR_DEBUG] render_probe call_id=454 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=248 elapsed=0.57s
+[ANCHOR_DEBUG] render_probe call_id=455 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=248 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe call_id=456 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=386 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=457 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=386 elapsed=0.59s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] circle_radius_end round=1, elapsed=2.36s, remaining=20.89s
+[ANCHOR_DEBUG] render_probe call_id=458 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=270 elapsed=0.59s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] element_render round=1, element=arm, elapsed=0.59s, state=cx=23.000, cy=10.000, r=9.000, arm_stroke=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] micro_eval phase=baseline, elapsed=0.00s, err=11.636
+[ANCHOR_DEBUG] render_probe call_id=459 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=386 elapsed=0.61s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] micro_eval phase=candidate_1, elapsed=0.61s, err=11.290
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] HEARTBEAT phase=micro_search, round=1, elapsed=10.31s, remaining=19.69s
+[ANCHOR_DEBUG] render_probe call_id=460 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=386 elapsed=0.61s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] micro_eval phase=candidate_2, elapsed=0.61s, err=11.479
+[ANCHOR_DEBUG] render_probe call_id=461 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=383 elapsed=0.60s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] micro_eval phase=candidate_3, elapsed=0.60s, err=8.760
+[ANCHOR_DEBUG] render_probe call_id=462 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=386 elapsed=0.61s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] micro_eval phase=candidate_4, elapsed=0.61s, err=8.734
+[ANCHOR_DEBUG] render_probe call_id=463 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=386 elapsed=0.59s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] micro_eval phase=candidate_5, elapsed=0.59s, err=11.284
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] micro_eval phase=candidate_6, elapsed=0.00s, err=11.636
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] full_render round=2, elapsed=0.00s, state=cx=23.000, cy=10.500, r=9.000, arm_stroke=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] element_render round=2, element=circle, elapsed=0.00s, state=cx=23.000, cy=10.500, r=9.000, arm_stroke=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] circle_center_start round=2, remaining=17.28s, state=cx=23.000, cy=10.500, r=9.000, arm_stroke=1.000
+[ANCHOR_DEBUG] render_probe call_id=464 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=248 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe call_id=465 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=248 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe call_id=466 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=248 elapsed=0.59s
+[ANCHOR_DEBUG] render_probe call_id=467 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=248 elapsed=0.58s
+[ANCHOR_DEBUG] render_probe call_id=468 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=248 elapsed=0.57s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] circle_center_end round=2, elapsed=2.94s, remaining=14.34s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] circle_radius_start round=2, remaining=14.34s, state=cx=23.000, cy=10.500, r=9.000, arm_stroke=1.000
+[ANCHOR_DEBUG] render_probe call_id=469 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=248 elapsed=0.60s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] circle_radius_end round=2, elapsed=0.61s, remaining=13.73s
+[ANCHOR_DEBUG] render_probe call_id=470 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=270 elapsed=0.61s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] element_render round=2, element=arm, elapsed=0.61s, state=cx=23.000, cy=10.500, r=9.500, arm_stroke=1.000
+[ANCHOR_DEBUG] render_probe call_id=471 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=386 elapsed=0.61s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] micro_eval phase=baseline, elapsed=0.61s, err=8.749
+[ANCHOR_DEBUG] render_probe call_id=472 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=386 elapsed=0.61s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] micro_eval phase=candidate_1, elapsed=0.61s, err=11.016
+[ANCHOR_DEBUG] render_probe call_id=473 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=386 elapsed=0.62s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] micro_eval phase=candidate_2, elapsed=0.62s, err=10.401
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] micro_eval phase=candidate_3, elapsed=0.00s, err=11.636
+[ANCHOR_DEBUG] render_probe call_id=474 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=386 elapsed=0.60s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] micro_eval phase=candidate_4, elapsed=0.60s, err=15.741
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] micro_eval phase=candidate_5, elapsed=0.00s, err=8.734
+[ANCHOR_DEBUG] render_probe call_id=475 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=386 elapsed=0.60s
+[ANCHOR_DEBUG] render_probe_aggregate calls=475 slow_calls_gt_1s=0 timeouts=0 mean_elapsed=0.61s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] micro_eval phase=candidate_6, elapsed=0.60s, err=8.794
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] full_render round=3, elapsed=0.00s, state=cx=23.000, cy=10.500, r=9.000, arm_stroke=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] element_render round=3, element=circle, elapsed=0.00s, state=cx=23.000, cy=10.500, r=9.000, arm_stroke=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] element_render round=3, element=arm, elapsed=0.00s, state=cx=23.000, cy=10.500, r=9.000, arm_stroke=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] micro_eval phase=baseline, elapsed=0.00s, err=8.734
+[ANCHOR_DEBUG] render_probe call_id=476 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=386 elapsed=0.61s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] micro_eval phase=candidate_1, elapsed=0.61s, err=11.016
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] HEARTBEAT phase=micro_search, round=3, elapsed=20.53s, remaining=9.47s

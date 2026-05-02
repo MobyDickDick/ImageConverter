@@ -243,6 +243,9 @@ def convertOneImpl(
     def _emit_anchor_variant_event(event: str, **fields: object) -> None:
         if not anchor_test_active:
             return
+        run_context = str(os.environ.get("ICC_ANCHOR_RUN_CONTEXT", "") or "").strip()
+        if run_context:
+            fields.setdefault("context", run_context)
         extras = " ".join(f"{key}={value}" for key, value in fields.items())
         suffix = f" {extras}" if extras else ""
         print_fn(f"[ANCHOR_DEBUG] {event} name={base}{suffix}")

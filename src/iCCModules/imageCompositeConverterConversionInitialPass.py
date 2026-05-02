@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import os
+
 
 def runInitialConversionPassImpl(
     *,
@@ -36,9 +38,9 @@ def runInitialConversionPassImpl(
                 continue
             seen_variants.add(variant)
         if anchor_test_active:
-            os_module = __import__("os")
-            os_module.environ["ICC_ANCHOR_VARIANT_IDX"] = str(variant_idx)
-            os_module.environ["ICC_ANCHOR_VARIANT_TOTAL"] = str(total_variants)
+            os.environ["ICC_ANCHOR_VARIANT_IDX"] = str(variant_idx)
+            os.environ["ICC_ANCHOR_VARIANT_TOTAL"] = str(total_variants)
+            os.environ["ICC_ANCHOR_RUN_CONTEXT"] = f"initial_pass:{variant_idx}/{total_variants}"
         row, failed = convert_one_fn(filename, iteration_budget=base_iterations, badge_rounds=6)
         if failed:
             stop_after_failure = True

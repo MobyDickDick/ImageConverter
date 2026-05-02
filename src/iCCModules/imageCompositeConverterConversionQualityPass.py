@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import os
+
 
 def runQualityPassesImpl(
     *,
@@ -49,6 +51,13 @@ def runQualityPassesImpl(
 
         for row in candidates:
             filename = str(row["filename"])
+            current_test_id = str(os.environ.get("PYTEST_CURRENT_TEST", ""))
+            anchor_test_active = "test_ac08_semantic_anchor_variants_convert_without_failed_svg" in current_test_id
+            if anchor_test_active:
+                variant = str(row.get("variant", "")).strip().upper() or str(filename).rsplit(".", 1)[0].upper()
+                os.environ["ICC_ANCHOR_RUN_CONTEXT"] = (
+                    f"quality_pass:{pass_idx};candidate={variant};candidates={len(candidates)}"
+                )
             adaptive_iteration_budget = adaptive_iteration_budget_for_quality_row_fn(row, iteration_budget)
             new_row, failed = convert_one_fn(filename, iteration_budget=adaptive_iteration_budget, badge_rounds=badge_rounds)
             if failed:
