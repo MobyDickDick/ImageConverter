@@ -236,6 +236,7 @@ def validateBadgeByElementsImpl(
     variant_name = str(params.get("variant_name", params.get("base_name", "unknown")))
     anchor_telemetry_prefix = f"anchor_telemetry[{variant_name}]"
     configured_budget = float(params.get("validation_time_budget_sec", 0.0) or 0.0)
+    variant_name_upper = variant_name.upper()
     if configured_budget <= 0.0:
         configured_budget = max(15.0, 3.0 * float(max_rounds))
         if os_module.environ.get("PYTEST_CURRENT_TEST"):
@@ -255,6 +256,13 @@ def validateBadgeByElementsImpl(
                 # can make the test appear stalled for several minutes without
                 # adding meaningful signal for this smoke-style assertion.
                 configured_budget = min(configured_budget, 90.0)
+
+    if variant_name_upper == "AC0811_L" and configured_budget > 0.0:
+        # AC0811_L is the first documented AC08 variant to exceed the
+        # validation budget in full-range runs. Give this single variant a
+        # slightly higher floor so element-search rounds can finish instead of
+        # timing out at round boundaries.
+        configured_budget = max(configured_budget, 48.0)
 
     variant_budget_sec = configured_budget
     if is_anchor_telemetry_test and configured_budget > 0.0:
