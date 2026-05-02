@@ -1,209 +1,270 @@
-run-meta: run_seed=430953015 pass_seed_offset=0 nonce_ns=1777124822547996800
+run-meta: run_seed=842272940 pass_seed_offset=0 nonce_ns=1777707398731168400
 status=semantic_ok
-redraw_variation: seed=434937906365 changed_params=cx:12.000->12.227 | cy:12.500->12.689 | r:7.500->7.577 | stroke_circle:1.000->1.064 | arm_stroke:1.000->0.912
+redraw_variation: seed=850140155058 changed_params=cx:12.500->12.606 | cy:16.500->16.702 | r:11.500->11.373 | stroke_circle:1.000->0.949 | arm_stroke:1.000->1.052
 semantic-guard: Textmodus aktiv (voc).
 Runde 1: elementweise Validierung gestartet
+budget_snapshot: round=1, remaining=18.00s, total=18.00s
 circle: Fehler=133.842
 circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
 circle: Mittelpunkt-Bracketing Achse fixiert (x-axis collapsed by template-centered window)
 circle: Mittelpunkt-Bracketing keine relevante Änderung (cx=16.000, cy=12.500, best_err=133.842)
+perf_probe: circle_center_elapsed round=1 elapsed=0.03s
 circle: Radius-Bracketing r 10.695->12.000 (best_err=133.842, full_err=39.093); Kandidaten=11.500->133.842, 12.000->133.842
+perf_probe: circle_radius_elapsed round=1 elapsed=0.02s
 arm: Element konnte nicht extrahiert werden
 text: Fehler=132.119
 text: Breiten-Bracketing voc_font_scale 0.600->1.650; Kandidaten=0.900->145.509, 1.125->146.566, 1.350->148.217, 1.650->142.641, 1.950->159.057, 2.175->149.596, 2.400->149.070
-global-search: konfiguration (modus=reduziert, aktive_parameter=3, keys=cx,cy,r)
-global-search: gestartet (modus=reduziert, aktive_parameter=cx,cy,r, samples_pro_runde=16, start_err=45.477)
+global-search: konfiguration (modus=voll, aktive_parameter=7, rounds=2, samples=8, keys=cx,cy,r,arm_x1,arm_y1,arm_x2,arm_y2)
+global-search: gestartet (modus=voll, aktive_parameter=cx,cy,r,arm_x1,arm_y1,arm_x2,arm_y2, samples_pro_runde=8, start_err=45.477)
 global-search: near-optimum-definition (err <= best_err + epsilon, epsilon=max(0.06, best_err*0.02))
 global-search: schwerpunkt verworfen (runde=1, grund=r=8.500 außerhalb [11.500, 8.500])
-global-search: Runde 1 best_err=40.638, akzeptierte_kandidaten=2, sigma_mittel=2.561
-global-search: near-optimum-plateau (runde=1, punkte=2, epsilon=0.813, mittlere_spannweite=1.167, stabilitaet=n/a, spannweite=cx:1.500; cy:2.000; r:0.000)
-global-search: plateau-repräsentant (runde=1, kandidat=best_sample, err=40.638, begründung=niedrigster Fehler in dieser Runde)
+global-search: Runde 1 best_err=39.944, akzeptierte_kandidaten=2, sigma_mittel=2.988
+global-search: near-optimum-plateau (runde=1, punkte=1, epsilon=0.799, mittlere_spannweite=0.000, stabilitaet=n/a, spannweite=cx:0.000; cy:0.000; r:0.000; arm_x1:0.000; arm_y1:0.000; arm_x2:0.000; arm_y2:0.000)
+global-search: plateau-repräsentant (runde=1, kandidat=best_sample, err=39.944, begründung=niedrigster Fehler in dieser Runde)
 global-search: schwerpunkt verworfen (runde=2, grund=r=8.500 außerhalb [11.500, 8.500])
-global-search: Runde 2 best_err=37.733, akzeptierte_kandidaten=1, sigma_mittel=1.998
-global-search: near-optimum-plateau (runde=2, punkte=1, epsilon=0.755, mittlere_spannweite=0.000, stabilitaet=dynamisch, spannweite=cx:0.000; cy:0.000; r:0.000)
-global-search: plateau-repräsentant (runde=2, kandidat=best_sample, err=37.733, begründung=niedrigster Fehler in dieser Runde)
-global-search: schwerpunkt verworfen (runde=3, grund=r=8.500 außerhalb [11.500, 8.500])
-global-search: Runde 3 best_err=35.261, akzeptierte_kandidaten=1, sigma_mittel=1.559
-global-search: near-optimum-plateau (runde=3, punkte=3, epsilon=0.705, mittlere_spannweite=0.500, stabilitaet=stabil, spannweite=cx:1.000; cy:0.500; r:0.000)
-global-search: plateau-repräsentant (runde=3, kandidat=best_sample, err=35.261, begründung=niedrigster Fehler in dieser Runde)
-global-search: deterministischer track gestartet (modus=reduziert, seed=430957114, schritte=3, start_err=45.477)
-global-search: deterministischer track (pass=1, verbesserungen=1, best_err=41.166)
-global-search: deterministischer track (pass=2, verbesserungen=0, best_err=41.166)
-global-search: track-vergleich (stochastic_err=35.261, deterministic_err=41.166, gewählt=stochastic)
-global-search: final (stochastic): global_vector cx=13.500 [0.00,24.00] lock=nein src=canvas; cy=17.500 [0.00,24.00] lock=nein src=canvas; r=8.500 [11.50,7.00] lock=nein src=template/semantic; arm_x1=28.500 [0.00,24.00] lock=nein src=canvas; arm_y1=17.500 [0.00,24.00] lock=nein src=canvas; arm_x2=22.500 [0.00,24.00] lock=nein src=template; arm_y2=17.500 [0.00,24.00] lock=nein src=template; arm_stroke=1.000 [1.00,5.00] lock=ja src=semantic; stem_x=- [0.00,24.00] lock=nein src=template; stem_top=- [0.00,24.00] lock=nein src=template; stem_bottom=- [0.00,24.00] lock=nein src=template; stem_width=- [1.00,6.25] lock=ja src=semantic; text_x=- [0.00,24.00] lock=nein src=template; text_y=- [0.00,24.00] lock=nein src=template; text_scale=- [0.50,1.80] lock=nein src=semantic
-global-search: übernommen (best_err=35.261, track=stochastic, verbessert=cx 16.000->13.500, cy 12.500->17.500, r 12.000->8.500)
-global-search: evaluate-telemetrie (requests=61, cache_hits=9, hit_rate=0.148, render_aufrufe=52)
-Runde 1: Gesamtfehler=35.261
+global-search: Runde 2 best_err=39.944, akzeptierte_kandidaten=0, sigma_mittel=2.151
+global-search: near-optimum-plateau (runde=2, punkte=1, epsilon=0.799, mittlere_spannweite=0.000, stabilitaet=stabil, spannweite=cx:0.000; cy:0.000; r:0.000; arm_x1:0.000; arm_y1:0.000; arm_x2:0.000; arm_y2:0.000)
+global-search: plateau-repräsentant (runde=2, kandidat=best_sample, err=39.944, begründung=niedrigster Fehler in dieser Runde)
+global-search: deterministischer track gestartet (modus=voll, seed=842277039, schritte=2, start_err=45.477)
+global-search: intervallhalbierung (pass=1, key=r, final_step=0.500, iters=0)
+global-search: intervallhalbierung (pass=1, key=arm_x1, final_step=0.540, iters=3)
+global-search: intervallhalbierung (pass=1, key=arm_x2, final_step=0.540, iters=3)
+global-search: intervallhalbierung (pass=1, key=arm_y2, final_step=0.540, iters=3)
+global-search: deterministischer track (pass=1, verbesserungen=4, best_err=40.341)
+global-search: intervallhalbierung (pass=2, key=cx, final_step=0.500, iters=1)
+global-search: intervallhalbierung (pass=2, key=cy, final_step=0.500, iters=1)
+global-search: intervallhalbierung (pass=2, key=r, final_step=0.500, iters=0)
+global-search: intervallhalbierung (pass=2, key=arm_x1, final_step=0.100, iters=3)
+global-search: intervallhalbierung (pass=2, key=arm_y1, final_step=0.203, iters=3)
+global-search: intervallhalbierung (pass=2, key=arm_x2, final_step=0.100, iters=3)
+global-search: intervallhalbierung (pass=2, key=arm_y2, final_step=0.100, iters=3)
+global-search: deterministischer track (pass=2, verbesserungen=0, best_err=40.341)
+global-search: track-vergleich (stochastic_err=39.944, deterministic_err=40.341, gewählt=stochastic)
+global-search: final (stochastic): global_vector cx=11.500 [0.00,24.00] lock=nein src=canvas; cy=16.000 [0.00,24.00] lock=nein src=canvas; r=8.500 [11.50,8.50] lock=nein src=template/semantic; arm_x1=24.000 [0.00,24.00] lock=nein src=canvas; arm_y1=16.000 [0.00,24.00] lock=nein src=canvas; arm_x2=20.500 [0.00,24.00] lock=nein src=template; arm_y2=16.000 [0.00,24.00] lock=nein src=template; arm_stroke=1.000 [1.00,5.00] lock=ja src=semantic; stem_x=- [0.00,24.00] lock=nein src=template; stem_top=- [0.00,24.00] lock=nein src=template; stem_bottom=- [0.00,24.00] lock=nein src=template; stem_width=- [1.00,6.25] lock=ja src=semantic; text_x=- [0.00,24.00] lock=nein src=template; text_y=- [0.00,24.00] lock=nein src=template; text_scale=- [0.50,1.80] lock=nein src=semantic
+global-search: übernommen (best_err=39.944, track=stochastic, verbessert=cx 16.000->11.500, cy 12.500->16.000, r 12.000->8.500, arm_x1 28.500->24.000, arm_y1 12.500->11.008, arm_x2 27.195->8.469, arm_y2 12.500->24.000)
+global-search: evaluate-telemetrie (requests=89, cache_hits=42, hit_rate=0.472, render_aufrufe=47)
+perf_probe: global_search_elapsed round=1 elapsed=0.46s
+Runde 1: Gesamtfehler=39.944
 Runde 2: elementweise Validierung gestartet
-circle: Fehler=111.920
+budget_snapshot: round=2, remaining=17.32s, total=18.00s
+circle: Fehler=144.777
 circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
-circle: Mittelpunkt-Bracketing abgebrochen (y-axis collapsed after radius-clearance corridor; x-axis collapsed by template-centered window; y-axis collapsed by template-centered window)
-circle: Radius-Bracketing r 8.500->12.000 (best_err=111.920, full_err=35.398); Kandidaten=11.500->111.920, 12.000->111.920
-arm: Element konnte nicht extrahiert werden
-text: Fehler=117.058
-text: Breiten-Stochastic-Survivor aktiviert (voc_font_scale=0.904, err=84.569)
-text: Breiten-Bracketing voc_font_scale 1.650->0.904; Kandidaten=0.900->84.737, 1.125->99.021, 1.350->108.344, 1.402->111.960, 1.650->117.058, 1.897->136.660, 1.950->140.086, 2.175->125.929, 2.400->123.702
-global-search: konfiguration (modus=reduziert, aktive_parameter=3, keys=cx,cy,r)
-global-search: gestartet (modus=reduziert, aktive_parameter=cx,cy,r, samples_pro_runde=16, start_err=38.726)
+circle: Mittelpunkt-Bracketing Achse fixiert (x-axis collapsed by template-centered window)
+circle: Mittelpunkt-Bracketing cx 11.500->11.500, cy 16.000->12.500 (best_err=112.302)
+perf_probe: circle_center_elapsed round=2 elapsed=0.03s
+circle: Radius-Bracketing r 8.500->12.000 (best_err=112.302, full_err=43.474); Kandidaten=11.500->112.302, 12.000->112.302
+perf_probe: circle_radius_elapsed round=2 elapsed=0.01s
+arm: Fehler=155.122
+arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
+arm: Längen-Bracketing arm_len 12.000->17.000; Kandidaten=9.000->161.216, 12.000->155.122, 13.000->149.298, 17.000->147.734, 21.000->157.046, 25.000->154.858
+text: Fehler=151.037
+text: Breiten-Bracketing voc_font_scale 1.650->1.125; Kandidaten=0.900->138.309, 1.125->136.474, 1.350->156.474, 1.402->157.941, 1.650->151.037, 1.897->159.924, 1.950->160.912, 2.175->165.602, 2.400->166.148
+global-search: konfiguration (modus=voll, aktive_parameter=7, rounds=2, samples=8, keys=cx,cy,r,arm_x1,arm_y1,arm_x2,arm_y2)
+global-search: gestartet (modus=voll, aktive_parameter=cx,cy,r,arm_x1,arm_y1,arm_x2,arm_y2, samples_pro_runde=8, start_err=39.086)
 global-search: near-optimum-definition (err <= best_err + epsilon, epsilon=max(0.06, best_err*0.02))
-global-search: schwerpunkt verworfen (runde=1, grund=r=7.000 außerhalb [11.500, 7.000])
-global-search: Runde 1 best_err=38.726, akzeptierte_kandidaten=0, sigma_mittel=2.561
-global-search: near-optimum-plateau (runde=1, punkte=2, epsilon=0.775, mittlere_spannweite=1.500, stabilitaet=n/a, spannweite=cx:2.000; cy:2.500; r:0.000)
-global-search: plateau-repräsentant (runde=1, kandidat=best_sample, err=38.726, begründung=niedrigster Fehler in dieser Runde)
-global-search: schwerpunkt verworfen (runde=2, grund=r=7.000 außerhalb [11.500, 7.000])
-global-search: Runde 2 best_err=36.238, akzeptierte_kandidaten=1, sigma_mittel=1.998
-global-search: near-optimum-plateau (runde=2, punkte=1, epsilon=0.725, mittlere_spannweite=0.000, stabilitaet=stabil, spannweite=cx:0.000; cy:0.000; r:0.000)
-global-search: plateau-repräsentant (runde=2, kandidat=best_sample, err=36.238, begründung=niedrigster Fehler in dieser Runde)
-global-search: schwerpunkt verworfen (runde=3, grund=r=7.000 außerhalb [11.500, 7.000])
-global-search: Runde 3 best_err=34.838, akzeptierte_kandidaten=1, sigma_mittel=1.559
-global-search: near-optimum-plateau (runde=3, punkte=1, epsilon=0.697, mittlere_spannweite=0.000, stabilitaet=dynamisch, spannweite=cx:0.000; cy:0.000; r:0.000)
-global-search: plateau-repräsentant (runde=3, kandidat=best_sample, err=34.838, begründung=niedrigster Fehler in dieser Runde)
-global-search: deterministischer track gestartet (modus=reduziert, seed=430957114, schritte=3, start_err=38.726)
-global-search: deterministischer track (pass=1, verbesserungen=0, best_err=38.726)
-global-search: deterministischer track (pass=2, verbesserungen=0, best_err=38.726)
-global-search: track-vergleich (stochastic_err=34.838, deterministic_err=38.726, gewählt=stochastic)
-global-search: final (stochastic): global_vector cx=12.000 [0.00,24.00] lock=nein src=canvas; cy=15.500 [0.00,24.00] lock=nein src=canvas; r=7.000 [11.50,9.00] lock=nein src=template/semantic; arm_x1=28.500 [0.00,24.00] lock=nein src=canvas; arm_y1=15.500 [0.00,24.00] lock=nein src=canvas; arm_x2=19.500 [0.00,24.00] lock=nein src=template; arm_y2=15.500 [0.00,24.00] lock=nein src=template; arm_stroke=1.000 [1.00,5.00] lock=ja src=semantic; stem_x=- [0.00,24.00] lock=nein src=template; stem_top=- [0.00,24.00] lock=nein src=template; stem_bottom=- [0.00,24.00] lock=nein src=template; stem_width=- [1.00,6.25] lock=ja src=semantic; text_x=- [0.00,24.00] lock=nein src=template; text_y=- [0.00,24.00] lock=nein src=template; text_scale=- [0.50,1.80] lock=nein src=semantic
-global-search: übernommen (best_err=34.838, track=stochastic, verbessert=cx 13.500->12.000, cy 17.500->15.500, r 12.000->7.000)
-global-search: evaluate-telemetrie (requests=61, cache_hits=7, hit_rate=0.115, render_aufrufe=54)
-Runde 2: Gesamtfehler=34.838
+global-search: schwerpunkt verworfen (runde=1, grund=r=11.000 außerhalb [11.500, 11.000])
+global-search: Runde 1 best_err=39.086, akzeptierte_kandidaten=0, sigma_mittel=2.988
+global-search: near-optimum-plateau (runde=1, punkte=1, epsilon=0.782, mittlere_spannweite=0.000, stabilitaet=n/a, spannweite=cx:0.000; cy:0.000; r:0.000; arm_x1:0.000; arm_y1:0.000; arm_x2:0.000; arm_y2:0.000)
+global-search: plateau-repräsentant (runde=1, kandidat=best_sample, err=39.086, begründung=niedrigster Fehler in dieser Runde)
+global-search: schwerpunkt verworfen (runde=2, grund=r=11.000 außerhalb [11.500, 11.000])
+global-search: Runde 2 best_err=39.086, akzeptierte_kandidaten=0, sigma_mittel=2.151
+global-search: near-optimum-plateau (runde=2, punkte=1, epsilon=0.782, mittlere_spannweite=0.000, stabilitaet=stabil, spannweite=cx:0.000; cy:0.000; r:0.000; arm_x1:0.000; arm_y1:0.000; arm_x2:0.000; arm_y2:0.000)
+global-search: plateau-repräsentant (runde=2, kandidat=best_sample, err=39.086, begründung=niedrigster Fehler in dieser Runde)
+global-search: deterministischer track gestartet (modus=voll, seed=842277039, schritte=2, start_err=39.086)
+global-search: intervallhalbierung (pass=1, key=cx, final_step=0.562, iters=3)
+global-search: intervallhalbierung (pass=1, key=r, final_step=0.500, iters=0)
+global-search: intervallhalbierung (pass=1, key=arm_x1, final_step=0.540, iters=3)
+global-search: intervallhalbierung (pass=1, key=arm_y1, final_step=0.540, iters=3)
+global-search: intervallhalbierung (pass=1, key=arm_x2, final_step=0.540, iters=3)
+global-search: deterministischer track (pass=1, verbesserungen=3, best_err=36.736)
+global-search: intervallhalbierung (pass=2, key=r, final_step=0.500, iters=0)
+global-search: intervallhalbierung (pass=2, key=arm_x1, final_step=0.100, iters=3)
+global-search: intervallhalbierung (pass=2, key=arm_y1, final_step=0.100, iters=3)
+global-search: intervallhalbierung (pass=2, key=arm_x2, final_step=0.100, iters=3)
+global-search: intervallhalbierung (pass=2, key=arm_y2, final_step=0.203, iters=3)
+global-search: deterministischer track (pass=2, verbesserungen=4, best_err=30.579)
+global-search: track-vergleich (stochastic_err=39.086, deterministic_err=30.579, gewählt=deterministic)
+global-search: final (deterministic): global_vector cx=12.500 [0.00,24.00] lock=nein src=canvas; cy=16.500 [0.00,24.00] lock=nein src=canvas; r=11.000 [11.50,8.00] lock=nein src=template/semantic; arm_x1=12.500 [0.00,24.00] lock=nein src=canvas; arm_y1=5.000 [0.00,24.00] lock=nein src=canvas; arm_x2=12.500 [0.00,24.00] lock=nein src=template; arm_y2=9.140 [0.00,24.00] lock=nein src=template; arm_stroke=1.000 [1.00,5.00] lock=ja src=semantic; stem_x=- [0.00,24.00] lock=nein src=template; stem_top=- [0.00,24.00] lock=nein src=template; stem_bottom=- [0.00,24.00] lock=nein src=template; stem_width=- [1.00,6.25] lock=ja src=semantic; text_x=- [0.00,24.00] lock=nein src=template; text_y=- [0.00,24.00] lock=nein src=template; text_scale=- [0.50,1.80] lock=nein src=semantic
+global-search: übernommen (best_err=30.579, track=deterministic, verbessert=cx 11.500->12.500, cy 12.500->16.500, r 12.000->11.000, arm_y2 0.500->9.140)
+global-search: evaluate-telemetrie (requests=93, cache_hits=46, hit_rate=0.495, render_aufrufe=47)
+perf_probe: global_search_elapsed round=2 elapsed=0.42s
+Runde 2: Gesamtfehler=30.579
 Runde 3: elementweise Validierung gestartet
-circle: Fehler=143.155
+budget_snapshot: round=3, remaining=16.64s, total=18.00s
+circle: Fehler=132.720
 circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
 circle: Mittelpunkt-Bracketing Achse fixiert (x-axis collapsed by template-centered window)
-circle: Mittelpunkt-Bracketing cx 12.000->12.000, cy 15.500->12.500 (best_err=96.313)
-circle: Radius-Bracketing r 7.000->12.000 (best_err=96.313, full_err=32.173); Kandidaten=11.500->96.313, 12.000->96.313
-arm: Fehler=104.917
+circle: Mittelpunkt-Bracketing cx 12.500->12.500, cy 16.500->13.000 (best_err=97.655)
+perf_probe: circle_center_elapsed round=3 elapsed=0.02s
+circle: Radius-Bracketing r 11.000->12.000 (best_err=97.655, full_err=37.906); Kandidaten=11.500->97.655, 12.000->97.655
+perf_probe: circle_radius_elapsed round=3 elapsed=0.02s
+arm: Fehler=134.492
 arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
-arm: Längen-Bracketing arm_len 4.000->3.000; Kandidaten=3.000->121.815, 4.000->121.815, 8.500->121.815, 14.000->121.815, 19.500->121.815, 25.000->121.815
-text: Fehler=142.963
-text: Breiten-Bracketing voc_font_scale 0.904->1.125; Kandidaten=0.900->141.497, 0.904->142.963, 1.040->147.482, 1.125->140.405, 1.350->151.107, 1.650->150.986, 1.950->160.556, 2.175->164.404, 2.400->165.250
-global-search: konfiguration (modus=reduziert, aktive_parameter=3, keys=cx,cy,r)
-global-search: gestartet (modus=reduziert, aktive_parameter=cx,cy,r, samples_pro_runde=16, start_err=35.954)
+arm: Längen-Bracketing arm_len 0.500->1.000; Kandidaten=1.000->131.177, 7.000->189.342, 13.000->165.136, 19.000->170.122, 25.000->168.095
+text: Fehler=140.040
+text: Breiten-Bracketing keine relevante Änderung (voc_font_scale: 1.125); Kandidaten=0.900->144.344, 0.956->147.391, 1.125->140.040, 1.294->146.176, 1.350->145.473, 1.650->154.944, 1.950->154.362, 2.175->151.239, 2.400->152.132
+global-search: konfiguration (modus=voll, aktive_parameter=7, rounds=2, samples=8, keys=cx,cy,r,arm_x1,arm_y1,arm_x2,arm_y2)
+global-search: gestartet (modus=voll, aktive_parameter=cx,cy,r,arm_x1,arm_y1,arm_x2,arm_y2, samples_pro_runde=8, start_err=37.910)
 global-search: near-optimum-definition (err <= best_err + epsilon, epsilon=max(0.06, best_err*0.02))
-global-search: Runde 1 best_err=35.954, akzeptierte_kandidaten=0, sigma_mittel=2.561
-global-search: near-optimum-plateau (runde=1, punkte=1, epsilon=0.719, mittlere_spannweite=0.000, stabilitaet=n/a, spannweite=cx:0.000; cy:0.000; r:0.000)
-global-search: plateau-repräsentant (runde=1, kandidat=best_sample, err=35.954, begründung=niedrigster Fehler in dieser Runde)
-global-search: Runde 2 best_err=35.954, akzeptierte_kandidaten=0, sigma_mittel=1.998
-global-search: near-optimum-plateau (runde=2, punkte=1, epsilon=0.719, mittlere_spannweite=0.000, stabilitaet=stabil, spannweite=cx:0.000; cy:0.000; r:0.000)
-global-search: plateau-repräsentant (runde=2, kandidat=best_sample, err=35.954, begründung=niedrigster Fehler in dieser Runde)
-global-search: Runde 3 best_err=35.954, akzeptierte_kandidaten=0, sigma_mittel=1.559
-global-search: near-optimum-plateau (runde=3, punkte=2, epsilon=0.719, mittlere_spannweite=0.333, stabilitaet=stabil, spannweite=cx:0.500; cy:0.500; r:0.000)
-global-search: plateau-repräsentant (runde=3, kandidat=best_sample, err=35.954, begründung=niedrigster Fehler in dieser Runde)
-global-search: deterministischer track gestartet (modus=reduziert, seed=430957114, schritte=3, start_err=35.954)
-global-search: deterministischer track (pass=1, verbesserungen=1, best_err=34.278)
-global-search: deterministischer track (pass=2, verbesserungen=0, best_err=34.278)
-global-search: track-vergleich (stochastic_err=35.954, deterministic_err=34.278, gewählt=deterministic)
-global-search: final (deterministic): global_vector cx=12.000 [0.00,24.00] lock=nein src=canvas; cy=17.000 [0.00,24.00] lock=nein src=canvas; r=11.500 [11.50,7.50] lock=nein src=template/semantic; arm_x1=24.000 [0.00,24.00] lock=nein src=canvas; arm_y1=17.000 [0.00,24.00] lock=nein src=canvas; arm_x2=24.000 [0.00,24.00] lock=nein src=template; arm_y2=17.000 [0.00,24.00] lock=nein src=template; arm_stroke=1.000 [1.00,5.00] lock=ja src=semantic; stem_x=- [0.00,24.00] lock=nein src=template; stem_top=- [0.00,24.00] lock=nein src=template; stem_bottom=- [0.00,24.00] lock=nein src=template; stem_width=- [1.00,6.25] lock=ja src=semantic; text_x=- [0.00,24.00] lock=nein src=template; text_y=- [0.00,24.00] lock=nein src=template; text_scale=- [0.50,1.80] lock=nein src=semantic
-global-search: übernommen (best_err=34.278, track=deterministic, verbessert=cy 12.500->17.000, r 12.000->11.500)
-global-search: evaluate-telemetrie (requests=64, cache_hits=9, hit_rate=0.141, render_aufrufe=55)
-Runde 3: Gesamtfehler=34.278
+global-search: Runde 1 best_err=37.910, akzeptierte_kandidaten=0, sigma_mittel=2.988
+global-search: near-optimum-plateau (runde=1, punkte=1, epsilon=0.758, mittlere_spannweite=0.000, stabilitaet=n/a, spannweite=cx:0.000; cy:0.000; r:0.000; arm_x1:0.000; arm_y1:0.000; arm_x2:0.000; arm_y2:0.000)
+global-search: plateau-repräsentant (runde=1, kandidat=best_sample, err=37.910, begründung=niedrigster Fehler in dieser Runde)
+global-search: Runde 2 best_err=37.910, akzeptierte_kandidaten=0, sigma_mittel=2.151
+global-search: near-optimum-plateau (runde=2, punkte=1, epsilon=0.758, mittlere_spannweite=0.000, stabilitaet=stabil, spannweite=cx:0.000; cy:0.000; r:0.000; arm_x1:0.000; arm_y1:0.000; arm_x2:0.000; arm_y2:0.000)
+global-search: plateau-repräsentant (runde=2, kandidat=best_sample, err=37.910, begründung=niedrigster Fehler in dieser Runde)
+global-search: deterministischer track gestartet (modus=voll, seed=842277039, schritte=2, start_err=37.910)
+global-search: intervallhalbierung (pass=1, key=cx, final_step=0.562, iters=3)
+global-search: intervallhalbierung (pass=1, key=r, final_step=0.500, iters=0)
+global-search: intervallhalbierung (pass=1, key=arm_y1, final_step=0.540, iters=3)
+global-search: intervallhalbierung (pass=1, key=arm_x2, final_step=0.540, iters=3)
+global-search: intervallhalbierung (pass=1, key=arm_y2, final_step=0.540, iters=3)
+global-search: deterministischer track (pass=1, verbesserungen=2, best_err=36.208)
+global-search: intervallhalbierung (pass=2, key=r, final_step=0.500, iters=0)
+global-search: intervallhalbierung (pass=2, key=arm_x1, final_step=0.101, iters=3)
+global-search: intervallhalbierung (pass=2, key=arm_y1, final_step=0.100, iters=3)
+global-search: intervallhalbierung (pass=2, key=arm_x2, final_step=0.100, iters=3)
+global-search: intervallhalbierung (pass=2, key=arm_y2, final_step=0.100, iters=3)
+global-search: deterministischer track (pass=2, verbesserungen=2, best_err=32.088)
+global-search: track-vergleich (stochastic_err=37.910, deterministic_err=32.088, gewählt=deterministic)
+global-search: final (deterministic): global_vector cx=12.000 [0.00,24.00] lock=nein src=canvas; cy=16.500 [0.00,24.00] lock=nein src=canvas; r=11.500 [11.50,8.00] lock=nein src=template/semantic; arm_x1=8.180 [0.00,24.00] lock=nein src=canvas; arm_y1=16.500 [0.00,24.00] lock=nein src=canvas; arm_x2=0.000 [0.00,24.00] lock=nein src=template; arm_y2=16.500 [0.00,24.00] lock=nein src=template; arm_stroke=1.000 [1.00,5.00] lock=ja src=semantic; stem_x=- [0.00,24.00] lock=nein src=template; stem_top=- [0.00,24.00] lock=nein src=template; stem_bottom=- [0.00,24.00] lock=nein src=template; stem_width=- [1.00,6.25] lock=ja src=semantic; text_x=- [0.00,24.00] lock=nein src=template; text_y=- [0.00,24.00] lock=nein src=template; text_scale=- [0.50,1.80] lock=nein src=semantic
+global-search: übernommen (best_err=32.088, track=deterministic, verbessert=cx 12.500->12.000, cy 13.000->16.500, r 12.000->11.500, arm_x1 12.500->8.180)
+global-search: evaluate-telemetrie (requests=93, cache_hits=46, hit_rate=0.495, render_aufrufe=47)
+perf_probe: global_search_elapsed round=3 elapsed=0.43s
+Runde 3: Gesamtfehler=32.088
 Runde 4: elementweise Validierung gestartet
-circle: Fehler=122.958
-circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
-circle: Mittelpunkt-Bracketing abgebrochen (y-axis collapsed after radius-clearance corridor; x-axis collapsed by template-centered window; y-axis collapsed by template-centered window)
-circle: Radius-Bracketing r 11.500->12.000 (best_err=122.958, full_err=33.573); Kandidaten=11.500->122.958, 12.000->122.958
-arm: Fehler=97.973
-arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
-arm: Längen-Bracketing arm_len 0.500->1.000; Kandidaten=1.000->97.973, 7.000->97.973, 13.000->97.973, 19.000->97.973, 25.000->97.973
-text: Fehler=107.613
-text: Breiten-Bracketing voc_font_scale 1.125->0.956; Kandidaten=0.900->86.209, 0.956->85.378, 1.125->107.613, 1.294->117.979, 1.350->113.000, 1.650->137.397, 1.950->130.972, 2.175->125.392, 2.400->137.165
-global-search: konfiguration (modus=reduziert, aktive_parameter=3, keys=cx,cy,r)
-global-search: gestartet (modus=reduziert, aktive_parameter=cx,cy,r, samples_pro_runde=16, start_err=35.554)
-global-search: near-optimum-definition (err <= best_err + epsilon, epsilon=max(0.06, best_err*0.02))
-global-search: schwerpunkt verworfen (runde=1, grund=r=7.500 außerhalb [11.500, 7.500])
-global-search: Runde 1 best_err=35.554, akzeptierte_kandidaten=0, sigma_mittel=2.561
-global-search: near-optimum-plateau (runde=1, punkte=1, epsilon=0.711, mittlere_spannweite=0.000, stabilitaet=n/a, spannweite=cx:0.000; cy:0.000; r:0.000)
-global-search: plateau-repräsentant (runde=1, kandidat=best_sample, err=35.554, begründung=niedrigster Fehler in dieser Runde)
-global-search: schwerpunkt verworfen (runde=2, grund=r=7.500 außerhalb [11.500, 7.500])
-global-search: Runde 2 best_err=35.554, akzeptierte_kandidaten=0, sigma_mittel=1.998
-global-search: near-optimum-plateau (runde=2, punkte=1, epsilon=0.711, mittlere_spannweite=0.000, stabilitaet=stabil, spannweite=cx:0.000; cy:0.000; r:0.000)
-global-search: plateau-repräsentant (runde=2, kandidat=best_sample, err=35.554, begründung=niedrigster Fehler in dieser Runde)
-global-search: schwerpunkt verworfen (runde=3, grund=r=7.500 außerhalb [11.500, 7.500])
-global-search: Runde 3 best_err=35.344, akzeptierte_kandidaten=1, sigma_mittel=1.559
-global-search: near-optimum-plateau (runde=3, punkte=2, epsilon=0.707, mittlere_spannweite=0.333, stabilitaet=stabil, spannweite=cx:0.500; cy:0.500; r:0.000)
-global-search: plateau-repräsentant (runde=3, kandidat=best_sample, err=35.344, begründung=niedrigster Fehler in dieser Runde)
-global-search: deterministischer track gestartet (modus=reduziert, seed=430957114, schritte=3, start_err=35.554)
-global-search: deterministischer track (pass=1, verbesserungen=1, best_err=33.309)
-global-search: deterministischer track (pass=2, verbesserungen=0, best_err=33.309)
-global-search: track-vergleich (stochastic_err=35.344, deterministic_err=33.309, gewählt=deterministic)
-global-search: final (deterministic): global_vector cx=12.000 [0.00,24.00] lock=nein src=canvas; cy=12.500 [0.00,24.00] lock=nein src=canvas; r=7.500 [11.50,11.50] lock=nein src=template/semantic; arm_x1=24.000 [0.00,24.00] lock=nein src=canvas; arm_y1=12.500 [0.00,24.00] lock=nein src=canvas; arm_x2=20.000 [0.00,24.00] lock=nein src=template; arm_y2=12.500 [0.00,24.00] lock=nein src=template; arm_stroke=1.000 [1.00,5.00] lock=ja src=semantic; stem_x=- [0.00,24.00] lock=nein src=template; stem_top=- [0.00,24.00] lock=nein src=template; stem_bottom=- [0.00,24.00] lock=nein src=template; stem_width=- [1.00,6.25] lock=ja src=semantic; text_x=- [0.00,24.00] lock=nein src=template; text_y=- [0.00,24.00] lock=nein src=template; text_scale=- [0.50,1.80] lock=nein src=semantic
-global-search: übernommen (best_err=33.309, track=deterministic, verbessert=cy 17.000->12.500, r 12.000->7.500)
-global-search: evaluate-telemetrie (requests=61, cache_hits=5, hit_rate=0.082, render_aufrufe=56)
-Runde 4: Gesamtfehler=33.309
-Runde 5: elementweise Validierung gestartet
-circle: Fehler=130.758
+budget_snapshot: round=4, remaining=15.85s, total=18.00s
+circle: Fehler=132.601
 circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
 circle: Mittelpunkt-Bracketing Achse fixiert (x-axis collapsed by template-centered window)
-circle: Mittelpunkt-Bracketing keine relevante Änderung (cx=12.000, cy=12.500, best_err=96.313)
-circle: Radius-Bracketing r 7.500->12.000 (best_err=96.313, full_err=33.386); Kandidaten=11.500->96.313, 12.000->96.313
-arm: Fehler=121.815
+circle: Mittelpunkt-Bracketing cx 12.000->12.000, cy 16.500->12.500 (best_err=96.313)
+perf_probe: circle_center_elapsed round=4 elapsed=0.02s
+circle: Radius-Bracketing r 11.500->12.000 (best_err=96.313, full_err=35.954); Kandidaten=11.500->96.313, 12.000->96.313
+perf_probe: circle_radius_elapsed round=4 elapsed=0.02s
+arm: Fehler=115.062
 arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
-arm: Längen-Bracketing arm_len 0.500->1.000; Kandidaten=1.000->121.815, 7.000->121.815, 13.000->121.815, 19.000->121.815, 25.000->121.815
-text: Fehler=144.569
-text: Breiten-Bracketing voc_font_scale 0.956->1.125; Kandidaten=0.900->141.497, 0.956->144.569, 1.099->142.661, 1.125->140.405, 1.350->151.107, 1.650->150.986, 1.950->160.556, 2.175->164.404, 2.400->165.250
-global-search: konfiguration (modus=reduziert, aktive_parameter=3, keys=cx,cy,r)
-global-search: gestartet (modus=reduziert, aktive_parameter=cx,cy,r, samples_pro_runde=16, start_err=35.954)
+arm: Längen-Bracketing arm_len 0.500->1.000; Kandidaten=1.000->115.062, 7.000->115.062, 13.000->115.062, 19.000->115.062, 25.000->115.062
+text: Fehler=140.405
+text: Breiten-Bracketing keine relevante Änderung (voc_font_scale: 1.125); Kandidaten=0.900->141.497, 0.956->144.569, 1.125->140.405, 1.294->147.246, 1.350->151.107, 1.650->150.986, 1.950->160.556, 2.175->164.404, 2.400->165.250
+global-search: konfiguration (modus=voll, aktive_parameter=7, rounds=2, samples=8, keys=cx,cy,r,arm_x1,arm_y1,arm_x2,arm_y2)
+global-search: gestartet (modus=voll, aktive_parameter=cx,cy,r,arm_x1,arm_y1,arm_x2,arm_y2, samples_pro_runde=8, start_err=35.954)
 global-search: near-optimum-definition (err <= best_err + epsilon, epsilon=max(0.06, best_err*0.02))
-global-search: Runde 1 best_err=35.954, akzeptierte_kandidaten=0, sigma_mittel=2.561
-global-search: near-optimum-plateau (runde=1, punkte=1, epsilon=0.719, mittlere_spannweite=0.000, stabilitaet=n/a, spannweite=cx:0.000; cy:0.000; r:0.000)
+global-search: Runde 1 best_err=35.954, akzeptierte_kandidaten=0, sigma_mittel=2.988
+global-search: near-optimum-plateau (runde=1, punkte=1, epsilon=0.719, mittlere_spannweite=0.000, stabilitaet=n/a, spannweite=cx:0.000; cy:0.000; r:0.000; arm_x1:0.000; arm_y1:0.000; arm_x2:0.000; arm_y2:0.000)
 global-search: plateau-repräsentant (runde=1, kandidat=best_sample, err=35.954, begründung=niedrigster Fehler in dieser Runde)
-global-search: Runde 2 best_err=35.954, akzeptierte_kandidaten=0, sigma_mittel=1.998
-global-search: near-optimum-plateau (runde=2, punkte=1, epsilon=0.719, mittlere_spannweite=0.000, stabilitaet=stabil, spannweite=cx:0.000; cy:0.000; r:0.000)
+global-search: Runde 2 best_err=35.954, akzeptierte_kandidaten=0, sigma_mittel=2.151
+global-search: near-optimum-plateau (runde=2, punkte=1, epsilon=0.719, mittlere_spannweite=0.000, stabilitaet=stabil, spannweite=cx:0.000; cy:0.000; r:0.000; arm_x1:0.000; arm_y1:0.000; arm_x2:0.000; arm_y2:0.000)
 global-search: plateau-repräsentant (runde=2, kandidat=best_sample, err=35.954, begründung=niedrigster Fehler in dieser Runde)
-global-search: Runde 3 best_err=35.954, akzeptierte_kandidaten=0, sigma_mittel=1.559
-global-search: near-optimum-plateau (runde=3, punkte=2, epsilon=0.719, mittlere_spannweite=0.333, stabilitaet=stabil, spannweite=cx:0.500; cy:0.500; r:0.000)
-global-search: plateau-repräsentant (runde=3, kandidat=best_sample, err=35.954, begründung=niedrigster Fehler in dieser Runde)
-global-search: deterministischer track gestartet (modus=reduziert, seed=430957114, schritte=3, start_err=35.954)
-global-search: deterministischer track (pass=1, verbesserungen=1, best_err=34.278)
-global-search: deterministischer track (pass=2, verbesserungen=0, best_err=34.278)
-global-search: track-vergleich (stochastic_err=35.954, deterministic_err=34.278, gewählt=deterministic)
-global-search: final (deterministic): global_vector cx=12.000 [0.00,24.00] lock=nein src=canvas; cy=17.000 [0.00,24.00] lock=nein src=canvas; r=11.500 [11.50,7.50] lock=nein src=template/semantic; arm_x1=24.000 [0.00,24.00] lock=nein src=canvas; arm_y1=17.000 [0.00,24.00] lock=nein src=canvas; arm_x2=24.000 [0.00,24.00] lock=nein src=template; arm_y2=17.000 [0.00,24.00] lock=nein src=template; arm_stroke=1.000 [1.00,5.00] lock=ja src=semantic; stem_x=- [0.00,24.00] lock=nein src=template; stem_top=- [0.00,24.00] lock=nein src=template; stem_bottom=- [0.00,24.00] lock=nein src=template; stem_width=- [1.00,6.25] lock=ja src=semantic; text_x=- [0.00,24.00] lock=nein src=template; text_y=- [0.00,24.00] lock=nein src=template; text_scale=- [0.50,1.80] lock=nein src=semantic
-global-search: übernommen (best_err=34.278, track=deterministic, verbessert=cy 12.500->17.000, r 12.000->11.500)
-global-search: evaluate-telemetrie (requests=64, cache_hits=64, hit_rate=1.000, render_aufrufe=0)
-Runde 5: Gesamtfehler=34.278
-Runde 6: elementweise Validierung gestartet
-circle: Fehler=122.958
+global-search: deterministischer track gestartet (modus=voll, seed=842277039, schritte=2, start_err=35.954)
+global-search: intervallhalbierung (pass=1, key=cx, final_step=0.562, iters=3)
+global-search: intervallhalbierung (pass=1, key=r, final_step=0.500, iters=0)
+global-search: intervallhalbierung (pass=1, key=arm_x1, final_step=0.540, iters=3)
+global-search: intervallhalbierung (pass=1, key=arm_x2, final_step=0.540, iters=3)
+global-search: intervallhalbierung (pass=1, key=arm_y2, final_step=0.540, iters=3)
+global-search: deterministischer track (pass=1, verbesserungen=2, best_err=33.870)
+global-search: intervallhalbierung (pass=2, key=r, final_step=0.500, iters=0)
+global-search: intervallhalbierung (pass=2, key=arm_x1, final_step=0.100, iters=3)
+global-search: intervallhalbierung (pass=2, key=arm_y1, final_step=0.101, iters=3)
+global-search: intervallhalbierung (pass=2, key=arm_x2, final_step=0.100, iters=3)
+global-search: intervallhalbierung (pass=2, key=arm_y2, final_step=0.100, iters=3)
+global-search: deterministischer track (pass=2, verbesserungen=3, best_err=30.576)
+global-search: track-vergleich (stochastic_err=35.954, deterministic_err=30.576, gewählt=deterministic)
+global-search: final (deterministic): global_vector cx=12.500 [0.00,24.00] lock=nein src=canvas; cy=16.500 [0.00,24.00] lock=nein src=canvas; r=11.500 [11.50,8.00] lock=nein src=template/semantic; arm_x1=12.500 [0.00,24.00] lock=nein src=canvas; arm_y1=8.180 [0.00,24.00] lock=nein src=canvas; arm_x2=12.500 [0.00,24.00] lock=nein src=template; arm_y2=4.500 [0.00,24.00] lock=nein src=template; arm_stroke=1.000 [1.00,5.00] lock=ja src=semantic; stem_x=- [0.00,24.00] lock=nein src=template; stem_top=- [0.00,24.00] lock=nein src=template; stem_bottom=- [0.00,24.00] lock=nein src=template; stem_width=- [1.00,6.25] lock=ja src=semantic; text_x=- [0.00,24.00] lock=nein src=template; text_y=- [0.00,24.00] lock=nein src=template; text_scale=- [0.50,1.80] lock=nein src=semantic
+global-search: übernommen (best_err=30.576, track=deterministic, verbessert=cx 12.000->12.500, cy 12.500->16.500, r 12.000->11.500, arm_y1 12.500->8.180)
+global-search: evaluate-telemetrie (requests=93, cache_hits=46, hit_rate=0.495, render_aufrufe=47)
+perf_probe: global_search_elapsed round=4 elapsed=0.41s
+Runde 4: Gesamtfehler=30.576
+Runde 5: elementweise Validierung gestartet
+budget_snapshot: round=5, remaining=15.21s, total=18.00s
+circle: Fehler=132.806
 circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
-circle: Mittelpunkt-Bracketing abgebrochen (y-axis collapsed after radius-clearance corridor; x-axis collapsed by template-centered window; y-axis collapsed by template-centered window)
-circle: Radius-Bracketing r 11.500->12.000 (best_err=122.958, full_err=33.573); Kandidaten=11.500->122.958, 12.000->122.958
-arm: Fehler=97.973
+circle: Mittelpunkt-Bracketing Achse fixiert (x-axis collapsed by template-centered window)
+circle: Mittelpunkt-Bracketing cx 12.500->12.500, cy 16.500->13.000 (best_err=97.655)
+perf_probe: circle_center_elapsed round=5 elapsed=0.00s
+circle: Radius-Bracketing r 11.500->12.000 (best_err=97.655, full_err=37.906); Kandidaten=11.500->97.655, 12.000->97.655
+perf_probe: circle_radius_elapsed round=5 elapsed=0.01s
+arm: Fehler=169.272
 arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
-arm: Längen-Bracketing arm_len 0.500->1.000; Kandidaten=1.000->97.973, 7.000->97.973, 13.000->97.973, 19.000->97.973, 25.000->97.973
-text: Fehler=107.613
-text: Breiten-Bracketing voc_font_scale 1.125->0.956; Kandidaten=0.900->86.209, 0.956->85.378, 1.125->107.613, 1.294->117.979, 1.350->113.000, 1.650->137.397, 1.950->130.972, 2.175->125.392, 2.400->137.165
-global-search: konfiguration (modus=reduziert, aktive_parameter=3, keys=cx,cy,r)
-global-search: gestartet (modus=reduziert, aktive_parameter=cx,cy,r, samples_pro_runde=16, start_err=35.554)
+arm: Längen-Bracketing arm_len 24.500->18.500; Kandidaten=18.500->130.577, 20.000->130.577, 21.500->130.577, 23.500->130.577, 24.500->130.577, 25.000->130.577
+text: Fehler=140.040
+text: Breiten-Bracketing keine relevante Änderung (voc_font_scale: 1.125); Kandidaten=0.900->144.344, 0.956->147.391, 1.125->140.040, 1.294->146.176, 1.350->145.473, 1.650->154.944, 1.950->154.362, 2.175->151.239, 2.400->152.132
+global-search: konfiguration (modus=voll, aktive_parameter=7, rounds=2, samples=8, keys=cx,cy,r,arm_x1,arm_y1,arm_x2,arm_y2)
+global-search: gestartet (modus=voll, aktive_parameter=cx,cy,r,arm_x1,arm_y1,arm_x2,arm_y2, samples_pro_runde=8, start_err=37.965)
 global-search: near-optimum-definition (err <= best_err + epsilon, epsilon=max(0.06, best_err*0.02))
-global-search: schwerpunkt verworfen (runde=1, grund=r=7.500 außerhalb [11.500, 7.500])
-global-search: Runde 1 best_err=35.554, akzeptierte_kandidaten=0, sigma_mittel=2.561
-global-search: near-optimum-plateau (runde=1, punkte=1, epsilon=0.711, mittlere_spannweite=0.000, stabilitaet=n/a, spannweite=cx:0.000; cy:0.000; r:0.000)
-global-search: plateau-repräsentant (runde=1, kandidat=best_sample, err=35.554, begründung=niedrigster Fehler in dieser Runde)
-global-search: schwerpunkt verworfen (runde=2, grund=r=7.500 außerhalb [11.500, 7.500])
-global-search: Runde 2 best_err=35.554, akzeptierte_kandidaten=0, sigma_mittel=1.998
-global-search: near-optimum-plateau (runde=2, punkte=1, epsilon=0.711, mittlere_spannweite=0.000, stabilitaet=stabil, spannweite=cx:0.000; cy:0.000; r:0.000)
-global-search: plateau-repräsentant (runde=2, kandidat=best_sample, err=35.554, begründung=niedrigster Fehler in dieser Runde)
-global-search: schwerpunkt verworfen (runde=3, grund=r=7.500 außerhalb [11.500, 7.500])
-global-search: Runde 3 best_err=35.344, akzeptierte_kandidaten=1, sigma_mittel=1.559
-global-search: near-optimum-plateau (runde=3, punkte=2, epsilon=0.707, mittlere_spannweite=0.333, stabilitaet=stabil, spannweite=cx:0.500; cy:0.500; r:0.000)
-global-search: plateau-repräsentant (runde=3, kandidat=best_sample, err=35.344, begründung=niedrigster Fehler in dieser Runde)
-global-search: deterministischer track gestartet (modus=reduziert, seed=430957114, schritte=3, start_err=35.554)
-global-search: deterministischer track (pass=1, verbesserungen=1, best_err=33.309)
-global-search: deterministischer track (pass=2, verbesserungen=0, best_err=33.309)
-global-search: track-vergleich (stochastic_err=35.344, deterministic_err=33.309, gewählt=deterministic)
-global-search: final (deterministic): global_vector cx=12.000 [0.00,24.00] lock=nein src=canvas; cy=12.500 [0.00,24.00] lock=nein src=canvas; r=7.500 [11.50,11.50] lock=nein src=template/semantic; arm_x1=24.000 [0.00,24.00] lock=nein src=canvas; arm_y1=12.500 [0.00,24.00] lock=nein src=canvas; arm_x2=20.000 [0.00,24.00] lock=nein src=template; arm_y2=12.500 [0.00,24.00] lock=nein src=template; arm_stroke=1.000 [1.00,5.00] lock=ja src=semantic; stem_x=- [0.00,24.00] lock=nein src=template; stem_top=- [0.00,24.00] lock=nein src=template; stem_bottom=- [0.00,24.00] lock=nein src=template; stem_width=- [1.00,6.25] lock=ja src=semantic; text_x=- [0.00,24.00] lock=nein src=template; text_y=- [0.00,24.00] lock=nein src=template; text_scale=- [0.50,1.80] lock=nein src=semantic
-global-search: übernommen (best_err=33.309, track=deterministic, verbessert=cy 17.000->12.500, r 12.000->7.500)
-global-search: evaluate-telemetrie (requests=61, cache_hits=61, hit_rate=1.000, render_aufrufe=0)
-Runde 6: Gesamtfehler=33.309
+global-search: Runde 1 best_err=37.965, akzeptierte_kandidaten=0, sigma_mittel=2.988
+global-search: near-optimum-plateau (runde=1, punkte=1, epsilon=0.759, mittlere_spannweite=0.000, stabilitaet=n/a, spannweite=cx:0.000; cy:0.000; r:0.000; arm_x1:0.000; arm_y1:0.000; arm_x2:0.000; arm_y2:0.000)
+global-search: plateau-repräsentant (runde=1, kandidat=best_sample, err=37.965, begründung=niedrigster Fehler in dieser Runde)
+global-search: Runde 2 best_err=37.965, akzeptierte_kandidaten=0, sigma_mittel=2.151
+global-search: near-optimum-plateau (runde=2, punkte=1, epsilon=0.759, mittlere_spannweite=0.000, stabilitaet=stabil, spannweite=cx:0.000; cy:0.000; r:0.000; arm_x1:0.000; arm_y1:0.000; arm_x2:0.000; arm_y2:0.000)
+global-search: plateau-repräsentant (runde=2, kandidat=best_sample, err=37.965, begründung=niedrigster Fehler in dieser Runde)
+global-search: deterministischer track gestartet (modus=voll, seed=842277039, schritte=2, start_err=37.965)
+global-search: intervallhalbierung (pass=1, key=cx, final_step=0.562, iters=3)
+global-search: intervallhalbierung (pass=1, key=r, final_step=0.500, iters=0)
+global-search: intervallhalbierung (pass=1, key=arm_y1, final_step=0.540, iters=3)
+global-search: intervallhalbierung (pass=1, key=arm_x2, final_step=0.540, iters=3)
+global-search: intervallhalbierung (pass=1, key=arm_y2, final_step=0.540, iters=3)
+global-search: deterministischer track (pass=1, verbesserungen=2, best_err=36.208)
+global-search: intervallhalbierung (pass=2, key=r, final_step=0.500, iters=0)
+global-search: intervallhalbierung (pass=2, key=arm_x1, final_step=0.101, iters=3)
+global-search: intervallhalbierung (pass=2, key=arm_y1, final_step=0.100, iters=3)
+global-search: intervallhalbierung (pass=2, key=arm_x2, final_step=0.100, iters=3)
+global-search: intervallhalbierung (pass=2, key=arm_y2, final_step=0.100, iters=3)
+global-search: deterministischer track (pass=2, verbesserungen=2, best_err=32.088)
+global-search: track-vergleich (stochastic_err=37.965, deterministic_err=32.088, gewählt=deterministic)
+global-search: final (deterministic): global_vector cx=12.000 [0.00,24.00] lock=nein src=canvas; cy=16.500 [0.00,24.00] lock=nein src=canvas; r=11.500 [11.50,8.00] lock=nein src=template/semantic; arm_x1=8.180 [0.00,24.00] lock=nein src=canvas; arm_y1=16.500 [0.00,24.00] lock=nein src=canvas; arm_x2=0.000 [0.00,24.00] lock=nein src=template; arm_y2=16.500 [0.00,24.00] lock=nein src=template; arm_stroke=1.000 [1.00,5.00] lock=ja src=semantic; stem_x=- [0.00,24.00] lock=nein src=template; stem_top=- [0.00,24.00] lock=nein src=template; stem_bottom=- [0.00,24.00] lock=nein src=template; stem_width=- [1.00,6.25] lock=ja src=semantic; text_x=- [0.00,24.00] lock=nein src=template; text_y=- [0.00,24.00] lock=nein src=template; text_scale=- [0.50,1.80] lock=nein src=semantic
+global-search: übernommen (best_err=32.088, track=deterministic, verbessert=cx 12.500->12.000, cy 13.000->16.500, r 12.000->11.500, arm_x1 12.500->8.180)
+global-search: evaluate-telemetrie (requests=93, cache_hits=77, hit_rate=0.828, render_aufrufe=16)
+perf_probe: global_search_elapsed round=5 elapsed=0.14s
+Runde 5: Gesamtfehler=32.088
+Runde 6: elementweise Validierung gestartet
+budget_snapshot: round=6, remaining=14.98s, total=18.00s
+circle: Fehler=132.601
+circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
+circle: Mittelpunkt-Bracketing Achse fixiert (x-axis collapsed by template-centered window)
+circle: Mittelpunkt-Bracketing cx 12.000->12.000, cy 16.500->12.500 (best_err=96.313)
+perf_probe: circle_center_elapsed round=6 elapsed=0.01s
+circle: Radius-Bracketing r 11.500->12.000 (best_err=96.313, full_err=35.954); Kandidaten=11.500->96.313, 12.000->96.313
+perf_probe: circle_radius_elapsed round=6 elapsed=0.01s
+arm: Fehler=115.062
+arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
+arm: Längen-Bracketing arm_len 0.500->1.000; Kandidaten=1.000->115.062, 7.000->115.062, 13.000->115.062, 19.000->115.062, 25.000->115.062
+text: Fehler=140.405
+text: Breiten-Bracketing keine relevante Änderung (voc_font_scale: 1.125); Kandidaten=0.900->141.497, 0.956->144.569, 1.125->140.405, 1.294->147.246, 1.350->151.107, 1.650->150.986, 1.950->160.556, 2.175->164.404, 2.400->165.250
+global-search: konfiguration (modus=voll, aktive_parameter=7, rounds=2, samples=8, keys=cx,cy,r,arm_x1,arm_y1,arm_x2,arm_y2)
+global-search: gestartet (modus=voll, aktive_parameter=cx,cy,r,arm_x1,arm_y1,arm_x2,arm_y2, samples_pro_runde=8, start_err=35.954)
+global-search: near-optimum-definition (err <= best_err + epsilon, epsilon=max(0.06, best_err*0.02))
+global-search: Runde 1 best_err=35.954, akzeptierte_kandidaten=0, sigma_mittel=2.988
+global-search: near-optimum-plateau (runde=1, punkte=1, epsilon=0.719, mittlere_spannweite=0.000, stabilitaet=n/a, spannweite=cx:0.000; cy:0.000; r:0.000; arm_x1:0.000; arm_y1:0.000; arm_x2:0.000; arm_y2:0.000)
+global-search: plateau-repräsentant (runde=1, kandidat=best_sample, err=35.954, begründung=niedrigster Fehler in dieser Runde)
+global-search: Runde 2 best_err=35.954, akzeptierte_kandidaten=0, sigma_mittel=2.151
+global-search: near-optimum-plateau (runde=2, punkte=1, epsilon=0.719, mittlere_spannweite=0.000, stabilitaet=stabil, spannweite=cx:0.000; cy:0.000; r:0.000; arm_x1:0.000; arm_y1:0.000; arm_x2:0.000; arm_y2:0.000)
+global-search: plateau-repräsentant (runde=2, kandidat=best_sample, err=35.954, begründung=niedrigster Fehler in dieser Runde)
+global-search: deterministischer track gestartet (modus=voll, seed=842277039, schritte=2, start_err=35.954)
+global-search: intervallhalbierung (pass=1, key=cx, final_step=0.562, iters=3)
+global-search: intervallhalbierung (pass=1, key=r, final_step=0.500, iters=0)
+global-search: intervallhalbierung (pass=1, key=arm_x1, final_step=0.540, iters=3)
+global-search: intervallhalbierung (pass=1, key=arm_x2, final_step=0.540, iters=3)
+global-search: intervallhalbierung (pass=1, key=arm_y2, final_step=0.540, iters=3)
+global-search: deterministischer track (pass=1, verbesserungen=2, best_err=33.870)
+global-search: intervallhalbierung (pass=2, key=r, final_step=0.500, iters=0)
+global-search: intervallhalbierung (pass=2, key=arm_x1, final_step=0.100, iters=3)
+global-search: intervallhalbierung (pass=2, key=arm_y1, final_step=0.101, iters=3)
+global-search: intervallhalbierung (pass=2, key=arm_x2, final_step=0.100, iters=3)
+global-search: intervallhalbierung (pass=2, key=arm_y2, final_step=0.100, iters=3)
+global-search: deterministischer track (pass=2, verbesserungen=3, best_err=30.576)
+global-search: track-vergleich (stochastic_err=35.954, deterministic_err=30.576, gewählt=deterministic)
+global-search: final (deterministic): global_vector cx=12.500 [0.00,24.00] lock=nein src=canvas; cy=16.500 [0.00,24.00] lock=nein src=canvas; r=11.500 [11.50,8.00] lock=nein src=template/semantic; arm_x1=12.500 [0.00,24.00] lock=nein src=canvas; arm_y1=8.180 [0.00,24.00] lock=nein src=canvas; arm_x2=12.500 [0.00,24.00] lock=nein src=template; arm_y2=4.500 [0.00,24.00] lock=nein src=template; arm_stroke=1.000 [1.00,5.00] lock=ja src=semantic; stem_x=- [0.00,24.00] lock=nein src=template; stem_top=- [0.00,24.00] lock=nein src=template; stem_bottom=- [0.00,24.00] lock=nein src=template; stem_width=- [1.00,6.25] lock=ja src=semantic; text_x=- [0.00,24.00] lock=nein src=template; text_y=- [0.00,24.00] lock=nein src=template; text_scale=- [0.50,1.80] lock=nein src=semantic
+global-search: übernommen (best_err=30.576, track=deterministic, verbessert=cx 12.000->12.500, cy 12.500->16.500, r 12.000->11.500, arm_y1 12.500->8.180)
+global-search: evaluate-telemetrie (requests=93, cache_hits=93, hit_rate=1.000, render_aufrufe=0)
+perf_probe: global_search_elapsed round=6 elapsed=0.01s
+Runde 6: Gesamtfehler=30.576
 phase2_rollback: no
-circle: Farb-Stochastic-Survivor aktiviert (fill_gray=182, err=6990.000)
-circle: Farb-Bracketing fill_gray 242->182; Kandidaten=182->6990.000, 200->7167.000, 210->7333.000, 220->7589.000, 226->7756.000, 230->7873.000, 234->8020.000, 240->8280.000, 242->8431.000, 250->9413.000, 255->10094.000
-circle: Farb-Stochastic-Survivor aktiviert (stroke_gray=182, err=6943.000)
-circle: Farb-Bracketing stroke_gray 127->182; Kandidaten=95->7016.000, 96->7015.000, 111->7002.000, 112->7002.000, 119->6996.000, 127->6990.000, 128->6988.000, 135->6982.000, 143->6976.000, 144->6976.000, 152->6968.000, 159->6963.000, 160->6962.000, 171->6953.000, 182->6943.000
+circle: Farb-Stochastic-Survivor aktiviert (fill_gray=186, err=11735.000)
+circle: Farb-Bracketing fill_gray 242->186; Kandidaten=186->11735.000, 200->12063.000, 210->12315.000, 220->12634.000, 226->12834.000, 230->12972.000, 234->13123.000, 240->13366.000, 242->13469.000, 250->14066.000, 255->14475.000
+circle: Farb-Bracketing stroke_gray 127->171; Kandidaten=95->12053.000, 96->12040.000, 111->11880.000, 112->11872.000, 119->11804.000, 127->11735.000, 128->11726.000, 135->11673.000, 143->11612.000, 144->11606.000, 152->11552.000, 159->11515.000, 160->11509.000, 171->11488.000, 186->11519.000
 circle: Farboptimierung in Abschlussphase angewendet
-arm: Farb-Stochastic-Survivor aktiviert (stroke_gray=214, err=139.727)
-arm: Farb-Bracketing stroke_gray 182->214; Kandidaten=96->145.695, 112->144.488, 128->143.356, 144->142.752, 150->142.526, 152->142.590, 160->142.288, 166->142.062, 171->141.892, 174->141.760, 179->141.590, 182->141.458, 190->141.156, 198->140.930, 214->139.727
+arm: Farb-Stochastic-Survivor aktiviert (stroke_gray=164, err=167.028)
+arm: Farb-Bracketing stroke_gray 171->164; Kandidaten=96->174.583, 112->172.806, 128->171.000, 139->169.806, 144->169.250, 152->168.361, 155->168.028, 160->167.472, 163->167.139, 170->169.139, 171->169.028, 179->168.139, 187->167.250, 203->165.528
 arm: Farboptimierung in Abschlussphase angewendet
-text: Farb-Stochastic-Survivor aktiviert (text_gray=174, err=146.458)
-text: Farb-Bracketing text_gray 127->174; Kandidaten=95->158.704, 96->158.503, 111->155.889, 112->155.738, 119->153.777, 127->152.542, 128->152.800, 135->152.250, 143->151.217, 144->150.176, 152->149.256, 159->148.450, 160->148.324, 171->148.074, 174->146.458
+text: Farb-Bracketing text_gray 127->160; Kandidaten=95->117.271, 96->117.011, 111->112.911, 112->112.731, 119->112.882, 127->110.671, 128->111.371, 135->113.088, 143->110.601, 144->110.576, 152->112.293, 159->110.046, 160->109.451, 171->109.701, 185->111.628
 text: Farboptimierung in Abschlussphase angewendet
 semantic-guard: Erwartete Arm-Geometrie bestätigt/wiederhergestellt (z.B. AC0812 links).
