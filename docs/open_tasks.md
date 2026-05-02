@@ -319,7 +319,7 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
     - Nächster Schritt: Locking/Adaptive-Unlock-Pfad in `validateBadgeByElements` für AC0812 instrumentieren (Rundenstart/-ende + Lock-Status loggen) und Blockierung deterministisch auflösen.
     - 2026-04-29: Reproduktion mit `timeout 240 python -m pytest tests/test_image_composite_converter.py::test_validate_badge_can_expand_ac0812_tiny_circle_radius -q` endet reproduzierbar mit Exit `0` (`1 passed`, ~125s); kein Blockieren im AC0812-Pfad mehr beobachtet.
   - [x] T5.13 (hohe Priorität): Hänger-Test aus dem Volltest gezielt diagnostizieren und zeitlich begrenzen.
-  - [ ] T5.16 (sehr hohe Priorität): Hänger im Schlusssegment bei `test_ac08_semantic_anchor_variants_convert_without_failed_svg` eingrenzen.
+  - [x] T5.16 (sehr hohe Priorität): Hänger im Schlusssegment bei `test_ac08_semantic_anchor_variants_convert_without_failed_svg` eingrenzen.
     - 2026-04-30: Zieltest isoliert mit `python -m pytest -q tests/test_image_composite_converter.py -k "test_ac08_semantic_anchor_variants_convert_without_failed_svg"` gestartet; nach >150s weiterhin ohne Abschlussausgabe laufend, daher per `pkill -f "pytest -q tests/test_image_composite_converter.py -k test_ac08_semantic_anchor_variants_convert_without_failed_svg"` beendet (Prozess hing, kein finaler Exit-Code des Tests).
     - Beobachtung (2026-04-30, Run BQ): `timeout 1800 python -m pytest --maxfail=5 -vv` lief bis `97%` und blieb nach `tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_convert_without_failed_svg` ohne weitere Ausgabe hängen (mehrfach jeweils >=120s Poll ohne Fortschritt), danach zur Entblockung per `pkill` beendet.
     - Ziel: Reproduzierbar klären, ob ein einzelner Variantendurchlauf in diesem Test blockiert (z. B. Render-Subprozess, Dateisystem-I/O, oder Endlosschleife im Validierungspfad).
@@ -401,9 +401,11 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
 
     - 2026-05-01: In `validateBadgeByElementsImpl` ein hartes Varianten-Teilbudget für den Anchor-Telemetriepfad umgesetzt (`variant_budget_sec = max(20.0, configured_budget / variant_total)`), inkl. `variant_budget`-Logevent pro Variante; Budgetüberschreitungen führen nun zu kontrolliertem Variantenabbruch via `validation_time_budget_exceeded` statt ungebremstem Gesamtlauf.
 
-  - [ ] T5.16.F (Abschlusskriterium): Reproduktionslauf ohne Timeout nachweisen und Aufgabenliste rückpflegen.
+  - [x] T5.16.F (Abschlusskriterium): Reproduktionslauf ohne Timeout nachweisen und Aufgabenliste rückpflegen.
     - Repro-Befehl: `set -o pipefail; timeout 420 python -m pytest tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_convert_without_failed_svg -vv -s --durations=0`.
     - Akzeptanzkriterium: Test endet mit Exit `0`; T5.16 und Teilaufgaben A-E auf `[x]` setzen und Ergebnis kurz dokumentieren.
+
+    - 2026-05-01: Abschluss-Repro erfolgreich: `set -o pipefail; timeout 420 python -m pytest tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_convert_without_failed_svg -vv -s --durations=0` endet mit `EXIT:0` (`1 passed`, `360.47s`) ohne Timeout; T5.16 damit abgeschlossen.
 
 
 ## Next tasks (added 2026-03-28)
