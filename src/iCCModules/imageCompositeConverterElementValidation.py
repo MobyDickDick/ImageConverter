@@ -312,6 +312,33 @@ def validateBadgeByElementsImpl(
             parts.append(f"{key}={numeric_value:.3f}")
         return ", ".join(parts) if parts else "no_numeric_state"
 
+    deep_trace_enabled = variant_name_upper == "AC0811_L"
+
+    def _snapshot_numeric_params() -> str:
+        numeric_items: list[tuple[str, float]] = []
+        for key, value in params.items():
+            try:
+                numeric_items.append((str(key), float(value)))
+            except (TypeError, ValueError):
+                continue
+        numeric_items.sort(key=lambda item: item[0])
+        return "; ".join(f"{k}={v:.6f}" for k, v in numeric_items) if numeric_items else "no_numeric_params"
+
+    def _log_deep_trace(stage: str, *, round_number: int, element: str | None = None) -> None:
+        if not deep_trace_enabled:
+            return
+        full_svg_trace = generate_badge_svg_fn(w, h, params)
+        full_render_trace = fit_to_original_size_fn(img_orig, render_svg_to_numpy_fn(full_svg_trace, w, h))
+        full_error_trace = float("inf")
+        if full_render_trace is not None:
+            full_error_trace = float(calculate_error_fn(img_orig, full_render_trace))
+        detail = f", element={element}" if element else ""
+        logs.append(
+            "ac0811_l_deep_trace: "
+            f"stage={stage}, round={round_number}{detail}, full_error={full_error_trace:.6f}, "
+            f"params={_snapshot_numeric_params()}"
+        )
+
     def _time_budget_exceeded() -> bool:
         if configured_budget <= 0.0:
             return False
@@ -519,6 +546,7 @@ def validateBadgeByElementsImpl(
         if _time_budget_exceeded():
             _raise_time_budget_exceeded(phase="round_start", round_number=round_idx + 1)
         logs.append(f"Runde {round_idx + 1}: elementweise Validierung gestartet")
+        _log_deep_trace("round_start", round_number=round_idx + 1)
         if configured_budget > 0.0:
             logs.append(
                 f"budget_snapshot: round={round_idx + 1}, remaining={_remaining_budget_seconds():.2f}s, "
@@ -672,6 +700,7 @@ def validateBadgeByElementsImpl(
                     )
                 if radius_changed:
                     round_changed = True
+            _log_deep_trace("element_end", round_number=round_idx + 1, element=element)
             if is_anchor_telemetry_test:
                 logs.append(f"{anchor_telemetry_prefix} PHASE element_end round={round_idx + 1} element={element}")
 
@@ -729,6 +758,7 @@ def validateBadgeByElementsImpl(
         full_render = fit_to_original_size_fn(img_orig, render_svg_to_numpy_fn(full_svg, w, h))
         full_err = calculate_error_fn(img_orig, full_render)
         logs.append(f"Runde {round_idx + 1}: Gesamtfehler={full_err:.3f}")
+        _log_deep_trace("round_end", round_number=round_idx + 1)
         previous_best_err = best_full_err
         improved_this_round = False
         if math_module.isfinite(full_err) and full_err < best_full_err:

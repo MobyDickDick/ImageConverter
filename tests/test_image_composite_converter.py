@@ -5497,6 +5497,52 @@ def test_validate_badge_by_elements_applies_ac0811_l_budget_floor() -> None:
             apply_canonical_badge_colors_fn=lambda _p: {},
         )
 
+def test_validate_badge_by_elements_logs_deep_trace_for_ac0811_l() -> None:
+    if image_composite_converter.np is None:
+        pytest.skip("numpy not available in this environment")
+
+    from src.iCCModules import imageCompositeConverterElementValidation as validation_helpers
+
+    img = image_composite_converter.np.zeros((4, 4, 3), dtype=image_composite_converter.np.uint8)
+    params = {"variant_name": "AC0811_L", "validation_time_budget_sec": 120.0, "cx": 1.0, "cy": 2.0, "r": 3.0}
+
+    logs = validation_helpers.validateBadgeByElementsImpl(
+        img,
+        params,
+        max_rounds=1,
+        debug_out_dir=None,
+        apply_circle_geometry_penalty=False,
+        stop_when_error_below_threshold=True,
+        cv2_module=image_composite_converter.cv2,
+        copy_module=image_composite_converter.copy,
+        math_module=image_composite_converter.math,
+        os_module=image_composite_converter.os,
+        time_module=image_composite_converter.time,
+        generate_badge_svg_fn=lambda *_a, **_k: "<svg/>",
+        fit_to_original_size_fn=lambda _img, _render: img,
+        render_svg_to_numpy_fn=lambda *_a, **_k: img,
+        create_diff_image_fn=lambda *_a, **_k: img,
+        write_debug_image_fn=lambda *_a, **_k: None,
+        element_only_params_fn=lambda p, _e: p,
+        extract_badge_element_mask_fn=lambda *_a, **_k: img[:, :, 0],
+        element_region_mask_fn=lambda *_a, **_k: img[:, :, 0],
+        element_match_error_fn=lambda *_a, **_k: 0.0,
+        refine_stem_geometry_from_masks_fn=lambda *_a, **_k: (False, None),
+        optimize_element_width_bracket_fn=lambda *_a, **_k: False,
+        optimize_element_extent_bracket_fn=lambda *_a, **_k: False,
+        optimize_circle_center_bracket_fn=lambda *_a, **_k: False,
+        optimize_circle_radius_bracket_fn=lambda *_a, **_k: False,
+        optimize_global_parameter_vector_sampling_fn=lambda *_a, **_k: False,
+        calculate_error_fn=lambda *_a, **_k: 0.0,
+        activate_ac08_adaptive_locks_fn=lambda *_a, **_k: False,
+        release_ac08_adaptive_locks_fn=lambda *_a, **_k: False,
+        optimize_element_color_bracket_fn=lambda *_a, **_k: False,
+        apply_canonical_badge_colors_fn=lambda _p: {},
+    )
+
+    assert any("ac0811_l_deep_trace:" in line for line in logs)
+
+
 def test_validate_badge_by_elements_raises_timeout_error_when_budget_exceeded() -> None:
     """Element validation should raise when the configured validation time budget is exhausted."""
     if image_composite_converter.np is None:
