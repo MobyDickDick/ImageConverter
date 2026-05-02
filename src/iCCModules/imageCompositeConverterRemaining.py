@@ -1075,6 +1075,8 @@ def convertRange(
             batch_failures
             and str(batch_failures[-1].get("filename", "")) == failed_filename
             and str(batch_failures[-1].get("status", "")) in {"render_failure", "batch_error"}
+            and str(batch_failures[-1].get("reason", "")) != "TimeoutError"
+            and "validation_time_budget_exceeded" not in str(batch_failures[-1].get("details", ""))
         ),
     )
 
