@@ -7363,8 +7363,8 @@ def test_ac0820_l_conversion_keeps_circle_diameter_above_half_image_width(tmp_pa
     assert (2.0 * radius) > (float(src_w) / 2.0)
 
 
-def test_ac08_semantic_anchor_variants_convert_without_failed_svg(tmp_path: Path) -> None:
-    """The historical anchor failures AC0811_L and AC0812_M should now render as real SVG outputs."""
+def test_ac08_semantic_anchor_variants_ac0811_only(tmp_path: Path) -> None:
+    """AC0811_L should render as a real SVG output without failed fallback."""
     if (
         image_composite_converter.np is None
         or image_composite_converter.cv2 is None
@@ -7392,6 +7392,22 @@ def test_ac08_semantic_anchor_variants_convert_without_failed_svg(tmp_path: Path
     assert not (output_ac0811 / "converted_svgs" / "AC0811_L_failed.svg").exists()
     log_ac0811_l = (output_ac0811 / "reports" / "AC0811_L_element_validation.log").read_text(encoding="utf-8")
     assert "status=semantic_ok" in log_ac0811_l
+
+
+
+def test_ac08_semantic_anchor_variants_ac0812_only(tmp_path: Path) -> None:
+    """AC0812_M should render as a real SVG output without failed fallback."""
+    if (
+        image_composite_converter.np is None
+        or image_composite_converter.cv2 is None
+        or image_composite_converter.fitz is None
+    ):
+        pytest.skip("numpy/cv2/fitz not available in this environment")
+
+    images_dir = Path("artifacts/images_to_convert")
+    csv_path = images_dir / "Finale_Wurzelformen_V3.xml"
+    if not images_dir.exists() or not csv_path.exists():
+        pytest.skip("AC08 fixture inputs not available")
 
     output_ac0812 = tmp_path / "ac0812_out"
     result_ac0812 = image_composite_converter.convertRange(
