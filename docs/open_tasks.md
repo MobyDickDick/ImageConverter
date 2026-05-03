@@ -224,6 +224,21 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
   - 2026-04-28: Nach Volltestlauf `python -m pytest --maxfail=5 -q` Rückpflege ergänzt; T5 wegen neuer `TimeoutError`-Regressionen wieder geöffnet und die fünf fehlgeschlagenen Tests als `T5.8` bis `T5.12` mit hoher Priorität dokumentiert.
   - 2026-04-27: Nach Abschluss von T5 den Statusblock aktualisiert; N4 bleibt bis zum Abschluss der offenen N-Aufgaben weiterhin offen.
 
+
+- [ ] T6: Aktuelle Laufzeit-Blocker aus dem erfolgreich abgeschlossenen Volltest (2026-05-03) priorisiert abbauen.
+  - Hintergrund: Der Volltest lief mit Exit `0`, aber die folgenden vier Tests dominieren weiterhin die Gesamtlaufzeit und blockieren schnelle Feedback-Zyklen.
+  - [ ] T6.1 (sehr hohe Priorität): `tests/test_image_composite_converter.py::test_make_badge_params_keeps_ac0838_m_circle_near_full_width_for_voc_layout` beschleunigen (zuletzt ~`168.27s`).
+    - Akzeptanzkriterium: isolierter Lauf dieses NodeIDs < `90s` bei unverändert grünem Ergebnis; Dauerreport im Run-Log dokumentieren.
+  - [ ] T6.2 (sehr hohe Priorität): `tests/test_image_composite_converter.py::test_ac08_regression_suite_preserves_previously_good_variants[AC0820_L-semantic_ok]` stabil unter Zeitbudget bringen (zuletzt ~`168.27s`).
+    - Akzeptanzkriterium: reproduzierbar `EXIT 0` in <= `120s` isoliert und ohne `validation_time_budget_exceeded`-Regressionsmarker.
+  - [ ] T6.3 (hohe Priorität): `tests/test_image_composite_converter.py::test_ac0820_l_conversion_keeps_circle_diameter_above_half_image_width` Laufzeit senken (zuletzt ~`165.26s`).
+    - Akzeptanzkriterium: isolierter Lauf <= `100s`; gleiche Assertions bleiben unverändert grün.
+  - [ ] T6.4 (hohe Priorität): `tests/test_image_composite_converter.py::test_ac08_regression_suite_preserves_previously_good_variants[AC0835_S-semantic_ok]` entkoppeln/optimieren (zuletzt ~`133.60s`).
+    - Akzeptanzkriterium: isolierter Lauf <= `90s` und Dokumentation der dominanten Pipeline-Phase (z. B. global search / quality pass).
+  - [ ] T6.5 (querschnittlich, hohe Priorität): standardisierte Langläufer-Messung in CI-ähnlichem Modus etablieren.
+    - Vorschlag: `python -m pytest --maxfail=1 -vv --durations=20` regelmäßig ausführen und Top-20-Dauern als CSV-Artefakt ablegen.
+    - Akzeptanzkriterium: neues Report-Artefakt pro Lauf + aktualisierte Top-Blocker-Liste in `docs/open_tasks.md`.
+
 ## Architektur-Backlog (added 2026-04-25)
 
 - [ ] A1: Optimierungsteil als eigenständiges Tool modularisieren.
