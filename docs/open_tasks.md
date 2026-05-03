@@ -243,6 +243,14 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
   - Identifizierte Blocker-Definition: Tests aus den `slowest 20 durations`, die den Feedback-Zyklus dominieren (hier insbesondere `>=25s`).
   - [ ] T6.1 (sehr hohe Priorität): `tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_convert_without_failed_svg` reduzieren (aktuell `377.98s`).
     - Akzeptanzkriterium: isoliert <= `240s` bei weiter `EXIT 0`; Laufnotiz mit Vorher/Nachher-Dauer ergänzen.
+    - 2026-05-03: Repro erneut ausgeführt mit `timeout 300 python -m pytest tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_convert_without_failed_svg -q`; Lauf endete wieder mit Exit `124` ohne Abschlussausgabe. Nächster Schritt: Lauf in kleinere Teilrepros splitten (AC0811 vs. AC0812) und dort gezielt Laufzeitgrenzen reduzieren.
+    - 2026-05-03: Ursachenhinweis konsolidiert: Der bekannte Varianten-"Wiederanlauf" ist laut Steuerfluss-Diagnose ein regulärer `quality_pass` (`context=quality_pass:*`) statt Endlosschleife; der Zeitverlust liegt damit primär in der Mehrfachbewertung der Kandidaten (AC0811 + AC0812) innerhalb derselben NodeID.
+    - [ ] T6.1.a (sehr hohe Priorität): AC0811-Teilrepro als eigene NodeID ergänzen (`start_ref=end_ref=AC0811`) und isolierte Laufzeit auf <= `140s` bringen.
+      - Akzeptanzkriterium: `timeout 240 python -m pytest ...::test_ac08_semantic_anchor_variants_ac0811_only ...` endet mit `EXIT 0`, `status=semantic_ok` für `AC0811_L`.
+    - [ ] T6.1.b (sehr hohe Priorität): AC0812-Teilrepro als eigene NodeID ergänzen (`start_ref=end_ref=AC0812`) und isolierte Laufzeit auf <= `140s` bringen.
+      - Akzeptanzkriterium: `timeout 240 python -m pytest ...::test_ac08_semantic_anchor_variants_ac0812_only ...` endet mit `EXIT 0`, `status=semantic_ok` für `AC0812_M`.
+    - [ ] T6.1.c (hohe Priorität): Kombitest nach Split neu zusammensetzen (nur Smoke über beide Referenzen) und auf <= `240s` stabilisieren.
+      - Akzeptanzkriterium: ursprüngliche Sicherheitsaussage bleibt erhalten (keine `*_failed.svg` für `AC0811_L`/`AC0812_M`), aber Laufzeit unter T6.1-Ziel.
   - [ ] T6.2 (sehr hohe Priorität): `tests/test_image_composite_converter.py::test_ac08_regression_suite_preserves_previously_good_variants[AC0837_L-semantic_ok]` reduzieren (aktuell `198.28s`).
     - Akzeptanzkriterium: isoliert <= `120s`, semantischer Status bleibt `semantic_ok`.
   - [ ] T6.3 (sehr hohe Priorität): `tests/test_image_composite_converter.py::test_make_badge_params_keeps_ac0838_m_circle_near_full_width_for_voc_layout` reduzieren (aktuell `173.27s`).
