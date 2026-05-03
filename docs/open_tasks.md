@@ -35,6 +35,8 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
   - Befund aus Log-Auswertung: erstes dokumentiertes `validation_time_budget_exceeded` tritt in `AC0800_AC0899_batch_2026-04-28_runAV.log` bei `AC0811_L.jpg` auf (`phase=round_start`, `round=2`, `elapsed=43.75s`, `budget=18.00s`).
   - Ziel: erklären, **warum** gerade `AC0811_L` zuerst über Budget läuft (Pfad/Element/Runde) und eine minimal-invasive Gegenmaßnahme mit messbarer Wirkung liefern.
   - Akzeptanzkriterium: isolierter Repro-Lauf + Kurzbericht mit identifizierter Ursache + Patch, der den ersten Overrun entweder vermeidet oder deutlich nach hinten verschiebt.
+  - 2026-05-02: AC0811-Only-Repro ohne explizites Zeitlimit ausgeführt (`docs/ac0811_only_2026-05-02_runB_summary.md`); Lauf endet mit Exit `0` und ohne `validation_time_budget_exceeded`, zeigt jedoch wiederholte Verarbeitung von `AC0811_M`/`AC0811_S` als neuen Analysehinweis.
+  - 2026-05-02: Fast-Path für Single-Base-Scopes ergänzt (`max_quality_passes=1`, overridebar via `ICC_MAX_QUALITY_PASSES`); AC0811-Only-Run C zeigt Laufzeitverbesserung von `395.59s` auf `363.78s` (~8.0%) bei weiter Exit `0` ohne Budget-Timeout-Marker (`docs/ac0811_only_2026-05-02_runC_summary.md`).
 
 - [ ] N1: B2 vollständig abschließen: Vollbereichslauf `AC0800..AC0899` mit Exit-Code `0` nachweisen.
   - Blockierungsverlauf (Kurztrend):
