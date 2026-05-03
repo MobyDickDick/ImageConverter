@@ -225,19 +225,32 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
   - 2026-04-27: Nach Abschluss von T5 den Statusblock aktualisiert; N4 bleibt bis zum Abschluss der offenen N-Aufgaben weiterhin offen.
 
 
-- [ ] T6: Aktuelle Laufzeit-Blocker aus dem erfolgreich abgeschlossenen Volltest (2026-05-03) priorisiert abbauen.
-  - Hintergrund: Der Volltest lief mit Exit `0`, aber die folgenden vier Tests dominieren weiterhin die Gesamtlaufzeit und blockieren schnelle Feedback-Zyklen.
-  - [ ] T6.1 (sehr hohe Priorität): `tests/test_image_composite_converter.py::test_make_badge_params_keeps_ac0838_m_circle_near_full_width_for_voc_layout` beschleunigen (zuletzt ~`168.27s`).
-    - Akzeptanzkriterium: isolierter Lauf dieses NodeIDs < `90s` bei unverändert grünem Ergebnis; Dauerreport im Run-Log dokumentieren.
-  - [ ] T6.2 (sehr hohe Priorität): `tests/test_image_composite_converter.py::test_ac08_regression_suite_preserves_previously_good_variants[AC0820_L-semantic_ok]` stabil unter Zeitbudget bringen (zuletzt ~`168.27s`).
-    - Akzeptanzkriterium: reproduzierbar `EXIT 0` in <= `120s` isoliert und ohne `validation_time_budget_exceeded`-Regressionsmarker.
-  - [ ] T6.3 (hohe Priorität): `tests/test_image_composite_converter.py::test_ac0820_l_conversion_keeps_circle_diameter_above_half_image_width` Laufzeit senken (zuletzt ~`165.26s`).
-    - Akzeptanzkriterium: isolierter Lauf <= `100s`; gleiche Assertions bleiben unverändert grün.
-  - [ ] T6.4 (hohe Priorität): `tests/test_image_composite_converter.py::test_ac08_regression_suite_preserves_previously_good_variants[AC0835_S-semantic_ok]` entkoppeln/optimieren (zuletzt ~`133.60s`).
-    - Akzeptanzkriterium: isolierter Lauf <= `90s` und Dokumentation der dominanten Pipeline-Phase (z. B. global search / quality pass).
-  - [ ] T6.5 (querschnittlich, hohe Priorität): standardisierte Langläufer-Messung in CI-ähnlichem Modus etablieren.
-    - Vorschlag: `python -m pytest --maxfail=1 -vv --durations=20` regelmäßig ausführen und Top-20-Dauern als CSV-Artefakt ablegen.
-    - Akzeptanzkriterium: neues Report-Artefakt pro Lauf + aktualisierte Top-Blocker-Liste in `docs/open_tasks.md`.
+- [ ] T6: Sämtliche aktuell blockierenden Langläufer-Tests identifizieren und priorisiert abbauen (Stand: Volltest-Isolation vom 2026-05-03).
+  - Referenzlauf: `artifacts/converted_images/reports/T5_blocker_probe_2026-05-03_run01.log` (`829 passed, 1 skipped`, Laufzeit `1574.93s`).
+  - Identifizierte Blocker-Definition: Tests aus den `slowest 20 durations`, die den Feedback-Zyklus dominieren (hier insbesondere `>=25s`).
+  - [ ] T6.1 (sehr hohe Priorität): `tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_convert_without_failed_svg` reduzieren (aktuell `377.98s`).
+    - Akzeptanzkriterium: isoliert <= `240s` bei weiter `EXIT 0`; Laufnotiz mit Vorher/Nachher-Dauer ergänzen.
+  - [ ] T6.2 (sehr hohe Priorität): `tests/test_image_composite_converter.py::test_ac08_regression_suite_preserves_previously_good_variants[AC0837_L-semantic_ok]` reduzieren (aktuell `198.28s`).
+    - Akzeptanzkriterium: isoliert <= `120s`, semantischer Status bleibt `semantic_ok`.
+  - [ ] T6.3 (sehr hohe Priorität): `tests/test_image_composite_converter.py::test_make_badge_params_keeps_ac0838_m_circle_near_full_width_for_voc_layout` reduzieren (aktuell `173.27s`).
+    - Akzeptanzkriterium: isoliert < `90s`, Assertions unverändert grün.
+  - [ ] T6.4 (sehr hohe Priorität): `tests/test_image_composite_converter.py::test_ac08_regression_suite_preserves_previously_good_variants[AC0820_L-semantic_ok]` reduzieren (aktuell `168.27s`).
+    - Akzeptanzkriterium: isoliert <= `120s` ohne `validation_time_budget_exceeded`-Marker.
+  - [ ] T6.5 (hohe Priorität): `tests/test_image_composite_converter.py::test_ac0820_l_conversion_keeps_circle_diameter_above_half_image_width` reduzieren (aktuell `165.26s`).
+    - Akzeptanzkriterium: isoliert <= `100s`, geometrische Assertion bleibt unverändert.
+  - [ ] T6.6 (hohe Priorität): `tests/test_image_composite_converter.py::test_ac08_regression_suite_preserves_previously_good_variants[AC0835_S-semantic_ok]` reduzieren (aktuell `133.60s`).
+    - Akzeptanzkriterium: isoliert <= `90s` bei weiter `semantic_ok`.
+  - [ ] T6.7 (hohe Priorität): `tests/test_image_composite_converter.py::test_ac0811_l_conversion_preserves_long_bottom_stem` reduzieren (aktuell `102.33s`).
+    - Akzeptanzkriterium: isoliert <= `75s` und weiterhin ohne Budget-Timeout.
+  - [ ] T6.8 (hohe Priorität): `tests/test_image_composite_converter.py::test_validate_badge_can_expand_ac0812_tiny_circle_radius` reduzieren (aktuell `101.94s`).
+    - Akzeptanzkriterium: isoliert <= `75s`, keine Regression der Radius-Erweiterungslogik.
+  - [ ] T6.9 (mittel-hohe Priorität): `tests/test_image_composite_converter.py::test_validate_badge_by_elements_activates_ac08_adaptive_unlocks_on_stagnation` reduzieren (aktuell `65.09s`).
+    - Akzeptanzkriterium: isoliert <= `45s`, Unlock-Verhalten bleibt testbar erhalten.
+  - [ ] T6.10 (mittel-hohe Priorität): `tests/test_image_composite_converter.py::test_validate_badge_logs_extent_bracketing_for_line_elements` reduzieren (aktuell `51.61s`).
+    - Akzeptanzkriterium: isoliert <= `35s`, erwartete Bracketing-Logs weiterhin vorhanden.
+  - [ ] T6.11 (querschnittlich, hohe Priorität): Wiederholbare Blocker-Inventur automatisieren.
+    - Befehl: `python -m pytest --maxfail=1 -vv --durations=20`.
+    - Akzeptanzkriterium: pro Inventurlauf ein Run-Log + eine aktualisierte Top-Blocker-Liste in `docs/open_tasks.md`.
 
 ## Architektur-Backlog (added 2026-04-25)
 
