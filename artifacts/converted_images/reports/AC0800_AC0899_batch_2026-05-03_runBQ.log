@@ -1,0 +1,15 @@
+[INFO] Vollbereich AC0800..AC0899 aktiviert isoliertes SVG-Rendering automatisch (entspricht --isolate-svg-render).
+[INFO] Schreibe Konsolen-Output nach: /workspace/ImageConverter/imageCompositeConverter.local.log
+
+--- Verarbeite AC0861_L.jpg ---
+Bildbeschreibung: Grauer Kreis mit grauem Rand und hellgrauem Hintergrund Abweichung: mit Text "rF" (relative Feuchtigkeit) Abweichung: mit Griff (dunkelgraue Linie nach unten)
+Befehl erkannt: Kein Compositing-Befehl gefunden
+[WARN] AC0861_L.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+
+--- Verarbeite AC0820_L.jpg ---
+Bildbeschreibung: Wie AC0800, Textg "CO2" (Die 2 ist fälschlicherweise hochgestellt, dieses muss jedoch tiefgestellt sein)
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe CO_2
+
+--- Verarbeite AC0832_L.jpg ---
+Bildbeschreibung: Wie AC0832, jedoch nach rechts gedreht, Text immer noch horizontal
+Befehl erkannt: SEMANTIC: waagrechter Strich links vom Kreis, SEMANTIC: Kreis + Buchstabe
