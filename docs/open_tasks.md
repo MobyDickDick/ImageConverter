@@ -171,7 +171,8 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
   - Akzeptanzkriterium: Pro Referenz mindestens ein reproduzierbarer Diagnoselauf mit Log und kurzem Ergebnisvermerk in den Run-Notizen.
   - 2026-04-29: AC0811-Einzellauf (Run BE) mit `--start AC0811 --end AC0811` durchgeführt; Log: `artifacts/converted_images/reports/AC0811_single_2026-04-29_runBE.log`, Summary: `docs/ac0811_single_runBE_2026-04-29_summary.md` (Exit `0`, weiterhin `validation_time_budget_exceeded` bei `AC0811_L`).
 
-- [ ] N4: Rückpflege in diese Aufgabenliste nach Abschluss.
+- [x] N4: Rückpflege in diese Aufgabenliste nach Abschluss. (2026-05-03: Prioritätsmatrix ergänzt und Liste konsolidiert; Aufgabe vollständig abgeschlossen, daher aus aktiver Priorisierung entfernt.)
+  - Rotationsstand 2026-05-03: Nach Bearbeitung von N4 wurden offene Prioritäten rotiert (N1→60, N2→100, N5→90, N6→80, N7→70, T6→40, A1→30).
   - Erledigte N-Aufgaben auf `[x]` setzen und mit kurzem Datum-/Ergebnisvermerk ergänzen.
   - 2026-04-23: Zwischenstand nach Run T nachgepflegt; N1/N2/N4 bleiben bis zum Exit-`0`-Vollbereichslauf offen.
   - 2026-04-23: Zwischenstand nach Run U nachgepflegt; N1/N2/N4 bleiben weiterhin offen.
@@ -254,6 +255,21 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
   - [ ] T6.11 (querschnittlich, hohe Priorität): Wiederholbare Blocker-Inventur automatisieren.
     - Befehl: `python -m pytest --maxfail=1 -vv --durations=20`.
     - Akzeptanzkriterium: pro Inventurlauf ein Run-Log + eine aktualisierte Top-Blocker-Liste in `docs/open_tasks.md`.
+
+## Prioritätsvergabe (aktualisiert am 2026-05-03)
+
+Eindeutige Prioritäten (größere Zahl = höhere Priorität):
+
+- N1 = 100
+- N2 = 90
+- N5 = 80
+- N6 = 70
+- N7 = 60
+- N4 = 50
+- T6 = 40
+- A1 = 30
+
+Abarbeitungsregel: Nach jedem Bearbeitungsschritt wird bei weiterhin offenen Aufgaben rotiert (größte Priorität wird zur kleinsten, zweitgrößte zur größten, usw.).
 
 ## Architektur-Backlog (added 2026-04-25)
 
