@@ -17,19 +17,22 @@ focused on the actual project scope.
 - The refresh run currently covers the most recently touched connector/circle families present in `artifacts/converted_images/reports` (`AC0811`, `AC0832`, `AC0835`, `AC0836`, `AC0870`, `AC0882`).
 - Continue to add new work items here before implementation starts, then mark them in-place when they are done.
 
-## Next execution tasks (re-priorisiert am 2026-04-25)
+## Next execution tasks (re-priorisiert am 2026-05-03)
 
 Arbeitsreihenfolge für die nächsten Sessions (von „hohe Abschlusschance“ nach
 „abhängig von langen Vollbereichsläufen“):
 
 1. **T5.x zuerst abschließen** (isolierte, kurze, reproduzierbare Testfehler).
 2. **N3/N4 bei jedem Lauf direkt mitpflegen** (Dokumentation sofort konsistent halten).
-3. **N1/N2 erst danach erneut anstoßen** (Vollbereichslauf als Verifikationsschritt, nicht als erster Schritt).
+3. **N5/N6/N7 vorziehen** (höhere Abschlusschance mit kürzeren, gezielten Läufen).
+4. **N1/N2 erst danach erneut anstoßen** (Vollbereichslauf als Verifikationsschritt, nicht als erster Schritt).
 
 Begründung: Die bisherigen Vollbereichs-Runs endeten wiederholt ohne Exit `0`.
 Mit der Reihenfolge „erst kurze, klare Root-Causes beheben, dann Vollbereich
 verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und auf
 `[x]` gesetzt werden können.
+
+2026-05-03: **N1-Priorität reduziert** (von „direkt nach T5/N3/N4“ auf „nach N5/N6/N7“), da wiederholte Vollbereichsläufe trotz Fortschritt weiterhin überwiegend in Timeouts enden.
 
 - [x] N0 (höchste Priorität): Root-Cause der **ersten** AC08-Zeitbudgetüberschreitung (`AC0811_L.jpg`) isolieren und beheben.
   - Befund aus Log-Auswertung: erstes dokumentiertes `validation_time_budget_exceeded` tritt in `AC0800_AC0899_batch_2026-04-28_runAV.log` bei `AC0811_L.jpg` auf (`phase=round_start`, `round=2`, `elapsed=43.75s`, `budget=18.00s`).
@@ -98,6 +101,7 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
   - 2026-05-03: Run BP ohne `timeout` gestartet; wegen ausbleibender sichtbarer Log-Fortschrittszeilen in der Beobachtungsphase manuell per `pkill` beendet (signalbedingter Prozessstatus `-1`, kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runBP_2026-05-03_summary.md`).
   - 2026-05-03: Run BQ mit `timeout 300` + unbuffered Output gestartet; sichtbarer Fortschritt bis `AC0832_L`, Prozessende mit Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runBQ_2026-05-03_summary.md`).
   - 2026-05-03: Run BR mit `timeout 300` + unbuffered Output gestartet; sichtbarer Fortschritt bis `AC0838_M`, Prozessende mit Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runBR_2026-05-03_summary.md`).
+  - 2026-05-03: Run BS mit `timeout 300` + unbuffered Output gestartet; sichtbarer Fortschritt bis `AC0870_M`, Prozessende mit Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runBS_2026-05-03_summary.md`).
   - Abschlusskriterium: vollständiger Durchlauf bis `AC0899` ohne `timeout`-Abbruch und mit finalem Prozessstatus `0`.
 
 - [ ] N2: Stabilitätsnachweis für den Vollbereich dokumentieren.
@@ -153,6 +157,7 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
   - 2026-05-03: Run BP endet signalbedingt nach manuellem `pkill`; kein zusätzlicher Segfault-/Stackoverflow-Hinweis, aber auch kein neuer belastbarer Stabilitätsnachweis bis Laufende (Summary: `docs/ac0800_ac0899_runBP_2026-05-03_summary.md`).
   - 2026-05-03: Run BQ zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault im Log-Tail bis mindestens `AC0832_L`; Status (Timeout-Exit `124`) in `docs/ac0800_ac0899_runBQ_2026-05-03_summary.md` dokumentiert.
   - 2026-05-03: Run BR zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault im Log-Tail bis mindestens `AC0838_M`; Status (Timeout-Exit `124`) in `docs/ac0800_ac0899_runBR_2026-05-03_summary.md` dokumentiert.
+  - 2026-05-03: Run BS zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault im Log-Tail bis mindestens `AC0870_M`; Status (Timeout-Exit `124`) in `docs/ac0800_ac0899_runBS_2026-05-03_summary.md` dokumentiert.
 
 - [x] N3: Neue Laufzusammenfassung im Run-Format ergänzen.
   - Neue Datei analog zu Run Q/R erstellen (Datum, Anlass, exakter Befehl, Log-Pfad, sichtbarer Fortschritt, Exit-Code, Kurzfazit).

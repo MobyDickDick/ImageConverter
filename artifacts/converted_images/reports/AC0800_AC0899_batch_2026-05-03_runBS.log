@@ -1,0 +1,24 @@
+[INFO] Vollbereich AC0800..AC0899 aktiviert isoliertes SVG-Rendering automatisch (entspricht --isolate-svg-render).
+[INFO] Schreibe Konsolen-Output nach: /workspace/ImageConverter/imageCompositeConverter.local.log
+
+--- Verarbeite AC0841_M.jpg ---
+Bildbeschreibung: Grauer Kreis mit grauem Rand und hellgrauem Hintergrund Abweichung: mit Text "rF" (relative Feuchtigkeit) Abweichung: mit Griff (dunkelgraue Linie nach unten)
+Befehl erkannt: Kein Compositing-Befehl gefunden
+[WARN] AC0841_M.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+
+--- Verarbeite AC0843_L.jpg ---
+Bildbeschreibung: Wie AC0842, jecoch nach rechts gedreht, Text immer noch horizontal
+Befehl erkannt: Kein Compositing-Befehl gefunden
+[WARN] AC0843_L.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+
+--- Verarbeite AC0833_M.jpg ---
+Bildbeschreibung: Wie AC0831: Wie AC080, jedoch Griff unten (als Kelle ausfeführt). Geometrische Variante: Vertikal gespiegelt.
+Befehl erkannt: SEMANTIC: senkrechter Strich oben vom Kreis, SEMANTIC: Kreis + Buchstabe
+
+--- Verarbeite AC0842_L.jpg ---
+Bildbeschreibung: Grauer Kreis mit grauem Rand und hellgrauem Hintergrund Abweichung: mit Text "rF" (relative Feuchtigkeit) Abweichung: mit Griff (dunkelgraue Linie nach unten) Abweichung: nach rechts gedreht, Text immer noch horizontal
+Befehl erkannt: SEMANTIC: waagrechter Strich links vom Kreis, SEMANTIC: Kreis + Buchstabe rF
+
+--- Verarbeite AC0814_S.jpg ---
+Bildbeschreibung: Wie AC0811: Kelle, ohne Text Kreis oben, Griff nach unten (dunkelgraue Liine). Geometrische Variante: 90° nach rechts gedreht.
+Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe, SEMANTIC: waagrechter Strich rechts vom Kreis
