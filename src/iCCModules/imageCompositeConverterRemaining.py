@@ -1011,6 +1011,23 @@ def convertRange(
     # policy for all run sizes so quality behavior stays deterministic and
     # observable across full batches and focused runs alike.
     max_quality_passes = 4
+    # Fast-path for tightly scoped runs (e.g. AC0811-only diagnostics): extra
+    # global quality passes mostly re-queue M/S variants with diminishing
+    # returns. Keep one refinement pass by default and allow explicit override.
+    single_base_run = False
+    try:
+        base_names = {str(getBaseNameFromFile(name)).upper() for name in process_files}
+        single_base_run = len(base_names) == 1
+    except Exception:
+        single_base_run = False
+    if single_base_run:
+        max_quality_passes = 1
+    override_quality_passes = os.environ.get("ICC_MAX_QUALITY_PASSES", "").strip()
+    if override_quality_passes:
+        try:
+            max_quality_passes = max(0, int(override_quality_passes))
+        except ValueError:
+            pass
     quality_logs: list[dict[str, object]] = []
     result_map: dict[str, dict[str, object]] = {}
     conversion_bestlist_path = _conversionBestlistManifestPath(reports_out_dir)

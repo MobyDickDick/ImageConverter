@@ -126,7 +126,8 @@ def quantizeBadgeParamsImpl(
     if "stem_bottom" in p:
         p["stem_bottom"] = max(0.0, min(float(h), float(p["stem_bottom"])))
 
-    p = enforce_circle_connector_symmetry_fn(p, w, h)
+    if not bool(p.get("defer_connector_symmetry", False)):
+        p = enforce_circle_connector_symmetry_fn(p, w, h)
     p = clamp_circle_inside_canvas_fn(p, w, h)
 
     if (
