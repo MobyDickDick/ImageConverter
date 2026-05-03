@@ -102,6 +102,7 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
   - 2026-05-03: Run BQ mit `timeout 300` + unbuffered Output gestartet; sichtbarer Fortschritt bis `AC0832_L`, Prozessende mit Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runBQ_2026-05-03_summary.md`).
   - 2026-05-03: Run BR mit `timeout 300` + unbuffered Output gestartet; sichtbarer Fortschritt bis `AC0838_M`, Prozessende mit Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runBR_2026-05-03_summary.md`).
   - 2026-05-03: Run BS mit `timeout 300` + unbuffered Output gestartet; sichtbarer Fortschritt bis `AC0870_M`, Prozessende mit Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runBS_2026-05-03_summary.md`).
+  - 2026-05-03: Run BT mit `timeout 300` + unbuffered Output gestartet; sichtbarer Fortschritt bis `AC0882_S`, Prozessende mit Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runBT_2026-05-03_summary.md`).
   - Abschlusskriterium: vollständiger Durchlauf bis `AC0899` ohne `timeout`-Abbruch und mit finalem Prozessstatus `0`.
 
 - [ ] N2: Stabilitätsnachweis für den Vollbereich dokumentieren.
@@ -158,6 +159,7 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
   - 2026-05-03: Run BQ zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault im Log-Tail bis mindestens `AC0832_L`; Status (Timeout-Exit `124`) in `docs/ac0800_ac0899_runBQ_2026-05-03_summary.md` dokumentiert.
   - 2026-05-03: Run BR zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault im Log-Tail bis mindestens `AC0838_M`; Status (Timeout-Exit `124`) in `docs/ac0800_ac0899_runBR_2026-05-03_summary.md` dokumentiert.
   - 2026-05-03: Run BS zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault im Log-Tail bis mindestens `AC0870_M`; Status (Timeout-Exit `124`) in `docs/ac0800_ac0899_runBS_2026-05-03_summary.md` dokumentiert.
+  - 2026-05-03: Run BT bestätigt weiterhin keinen MuPDF-`stack overflow`/Segfault bis mindestens `AC0882_S`; Timeout-Status in `docs/ac0800_ac0899_runBT_2026-05-03_summary.md` dokumentiert.
 
 - [x] N3: Neue Laufzusammenfassung im Run-Format ergänzen.
   - Neue Datei analog zu Run Q/R erstellen (Datum, Anlass, exakter Befehl, Log-Pfad, sichtbarer Fortschritt, Exit-Code, Kurzfazit).
