@@ -95,6 +95,7 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
   - 2026-05-02: Run BM mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis `AC0811_L`, Prozessende mit Exit `0`, aber ohne Vollbereichsnachweis bis `AC0899` (Summary: `docs/ac0800_ac0899_runBM_2026-05-02_summary.md`).
   - 2026-05-02: Run BN mit `timeout 300` + `pipefail` gestartet; sichtbarer Fortschritt bis Start `AC0812_S`, Prozessende mit Timeout-Exit `124` (Summary: `docs/ac0800_ac0899_runBN_2026-05-02_summary.md`).
   - 2026-05-03: Run BO mit `timeout 120` + unbuffered Output gestartet; sichtbarer Fortschritt bis `AC0881_M`, Prozessende mit Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runBO_2026-05-03_summary.md`).
+  - 2026-05-03: Run BP ohne `timeout` gestartet; wegen ausbleibender sichtbarer Log-Fortschrittszeilen in der Beobachtungsphase manuell per `pkill` beendet (signalbedingter Prozessstatus `-1`, kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runBP_2026-05-03_summary.md`).
   - Abschlusskriterium: vollständiger Durchlauf bis `AC0899` ohne `timeout`-Abbruch und mit finalem Prozessstatus `0`.
 
 - [ ] N2: Stabilitätsnachweis für den Vollbereich dokumentieren.
@@ -147,6 +148,7 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
   - 2026-05-02: Run BM zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis `AC0811_L`; Status (Exit `0` ohne Vollbereichsnachweis) in `docs/ac0800_ac0899_runBM_2026-05-02_summary.md` dokumentiert.
   - 2026-05-02: Run BN zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis mindestens `AC0812_S`; Status (Timeout-Exit `124` mit erweitertem Fortschritt) in `docs/ac0800_ac0899_runBN_2026-05-02_summary.md` dokumentiert.
   - 2026-05-03: Run BO zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault bis mindestens `AC0881_M`; Status (Timeout-Exit `124`) in `docs/ac0800_ac0899_runBO_2026-05-03_summary.md` dokumentiert.
+  - 2026-05-03: Run BP endet signalbedingt nach manuellem `pkill`; kein zusätzlicher Segfault-/Stackoverflow-Hinweis, aber auch kein neuer belastbarer Stabilitätsnachweis bis Laufende (Summary: `docs/ac0800_ac0899_runBP_2026-05-03_summary.md`).
 
 - [x] N3: Neue Laufzusammenfassung im Run-Format ergänzen.
   - Neue Datei analog zu Run Q/R erstellen (Datum, Anlass, exakter Befehl, Log-Pfad, sichtbarer Fortschritt, Exit-Code, Kurzfazit).
@@ -216,6 +218,7 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
   - 2026-05-02: Zwischenstand nach Run BM nachgepflegt; Exit `0` erneut ohne Vollbereichsnachweis bis `AC0899` (letzter sichtbarer Fortschritt `AC0811_L` mit `validation_time_budget_exceeded`), daher bleibt der Blockierungsverlauf aktuell stagnierend und N1/N2/N4 offen.
   - 2026-05-02: Zwischenstand nach Run BN nachgepflegt; nach Gegenmaßnahme Fortschritt bis `AC0812_S`-Start erreicht (statt Stopp bei `AC0811_L`), Prozessende jedoch weiterhin per Timeout `124`; N1/N2/N4 bleiben offen.
   - 2026-05-03: Zwischenstand nach Run BO nachgepflegt; trotz Fortschritt bis `AC0881_M` endet der Lauf mit Timeout-Exit `124`, daher bleiben N1/N2/N4 offen.
+  - 2026-05-03: Zwischenstand nach Run BP nachgepflegt; Lauf wurde mangels sichtbarer Fortschrittszeilen manuell beendet (signalbedingt `-1`), daher bleiben N1/N2/N4 offen.
   - 2026-05-03: Zwischenstand nach priorisiertem T5-Volltest nachgepflegt; Fortschritt bis `95%` ohne Fehlermeldung, anschließend Inaktivität und Entblockung per `pkill`, daher bleiben N1/N2/N4 offen.
   - 2026-05-03: Nach Volltest-Isolation `--maxfail=1 -vv --durations=20` Rückpflege ergänzt; T5 ist mit Exit `0` abgeschlossen, N1/N2/N4 bleiben unabhängig davon offen bis zum Vollbereichsnachweis `AC0800..AC0899`.
   - 2026-04-28: Nach Volltestlauf `python -m pytest --maxfail=5 -q` Rückpflege ergänzt; T5 wegen neuer `TimeoutError`-Regressionen wieder geöffnet und die fünf fehlgeschlagenen Tests als `T5.8` bis `T5.12` mit hoher Priorität dokumentiert.
