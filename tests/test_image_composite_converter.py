@@ -2668,7 +2668,7 @@ def test_convert_range_writes_svgs_and_diffs_to_dedicated_subfolders(
     result = image_composite_converter.convertRange(
         str(images_dir),
         str(csv_path),
-        iterations=2,
+        iterations=3,
         start_ref="AC0812",
         end_ref="AC0812",
         output_root=str(output_root),
@@ -7414,7 +7414,7 @@ def test_ac08_semantic_anchor_variants_ac0812_only(tmp_path: Path) -> None:
     result_ac0812 = image_composite_converter.convertRange(
         str(images_dir),
         str(csv_path),
-        iterations=4,
+        iterations=3,
         start_ref="AC0812",
         end_ref="AC0812",
         output_root=str(output_ac0812),
