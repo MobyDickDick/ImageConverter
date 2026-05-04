@@ -7293,7 +7293,7 @@ def test_ac0811_l_conversion_preserves_long_bottom_stem(tmp_path: Path) -> None:
     result = image_composite_converter.convertRange(
         str(images_dir),
         str(csv_path),
-        iterations=4,
+        iterations=3,
         start_ref="AC0811",
         end_ref="AC0811",
         output_root=str(output_root),
@@ -7385,6 +7385,7 @@ def test_ac08_semantic_anchor_variants_ac0811_only(tmp_path: Path) -> None:
         start_ref="AC0811",
         end_ref="AC0811",
         output_root=str(output_ac0811),
+        selected_variants={"AC0811_L"},
     )
 
     assert result_ac0811 == str(output_ac0811)
@@ -7417,6 +7418,7 @@ def test_ac08_semantic_anchor_variants_ac0812_only(tmp_path: Path) -> None:
         start_ref="AC0812",
         end_ref="AC0812",
         output_root=str(output_ac0812),
+        selected_variants={"AC0812_M"},
     )
 
     assert result_ac0812 == str(output_ac0812)

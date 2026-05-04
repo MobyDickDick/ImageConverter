@@ -247,6 +247,7 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
     - 2026-05-03: Ursachenhinweis konsolidiert: Der bekannte Varianten-"Wiederanlauf" ist laut Steuerfluss-Diagnose ein regulärer `quality_pass` (`context=quality_pass:*`) statt Endlosschleife; der Zeitverlust liegt damit primär in der Mehrfachbewertung der Kandidaten (AC0811 + AC0812) innerhalb derselben NodeID.
     - 2026-05-03: Teilrepro-NodeIDs ergänzt: `test_ac08_semantic_anchor_variants_ac0811_only` und `test_ac08_semantic_anchor_variants_ac0812_only` in `tests/test_image_composite_converter.py`.
     - 2026-05-03: `timeout 240 python -m pytest tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_ac0811_only -q` endet weiterhin mit Exit `124` (Laufzeitgrenze noch nicht erreicht).
+    - 2026-05-04: Teilrepros auf `selected_variants` eingegrenzt (`AC0811_L` bzw. `AC0812_M`). Re-Run: `AC0811_only` jetzt mit Exit `0` in `151.96s` (noch über Ziel `<=140s`, T6.1.a bleibt offen); `AC0812_only` mit Exit `0` in `109.81s` (innerhalb Zielkorridor für T6.1.b).
     - [ ] T6.1.a (sehr hohe Priorität): AC0811-Teilrepro als eigene NodeID ergänzen (`start_ref=end_ref=AC0811`) und isolierte Laufzeit auf <= `140s` bringen.
       - Akzeptanzkriterium: `timeout 240 python -m pytest ...::test_ac08_semantic_anchor_variants_ac0811_only ...` endet mit `EXIT 0`, `status=semantic_ok` für `AC0811_L`.
     - [ ] T6.1.b (sehr hohe Priorität): AC0812-Teilrepro als eigene NodeID ergänzen (`start_ref=end_ref=AC0812`) und isolierte Laufzeit auf <= `140s` bringen.
