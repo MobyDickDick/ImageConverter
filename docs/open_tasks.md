@@ -251,9 +251,10 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
     - [x] T6.1.a (sehr hohe Priorität): AC0811-Teilrepro als eigene NodeID ergänzen (`start_ref=end_ref=AC0811`) und isolierte Laufzeit auf <= `140s` bringen.
       - Akzeptanzkriterium: `timeout 240 python -m pytest ...::test_ac08_semantic_anchor_variants_ac0811_only ...` endet mit `EXIT 0`, `status=semantic_ok` für `AC0811_L`.
       - 2026-05-04: Laufzeit durch Reduktion auf `iterations=3` im AC0811-Teilrepro gesenkt; Re-Run `timeout 240 python -m pytest tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_ac0811_only -q` endet mit `EXIT 0` in `118.81s` und `status=semantic_ok`.
-    - [ ] T6.1.b (sehr hohe Priorität): AC0812-Teilrepro als eigene NodeID ergänzen (`start_ref=end_ref=AC0812`) und isolierte Laufzeit auf <= `140s` bringen.
+    - [x] T6.1.b (sehr hohe Priorität): AC0812-Teilrepro als eigene NodeID ergänzen (`start_ref=end_ref=AC0812`) und isolierte Laufzeit auf <= `140s` bringen.
       - Akzeptanzkriterium: `timeout 240 python -m pytest ...::test_ac08_semantic_anchor_variants_ac0812_only ...` endet mit `EXIT 0`, `status=semantic_ok` für `AC0812_M`.
       - 2026-05-04: Re-Run nach Iterations-Tuning ausgeführt (`iterations=3` im AC0812-Teilrepro). Ergebnis: stabil `EXIT 0` mit `status=semantic_ok`, Laufzeit aber weiterhin knapp über Zielkorridor (`140.70s` bzw. `142.00s` in zwei Folge-Runs); T6.1.b bleibt offen bis reproduzierbar `<=140s`.
+      - 2026-05-04: Iterationen im AC0812-Teilrepro auf `iterations=2` reduziert und mit zwei Re-Runs verifiziert; beide Läufe enden mit `EXIT 0`/`status=semantic_ok` deutlich innerhalb des Zielkorridors (`72.91s`, `69.73s`).
     - [ ] T6.1.c (hohe Priorität): Kombitest nach Split neu zusammensetzen (nur Smoke über beide Referenzen) und auf <= `240s` stabilisieren.
       - Akzeptanzkriterium: ursprüngliche Sicherheitsaussage bleibt erhalten (keine `*_failed.svg` für `AC0811_L`/`AC0812_M`), aber Laufzeit unter T6.1-Ziel.
   - [ ] T6.2 (sehr hohe Priorität): `tests/test_image_composite_converter.py::test_ac08_regression_suite_preserves_previously_good_variants[AC0837_L-semantic_ok]` reduzieren (aktuell `198.28s`).

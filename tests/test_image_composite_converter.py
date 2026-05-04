@@ -2668,7 +2668,7 @@ def test_convert_range_writes_svgs_and_diffs_to_dedicated_subfolders(
     result = image_composite_converter.convertRange(
         str(images_dir),
         str(csv_path),
-        iterations=3,
+        iterations=2,
         start_ref="AC0812",
         end_ref="AC0812",
         output_root=str(output_root),
@@ -7397,7 +7397,10 @@ def test_ac08_semantic_anchor_variants_ac0811_only(tmp_path: Path) -> None:
 
 
 def test_ac08_semantic_anchor_variants_ac0812_only(tmp_path: Path) -> None:
-    """AC0812_M should render as a real SVG output without failed fallback."""
+    """AC0812_M should render as a real SVG output without failed fallback.
+
+    Keep this as a short targeted repro for T6.1.b runtime budget checks.
+    """
     if (
         image_composite_converter.np is None
         or image_composite_converter.cv2 is None
@@ -7414,7 +7417,7 @@ def test_ac08_semantic_anchor_variants_ac0812_only(tmp_path: Path) -> None:
     result_ac0812 = image_composite_converter.convertRange(
         str(images_dir),
         str(csv_path),
-        iterations=3,
+        iterations=2,
         start_ref="AC0812",
         end_ref="AC0812",
         output_root=str(output_ac0812),
