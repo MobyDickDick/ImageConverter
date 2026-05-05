@@ -1,6 +1,6 @@
-run-meta: run_seed=842272940 pass_seed_offset=0 nonce_ns=1777707826192638400
+run-meta: run_seed=790988377 pass_seed_offset=0 nonce_ns=1777737536007604300
 status=semantic_ok
-redraw_variation: seed=850601661469 changed_params=cx:7.500->7.391 | cy:8.000->7.828 | r:7.000->6.941 | stroke_circle:1.000->1.063 | stem_width:1.000->0.906
+redraw_variation: seed=798670550832 changed_params=cx:7.500->7.454 | cy:8.000->8.200 | r:7.000->6.990 | stroke_circle:1.000->1.060 | stem_width:1.000->1.111
 semantic-guard: Text bewusst deaktiviert (plain-ring Familie ohne Buchstabe).
 small_variant_mode_active: reason=min_dim, min_dim=14.000, mask_dilate_px=1, text_mode=path_t, arm_min_ratio=0.000, stem_min_ratio=0.700
 Runde 1: elementweise Validierung gestartet
@@ -8,9 +8,9 @@ budget_snapshot: round=1, remaining=18.00s, total=18.00s
 circle: Fehler=50.961
 circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
 circle: Mittelpunkt-Bracketing cx 7.500->7.500, cy 7.500->8.000 (best_err=44.987)
-perf_probe: circle_center_elapsed round=1 elapsed=0.12s
+perf_probe: circle_center_elapsed round=1 elapsed=0.02s
 circle: Radius-Bracketing keine relevante Änderung (r: 7.000, best_err=44.987, full_err=10.557); Kandidaten=6.300->46.138, 7.000->44.987, 7.200->44.987
-perf_probe: circle_radius_elapsed round=1 elapsed=0.09s
+perf_probe: circle_radius_elapsed round=1 elapsed=0.01s
 stem: Fehler=39.741
 stem: Breitenkorrektur mode=iter, ratio=0.833, alt=1.000, neu=3.000
 stem: Geometrie nach Elementabgleich aktualisiert
@@ -26,7 +26,7 @@ global-search: plateau-repräsentant (runde=1, kandidat=best_sample, err=10.893,
 global-search: Runde 2 best_err=10.893, akzeptierte_kandidaten=0, sigma_mittel=1.753
 global-search: near-optimum-plateau (runde=2, punkte=1, epsilon=0.218, mittlere_spannweite=0.000, stabilitaet=stabil, spannweite=cx:0.000; cy:0.000; r:0.000; stem_x:0.000; stem_top:0.000; stem_bottom:0.000)
 global-search: plateau-repräsentant (runde=2, kandidat=best_sample, err=10.893, begründung=niedrigster Fehler in dieser Runde)
-global-search: deterministischer track gestartet (modus=voll, seed=842277039, schritte=2, start_err=10.893)
+global-search: deterministischer track gestartet (modus=voll, seed=790992476, schritte=2, start_err=10.893)
 global-search: intervallhalbierung (pass=1, key=cx, final_step=0.500, iters=3)
 global-search: intervallhalbierung (pass=1, key=cy, final_step=0.562, iters=3)
 global-search: intervallhalbierung (pass=1, key=r, final_step=0.500, iters=0)
@@ -44,16 +44,16 @@ global-search: deterministischer track (pass=2, verbesserungen=0, best_err=10.89
 global-search: track-vergleich (stochastic_err=10.893, deterministic_err=10.893, gewählt=stochastic)
 global-search: keine relevante Verbesserung
 global-search: evaluate-telemetrie (requests=71, cache_hits=15, hit_rate=0.211, render_aufrufe=56)
-perf_probe: global_search_elapsed round=1 elapsed=0.72s
+perf_probe: global_search_elapsed round=1 elapsed=0.15s
 Runde 1: Gesamtfehler=10.557
 Runde 2: elementweise Validierung gestartet
-budget_snapshot: round=2, remaining=16.83s, total=18.00s
+budget_snapshot: round=2, remaining=16.94s, total=18.00s
 circle: Fehler=44.987
 circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
 circle: Mittelpunkt-Bracketing keine relevante Änderung (cx=7.500, cy=8.000, best_err=44.987)
-perf_probe: circle_center_elapsed round=2 elapsed=0.07s
+perf_probe: circle_center_elapsed round=2 elapsed=0.01s
 circle: Radius-Bracketing keine relevante Änderung (r: 7.000, best_err=44.987, full_err=10.557); Kandidaten=6.300->46.138, 7.000->44.987, 7.200->44.987
-perf_probe: circle_radius_elapsed round=2 elapsed=0.01s
+perf_probe: circle_radius_elapsed round=2 elapsed=0.00s
 stem: Fehler=39.741
 stem: Breitenkorrektur mode=iter, ratio=0.833, alt=1.000, neu=3.000
 stem: Geometrie nach Elementabgleich aktualisiert
@@ -69,7 +69,7 @@ global-search: plateau-repräsentant (runde=1, kandidat=best_sample, err=10.893,
 global-search: Runde 2 best_err=10.893, akzeptierte_kandidaten=0, sigma_mittel=1.753
 global-search: near-optimum-plateau (runde=2, punkte=1, epsilon=0.218, mittlere_spannweite=0.000, stabilitaet=stabil, spannweite=cx:0.000; cy:0.000; r:0.000; stem_x:0.000; stem_top:0.000; stem_bottom:0.000)
 global-search: plateau-repräsentant (runde=2, kandidat=best_sample, err=10.893, begründung=niedrigster Fehler in dieser Runde)
-global-search: deterministischer track gestartet (modus=voll, seed=842277039, schritte=2, start_err=10.893)
+global-search: deterministischer track gestartet (modus=voll, seed=790992476, schritte=2, start_err=10.893)
 global-search: intervallhalbierung (pass=1, key=cx, final_step=0.500, iters=3)
 global-search: intervallhalbierung (pass=1, key=cy, final_step=0.562, iters=3)
 global-search: intervallhalbierung (pass=1, key=r, final_step=0.500, iters=0)
@@ -87,12 +87,12 @@ global-search: deterministischer track (pass=2, verbesserungen=0, best_err=10.89
 global-search: track-vergleich (stochastic_err=10.893, deterministic_err=10.893, gewählt=stochastic)
 global-search: keine relevante Verbesserung
 global-search: evaluate-telemetrie (requests=71, cache_hits=71, hit_rate=1.000, render_aufrufe=0)
-perf_probe: global_search_elapsed round=2 elapsed=0.03s
+perf_probe: global_search_elapsed round=2 elapsed=0.01s
 Runde 2: Gesamtfehler=10.557
 stagnation_detected: identischer Parameter-Fingerprint und praktisch unveränderter Gesamtfehler
 switch_to_fallback_search: deaktiviere Circle-Geometry-Penalty für eine letzte Ausweichrunde
 Runde 3: elementweise Validierung gestartet
-budget_snapshot: round=3, remaining=16.64s, total=18.00s
+budget_snapshot: round=3, remaining=16.90s, total=18.00s
 circle: Fehler=44.987
 circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
 stem: Fehler=39.741
@@ -110,7 +110,7 @@ global-search: plateau-repräsentant (runde=1, kandidat=best_sample, err=10.893,
 global-search: Runde 2 best_err=10.893, akzeptierte_kandidaten=0, sigma_mittel=1.753
 global-search: near-optimum-plateau (runde=2, punkte=1, epsilon=0.218, mittlere_spannweite=0.000, stabilitaet=stabil, spannweite=cx:0.000; cy:0.000; r:0.000; stem_x:0.000; stem_top:0.000; stem_bottom:0.000)
 global-search: plateau-repräsentant (runde=2, kandidat=best_sample, err=10.893, begründung=niedrigster Fehler in dieser Runde)
-global-search: deterministischer track gestartet (modus=voll, seed=842277039, schritte=2, start_err=10.893)
+global-search: deterministischer track gestartet (modus=voll, seed=790992476, schritte=2, start_err=10.893)
 global-search: intervallhalbierung (pass=1, key=cx, final_step=0.500, iters=3)
 global-search: intervallhalbierung (pass=1, key=cy, final_step=0.562, iters=3)
 global-search: intervallhalbierung (pass=1, key=r, final_step=0.500, iters=0)
@@ -128,7 +128,7 @@ global-search: deterministischer track (pass=2, verbesserungen=0, best_err=10.89
 global-search: track-vergleich (stochastic_err=10.893, deterministic_err=10.893, gewählt=stochastic)
 global-search: keine relevante Verbesserung
 global-search: evaluate-telemetrie (requests=71, cache_hits=71, hit_rate=1.000, render_aufrufe=0)
-perf_probe: global_search_elapsed round=3 elapsed=0.01s
+perf_probe: global_search_elapsed round=3 elapsed=0.00s
 Runde 3: Gesamtfehler=10.557
 stable_improvement_probe: round=3, improved=false, count=1/2, eps=0.0200
 stagnation_detected: identischer Parameter-Fingerprint und praktisch unveränderter Gesamtfehler
