@@ -176,10 +176,11 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
   - 2026-05-06: Nach Fallback-Umstellung auf MuPDF-basierten Diff (`tools.validate_sample_pairs`) erfolgreicher Repro-Lauf mit Exit `0`, `pair_validation=ok` und Report `artifacts/converted_images/reports/sample_pair_validation_2026-05-06_run02.csv` (`docs/sample_pair_validation_2026-05-06_run02.md`).
   - Akzeptanzkriterium: reproduzierbarer Batch-Check (inkl. Log/Report), der neu hinzugefügte Samples ohne manuelle Einzelschritte abdeckt.
 
-- [ ] N6: Generative SVG-Variationssuite für Algorithmus-Verbesserung ergänzen.
+- [x] N6: Generative SVG-Variationssuite für Algorithmus-Verbesserung ergänzen. (2026-05-06: Run 02 mit automatischem Metrik-Report erfolgreich, Akzeptanzkriterium erfüllt.)
   - Teil A (Parameterfächer): Mehrere Parameter einzelner Elemente (z. B. Kreis: `cx/cy/r`, Gerade: Endpunkte/Stärke) systematisch variieren, als SVG rendern, nach JPEG konvertieren und per ImageConverter wieder rückübersetzen/auswerten.
   - 2026-05-06: Basisgenerator `python -m tools.generate_svg_variation_suite` ergänzt; erzeugt 6 deterministische N6-Varianten (`N6A_CIRCLE_*`, `N6B_CROSS_*`) plus Katalog-CSV `artifacts/converted_images/reports/n6_variation_catalog.csv` als Startpunkt für den automatisierbaren Vergleichslauf.
   - 2026-05-06: Repro-Run 01 dokumentiert (`docs/n6_variation_suite_2026-05-06_run01.md`); Generatorlauf bestätigt Exit `0` mit 6 Varianten und aktualisiertem Katalog `artifacts/converted_images/reports/n6_variation_catalog.csv`.
+  - 2026-05-06: Repro-Run 02 dokumentiert (`docs/n6_variation_suite_2026-05-06_run02.md`); kombinierter Generator+Validierungslauf bestätigt Exit `0`, `pair_validation=ok` und schreibt Qualitätsmetriken nach `artifacts/converted_images/reports/n6_variation_metrics_2026-05-06_run02.csv`.
   - Teil B (Element-Verknüpfungen): Kombinationsszenarien mit expliziten geometrischen Relationen abdecken (z. B. Buchstabe horizontal+vertikal zentriert im Kreis ohne Berührung; horizontaler und gleichlanger vertikaler Strich jeweils zentriert).
   - Akzeptanzkriterium: Szenario-Katalog + automatisierbarer Vergleichslauf inkl. Qualitätsmetriken pro Szenario.
 
