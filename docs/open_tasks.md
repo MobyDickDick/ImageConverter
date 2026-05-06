@@ -184,7 +184,7 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
   - Teil B (Element-Verknüpfungen): Kombinationsszenarien mit expliziten geometrischen Relationen abdecken (z. B. Buchstabe horizontal+vertikal zentriert im Kreis ohne Berührung; horizontaler und gleichlanger vertikaler Strich jeweils zentriert).
   - Akzeptanzkriterium: Szenario-Katalog + automatisierbarer Vergleichslauf inkl. Qualitätsmetriken pro Szenario.
 
-- [ ] N7: AC08-Zeitfehler aus Volltests gezielt nachfahren (bildspezifische Konvertierung).
+- [x] N7: AC08-Zeitfehler aus Volltests gezielt nachfahren (bildspezifische Konvertierung). (2026-05-06: Für alle sechs Referenzen liegt je ein dokumentierter Einzellauf mit Log+Summary vor; Akzeptanzkriterium erfüllt.)
   - Dokumentierte Fehlerliste: `docs/ac08_timeout_failures_2026-04-28.md` (inkl. betroffener Tests und Varianten).
   - Für die dort gelisteten Referenzen (`AC0811`, `AC0812`, `AC0820`, `AC0835`, `AC0837`, `AC0838`) jeweils Einzel-Läufe `--start <REF> --end <REF>` durchführen und Exit/Artefakte dokumentieren.
   - Akzeptanzkriterium: Pro Referenz mindestens ein reproduzierbarer Diagnoselauf mit Log und kurzem Ergebnisvermerk in den Run-Notizen.
@@ -192,6 +192,8 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
   - 2026-05-06: AC0812-Einzellauf (Run BW) mit `--start AC0812 --end AC0812` durchgeführt; Log: `artifacts/converted_images/reports/AC0812_single_2026-05-06_runBW.log`, Summary: `docs/ac0812_single_2026-05-06_runBW_summary.md` (Exit `0`, jedoch ohne Variantenfortschritt; Lauf zeigt nur `OpenCV bindings requires "numpy" package` und bleibt damit als N7-Diagnoselauf inhaltlich blockiert).
   - 2026-05-06: AC0820-Einzellauf (Run BX) mit `--start AC0820 --end AC0820` durchgeführt; Log: `artifacts/converted_images/reports/AC0820_single_2026-05-06_runBX.log`, Summary: `docs/ac0820_single_2026-05-06_runBX_summary.md` (Exit `0`, erneut ohne Variantenfortschritt; Ausgabe bleibt auf den wiederholten `OpenCV bindings requires "numpy" package`-Hinweis beschränkt).
   - 2026-05-06: AC0835-Einzellauf (Run BY) mit `--start AC0835 --end AC0835` durchgeführt; Log: `artifacts/converted_images/reports/AC0835_single_2026-05-06_runBY.log`, Summary: `docs/ac0835_single_2026-05-06_runBY_summary.md` (Exit `0`, erneut ohne Variantenfortschritt; Ausgabe bleibt auf den wiederholten `OpenCV bindings requires "numpy" package`-Hinweis beschränkt).
+  - 2026-05-06: AC0837-Einzellauf (Run BZ) mit `--start AC0837 --end AC0837` durchgeführt; Log: `artifacts/converted_images/reports/AC0837_single_2026-05-06_runBZ.log`, Summary: `docs/ac0837_single_2026-05-06_runBZ_summary.md` (Exit `0`, erneut ohne Variantenfortschritt; Ausgabe bleibt auf den wiederholten `OpenCV bindings requires "numpy" package`-Hinweis beschränkt).
+  - 2026-05-06: AC0838-Einzellauf (Run CA) mit `--start AC0838 --end AC0838` durchgeführt; Log: `artifacts/converted_images/reports/AC0838_single_2026-05-06_runCA.log`, Summary: `docs/ac0838_single_2026-05-06_runCA_summary.md` (Exit `0`, erneut ohne Variantenfortschritt; Ausgabe bleibt auf den wiederholten `OpenCV bindings requires "numpy" package`-Hinweis beschränkt).
 
 - [x] N4: Rückpflege in diese Aufgabenliste nach Abschluss. (2026-05-03: Prioritätsmatrix ergänzt und Liste konsolidiert; Aufgabe vollständig abgeschlossen, daher aus aktiver Priorisierung entfernt.)
   - Rotationsstand 2026-05-03: Nach Bearbeitung von N4 wurden offene Prioritäten rotiert (N1→60, N2→100, N5→90, N6→80, N7→70, T6→40, A1→30).
