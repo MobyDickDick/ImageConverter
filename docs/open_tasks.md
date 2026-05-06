@@ -103,6 +103,7 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
   - 2026-05-03: Run BR mit `timeout 300` + unbuffered Output gestartet; sichtbarer Fortschritt bis `AC0838_M`, Prozessende mit Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runBR_2026-05-03_summary.md`).
   - 2026-05-03: Run BS mit `timeout 300` + unbuffered Output gestartet; sichtbarer Fortschritt bis `AC0870_M`, Prozessende mit Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runBS_2026-05-03_summary.md`).
   - 2026-05-03: Run BT mit `timeout 300` + unbuffered Output gestartet; sichtbarer Fortschritt bis `AC0882_S`, Prozessende mit Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runBT_2026-05-03_summary.md`).
+  - 2026-05-06: Run BU mit `timeout 300` + unbuffered Output gestartet; Prozessende mit Exit `0`, aber ohne AC08-Variantenfortschritt (Log enthält nur `OpenCV bindings requires "numpy" package` + Abschlussmeldung), daher kein Vollbereichsnachweis bis `AC0899` (Summary: `docs/ac0800_ac0899_runBU_2026-05-06_summary.md`).
   - Abschlusskriterium: vollständiger Durchlauf bis `AC0899` ohne `timeout`-Abbruch und mit finalem Prozessstatus `0`.
 
 - [ ] N2: Stabilitätsnachweis für den Vollbereich dokumentieren.
