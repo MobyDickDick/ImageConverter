@@ -168,6 +168,7 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
 
 - [ ] N5: Neue JPEG-Samples aus `artifacts/images_to_convert/samples` automatisch mit gleichnamigen SVG/JPEG-Paaren validieren.
   - Für jedes neue Sample in `artifacts/images_to_convert/samples` sicherstellen, dass ein gleichnamiges `.jpeg` konvertiert wird und das Ergebnis gegen das Referenzbild verglichen wird (Diff/Fehlerwert im Report).
+  - 2026-05-06: Basis-Checkskript `python -m tools.validate_sample_pairs --strict` ergänzt; aktueller Ist-Stand zeigt `svg_count=15`, `jpeg_count=0` und damit fehlende JPEG-Paare für alle vorhandenen SVG-Samples. N5 bleibt offen bis automatischer Konvertierungs-/Vergleichslauf inkl. Report ergänzt ist.
   - Akzeptanzkriterium: reproduzierbarer Batch-Check (inkl. Log/Report), der neu hinzugefügte Samples ohne manuelle Einzelschritte abdeckt.
 
 - [ ] N6: Generative SVG-Variationssuite für Algorithmus-Verbesserung ergänzen.
