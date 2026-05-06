@@ -187,6 +187,7 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
   - Für die dort gelisteten Referenzen (`AC0811`, `AC0812`, `AC0820`, `AC0835`, `AC0837`, `AC0838`) jeweils Einzel-Läufe `--start <REF> --end <REF>` durchführen und Exit/Artefakte dokumentieren.
   - Akzeptanzkriterium: Pro Referenz mindestens ein reproduzierbarer Diagnoselauf mit Log und kurzem Ergebnisvermerk in den Run-Notizen.
   - 2026-04-29: AC0811-Einzellauf (Run BE) mit `--start AC0811 --end AC0811` durchgeführt; Log: `artifacts/converted_images/reports/AC0811_single_2026-04-29_runBE.log`, Summary: `docs/ac0811_single_runBE_2026-04-29_summary.md` (Exit `0`, weiterhin `validation_time_budget_exceeded` bei `AC0811_L`).
+  - 2026-05-06: AC0812-Einzellauf (Run BW) mit `--start AC0812 --end AC0812` durchgeführt; Log: `artifacts/converted_images/reports/AC0812_single_2026-05-06_runBW.log`, Summary: `docs/ac0812_single_2026-05-06_runBW_summary.md` (Exit `0`, jedoch ohne Variantenfortschritt; Lauf zeigt nur `OpenCV bindings requires "numpy" package` und bleibt damit als N7-Diagnoselauf inhaltlich blockiert).
 
 - [x] N4: Rückpflege in diese Aufgabenliste nach Abschluss. (2026-05-03: Prioritätsmatrix ergänzt und Liste konsolidiert; Aufgabe vollständig abgeschlossen, daher aus aktiver Priorisierung entfernt.)
   - Rotationsstand 2026-05-03: Nach Bearbeitung von N4 wurden offene Prioritäten rotiert (N1→60, N2→100, N5→90, N6→80, N7→70, T6→40, A1→30).
