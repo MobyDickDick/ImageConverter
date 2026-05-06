@@ -166,11 +166,12 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
   - Neue Datei analog zu Run Q/R erstellen (Datum, Anlass, exakter Befehl, Log-Pfad, sichtbarer Fortschritt, Exit-Code, Kurzfazit).
   - 2026-04-23: Run-T-Summary ergänzt: `docs/ac0800_ac0899_runT_2026-04-23_summary.md`.
 
-- [ ] N5: Neue JPEG-Samples aus `artifacts/images_to_convert/samples` automatisch mit gleichnamigen SVG/JPEG-Paaren validieren.
+- [x] N5: Neue JPEG-Samples aus `artifacts/images_to_convert/samples` automatisch mit gleichnamigen SVG/JPEG-Paaren validieren. (2026-05-06: Run 02 erfolgreich mit `pair_validation=ok`, CSV-Report geschrieben.)
   - Für jedes neue Sample in `artifacts/images_to_convert/samples` sicherstellen, dass ein gleichnamiges `.jpeg` konvertiert wird und das Ergebnis gegen das Referenzbild verglichen wird (Diff/Fehlerwert im Report).
   - 2026-05-06: Basis-Checkskript `python -m tools.validate_sample_pairs --strict` ergänzt; aktueller Ist-Stand zeigt `svg_count=15`, `jpeg_count=0` und damit fehlende JPEG-Paare für alle vorhandenen SVG-Samples. N5 bleibt offen bis automatischer Konvertierungs-/Vergleichslauf inkl. Report ergänzt ist.
   - 2026-05-06: `tools.validate_sample_pairs` um `--render-missing-jpeg`, `--reference-dir` und `--report-csv` erweitert; Importpfade für `fitz`/`Pillow` werden jetzt automatisch inkl. Repo-`vendor/*/site-packages` aufgelöst, damit die häufige Fehlannahme "Pakete fehlen" vermieden wird.
   - 2026-05-06: Repro-Lauf `python -m tools.validate_sample_pairs artifacts/images_to_convert/samples --render-missing-jpeg --reference-dir artifacts/images_to_convert --report-csv artifacts/converted_images/reports/sample_pair_validation_2026-05-06.csv` dokumentiert (`docs/sample_pair_validation_2026-05-06_run01.md`); Render-Schritt erzeugt `jpeg_count=15`, der anschließende Diff-Schritt bricht jedoch mit `ImportError: cannot import name '_imaging' from 'PIL'` (vendored `linux-py310`-Wheel inkompatibel zur aktiven Python-ABI) ab.
+  - 2026-05-06: Nach Fallback-Umstellung auf MuPDF-basierten Diff (`tools.validate_sample_pairs`) erfolgreicher Repro-Lauf mit Exit `0`, `pair_validation=ok` und Report `artifacts/converted_images/reports/sample_pair_validation_2026-05-06_run02.csv` (`docs/sample_pair_validation_2026-05-06_run02.md`).
   - Akzeptanzkriterium: reproduzierbarer Batch-Check (inkl. Log/Report), der neu hinzugefügte Samples ohne manuelle Einzelschritte abdeckt.
 
 - [ ] N6: Generative SVG-Variationssuite für Algorithmus-Verbesserung ergänzen.
