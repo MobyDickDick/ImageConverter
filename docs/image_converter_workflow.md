@@ -101,3 +101,13 @@ Hinweis: `tools.validate_sample_pairs` lädt `fitz` (PyMuPDF) und `Pillow`
 bei Bedarf automatisch auch aus den Repo-`vendor/*/site-packages`-Pfaden.
 Wenn diese Pakete im `vendor`-Ordner liegen, ist kein zusätzlicher manueller
 `pip install`-Schritt nötig.
+
+## 8. N6-Variationssuite generieren (Basis)
+
+```bash
+python -m tools.generate_svg_variation_suite
+```
+
+Das Kommando erzeugt deterministische SVG-Szenarien für N6 in
+`artifacts/images_to_convert/n6_variations` sowie einen Katalog in
+`artifacts/converted_images/reports/n6_variation_catalog.csv`.
