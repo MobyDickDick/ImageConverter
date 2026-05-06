@@ -89,3 +89,15 @@ python -m src.imageCompositeConverter --print-linux-vendor-command --vendor-dir 
 - Falls `debugpy` in der geloggten `Command line` nur den Ordner
   `.venv\\Scripts` startet, ist der Interpreter falsch gewählt. In diesem Fall
   in VS Code explizit `.venv\\Scripts\\python.exe` auswählen.
+
+## 7. Sample-Paar-Validierung (N5)
+
+```bash
+python -m tools.validate_sample_pairs --strict
+python -m tools.validate_sample_pairs --render-missing-jpeg --report-csv artifacts/converted_images/reports/sample_pair_metrics.csv
+```
+
+Hinweis: `tools.validate_sample_pairs` lädt `fitz` (PyMuPDF) und `Pillow`
+bei Bedarf automatisch auch aus den Repo-`vendor/*/site-packages`-Pfaden.
+Wenn diese Pakete im `vendor`-Ordner liegen, ist kein zusätzlicher manueller
+`pip install`-Schritt nötig.
