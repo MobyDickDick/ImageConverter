@@ -313,6 +313,7 @@ Abarbeitungsregel: Nach jedem Bearbeitungsschritt wird bei weiterhin offenen Auf
 ## Architektur-Backlog (added 2026-04-25)
 
 - [ ] A1: Optimierungsteil als eigenständiges Tool modularisieren.
+  - 2026-05-06: Vorbereitender Entkopplungsschritt ergänzt: neues Modul `src/iCCModules/imageCompositeConverterImageBackend.py` mit `ImageBackend`-Vertrag, `OpenCvImageBackend`, `PurePythonImageBackend` und `pickImageBackendImpl` als Basis für backend-unabhängige Pfade.
   - Ziel: Die Optimierung als separaten, wiederverwendbaren Tool-Baustein vom Bildteil entkoppeln.
   - Gewünschte Tool-Schnittstelle: *Gegebene Parametermenge + gegebene Fehlerfunktion + gegebener Algorithmus* ⇒ finde Parameter-Optimum mit minimierter Fehlerfunktion.
   - Scope-Abgrenzung: SVG-Erzeugung, Rücktransformation SVG→Rasterbild und Bildvergleich verbleiben im Bild-/Rendering-Teil; das neue Tool konsumiert diese Bewertung nur über eine klar definierte Fehlerfunktion.
