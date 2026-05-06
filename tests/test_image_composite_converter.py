@@ -7363,6 +7363,40 @@ def test_ac0820_l_conversion_keeps_circle_diameter_above_half_image_width(tmp_pa
     assert (2.0 * radius) > (float(src_w) / 2.0)
 
 
+
+
+def test_ac08_semantic_anchor_variants_convert_without_failed_svg(tmp_path: Path) -> None:
+    """Smoke-run across AC0811_L + AC0812_M without producing failed fallback SVGs."""
+    if (
+        image_composite_converter.np is None
+        or image_composite_converter.cv2 is None
+        or image_composite_converter.fitz is None
+    ):
+        pytest.skip("numpy/cv2/fitz not available in this environment")
+
+    images_dir = Path("artifacts/images_to_convert")
+    csv_path = images_dir / "Finale_Wurzelformen_V3.xml"
+    if not images_dir.exists() or not csv_path.exists():
+        pytest.skip("AC08 fixture inputs not available")
+
+    output_root = tmp_path / "ac08_anchor_smoke"
+    result = image_composite_converter.convertRange(
+        str(images_dir),
+        str(csv_path),
+        iterations=2,
+        start_ref="AC0811",
+        end_ref="AC0812",
+        output_root=str(output_root),
+        selected_variants={"AC0811_L", "AC0812_M"},
+        deterministic_order=True,
+    )
+
+    assert result == str(output_root)
+    assert (output_root / "converted_svgs" / "AC0811_L.svg").exists()
+    assert (output_root / "converted_svgs" / "AC0812_M.svg").exists()
+    assert not (output_root / "converted_svgs" / "AC0811_L_failed.svg").exists()
+    assert not (output_root / "converted_svgs" / "AC0812_M_failed.svg").exists()
+
 def test_ac08_semantic_anchor_variants_ac0811_only(tmp_path: Path) -> None:
     """AC0811_L should render as a real SVG output without failed fallback."""
     if (
