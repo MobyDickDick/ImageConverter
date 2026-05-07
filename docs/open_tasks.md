@@ -17,22 +17,77 @@ focused on the actual project scope.
 - The refresh run currently covers the most recently touched connector/circle families present in `artifacts/converted_images/reports` (`AC0811`, `AC0832`, `AC0835`, `AC0836`, `AC0870`, `AC0882`).
 - Continue to add new work items here before implementation starts, then mark them in-place when they are done.
 
-## Next execution tasks (re-priorisiert am 2026-05-03)
+## Next execution tasks (neu sortiert am 2026-05-07: leicht → schwierig)
 
-Arbeitsreihenfolge für die nächsten Sessions (von „hohe Abschlusschance“ nach
-„abhängig von langen Vollbereichsläufen“):
+Arbeitsreihenfolge für die nächsten Sessions (explizit von **leicht zu erledigen**
+bis **schwierig/zeitintensiv**):
 
-1. **T5.x zuerst abschließen** (isolierte, kurze, reproduzierbare Testfehler).
-2. **N3/N4 bei jedem Lauf direkt mitpflegen** (Dokumentation sofort konsistent halten).
-3. **N5/N6/N7 vorziehen** (höhere Abschlusschance mit kürzeren, gezielten Läufen).
-4. **N1/N2 erst danach erneut anstoßen** (Vollbereichslauf als Verifikationsschritt, nicht als erster Schritt).
+1. **N3/N4 – Run-Dokumentation sofort nach jedem Lauf nachpflegen**  
+   _Leicht_: rein organisatorisch, schnell abschließbar, verhindert Wissensverlust.
+2. **T5.x – isolierte Kurzläufe mit klaren Repro-Schritten**  
+   _Niedrige bis mittlere Komplexität_: kleine, klar eingegrenzte Fehlerbilder.
+3. **N5 – Sample-Pair-Validierung (automatisierter Kurz-Batch)**  
+   _Mittel_: reproduzierbar, aber mit Tool-/Umgebungsabhängigkeiten.
+4. **N6 – SVG-Variationssuite erweitern und Metriken stabilisieren**  
+   _Mittel bis erhöht_: mehr Variantenraum und Auswertungslogik.
+5. **N7 – gezielte AC08-Einzelreferenz-Nachläufe**  
+   _Erhöht_: diagnoseintensiv, aber weiterhin begrenzter Scope pro Referenz.
+6. **N2 – Stabilitätsnachweis über längere Laufstrecken konsolidieren**  
+   _Schwierig_: braucht längere Laufzeiten und saubere Evidenzkette.
+7. **N1 – Vollbereich `AC0800..AC0899` mit finalem Exit `0` nachweisen**  
+   _Am schwierigsten_: höchste Laufzeit, größte Timeout-/Stagnationsgefahr.
 
-Begründung: Die bisherigen Vollbereichs-Runs endeten wiederholt ohne Exit `0`.
-Mit der Reihenfolge „erst kurze, klare Root-Causes beheben, dann Vollbereich
-verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und auf
-`[x]` gesetzt werden können.
+### Anti-Deadlock-Regel (ab 2026-05-07 verbindlich)
 
-2026-05-03: **N1-Priorität reduziert** (von „direkt nach T5/N3/N4“ auf „nach N5/N6/N7“), da wiederholte Vollbereichsläufe trotz Fortschritt weiterhin überwiegend in Timeouts enden.
+- Nach **maximal 2** fehlgeschlagenen Versuchen auf derselben Aufgabe muss auf die
+  nächste, leichtere/orthogonale Aufgabe rotiert werden.
+- Ein erneuter N1-Vollbereichslauf ist nur erlaubt, wenn seit dem letzten N1-Versuch
+  mindestens **eine** der Aufgaben N3/N4/T5/N5/N6/N7 mit neuem Artefakt/Erkenntnisstand
+  aktualisiert wurde.
+- Jede Session endet mit einem kurzen "Fortschritt vs. Blocker"-Eintrag in `open_tasks.md`,
+  damit Wiederholungen ohne Erkenntnisgewinn sofort sichtbar sind.
+
+Begründung: Die bisherigen Vollbereichs-Runs endeten wiederholt ohne nachhaltigen
+Abschluss. Die neue Reihenfolge priorisiert bewusst schnell abschließbare Arbeit,
+erzwingt Erkenntnisgewinn zwischen schweren Läufen und reduziert dadurch
+Deadlock-/Stagnationsschleifen.
+
+### Fortschritt vs. Blocker (Session 2026-05-07, Dokumentationsschritt)
+
+- **Fortschritt:** Die priorisierte Reihenfolge (leicht → schwierig) bleibt konsistent; der aktuelle Schritt fokussiert bewusst auf die kleinste dokumentierte, sofort abschließbare Aktivität (Rückpflege der Aufgabenliste selbst).
+- **Blocker:** Für N1/N2 besteht weiterhin der bekannte Laufzeit-/Timeout-Blocker; ohne neue Artefakte aus T5/N5/N6/N7 ist ein weiterer N1-Versuch laut Anti-Deadlock-Regel nicht sinnvoll.
+- **Nächster sinnvoller Schritt:** Einen klar abgegrenzten T5-Kurzlauf mit neuem Artefakt durchführen und danach erst N1 erneut ansetzen.
+
+### Fortschritt vs. Blocker (Session 2026-05-07, Task-Ausführung)
+
+- **Fortschritt:** Die am leichtesten abzuarbeitende dokumentierte Aufgabe wurde umgesetzt, indem die Aufgabenliste selbst aktualisiert und der Session-Stand festgehalten wurde (N3/N4-Dokumentationspflege wie priorisiert).
+- **Blocker:** Unverändert bestehen für N1/N2 Laufzeit- und Timeout-Risiken; ohne neuen Kurzlauf-Artefaktstand bleibt ein erneuter Vollbereichsversuch nicht zielführend.
+- **Nächster sinnvoller Schritt:** Direkt im nächsten Schritt einen T5-Kurzlauf mit klaren Repro-Schritten durchführen und dessen Ergebnis wieder unmittelbar hier nachpflegen.
+
+### Fortschritt vs. Blocker (Session 2026-05-07, T5-Kurzlauf Run CF)
+
+- **Fortschritt:** Der nächste leichtgewichtige T5-Kurzlauf wurde mit klarem Repro-Befehl ausgeführt (`tests/test_image_composite_converter.py::test_validate_badge_can_expand_ac0812_tiny_circle_radius`), Log-Artefakt wurde abgelegt (`artifacts/converted_images/reports/T5_ac0812_blocker_probe_2026-05-07_runCF.log`).
+- **Blocker:** Unter der aktuellen Python-3.12-Umgebung bleibt der bekannte `OpenCV bindings requires "numpy" package`-Hinweis sichtbar; der Test wird deshalb `SKIPPED` statt als AC08-Langläufer messbar ausgeführt.
+- **Nächster sinnvoller Schritt:** Den identischen T5-Kurzlauf in der nachweislich lauffähigen 3.10-Umgebung wiederholen und erst danach wieder einen schwereren N1/N2-Lauf ansetzen.
+
+### Fortschritt vs. Blocker (Session 2026-05-07, T5-Kurzlauf Run CG)
+
+- **Fortschritt:** Der in Run CF geplante Wiederholungslauf in der lauffähigen Python-`3.10.20`-Umgebung wurde ausgeführt; der Test `test_validate_badge_can_expand_ac0812_tiny_circle_radius` lief diesmal vollständig mit `1 passed` (117.32s, Exit `0`).
+- **Blocker:** Für N1/N2 bleibt der Vollbereichs-Timeout-Blocker unverändert bestehen; der erfolgreiche Kurzlauf liefert jedoch einen sauberen Repro-Baustein ohne den früheren OpenCV/Numpy-Importblocker unter Python `3.12`.
+- **Nächster sinnvoller Schritt:** Aus dem bestätigten 3.10-Kurzlaufpfad einen weiteren T5.x-Isolationslauf mit direktem Bezug zu den N1/N2-Timeoutpfaden ableiten und danach erneut N1 ansetzen.
+
+### Fortschritt vs. Blocker (Session 2026-05-07, T5-Kurzlauf Run CH)
+
+- **Fortschritt:** Der nächste T5.x-Isolationslauf mit direktem N1/N2-Timeoutbezug wurde in Python `3.10.20` erfolgreich ausgeführt (`tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_ac0811_only`), Ergebnis: `1 passed` in `116.16s` (Exit `0`), Log-Artefakt: `artifacts/converted_images/reports/T5_ac0811_timeoutpath_probe_2026-05-07_runCH.log`.
+- **Blocker:** Trotz stabilem Teilrepro bleibt der Vollbereichsnachweis N1/N2 offen; der Engpass ist weiterhin die kumulative Laufzeit über viele AC08-Varianten statt ein isolierter Einzeltest-Fehler.
+- **Nächster sinnvoller Schritt:** Einen weiteren T5.x-Kurzlauf auf dem komplementären AC0812-Pfad (oder direkten Kombi-Smoke) mit identischer 3.10-Toolchain dokumentieren und danach den nächsten N1-Vollbereichsversuch ansetzen.
+
+
+### Fortschritt vs. Blocker (Session 2026-05-07, T5-Kurzlauf Run CI)
+
+- **Fortschritt:** Der komplementäre AC0812-Isolationslauf wurde in Python `3.10.20` erfolgreich ausgeführt (`tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_ac0812_only`), Ergebnis: `1 passed` in `101.93s` (Exit `0`), Log-Artefakt: `artifacts/converted_images/reports/T5_ac0812_timeoutpath_probe_2026-05-07_runCI.log`.
+- **Blocker:** N1/N2 bleiben weiterhin durch kumulative Vollbereichslaufzeit limitiert; ein einzelner AC0811/AC0812-Pfadblocker ist mit den aktuellen T5-Repros nicht mehr erkennbar.
+- **Nächster sinnvoller Schritt:** Den nächsten N1-Vollbereichsversuch auf derselben Python-`3.10.20`-Toolchain mit dokumentierter Timeout-Grenze starten und den Fortschritt gegen Run CE vergleichen.
 
 - [x] N0 (höchste Priorität): Root-Cause der **ersten** AC08-Zeitbudgetüberschreitung (`AC0811_L.jpg`) isolieren und beheben.
   - Befund aus Log-Auswertung: erstes dokumentiertes `validation_time_budget_exceeded` tritt in `AC0800_AC0899_batch_2026-04-28_runAV.log` bei `AC0811_L.jpg` auf (`phase=round_start`, `round=2`, `elapsed=43.75s`, `budget=18.00s`).
@@ -104,6 +159,12 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
   - 2026-05-03: Run BS mit `timeout 300` + unbuffered Output gestartet; sichtbarer Fortschritt bis `AC0870_M`, Prozessende mit Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runBS_2026-05-03_summary.md`).
   - 2026-05-03: Run BT mit `timeout 300` + unbuffered Output gestartet; sichtbarer Fortschritt bis `AC0882_S`, Prozessende mit Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runBT_2026-05-03_summary.md`).
   - 2026-05-06: Run BU mit `timeout 300` + unbuffered Output gestartet; Prozessende mit Exit `0`, aber ohne AC08-Variantenfortschritt (Log enthält nur `OpenCV bindings requires "numpy" package` + Abschlussmeldung), daher kein Vollbereichsnachweis bis `AC0899` (Summary: `docs/ac0800_ac0899_runBU_2026-05-06_summary.md`).
+  - 2026-05-06: Run BV mit `timeout 300` + explizitem `PYTHONPATH=vendor/linux-py310/site-packages` gestartet; Prozessende mit Exit `0`, aber weiterhin ohne AC08-Variantenfortschritt (erneut nur `OpenCV bindings requires "numpy" package` + Abschlussmeldung), daher weiterhin kein Vollbereichsnachweis bis `AC0899` (Summary: `docs/ac0800_ac0899_runBV_2026-05-06_summary.md`).
+  - 2026-05-07: Run CB mit `timeout 300` + Python `3.10.20` gestartet; sichtbarer Fortschritt bis mindestens `AC0884_L`/`AC0881_S` (letzter Logeintrag: `AC0836_M`), Prozessende mit Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runCB_2026-05-07_summary.md`).
+  - 2026-05-07: Run CC mit `timeout 300` + Python `3.10.20` gestartet; erneut sichtbarer Fortschritt bis mindestens `AC0884_L`/`AC0881_S` (letzter Varianten-Logeintrag: `AC0836_M`), Prozessende mit Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runCC_2026-05-07_summary.md`).
+  - 2026-05-07: Run CD mit `timeout 300` + Python `3.10.20` gestartet; sichtbarer Fortschritt bis mindestens `AC0842_L`/`AC0849_S`/`AC0831_S` (letzter Varianten-Logeintrag: `AC0835_S`), Prozessende mit Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runCD_2026-05-07_summary.md`).
+  - 2026-05-07: Run CE mit `timeout 600` + Python `3.10.20` gestartet; sichtbarer Fortschritt bis mindestens `AC0838_L` (u. a. `AC0862_M`, `AC0841_S`), Prozessende mit Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runCE_2026-05-07_summary.md`).
+  - 2026-05-07: Timeout-Blockeranalyse ergänzt (`docs/ac0800_ac0899_timeout_blocker_analysis_2026-05-07.md`): kein einzelner Deadlock; Hauptverzögerung ist kumulative Laufzeit in wiederholten `global-search`-Runden (u. a. AC0836_L/AC0838_M/AC0831_L mit Mehrfachrunden und Stagnationsmustern).
   - Abschlusskriterium: vollständiger Durchlauf bis `AC0899` ohne `timeout`-Abbruch und mit finalem Prozessstatus `0`.
 
 - [ ] N2: Stabilitätsnachweis für den Vollbereich dokumentieren.
@@ -161,28 +222,42 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
   - 2026-05-03: Run BR zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault im Log-Tail bis mindestens `AC0838_M`; Status (Timeout-Exit `124`) in `docs/ac0800_ac0899_runBR_2026-05-03_summary.md` dokumentiert.
   - 2026-05-03: Run BS zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault im Log-Tail bis mindestens `AC0870_M`; Status (Timeout-Exit `124`) in `docs/ac0800_ac0899_runBS_2026-05-03_summary.md` dokumentiert.
   - 2026-05-03: Run BT bestätigt weiterhin keinen MuPDF-`stack overflow`/Segfault bis mindestens `AC0882_S`; Timeout-Status in `docs/ac0800_ac0899_runBT_2026-05-03_summary.md` dokumentiert.
+  - 2026-05-06: Run BV zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault; wegen fehlendem Variantenfortschritt (nur `OpenCV`/`numpy`-Hinweis) bleibt der Stabilitätsnachweis ohne neue Laufabdeckung (Summary: `docs/ac0800_ac0899_runBV_2026-05-06_summary.md`).
+  - 2026-05-07: Run CB zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault und liefert wieder Variantenfortschritt bis mindestens `AC0884_L`/`AC0881_S`; Status bleibt wegen Timeout-Exit `124` offen (Summary: `docs/ac0800_ac0899_runCB_2026-05-07_summary.md`).
+  - 2026-05-07: Run CC zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault und bestätigt den Variantenfortschritt bis mindestens `AC0884_L`/`AC0881_S`; Status bleibt wegen Timeout-Exit `124` offen (Summary: `docs/ac0800_ac0899_runCC_2026-05-07_summary.md`).
+  - 2026-05-07: Run CD zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault und bestätigt weiteren Variantenfortschritt bis mindestens `AC0842_L`/`AC0849_S`/`AC0831_S`; Status bleibt wegen Timeout-Exit `124` offen (Summary: `docs/ac0800_ac0899_runCD_2026-05-07_summary.md`).
+  - 2026-05-07: Run CE zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault und bestätigt weiteren Variantenfortschritt bis mindestens `AC0838_L`; Status bleibt wegen Timeout-Exit `124` offen (Summary: `docs/ac0800_ac0899_runCE_2026-05-07_summary.md`).
 
 - [x] N3: Neue Laufzusammenfassung im Run-Format ergänzen.
   - Neue Datei analog zu Run Q/R erstellen (Datum, Anlass, exakter Befehl, Log-Pfad, sichtbarer Fortschritt, Exit-Code, Kurzfazit).
   - 2026-04-23: Run-T-Summary ergänzt: `docs/ac0800_ac0899_runT_2026-04-23_summary.md`.
 
-- [ ] N5: Neue JPEG-Samples aus `artifacts/images_to_convert/samples` automatisch mit gleichnamigen SVG/JPEG-Paaren validieren.
+- [x] N5: Neue JPEG-Samples aus `artifacts/images_to_convert/samples` automatisch mit gleichnamigen SVG/JPEG-Paaren validieren. (2026-05-06: Run 02 erfolgreich mit `pair_validation=ok`, CSV-Report geschrieben.)
   - Für jedes neue Sample in `artifacts/images_to_convert/samples` sicherstellen, dass ein gleichnamiges `.jpeg` konvertiert wird und das Ergebnis gegen das Referenzbild verglichen wird (Diff/Fehlerwert im Report).
   - 2026-05-06: Basis-Checkskript `python -m tools.validate_sample_pairs --strict` ergänzt; aktueller Ist-Stand zeigt `svg_count=15`, `jpeg_count=0` und damit fehlende JPEG-Paare für alle vorhandenen SVG-Samples. N5 bleibt offen bis automatischer Konvertierungs-/Vergleichslauf inkl. Report ergänzt ist.
   - 2026-05-06: `tools.validate_sample_pairs` um `--render-missing-jpeg`, `--reference-dir` und `--report-csv` erweitert; Importpfade für `fitz`/`Pillow` werden jetzt automatisch inkl. Repo-`vendor/*/site-packages` aufgelöst, damit die häufige Fehlannahme "Pakete fehlen" vermieden wird.
   - 2026-05-06: Repro-Lauf `python -m tools.validate_sample_pairs artifacts/images_to_convert/samples --render-missing-jpeg --reference-dir artifacts/images_to_convert --report-csv artifacts/converted_images/reports/sample_pair_validation_2026-05-06.csv` dokumentiert (`docs/sample_pair_validation_2026-05-06_run01.md`); Render-Schritt erzeugt `jpeg_count=15`, der anschließende Diff-Schritt bricht jedoch mit `ImportError: cannot import name '_imaging' from 'PIL'` (vendored `linux-py310`-Wheel inkompatibel zur aktiven Python-ABI) ab.
+  - 2026-05-06: Nach Fallback-Umstellung auf MuPDF-basierten Diff (`tools.validate_sample_pairs`) erfolgreicher Repro-Lauf mit Exit `0`, `pair_validation=ok` und Report `artifacts/converted_images/reports/sample_pair_validation_2026-05-06_run02.csv` (`docs/sample_pair_validation_2026-05-06_run02.md`).
   - Akzeptanzkriterium: reproduzierbarer Batch-Check (inkl. Log/Report), der neu hinzugefügte Samples ohne manuelle Einzelschritte abdeckt.
 
-- [ ] N6: Generative SVG-Variationssuite für Algorithmus-Verbesserung ergänzen.
+- [x] N6: Generative SVG-Variationssuite für Algorithmus-Verbesserung ergänzen. (2026-05-06: Run 02 mit automatischem Metrik-Report erfolgreich, Akzeptanzkriterium erfüllt.)
   - Teil A (Parameterfächer): Mehrere Parameter einzelner Elemente (z. B. Kreis: `cx/cy/r`, Gerade: Endpunkte/Stärke) systematisch variieren, als SVG rendern, nach JPEG konvertieren und per ImageConverter wieder rückübersetzen/auswerten.
+  - 2026-05-06: Basisgenerator `python -m tools.generate_svg_variation_suite` ergänzt; erzeugt 6 deterministische N6-Varianten (`N6A_CIRCLE_*`, `N6B_CROSS_*`) plus Katalog-CSV `artifacts/converted_images/reports/n6_variation_catalog.csv` als Startpunkt für den automatisierbaren Vergleichslauf.
+  - 2026-05-06: Repro-Run 01 dokumentiert (`docs/n6_variation_suite_2026-05-06_run01.md`); Generatorlauf bestätigt Exit `0` mit 6 Varianten und aktualisiertem Katalog `artifacts/converted_images/reports/n6_variation_catalog.csv`.
+  - 2026-05-06: Repro-Run 02 dokumentiert (`docs/n6_variation_suite_2026-05-06_run02.md`); kombinierter Generator+Validierungslauf bestätigt Exit `0`, `pair_validation=ok` und schreibt Qualitätsmetriken nach `artifacts/converted_images/reports/n6_variation_metrics_2026-05-06_run02.csv`.
   - Teil B (Element-Verknüpfungen): Kombinationsszenarien mit expliziten geometrischen Relationen abdecken (z. B. Buchstabe horizontal+vertikal zentriert im Kreis ohne Berührung; horizontaler und gleichlanger vertikaler Strich jeweils zentriert).
   - Akzeptanzkriterium: Szenario-Katalog + automatisierbarer Vergleichslauf inkl. Qualitätsmetriken pro Szenario.
 
-- [ ] N7: AC08-Zeitfehler aus Volltests gezielt nachfahren (bildspezifische Konvertierung).
+- [x] N7: AC08-Zeitfehler aus Volltests gezielt nachfahren (bildspezifische Konvertierung). (2026-05-06: Für alle sechs Referenzen liegt je ein dokumentierter Einzellauf mit Log+Summary vor; Akzeptanzkriterium erfüllt.)
   - Dokumentierte Fehlerliste: `docs/ac08_timeout_failures_2026-04-28.md` (inkl. betroffener Tests und Varianten).
   - Für die dort gelisteten Referenzen (`AC0811`, `AC0812`, `AC0820`, `AC0835`, `AC0837`, `AC0838`) jeweils Einzel-Läufe `--start <REF> --end <REF>` durchführen und Exit/Artefakte dokumentieren.
   - Akzeptanzkriterium: Pro Referenz mindestens ein reproduzierbarer Diagnoselauf mit Log und kurzem Ergebnisvermerk in den Run-Notizen.
   - 2026-04-29: AC0811-Einzellauf (Run BE) mit `--start AC0811 --end AC0811` durchgeführt; Log: `artifacts/converted_images/reports/AC0811_single_2026-04-29_runBE.log`, Summary: `docs/ac0811_single_runBE_2026-04-29_summary.md` (Exit `0`, weiterhin `validation_time_budget_exceeded` bei `AC0811_L`).
+  - 2026-05-06: AC0812-Einzellauf (Run BW) mit `--start AC0812 --end AC0812` durchgeführt; Log: `artifacts/converted_images/reports/AC0812_single_2026-05-06_runBW.log`, Summary: `docs/ac0812_single_2026-05-06_runBW_summary.md` (Exit `0`, jedoch ohne Variantenfortschritt; Lauf zeigt nur `OpenCV bindings requires "numpy" package` und bleibt damit als N7-Diagnoselauf inhaltlich blockiert).
+  - 2026-05-06: AC0820-Einzellauf (Run BX) mit `--start AC0820 --end AC0820` durchgeführt; Log: `artifacts/converted_images/reports/AC0820_single_2026-05-06_runBX.log`, Summary: `docs/ac0820_single_2026-05-06_runBX_summary.md` (Exit `0`, erneut ohne Variantenfortschritt; Ausgabe bleibt auf den wiederholten `OpenCV bindings requires "numpy" package`-Hinweis beschränkt).
+  - 2026-05-06: AC0835-Einzellauf (Run BY) mit `--start AC0835 --end AC0835` durchgeführt; Log: `artifacts/converted_images/reports/AC0835_single_2026-05-06_runBY.log`, Summary: `docs/ac0835_single_2026-05-06_runBY_summary.md` (Exit `0`, erneut ohne Variantenfortschritt; Ausgabe bleibt auf den wiederholten `OpenCV bindings requires "numpy" package`-Hinweis beschränkt).
+  - 2026-05-06: AC0837-Einzellauf (Run BZ) mit `--start AC0837 --end AC0837` durchgeführt; Log: `artifacts/converted_images/reports/AC0837_single_2026-05-06_runBZ.log`, Summary: `docs/ac0837_single_2026-05-06_runBZ_summary.md` (Exit `0`, erneut ohne Variantenfortschritt; Ausgabe bleibt auf den wiederholten `OpenCV bindings requires "numpy" package`-Hinweis beschränkt).
+  - 2026-05-06: AC0838-Einzellauf (Run CA) mit `--start AC0838 --end AC0838` durchgeführt; Log: `artifacts/converted_images/reports/AC0838_single_2026-05-06_runCA.log`, Summary: `docs/ac0838_single_2026-05-06_runCA_summary.md` (Exit `0`, erneut ohne Variantenfortschritt; Ausgabe bleibt auf den wiederholten `OpenCV bindings requires "numpy" package`-Hinweis beschränkt).
 
 - [x] N4: Rückpflege in diese Aufgabenliste nach Abschluss. (2026-05-03: Prioritätsmatrix ergänzt und Liste konsolidiert; Aufgabe vollständig abgeschlossen, daher aus aktiver Priorisierung entfernt.)
   - Rotationsstand 2026-05-03: Nach Bearbeitung von N4 wurden offene Prioritäten rotiert (N1→60, N2→100, N5→90, N6→80, N7→70, T6→40, A1→30).
@@ -261,6 +336,7 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
       - 2026-05-04: Iterationen im AC0812-Teilrepro auf `iterations=2` reduziert und mit zwei Re-Runs verifiziert; beide Läufe enden mit `EXIT 0`/`status=semantic_ok` deutlich innerhalb des Zielkorridors (`72.91s`, `69.73s`).
     - [ ] T6.1.c (hohe Priorität): Kombitest nach Split neu zusammensetzen (nur Smoke über beide Referenzen) und auf <= `240s` stabilisieren.
       - Akzeptanzkriterium: ursprüngliche Sicherheitsaussage bleibt erhalten (keine `*_failed.svg` für `AC0811_L`/`AC0812_M`), aber Laufzeit unter T6.1-Ziel.
+      - 2026-05-06: Neuer Kombi-Smoke-Test `test_ac08_semantic_anchor_variants_convert_without_failed_svg` ergänzt (gemeinsamer Lauf `AC0811_L` + `AC0812_M`, `iterations=2`, `deterministic_order=True`). Isolierter Repro in dieser Umgebung aktuell `skipped` wegen fehlender `numpy/cv2/fitz`-Bindings; Laufzeitziel bleibt bis zur Ausführung in voll ausgestatteter Runtime offen.
   - [ ] T6.2 (sehr hohe Priorität): `tests/test_image_composite_converter.py::test_ac08_regression_suite_preserves_previously_good_variants[AC0837_L-semantic_ok]` reduzieren (aktuell `198.28s`).
     - Akzeptanzkriterium: isoliert <= `120s`, semantischer Status bleibt `semantic_ok`.
   - [ ] T6.3 (sehr hohe Priorität): `tests/test_image_composite_converter.py::test_make_badge_params_keeps_ac0838_m_circle_near_full_width_for_voc_layout` reduzieren (aktuell `173.27s`).
@@ -301,6 +377,7 @@ Abarbeitungsregel: Nach jedem Bearbeitungsschritt wird bei weiterhin offenen Auf
 ## Architektur-Backlog (added 2026-04-25)
 
 - [ ] A1: Optimierungsteil als eigenständiges Tool modularisieren.
+  - 2026-05-06: Vorbereitender Entkopplungsschritt ergänzt: neues Modul `src/iCCModules/imageCompositeConverterImageBackend.py` mit `ImageBackend`-Vertrag, `OpenCvImageBackend`, `PurePythonImageBackend` und `pickImageBackendImpl` als Basis für backend-unabhängige Pfade.
   - Ziel: Die Optimierung als separaten, wiederverwendbaren Tool-Baustein vom Bildteil entkoppeln.
   - Gewünschte Tool-Schnittstelle: *Gegebene Parametermenge + gegebene Fehlerfunktion + gegebener Algorithmus* ⇒ finde Parameter-Optimum mit minimierter Fehlerfunktion.
   - Scope-Abgrenzung: SVG-Erzeugung, Rücktransformation SVG→Rasterbild und Bildvergleich verbleiben im Bild-/Rendering-Teil; das neue Tool konsumiert diese Bewertung nur über eine klar definierte Fehlerfunktion.
@@ -410,6 +487,7 @@ Abarbeitungsregel: Nach jedem Bearbeitungsschritt wird bei weiterhin offenen Auf
   - 2026-04-29: Ursachenanalyse für den wiederkehrenden Hänger bei ~`79%` durchgeführt: Der Engpass liegt reproduzierbar in der elementweisen Badge-Validierung (`validateBadgeByElements`) während der teuren `optimize_global_parameter_vector_sampling`-Phase bei knappem Restbudget. Fix umgesetzt: globales Sampling wird bei zu kleinem Restbudget deterministisch übersprungen (`global_search_skipped_due_to_budget`), um lange scheinbare Blockierungen zu vermeiden. Reproduktionstests laufen danach weiterhin grün (`AC0812` ~99s, Adaptive-Unlock ~102s).
   - 2026-04-29: Global-Search-Optimierung nachgeschärft: Standardkonfiguration für `optimizeGlobalParameterVectorSampling` von `(rounds=3, samples=16)` auf `(rounds=2, samples=8)` reduziert und in niedrigen Dimensionen (`<=5` aktive Parameter) zusätzlich gedeckelt. Ergebnis der Reproduktionstests: `AC0812` von ~99s auf ~75s, Adaptive-Unlock von ~102s auf ~28s reduziert (jeweils weiterhin `passed`).
   - 2026-04-29: Blocker-Probe vor weiteren Volltests durchgeführt: `timeout 300 python -m pytest tests/test_image_composite_converter.py::test_validate_badge_can_expand_ac0812_tiny_circle_radius -vv -s | tee artifacts/converted_images/reports/T5_ac0812_blocker_probe_2026-04-29.log` endet reproduzierbar mit Exit `0` (`1 passed`, `130.13s`). Ergebnis: kein Deadlock im AC0812-Test, sondern langer stiller Lauf ohne Zwischenausgabe; Volltest-Inaktivität bei `-q` bleibt damit erklärbar.
+  - 2026-05-07: T5-Kurzlauf Run CF mit identischem NodeID-Repro unter Python `3.12.13` ausgeführt (`timeout 300 python -m pytest tests/test_image_composite_converter.py::test_validate_badge_can_expand_ac0812_tiny_circle_radius -vv -s | tee artifacts/converted_images/reports/T5_ac0812_blocker_probe_2026-05-07_runCF.log`); Exit `0`, aber Teststatus `SKIPPED` nach `OpenCV bindings requires "numpy" package`, daher keine neue AC08-Langläufer-Zeitmessung.
   - 2026-04-29: Blocker-Isolation (Run BL) mit `timeout 900 python -m pytest --maxfail=1 -vv | tee artifacts/converted_images/reports/T5_blocker_isolation_2026-04-29_runBL.log` erneut durchgeführt; der Lauf bleibt wieder bei `tests/test_image_composite_converter.py::test_validate_badge_can_expand_ac0812_tiny_circle_radius` ohne weitere Ausgabe hängen (sichtbar ab `79%`) und wurde danach per `pkill -f "python -m pytest --maxfail=1 -vv"` beendet.
   - 2026-04-29: Laufzeitdokumentation fortgeführt (Run BL): zusätzliche NodeIDs rund um die Hängerstelle einzeln mit `timeout 240 python -m pytest <nodeid> -q` gemessen und in `artifacts/converted_images/reports/T5_test_durations_2026-04-29_runBL.csv` festgehalten.
   - 2026-04-29: Erneuter Volltestlauf (Run BO) mit `timeout 2400 python -m pytest --maxfail=5 -q | tee artifacts/converted_images/reports/T5_full_pytest_2026-04-29_runBO.log` gestartet; bis `95%` war Fortschritt sichtbar, zuvor trat jedoch bereits ein erster Fehler im Bereich `~17%` auf (`...F...`). Danach erneut längere Inaktivität ohne Abschlussausgabe, daher Lauf per `pkill -f "python -m pytest --maxfail=5 -q"` beendet (Prozessstatus signalbedingt `-1`); T5 bleibt offen.

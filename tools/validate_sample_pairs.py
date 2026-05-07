@@ -42,23 +42,45 @@ def _render_svg_to_jpeg(svg_path: Path, jpeg_path: Path) -> None:
 
 
 def _diff_score(svg_jpeg: Path, reference_jpeg: Path) -> float:
-    image_module = import_with_vendored_fallback("PIL.Image")
-    image_chops_module = import_with_vendored_fallback("PIL.ImageChops")
-    image_stat_module = import_with_vendored_fallback("PIL.ImageStat")
+    fitz = import_with_vendored_fallback("fitz")
 
-    Image = image_module
-    ImageChops = image_chops_module
-    ImageStat = image_stat_module
+    with fitz.open(svg_jpeg) as converted_doc, fitz.open(reference_jpeg) as reference_doc:
+        converted_pix = converted_doc[0].get_pixmap(alpha=False)
+        reference_pix = reference_doc[0].get_pixmap(alpha=False)
 
-    with Image.open(svg_jpeg) as converted, Image.open(reference_jpeg) as reference:
-        converted_rgb = converted.convert("RGB")
-        reference_rgb = reference.convert("RGB")
-        if converted_rgb.size != reference_rgb.size:
-            converted_rgb = converted_rgb.resize(reference_rgb.size)
-        diff = ImageChops.difference(converted_rgb, reference_rgb)
-        stat = ImageStat.Stat(diff)
-        mean_delta2 = sum(channel_mean * channel_mean for channel_mean in stat.mean)
-    return float(mean_delta2)
+    converted_w, converted_h = converted_pix.width, converted_pix.height
+    reference_w, reference_h = reference_pix.width, reference_pix.height
+
+    if (converted_w, converted_h) != (reference_w, reference_h):
+        scale_x = reference_w / converted_w
+        scale_y = reference_h / converted_h
+        with fitz.open(svg_jpeg) as converted_doc:
+            converted_pix = converted_doc[0].get_pixmap(alpha=False, matrix=fitz.Matrix(scale_x, scale_y))
+        converted_w, converted_h = converted_pix.width, converted_pix.height
+
+    width = min(converted_w, reference_w)
+    height = min(converted_h, reference_h)
+
+    c_bytes = converted_pix.samples
+    r_bytes = reference_pix.samples
+    c_stride = converted_pix.stride
+    r_stride = reference_pix.stride
+    c_n = converted_pix.n
+    r_n = reference_pix.n
+
+    channel_sums = [0.0, 0.0, 0.0]
+    pixel_count = width * height
+    for y in range(height):
+        c_row = y * c_stride
+        r_row = y * r_stride
+        for x in range(width):
+            c_off = c_row + x * c_n
+            r_off = r_row + x * r_n
+            for ch in range(3):
+                channel_sums[ch] += abs(c_bytes[c_off + ch] - r_bytes[r_off + ch])
+
+    channel_means = [s / pixel_count for s in channel_sums]
+    return float(sum(m * m for m in channel_means))
 
 
 def main() -> int:
