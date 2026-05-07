@@ -17,22 +17,40 @@ focused on the actual project scope.
 - The refresh run currently covers the most recently touched connector/circle families present in `artifacts/converted_images/reports` (`AC0811`, `AC0832`, `AC0835`, `AC0836`, `AC0870`, `AC0882`).
 - Continue to add new work items here before implementation starts, then mark them in-place when they are done.
 
-## Next execution tasks (re-priorisiert am 2026-05-03)
+## Next execution tasks (neu sortiert am 2026-05-07: leicht → schwierig)
 
-Arbeitsreihenfolge für die nächsten Sessions (von „hohe Abschlusschance“ nach
-„abhängig von langen Vollbereichsläufen“):
+Arbeitsreihenfolge für die nächsten Sessions (explizit von **leicht zu erledigen**
+bis **schwierig/zeitintensiv**):
 
-1. **T5.x zuerst abschließen** (isolierte, kurze, reproduzierbare Testfehler).
-2. **N3/N4 bei jedem Lauf direkt mitpflegen** (Dokumentation sofort konsistent halten).
-3. **N5/N6/N7 vorziehen** (höhere Abschlusschance mit kürzeren, gezielten Läufen).
-4. **N1/N2 erst danach erneut anstoßen** (Vollbereichslauf als Verifikationsschritt, nicht als erster Schritt).
+1. **N3/N4 – Run-Dokumentation sofort nach jedem Lauf nachpflegen**  
+   _Leicht_: rein organisatorisch, schnell abschließbar, verhindert Wissensverlust.
+2. **T5.x – isolierte Kurzläufe mit klaren Repro-Schritten**  
+   _Niedrige bis mittlere Komplexität_: kleine, klar eingegrenzte Fehlerbilder.
+3. **N5 – Sample-Pair-Validierung (automatisierter Kurz-Batch)**  
+   _Mittel_: reproduzierbar, aber mit Tool-/Umgebungsabhängigkeiten.
+4. **N6 – SVG-Variationssuite erweitern und Metriken stabilisieren**  
+   _Mittel bis erhöht_: mehr Variantenraum und Auswertungslogik.
+5. **N7 – gezielte AC08-Einzelreferenz-Nachläufe**  
+   _Erhöht_: diagnoseintensiv, aber weiterhin begrenzter Scope pro Referenz.
+6. **N2 – Stabilitätsnachweis über längere Laufstrecken konsolidieren**  
+   _Schwierig_: braucht längere Laufzeiten und saubere Evidenzkette.
+7. **N1 – Vollbereich `AC0800..AC0899` mit finalem Exit `0` nachweisen**  
+   _Am schwierigsten_: höchste Laufzeit, größte Timeout-/Stagnationsgefahr.
 
-Begründung: Die bisherigen Vollbereichs-Runs endeten wiederholt ohne Exit `0`.
-Mit der Reihenfolge „erst kurze, klare Root-Causes beheben, dann Vollbereich
-verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und auf
-`[x]` gesetzt werden können.
+### Anti-Deadlock-Regel (ab 2026-05-07 verbindlich)
 
-2026-05-03: **N1-Priorität reduziert** (von „direkt nach T5/N3/N4“ auf „nach N5/N6/N7“), da wiederholte Vollbereichsläufe trotz Fortschritt weiterhin überwiegend in Timeouts enden.
+- Nach **maximal 2** fehlgeschlagenen Versuchen auf derselben Aufgabe muss auf die
+  nächste, leichtere/orthogonale Aufgabe rotiert werden.
+- Ein erneuter N1-Vollbereichslauf ist nur erlaubt, wenn seit dem letzten N1-Versuch
+  mindestens **eine** der Aufgaben N3/N4/T5/N5/N6/N7 mit neuem Artefakt/Erkenntnisstand
+  aktualisiert wurde.
+- Jede Session endet mit einem kurzen "Fortschritt vs. Blocker"-Eintrag in `open_tasks.md`,
+  damit Wiederholungen ohne Erkenntnisgewinn sofort sichtbar sind.
+
+Begründung: Die bisherigen Vollbereichs-Runs endeten wiederholt ohne nachhaltigen
+Abschluss. Die neue Reihenfolge priorisiert bewusst schnell abschließbare Arbeit,
+erzwingt Erkenntnisgewinn zwischen schweren Läufen und reduziert dadurch
+Deadlock-/Stagnationsschleifen.
 
 - [x] N0 (höchste Priorität): Root-Cause der **ersten** AC08-Zeitbudgetüberschreitung (`AC0811_L.jpg`) isolieren und beheben.
   - Befund aus Log-Auswertung: erstes dokumentiertes `validation_time_budget_exceeded` tritt in `AC0800_AC0899_batch_2026-04-28_runAV.log` bei `AC0811_L.jpg` auf (`phase=round_start`, `round=2`, `elapsed=43.75s`, `budget=18.00s`).
