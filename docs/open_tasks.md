@@ -82,6 +82,13 @@ Deadlock-/Stagnationsschleifen.
 - **Blocker:** Trotz stabilem Teilrepro bleibt der Vollbereichsnachweis N1/N2 offen; der Engpass ist weiterhin die kumulative Laufzeit über viele AC08-Varianten statt ein isolierter Einzeltest-Fehler.
 - **Nächster sinnvoller Schritt:** Einen weiteren T5.x-Kurzlauf auf dem komplementären AC0812-Pfad (oder direkten Kombi-Smoke) mit identischer 3.10-Toolchain dokumentieren und danach den nächsten N1-Vollbereichsversuch ansetzen.
 
+
+### Fortschritt vs. Blocker (Session 2026-05-07, T5-Kurzlauf Run CI)
+
+- **Fortschritt:** Der komplementäre AC0812-Isolationslauf wurde in Python `3.10.20` erfolgreich ausgeführt (`tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_ac0812_only`), Ergebnis: `1 passed` in `101.93s` (Exit `0`), Log-Artefakt: `artifacts/converted_images/reports/T5_ac0812_timeoutpath_probe_2026-05-07_runCI.log`.
+- **Blocker:** N1/N2 bleiben weiterhin durch kumulative Vollbereichslaufzeit limitiert; ein einzelner AC0811/AC0812-Pfadblocker ist mit den aktuellen T5-Repros nicht mehr erkennbar.
+- **Nächster sinnvoller Schritt:** Den nächsten N1-Vollbereichsversuch auf derselben Python-`3.10.20`-Toolchain mit dokumentierter Timeout-Grenze starten und den Fortschritt gegen Run CE vergleichen.
+
 - [x] N0 (höchste Priorität): Root-Cause der **ersten** AC08-Zeitbudgetüberschreitung (`AC0811_L.jpg`) isolieren und beheben.
   - Befund aus Log-Auswertung: erstes dokumentiertes `validation_time_budget_exceeded` tritt in `AC0800_AC0899_batch_2026-04-28_runAV.log` bei `AC0811_L.jpg` auf (`phase=round_start`, `round=2`, `elapsed=43.75s`, `budget=18.00s`).
   - Ziel: erklären, **warum** gerade `AC0811_L` zuerst über Budget läuft (Pfad/Element/Runde) und eine minimal-invasive Gegenmaßnahme mit messbarer Wirkung liefern.
