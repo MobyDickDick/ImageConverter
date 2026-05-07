@@ -90,6 +90,13 @@ Deadlock-/Stagnationsschleifen.
 - **Nächster sinnvoller Schritt:** Den nächsten N1-Vollbereichsversuch auf derselben Python-`3.10.20`-Toolchain mit dokumentierter Timeout-Grenze starten und den Fortschritt gegen Run CE vergleichen.
 
 
+
+### Fortschritt vs. Blocker (Session 2026-05-07, T5-Kurzlauf Run CK)
+
+- **Fortschritt:** Ein weiterer T5.x-Isolationslauf wurde in Python `3.10.20` erfolgreich ausgeführt (`tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_ac0811_only`), Ergebnis: `1 passed` in `113.62s` (Exit `0`), Log-Artefakt: `artifacts/converted_images/reports/T5_ac0811_timeoutpath_probe_2026-05-07_runCK.log`.
+- **Blocker:** N1/N2 bleiben weiterhin durch die kumulative Vollbereichslaufzeit limitiert; der Einzelpfad AC0811 zeigt im Kurzlauf weiterhin keinen isolierten Fehler.
+- **Nächster sinnvoller Schritt:** Als nächste leichtgewichtige Anschlussaufgabe den automatisierten N5-Sample-Pair-Kurzbatch laufen lassen und den Ergebnisstand direkt in `open_tasks.md` ergänzen.
+
 ### Fortschritt vs. Blocker (Session 2026-05-07, N3/N4 Mini-Update durch Agent)
 
 - **Fortschritt:** Die leichteste dokumentierte Aufgabe (N3/N4: Run-Dokumentation sofort nachpflegen) wurde erneut erfüllt, indem der Session-Stand unmittelbar in `docs/open_tasks.md` ergänzt wurde.
