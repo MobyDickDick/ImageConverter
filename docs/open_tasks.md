@@ -89,6 +89,12 @@ Deadlock-/Stagnationsschleifen.
 - **Blocker:** N1/N2 bleiben weiterhin durch kumulative Vollbereichslaufzeit limitiert; ein einzelner AC0811/AC0812-Pfadblocker ist mit den aktuellen T5-Repros nicht mehr erkennbar.
 - **Nächster sinnvoller Schritt:** Den nächsten N1-Vollbereichsversuch auf derselben Python-`3.10.20`-Toolchain mit dokumentierter Timeout-Grenze starten und den Fortschritt gegen Run CE vergleichen.
 
+
+### Fortschritt vs. Blocker (Session 2026-05-07, N3/N4 Mini-Update durch Agent)
+
+- **Fortschritt:** Die leichteste dokumentierte Aufgabe (N3/N4: Run-Dokumentation sofort nachpflegen) wurde erneut erfüllt, indem der Session-Stand unmittelbar in `docs/open_tasks.md` ergänzt wurde.
+- **Blocker:** Für N1/N2 bleibt der bekannte Vollbereichs-Timeout-Blocker bestehen; ohne neues Kurzlauf-Artefakt ist kein zusätzlicher Erkenntnisgewinn zu erwarten.
+- **Nächster sinnvoller Schritt:** Einen weiteren kurzen T5.x-Reprolauf mit identischem Python-`3.10.20`-Pfad durchführen und Ergebnis direkt danach hier dokumentieren.
 ### Fortschritt vs. Blocker (Session 2026-05-07, N1-Vollbereich Run CJ)
 
 - **Fortschritt:** Der nächste dokumentierte N1-Vollbereichsversuch wurde in derselben Python-`3.10.20`-Toolchain wie die erfolgreichen T5-Kurzläufe ausgeführt; neues Log-Artefakt: `artifacts/converted_images/reports/AC0800_AC0899_batch_2026-05-07_runCJ.log` (Summary: `docs/ac0800_ac0899_runCJ_2026-05-07_summary.md`).
