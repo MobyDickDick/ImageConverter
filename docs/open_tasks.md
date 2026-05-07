@@ -52,6 +52,12 @@ Abschluss. Die neue Reihenfolge priorisiert bewusst schnell abschließbare Arbei
 erzwingt Erkenntnisgewinn zwischen schweren Läufen und reduziert dadurch
 Deadlock-/Stagnationsschleifen.
 
+### Fortschritt vs. Blocker (Session 2026-05-07, Dokumentationsschritt)
+
+- **Fortschritt:** Die priorisierte Reihenfolge (leicht → schwierig) bleibt konsistent; der aktuelle Schritt fokussiert bewusst auf die kleinste dokumentierte, sofort abschließbare Aktivität (Rückpflege der Aufgabenliste selbst).
+- **Blocker:** Für N1/N2 besteht weiterhin der bekannte Laufzeit-/Timeout-Blocker; ohne neue Artefakte aus T5/N5/N6/N7 ist ein weiterer N1-Versuch laut Anti-Deadlock-Regel nicht sinnvoll.
+- **Nächster sinnvoller Schritt:** Einen klar abgegrenzten T5-Kurzlauf mit neuem Artefakt durchführen und danach erst N1 erneut ansetzen.
+
 - [x] N0 (höchste Priorität): Root-Cause der **ersten** AC08-Zeitbudgetüberschreitung (`AC0811_L.jpg`) isolieren und beheben.
   - Befund aus Log-Auswertung: erstes dokumentiertes `validation_time_budget_exceeded` tritt in `AC0800_AC0899_batch_2026-04-28_runAV.log` bei `AC0811_L.jpg` auf (`phase=round_start`, `round=2`, `elapsed=43.75s`, `budget=18.00s`).
   - Ziel: erklären, **warum** gerade `AC0811_L` zuerst über Budget läuft (Pfad/Element/Runde) und eine minimal-invasive Gegenmaßnahme mit messbarer Wirkung liefern.
