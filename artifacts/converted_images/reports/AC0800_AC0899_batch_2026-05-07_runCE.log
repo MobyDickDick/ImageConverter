@@ -1,0 +1,33 @@
+[INFO] Vollbereich AC0800..AC0899 aktiviert isoliertes SVG-Rendering automatisch (entspricht --isolate-svg-render).
+[INFO] Schreibe Konsolen-Output nach: /workspace/ImageConverter/imageCompositeConverter.local.log
+
+--- Verarbeite AC0835_M.jpg ---
+Bildbeschreibung: Grauer Kreis mit grauem Rand und hellgrauem Hintergrund. Text im Kreis: "VOC". Kein Griff, keine Kelle und keine weiteren Anbauteile.
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe VOC
+
+--- Verarbeite AC0845_L.jpg ---
+Bildbeschreibung: Grauer Kreis mit dunkler Kontur und hellem Innenverlauf; im Kreis steht "rH". Keine Griff-/Leitungslinie außerhalb des Kreises. Geometrische Beschreibung: konzentrischer Kreisring mit zentrierter horizontaler Textachse.
+Befehl erkannt: Kein Compositing-Befehl gefunden
+
+--- Verarbeite AC0841_M.jpg ---
+Bildbeschreibung: Grauer Kreis mit grauem Rand und hellgrauem Hintergrund Abweichung: mit Text "rF" (relative Feuchtigkeit) Abweichung: mit Griff (dunkelgraue Linie nach unten)
+Befehl erkannt: Kein Compositing-Befehl gefunden
+[WARN] AC0841_M.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+
+--- Verarbeite AC0846_M.jpg ---
+Bildbeschreibung: Wie AC0845, zusätzlich ein dunkler vertikaler Griff/Leitungsstiel mittig unter dem Kreis. Geometrische Beschreibung: Kreisring mit nach unten angesetzter zentrierter Vertikallinie.
+Befehl erkannt: Kein Compositing-Befehl gefunden
+
+--- Verarbeite AC0862_M.jpg ---
+Bildbeschreibung: Grauer Kreis mit grauem Rand und hellgrauem Hintergrund Abweichung: mit Text "rF" (relative Feuchtigkeit) Abweichung: mit Griff (dunkelgraue Linie nach unten) Abweichung: nach rechts gedreht, Text immer noch horizontal
+Befehl erkannt: Kein Compositing-Befehl gefunden
+[WARN] AC0862_M.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+
+--- Verarbeite AC0841_S.jpg ---
+Bildbeschreibung: Grauer Kreis mit grauem Rand und hellgrauem Hintergrund Abweichung: mit Text "rF" (relative Feuchtigkeit) Abweichung: mit Griff (dunkelgraue Linie nach unten)
+Befehl erkannt: Kein Compositing-Befehl gefunden
+[WARN] AC0841_S.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+
+--- Verarbeite AC0838_L.jpg ---
+Bildbeschreibung: Wie AC0836, jedoch in der gegenüberliegenden Drehlage. Der Griff bleibt als klarer Zusatzarm am Kreis erkennbar, der Text "VOC" bleibt horizontal lesbar.
+Befehl erkannt: SEMANTIC: senkrechter Strich oben vom Kreis, SEMANTIC: Kreis + Buchstabe VOC
