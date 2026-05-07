@@ -106,6 +106,7 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
   - 2026-05-06: Run BU mit `timeout 300` + unbuffered Output gestartet; Prozessende mit Exit `0`, aber ohne AC08-Variantenfortschritt (Log enthält nur `OpenCV bindings requires "numpy" package` + Abschlussmeldung), daher kein Vollbereichsnachweis bis `AC0899` (Summary: `docs/ac0800_ac0899_runBU_2026-05-06_summary.md`).
   - 2026-05-06: Run BV mit `timeout 300` + explizitem `PYTHONPATH=vendor/linux-py310/site-packages` gestartet; Prozessende mit Exit `0`, aber weiterhin ohne AC08-Variantenfortschritt (erneut nur `OpenCV bindings requires "numpy" package` + Abschlussmeldung), daher weiterhin kein Vollbereichsnachweis bis `AC0899` (Summary: `docs/ac0800_ac0899_runBV_2026-05-06_summary.md`).
   - 2026-05-07: Run CB mit `timeout 300` + Python `3.10.20` gestartet; sichtbarer Fortschritt bis mindestens `AC0884_L`/`AC0881_S` (letzter Logeintrag: `AC0836_M`), Prozessende mit Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runCB_2026-05-07_summary.md`).
+  - 2026-05-07: Run CC mit `timeout 300` + Python `3.10.20` gestartet; erneut sichtbarer Fortschritt bis mindestens `AC0884_L`/`AC0881_S` (letzter Varianten-Logeintrag: `AC0836_M`), Prozessende mit Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runCC_2026-05-07_summary.md`).
   - Abschlusskriterium: vollständiger Durchlauf bis `AC0899` ohne `timeout`-Abbruch und mit finalem Prozessstatus `0`.
 
 - [ ] N2: Stabilitätsnachweis für den Vollbereich dokumentieren.
@@ -165,6 +166,7 @@ verifizieren“ steigt die Chance, dass Aufgaben tatsächlich abgeschlossen und 
   - 2026-05-03: Run BT bestätigt weiterhin keinen MuPDF-`stack overflow`/Segfault bis mindestens `AC0882_S`; Timeout-Status in `docs/ac0800_ac0899_runBT_2026-05-03_summary.md` dokumentiert.
   - 2026-05-06: Run BV zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault; wegen fehlendem Variantenfortschritt (nur `OpenCV`/`numpy`-Hinweis) bleibt der Stabilitätsnachweis ohne neue Laufabdeckung (Summary: `docs/ac0800_ac0899_runBV_2026-05-06_summary.md`).
   - 2026-05-07: Run CB zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault und liefert wieder Variantenfortschritt bis mindestens `AC0884_L`/`AC0881_S`; Status bleibt wegen Timeout-Exit `124` offen (Summary: `docs/ac0800_ac0899_runCB_2026-05-07_summary.md`).
+  - 2026-05-07: Run CC zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault und bestätigt den Variantenfortschritt bis mindestens `AC0884_L`/`AC0881_S`; Status bleibt wegen Timeout-Exit `124` offen (Summary: `docs/ac0800_ac0899_runCC_2026-05-07_summary.md`).
 
 - [x] N3: Neue Laufzusammenfassung im Run-Format ergänzen.
   - Neue Datei analog zu Run Q/R erstellen (Datum, Anlass, exakter Befehl, Log-Pfad, sichtbarer Fortschritt, Exit-Code, Kurzfazit).
