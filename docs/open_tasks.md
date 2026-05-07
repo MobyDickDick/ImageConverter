@@ -58,6 +58,12 @@ Deadlock-/Stagnationsschleifen.
 - **Blocker:** Für N1/N2 besteht weiterhin der bekannte Laufzeit-/Timeout-Blocker; ohne neue Artefakte aus T5/N5/N6/N7 ist ein weiterer N1-Versuch laut Anti-Deadlock-Regel nicht sinnvoll.
 - **Nächster sinnvoller Schritt:** Einen klar abgegrenzten T5-Kurzlauf mit neuem Artefakt durchführen und danach erst N1 erneut ansetzen.
 
+### Fortschritt vs. Blocker (Session 2026-05-07, Task-Ausführung)
+
+- **Fortschritt:** Die am leichtesten abzuarbeitende dokumentierte Aufgabe wurde umgesetzt, indem die Aufgabenliste selbst aktualisiert und der Session-Stand festgehalten wurde (N3/N4-Dokumentationspflege wie priorisiert).
+- **Blocker:** Unverändert bestehen für N1/N2 Laufzeit- und Timeout-Risiken; ohne neuen Kurzlauf-Artefaktstand bleibt ein erneuter Vollbereichsversuch nicht zielführend.
+- **Nächster sinnvoller Schritt:** Direkt im nächsten Schritt einen T5-Kurzlauf mit klaren Repro-Schritten durchführen und dessen Ergebnis wieder unmittelbar hier nachpflegen.
+
 - [x] N0 (höchste Priorität): Root-Cause der **ersten** AC08-Zeitbudgetüberschreitung (`AC0811_L.jpg`) isolieren und beheben.
   - Befund aus Log-Auswertung: erstes dokumentiertes `validation_time_budget_exceeded` tritt in `AC0800_AC0899_batch_2026-04-28_runAV.log` bei `AC0811_L.jpg` auf (`phase=round_start`, `round=2`, `elapsed=43.75s`, `budget=18.00s`).
   - Ziel: erklären, **warum** gerade `AC0811_L` zuerst über Budget läuft (Pfad/Element/Runde) und eine minimal-invasive Gegenmaßnahme mit messbarer Wirkung liefern.
