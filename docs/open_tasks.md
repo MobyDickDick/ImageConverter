@@ -70,6 +70,12 @@ Deadlock-/Stagnationsschleifen.
 - **Blocker:** Unter der aktuellen Python-3.12-Umgebung bleibt der bekannte `OpenCV bindings requires "numpy" package`-Hinweis sichtbar; der Test wird deshalb `SKIPPED` statt als AC08-Langläufer messbar ausgeführt.
 - **Nächster sinnvoller Schritt:** Den identischen T5-Kurzlauf in der nachweislich lauffähigen 3.10-Umgebung wiederholen und erst danach wieder einen schwereren N1/N2-Lauf ansetzen.
 
+### Fortschritt vs. Blocker (Session 2026-05-07, T5-Kurzlauf Run CG)
+
+- **Fortschritt:** Der in Run CF geplante Wiederholungslauf in der lauffähigen Python-`3.10.20`-Umgebung wurde ausgeführt; der Test `test_validate_badge_can_expand_ac0812_tiny_circle_radius` lief diesmal vollständig mit `1 passed` (117.32s, Exit `0`).
+- **Blocker:** Für N1/N2 bleibt der Vollbereichs-Timeout-Blocker unverändert bestehen; der erfolgreiche Kurzlauf liefert jedoch einen sauberen Repro-Baustein ohne den früheren OpenCV/Numpy-Importblocker unter Python `3.12`.
+- **Nächster sinnvoller Schritt:** Aus dem bestätigten 3.10-Kurzlaufpfad einen weiteren T5.x-Isolationslauf mit direktem Bezug zu den N1/N2-Timeoutpfaden ableiten und danach erneut N1 ansetzen.
+
 - [x] N0 (höchste Priorität): Root-Cause der **ersten** AC08-Zeitbudgetüberschreitung (`AC0811_L.jpg`) isolieren und beheben.
   - Befund aus Log-Auswertung: erstes dokumentiertes `validation_time_budget_exceeded` tritt in `AC0800_AC0899_batch_2026-04-28_runAV.log` bei `AC0811_L.jpg` auf (`phase=round_start`, `round=2`, `elapsed=43.75s`, `budget=18.00s`).
   - Ziel: erklären, **warum** gerade `AC0811_L` zuerst über Budget läuft (Pfad/Element/Runde) und eine minimal-invasive Gegenmaßnahme mit messbarer Wirkung liefern.
