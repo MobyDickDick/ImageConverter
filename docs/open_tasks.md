@@ -120,6 +120,19 @@ Deadlock-/Stagnationsschleifen.
 - **Blocker:** N1/N2 bleiben unverändert offen, da weiterhin kein Vollbereichslauf bis `AC0899` mit finalem Exit `0` nachgewiesen ist.
 - **Nächster sinnvoller Schritt:** Gemäß Priorisierung auf den nächsten noch offenen schweren Pfad rotieren (N2/N1), idealerweise mit klarer Timeout-Grenze und unmittelbarer Run-Dokumentation.
 
+
+### Fortschritt vs. Blocker (Session 2026-05-08, N1/N2-Vollbereich Run CL)
+
+- **Fortschritt:** Der als nächster schwerer Anschluss dokumentierte Vollbereichslauf wurde in Python `3.10.20` mit fixer Timeout-Grenze ausgeführt; neues Log-Artefakt: `artifacts/converted_images/reports/AC0800_AC0899_batch_2026-05-08_runCL.log` (Summary: `docs/ac0800_ac0899_runCL_2026-05-08_summary.md`).
+- **Blocker:** Der Lauf endete erneut per äußerem `timeout 420` mit Exit `124`; damit bleibt der Abschlussnachweis bis `AC0899` weiterhin offen.
+- **Nächster sinnvoller Schritt:** Gemäß Priorisierung wieder auf eine leichtere/orthogonale Aufgabe rotieren (z. B. T5/N6/N7 mit neuem Diagnoseartefakt), bevor der nächste N1-Vollbereichsversuch erfolgt.
+
+### Fortschritt vs. Blocker (Session 2026-05-08, N1/N2-Vollbereich Run CM)
+
+- **Fortschritt:** Der Vollbereichslauf `AC0800..AC0899` wurde erneut in Python `3.10.20` mit `timeout 420` ausgeführt; neues Log-Artefakt: `artifacts/converted_images/reports/AC0800_AC0899_batch_2026-05-08_runCM.log` (Summary: `docs/ac0800_ac0899_runCM_2026-05-08_summary.md`).
+- **Blocker:** Der Lauf endete erneut mit Exit `124`; der Vollbereichsnachweis bis `AC0899` bleibt weiterhin offen.
+- **Nächster sinnvoller Schritt:** Auf eine leichtere/orthogonale Diagnoseaufgabe rotieren und erst danach erneut N1 starten.
+
 - [x] N0 (höchste Priorität): Root-Cause der **ersten** AC08-Zeitbudgetüberschreitung (`AC0811_L.jpg`) isolieren und beheben.
   - Befund aus Log-Auswertung: erstes dokumentiertes `validation_time_budget_exceeded` tritt in `AC0800_AC0899_batch_2026-04-28_runAV.log` bei `AC0811_L.jpg` auf (`phase=round_start`, `round=2`, `elapsed=43.75s`, `budget=18.00s`).
   - Ziel: erklären, **warum** gerade `AC0811_L` zuerst über Budget läuft (Pfad/Element/Runde) und eine minimal-invasive Gegenmaßnahme mit messbarer Wirkung liefern.
