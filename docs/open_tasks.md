@@ -1486,3 +1486,9 @@ Details und Akzeptanzkriterien stehen in `docs/kelle_umsetzungscheck.md` unter
 
 - [x] Materialize the AC08 weak-family follow-up reports referenced by the improvement plan.
   - Regenerated `artifacts/converted_images/reports/ac08_weak_family_status.csv` and `.txt` from the current `pixel_delta2_ranking.csv` so the documented AC08 follow-up now exists as committed snapshot artifacts, not only as code/tests.
+
+### Fortschritt vs. Blocker (Session 2026-05-08, T5-Kurzlauf Run CN)
+
+- **Fortschritt:** Der nächste dokumentierte leichte/orthogonale Schritt wurde als T5.x-Isolationslauf ausgeführt (`tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_ac0812_only`); der Aufruf lief mit Exit `0`, aber der Teststatus war `SKIPPED` (`1 skipped` in `5.69s`).
+- **Blocker:** Unter der aktuellen Laufumgebung wurde kein vollwertiger AC08-Repropfad durchlaufen; damit entsteht kein neues belastbares Laufzeit-/Timeout-Artefakt für N1/N2.
+- **Nächster sinnvoller Schritt:** Den identischen T5-Kurzlauf in der bestätigten Python-`3.10.20`-Umgebung wiederholen (mit persistiertem Log-Artefakt) und anschließend wieder auf N1/N2 rotieren.
