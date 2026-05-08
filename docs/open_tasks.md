@@ -133,6 +133,12 @@ Deadlock-/Stagnationsschleifen.
 - **Blocker:** Der Lauf endete erneut mit Exit `124`; der Vollbereichsnachweis bis `AC0899` bleibt weiterhin offen.
 - **Nächster sinnvoller Schritt:** Auf eine leichtere/orthogonale Diagnoseaufgabe rotieren und erst danach erneut N1 starten.
 
+### Fortschritt vs. Blocker (Session 2026-05-08, T5-Kurzlauf Run CN)
+
+- **Fortschritt:** Ein weiterer leichter T5.x-Isolationslauf wurde in Python `3.10.20` erfolgreich ausgeführt (`tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_ac0812_only`), Ergebnis: `1 passed` in `104.61s` (Exit `0`), Log-Artefakt: `artifacts/converted_images/reports/T5_ac0812_timeoutpath_probe_2026-05-08_runCN.log`.
+- **Blocker:** N1/N2 bleiben weiterhin offen; der Vollbereichsnachweis bis `AC0899` wurde durch diesen Kurzlauf erwartungsgemäß nicht ersetzt.
+- **Nächster sinnvoller Schritt:** Gemäß Priorisierung den nächsten schweren N2/N1-Vollbereichslauf mit fixer Timeout-Grenze ansetzen und direkt danach den Status hier nachpflegen.
+
 - [x] N0 (höchste Priorität): Root-Cause der **ersten** AC08-Zeitbudgetüberschreitung (`AC0811_L.jpg`) isolieren und beheben.
   - Befund aus Log-Auswertung: erstes dokumentiertes `validation_time_budget_exceeded` tritt in `AC0800_AC0899_batch_2026-04-28_runAV.log` bei `AC0811_L.jpg` auf (`phase=round_start`, `round=2`, `elapsed=43.75s`, `budget=18.00s`).
   - Ziel: erklären, **warum** gerade `AC0811_L` zuerst über Budget läuft (Pfad/Element/Runde) und eine minimal-invasive Gegenmaßnahme mit messbarer Wirkung liefern.
