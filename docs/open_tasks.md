@@ -108,6 +108,12 @@ Deadlock-/Stagnationsschleifen.
 - **Blocker:** Der äußere Zeitrahmen (`timeout 420`) endete erneut mit Exit `124`; damit bleibt der Vollbereichsnachweis bis `AC0899` weiterhin offen.
 - **Nächster sinnvoller Schritt:** Gemäß Anti-Deadlock-Regel wieder auf eine leichtere/orthogonale Aufgabe (z. B. weiterer T5-/N5-Schritt mit zusätzlicher Diagnosemetrik) rotieren, bevor der nächste N1-Versuch erfolgt.
 
+### Fortschritt vs. Blocker (Session 2026-05-08, N3/N4 Dokumentationspflege)
+
+- **Fortschritt:** Die dokumentierte Priorisierung (leicht → schwierig) wurde erneut aktiv eingehalten, indem die Aufgabenliste direkt zu Session-Beginn geprüft und der Stand nachgeführt wurde.
+- **Blocker:** N1/N2 bleiben unverändert durch Vollbereichs-Laufzeit/Timeout limitiert; ohne neues Kurzlauf-Artefakt ist der nächste schwere Vollbereichslauf weiterhin risikoreich.
+- **Nächster sinnvoller Schritt:** Als nächste konkrete Anschlussaufgabe den bereits benannten N5-Sample-Pair-Kurzbatch ausführen und den Output unmittelbar hier dokumentieren.
+
 - [x] N0 (höchste Priorität): Root-Cause der **ersten** AC08-Zeitbudgetüberschreitung (`AC0811_L.jpg`) isolieren und beheben.
   - Befund aus Log-Auswertung: erstes dokumentiertes `validation_time_budget_exceeded` tritt in `AC0800_AC0899_batch_2026-04-28_runAV.log` bei `AC0811_L.jpg` auf (`phase=round_start`, `round=2`, `elapsed=43.75s`, `budget=18.00s`).
   - Ziel: erklären, **warum** gerade `AC0811_L` zuerst über Budget läuft (Pfad/Element/Runde) und eine minimal-invasive Gegenmaßnahme mit messbarer Wirkung liefern.
