@@ -114,6 +114,12 @@ Deadlock-/Stagnationsschleifen.
 - **Blocker:** N1/N2 bleiben unverändert durch Vollbereichs-Laufzeit/Timeout limitiert; ohne neues Kurzlauf-Artefakt ist der nächste schwere Vollbereichslauf weiterhin risikoreich.
 - **Nächster sinnvoller Schritt:** Als nächste konkrete Anschlussaufgabe den bereits benannten N5-Sample-Pair-Kurzbatch ausführen und den Output unmittelbar hier dokumentieren.
 
+### Fortschritt vs. Blocker (Session 2026-05-08, N5-Kurzbatch Run 03)
+
+- **Fortschritt:** Der als nächster Schritt dokumentierte N5-Sample-Pair-Kurzbatch wurde erneut ausgeführt; Ergebnis weiterhin stabil mit `svg_count=15`, `jpeg_count=15`, `pair_validation=ok` und Exit `0` (Artefakte: `artifacts/converted_images/reports/sample_pair_validation_2026-05-08_run03.csv`, `artifacts/converted_images/reports/sample_pair_validation_2026-05-08_run03.log`, Summary: `docs/sample_pair_validation_2026-05-08_run03.md`; binäre JPEG-Zwischendateien werden nicht versioniert).
+- **Blocker:** N1/N2 bleiben unverändert offen, da weiterhin kein Vollbereichslauf bis `AC0899` mit finalem Exit `0` nachgewiesen ist.
+- **Nächster sinnvoller Schritt:** Gemäß Priorisierung auf den nächsten noch offenen schweren Pfad rotieren (N2/N1), idealerweise mit klarer Timeout-Grenze und unmittelbarer Run-Dokumentation.
+
 - [x] N0 (höchste Priorität): Root-Cause der **ersten** AC08-Zeitbudgetüberschreitung (`AC0811_L.jpg`) isolieren und beheben.
   - Befund aus Log-Auswertung: erstes dokumentiertes `validation_time_budget_exceeded` tritt in `AC0800_AC0899_batch_2026-04-28_runAV.log` bei `AC0811_L.jpg` auf (`phase=round_start`, `round=2`, `elapsed=43.75s`, `budget=18.00s`).
   - Ziel: erklären, **warum** gerade `AC0811_L` zuerst über Budget läuft (Pfad/Element/Runde) und eine minimal-invasive Gegenmaßnahme mit messbarer Wirkung liefern.
