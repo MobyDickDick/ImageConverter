@@ -40,7 +40,7 @@ bis **schwierig/zeitintensiv**):
 
 ### Abgeleitete Lightweight-Aufgaben aus Laufzeitfaktoren (2026-05-09)
 
-- [ ] **LW1:** `AC0836_L` isoliert konvertieren und 6-Runden/global-search-Zeit erneut messen.
+- [x] **LW1:** `AC0836_L` isoliert konvertieren und 6-Runden/global-search-Zeit erneut messen. (2026-05-09: Repro in Python `3.10.20` ausgeführt; `max_round=6`, `global_search_samples=6`, `global_search_sum=3.37s`, kein `stagnation_detected`; Log: `artifacts/converted_images/reports/LW1_ac0836L_isolation_2026-05-09_runCQ.log`.)
 - [ ] **LW2:** `AC0838_M` isoliert konvertieren und Stagnationsrunde + Rundendauern protokollieren.
 - [ ] **LW3:** `AC0831_L` isoliert in 3 Wiederholungen laufen lassen (min/median/max global-search).
 - [ ] **LW4:** 3er-Microbatch `AC0836_L, AC0838_M, AC0831_L` als schneller N1/N2-Proxy dokumentieren.
@@ -165,6 +165,12 @@ Deadlock-/Stagnationsschleifen.
 - **Fortschritt:** Die begrenzenden Faktoren wurden bildweise dokumentiert (`docs/ac08_limiting_factors_2026-05-09.md`), inklusive Top-10 nach kumulierter `global-search`-Zeit und abgeleiteter Lightweight-Tasks.
 - **Blocker:** N1/N2 bleiben weiter vom kumulativen Laufzeitbudget abhängig; ohne gezielte Reduktion der 5–6-Runden-Fälle bleiben Vollbereichs-Timeouts wahrscheinlich.
 - **Nächster sinnvoller Schritt:** Die abgeleiteten LW1–LW4-Aufgaben der Reihe nach als kurze Repros ausführen und die Messwerte direkt hier ergänzen.
+
+### Fortschritt vs. Blocker (Session 2026-05-09, LW1 AC0836_L-Isolation)
+
+- **Fortschritt:** LW1 wurde abgeschlossen: isolierter Lauf für `AC0836_L` in Python `3.10.20` durchgeführt (`--start AC0836 --end AC0836`), Exit `0`; Messwerte aus `AC0836_L_element_validation.log` bestätigen erneut `max_round=6`, `global_search_samples=6`, `global_search_sum=3.37s`, ohne `stagnation_detected`.
+- **Blocker:** N1/N2 bleiben weiterhin offen; der Vollbereichsnachweis bis `AC0899` ist durch den Einzelrepro erwartungsgemäß nicht ersetzt.
+- **Nächster sinnvoller Schritt:** Mit LW2 (`AC0838_M` isoliert inkl. Stagnationsrunde + Rundendauern) unmittelbar fortfahren.
 
 - [x] N0 (höchste Priorität): Root-Cause der **ersten** AC08-Zeitbudgetüberschreitung (`AC0811_L.jpg`) isolieren und beheben.
   - Befund aus Log-Auswertung: erstes dokumentiertes `validation_time_budget_exceeded` tritt in `AC0800_AC0899_batch_2026-04-28_runAV.log` bei `AC0811_L.jpg` auf (`phase=round_start`, `round=2`, `elapsed=43.75s`, `budget=18.00s`).
