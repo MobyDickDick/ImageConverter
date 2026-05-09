@@ -37,6 +37,14 @@ bis **schwierig/zeitintensiv**):
 7. **N1 – Vollbereich `AC0800..AC0899` mit finalem Exit `0` nachweisen**  
    _Am schwierigsten_: höchste Laufzeit, größte Timeout-/Stagnationsgefahr.
 
+
+### Abgeleitete Lightweight-Aufgaben aus Laufzeitfaktoren (2026-05-09)
+
+- [ ] **LW1:** `AC0836_L` isoliert konvertieren und 6-Runden/global-search-Zeit erneut messen.
+- [ ] **LW2:** `AC0838_M` isoliert konvertieren und Stagnationsrunde + Rundendauern protokollieren.
+- [ ] **LW3:** `AC0831_L` isoliert in 3 Wiederholungen laufen lassen (min/median/max global-search).
+- [ ] **LW4:** 3er-Microbatch `AC0836_L, AC0838_M, AC0831_L` als schneller N1/N2-Proxy dokumentieren.
+
 ### Anti-Deadlock-Regel (ab 2026-05-07 verbindlich)
 
 - Nach **maximal 2** fehlgeschlagenen Versuchen auf derselben Aufgabe muss auf die
@@ -139,6 +147,25 @@ Deadlock-/Stagnationsschleifen.
 - **Blocker:** N1/N2 bleiben weiterhin offen; der Vollbereichsnachweis bis `AC0899` wurde durch diesen Kurzlauf erwartungsgemäß nicht ersetzt.
 - **Nächster sinnvoller Schritt:** Gemäß Priorisierung den nächsten schweren N2/N1-Vollbereichslauf mit fixer Timeout-Grenze ansetzen und direkt danach den Status hier nachpflegen.
 
+
+### Fortschritt vs. Blocker (Session 2026-05-09, T5-Kurzlauf Run CO)
+
+- **Fortschritt:** Ein weiterer leichter T5.x-Isolationslauf wurde in Python `3.10.20` erfolgreich ausgeführt (`tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_ac0811_only`), Ergebnis: `1 passed` in `105.42s` (Exit `0`), Log-Artefakt: `artifacts/converted_images/reports/T5_ac0811_timeoutpath_probe_2026-05-09_runCO.log`.
+- **Blocker:** N1/N2 bleiben weiterhin offen; der Vollbereichsnachweis bis `AC0899` ist durch den isolierten Kurzlauf erwartungsgemäß nicht ersetzt.
+- **Nächster sinnvoller Schritt:** Gemäß Priorisierung den nächsten N1/N2-Vollbereichslauf mit fixer Timeout-Grenze durchführen und den Ergebnisstand unmittelbar hier nachpflegen.
+
+### Fortschritt vs. Blocker (Session 2026-05-09, N1/N2-Vollbereich Run CP)
+
+- **Fortschritt:** Der nächste schwere N1/N2-Vollbereichslauf wurde in Python `3.10.20` mit fixer Timeout-Grenze ausgeführt; neues Log-Artefakt: `artifacts/converted_images/reports/AC0800_AC0899_batch_2026-05-09_runCP.log` (Summary: `docs/ac0800_ac0899_runCP_2026-05-09_summary.md`).
+- **Blocker:** Der Lauf endete erneut per äußerem `timeout 420` mit Exit `124`; der Vollbereichsnachweis bis `AC0899` mit finalem Exit `0` bleibt offen.
+- **Nächster sinnvoller Schritt:** Gemäß Priorisierung wieder auf eine leichtere/orthogonale Aufgabe (T5/N5/N6/N7) mit neuem Diagnoseartefakt rotieren, bevor der nächste N1-Versuch erfolgt.
+
+### Fortschritt vs. Blocker (Session 2026-05-09, Laufzeitfaktoren dokumentiert)
+
+- **Fortschritt:** Die begrenzenden Faktoren wurden bildweise dokumentiert (`docs/ac08_limiting_factors_2026-05-09.md`), inklusive Top-10 nach kumulierter `global-search`-Zeit und abgeleiteter Lightweight-Tasks.
+- **Blocker:** N1/N2 bleiben weiter vom kumulativen Laufzeitbudget abhängig; ohne gezielte Reduktion der 5–6-Runden-Fälle bleiben Vollbereichs-Timeouts wahrscheinlich.
+- **Nächster sinnvoller Schritt:** Die abgeleiteten LW1–LW4-Aufgaben der Reihe nach als kurze Repros ausführen und die Messwerte direkt hier ergänzen.
+
 - [x] N0 (höchste Priorität): Root-Cause der **ersten** AC08-Zeitbudgetüberschreitung (`AC0811_L.jpg`) isolieren und beheben.
   - Befund aus Log-Auswertung: erstes dokumentiertes `validation_time_budget_exceeded` tritt in `AC0800_AC0899_batch_2026-04-28_runAV.log` bei `AC0811_L.jpg` auf (`phase=round_start`, `round=2`, `elapsed=43.75s`, `budget=18.00s`).
   - Ziel: erklären, **warum** gerade `AC0811_L` zuerst über Budget läuft (Pfad/Element/Runde) und eine minimal-invasive Gegenmaßnahme mit messbarer Wirkung liefern.
@@ -155,6 +182,7 @@ Deadlock-/Stagnationsschleifen.
     - 2026-05-02 (Run BM): Exit `0`, erneut nur bis `AC0811_L` mit `validation_time_budget_exceeded` (`phase=round_start`, `round=2`) → **weiterhin Stagnation**.
     - 2026-05-02 (Run BN): Exit `124` (äußeres Timeout), aber Fortschritt bis `AC0812_S`-Start nach `AC0811_L/M/S` + `AC0812_L/M` → **Blockierung verringert**.
     - 2026-05-07 (Run CJ): Exit `124` (äußeres Timeout bei `timeout 420`), neues Vollbereichsartefakt in Python `3.10.20`, aber weiterhin kein Abschluss bis `AC0899` → **N1 weiterhin offen**.
+    - 2026-05-09 (Run CP): Exit `124` (äußeres Timeout bei `timeout 420`), erneuter Vollbereichsversuch in Python `3.10.20` ohne Abschluss bis `AC0899` → **N1 weiterhin offen**.
   - 2026-04-23: Startkommando als Run S angestoßen; Log-Datei: `artifacts/converted_images/reports/AC0800_AC0899_batch_2026-04-23_runS.log`.
   - 2026-04-23: Run S nach dokumentiertem Teilfortschritt (`AC0800_*`, Start `AC0811_L`) manuell mit Exit `143` beendet, um Aufgaben-/Run-Doku im selben Arbeitsgang zu aktualisieren.
   - 2026-04-23: Run T ohne `timeout` gestartet; dokumentierter Fortschritt bis `AC0811_M`, danach manuell per `pkill` beendet (kein finaler Exit-`0`).
