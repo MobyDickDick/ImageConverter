@@ -1510,3 +1510,9 @@ Details und Akzeptanzkriterien stehen in `docs/kelle_umsetzungscheck.md` unter
 - **Fortschritt:** Die nächste priorisierte, leichteste dokumentierte Aufgabe wurde abgearbeitet, indem die Aufgabenliste zu Session-Beginn erneut aktiv nachgepflegt und der aktuelle Arbeitsstand unmittelbar dokumentiert wurde.
 - **Blocker:** N1/N2 bleiben weiterhin durch die kumulative Vollbereichslaufzeit (`AC0800..AC0899`) mit wiederholten Timeout-Abbrüchen limitiert; ein finaler Vollbereichsnachweis bis `AC0899` mit Exit `0` liegt weiterhin nicht vor.
 - **Nächster sinnvoller Schritt:** Gemäß Priorisierung einen weiteren klar abgegrenzten T5.x-Kurzlauf oder N5/N6-Artefaktlauf erzeugen und danach den Status wieder direkt in `open_tasks.md` nachführen.
+
+### Fortschritt vs. Blocker (Session 2026-05-09, T5-Kurzlauf Run CO)
+
+- **Fortschritt:** Der nächste dokumentierte leichte T5.x-Isolationslauf wurde in Python `3.10.20` erfolgreich ausgeführt (`tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_ac0811_only`), Ergebnis: `1 passed` in `112.96s` (Exit `0`), Log-Artefakt: `artifacts/converted_images/reports/T5_ac0811_timeoutpath_probe_2026-05-09_runCO.log`.
+- **Blocker:** N1/N2 bleiben weiterhin offen; ein vollständiger Vollbereichsnachweis bis `AC0899` mit finalem Exit `0` wurde durch den isolierten Kurzlauf erwartungsgemäß nicht ersetzt.
+- **Nächster sinnvoller Schritt:** Den nächsten N1/N2-Vollbereichslauf mit fixer Timeout-Grenze auf derselben Python-`3.10.20`-Toolchain ausführen und das Ergebnis direkt nachpflegen.
