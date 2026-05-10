@@ -116,7 +116,9 @@ def parseArgsImpl(
         "--log-file",
         default=os.environ.get("IMAGE_COMPOSITE_CONVERTER_LOG_FILE", ""),
         help=(
-            "Optional: Schreibt den kompletten Konsolen-Output zusätzlich in diese Datei. "
+            "Optional: Schreibt den kompletten Konsolen-Output zusätzlich in diese Datei "
+            "(z. B. --log-file logs/konverter.log). "
+            "Wenn nicht gesetzt, wird bei lokalen CLI-Läufen automatisch imageCompositeConverter.local.log verwendet. "
             "Kann alternativ über IMAGE_COMPOSITE_CONVERTER_LOG_FILE gesetzt werden."
         ),
     )
