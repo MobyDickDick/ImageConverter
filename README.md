@@ -47,6 +47,32 @@ python -m src.successful_conversion_quality_app
 
 Die kleine Anwendung liest `artifacts/converted_images/reports/successful_conversions.txt` als Bestenliste, ergänzt die dort bereits als erfolgreich markierten Varianten automatisch um Qualitätskennzahlen wie `total_delta2 = Σ((ΔR)^2 + (ΔG)^2 + (ΔB)^2)`, `mean_delta2` und `std_delta2` und übernimmt neue Konvertierungen nur dann in Manifest und Snapshot, wenn sich mindestens eine Kernmetrik verbessert. Schlechtere Neu-Konvertierungen werden verworfen und – falls vorhanden – aus der gespeicherten Bestenlisten-Sicherung wiederhergestellt. Zusätzlich wird eine sortierte CSV-Bestenliste unter `artifacts/converted_images/reports/successful_conversions.csv` erzeugt bzw. aktualisiert; die Einträge sind nach dem Namen der konvertierten Bilder (`variant`) geordnet.
 
+
+### Weak-Family-Pipeline (Top-N + Vorher/Nachher)
+
+```bash
+python -m src.weak_family_pipeline \
+  --before-ranking artifacts/converted_images/reports/pixel_delta2_ranking.csv \
+  --top-n 10 \
+  --prefix AC08 \
+  --selection-out artifacts/converted_images/reports/weak_family_top10.txt
+```
+
+Optional kann ein Konverter-Lauf angestoßen und danach eine Vorher/Nachher-CSV geschrieben werden:
+
+```bash
+python -m src.weak_family_pipeline \
+  --before-ranking artifacts/converted_images/reports/pixel_delta2_ranking_before.csv \
+  --after-ranking artifacts/converted_images/reports/pixel_delta2_ranking_after.csv \
+  --top-n 10 \
+  --prefix AC08 \
+  --selection-out artifacts/converted_images/reports/weak_family_top10.txt \
+  --comparison-out artifacts/converted_images/reports/weak_family_top10_comparison.csv \
+  --run-command "echo Running converter for variants in {variants_file}"
+```
+
+`{variants_file}` wird dabei automatisch durch die erzeugte Top-N-Liste ersetzt.
+
 ### Annotate source images
 
 ```bash
