@@ -46,5 +46,5 @@ def test_emit_iteration_description_header_impl_prints_description_and_fallback_
     assert lines == [
         "\n--- Verarbeite AC0800_S.jpg ---",
         "Bildbeschreibung: SEMANTIC: Kreis ohne Buchstabe",
-        "Befehl erkannt: Kein Compositing-Befehl gefunden",
+        "Befehl erkannt: Kein expliziter Compositing-Befehl (Beschreibung vorhanden, Fallback aktiv)",
     ]

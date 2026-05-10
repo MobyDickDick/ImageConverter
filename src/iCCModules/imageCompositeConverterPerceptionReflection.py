@@ -61,10 +61,15 @@ class Reflection:
     def __init__(self, raw_desc: dict[str, str]):
         self.raw_desc = raw_desc
 
-    def parseDescription(self, base_name: str, img_filename: str):
+    def parseDescription(self, base_name: str, img_filename: str, _visited: set[str] | None = None):
+        if _visited is None:
+            _visited = set()
         canonical_base = _get_base_name_from_file(base_name).upper()
         if not canonical_base:
             canonical_base = _get_base_name_from_file(img_filename).upper()
+        if canonical_base in _visited:
+            return "", {"mode": "auto", "elements": []}
+        _visited.add(canonical_base)
         description_fragments = _collect_description_fragments(self.raw_desc, base_name, img_filename)
         desc_raw = " ".join(fragment["text"] for fragment in description_fragments)
         desc = desc_raw.lower().strip()
@@ -103,6 +108,16 @@ class Reflection:
             params["label"] = ""
             return desc, params
 
+        reference_symbol = Reflection._extract_reference_symbol(desc_raw)
+        if reference_symbol and reference_symbol != symbol_upper:
+            inherited = self._inherit_mode_from_reference(reference_symbol=reference_symbol, img_filename=img_filename, visited=_visited)
+            if inherited is not None:
+                _ref_desc_text, inherited_params = inherited
+                inherited_params["documented_alias_refs"] = sorted(Reflection._extractDocumentedAliasRefs(desc))
+                inherited_params["description_fragments"] = description_fragments
+                inherited_params["variant_name"] = os.path.splitext(str(img_filename))[0].upper()
+                return desc, inherited_params
+
         non_traceable_hint = Reflection._detect_non_traceable_hint(desc)
         if non_traceable_hint:
             params["mode"] = "manual_review"
@@ -126,6 +141,34 @@ class Reflection:
 
     def parse_description(self, base_name: str, img_filename: str):
         return self.parseDescription(base_name, img_filename)
+
+
+    @staticmethod
+    def _extract_reference_symbol(text: str) -> str | None:
+        normalized = str(text or "")
+        match = re.search(r"\bwie\s+([a-z]{2}\d{3,4})\b", normalized, flags=re.IGNORECASE)
+        if not match:
+            return None
+        return match.group(1).upper()
+
+    def _inherit_mode_from_reference(self, *, reference_symbol: str, img_filename: str, visited: set[str]) -> tuple[str, dict[str, object]] | None:
+        reference_desc = self.raw_desc.get(reference_symbol)
+        if not reference_desc:
+            return None
+        ref_desc_text, ref_params = self.parseDescription(reference_symbol, img_filename, _visited=set(visited))
+        ref_mode = str(ref_params.get("mode", "")).strip()
+        if ref_mode in {"manual_review", "auto"}:
+            return None
+        inherited = {
+            key: value
+            for key, value in ref_params.items()
+            if key not in {"description_fragments", "variant_name"}
+        }
+        inherited.setdefault("elements", [])
+        if isinstance(inherited.get("elements"), list):
+            inherited["elements"] = list(inherited["elements"])
+            inherited["elements"].append(f"REFERENZ: Abgeleitet aus {reference_symbol}")
+        return ref_desc_text, inherited
 
     @staticmethod
     def _extractDocumentedAliasRefs(text: str) -> set[str]:
