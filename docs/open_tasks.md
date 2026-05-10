@@ -4,6 +4,58 @@ This checklist only tracks work that is actionable for the ImageConverter in the
 current repository snapshot. Older unrelated language/compiler/runtime tasks were removed so the list stays
 focused on the actual project scope.
 
+## Neue Vision-Roadmap: semantische SVG-Rekonstruktion (abgeglichen am 2026-05-10)
+
+Zielbild: Nicht-binäre Vektorisierung über echte SVG-Primitive mit semantischen Beziehungen und iterativer Nachzeichnung.
+
+### Anpassungen gegenüber der bisherigen Roadmap
+
+- [x] **Beibehalten:** bestehende Stabilitäts-/Laufzeitaufgaben (N1–N7, LW1–LW4) bleiben als technische Basis erhalten.
+- [x] **Ergänzen:** neue inhaltliche Tracks für Primitive-Erkennung, Beziehungen, Überdeckungen und rekonstruktive Iteration.
+- [x] **Bereinigen:** keine der aktuellen Aufgaben widerspricht der Vision diametral; daher wurden keine bestehenden Aufgaben gelöscht.
+
+### Neue Aufgabenpakete (Vision-Track)
+
+- [ ] **V1 – Primitive-Inventar v1 spezifizieren und messbar machen**
+  - Scope: Kreis, Gerade/Linie, Ellipse, Rechteck, Buchstaben/Text, Polygon-/Pfadkurven.
+  - Deliverable: maschinenlesbares Schema (z. B. JSON) inkl. Parameter pro Primitive und Confidence.
+  - Akzeptanz: Für einen Test-Batch wird je Elementtyp Precision/Recall ausgewiesen.
+
+- [ ] **V2 – Bezierkurven-Erkennung ergänzen**
+  - Scope: kubische und quadratische Beziersegmente aus Konturen/Pfaden extrahieren.
+  - Deliverable: Fitting-Strategie inkl. Fehlerschranke (Pixel- und Kurvenraum).
+  - Akzeptanz: Bezier-lastige Referenzen werden mit sinkender Restabweichung rekonstruiert.
+
+- [ ] **V3 – Farbfüllungen und Verläufe robust modellieren**
+  - Scope: flächige Füllungen, lineare/radiale Verläufe, Übergänge an Objektgrenzen.
+  - Deliverable: Gradient-Parameterisierung pro Shape inkl. Stop-Positionen.
+  - Akzeptanz: Gradient-Metrik (DeltaE/Pixeldelta) verbessert sich gegenüber Flat-Fill-Baseline.
+
+- [ ] **V4 – Überdeckungen/Z-Order explizit erkennen**
+  - Scope: Vorder-/Hintergrundbeziehungen, partielle Verdeckung, verdeckte Fortsetzungen.
+  - Deliverable: Layer-Graph mit Occlusion-Relationen (`covers`, `behind`, `continues_behind`).
+  - Akzeptanz: Szenen mit teilverdeckteten Griffen/Verbindungen werden konsistent rekonstruiert.
+
+- [ ] **V5 – Semantische Textrepräsentation + Bedingungen einführen**
+  - Scope: textuelle Szenenbeschreibung inkl. Relationen (z. B. „Kelle mit horizontalem Griff links und Beschriftung rF“).
+  - Deliverable: DSL/JSON-Layer für Objekte + Relationen + Constraints.
+  - Akzeptanz: Beschreibung kann deterministisch wieder in eine rekonstruktive SVG-Szene übersetzt werden.
+
+- [ ] **V6 – Iterativen Nachzeichnungsalgorithmus auf Semantik umstellen**
+  - Scope: Initiale Primitive-Schätzung → Render → Fehleranalyse → Parameterupdate.
+  - Deliverable: Mehrziel-Optimierung (Geometrie, Farbe, Semantik-Konsistenz) pro Iteration.
+  - Akzeptanz: Konvergenzplots zeigen reproduzierbare Verbesserung in mindestens 3 Referenzfamilien.
+
+- [ ] **V7 – Rückwärts-Training (Text → SVG → Raster → Rücktransformation)**
+  - Scope: generierte Szenen zur Selbstvalidierung und Schwachstellenanalyse.
+  - Deliverable: Closed-Loop-Evaluationspipeline mit Gap-Reports pro Relationstyp.
+  - Akzeptanz: Pipeline markiert systematisch nicht-invertierbare Fälle (z. B. vollständig verdeckte Griffe ohne Constraints).
+
+- [ ] **V8 – Grenzfallkatalog für Nicht-Invertierbarkeit pflegen**
+  - Scope: explizite Regeln, wann Rücktransformation prinzipiell mehrdeutig/unmöglich ist.
+  - Deliverable: katalogisierte Failure-Modes + empfohlene Zusatzbedingungen.
+  - Akzeptanz: Jeder dokumentierte Fehlschlag ist einem bekannten Failure-Mode zugeordnet.
+
 ## How to use this list
 
 - Work from top to bottom unless a dependency requires a different order.
