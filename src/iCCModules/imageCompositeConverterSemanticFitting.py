@@ -5,6 +5,28 @@ from __future__ import annotations
 import math
 from collections.abc import Callable
 
+_GRAY_TONE_KEYS = ("fill_gray", "stroke_gray", "line_gray", "stem_gray", "arm_gray", "text_gray")
+
+
+def _snap_semantic_grays_to_two_tones(params: dict, gray_img, *, np_module) -> dict:
+    vals = gray_img.reshape(-1).astype(float)
+    if vals.size == 0:
+        return params
+    lo = float(np_module.percentile(vals, 20))
+    hi = float(np_module.percentile(vals, 80))
+    if not (hi > lo):
+        return params
+    snapped = dict(params)
+    for key in _GRAY_TONE_KEYS:
+        if key not in snapped:
+            continue
+        try:
+            current = float(snapped[key])
+        except (TypeError, ValueError):
+            continue
+        snapped[key] = int(round(lo if abs(current - lo) <= abs(current - hi) else hi))
+    return snapped
+
 
 def stabilizeSemanticCirclePoseImpl(params: dict, defaults: dict, w: int, h: int) -> dict:
     """Bound fitted circle pose to semantic template geometry."""
@@ -410,6 +432,7 @@ def fitSemanticBadgeFromImageImpl(
                     params["arm_stroke"] = float(max(1.0, rw))
 
     params = stabilize_semantic_circle_pose_fn(params, defaults, w, h)
+    params = _snap_semantic_grays_to_two_tones(params, gray, np_module=np)
 
     if params.get("draw_text", True) and params.get("text_mode") in {"path", "path_t"}:
         center_glyph_bbox_fn(params)
