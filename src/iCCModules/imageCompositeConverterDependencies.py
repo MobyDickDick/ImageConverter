@@ -117,13 +117,20 @@ def load_optional_module(module_name: str, *, vendored_dirs_fn=vendored_site_pac
             sys.path.insert(0, path_str)
             added = True
         try:
-            return import_module_fn(module_name)
+            module = import_module_fn(module_name)
+            # Keep the vendored site-packages path active after a successful
+            # import so transitive runtime imports (e.g. cv2 -> numpy) keep
+            # resolving from the same bundle.
+            if added and path_str in sys.path:
+                sys.path.remove(path_str)
+                sys.path.insert(0, path_str)
+            return module
         except Exception as exc:  # pragma: no cover - exercised only in dependency-missing envs
             last_exc = exc
             clear_partial_module_import(module_name)
             _restore_module_entries(baseline_modules)
         finally:
-            if added:
+            if added and path_str in sys.path and module_name not in sys.modules:
                 with contextlib.suppress(ValueError):
                     sys.path.remove(path_str)
 
@@ -153,13 +160,17 @@ def import_with_vendored_fallback(
             sys.path.insert(0, path_str)
             added = True
         try:
-            return import_module_fn(module_name)
+            module = import_module_fn(module_name)
+            if added and path_str in sys.path:
+                sys.path.remove(path_str)
+                sys.path.insert(0, path_str)
+            return module
         except Exception as exc:
             last_exc = exc
             clear_partial_module_import(module_name)
             _restore_module_entries(baseline_modules)
         finally:
-            if added:
+            if added and path_str in sys.path and module_name not in sys.modules:
                 with contextlib.suppress(ValueError):
                     sys.path.remove(path_str)
 

@@ -56,6 +56,10 @@ def parse_semantic_badge_layout_overrides(text: str) -> dict[str, float | str]:
         overrides["co2_anchor_mode"] = "cluster"
         overrides["co2_dx"] = 0.0
 
+    color_count_match = re.search(r"\b(?:farben|colors?)\s*[:=]?\s*(\d+)\b", normalized)
+    if color_count_match:
+        overrides["palette_color_count"] = str(int(color_count_match.group(1)))
+
     return overrides
 
 
