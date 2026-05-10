@@ -35,7 +35,7 @@ def runNonCompositeIterationImpl(
         return None
 
     if stripe_strategy:
-        print_fn("  -> Kein Compositing-Befehl erkannt: verwende Gradient-Stripe-Strategie.")
+        print_fn("  -> Kein expliziter Compositing-Befehl: verwende Gradient-Stripe-Strategie.")
         svg_content = build_gradient_stripe_svg_fn(width, height, stripe_strategy)
         strategy_stop_count = len(list(stripe_strategy.get("stops", [])))
         write_validation_log_fn(
@@ -45,7 +45,7 @@ def runNonCompositeIterationImpl(
             )
         )
     else:
-        print_fn("  -> Kein Compositing-Befehl erkannt: verwende Einzelbild-Konvertierung (embedded raster SVG).")
+        print_fn("  -> Kein expliziter Compositing-Befehl: verwende Einzelbild-Konvertierung (embedded raster SVG).")
         svg_content = render_embedded_raster_svg_fn(img_path)
         write_validation_log_fn(["status=non_composite_embedded_svg"])
 

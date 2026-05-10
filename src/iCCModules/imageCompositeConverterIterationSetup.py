@@ -45,5 +45,13 @@ def emitIterationDescriptionHeaderImpl(
     ).strip()
     if description_text:
         print_fn(f"Bildbeschreibung: {description_text}")
-    elements = ", ".join(params.get("elements", [])) if params.get("elements") else "Kein Compositing-Befehl gefunden"
-    print_fn(f"Befehl erkannt: {elements}")
+    raw_elements = params.get("elements", [])
+    elements = ", ".join(raw_elements) if raw_elements else None
+    if elements:
+        print_fn(f"Befehl erkannt: {elements}")
+    else:
+        mode = str(params.get("mode", "non_composite")).strip()
+        if mode == "manual_review":
+            print_fn("Befehl erkannt: MANUELL (fachliche Zuordnung erforderlich)")
+        else:
+            print_fn("Befehl erkannt: Kein expliziter Compositing-Befehl (Beschreibung vorhanden, Fallback aktiv)")
