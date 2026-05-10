@@ -95,7 +95,7 @@ bis **schwierig/zeitintensiv**):
 - [x] **LW1:** `AC0836_L` isoliert konvertieren und 6-Runden/global-search-Zeit erneut messen. (2026-05-09: Repro in Python `3.10.20` ausgeführt; `max_round=6`, `global_search_samples=6`, `global_search_sum=3.37s`, kein `stagnation_detected`; Log: `artifacts/converted_images/reports/LW1_ac0836L_isolation_2026-05-09_runCQ.log`.)
 - [x] **LW2:** `AC0838_M` isoliert konvertieren und Stagnationsrunde + Rundendauern protokollieren. (2026-05-10: Python `3.10.20`-Isolationslauf erfolgreich, Exit `0`; `stagnation_detected` in Runde `3`; `global_search_elapsed` R1..R5 = `0.70s/0.77s/0.02s/0.67s/0.47s`; Artefakte: `artifacts/converted_images/reports/LW2_ac0838M_isolation_2026-05-10_runCR_py310.log`, `artifacts/converted_images/reports/AC0838_M_element_validation.log`, Summary: `docs/lw2_ac0838M_isolation_2026-05-10_runCR_summary.md`.)
 - [x] **LW3:** `AC0831_L` isoliert in 3 Wiederholungen laufen lassen (min/median/max global-search). (2026-05-10: 3x Python `3.10.20`-Isolationsläufe erfolgreich, jeweils Exit `0`; kumulierte `global_search_elapsed` pro Lauf: `2.40s/2.40s/2.40s` ⇒ `min=2.40s`, `median=2.40s`, `max=2.40s`; Artefakte: `artifacts/converted_images/reports/LW3_ac0831L_isolation_2026-05-10_runCS1_py310.log`, `...runCS2...`, `...runCS3...`, Element-Logs: `AC0831_L_element_validation_runCS1.log` bis `runCS3.log`, Summary: `docs/lw3_ac0831L_isolation_2026-05-10_runCS_summary.md`.)
-- [ ] **LW4:** 3er-Microbatch `AC0836_L, AC0838_M, AC0831_L` als schneller N1/N2-Proxy dokumentieren.
+- [ ] **LW4:** 3er-Microbatch `AC0836_L, AC0838_M, AC0831_L` als schneller N1/N2-Proxy dokumentieren. (2026-05-10: Run CT gestartet; `AC0838`/`AC0831` jeweils Exit `0`, `AC0836` mit Exit `139` abgebrochen, siehe `docs/lw4_microbatch_2026-05-10_runCT_summary.md` und Logs `artifacts/converted_images/reports/LW4_microbatch_2026-05-10_runCT_*.log`; LW4 bleibt offen.)
 
 ### Anti-Deadlock-Regel (ab 2026-05-07 verbindlich)
 
@@ -217,6 +217,12 @@ Deadlock-/Stagnationsschleifen.
 - **Fortschritt:** Die begrenzenden Faktoren wurden bildweise dokumentiert (`docs/ac08_limiting_factors_2026-05-09.md`), inklusive Top-10 nach kumulierter `global-search`-Zeit und abgeleiteter Lightweight-Tasks.
 - **Blocker:** N1/N2 bleiben weiter vom kumulativen Laufzeitbudget abhängig; ohne gezielte Reduktion der 5–6-Runden-Fälle bleiben Vollbereichs-Timeouts wahrscheinlich.
 - **Nächster sinnvoller Schritt:** Die abgeleiteten LW1–LW4-Aufgaben der Reihe nach als kurze Repros ausführen und die Messwerte direkt hier ergänzen.
+
+### Fortschritt vs. Blocker (Session 2026-05-10, LW4-Microbatch Run CT)
+
+- **Fortschritt:** Die nächste offene Lightweight-Aufgabe (LW4) wurde gestartet; der 3er-Microbatch-Proxylauf wurde für `AC0836`, `AC0838` und `AC0831` in Python `3.10.20` ausgeführt (Logs: `artifacts/converted_images/reports/LW4_microbatch_2026-05-10_runCT_ac0836.log`, `...ac0838.log`, `...ac0831.log`; Summary: `docs/lw4_microbatch_2026-05-10_runCT_summary.md`).
+- **Blocker:** Der Teilpfad `AC0836` brach im Microbatch-Lauf mit Exit `139` (`MuPDF error: exception stack overflow!`) ab; damit ist der gewünschte vollständige 3er-Proxylauf noch nicht als stabil abgeschlossen nachgewiesen.
+- **Nächster sinnvoller Schritt:** LW4 mit einem gezielten Re-Run des AC0836-Teils (gleiche Toolchain/Kommandostruktur) vervollständigen und erst danach erneut auf schwere N1/N2-Läufe rotieren.
 
 ### Fortschritt vs. Blocker (Session 2026-05-09, LW1 AC0836_L-Isolation)
 
