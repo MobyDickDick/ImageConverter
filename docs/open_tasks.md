@@ -41,7 +41,7 @@ bis **schwierig/zeitintensiv**):
 ### Abgeleitete Lightweight-Aufgaben aus Laufzeitfaktoren (2026-05-09)
 
 - [x] **LW1:** `AC0836_L` isoliert konvertieren und 6-Runden/global-search-Zeit erneut messen. (2026-05-09: Repro in Python `3.10.20` ausgeführt; `max_round=6`, `global_search_samples=6`, `global_search_sum=3.37s`, kein `stagnation_detected`; Log: `artifacts/converted_images/reports/LW1_ac0836L_isolation_2026-05-09_runCQ.log`.)
-- [ ] **LW2:** `AC0838_M` isoliert konvertieren und Stagnationsrunde + Rundendauern protokollieren.
+- [x] **LW2:** `AC0838_M` isoliert konvertieren und Stagnationsrunde + Rundendauern protokollieren. (2026-05-10: Python `3.10.20`-Isolationslauf erfolgreich, Exit `0`; `stagnation_detected` in Runde `3`; `global_search_elapsed` R1..R5 = `0.70s/0.77s/0.02s/0.67s/0.47s`; Artefakte: `artifacts/converted_images/reports/LW2_ac0838M_isolation_2026-05-10_runCR_py310.log`, `artifacts/converted_images/reports/AC0838_M_element_validation.log`, Summary: `docs/lw2_ac0838M_isolation_2026-05-10_runCR_summary.md`.)
 - [ ] **LW3:** `AC0831_L` isoliert in 3 Wiederholungen laufen lassen (min/median/max global-search).
 - [ ] **LW4:** 3er-Microbatch `AC0836_L, AC0838_M, AC0831_L` als schneller N1/N2-Proxy dokumentieren.
 
@@ -1556,3 +1556,10 @@ Details und Akzeptanzkriterien stehen in `docs/kelle_umsetzungscheck.md` unter
 - **Fortschritt:** Der als nächster Schritt dokumentierte N1/N2-Vollbereichslauf wurde auf Python `3.10.20` mit fixer Timeout-Grenze ausgeführt; neues Artefakt: `artifacts/converted_images/reports/AC0800_AC0899_batch_2026-05-09_runCP.log` (Summary: `docs/ac0800_ac0899_runCP_2026-05-09_summary.md`).
 - **Blocker:** Der Lauf endete erneut durch den äußeren `timeout` (Exit `124`); der Vollbereichsnachweis bis `AC0899` mit finalem Exit `0` bleibt offen.
 - **Nächster sinnvoller Schritt:** Gemäß Priorisierung auf eine leichtere/orthogonale Aufgabe mit neuem Diagnoseartefakt rotieren (T5/N5/N6/N7), bevor der nächste N1-Lauf gestartet wird.
+
+
+### Fortschritt vs. Blocker (Session 2026-05-10, LW2 AC0838_M-Isolation)
+
+- **Fortschritt:** LW2 wurde abgeschlossen: `AC0838_M` isoliert in Python `3.10.20` ausgeführt (`--start AC0838 --end AC0838`), Exit `0`; Stagnation wurde in Runde `3` bestätigt und Rundendauern dokumentiert (Summary: `docs/lw2_ac0838M_isolation_2026-05-10_runCR_summary.md`).
+- **Blocker:** N1/N2 bleiben weiterhin offen; der Vollbereichsnachweis bis `AC0899` ist durch den Einzelrepro erwartungsgemäß nicht ersetzt.
+- **Nächster sinnvoller Schritt:** Mit LW3 (`AC0831_L` in drei Wiederholungen mit min/median/max global-search) unmittelbar fortfahren.
