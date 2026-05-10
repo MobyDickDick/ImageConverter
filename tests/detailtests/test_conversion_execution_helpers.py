@@ -220,8 +220,8 @@ def test_convert_one_impl_non_composite_success_renames_svg_to_failed_prefix(tmp
         print_fn=lambda _msg: None,
     )
 
-    assert failed is False
-    assert row is not None
+    assert failed is True
+    assert row is None
     assert (svg_out / "Failed_AC0704_S.svg").exists()
     assert not (svg_out / "AC0704_S.svg").exists()
 
@@ -263,8 +263,8 @@ def test_convert_one_impl_embedded_svg_uses_failed_prefix_independent_of_status(
         print_fn=lambda _msg: None,
     )
 
-    assert failed is False
-    assert row is not None
+    assert failed is True
+    assert row is None
     assert (svg_out / "Failed_AC0805_M.svg").exists()
     assert not (svg_out / "AC0805_M.svg").exists()
 
@@ -431,8 +431,8 @@ def test_convert_one_impl_marks_image_only_svg_without_raster_extension_as_faile
         print_fn=lambda _msg: None,
     )
 
-    assert failed is False
-    assert row is not None
+    assert failed is True
+    assert row is None
     assert (svg_out / "Failed_AC0414_2_M.svg").exists()
     assert not (svg_out / "AC0414_2_M.svg").exists()
 

@@ -516,6 +516,21 @@ def convertOneImpl(
         base_name=base,
         svg_path=svg_path,
     )
+    if _svgContainsEmbeddedRasterArtifact(svg_path):
+        append_batch_failure_fn(
+            {
+                "filename": filename,
+                "status": "raster_embedded_svg",
+                "reason": "embedded_raster_detected",
+                "details": "Detected embedded raster payload in SVG output.",
+                "log_file": os.path.basename(log_file),
+                "failed_svg": os.path.basename(svg_path),
+            }
+        )
+        _ensureOutputArtifacts(svg_path=svg_path, diff_path=diff_path, create_svg_fallback=False)
+        print_fn(f"[WARN] {filename}: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.")
+        _emit_anchor_variant_event("variant_done", status="raster_embedded_svg")
+        return None, True
     if _svgIsTrivialFallbackArtifact(svg_path):
         append_batch_failure_fn(
             {
