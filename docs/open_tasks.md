@@ -94,7 +94,7 @@ bis **schwierig/zeitintensiv**):
 
 - [x] **LW1:** `AC0836_L` isoliert konvertieren und 6-Runden/global-search-Zeit erneut messen. (2026-05-09: Repro in Python `3.10.20` ausgeführt; `max_round=6`, `global_search_samples=6`, `global_search_sum=3.37s`, kein `stagnation_detected`; Log: `artifacts/converted_images/reports/LW1_ac0836L_isolation_2026-05-09_runCQ.log`.)
 - [x] **LW2:** `AC0838_M` isoliert konvertieren und Stagnationsrunde + Rundendauern protokollieren. (2026-05-10: Python `3.10.20`-Isolationslauf erfolgreich, Exit `0`; `stagnation_detected` in Runde `3`; `global_search_elapsed` R1..R5 = `0.70s/0.77s/0.02s/0.67s/0.47s`; Artefakte: `artifacts/converted_images/reports/LW2_ac0838M_isolation_2026-05-10_runCR_py310.log`, `artifacts/converted_images/reports/AC0838_M_element_validation.log`, Summary: `docs/lw2_ac0838M_isolation_2026-05-10_runCR_summary.md`.)
-- [ ] **LW3:** `AC0831_L` isoliert in 3 Wiederholungen laufen lassen (min/median/max global-search).
+- [x] **LW3:** `AC0831_L` isoliert in 3 Wiederholungen laufen lassen (min/median/max global-search). (2026-05-10: 3x Python `3.10.20`-Isolationsläufe erfolgreich, jeweils Exit `0`; kumulierte `global_search_elapsed` pro Lauf: `2.40s/2.40s/2.40s` ⇒ `min=2.40s`, `median=2.40s`, `max=2.40s`; Artefakte: `artifacts/converted_images/reports/LW3_ac0831L_isolation_2026-05-10_runCS1_py310.log`, `...runCS2...`, `...runCS3...`, Element-Logs: `AC0831_L_element_validation_runCS1.log` bis `runCS3.log`, Summary: `docs/lw3_ac0831L_isolation_2026-05-10_runCS_summary.md`.)
 - [ ] **LW4:** 3er-Microbatch `AC0836_L, AC0838_M, AC0831_L` als schneller N1/N2-Proxy dokumentieren.
 
 ### Anti-Deadlock-Regel (ab 2026-05-07 verbindlich)
@@ -1615,3 +1615,10 @@ Details und Akzeptanzkriterien stehen in `docs/kelle_umsetzungscheck.md` unter
 - **Fortschritt:** LW2 wurde abgeschlossen: `AC0838_M` isoliert in Python `3.10.20` ausgeführt (`--start AC0838 --end AC0838`), Exit `0`; Stagnation wurde in Runde `3` bestätigt und Rundendauern dokumentiert (Summary: `docs/lw2_ac0838M_isolation_2026-05-10_runCR_summary.md`).
 - **Blocker:** N1/N2 bleiben weiterhin offen; der Vollbereichsnachweis bis `AC0899` ist durch den Einzelrepro erwartungsgemäß nicht ersetzt.
 - **Nächster sinnvoller Schritt:** Mit LW3 (`AC0831_L` in drei Wiederholungen mit min/median/max global-search) unmittelbar fortfahren.
+
+### Fortschritt vs. Blocker (Session 2026-05-10, LW3-Isolation Run CS1–CS3)
+
+- **Fortschritt:** Die nächste offene Lightweight-Aufgabe (LW3) wurde abgeschlossen: `AC0831_L` lief dreimal isoliert in Python `3.10.20` mit Exit `0`; die kumulierte `global_search`-Zeit ist in allen Wiederholungen identisch (`2.40s`), damit `min=2.40s`, `median=2.40s`, `max=2.40s` (Artefakte: `artifacts/converted_images/reports/LW3_ac0831L_isolation_2026-05-10_runCS1_py310.log` bis `runCS3`, sowie `AC0831_L_element_validation_runCS1.log` bis `runCS3`; Summary: `docs/lw3_ac0831L_isolation_2026-05-10_runCS_summary.md`).
+- **Blocker:** N1/N2 bleiben weiterhin offen; der Vollbereichsnachweis bis `AC0899` mit finalem Exit `0` ist durch LW3 erwartungsgemäß noch nicht erbracht.
+- **Nächster sinnvoller Schritt:** LW4 als 3er-Microbatch (`AC0836_L`, `AC0838_M`, `AC0831_L`) ausführen und als schnellen N1/N2-Proxy dokumentieren.
+
