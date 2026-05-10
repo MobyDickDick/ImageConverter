@@ -4,6 +4,58 @@ This checklist only tracks work that is actionable for the ImageConverter in the
 current repository snapshot. Older unrelated language/compiler/runtime tasks were removed so the list stays
 focused on the actual project scope.
 
+## Neue Vision-Roadmap: semantische SVG-Rekonstruktion (abgeglichen am 2026-05-10)
+
+Zielbild: Nicht-binäre Vektorisierung über echte SVG-Primitive mit semantischen Beziehungen und iterativer Nachzeichnung.
+
+### Anpassungen gegenüber der bisherigen Roadmap
+
+- [x] **Beibehalten:** bestehende Stabilitäts-/Laufzeitaufgaben (N1–N7, LW1–LW4) bleiben als technische Basis erhalten.
+- [x] **Ergänzen:** neue inhaltliche Tracks für Primitive-Erkennung, Beziehungen, Überdeckungen und rekonstruktive Iteration.
+- [x] **Bereinigen:** keine der aktuellen Aufgaben widerspricht der Vision diametral; daher wurden keine bestehenden Aufgaben gelöscht.
+
+### Neue Aufgabenpakete (Vision-Track)
+
+- [ ] **V1 – Primitive-Inventar v1 spezifizieren und messbar machen**
+  - Scope: Kreis, Gerade/Linie, Ellipse, Rechteck, Buchstaben/Text, Polygon-/Pfadkurven.
+  - Deliverable: maschinenlesbares Schema (z. B. JSON) inkl. Parameter pro Primitive und Confidence.
+  - Akzeptanz: Für einen Test-Batch wird je Elementtyp Precision/Recall ausgewiesen.
+
+- [ ] **V2 – Bezierkurven-Erkennung ergänzen**
+  - Scope: kubische und quadratische Beziersegmente aus Konturen/Pfaden extrahieren.
+  - Deliverable: Fitting-Strategie inkl. Fehlerschranke (Pixel- und Kurvenraum).
+  - Akzeptanz: Bezier-lastige Referenzen werden mit sinkender Restabweichung rekonstruiert.
+
+- [ ] **V3 – Farbfüllungen und Verläufe robust modellieren**
+  - Scope: flächige Füllungen, lineare/radiale Verläufe, Übergänge an Objektgrenzen.
+  - Deliverable: Gradient-Parameterisierung pro Shape inkl. Stop-Positionen.
+  - Akzeptanz: Gradient-Metrik (DeltaE/Pixeldelta) verbessert sich gegenüber Flat-Fill-Baseline.
+
+- [ ] **V4 – Überdeckungen/Z-Order explizit erkennen**
+  - Scope: Vorder-/Hintergrundbeziehungen, partielle Verdeckung, verdeckte Fortsetzungen.
+  - Deliverable: Layer-Graph mit Occlusion-Relationen (`covers`, `behind`, `continues_behind`).
+  - Akzeptanz: Szenen mit teilverdeckteten Griffen/Verbindungen werden konsistent rekonstruiert.
+
+- [ ] **V5 – Semantische Textrepräsentation + Bedingungen einführen**
+  - Scope: textuelle Szenenbeschreibung inkl. Relationen (z. B. „Kelle mit horizontalem Griff links und Beschriftung rF“).
+  - Deliverable: DSL/JSON-Layer für Objekte + Relationen + Constraints.
+  - Akzeptanz: Beschreibung kann deterministisch wieder in eine rekonstruktive SVG-Szene übersetzt werden.
+
+- [ ] **V6 – Iterativen Nachzeichnungsalgorithmus auf Semantik umstellen**
+  - Scope: Initiale Primitive-Schätzung → Render → Fehleranalyse → Parameterupdate.
+  - Deliverable: Mehrziel-Optimierung (Geometrie, Farbe, Semantik-Konsistenz) pro Iteration.
+  - Akzeptanz: Konvergenzplots zeigen reproduzierbare Verbesserung in mindestens 3 Referenzfamilien.
+
+- [ ] **V7 – Rückwärts-Training (Text → SVG → Raster → Rücktransformation)**
+  - Scope: generierte Szenen zur Selbstvalidierung und Schwachstellenanalyse.
+  - Deliverable: Closed-Loop-Evaluationspipeline mit Gap-Reports pro Relationstyp.
+  - Akzeptanz: Pipeline markiert systematisch nicht-invertierbare Fälle (z. B. vollständig verdeckte Griffe ohne Constraints).
+
+- [ ] **V8 – Grenzfallkatalog für Nicht-Invertierbarkeit pflegen**
+  - Scope: explizite Regeln, wann Rücktransformation prinzipiell mehrdeutig/unmöglich ist.
+  - Deliverable: katalogisierte Failure-Modes + empfohlene Zusatzbedingungen.
+  - Akzeptanz: Jeder dokumentierte Fehlschlag ist einem bekannten Failure-Mode zugeordnet.
+
 ## How to use this list
 
 - Work from top to bottom unless a dependency requires a different order.
@@ -42,7 +94,7 @@ bis **schwierig/zeitintensiv**):
 
 - [x] **LW1:** `AC0836_L` isoliert konvertieren und 6-Runden/global-search-Zeit erneut messen. (2026-05-09: Repro in Python `3.10.20` ausgeführt; `max_round=6`, `global_search_samples=6`, `global_search_sum=3.37s`, kein `stagnation_detected`; Log: `artifacts/converted_images/reports/LW1_ac0836L_isolation_2026-05-09_runCQ.log`.)
 - [x] **LW2:** `AC0838_M` isoliert konvertieren und Stagnationsrunde + Rundendauern protokollieren. (2026-05-10: Python `3.10.20`-Isolationslauf erfolgreich, Exit `0`; `stagnation_detected` in Runde `3`; `global_search_elapsed` R1..R5 = `0.70s/0.77s/0.02s/0.67s/0.47s`; Artefakte: `artifacts/converted_images/reports/LW2_ac0838M_isolation_2026-05-10_runCR_py310.log`, `artifacts/converted_images/reports/AC0838_M_element_validation.log`, Summary: `docs/lw2_ac0838M_isolation_2026-05-10_runCR_summary.md`.)
-- [ ] **LW3:** `AC0831_L` isoliert in 3 Wiederholungen laufen lassen (min/median/max global-search).
+- [x] **LW3:** `AC0831_L` isoliert in 3 Wiederholungen laufen lassen (min/median/max global-search). (2026-05-10: 3x Python `3.10.20`-Isolationsläufe erfolgreich, jeweils Exit `0`; kumulierte `global_search_elapsed` pro Lauf: `2.40s/2.40s/2.40s` ⇒ `min=2.40s`, `median=2.40s`, `max=2.40s`; Artefakte: `artifacts/converted_images/reports/LW3_ac0831L_isolation_2026-05-10_runCS1_py310.log`, `...runCS2...`, `...runCS3...`, Element-Logs: `AC0831_L_element_validation_runCS1.log` bis `runCS3.log`, Summary: `docs/lw3_ac0831L_isolation_2026-05-10_runCS_summary.md`.)
 - [ ] **LW4:** 3er-Microbatch `AC0836_L, AC0838_M, AC0831_L` als schneller N1/N2-Proxy dokumentieren.
 
 ### Anti-Deadlock-Regel (ab 2026-05-07 verbindlich)
@@ -1563,3 +1615,10 @@ Details und Akzeptanzkriterien stehen in `docs/kelle_umsetzungscheck.md` unter
 - **Fortschritt:** LW2 wurde abgeschlossen: `AC0838_M` isoliert in Python `3.10.20` ausgeführt (`--start AC0838 --end AC0838`), Exit `0`; Stagnation wurde in Runde `3` bestätigt und Rundendauern dokumentiert (Summary: `docs/lw2_ac0838M_isolation_2026-05-10_runCR_summary.md`).
 - **Blocker:** N1/N2 bleiben weiterhin offen; der Vollbereichsnachweis bis `AC0899` ist durch den Einzelrepro erwartungsgemäß nicht ersetzt.
 - **Nächster sinnvoller Schritt:** Mit LW3 (`AC0831_L` in drei Wiederholungen mit min/median/max global-search) unmittelbar fortfahren.
+
+### Fortschritt vs. Blocker (Session 2026-05-10, LW3-Isolation Run CS1–CS3)
+
+- **Fortschritt:** Die nächste offene Lightweight-Aufgabe (LW3) wurde abgeschlossen: `AC0831_L` lief dreimal isoliert in Python `3.10.20` mit Exit `0`; die kumulierte `global_search`-Zeit ist in allen Wiederholungen identisch (`2.40s`), damit `min=2.40s`, `median=2.40s`, `max=2.40s` (Artefakte: `artifacts/converted_images/reports/LW3_ac0831L_isolation_2026-05-10_runCS1_py310.log` bis `runCS3`, sowie `AC0831_L_element_validation_runCS1.log` bis `runCS3`; Summary: `docs/lw3_ac0831L_isolation_2026-05-10_runCS_summary.md`).
+- **Blocker:** N1/N2 bleiben weiterhin offen; der Vollbereichsnachweis bis `AC0899` mit finalem Exit `0` ist durch LW3 erwartungsgemäß noch nicht erbracht.
+- **Nächster sinnvoller Schritt:** LW4 als 3er-Microbatch (`AC0836_L`, `AC0838_M`, `AC0831_L`) ausführen und als schnellen N1/N2-Proxy dokumentieren.
+
