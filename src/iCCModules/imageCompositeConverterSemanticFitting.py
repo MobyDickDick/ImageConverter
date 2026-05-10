@@ -432,7 +432,17 @@ def fitSemanticBadgeFromImageImpl(
                     params["arm_stroke"] = float(max(1.0, rw))
 
     params = stabilize_semantic_circle_pose_fn(params, defaults, w, h)
-    params = _snap_semantic_grays_to_two_tones(params, gray, np_module=np)
+    badge_overrides = defaults.get("badge_overrides", {}) if isinstance(defaults.get("badge_overrides"), dict) else {}
+    palette_color_count_raw = params.get(
+        "palette_color_count",
+        defaults.get("palette_color_count", badge_overrides.get("palette_color_count")),
+    )
+    try:
+        palette_color_count = int(str(palette_color_count_raw))
+    except (TypeError, ValueError):
+        palette_color_count = 0
+    if palette_color_count == 2:
+        params = _snap_semantic_grays_to_two_tones(params, gray, np_module=np)
 
     if params.get("draw_text", True) and params.get("text_mode") in {"path", "path_t"}:
         center_glyph_bbox_fn(params)
