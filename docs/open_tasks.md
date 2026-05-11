@@ -95,7 +95,7 @@ bis **schwierig/zeitintensiv**):
 - [x] **LW1:** `AC0836_L` isoliert konvertieren und 6-Runden/global-search-Zeit erneut messen. (2026-05-09: Repro in Python `3.10.20` ausgeführt; `max_round=6`, `global_search_samples=6`, `global_search_sum=3.37s`, kein `stagnation_detected`; Log: `artifacts/converted_images/reports/LW1_ac0836L_isolation_2026-05-09_runCQ.log`.)
 - [x] **LW2:** `AC0838_M` isoliert konvertieren und Stagnationsrunde + Rundendauern protokollieren. (2026-05-10: Python `3.10.20`-Isolationslauf erfolgreich, Exit `0`; `stagnation_detected` in Runde `3`; `global_search_elapsed` R1..R5 = `0.70s/0.77s/0.02s/0.67s/0.47s`; Artefakte: `artifacts/converted_images/reports/LW2_ac0838M_isolation_2026-05-10_runCR_py310.log`, `artifacts/converted_images/reports/AC0838_M_element_validation.log`, Summary: `docs/lw2_ac0838M_isolation_2026-05-10_runCR_summary.md`.)
 - [x] **LW3:** `AC0831_L` isoliert in 3 Wiederholungen laufen lassen (min/median/max global-search). (2026-05-10: 3x Python `3.10.20`-Isolationsläufe erfolgreich, jeweils Exit `0`; kumulierte `global_search_elapsed` pro Lauf: `2.40s/2.40s/2.40s` ⇒ `min=2.40s`, `median=2.40s`, `max=2.40s`; Artefakte: `artifacts/converted_images/reports/LW3_ac0831L_isolation_2026-05-10_runCS1_py310.log`, `...runCS2...`, `...runCS3...`, Element-Logs: `AC0831_L_element_validation_runCS1.log` bis `runCS3.log`, Summary: `docs/lw3_ac0831L_isolation_2026-05-10_runCS_summary.md`.)
-- [ ] **LW4:** 3er-Microbatch `AC0836_L, AC0838_M, AC0831_L` als schneller N1/N2-Proxy dokumentieren. (2026-05-10: Run CT gestartet; `AC0838`/`AC0831` jeweils Exit `0`, `AC0836` mit Exit `139` abgebrochen, siehe `docs/lw4_microbatch_2026-05-10_runCT_summary.md` und Logs `artifacts/converted_images/reports/LW4_microbatch_2026-05-10_runCT_*.log`; LW4 bleibt offen.)
+- [ ] **LW4:** 3er-Microbatch `AC0836_L, AC0838_M, AC0831_L` als schneller N1/N2-Proxy dokumentieren. (2026-05-10: Run CT gestartet; `AC0838`/`AC0831` jeweils Exit `0`, `AC0836` mit Exit `139` abgebrochen, siehe `docs/lw4_microbatch_2026-05-10_runCT_summary.md` und Logs `artifacts/converted_images/reports/LW4_microbatch_2026-05-10_runCT_*.log`; 2026-05-11: gezielter AC0836-Re-Run in Python `3.10.20` erneut mit Exit `139`, siehe `docs/lw4_ac0836_rerun_2026-05-11_runCU_summary.md` und `artifacts/converted_images/reports/LW4_microbatch_2026-05-11_runCU_ac0836_py310.log`; LW4 bleibt offen.)
 
 ### Anti-Deadlock-Regel (ab 2026-05-07 verbindlich)
 
@@ -229,6 +229,12 @@ Deadlock-/Stagnationsschleifen.
 - **Fortschritt:** LW1 wurde abgeschlossen: isolierter Lauf für `AC0836_L` in Python `3.10.20` durchgeführt (`--start AC0836 --end AC0836`), Exit `0`; Messwerte aus `AC0836_L_element_validation.log` bestätigen erneut `max_round=6`, `global_search_samples=6`, `global_search_sum=3.37s`, ohne `stagnation_detected`.
 - **Blocker:** N1/N2 bleiben weiterhin offen; der Vollbereichsnachweis bis `AC0899` ist durch den Einzelrepro erwartungsgemäß nicht ersetzt.
 - **Nächster sinnvoller Schritt:** Mit LW2 (`AC0838_M` isoliert inkl. Stagnationsrunde + Rundendauern) unmittelbar fortfahren.
+
+### Fortschritt vs. Blocker (Session 2026-05-11, LW4 AC0836-Re-Run Run CU)
+
+- **Fortschritt:** Der als nächster LW4-Schritt dokumentierte gezielte Re-Run für `AC0836` wurde im identischen Microbatch-Schema in Python `3.10.20` durchgeführt; neues Artefakt: `artifacts/converted_images/reports/LW4_microbatch_2026-05-11_runCU_ac0836_py310.log` (Summary: `docs/lw4_ac0836_rerun_2026-05-11_runCU_summary.md`).
+- **Blocker:** Der Teilpfad `AC0836` reproduziert weiterhin den bekannten Abbruch (`MuPDF error: exception stack overflow!`, Exit `139`), daher bleibt LW4 weiterhin offen.
+- **Nächster sinnvoller Schritt:** Den AC0836-Langläuferpfad isoliert weiter eingrenzen (z. B. mit zusätzlicher MuPDF-/Render-Telemetrie pro Runde/Element) und erst nach stabiler AC0836-Teilprobe den kompletten LW4-Proxy erneut fahren.
 
 - [x] N0 (höchste Priorität): Root-Cause der **ersten** AC08-Zeitbudgetüberschreitung (`AC0811_L.jpg`) isolieren und beheben.
   - Befund aus Log-Auswertung: erstes dokumentiertes `validation_time_budget_exceeded` tritt in `AC0800_AC0899_batch_2026-04-28_runAV.log` bei `AC0811_L.jpg` auf (`phase=round_start`, `round=2`, `elapsed=43.75s`, `budget=18.00s`).
