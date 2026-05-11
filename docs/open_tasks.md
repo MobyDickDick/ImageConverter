@@ -1634,3 +1634,9 @@ Details und Akzeptanzkriterien stehen in `docs/kelle_umsetzungscheck.md` unter
 - **Blocker:** N1/N2 bleiben weiterhin offen; der Vollbereichsnachweis bis `AC0899` mit finalem Exit `0` ist durch LW3 erwartungsgemäß noch nicht erbracht.
 - **Nächster sinnvoller Schritt:** LW4 als 3er-Microbatch (`AC0836_L`, `AC0838_M`, `AC0831_L`) ausführen und als schnellen N1/N2-Proxy dokumentieren.
 
+
+### Fortschritt vs. Blocker (Session 2026-05-11, T5-Kurzlauf Run CV)
+
+- **Fortschritt:** Der nächste dokumentierte T5.x-Kurzlauf wurde mit klarem Repro-Befehl ausgeführt (`tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_ac0812_only`); neues Log-Artefakt: `artifacts/converted_images/reports/T5_ac0812_timeoutpath_probe_2026-05-11_runCV.log`.
+- **Blocker:** In der aktuellen Umgebung wurde der Test `skipped` (kein `passed`-Signal), daher liefert Run CV keinen gleichwertigen 3.10-Laufzeitnachweis für den AC0812-Pfad.
+- **Nächster sinnvoller Schritt:** Den identischen T5-Kurzlauf in der bestätigten Python-`3.10.20`-Toolchain wiederholen und danach den Status erneut hier nachpflegen.
