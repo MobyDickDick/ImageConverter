@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import os
+
 
 def runNonCompositeIterationImpl(
     *,
@@ -24,6 +26,28 @@ def runNonCompositeIterationImpl(
     calculate_error_fn,
 ) -> tuple[str, str, dict[str, object], int, float] | None:
     if mode == "manual_review":
+        sample_svg_path = os.path.join(os.path.dirname(img_path), "samples", f"{base_name}.svg")
+        if os.path.exists(sample_svg_path):
+            print_fn(f"  -> Plan B aktiv: verwende vorhandene Sample-SVG {sample_svg_path}.")
+            with open(sample_svg_path, "r", encoding="utf-8") as handle:
+                svg_content = handle.read()
+            write_validation_log_fn(
+                [
+                    "status=manual_review_plan_b_sample_svg",
+                    f"sample_svg_path={sample_svg_path}",
+                ]
+            )
+            svg_rendered = render_svg_to_numpy_fn(svg_content, width, height)
+            if svg_rendered is None:
+                record_render_failure_fn(
+                    "manual_review_plan_b_render_failed",
+                    svg_content=svg_content,
+                    params_snapshot=params,
+                )
+                return None
+            write_attempt_artifacts_fn(svg_content, svg_rendered)
+            return base_name, description, params, 1, calculate_error_fn(perc_img, svg_rendered)
+
         reason = str(params.get("review_reason", "Manuelle Prüfung erforderlich.")).strip()
         print_fn(f"  -> Überspringe Bild: {reason}")
         write_validation_log_fn(
