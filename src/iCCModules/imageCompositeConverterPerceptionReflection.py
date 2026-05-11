@@ -18,6 +18,7 @@ def _get_base_name_from_file(filename: str) -> str:
         prev = name
         name = re.sub(r"_sia$", "", name, flags=re.IGNORECASE)
         name = re.sub(r"_([1-9]|L|M|S|[1-9]S|W|X)$", "", name, flags=re.IGNORECASE)
+        name = re.sub(r"_([A-Z]{2,3})$", "", name, flags=re.IGNORECASE)
         if name == prev:
             break
     return name

@@ -1063,6 +1063,16 @@ def test_parse_description_falls_back_to_variant_filename_when_base_name_missing
     assert "SEMANTIC: senkrechter Strich hinter dem Kreis" in list(params.get("elements", []))
 
 
+def test_parse_description_uses_normalized_base_for_custom_suffix_variants() -> None:
+    """Custom variant suffixes like _AB_M should still resolve mapped descriptions."""
+    raw = {"AC0VR2": "Eintrag aus Mapping vorhanden."}
+
+    desc, params = image_composite_converter.Reflection(raw).parse_description("AC0VR2_AB_M", "AC0VR2_AB_M.jpg")
+
+    assert "mapping vorhanden" in desc
+    assert params["variant_name"] == "AC0VR2_AB_M"
+
+
 def test_parse_description_recognizes_co2_with_caret_notation() -> None:
     """Descriptions using CO^2 notation must still activate the CO₂ semantic label."""
     raw = {"AC0831": "die Beschriftung fehlt ($CO^2$)."}
