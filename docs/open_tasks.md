@@ -1640,3 +1640,9 @@ Details und Akzeptanzkriterien stehen in `docs/kelle_umsetzungscheck.md` unter
 - **Fortschritt:** Der nächste dokumentierte T5.x-Kurzlauf wurde mit klarem Repro-Befehl ausgeführt (`tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_ac0812_only`); neues Log-Artefakt: `artifacts/converted_images/reports/T5_ac0812_timeoutpath_probe_2026-05-11_runCV.log`.
 - **Blocker:** In der aktuellen Umgebung wurde der Test `skipped` (kein `passed`-Signal), daher liefert Run CV keinen gleichwertigen 3.10-Laufzeitnachweis für den AC0812-Pfad.
 - **Nächster sinnvoller Schritt:** Den identischen T5-Kurzlauf in der bestätigten Python-`3.10.20`-Toolchain wiederholen und danach den Status erneut hier nachpflegen.
+
+### Fortschritt vs. Blocker (Session 2026-05-11, T5-Kurzlauf Run CW)
+
+- **Fortschritt:** Der als nächster Schritt dokumentierte Reprolauf wurde in der bestätigten Python-`3.10.20`-Toolchain wiederholt (`tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_ac0812_only`), Ergebnis: `1 passed` in `92.93s` (Exit `0`), Log-Artefakt: `artifacts/converted_images/reports/T5_ac0812_timeoutpath_probe_2026-05-11_runCW.log`.
+- **Blocker:** N1/N2 bleiben weiterhin offen; der Vollbereichsnachweis bis `AC0899` mit finalem Exit `0` wurde durch den isolierten Kurzlauf erwartungsgemäß nicht ersetzt.
+- **Nächster sinnvoller Schritt:** Gemäß Priorisierung den nächsten N1/N2-Vollbereichslauf mit fixer Timeout-Grenze starten und den Ergebnisstand direkt danach dokumentieren.
