@@ -3,12 +3,31 @@ from __future__ import annotations
 import os
 
 
+_PLAN_B_SAMPLE_ALIASES: dict[str, tuple[str, ...]] = {
+    "AC0212": ("AC0VR2_AB",),
+}
+
+
+def _build_sample_candidates(base_name: str) -> list[str]:
+    candidates = [base_name]
+    root, sep, size_suffix = base_name.rpartition("_")
+    if not sep:
+        return candidates
+
+    for alias_root in _PLAN_B_SAMPLE_ALIASES.get(root, ()):  # pragma: no branch - tiny tuple lookup
+        candidates.append(f"{alias_root}_{size_suffix}")
+    return candidates
+
+
 def _try_load_sample_svg(*, img_path: str, base_name: str):
-    sample_svg_path = os.path.join(os.path.dirname(img_path), "samples", f"{base_name}.svg")
-    if not os.path.exists(sample_svg_path):
-        return None
-    with open(sample_svg_path, "r", encoding="utf-8") as handle:
-        return sample_svg_path, handle.read()
+    samples_dir = os.path.join(os.path.dirname(img_path), "samples")
+    for sample_name in _build_sample_candidates(base_name):
+        sample_svg_path = os.path.join(samples_dir, f"{sample_name}.svg")
+        if not os.path.exists(sample_svg_path):
+            continue
+        with open(sample_svg_path, "r", encoding="utf-8") as handle:
+            return sample_svg_path, handle.read()
+    return None
 
 
 def runNonCompositeIterationImpl(
