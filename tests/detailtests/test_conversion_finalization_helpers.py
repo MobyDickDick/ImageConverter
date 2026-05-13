@@ -294,3 +294,47 @@ def test_canonicalize_failed_attempt_svg_names_from_lowercase_prefix(tmp_path):
 
     assert (svg_dir / "Failed_AC0302_2_M.svg").exists()
     assert not (svg_dir / "failed_AC0302_2_M.svg").exists()
+
+def test_archive_successful_conversion_artifacts_moves_image_and_copies_svg(tmp_path):
+    reports_dir = tmp_path / "src" / "artifacts" / "converted_images" / "reports"
+    reports_dir.mkdir(parents=True)
+    source_dir = tmp_path / "input"
+    source_dir.mkdir()
+    svg_dir = tmp_path / "svg"
+    svg_dir.mkdir()
+
+    (source_dir / "AC0831_L.jpg").write_text("img", encoding="utf-8")
+    (svg_dir / "AC0831_L.svg").write_text("<svg/>", encoding="utf-8")
+
+    finalization_helpers._archiveSuccessfulConversionArtifacts(
+        folder_path=str(source_dir),
+        svg_out_dir=str(svg_dir),
+        reports_out_dir=str(reports_dir),
+        result_map={"AC0831_L.jpg": {"variant": "AC0831_L", "status": "semantic_ok"}},
+    )
+
+    assert (reports_dir / "successful_conversions_bestlist" / "AC0831_L.svg").exists()
+    assert (reports_dir / "archived_source_images" / "AC0831_L.jpg").exists()
+    assert not (source_dir / "AC0831_L.jpg").exists()
+
+
+def test_remove_successful_variants_from_open_tasks_only_removes_open_checkboxes(tmp_path):
+    reports_dir = tmp_path / "src" / "artifacts" / "converted_images" / "reports"
+    reports_dir.mkdir(parents=True)
+    docs_dir = tmp_path / "docs"
+    docs_dir.mkdir(parents=True)
+    open_tasks = docs_dir / "open_tasks.md"
+    open_tasks.write_text(
+        "- [ ] todo AC0831_L\n- [x] done AC0831_L\n- [ ] todo AC0836_L\n",
+        encoding="utf-8",
+    )
+
+    finalization_helpers._removeSuccessfulVariantsFromOpenTasks(
+        reports_out_dir=str(reports_dir),
+        result_map={"AC0831_L.jpg": {"variant": "AC0831_L", "status": "semantic_ok"}},
+    )
+
+    content = open_tasks.read_text(encoding="utf-8")
+    assert "- [ ] todo AC0831_L" not in content
+    assert "- [x] done AC0831_L" in content
+    assert "- [ ] todo AC0836_L" in content

@@ -217,6 +217,70 @@ def _markPoorConversionsWithFailedPrefix(
             failed_svg.unlink()
 
 
+def _archiveSuccessfulConversionArtifacts(*,
+    folder_path: str,
+    svg_out_dir: str,
+    reports_out_dir: str,
+    result_map: dict[str, dict[str, object]],
+) -> None:
+    """Archive successful source images and copy their SVGs into a bestlist folder."""
+    reports_dir = Path(reports_out_dir)
+    bestlist_dir = reports_dir / "successful_conversions_bestlist"
+    archive_dir = reports_dir / "archived_source_images"
+    bestlist_dir.mkdir(parents=True, exist_ok=True)
+    archive_dir.mkdir(parents=True, exist_ok=True)
+
+    for filename, row in result_map.items():
+        status = str(row.get("status", "")).strip().lower()
+        if status not in {"semantic_ok", "ok", "success", "passed"}:
+            continue
+        variant = str(row.get("variant", "")).strip().upper()
+        if not variant:
+            continue
+
+        svg_path = Path(svg_out_dir) / f"{variant}.svg"
+        failed_svg_path = Path(svg_out_dir) / f"Failed_{variant}.svg"
+        if svg_path.exists():
+            (bestlist_dir / svg_path.name).write_text(svg_path.read_text(encoding="utf-8"), encoding="utf-8")
+        elif failed_svg_path.exists():
+            # Failed SVGs are never bestlist candidates.
+            continue
+
+        source_path = Path(folder_path) / filename
+        if source_path.exists():
+            target_path = archive_dir / source_path.name
+            if target_path.exists():
+                target_path.unlink()
+            source_path.replace(target_path)
+
+
+def _removeSuccessfulVariantsFromOpenTasks(*, reports_out_dir: str, result_map: dict[str, dict[str, object]]) -> None:
+    """Remove successful variants from open checkbox task lines in docs/open_tasks.md."""
+    repo_root = Path(reports_out_dir).resolve().parents[3]
+    open_tasks_path = repo_root / "docs" / "open_tasks.md"
+    if not open_tasks_path.exists():
+        return
+
+    successful_variants: set[str] = set()
+    for row in result_map.values():
+        status = str(row.get("status", "")).strip().lower()
+        if status in {"semantic_ok", "ok", "success", "passed"}:
+            variant = str(row.get("variant", "")).strip().upper()
+            if variant:
+                successful_variants.add(variant)
+
+    if not successful_variants:
+        return
+
+    lines = open_tasks_path.read_text(encoding="utf-8").splitlines()
+    updated_lines: list[str] = []
+    for line in lines:
+        if line.lstrip().startswith("- [ ]") and any(variant in line.upper() for variant in successful_variants):
+            continue
+        updated_lines.append(line)
+    open_tasks_path.write_text("\n".join(updated_lines) + "\n", encoding="utf-8")
+
+
 def _canonicalizeFailedAttemptSvgNames(
     *,
     svg_out_dir: str,
@@ -298,5 +362,15 @@ def runConversionFinalizationImpl(
         svg_out_dir=svg_out_dir,
         result_map=result_map,
         reports_out_dir=reports_out_dir,
+    )
+    _archiveSuccessfulConversionArtifacts(
+        folder_path=folder_path,
+        svg_out_dir=svg_out_dir,
+        reports_out_dir=reports_out_dir,
+        result_map=result_map,
+    )
+    _removeSuccessfulVariantsFromOpenTasks(
+        reports_out_dir=reports_out_dir,
+        result_map=result_map,
     )
     return semantic_results
