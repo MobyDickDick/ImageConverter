@@ -3,6 +3,14 @@ from __future__ import annotations
 import os
 
 
+def _try_load_sample_svg(*, img_path: str, base_name: str):
+    sample_svg_path = os.path.join(os.path.dirname(img_path), "samples", f"{base_name}.svg")
+    if not os.path.exists(sample_svg_path):
+        return None
+    with open(sample_svg_path, "r", encoding="utf-8") as handle:
+        return sample_svg_path, handle.read()
+
+
 def runNonCompositeIterationImpl(
     *,
     mode: str,
@@ -25,12 +33,12 @@ def runNonCompositeIterationImpl(
     write_attempt_artifacts_fn,
     calculate_error_fn,
 ) -> tuple[str, str, dict[str, object], int, float] | None:
+    sample_svg = _try_load_sample_svg(img_path=img_path, base_name=base_name)
+
     if mode == "manual_review":
-        sample_svg_path = os.path.join(os.path.dirname(img_path), "samples", f"{base_name}.svg")
-        if os.path.exists(sample_svg_path):
+        if sample_svg:
+            sample_svg_path, svg_content = sample_svg
             print_fn(f"  -> Plan B aktiv: verwende vorhandene Sample-SVG {sample_svg_path}.")
-            with open(sample_svg_path, "r", encoding="utf-8") as handle:
-                svg_content = handle.read()
             write_validation_log_fn(
                 [
                     "status=manual_review_plan_b_sample_svg",
@@ -82,5 +90,27 @@ def runNonCompositeIterationImpl(
         )
         return None
 
+    svg_err = calculate_error_fn(perc_img, svg_rendered)
+
+    if sample_svg:
+        sample_svg_path, sample_svg_content = sample_svg
+        sample_rendered = render_svg_to_numpy_fn(sample_svg_content, width, height)
+        if sample_rendered is not None:
+            sample_err = calculate_error_fn(perc_img, sample_rendered)
+            if sample_err <= svg_err:
+                print_fn(
+                    f"  -> Plan B Vergleich aktiv: nutze Sample-SVG {sample_svg_path} (err={sample_err:.3f} <= {svg_err:.3f})."
+                )
+                write_validation_log_fn(
+                    [
+                        "status=non_composite_plan_b_sample_svg_selected",
+                        f"sample_svg_path={sample_svg_path}",
+                        f"sample_error={sample_err:.6f}",
+                        f"baseline_error={svg_err:.6f}",
+                    ]
+                )
+                write_attempt_artifacts_fn(sample_svg_content, sample_rendered)
+                return base_name, description, params, 1, sample_err
+
     write_attempt_artifacts_fn(svg_content, svg_rendered)
-    return base_name, description, params, 1, calculate_error_fn(perc_img, svg_rendered)
+    return base_name, description, params, 1, svg_err
