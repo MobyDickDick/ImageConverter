@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import math
 import os
 import re
 import signal
@@ -47,6 +48,7 @@ def _ensureOutputArtifacts(
     svg_path: str,
     diff_path: str,
     create_svg_fallback: bool = True,
+    create_diff_fallback: bool = True,
 ) -> None:
     if create_svg_fallback and not os.path.exists(svg_path):
         width = 1
@@ -57,9 +59,66 @@ def _ensureOutputArtifacts(
         )
         with open(svg_path, "w", encoding="utf-8") as svg_file:
             svg_file.write(svg_fallback)
-    if not os.path.exists(diff_path):
+    if create_diff_fallback and not os.path.exists(diff_path):
         with open(diff_path, "wb") as diff_file:
             diff_file.write(_ONE_BY_ONE_TRANSPARENT_PNG)
+
+
+def _deleteDiffIfPresent(diff_path: str) -> None:
+    if os.path.exists(diff_path):
+        os.unlink(diff_path)
+
+
+def _isMeaningfulDiffArtifact(diff_path: str, cv2_module) -> bool:
+    if not os.path.exists(diff_path):
+        return False
+    try:
+        with open(diff_path, "rb") as handle:
+            if handle.read() == _ONE_BY_ONE_TRANSPARENT_PNG:
+                return False
+    except OSError:
+        return False
+    imread_flag = getattr(cv2_module, "IMREAD_UNCHANGED", None)
+    try:
+        img = cv2_module.imread(diff_path, imread_flag) if imread_flag is not None else cv2_module.imread(diff_path)
+    except TypeError:
+        img = cv2_module.imread(diff_path)
+    if img is None:
+        return False
+    try:
+        return bool((img != 0).any())
+    except Exception:
+        return True
+
+
+def _svgQualityScore(
+    *,
+    image_path: str,
+    svg_path: str,
+    cv2_module,
+    render_svg_to_numpy_fn,
+    calculate_delta2_stats_fn,
+) -> float:
+    if not os.path.exists(svg_path):
+        return float("inf")
+    img = cv2_module.imread(image_path)
+    if img is None:
+        return float("inf")
+    try:
+        with open(svg_path, "r", encoding="utf-8") as handle:
+            svg_content = handle.read()
+    except OSError:
+        return float("inf")
+    if not svg_content.strip():
+        return float("inf")
+    height, width = img.shape[:2]
+    rendered = render_svg_to_numpy_fn(svg_content, width, height)
+    mean_delta2, _std_delta2 = calculate_delta2_stats_fn(img, rendered)
+    try:
+        score = float(mean_delta2)
+    except (TypeError, ValueError):
+        return float("inf")
+    return score if math.isfinite(score) else float("inf")
 
 
 def _ensureEmbeddedSvgAtPath(
@@ -285,6 +344,8 @@ def convertOneImpl(
     base_name = str(get_base_name_from_file_fn(base)).upper()
     svg_path = os.path.join(svg_out_dir, f"{base}.svg")
     diff_path = os.path.join(diff_out_dir, f"{base}_diff.png")
+    previous_svg_content = _safeReadTextFile(svg_path) if os.path.exists(svg_path) else ""
+    _deleteDiffIfPresent(diff_path)
     log_file = os.path.join(reports_out_dir, f"{base}_element_validation.log")
     current_test_id = str(os.environ.get("PYTEST_CURRENT_TEST", ""))
     anchor_test_active = "test_ac08_semantic_anchor_variants_convert_without_failed_svg" in current_test_id
@@ -438,7 +499,7 @@ def convertOneImpl(
                 base_name=base,
                 svg_path=svg_path,
             )
-            _ensureOutputArtifacts(svg_path=svg_path, diff_path=diff_path, create_svg_fallback=False)
+            _deleteDiffIfPresent(diff_path)
             _emit_anchor_variant_event("variant_done", status=status)
             return None, False
 
@@ -508,7 +569,7 @@ def convertOneImpl(
             base_name=base,
             svg_path=svg_path,
         )
-        _ensureOutputArtifacts(svg_path=svg_path, diff_path=diff_path, create_svg_fallback=False)
+        _ensureOutputArtifacts(svg_path=svg_path, diff_path=diff_path, create_svg_fallback=False, create_diff_fallback=False)
         _emit_anchor_variant_event("variant_done", status=status)
         return None, False
     svg_path = _normalizeSvgToFailedPrefixIfRasterArtifact(
@@ -527,7 +588,7 @@ def convertOneImpl(
                 "failed_svg": os.path.basename(svg_path),
             }
         )
-        _ensureOutputArtifacts(svg_path=svg_path, diff_path=diff_path, create_svg_fallback=False)
+        _deleteDiffIfPresent(diff_path)
         print_fn(f"[WARN] {filename}: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.")
         _emit_anchor_variant_event("variant_done", status="raster_embedded_svg")
         return None, True
@@ -542,10 +603,44 @@ def convertOneImpl(
                 "failed_svg": os.path.basename(svg_path),
             }
         )
-        _ensureOutputArtifacts(svg_path=svg_path, diff_path=diff_path)
+        _ensureOutputArtifacts(svg_path=svg_path, diff_path=diff_path, create_diff_fallback=False)
         print_fn(f"[WARN] {filename}: Triviale 1x1-Placeholder-SVG erkannt, als fehlgeschlagen markiert.")
         _emit_anchor_variant_event("variant_done", status="poor_conversion_placeholder_svg")
         return None, True
+
+    if previous_svg_content.strip():
+        previous_svg_path = os.path.join(svg_out_dir, f"{base}.__previous__.svg")
+        try:
+            with open(previous_svg_path, "w", encoding="utf-8") as handle:
+                handle.write(previous_svg_content)
+            previous_quality = _svgQualityScore(
+                image_path=image_path,
+                svg_path=previous_svg_path,
+                cv2_module=cv2_module,
+                render_svg_to_numpy_fn=render_svg_to_numpy_fn,
+                calculate_delta2_stats_fn=calculate_delta2_stats_fn,
+            )
+        finally:
+            if os.path.exists(previous_svg_path):
+                os.unlink(previous_svg_path)
+        new_quality = _svgQualityScore(
+            image_path=image_path,
+            svg_path=svg_path,
+            cv2_module=cv2_module,
+            render_svg_to_numpy_fn=render_svg_to_numpy_fn,
+            calculate_delta2_stats_fn=calculate_delta2_stats_fn,
+        )
+        poor_threshold = float(os.environ.get("ICC_POOR_SVG_MEAN_DELTA2", "2500.0") or "2500.0")
+        old_is_poor = math.isfinite(previous_quality) and previous_quality >= poor_threshold
+        new_is_better = new_quality < previous_quality
+        if not new_is_better:
+            if old_is_poor:
+                _deleteDiffIfPresent(diff_path)
+                if os.path.exists(svg_path):
+                    os.unlink(svg_path)
+                return None, True
+            with open(svg_path, "w", encoding="utf-8") as handle:
+                handle.write(previous_svg_content)
     img = cv2_module.imread(image_path)
     pixel_count = 1.0
     width = 0
@@ -564,7 +659,9 @@ def convertOneImpl(
             if svg_content:
                 rendered = render_svg_to_numpy_fn(svg_content, width, height)
                 mean_delta2, std_delta2 = calculate_delta2_stats_fn(img, rendered)
-    _ensureOutputArtifacts(svg_path=svg_path, diff_path=diff_path)
+    if not _isMeaningfulDiffArtifact(diff_path, cv2_module):
+        _deleteDiffIfPresent(diff_path)
+    _ensureOutputArtifacts(svg_path=svg_path, diff_path=diff_path, create_svg_fallback=True, create_diff_fallback=False)
     row = {
         "filename": filename,
         "params": params,

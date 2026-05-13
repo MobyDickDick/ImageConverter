@@ -484,3 +484,45 @@ def test_convert_one_impl_writes_ac0811_debug_dump_on_success(tmp_path: Path) ->
     assert dump["stage"] == "success"
     assert dump["result_row"]["variant"] == "AC0811_L"
     assert "status=semantic_ok" in dump["validation_log_text"]
+
+
+def test_convert_one_impl_keeps_existing_svg_when_new_is_not_better(tmp_path: Path) -> None:
+    folder = tmp_path / "images"
+    svg_out = tmp_path / "svg"
+    diff_out = tmp_path / "diff"
+    reports = tmp_path / "reports"
+    for path in (folder, svg_out, diff_out, reports):
+        path.mkdir()
+    filename = "AC0801_S.jpg"
+    (folder / filename).write_bytes(b"fake")
+    (svg_out / "AC0801_S.svg").write_text("<svg>old</svg>", encoding="utf-8")
+
+    def _run(*_args, **_kwargs):
+        (svg_out / "AC0801_S.svg").write_text("<svg>new</svg>", encoding="utf-8")
+        return ("AC0801_S", "desc", {"mode": "semantic_badge"}, 2, 12.0)
+
+    row, failed = conversion_execution_helpers.convertOneImpl(
+        filename=filename,
+        folder_path=str(folder),
+        csv_path="descriptions.csv",
+        iteration_budget=3,
+        badge_rounds=5,
+        svg_out_dir=str(svg_out),
+        diff_out_dir=str(diff_out),
+        reports_out_dir=str(reports),
+        debug_ac0811_dir=None,
+        debug_element_diff_dir=None,
+        run_iteration_pipeline_fn=_run,
+        read_validation_log_details_fn=lambda _path: {"convergence": "plateau"},
+        render_svg_to_numpy_fn=lambda svg, _w, _h: svg,
+        calculate_delta2_stats_fn=lambda _img, rendered: (1.0 if "old" in rendered else 2.0, 0.0),
+        get_base_name_from_file_fn=lambda stem: stem.split("_")[0],
+        cv2_module=_Cv2Stub(_ImageStub((4, 3, 3))),
+        render_embedded_raster_svg_fn=lambda _path: "<svg/>",
+        append_batch_failure_fn=lambda _row: None,
+        print_fn=lambda _msg: None,
+    )
+
+    assert failed is False
+    assert row is not None
+    assert (svg_out / "AC0801_S.svg").read_text(encoding="utf-8") == "<svg>old</svg>"
