@@ -144,3 +144,68 @@ def apply_semantic_badge_family_rules(
             elements.append("SEMANTIC: Layout-Override für Badge-Text")
 
     return True
+
+
+def apply_semantic_badge_description_rules(*, desc: str, params: dict[str, object]) -> bool:
+    """Infer semantic badge elements from free-form German descriptions."""
+    normalized = re.sub(r"\s+", " ", str(desc or "").lower()).strip()
+    if not normalized:
+        return False
+
+    has_badge_shape = any(token in normalized for token in ("kelle", "kreis", "badge"))
+    has_orientation_hint = any(
+        token in normalized
+        for token in (
+            "griff nach unten",
+            "griff nach oben",
+            "senkrecht nach unten",
+            "senkrecht nach oben",
+            "waagrecht nach links",
+            "waagrecht nach rechts",
+            "waagrechter strich links",
+            "waagrechter strich rechts",
+            "horizontale linie",
+            "vertikale linie",
+        )
+    )
+    if not has_badge_shape:
+        return False
+
+    elements: list[str] = []
+    if "ohne buchstabe" in normalized:
+        elements.append("SEMANTIC: Kreis ohne Buchstabe")
+        params["label"] = ""
+    elif any(token in normalized for token in ("\"m\"", " m ", "motor")):
+        elements.append("SEMANTIC: Kreis + Buchstabe")
+        params["label"] = "M"
+    elif "voc" in normalized:
+        elements.append("SEMANTIC: Kreis + Buchstabe VOC")
+        params["label"] = "VOC"
+
+    if "griff nach unten" in normalized or "senkrecht nach unten" in normalized:
+        elements.append("SEMANTIC: senkrechter Strich oben vom Kreis")
+    if "griff nach oben" in normalized or "senkrecht nach oben" in normalized:
+        elements.append("SEMANTIC: senkrechter Strich hinter dem Kreis")
+    if "waagrecht nach links" in normalized or "waagrechter strich links" in normalized:
+        elements.append("SEMANTIC: waagrechter Strich links vom Kreis")
+    if "waagrecht nach rechts" in normalized or "waagrechter strich rechts" in normalized:
+        elements.append("SEMANTIC: waagrechter Strich rechts vom Kreis")
+
+    if not elements and has_orientation_hint:
+        elements.append("SEMANTIC: Kreis + Buchstabe")
+        params.setdefault("label", "T")
+
+    if not elements:
+        return False
+
+    params["mode"] = "semantic_badge"
+    semantic_sources = params.setdefault("semantic_sources", {})
+    if isinstance(semantic_sources, dict):
+        semantic_sources["description_heuristic"] = list(dict.fromkeys(elements))
+
+    params_elements = params.setdefault("elements", [])
+    if isinstance(params_elements, list):
+        for element in elements:
+            if element not in params_elements:
+                params_elements.append(element)
+    return True

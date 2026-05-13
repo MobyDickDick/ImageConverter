@@ -54,4 +54,4 @@ def emitIterationDescriptionHeaderImpl(
         if mode == "manual_review":
             print_fn("Befehl erkannt: MANUELL (fachliche Zuordnung erforderlich)")
         else:
-            print_fn("Befehl erkannt: Kein expliziter Compositing-Befehl (Beschreibung vorhanden, Fallback aktiv)")
+            print_fn("Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)")

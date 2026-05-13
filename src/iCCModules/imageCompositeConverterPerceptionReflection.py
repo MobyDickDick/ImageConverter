@@ -103,6 +103,9 @@ class Reflection:
         ):
             return desc, params
 
+        if semantic_helpers.apply_semantic_badge_description_rules(desc=desc, params=params):
+            return desc, params
+
         if dual_arrow_badge_helpers.looksLikeDualArrowDescriptionImpl(desc):
             params["mode"] = "dual_arrow_badge"
             params["elements"].append("SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch)")
