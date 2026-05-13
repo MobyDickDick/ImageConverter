@@ -47,6 +47,7 @@ def _ensureOutputArtifacts(
     svg_path: str,
     diff_path: str,
     create_svg_fallback: bool = True,
+    create_diff_fallback: bool = True,
 ) -> None:
     if create_svg_fallback and not os.path.exists(svg_path):
         width = 1
@@ -57,9 +58,32 @@ def _ensureOutputArtifacts(
         )
         with open(svg_path, "w", encoding="utf-8") as svg_file:
             svg_file.write(svg_fallback)
-    if not os.path.exists(diff_path):
+    if create_diff_fallback and not os.path.exists(diff_path):
         with open(diff_path, "wb") as diff_file:
             diff_file.write(_ONE_BY_ONE_TRANSPARENT_PNG)
+
+
+def _deleteDiffIfPresent(diff_path: str) -> None:
+    if os.path.exists(diff_path):
+        os.unlink(diff_path)
+
+
+def _isMeaningfulDiffArtifact(diff_path: str, cv2_module) -> bool:
+    if not os.path.exists(diff_path):
+        return False
+    try:
+        with open(diff_path, "rb") as handle:
+            if handle.read() == _ONE_BY_ONE_TRANSPARENT_PNG:
+                return False
+    except OSError:
+        return False
+    img = cv2_module.imread(diff_path, cv2_module.IMREAD_UNCHANGED)
+    if img is None:
+        return False
+    try:
+        return bool((img != 0).any())
+    except Exception:
+        return True
 
 
 def _ensureEmbeddedSvgAtPath(
@@ -285,6 +309,7 @@ def convertOneImpl(
     base_name = str(get_base_name_from_file_fn(base)).upper()
     svg_path = os.path.join(svg_out_dir, f"{base}.svg")
     diff_path = os.path.join(diff_out_dir, f"{base}_diff.png")
+    _deleteDiffIfPresent(diff_path)
     log_file = os.path.join(reports_out_dir, f"{base}_element_validation.log")
     current_test_id = str(os.environ.get("PYTEST_CURRENT_TEST", ""))
     anchor_test_active = "test_ac08_semantic_anchor_variants_convert_without_failed_svg" in current_test_id
@@ -438,7 +463,7 @@ def convertOneImpl(
                 base_name=base,
                 svg_path=svg_path,
             )
-            _ensureOutputArtifacts(svg_path=svg_path, diff_path=diff_path, create_svg_fallback=False)
+            _deleteDiffIfPresent(diff_path)
             _emit_anchor_variant_event("variant_done", status=status)
             return None, False
 
@@ -508,7 +533,7 @@ def convertOneImpl(
             base_name=base,
             svg_path=svg_path,
         )
-        _ensureOutputArtifacts(svg_path=svg_path, diff_path=diff_path, create_svg_fallback=False)
+        _ensureOutputArtifacts(svg_path=svg_path, diff_path=diff_path, create_svg_fallback=False, create_diff_fallback=False)
         _emit_anchor_variant_event("variant_done", status=status)
         return None, False
     svg_path = _normalizeSvgToFailedPrefixIfRasterArtifact(
@@ -527,7 +552,7 @@ def convertOneImpl(
                 "failed_svg": os.path.basename(svg_path),
             }
         )
-        _ensureOutputArtifacts(svg_path=svg_path, diff_path=diff_path, create_svg_fallback=False)
+        _deleteDiffIfPresent(diff_path)
         print_fn(f"[WARN] {filename}: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.")
         _emit_anchor_variant_event("variant_done", status="raster_embedded_svg")
         return None, True
@@ -542,7 +567,7 @@ def convertOneImpl(
                 "failed_svg": os.path.basename(svg_path),
             }
         )
-        _ensureOutputArtifacts(svg_path=svg_path, diff_path=diff_path)
+        _ensureOutputArtifacts(svg_path=svg_path, diff_path=diff_path, create_diff_fallback=False)
         print_fn(f"[WARN] {filename}: Triviale 1x1-Placeholder-SVG erkannt, als fehlgeschlagen markiert.")
         _emit_anchor_variant_event("variant_done", status="poor_conversion_placeholder_svg")
         return None, True
@@ -564,7 +589,9 @@ def convertOneImpl(
             if svg_content:
                 rendered = render_svg_to_numpy_fn(svg_content, width, height)
                 mean_delta2, std_delta2 = calculate_delta2_stats_fn(img, rendered)
-    _ensureOutputArtifacts(svg_path=svg_path, diff_path=diff_path)
+    if not _isMeaningfulDiffArtifact(diff_path, cv2_module):
+        _deleteDiffIfPresent(diff_path)
+    _ensureOutputArtifacts(svg_path=svg_path, diff_path=diff_path, create_svg_fallback=True, create_diff_fallback=False)
     row = {
         "filename": filename,
         "params": params,
