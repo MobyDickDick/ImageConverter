@@ -1658,3 +1658,9 @@ Details und Akzeptanzkriterien stehen in `docs/kelle_umsetzungscheck.md` unter
 - **Fortschritt:** Die nächste offene dokumentierte Lightweight-Aufgabe wurde abgeschlossen: Der AC0836-Teilpfad lief im isolierten Microbatch-Re-Run unter Python `3.10.20` mit Exit `0` durch (Artefakt: `artifacts/converted_images/reports/LW4_microbatch_2026-05-13_runCZ_ac0836_py310.log`; Summary: `docs/lw4_ac0836_rerun_2026-05-13_runCZ_summary.md`).
 - **Blocker:** N1/N2 bleiben weiterhin offen; der Vollbereichsnachweis bis `AC0899` mit finalem Exit `0` ist durch den isolierten LW4-Abschluss erwartungsgemäß noch nicht ersetzt.
 - **Nächster sinnvoller Schritt:** Gemäß Priorisierung auf den nächsten offenen, leichtgewichtigen Erkenntnisschritt (z. B. N5/N6/N7) rotieren, bevor erneut ein schwerer N1-Lauf erfolgt.
+
+### Fortschritt vs. Blocker (Session 2026-05-13, N3/N4 Dokumentationspflege durch Agent)
+
+- **Fortschritt:** Die aktuell leichteste dokumentierte Aufgabe wurde erneut direkt abgeschlossen, indem der Session-Stand unmittelbar in `docs/open_tasks.md` nachgepflegt wurde (N3/N4: Run-Dokumentation sofort nach jedem Lauf).
+- **Blocker:** Für N1/N2 besteht weiterhin der bekannte Vollbereichs-Timeout-Blocker (`AC0800..AC0899`), da weiterhin kein vollständiger Durchlauf bis `AC0899` mit finalem Exit `0` vorliegt.
+- **Nächster sinnvoller Schritt:** Als nächstes auf eine leichte/orthogonale Aufgabe mit neuem Artefakt rotieren (vorzugsweise T5.x oder N5), danach erneut den Status hier aktualisieren.
