@@ -1786,3 +1786,12 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 - **Fortschritt (Plan-B-Aufgabe):** Die gekoppelte Fallback-Syntheseprobe wurde erfolgreich ausgeführt (`PYTHONPATH=. python3 tools/plan_b_synthetic_probe.py "Circle with horizontal line" --variant AC0080_L`), Log: `artifacts/converted_images/reports/plan_b_synthetic_probe_2026-05-14_run01.log`, Ergebnis `status=ok`.
 - **Blocker:** Für N5 fehlt weiterhin die JPEG-Gegenstück-Erzeugung/-Ablage im Sample-Verzeichnis; ohne diese bleibt `pair_validation=ok` unerreichbar.
 - **Nächster sinnvoller Schritt:** N5 direkt mit `--render-missing-jpeg` wiederholen (oder JPEGs aus bestehender Pipeline nachziehen) und anschließend den Zustand erneut dokumentieren.
+
+
+### Fortschritt vs. Blocker (Session 2026-05-14, N5-Kurzbatch Run 05 + Plan-B Probe)
+
+- **Fortschritt (Primäraufgabe N5):** Der in der vorherigen Session identifizierte Folgeschritt wurde direkt umgesetzt (`PYTHONPATH=. python3 tools/validate_sample_pairs.py --render-missing-jpeg --report-csv artifacts/converted_images/reports/sample_pair_validation_2026-05-14_run05.csv`); neue Artefakte: `artifacts/converted_images/reports/sample_pair_validation_2026-05-14_run05.log` und `...run05.csv`.
+- **Ergebnis N5:** Lauf mit Exit `0`; nach dem Rendern fehlender Gegenstücke nun `svg_count=42`, `jpeg_count=42`, `pair_validation=ok`.
+- **Fortschritt (Plan-B-Aufgabe):** Die gekoppelte Plan-B-Syntheseprobe wurde erfolgreich ausgeführt (`PYTHONPATH=. python3 tools/plan_b_synthetic_probe.py "Circle with vertical handle and label rF" --variant AC0814_L`); Log: `artifacts/converted_images/reports/plan_b_synthetic_probe_2026-05-14_run02.log`, Ergebnis `status=ok`.
+- **Blocker:** N1/N2 bleiben weiterhin offen (Vollbereichslauf `AC0800..AC0899` mit Exit `0` ausstehend), obwohl der N5-Sample-Pair-Blocker aufgelöst wurde.
+- **Nächster sinnvoller Schritt:** Auf einen weiteren leichten Diagnoseschritt (T5/N6/N7) rotieren und danach den nächsten N1/N2-Versuch mit aktualisierter Evidenzbasis ansetzen.
