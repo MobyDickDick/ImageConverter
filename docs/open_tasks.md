@@ -338,6 +338,9 @@ Deadlock-/Stagnationsschleifen.
   - 2026-05-07: Run CD mit `timeout 300` + Python `3.10.20` gestartet; sichtbarer Fortschritt bis mindestens `AC0842_L`/`AC0849_S`/`AC0831_S` (letzter Varianten-Logeintrag: `AC0835_S`), Prozessende mit Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runCD_2026-05-07_summary.md`).
   - 2026-05-07: Run CE mit `timeout 600` + Python `3.10.20` gestartet; sichtbarer Fortschritt bis mindestens `AC0838_L` (u. a. `AC0862_M`, `AC0841_S`), Prozessende mit Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runCE_2026-05-07_summary.md`).
   - 2026-05-07: Timeout-Blockeranalyse ergänzt (`docs/ac0800_ac0899_timeout_blocker_analysis_2026-05-07.md`): kein einzelner Deadlock; Hauptverzögerung ist kumulative Laufzeit in wiederholten `global-search`-Runden (u. a. AC0836_L/AC0838_M/AC0831_L mit Mehrfachrunden und Stagnationsmustern).
+
+  - 2026-05-14: Run DA mit `timeout 420` + Python `3.10.20` gestartet; Prozessende erneut mit Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runDA_2026-05-14_summary.md`).
+  - 2026-05-14: N1-PB direkt nach Run DA ausgeführt (`AC0800..AC0809`, gleiche Runtime-Parameter); Microbatch endet mit Exit `0`, Fortschritt/Artefakt in `artifacts/converted_images/reports/AC0800_AC0809_microbatch_2026-05-14_runDA_PB.log` (Summary: `docs/ac0800_ac0809_planb_runDA_2026-05-14_summary.md`).
   - Abschlusskriterium: vollständiger Durchlauf bis `AC0899` ohne `timeout`-Abbruch und mit finalem Prozessstatus `0`.
 
 - [ ] N2: Stabilitätsnachweis für den Vollbereich dokumentieren.
@@ -1737,3 +1740,9 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 - [ ] **S6 – Integration in bestehende Semantik-Validierung**
   - Ziel: Erkennungsresultate in bestehende `semantic_*`-Logs einspeisen (z. B. „vertical_line_detected=true, width_px=...“).
   - Akzeptanz: Neue Logzeilen in `element_validation.log` und mindestens ein Integrationstest.
+
+### Fortschritt vs. Blocker (Session 2026-05-14, N1 Run DA + N1-PB DA_PB)
+
+- **Fortschritt:** Die nächste offene dokumentierte Primäraufgabe (`N1`) wurde mit fixer Timeout-Grenze in Python `3.10.20` ausgeführt; nach Timeout wurde gemäß Kopplungsregel unmittelbar die gekoppelte Plan-B-Aufgabe (`N1-PB`, `AC0800..AC0809`) nachgezogen und erfolgreich mit Exit `0` abgeschlossen.
+- **Blocker:** Der Vollbereichsnachweis bis `AC0899` bleibt trotz Run DA offen, da der Primärlauf erneut mit Exit `124` endete.
+- **Nächster sinnvoller Schritt:** Für den nächsten N1-Versuch die Timeout-Strategie/Batch-Segmentierung weiter schärfen und den Vollbereichslauf erst nach einer zusätzlichen leichten Diagnoseaufgabe erneut ansetzen.
