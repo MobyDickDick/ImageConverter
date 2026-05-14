@@ -1889,3 +1889,11 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 - **Fortschritt (gekoppelte Plan-B-Aufgabe):** Die gekoppelte Plan-B-Syntheseprobe wurde ausgeführt (`PYTHONPATH=. python3 tools/plan_b_synthetic_probe.py "Circle with horizontal line" --variant AC0812_M`), Log: `artifacts/converted_images/reports/plan_b_synthetic_probe_2026-05-14_run10.log`, Ergebnis `status=ok`, Exit `0`.
 - **Blocker:** In der Default-Umgebung bleibt der bekannte NumPy/OpenCV-Hinweis bestehen; die fachliche Abarbeitung ist dennoch abgeschlossen, da der Primärnachweis in der vorgesehenen 3.10-Toolchain erfolgreich war.
 - **Nächster sinnvoller Schritt:** Auf die nächste offene dokumentierte Aufgabe außerhalb des S-Blocks (z. B. T5/N6/N7) rotieren und erneut mit gekoppelter Plan-B-Aufgabe dokumentieren.
+
+### Fortschritt vs. Blocker (Session 2026-05-14, T5-Kurzlauf Run 11 + Plan-B-Syntheseprobe AC0814_M)
+
+- **Fortschritt (Primäraufgabe T5):** Die nächste dokumentierte, timeout-arme Aufgabe außerhalb des S-Blocks wurde als isolierter Kurzlauf in der bestätigten Python-`3.10.20`-Toolchain ausgeführt: `PYENV_VERSION=3.10.20 PYTHONPATH=. pyenv exec python -m pytest -q tests/test_image_composite_converter.py::test_validate_badge_logs_extent_bracketing_for_line_elements`.
+- **Ergebnis Primäraufgabe:** Exit `0`, `1 passed` in `63.96s`; Laufprotokoll: `artifacts/converted_images/reports/T5_t6_10_isolation_2026-05-14_run11.log`.
+- **Fortschritt (gekoppelte Plan-B-Aufgabe):** Die gekoppelte Plan-B-Syntheseprobe wurde im selben Schritt ausgeführt: `PYTHONPATH=. python3 tools/plan_b_synthetic_probe.py "Circle with horizontal line" --variant AC0814_M`; Log: `artifacts/converted_images/reports/plan_b_synthetic_probe_2026-05-14_run11.log`, Ergebnis `status=ok`, Exit `0`.
+- **Blocker:** In der Default-Python-`3.x`-Umgebung bleibt der bekannte OpenCV/Numpy-Hinweis bestehen; für Primärnachweise wird weiterhin die bestätigte Python-`3.10.20`-Toolchain verwendet.
+- **Nächster sinnvoller Schritt:** Als nächstes einen kleinen N6-Schritt (Variationssuite/Evaluationslauf) plus gekoppelte Plan-B-Aufgabe ausführen und direkt nachpflegen.
