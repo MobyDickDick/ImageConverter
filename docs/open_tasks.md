@@ -6,7 +6,7 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-05-14)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `251` · Erledigt `222` · Offen `29`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `251` · Erledigt `223` · Offen `28`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -27,7 +27,7 @@ Zielbild: Nicht-binäre Vektorisierung über echte SVG-Primitive mit semantische
   - Deliverable: maschinenlesbares Schema (z. B. JSON) inkl. Parameter pro Primitive und Confidence.
   - Akzeptanz: Für einen Test-Batch wird je Elementtyp Precision/Recall ausgewiesen.
 
-- [ ] **V2 – Bezierkurven-Erkennung ergänzen**
+- [x] **V2 – Bezierkurven-Erkennung ergänzen** (2026-05-14: Fitting-Strategie inkl. Pixel-/Kurvenraum-Fehlerschranke und Evaluationsprotokoll dokumentiert in `docs/v2_bezier_detection_strategy_2026-05-14.md`.)
   - Scope: kubische und quadratische Beziersegmente aus Konturen/Pfaden extrahieren.
   - Deliverable: Fitting-Strategie inkl. Fehlerschranke (Pixel- und Kurvenraum).
   - Akzeptanz: Bezier-lastige Referenzen werden mit sinkender Restabweichung rekonstruiert.
