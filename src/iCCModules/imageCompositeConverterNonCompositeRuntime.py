@@ -3,6 +3,11 @@ from __future__ import annotations
 import os
 
 
+def _contains_svg_image_tag(svg_content: str) -> bool:
+    lowered = svg_content.lower()
+    return "<image" in lowered and ('href="data:image' in lowered or 'xlink:href="data:image' in lowered)
+
+
 _PLAN_B_SAMPLE_ALIASES: dict[str, tuple[str, ...]] = {
     "AC0212": ("AC0VR2_AB",),
 }
@@ -139,9 +144,16 @@ def runNonCompositeIterationImpl(
         sample_rendered = render_svg_to_numpy_fn(sample_svg_content, width, height)
         if sample_rendered is not None:
             sample_err = calculate_error_fn(perc_img, sample_rendered)
-            if sample_err <= svg_err:
+            baseline_is_embedded_raster = _contains_svg_image_tag(svg_content)
+            sample_preference_factor = 1.08 if baseline_is_embedded_raster else 1.0
+            if sample_err <= (svg_err * sample_preference_factor):
+                decision_note = ""
+                if baseline_is_embedded_raster and sample_err > svg_err:
+                    decision_note = " (Vector-Sample gegenüber Embedded-Raster bevorzugt)"
                 print_fn(
-                    f"  -> Plan B Vergleich aktiv: nutze Sample-SVG {sample_svg_path} (err={sample_err:.3f} <= {svg_err:.3f})."
+                    "  -> Plan B Vergleich aktiv: nutze Sample-SVG "
+                    f"{sample_svg_path} (err={sample_err:.3f}, baseline={svg_err:.3f})."
+                    f"{decision_note}"
                 )
                 write_validation_log_fn(
                     [
@@ -149,6 +161,8 @@ def runNonCompositeIterationImpl(
                         f"sample_svg_path={sample_svg_path}",
                         f"sample_error={sample_err:.6f}",
                         f"baseline_error={svg_err:.6f}",
+                        f"baseline_is_embedded_raster={int(baseline_is_embedded_raster)}",
+                        f"sample_preference_factor={sample_preference_factor:.2f}",
                     ]
                 )
                 write_attempt_artifacts_fn(sample_svg_content, sample_rendered)
