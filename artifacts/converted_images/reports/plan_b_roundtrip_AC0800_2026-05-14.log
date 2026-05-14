@@ -1,0 +1,9 @@
+OpenCV bindings requires "numpy" package.
+Install it via command:
+    pip install numpy
+[INFO] Schreibe Konsolen-Output nach: /workspace/ImageConverter/imageCompositeConverter.local.log
+
+Abgeschlossen! Ausgaben unter: artifacts/converted_images
+variant=AC0800
+output_svg=artifacts/converted_images/converted_svgs/AC0800.svg
+delta2_output_vs_sample=0.100868
