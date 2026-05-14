@@ -77,6 +77,15 @@ Zielbild: Nicht-binäre Vektorisierung über echte SVG-Primitive mit semantische
 
 ## Next execution tasks (neu sortiert am 2026-05-07: leicht → schwierig)
 
+### Plan-B-Kopplungsregel (ab 2026-05-14 verbindlich)
+
+- Jede neue oder weiterbearbeitete Aufgabe wird ab sofort mit genau einer
+  **Plan-B-Aufgabe** verknüpft (Fallback mit kleinerem Scope oder synthetischem Repro).
+- Die Plan-B-Aufgabe wird direkt unter der Primäraufgabe dokumentiert und im selben
+  Session-Eintrag mit Fortschritt/Blocker-Status nachgeführt.
+- Ziel: Bei Blockern sofort auf die gekoppelte Alternative rotieren, ohne neue
+  Deadlock-Schleifen zu erzeugen.
+
 ### Neue Zusatzaufgabe (Session 2026-05-14)
 
 - [x] **N8 – Plan-B-Syntheseprobe (Beschreibung → SVG → JPG → Rauschen → Konvertierung)** (2026-05-14: Tool `tools/plan_b_synthetic_probe.py` ergänzt und Beispielausführung mit `variant=AC0080_L` dokumentiert; Ergebnisartefakt unter `artifacts/converted_images/converted_svgs/AC0080_L.svg` aktualisiert.)
@@ -257,6 +266,9 @@ Deadlock-/Stagnationsschleifen.
   - 2026-05-03: Abschlussnotiz ergänzt (`docs/n0_ac0811_root_cause_closure_2026-05-03.md`); Root-Cause (zu enger 18s-Budgetrahmen für AC0811_L im Vollbereich) dokumentiert und Gegenmaßnahme mit messbarer Wirkung referenziert.
 
 - [ ] N1: B2 vollständig abschließen: Vollbereichslauf `AC0800..AC0899` mit Exit-Code `0` nachweisen.
+  - [ ] **N1-PB:** Falls N1 per Timeout/Exit≠0 endet, stattdessen 10-Varianten-Microbatch
+    (`AC0800..AC0809`) mit denselben Runtime-Parametern ausführen und Fortschritt/Abbruchstelle
+    samt Exit-Code dokumentieren.
   - Blockierungsverlauf (Kurztrend):
     - 2026-05-01 (Run BJ): Exit `0`, sichtbarer Fortschritt nur bis `AC0811_L` → **Stagnation**.
     - 2026-05-02 (Run BK): Exit `0`, erneut nur bis `AC0811_L` mit `validation_time_budget_exceeded` → **weiterhin Stagnation**.
@@ -1725,4 +1737,3 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 - [ ] **S6 – Integration in bestehende Semantik-Validierung**
   - Ziel: Erkennungsresultate in bestehende `semantic_*`-Logs einspeisen (z. B. „vertical_line_detected=true, width_px=...“).
   - Akzeptanz: Neue Logzeilen in `element_validation.log` und mindestens ein Integrationstest.
-
