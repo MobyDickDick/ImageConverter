@@ -1723,7 +1723,7 @@ Details und Akzeptanzkriterien stehen in `docs/kelle_umsetzungscheck.md` unter
 
 ## Neue Aufgaben: Formen-Erkennung (Kreis, Dreieck, Pfeil, Viereck) + Linien-/Farbmessung (angelegt 2026-05-14)
 
-**Aufgabenzähler (S1–S6):** Gesamt `6` · Erledigt `1` · Offen `5`
+**Aufgabenzähler (S1–S6):** Gesamt `6` · Erledigt `2` · Offen `4`
 
 > Hinweis: Beim Abhaken bitte den Zähler direkt mit aktualisieren, damit der Fortschritt sofort sichtbar bleibt.
 
@@ -1734,7 +1734,7 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
   - Ausgabe: Liste erkannter Primitive (`circle`, `triangle`, `arrow`, `rectangle`, `line`) mit `bbox`, `polygon/params`, `confidence`, `stroke_width_px`, `fill_color`, `stroke_color`.
   - Akzeptanz: JSON-Schema + Beispielausgaben für 10 Referenzbilder versioniert.
 
-- [ ] **S2 – Vertikale Linienerkennung ("senkrechter Griff") implementieren**
+- [x] **S2 – Vertikale Linienerkennung ("senkrechter Griff") implementieren** (2026-05-14: Modul `tools/shape_detection.py` mit Canny+Hough-Detektion ergänzt; Basistests in `tests/test_shape_detection_vertical_lines.py` hinzugefügt.)
   - Ziel: Für Aussagen wie „Kelle mit senkrechtem Griff unten“ robuste Detektion von Position, Länge, Winkelabweichung und Breite.
   - Methode: Kanten + Hough-Linien + Segment-Merging + Richtungsklassifikation (`|angle-90°| <= tol`).
   - Akzeptanz: MAE für x-Position/Breite auf annotiertem Mini-Datensatz unter definiertem Schwellwert.
