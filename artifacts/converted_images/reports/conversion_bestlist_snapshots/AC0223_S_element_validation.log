@@ -1,14 +1,14 @@
-run-meta: run_seed=439741530 pass_seed_offset=0 nonce_ns=1778695848252933800
+run-meta: run_seed=880940688 pass_seed_offset=0 nonce_ns=1778773518256657700
 status=semantic_ok
-redraw_variation: seed=444501163525 changed_params=cx:10.000->10.020 | cy:21.500->21.791 | r:9.000->9.061 | stroke_circle:1.000->1.103 | arm_stroke:2.000->2.060
+redraw_variation: seed=889674265457 changed_params=cx:10.000->10.102 | cy:21.500->21.769 | r:9.000->8.879 | stroke_circle:1.000->1.088 | arm_stroke:2.000->1.883
 semantic-guard: Text bewusst deaktiviert (plain-ring Familie ohne Buchstabe).
 Runde 1: elementweise Validierung gestartet
 circle: Fehler=104.151
 circle: Breiten-Bracketing stroke_circle 1.333->1.000; Kandidaten=1.000->104.151, 1.500->118.722, 2.500->118.722, 3.500->175.425, 4.500->175.425
 circle: Mittelpunkt-Bracketing cx 10.000->10.000, cy 20.500->21.500 (best_err=93.407)
-perf_probe: circle_center_elapsed round=1 elapsed=0.02s
+perf_probe: circle_center_elapsed round=1 elapsed=0.03s
 circle: Radius-Bracketing r 6.880->9.000 (best_err=110.766, full_err=54.935); Kandidaten=7.568->115.214, 8.500->110.766, 9.000->110.766, 9.600->110.766
-perf_probe: circle_radius_elapsed round=1 elapsed=0.03s
+perf_probe: circle_radius_elapsed round=1 elapsed=0.01s
 arm: Fehler=95.961
 arm: Breiten-Stochastic-Survivor aktiviert (arm_stroke=1.500, err=89.266)
 arm: Breiten-Bracketing arm_stroke 2.133->2.000; Kandidaten=1.000->89.266, 2.000->94.763, 2.500->95.961, 3.000->95.961, 4.000->102.809
@@ -19,7 +19,7 @@ Runde 2: elementweise Validierung gestartet
 circle: Fehler=104.588
 circle: Breiten-Bracketing keine relevante Änderung (stroke_circle: 1.000); Kandidaten=1.000->104.588, 1.500->109.995, 2.500->109.995, 3.500->116.817, 4.500->116.817
 circle: Mittelpunkt-Bracketing keine relevante Änderung (cx=10.000, cy=21.500, best_err=112.977)
-perf_probe: circle_center_elapsed round=2 elapsed=0.01s
+perf_probe: circle_center_elapsed round=2 elapsed=0.04s
 circle: Radius-Bracketing keine relevante Änderung (r: 9.000, best_err=112.977, full_err=54.935); Kandidaten=8.100->112.977, 8.500->112.977, 9.000->112.977, 9.600->112.977
 perf_probe: circle_radius_elapsed round=2 elapsed=0.00s
 arm: Fehler=100.900

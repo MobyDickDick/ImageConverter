@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="60.198868"
+   height="47.5"
+   viewBox="0 0 60.198868 47.5"
+   role="img"
+   aria-label="Graues Polygon mit Kelle und M"
+   version="1.1"
+   id="svg6"
+   sodipodi:docname="AC0212_L.svg"
+   inkscape:version="1.4.4 (dcaf3e7, 2026-05-05)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview6"
+     pagecolor="#4bffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="5.7487781"
+     inkscape:cx="1.8264751"
+     inkscape:cy="62.708978"
+     inkscape:window-width="1920"
+     inkscape:window-height="1094"
+     inkscape:window-x="-11"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg6" />
+  <defs
+     id="defs6">
+    <linearGradient
+       id="polyGrad"
+       x1="3"
+       y1="1"
+       x2="25.797274"
+       y2="47.668995"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(-2.6011339,-1.2)">
+      <stop
+         offset="0%"
+         stop-color="#a8a8a8"
+         id="stop1" />
+      <stop
+         offset="100%"
+         stop-color="#fbfbfb"
+         id="stop4" />
+    </linearGradient>
+    <linearGradient
+       id="circleGrad"
+       x1="32"
+       y1="11"
+       x2="56"
+       y2="39"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(-2.6011339,-1.2)">
+      <stop
+         offset="0%"
+         stop-color="#ffffff"
+         id="stop5" />
+      <stop
+         offset="100%"
+         stop-color="#f7f7f7"
+         id="stop6" />
+    </linearGradient>
+  </defs>
+  <!-- Hintergrund -->
+  <!-- Horizontaler Griff der Kelle; liegt hinter Kreis und Polygonkontur -->
+  <!-- Linkes Doppel-Dreieck als ein Polygon -->
+  <path
+     d="M 1.5988661,1 H 23.098866 L 12.467378,24.169495 23.098866,46.5 H 1.5988661 L 12.467378,24.169495 Z"
+     fill="url(#polyGrad)"
+     stroke="#969696"
+     stroke-width="3"
+     stroke-linejoin="miter"
+     id="path6"
+     sodipodi:nodetypes="ccccccc"
+     style="fill:url(#polyGrad);fill-opacity:1;stroke-width:2;stroke-dasharray:none" />
+  <!-- Rechte Kelle: Kreis -->
+  <!-- Buchstabe im Kreis -->
+  <g
+     id="g6"
+     transform="translate(0,-0.04999924)">
+    <line
+       x1="12.798865"
+       y1="23.799999"
+       x2="27.698866"
+       y2="23.799999"
+       stroke="#8f8f8f"
+       stroke-width="7.2"
+       stroke-linecap="butt"
+       id="line6"
+       style="stroke-width:3;stroke-dasharray:none" />
+    <circle
+       cx="43.398865"
+       cy="23.799999"
+       r="15.8"
+       fill="url(#circleGrad)"
+       stroke="#8c8c8c"
+       stroke-width="3.2"
+       id="circle6"
+       style="fill:url(#circleGrad);stroke-width:2;stroke-dasharray:none" />
+    <text
+       x="43.398865"
+       y="33.463573"
+       text-anchor="middle"
+       font-family="Arial, Helvetica, sans-serif"
+       font-size="27px"
+       font-weight="700"
+       fill="#666666"
+       id="text6">M</text>
+  </g>
+</svg>
