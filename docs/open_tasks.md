@@ -1911,3 +1911,41 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 - **Blocker:** Der Lauf endete erneut per äußerem `timeout 420` mit Exit `124`; der Abschlussnachweis bis `AC0899` mit finalem Exit `0` bleibt offen.
 - **Plan-B-Ergebnis:** Der gekoppelte Microbatch `AC0800..AC0809` lief direkt im Anschluss mit Exit `0` (Log: `artifacts/converted_images/reports/AC0800_AC0809_microbatch_2026-05-14_runDJ_PB.log`, Summary: `docs/ac0800_ac0809_planb_runDJ_2026-05-14_summary.md`).
 - **Nächster sinnvoller Schritt:** Gemäß Priorisierung wieder auf eine leichtere/orthogonale Aufgabe (T5/N5/N6/N7) rotieren, bevor der nächste N1-Versuch erfolgt.
+
+### Aufgabenliste – Blockweise Abarbeitung der Plan-B-Chunks (Stand 2026-05-14)
+
+- [ ] **A1 Datenbasis erfassen (einmalig)**
+  - [ ] Vorhandene JPG-Dateien inventarisieren (nur reale Inputs zählen).
+  - [ ] Nach Familien gruppieren: `AC08xx`, `AC05xx`, `AR*`, `DLG*`, `Ddc*`.
+  - [ ] Fehlstellen je Zielbereich markieren (z. B. `AC0810`, `AC0811`, `AC0813` fehlen lokal).
+
+- [ ] **A2 Block-Plan festlegen (nur vorhandene IDs)**
+  - [ ] Blockgröße: max. 10 **vorhandene** Basis-IDs.
+  - [ ] Priorität: zuerst `AC08xx`, dann `AC05xx`, danach `AR*`, zuletzt `DLG*`/`Ddc*`.
+  - [ ] Pro Block dokumentieren: Blockname, enthaltene IDs, erwartete Varianten (`_S/_M/_L`).
+
+- [ ] **A3 Standard-Run pro Block**
+  - [ ] Lauf mit fixer Toolchain/Timeout starten (`PYENV_VERSION=3.10.20`, `timeout ...`, Log via `tee`).
+  - [ ] Logname mit Block-ID und Zeitstempel schreiben.
+  - [ ] Direkt danach Kurzprüfung: Fehler/Timeout + tatsächlich verarbeitete IDs.
+
+- [ ] **A4 Review pro Block dokumentieren**
+  - [ ] In der Doku je Block festhalten: Log-Pfad, Ergebnis (`stabil`/`instabil`), Kurznotiz (3–5 Sätze).
+  - [ ] Bei `instabil` Ursache markieren: Datenlücke / Range-Filter / Laufzeit / Qualitätsbefund.
+
+- [ ] **A5 Qualitäts-Checkpoint nach je 3 Blöcken**
+  - [ ] Fehlertrend und wiederkehrende Problem-IDs prüfen.
+  - [ ] Entscheiden: weiter skalieren **oder** Plan-B-Selektionslogik nachjustieren.
+
+- [ ] **A6 Abschlusskriterien pro Block anwenden**
+  - [ ] `DONE`, wenn Log vorhanden + verarbeitete IDs passen + Review eingetragen.
+  - [ ] `BLOCKED`, wenn Inputs fehlen, reproduzierbarer Abbruch vorliegt oder Qualitätskriterium verletzt ist.
+
+- [ ] **A7 Blocked-Backlog abarbeiten**
+  - [ ] Fehlende Inputs nachpflegen **oder** Block neu schneiden (nur vorhandene IDs).
+  - [ ] Bei Filter-/Range-Unklarheiten Mini-Repro mit 1–2 IDs erstellen.
+  - [ ] `BLOCKED`-Blöcke gesammelt erneut fahren.
+
+- [ ] **A8 Kanban-Status pflegen**
+  - [ ] Spalten verwenden: `Planned` → `Running` → `Review` → `Done` / `Blocked`.
+  - [ ] Pro Session mindestens einen Block vollständig bis `Review` abschließen.
