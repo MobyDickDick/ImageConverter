@@ -131,3 +131,39 @@ def detect_primitive_colors(
         fill_confidence=round(fill_confidence, 4),
         stroke_confidence=round(stroke_confidence, 4),
     )
+
+
+@dataclass(frozen=True)
+class ShapeClassification:
+    primitive: str
+    confidence: float
+    vertices: int
+    is_convex: bool
+
+
+def classify_contour_shape(contour, *, approx_epsilon_factor: float = 0.02) -> ShapeClassification:
+    """Classify contour as triangle/rectangle/arrow/unknown via polygon and convexity heuristics."""
+    try:
+        import cv2  # type: ignore
+    except ModuleNotFoundError as exc:
+        raise RuntimeError("classify_contour_shape requires opencv-python") from exc
+
+    perimeter = float(cv2.arcLength(contour, True))
+    if perimeter <= 0:
+        return ShapeClassification("unknown", 0.0, 0, False)
+    approx = cv2.approxPolyDP(contour, approx_epsilon_factor * perimeter, True)
+    vertices = int(len(approx))
+    is_convex = bool(cv2.isContourConvex(approx))
+
+    if vertices == 3:
+        return ShapeClassification("triangle", 0.95, vertices, True)
+    if vertices == 4 and is_convex:
+        return ShapeClassification("rectangle", 0.9, vertices, True)
+
+    if not is_convex and vertices >= 5:
+        hull = cv2.convexHull(approx)
+        defects = max(0, int(len(hull) - len(approx)))
+        confidence = min(0.92, 0.6 + defects * 0.08)
+        return ShapeClassification("arrow", confidence, vertices, False)
+
+    return ShapeClassification("unknown", 0.3 if vertices >= 3 else 0.0, vertices, is_convex)
