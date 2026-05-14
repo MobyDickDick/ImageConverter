@@ -15,6 +15,16 @@ class VerticalLineDetection:
     confidence: float
 
 
+@dataclass(frozen=True)
+class PrimitiveColorDetection:
+    fill_rgb: tuple[int, int, int] | None
+    stroke_rgb: tuple[int, int, int] | None
+    fill_hex: str | None
+    stroke_hex: str | None
+    fill_confidence: float
+    stroke_confidence: float
+
+
 def detect_vertical_lines(
     image,
     *,
@@ -73,3 +83,51 @@ def detection_to_dict(d: VerticalLineDetection) -> dict[str, Any]:
         "angle_deg": round(d.angle_deg, 2),
         "confidence": round(d.confidence, 4),
     }
+
+
+def detect_primitive_colors(
+    image,
+    *,
+    fill_mask=None,
+    stroke_mask=None,
+    trim_percent: float = 0.05,
+) -> PrimitiveColorDetection:
+    """Estimate robust fill/stroke colors from optional primitive masks."""
+    try:
+        import cv2  # type: ignore
+        import numpy as np  # type: ignore
+    except ModuleNotFoundError as exc:
+        raise RuntimeError("detect_primitive_colors requires numpy and opencv-python") from exc
+
+    if image.ndim == 2:
+        bgr = cv2.cvtColor(image, cv2.COLOR_GRAY2BGR)
+    else:
+        bgr = image
+    rgb = cv2.cvtColor(bgr, cv2.COLOR_BGR2RGB)
+
+    def _extract(mask) -> tuple[tuple[int, int, int] | None, str | None, float]:
+        if mask is None:
+            return None, None, 0.0
+        pixels = rgb[mask > 0]
+        if pixels.size == 0:
+            return None, None, 0.0
+        low_q = int(max(0, trim_percent * 100))
+        high_q = int(min(100, 100 - trim_percent * 100))
+        robust = np.percentile(pixels, [low_q, high_q], axis=0)
+        keep = np.all((pixels >= robust[0]) & (pixels <= robust[1]), axis=1)
+        kept = pixels[keep] if np.any(keep) else pixels
+        mean_rgb = tuple(int(round(v)) for v in np.mean(kept, axis=0))
+        confidence = float(max(0.0, 1.0 - (np.std(kept, axis=0).mean() / 128.0)))
+        hex_color = f"#{mean_rgb[0]:02X}{mean_rgb[1]:02X}{mean_rgb[2]:02X}"
+        return mean_rgb, hex_color, confidence
+
+    fill_rgb, fill_hex, fill_confidence = _extract(fill_mask)
+    stroke_rgb, stroke_hex, stroke_confidence = _extract(stroke_mask)
+    return PrimitiveColorDetection(
+        fill_rgb=fill_rgb,
+        stroke_rgb=stroke_rgb,
+        fill_hex=fill_hex,
+        stroke_hex=stroke_hex,
+        fill_confidence=round(fill_confidence, 4),
+        stroke_confidence=round(stroke_confidence, 4),
+    )

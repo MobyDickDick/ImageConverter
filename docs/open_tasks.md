@@ -6,7 +6,7 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-05-14)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `251` · Erledigt `228` · Offen `23`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `251` · Erledigt `229` · Offen `22`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -1744,7 +1744,7 @@ Details und Akzeptanzkriterien stehen in `docs/kelle_umsetzungscheck.md` unter
 
 ## Neue Aufgaben: Formen-Erkennung (Kreis, Dreieck, Pfeil, Viereck) + Linien-/Farbmessung (angelegt 2026-05-14)
 
-**Aufgabenzähler (S1–S6):** Gesamt `6` · Erledigt `2` · Offen `4`
+**Aufgabenzähler (S1–S6):** Gesamt `6` · Erledigt `3` · Offen `3`
 
 > Hinweis: Beim Abhaken bitte den Zähler direkt mit aktualisieren, damit der Fortschritt sofort sichtbar bleibt.
 
@@ -1760,7 +1760,7 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
   - Methode: Kanten + Hough-Linien + Segment-Merging + Richtungsklassifikation (`|angle-90°| <= tol`).
   - Akzeptanz: MAE für x-Position/Breite auf annotiertem Mini-Datensatz unter definiertem Schwellwert.
 
-- [ ] **S3 – Farbdetektion pro Primitive ergänzen**
+- [x] **S3 – Farbdetektion pro Primitive ergänzen** (2026-05-14: `detect_primitive_colors(...)` in `tools/shape_detection.py` ergänzt (robuste maskierte RGB/HEX-Schätzung für Fill/Stroke inkl. Konfidenz); Basistest `tests/test_shape_detection_colors.py` hinzugefügt.)
   - Ziel: Dominante Füll-/Konturfarbe je erkanntem Objekt liefern (RGB/HEX + optional DeltaE-Konfidenz).
   - Methode: Maskierte Pixelstatistik, Outlier-Robustheit, getrennt für Stroke und Fill.
   - Akzeptanz: Farbabstand zu Ground-Truth unter Schwellwert (z. B. DeltaE95 < Zielwert).
@@ -1840,3 +1840,10 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 - **Fortschritt:** Die nächste offene, timeout-arme dokumentierte Aufgabe (N9) wurde mit einem isolierten `AC0212`-Kurzlauf inkl. reproduzierbarem Befehl abgeschlossen; die gekoppelte Plan-B-Aufgabe wurde im selben Schritt ausgeführt und dokumentiert.
 - **Blocker:** Kein technischer Timeout-Blocker im Session-Umfang; fachlich bleibt `non_composite_embedded_svg` für AC0212 als Qualitätsbefund sichtbar.
 - **Nächster sinnvoller Schritt:** Auf die nächste offene Aufgabe der priorisierten Liste rotieren (T5/N5/N6/N7-Kontext), bevor erneut ein schwerer Vollbereichslauf gestartet wird.
+
+### Fortschritt vs. Blocker (Session 2026-05-14, S3 + Plan-B-Syntheseprobe AC0814_L)
+
+- **Fortschritt (Primäraufgabe S3):** Die dokumentierte, timeout-arme Aufgabe **S3** wurde umgesetzt: Farbdetektion pro Primitive (Fill/Stroke) ist nun als robuste maskierte Auswertung mit RGB/HEX und Konfidenz verfügbar (`tools/shape_detection.py`), inkl. neuem Basistest (`tests/test_shape_detection_colors.py`).
+- **Fortschritt (gekoppelte Plan-B-Aufgabe):** Die zugehörige Plan-B-Syntheseprobe wurde erfolgreich ausgeführt (`PYTHONPATH=. python3 tools/plan_b_synthetic_probe.py "Triangle with vertical handle" --variant AC0814_L`), Laufartefakt: `artifacts/converted_images/reports/plan_b_synthetic_probe_2026-05-14_run06.log`, Exit `0`.
+- **Blocker:** In der Python-3.12-Default-Umgebung sind OpenCV/Numpy-basierte Shape-Tests weiterhin `skipped`; der neue Test ist vorhanden, benötigt für aktive Ausführung dieselbe lauffähige Toolchain wie frühere 3.10-Läufe.
+- **Nächster sinnvoller Schritt:** Als nächstes **S4** (Dreieck/Pfeil/Viereck-Klassifikation) ergänzen und danach einen kleinen S3/S4-Evaluationslauf auf der bestätigten OpenCV-fähigen Umgebung dokumentieren.
