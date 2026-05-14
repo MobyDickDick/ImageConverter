@@ -257,6 +257,13 @@ Deadlock-/Stagnationsschleifen.
 - **Blocker:** Der Teilpfad `AC0836` reproduziert weiterhin den bekannten Abbruch (`MuPDF error: exception stack overflow!`, Exit `139`), daher bleibt LW4 weiterhin offen.
 - **Nächster sinnvoller Schritt:** Den AC0836-Langläuferpfad isoliert weiter eingrenzen (z. B. mit zusätzlicher MuPDF-/Render-Telemetrie pro Runde/Element) und erst nach stabiler AC0836-Teilprobe den kompletten LW4-Proxy erneut fahren.
 
+
+### Fortschritt vs. Blocker (Session 2026-05-14, N1 Run DB + N1-PB Run DB_PB)
+
+- **Fortschritt:** Die nächste dokumentierte Primäraufgabe N1 wurde erneut mit der standardisierten Python-`3.10.20`-Toolchain und `timeout 420` ausgeführt; gemäß Kopplungsregel wurde direkt anschließend die Plan-B-Aufgabe (Microbatch `AC0800..AC0809`) erfolgreich abgeschlossen (Exit `0`).
+- **Blocker:** Der N1-Vollbereichslauf endet weiterhin per äußerem Timeout (Exit `124`), damit bleibt der Vollbereichsnachweis bis `AC0899` offen.
+- **Nächster sinnvoller Schritt:** Entweder weitere Laufzeitverkürzung für den Vollbereichspfad vorbereiten oder nach dokumentierter Priorisierung auf eine leichtere orthogonale Aufgabe rotieren, bevor der nächste N1-Anlauf erfolgt.
+
 - [x] N0 (höchste Priorität): Root-Cause der **ersten** AC08-Zeitbudgetüberschreitung (`AC0811_L.jpg`) isolieren und beheben.
   - Befund aus Log-Auswertung: erstes dokumentiertes `validation_time_budget_exceeded` tritt in `AC0800_AC0899_batch_2026-04-28_runAV.log` bei `AC0811_L.jpg` auf (`phase=round_start`, `round=2`, `elapsed=43.75s`, `budget=18.00s`).
   - Ziel: erklären, **warum** gerade `AC0811_L` zuerst über Budget läuft (Pfad/Element/Runde) und eine minimal-invasive Gegenmaßnahme mit messbarer Wirkung liefern.
@@ -341,6 +348,8 @@ Deadlock-/Stagnationsschleifen.
 
   - 2026-05-14: Run DA mit `timeout 420` + Python `3.10.20` gestartet; Prozessende erneut mit Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runDA_2026-05-14_summary.md`).
   - 2026-05-14: N1-PB direkt nach Run DA ausgeführt (`AC0800..AC0809`, gleiche Runtime-Parameter); Microbatch endet mit Exit `0`, Fortschritt/Artefakt in `artifacts/converted_images/reports/AC0800_AC0809_microbatch_2026-05-14_runDA_PB.log` (Summary: `docs/ac0800_ac0809_planb_runDA_2026-05-14_summary.md`).
+  - 2026-05-14: Run DB mit `timeout 420` + Python `3.10.20` gestartet; Prozessende erneut mit Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runDB_2026-05-14_summary.md`).
+  - 2026-05-14: N1-PB direkt nach Run DB ausgeführt (`AC0800..AC0809`, gleiche Runtime-Parameter); Microbatch endet mit Exit `0`, Fortschritt/Artefakt in `artifacts/converted_images/reports/AC0800_AC0809_microbatch_2026-05-14_runDB_PB.log` (Summary: `docs/ac0800_ac0809_planb_runDB_2026-05-14_summary.md`).
   - Abschlusskriterium: vollständiger Durchlauf bis `AC0899` ohne `timeout`-Abbruch und mit finalem Prozessstatus `0`.
 
 - [ ] N2: Stabilitätsnachweis für den Vollbereich dokumentieren.
