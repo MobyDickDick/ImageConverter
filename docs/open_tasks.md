@@ -1744,7 +1744,7 @@ Details und Akzeptanzkriterien stehen in `docs/kelle_umsetzungscheck.md` unter
 
 ## Neue Aufgaben: Formen-Erkennung (Kreis, Dreieck, Pfeil, Viereck) + Linien-/Farbmessung (angelegt 2026-05-14)
 
-**Aufgabenzähler (S1–S6):** Gesamt `6` · Erledigt `3` · Offen `3`
+**Aufgabenzähler (S1–S6):** Gesamt `6` · Erledigt `4` · Offen `2`
 
 > Hinweis: Beim Abhaken bitte den Zähler direkt mit aktualisieren, damit der Fortschritt sofort sichtbar bleibt.
 
@@ -1765,7 +1765,7 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
   - Methode: Maskierte Pixelstatistik, Outlier-Robustheit, getrennt für Stroke und Fill.
   - Akzeptanz: Farbabstand zu Ground-Truth unter Schwellwert (z. B. DeltaE95 < Zielwert).
 
-- [ ] **S4 – Dreieck-/Pfeil-/Viereck-Klassifikation aufbauen**
+- [x] **S4 – Dreieck-/Pfeil-/Viereck-Klassifikation aufbauen** (2026-05-14: `classify_contour_shape(...)` in `tools/shape_detection.py` ergänzt; Basistests in `tests/test_shape_detection_classification.py` hinzugefügt.)
   - Ziel: Konturbasierte Unterscheidung zwischen Dreieck, Viereck und Pfeil (inkl. Schaft+Spitze-Heuristik).
   - Methode: Konturapproximation, Eckenzahl, Konvexität, Achsen-/Symmetrie-Features.
   - Akzeptanz: Precision/Recall/F1 je Klasse auf Testset dokumentiert.
@@ -1847,3 +1847,11 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 - **Fortschritt (gekoppelte Plan-B-Aufgabe):** Die zugehörige Plan-B-Syntheseprobe wurde erfolgreich ausgeführt (`PYTHONPATH=. python3 tools/plan_b_synthetic_probe.py "Triangle with vertical handle" --variant AC0814_L`), Laufartefakt: `artifacts/converted_images/reports/plan_b_synthetic_probe_2026-05-14_run06.log`, Exit `0`.
 - **Blocker:** In der Python-3.12-Default-Umgebung sind OpenCV/Numpy-basierte Shape-Tests weiterhin `skipped`; der neue Test ist vorhanden, benötigt für aktive Ausführung dieselbe lauffähige Toolchain wie frühere 3.10-Läufe.
 - **Nächster sinnvoller Schritt:** Als nächstes **S4** (Dreieck/Pfeil/Viereck-Klassifikation) ergänzen und danach einen kleinen S3/S4-Evaluationslauf auf der bestätigten OpenCV-fähigen Umgebung dokumentieren.
+
+
+### Fortschritt vs. Blocker (Session 2026-05-14, S4 + Plan-B-Syntheseprobe AC0838_M)
+
+- **Fortschritt (Primäraufgabe S4):** Die nächste dokumentierte Primäraufgabe **S4** wurde abgeschlossen: Konturklassifikation für `triangle`/`rectangle`/`arrow` ist als Heuristik in `tools/shape_detection.py` implementiert (`classify_contour_shape`), inklusive Basistests für alle drei Klassen (`tests/test_shape_detection_classification.py`).
+- **Fortschritt (gekoppelte Plan-B-Aufgabe):** Die gekoppelte Plan-B-Syntheseprobe wurde erfolgreich ausgeführt (`PYTHONPATH=. python3 tools/plan_b_synthetic_probe.py "Rectangle with vertical handle" --variant AC0838_M`), Log: `artifacts/converted_images/reports/plan_b_synthetic_probe_2026-05-14_run07.log`, Ergebnis `status=ok`, Exit `0`.
+- **Blocker:** S5/S6 sind weiterhin offen (Evaluationspipeline und Semantik-Integration).
+- **Nächster sinnvoller Schritt:** Als nächstes **S5** (Testset + Evaluationspipeline) als kleinsten verbleibenden Shape-Detection-Block umsetzen und die Metrikartefakte dokumentieren.
