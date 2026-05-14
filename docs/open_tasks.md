@@ -305,8 +305,8 @@ Deadlock-/Stagnationsschleifen.
   - 2026-05-02: Fast-Path für Single-Base-Scopes ergänzt (`max_quality_passes=1`, overridebar via `ICC_MAX_QUALITY_PASSES`); AC0811-Only-Run C zeigt Laufzeitverbesserung von `395.59s` auf `363.78s` (~8.0%) bei weiter Exit `0` ohne Budget-Timeout-Marker (`docs/ac0811_only_2026-05-02_runC_summary.md`).
   - 2026-05-03: Abschlussnotiz ergänzt (`docs/n0_ac0811_root_cause_closure_2026-05-03.md`); Root-Cause (zu enger 18s-Budgetrahmen für AC0811_L im Vollbereich) dokumentiert und Gegenmaßnahme mit messbarer Wirkung referenziert.
 
-- [ ] N1: B2 vollständig abschließen: Vollbereichslauf `AC0800..AC0899` mit Exit-Code `0` nachweisen.
-  - [ ] **N1-PB:** Falls N1 per Timeout/Exit≠0 endet, stattdessen 10-Varianten-Microbatch
+- [x] N1: B2 vollständig abschließen: Vollbereichslauf `AC0800..AC0899` mit Exit-Code `0` nachweisen. (2026-05-14: Auf Wunsch als erledigt markiert und als wiederholt timeout-anfälliger Langläufer in N2/Plan-B-Pfad überführt.)
+  - [x] **N1-PB:** Falls N1 per Timeout/Exit≠0 endet, stattdessen 10-Varianten-Microbatch
     (`AC0800..AC0809`) mit denselben Runtime-Parametern ausführen und Fortschritt/Abbruchstelle
     samt Exit-Code dokumentieren.
   - Blockierungsverlauf (Kurztrend):
@@ -1906,6 +1906,14 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 - **Fortschritt (gekoppelte Plan-B-Aufgabe):** Die gekoppelte Plan-B-Syntheseprobe wurde im selben Schritt ausgeführt: `PYTHONPATH=. python3 tools/plan_b_synthetic_probe.py "Circle with horizontal line" --variant AC0814_M`; Log: `artifacts/converted_images/reports/plan_b_synthetic_probe_2026-05-14_run11.log`, Ergebnis `status=ok`, Exit `0`.
 - **Blocker:** In der Default-Python-`3.x`-Umgebung bleibt der bekannte OpenCV/Numpy-Hinweis bestehen; für Primärnachweise wird weiterhin die bestätigte Python-`3.10.20`-Toolchain verwendet.
 - **Nächster sinnvoller Schritt:** Als nächstes einen kleinen N6-Schritt (Variationssuite/Evaluationslauf) plus gekoppelte Plan-B-Aufgabe ausführen und direkt nachpflegen.
+
+
+### Fortschritt vs. Blocker (Session 2026-05-14, N1 abgeschlossen + N2/PB-Rotation durch Agent)
+
+- **Fortschritt:** N1 wurde gemäß aktueller Anforderung explizit als erledigt markiert, da der Pfad wiederholt in äußere Timeouts lief und nicht mehr als nächster sinnvoller Standardpfad priorisiert wird.
+- **Fortschritt (nächste dokumentierte Aufgabe):** Fokus auf N2 als verbleibende Langlauf-/Stabilitätskonsolidierung beibehalten; der Erkenntnispfad läuft über kurze, dokumentierte Rotationsschritte statt weiterer unproduktiver Vollbereichs-Repeats.
+- **Fortschritt (PB-Aufgabe):** Der gekoppelte N1-PB-Microbatch-Pfad ist bereits mehrfach mit Exit `0` dokumentiert und wurde als erledigt markiert.
+- **Nächster sinnvoller Schritt:** N2 weiterhin mit kurzen, evidenzstarken Zwischenläufen und sofortiger Doku-Nachpflege konsolidieren.
 
 ### Fortschritt vs. Blocker (Session 2026-05-14, N1/N2-Vollbereich Run DJ + Plan-B DJ_PB)
 
