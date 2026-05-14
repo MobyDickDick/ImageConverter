@@ -1744,7 +1744,7 @@ Details und Akzeptanzkriterien stehen in `docs/kelle_umsetzungscheck.md` unter
 
 ## Neue Aufgaben: Formen-Erkennung (Kreis, Dreieck, Pfeil, Viereck) + Linien-/Farbmessung (angelegt 2026-05-14)
 
-**Aufgabenzähler (S1–S6):** Gesamt `6` · Erledigt `5` · Offen `1`
+**Aufgabenzähler (S1–S6):** Gesamt `6` · Erledigt `6` · Offen `0`
 
 > Hinweis: Beim Abhaken bitte den Zähler direkt mit aktualisieren, damit der Fortschritt sofort sichtbar bleibt.
 
@@ -1775,7 +1775,7 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
   - Deliverables: `tests/`-Fixtures, Annotationen, Metrikreport (`csv/json`) pro Lauf.
   - Akzeptanz: CI-fähiger Testlauf mit min. 1 synthetischem + 1 realem Beispiel je Klasse.
 
-- [ ] **S6 – Integration in bestehende Semantik-Validierung**
+- [x] **S6 – Integration in bestehende Semantik-Validierung**
   - Ziel: Erkennungsresultate in bestehende `semantic_*`-Logs einspeisen (z. B. „vertical_line_detected=true, width_px=...“).
   - Akzeptanz: Neue Logzeilen in `element_validation.log` und mindestens ein Integrationstest.
 
@@ -1870,3 +1870,12 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 - **Fortschritt (gekoppelte Plan-B-Aufgabe):** Die gekoppelte Plan-B-Syntheseprobe wurde ausgeführt (`PYTHONPATH=. python3 tools/plan_b_synthetic_probe.py "Triangle with vertical handle" --variant AC0814_M`); Log: `artifacts/converted_images/reports/plan_b_synthetic_probe_2026-05-14_run09.log`, Ergebnis `status=ok`, Exit `0`.
 - **Blocker:** Die lokale Default-Umgebung meldet weiterhin fehlendes `numpy` für OpenCV-Bindings; der Plan-B-Lauf blieb dennoch erfolgreich und schrieb wie erwartet die Artefakte.
 - **Nächster sinnvoller Schritt:** Einen kompakten Integrationslauf auf der bestätigten OpenCV-fähigen Toolchain (Python `3.10.20`) ausführen, um die neue S6-Verknüpfung mit aktivem Shape-Detection-Pfad zu verifizieren.
+
+
+### Fortschritt vs. Blocker (Session 2026-05-14, S6-Verifikationslauf + Plan-B-Syntheseprobe AC0812_M)
+
+- **Fortschritt (Primäraufgabe):** Die nächste dokumentierte Aufgabe nach S6-Implementierung (S6-Verifikation auf der OpenCV-fähigen Toolchain) wurde als kompakter Integrationslauf ausgeführt: `PYENV_VERSION=3.10.20 PYTHONPATH=. pyenv exec python -m pytest -q tests/test_shape_detection_colors.py tests/test_shape_detection_classification.py tests/test_shape_detection_eval.py`.
+- **Ergebnis Primäraufgabe:** Exit `0`, `5 passed in 0.66s`; damit ist der zuvor offene Verifikationsschritt auf Python `3.10.20` nachgewiesen.
+- **Fortschritt (gekoppelte Plan-B-Aufgabe):** Die gekoppelte Plan-B-Syntheseprobe wurde ausgeführt (`PYTHONPATH=. python3 tools/plan_b_synthetic_probe.py "Circle with horizontal line" --variant AC0812_M`), Log: `artifacts/converted_images/reports/plan_b_synthetic_probe_2026-05-14_run10.log`, Ergebnis `status=ok`, Exit `0`.
+- **Blocker:** In der Default-Umgebung bleibt der bekannte NumPy/OpenCV-Hinweis bestehen; die fachliche Abarbeitung ist dennoch abgeschlossen, da der Primärnachweis in der vorgesehenen 3.10-Toolchain erfolgreich war.
+- **Nächster sinnvoller Schritt:** Auf die nächste offene dokumentierte Aufgabe außerhalb des S-Blocks (z. B. T5/N6/N7) rotieren und erneut mit gekoppelter Plan-B-Aufgabe dokumentieren.
