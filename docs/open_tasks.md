@@ -272,6 +272,12 @@ Deadlock-/Stagnationsschleifen.
 - **Blocker:** Der N1-Vollbereichslauf endet weiterhin per äußerem Timeout (Exit `124`), damit bleibt der Vollbereichsnachweis bis `AC0899` offen.
 - **Nächster sinnvoller Schritt:** Entweder weitere Laufzeitverkürzung für den Vollbereichspfad vorbereiten oder nach dokumentierter Priorisierung auf eine leichtere orthogonale Aufgabe rotieren, bevor der nächste N1-Anlauf erfolgt.
 
+### Fortschritt vs. Blocker (Session 2026-05-14, N1 Run DG + N1-PB Run DG_PB)
+
+- **Fortschritt:** Die nächste dokumentierte Primäraufgabe N1 wurde erneut mit der standardisierten Python-`3.10.20`-Toolchain und `timeout 420` ausgeführt; gemäß Kopplungsregel wurde direkt anschließend die Plan-B-Aufgabe (Microbatch `AC0800..AC0809`) erfolgreich abgeschlossen (Exit `0`).
+- **Blocker:** Der N1-Vollbereichslauf endet weiterhin per äußerem Timeout (Exit `124`), damit bleibt der Vollbereichsnachweis bis `AC0899` offen.
+- **Nächster sinnvoller Schritt:** Entweder weitere Laufzeitverkürzung für den Vollbereichspfad vorbereiten oder nach dokumentierter Priorisierung auf eine leichtere orthogonale Aufgabe rotieren, bevor der nächste N1-Anlauf erfolgt.
+
 ### Fortschritt vs. Blocker (Session 2026-05-14, N1 Run DB + N1-PB Run DB_PB)
 
 - **Fortschritt:** Die nächste dokumentierte Primäraufgabe N1 wurde erneut mit der standardisierten Python-`3.10.20`-Toolchain und `timeout 420` ausgeführt; gemäß Kopplungsregel wurde direkt anschließend die Plan-B-Aufgabe (Microbatch `AC0800..AC0809`) erfolgreich abgeschlossen (Exit `0`).
@@ -368,6 +374,8 @@ Deadlock-/Stagnationsschleifen.
   - 2026-05-14: N1-PB direkt nach Run DC ausgeführt (`AC0800..AC0809`, gleiche Runtime-Parameter); Microbatch endet mit Exit `0`, Fortschritt/Artefakt in `artifacts/converted_images/reports/AC0800_AC0809_microbatch_2026-05-14_runDC_PB.log` (Summary: `docs/ac0800_ac0809_planb_runDC_2026-05-14_summary.md`).
   - 2026-05-14: Run DE mit `timeout 420` + Python `3.10.20` gestartet; Prozessende erneut mit Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runDE_2026-05-14_summary.md`).
   - 2026-05-14: N1-PB direkt nach Run DE ausgeführt (`AC0800..AC0809`, gleiche Runtime-Parameter); Microbatch endet mit Exit `0`, Fortschritt/Artefakt in `artifacts/converted_images/reports/AC0800_AC0809_microbatch_2026-05-14_runDE_PB.log` (Summary: `docs/ac0800_ac0809_planb_runDE_2026-05-14_summary.md`).
+  - 2026-05-14: Run DG mit `timeout 420` + Python `3.10.20` gestartet; Prozessende erneut mit Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runDG_2026-05-14_summary.md`).
+  - 2026-05-14: N1-PB direkt nach Run DG ausgeführt (`AC0800..AC0809`, gleiche Runtime-Parameter); Microbatch endet mit Exit `0`, Fortschritt/Artefakt in `artifacts/converted_images/reports/AC0800_AC0809_microbatch_2026-05-14_runDG_PB.log` (Summary: `docs/ac0800_ac0809_planb_runDG_2026-05-14_summary.md`).
   - Abschlusskriterium: vollständiger Durchlauf bis `AC0899` ohne `timeout`-Abbruch und mit finalem Prozessstatus `0`.
 
 - [ ] N2: Stabilitätsnachweis für den Vollbereich dokumentieren.
