@@ -1,0 +1,16 @@
+{
+  "version": "gradient_model_v1",
+  "date": "2026-05-14",
+  "paint_types": ["solid", "linear_gradient", "radial_gradient"],
+  "units": "bbox_normalized",
+  "metrics": [
+    "delta_e_2000_mean",
+    "delta_e_2000_p95",
+    "pixel_delta_ratio",
+    "improvement_delta_e_mean"
+  ],
+  "acceptance_rule": {
+    "improvement_delta_e_mean": "> 0",
+    "pixel_delta_ratio": "not_worse_than_flat_fill"
+  }
+}
