@@ -38,6 +38,44 @@
     "mismatch_reasons": []
   },
   {
+    "filename": "AC0814_M.jpg",
+    "base_name": "AC0814",
+    "description_fragments": [
+      {
+        "source": "base_name",
+        "key": "AC0814",
+        "text": "Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 90° nach rechts gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises."
+      }
+    ],
+    "recognized_description_elements": [
+      "Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 90° nach rechts gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises."
+    ],
+    "description_lookup_keys": [
+      "AC0814"
+    ],
+    "description_text": "Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 90° nach rechts gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+    "derived_elements": [
+      "SEMANTIC: Kreis ohne Buchstabe",
+      "SEMANTIC: waagrechter Strich rechts vom Kreis"
+    ],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_conflicts": [],
+    "semantic_sources": {
+      "family_rule": [
+        "SEMANTIC: Kreis ohne Buchstabe",
+        "SEMANTIC: waagrechter Strich rechts vom Kreis"
+      ],
+      "description_heuristic": []
+    },
+    "status": "semantic_ok",
+    "mismatch_reason": "",
+    "mismatch_reasons": []
+  },
+  {
     "filename": "AC0812_S.jpg",
     "base_name": "AC0812",
     "description_fragments": [
@@ -76,25 +114,25 @@
     "mismatch_reasons": []
   },
   {
-    "filename": "AC0814_L.jpg",
-    "base_name": "AC0814",
+    "filename": "AC0812_L.jpg",
+    "base_name": "AC0812",
     "description_fragments": [
       {
         "source": "base_name",
-        "key": "AC0814",
-        "text": "Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 90° nach rechts gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises."
+        "key": "AC0812",
+        "text": "Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 90° nach links gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises."
       }
     ],
     "recognized_description_elements": [
-      "Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 90° nach rechts gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises."
+      "Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 90° nach links gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises."
     ],
     "description_lookup_keys": [
-      "AC0814"
+      "AC0812"
     ],
-    "description_text": "Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 90° nach rechts gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.",
+    "description_text": "Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 90° nach links gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.",
     "derived_elements": [
       "SEMANTIC: Kreis ohne Buchstabe",
-      "SEMANTIC: waagrechter Strich rechts vom Kreis"
+      "SEMANTIC: waagrechter Strich links vom Kreis"
     ],
     "semantic_priority_order": [
       "family_rule",
@@ -105,7 +143,7 @@
     "semantic_sources": {
       "family_rule": [
         "SEMANTIC: Kreis ohne Buchstabe",
-        "SEMANTIC: waagrechter Strich rechts vom Kreis"
+        "SEMANTIC: waagrechter Strich links vom Kreis"
       ],
       "description_heuristic": []
     },
@@ -152,7 +190,7 @@
     "mismatch_reasons": []
   },
   {
-    "filename": "AC0814_M.jpg",
+    "filename": "AC0814_L.jpg",
     "base_name": "AC0814",
     "description_fragments": [
       {
@@ -182,44 +220,6 @@
       "family_rule": [
         "SEMANTIC: Kreis ohne Buchstabe",
         "SEMANTIC: waagrechter Strich rechts vom Kreis"
-      ],
-      "description_heuristic": []
-    },
-    "status": "semantic_ok",
-    "mismatch_reason": "",
-    "mismatch_reasons": []
-  },
-  {
-    "filename": "AC0812_L.jpg",
-    "base_name": "AC0812",
-    "description_fragments": [
-      {
-        "source": "base_name",
-        "key": "AC0812",
-        "text": "Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 90° nach links gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises."
-      }
-    ],
-    "recognized_description_elements": [
-      "Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 90° nach links gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises."
-    ],
-    "description_lookup_keys": [
-      "AC0812"
-    ],
-    "description_text": "Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 90° nach links gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.",
-    "derived_elements": [
-      "SEMANTIC: Kreis ohne Buchstabe",
-      "SEMANTIC: waagrechter Strich links vom Kreis"
-    ],
-    "semantic_priority_order": [
-      "family_rule",
-      "layout_override",
-      "description_heuristic"
-    ],
-    "semantic_conflicts": [],
-    "semantic_sources": {
-      "family_rule": [
-        "SEMANTIC: Kreis ohne Buchstabe",
-        "SEMANTIC: waagrechter Strich links vom Kreis"
       ],
       "description_heuristic": []
     },
