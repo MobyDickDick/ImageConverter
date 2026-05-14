@@ -52,7 +52,7 @@ Zielbild: Nicht-binäre Vektorisierung über echte SVG-Primitive mit semantische
   - Deliverable: Mehrziel-Optimierung (Geometrie, Farbe, Semantik-Konsistenz) pro Iteration.
   - Akzeptanz: Konvergenzplots zeigen reproduzierbare Verbesserung in mindestens 3 Referenzfamilien.
 
-- [ ] **V7 – Rückwärts-Training (Text → SVG → Raster → Rücktransformation)**
+- [x] **V7 – Rückwärts-Training (Text → SVG → Raster → Rücktransformation)** (2026-05-14: Closed-Loop-Gap-Report-v1 mit Tool `tools/evaluate_semantic_roundtrip.py` und Baseline-Artefakt `artifacts/evaluation/semantic_roundtrip_v1/report_2026-05-14.json` dokumentiert in `docs/v7_roundtrip_training_pipeline_2026-05-14.md`.)
   - Scope: generierte Szenen zur Selbstvalidierung und Schwachstellenanalyse.
   - Deliverable: Closed-Loop-Evaluationspipeline mit Gap-Reports pro Relationstyp.
   - Akzeptanz: Pipeline markiert systematisch nicht-invertierbare Fälle (z. B. vollständig verdeckte Griffe ohne Constraints).
