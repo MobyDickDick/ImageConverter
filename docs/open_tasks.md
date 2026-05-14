@@ -1904,3 +1904,10 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 - **Fortschritt (gekoppelte Plan-B-Aufgabe):** Die gekoppelte Plan-B-Syntheseprobe wurde im selben Schritt ausgeführt: `PYTHONPATH=. python3 tools/plan_b_synthetic_probe.py "Circle with horizontal line" --variant AC0814_M`; Log: `artifacts/converted_images/reports/plan_b_synthetic_probe_2026-05-14_run11.log`, Ergebnis `status=ok`, Exit `0`.
 - **Blocker:** In der Default-Python-`3.x`-Umgebung bleibt der bekannte OpenCV/Numpy-Hinweis bestehen; für Primärnachweise wird weiterhin die bestätigte Python-`3.10.20`-Toolchain verwendet.
 - **Nächster sinnvoller Schritt:** Als nächstes einen kleinen N6-Schritt (Variationssuite/Evaluationslauf) plus gekoppelte Plan-B-Aufgabe ausführen und direkt nachpflegen.
+
+### Fortschritt vs. Blocker (Session 2026-05-14, N1/N2-Vollbereich Run DJ + Plan-B DJ_PB)
+
+- **Fortschritt:** Der nächste dokumentierte N1-Vollbereichslauf wurde in Python `3.10.20` mit fixer Timeout-Grenze ausgeführt; neues Log-Artefakt: `artifacts/converted_images/reports/AC0800_AC0899_batch_2026-05-14_runDJ.log` (Summary: `docs/ac0800_ac0899_runDJ_2026-05-14_summary.md`).
+- **Blocker:** Der Lauf endete erneut per äußerem `timeout 420` mit Exit `124`; der Abschlussnachweis bis `AC0899` mit finalem Exit `0` bleibt offen.
+- **Plan-B-Ergebnis:** Der gekoppelte Microbatch `AC0800..AC0809` lief direkt im Anschluss mit Exit `0` (Log: `artifacts/converted_images/reports/AC0800_AC0809_microbatch_2026-05-14_runDJ_PB.log`, Summary: `docs/ac0800_ac0809_planb_runDJ_2026-05-14_summary.md`).
+- **Nächster sinnvoller Schritt:** Gemäß Priorisierung wieder auf eine leichtere/orthogonale Aufgabe (T5/N5/N6/N7) rotieren, bevor der nächste N1-Versuch erfolgt.
