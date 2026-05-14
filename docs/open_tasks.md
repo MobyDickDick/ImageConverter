@@ -1816,3 +1816,12 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 - **Fortschritt:** Beide gekoppelten Aufgaben sind in dieser Session abgeschlossen; dadurch bleibt die Anti-Deadlock-Kette konsistent und ohne neuen Langläufer-Timeout.
 - **Blocker:** N1/N2 bleiben unverändert offen (historische Timeout-/Langläuferproblematik), da in dieser Session bewusst die nicht-timeout-gefährdete Prioritätsstufe bedient wurde.
 - **Nächster sinnvoller Schritt:** Im nächsten Schritt den kleinsten reproduzierbaren T6-Unterpunkt (vorzugsweise T6.10 oder T6.9) als isolierten Kurzlauf mit enger Timeout-Grenze dokumentieren und danach wieder hier rückpflegen.
+
+### Fortschritt vs. Blocker (Session 2026-05-14, T6.10-Isolation + T6-PB-Schnellrepro)
+
+- **Primäraufgabe (T6.10):** Der als nächster Schritt empfohlene kleinste T6-Unterpunkt wurde als Kurzlauf mit enger Timeout-Grenze ausgeführt: `PYTHONPATH=. timeout 180 python3 -m pytest -q tests/test_image_composite_converter.py::test_validate_badge_logs_extent_bracketing_for_line_elements`.
+- **Ergebnis T6.10:** Exit `0`, Teststatus `1 skipped, 5 warnings in 3.94s`; kein Timeout und kein Fail, aber weiterhin kein aktiver PASS-Nachweis für diesen Node in der aktuellen Umgebung.
+- **Gekoppelte Plan-B-Aufgabe (T6-PB):** Historischen Einzeltest-Blocker erneut als Schnellrepro gefahren: `PYTHONPATH=. timeout 120 python3 -m pytest -q tests/detailtests/test_global_search_optimization_helpers.py::test_global_search_skips_deterministic_track_after_strong_stochastic_gain`.
+- **Ergebnis T6-PB:** Exit `0`, `1 passed in 0.17s`; der historische Detailtest bleibt aktuell unauffällig.
+- **Dokuartefakte:** `docs/t6_10_isolation_2026-05-14_run01_summary.md`, `artifacts/converted_images/reports/t6_10_isolation_2026-05-14_run01.log`, `artifacts/converted_images/reports/t6_planb_singletest_2026-05-14_run01.log`.
+- **Nächster sinnvoller Schritt:** T6.9 analog isoliert mit enger Timeout-Grenze fahren und danach entscheiden, ob T6.10 als erledigt markiert werden kann oder ein expliziter Nicht-Skip-Repro in der Zielumgebung benötigt wird.
