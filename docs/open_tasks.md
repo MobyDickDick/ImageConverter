@@ -278,6 +278,13 @@ Deadlock-/Stagnationsschleifen.
 - **Blocker:** Der N1-Vollbereichslauf endet weiterhin per äußerem Timeout (Exit `124`), damit bleibt der Vollbereichsnachweis bis `AC0899` offen.
 - **Nächster sinnvoller Schritt:** Entweder weitere Laufzeitverkürzung für den Vollbereichspfad vorbereiten oder nach dokumentierter Priorisierung auf eine leichtere orthogonale Aufgabe rotieren, bevor der nächste N1-Anlauf erfolgt.
 
+
+### Fortschritt vs. Blocker (Session 2026-05-14, N1 Run DI + N1-PB Run DI_PB)
+
+- **Fortschritt:** Die nächste dokumentierte Primäraufgabe N1 wurde erneut mit der standardisierten Python-`3.10.20`-Toolchain und `timeout 420` ausgeführt; gemäß Kopplungsregel wurde direkt anschließend die Plan-B-Aufgabe (Microbatch `AC0800..AC0809`) erfolgreich abgeschlossen (Exit `0`).
+- **Blocker:** Der N1-Vollbereichslauf endet weiterhin per äußerem Timeout (Exit `124`), damit bleibt der Vollbereichsnachweis bis `AC0899` offen.
+- **Nächster sinnvoller Schritt:** Entweder weitere Laufzeitverkürzung für den Vollbereichspfad vorbereiten oder nach dokumentierter Priorisierung auf eine leichtere orthogonale Aufgabe rotieren, bevor der nächste N1-Anlauf erfolgt.
+
 ### Fortschritt vs. Blocker (Session 2026-05-14, N1 Run DH + N1-PB Run DH_PB)
 
 - **Fortschritt:** Die nächste dokumentierte Primäraufgabe N1 wurde erneut mit der standardisierten Python-`3.10.20`-Toolchain und `timeout 420` ausgeführt; gemäß Kopplungsregel wurde direkt anschließend die Plan-B-Aufgabe (Microbatch `AC0800..AC0809`) erfolgreich abgeschlossen (Exit `0`).
