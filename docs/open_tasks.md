@@ -84,10 +84,11 @@ bis **schwierig/zeitintensiv**):
    _Mittel bis erhöht_: mehr Variantenraum und Auswertungslogik.
 5. **N7 – gezielte AC08-Einzelreferenz-Nachläufe**  
    _Erhöht_: diagnoseintensiv, aber weiterhin begrenzter Scope pro Referenz.
-6. **N2 – Stabilitätsnachweis über längere Laufstrecken konsolidieren**  
-   _Schwierig_: braucht längere Laufzeiten und saubere Evidenzkette.
-7. **N1 – Vollbereich `AC0800..AC0899` mit finalem Exit `0` nachweisen**  
-   _Am schwierigsten_: höchste Laufzeit, größte Timeout-/Stagnationsgefahr.
+6. **Kategorie: ganz zuletzt abarbeiten (wiederholt erfolglos)**
+   - **N2 – Stabilitätsnachweis über längere Laufstrecken konsolidieren**  
+     _Ganz zuletzt_: wiederholt per Timeout/Exit `124` gescheitert; braucht längere Laufzeiten und saubere Evidenzkette.
+   - **N1 – Vollbereich `AC0800..AC0899` mit finalem Exit `0` nachweisen**  
+     _Ganz zuletzt_: höchste Laufzeit, größte Timeout-/Stagnationsgefahr und ebenfalls wiederholt erfolglos.
 
 
 ### Abgeleitete Lightweight-Aufgaben aus Laufzeitfaktoren (2026-05-09)
@@ -1664,3 +1665,15 @@ Details und Akzeptanzkriterien stehen in `docs/kelle_umsetzungscheck.md` unter
 - **Fortschritt:** Die aktuell leichteste dokumentierte Aufgabe wurde erneut direkt abgeschlossen, indem der Session-Stand unmittelbar in `docs/open_tasks.md` nachgepflegt wurde (N3/N4: Run-Dokumentation sofort nach jedem Lauf).
 - **Blocker:** Für N1/N2 besteht weiterhin der bekannte Vollbereichs-Timeout-Blocker (`AC0800..AC0899`), da weiterhin kein vollständiger Durchlauf bis `AC0899` mit finalem Exit `0` vorliegt.
 - **Nächster sinnvoller Schritt:** Als nächstes auf eine leichte/orthogonale Aufgabe mit neuem Artefakt rotieren (vorzugsweise T5.x oder N5), danach erneut den Status hier aktualisieren.
+
+### Fortschritt vs. Blocker (Session 2026-05-14, N3/N4 Dokumentationspflege)
+
+- **Fortschritt:** Die aktuell leichteste offene dokumentierte Aufgabe wurde abgearbeitet, indem die Run-/Task-Dokumentation unmittelbar nach der Session aktualisiert wurde (N3/N4 gemäß Priorisierung leicht → schwierig).
+- **Blocker:** N1/N2 bleiben weiterhin durch Vollbereichs-Laufzeit und Timeout-Grenzen blockiert; ohne neues Diagnoseartefakt ist ein weiterer Vollbereichslauf voraussichtlich erneut risikobehaftet.
+- **Nächster sinnvoller Schritt:** Als nächstes einen kompakten T5.x-Isolationslauf mit klaren Repro-Schritten durchführen und das Ergebnis direkt hier nachpflegen.
+
+### Fortschritt vs. Blocker (Session 2026-05-14, N3/N4-Nachpflege durch Agent)
+
+- **Fortschritt:** Wiederholt erfolglose Aufgaben wurden explizit unter der neuen Kategorie **„ganz zuletzt abarbeiten“** gebündelt (N1/N2), damit die Abarbeitungsreihenfolge den bisherigen Timeout-Erkenntnissen folgt.
+- **Blocker:** Die bekannten Vollbereichs-Timeouts für N1/N2 bleiben unverändert bestehen; ohne neue leichte Diagnoseartefakte ist dort kurzfristig kein stabiler Abschluss zu erwarten.
+- **Nächster sinnvoller Schritt:** Als direkt nächste Aufgabe weiterhin leichte/orthogonale Arbeitspakete (T5/N5/N6/N7) priorisieren und erst danach N1/N2 erneut ansetzen.

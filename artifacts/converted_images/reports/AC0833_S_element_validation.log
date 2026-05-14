@@ -1,6 +1,6 @@
-run-meta: run_seed=439741530 pass_seed_offset=0 nonce_ns=1778695928879792000
+run-meta: run_seed=921507370 pass_seed_offset=0 nonce_ns=1778751845317553600
 status=semantic_ok
-redraw_variation: seed=444127954158 changed_params=cx:7.500->7.403 | cy:17.000->16.997 | r:7.000->7.016 | stroke_circle:1.000->0.996 | arm_stroke:1.000->0.978 | co2_dx:0.000->-0.038 | co2_dy:0.000->-0.002
+redraw_variation: seed=930667032006 changed_params=cx:7.500->7.544 | cy:17.000->17.067 | r:7.000->7.105 | stroke_circle:1.000->1.045 | arm_stroke:1.000->1.109 | co2_dx:0.000->0.061 | co2_dy:0.000->0.038
 semantic-guard: Textmodus aktiv (co2).
 small_variant_mode_active: reason=min_dim, min_dim=12.126, mask_dilate_px=1, text_mode=co2, arm_min_ratio=0.000, stem_min_ratio=0.000
 Runde 1: elementweise Validierung gestartet
@@ -25,7 +25,7 @@ global-search: plateau-repräsentant (runde=1, kandidat=best_sample, err=19.245,
 global-search: Runde 2 best_err=19.245, akzeptierte_kandidaten=0, sigma_mittel=1.707
 global-search: near-optimum-plateau (runde=2, punkte=1, epsilon=0.385, mittlere_spannweite=0.000, stabilitaet=stabil, spannweite=cx:0.000; cy:0.000; r:0.000; arm_x1:0.000; arm_y1:0.000; arm_x2:0.000; arm_y2:0.000)
 global-search: plateau-repräsentant (runde=2, kandidat=best_sample, err=19.245, begründung=niedrigster Fehler in dieser Runde)
-global-search: deterministischer track gestartet (modus=voll, seed=439745629, schritte=2, start_err=19.245)
+global-search: deterministischer track gestartet (modus=voll, seed=921511469, schritte=2, start_err=19.245)
 global-search: intervallhalbierung (pass=1, key=cx, final_step=0.500, iters=3)
 global-search: intervallhalbierung (pass=1, key=cy, final_step=0.562, iters=3)
 global-search: intervallhalbierung (pass=1, key=r, final_step=0.500, iters=0)
@@ -44,8 +44,8 @@ global-search: intervallhalbierung (pass=2, key=arm_y2, final_step=0.100, iters=
 global-search: deterministischer track (pass=2, verbesserungen=0, best_err=19.245)
 global-search: track-vergleich (stochastic_err=19.245, deterministic_err=19.245, gewählt=stochastic)
 global-search: keine relevante Verbesserung
-global-search: evaluate-telemetrie (requests=87, cache_hits=50, hit_rate=0.575, render_aufrufe=37)
-perf_probe: global_search_elapsed round=1 elapsed=0.29s
+global-search: evaluate-telemetrie (requests=87, cache_hits=52, hit_rate=0.598, render_aufrufe=35)
+perf_probe: global_search_elapsed round=1 elapsed=0.27s
 Runde 1: Gesamtfehler=19.245
 Runde 2: elementweise Validierung gestartet
 circle: Fehler=51.243
@@ -69,7 +69,7 @@ global-search: plateau-repräsentant (runde=1, kandidat=best_sample, err=19.245,
 global-search: Runde 2 best_err=19.245, akzeptierte_kandidaten=0, sigma_mittel=1.707
 global-search: near-optimum-plateau (runde=2, punkte=1, epsilon=0.385, mittlere_spannweite=0.000, stabilitaet=stabil, spannweite=cx:0.000; cy:0.000; r:0.000; arm_x1:0.000; arm_y1:0.000; arm_x2:0.000; arm_y2:0.000)
 global-search: plateau-repräsentant (runde=2, kandidat=best_sample, err=19.245, begründung=niedrigster Fehler in dieser Runde)
-global-search: deterministischer track gestartet (modus=voll, seed=439745629, schritte=2, start_err=19.245)
+global-search: deterministischer track gestartet (modus=voll, seed=921511469, schritte=2, start_err=19.245)
 global-search: intervallhalbierung (pass=1, key=cx, final_step=0.500, iters=3)
 global-search: intervallhalbierung (pass=1, key=cy, final_step=0.562, iters=3)
 global-search: intervallhalbierung (pass=1, key=r, final_step=0.500, iters=0)
@@ -88,7 +88,7 @@ global-search: intervallhalbierung (pass=2, key=arm_y2, final_step=0.100, iters=
 global-search: deterministischer track (pass=2, verbesserungen=0, best_err=19.245)
 global-search: track-vergleich (stochastic_err=19.245, deterministic_err=19.245, gewählt=stochastic)
 global-search: keine relevante Verbesserung
-global-search: evaluate-telemetrie (requests=87, cache_hits=50, hit_rate=0.575, render_aufrufe=37)
+global-search: evaluate-telemetrie (requests=87, cache_hits=52, hit_rate=0.598, render_aufrufe=35)
 perf_probe: global_search_elapsed round=2 elapsed=0.03s
 Runde 2: Gesamtfehler=19.245
 Runde 3: elementweise Validierung gestartet
@@ -113,7 +113,7 @@ global-search: plateau-repräsentant (runde=1, kandidat=best_sample, err=19.245,
 global-search: Runde 2 best_err=19.245, akzeptierte_kandidaten=0, sigma_mittel=1.707
 global-search: near-optimum-plateau (runde=2, punkte=1, epsilon=0.385, mittlere_spannweite=0.000, stabilitaet=stabil, spannweite=cx:0.000; cy:0.000; r:0.000; arm_x1:0.000; arm_y1:0.000; arm_x2:0.000; arm_y2:0.000)
 global-search: plateau-repräsentant (runde=2, kandidat=best_sample, err=19.245, begründung=niedrigster Fehler in dieser Runde)
-global-search: deterministischer track gestartet (modus=voll, seed=439745629, schritte=2, start_err=19.245)
+global-search: deterministischer track gestartet (modus=voll, seed=921511469, schritte=2, start_err=19.245)
 global-search: intervallhalbierung (pass=1, key=cx, final_step=0.500, iters=3)
 global-search: intervallhalbierung (pass=1, key=cy, final_step=0.562, iters=3)
 global-search: intervallhalbierung (pass=1, key=r, final_step=0.500, iters=0)
@@ -154,7 +154,7 @@ global-search: plateau-repräsentant (runde=1, kandidat=best_sample, err=19.245,
 global-search: Runde 2 best_err=19.245, akzeptierte_kandidaten=0, sigma_mittel=1.707
 global-search: near-optimum-plateau (runde=2, punkte=1, epsilon=0.385, mittlere_spannweite=0.000, stabilitaet=stabil, spannweite=cx:0.000; cy:0.000; r:0.000; arm_x1:0.000; arm_y1:0.000; arm_x2:0.000; arm_y2:0.000)
 global-search: plateau-repräsentant (runde=2, kandidat=best_sample, err=19.245, begründung=niedrigster Fehler in dieser Runde)
-global-search: deterministischer track gestartet (modus=voll, seed=439745629, schritte=2, start_err=19.245)
+global-search: deterministischer track gestartet (modus=voll, seed=921511469, schritte=2, start_err=19.245)
 global-search: intervallhalbierung (pass=1, key=cx, final_step=0.500, iters=3)
 global-search: intervallhalbierung (pass=1, key=cy, final_step=0.562, iters=3)
 global-search: intervallhalbierung (pass=1, key=r, final_step=0.500, iters=0)
