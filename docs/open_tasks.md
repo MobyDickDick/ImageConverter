@@ -1664,3 +1664,9 @@ Details und Akzeptanzkriterien stehen in `docs/kelle_umsetzungscheck.md` unter
 - **Fortschritt:** Die aktuell leichteste dokumentierte Aufgabe wurde erneut direkt abgeschlossen, indem der Session-Stand unmittelbar in `docs/open_tasks.md` nachgepflegt wurde (N3/N4: Run-Dokumentation sofort nach jedem Lauf).
 - **Blocker:** Für N1/N2 besteht weiterhin der bekannte Vollbereichs-Timeout-Blocker (`AC0800..AC0899`), da weiterhin kein vollständiger Durchlauf bis `AC0899` mit finalem Exit `0` vorliegt.
 - **Nächster sinnvoller Schritt:** Als nächstes auf eine leichte/orthogonale Aufgabe mit neuem Artefakt rotieren (vorzugsweise T5.x oder N5), danach erneut den Status hier aktualisieren.
+
+### Fortschritt vs. Blocker (Session 2026-05-14, N3/N4 Dokumentationspflege)
+
+- **Fortschritt:** Die aktuell leichteste offene dokumentierte Aufgabe wurde abgearbeitet, indem die Run-/Task-Dokumentation unmittelbar nach der Session aktualisiert wurde (N3/N4 gemäß Priorisierung leicht → schwierig).
+- **Blocker:** N1/N2 bleiben weiterhin durch Vollbereichs-Laufzeit und Timeout-Grenzen blockiert; ohne neues Diagnoseartefakt ist ein weiterer Vollbereichslauf voraussichtlich erneut risikobehaftet.
+- **Nächster sinnvoller Schritt:** Als nächstes einen kompakten T5.x-Isolationslauf mit klaren Repro-Schritten durchführen und das Ergebnis direkt hier nachpflegen.
