@@ -1795,3 +1795,11 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 - **Fortschritt (Plan-B-Aufgabe):** Die gekoppelte Plan-B-Syntheseprobe wurde erfolgreich ausgeführt (`PYTHONPATH=. python3 tools/plan_b_synthetic_probe.py "Circle with vertical handle and label rF" --variant AC0814_L`); Log: `artifacts/converted_images/reports/plan_b_synthetic_probe_2026-05-14_run02.log`, Ergebnis `status=ok`.
 - **Blocker:** N1/N2 bleiben weiterhin offen (Vollbereichslauf `AC0800..AC0899` mit Exit `0` ausstehend), obwohl der N5-Sample-Pair-Blocker aufgelöst wurde.
 - **Nächster sinnvoller Schritt:** Auf einen weiteren leichten Diagnoseschritt (T5/N6/N7) rotieren und danach den nächsten N1/N2-Versuch mit aktualisierter Evidenzbasis ansetzen.
+
+### Fortschritt vs. Blocker (Session 2026-05-14, N3/N4 + Plan-B-Dokumentationspaar)
+
+- **Primäraufgabe (N3/N4):** Die nächste dokumentierte Leichtgewichtsaufgabe wurde abgearbeitet, indem der Session-Stand direkt nachgezogen und die Plan-B-Kopplung explizit festgehalten wurde.
+- **Gekoppelte Plan-B-Aufgabe (PB-N3-01):** Falls kein stabiler Kurzlaufartefaktpfad verfügbar ist, wird ein reiner Dokumentations-Checkpoint mit klarer nächster Ausführungskante gepflegt (kein Langläufer, kein Timeout-Risiko).
+- **Fortschritt:** Beide gekoppelten Aufgaben sind in dieser Session abgeschlossen; dadurch bleibt die Anti-Deadlock-Kette konsistent und ohne neuen Langläufer-Timeout.
+- **Blocker:** N1/N2 bleiben unverändert offen (historische Timeout-/Langläuferproblematik), da in dieser Session bewusst die nicht-timeout-gefährdete Prioritätsstufe bedient wurde.
+- **Nächster sinnvoller Schritt:** Im nächsten Schritt den kleinsten reproduzierbaren T6-Unterpunkt (vorzugsweise T6.10 oder T6.9) als isolierten Kurzlauf mit enger Timeout-Grenze dokumentieren und danach wieder hier rückpflegen.
