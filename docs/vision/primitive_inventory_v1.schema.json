@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://imageconverter.local/schemas/primitive-inventory-v1.schema.json",
+  "title": "Primitive Inventory v1",
+  "type": "object",
+  "required": ["image_id", "source", "primitives"],
+  "properties": {
+    "image_id": {"type": "string"},
+    "source": {"type": "string", "enum": ["ground_truth", "prediction"]},
+    "primitives": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "type", "confidence", "parameters"],
+        "properties": {
+          "id": {"type": "string"},
+          "type": {
+            "type": "string",
+            "enum": ["circle", "line", "ellipse", "rect", "text", "polygon", "path_curve"]
+          },
+          "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+          "parameters": {"type": "object", "additionalProperties": true},
+          "style": {
+            "type": "object",
+            "properties": {
+              "fill": {"type": ["string", "null"]},
+              "stroke": {"type": ["string", "null"]},
+              "stroke_width": {"type": ["number", "null"]}
+            },
+            "additionalProperties": true
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

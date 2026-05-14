@@ -6,7 +6,7 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-05-14)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `251` · Erledigt `221` · Offen `30`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `251` · Erledigt `222` · Offen `29`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -22,7 +22,7 @@ Zielbild: Nicht-binäre Vektorisierung über echte SVG-Primitive mit semantische
 
 ### Neue Aufgabenpakete (Vision-Track)
 
-- [ ] **V1 – Primitive-Inventar v1 spezifizieren und messbar machen**
+- [x] **V1 – Primitive-Inventar v1 spezifizieren und messbar machen** (2026-05-14: Schema + Baseline-Metriken inkl. Precision/Recall je Primitive-Typ in `docs/primitive_inventory_v1_baseline_2026-05-14.md` und `artifacts/evaluation/primitive_inventory_v1/metrics.json` dokumentiert.)
   - Scope: Kreis, Gerade/Linie, Ellipse, Rechteck, Buchstaben/Text, Polygon-/Pfadkurven.
   - Deliverable: maschinenlesbares Schema (z. B. JSON) inkl. Parameter pro Primitive und Confidence.
   - Akzeptanz: Für einen Test-Batch wird je Elementtyp Precision/Recall ausgewiesen.
