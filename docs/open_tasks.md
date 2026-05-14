@@ -89,6 +89,7 @@ Zielbild: Nicht-binäre Vektorisierung über echte SVG-Primitive mit semantische
 ### Neue Zusatzaufgabe (Session 2026-05-14)
 
 - [x] **N8 – Plan-B-Syntheseprobe (Beschreibung → SVG → JPG → Rauschen → Konvertierung)** (2026-05-14: Tool `tools/plan_b_synthetic_probe.py` ergänzt und Beispielausführung mit `variant=AC0080_L` dokumentiert; Ergebnisartefakt unter `artifacts/converted_images/converted_svgs/AC0080_L.svg` aktualisiert.)
+- [ ] **N9 – Plan-B-Einzelprobe für `AC0212_L.svg` anlegen** (Scope: `artifacts/images_to_convert/samples/AC0212_L.svg`; Deliverable: klarer Kurzlauf-Befehl + Summary-Datei analog zu den bestehenden Plan-B-Microbatch-Reports, damit bei Blockern sofort auf diese isolierte Referenz rotiert werden kann.)
 
 
 Arbeitsreihenfolge für die nächsten Sessions (explizit von **leicht zu erledigen**
