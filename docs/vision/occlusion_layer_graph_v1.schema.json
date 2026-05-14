@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://imageconverter.local/schemas/occlusion_layer_graph_v1.schema.json",
+  "title": "Occlusion Layer Graph v1",
+  "type": "object",
+  "required": ["scene_id", "nodes", "relations"],
+  "properties": {
+    "scene_id": {"type": "string", "minLength": 1},
+    "nodes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "primitive", "z"],
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "primitive": {"type": "string", "minLength": 1},
+          "z": {"type": "integer"}
+        },
+        "additionalProperties": false
+      }
+    },
+    "relations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type", "confidence"],
+        "properties": {
+          "type": {"enum": ["covers", "behind", "continues_behind"]},
+          "front": {"type": "string"},
+          "back": {"type": "string"},
+          "occluder": {"type": "string"},
+          "occluded": {"type": "string"},
+          "confidence": {"type": "number", "minimum": 0.0, "maximum": 1.0}
+        },
+        "allOf": [
+          {
+            "if": {"properties": {"type": {"const": "covers"}}},
+            "then": {"required": ["front", "back"]}
+          },
+          {
+            "if": {"properties": {"type": {"const": "behind"}}},
+            "then": {"required": ["front", "back"]}
+          },
+          {
+            "if": {"properties": {"type": {"const": "continues_behind"}}},
+            "then": {"required": ["occluder", "occluded"]}
+          }
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

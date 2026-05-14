@@ -6,7 +6,7 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-05-14)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `251` · Erledigt `224` · Offen `27`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `251` · Erledigt `225` · Offen `26`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -37,7 +37,7 @@ Zielbild: Nicht-binäre Vektorisierung über echte SVG-Primitive mit semantische
   - Deliverable: Gradient-Parameterisierung pro Shape inkl. Stop-Positionen.
   - Akzeptanz: Gradient-Metrik (DeltaE/Pixeldelta) verbessert sich gegenüber Flat-Fill-Baseline.
 
-- [ ] **V4 – Überdeckungen/Z-Order explizit erkennen**
+- [x] **V4 – Überdeckungen/Z-Order explizit erkennen** (2026-05-14: Layer-Graph-Schema + Baseline-Artefakt in `docs/v4_occlusion_zorder_model_2026-05-14.md`, `docs/vision/occlusion_layer_graph_v1.schema.json` und `artifacts/evaluation/occlusion_layer_graph_v1/baseline_scene_graph.json` dokumentiert.)
   - Scope: Vorder-/Hintergrundbeziehungen, partielle Verdeckung, verdeckte Fortsetzungen.
   - Deliverable: Layer-Graph mit Occlusion-Relationen (`covers`, `behind`, `continues_behind`).
   - Akzeptanz: Szenen mit teilverdeckteten Griffen/Verbindungen werden konsistent rekonstruiert.
