@@ -27,3 +27,8 @@ def test_semantic_presence_mismatches_reports_missing_and_unexpected_items() -> 
     assert "Beschreibung erwartet Kreis, im Bild aber nicht robust erkennbar" in mismatches
     assert "Beschreibung erwartet waagrechter Strich, im Bild aber nicht robust erkennbar" in mismatches
     assert "Im Bild ist senkrechter Strich erkennbar, aber nicht in der Beschreibung enthalten" in mismatches
+
+
+def test_observed_semantic_presence_from_shape_detection_handles_missing_image() -> None:
+    observed = semantic_validation_helpers.observedSemanticPresenceFromShapeDetectionImpl(None)
+    assert observed == {"circle": False, "stem": False, "arm": False, "text": False}

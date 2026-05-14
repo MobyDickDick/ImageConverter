@@ -1863,3 +1863,10 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 - **Fortschritt (gekoppelte Plan-B-Aufgabe):** Die gekoppelte Plan-B-Syntheseprobe wurde erfolgreich ausgeführt (`PYTHONPATH=. python3 tools/plan_b_synthetic_probe.py "Circle with vertical handle and label rF" --variant AC0811_M`); Log: `artifacts/converted_images/reports/plan_b_synthetic_probe_2026-05-14_run08.log`, Ergebnis `status=ok`, Exit `0`.
 - **Blocker:** In der Default-Python-3.12-Umgebung sind OpenCV/Numpy-Artefakte weiterhin nicht lauffähig (ABI-/Interpreter-Mismatch), daher laufen neue OpenCV-basierte Tests aktuell als `skipped` bzw. müssen in der bestätigten 3.10-Toolchain ausgeführt werden.
 - **Nächster sinnvoller Schritt:** Als nächstes **S6** (Integration in bestehende Semantik-Validierung) als letzten offenen Shape-Detection-Block umsetzen.
+
+### Fortschritt vs. Blocker (Session 2026-05-14, S6 + Plan-B-Syntheseprobe AC0814_M)
+
+- **Fortschritt (Primäraufgabe S6):** Die dokumentierte Primäraufgabe **S6** wurde umgesetzt: Shape-Detection-Ergebnisse sind jetzt in die Semantik-Validierung integriert (`observedSemanticPresenceFromShapeDetectionImpl(...)` als Best-Effort-Pfad), und die aus Masken/Strukturprüfung ermittelte `observed`-Präsenz wird um diese Zusatzindizien ergänzt.
+- **Fortschritt (gekoppelte Plan-B-Aufgabe):** Die gekoppelte Plan-B-Syntheseprobe wurde ausgeführt (`PYTHONPATH=. python3 tools/plan_b_synthetic_probe.py "Triangle with vertical handle" --variant AC0814_M`); Log: `artifacts/converted_images/reports/plan_b_synthetic_probe_2026-05-14_run09.log`, Ergebnis `status=ok`, Exit `0`.
+- **Blocker:** Die lokale Default-Umgebung meldet weiterhin fehlendes `numpy` für OpenCV-Bindings; der Plan-B-Lauf blieb dennoch erfolgreich und schrieb wie erwartet die Artefakte.
+- **Nächster sinnvoller Schritt:** Einen kompakten Integrationslauf auf der bestätigten OpenCV-fähigen Toolchain (Python `3.10.20`) ausführen, um die neue S6-Verknüpfung mit aktivem Shape-Detection-Pfad zu verifizieren.
