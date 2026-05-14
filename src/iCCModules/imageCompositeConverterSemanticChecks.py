@@ -6,6 +6,7 @@ import math
 from collections.abc import Callable
 from typing import Any
 
+from src.iCCModules import imageCompositeConverterSemanticValidation as semantic_validation_helpers
 
 def detectSemanticPrimitivesImpl(
     img_orig: Any,
@@ -408,6 +409,9 @@ def validateSemanticDescriptionAlignmentImpl(
         ),
         "text": bool(local_support["text"] or (structural.get("text", False) and not plain_circle_badge)),
     }
+    shape_detection_observed = semantic_validation_helpers.observedSemanticPresenceFromShapeDetectionImpl(img_orig)
+    for key in ("circle", "stem", "arm", "text"):
+        observed[key] = bool(observed.get(key, False) or shape_detection_observed.get(key, False))
 
     issues = semantic_presence_mismatches_fn(expected, observed)
 

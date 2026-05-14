@@ -6,7 +6,7 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-05-14)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `251` · Erledigt `229` · Offen `22`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `255` · Erledigt `238` · Offen `17`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -278,6 +278,12 @@ Deadlock-/Stagnationsschleifen.
 - **Blocker:** Der N1-Vollbereichslauf endet weiterhin per äußerem Timeout (Exit `124`), damit bleibt der Vollbereichsnachweis bis `AC0899` offen.
 - **Nächster sinnvoller Schritt:** Entweder weitere Laufzeitverkürzung für den Vollbereichspfad vorbereiten oder nach dokumentierter Priorisierung auf eine leichtere orthogonale Aufgabe rotieren, bevor der nächste N1-Anlauf erfolgt.
 
+### Fortschritt vs. Blocker (Session 2026-05-14, N1 Run DH + N1-PB Run DH_PB)
+
+- **Fortschritt:** Die nächste dokumentierte Primäraufgabe N1 wurde erneut mit der standardisierten Python-`3.10.20`-Toolchain und `timeout 420` ausgeführt; gemäß Kopplungsregel wurde direkt anschließend die Plan-B-Aufgabe (Microbatch `AC0800..AC0809`) erfolgreich abgeschlossen (Exit `0`).
+- **Blocker:** Der N1-Vollbereichslauf endet weiterhin per äußerem Timeout (Exit `124`), damit bleibt der Vollbereichsnachweis bis `AC0899` offen.
+- **Nächster sinnvoller Schritt:** Entweder weitere Laufzeitverkürzung für den Vollbereichspfad vorbereiten oder nach dokumentierter Priorisierung auf eine leichtere orthogonale Aufgabe rotieren, bevor der nächste N1-Anlauf erfolgt.
+
 ### Fortschritt vs. Blocker (Session 2026-05-14, N1 Run DB + N1-PB Run DB_PB)
 
 - **Fortschritt:** Die nächste dokumentierte Primäraufgabe N1 wurde erneut mit der standardisierten Python-`3.10.20`-Toolchain und `timeout 420` ausgeführt; gemäß Kopplungsregel wurde direkt anschließend die Plan-B-Aufgabe (Microbatch `AC0800..AC0809`) erfolgreich abgeschlossen (Exit `0`).
@@ -376,6 +382,8 @@ Deadlock-/Stagnationsschleifen.
   - 2026-05-14: N1-PB direkt nach Run DE ausgeführt (`AC0800..AC0809`, gleiche Runtime-Parameter); Microbatch endet mit Exit `0`, Fortschritt/Artefakt in `artifacts/converted_images/reports/AC0800_AC0809_microbatch_2026-05-14_runDE_PB.log` (Summary: `docs/ac0800_ac0809_planb_runDE_2026-05-14_summary.md`).
   - 2026-05-14: Run DG mit `timeout 420` + Python `3.10.20` gestartet; Prozessende erneut mit Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runDG_2026-05-14_summary.md`).
   - 2026-05-14: N1-PB direkt nach Run DG ausgeführt (`AC0800..AC0809`, gleiche Runtime-Parameter); Microbatch endet mit Exit `0`, Fortschritt/Artefakt in `artifacts/converted_images/reports/AC0800_AC0809_microbatch_2026-05-14_runDG_PB.log` (Summary: `docs/ac0800_ac0809_planb_runDG_2026-05-14_summary.md`).
+  - 2026-05-14: Run DH mit `timeout 420` + Python `3.10.20` gestartet; Prozessende erneut mit Timeout-Exit `124` (kein finaler Exit-`0`; Summary: `docs/ac0800_ac0899_runDH_2026-05-14_summary.md`).
+  - 2026-05-14: N1-PB direkt nach Run DH ausgeführt (`AC0800..AC0809`, gleiche Runtime-Parameter); Microbatch endet mit Exit `0`, Fortschritt/Artefakt in `artifacts/converted_images/reports/AC0800_AC0809_microbatch_2026-05-14_runDH_PB.log` (Summary: `docs/ac0800_ac0809_planb_runDH_2026-05-14_summary.md`).
   - Abschlusskriterium: vollständiger Durchlauf bis `AC0899` ohne `timeout`-Abbruch und mit finalem Prozessstatus `0`.
 
 - [ ] N2: Stabilitätsnachweis für den Vollbereich dokumentieren.
@@ -531,6 +539,7 @@ Deadlock-/Stagnationsschleifen.
 - [ ] T6: Sämtliche aktuell blockierenden Langläufer-Tests identifizieren und priorisiert abbauen (Stand: Volltest-Isolation vom 2026-05-03).
   - 2026-05-14: T6-Inventur aktualisiert (siehe `docs/t6_blocking_langlaeufer_inventory_2026-05-14.md`): dominanter Blocker weiterhin N1/N2-Vollbereichslaufzeit; historischer Einzeltest-Blocker `test_global_search_skips_deterministic_track_after_strong_stochastic_gain` im Schnellrepro aktuell grün (`1 passed`, `0.18s`).
   - [x] T6-PB (Plan-B, 2026-05-14): Historischen Einzeltest-Blocker als Kurzrepro fahren, falls kein neuer sofortiger Langlauf-Abbau ohne Timeout möglich ist.
+    - 2026-05-14 (Run 02): Wiederholung weiterhin grün mit Exit `0` (`1 passed`), Log: `artifacts/converted_images/reports/t6_planb_singletest_2026-05-14_run02.log`.
     - Ergebnis: `pytest -q tests/detailtests/test_global_search_optimization_helpers.py::test_global_search_skips_deterministic_track_after_strong_stochastic_gain` => Exit `0`, `1 passed in 0.18s`.
   - Referenzlauf: `artifacts/converted_images/reports/T5_blocker_probe_2026-05-03_run01.log` (`829 passed, 1 skipped`, Laufzeit `1574.93s`).
   - Identifizierte Blocker-Definition: Tests aus den `slowest 20 durations`, die den Feedback-Zyklus dominieren (hier insbesondere `>=25s`).
@@ -568,6 +577,7 @@ Deadlock-/Stagnationsschleifen.
   - [ ] T6.9 (mittel-hohe Priorität): `tests/test_image_composite_converter.py::test_validate_badge_by_elements_activates_ac08_adaptive_unlocks_on_stagnation` reduzieren (aktuell `65.09s`).
     - Akzeptanzkriterium: isoliert <= `45s`, Unlock-Verhalten bleibt testbar erhalten.
   - [ ] T6.10 (mittel-hohe Priorität): `tests/test_image_composite_converter.py::test_validate_badge_logs_extent_bracketing_for_line_elements` reduzieren (aktuell `51.61s`).
+    - 2026-05-14: Run 02 als timeout-gesicherter Isolationslauf erneut ausgeführt (`timeout 180 ...::test_validate_badge_logs_extent_bracketing_for_line_elements`), Ergebnis weiterhin `skipped` bei Exit `0`; siehe `docs/t6_10_isolation_2026-05-14_run02_summary.md` und `artifacts/converted_images/reports/t6_10_isolation_2026-05-14_run02.log`.
     - Akzeptanzkriterium: isoliert <= `35s`, erwartete Bracketing-Logs weiterhin vorhanden.
   - [ ] T6.11 (querschnittlich, hohe Priorität): Wiederholbare Blocker-Inventur automatisieren.
     - Befehl: `python -m pytest --maxfail=1 -vv --durations=20`.
@@ -1744,7 +1754,7 @@ Details und Akzeptanzkriterien stehen in `docs/kelle_umsetzungscheck.md` unter
 
 ## Neue Aufgaben: Formen-Erkennung (Kreis, Dreieck, Pfeil, Viereck) + Linien-/Farbmessung (angelegt 2026-05-14)
 
-**Aufgabenzähler (S1–S6):** Gesamt `6` · Erledigt `5` · Offen `1`
+**Aufgabenzähler (S1–S6):** Gesamt `6` · Erledigt `6` · Offen `0`
 
 > Hinweis: Beim Abhaken bitte den Zähler direkt mit aktualisieren, damit der Fortschritt sofort sichtbar bleibt.
 
@@ -1775,7 +1785,7 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
   - Deliverables: `tests/`-Fixtures, Annotationen, Metrikreport (`csv/json`) pro Lauf.
   - Akzeptanz: CI-fähiger Testlauf mit min. 1 synthetischem + 1 realem Beispiel je Klasse.
 
-- [ ] **S6 – Integration in bestehende Semantik-Validierung**
+- [x] **S6 – Integration in bestehende Semantik-Validierung**
   - Ziel: Erkennungsresultate in bestehende `semantic_*`-Logs einspeisen (z. B. „vertical_line_detected=true, width_px=...“).
   - Akzeptanz: Neue Logzeilen in `element_validation.log` und mindestens ein Integrationstest.
 
@@ -1863,3 +1873,19 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 - **Fortschritt (gekoppelte Plan-B-Aufgabe):** Die gekoppelte Plan-B-Syntheseprobe wurde erfolgreich ausgeführt (`PYTHONPATH=. python3 tools/plan_b_synthetic_probe.py "Circle with vertical handle and label rF" --variant AC0811_M`); Log: `artifacts/converted_images/reports/plan_b_synthetic_probe_2026-05-14_run08.log`, Ergebnis `status=ok`, Exit `0`.
 - **Blocker:** In der Default-Python-3.12-Umgebung sind OpenCV/Numpy-Artefakte weiterhin nicht lauffähig (ABI-/Interpreter-Mismatch), daher laufen neue OpenCV-basierte Tests aktuell als `skipped` bzw. müssen in der bestätigten 3.10-Toolchain ausgeführt werden.
 - **Nächster sinnvoller Schritt:** Als nächstes **S6** (Integration in bestehende Semantik-Validierung) als letzten offenen Shape-Detection-Block umsetzen.
+
+### Fortschritt vs. Blocker (Session 2026-05-14, S6 + Plan-B-Syntheseprobe AC0814_M)
+
+- **Fortschritt (Primäraufgabe S6):** Die dokumentierte Primäraufgabe **S6** wurde umgesetzt: Shape-Detection-Ergebnisse sind jetzt in die Semantik-Validierung integriert (`observedSemanticPresenceFromShapeDetectionImpl(...)` als Best-Effort-Pfad), und die aus Masken/Strukturprüfung ermittelte `observed`-Präsenz wird um diese Zusatzindizien ergänzt.
+- **Fortschritt (gekoppelte Plan-B-Aufgabe):** Die gekoppelte Plan-B-Syntheseprobe wurde ausgeführt (`PYTHONPATH=. python3 tools/plan_b_synthetic_probe.py "Triangle with vertical handle" --variant AC0814_M`); Log: `artifacts/converted_images/reports/plan_b_synthetic_probe_2026-05-14_run09.log`, Ergebnis `status=ok`, Exit `0`.
+- **Blocker:** Die lokale Default-Umgebung meldet weiterhin fehlendes `numpy` für OpenCV-Bindings; der Plan-B-Lauf blieb dennoch erfolgreich und schrieb wie erwartet die Artefakte.
+- **Nächster sinnvoller Schritt:** Einen kompakten Integrationslauf auf der bestätigten OpenCV-fähigen Toolchain (Python `3.10.20`) ausführen, um die neue S6-Verknüpfung mit aktivem Shape-Detection-Pfad zu verifizieren.
+
+
+### Fortschritt vs. Blocker (Session 2026-05-14, S6-Verifikationslauf + Plan-B-Syntheseprobe AC0812_M)
+
+- **Fortschritt (Primäraufgabe):** Die nächste dokumentierte Aufgabe nach S6-Implementierung (S6-Verifikation auf der OpenCV-fähigen Toolchain) wurde als kompakter Integrationslauf ausgeführt: `PYENV_VERSION=3.10.20 PYTHONPATH=. pyenv exec python -m pytest -q tests/test_shape_detection_colors.py tests/test_shape_detection_classification.py tests/test_shape_detection_eval.py`.
+- **Ergebnis Primäraufgabe:** Exit `0`, `5 passed in 0.66s`; damit ist der zuvor offene Verifikationsschritt auf Python `3.10.20` nachgewiesen.
+- **Fortschritt (gekoppelte Plan-B-Aufgabe):** Die gekoppelte Plan-B-Syntheseprobe wurde ausgeführt (`PYTHONPATH=. python3 tools/plan_b_synthetic_probe.py "Circle with horizontal line" --variant AC0812_M`), Log: `artifacts/converted_images/reports/plan_b_synthetic_probe_2026-05-14_run10.log`, Ergebnis `status=ok`, Exit `0`.
+- **Blocker:** In der Default-Umgebung bleibt der bekannte NumPy/OpenCV-Hinweis bestehen; die fachliche Abarbeitung ist dennoch abgeschlossen, da der Primärnachweis in der vorgesehenen 3.10-Toolchain erfolgreich war.
+- **Nächster sinnvoller Schritt:** Auf die nächste offene dokumentierte Aufgabe außerhalb des S-Blocks (z. B. T5/N6/N7) rotieren und erneut mit gekoppelter Plan-B-Aufgabe dokumentieren.
