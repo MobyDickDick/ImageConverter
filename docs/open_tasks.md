@@ -4,6 +4,12 @@ This checklist only tracks work that is actionable for the ImageConverter in the
 current repository snapshot. Older unrelated language/compiler/runtime tasks were removed so the list stays
 focused on the actual project scope.
 
+## Aufgaben-Gesamtzähler (Snapshot 2026-05-14)
+
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `251` · Erledigt `221` · Offen `30`
+
+> Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
+
 ## Neue Vision-Roadmap: semantische SVG-Rekonstruktion (abgeglichen am 2026-05-10)
 
 Zielbild: Nicht-binäre Vektorisierung über echte SVG-Primitive mit semantischen Beziehungen und iterativer Nachzeichnung.
@@ -1677,3 +1683,41 @@ Details und Akzeptanzkriterien stehen in `docs/kelle_umsetzungscheck.md` unter
 - **Fortschritt:** Wiederholt erfolglose Aufgaben wurden explizit unter der neuen Kategorie **„ganz zuletzt abarbeiten“** gebündelt (N1/N2), damit die Abarbeitungsreihenfolge den bisherigen Timeout-Erkenntnissen folgt.
 - **Blocker:** Die bekannten Vollbereichs-Timeouts für N1/N2 bleiben unverändert bestehen; ohne neue leichte Diagnoseartefakte ist dort kurzfristig kein stabiler Abschluss zu erwarten.
 - **Nächster sinnvoller Schritt:** Als direkt nächste Aufgabe weiterhin leichte/orthogonale Arbeitspakete (T5/N5/N6/N7) priorisieren und erst danach N1/N2 erneut ansetzen.
+
+## Neue Aufgaben: Formen-Erkennung (Kreis, Dreieck, Pfeil, Viereck) + Linien-/Farbmessung (angelegt 2026-05-14)
+
+**Aufgabenzähler (S1–S6):** Gesamt `6` · Erledigt `0` · Offen `6`
+
+> Hinweis: Beim Abhaken bitte den Zähler direkt mit aktualisieren, damit der Fortschritt sofort sichtbar bleibt.
+
+Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validierungslogik für Kreis-/Kellen-Badges und semantische Pfade, aber **keine eigenständige allgemeine Erkennungssoftware** für die vier gewünschten Grundformen inkl. vertikaler Linien-Breiten- und Farbdetektion als separates Modul mit eigenen Qualitätsmetriken.
+
+- [ ] **S1 – Shape-Detection API spezifizieren**
+  - Eingabe: Rasterbild (PNG/JPG), optional ROI/Skalierung.
+  - Ausgabe: Liste erkannter Primitive (`circle`, `triangle`, `arrow`, `rectangle`, `line`) mit `bbox`, `polygon/params`, `confidence`, `stroke_width_px`, `fill_color`, `stroke_color`.
+  - Akzeptanz: JSON-Schema + Beispielausgaben für 10 Referenzbilder versioniert.
+
+- [ ] **S2 – Vertikale Linienerkennung ("senkrechter Griff") implementieren**
+  - Ziel: Für Aussagen wie „Kelle mit senkrechtem Griff unten“ robuste Detektion von Position, Länge, Winkelabweichung und Breite.
+  - Methode: Kanten + Hough-Linien + Segment-Merging + Richtungsklassifikation (`|angle-90°| <= tol`).
+  - Akzeptanz: MAE für x-Position/Breite auf annotiertem Mini-Datensatz unter definiertem Schwellwert.
+
+- [ ] **S3 – Farbdetektion pro Primitive ergänzen**
+  - Ziel: Dominante Füll-/Konturfarbe je erkanntem Objekt liefern (RGB/HEX + optional DeltaE-Konfidenz).
+  - Methode: Maskierte Pixelstatistik, Outlier-Robustheit, getrennt für Stroke und Fill.
+  - Akzeptanz: Farbabstand zu Ground-Truth unter Schwellwert (z. B. DeltaE95 < Zielwert).
+
+- [ ] **S4 – Dreieck-/Pfeil-/Viereck-Klassifikation aufbauen**
+  - Ziel: Konturbasierte Unterscheidung zwischen Dreieck, Viereck und Pfeil (inkl. Schaft+Spitze-Heuristik).
+  - Methode: Konturapproximation, Eckenzahl, Konvexität, Achsen-/Symmetrie-Features.
+  - Akzeptanz: Precision/Recall/F1 je Klasse auf Testset dokumentiert.
+
+- [ ] **S5 – Testset + Evaluationspipeline erstellen**
+  - Ziel: Reproduzierbare Qualitätsprüfung für alle 5 Primitive (inkl. Linie).
+  - Deliverables: `tests/`-Fixtures, Annotationen, Metrikreport (`csv/json`) pro Lauf.
+  - Akzeptanz: CI-fähiger Testlauf mit min. 1 synthetischem + 1 realem Beispiel je Klasse.
+
+- [ ] **S6 – Integration in bestehende Semantik-Validierung**
+  - Ziel: Erkennungsresultate in bestehende `semantic_*`-Logs einspeisen (z. B. „vertical_line_detected=true, width_px=...“).
+  - Akzeptanz: Neue Logzeilen in `element_validation.log` und mindestens ein Integrationstest.
+
