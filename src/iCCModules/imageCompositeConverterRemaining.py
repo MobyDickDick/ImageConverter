@@ -1178,10 +1178,38 @@ def convertRange(
         harmonize_semantic_size_variants_fn=_harmonizeSemanticSizeVariants,
         run_post_conversion_reporting_fn=_runPostConversionReporting,
     )
+    _moveNonconvertableSources(folder_path=folder_path, batch_failures=batch_failures)
 
     Action.STOCHASTIC_SEED_OFFSET = 0
     Action.STOCHASTIC_RUN_SEED = 0
     return out_root
+
+
+def _moveNonconvertableSources(*, folder_path: str, batch_failures: list[dict[str, str]]) -> int:
+    failed_names = {
+        str(entry.get("filename", "")).strip()
+        for entry in batch_failures
+        if str(entry.get("status", "")).strip() in {"render_failure", "batch_error", "semantic_mismatch"}
+    }
+    failed_names = {name for name in failed_names if name}
+    if not failed_names:
+        return 0
+
+    source_dir = Path(folder_path)
+    nonconvertable_dir = source_dir / "nonconvertable"
+    nonconvertable_dir.mkdir(parents=True, exist_ok=True)
+
+    moved = 0
+    for failed_name in sorted(failed_names):
+        source_path = source_dir / failed_name
+        if not source_path.exists() or not source_path.is_file():
+            continue
+        target_path = nonconvertable_dir / source_path.name
+        if target_path.exists():
+            target_path.unlink()
+        source_path.rename(target_path)
+        moved += 1
+    return moved
 
 def _readSvgGeometry(svg_path: str) -> tuple[int, int, dict] | None:
     return semantic_geometry_helpers.readSvgGeometryImpl(svg_path, action_t_path_d=Action.T_PATH_D)
