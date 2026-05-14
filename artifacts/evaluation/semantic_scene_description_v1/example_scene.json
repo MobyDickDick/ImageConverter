@@ -1,0 +1,48 @@
+{
+  "scene_id": "kelle_rf_v1",
+  "canvas": { "width": 512, "height": 512, "units": "px" },
+  "objects": [
+    {
+      "id": "bowl_1",
+      "type": "ladle_bowl",
+      "geometry": { "cx": 180, "cy": 250, "r": 42 },
+      "style": { "stroke": "#111111", "stroke_width": 6, "fill": "none" },
+      "confidence": 0.96
+    },
+    {
+      "id": "handle_1",
+      "type": "ladle_handle",
+      "geometry": { "x1": 220, "y1": 250, "x2": 430, "y2": 250 },
+      "style": { "stroke": "#111111", "stroke_width": 6, "fill": "none" },
+      "confidence": 0.94
+    },
+    {
+      "id": "label_rf",
+      "type": "text_label",
+      "geometry": { "x": 120, "y": 180, "text": "rF" },
+      "style": { "stroke": "none", "stroke_width": 0, "fill": "#111111" },
+      "confidence": 0.88
+    }
+  ],
+  "relations": [
+    { "subject": "handle_1", "predicate": "attached_to", "object": "bowl_1", "tolerance_px": 4 },
+    { "subject": "label_rf", "predicate": "above", "object": "bowl_1" },
+    { "subject": "bowl_1", "predicate": "left_of", "object": "handle_1" }
+  ],
+  "constraints": [
+    {
+      "kind": "hard",
+      "rule": "horizontal_alignment",
+      "targets": ["handle_1"],
+      "params": { "max_dy": 1.5 }
+    },
+    {
+      "kind": "soft",
+      "rule": "text_anchor_match",
+      "targets": ["label_rf", "bowl_1"],
+      "params": { "target": "upper_left" },
+      "weight": 0.7
+    }
+  ],
+  "labels": ["ac08", "semantic-v1"]
+}

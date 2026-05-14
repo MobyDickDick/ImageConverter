@@ -6,7 +6,7 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-05-14)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `251` · Erledigt `225` · Offen `26`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `251` · Erledigt `226` · Offen `25`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -42,7 +42,7 @@ Zielbild: Nicht-binäre Vektorisierung über echte SVG-Primitive mit semantische
   - Deliverable: Layer-Graph mit Occlusion-Relationen (`covers`, `behind`, `continues_behind`).
   - Akzeptanz: Szenen mit teilverdeckteten Griffen/Verbindungen werden konsistent rekonstruiert.
 
-- [ ] **V5 – Semantische Textrepräsentation + Bedingungen einführen**
+- [x] **V5 – Semantische Textrepräsentation + Bedingungen einführen** (2026-05-14: DSL- und JSON-Layer als v1 spezifiziert; siehe `docs/v5_semantic_text_representation_2026-05-14.md`, `docs/vision/semantic_scene_description_v1.schema.json` und `artifacts/evaluation/semantic_scene_description_v1/example_scene.json`.)
   - Scope: textuelle Szenenbeschreibung inkl. Relationen (z. B. „Kelle mit horizontalem Griff links und Beschriftung rF“).
   - Deliverable: DSL/JSON-Layer für Objekte + Relationen + Constraints.
   - Akzeptanz: Beschreibung kann deterministisch wieder in eine rekonstruktive SVG-Szene übersetzt werden.

@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://imageconverter.local/schemas/semantic_scene_description_v1.schema.json",
+  "title": "Semantic Scene Description v1",
+  "type": "object",
+  "required": ["scene_id", "canvas", "objects", "relations", "constraints"],
+  "properties": {
+    "scene_id": { "type": "string", "minLength": 1 },
+    "canvas": {
+      "type": "object",
+      "required": ["width", "height", "units"],
+      "properties": {
+        "width": { "type": "number", "exclusiveMinimum": 0 },
+        "height": { "type": "number", "exclusiveMinimum": 0 },
+        "units": { "type": "string", "enum": ["px"] }
+      },
+      "additionalProperties": false
+    },
+    "objects": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "type", "geometry", "style", "confidence"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "type": { "type": "string", "minLength": 1 },
+          "geometry": { "type": "object" },
+          "style": {
+            "type": "object",
+            "required": ["stroke", "stroke_width", "fill"],
+            "properties": {
+              "stroke": { "type": "string" },
+              "stroke_width": { "type": "number", "minimum": 0 },
+              "fill": { "type": "string" },
+              "gradient_ref": { "type": "string" }
+            },
+            "additionalProperties": true
+          },
+          "confidence": { "type": "number", "minimum": 0, "maximum": 1 }
+        },
+        "additionalProperties": false
+      }
+    },
+    "relations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["subject", "predicate", "object"],
+        "properties": {
+          "subject": { "type": "string" },
+          "predicate": {
+            "type": "string",
+            "enum": [
+              "attached_to", "left_of", "right_of", "above", "below", "inside", "overlaps",
+              "covers", "behind", "continues_behind"
+            ]
+          },
+          "object": { "type": "string" },
+          "tolerance_px": { "type": "number", "minimum": 0 }
+        },
+        "additionalProperties": false
+      }
+    },
+    "constraints": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["kind", "rule", "targets", "params"],
+        "properties": {
+          "kind": { "type": "string", "enum": ["hard", "soft"] },
+          "rule": { "type": "string", "minLength": 1 },
+          "targets": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+          "params": { "type": "object" },
+          "weight": { "type": "number", "minimum": 0 }
+        },
+        "additionalProperties": false
+      }
+    },
+    "labels": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "additionalProperties": false
+}
