@@ -6,7 +6,7 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-05-14)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `251` · Erledigt `223` · Offen `28`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `251` · Erledigt `224` · Offen `27`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -32,7 +32,7 @@ Zielbild: Nicht-binäre Vektorisierung über echte SVG-Primitive mit semantische
   - Deliverable: Fitting-Strategie inkl. Fehlerschranke (Pixel- und Kurvenraum).
   - Akzeptanz: Bezier-lastige Referenzen werden mit sinkender Restabweichung rekonstruiert.
 
-- [ ] **V3 – Farbfüllungen und Verläufe robust modellieren**
+- [x] **V3 – Farbfüllungen und Verläufe robust modellieren** (2026-05-14: Gradient-Parameterisierung inkl. Stop-Positionen und DeltaE-/Pixeldelta-Metrik in `docs/v3_color_gradient_modeling_2026-05-14.md` spezifiziert; maschinenlesbare Spezifikation unter `artifacts/evaluation/gradient_model_v1/spec.json` angelegt.)
   - Scope: flächige Füllungen, lineare/radiale Verläufe, Übergänge an Objektgrenzen.
   - Deliverable: Gradient-Parameterisierung pro Shape inkl. Stop-Positionen.
   - Akzeptanz: Gradient-Metrik (DeltaE/Pixeldelta) verbessert sich gegenüber Flat-Fill-Baseline.
