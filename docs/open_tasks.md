@@ -1715,13 +1715,13 @@ Details und Akzeptanzkriterien stehen in `docs/kelle_umsetzungscheck.md` unter
 
 ## Neue Aufgaben: Formen-Erkennung (Kreis, Dreieck, Pfeil, Viereck) + Linien-/Farbmessung (angelegt 2026-05-14)
 
-**Aufgabenzähler (S1–S6):** Gesamt `6` · Erledigt `0` · Offen `6`
+**Aufgabenzähler (S1–S6):** Gesamt `6` · Erledigt `1` · Offen `5`
 
 > Hinweis: Beim Abhaken bitte den Zähler direkt mit aktualisieren, damit der Fortschritt sofort sichtbar bleibt.
 
 Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validierungslogik für Kreis-/Kellen-Badges und semantische Pfade, aber **keine eigenständige allgemeine Erkennungssoftware** für die vier gewünschten Grundformen inkl. vertikaler Linien-Breiten- und Farbdetektion als separates Modul mit eigenen Qualitätsmetriken.
 
-- [ ] **S1 – Shape-Detection API spezifizieren**
+- [x] **S1 – Shape-Detection API spezifizieren**
   - Eingabe: Rasterbild (PNG/JPG), optional ROI/Skalierung.
   - Ausgabe: Liste erkannter Primitive (`circle`, `triangle`, `arrow`, `rectangle`, `line`) mit `bbox`, `polygon/params`, `confidence`, `stroke_width_px`, `fill_color`, `stroke_color`.
   - Akzeptanz: JSON-Schema + Beispielausgaben für 10 Referenzbilder versioniert.
@@ -1762,3 +1762,11 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 - **Fortschritt (gekoppelte Plan-B-Aufgabe):** Die Plan-B-Syntheseprobe wurde mit `tools/plan_b_synthetic_probe.py` für `variant=AC0812_M` erfolgreich ausgeführt (`status=ok`, Exit `0`); Konsolen-/Ablauflog in `imageCompositeConverter.local.log`, Ausgaben unter `artifacts/converted_images`.
 - **Blocker:** Die schwere Primäraufgabe N1 bleibt weiterhin offen, da Vollbereichsläufe `AC0800..AC0899` wiederholt an externen Zeitgrenzen scheitern.
 - **Nächster sinnvoller Schritt:** Weitere kleine Plan-B-Batches aus dem offenen Sample-Gap-Backlog systematisch abarbeiten und pro Lauf direkt dokumentieren, bevor erneut ein N1-Langlauf versucht wird.
+
+
+### Fortschritt vs. Blocker (Session 2026-05-14, S1 + Plan-B Pilot AC0800)
+
+- **Fortschritt (Primäraufgabe):** Die nächste dokumentierte Aufgabe ohne Timeout-Risiko (**S1**) wurde abgeschlossen; API-Input/Output inkl. JSON-Schema und 10 Referenz-Beispielfällen ist versioniert in `docs/shape_detection_api_spec_v1_2026-05-14.md`.
+- **Fortschritt (Plan-B-Aufgabe):** Ein Plan-B-Pilot aus dem Sample-Gap-Backlog wurde ausgeführt (`AC0800.svg`), Artefakt: `artifacts/converted_images/reports/plan_b_roundtrip_AC0800_2026-05-14.log` (Exit `0`).
+- **Blocker:** S2–S6 sind weiterhin offen (Implementierung/Metriken/Integration).
+- **Nächster sinnvoller Schritt:** Entweder S2 (vertikale Linienerkennung) beginnen oder den Plan-B-Pilot auf `AC0814_L`, `AC0814_M`, `AC0838_M` erweitern.
