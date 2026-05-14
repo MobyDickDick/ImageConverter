@@ -1,12 +1,12 @@
 {
   "base": "AC0836",
-  "best_error": 18.898666666666667,
+  "best_error": 30.344,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.050396444444444445,
+  "error_per_pixel": 0.08091733333333334,
   "filename": "AC0836_S.jpg",
   "h": 25,
-  "mean_delta2": 4115.3681640625,
+  "mean_delta2": 7329.255859375,
   "params": {
     "bottom_shape": null,
     "description_fragments": [
@@ -42,7 +42,7 @@
     "top_source_ref": null,
     "variant_name": "AC0836_S"
   },
-  "std_delta2": 10719.76953125,
+  "std_delta2": 13515.3349609375,
   "variant": "AC0836_S",
   "w": 15
 }

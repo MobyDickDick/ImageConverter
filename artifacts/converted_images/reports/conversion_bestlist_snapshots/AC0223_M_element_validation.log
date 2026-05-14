@@ -1,6 +1,6 @@
-run-meta: run_seed=921507370 pass_seed_offset=0 nonce_ns=1778751825679726600
+run-meta: run_seed=165360756 pass_seed_offset=0 nonce_ns=1778779161404353300
 status=semantic_ok
-redraw_variation: seed=930029189739 changed_params=cx:15.000->14.937 | cy:34.000->33.930 | r:13.000->12.869 | stroke_circle:1.000->0.888 | arm_stroke:2.000->1.907
+redraw_variation: seed=167801752168 changed_params=cx:15.000->14.971 | cy:34.000->33.911 | r:13.000->13.074 | stroke_circle:1.000->1.066 | arm_stroke:2.000->2.051
 semantic-guard: Text bewusst deaktiviert (plain-ring Familie ohne Buchstabe).
 Runde 1: elementweise Validierung gestartet
 circle: Fehler=135.844
@@ -19,7 +19,7 @@ Runde 2: elementweise Validierung gestartet
 circle: Fehler=105.580
 circle: Breiten-Bracketing stroke_circle 1.000->2.000; Kandidaten=1.000->105.580, 2.000->64.084, 3.500->90.979, 5.000->116.915, 6.500->150.851
 circle: Mittelpunkt-Bracketing cx 15.000->15.000, cy 34.000->32.500 (best_err=133.502)
-perf_probe: circle_center_elapsed round=2 elapsed=0.01s
+perf_probe: circle_center_elapsed round=2 elapsed=0.03s
 circle: Radius-Bracketing keine relevante Änderung (r: 13.000, best_err=133.502, full_err=55.833); Kandidaten=11.700->133.502, 12.000->133.502, 12.500->133.502, 13.000->133.502, 14.400->133.502
 perf_probe: circle_radius_elapsed round=2 elapsed=0.00s
 arm: Fehler=88.421
@@ -57,7 +57,7 @@ circle: Breiten-Bracketing stroke_circle 2.000->4.000; Kandidaten=1.000->119.123
 circle: Mittelpunkt-Bracketing cx 15.000->15.000, cy 32.500->31.500 (best_err=174.844)
 perf_probe: circle_center_elapsed round=5 elapsed=0.00s
 circle: Radius-Bracketing keine relevante Änderung (r: 13.000, best_err=174.844, full_err=62.916); Kandidaten=11.700->174.844, 12.000->174.844, 12.500->174.844, 13.000->174.844, 14.400->174.844
-perf_probe: circle_radius_elapsed round=5 elapsed=0.01s
+perf_probe: circle_radius_elapsed round=5 elapsed=0.00s
 arm: Fehler=89.326
 arm: Breiten-Bracketing arm_stroke 2.000->2.000; Kandidaten=2.500->91.405, 3.500->100.800, 4.500->114.294, 5.000->114.788, 6.000->118.746
 arm: Längen-Bracketing arm_len 2.408->2.500; Kandidaten=1.000->91.142, 2.500->89.326, 12.000->107.789, 23.000->102.330, 34.000->102.330, 45.000->102.330
