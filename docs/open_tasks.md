@@ -89,7 +89,7 @@ Zielbild: Nicht-binäre Vektorisierung über echte SVG-Primitive mit semantische
 ### Neue Zusatzaufgabe (Session 2026-05-14)
 
 - [x] **N8 – Plan-B-Syntheseprobe (Beschreibung → SVG → JPG → Rauschen → Konvertierung)** (2026-05-14: Tool `tools/plan_b_synthetic_probe.py` ergänzt und Beispielausführung mit `variant=AC0080_L` dokumentiert; Ergebnisartefakt unter `artifacts/converted_images/converted_svgs/AC0080_L.svg` aktualisiert.)
-- [ ] **N9 – Plan-B-Einzelprobe für `AC0212_L.svg` anlegen** (Scope: `artifacts/images_to_convert/samples/AC0212_L.svg`; Deliverable: klarer Kurzlauf-Befehl + Summary-Datei analog zu den bestehenden Plan-B-Microbatch-Reports, damit bei Blockern sofort auf diese isolierte Referenz rotiert werden kann.)
+- [x] **N9 – Plan-B-Einzelprobe für `AC0212_L.svg` anlegen** (2026-05-14: isolierter `AC0212`-Kurzlauf + gekoppelte Plan-B-Syntheseprobe mit Exit `0` dokumentiert; siehe `docs/n9_ac0212_planb_single_2026-05-14_runDF_summary.md` sowie Logs `artifacts/converted_images/reports/AC0212_single_planbprobe_2026-05-14_runDF.log` und `artifacts/converted_images/reports/AC0212_planb_synthetic_2026-05-14_runDF_PB.log`.)
 
 
 Arbeitsreihenfolge für die nächsten Sessions (explizit von **leicht zu erledigen**
@@ -1825,3 +1825,10 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 - **Ergebnis T6-PB:** Exit `0`, `1 passed in 0.17s`; der historische Detailtest bleibt aktuell unauffällig.
 - **Dokuartefakte:** `docs/t6_10_isolation_2026-05-14_run01_summary.md`, `artifacts/converted_images/reports/t6_10_isolation_2026-05-14_run01.log`, `artifacts/converted_images/reports/t6_planb_singletest_2026-05-14_run01.log`.
 - **Nächster sinnvoller Schritt:** T6.9 analog isoliert mit enger Timeout-Grenze fahren und danach entscheiden, ob T6.10 als erledigt markiert werden kann oder ein expliziter Nicht-Skip-Repro in der Zielumgebung benötigt wird.
+
+
+### Fortschritt vs. Blocker (Session 2026-05-14, N9 + Plan-B Run DF)
+
+- **Fortschritt:** Die nächste offene, timeout-arme dokumentierte Aufgabe (N9) wurde mit einem isolierten `AC0212`-Kurzlauf inkl. reproduzierbarem Befehl abgeschlossen; die gekoppelte Plan-B-Aufgabe wurde im selben Schritt ausgeführt und dokumentiert.
+- **Blocker:** Kein technischer Timeout-Blocker im Session-Umfang; fachlich bleibt `non_composite_embedded_svg` für AC0212 als Qualitätsbefund sichtbar.
+- **Nächster sinnvoller Schritt:** Auf die nächste offene Aufgabe der priorisierten Liste rotieren (T5/N5/N6/N7-Kontext), bevor erneut ein schwerer Vollbereichslauf gestartet wird.
