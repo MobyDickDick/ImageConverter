@@ -1959,3 +1959,10 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 - [ ] **A8 Kanban-Status pflegen**
   - [ ] Spalten verwenden: `Planned` → `Running` → `Review` → `Done` / `Blocked`.
   - [ ] Pro Session mindestens einen Block vollständig bis `Review` abschließen.
+
+### Fortschritt vs. Blocker (Session 2026-05-14, N3/N4 + Plan-B-gekoppelter Kurzschritt Run DG)
+
+- **Fortschritt:** Die nächste leichtgewichtige dokumentierte Aufgabe (N3/N4: Run-Dokumentation sofort nachpflegen) wurde erneut umgesetzt, inklusive neuem Session-Eintrag. Als gekoppelte **Plan-B-Aufgabe** wurde eine zusätzliche Syntheseprobe mit `tools/plan_b_synthetic_probe.py` ausgeführt (Exit `0`); Log-Artefakt: `artifacts/converted_images/reports/planb_probe_2026-05-14_runDG.log`.
+- **Fortschritt (Transparenz):** Eine aktuelle Klassenliste für bislang nicht konvertierbare Bilder wurde als Arbeitsartefakt ergänzt: `docs/nonconvertable_classes_examples_2026-05-14.md` (eine Beispiel-Datei je Klasse aus `artifacts/images_to_convert/nonconvertable`).
+- **Blocker:** N1/N2 bleiben weiterhin durch den bekannten Vollbereichs-Laufzeit-/Timeoutpfad limitiert; dieser Dokumentations- und Plan-B-Schritt ersetzt keinen Vollbereichsnachweis.
+- **Nächster sinnvoller Schritt:** Entweder den nächsten T5/T6-Diagnoseschritt (langläuferfokussiert) ausführen oder – falls Laufzeitbudget verfügbar – den offenen N2-Stabilitätsnachweis mit klarer Timeout-Grenze erneut ansetzen.
