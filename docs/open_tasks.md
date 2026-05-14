@@ -1778,3 +1778,11 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 - **Fortschritt (Plan-B-Aufgabe):** Ein Plan-B-Pilot aus dem Sample-Gap-Backlog wurde ausgeführt (`AC0800.svg`), Artefakt: `artifacts/converted_images/reports/plan_b_roundtrip_AC0800_2026-05-14.log` (Exit `0`).
 - **Blocker:** S2–S6 sind weiterhin offen (Implementierung/Metriken/Integration).
 - **Nächster sinnvoller Schritt:** Entweder S2 (vertikale Linienerkennung) beginnen oder den Plan-B-Pilot auf `AC0814_L`, `AC0814_M`, `AC0838_M` erweitern.
+
+### Fortschritt vs. Blocker (Session 2026-05-14, N5-Kurzbatch Run 04 + Plan-B Probe)
+
+- **Fortschritt (Primäraufgabe N5):** Der nächste nicht-timeout-gefährdete Kurzbatch wurde ausgeführt (`PYTHONPATH=. python3 tools/validate_sample_pairs.py --report-csv artifacts/converted_images/reports/sample_pair_validation_2026-05-14_run04.csv`); neue Artefakte: `artifacts/converted_images/reports/sample_pair_validation_2026-05-14_run04.log` und `...run04.csv`.
+- **Ergebnis N5:** Lauf mit Exit `0`, aber `pair_validation=issues` wegen `svg_count=42` bei `jpeg_count=0` (fehlende JPEG-Pendants für alle erkannten SVG-Stems im Sample-Ordner).
+- **Fortschritt (Plan-B-Aufgabe):** Die gekoppelte Fallback-Syntheseprobe wurde erfolgreich ausgeführt (`PYTHONPATH=. python3 tools/plan_b_synthetic_probe.py "Circle with horizontal line" --variant AC0080_L`), Log: `artifacts/converted_images/reports/plan_b_synthetic_probe_2026-05-14_run01.log`, Ergebnis `status=ok`.
+- **Blocker:** Für N5 fehlt weiterhin die JPEG-Gegenstück-Erzeugung/-Ablage im Sample-Verzeichnis; ohne diese bleibt `pair_validation=ok` unerreichbar.
+- **Nächster sinnvoller Schritt:** N5 direkt mit `--render-missing-jpeg` wiederholen (oder JPEGs aus bestehender Pipeline nachziehen) und anschließend den Zustand erneut dokumentieren.
