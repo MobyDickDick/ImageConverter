@@ -1,0 +1,13 @@
+{
+  "scene_id": "AC0811_L",
+  "nodes": [
+    {"id": "bowl", "primitive": "ellipse", "z": 3},
+    {"id": "handle", "primitive": "line", "z": 2},
+    {"id": "label_rf", "primitive": "text", "z": 4}
+  ],
+  "relations": [
+    {"type": "covers", "front": "bowl", "back": "handle", "confidence": 0.89},
+    {"type": "continues_behind", "occluder": "bowl", "occluded": "handle", "confidence": 0.83},
+    {"type": "behind", "back": "handle", "front": "label_rf", "confidence": 0.76}
+  ]
+}
