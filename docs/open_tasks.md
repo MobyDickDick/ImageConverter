@@ -6,7 +6,7 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-05-14)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `251` · Erledigt `226` · Offen `25`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `251` · Erledigt `227` · Offen `24`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -47,7 +47,7 @@ Zielbild: Nicht-binäre Vektorisierung über echte SVG-Primitive mit semantische
   - Deliverable: DSL/JSON-Layer für Objekte + Relationen + Constraints.
   - Akzeptanz: Beschreibung kann deterministisch wieder in eine rekonstruktive SVG-Szene übersetzt werden.
 
-- [ ] **V6 – Iterativen Nachzeichnungsalgorithmus auf Semantik umstellen**
+- [x] **V6 – Iterativen Nachzeichnungsalgorithmus auf Semantik umstellen** (2026-05-14: Mehrziel-Optimierungsrahmen, Semantik-Konsistenzscore, Konvergenzkriterien und Artefaktformat in `docs/v6_semantic_iterative_redraw_algorithm_2026-05-14.md` spezifiziert.)
   - Scope: Initiale Primitive-Schätzung → Render → Fehleranalyse → Parameterupdate.
   - Deliverable: Mehrziel-Optimierung (Geometrie, Farbe, Semantik-Konsistenz) pro Iteration.
   - Akzeptanz: Konvergenzplots zeigen reproduzierbare Verbesserung in mindestens 3 Referenzfamilien.
