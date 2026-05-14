@@ -6,7 +6,7 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-05-14)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `251` · Erledigt `227` · Offen `24`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `251` · Erledigt `228` · Offen `23`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -57,7 +57,7 @@ Zielbild: Nicht-binäre Vektorisierung über echte SVG-Primitive mit semantische
   - Deliverable: Closed-Loop-Evaluationspipeline mit Gap-Reports pro Relationstyp.
   - Akzeptanz: Pipeline markiert systematisch nicht-invertierbare Fälle (z. B. vollständig verdeckte Griffe ohne Constraints).
 
-- [ ] **V8 – Grenzfallkatalog für Nicht-Invertierbarkeit pflegen**
+- [x] **V8 – Grenzfallkatalog für Nicht-Invertierbarkeit pflegen** (2026-05-14: Failure-Mode-Katalog v1 inkl. Zusatzbedingungen und Zuordnungsvorlage in `docs/v8_non_invertibility_edge_case_catalog_2026-05-14.md` dokumentiert.)
   - Scope: explizite Regeln, wann Rücktransformation prinzipiell mehrdeutig/unmöglich ist.
   - Deliverable: katalogisierte Failure-Modes + empfohlene Zusatzbedingungen.
   - Akzeptanz: Jeder dokumentierte Fehlschlag ist einem bekannten Failure-Mode zugeordnet.
