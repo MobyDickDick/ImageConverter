@@ -124,11 +124,16 @@ class Reflection:
 
         non_traceable_hint = Reflection._detect_non_traceable_hint(desc)
         if non_traceable_hint:
-            params["mode"] = "manual_review"
-            params["review_reason"] = non_traceable_hint
-            params["label"] = ""
-            params["elements"].append(f"MANUELL: {non_traceable_hint}")
-            return desc, params
+            if Reflection._should_allow_auto_for_unclassified_geometry(desc, non_traceable_hint):
+                params["elements"].append(
+                    "AUTO: Trotz unzugeordneter Familienzuordnung wurde wegen ausreichender Geometriehinweise automatisch konvertiert."
+                )
+            else:
+                params["mode"] = "manual_review"
+                params["review_reason"] = non_traceable_hint
+                params["label"] = ""
+                params["elements"].append(f"MANUELL: {non_traceable_hint}")
+                return desc, params
 
         match = re.search(r"\boven\b.*?\bwie(?:\s+in)?\s+([a-z]{2}\d{3,4})\b", desc)
         if match:
@@ -173,6 +178,32 @@ class Reflection:
             inherited["elements"] = list(inherited["elements"])
             inherited["elements"].append(f"REFERENZ: Abgeleitet aus {reference_symbol}")
         return ref_desc_text, inherited
+
+
+    @staticmethod
+    def _should_allow_auto_for_unclassified_geometry(text: str, non_traceable_hint: str | None) -> bool:
+        if not non_traceable_hint:
+            return False
+        normalized = re.sub(r"\s+", " ", str(text or "").lower()).strip()
+        if not normalized:
+            return False
+        if not any(
+            token in non_traceable_hint.lower()
+            for token in ("familienzuordnung", "unzugeordnete wurzelform", "fachlich noch nicht klassifiziert")
+        ):
+            return False
+        geometry_tokens = (
+            "kreis",
+            "ellipse",
+            "rechteck",
+            "polygon",
+            "dreieck",
+            "linie",
+            "griff",
+            "symmetrieachse",
+        )
+        hits = sum(1 for token in geometry_tokens if token in normalized)
+        return hits >= 2
 
     @staticmethod
     def _extractDocumentedAliasRefs(text: str) -> set[str]:
