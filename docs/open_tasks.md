@@ -511,6 +511,9 @@ Deadlock-/Stagnationsschleifen.
 
 
 - [ ] T6: Sämtliche aktuell blockierenden Langläufer-Tests identifizieren und priorisiert abbauen (Stand: Volltest-Isolation vom 2026-05-03).
+  - 2026-05-14: T6-Inventur aktualisiert (siehe `docs/t6_blocking_langlaeufer_inventory_2026-05-14.md`): dominanter Blocker weiterhin N1/N2-Vollbereichslaufzeit; historischer Einzeltest-Blocker `test_global_search_skips_deterministic_track_after_strong_stochastic_gain` im Schnellrepro aktuell grün (`1 passed`, `0.18s`).
+  - [x] T6-PB (Plan-B, 2026-05-14): Historischen Einzeltest-Blocker als Kurzrepro fahren, falls kein neuer sofortiger Langlauf-Abbau ohne Timeout möglich ist.
+    - Ergebnis: `pytest -q tests/detailtests/test_global_search_optimization_helpers.py::test_global_search_skips_deterministic_track_after_strong_stochastic_gain` => Exit `0`, `1 passed in 0.18s`.
   - Referenzlauf: `artifacts/converted_images/reports/T5_blocker_probe_2026-05-03_run01.log` (`829 passed, 1 skipped`, Laufzeit `1574.93s`).
   - Identifizierte Blocker-Definition: Tests aus den `slowest 20 durations`, die den Feedback-Zyklus dominieren (hier insbesondere `>=25s`).
   - [ ] T6.1 (sehr hohe Priorität): `tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_convert_without_failed_svg` reduzieren (aktuell `377.98s`).
