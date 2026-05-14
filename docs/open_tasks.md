@@ -1744,7 +1744,7 @@ Details und Akzeptanzkriterien stehen in `docs/kelle_umsetzungscheck.md` unter
 
 ## Neue Aufgaben: Formen-Erkennung (Kreis, Dreieck, Pfeil, Viereck) + Linien-/Farbmessung (angelegt 2026-05-14)
 
-**Aufgabenzähler (S1–S6):** Gesamt `6` · Erledigt `4` · Offen `2`
+**Aufgabenzähler (S1–S6):** Gesamt `6` · Erledigt `5` · Offen `1`
 
 > Hinweis: Beim Abhaken bitte den Zähler direkt mit aktualisieren, damit der Fortschritt sofort sichtbar bleibt.
 
@@ -1770,7 +1770,7 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
   - Methode: Konturapproximation, Eckenzahl, Konvexität, Achsen-/Symmetrie-Features.
   - Akzeptanz: Precision/Recall/F1 je Klasse auf Testset dokumentiert.
 
-- [ ] **S5 – Testset + Evaluationspipeline erstellen**
+- [x] **S5 – Testset + Evaluationspipeline erstellen** (2026-05-14: Evaluationspipeline `tools/shape_detection_eval.py` ergänzt; synthetische+real-ähnliche Testfälle je Primitive und CSV/JSON-Report-Output implementiert; Basistest `tests/test_shape_detection_eval.py` hinzugefügt.)
   - Ziel: Reproduzierbare Qualitätsprüfung für alle 5 Primitive (inkl. Linie).
   - Deliverables: `tests/`-Fixtures, Annotationen, Metrikreport (`csv/json`) pro Lauf.
   - Akzeptanz: CI-fähiger Testlauf mit min. 1 synthetischem + 1 realem Beispiel je Klasse.
@@ -1855,3 +1855,11 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 - **Fortschritt (gekoppelte Plan-B-Aufgabe):** Die gekoppelte Plan-B-Syntheseprobe wurde erfolgreich ausgeführt (`PYTHONPATH=. python3 tools/plan_b_synthetic_probe.py "Rectangle with vertical handle" --variant AC0838_M`), Log: `artifacts/converted_images/reports/plan_b_synthetic_probe_2026-05-14_run07.log`, Ergebnis `status=ok`, Exit `0`.
 - **Blocker:** S5/S6 sind weiterhin offen (Evaluationspipeline und Semantik-Integration).
 - **Nächster sinnvoller Schritt:** Als nächstes **S5** (Testset + Evaluationspipeline) als kleinsten verbleibenden Shape-Detection-Block umsetzen und die Metrikartefakte dokumentieren.
+
+
+### Fortschritt vs. Blocker (Session 2026-05-14, S5 + Plan-B-Syntheseprobe AC0811_M)
+
+- **Fortschritt (Primäraufgabe S5):** Die nächste dokumentierte Primäraufgabe **S5** wurde umgesetzt: Reproduzierbare Evaluationspipeline (`tools/shape_detection_eval.py`) erzeugt pro Lauf einen CSV-Metrikreport und eine JSON-Zusammenfassung für alle fünf Primitive (jeweils synthetisch + real-ähnlich), ergänzt durch den Basistest `tests/test_shape_detection_eval.py`.
+- **Fortschritt (gekoppelte Plan-B-Aufgabe):** Die gekoppelte Plan-B-Syntheseprobe wurde erfolgreich ausgeführt (`PYTHONPATH=. python3 tools/plan_b_synthetic_probe.py "Circle with vertical handle and label rF" --variant AC0811_M`); Log: `artifacts/converted_images/reports/plan_b_synthetic_probe_2026-05-14_run08.log`, Ergebnis `status=ok`, Exit `0`.
+- **Blocker:** In der Default-Python-3.12-Umgebung sind OpenCV/Numpy-Artefakte weiterhin nicht lauffähig (ABI-/Interpreter-Mismatch), daher laufen neue OpenCV-basierte Tests aktuell als `skipped` bzw. müssen in der bestätigten 3.10-Toolchain ausgeführt werden.
+- **Nächster sinnvoller Schritt:** Als nächstes **S6** (Integration in bestehende Semantik-Validierung) als letzten offenen Shape-Detection-Block umsetzen.
