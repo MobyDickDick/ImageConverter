@@ -1755,3 +1755,10 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 - **Fortschritt:** Die nächste offene dokumentierte Primäraufgabe (`N1`) wurde mit fixer Timeout-Grenze in Python `3.10.20` ausgeführt; nach Timeout wurde gemäß Kopplungsregel unmittelbar die gekoppelte Plan-B-Aufgabe (`N1-PB`, `AC0800..AC0809`) nachgezogen und erfolgreich mit Exit `0` abgeschlossen.
 - **Blocker:** Der Vollbereichsnachweis bis `AC0899` bleibt trotz Run DA offen, da der Primärlauf erneut mit Exit `124` endete.
 - **Nächster sinnvoller Schritt:** Für den nächsten N1-Versuch die Timeout-Strategie/Batch-Segmentierung weiter schärfen und den Vollbereichslauf erst nach einer zusätzlichen leichten Diagnoseaufgabe erneut ansetzen.
+
+### Fortschritt vs. Blocker (Session 2026-05-14, N3/N4 + Plan-B-Syntheseprobe AC0812_M)
+
+- **Fortschritt (Primäraufgabe):** Die nächste ohne Timeout-Risiko sinnvoll abschließbare dokumentierte Aufgabe N3/N4 (sofortige Run-Dokumentationspflege) wurde umgesetzt; der aktuelle Session-Stand inkl. Prüfkommandos ist direkt nachgeführt.
+- **Fortschritt (gekoppelte Plan-B-Aufgabe):** Die Plan-B-Syntheseprobe wurde mit `tools/plan_b_synthetic_probe.py` für `variant=AC0812_M` erfolgreich ausgeführt (`status=ok`, Exit `0`); Konsolen-/Ablauflog in `imageCompositeConverter.local.log`, Ausgaben unter `artifacts/converted_images`.
+- **Blocker:** Die schwere Primäraufgabe N1 bleibt weiterhin offen, da Vollbereichsläufe `AC0800..AC0899` wiederholt an externen Zeitgrenzen scheitern.
+- **Nächster sinnvoller Schritt:** Weitere kleine Plan-B-Batches aus dem offenen Sample-Gap-Backlog systematisch abarbeiten und pro Lauf direkt dokumentieren, bevor erneut ein N1-Langlauf versucht wird.
