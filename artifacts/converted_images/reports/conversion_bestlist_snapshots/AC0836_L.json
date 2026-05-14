@@ -1,19 +1,19 @@
 {
   "base": "AC0836",
-  "best_error": 14.958222222222222,
+  "best_error": 18.148444444444443,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.013296197530864197,
+  "error_per_pixel": 0.01613195061728395,
   "filename": "AC0836_L.jpg",
   "h": 45,
-  "mean_delta2": 3969.743896484375,
+  "mean_delta2": 4411.37353515625,
   "params": {
     "bottom_shape": null,
     "description_fragments": [
       {
         "key": "AC0836",
         "source": "base_name",
-        "text": "Wie AC0835, jedoch mit senkrechtem Griff nach unten (dunkelgraue Linie hinter dem Kreis). Text im Kreis: \"VOC\"."
+        "text": "Wie AC0835, jedoch mit senkrechtem Griff nach unten (dunkelgraue Linie hinter dem Kreis). Text im Kreis: \"VOC\". Der Griff liegt auf einer Symmetrieachse des Kreises."
       }
     ],
     "documented_alias_refs": [
@@ -42,7 +42,7 @@
     "top_source_ref": null,
     "variant_name": "AC0836_L"
   },
-  "std_delta2": 12383.0234375,
+  "std_delta2": 11706.6376953125,
   "variant": "AC0836_L",
   "w": 25
 }

@@ -1,19 +1,19 @@
 {
   "base": "AC0831",
-  "best_error": 16.426666666666666,
+  "best_error": 17.16,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.043804444444444444,
+  "error_per_pixel": 0.04576,
   "filename": "AC0831_S.jpg",
   "h": 25,
-  "mean_delta2": 2933.552001953125,
+  "mean_delta2": 3122.823974609375,
   "params": {
     "bottom_shape": null,
     "description_fragments": [
       {
         "key": "AC0831",
         "source": "base_name",
-        "text": "Wie AC080, jedoch Griff unten (als Kelle ausfeführt)"
+        "text": "Wie AC080, jedoch Griff unten (als Kelle ausfeführt). Der Griff liegt auf einer Symmetrieachse des Kreises."
       }
     ],
     "documented_alias_refs": [
@@ -42,7 +42,7 @@
     "top_source_ref": null,
     "variant_name": "AC0831_S"
   },
-  "std_delta2": 8469.5009765625,
+  "std_delta2": 8523.53125,
   "variant": "AC0831_S",
   "w": 15
 }

@@ -1,19 +1,19 @@
-run-meta: run_seed=419583469 pass_seed_offset=0 nonce_ns=1778606021711452000
+run-meta: run_seed=439741530 pass_seed_offset=0 nonce_ns=1778695818881761600
 status=semantic_ok
 semantic_audit_status=semantic_ok
 semantic_audit_lookup_keys=AC0814
-semantic_audit_recognized_description_elements=Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 90° nach rechts gedreht.
+semantic_audit_recognized_description_elements=Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 90° nach rechts gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.
 semantic_audit_derived_elements=SEMANTIC: Kreis ohne Buchstabe | SEMANTIC: waagrechter Strich rechts vom Kreis
 semantic_audit_priority_order=family_rule > layout_override > description_heuristic
 semantic_audit_conflicts=
-redraw_variation: seed=423620749158 changed_params=cx:8.000->7.890 | cy:7.500->7.606 | r:7.000->7.109 | stroke_circle:1.000->1.099 | arm_stroke:1.000->0.954
+redraw_variation: seed=444129939828 changed_params=cx:8.000->7.987 | cy:7.500->7.638 | r:7.000->6.964 | stroke_circle:1.000->0.905 | arm_stroke:1.000->1.038
 semantic-guard: Text bewusst deaktiviert (plain-ring Familie ohne Buchstabe).
 small_variant_mode_active: reason=min_dim, min_dim=14.100, mask_dilate_px=1, text_mode=, arm_min_ratio=0.000, stem_min_ratio=0.000
 Runde 1: elementweise Validierung gestartet
 circle: Fehler=54.411
 circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
 circle: Mittelpunkt-Bracketing cx 9.600->8.000, cy 7.500->7.500 (best_err=21.507)
-perf_probe: circle_center_elapsed round=1 elapsed=0.02s
+perf_probe: circle_center_elapsed round=1 elapsed=0.03s
 circle: Radius-Bracketing r 7.050->7.000 (best_err=21.507, full_err=8.368); Kandidaten=6.417->21.882, 7.000->21.507, 7.200->21.507
 perf_probe: circle_radius_elapsed round=1 elapsed=0.01s
 arm: Fehler=43.303
@@ -28,7 +28,7 @@ global-search: plateau-repräsentant (runde=1, kandidat=best_sample, err=8.581, 
 global-search: Runde 2 best_err=8.581, akzeptierte_kandidaten=0, sigma_mittel=1.707
 global-search: near-optimum-plateau (runde=2, punkte=1, epsilon=0.172, mittlere_spannweite=0.000, stabilitaet=stabil, spannweite=cx:0.000; cy:0.000; r:0.000; arm_x1:0.000; arm_y1:0.000; arm_x2:0.000; arm_y2:0.000)
 global-search: plateau-repräsentant (runde=2, kandidat=best_sample, err=8.581, begründung=niedrigster Fehler in dieser Runde)
-global-search: deterministischer track gestartet (modus=voll, seed=419587568, schritte=2, start_err=8.581)
+global-search: deterministischer track gestartet (modus=voll, seed=439745629, schritte=2, start_err=8.581)
 global-search: intervallhalbierung (pass=1, key=cx, final_step=0.562, iters=3)
 global-search: intervallhalbierung (pass=1, key=cy, final_step=0.500, iters=3)
 global-search: intervallhalbierung (pass=1, key=r, final_step=0.500, iters=0)
@@ -47,14 +47,14 @@ global-search: intervallhalbierung (pass=2, key=arm_y2, final_step=0.100, iters=
 global-search: deterministischer track (pass=2, verbesserungen=0, best_err=8.581)
 global-search: track-vergleich (stochastic_err=8.581, deterministic_err=8.581, gewählt=stochastic)
 global-search: keine relevante Verbesserung
-global-search: evaluate-telemetrie (requests=87, cache_hits=50, hit_rate=0.575, render_aufrufe=37)
-perf_probe: global_search_elapsed round=1 elapsed=0.12s
+global-search: evaluate-telemetrie (requests=87, cache_hits=49, hit_rate=0.563, render_aufrufe=38)
+perf_probe: global_search_elapsed round=1 elapsed=0.13s
 Runde 1: Gesamtfehler=8.328
 Runde 2: elementweise Validierung gestartet
 circle: Fehler=20.560
 circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
 circle: Mittelpunkt-Bracketing keine relevante Änderung (cx=8.000, cy=7.500, best_err=20.560)
-perf_probe: circle_center_elapsed round=2 elapsed=0.01s
+perf_probe: circle_center_elapsed round=2 elapsed=0.02s
 circle: Radius-Bracketing r 7.000->6.500 (best_err=20.291, full_err=8.328); Kandidaten=6.417->20.432, 6.500->20.291, 7.000->20.560, 7.200->20.560
 perf_probe: circle_radius_elapsed round=2 elapsed=0.00s
 arm: Fehler=37.036
@@ -69,7 +69,7 @@ global-search: plateau-repräsentant (runde=1, kandidat=best_sample, err=8.581, 
 global-search: Runde 2 best_err=8.581, akzeptierte_kandidaten=0, sigma_mittel=1.707
 global-search: near-optimum-plateau (runde=2, punkte=1, epsilon=0.172, mittlere_spannweite=0.000, stabilitaet=stabil, spannweite=cx:0.000; cy:0.000; r:0.000; arm_x1:0.000; arm_y1:0.000; arm_x2:0.000; arm_y2:0.000)
 global-search: plateau-repräsentant (runde=2, kandidat=best_sample, err=8.581, begründung=niedrigster Fehler in dieser Runde)
-global-search: deterministischer track gestartet (modus=voll, seed=419587568, schritte=2, start_err=8.581)
+global-search: deterministischer track gestartet (modus=voll, seed=439745629, schritte=2, start_err=8.581)
 global-search: intervallhalbierung (pass=1, key=cx, final_step=0.562, iters=3)
 global-search: intervallhalbierung (pass=1, key=cy, final_step=0.500, iters=3)
 global-search: intervallhalbierung (pass=1, key=r, final_step=0.500, iters=0)
@@ -88,8 +88,8 @@ global-search: intervallhalbierung (pass=2, key=arm_y2, final_step=0.100, iters=
 global-search: deterministischer track (pass=2, verbesserungen=0, best_err=8.581)
 global-search: track-vergleich (stochastic_err=8.581, deterministic_err=8.581, gewählt=stochastic)
 global-search: keine relevante Verbesserung
-global-search: evaluate-telemetrie (requests=87, cache_hits=56, hit_rate=0.644, render_aufrufe=31)
-perf_probe: global_search_elapsed round=2 elapsed=0.09s
+global-search: evaluate-telemetrie (requests=87, cache_hits=52, hit_rate=0.598, render_aufrufe=35)
+perf_probe: global_search_elapsed round=2 elapsed=0.14s
 Runde 2: Gesamtfehler=8.328
 Runde 3: elementweise Validierung gestartet
 circle: Fehler=20.484
@@ -110,7 +110,7 @@ global-search: plateau-repräsentant (runde=1, kandidat=best_sample, err=8.581, 
 global-search: Runde 2 best_err=8.581, akzeptierte_kandidaten=0, sigma_mittel=1.707
 global-search: near-optimum-plateau (runde=2, punkte=1, epsilon=0.172, mittlere_spannweite=0.000, stabilitaet=stabil, spannweite=cx:0.000; cy:0.000; r:0.000; arm_x1:0.000; arm_y1:0.000; arm_x2:0.000; arm_y2:0.000)
 global-search: plateau-repräsentant (runde=2, kandidat=best_sample, err=8.581, begründung=niedrigster Fehler in dieser Runde)
-global-search: deterministischer track gestartet (modus=voll, seed=419587568, schritte=2, start_err=8.581)
+global-search: deterministischer track gestartet (modus=voll, seed=439745629, schritte=2, start_err=8.581)
 global-search: intervallhalbierung (pass=1, key=cx, final_step=0.562, iters=3)
 global-search: intervallhalbierung (pass=1, key=cy, final_step=0.500, iters=3)
 global-search: intervallhalbierung (pass=1, key=r, final_step=0.500, iters=0)
@@ -130,7 +130,7 @@ global-search: deterministischer track (pass=2, verbesserungen=0, best_err=8.581
 global-search: track-vergleich (stochastic_err=8.581, deterministic_err=8.581, gewählt=stochastic)
 global-search: keine relevante Verbesserung
 global-search: evaluate-telemetrie (requests=87, cache_hits=87, hit_rate=1.000, render_aufrufe=0)
-perf_probe: global_search_elapsed round=3 elapsed=0.01s
+perf_probe: global_search_elapsed round=3 elapsed=0.00s
 Runde 3: Gesamtfehler=8.328
 stagnation_detected: identischer Parameter-Fingerprint und praktisch unveränderter Gesamtfehler
 switch_to_fallback_search: deaktiviere Circle-Geometry-Penalty für eine letzte Ausweichrunde
@@ -149,7 +149,7 @@ global-search: plateau-repräsentant (runde=1, kandidat=best_sample, err=8.581, 
 global-search: Runde 2 best_err=8.581, akzeptierte_kandidaten=0, sigma_mittel=1.707
 global-search: near-optimum-plateau (runde=2, punkte=1, epsilon=0.172, mittlere_spannweite=0.000, stabilitaet=stabil, spannweite=cx:0.000; cy:0.000; r:0.000; arm_x1:0.000; arm_y1:0.000; arm_x2:0.000; arm_y2:0.000)
 global-search: plateau-repräsentant (runde=2, kandidat=best_sample, err=8.581, begründung=niedrigster Fehler in dieser Runde)
-global-search: deterministischer track gestartet (modus=voll, seed=419587568, schritte=2, start_err=8.581)
+global-search: deterministischer track gestartet (modus=voll, seed=439745629, schritte=2, start_err=8.581)
 global-search: intervallhalbierung (pass=1, key=cx, final_step=0.562, iters=3)
 global-search: intervallhalbierung (pass=1, key=cy, final_step=0.500, iters=3)
 global-search: intervallhalbierung (pass=1, key=r, final_step=0.500, iters=0)

@@ -1,6 +1,6 @@
-run-meta: run_seed=291567970 pass_seed_offset=0 nonce_ns=1778693351212653100
+run-meta: run_seed=439741530 pass_seed_offset=0 nonce_ns=1778695885281352600
 status=semantic_ok
-redraw_variation: seed=294953733064 changed_params=cx:15.000->14.765 | cy:34.000->33.975 | r:13.000->12.933 | stroke_circle:1.000->1.039 | arm_stroke:2.000->2.071
+redraw_variation: seed=444529433066 changed_params=cx:15.000->15.027 | cy:34.000->33.597 | r:13.000->12.898 | stroke_circle:1.000->0.891 | arm_stroke:2.000->1.985
 semantic-guard: Text bewusst deaktiviert (plain-ring Familie ohne Buchstabe).
 Runde 1: elementweise Validierung gestartet
 circle: Fehler=135.844
@@ -19,7 +19,7 @@ Runde 2: elementweise Validierung gestartet
 circle: Fehler=105.580
 circle: Breiten-Bracketing stroke_circle 1.000->2.000; Kandidaten=1.000->105.580, 2.000->64.084, 3.500->90.979, 5.000->116.915, 6.500->150.851
 circle: Mittelpunkt-Bracketing cx 15.000->15.000, cy 34.000->32.500 (best_err=133.502)
-perf_probe: circle_center_elapsed round=2 elapsed=0.01s
+perf_probe: circle_center_elapsed round=2 elapsed=0.05s
 circle: Radius-Bracketing keine relevante Änderung (r: 13.000, best_err=133.502, full_err=55.833); Kandidaten=11.700->133.502, 12.000->133.502, 12.500->133.502, 13.000->133.502, 14.400->133.502
 perf_probe: circle_radius_elapsed round=2 elapsed=0.00s
 arm: Fehler=88.421
@@ -31,7 +31,7 @@ Runde 3: elementweise Validierung gestartet
 circle: Fehler=121.660
 circle: Breiten-Bracketing stroke_circle 2.000->4.000; Kandidaten=1.000->119.123, 2.000->121.660, 2.500->121.660, 4.000->114.839, 5.000->121.020, 6.500->149.447
 circle: Mittelpunkt-Bracketing cx 15.000->15.000, cy 32.500->31.500 (best_err=174.844)
-perf_probe: circle_center_elapsed round=3 elapsed=0.01s
+perf_probe: circle_center_elapsed round=3 elapsed=0.03s
 circle: Radius-Bracketing keine relevante Änderung (r: 13.000, best_err=174.844, full_err=62.916); Kandidaten=11.700->174.844, 12.000->174.844, 12.500->174.844, 13.000->174.844, 14.400->174.844
 perf_probe: circle_radius_elapsed round=3 elapsed=0.00s
 arm: Fehler=89.326

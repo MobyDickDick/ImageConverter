@@ -1,12 +1,12 @@
-run-meta: run_seed=909722466 pass_seed_offset=0 nonce_ns=1778692060238398700
+run-meta: run_seed=439741530 pass_seed_offset=0 nonce_ns=1778695839999061700
 status=semantic_ok
-redraw_variation: seed=918697414065 changed_params=cx:15.000->14.754 | cy:29.700->29.949 | r:12.000->11.773 | stroke_circle:1.000->1.108 | arm_stroke:6.000->5.977
+redraw_variation: seed=444247208381 changed_params=cx:15.000->15.028 | cy:29.700->29.936 | r:12.000->12.072 | stroke_circle:1.000->0.940 | arm_stroke:6.000->5.982
 semantic-guard: Text bewusst deaktiviert (plain-ring Familie ohne Buchstabe).
 Runde 1: elementweise Validierung gestartet
 circle: Fehler=154.001
 circle: Breiten-Bracketing stroke_circle 2.000->1.000; Kandidaten=1.000->126.676, 2.000->154.001, 2.500->154.001, 4.000->225.202, 5.000->248.884, 6.500->274.791
 circle: Mittelpunkt-Bracketing cx 15.000->15.000, cy 29.700->26.000 (best_err=123.704)
-perf_probe: circle_center_elapsed round=1 elapsed=0.04s
+perf_probe: circle_center_elapsed round=1 elapsed=0.02s
 circle: Radius-Bracketing r 11.868->12.000 (best_err=123.394, full_err=49.532); Kandidaten=11.352->126.954, 11.500->126.450, 12.000->123.394, 14.400->136.040
 perf_probe: circle_radius_elapsed round=1 elapsed=0.01s
 arm: Fehler=102.663
@@ -20,9 +20,9 @@ Runde 2: elementweise Validierung gestartet
 circle: Fehler=123.394
 circle: Breiten-Bracketing keine relevante Änderung (stroke_circle: 1.000); Kandidaten=1.000->123.394, 2.000->133.149, 3.500->161.356, 5.000->182.205, 6.500->197.872
 circle: Mittelpunkt-Bracketing cx 15.000->15.000, cy 26.000->31.000 (best_err=116.872)
-perf_probe: circle_center_elapsed round=2 elapsed=0.04s
+perf_probe: circle_center_elapsed round=2 elapsed=0.03s
 circle: Radius-Bracketing r 12.000->11.500 (best_err=117.587, full_err=53.856); Kandidaten=11.352->118.722, 11.500->117.587, 12.000->116.872, 14.400->131.553
-perf_probe: circle_radius_elapsed round=2 elapsed=0.04s
+perf_probe: circle_radius_elapsed round=2 elapsed=0.01s
 arm: Element konnte nicht extrahiert werden
 perf_probe: global_search_elapsed round=2 elapsed=0.00s
 Runde 2: Gesamtfehler=53.856
@@ -30,9 +30,9 @@ Runde 3: elementweise Validierung gestartet
 circle: Fehler=116.830
 circle: Breiten-Bracketing keine relevante Änderung (stroke_circle: 1.000); Kandidaten=1.000->116.830, 2.000->143.571, 3.500->234.855, 5.000->267.966, 6.500->288.002
 circle: Mittelpunkt-Bracketing cx 15.000->15.000, cy 31.000->30.000 (best_err=119.397)
-perf_probe: circle_center_elapsed round=3 elapsed=0.03s
+perf_probe: circle_center_elapsed round=3 elapsed=0.01s
 circle: Radius-Bracketing keine relevante Änderung (r: 11.500, best_err=119.397, full_err=53.828); Kandidaten=11.352->120.420, 11.500->119.397, 14.400->136.713
-perf_probe: circle_radius_elapsed round=3 elapsed=0.01s
+perf_probe: circle_radius_elapsed round=3 elapsed=0.00s
 arm: Fehler=21.643
 arm: Breiten-Bracketing abgebrochen (arm_stroke) wegen nicht-finiten Fehlern 1.000->inf, 2.000->inf, 3.500->inf, 5.000->inf, 6.000->21.643
 arm: Längen-Bracketing arm_len 0.500->1.000; Kandidaten=1.000->21.643, 12.000->21.643, 23.000->21.643, 34.000->21.643, 45.000->21.643
@@ -42,7 +42,7 @@ Runde 4: elementweise Validierung gestartet
 circle: Fehler=119.397
 circle: Breiten-Bracketing keine relevante Änderung (stroke_circle: 1.000); Kandidaten=1.000->119.397, 2.000->143.486, 3.500->215.743, 5.000->251.196, 6.500->280.648
 circle: Mittelpunkt-Bracketing cx 15.000->15.000, cy 30.000->31.000 (best_err=116.830)
-perf_probe: circle_center_elapsed round=4 elapsed=0.03s
+perf_probe: circle_center_elapsed round=4 elapsed=0.01s
 circle: Radius-Bracketing keine relevante Änderung (r: 11.500, best_err=116.830, full_err=53.856); Kandidaten=11.352->118.236, 11.500->116.830, 14.400->131.553
 perf_probe: circle_radius_elapsed round=4 elapsed=0.00s
 arm: Element konnte nicht extrahiert werden
@@ -52,7 +52,7 @@ Runde 5: elementweise Validierung gestartet
 circle: Fehler=116.830
 circle: Breiten-Bracketing keine relevante Änderung (stroke_circle: 1.000); Kandidaten=1.000->116.830, 2.000->143.571, 3.500->234.855, 5.000->267.966, 6.500->288.002
 circle: Mittelpunkt-Bracketing cx 15.000->15.000, cy 31.000->30.000 (best_err=119.397)
-perf_probe: circle_center_elapsed round=5 elapsed=0.01s
+perf_probe: circle_center_elapsed round=5 elapsed=0.00s
 circle: Radius-Bracketing keine relevante Änderung (r: 11.500, best_err=119.397, full_err=53.828); Kandidaten=11.352->120.420, 11.500->119.397, 14.400->136.713
 perf_probe: circle_radius_elapsed round=5 elapsed=0.00s
 arm: Fehler=21.643
@@ -63,9 +63,9 @@ Runde 6: elementweise Validierung gestartet
 circle: Fehler=119.397
 circle: Breiten-Bracketing keine relevante Änderung (stroke_circle: 1.000); Kandidaten=1.000->119.397, 2.000->143.486, 3.500->215.743, 5.000->251.196, 6.500->280.648
 circle: Mittelpunkt-Bracketing cx 15.000->15.000, cy 30.000->31.000 (best_err=116.830)
-perf_probe: circle_center_elapsed round=6 elapsed=0.01s
+perf_probe: circle_center_elapsed round=6 elapsed=0.00s
 circle: Radius-Bracketing keine relevante Änderung (r: 11.500, best_err=116.830, full_err=53.856); Kandidaten=11.352->118.236, 11.500->116.830, 14.400->131.553
-perf_probe: circle_radius_elapsed round=6 elapsed=0.01s
+perf_probe: circle_radius_elapsed round=6 elapsed=0.00s
 arm: Element konnte nicht extrahiert werden
 perf_probe: global_search_elapsed round=6 elapsed=0.00s
 Runde 6: Gesamtfehler=53.856
