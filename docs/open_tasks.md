@@ -2096,3 +2096,9 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 - **Fortschritt (gekoppelte Plan-B-Aufgabe):** Die gekoppelte Plan-B-Syntheseprobe wurde im selben Schritt erfolgreich ausgeführt (`PYTHONPATH=. python3 tools/plan_b_synthetic_probe.py "Grey circle with label rF" --variant AC0223_S`), Ergebnis `status=ok`, Exit `0`; Log: `artifacts/converted_images/reports/plan_b_synthetic_probe_2026-05-15_ac0223S_run04.log`.
 - **Blocker:** Der Real-Input-Pfad für `AC0223` bleibt aufgrund des reproduzierbaren Semantik-Mismatch blockerrelevant; die bekannte OpenCV/Numpy-Umgebungswarnung erscheint im PB-Lauf weiterhin ohne Exit-Fehler.
 - **Nächster sinnvoller Schritt:** Entscheidungspfad für A7 explizit treffen: entweder Beschreibungsregel für `AC0223` (horizontale Linie als erlaubtes Merkmal) anpassen oder die Familie im Kanban vorläufig als `BLOCKED` markieren und mit dem nächsten A-Block fortfahren.
+
+### Fortschritt vs. Blocker (Session 2026-05-15, Run DO: N10-PB + T5)
+
+- **Fortschritt:** Die in der vorigen Session als nächster Schritt benannte gekoppelte Plan-B-Aufgabe **N10-PB** wurde ausgeführt (`AC0223`-Syntheseprobe, Exit `0`; Log: `artifacts/converted_images/reports/AC0223_planb_synthetic_2026-05-15_runDO_PB.log`). Zusätzlich wurde ein weiterer priorisierter Kurzlauf aus dem leichten Pfad umgesetzt (`T5_ac0812...`, `1 passed`, Exit `0`; Log: `artifacts/converted_images/reports/T5_ac0812_timeoutpath_probe_2026-05-15_runDO.log`).
+- **Blocker:** Der bekannte Laufzeit-/Timeout-Blocker für die schweren Vollbereichspfade N1/N2 bleibt unabhängig von den erfolgreichen Kurzläufen weiterhin offen.
+- **Nächster sinnvoller Schritt:** Entweder den nächsten T5-/N5-Kurzpfad mit neuem Artefakt nachziehen oder – bei ausreichend frischer Evidenz – einen erneuten N1-Vollbereichslauf mit fixer Timeout-Grenze dokumentieren.
