@@ -1924,10 +1924,10 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 
 ### Aufgabenliste – Blockweise Abarbeitung der Plan-B-Chunks (Stand 2026-05-14)
 
-- [ ] **A1 Datenbasis erfassen (einmalig)**
-  - [ ] Vorhandene JPG-Dateien inventarisieren (nur reale Inputs zählen).
-  - [ ] Nach Familien gruppieren: `AC08xx`, `AC05xx`, `AR*`, `DLG*`, `Ddc*`.
-  - [ ] Fehlstellen je Zielbereich markieren (z. B. `AC0810`, `AC0811`, `AC0813` fehlen lokal).
+- [x] **A1 Datenbasis erfassen (einmalig)** (2026-05-15: Inventur der realen Inputs in `artifacts/images_to_convert` durchgeführt: `1719` JPG/JPEG-Dateien. Familienverteilung: `AC08xx=87`, `AC05xx=228`, `AR*=30`, `DLG*=14`, `Ddc*=0`, Rest `1360` außerhalb der Prioritätsfamilien. Fehlstellen im genannten Zielbereich bestätigt: `AC0810`, `AC0811`, `AC0813` lokal nicht vorhanden.)
+  - [x] Vorhandene JPG-Dateien inventarisieren (nur reale Inputs zählen).
+  - [x] Nach Familien gruppieren: `AC08xx`, `AC05xx`, `AR*`, `DLG*`, `Ddc*`.
+  - [x] Fehlstellen je Zielbereich markieren (z. B. `AC0810`, `AC0811`, `AC0813` fehlen lokal).
 
 - [ ] **A2 Block-Plan festlegen (nur vorhandene IDs)**
   - [ ] Blockgröße: max. 10 **vorhandene** Basis-IDs.
@@ -1957,6 +1957,13 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
   - [ ] `BLOCKED`-Blöcke gesammelt erneut fahren.
 
 - [ ] **A8 Kanban-Status pflegen**
+
+### Fortschritt vs. Blocker (Session 2026-05-15, A1-Inventur + PB-A1-Dokumentationsfallback)
+
+- **Fortschritt (Primäraufgabe A1):** Die nächste offene dokumentierte Aufgabe wurde abgearbeitet: vollständige JPG/JPEG-Inventur aus `artifacts/images_to_convert` sowie Familiengruppierung und Fehlstellenprüfung (`AC0810`, `AC0811`, `AC0813` fehlen lokal).
+- **Fortschritt (gekoppelte PB-Aufgabe):** **PB-A1-Dokumentationsfallback** im selben Schritt erfüllt: Inventur wurde direkt in `open_tasks.md` mit quantifizierten Ergebnissen nachgetragen, damit A2 ohne zusätzlichen Vorlauf starten kann.
+- **Blocker:** Kein technischer Laufzeitblocker in diesem Schritt; für A2 bleibt inhaltlich nur die Festlegung belastbarer 10er-Blöcke auf Basis der vorhandenen IDs offen.
+- **Nächster sinnvoller Schritt:** A2 als nächste dokumentierte Aufgabe abarbeiten (Blockzuschnitt ausschließlich aus vorhandenen IDs).
   - [ ] Spalten verwenden: `Planned` → `Running` → `Review` → `Done` / `Blocked`.
   - [ ] Pro Session mindestens einen Block vollständig bis `Review` abschließen.
 
