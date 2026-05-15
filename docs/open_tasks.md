@@ -1930,10 +1930,18 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
   - [x] Nach Familien gruppieren: `AC08xx`, `AC05xx`, `AR*`, `DLG*`, `Ddc*`.
   - [x] Fehlstellen je Zielbereich markieren (z. B. `AC0810`, `AC0811`, `AC0813` fehlen lokal).
 
-- [ ] **A2 Block-Plan festlegen (nur vorhandene IDs)**
-  - [ ] Blockgröße: max. 10 **vorhandene** Basis-IDs.
-  - [ ] Priorität: zuerst `AC08xx`, dann `AC05xx`, danach `AR*`, zuletzt `DLG*`/`Ddc*`.
-  - [ ] Pro Block dokumentieren: Blockname, enthaltene IDs, erwartete Varianten (`_S/_M/_L`).
+- [x] **A2 Block-Plan festlegen (nur vorhandene IDs)** (2026-05-15: 10er-Blockplan auf Basis vorhandener IDs festgelegt; Priorität `AC08xx` → `AC05xx` → `AR*` → `DLG*`, `Ddc*` weiterhin ohne lokale Inputs.)
+  - [x] Blockgröße: max. 10 **vorhandene** Basis-IDs.
+  - [x] Priorität: zuerst `AC08xx`, dann `AC05xx`, danach `AR*`, zuletzt `DLG*`/`Ddc*`.
+  - [x] Pro Block dokumentieren: Blockname, enthaltene IDs, erwartete Varianten (`_S/_M/_L`).
+  - **Geplanter Blockzuschnitt (A2 v1):**
+    - `B-AC08-01`: `AC0800, AC0812, AC0814, AC0820, AC0832, AC0834, AC0835, AC0837, AC0839, AC0840` → erwartet je ID Varianten `_S/_M/_L`.
+    - `B-AC08-02`: `AC0841, AC0842, AC0843, AC0844, AC0845, AC0846, AC0847, AC0848, AC0849, AC0850` → erwartet je ID Varianten `_S/_M/_L`.
+    - `B-AC08-03`: `AC0851, AC0852, AC0853, AC0854, AC0860, AC0861, AC0862, AC0870, AC0881, AC0882` → erwartet je ID Varianten `_S/_M/_L`.
+    - `B-AC05-01`: `AC0501, AC0502, AC0503, AC0504, AC0511, AC0512, AC0521, AC0522, AC0531, AC0532` → erwartet je ID Varianten `_S/_M/_L`.
+    - `B-AR-01`: `AR0021, AR0022, AR0023, AR0024, AR0030, AR0041, AR0042, AR0043, AR0044, AR0061` → erwartet je ID Varianten `_S/_M/_L`.
+    - `B-DLG-01`: `DLG0000, DLG0001, DLG0002, DLG0003, DLG0010, DLG0011, DLG0012, DLG0013, DLG0014, DLG0015` → erwartet je ID Varianten `_S/_M/_L`.
+  - **PB-A2 (Dokumentationsfallback, gekoppelt):** Prioritäts- und Verfügbarkeits-Check durch direkte Nachpflege in `open_tasks.md` abgeschlossen; `Ddc*` bleibt wegen `0` lokaler Basis-IDs vorerst `blocked-by-input`.
 
 - [ ] **A3 Standard-Run pro Block**
   - [ ] Lauf mit fixer Toolchain/Timeout starten (`PYENV_VERSION=3.10.20`, `timeout ...`, Log via `tee`).
@@ -1965,6 +1973,14 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 - **Fortschritt (gekoppelte PB-Aufgabe):** **PB-A1-Dokumentationsfallback** im selben Schritt erfüllt: Inventur wurde direkt in `open_tasks.md` mit quantifizierten Ergebnissen nachgetragen, damit A2 ohne zusätzlichen Vorlauf starten kann.
 - **Blocker:** Kein technischer Laufzeitblocker in diesem Schritt; für A2 bleibt inhaltlich nur die Festlegung belastbarer 10er-Blöcke auf Basis der vorhandenen IDs offen.
 - **Nächster sinnvoller Schritt:** A2 als nächste dokumentierte Aufgabe abarbeiten (Blockzuschnitt ausschließlich aus vorhandenen IDs).
+
+### Fortschritt vs. Blocker (Session 2026-05-15, A2-Blockplan + PB-A2-Dokumentationsfallback)
+
+- **Fortschritt (Primäraufgabe A2):** Die nächste offene dokumentierte Aufgabe wurde ohne timeout-riskanten Lauf abgeschlossen: 10er-Blockplan ausschließlich aus vorhandenen Basis-IDs festgelegt und nach Priorität (`AC08xx` → `AC05xx` → `AR*` → `DLG*`) strukturiert.
+- **Fortschritt (gekoppelte PB-Aufgabe):** **PB-A2-Dokumentationsfallback** im selben Schritt erfüllt: Verfügbarkeits-/Prioritätsprüfung direkt im Taskboard dokumentiert; `Ddc*` explizit als `blocked-by-input` (0 lokale IDs) markiert.
+- **Blocker:** Kein technischer Runtime-Blocker; fachlicher Restblocker ist ausschließlich Datenverfügbarkeit für `Ddc*`.
+- **Nächster sinnvoller Schritt:** A3 mit dem ersten definierten Block (`B-AC08-01`) als Standard-Run starten und direkt danach A4-Review nachpflegen.
+
   - [ ] Spalten verwenden: `Planned` → `Running` → `Review` → `Done` / `Blocked`.
   - [ ] Pro Session mindestens einen Block vollständig bis `Review` abschließen.
 
