@@ -2023,3 +2023,10 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 - **Review (A4):** Der Lauf ist **instabil** für Teilmengen innerhalb des Blocks: u. a. `AC0840_[L|M|S]` mit `conversion_failed` (Fallback-Modus ohne verwertbares Ergebnis). Damit ist der Block nicht `DONE`, sondern vorläufig `Review/Blocked` bis Ursachenbereinigung.
 - **Fortschritt (gekoppelte Plan-B-Aufgabe):** Gekoppelte PB-Syntheseprobe erfolgreich ausgeführt: `PYTHONPATH=. python3 tools/plan_b_synthetic_probe.py "Circle with horizontal line" --variant AC0837_L` (Log: `artifacts/converted_images/reports/plan_b_synthetic_probe_2026-05-15_run12.log`, Ergebnis `status=ok`, Exit `0`).
 - **Nächster sinnvoller Schritt:** Für A7 einen Mini-Repro nur auf `AC0840` vorbereiten (Input-/Semantikpfad prüfen) und danach `B-AC08-01` erneut fahren oder auf `B-AC08-02` rotieren.
+
+### Fortschritt vs. Blocker (Session 2026-05-15, A7-Mini-Repro AC0840 + Plan-B Run 13)
+
+- **Fortschritt (Primäraufgabe A7):** Der als nächster Schritt benannte Mini-Repro für `AC0840` wurde mit fixer Toolchain/Timeout isoliert ausgeführt (`PYENV_VERSION=3.10.20 timeout 180 ... --start AC0840 --end AC0840 --deterministic-order`); Log-Artefakt: `artifacts/converted_images/reports/A7_AC0840_minirepro_2026-05-15_run13.log`, Exit `0`.
+- **Review/Befund:** Alle Varianten `AC0840_[L|M|S]` laufen reproduzierbar in den Fallback-Modus und enden mit `conversion_failed`; der Blocker ist damit auf Einzel-ID-Ebene bestätigt und nicht nur ein Batch-Effekt.
+- **Fortschritt (gekoppelte Plan-B-Aufgabe):** Die gekoppelte PB-Syntheseprobe wurde im selben Schritt erfolgreich ausgeführt (`PYTHONPATH=. python3 tools/plan_b_synthetic_probe.py "Grey circle with label rF" --variant AC0840_L`); Log: `artifacts/converted_images/reports/plan_b_synthetic_probe_2026-05-15_run13.log`, Ergebnis `status=ok`, Exit `0`.
+- **Nächster sinnvoller Schritt:** A7 fortsetzen mit einem direkten Diff der Inputpfade (reales `AC0840_L.jpg` vs. synthetischer Probe auf derselben Semantik), danach Entscheidung: Block `B-AC08-01` erneut fahren oder mit markiertem `BLOCKED` auf `B-AC08-02` rotieren.
