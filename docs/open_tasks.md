@@ -1930,10 +1930,18 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
   - [x] Nach Familien gruppieren: `AC08xx`, `AC05xx`, `AR*`, `DLG*`, `Ddc*`.
   - [x] Fehlstellen je Zielbereich markieren (z. B. `AC0810`, `AC0811`, `AC0813` fehlen lokal).
 
-- [ ] **A2 Block-Plan festlegen (nur vorhandene IDs)**
-  - [ ] Blockgröße: max. 10 **vorhandene** Basis-IDs.
-  - [ ] Priorität: zuerst `AC08xx`, dann `AC05xx`, danach `AR*`, zuletzt `DLG*`/`Ddc*`.
-  - [ ] Pro Block dokumentieren: Blockname, enthaltene IDs, erwartete Varianten (`_S/_M/_L`).
+- [x] **A2 Block-Plan festlegen (nur vorhandene IDs)** (2026-05-15: 10er-Blockplan auf Basis vorhandener IDs festgelegt; Priorität `AC08xx` → `AC05xx` → `AR*` → `DLG*`, `Ddc*` weiterhin ohne lokale Inputs.)
+  - [x] Blockgröße: max. 10 **vorhandene** Basis-IDs.
+  - [x] Priorität: zuerst `AC08xx`, dann `AC05xx`, danach `AR*`, zuletzt `DLG*`/`Ddc*`.
+  - [x] Pro Block dokumentieren: Blockname, enthaltene IDs, erwartete Varianten (`_S/_M/_L`).
+  - **Geplanter Blockzuschnitt (A2 v1):**
+    - `B-AC08-01`: `AC0800, AC0812, AC0814, AC0820, AC0832, AC0834, AC0835, AC0837, AC0839, AC0840` → erwartet je ID Varianten `_S/_M/_L`.
+    - `B-AC08-02`: `AC0841, AC0842, AC0843, AC0844, AC0845, AC0846, AC0847, AC0848, AC0849, AC0850` → erwartet je ID Varianten `_S/_M/_L`.
+    - `B-AC08-03`: `AC0851, AC0852, AC0853, AC0854, AC0860, AC0861, AC0862, AC0870, AC0881, AC0882` → erwartet je ID Varianten `_S/_M/_L`.
+    - `B-AC05-01`: `AC0501, AC0502, AC0503, AC0504, AC0511, AC0512, AC0521, AC0522, AC0531, AC0532` → erwartet je ID Varianten `_S/_M/_L`.
+    - `B-AR-01`: `AR0021, AR0022, AR0023, AR0024, AR0030, AR0041, AR0042, AR0043, AR0044, AR0061` → erwartet je ID Varianten `_S/_M/_L`.
+    - `B-DLG-01`: `DLG0000, DLG0001, DLG0002, DLG0003, DLG0010, DLG0011, DLG0012, DLG0013, DLG0014, DLG0015` → erwartet je ID Varianten `_S/_M/_L`.
+  - **PB-A2 (Dokumentationsfallback, gekoppelt):** Prioritäts- und Verfügbarkeits-Check durch direkte Nachpflege in `open_tasks.md` abgeschlossen; `Ddc*` bleibt wegen `0` lokaler Basis-IDs vorerst `blocked-by-input`.
 
 - [ ] **A3 Standard-Run pro Block**
   - [ ] Lauf mit fixer Toolchain/Timeout starten (`PYENV_VERSION=3.10.20`, `timeout ...`, Log via `tee`).
@@ -1965,6 +1973,14 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 - **Fortschritt (gekoppelte PB-Aufgabe):** **PB-A1-Dokumentationsfallback** im selben Schritt erfüllt: Inventur wurde direkt in `open_tasks.md` mit quantifizierten Ergebnissen nachgetragen, damit A2 ohne zusätzlichen Vorlauf starten kann.
 - **Blocker:** Kein technischer Laufzeitblocker in diesem Schritt; für A2 bleibt inhaltlich nur die Festlegung belastbarer 10er-Blöcke auf Basis der vorhandenen IDs offen.
 - **Nächster sinnvoller Schritt:** A2 als nächste dokumentierte Aufgabe abarbeiten (Blockzuschnitt ausschließlich aus vorhandenen IDs).
+
+### Fortschritt vs. Blocker (Session 2026-05-15, A2-Blockplan + PB-A2-Dokumentationsfallback)
+
+- **Fortschritt (Primäraufgabe A2):** Die nächste offene dokumentierte Aufgabe wurde ohne timeout-riskanten Lauf abgeschlossen: 10er-Blockplan ausschließlich aus vorhandenen Basis-IDs festgelegt und nach Priorität (`AC08xx` → `AC05xx` → `AR*` → `DLG*`) strukturiert.
+- **Fortschritt (gekoppelte PB-Aufgabe):** **PB-A2-Dokumentationsfallback** im selben Schritt erfüllt: Verfügbarkeits-/Prioritätsprüfung direkt im Taskboard dokumentiert; `Ddc*` explizit als `blocked-by-input` (0 lokale IDs) markiert.
+- **Blocker:** Kein technischer Runtime-Blocker; fachlicher Restblocker ist ausschließlich Datenverfügbarkeit für `Ddc*`.
+- **Nächster sinnvoller Schritt:** A3 mit dem ersten definierten Block (`B-AC08-01`) als Standard-Run starten und direkt danach A4-Review nachpflegen.
+
   - [ ] Spalten verwenden: `Planned` → `Running` → `Review` → `Done` / `Blocked`.
   - [ ] Pro Session mindestens einen Block vollständig bis `Review` abschließen.
 
@@ -2000,3 +2016,17 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 - **Fortschritt:** Die nächste offene dokumentierte Primäraufgabe (`N2`) wurde mit standardisierter Python-`3.10.20`-Toolchain und `timeout 420` ausgeführt; gemäß Plan-B-Kopplungsregel wurde direkt anschließend die gekoppelte Microbatch-Aufgabe (`AC0800..AC0809`) erfolgreich mit Exit `0` abgeschlossen.
 - **Blocker:** Der Vollbereichslauf `AC0800..AC0899` endet weiterhin am äußeren Timeout (Exit `124`), daher bleibt der vollständige Stabilitätsnachweis über den kompletten Bereich offen.
 - **Nächster sinnvoller Schritt:** Weiter auf kurze, reproduzierbare Diagnosepfade rotieren (z. B. T6/T6-PB bzw. A-Block-Plan), bevor erneut ein schwerer Vollbereichslauf angesetzt wird.
+
+### Fortschritt vs. Blocker (Session 2026-05-15, A3/A4 B-AC08-01 + PB-Syntheseprobe Run 12)
+
+- **Fortschritt (Primäraufgabe A3 + A4):** Der erste definierte Block `B-AC08-01` wurde als Standard-Run mit fixer Toolchain/Timeout und deterministischer Reihenfolge ausgeführt: `PYENV_VERSION=3.10.20 timeout 240 python -m src.imageCompositeConverter artifacts/images_to_convert --descriptions-path artifacts/images_to_convert/Finale_Wurzelformen_V3.xml --output-dir artifacts/converted_images --start AC0800 --end AC0840 --deterministic-order` (Log: `artifacts/converted_images/reports/B-AC08-01_standard_2026-05-15_run01.log`, Exit `0`).
+- **Review (A4):** Der Lauf ist **instabil** für Teilmengen innerhalb des Blocks: u. a. `AC0840_[L|M|S]` mit `conversion_failed` (Fallback-Modus ohne verwertbares Ergebnis). Damit ist der Block nicht `DONE`, sondern vorläufig `Review/Blocked` bis Ursachenbereinigung.
+- **Fortschritt (gekoppelte Plan-B-Aufgabe):** Gekoppelte PB-Syntheseprobe erfolgreich ausgeführt: `PYTHONPATH=. python3 tools/plan_b_synthetic_probe.py "Circle with horizontal line" --variant AC0837_L` (Log: `artifacts/converted_images/reports/plan_b_synthetic_probe_2026-05-15_run12.log`, Ergebnis `status=ok`, Exit `0`).
+- **Nächster sinnvoller Schritt:** Für A7 einen Mini-Repro nur auf `AC0840` vorbereiten (Input-/Semantikpfad prüfen) und danach `B-AC08-01` erneut fahren oder auf `B-AC08-02` rotieren.
+
+### Fortschritt vs. Blocker (Session 2026-05-15, A7-Mini-Repro AC0840 + Plan-B Run 13)
+
+- **Fortschritt (Primäraufgabe A7):** Der als nächster Schritt benannte Mini-Repro für `AC0840` wurde mit fixer Toolchain/Timeout isoliert ausgeführt (`PYENV_VERSION=3.10.20 timeout 180 ... --start AC0840 --end AC0840 --deterministic-order`); Log-Artefakt: `artifacts/converted_images/reports/A7_AC0840_minirepro_2026-05-15_run13.log`, Exit `0`.
+- **Review/Befund:** Alle Varianten `AC0840_[L|M|S]` laufen reproduzierbar in den Fallback-Modus und enden mit `conversion_failed`; der Blocker ist damit auf Einzel-ID-Ebene bestätigt und nicht nur ein Batch-Effekt.
+- **Fortschritt (gekoppelte Plan-B-Aufgabe):** Die gekoppelte PB-Syntheseprobe wurde im selben Schritt erfolgreich ausgeführt (`PYTHONPATH=. python3 tools/plan_b_synthetic_probe.py "Grey circle with label rF" --variant AC0840_L`); Log: `artifacts/converted_images/reports/plan_b_synthetic_probe_2026-05-15_run13.log`, Ergebnis `status=ok`, Exit `0`.
+- **Nächster sinnvoller Schritt:** A7 fortsetzen mit einem direkten Diff der Inputpfade (reales `AC0840_L.jpg` vs. synthetischer Probe auf derselben Semantik), danach Entscheidung: Block `B-AC08-01` erneut fahren oder mit markiertem `BLOCKED` auf `B-AC08-02` rotieren.
