@@ -1,6 +1,29 @@
 ﻿Dateiname;Gefundene Elemente;Beste Iteration;Diff-Score;FehlerProPixel
+AC0020_L.jpg;SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch);1;10.68;0.00190719
+AC0020_M.jpg;SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch);1;12.29;0.00372283
+AC0020_S.jpg;SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch);1;13.06;0.00544253
+AC0021.jpg;SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch);1;26.00;0.00650542
+AC0022.jpg;SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch);1;32.35;0.00809506
+AC0023.jpg;SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch);1;20.98;0.00540050
+AC0026.jpg;SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch);1;24.99;0.00643253
 AC0040_L.jpg;SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch);1;9.06;0.00161724
+AC0040_M.jpg;SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch);1;11.10;0.00336468
+AC0040_S.jpg;SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch);1;11.37;0.00473877
 AC0050_L.jpg;SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch);1;8.96;0.00159954
+AC0050_M.jpg;SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch);1;11.18;0.00338745
+AC0050_S.jpg;SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch);1;11.26;0.00469086
+AC0060_L.jpg;SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch);1;19.53;0.00348697
+AC0060_M.jpg;SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch);1;14.69;0.00445237
+AC0060_S.jpg;SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch);1;18.78;0.00782425
+AC0070_L.jpg;SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch);1;26.84;0.00479278
+AC0070_M.jpg;SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch);1;21.47;0.00650520
+AC0070_S.jpg;SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch);1;25.59;0.01066343
+AC0080_L.jpg;SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch);1;20.19;0.00360558
+AC0080_M.jpg;SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch);1;15.52;0.00470321
+AC0080_S.jpg;SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch);1;19.71;0.00821163
+AC0090_L.jpg;SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch);1;26.86;0.00479677
+AC0090_M.jpg;SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch);1;21.45;0.00650107
+AC0090_S.jpg;SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch);1;25.57;0.01065590
 AC0800_L.jpg;SEMANTIC: Kreis ohne Buchstabe;1;8.90;0.00988519
 AC0800_M.jpg;SEMANTIC: Kreis ohne Buchstabe;1;2.40;0.00601250
 AC0800_S.jpg;SEMANTIC: Kreis ohne Buchstabe;1;10.31;0.04580741
@@ -10,18 +33,20 @@ AC0812_S.jpg;SEMANTIC: Kreis ohne Buchstabe + SEMANTIC: waagrechter Strich links
 AC0814_L.jpg;SEMANTIC: Kreis ohne Buchstabe + SEMANTIC: waagrechter Strich rechts vom Kreis;1;6.22;0.00553086
 AC0814_M.jpg;SEMANTIC: Kreis ohne Buchstabe + SEMANTIC: waagrechter Strich rechts vom Kreis;1;8.50;0.01214082
 AC0814_S.jpg;SEMANTIC: Kreis ohne Buchstabe + SEMANTIC: waagrechter Strich rechts vom Kreis;1;8.01;0.02134756
-AC0820_L.jpg;SEMANTIC: Kreis + Buchstabe CO_2;1;30.19;0.03354198
-AC0820_M.jpg;SEMANTIC: Kreis + Buchstabe CO_2;1;24.28;0.06069375
-AC0832_M.jpg;SEMANTIC: waagrechter Strich links vom Kreis + SEMANTIC: Kreis + Buchstabe;1;23.37;0.03338980
-AC0834_L.jpg;SEMANTIC: waagrechter Strich rechts vom Kreis + SEMANTIC: Kreis + Buchstabe;1;13.73;0.01220583
-AC0835_L.jpg;SEMANTIC: Kreis + Buchstabe VOC;1;26.40;0.04224000
-AC0835_S.jpg;SEMANTIC: Kreis + Buchstabe VOC;1;29.98;0.13325432
-AC0837_S.jpg;SEMANTIC: waagrechter Strich links vom Kreis + SEMANTIC: Kreis + Buchstabe VOC;1;23.32;0.06217956
-AC0839_M.jpg;SEMANTIC: waagrechter Strich rechts vom Kreis + SEMANTIC: Kreis + Buchstabe VOC;1;21.75;0.03107755
-AC0839_S.jpg;SEMANTIC: waagrechter Strich rechts vom Kreis + SEMANTIC: Kreis + Buchstabe VOC;1;21.65;0.05772089
-AC0842_L.jpg;SEMANTIC: waagrechter Strich links vom Kreis + SEMANTIC: Kreis + Buchstabe rF;1;23.79;0.02114607
-AC0842_S.jpg;SEMANTIC: waagrechter Strich links vom Kreis + SEMANTIC: Kreis + Buchstabe rF;1;26.91;0.07175111
+AC0820_S.jpg;SEMANTIC: Kreis + Buchstabe CO_2;1;24.36;0.10826667
+AC0832_L.jpg;SEMANTIC: waagrechter Strich links vom Kreis + SEMANTIC: Kreis + Buchstabe;1;21.56;0.01916681
+AC0832_S.jpg;SEMANTIC: waagrechter Strich links vom Kreis + SEMANTIC: Kreis + Buchstabe;1;19.83;0.05287111
+AC0834_M.jpg;SEMANTIC: waagrechter Strich rechts vom Kreis + SEMANTIC: Kreis + Buchstabe;1;17.82;0.02546122
+AC0834_S.jpg;SEMANTIC: waagrechter Strich rechts vom Kreis + SEMANTIC: Kreis + Buchstabe;1;17.51;0.04670578
+AC0835_M.jpg;SEMANTIC: Kreis + Buchstabe VOC;1;20.24;0.05059375
+AC0835_S.jpg;SEMANTIC: Kreis + Buchstabe VOC;1;26.57;0.11808395
+AC0837_L.jpg;SEMANTIC: waagrechter Strich links vom Kreis + SEMANTIC: Kreis + Buchstabe VOC;1;22.73;0.02020583
+AC0837_M.jpg;SEMANTIC: waagrechter Strich links vom Kreis + SEMANTIC: Kreis + Buchstabe VOC;1;25.32;0.03617551
+AC0839_L.jpg;SEMANTIC: waagrechter Strich rechts vom Kreis + SEMANTIC: Kreis + Buchstabe VOC;1;18.06;0.01605531
+AC0839_S.jpg;SEMANTIC: waagrechter Strich rechts vom Kreis + SEMANTIC: Kreis + Buchstabe VOC;1;18.55;0.04945778
+AC0842_M.jpg;SEMANTIC: waagrechter Strich links vom Kreis + SEMANTIC: Kreis + Buchstabe rF;1;26.98;0.03854898
 AC0870_L.jpg;SEMANTIC: Kreis + Buchstabe;1;12.35;0.01372469
+AC0870_M.jpg;SEMANTIC: Kreis + Buchstabe;1;29.18;0.07294375
 AC0870_S.jpg;SEMANTIC: Kreis + Buchstabe;1;32.86;0.14603457
 AC0882_L.jpg;SEMANTIC: waagrechter Strich links vom Kreis + SEMANTIC: Kreis + Buchstabe;1;11.07;0.00984336
-AC0882_M.jpg;SEMANTIC: waagrechter Strich links vom Kreis + SEMANTIC: Kreis + Buchstabe;1;23.50;0.03357755
+AC0882_S.jpg;SEMANTIC: waagrechter Strich links vom Kreis + SEMANTIC: Kreis + Buchstabe;1;23.84;0.06358044
