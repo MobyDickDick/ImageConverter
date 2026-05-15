@@ -454,6 +454,8 @@ Deadlock-/Stagnationsschleifen.
   - 2026-05-07: Run CD zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault und bestätigt weiteren Variantenfortschritt bis mindestens `AC0842_L`/`AC0849_S`/`AC0831_S`; Status bleibt wegen Timeout-Exit `124` offen (Summary: `docs/ac0800_ac0899_runCD_2026-05-07_summary.md`).
   - 2026-05-15: Run DK zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault; Vollbereich endet erneut per Timeout-Exit `124` (Summary: `docs/ac0800_ac0899_runDK_2026-05-15_summary.md`).
   - 2026-05-15: N2-PB direkt nach Run DK ausgeführt (`AC0800..AC0809`, gleiche Runtime-Parameter); Microbatch endet mit Exit `0`, Fortschritt/Artefakt in `artifacts/converted_images/reports/AC0800_AC0809_microbatch_2026-05-15_runDK_PB.log` (Summary: `docs/ac0800_ac0809_planb_runDK_2026-05-15_summary.md`).
+  - 2026-05-15: Run DL zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault; Vollbereich endet erneut per Timeout-Exit `124` (Summary: `docs/ac0800_ac0899_runDL_2026-05-15_summary.md`).
+  - 2026-05-15: N2-PB direkt nach Run DL ausgeführt (`AC0800..AC0809`, gleiche Runtime-Parameter); Microbatch endet mit Exit `0`, Fortschritt/Artefakt in `artifacts/converted_images/reports/AC0800_AC0809_microbatch_2026-05-15_runDL_PB.log` (Summary: `docs/ac0800_ac0809_planb_runDL_2026-05-15_summary.md`).
 
 - [x] N3: Neue Laufzusammenfassung im Run-Format ergänzen.
   - Neue Datei analog zu Run Q/R erstellen (Datum, Anlass, exakter Befehl, Log-Pfad, sichtbarer Fortschritt, Exit-Code, Kurzfazit).
