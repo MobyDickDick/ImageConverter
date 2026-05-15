@@ -1,0 +1,14 @@
+<svg width="60" height="10" viewBox="0 0 60 10" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+  <g transform="translate(30.000 5.000) rotate(0) scale(0.7967) translate(-30.000 -5.000)">
+<defs>
+    <linearGradient id="detectedStripeGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0.000%" stop-color="#d0d0d0"/>
+      <stop offset="20.000%" stop-color="#b6b8b7"/>
+      <stop offset="40.000%" stop-color="#d6d8d7"/>
+      <stop offset="80.000%" stop-color="#b7b9b8"/>
+      <stop offset="100.000%" stop-color="#cfd1d0"/>
+    </linearGradient>
+  </defs>
+  <rect x="0.0000" y="2.0000" width="60.0000" height="6.0000" fill="url(#detectedStripeGradient)"/>
+  </g>
+</svg>

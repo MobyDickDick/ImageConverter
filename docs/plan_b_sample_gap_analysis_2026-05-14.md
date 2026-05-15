@@ -41,3 +41,14 @@
 
 - Start mit Pilot-Subset `AC0800`, `AC0814_L`, `AC0814_M`, `AC0838_M`.
 - Danach Entscheidung, ob Plan-B-Selektionslogik (Schwellwerte/Ranking) vor dem Vollbatch nachjustiert werden soll.
+# Pilot-Entscheidung (2026-05-14 21:23:01)
+
+- Log: `artifacts/converted_images/reports/pilot_ac0800_ac0814_ac0838m_2026-05-14_2119.log`
+- Entscheidung: [ ] Plan-B-Logik jetzt nachjustieren  [ ] Direkt auf 10er-Chunks skalieren
+- Begründung (max 5 Sätze):
+
+# Chunk-Review AC0800..AC0809 (2026-05-14 21:29:35)
+
+- Log: `artifacts/converted_images/reports/chunk_ac0800_ac0809_2026-05-14_2128.log`
+- Ergebnis: [ ] stabil (nächster 10er-Chunk)  [ ] instabil (erst nachjustieren)
+- Kurznotiz:

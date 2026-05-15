@@ -1,0 +1,932 @@
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
+
+--- Verarbeite SE0041_1.jpg ---
+Bildbeschreibung: Wie AC0811, jecoch ist der Kreis viereckig anstatt rund gezeichnet.
+Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe, SEMANTIC: senkrechter Strich hinter dem Kreis, REFERENZ: Abgeleitet aus AC0811
+[WARN] SE0041_1.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+
+--- Verarbeite GE9034_6S.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE9034_6S.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE1404_L.jpg ---
+Bildbeschreibung: Wie GE1401: Wie AC0150, jedoch ist die kräftige graue Ecke/ Winkel unten statt rechts. . Geometrische Variante: 90° nach links gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe, REFERENZ: Abgeleitet aus GE1401
+[WARN] GE1404_L.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+
+--- Verarbeite GE9024_5S.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE9024_5S.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite AC0913_S.jpg ---
+Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0913. Dokumentiert ist die kleine Variante (S) als Einzelbild ohne finale Familienzuordnung. Geometrie-Hinweis: Grundform und Anbauteile sollten analog zu den bereits detaillierten Kreis-/Kellen-Familien beschrieben werden (zuerst Grundkörper wie Kreis/Ellipse/Rechteck/Polygon, danach Leitungen/Griffe/Dreiecke, anschließend vorhandene Zeichenkette im Symbol). Konverter-Hinweis: Bis zur fachlichen Zuordnung als "manuell prüfen" behandeln; automatische Nachzeichnung ist nur nach expliziter Geometrie- und Textklassifizierung belastbar. Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: AUTO: Trotz unzugeordneter Familienzuordnung wurde wegen ausreichender Geometriehinweise automatisch konvertiert.
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] AC0913_S.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE0109_L.jpg ---
+Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie GE0109. Dokumentiert ist die kleine Variante (S) als Einzelbild ohne finale Familienzuordnung. Geometrie-Hinweis: Grundform und Anbauteile sollten analog zu den bereits detaillierten Kreis-/Kellen-Familien beschrieben werden (zuerst Grundkörper wie Kreis/Ellipse/Rechteck/Polygon, danach Leitungen/Griffe/Dreiecke, anschließend vorhandene Zeichenkette im Symbol). Konverter-Hinweis: Bis zur fachlichen Zuordnung als "manuell prüfen" behandeln; automatische Nachzeichnung ist nur nach expliziter Geometrie- und Textklassifizierung belastbar. Der Griff liegt auf einer Symmetrieachse des Kreises. Unzugeordnete Wurzelform aus der Serie GE0109. Dokumentiert ist die große Variante (L) als Einzelbild ohne finale Familienzuordnung. Geometrie-Hinweis: Grundform und Anbauteile sollten analog zu den bereits detaillierten Kreis-/Kellen-Familien beschrieben werden (zuerst Grundkörper wie Kreis/Ellipse/Rechteck/Polygon, danach Leitungen/Griffe/Dreiecke, anschließend vorhandene Zeichenkette im Symbol). Konverter-Hinweis: Bis zur fachlichen Zuordnung als "manuell prüfen" behandeln; automatische Nachzeichnung ist nur nach expliziter Geometrie- und Textklassifizierung belastbar. Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: AUTO: Trotz unzugeordneter Familienzuordnung wurde wegen ausreichender Geometriehinweise automatisch konvertiert.
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE0109_L.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE0003_M.jpg ---
+Bildbeschreibung: Weltkugel (links oben Nordamerika, links unten Südamerika rechts oben Westeuropa, rechts unten Teil von Afrika). Hintergrund GE0999
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE0003_M.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE9013_1S.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE9013_1S.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE9014_3S.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE9014_3S.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite AC5041_M.jpg ---
+Bildbeschreibung: sehr komplexe Form, wahrscheinlich sehr schwierig zum nachzeichnen. Es zeigt eine eingeschaltete Heizung. Links ist ein Gebläse (Motor mit eingebauten Ventilator) Auf der rechten Seite ist aussen ein Behälter schematisch dargestellt, welcher aufgeschnitten ist (Heizraum). Er ist grau mit einem vertikalen Farbverlauf von hell nach dunkel. Es ist eine farbige Fläche dargestellt mit einem vertikalen Farbverlauf von orange nach rot.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] AC5041_M.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite AC0870_M.jpg ---
+Bildbeschreibung: Grauer Kreis mit grauem Rand und hellgrauem Hintergrund Abweichung: mit Text "T" (Temperatur)
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe
+
+--- Verarbeite NAV0018.JPG ---
+Bildbeschreibung: Hintergrund NAV0010. Haus wie bei GE0346
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] NAV0018.JPG: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite AC0842_L.jpg ---
+Bildbeschreibung: Grauer Kreis mit grauem Rand und hellgrauem Hintergrund Abweichung: mit Text "rF" (relative Feuchtigkeit) Abweichung: mit Griff (dunkelgraue Linie nach unten) Abweichung: nach rechts gedreht, Text immer noch horizontal. Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: SEMANTIC: waagrechter Strich links vom Kreis, SEMANTIC: Kreis + Buchstabe rF
+
+--- Verarbeite GE9014_6S.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE9014_6S.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE0013.jpg ---
+Bildbeschreibung: Wie GE0012, aber heller
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE0013.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE0015_S.jpg ---
+Bildbeschreibung: Wie GE0014 aber dunkler
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE0015_S.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite SE0061.jpg ---
+Bildbeschreibung: Wie AC0811, jecoch ist der Kreis viereckig anstatt rund gezeichnet. Abweichung: anstelle von "T" steht ein "P"
+Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe, SEMANTIC: senkrechter Strich hinter dem Kreis, REFERENZ: Abgeleitet aus AC0811
+[WARN] SE0061.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+
+--- Verarbeite GE1101_M.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE1101_M.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE9013_3S.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE9013_3S.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE9044_3S.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE9044_3S.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE1204_S.jpg ---
+Bildbeschreibung: Wie GE1202: Wie GE1200, jedoch rote Farbe innen (grauer Rand ist gleich). Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE1204_S.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE9012_3S.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE9012_3S.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE0025.jpg ---
+Bildbeschreibung: Hintergrund: GE0999. Play-Button (Dreieck ) nach rechts
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE0025.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite AC0910_M.jpg ---
+Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0910. Dokumentiert ist die kleine Variante (S) als Einzelbild ohne finale Familienzuordnung. Geometrie-Hinweis: Grundform und Anbauteile sollten analog zu den bereits detaillierten Kreis-/Kellen-Familien beschrieben werden (zuerst Grundkörper wie Kreis/Ellipse/Rechteck/Polygon, danach Leitungen/Griffe/Dreiecke, anschließend vorhandene Zeichenkette im Symbol). Konverter-Hinweis: Bis zur fachlichen Zuordnung als "manuell prüfen" behandeln; automatische Nachzeichnung ist nur nach expliziter Geometrie- und Textklassifizierung belastbar. Der Griff liegt auf einer Symmetrieachse des Kreises. Unzugeordnete Wurzelform aus der Serie AC0910. Dokumentiert ist die mittlere Variante (M) als Einzelbild ohne finale Familienzuordnung. Geometrie-Hinweis: Grundform und Anbauteile sollten analog zu den bereits detaillierten Kreis-/Kellen-Familien beschrieben werden (zuerst Grundkörper wie Kreis/Ellipse/Rechteck/Polygon, danach Leitungen/Griffe/Dreiecke, anschließend vorhandene Zeichenkette im Symbol). Konverter-Hinweis: Bis zur fachlichen Zuordnung als "manuell prüfen" behandeln; automatische Nachzeichnung ist nur nach expliziter Geometrie- und Textklassifizierung belastbar. Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: AUTO: Trotz unzugeordneter Familienzuordnung wurde wegen ausreichender Geometriehinweise automatisch konvertiert.
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] AC0910_M.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite AC0844_M.jpg ---
+Bildbeschreibung: Grauer Kreis mit grauem Rand und hellgrauem Hintergrund Abweichung: mit Text "rF" (relative Feuchtigkeit) Abweichung: mit Griff (dunkelgraue Linie nach unten) Abweichung: nach links gedreht, Text immer noch horizontal. Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] AC0844_M.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+
+--- Verarbeite GE0044_L.jpg ---
+Bildbeschreibung: Hintergrund: GE0999. Wie GE0014
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE0044_L.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE0036_S.jpg ---
+Bildbeschreibung: Wie GE0028, aber ohne Hintergrund
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE0036_S.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE9012_4S.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE9012_4S.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE1201_L.jpg ---
+Bildbeschreibung: Ähnlich GE1002, jedoch heller und mit einem zusätzlichen hellgrauen Rand. Abweichung: gelbe Farbe innen (grauer Rand ist gleich)
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE1201_L.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE9011_5S.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE9011_5S.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE9032_5S.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE9032_5S.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite SE0024.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] SE0024.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE0039_L.jpg ---
+Bildbeschreibung: Wie GE0038: Hintergrund: GE0999. Pfeil GE0030 jedoch vertikal gespiegelt. . Geometrische Variante: 90° nach links gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE0039_L.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite AC5000_S_KH.jpg ---
+Bildbeschreibung: Radiator (komplexe Zeichnung) ca. 10 ganz dünne Rechtecke, Ecken abgerundet. Zwei dünne dunkelgraue Linien oben und unten hinter den dünnen Rechtecken.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] AC5000_S_KH.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE9001_6S.jpg ---
+Bildbeschreibung: stillisierte Röhre. Im Prinzip sehr dünnes Rechteck, hochkant, horizontaler Farbverlauf rot/grau/rot
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE9001_6S.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite AC0934_L.jpg ---
+Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0934. Dokumentiert ist die kleine Variante (S) als Einzelbild ohne finale Familienzuordnung. Geometrie-Hinweis: Grundform und Anbauteile sollten analog zu den bereits detaillierten Kreis-/Kellen-Familien beschrieben werden (zuerst Grundkörper wie Kreis/Ellipse/Rechteck/Polygon, danach Leitungen/Griffe/Dreiecke, anschließend vorhandene Zeichenkette im Symbol). Konverter-Hinweis: Bis zur fachlichen Zuordnung als "manuell prüfen" behandeln; automatische Nachzeichnung ist nur nach expliziter Geometrie- und Textklassifizierung belastbar. Der Griff liegt auf einer Symmetrieachse des Kreises. Unzugeordnete Wurzelform aus der Serie AC0934. Dokumentiert ist die große Variante (L) als Einzelbild ohne finale Familienzuordnung. Geometrie-Hinweis: Grundform und Anbauteile sollten analog zu den bereits detaillierten Kreis-/Kellen-Familien beschrieben werden (zuerst Grundkörper wie Kreis/Ellipse/Rechteck/Polygon, danach Leitungen/Griffe/Dreiecke, anschließend vorhandene Zeichenkette im Symbol). Konverter-Hinweis: Bis zur fachlichen Zuordnung als "manuell prüfen" behandeln; automatische Nachzeichnung ist nur nach expliziter Geometrie- und Textklassifizierung belastbar. Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: AUTO: Trotz unzugeordneter Familienzuordnung wurde wegen ausreichender Geometriehinweise automatisch konvertiert.
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] AC0934_L.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE9023_3S.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE9023_3S.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE9001_4S.jpg ---
+Bildbeschreibung: stillisierte Röhre. Im Prinzip sehr dünnes Rechteck, hochkant, horizontaler Farbverlauf rot/grau/rot
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE9001_4S.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE0102_L.jpg ---
+Bildbeschreibung: Wie GE0100: leicht abgerundetes Rechteck mit grauem Rand, vertikaler Farbverlauf von weiss (oben) nach grau (unten). . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE0102_L.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite AC0848_M.jpg ---
+Bildbeschreibung: Wie AC0846, um 90° nach links rotiert; die Zeichenkette "rH" bleibt horizontal lesbar. Geometrische Beschreibung: Kreisring unten/links versetzt mit vertikalem Leitungsarm nach oben.
+Befehl erkannt: REFERENZ: Abgeleitet aus AC0845, REFERENZ: Abgeleitet aus AC0846
+
+--- Verarbeite SE0100.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] SE0100.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite AC0840_L.jpg ---
+Bildbeschreibung: Grauer Kreis mit grauem Rand und hellgrauem Hintergrund Abweichung: mit Text "rF" (relative Feuchtigkeit)
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] AC0840_L.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+
+--- Verarbeite GE0033_S.jpg ---
+Bildbeschreibung: Wie GE0031: Wie GE0030, nach rechts gedreht. Geometrische Variante: 180° gedreht.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE0033_S.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE0040_L.jpg ---
+Bildbeschreibung: Hintergrund: GE0999. Fast-Left-Button (zwei Dreiecke nach links)
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE0040_L.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite AC0839_M.jpg ---
+Bildbeschreibung: Wie AC0836, jedoch 90° nach rechts gedreht. Der Griff verläuft waagrecht nach rechts, der Text "VOC" bleibt horizontal lesbar. Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: SEMANTIC: waagrechter Strich rechts vom Kreis, SEMANTIC: Kreis + Buchstabe VOC
+
+--- Verarbeite GE9024_6S.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE9024_6S.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE9005_4S.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE9005_4S.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE1003_L.jpg ---
+Bildbeschreibung: Hintergrund GE1002, Vordergrund Haken wie in GE1001
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE1003_L.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE9012_7S.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE9012_7S.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite AC0883_L.jpg ---
+Bildbeschreibung: Wie AC0881: Wie AC0870, jedoch mit Griff (dunkelgraue Linie nach unten). Geometrische Variante: 180° gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: SEMANTIC: senkrechter Strich hinter dem Kreis, SEMANTIC: Kreis + Buchstabe, REFERENZ: Abgeleitet aus AC0881
+[WARN] AC0883_L.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+
+--- Verarbeite GE9032_6S.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE9032_6S.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite AC0861_S.jpg ---
+Bildbeschreibung: Grauer Kreis mit grauem Rand und hellgrauem Hintergrund Abweichung: mit Text "rF" (relative Feuchtigkeit) Abweichung: mit Griff (dunkelgraue Linie nach unten). Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] AC0861_S.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+
+--- Verarbeite GE1201_M.jpg ---
+Bildbeschreibung: Ähnlich GE1002, jedoch heller und mit einem zusätzlichen hellgrauen Rand. Abweichung: gelbe Farbe innen (grauer Rand ist gleich)
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE1201_M.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE1002_L.jpg ---
+Bildbeschreibung: Wie GE0280, grau
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE1002_L.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE9901_M.jpg ---
+Bildbeschreibung: Wie GE0010: grauer Hintergrund links blaue Fläche mit vertikalem Farbverlauf oben dunkel, unten ein wenig heller und rechts geschwungene Linie (Wellenform mit 1-Ausbuchtung nach und 1-Ausbuchtung nach rechts). Auf der linken Seite ist noch eine Art Sichelform und ganz links eine einzelne weiße Linie. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE9901_M.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE0013_M.jpg ---
+Bildbeschreibung: Wie GE0012, aber heller
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE0013_M.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite AR0023.jpg ---
+Bildbeschreibung: Wie AR0022: Wie AR0021, nach rechts gedrecht. Geometrische Variante: Hauptdiagonal gespiegelt.
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe, REFERENZ: Abgeleitet aus AR0021, REFERENZ: Abgeleitet aus AR0022
+[WARN] AR0023.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+
+--- Verarbeite AC0841_M.jpg ---
+Bildbeschreibung: Grauer Kreis mit grauem Rand und hellgrauem Hintergrund Abweichung: mit Text "rF" (relative Feuchtigkeit) Abweichung: mit Griff (dunkelgraue Linie nach unten). Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] AC0841_M.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+
+--- Verarbeite GE0004_S.jpg ---
+Bildbeschreibung: Fragezeichen-Button. Hintergrund GE0999
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE0004_S.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE9013_2S.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE9013_2S.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE0044_S.jpg ---
+Bildbeschreibung: Hintergrund: GE0999. Wie GE0014
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE0044_S.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE1404_S.jpg ---
+Bildbeschreibung: Wie GE1401: Wie AC0150, jedoch ist die kräftige graue Ecke/ Winkel unten statt rechts. . Geometrische Variante: 90° nach links gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe, REFERENZ: Abgeleitet aus GE1401
+[WARN] GE1404_S.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+
+--- Verarbeite AC0911_S.jpg ---
+Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0911. Dokumentiert ist die kleine Variante (S) als Einzelbild ohne finale Familienzuordnung. Geometrie-Hinweis: Grundform und Anbauteile sollten analog zu den bereits detaillierten Kreis-/Kellen-Familien beschrieben werden (zuerst Grundkörper wie Kreis/Ellipse/Rechteck/Polygon, danach Leitungen/Griffe/Dreiecke, anschließend vorhandene Zeichenkette im Symbol). Konverter-Hinweis: Bis zur fachlichen Zuordnung als "manuell prüfen" behandeln; automatische Nachzeichnung ist nur nach expliziter Geometrie- und Textklassifizierung belastbar. Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: AUTO: Trotz unzugeordneter Familienzuordnung wurde wegen ausreichender Geometriehinweise automatisch konvertiert.
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] AC0911_S.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE0350.jpg ---
+Bildbeschreibung: Wie GE001
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE0350.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE0280.jpg ---
+Bildbeschreibung: Blaue Kugelform (blauer Kreis mit radialem Farbverlauf, aussen dunkel, innen hell)
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE0280.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite AC0844_L.jpg ---
+Bildbeschreibung: Grauer Kreis mit grauem Rand und hellgrauem Hintergrund Abweichung: mit Text "rF" (relative Feuchtigkeit) Abweichung: mit Griff (dunkelgraue Linie nach unten) Abweichung: nach links gedreht, Text immer noch horizontal. Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] AC0844_L.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+
+--- Verarbeite GE0108_M.jpg ---
+Bildbeschreibung: Wie GE0104: Flammensymbol von GE02024 links und Hintergrund GE0100. Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE0108_M.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite AC0863_L.jpg ---
+Bildbeschreibung: Wie AC0842, jecoch nach rechts gedreht, Text immer noch horizontal
+Befehl erkannt: SEMANTIC: waagrechter Strich links vom Kreis, SEMANTIC: Kreis + Buchstabe rF, REFERENZ: Abgeleitet aus AC0842
+[WARN] AC0863_L.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+
+--- Verarbeite AR0140_1.jpg ---
+Bildbeschreibung: Klappensymbol: Rechteck hochkant, graue Umrandung. Graue Diagonale von unten links nach oben Rechts, in der Mitte ein dunkelgrauer Punkt. Farbverlauf Hintergrund: Dunkelgrau, hellgrau, dunkelgrau. üAhnlich AC501, jedoch in der Höhe gestaucht
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] AR0140_1.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite AC0932_L.jpg ---
+Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0932. Dokumentiert ist die kleine Variante (S) als Einzelbild ohne finale Familienzuordnung. Geometrie-Hinweis: Grundform und Anbauteile sollten analog zu den bereits detaillierten Kreis-/Kellen-Familien beschrieben werden (zuerst Grundkörper wie Kreis/Ellipse/Rechteck/Polygon, danach Leitungen/Griffe/Dreiecke, anschließend vorhandene Zeichenkette im Symbol). Konverter-Hinweis: Bis zur fachlichen Zuordnung als "manuell prüfen" behandeln; automatische Nachzeichnung ist nur nach expliziter Geometrie- und Textklassifizierung belastbar. Der Griff liegt auf einer Symmetrieachse des Kreises. Unzugeordnete Wurzelform aus der Serie AC0932. Dokumentiert ist die große Variante (L) als Einzelbild ohne finale Familienzuordnung. Geometrie-Hinweis: Grundform und Anbauteile sollten analog zu den bereits detaillierten Kreis-/Kellen-Familien beschrieben werden (zuerst Grundkörper wie Kreis/Ellipse/Rechteck/Polygon, danach Leitungen/Griffe/Dreiecke, anschließend vorhandene Zeichenkette im Symbol). Konverter-Hinweis: Bis zur fachlichen Zuordnung als "manuell prüfen" behandeln; automatische Nachzeichnung ist nur nach expliziter Geometrie- und Textklassifizierung belastbar. Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: AUTO: Trotz unzugeordneter Familienzuordnung wurde wegen ausreichender Geometriehinweise automatisch konvertiert.
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] AC0932_L.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE1000_S.jpg ---
+Bildbeschreibung: Grau umrandetes Quadrat. Horizontaler Farbverlauf (links weiss, rechts grau)
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE1000_S.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite SE0074.jpg ---
+Bildbeschreibung: Wie SE0073, aber nach rechts gekippt. "T" steht waagrecht geschrieben.
+Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe, SEMANTIC: senkrechter Strich hinter dem Kreis, REFERENZ: Abgeleitet aus AC0811, REFERENZ: Abgeleitet aus SE0041, REFERENZ: Abgeleitet aus SE0072, REFERENZ: Abgeleitet aus SE0073
+[WARN] SE0074.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+
+--- Verarbeite GE9042_5S.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE9042_5S.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE1313_M.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE1313_M.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE9043_2S.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE9043_2S.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE9044_5S.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE9044_5S.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE0304_S.jpg ---
+Bildbeschreibung: Hintergrund: GE0999: Vordergrund französische Flagge
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE0304_S.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite AC0900_M.jpg ---
+Bildbeschreibung: Differenzdruckmessung oben kleines graues Rechteck mit "dp" geschrieben, vor halbem Rechteck mit einachen grauen Rand
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] AC0900_M.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE9013_6S.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE9013_6S.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite AC0930_L.jpg ---
+Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0930. Dokumentiert ist die kleine Variante (S) als Einzelbild ohne finale Familienzuordnung. Geometrie-Hinweis: Grundform und Anbauteile sollten analog zu den bereits detaillierten Kreis-/Kellen-Familien beschrieben werden (zuerst Grundkörper wie Kreis/Ellipse/Rechteck/Polygon, danach Leitungen/Griffe/Dreiecke, anschließend vorhandene Zeichenkette im Symbol). Konverter-Hinweis: Bis zur fachlichen Zuordnung als "manuell prüfen" behandeln; automatische Nachzeichnung ist nur nach expliziter Geometrie- und Textklassifizierung belastbar. Der Griff liegt auf einer Symmetrieachse des Kreises. Unzugeordnete Wurzelform aus der Serie AC0930. Dokumentiert ist die große Variante (L) als Einzelbild ohne finale Familienzuordnung. Geometrie-Hinweis: Grundform und Anbauteile sollten analog zu den bereits detaillierten Kreis-/Kellen-Familien beschrieben werden (zuerst Grundkörper wie Kreis/Ellipse/Rechteck/Polygon, danach Leitungen/Griffe/Dreiecke, anschließend vorhandene Zeichenkette im Symbol). Konverter-Hinweis: Bis zur fachlichen Zuordnung als "manuell prüfen" behandeln; automatische Nachzeichnung ist nur nach expliziter Geometrie- und Textklassifizierung belastbar. Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: AUTO: Trotz unzugeordneter Familienzuordnung wurde wegen ausreichender Geometriehinweise automatisch konvertiert.
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] AC0930_L.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite AC0843_M.jpg ---
+Bildbeschreibung: Wie AC0842, jecoch nach rechts gedreht, Text immer noch horizontal
+Befehl erkannt: SEMANTIC: waagrechter Strich links vom Kreis, SEMANTIC: Kreis + Buchstabe rF, REFERENZ: Abgeleitet aus AC0842
+[WARN] AC0843_M.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+
+--- Verarbeite GE9022_2S.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE9022_2S.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE0037_S.jpg ---
+Bildbeschreibung: Wie GE0028, aber ohne Hintergrund Abweichung: horizontal gespiegelt
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE0037_S.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE0206_S.jpg ---
+Bildbeschreibung: Hintergrund: GE0999. Drei Wassertropfen. Form der Wassertropfen wie in GE02025, jedoch blau (Blaue Kreisscheibe, blauer Zipfel), Hellblauer Tropfen auf Zipfel (unten rechts). Oben links stillisierte Röhre von der Seite
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE0206_S.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE1403_L.jpg ---
+Bildbeschreibung: Wie GE1401: Wie AC0150, jedoch ist die kräftige graue Ecke/ Winkel unten statt rechts. . Geometrische Variante: 180° gedreht.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE1403_L.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE0351.jpg ---
+Bildbeschreibung: Info-Button. Hintergrund GE0999
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE0351.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite AC5050_M.jpg ---
+Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC5050. Dokumentiert ist die kleine Variante (S) als Einzelbild ohne finale Familienzuordnung. Geometrie-Hinweis: Grundform und Anbauteile sollten analog zu den bereits detaillierten Kreis-/Kellen-Familien beschrieben werden (zuerst Grundkörper wie Kreis/Ellipse/Rechteck/Polygon, danach Leitungen/Griffe/Dreiecke, anschließend vorhandene Zeichenkette im Symbol). Konverter-Hinweis: Bis zur fachlichen Zuordnung als "manuell prüfen" behandeln; automatische Nachzeichnung ist nur nach expliziter Geometrie- und Textklassifizierung belastbar. Der Griff liegt auf einer Symmetrieachse des Kreises. Unzugeordnete Wurzelform aus der Serie AC5050. Dokumentiert ist die mittlere Variante (M) als Einzelbild ohne finale Familienzuordnung. Geometrie-Hinweis: Grundform und Anbauteile sollten analog zu den bereits detaillierten Kreis-/Kellen-Familien beschrieben werden (zuerst Grundkörper wie Kreis/Ellipse/Rechteck/Polygon, danach Leitungen/Griffe/Dreiecke, anschließend vorhandene Zeichenkette im Symbol). Konverter-Hinweis: Bis zur fachlichen Zuordnung als "manuell prüfen" behandeln; automatische Nachzeichnung ist nur nach expliziter Geometrie- und Textklassifizierung belastbar. Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: AUTO: Trotz unzugeordneter Familienzuordnung wurde wegen ausreichender Geometriehinweise automatisch konvertiert.
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] AC5050_M.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite AR0022.jpg ---
+Bildbeschreibung: Wie AR0021, nach rechts gedrecht
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe, REFERENZ: Abgeleitet aus AR0021
+[WARN] AR0022.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+
+--- Verarbeite GE0001_1_S.jpg ---
+Bildbeschreibung: Vorsicht-Zeichen vor blaugrauem Kreis mit Farbverlauf. Hintergrund GE0999
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE0001_1_S.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite AR0084.jpg ---
+Bildbeschreibung: Wie AR0083, nach rechts gedreht, Text "M" horizontal
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe, REFERENZ: Abgeleitet aus AR0021, REFERENZ: Abgeleitet aus AR0061, REFERENZ: Abgeleitet aus AR0081, REFERENZ: Abgeleitet aus AR0082, REFERENZ: Abgeleitet aus AR0083
+[WARN] AR0084.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+
+--- Verarbeite GE0045_L.jpg ---
+Bildbeschreibung: Hintergrund: GE0999. Wie GE0044
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE0045_L.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite AR0061.jpg ---
+Bildbeschreibung: Wie AR0021, ohne drittes spitzes Dreieck
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe, REFERENZ: Abgeleitet aus AR0021
+[WARN] AR0061.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+
+--- Verarbeite AC1001_L.jpg ---
+Bildbeschreibung: Grauer Kreis mit grauem Rand und hellgrauem Hintergrund Abweichung: mit Text "M" (Motor) Abweichung: mit Kelle (graue horizontale Linie) nach unten. Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe
+[WARN] AC1001_L.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (non_composite_embedded_svg).
+
+--- Verarbeite AC0930_M.jpg ---
+Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0930. Dokumentiert ist die kleine Variante (S) als Einzelbild ohne finale Familienzuordnung. Geometrie-Hinweis: Grundform und Anbauteile sollten analog zu den bereits detaillierten Kreis-/Kellen-Familien beschrieben werden (zuerst Grundkörper wie Kreis/Ellipse/Rechteck/Polygon, danach Leitungen/Griffe/Dreiecke, anschließend vorhandene Zeichenkette im Symbol). Konverter-Hinweis: Bis zur fachlichen Zuordnung als "manuell prüfen" behandeln; automatische Nachzeichnung ist nur nach expliziter Geometrie- und Textklassifizierung belastbar. Der Griff liegt auf einer Symmetrieachse des Kreises. Unzugeordnete Wurzelform aus der Serie AC0930. Dokumentiert ist die mittlere Variante (M) als Einzelbild ohne finale Familienzuordnung. Geometrie-Hinweis: Grundform und Anbauteile sollten analog zu den bereits detaillierten Kreis-/Kellen-Familien beschrieben werden (zuerst Grundkörper wie Kreis/Ellipse/Rechteck/Polygon, danach Leitungen/Griffe/Dreiecke, anschließend vorhandene Zeichenkette im Symbol). Konverter-Hinweis: Bis zur fachlichen Zuordnung als "manuell prüfen" behandeln; automatische Nachzeichnung ist nur nach expliziter Geometrie- und Textklassifizierung belastbar. Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: AUTO: Trotz unzugeordneter Familienzuordnung wurde wegen ausreichender Geometriehinweise automatisch konvertiert.
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] AC0930_M.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE0041_L.jpg ---
+Bildbeschreibung: Wie GE0040 vertikal gespigelt (der Farbverlauf in der Abbildung ist m. E. falsch)
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE0041_L.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite AC0884_L.jpg ---
+Bildbeschreibung: Wie AC0882: Wie AC0881, jedoch nach rechts gedreht, Text immer noch horizontal. Geometrische Variante: 180° gedreht.
+Befehl erkannt: SEMANTIC: waagrechter Strich links vom Kreis, SEMANTIC: Kreis + Buchstabe, REFERENZ: Abgeleitet aus AC0882
+[WARN] AC0884_L.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+
+--- Verarbeite GE0202_M.jpg ---
+Bildbeschreibung: Hintergrund: GE0999. Stillisierte Schneeflocke. Sechs dunkle Strahlen, nach aussen. Aussen ein dunkle Strahlen in Rechtekform. 3-D Effekt (weiss) von links (?) angestrahlt
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE0202_M.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite SE0054.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] SE0054.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE0307.jpg ---
+Bildbeschreibung: Hintergrund: GE0999: Dänische Flagge
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE0307.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE9011_4S.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE9011_4S.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE9013_7S.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE9013_7S.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite SE0041.jpg ---
+Bildbeschreibung: Wie AC0811, jecoch ist der Kreis viereckig anstatt rund gezeichnet.
+Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe, SEMANTIC: senkrechter Strich hinter dem Kreis, REFERENZ: Abgeleitet aus AC0811
+[WARN] SE0041.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+
+--- Verarbeite SE0103.jpg ---
+Bildbeschreibung: Wie AC0831 (Anstelle von CO^2/ 2 hochgestellt sollte CO^2/ 2 tiefgestellt geschrieben werden. Abweichung: nach rechts gekippt. Der Text ist waagrecht geschrieben. Abweichung: nach rechts gekippt. Der Text ist waagrecht geschrieben.
+Befehl erkannt: SEMANTIC: senkrechter Strich hinter dem Kreis, SEMANTIC: Kreis + Buchstabe CO_2, REFERENZ: Abgeleitet aus AC0831
+[WARN] SE0103.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+
+--- Verarbeite GE0043_M.jpg ---
+Bildbeschreibung: Schematischer Kalender (mit der Zahl 31) Unten: Tabellenform mit weißen Rechtecken, ca 7 horizontal, 4 - 5 vertikal. Hintergrund Farbverflauf: Links dunkelgrau, rechts hellgrau
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE0043_M.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite AC0923_M.jpg ---
+Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0923. Dokumentiert ist die kleine Variante (S) als Einzelbild ohne finale Familienzuordnung. Geometrie-Hinweis: Grundform und Anbauteile sollten analog zu den bereits detaillierten Kreis-/Kellen-Familien beschrieben werden (zuerst Grundkörper wie Kreis/Ellipse/Rechteck/Polygon, danach Leitungen/Griffe/Dreiecke, anschließend vorhandene Zeichenkette im Symbol). Konverter-Hinweis: Bis zur fachlichen Zuordnung als "manuell prüfen" behandeln; automatische Nachzeichnung ist nur nach expliziter Geometrie- und Textklassifizierung belastbar. Der Griff liegt auf einer Symmetrieachse des Kreises. Unzugeordnete Wurzelform aus der Serie AC0923. Dokumentiert ist die mittlere Variante (M) als Einzelbild ohne finale Familienzuordnung. Geometrie-Hinweis: Grundform und Anbauteile sollten analog zu den bereits detaillierten Kreis-/Kellen-Familien beschrieben werden (zuerst Grundkörper wie Kreis/Ellipse/Rechteck/Polygon, danach Leitungen/Griffe/Dreiecke, anschließend vorhandene Zeichenkette im Symbol). Konverter-Hinweis: Bis zur fachlichen Zuordnung als "manuell prüfen" behandeln; automatische Nachzeichnung ist nur nach expliziter Geometrie- und Textklassifizierung belastbar. Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: AUTO: Trotz unzugeordneter Familienzuordnung wurde wegen ausreichender Geometriehinweise automatisch konvertiert.
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] AC0923_M.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE0310.jpg ---
+Bildbeschreibung: Wie GE0306: Hintergrund: GE0999: Niederländische Flagge. Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE0310.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE9012_6S.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE9012_6S.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE0363.jpg ---
+Bildbeschreibung: Hintergrund: GE0999. Die Symbole von GE020 (Schraubenschlüssel und Schraubendreher) und GE0201 (drei Wasserwellen) unten rechts.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE0363.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE9901_W.jpg ---
+Bildbeschreibung: Wie GE0010: grauer Hintergrund links blaue Fläche mit vertikalem Farbverlauf oben dunkel, unten ein wenig heller und rechts geschwungene Linie (Wellenform mit 1-Ausbuchtung nach und 1-Ausbuchtung nach rechts). Auf der linken Seite ist noch eine Art Sichelform und ganz links eine einzelne weiße Linie. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE9901_W.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite AC1000_M.jpg ---
+Bildbeschreibung: Grauer Kreis mit grauem Rand und hellgrauem Hintergrund Abweichung: mit Text "M" (Motor)
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe
+[WARN] AC1000_M.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (non_composite_embedded_svg).
+
+--- Verarbeite AC0841_S.jpg ---
+Bildbeschreibung: Grauer Kreis mit grauem Rand und hellgrauem Hintergrund Abweichung: mit Text "rF" (relative Feuchtigkeit) Abweichung: mit Griff (dunkelgraue Linie nach unten). Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] AC0841_S.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+
+--- Verarbeite GE1402_L.jpg ---
+Bildbeschreibung: Wie GE1401: Wie AC0150, jedoch ist die kräftige graue Ecke/ Winkel unten statt rechts. . Geometrische Variante: 90° nach rechts gedreht.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE1402_L.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE9013_5S.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE9013_5S.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite AC1004_L.jpg ---
+Bildbeschreibung: Wie AC1001: Wie AC1000, jedoch mit Kelle (graue horizontale Linie) nach unten. Geometrische Variante: Hauptdiagonal gespiegelt. Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe
+[WARN] AC1004_L.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (non_composite_embedded_svg).
+
+--- Verarbeite GE1312_S.jpg ---
+Bildbeschreibung: Wie AC0010: Heizelement, graues Rechteck, Plus-Minus-Zeichen oben links, Farbverlauf horizontal dunkel-hell-dunkel graue Diagonale oben rechts nach unten links. Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Gradient-Stripe-Strategie.
+
+--- Verarbeite GE0031_L.jpg ---
+Bildbeschreibung: Wie GE0030, nach rechts gedreht
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE0031_L.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite AC0862_S.jpg ---
+Bildbeschreibung: Grauer Kreis mit grauem Rand und hellgrauem Hintergrund Abweichung: mit Text "rF" (relative Feuchtigkeit) Abweichung: mit Griff (dunkelgraue Linie nach unten) Abweichung: nach rechts gedreht, Text immer noch horizontal. Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] AC0862_S.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+
+--- Verarbeite AC0882_M.jpg ---
+Bildbeschreibung: Grauer Kreis mit grauem Rand und hellgrauem Hintergrund Abweichung: mit Text "T" (Temperatur) Abweichung: mit Griff (dunkelgraue Linie nach unten) Abweichung: nach rechts gedreht, Text immer noch horizontal. Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: SEMANTIC: waagrechter Strich links vom Kreis, SEMANTIC: Kreis + Buchstabe
+
+--- Verarbeite GE0000.JPG ---
+Bildbeschreibung: Wie AC0010: Heizelement, graues Rechteck, Plus-Minus-Zeichen oben links, Farbverlauf horizontal dunkel-hell-dunkel graue Diagonale oben rechts nach unten links. Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE0000.JPG: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite AC0832_M.jpg ---
+Bildbeschreibung: Wie AC0832, jedoch nach rechts gedreht, Text immer noch horizontal
+Befehl erkannt: SEMANTIC: waagrechter Strich links vom Kreis, SEMANTIC: Kreis + Buchstabe
+
+--- Verarbeite AC1003_S.jpg ---
+Bildbeschreibung: Wie AC1001: Wie AC1000, jedoch mit Kelle (graue horizontale Linie) nach unten. Geometrische Variante: 180° gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe
+[WARN] AC1003_S.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (non_composite_embedded_svg).
+
+--- Verarbeite GE1200_M.jpg ---
+Bildbeschreibung: Ähnlich GE1002, jedoch heller und mit einem zusätzlichen hellgrauen Rand.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE1200_M.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE0205_S.jpg ---
+Bildbeschreibung: Hintergrund: GE0999. Wahrscheinlich 3 gleiche Öltropfensymbole. Roter Kreis, oben eine Art blauer Zipfel mit hellblauem Tropen auf Zipfel (unten rechts). Farbverlauf auf rotem Kreisscheibe hell (oben) nach dunkel (unten)
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE0205_S.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE1202_L.jpg ---
+Bildbeschreibung: Ähnlich GE1002, jedoch heller und mit einem zusätzlichen hellgrauen Rand. Abweichung: rote Farbe innen (grauer Rand ist gleich)
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE1202_L.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE1002_M.jpg ---
+Bildbeschreibung: Wie GE0280, grau
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE1002_M.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite AC0800_S.jpg ---
+Bildbeschreibung: Grauer Kreis mit grauem Rand und hellgrauem Hintergrund
+Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe
+
+--- Verarbeite AC5020_M.jpg ---
+Bildbeschreibung: sehr komplexe Form, wahrscheinlich sehr schwierig zum nachzeichnen. Das ist ein "Rückkühler" also ein Aussenluftkühlgerät für Heisses Wasser (oder eine Heisse Flüssigkeit). Ob oben sind zwei Röhren um die heisse Luft abzuleiten, oben rchts sind zwei Gitterroste, um die kalte Luft einströmen zu lassen. Unten rechts ist ein grosse Öffnung (?). Auf der Llinken Seite ist oben links ein grau-blauer Punkt.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] AC5020_M.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE1000_M.jpg ---
+Bildbeschreibung: Grau umrandetes Quadrat. Horizontaler Farbverlauf (links weiss, rechts grau)
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE1000_M.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite NAV0014.JPG ---
+Bildbeschreibung: Hintergrund NAV0010, Vordergrund Flamme (Symbol) von GE0204 ohne Hintergrund
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] NAV0014.JPG: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite AC0922_M.jpg ---
+Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0922. Dokumentiert ist die kleine Variante (S) als Einzelbild ohne finale Familienzuordnung. Geometrie-Hinweis: Grundform und Anbauteile sollten analog zu den bereits detaillierten Kreis-/Kellen-Familien beschrieben werden (zuerst Grundkörper wie Kreis/Ellipse/Rechteck/Polygon, danach Leitungen/Griffe/Dreiecke, anschließend vorhandene Zeichenkette im Symbol). Konverter-Hinweis: Bis zur fachlichen Zuordnung als "manuell prüfen" behandeln; automatische Nachzeichnung ist nur nach expliziter Geometrie- und Textklassifizierung belastbar. Der Griff liegt auf einer Symmetrieachse des Kreises. Unzugeordnete Wurzelform aus der Serie AC0922. Dokumentiert ist die mittlere Variante (M) als Einzelbild ohne finale Familienzuordnung. Geometrie-Hinweis: Grundform und Anbauteile sollten analog zu den bereits detaillierten Kreis-/Kellen-Familien beschrieben werden (zuerst Grundkörper wie Kreis/Ellipse/Rechteck/Polygon, danach Leitungen/Griffe/Dreiecke, anschließend vorhandene Zeichenkette im Symbol). Konverter-Hinweis: Bis zur fachlichen Zuordnung als "manuell prüfen" behandeln; automatische Nachzeichnung ist nur nach expliziter Geometrie- und Textklassifizierung belastbar. Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: AUTO: Trotz unzugeordneter Familienzuordnung wurde wegen ausreichender Geometriehinweise automatisch konvertiert.
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] AC0922_M.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE0303_S.jpg ---
+Bildbeschreibung: Hintergrund: GE0999: Vordergrund britische Flagge
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE0303_S.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE0354.jpg ---
+Bildbeschreibung: Hintergrund: GE0999. Alarmglocke wie DLG0060, weiss unten und zart-blau oben
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE0354.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite SE0053.jpg ---
+Bildbeschreibung: Wie AC0811, jecoch ist der Kreis viereckig anstatt rund gezeichnet. Abweichung: vertikal gespiegelt. Anstelle von "T" wurde ". /" geschrieben (aber ich weiss auch nicht, was das bedeuten soll).
+Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe, SEMANTIC: senkrechter Strich hinter dem Kreis, REFERENZ: Abgeleitet aus AC0811
+[WARN] SE0053.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+
+--- Verarbeite GE0015.jpg ---
+Bildbeschreibung: Wie GE0014 aber dunkler
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE0015.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE0041_M.jpg ---
+Bildbeschreibung: Wie GE0040 vertikal gespigelt (der Farbverlauf in der Abbildung ist m. E. falsch)
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE0041_M.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite AC0812_M.jpg ---
+Bildbeschreibung: Wie AC0811: Kelle, ohne Text Kreis oben, Griff nach unten (dunkelgraue Liine). Geometrische Variante: 90° nach links gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe, SEMANTIC: waagrechter Strich links vom Kreis
+
+--- Verarbeite GE0012_M.jpg ---
+Bildbeschreibung: Schematischer Kalender (mit der Zahl 31) Unten: Tabellenform mit weißen Rechtecken, ca 7 horizontal, 4 - 5 vertikal. Hintergrund Farbverflauf: Links dunkelgrau, rechts hellgrau
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE0012_M.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE0107_M.jpg ---
+Bildbeschreibung: Wie GE0100: leicht abgerundetes Rechteck mit grauem Rand, vertikaler Farbverlauf von weiss (oben) nach grau (unten). . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE0107_M.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite AC0820_S.jpg ---
+Bildbeschreibung: Wie AC0800, Textg "CO2" (Die 2 ist fälschlicherweise hochgestellt, dieses muss jedoch tiefgestellt sein)
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe CO_2
+
+--- Verarbeite NAV0016.JPG ---
+Bildbeschreibung: Hintergrund NAV0010. Symbole der Wassertropfen und der Röhre wie bei GE0206
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] NAV0016.JPG: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE9011_6S.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE9011_6S.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite AR0110_2.jpg ---
+Bildbeschreibung: Wie AR0030: Wie AC0501. Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] AR0110_2.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE9001_7S.jpg ---
+Bildbeschreibung: stillisierte Röhre. Im Prinzip sehr dünnes Rechteck, hochkant, horizontaler Farbverlauf rot/grau/rot
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE9001_7S.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE9033_1S.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE9033_1S.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite AC0923_S.jpg ---
+Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0923. Dokumentiert ist die kleine Variante (S) als Einzelbild ohne finale Familienzuordnung. Geometrie-Hinweis: Grundform und Anbauteile sollten analog zu den bereits detaillierten Kreis-/Kellen-Familien beschrieben werden (zuerst Grundkörper wie Kreis/Ellipse/Rechteck/Polygon, danach Leitungen/Griffe/Dreiecke, anschließend vorhandene Zeichenkette im Symbol). Konverter-Hinweis: Bis zur fachlichen Zuordnung als "manuell prüfen" behandeln; automatische Nachzeichnung ist nur nach expliziter Geometrie- und Textklassifizierung belastbar. Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: AUTO: Trotz unzugeordneter Familienzuordnung wurde wegen ausreichender Geometriehinweise automatisch konvertiert.
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] AC0923_S.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE1001_L.jpg ---
+Bildbeschreibung: Hintergrund GE1000, Vordergrund grüner Haken mit feiner grauer Umrandung
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE1001_L.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE9014_1S.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE9014_1S.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite AC0870_S.jpg ---
+Bildbeschreibung: Grauer Kreis mit grauem Rand und hellgrauem Hintergrund Abweichung: mit Text "T" (Temperatur)
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe
+
+--- Verarbeite GE9023_4S.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE9023_4S.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE1003_S.jpg ---
+Bildbeschreibung: Hintergrund GE1002, Vordergrund Haken wie in GE1001
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE1003_S.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite AC0840_M.jpg ---
+Bildbeschreibung: Grauer Kreis mit grauem Rand und hellgrauem Hintergrund Abweichung: mit Text "rF" (relative Feuchtigkeit)
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+[WARN] AC0840_M.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+
+--- Verarbeite GE9005_7S.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE9005_7S.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE1203_M.jpg ---
+Bildbeschreibung: Ähnlich GE1002, jedoch heller und mit einem zusätzlichen hellgrauen Rand. Abweichung: grüne Farbe innen (grauer Rand ist gleich)
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE1203_M.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE0303.jpg ---
+Bildbeschreibung: Hintergrund: GE0999: Vordergrund britische Flagge
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE0303.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite AR0101.jpg ---
+Bildbeschreibung: Wie AR0100, mit Griff nach unten (vertikale dunkegraue Linie). Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: SEMANTIC: senkrechter Strich oben vom Kreis
+[WARN] AR0101.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+
+--- Verarbeite GE0344.jpg ---
+Bildbeschreibung: Hintergrund: GE0999. Wahrscheinlich 3 gleiche Öltropfensymbole. Roter Kreis, oben eine Art blauer Zipfel mit hellblauem Tropen auf Zipfel (unten rechts). Farbverlauf auf rotem Kreisscheibe hell (oben) nach dunkel (unten)
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE0344.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE0356.jpg ---
+Bildbeschreibung: Hintergrund: GE0999. Alarmglocke wie DLG0060
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE0356.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE0306_M.jpg ---
+Bildbeschreibung: Hintergrund: GE0999: Niederländische Flagge
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE0306_M.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE0043_L.jpg ---
+Bildbeschreibung: Schematischer Kalender (mit der Zahl 31) Unten: Tabellenform mit weißen Rechtecken, ca 7 horizontal, 4 - 5 vertikal. Hintergrund Farbverflauf: Links dunkelgrau, rechts hellgrau
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE0043_L.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE9011_3S.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE9011_3S.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE0103_S.jpg ---
+Bildbeschreibung: Wie GE0100: leicht abgerundetes Rechteck mit grauem Rand, vertikaler Farbverlauf von weiss (oben) nach grau (unten). . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE0103_S.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite DLG0018.JPG ---
+Bildbeschreibung: Wie DLG0011, weißes Rechteck bedeckt jedoch fast ganzen Hintergrund
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] DLG0018.JPG: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite GE9901_X.jpg ---
+Bildbeschreibung: Wie GE0010: grauer Hintergrund links blaue Fläche mit vertikalem Farbverlauf oben dunkel, unten ein wenig heller und rechts geschwungene Linie (Wellenform mit 1-Ausbuchtung nach und 1-Ausbuchtung nach rechts). Auf der linken Seite ist noch eine Art Sichelform und ganz links eine einzelne weiße Linie. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] GE9901_X.jpg: Fehler protokolliert, Batchlauf wird fortgesetzt (render_failure).
+[INFO] Übersichts-Kacheln erzeugt: diff=artifacts\converted_images\reports\overview_diff_tiles.png, svg=artifacts\converted_images\reports\overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: artifacts/converted_images
