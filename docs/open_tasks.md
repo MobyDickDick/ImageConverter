@@ -1966,3 +1966,22 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 - **Fortschritt (Transparenz):** Eine aktuelle Klassenliste für bislang nicht konvertierbare Bilder wurde als Arbeitsartefakt ergänzt: `docs/nonconvertable_classes_examples_2026-05-14.md` (eine Beispiel-Datei je Klasse aus `artifacts/images_to_convert/nonconvertable`).
 - **Blocker:** N1/N2 bleiben weiterhin durch den bekannten Vollbereichs-Laufzeit-/Timeoutpfad limitiert; dieser Dokumentations- und Plan-B-Schritt ersetzt keinen Vollbereichsnachweis.
 - **Nächster sinnvoller Schritt:** Entweder den nächsten T5/T6-Diagnoseschritt (langläuferfokussiert) ausführen oder – falls Laufzeitbudget verfügbar – den offenen N2-Stabilitätsnachweis mit klarer Timeout-Grenze erneut ansetzen.
+
+## Neue Leitaufgaben aus Zielabgleich 2026-05-15 (JPEG + sprachliche Beschreibung)
+
+- [ ] **ZG1 (P0): Input-Contract v1 verbindlich machen**
+  - Pflichtinput: `image_path` (JPEG) + `semantic_description` (V5-JSON oder Adapter aus XML).
+  - Akzeptanz: Lauf bricht mit klarer Fehlermeldung ab, wenn eines der beiden Felder fehlt.
+
+- [ ] **ZG2 (P0): Bildspezifische Logik aus Hauptpfad entfernen**
+  - Inventur aller dateiname-/familienabhängigen Heuristiken, danach Migration auf beschreibungsgetriebete Regeln.
+  - Akzeptanz: Hauptpfad funktioniert auf Referenzset ohne filename-spezifische Sonderfälle.
+
+- [ ] **ZG3 (P0): Good-Solution-Gate v1 implementieren**
+  - Einheitliche Statusklassifikation `good` / `suboptimal` / `not_reachable` via versionierter Schwellenwerte.
+  - Akzeptanz: Status + Schwellen + Gründe stehen pro Datei im Report.
+
+- [ ] **ZG4 (P0): Dimensionstreue als harte Regel erzwingen**
+  - Width/Height/Aspect-Ratio-Abweichung über Toleranz => kein `good`.
+  - Akzeptanz: Regressionstest mit absichtlich falscher Dimension liefert `suboptimal` oder `not_reachable`.
+
