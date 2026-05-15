@@ -91,6 +91,21 @@ Zielbild: Nicht-binäre Vektorisierung über echte SVG-Primitive mit semantische
 - [x] **N8 – Plan-B-Syntheseprobe (Beschreibung → SVG → JPG → Rauschen → Konvertierung)** (2026-05-14: Tool `tools/plan_b_synthetic_probe.py` ergänzt und Beispielausführung mit `variant=AC0080_L` dokumentiert; Ergebnisartefakt unter `artifacts/converted_images/converted_svgs/AC0080_L.svg` aktualisiert.)
 - [x] **N9 – Plan-B-Einzelprobe für `AC0212_L.svg` anlegen** (2026-05-14: isolierter `AC0212`-Kurzlauf + gekoppelte Plan-B-Syntheseprobe mit Exit `0` dokumentiert; siehe `docs/n9_ac0212_planb_single_2026-05-14_runDF_summary.md` sowie Logs `artifacts/converted_images/reports/AC0212_single_planbprobe_2026-05-14_runDF.log` und `artifacts/converted_images/reports/AC0212_planb_synthetic_2026-05-14_runDF_PB.log`.)
 
+- [x] **N10 – Plan-B-Einzelprobe für `AC0223_L_sia.svg` anlegen** (2026-05-15: isolierter `AC0223`-Kurzlauf dokumentiert und anschließend auf den tatsächlichen Trefferpfad `artifacts/images_to_convert/nonconvertable` korrigiert (`Run DN2`, Exit `0`); gekoppelte Plan-B-Aufgabe `N10-PB` aus neuer Sample-Datei `artifacts/images_to_convert/samples/AC0223_L_sia.svg` abgeleitet; siehe `docs/n10_ac0223_planb_single_2026-05-15_runDN_summary.md` sowie Logs `artifacts/converted_images/reports/AC0223_single_2026-05-15_runDN.log` und `artifacts/converted_images/reports/AC0223_single_nonconvertable_retry_2026-05-15_runDN2.log`.)
+
+
+### Fortschritt vs. Blocker (Session 2026-05-15, N10 AC0223-Plan-B + Einzelrun Run DN)
+
+- **Fortschritt:** Aus der neu hinzugefügten Sample-Datei `artifacts/images_to_convert/samples/AC0223_L_sia.svg` wurde eine gekoppelte Plan-B-Aufgabe (`N10-PB`) abgeleitet und der nächste dokumentierte leichtgewichtige Umsetzungsschritt als AC0223-Einzelrun ausgeführt (`--start AC0223 --end AC0223`, Exit `0`; Log: `artifacts/converted_images/reports/AC0223_single_2026-05-15_runDN.log`, Summary: `docs/n10_ac0223_planb_single_2026-05-15_runDN_summary.md`).
+- **Blocker:** Für die schweren Vollbereichsaufgaben N1/N2 bleibt der bekannte Timeout-/Laufzeitblocker unverändert bestehen.
+- **Nächster sinnvoller Schritt:** Die gekoppelte Plan-B-Syntheseprobe `N10-PB` für `AC0223` ausführen und danach wieder auf den nächsten priorisierten Kurzlaufpfad (T5/N5/N6/N7) rotieren.
+
+
+### Fortschritt vs. Blocker (Session 2026-05-15, N10-Korrektur auf nonconvertable Run DN2)
+
+- **Fortschritt:** Der AC0223-Einzelrun wurde gemäß Hinweis auf den korrekten Eingabepfad `artifacts/images_to_convert/nonconvertable` wiederholt; der Lauf lieferte Exit `0` und erzeugte ein belastbares Log-Artefakt (`artifacts/converted_images/reports/AC0223_single_nonconvertable_retry_2026-05-15_runDN2.log`).
+- **Blocker:** Kein neuer technischer Blocker im Einzelpfad; der bekannte N1/N2-Laufzeitblocker bleibt unabhängig davon bestehen.
+- **Nächster sinnvoller Schritt:** Bei weiteren Einzelproben zuerst Range-Treffer in `images_to_convert` **und** `images_to_convert/nonconvertable` verifizieren, danach den nächsten priorisierten Kurzlaufpfad fortsetzen.
 
 Arbeitsreihenfolge für die nächsten Sessions (explizit von **leicht zu erledigen**
 bis **schwierig/zeitintensiv**):
