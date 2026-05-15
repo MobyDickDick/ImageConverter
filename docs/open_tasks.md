@@ -2030,3 +2030,11 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 - **Review/Befund:** Alle Varianten `AC0840_[L|M|S]` laufen reproduzierbar in den Fallback-Modus und enden mit `conversion_failed`; der Blocker ist damit auf Einzel-ID-Ebene bestätigt und nicht nur ein Batch-Effekt.
 - **Fortschritt (gekoppelte Plan-B-Aufgabe):** Die gekoppelte PB-Syntheseprobe wurde im selben Schritt erfolgreich ausgeführt (`PYTHONPATH=. python3 tools/plan_b_synthetic_probe.py "Grey circle with label rF" --variant AC0840_L`); Log: `artifacts/converted_images/reports/plan_b_synthetic_probe_2026-05-15_run13.log`, Ergebnis `status=ok`, Exit `0`.
 - **Nächster sinnvoller Schritt:** A7 fortsetzen mit einem direkten Diff der Inputpfade (reales `AC0840_L.jpg` vs. synthetischer Probe auf derselben Semantik), danach Entscheidung: Block `B-AC08-01` erneut fahren oder mit markiertem `BLOCKED` auf `B-AC08-02` rotieren.
+
+### Fortschritt vs. Blocker (Session 2026-05-15, AC0223_L Plan-B + Retry + N3/N4)
+
+- **Fortschritt (Primäraufgabe):** `AC0223_L` wurde als gezielter Einzel-Retry erneut konvertiert (deterministische Reihenfolge, `--start AC0223 --end AC0223`), Exit `0`; Log-Artefakt: `artifacts/converted_images/reports/AC0223_single_retry_2026-05-15.log`.
+- **Fortschritt (gekoppelte Plan-B-Aufgabe):** Für dieselbe Referenz wurde zuvor eine Plan-B-Syntheseprobe ausgeführt (`tools.plan_b_synthetic_probe.py`, `variant=AC0223_L`), Exit `0`; Log-Artefakt: `artifacts/converted_images/reports/plan_b_synthetic_probe_2026-05-15_ac0223L.log`.
+- **Nächste dokumentierte Aufgabe abgearbeitet:** N3/N4 (Run-Dokumentation sofort nach jedem Lauf nachpflegen) wurde direkt im Anschluss erfüllt, indem dieser Session-Stand inkl. Repro-/Logpfad unmittelbar in `open_tasks.md` ergänzt wurde.
+- **Blocker:** Kein neuer technischer Blocker im AC0223-Einzelpfad sichtbar; die bekannten Langlauf-/Batch-Risiken (N2) bleiben unabhängig davon bestehen.
+- **Nächster sinnvoller Schritt:** Entweder weiteren kleinen Plan-B-Sample aus dem Gap-Backlog ausführen oder einen begrenzten Batch-Scope (`AC0800..AC0809`) als kontrollierten Proxy-Lauf nachziehen.
