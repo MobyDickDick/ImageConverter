@@ -2048,3 +2048,11 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 - **Nächste dokumentierte Aufgabe abgearbeitet:** N3/N4 (Run-Dokumentation sofort nach jedem Lauf nachpflegen) wurde direkt im Anschluss erfüllt, indem dieser Session-Stand inkl. Repro-/Logpfad unmittelbar in `open_tasks.md` ergänzt wurde.
 - **Blocker:** Kein neuer technischer Blocker im AC0223-Einzelpfad sichtbar; die bekannten Langlauf-/Batch-Risiken (N2) bleiben unabhängig davon bestehen.
 - **Nächster sinnvoller Schritt:** Entweder weiteren kleinen Plan-B-Sample aus dem Gap-Backlog ausführen oder einen begrenzten Batch-Scope (`AC0800..AC0809`) als kontrollierten Proxy-Lauf nachziehen.
+
+### Fortschritt vs. Blocker (Session 2026-05-15, A7-AC0840 Follow-up Run 16 + Plan-B Run 16)
+
+- **Fortschritt (Primäraufgabe A7):** Der dokumentierte A7-Folgeschritt wurde mit fixer Toolchain/Timeout erneut isoliert für `AC0840` ausgeführt (`PYENV_VERSION=3.10.20 timeout 180 ... --start AC0840 --end AC0840 --deterministic-order`); Log-Artefakt: `artifacts/converted_images/reports/A7_AC0840_minirepro_2026-05-15_run16.log`, Exit `0`.
+- **Review/Befund:** Das Muster bleibt unverändert: `AC0840_[L|M|S]` endet reproduzierbar im Fallback-Pfad mit `conversion_failed`; kein Hinweis auf einen transienten Batch-Effekt.
+- **Fortschritt (gekoppelte Plan-B-Aufgabe):** Die gekoppelte PB-Syntheseprobe wurde im selben Schritt erfolgreich ausgeführt (`PYTHONPATH=. python3 tools/plan_b_synthetic_probe.py "Grey circle with label rF" --variant AC0840_M`); Log: `artifacts/converted_images/reports/plan_b_synthetic_probe_2026-05-15_run16.log`, Ergebnis `status=ok`, Exit `0`.
+- **Blocker:** Real-Input-Pfad für `AC0840` bleibt blockerrelevant; der synthetische Vergleichspfad ist weiterhin grün.
+- **Nächster sinnvoller Schritt:** A7 mit einem expliziten Input-Diff-Artefakt (Real-JPG vs. synthetisches JPG vor dem Converter) ergänzen und danach entscheiden, ob `B-AC08-01` mit `AC0840` als `BLOCKED` gesplittet wird.
