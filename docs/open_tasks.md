@@ -452,7 +452,8 @@ Deadlock-/Stagnationsschleifen.
   - 2026-05-07: Run CB zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault und liefert wieder Variantenfortschritt bis mindestens `AC0884_L`/`AC0881_S`; Status bleibt wegen Timeout-Exit `124` offen (Summary: `docs/ac0800_ac0899_runCB_2026-05-07_summary.md`).
   - 2026-05-07: Run CC zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault und bestätigt den Variantenfortschritt bis mindestens `AC0884_L`/`AC0881_S`; Status bleibt wegen Timeout-Exit `124` offen (Summary: `docs/ac0800_ac0899_runCC_2026-05-07_summary.md`).
   - 2026-05-07: Run CD zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault und bestätigt weiteren Variantenfortschritt bis mindestens `AC0842_L`/`AC0849_S`/`AC0831_S`; Status bleibt wegen Timeout-Exit `124` offen (Summary: `docs/ac0800_ac0899_runCD_2026-05-07_summary.md`).
-  - 2026-05-07: Run CE zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault und bestätigt weiteren Variantenfortschritt bis mindestens `AC0838_L`; Status bleibt wegen Timeout-Exit `124` offen (Summary: `docs/ac0800_ac0899_runCE_2026-05-07_summary.md`).
+  - 2026-05-15: Run DK zeigt ebenfalls keinen MuPDF-`stack overflow`/Segfault; Vollbereich endet erneut per Timeout-Exit `124` (Summary: `docs/ac0800_ac0899_runDK_2026-05-15_summary.md`).
+  - 2026-05-15: N2-PB direkt nach Run DK ausgeführt (`AC0800..AC0809`, gleiche Runtime-Parameter); Microbatch endet mit Exit `0`, Fortschritt/Artefakt in `artifacts/converted_images/reports/AC0800_AC0809_microbatch_2026-05-15_runDK_PB.log` (Summary: `docs/ac0800_ac0809_planb_runDK_2026-05-15_summary.md`).
 
 - [x] N3: Neue Laufzusammenfassung im Run-Format ergänzen.
   - Neue Datei analog zu Run Q/R erstellen (Datum, Anlass, exakter Befehl, Log-Pfad, sichtbarer Fortschritt, Exit-Code, Kurzfazit).
@@ -1992,3 +1993,10 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
   - Width/Height/Aspect-Ratio-Abweichung über Toleranz => kein `good`.
   - Akzeptanz: Regressionstest mit absichtlich falscher Dimension liefert `suboptimal` oder `not_reachable`.
 
+
+
+### Fortschritt vs. Blocker (Session 2026-05-15, N2 Run DK + N2-PB Run DK_PB)
+
+- **Fortschritt:** Die nächste offene dokumentierte Primäraufgabe (`N2`) wurde mit standardisierter Python-`3.10.20`-Toolchain und `timeout 420` ausgeführt; gemäß Plan-B-Kopplungsregel wurde direkt anschließend die gekoppelte Microbatch-Aufgabe (`AC0800..AC0809`) erfolgreich mit Exit `0` abgeschlossen.
+- **Blocker:** Der Vollbereichslauf `AC0800..AC0899` endet weiterhin am äußeren Timeout (Exit `124`), daher bleibt der vollständige Stabilitätsnachweis über den kompletten Bereich offen.
+- **Nächster sinnvoller Schritt:** Weiter auf kurze, reproduzierbare Diagnosepfade rotieren (z. B. T6/T6-PB bzw. A-Block-Plan), bevor erneut ein schwerer Vollbereichslauf angesetzt wird.
