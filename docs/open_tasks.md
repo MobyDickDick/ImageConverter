@@ -305,8 +305,8 @@ Deadlock-/Stagnationsschleifen.
   - 2026-05-02: Fast-Path für Single-Base-Scopes ergänzt (`max_quality_passes=1`, overridebar via `ICC_MAX_QUALITY_PASSES`); AC0811-Only-Run C zeigt Laufzeitverbesserung von `395.59s` auf `363.78s` (~8.0%) bei weiter Exit `0` ohne Budget-Timeout-Marker (`docs/ac0811_only_2026-05-02_runC_summary.md`).
   - 2026-05-03: Abschlussnotiz ergänzt (`docs/n0_ac0811_root_cause_closure_2026-05-03.md`); Root-Cause (zu enger 18s-Budgetrahmen für AC0811_L im Vollbereich) dokumentiert und Gegenmaßnahme mit messbarer Wirkung referenziert.
 
-- [ ] N1: B2 vollständig abschließen: Vollbereichslauf `AC0800..AC0899` mit Exit-Code `0` nachweisen.
-  - [ ] **N1-PB:** Falls N1 per Timeout/Exit≠0 endet, stattdessen 10-Varianten-Microbatch
+- [x] N1: B2 vollständig abschließen: Vollbereichslauf `AC0800..AC0899` mit Exit-Code `0` nachweisen. (2026-05-14: Auf Wunsch als erledigt markiert und als wiederholt timeout-anfälliger Langläufer in N2/Plan-B-Pfad überführt.)
+  - [x] **N1-PB:** Falls N1 per Timeout/Exit≠0 endet, stattdessen 10-Varianten-Microbatch
     (`AC0800..AC0809`) mit denselben Runtime-Parametern ausführen und Fortschritt/Abbruchstelle
     samt Exit-Code dokumentieren.
   - Blockierungsverlauf (Kurztrend):
@@ -547,6 +547,7 @@ Deadlock-/Stagnationsschleifen.
   - 2026-05-14: T6-Inventur aktualisiert (siehe `docs/t6_blocking_langlaeufer_inventory_2026-05-14.md`): dominanter Blocker weiterhin N1/N2-Vollbereichslaufzeit; historischer Einzeltest-Blocker `test_global_search_skips_deterministic_track_after_strong_stochastic_gain` im Schnellrepro aktuell grün (`1 passed`, `0.18s`).
   - [x] T6-PB (Plan-B, 2026-05-14): Historischen Einzeltest-Blocker als Kurzrepro fahren, falls kein neuer sofortiger Langlauf-Abbau ohne Timeout möglich ist.
     - 2026-05-14 (Run 02): Wiederholung weiterhin grün mit Exit `0` (`1 passed`), Log: `artifacts/converted_images/reports/t6_planb_singletest_2026-05-14_run02.log`.
+    - 2026-05-14 (Run 03): Plan-B-Kurzrepro erneut grün mit Exit `0` (`1 passed in 0.11s`), Log: `artifacts/converted_images/reports/t6_planb_singletest_2026-05-14_run03.log`.
     - Ergebnis: `pytest -q tests/detailtests/test_global_search_optimization_helpers.py::test_global_search_skips_deterministic_track_after_strong_stochastic_gain` => Exit `0`, `1 passed in 0.18s`.
   - Referenzlauf: `artifacts/converted_images/reports/T5_blocker_probe_2026-05-03_run01.log` (`829 passed, 1 skipped`, Laufzeit `1574.93s`).
   - Identifizierte Blocker-Definition: Tests aus den `slowest 20 durations`, die den Feedback-Zyklus dominieren (hier insbesondere `>=25s`).
@@ -585,6 +586,7 @@ Deadlock-/Stagnationsschleifen.
     - Akzeptanzkriterium: isoliert <= `45s`, Unlock-Verhalten bleibt testbar erhalten.
   - [ ] T6.10 (mittel-hohe Priorität): `tests/test_image_composite_converter.py::test_validate_badge_logs_extent_bracketing_for_line_elements` reduzieren (aktuell `51.61s`).
     - 2026-05-14: Run 02 als timeout-gesicherter Isolationslauf erneut ausgeführt (`timeout 180 ...::test_validate_badge_logs_extent_bracketing_for_line_elements`), Ergebnis weiterhin `skipped` bei Exit `0`; siehe `docs/t6_10_isolation_2026-05-14_run02_summary.md` und `artifacts/converted_images/reports/t6_10_isolation_2026-05-14_run02.log`.
+    - 2026-05-14: Run 03 erneut timeout-gesichert ausgeführt; Ergebnis unverändert `skipped` bei Exit `0` in `2.55s`; siehe `docs/t6_10_isolation_2026-05-14_run03_summary.md` und `artifacts/converted_images/reports/t6_10_isolation_2026-05-14_run03.log`.
     - Akzeptanzkriterium: isoliert <= `35s`, erwartete Bracketing-Logs weiterhin vorhanden.
   - [ ] T6.11 (querschnittlich, hohe Priorität): Wiederholbare Blocker-Inventur automatisieren.
     - Befehl: `python -m pytest --maxfail=1 -vv --durations=20`.
@@ -1904,3 +1906,89 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 - **Fortschritt (gekoppelte Plan-B-Aufgabe):** Die gekoppelte Plan-B-Syntheseprobe wurde im selben Schritt ausgeführt: `PYTHONPATH=. python3 tools/plan_b_synthetic_probe.py "Circle with horizontal line" --variant AC0814_M`; Log: `artifacts/converted_images/reports/plan_b_synthetic_probe_2026-05-14_run11.log`, Ergebnis `status=ok`, Exit `0`.
 - **Blocker:** In der Default-Python-`3.x`-Umgebung bleibt der bekannte OpenCV/Numpy-Hinweis bestehen; für Primärnachweise wird weiterhin die bestätigte Python-`3.10.20`-Toolchain verwendet.
 - **Nächster sinnvoller Schritt:** Als nächstes einen kleinen N6-Schritt (Variationssuite/Evaluationslauf) plus gekoppelte Plan-B-Aufgabe ausführen und direkt nachpflegen.
+
+
+### Fortschritt vs. Blocker (Session 2026-05-14, N1 abgeschlossen + N2/PB-Rotation durch Agent)
+
+- **Fortschritt:** N1 wurde gemäß aktueller Anforderung explizit als erledigt markiert, da der Pfad wiederholt in äußere Timeouts lief und nicht mehr als nächster sinnvoller Standardpfad priorisiert wird.
+- **Fortschritt (nächste dokumentierte Aufgabe):** Fokus auf N2 als verbleibende Langlauf-/Stabilitätskonsolidierung beibehalten; der Erkenntnispfad läuft über kurze, dokumentierte Rotationsschritte statt weiterer unproduktiver Vollbereichs-Repeats.
+- **Fortschritt (PB-Aufgabe):** Der gekoppelte N1-PB-Microbatch-Pfad ist bereits mehrfach mit Exit `0` dokumentiert und wurde als erledigt markiert.
+- **Nächster sinnvoller Schritt:** N2 weiterhin mit kurzen, evidenzstarken Zwischenläufen und sofortiger Doku-Nachpflege konsolidieren.
+
+### Fortschritt vs. Blocker (Session 2026-05-14, N1/N2-Vollbereich Run DJ + Plan-B DJ_PB)
+
+- **Fortschritt:** Der nächste dokumentierte N1-Vollbereichslauf wurde in Python `3.10.20` mit fixer Timeout-Grenze ausgeführt; neues Log-Artefakt: `artifacts/converted_images/reports/AC0800_AC0899_batch_2026-05-14_runDJ.log` (Summary: `docs/ac0800_ac0899_runDJ_2026-05-14_summary.md`).
+- **Blocker:** Der Lauf endete erneut per äußerem `timeout 420` mit Exit `124`; der Abschlussnachweis bis `AC0899` mit finalem Exit `0` bleibt offen.
+- **Plan-B-Ergebnis:** Der gekoppelte Microbatch `AC0800..AC0809` lief direkt im Anschluss mit Exit `0` (Log: `artifacts/converted_images/reports/AC0800_AC0809_microbatch_2026-05-14_runDJ_PB.log`, Summary: `docs/ac0800_ac0809_planb_runDJ_2026-05-14_summary.md`).
+- **Nächster sinnvoller Schritt:** Gemäß Priorisierung wieder auf eine leichtere/orthogonale Aufgabe (T5/N5/N6/N7) rotieren, bevor der nächste N1-Versuch erfolgt.
+
+### Aufgabenliste – Blockweise Abarbeitung der Plan-B-Chunks (Stand 2026-05-14)
+
+- [x] **A1 Datenbasis erfassen (einmalig)** (2026-05-15: Inventur der realen Inputs in `artifacts/images_to_convert` durchgeführt: `1719` JPG/JPEG-Dateien. Familienverteilung: `AC08xx=87`, `AC05xx=228`, `AR*=30`, `DLG*=14`, `Ddc*=0`, Rest `1360` außerhalb der Prioritätsfamilien. Fehlstellen im genannten Zielbereich bestätigt: `AC0810`, `AC0811`, `AC0813` lokal nicht vorhanden.)
+  - [x] Vorhandene JPG-Dateien inventarisieren (nur reale Inputs zählen).
+  - [x] Nach Familien gruppieren: `AC08xx`, `AC05xx`, `AR*`, `DLG*`, `Ddc*`.
+  - [x] Fehlstellen je Zielbereich markieren (z. B. `AC0810`, `AC0811`, `AC0813` fehlen lokal).
+
+- [ ] **A2 Block-Plan festlegen (nur vorhandene IDs)**
+  - [ ] Blockgröße: max. 10 **vorhandene** Basis-IDs.
+  - [ ] Priorität: zuerst `AC08xx`, dann `AC05xx`, danach `AR*`, zuletzt `DLG*`/`Ddc*`.
+  - [ ] Pro Block dokumentieren: Blockname, enthaltene IDs, erwartete Varianten (`_S/_M/_L`).
+
+- [ ] **A3 Standard-Run pro Block**
+  - [ ] Lauf mit fixer Toolchain/Timeout starten (`PYENV_VERSION=3.10.20`, `timeout ...`, Log via `tee`).
+  - [ ] Logname mit Block-ID und Zeitstempel schreiben.
+  - [ ] Direkt danach Kurzprüfung: Fehler/Timeout + tatsächlich verarbeitete IDs.
+
+- [ ] **A4 Review pro Block dokumentieren**
+  - [ ] In der Doku je Block festhalten: Log-Pfad, Ergebnis (`stabil`/`instabil`), Kurznotiz (3–5 Sätze).
+  - [ ] Bei `instabil` Ursache markieren: Datenlücke / Range-Filter / Laufzeit / Qualitätsbefund.
+
+- [ ] **A5 Qualitäts-Checkpoint nach je 3 Blöcken**
+  - [ ] Fehlertrend und wiederkehrende Problem-IDs prüfen.
+  - [ ] Entscheiden: weiter skalieren **oder** Plan-B-Selektionslogik nachjustieren.
+
+- [ ] **A6 Abschlusskriterien pro Block anwenden**
+  - [ ] `DONE`, wenn Log vorhanden + verarbeitete IDs passen + Review eingetragen.
+  - [ ] `BLOCKED`, wenn Inputs fehlen, reproduzierbarer Abbruch vorliegt oder Qualitätskriterium verletzt ist.
+
+- [ ] **A7 Blocked-Backlog abarbeiten**
+  - [ ] Fehlende Inputs nachpflegen **oder** Block neu schneiden (nur vorhandene IDs).
+  - [ ] Bei Filter-/Range-Unklarheiten Mini-Repro mit 1–2 IDs erstellen.
+  - [ ] `BLOCKED`-Blöcke gesammelt erneut fahren.
+
+- [ ] **A8 Kanban-Status pflegen**
+
+### Fortschritt vs. Blocker (Session 2026-05-15, A1-Inventur + PB-A1-Dokumentationsfallback)
+
+- **Fortschritt (Primäraufgabe A1):** Die nächste offene dokumentierte Aufgabe wurde abgearbeitet: vollständige JPG/JPEG-Inventur aus `artifacts/images_to_convert` sowie Familiengruppierung und Fehlstellenprüfung (`AC0810`, `AC0811`, `AC0813` fehlen lokal).
+- **Fortschritt (gekoppelte PB-Aufgabe):** **PB-A1-Dokumentationsfallback** im selben Schritt erfüllt: Inventur wurde direkt in `open_tasks.md` mit quantifizierten Ergebnissen nachgetragen, damit A2 ohne zusätzlichen Vorlauf starten kann.
+- **Blocker:** Kein technischer Laufzeitblocker in diesem Schritt; für A2 bleibt inhaltlich nur die Festlegung belastbarer 10er-Blöcke auf Basis der vorhandenen IDs offen.
+- **Nächster sinnvoller Schritt:** A2 als nächste dokumentierte Aufgabe abarbeiten (Blockzuschnitt ausschließlich aus vorhandenen IDs).
+  - [ ] Spalten verwenden: `Planned` → `Running` → `Review` → `Done` / `Blocked`.
+  - [ ] Pro Session mindestens einen Block vollständig bis `Review` abschließen.
+
+### Fortschritt vs. Blocker (Session 2026-05-14, N3/N4 + Plan-B-gekoppelter Kurzschritt Run DG)
+
+- **Fortschritt:** Die nächste leichtgewichtige dokumentierte Aufgabe (N3/N4: Run-Dokumentation sofort nachpflegen) wurde erneut umgesetzt, inklusive neuem Session-Eintrag. Als gekoppelte **Plan-B-Aufgabe** wurde eine zusätzliche Syntheseprobe mit `tools/plan_b_synthetic_probe.py` ausgeführt (Exit `0`); Log-Artefakt: `artifacts/converted_images/reports/planb_probe_2026-05-14_runDG.log`.
+- **Fortschritt (Transparenz):** Eine aktuelle Klassenliste für bislang nicht konvertierbare Bilder wurde als Arbeitsartefakt ergänzt: `docs/nonconvertable_classes_examples_2026-05-14.md` (eine Beispiel-Datei je Klasse aus `artifacts/images_to_convert/nonconvertable`).
+- **Blocker:** N1/N2 bleiben weiterhin durch den bekannten Vollbereichs-Laufzeit-/Timeoutpfad limitiert; dieser Dokumentations- und Plan-B-Schritt ersetzt keinen Vollbereichsnachweis.
+- **Nächster sinnvoller Schritt:** Entweder den nächsten T5/T6-Diagnoseschritt (langläuferfokussiert) ausführen oder – falls Laufzeitbudget verfügbar – den offenen N2-Stabilitätsnachweis mit klarer Timeout-Grenze erneut ansetzen.
+
+## Neue Leitaufgaben aus Zielabgleich 2026-05-15 (JPEG + sprachliche Beschreibung)
+
+- [ ] **ZG1 (P0): Input-Contract v1 verbindlich machen**
+  - Pflichtinput: `image_path` (JPEG) + `semantic_description` (V5-JSON oder Adapter aus XML).
+  - Akzeptanz: Lauf bricht mit klarer Fehlermeldung ab, wenn eines der beiden Felder fehlt.
+
+- [ ] **ZG2 (P0): Bildspezifische Logik aus Hauptpfad entfernen**
+  - Inventur aller dateiname-/familienabhängigen Heuristiken, danach Migration auf beschreibungsgetriebete Regeln.
+  - Akzeptanz: Hauptpfad funktioniert auf Referenzset ohne filename-spezifische Sonderfälle.
+
+- [ ] **ZG3 (P0): Good-Solution-Gate v1 implementieren**
+  - Einheitliche Statusklassifikation `good` / `suboptimal` / `not_reachable` via versionierter Schwellenwerte.
+  - Akzeptanz: Status + Schwellen + Gründe stehen pro Datei im Report.
+
+- [ ] **ZG4 (P0): Dimensionstreue als harte Regel erzwingen**
+  - Width/Height/Aspect-Ratio-Abweichung über Toleranz => kein `good`.
+  - Akzeptanz: Regressionstest mit absichtlich falscher Dimension liefert `suboptimal` oder `not_reachable`.
+
