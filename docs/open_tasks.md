@@ -2147,3 +2147,10 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 - Entscheidung: N2 wird bewusst als abgeschlossen betrachtet, obwohl der Vollbereichspfad weiterhin timeout-anfällig ist.
 - Begründung: Wiederholte identische N2-Vollbereichsversuche liefern keinen zusätzlichen Erkenntnisgewinn.
 - Neuer Fokus: Problemlösung über alternative, gezielte Pfade (z. B. T5/N5/N6/N7 und isolierte Engpass-Analysen) statt weiterer identischer Vollbereichs-Re-Runs.
+
+### Fortschritt vs. Blocker (Session 2026-05-16, T5 + gekoppelte Plan-B-Aufgabe Run EZ)
+
+- **Fortschritt (nächste dokumentierte Aufgabe):** Ein weiterer priorisierter T5.x-Kurzlauf wurde erfolgreich ausgeführt (`PYENV_VERSION=3.10.20 python -m pytest tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_ac0812_only -q`), Ergebnis: `1 passed` in `73.49s`, Exit `0`, Log-Artefakt: `artifacts/converted_images/reports/T5_ac0812_timeoutpath_probe_2026-05-16_runEZ.log`.
+- **Fortschritt (Plan B):** Die gekoppelte Plan-B-Syntheseprobe wurde direkt im selben Schritt durchgeführt (`PYTHONPATH=. python3 tools/plan_b_synthetic_probe.py "Bildbeschreibung: Kelle (Kreis mit einem vertikalen Strich nach unten, der Strich ist in der vertikalen Symmetrieachse des Kreises), der Strich reicht hinter die Kelle. In der Kreisscheibe ist die Beschriftung CO^2 (mit hochgestelltem 2) eingefügt." --variant AC0223 --output-dir artifacts/converted_images/reports`), Exit `0`, Log-Artefakt: `artifacts/converted_images/reports/AC0223_planb_synthetic_2026-05-16_runEZ.log`.
+- **Blocker:** Der bekannte N1/N2-Vollbereichsblocker (Timeout/Laufzeit) bleibt unabhängig von den erfolgreichen Kurzläufen bestehen; im Plan-B-Lauf erscheint weiterhin die bekannte Umgebungswarnung zu OpenCV/Numpy, ohne den Exit-Code zu kippen.
+- **Nächster sinnvoller Schritt:** Als nächste Rotation entweder N5 (Sample-Pair-Kurzbatch) mit neuem Diagnoseartefakt ausführen oder einen weiteren T5/N7-Einzelpfad nachziehen.
