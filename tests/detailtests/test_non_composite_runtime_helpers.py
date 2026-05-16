@@ -216,3 +216,41 @@ def test_run_non_composite_iteration_impl_uses_alias_sample_svg_without_size_suf
     assert "sample_svg_path=" in logs[-1][1] and "AC0100_L.svg" in logs[-1][1]
     assert prints and "Plan B Vergleich aktiv" in prints[-1]
     assert artifacts == [("<svg alias-nosize-sample/>", "sample_rendered")]
+
+
+def test_run_non_composite_iteration_impl_uses_own_size_sample_for_base_without_size_suffix(tmp_path) -> None:
+    logs: list[list[str]] = []
+    prints: list[str] = []
+    artifacts: list[tuple[str, object]] = []
+    image_dir = tmp_path / "images"
+    samples_dir = image_dir / "samples"
+    samples_dir.mkdir(parents=True)
+    (samples_dir / "AC0100_L.svg").write_text("<svg own-nosize-sample/>", encoding="utf-8")
+
+    result = non_composite_runtime_helpers.runNonCompositeIterationImpl(
+        mode="non_composite",
+        params={"mode": "non_composite"},
+        stripe_strategy=None,
+        semantic_mode_visual_override=False,
+        width=64,
+        height=64,
+        base_name="AC0100",
+        description="desc",
+        perc_img="target",
+        img_path=str(image_dir / "AC0100.jpg"),
+        print_fn=prints.append,
+        render_embedded_raster_svg_fn=lambda _path: "<svg baseline/>",
+        build_gradient_stripe_svg_fn=lambda *_args, **_kwargs: "<svg gradient/>",
+        build_gradient_stripe_validation_log_lines_fn=lambda **_kwargs: ["status=non_composite_gradient_stripe"],
+        write_validation_log_fn=logs.append,
+        render_svg_to_numpy_fn=lambda content, *_args, **_kwargs: "sample_rendered" if "own-nosize-sample" in content else "baseline_rendered",
+        record_render_failure_fn=lambda *args, **kwargs: None,
+        write_attempt_artifacts_fn=lambda svg, rendered: artifacts.append((svg, rendered)),
+        calculate_error_fn=lambda _target, rendered: 0.31 if rendered == "sample_rendered" else 1.5,
+    )
+
+    assert result == ("AC0100", "desc", {"mode": "non_composite"}, 1, 0.31)
+    assert logs[-1][0] == "status=non_composite_plan_b_sample_svg_selected"
+    assert "sample_svg_path=" in logs[-1][1] and "AC0100_L.svg" in logs[-1][1]
+    assert prints and "Plan B Vergleich aktiv" in prints[-1]
+    assert artifacts == [("<svg own-nosize-sample/>", "sample_rendered")]

@@ -22,6 +22,7 @@ def _build_sample_candidates(base_name: str) -> list[str]:
         candidates.extend(f"{alias_root}_{size_suffix}" for alias_root in alias_roots)
         return candidates
 
+    candidates.extend(f"{base_name}_{size_suffix}" for size_suffix in ("L", "M", "S"))
     alias_roots = _PLAN_B_SAMPLE_ALIASES.get(base_name, ())
     for alias_root in alias_roots:
         candidates.append(alias_root)
