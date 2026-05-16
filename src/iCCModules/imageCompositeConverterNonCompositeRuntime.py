@@ -8,25 +8,26 @@ def _contains_svg_image_tag(svg_content: str) -> bool:
     return "<image" in lowered and ('href="data:image' in lowered or 'xlink:href="data:image' in lowered)
 
 
-_PLAN_B_SAMPLE_ALIASES: dict[str, tuple[str, ...]] = {
-    "AC0010": ("AC0100",),
-    "AC0212": ("AC0VR2_AB",),
-}
-
-
 def _build_sample_candidates(base_name: str) -> list[str]:
-    candidates = [base_name]
+    candidates: list[str] = []
+    seen: set[str] = set()
+
+    def _add(name: str) -> None:
+        if name and name not in seen:
+            seen.add(name)
+            candidates.append(name)
+
+    _add(base_name)
     root, sep, size_suffix = base_name.rpartition("_")
     if sep:
-        alias_roots = _PLAN_B_SAMPLE_ALIASES.get(root, ())
-        candidates.extend(f"{alias_root}_{size_suffix}" for alias_root in alias_roots)
+        _add(root)
+        for alt_suffix in ("L", "M", "S"):
+            _add(f"{root}_{alt_suffix}")
+        _add(size_suffix)
         return candidates
 
-    candidates.extend(f"{base_name}_{size_suffix}" for size_suffix in ("L", "M", "S"))
-    alias_roots = _PLAN_B_SAMPLE_ALIASES.get(base_name, ())
-    for alias_root in alias_roots:
-        candidates.append(alias_root)
-        candidates.extend(f"{alias_root}_{size_suffix}" for size_suffix in ("L", "M", "S"))
+    for alt_suffix in ("L", "M", "S"):
+        _add(f"{base_name}_{alt_suffix}")
     return candidates
 
 
