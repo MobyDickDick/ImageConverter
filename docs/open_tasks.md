@@ -130,6 +130,14 @@ Zielbild: Nicht-binäre Vektorisierung über echte SVG-Primitive mit semantische
 - **Nächster sinnvoller Schritt:** Für die nächste gekoppelte Plan-B-Aufgabe die Beschreibung weiterhin im selben Formalisierungsstil hinterlegen (Objekt, Achsenbezug, Überdeckung, Beschriftungssemantik).
 
 
+### Fortschritt vs. Blocker (Session 2026-05-16, 3x Plan-B-Samples + T5-Rotation Run EU)
+
+- **Fortschritt (Plan B):** Für die drei in `not_satisfactory_converted_images.csv` als `in samples=yes` markierten Varianten (`AC0010`, `AC0011`, `AC0020_L`) wurden gekoppelte Plan-B-Syntheseproben ausgeführt (`python -m tools.plan_b_synthetic_probe ... --variant <ID> --output-dir artifacts/converted_images/reports`), jeweils mit Exit `0`; neue Log-Artefakte: `artifacts/converted_images/reports/AC0010_planb_synthetic_2026-05-16_runEU.log`, `.../AC0011_planb_synthetic_2026-05-16_runEU.log`, `.../AC0020_L_planb_synthetic_2026-05-16_runEU.log`.
+- **Fortschritt (nächste dokumentierte Aufgabe):** Der nächste priorisierte Kurzlaufpfad wurde direkt danach erneut ausgeführt (`PYENV_VERSION=3.10.20 python -m pytest tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_ac0812_only -q`), Ergebnis: `1 passed` in `98.46s`, Exit `0`; Log-Artefakt: `artifacts/converted_images/reports/T5_ac0812_timeoutpath_probe_2026-05-16_runEU.log`.
+- **Blocker:** Der bekannte N1/N2-Vollbereichsblocker (Timeout/Laufzeit) bleibt unabhängig von den erfolgreichen Plan-B-/T5-Kurzläufen bestehen.
+- **Nächster sinnvoller Schritt:** Entweder N5 (Sample-Pair-Kurzbatch) als nächsten mittleren Schritt ausführen oder einen weiteren T6.x-Isolationslauf mit gekoppelter Plan-B-Aufgabe dokumentieren.
+
+
 Arbeitsreihenfolge für die nächsten Sessions (explizit von **leicht zu erledigen**
 bis **schwierig/zeitintensiv**):
 

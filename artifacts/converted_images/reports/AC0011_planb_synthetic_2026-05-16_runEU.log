@@ -1,0 +1,11 @@
+[INFO] Schreibe Konsolen-Output nach: /workspace/ImageConverter/imageCompositeConverter.local.log
+
+--- Verarbeite AC0011.jpg ---
+Bildbeschreibung: Wie AC0010: Heizelement, graues Rechteck, Plus-Minus-Zeichen oben links, Farbverlauf horizontal dunkel-hell-dunkel graue Diagonale oben rechts nach unten links. Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).
+[WARN] AC0011.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+Abgeschlossen! Ausgaben unter: artifacts/converted_images/reports
+status=ok
+variant=AC0011
