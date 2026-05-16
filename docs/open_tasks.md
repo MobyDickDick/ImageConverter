@@ -2301,3 +2301,11 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 - **Arbeitspaket-Definition (fortgeschrieben):** Das **„nächste Arbeitspaket“** bleibt die feste Kombination aus **(1) nächster dokumentierter Aufgabe + (2) genau einer gekoppelten Plan-B-Aufgabe + (3) nächstes CSV-Bild** und wurde in Run GJ erneut vollständig so umgesetzt.
 - **Blocker:** Der bekannte N1/N2-Vollbereichsblocker (Timeout/Laufzeit) bleibt davon unabhängig bestehen; im Plan-B-Lauf erscheint die bekannte OpenCV/Numpy-Umgebungswarnung ohne Exit-Fehler.
 - **Nächster sinnvoller Schritt:** Dasselbe Arbeitspaket-Schema mit dem nächsten CSV-Eintrag (`AC0023`) fortsetzen.
+
+### Fortschritt vs. Blocker (Session 2026-05-16, Arbeitspaket-Definition + N5/Plan-B/CSV Run EX)
+
+- **Fortschritt (Arbeitspaket-Definition):** Der Begriff **„nächstes Arbeitspaket“** wurde für Folgesessions eindeutig dokumentiert als feste 3er-Kombination aus *(1) nächster dokumentierter Aufgabe*, *(2) gekoppelter Plan-B-Aufgabe* und *(3) nächstem Bild aus `not_satisfactory_converted_images.csv`*; siehe `docs/sample_pair_validation_2026-05-16_runEX.md`.
+- **Fortschritt (nächste dokumentierte Aufgabe):** `N5` wurde als priorisierter mittlerer Kurzbatch ausgeführt (`PYENV_VERSION=3.10.20 python -m tools.validate_sample_pairs ... --report-csv artifacts/converted_images/reports/sample_pair_validation_2026-05-16_runEX.csv`), Exit `0`; Artefakte: `artifacts/converted_images/reports/sample_pair_validation_2026-05-16_runEX.log` und `...runEX.csv`.
+- **Fortschritt (Plan B + nächstes Bild):** Als nächstes unbearbeitetes CSV-Bild wurde `AC0020_M` bearbeitet und direkt mit der gekoppelten Plan-B-Syntheseprobe ausgeführt (`python -m tools.plan_b_synthetic_probe ... --variant AC0020_M ...`), Exit `0`; Log-Artefakt: `artifacts/converted_images/reports/AC0020_M_planb_synthetic_2026-05-16_runEX.log`.
+- **Blocker:** Der bekannte N1/N2-Vollbereichsblocker (Timeout/Laufzeit) bleibt unverändert und ist von diesem Arbeitspaket unabhängig.
+- **Nächster sinnvoller Schritt:** Das nächste Arbeitspaket nach derselben Definition fortsetzen (nächste dokumentierte Aufgabe + gekoppelte Plan-B-Aufgabe + nächstes CSV-Bild nach `AC0020_M`).
