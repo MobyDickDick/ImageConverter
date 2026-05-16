@@ -47,7 +47,7 @@ def detectDualArrowBadgeParamsFromImageImpl(
         # collapse to the same orientation (common with compressed tips),
         # keep the right/red arrow and mirror the left/blue arrow.
         left = _flipArrowDirection(left)
-    left, right = _normalizeDualArrowPairGeometry(left, right, h)
+    left, right = _normalizeDualArrowPairGeometry(left, right, h, width=w)
 
     return {
         "mode": "dual_arrow_badge",
@@ -145,6 +145,7 @@ def _normalizeDualArrowPairGeometry(
     left: dict[str, float],
     right: dict[str, float],
     height: int,
+    width: int | None = None,
 ) -> tuple[dict[str, float], dict[str, float]]:
     normalized_left = dict(left)
     normalized_right = dict(right)
@@ -165,6 +166,16 @@ def _normalizeDualArrowPairGeometry(
 
     shared_half_width = (float(left["triangle_half_width"]) + float(right["triangle_half_width"])) / 2.0
     shared_line_width = (float(left["line_width"]) + float(right["line_width"])) / 2.0
+    left_cx = float(left["center_x"])
+    right_cx = float(right["center_x"])
+    canvas_width = float(width) if width is not None else max(left_cx, right_cx) + shared_half_width + 1.0
+    edge_margin = 0.5
+    max_half_by_edges = min(
+        max(1.0, left_cx - edge_margin),
+        max(1.0, canvas_width - right_cx - edge_margin),
+    )
+    max_half_by_gap = max(1.0, abs(right_cx - left_cx) / 2.0 - 0.5)
+    shared_half_width = min(shared_half_width, max_half_by_edges, max_half_by_gap)
 
     normalized_left["line_y1"] = line_top
     normalized_left["line_y2"] = line_bottom
