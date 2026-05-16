@@ -2283,3 +2283,12 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 - **Fortschritt (Arbeitspaket-Definition):** Das Arbeitspaket-Schema bleibt explizit bestehen: **(1) nächste dokumentierte Aufgabe + (2) genau eine Plan-B-Aufgabe + (3) nächstes CSV-Bild**.
 - **Blocker:** Der bekannte N1/N2-Vollbereichsblocker (Timeout/Laufzeit) bleibt unabhängig von diesem Kurzpaket bestehen; die bekannte OpenCV/Numpy-Umgebungswarnung erscheint weiterhin im Plan-B-Lauf, ohne den Exit-Code zu kippen.
 - **Nächster sinnvoller Schritt:** Dasselbe Arbeitspaket-Schema mit dem nächsten CSV-Eintrag (`AC0022`) fortsetzen.
+
+### Fortschritt vs. Blocker (Session 2026-05-16, nächstes Arbeitspaket Run EW)
+
+- **Definition (neu):** Als **nächstes Arbeitspaket** gilt ab sofort die feste Kombination aus **(1) nächster dokumentierter Aufgabe**, **(2) genau einer gekoppelten Plan-B-Aufgabe** und **(3) dem nächsten Bild aus** `artifacts/converted_images/reports/summaries/not_satisfactory_converted_images.csv`.
+- **Fortschritt (1/3 – nächste dokumentierte Aufgabe):** T5.x-Kurzlauf erneut erfolgreich ausgeführt (`PYENV_VERSION=3.10.20 python -m pytest tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_ac0812_only -q`), Ergebnis: `1 passed` in `144.05s`, Exit `0`; Log: `artifacts/converted_images/reports/T5_ac0812_timeoutpath_probe_2026-05-16_runEW.log`, Summary: `docs/t5_ac0812_timeoutpath_probe_2026-05-16_runEW_summary.md`.
+- **Fortschritt (2/3 – Plan B):** Gekoppelte Plan-B-Syntheseprobe für `AC0020_M` erfolgreich ausgeführt (`python -m tools.plan_b_synthetic_probe ... --variant AC0020_M --output-dir artifacts/converted_images/reports`), Exit `0`; Log: `artifacts/converted_images/reports/AC0020_M_planb_synthetic_2026-05-16_runEW.log`.
+- **Fortschritt (3/3 – nächstes Bild):** Nächster Bildpfad anhand der CSV-Liste praktisch abgearbeitet über Einzelbereichslauf `--start AC0020 --end AC0020` (inkl. `AC0020_M`), Exit `0`; Log: `artifacts/converted_images/reports/AC0020_single_2026-05-16_runEW.log`.
+- **Blocker:** Kein neuer technischer Blocker in diesem Arbeitspaket; der bekannte N1/N2-Vollbereichsblocker (Timeout/Laufzeit) bleibt unabhängig davon bestehen.
+- **Nächster sinnvoller Schritt:** Dasselbe Arbeitspaket-Muster für den nächsten CSV-Eintrag (`AC0021`) fortsetzen.
