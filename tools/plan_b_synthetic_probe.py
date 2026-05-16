@@ -11,6 +11,7 @@ if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
 from src.iCCModules.imageCompositeConverterDependencies import import_with_vendored_fallback
+from src.iCCModules.imageCompositeConverterDependencies import vendored_site_packages_dirs
 
 
 def _create_svg_from_description(svg_path: Path, description: str) -> None:
@@ -76,8 +77,18 @@ def main() -> int:
         converter_input.mkdir(parents=True, exist_ok=True)
         (converter_input / f"{args.variant}.jpg").write_bytes(jpeg_noisy.read_bytes())
 
+        import os
+
+        env = dict(os.environ)
+        vendored_paths = [str(p) for p in vendored_site_packages_dirs()]
+        existing_pythonpath = env.get("PYTHONPATH", "")
+        pythonpath_parts = [str(REPO_ROOT), *vendored_paths]
+        if existing_pythonpath:
+            pythonpath_parts.append(existing_pythonpath)
+        env["PYTHONPATH"] = ":".join(part for part in pythonpath_parts if part)
+
         cmd = [
-            "python",
+            sys.executable,
             "-m",
             "src.imageCompositeConverter",
             str(converter_input),
@@ -90,7 +101,7 @@ def main() -> int:
             "--end",
             args.variant,
         ]
-        subprocess.run(cmd, check=True)
+        subprocess.run(cmd, check=True, env=env)
 
     print(f"status=ok\nvariant={args.variant}")
     return 0

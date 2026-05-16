@@ -599,7 +599,8 @@ Deadlock-/Stagnationsschleifen.
   - [x] T6-PB (Plan-B, 2026-05-14): Historischen Einzeltest-Blocker als Kurzrepro fahren, falls kein neuer sofortiger Langlauf-Abbau ohne Timeout möglich ist.
     - 2026-05-14 (Run 02): Wiederholung weiterhin grün mit Exit `0` (`1 passed`), Log: `artifacts/converted_images/reports/t6_planb_singletest_2026-05-14_run02.log`.
     - 2026-05-14 (Run 03): Plan-B-Kurzrepro erneut grün mit Exit `0` (`1 passed in 0.11s`), Log: `artifacts/converted_images/reports/t6_planb_singletest_2026-05-14_run03.log`.
-    - Ergebnis: `pytest -q tests/detailtests/test_global_search_optimization_helpers.py::test_global_search_skips_deterministic_track_after_strong_stochastic_gain` => Exit `0`, `1 passed in 0.18s`.
+    - 2026-05-16 (Run EQ): Plan-B-Kurzrepro erneut grün mit Exit `0` (`1 passed in 0.35s`), Log: `artifacts/converted_images/reports/t6_planb_singletest_2026-05-16_runEQ.log`.
+    - Ergebnis: `pytest -q tests/detailtests/test_global_search_optimization_helpers.py::test_global_search_skips_deterministic_track_after_strong_stochastic_gain` => Exit `0`, `1 passed in 0.35s`.
   - Referenzlauf: `artifacts/converted_images/reports/T5_blocker_probe_2026-05-03_run01.log` (`829 passed, 1 skipped`, Laufzeit `1574.93s`).
   - Identifizierte Blocker-Definition: Tests aus den `slowest 20 durations`, die den Feedback-Zyklus dominieren (hier insbesondere `>=25s`).
   - [ ] T6.1 (sehr hohe Priorität): `tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_convert_without_failed_svg` reduzieren (aktuell `377.98s`).
@@ -619,6 +620,7 @@ Deadlock-/Stagnationsschleifen.
     - [ ] T6.1.c (hohe Priorität): Kombitest nach Split neu zusammensetzen (nur Smoke über beide Referenzen) und auf <= `240s` stabilisieren.
       - Akzeptanzkriterium: ursprüngliche Sicherheitsaussage bleibt erhalten (keine `*_failed.svg` für `AC0811_L`/`AC0812_M`), aber Laufzeit unter T6.1-Ziel.
       - 2026-05-06: Neuer Kombi-Smoke-Test `test_ac08_semantic_anchor_variants_convert_without_failed_svg` ergänzt (gemeinsamer Lauf `AC0811_L` + `AC0812_M`, `iterations=2`, `deterministic_order=True`). Isolierter Repro in dieser Umgebung aktuell `skipped` wegen fehlender `numpy/cv2/fitz`-Bindings; Laufzeitziel bleibt bis zur Ausführung in voll ausgestatteter Runtime offen.
+      - 2026-05-16 (Run EQ): Timeout-gesicherter Isolationslauf erneut durchgeführt (`timeout 240 python -m pytest tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_convert_without_failed_svg -q`), Ergebnis weiterhin `1 skipped` bei Exit `0` in `7.93s`; Log: `artifacts/converted_images/reports/T6_1c_smoke_2026-05-16_runEQ.log`.
   - [ ] T6.2 (sehr hohe Priorität): `tests/test_image_composite_converter.py::test_ac08_regression_suite_preserves_previously_good_variants[AC0837_L-semantic_ok]` reduzieren (aktuell `198.28s`).
     - Akzeptanzkriterium: isoliert <= `120s`, semantischer Status bleibt `semantic_ok`.
   - [ ] T6.3 (sehr hohe Priorität): `tests/test_image_composite_converter.py::test_make_badge_params_keeps_ac0838_m_circle_near_full_width_for_voc_layout` reduzieren (aktuell `173.27s`).
@@ -2238,3 +2240,12 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 - **Fortschritt (Plan B):** Die gekoppelte Plan-B-Syntheseprobe wurde direkt danach für `AC0223` im formalisierten Beschreibungsstil ausgeführt (`python -m tools.plan_b_synthetic_probe "Bildbeschreibung: Kelle (Kreis mit einem vertikalen Strich nach unten, der Strich ist in der vertikalen Symmetrieachse des Kreises), der Strich reicht hinter die Kelle. In der Kreisscheibe ist die Beschriftung CO^2 (mit hochgestelltem 2) eingefügt." --variant AC0223 --output-dir artifacts/converted_images/reports`), Exit `0`; Log-Artefakt: `artifacts/converted_images/reports/AC0223_planb_synthetic_2026-05-16_runEV.log`.
 - **Blocker:** Der bekannte N1/N2-Vollbereichsblocker (Timeout/Laufzeit) bleibt unabhängig von den erfolgreichen N5-/Plan-B-Kurzläufen bestehen.
 - **Nächster sinnvoller Schritt:** Als nächste leichte Rotation einen weiteren T5- oder T6.x-Isolationslauf mit neuem Diagnoseartefakt durchführen und danach den Session-Stand direkt nachpflegen.
+
+### Fortschritt vs. Blocker (Session 2026-05-16, AC0060_L Arrow-Fix + T6.10 Run 09 + Plan-B Run 09)
+
+- **Fortschritt (Root-Cause AC0060_L):** Die zu breiten Pfeilspitzen wurden auf die Geometrie-Normalisierung im Dual-Arrow-Renderer eingegrenzt: `triangle_half_width` wurde als Mittelwert übernommen, aber nicht gegen Canvas-Kanten bzw. den Abstand zwischen beiden Pfeilen begrenzt. Dadurch konnten Dreiecke den ViewBox-Bereich überschreiten.
+- **Umsetzung:** In `src/iCCModules/imageCompositeConverterDualArrowBadge.py` wurde `_normalizeDualArrowPairGeometry(...)` um eine Breitenbegrenzung erweitert (`max_half_by_edges` + `max_half_by_gap`) und der Aufrufer übergibt jetzt auch die Bildbreite (`width=w`) für verlässliches Clamping.
+- **Testabdeckung:** Neuer Regressionstest `test_dual_arrow_badge_triangle_width_is_clamped_to_canvas` ergänzt; zusätzlicher bestehender Gegenrichtungstest erneut mitausgeführt.
+- **Fortschritt (nächste dokumentierte Aufgabe):** T6.10-Isolationslauf erneut ausgeführt (`PYTHONPATH=. timeout 180 python3 -m pytest tests/test_image_composite_converter.py::test_validate_badge_logs_extent_bracketing_for_line_elements -q`), Ergebnis weiterhin `1 skipped`, Exit `0`; Log: `artifacts/converted_images/reports/t6_10_isolation_2026-05-16_run09.log`.
+- **Fortschritt (Plan B, SVG→JPG→SVG):** Gekoppelte Plan-B-Probe für `AC0060_L` ausgeführt (`PYTHONPATH=. python3 tools/plan_b_synthetic_probe.py "Bildbeschreibung: Zwei vertikale Pfeile, links blau mit Spitze nach unten, rechts rot mit Spitze nach oben." --variant AC0060_L --output-dir artifacts/converted_images/reports`), Ergebnis `status=ok`, Exit `0`; Log: `artifacts/converted_images/reports/t6_planb_svg_jpeg_roundtrip_2026-05-16_run09.log`.
+- **Blocker:** Die bekannte OpenCV/Numpy-Umgebungswarnung erscheint in der Plan-B-Probe weiterhin, ohne Exit-Fehler.
