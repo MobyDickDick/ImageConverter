@@ -107,6 +107,29 @@ Zielbild: Nicht-binäre Vektorisierung über echte SVG-Primitive mit semantische
 - **Blocker:** Kein neuer technischer Blocker im Einzelpfad; der bekannte N1/N2-Laufzeitblocker bleibt unabhängig davon bestehen.
 - **Nächster sinnvoller Schritt:** Bei weiteren Einzelproben zuerst Range-Treffer in `images_to_convert` **und** `images_to_convert/nonconvertable` verifizieren, danach den nächsten priorisierten Kurzlaufpfad fortsetzen.
 
+### Fortschritt vs. Blocker (Session 2026-05-16, N10-PB AC0223 + T5-Rotation Run EO)
+
+- **Fortschritt (Plan B):** Die gekoppelte Plan-B-Syntheseprobe `N10-PB` wurde für `AC0223` ausgeführt (`python -m tools.plan_b_synthetic_probe --variant AC0223 ...`), Log-Artefakt: `artifacts/converted_images/reports/AC0223_planb_synthetic_2026-05-16_runEO.log`, Exit `0`.
+- **Fortschritt (nächste dokumentierte Aufgabe):** Direkt anschließend wurde gemäß priorisiertem Kurzlaufpfad ein T5.x-Isolationslauf ausgeführt (`tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_ac0812_only`), Ergebnis: `1 passed` in `92.83s`, Exit `0`, Log-Artefakt: `artifacts/converted_images/reports/T5_ac0812_timeoutpath_probe_2026-05-16_runEO.log`.
+- **Blocker:** Der bekannte N1/N2-Vollbereichsblocker (Timeout/Laufzeit) bleibt weiterhin unabhängig von diesen Kurzläufen bestehen.
+- **Nächster sinnvoller Schritt:** Entweder einen weiteren leichten Kurzlauf (T5/N5/N6/N7) mit neuem Diagnoseartefakt ergänzen oder danach den nächsten schweren N1/N2-Versuch mit fixer Timeout-Grenze dokumentiert ansetzen.
+
+### Fortschritt vs. Blocker (Session 2026-05-16, T5 + gekoppelte Plan-B-Aufgabe Run EP)
+
+- **Fortschritt (nächste dokumentierte Aufgabe):** Ein weiterer priorisierter T5.x-Kurzlauf wurde erfolgreich ausgeführt (`PYENV_VERSION=3.10.20 python -m pytest tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_ac0812_only -q`), Ergebnis: `1 passed` in `98.38s`, Exit `0`, Log-Artefakt: `artifacts/converted_images/reports/T5_ac0812_timeoutpath_probe_2026-05-16_runEP.log`.
+- **Fortschritt (Plan B):** Die gekoppelte Plan-B-Syntheseprobe wurde direkt im selben Schritt durchgeführt (`python -m tools.plan_b_synthetic_probe "Kreis mit horizontalem Griff links und Label rF" --variant AC0223 --output-dir artifacts/converted_images/reports`), Exit `0`, Log-Artefakt: `artifacts/converted_images/reports/AC0223_planb_synthetic_2026-05-16_runEP.log`.
+- **Blocker:** Der bekannte N1/N2-Vollbereichsblocker (Timeout/Laufzeit) bleibt unabhängig von den erfolgreichen Kurzläufen bestehen.
+- **Nächster sinnvoller Schritt:** Entweder N5 (Sample-Pair-Kurzbatch) als nächsten mittleren Schritt dokumentiert ausführen oder einen weiteren T5/N7-Einzelpfad mit neuem Diagnoseartefakt ergänzen.
+
+
+### Fortschritt vs. Blocker (Session 2026-05-16, Plan-B-Beschreibung formalisiert Run EP2)
+
+- **Fortschritt (Plan B-Qualität):** Die Plan-B-Syntheseprobe für `AC0223` wurde mit einer formalisierten, fachlich präziseren Beschreibung erneut ausgeführt: `"Bildbeschreibung: Kelle (Kreis mit einem vertikalen Strich nach unten, der Strich ist in der vertikalen Symmetrieachse des Kreises), der Strich reicht hinter die Kelle. In der Kreisscheibe ist die Beschriftung CO^2 (mit hochgestelltem 2) eingefügt."`.
+- **Ergebnis:** Lauf erfolgreich mit Exit `0` (`status=ok`), neues Log-Artefakt: `artifacts/converted_images/reports/AC0223_planb_synthetic_2026-05-16_runEP2.log`.
+- **Blocker:** Der bekannte N1/N2-Vollbereichsblocker (Timeout/Laufzeit) bleibt unverändert und ist von dieser Formalisierung unabhängig.
+- **Nächster sinnvoller Schritt:** Für die nächste gekoppelte Plan-B-Aufgabe die Beschreibung weiterhin im selben Formalisierungsstil hinterlegen (Objekt, Achsenbezug, Überdeckung, Beschriftungssemantik).
+
+
 Arbeitsreihenfolge für die nächsten Sessions (explizit von **leicht zu erledigen**
 bis **schwierig/zeitintensiv**):
 
@@ -608,6 +631,8 @@ Deadlock-/Stagnationsschleifen.
     - 2026-05-14: Run 02 als timeout-gesicherter Isolationslauf erneut ausgeführt (`timeout 180 ...::test_validate_badge_logs_extent_bracketing_for_line_elements`), Ergebnis weiterhin `skipped` bei Exit `0`; siehe `docs/t6_10_isolation_2026-05-14_run02_summary.md` und `artifacts/converted_images/reports/t6_10_isolation_2026-05-14_run02.log`.
     - 2026-05-14: Run 03 erneut timeout-gesichert ausgeführt; Ergebnis unverändert `skipped` bei Exit `0` in `2.55s`; siehe `docs/t6_10_isolation_2026-05-14_run03_summary.md` und `artifacts/converted_images/reports/t6_10_isolation_2026-05-14_run03.log`.
     - 2026-05-16: Run 04 timeout-gesichert ausgeführt; Ergebnis weiterhin `skipped` bei Exit `0` in `3.84s`; gekoppelte Plan-B-Aufgabe (`T6-PB`) erneut grün mit Exit `0` (`1 passed in 0.17s`); siehe `docs/t6_10_isolation_2026-05-16_run04_summary.md` sowie Logs `artifacts/converted_images/reports/t6_10_isolation_2026-05-16_run04.log` und `artifacts/converted_images/reports/t6_planb_singletest_2026-05-16_run04.log`.
+    - 2026-05-16: Run 05 timeout-gesichert ausgeführt; Ergebnis weiterhin `skipped` bei Exit `0` in `5.59s`; gekoppelte Plan-B-Aufgabe wurde aus `artifacts/images_to_convert/samples/AC0831_L.svg` abgeleitet und als Syntheseprobe mit Exit `0` (`status=ok`, `variant=AC0831_L`) dokumentiert; siehe `docs/t6_10_isolation_2026-05-16_run05_summary.md` sowie Logs `artifacts/converted_images/reports/t6_10_isolation_2026-05-16_run05.log` und `artifacts/converted_images/reports/t6_planb_ac0831_synthetic_2026-05-16_run05.log`.
+    - 2026-05-16: Run 06 timeout-gesichert ausgeführt; Ergebnis weiterhin `skipped` bei Exit `0` in `2.51s`; gekoppelte Plan-B-Aufgabe explizit als SVG+Bildbeschreibung-Flow (`Beschreibung -> SVG -> JPEG -> Rückkonvertierung`) ausgeführt und mit Exit `0` (`status=ok`, `variant=AC0831_L`) dokumentiert; siehe `docs/t6_10_isolation_2026-05-16_run06_summary.md` sowie Logs `artifacts/converted_images/reports/t6_10_isolation_2026-05-16_run06.log` und `artifacts/converted_images/reports/t6_planb_svg_jpeg_roundtrip_2026-05-16_run06.log`.
     - Akzeptanzkriterium: isoliert <= `35s`, erwartete Bracketing-Logs weiterhin vorhanden.
   - [ ] T6.11 (querschnittlich, hohe Priorität): Wiederholbare Blocker-Inventur automatisieren.
     - Befehl: `python -m pytest --maxfail=1 -vv --durations=20`.
@@ -2123,3 +2148,9 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 - Begründung: Wiederholte identische N2-Vollbereichsversuche liefern keinen zusätzlichen Erkenntnisgewinn.
 - Neuer Fokus: Problemlösung über alternative, gezielte Pfade (z. B. T5/N5/N6/N7 und isolierte Engpass-Analysen) statt weiterer identischer Vollbereichs-Re-Runs.
 
+### Fortschritt vs. Blocker (Session 2026-05-16, T5 + gekoppelte Plan-B-Aufgabe Run EZ)
+
+- **Fortschritt (nächste dokumentierte Aufgabe):** Ein weiterer priorisierter T5.x-Kurzlauf wurde erfolgreich ausgeführt (`PYENV_VERSION=3.10.20 python -m pytest tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_ac0812_only -q`), Ergebnis: `1 passed` in `73.49s`, Exit `0`, Log-Artefakt: `artifacts/converted_images/reports/T5_ac0812_timeoutpath_probe_2026-05-16_runEZ.log`.
+- **Fortschritt (Plan B):** Die gekoppelte Plan-B-Syntheseprobe wurde direkt im selben Schritt durchgeführt (`PYTHONPATH=. python3 tools/plan_b_synthetic_probe.py "Bildbeschreibung: Kelle (Kreis mit einem vertikalen Strich nach unten, der Strich ist in der vertikalen Symmetrieachse des Kreises), der Strich reicht hinter die Kelle. In der Kreisscheibe ist die Beschriftung CO^2 (mit hochgestelltem 2) eingefügt." --variant AC0223 --output-dir artifacts/converted_images/reports`), Exit `0`, Log-Artefakt: `artifacts/converted_images/reports/AC0223_planb_synthetic_2026-05-16_runEZ.log`.
+- **Blocker:** Der bekannte N1/N2-Vollbereichsblocker (Timeout/Laufzeit) bleibt unabhängig von den erfolgreichen Kurzläufen bestehen; im Plan-B-Lauf erscheint weiterhin die bekannte Umgebungswarnung zu OpenCV/Numpy, ohne den Exit-Code zu kippen.
+- **Nächster sinnvoller Schritt:** Als nächste Rotation entweder N5 (Sample-Pair-Kurzbatch) mit neuem Diagnoseartefakt ausführen oder einen weiteren T5/N7-Einzelpfad nachziehen.
