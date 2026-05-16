@@ -3,7 +3,9 @@
 from __future__ import annotations
 
 import json
+import os
 import re
+from importlib import import_module
 from pathlib import Path
 
 
@@ -32,6 +34,10 @@ def convertImageImpl(
     target.parent.mkdir(parents=True, exist_ok=True)
 
     if target.suffix.lower() == ".svg" or cv2_module is None or np_module is None:
+        if target.suffix.lower() == ".svg":
+            traced = _tryVectorizeWithVtracer(input_path, target)
+            if traced is not None:
+                return traced
         target = _normalizeFailedSvgTarget(target)
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_text(render_embedded_raster_svg_fn(input_path), encoding="utf-8")
@@ -50,3 +56,39 @@ def convertImageImpl(
 def convertImageVariantsImpl(*args, convert_range_fn, **kwargs):
     """Compatibility shim implementation kept for tooling imports."""
     return convert_range_fn(*args, **kwargs)
+
+
+def _tryVectorizeWithVtracer(input_path: str, target: Path) -> Path | None:
+    """Optional high-quality JPG/PNG->SVG vectorization via vtracer.
+
+    Activated by setting ``IMAGE_CONVERTER_VECTORIZE_BACKEND=vtracer``.
+    """
+    if os.environ.get("IMAGE_CONVERTER_VECTORIZE_BACKEND", "").strip().lower() != "vtracer":
+        return None
+    try:
+        module = import_module("vtracer")
+    except Exception:
+        return None
+
+    convert_fn = getattr(module, "convert_image_to_svg_py", None)
+    if not callable(convert_fn):
+        return None
+    try:
+        target.parent.mkdir(parents=True, exist_ok=True)
+        convert_fn(
+            str(input_path),
+            str(target),
+            colormode="color",
+            mode="spline",
+            filter_speckle=4,
+            color_precision=6,
+            layer_difference=16,
+            corner_threshold=60,
+            length_threshold=4.0,
+            max_iterations=10,
+            splice_threshold=45,
+            path_precision=4,
+        )
+    except Exception:
+        return None
+    return target if target.exists() else None
