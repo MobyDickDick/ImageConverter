@@ -9,6 +9,7 @@ def _contains_svg_image_tag(svg_content: str) -> bool:
 
 
 _PLAN_B_SAMPLE_ALIASES: dict[str, tuple[str, ...]] = {
+    "AC0010": ("AC0100",),
     "AC0212": ("AC0VR2_AB",),
 }
 
@@ -16,11 +17,15 @@ _PLAN_B_SAMPLE_ALIASES: dict[str, tuple[str, ...]] = {
 def _build_sample_candidates(base_name: str) -> list[str]:
     candidates = [base_name]
     root, sep, size_suffix = base_name.rpartition("_")
-    if not sep:
+    if sep:
+        alias_roots = _PLAN_B_SAMPLE_ALIASES.get(root, ())
+        candidates.extend(f"{alias_root}_{size_suffix}" for alias_root in alias_roots)
         return candidates
 
-    for alias_root in _PLAN_B_SAMPLE_ALIASES.get(root, ()):  # pragma: no branch - tiny tuple lookup
-        candidates.append(f"{alias_root}_{size_suffix}")
+    alias_roots = _PLAN_B_SAMPLE_ALIASES.get(base_name, ())
+    for alias_root in alias_roots:
+        candidates.append(alias_root)
+        candidates.extend(f"{alias_root}_{size_suffix}" for size_suffix in ("L", "M", "S"))
     return candidates
 
 
