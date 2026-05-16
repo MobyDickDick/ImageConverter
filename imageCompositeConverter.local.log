@@ -1,12 +1,2 @@
-[INFO] Schreibe Konsolen-Output nach: /workspace/ImageConverter/imageCompositeConverter.local.log
-
---- Verarbeite AC0223.jpg ---
-Bildbeschreibung: 3-Wege-Ventilkopf oben (drei spitze Ventilflügel mit gemeinsamem Verlauf von dunkelgrau nach hellgrau), darunter ein dunkelgrauer senkrechter Griff (vom Ventilzentrum nach unten) auf hellgrauem Hintergrund. Kein "M"-Text im Badge. Der Griff liegt auf einer Symmetrieachse des Kreises.
-Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe, SEMANTIC: senkrechter Strich oben vom Kreis, SEMANTIC: Ventilkopf mit drei Dreiecken oberhalb des Stiels, SEMANTIC: Dreiecks-Spitzen treffen zentriert am oberen Stielende zusammen, SEMANTIC: Drei Dreiecke sind zu einem Polygon vereint
-[ERROR] Semantik-Abgleich fehlgeschlagen:
-  - semantic_connector_classification=horizontal;circle_source=hough;horizontal_candidates=1;vertical_candidates=0
-  - Beschreibung erwartet senkrechter Strich, im Bild aber nicht robust erkennbar
-  - Im Bild ist waagrechter Strich erkennbar, aber nicht in der Beschreibung enthalten
-[WARN] AC0223.jpg: Semantischer Fehlmatch, Batchlauf stoppt nach diesem Fehler.
-
-Abgeschlossen! Ausgaben unter: artifacts/converted_images/reports
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
+Namen von: 
