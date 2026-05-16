@@ -2327,3 +2327,12 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 - **Dokumentationskonvention:** Der Begriff **„nächstes Arbeitspaket“** ist damit erneut explizit als feste 3er-Kombination (dokumentierte Aufgabe + Plan-B-Aufgabe + nächstes CSV-Bild) nachgeführt und kann in Folgesessions direkt referenziert werden.
 - **Blocker:** Der bekannte N1/N2-Vollbereichsblocker (Timeout/Laufzeit) bleibt weiterhin unabhängig von den erfolgreichen Kurzläufen bestehen.
 - **Nächster sinnvoller Schritt:** Das nächste Arbeitspaket in identischer Struktur mit dem Folgeeintrag `AC0025` fortsetzen.
+
+### Fortschritt vs. Blocker (Session 2026-05-16, nächstes Arbeitspaket Run GL)
+
+- **Fortschritt (Begriffsstandard):** Der Begriff **„nächstes Arbeitspaket“** ist weiterhin verbindlich als 3er-Kombination definiert: (1) nächste dokumentierte Aufgabe, (2) genau eine gekoppelte Plan-B-Aufgabe, (3) nächstes Bild aus `not_satisfactory_converted_images.csv`.
+- **Fortschritt (nächste dokumentierte Aufgabe):** Der priorisierte T5-Kurzlauf (`test_ac08_semantic_anchor_variants_ac0812_only`) wurde erneut erfolgreich ausgeführt (`1 passed`, Exit `0`), Log: `artifacts/converted_images/reports/T5_ac0812_timeoutpath_probe_2026-05-16_runGL.log`.
+- **Fortschritt (Plan B):** Die gekoppelte Plan-B-Syntheseprobe wurde für `AC0024` erfolgreich ausgeführt (`status=ok`, Exit `0`), Log: `artifacts/converted_images/reports/AC0024_planb_synthetic_2026-05-16_runGL.log`.
+- **Fortschritt (CSV-Bild):** Das nächste CSV-Bild nach `AC0023` wurde als Einzelrun `AC0024` mit Exit `0` bearbeitet, Log: `artifacts/converted_images/reports/AC0024_single_2026-05-16_runGL.log`.
+- **Blocker:** Der bekannte N1/N2-Vollbereichsblocker (Timeout/Laufzeit) bleibt unabhängig davon bestehen.
+- **Nächster sinnvoller Schritt:** Im nächsten Arbeitspaket den nächsten CSV-Eintrag (`AC0025`) mit derselben 3er-Kopplung bearbeiten und direkt nachdokumentieren.

@@ -1,7 +1,7 @@
 # Nächstes Arbeitspaket – Run GL (2026-05-16)
 
 ## Definition
-Das **nächste Arbeitspaket** bleibt die feste Kombination aus:
+Das **nächste Arbeitspaket** bleibt als wiederverwendbarer Begriff die feste Kombination aus:
 1. nächster dokumentierter Aufgabe,
 2. genau einer gekoppelten Plan-B-Aufgabe,
 3. nächstem Bild aus `artifacts/converted_images/reports/summaries/not_satisfactory_converted_images.csv`.
@@ -27,4 +27,4 @@ Das **nächste Arbeitspaket** bleibt die feste Kombination aus:
 - Log: `artifacts/converted_images/reports/AC0024_single_2026-05-16_runGL.log`
 
 ## Kurzfazit
-Das Arbeitspaket wurde vollständig in der 3er-Kombination durchgeführt und erfolgreich abgeschlossen.
+Das Arbeitspaket wurde in der gewünschten 3er-Kombination erneut vollständig durchgeführt.
