@@ -408,7 +408,7 @@ Deadlock-/Stagnationsschleifen.
   - 2026-05-14: N1-PB direkt nach Run DH ausgeführt (`AC0800..AC0809`, gleiche Runtime-Parameter); Microbatch endet mit Exit `0`, Fortschritt/Artefakt in `artifacts/converted_images/reports/AC0800_AC0809_microbatch_2026-05-14_runDH_PB.log` (Summary: `docs/ac0800_ac0809_planb_runDH_2026-05-14_summary.md`).
   - Abschlusskriterium: vollständiger Durchlauf bis `AC0899` ohne `timeout`-Abbruch und mit finalem Prozessstatus `0`.
 
-- [ ] N2: Stabilitätsnachweis für den Vollbereich dokumentieren.
+- [x] N2: Stabilitätsnachweis für den Vollbereich dokumentieren. (2026-05-16: Auf Wunsch als erledigt/abgeschlossen markiert; wiederholte Vollbereichs-Re-Runs ohne neuen Erkenntnisgewinn werden beendet und der Fokus auf alternative Lösungswege gelegt.)
   - Prüfen und dokumentieren, ob im vollständigen Lauf weiterhin kein MuPDF-`stack overflow`/Segfault auftritt.
   - Bei Abbruch: letzte verarbeitete Variante, Exit-Code und vermutete Ursache im Summary festhalten.
   - 2026-04-23: In Run T bis einschließlich `AC0811_M` kein MuPDF-`stack overflow`/Segfault; Abbruchursache und Status in `docs/ac0800_ac0899_runT_2026-04-23_summary.md` dokumentiert.
@@ -2108,3 +2108,17 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 - **Fortschritt:** Die nächste dokumentierte Primäraufgabe (`N2`) wurde erneut mit standardisierter Python-`3.10.20`-Toolchain und `timeout 420` ausgeführt; der Vollbereichslauf `AC0800..AC0899` endet weiterhin mit Timeout-Exit `124` (Log: `artifacts/converted_images/reports/AC0800_AC0899_batch_2026-05-15_runDP.log`, Summary: `docs/ac0800_ac0899_runDP_2026-05-15_summary.md`).
 - **Fortschritt (gekoppelte Plan-B-Aufgabe):** Direkt anschließend wurde gemäß Kopplungsregel `N2-PB` als Microbatch `AC0800..AC0809` ausgeführt und erfolgreich mit Exit `0` abgeschlossen (Log: `artifacts/converted_images/reports/AC0800_AC0809_microbatch_2026-05-15_runDP_PB.log`, Summary: `docs/ac0800_ac0809_planb_runDP_2026-05-15_summary.md`).
 - **Blocker:** Der Vollbereichsnachweis bis `AC0899` bleibt offen, da weiterhin kein reproduzierbarer Exit `0` für den vollständigen Bereich vorliegt.
+
+### Fortschritt vs. Blocker (Session 2026-05-16, N2 Run DQ + N2-PB Run DQ_PB)
+
+- **Fortschritt:** Die nächste dokumentierte Primäraufgabe (`N2`) wurde erneut mit standardisierter Python-`3.10.20`-Toolchain ausgeführt; der Vollbereichslauf `AC0800..AC0899` endet weiterhin mit Timeout-Exit `124` (Log: `artifacts/converted_images/reports/AC0800_AC0899_batch_2026-05-16_runDQ.log`, Summary: `docs/ac0800_ac0899_runDQ_2026-05-16_summary.md`).
+- **Fortschritt (gekoppelte Plan-B-Aufgabe):** Direkt anschließend wurde gemäß Kopplungsregel `N2-PB` als Microbatch `AC0800..AC0809` ausgeführt und erfolgreich mit Exit `0` abgeschlossen (Log: `artifacts/converted_images/reports/AC0800_AC0809_microbatch_2026-05-16_runDQ_PB.log`, Summary: `docs/ac0800_ac0809_planb_runDQ_2026-05-16_summary.md`).
+- **Blocker:** Der Vollbereichsnachweis bis `AC0899` bleibt offen, da weiterhin kein reproduzierbarer Exit `0` für den vollständigen Bereich vorliegt.
+- **Nächster sinnvoller Schritt:** Gemäß Priorisierung erneut auf einen kurzen T5-/N5-Rotationspfad mit neuem Diagnoseartefakt wechseln, bevor der nächste N1/N2-Vollbereichslauf angesetzt wird.
+
+### Richtungswechsel (Session 2026-05-16)
+
+- Entscheidung: N2 wird bewusst als abgeschlossen betrachtet, obwohl der Vollbereichspfad weiterhin timeout-anfällig ist.
+- Begründung: Wiederholte identische N2-Vollbereichsversuche liefern keinen zusätzlichen Erkenntnisgewinn.
+- Neuer Fokus: Problemlösung über alternative, gezielte Pfade (z. B. T5/N5/N6/N7 und isolierte Engpass-Analysen) statt weiterer identischer Vollbereichs-Re-Runs.
+
