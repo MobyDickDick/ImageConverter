@@ -600,6 +600,7 @@ Deadlock-/Stagnationsschleifen.
     - 2026-05-14 (Run 02): Wiederholung weiterhin grün mit Exit `0` (`1 passed`), Log: `artifacts/converted_images/reports/t6_planb_singletest_2026-05-14_run02.log`.
     - 2026-05-14 (Run 03): Plan-B-Kurzrepro erneut grün mit Exit `0` (`1 passed in 0.11s`), Log: `artifacts/converted_images/reports/t6_planb_singletest_2026-05-14_run03.log`.
     - 2026-05-16 (Run EQ): Plan-B-Kurzrepro erneut grün mit Exit `0` (`1 passed in 0.35s`), Log: `artifacts/converted_images/reports/t6_planb_singletest_2026-05-16_runEQ.log`.
+    - 2026-05-16 (Run EZ): Plan-B-Kurzrepro erneut grün mit Exit `0` (`1 passed in 0.15s`), Log: `artifacts/converted_images/reports/t6_planb_singletest_2026-05-16_runEZ.log`.
     - Ergebnis: `pytest -q tests/detailtests/test_global_search_optimization_helpers.py::test_global_search_skips_deterministic_track_after_strong_stochastic_gain` => Exit `0`, `1 passed in 0.35s`.
   - Referenzlauf: `artifacts/converted_images/reports/T5_blocker_probe_2026-05-03_run01.log` (`829 passed, 1 skipped`, Laufzeit `1574.93s`).
   - Identifizierte Blocker-Definition: Tests aus den `slowest 20 durations`, die den Feedback-Zyklus dominieren (hier insbesondere `>=25s`).
