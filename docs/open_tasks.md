@@ -107,6 +107,13 @@ Zielbild: Nicht-binäre Vektorisierung über echte SVG-Primitive mit semantische
 - **Blocker:** Kein neuer technischer Blocker im Einzelpfad; der bekannte N1/N2-Laufzeitblocker bleibt unabhängig davon bestehen.
 - **Nächster sinnvoller Schritt:** Bei weiteren Einzelproben zuerst Range-Treffer in `images_to_convert` **und** `images_to_convert/nonconvertable` verifizieren, danach den nächsten priorisierten Kurzlaufpfad fortsetzen.
 
+### Fortschritt vs. Blocker (Session 2026-05-16, N10-PB AC0223 + T5-Rotation Run EO)
+
+- **Fortschritt (Plan B):** Die gekoppelte Plan-B-Syntheseprobe `N10-PB` wurde für `AC0223` ausgeführt (`python -m tools.plan_b_synthetic_probe --variant AC0223 ...`), Log-Artefakt: `artifacts/converted_images/reports/AC0223_planb_synthetic_2026-05-16_runEO.log`, Exit `0`.
+- **Fortschritt (nächste dokumentierte Aufgabe):** Direkt anschließend wurde gemäß priorisiertem Kurzlaufpfad ein T5.x-Isolationslauf ausgeführt (`tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_ac0812_only`), Ergebnis: `1 passed` in `92.83s`, Exit `0`, Log-Artefakt: `artifacts/converted_images/reports/T5_ac0812_timeoutpath_probe_2026-05-16_runEO.log`.
+- **Blocker:** Der bekannte N1/N2-Vollbereichsblocker (Timeout/Laufzeit) bleibt weiterhin unabhängig von diesen Kurzläufen bestehen.
+- **Nächster sinnvoller Schritt:** Entweder einen weiteren leichten Kurzlauf (T5/N5/N6/N7) mit neuem Diagnoseartefakt ergänzen oder danach den nächsten schweren N1/N2-Versuch mit fixer Timeout-Grenze dokumentiert ansetzen.
+
 Arbeitsreihenfolge für die nächsten Sessions (explizit von **leicht zu erledigen**
 bis **schwierig/zeitintensiv**):
 
@@ -2123,4 +2130,3 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 - Entscheidung: N2 wird bewusst als abgeschlossen betrachtet, obwohl der Vollbereichspfad weiterhin timeout-anfällig ist.
 - Begründung: Wiederholte identische N2-Vollbereichsversuche liefern keinen zusätzlichen Erkenntnisgewinn.
 - Neuer Fokus: Problemlösung über alternative, gezielte Pfade (z. B. T5/N5/N6/N7 und isolierte Engpass-Analysen) statt weiterer identischer Vollbereichs-Re-Runs.
-
