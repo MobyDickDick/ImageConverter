@@ -1,8 +1,7 @@
-"""Quality pass config and raster embedding helper functions."""
+"""Quality pass config and SVG fallback helper functions."""
 
 from __future__ import annotations
 
-import base64
 import json
 import math
 import os
@@ -26,14 +25,16 @@ def renderEmbeddedRasterSvgImpl(
     sniff_raster_size_fn,
 ) -> str:
     width, height = sniff_raster_size_fn(input_path)
-    raw = Path(input_path).read_bytes()
-    encoded = base64.b64encode(raw).decode("ascii")
-    mime = svgHrefMimeTypeImpl(input_path)
+    safe_w = max(1, int(width))
+    safe_h = max(1, int(height))
+    label = Path(input_path).name
     return (
-        f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" '
-        f'viewBox="0 0 {width} {height}">\n'
-        f'  <image width="{width}" height="{height}" href="data:{mime};base64,{encoded}"/>\n'
-        "</svg>\n"
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{safe_w}" height="{safe_h}" '
+        f'viewBox="0 0 {safe_w} {safe_h}">\n'
+        f'  <rect x="0" y="0" width="{safe_w}" height="{safe_h}" fill="#f5f5f5" stroke="#999" stroke-width="1"/>\n'
+        f'  <text x="{max(4, safe_w // 20)}" y="{max(14, safe_h // 2)}" fill="#444" font-size="12" font-family="Arial, sans-serif">'
+        f'Fallback (no embedded raster): {label}</text>\n'
+        '</svg>\n'
     )
 
 
