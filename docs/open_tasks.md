@@ -2267,3 +2267,11 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 - **Fortschritt (Plan B + nächstes Bild):** Für das nächste CSV-Bild `AC0020_M` wurde die gekoppelte Plan-B-Syntheseprobe ausgeführt (`python -m tools.plan_b_synthetic_probe ... --variant AC0020_M --output-dir artifacts/converted_images/reports`), Exit `0`; Log-Artefakt: `artifacts/converted_images/reports/AC0020_M_planb_synthetic_2026-05-16_runEV.log`.
 - **Blocker:** Der bekannte N1/N2-Vollbereichsblocker (Timeout/Laufzeit) bleibt unabhängig von diesem Arbeitspaket bestehen.
 - **Nächster sinnvoller Schritt:** Dasselbe Arbeitspaket-Schema direkt mit dem nächsten CSV-Eintrag (`AC0020_S`) wiederholen oder alternativ N5-Kurzbatch + gekoppelte Plan-B-Aufgabe dokumentieren.
+
+### Fortschritt vs. Blocker (Session 2026-05-16, nächstes Arbeitspaket Run GH)
+
+- **Fortschritt (nächste dokumentierte Aufgabe):** Der priorisierte T5.x-Kurzlauf wurde erneut ausgeführt (`PYENV_VERSION=3.10.20 PYTHONPATH=. timeout 240 pyenv exec python -m pytest tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_ac0812_only -q`), Ergebnis: `1 passed` in `92.25s`, Exit `0`; Log-Artefakt: `artifacts/converted_images/reports/T5_ac0812_timeoutpath_probe_2026-05-16_runGH.log`.
+- **Fortschritt (Plan B + nächstes Bild):** Für das nächste CSV-Bild `AC0020_S` wurde die gekoppelte Plan-B-Syntheseprobe ausgeführt (`PYTHONPATH=. python3 tools/plan_b_synthetic_probe.py "Bildbeschreibung: Kreis mit horizontalem Griff links und Beschriftung rF." --variant AC0020_S --output-dir artifacts/converted_images/reports`), Ergebnis `status=ok`, Exit `0`; Log-Artefakt: `artifacts/converted_images/reports/AC0020_S_planb_synthetic_2026-05-16_runGH.log`.
+- **Fortschritt (Arbeitspaket-Definition):** Das Arbeitspaket-Schema bleibt dokumentiert und wurde konsistent angewendet: **(1) nächste dokumentierte Aufgabe + (2) genau eine Plan-B-Aufgabe + (3) nächstes CSV-Bild**.
+- **Blocker:** Der bekannte N1/N2-Vollbereichsblocker (Timeout/Laufzeit) bleibt unabhängig von diesem Kurzpaket bestehen; die bekannte OpenCV/Numpy-Umgebungswarnung erscheint weiterhin im Plan-B-Lauf, ohne den Exit-Code zu kippen.
+- **Nächster sinnvoller Schritt:** Dasselbe Arbeitspaket-Schema mit dem nächsten CSV-Eintrag (`AC0021`) fortsetzen.
