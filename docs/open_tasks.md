@@ -2259,3 +2259,11 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 - **Fortschritt (nächstes Bild aus CSV):** Als nächstes Bild wurde `AC0020_M` abgearbeitet (nach den bereits früher bearbeiteten `AC0010`, `AC0011`, `AC0020_L` aus derselben Liste).
 - **Blocker:** Die bekannte OpenCV/Numpy-Umgebungswarnung erscheint im Plan-B-Lauf weiterhin, ohne Exit-Fehler.
 - **Nächster sinnvoller Schritt:** Das nächste Arbeitspaket identisch fortsetzen (nächste dokumentierte Aufgabe + gekoppelte Plan-B-Aufgabe + nächstes CSV-Bild, voraussichtlich `AC0020_S`).
+
+### Fortschritt vs. Blocker (Session 2026-05-16, nächstes Arbeitspaket Run EV)
+
+- **Definition (neu):** Das **„nächste Arbeitspaket“** bezeichnet ab sofort die feste Kombination aus **(1) nächster dokumentierter Aufgabe**, **(2) genau einer gekoppelten Plan-B-Aufgabe** und **(3) dem nächsten Bild aus** `artifacts/converted_images/reports/summaries/not_satisfactory_converted_images.csv`.
+- **Fortschritt (nächste dokumentierte Aufgabe):** Der priorisierte T5.x-Kurzlauf wurde erneut ausgeführt (`PYENV_VERSION=3.10.20 python -m pytest tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_ac0812_only -q`), Ergebnis: `1 passed` in `70.83s`, Exit `0`; Log-Artefakt: `artifacts/converted_images/reports/T5_ac0812_timeoutpath_probe_2026-05-16_runEV.log`.
+- **Fortschritt (Plan B + nächstes Bild):** Für das nächste CSV-Bild `AC0020_M` wurde die gekoppelte Plan-B-Syntheseprobe ausgeführt (`python -m tools.plan_b_synthetic_probe ... --variant AC0020_M --output-dir artifacts/converted_images/reports`), Exit `0`; Log-Artefakt: `artifacts/converted_images/reports/AC0020_M_planb_synthetic_2026-05-16_runEV.log`.
+- **Blocker:** Der bekannte N1/N2-Vollbereichsblocker (Timeout/Laufzeit) bleibt unabhängig von diesem Arbeitspaket bestehen.
+- **Nächster sinnvoller Schritt:** Dasselbe Arbeitspaket-Schema direkt mit dem nächsten CSV-Eintrag (`AC0020_S`) wiederholen oder alternativ N5-Kurzbatch + gekoppelte Plan-B-Aufgabe dokumentieren.
