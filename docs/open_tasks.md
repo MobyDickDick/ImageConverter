@@ -2318,3 +2318,12 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 - **Fortschritt (3/3 – nächstes Bild aus CSV):** Das nächste Bild aus der CSV-Liste wurde als Einzelbereichslauf praktisch abgearbeitet (`PYTHONPATH=. timeout 240 python3 -m src.iCCModules.imageCompositeConverterCli --input-dir artifacts/images_to_convert --output-dir artifacts/converted_images --start AC0023 --end AC0023`), Exit `0`; Log: `artifacts/converted_images/reports/AC0023_single_2026-05-16_runGK.log`.
 - **Blocker:** Kein neuer Blocker im Arbeitspaket; die bekannte OpenCV/Numpy-Umgebungswarnung erscheint im Plan-B-Lauf weiterhin, ohne Exit-Fehler.
 - **Nächster sinnvoller Schritt:** Dasselbe Arbeitspaket-Schema mit dem nächsten CSV-Eintrag (`AC0024`) fortsetzen.
+
+### Fortschritt vs. Blocker (Session 2026-05-16, nächstes Arbeitspaket Run GL)
+
+- **Fortschritt (nächste dokumentierte Aufgabe):** Der priorisierte T5.x-Kurzlauf wurde erneut erfolgreich ausgeführt (`PYENV_VERSION=3.10.20 PYTHONPATH=. timeout 240 pyenv exec python -m pytest tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_ac0812_only -q`), Ergebnis: `1 passed` in `101.41s`, Exit `0`; Log-Artefakt: `artifacts/converted_images/reports/T5_ac0812_timeoutpath_probe_2026-05-16_runGL.log`.
+- **Fortschritt (Plan B):** Die gekoppelte Plan-B-Aufgabe wurde für `AC0024` ausgeführt (`PYTHONPATH=. python3 tools/plan_b_synthetic_probe.py ... --variant AC0024 --output-dir artifacts/converted_images/reports`), Ergebnis: `status=ok`, Exit `0`; Log-Artefakt: `artifacts/converted_images/reports/AC0024_planb_synthetic_2026-05-16_runGL.log`.
+- **Fortschritt (nächstes CSV-Bild):** Das nächste Bild aus `not_satisfactory_converted_images.csv` nach `AC0023` (`AC0024`) wurde als Einzelkonvertierung abgearbeitet (`--start AC0024 --end AC0024`), Exit `0`; Log-Artefakt: `artifacts/converted_images/reports/AC0024_single_2026-05-16_runGL.log`.
+- **Dokumentationskonvention:** Der Begriff **„nächstes Arbeitspaket“** ist damit erneut explizit als feste 3er-Kombination (dokumentierte Aufgabe + Plan-B-Aufgabe + nächstes CSV-Bild) nachgeführt und kann in Folgesessions direkt referenziert werden.
+- **Blocker:** Der bekannte N1/N2-Vollbereichsblocker (Timeout/Laufzeit) bleibt weiterhin unabhängig von den erfolgreichen Kurzläufen bestehen.
+- **Nächster sinnvoller Schritt:** Das nächste Arbeitspaket in identischer Struktur mit dem Folgeeintrag `AC0025` fortsetzen.
