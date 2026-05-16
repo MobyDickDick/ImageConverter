@@ -7,9 +7,11 @@ import importlib
 import os
 import subprocess
 import sys
+import io
 from pathlib import Path
 
 OPTIONAL_DEPENDENCY_ERRORS: dict[str, str] = {}
+PREFER_VENDORED_FIRST = {"cv2", "numpy"}
 
 
 def _snapshot_module_entries(module_name: str) -> dict[str, object]:
@@ -102,14 +104,19 @@ def load_optional_module(module_name: str, *, vendored_dirs_fn=vendored_site_pac
     """Import optional dependencies, including repo-vendored site-packages."""
     attempted_paths: list[Path] = []
     baseline_modules = _snapshot_module_entries(module_name)
-    try:
-        return import_module_fn(module_name)
-    except Exception as exc:  # pragma: no cover - exercised only in dependency-missing envs
-        last_exc: BaseException = exc
-        clear_partial_module_import(module_name)
-        _restore_module_entries(baseline_modules)
+    candidate_paths = vendored_dirs_fn()
+    if module_name not in PREFER_VENDORED_FIRST:
+        try:
+            with contextlib.redirect_stderr(io.StringIO()):
+                return import_module_fn(module_name)
+        except Exception as exc:  # pragma: no cover - exercised only in dependency-missing envs
+            last_exc: BaseException = exc
+            clear_partial_module_import(module_name)
+            _restore_module_entries(baseline_modules)
+    else:
+        last_exc = ModuleNotFoundError(module_name)
 
-    for site_packages in vendored_dirs_fn():
+    for site_packages in candidate_paths:
         attempted_paths.append(site_packages)
         path_str = str(site_packages)
         added = False
@@ -117,7 +124,8 @@ def load_optional_module(module_name: str, *, vendored_dirs_fn=vendored_site_pac
             sys.path.insert(0, path_str)
             added = True
         try:
-            module = import_module_fn(module_name)
+            with contextlib.redirect_stderr(io.StringIO()):
+                module = import_module_fn(module_name)
             # Keep the vendored site-packages path active after a successful
             # import so transitive runtime imports (e.g. cv2 -> numpy) keep
             # resolving from the same bundle.
@@ -146,21 +154,27 @@ def import_with_vendored_fallback(
 ):
     """Import a module, retrying with repo-vendored site-packages on sys.path."""
     baseline_modules = _snapshot_module_entries(module_name)
-    try:
-        return import_module_fn(module_name)
-    except Exception as exc:
-        last_exc: BaseException = exc
-        clear_partial_module_import(module_name)
-        _restore_module_entries(baseline_modules)
+    candidate_paths = vendored_dirs_fn()
+    if module_name not in PREFER_VENDORED_FIRST:
+        try:
+            with contextlib.redirect_stderr(io.StringIO()):
+                return import_module_fn(module_name)
+        except Exception as exc:
+            last_exc: BaseException = exc
+            clear_partial_module_import(module_name)
+            _restore_module_entries(baseline_modules)
+    else:
+        last_exc = ModuleNotFoundError(module_name)
 
-    for site_packages in vendored_dirs_fn():
+    for site_packages in candidate_paths:
         path_str = str(site_packages)
         added = False
         if path_str not in sys.path:
             sys.path.insert(0, path_str)
             added = True
         try:
-            module = import_module_fn(module_name)
+            with contextlib.redirect_stderr(io.StringIO()):
+                module = import_module_fn(module_name)
             if added and path_str in sys.path:
                 sys.path.remove(path_str)
                 sys.path.insert(0, path_str)
@@ -173,6 +187,10 @@ def import_with_vendored_fallback(
             if added and path_str in sys.path and module_name not in sys.modules:
                 with contextlib.suppress(ValueError):
                     sys.path.remove(path_str)
+
+    if module_name in PREFER_VENDORED_FIRST:
+        with contextlib.redirect_stderr(io.StringIO()):
+            return import_module_fn(module_name)
 
     raise last_exc
 
@@ -238,3 +256,11 @@ def bootstrapRequiredImageDependenciesImpl(
         set_modules_fn(cv2_module=loaded_cv2, np_module=loaded_np)
 
     return missing
+    if module_name in PREFER_VENDORED_FIRST:
+        try:
+            with contextlib.redirect_stderr(io.StringIO()):
+                return import_module_fn(module_name)
+        except Exception as exc:  # pragma: no cover - exercised only in dependency-missing envs
+            last_exc = exc
+            clear_partial_module_import(module_name)
+            _restore_module_entries(baseline_modules)

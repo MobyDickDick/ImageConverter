@@ -7841,3 +7841,29 @@ def test_dual_arrow_badge_detection_forces_opposite_arrow_directions() -> None:
 
     svg = dual_arrow_helpers.generateDualArrowBadgeSvgImpl(22, 32, params)
     assert 'stroke-linecap="butt"' in svg
+
+
+def test_dual_arrow_badge_triangle_width_is_clamped_to_canvas() -> None:
+    from src.iCCModules import imageCompositeConverterDualArrowBadge as dual_arrow_helpers
+
+    left = {
+        "center_x": 8.2,
+        "line_y1": 0.0,
+        "line_y2": 81.0,
+        "line_width": 2.0,
+        "triangle_tip_y": 82.0,
+        "triangle_base_y": 90.0,
+        "triangle_half_width": 20.0,
+    }
+    right = {
+        "center_x": 33.5,
+        "line_y1": 0.0,
+        "line_y2": 81.0,
+        "line_width": 2.0,
+        "triangle_tip_y": 90.0,
+        "triangle_base_y": 82.0,
+        "triangle_half_width": 20.0,
+    }
+    n_left, n_right = dual_arrow_helpers._normalizeDualArrowPairGeometry(left, right, 140, width=40)
+    assert float(n_left["triangle_half_width"]) <= 7.0
+    assert float(n_right["triangle_half_width"]) <= 7.0
