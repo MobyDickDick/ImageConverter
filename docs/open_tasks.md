@@ -114,6 +114,22 @@ Zielbild: Nicht-binäre Vektorisierung über echte SVG-Primitive mit semantische
 - **Blocker:** Der bekannte N1/N2-Vollbereichsblocker (Timeout/Laufzeit) bleibt weiterhin unabhängig von diesen Kurzläufen bestehen.
 - **Nächster sinnvoller Schritt:** Entweder einen weiteren leichten Kurzlauf (T5/N5/N6/N7) mit neuem Diagnoseartefakt ergänzen oder danach den nächsten schweren N1/N2-Versuch mit fixer Timeout-Grenze dokumentiert ansetzen.
 
+### Fortschritt vs. Blocker (Session 2026-05-16, T5 + gekoppelte Plan-B-Aufgabe Run EP)
+
+- **Fortschritt (nächste dokumentierte Aufgabe):** Ein weiterer priorisierter T5.x-Kurzlauf wurde erfolgreich ausgeführt (`PYENV_VERSION=3.10.20 python -m pytest tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_ac0812_only -q`), Ergebnis: `1 passed` in `98.38s`, Exit `0`, Log-Artefakt: `artifacts/converted_images/reports/T5_ac0812_timeoutpath_probe_2026-05-16_runEP.log`.
+- **Fortschritt (Plan B):** Die gekoppelte Plan-B-Syntheseprobe wurde direkt im selben Schritt durchgeführt (`python -m tools.plan_b_synthetic_probe "Kreis mit horizontalem Griff links und Label rF" --variant AC0223 --output-dir artifacts/converted_images/reports`), Exit `0`, Log-Artefakt: `artifacts/converted_images/reports/AC0223_planb_synthetic_2026-05-16_runEP.log`.
+- **Blocker:** Der bekannte N1/N2-Vollbereichsblocker (Timeout/Laufzeit) bleibt unabhängig von den erfolgreichen Kurzläufen bestehen.
+- **Nächster sinnvoller Schritt:** Entweder N5 (Sample-Pair-Kurzbatch) als nächsten mittleren Schritt dokumentiert ausführen oder einen weiteren T5/N7-Einzelpfad mit neuem Diagnoseartefakt ergänzen.
+
+
+### Fortschritt vs. Blocker (Session 2026-05-16, Plan-B-Beschreibung formalisiert Run EP2)
+
+- **Fortschritt (Plan B-Qualität):** Die Plan-B-Syntheseprobe für `AC0223` wurde mit einer formalisierten, fachlich präziseren Beschreibung erneut ausgeführt: `"Bildbeschreibung: Kelle (Kreis mit einem vertikalen Strich nach unten, der Strich ist in der vertikalen Symmetrieachse des Kreises), der Strich reicht hinter die Kelle. In der Kreisscheibe ist die Beschriftung CO^2 (mit hochgestelltem 2) eingefügt."`.
+- **Ergebnis:** Lauf erfolgreich mit Exit `0` (`status=ok`), neues Log-Artefakt: `artifacts/converted_images/reports/AC0223_planb_synthetic_2026-05-16_runEP2.log`.
+- **Blocker:** Der bekannte N1/N2-Vollbereichsblocker (Timeout/Laufzeit) bleibt unverändert und ist von dieser Formalisierung unabhängig.
+- **Nächster sinnvoller Schritt:** Für die nächste gekoppelte Plan-B-Aufgabe die Beschreibung weiterhin im selben Formalisierungsstil hinterlegen (Objekt, Achsenbezug, Überdeckung, Beschriftungssemantik).
+
+
 Arbeitsreihenfolge für die nächsten Sessions (explizit von **leicht zu erledigen**
 bis **schwierig/zeitintensiv**):
 
