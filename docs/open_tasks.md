@@ -2102,3 +2102,9 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 - **Fortschritt:** Die in der vorigen Session als nächster Schritt benannte gekoppelte Plan-B-Aufgabe **N10-PB** wurde ausgeführt (`AC0223`-Syntheseprobe, Exit `0`; Log: `artifacts/converted_images/reports/AC0223_planb_synthetic_2026-05-15_runDO_PB.log`). Zusätzlich wurde ein weiterer priorisierter Kurzlauf aus dem leichten Pfad umgesetzt (`T5_ac0812...`, `1 passed`, Exit `0`; Log: `artifacts/converted_images/reports/T5_ac0812_timeoutpath_probe_2026-05-15_runDO.log`).
 - **Blocker:** Der bekannte Laufzeit-/Timeout-Blocker für die schweren Vollbereichspfade N1/N2 bleibt unabhängig von den erfolgreichen Kurzläufen weiterhin offen.
 - **Nächster sinnvoller Schritt:** Entweder den nächsten T5-/N5-Kurzpfad mit neuem Artefakt nachziehen oder – bei ausreichend frischer Evidenz – einen erneuten N1-Vollbereichslauf mit fixer Timeout-Grenze dokumentieren.
+
+### Fortschritt vs. Blocker (Session 2026-05-15, N2 Run DP + N2-PB Run DP_PB)
+
+- **Fortschritt:** Die nächste dokumentierte Primäraufgabe (`N2`) wurde erneut mit standardisierter Python-`3.10.20`-Toolchain und `timeout 420` ausgeführt; der Vollbereichslauf `AC0800..AC0899` endet weiterhin mit Timeout-Exit `124` (Log: `artifacts/converted_images/reports/AC0800_AC0899_batch_2026-05-15_runDP.log`, Summary: `docs/ac0800_ac0899_runDP_2026-05-15_summary.md`).
+- **Fortschritt (gekoppelte Plan-B-Aufgabe):** Direkt anschließend wurde gemäß Kopplungsregel `N2-PB` als Microbatch `AC0800..AC0809` ausgeführt und erfolgreich mit Exit `0` abgeschlossen (Log: `artifacts/converted_images/reports/AC0800_AC0809_microbatch_2026-05-15_runDP_PB.log`, Summary: `docs/ac0800_ac0809_planb_runDP_2026-05-15_summary.md`).
+- **Blocker:** Der Vollbereichsnachweis bis `AC0899` bleibt offen, da weiterhin kein reproduzierbarer Exit `0` für den vollständigen Bereich vorliegt.
