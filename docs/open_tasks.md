@@ -599,7 +599,8 @@ Deadlock-/Stagnationsschleifen.
   - [x] T6-PB (Plan-B, 2026-05-14): Historischen Einzeltest-Blocker als Kurzrepro fahren, falls kein neuer sofortiger Langlauf-Abbau ohne Timeout möglich ist.
     - 2026-05-14 (Run 02): Wiederholung weiterhin grün mit Exit `0` (`1 passed`), Log: `artifacts/converted_images/reports/t6_planb_singletest_2026-05-14_run02.log`.
     - 2026-05-14 (Run 03): Plan-B-Kurzrepro erneut grün mit Exit `0` (`1 passed in 0.11s`), Log: `artifacts/converted_images/reports/t6_planb_singletest_2026-05-14_run03.log`.
-    - Ergebnis: `pytest -q tests/detailtests/test_global_search_optimization_helpers.py::test_global_search_skips_deterministic_track_after_strong_stochastic_gain` => Exit `0`, `1 passed in 0.18s`.
+    - 2026-05-16 (Run EQ): Plan-B-Kurzrepro erneut grün mit Exit `0` (`1 passed in 0.35s`), Log: `artifacts/converted_images/reports/t6_planb_singletest_2026-05-16_runEQ.log`.
+    - Ergebnis: `pytest -q tests/detailtests/test_global_search_optimization_helpers.py::test_global_search_skips_deterministic_track_after_strong_stochastic_gain` => Exit `0`, `1 passed in 0.35s`.
   - Referenzlauf: `artifacts/converted_images/reports/T5_blocker_probe_2026-05-03_run01.log` (`829 passed, 1 skipped`, Laufzeit `1574.93s`).
   - Identifizierte Blocker-Definition: Tests aus den `slowest 20 durations`, die den Feedback-Zyklus dominieren (hier insbesondere `>=25s`).
   - [ ] T6.1 (sehr hohe Priorität): `tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_convert_without_failed_svg` reduzieren (aktuell `377.98s`).
@@ -619,6 +620,7 @@ Deadlock-/Stagnationsschleifen.
     - [ ] T6.1.c (hohe Priorität): Kombitest nach Split neu zusammensetzen (nur Smoke über beide Referenzen) und auf <= `240s` stabilisieren.
       - Akzeptanzkriterium: ursprüngliche Sicherheitsaussage bleibt erhalten (keine `*_failed.svg` für `AC0811_L`/`AC0812_M`), aber Laufzeit unter T6.1-Ziel.
       - 2026-05-06: Neuer Kombi-Smoke-Test `test_ac08_semantic_anchor_variants_convert_without_failed_svg` ergänzt (gemeinsamer Lauf `AC0811_L` + `AC0812_M`, `iterations=2`, `deterministic_order=True`). Isolierter Repro in dieser Umgebung aktuell `skipped` wegen fehlender `numpy/cv2/fitz`-Bindings; Laufzeitziel bleibt bis zur Ausführung in voll ausgestatteter Runtime offen.
+      - 2026-05-16 (Run EQ): Timeout-gesicherter Isolationslauf erneut durchgeführt (`timeout 240 python -m pytest tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_convert_without_failed_svg -q`), Ergebnis weiterhin `1 skipped` bei Exit `0` in `7.93s`; Log: `artifacts/converted_images/reports/T6_1c_smoke_2026-05-16_runEQ.log`.
   - [ ] T6.2 (sehr hohe Priorität): `tests/test_image_composite_converter.py::test_ac08_regression_suite_preserves_previously_good_variants[AC0837_L-semantic_ok]` reduzieren (aktuell `198.28s`).
     - Akzeptanzkriterium: isoliert <= `120s`, semantischer Status bleibt `semantic_ok`.
   - [ ] T6.3 (sehr hohe Priorität): `tests/test_image_composite_converter.py::test_make_badge_params_keeps_ac0838_m_circle_near_full_width_for_voc_layout` reduzieren (aktuell `173.27s`).
