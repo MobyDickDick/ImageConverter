@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import base64
 from pathlib import Path
 
 from src.iCCModules import imageCompositeConverterQualityConfig as quality_config_helpers
@@ -22,8 +21,9 @@ def test_render_embedded_raster_svg_uses_sniffed_size(tmp_path: Path) -> None:
 
     assert 'width="7"' in svg
     assert 'height="9"' in svg
-    encoded = base64.b64encode(b"GIF89a").decode("ascii")
-    assert f"data:image/gif;base64,{encoded}" in svg
+    assert "<image" not in svg
+    assert "data:image/" not in svg
+    assert "Fallback (no embedded raster): sample.gif" in svg
 
 
 def test_load_and_write_quality_config_roundtrip(tmp_path: Path) -> None:
