@@ -1,0 +1,39 @@
+{
+  "base": "AC0522",
+  "best_error": 32.961666666666666,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.041202083333333334,
+  "filename": "AC0522_S.jpg",
+  "h": 20,
+  "mean_delta2": 5867.01513671875,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "AC0522",
+        "source": "base_name",
+        "text": "Wie AC0521: Wie AC0511, jedoch anstelle von 3 grauen horizontalen dunkelgrauen Strichen drei kleinere vertikale dunkelgraue Striche. Es handelt sich um eine geschlossene Klappe mit der Schliessflächen. . Geometrische Variante: 90° nach rechts gedreht."
+      }
+    ],
+    "documented_alias_refs": [
+      "AC0511",
+      "AC0521"
+    ],
+    "elements": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "AC0522_S"
+  },
+  "std_delta2": 10782.751953125,
+  "variant": "AC0522_S",
+  "w": 40
+}
