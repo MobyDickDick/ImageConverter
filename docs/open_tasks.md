@@ -2445,3 +2445,13 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 - **Fortschritt (AC04*-Konvertierung):** Zusätzlich wurde ein Batch-Lauf für den Bereich `AC0400..AC0499` gestartet (`python -m src.imageCompositeConverter ... --start AC0400 --end AC0499`), Exit `0`; Log-Artefakt: `artifacts/converted_images/reports/AC0400_AC0499_batch_2026-05-17_runGP2.log`.
 - **Blocker:** Kein neuer Blocker im Kurzlaufpfad; bekannte Laufzeitrisiken für deutlich größere Gesamtbereiche bleiben unverändert.
 - **Nächster sinnvoller Schritt:** Aus den erzeugten AC04-Artefakten gezielt die schwächsten Varianten nach Qualitätsmetriken auswählen und mit präziserer Plan-B-Beschreibung erneut testen.
+
+### Fortschritt vs. Blocker (Session 2026-05-17, nächstes Arbeitspaket Run GW)
+
+- **Fortschritt (Begriffsstandard):** Der Begriff **„nächstes Arbeitspaket“** bleibt verbindlich als 3er-Kombination definiert: (1) nächste dokumentierte Aufgabe, (2) genau eine gekoppelte Plan-B-Aufgabe, (3) nächstes Bild aus `not_satisfactory_converted_images.csv`.
+- **Fortschritt (nächste dokumentierte Aufgabe):** Der priorisierte T5-Kurzlauf (`test_ac08_semantic_anchor_variants_ac0812_only`) wurde erneut in Python `3.10.20` ausgeführt; Ergebnis `1 passed`, Exit `0`; Log: `artifacts/converted_images/reports/T5_ac0812_timeoutpath_probe_2026-05-17_runGW.log`.
+- **Fortschritt (Plan B):** Die gekoppelte Plan-B-Syntheseprobe wurde für `AC0030_L` erfolgreich ausgeführt (`status=ok`, Exit `0`); Log: `artifacts/converted_images/reports/AC0030_L_planb_synthetic_2026-05-17_runGW.log`.
+- **Fortschritt (nächstes CSV-Bild):** Das nächste Bild aus der Liste der nicht zufriedenstellenden Konvertierungen wurde als Einzelkonvertierung bearbeitet (`AC0030_L`, Exit `0`); Log: `artifacts/converted_images/reports/AC0030_L_single_2026-05-17_runGW.log`.
+- **Fortschritt (Tracking):** `AC0030_L` wurde in `artifacts/converted_images/reports/summaries/not_satisfactory_converted_images.csv` als bearbeitet (`in samples=yes`) markiert.
+- **Blocker:** Der bekannte N1/N2-Vollbereichsblocker (Timeout/Laufzeit) bleibt unverändert bestehen.
+- **Nächster sinnvoller Schritt:** Das nächste Arbeitspaket wieder strikt als 3er-Kombination fortsetzen (T5/N5 als Primäraufgabe + 1 Plan-B-Probe + nächster CSV-Eintrag `AC0030_M`).
