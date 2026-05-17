@@ -2438,3 +2438,10 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 - **Fortschritt (nächstes CSV-Bild):** Das nächste Bild aus der Liste der nicht zufriedenstellenden Konvertierungen wurde als Einzelkonvertierung bearbeitet (`AC0030`, Exit `0`); Log: `artifacts/converted_images/reports/AC0030_single_2026-05-17_runGV.log`.
 - **Blocker:** Der bekannte N1/N2-Vollbereichsblocker (Timeout/Laufzeit) bleibt unverändert bestehen.
 - **Nächster sinnvoller Schritt:** Das nächste Arbeitspaket wieder strikt als 3er-Kombination fortsetzen (T5/N5 als Primäraufgabe + 1 Plan-B-Probe + nächster CSV-Eintrag `AC0030_L`).
+
+### Fortschritt vs. Blocker (Session 2026-05-17, AC0402_L Sample + AC04*-Batch Run GP2)
+
+- **Fortschritt (Plan B):** Für die neue Sample-Datei `artifacts/images_to_convert/samples/AC0402_L.svg` wurde eine gekoppelte Plan-B-Syntheseprobe als SVG→JPG→Rückkonvertierungs-Flow ausgeführt (`python -m tools.plan_b_synthetic_probe ... --variant AC0402_L`), Exit `0`; Log-Artefakt: `artifacts/converted_images/reports/AC0402_L_planb_synthetic_2026-05-17_runGP2.log`.
+- **Fortschritt (AC04*-Konvertierung):** Zusätzlich wurde ein Batch-Lauf für den Bereich `AC0400..AC0499` gestartet (`python -m src.imageCompositeConverter ... --start AC0400 --end AC0499`), Exit `0`; Log-Artefakt: `artifacts/converted_images/reports/AC0400_AC0499_batch_2026-05-17_runGP2.log`.
+- **Blocker:** Kein neuer Blocker im Kurzlaufpfad; bekannte Laufzeitrisiken für deutlich größere Gesamtbereiche bleiben unverändert.
+- **Nächster sinnvoller Schritt:** Aus den erzeugten AC04-Artefakten gezielt die schwächsten Varianten nach Qualitätsmetriken auswählen und mit präziserer Plan-B-Beschreibung erneut testen.
