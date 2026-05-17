@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import base64
 import json
 import math
 import os
@@ -27,13 +28,14 @@ def renderEmbeddedRasterSvgImpl(
     width, height = sniff_raster_size_fn(input_path)
     safe_w = max(1, int(width))
     safe_h = max(1, int(height))
-    label = Path(input_path).name
+    raw = Path(input_path).read_bytes()
+    encoded = base64.b64encode(raw).decode("ascii")
+    mime_type = svgHrefMimeTypeImpl(input_path)
     return (
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{safe_w}" height="{safe_h}" '
         f'viewBox="0 0 {safe_w} {safe_h}">\n'
-        f'  <rect x="0" y="0" width="{safe_w}" height="{safe_h}" fill="#f5f5f5" stroke="#999" stroke-width="1"/>\n'
-        f'  <text x="{max(4, safe_w // 20)}" y="{max(14, safe_h // 2)}" fill="#444" font-size="12" font-family="Arial, sans-serif">'
-        f'Fallback (no embedded raster): {label}</text>\n'
+        f'  <image width="{safe_w}" height="{safe_h}" '
+        f'href="data:{mime_type};base64,{encoded}" />\n'
         '</svg>\n'
     )
 
