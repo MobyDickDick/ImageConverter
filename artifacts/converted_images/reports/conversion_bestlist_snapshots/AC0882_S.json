@@ -1,12 +1,12 @@
 {
   "base": "AC0882",
-  "best_error": 15.704,
+  "best_error": 23.842666666666666,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.041877333333333336,
+  "error_per_pixel": 0.06358044444444444,
   "filename": "AC0882_S.jpg",
   "h": 15,
-  "mean_delta2": 3027.56005859375,
+  "mean_delta2": 5136.0400390625,
   "params": {
     "bottom_shape": null,
     "description_fragments": [
@@ -40,7 +40,7 @@
     "top_source_ref": null,
     "variant_name": "AC0882_S"
   },
-  "std_delta2": 9747.8154296875,
+  "std_delta2": 10170.908203125,
   "variant": "AC0882_S",
   "w": 25
 }

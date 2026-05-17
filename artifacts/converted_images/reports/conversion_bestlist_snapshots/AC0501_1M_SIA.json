@@ -1,0 +1,36 @@
+{
+  "base": "AC0501_1M",
+  "best_error": 21.152407407407406,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.01175133744855967,
+  "filename": "AC0501_1M_sia.jpg",
+  "h": 60,
+  "mean_delta2": 8004.37841796875,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "AC0501_1M_sia",
+        "source": "variant_name",
+        "text": "Klappensymbol: Rechteck hochkant, graue Umrandung. Graue Diagonale von unten links nach oben Rechts, in der Mitte ein dunkelgrauer Punkt. Farbverlauf Hintergrund: Dunkelgrau, hellgrau, dunkelgrau"
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "AC0501_1M_SIA"
+  },
+  "std_delta2": 19576.931640625,
+  "variant": "AC0501_1M_SIA",
+  "w": 30
+}

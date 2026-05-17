@@ -1,0 +1,36 @@
+{
+  "base": "AC5000",
+  "best_error": 74.55073099415205,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.03269768903252283,
+  "filename": "AC5000_S_HZ.jpg",
+  "h": 40,
+  "mean_delta2": 27789.20703125,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "AC5000",
+        "source": "base_name",
+        "text": "Radiator (komplexe Zeichnung) ca. 10 ganz dünne Rechtecke, Ecken abgerundet. Zwei dünne dunkelgraue Linien oben und unten hinter den dünnen Rechtecken."
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "AC5000_S_HZ"
+  },
+  "std_delta2": 27843.2890625,
+  "variant": "AC5000_S_HZ",
+  "w": 57
+}
