@@ -88,6 +88,8 @@ python -m src.imageCompositeConverter \
 ```bash
 python -m compileall src tests
 python -m pytest
+./tools/run_regression_checks.sh
+./tools/run_safe_test_baseline.sh
 python -m src.imageCompositeConverter --help
 python tools/check_vendored_cv2.py
 python -m src.imageCompositeConverter artifacts/images_to_convert --descriptions-path artifacts/images_to_convert/Finale_Wurzelformen_V3.xml --ac08-regression-set --output-dir artifacts/converted_images
