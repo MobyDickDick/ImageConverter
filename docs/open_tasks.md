@@ -2423,3 +2423,10 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 - **Fortschritt (Plan B + nächstes Bild):** Die gekoppelte Plan-B-Aufgabe wurde für das nächste Bild aus der Not-Satisfactory-Liste (`AC0021`) erfolgreich ausgeführt (`status=ok`, Exit `0`); Log-Artefakt: `artifacts/converted_images/reports/AC0021_planb_synthetic_2026-05-17_runGS.log`.
 - **Blocker:** Der bekannte N1/N2-Vollbereichsblocker (Timeout/Laufzeit) bleibt unverändert.
 - **Nächster sinnvoller Schritt:** Das nächste Arbeitspaket mit der gleichen 3er-Kombination für das nächste noch offene CSV-Bild (`AC0022`) fortsetzen.
+
+### Fortschritt vs. Blocker (Session 2026-05-17, nächstes Arbeitspaket Run GT)
+
+- **Fortschritt (nächste dokumentierte Aufgabe):** Der priorisierte T5.x-Kurzlauf wurde erneut in der bestätigten Python-`3.10.20`-Umgebung ausgeführt (`test_ac08_semantic_anchor_variants_ac0812_only`), Ergebnis: `1 passed`, Exit `0`; Log-Artefakt: `artifacts/converted_images/reports/T5_ac0812_timeoutpath_probe_2026-05-17_runGT.log`.
+- **Fortschritt (Plan B + CSV-Bild):** Die gekoppelte Plan-B-Syntheseprobe wurde für das nächste CSV-Bild `AC0022` ausgeführt (`status=ok`, Exit `0`); Log-Artefakt: `artifacts/converted_images/reports/AC0022_planb_synthetic_2026-05-17_runGT.log`.
+- **Blocker:** Der bekannte N1/N2-Vollbereichsblocker (Timeout/Laufzeit) bleibt unverändert.
+- **Nächster sinnvoller Schritt:** Das nächste Arbeitspaket mit dem nächsten noch nicht verwendeten CSV-Bild (`AC0023`) fortsetzen und weiterhin genau eine gekoppelte Plan-B-Aufgabe im selben Lauf dokumentieren.
