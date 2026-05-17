@@ -2404,3 +2404,11 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 - **Fortschritt (nächstes Bild):** Als nächstes Bild aus `artifacts/converted_images/reports/summaries/not_satisfactory_converted_images.csv` wurde `AC0020_M` abgearbeitet; die 3er-Kombination ist in `docs/next_arbeitspaket_2026-05-17_runGQ.md` dokumentiert.
 - **Blocker:** Der bekannte N1/N2-Vollbereichsblocker (Timeout/Laufzeit) bleibt unverändert.
 - **Nächster sinnvoller Schritt:** Im nächsten Arbeitspaket das nächste Bild (`AC0020_S`) aus der CSV aufnehmen und erneut mit genau einer Plan-B-Aufgabe koppeln.
+
+### Fortschritt vs. Blocker (Session 2026-05-17, nächstes Arbeitspaket Run GR)
+
+- **Fortschritt (nächste dokumentierte Aufgabe):** Der priorisierte T5.x-Kurzlauf wurde erneut erfolgreich ausgeführt (`PYENV_VERSION=3.10.20 python -m pytest tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_ac0812_only -q`), Ergebnis: `1 passed, 5 warnings in 78.17s`, Exit `0`; Log-Artefakt: `artifacts/converted_images/reports/T5_ac0812_timeoutpath_probe_2026-05-17_runGR.log`.
+- **Fortschritt (Plan B):** Die gekoppelte Plan-B-Syntheseprobe wurde im selben Arbeitspaket für `AC0020_S` durchgeführt (`python -m tools.plan_b_synthetic_probe "Bildbeschreibung: Kreis mit horizontalem Griff links; zentrierte Beschriftung im Kreis; klare Kontur, hoher Kontrast." --variant AC0020_S --output-dir artifacts/converted_images/reports`), Ergebnis `status=ok`, Exit `0`; Log-Artefakt: `artifacts/converted_images/reports/AC0020_S_planb_synthetic_2026-05-17_runGR.log`.
+- **Fortschritt (nächstes CSV-Bild):** Als nächstes Bild aus `artifacts/converted_images/reports/summaries/not_satisfactory_converted_images.csv` wurde `AC0020_S` abgearbeitet (nach `AC0020_M`).
+- **Blocker:** Der bekannte N1/N2-Vollbereichsblocker (Timeout/Laufzeit) bleibt unabhängig von den erfolgreichen Kurzläufen bestehen.
+- **Nächster sinnvoller Schritt:** Das nächste Arbeitspaket in derselben 3er-Kombination fortsetzen (nächste dokumentierte Aufgabe + genau eine Plan-B-Aufgabe + nächstes CSV-Bild).
