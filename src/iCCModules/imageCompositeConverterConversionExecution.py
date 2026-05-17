@@ -181,14 +181,12 @@ def _writeFailedEmbeddedSvgArtifact(
 ) -> str | None:
     base = os.path.splitext(filename)[0]
     failed_svg_path = os.path.join(svg_out_dir, f"Failed_{base}.svg")
-    try:
-        svg_content = render_embedded_raster_svg_fn(image_path)
-        with open(failed_svg_path, "w", encoding="utf-8") as failed_svg_file:
-            failed_svg_file.write(svg_content)
-        return failed_svg_path
-    except Exception as exc:  # noqa: BLE001 - must not break batch flow when fallback artifact fails.
-        print_fn(f"[WARN] {filename}: Konnte Failed-Embedded-SVG nicht schreiben ({type(exc).__name__}: {exc})")
-        return None
+    if os.path.exists(failed_svg_path):
+        try:
+            os.unlink(failed_svg_path)
+        except OSError:
+            pass
+    return None
 
 
 def _svgContainsEmbeddedRasterArtifact(svg_path: str) -> bool:
@@ -429,6 +427,7 @@ def convertOneImpl(
         _ensureOutputArtifacts(
             svg_path=_resolveFailureSvgPath(svg_path, failed_svg_path),
             diff_path=diff_path,
+            create_svg_fallback=False,
         )
         telemetry_suffix = f" | telemetry: {failure_telemetry}" if failure_telemetry else ""
         print_fn(f"[WARN] {filename}: Batchlauf setzt nach Fehler fort ({type(exc).__name__}: {exc}){telemetry_suffix}")
@@ -458,6 +457,7 @@ def convertOneImpl(
             _ensureOutputArtifacts(
                 svg_path=_resolveFailureSvgPath(svg_path, failed_svg_path),
                 diff_path=diff_path,
+                create_svg_fallback=False,
             )
             print_fn(f"[WARN] {filename}: Fehler protokolliert, Batchlauf wird fortgesetzt ({status}).")
             _emit_anchor_variant_event("variant_done", status=status or "render_failure")
@@ -483,6 +483,7 @@ def convertOneImpl(
             _ensureOutputArtifacts(
                 svg_path=_resolveFailureSvgPath(svg_path, failed_svg_path),
                 diff_path=diff_path,
+                create_svg_fallback=False,
             )
             print_fn(f"[WARN] {filename}: Semantischer Fehlmatch, Batchlauf stoppt nach diesem Fehler.")
             _emit_anchor_variant_event("variant_done", status="semantic_mismatch")
@@ -533,6 +534,7 @@ def convertOneImpl(
         _ensureOutputArtifacts(
             svg_path=_resolveFailureSvgPath(svg_path, failed_svg_path),
             diff_path=diff_path,
+            create_svg_fallback=False,
         )
         print_fn(f"[WARN] {filename}: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert ({failure_status}).")
         _emitVariantDebugDump(
@@ -603,7 +605,9 @@ def convertOneImpl(
                 "failed_svg": os.path.basename(svg_path),
             }
         )
-        _ensureOutputArtifacts(svg_path=svg_path, diff_path=diff_path, create_diff_fallback=False)
+        if os.path.exists(svg_path):
+            os.unlink(svg_path)
+        _ensureOutputArtifacts(svg_path=svg_path, diff_path=diff_path, create_svg_fallback=False, create_diff_fallback=False)
         print_fn(f"[WARN] {filename}: Triviale 1x1-Placeholder-SVG erkannt, als fehlgeschlagen markiert.")
         _emit_anchor_variant_event("variant_done", status="poor_conversion_placeholder_svg")
         return None, True
