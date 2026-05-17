@@ -1,0 +1,36 @@
+{
+  "base": "AC5030",
+  "best_error": 31.93728,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.0017033216,
+  "filename": "AC5030_S.jpg",
+  "h": 125,
+  "mean_delta2": 4462.212890625,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "AC5030",
+        "source": "base_name",
+        "text": "sehr komplexe Form, wahrscheinlich sehr schwierig zum nachzeichnen. Es zeigt eine heruntergleassene Store (\"Jalousie\"). Oben ist ein dunkelgraues langes schmales Rechteck. Unten sind dünne hellgraue rechtecke (Lamellen) links und rechts sind zwei vertikale grau Linien (hinter den Lamellen) dargesetllt, die Haltefäden der Lamellen."
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "AC5030_S"
+  },
+  "std_delta2": 5181.63525390625,
+  "variant": "AC5030_S",
+  "w": 150
+}

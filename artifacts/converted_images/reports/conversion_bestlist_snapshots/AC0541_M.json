@@ -1,0 +1,36 @@
+{
+  "base": "AC0541",
+  "best_error": 38.20666666666666,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.04245185185185185,
+  "filename": "AC0541_M.jpg",
+  "h": 30,
+  "mean_delta2": 9492.6669921875,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "AC0541",
+        "source": "base_name",
+        "text": "Klappensymbol: Rechteck hochkant, graue Umrandung. Graue Diagonale von unten links nach oben Rechts, in der Mitte ein dunkelgrauer Punkt. Farbverlauf Hintergrund: Dunkelgrau, hellgrau, dunkelgrau. üAhnlich AC501, jedoch in der Höhe gestaucht"
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "AC0541_M"
+  },
+  "std_delta2": 20193.681640625,
+  "variant": "AC0541_M",
+  "w": 30
+}

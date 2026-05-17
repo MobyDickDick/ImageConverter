@@ -1,0 +1,36 @@
+{
+  "base": "AC0202",
+  "best_error": 62.826933333333336,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.025130773333333335,
+  "filename": "AC0202_1.jpg",
+  "h": 50,
+  "mean_delta2": 29248.23046875,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "AC0202",
+        "source": "base_name",
+        "text": "Kompressor grau nach rechts"
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "AC0202_1"
+  },
+  "std_delta2": 36811.05078125,
+  "variant": "AC0202_1",
+  "w": 50
+}

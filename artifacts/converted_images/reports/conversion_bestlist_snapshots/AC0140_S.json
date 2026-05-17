@@ -1,0 +1,36 @@
+{
+  "base": "AC0140",
+  "best_error": 44.23222222222222,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.013403703703703702,
+  "filename": "AC0140_S.jpg",
+  "h": 110,
+  "mean_delta2": 10281.291015625,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "AC0140",
+        "source": "base_name",
+        "text": "Ähnlich AC0140_S"
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "AC0140_S"
+  },
+  "std_delta2": 14170.642578125,
+  "variant": "AC0140_S",
+  "w": 30
+}

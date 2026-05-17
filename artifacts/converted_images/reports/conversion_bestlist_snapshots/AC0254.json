@@ -1,0 +1,38 @@
+{
+  "base": "AC0254",
+  "best_error": 35.931321540062434,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.037389512528680995,
+  "filename": "AC0254.jpg",
+  "h": 31,
+  "mean_delta2": 7800.51806640625,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "AC0254",
+        "source": "base_name",
+        "text": "Wie AC0521, aber nach links gedreht"
+      }
+    ],
+    "documented_alias_refs": [
+      "AC0521"
+    ],
+    "elements": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "AC0254"
+  },
+  "std_delta2": 12761.7216796875,
+  "variant": "AC0254",
+  "w": 31
+}
