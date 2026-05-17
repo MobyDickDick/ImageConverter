@@ -3,6 +3,59 @@
 from __future__ import annotations
 
 
+def _approximate_contour_points(contour, *, cv2_module, np_module, ratio: float = 0.10):
+    """Iteratively approximate a contour and target ~ratio of original points."""
+    if contour is None or len(contour) < 4:
+        return contour
+
+    arc_len = float(cv2_module.arcLength(contour, True))
+    if arc_len <= 1e-6:
+        return contour
+
+    raw_count = int(len(contour))
+    target_count = max(4, int(round(raw_count * max(0.02, min(0.50, ratio)))))
+
+    lo, hi = 0.0, 0.20
+    best = contour
+    best_distance = abs(raw_count - target_count)
+
+    for _ in range(20):
+        eps_factor = (lo + hi) * 0.5
+        approx = cv2_module.approxPolyDP(contour, eps_factor * arc_len, True)
+        count = int(len(approx))
+        distance = abs(count - target_count)
+        if distance <= best_distance:
+            best, best_distance = approx, distance
+        if count > target_count:
+            lo = eps_factor
+        else:
+            hi = eps_factor
+    return best
+
+
+def _closed_catmull_rom_to_bezier_path(points_xy):
+    """Create a smooth closed SVG path using cubic Bézier segments."""
+    if len(points_xy) < 4:
+        return ""
+
+    path = [f"M {points_xy[0][0]:.3f},{points_xy[0][1]:.3f}"]
+    n = len(points_xy)
+    for i in range(n):
+        p0 = points_xy[(i - 1) % n]
+        p1 = points_xy[i % n]
+        p2 = points_xy[(i + 1) % n]
+        p3 = points_xy[(i + 2) % n]
+
+        c1x = p1[0] + (p2[0] - p0[0]) / 6.0
+        c1y = p1[1] + (p2[1] - p0[1]) / 6.0
+        c2x = p2[0] - (p3[0] - p1[0]) / 6.0
+        c2y = p2[1] - (p3[1] - p1[1]) / 6.0
+        path.append(f"C {c1x:.3f},{c1y:.3f} {c2x:.3f},{c2y:.3f} {p2[0]:.3f},{p2[1]:.3f}")
+
+    path.append("Z")
+    return " ".join(path)
+
+
 def traceImageSegmentImpl(
     img_segment,
     epsilon_factor: float,
@@ -47,17 +100,32 @@ def traceImageSegmentImpl(
             if cv2_module.contourArea(contour) < 10:
                 continue
 
-            epsilon = epsilon_factor * cv2_module.arcLength(contour, True)
-            approx = cv2_module.approxPolyDP(contour, epsilon, True)
-            path_d = "M " + " L ".join(
-                [
-                    (
-                        f"{(pt[0][0] * scale_x) + offset_x:.3f},"
-                        f"{(pt[0][1] * scale_y) + offset_y:.3f}"
-                    )
-                    for pt in approx
-                ]
-            ) + " Z"
+            # Plan-B: (1) pixel contour tracing is from CHAIN_APPROX_NONE,
+            # (2) iterative point thinning (~10%) + smoothing into cubic Bézier segments.
+            approx = _approximate_contour_points(contour, cv2_module=cv2_module, np_module=np_module, ratio=0.10)
+
+            points_xy = [
+                ((pt[0][0] * scale_x) + offset_x, (pt[0][1] * scale_y) + offset_y)
+                for pt in approx
+            ]
+
+            path_d = ""
+            if len(points_xy) >= 4:
+                path_d = _closed_catmull_rom_to_bezier_path(points_xy)
+
+            if not path_d:
+                epsilon = epsilon_factor * cv2_module.arcLength(contour, True)
+                fallback = cv2_module.approxPolyDP(contour, epsilon, True)
+                path_d = "M " + " L ".join(
+                    [
+                        (
+                            f"{(pt[0][0] * scale_x) + offset_x:.3f},"
+                            f"{(pt[0][1] * scale_y) + offset_y:.3f}"
+                        )
+                        for pt in fallback
+                    ]
+                ) + " Z"
+
             paths.append(f'  <path d="{path_d}" fill="{hex_color}" stroke="none" />')
     return paths
 
