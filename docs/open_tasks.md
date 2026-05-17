@@ -2376,3 +2376,13 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 - **Fortschritt (Tracking):** `AC0020_S` wurde in `artifacts/converted_images/reports/summaries/not_satisfactory_converted_images.csv` als bearbeitet (`in samples=yes`) markiert.
 - **Blocker:** Der bekannte N1/N2-Vollbereichsblocker (Timeout/Laufzeit) bleibt unabhängig von den erfolgreichen Kurzläufen bestehen; die bekannte OpenCV/Numpy-Umgebungswarnung erscheint im Plan-B-Lauf weiterhin ohne Exit-Fehler.
 - **Nächster sinnvoller Schritt:** Im nächsten Arbeitspaket den nächsten CSV-Eintrag (`AC0021`) mit derselben 3er-Kopplung bearbeiten und direkt nachdokumentieren.
+
+### Fortschritt vs. Blocker (Session 2026-05-17, nächstes Arbeitspaket Run GO)
+
+- **Fortschritt (Begriffsstandard):** Der Begriff **„nächstes Arbeitspaket“** bleibt verbindlich als 3er-Kombination definiert: (1) nächste dokumentierte Aufgabe, (2) genau eine gekoppelte Plan-B-Aufgabe, (3) nächstes Bild aus `not_satisfactory_converted_images.csv`.
+- **Fortschritt (nächste dokumentierte Aufgabe):** Der priorisierte T5-Kurzlauf (`test_ac08_semantic_anchor_variants_ac0812_only`) wurde erfolgreich ausgeführt (`1 passed`, Exit `0`), Log: `artifacts/converted_images/reports/T5_ac0812_timeoutpath_probe_2026-05-17_runGO.log`.
+- **Fortschritt (Plan B):** Die gekoppelte Plan-B-Syntheseprobe wurde für `AC0021` erfolgreich ausgeführt (`status=ok`, Exit `0`), Log: `artifacts/converted_images/reports/AC0021_planb_synthetic_2026-05-17_runGO.log`.
+- **Fortschritt (CSV-Bild):** Das nächste CSV-Bild nach `AC0020_S` wurde als Einzelrun `AC0021` mit Exit `0` bearbeitet, Log: `artifacts/converted_images/reports/AC0021_single_2026-05-17_runGO.log`.
+- **Fortschritt (Tracking):** `AC0021` wurde in `artifacts/converted_images/reports/summaries/not_satisfactory_converted_images.csv` als bearbeitet (`in samples=yes`) markiert.
+- **Blocker:** Der bekannte N1/N2-Vollbereichsblocker (Timeout/Laufzeit) bleibt unabhängig von den erfolgreichen Kurzläufen bestehen; die bekannte OpenCV/Numpy-Umgebungswarnung erscheint im Plan-B-Lauf weiterhin ohne Exit-Fehler.
+- **Nächster sinnvoller Schritt:** Im nächsten Arbeitspaket den Folgeeintrag `AC0022` mit derselben 3er-Kopplung bearbeiten und direkt nachdokumentieren.
