@@ -9,3 +9,7 @@
   - It still completed and printed: `Abgeschlossen! Ausgaben unter: artifacts/converted_images`.
 - Commit policy for this task:
   - Binary output files generated during this run were intentionally reverted/removed before commit.
+
+## Follow-up Arbeitspaket (2026-05-17)
+- Begriff eingeführt: **Arbeitspaket** = nächste dokumentierte Aufgabe + Plan-B-Aufgabe + nächstes Bild aus `not_satisfactory_converted_images.csv`.
+- Für das nächste Arbeitspaket wurde `AC0010` als nächstes Bild identifiziert.
