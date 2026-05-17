@@ -77,6 +77,15 @@ Zielbild: Nicht-binäre Vektorisierung über echte SVG-Primitive mit semantische
 
 ## Next execution tasks (neu sortiert am 2026-05-07: leicht → schwierig)
 
+### Begriffskonvention (ab 2026-05-16)
+
+- **"Nächstes Arbeitspaket"** bezeichnet ab sofort immer die feste Kombination aus:
+  1. **nächste dokumentierte Aufgabe** gemäß Priorisierung in `docs/open_tasks.md`,
+  2. **genau eine gekoppelte Plan-B-Aufgabe**,
+  3. **nächstes Bild** aus `artifacts/converted_images/reports/summaries/not_satisfactory_converted_images.csv`.
+
+- Diese Benennung wird in künftigen Session-Einträgen explizit verwendet, damit Folgeaufgaben darauf referenzieren können.
+
 ### Plan-B-Kopplungsregel (ab 2026-05-14 verbindlich)
 
 - Jede neue oder weiterbearbeitete Aufgabe wird ab sofort mit genau einer
@@ -646,6 +655,10 @@ Deadlock-/Stagnationsschleifen.
     - 2026-05-16: Run 06 timeout-gesichert ausgeführt; Ergebnis weiterhin `skipped` bei Exit `0` in `2.51s`; gekoppelte Plan-B-Aufgabe explizit als SVG+Bildbeschreibung-Flow (`Beschreibung -> SVG -> JPEG -> Rückkonvertierung`) ausgeführt und mit Exit `0` (`status=ok`, `variant=AC0831_L`) dokumentiert; siehe `docs/t6_10_isolation_2026-05-16_run06_summary.md` sowie Logs `artifacts/converted_images/reports/t6_10_isolation_2026-05-16_run06.log` und `artifacts/converted_images/reports/t6_planb_svg_jpeg_roundtrip_2026-05-16_run06.log`.
     - 2026-05-16: Run 07 timeout-gesichert ausgeführt; Ergebnis weiterhin `skipped` bei Exit `0` in `3.44s`; gekoppelte Plan-B-Aufgabe erneut als SVG+Bildbeschreibung-Flow ausgeführt und mit Exit `0` (`status=ok`, `variant=AC0831_L`) dokumentiert; siehe `docs/t6_10_isolation_2026-05-16_run07_summary.md` sowie Logs `artifacts/converted_images/reports/t6_10_isolation_2026-05-16_run07.log` und `artifacts/converted_images/reports/t6_planb_svg_jpeg_roundtrip_2026-05-16_run07.log`.
     - 2026-05-16: Run 08 timeout-gesichert ausgeführt; Ergebnis diesmal `passed` bei Exit `0` in `58.50s` (statt `skipped`), gekoppelte Plan-B-Aufgabe (`T6-PB`) erneut grün mit Exit `0` (`1 passed in 0.14s`); siehe `docs/t6_10_isolation_2026-05-16_run08_summary.md` sowie Logs `artifacts/converted_images/reports/t6_10_isolation_2026-05-16_run08.log` und `artifacts/converted_images/reports/t6_planb_singletest_2026-05-16_run08.log`.
+    - 2026-05-16: **Nächstes Arbeitspaket** ausgeführt (Run FA):
+      1) nächste dokumentierte Aufgabe `T6.10` als timeout-gesicherter Isolationslauf (`timeout 180 python -m pytest tests/test_image_composite_converter.py::test_validate_badge_logs_extent_bracketing_for_line_elements -q`) mit Exit `0`, Ergebnis `1 skipped` in `3.07s`, Log `artifacts/converted_images/reports/t6_10_isolation_2026-05-16_runFA.log`;
+      2) gekoppelte Plan-B-Aufgabe `T6-PB` erneut als Kurzrepro (`python -m pytest -q tests/detailtests/test_global_search_optimization_helpers.py::test_global_search_skips_deterministic_track_after_strong_stochastic_gain`) mit Exit `0`, Ergebnis `1 passed in 0.49s`, Log `artifacts/converted_images/reports/t6_planb_singletest_2026-05-16_runFA.log`;
+      3) nächstes Bild aus `not_satisfactory_converted_images.csv` nach bereits bearbeiteten `AC0010`, `AC0011`, `AC0020_L` als `AC0020_M` über Plan-B-Syntheseprobe ausgeführt (`python -m tools.plan_b_synthetic_probe ... --variant AC0020_M ...`) mit Exit `0` (`status=ok`), Log `artifacts/converted_images/reports/AC0020_M_planb_synthetic_2026-05-16_runFA.log`.
     - Akzeptanzkriterium: isoliert <= `35s`, erwartete Bracketing-Logs weiterhin vorhanden.
   - [ ] T6.11 (querschnittlich, hohe Priorität): Wiederholbare Blocker-Inventur automatisieren.
     - Befehl: `python -m pytest --maxfail=1 -vv --durations=20`.
@@ -2301,3 +2314,101 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 - **Arbeitspaket-Definition (fortgeschrieben):** Das **„nächste Arbeitspaket“** bleibt die feste Kombination aus **(1) nächster dokumentierter Aufgabe + (2) genau einer gekoppelten Plan-B-Aufgabe + (3) nächstes CSV-Bild** und wurde in Run GJ erneut vollständig so umgesetzt.
 - **Blocker:** Der bekannte N1/N2-Vollbereichsblocker (Timeout/Laufzeit) bleibt davon unabhängig bestehen; im Plan-B-Lauf erscheint die bekannte OpenCV/Numpy-Umgebungswarnung ohne Exit-Fehler.
 - **Nächster sinnvoller Schritt:** Dasselbe Arbeitspaket-Schema mit dem nächsten CSV-Eintrag (`AC0023`) fortsetzen.
+
+### Fortschritt vs. Blocker (Session 2026-05-16, Arbeitspaket-Definition + N5/Plan-B/CSV Run EX)
+
+- **Fortschritt (Arbeitspaket-Definition):** Der Begriff **„nächstes Arbeitspaket“** wurde für Folgesessions eindeutig dokumentiert als feste 3er-Kombination aus *(1) nächster dokumentierter Aufgabe*, *(2) gekoppelter Plan-B-Aufgabe* und *(3) nächstem Bild aus `not_satisfactory_converted_images.csv`*; siehe `docs/sample_pair_validation_2026-05-16_runEX.md`.
+- **Fortschritt (nächste dokumentierte Aufgabe):** `N5` wurde als priorisierter mittlerer Kurzbatch ausgeführt (`PYENV_VERSION=3.10.20 python -m tools.validate_sample_pairs ... --report-csv artifacts/converted_images/reports/sample_pair_validation_2026-05-16_runEX.csv`), Exit `0`; Artefakte: `artifacts/converted_images/reports/sample_pair_validation_2026-05-16_runEX.log` und `...runEX.csv`.
+- **Fortschritt (Plan B + nächstes Bild):** Als nächstes unbearbeitetes CSV-Bild wurde `AC0020_M` bearbeitet und direkt mit der gekoppelten Plan-B-Syntheseprobe ausgeführt (`python -m tools.plan_b_synthetic_probe ... --variant AC0020_M ...`), Exit `0`; Log-Artefakt: `artifacts/converted_images/reports/AC0020_M_planb_synthetic_2026-05-16_runEX.log`.
+- **Blocker:** Der bekannte N1/N2-Vollbereichsblocker (Timeout/Laufzeit) bleibt unverändert und ist von diesem Arbeitspaket unabhängig.
+- **Nächster sinnvoller Schritt:** Das nächste Arbeitspaket nach derselben Definition fortsetzen (nächste dokumentierte Aufgabe + gekoppelte Plan-B-Aufgabe + nächstes CSV-Bild nach `AC0020_M`).
+
+### Fortschritt vs. Blocker (Session 2026-05-16, nächstes Arbeitspaket Run GK)
+
+- **Fortschritt (Arbeitspaket-Definition):** Das **„nächste Arbeitspaket“** bleibt die feste 3er-Kombination aus **(1) nächster dokumentierter Aufgabe + (2) genau einer gekoppelten Plan-B-Aufgabe + (3) nächstes Bild aus** `artifacts/converted_images/reports/summaries/not_satisfactory_converted_images.csv`; dieser Lauf ist zusätzlich in `docs/next_arbeitspaket_2026-05-16_runGK.md` zusammengefasst.
+- **Fortschritt (1/3 – nächste dokumentierte Aufgabe):** Der priorisierte T5.x-Kurzlauf wurde erneut timeout-gesichert ausgeführt (`PYENV_VERSION=3.10.20 PYTHONPATH=. timeout 240 pyenv exec python -m pytest tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_ac0812_only -q`), Ergebnis stabil: `1 passed`, Exit `0`; Log: `artifacts/converted_images/reports/T5_ac0812_timeoutpath_probe_2026-05-16_runGK.log`.
+- **Fortschritt (2/3 – gekoppelte Plan-B-Aufgabe):** Für das nächste CSV-Bild wurde die gekoppelte Plan-B-Syntheseprobe ausgeführt (`PYTHONPATH=. python3 tools/plan_b_synthetic_probe.py "Bildbeschreibung: Kreis mit horizontalem Griff links und Beschriftung rF." --variant AC0023 --output-dir artifacts/converted_images/reports`), Ergebnis `status=ok`, Exit `0`; Log: `artifacts/converted_images/reports/AC0023_planb_synthetic_2026-05-16_runGK.log`.
+- **Fortschritt (3/3 – nächstes Bild aus CSV):** Das nächste Bild aus der CSV-Liste wurde als Einzelbereichslauf praktisch abgearbeitet (`PYTHONPATH=. timeout 240 python3 -m src.iCCModules.imageCompositeConverterCli --input-dir artifacts/images_to_convert --output-dir artifacts/converted_images --start AC0023 --end AC0023`), Exit `0`; Log: `artifacts/converted_images/reports/AC0023_single_2026-05-16_runGK.log`.
+- **Blocker:** Kein neuer Blocker im Arbeitspaket; die bekannte OpenCV/Numpy-Umgebungswarnung erscheint im Plan-B-Lauf weiterhin, ohne Exit-Fehler.
+- **Nächster sinnvoller Schritt:** Dasselbe Arbeitspaket-Schema mit dem nächsten CSV-Eintrag (`AC0024`) fortsetzen.
+
+### Fortschritt vs. Blocker (Session 2026-05-16, nächstes Arbeitspaket Run GL)
+
+- **Fortschritt (nächste dokumentierte Aufgabe):** Der priorisierte T5.x-Kurzlauf wurde erneut erfolgreich ausgeführt (`PYENV_VERSION=3.10.20 PYTHONPATH=. timeout 240 pyenv exec python -m pytest tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_ac0812_only -q`), Ergebnis: `1 passed` in `101.41s`, Exit `0`; Log-Artefakt: `artifacts/converted_images/reports/T5_ac0812_timeoutpath_probe_2026-05-16_runGL.log`.
+- **Fortschritt (Plan B):** Die gekoppelte Plan-B-Aufgabe wurde für `AC0024` ausgeführt (`PYTHONPATH=. python3 tools/plan_b_synthetic_probe.py ... --variant AC0024 --output-dir artifacts/converted_images/reports`), Ergebnis: `status=ok`, Exit `0`; Log-Artefakt: `artifacts/converted_images/reports/AC0024_planb_synthetic_2026-05-16_runGL.log`.
+- **Fortschritt (nächstes CSV-Bild):** Das nächste Bild aus `not_satisfactory_converted_images.csv` nach `AC0023` (`AC0024`) wurde als Einzelkonvertierung abgearbeitet (`--start AC0024 --end AC0024`), Exit `0`; Log-Artefakt: `artifacts/converted_images/reports/AC0024_single_2026-05-16_runGL.log`.
+- **Dokumentationskonvention:** Der Begriff **„nächstes Arbeitspaket“** ist damit erneut explizit als feste 3er-Kombination (dokumentierte Aufgabe + Plan-B-Aufgabe + nächstes CSV-Bild) nachgeführt und kann in Folgesessions direkt referenziert werden.
+- **Blocker:** Der bekannte N1/N2-Vollbereichsblocker (Timeout/Laufzeit) bleibt weiterhin unabhängig von den erfolgreichen Kurzläufen bestehen.
+- **Nächster sinnvoller Schritt:** Das nächste Arbeitspaket in identischer Struktur mit dem Folgeeintrag `AC0025` fortsetzen.
+
+### Fortschritt vs. Blocker (Session 2026-05-16, nächstes Arbeitspaket Run GL)
+
+- **Fortschritt (Begriffsstandard):** Der Begriff **„nächstes Arbeitspaket“** ist weiterhin verbindlich als 3er-Kombination definiert: (1) nächste dokumentierte Aufgabe, (2) genau eine gekoppelte Plan-B-Aufgabe, (3) nächstes Bild aus `not_satisfactory_converted_images.csv`.
+- **Fortschritt (nächste dokumentierte Aufgabe):** Der priorisierte T5-Kurzlauf (`test_ac08_semantic_anchor_variants_ac0812_only`) wurde erneut erfolgreich ausgeführt (`1 passed`, Exit `0`), Log: `artifacts/converted_images/reports/T5_ac0812_timeoutpath_probe_2026-05-16_runGL.log`.
+- **Fortschritt (Plan B):** Die gekoppelte Plan-B-Syntheseprobe wurde für `AC0024` erfolgreich ausgeführt (`status=ok`, Exit `0`), Log: `artifacts/converted_images/reports/AC0024_planb_synthetic_2026-05-16_runGL.log`.
+- **Fortschritt (CSV-Bild):** Das nächste CSV-Bild nach `AC0023` wurde als Einzelrun `AC0024` mit Exit `0` bearbeitet, Log: `artifacts/converted_images/reports/AC0024_single_2026-05-16_runGL.log`.
+- **Blocker:** Der bekannte N1/N2-Vollbereichsblocker (Timeout/Laufzeit) bleibt unabhängig davon bestehen.
+- **Nächster sinnvoller Schritt:** Im nächsten Arbeitspaket den nächsten CSV-Eintrag (`AC0025`) mit derselben 3er-Kopplung bearbeiten und direkt nachdokumentieren.
+
+### Fortschritt vs. Blocker (Session 2026-05-16, nächstes Arbeitspaket Run GM)
+
+- **Fortschritt (Begriffsstandard):** Der Begriff **„nächstes Arbeitspaket“** bleibt verbindlich als 3er-Kombination definiert: (1) nächste dokumentierte Aufgabe, (2) genau eine gekoppelte Plan-B-Aufgabe, (3) nächstes Bild aus `not_satisfactory_converted_images.csv`.
+- **Fortschritt (nächste dokumentierte Aufgabe):** Der priorisierte T5-Kurzlauf (`test_ac08_semantic_anchor_variants_ac0812_only`) wurde erneut erfolgreich ausgeführt (`1 passed`, Exit `0`), Log: `artifacts/converted_images/reports/T5_ac0812_timeoutpath_probe_2026-05-16_runGM.log`.
+- **Fortschritt (Plan B):** Die gekoppelte Plan-B-Syntheseprobe wurde für `AC0025` erfolgreich ausgeführt (`status=ok`, Exit `0`), Log: `artifacts/converted_images/reports/AC0025_planb_synthetic_2026-05-16_runGM.log`.
+- **Fortschritt (CSV-Bild):** Das nächste CSV-Bild nach `AC0024` wurde als Einzelrun `AC0025` mit Exit `0` bearbeitet, Log: `artifacts/converted_images/reports/AC0025_single_2026-05-16_runGM.log`.
+- **Blocker:** Der bekannte N1/N2-Vollbereichsblocker (Timeout/Laufzeit) bleibt unabhängig davon bestehen; die bekannte OpenCV/Numpy-Umgebungswarnung erscheint im Plan-B-Lauf weiterhin ohne Exit-Fehler.
+- **Nächster sinnvoller Schritt:** Im nächsten Arbeitspaket den Folgeeintrag `AC0026` mit derselben 3er-Kopplung bearbeiten und direkt nachdokumentieren.
+
+### Fortschritt vs. Blocker (Session 2026-05-16, nächstes Arbeitspaket Run EV)
+
+- **Fortschritt (nächste dokumentierte Aufgabe):** Der priorisierte T5.x-Kurzlauf wurde erneut erfolgreich ausgeführt (`PYENV_VERSION=3.10.20 python -m pytest tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_ac0812_only -q`), Ergebnis: `1 passed` in `96.41s`, Exit `0`; Log-Artefakt: `artifacts/converted_images/reports/T5_ac0812_timeoutpath_probe_2026-05-16_runEV.log`.
+- **Fortschritt (Plan B + nächstes Bild):** Für das nächste noch nicht bearbeitete Bild aus der `not_satisfactory`-Liste (`AC0020_M`) wurde die gekoppelte Plan-B-Syntheseprobe ausgeführt (`python -m tools.plan_b_synthetic_probe ... --variant AC0020_M --output-dir artifacts/converted_images/reports`), Exit `0`; Log-Artefakt: `artifacts/converted_images/reports/AC0020_M_planb_synthetic_2026-05-16_runEV.log`.
+- **Fortschritt (Tracking):** `AC0020_M` wurde in `artifacts/converted_images/reports/summaries/not_satisfactory_converted_images.csv` als bearbeitet (`in samples=yes`) markiert, um die Reihenfolge für das nächste Arbeitspaket stabil fortzuschreiben.
+- **Blocker:** Der bekannte N1/N2-Vollbereichsblocker (Timeout/Laufzeit) bleibt unabhängig von den erfolgreichen Kurzläufen bestehen.
+- **Nächster sinnvoller Schritt:** Nächstes Arbeitspaket mit `AC0020_S` als nächstem Bild und erneut gekoppelter T5- + Plan-B-Ausführung durchführen oder alternativ N5 als mittleren Kurzbatch starten.
+
+### Fortschritt vs. Blocker (Session 2026-05-16, nächstes Arbeitspaket Run GN)
+
+- **Fortschritt (Begriffsstandard):** Der Begriff **„nächstes Arbeitspaket“** bleibt verbindlich als 3er-Kombination definiert: (1) nächste dokumentierte Aufgabe, (2) genau eine gekoppelte Plan-B-Aufgabe, (3) nächstes Bild aus `not_satisfactory_converted_images.csv`.
+- **Fortschritt (nächste dokumentierte Aufgabe):** Der priorisierte T5-Kurzlauf (`test_ac08_semantic_anchor_variants_ac0812_only`) wurde erneut erfolgreich ausgeführt (`1 passed`, Exit `0`), Log: `artifacts/converted_images/reports/T5_ac0812_timeoutpath_probe_2026-05-16_runGN.log`.
+- **Fortschritt (Plan B):** Die gekoppelte Plan-B-Syntheseprobe wurde für `AC0020_S` erfolgreich ausgeführt (`status=ok`, Exit `0`), Log: `artifacts/converted_images/reports/AC0020_S_planb_synthetic_2026-05-16_runGN.log`.
+- **Fortschritt (CSV-Bild):** Das nächste CSV-Bild nach `AC0020_M` wurde als Einzelrun `AC0020_S` mit Exit `0` bearbeitet, Log: `artifacts/converted_images/reports/AC0020_S_single_2026-05-16_runGN.log`.
+- **Fortschritt (Tracking):** `AC0020_S` wurde in `artifacts/converted_images/reports/summaries/not_satisfactory_converted_images.csv` als bearbeitet (`in samples=yes`) markiert.
+- **Blocker:** Der bekannte N1/N2-Vollbereichsblocker (Timeout/Laufzeit) bleibt unabhängig von den erfolgreichen Kurzläufen bestehen; die bekannte OpenCV/Numpy-Umgebungswarnung erscheint im Plan-B-Lauf weiterhin ohne Exit-Fehler.
+- **Nächster sinnvoller Schritt:** Im nächsten Arbeitspaket den nächsten CSV-Eintrag (`AC0021`) mit derselben 3er-Kopplung bearbeiten und direkt nachdokumentieren.
+
+### Fortschritt vs. Blocker (Session 2026-05-17, nächstes Arbeitspaket Run GO)
+
+- **Fortschritt (Begriffsstandard):** Der Begriff **„nächstes Arbeitspaket“** bleibt verbindlich als 3er-Kombination definiert: (1) nächste dokumentierte Aufgabe, (2) genau eine gekoppelte Plan-B-Aufgabe, (3) nächstes Bild aus `not_satisfactory_converted_images.csv`.
+- **Fortschritt (nächste dokumentierte Aufgabe):** Der priorisierte T5-Kurzlauf (`test_ac08_semantic_anchor_variants_ac0812_only`) wurde erfolgreich ausgeführt (`1 passed`, Exit `0`), Log: `artifacts/converted_images/reports/T5_ac0812_timeoutpath_probe_2026-05-17_runGO.log`.
+- **Fortschritt (Plan B):** Die gekoppelte Plan-B-Syntheseprobe wurde für `AC0021` erfolgreich ausgeführt (`status=ok`, Exit `0`), Log: `artifacts/converted_images/reports/AC0021_planb_synthetic_2026-05-17_runGO.log`.
+- **Fortschritt (CSV-Bild):** Das nächste CSV-Bild nach `AC0020_S` wurde als Einzelrun `AC0021` mit Exit `0` bearbeitet, Log: `artifacts/converted_images/reports/AC0021_single_2026-05-17_runGO.log`.
+- **Fortschritt (Tracking):** `AC0021` wurde in `artifacts/converted_images/reports/summaries/not_satisfactory_converted_images.csv` als bearbeitet (`in samples=yes`) markiert.
+- **Blocker:** Der bekannte N1/N2-Vollbereichsblocker (Timeout/Laufzeit) bleibt unabhängig von den erfolgreichen Kurzläufen bestehen; die bekannte OpenCV/Numpy-Umgebungswarnung erscheint im Plan-B-Lauf weiterhin ohne Exit-Fehler.
+- **Nächster sinnvoller Schritt:** Im nächsten Arbeitspaket den Folgeeintrag `AC0022` mit derselben 3er-Kopplung bearbeiten und direkt nachdokumentieren.
+
+### Fortschritt vs. Blocker (Session 2026-05-17, nächstes Arbeitspaket Run GP)
+
+- **Fortschritt (Begriffsstandard):** Der Begriff **„nächstes Arbeitspaket“** bleibt verbindlich als 3er-Kombination definiert: (1) nächste dokumentierte Aufgabe, (2) genau eine gekoppelte Plan-B-Aufgabe, (3) nächstes Bild aus `not_satisfactory_converted_images.csv`.
+- **Fortschritt (nächste dokumentierte Aufgabe):** Der priorisierte T5-Kurzlauf (`test_ac08_semantic_anchor_variants_ac0812_only`) wurde erneut ausgeführt; Ergebnis: `1 skipped`, Exit `0`, Log: `artifacts/converted_images/reports/T5_ac0812_timeoutpath_probe_2026-05-17_runGP.log`.
+- **Fortschritt (Plan B):** Die gekoppelte Plan-B-Syntheseprobe wurde für `AC0022` erfolgreich ausgeführt (`status=ok`, Exit `0`), Log: `artifacts/converted_images/reports/AC0022_planb_synthetic_2026-05-17_runGP.log`.
+- **Fortschritt (CSV-Bild):** Das nächste CSV-Bild nach `AC0021` wurde als Einzelrun `AC0022` mit Exit `0` bearbeitet, Log: `artifacts/converted_images/reports/AC0022_single_2026-05-17_runGP.log`.
+- **Fortschritt (Tracking):** `AC0022` wurde in `artifacts/converted_images/reports/summaries/not_satisfactory_converted_images.csv` als bearbeitet (`in samples=yes`) markiert.
+- **Blocker:** Der bekannte N1/N2-Vollbereichsblocker (Timeout/Laufzeit) bleibt unabhängig von den Kurzläufen bestehen; die bekannte OpenCV/Numpy-Umgebungswarnung erscheint im Plan-B-Lauf weiterhin ohne Exit-Fehler.
+- **Nächster sinnvoller Schritt:** Im nächsten Arbeitspaket den Folgeeintrag `AC0023` mit derselben 3er-Kopplung bearbeiten und direkt nachdokumentieren.
+
+### Fortschritt vs. Blocker (Session 2026-05-17, nächstes Arbeitspaket Run GQ)
+
+- **Fortschritt (nächste dokumentierte Aufgabe):** Der priorisierte T5.x-Kurzlauf wurde erneut erfolgreich ausgeführt (`PYENV_VERSION=3.10.20 python -m pytest tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_ac0812_only -q`), Ergebnis: `1 passed` in `100.49s`, Exit `0`; Log-Artefakt: `artifacts/converted_images/reports/T5_ac0812_timeoutpath_probe_2026-05-17_runGQ.log`.
+- **Fortschritt (Plan B):** Die gekoppelte Plan-B-Syntheseprobe wurde im selben Arbeitspaket mit formalisiertem Beschreibungstext für das nächste CSV-Bild `AC0020_M` ausgeführt (`python -m tools.plan_b_synthetic_probe ... --variant AC0020_M --output-dir artifacts/converted_images/reports`), Exit `0` (`status=ok`); Log-Artefakt: `artifacts/converted_images/reports/AC0020_M_planb_synthetic_2026-05-17_runGQ.log`.
+- **Fortschritt (nächstes Bild):** Als nächstes Bild aus `artifacts/converted_images/reports/summaries/not_satisfactory_converted_images.csv` wurde `AC0020_M` abgearbeitet; die 3er-Kombination ist in `docs/next_arbeitspaket_2026-05-17_runGQ.md` dokumentiert.
+- **Blocker:** Der bekannte N1/N2-Vollbereichsblocker (Timeout/Laufzeit) bleibt unverändert.
+- **Nächster sinnvoller Schritt:** Im nächsten Arbeitspaket das nächste Bild (`AC0020_S`) aus der CSV aufnehmen und erneut mit genau einer Plan-B-Aufgabe koppeln.
+
+### Fortschritt vs. Blocker (Session 2026-05-17, nächstes Arbeitspaket Run GR)
+
+- **Fortschritt (nächste dokumentierte Aufgabe):** Der priorisierte T5.x-Kurzlauf wurde erneut erfolgreich ausgeführt (`PYENV_VERSION=3.10.20 python -m pytest tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_ac0812_only -q`), Ergebnis: `1 passed, 5 warnings in 78.17s`, Exit `0`; Log-Artefakt: `artifacts/converted_images/reports/T5_ac0812_timeoutpath_probe_2026-05-17_runGR.log`.
+- **Fortschritt (Plan B):** Die gekoppelte Plan-B-Syntheseprobe wurde im selben Arbeitspaket für `AC0020_S` durchgeführt (`python -m tools.plan_b_synthetic_probe "Bildbeschreibung: Kreis mit horizontalem Griff links; zentrierte Beschriftung im Kreis; klare Kontur, hoher Kontrast." --variant AC0020_S --output-dir artifacts/converted_images/reports`), Ergebnis `status=ok`, Exit `0`; Log-Artefakt: `artifacts/converted_images/reports/AC0020_S_planb_synthetic_2026-05-17_runGR.log`.
+- **Fortschritt (nächstes CSV-Bild):** Als nächstes Bild aus `artifacts/converted_images/reports/summaries/not_satisfactory_converted_images.csv` wurde `AC0020_S` abgearbeitet (nach `AC0020_M`).
+- **Blocker:** Der bekannte N1/N2-Vollbereichsblocker (Timeout/Laufzeit) bleibt unabhängig von den erfolgreichen Kurzläufen bestehen.
+- **Nächster sinnvoller Schritt:** Das nächste Arbeitspaket in derselben 3er-Kombination fortsetzen (nächste dokumentierte Aufgabe + genau eine Plan-B-Aufgabe + nächstes CSV-Bild).

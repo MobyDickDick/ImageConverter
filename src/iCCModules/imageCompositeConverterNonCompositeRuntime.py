@@ -131,14 +131,14 @@ def runNonCompositeIterationImpl(
             )
         )
     else:
-        print_fn("  -> Fallback aktiv: verwende Einzelbild-Konvertierung (embedded raster SVG).")
+        print_fn("  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).")
         svg_content = render_embedded_raster_svg_fn(img_path)
-        write_validation_log_fn(["status=non_composite_embedded_svg"])
+        write_validation_log_fn(["status=non_composite_pure_svg_placeholder"])
 
     svg_rendered = render_svg_to_numpy_fn(svg_content, width, height)
     if svg_rendered is None:
         record_render_failure_fn(
-            "non_composite_embedded_render_failed",
+            "non_composite_pure_svg_render_failed",
             svg_content=svg_content,
             params_snapshot=params,
         )
