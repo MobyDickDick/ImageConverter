@@ -2800,13 +2800,17 @@ def convert_image(input_path: str, output_path: str, *, max_iter: int = 120, pla
         return written
     if written.name.lower().startswith("failed_"):
         input_is_jpeg = Path(input_path).suffix.lower() in {".jpg", ".jpeg"}
-        if not input_is_jpeg and written.exists():
+        if input_is_jpeg:
+            if requested.exists():
+                requested.unlink()
+            if written.exists():
+                written.unlink()
+            return requested
+        if written.exists():
             requested.parent.mkdir(parents=True, exist_ok=True)
             requested.write_text(written.read_text(encoding="utf-8"), encoding="utf-8")
         elif requested.exists():
             requested.unlink()
-        if input_is_jpeg:
-            return written
     if written != requested and written.exists():
         requested.parent.mkdir(parents=True, exist_ok=True)
         requested.write_text(written.read_text(encoding="utf-8"), encoding="utf-8")
