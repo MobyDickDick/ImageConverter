@@ -6296,7 +6296,7 @@ def test_render_embedded_raster_svg_wraps_gif_without_optional_deps(tmp_path: Pa
     assert "data:image/gif;base64," in svg
 
 
-def test_convert_image_fallback_writes_embedded_svg(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+def test_convert_image_failed_jpg_does_not_write_svg(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     jpg_path = tmp_path / "sample.jpg"
     jpg_path.write_bytes(
         b"\xff\xd8"
@@ -6311,11 +6311,9 @@ def test_convert_image_fallback_writes_embedded_svg(tmp_path: Path, monkeypatch:
     result = conv.convert_image(jpg_path, out_path)
 
     failed_out_path = tmp_path / "Failed_sample.svg"
-    assert result == failed_out_path
+    assert result == out_path
     assert not out_path.exists()
-    text = failed_out_path.read_text(encoding="utf-8")
-    assert 'viewBox="0 0 5 4"' in text
-    assert "data:image/jpeg;base64," in text
+    assert not failed_out_path.exists()
 
 
 def test_load_description_mapping_from_xml_reads_wurzelform_key_and_images(tmp_path: Path) -> None:
