@@ -2455,3 +2455,64 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 - **Fortschritt (Tracking):** `AC0030_L` wurde in `artifacts/converted_images/reports/summaries/not_satisfactory_converted_images.csv` als bearbeitet (`in samples=yes`) markiert.
 - **Blocker:** Der bekannte N1/N2-Vollbereichsblocker (Timeout/Laufzeit) bleibt unverändert bestehen.
 - **Nächster sinnvoller Schritt:** Das nächste Arbeitspaket wieder strikt als 3er-Kombination fortsetzen (T5/N5 als Primäraufgabe + 1 Plan-B-Probe + nächster CSV-Eintrag `AC0030_M`).
+
+## Blockierende Konvertierungen aus Testbatterie (2026-05-17)
+
+- [ ] **TB1 – Stabilisieren/Beheben von `blocking_conversion`-Tests**
+  - Hintergrund: Diese Tests sind aktuell aus der Standard-Testbatterie ausgenommen (`pytest -m "not blocking_conversion"`), damit die reguläre CI-/Session-Testbatterie ohne Timeout/Fehler durchläuft.
+  - Betroffene Tests:
+    - `test_semantic_validation_accepts_circle_supported_by_local_mask`
+    - `test_detect_semantic_primitives_detects_vertical_connector_without_arm`
+    - `test_semantic_validation_accepts_text_supported_by_local_mask`
+    - `test_semantic_validation_ignores_structural_false_positives_for_plain_circle_badge`
+    - `test_make_badge_params_reanchors_ac0811_l_stem_after_template_center_lock`
+    - `test_run_iteration_pipeline_converts_non_composite_as_embedded_svg`
+    - `test_validate_semantic_description_alignment_rejects_non_semantic_cross_shape`
+    - `test_validate_semantic_description_alignment_accepts_ac0813_vertical_connector`
+    - `test_convert_range_writes_svgs_and_diffs_to_dedicated_subfolders`
+  - Ziel: Schrittweise Entblockung und Rückführung in die Standard-Testbatterie.
+
+
+## Strenges Testregime: Nicht-grüne / nicht ausführbare Tests (Snapshot 2026-05-18)
+
+- [ ] **TB1-Sammelaufgabe – `blocking_conversion`-Tests wieder eingrünen**
+  - Definition: Alle aktuell mit `@pytest.mark.blocking_conversion` markierten Tests müssen entweder
+    1) fachlich gefixt und zurück in die Standard-Batterie überführt oder
+    2) mit belastbarer Begründung weiter isoliert und priorisiert abgearbeitet werden.
+  - Aktuell markierte Tests (18):
+    - `test_semantic_validation_accepts_circle_supported_by_local_mask`
+    - `test_detect_semantic_primitives_detects_vertical_connector_without_arm`
+    - `test_semantic_validation_accepts_text_supported_by_local_mask`
+    - `test_semantic_validation_ignores_structural_false_positives_for_plain_circle_badge`
+    - `test_make_badge_params_reanchors_ac0811_l_stem_after_template_center_lock`
+    - `test_run_iteration_pipeline_converts_non_composite_as_embedded_svg`
+    - `test_validate_semantic_description_alignment_rejects_non_semantic_cross_shape`
+    - `test_validate_semantic_description_alignment_accepts_ac0813_vertical_connector`
+    - `test_convert_range_writes_svgs_and_diffs_to_dedicated_subfolders`
+    - `test_circle_error_uses_stable_source_mask_for_radius_candidates`
+    - `test_make_badge_params_keeps_ac0223_m_circle_in_lower_half`
+    - `test_validate_semantic_alignment_accepts_vertical_circle_when_raw_hough_misses`
+    - `test_validate_semantic_alignment_accepts_ac0838_large_top_connector_voc_variant`
+    - `test_make_badge_params_keeps_ac0838_m_circle_near_full_width_for_voc_layout`
+    - `test_validate_semantic_alignment_accepts_merged_co2_blob_for_ac0831_artifact`
+    - `test_convert_range_uses_existing_conversion_rows_as_template_donors`
+    - `test_validate_badge_by_elements_activates_ac08_adaptive_unlocks_on_stagnation`
+    - `test_parse_description_manual_review_clears_default_label_for_unclassified_sia_symbol`
+
+- [ ] **TB2 – Nicht ausführbarer Test (Umgebungsabhängigkeit) wieder aktivieren**
+  - Betroffener Test (aktuell `SKIPPED`): `test_generate_badges_reconverted_svg_contains_text`
+  - Blocker: fehlendes Modul/Tooling `tools.generate_badge_comparison_set` in aktueller Laufumgebung.
+  - Ziel: Umgebung/Abhängigkeit reproduzierbar herstellen oder Test auf robuste lokale Fixture-Variante umstellen.
+
+
+- [ ] **TB3 – Nicht-blocking-Batterie vollständig abschließen (ohne Hänger/Timeout)**
+  - Status 2026-05-18: Der Lauf `pytest tests/test_image_composite_converter.py -m "not blocking_conversion"` lief reproduzierbar bis in den späten Bereich, konnte aber in Session-Läufen nicht immer deterministisch mit Abschlusszeile beendet werden.
+  - Ziel: verbleibende Langläufer im `not blocking_conversion`-Set identifizieren, Laufzeitbudget pro Test absichern und einen vollständigen grünen Durchlauf mit stabiler Abschlussmeldung nachweisen.
+  - Nachweisführung: vollständiges Run-Log mit finaler `passed/failed/skipped`-Zusammenfassung und Exit `0`.
+
+
+### Fortschritt vs. Blocker (Session 2026-05-18, TB3-Striktrun Run HG)
+
+- **Fortschritt:** Die `not blocking_conversion`-Batterie wurde mit stark erhöhtem Timeout (`7200s`) erneut als Vollsuite gestartet und lief reproduzierbar bis in den späten Bereich (`88%+`) ohne frühen fachlichen Abbruch.
+- **Blocker:** In der aktuellen Umgebung bleibt der vollständige stabile Abschluss (`Exit 0` mit finaler Zusammenfassung im selben Lauf) weiterhin nicht konsistent erreichbar; es besteht weiterhin ein Langläufer-/Abschlussproblem im späten Suitenbereich.
+- **Nächster sinnvoller Schritt:** Restbereich der späten Tests in kleinere stabile Subsets schneiden, den verbleibenden Langläufer deterministisch identifizieren und entweder fixen oder als neue TB-Unteraufgabe explizit abspalten.

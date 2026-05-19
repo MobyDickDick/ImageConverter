@@ -1,0 +1,255 @@
+........................................................................ [ 22%]
+........................................................................ [ 44%]
+...................................................................s.... [ 66%]
+........................................................................ [ 88%]
+.....................F.FF..............                                  [100%]
+=================================== FAILURES ===================================
+_____________ test_ac0811_l_conversion_preserves_long_bottom_stem ______________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-12/test_ac0811_l_conversion_prese0')
+
+    def test_ac0811_l_conversion_preserves_long_bottom_stem(tmp_path: Path) -> None:
+        """AC0811_L should keep a visibly long stem instead of collapsing during validation."""
+        if (
+            image_composite_converter.np is None
+            or image_composite_converter.cv2 is None
+            or image_composite_converter.fitz is None
+        ):
+            pytest.skip("numpy/cv2/fitz not available in this environment")
+    
+        images_dir = Path("artifacts/images_to_convert")
+        csv_path = images_dir / "Finale_Wurzelformen_V3.xml"
+        if not images_dir.exists() or not csv_path.exists():
+            pytest.skip("AC0811 fixture inputs not available")
+    
+        img_path = images_dir / "AC0811_L.jpg"
+>       assert img_path.exists(), f"missing regression fixture: {img_path}"
+E       AssertionError: missing regression fixture: artifacts/images_to_convert/AC0811_L.jpg
+E       assert False
+E        +  where False = exists()
+E        +    where exists = PosixPath('artifacts/images_to_convert/AC0811_L.jpg').exists
+
+tests/test_image_composite_converter.py:7322: AssertionError
+________ test_ac08_semantic_anchor_variants_convert_without_failed_svg _________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-12/test_ac08_semantic_anchor_vari0')
+
+    def test_ac08_semantic_anchor_variants_convert_without_failed_svg(tmp_path: Path) -> None:
+        """Smoke-run across AC0811_L + AC0812_M without producing failed fallback SVGs."""
+        if (
+            image_composite_converter.np is None
+            or image_composite_converter.cv2 is None
+            or image_composite_converter.fitz is None
+        ):
+            pytest.skip("numpy/cv2/fitz not available in this environment")
+    
+        images_dir = Path("artifacts/images_to_convert")
+        csv_path = images_dir / "Finale_Wurzelformen_V3.xml"
+        if not images_dir.exists() or not csv_path.exists():
+            pytest.skip("AC08 fixture inputs not available")
+    
+        output_root = tmp_path / "ac08_anchor_smoke"
+        result = image_composite_converter.convertRange(
+            str(images_dir),
+            str(csv_path),
+            iterations=2,
+            start_ref="AC0811",
+            end_ref="AC0812",
+            output_root=str(output_root),
+            selected_variants={"AC0811_L", "AC0812_M"},
+            deterministic_order=True,
+        )
+    
+        assert result == str(output_root)
+>       assert (output_root / "converted_svgs" / "AC0811_L.svg").exists()
+E       AssertionError: assert False
+E        +  where False = exists()
+E        +    where exists = ((PosixPath('/tmp/pytest-of-root/pytest-12/test_ac08_semantic_anchor_vari0/ac08_anchor_smoke') / 'converted_svgs') / 'AC0811_L.svg').exists
+
+tests/test_image_composite_converter.py:7427: AssertionError
+----------------------------- Captured stdout call -----------------------------
+[ANCHOR_DEBUG] variant_start name=AC0812_M attempt_idx=1 context=initial_pass:1/1
+
+--- Verarbeite AC0812_M.jpg ---
+Bildbeschreibung: Wie AC0811: Kelle, ohne Text Kreis oben, Griff nach unten (dunkelgraue Liine). Geometrische Variante: 90° nach links gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe, SEMANTIC: waagrechter Strich links vom Kreis
+[ANCHOR_DEBUG] render_probe call_id=1387 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=386 elapsed=0.85s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] full_render round=1, elapsed=0.85s, state=cx=25.000, cy=10.000, r=8.833, arm_stroke=1.000
+[ANCHOR_DEBUG] render_probe call_id=1388 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=248 elapsed=0.87s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] element_render round=1, element=circle, elapsed=0.87s, state=cx=25.000, cy=10.000, r=8.833, arm_stroke=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] circle_center_start round=1, remaining=88.27s, state=cx=25.000, cy=10.000, r=8.833, arm_stroke=1.000
+[ANCHOR_DEBUG] render_probe call_id=1389 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=248 elapsed=0.84s
+[ANCHOR_DEBUG] render_probe call_id=1390 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=248 elapsed=0.87s
+[ANCHOR_DEBUG] render_probe call_id=1391 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=248 elapsed=0.87s
+[ANCHOR_DEBUG] render_probe call_id=1392 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=248 elapsed=0.87s
+[ANCHOR_DEBUG] render_probe call_id=1393 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=248 elapsed=0.85s
+[ANCHOR_DEBUG] render_probe call_id=1394 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=247 elapsed=0.88s
+[ANCHOR_DEBUG] render_probe call_id=1395 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=248 elapsed=0.84s
+[ANCHOR_DEBUG] render_probe call_id=1396 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=248 elapsed=0.95s
+[ANCHOR_DEBUG] render_probe call_id=1397 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=248 elapsed=0.86s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] circle_center_end round=1, elapsed=7.85s, remaining=80.42s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] circle_radius_start round=1, remaining=80.42s, state=cx=23.000, cy=10.000, r=8.833, arm_stroke=1.000
+[ANCHOR_DEBUG] render_probe call_id=1398 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=248 elapsed=0.94s
+[ANCHOR_DEBUG] render_probe call_id=1399 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=248 elapsed=0.88s
+[ANCHOR_DEBUG] render_probe call_id=1400 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=386 elapsed=0.92s
+[ANCHOR_DEBUG] render_probe_aggregate calls=1400 slow_calls_gt_1s=1 timeouts=0 mean_elapsed=0.73s
+[ANCHOR_DEBUG] render_probe call_id=1401 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=386 elapsed=0.90s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] circle_radius_end round=1, elapsed=3.67s, remaining=76.75s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] HEARTBEAT phase=element_loop, round=1, elapsed=13.25s, remaining=76.75s, element=arm
+[ANCHOR_DEBUG] render_probe call_id=1402 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=270 elapsed=0.88s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] element_render round=1, element=arm, elapsed=0.88s, state=cx=23.000, cy=10.000, r=9.000, arm_stroke=1.000
+[ANCHOR_DEBUG] render_probe call_id=1403 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=270 elapsed=0.90s
+[ANCHOR_DEBUG] render_probe call_id=1404 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=386 elapsed=0.87s
+[ANCHOR_DEBUG] render_probe call_id=1405 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=385 elapsed=0.94s
+[ANCHOR_DEBUG] render_probe call_id=1406 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=383 elapsed=0.90s
+[ANCHOR_DEBUG] render_probe call_id=1407 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=383 elapsed=0.94s
+[ANCHOR_DEBUG] render_probe call_id=1408 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=385 elapsed=0.93s
+[ANCHOR_DEBUG] render_probe call_id=1409 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=386 elapsed=0.93s
+[ANCHOR_DEBUG] render_probe call_id=1410 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=383 elapsed=0.96s
+[ANCHOR_DEBUG] render_probe call_id=1411 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=382 elapsed=0.91s
+[ANCHOR_DEBUG] render_probe call_id=1412 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=383 elapsed=0.86s
+[ANCHOR_DEBUG] render_probe call_id=1413 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=383 elapsed=0.86s
+[ANCHOR_DEBUG] render_probe call_id=1414 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=383 elapsed=0.94s
+[ANCHOR_DEBUG] render_probe call_id=1415 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=386 elapsed=1.02s
+[ANCHOR_DEBUG] render_probe call_id=1416 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=385 elapsed=0.94s
+[ANCHOR_DEBUG] render_probe call_id=1417 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=386 elapsed=0.91s
+[ANCHOR_DEBUG] render_probe call_id=1418 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=386 elapsed=0.97s
+[ANCHOR_DEBUG] render_probe call_id=1419 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=385 elapsed=1.00s
+[ANCHOR_DEBUG] render_probe call_id=1420 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=386 elapsed=0.86s
+[ANCHOR_DEBUG] render_probe call_id=1421 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=385 elapsed=0.91s
+[ANCHOR_DEBUG] render_probe call_id=1422 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=386 elapsed=0.88s
+[ANCHOR_DEBUG] render_probe call_id=1423 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=386 elapsed=0.87s
+[ANCHOR_DEBUG] render_probe call_id=1424 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=386 elapsed=0.90s
+[ANCHOR_DEBUG] render_probe call_id=1425 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=386 elapsed=0.94s
+[ANCHOR_DEBUG] render_probe_aggregate calls=1425 slow_calls_gt_1s=2 timeouts=0 mean_elapsed=0.74s
+[ANCHOR_DEBUG] render_probe call_id=1426 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=386 elapsed=0.90s
+[ANCHOR_DEBUG] render_probe call_id=1427 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=383 elapsed=0.84s
+[ANCHOR_DEBUG] render_probe call_id=1428 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=386 elapsed=0.83s
+[ANCHOR_DEBUG] render_probe call_id=1429 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=383 elapsed=0.98s
+[ANCHOR_DEBUG] render_probe call_id=1430 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=386 elapsed=0.82s
+[ANCHOR_DEBUG] render_probe call_id=1431 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=383 elapsed=0.94s
+[ANCHOR_DEBUG] render_probe call_id=1432 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=386 elapsed=1.01s
+[ANCHOR_DEBUG] render_probe call_id=1433 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=386 elapsed=0.90s
+[ANCHOR_DEBUG] render_probe call_id=1434 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=386 elapsed=0.89s
+[ANCHOR_DEBUG] render_probe call_id=1435 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=386 elapsed=1.03s
+[ANCHOR_DEBUG] render_probe call_id=1436 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=386 elapsed=0.98s
+[ANCHOR_DEBUG] render_probe call_id=1437 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=386 elapsed=1.32s
+[ANCHOR_DEBUG] render_probe call_id=1438 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=386 elapsed=1.31s
+[ANCHOR_DEBUG] render_probe call_id=1439 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=386 elapsed=1.24s
+[ANCHOR_DEBUG] render_probe call_id=1440 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=386 elapsed=1.41s
+[ANCHOR_DEBUG] render_probe call_id=1441 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=383 elapsed=1.22s
+[ANCHOR_DEBUG] render_probe call_id=1442 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=386 elapsed=1.11s
+[ANCHOR_DEBUG] render_probe call_id=1443 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=386 elapsed=1.41s
+[ANCHOR_DEBUG] render_probe call_id=1444 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=386 elapsed=1.37s
+[ANCHOR_DEBUG] render_probe call_id=1445 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=386 elapsed=1.23s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] HEARTBEAT phase=round_start, round=2, elapsed=57.06s, remaining=32.94s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] full_render round=2, elapsed=0.00s, state=cx=22.500, cy=10.000, r=8.500, arm_stroke=1.000
+[ANCHOR_DEBUG] render_probe call_id=1446 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=248 elapsed=1.38s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] element_render round=2, element=circle, elapsed=1.38s, state=cx=22.500, cy=10.000, r=8.500, arm_stroke=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] circle_center_start round=2, remaining=31.56s, state=cx=22.500, cy=10.000, r=8.500, arm_stroke=1.000
+[ANCHOR_DEBUG] render_probe call_id=1447 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=248 elapsed=1.20s
+[ANCHOR_DEBUG] render_probe call_id=1448 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=248 elapsed=1.32s
+[ANCHOR_DEBUG] render_probe call_id=1449 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=248 elapsed=1.26s
+[ANCHOR_DEBUG] render_probe call_id=1450 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=248 elapsed=1.38s
+[ANCHOR_DEBUG] render_probe_aggregate calls=1450 slow_calls_gt_1s=18 timeouts=0 mean_elapsed=0.74s
+[ANCHOR_DEBUG] render_probe call_id=1451 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=247 elapsed=1.33s
+[ANCHOR_DEBUG] render_probe call_id=1452 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=248 elapsed=1.27s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] circle_center_end round=2, elapsed=7.81s, remaining=23.75s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] circle_radius_start round=2, remaining=23.75s, state=cx=23.000, cy=10.500, r=8.500, arm_stroke=1.000
+[ANCHOR_DEBUG] render_probe call_id=1453 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=248 elapsed=1.25s
+[ANCHOR_DEBUG] render_probe call_id=1454 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=386 elapsed=1.33s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] circle_radius_end round=2, elapsed=2.59s, remaining=21.16s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] HEARTBEAT phase=element_loop, round=2, elapsed=68.84s, remaining=21.16s, element=arm
+[ANCHOR_DEBUG] render_probe call_id=1455 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=270 elapsed=1.28s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] element_render round=2, element=arm, elapsed=1.29s, state=cx=23.000, cy=10.500, r=8.500, arm_stroke=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] micro_eval phase=baseline, elapsed=0.00s, err=8.734
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] micro_eval phase=candidate_1, elapsed=0.00s, err=11.017
+[ANCHOR_DEBUG] render_probe call_id=1456 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=386 elapsed=1.27s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] micro_eval phase=candidate_2, elapsed=1.27s, err=10.403
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] micro_eval phase=candidate_3, elapsed=0.00s, err=11.284
+[ANCHOR_DEBUG] render_probe call_id=1457 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=386 elapsed=1.34s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] micro_eval phase=candidate_4, elapsed=1.34s, err=15.730
+[ANCHOR_DEBUG] render_probe call_id=1458 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=386 elapsed=1.39s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] micro_eval phase=candidate_5, elapsed=1.39s, err=16.737
+[ANCHOR_DEBUG] render_probe call_id=1459 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=386 elapsed=1.43s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] micro_eval phase=candidate_6, elapsed=1.43s, err=8.734
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] full_render round=3, elapsed=0.00s, state=cx=23.000, cy=10.500, r=8.500, arm_stroke=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] element_render round=3, element=circle, elapsed=0.00s, state=cx=23.000, cy=10.500, r=8.500, arm_stroke=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] circle_center_start round=3, remaining=14.40s, state=cx=23.000, cy=10.500, r=8.500, arm_stroke=1.000
+[ANCHOR_DEBUG] render_probe call_id=1460 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=248 elapsed=1.54s
+[ANCHOR_DEBUG] render_probe call_id=1461 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=248 elapsed=1.38s
+[ANCHOR_DEBUG] render_probe call_id=1462 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=248 elapsed=1.41s
+[ANCHOR_DEBUG] render_probe call_id=1463 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=248 elapsed=1.35s
+[ANCHOR_DEBUG] render_probe call_id=1464 status=done returncode=0 timeout_sec=5.00 size=35x20 payload_bytes=248 elapsed=1.34s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] circle_center_end round=3, elapsed=7.06s, remaining=7.34s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] circle_radius_start round=3, remaining=7.34s, state=cx=23.000, cy=10.500, r=8.500, arm_stroke=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] circle_radius_end round=3, elapsed=0.05s, remaining=7.30s
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] HEARTBEAT phase=element_loop, round=3, elapsed=82.71s, remaining=7.29s, element=arm
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] element_render round=3, element=arm, elapsed=0.00s, state=cx=23.000, cy=10.500, r=8.500, arm_stroke=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] full_render round=4, elapsed=0.00s, state=cx=23.000, cy=10.500, r=8.500, arm_stroke=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] element_render round=4, element=circle, elapsed=0.00s, state=cx=23.000, cy=10.500, r=8.500, arm_stroke=1.000
+[ANCHOR_DEBUG] anchor_telemetry[AC0812] element_render round=4, element=arm, elapsed=0.00s, state=cx=23.000, cy=10.500, r=8.500, arm_stroke=1.000
+[ANCHOR_DEBUG] variant_done name=AC0812_M status=ok context=initial_pass:1/1
+[INFO] Übersichts-Kacheln erzeugt: diff=/tmp/pytest-of-root/pytest-12/test_ac08_semantic_anchor_vari0/ac08_anchor_smoke/reports/overview_diff_tiles.png, svg=/tmp/pytest-of-root/pytest-12/test_ac08_semantic_anchor_vari0/ac08_anchor_smoke/reports/overview_svg_tiles.png
+________________ test_ac08_semantic_anchor_variants_ac0811_only ________________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-12/test_ac08_semantic_anchor_vari1')
+
+    def test_ac08_semantic_anchor_variants_ac0811_only(tmp_path: Path) -> None:
+        """AC0811_L should render as a real SVG output without failed fallback."""
+        if (
+            image_composite_converter.np is None
+            or image_composite_converter.cv2 is None
+            or image_composite_converter.fitz is None
+        ):
+            pytest.skip("numpy/cv2/fitz not available in this environment")
+    
+        images_dir = Path("artifacts/images_to_convert")
+        csv_path = images_dir / "Finale_Wurzelformen_V3.xml"
+        if not images_dir.exists() or not csv_path.exists():
+            pytest.skip("AC08 fixture inputs not available")
+    
+        output_ac0811 = tmp_path / "ac0811_out"
+        result_ac0811 = image_composite_converter.convertRange(
+            str(images_dir),
+            str(csv_path),
+            iterations=3,
+            start_ref="AC0811",
+            end_ref="AC0811",
+            output_root=str(output_ac0811),
+            selected_variants={"AC0811_L"},
+        )
+    
+        assert result_ac0811 == str(output_ac0811)
+>       assert (output_ac0811 / "converted_svgs" / "AC0811_L.svg").exists()
+E       AssertionError: assert False
+E        +  where False = exists()
+E        +    where exists = ((PosixPath('/tmp/pytest-of-root/pytest-12/test_ac08_semantic_anchor_vari1/ac0811_out') / 'converted_svgs') / 'AC0811_L.svg').exists
+
+tests/test_image_composite_converter.py:7458: AssertionError
+----------------------------- Captured stdout call -----------------------------
+Keine Eingabedateien für die Konvertierung gefunden.
+Ordner: artifacts/images_to_convert
+Range: AC0811..AC0811
+Anzahl gefundener Dateien: 0
+Unterstützte Endungen: .bmp, .jpg, .jpeg, .png, .gif, .tif, .tiff, .webp
+Ausgewählte Varianten: AC0811_L
+Hinweis: Prüfe Range, Dateiendung und Variantennamen.
+=============================== warnings summary ===============================
+<frozen importlib._bootstrap>:241
+<frozen importlib._bootstrap>:241
+  <frozen importlib._bootstrap>:241: DeprecationWarning: builtin type SwigPyPacked has no __module__ attribute
+
+<frozen importlib._bootstrap>:241
+<frozen importlib._bootstrap>:241
+  <frozen importlib._bootstrap>:241: DeprecationWarning: builtin type SwigPyObject has no __module__ attribute
+
+<frozen importlib._bootstrap>:241
+  <frozen importlib._bootstrap>:241: DeprecationWarning: builtin type swigvarlink has no __module__ attribute
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_image_composite_converter.py::test_ac0811_l_conversion_preserves_long_bottom_stem
+FAILED tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_convert_without_failed_svg
+FAILED tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_ac0811_only
+3 failed, 323 passed, 1 skipped, 18 deselected, 5 warnings in 1213.15s (0:20:13)
