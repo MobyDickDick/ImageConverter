@@ -10,6 +10,10 @@ focused on the actual project scope.
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
+## Testhygiene – nur echte Grün-Tests in der Kernliste (neu 2026-05-20)
+
+- [ ] **TH1:** Nicht-grüne Testergebnisse als Aufgaben pflegen und abbauen (Skips, Deselections, XFails, Warnings), siehe `docs/test_followup_tasks_2026-05-20.md`.
+
 ## Neue Vision-Roadmap: semantische SVG-Rekonstruktion (abgeglichen am 2026-05-10)
 
 Zielbild: Nicht-binäre Vektorisierung über echte SVG-Primitive mit semantischen Beziehungen und iterativer Nachzeichnung.
