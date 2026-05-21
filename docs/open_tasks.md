@@ -2528,3 +2528,13 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 - **Fortschritt:** Die `not blocking_conversion`-Batterie wurde mit stark erhöhtem Timeout (`7200s`) erneut als Vollsuite gestartet und lief reproduzierbar bis in den späten Bereich (`88%+`) ohne frühen fachlichen Abbruch.
 - **Blocker:** In der aktuellen Umgebung bleibt der vollständige stabile Abschluss (`Exit 0` mit finaler Zusammenfassung im selben Lauf) weiterhin nicht konsistent erreichbar; es besteht weiterhin ein Langläufer-/Abschlussproblem im späten Suitenbereich.
 - **Nächster sinnvoller Schritt:** Restbereich der späten Tests in kleinere stabile Subsets schneiden, den verbleibenden Langläufer deterministisch identifizieren und entweder fixen oder als neue TB-Unteraufgabe explizit abspalten.
+
+### Fortschritt vs. Blocker (Session 2026-05-21, nächstes Arbeitspaket Run HI)
+
+- **Fortschritt (Begriffsstandard):** Der Begriff **„nächstes Arbeitspaket“** bleibt verbindlich als 3er-Kombination definiert: (1) nächste dokumentierte Aufgabe, (2) genau eine gekoppelte Plan-B-Aufgabe, (3) nächstes Bild aus `not_satisfactory_converted_images.csv`.
+- **Fortschritt (nächste dokumentierte Aufgabe):** Der priorisierte T5-Kurzlauf (`test_ac08_semantic_anchor_variants_ac0812_only`) wurde erneut in Python `3.10.20` ausgeführt; Ergebnis `1 passed`, Exit `0`; Log: `artifacts/converted_images/reports/T5_ac0812_timeoutpath_probe_2026-05-21_runHI.log`.
+- **Fortschritt (Plan B):** Die gekoppelte Plan-B-Syntheseprobe wurde für `AC0030` erfolgreich ausgeführt (`status=ok`, Exit `0`); Log: `artifacts/converted_images/reports/AC0030_planb_synthetic_2026-05-21_runHI.log`.
+- **Fortschritt (nächstes CSV-Bild):** Das nächste Bild aus der Liste der nicht zufriedenstellenden Konvertierungen wurde als Einzelkonvertierung bearbeitet (`AC0030`, Exit `0`); Log: `artifacts/converted_images/reports/AC0030_single_2026-05-21_runHI.log`.
+- **Fortschritt (Dokumentation):** Das komplette Arbeitspaket ist in `docs/next_arbeitspaket_2026-05-21_runHI.md` nachgeführt.
+- **Blocker:** Der bekannte N1/N2-Vollbereichsblocker (Timeout/Laufzeit) bleibt unverändert bestehen.
+- **Nächster sinnvoller Schritt:** Das nächste Arbeitspaket wieder strikt als 3er-Kombination fortsetzen (T5/N5 als Primäraufgabe + 1 Plan-B-Probe + nächster CSV-Eintrag `AC0030_L`).
