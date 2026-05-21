@@ -3,6 +3,12 @@
 Datum: 2026-05-20  
 Basis: letzter vollständiger grüner Suite-Lauf mit Python 3.10 (`pytest -q`).
 
+## Session-Update 2026-05-21 (nicht-grüner Lauf explizit nachgeführt)
+
+- Reproduzierter Kontrolllauf: `timeout 300 python -m pytest -q`
+- Ergebnis: Lauf erreichte in 300s kein finales `pytest`-Summary und endete mit Exit `124` (Timeout), bei sichtbarem Zwischenstand mit weiterhin vorhandenen `xfailed` (`x`) und `skipped` (`s`) Markern.
+- Einordnung: Dieser Lauf zählt **nicht** als „wirklich grün“ und bleibt als Follow-up-Aufgabe offen.
+
 ## Ziel
 
 Nur **wirklich grüne** Tests sollen als stabile Kern-Testliste gelten.  
@@ -51,6 +57,11 @@ Alles andere (skip/deselect/xfail/warnings) wird hier als explizite Aufgabe gef�
 - [ ] Timeout-Fälle dürfen nicht als „nur Umgebung langsam“ verbucht werden; sie gelten bis zur Auflösung als offene Qualitätsaufgabe.
 - [ ] Nach Stabilisierung: Timeout-Marker entfernen und Test zurück in `core-green` überführen.
 
+### A6 – `pytest -q` in 300s wieder deterministisch zum Endsummary bringen
+- [ ] Timeout-Lauf vom 2026-05-21 (`timeout 300 python -m pytest -q`, Exit `124`) in Teilbatches aufspalten und den langsamsten Block identifizieren.
+- [ ] Für den langsamsten Block einen reproduzierbaren Einzel-Repro (NodeID oder Marker-Subset) dokumentieren.
+- [ ] Akzeptanz: Ein erneuter Suite-Lauf mit identischem 300s-Limit endet mit finalem `pytest`-Summary statt Exit `124`.
+
 ## Definition „wirklich grün“
 
 Ein Test zählt nur als **wirklich grün**, wenn er:
@@ -58,4 +69,3 @@ Ein Test zählt nur als **wirklich grün**, wenn er:
 2. `passed` ist,
 3. nicht `skip`/`xfail`/`deselect` ist,
 4. und keine Warnung erzeugt (für das Kernprofil).
-
