@@ -18,6 +18,17 @@ Basis: letzter vollständiger grüner Suite-Lauf mit Python 3.10 (`pytest -q`).
 - Die aktuell 20 `blocking_conversion`-NodeIDs wurden vollständig namentlich erfasst (siehe Liste unten unter **A2**).
 - Warnungsbild erneut verifiziert (unverändert 5 Deprecation-Warnungen zu `SwigPyPacked`, `SwigPyObject`, `swigvarlink`).
 
+
+## Session-Update 2026-05-21 (A6-Teilfortschritt: 300s-Batching durchgeführt)
+
+- Teilbatch ohne `tests/test_image_composite_converter.py` reproduzierbar grün innerhalb des 300s-Limits:
+  - `PYENV_VERSION=3.10.20 timeout 300 python -m pytest -q tests/detailtests tests/test_image_composite_converter_element_decomposition.py tests/test_image_composite_converter_naming.py tests/test_weak_family_pipeline.py tests/test_shape_detection_vertical_lines.py tests/test_conversion_regression_smoke.py tests/test_shape_detection_classification.py tests/test_retry_failed_image_conversions.py tests/test_shape_detection_colors.py tests/test_generate_form_code_inventory.py tests/test_shape_detection_eval.py tests/test_satisfactory_regression_battery.py`
+  - Ergebnis: `521 passed, 1 skipped, 5 warnings`, Exit `0`, Laufzeit `236s`.
+- Isolierter Batch für `tests/test_image_composite_converter.py` weiterhin nicht innerhalb des 300s-Limits abschließbar:
+  - `PYENV_VERSION=3.10.20 timeout 300 python -m pytest -q tests/test_image_composite_converter.py`
+  - Ergebnis: Exit `124` (Timeout bei `300s`), kein finales Summary.
+- Ableitung: Der aktuell langsamste/limitierende Block für A6 ist `tests/test_image_composite_converter.py`; weitere Repros sollten auf NodeID-/Marker-Ebene in genau dieser Datei aufgesplittet werden.
+
 ## Ziel
 
 Nur **wirklich grüne** Tests sollen als stabile Kern-Testliste gelten.  
@@ -90,7 +101,7 @@ Alles andere (skip/deselect/xfail/warnings) wird hier als explizite Aufgabe gef�
 - [ ] Nach Stabilisierung: Timeout-Marker entfernen und Test zurück in `core-green` überführen.
 
 ### A6 – `pytest -q` in 300s wieder deterministisch zum Endsummary bringen
-- [ ] Timeout-Lauf vom 2026-05-21 (`timeout 300 python -m pytest -q`, Exit `124`) in Teilbatches aufspalten und den langsamsten Block identifizieren.
+- [x] Timeout-Lauf vom 2026-05-21 (`timeout 300 python -m pytest -q`, Exit `124`) in Teilbatches aufspalten und den langsamsten Block identifizieren. (2026-05-21: Batch-Split durchgeführt; limitierender Block ist `tests/test_image_composite_converter.py`, Einzelbatch endet weiterhin mit Exit `124` bei 300s.)
 - [ ] Für den langsamsten Block einen reproduzierbaren Einzel-Repro (NodeID oder Marker-Subset) dokumentieren.
 - [ ] Akzeptanz: Ein erneuter Suite-Lauf mit identischem 300s-Limit endet mit finalem `pytest`-Summary statt Exit `124`.
 
