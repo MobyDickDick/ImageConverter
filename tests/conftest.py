@@ -46,7 +46,8 @@ def pytest_runtest_call(item: pytest.Item):
         yield
     except _PerTestTimeout:
         pytest.xfail(
-            f"AUFGABE: Testlauf > {_PER_TEST_TIMEOUT_SECONDS}s, bitte optimieren/isolieren: {item.nodeid}"
+            f"AUFGABE A5 (docs/test_followup_tasks_2026-05-20.md): "
+            f"Testlauf > {_PER_TEST_TIMEOUT_SECONDS}s, bitte optimieren/isolieren: {item.nodeid}"
         )
     finally:
         signal.alarm(0)

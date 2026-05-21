@@ -44,6 +44,13 @@ Alles andere (skip/deselect/xfail/warnings) wird hier als explizite Aufgabe gef�
   - [ ] temporär als bekannte, explizit erlaubte Warnungen dokumentieren.
 - [ ] Mittelfristig CI-Profil mit `-W error` für `core-green` vorbereiten.
 
+
+### A5 – Laufzeitüberschreitungen strikt als Follow-up-Aufgaben behandeln
+- [ ] Alle Testfälle mit Laufzeitüberschreitung (`_PerTestTimeout`) täglich aus dem `pytest`-Output extrahieren und in einer eigenen Liste erfassen (NodeID + Dauergrenze).
+- [ ] Für jeden Timeout-Fall genau **eine** Folgeaufgabe mit Akzeptanzkriterium anlegen (z. B. „<30s in Python 3.10.20“).
+- [ ] Timeout-Fälle dürfen nicht als „nur Umgebung langsam“ verbucht werden; sie gelten bis zur Auflösung als offene Qualitätsaufgabe.
+- [ ] Nach Stabilisierung: Timeout-Marker entfernen und Test zurück in `core-green` überführen.
+
 ## Definition „wirklich grün“
 
 Ein Test zählt nur als **wirklich grün**, wenn er:

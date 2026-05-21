@@ -91,6 +91,7 @@ def test_satisfactory_baseline_has_pairs() -> None:
         assert (BASE / "svgs" / f"{variant}.svg").exists()
 
 
+@pytest.mark.blocking_conversion
 def test_satisfactory_baseline_reconversion_smoke(tmp_path: Path) -> None:
     if not BASE.exists():
         _prepare_mini_baseline(BASE)
@@ -118,6 +119,7 @@ def test_satisfactory_baseline_reconversion_smoke(tmp_path: Path) -> None:
     assert produced, f"No SVG output produced for family {family}."
 
 
+@pytest.mark.blocking_conversion
 def test_satisfactory_successful_variants_reconversion_keeps_or_improves_quality(tmp_path: Path) -> None:
     if not BASE.exists():
         _prepare_mini_baseline(BASE, limit=5)
