@@ -64,11 +64,11 @@ Alles andere (skip/deselect/xfail/warnings) wird hier als explizite Aufgabe gef�
   19. `tests/test_satisfactory_regression_battery.py::test_satisfactory_baseline_reconversion_smoke`
   20. `tests/test_satisfactory_regression_battery.py::test_satisfactory_successful_variants_reconversion_keeps_or_improves_quality`
 
-- [ ] In `pytest.ini`/Runner-Skripten feste Profile definieren:
-  - [ ] `core-green` (nur harte grüne Tests),
-  - [ ] `extended` (inkl. langsam/optional),
-  - [ ] `research` (experimentell).
-- [ ] Sicherstellen, dass `core-green` keine impliziten Deselections mehr enthält.
+- [x] In `pytest.ini`/Runner-Skripten feste Profile definieren: (2026-05-21: Profil-Runner `tools/run_pytest_profile.py` ergänzt; Profile `core-green`, `extended`, `research` implementiert.)
+  - [x] `core-green` (nur harte grüne Tests),
+  - [x] `extended` (inkl. langsam/optional),
+  - [x] `research` (experimentell).
+- [x] Sicherstellen, dass `core-green` keine impliziten Deselections mehr enthält. (2026-05-21: globales `pytest.ini`-`addopts` entfernt; Markerfilter werden nur noch explizit über den Profil-Runner gesetzt.)
 
 ### A3 – XFail-Tests in echte Qualitäts-Tasks auflösen
 - [ ] Alle 3 `xfailed` Tests inkl. Grund dokumentieren.
