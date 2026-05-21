@@ -186,7 +186,20 @@ def _writeFailedEmbeddedSvgArtifact(
             os.unlink(failed_svg_path)
         except OSError:
             pass
-    return None
+    try:
+        svg_content = render_embedded_raster_svg_fn(image_path)
+    except Exception as exc:  # noqa: BLE001 - failure artifact should not break batch flow.
+        print_fn(
+            f"[WARN] {filename}: Konnte Failed-Embedded-SVG nicht erzeugen ({type(exc).__name__}: {exc})"
+        )
+        return None
+    try:
+        with open(failed_svg_path, "w", encoding="utf-8") as svg_file:
+            svg_file.write(svg_content)
+    except OSError as exc:
+        print_fn(f"[WARN] {filename}: Konnte Failed-SVG nicht schreiben ({type(exc).__name__}: {exc})")
+        return None
+    return failed_svg_path
 
 
 def _svgContainsEmbeddedRasterArtifact(svg_path: str) -> bool:
@@ -595,6 +608,11 @@ def convertOneImpl(
         _emit_anchor_variant_event("variant_done", status="raster_embedded_svg")
         return None, True
     if _svgIsTrivialFallbackArtifact(svg_path):
+        svg_path = _normalizeSvgToFailedPrefixIfRasterArtifact(
+            svg_out_dir=svg_out_dir,
+            base_name=base,
+            svg_path=svg_path,
+        )
         append_batch_failure_fn(
             {
                 "filename": filename,
@@ -605,8 +623,6 @@ def convertOneImpl(
                 "failed_svg": os.path.basename(svg_path),
             }
         )
-        if os.path.exists(svg_path):
-            os.unlink(svg_path)
         _ensureOutputArtifacts(svg_path=svg_path, diff_path=diff_path, create_svg_fallback=False, create_diff_fallback=False)
         print_fn(f"[WARN] {filename}: Triviale 1x1-Placeholder-SVG erkannt, als fehlgeschlagen markiert.")
         _emit_anchor_variant_event("variant_done", status="poor_conversion_placeholder_svg")

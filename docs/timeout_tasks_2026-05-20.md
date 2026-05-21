@@ -3,9 +3,9 @@
 Quelle: automatische Auswertung von xfail-Markierungen + 30s-Timeout-Policy.
 
 ## Kandidaten (Priorität hoch)
-- [ ] `test_convert_one_impl_semantic_mismatch_is_reported_as_failure` in `tests/detailtests/test_conversion_execution_helpers.py` — TODO: extract and fix Failed_<name>.svg emission for semantic_mismatch path
-- [ ] `test_convert_one_impl_unknown_status_is_recorded_as_failure` in `tests/detailtests/test_conversion_execution_helpers.py` — TODO: extract and fix Failed_<name>.svg emission for non-success statuses
-- [ ] `test_convert_one_impl_trivial_placeholder_svg_is_marked_failed` in `tests/detailtests/test_conversion_execution_helpers.py` — TODO: extract and fix Failed_<name>.svg emission when placeholder detection fails
+- [x] `test_convert_one_impl_semantic_mismatch_is_reported_as_failure` in `tests/detailtests/test_conversion_execution_helpers.py` — erledigt am 2026-05-21 (Failed_<name>.svg wird geschrieben)
+- [x] `test_convert_one_impl_unknown_status_is_recorded_as_failure` in `tests/detailtests/test_conversion_execution_helpers.py` — erledigt am 2026-05-21 (Failed_<name>.svg wird geschrieben)
+- [x] `test_convert_one_impl_trivial_placeholder_svg_is_marked_failed` in `tests/detailtests/test_conversion_execution_helpers.py` — erledigt am 2026-05-21 (Placeholder-SVG wird als Failed_<name>.svg markiert)
 - [ ] `test_ac08_regression_smoke_run_creates_expected_outputs` in `tests/test_conversion_regression_smoke.py` — AUFGABE: stabilisiere AC0800 smoke output (expected SVG/metrics drift in current env)
 
 ## Kandidat aus Laufzeitgrenze (30s)
