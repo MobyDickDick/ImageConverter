@@ -2546,3 +2546,10 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 - **Fortschritt (Dokumentation):** Der Lauf ist in `docs/next_aufgabe_2026-05-21_runHL.md` dokumentiert.
 - **Blocker:** Der bekannte N1/N2-Vollbereichsblocker (Timeout/Laufzeit) bleibt unverändert bestehen.
 - **Nächster sinnvoller Schritt:** Das nächste Arbeitspaket wieder strikt als 3er-Kombination fortsetzen (T5/N5 als Primäraufgabe + 1 Plan-B-Probe + nächster CSV-Eintrag `AC0030_L`).
+
+### Fortschritt vs. Blocker (Session 2026-05-21, nächste dokumentierte Aufgabe Run HM)
+
+- **Fortschritt (nächste dokumentierte Aufgabe):** Der priorisierte T5-Kurzlauf (`test_ac08_semantic_anchor_variants_ac0812_only`) wurde erneut in Python `3.10.20` ausgeführt; Ergebnis `1 passed, 5 warnings`, Exit `0`; Log: `artifacts/converted_images/reports/T5_ac0812_timeoutpath_probe_2026-05-21_runHM.log`.
+- **Fortschritt (Dokumentation):** Der Lauf ist in `docs/next_aufgabe_2026-05-21_runHM.md` dokumentiert.
+- **Blocker:** Der bekannte N1/N2-Vollbereichsblocker (Timeout/Laufzeit) bleibt unverändert bestehen.
+- **Nächster sinnvoller Schritt:** Das nächste Arbeitspaket wieder strikt als 3er-Kombination fortsetzen (T5/N5 als Primäraufgabe + 1 Plan-B-Probe + nächster CSV-Eintrag `AC0030_L`).
