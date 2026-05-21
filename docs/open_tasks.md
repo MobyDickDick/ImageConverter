@@ -2103,6 +2103,13 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 - **Fortschritt (gekoppelte Plan-B-Aufgabe):** Gekoppelte PB-Syntheseprobe erfolgreich ausgeführt: `PYTHONPATH=. python3 tools/plan_b_synthetic_probe.py "Circle with horizontal line" --variant AC0837_L` (Log: `artifacts/converted_images/reports/plan_b_synthetic_probe_2026-05-15_run12.log`, Ergebnis `status=ok`, Exit `0`).
 - **Nächster sinnvoller Schritt:** Für A7 einen Mini-Repro nur auf `AC0840` vorbereiten (Input-/Semantikpfad prüfen) und danach `B-AC08-01` erneut fahren oder auf `B-AC08-02` rotieren.
 
+### Fortschritt vs. Blocker (Session 2026-05-21, A3/A4 B-AC08-02 + Run01)
+
+- **Fortschritt (Primäraufgabe A3 + A4):** Der nächste definierte Block `B-AC08-02` wurde als Standard-Run mit fixer Toolchain/Timeout und deterministischer Reihenfolge ausgeführt: `PYENV_VERSION=3.10.20 timeout 240 python -m src.imageCompositeConverter artifacts/images_to_convert --descriptions-path artifacts/images_to_convert/Finale_Wurzelformen_V3.xml --output-dir artifacts/converted_images --start AC0841 --end AC0850 --deterministic-order` (Log: `artifacts/converted_images/reports/B-AC08-02_standard_2026-05-21_run01.log`, Exit `0`).
+- **Review (A4):** Der Block ist aktuell **instabil**: reproduzierbare `conversion_failed`-Warnungen u. a. für `AC0841_[L|M|S]`, `AC0843_[L|M|S]`, `AC0844_[L|M|S]` und `AC0850_[L|M|S]`; der Block bleibt damit in `Review/Blocked` bis zur Ursachenklärung.
+- **A6-Status:** Abschlusskriterium `DONE` noch **nicht** erreicht, da trotz vorhandener Logs und passender ID-Abdeckung ein instabiler Qualitätszustand vorliegt.
+- **Nächster sinnvoller Schritt:** A7-Mini-Repro auf den fehlerhäufigen Teilpfad (`AC0841`/`AC0843`/`AC0850`) ansetzen oder parallel den nächsten Block als Vergleichslauf starten.
+
 ### Fortschritt vs. Blocker (Session 2026-05-15, A3/A4 B-AC08-01 Re-Run + PB-Syntheseprobe Run 14)
 
 - **Fortschritt (Primäraufgabe A3):** Der erste definierte Block `B-AC08-01` wurde erneut als Standard-Run mit fixer Toolchain/Timeout ausgeführt: `PYENV_VERSION=3.10.20 timeout 240 python -m src.imageCompositeConverter artifacts/images_to_convert --descriptions-path artifacts/images_to_convert/Finale_Wurzelformen_V3.xml --output-dir artifacts/converted_images --start AC0800 --end AC0840 --deterministic-order` (Log: `artifacts/converted_images/reports/B-AC08-01_standard_2026-05-15_run02.log`, Exit `0`).
