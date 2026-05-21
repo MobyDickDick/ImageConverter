@@ -37,7 +37,7 @@ Alles andere (skip/deselect/xfail/warnings) wird hier als explizite Aufgabe gef�
 - [x] Alle 4 `skipped` Tests identifizieren und je Test entscheiden: (2026-05-21: Skip-Kandidatenquellen eingegrenzt auf AC0800-Smoke-Placeholder, optionale Baseline-Fixture-Pfade in `tests/test_satisfactory_regression_battery.py` und Import-/Fixture-abhängige Shape/AC08-Tests; Entscheidungsdokumentation gestartet).
   - [ ] Entweder Fixture/Umgebung in CI bereitstellen (damit Test wieder grün läuft),
   - [ ] oder Test dauerhaft in eine klar benannte optional-suite verschieben (`@pytest.mark.optional_fixture`).
-- [ ] Für jeden Skip-Grund eine reproduzierbare Anleitung in `docs/` ergänzen.
+- [x] Für jeden Skip-Grund eine reproduzierbare Anleitung in `docs/` ergänzen. (2026-05-21: Leitfaden unter `docs/skip_repro_guide_2026-05-21.md` ergänzt.)
 
 ### A2 – Deselected-Tests in explizite Testprofile überführen
 - [x] Die 18 `deselected` Tests namentlich erfassen. (2026-05-21 aktualisiert: aktueller Collect-only-Stand zeigt 20 `blocking_conversion`-Tests; Liste unten ergänzt.)
@@ -84,8 +84,8 @@ Alles andere (skip/deselect/xfail/warnings) wird hier als explizite Aufgabe gef�
 
 
 ### A5 – Laufzeitüberschreitungen strikt als Follow-up-Aufgaben behandeln
-- [ ] Alle Testfälle mit Laufzeitüberschreitung (`_PerTestTimeout`) täglich aus dem `pytest`-Output extrahieren und in einer eigenen Liste erfassen (NodeID + Dauergrenze).
-- [ ] Für jeden Timeout-Fall genau **eine** Folgeaufgabe mit Akzeptanzkriterium anlegen (z. B. „<30s in Python 3.10.20“).
+- [x] Alle Testfälle mit Laufzeitüberschreitung (`_PerTestTimeout`) täglich aus dem `pytest`-Output extrahieren und in einer eigenen Liste erfassen (NodeID + Dauergrenze). (2026-05-21: Inventar unter `docs/per_test_timeout_inventory_2026-05-21.md` angelegt.)
+- [x] Für jeden Timeout-Fall genau **eine** Folgeaufgabe mit Akzeptanzkriterium anlegen (z. B. „<30s in Python 3.10.20“). (2026-05-21: 1:1-Zuordnung + Akzeptanzkriterien in `docs/per_test_timeout_inventory_2026-05-21.md` dokumentiert.)
 - [ ] Timeout-Fälle dürfen nicht als „nur Umgebung langsam“ verbucht werden; sie gelten bis zur Auflösung als offene Qualitätsaufgabe.
 - [ ] Nach Stabilisierung: Timeout-Marker entfernen und Test zurück in `core-green` überführen.
 
