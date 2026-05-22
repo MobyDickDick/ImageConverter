@@ -1,10 +1,6 @@
-[INFO] Schreibe Konsolen-Output nach: /workspace/ImageConverter/imageCompositeConverter.local.log
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
+Namen von: Namen bis: [INFO] Verwende Teilstring-Filter 'AC0' für die Auswahl der Bilder.
+[WARN] AC0402_2_S.jpg: Batchlauf setzt nach Fehler fort (RuntimeError: Required SVG renderer dependency is missing: fitz (PyMuPDF). Install PyMuPDF before running the conversion pipeline.)
+[INFO] Übersichts-Kacheln erzeugt: diff=C:\Users\marku\myCloud\imageConverter\artifacts\converted_images\reports\overview_diff_tiles.png, svg=C:\Users\marku\myCloud\imageConverter\artifacts\converted_images\reports\overview_svg_tiles.png
 
---- Verarbeite AC0025.jpg ---
-Bildbeschreibung: Wie AC0024: AC0023.jpg vertikal gespiegelt. Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-[WARN] AC0025.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
-[INFO] Übersichts-Kacheln erzeugt: svg=artifacts/converted_images/reports/reports/overview_svg_tiles.png
-
-Abgeschlossen! Ausgaben unter: artifacts/converted_images/reports
+Abgeschlossen! Ausgaben unter: C:\Users\marku\myCloud\imageConverter\artifacts\converted_images

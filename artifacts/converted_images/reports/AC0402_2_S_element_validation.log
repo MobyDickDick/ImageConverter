@@ -1,2 +1,6 @@
 run-meta: run_seed=60729046 pass_seed_offset=0 nonce_ns=1779038024042708900
 status=non_composite_pure_svg_placeholder
+status=batch_error
+filename=AC0402_2_S.jpg
+reason=RuntimeError
+details=Required SVG renderer dependency is missing: fitz (PyMuPDF). Install PyMuPDF before running the conversion pipeline.
