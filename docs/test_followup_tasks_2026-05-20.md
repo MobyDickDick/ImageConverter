@@ -29,6 +29,15 @@ Basis: letzter vollständiger grüner Suite-Lauf mit Python 3.10 (`pytest -q`).
   - Ergebnis: Exit `124` (Timeout bei `300s`), kein finales Summary.
 - Ableitung: Der aktuell langsamste/limitierende Block für A6 ist `tests/test_image_composite_converter.py`; weitere Repros sollten auf NodeID-/Marker-Ebene in genau dieser Datei aufgesplittet werden.
 
+
+## Session-Update 2026-05-22 (A3-Stabilitäts-Repro)
+
+- Repro-Lauf für den zuletzt temporär grünen A3-Kandidaten erneut ausgeführt:
+  - `PYENV_VERSION=3.10.20 python -m pytest -q tests/test_satisfactory_regression_battery.py::test_satisfactory_successful_variants_reconversion_keeps_or_improves_quality`
+  - Ergebnis: `1 xfailed, 5 warnings`, Exit `0`, Laufzeit `186.69s`.
+- Log-Artefakt: `artifacts/converted_images/reports/TB_A3_xfail_probe_2026-05-22_runHY.log`.
+- Einordnung: A3 bleibt offen; der Test ist aktuell nicht stabil reproduzierbar grün.
+
 ## Ziel
 
 Nur **wirklich grüne** Tests sollen als stabile Kern-Testliste gelten.  
