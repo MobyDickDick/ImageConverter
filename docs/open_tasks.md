@@ -2556,3 +2556,10 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 - **Fortschritt (Dokumentation):** Der Lauf ist in `docs/next_aufgabe_2026-05-21_runHM.md` dokumentiert.
 - **Blocker:** Der bekannte N1/N2-Vollbereichsblocker (Timeout/Laufzeit) bleibt unverändert bestehen.
 - **Nächster sinnvoller Schritt:** Das nächste Arbeitspaket wieder strikt als 3er-Kombination fortsetzen (T5/N5 als Primäraufgabe + 1 Plan-B-Probe + nächster CSV-Eintrag `AC0030_L`).
+
+### Fortschritt vs. Blocker (Session 2026-05-22, nächste dokumentierte Aufgabe Run HU)
+
+- **Fortschritt (nächste dokumentierte Aufgabe):** Der priorisierte Lauf `tests/test_satisfactory_regression_battery.py::test_satisfactory_successful_variants_reconversion_keeps_or_improves_quality` wurde in Python `3.10.20` erneut ausgeführt; Ergebnis `1 xfailed, 5 warnings`, Exit `0`, Laufzeit `104.61s`.
+- **Fortschritt (Dokumentation):** Der Lauf ist in `docs/next_aufgabe_2026-05-22_runHU.md` dokumentiert.
+- **Blocker:** Die Aufgabe bleibt inhaltlich offen, da der Test weiterhin als erwarteter Fehler (`xfail`) markiert ist.
+- **Nächster sinnvoller Schritt:** Den zugrundeliegenden XFail-Fall aus `docs/test_followup_tasks_2026-05-20.md` gezielt entblocken oder in ein stabiles, kleineres Repro aufteilen.
