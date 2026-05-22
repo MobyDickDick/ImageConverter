@@ -2571,3 +2571,10 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 - **Fortschritt (Dokumentation):** Der Lauf ist in `docs/next_aufgabe_2026-05-22_runHV.md` dokumentiert.
 - **Blocker:** Die Aufgabe bleibt inhaltlich offen, da der Test weiterhin als erwarteter Fehler (`xfail`) markiert ist.
 - **Nächster sinnvoller Schritt:** A3 gezielt fortführen: die im XFail-Text berichtete Qualitätsdrift in ein kleineres Repro je Variante aufteilen und Akzeptanzkriterium für Rückführung auf normalen Assert definieren.
+
+### Fortschritt vs. Blocker (Session 2026-05-22, nächste dokumentierte Aufgabe Run HW)
+
+- **Fortschritt (nächste dokumentierte Aufgabe):** Der priorisierte Lauf `tests/test_satisfactory_regression_battery.py::test_satisfactory_successful_variants_reconversion_keeps_or_improves_quality` wurde in Python `3.10.20` erneut ausgeführt; Ergebnis `1 xfailed, 5 warnings`, Exit `0`, Laufzeit `101.01s`.
+- **Fortschritt (Dokumentation):** Der Lauf ist in `docs/next_aufgabe_2026-05-22_runHW.md` dokumentiert.
+- **Blocker:** Die Aufgabe bleibt inhaltlich offen, da der Test weiterhin als erwarteter Fehler (`xfail`) markiert ist.
+- **Nächster sinnvoller Schritt:** A3 weiter eingrenzen: xfail-Ursache pro betroffener Variante in kleinere Repros aufspalten und Akzeptanzkriterium für Rückführung auf normalen Assert definieren.
