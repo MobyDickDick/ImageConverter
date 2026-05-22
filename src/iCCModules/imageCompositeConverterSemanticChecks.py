@@ -410,8 +410,13 @@ def validateSemanticDescriptionAlignmentImpl(
         "text": bool(local_support["text"] or (structural.get("text", False) and not plain_circle_badge)),
     }
     shape_detection_observed = semantic_validation_helpers.observedSemanticPresenceFromShapeDetectionImpl(img_orig)
-    for key in ("circle", "stem", "arm", "text"):
+    for key in ("circle", "text"):
         observed[key] = bool(observed.get(key, False) or shape_detection_observed.get(key, False))
+    for key in ("stem", "arm"):
+        observed[key] = bool(
+            observed.get(key, False)
+            or (expected.get(key, False) and shape_detection_observed.get(key, False))
+        )
 
     issues = semantic_presence_mismatches_fn(expected, observed)
 
