@@ -10,6 +10,10 @@ focused on the actual project scope.
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
+## Testhygiene – nur echte Grün-Tests in der Kernliste (neu 2026-05-20)
+
+- [x] **TH1:** Nicht-grüne Testergebnisse als Aufgaben pflegen und abbauen (Skips, Deselections, XFails, Warnings), siehe `docs/test_followup_tasks_2026-05-20.md`. (2026-05-21: Follow-up-Liste um aktuellen Timeout-/Nicht-Grün-Snapshot aus `pytest -q` ergänzt, inkl. neuer Aufgabe A6 und Session-Artefakt unter `docs/test_followup_tasks_2026-05-20.md`.)
+
 ## Neue Vision-Roadmap: semantische SVG-Rekonstruktion (abgeglichen am 2026-05-10)
 
 Zielbild: Nicht-binäre Vektorisierung über echte SVG-Primitive mit semantischen Beziehungen und iterativer Nachzeichnung.
@@ -631,8 +635,16 @@ Deadlock-/Stagnationsschleifen.
       - Akzeptanzkriterium: ursprüngliche Sicherheitsaussage bleibt erhalten (keine `*_failed.svg` für `AC0811_L`/`AC0812_M`), aber Laufzeit unter T6.1-Ziel.
       - 2026-05-06: Neuer Kombi-Smoke-Test `test_ac08_semantic_anchor_variants_convert_without_failed_svg` ergänzt (gemeinsamer Lauf `AC0811_L` + `AC0812_M`, `iterations=2`, `deterministic_order=True`). Isolierter Repro in dieser Umgebung aktuell `skipped` wegen fehlender `numpy/cv2/fitz`-Bindings; Laufzeitziel bleibt bis zur Ausführung in voll ausgestatteter Runtime offen.
       - 2026-05-16 (Run EQ): Timeout-gesicherter Isolationslauf erneut durchgeführt (`timeout 240 python -m pytest tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_convert_without_failed_svg -q`), Ergebnis weiterhin `1 skipped` bei Exit `0` in `7.93s`; Log: `artifacts/converted_images/reports/T6_1c_smoke_2026-05-16_runEQ.log`.
+      - 2026-05-21 (Run HA): Timeout-gesicherter Isolationslauf in `PYENV_VERSION=3.10.20` erneut ausgeführt (`timeout 240 python -m pytest tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_convert_without_failed_svg -q`), Ergebnis weiterhin `1 skipped` bei Exit `0` in `4.62s`; Log: `artifacts/converted_images/reports/T6_1c_smoke_2026-05-21_runHA.log`.
+      - 2026-05-21 (Run HB): **Nächstes Arbeitspaket** ausgeführt: 1) nächste dokumentierte Aufgabe `T6.1.c` erneut timeout-gesichert isoliert (`PYENV_VERSION=3.10.20 timeout 240 python -m pytest tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_convert_without_failed_svg -q`) mit Exit `0`, Ergebnis weiterhin `1 skipped` in `3.44s`, Log `artifacts/converted_images/reports/T6_1c_smoke_2026-05-21_runHB.log`; 2) gekoppelte Plan-B-Aufgabe `T6-PB` als Kurzrepro erneut grün (`PYENV_VERSION=3.10.20 python -m pytest -q tests/detailtests/test_global_search_optimization_helpers.py::test_global_search_skips_deterministic_track_after_strong_stochastic_gain`) mit Exit `0`, Ergebnis `1 passed in 0.14s`, Log `artifacts/converted_images/reports/t6_planb_singletest_2026-05-21_runHB.log`; 3) nächstes Bild aus `.../not_satisfactory_converted_images.csv` nach `AC0020_S` als `AC0021` über Plan-B-Syntheseprobe ausgeführt (`PYENV_VERSION=3.10.20 python -m tools.plan_b_synthetic_probe ... --variant AC0021 --output-dir artifacts/converted_images/reports`) mit Exit `0` (`status=ok`), Log `artifacts/converted_images/reports/AC0021_planb_synthetic_2026-05-21_runHB.log`.
+      - 2026-05-21 (Run HC): **Nächstes Arbeitspaket** erneut ausgeführt: 1) nächste dokumentierte Aufgabe `T6.1.c` timeout-gesichert isoliert (`PYENV_VERSION=3.10.20 timeout 240 python -m pytest tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_convert_without_failed_svg -q`) mit Exit `0`, Ergebnis weiterhin `1 skipped` in `3.32s`, Log `artifacts/converted_images/reports/T6_1c_smoke_2026-05-21_runHC.log`; 2) gekoppelte Plan-B-Aufgabe `T6-PB` als Kurzrepro erneut grün (`PYENV_VERSION=3.10.20 python -m pytest -q tests/detailtests/test_global_search_optimization_helpers.py::test_global_search_skips_deterministic_track_after_strong_stochastic_gain`) mit Exit `0`, Ergebnis `1 passed in 0.13s`, Log `artifacts/converted_images/reports/t6_planb_singletest_2026-05-21_runHC.log`; 3) nächstes Bild aus `.../not_satisfactory_converted_images.csv` nach `AC0021` als `AC0022` über Plan-B-Syntheseprobe ausgeführt (`PYENV_VERSION=3.10.20 python -m tools.plan_b_synthetic_probe ... --variant AC0022 --output-dir artifacts/converted_images/reports`) mit Exit `0` (`status=ok`), Log `artifacts/converted_images/reports/AC0022_planb_synthetic_2026-05-21_runHC.log`.
+      - 2026-05-22 (Run HI): **Nächstes Arbeitspaket** erneut ausgeführt: 1) nächste dokumentierte Aufgabe `T6.1.c` timeout-gesichert isoliert (`PYENV_VERSION=3.10.20 timeout 240 python -m pytest tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_convert_without_failed_svg -q`) mit Exit `0`, Ergebnis weiterhin `1 skipped` in `3.63s`, Log `artifacts/converted_images/reports/T6_1c_smoke_2026-05-22_runHI.log`; 2) gekoppelte Plan-B-Aufgabe `T6-PB` als Kurzrepro erneut grün (`PYENV_VERSION=3.10.20 python -m pytest -q tests/detailtests/test_global_search_optimization_helpers.py::test_global_search_skips_deterministic_track_after_strong_stochastic_gain`) mit Exit `0`, Ergebnis `1 passed in 0.15s`, Log `artifacts/converted_images/reports/t6_planb_singletest_2026-05-22_runHI.log`; 3) nächstes Bild aus `.../not_satisfactory_converted_images.csv` nach `AC0022` als `AC0023` über Plan-B-Syntheseprobe ausgeführt (`PYENV_VERSION=3.10.20 python -m tools.plan_b_synthetic_probe ... --variant AC0023 --output-dir artifacts/converted_images/reports`) mit Exit `0` (`status=ok`), Log `artifacts/converted_images/reports/AC0023_planb_synthetic_2026-05-22_runHI.log`.
   - [ ] T6.2 (sehr hohe Priorität): `tests/test_image_composite_converter.py::test_ac08_regression_suite_preserves_previously_good_variants[AC0837_L-semantic_ok]` reduzieren (aktuell `198.28s`).
     - Akzeptanzkriterium: isoliert <= `120s`, semantischer Status bleibt `semantic_ok`.
+    - 2026-05-21 (Run HM): Isolationslauf mit fixer Timeout-Grenze ausgeführt (`PYENV_VERSION=3.10.20 PYTHONPATH=. timeout 70 pyenv exec python -u -m pytest tests/test_image_composite_converter.py::test_ac08_regression_suite_preserves_previously_good_variants[AC0837_L-semantic_ok] -q`); Ergebnis: Timeout mit Exit `124`, Log `artifacts/converted_images/reports/T6_2_ac0837L_isolation_2026-05-21_runHM.log`.
+    - 2026-05-21 (Run HP): Wiederholung mit identischem Timeout-Guard ausgeführt (`PYENV_VERSION=3.10.20 PYTHONPATH=. timeout 70 pyenv exec python -u -m pytest tests/test_image_composite_converter.py::test_ac08_regression_suite_preserves_previously_good_variants[AC0837_L-semantic_ok] -q`); Ergebnis erneut Timeout mit Exit `124`, Log `artifacts/converted_images/reports/T6_2_ac0837L_isolation_2026-05-21_runHP.log` (ohne verwertbaren `pytest`-Stdout im Log).
+    - 2026-05-22 (Run HJ): **Nächstes Arbeitspaket** ausgeführt: 1) nächste dokumentierte Aufgabe `T6.2` erneut mit Timeout-Guard isoliert (`PYENV_VERSION=3.10.20 PYTHONPATH=. timeout 70 pyenv exec python -u -m pytest tests/test_image_composite_converter.py::test_ac08_regression_suite_preserves_previously_good_variants[AC0837_L-semantic_ok] -q`) mit erneutem Timeout/Abbruch (kein verwertbarer `pytest`-Stdout), Log `artifacts/converted_images/reports/T6_2_ac0837L_isolation_2026-05-22_runHJ.log`; 2) gekoppelte Plan-B-Aufgabe `T6-PB` als Kurzrepro erneut grün (`PYENV_VERSION=3.10.20 python -m pytest -q tests/detailtests/test_global_search_optimization_helpers.py::test_global_search_skips_deterministic_track_after_strong_stochastic_gain`) mit Exit `0`, Ergebnis `1 passed in 0.13s`, Log `artifacts/converted_images/reports/t6_planb_singletest_2026-05-22_runHJ.log`; 3) nächstes Bild aus `.../not_satisfactory_converted_images.csv` nach `AC0023` als `AC0024` über Plan-B-Syntheseprobe ausgeführt (`PYENV_VERSION=3.10.20 python -m tools.plan_b_synthetic_probe ... --variant AC0024 --output-dir artifacts/converted_images/reports`) mit Exit `0` (`status=ok`), Log `artifacts/converted_images/reports/AC0024_planb_synthetic_2026-05-22_runHJ.log`.
+    - 2026-05-22 (Run HK): **Nächstes Arbeitspaket** ausgeführt: 1) nächste dokumentierte Aufgabe `T6.2` erneut mit Timeout-Guard isoliert (`PYENV_VERSION=3.10.20 PYTHONPATH=. timeout 70 pyenv exec python -u -m pytest tests/test_image_composite_converter.py::test_ac08_regression_suite_preserves_previously_good_variants[AC0837_L-semantic_ok] -q`) mit erneutem Timeout/Abbruch (weiterhin kein verwertbarer `pytest`-Stdout), Log `artifacts/converted_images/reports/T6_2_ac0837L_isolation_2026-05-22_runHK.log`; 2) gekoppelte Plan-B-Aufgabe `T6-PB` als Kurzrepro erneut grün (`PYENV_VERSION=3.10.20 python -m pytest -q tests/detailtests/test_global_search_optimization_helpers.py::test_global_search_skips_deterministic_track_after_strong_stochastic_gain`) mit Exit `0`, Ergebnis `1 passed in 0.14s`, Log `artifacts/converted_images/reports/t6_planb_singletest_2026-05-22_runHK.log`; 3) nächstes Bild aus `.../not_satisfactory_converted_images.csv` nach `AC0024` als `AC0025` über Plan-B-Syntheseprobe ausgeführt (`PYENV_VERSION=3.10.20 python -m tools.plan_b_synthetic_probe ... --variant AC0025 --output-dir artifacts/converted_images/reports`) mit Exit `0` (`status=ok`), Log `artifacts/converted_images/reports/AC0025_planb_synthetic_2026-05-22_runHK.log`.
   - [ ] T6.3 (sehr hohe Priorität): `tests/test_image_composite_converter.py::test_make_badge_params_keeps_ac0838_m_circle_near_full_width_for_voc_layout` reduzieren (aktuell `173.27s`).
     - Akzeptanzkriterium: isoliert < `90s`, Assertions unverändert grün.
   - [ ] T6.4 (sehr hohe Priorität): `tests/test_image_composite_converter.py::test_ac08_regression_suite_preserves_previously_good_variants[AC0820_L-semantic_ok]` reduzieren (aktuell `168.27s`).
@@ -2099,6 +2111,13 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 - **Fortschritt (gekoppelte Plan-B-Aufgabe):** Gekoppelte PB-Syntheseprobe erfolgreich ausgeführt: `PYTHONPATH=. python3 tools/plan_b_synthetic_probe.py "Circle with horizontal line" --variant AC0837_L` (Log: `artifacts/converted_images/reports/plan_b_synthetic_probe_2026-05-15_run12.log`, Ergebnis `status=ok`, Exit `0`).
 - **Nächster sinnvoller Schritt:** Für A7 einen Mini-Repro nur auf `AC0840` vorbereiten (Input-/Semantikpfad prüfen) und danach `B-AC08-01` erneut fahren oder auf `B-AC08-02` rotieren.
 
+### Fortschritt vs. Blocker (Session 2026-05-21, A3/A4 B-AC08-02 + Run01)
+
+- **Fortschritt (Primäraufgabe A3 + A4):** Der nächste definierte Block `B-AC08-02` wurde als Standard-Run mit fixer Toolchain/Timeout und deterministischer Reihenfolge ausgeführt: `PYENV_VERSION=3.10.20 timeout 240 python -m src.imageCompositeConverter artifacts/images_to_convert --descriptions-path artifacts/images_to_convert/Finale_Wurzelformen_V3.xml --output-dir artifacts/converted_images --start AC0841 --end AC0850 --deterministic-order` (Log: `artifacts/converted_images/reports/B-AC08-02_standard_2026-05-21_run01.log`, Exit `0`).
+- **Review (A4):** Der Block ist aktuell **instabil**: reproduzierbare `conversion_failed`-Warnungen u. a. für `AC0841_[L|M|S]`, `AC0843_[L|M|S]`, `AC0844_[L|M|S]` und `AC0850_[L|M|S]`; der Block bleibt damit in `Review/Blocked` bis zur Ursachenklärung.
+- **A6-Status:** Abschlusskriterium `DONE` noch **nicht** erreicht, da trotz vorhandener Logs und passender ID-Abdeckung ein instabiler Qualitätszustand vorliegt.
+- **Nächster sinnvoller Schritt:** A7-Mini-Repro auf den fehlerhäufigen Teilpfad (`AC0841`/`AC0843`/`AC0850`) ansetzen oder parallel den nächsten Block als Vergleichslauf starten.
+
 ### Fortschritt vs. Blocker (Session 2026-05-15, A3/A4 B-AC08-01 Re-Run + PB-Syntheseprobe Run 14)
 
 - **Fortschritt (Primäraufgabe A3):** Der erste definierte Block `B-AC08-01` wurde erneut als Standard-Run mit fixer Toolchain/Timeout ausgeführt: `PYENV_VERSION=3.10.20 timeout 240 python -m src.imageCompositeConverter artifacts/images_to_convert --descriptions-path artifacts/images_to_convert/Finale_Wurzelformen_V3.xml --output-dir artifacts/converted_images --start AC0800 --end AC0840 --deterministic-order` (Log: `artifacts/converted_images/reports/B-AC08-01_standard_2026-05-15_run02.log`, Exit `0`).
@@ -2455,3 +2474,109 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 - **Fortschritt (Tracking):** `AC0030_L` wurde in `artifacts/converted_images/reports/summaries/not_satisfactory_converted_images.csv` als bearbeitet (`in samples=yes`) markiert.
 - **Blocker:** Der bekannte N1/N2-Vollbereichsblocker (Timeout/Laufzeit) bleibt unverändert bestehen.
 - **Nächster sinnvoller Schritt:** Das nächste Arbeitspaket wieder strikt als 3er-Kombination fortsetzen (T5/N5 als Primäraufgabe + 1 Plan-B-Probe + nächster CSV-Eintrag `AC0030_M`).
+
+## Blockierende Konvertierungen aus Testbatterie (2026-05-17)
+
+- [ ] **TB1 – Stabilisieren/Beheben von `blocking_conversion`-Tests**
+  - Hintergrund: Diese Tests sind aktuell aus der Standard-Testbatterie ausgenommen (`pytest -m "not blocking_conversion"`), damit die reguläre CI-/Session-Testbatterie ohne Timeout/Fehler durchläuft.
+  - Betroffene Tests:
+    - `test_semantic_validation_accepts_circle_supported_by_local_mask`
+    - `test_detect_semantic_primitives_detects_vertical_connector_without_arm`
+    - `test_semantic_validation_accepts_text_supported_by_local_mask`
+    - `test_semantic_validation_ignores_structural_false_positives_for_plain_circle_badge`
+    - `test_make_badge_params_reanchors_ac0811_l_stem_after_template_center_lock`
+    - `test_run_iteration_pipeline_converts_non_composite_as_embedded_svg`
+    - `test_validate_semantic_description_alignment_rejects_non_semantic_cross_shape`
+    - `test_validate_semantic_description_alignment_accepts_ac0813_vertical_connector`
+    - `test_convert_range_writes_svgs_and_diffs_to_dedicated_subfolders`
+  - Ziel: Schrittweise Entblockung und Rückführung in die Standard-Testbatterie.
+
+
+## Strenges Testregime: Nicht-grüne / nicht ausführbare Tests (Snapshot 2026-05-18)
+
+- [ ] **TB1-Sammelaufgabe – `blocking_conversion`-Tests wieder eingrünen**
+  - Definition: Alle aktuell mit `@pytest.mark.blocking_conversion` markierten Tests müssen entweder
+    1) fachlich gefixt und zurück in die Standard-Batterie überführt oder
+    2) mit belastbarer Begründung weiter isoliert und priorisiert abgearbeitet werden.
+  - Aktuell markierte Tests (18):
+    - `test_semantic_validation_accepts_circle_supported_by_local_mask`
+    - `test_detect_semantic_primitives_detects_vertical_connector_without_arm`
+    - `test_semantic_validation_accepts_text_supported_by_local_mask`
+    - `test_semantic_validation_ignores_structural_false_positives_for_plain_circle_badge`
+    - `test_make_badge_params_reanchors_ac0811_l_stem_after_template_center_lock`
+    - `test_run_iteration_pipeline_converts_non_composite_as_embedded_svg`
+    - `test_validate_semantic_description_alignment_rejects_non_semantic_cross_shape`
+    - `test_validate_semantic_description_alignment_accepts_ac0813_vertical_connector`
+    - `test_convert_range_writes_svgs_and_diffs_to_dedicated_subfolders`
+    - `test_circle_error_uses_stable_source_mask_for_radius_candidates`
+    - `test_make_badge_params_keeps_ac0223_m_circle_in_lower_half`
+    - `test_validate_semantic_alignment_accepts_vertical_circle_when_raw_hough_misses`
+    - `test_validate_semantic_alignment_accepts_ac0838_large_top_connector_voc_variant`
+    - `test_make_badge_params_keeps_ac0838_m_circle_near_full_width_for_voc_layout`
+    - `test_validate_semantic_alignment_accepts_merged_co2_blob_for_ac0831_artifact`
+    - `test_convert_range_uses_existing_conversion_rows_as_template_donors`
+    - `test_validate_badge_by_elements_activates_ac08_adaptive_unlocks_on_stagnation`
+    - `test_parse_description_manual_review_clears_default_label_for_unclassified_sia_symbol`
+
+- [ ] **TB2 – Nicht ausführbarer Test (Umgebungsabhängigkeit) wieder aktivieren**
+  - Betroffener Test (aktuell `SKIPPED`): `test_generate_badges_reconverted_svg_contains_text`
+  - Blocker: fehlendes Modul/Tooling `tools.generate_badge_comparison_set` in aktueller Laufumgebung.
+  - Ziel: Umgebung/Abhängigkeit reproduzierbar herstellen oder Test auf robuste lokale Fixture-Variante umstellen.
+
+
+- [ ] **TB3 – Nicht-blocking-Batterie vollständig abschließen (ohne Hänger/Timeout)**
+  - Status 2026-05-18: Der Lauf `pytest tests/test_image_composite_converter.py -m "not blocking_conversion"` lief reproduzierbar bis in den späten Bereich, konnte aber in Session-Läufen nicht immer deterministisch mit Abschlusszeile beendet werden.
+  - Ziel: verbleibende Langläufer im `not blocking_conversion`-Set identifizieren, Laufzeitbudget pro Test absichern und einen vollständigen grünen Durchlauf mit stabiler Abschlussmeldung nachweisen.
+  - Nachweisführung: vollständiges Run-Log mit finaler `passed/failed/skipped`-Zusammenfassung und Exit `0`.
+
+
+### Fortschritt vs. Blocker (Session 2026-05-18, TB3-Striktrun Run HG)
+
+- **Fortschritt:** Die `not blocking_conversion`-Batterie wurde mit stark erhöhtem Timeout (`7200s`) erneut als Vollsuite gestartet und lief reproduzierbar bis in den späten Bereich (`88%+`) ohne frühen fachlichen Abbruch.
+- **Blocker:** In der aktuellen Umgebung bleibt der vollständige stabile Abschluss (`Exit 0` mit finaler Zusammenfassung im selben Lauf) weiterhin nicht konsistent erreichbar; es besteht weiterhin ein Langläufer-/Abschlussproblem im späten Suitenbereich.
+- **Nächster sinnvoller Schritt:** Restbereich der späten Tests in kleinere stabile Subsets schneiden, den verbleibenden Langläufer deterministisch identifizieren und entweder fixen oder als neue TB-Unteraufgabe explizit abspalten.
+
+### Fortschritt vs. Blocker (Session 2026-05-21, nächstes Arbeitspaket Run HI)
+
+- **Fortschritt (Begriffsstandard):** Der Begriff **„nächstes Arbeitspaket“** bleibt verbindlich als 3er-Kombination definiert: (1) nächste dokumentierte Aufgabe, (2) genau eine gekoppelte Plan-B-Aufgabe, (3) nächstes Bild aus `not_satisfactory_converted_images.csv`.
+- **Fortschritt (nächste dokumentierte Aufgabe):** Der priorisierte T5-Kurzlauf (`test_ac08_semantic_anchor_variants_ac0812_only`) wurde erneut in Python `3.10.20` ausgeführt; Ergebnis `1 passed`, Exit `0`; Log: `artifacts/converted_images/reports/T5_ac0812_timeoutpath_probe_2026-05-21_runHI.log`.
+- **Fortschritt (Plan B):** Die gekoppelte Plan-B-Syntheseprobe wurde für `AC0030` erfolgreich ausgeführt (`status=ok`, Exit `0`); Log: `artifacts/converted_images/reports/AC0030_planb_synthetic_2026-05-21_runHI.log`.
+- **Fortschritt (nächstes CSV-Bild):** Das nächste Bild aus der Liste der nicht zufriedenstellenden Konvertierungen wurde als Einzelkonvertierung bearbeitet (`AC0030`, Exit `0`); Log: `artifacts/converted_images/reports/AC0030_single_2026-05-21_runHI.log`.
+- **Fortschritt (Dokumentation):** Das komplette Arbeitspaket ist in `docs/next_arbeitspaket_2026-05-21_runHI.md` nachgeführt.
+- **Blocker:** Der bekannte N1/N2-Vollbereichsblocker (Timeout/Laufzeit) bleibt unverändert bestehen.
+- **Nächster sinnvoller Schritt:** Das nächste Arbeitspaket wieder strikt als 3er-Kombination fortsetzen (T5/N5 als Primäraufgabe + 1 Plan-B-Probe + nächster CSV-Eintrag `AC0030_L`).
+
+### Fortschritt vs. Blocker (Session 2026-05-21, nächste dokumentierte Aufgabe Run HL)
+
+- **Fortschritt (nächste dokumentierte Aufgabe):** Der priorisierte T5-Kurzlauf (`test_ac08_semantic_anchor_variants_ac0812_only`) wurde erneut in Python `3.10.20` ausgeführt; Ergebnis `1 passed`, Exit `0`; Log: `artifacts/converted_images/reports/T5_ac0812_timeoutpath_probe_2026-05-21_runHL.log`.
+- **Fortschritt (Dokumentation):** Der Lauf ist in `docs/next_aufgabe_2026-05-21_runHL.md` dokumentiert.
+- **Blocker:** Der bekannte N1/N2-Vollbereichsblocker (Timeout/Laufzeit) bleibt unverändert bestehen.
+- **Nächster sinnvoller Schritt:** Das nächste Arbeitspaket wieder strikt als 3er-Kombination fortsetzen (T5/N5 als Primäraufgabe + 1 Plan-B-Probe + nächster CSV-Eintrag `AC0030_L`).
+
+### Fortschritt vs. Blocker (Session 2026-05-21, nächste dokumentierte Aufgabe Run HM)
+
+- **Fortschritt (nächste dokumentierte Aufgabe):** Der priorisierte T5-Kurzlauf (`test_ac08_semantic_anchor_variants_ac0812_only`) wurde erneut in Python `3.10.20` ausgeführt; Ergebnis `1 passed, 5 warnings`, Exit `0`; Log: `artifacts/converted_images/reports/T5_ac0812_timeoutpath_probe_2026-05-21_runHM.log`.
+- **Fortschritt (Dokumentation):** Der Lauf ist in `docs/next_aufgabe_2026-05-21_runHM.md` dokumentiert.
+- **Blocker:** Der bekannte N1/N2-Vollbereichsblocker (Timeout/Laufzeit) bleibt unverändert bestehen.
+- **Nächster sinnvoller Schritt:** Das nächste Arbeitspaket wieder strikt als 3er-Kombination fortsetzen (T5/N5 als Primäraufgabe + 1 Plan-B-Probe + nächster CSV-Eintrag `AC0030_L`).
+
+### Fortschritt vs. Blocker (Session 2026-05-22, nächste dokumentierte Aufgabe Run HU)
+
+- **Fortschritt (nächste dokumentierte Aufgabe):** Der priorisierte Lauf `tests/test_satisfactory_regression_battery.py::test_satisfactory_successful_variants_reconversion_keeps_or_improves_quality` wurde in Python `3.10.20` erneut ausgeführt; Ergebnis `1 xfailed, 5 warnings`, Exit `0`, Laufzeit `104.61s`.
+- **Fortschritt (Dokumentation):** Der Lauf ist in `docs/next_aufgabe_2026-05-22_runHU.md` dokumentiert.
+- **Blocker:** Die Aufgabe bleibt inhaltlich offen, da der Test weiterhin als erwarteter Fehler (`xfail`) markiert ist.
+- **Nächster sinnvoller Schritt:** Den zugrundeliegenden XFail-Fall aus `docs/test_followup_tasks_2026-05-20.md` gezielt entblocken oder in ein stabiles, kleineres Repro aufteilen.
+
+### Fortschritt vs. Blocker (Session 2026-05-22, nächste dokumentierte Aufgabe Run HV)
+
+- **Fortschritt (nächste dokumentierte Aufgabe):** Der priorisierte Lauf `tests/test_satisfactory_regression_battery.py::test_satisfactory_successful_variants_reconversion_keeps_or_improves_quality` wurde in Python `3.10.20` erneut ausgeführt; Ergebnis `1 xfailed, 5 warnings`, Exit `0`, Laufzeit `223.79s`.
+- **Fortschritt (Dokumentation):** Der Lauf ist in `docs/next_aufgabe_2026-05-22_runHV.md` dokumentiert.
+- **Blocker:** Die Aufgabe bleibt inhaltlich offen, da der Test weiterhin als erwarteter Fehler (`xfail`) markiert ist.
+- **Nächster sinnvoller Schritt:** A3 gezielt fortführen: die im XFail-Text berichtete Qualitätsdrift in ein kleineres Repro je Variante aufteilen und Akzeptanzkriterium für Rückführung auf normalen Assert definieren.
+
+### Fortschritt vs. Blocker (Session 2026-05-22, nächste dokumentierte Aufgabe Run HW)
+
+- **Fortschritt (nächste dokumentierte Aufgabe):** Der priorisierte Lauf `tests/test_satisfactory_regression_battery.py::test_satisfactory_successful_variants_reconversion_keeps_or_improves_quality` wurde in Python `3.10.20` erneut ausgeführt; Ergebnis `1 xfailed, 5 warnings`, Exit `0`, Laufzeit `101.01s`.
+- **Fortschritt (Dokumentation):** Der Lauf ist in `docs/next_aufgabe_2026-05-22_runHW.md` dokumentiert.
+- **Blocker:** Die Aufgabe bleibt inhaltlich offen, da der Test weiterhin als erwarteter Fehler (`xfail`) markiert ist.
+- **Nächster sinnvoller Schritt:** A3 weiter eingrenzen: xfail-Ursache pro betroffener Variante in kleinere Repros aufspalten und Akzeptanzkriterium für Rückführung auf normalen Assert definieren.

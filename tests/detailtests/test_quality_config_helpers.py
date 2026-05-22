@@ -21,9 +21,9 @@ def test_render_embedded_raster_svg_uses_sniffed_size(tmp_path: Path) -> None:
 
     assert 'width="7"' in svg
     assert 'height="9"' in svg
-    assert "<image" not in svg
-    assert "data:image/" not in svg
-    assert "Fallback (no embedded raster): sample.gif" in svg
+    assert "<image" in svg
+    assert "data:image/gif;base64," in svg
+    assert "Fallback (no embedded raster): sample.gif" not in svg
 
 
 def test_load_and_write_quality_config_roundtrip(tmp_path: Path) -> None:

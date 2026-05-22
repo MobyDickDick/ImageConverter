@@ -88,6 +88,10 @@ python -m src.imageCompositeConverter \
 ```bash
 python -m compileall src tests
 python -m pytest
+./tools/run_regression_checks.sh
+./tools/run_safe_test_baseline.sh
+python tools/manage_satisfactory_baseline.py
+./tools/run_satisfactory_regression_battery.sh
 python -m src.imageCompositeConverter --help
 python tools/check_vendored_cv2.py
 python -m src.imageCompositeConverter artifacts/images_to_convert --descriptions-path artifacts/images_to_convert/Finale_Wurzelformen_V3.xml --ac08-regression-set --output-dir artifacts/converted_images
@@ -114,3 +118,20 @@ Wenn VS Code beim Starten mit `debugpy` einen Fehler wie `Couldn't spawn debugge
 - Wähle in VS Code über `Python: Select Interpreter` explizit die Datei `.venv\Scripts\python.exe` aus — **nicht** den Ordner `.venv\Scripts`.
 - Verwende bevorzugt die mitgelieferte Debug-Konfiguration `ImageConverter: convert interactive range`; sie startet den Einstiegspunkt als Modul (`python -m src.imageCompositeConverter`) und setzt das Workspace-Verzeichnis korrekt.
 - Falls du lieber direkt im Terminal prüfst, funktioniert derselbe Start auch ohne Debugger mit `python -m src.imageCompositeConverter artifacts/images_to_convert --interactive-range`.
+
+
+## Testprofile
+
+Feste Testprofile können über `tools/run_pytest_profile.py` gestartet werden:
+
+- `core-green`: harte grüne Kernbatterie ohne `blocking_conversion`/`optional_fixture`-Marker
+- `extended`: breitere Suite ohne `blocking_conversion`
+- `research`: nur experimentelle/blockierende Tests
+
+Beispiele:
+
+```bash
+python tools/run_pytest_profile.py core-green
+python tools/run_pytest_profile.py extended tests/test_image_composite_converter.py -k ac08
+python tools/run_pytest_profile.py research
+```

@@ -6,6 +6,8 @@ import struct
 import time
 from pathlib import Path
 
+import pytest
+
 from src.iCCModules import imageCompositeConverterConversionExecution as conversion_execution_helpers
 
 
