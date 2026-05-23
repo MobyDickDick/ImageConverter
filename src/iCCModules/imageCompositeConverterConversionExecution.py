@@ -604,6 +604,10 @@ def convertOneImpl(
             folder_path=folder_path,
             reports_out_dir=reports_out_dir,
         )
+        if not sample_svg_path:
+            candidate_svg_path = os.path.join(svg_out_dir, f"{_base}.svg")
+            if os.path.exists(candidate_svg_path):
+                sample_svg_path = candidate_svg_path
         if sample_svg_path:
             try:
                 shutil.copyfile(sample_svg_path, svg_path)
