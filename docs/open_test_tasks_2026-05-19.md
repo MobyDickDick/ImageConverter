@@ -82,3 +82,28 @@ Die folgenden `blocking_conversion`-Tests werden **nicht** mehr als Teil einer a
 - [ ] BC-20: `tests/test_satisfactory_regression_battery.py::test_satisfactory_successful_variants_reconversion_keeps_or_improves_quality`
 
 Akzeptanz pro BC-Task: reproduzierbarer Einzel-Repro + stabiler `passed`-Status ohne `skip/xfail` im Profil `research` oder Rückführung in `core-green`.
+
+
+## Session-Update 2026-05-23 (Run IJ: nächste Aufgabe + Volltest + Blocking-Inventory)
+
+- A3-Repro erneut ausgeführt:
+  - `PYENV_VERSION=3.10.20 PYTHONPATH=. timeout 120 pyenv exec python -m pytest tests/test_satisfactory_regression_battery.py::test_satisfactory_successful_variants_reconversion_keeps_or_improves_quality -q`
+  - Ergebnis: `1 failed, 5 warnings`, Exit `1`.
+  - Blocker unverändert: `FileNotFoundError` auf `artifacts/regression_baseline/satisfactory/images`.
+- Volltest erneut ausgeführt:
+  - `PYENV_VERSION=3.10.20 PYTHONPATH=. timeout 300 pyenv exec python -m pytest -q -rs`
+  - Ergebnis: kein finales Summary im Zeitfenster; Fortschritt erneut bis `91%`.
+  - Sichtbar im Lauf: mindestens 11 Skip-Marker (`s`).
+- Blocker-Inventar (collect-only) aktualisiert:
+  - `PYENV_VERSION=3.10.20 PYTHONPATH=. pyenv exec python -m pytest --collect-only -q -m blocking_conversion`
+  - Ergebnis unverändert: 20 `blocking_conversion`-Tests.
+
+### Neu in Aufgabenform überführt (Run IJ)
+- [ ] **A1-FU3:** Skip-NodeIDs des Run-IJ-Volltests mit `-rs`/Teilbatch vollständig auflösen (nicht nur Marker zählen).
+  - **Akzeptanz:** vollständige NodeID-Liste + je Test Entscheidung (Fixture bereitstellen vs optional markieren).
+- [ ] **A3-FU3:** Satisfactory-Baseline-Setup automatisieren oder fehlende Baseline als expliziten `skip` statt Hard-Fail behandeln.
+  - **Akzeptanz:** der A3-Zieltest läuft in 2 direkten Wiederholungen ohne `FileNotFoundError` und mit finalem Summary.
+- [ ] **A6-FU3:** 300s-Vollsuite-Limitierer ab ~91% durch NodeID-Teilbatches isolieren.
+  - **Akzeptanz:** reproduzierbarer Limitierer dokumentiert inkl. Laufzeitprofil **oder** Vollsuite endet unter 300s mit finalem Summary.
+- [ ] **BC-Inventory-FU1:** 20 `blocking_conversion`-Tests aus dem aktuellen Collect-only-Lauf als laufend verifiziert markieren (kein Rückgang/Anstieg unbemerkt).
+  - **Akzeptanz:** Anzahl und NodeID-Liste sind in jedem Folgelauf diffbar dokumentiert.
