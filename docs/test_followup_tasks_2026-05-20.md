@@ -138,3 +138,24 @@ Ein Test zählt nur als **wirklich grün**, wenn er:
   - **Akzeptanzkriterium:** `tests/test_satisfactory_regression_battery.py::test_satisfactory_successful_variants_reconversion_keeps_or_improves_quality` läuft mindestens in zwei direkten Wiederholungen ohne `FileNotFoundError` und endet jeweils mit finalem `pytest`-Summary.
 - [ ] **A6-FU1 (300s-Volltest entblocken):** Den Timeout-Limitierer im Volltestlauf (`timeout 300 ... pytest -q`) weiter per NodeID-/Marker-Batches eingrenzen und einen reproduzierbaren Teilrepro inkl. Laufzeitgrenze dokumentieren.
   - **Akzeptanzkriterium:** Ein Vollsuite-Lauf mit identischem 300s-Limit endet mit finalem Summary statt Exit `124`.
+
+
+## Session-Update 2026-05-23 (Run IE: nächste Aufgabe + Vollsuite erneut)
+
+- Nächste dokumentierte Aufgabe erneut ausgeführt:
+  - `PYENV_VERSION=3.10.20 PYTHONPATH=. timeout 120 pyenv exec python -m pytest tests/test_satisfactory_regression_battery.py::test_satisfactory_successful_variants_reconversion_keeps_or_improves_quality -q`
+  - Ergebnis: `1 failed, 5 warnings`, Exit `1` (statt `xfail`).
+  - Primärer Blocker unverändert: `FileNotFoundError` auf `artifacts/regression_baseline/satisfactory/images`.
+- Vollsuite erneut ausgeführt:
+  - `PYENV_VERSION=3.10.20 PYTHONPATH=. timeout 300 pyenv exec python -m pytest -q`
+  - Ergebnis: kein finales Summary innerhalb 300s (nicht erfolgreich abgeschlossen), Fortschritt bis `91%`.
+  - Im Protokoll sichtbar: mindestens `11` Skip-Marker (`s`).
+
+### Neue/aktualisierte Aufgaben aus übersprungenen, fehlgeschlagenen und blockierenden Tests
+
+- [ ] **A1-FU2 (Skips aus Vollsuite auflösen):** Die im Run-IE-Vollsuiteprotokoll sichtbaren Skip-Kandidaten (`>=11` Marker) per `pytest -rs` exakt als NodeIDs erfassen und je Test in „Fixture bereitstellen“ vs. „optional markieren“ überführen.
+  - **Akzeptanzkriterium:** Für alle in Run IE sichtbaren Skip-NodeIDs liegt eine dokumentierte Entscheidung + Repro-Schritt vor.
+- [ ] **A3-FU2 (Fehlschlag statt XFail stabilisieren):** Den A3-Test wieder auf reproduzierbare Vorbedingungen bringen (Baseline-Verzeichnis + Mindestinhalt), sodass der Test nicht mehr mit `FileNotFoundError` abbricht.
+  - **Akzeptanzkriterium:** `tests/test_satisfactory_regression_battery.py::test_satisfactory_successful_variants_reconversion_keeps_or_improves_quality` läuft in 2 direkten Wiederholungen ohne Exception-Abbruch durch und liefert jeweils ein finales Pytest-Summary.
+- [ ] **A6-FU2 (Blockierenden Langläufer isolieren):** Für den 300s-Timeout in der Vollsuite den bremsenden Restbereich ab ~`91%` mit NodeID-Teilbatches auflösen.
+  - **Akzeptanzkriterium:** Reproduzierbarer Teilbatch inkl. Laufzeitprofil dokumentiert **oder** Vollsuite mit identischem 300s-Limit endet mit finalem Summary.
