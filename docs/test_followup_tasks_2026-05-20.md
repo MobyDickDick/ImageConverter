@@ -121,3 +121,20 @@ Ein Test zählt nur als **wirklich grün**, wenn er:
 2. `passed` ist,
 3. nicht `skip`/`xfail`/`deselect` ist,
 4. und keine Warnung erzeugt (für das Kernprofil).
+
+## Session-Update 2026-05-23 (Run IF: nächste Aufgabe + Volltest)
+
+- Repro-Lauf der nächsten dokumentierten Aufgabe erneut ausgeführt:
+  - `PYENV_VERSION=3.10.20 PYTHONPATH=. timeout 120 pyenv exec python -m pytest tests/test_satisfactory_regression_battery.py::test_satisfactory_successful_variants_reconversion_keeps_or_improves_quality -q`
+  - Ergebnis: `1 failed, 5 warnings`, Exit `1`.
+  - Blocker: `FileNotFoundError` für `artifacts/regression_baseline/satisfactory/images`.
+- Zusätzlicher Volltestlauf ausgeführt:
+  - `PYENV_VERSION=3.10.20 PYTHONPATH=. timeout 300 pyenv exec python -m pytest -q`
+  - Ergebnis: Exit `124` (Timeout), weiterhin kein finales Summary.
+
+### Neu/konkretisierte Folgeaufgaben aus den blockierenden oder misslungenen Tests
+
+- [ ] **A3-FU1 (Setup-Baseline deterministisch):** Vor dem A3-Zieltest die Baseline-Bilder reproduzierbar bereitstellen (`artifacts/regression_baseline/satisfactory/images` mit verwertbaren Testbildern statt leer/missing).
+  - **Akzeptanzkriterium:** `tests/test_satisfactory_regression_battery.py::test_satisfactory_successful_variants_reconversion_keeps_or_improves_quality` läuft mindestens in zwei direkten Wiederholungen ohne `FileNotFoundError` und endet jeweils mit finalem `pytest`-Summary.
+- [ ] **A6-FU1 (300s-Volltest entblocken):** Den Timeout-Limitierer im Volltestlauf (`timeout 300 ... pytest -q`) weiter per NodeID-/Marker-Batches eingrenzen und einen reproduzierbaren Teilrepro inkl. Laufzeitgrenze dokumentieren.
+  - **Akzeptanzkriterium:** Ein Vollsuite-Lauf mit identischem 300s-Limit endet mit finalem Summary statt Exit `124`.
