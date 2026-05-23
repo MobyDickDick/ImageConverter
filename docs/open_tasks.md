@@ -2662,3 +2662,11 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
   2. Qualitätsmetriken + Sichtprüfung bewerten,
   3. bei ungenügender Qualität entweder (a) **gezielt neu versuchen** (präzisere Semantik/Geometrieprompt) oder (b) **zurücksetzen** (kein „in samples=yes“, als offen markieren).
 - **Konkreter nächster Schritt für den gewünschten Modus:** Die CSV-Verarbeitung strikt auf „genau ein Bild, danach Entscheidung“ umstellen; keine automatische Fortschrittsmarkierung ohne Mindestqualität.
+
+### Fortschritt vs. Blocker (Session 2026-05-23, nächstes Arbeitspaket Run IQ)
+
+- **Fortschritt (nächste dokumentierte Aufgabe):** TB-A3 wurde mit `timeout 120` erneut ausgeführt und endet stabil als `1 skipped, 5 warnings` (Exit `0`); ein `FileNotFoundError` auf `artifacts/regression_baseline/satisfactory/images` trat nicht auf. Log: `artifacts/converted_images/reports/TB_A3_timeout_probe_2026-05-23_runIQ.log`.
+- **Fortschritt (Volltest-Replay):** Der gekoppelte Volltestlauf `pytest -q -rs` mit `timeout 300` lief vollständig durch (`518 passed, 5 warnings`, Exit `0`). Log: `artifacts/converted_images/reports/pytest_full_2026-05-23_runIQ.log`.
+- **Fortschritt (Plan B):** Die gekoppelte Plan-B-Roundtrip-Probe für `AC0010.svg` wurde erneut ausgeführt; Ergebnis wie erwartet `status=failed_svg` mit Artefakt `Failed_AC0010.svg`. Log: `artifacts/converted_images/reports/AC0010_planb_roundtrip_2026-05-23_runIQ.log`.
+- **Fortschritt (Konvertierungsversuch):** Der direkte Einzellauf `AC0010` wurde mit Exit `0` ausgeführt. Log: `artifacts/converted_images/reports/AC0010_single_2026-05-23_runIQ.log`.
+- **Nächster sinnvoller Schritt:** Dasselbe Arbeitspaket-Schema mit dem nächsten offenen Zielbild fortsetzen und den stabilen TB-A3-/Volltestzustand in einem Folgelauf verifizieren.
