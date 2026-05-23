@@ -2640,3 +2640,25 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 - **Fortschritt (nächstes CSV-Bild):** Das nächste CSV-Bild `AC0023` wurde als Einzellauf bearbeitet (`PYTHONPATH=. timeout 240 python3 -m src.iCCModules.imageCompositeConverterCli --input-dir artifacts/images_to_convert --output-dir artifacts/converted_images --start AC0023 --end AC0023`), Exit `0`; Log: `artifacts/converted_images/reports/AC0023_single_2026-05-23_runIN.log`.
 - **Fortschritt (Tracking):** `AC0023` wurde in `artifacts/converted_images/reports/reports/summaries/not_satisfactory_converted_images.csv` als bearbeitet (`in samples=yes`) markiert.
 - **Nächster sinnvoller Schritt:** Dasselbe Arbeitspaket-Schema mit dem nächsten noch offenen CSV-Eintrag fortsetzen und den A3-Status nach mindestens einem direkten Re-Run weiter stabilisieren.
+
+### Fortschritt vs. Blocker (Session 2026-05-23, nächstes Arbeitspaket Run IO)
+
+- **Fortschritt (nächste dokumentierte Aufgabe):** Der priorisierte Lauf `tests/test_satisfactory_regression_battery.py::test_satisfactory_successful_variants_reconversion_keeps_or_improves_quality` wurde nach Baseline-Vorbereitung (`python -m tools.manage_satisfactory_baseline ...`) erneut in Python `3.10.20` mit Timeout-Guard ausgeführt; Ergebnis `1 passed, 5 warnings`, Exit `0`. Logs: `artifacts/converted_images/reports/TB_A3_baseline_prepare_2026-05-23_runIO.log`, `artifacts/converted_images/reports/TB_A3_timeout_probe_2026-05-23_runIO.log`.
+- **Fortschritt (Plan B):** Die gekoppelte Plan-B-Syntheseprobe wurde für `AC0024` ausgeführt (`PYTHONPATH=. python3 tools/plan_b_synthetic_probe.py ... --variant AC0024 --output-dir artifacts/converted_images/reports`), Ergebnis `status=ok`, Exit `0`; Log: `artifacts/converted_images/reports/AC0024_planb_synthetic_2026-05-23_runIO.log`.
+- **Fortschritt (nächstes CSV-Bild):** Das nächste CSV-Bild `AC0024` wurde als Einzellauf bearbeitet (`PYTHONPATH=. timeout 240 python3 -m src.iCCModules.imageCompositeConverterCli --input-dir artifacts/images_to_convert --output-dir artifacts/converted_images --start AC0024 --end AC0024`), Exit `0`; Log: `artifacts/converted_images/reports/AC0024_single_2026-05-23_runIO.log`.
+- **Fortschritt (Tracking):** `AC0024` wurde in `artifacts/converted_images/reports/reports/summaries/not_satisfactory_converted_images.csv` als bearbeitet (`in samples=yes`) markiert.
+- **Nächster sinnvoller Schritt:** Dasselbe Arbeitspaket-Schema mit dem nächsten noch offenen CSV-Eintrag (`AC0025`) fortsetzen und den A3-Status über weitere Re-Runs stabil halten.
+
+### Analyse AC0023/AC0024 und Vorgehen „konvertieren oder zurücksetzen“ (Session 2026-05-23, Review)
+
+- **Warum AC0023 nicht als „gut konvertiert“ gilt:** Für `AC0023` liegt zwar ein technischer Lauf mit Exit `0` vor (Pipeline lief durch), aber die Qualitätsmetriken bleiben schwach (`best_error=35.900447`, `mean_delta2=16055.651367`) und die Variante bleibt damit in der Not‑Satisfactory‑Klasse statt in „satisfactory“. Sie ist also **nicht abstürzt**, aber **inhaltlich/visuell unzureichend**.
+- **Warum AC0024 ähnlich wirkt:** `AC0024` wurde über die Beschreibung „`AC0023.jpg vertikal gespiegelt`“ gefahren. Wenn schon die Referenzform (`AC0023`) unpräzise ist, propagiert die Spiegelungsstrategie den Fehler meist nur geometrisch weiter, statt ihn zu beheben.
+- **Einordnung der Ursache (hypothesenbasiert):**
+  1. **Algorithmische Grenze** bei komplexen semantischen Layouts (zwei farbige Pfeile + Richtungssemantik),
+  2. **Prompt-/Beschreibungsschärfe** zu indirekt (abgeleitete Beschreibung statt harten Geometrie‑Constraints),
+  3. **Technische Fallback-Strategie** priorisiert robuste Erzeugung (inkl. Embedded‑Raster‑SVG), was Stabilität erhöht, aber visuelle Qualität nicht automatisch verbessert.
+- **Neues Entscheidungsraster pro Bild (ab sofort):**
+  1. Einzelbild konvertieren,
+  2. Qualitätsmetriken + Sichtprüfung bewerten,
+  3. bei ungenügender Qualität entweder (a) **gezielt neu versuchen** (präzisere Semantik/Geometrieprompt) oder (b) **zurücksetzen** (kein „in samples=yes“, als offen markieren).
+- **Konkreter nächster Schritt für den gewünschten Modus:** Die CSV-Verarbeitung strikt auf „genau ein Bild, danach Entscheidung“ umstellen; keine automatische Fortschrittsmarkierung ohne Mindestqualität.
