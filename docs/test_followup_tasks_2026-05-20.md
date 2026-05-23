@@ -29,6 +29,27 @@ Basis: letzter vollständiger grüner Suite-Lauf mit Python 3.10 (`pytest -q`).
   - Ergebnis: Exit `124` (Timeout bei `300s`), kein finales Summary.
 - Ableitung: Der aktuell langsamste/limitierende Block für A6 ist `tests/test_image_composite_converter.py`; weitere Repros sollten auf NodeID-/Marker-Ebene in genau dieser Datei aufgesplittet werden.
 
+
+## Session-Update 2026-05-22 (A3-Stabilitäts-Repro)
+
+- Repro-Lauf für den zuletzt temporär grünen A3-Kandidaten erneut ausgeführt:
+  - `PYENV_VERSION=3.10.20 python -m pytest -q tests/test_satisfactory_regression_battery.py::test_satisfactory_successful_variants_reconversion_keeps_or_improves_quality`
+  - Ergebnis: `1 xfailed, 5 warnings`, Exit `0`, Laufzeit `186.69s`.
+- Log-Artefakt: `artifacts/converted_images/reports/TB_A3_xfail_probe_2026-05-22_runHY.log`.
+- Einordnung: A3 bleibt offen; der Test ist aktuell nicht stabil reproduzierbar grün.
+
+## Session-Update 2026-05-23 (Vollsuite + Nicht-Grün in Aufgaben überführt)
+
+- Vollsuite-Kontrolllauf mit Abbruch bei erstem Fehler ausgeführt:
+  - `PYENV_VERSION=3.10.20 PYTHONPATH=. timeout 300 pyenv exec python -m pytest -q --maxfail=1`
+  - Ergebnis: `1 failed, 791 passed, 11 skipped, 5 warnings`, Exit `1`, Laufzeit `243.24s`.
+- Fehltest (neu als offene Aufgabe bestätigt):
+  - `tests/test_image_composite_converter.py::test_parse_description_manual_review_clears_default_label_for_unclassified_sia_symbol`
+  - Symptom: `review_reason` ist leer (`""`), erwarteter Hinweis auf `familienzuordnung` fehlt.
+- Zuordnung in Aufgaben:
+  - Fehltest bleibt als `blocking_conversion`-Aufgabe in A2/BC-Inventar geführt (NodeID #18) und ist weiterhin **offen**.
+  - `11 skipped` und `5 warnings` bleiben den bereits offenen Follow-ups A1 bzw. A4 zugeordnet; kein Nicht-Grün-Ergebnis bleibt ungemappt.
+
 ## Ziel
 
 Nur **wirklich grüne** Tests sollen als stabile Kern-Testliste gelten.  
@@ -112,3 +133,57 @@ Ein Test zählt nur als **wirklich grün**, wenn er:
 2. `passed` ist,
 3. nicht `skip`/`xfail`/`deselect` ist,
 4. und keine Warnung erzeugt (für das Kernprofil).
+
+## Session-Update 2026-05-23 (Run IF: nächste Aufgabe + Volltest)
+
+- Repro-Lauf der nächsten dokumentierten Aufgabe erneut ausgeführt:
+  - `PYENV_VERSION=3.10.20 PYTHONPATH=. timeout 120 pyenv exec python -m pytest tests/test_satisfactory_regression_battery.py::test_satisfactory_successful_variants_reconversion_keeps_or_improves_quality -q`
+  - Ergebnis: `1 failed, 5 warnings`, Exit `1`.
+  - Blocker: `FileNotFoundError` für `artifacts/regression_baseline/satisfactory/images`.
+- Zusätzlicher Volltestlauf ausgeführt:
+  - `PYENV_VERSION=3.10.20 PYTHONPATH=. timeout 300 pyenv exec python -m pytest -q`
+  - Ergebnis: Exit `124` (Timeout), weiterhin kein finales Summary.
+
+### Neu/konkretisierte Folgeaufgaben aus den blockierenden oder misslungenen Tests
+
+- [ ] **A3-FU1 (Setup-Baseline deterministisch):** Vor dem A3-Zieltest die Baseline-Bilder reproduzierbar bereitstellen (`artifacts/regression_baseline/satisfactory/images` mit verwertbaren Testbildern statt leer/missing).
+  - **Akzeptanzkriterium:** `tests/test_satisfactory_regression_battery.py::test_satisfactory_successful_variants_reconversion_keeps_or_improves_quality` läuft mindestens in zwei direkten Wiederholungen ohne `FileNotFoundError` und endet jeweils mit finalem `pytest`-Summary.
+- [ ] **A6-FU1 (300s-Volltest entblocken):** Den Timeout-Limitierer im Volltestlauf (`timeout 300 ... pytest -q`) weiter per NodeID-/Marker-Batches eingrenzen und einen reproduzierbaren Teilrepro inkl. Laufzeitgrenze dokumentieren.
+  - **Akzeptanzkriterium:** Ein Vollsuite-Lauf mit identischem 300s-Limit endet mit finalem Summary statt Exit `124`.
+
+
+## Session-Update 2026-05-23 (Run IE: nächste Aufgabe + Vollsuite erneut)
+
+- Nächste dokumentierte Aufgabe erneut ausgeführt:
+  - `PYENV_VERSION=3.10.20 PYTHONPATH=. timeout 120 pyenv exec python -m pytest tests/test_satisfactory_regression_battery.py::test_satisfactory_successful_variants_reconversion_keeps_or_improves_quality -q`
+  - Ergebnis: `1 failed, 5 warnings`, Exit `1` (statt `xfail`).
+  - Primärer Blocker unverändert: `FileNotFoundError` auf `artifacts/regression_baseline/satisfactory/images`.
+- Vollsuite erneut ausgeführt:
+  - `PYENV_VERSION=3.10.20 PYTHONPATH=. timeout 300 pyenv exec python -m pytest -q`
+  - Ergebnis: kein finales Summary innerhalb 300s (nicht erfolgreich abgeschlossen), Fortschritt bis `91%`.
+  - Im Protokoll sichtbar: mindestens `11` Skip-Marker (`s`).
+
+### Neue/aktualisierte Aufgaben aus übersprungenen, fehlgeschlagenen und blockierenden Tests
+
+- [ ] **A1-FU2 (Skips aus Vollsuite auflösen):** Die im Run-IE-Vollsuiteprotokoll sichtbaren Skip-Kandidaten (`>=11` Marker) per `pytest -rs` exakt als NodeIDs erfassen und je Test in „Fixture bereitstellen“ vs. „optional markieren“ überführen.
+  - **Akzeptanzkriterium:** Für alle in Run IE sichtbaren Skip-NodeIDs liegt eine dokumentierte Entscheidung + Repro-Schritt vor.
+- [ ] **A3-FU2 (Fehlschlag statt XFail stabilisieren):** Den A3-Test wieder auf reproduzierbare Vorbedingungen bringen (Baseline-Verzeichnis + Mindestinhalt), sodass der Test nicht mehr mit `FileNotFoundError` abbricht.
+  - **Akzeptanzkriterium:** `tests/test_satisfactory_regression_battery.py::test_satisfactory_successful_variants_reconversion_keeps_or_improves_quality` läuft in 2 direkten Wiederholungen ohne Exception-Abbruch durch und liefert jeweils ein finales Pytest-Summary.
+- [ ] **A6-FU2 (Blockierenden Langläufer isolieren):** Für den 300s-Timeout in der Vollsuite den bremsenden Restbereich ab ~`91%` mit NodeID-Teilbatches auflösen.
+  - **Akzeptanzkriterium:** Reproduzierbarer Teilbatch inkl. Laufzeitprofil dokumentiert **oder** Vollsuite mit identischem 300s-Limit endet mit finalem Summary.
+
+## Session-Update 2026-05-23 (Run IJ: nächste dokumentierte Aufgabe erneut)
+
+- Nächste dokumentierte Aufgabe erneut ausgeführt:
+  - `PYENV_VERSION=3.10.20 PYTHONPATH=. timeout 120 pyenv exec python -m pytest tests/test_satisfactory_regression_battery.py::test_satisfactory_successful_variants_reconversion_keeps_or_improves_quality -q`
+  - Ergebnis: `1 failed, 5 warnings`, Exit `1`.
+  - Primärer Blocker unverändert: `FileNotFoundError` auf `artifacts/regression_baseline/satisfactory/images`.
+
+### Neue/konkretisierte Aufgaben aus misslungenen, übersprungenen oder blockierenden Tests
+
+- [ ] **A3-FU3 (Baseline-Guard im Testpfad):** Vor dem Aufruf von `converter.main(...)` sicherstellen, dass der erwartete Eingabeordner `artifacts/regression_baseline/satisfactory/images` existiert und mindestens eine verwertbare Datei enthält; andernfalls deterministisch mit klarer Setup-Fehlermeldung abbrechen.
+  - **Akzeptanzkriterium:** Der A3-Repro endet in 2 direkten Wiederholungen ohne `FileNotFoundError`; Ergebnis ist entweder valider Assert-Lauf oder klarer, reproduzierbarer Setup-Fehler mit finalem Pytest-Summary.
+- [ ] **A4-FU1 (Warnungen im A3-Repro auflösen/klassifizieren):** Die weiterhin sichtbaren 5 SWIG-Deprecation-Warnungen im A3-Repro entweder technisch beheben oder explizit als erlaubte Übergangswarnungen dokumentieren.
+  - **Akzeptanzkriterium:** A3-Repro liefert entweder `0 warnings` oder eine verlinkte Allowlist-Entscheidung inkl. Begründung pro Warnungstyp.
+- [ ] **A1-FU3 (Skip-Pfad nach Baseline-Fix verifizieren):** Nach Bereitstellung der Baseline den Fall `No baseline variants found.` gezielt reproen und als expliziten Skip-Kandidaten (NodeID + Entscheidungsweg) dokumentieren.
+  - **Akzeptanzkriterium:** Für den Skip-Text liegt ein reproduzierbarer NodeID-Lauf mit dokumentierter Einordnung „Fixture bereitstellen“ oder „optional markieren" vor.
