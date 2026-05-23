@@ -122,3 +122,20 @@ Akzeptanz pro BC-Task: reproduzierbarer Einzel-Repro + stabiler `passed`-Status 
   - **Akzeptanz:** Zwei direkte Re-Runs des A3-Tests ohne `FileNotFoundError`; Ergebnis ist `passed` oder explizit begründeter `skipped`.
 - [ ] **A6-FU4:** Vollsuite-Timeout bei 300s weiterhin reproduziert; den Verursacherbereich nach `91%` via NodeID-Chunking (`--maxfail=1` + `-k`/Dateibatches) isolieren.
   - **Akzeptanz:** Mindestens ein konkreter limitierender Testfall oder ein klarer enger Kandidatenblock dokumentiert.
+
+## Neu: JIRA-Kurzfassung als nächste Aufgabe (2026-05-23)
+
+**Titel:** AC0011-Konvertierung stabilisieren: Sample-SVG statt Raster-Fallback
+
+**Beschreibung (ultrakurz):**
+`AC0011.jpg` endet aktuell als `Failed_AC0011.svg` mit `raster_embedded_svg`, obwohl `samples/AC0011.svg` vorhanden ist. Root-Cause im echten Call-Path beheben und Sample-SVG als valides Endergebnis durchsetzen.
+
+**Akzeptanzkriterien:**
+1. `artifacts/converted_images/converted_svgs/AC0011.svg` wird erzeugt (kein `Failed_AC0011.svg`).
+2. Kein `AC0011.jpg;raster_embedded_svg` in `artifacts/converted_images/reports/reports/batch_failure_summary.csv`.
+3. `AC0011_element_validation.log` zeigt aktive Sample-Nutzung (`sample_svg_path=.../AC0011.svg`).
+4. Repro 2x hintereinander stabil mit identischem Erfolg.
+5. Relevante Detailtests für Non-Composite/Plan-B-Pfad sind grün.
+
+**Repro-Befehl:**
+- `PYTHONPATH=. python3 -m src.iCCModules.imageCompositeConverterCli --input-dir artifacts/images_to_convert --output-dir artifacts/converted_images --start AC0011 --end AC0011`
