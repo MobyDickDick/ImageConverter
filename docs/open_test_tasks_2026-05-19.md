@@ -54,3 +54,31 @@ Ergebnis: `17 passed, 3 xfailed`.
 2. Jeden Task einzeln fixen und mit `-k` gezielt validieren.
 3. Nach jedem Fix `xfail` entfernen und Test auf normal `pass` umstellen.
 4. Danach wieder größeren Block laufen lassen.
+
+
+## Neu: Blockierende Tests aus der Gesamtliste als Aufgaben (2026-05-23)
+
+Die folgenden `blocking_conversion`-Tests werden **nicht** mehr als Teil einer allgemeinen Grün-Testliste behandelt, sondern als explizite Aufgaben geführt.
+
+- [ ] BC-01: `tests/test_image_composite_converter.py::test_semantic_validation_accepts_circle_supported_by_local_mask`
+- [ ] BC-02: `tests/test_image_composite_converter.py::test_detect_semantic_primitives_detects_vertical_connector_without_arm`
+- [ ] BC-03: `tests/test_image_composite_converter.py::test_semantic_validation_accepts_text_supported_by_local_mask`
+- [ ] BC-04: `tests/test_image_composite_converter.py::test_semantic_validation_ignores_structural_false_positives_for_plain_circle_badge`
+- [ ] BC-05: `tests/test_image_composite_converter.py::test_make_badge_params_reanchors_ac0811_l_stem_after_template_center_lock`
+- [ ] BC-06: `tests/test_image_composite_converter.py::test_run_iteration_pipeline_converts_non_composite_as_embedded_svg`
+- [ ] BC-07: `tests/test_image_composite_converter.py::test_validate_semantic_description_alignment_rejects_non_semantic_cross_shape`
+- [ ] BC-08: `tests/test_image_composite_converter.py::test_validate_semantic_description_alignment_accepts_ac0813_vertical_connector`
+- [ ] BC-09: `tests/test_image_composite_converter.py::test_convert_range_writes_svgs_and_diffs_to_dedicated_subfolders`
+- [ ] BC-10: `tests/test_image_composite_converter.py::test_circle_error_uses_stable_source_mask_for_radius_candidates`
+- [ ] BC-11: `tests/test_image_composite_converter.py::test_make_badge_params_keeps_ac0223_m_circle_in_lower_half`
+- [ ] BC-12: `tests/test_image_composite_converter.py::test_validate_semantic_alignment_accepts_vertical_circle_when_raw_hough_misses`
+- [ ] BC-13: `tests/test_image_composite_converter.py::test_validate_semantic_alignment_accepts_ac0838_large_top_connector_voc_variant`
+- [ ] BC-14: `tests/test_image_composite_converter.py::test_make_badge_params_keeps_ac0838_m_circle_near_full_width_for_voc_layout`
+- [ ] BC-15: `tests/test_image_composite_converter.py::test_validate_semantic_alignment_accepts_merged_co2_blob_for_ac0831_artifact`
+- [ ] BC-16: `tests/test_image_composite_converter.py::test_convert_range_uses_existing_conversion_rows_as_template_donors`
+- [ ] BC-17: `tests/test_image_composite_converter.py::test_validate_badge_by_elements_activates_ac08_adaptive_unlocks_on_stagnation`
+- [ ] BC-18: `tests/test_image_composite_converter.py::test_parse_description_manual_review_clears_default_label_for_unclassified_sia_symbol`
+- [ ] BC-19: `tests/test_satisfactory_regression_battery.py::test_satisfactory_baseline_reconversion_smoke`
+- [ ] BC-20: `tests/test_satisfactory_regression_battery.py::test_satisfactory_successful_variants_reconversion_keeps_or_improves_quality`
+
+Akzeptanz pro BC-Task: reproduzierbarer Einzel-Repro + stabiler `passed`-Status ohne `skip/xfail` im Profil `research` oder Rückführung in `core-green`.
