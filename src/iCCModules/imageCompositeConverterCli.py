@@ -513,8 +513,9 @@ def runMainImpl(
 
 def main(argv: list[str] | None = None) -> int:
     """Compatibility CLI entry point that delegates to the canonical module CLI."""
-    from src import imageCompositeConverter as app
+    import importlib
 
+    app = importlib.import_module("src.imageCompositeConverter")
     return int(app.main(argv))
 
 
