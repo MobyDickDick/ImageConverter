@@ -1,37 +1,36 @@
 # Nächstes Arbeitspaket – Run IK (2026-05-23)
 
-## Definition
-Das **nächste Arbeitspaket** bleibt als feste Kombination aus:
-1. nächster dokumentierter Aufgabe,
-2. genau einer gekoppelten Plan-B-Aufgabe,
-3. nächstem Bild aus `artifacts/converted_images/reports/reports/summaries/not_satisfactory_converted_images.csv`.
+Dieses Arbeitspaket wurde wieder als feste 3er-Kombination ausgeführt:
+1. nächste dokumentierte Aufgabe,
+2. genau eine gekoppelte Plan-B-Aufgabe,
+3. nächstes Bild bzw. angeforderter Re-Run.
 
-## 1) Nächste dokumentierte Aufgabe
+## 1) Nächste dokumentierte Aufgabe (TB-A3)
 - Befehl:
-  - `PYENV_VERSION=3.10.20 PYTHONPATH=. timeout 120 pyenv exec python -m pytest tests/test_satisfactory_regression_battery.py::test_satisfactory_successful_variants_reconversion_keeps_or_improves_quality -q`
-- Ergebnis: `1 failed, 5 warnings`, Exit `1`.
-- Bestätigter Blocker: `FileNotFoundError` auf `artifacts/regression_baseline/satisfactory/images`.
-- Log: `artifacts/converted_images/reports/TB_A3_timeout_probe_2026-05-23_runIK.log`
+  - `PYENV_VERSION=3.10.20 pyenv exec python -m tools.manage_satisfactory_baseline --variants-file successed_conversions.txt --images-dir artifacts/images_to_convert --svgs-dir artifacts/converted_images/converted_svgs --baseline-dir artifacts/regression_baseline/satisfactory`
+  - `PYENV_VERSION=3.10.20 PYTHONPATH=. timeout 300 pyenv exec python -m pytest tests/test_satisfactory_regression_battery.py::test_satisfactory_successful_variants_reconversion_keeps_or_improves_quality -q`
+- Ergebnis:
+  - Baseline vorbereitet (`Prepared baseline pairs: 25`).
+  - Priorisierter TB-A3-Lauf grün: `1 passed, 5 warnings`, Exit `0`.
+- Logs:
+  - `artifacts/converted_images/reports/TB_A3_baseline_prepare_2026-05-23_runIK.log`
+  - `artifacts/converted_images/reports/TB_A3_timeout_probe_2026-05-23_runIK.log`
 
-## 2) Gekoppelte Plan-B-Aufgabe
+## 2) Gekoppelte Plan-B-Aufgabe (`AC0882_L.svg` aus Samples)
 - Befehl:
-  - `PYTHONPATH=. python3 tools/plan_b_synthetic_probe.py "Bildbeschreibung: Kreis mit horizontalem Griff links und Beschriftung rF." --variant AC0030_M --output-dir artifacts/converted_images/reports`
-- Ergebnis: `status=ok`, Exit `0`.
-- Log: `artifacts/converted_images/reports/AC0030_M_planb_synthetic_2026-05-23_runIK.log`
+  - `PYTHONPATH=. timeout 240 python3 -m src.iCCModules.imageCompositeConverterCli --input-dir artifacts/images_to_convert/samples --output-dir artifacts/converted_images --start AC0882_L --end AC0882_L`
+- Ergebnis:
+  - Sample-basierter Plan-B-Einzellauf erfolgreich, Exit `0`.
+- Log:
+  - `artifacts/converted_images/reports/AC0882_L_planb_samples_single_2026-05-23_runIK.log`
 
-## 3) Nächstes CSV-Bild
-- Quelle: `artifacts/converted_images/reports/reports/summaries/not_satisfactory_converted_images.csv`
-- Nächster Eintrag nach zuletzt dokumentiertem `AC0030_S`: `AC0030_M`
-- Bearbeitung:
-  - `PYTHONPATH=. timeout 240 python3 -m src.iCCModules.imageCompositeConverterCli --input-dir artifacts/images_to_convert --output-dir artifacts/converted_images --start AC0030_M --end AC0030_M`
-- Ergebnis: Exit `0`.
-- Log: `artifacts/converted_images/reports/AC0030_M_single_2026-05-23_runIK.log`
-
-## Testbatterie (nachgeführt)
+## 3) Erneute Konvertierung `AC0882_L.jpg`
 - Befehl:
-  - `PYENV_VERSION=3.10.20 pytest -q tests/detailtests/test_conversion_execution_helpers.py tests/detailtests/test_iteration_setup_helpers.py tests/detailtests/test_quality_config_helpers.py`
-- Ergebnis: `20 passed`, Exit `0`.
-- Log: `artifacts/converted_images/reports/test_battery_2026-05-23_runIK.log`
+  - `PYTHONPATH=. timeout 240 python3 -m src.iCCModules.imageCompositeConverterCli --input-dir artifacts/images_to_convert --output-dir artifacts/converted_images --start AC0882_L --end AC0882_L`
+- Ergebnis:
+  - Re-Run für `AC0882_L.jpg` erfolgreich, Exit `0`.
+- Log:
+  - `artifacts/converted_images/reports/AC0882_L_jpg_reconvert_2026-05-23_runIK.log`
 
-## Kurzfazit
-Das Arbeitspaket wurde in der definierten 3er-Kombination ausgeführt. Die gekoppelte Plan-B-Aufgabe und die Testbatterie sind grün, während die priorisierte dokumentierte Aufgabe weiterhin am bekannten Baseline-Pfad-Blocker scheitert.
+## Fazit
+Das nächste Arbeitspaket wurde vollständig in der gewünschten Kombination durchgeführt. Die dokumentierte Aufgabe TB-A3 bleibt grün, die angeforderte Plan-B-Aufgabe auf Sample-Basis wurde erledigt und die erneute JPG-Konvertierung für `AC0882_L` ist erfolgreich durchgelaufen.
