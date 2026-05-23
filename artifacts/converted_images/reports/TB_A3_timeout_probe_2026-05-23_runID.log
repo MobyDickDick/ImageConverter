@@ -1,0 +1,77 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_ test_satisfactory_successful_variants_reconversion_keeps_or_improves_quality _
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-0/test_satisfactory_successful_v0')
+
+    @pytest.mark.blocking_conversion
+    def test_satisfactory_successful_variants_reconversion_keeps_or_improves_quality(tmp_path: Path) -> None:
+        if not BASE.exists():
+            _prepare_mini_baseline(BASE, limit=5)
+        variants = _variants()
+        if not variants:
+            pytest.skip("No baseline variants found.")
+    
+        baseline_error_pp = _load_baseline_error_per_pixel()
+        checked = 0
+        regressions: list[str] = []
+    
+        # Reconversion quality should remain within a broad but still meaningful band.
+        # This suite runs across heterogeneous CI/dev environments where rasterization
+        # and optimization paths may diverge noticeably.
+        quality_epsilon = 0.02
+    
+        for variant in variants[:5]:
+            baseline_value = baseline_error_pp.get(variant.upper())
+            if baseline_value is None:
+                continue
+            family = variant.rsplit("_", 1)[0]
+            out = tmp_path / f"run_{variant.lower()}"
+            exit_code = converter.main(
+                [
+                    str(BASE / "images"),
+                    "--descriptions-path",
+                    "artifacts/images_to_convert/Finale_Wurzelformen_V3.xml",
+                    "--output-dir",
+                    str(out),
+                    "--start",
+                    family,
+                    "--end",
+                    family,
+                ]
+            )
+            assert exit_code == 0
+            rows = _load_iteration_error_per_pixel(out / "reports" / "Iteration_Log.csv")
+>           assert variant.upper() in rows, f"No reconversion metric found for {variant}."
+E           AssertionError: No reconversion metric found for AC0800_L.
+E           assert 'AC0800_L' in {}
+E            +  where 'AC0800_L' = <built-in method upper of str object at 0x7f1ecc3b59b0>()
+E            +    where <built-in method upper of str object at 0x7f1ecc3b59b0> = 'AC0800_L'.upper
+
+tests/test_satisfactory_regression_battery.py:160: AssertionError
+----------------------------- Captured stdout call -----------------------------
+Keine Eingabedateien für die Konvertierung gefunden.
+Ordner: artifacts/regression_baseline/satisfactory/images
+Range: AC0800..AC0800
+Anzahl gefundener Dateien: 0
+Unterstützte Endungen: .bmp, .jpg, .jpeg, .png, .gif, .tif, .tiff, .webp
+Ausgewählte Varianten: <keine Vorgabe>
+Hinweis: Prüfe Range, Dateiendung und Variantennamen.
+
+Abgeschlossen! Ausgaben unter: /tmp/pytest-of-root/pytest-0/test_satisfactory_successful_v0/run_ac0800_l
+=============================== warnings summary ===============================
+<frozen importlib._bootstrap>:241
+<frozen importlib._bootstrap>:241
+  <frozen importlib._bootstrap>:241: DeprecationWarning: builtin type SwigPyPacked has no __module__ attribute
+
+<frozen importlib._bootstrap>:241
+<frozen importlib._bootstrap>:241
+  <frozen importlib._bootstrap>:241: DeprecationWarning: builtin type SwigPyObject has no __module__ attribute
+
+<frozen importlib._bootstrap>:241
+  <frozen importlib._bootstrap>:241: DeprecationWarning: builtin type swigvarlink has no __module__ attribute
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_satisfactory_regression_battery.py::test_satisfactory_successful_variants_reconversion_keeps_or_improves_quality
+1 failed, 5 warnings in 2.59s
