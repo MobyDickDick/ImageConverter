@@ -38,6 +38,18 @@ Basis: letzter vollständiger grüner Suite-Lauf mit Python 3.10 (`pytest -q`).
 - Log-Artefakt: `artifacts/converted_images/reports/TB_A3_xfail_probe_2026-05-22_runHY.log`.
 - Einordnung: A3 bleibt offen; der Test ist aktuell nicht stabil reproduzierbar grün.
 
+## Session-Update 2026-05-23 (Vollsuite + Nicht-Grün in Aufgaben überführt)
+
+- Vollsuite-Kontrolllauf mit Abbruch bei erstem Fehler ausgeführt:
+  - `PYENV_VERSION=3.10.20 PYTHONPATH=. timeout 300 pyenv exec python -m pytest -q --maxfail=1`
+  - Ergebnis: `1 failed, 791 passed, 11 skipped, 5 warnings`, Exit `1`, Laufzeit `243.24s`.
+- Fehltest (neu als offene Aufgabe bestätigt):
+  - `tests/test_image_composite_converter.py::test_parse_description_manual_review_clears_default_label_for_unclassified_sia_symbol`
+  - Symptom: `review_reason` ist leer (`""`), erwarteter Hinweis auf `familienzuordnung` fehlt.
+- Zuordnung in Aufgaben:
+  - Fehltest bleibt als `blocking_conversion`-Aufgabe in A2/BC-Inventar geführt (NodeID #18) und ist weiterhin **offen**.
+  - `11 skipped` und `5 warnings` bleiben den bereits offenen Follow-ups A1 bzw. A4 zugeordnet; kein Nicht-Grün-Ergebnis bleibt ungemappt.
+
 ## Ziel
 
 Nur **wirklich grüne** Tests sollen als stabile Kern-Testliste gelten.  
