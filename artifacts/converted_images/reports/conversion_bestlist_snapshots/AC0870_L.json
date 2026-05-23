@@ -1,12 +1,12 @@
 {
   "base": "AC0870",
-  "best_error": 26.16777777777778,
+  "best_error": 26.02,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.02907530864197531,
+  "error_per_pixel": 0.02891111111111111,
   "filename": "AC0870_L.jpg",
   "h": 30,
-  "mean_delta2": 6241.9833984375,
+  "mean_delta2": 6206.693359375,
   "params": {
     "bottom_shape": null,
     "description_fragments": [
@@ -37,7 +37,7 @@
     "top_source_ref": null,
     "variant_name": "AC0870_L"
   },
-  "std_delta2": 12792.779296875,
+  "std_delta2": 12725.2578125,
   "variant": "AC0870_L",
   "w": 30
 }
