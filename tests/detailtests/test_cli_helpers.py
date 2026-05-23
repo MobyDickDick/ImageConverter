@@ -417,3 +417,61 @@ def test_compat_cli_main_delegates_to_canonical_app(monkeypatch) -> None:
 
     monkeypatch.setitem(sys.modules, "src.imageCompositeConverter", DummyApp)
     assert cli_helpers.main(["--help"]) == 23
+
+
+def test_has_batch_failures_detects_non_empty_summary(tmp_path: Path) -> None:
+    reports_dir = tmp_path / "reports"
+    reports_dir.mkdir()
+    (reports_dir / "batch_failure_summary.csv").write_text(
+        """filename;status;reason;details;log_file
+AC0030.jpg;raster_embedded_svg;embedded_raster_detected;d;l
+""",
+        encoding="utf-8",
+    )
+    assert cli_helpers._hasBatchFailures(str(tmp_path)) is True
+
+
+def test_run_main_impl_convert_mode_returns_1_when_batch_failures_exist() -> None:
+    args = argparse.Namespace(
+        _render_svg_subprocess=False,
+        isolate_svg_render=False,
+        isolate_svg_render_timeout_sec=3.0,
+        log_file="",
+        ac08_regression_set=False,
+        print_linux_vendor_command=False,
+        vendor_dir="vendor",
+        vendor_platform="manylinux",
+        vendor_python_version="310",
+        interactive_range=False,
+        start="AC0030",
+        end="AC0030",
+        mode="convert",
+        bootstrap_deps=False,
+        folder_path="images",
+        iterations=5,
+        debug_ac0811_dir=None,
+        debug_element_diff_dir=None,
+        deterministic_order=True,
+    )
+
+    with mock.patch("src.iCCModules.imageCompositeConverterCli._hasBatchFailures", return_value=True):
+        rc = cli_helpers.runMainImpl(
+            args,
+            run_svg_render_subprocess_entrypoint_fn=lambda: 11,
+            set_svg_render_subprocess_enabled_fn=lambda _enabled: None,
+            set_svg_render_subprocess_timeout_fn=lambda _timeout: None,
+            optional_log_capture_fn=contextlib.nullcontext,
+            build_linux_vendor_install_command_fn=lambda **_kwargs: ["pip"],
+            prompt_interactive_range_fn=lambda _args: ("AC0030", "AC0030"),
+            resolve_cli_csv_and_output_fn=lambda _args: ("descriptions.csv", "out"),
+            load_description_mapping_fn=lambda _path: None,
+            bootstrap_required_image_dependencies_fn=lambda: [],
+            analyze_range_fn=lambda *_args, **_kwargs: "annotated",
+            convert_range_fn=lambda *fn_args, **_kwargs: "converted",
+            format_user_diagnostic_fn=lambda exc: str(exc),
+            description_mapping_error_type=RuntimeError,
+            ac08_regression_set_name="ac08-set",
+            ac08_regression_variants=("AC0800_L",),
+        )
+
+    assert rc == 1
