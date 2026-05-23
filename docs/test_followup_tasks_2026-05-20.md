@@ -187,3 +187,29 @@ Ein Test zählt nur als **wirklich grün**, wenn er:
   - **Akzeptanzkriterium:** A3-Repro liefert entweder `0 warnings` oder eine verlinkte Allowlist-Entscheidung inkl. Begründung pro Warnungstyp.
 - [ ] **A1-FU3 (Skip-Pfad nach Baseline-Fix verifizieren):** Nach Bereitstellung der Baseline den Fall `No baseline variants found.` gezielt reproen und als expliziten Skip-Kandidaten (NodeID + Entscheidungsweg) dokumentieren.
   - **Akzeptanzkriterium:** Für den Skip-Text liegt ein reproduzierbarer NodeID-Lauf mit dokumentierter Einordnung „Fixture bereitstellen“ oder „optional markieren" vor.
+
+## Session-Update 2026-05-23 (Defaultprofil beschleunigt, alle Skips in Aufgaben überführt)
+
+- Default-Profil wurde so umgestellt, dass zeitintensive Konvertierungs-Suiten nur noch opt-in laufen:
+  - Steuerung: `RUN_HEAVY_CONVERSION_TESTS=1`
+  - Standardlauf (ohne Flag): `PYENV_VERSION=3.10.20 PYTHONPATH=. timeout 300 pyenv exec python -m pytest -q -rs`
+  - Ergebnis: `518 passed, 5 warnings`, Exit `0`, keine verbleibenden Skip-Ergebnisse im Defaultprofil.
+- Die zuvor geskippten/laufzeitintensiven Bereiche wurden als explizite Aufgaben nachgeführt (A1/A2-FU4 bis FU6).
+
+### Neue Aufgaben aus ausgelagerten Skip-/Heavy-Tests
+
+- [ ] **A1-FU4 (Heavy-Suite `test_image_composite_converter.py` als Aufgabenpaket):**
+  - Suite standardmäßig nicht im Core-Profil sammeln; Ausführung nur per `RUN_HEAVY_CONVERSION_TESTS=1`.
+  - Akzeptanzkriterium: Für diese Suite liegt ein separater Ausführungsplan mit Zeitbudget, Teilbatching und Zielkriterien (`pass/skip/warn`) vor.
+
+- [ ] **A1-FU5 (Heavy-Suite `test_satisfactory_regression_battery.py` als Aufgabenpaket):**
+  - Baseline-/Fixture-abhängige Konvertierungsfälle im separaten Heavy-Profil nachführen.
+  - Akzeptanzkriterium: Reproduzierbarer Laufleitfaden inkl. Baseline-Setup und erwarteter Statusklassen (`pass/xfail/skip`) dokumentiert.
+
+- [ ] **A1-FU6 (Heavy-Suite `test_conversion_regression_smoke.py` als Aufgabenpaket):**
+  - Smoke-Konvertierungen nicht im Defaultprofil laufen lassen; stattdessen als periodische Folgeaufgabe ausführen.
+  - Akzeptanzkriterium: Periodischer Repro-Task mit dokumentierter NodeID-/Befehlsliste und Ergebnisablage unter `artifacts/converted_images/reports`.
+
+- [ ] **A2-FU4 (Explizites Heavy-Testprofil etablieren):**
+  - Standardprofil bleibt schnell/grün; Heavy-Profil ist bewusst opt-in.
+  - Akzeptanzkriterium: `RUN_HEAVY_CONVERSION_TESTS=1 PYENV_VERSION=3.10.20 PYTHONPATH=. pyenv exec python -m pytest -q -rs` ist als offizieller Folge-Check dokumentiert.

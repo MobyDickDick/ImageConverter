@@ -79,9 +79,18 @@ def _load_iteration_error_per_pixel(iteration_log: Path) -> dict[str, float]:
     return rows
 
 
+def _baseline_ready() -> bool:
+    return (BASE / "images").exists() and (BASE / "svgs").exists() and (BASE / "variants.txt").exists()
+
+
+def _ensure_baseline(limit: int = 3) -> None:
+    if _baseline_ready():
+        return
+    _prepare_mini_baseline(BASE, limit=limit)
+
+
 def test_satisfactory_baseline_has_pairs() -> None:
-    if not BASE.exists():
-        _prepare_mini_baseline(BASE)
+    _ensure_baseline(limit=3)
     variants = _variants()
     if not variants:
         pytest.skip("No baseline variants found. Run tools/manage_satisfactory_baseline.py first.")
@@ -93,8 +102,7 @@ def test_satisfactory_baseline_has_pairs() -> None:
 
 @pytest.mark.blocking_conversion
 def test_satisfactory_baseline_reconversion_smoke(tmp_path: Path) -> None:
-    if not BASE.exists():
-        _prepare_mini_baseline(BASE)
+    _ensure_baseline(limit=3)
     variants = _variants()
     if not variants:
         pytest.skip("No baseline variants found.")
@@ -121,8 +129,7 @@ def test_satisfactory_baseline_reconversion_smoke(tmp_path: Path) -> None:
 
 @pytest.mark.blocking_conversion
 def test_satisfactory_successful_variants_reconversion_keeps_or_improves_quality(tmp_path: Path) -> None:
-    if not BASE.exists():
-        _prepare_mini_baseline(BASE, limit=5)
+    _ensure_baseline(limit=5)
     variants = _variants()
     if not variants:
         pytest.skip("No baseline variants found.")
