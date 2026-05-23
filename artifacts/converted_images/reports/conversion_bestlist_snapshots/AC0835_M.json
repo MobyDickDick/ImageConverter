@@ -1,12 +1,12 @@
 {
   "base": "AC0835",
-  "best_error": 20.255,
+  "best_error": 38.34,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.050637499999999995,
+  "error_per_pixel": 0.09585,
   "filename": "AC0835_M.jpg",
   "h": 20,
-  "mean_delta2": 5712.1650390625,
+  "mean_delta2": 9093.0595703125,
   "params": {
     "bottom_shape": null,
     "description_fragments": [
@@ -37,7 +37,7 @@
     "top_source_ref": null,
     "variant_name": "AC0835_M"
   },
-  "std_delta2": 14653.3876953125,
+  "std_delta2": 13884.0439453125,
   "variant": "AC0835_M",
   "w": 20
 }
