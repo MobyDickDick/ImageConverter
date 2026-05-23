@@ -159,3 +159,19 @@ Ein Test zählt nur als **wirklich grün**, wenn er:
   - **Akzeptanzkriterium:** `tests/test_satisfactory_regression_battery.py::test_satisfactory_successful_variants_reconversion_keeps_or_improves_quality` läuft in 2 direkten Wiederholungen ohne Exception-Abbruch durch und liefert jeweils ein finales Pytest-Summary.
 - [ ] **A6-FU2 (Blockierenden Langläufer isolieren):** Für den 300s-Timeout in der Vollsuite den bremsenden Restbereich ab ~`91%` mit NodeID-Teilbatches auflösen.
   - **Akzeptanzkriterium:** Reproduzierbarer Teilbatch inkl. Laufzeitprofil dokumentiert **oder** Vollsuite mit identischem 300s-Limit endet mit finalem Summary.
+
+## Session-Update 2026-05-23 (Run IJ: nächste dokumentierte Aufgabe erneut)
+
+- Nächste dokumentierte Aufgabe erneut ausgeführt:
+  - `PYENV_VERSION=3.10.20 PYTHONPATH=. timeout 120 pyenv exec python -m pytest tests/test_satisfactory_regression_battery.py::test_satisfactory_successful_variants_reconversion_keeps_or_improves_quality -q`
+  - Ergebnis: `1 failed, 5 warnings`, Exit `1`.
+  - Primärer Blocker unverändert: `FileNotFoundError` auf `artifacts/regression_baseline/satisfactory/images`.
+
+### Neue/konkretisierte Aufgaben aus misslungenen, übersprungenen oder blockierenden Tests
+
+- [ ] **A3-FU3 (Baseline-Guard im Testpfad):** Vor dem Aufruf von `converter.main(...)` sicherstellen, dass der erwartete Eingabeordner `artifacts/regression_baseline/satisfactory/images` existiert und mindestens eine verwertbare Datei enthält; andernfalls deterministisch mit klarer Setup-Fehlermeldung abbrechen.
+  - **Akzeptanzkriterium:** Der A3-Repro endet in 2 direkten Wiederholungen ohne `FileNotFoundError`; Ergebnis ist entweder valider Assert-Lauf oder klarer, reproduzierbarer Setup-Fehler mit finalem Pytest-Summary.
+- [ ] **A4-FU1 (Warnungen im A3-Repro auflösen/klassifizieren):** Die weiterhin sichtbaren 5 SWIG-Deprecation-Warnungen im A3-Repro entweder technisch beheben oder explizit als erlaubte Übergangswarnungen dokumentieren.
+  - **Akzeptanzkriterium:** A3-Repro liefert entweder `0 warnings` oder eine verlinkte Allowlist-Entscheidung inkl. Begründung pro Warnungstyp.
+- [ ] **A1-FU3 (Skip-Pfad nach Baseline-Fix verifizieren):** Nach Bereitstellung der Baseline den Fall `No baseline variants found.` gezielt reproen und als expliziten Skip-Kandidaten (NodeID + Entscheidungsweg) dokumentieren.
+  - **Akzeptanzkriterium:** Für den Skip-Text liegt ein reproduzierbarer NodeID-Lauf mit dokumentierter Einordnung „Fixture bereitstellen“ oder „optional markieren" vor.
