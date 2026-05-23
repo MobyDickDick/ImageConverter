@@ -31,6 +31,24 @@ Ergebnis: `17 passed, 3 xfailed`.
 - Datei: `tests/detailtests/test_conversion_execution_helpers.py`
 - Erwartung: `Failed_<name>.svg` existiert nach Verarbeitung.
 
+
+### TASK-4: Satisfactory-Baseline-Regressionstest scheitert ohne Testdaten-Setup ❌ (neu 2026-05-23)
+- Test: `tests/test_satisfactory_regression_battery.py::test_satisfactory_successful_variants_reconversion_keeps_or_improves_quality`
+- Beobachtung: `FileNotFoundError` auf `artifacts/regression_baseline/satisfactory/images`.
+- Erwartung: Test soll entweder reproduzierbar die benötigte Baseline vorbereiten oder bei fehlenden Artefakten sauber `skippen` statt als Hard-Fail zu enden.
+- Repro:
+  - `PYENV_VERSION=3.10.20 PYTHONPATH=. timeout 120 pyenv exec python -m pytest tests/test_satisfactory_regression_battery.py::test_satisfactory_successful_variants_reconversion_keeps_or_improves_quality -q`
+- Artefakt: `artifacts/converted_images/reports/TB_A3_timeout_probe_2026-05-23_runID.log`.
+
+
+### TASK-5: Global-Search-Kleingewinn-Repro ist flaky/unter Zielschwelle ❌ (neu 2026-05-23)
+- Test: `tests/detailtests/test_global_search_optimization_helpers.py::test_global_search_does_not_count_small_relevant_gain_as_no_improvement`
+- Beobachtung: Assertion `float(params["arm_x1"]) >= 1.10` schlägt fehl (`1.052784303601394`).
+- Erwartung: Optimierungslogik soll bei kleinem relevantem Gewinn konsistent über die Zielschwelle verbessern oder der Test muss auf stabile, deterministische Akzeptanzkriterien umgestellt werden.
+- Repro:
+  - `PYENV_VERSION=3.10.20 PYTHONPATH=. pyenv exec pytest -q --maxfail=1`
+- Artefakt: `artifacts/converted_images/reports/pytest_full_maxfail1_2026-05-23_runID.log`.
+
 ## Empfohlener Abarbeitungsmodus
 1. Produktionslogik für File-Emission in `convertOneImpl` vereinheitlichen (ein zentraler Write/Move-Pfad für Failed-SVG).
 2. Jeden Task einzeln fixen und mit `-k` gezielt validieren.
