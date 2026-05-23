@@ -2624,3 +2624,10 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 - **Blocker:** Der bekannte Setup-Blocker bleibt unverändert reproduzierbar (`FileNotFoundError` auf `artifacts/regression_baseline/satisfactory/images`).
 - **Volltest-Replay:** `pytest -q` wurde erneut als Gesamtlauf mit `timeout 300` ausgeführt und endet weiterhin ohne Endsummary mit Exit `124` (Fortschritt bis ca. `91%`). Log: `artifacts/converted_images/reports/pytest_full_2026-05-23_runIG.log`.
 - **Nächster sinnvoller Schritt:** Baseline-Verzeichnis `artifacts/regression_baseline/satisfactory/images` deterministisch bereitstellen (oder Test-Fixture robust gegen fehlende Baseline machen) und danach A3 erneut laufen lassen.
+
+### Fortschritt vs. Blocker (Session 2026-05-23, nächste dokumentierte Aufgabe Run IM)
+
+- **Fortschritt (nächste dokumentierte Aufgabe):** Der priorisierte Lauf `tests/test_satisfactory_regression_battery.py::test_satisfactory_successful_variants_reconversion_keeps_or_improves_quality` wurde in Python `3.10.20` erneut mit Timeout-Guard ausgeführt; Ergebnis `1 failed, 5 warnings`, Exit `1`. Log: `artifacts/converted_images/reports/TB_A3_timeout_probe_2026-05-23_runIM.log`.
+- **Blocker:** Der bekannte Setup-Blocker bleibt unverändert reproduzierbar (`FileNotFoundError` auf `artifacts/regression_baseline/satisfactory/images`).
+- **Volltest-Replay:** `pytest -q -rs` wurde erneut als Gesamtlauf mit `timeout 300` ausgeführt und endet mit Exit `1`; im Log wurde bis mindestens `91%` Fortschritt ein sichtbarer `F` protokolliert, jedoch ohne finales Summary. Log: `artifacts/converted_images/reports/pytest_full_2026-05-23_runIM.log`.
+- **Nächster sinnvoller Schritt:** Baseline-Verzeichnis `artifacts/regression_baseline/satisfactory/images` inklusive Mindestinhalt deterministisch vorbereiten (nicht nur per `mkdir -p`) und danach A3 erneut laufen lassen.
