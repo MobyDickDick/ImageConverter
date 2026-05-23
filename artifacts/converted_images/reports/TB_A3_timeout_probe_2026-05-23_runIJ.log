@@ -2,7 +2,7 @@ F                                                                        [100%]
 =================================== FAILURES ===================================
 _ test_satisfactory_successful_variants_reconversion_keeps_or_improves_quality _
 
-tmp_path = PosixPath('/tmp/pytest-of-root/pytest-1/test_satisfactory_successful_v0')
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-0/test_satisfactory_successful_v0')
 
     @pytest.mark.blocking_conversion
     def test_satisfactory_successful_variants_reconversion_keeps_or_improves_quality(tmp_path: Path) -> None:
@@ -95,4 +95,4 @@ src/iCCModules/imageCompositeConverterConversionInputs.py:24: FileNotFoundError
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
 =========================== short test summary info ============================
 FAILED tests/test_satisfactory_regression_battery.py::test_satisfactory_successful_variants_reconversion_keeps_or_improves_quality
-1 failed, 5 warnings in 1.43s
+1 failed, 5 warnings in 2.48s
