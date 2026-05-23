@@ -45,6 +45,12 @@ def parseArgsImpl(
         help="Pfad zum Ordner mit den Bildern (Default: artifacts/images_to_convert)",
     )
     parser.add_argument(
+        "--input-dir",
+        dest="input_dir",
+        default=None,
+        help="Alias für folder_path (Kompatibilität mit älteren Skriptaufrufen).",
+    )
+    parser.add_argument(
         "csv_or_output",
         nargs="?",
         default=None,
@@ -173,6 +179,9 @@ def parseArgsImpl(
     )
     parser.add_argument("--_render-svg-subprocess", action="store_true", help=argparse.SUPPRESS)
     args = parser.parse_args(argv)
+    if args.input_dir:
+        args.folder_path = str(args.input_dir)
+    delattr(args, "input_dir")
     if args.iterations_override is not None:
         args.iterations = args.iterations_override
     delattr(args, "iterations_override")
@@ -500,3 +509,14 @@ def runMainImpl(
         except description_mapping_error_type as exc:
             print(f"[ERROR] {format_user_diagnostic_fn(exc)}")
             return 2
+
+
+def main(argv: list[str] | None = None) -> int:
+    """Compatibility CLI entry point that delegates to the canonical module CLI."""
+    from src import imageCompositeConverter as app
+
+    return int(app.main(argv))
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

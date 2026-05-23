@@ -7,6 +7,7 @@ import math
 import os
 import re
 import signal
+import shutil
 from contextlib import contextmanager
 
 _ONE_BY_ONE_TRANSPARENT_PNG = (
@@ -120,6 +121,31 @@ def _svgQualityScore(
         return float("inf")
     return score if math.isfinite(score) else float("inf")
 
+
+
+
+def _resolveSampleSvgPath(*, sample_svg_path: str, folder_path: str, reports_out_dir: str) -> str:
+    candidate = str(sample_svg_path or '').strip()
+    if not candidate:
+        return ''
+    probe_paths = [candidate]
+    if not os.path.isabs(candidate):
+        probe_paths.extend([
+            os.path.abspath(candidate),
+            os.path.abspath(os.path.join(folder_path, candidate)),
+            os.path.abspath(os.path.join(os.path.dirname(folder_path), candidate)),
+            os.path.abspath(os.path.join(reports_out_dir, candidate)),
+            os.path.abspath(os.path.join(os.path.dirname(reports_out_dir), candidate)),
+        ])
+        normalized = candidate.replace("\\", "/")
+        marker = "/samples/"
+        if marker in normalized:
+            sample_tail = normalized.split(marker, 1)[1].lstrip("/")
+            probe_paths.append(os.path.abspath(os.path.join(folder_path, "samples", sample_tail)))
+    for probe in probe_paths:
+        if probe and os.path.exists(probe):
+            return probe
+    return ''
 
 def _ensureEmbeddedSvgAtPath(
     *,
@@ -572,6 +598,23 @@ def convertOneImpl(
     _base, _desc, params, best_iter, best_error = res
     details = read_validation_log_details_fn(log_file)
     status = str(details.get("status", ""))
+    if status == "non_composite_plan_b_sample_svg_selected":
+        sample_svg_path = _resolveSampleSvgPath(
+            sample_svg_path=str(details.get("sample_svg_path", "")),
+            folder_path=folder_path,
+            reports_out_dir=reports_out_dir,
+        )
+        if sample_svg_path:
+            try:
+                shutil.copyfile(sample_svg_path, svg_path)
+                failed_svg_path = os.path.join(svg_out_dir, f"Failed_{base}.svg")
+                if os.path.exists(failed_svg_path):
+                    os.unlink(failed_svg_path)
+                reports_failed_svg_path = os.path.join(reports_out_dir, "converted_svgs", f"Failed_{base}.svg")
+                if os.path.exists(reports_failed_svg_path):
+                    os.unlink(reports_failed_svg_path)
+            except OSError:
+                pass
     if status.startswith("skipped_"):
         _ensureEmbeddedSvgAtPath(
             svg_path=svg_path,
@@ -653,6 +696,10 @@ def convertOneImpl(
         poor_threshold = float(os.environ.get("ICC_POOR_SVG_MEAN_DELTA2", "2500.0") or "2500.0")
         old_is_poor = math.isfinite(previous_quality) and previous_quality >= poor_threshold
         new_is_better = new_quality < previous_quality
+        previous_contains_embedded_raster = "data:image/" in previous_svg_content.lower()
+        new_contains_embedded_raster = _svgContainsEmbeddedRasterArtifact(svg_path)
+        if previous_contains_embedded_raster and not new_contains_embedded_raster:
+            new_is_better = True
         if not new_is_better:
             if old_is_poor:
                 _deleteDiffIfPresent(diff_path)
