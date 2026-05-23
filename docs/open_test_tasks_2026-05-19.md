@@ -107,3 +107,18 @@ Akzeptanz pro BC-Task: reproduzierbarer Einzel-Repro + stabiler `passed`-Status 
   - **Akzeptanz:** reproduzierbarer Limitierer dokumentiert inkl. Laufzeitprofil **oder** Vollsuite endet unter 300s mit finalem Summary.
 - [ ] **BC-Inventory-FU1:** 20 `blocking_conversion`-Tests aus dem aktuellen Collect-only-Lauf als laufend verifiziert markieren (kein Rückgang/Anstieg unbemerkt).
   - **Akzeptanz:** Anzahl und NodeID-Liste sind in jedem Folgelauf diffbar dokumentiert.
+
+## Session-Update 2026-05-23 (Run IK: Re-Run nächste Aufgabe + Volltest)
+
+- A3-Repro erneut ausgeführt:
+  - `PYENV_VERSION=3.10.20 PYTHONPATH=. timeout 120 pyenv exec python -m pytest tests/test_satisfactory_regression_battery.py::test_satisfactory_successful_variants_reconversion_keeps_or_improves_quality -q`
+  - Ergebnis: weiterhin `1 failed, 5 warnings`; Root cause unverändert (`FileNotFoundError` auf `artifacts/regression_baseline/satisfactory/images`).
+- Volltest erneut ausgeführt:
+  - `PYENV_VERSION=3.10.20 PYTHONPATH=. timeout 300 pyenv exec python -m pytest -q -rs`
+  - Ergebnis: Exit `124`; kein finales Summary im Zeitfenster, Laufstand erneut im Bereich `~91%`.
+
+### Neu in Aufgabenform überführt (Run IK)
+- [ ] **A3-FU4:** `_prepare_mini_baseline` für fehlendes `BASE/images` hart machen (Verzeichnis anlegen/kopieren) oder den Test bei fehlender Quellbasis kontrolliert `skippen`.
+  - **Akzeptanz:** Zwei direkte Re-Runs des A3-Tests ohne `FileNotFoundError`; Ergebnis ist `passed` oder explizit begründeter `skipped`.
+- [ ] **A6-FU4:** Vollsuite-Timeout bei 300s weiterhin reproduziert; den Verursacherbereich nach `91%` via NodeID-Chunking (`--maxfail=1` + `-k`/Dateibatches) isolieren.
+  - **Akzeptanz:** Mindestens ein konkreter limitierender Testfall oder ein klarer enger Kandidatenblock dokumentiert.
