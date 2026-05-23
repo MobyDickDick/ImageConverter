@@ -1,0 +1,98 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_ test_satisfactory_successful_variants_reconversion_keeps_or_improves_quality _
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-0/test_satisfactory_successful_v0')
+
+    @pytest.mark.blocking_conversion
+    def test_satisfactory_successful_variants_reconversion_keeps_or_improves_quality(tmp_path: Path) -> None:
+        if not BASE.exists():
+            _prepare_mini_baseline(BASE, limit=5)
+        variants = _variants()
+        if not variants:
+            pytest.skip("No baseline variants found.")
+    
+        baseline_error_pp = _load_baseline_error_per_pixel()
+        checked = 0
+        regressions: list[str] = []
+    
+        # Reconversion quality should remain within a broad but still meaningful band.
+        # This suite runs across heterogeneous CI/dev environments where rasterization
+        # and optimization paths may diverge noticeably.
+        quality_epsilon = 0.02
+    
+        for variant in variants[:5]:
+            baseline_value = baseline_error_pp.get(variant.upper())
+            if baseline_value is None:
+                continue
+            family = variant.rsplit("_", 1)[0]
+            out = tmp_path / f"run_{variant.lower()}"
+>           exit_code = converter.main(
+                [
+                    str(BASE / "images"),
+                    "--descriptions-path",
+                    "artifacts/images_to_convert/Finale_Wurzelformen_V3.xml",
+                    "--output-dir",
+                    str(out),
+                    "--start",
+                    family,
+                    "--end",
+                    family,
+                ]
+            )
+
+tests/test_satisfactory_regression_battery.py:145: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/imageCompositeConverter.py:2754: in main
+    return cli_helpers.runMainImpl(
+src/iCCModules/imageCompositeConverterCli.py:486: in runMainImpl
+    out_dir = convert_range_fn(
+src/imageCompositeConverter.py:2492: in convertRange
+    return imageCompositeConverterRemaining_helpers.convertRange(folder_path, csv_path, iterations, start_ref, end_ref, debug_ac0811_dir, debug_element_diff_dir, output_root, selected_variants, deterministic_order)
+src/iCCModules/imageCompositeConverterRemaining.py:963: in convertRange
+    normalized_selected_variants, files = _listRequestedImageFiles(
+src/iCCModules/imageCompositeConverterRemaining.py:934: in _listRequestedImageFiles
+    return conversion_input_helpers.listRequestedImageFilesImpl(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+folder_path = 'artifacts/regression_baseline/satisfactory/images'
+start_ref = 'AC0800', end_ref = 'AC0800'
+
+    def listRequestedImageFilesImpl(
+        folder_path: str,
+        start_ref: str,
+        end_ref: str,
+        *,
+        selected_variants: set[str] | None,
+        in_requested_range_fn,
+    ) -> tuple[set[str], list[str]]:
+        normalized_selected_variants = normalizeSelectedVariantsImpl(selected_variants)
+        files = sorted(
+            filename
+>           for filename in os.listdir(folder_path)
+            if filename.lower().endswith(_VALID_IMAGE_EXTENSIONS)
+            and in_requested_range_fn(filename, start_ref, end_ref)
+            and (
+                not normalized_selected_variants
+                or os.path.splitext(filename)[0].upper() in normalized_selected_variants
+            )
+        )
+E       FileNotFoundError: [Errno 2] No such file or directory: 'artifacts/regression_baseline/satisfactory/images'
+
+src/iCCModules/imageCompositeConverterConversionInputs.py:24: FileNotFoundError
+=============================== warnings summary ===============================
+<frozen importlib._bootstrap>:241
+<frozen importlib._bootstrap>:241
+  <frozen importlib._bootstrap>:241: DeprecationWarning: builtin type SwigPyPacked has no __module__ attribute
+
+<frozen importlib._bootstrap>:241
+<frozen importlib._bootstrap>:241
+  <frozen importlib._bootstrap>:241: DeprecationWarning: builtin type SwigPyObject has no __module__ attribute
+
+<frozen importlib._bootstrap>:241
+  <frozen importlib._bootstrap>:241: DeprecationWarning: builtin type swigvarlink has no __module__ attribute
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_satisfactory_regression_battery.py::test_satisfactory_successful_variants_reconversion_keeps_or_improves_quality
+1 failed, 5 warnings in 2.72s
