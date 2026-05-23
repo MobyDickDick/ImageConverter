@@ -243,6 +243,7 @@ def test_convert_one_impl_embedded_svg_uses_failed_prefix_independent_of_status(
         encoding="utf-8",
     )
 
+    logs: list[str] = []
     row, failed = conversion_execution_helpers.convertOneImpl(
         filename=filename,
         folder_path=str(folder),
@@ -262,13 +263,14 @@ def test_convert_one_impl_embedded_svg_uses_failed_prefix_independent_of_status(
         cv2_module=_Cv2Stub(_ImageStub((8, 6, 3))),
         render_embedded_raster_svg_fn=lambda _path: "<svg/>",
         append_batch_failure_fn=lambda _row: None,
-        print_fn=lambda _msg: None,
+        print_fn=logs.append,
     )
 
     assert failed is True
     assert row is None
     assert (svg_out / "Failed_AC0805_M.svg").exists()
     assert not (svg_out / "AC0805_M.svg").exists()
+    assert any(msg.startswith("[ERROR] AC0805_M.jpg: Embedded-Raster-SVG erkannt") for msg in logs)
 
 
 def test_convert_one_impl_marks_timeout_as_batch_error(tmp_path: Path) -> None:

@@ -352,6 +352,18 @@ def optionalLogCaptureImpl(log_path: str):
             yield
 
 
+def _hasBatchFailures(reports_out_dir: str) -> bool:
+    summary_path = Path(reports_out_dir) / "reports" / "batch_failure_summary.csv"
+    if not summary_path.exists():
+        return False
+    try:
+        with open(summary_path, "r", encoding="utf-8", newline="") as handle:
+            rows = [line for line in handle.readlines()[1:] if line.strip()]
+        return bool(rows)
+    except OSError:
+        return False
+
+
 def _isFullAc08Range(args: argparse.Namespace) -> bool:
     start = str(getattr(args, "start", "") or "").strip().upper()
     end = str(getattr(args, "end", "") or "").strip().upper()
@@ -505,6 +517,9 @@ def runMainImpl(
                     bool(args.deterministic_order),
                 )
             print(f"\nAbgeschlossen! Ausgaben unter: {out_dir}")
+            if args.mode == "convert" and _hasBatchFailures(str(out_dir)):
+                print("[ERROR] Mindestens eine Datei konnte nicht erfolgreich konvertiert werden (siehe batch_failure_summary.csv).")
+                return 1
             return 0
         except description_mapping_error_type as exc:
             print(f"[ERROR] {format_user_diagnostic_fn(exc)}")

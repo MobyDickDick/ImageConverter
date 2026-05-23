@@ -651,7 +651,7 @@ def convertOneImpl(
             }
         )
         _deleteDiffIfPresent(diff_path)
-        print_fn(f"[WARN] {filename}: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.")
+        print_fn(f"[ERROR] {filename}: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.")
         _emit_anchor_variant_event("variant_done", status="raster_embedded_svg")
         return None, True
     if _svgIsTrivialFallbackArtifact(svg_path):

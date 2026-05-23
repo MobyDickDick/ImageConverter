@@ -1,0 +1,28 @@
+[INFO] Schreibe Konsolen-Output nach: /workspace/ImageConverter/imageCompositeConverter.local.log
+
+--- Verarbeite AC0030_S.jpg ---
+Bildbeschreibung: Kühlelement, graues Rechteck, Minus-Minus-Zeichen oben Mitte, Farbverlauf horizontal dunkel-hell-dunkel, graue Linien in beiden Diagonalen
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
+[WARN] AC0030_S.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite AC0030.jpg ---
+Bildbeschreibung: Kühlelement, graues Rechteck, Minus-Minus-Zeichen oben Mitte, Farbverlauf horizontal dunkel-hell-dunkel, graue Linien in beiden Diagonalen
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
+[WARN] AC0030.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite AC0030_L.jpg ---
+Bildbeschreibung: Kühlelement, graues Rechteck, Minus-Minus-Zeichen oben Mitte, Farbverlauf horizontal dunkel-hell-dunkel, graue Linien in beiden Diagonalen
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
+[WARN] AC0030_L.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+
+--- Verarbeite AC0030_M.jpg ---
+Bildbeschreibung: Kühlelement, graues Rechteck, Minus-Minus-Zeichen oben Mitte, Farbverlauf horizontal dunkel-hell-dunkel, graue Linien in beiden Diagonalen
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
+[WARN] AC0030_M.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
+[INFO] Übersichts-Kacheln erzeugt: diff=artifacts/converted_images/reports/overview_diff_tiles.png, svg=artifacts/converted_images/reports/overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: artifacts/converted_images
