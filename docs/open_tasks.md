@@ -2596,3 +2596,9 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 - **Fortschritt (nächste dokumentierte Aufgabe):** Der priorisierte Lauf `tests/test_satisfactory_regression_battery.py::test_satisfactory_successful_variants_reconversion_keeps_or_improves_quality` wurde in Python `3.10.20` erneut ausgeführt; Log: `artifacts/converted_images/reports/TB_A3_xfail_probe_2026-05-22_runHY.log`.
 - **Blocker:** Ergebnis ist in diesem Lauf `1 failed, 5 warnings` (Exit `1`) statt grün; Fehlerursache: `FileNotFoundError` für `artifacts/regression_baseline/satisfactory/images`.
 - **Nächster sinnvoller Schritt:** Repro stabilisieren, indem die Baseline-Verzeichnisstruktur vor dem Lauf explizit vorbereitet/validiert wird, und anschließend denselben A3-Lauf erneut ausführen.
+
+### Fortschritt vs. Blocker (Session 2026-05-23, nächste dokumentierte Aufgabe Run IC)
+
+- **Fortschritt (nächste dokumentierte Aufgabe):** Der priorisierte Lauf `tests/test_satisfactory_regression_battery.py::test_satisfactory_successful_variants_reconversion_keeps_or_improves_quality` wurde in Python `3.10.20` erneut mit Timeout-Guard ausgeführt; Log: `artifacts/converted_images/reports/TB_A3_timeout_probe_2026-05-23_runIC.log`.
+- **Blocker:** Ergebnis bleibt `1 failed, 5 warnings` (Exit `1`); Fehlerursache weiterhin `FileNotFoundError` für `artifacts/regression_baseline/satisfactory/images`.
+- **Nächster sinnvoller Schritt:** Vor dem nächsten A3-Folgelauf die fehlende Baseline-Struktur (`.../satisfactory/images`) reproduzierbar bereitstellen bzw. aus vorhandenen Artefakten vorbereiten und dann denselben Test erneut fahren.
