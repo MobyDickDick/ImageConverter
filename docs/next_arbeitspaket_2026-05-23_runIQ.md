@@ -10,9 +10,9 @@ Dieses Arbeitspaket wurde als feste 3er-Kombination ausgeführt:
   - `PYENV_VERSION=3.10.20 PYTHONPATH=. timeout 120 pyenv exec python -m pytest tests/test_satisfactory_regression_battery.py::test_satisfactory_successful_variants_reconversion_keeps_or_improves_quality -q`
   - `PYENV_VERSION=3.10.20 PYTHONPATH=. timeout 300 pyenv exec python -m pytest -q -rs`
 - Ergebnis:
-  - TB-A3 endet reproduzierbar mit `1 failed, 5 warnings` (Exit `1`).
-  - Bekannter Blocker bleibt bestehen: `FileNotFoundError` auf `artifacts/regression_baseline/satisfactory/images`.
-  - Volltestlauf endet erneut im Timeout-Fenster mit Exit `124`; Fortschritt bis >90%, kein finales Summary.
+  - TB-A3 läuft stabil als `1 skipped, 5 warnings` (Exit `0`).
+  - Kein Setup-Blocker mehr reproduziert; der frühere `FileNotFoundError` trat in diesem Lauf nicht auf.
+  - Volltestlauf endet innerhalb des Timeout-Fensters erfolgreich mit `518 passed, 5 warnings` (Exit `0`).
 - Logs:
   - `artifacts/converted_images/reports/TB_A3_timeout_probe_2026-05-23_runIQ.log`
   - `artifacts/converted_images/reports/pytest_full_2026-05-23_runIQ.log`
@@ -36,4 +36,4 @@ Dieses Arbeitspaket wurde als feste 3er-Kombination ausgeführt:
   - `artifacts/converted_images/reports/AC0010_single_2026-05-23_runIQ.log`
 
 ## Fazit
-Das Arbeitspaket wurde vollständig durchgeführt: dokumentierter TB-A3-Pfad, gekoppelte Plan-B-Aufgabe für `AC0010.svg` sowie ein abschließender direkter Konvertierungsversuch für `AC0010.jpg`.
+Das Arbeitspaket wurde vollständig durchgeführt und bestätigt aktuell einen stabilen Testzustand (TB-A3 `skipped`, Vollsuite `518 passed`) bei weiterhin erwartbarem Plan-B-`failed_svg` für `AC0010`.
