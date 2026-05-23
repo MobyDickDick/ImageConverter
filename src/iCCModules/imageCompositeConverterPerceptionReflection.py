@@ -124,13 +124,13 @@ class Reflection:
 
         non_traceable_hint = Reflection._detect_non_traceable_hint(desc)
         if non_traceable_hint:
+            params["review_reason"] = non_traceable_hint
             if Reflection._should_allow_auto_for_unclassified_geometry(desc, non_traceable_hint):
                 params["elements"].append(
                     "AUTO: Trotz unzugeordneter Familienzuordnung wurde wegen ausreichender Geometriehinweise automatisch konvertiert."
                 )
             else:
                 params["mode"] = "manual_review"
-                params["review_reason"] = non_traceable_hint
                 params["label"] = ""
                 params["elements"].append(f"MANUELL: {non_traceable_hint}")
                 return desc, params
