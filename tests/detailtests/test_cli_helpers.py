@@ -22,6 +22,17 @@ def test_parse_args_impl_applies_named_iterations_override() -> None:
     assert args.iterations == 17
 
 
+def test_parse_args_impl_accepts_input_dir_alias() -> None:
+    args = cli_helpers.parseArgsImpl(
+        argv=["--input-dir", "images_alt", "--start", "AC0011", "--end", "AC0011"],
+        ac08_regression_set_name="ac08-regression",
+        ac08_regression_variants=("AC0800_L",),
+        svg_render_subprocess_timeout_sec=5.0,
+    )
+
+    assert args.folder_path == "images_alt"
+
+
 def test_auto_detect_csv_path_prefers_reference_like_names(tmp_path: Path) -> None:
     images_dir = tmp_path / "images"
     images_dir.mkdir()
@@ -396,3 +407,13 @@ def test_run_main_impl_repair_mode_requires_repair_callback() -> None:
 
     assert rc == 2
     assert "repair_ac0223_bestlist_fn-Callback" in stdout.getvalue()
+
+
+def test_compat_cli_main_delegates_to_canonical_app(monkeypatch) -> None:
+    class DummyApp:
+        @staticmethod
+        def main(argv=None) -> int:
+            return 23 if argv == ["--help"] else 0
+
+    monkeypatch.setitem(sys.modules, "src.imageCompositeConverter", DummyApp)
+    assert cli_helpers.main(["--help"]) == 23

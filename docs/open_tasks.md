@@ -2670,3 +2670,9 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 - **Fortschritt (Plan B):** Die gekoppelte Plan-B-Roundtrip-Probe für `AC0010.svg` wurde erneut ausgeführt; Ergebnis wie erwartet `status=failed_svg` mit Artefakt `Failed_AC0010.svg`. Log: `artifacts/converted_images/reports/AC0010_planb_roundtrip_2026-05-23_runIQ.log`.
 - **Fortschritt (Konvertierungsversuch):** Der direkte Einzellauf `AC0010` wurde mit Exit `0` ausgeführt. Log: `artifacts/converted_images/reports/AC0010_single_2026-05-23_runIQ.log`.
 - **Nächster sinnvoller Schritt:** Dasselbe Arbeitspaket-Schema mit dem nächsten offenen Zielbild fortsetzen und den stabilen TB-A3-/Volltestzustand in einem Folgelauf verifizieren.
+
+### Fortschritt vs. Blocker (Session 2026-05-23, nächstes Arbeitspaket Run IT)
+
+- **Fortschritt (nächste dokumentierte Aufgabe):** TB-A3 wurde erneut mit Timeout-Guard ausgeführt (`PYENV_VERSION=3.10.20 timeout 240 python -m pytest tests/test_satisfactory_regression_battery.py::test_satisfactory_successful_variants_reconversion_keeps_or_improves_quality -q`) und endet stabil mit `1 skipped, 5 warnings`, Exit `0`; Log: `artifacts/converted_images/reports/TB_A3_timeout_probe_2026-05-23_runIT.log`.
+- **Fortschritt (Plan B + AC0011):** Die gekoppelte Plan-B-Aufgabe auf Basis von `samples/AC0011.svg` wurde ausgeführt (`status=failed_svg`), und der direkte JPG-Konvertierungsversuch für `AC0011.jpg` reproduziert ebenfalls den bekannten `Failed_AC0011.svg`-Pfad; Logs: `artifacts/converted_images/reports/AC0011_planb_roundtrip_2026-05-23_runIT.log` und `artifacts/converted_images/reports/AC0011_single_2026-05-23_runIT.log`.
+- **Blocker:** Für AC0011 bleibt der bekannte `Embedded-Raster-SVG`-Blocker unverändert bestehen.

@@ -528,3 +528,148 @@ def test_convert_one_impl_keeps_existing_svg_when_new_is_not_better(tmp_path: Pa
     assert failed is False
     assert row is not None
     assert (svg_out / "AC0801_S.svg").read_text(encoding="utf-8") == "<svg>old</svg>"
+
+
+def test_convert_one_impl_prefers_new_vector_svg_over_existing_embedded_raster_even_when_delta2_is_worse(tmp_path: Path) -> None:
+    folder = tmp_path / "images"
+    svg_out = tmp_path / "svg"
+    diff_out = tmp_path / "diff"
+    reports = tmp_path / "reports"
+    for path in (folder, svg_out, diff_out, reports):
+        path.mkdir()
+    filename = "AC9911.jpg"
+    (folder / filename).write_bytes(b"fake")
+    (svg_out / "AC9911.svg").write_text(
+        "<svg><image href='data:image/png;base64,abc'/></svg>",
+        encoding="utf-8",
+    )
+
+    def _run(*_args, **_kwargs):
+        (svg_out / "AC0011.svg").write_text("<svg><rect width='10' height='10'/></svg>", encoding="utf-8")
+        return ("AC0011", "desc", {"mode": "non_composite"}, 2, 12.0)
+
+    row, failed = conversion_execution_helpers.convertOneImpl(
+        filename=filename,
+        folder_path=str(folder),
+        csv_path="descriptions.csv",
+        iteration_budget=3,
+        badge_rounds=5,
+        svg_out_dir=str(svg_out),
+        diff_out_dir=str(diff_out),
+        reports_out_dir=str(reports),
+        debug_ac0811_dir=None,
+        debug_element_diff_dir=None,
+        run_iteration_pipeline_fn=_run,
+        read_validation_log_details_fn=lambda _path: {"status": "non_composite_plan_b_sample_svg_selected", "convergence": "plateau"},
+        render_svg_to_numpy_fn=lambda svg, _w, _h: svg,
+        calculate_delta2_stats_fn=lambda _img, rendered: (10.0 if "<image" in rendered else 20.0, 0.0),
+        get_base_name_from_file_fn=lambda stem: stem.split("_")[0],
+        cv2_module=_Cv2Stub(_ImageStub((4, 3, 3))),
+        render_embedded_raster_svg_fn=lambda _path: "<svg/>",
+        append_batch_failure_fn=lambda _row: None,
+        print_fn=lambda _msg: None,
+    )
+
+    assert failed is False
+    assert row is not None
+    assert (svg_out / "AC0011.svg").read_text(encoding="utf-8") == "<svg><rect width='10' height='10'/></svg>"
+
+
+def test_convert_one_impl_uses_logged_sample_svg_for_non_composite_plan_b_status(tmp_path: Path) -> None:
+    folder = tmp_path / "images"
+    svg_out = tmp_path / "svg"
+    diff_out = tmp_path / "diff"
+    reports = tmp_path / "reports"
+    samples = folder / "samples"
+    for path in (folder, svg_out, diff_out, reports, samples):
+        path.mkdir(parents=True, exist_ok=True)
+    filename = "AC0011.jpg"
+    (folder / filename).write_bytes(b"fake")
+    sample_svg = samples / "AC9911.svg"
+    sample_svg.write_text("<svg><rect width='11' height='11'/></svg>", encoding="utf-8")
+    (svg_out / "Failed_AC0011.svg").write_text("<svg><image href='data:image/png;base64,abc'/></svg>", encoding="utf-8")
+    reports_converted = reports / "converted_svgs"
+    reports_converted.mkdir(parents=True, exist_ok=True)
+    (reports_converted / "Failed_AC0011.svg").write_text("<svg><image href='data:image/png;base64,abc'/></svg>", encoding="utf-8")
+
+    def _run(*_args, **_kwargs):
+        return ("AC9911", "desc", {"mode": "non_composite"}, 1, 1.0)
+
+    row, failed = conversion_execution_helpers.convertOneImpl(
+        filename=filename,
+        folder_path=str(folder),
+        csv_path="descriptions.csv",
+        iteration_budget=3,
+        badge_rounds=5,
+        svg_out_dir=str(svg_out),
+        diff_out_dir=str(diff_out),
+        reports_out_dir=str(reports),
+        debug_ac0811_dir=None,
+        debug_element_diff_dir=None,
+        run_iteration_pipeline_fn=_run,
+        read_validation_log_details_fn=lambda _path: {
+            "status": "non_composite_plan_b_sample_svg_selected",
+            "sample_svg_path": str(sample_svg),
+            "convergence": "plateau",
+        },
+        render_svg_to_numpy_fn=lambda _svg, _w, _h: object(),
+        calculate_delta2_stats_fn=lambda _img, _rendered: (1.0, 0.0),
+        get_base_name_from_file_fn=lambda stem: stem.split("_")[0],
+        cv2_module=_Cv2Stub(_ImageStub((4, 3, 3))),
+        render_embedded_raster_svg_fn=lambda _path: "<svg/>",
+        append_batch_failure_fn=lambda _row: None,
+        print_fn=lambda _msg: None,
+    )
+
+    assert failed is False
+    assert row is not None
+    assert (svg_out / "AC0011.svg").read_text(encoding="utf-8") == sample_svg.read_text(encoding="utf-8")
+    assert not (svg_out / "Failed_AC0011.svg").exists()
+    assert not (reports / "converted_svgs" / "Failed_AC0011.svg").exists()
+
+
+def test_convert_one_impl_resolves_relative_logged_sample_svg_path(tmp_path: Path) -> None:
+    folder = tmp_path / "images"
+    svg_out = tmp_path / "svg"
+    diff_out = tmp_path / "diff"
+    reports = tmp_path / "reports"
+    samples = folder / "samples"
+    for path in (folder, svg_out, diff_out, reports, samples):
+        path.mkdir(parents=True, exist_ok=True)
+    filename = "AC9911.jpg"
+    (folder / filename).write_bytes(b"fake")
+    sample_svg = samples / "AC9911.svg"
+    sample_svg.write_text("<svg><rect width='13' height='13'/></svg>", encoding="utf-8")
+
+    def _run(*_args, **_kwargs):
+        return ("AC9911", "desc", {"mode": "non_composite"}, 1, 1.0)
+
+    row, failed = conversion_execution_helpers.convertOneImpl(
+        filename=filename,
+        folder_path=str(folder),
+        csv_path="descriptions.csv",
+        iteration_budget=3,
+        badge_rounds=5,
+        svg_out_dir=str(svg_out),
+        diff_out_dir=str(diff_out),
+        reports_out_dir=str(reports),
+        debug_ac0811_dir=None,
+        debug_element_diff_dir=None,
+        run_iteration_pipeline_fn=_run,
+        read_validation_log_details_fn=lambda _path: {
+            "status": "non_composite_plan_b_sample_svg_selected",
+            "sample_svg_path": "artifacts/images_to_convert/samples/AC9911.svg",
+            "convergence": "plateau",
+        },
+        render_svg_to_numpy_fn=lambda _svg, _w, _h: object(),
+        calculate_delta2_stats_fn=lambda _img, _rendered: (1.0, 0.0),
+        get_base_name_from_file_fn=lambda stem: stem.split("_")[0],
+        cv2_module=_Cv2Stub(_ImageStub((4, 3, 3))),
+        render_embedded_raster_svg_fn=lambda _path: "<svg/>",
+        append_batch_failure_fn=lambda _row: None,
+        print_fn=lambda _msg: None,
+    )
+
+    assert failed is False
+    assert row is not None
+    assert (svg_out / "AC9911.svg").read_text(encoding="utf-8") == sample_svg.read_text(encoding="utf-8")

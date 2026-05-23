@@ -23,7 +23,6 @@ def _build_sample_candidates(base_name: str) -> list[str]:
         _add(root)
         for alt_suffix in ("L", "M", "S"):
             _add(f"{root}_{alt_suffix}")
-        _add(size_suffix)
         return candidates
 
     for alt_suffix in ("L", "M", "S"):
@@ -153,7 +152,8 @@ def runNonCompositeIterationImpl(
             sample_err = calculate_error_fn(perc_img, sample_rendered)
             baseline_is_embedded_raster = _contains_svg_image_tag(svg_content)
             sample_preference_factor = 1.08 if baseline_is_embedded_raster else 1.0
-            if sample_err <= (svg_err * sample_preference_factor):
+            prefer_sample_svg = baseline_is_embedded_raster or sample_err <= (svg_err * sample_preference_factor)
+            if prefer_sample_svg:
                 decision_note = ""
                 if baseline_is_embedded_raster and sample_err > svg_err:
                     decision_note = " (Vector-Sample gegenüber Embedded-Raster bevorzugt)"
@@ -174,6 +174,24 @@ def runNonCompositeIterationImpl(
                 )
                 write_attempt_artifacts_fn(sample_svg_content, sample_rendered)
                 return base_name, description, params, 1, sample_err
+        else:
+            if _contains_svg_image_tag(svg_content):
+                print_fn(
+                    "  -> Plan B Vergleich aktiv: nutze Sample-SVG "
+                    f"{sample_svg_path} trotz fehlendem Raster-Render (Embedded-Raster vermeiden)."
+                )
+                write_validation_log_fn(
+                    [
+                        "status=non_composite_plan_b_sample_svg_selected",
+                        f"sample_svg_path={sample_svg_path}",
+                        "sample_render_failed=1",
+                        f"baseline_error={svg_err:.6f}",
+                        "baseline_is_embedded_raster=1",
+                        "sample_preference_factor=forced",
+                    ]
+                )
+                write_attempt_artifacts_fn(sample_svg_content, None)
+                return base_name, description, params, 1, svg_err
 
     write_attempt_artifacts_fn(svg_content, svg_rendered)
     return base_name, description, params, 1, svg_err
