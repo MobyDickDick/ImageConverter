@@ -1,0 +1,28 @@
+[INFO] Schreibe Konsolen-Output nach: /workspace/ImageConverter/imageCompositeConverter.local.log
+
+--- Verarbeite AC0030_M.jpg ---
+Bildbeschreibung: AC0030 ist ein Luftkühler. AC0030_L, AC0030_M und AC0030_S sind Röhren mit links roter und rechts blauer Seite; der linke Pfeil zeigt nach oben, der rechte Pfeil nach unten.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
+  -> Plan B Vergleich aktiv: nutze Sample-SVG artifacts/images_to_convert/samples/AC0030.svg (err=205.684, baseline=227.522).
+
+--- Verarbeite AC0030_L.jpg ---
+Bildbeschreibung: AC0030 ist ein Luftkühler. AC0030_L, AC0030_M und AC0030_S sind Röhren mit links roter und rechts blauer Seite; der linke Pfeil zeigt nach oben, der rechte Pfeil nach unten.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
+  -> Plan B Vergleich aktiv: nutze Sample-SVG artifacts/images_to_convert/samples/AC0030.svg (err=205.614, baseline=228.549).
+
+--- Verarbeite AC0030.jpg ---
+Bildbeschreibung: AC0030 ist ein Luftkühler. AC0030_L, AC0030_M und AC0030_S sind Röhren mit links roter und rechts blauer Seite; der linke Pfeil zeigt nach oben, der rechte Pfeil nach unten.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
+  -> Plan B Vergleich aktiv: nutze Sample-SVG artifacts/images_to_convert/samples/AC0030.svg (err=175.185, baseline=198.987).
+
+--- Verarbeite AC0030_S.jpg ---
+Bildbeschreibung: AC0030 ist ein Luftkühler. AC0030_L, AC0030_M und AC0030_S sind Röhren mit links roter und rechts blauer Seite; der linke Pfeil zeigt nach oben, der rechte Pfeil nach unten.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
+  -> Plan B Vergleich aktiv: nutze Sample-SVG artifacts/images_to_convert/samples/AC0030.svg (err=204.955, baseline=227.067).
+[INFO] Übersichts-Kacheln erzeugt: diff=artifacts/converted_images/reports/overview_diff_tiles.png, svg=artifacts/converted_images/reports/overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: artifacts/converted_images
