@@ -2701,3 +2701,100 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
 - **Fortschritt (nächstes CSV-Bild):** Das nächste CSV-Zielbild `AC0030` wurde als Einzellauf bearbeitet (`PYTHONPATH=. timeout 240 python3 -m src.iCCModules.imageCompositeConverterCli --input-dir artifacts/images_to_convert --output-dir artifacts/converted_images --start AC0030 --end AC0030`), Exit `0`; Log: `artifacts/converted_images/reports/AC0030_single_2026-05-24_runJE.log`.
 - **Fortschritt (Volltest):** Der finale Volltestlauf `PYENV_VERSION=3.10.20 timeout 300 python -m pytest -q -rs` lief vollständig durch (`530 passed, 5 warnings`, Exit `0`); Log: `artifacts/converted_images/reports/pytest_full_2026-05-24_runJE.log`.
 - **Nächster sinnvoller Schritt:** Dasselbe Arbeitspaket-Schema fortsetzen; den CSV-Eintrag erst nach expliziter Qualitätsentscheidung auf `in samples=yes` setzen.
+
+## 14-Tage-Finish-Playbook (Start: 2026-05-24, Fokus: Testdisziplin + wirksame Resultate)
+
+Ziel dieses Pakets: Das Projekt bis zu einem belastbaren Abschlussnachweis führen.
+Jeder Tag hat genau definierte Aufgaben mit einem harten Exit-Kriterium.
+
+### Verbindliche Regeln für alle 14 Tage
+
+- [ ] **FP-R1:** Kein Commit ohne dokumentiertes Testsignal (Befehl + Exit-Code + Kurzfazit).
+- [ ] **FP-R2:** Kein „gefühlt besser“ ohne Metrikvergleich (`vorher`/`nachher`).
+- [ ] **FP-R3:** Kein Vollbereichslauf ohne Timeout-Guard und Batch-Plan.
+- [ ] **FP-R4:** Jeder Arbeitstag endet mit einem 5-Zeilen-Log (Getestet, Ergebnis, Blocker, nächster Schritt, morgiger Startbefehl).
+
+### Tag 1 (2026-05-24) – Baseline fixieren
+
+- [ ] **FP-D1-1:** Baseline-Toolchain fixieren (`PYENV_VERSION=3.10.20`) und in Session-Log eintragen.
+- [ ] **FP-D1-2:** Baseline-Run ausführen (`pytest -q -rs` + TB-A3-Kurzlauf) und Logs unter `artifacts/converted_images/reports/` mit Datumspräfix ablegen.
+- [ ] **FP-D1-3:** Mini-Scorecard anlegen/aktualisieren (Anzahl Varianten, `semantic_ok`, `semantic_mismatch`, Timeout-Anteil, mittlere Laufzeit).
+- [ ] **FP-D1-EXIT:** Baseline vollständig reproduzierbar: gleiche Kommandos, vollständige Artefakte, keine manuelle Nacharbeit.
+
+### Tag 2 (2026-05-25) – Baseline verifizieren
+
+- [ ] **FP-D2-1:** Baseline-Runs identisch wiederholen und auf Drift prüfen.
+- [ ] **FP-D2-2:** Abweichungen (wenn vorhanden) als konkrete Aufgaben in `docs/open_tasks.md` erfassen.
+- [ ] **FP-D2-EXIT:** Zwei aufeinanderfolgende Baseline-Läufe konsistent dokumentiert.
+
+### Tag 3 (2026-05-26) – Commit-Test-Gate erzwingen
+
+- [ ] **FP-D3-1:** Pflicht-Pre-Commit-Checks definieren (mindestens: Kern-`pytest` + AC08-Smoke).
+- [ ] **FP-D3-2:** Für jeden Tages-Commit Testausgabe + Bewertung (`PASS`/`FAIL`) protokollieren.
+- [ ] **FP-D3-EXIT:** 100% der Tages-Commits mit zugehörigem Testnachweis.
+
+### Tag 4 (2026-05-27) – Nicht-grüne Signale abbauen
+
+- [ ] **FP-D4-1:** Warnings/Skips/Xfails aus dem aktuellen Lauf priorisieren.
+- [ ] **FP-D4-2:** Mindestens ein Nicht-Grün-Thema in ein reproduzierbares Ticket mit Repro-Befehl überführen.
+- [ ] **FP-D4-EXIT:** Offene Nicht-Grün-Liste aktualisiert und priorisiert (keine unsortierten Restpunkte).
+
+### Tag 5 (2026-05-28) – Laufzeitblocker zerlegen
+
+- [ ] **FP-D5-1:** N1/N2-Vollbereich in kleinere Batches aufteilen (z. B. 10er/20er Segmente).
+- [ ] **FP-D5-2:** Für jeden Batch Laufzeit, Exit-Code und Fehlertyp erfassen.
+- [ ] **FP-D5-EXIT:** Transparente Batch-Tabelle vorhanden, Top-3 Engpässe identifiziert.
+
+### Tag 6 (2026-05-29) – Top-Engpass #1 beheben
+
+- [ ] **FP-D6-1:** Für Engpass #1 genau eine Gegenmaßnahme implementieren.
+- [ ] **FP-D6-2:** Vorher/Nachher-Reprolauf mit identischem Batch durchführen.
+- [ ] **FP-D6-EXIT:** Messbarer Effekt dokumentiert (Laufzeit, Timeout-Rate oder semantische Qualität).
+
+### Tag 7 (2026-05-30) – Top-Engpass #2 beheben
+
+- [ ] **FP-D7-1:** Gegenmaßnahme für Engpass #2 implementieren und separat testen.
+- [ ] **FP-D7-2:** Regressionsprüfung gegen Kernsuite durchführen.
+- [ ] **FP-D7-EXIT:** Keine neue Kernregression, Engpass #2 messbar verbessert oder sauber falsifiziert.
+
+### Tag 8 (2026-05-31) – Semantik-Fokusfamilien Teil 1
+
+- [ ] **FP-D8-1:** Fokusfamilie aus AC08-Prioritäten wählen (z. B. kleine Kreisvarianten).
+- [ ] **FP-D8-2:** Pro bearbeiteter Familie mindestens einen gezielten Regressionstest ergänzen/aktualisieren.
+- [ ] **FP-D8-EXIT:** Familienänderung + zugehöriger grüner Test sind gemeinsam dokumentiert.
+
+### Tag 9 (2026-06-01) – Semantik-Fokusfamilien Teil 2
+
+- [ ] **FP-D9-1:** Nächste AC08-Fokusfamilie bearbeiten (z. B. Plain-Ring `AC0800_*`).
+- [ ] **FP-D9-2:** Qualitätsmetrik zur Familienkonsistenz protokollieren.
+- [ ] **FP-D9-EXIT:** Regressionsschutz für die zweite Fokusfamilie grün.
+
+### Tag 10 (2026-06-02) – Familienübergreifende Harmonisierung
+
+- [ ] **FP-D10-1:** Eine familienübergreifende Harmonisierungshypothese aus `docs/ac08_improvement_plan.md` praktisch prüfen.
+- [ ] **FP-D10-2:** Ergebnis als `bestätigt` oder `verworfen` mit Evidenz festhalten.
+- [ ] **FP-D10-EXIT:** Eine Hypothese datenbasiert abgeschlossen (nicht nur diskutiert).
+
+### Tag 11 (2026-06-03) – Release-Kandidaten-Gate vorbereiten
+
+- [ ] **FP-D11-1:** Fixe Gate-Checkliste ausführen (Kernsuite, AC08-Smoke, Qualitätsvergleich zur Baseline).
+- [ ] **FP-D11-2:** Jede Abweichung als Blocker oder akzeptierte Ausnahme markieren.
+- [ ] **FP-D11-EXIT:** Vollständiger Gate-Probelauf mit eindeutigem Status.
+
+### Tag 12 (2026-06-04) – Release-Kandidaten-Gate hart fahren
+
+- [ ] **FP-D12-1:** Gate erneut unter denselben Bedingungen ausführen.
+- [ ] **FP-D12-2:** Regel „No silent regression“ strikt anwenden.
+- [ ] **FP-D12-EXIT:** Gate `PASS` oder explizit dokumentiertes `FAIL` mit konkretem Recovery-Plan.
+
+### Tag 13 (2026-06-05) – Abschlusslauf
+
+- [ ] **FP-D13-1:** Finalen End-to-End-Lauf mit vollständiger Artefaktkette ausführen.
+- [ ] **FP-D13-2:** Ergebnis gegen Baseline quantitativ vergleichen.
+- [ ] **FP-D13-EXIT:** Abschlusslauf reproduzierbar und vollständig dokumentiert.
+
+### Tag 14 (2026-06-06) – Abschlussentscheidung
+
+- [ ] **FP-D14-1:** 1-seitiges Abschlussdokument schreiben (stabil, verbessert, offen).
+- [ ] **FP-D14-2:** „Durch“ vs. „noch offen“ mit 3 harten Kennzahlen entscheiden.
+- [ ] **FP-D14-EXIT:** Entscheidung ist datenbasiert und für Dritte nachvollziehbar.
