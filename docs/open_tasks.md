@@ -687,6 +687,14 @@ Deadlock-/Stagnationsschleifen.
   - [ ] T6.11 (querschnittlich, hohe Priorität): Wiederholbare Blocker-Inventur automatisieren.
     - Befehl: `python -m pytest --maxfail=1 -vv --durations=20`.
     - Akzeptanzkriterium: pro Inventurlauf ein Run-Log + eine aktualisierte Top-Blocker-Liste in `docs/open_tasks.md`.
+  - [ ] T6.12 (hoch): `tests/test_image_composite_converter.py::test_ac08_regression_suite_preserves_previously_good_variants[AC0800_L-semantic_ok]` isolieren und Laufzeit dokumentiert reduzieren.
+    - Akzeptanzkriterium: isoliert <= `120s`, Status weiterhin `semantic_ok`.
+  - [ ] T6.13 (hoch): `tests/test_image_composite_converter.py::test_ac08_regression_suite_preserves_previously_good_variants[AC0800_M-semantic_ok]` isolieren und Laufzeit dokumentiert reduzieren.
+    - Akzeptanzkriterium: isoliert <= `120s`, Status weiterhin `semantic_ok`.
+  - [ ] T6.14 (hoch): `tests/test_image_composite_converter.py::test_ac08_regression_suite_preserves_previously_good_variants[AC0820_L-semantic_ok]` als separaten Langläufer-Track führen.
+    - Akzeptanzkriterium: isoliert <= `120s` ohne `validation_time_budget_exceeded` im Element-Log.
+  - [ ] T6.15 (hoch): `tests/test_image_composite_converter.py::test_ac08_regression_suite_preserves_previously_good_variants[AC0835_S-semantic_ok]` isolieren und Laufzeit dokumentiert reduzieren.
+    - Akzeptanzkriterium: isoliert <= `90s`, Status weiterhin `semantic_ok`.
 
 ## Prioritätsvergabe (aktualisiert am 2026-05-03)
 
