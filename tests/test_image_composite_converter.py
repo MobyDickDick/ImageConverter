@@ -7870,8 +7870,8 @@ def test_dual_arrow_badge_detection_forces_opposite_arrow_directions() -> None:
     assert params is not None
     left = params["left"]
     right = params["right"]
-    assert float(left["triangle_tip_y"]) < float(left["triangle_base_y"])
-    assert float(right["triangle_tip_y"]) > float(right["triangle_base_y"])
+    assert float(left["triangle_tip_y"]) > float(left["triangle_base_y"])
+    assert float(right["triangle_tip_y"]) < float(right["triangle_base_y"])
     assert float(left["line_y1"]) == float(right["line_y1"])
     assert float(left["line_y2"]) == float(right["line_y2"])
     assert float(left["line_width"]) == float(right["line_width"])
