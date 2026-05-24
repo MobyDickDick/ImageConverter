@@ -27,7 +27,8 @@ def _prepare_mini_baseline(base_dir: Path, limit: int = 3) -> list[str]:
     images_dir.mkdir(parents=True, exist_ok=True)
     svgs_dir.mkdir(parents=True, exist_ok=True)
     copied: list[str] = []
-    for variant in FALLBACK_VARIANTS:
+    requested_variants = _variants() or list(FALLBACK_VARIANTS)
+    for variant in requested_variants:
         jpg_src = SOURCE_IMAGES / f"{variant}.jpg"
         svg_src = SOURCE_SVGS / f"{variant}.svg"
         if not jpg_src.exists() or not svg_src.exists():
@@ -37,6 +38,17 @@ def _prepare_mini_baseline(base_dir: Path, limit: int = 3) -> list[str]:
         copied.append(variant)
         if len(copied) >= limit:
             break
+    if not copied:
+        for variant in FALLBACK_VARIANTS:
+            jpg_src = SOURCE_IMAGES / f"{variant}.jpg"
+            svg_src = SOURCE_SVGS / f"{variant}.svg"
+            if not jpg_src.exists() or not svg_src.exists():
+                continue
+            shutil.copy2(jpg_src, images_dir / jpg_src.name)
+            shutil.copy2(svg_src, svgs_dir / svg_src.name)
+            copied.append(variant)
+            if len(copied) >= limit:
+                break
     (base_dir / "variants.txt").write_text("\n".join(copied) + ("\n" if copied else ""), encoding="utf-8")
     return copied
 
@@ -80,7 +92,15 @@ def _load_iteration_error_per_pixel(iteration_log: Path) -> dict[str, float]:
 
 
 def _baseline_ready() -> bool:
-    return (BASE / "images").exists() and (BASE / "svgs").exists() and (BASE / "variants.txt").exists()
+    images_dir = BASE / "images"
+    svgs_dir = BASE / "svgs"
+    manifest = BASE / "variants.txt"
+    if not (images_dir.exists() and svgs_dir.exists() and manifest.exists()):
+        return False
+    variants = _variants()
+    if not variants:
+        return False
+    return any((images_dir / f"{variant}.jpg").exists() and (svgs_dir / f"{variant}.svg").exists() for variant in variants)
 
 
 def _ensure_baseline(limit: int = 3) -> None:
