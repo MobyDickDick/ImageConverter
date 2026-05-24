@@ -71,6 +71,39 @@ def test_run_non_composite_iteration_impl_manual_review_writes_skip_log() -> Non
     assert prints == ["  -> Überspringe Bild: Bitte prüfen"]
 
 
+def test_run_non_composite_iteration_impl_manual_review_uses_gradient_stripe_plan_b() -> None:
+    logs: list[list[str]] = []
+    artifacts: list[tuple[str, object]] = []
+    prints: list[str] = []
+
+    result = non_composite_runtime_helpers.runNonCompositeIterationImpl(
+        mode="manual_review",
+        params={"mode": "manual_review", "review_reason": "Bitte prüfen"},
+        stripe_strategy={"stops": [0, 1, 2]},
+        semantic_mode_visual_override=False,
+        width=64,
+        height=16,
+        base_name="Z_203",
+        description="desc",
+        perc_img="target",
+        img_path="input.jpg",
+        print_fn=prints.append,
+        render_embedded_raster_svg_fn=lambda _path: "<svg />",
+        build_gradient_stripe_svg_fn=lambda *_args, **_kwargs: "<svg gradient/>",
+        build_gradient_stripe_validation_log_lines_fn=lambda **_kwargs: ["status=non_composite_gradient_stripe"],
+        write_validation_log_fn=logs.append,
+        render_svg_to_numpy_fn=lambda *_args, **_kwargs: "rendered",
+        record_render_failure_fn=lambda *args, **kwargs: None,
+        write_attempt_artifacts_fn=lambda svg, rendered: artifacts.append((svg, rendered)),
+        calculate_error_fn=lambda _target, _rendered: 0.9,
+    )
+
+    assert result == ("Z_203", "desc", {"mode": "manual_review", "review_reason": "Bitte prüfen"}, 1, 0.9)
+    assert logs == [["status=non_composite_gradient_stripe"]]
+    assert artifacts == [("<svg gradient/>", "rendered")]
+    assert prints and "Plan B aktiv" in prints[0]
+
+
 def test_run_non_composite_iteration_impl_gradient_stripe_returns_iteration_tuple() -> None:
     logs: list[list[str]] = []
     artifacts: list[tuple[str, object]] = []

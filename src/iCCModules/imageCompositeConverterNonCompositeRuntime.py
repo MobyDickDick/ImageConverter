@@ -137,6 +137,28 @@ def runNonCompositeIterationImpl(
             write_attempt_artifacts_fn(sample_svg_content, sample_rendered)
             return base_name, description, params, 1, sample_err
 
+        if stripe_strategy:
+            print_fn("  -> Plan B aktiv: nutze erkannte Gradient-Stripe-Strategie trotz Manual-Review.")
+            svg_content = build_gradient_stripe_svg_fn(width, height, stripe_strategy)
+            strategy_stop_count = len(list(stripe_strategy.get("stops", [])))
+            write_validation_log_fn(
+                build_gradient_stripe_validation_log_lines_fn(
+                    semantic_mode_visual_override=semantic_mode_visual_override,
+                    strategy_stop_count=strategy_stop_count,
+                )
+            )
+            svg_rendered = render_svg_to_numpy_fn(svg_content, width, height)
+            if svg_rendered is None:
+                record_render_failure_fn(
+                    "manual_review_gradient_stripe_render_failed",
+                    svg_content=svg_content,
+                    params_snapshot=params,
+                )
+                return None
+            svg_err = calculate_error_fn(perc_img, svg_rendered)
+            write_attempt_artifacts_fn(svg_content, svg_rendered)
+            return base_name, description, params, 1, svg_err
+
         reason = str(params.get("review_reason", "Manuelle Prüfung erforderlich.")).strip()
         print_fn(f"  -> Überspringe Bild: {reason}")
         write_validation_log_fn(
