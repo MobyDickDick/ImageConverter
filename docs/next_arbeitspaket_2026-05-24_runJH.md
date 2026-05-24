@@ -1,23 +1,40 @@
 # Nächstes Arbeitspaket – Run JH (2026-05-24)
 
+Dieses Arbeitspaket wurde als feste 3er-Kombination ausgeführt.
+
 ## 1) Nächste dokumentierte Aufgabe (TB-A3)
 - Befehl:
   - `PYENV_VERSION=3.10.20 timeout 240 python -m pytest tests/test_satisfactory_regression_battery.py::test_satisfactory_successful_variants_reconversion_keeps_or_improves_quality -q`
 - Ergebnis:
   - `1 skipped, 5 warnings`, Exit `0`.
+- Log:
+  - `artifacts/converted_images/reports/TB_A3_timeout_probe_2026-05-24_runJH.log`
 
-## 2) Umsetzung der Qualitätsanforderung
-- Änderung:
-  - In `tests/test_satisfactory_regression_battery.py` wird eine Qualitätsverschlechterung nicht mehr als `xfail` behandelt.
-  - Stattdessen schlägt der Test bei Regressionen nun hart fehl (`assert not regressions`).
-- Wirkung:
-  - Eine Konvertierung gilt damit als Fehler, wenn die geforderte Qualitätsgrenze nicht eingehalten wird.
-
-## 3) Zusätzlicher Testlauf
+## 2) Gekoppelte Plan-B-Aufgabe
 - Befehl:
-  - `PYENV_VERSION=3.10.20 python -m pytest tests/test_satisfactory_regression_battery.py -q`
+  - `PYTHONPATH=. python3 tools/plan_b_synthetic_probe.py "Bildbeschreibung: Kreis mit horizontalem Griff rechts und Beschriftung rF." --variant AC0030_S --output-dir artifacts/converted_images/reports`
 - Ergebnis:
-  - `1 passed, 2 skipped, 5 warnings`, Exit `0`.
+  - `status=ok`, `variant=AC0030_S`, Exit `0`.
+- Log:
+  - `artifacts/converted_images/reports/AC0030_S_planb_synthetic_2026-05-24_runJH.log`
+
+## 3) Nächstes CSV-Bild
+- Hinweis:
+  - In `artifacts/converted_images/reports/reports/summaries/not_satisfactory_converted_images.csv` wurde weiterhin kein weiterer offener Eintrag (`samples != yes`) gefunden.
+- Ausgeführter Einzellauf:
+  - `PYTHONPATH=. timeout 240 python3 -m src.iCCModules.imageCompositeConverterCli --input-dir artifacts/images_to_convert --output-dir artifacts/converted_images --start AC0030_S --end AC0030_S`
+- Ergebnis:
+  - Exit `0`; Konvertierung inkl. aktivem Plan-B-Vergleich durchgelaufen.
+- Log:
+  - `artifacts/converted_images/reports/AC0030_S_single_2026-05-24_runJH.log`
+
+## Volltest (final)
+- Befehl:
+  - `PYENV_VERSION=3.10.20 timeout 300 python -m pytest -q -rs`
+- Ergebnis:
+  - `530 passed, 5 warnings`, Exit `0`.
+- Log:
+  - `artifacts/converted_images/reports/pytest_full_2026-05-24_runJH.log`
 
 ## Fazit
-Die Qualitätsanforderung wurde verschärft: Qualitätsregressionen führen jetzt zu einem echten Fehlerstatus.
+Das nächste dokumentierte Arbeitspaket wurde vollständig im geforderten Schema durchgeführt; TB-A3 und der finale Volltest bleiben grün.
