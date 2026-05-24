@@ -174,7 +174,6 @@ def test_satisfactory_successful_variants_reconversion_keeps_or_improves_quality
 
     if checked == 0:
         pytest.skip("No overlap between satisfactory variants and baseline quality bestlist found.")
-    if regressions:
-        pytest.xfail(
-            "Open quality follow-up tasks for reconversion drift: " + "; ".join(regressions[:5])
-        )
+    assert not regressions, (
+        "Open quality follow-up tasks for reconversion drift: " + "; ".join(regressions[:5])
+    )
