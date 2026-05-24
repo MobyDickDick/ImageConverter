@@ -1,0 +1,10 @@
+[INFO] Schreibe Konsolen-Output nach: /workspace/ImageConverter/imageCompositeConverter.local.log
+
+--- Verarbeite AC0060_S.jpg ---
+Bildbeschreibung: Wie AC0020: zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben. Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch)
+[INFO] Übersichts-Kacheln erzeugt: diff=artifacts/converted_images/reports/reports/overview_diff_tiles.png, svg=artifacts/converted_images/reports/reports/overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: artifacts/converted_images/reports
+status=ok
+variant=AC0060_S
