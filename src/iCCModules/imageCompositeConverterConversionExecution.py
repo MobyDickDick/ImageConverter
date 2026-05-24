@@ -598,12 +598,16 @@ def convertOneImpl(
     _base, _desc, params, best_iter, best_error = res
     details = read_validation_log_details_fn(log_file)
     status = str(details.get("status", ""))
-    if status == "non_composite_plan_b_sample_svg_selected":
+    if status in {"non_composite_plan_b_sample_svg_selected", "non_composite_pure_svg_placeholder"}:
         sample_svg_path = _resolveSampleSvgPath(
             sample_svg_path=str(details.get("sample_svg_path", "")),
             folder_path=folder_path,
             reports_out_dir=reports_out_dir,
         )
+        if not sample_svg_path:
+            implicit_sample_svg = os.path.join(folder_path, "samples", f"{_base}.svg")
+            if os.path.exists(implicit_sample_svg):
+                sample_svg_path = implicit_sample_svg
         if not sample_svg_path:
             candidate_svg_path = os.path.join(svg_out_dir, f"{_base}.svg")
             if os.path.exists(candidate_svg_path):
