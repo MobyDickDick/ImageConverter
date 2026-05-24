@@ -180,15 +180,15 @@ def _normalizeDualArrowPairGeometry(
     normalized_left["line_y1"] = line_top
     normalized_left["line_y2"] = line_bottom
     normalized_left["line_width"] = shared_line_width
-    normalized_left["triangle_tip_y"] = triangle_top
-    normalized_left["triangle_base_y"] = triangle_top + shared_tri_height
+    normalized_left["triangle_base_y"] = triangle_top
+    normalized_left["triangle_tip_y"] = triangle_top + shared_tri_height
     normalized_left["triangle_half_width"] = shared_half_width
 
     normalized_right["line_y1"] = line_top
     normalized_right["line_y2"] = line_bottom
     normalized_right["line_width"] = shared_line_width
-    normalized_right["triangle_base_y"] = triangle_top
-    normalized_right["triangle_tip_y"] = triangle_top + shared_tri_height
+    normalized_right["triangle_tip_y"] = triangle_top
+    normalized_right["triangle_base_y"] = triangle_top + shared_tri_height
     normalized_right["triangle_half_width"] = shared_half_width
 
     return normalized_left, normalized_right
