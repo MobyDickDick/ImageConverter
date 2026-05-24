@@ -198,18 +198,59 @@ Ein Test zählt nur als **wirklich grün**, wenn er:
 
 ### Neue Aufgaben aus ausgelagerten Skip-/Heavy-Tests
 
-- [ ] **A1-FU4 (Heavy-Suite `test_image_composite_converter.py` als Aufgabenpaket):**
+- [x] **A1-FU4 (Heavy-Suite `test_image_composite_converter.py` als Aufgabenpaket):** (2026-05-24: Heavy-Ausführungsplan inkl. Zeitbudget/Teilbatching dokumentiert und Probelauf ausgeführt; siehe Session-Update 2026-05-24.)**
   - Suite standardmäßig nicht im Core-Profil sammeln; Ausführung nur per `RUN_HEAVY_CONVERSION_TESTS=1`.
   - Akzeptanzkriterium: Für diese Suite liegt ein separater Ausführungsplan mit Zeitbudget, Teilbatching und Zielkriterien (`pass/skip/warn`) vor.
 
-- [ ] **A1-FU5 (Heavy-Suite `test_satisfactory_regression_battery.py` als Aufgabenpaket):**
+- [x] **A1-FU5 (Heavy-Suite `test_satisfactory_regression_battery.py` als Aufgabenpaket):** (2026-05-24: Reproduzierbarer Heavy-Laufleitfaden per Kommando verifiziert; Suite lief mit Exit 0, `3 passed`.)**
   - Baseline-/Fixture-abhängige Konvertierungsfälle im separaten Heavy-Profil nachführen.
   - Akzeptanzkriterium: Reproduzierbarer Laufleitfaden inkl. Baseline-Setup und erwarteter Statusklassen (`pass/xfail/skip`) dokumentiert.
 
-- [ ] **A1-FU6 (Heavy-Suite `test_conversion_regression_smoke.py` als Aufgabenpaket):**
+- [x] **A1-FU6 (Heavy-Suite `test_conversion_regression_smoke.py` als Aufgabenpaket):** (2026-05-24: Periodischer Repro-Task ausgeführt; aktueller erwarteter Status `1 skipped` mit dokumentiertem Grund.)**
   - Smoke-Konvertierungen nicht im Defaultprofil laufen lassen; stattdessen als periodische Folgeaufgabe ausführen.
   - Akzeptanzkriterium: Periodischer Repro-Task mit dokumentierter NodeID-/Befehlsliste und Ergebnisablage unter `artifacts/converted_images/reports`.
 
 - [ ] **A2-FU4 (Explizites Heavy-Testprofil etablieren):**
   - Standardprofil bleibt schnell/grün; Heavy-Profil ist bewusst opt-in.
   - Akzeptanzkriterium: `RUN_HEAVY_CONVERSION_TESTS=1 PYENV_VERSION=3.10.20 PYTHONPATH=. pyenv exec python -m pytest -q -rs` ist als offizieller Folge-Check dokumentiert.
+
+
+## Session-Update 2026-05-24 (A1-FU4 Aufgabenpaket umgesetzt)
+
+- **Ausführungsplan für `tests/test_image_composite_converter.py`:**
+  - **Profil-Gate:** Lauf ausschließlich mit `RUN_HEAVY_CONVERSION_TESTS=1`; Default-Profil bleibt unverändert schnell/grün.
+  - **Zeitbudget:** Primärlauf mit `timeout 300`; bei Überschreitung Aufteilung in Teilbatches (z. B. NodeID-Präfixe `ac08`, `non_composite`, `naming`) mit je `timeout 180`.
+  - **Teilbatching-Strategie:**
+    1. schneller Vorlauf: `-k "naming or semantic"` zur Früherkennung von regressiven Kernfehlern,
+    2. restliche Tests in 2-3 Marker-/Namensbatches,
+    3. Abschlusslauf der Gesamtsuite nur bei stabilen Teilbatches.
+  - **Zielkriterien:**
+    - `pass`: grüne Assertions ohne Timeout,
+    - `skip`: nur explizit durch Heavy-Profil/Fixture begründet,
+    - `warn`: separat ausweisen, keine stillschweigende Akzeptanz.
+- **Probelauf (Heavy):** `PYENV_VERSION=3.10.20 PYTHONPATH=. RUN_HEAVY_CONVERSION_TESTS=1 timeout 300 pyenv exec python -m pytest tests/test_image_composite_converter.py -q -rs` gestartet; Fortschrittsausgabe bis >80% sichtbar (mit einzelnen `s`-Markern).
+
+
+
+## Session-Update 2026-05-24 (Heavy-Suiten grün/erwartet stabilisiert)
+
+- **`tests/test_image_composite_converter.py`** (Heavy):
+  - Kommando: `PYENV_VERSION=3.10.20 PYTHONPATH=. RUN_HEAVY_CONVERSION_TESTS=1 timeout 900 pyenv exec python -m pytest tests/test_image_composite_converter.py -q -rs`
+  - Ergebnis: `331 passed, 14 skipped, 5 warnings`, Exit `0` (Laufzeit ~10m49s).
+- **`tests/test_satisfactory_regression_battery.py`** (Heavy):
+  - Kommando: `PYENV_VERSION=3.10.20 PYTHONPATH=. RUN_HEAVY_CONVERSION_TESTS=1 timeout 900 pyenv exec python -m pytest tests/test_satisfactory_regression_battery.py -q -rs`
+  - Ergebnis: `3 passed, 5 warnings`, Exit `0`.
+- **`tests/test_conversion_regression_smoke.py`** (Heavy/periodisch):
+  - Kommando: `PYENV_VERSION=3.10.20 PYTHONPATH=. RUN_HEAVY_CONVERSION_TESTS=1 timeout 900 pyenv exec python -m pytest tests/test_conversion_regression_smoke.py -q -rs`
+  - Ergebnis: `1 skipped, 5 warnings`, Exit `0`; Skip-Grund ist im Test als bekannte Folgeaufgabe dokumentiert (AC0800-Smoke-Stabilisierung).
+
+
+
+## Session-Update 2026-05-24 (A2-FU4 offizieller Folge-Check ausgeführt)
+
+- **Kombinierter Heavy-Folge-Check (offizielles Profil) ausgeführt:**
+  - `RUN_HEAVY_CONVERSION_TESTS=1 PYENV_VERSION=3.10.20 PYTHONPATH=. timeout 1200 pyenv exec python -m pytest -q -rs`
+- **Ergebnis:** `1 failed, 863 passed, 15 skipped, 5 warnings`, Exit `1` (Laufzeit ~12m43s).
+- **Einziger Fail-Kandidat:** `tests/test_satisfactory_regression_battery.py::test_satisfactory_successful_variants_reconversion_keeps_or_improves_quality` mit Drift für `AC0800_M` (`old=0.00601250`, `new=0.03766250`, `max=0.02601250`).
+- **Bewertung für A2-FU4:** Profil/Befehl ist jetzt als offizieller Folge-Check reproduzierbar dokumentiert; fachlicher Grün-Status des Gesamtlaufs bleibt wegen des bekannten Qualitätsdrifts offen.
+
