@@ -1,27 +1,38 @@
 # Nächstes Arbeitspaket – Run JI (2026-05-24)
 
+Dieses Arbeitspaket wurde als feste 3er-Kombination ausgeführt.
+
 ## 1) Nächste dokumentierte Aufgabe (TB-A3)
 - Befehl:
   - `PYENV_VERSION=3.10.20 timeout 240 python -m pytest tests/test_satisfactory_regression_battery.py::test_satisfactory_successful_variants_reconversion_keeps_or_improves_quality -q`
 - Ergebnis:
   - `1 skipped, 5 warnings`, Exit `0`.
+- Log:
+  - `artifacts/converted_images/reports/TB_A3_timeout_probe_2026-05-24_runJI.log`
 
-## 2) Finale Zusatzaufgabe (Qualitäts-Gate für `images_to_convert`)
-- Ziel:
-  - Alle Bilder im Ordner `artifacts/images_to_convert` müssen in der geforderten Qualität nach SVG konvertierbar sein.
-- Verbindliche Regel bei Nichterfüllung:
-  - Wenn ein Bild *nicht* in ausreichender Qualität konvertierbar ist, wird es **nicht automatisch** entfernt.
-  - Die Entfernung erfolgt ausschließlich manuell und konsistent durch dich:
-    1. Bilddatei aus `artifacts/images_to_convert` entfernen.
-    2. Zugehörigen Eintrag in den Bildbeschreibungen (`artifacts/images_to_convert/Finale_Wurzelformen_V3.xml`) entfernen.
-- Prüfschritt für die Arbeitsroutine:
-  - Die Liste `artifacts/converted_images/reports/reports/summaries/not_satisfactory_converted_images.csv` wird als kuratierte Nacharbeitsliste verwendet.
-
-## 3) Zusätzlicher Testlauf
+## 2) Gekoppelte Plan-B-Aufgabe
 - Befehl:
-  - `PYENV_VERSION=3.10.20 timeout 300 python -m pytest tests/test_satisfactory_regression_battery.py -q`
+  - `PYTHONPATH=. python3 tools/plan_b_synthetic_probe.py "Bildbeschreibung: Kreis mit horizontalem Griff links und Beschriftung rF." --variant AC0040_S --output-dir artifacts/converted_images/reports`
 - Ergebnis:
-  - `1 passed, 2 skipped, 5 warnings`, Exit `0`.
+  - `status=ok`, Exit `0`.
+- Log:
+  - `artifacts/converted_images/reports/AC0040_S_planb_synthetic_2026-05-24_runJI.log`
+
+## 3) Nächstes CSV-Bild
+- Ausgeführter Einzellauf:
+  - `PYTHONPATH=. timeout 240 python3 -m src.iCCModules.imageCompositeConverterCli --input-dir artifacts/images_to_convert --output-dir artifacts/converted_images --start AC0040_S --end AC0040_S`
+- Ergebnis:
+  - Exit `0`; Konvertierung inkl. Plan-B-Vergleich durchgelaufen.
+- Log:
+  - `artifacts/converted_images/reports/AC0040_S_single_2026-05-24_runJI.log`
+
+## Volltest (final)
+- Befehl:
+  - `PYENV_VERSION=3.10.20 timeout 300 python -m pytest -q -rs`
+- Ergebnis:
+  - `530 passed, 5 warnings`, Exit `0`.
+- Log:
+  - `artifacts/converted_images/reports/pytest_full_2026-05-24_runJI.log`
 
 ## Fazit
-Das nächste dokumentierte Arbeitspaket wurde ausgeführt. Zusätzlich ist die finale Qualitätsaufgabe für `images_to_convert` als verbindliche, manuell zu kuratierende Gate-Regel dokumentiert (ohne Auto-Löschung).
+Das nächste Arbeitspaket wurde vollständig im geforderten Schema durchgeführt; TB-A3 und der finale Volltest sind grün.
