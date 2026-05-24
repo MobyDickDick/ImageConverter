@@ -3,6 +3,34 @@ from __future__ import annotations
 import os
 
 
+def _build_vector_placeholder_svg(width: int, height: int, *, description: str = "") -> str:
+    safe_w = max(1, int(width or 1))
+    safe_h = max(1, int(height or 1))
+    desc = (description or "Automatisch erzeugte Platzhalter-Vektorgrafik").strip()
+    escaped_desc = (
+        desc.replace("&", "&amp;")
+        .replace("<", "&lt;")
+        .replace(">", "&gt;")
+    )
+    return (
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{safe_w}" height="{safe_h}" viewBox="0 0 {safe_w} {safe_h}">\n'
+        f'  <desc>{escaped_desc}</desc>\n'
+        '  <defs>\n'
+        '    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="0%">\n'
+        '      <stop offset="0%" stop-color="#6d6d6d"/>\n'
+        '      <stop offset="50%" stop-color="#d7d7d7"/>\n'
+        '      <stop offset="100%" stop-color="#6d6d6d"/>\n'
+        '    </linearGradient>\n'
+        '  </defs>\n'
+        f'  <rect x="0" y="0" width="{safe_w}" height="{safe_h}" fill="url(#bg)"/>\n'
+        f'  <line x1="0" y1="0" x2="{safe_w}" y2="{safe_h}" stroke="#8e8e8e" stroke-width="1"/>\n'
+        f'  <line x1="{safe_w}" y1="0" x2="0" y2="{safe_h}" stroke="#8e8e8e" stroke-width="1"/>\n'
+        f'  <rect x="{max(1, safe_w//4)}" y="{max(1, safe_h//10)}" width="{max(2, safe_w//2)}" height="{max(2, safe_h//8)}" fill="#4a4a4a" rx="1"/>\n'
+        f'  <line x1="{max(2, safe_w//2 - safe_w//8)}" y1="{max(2, safe_h//6)}" x2="{max(3, safe_w//2 - safe_w//20)}" y2="{max(2, safe_h//6)}" stroke="#f2f2f2" stroke-width="1"/>\n'
+        f'  <line x1="{max(2, safe_w//2 + safe_w//20)}" y1="{max(2, safe_h//6)}" x2="{max(3, safe_w//2 + safe_w//8)}" y2="{max(2, safe_h//6)}" stroke="#f2f2f2" stroke-width="1"/>\n'
+        '</svg>\n'
+    )
+
 def _contains_svg_image_tag(svg_content: str) -> bool:
     lowered = svg_content.lower()
     return "<image" in lowered and ('href="data:image' in lowered or 'xlink:href="data:image' in lowered)
@@ -131,8 +159,8 @@ def runNonCompositeIterationImpl(
         )
     else:
         print_fn("  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).")
-        svg_content = render_embedded_raster_svg_fn(img_path)
-        write_validation_log_fn(["status=non_composite_pure_svg_placeholder"])
+        svg_content = _build_vector_placeholder_svg(width, height, description=description)
+        write_validation_log_fn(["status=non_composite_pure_svg_placeholder_vector"])
 
     svg_rendered = render_svg_to_numpy_fn(svg_content, width, height)
     if svg_rendered is None:
@@ -151,7 +179,10 @@ def runNonCompositeIterationImpl(
         if sample_rendered is not None:
             sample_err = calculate_error_fn(perc_img, sample_rendered)
             baseline_is_embedded_raster = _contains_svg_image_tag(svg_content)
-            sample_preference_factor = 1.08 if baseline_is_embedded_raster else 1.0
+            # Favor curated sample SVGs over generated placeholders when they are
+            # in a similar quality range, because sample assets usually carry
+            # richer semantic structure than our generic non-composite fallback.
+            sample_preference_factor = 1.08 if baseline_is_embedded_raster else 1.25
             prefer_sample_svg = baseline_is_embedded_raster or sample_err <= (svg_err * sample_preference_factor)
             if prefer_sample_svg:
                 decision_note = ""
