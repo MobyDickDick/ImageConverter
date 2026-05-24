@@ -1,0 +1,36 @@
+{
+  "base": "AC0150",
+  "best_error": 43.38484848484848,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.013146923783287419,
+  "filename": "AC0150_S.jpg",
+  "h": 110,
+  "mean_delta2": 9709.462890625,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "AC0150",
+        "source": "base_name",
+        "text": "Graues Rechteck hochkant, graue Umrandung, drei graue horizontale Linien, Farbverlauf dunkel-hell-dunkel, Graue Linien Oben-Mitte nach Rechts-Mitte nach Unten-Mitte"
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "AC0150_S"
+  },
+  "std_delta2": 12869.4560546875,
+  "variant": "AC0150_S",
+  "w": 30
+}

@@ -1,0 +1,36 @@
+{
+  "base": "AC0201",
+  "best_error": 77.4616,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.03098464,
+  "filename": "AC0201_2.jpg",
+  "h": 50,
+  "mean_delta2": 30127.103515625,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "AC0201",
+        "source": "base_name",
+        "text": "Kompressor grau nach oben"
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "AC0201_2"
+  },
+  "std_delta2": 26822.28125,
+  "variant": "AC0201_2",
+  "w": 50
+}

@@ -1,0 +1,36 @@
+{
+  "base": "AC0231",
+  "best_error": 40.40611111111111,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.06734351851851851,
+  "filename": "AC0231_S.jpg",
+  "h": 30,
+  "mean_delta2": 10382.1953125,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "AC0231",
+        "source": "base_name",
+        "text": "3-Weg Ventil ähnlich AC0211, um 90° im Uhrzeigersinn gedreht, \"M\" wird immer noch senkrecht geschrieben. Noch ein 3. spitzes Dreieck unten. Wieder Farbwechsel von Dunkelgrau nach hellgrau (von links unten nach rechts oben)"
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "AC0231_S"
+  },
+  "std_delta2": 16411.34375,
+  "variant": "AC0231_S",
+  "w": 20
+}

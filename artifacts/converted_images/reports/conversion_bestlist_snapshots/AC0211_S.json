@@ -1,0 +1,36 @@
+{
+  "base": "AC0211",
+  "best_error": 33.224,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.066448,
+  "filename": "AC0211_S.jpg",
+  "h": 25,
+  "mean_delta2": 6234.27587890625,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "AC0211",
+        "source": "base_name",
+        "text": "Kopressor grau nach oben"
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "AC0211_S"
+  },
+  "std_delta2": 8780.55859375,
+  "variant": "AC0211_S",
+  "w": 20
+}

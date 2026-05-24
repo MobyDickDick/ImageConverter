@@ -1,0 +1,36 @@
+{
+  "base": "AC0521",
+  "best_error": 42.986875,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.013433398437499999,
+  "filename": "AC0521_L.jpg",
+  "h": 80,
+  "mean_delta2": 8603.4365234375,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "AC0521",
+        "source": "base_name",
+        "text": "Graues Rechteck hochkant, graue Umrandung, drei graue horizontale Linien, Farbverlauf dunkel-hell-dunkel. Offene Klappe mit 3 Schliessflächen Abweichung: anstelle von 3 grauen horizontalen dunkelgrauen Strichen drei kleinere vertikale dunkelgraue Striche. Es handelt sich um eine geschlossene Klappe mit der Schliessflächen."
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "AC0521_L"
+  },
+  "std_delta2": 12415.6123046875,
+  "variant": "AC0521_L",
+  "w": 40
+}
