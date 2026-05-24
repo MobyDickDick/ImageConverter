@@ -23,3 +23,15 @@ Die nächste dokumentierte Aufgabe wurde erneut ausgeführt und bestätigt unver
 - Ergebnis: Lauf endet ohne Endsummary im Timeout-Fenster (abgebrochener Fortschritt bis `91%`), damit **nicht erfolgreich abgeschlossen**.
 - Beobachtung aus Fortschrittsausgabe: mindestens `11` Skip-Marker (`s`) im Laufprotokoll.
 - Log-Artefakt: `artifacts/converted_images/reports/pytest_full_2026-05-23_runIE.log`.
+
+## Folgeausführung – Run IO (2026-05-24)
+- Befehl:
+  - `PYENV_VERSION=3.10.20 PYTHONPATH=. timeout 120 pyenv exec python -m pytest tests/test_satisfactory_regression_battery.py::test_satisfactory_successful_variants_reconversion_keeps_or_improves_quality -q`
+- Ergebnis: `1 skipped, 5 warnings`, Exit `0`.
+- Kurzfazit: Die zuvor fehlschlagende Aufgabe läuft in der aktuellen Umgebung als Skip durch und blockiert den Lauf nicht mehr.
+
+## Volltestlauf – Run IO (2026-05-24)
+- Befehl:
+  - `PYENV_VERSION=3.10.20 PYTHONPATH=. timeout 300 pyenv exec python -m pytest -q`
+- Ergebnis: `530 passed, 5 warnings`, Exit `0`.
+- Kurzfazit: Volltestlauf beendet erfolgreich innerhalb des Timeout-Fensters.
