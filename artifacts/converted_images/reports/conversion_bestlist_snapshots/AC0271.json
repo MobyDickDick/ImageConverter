@@ -1,0 +1,36 @@
+{
+  "base": "AC0271",
+  "best_error": 40.56125,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.02535078125,
+  "filename": "AC0271.jpg",
+  "h": 40,
+  "mean_delta2": 9511.728515625,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "AC0271",
+        "source": "base_name",
+        "text": "Pumpensymbol grau: grauer Kreis, hellgrauer Hintergund. Im Kreis ist ein dunkelgraues dreieck, Symmetrisch zu senkrechter Linie, nicht ganz gleichseitig (waagrechte Line unten ist ein weig kürzer)"
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "AC0271"
+  },
+  "std_delta2": 13046.6328125,
+  "variant": "AC0271",
+  "w": 40
+}
