@@ -2810,3 +2810,11 @@ Jeder Tag hat genau definierte Aufgaben mit einem harten Exit-Kriterium.
 - [ ] **FP-D14-1:** 1-seitiges Abschlussdokument schreiben (stabil, verbessert, offen).
 - [ ] **FP-D14-2:** „Durch“ vs. „noch offen“ mit 3 harten Kennzahlen entscheiden.
 - [ ] **FP-D14-EXIT:** Entscheidung ist datenbasiert und für Dritte nachvollziehbar.
+
+### Fortschritt vs. Blocker (Session 2026-05-24, AC0020_L Plan-B + Re-Conversion + T5 Run ZZ)
+
+- **Fortschritt (Plan B):** Für `AC0020_L` wurde eine gekoppelte Plan-B-Syntheseprobe ausgeführt (`python -m tools.plan_b_synthetic_probe ... --variant AC0020_L`), Exit `0`; neues Log-Artefakt: `artifacts/converted_images/reports/AC0020_L_planb_synthetic_2026-05-24_runZZ.log`.
+- **Fortschritt (Re-Conversion):** Die unbefriedigende Konvertierung von `AC0020_L.jpg` wurde als isolierter deterministischer Einzelrun neu erzeugt (`--start AC0020_L --end AC0020_L --deterministic-order`), Exit `0`; neues Log-Artefakt: `artifacts/converted_images/reports/AC0020_L_single_2026-05-24_runZZ.log`.
+- **Fortschritt (nächstes Arbeitspaket):** Direkt anschließend wurde der priorisierte T5.x-Kurzlauf erneut ausgeführt (`tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_ac0812_only`), Ergebnis `1 passed`, Exit `0`; Log-Artefakt: `artifacts/converted_images/reports/T5_ac0812_timeoutpath_probe_2026-05-24_runZZ.log`.
+- **Blocker:** Der bekannte N1/N2-Vollbereichsblocker (kumulative Laufzeit/Timeout) bleibt von den erfolgreichen Kurzläufen unberührt.
+- **Nächster sinnvoller Schritt:** Weiter mit dem nächsten priorisierten mittleren Paket (N5-Kurzbatch) inkl. genau einer gekoppelten Plan-B-Aufgabe und anschließendem Session-Eintrag.
