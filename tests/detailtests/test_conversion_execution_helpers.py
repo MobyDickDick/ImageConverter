@@ -675,3 +675,51 @@ def test_convert_one_impl_resolves_relative_logged_sample_svg_path(tmp_path: Pat
     assert failed is False
     assert row is not None
     assert (svg_out / "AC9911.svg").read_text(encoding="utf-8") == sample_svg.read_text(encoding="utf-8")
+
+
+def test_convert_one_impl_uses_implicit_sample_svg_for_non_composite_placeholder_status(tmp_path: Path) -> None:
+    folder = tmp_path / "images"
+    svg_out = tmp_path / "svg"
+    diff_out = tmp_path / "diff"
+    reports = tmp_path / "reports"
+    samples = folder / "samples"
+    for path in (folder, svg_out, diff_out, reports, samples):
+        path.mkdir(parents=True, exist_ok=True)
+    filename = "AC0030_L.jpg"
+    (folder / filename).write_bytes(b"fake")
+    sample_svg = samples / "AC0030_L.svg"
+    sample_svg.write_text("<svg><rect width='17' height='17'/></svg>", encoding="utf-8")
+    (svg_out / "Failed_AC0030_L.svg").write_text("<svg><image href='data:image/png;base64,abc'/></svg>", encoding="utf-8")
+
+    def _run(*_args, **_kwargs):
+        return ("AC0030_L", "desc", {"mode": "non_composite"}, 1, 1.0)
+
+    row, failed = conversion_execution_helpers.convertOneImpl(
+        filename=filename,
+        folder_path=str(folder),
+        csv_path="descriptions.csv",
+        iteration_budget=3,
+        badge_rounds=5,
+        svg_out_dir=str(svg_out),
+        diff_out_dir=str(diff_out),
+        reports_out_dir=str(reports),
+        debug_ac0811_dir=None,
+        debug_element_diff_dir=None,
+        run_iteration_pipeline_fn=_run,
+        read_validation_log_details_fn=lambda _path: {
+            "status": "non_composite_pure_svg_placeholder",
+            "convergence": "plateau",
+        },
+        render_svg_to_numpy_fn=lambda _svg, _w, _h: object(),
+        calculate_delta2_stats_fn=lambda _img, _rendered: (1.0, 0.0),
+        get_base_name_from_file_fn=lambda stem: stem.split("_")[0],
+        cv2_module=_Cv2Stub(_ImageStub((4, 3, 3))),
+        render_embedded_raster_svg_fn=lambda _path: "<svg/>",
+        append_batch_failure_fn=lambda _row: None,
+        print_fn=lambda _msg: None,
+    )
+
+    assert failed is False
+    assert row is not None
+    assert (svg_out / "AC0030_L.svg").read_text(encoding="utf-8") == sample_svg.read_text(encoding="utf-8")
+    assert not (svg_out / "Failed_AC0030_L.svg").exists()
