@@ -1,0 +1,36 @@
+{
+  "base": "GE0100",
+  "best_error": 19.591348837209303,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.001822451054624121,
+  "filename": "GE0100_L.jpg",
+  "h": 50,
+  "mean_delta2": 1928.4014892578125,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "GE0100",
+        "source": "base_name",
+        "text": "leicht abgerundetes Rechteck mit grauem Rand, vertikaler Farbverlauf von weiss (oben) nach grau (unten)."
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "GE0100_L"
+  },
+  "std_delta2": 2814.9365234375,
+  "variant": "GE0100_L",
+  "w": 215
+}

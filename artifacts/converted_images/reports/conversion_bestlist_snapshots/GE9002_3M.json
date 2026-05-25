@@ -1,0 +1,38 @@
+{
+  "base": "GE9002_3M",
+  "best_error": 35.03791666666667,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.014599131944444444,
+  "filename": "GE9002_3M.jpg",
+  "h": 20,
+  "mean_delta2": 9580.6015625,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "GE9002_3M",
+        "source": "base_name",
+        "text": "Wie GE9001: stillisierte Röhre. Im Prinzip sehr dünnes Rechteck, hochkant, horizontaler Farbverlauf rot/grau/rot. Geometrische Variante: 90° nach rechts gedreht."
+      }
+    ],
+    "documented_alias_refs": [
+      "GE9001"
+    ],
+    "elements": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "GE9002_3M"
+  },
+  "std_delta2": 14631.7841796875,
+  "variant": "GE9002_3M",
+  "w": 120
+}

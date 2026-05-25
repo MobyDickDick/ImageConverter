@@ -1,0 +1,38 @@
+{
+  "base": "GE0035",
+  "best_error": 46.70013605442177,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.009530640011106484,
+  "filename": "GE0035_L.jpg",
+  "h": 70,
+  "mean_delta2": 13189.0146484375,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "GE0035",
+        "source": "base_name",
+        "text": "Wie GE0026, ober ohne Hintergrund"
+      }
+    ],
+    "documented_alias_refs": [
+      "GE0026"
+    ],
+    "elements": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "GE0035_L"
+  },
+  "std_delta2": 21033.53515625,
+  "variant": "GE0035_L",
+  "w": 70
+}

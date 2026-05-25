@@ -1,0 +1,36 @@
+{
+  "base": "SE0011",
+  "best_error": 22.851973684210527,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.025056988688827334,
+  "filename": "SE0011.jpg",
+  "h": 38,
+  "mean_delta2": 5538.4375,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "SE0011",
+        "source": "base_name",
+        "text": "Kreisförmiges Badge. Abweichung: mit Text \"T\" (Temperatur) Abweichung: mit Griff (dunkelgraue Linie nach unten). Der Griff liegt auf einer Symmetrieachse des Kreises."
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "SE0011"
+  },
+  "std_delta2": 13338.341796875,
+  "variant": "SE0011",
+  "w": 24
+}

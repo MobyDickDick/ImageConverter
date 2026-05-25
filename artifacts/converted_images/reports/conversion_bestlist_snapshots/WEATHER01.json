@@ -1,0 +1,36 @@
+{
+  "base": "WEATHER01",
+  "best_error": 30.29364866075428,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.008141265428850922,
+  "filename": "weather01.jpg",
+  "h": 61,
+  "mean_delta2": 7065.64111328125,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "weather01",
+        "source": "base_name",
+        "text": "sehr komplexe Form, wahrscheinlich sehr schwierig zum nachzeichnen. Oben: Wolken mit runden Bögen. Im Prinzip wie Ellipsen mit vertikalem Farbverlauf von hell nach Dunkel. Ganz zuoberst in den Ellipsen sind weiße \"Kappen\" (Sichelförmig weiße Flächen, durch Bögen begrenzt). Unter der Wolke ist ein dunkelgrauer \"Schatten\" angetönt."
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "WEATHER01"
+  },
+  "std_delta2": 14109.7763671875,
+  "variant": "WEATHER01",
+  "w": 61
+}
