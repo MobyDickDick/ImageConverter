@@ -1,0 +1,36 @@
+{
+  "base": "GE0361",
+  "best_error": 44.26702946143742,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.008306817313086398,
+  "filename": "GE0361.jpg",
+  "h": 73,
+  "mean_delta2": 12311.3662109375,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "GE0361",
+        "source": "base_name",
+        "text": "Hintergrund: GE0999. Die Symbole von GE020 (Schraubenschlüssel und Schraubendreher) und GE0206 (Rohr und drei Wassertropfen) unten rechts."
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "GE0361"
+  },
+  "std_delta2": 18210.314453125,
+  "variant": "GE0361",
+  "w": 73
+}

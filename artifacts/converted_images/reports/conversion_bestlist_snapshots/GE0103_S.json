@@ -1,0 +1,38 @@
+{
+  "base": "GE0103",
+  "best_error": 21.745396825396824,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.0041419803476946335,
+  "filename": "GE0103_S.jpg",
+  "h": 35,
+  "mean_delta2": 3477.647216796875,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "GE0103",
+        "source": "base_name",
+        "text": "Wie GE0100: leicht abgerundetes Rechteck mit grauem Rand, vertikaler Farbverlauf von weiss (oben) nach grau (unten). . Geometrische Variante: identisch zur Referenz."
+      }
+    ],
+    "documented_alias_refs": [
+      "GE0100"
+    ],
+    "elements": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "GE0103_S"
+  },
+  "std_delta2": 9411.0693359375,
+  "variant": "GE0103_S",
+  "w": 150
+}

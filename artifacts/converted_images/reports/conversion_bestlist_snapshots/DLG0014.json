@@ -1,0 +1,38 @@
+{
+  "base": "DLG0014",
+  "best_error": 7.353028571428571,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.0008403461224489796,
+  "filename": "DLG0014.JPG",
+  "h": 25,
+  "mean_delta2": 647.6030883789062,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "DLG0014",
+        "source": "base_name",
+        "text": "Wie AC0010: Heizelement, graues Rechteck, Plus-Minus-Zeichen oben links, Farbverlauf horizontal dunkel-hell-dunkel graue Diagonale oben rechts nach unten links. Geometrische Variante: identisch zur Referenz."
+      }
+    ],
+    "documented_alias_refs": [
+      "AC0010"
+    ],
+    "elements": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "DLG0014"
+  },
+  "std_delta2": 1341.8096923828125,
+  "variant": "DLG0014",
+  "w": 350
+}

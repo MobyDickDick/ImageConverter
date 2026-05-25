@@ -1,0 +1,38 @@
+{
+  "base": "GE0350",
+  "best_error": 44.71964444444444,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.007950159012345678,
+  "filename": "GE0350.jpg",
+  "h": 75,
+  "mean_delta2": 11792.4775390625,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "GE0350",
+        "source": "base_name",
+        "text": "Wie GE001"
+      }
+    ],
+    "documented_alias_refs": [
+      "GE001"
+    ],
+    "elements": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "GE0350"
+  },
+  "std_delta2": 17562.041015625,
+  "variant": "GE0350",
+  "w": 75
+}

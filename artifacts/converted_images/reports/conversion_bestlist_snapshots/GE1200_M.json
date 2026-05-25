@@ -1,12 +1,12 @@
 {
   "base": "GE1200",
-  "best_error": 44.18416666666667,
+  "best_error": 43.54,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.11046041666666667,
+  "error_per_pixel": 0.10885,
   "filename": "GE1200_M.jpg",
   "h": 20,
-  "mean_delta2": 7454.92236328125,
+  "mean_delta2": 8237.9296875,
   "params": {
     "bottom_shape": null,
     "description_fragments": [
@@ -30,7 +30,7 @@
     "top_source_ref": null,
     "variant_name": "GE1200_M"
   },
-  "std_delta2": 6017.7705078125,
+  "std_delta2": 7850.10986328125,
   "variant": "GE1200_M",
   "w": 20
 }

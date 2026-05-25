@@ -1,0 +1,38 @@
+{
+  "base": "GE0037",
+  "best_error": 50.67877551020408,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.010342607246980426,
+  "filename": "GE0037_L.jpg",
+  "h": 70,
+  "mean_delta2": 15348.099609375,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "GE0037",
+        "source": "base_name",
+        "text": "Wie GE0028, aber ohne Hintergrund Abweichung: horizontal gespiegelt"
+      }
+    ],
+    "documented_alias_refs": [
+      "GE0028"
+    ],
+    "elements": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "GE0037_L"
+  },
+  "std_delta2": 22829.244140625,
+  "variant": "GE0037_L",
+  "w": 70
+}

@@ -1,0 +1,38 @@
+{
+  "base": "GE0045",
+  "best_error": 45.095782312925174,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.03681288352075524,
+  "filename": "GE0045_L.jpg",
+  "h": 35,
+  "mean_delta2": 10389.4814453125,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "GE0045",
+        "source": "base_name",
+        "text": "Hintergrund: GE0999. Wie GE0044"
+      }
+    ],
+    "documented_alias_refs": [
+      "GE0044"
+    ],
+    "elements": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "GE0045_L"
+  },
+  "std_delta2": 12291.7685546875,
+  "variant": "GE0045_L",
+  "w": 35
+}

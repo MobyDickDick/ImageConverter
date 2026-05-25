@@ -1,0 +1,36 @@
+{
+  "base": "GE1411",
+  "best_error": 18.68,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.08302222222222222,
+  "filename": "GE1411_S.jpg",
+  "h": 15,
+  "mean_delta2": 2526.5556640625,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "GE1411",
+        "source": "base_name",
+        "text": "Diagrammlinie (x-/y-Achse schwarz) wie bei GE1410, rote Sinuslinie nach oben verschoben"
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "GE1411_S"
+  },
+  "std_delta2": 7360.3994140625,
+  "variant": "GE1411_S",
+  "w": 15
+}

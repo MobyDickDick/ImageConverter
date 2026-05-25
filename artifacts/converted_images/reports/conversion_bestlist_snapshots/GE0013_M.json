@@ -1,0 +1,38 @@
+{
+  "base": "GE0013",
+  "best_error": 46.93185185185185,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.013036625514403292,
+  "filename": "GE0013_M.jpg",
+  "h": 60,
+  "mean_delta2": 12569.509765625,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "GE0013",
+        "source": "base_name",
+        "text": "Wie GE0012, aber heller"
+      }
+    ],
+    "documented_alias_refs": [
+      "GE0012"
+    ],
+    "elements": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "GE0013_M"
+  },
+  "std_delta2": 16941.73828125,
+  "variant": "GE0013_M",
+  "w": 60
+}

@@ -1,0 +1,38 @@
+{
+  "base": "DLG0061",
+  "best_error": 67.64416666666666,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.16911041666666665,
+  "filename": "DLG0061.jpg",
+  "h": 20,
+  "mean_delta2": 19244.4921875,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "DLG0061",
+        "source": "base_name",
+        "text": "Alarmglocke (komplexe Form) mit weißem Klöppel innen oben je zwei dunkelroten gekrümmten Linien. Wie GE1420"
+      }
+    ],
+    "documented_alias_refs": [
+      "GE1420"
+    ],
+    "elements": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "DLG0061"
+  },
+  "std_delta2": 15093.9052734375,
+  "variant": "DLG0061",
+  "w": 20
+}

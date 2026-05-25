@@ -2983,4 +2983,4 @@ for _name, _obj in list(globals().items()):
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    raise SystemExit(mai

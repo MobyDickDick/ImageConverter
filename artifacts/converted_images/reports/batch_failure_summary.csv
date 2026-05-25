@@ -1,15 +1,22 @@
 filename;status;reason;details;log_file
-AC1001_L.jpg;conversion_failed;no_result;;AC1001_L_element_validation.log
-GE1310_S.jpg;conversion_failed;no_result;;GE1310_S_element_validation.log
-AC0214_S.jpg;conversion_failed;no_result;no_result_returned;AC0214_S_element_validation.log
-AC0843_S.jpg;conversion_failed;no_result;no_result_returned;AC0843_S_element_validation.log
-AR0102.jpg;conversion_failed;no_result;;AR0102_element_validation.log
-AC0841_S.jpg;conversion_failed;no_result;no_result_returned;AC0841_S_element_validation.log
-AC0861_S.jpg;conversion_failed;no_result;;AC0861_S_element_validation.log
-AC0861_L.jpg;conversion_failed;no_result;no_result_returned;AC0861_L_element_validation.log
-AC0224_S.jpg;conversion_failed;no_result;;AC0224_S_element_validation.log
+SE0124.jpg;conversion_failed;no_result;;SE0124_element_validation.log
+AC0213_S.jpg;conversion_failed;no_result;;AC0213_S_element_validation.log
+AC0232_S.jpg;conversion_failed;no_result;;AC0232_S_element_validation.log
+AC0232_L.jpg;conversion_failed;no_result;;AC0232_L_element_validation.log
+SE0102.jpg;conversion_failed;no_result;;SE0102_element_validation.log
+AC1001_L.jpg;conversion_failed;no_result;no_result_returned;AC1001_L_element_validation.log
+AC0VR2_ZL_M.jpg;raster_embedded_svg;embedded_raster_detected;Detected embedded raster payload in SVG output.;AC0VR2_ZL_M_element_validation.log
+AR0063.jpg;conversion_failed;no_result;;AR0063_element_validation.log
+AR0101.jpg;conversion_failed;no_result;;AR0101_element_validation.log
+AC0221_M_sia.jpg;conversion_failed;no_result;;AC0221_M_sia_element_validation.log
+AC0864_M.jpg;conversion_failed;no_result;no_result_returned;AC0864_M_element_validation.log
+SE0061.jpg;conversion_failed;no_result;;SE0061_element_validation.log
+AC1002_L.jpg;conversion_failed;no_result;;AC1002_L_element_validation.log
+AC0840_M.jpg;conversion_failed;no_result;;AC0840_M_element_validation.log
+AC0VR2_AB_M.jpg;raster_embedded_svg;embedded_raster_detected;Detected embedded raster payload in SVG output.;AC0VR2_AB_M_element_validation.log
+SE0071.jpg;conversion_failed;no_result;no_result_returned;SE0071_element_validation.log
+AC1000_S.jpg;conversion_failed;no_result;;AC1000_S_element_validation.log
+AR0083.jpg;conversion_failed;no_result;no_result_returned;AR0083_element_validation.log
 AC0862_S.jpg;conversion_failed;no_result;no_result_returned;AC0862_S_element_validation.log
-AC0862_M.jpg;conversion_failed;no_result;;AC0862_M_element_validation.log
-AR0082.jpg;conversion_failed;no_result;;AR0082_element_validation.log
-SE0082.jpg;conversion_failed;no_result;;SE0082_element_validation.log
-GE9910_M.jpg;batch_error;KeyError;'img_path';GE9910_M_element_validation.log
+bottom.gif;conversion_failed;no_result;;bottom_element_validation.log
+GE1301_M.jpg;batch_error;KeyError;'img_path';GE1301_M_element_validation.log

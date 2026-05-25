@@ -1,0 +1,36 @@
+{
+  "base": "GE0280",
+  "best_error": 50.81708238851096,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.11523147933902712,
+  "filename": "GE0280.jpg",
+  "h": 21,
+  "mean_delta2": 12798.6103515625,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "GE0280",
+        "source": "base_name",
+        "text": "Blaue Kugelform (blauer Kreis mit radialem Farbverlauf, aussen dunkel, innen hell)"
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "GE0280"
+  },
+  "std_delta2": 15086.1552734375,
+  "variant": "GE0280",
+  "w": 21
+}
