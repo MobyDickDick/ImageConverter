@@ -338,3 +338,51 @@ def test_remove_successful_variants_from_open_tasks_only_removes_open_checkboxes
     assert "- [ ] todo AC0831_L" not in content
     assert "- [x] done AC0831_L" in content
     assert "- [ ] todo AC0836_L" in content
+
+
+def test_append_failure_followup_tasks_adds_missing_failure_variants(tmp_path):
+    reports_dir = tmp_path / "src" / "artifacts" / "converted_images" / "reports"
+    reports_dir.mkdir(parents=True)
+    docs_dir = tmp_path / "docs"
+    docs_dir.mkdir(parents=True)
+    open_tasks = docs_dir / "open_tasks.md"
+    open_tasks.write_text(
+        "# Aufgaben\n\n## Session-Log\n- bisheriger Eintrag\n",
+        encoding="utf-8",
+    )
+
+    finalization_helpers._appendFailureFollowUpTasks(
+        reports_out_dir=str(reports_dir),
+        batch_failures=[
+            {"filename": "AC0840_L.jpg", "status": "conversion_failed", "reason": "no_result"},
+            {"filename": "AC0841_M.jpg", "status": "semantic_mismatch", "reason": "semantic_mismatch"},
+        ],
+    )
+
+    content = open_tasks.read_text(encoding="utf-8")
+    assert "## Automatisch erzeugte Folgeaufgaben (Konvertierungsfehler)" in content
+    assert "AUFGABE: Fehleranalyse `AC0840_L` (status=conversion_failed, reason=no_result)" in content
+    assert "AUFGABE: Fehleranalyse `AC0841_M` (status=semantic_mismatch, reason=semantic_mismatch)" in content
+    assert content.index("## Automatisch erzeugte Folgeaufgaben (Konvertierungsfehler)") < content.index("## Session-Log")
+
+
+def test_append_failure_followup_tasks_skips_existing_variant_entries(tmp_path):
+    reports_dir = tmp_path / "src" / "artifacts" / "converted_images" / "reports"
+    reports_dir.mkdir(parents=True)
+    docs_dir = tmp_path / "docs"
+    docs_dir.mkdir(parents=True)
+    open_tasks = docs_dir / "open_tasks.md"
+    open_tasks.write_text(
+        "- [ ] Bereits offen: AC0840_L\n",
+        encoding="utf-8",
+    )
+
+    finalization_helpers._appendFailureFollowUpTasks(
+        reports_out_dir=str(reports_dir),
+        batch_failures=[
+            {"filename": "AC0840_L.jpg", "status": "conversion_failed", "reason": "no_result"},
+        ],
+    )
+
+    content = open_tasks.read_text(encoding="utf-8")
+    assert "Automatisch erzeugte Folgeaufgaben" not in content

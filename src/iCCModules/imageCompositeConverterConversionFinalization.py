@@ -281,6 +281,63 @@ def _removeSuccessfulVariantsFromOpenTasks(*, reports_out_dir: str, result_map: 
     open_tasks_path.write_text("\n".join(updated_lines) + "\n", encoding="utf-8")
 
 
+def _appendFailureFollowUpTasks(*, reports_out_dir: str, batch_failures: list[dict[str, str]]) -> None:
+    """Append open task entries for conversion failures that have no existing task line yet."""
+    if not batch_failures:
+        return
+
+    repo_root = Path(reports_out_dir).resolve().parents[3]
+    open_tasks_path = repo_root / "docs" / "open_tasks.md"
+    if not open_tasks_path.exists():
+        return
+
+    try:
+        existing_content = open_tasks_path.read_text(encoding="utf-8")
+    except OSError:
+        return
+    existing_upper = existing_content.upper()
+
+    variants_to_add: list[tuple[str, str, str]] = []
+    seen_variants: set[str] = set()
+    for failure in batch_failures:
+        filename = str(failure.get("filename", "")).strip()
+        if not filename:
+            continue
+        variant = Path(filename).stem.strip().upper()
+        if not variant or variant in seen_variants:
+            continue
+        seen_variants.add(variant)
+        if variant in existing_upper:
+            continue
+        status = str(failure.get("status", "conversion_failed")).strip() or "conversion_failed"
+        reason = str(failure.get("reason", "no_result")).strip() or "no_result"
+        variants_to_add.append((variant, status, reason))
+
+    if not variants_to_add:
+        return
+
+    lines = existing_content.splitlines()
+    marker = "## Session-Log"
+    insert_idx = len(lines)
+    for idx, line in enumerate(lines):
+        if line.strip() == marker:
+            insert_idx = idx
+            break
+
+    new_lines: list[str] = []
+    if insert_idx > 0 and lines[insert_idx - 1].strip():
+        new_lines.append("")
+    new_lines.append("## Automatisch erzeugte Folgeaufgaben (Konvertierungsfehler)")
+    for variant, status, reason in variants_to_add:
+        new_lines.append(
+            f"- [ ] AUFGABE: Fehleranalyse `{variant}` (status={status}, reason={reason}) und Gegenmaßnahme ableiten."
+        )
+    new_lines.append("")
+
+    updated_lines = lines[:insert_idx] + new_lines + lines[insert_idx:]
+    open_tasks_path.write_text("\n".join(updated_lines) + "\n", encoding="utf-8")
+
+
 def _canonicalizeFailedAttemptSvgNames(
     *,
     svg_out_dir: str,
@@ -372,5 +429,9 @@ def runConversionFinalizationImpl(
     _removeSuccessfulVariantsFromOpenTasks(
         reports_out_dir=reports_out_dir,
         result_map=result_map,
+    )
+    _appendFailureFollowUpTasks(
+        reports_out_dir=reports_out_dir,
+        batch_failures=batch_failures,
     )
     return semantic_results
