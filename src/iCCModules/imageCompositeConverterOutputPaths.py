@@ -20,5 +20,9 @@ def diffOutputDirImpl(output_root: str) -> str:
     return os.path.join(output_root, "diff_pngs")
 
 
+def convertedPngOutputDirImpl(output_root: str) -> str:
+    return os.path.join(output_root, "converted_images_png")
+
+
 def reportsOutputDirImpl(output_root: str) -> str:
     return os.path.join(output_root, "reports")

@@ -603,6 +603,9 @@ def _writeSemanticAuditReport(reports_out_dir: str, audit_rows: list[dict[str, o
 def _diffOutputDir(output_root: str) -> str:
     return output_path_helpers.diffOutputDirImpl(output_root)
 
+def _convertedPngOutputDir(output_root: str) -> str:
+    return output_path_helpers.convertedPngOutputDirImpl(output_root)
+
 def _reportsOutputDir(output_root: str) -> str:
     return output_path_helpers.reportsOutputDirImpl(output_root)
 
@@ -954,10 +957,12 @@ def convertRange(
     out_root = output_root or _defaultConvertedSymbolsRoot()
     svg_out_dir = _convertedSvgOutputDir(out_root)
     diff_out_dir = _diffOutputDir(out_root)
+    png_out_dir = _convertedPngOutputDir(out_root)
     reports_out_dir = _reportsOutputDir(out_root)
 
     os.makedirs(svg_out_dir, exist_ok=True)
     os.makedirs(diff_out_dir, exist_ok=True)
+    os.makedirs(png_out_dir, exist_ok=True)
     os.makedirs(reports_out_dir, exist_ok=True)
 
     normalized_selected_variants, files = _listRequestedImageFiles(
@@ -1046,6 +1051,7 @@ def convertRange(
             badge_rounds=badge_rounds,
             svg_out_dir=svg_out_dir,
             diff_out_dir=diff_out_dir,
+            png_out_dir=png_out_dir,
             reports_out_dir=reports_out_dir,
             debug_ac0811_dir=debug_ac0811_dir,
             debug_element_diff_dir=debug_element_diff_dir,
