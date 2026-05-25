@@ -1,0 +1,38 @@
+{
+  "base": "GE1002",
+  "best_error": 23.501333333333335,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.037602133333333336,
+  "filename": "GE1002_M.jpg",
+  "h": 25,
+  "mean_delta2": 6251.18896484375,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "GE1002",
+        "source": "base_name",
+        "text": "Wie GE0280, grau"
+      }
+    ],
+    "documented_alias_refs": [
+      "GE0280"
+    ],
+    "elements": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "GE1002_M"
+  },
+  "std_delta2": 12826.4736328125,
+  "variant": "GE1002_M",
+  "w": 25
+}
