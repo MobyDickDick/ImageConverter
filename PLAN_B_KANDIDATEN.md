@@ -4,11 +4,11 @@ Ziel: maximal **5** aktive JPG-Kandidaten, die derzeit noch nicht zufriedenstell
 
 ## Aktuelle Kandidaten (Stand: 2026-05-25)
 
-1. `AC0021.jpg` – kompakter Einzelmarker, gut für schnelles Nachzeichnen.
-2. `AC0025.jpg` – ähnlich einfache Geometrie, bislang weiterhin als fehlerhaft sichtbar.
-3. `AC0040_M.jpg` – mittlere Variante mit überschaubarer Struktur.
-4. `AC0060_L.jpg` – größere, aber weiterhin klar konturierte Symbolform.
-5. `AC0080_L.jpg` – einfacher Kandidat mit gutem Nutzen für parallele Plan-B-Arbeit.
+1. `AC0025.jpg` – ähnlich einfache Geometrie, bislang weiterhin als fehlerhaft sichtbar.
+2. `AC0040_M.jpg` – mittlere Variante mit überschaubarer Struktur.
+3. `AC0060_L.jpg` – größere, aber weiterhin klar konturierte Symbolform.
+4. `AC0080_L.jpg` – einfacher Kandidat mit gutem Nutzen für parallele Plan-B-Arbeit.
+5. `AC0100_from_sample.jpg` – weiterhin in `diff_pngs` als problematisch sichtbar und visuell überschaubar.
 
 ## Pflege-Regel (fortan)
 
