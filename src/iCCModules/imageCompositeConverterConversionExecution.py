@@ -362,6 +362,7 @@ def convertOneImpl(
     badge_rounds: int,
     svg_out_dir: str,
     diff_out_dir: str,
+    png_out_dir: str,
     reports_out_dir: str,
     debug_ac0811_dir: str | None,
     debug_element_diff_dir: str | None,
@@ -775,4 +776,13 @@ def convertOneImpl(
         print_fn=print_fn,
     )
     _emit_anchor_variant_event("variant_done", status="ok")
+    if os.path.exists(svg_path) and img is not None and hasattr(cv2_module, "imwrite"):
+        try:
+            with open(svg_path, "r", encoding="utf-8") as handle:
+                png_svg_content = handle.read()
+            png_rendered = render_svg_to_numpy_fn(png_svg_content, width, height)
+            if png_rendered is not None:
+                cv2_module.imwrite(os.path.join(png_out_dir, f"{base}.png"), png_rendered)
+        except OSError:
+            pass
     return row, False
