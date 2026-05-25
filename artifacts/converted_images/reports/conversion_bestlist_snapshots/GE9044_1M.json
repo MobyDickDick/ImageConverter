@@ -1,0 +1,36 @@
+{
+  "base": "GE9044_1M",
+  "best_error": 17.390208333333334,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.010868880208333334,
+  "filename": "GE9044_1M.jpg",
+  "h": 40,
+  "mean_delta2": 5446.70947265625,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "GE9044_1M",
+        "source": "base_name",
+        "text": "Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz."
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "GE9044_1M"
+  },
+  "std_delta2": 14324.3798828125,
+  "variant": "GE9044_1M",
+  "w": 40
+}

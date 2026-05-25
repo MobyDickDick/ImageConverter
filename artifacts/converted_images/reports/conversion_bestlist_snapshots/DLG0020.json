@@ -1,0 +1,36 @@
+{
+  "base": "DLG0020",
+  "best_error": 35.97511574074074,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.06245679816100823,
+  "filename": "DLG0020.jpg",
+  "h": 24,
+  "mean_delta2": 13582.51953125,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "DLG0020",
+        "source": "base_name",
+        "text": "Im Prinzip ein Kreis mit 3-D-Effekt. Vertikaler Farbverlauf: oben hell, mittig dunkel, unten hellgrau. Der graue Hintergrund kann vernachlässigt werden."
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "DLG0020"
+  },
+  "std_delta2": 28487.466796875,
+  "variant": "DLG0020",
+  "w": 24
+}

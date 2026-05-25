@@ -1,792 +1,22 @@
 [INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
-Namen von: Namen bis: [INFO] Verwende Teilstring-Filter 'AC0' für die Auswahl der Bilder.
 
---- Verarbeite AC0800_S.jpg ---
-Bildbeschreibung: Kreisförmiges Badge.
-Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe
-
---- Verarbeite AC0554_1_M.jpg ---
-Bildbeschreibung: Wie AC0551: Wie AC0150. Geometrische Variante: 90° nach links gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.
-Befehl erkannt: SEMANTIC: Kreis + Buchstabe, REFERENZ: Abgeleitet aus AC0551
-[WARN] AC0554_1_M.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
-
---- Verarbeite AC0211_S.jpg ---
-Bildbeschreibung: Kopressor grau nach oben
+--- Verarbeite GE9033_5S.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
 Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
   -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
 
---- Verarbeite AC5000_M.jpg ---
-Bildbeschreibung: Radiator (komplexe Zeichnung) ca. 10 ganz dünne Rechtecke, Ecken abgerundet. Zwei dünne dunkelgraue Linien oben und unten hinter den dünnen Rechtecken.
+--- Verarbeite GE0001_1_S.jpg ---
+Bildbeschreibung: Vorsicht-Zeichen vor blaugrauem Kreis mit Farbverlauf. Hintergrund GE0999
 Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
   -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
 
---- Verarbeite AC0521_L.jpg ---
-Bildbeschreibung: Graues Rechteck hochkant, graue Umrandung, drei graue horizontale Linien, Farbverlauf dunkel-hell-dunkel. Offene Klappe mit 3 Schliessflächen Abweichung: anstelle von 3 grauen horizontalen dunkelgrauen Strichen drei kleinere vertikale dunkelgraue Striche. Es handelt sich um eine geschlossene Klappe mit der Schliessflächen.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0843_L.jpg ---
-Bildbeschreibung: Wie AC0842, jecoch nach rechts gedreht, Text immer noch horizontal
-Befehl erkannt: SEMANTIC: waagrechter Strich links vom Kreis, SEMANTIC: Kreis + Buchstabe rF, REFERENZ: Abgeleitet aus AC0842
-[WARN] AC0843_L.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
-
---- Verarbeite AC0252_1.jpg ---
-Bildbeschreibung: Wie AC0251: Pumpensymbol grau: grauer Kreis, hellgrauer Hintergund. Im Kreis ist ein dunkelgraues dreieck, Symmetrisch zu senkrechter Linie, nicht ganz gleichseitig (waagrechte Line unten ist ein weig kürzer). Geometrische Variante: 90° nach links gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0304_1_M.jpg ---
-Bildbeschreibung: Wie AC0301: Kompresor grauer Hintergrund nach oben. Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0701_S.jpg ---
-Bildbeschreibung: Kelle, aber mit Quadrat anstelle von Kreis oben.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0252.jpg ---
-Bildbeschreibung: Wie AC0251: Pumpensymbol grau: grauer Kreis, hellgrauer Hintergund. Im Kreis ist ein dunkelgraues dreieck, Symmetrisch zu senkrechter Linie, nicht ganz gleichseitig (waagrechte Line unten ist ein weig kürzer). Geometrische Variante: 90° nach links gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0040_S.jpg ---
-Bildbeschreibung: Wie AC0020: zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben. Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch)
-
---- Verarbeite AC1003_L.jpg ---
-Bildbeschreibung: Wie AC1001: Wie AC1000, jedoch mit Kelle (graue horizontale Linie) nach unten. Geometrische Variante: 180° gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.
+--- Verarbeite AC0890_S.jpg ---
+Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "T" (Temperatur) Abweichung: links mit einer Form dünne graue vertikale Linie, dann ca. 8 dünne graue diagonale linien (von oben links nach unten rechts, dann ein graues Rechteck, dann die Temperaturmessung. Symbolisiert einen Temperaturfühler, welcher an einer Wand besfestigt ist.
 Befehl erkannt: SEMANTIC: Kreis + Buchstabe
-[WARN] AC1003_L.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+[WARN] AC0890_S.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
 
---- Verarbeite AC0130_S.jpg ---
-Bildbeschreibung: Wie AC0030: Kühlelement, graues Rechteck, Minus-Minus-Zeichen oben Mitte, Farbverlauf horizontal dunkel-hell-dunkel, graue Linien in beiden Diagonalen. Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-  -> Plan B Vergleich aktiv: nutze Sample-SVG artifacts/images_to_convert\samples\AC0130_L.svg (err=171.079, baseline=184.630).
-
---- Verarbeite AC0814_S.jpg ---
-Bildbeschreibung: Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 90° nach rechts gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.
-Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe, SEMANTIC: waagrechter Strich rechts vom Kreis
-
---- Verarbeite AC0020_M.jpg ---
-Bildbeschreibung: zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben
-Befehl erkannt: SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch)
-
---- Verarbeite AC0021.jpg ---
-Bildbeschreibung: zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben, unteres Drittel blaue horizontale Linie
-Befehl erkannt: SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch)
-
---- Verarbeite AC0404_2_S.jpg ---
-Bildbeschreibung: Wie AC0401: Wie AC0251, jedoch Hintergrund Kreis ein wenig dunkler. . Geometrische Variante: 90° nach rechts gedreht.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-  -> Überspringe Bild, da keine begleitende textliche Beschreibung vorliegt.
-[WARN] AC0100_from_sample.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
-
---- Verarbeite AC0204_2.jpg ---
-Bildbeschreibung: Wie AC0201: Kompressor grau nach oben. Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0834_S.jpg ---
-Bildbeschreibung: Wie AC080, jedoch Griff unten (als Kelle ausfeführt) Abweichung: nach links gedreht, Text immer noch horizontal. Der Griff liegt auf einer Symmetrieachse des Kreises.
-Befehl erkannt: SEMANTIC: waagrechter Strich rechts vom Kreis, SEMANTIC: Kreis + Buchstabe
-
---- Verarbeite AC0411_S.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0411. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0201_2.jpg ---
-Bildbeschreibung: Kompressor grau nach oben
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0303_2M_sia.jpg ---
-Bildbeschreibung: Wie AC0301: Kompresor grauer Hintergrund nach oben. Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0502_L_sia.jpg ---
-Bildbeschreibung: Wie AC0501: Klappensymbol: Rechteck hochkant, graue Umrandung. Graue Diagonale von unten links nach oben Rechts, in der Mitte ein dunkelgrauer Punkt. Farbverlauf Hintergrund: Dunkelgrau, hellgrau, dunkelgrau. Geometrische Variante: 90° nach rechts gedreht.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0532_S_sia.jpg ---
-Bildbeschreibung: Wie AC0501: Klappensymbol: Rechteck hochkant, graue Umrandung. Graue Diagonale von unten links nach oben Rechts, in der Mitte ein dunkelgrauer Punkt. Farbverlauf Hintergrund: Dunkelgrau, hellgrau, dunkelgrau. Geometrische Variante: 90° nach rechts gedreht.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC5010_L.jpg ---
-Bildbeschreibung: Wassererhitzer (komplexe Zeichnung). Prinzip: Graues Rechteck, aber oben ein wenig rund, unten auch abgerudnet aber weniger. Innen eine weiße umrandung einer unten blaue, oben rotge Fläche, in der der Mitte Farbübergang. Innendrin 3 schematissche Heizspiralen.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0839_S.jpg ---
-Bildbeschreibung: Wie AC0836, jedoch 90° nach rechts gedreht. Der Griff verläuft waagrecht nach rechts, der Text "VOC" bleibt horizontal lesbar. Der Griff liegt auf einer Symmetrieachse des Kreises.
-Befehl erkannt: SEMANTIC: waagrechter Strich rechts vom Kreis, SEMANTIC: Kreis + Buchstabe VOC
-
---- Verarbeite AC0512_1_S.jpg ---
-Bildbeschreibung: Wie AC0511: Graues Rechteck hochkant, graue Umrandung, drei graue horizontale Linien, Farbverlauf dunkel-hell-dunkel. Offene Klappe mit 3 Schliessflächen. Geometrische Variante: 90° nach rechts gedreht.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0404_L_sia.jpg ---
-Bildbeschreibung: Wie AC0401: Wie AC0251, jedoch Hintergrund Kreis ein wenig dunkler. . Geometrische Variante: 90° nach rechts gedreht.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0714_1_M.jpg ---
-Bildbeschreibung: Wie AC0701: Kelle, aber mit Quadrat anstelle von Kreis oben. Geometrische Variante: 90° nach rechts gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0503_2M_sia.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0503_2M_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0913_S.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0913. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0152_S.jpg ---
-Bildbeschreibung: Wie AC0151_L, aber rechts mit grauer Kelle und dem Buchstaben „M“. Der Griff liegt auf einer Symmetrieachse des Kreises.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0901_M.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0901. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0901. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die mittlere Variante (M). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0403_S_sia.jpg ---
-Bildbeschreibung: Wie AC0401: Wie AC0251, jedoch Hintergrund Kreis ein wenig dunkler. . Geometrische Variante: 180° gedreht.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0863_S.jpg ---
-Bildbeschreibung: Wie AC0842, jecoch nach rechts gedreht, Text immer noch horizontal
-Befehl erkannt: SEMANTIC: waagrechter Strich links vom Kreis, SEMANTIC: Kreis + Buchstabe rF, REFERENZ: Abgeleitet aus AC0842
-[WARN] AC0863_S.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
-
---- Verarbeite AC0423_M.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0423. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0423. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die mittlere Variante (M). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0884_S.jpg ---
-Bildbeschreibung: Wie AC0882: Wie AC0881, jedoch nach rechts gedreht, Text immer noch horizontal. Geometrische Variante: 180° gedreht.
-Befehl erkannt: SEMANTIC: waagrechter Strich links vom Kreis, SEMANTIC: Kreis + Buchstabe, REFERENZ: Abgeleitet aus AC0882
-[WARN] AC0884_S.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
-
---- Verarbeite AC0733_L.jpg ---
-Bildbeschreibung: Wie AC0733, aber nach rechts gedreht, Text immer noch horizontal "P"
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0422_1_S.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0422. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0422_1. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0421_1_M.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0421. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0421_1. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die mittlere Variante (M). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0203.jpg ---
-Bildbeschreibung: Wie AC0202: Kompressor grau nach rechts. Geometrische Variante: Hauptdiagonal gespiegelt.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC5030_L.jpg ---
-Bildbeschreibung: sehr komplexe Form, wahrscheinlich sehr schwierig zum nachzeichnen. Es zeigt eine heruntergleassene Store ("Jalousie"). Oben ist ein dunkelgraues langes schmales Rechteck. Unten sind dünne hellgraue rechtecke (Lamellen) links und rechts sind zwei vertikale grau Linien (hinter den Lamellen) dargesetllt, die Haltefäden der Lamellen.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0535_2M_sia.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0535_2M_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0222_L.jpg ---
-Bildbeschreibung: Kompressor grauer Hintergrund nach oben.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0303_2_M.jpg ---
-Bildbeschreibung: Wie AC0301: Kompresor grauer Hintergrund nach oben. Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0404_1L_sia.jpg ---
-Bildbeschreibung: Wie AC0401: Wie AC0251, jedoch Hintergrund Kreis ein wenig dunkler. . Geometrische Variante: 90° nach rechts gedreht.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0201_L_sia.jpg ---
-Bildbeschreibung: Kompressor grau nach oben
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0150.jpg ---
-Bildbeschreibung: Graues Rechteck hochkant, graue Umrandung, drei graue horizontale Linien, Farbverlauf dunkel-hell-dunkel, Graue Linien Oben-Mitte nach Rechts-Mitte nach Unten-Mitte
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0304_1_L.jpg ---
-Bildbeschreibung: Wie AC0301: Kompresor grauer Hintergrund nach oben. Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0532_L.jpg ---
-Bildbeschreibung: Wie AC0501: Klappensymbol: Rechteck hochkant, graue Umrandung. Graue Diagonale von unten links nach oben Rechts, in der Mitte ein dunkelgrauer Punkt. Farbverlauf Hintergrund: Dunkelgrau, hellgrau, dunkelgrau. Geometrische Variante: 90° nach rechts gedreht.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0703_1_S.jpg ---
-Bildbeschreibung: Wie AC0701: Kelle, aber mit Quadrat anstelle von Kreis oben. Geometrische Variante: 180° gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0424_S.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0424. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0552_S.jpg ---
-Bildbeschreibung: Wie AC0551: Wie AC0150. Geometrische Variante: 90° nach rechts gedreht.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0538_M_sia.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0538_S_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0538_M_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0025.jpg ---
-Bildbeschreibung: Wie AC0024: AC0023.jpg vertikal gespiegelt. Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0531_2L_sia.jpg ---
-Bildbeschreibung: Wie AC0501: Klappensymbol: Rechteck hochkant, graue Umrandung. Graue Diagonale von unten links nach oben Rechts, in der Mitte ein dunkelgrauer Punkt. Farbverlauf Hintergrund: Dunkelgrau, hellgrau, dunkelgrau. Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC100_1_M.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC100_1. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die mittlere Variante (M). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0934_L.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0934. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0934. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die große Variante (L). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0921_M.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0921. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0921. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die mittlere Variante (M). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0301_2_L.jpg ---
-Bildbeschreibung: Kompresor grauer Hintergrund nach oben
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0222_S_sia.jpg ---
-Bildbeschreibung: Kompressor grauer Hintergrund nach oben.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0861_M.jpg ---
-Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "rF" (relative Feuchtigkeit) Abweichung: mit Griff (dunkelgraue Linie nach unten). Der Griff liegt auf einer Symmetrieachse des Kreises.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-[WARN] AC0861_M.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
-
---- Verarbeite AC0VR2_M.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0VR2_ZL. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die mittlere Variante (M). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0VR2. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die mittlere Variante (M). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Plan B verworfen: Embedded-Raster ist näher am Original (err=0.000 < sample=204.259).
-[ERROR] AC0VR2_M.jpg: Embedded-Raster-SVG erkannt, als fehlgeschlagen markiert.
-
---- Verarbeite AC0848_M.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0848. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0848. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die mittlere Variante (M). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0503_2S_sia.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0503_S_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0503_2S_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0303_L.jpg ---
-Bildbeschreibung: Wie AC0301: Kompresor grauer Hintergrund nach oben. Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0150_1.jpg ---
-Bildbeschreibung: Graues Rechteck hochkant, graue Umrandung, drei graue horizontale Linien, Farbverlauf dunkel-hell-dunkel, Graue Linien Oben-Mitte nach Rechts-Mitte nach Unten-Mitte
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0532_1_L.jpg ---
-Bildbeschreibung: Wie AC0501: Klappensymbol: Rechteck hochkant, graue Umrandung. Graue Diagonale von unten links nach oben Rechts, in der Mitte ein dunkelgrauer Punkt. Farbverlauf Hintergrund: Dunkelgrau, hellgrau, dunkelgrau. Geometrische Variante: 90° nach rechts gedreht.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0150_S.jpg ---
-Bildbeschreibung: Graues Rechteck hochkant, graue Umrandung, drei graue horizontale Linien, Farbverlauf dunkel-hell-dunkel, Graue Linien Oben-Mitte nach Rechts-Mitte nach Unten-Mitte
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0551_2_S.jpg ---
-Bildbeschreibung: Graues Rechteck hochkant, graue Umrandung, drei graue horizontale Linien, Farbverlauf dunkel-hell-dunkel, Graue Linien Oben-Mitte nach Rechts-Mitte nach Unten-Mitte
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0423_2_L.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0423. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0423_2. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die große Variante (L). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0153_S.jpg ---
-Bildbeschreibung: Graue Scheibe in Seitenansicht mit sichtbarer rechter Seite; Farbgebung wie bei AC0152_M (oben gelbgrün, unten dunkelgrün). Rechts befindet sich zusätzlich mittig ein weißer Punkt sowie ein Drehsymbol: ein weißer Kreis, als Ellipse dargestellt, mit zwei Pfeilen zur Anzeige der rechtsdrehenden Bewegung.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-  -> Plan B Vergleich aktiv: nutze Sample-SVG artifacts/images_to_convert\samples\AC0153_L.svg (err=83.574, baseline=201.159).
-
---- Verarbeite AC0930_L.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0930. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0930. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die große Variante (L). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0713_M.jpg ---
-Bildbeschreibung: Wie AC0701: Kelle, aber mit Quadrat anstelle von Kreis oben. Geometrische Variante: 180° gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0244_L.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0244. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0244. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die große Variante (L). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0153_L.jpg ---
-Bildbeschreibung: Graue Scheibe in Seitenansicht mit sichtbarer rechter Seite; Farbgebung wie bei AC0152_M (oben gelbgrün, unten dunkelgrün). Rechts befindet sich zusätzlich mittig ein weißer Punkt sowie ein Drehsymbol: ein weißer Kreis, als Ellipse dargestellt, mit zwei Pfeilen zur Anzeige der rechtsdrehenden Bewegung.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-  -> Plan B Vergleich aktiv: nutze Sample-SVG artifacts/images_to_convert\samples\AC0153_L.svg (err=84.865, baseline=205.209).
-
---- Verarbeite AC0911_L.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0911. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0911. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die große Variante (L). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0532_2S_sia.jpg ---
-Bildbeschreibung: Wie AC0501: Klappensymbol: Rechteck hochkant, graue Umrandung. Graue Diagonale von unten links nach oben Rechts, in der Mitte ein dunkelgrauer Punkt. Farbverlauf Hintergrund: Dunkelgrau, hellgrau, dunkelgrau. Geometrische Variante: 90° nach rechts gedreht.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0847_M.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0847. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0847. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die mittlere Variante (M). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC1003_S.jpg ---
-Bildbeschreibung: Wie AC1001: Wie AC1000, jedoch mit Kelle (graue horizontale Linie) nach unten. Geometrische Variante: 180° gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.
-Befehl erkannt: SEMANTIC: Kreis + Buchstabe
-[WARN] AC1003_S.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
-
---- Verarbeite AC0844_M.jpg ---
-Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "rF" (relative Feuchtigkeit) Abweichung: mit Griff (dunkelgraue Linie nach unten) Abweichung: nach links gedreht, Text immer noch horizontal. Der Griff liegt auf einer Symmetrieachse des Kreises.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-[WARN] AC0844_M.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
-
---- Verarbeite AC0100_S.jpg ---
-Bildbeschreibung: Wie AC0010: Heizelement, graues Rechteck, Plus-Minus-Zeichen oben links, horizontaler Farbverlauf dunkel–hell–dunkel sowie graue Diagonale von oben rechts nach unten links.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-  -> Plan B Vergleich aktiv: nutze Sample-SVG artifacts/images_to_convert\samples\AC0100_L.svg (err=176.170, baseline=185.623).
-
---- Verarbeite AC0304_2S_sia.jpg ---
-Bildbeschreibung: Wie AC0301: Kompresor grauer Hintergrund nach oben. Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0040_M.jpg ---
-Bildbeschreibung: Wie AC0020: zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben. Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch)
-
---- Verarbeite AC0900_M.jpg ---
-Bildbeschreibung: Differenzdruckmessung oben kleines graues Rechteck mit "dp" geschrieben, vor halbem Rechteck mit einachen grauen Rand
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0844_L.jpg ---
-Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "rF" (relative Feuchtigkeit) Abweichung: mit Griff (dunkelgraue Linie nach unten) Abweichung: nach links gedreht, Text immer noch horizontal. Der Griff liegt auf einer Symmetrieachse des Kreises.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-[WARN] AC0844_L.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
-
---- Verarbeite AC0533_1S_sia.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0533_S_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0533_1S_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0404_2_L.jpg ---
-Bildbeschreibung: Wie AC0401: Wie AC0251, jedoch Hintergrund Kreis ein wenig dunkler. . Geometrische Variante: 90° nach rechts gedreht.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0411_L.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0411. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0411. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die große Variante (L). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0404_1_L.jpg ---
-Bildbeschreibung: Wie AC0401: Wie AC0251, jedoch Hintergrund Kreis ein wenig dunkler. . Geometrische Variante: 90° nach rechts gedreht.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0551_1_L.jpg ---
-Bildbeschreibung: Graues Rechteck hochkant, graue Umrandung, drei graue horizontale Linien, Farbverlauf dunkel-hell-dunkel, Graue Linien Oben-Mitte nach Rechts-Mitte nach Unten-Mitte
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0863_L.jpg ---
-Bildbeschreibung: Wie AC0842, jecoch nach rechts gedreht, Text immer noch horizontal
-Befehl erkannt: SEMANTIC: waagrechter Strich links vom Kreis, SEMANTIC: Kreis + Buchstabe rF, REFERENZ: Abgeleitet aus AC0842
-[WARN] AC0863_L.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
-
---- Verarbeite AC0536_1S_sia.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0536_S_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0536_1S_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0842_S.jpg ---
-Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "rF" (relative Feuchtigkeit) Abweichung: mit Griff (dunkelgraue Linie nach unten) Abweichung: nach rechts gedreht, Text immer noch horizontal. Der Griff liegt auf einer Symmetrieachse des Kreises.
-Befehl erkannt: SEMANTIC: waagrechter Strich links vom Kreis, SEMANTIC: Kreis + Buchstabe rF
-
---- Verarbeite AC0231_S.jpg ---
-Bildbeschreibung: 3-Weg Ventil ähnlich AC0211, um 90° im Uhrzeigersinn gedreht, "M" wird immer noch senkrecht geschrieben. Noch ein 3. spitzes Dreieck unten. Wieder Farbwechsel von Dunkelgrau nach hellgrau (von links unten nach rechts oben)
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0562_sia_M.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0562_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0562_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die mittlere Variante (M). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0412_M.jpg ---
-Bildbeschreibung: Wie AC0222: Kompressor grauer Hintergrund nach oben. . Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0553_1_M.jpg ---
-Bildbeschreibung: Wie AC0551: Wie AC0150. Geometrische Variante: 180° gedreht.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC5000_S.jpg ---
-Bildbeschreibung: Radiator (komplexe Zeichnung) ca. 10 ganz dünne Rechtecke, Ecken abgerundet. Zwei dünne dunkelgraue Linien oben und unten hinter den dünnen Rechtecken.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0721_1_S.jpg ---
-Bildbeschreibung: Wie AC0701: Kelle, aber mit Quadrat anstelle von Kreis oben. Geometrische Variante: identisch zur Referenz. Der Griff liegt auf einer Symmetrieachse des Kreises.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0502_S_sia.jpg ---
-Bildbeschreibung: Wie AC0501: Klappensymbol: Rechteck hochkant, graue Umrandung. Graue Diagonale von unten links nach oben Rechts, in der Mitte ein dunkelgrauer Punkt. Farbverlauf Hintergrund: Dunkelgrau, hellgrau, dunkelgrau. Geometrische Variante: 90° nach rechts gedreht.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0501_M.jpg ---
-Bildbeschreibung: Klappensymbol: Rechteck hochkant, graue Umrandung. Graue Diagonale von unten links nach oben Rechts, in der Mitte ein dunkelgrauer Punkt. Farbverlauf Hintergrund: Dunkelgrau, hellgrau, dunkelgrau
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0302_M_sia.jpg ---
-Bildbeschreibung: Wie AC0301: Kompresor grauer Hintergrund nach oben. Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0412_2_M.jpg ---
-Bildbeschreibung: Wie AC0222: Kompressor grauer Hintergrund nach oben. . Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0501_S_sia.jpg ---
-Bildbeschreibung: Klappensymbol: Rechteck hochkant, graue Umrandung. Graue Diagonale von unten links nach oben Rechts, in der Mitte ein dunkelgrauer Punkt. Farbverlauf Hintergrund: Dunkelgrau, hellgrau, dunkelgrau
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC110_1_M.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC110_1. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die mittlere Variante (M). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0224_S_sia.jpg ---
-Bildbeschreibung: Wie AC0221: Wie AC0231, jedoch ohne "M" in der Kelle oben. Geometrische Variante: 90° nach rechts gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.
-Befehl erkannt: SEMANTIC: Kreis + Buchstabe
-[WARN] AC0224_S_sia.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
-
---- Verarbeite AC0304_S.jpg ---
-Bildbeschreibung: Wie AC0301: Kompresor grauer Hintergrund nach oben. Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0536_1M_sia.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0536_1M_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0252_2.jpg ---
-Bildbeschreibung: Wie AC0251: Pumpensymbol grau: grauer Kreis, hellgrauer Hintergund. Im Kreis ist ein dunkelgraues dreieck, Symmetrisch zu senkrechter Linie, nicht ganz gleichseitig (waagrechte Line unten ist ein weig kürzer). Geometrische Variante: 90° nach links gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0913_L.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0913. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0913. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die große Variante (L). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0303_M_sia.jpg ---
-Bildbeschreibung: Wie AC0301: Kompresor grauer Hintergrund nach oben. Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0412_1_M.jpg ---
-Bildbeschreibung: Wie AC0222: Kompressor grauer Hintergrund nach oben. . Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0532_1_M.jpg ---
-Bildbeschreibung: Wie AC0501: Klappensymbol: Rechteck hochkant, graue Umrandung. Graue Diagonale von unten links nach oben Rechts, in der Mitte ein dunkelgrauer Punkt. Farbverlauf Hintergrund: Dunkelgrau, hellgrau, dunkelgrau. Geometrische Variante: 90° nach rechts gedreht.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0302_2_S.jpg ---
-Bildbeschreibung: Wie AC0301: Kompresor grauer Hintergrund nach oben. Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC5010_M.jpg ---
-Bildbeschreibung: Wassererhitzer (komplexe Zeichnung). Prinzip: Graues Rechteck, aber oben ein wenig rund, unten auch abgerudnet aber weniger. Innen eine weiße umrandung einer unten blaue, oben rotge Fläche, in der der Mitte Farbübergang. Innendrin 3 schematissche Heizspiralen.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0224_M_sia.jpg ---
-Bildbeschreibung: Wie AC0221: Wie AC0231, jedoch ohne "M" in der Kelle oben. Geometrische Variante: 90° nach rechts gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.
-Befehl erkannt: SEMANTIC: Kreis + Buchstabe
-[WARN] AC0224_M_sia.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
-
---- Verarbeite AC0712_1_L.jpg ---
-Bildbeschreibung: Wie AC0701: Kelle, aber mit Quadrat anstelle von Kreis oben. Geometrische Variante: 90° nach links gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0153_M.jpg ---
-Bildbeschreibung: Graue Scheibe in Seitenansicht mit sichtbarer rechter Seite; Farbgebung wie bei AC0152_M (oben gelbgrün, unten dunkelgrün). Rechts befindet sich zusätzlich mittig ein weißer Punkt sowie ein Drehsymbol: ein weißer Kreis, als Ellipse dargestellt, mit zwei Pfeilen zur Anzeige der rechtsdrehenden Bewegung.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-  -> Plan B Vergleich aktiv: nutze Sample-SVG artifacts/images_to_convert\samples\AC0153_L.svg (err=83.062, baseline=203.957).
-
---- Verarbeite AC0711_L.jpg ---
-Bildbeschreibung: Wie AC0701: Kelle, aber mit Quadrat anstelle von Kreis oben. Geometrische Variante: identisch zur Referenz. Der Griff liegt auf einer Symmetrieachse des Kreises.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0232_M.jpg ---
-Bildbeschreibung: Wie AC0231: 3-Weg Ventil ähnlich AC0211, um 90° im Uhrzeigersinn gedreht, "M" wird immer noch senkrecht geschrieben. Noch ein 3. spitzes Dreieck unten. Wieder Farbwechsel von Dunkelgrau nach hellgrau (von links unten nach rechts oben). Geometrische Variante: 90° nach links gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.
-Befehl erkannt: SEMANTIC: Kreis + Buchstabe
-[WARN] AC0232_M.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
-
---- Verarbeite AC0841_S.jpg ---
-Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "rF" (relative Feuchtigkeit) Abweichung: mit Griff (dunkelgraue Linie nach unten). Der Griff liegt auf einer Symmetrieachse des Kreises.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-[WARN] AC0841_S.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
-
---- Verarbeite AC0502_1S_sia.jpg ---
-Bildbeschreibung: Wie AC0501: Klappensymbol: Rechteck hochkant, graue Umrandung. Graue Diagonale von unten links nach oben Rechts, in der Mitte ein dunkelgrauer Punkt. Farbverlauf Hintergrund: Dunkelgrau, hellgrau, dunkelgrau. Geometrische Variante: 90° nach rechts gedreht.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0840_L.jpg ---
-Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "rF" (relative Feuchtigkeit)
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-[WARN] AC0840_L.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
-
---- Verarbeite AC0537_2S_sia.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0537_S_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0537_2S_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0714_1_L.jpg ---
-Bildbeschreibung: Wie AC0701: Kelle, aber mit Quadrat anstelle von Kreis oben. Geometrische Variante: 90° nach rechts gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0538_L_sia.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0538_S_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0538_L_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0212_L.jpg ---
-Bildbeschreibung: 2-Weg Ventil vertikal: Kelle mit Kreis rechts, horizontale Verbindungslinie, "M" als Text (M = Motor), zwei spitze Dreiecke, welche sich in der Mitte berühren, graue Umrandung, Dreiecke besitzen emeinsamen Farübergang von dunkelgrau rechts oben nach hellgrau links unten. Der Griff liegt auf einer Symmetrieachse des Kreises.
-Befehl erkannt: SEMANTIC: Kreis + Buchstabe
-[WARN] AC0212_L.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
-
---- Verarbeite AC0712_S.jpg ---
-Bildbeschreibung: Wie AC0701: Kelle, aber mit Quadrat anstelle von Kreis oben. Geometrische Variante: 90° nach links gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0413_1_M.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0413 (Variante S). Die automatische Regionsanalyse hat nur eine Textfläche erkannt; dadurch wurde bisher eine generische Platzhalterbeschreibung erzeugt. Für die Konvertierung ist die Geometrie als kleiner Kreis (ca. 20×20 px) mit innenliegender Zeichenkette zu behandeln; die konkrete Zeichenkette bleibt ohne belastbares OCR-Ergebnis manuell zu prüfen. Unzugeordnete Wurzelform aus der Serie AC0413_1. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die mittlere Variante (M). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0202_2.jpg ---
-Bildbeschreibung: Kompressor grau nach rechts
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0422_M.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0422. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0422. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die mittlere Variante (M). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0404_L.jpg ---
-Bildbeschreibung: Wie AC0401: Wie AC0251, jedoch Hintergrund Kreis ein wenig dunkler. . Geometrische Variante: 90° nach rechts gedreht.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0302_2M_sia.jpg ---
-Bildbeschreibung: Wie AC0301: Kompresor grauer Hintergrund nach oben. Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0413_M.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0413 (Variante S). Die automatische Regionsanalyse hat nur eine Textfläche erkannt; dadurch wurde bisher eine generische Platzhalterbeschreibung erzeugt. Für die Konvertierung ist die Geometrie als kleiner Kreis (ca. 20×20 px) mit innenliegender Zeichenkette zu behandeln; die konkrete Zeichenkette bleibt ohne belastbares OCR-Ergebnis manuell zu prüfen. Unzugeordnete Wurzelform aus der Serie AC0413. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die mittlere Variante (M). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0551_S.jpg ---
-Bildbeschreibung: Graues Rechteck hochkant, graue Umrandung, drei graue horizontale Linien, Farbverlauf dunkel-hell-dunkel, Graue Linien Oben-Mitte nach Rechts-Mitte nach Unten-Mitte
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0920_M.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0920. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0920. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die mittlere Variante (M). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0721_M.jpg ---
-Bildbeschreibung: Wie AC0701: Kelle, aber mit Quadrat anstelle von Kreis oben. Geometrische Variante: identisch zur Referenz. Der Griff liegt auf einer Symmetrieachse des Kreises.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0511_M.jpg ---
-Bildbeschreibung: Graues Rechteck hochkant, graue Umrandung, drei graue horizontale Linien, Farbverlauf dunkel-hell-dunkel. Offene Klappe mit 3 Schliessflächen
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-  -> Plan B Vergleich aktiv: nutze Sample-SVG artifacts/images_to_convert\samples\AC0511_L.svg (err=187.708, baseline=194.686).
-
---- Verarbeite AC0532_1L_sia.jpg ---
-Bildbeschreibung: Wie AC0501: Klappensymbol: Rechteck hochkant, graue Umrandung. Graue Diagonale von unten links nach oben Rechts, in der Mitte ein dunkelgrauer Punkt. Farbverlauf Hintergrund: Dunkelgrau, hellgrau, dunkelgrau. Geometrische Variante: 90° nach rechts gedreht.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0862_S.jpg ---
-Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "rF" (relative Feuchtigkeit) Abweichung: mit Griff (dunkelgraue Linie nach unten) Abweichung: nach rechts gedreht, Text immer noch horizontal. Der Griff liegt auf einer Symmetrieachse des Kreises.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-[WARN] AC0862_S.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
-
---- Verarbeite AC0723_1_M.jpg ---
-Bildbeschreibung: Wie AC0701: Kelle, aber mit Quadrat anstelle von Kreis oben. Geometrische Variante: Vertikal gespiegelt. Der Griff liegt auf einer Symmetrieachse des Kreises.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0140_M.jpg ---
-Bildbeschreibung: Ähnlich AC0140_S
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0538_2S_sia.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0538_S_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0538_2S_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0532_M_sia.jpg ---
-Bildbeschreibung: Wie AC0501: Klappensymbol: Rechteck hochkant, graue Umrandung. Graue Diagonale von unten links nach oben Rechts, in der Mitte ein dunkelgrauer Punkt. Farbverlauf Hintergrund: Dunkelgrau, hellgrau, dunkelgrau. Geometrische Variante: 90° nach rechts gedreht.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0214_S.jpg ---
-Bildbeschreibung: Wie AC0212: 2-Weg Ventil vertikal: Kelle mit Kreis rechts, horizontale Verbindungslinie, "M" als Text (M = Motor), zwei spitze Dreiecke, welche sich in der Mitte berühren, graue Umrandung, Dreiecke besitzen emeinsamen Farübergang von dunkelgrau rechts oben nach hellgrau links unten. Geometrische Variante: 180° gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.
-Befehl erkannt: SEMANTIC: Kreis + Buchstabe
-[WARN] AC0214_S.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
-
---- Verarbeite AC0110_L.jpg ---
-Bildbeschreibung: Graues Rechteck hochkant, graue Umrandung, drei graue horizontale Linien, Farbverlauf dunkel-hell-dunkel
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-  -> Plan B Vergleich aktiv: nutze Sample-SVG artifacts/images_to_convert\samples\AC0110_L.svg (err=166.512, baseline=190.197).
-
---- Verarbeite AC0402_1S_sia.jpg ---
-Bildbeschreibung: Wie AC0211: Kopressor grau nach oben. Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0922_M.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0922. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0922. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die mittlere Variante (M). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0421_1_S.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0421. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0421_1. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0703_S.jpg ---
-Bildbeschreibung: Wie AC0701: Kelle, aber mit Quadrat anstelle von Kreis oben. Geometrische Variante: 180° gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0542_M.jpg ---
-Bildbeschreibung: Wie AC0541: Klappensymbol: Rechteck hochkant, graue Umrandung. Graue Diagonale von unten links nach oben Rechts, in der Mitte ein dunkelgrauer Punkt. Farbverlauf Hintergrund: Dunkelgrau, hellgrau, dunkelgrau. üAhnlich AC501, jedoch in der Höhe gestaucht. Geometrische Variante: 90° nach rechts gedreht.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0414_2_L.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0414. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0414_2. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die große Variante (L). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0842_M.jpg ---
-Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "rF" (relative Feuchtigkeit) Abweichung: mit Griff (dunkelgraue Linie nach unten) Abweichung: nach rechts gedreht, Text immer noch horizontal. Der Griff liegt auf einer Symmetrieachse des Kreises.
-Befehl erkannt: SEMANTIC: waagrechter Strich links vom Kreis, SEMANTIC: Kreis + Buchstabe rF
-
---- Verarbeite AC0837_M.jpg ---
-Bildbeschreibung: Wie AC0836, jedoch 90° nach links gedreht. Der Griff verläuft waagrecht nach links, der Text "VOC" bleibt horizontal lesbar. Der Griff liegt auf einer Symmetrieachse des Kreises.
-Befehl erkannt: SEMANTIC: waagrechter Strich links vom Kreis, SEMANTIC: Kreis + Buchstabe VOC
-
---- Verarbeite AC0503_L_sia.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0503_S_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0503_L_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0554_2_L.jpg ---
-Bildbeschreibung: Wie AC0551: Wie AC0150. Geometrische Variante: 90° nach links gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.
-Befehl erkannt: SEMANTIC: Kreis + Buchstabe, REFERENZ: Abgeleitet aus AC0551
-[WARN] AC0554_2_L.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
-
---- Verarbeite AC5010_S.jpg ---
-Bildbeschreibung: Wassererhitzer (komplexe Zeichnung). Prinzip: Graues Rechteck, aber oben ein wenig rund, unten auch abgerudnet aber weniger. Innen eine weiße umrandung einer unten blaue, oben rotge Fläche, in der der Mitte Farbübergang. Innendrin 3 schematissche Heizspiralen.
+--- Verarbeite GE9042_1M.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
 Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
   -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
 
@@ -795,697 +25,141 @@ Bildbeschreibung: Wie AC0222: Kompressor grauer Hintergrund nach oben. . Geometr
 Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
   -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
 
---- Verarbeite AC0724_M.jpg ---
-Bildbeschreibung: Wie AC0701: Kelle, aber mit Quadrat anstelle von Kreis oben. Geometrische Variante: Hauptdiagonal gespiegelt. Der Griff liegt auf einer Symmetrieachse des Kreises.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0911_M.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0911. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0911. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die mittlere Variante (M). Bitte einer finalen Wurzelform-Kategorie zuordnen.
+--- Verarbeite AC0537_1S_sia.jpg ---
+Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0537_S_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0537_1S_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen.
 Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
   -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
 
---- Verarbeite AC0501_L.jpg ---
-Bildbeschreibung: Klappensymbol: Rechteck hochkant, graue Umrandung. Graue Diagonale von unten links nach oben Rechts, in der Mitte ein dunkelgrauer Punkt. Farbverlauf Hintergrund: Dunkelgrau, hellgrau, dunkelgrau
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0302_1_L.jpg ---
-Bildbeschreibung: Wie AC0301: Kompresor grauer Hintergrund nach oben. Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0542_2_M.jpg ---
-Bildbeschreibung: Wie AC0541: Klappensymbol: Rechteck hochkant, graue Umrandung. Graue Diagonale von unten links nach oben Rechts, in der Mitte ein dunkelgrauer Punkt. Farbverlauf Hintergrund: Dunkelgrau, hellgrau, dunkelgrau. üAhnlich AC501, jedoch in der Höhe gestaucht. Geometrische Variante: 90° nach rechts gedreht.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0402_2_L.jpg ---
-Bildbeschreibung: Wie AC0211: Kopressor grau nach oben. Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC5040_L.jpg ---
-Bildbeschreibung: Wie AC5041, aber mit einem Flammensymbol, wie es GE0204 (ohne blaugrauem Hintergrund) gezeichnet wurde. Das Flammensymbol ist hier jedoch gegen Rechts gedreht.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0538_1M_sia.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0538_1M_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen.
+--- Verarbeite AC0503_1S_sia.jpg ---
+Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0503_S_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0503_1S_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen.
 Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
   -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
 
---- Verarbeite AC0401_2S_sia.jpg ---
-Bildbeschreibung: Pumpensymbol grau: grauer Kreis, hellgrauer Hintergund. Im Kreis ist ein dunkelgraues dreieck, Symmetrisch zu senkrechter Linie, nicht ganz gleichseitig (waagrechte Line unten ist ein weig kürzer) Abweichung: Hintergrund Kreis ein wenig dunkler.
+--- Verarbeite AC0301_1_L.jpg ---
+Bildbeschreibung: Kompresor grauer Hintergrund nach oben
 Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
   -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
 
---- Verarbeite AC0502_1L_sia.jpg ---
+--- Verarbeite AC0151_M.jpg ---
+Bildbeschreibung: Röhre oben und unten grau; vertikaler Verlauf von gelbgrün nach dunkelgrün. Gesamter Farbverlauf: links dunkel, Mitte hell, rechts dunkel (Röhreneffekt)
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
+  -> Plan B Vergleich aktiv: nutze Sample-SVG artifacts/images_to_convert\samples\AC0151_L.svg (err=129.259, baseline=121.054).
+
+--- Verarbeite z_231.jpg ---
+Bildbeschreibung: z_-Dateien sind Rohr-Symbole mit Verzierungen; enthalten sind gerade Rohre, gebogene Rohre und T-Stücke.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
+
+--- Verarbeite SE0111.jpg ---
+Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "rF" (relative Feuchtigkeit) Abweichung: mit Griff (dunkelgraue Linie nach unten). Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
+
+--- Verarbeite AC0814_M.jpg ---
+Bildbeschreibung: Wie AC0811: Kelle mit Kreis oben und Griff nach unten. Geometrische Variante: 90° nach rechts gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe, SEMANTIC: waagrechter Strich rechts vom Kreis
+
+--- Verarbeite AC0422_S.jpg ---
+Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0422. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen.
+Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
+  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
+
+--- Verarbeite z_206.jpg ---
+Bildbeschreibung: z_-Dateien sind Rohr-Symbole mit Verzierungen; enthalten sind gerade Rohre, gebogene Rohre und T-Stücke.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
+
+--- Verarbeite AC0502_1_M.jpg ---
 Bildbeschreibung: Wie AC0501: Klappensymbol: Rechteck hochkant, graue Umrandung. Graue Diagonale von unten links nach oben Rechts, in der Mitte ein dunkelgrauer Punkt. Farbverlauf Hintergrund: Dunkelgrau, hellgrau, dunkelgrau. Geometrische Variante: 90° nach rechts gedreht.
 Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
   -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
 
---- Verarbeite AC0413_2_S.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0413 (Variante S). Die automatische Regionsanalyse hat nur eine Textfläche erkannt; dadurch wurde bisher eine generische Platzhalterbeschreibung erzeugt. Für die Konvertierung ist die Geometrie als kleiner Kreis (ca. 20×20 px) mit innenliegender Zeichenkette zu behandeln; die konkrete Zeichenkette bleibt ohne belastbares OCR-Ergebnis manuell zu prüfen. Unzugeordnete Wurzelform aus der Serie AC0413_2. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0231_M.jpg ---
-Bildbeschreibung: 3-Weg Ventil ähnlich AC0211, um 90° im Uhrzeigersinn gedreht, "M" wird immer noch senkrecht geschrieben. Noch ein 3. spitzes Dreieck unten. Wieder Farbwechsel von Dunkelgrau nach hellgrau (von links unten nach rechts oben)
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0552_1_S.jpg ---
-Bildbeschreibung: Wie AC0551: Wie AC0150. Geometrische Variante: 90° nach rechts gedreht.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0504_2M_sia.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0504_2M_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0843_S.jpg ---
+--- Verarbeite SE0123.jpg ---
 Bildbeschreibung: Wie AC0842, jecoch nach rechts gedreht, Text immer noch horizontal
 Befehl erkannt: SEMANTIC: waagrechter Strich links vom Kreis, SEMANTIC: Kreis + Buchstabe rF, REFERENZ: Abgeleitet aus AC0842
-[WARN] AC0843_S.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+[WARN] SE0123.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
 
---- Verarbeite AC0534_L_sia.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0534_S_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0534_L_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen.
+--- Verarbeite AC0820_S.jpg ---
+Bildbeschreibung: Wie AC0800, mit Text "$CO_2$" (2 tiefgestellt).
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe CO_2
+
+--- Verarbeite AC0531_S.jpg ---
+Bildbeschreibung: Wie AC0501: Klappensymbol: Rechteck hochkant, graue Umrandung. Graue Diagonale von unten links nach oben Rechts, in der Mitte ein dunkelgrauer Punkt. Farbverlauf Hintergrund: Dunkelgrau, hellgrau, dunkelgrau. Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
+
+--- Verarbeite GE9031_4S.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
+
+--- Verarbeite AC0834_M.jpg ---
+Bildbeschreibung: Wie AC080, jedoch Griff unten (als Kelle ausfeführt) Abweichung: nach links gedreht, Text immer noch horizontal. Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: SEMANTIC: waagrechter Strich rechts vom Kreis, SEMANTIC: Kreis + Buchstabe
+
+--- Verarbeite AC0024.jpg ---
+Bildbeschreibung: AC0023.jpg vertikal gespiegelt
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
+
+--- Verarbeite AR0140_1.jpg ---
+Bildbeschreibung: Klappensymbol: Rechteck hochkant, graue Umrandung. Graue Diagonale von unten links nach oben Rechts, in der Mitte ein dunkelgrauer Punkt. Farbverlauf Hintergrund: Dunkelgrau, hellgrau, dunkelgrau. üAhnlich AC501, jedoch in der Höhe gestaucht
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
+  -> Plan B Vergleich aktiv: nutze Sample-SVG artifacts/images_to_convert\samples\AR0140.svg (err=104.166, baseline=128.354).
+
+--- Verarbeite GE9032_3M.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
+
+--- Verarbeite AC0721_1_L.jpg ---
+Bildbeschreibung: Wie AC0701: Kelle, aber mit Quadrat anstelle von Kreis oben. Geometrische Variante: identisch zur Referenz. Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
+
+--- Verarbeite AC0413_1_L.jpg ---
+Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0413 (Variante S). Die automatische Regionsanalyse hat nur eine Textfläche erkannt; dadurch wurde bisher eine generische Platzhalterbeschreibung erzeugt. Für die Konvertierung ist die Geometrie als kleiner Kreis (ca. 20×20 px) mit innenliegender Zeichenkette zu behandeln; die konkrete Zeichenkette bleibt ohne belastbares OCR-Ergebnis manuell zu prüfen. Unzugeordnete Wurzelform aus der Serie AC0413_1. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die große Variante (L). Bitte einer finalen Wurzelform-Kategorie zuordnen.
 Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
   -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
 
---- Verarbeite AC0023.jpg ---
-Bildbeschreibung: zwei vertikale Striche links blau, rechts rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben
-Befehl erkannt: SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch)
-
---- Verarbeite AC0110.jpg ---
-Bildbeschreibung: Graues Rechteck hochkant, graue Umrandung, drei graue horizontale Linien, Farbverlauf dunkel-hell-dunkel
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-  -> Plan B Vergleich aktiv: nutze Sample-SVG artifacts/images_to_convert\samples\AC0110_L.svg (err=179.053, baseline=202.847).
-
---- Verarbeite AC0713_S.jpg ---
-Bildbeschreibung: Wie AC0701: Kelle, aber mit Quadrat anstelle von Kreis oben. Geometrische Variante: 180° gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.
+--- Verarbeite GE9041_3M.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
 Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
   -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
 
---- Verarbeite AC0911_S.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0911. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0202_S.jpg ---
-Bildbeschreibung: Kompressor grau nach rechts
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0402_2S_sia.jpg ---
-Bildbeschreibung: Wie AC0211: Kopressor grau nach oben. Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0403_L_sia.jpg ---
-Bildbeschreibung: Wie AC0401: Wie AC0251, jedoch Hintergrund Kreis ein wenig dunkler. . Geometrische Variante: 180° gedreht.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0404_M.jpg ---
-Bildbeschreibung: Wie AC0401: Wie AC0251, jedoch Hintergrund Kreis ein wenig dunkler. . Geometrische Variante: 90° nach rechts gedreht.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0402_1M_sia.jpg ---
-Bildbeschreibung: Wie AC0211: Kopressor grau nach oben. Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0502_2_L.jpg ---
-Bildbeschreibung: Wie AC0501: Klappensymbol: Rechteck hochkant, graue Umrandung. Graue Diagonale von unten links nach oben Rechts, in der Mitte ein dunkelgrauer Punkt. Farbverlauf Hintergrund: Dunkelgrau, hellgrau, dunkelgrau. Geometrische Variante: 90° nach rechts gedreht.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0532_2_M.jpg ---
-Bildbeschreibung: Wie AC0501: Klappensymbol: Rechteck hochkant, graue Umrandung. Graue Diagonale von unten links nach oben Rechts, in der Mitte ein dunkelgrauer Punkt. Farbverlauf Hintergrund: Dunkelgrau, hellgrau, dunkelgrau. Geometrische Variante: 90° nach rechts gedreht.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0849_S.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0849. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0722_L.jpg ---
-Bildbeschreibung: Wie AC0701: Kelle, aber mit Quadrat anstelle von Kreis oben. Geometrische Variante: 90° nach links gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0414_L.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0414. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0414. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die große Variante (L). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0504_1S_sia.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0504_S_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0504_1S_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0502_2M_sia.jpg ---
-Bildbeschreibung: Wie AC0501: Klappensymbol: Rechteck hochkant, graue Umrandung. Graue Diagonale von unten links nach oben Rechts, in der Mitte ein dunkelgrauer Punkt. Farbverlauf Hintergrund: Dunkelgrau, hellgrau, dunkelgrau. Geometrische Variante: 90° nach rechts gedreht.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0401_2_S.jpg ---
-Bildbeschreibung: Pumpensymbol grau: grauer Kreis, hellgrauer Hintergund. Im Kreis ist ein dunkelgraues dreieck, Symmetrisch zu senkrechter Linie, nicht ganz gleichseitig (waagrechte Line unten ist ein weig kürzer) Abweichung: Hintergrund Kreis ein wenig dunkler.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0536_L_sia.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0536_S_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0536_L_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0080_L.jpg ---
+--- Verarbeite AC0050_S.jpg ---
 Bildbeschreibung: Wie AC0020: zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben. Geometrische Variante: identisch zur Referenz.
 Befehl erkannt: SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch)
 
---- Verarbeite AC0914_S.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0914. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen.
+--- Verarbeite GE9043_2S.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
+
+--- Verarbeite AC0534_S_sia.jpg ---
+Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0534_S_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen.
 Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
   -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0512_M.jpg ---
-Bildbeschreibung: Wie AC0511: Graues Rechteck hochkant, graue Umrandung, drei graue horizontale Linien, Farbverlauf dunkel-hell-dunkel. Offene Klappe mit 3 Schliessflächen. Geometrische Variante: 90° nach rechts gedreht.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-  -> Plan B Vergleich aktiv: nutze Sample-SVG artifacts/images_to_convert\samples\AC0512_L.svg (err=187.412, baseline=195.271).
-
---- Verarbeite AC0553_1_S.jpg ---
-Bildbeschreibung: Wie AC0551: Wie AC0150. Geometrische Variante: 180° gedreht.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0402_2.jpg ---
-Bildbeschreibung: Wie AC0211: Kopressor grau nach oben. Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-  -> Plan B Vergleich aktiv: nutze Sample-SVG artifacts/images_to_convert\samples\AC0402_L.svg (err=56.459, baseline=142.058).
-
---- Verarbeite AC0501_1M_sia.jpg ---
-Bildbeschreibung: Klappensymbol: Rechteck hochkant, graue Umrandung. Graue Diagonale von unten links nach oben Rechts, in der Mitte ein dunkelgrauer Punkt. Farbverlauf Hintergrund: Dunkelgrau, hellgrau, dunkelgrau
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0532_2_S.jpg ---
-Bildbeschreibung: Wie AC0501: Klappensymbol: Rechteck hochkant, graue Umrandung. Graue Diagonale von unten links nach oben Rechts, in der Mitte ein dunkelgrauer Punkt. Farbverlauf Hintergrund: Dunkelgrau, hellgrau, dunkelgrau. Geometrische Variante: 90° nach rechts gedreht.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0538_S_sia.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0538_S_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0542_S.jpg ---
-Bildbeschreibung: Wie AC0541: Klappensymbol: Rechteck hochkant, graue Umrandung. Graue Diagonale von unten links nach oben Rechts, in der Mitte ein dunkelgrauer Punkt. Farbverlauf Hintergrund: Dunkelgrau, hellgrau, dunkelgrau. üAhnlich AC501, jedoch in der Höhe gestaucht. Geometrische Variante: 90° nach rechts gedreht.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0403_1M_sia.jpg ---
-Bildbeschreibung: Wie AC0401: Wie AC0251, jedoch Hintergrund Kreis ein wenig dunkler. . Geometrische Variante: 180° gedreht.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0211.jpg ---
-Bildbeschreibung: Kopressor grau nach oben
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0933_L.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0933. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0933. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die große Variante (L). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0722_1_L.jpg ---
-Bildbeschreibung: Wie AC0701: Kelle, aber mit Quadrat anstelle von Kreis oben. Geometrische Variante: 90° nach links gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0403_1S_sia.jpg ---
-Bildbeschreibung: Wie AC0401: Wie AC0251, jedoch Hintergrund Kreis ein wenig dunkler. . Geometrische Variante: 180° gedreht.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0841_M.jpg ---
-Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "rF" (relative Feuchtigkeit) Abweichung: mit Griff (dunkelgraue Linie nach unten). Der Griff liegt auf einer Symmetrieachse des Kreises.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-[WARN] AC0841_M.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
-
---- Verarbeite AC0910_L.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0910. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0910. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die große Variante (L). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0835_L.jpg ---
-Bildbeschreibung: Grauer Kreis mit grauem Rand und hellgrauem Hintergrund. Text im Kreis: "VOC". Kein Griff, keine Kelle und keine weiteren Anbauteile.
-Befehl erkannt: SEMANTIC: Kreis + Buchstabe VOC
-
---- Verarbeite AC0403_L.jpg ---
-Bildbeschreibung: Wie AC0401: Wie AC0251, jedoch Hintergrund Kreis ein wenig dunkler. . Geometrische Variante: 180° gedreht.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0712_M.jpg ---
-Bildbeschreibung: Wie AC0701: Kelle, aber mit Quadrat anstelle von Kreis oben. Geometrische Variante: 90° nach links gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0844_S.jpg ---
-Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "rF" (relative Feuchtigkeit) Abweichung: mit Griff (dunkelgraue Linie nach unten) Abweichung: nach links gedreht, Text immer noch horizontal. Der Griff liegt auf einer Symmetrieachse des Kreises.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-[WARN] AC0844_S.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
-
---- Verarbeite AC0234_S.jpg ---
-Bildbeschreibung: Wie AC0231: 3-Weg Ventil ähnlich AC0211, um 90° im Uhrzeigersinn gedreht, "M" wird immer noch senkrecht geschrieben. Noch ein 3. spitzes Dreieck unten. Wieder Farbwechsel von Dunkelgrau nach hellgrau (von links unten nach rechts oben). Geometrische Variante: Hauptdiagonal gespiegelt.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0542_1_M.jpg ---
-Bildbeschreibung: Wie AC0541: Klappensymbol: Rechteck hochkant, graue Umrandung. Graue Diagonale von unten links nach oben Rechts, in der Mitte ein dunkelgrauer Punkt. Farbverlauf Hintergrund: Dunkelgrau, hellgrau, dunkelgrau. üAhnlich AC501, jedoch in der Höhe gestaucht. Geometrische Variante: 90° nach rechts gedreht.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC1001_S.jpg ---
-Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "M" (Motor) Abweichung: mit Kelle (graue horizontale Linie) nach unten. Der Griff liegt auf einer Symmetrieachse des Kreises.
-Befehl erkannt: SEMANTIC: Kreis + Buchstabe
-[WARN] AC1001_S.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
-
---- Verarbeite AC0511_S.jpg ---
-Bildbeschreibung: Graues Rechteck hochkant, graue Umrandung, drei graue horizontale Linien, Farbverlauf dunkel-hell-dunkel. Offene Klappe mit 3 Schliessflächen
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-  -> Plan B Vergleich aktiv: nutze Sample-SVG artifacts/images_to_convert\samples\AC0511_L.svg (err=181.666, baseline=186.534).
 
 --- Verarbeite AC0202_L_sia.jpg ---
 Bildbeschreibung: Kompressor grau nach rechts
 Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
   -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
 
---- Verarbeite AC0541_S.jpg ---
-Bildbeschreibung: Klappensymbol: Rechteck hochkant, graue Umrandung. Graue Diagonale von unten links nach oben Rechts, in der Mitte ein dunkelgrauer Punkt. Farbverlauf Hintergrund: Dunkelgrau, hellgrau, dunkelgrau. üAhnlich AC501, jedoch in der Höhe gestaucht
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0724_1_S.jpg ---
-Bildbeschreibung: Wie AC0701: Kelle, aber mit Quadrat anstelle von Kreis oben. Geometrische Variante: Hauptdiagonal gespiegelt. Der Griff liegt auf einer Symmetrieachse des Kreises.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0701_M.jpg ---
-Bildbeschreibung: Kelle, aber mit Quadrat anstelle von Kreis oben.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0845_M.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0845. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0845. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die mittlere Variante (M). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0553_2_L.jpg ---
-Bildbeschreibung: Wie AC0551: Wie AC0150. Geometrische Variante: 180° gedreht.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0850_M.jpg ---
-Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "rF" (relative Feuchtigkeit)
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-[WARN] AC0850_M.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
-
---- Verarbeite AC0561_sia_L.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0561_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0561_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die große Variante (L). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0704_1_M.jpg ---
-Bildbeschreibung: Wie AC0701: Kelle, aber mit Quadrat anstelle von Kreis oben. Geometrische Variante: 90° nach rechts gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0533_M_sia.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0533_S_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0533_M_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0912_M.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0912. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0912. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die mittlere Variante (M). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0302_1L_sia.jpg ---
-Bildbeschreibung: Wie AC0301: Kompresor grauer Hintergrund nach oben. Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0140_L.jpg ---
-Bildbeschreibung: Ähnlich AC0140_S
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0713_1_S.jpg ---
+--- Verarbeite AC0713_L.jpg ---
 Bildbeschreibung: Wie AC0701: Kelle, aber mit Quadrat anstelle von Kreis oben. Geometrische Variante: 180° gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.
 Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
   -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
 
---- Verarbeite AC0931_M.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0931. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0931. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die mittlere Variante (M). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0423_1_S.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0423. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0423_1. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0221_S.jpg ---
-Bildbeschreibung: Wie AC0231, jedoch ohne "M" in der Kelle oben. Der Griff liegt auf einer Symmetrieachse des Kreises.
-Befehl erkannt: SEMANTIC: Kreis + Buchstabe
-[WARN] AC0221_S.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
-
---- Verarbeite AC0402_1L_sia.jpg ---
-Bildbeschreibung: Wie AC0211: Kopressor grau nach oben. Geometrische Variante: identisch zur Referenz.
+--- Verarbeite z_213.jpg ---
+Bildbeschreibung: z_-Dateien sind Rohr-Symbole mit Verzierungen; enthalten sind gerade Rohre, gebogene Rohre und T-Stücke.
 Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
   -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
 
---- Verarbeite AC0254_1.jpg ---
-Bildbeschreibung: Wie AC0521, aber nach links gedreht
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0731_L.jpg ---
-Bildbeschreibung: Wie AC071, aber mit "P" als Text
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0503_S_sia.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0503_S_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0414_1_S.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0414. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0414_1. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0422_1_L.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0422. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0422_1. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die große Variante (L). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0421_M.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0421. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0421. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die mittlere Variante (M). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0204_M.jpg ---
-Bildbeschreibung: Wie AC0201: Kompressor grau nach oben. Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0536_M_sia.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0536_S_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0536_M_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0848_L.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0848. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0848. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die große Variante (L). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0201.jpg ---
-Bildbeschreibung: Kompressor grau nach oben
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0552_2_M.jpg ---
-Bildbeschreibung: Wie AC0551: Wie AC0150. Geometrische Variante: 90° nach rechts gedreht.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0501_1_S.jpg ---
-Bildbeschreibung: Klappensymbol: Rechteck hochkant, graue Umrandung. Graue Diagonale von unten links nach oben Rechts, in der Mitte ein dunkelgrauer Punkt. Farbverlauf Hintergrund: Dunkelgrau, hellgrau, dunkelgrau
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0538_2M_sia.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0538_2M_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0401_L_sia.jpg ---
-Bildbeschreibung: Pumpensymbol grau: grauer Kreis, hellgrauer Hintergund. Im Kreis ist ein dunkelgraues dreieck, Symmetrisch zu senkrechter Linie, nicht ganz gleichseitig (waagrechte Line unten ist ein weig kürzer) Abweichung: Hintergrund Kreis ein wenig dunkler.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0304_2_L.jpg ---
-Bildbeschreibung: Wie AC0301: Kompresor grauer Hintergrund nach oben. Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0423_1_M.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0423. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0423_1. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die mittlere Variante (M). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0921_S.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0921. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0503_2L_sia.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0503_2L_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0411_1_M.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0411. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0411_1. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die mittlere Variante (M). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0841_L.jpg ---
-Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "rF" (relative Feuchtigkeit) Abweichung: mit Griff (dunkelgraue Linie nach unten). Der Griff liegt auf einer Symmetrieachse des Kreises.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-[WARN] AC0841_L.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
-
---- Verarbeite AC0130_L.jpg ---
-Bildbeschreibung: Wie AC0030: Kühlelement, graues Rechteck, Minus-Minus-Zeichen oben Mitte, Farbverlauf horizontal dunkel-hell-dunkel, graue Linien in beiden Diagonalen. Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-  -> Plan B Vergleich aktiv: nutze Sample-SVG artifacts/images_to_convert\samples\AC0130_L.svg (err=176.422, baseline=194.722).
-
---- Verarbeite AC0933_M.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0933. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0933. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die mittlere Variante (M). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0214_M.jpg ---
-Bildbeschreibung: Wie AC0212: 2-Weg Ventil vertikal: Kelle mit Kreis rechts, horizontale Verbindungslinie, "M" als Text (M = Motor), zwei spitze Dreiecke, welche sich in der Mitte berühren, graue Umrandung, Dreiecke besitzen emeinsamen Farübergang von dunkelgrau rechts oben nach hellgrau links unten. Geometrische Variante: 180° gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.
-Befehl erkannt: SEMANTIC: Kreis + Buchstabe
-[WARN] AC0214_M.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
-
---- Verarbeite AC5010_L_PKW.jpg ---
-Bildbeschreibung: Wassererhitzer (komplexe Zeichnung). Prinzip: Graues Rechteck, aber oben ein wenig rund, unten auch abgerudnet aber weniger. Innen eine weiße umrandung einer unten blaue, oben rotge Fläche, in der der Mitte Farbübergang. Innendrin 3 schematissche Heizspiralen.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0572_S.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0572. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0921_L.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0921. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0921. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die große Variante (L). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0913_M.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0913. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0913. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die mittlere Variante (M). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0304_2_M.jpg ---
-Bildbeschreibung: Wie AC0301: Kompresor grauer Hintergrund nach oben. Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0203_M_sia.jpg ---
-Bildbeschreibung: Wie AC0202: Kompressor grau nach rechts. Geometrische Variante: Hauptdiagonal gespiegelt.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0534_M_sia.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0534_S_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0534_M_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0243_S.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0243. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0120_M.jpg ---
-Bildbeschreibung: Wie AC0030, jedoch mit einem zusätzlichen Plus-Minus-Zeichen unmittelbar über dem Minus-Minus-Zeichen.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-  -> Plan B Vergleich aktiv: nutze Sample-SVG artifacts/images_to_convert\samples\AC0120_L.svg (err=92.599, baseline=184.158).
-
---- Verarbeite AC0847_S.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0847. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0504_S_sia.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0504_S_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0561_sia_S.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0561_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0832_L.jpg ---
-Bildbeschreibung: Wie AC0832, jedoch nach rechts gedreht, Text immer noch horizontal
-Befehl erkannt: SEMANTIC: waagrechter Strich links vom Kreis, SEMANTIC: Kreis + Buchstabe
-
---- Verarbeite AC0202.jpg ---
-Bildbeschreibung: Kompressor grau nach rechts
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0541_2_M.jpg ---
-Bildbeschreibung: Klappensymbol: Rechteck hochkant, graue Umrandung. Graue Diagonale von unten links nach oben Rechts, in der Mitte ein dunkelgrauer Punkt. Farbverlauf Hintergrund: Dunkelgrau, hellgrau, dunkelgrau. üAhnlich AC501, jedoch in der Höhe gestaucht
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0251_2.jpg ---
-Bildbeschreibung: Pumpensymbol grau: grauer Kreis, hellgrauer Hintergund. Im Kreis ist ein dunkelgraues dreieck, Symmetrisch zu senkrechter Linie, nicht ganz gleichseitig (waagrechte Line unten ist ein weig kürzer)
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0732_1_L.jpg ---
-Bildbeschreibung: wie AC072, aber nach rechts gredreht, Text immer noch horizontal "P"
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0504_1L_sia.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0504_1L_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0930_S.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0930. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0060_L.jpg ---
-Bildbeschreibung: Wie AC0020: zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben. Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch)
-
---- Verarbeite AC0413_L.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0413 (Variante S). Die automatische Regionsanalyse hat nur eine Textfläche erkannt; dadurch wurde bisher eine generische Platzhalterbeschreibung erzeugt. Für die Konvertierung ist die Geometrie als kleiner Kreis (ca. 20×20 px) mit innenliegender Zeichenkette zu behandeln; die konkrete Zeichenkette bleibt ohne belastbares OCR-Ergebnis manuell zu prüfen. Unzugeordnete Wurzelform aus der Serie AC0413. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die große Variante (L). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0501_1L_sia.jpg ---
-Bildbeschreibung: Klappensymbol: Rechteck hochkant, graue Umrandung. Graue Diagonale von unten links nach oben Rechts, in der Mitte ein dunkelgrauer Punkt. Farbverlauf Hintergrund: Dunkelgrau, hellgrau, dunkelgrau
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0402_S_sia.jpg ---
-Bildbeschreibung: Wie AC0211: Kopressor grau nach oben. Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0301_M_sia.jpg ---
-Bildbeschreibung: Kompresor grauer Hintergrund nach oben
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0403_1_M.jpg ---
-Bildbeschreibung: Wie AC0401: Wie AC0251, jedoch Hintergrund Kreis ein wenig dunkler. . Geometrische Variante: 180° gedreht.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0301_1S_sia.jpg ---
-Bildbeschreibung: Kompresor grauer Hintergrund nach oben
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0401_M_sia.jpg ---
-Bildbeschreibung: Pumpensymbol grau: grauer Kreis, hellgrauer Hintergund. Im Kreis ist ein dunkelgraues dreieck, Symmetrisch zu senkrechter Linie, nicht ganz gleichseitig (waagrechte Line unten ist ein weig kürzer) Abweichung: Hintergrund Kreis ein wenig dunkler.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0870_S.jpg ---
-Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "T" (Temperatur)
-Befehl erkannt: SEMANTIC: Kreis + Buchstabe
-
---- Verarbeite AC0413_2_M.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0413 (Variante S). Die automatische Regionsanalyse hat nur eine Textfläche erkannt; dadurch wurde bisher eine generische Platzhalterbeschreibung erzeugt. Für die Konvertierung ist die Geometrie als kleiner Kreis (ca. 20×20 px) mit innenliegender Zeichenkette zu behandeln; die konkrete Zeichenkette bleibt ohne belastbares OCR-Ergebnis manuell zu prüfen. Unzugeordnete Wurzelform aus der Serie AC0413_2. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die mittlere Variante (M). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0820_S.jpg ---
-Bildbeschreibung: Wie AC0800, mit Text "$CO_2$" (2 tiefgestellt).
-Befehl erkannt: SEMANTIC: Kreis + Buchstabe CO_2
-
---- Verarbeite AC0501_1S_sia.jpg ---
-Bildbeschreibung: Klappensymbol: Rechteck hochkant, graue Umrandung. Graue Diagonale von unten links nach oben Rechts, in der Mitte ein dunkelgrauer Punkt. Farbverlauf Hintergrund: Dunkelgrau, hellgrau, dunkelgrau
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0910_M.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0910. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0910. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die mittlere Variante (M). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0923_M.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0923. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0923. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die mittlere Variante (M). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0542_2_S.jpg ---
-Bildbeschreibung: Wie AC0541: Klappensymbol: Rechteck hochkant, graue Umrandung. Graue Diagonale von unten links nach oben Rechts, in der Mitte ein dunkelgrauer Punkt. Farbverlauf Hintergrund: Dunkelgrau, hellgrau, dunkelgrau. üAhnlich AC501, jedoch in der Höhe gestaucht. Geometrische Variante: 90° nach rechts gedreht.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0244_S.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0244. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0303_1L_sia.jpg ---
-Bildbeschreibung: Wie AC0301: Kompresor grauer Hintergrund nach oben. Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC5050_M.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC5050. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC5050. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die mittlere Variante (M). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0403_1_L.jpg ---
-Bildbeschreibung: Wie AC0401: Wie AC0251, jedoch Hintergrund Kreis ein wenig dunkler. . Geometrische Variante: 180° gedreht.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0522_M.jpg ---
-Bildbeschreibung: Wie AC0521: Wie AC0511, jedoch anstelle von 3 grauen horizontalen dunkelgrauen Strichen drei kleinere vertikale dunkelgraue Striche. Es handelt sich um eine geschlossene Klappe mit der Schliessflächen. . Geometrische Variante: 90° nach rechts gedreht.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC5041_M.jpg ---
-Bildbeschreibung: sehr komplexe Form, wahrscheinlich sehr schwierig zum nachzeichnen. Es zeigt eine eingeschaltete Heizung. Links ist ein Gebläse (Motor mit eingebauten Ventilator) Auf der rechten Seite ist aussen ein Behälter schematisch dargestellt, welcher aufgeschnitten ist (Heizraum). Er ist grau mit einem vertikalen Farbverlauf von hell nach dunkel. Es ist eine farbige Fläche dargestellt mit einem vertikalen Farbverlauf von orange nach rot.
+--- Verarbeite GE1313_M.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
 Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
   -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
 
@@ -1494,73 +168,335 @@ Bildbeschreibung: Pumpensymbol grau: grauer Kreis, hellgrauer Hintergund. Im Kre
 Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
   -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
 
+--- Verarbeite AC0723_L.jpg ---
+Bildbeschreibung: Wie AC0701: Kelle, aber mit Quadrat anstelle von Kreis oben. Geometrische Variante: Vertikal gespiegelt. Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
+
 --- Verarbeite AC0839_L.jpg ---
 Bildbeschreibung: Wie AC0836, jedoch 90° nach rechts gedreht. Der Griff verläuft waagrecht nach rechts, der Text "VOC" bleibt horizontal lesbar. Der Griff liegt auf einer Symmetrieachse des Kreises.
 Befehl erkannt: SEMANTIC: waagrechter Strich rechts vom Kreis, SEMANTIC: Kreis + Buchstabe VOC
 
---- Verarbeite AC0535_1M_sia.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0535_1M_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0933_S.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0933. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0403_M.jpg ---
-Bildbeschreibung: Wie AC0401: Wie AC0251, jedoch Hintergrund Kreis ein wenig dunkler. . Geometrische Variante: 180° gedreht.
+--- Verarbeite AC0402_2S_sia.jpg ---
+Bildbeschreibung: Wie AC0211: Kopressor grau nach oben. Geometrische Variante: identisch zur Referenz.
 Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
   -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
 
---- Verarbeite AC0302_S.jpg ---
+--- Verarbeite AC0732_L.jpg ---
+Bildbeschreibung: wie AC072, aber nach rechts gredreht, Text immer noch horizontal "P"
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
+
+--- Verarbeite GE0045_M.jpg ---
+Bildbeschreibung: Hintergrund: GE0999. Wie GE0044
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
+
+--- Verarbeite GE0111_L.jpg ---
+Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie GE0111. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie GE0111. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die große Variante (L). Bitte einer finalen Wurzelform-Kategorie zuordnen.
+Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
+  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
+
+--- Verarbeite GE0204_M.jpg ---
+Bildbeschreibung: Hintergrund: GE0999. Komplexes zweifarbiges Flammensymbol. Unklar, ob dies automatisiert nachgezeichnet werden kann.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
+
+--- Verarbeite GE9023_2M.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
+
+--- Verarbeite GE9013_6S.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
+
+--- Verarbeite AC0722_L.jpg ---
+Bildbeschreibung: Wie AC0701: Kelle, aber mit Quadrat anstelle von Kreis oben. Geometrische Variante: 90° nach links gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
+
+--- Verarbeite AC1002_S.jpg ---
+Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "M" (Motor) Abweichung: mit Kelle (graue horizontale Linie) nach unten Abweichung: nach rechts gedreht, Text immer noch horizonal. Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe
+[WARN] AC1002_S.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+
+--- Verarbeite AC0914_L.jpg ---
+Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0914. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0914. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die große Variante (L). Bitte einer finalen Wurzelform-Kategorie zuordnen.
+Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
+  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
+
+--- Verarbeite AC0848_L.jpg ---
+Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0848. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0848. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die große Variante (L). Bitte einer finalen Wurzelform-Kategorie zuordnen.
+Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
+  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
+
+--- Verarbeite AC0842_S.jpg ---
+Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "rF" (relative Feuchtigkeit) Abweichung: mit Griff (dunkelgraue Linie nach unten) Abweichung: nach rechts gedreht, Text immer noch horizontal. Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: SEMANTIC: waagrechter Strich links vom Kreis, SEMANTIC: Kreis + Buchstabe rF
+
+--- Verarbeite DLG0000.jpg ---
+Bildbeschreibung: Wie AC0100: Wie AC0010. Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
+
+--- Verarbeite AC0304_M.jpg ---
 Bildbeschreibung: Wie AC0301: Kompresor grauer Hintergrund nach oben. Geometrische Variante: identisch zur Referenz.
 Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
   -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-  -> Plan B Vergleich aktiv: nutze Sample-SVG artifacts/images_to_convert\samples\AC0302_L.svg (err=14.656, baseline=210.980).
 
---- Verarbeite AC0404_2S_sia.jpg ---
-Bildbeschreibung: Wie AC0401: Wie AC0251, jedoch Hintergrund Kreis ein wenig dunkler. . Geometrische Variante: 90° nach rechts gedreht.
+--- Verarbeite AC0151_S.jpg ---
+Bildbeschreibung: Röhre oben und unten grau; vertikaler Verlauf von gelbgrün nach dunkelgrün. Gesamter Farbverlauf: links dunkel, Mitte hell, rechts dunkel (Röhreneffekt)
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
+  -> Plan B Vergleich aktiv: nutze Sample-SVG artifacts/images_to_convert\samples\AC0151_L.svg (err=128.579, baseline=117.656).
+
+--- Verarbeite GE0303.jpg ---
+Bildbeschreibung: Hintergrund: GE0999: Vordergrund britische Flagge
 Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
   -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
 
---- Verarbeite AC0234_L.jpg ---
-Bildbeschreibung: Wie AC0231: 3-Weg Ventil ähnlich AC0211, um 90° im Uhrzeigersinn gedreht, "M" wird immer noch senkrecht geschrieben. Noch ein 3. spitzes Dreieck unten. Wieder Farbwechsel von Dunkelgrau nach hellgrau (von links unten nach rechts oben). Geometrische Variante: Hauptdiagonal gespiegelt.
+--- Verarbeite GE9034_1M.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
 Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
   -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
 
---- Verarbeite AC0882_M.jpg ---
-Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "T" (Temperatur) Abweichung: mit Griff (dunkelgraue Linie nach unten) Abweichung: nach rechts gedreht, Text immer noch horizontal. Der Griff liegt auf einer Symmetrieachse des Kreises.
-Befehl erkannt: SEMANTIC: waagrechter Strich links vom Kreis, SEMANTIC: Kreis + Buchstabe
-
---- Verarbeite AC0203_S_sia.jpg ---
-Bildbeschreibung: Wie AC0202: Kompressor grau nach rechts. Geometrische Variante: Hauptdiagonal gespiegelt.
+--- Verarbeite GE0033_M.jpg ---
+Bildbeschreibung: Wie GE0031: Wie GE0030, nach rechts gedreht. Geometrische Variante: 180° gedreht.
 Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
   -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
 
---- Verarbeite AC0501_L_sia.jpg ---
-Bildbeschreibung: Klappensymbol: Rechteck hochkant, graue Umrandung. Graue Diagonale von unten links nach oben Rechts, in der Mitte ein dunkelgrauer Punkt. Farbverlauf Hintergrund: Dunkelgrau, hellgrau, dunkelgrau
+--- Verarbeite AC0531_M.jpg ---
+Bildbeschreibung: Wie AC0501: Klappensymbol: Rechteck hochkant, graue Umrandung. Graue Diagonale von unten links nach oben Rechts, in der Mitte ein dunkelgrauer Punkt. Farbverlauf Hintergrund: Dunkelgrau, hellgrau, dunkelgrau. Geometrische Variante: identisch zur Referenz.
 Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
   -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
 
---- Verarbeite AC0213_L.jpg ---
-Bildbeschreibung: Wie AC0212: 2-Weg Ventil vertikal: Kelle mit Kreis rechts, horizontale Verbindungslinie, "M" als Text (M = Motor), zwei spitze Dreiecke, welche sich in der Mitte berühren, graue Umrandung, Dreiecke besitzen emeinsamen Farübergang von dunkelgrau rechts oben nach hellgrau links unten. Geometrische Variante: 90° nach links gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.
-Befehl erkannt: SEMANTIC: Kreis + Buchstabe
-[WARN] AC0213_L.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
-
---- Verarbeite AC0203_1.jpg ---
-Bildbeschreibung: Wie AC0202: Kompressor grau nach rechts. Geometrische Variante: Hauptdiagonal gespiegelt.
+--- Verarbeite GE9032_4S.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
 Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
   -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
 
---- Verarbeite AC0253_2.jpg ---
-Bildbeschreibung: Wie AC0251: Pumpensymbol grau: grauer Kreis, hellgrauer Hintergund. Im Kreis ist ein dunkelgraues dreieck, Symmetrisch zu senkrechter Linie, nicht ganz gleichseitig (waagrechte Line unten ist ein weig kürzer). Geometrische Variante: 180° gedreht.
+--- Verarbeite z_203.jpg ---
+Bildbeschreibung: z_-Dateien sind Rohr-Symbole mit Verzierungen; enthalten sind gerade Rohre, gebogene Rohre und T-Stücke.
 Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
   -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
 
---- Verarbeite AC0401_1_L.jpg ---
+--- Verarbeite GE9022_2M.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
+
+--- Verarbeite GE0307_M.jpg ---
+Bildbeschreibung: Hintergrund: GE0999: Dänische Flagge
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
+
+--- Verarbeite GE1200_M.jpg ---
+Bildbeschreibung: Ähnlich GE1002, jedoch heller und mit einem zusätzlichen hellgrauen Rand.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
+
+--- Verarbeite AC0820_L.jpg ---
+Bildbeschreibung: Wie AC0800, mit Text "$CO_2$" (2 tiefgestellt).
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe CO_2
+
+--- Verarbeite SE0071.jpg ---
+Bildbeschreibung: Wie AC0811, jecoch ist der Kreis viereckig anstatt rund gezeichnet.
+Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe, SEMANTIC: senkrechter Strich hinter dem Kreis, REFERENZ: Abgeleitet aus AC0811
+[WARN] SE0071.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+
+--- Verarbeite GE9021_7M.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
+
+--- Verarbeite DLG0020.jpg ---
+Bildbeschreibung: Im Prinzip ein Kreis mit 3-D-Effekt. Vertikaler Farbverlauf: oben hell, mittig dunkel, unten hellgrau. Der graue Hintergrund kann vernachlässigt werden.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
+
+--- Verarbeite AC0503_M_sia.jpg ---
+Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0503_S_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0503_M_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen.
+Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
+  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
+
+--- Verarbeite GE0041_S.jpg ---
+Bildbeschreibung: Wie GE0040 vertikal gespigelt (der Farbverlauf in der Abbildung ist m. E. falsch)
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
+
+--- Verarbeite SE0041.jpg ---
+Bildbeschreibung: Wie AC0811, jecoch ist der Kreis viereckig anstatt rund gezeichnet.
+Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe, SEMANTIC: senkrechter Strich hinter dem Kreis, REFERENZ: Abgeleitet aus AC0811
+[WARN] SE0041.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+
+--- Verarbeite AC0843_M.jpg ---
+Bildbeschreibung: Wie AC0842, jecoch nach rechts gedreht, Text immer noch horizontal
+Befehl erkannt: SEMANTIC: waagrechter Strich links vom Kreis, SEMANTIC: Kreis + Buchstabe rF, REFERENZ: Abgeleitet aus AC0842
+[WARN] AC0843_M.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+
+--- Verarbeite AC0711_1_S.jpg ---
+Bildbeschreibung: Wie AC0701: Kelle, aber mit Quadrat anstelle von Kreis oben. Geometrische Variante: identisch zur Referenz. Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
+
+--- Verarbeite AC0424_2_M.jpg ---
+Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0424. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0424_2. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die mittlere Variante (M). Bitte einer finalen Wurzelform-Kategorie zuordnen.
+Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
+  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
+
+--- Verarbeite AC0521_L.jpg ---
+Bildbeschreibung: Graues Rechteck hochkant, graue Umrandung, drei graue horizontale Linien, Farbverlauf dunkel-hell-dunkel. Offene Klappe mit 3 Schliessflächen Abweichung: anstelle von 3 grauen horizontalen dunkelgrauen Strichen drei kleinere vertikale dunkelgraue Striche. Es handelt sich um eine geschlossene Klappe mit der Schliessflächen.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
+
+--- Verarbeite AC0303_2M_sia.jpg ---
+Bildbeschreibung: Wie AC0301: Kompresor grauer Hintergrund nach oben. Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
+
+--- Verarbeite AR0104.jpg ---
+Bildbeschreibung: Wie AR0101, nach links gedreht, Text horizontal
+Befehl erkannt: SEMANTIC: senkrechter Strich oben vom Kreis, REFERENZ: Abgeleitet aus AR0101
+[WARN] AR0104.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+
+--- Verarbeite AC0711_L.jpg ---
+Bildbeschreibung: Wie AC0701: Kelle, aber mit Quadrat anstelle von Kreis oben. Geometrische Variante: identisch zur Referenz. Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
+
+--- Verarbeite AC0402_2_M.jpg ---
+Bildbeschreibung: Wie AC0211: Kopressor grau nach oben. Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
+
+--- Verarbeite AR0024.jpg ---
+Bildbeschreibung: Wie AR0022: Wie AR0021, nach rechts gedrecht. Geometrische Variante: Horizontal gespiegelt.
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe, REFERENZ: Abgeleitet aus AR0021, REFERENZ: Abgeleitet aus AR0022
+[WARN] AR0024.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+
+--- Verarbeite b_forward.jpg ---
+Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie b_forward. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (forward). Bitte einer finalen Wurzelform-Kategorie zuordnen.
+Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
+  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
+
+--- Verarbeite AC0534_2M_sia.jpg ---
+Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0534_2M_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen.
+Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
+  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
+
+--- Verarbeite AC0423_2_S.jpg ---
+Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0423. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0423_2. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen.
+Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
+  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
+
+--- Verarbeite AC0110_M.jpg ---
+Bildbeschreibung: Graues Rechteck hochkant, graue Umrandung, drei graue horizontale Linien, Farbverlauf dunkel-hell-dunkel
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
+  -> Plan B Vergleich aktiv: nutze Sample-SVG artifacts/images_to_convert\samples\AC0110_L.svg (err=164.706, baseline=186.647).
+
+--- Verarbeite SE0110.jpg ---
+Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "rF" (relative Feuchtigkeit)
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
+
+--- Verarbeite AC0912_M.jpg ---
+Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0912. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0912. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die mittlere Variante (M). Bitte einer finalen Wurzelform-Kategorie zuordnen.
+Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
+  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
+
+--- Verarbeite GE9021_2S.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
+
+--- Verarbeite GE9044_1M.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
+
+--- Verarbeite AC0402_1M_sia.jpg ---
+Bildbeschreibung: Wie AC0211: Kopressor grau nach oben. Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
+
+--- Verarbeite AC0202_M.jpg ---
+Bildbeschreibung: Kompressor grau nach rechts
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
+
+--- Verarbeite GE9023_4S.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
+
+--- Verarbeite AC0401_2_M.jpg ---
 Bildbeschreibung: Pumpensymbol grau: grauer Kreis, hellgrauer Hintergund. Im Kreis ist ein dunkelgraues dreieck, Symmetrisch zu senkrechter Linie, nicht ganz gleichseitig (waagrechte Line unten ist ein weig kürzer) Abweichung: Hintergrund Kreis ein wenig dunkler.
 Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
   -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
 
---- Verarbeite AC0846_M.jpg ---
+--- Verarbeite AC0501_M.jpg ---
+Bildbeschreibung: Klappensymbol: Rechteck hochkant, graue Umrandung. Graue Diagonale von unten links nach oben Rechts, in der Mitte ein dunkelgrauer Punkt. Farbverlauf Hintergrund: Dunkelgrau, hellgrau, dunkelgrau
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
+
+--- Verarbeite GE0360.jpg ---
+Bildbeschreibung: Hintergrund: GE0999. Die Symbole von GE0202 (Scharubenschlüssel und Schraubendreher) und GE0349 (Schneeflocken) sind kombiniert. GE0202 ist oben links, GE0349 unten rechts. Der Hintergrund von von GE0349 überdeckt das Sybmol von GE0202
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
+
+--- Verarbeite AC0864_M.jpg ---
+Bildbeschreibung: Wie AC0862: Wie AC0841, jedoch nach rechts gedreht, Text immer noch horizontal. Geometrische Variante: Horizontal gespiegelt.
+Befehl erkannt: REFERENZ: Abgeleitet aus AC0862
+[WARN] AC0864_M.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
+
+--- Verarbeite AC0924_L.jpg ---
+Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0924. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0924. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die große Variante (L). Bitte einer finalen Wurzelform-Kategorie zuordnen.
+Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
+  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
+
+--- Verarbeite GE0365.jpg ---
+Bildbeschreibung: Wie GE0360: Hintergrund: GE0999. Die Symbole von GE0202 (Scharubenschlüssel und Schraubendreher) und GE0349 (Schneeflocken) sind kombiniert. GE0202 ist oben links, GE0349 unten rechts. Der Hintergrund von von GE0349 überdeckt das Sybmol von GE0202. Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
+
+--- Verarbeite AC0243_M.jpg ---
+Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0243. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0243. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die mittlere Variante (M). Bitte einer finalen Wurzelform-Kategorie zuordnen.
+Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
+  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
+
+--- Verarbeite GE9001_6M.jpg ---
+Bildbeschreibung: stillisierte Röhre. Im Prinzip sehr dünnes Rechteck, hochkant, horizontaler Farbverlauf rot/grau/rot
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
+
+--- Verarbeite AC0234_M.jpg ---
+Bildbeschreibung: Wie AC0231: 3-Weg Ventil ähnlich AC0211, um 90° im Uhrzeigersinn gedreht, "M" wird immer noch senkrecht geschrieben. Noch ein 3. spitzes Dreieck unten. Wieder Farbwechsel von Dunkelgrau nach hellgrau (von links unten nach rechts oben). Geometrische Variante: Hauptdiagonal gespiegelt.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
+
+--- Verarbeite GE0030.jpg ---
+Bildbeschreibung: Wie GE0021, aber ohne Hintergrund
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
+
+--- Verarbeite AC0702_M.jpg ---
+Bildbeschreibung: Wie AC0701: Kelle, aber mit Quadrat anstelle von Kreis oben. Geometrische Variante: 90° nach links gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
+
+--- Verarbeite AC0412_2_S.jpg ---
+Bildbeschreibung: Wie AC0222: Kompressor grauer Hintergrund nach oben. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
+
+--- Verarbeite GE1311_S.jpg ---
+Bildbeschreibung: Wie AC0020: zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben. Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch)
+[WARN] GE1311_S.jpg: Batchlauf setzt nach Fehler fort (KeyError: 'img_path')
+[INFO] Übersichts-Kacheln erzeugt: diff=artifacts\converted_images\reports\overview_diff_tiles.png, svg=artifacts\converted_images\reports\overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: artifacts/converted_images
+[ERROR] Mindestens eine Datei konnte nicht erfolgreich konvertiert werden (siehe batch_failure_summary.csv).

@@ -1,0 +1,39 @@
+{
+  "base": "DLG0000",
+  "best_error": 44.31576111111111,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.0007385960185185184,
+  "filename": "DLG0000.jpg",
+  "h": 50,
+  "mean_delta2": 8367.55859375,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "DLG0000",
+        "source": "base_name",
+        "text": "Wie AC0100: Wie AC0010. Geometrische Variante: identisch zur Referenz."
+      }
+    ],
+    "documented_alias_refs": [
+      "AC0010",
+      "AC0100"
+    ],
+    "elements": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "DLG0000"
+  },
+  "std_delta2": 1605.6798095703125,
+  "variant": "DLG0000",
+  "w": 1200
+}
