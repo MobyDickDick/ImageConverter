@@ -1,0 +1,36 @@
+{
+  "base": "GE0281",
+  "best_error": 53.46938775510204,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.12124577722245361,
+  "filename": "GE0281.jpg",
+  "h": 21,
+  "mean_delta2": 25200.109375,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "GE0281",
+        "source": "base_name",
+        "text": "Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz."
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "GE0281"
+  },
+  "std_delta2": 21056.451171875,
+  "variant": "GE0281",
+  "w": 21
+}

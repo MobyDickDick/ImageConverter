@@ -1,0 +1,36 @@
+{
+  "base": "DLG0010",
+  "best_error": 12.350518518518518,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.005489119341563786,
+  "filename": "DLG0010.JPG",
+  "h": 25,
+  "mean_delta2": 1137.8204345703125,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "DLG0010",
+        "source": "base_name",
+        "text": "Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz."
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "DLG0010"
+  },
+  "std_delta2": 1574.0712890625,
+  "variant": "DLG0010",
+  "w": 90
+}

@@ -1,0 +1,38 @@
+{
+  "base": "AR0043",
+  "best_error": 38.99942824471126,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.022298129356610213,
+  "filename": "AR0043.jpg",
+  "h": 53,
+  "mean_delta2": 9175.646484375,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "AR0043",
+        "source": "base_name",
+        "text": "Wie AR0042, nach rechts gedreht, Text horizontal"
+      }
+    ],
+    "documented_alias_refs": [
+      "AR0042"
+    ],
+    "elements": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "AR0043"
+  },
+  "std_delta2": 14209.0791015625,
+  "variant": "AR0043",
+  "w": 33
+}

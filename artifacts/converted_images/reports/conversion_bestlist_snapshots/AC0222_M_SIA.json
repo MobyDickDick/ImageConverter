@@ -1,0 +1,36 @@
+{
+  "base": "AC0222",
+  "best_error": 31.913333333333334,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.023639506172839508,
+  "filename": "AC0222_M_sia.jpg",
+  "h": 30,
+  "mean_delta2": 8019.08056640625,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "AC0222",
+        "source": "base_name",
+        "text": "Kompressor grauer Hintergrund nach oben."
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "AC0222_M_SIA"
+  },
+  "std_delta2": 12453.8916015625,
+  "variant": "AC0222_M_SIA",
+  "w": 45
+}

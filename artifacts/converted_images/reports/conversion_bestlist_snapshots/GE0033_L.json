@@ -1,0 +1,39 @@
+{
+  "base": "GE0033",
+  "best_error": 52.12646258503401,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.010638053588782451,
+  "filename": "GE0033_L.jpg",
+  "h": 70,
+  "mean_delta2": 16204.515625,
+  "params": {
+    "bottom_shape": null,
+    "description_fragments": [
+      {
+        "key": "GE0033",
+        "source": "base_name",
+        "text": "Wie GE0031: Wie GE0030, nach rechts gedreht. Geometrische Variante: 180° gedreht."
+      }
+    ],
+    "documented_alias_refs": [
+      "GE0030",
+      "GE0031"
+    ],
+    "elements": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "GE0033_L"
+  },
+  "std_delta2": 23608.2578125,
+  "variant": "GE0033_L",
+  "w": 70
+}
