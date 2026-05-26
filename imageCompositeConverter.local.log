@@ -1,23 +1,26 @@
 [INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
 Namen von: Namen bis: [INFO] Verwende Bereich von 'AC0120' bis 'AC0120'.
 
---- Verarbeite AC0120_M.jpg ---
+--- Verarbeite AC0120_S.jpg ---
 Bildbeschreibung: Wie AC0030, jedoch mit einem zusätzlichen Plus-Minus-Zeichen unmittelbar über dem Minus-Minus-Zeichen.
 Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
   -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-  -> Plan B Vergleich aktiv: nutze Sample-SVG artifacts/images_to_convert\samples\AC0120_L.svg (err=161.181, baseline=184.158).
+  -> Plan B Vergleich aktiv: nutze Sample-SVG artifacts/images_to_convert\samples\AC0120_L.svg (err=157.119, baseline=178.120).
+[WARN] AC0120_S.jpg: Keine echte Konvertierung; verwende Plan-B/Sample-SVG als Platzhalter.
 
 --- Verarbeite AC0120_L.jpg ---
 Bildbeschreibung: Wie AC0030, jedoch mit einem zusätzlichen Plus-Minus-Zeichen unmittelbar über dem Minus-Minus-Zeichen.
 Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
   -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
   -> Plan B Vergleich aktiv: nutze Sample-SVG artifacts/images_to_convert\samples\AC0120_L.svg (err=163.204, baseline=188.043).
+[WARN] AC0120_L.jpg: Keine echte Konvertierung; verwende Plan-B/Sample-SVG als Platzhalter.
 
---- Verarbeite AC0120_S.jpg ---
+--- Verarbeite AC0120_M.jpg ---
 Bildbeschreibung: Wie AC0030, jedoch mit einem zusätzlichen Plus-Minus-Zeichen unmittelbar über dem Minus-Minus-Zeichen.
 Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
   -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-  -> Plan B Vergleich aktiv: nutze Sample-SVG artifacts/images_to_convert\samples\AC0120_L.svg (err=157.119, baseline=178.120).
+  -> Plan B Vergleich aktiv: nutze Sample-SVG artifacts/images_to_convert\samples\AC0120_L.svg (err=161.181, baseline=184.158).
+[WARN] AC0120_M.jpg: Keine echte Konvertierung; verwende Plan-B/Sample-SVG als Platzhalter.
 [INFO] Übersichts-Kacheln erzeugt: diff=C:\Users\marku\myCloud\imageConverter\artifacts\converted_images\reports\overview_diff_tiles.png, svg=C:\Users\marku\myCloud\imageConverter\artifacts\converted_images\reports\overview_svg_tiles.png
 
 Abgeschlossen! Ausgaben unter: C:\Users\marku\myCloud\imageConverter\artifacts\converted_images
