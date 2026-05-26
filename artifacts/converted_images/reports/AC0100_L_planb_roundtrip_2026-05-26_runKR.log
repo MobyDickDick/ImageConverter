@@ -1,0 +1,11 @@
+[INFO] Schreibe Konsolen-Output nach: /workspace/ImageConverter/imageCompositeConverter.local.log
+
+--- Verarbeite AC0100_L.jpg ---
+Bildbeschreibung: Wie AC0010: Heizelement, graues Rechteck, Plus-Minus-Zeichen oben links, horizontaler Farbverlauf dunkel–hell–dunkel sowie graue Diagonale von oben rechts nach unten links.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
+
+Abgeschlossen! Ausgaben unter: artifacts/converted_images/reports
+variant=AC0100_L
+output_svg=artifacts/converted_images/reports/converted_svgs/AC0100_L.svg
+delta2_output_vs_sample=3245.435702
