@@ -307,6 +307,21 @@ def promptInteractiveRangeImpl(
     if not end_value:
         end_value = start_value
 
+    start_parts = extract_ref_parts_fn(start_value) if start_value else None
+    end_parts = extract_ref_parts_fn(end_value) if end_value else None
+    if start_parts is not None and end_parts is None and end_value:
+        print(
+            f"[WARN] Ungültiger Endwert '{end_value}'. Verwende stattdessen '{start_value}' als Endwert."
+        )
+        end_value = start_value
+        end_parts = start_parts
+    elif start_parts is None and end_parts is not None and start_value:
+        print(
+            f"[WARN] Ungültiger Startwert '{start_value}'. Verwende stattdessen '{end_value}' als Startwert."
+        )
+        start_value = end_value
+        start_parts = end_parts
+
     shared = shared_partial_range_token_fn(start_value, end_value)
     if shared and extract_ref_parts_fn(start_value) is None and extract_ref_parts_fn(end_value) is None:
         print(f"[INFO] Verwende Teilstring-Filter '{shared}' für die Auswahl der Bilder.")
