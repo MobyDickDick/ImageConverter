@@ -182,11 +182,16 @@ def generateCompositeSvgImpl(
         svg_elements.append(
             f'  <rect x="{cx-s}" y="{cy-s}" width="{s*2}" height="{s*2}" fill="#e6e6e6" stroke="#4d4d4d" stroke-width="{sw}"/>'
         )
+        inset = sw * 0.5
+        x0 = cx - s + inset
+        x1 = cx + s - inset
+        y0 = cy - s + inset
+        y1 = cy + s - inset
         svg_elements.append(
-            f'  <line x1="{cx-s}" y1="{cy-s}" x2="{cx+s}" y2="{cy+s}" stroke="#4d4d4d" stroke-width="{sw}"/>'
+            f'  <path d="M {x0} {y0} L {x1} {y1}" stroke="#4d4d4d" stroke-width="{sw}" fill="none" stroke-linecap="butt"/>'
         )
         svg_elements.append(
-            f'  <line x1="{cx+s}" y1="{cy-s}" x2="{cx-s}" y2="{cy+s}" stroke="#4d4d4d" stroke-width="{sw}"/>'
+            f'  <path d="M {x1} {y0} L {x0} {y1}" stroke="#4d4d4d" stroke-width="{sw}" fill="none" stroke-linecap="butt"/>'
         )
 
     svg_elements.append("</svg>")

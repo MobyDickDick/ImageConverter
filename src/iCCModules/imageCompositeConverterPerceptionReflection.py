@@ -112,6 +112,18 @@ class Reflection:
             params["label"] = ""
             return desc, params
 
+
+        ac0030_alias = Reflection._extract_reference_symbol(desc_raw) == "AC0030" or "wie ac0030" in desc
+        has_cross_hint = any(token in desc for token in ("diagonalen", "andreaskreuz", "kreuz"))
+        has_cooler_hint = any(token in desc for token in ("kühlelement", "rechteck", "minus-minus"))
+        if ac0030_alias and (has_cross_hint or has_cooler_hint):
+            params["mode"] = "composite"
+            params["top_source_ref"] = "AC0030"
+            params["bottom_shape"] = "square_cross"
+            params["elements"].append("OBEN: Alias-Referenz auf AC0030")
+            params["elements"].append("UNTEN: Parametrisch generiertes Viereck mit Andreaskreuz")
+            return desc, params
+
         reference_symbol = Reflection._extract_reference_symbol(desc_raw)
         if reference_symbol and reference_symbol != symbol_upper:
             inherited = self._inherit_mode_from_reference(reference_symbol=reference_symbol, img_filename=img_filename, visited=_visited)
