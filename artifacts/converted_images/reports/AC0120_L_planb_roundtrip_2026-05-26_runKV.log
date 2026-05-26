@@ -1,0 +1,11 @@
+[INFO] Schreibe Konsolen-Output nach: /workspace/ImageConverter/imageCompositeConverter.local.log
+
+--- Verarbeite AC0120_L.jpg ---
+Bildbeschreibung: Wie AC0030, jedoch mit einem zusätzlichen Plus-Minus-Zeichen unmittelbar über dem Minus-Minus-Zeichen.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
+
+Abgeschlossen! Ausgaben unter: artifacts/converted_images/reports
+variant=AC0120_L
+output_svg=artifacts/converted_images/reports/converted_svgs/AC0120_L.svg
+delta2_output_vs_sample=64086.669297
