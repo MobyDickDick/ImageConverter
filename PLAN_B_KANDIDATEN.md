@@ -4,10 +4,9 @@ Ziel: maximal **5** aktive JPG-Kandidaten, die derzeit noch nicht zufriedenstell
 
 ## Aktuelle Kandidaten (Stand: 2026-05-26)
 
-1. `AC0025.jpg` – ähnlich einfache Geometrie, bislang weiterhin als fehlerhaft sichtbar.
-2. `AC0040_M.jpg` – mittlere Variante mit überschaubarer Struktur.
-3. `AC0080_L.jpg` – einfacher Kandidat mit gutem Nutzen für parallele Plan-B-Arbeit.
-4. `AC0120_L.jpg` – als nächster einfacher L-Kandidat für Plan-B-Roundtrip nachgerückt.
+1. `AC0040_M.jpg` – mittlere Variante mit überschaubarer Struktur.
+2. `AC0080_L.jpg` – einfacher Kandidat mit gutem Nutzen für parallele Plan-B-Arbeit.
+3. `AC0120_L.jpg` – als nächster einfacher L-Kandidat für Plan-B-Roundtrip nachgerückt.
 
 ## Pflege-Regel (fortan)
 
