@@ -2486,10 +2486,11 @@ def convertRange(
     output_root: str | None = None,
     selected_variants: set[str] | None = None,
     deterministic_order: bool = False,
+    debug_jpeg_load: bool = False,
 ) -> str:
     previous_bindings = _syncRemainingRuntimeBindings()
     try:
-        return imageCompositeConverterRemaining_helpers.convertRange(folder_path, csv_path, iterations, start_ref, end_ref, debug_ac0811_dir, debug_element_diff_dir, output_root, selected_variants, deterministic_order)
+        return imageCompositeConverterRemaining_helpers.convertRange(folder_path, csv_path, iterations, start_ref, end_ref, debug_ac0811_dir, debug_element_diff_dir, output_root, selected_variants, deterministic_order, debug_jpeg_load)
     finally:
         _restoreRemainingRuntimeBindings(previous_bindings)
 

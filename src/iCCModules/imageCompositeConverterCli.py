@@ -103,6 +103,11 @@ def parseArgsImpl(
         help="Optional: Ordner für Element-Diff-Dumps pro Runde/Element für alle Semantic-Badges",
     )
     parser.add_argument(
+        "--debug-jpeg-load",
+        action="store_true",
+        help="Schreibt bei fehlgeschlagenen JPG-Konvertierungen automatisch JPEG-Lade-Diagnosen als JSON in den Report-Ordner.",
+    )
+    parser.add_argument(
         "--bootstrap-deps",
         action="store_true",
         help=(
@@ -515,6 +520,7 @@ def runMainImpl(
                     output_dir,
                     selected_variants,
                     bool(args.deterministic_order),
+                    bool(args.debug_jpeg_load),
                 )
             print(f"\nAbgeschlossen! Ausgaben unter: {out_dir}")
             if args.mode == "convert" and _hasBatchFailures(str(out_dir)):
