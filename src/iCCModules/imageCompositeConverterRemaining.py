@@ -953,6 +953,7 @@ def convertRange(
     output_root: str | None = None,
     selected_variants: set[str] | None = None,
     deterministic_order: bool = False,
+    debug_jpeg_load: bool = False,
 ) -> str:
     out_root = output_root or _defaultConvertedSymbolsRoot()
     svg_out_dir = _convertedSvgOutputDir(out_root)
@@ -1184,12 +1185,68 @@ def convertRange(
         harmonize_semantic_size_variants_fn=_harmonizeSemanticSizeVariants,
         run_post_conversion_reporting_fn=_runPostConversionReporting,
     )
+    if debug_jpeg_load:
+        _writeJpegFailureDiagnostics(
+            folder_path=folder_path,
+            reports_out_dir=reports_out_dir,
+            batch_failures=batch_failures,
+        )
     _moveNonconvertableSources(folder_path=folder_path, batch_failures=batch_failures)
 
     Action.STOCHASTIC_SEED_OFFSET = 0
     Action.STOCHASTIC_RUN_SEED = 0
     return out_root
 
+
+def _writeJpegFailureDiagnostics(*, folder_path: str, reports_out_dir: str, batch_failures: list[dict[str, str]]) -> int:
+    failed_names = {
+        str(entry.get("filename", "")).strip()
+        for entry in batch_failures
+        if str(entry.get("status", "")).strip() in {"render_failure", "batch_error", "semantic_mismatch"}
+    }
+    jpg_names = {name for name in failed_names if name.lower().endswith((".jpg", ".jpeg"))}
+    if not jpg_names:
+        return 0
+
+    vendor_root = Path(__file__).resolve().parents[2] / "vendor"
+    for rel in ("linux-py310/site-packages", "linux-py311/site-packages", "linux-py312/site-packages"):
+        candidate = vendor_root / rel
+        if candidate.exists():
+            text = str(candidate)
+            if text not in sys.path:
+                sys.path.insert(0, text)
+
+    try:
+        from PIL import Image
+    except Exception as exc:
+        print(f"[WARN] JPEG-Diagnose übersprungen (Pillow nicht verfügbar): {exc}")
+        return 0
+
+    source_dir = Path(folder_path)
+    report_dir = Path(reports_out_dir)
+    written = 0
+    for name in sorted(jpg_names):
+        source_path = source_dir / name
+        report = {"filename": name, "path": str(source_path), "exists": source_path.exists()}
+        if source_path.exists() and source_path.is_file():
+            report["size_bytes"] = source_path.stat().st_size
+            try:
+                with Image.open(source_path) as img:
+                    report["format"] = img.format
+                    report["mode"] = img.mode
+                    report["size"] = {"width": img.width, "height": img.height}
+                    report["bands"] = list(img.getbands())
+                    report["info_keys"] = sorted(str(k) for k in img.info.keys())
+                    report["exif_count"] = len(img.getexif() or {})
+                    img.load()
+                    report["load_ok"] = True
+            except Exception as exc:
+                report["load_ok"] = False
+                report["error"] = f"{type(exc).__name__}: {exc}"
+        out_path = report_dir / f"{Path(name).stem}_jpeg_debug.json"
+        out_path.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        written += 1
+    return written
 
 def _moveNonconvertableSources(*, folder_path: str, batch_failures: list[dict[str, str]]) -> int:
     failed_names = {
