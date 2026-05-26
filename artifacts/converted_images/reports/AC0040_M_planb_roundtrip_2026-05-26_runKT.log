@@ -1,0 +1,10 @@
+[INFO] Schreibe Konsolen-Output nach: /workspace/ImageConverter/imageCompositeConverter.local.log
+
+--- Verarbeite AC0040_M.jpg ---
+Bildbeschreibung: Wie AC0020: zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben. Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch)
+
+Abgeschlossen! Ausgaben unter: artifacts/converted_images/reports
+variant=AC0040_M
+output_svg=artifacts/converted_images/reports/converted_svgs/AC0040_M.svg
+delta2_output_vs_sample=319.733108
