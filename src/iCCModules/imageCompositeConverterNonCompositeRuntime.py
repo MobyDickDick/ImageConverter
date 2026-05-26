@@ -72,6 +72,32 @@ def _build_sample_candidates(base_name: str) -> list[str]:
     return candidates
 
 
+def _extract_reference_family_from_description(description: str) -> str | None:
+    text = (description or "").strip()
+    if not text:
+        return None
+    match = re.search(r"\bwie\s+((?:AC|SE)\d{4})\b", text, flags=re.IGNORECASE)
+    if not match:
+        return None
+    return match.group(1).upper()
+
+
+def _prepend_reference_candidates(candidates: list[str], reference_family: str) -> list[str]:
+    preferred: list[str] = []
+    seen: set[str] = set()
+
+    def _add(name: str) -> None:
+        if name and name not in seen:
+            seen.add(name)
+            preferred.append(name)
+
+    _add(reference_family)
+    for size in ("L", "M", "S"):
+        _add(f"{reference_family}_{size}")
+
+    for existing in candidates:
+        _add(existing)
+    return preferred
 
 
 def _sanitize_sample_svg(svg_content: str) -> str:
@@ -83,9 +109,13 @@ def _sanitize_sample_svg(svg_content: str) -> str:
     return sanitized
 
 
-def _try_load_sample_svg(*, img_path: str, base_name: str):
+def _try_load_sample_svg(*, img_path: str, base_name: str, description: str = ""):
     samples_dir = os.path.join(os.path.dirname(img_path), "samples")
-    for sample_name in _build_sample_candidates(base_name):
+    sample_candidates = _build_sample_candidates(base_name)
+    reference_family = _extract_reference_family_from_description(description)
+    if reference_family and reference_family != base_name.upper():
+        sample_candidates = _prepend_reference_candidates(sample_candidates, reference_family)
+    for sample_name in sample_candidates:
         sample_svg_path = os.path.join(samples_dir, f"{sample_name}.svg")
         if not os.path.exists(sample_svg_path):
             continue
@@ -116,7 +146,7 @@ def runNonCompositeIterationImpl(
     write_attempt_artifacts_fn,
     calculate_error_fn,
 ) -> tuple[str, str, dict[str, object], int, float] | None:
-    sample_svg = _try_load_sample_svg(img_path=img_path, base_name=base_name)
+    sample_svg = _try_load_sample_svg(img_path=img_path, base_name=base_name, description=description)
 
     if mode == "manual_review":
         if sample_svg:
@@ -230,7 +260,8 @@ def runNonCompositeIterationImpl(
             # in a similar quality range, because sample assets usually carry
             # richer semantic structure than our generic non-composite fallback.
             sample_preference_factor = 1.08 if baseline_is_embedded_raster else 1.25
-            prefer_sample_svg = baseline_is_embedded_raster or sample_err <= (svg_err * sample_preference_factor)
+            sample_improvement_ratio = (svg_err / sample_err) if sample_err > 0 else float("inf")
+            prefer_sample_svg = baseline_is_embedded_raster or sample_improvement_ratio >= sample_preference_factor
             if prefer_sample_svg:
                 decision_note = ""
                 if baseline_is_embedded_raster and sample_err > svg_err:
@@ -248,6 +279,7 @@ def runNonCompositeIterationImpl(
                         f"baseline_error={svg_err:.6f}",
                         f"baseline_is_embedded_raster={int(baseline_is_embedded_raster)}",
                         f"sample_preference_factor={sample_preference_factor:.2f}",
+                        f"sample_improvement_ratio={sample_improvement_ratio:.6f}",
                     ]
                 )
                 write_attempt_artifacts_fn(sample_svg_content, sample_rendered)
