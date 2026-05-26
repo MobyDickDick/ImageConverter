@@ -600,6 +600,10 @@ def convertOneImpl(
     details = read_validation_log_details_fn(log_file)
     status = str(details.get("status", ""))
     if status in {"non_composite_plan_b_sample_svg_selected", "non_composite_pure_svg_placeholder"}:
+        print_fn(
+            f"[WARN] {filename}: Keine echte Konvertierung; "
+            "verwende Plan-B/Sample-SVG als Platzhalter."
+        )
         sample_svg_path = _resolveSampleSvgPath(
             sample_svg_path=str(details.get("sample_svg_path", "")),
             folder_path=folder_path,
