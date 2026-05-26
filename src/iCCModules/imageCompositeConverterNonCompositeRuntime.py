@@ -51,10 +51,23 @@ def _build_sample_candidates(base_name: str) -> list[str]:
         _add(root)
         for alt_suffix in ("L", "M", "S"):
             _add(f"{root}_{alt_suffix}")
-        return candidates
+    else:
+        for alt_suffix in ("L", "M", "S"):
+            _add(f"{base_name}_{alt_suffix}")
 
-    for alt_suffix in ("L", "M", "S"):
-        _add(f"{base_name}_{alt_suffix}")
+    family_name = root if sep else base_name
+
+    if family_name.startswith("AC") and len(family_name) > 2:
+        se_alias = f"SE{family_name[2:]}"
+        _add(se_alias)
+        for alt_suffix in ("L", "M", "S"):
+            _add(f"{se_alias}_{alt_suffix}")
+    if family_name.startswith("SE") and len(family_name) > 2:
+        ac_alias = f"AC{family_name[2:]}"
+        _add(ac_alias)
+        for alt_suffix in ("L", "M", "S"):
+            _add(f"{ac_alias}_{alt_suffix}")
+
     return candidates
 
 
