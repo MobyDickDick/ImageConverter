@@ -1,94 +1,102 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
 <svg
-   width="60.198868"
-   height="47.5"
-   viewBox="0 0 60.198868 47.5"
-   role="img"
-   aria-label="Graues Polygon mit Kelle und M"
+   width="9.7906189mm"
+   height="20.902082mm"
+   viewBox="0 0 9.7906189 20.902083"
    version="1.1"
-   id="svg6"
+   id="svg1"
+   xml:space="preserve"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25, custom)"
+   sodipodi:docname="DdcCoValvd21_Heat_Recovery.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg">
-  <defs
-     id="defs6">
-    <linearGradient
-       id="polyGrad"
-       x1="3"
-       y1="1"
-       x2="25.797274"
-       y2="47.668995"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="translate(-2.6011339,-1.2)">
-      <stop
-         offset="0%"
-         stop-color="#a8a8a8"
-         id="stop1" />
-      <stop
-         offset="100%"
-         stop-color="#fbfbfb"
-         id="stop4" />
-    </linearGradient>
-    <linearGradient
-       id="circleGrad"
-       x1="32"
-       y1="11"
-       x2="56"
-       y2="39"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="translate(-2.6011339,-1.2)">
-      <stop
-         offset="0%"
-         stop-color="#ffffff"
-         id="stop5" />
-      <stop
-         offset="100%"
-         stop-color="#f7f7f7"
-         id="stop6" />
-    </linearGradient>
-  </defs>
-  <!-- Hintergrund -->
-  <!-- Horizontaler Griff der Kelle; liegt hinter Kreis und Polygonkontur -->
-  <!-- Linkes Doppel-Dreieck als ein Polygon -->
-  <path
-     d="M 1.5988661,1 H 23.098866 L 12.467378,24.169495 23.098866,46.5 H 1.5988661 L 12.467378,24.169495 Z"
-     fill="url(#polyGrad)"
-     stroke="#969696"
-     stroke-width="3"
-     stroke-linejoin="miter"
-     id="path6"
-     style="fill:url(#polyGrad);fill-opacity:1;stroke-width:2;stroke-dasharray:none" />
-  <!-- Rechte Kelle: Kreis -->
-  <!-- Buchstabe im Kreis -->
-  <g
-     id="g6"
-     transform="translate(0,-0.04999924)">
-    <line
-       x1="12.798865"
-       y1="23.799999"
-       x2="27.698866"
-       y2="23.799999"
-       stroke="#8f8f8f"
-       stroke-width="7.2"
-       stroke-linecap="butt"
-       id="line6"
-       style="stroke-width:3;stroke-dasharray:none" />
-    <circle
-       cx="43.398865"
-       cy="23.799999"
-       r="15.8"
-       fill="url(#circleGrad)"
-       stroke="#8c8c8c"
-       stroke-width="3.2"
-       id="circle6"
-       style="fill:url(#circleGrad);stroke-width:2;stroke-dasharray:none" />
-    <text
-       x="43.398865"
-       y="33.463573"
-       text-anchor="middle"
-       font-family="Arial, Helvetica, sans-serif"
-       font-size="27px"
-       font-weight="700"
-       fill="#666666"
-       id="text6">M</text>
-  </g>
-</svg>
+   xmlns:svg="http://www.w3.org/2000/svg"><sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="16"
+     inkscape:cx="1.53125"
+     inkscape:cy="-8.0937498"
+     inkscape:window-width="1920"
+     inkscape:window-height="1009"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" /><defs
+     id="defs1"><linearGradient
+       id="metalGrad"
+       x1="1.1996347"
+       y1="0.46889275"
+       x2="62.780884"
+       y2="0.46889275"
+       gradientTransform="matrix(0.15562065,0,0,0.33575661,54.271204,50.927778)"
+       gradientUnits="userSpaceOnUse"><stop
+         offset="0"
+         style="stop-color:#cccccc;stop-opacity:1;"
+         id="stop1" /><stop
+         offset="0.31380066"
+         style="stop-color:#f6f6f6;stop-opacity:1;"
+         id="stop2" /><stop
+         offset="0.45125964"
+         style="stop-color:#f6f6f6;stop-opacity:1;"
+         id="stop4" /><stop
+         offset="1"
+         style="stop-color:#c9c9c9;stop-opacity:1;"
+         id="stop3" /></linearGradient></defs><g
+     inkscape:label="Ebene 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-54.353723,-50.972323)"><rect
+       x="54.520123"
+       y="51.137688"
+       width="9.4588547"
+       height="20.571354"
+       fill="url(#metalGrad)"
+       stroke="#999999"
+       stroke-width="0.330729"
+       rx="0"
+       ry="0"
+       id="rect5"
+       style="fill:url(#metalGrad);stroke:#b8b8b8;stroke-opacity:1" /><g
+       id="g1"
+       transform="translate(-9.6089892)"><rect
+         x="-55.050919"
+         y="68.707802"
+         width="2.4642563"
+         height="0.56400001"
+         fill="#555555"
+         rx="0.015018309"
+         id="rect6-3-7-2-4-7"
+         ry="0.015018309"
+         style="fill:#696969;fill-opacity:1;stroke-width:0.66146"
+         transform="rotate(-90)" /><rect
+         x="67.757668"
+         y="53.536789"
+         width="2.4642563"
+         height="0.56400001"
+         fill="#555555"
+         rx="0.015018309"
+         id="rect6-3-7-2-4-7-4"
+         ry="0.015018309"
+         style="fill:#696969;fill-opacity:1;stroke-width:0.66146" /></g><rect
+       x="58.148678"
+       y="55.55843"
+       width="2.4642563"
+       height="0.56400001"
+       fill="#555555"
+       rx="0.015018309"
+       id="rect6-3-7-2-4-7-4-4"
+       ry="0.015018309"
+       style="fill:#696969;fill-opacity:1;stroke-width:0.66146" /><path
+       id="path1"
+       style="fill:#858585;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.264583;stroke-linecap:round"
+       d="m 54.353723,50.972323 v 0.325559 l 4.46123,10.12497 -4.46123,10.12444 v 0.32556 h 0.73226 c 1.38829,-3.154409 3.67667,-8.358089 4.163049,-9.46402 0.48638,1.105931 2.77476,6.309611 4.16305,9.46402 h 0.73226 v -0.32556 l -4.46123,-10.124959 4.46123,-10.124451 v -0.325559 h -0.73226 c -1.38829,3.154419 -3.67667,8.358089 -4.16305,9.46402 -0.486379,-1.105931 -2.774759,-6.309601 -4.163049,-9.46402 z" /></g></svg>
