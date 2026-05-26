@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import os
+import re
 
 
 def _build_vector_placeholder_svg(width: int, height: int, *, description: str = "") -> str:
@@ -71,6 +72,17 @@ def _build_sample_candidates(base_name: str) -> list[str]:
     return candidates
 
 
+
+
+def _sanitize_sample_svg(svg_content: str) -> str:
+    # Remove editor-specific metadata that can break strict SVG parsers when
+    # namespace declarations are missing in curated sample assets.
+    sanitized = re.sub(r"<\/?(?:sodipodi|inkscape):[^>]*?>", "", svg_content, flags=re.IGNORECASE)
+    sanitized = re.sub(r"\s(?:sodipodi|inkscape):[\w.-]+=\"[^\"]*\"", "", sanitized, flags=re.IGNORECASE)
+    sanitized = re.sub(r"\s(?:sodipodi|inkscape):[\w.-]+='[^']*'", "", sanitized, flags=re.IGNORECASE)
+    return sanitized
+
+
 def _try_load_sample_svg(*, img_path: str, base_name: str):
     samples_dir = os.path.join(os.path.dirname(img_path), "samples")
     for sample_name in _build_sample_candidates(base_name):
@@ -78,7 +90,7 @@ def _try_load_sample_svg(*, img_path: str, base_name: str):
         if not os.path.exists(sample_svg_path):
             continue
         with open(sample_svg_path, "r", encoding="utf-8") as handle:
-            return sample_svg_path, handle.read()
+            return sample_svg_path, _sanitize_sample_svg(handle.read())
     return None
 
 
