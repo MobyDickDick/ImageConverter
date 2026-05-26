@@ -8,7 +8,7 @@ Ziel: maximal **5** aktive JPG-Kandidaten, die derzeit noch nicht zufriedenstell
 2. `AC0040_M.jpg` – mittlere Variante mit überschaubarer Struktur.
 3. `AC0060_L.jpg` – größere, aber weiterhin klar konturierte Symbolform.
 4. `AC0080_L.jpg` – einfacher Kandidat mit gutem Nutzen für parallele Plan-B-Arbeit.
-5. `AC0100_from_sample.jpg` – weiterhin in `diff_pngs` als problematisch sichtbar und visuell überschaubar.
+5. `AC0110_L.jpg` – als nächster einfacher Kandidat aus den Sample-Vorlagen für Plan-B-Roundtrip vorgesehen.
 
 ## Pflege-Regel (fortan)
 
