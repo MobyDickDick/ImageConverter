@@ -2,13 +2,12 @@
 
 Ziel: maximal **5** aktive JPG-Kandidaten, die derzeit noch nicht zufriedenstellend konvertieren, aber voraussichtlich nicht "hoffnungslos komplex" sind.
 
-## Aktuelle Kandidaten (Stand: 2026-05-25)
+## Aktuelle Kandidaten (Stand: 2026-05-26)
 
 1. `AC0025.jpg` – ähnlich einfache Geometrie, bislang weiterhin als fehlerhaft sichtbar.
 2. `AC0040_M.jpg` – mittlere Variante mit überschaubarer Struktur.
-3. `AC0060_L.jpg` – größere, aber weiterhin klar konturierte Symbolform.
-4. `AC0080_L.jpg` – einfacher Kandidat mit gutem Nutzen für parallele Plan-B-Arbeit.
-5. `AC0110_L.jpg` – als nächster einfacher Kandidat aus den Sample-Vorlagen für Plan-B-Roundtrip vorgesehen.
+3. `AC0080_L.jpg` – einfacher Kandidat mit gutem Nutzen für parallele Plan-B-Arbeit.
+4. `AC0120_L.jpg` – als nächster einfacher L-Kandidat für Plan-B-Roundtrip nachgerückt.
 
 ## Pflege-Regel (fortan)
 
