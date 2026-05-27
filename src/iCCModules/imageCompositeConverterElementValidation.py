@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from .imageCompositeConverterOptimizationFacade import OptimizationHooks
 
 def applyElementAlignmentStepImpl(
     params: dict,
@@ -222,12 +223,21 @@ def validateBadgeByElementsImpl(
     optimize_circle_center_bracket_fn,
     optimize_circle_radius_bracket_fn,
     optimize_global_parameter_vector_sampling_fn,
+    optimization_hooks: OptimizationHooks | None = None,
     calculate_error_fn,
     activate_ac08_adaptive_locks_fn,
     release_ac08_adaptive_locks_fn,
     optimize_element_color_bracket_fn,
     apply_canonical_badge_colors_fn,
 ):
+    if optimization_hooks is not None:
+        optimize_element_width_bracket_fn = optimization_hooks.optimize_element_width_bracket_fn
+        optimize_element_extent_bracket_fn = optimization_hooks.optimize_element_extent_bracket_fn
+        optimize_circle_center_bracket_fn = optimization_hooks.optimize_circle_center_bracket_fn
+        optimize_circle_radius_bracket_fn = optimization_hooks.optimize_circle_radius_bracket_fn
+        optimize_global_parameter_vector_sampling_fn = optimization_hooks.optimize_global_parameter_vector_sampling_fn
+        optimize_element_color_bracket_fn = optimization_hooks.optimize_element_color_bracket_fn
+
     h, w = img_orig.shape[:2]
     logs: list[str] = []
     validation_started_at = float(time_module.monotonic())
