@@ -535,7 +535,7 @@ def runMainImpl(
                     output_dir,
                     selected_variants,
                     bool(args.deterministic_order),
-                    bool(args.debug_jpeg_load),
+                    bool(getattr(args, "debug_jpeg_load", False)),
                 )
             print(f"\nAbgeschlossen! Ausgaben unter: {out_dir}")
             if args.mode == "convert" and _hasBatchFailures(str(out_dir)):
