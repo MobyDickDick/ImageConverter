@@ -1,12 +1,12 @@
 {
   "base": "AC0120",
-  "best_error": 44.927083333333336,
-  "best_iter": 5,
+  "best_error": 41.14416666666666,
+  "best_iter": 14,
   "convergence": "plateau",
-  "error_per_pixel": 0.014039713541666667,
+  "error_per_pixel": 0.012857552083333333,
   "filename": "AC0120_L.jpg",
   "h": 80,
-  "mean_delta2": 10595.763671875,
+  "mean_delta2": 9099.005859375,
   "params": {
     "bottom_shape": "square_cross",
     "description_fragments": [
@@ -35,7 +35,7 @@
     "top_source_ref": "AC0030",
     "variant_name": "AC0120_L"
   },
-  "std_delta2": 15400.5927734375,
+  "std_delta2": 14849.6513671875,
   "variant": "AC0120_L",
   "w": 40
 }

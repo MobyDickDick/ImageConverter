@@ -1,208 +1,47 @@
 [INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
-Namen von: Namen bis: [INFO] Verwende Bereich von 'AC0120' bis 'AC012'.
-
---- Verarbeite AC0060_M.jpg ---
-Bildbeschreibung: Wie AC0020: zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben. Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch)
-
---- Verarbeite AC0070_M.jpg ---
-Bildbeschreibung: Wie AC0020: zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben. Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch)
-
---- Verarbeite AC0060_S.jpg ---
-Bildbeschreibung: Wie AC0020: zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben. Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch)
-
---- Verarbeite AC0090_S.jpg ---
-Bildbeschreibung: Wie AC0020: zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben. Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch)
-
---- Verarbeite AC0030_S.jpg ---
-Bildbeschreibung: AC0030 ist ein Luftkühler. AC0030_L, AC0030_M und AC0030_S sind Röhren mit links roter und rechts blauer Seite; der linke Pfeil zeigt nach oben, der rechte Pfeil nach unten.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0022.jpg ---
-Bildbeschreibung: Wie AC0021: zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben, unteres Drittel blaue horizontale Linie. Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch)
-
---- Verarbeite AC0050_M.jpg ---
-Bildbeschreibung: Wie AC0020: zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben. Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch)
-
---- Verarbeite AC0120_L.jpg ---
-Bildbeschreibung: Wie AC0030, jedoch mit einem zusätzlichen Plus-Minus-Zeichen unmittelbar über dem Minus-Minus-Zeichen.
-Befehl erkannt: OBEN: Alias-Referenz auf AC0030, UNTEN: Parametrisch generiertes Viereck mit Andreaskreuz
-  [Iter 1/128] Epsilon=0.0500 -> Diff-Fehler: 45.64
-  [Iter 5/128] Epsilon=0.0484 -> Diff-Fehler: 44.93
-  -> Früher Abbruch: Diff-Fehler blieb 22 Iterationen innerhalb ±1e-06
--> Bester Match in Iteration 5 (Fehler auf 44.93 reduziert)
--> Konvergenzdiagnose: Plateau nach Verbesserung erreicht (lokales Optimum wahrscheinlich)
-
---- Verarbeite AC0025.jpg ---
-Bildbeschreibung: Wie AC0024: AC0023.jpg vertikal gespiegelt. Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-  -> Plan B Vergleich aktiv: nutze Sample-SVG artifacts/images_to_convert\samples\AC0025.svg (err=20.662, baseline=217.904).
-[WARN] AC0025.jpg: Keine echte Konvertierung; verwende Plan-B/Sample-SVG als Platzhalter.
-
---- Verarbeite AC0026.jpg ---
-Bildbeschreibung: Wie AC0023: zwei vertikale Striche links blau, rechts rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben. Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch)
-
---- Verarbeite AC0024.jpg ---
-Bildbeschreibung: AC0023.jpg vertikal gespiegelt
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0030.jpg ---
-Bildbeschreibung: AC0030 ist ein Luftkühler. AC0030_L, AC0030_M und AC0030_S sind Röhren mit links roter und rechts blauer Seite; der linke Pfeil zeigt nach oben, der rechte Pfeil nach unten.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0100_S.jpg ---
-Bildbeschreibung: Wie AC0010: Heizelement, graues Rechteck, Plus-Minus-Zeichen oben links, horizontaler Farbverlauf dunkel–hell–dunkel sowie graue Diagonale von oben rechts nach unten links.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0021.jpg ---
-Bildbeschreibung: zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben, unteres Drittel blaue horizontale Linie
-Befehl erkannt: SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch)
-
---- Verarbeite AC0030_M.jpg ---
-Bildbeschreibung: AC0030 ist ein Luftkühler. AC0030_L, AC0030_M und AC0030_S sind Röhren mit links roter und rechts blauer Seite; der linke Pfeil zeigt nach oben, der rechte Pfeil nach unten.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0080_M.jpg ---
-Bildbeschreibung: Wie AC0020: zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben. Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch)
-
---- Verarbeite AC100_1_M.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC100_1. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die mittlere Variante (M). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0110_S.jpg ---
-Bildbeschreibung: Graues Rechteck hochkant, graue Umrandung, drei graue horizontale Linien, Farbverlauf dunkel-hell-dunkel
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0060_L.jpg ---
-Bildbeschreibung: Wie AC0020: zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben. Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch)
-
---- Verarbeite AC0020_M.jpg ---
-Bildbeschreibung: zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben
-Befehl erkannt: SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch)
-
---- Verarbeite AC0070_L.jpg ---
-Bildbeschreibung: Wie AC0020: zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben. Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch)
-
---- Verarbeite AC0090_M.jpg ---
-Bildbeschreibung: Wie AC0020: zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben. Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch)
-
---- Verarbeite AC110_1_M.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC110_1. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die mittlere Variante (M). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Überspringe Bild: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-
---- Verarbeite AC0110_M.jpg ---
-Bildbeschreibung: Graues Rechteck hochkant, graue Umrandung, drei graue horizontale Linien, Farbverlauf dunkel-hell-dunkel
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0040_L.jpg ---
-Bildbeschreibung: Wie AC0020: zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben. Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch)
-
---- Verarbeite AC0080_L.jpg ---
-Bildbeschreibung: Wie AC0020: zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben. Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch)
-
---- Verarbeite AC0020_L.jpg ---
-Bildbeschreibung: zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben
-Befehl erkannt: SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch)
-
---- Verarbeite AC0100_L.jpg ---
-Bildbeschreibung: Wie AC0010: Heizelement, graues Rechteck, Plus-Minus-Zeichen oben links, horizontaler Farbverlauf dunkel–hell–dunkel sowie graue Diagonale von oben rechts nach unten links.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0110_L.jpg ---
-Bildbeschreibung: Graues Rechteck hochkant, graue Umrandung, drei graue horizontale Linien, Farbverlauf dunkel-hell-dunkel
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0070_S.jpg ---
-Bildbeschreibung: Wie AC0020: zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben. Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch)
-
---- Verarbeite AC0040_S.jpg ---
-Bildbeschreibung: Wie AC0020: zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben. Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch)
-
---- Verarbeite AC0050_S.jpg ---
-Bildbeschreibung: Wie AC0020: zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben. Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch)
-
---- Verarbeite AC0040_M.jpg ---
-Bildbeschreibung: Wie AC0020: zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben. Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch)
-
---- Verarbeite AC0023.jpg ---
-Bildbeschreibung: zwei vertikale Striche links blau, rechts rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben
-Befehl erkannt: SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch)
-
---- Verarbeite AC0080_S.jpg ---
-Bildbeschreibung: Wie AC0020: zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben. Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch)
-
---- Verarbeite AC0110.jpg ---
-Bildbeschreibung: Graues Rechteck hochkant, graue Umrandung, drei graue horizontale Linien, Farbverlauf dunkel-hell-dunkel
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0090_L.jpg ---
-Bildbeschreibung: Wie AC0020: zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben. Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch)
-
---- Verarbeite AC0020_S.jpg ---
-Bildbeschreibung: zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben
-Befehl erkannt: SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch)
-
---- Verarbeite AC0030_L.jpg ---
-Bildbeschreibung: AC0030 ist ein Luftkühler. AC0030_L, AC0030_M und AC0030_S sind Röhren mit links roter und rechts blauer Seite; der linke Pfeil zeigt nach oben, der rechte Pfeil nach unten.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
-
---- Verarbeite AC0120_M.jpg ---
-Bildbeschreibung: Wie AC0030, jedoch mit einem zusätzlichen Plus-Minus-Zeichen unmittelbar über dem Minus-Minus-Zeichen.
-Befehl erkannt: OBEN: Alias-Referenz auf AC0030, UNTEN: Parametrisch generiertes Viereck mit Andreaskreuz
-  [Iter 1/128] Epsilon=0.0500 -> Diff-Fehler: 47.27
-  [Iter 14/128] Epsilon=0.0449 -> Diff-Fehler: 46.26
-  -> Früher Abbruch: Diff-Fehler blieb 22 Iterationen innerhalb ±1e-06
--> Bester Match in Iteration 14 (Fehler auf 46.26 reduziert)
--> Konvergenzdiagnose: Plateau nach Verbesserung erreicht (lokales Optimum wahrscheinlich)
-
---- Verarbeite AC0100_M.jpg ---
-Bildbeschreibung: Wie AC0010: Heizelement, graues Rechteck, Plus-Minus-Zeichen oben links, horizontaler Farbverlauf dunkel–hell–dunkel sowie graue Diagonale von oben rechts nach unten links.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
+Namen von: Namen bis: [INFO] Verwende Bereich von 'AC0120' bis 'AC0120'.
 
 --- Verarbeite AC0120_S.jpg ---
 Bildbeschreibung: Wie AC0030, jedoch mit einem zusätzlichen Plus-Minus-Zeichen unmittelbar über dem Minus-Minus-Zeichen.
 Befehl erkannt: OBEN: Alias-Referenz auf AC0030, UNTEN: Parametrisch generiertes Viereck mit Andreaskreuz
   [Iter 1/128] Epsilon=0.0500 -> Diff-Fehler: 47.18
+  [Iter 5/128] Epsilon=0.0484 -> Diff-Fehler: 46.31
   -> Früher Abbruch: Diff-Fehler blieb 22 Iterationen innerhalb ±1e-06
--> Bester Match in Iteration 1 (Fehler auf 47.18 reduziert)
+-> Bester Match in Iteration 5 (Fehler auf 46.31 reduziert)
+-> Konvergenzdiagnose: Plateau nach Verbesserung erreicht (lokales Optimum wahrscheinlich)
+
+--- Verarbeite AC0120_L.jpg ---
+Bildbeschreibung: Wie AC0030, jedoch mit einem zusätzlichen Plus-Minus-Zeichen unmittelbar über dem Minus-Minus-Zeichen.
+Befehl erkannt: OBEN: Alias-Referenz auf AC0030, UNTEN: Parametrisch generiertes Viereck mit Andreaskreuz
+  [Iter 1/128] Epsilon=0.0500 -> Diff-Fehler: 45.64
+  [Iter 14/128] Epsilon=0.0449 -> Diff-Fehler: 44.88
+  -> Früher Abbruch: Diff-Fehler blieb 22 Iterationen innerhalb ±1e-06
+-> Bester Match in Iteration 14 (Fehler auf 44.88 reduziert)
+-> Konvergenzdiagnose: Plateau nach Verbesserung erreicht (lokales Optimum wahrscheinlich)
+
+--- Verarbeite AC0120_M.jpg ---
+Bildbeschreibung: Wie AC0030, jedoch mit einem zusätzlichen Plus-Minus-Zeichen unmittelbar über dem Minus-Minus-Zeichen.
+Befehl erkannt: OBEN: Alias-Referenz auf AC0030, UNTEN: Parametrisch generiertes Viereck mit Andreaskreuz
+  [Iter 1/128] Epsilon=0.0500 -> Diff-Fehler: 47.27
+  -> Früher Abbruch: Diff-Fehler blieb 22 Iterationen innerhalb ±1e-06
+-> Bester Match in Iteration 1 (Fehler auf 47.27 reduziert)
 -> Konvergenzdiagnose: Plateau ohne messbare Verbesserung (Parameterraum ggf. erweitern)
 
---- Verarbeite AC0050_L.jpg ---
-Bildbeschreibung: Wie AC0020: zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben. Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch)
+--- Verarbeite AC0120_M.jpg ---
+Bildbeschreibung: Wie AC0030, jedoch mit einem zusätzlichen Plus-Minus-Zeichen unmittelbar über dem Minus-Minus-Zeichen.
+Befehl erkannt: OBEN: Alias-Referenz auf AC0030, UNTEN: Parametrisch generiertes Viereck mit Andreaskreuz
+  [Iter 1/77] Epsilon=0.0500 -> Diff-Fehler: 47.27
+  -> Früher Abbruch: Diff-Fehler blieb 13 Iterationen innerhalb ±1e-06
+-> Bester Match in Iteration 1 (Fehler auf 47.27 reduziert)
+-> Konvergenzdiagnose: Plateau ohne messbare Verbesserung (Parameterraum ggf. erweitern)
+
+--- Verarbeite AC0120_S.jpg ---
+Bildbeschreibung: Wie AC0030, jedoch mit einem zusätzlichen Plus-Minus-Zeichen unmittelbar über dem Minus-Minus-Zeichen.
+Befehl erkannt: OBEN: Alias-Referenz auf AC0030, UNTEN: Parametrisch generiertes Viereck mit Andreaskreuz
+  [Iter 1/77] Epsilon=0.0500 -> Diff-Fehler: 47.18
+  -> Früher Abbruch: Diff-Fehler blieb 13 Iterationen innerhalb ±1e-06
+-> Bester Match in Iteration 1 (Fehler auf 47.18 reduziert)
+-> Konvergenzdiagnose: Plateau ohne messbare Verbesserung (Parameterraum ggf. erweitern)
 [INFO] Übersichts-Kacheln erzeugt: diff=C:\Users\marku\myCloud\imageConverter\artifacts\converted_images\reports\overview_diff_tiles.png, svg=C:\Users\marku\myCloud\imageConverter\artifacts\converted_images\reports\overview_svg_tiles.png
 
 Abgeschlossen! Ausgaben unter: C:\Users\marku\myCloud\imageConverter\artifacts\converted_images
