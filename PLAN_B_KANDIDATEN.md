@@ -2,10 +2,10 @@
 
 Ziel: maximal **5** aktive JPG-Kandidaten, die derzeit noch nicht zufriedenstellend konvertieren, aber voraussichtlich nicht "hoffnungslos komplex" sind.
 
-## Aktuelle Kandidaten (Stand: 2026-05-26, nach AC0080_L-Einzellauf)
+## Aktuelle Kandidaten (Stand: 2026-05-27, nach AC0120_L-Plan-B)
 
-1. `AC0120_L.jpg` – als nächster einfacher L-Kandidat für Plan-B-Roundtrip nachgerückt.
-2. `AC0110_L.jpg` – naheliegender weiterer L-Kandidat mit bereits vorhandenen Referenzartefakten.
+1. `AC0110_L.jpg` – naheliegender weiterer L-Kandidat mit bereits vorhandenen Referenzartefakten.
+2. `AC0100_L.jpg` – als neuer einfacher L-Kandidat aus den weiterhin auffälligen Diff-Artefakten aufgenommen.
 
 ## Pflege-Regel (fortan)
 
