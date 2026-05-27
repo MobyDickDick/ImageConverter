@@ -7,20 +7,43 @@
    id="svg1"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
-  <defs id="defs1">
-    <linearGradient id="horizontalGrey" x1="30" y1="0" x2="0" y2="0" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#b4b4b4" />
-      <stop offset="0.30453876" stop-color="#fbfbfb" />
-      <stop offset="0.36996627" stop-color="#fbfbfb" />
-      <stop offset="1" stop-color="#b4b4b4" />
+  <defs
+     id="defs1">
+    <linearGradient
+       id="verticalGrey"
+       x1="0"
+       y1="0"
+       x2="0"
+       y2="30"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(-60)">
+      <stop
+         offset="0"
+         stop-color="#b4b4b4"
+         id="stop1" />
+      <stop
+         offset="0.30453876"
+         stop-color="#fbfbfb"
+         id="stop3" />
+      <stop
+         offset="0.36996627"
+         stop-color="#fbfbfb"
+         id="stop5" />
+      <stop
+         offset="1"
+         stop-color="#b4b4b4"
+         id="stop7" />
     </linearGradient>
   </defs>
   <rect
-     x="0.5"
+     x="-59.5"
      y="0.5"
-     width="29"
-     height="59"
-     fill="url(#horizontalGrey)"
+     width="59"
+     height="29"
+     fill="url(#verticalGrey)"
      stroke="#adadad"
-     stroke-width="1" />
+     stroke-width="1"
+     id="rect7"
+     style="fill:url(#verticalGrey)"
+     transform="rotate(-90)" />
 </svg>

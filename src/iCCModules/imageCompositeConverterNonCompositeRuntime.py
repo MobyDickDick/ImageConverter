@@ -33,6 +33,51 @@ def _build_vector_placeholder_svg(width: int, height: int, *, description: str =
         '</svg>\n'
     )
 
+
+
+def _description_requests_diagonal_band(description: str) -> bool:
+    text = (description or "").lower()
+    return "diagon" in text and "links unten" in text and "rechts oben" in text
+
+
+def _build_diagonal_band_svg(width: int, height: int, *, stroke_width: float, description: str = "") -> str:
+    safe_w = max(1, int(width or 1))
+    safe_h = max(1, int(height or 1))
+    margin = 0.5
+    x1, y1 = margin, safe_h - margin
+    x2, y2 = safe_w - margin, margin
+    return (
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{safe_w}" height="{safe_h}" viewBox="0 0 {safe_w} {safe_h}">\n'
+        '  <defs>\n'
+        '    <linearGradient id="bg" x1="100%" y1="0%" x2="0%" y2="0%">\n'
+        '      <stop offset="0%" stop-color="#b4b4b4"/>\n'
+        '      <stop offset="30%" stop-color="#fbfbfb"/>\n'
+        '      <stop offset="37%" stop-color="#fbfbfb"/>\n'
+        '      <stop offset="100%" stop-color="#b4b4b4"/>\n'
+        '    </linearGradient>\n'
+        f'    <clipPath id="innerRect"><rect x="{margin}" y="{margin}" width="{safe_w-1}" height="{safe_h-1}"/></clipPath>\n'
+        '  </defs>\n'
+        f'  <rect x="{margin}" y="{margin}" width="{safe_w-1}" height="{safe_h-1}" fill="url(#bg)" stroke="#adadad" stroke-width="1"/>\n'
+        f'  <path d="M {x1} {y1} L {x2} {y2}" fill="none" stroke="#8f8f8f" stroke-width="{stroke_width:.3f}" stroke-linecap="butt" clip-path="url(#innerRect)"/>\n'
+        '</svg>\n'
+    )
+
+
+def _fit_diagonal_band_iterative(*, width: int, height: int, description: str, perc_img, render_svg_to_numpy_fn, calculate_error_fn):
+    ratios = (0.08, 0.11, 0.14, 0.17, 0.20, 0.23, 0.26)
+    scale = max(2.0, min(width, height))
+    best = None
+    for ratio in ratios:
+        stroke_w = max(1.0, scale * ratio)
+        svg = _build_diagonal_band_svg(width, height, stroke_width=stroke_w, description=description)
+        rendered = render_svg_to_numpy_fn(svg, width, height)
+        if rendered is None:
+            continue
+        err = calculate_error_fn(perc_img, rendered)
+        if best is None or err < best[0]:
+            best = (err, svg, rendered, stroke_w)
+    return best
+
 def _contains_svg_image_tag(svg_content: str) -> bool:
     lowered = svg_content.lower()
     return "<image" in lowered and ('href="data:image' in lowered or 'xlink:href="data:image' in lowered)
@@ -186,7 +231,26 @@ def runNonCompositeIterationImpl(
         generated_err = float("inf")
         generated_status = "manual_review_generated_vector_placeholder"
 
-        if stripe_strategy:
+        if _description_requests_diagonal_band(description):
+            print_fn("  -> Plan B Grundsatz: Diagonalbreite wird iterativ bestimmt (kein Fixwert).")
+            best_diagonal = _fit_diagonal_band_iterative(
+                width=width,
+                height=height,
+                description=description,
+                perc_img=perc_img,
+                render_svg_to_numpy_fn=render_svg_to_numpy_fn,
+                calculate_error_fn=calculate_error_fn,
+            )
+            if best_diagonal is not None:
+                generated_err, generated_svg_content, generated_rendered, stroke_w = best_diagonal
+                generated_status = "manual_review_iterative_diagonal_band"
+                generated_log_lines = [
+                    "status=manual_review_iterative_diagonal_band",
+                    f"iterative_stroke_width={stroke_w:.6f}",
+                ]
+            else:
+                generated_log_lines = ["status=manual_review_iterative_diagonal_band_render_failed"]
+        elif stripe_strategy:
             print_fn("  -> Plan B aktiv: nutze erkannte Gradient-Stripe-Strategie trotz Manual-Review.")
             generated_svg_content = build_gradient_stripe_svg_fn(width, height, stripe_strategy)
             strategy_stop_count = len(list(stripe_strategy.get("stops", [])))
