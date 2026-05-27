@@ -2874,3 +2874,49 @@ Jeder Tag hat genau definierte Aufgaben mit einem harten Exit-Kriterium.
 - **Fortschritt (Re-Conversion):** `AC0120_L.jpg` wurde als isolierter Einzelrun erneut konvertiert (`PYTHONPATH=. timeout 240 python3 -m src.iCCModules.imageCompositeConverterCli --input-dir artifacts/images_to_convert --output-dir artifacts/converted_images --start AC0120_L --end AC0120_L`), Exit `0`; Log: `artifacts/converted_images/reports/AC0120_L_single_2026-05-26_runKV.log`.
 - **Fortschritt (Volltest):** Das Arbeitspaket wurde mit einem vollständigen Testlauf abgeschlossen (`PYENV_VERSION=3.10.20 timeout 300 python -m pytest -q -rs`), Ergebnis `533 passed, 5 warnings`, Exit `0`; Log: `artifacts/converted_images/reports/pytest_full_2026-05-26_runKV.log`.
 - **Nächster sinnvoller Schritt:** Dasselbe Schema mit dem nächsten offenen CSV-Zielbild fortsetzen (TB-A3 → gekoppelte Plan-B-Aufgabe → Einzelrun → Volltest).
+
+---
+
+## Roadmap: Ketten-Architektur für geometrische Bildkonvertierung (PR-Plan, 2026-05-27)
+
+Ziel: Die Konvertierung soll strikt als **Kette** laufen:  
+1) Bildbeschreibung prüfen/normalisieren → 2) Geometrie-Elemente ableiten → 3) Element-für-Element optimieren → 4) Bedingungen/Policies anwenden → 5) Finalauswahl.
+
+### PR-R1 — Description Contract + Fail-Fast
+- [ ] **R1-1:** Zentrales Description-Contract-Schema einführen (`has_reference`, `has_geometry_terms`, `has_conditions`, `deficits`).
+- [ ] **R1-2:** Parser/Reflection um `contract_status` erweitern und Defizite explizit loggen.
+- [ ] **R1-3:** Bei unzureichender Beschreibung klarer Status (`insufficient_description`) statt stiller Fallback-Entscheidung.
+- [ ] **R1-TEST:** Unit-Tests für vollständige, rekursive, leere und alias-lastige Beschreibungen.
+- [ ] **R1-EXIT:** Jeder Lauf hat nachvollziehbare Beschreibungsgüte und expliziten Grund für Moduswahl.
+
+### PR-R2 — Geometry IR (Zwischenrepräsentation)
+- [ ] **R2-1:** Geometrie-IR einführen (z. B. `RectBorder`, `HorizontalGradient`, `DiagonalBand`, `PlusGlyph`, `MinusGlyph`).
+- [ ] **R2-2:** Mapping Beschreibung → IR-Reihenfolge implementieren (inkl. Constraints).
+- [ ] **R2-3:** SVG-Erzeugung aus IR zentralisieren (kein verstreutes Direkt-SVG pro Sonderpfad).
+- [ ] **R2-TEST:** Snapshot-Tests für Parser→IR und Smoke-Tests für IR→SVG.
+- [ ] **R2-EXIT:** Für AC0120-artige Fälle liegt eine explizite IR-Kette vor.
+
+### PR-R3 — Elementweiser Optimizer als Standardpfad
+- [ ] **R3-1:** Generischen sequenziellen Optimizer auf IR-Basis einführen (pro Schritt nur Verbesserung übernehmen).
+- [ ] **R3-2:** Step-Logging standardisieren (`step_index`, `element`, `best_delta`, `accepted`).
+- [ ] **R3-3:** One-shot nur noch als expliziter Notfallmodus; Standard bleibt elementweise.
+- [ ] **R3-TEST:** Deterministische Tests mit Mock-Renderer/Error-Funktion; Regressionsschutz für bestehende Helper-Tests.
+- [ ] **R3-EXIT:** „Element-für-Element zuerst“ ist technisch erzwungen und testbar.
+
+### PR-R4 — Bedingungen/Policy als getrennte Schlussphase
+- [ ] **R4-1:** Policy-Phase nach der Geometriekette formal trennen (Alias-Regeln, Sample-Vergleich, Guards).
+- [ ] **R4-2:** Klaren Entscheidungs-Log einführen (`geometry_phase_result`, `policy_phase_decision`, `override_reason`).
+- [ ] **R4-3:** Harte variantspezifische Sonderbehandlungen abbauen oder zeitlich befristen.
+- [ ] **R4-TEST:** Fälle für „Geometrie gewinnt“, „Sample gewinnt“, „Guard greift“.
+- [ ] **R4-EXIT:** Keine verdeckten Policy-Overrides mehr vor Abschluss der Geometriekette.
+
+### PR-R5 — Benennung, Telemetrie, Abnahme
+- [ ] **R5-1:** Uneindeutige Begriffe im Logging harmonisieren (z. B. klare Trennung von Fallback- und Kettenphasen).
+- [ ] **R5-2:** Qualitätsmetriken pro Phase erfassen (Step-Erfolgsrate, Override-Häufigkeit, Placeholder-Notfallrate).
+- [ ] **R5-3:** Abschlussdokument mit Vorher/Nachher-Kennzahlen und offenen Restpunkten ergänzen.
+- [ ] **R5-TEST:** Vollsuite + gezielte AC0120/AC0130/AC0030 Vergleichsläufe.
+- [ ] **R5-EXIT:** Reproduzierbare, datenbasierte Abnahme der Ketten-Architektur.
+
+### Reihenfolge und Leitplanke
+- [ ] **Reihenfolge:** R1 → R2 → R3 → R4 → R5.
+- [ ] **Leitplanke (verbindlich):** Bedingungen/Policies erst **nach** elementweiser Geometriekette anwenden.
