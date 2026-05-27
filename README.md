@@ -73,6 +73,14 @@ python -m src.weak_family_pipeline \
 
 `{variants_file}` wird dabei automatisch durch die erzeugte Top-N-Liste ersetzt.
 
+### Inkscape-SVG automatisch bereinigen
+
+```bash
+python tools/strip_inkscape_svg.py artifacts/images_to_convert/samples/AC0120_L.svg --in-place
+```
+
+Optional statt `--in-place` mit `--output <datei.svg>` in eine neue Datei schreiben.
+
 ### Annotate source images
 
 ```bash

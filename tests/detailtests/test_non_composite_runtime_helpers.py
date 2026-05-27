@@ -508,3 +508,42 @@ def test_try_load_sample_svg_prefers_reference_family_from_description(tmp_path)
     sample_path, sample_content = sample
     assert sample_path.endswith("AC0030.svg")
     assert sample_content == "<svg ref/>"
+
+
+def test_try_load_sample_svg_auto_converts_inkscape_file(tmp_path) -> None:
+    image_dir = tmp_path / "images"
+    samples_dir = image_dir / "samples"
+    samples_dir.mkdir(parents=True)
+    sample_path = samples_dir / "AC0120_L.svg"
+    sample_path.write_text(
+        '<svg xmlns="http://www.w3.org/2000/svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" inkscape:version="1.3"><inkscape:label/>\n<rect width="5" height="5"/></svg>',
+        encoding="utf-8",
+    )
+
+    sample = non_composite_runtime_helpers._try_load_sample_svg(
+        img_path=str(image_dir / "AC0120_L.jpg"),
+        base_name="AC0120_L",
+    )
+
+    assert sample is not None
+    _sample_path, sample_content = sample
+    assert "inkscape:" not in sample_content
+    persisted = sample_path.read_text(encoding="utf-8")
+    assert "inkscape:" not in persisted
+
+
+def test_try_load_sample_svg_does_not_rewrite_non_inkscape_svg(tmp_path) -> None:
+    image_dir = tmp_path / "images"
+    samples_dir = image_dir / "samples"
+    samples_dir.mkdir(parents=True)
+    sample_path = samples_dir / "AC0120_L.svg"
+    original = '<svg xmlns="http://www.w3.org/2000/svg"><rect width="5" height="5"/></svg>'
+    sample_path.write_text(original, encoding="utf-8")
+
+    sample = non_composite_runtime_helpers._try_load_sample_svg(
+        img_path=str(image_dir / "AC0120_L.jpg"),
+        base_name="AC0120_L",
+    )
+
+    assert sample is not None
+    assert sample_path.read_text(encoding="utf-8") == original

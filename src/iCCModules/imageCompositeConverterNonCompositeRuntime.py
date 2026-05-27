@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import os
 import re
+from pathlib import Path
 
 
 def _build_vector_placeholder_svg(width: int, height: int, *, description: str = "") -> str:
@@ -100,27 +101,58 @@ def _prepend_reference_candidates(candidates: list[str], reference_family: str) 
     return preferred
 
 
+def _is_inkscape_svg(svg_content: str) -> bool:
+    lowered = svg_content.lower()
+    return "inkscape:" in lowered or "sodipodi:" in lowered or "created with inkscape" in lowered
+
+
 def _sanitize_sample_svg(svg_content: str) -> str:
     # Remove editor-specific metadata that can break strict SVG parsers when
     # namespace declarations are missing in curated sample assets.
     sanitized = re.sub(r"<\/?(?:sodipodi|inkscape):[^>]*?>", "", svg_content, flags=re.IGNORECASE)
+    sanitized = re.sub(r"\sxmlns:(?:inkscape|sodipodi)=\"[^\"]*\"", "", sanitized, flags=re.IGNORECASE)
+    sanitized = re.sub(r"\sxmlns:(?:inkscape|sodipodi)='[^']*'", "", sanitized, flags=re.IGNORECASE)
     sanitized = re.sub(r"\s(?:sodipodi|inkscape):[\w.-]+=\"[^\"]*\"", "", sanitized, flags=re.IGNORECASE)
     sanitized = re.sub(r"\s(?:sodipodi|inkscape):[\w.-]+='[^']*'", "", sanitized, flags=re.IGNORECASE)
     return sanitized
 
 
 def _try_load_sample_svg(*, img_path: str, base_name: str, description: str = ""):
-    samples_dir = os.path.join(os.path.dirname(img_path), "samples")
+    local_samples_dir = os.path.join(os.path.dirname(img_path), "samples")
+    fallback_dirs: list[str] = [local_samples_dir]
+    env_dirs = os.environ.get("IMAGE_CONVERTER_SAMPLE_SVG_DIRS", "")
+    for raw in env_dirs.split(os.pathsep):
+        candidate = raw.strip()
+        if candidate:
+            fallback_dirs.append(candidate)
+    repo_default = Path(__file__).resolve().parents[2] / "artifacts" / "images_to_convert" / "samples"
+    fallback_dirs.append(str(repo_default))
+
+    # de-duplicate and keep existing dirs only
+    samples_dirs: list[str] = []
+    seen_dirs: set[str] = set()
+    for raw_dir in fallback_dirs:
+        normalized = os.path.abspath(raw_dir)
+        if normalized in seen_dirs or not os.path.isdir(normalized):
+            continue
+        seen_dirs.add(normalized)
+        samples_dirs.append(normalized)
+
     sample_candidates = _build_sample_candidates(base_name)
     reference_family = _extract_reference_family_from_description(description)
     if reference_family and reference_family != base_name.upper():
         sample_candidates = _prepend_reference_candidates(sample_candidates, reference_family)
-    for sample_name in sample_candidates:
-        sample_svg_path = os.path.join(samples_dir, f"{sample_name}.svg")
-        if not os.path.exists(sample_svg_path):
-            continue
-        with open(sample_svg_path, "r", encoding="utf-8") as handle:
-            return sample_svg_path, _sanitize_sample_svg(handle.read())
+    for samples_dir in samples_dirs:
+        for sample_name in sample_candidates:
+            sample_svg_path = os.path.join(samples_dir, f"{sample_name}.svg")
+            if not os.path.exists(sample_svg_path):
+                continue
+            with open(sample_svg_path, "r", encoding="utf-8") as handle:
+                original_svg = handle.read()
+            sanitized_svg = _sanitize_sample_svg(original_svg)
+            if _is_inkscape_svg(original_svg) and sanitized_svg != original_svg:
+                Path(sample_svg_path).write_text(sanitized_svg, encoding="utf-8")
+            return sample_svg_path, sanitized_svg
     return None
 
 
