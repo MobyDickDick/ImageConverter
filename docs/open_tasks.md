@@ -2921,3 +2921,10 @@ Ziel: Die Konvertierung soll strikt als **Kette** laufen:
 ### Reihenfolge und Leitplanke
 - [ ] **Reihenfolge:** R1 → R2 → R3 → R4 → R5.
 - [ ] **Leitplanke (verbindlich):** Bedingungen/Policies erst **nach** elementweiser Geometriekette anwenden.
+
+### Fortschritt vs. Blocker (Session 2026-05-27, PR-R1 Description Contract + Volltest Run KW)
+
+- **Fortschritt (R1-1/R1-2/R1-3):** In `imageCompositeConverterPerceptionReflection` wurde ein zentraler Description-Contract ergänzt (`has_reference`, `has_geometry_terms`, `has_conditions`, `deficits`, `status`) und in `params` als `description_contract` plus `contract_status` verdrahtet. Leere bzw. geometriearme Nicht-Referenz-Beschreibungen werden jetzt fail-fast als `mode=insufficient_description` markiert.
+- **Fortschritt (R1-TEST):** Neue Unit-Tests für vollständige Beschreibung, rekursive Alias-Vererbung, leere Beschreibung und alias-lastige Beschreibung ergänzt.
+- **Fortschritt (Volltest):** Gesamte Suite wurde vollständig ausgeführt (`PYENV_VERSION=3.10.20 timeout 300 python -m pytest -q -rs`) mit Ergebnis `547 passed, 5 warnings`, Exit `0`.
+- **Nächster sinnvoller Schritt:** PR-R2 (Geometry-IR) gemäß Roadmap starten.
