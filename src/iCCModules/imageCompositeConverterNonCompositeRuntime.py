@@ -33,6 +33,51 @@ def _build_vector_placeholder_svg(width: int, height: int, *, description: str =
         '</svg>\n'
     )
 
+
+
+def _description_requests_diagonal_band(description: str) -> bool:
+    text = (description or "").lower()
+    return "diagon" in text and "links unten" in text and "rechts oben" in text
+
+
+def _build_diagonal_band_svg(width: int, height: int, *, stroke_width: float, description: str = "") -> str:
+    safe_w = max(1, int(width or 1))
+    safe_h = max(1, int(height or 1))
+    margin = 0.5
+    x1, y1 = margin, safe_h - margin
+    x2, y2 = safe_w - margin, margin
+    return (
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{safe_w}" height="{safe_h}" viewBox="0 0 {safe_w} {safe_h}">\n'
+        '  <defs>\n'
+        '    <linearGradient id="bg" x1="100%" y1="0%" x2="0%" y2="0%">\n'
+        '      <stop offset="0%" stop-color="#b4b4b4"/>\n'
+        '      <stop offset="30%" stop-color="#fbfbfb"/>\n'
+        '      <stop offset="37%" stop-color="#fbfbfb"/>\n'
+        '      <stop offset="100%" stop-color="#b4b4b4"/>\n'
+        '    </linearGradient>\n'
+        f'    <clipPath id="innerRect"><rect x="{margin}" y="{margin}" width="{safe_w-1}" height="{safe_h-1}"/></clipPath>\n'
+        '  </defs>\n'
+        f'  <rect x="{margin}" y="{margin}" width="{safe_w-1}" height="{safe_h-1}" fill="url(#bg)" stroke="#adadad" stroke-width="1"/>\n'
+        f'  <path d="M {x1} {y1} L {x2} {y2}" fill="none" stroke="#8f8f8f" stroke-width="{stroke_width:.3f}" stroke-linecap="butt" clip-path="url(#innerRect)"/>\n'
+        '</svg>\n'
+    )
+
+
+def _fit_diagonal_band_iterative(*, width: int, height: int, description: str, perc_img, render_svg_to_numpy_fn, calculate_error_fn):
+    ratios = (0.08, 0.11, 0.14, 0.17, 0.20, 0.23, 0.26)
+    scale = max(2.0, min(width, height))
+    best = None
+    for ratio in ratios:
+        stroke_w = max(1.0, scale * ratio)
+        svg = _build_diagonal_band_svg(width, height, stroke_width=stroke_w, description=description)
+        rendered = render_svg_to_numpy_fn(svg, width, height)
+        if rendered is None:
+            continue
+        err = calculate_error_fn(perc_img, rendered)
+        if best is None or err < best[0]:
+            best = (err, svg, rendered, stroke_w)
+    return best
+
 def _contains_svg_image_tag(svg_content: str) -> bool:
     lowered = svg_content.lower()
     return "<image" in lowered and ('href="data:image' in lowered or 'xlink:href="data:image' in lowered)
@@ -181,6 +226,61 @@ def runNonCompositeIterationImpl(
     sample_svg = _try_load_sample_svg(img_path=img_path, base_name=base_name, description=description)
 
     if mode == "manual_review":
+        generated_svg_content = None
+        generated_rendered = None
+        generated_err = float("inf")
+        generated_status = "manual_review_generated_vector_placeholder"
+
+        if _description_requests_diagonal_band(description):
+            print_fn("  -> Plan B Grundsatz: Diagonalbreite wird iterativ bestimmt (kein Fixwert).")
+            best_diagonal = _fit_diagonal_band_iterative(
+                width=width,
+                height=height,
+                description=description,
+                perc_img=perc_img,
+                render_svg_to_numpy_fn=render_svg_to_numpy_fn,
+                calculate_error_fn=calculate_error_fn,
+            )
+            if best_diagonal is not None:
+                generated_err, generated_svg_content, generated_rendered, stroke_w = best_diagonal
+                generated_status = "manual_review_iterative_diagonal_band"
+                generated_log_lines = [
+                    "status=manual_review_iterative_diagonal_band",
+                    f"iterative_stroke_width={stroke_w:.6f}",
+                ]
+            else:
+                generated_log_lines = ["status=manual_review_iterative_diagonal_band_render_failed"]
+        elif stripe_strategy:
+            print_fn("  -> Plan B aktiv: nutze erkannte Gradient-Stripe-Strategie trotz Manual-Review.")
+            generated_svg_content = build_gradient_stripe_svg_fn(width, height, stripe_strategy)
+            strategy_stop_count = len(list(stripe_strategy.get("stops", [])))
+            generated_rendered = render_svg_to_numpy_fn(generated_svg_content, width, height)
+            if generated_rendered is None:
+                record_render_failure_fn(
+                    "manual_review_gradient_stripe_render_failed",
+                    svg_content=generated_svg_content,
+                    params_snapshot=params,
+                )
+            else:
+                generated_err = calculate_error_fn(perc_img, generated_rendered)
+                generated_status = "manual_review_gradient_stripe"
+                generated_log_lines = build_gradient_stripe_validation_log_lines_fn(
+                    semantic_mode_visual_override=semantic_mode_visual_override,
+                    strategy_stop_count=strategy_stop_count,
+                )
+        else:
+            generated_svg_content = _build_vector_placeholder_svg(width, height, description=description)
+            generated_rendered = render_svg_to_numpy_fn(generated_svg_content, width, height)
+            if generated_rendered is None:
+                record_render_failure_fn(
+                    "manual_review_vector_placeholder_render_failed",
+                    svg_content=generated_svg_content,
+                    params_snapshot=params,
+                )
+            else:
+                generated_err = calculate_error_fn(perc_img, generated_rendered)
+            generated_log_lines = ["status=manual_review_generated_vector_placeholder"]
+
         if sample_svg:
             sample_svg_path, sample_svg_content = sample_svg
             sample_rendered = render_svg_to_numpy_fn(sample_svg_content, width, height)
@@ -190,61 +290,33 @@ def runNonCompositeIterationImpl(
                     svg_content=sample_svg_content,
                     params_snapshot=params,
                 )
-                return None
-
-            sample_err = calculate_error_fn(perc_img, sample_rendered)
-            embedded_svg_content = render_embedded_raster_svg_fn(img_path)
-            embedded_rendered = render_svg_to_numpy_fn(embedded_svg_content, width, height)
-            if embedded_rendered is not None:
-                embedded_err = calculate_error_fn(perc_img, embedded_rendered)
-                if embedded_err + 1e-6 < sample_err:
+            else:
+                sample_err = calculate_error_fn(perc_img, sample_rendered)
+                if sample_err + 1e-6 < generated_err:
                     print_fn(
-                        "  -> Plan B verworfen: Embedded-Raster ist näher am Original "
-                        f"(err={embedded_err:.3f} < sample={sample_err:.3f})."
+                        "  -> Plan B Vergleich aktiv: verwende vorhandene Sample-SVG "
+                        f"{sample_svg_path} (sample={sample_err:.3f}, generated={generated_err:.3f})."
                     )
                     write_validation_log_fn(
                         [
-                            "status=manual_review_embedded_svg_selected",
+                            "status=manual_review_plan_b_sample_svg",
                             f"sample_svg_path={sample_svg_path}",
                             f"sample_error={sample_err:.6f}",
-                            f"embedded_error={embedded_err:.6f}",
+                            f"generated_error={generated_err:.6f}",
+                            f"generated_status={generated_status}",
                         ]
                     )
-                    write_attempt_artifacts_fn(embedded_svg_content, embedded_rendered)
-                    return base_name, description, params, 1, embedded_err
+                    write_attempt_artifacts_fn(sample_svg_content, sample_rendered)
+                    return base_name, description, params, 1, sample_err
 
-            print_fn(f"  -> Plan B aktiv: verwende vorhandene Sample-SVG {sample_svg_path}.")
-            write_validation_log_fn(
-                [
-                    "status=manual_review_plan_b_sample_svg",
-                    f"sample_svg_path={sample_svg_path}",
-                    f"sample_error={sample_err:.6f}",
-                ]
+        if generated_rendered is not None and generated_svg_content is not None:
+            print_fn(
+                "  -> Plan B Vergleich aktiv: verwende generierte Vektor-Lösung "
+                f"(status={generated_status}, err={generated_err:.3f})."
             )
-            write_attempt_artifacts_fn(sample_svg_content, sample_rendered)
-            return base_name, description, params, 1, sample_err
-
-        if stripe_strategy:
-            print_fn("  -> Plan B aktiv: nutze erkannte Gradient-Stripe-Strategie trotz Manual-Review.")
-            svg_content = build_gradient_stripe_svg_fn(width, height, stripe_strategy)
-            strategy_stop_count = len(list(stripe_strategy.get("stops", [])))
-            write_validation_log_fn(
-                build_gradient_stripe_validation_log_lines_fn(
-                    semantic_mode_visual_override=semantic_mode_visual_override,
-                    strategy_stop_count=strategy_stop_count,
-                )
-            )
-            svg_rendered = render_svg_to_numpy_fn(svg_content, width, height)
-            if svg_rendered is None:
-                record_render_failure_fn(
-                    "manual_review_gradient_stripe_render_failed",
-                    svg_content=svg_content,
-                    params_snapshot=params,
-                )
-                return None
-            svg_err = calculate_error_fn(perc_img, svg_rendered)
-            write_attempt_artifacts_fn(svg_content, svg_rendered)
-            return base_name, description, params, 1, svg_err
+            write_validation_log_fn(generated_log_lines)
+            write_attempt_artifacts_fn(generated_svg_content, generated_rendered)
+            return base_name, description, params, 1, generated_err
 
         reason = str(params.get("review_reason", "Manuelle Prüfung erforderlich.")).strip()
         print_fn(f"  -> Überspringe Bild: {reason}")
