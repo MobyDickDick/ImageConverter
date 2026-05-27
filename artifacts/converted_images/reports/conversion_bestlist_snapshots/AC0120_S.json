@@ -1,14 +1,14 @@
 {
   "base": "AC0120",
-  "best_error": 55.9125,
+  "best_error": 39.48416666666667,
   "best_iter": 1,
-  "convergence": "",
-  "error_per_pixel": 0.069890625,
+  "convergence": "plateau",
+  "error_per_pixel": 0.04935520833333333,
   "filename": "AC0120_S.jpg",
   "h": 40,
-  "mean_delta2": 13373.20703125,
+  "mean_delta2": 7852.03271484375,
   "params": {
-    "bottom_shape": null,
+    "bottom_shape": "square_cross",
     "description_fragments": [
       {
         "key": "AC0120",
@@ -19,9 +19,12 @@
     "documented_alias_refs": [
       "AC0030"
     ],
-    "elements": [],
+    "elements": [
+      "OBEN: Alias-Referenz auf AC0030",
+      "UNTEN: Parametrisch generiertes Viereck mit Andreaskreuz"
+    ],
     "label": "M",
-    "mode": "auto",
+    "mode": "composite",
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
@@ -29,10 +32,10 @@
       "description_heuristic"
     ],
     "semantic_sources": {},
-    "top_source_ref": null,
+    "top_source_ref": "AC0030",
     "variant_name": "AC0120_S"
   },
-  "std_delta2": 15522.603515625,
+  "std_delta2": 10800.5029296875,
   "variant": "AC0120_S",
   "w": 20
 }
