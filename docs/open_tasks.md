@@ -2986,3 +2986,11 @@ Ziel: Die Konvertierung soll strikt als **Kette** laufen:
 - **Fortschritt (Plan-B-Kandidat):** Die Syntheseprobe für `AC0130_M` wurde ausgeführt (`PYENV_VERSION=3.10.20 python -m tools.plan_b_synthetic_probe "Bildbeschreibung: Kreis mit horizontalem Griff links und Beschriftung rF." --variant AC0130_M --output-dir artifacts/converted_images/reports`) mit Exit `0`, Ergebnis `status=ok`; Log: `artifacts/converted_images/reports/AC0130_M_planb_synthetic_2026-05-28_runLM.log`.
 - **Fortschritt (Volltest):** Der abschließende Komplettlauf war vollständig grün (`PYENV_VERSION=3.10.20 timeout 300 python -m pytest -q -rs`) mit Exit `0`, Ergebnis `547 passed, 5 warnings`; Log: `artifacts/converted_images/reports/pytest_full_2026-05-28_runLM.log`.
 - **Nächster sinnvoller Schritt:** Wegen der neuen Gewichtung nicht erneut im T6/TB-A3-Routineschema fortfahren, sondern PR-R2 (Geometry IR) als nächstes Arbeitspaket starten; T6/TB-A3 bleiben nur Sicherungsnetz nach konkreten Ketten-Änderungen.
+
+### Fortschritt vs. Blocker (Session 2026-05-28, R5 Batch-Telemetrie Run LR)
+
+- **Fortschritt:** Der nach PR-R5 dokumentierte Anschluss wurde umgesetzt: Batchläufe schreiben nun `chain_phase_telemetry.csv` mit Geometry-/Policy-Phasen, Step-Erfolgsrate, Override-Status und Placeholder-Notfallmarkierung je Variante sowie `chain_phase_telemetry_summary.txt` mit aggregierten R5-Abnahmemetriken.
+- **Verdrahtung:** `runConversionFinalizationImpl(...)` ruft den neuen Batch-Telemetrie-Report vor `Iteration_Log.csv` und der Post-Conversion-Reportphase auf; `convertRange(...)` nutzt dafür die bestehende R5-Aggregation aus `imageCompositeConverterChainTelemetry`.
+- **Sicherung:** Detailtests liefen grün (`23 passed`, Exit `0`); Vollsuite lief grün (`PYENV_VERSION=3.10.20 timeout 300 python -m pytest -q -rs`, `561 passed, 5 warnings`, Exit `0`).
+- **Blocker:** Keine neuen Blocker. Die neuen Reports bleiben leer bis ohne Fehler lauffähige Varianten tatsächlich `params["chain_phase_telemetry"]` liefern.
+- **Nächster sinnvoller Schritt:** Auf das nächste dokumentierte Bild-/Testhygiene-Paket rotieren oder die neuen Telemetrie-Reports in eine bestehende Scorecard/Baseline-Auswertung integrieren.
