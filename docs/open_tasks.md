@@ -2920,11 +2920,11 @@ Ziel: Die Konvertierung soll strikt als **Kette** laufen:
 - [x] **R3-EXIT:** „Element-für-Element zuerst“ ist technisch erzwungen und testbar. (2026-05-28 Run LO erfüllt.)
 
 ### PR-R4 — Bedingungen/Policy als getrennte Schlussphase
-- [ ] **R4-1:** Policy-Phase nach der Geometriekette formal trennen (Alias-Regeln, Sample-Vergleich, Guards).
-- [ ] **R4-2:** Klaren Entscheidungs-Log einführen (`geometry_phase_result`, `policy_phase_decision`, `override_reason`).
-- [ ] **R4-3:** Harte variantspezifische Sonderbehandlungen abbauen oder zeitlich befristen.
-- [ ] **R4-TEST:** Fälle für „Geometrie gewinnt“, „Sample gewinnt“, „Guard greift“.
-- [ ] **R4-EXIT:** Keine verdeckten Policy-Overrides mehr vor Abschluss der Geometriekette.
+- [x] **R4-1:** Policy-Phase nach der Geometriekette formal trennen (Alias-Regeln, Sample-Vergleich, Guards). (2026-05-28 Run LP umgesetzt.)
+- [x] **R4-2:** Klaren Entscheidungs-Log einführen (`geometry_phase_result`, `policy_phase_decision`, `override_reason`). (2026-05-28 Run LP umgesetzt.)
+- [x] **R4-3:** Harte variantspezifische Sonderbehandlungen abbauen oder zeitlich befristen. (2026-05-28 Run LP: neue Schlussphase ohne variantspezifische Sonderliste eingeführt; Guards/Sample-Overrides laufen nur noch über zentrale Policy-Entscheidungen.)
+- [x] **R4-TEST:** Fälle für „Geometrie gewinnt“, „Sample gewinnt“, „Guard greift“. (2026-05-28 Run LP umgesetzt.)
+- [x] **R4-EXIT:** Keine verdeckten Policy-Overrides mehr vor Abschluss der Geometriekette. (2026-05-28 Run LP erfüllt; `geometry_phase_result` wird vor jeder Policy-Entscheidung protokolliert.)
 
 ### PR-R5 — Benennung, Telemetrie, Abnahme
 - [ ] **R5-1:** Uneindeutige Begriffe im Logging harmonisieren (z. B. klare Trennung von Fallback- und Kettenphasen).
@@ -2937,6 +2937,15 @@ Ziel: Die Konvertierung soll strikt als **Kette** laufen:
 - [ ] **Reihenfolge:** R1 → R2 → R3 → R4 → R5.
 - [ ] **Leitplanke (verbindlich):** Bedingungen/Policies erst **nach** elementweiser Geometriekette anwenden.
 
+
+
+### Fortschritt vs. Blocker (Session 2026-05-28, PR-R4 Policy-Schlussphase Run LP)
+
+- **Fortschritt (R4-1/R4-2):** Neue zentrale Policy-Schlussphase nach der Geometry-IR-Auswahl eingeführt; sie protokolliert `geometry_phase_result`, `policy_phase_decision` und `override_reason` vor finaler Render-Freigabe.
+- **Fortschritt (R4-3):** Guards, explizite Sample-Präferenz und Sample/Geometry-Fehlervergleich laufen jetzt über eine zentrale, nicht variantspezifische Policy-Entscheidung statt verdeckter Einzelpfade.
+- **Fortschritt (R4-TEST):** Detailtests decken die Entscheidungen „Geometrie gewinnt“, „Sample gewinnt“ und „Guard greift“ ab; außerdem wurden die bestehenden Geometry-IR- und Description-Contract-Tests erneut ausgeführt. Der abschließende Volltest lief grün (`PYENV_VERSION=3.10.20 timeout 300 python -m pytest -q -rs`, `557 passed, 5 warnings`, Exit `0`).
+- **Blocker:** Keine neuen Blocker; echte produktive Sample-Vergleichsmetriken bleiben ein Anschluss für PR-R5-Telemetrie/Abnahme.
+- **Nächster sinnvoller Schritt:** PR-R5 starten und die neue Policy-/Geometry-Phasentrennung in Telemetrie, Logging-Begriffen und Abnahmebericht messbar machen.
 
 ### Fortschritt vs. Blocker (Session 2026-05-28, PR-R3 elementweiser Geometry-IR-Optimizer Run LO)
 
