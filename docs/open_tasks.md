@@ -4,9 +4,9 @@ This checklist only tracks work that is actionable for the ImageConverter in the
 current repository snapshot. Older unrelated language/compiler/runtime tasks were removed so the list stays
 focused on the actual project scope.
 
-## Aufgaben-Gesamtzähler (Snapshot 2026-05-14)
+## Aufgaben-Gesamtzähler (Snapshot 2026-05-28)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `255` · Erledigt `238` · Offen `17`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `374` · Erledigt `258` · Offen `116`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -72,6 +72,7 @@ Zielbild: Nicht-binäre Vektorisierung über echte SVG-Primitive mit semantische
 - When a task is completed, change its checkbox to `- [x]` and add a short note.
 - If a task splits into multiple deliverables, keep the parent item and add nested
   subtasks below it.
+- **Aktuelle Gewichtung (2026-05-28):** Beschleunigung der Algorithmus-Umstellung hat Vorrang vor weiteren Routine-/Testhygiene-Paketen. Das nächste Arbeitspaket startet daher bei PR-R2/R3 der Ketten-Architektur statt erneut bei T6/TB-A3.
 
 ## Current status
 
@@ -79,7 +80,7 @@ Zielbild: Nicht-binäre Vektorisierung über echte SVG-Primitive mit semantische
 - The refresh run currently covers the most recently touched connector/circle families present in `artifacts/converted_images/reports` (`AC0811`, `AC0832`, `AC0835`, `AC0836`, `AC0870`, `AC0882`).
 - Continue to add new work items here before implementation starts, then mark them in-place when they are done.
 
-## Next execution tasks (neu sortiert am 2026-05-07: leicht → schwierig)
+## Next execution tasks (neu gewichtet am 2026-05-28: Ketten-Architektur vor Testhygiene)
 
 ### Begriffskonvention (ab 2026-05-16)
 
@@ -2885,12 +2886,24 @@ Jeder Tag hat genau definierte Aufgaben mit einem harten Exit-Kriterium.
 Ziel: Die Konvertierung soll strikt als **Kette** laufen:  
 1) Bildbeschreibung prüfen/normalisieren → 2) Geometrie-Elemente ableiten → 3) Element-für-Element optimieren → 4) Bedingungen/Policies anwenden → 5) Finalauswahl.
 
+### Neue Prioritätsgewichtung ab 2026-05-28
+
+| Gewicht | Arbeit | Begründung |
+| ---: | --- | --- |
+| 100 | **PR-R2 — Geometry IR** | Schnellster Hebel weg von verstreuten Heuristiken hin zu expliziten geometrischen Figurenketten. |
+| 95 | **PR-R3 — Elementweiser Optimizer** | Macht die IR-Kette ausführbar und erzwingt Einpassen pro Figur statt One-shot-Heuristik. |
+| 70 | **PR-R4 — Policy-Schlussphase** | Wichtig, aber erst nach belastbarer Geometriekette; verhindert frühe Sonderfall-Overrides. |
+| 55 | **PR-R5 — Telemetrie/Abnahme** | Abnahme folgt nach funktionsfähigem Kettenpfad. |
+| 30 | **T6/TB-A3/Testhygiene-Routine** | Nur noch als Sicherungsnetz oder bei konkretem Regressionsverdacht, nicht mehr als Standard-Next-Step. |
+
+**Verbindlicher nächster Schritt:** PR-R2 starten und direkt so zuschneiden, dass R2-Artefakte von PR-R3 als sequenzielle Einpass-Kette konsumiert werden können.
+
 ### PR-R1 — Description Contract + Fail-Fast
-- [ ] **R1-1:** Zentrales Description-Contract-Schema einführen (`has_reference`, `has_geometry_terms`, `has_conditions`, `deficits`).
-- [ ] **R1-2:** Parser/Reflection um `contract_status` erweitern und Defizite explizit loggen.
-- [ ] **R1-3:** Bei unzureichender Beschreibung klarer Status (`insufficient_description`) statt stiller Fallback-Entscheidung.
-- [ ] **R1-TEST:** Unit-Tests für vollständige, rekursive, leere und alias-lastige Beschreibungen.
-- [ ] **R1-EXIT:** Jeder Lauf hat nachvollziehbare Beschreibungsgüte und expliziten Grund für Moduswahl.
+- [x] **R1-1:** Zentrales Description-Contract-Schema einführen (`has_reference`, `has_geometry_terms`, `has_conditions`, `deficits`). (2026-05-27 Run KW umgesetzt.)
+- [x] **R1-2:** Parser/Reflection um `contract_status` erweitern und Defizite explizit loggen. (2026-05-27 Run KW umgesetzt.)
+- [x] **R1-3:** Bei unzureichender Beschreibung klarer Status (`insufficient_description`) statt stiller Fallback-Entscheidung. (2026-05-27 Run KW umgesetzt.)
+- [x] **R1-TEST:** Unit-Tests für vollständige, rekursive, leere und alias-lastige Beschreibungen. (2026-05-27 Run KW umgesetzt.)
+- [x] **R1-EXIT:** Jeder Lauf hat nachvollziehbare Beschreibungsgüte und expliziten Grund für Moduswahl. (2026-05-27 Run KW erfüllt; Volltest grün.)
 
 ### PR-R2 — Geometry IR (Zwischenrepräsentation)
 - [ ] **R2-1:** Geometrie-IR einführen (z. B. `RectBorder`, `HorizontalGradient`, `DiagonalBand`, `PlusGlyph`, `MinusGlyph`).
@@ -2937,4 +2950,4 @@ Ziel: Die Konvertierung soll strikt als **Kette** laufen:
 - **Fortschritt (gekoppelte Plan-B-Aufgabe):** Der T6-PB-Einzeltest lief grün (`PYENV_VERSION=3.10.20 python -m pytest -q tests/detailtests/test_global_search_optimization_helpers.py::test_global_search_skips_deterministic_track_after_strong_stochastic_gain`) mit Exit `0`, Ergebnis `1 passed in 0.13s`; Log: `artifacts/converted_images/reports/t6_planb_singletest_2026-05-28_runLM.log`.
 - **Fortschritt (Plan-B-Kandidat):** Die Syntheseprobe für `AC0130_M` wurde ausgeführt (`PYENV_VERSION=3.10.20 python -m tools.plan_b_synthetic_probe "Bildbeschreibung: Kreis mit horizontalem Griff links und Beschriftung rF." --variant AC0130_M --output-dir artifacts/converted_images/reports`) mit Exit `0`, Ergebnis `status=ok`; Log: `artifacts/converted_images/reports/AC0130_M_planb_synthetic_2026-05-28_runLM.log`.
 - **Fortschritt (Volltest):** Der abschließende Komplettlauf war vollständig grün (`PYENV_VERSION=3.10.20 timeout 300 python -m pytest -q -rs`) mit Exit `0`, Ergebnis `547 passed, 5 warnings`; Log: `artifacts/converted_images/reports/pytest_full_2026-05-28_runLM.log`.
-- **Nächster sinnvoller Schritt:** Das nächste Arbeitspaket im gleichen Schema fortführen (T6.x-Fokusaufgabe → genau eine gekoppelte Plan-B-Aufgabe → Plan-B-Kandidat/Syntheseprobe → Volltest).
+- **Nächster sinnvoller Schritt:** Wegen der neuen Gewichtung nicht erneut im T6/TB-A3-Routineschema fortfahren, sondern PR-R2 (Geometry IR) als nächstes Arbeitspaket starten; T6/TB-A3 bleiben nur Sicherungsnetz nach konkreten Ketten-Änderungen.
