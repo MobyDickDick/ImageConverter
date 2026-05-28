@@ -40,6 +40,40 @@ def _collect_description_fragments(raw_desc: dict[str, str], base_name: str, img
     )
 
 
+def _build_description_contract(desc_raw: str) -> dict[str, object]:
+    normalized = re.sub(r"\s+", " ", str(desc_raw or "")).strip().lower()
+    reference_tokens = ("wie ", "analog ", "referenz", "entspricht")
+    geometry_tokens = (
+        "kreis",
+        "ellipse",
+        "rechteck",
+        "viereck",
+        "dreieck",
+        "linie",
+        "band",
+        "kreuz",
+        "pfeil",
+        "symbol",
+        "gradient",
+    )
+    condition_tokens = ("wenn", "falls", "nur", "außer", "nicht", "ohne", "mit")
+    has_reference = any(token in normalized for token in reference_tokens)
+    has_geometry_terms = any(token in normalized for token in geometry_tokens)
+    has_conditions = any(token in normalized for token in condition_tokens)
+    deficits: list[str] = []
+    if not normalized:
+        deficits.append("missing_description")
+    if not has_geometry_terms and not has_reference:
+        deficits.append("missing_geometry_terms")
+    return {
+        "has_reference": has_reference,
+        "has_geometry_terms": has_geometry_terms,
+        "has_conditions": has_conditions,
+        "deficits": deficits,
+        "status": "ok" if not deficits else "insufficient_description",
+    }
+
+
 @dataclass
 class Perception:
     img_path: str
@@ -89,7 +123,18 @@ class Reflection:
             "semantic_priority_order": ["family_rule", "layout_override", "description_heuristic"],
             "semantic_conflicts": [],
             "semantic_sources": {},
+            "description_contract": _build_description_contract(desc_raw),
         }
+
+        contract_status = str(params["description_contract"].get("status", "ok"))
+        params["contract_status"] = contract_status
+        if contract_status == "insufficient_description":
+            params["mode"] = "insufficient_description"
+            params["label"] = ""
+            params["elements"].append(
+                "MANUELL: Beschreibung unzureichend (fehlende Geometriehinweise oder leerer Beschreibungstext)."
+            )
+            return desc, params
 
         semantic_symbol = symbol_upper.startswith("AC08") or symbol_upper == "AR0100"
         if semantic_symbol:
