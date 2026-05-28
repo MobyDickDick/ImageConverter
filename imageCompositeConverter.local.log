@@ -1,32 +1,20 @@
 [INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
 Namen von: Namen bis: [INFO] Verwende Bereich von 'AC0120' bis 'AC0120'.
 
+--- Verarbeite AC0120_L.jpg ---
+Bildbeschreibung: Wie AC0120-Bildbeschreibung, zusätzlich analog AC0VR2_M4.svg mit einer zusätzlichen an der vertikalen Symmetrieachse ausgerichteten Diagonale; außerdem werden oben auf der vertikalen Symmetrieachse ein "+"- und ein "-"-Zeichen eingefügt.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
+
 --- Verarbeite AC0120_M.jpg ---
-Bildbeschreibung: Wie AC0030, jedoch mit einem zusätzlichen Plus-Minus-Zeichen unmittelbar über dem Minus-Minus-Zeichen.
-Befehl erkannt: OBEN: Alias-Referenz auf AC0030, UNTEN: Parametrisch generiertes Viereck mit Andreaskreuz
-  [Iter 1/128] Epsilon=0.0500 -> Diff-Fehler: 47.27
-  [Iter 5/128] Epsilon=0.0484 -> Diff-Fehler: 46.32
-  -> Früher Abbruch: Diff-Fehler blieb 22 Iterationen innerhalb ±1e-06
--> Bester Match in Iteration 5 (Fehler auf 46.32 reduziert)
--> Konvergenzdiagnose: Plateau nach Verbesserung erreicht (lokales Optimum wahrscheinlich)
+Bildbeschreibung: Wie AC0120-Bildbeschreibung, zusätzlich analog AC0VR2_M4.svg mit einer zusätzlichen an der vertikalen Symmetrieachse ausgerichteten Diagonale; außerdem werden oben auf der vertikalen Symmetrieachse ein "+"- und ein "-"-Zeichen eingefügt.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
 
 --- Verarbeite AC0120_S.jpg ---
-Bildbeschreibung: Wie AC0030, jedoch mit einem zusätzlichen Plus-Minus-Zeichen unmittelbar über dem Minus-Minus-Zeichen.
-Befehl erkannt: OBEN: Alias-Referenz auf AC0030, UNTEN: Parametrisch generiertes Viereck mit Andreaskreuz
-  [Iter 1/128] Epsilon=0.0500 -> Diff-Fehler: 47.18
-  [Iter 14/128] Epsilon=0.0449 -> Diff-Fehler: 46.42
-  [Iter 73/128] Epsilon=0.0219 -> Diff-Fehler: 46.29
-  -> Früher Abbruch: Diff-Fehler blieb 22 Iterationen innerhalb ±1e-06
--> Bester Match in Iteration 73 (Fehler auf 46.29 reduziert)
--> Konvergenzdiagnose: Plateau nach Verbesserung erreicht (lokales Optimum wahrscheinlich)
-
---- Verarbeite AC0120_L.jpg ---
-Bildbeschreibung: Wie AC0030, jedoch mit einem zusätzlichen Plus-Minus-Zeichen unmittelbar über dem Minus-Minus-Zeichen.
-Befehl erkannt: OBEN: Alias-Referenz auf AC0030, UNTEN: Parametrisch generiertes Viereck mit Andreaskreuz
-  [Iter 1/128] Epsilon=0.0500 -> Diff-Fehler: 45.64
-  -> Früher Abbruch: Diff-Fehler blieb 22 Iterationen innerhalb ±1e-06
--> Bester Match in Iteration 1 (Fehler auf 45.64 reduziert)
--> Konvergenzdiagnose: Plateau ohne messbare Verbesserung (Parameterraum ggf. erweitern)
+Bildbeschreibung: Wie AC0120-Bildbeschreibung, zusätzlich analog AC0VR2_M4.svg mit einer zusätzlichen an der vertikalen Symmetrieachse ausgerichteten Diagonale; außerdem werden oben auf der vertikalen Symmetrieachse ein "+"- und ein "-"-Zeichen eingefügt.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).
 [INFO] Übersichts-Kacheln erzeugt: diff=C:\Users\marku\myCloud\imageConverter\artifacts\converted_images\reports\overview_diff_tiles.png, svg=C:\Users\marku\myCloud\imageConverter\artifacts\converted_images\reports\overview_svg_tiles.png
 
 Abgeschlossen! Ausgaben unter: C:\Users\marku\myCloud\imageConverter\artifacts\converted_images
