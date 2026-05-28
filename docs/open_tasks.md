@@ -2929,3 +2929,11 @@ Ziel: Die Konvertierung soll strikt als **Kette** laufen:
 - **Fortschritt (R1-TEST):** Neue Unit-Tests für vollständige Beschreibung, rekursive Alias-Vererbung, leere Beschreibung und alias-lastige Beschreibung ergänzt.
 - **Fortschritt (Volltest):** Gesamte Suite wurde vollständig ausgeführt (`PYENV_VERSION=3.10.20 timeout 300 python -m pytest -q -rs`) mit Ergebnis `547 passed, 5 warnings`, Exit `0`.
 - **Nächster sinnvoller Schritt:** PR-R2 (Geometry-IR) gemäß Roadmap starten.
+
+### Fortschritt vs. Blocker (Session 2026-05-28, T6.3 + T6-PB + AC0130_M + Volltest Run LM)
+
+- **Fortschritt (nächste dokumentierte Aufgabe):** T6.3 wurde isoliert ausgeführt (`PYENV_VERSION=3.10.20 PYTHONPATH=. timeout 180 pyenv exec python -u -m pytest tests/test_image_composite_converter.py::test_make_badge_params_keeps_ac0838_m_circle_near_full_width_for_voc_layout -q`) mit Exit `0`, Ergebnis `1 skipped, 5 warnings in 3.66s`; Log: `artifacts/converted_images/reports/T6_3_ac0838M_isolation_2026-05-28_runLM.log`.
+- **Fortschritt (gekoppelte Plan-B-Aufgabe):** Der T6-PB-Einzeltest lief grün (`PYENV_VERSION=3.10.20 python -m pytest -q tests/detailtests/test_global_search_optimization_helpers.py::test_global_search_skips_deterministic_track_after_strong_stochastic_gain`) mit Exit `0`, Ergebnis `1 passed in 0.13s`; Log: `artifacts/converted_images/reports/t6_planb_singletest_2026-05-28_runLM.log`.
+- **Fortschritt (Plan-B-Kandidat):** Die Syntheseprobe für `AC0130_M` wurde ausgeführt (`PYENV_VERSION=3.10.20 python -m tools.plan_b_synthetic_probe "Bildbeschreibung: Kreis mit horizontalem Griff links und Beschriftung rF." --variant AC0130_M --output-dir artifacts/converted_images/reports`) mit Exit `0`, Ergebnis `status=ok`; Log: `artifacts/converted_images/reports/AC0130_M_planb_synthetic_2026-05-28_runLM.log`.
+- **Fortschritt (Volltest):** Der abschließende Komplettlauf war vollständig grün (`PYENV_VERSION=3.10.20 timeout 300 python -m pytest -q -rs`) mit Exit `0`, Ergebnis `547 passed, 5 warnings`; Log: `artifacts/converted_images/reports/pytest_full_2026-05-28_runLM.log`.
+- **Nächster sinnvoller Schritt:** Das nächste Arbeitspaket im gleichen Schema fortführen (T6.x-Fokusaufgabe → genau eine gekoppelte Plan-B-Aufgabe → Plan-B-Kandidat/Syntheseprobe → Volltest).
