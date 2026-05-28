@@ -75,6 +75,9 @@ def test_write_chain_telemetry_batch_report_writes_rows_and_aggregate(tmp_path: 
     result_map = {
         "AC0130_M.jpg": {
             "variant": "AC0130_M",
+            "status": "semantic_ok",
+            "error_per_pixel": 0.012345678,
+            "mean_delta2": 12.5,
             "params": {
                 "chain_phase_telemetry": {
                     "geometry_phase": "geometry_chain.elementwise",
@@ -109,6 +112,9 @@ def test_write_chain_telemetry_batch_report_writes_rows_and_aggregate(tmp_path: 
     assert csv_rows[0] == [
         "variant",
         "filename",
+        "status",
+        "error_per_pixel",
+        "mean_delta2",
         "geometry_phase",
         "geometry_phase_mode",
         "policy_phase",
@@ -123,6 +129,9 @@ def test_write_chain_telemetry_batch_report_writes_rows_and_aggregate(tmp_path: 
     assert csv_rows[1] == [
         "AC0130_M",
         "AC0130_M.jpg",
+        "semantic_ok",
+        "0.012346",
+        "12.500000",
         "geometry_chain.elementwise",
         "elementwise_geometry_ir",
         "policy.reference_selected",
@@ -137,3 +146,7 @@ def test_write_chain_telemetry_batch_report_writes_rows_and_aggregate(tmp_path: 
     summary = Path(txt_path).read_text(encoding="utf-8")
     assert "conversion_count=1" in summary
     assert "override_frequency=1.0" in summary
+    assert "semantic_ok_count=1" in summary
+    assert "non_green_count=0" in summary
+    assert "mean_error_per_pixel=0.012346" in summary
+    assert "mean_delta2=12.500000" in summary

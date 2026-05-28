@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import csv
+import math
 import os
 
 
@@ -56,6 +57,9 @@ def _chainTelemetryRows(result_map: dict[str, dict[str, object]]) -> list[dict[s
             {
                 "filename": filename,
                 "variant": variant,
+                "status": str(result_row.get("status", "")),
+                "error_per_pixel": _finiteFloatOrNone(result_row.get("error_per_pixel")),
+                "mean_delta2": _finiteFloatOrNone(result_row.get("mean_delta2")),
                 "geometry_phase": str(telemetry.get("geometry_phase", "")),
                 "geometry_phase_mode": str(telemetry.get("geometry_phase_mode", "")),
                 "policy_phase": str(telemetry.get("policy_phase", "")),
@@ -70,6 +74,40 @@ def _chainTelemetryRows(result_map: dict[str, dict[str, object]]) -> list[dict[s
         )
     rows.sort(key=lambda row: str(row.get("variant", "")))
     return rows
+
+
+def _finiteFloatOrNone(value: object) -> float | None:
+    try:
+        number = float(value)
+    except (TypeError, ValueError):
+        return None
+    return number if math.isfinite(number) else None
+
+
+def _meanFinite(rows: list[dict[str, object]], key: str) -> float | None:
+    values = [float(row[key]) for row in rows if row.get(key) is not None]
+    if not values:
+        return None
+    return sum(values) / len(values)
+
+
+def _chainScorecardSummary(rows: list[dict[str, object]]) -> dict[str, object]:
+    semantic_ok_count = sum(1 for row in rows if str(row.get("status", "")).strip().lower() == "semantic_ok")
+    return {
+        "scorecard_row_count": len(rows),
+        "semantic_ok_count": semantic_ok_count,
+        "non_green_count": max(0, len(rows) - semantic_ok_count),
+        "mean_error_per_pixel": _meanFinite(rows, "error_per_pixel"),
+        "mean_delta2": _meanFinite(rows, "mean_delta2"),
+    }
+
+
+def _formatScorecardValue(value: object) -> str:
+    if value is None:
+        return ""
+    if isinstance(value, float):
+        return f"{value:.6f}"
+    return str(value)
 
 
 def writeChainTelemetryBatchReportImpl(
@@ -88,6 +126,9 @@ def writeChainTelemetryBatchReportImpl(
             [
                 "variant",
                 "filename",
+                "status",
+                "error_per_pixel",
+                "mean_delta2",
                 "geometry_phase",
                 "geometry_phase_mode",
                 "policy_phase",
@@ -105,6 +146,9 @@ def writeChainTelemetryBatchReportImpl(
                 [
                     row["variant"],
                     row["filename"],
+                    row["status"],
+                    _formatScorecardValue(row["error_per_pixel"]),
+                    _formatScorecardValue(row["mean_delta2"]),
                     row["geometry_phase"],
                     row["geometry_phase_mode"],
                     row["policy_phase"],
@@ -119,6 +163,7 @@ def writeChainTelemetryBatchReportImpl(
             )
 
     aggregate = aggregate_chain_telemetry_fn(rows)
+    scorecard = _chainScorecardSummary(rows)
     with open(txt_path, "w", encoding="utf-8") as f:
         f.write(f"telemetry_csv={csv_path}\n")
         for key in (
@@ -128,6 +173,14 @@ def writeChainTelemetryBatchReportImpl(
             "placeholder_emergency_rate",
         ):
             f.write(f"{key}={aggregate.get(key)}\n")
+        for key in (
+            "scorecard_row_count",
+            "semantic_ok_count",
+            "non_green_count",
+            "mean_error_per_pixel",
+            "mean_delta2",
+        ):
+            f.write(f"{key}={_formatScorecardValue(scorecard.get(key))}\n")
 
     return csv_path, txt_path, rows
 
