@@ -38,3 +38,18 @@ def test_description_contract_alias_only_marks_reference_without_geometry_terms(
     assert contract["has_reference"] is True
     assert contract["has_geometry_terms"] is False
     assert params["contract_status"] == "ok"
+
+
+def test_description_parser_attaches_geometry_ir_for_ac0120_like_description() -> None:
+    _desc, params = _parse(
+        "Wie AC0030: Kühlelement, graues Rechteck, Minus-Minus-Zeichen oben Mitte, "
+        "Farbverlauf horizontal dunkel-hell-dunkel, graue Linien in beiden Diagonalen."
+    )
+
+    assert params["contract_status"] == "ok"
+    assert [element["kind"] for element in params["geometry_ir"]][:4] == [
+        "HorizontalGradient",
+        "RectBorder",
+        "DiagonalBand",
+        "DiagonalBand",
+    ]

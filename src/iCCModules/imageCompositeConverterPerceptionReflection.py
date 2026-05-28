@@ -8,6 +8,7 @@ from dataclasses import dataclass
 from src.iCCModules import imageCompositeConverterAudit as audit_helpers
 from src.iCCModules import imageCompositeConverterDescriptions as description_mapping_helpers
 from src.iCCModules import imageCompositeConverterDualArrowBadge as dual_arrow_badge_helpers
+from src.iCCModules import imageCompositeConverterGeometryIr as geometry_ir_helpers
 from src.iCCModules import imageCompositeConverterSemantic as semantic_helpers
 
 
@@ -124,6 +125,7 @@ class Reflection:
             "semantic_conflicts": [],
             "semantic_sources": {},
             "description_contract": _build_description_contract(desc_raw),
+            "geometry_ir": geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(desc_raw),
         }
 
         contract_status = str(params["description_contract"].get("status", "ok"))
