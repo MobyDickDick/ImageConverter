@@ -6,7 +6,7 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-05-28)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `374` · Erledigt `258` · Offen `116`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `374` · Erledigt `263` · Offen `111`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -2906,11 +2906,11 @@ Ziel: Die Konvertierung soll strikt als **Kette** laufen:
 - [x] **R1-EXIT:** Jeder Lauf hat nachvollziehbare Beschreibungsgüte und expliziten Grund für Moduswahl. (2026-05-27 Run KW erfüllt; Volltest grün.)
 
 ### PR-R2 — Geometry IR (Zwischenrepräsentation)
-- [ ] **R2-1:** Geometrie-IR einführen (z. B. `RectBorder`, `HorizontalGradient`, `DiagonalBand`, `PlusGlyph`, `MinusGlyph`).
-- [ ] **R2-2:** Mapping Beschreibung → IR-Reihenfolge implementieren (inkl. Constraints).
-- [ ] **R2-3:** SVG-Erzeugung aus IR zentralisieren (kein verstreutes Direkt-SVG pro Sonderpfad).
-- [ ] **R2-TEST:** Snapshot-Tests für Parser→IR und Smoke-Tests für IR→SVG.
-- [ ] **R2-EXIT:** Für AC0120-artige Fälle liegt eine explizite IR-Kette vor.
+- [x] **R2-1:** Geometrie-IR einführen (z. B. `RectBorder`, `HorizontalGradient`, `DiagonalBand`, `PlusGlyph`, `MinusGlyph`). (2026-05-28 Run LN umgesetzt.)
+- [x] **R2-2:** Mapping Beschreibung → IR-Reihenfolge implementieren (inkl. Constraints). (2026-05-28 Run LN umgesetzt.)
+- [x] **R2-3:** SVG-Erzeugung aus IR zentralisieren (kein verstreutes Direkt-SVG pro Sonderpfad). (2026-05-28 Run LN umgesetzt.)
+- [x] **R2-TEST:** Snapshot-Tests für Parser→IR und Smoke-Tests für IR→SVG. (2026-05-28 Run LN umgesetzt.)
+- [x] **R2-EXIT:** Für AC0120-artige Fälle liegt eine explizite IR-Kette vor. (2026-05-28 Run LN erfüllt.)
 
 ### PR-R3 — Elementweiser Optimizer als Standardpfad
 - [ ] **R3-1:** Generischen sequenziellen Optimizer auf IR-Basis einführen (pro Schritt nur Verbesserung übernehmen).
@@ -2936,6 +2936,14 @@ Ziel: Die Konvertierung soll strikt als **Kette** laufen:
 ### Reihenfolge und Leitplanke
 - [ ] **Reihenfolge:** R1 → R2 → R3 → R4 → R5.
 - [ ] **Leitplanke (verbindlich):** Bedingungen/Policies erst **nach** elementweiser Geometriekette anwenden.
+
+### Fortschritt vs. Blocker (Session 2026-05-28, PR-R2 Geometry-IR Run LN)
+
+- **Fortschritt (R2-1/R2-2):** Neues Geometry-IR-Modul eingeführt; Beschreibungen werden in eine geordnete Primitive-Kette (`HorizontalGradient`, `RectBorder`, `DiagonalBand`, `PlusGlyph`, `MinusGlyph`) übersetzt und in `params["geometry_ir"]` abgelegt.
+- **Fortschritt (R2-3):** Composite-SVG-Erzeugung rendert vorhandene IR-Ketten zentral über den Geometry-IR-Renderer; der bisherige `square_cross`-Sonderpfad nutzt ebenfalls IR-Fragmente als Fallback.
+- **Fortschritt (R2-TEST):** Detailtests decken AC0130-/AC0120-artige Parser→IR-Ketten, SVG-Smoke-Rendering und Parser-Verdrahtung ab; zusätzlich lief der Volltest grün (`PYENV_VERSION=3.10.20 timeout 300 python -m pytest -q -rs`, `551 passed, 5 warnings`, Exit `0`; Logs: `artifacts/converted_images/reports/pr_r2_geometry_ir_detailtests_2026-05-28_runLN.log`, `artifacts/converted_images/reports/pytest_full_2026-05-28_runLN.log`).
+- **Blocker:** Keine neuen Blocker; die IR ist bewusst deterministisch und noch nicht optimierend.
+- **Nächster sinnvoller Schritt:** PR-R3 starten und den elementweisen Optimizer auf `geometry_ir` aufsetzen.
 
 ### Fortschritt vs. Blocker (Session 2026-05-27, PR-R1 Description Contract + Volltest Run KW)
 
