@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from src.iCCModules import imageCompositeConverterGeometryIr as geometry_ir_helpers
+from src.iCCModules import imageCompositeConverterGeometryIrOptimizer as geometry_ir_optimizer
 
 
 def _approximate_contour_points(contour, *, cv2_module, np_module, ratio: float = 0.10):
@@ -176,8 +177,8 @@ def generateCompositeSvgImpl(
                 )
             )
 
-    geometry_ir = params.get("geometry_ir")
-    if isinstance(geometry_ir, list) and geometry_ir:
+    geometry_ir = geometry_ir_optimizer.selectGeometryIrForRenderingImpl(params)
+    if geometry_ir:
         svg_elements.extend(geometry_ir_helpers.renderGeometryIrToSvgElementsImpl(w, h, geometry_ir))
     elif params["bottom_shape"] == "square_cross":
         square_cross_ir = [

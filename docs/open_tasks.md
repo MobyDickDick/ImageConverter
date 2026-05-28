@@ -2913,11 +2913,11 @@ Ziel: Die Konvertierung soll strikt als **Kette** laufen:
 - [x] **R2-EXIT:** Für AC0120-artige Fälle liegt eine explizite IR-Kette vor. (2026-05-28 Run LN erfüllt.)
 
 ### PR-R3 — Elementweiser Optimizer als Standardpfad
-- [ ] **R3-1:** Generischen sequenziellen Optimizer auf IR-Basis einführen (pro Schritt nur Verbesserung übernehmen).
-- [ ] **R3-2:** Step-Logging standardisieren (`step_index`, `element`, `best_delta`, `accepted`).
-- [ ] **R3-3:** One-shot nur noch als expliziter Notfallmodus; Standard bleibt elementweise.
-- [ ] **R3-TEST:** Deterministische Tests mit Mock-Renderer/Error-Funktion; Regressionsschutz für bestehende Helper-Tests.
-- [ ] **R3-EXIT:** „Element-für-Element zuerst“ ist technisch erzwungen und testbar.
+- [x] **R3-1:** Generischen sequenziellen Optimizer auf IR-Basis einführen (pro Schritt nur Verbesserung übernehmen). (2026-05-28 Run LO umgesetzt.)
+- [x] **R3-2:** Step-Logging standardisieren (`step_index`, `element`, `best_delta`, `accepted`). (2026-05-28 Run LO umgesetzt.)
+- [x] **R3-3:** One-shot nur noch als expliziter Notfallmodus; Standard bleibt elementweise. (2026-05-28 Run LO umgesetzt.)
+- [x] **R3-TEST:** Deterministische Tests mit Mock-Renderer/Error-Funktion; Regressionsschutz für bestehende Helper-Tests. (2026-05-28 Run LO umgesetzt.)
+- [x] **R3-EXIT:** „Element-für-Element zuerst“ ist technisch erzwungen und testbar. (2026-05-28 Run LO erfüllt.)
 
 ### PR-R4 — Bedingungen/Policy als getrennte Schlussphase
 - [ ] **R4-1:** Policy-Phase nach der Geometriekette formal trennen (Alias-Regeln, Sample-Vergleich, Guards).
@@ -2936,6 +2936,15 @@ Ziel: Die Konvertierung soll strikt als **Kette** laufen:
 ### Reihenfolge und Leitplanke
 - [ ] **Reihenfolge:** R1 → R2 → R3 → R4 → R5.
 - [ ] **Leitplanke (verbindlich):** Bedingungen/Policies erst **nach** elementweiser Geometriekette anwenden.
+
+
+### Fortschritt vs. Blocker (Session 2026-05-28, PR-R3 elementweiser Geometry-IR-Optimizer Run LO)
+
+- **Fortschritt (R3-1/R3-2):** Neuer sequenzieller Geometry-IR-Optimizer eingeführt; er bewertet jedes IR-Element gegen die aktuell akzeptierte Kette, übernimmt ausschließlich strikt verbessernde Kandidaten und protokolliert pro Schritt `step_index`, `element`, `best_delta`, `accepted`, `error_before` und `error_after`.
+- **Fortschritt (R3-3):** Composite-SVG-Rendering wählt nun zuerst `optimized_geometry_ir`, dann die normale `geometry_ir`; ein One-shot-IR wird nur bei explizitem `allow_one_shot_emergency=True` als Notfallmodus akzeptiert.
+- **Fortschritt (R3-TEST):** Deterministische Mock-Renderer/Error-Tests decken Annahme verbessernder Kandidaten, Regressionsablehnung und One-shot-Notfallgating ab; zusätzlich lief der Volltest grün (`PYENV_VERSION=3.10.20 timeout 300 python -m pytest -q -rs`, `554 passed, 5 warnings`, Exit `0`; Logs: `artifacts/converted_images/reports/pr_r3_geometry_ir_optimizer_detailtests_2026-05-28_runLO.log`, `artifacts/converted_images/reports/pytest_full_2026-05-28_runLO.log`).
+- **Blocker:** Keine neuen Blocker; der Optimizer ist aktuell bewusst renderer-agnostisch und nutzt für Produktionsläufe zunächst konservative lokale Default-Probes.
+- **Nächster sinnvoller Schritt:** PR-R4 starten und Policy-/Bedingungsentscheidungen als getrennte Schlussphase nach `geometry_phase_mode=elementwise_geometry_ir` verdrahten.
 
 ### Fortschritt vs. Blocker (Session 2026-05-28, PR-R2 Geometry-IR Run LN)
 
