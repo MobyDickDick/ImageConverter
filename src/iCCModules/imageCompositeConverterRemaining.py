@@ -6,6 +6,8 @@ from pathlib import Path
 
 from src.iCCModules import imageCompositeConverterDependencies as dependency_helpers
 from src.iCCModules import imageCompositeConverterDependencyBootstrapRuntime as dependency_bootstrap_runtime_helpers
+from src.iCCModules import imageCompositeConverterBatchReporting as batch_reporting_helpers
+from src.iCCModules import imageCompositeConverterChainTelemetry as chain_telemetry_helpers
 from src.iCCModules import imageCompositeConverterDualArrowBadge as dual_arrow_badge_helpers
 from src.iCCModules import imageCompositeConverterElementDecomposition as element_decomposition_helpers
 from src.iCCModules import imageCompositeConverterGradientStripeStrategy as gradient_stripe_strategy_helpers
@@ -563,6 +565,16 @@ def _writeStrategySwitchTemplateTransfersReport(
     strategy_rows: list[dict[str, object]],
 ) -> None:
     return batch_reporting_helpers.writeStrategySwitchTemplateTransfersImpl(reports_out_dir, strategy_rows)
+
+def _writeChainTelemetryBatchReport(
+    reports_out_dir: str,
+    result_map: dict[str, dict[str, object]],
+) -> tuple[str, str, list[dict[str, object]]]:
+    return batch_reporting_helpers.writeChainTelemetryBatchReportImpl(
+        reports_out_dir,
+        result_map,
+        chain_telemetry_helpers.aggregateChainTelemetryImpl,
+    )
 
 def _collectDescriptionFragments(raw_desc: dict[str, str], base_name: str, img_filename: str) -> list[dict[str, str]]:
     return audit_helpers.collectDescriptionFragmentsImpl(
@@ -1182,6 +1194,7 @@ def convertRange(
         write_batch_failure_summary_fn=_writeBatchFailureSummary,
         write_strategy_switch_template_transfers_report_fn=_writeStrategySwitchTemplateTransfersReport,
         write_iteration_log_and_collect_semantic_results_fn=_writeIterationLogAndCollectSemanticResults,
+        write_chain_telemetry_batch_report_fn=_writeChainTelemetryBatchReport,
         harmonize_semantic_size_variants_fn=_harmonizeSemanticSizeVariants,
         run_post_conversion_reporting_fn=_runPostConversionReporting,
     )
