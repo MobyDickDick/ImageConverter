@@ -1,0 +1,11 @@
+[INFO] Schreibe Konsolen-Output nach: /workspace/ImageConverter/imageCompositeConverter.local.log
+
+--- Verarbeite AC0223_L.jpg ---
+Bildbeschreibung: 3-Wege-Ventilkopf oben (drei spitze Ventilflügel mit gemeinsamem Verlauf von dunkelgrau nach hellgrau), darunter ein dunkelgrauer senkrechter Griff (vom Ventilzentrum nach unten) auf hellgrauem Hintergrund. Kein "M"-Text im Badge. Der Griff liegt auf einer Symmetrieachse des Kreises. 3-Wege-Ventilkopf oben (drei spitze Ventilflügel mit gemeinsamem Verlauf von dunkelgrau nach hellgrau), darunter ein dunkelgrauer senkrechter Griff (vom Ventilzentrum nach unten) auf hellgrauem Hintergrund. Kein "M"-Text im Badge. Der Griff liegt auf einer Symmetrieachse des Kreises. Unterteil: grauer Kreis mit grauem Rand (klassische Kelle) mit schmalem, zentriertem Griff; das Symbol ist horizontal symmetrisch.
+Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe, SEMANTIC: senkrechter Strich oben vom Kreis, SEMANTIC: Ventilkopf mit drei Dreiecken oberhalb des Stiels, SEMANTIC: Dreiecks-Spitzen treffen zentriert am oberen Stielende zusammen, SEMANTIC: Drei Dreiecke sind zu einem Polygon vereint
+[INFO] Übersichts-Kacheln erzeugt: diff=artifacts/converted_images/reports/reports/overview_diff_tiles.png, svg=artifacts/converted_images/reports/reports/overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: artifacts/converted_images/reports
+variant=AC0223_L
+output_svg=artifacts/converted_images/reports/converted_svgs/AC0223_L.svg
+delta2_output_vs_sample=363.945213
