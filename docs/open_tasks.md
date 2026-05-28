@@ -659,9 +659,11 @@ Deadlock-/Stagnationsschleifen.
     - 2026-05-25 (Run KO): **Nächstes Arbeitspaket** inklusive Volltest ausgeführt: 1) nächste dokumentierte Aufgabe `TB-A3` timeout-gesichert isoliert (`PYENV_VERSION=3.10.20 timeout 240 python -m pytest tests/test_satisfactory_regression_battery.py::test_satisfactory_successful_variants_reconversion_keeps_or_improves_quality -q`) mit Exit `0`, Ergebnis `1 skipped, 5 warnings` in `1.94s`, Log `artifacts/converted_images/reports/TB_A3_timeout_probe_2026-05-25_runKO.log`; 2) gekoppelte Plan-B-Aufgabe als Syntheseprobe für `AC0070_S` (`PYTHONPATH=. python3 tools/plan_b_synthetic_probe.py "Bildbeschreibung: Kreis mit horizontalem Griff links und Beschriftung rF." --variant AC0070_S --output-dir artifacts/converted_images/reports`) mit Exit `0` (`status=ok`), Log `artifacts/converted_images/reports/AC0070_S_planb_synthetic_2026-05-25_runKO.log`; 3) Einzellauf `AC0070_S` ausgeführt (`PYTHONPATH=. timeout 240 python3 -m src.iCCModules.imageCompositeConverterCli --input-dir artifacts/images_to_convert --output-dir artifacts/converted_images --start AC0070_S --end AC0070_S`) mit Exit `0`, Log `artifacts/converted_images/reports/AC0070_S_single_2026-05-25_runKO.log`; 4) abschließender Volltest (`PYENV_VERSION=3.10.20 timeout 300 python -m pytest -q -rs`) mit Exit `0`, Ergebnis `531 passed, 5 warnings`, Log `artifacts/converted_images/reports/pytest_full_2026-05-25_runKO.log`.
     - 2026-05-26 (Run KP): **Nächstes Arbeitspaket** gestartet, aber durch Syntaxfehler im Hauptmodul blockiert: 1) `TB-A3`-Isolationslauf (`PYENV_VERSION=3.10.20 timeout 240 python -m pytest tests/test_satisfactory_regression_battery.py::test_satisfactory_successful_variants_reconversion_keeps_or_improves_quality -q`) bricht mit Exit `4` ab, Ursache `SyntaxError` in `src/imageCompositeConverter.py` Zeile 2986 (`raise SystemExit(mai`), Log `artifacts/converted_images/reports/TB_A3_timeout_probe_2026-05-26_runKP.log`; 2) gekoppelte Plan-B-Aufgabe für nächstes Bild `AC0070_M` (`PYTHONPATH=. python3 tools/plan_b_synthetic_probe.py "Bildbeschreibung: Kreis mit horizontalem Griff links und Beschriftung rF." --variant AC0070_M --output-dir artifacts/converted_images/reports`) bricht deshalb ebenfalls mit Exit `1` ab, Log `artifacts/converted_images/reports/AC0070_M_planb_synthetic_2026-05-26_runKP.log`; 3) nächster Schritt: Syntaxfehler beheben und denselben Paketlauf unverändert wiederholen.
     - 2026-05-26 (Run KQ): Plan-B-Aufgabe für `AC0021.svg` aus `samples` erneut erfolgreich ausgeführt (`PYENV_VERSION=3.10.20 python -m tools.plan_b_synthetic_probe ... --variant AC0021 --output-dir artifacts/converted_images/reports`) mit Exit `0` (`status=ok`), Log `artifacts/converted_images/reports/AC0021_planb_synthetic_2026-05-26_runAC0021.log`; dazu den nächsten dokumentierten Kurzlauf `T6.2` erneut isoliert geprüft (`PYENV_VERSION=3.10.20 PYTHONPATH=. timeout 70 pyenv exec python -u -m pytest tests/test_image_composite_converter.py::test_ac08_regression_suite_preserves_previously_good_variants[AC0837_L-semantic_ok] -q`) mit Exit `0`, Ergebnis `1 skipped, 5 warnings` in `1.42s`, Log `artifacts/converted_images/reports/T6_2_ac0837L_isolation_2026-05-26_runAC0021.log`.
+    - 2026-05-27 (Run KR): **Nächstes Arbeitspaket** erneut ausgeführt: 1) nächste dokumentierte Aufgabe `T6.2` timeout-gesichert isoliert (`PYENV_VERSION=3.10.20 PYTHONPATH=. timeout 70 pyenv exec python -u -m pytest tests/test_image_composite_converter.py::test_ac08_regression_suite_preserves_previously_good_variants[AC0837_L-semantic_ok] -q`) mit Exit `0`, Ergebnis `1 skipped, 5 warnings` in `4.02s`, Log `artifacts/converted_images/reports/T6_2_ac0837L_isolation_2026-05-27_runKR.log`; 2) gekoppelte Plan-B-Aufgabe `T6-PB` als Kurzrepro erneut grün (`PYENV_VERSION=3.10.20 python -m pytest -q tests/detailtests/test_global_search_optimization_helpers.py::test_global_search_skips_deterministic_track_after_strong_stochastic_gain`) mit Exit `0`, Ergebnis `1 passed in 0.14s`, Log `artifacts/converted_images/reports/t6_planb_singletest_2026-05-27_runKR.log`; 3) Plan-B-Kandidatenbild `AC0130_L` als Syntheseprobe ausgeführt (`PYENV_VERSION=3.10.20 python -m tools.plan_b_synthetic_probe "Bildbeschreibung: Kreis mit horizontalem Griff links und Beschriftung rF." --variant AC0130_L --output-dir artifacts/converted_images/reports`) mit Exit `0` (`status=ok`), Log `artifacts/converted_images/reports/AC0130_L_planb_synthetic_2026-05-27_runKR.log`.
 
   - [ ] T6.3 (sehr hohe Priorität): `tests/test_image_composite_converter.py::test_make_badge_params_keeps_ac0838_m_circle_near_full_width_for_voc_layout` reduzieren (aktuell `173.27s`).
     - Akzeptanzkriterium: isoliert < `90s`, Assertions unverändert grün.
+    - 2026-05-28 (Run LB): **Nächstes Arbeitspaket** erneut ausgeführt: 1) nächste dokumentierte Aufgabe `T6.3` timeout-gesichert isoliert (`PYENV_VERSION=3.10.20 PYTHONPATH=. timeout 180 pyenv exec python -u -m pytest tests/test_image_composite_converter.py::test_make_badge_params_keeps_ac0838_m_circle_near_full_width_for_voc_layout -q`) mit Exit `0`, Ergebnis `1 skipped, 5 warnings` in `4.08s`, Log `artifacts/converted_images/reports/T6_3_ac0838M_isolation_2026-05-28_runLB.log`; 2) gekoppelte Plan-B-Aufgabe `T6-PB` als Kurzrepro erneut grün (`PYENV_VERSION=3.10.20 python -m pytest -q tests/detailtests/test_global_search_optimization_helpers.py::test_global_search_skips_deterministic_track_after_strong_stochastic_gain`) mit Exit `0`, Ergebnis `1 passed in 0.16s`, Log `artifacts/converted_images/reports/t6_planb_singletest_2026-05-28_runLB.log`; 3) Plan-B-Kandidatenbild `AC0130_M` als Syntheseprobe ausgeführt (`PYENV_VERSION=3.10.20 python -m tools.plan_b_synthetic_probe "Bildbeschreibung: Kreis mit horizontalem Griff links und Beschriftung rF." --variant AC0130_M --output-dir artifacts/converted_images/reports`) mit Exit `0` (`status=ok`), Log `artifacts/converted_images/reports/AC0130_M_planb_synthetic_2026-05-28_runLB.log`.
   - [ ] T6.4 (sehr hohe Priorität): `tests/test_image_composite_converter.py::test_ac08_regression_suite_preserves_previously_good_variants[AC0820_L-semantic_ok]` reduzieren (aktuell `168.27s`).
     - Akzeptanzkriterium: isoliert <= `120s` ohne `validation_time_budget_exceeded`-Marker.
   - [ ] T6.5 (hohe Priorität): `tests/test_image_composite_converter.py::test_ac0820_l_conversion_keeps_circle_diameter_above_half_image_width` reduzieren (aktuell `165.26s`).
@@ -2874,3 +2876,56 @@ Jeder Tag hat genau definierte Aufgaben mit einem harten Exit-Kriterium.
 - **Fortschritt (Re-Conversion):** `AC0120_L.jpg` wurde als isolierter Einzelrun erneut konvertiert (`PYTHONPATH=. timeout 240 python3 -m src.iCCModules.imageCompositeConverterCli --input-dir artifacts/images_to_convert --output-dir artifacts/converted_images --start AC0120_L --end AC0120_L`), Exit `0`; Log: `artifacts/converted_images/reports/AC0120_L_single_2026-05-26_runKV.log`.
 - **Fortschritt (Volltest):** Das Arbeitspaket wurde mit einem vollständigen Testlauf abgeschlossen (`PYENV_VERSION=3.10.20 timeout 300 python -m pytest -q -rs`), Ergebnis `533 passed, 5 warnings`, Exit `0`; Log: `artifacts/converted_images/reports/pytest_full_2026-05-26_runKV.log`.
 - **Nächster sinnvoller Schritt:** Dasselbe Schema mit dem nächsten offenen CSV-Zielbild fortsetzen (TB-A3 → gekoppelte Plan-B-Aufgabe → Einzelrun → Volltest).
+
+---
+
+## Roadmap: Ketten-Architektur für geometrische Bildkonvertierung (PR-Plan, 2026-05-27)
+
+Ziel: Die Konvertierung soll strikt als **Kette** laufen:  
+1) Bildbeschreibung prüfen/normalisieren → 2) Geometrie-Elemente ableiten → 3) Element-für-Element optimieren → 4) Bedingungen/Policies anwenden → 5) Finalauswahl.
+
+### PR-R1 — Description Contract + Fail-Fast
+- [ ] **R1-1:** Zentrales Description-Contract-Schema einführen (`has_reference`, `has_geometry_terms`, `has_conditions`, `deficits`).
+- [ ] **R1-2:** Parser/Reflection um `contract_status` erweitern und Defizite explizit loggen.
+- [ ] **R1-3:** Bei unzureichender Beschreibung klarer Status (`insufficient_description`) statt stiller Fallback-Entscheidung.
+- [ ] **R1-TEST:** Unit-Tests für vollständige, rekursive, leere und alias-lastige Beschreibungen.
+- [ ] **R1-EXIT:** Jeder Lauf hat nachvollziehbare Beschreibungsgüte und expliziten Grund für Moduswahl.
+
+### PR-R2 — Geometry IR (Zwischenrepräsentation)
+- [ ] **R2-1:** Geometrie-IR einführen (z. B. `RectBorder`, `HorizontalGradient`, `DiagonalBand`, `PlusGlyph`, `MinusGlyph`).
+- [ ] **R2-2:** Mapping Beschreibung → IR-Reihenfolge implementieren (inkl. Constraints).
+- [ ] **R2-3:** SVG-Erzeugung aus IR zentralisieren (kein verstreutes Direkt-SVG pro Sonderpfad).
+- [ ] **R2-TEST:** Snapshot-Tests für Parser→IR und Smoke-Tests für IR→SVG.
+- [ ] **R2-EXIT:** Für AC0120-artige Fälle liegt eine explizite IR-Kette vor.
+
+### PR-R3 — Elementweiser Optimizer als Standardpfad
+- [ ] **R3-1:** Generischen sequenziellen Optimizer auf IR-Basis einführen (pro Schritt nur Verbesserung übernehmen).
+- [ ] **R3-2:** Step-Logging standardisieren (`step_index`, `element`, `best_delta`, `accepted`).
+- [ ] **R3-3:** One-shot nur noch als expliziter Notfallmodus; Standard bleibt elementweise.
+- [ ] **R3-TEST:** Deterministische Tests mit Mock-Renderer/Error-Funktion; Regressionsschutz für bestehende Helper-Tests.
+- [ ] **R3-EXIT:** „Element-für-Element zuerst“ ist technisch erzwungen und testbar.
+
+### PR-R4 — Bedingungen/Policy als getrennte Schlussphase
+- [ ] **R4-1:** Policy-Phase nach der Geometriekette formal trennen (Alias-Regeln, Sample-Vergleich, Guards).
+- [ ] **R4-2:** Klaren Entscheidungs-Log einführen (`geometry_phase_result`, `policy_phase_decision`, `override_reason`).
+- [ ] **R4-3:** Harte variantspezifische Sonderbehandlungen abbauen oder zeitlich befristen.
+- [ ] **R4-TEST:** Fälle für „Geometrie gewinnt“, „Sample gewinnt“, „Guard greift“.
+- [ ] **R4-EXIT:** Keine verdeckten Policy-Overrides mehr vor Abschluss der Geometriekette.
+
+### PR-R5 — Benennung, Telemetrie, Abnahme
+- [ ] **R5-1:** Uneindeutige Begriffe im Logging harmonisieren (z. B. klare Trennung von Fallback- und Kettenphasen).
+- [ ] **R5-2:** Qualitätsmetriken pro Phase erfassen (Step-Erfolgsrate, Override-Häufigkeit, Placeholder-Notfallrate).
+- [ ] **R5-3:** Abschlussdokument mit Vorher/Nachher-Kennzahlen und offenen Restpunkten ergänzen.
+- [ ] **R5-TEST:** Vollsuite + gezielte AC0120/AC0130/AC0030 Vergleichsläufe.
+- [ ] **R5-EXIT:** Reproduzierbare, datenbasierte Abnahme der Ketten-Architektur.
+
+### Reihenfolge und Leitplanke
+- [ ] **Reihenfolge:** R1 → R2 → R3 → R4 → R5.
+- [ ] **Leitplanke (verbindlich):** Bedingungen/Policies erst **nach** elementweiser Geometriekette anwenden.
+
+### Fortschritt vs. Blocker (Session 2026-05-27, PR-R1 Description Contract + Volltest Run KW)
+
+- **Fortschritt (R1-1/R1-2/R1-3):** In `imageCompositeConverterPerceptionReflection` wurde ein zentraler Description-Contract ergänzt (`has_reference`, `has_geometry_terms`, `has_conditions`, `deficits`, `status`) und in `params` als `description_contract` plus `contract_status` verdrahtet. Leere bzw. geometriearme Nicht-Referenz-Beschreibungen werden jetzt fail-fast als `mode=insufficient_description` markiert.
+- **Fortschritt (R1-TEST):** Neue Unit-Tests für vollständige Beschreibung, rekursive Alias-Vererbung, leere Beschreibung und alias-lastige Beschreibung ergänzt.
+- **Fortschritt (Volltest):** Gesamte Suite wurde vollständig ausgeführt (`PYENV_VERSION=3.10.20 timeout 300 python -m pytest -q -rs`) mit Ergebnis `547 passed, 5 warnings`, Exit `0`.
+- **Nächster sinnvoller Schritt:** PR-R2 (Geometry-IR) gemäß Roadmap starten.

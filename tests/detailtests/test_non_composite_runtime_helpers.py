@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import numpy as np
+
 from src.iCCModules import imageCompositeConverterNonCompositeRuntime as non_composite_runtime_helpers
 
 
@@ -21,8 +23,43 @@ def test_run_non_composite_iteration_impl_manual_review_plan_b_uses_sample_svg(t
         height=64,
         base_name="AC0VR2_M",
         description="desc",
-        perc_img="target",
+        perc_img=np.ones((64, 64, 3), dtype=np.uint8) * 180,
         img_path=str(image_dir / "AC0VR2_M.jpg"),
+        print_fn=prints.append,
+        render_embedded_raster_svg_fn=lambda _path: "<svg />",
+        build_gradient_stripe_svg_fn=lambda *_args, **_kwargs: "<svg />",
+        build_gradient_stripe_validation_log_lines_fn=lambda **_kwargs: ["status=non_composite_gradient_stripe"],
+        write_validation_log_fn=logs.append,
+        render_svg_to_numpy_fn=lambda content, *_args, **_kwargs: "sample_rendered" if "<circle" in content else "generated_rendered",
+        record_render_failure_fn=lambda *args, **kwargs: None,
+        write_attempt_artifacts_fn=lambda svg, rendered: artifacts.append((svg, rendered)),
+        calculate_error_fn=lambda _target, rendered: 0.5 if rendered == "sample_rendered" else 0.9,
+    )
+
+    assert result == ("AC0VR2_M", "desc", {"mode": "manual_review", "review_reason": "Bitte prüfen"}, 1, 0.5)
+    assert logs[0][0] == "status=manual_review_plan_b_sample_svg"
+    assert prints and "Plan B aktiv" in prints[0]
+    assert artifacts == [("<svg><circle r='1'/></svg>", "sample_rendered")]
+
+
+
+
+def test_run_non_composite_iteration_impl_manual_review_uses_iterative_symbol_fit() -> None:
+    logs: list[list[str]] = []
+    prints: list[str] = []
+    artifacts: list[tuple[str, object]] = []
+
+    result = non_composite_runtime_helpers.runNonCompositeIterationImpl(
+        mode="manual_review",
+        params={"mode": "manual_review", "review_reason": "Bitte prüfen"},
+        stripe_strategy=None,
+        semantic_mode_visual_override=False,
+        width=64,
+        height=64,
+        base_name="AC0120_L",
+        description="desc",
+        perc_img=np.ones((64, 64, 3), dtype=np.uint8) * 180,
+        img_path="input.jpg",
         print_fn=prints.append,
         render_embedded_raster_svg_fn=lambda _path: "<svg />",
         build_gradient_stripe_svg_fn=lambda *_args, **_kwargs: "<svg />",
@@ -31,15 +68,14 @@ def test_run_non_composite_iteration_impl_manual_review_plan_b_uses_sample_svg(t
         render_svg_to_numpy_fn=lambda *_args, **_kwargs: "rendered",
         record_render_failure_fn=lambda *args, **kwargs: None,
         write_attempt_artifacts_fn=lambda svg, rendered: artifacts.append((svg, rendered)),
-        calculate_error_fn=lambda target, rendered: 0.5 if (target, rendered) == ("target", "rendered") else 99.0,
+        calculate_error_fn=lambda _target, _rendered: 0.4,
     )
 
-    assert result == ("AC0VR2_M", "desc", {"mode": "manual_review", "review_reason": "Bitte prüfen"}, 1, 0.5)
-    assert logs[0][0] == "status=manual_review_plan_b_sample_svg"
-    assert prints and "Plan B aktiv" in prints[0]
-    assert artifacts == [("<svg><circle r='1'/></svg>", "rendered")]
-
-
+    assert result == ("AC0120_L", "desc", {"mode": "manual_review", "review_reason": "Bitte prüfen"}, 1, 0.4)
+    assert logs and logs[0][0] == "status=manual_review_elementwise_symbol_fit"
+    assert any("elementweise iterative Annäherung" in msg for msg in prints)
+    assert any(line.startswith("step_border_thickness=") for line in logs[0])
+    assert artifacts and "<svg" in artifacts[0][0]
 def test_run_non_composite_iteration_impl_manual_review_writes_skip_log() -> None:
     logs: list[list[str]] = []
     prints: list[str] = []
@@ -60,7 +96,7 @@ def test_run_non_composite_iteration_impl_manual_review_writes_skip_log() -> Non
         build_gradient_stripe_svg_fn=lambda *_args, **_kwargs: "<svg />",
         build_gradient_stripe_validation_log_lines_fn=lambda **_kwargs: ["status=non_composite_gradient_stripe"],
         write_validation_log_fn=logs.append,
-        render_svg_to_numpy_fn=lambda *_args, **_kwargs: object(),
+        render_svg_to_numpy_fn=lambda *_args, **_kwargs: None,
         record_render_failure_fn=lambda *args, **kwargs: None,
         write_attempt_artifacts_fn=lambda *_args, **_kwargs: None,
         calculate_error_fn=lambda *_args, **_kwargs: 0.0,
@@ -68,7 +104,7 @@ def test_run_non_composite_iteration_impl_manual_review_writes_skip_log() -> Non
 
     assert result is None
     assert logs == [["status=skipped_manual_review", "manual_review_reason=Bitte prüfen"]]
-    assert prints == ["  -> Überspringe Bild: Bitte prüfen"]
+    assert prints and prints[-1] == "  -> Überspringe Bild: Bitte prüfen"
 
 
 def test_run_non_composite_iteration_impl_manual_review_uses_gradient_stripe_plan_b() -> None:
@@ -456,6 +492,48 @@ def test_run_non_composite_iteration_impl_rejects_sample_without_sufficient_gain
     image_dir = tmp_path / "images"
     samples_dir = image_dir / "samples"
     samples_dir.mkdir(parents=True)
+    (samples_dir / "AC0130_L.svg").write_text("<svg sample/>", encoding="utf-8")
+
+    result = non_composite_runtime_helpers.runNonCompositeIterationImpl(
+        mode="non_composite",
+        params={"mode": "non_composite"},
+        stripe_strategy=None,
+        semantic_mode_visual_override=False,
+        width=64,
+        height=64,
+        base_name="AC0130_L",
+        description="desc",
+        perc_img="target",
+        img_path=str(image_dir / "AC0130_L.jpg"),
+        print_fn=lambda *_args, **_kwargs: None,
+        render_embedded_raster_svg_fn=lambda _path: "<svg baseline/>",
+        build_gradient_stripe_svg_fn=lambda *_args, **_kwargs: "<svg gradient/>",
+        build_gradient_stripe_validation_log_lines_fn=lambda **_kwargs: ["status=non_composite_gradient_stripe"],
+        write_validation_log_fn=logs.append,
+        render_svg_to_numpy_fn=lambda content, *_args, **_kwargs: "sample_rendered" if "sample" in content else "baseline_rendered",
+        record_render_failure_fn=lambda *args, **kwargs: None,
+        write_attempt_artifacts_fn=lambda svg, rendered: artifacts.append((svg, rendered)),
+        calculate_error_fn=lambda _target, rendered: 160.0 if rendered == "sample_rendered" else 188.0,
+    )
+
+    assert result == ("AC0130_L", "desc", {"mode": "non_composite"}, 1, 188.0)
+    assert not any("status=non_composite_plan_b_sample_svg_selected" in line for row in logs for line in row)
+    assert artifacts and artifacts[0][1] == "baseline_rendered"
+
+def test_extract_reference_family_from_description() -> None:
+    ref = non_composite_runtime_helpers._extract_reference_family_from_description(
+        "Wie AC0030, jedoch mit einem zusätzlichen Zeichen."
+    )
+    assert ref == "AC0030"
+
+
+def test_run_non_composite_iteration_impl_does_not_force_sample_for_known_problem_variant(tmp_path) -> None:
+    logs: list[list[str]] = []
+    prints: list[str] = []
+    artifacts: list[tuple[str, object]] = []
+    image_dir = tmp_path / "images"
+    samples_dir = image_dir / "samples"
+    samples_dir.mkdir(parents=True)
     (samples_dir / "AC0120_L.svg").write_text("<svg sample/>", encoding="utf-8")
 
     result = non_composite_runtime_helpers.runNonCompositeIterationImpl(
@@ -469,7 +547,7 @@ def test_run_non_composite_iteration_impl_rejects_sample_without_sufficient_gain
         description="desc",
         perc_img="target",
         img_path=str(image_dir / "AC0120_L.jpg"),
-        print_fn=lambda *_args, **_kwargs: None,
+        print_fn=prints.append,
         render_embedded_raster_svg_fn=lambda _path: "<svg baseline/>",
         build_gradient_stripe_svg_fn=lambda *_args, **_kwargs: "<svg gradient/>",
         build_gradient_stripe_validation_log_lines_fn=lambda **_kwargs: ["status=non_composite_gradient_stripe"],
@@ -477,18 +555,12 @@ def test_run_non_composite_iteration_impl_rejects_sample_without_sufficient_gain
         render_svg_to_numpy_fn=lambda content, *_args, **_kwargs: "sample_rendered" if "sample" in content else "baseline_rendered",
         record_render_failure_fn=lambda *args, **kwargs: None,
         write_attempt_artifacts_fn=lambda svg, rendered: artifacts.append((svg, rendered)),
-        calculate_error_fn=lambda _target, rendered: 160.0 if rendered == "sample_rendered" else 188.0,
+        calculate_error_fn=lambda _target, rendered: 200.0 if rendered == "sample_rendered" else 188.0,
     )
 
     assert result == ("AC0120_L", "desc", {"mode": "non_composite"}, 1, 188.0)
     assert not any("status=non_composite_plan_b_sample_svg_selected" in line for row in logs for line in row)
     assert artifacts and artifacts[0][1] == "baseline_rendered"
-
-def test_extract_reference_family_from_description() -> None:
-    ref = non_composite_runtime_helpers._extract_reference_family_from_description(
-        "Wie AC0030, jedoch mit einem zusätzlichen Zeichen."
-    )
-    assert ref == "AC0030"
 
 
 def test_try_load_sample_svg_prefers_reference_family_from_description(tmp_path) -> None:
