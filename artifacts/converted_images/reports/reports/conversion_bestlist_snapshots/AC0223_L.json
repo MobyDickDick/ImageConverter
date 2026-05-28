@@ -1,0 +1,64 @@
+{
+  "base": "AC0223",
+  "best_error": 13.010666666666667,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.0034695111111111114,
+  "filename": "AC0223_L.jpg",
+  "h": 75,
+  "mean_delta2": 2930.790283203125,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": false,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "AC0223",
+        "source": "base_name",
+        "text": "3-Wege-Ventilkopf oben (drei spitze Ventilflügel mit gemeinsamem Verlauf von dunkelgrau nach hellgrau), darunter ein dunkelgrauer senkrechter Griff (vom Ventilzentrum nach unten) auf hellgrauem Hintergrund. Kein \"M\"-Text im Badge. Der Griff liegt auf einer Symmetrieachse des Kreises."
+      },
+      {
+        "key": "AC0223_L",
+        "source": "variant_name",
+        "text": "3-Wege-Ventilkopf oben (drei spitze Ventilflügel mit gemeinsamem Verlauf von dunkelgrau nach hellgrau), darunter ein dunkelgrauer senkrechter Griff (vom Ventilzentrum nach unten) auf hellgrauem Hintergrund. Kein \"M\"-Text im Badge. Der Griff liegt auf einer Symmetrieachse des Kreises. Unterteil: grauer Kreis mit grauem Rand (klassische Kelle) mit schmalem, zentriertem Griff; das Symbol ist horizontal symmetrisch."
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [
+      "SEMANTIC: Kreis ohne Buchstabe",
+      "SEMANTIC: senkrechter Strich oben vom Kreis",
+      "SEMANTIC: Ventilkopf mit drei Dreiecken oberhalb des Stiels",
+      "SEMANTIC: Dreiecks-Spitzen treffen zentriert am oberen Stielende zusammen",
+      "SEMANTIC: Drei Dreiecke sind zu einem Polygon vereint"
+    ],
+    "label": "",
+    "mode": "semantic_badge",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {
+      "description_heuristic": [],
+      "family_rule": [
+        "SEMANTIC: Kreis ohne Buchstabe",
+        "SEMANTIC: senkrechter Strich oben vom Kreis",
+        "SEMANTIC: Ventilkopf mit drei Dreiecken oberhalb des Stiels",
+        "SEMANTIC: Dreiecks-Spitzen treffen zentriert am oberen Stielende zusammen",
+        "SEMANTIC: Drei Dreiecke sind zu einem Polygon vereint"
+      ]
+    },
+    "top_source_ref": null,
+    "variant_name": "AC0223_L"
+  },
+  "std_delta2": 9873.013671875,
+  "variant": "AC0223_L",
+  "w": 50
+}
