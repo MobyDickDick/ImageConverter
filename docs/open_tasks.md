@@ -2987,6 +2987,13 @@ Ziel: Die Konvertierung soll strikt als **Kette** laufen:
 - **Fortschritt (Volltest):** Der abschließende Komplettlauf war vollständig grün (`PYENV_VERSION=3.10.20 timeout 300 python -m pytest -q -rs`) mit Exit `0`, Ergebnis `547 passed, 5 warnings`; Log: `artifacts/converted_images/reports/pytest_full_2026-05-28_runLM.log`.
 - **Nächster sinnvoller Schritt:** Wegen der neuen Gewichtung nicht erneut im T6/TB-A3-Routineschema fortfahren, sondern PR-R2 (Geometry IR) als nächstes Arbeitspaket starten; T6/TB-A3 bleiben nur Sicherungsnetz nach konkreten Ketten-Änderungen.
 
+### Fortschritt vs. Blocker (Session 2026-05-28, R5 Scorecard-Telemetrie Run LS)
+
+- **Fortschritt:** Der nach Run LR dokumentierte Anschluss wurde umgesetzt: `chain_phase_telemetry.csv` führt nun Scorecard-/Baseline-Felder (`status`, `error_per_pixel`, `mean_delta2`) direkt neben den R5-Phasenfeldern; `chain_phase_telemetry_summary.txt` ergänzt `semantic_ok_count`, `non_green_count`, `mean_error_per_pixel` und `mean_delta2`.
+- **Sicherung:** Detailtests liefen grün (`PYENV_VERSION=3.10.20 python -m pytest -q tests/detailtests/test_batch_reporting_helpers.py tests/detailtests/test_chain_telemetry_helpers.py tests/detailtests/test_conversion_finalization_helpers.py`, `23 passed`, Exit `0`); Vollsuite lief grün (`PYENV_VERSION=3.10.20 timeout 300 python -m pytest -q -rs`, `561 passed, 5 warnings`, Exit `0`).
+- **Blocker:** Keine neuen Blocker; Scorecard-Werte bleiben leer, wenn ein Lauf keine endlichen Qualitätsmetriken im `result_map` liefert.
+- **Nächster sinnvoller Schritt:** Wieder auf das nächste dokumentierte Bild-/Testhygiene-Paket rotieren oder aus den neuen Scorecard-Telemetrie-Kennzahlen eine Drift-Grenze für künftige Batchläufe ableiten.
+
 ### Fortschritt vs. Blocker (Session 2026-05-28, R5 Batch-Telemetrie Run LR)
 
 - **Fortschritt:** Der nach PR-R5 dokumentierte Anschluss wurde umgesetzt: Batchläufe schreiben nun `chain_phase_telemetry.csv` mit Geometry-/Policy-Phasen, Step-Erfolgsrate, Override-Status und Placeholder-Notfallmarkierung je Variante sowie `chain_phase_telemetry_summary.txt` mit aggregierten R5-Abnahmemetriken.
