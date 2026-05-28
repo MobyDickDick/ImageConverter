@@ -165,9 +165,9 @@ class Reflection:
         has_cooler_hint = any(token in desc for token in ("kühlelement", "rechteck", "minus-minus"))
         if ac0030_alias and (has_cross_hint or has_cooler_hint):
             params["mode"] = "composite"
-            params["top_source_ref"] = "AC0030"
+            params["top_source_ref"] = None
             params["bottom_shape"] = "square_cross"
-            params["elements"].append("OBEN: Alias-Referenz auf AC0030")
+            params["elements"].append("GEOMETRIE: AC0030-artige Beschreibung wird über Geometry-IR rekonstruiert")
             params["elements"].append("UNTEN: Parametrisch generiertes Viereck mit Andreaskreuz")
             return desc, params
 

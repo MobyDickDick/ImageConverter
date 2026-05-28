@@ -6,7 +6,7 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-05-28)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `374` · Erledigt `263` · Offen `111`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `374` · Erledigt `280` · Offen `94`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -2927,15 +2927,24 @@ Ziel: Die Konvertierung soll strikt als **Kette** laufen:
 - [x] **R4-EXIT:** Keine verdeckten Policy-Overrides mehr vor Abschluss der Geometriekette. (2026-05-28 Run LP erfüllt; `geometry_phase_result` wird vor jeder Policy-Entscheidung protokolliert.)
 
 ### PR-R5 — Benennung, Telemetrie, Abnahme
-- [ ] **R5-1:** Uneindeutige Begriffe im Logging harmonisieren (z. B. klare Trennung von Fallback- und Kettenphasen).
-- [ ] **R5-2:** Qualitätsmetriken pro Phase erfassen (Step-Erfolgsrate, Override-Häufigkeit, Placeholder-Notfallrate).
-- [ ] **R5-3:** Abschlussdokument mit Vorher/Nachher-Kennzahlen und offenen Restpunkten ergänzen.
-- [ ] **R5-TEST:** Vollsuite + gezielte AC0120/AC0130/AC0030 Vergleichsläufe.
-- [ ] **R5-EXIT:** Reproduzierbare, datenbasierte Abnahme der Ketten-Architektur.
+- [x] **R5-1:** Uneindeutige Begriffe im Logging harmonisieren (z. B. klare Trennung von Fallback- und Kettenphasen). (2026-05-28 Run LQ umgesetzt: zentrale R5-Labels für Geometry-, Policy- und Emergency-/Placeholder-Phasen eingeführt.)
+- [x] **R5-2:** Qualitätsmetriken pro Phase erfassen (Step-Erfolgsrate, Override-Häufigkeit, Placeholder-Notfallrate). (2026-05-28 Run LQ umgesetzt: `step_success_rate`, `override_frequency` und `placeholder_emergency_rate` als Telemetrie-/Aggregationsfelder ergänzt.)
+- [x] **R5-3:** Abschlussdokument mit Vorher/Nachher-Kennzahlen und offenen Restpunkten ergänzen. (2026-05-28 Run LQ umgesetzt: siehe `docs/chain_architecture_r5_acceptance_2026-05-28_runLQ.md`.)
+- [x] **R5-TEST:** Vollsuite + gezielte AC0120/AC0130/AC0030 Vergleichsläufe. (2026-05-28 Run LQ umgesetzt: R5-Detailtests `19 passed`, gezielte AC0120/AC0130/AC0030-Tests `5 passed`, Vollsuite `560 passed, 5 warnings`.)
+- [x] **R5-EXIT:** Reproduzierbare, datenbasierte Abnahme der Ketten-Architektur. (2026-05-28 Run LQ erfüllt; Telemetrie, Abnahmedokument und Sicherungstests liegen vor.)
 
 ### Reihenfolge und Leitplanke
-- [ ] **Reihenfolge:** R1 → R2 → R3 → R4 → R5.
-- [ ] **Leitplanke (verbindlich):** Bedingungen/Policies erst **nach** elementweiser Geometriekette anwenden.
+- [x] **Reihenfolge:** R1 → R2 → R3 → R4 → R5. (2026-05-28 Run LQ erfüllt: R5 nach R1–R4 abgeschlossen.)
+- [x] **Leitplanke (verbindlich):** Bedingungen/Policies erst **nach** elementweiser Geometriekette anwenden. (2026-05-28 Run LQ erfüllt und über R5-Telemetrie nach der Policy-Schlussphase sichtbar.)
+
+### Fortschritt vs. Blocker (Session 2026-05-28, PR-R5 Telemetrie/Abnahme Run LQ)
+
+- **Fortschritt (R5-1/R5-2):** Neue zentrale R5-Telemetrie eingeführt; sie harmonisiert Geometry-/Policy-/Emergency-Begriffe und erfasst `step_success_rate`, `override_applied`, `override_reason` sowie Placeholder-Notfallnutzung pro Lauf. Aggregiert werden daraus `mean_step_success_rate`, `override_frequency` und `placeholder_emergency_rate`.
+- **Fortschritt (R5-3/R5-EXIT):** Abschluss-/Abnahmedokument `docs/chain_architecture_r5_acceptance_2026-05-28_runLQ.md` ergänzt, inklusive Vorher/Nachher-Kennzahlen, Restpunkten und Fazit.
+- **Fortschritt (R5-TEST):** R5-Detailtests liefen grün (`19 passed`), die gezielten AC0120/AC0130/AC0030-Vergleichstests liefen grün (`5 passed, 5 warnings`) und die Vollsuite lief grün (`PYENV_VERSION=3.10.20 timeout 300 python -m pytest -q -rs`, `560 passed, 5 warnings`, Exit `0`).
+- **Zusatzkorrektur:** AC0030-artige, geometrisch vollständige AC0130-Beschreibungen setzen keine verdeckte `top_source_ref="AC0030"` mehr; damit bleibt die Referenz-/Policy-Fallback-Trennung sauber.
+- **Blocker:** Keine neuen Blocker. Produktive Batch-/CSV-Reports können die neue `chain_phase_telemetry_line` künftig zusätzlich ausgeben.
+- **Nächster sinnvoller Schritt:** Nach Abschluss der PR-Roadmap wieder gemäß aktueller Produktpriorität entscheiden: entweder R5-Telemetrie in Batch-Reports verdrahten oder auf das nächste dokumentierte Bild-/Testhygiene-Paket rotieren.
 
 
 
