@@ -150,3 +150,58 @@ def test_write_chain_telemetry_batch_report_writes_rows_and_aggregate(tmp_path: 
     assert "non_green_count=0" in summary
     assert "mean_error_per_pixel=0.012346" in summary
     assert "mean_delta2=12.500000" in summary
+
+
+def test_write_chain_telemetry_batch_report_marks_drift_pass(tmp_path: Path):
+    result_map = {
+        "AC0120_S.jpg": {
+            "variant": "AC0120_S",
+            "status": "semantic_ok",
+            "error_per_pixel": 0.01,
+            "mean_delta2": 10.0,
+            "params": {"chain_phase_telemetry": {"step_success_rate": 1.0}},
+        }
+    }
+
+    _csv_path, txt_path, _rows = helpers.writeChainTelemetryBatchReportImpl(
+        str(tmp_path),
+        result_map,
+        lambda _telemetry_rows: {},
+    )
+
+    summary = Path(txt_path).read_text(encoding="utf-8")
+    assert "drift_status=pass" in summary
+    assert "drift_reasons=" in summary
+    assert "drift_max_mean_error_per_pixel=0.050000" in summary
+    assert "drift_max_mean_delta2=18.000000" in summary
+    assert "drift_max_non_green=0" in summary
+
+
+def test_write_chain_telemetry_batch_report_marks_drift_warning(tmp_path: Path, monkeypatch):
+    monkeypatch.setenv("ICC_CHAIN_DRIFT_MAX_MEAN_ERROR_PER_PIXEL", "0.02")
+    monkeypatch.setenv("ICC_CHAIN_DRIFT_MAX_MEAN_DELTA2", "20.0")
+    monkeypatch.setenv("ICC_CHAIN_DRIFT_MAX_NON_GREEN", "0")
+    result_map = {
+        "AC0120_L.jpg": {
+            "variant": "AC0120_L",
+            "status": "semantic_mismatch",
+            "error_per_pixel": 0.03,
+            "mean_delta2": 25.0,
+            "params": {"chain_phase_telemetry": {"step_success_rate": 0.0}},
+        }
+    }
+
+    _csv_path, txt_path, _rows = helpers.writeChainTelemetryBatchReportImpl(
+        str(tmp_path),
+        result_map,
+        lambda _telemetry_rows: {},
+    )
+
+    summary = Path(txt_path).read_text(encoding="utf-8")
+    assert "drift_status=warn" in summary
+    assert (
+        "drift_reasons=mean_error_per_pixel_above_limit,"
+        "mean_delta2_above_limit,non_green_count_above_limit"
+    ) in summary
+    assert "drift_max_mean_error_per_pixel=0.020000" in summary
+    assert "drift_max_mean_delta2=20.000000" in summary

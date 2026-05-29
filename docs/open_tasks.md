@@ -3001,3 +3001,10 @@ Ziel: Die Konvertierung soll strikt als **Kette** laufen:
 - **Sicherung:** Detailtests liefen grün (`23 passed`, Exit `0`); Vollsuite lief grün (`PYENV_VERSION=3.10.20 timeout 300 python -m pytest -q -rs`, `561 passed, 5 warnings`, Exit `0`).
 - **Blocker:** Keine neuen Blocker. Die neuen Reports bleiben leer bis ohne Fehler lauffähige Varianten tatsächlich `params["chain_phase_telemetry"]` liefern.
 - **Nächster sinnvoller Schritt:** Auf das nächste dokumentierte Bild-/Testhygiene-Paket rotieren oder die neuen Telemetrie-Reports in eine bestehende Scorecard/Baseline-Auswertung integrieren.
+
+### Fortschritt vs. Blocker (Session 2026-05-28, R5 Drift-Grenze Run LT)
+
+- **Fortschritt:** Der nach Run LS dokumentierte Anschluss wurde umgesetzt: `chain_phase_telemetry_summary.txt` enthält nun einen konfigurierbaren Drift-Gate-Block (`drift_status`, `drift_reasons`, `drift_max_mean_error_per_pixel`, `drift_max_mean_delta2`, `drift_max_non_green`).
+- **Sicherung:** Neue Detailtests decken den `pass`-Fall unter den Standardgrenzen und den `warn`-Fall bei überschrittener Fehler-/Delta2-Grenze sowie nicht-grünem Status ab.
+- **Blocker:** Keine neuen Blocker; bei fehlenden endlichen Scorecard-Metriken bleibt das Gate bewusst `warn` mit expliziten Missing-Reasons.
+- **Nächster sinnvoller Schritt:** Wieder auf das nächste dokumentierte Bild-/Testhygiene-Paket rotieren oder die Drift-Grenze in einen automatisierten Abnahmecheck für konkrete Batch-Artefakte überführen.
