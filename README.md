@@ -99,8 +99,9 @@ python -m pytest
 ./tools/run_regression_checks.sh
 ./tools/run_safe_test_baseline.sh
 ./tools/run_local_completion_checks.sh
-./tools/run_local_completion_checks.sh --summary artifacts/converted_images/reports/chain_phase_telemetry_summary.txt --require-drift-summary
-# CI installiert pytest und nutzt denselben Abschlussbefehl plus Pflicht-Drift-Probe in .github/workflows/local-completion-checks.yml
+# CI nutzt denselben Abschlussbefehl in .github/workflows/local-completion-checks.yml
+# Der CI-Job batch-artifact-drift-gate erzwingt zusätzlich ein vorhandenes Drift-Summary:
+./tools/run_local_completion_checks.sh --require-drift-summary
 python tools/manage_satisfactory_baseline.py
 ./tools/run_satisfactory_regression_battery.sh
 python -m src.imageCompositeConverter --help

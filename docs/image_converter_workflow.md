@@ -125,15 +125,13 @@ python -m pip install pytest
 ./tools/run_local_completion_checks.sh
 ```
 
-Zusätzlich enthält der Workflow eine Pflicht-Drift-Probe: Er erzeugt ein
-synthetisches `chain_phase_telemetry_summary.txt` mit `drift_status=pass` und
-ruft das Abschlussprofil mit explizitem Summary-Pfad und
-`--require-drift-summary` auf. Damit bleibt auch der CI-Pfad abgesichert, der
-bei echten Batch-Artefakt-Jobs ein fehlendes Drift-Summary hart fehlschlagen
-lässt:
+Der Workflow enthält zusätzlich den Job `batch-artifact-drift-gate`. Dieser
+legt ein repräsentatives `chain_phase_telemetry_summary.txt` mit
+`drift_status=pass` an und startet dasselbe Abschlussprofil mit verpflichtender
+Drift-Artefaktprüfung:
 
 ```bash
-./tools/run_local_completion_checks.sh --summary "${RUNNER_TEMP}/chain_phase_telemetry_summary.txt" --require-drift-summary
+./tools/run_local_completion_checks.sh --require-drift-summary
 ```
 
 ## 8. Linux-Vendor-Kommando ausgeben

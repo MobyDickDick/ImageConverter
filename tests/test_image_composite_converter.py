@@ -6291,9 +6291,9 @@ def test_local_workflow_doc_tracks_current_commands() -> None:
     assert "python -m pip install pytest" in workflow_doc
     assert "python -m pip install pytest" in ci_workflow
     assert "./tools/run_local_completion_checks.sh" in ci_workflow
-    assert "--summary" in ci_workflow
-    assert "--require-drift-summary" in ci_workflow
+    assert "batch-artifact-drift-gate:" in ci_workflow
     assert "drift_status=pass" in ci_workflow
+    assert "./tools/run_local_completion_checks.sh --require-drift-summary" in ci_workflow
     assert "pull_request:" in ci_workflow
     assert "workflow_dispatch:" in ci_workflow
     assert "--print-linux-vendor-command" in workflow_doc
