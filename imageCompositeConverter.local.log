@@ -1,8 +1,45 @@
-[INFO] Schreibe Konsolen-Output nach: /workspace/ImageConverter/imageCompositeConverter.local.log
+[INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
 
---- Verarbeite AC0223_L.jpg ---
-Bildbeschreibung: 3-Wege-Ventilkopf oben (drei spitze Ventilflügel mit gemeinsamem Verlauf von dunkelgrau nach hellgrau), darunter ein dunkelgrauer senkrechter Griff (vom Ventilzentrum nach unten) auf hellgrauem Hintergrund. Kein "M"-Text im Badge. Der Griff liegt auf einer Symmetrieachse des Kreises. 3-Wege-Ventilkopf oben (drei spitze Ventilflügel mit gemeinsamem Verlauf von dunkelgrau nach hellgrau), darunter ein dunkelgrauer senkrechter Griff (vom Ventilzentrum nach unten) auf hellgrauem Hintergrund. Kein "M"-Text im Badge. Der Griff liegt auf einer Symmetrieachse des Kreises. Unterteil: grauer Kreis mit grauem Rand (klassische Kelle) mit schmalem, zentriertem Griff; das Symbol ist horizontal symmetrisch.
-Befehl erkannt: SEMANTIC: Kreis ohne Buchstabe, SEMANTIC: senkrechter Strich oben vom Kreis, SEMANTIC: Ventilkopf mit drei Dreiecken oberhalb des Stiels, SEMANTIC: Dreiecks-Spitzen treffen zentriert am oberen Stielende zusammen, SEMANTIC: Drei Dreiecke sind zu einem Polygon vereint
-[INFO] Übersichts-Kacheln erzeugt: diff=artifacts/converted_images/reports/reports/overview_diff_tiles.png, svg=artifacts/converted_images/reports/reports/overview_svg_tiles.png
+--- Verarbeite GE0035_M.jpg ---
+Bildbeschreibung: Wie GE0026, ober ohne Hintergrund
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
 
-Abgeschlossen! Ausgaben unter: artifacts/converted_images/reports
+--- Verarbeite GE9024_1M.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+
+--- Verarbeite Sign_07.jpg ---
+Bildbeschreibung: sehr komplexe Form, wahrscheinlich sehr schwierig zum nachzeichnen. Es sieht aus wie ein handgemaltes Andreas-Kreuz ("Abbrechen" oder "Fehler") rot.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+
+--- Verarbeite z_246.jpg ---
+Bildbeschreibung: z_-Dateien sind Rohr-Symbole mit Verzierungen; enthalten sind gerade Rohre, gebogene Rohre und T-Stücke.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+
+--- Verarbeite GE0037.jpg ---
+Bildbeschreibung: Wie GE0028, aber ohne Hintergrund Abweichung: horizontal gespiegelt
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+
+--- Verarbeite NAV0015.JPG ---
+Bildbeschreibung: Hintergrund NAV0010. Symbole der Öltropfen wie bei GE0344.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+
+--- Verarbeite AC0532_1_M.jpg ---
+Bildbeschreibung: Wie AC0501: Klappensymbol: Rechteck hochkant, graue Umrandung. Graue Diagonale von unten links nach oben Rechts, in der Mitte ein dunkelgrauer Punkt. Farbverlauf Hintergrund: Dunkelgrau, hellgrau, dunkelgrau. Geometrische Variante: 90° nach rechts gedreht.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+
+--- Verarbeite GE9910_W.jpg ---
+Bildbeschreibung: Wie AC0020: zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben. Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch)
+[WARN] GE9910_W.jpg: Batchlauf setzt nach Fehler fort (KeyError: 'img_path')
+[INFO] Übersichts-Kacheln erzeugt: diff=artifacts\converted_images\reports\overview_diff_tiles.png, svg=artifacts\converted_images\reports\overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: artifacts/converted_images
+[ERROR] Mindestens eine Datei konnte nicht erfolgreich konvertiert werden (siehe batch_failure_summary.csv).
