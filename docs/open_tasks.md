@@ -3036,3 +3036,10 @@ Ziel: Die Konvertierung soll strikt als **Kette** laufen:
 - **Sicherung:** Der Workflow-Dokumentationstest lief grün (`PYENV_VERSION=3.10.20 python -m pytest -q tests/test_image_composite_converter.py::test_local_workflow_doc_tracks_current_commands`, `1 passed`, Exit `0`); das lokale Abschlussprofil lief vollständig grün (`PYENV_VERSION=3.10.20 timeout 300 ./tools/run_local_completion_checks.sh`, Exit `0`, Pytest: `566 passed, 5 warnings`).
 - **Blocker:** Keine neuen Blocker. Der CI-Workflow nutzt bewusst denselben lokalen Sammelbefehl; ohne erzeugtes `chain_phase_telemetry_summary.txt` bleibt der Drift-Gate-Schritt wie lokal ein dokumentierter `SKIP`.
 - **Nächster sinnvoller Schritt:** Wieder auf das nächste dokumentierte Bild-/Testhygiene-Paket rotieren oder bei Bedarf das CI-Profil um einen separaten Batch-Artefakt-Job mit `--require-drift-summary` erweitern.
+
+### Fortschritt vs. Blocker (Session 2026-05-29, CI-Pflicht-Drift-Probe Run LY)
+
+- **Fortschritt:** Der nach Run LX dokumentierte Anschluss wurde umgesetzt: `.github/workflows/local-completion-checks.yml` startet zusätzlich eine Pflicht-Drift-Probe, erzeugt dafür ein synthetisches `chain_phase_telemetry_summary.txt` mit `drift_status=pass` und ruft `./tools/run_local_completion_checks.sh --summary ... --require-drift-summary` auf.
+- **Sicherung:** Der Workflow-Dokumentationstest lief grün (`PYENV_VERSION=3.10.20 python -m pytest -q tests/test_image_composite_converter.py::test_local_workflow_doc_tracks_current_commands`, `1 passed`, Exit `0`); das lokale Abschlussprofil mit synthetischem Pflicht-Summary lief vollständig grün (`PYENV_VERSION=3.10.20 timeout 300 ./tools/run_local_completion_checks.sh --summary <tmp>/chain_phase_telemetry_summary.txt --require-drift-summary`, Exit `0`).
+- **Blocker:** Keine neuen Blocker. Der CI-Pflichtpfad nutzt ein synthetisches Pass-Summary als Smoke; echte Batch-Artefakt-Jobs müssen weiterhin das produktive Summary erzeugen.
+- **Nächster sinnvoller Schritt:** Wieder auf das nächste dokumentierte Bild-/Testhygiene-Paket rotieren.

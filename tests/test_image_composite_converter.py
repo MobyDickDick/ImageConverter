@@ -6285,9 +6285,13 @@ def test_local_workflow_doc_tracks_current_commands() -> None:
     assert "--ac08-regression-set" in workflow_doc
     assert "python tools/check_chain_telemetry_drift_gate.py" in workflow_doc
     assert "./tools/run_local_completion_checks.sh" in workflow_doc
+    assert "--summary" in workflow_doc
     assert "--require-drift-summary" in workflow_doc
     assert ".github/workflows/local-completion-checks.yml" in workflow_doc
     assert "./tools/run_local_completion_checks.sh" in ci_workflow
+    assert "--summary" in ci_workflow
+    assert "--require-drift-summary" in ci_workflow
+    assert "drift_status=pass" in ci_workflow
     assert "pull_request:" in ci_workflow
     assert "workflow_dispatch:" in ci_workflow
     assert "--print-linux-vendor-command" in workflow_doc

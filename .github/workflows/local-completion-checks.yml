@@ -24,3 +24,9 @@ jobs:
 
       - name: Run documented local completion profile
         run: ./tools/run_local_completion_checks.sh
+
+      - name: Run required drift-summary profile probe
+        run: |
+          summary_path="${RUNNER_TEMP}/chain_phase_telemetry_summary.txt"
+          printf 'drift_status=pass\ndrift_reasons=\n' > "${summary_path}"
+          ./tools/run_local_completion_checks.sh --summary "${summary_path}" --require-drift-summary

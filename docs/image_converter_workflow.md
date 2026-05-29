@@ -122,6 +122,17 @@ denselben Sammelbefehl:
 ./tools/run_local_completion_checks.sh
 ```
 
+Zusätzlich enthält der Workflow eine Pflicht-Drift-Probe: Er erzeugt ein
+synthetisches `chain_phase_telemetry_summary.txt` mit `drift_status=pass` und
+ruft das Abschlussprofil mit explizitem Summary-Pfad und
+`--require-drift-summary` auf. Damit bleibt auch der CI-Pfad abgesichert, der
+bei echten Batch-Artefakt-Jobs ein fehlendes Drift-Summary hart fehlschlagen
+lässt:
+
+```bash
+./tools/run_local_completion_checks.sh --summary "${RUNNER_TEMP}/chain_phase_telemetry_summary.txt" --require-drift-summary
+```
+
 ## 8. Linux-Vendor-Kommando ausgeben
 
 ```bash
