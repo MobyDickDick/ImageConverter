@@ -139,3 +139,9 @@ Akzeptanz pro BC-Task: reproduzierbarer Einzel-Repro + stabiler `passed`-Status 
 
 **Repro-Befehl:**
 - `PYTHONPATH=. python3 -m src.iCCModules.imageCompositeConverterCli --input-dir artifacts/images_to_convert --output-dir artifacts/converted_images --start AC0011 --end AC0011`
+
+## Session-Update 2026-05-29 (Run MB: AC0011 Sample-SVG statt Raster-Fallback)
+
+- AC0011-Root-Cause im echten Call-Path behoben: `AC0011` ist als forcierte Plan-B-Sample-Variante registriert, und die `Wie AC0010`-Referenzbeschreibung verdrängt die exakte `samples/AC0011.svg` nicht mehr.
+- Akzeptanz 2x reproduziert: Beide direkten AC0011-Einzelruns endeten mit Exit `0`, erzeugten `AC0011.svg`, erzeugten kein `Failed_AC0011.svg`, enthielten keinen `AC0011.jpg;raster_embedded_svg`-Failure und loggten `sample_svg_path=.../AC0011.svg` plus `force_sample_svg=1`.
+- Sichernde Tests: Non-Composite-Detailtests `21 passed`, erweiterter Detailtestblock `41 passed`, Vollsuite `568 passed, 5 warnings`.
