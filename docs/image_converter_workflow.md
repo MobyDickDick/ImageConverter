@@ -122,6 +122,15 @@ denselben Sammelbefehl:
 ./tools/run_local_completion_checks.sh
 ```
 
+Der Workflow enthält zusätzlich den Job `batch-artifact-drift-gate`. Dieser
+legt ein repräsentatives `chain_phase_telemetry_summary.txt` mit
+`drift_status=pass` an und startet dasselbe Abschlussprofil mit verpflichtender
+Drift-Artefaktprüfung:
+
+```bash
+./tools/run_local_completion_checks.sh --require-drift-summary
+```
+
 ## 8. Linux-Vendor-Kommando ausgeben
 
 ```bash
