@@ -205,3 +205,43 @@ def test_write_chain_telemetry_batch_report_marks_drift_warning(tmp_path: Path, 
     ) in summary
     assert "drift_max_mean_error_per_pixel=0.020000" in summary
     assert "drift_max_mean_delta2=20.000000" in summary
+
+
+def test_check_chain_telemetry_drift_summary_accepts_pass_artifact(tmp_path: Path):
+    summary_path = tmp_path / "chain_phase_telemetry_summary.txt"
+    summary_path.write_text(
+        "telemetry_csv=/tmp/chain_phase_telemetry.csv\n"
+        "drift_status=pass\n"
+        "drift_reasons=\n",
+        encoding="utf-8",
+    )
+
+    result = helpers.checkChainTelemetryDriftSummaryImpl(str(summary_path))
+
+    assert result["accepted"] is True
+    assert result["status"] == "pass"
+    assert result["reasons"] == []
+    assert result["telemetry_csv"] == "/tmp/chain_phase_telemetry.csv"
+
+
+def test_check_chain_telemetry_drift_summary_rejects_warn_artifact(tmp_path: Path):
+    summary_path = tmp_path / "chain_phase_telemetry_summary.txt"
+    summary_path.write_text(
+        "drift_status=warn\n"
+        "drift_reasons=mean_delta2_above_limit,non_green_count_above_limit\n",
+        encoding="utf-8",
+    )
+
+    result = helpers.checkChainTelemetryDriftSummaryImpl(str(summary_path))
+
+    assert result["accepted"] is False
+    assert result["status"] == "warn"
+    assert result["reasons"] == ["mean_delta2_above_limit", "non_green_count_above_limit"]
+
+
+def test_check_chain_telemetry_drift_summary_rejects_missing_artifact(tmp_path: Path):
+    result = helpers.checkChainTelemetryDriftSummaryImpl(str(tmp_path / "missing_summary.txt"))
+
+    assert result["accepted"] is False
+    assert result["status"] == "missing"
+    assert result["reasons"] == ["summary_missing"]

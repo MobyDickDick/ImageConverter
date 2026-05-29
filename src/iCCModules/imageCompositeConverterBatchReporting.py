@@ -241,6 +241,65 @@ def writeChainTelemetryBatchReportImpl(
     return csv_path, txt_path, rows
 
 
+def readKeyValueReportImpl(report_path: str) -> dict[str, str]:
+    """Read a simple key=value report artifact into a dictionary."""
+
+    values: dict[str, str] = {}
+    if not os.path.exists(report_path):
+        return values
+    with open(report_path, "r", encoding="utf-8") as f:
+        for raw_line in f:
+            line = raw_line.strip()
+            if not line or line.startswith("#") or "=" not in line:
+                continue
+            key, value = line.split("=", 1)
+            values[key.strip()] = value.strip()
+    return values
+
+
+def checkChainTelemetryDriftSummaryImpl(summary_path: str) -> dict[str, object]:
+    """Evaluate a chain telemetry summary artifact as an automated drift gate."""
+
+    if not os.path.exists(summary_path):
+        return {
+            "accepted": False,
+            "status": "missing",
+            "reasons": ["summary_missing"],
+            "summary_path": summary_path,
+        }
+
+    values = readKeyValueReportImpl(summary_path)
+    status = values.get("drift_status", "").strip().lower()
+    raw_reasons = values.get("drift_reasons", "")
+    reasons = [reason for reason in raw_reasons.split(",") if reason]
+
+    if status == "pass":
+        return {
+            "accepted": True,
+            "status": "pass",
+            "reasons": reasons,
+            "summary_path": summary_path,
+            "telemetry_csv": values.get("telemetry_csv", ""),
+        }
+
+    if status == "warn":
+        return {
+            "accepted": False,
+            "status": "warn",
+            "reasons": reasons or ["drift_warning_without_reason"],
+            "summary_path": summary_path,
+            "telemetry_csv": values.get("telemetry_csv", ""),
+        }
+
+    return {
+        "accepted": False,
+        "status": status or "missing",
+        "reasons": ["drift_status_missing"],
+        "summary_path": summary_path,
+        "telemetry_csv": values.get("telemetry_csv", ""),
+    }
+
+
 def writeStrategySwitchTemplateTransfersImpl(
     reports_out_dir: str,
     strategy_rows: list[dict[str, object]],

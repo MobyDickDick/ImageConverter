@@ -3008,3 +3008,10 @@ Ziel: Die Konvertierung soll strikt als **Kette** laufen:
 - **Sicherung:** Neue Detailtests decken den `pass`-Fall unter den Standardgrenzen und den `warn`-Fall bei überschrittener Fehler-/Delta2-Grenze sowie nicht-grünem Status ab.
 - **Blocker:** Keine neuen Blocker; bei fehlenden endlichen Scorecard-Metriken bleibt das Gate bewusst `warn` mit expliziten Missing-Reasons.
 - **Nächster sinnvoller Schritt:** Wieder auf das nächste dokumentierte Bild-/Testhygiene-Paket rotieren oder die Drift-Grenze in einen automatisierten Abnahmecheck für konkrete Batch-Artefakte überführen.
+
+### Fortschritt vs. Blocker (Session 2026-05-29, R5 Drift-Artefakt-Check Run LU)
+
+- **Fortschritt:** Der nach Run LT dokumentierte Anschluss wurde umgesetzt: `chain_phase_telemetry_summary.txt` kann nun mit `tools/check_chain_telemetry_drift_gate.py` als automatisierter Drift-Gate-Check geprüft werden; `pass` liefert Exit `0`, `warn`/fehlende Artefakte liefern Exit `1` mit stabilen Reasons.
+- **Sicherung:** Detailtests liefen grün (`python -m pytest -q tests/detailtests/test_batch_reporting_helpers.py`, `8 passed`, Exit `0`); der erweiterte Detailtest-Block lief grün (`28 passed`, Exit `0`); die Vollsuite lief grün (`PYENV_VERSION=3.10.20 timeout 300 python -m pytest -q -rs`, `566 passed, 5 warnings`, Exit `0`).
+- **Blocker:** Keine neuen Blocker. Der neue Check bewertet vorhandene Summary-Artefakte; Batchläufe müssen das Summary weiterhin vorher erzeugen.
+- **Nächster sinnvoller Schritt:** Den Artefakt-Check in das dokumentierte Gate-/Pre-Commit-Profil aufnehmen oder wieder auf das nächste Bild-/Testhygiene-Paket rotieren.
