@@ -105,10 +105,12 @@ Das Skript führt `compileall`, die Pytest-Suite, den CLI-Help-Smoke und – sof
 ein `chain_phase_telemetry_summary.txt` vorhanden ist – den
 Ketten-Telemetrie-Drift-Gate-Check aus. Wenn ein Batchlauf zwingend ein Summary
 erzeugen muss, wird die Drift-Artefaktprüfung mit `--require-drift-summary`
-verbindlich gemacht:
+verbindlich gemacht. Für abweichende Artefaktpfade kann der Summary-Pfad mit
+`--summary` explizit gesetzt werden:
 
 ```bash
 ./tools/run_local_completion_checks.sh --require-drift-summary
+./tools/run_local_completion_checks.sh --summary artifacts/converted_images/reports/chain_phase_telemetry_summary.txt --require-drift-summary
 ```
 
 ## 7. Automatisierter CI-Aufruf
@@ -126,9 +128,9 @@ python -m pip install pytest
 ```
 
 Der Workflow enthält zusätzlich den Job `batch-artifact-drift-gate`. Dieser
-legt ein repräsentatives `chain_phase_telemetry_summary.txt` mit
-`drift_status=pass` an und startet dasselbe Abschlussprofil mit verpflichtender
-Drift-Artefaktprüfung:
+installiert ebenfalls die Testabhängigkeit `pytest`, legt ein repräsentatives
+`chain_phase_telemetry_summary.txt` mit `drift_status=pass` an und startet
+dasselbe Abschlussprofil mit verpflichtender Drift-Artefaktprüfung:
 
 ```bash
 ./tools/run_local_completion_checks.sh --require-drift-summary
