@@ -76,13 +76,29 @@ if failed:
 PY
 ```
 
-## 5. Linux-Vendor-Kommando ausgeben
+## 5. Ketten-Telemetrie-Drift-Gate prüfen
+
+Nach Batchläufen, die `chain_phase_telemetry_summary.txt` erzeugen, ist die
+konfigurierte Drift-Grenze als eigener, Shell-/CI-tauglicher Gate-Check
+auszuführen:
+
+```bash
+python tools/check_chain_telemetry_drift_gate.py artifacts/converted_images/reports/chain_phase_telemetry_summary.txt
+```
+
+Der Check akzeptiert nur ein Summary mit `drift_status=pass` und beendet sich
+dann mit Exit `0`. Warnungen, fehlende Artefakte oder ein fehlender
+`drift_status` liefern Exit `1` mit stabilen Reason-Codes, damit
+Batch-Artefakte nicht nur erzeugt, sondern auch automatisiert gegen die
+dokumentierte Drift-Grenze abgesichert werden.
+
+## 6. Linux-Vendor-Kommando ausgeben
 
 ```bash
 python -m src.imageCompositeConverter --print-linux-vendor-command --vendor-dir vendor
 ```
 
-## 6. VS Code Debugging unter Windows
+## 7. VS Code Debugging unter Windows
 
 - Nutze nach Möglichkeit die Workspace-Launch-Konfiguration
   `ImageConverter: convert interactive range`.
@@ -90,7 +106,7 @@ python -m src.imageCompositeConverter --print-linux-vendor-command --vendor-dir 
   `.venv\\Scripts` startet, ist der Interpreter falsch gewählt. In diesem Fall
   in VS Code explizit `.venv\\Scripts\\python.exe` auswählen.
 
-## 7. Sample-Paar-Validierung (N5)
+## 8. Sample-Paar-Validierung (N5)
 
 ```bash
 python -m tools.validate_sample_pairs --strict
@@ -102,7 +118,7 @@ bei Bedarf automatisch auch aus den Repo-`vendor/*/site-packages`-Pfaden.
 Wenn diese Pakete im `vendor`-Ordner liegen, ist kein zusätzlicher manueller
 `pip install`-Schritt nötig.
 
-## 8. N6-Variationssuite generieren (Basis)
+## 9. N6-Variationssuite generieren (Basis)
 
 ```bash
 python -m tools.generate_svg_variation_suite

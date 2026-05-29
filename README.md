@@ -103,6 +103,7 @@ python tools/manage_satisfactory_baseline.py
 python -m src.imageCompositeConverter --help
 python tools/check_vendored_cv2.py
 python -m src.imageCompositeConverter artifacts/images_to_convert --descriptions-path artifacts/images_to_convert/Finale_Wurzelformen_V3.xml --ac08-regression-set --output-dir artifacts/converted_images
+python tools/check_chain_telemetry_drift_gate.py artifacts/converted_images/reports/chain_phase_telemetry_summary.txt
 python - <<'PY'
 from pathlib import Path
 import csv
