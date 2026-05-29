@@ -102,6 +102,53 @@ def _chainScorecardSummary(rows: list[dict[str, object]]) -> dict[str, object]:
     }
 
 
+def _envFloat(name: str, default: float) -> float:
+    try:
+        value = float(os.environ.get(name, str(default)) or default)
+    except (TypeError, ValueError):
+        return default
+    return value if math.isfinite(value) else default
+
+
+def _envInt(name: str, default: int) -> int:
+    try:
+        value = int(os.environ.get(name, str(default)) or default)
+    except (TypeError, ValueError):
+        return default
+    return max(0, value)
+
+
+def _chainScorecardDriftGate(scorecard: dict[str, object]) -> dict[str, object]:
+    error_limit = max(0.0, _envFloat("ICC_CHAIN_DRIFT_MAX_MEAN_ERROR_PER_PIXEL", 0.05))
+    delta2_limit = max(0.0, _envFloat("ICC_CHAIN_DRIFT_MAX_MEAN_DELTA2", 18.0))
+    non_green_limit = _envInt("ICC_CHAIN_DRIFT_MAX_NON_GREEN", 0)
+    reasons: list[str] = []
+
+    mean_error = scorecard.get("mean_error_per_pixel")
+    if mean_error is None:
+        reasons.append("mean_error_per_pixel_missing")
+    elif float(mean_error) > error_limit:
+        reasons.append("mean_error_per_pixel_above_limit")
+
+    mean_delta2 = scorecard.get("mean_delta2")
+    if mean_delta2 is None:
+        reasons.append("mean_delta2_missing")
+    elif float(mean_delta2) > delta2_limit:
+        reasons.append("mean_delta2_above_limit")
+
+    non_green_count = int(scorecard.get("non_green_count", 0) or 0)
+    if non_green_count > non_green_limit:
+        reasons.append("non_green_count_above_limit")
+
+    return {
+        "drift_status": "pass" if not reasons else "warn",
+        "drift_reasons": ",".join(reasons),
+        "drift_max_mean_error_per_pixel": error_limit,
+        "drift_max_mean_delta2": delta2_limit,
+        "drift_max_non_green": non_green_limit,
+    }
+
+
 def _formatScorecardValue(value: object) -> str:
     if value is None:
         return ""
@@ -164,6 +211,7 @@ def writeChainTelemetryBatchReportImpl(
 
     aggregate = aggregate_chain_telemetry_fn(rows)
     scorecard = _chainScorecardSummary(rows)
+    drift_gate = _chainScorecardDriftGate(scorecard)
     with open(txt_path, "w", encoding="utf-8") as f:
         f.write(f"telemetry_csv={csv_path}\n")
         for key in (
@@ -181,6 +229,14 @@ def writeChainTelemetryBatchReportImpl(
             "mean_delta2",
         ):
             f.write(f"{key}={_formatScorecardValue(scorecard.get(key))}\n")
+        for key in (
+            "drift_status",
+            "drift_reasons",
+            "drift_max_mean_error_per_pixel",
+            "drift_max_mean_delta2",
+            "drift_max_non_green",
+        ):
+            f.write(f"{key}={_formatScorecardValue(drift_gate.get(key))}\n")
 
     return csv_path, txt_path, rows
 
