@@ -5,7 +5,7 @@ import re
 from pathlib import Path
 import numpy as np
 
-FORCED_PLAN_B_SAMPLE_VARIANTS: set[str] = set()
+FORCED_PLAN_B_SAMPLE_VARIANTS: set[str] = {"AC0011"}
 
 def _build_vector_placeholder_svg(width: int, height: int, *, description: str = "") -> str:
     safe_w = max(1, int(width or 1))
@@ -303,7 +303,11 @@ def _try_load_sample_svg(*, img_path: str, base_name: str, description: str = ""
 
     sample_candidates = _build_sample_candidates(base_name)
     reference_family = _extract_reference_family_from_description(description)
-    if reference_family and reference_family != base_name.upper():
+    if (
+        reference_family
+        and reference_family != base_name.upper()
+        and base_name not in FORCED_PLAN_B_SAMPLE_VARIANTS
+    ):
         sample_candidates = _prepend_reference_candidates(sample_candidates, reference_family)
     for samples_dir in samples_dirs:
         for sample_name in sample_candidates:
