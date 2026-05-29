@@ -111,13 +111,24 @@ verbindlich gemacht:
 ./tools/run_local_completion_checks.sh --require-drift-summary
 ```
 
-## 7. Linux-Vendor-Kommando ausgeben
+## 7. Automatisierter CI-Aufruf
+
+Das lokale Abschlussprofil ist zusätzlich in GitHub Actions verdrahtet. Der
+Workflow `.github/workflows/local-completion-checks.yml` startet auf Pull
+Requests, Pushes auf die Hauptarbeitszweige und manuell per `workflow_dispatch`
+denselben Sammelbefehl:
+
+```bash
+./tools/run_local_completion_checks.sh
+```
+
+## 8. Linux-Vendor-Kommando ausgeben
 
 ```bash
 python -m src.imageCompositeConverter --print-linux-vendor-command --vendor-dir vendor
 ```
 
-## 8. VS Code Debugging unter Windows
+## 9. VS Code Debugging unter Windows
 
 - Nutze nach Möglichkeit die Workspace-Launch-Konfiguration
   `ImageConverter: convert interactive range`.
@@ -125,7 +136,7 @@ python -m src.imageCompositeConverter --print-linux-vendor-command --vendor-dir 
   `.venv\\Scripts` startet, ist der Interpreter falsch gewählt. In diesem Fall
   in VS Code explizit `.venv\\Scripts\\python.exe` auswählen.
 
-## 9. Sample-Paar-Validierung (N5)
+## 10. Sample-Paar-Validierung (N5)
 
 ```bash
 python -m tools.validate_sample_pairs --strict
@@ -137,7 +148,7 @@ bei Bedarf automatisch auch aus den Repo-`vendor/*/site-packages`-Pfaden.
 Wenn diese Pakete im `vendor`-Ordner liegen, ist kein zusätzlicher manueller
 `pip install`-Schritt nötig.
 
-## 10. N6-Variationssuite generieren (Basis)
+## 11. N6-Variationssuite generieren (Basis)
 
 ```bash
 python -m tools.generate_svg_variation_suite

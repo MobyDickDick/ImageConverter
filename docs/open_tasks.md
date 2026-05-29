@@ -3029,3 +3029,10 @@ Ziel: Die Konvertierung soll strikt als **Kette** laufen:
 - **Sicherung:** Der Workflow-Dokumentationstest lief grün (`PYENV_VERSION=3.10.20 python -m pytest -q tests/test_image_composite_converter.py::test_local_workflow_doc_tracks_current_commands`, `1 passed`, Exit `0`); das neue Sammelprofil lief vollständig grün (`PYENV_VERSION=3.10.20 timeout 300 ./tools/run_local_completion_checks.sh`, Exit `0`, Pytest: `566 passed, 5 warnings`).
 - **Blocker:** Keine neuen Blocker. Der Drift-Gate-Schritt wird ohne vorhandenes `chain_phase_telemetry_summary.txt` bewusst als `SKIP` protokolliert; für verpflichtende Batch-Gates steht `--require-drift-summary` bereit.
 - **Nächster sinnvoller Schritt:** Wieder auf das nächste dokumentierte Bild-/Testhygiene-Paket rotieren oder das Abschlussprofil in einen automatisierten CI-/Pre-Commit-Aufruf einhängen.
+
+### Fortschritt vs. Blocker (Session 2026-05-29, CI-Abschlussprofil Run LX)
+
+- **Fortschritt:** Der nach Run LW dokumentierte Anschluss wurde umgesetzt: `.github/workflows/local-completion-checks.yml` startet nun `./tools/run_local_completion_checks.sh` auf Pull Requests, Pushes auf die Hauptarbeitszweige und manuell per `workflow_dispatch`.
+- **Sicherung:** Der Workflow-Dokumentationstest lief grün (`PYENV_VERSION=3.10.20 python -m pytest -q tests/test_image_composite_converter.py::test_local_workflow_doc_tracks_current_commands`, `1 passed`, Exit `0`); das lokale Abschlussprofil lief vollständig grün (`PYENV_VERSION=3.10.20 timeout 300 ./tools/run_local_completion_checks.sh`, Exit `0`, Pytest: `566 passed, 5 warnings`).
+- **Blocker:** Keine neuen Blocker. Der CI-Workflow nutzt bewusst denselben lokalen Sammelbefehl; ohne erzeugtes `chain_phase_telemetry_summary.txt` bleibt der Drift-Gate-Schritt wie lokal ein dokumentierter `SKIP`.
+- **Nächster sinnvoller Schritt:** Wieder auf das nächste dokumentierte Bild-/Testhygiene-Paket rotieren oder bei Bedarf das CI-Profil um einen separaten Batch-Artefakt-Job mit `--require-drift-summary` erweitern.

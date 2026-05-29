@@ -1,0 +1,26 @@
+name: Local completion checks
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - master
+      - work
+  workflow_dispatch:
+
+jobs:
+  completion-profile:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Run documented local completion profile
+        run: ./tools/run_local_completion_checks.sh
