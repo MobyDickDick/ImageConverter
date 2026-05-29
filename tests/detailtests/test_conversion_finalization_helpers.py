@@ -340,6 +340,18 @@ def test_remove_successful_variants_from_open_tasks_only_removes_open_checkboxes
     assert "- [ ] todo AC0836_L" in content
 
 
+def test_remove_successful_variants_from_open_tasks_ignores_external_reports_dir(tmp_path):
+    reports_dir = tmp_path / "reports"
+    reports_dir.mkdir()
+
+    finalization_helpers._removeSuccessfulVariantsFromOpenTasks(
+        reports_out_dir=str(reports_dir),
+        result_map={"AC0831_L.jpg": {"variant": "AC0831_L", "status": "semantic_ok"}},
+    )
+
+    assert not (tmp_path / "docs" / "open_tasks.md").exists()
+
+
 def test_append_failure_followup_tasks_adds_missing_failure_variants(tmp_path):
     reports_dir = tmp_path / "src" / "artifacts" / "converted_images" / "reports"
     reports_dir.mkdir(parents=True)

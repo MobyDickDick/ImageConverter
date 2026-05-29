@@ -254,11 +254,20 @@ def _archiveSuccessfulConversionArtifacts(*,
             source_path.replace(target_path)
 
 
+def _findOpenTasksPathForReportsDir(reports_out_dir: str) -> Path | None:
+    """Return the nearest repository ``docs/open_tasks.md`` for a reports directory."""
+    reports_path = Path(reports_out_dir).resolve()
+    for candidate in (reports_path, *reports_path.parents):
+        open_tasks_path = candidate / "docs" / "open_tasks.md"
+        if open_tasks_path.exists():
+            return open_tasks_path
+    return None
+
+
 def _removeSuccessfulVariantsFromOpenTasks(*, reports_out_dir: str, result_map: dict[str, dict[str, object]]) -> None:
     """Remove successful variants from open checkbox task lines in docs/open_tasks.md."""
-    repo_root = Path(reports_out_dir).resolve().parents[3]
-    open_tasks_path = repo_root / "docs" / "open_tasks.md"
-    if not open_tasks_path.exists():
+    open_tasks_path = _findOpenTasksPathForReportsDir(reports_out_dir)
+    if open_tasks_path is None:
         return
 
     successful_variants: set[str] = set()
