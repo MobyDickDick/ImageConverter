@@ -99,6 +99,7 @@ python -m pytest
 ./tools/run_regression_checks.sh
 ./tools/run_safe_test_baseline.sh
 ./tools/run_local_completion_checks.sh
+# CI nutzt denselben Abschlussbefehl in .github/workflows/local-completion-checks.yml
 python tools/manage_satisfactory_baseline.py
 ./tools/run_satisfactory_regression_battery.sh
 python -m src.imageCompositeConverter --help
