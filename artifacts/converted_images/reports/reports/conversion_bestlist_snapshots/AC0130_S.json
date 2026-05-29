@@ -1,0 +1,49 @@
+{
+  "base": "AC0130",
+  "best_error": 35.559814453125,
+  "best_iter": 1,
+  "convergence": "plateau",
+  "error_per_pixel": 0.00024115542570749918,
+  "filename": "AC0130_S.jpg",
+  "h": 384,
+  "mean_delta2": 15951.0205078125,
+  "params": {
+    "bottom_shape": "square_cross",
+    "contract_status": "ok",
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "AC0130",
+        "source": "base_name",
+        "text": "Wie AC0030: Kühlelement, graues Rechteck, Minus-Minus-Zeichen oben Mitte, Farbverlauf horizontal dunkel-hell-dunkel, graue Linien in beiden Diagonalen. Das Andreaskreuz besteht aus zwei Geraden, welche jedoch in Pfade konvertiert werden. Die Enden der Geraden werden derart abgeschnitten, dass sie nicht über das Rechteck hinaus reichen. Geometrische Variante: identisch zur Referenz."
+      }
+    ],
+    "documented_alias_refs": [
+      "AC0030"
+    ],
+    "elements": [
+      "OBEN: Alias-Referenz auf AC0030",
+      "UNTEN: Parametrisch generiertes Viereck mit Andreaskreuz"
+    ],
+    "label": "M",
+    "mode": "composite",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": "AC0030",
+    "variant_name": "AC0130_S"
+  },
+  "std_delta2": 37742.42578125,
+  "variant": "AC0130_S",
+  "w": 384
+}

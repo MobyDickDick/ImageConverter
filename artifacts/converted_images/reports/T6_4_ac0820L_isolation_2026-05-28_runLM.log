@@ -1,0 +1,79 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_ test_ac08_regression_suite_preserves_previously_good_variants[AC0820_L-semantic_ok] _
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-0/test_ac08_regression_suite_pre0')
+variant = 'AC0820_L', expected_status = 'semantic_ok'
+
+    @pytest.mark.parametrize(
+        ("variant", "expected_status"),
+        [
+            ("AC0800_L", "semantic_ok"),
+            ("AC0800_M", "semantic_ok"),
+            ("AC0820_L", "semantic_ok"),
+            ("AC0835_S", "semantic_ok"),
+            ("AC0837_L", "semantic_ok"),
+        ],
+    )
+    def test_ac08_regression_suite_preserves_previously_good_variants(
+        tmp_path: Path,
+        variant: str,
+        expected_status: str,
+    ) -> None:
+        """Regression-safe semantic changes must keep the already-good AC08 fixtures convertible."""
+        if (
+            image_composite_converter.np is None
+            or image_composite_converter.cv2 is None
+            or image_composite_converter.fitz is None
+        ):
+            pytest.skip("numpy/cv2/fitz not available in this environment")
+    
+        images_dir = Path("artifacts/images_to_convert")
+        csv_path = images_dir / "Finale_Wurzelformen_V3.xml"
+        if not images_dir.exists() or not csv_path.exists():
+            pytest.skip("AC08 fixture inputs not available")
+    
+        img_path = images_dir / f"{variant}.jpg"
+        assert img_path.exists(), f"missing regression fixture: {img_path}"
+    
+        if variant == "AC0837_L":
+            pytest.skip("AC0837_L isolated regression path remains a documented long-run blocker (T6.2)")
+    
+        svg_dir = tmp_path / "svgs"
+        diff_dir = tmp_path / "diffs"
+        reports_dir = tmp_path / "reports"
+    
+        result = image_composite_converter.runIterationPipeline(
+            str(img_path),
+            str(csv_path),
+            4,
+            str(svg_dir),
+            str(diff_dir),
+            str(reports_dir),
+        )
+    
+>       assert result is not None
+E       assert None is not None
+
+tests/test_image_composite_converter.py:7316: AssertionError
+----------------------------- Captured stdout call -----------------------------
+
+--- Verarbeite AC0820_L.jpg ---
+Bildbeschreibung: Wie AC0800, Textg "CO2" (Die 2 ist fälschlicherweise hochgestellt, dieses muss jedoch tiefgestellt sein)
+Befehl erkannt: SEMANTIC: Kreis + Buchstabe CO_2
+=============================== warnings summary ===============================
+<frozen importlib._bootstrap>:241
+<frozen importlib._bootstrap>:241
+  <frozen importlib._bootstrap>:241: DeprecationWarning: builtin type SwigPyPacked has no __module__ attribute
+
+<frozen importlib._bootstrap>:241
+<frozen importlib._bootstrap>:241
+  <frozen importlib._bootstrap>:241: DeprecationWarning: builtin type SwigPyObject has no __module__ attribute
+
+<frozen importlib._bootstrap>:241
+  <frozen importlib._bootstrap>:241: DeprecationWarning: builtin type swigvarlink has no __module__ attribute
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_image_composite_converter.py::test_ac08_regression_suite_preserves_previously_good_variants[AC0820_L-semantic_ok]
+1 failed, 5 warnings in 8.57s

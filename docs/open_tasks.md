@@ -4,9 +4,9 @@ This checklist only tracks work that is actionable for the ImageConverter in the
 current repository snapshot. Older unrelated language/compiler/runtime tasks were removed so the list stays
 focused on the actual project scope.
 
-## Aufgaben-Gesamtzähler (Snapshot 2026-05-14)
+## Aufgaben-Gesamtzähler (Snapshot 2026-05-28)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `255` · Erledigt `238` · Offen `17`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `374` · Erledigt `280` · Offen `94`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -72,6 +72,7 @@ Zielbild: Nicht-binäre Vektorisierung über echte SVG-Primitive mit semantische
 - When a task is completed, change its checkbox to `- [x]` and add a short note.
 - If a task splits into multiple deliverables, keep the parent item and add nested
   subtasks below it.
+- **Aktuelle Gewichtung (2026-05-28):** Beschleunigung der Algorithmus-Umstellung hat Vorrang vor weiteren Routine-/Testhygiene-Paketen. Das nächste Arbeitspaket startet daher bei PR-R2/R3 der Ketten-Architektur statt erneut bei T6/TB-A3.
 
 ## Current status
 
@@ -79,7 +80,7 @@ Zielbild: Nicht-binäre Vektorisierung über echte SVG-Primitive mit semantische
 - The refresh run currently covers the most recently touched connector/circle families present in `artifacts/converted_images/reports` (`AC0811`, `AC0832`, `AC0835`, `AC0836`, `AC0870`, `AC0882`).
 - Continue to add new work items here before implementation starts, then mark them in-place when they are done.
 
-## Next execution tasks (neu sortiert am 2026-05-07: leicht → schwierig)
+## Next execution tasks (neu gewichtet am 2026-05-28: Ketten-Architektur vor Testhygiene)
 
 ### Begriffskonvention (ab 2026-05-16)
 
@@ -666,6 +667,7 @@ Deadlock-/Stagnationsschleifen.
     - 2026-05-28 (Run LB): **Nächstes Arbeitspaket** erneut ausgeführt: 1) nächste dokumentierte Aufgabe `T6.3` timeout-gesichert isoliert (`PYENV_VERSION=3.10.20 PYTHONPATH=. timeout 180 pyenv exec python -u -m pytest tests/test_image_composite_converter.py::test_make_badge_params_keeps_ac0838_m_circle_near_full_width_for_voc_layout -q`) mit Exit `0`, Ergebnis `1 skipped, 5 warnings` in `4.08s`, Log `artifacts/converted_images/reports/T6_3_ac0838M_isolation_2026-05-28_runLB.log`; 2) gekoppelte Plan-B-Aufgabe `T6-PB` als Kurzrepro erneut grün (`PYENV_VERSION=3.10.20 python -m pytest -q tests/detailtests/test_global_search_optimization_helpers.py::test_global_search_skips_deterministic_track_after_strong_stochastic_gain`) mit Exit `0`, Ergebnis `1 passed in 0.16s`, Log `artifacts/converted_images/reports/t6_planb_singletest_2026-05-28_runLB.log`; 3) Plan-B-Kandidatenbild `AC0130_M` als Syntheseprobe ausgeführt (`PYENV_VERSION=3.10.20 python -m tools.plan_b_synthetic_probe "Bildbeschreibung: Kreis mit horizontalem Griff links und Beschriftung rF." --variant AC0130_M --output-dir artifacts/converted_images/reports`) mit Exit `0` (`status=ok`), Log `artifacts/converted_images/reports/AC0130_M_planb_synthetic_2026-05-28_runLB.log`.
   - [ ] T6.4 (sehr hohe Priorität): `tests/test_image_composite_converter.py::test_ac08_regression_suite_preserves_previously_good_variants[AC0820_L-semantic_ok]` reduzieren (aktuell `168.27s`).
     - Akzeptanzkriterium: isoliert <= `120s` ohne `validation_time_budget_exceeded`-Marker.
+    - 2026-05-28 (Run LM): **Nächstes Arbeitspaket** ausgeführt: 1) nächste dokumentierte Aufgabe `T6.4` timeout-gesichert isoliert (`PYENV_VERSION=3.10.20 PYTHONPATH=. timeout 180 pyenv exec python -u -m pytest tests/test_image_composite_converter.py::test_ac08_regression_suite_preserves_previously_good_variants[AC0820_L-semantic_ok] -q`) mit Exit `1`, Ergebnis `FAILED` in `8.57s` (`assert result is not None`), Log `artifacts/converted_images/reports/T6_4_ac0820L_isolation_2026-05-28_runLM.log`; 2) gekoppelte Plan-B-Aufgabe `T6-PB` als Kurzrepro erneut grün (`PYENV_VERSION=3.10.20 python -m pytest -q tests/detailtests/test_global_search_optimization_helpers.py::test_global_search_skips_deterministic_track_after_strong_stochastic_gain`) mit Exit `0`, Ergebnis `1 passed in 0.10s`, Log `artifacts/converted_images/reports/t6_planb_singletest_2026-05-28_runLM.log`; 3) Plan-B-Kandidatenbild `AC0130_S` als Syntheseprobe ausgeführt (`PYENV_VERSION=3.10.20 python -m tools.plan_b_synthetic_probe "Bildbeschreibung: Kreis mit horizontalem Griff links und Beschriftung rF." --variant AC0130_S --output-dir artifacts/converted_images/reports`) mit Exit `0` (`status=ok`), Log `artifacts/converted_images/reports/AC0130_S_planb_synthetic_2026-05-28_runLM.log`.
   - [ ] T6.5 (hohe Priorität): `tests/test_image_composite_converter.py::test_ac0820_l_conversion_keeps_circle_diameter_above_half_image_width` reduzieren (aktuell `165.26s`).
     - Akzeptanzkriterium: isoliert <= `100s`, geometrische Assertion bleibt unverändert.
   - [ ] T6.6 (hohe Priorität): `tests/test_image_composite_converter.py::test_ac08_regression_suite_preserves_previously_good_variants[AC0835_S-semantic_ok]` reduzieren (aktuell `133.60s`).
@@ -2884,44 +2886,91 @@ Jeder Tag hat genau definierte Aufgaben mit einem harten Exit-Kriterium.
 Ziel: Die Konvertierung soll strikt als **Kette** laufen:  
 1) Bildbeschreibung prüfen/normalisieren → 2) Geometrie-Elemente ableiten → 3) Element-für-Element optimieren → 4) Bedingungen/Policies anwenden → 5) Finalauswahl.
 
+### Neue Prioritätsgewichtung ab 2026-05-28
+
+| Gewicht | Arbeit | Begründung |
+| ---: | --- | --- |
+| 100 | **PR-R2 — Geometry IR** | Schnellster Hebel weg von verstreuten Heuristiken hin zu expliziten geometrischen Figurenketten. |
+| 95 | **PR-R3 — Elementweiser Optimizer** | Macht die IR-Kette ausführbar und erzwingt Einpassen pro Figur statt One-shot-Heuristik. |
+| 70 | **PR-R4 — Policy-Schlussphase** | Wichtig, aber erst nach belastbarer Geometriekette; verhindert frühe Sonderfall-Overrides. |
+| 55 | **PR-R5 — Telemetrie/Abnahme** | Abnahme folgt nach funktionsfähigem Kettenpfad. |
+| 30 | **T6/TB-A3/Testhygiene-Routine** | Nur noch als Sicherungsnetz oder bei konkretem Regressionsverdacht, nicht mehr als Standard-Next-Step. |
+
+**Verbindlicher nächster Schritt:** PR-R2 starten und direkt so zuschneiden, dass R2-Artefakte von PR-R3 als sequenzielle Einpass-Kette konsumiert werden können.
+
 ### PR-R1 — Description Contract + Fail-Fast
-- [ ] **R1-1:** Zentrales Description-Contract-Schema einführen (`has_reference`, `has_geometry_terms`, `has_conditions`, `deficits`).
-- [ ] **R1-2:** Parser/Reflection um `contract_status` erweitern und Defizite explizit loggen.
-- [ ] **R1-3:** Bei unzureichender Beschreibung klarer Status (`insufficient_description`) statt stiller Fallback-Entscheidung.
-- [ ] **R1-TEST:** Unit-Tests für vollständige, rekursive, leere und alias-lastige Beschreibungen.
-- [ ] **R1-EXIT:** Jeder Lauf hat nachvollziehbare Beschreibungsgüte und expliziten Grund für Moduswahl.
+- [x] **R1-1:** Zentrales Description-Contract-Schema einführen (`has_reference`, `has_geometry_terms`, `has_conditions`, `deficits`). (2026-05-27 Run KW umgesetzt.)
+- [x] **R1-2:** Parser/Reflection um `contract_status` erweitern und Defizite explizit loggen. (2026-05-27 Run KW umgesetzt.)
+- [x] **R1-3:** Bei unzureichender Beschreibung klarer Status (`insufficient_description`) statt stiller Fallback-Entscheidung. (2026-05-27 Run KW umgesetzt.)
+- [x] **R1-TEST:** Unit-Tests für vollständige, rekursive, leere und alias-lastige Beschreibungen. (2026-05-27 Run KW umgesetzt.)
+- [x] **R1-EXIT:** Jeder Lauf hat nachvollziehbare Beschreibungsgüte und expliziten Grund für Moduswahl. (2026-05-27 Run KW erfüllt; Volltest grün.)
 
 ### PR-R2 — Geometry IR (Zwischenrepräsentation)
-- [ ] **R2-1:** Geometrie-IR einführen (z. B. `RectBorder`, `HorizontalGradient`, `DiagonalBand`, `PlusGlyph`, `MinusGlyph`).
-- [ ] **R2-2:** Mapping Beschreibung → IR-Reihenfolge implementieren (inkl. Constraints).
-- [ ] **R2-3:** SVG-Erzeugung aus IR zentralisieren (kein verstreutes Direkt-SVG pro Sonderpfad).
-- [ ] **R2-TEST:** Snapshot-Tests für Parser→IR und Smoke-Tests für IR→SVG.
-- [ ] **R2-EXIT:** Für AC0120-artige Fälle liegt eine explizite IR-Kette vor.
+- [x] **R2-1:** Geometrie-IR einführen (z. B. `RectBorder`, `HorizontalGradient`, `DiagonalBand`, `PlusGlyph`, `MinusGlyph`). (2026-05-28 Run LN umgesetzt.)
+- [x] **R2-2:** Mapping Beschreibung → IR-Reihenfolge implementieren (inkl. Constraints). (2026-05-28 Run LN umgesetzt.)
+- [x] **R2-3:** SVG-Erzeugung aus IR zentralisieren (kein verstreutes Direkt-SVG pro Sonderpfad). (2026-05-28 Run LN umgesetzt.)
+- [x] **R2-TEST:** Snapshot-Tests für Parser→IR und Smoke-Tests für IR→SVG. (2026-05-28 Run LN umgesetzt.)
+- [x] **R2-EXIT:** Für AC0120-artige Fälle liegt eine explizite IR-Kette vor. (2026-05-28 Run LN erfüllt.)
 
 ### PR-R3 — Elementweiser Optimizer als Standardpfad
-- [ ] **R3-1:** Generischen sequenziellen Optimizer auf IR-Basis einführen (pro Schritt nur Verbesserung übernehmen).
-- [ ] **R3-2:** Step-Logging standardisieren (`step_index`, `element`, `best_delta`, `accepted`).
-- [ ] **R3-3:** One-shot nur noch als expliziter Notfallmodus; Standard bleibt elementweise.
-- [ ] **R3-TEST:** Deterministische Tests mit Mock-Renderer/Error-Funktion; Regressionsschutz für bestehende Helper-Tests.
-- [ ] **R3-EXIT:** „Element-für-Element zuerst“ ist technisch erzwungen und testbar.
+- [x] **R3-1:** Generischen sequenziellen Optimizer auf IR-Basis einführen (pro Schritt nur Verbesserung übernehmen). (2026-05-28 Run LO umgesetzt.)
+- [x] **R3-2:** Step-Logging standardisieren (`step_index`, `element`, `best_delta`, `accepted`). (2026-05-28 Run LO umgesetzt.)
+- [x] **R3-3:** One-shot nur noch als expliziter Notfallmodus; Standard bleibt elementweise. (2026-05-28 Run LO umgesetzt.)
+- [x] **R3-TEST:** Deterministische Tests mit Mock-Renderer/Error-Funktion; Regressionsschutz für bestehende Helper-Tests. (2026-05-28 Run LO umgesetzt.)
+- [x] **R3-EXIT:** „Element-für-Element zuerst“ ist technisch erzwungen und testbar. (2026-05-28 Run LO erfüllt.)
 
 ### PR-R4 — Bedingungen/Policy als getrennte Schlussphase
-- [ ] **R4-1:** Policy-Phase nach der Geometriekette formal trennen (Alias-Regeln, Sample-Vergleich, Guards).
-- [ ] **R4-2:** Klaren Entscheidungs-Log einführen (`geometry_phase_result`, `policy_phase_decision`, `override_reason`).
-- [ ] **R4-3:** Harte variantspezifische Sonderbehandlungen abbauen oder zeitlich befristen.
-- [ ] **R4-TEST:** Fälle für „Geometrie gewinnt“, „Sample gewinnt“, „Guard greift“.
-- [ ] **R4-EXIT:** Keine verdeckten Policy-Overrides mehr vor Abschluss der Geometriekette.
+- [x] **R4-1:** Policy-Phase nach der Geometriekette formal trennen (Alias-Regeln, Sample-Vergleich, Guards). (2026-05-28 Run LP umgesetzt.)
+- [x] **R4-2:** Klaren Entscheidungs-Log einführen (`geometry_phase_result`, `policy_phase_decision`, `override_reason`). (2026-05-28 Run LP umgesetzt.)
+- [x] **R4-3:** Harte variantspezifische Sonderbehandlungen abbauen oder zeitlich befristen. (2026-05-28 Run LP: neue Schlussphase ohne variantspezifische Sonderliste eingeführt; Guards/Sample-Overrides laufen nur noch über zentrale Policy-Entscheidungen.)
+- [x] **R4-TEST:** Fälle für „Geometrie gewinnt“, „Sample gewinnt“, „Guard greift“. (2026-05-28 Run LP umgesetzt.)
+- [x] **R4-EXIT:** Keine verdeckten Policy-Overrides mehr vor Abschluss der Geometriekette. (2026-05-28 Run LP erfüllt; `geometry_phase_result` wird vor jeder Policy-Entscheidung protokolliert.)
 
 ### PR-R5 — Benennung, Telemetrie, Abnahme
-- [ ] **R5-1:** Uneindeutige Begriffe im Logging harmonisieren (z. B. klare Trennung von Fallback- und Kettenphasen).
-- [ ] **R5-2:** Qualitätsmetriken pro Phase erfassen (Step-Erfolgsrate, Override-Häufigkeit, Placeholder-Notfallrate).
-- [ ] **R5-3:** Abschlussdokument mit Vorher/Nachher-Kennzahlen und offenen Restpunkten ergänzen.
-- [ ] **R5-TEST:** Vollsuite + gezielte AC0120/AC0130/AC0030 Vergleichsläufe.
-- [ ] **R5-EXIT:** Reproduzierbare, datenbasierte Abnahme der Ketten-Architektur.
+- [x] **R5-1:** Uneindeutige Begriffe im Logging harmonisieren (z. B. klare Trennung von Fallback- und Kettenphasen). (2026-05-28 Run LQ umgesetzt: zentrale R5-Labels für Geometry-, Policy- und Emergency-/Placeholder-Phasen eingeführt.)
+- [x] **R5-2:** Qualitätsmetriken pro Phase erfassen (Step-Erfolgsrate, Override-Häufigkeit, Placeholder-Notfallrate). (2026-05-28 Run LQ umgesetzt: `step_success_rate`, `override_frequency` und `placeholder_emergency_rate` als Telemetrie-/Aggregationsfelder ergänzt.)
+- [x] **R5-3:** Abschlussdokument mit Vorher/Nachher-Kennzahlen und offenen Restpunkten ergänzen. (2026-05-28 Run LQ umgesetzt: siehe `docs/chain_architecture_r5_acceptance_2026-05-28_runLQ.md`.)
+- [x] **R5-TEST:** Vollsuite + gezielte AC0120/AC0130/AC0030 Vergleichsläufe. (2026-05-28 Run LQ umgesetzt: R5-Detailtests `19 passed`, gezielte AC0120/AC0130/AC0030-Tests `5 passed`, Vollsuite `560 passed, 5 warnings`.)
+- [x] **R5-EXIT:** Reproduzierbare, datenbasierte Abnahme der Ketten-Architektur. (2026-05-28 Run LQ erfüllt; Telemetrie, Abnahmedokument und Sicherungstests liegen vor.)
 
 ### Reihenfolge und Leitplanke
-- [ ] **Reihenfolge:** R1 → R2 → R3 → R4 → R5.
-- [ ] **Leitplanke (verbindlich):** Bedingungen/Policies erst **nach** elementweiser Geometriekette anwenden.
+- [x] **Reihenfolge:** R1 → R2 → R3 → R4 → R5. (2026-05-28 Run LQ erfüllt: R5 nach R1–R4 abgeschlossen.)
+- [x] **Leitplanke (verbindlich):** Bedingungen/Policies erst **nach** elementweiser Geometriekette anwenden. (2026-05-28 Run LQ erfüllt und über R5-Telemetrie nach der Policy-Schlussphase sichtbar.)
+
+### Fortschritt vs. Blocker (Session 2026-05-28, PR-R5 Telemetrie/Abnahme Run LQ)
+
+- **Fortschritt (R5-1/R5-2):** Neue zentrale R5-Telemetrie eingeführt; sie harmonisiert Geometry-/Policy-/Emergency-Begriffe und erfasst `step_success_rate`, `override_applied`, `override_reason` sowie Placeholder-Notfallnutzung pro Lauf. Aggregiert werden daraus `mean_step_success_rate`, `override_frequency` und `placeholder_emergency_rate`.
+- **Fortschritt (R5-3/R5-EXIT):** Abschluss-/Abnahmedokument `docs/chain_architecture_r5_acceptance_2026-05-28_runLQ.md` ergänzt, inklusive Vorher/Nachher-Kennzahlen, Restpunkten und Fazit.
+- **Fortschritt (R5-TEST):** R5-Detailtests liefen grün (`19 passed`), die gezielten AC0120/AC0130/AC0030-Vergleichstests liefen grün (`5 passed, 5 warnings`) und die Vollsuite lief grün (`PYENV_VERSION=3.10.20 timeout 300 python -m pytest -q -rs`, `560 passed, 5 warnings`, Exit `0`).
+- **Zusatzkorrektur:** AC0030-artige, geometrisch vollständige AC0130-Beschreibungen setzen keine verdeckte `top_source_ref="AC0030"` mehr; damit bleibt die Referenz-/Policy-Fallback-Trennung sauber.
+- **Blocker:** Keine neuen Blocker. Produktive Batch-/CSV-Reports können die neue `chain_phase_telemetry_line` künftig zusätzlich ausgeben.
+- **Nächster sinnvoller Schritt:** Nach Abschluss der PR-Roadmap wieder gemäß aktueller Produktpriorität entscheiden: entweder R5-Telemetrie in Batch-Reports verdrahten oder auf das nächste dokumentierte Bild-/Testhygiene-Paket rotieren.
+
+
+
+### Fortschritt vs. Blocker (Session 2026-05-28, PR-R4 Policy-Schlussphase Run LP)
+
+- **Fortschritt (R4-1/R4-2):** Neue zentrale Policy-Schlussphase nach der Geometry-IR-Auswahl eingeführt; sie protokolliert `geometry_phase_result`, `policy_phase_decision` und `override_reason` vor finaler Render-Freigabe.
+- **Fortschritt (R4-3):** Guards, explizite Sample-Präferenz und Sample/Geometry-Fehlervergleich laufen jetzt über eine zentrale, nicht variantspezifische Policy-Entscheidung statt verdeckter Einzelpfade.
+- **Fortschritt (R4-TEST):** Detailtests decken die Entscheidungen „Geometrie gewinnt“, „Sample gewinnt“ und „Guard greift“ ab; außerdem wurden die bestehenden Geometry-IR- und Description-Contract-Tests erneut ausgeführt. Der abschließende Volltest lief grün (`PYENV_VERSION=3.10.20 timeout 300 python -m pytest -q -rs`, `557 passed, 5 warnings`, Exit `0`).
+- **Blocker:** Keine neuen Blocker; echte produktive Sample-Vergleichsmetriken bleiben ein Anschluss für PR-R5-Telemetrie/Abnahme.
+- **Nächster sinnvoller Schritt:** PR-R5 starten und die neue Policy-/Geometry-Phasentrennung in Telemetrie, Logging-Begriffen und Abnahmebericht messbar machen.
+
+### Fortschritt vs. Blocker (Session 2026-05-28, PR-R3 elementweiser Geometry-IR-Optimizer Run LO)
+
+- **Fortschritt (R3-1/R3-2):** Neuer sequenzieller Geometry-IR-Optimizer eingeführt; er bewertet jedes IR-Element gegen die aktuell akzeptierte Kette, übernimmt ausschließlich strikt verbessernde Kandidaten und protokolliert pro Schritt `step_index`, `element`, `best_delta`, `accepted`, `error_before` und `error_after`.
+- **Fortschritt (R3-3):** Composite-SVG-Rendering wählt nun zuerst `optimized_geometry_ir`, dann die normale `geometry_ir`; ein One-shot-IR wird nur bei explizitem `allow_one_shot_emergency=True` als Notfallmodus akzeptiert.
+- **Fortschritt (R3-TEST):** Deterministische Mock-Renderer/Error-Tests decken Annahme verbessernder Kandidaten, Regressionsablehnung und One-shot-Notfallgating ab; zusätzlich lief der Volltest grün (`PYENV_VERSION=3.10.20 timeout 300 python -m pytest -q -rs`, `554 passed, 5 warnings`, Exit `0`; Logs: `artifacts/converted_images/reports/pr_r3_geometry_ir_optimizer_detailtests_2026-05-28_runLO.log`, `artifacts/converted_images/reports/pytest_full_2026-05-28_runLO.log`).
+- **Blocker:** Keine neuen Blocker; der Optimizer ist aktuell bewusst renderer-agnostisch und nutzt für Produktionsläufe zunächst konservative lokale Default-Probes.
+- **Nächster sinnvoller Schritt:** PR-R4 starten und Policy-/Bedingungsentscheidungen als getrennte Schlussphase nach `geometry_phase_mode=elementwise_geometry_ir` verdrahten.
+
+### Fortschritt vs. Blocker (Session 2026-05-28, PR-R2 Geometry-IR Run LN)
+
+- **Fortschritt (R2-1/R2-2):** Neues Geometry-IR-Modul eingeführt; Beschreibungen werden in eine geordnete Primitive-Kette (`HorizontalGradient`, `RectBorder`, `DiagonalBand`, `PlusGlyph`, `MinusGlyph`) übersetzt und in `params["geometry_ir"]` abgelegt.
+- **Fortschritt (R2-3):** Composite-SVG-Erzeugung rendert vorhandene IR-Ketten zentral über den Geometry-IR-Renderer; der bisherige `square_cross`-Sonderpfad nutzt ebenfalls IR-Fragmente als Fallback.
+- **Fortschritt (R2-TEST):** Detailtests decken AC0130-/AC0120-artige Parser→IR-Ketten, SVG-Smoke-Rendering und Parser-Verdrahtung ab; zusätzlich lief der Volltest grün (`PYENV_VERSION=3.10.20 timeout 300 python -m pytest -q -rs`, `551 passed, 5 warnings`, Exit `0`; Logs: `artifacts/converted_images/reports/pr_r2_geometry_ir_detailtests_2026-05-28_runLN.log`, `artifacts/converted_images/reports/pytest_full_2026-05-28_runLN.log`).
+- **Blocker:** Keine neuen Blocker; die IR ist bewusst deterministisch und noch nicht optimierend.
+- **Nächster sinnvoller Schritt:** PR-R3 starten und den elementweisen Optimizer auf `geometry_ir` aufsetzen.
 
 ### Fortschritt vs. Blocker (Session 2026-05-27, PR-R1 Description Contract + Volltest Run KW)
 
@@ -2929,3 +2978,61 @@ Ziel: Die Konvertierung soll strikt als **Kette** laufen:
 - **Fortschritt (R1-TEST):** Neue Unit-Tests für vollständige Beschreibung, rekursive Alias-Vererbung, leere Beschreibung und alias-lastige Beschreibung ergänzt.
 - **Fortschritt (Volltest):** Gesamte Suite wurde vollständig ausgeführt (`PYENV_VERSION=3.10.20 timeout 300 python -m pytest -q -rs`) mit Ergebnis `547 passed, 5 warnings`, Exit `0`.
 - **Nächster sinnvoller Schritt:** PR-R2 (Geometry-IR) gemäß Roadmap starten.
+
+### Fortschritt vs. Blocker (Session 2026-05-28, T6.3 + T6-PB + AC0130_M + Volltest Run LM)
+
+- **Fortschritt (nächste dokumentierte Aufgabe):** T6.3 wurde isoliert ausgeführt (`PYENV_VERSION=3.10.20 PYTHONPATH=. timeout 180 pyenv exec python -u -m pytest tests/test_image_composite_converter.py::test_make_badge_params_keeps_ac0838_m_circle_near_full_width_for_voc_layout -q`) mit Exit `0`, Ergebnis `1 skipped, 5 warnings in 3.66s`; Log: `artifacts/converted_images/reports/T6_3_ac0838M_isolation_2026-05-28_runLM.log`.
+- **Fortschritt (gekoppelte Plan-B-Aufgabe):** Der T6-PB-Einzeltest lief grün (`PYENV_VERSION=3.10.20 python -m pytest -q tests/detailtests/test_global_search_optimization_helpers.py::test_global_search_skips_deterministic_track_after_strong_stochastic_gain`) mit Exit `0`, Ergebnis `1 passed in 0.13s`; Log: `artifacts/converted_images/reports/t6_planb_singletest_2026-05-28_runLM.log`.
+- **Fortschritt (Plan-B-Kandidat):** Die Syntheseprobe für `AC0130_M` wurde ausgeführt (`PYENV_VERSION=3.10.20 python -m tools.plan_b_synthetic_probe "Bildbeschreibung: Kreis mit horizontalem Griff links und Beschriftung rF." --variant AC0130_M --output-dir artifacts/converted_images/reports`) mit Exit `0`, Ergebnis `status=ok`; Log: `artifacts/converted_images/reports/AC0130_M_planb_synthetic_2026-05-28_runLM.log`.
+- **Fortschritt (Volltest):** Der abschließende Komplettlauf war vollständig grün (`PYENV_VERSION=3.10.20 timeout 300 python -m pytest -q -rs`) mit Exit `0`, Ergebnis `547 passed, 5 warnings`; Log: `artifacts/converted_images/reports/pytest_full_2026-05-28_runLM.log`.
+- **Nächster sinnvoller Schritt:** Wegen der neuen Gewichtung nicht erneut im T6/TB-A3-Routineschema fortfahren, sondern PR-R2 (Geometry IR) als nächstes Arbeitspaket starten; T6/TB-A3 bleiben nur Sicherungsnetz nach konkreten Ketten-Änderungen.
+
+### Fortschritt vs. Blocker (Session 2026-05-28, R5 Scorecard-Telemetrie Run LS)
+
+- **Fortschritt:** Der nach Run LR dokumentierte Anschluss wurde umgesetzt: `chain_phase_telemetry.csv` führt nun Scorecard-/Baseline-Felder (`status`, `error_per_pixel`, `mean_delta2`) direkt neben den R5-Phasenfeldern; `chain_phase_telemetry_summary.txt` ergänzt `semantic_ok_count`, `non_green_count`, `mean_error_per_pixel` und `mean_delta2`.
+- **Sicherung:** Detailtests liefen grün (`PYENV_VERSION=3.10.20 python -m pytest -q tests/detailtests/test_batch_reporting_helpers.py tests/detailtests/test_chain_telemetry_helpers.py tests/detailtests/test_conversion_finalization_helpers.py`, `23 passed`, Exit `0`); Vollsuite lief grün (`PYENV_VERSION=3.10.20 timeout 300 python -m pytest -q -rs`, `561 passed, 5 warnings`, Exit `0`).
+- **Blocker:** Keine neuen Blocker; Scorecard-Werte bleiben leer, wenn ein Lauf keine endlichen Qualitätsmetriken im `result_map` liefert.
+- **Nächster sinnvoller Schritt:** Wieder auf das nächste dokumentierte Bild-/Testhygiene-Paket rotieren oder aus den neuen Scorecard-Telemetrie-Kennzahlen eine Drift-Grenze für künftige Batchläufe ableiten.
+
+### Fortschritt vs. Blocker (Session 2026-05-28, R5 Batch-Telemetrie Run LR)
+
+- **Fortschritt:** Der nach PR-R5 dokumentierte Anschluss wurde umgesetzt: Batchläufe schreiben nun `chain_phase_telemetry.csv` mit Geometry-/Policy-Phasen, Step-Erfolgsrate, Override-Status und Placeholder-Notfallmarkierung je Variante sowie `chain_phase_telemetry_summary.txt` mit aggregierten R5-Abnahmemetriken.
+- **Verdrahtung:** `runConversionFinalizationImpl(...)` ruft den neuen Batch-Telemetrie-Report vor `Iteration_Log.csv` und der Post-Conversion-Reportphase auf; `convertRange(...)` nutzt dafür die bestehende R5-Aggregation aus `imageCompositeConverterChainTelemetry`.
+- **Sicherung:** Detailtests liefen grün (`23 passed`, Exit `0`); Vollsuite lief grün (`PYENV_VERSION=3.10.20 timeout 300 python -m pytest -q -rs`, `561 passed, 5 warnings`, Exit `0`).
+- **Blocker:** Keine neuen Blocker. Die neuen Reports bleiben leer bis ohne Fehler lauffähige Varianten tatsächlich `params["chain_phase_telemetry"]` liefern.
+- **Nächster sinnvoller Schritt:** Auf das nächste dokumentierte Bild-/Testhygiene-Paket rotieren oder die neuen Telemetrie-Reports in eine bestehende Scorecard/Baseline-Auswertung integrieren.
+
+### Fortschritt vs. Blocker (Session 2026-05-28, R5 Drift-Grenze Run LT)
+
+- **Fortschritt:** Der nach Run LS dokumentierte Anschluss wurde umgesetzt: `chain_phase_telemetry_summary.txt` enthält nun einen konfigurierbaren Drift-Gate-Block (`drift_status`, `drift_reasons`, `drift_max_mean_error_per_pixel`, `drift_max_mean_delta2`, `drift_max_non_green`).
+- **Sicherung:** Neue Detailtests decken den `pass`-Fall unter den Standardgrenzen und den `warn`-Fall bei überschrittener Fehler-/Delta2-Grenze sowie nicht-grünem Status ab.
+- **Blocker:** Keine neuen Blocker; bei fehlenden endlichen Scorecard-Metriken bleibt das Gate bewusst `warn` mit expliziten Missing-Reasons.
+- **Nächster sinnvoller Schritt:** Wieder auf das nächste dokumentierte Bild-/Testhygiene-Paket rotieren oder die Drift-Grenze in einen automatisierten Abnahmecheck für konkrete Batch-Artefakte überführen.
+
+### Fortschritt vs. Blocker (Session 2026-05-29, R5 Drift-Artefakt-Check Run LU)
+
+- **Fortschritt:** Der nach Run LT dokumentierte Anschluss wurde umgesetzt: `chain_phase_telemetry_summary.txt` kann nun mit `tools/check_chain_telemetry_drift_gate.py` als automatisierter Drift-Gate-Check geprüft werden; `pass` liefert Exit `0`, `warn`/fehlende Artefakte liefern Exit `1` mit stabilen Reasons.
+- **Sicherung:** Detailtests liefen grün (`python -m pytest -q tests/detailtests/test_batch_reporting_helpers.py`, `8 passed`, Exit `0`); der erweiterte Detailtest-Block lief grün (`28 passed`, Exit `0`); die Vollsuite lief grün (`PYENV_VERSION=3.10.20 timeout 300 python -m pytest -q -rs`, `566 passed, 5 warnings`, Exit `0`).
+- **Blocker:** Keine neuen Blocker. Der neue Check bewertet vorhandene Summary-Artefakte; Batchläufe müssen das Summary weiterhin vorher erzeugen.
+- **Nächster sinnvoller Schritt:** Den Artefakt-Check in das dokumentierte Gate-/Pre-Commit-Profil aufnehmen oder wieder auf das nächste Bild-/Testhygiene-Paket rotieren.
+
+### Fortschritt vs. Blocker (Session 2026-05-29, Drift-Gate im Abschlussprofil Run LV)
+
+- **Fortschritt:** Der nach Run LU dokumentierte Anschluss wurde umgesetzt: `tools/check_chain_telemetry_drift_gate.py` ist nun im lokalen Workflow als eigener Gate-Schritt dokumentiert und zusätzlich im README-Checkblock sichtbar.
+- **Sicherung:** Der Workflow-Dokumentationstest wurde erweitert und lief grün (`PYENV_VERSION=3.10.20 python -m pytest -q tests/test_image_composite_converter.py::test_local_workflow_doc_tracks_current_commands`, `1 passed`, Exit `0`); eine synthetische Pass-Artefakt-Probe für den Drift-Gate-Check endete mit Exit `0`; die Vollsuite lief grün (`PYENV_VERSION=3.10.20 timeout 300 python -m pytest -q -rs`, `566 passed, 5 warnings`, Exit `0`).
+- **Blocker:** Keine neuen Blocker. Der Gate-Check setzt weiterhin voraus, dass ein Batchlauf vorher `chain_phase_telemetry_summary.txt` erzeugt hat.
+- **Nächster sinnvoller Schritt:** Wieder auf das nächste dokumentierte Bild-/Testhygiene-Paket rotieren oder das Drift-Gate zusätzlich in ein ausführbares Sammelskript für lokale Abschlusschecks bündeln.
+
+### Fortschritt vs. Blocker (Session 2026-05-29, lokales Abschlussprofil Run LW)
+
+- **Fortschritt:** Der nach Run LV dokumentierte Anschluss wurde umgesetzt: `tools/run_local_completion_checks.sh` bündelt nun `compileall`, Pytest, den CLI-Help-Smoke und den Ketten-Telemetrie-Drift-Gate-Check als ausführbares lokales Abschlussprofil.
+- **Sicherung:** Der Workflow-Dokumentationstest lief grün (`PYENV_VERSION=3.10.20 python -m pytest -q tests/test_image_composite_converter.py::test_local_workflow_doc_tracks_current_commands`, `1 passed`, Exit `0`); das neue Sammelprofil lief vollständig grün (`PYENV_VERSION=3.10.20 timeout 300 ./tools/run_local_completion_checks.sh`, Exit `0`, Pytest: `566 passed, 5 warnings`).
+- **Blocker:** Keine neuen Blocker. Der Drift-Gate-Schritt wird ohne vorhandenes `chain_phase_telemetry_summary.txt` bewusst als `SKIP` protokolliert; für verpflichtende Batch-Gates steht `--require-drift-summary` bereit.
+- **Nächster sinnvoller Schritt:** Wieder auf das nächste dokumentierte Bild-/Testhygiene-Paket rotieren oder das Abschlussprofil in einen automatisierten CI-/Pre-Commit-Aufruf einhängen.
+
+### Fortschritt vs. Blocker (Session 2026-05-29, CI-Abschlussprofil Run LX)
+
+- **Fortschritt:** Der nach Run LW dokumentierte Anschluss wurde umgesetzt: `.github/workflows/local-completion-checks.yml` startet nun `./tools/run_local_completion_checks.sh` auf Pull Requests, Pushes auf die Hauptarbeitszweige und manuell per `workflow_dispatch`.
+- **Sicherung:** Der Workflow-Dokumentationstest lief grün (`PYENV_VERSION=3.10.20 python -m pytest -q tests/test_image_composite_converter.py::test_local_workflow_doc_tracks_current_commands`, `1 passed`, Exit `0`); das lokale Abschlussprofil lief vollständig grün (`PYENV_VERSION=3.10.20 timeout 300 ./tools/run_local_completion_checks.sh`, Exit `0`, Pytest: `566 passed, 5 warnings`).
+- **Blocker:** Keine neuen Blocker. Der CI-Workflow nutzt bewusst denselben lokalen Sammelbefehl; ohne erzeugtes `chain_phase_telemetry_summary.txt` bleibt der Drift-Gate-Schritt wie lokal ein dokumentierter `SKIP`.
+- **Nächster sinnvoller Schritt:** Wieder auf das nächste dokumentierte Bild-/Testhygiene-Paket rotieren oder bei Bedarf das CI-Profil um einen separaten Batch-Artefakt-Job mit `--require-drift-summary` erweitern.

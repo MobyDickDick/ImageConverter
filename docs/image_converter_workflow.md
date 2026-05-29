@@ -76,13 +76,59 @@ if failed:
 PY
 ```
 
-## 5. Linux-Vendor-Kommando ausgeben
+## 5. Ketten-Telemetrie-Drift-Gate prüfen
+
+Nach Batchläufen, die `chain_phase_telemetry_summary.txt` erzeugen, ist die
+konfigurierte Drift-Grenze als eigener, Shell-/CI-tauglicher Gate-Check
+auszuführen:
+
+```bash
+python tools/check_chain_telemetry_drift_gate.py artifacts/converted_images/reports/chain_phase_telemetry_summary.txt
+```
+
+Der Check akzeptiert nur ein Summary mit `drift_status=pass` und beendet sich
+dann mit Exit `0`. Warnungen, fehlende Artefakte oder ein fehlender
+`drift_status` liefern Exit `1` mit stabilen Reason-Codes, damit
+Batch-Artefakte nicht nur erzeugt, sondern auch automatisiert gegen die
+dokumentierte Drift-Grenze abgesichert werden.
+
+## 6. Gebündeltes lokales Abschlussprofil
+
+Für reguläre Arbeitspakete kann der verbindliche lokale Abschlussblock als
+ein ausführbares Sammelprofil gestartet werden:
+
+```bash
+./tools/run_local_completion_checks.sh
+```
+
+Das Skript führt `compileall`, die Pytest-Suite, den CLI-Help-Smoke und – sofern
+ein `chain_phase_telemetry_summary.txt` vorhanden ist – den
+Ketten-Telemetrie-Drift-Gate-Check aus. Wenn ein Batchlauf zwingend ein Summary
+erzeugen muss, wird die Drift-Artefaktprüfung mit `--require-drift-summary`
+verbindlich gemacht:
+
+```bash
+./tools/run_local_completion_checks.sh --require-drift-summary
+```
+
+## 7. Automatisierter CI-Aufruf
+
+Das lokale Abschlussprofil ist zusätzlich in GitHub Actions verdrahtet. Der
+Workflow `.github/workflows/local-completion-checks.yml` startet auf Pull
+Requests, Pushes auf die Hauptarbeitszweige und manuell per `workflow_dispatch`
+denselben Sammelbefehl:
+
+```bash
+./tools/run_local_completion_checks.sh
+```
+
+## 8. Linux-Vendor-Kommando ausgeben
 
 ```bash
 python -m src.imageCompositeConverter --print-linux-vendor-command --vendor-dir vendor
 ```
 
-## 6. VS Code Debugging unter Windows
+## 9. VS Code Debugging unter Windows
 
 - Nutze nach Möglichkeit die Workspace-Launch-Konfiguration
   `ImageConverter: convert interactive range`.
@@ -90,7 +136,7 @@ python -m src.imageCompositeConverter --print-linux-vendor-command --vendor-dir 
   `.venv\\Scripts` startet, ist der Interpreter falsch gewählt. In diesem Fall
   in VS Code explizit `.venv\\Scripts\\python.exe` auswählen.
 
-## 7. Sample-Paar-Validierung (N5)
+## 10. Sample-Paar-Validierung (N5)
 
 ```bash
 python -m tools.validate_sample_pairs --strict
@@ -102,7 +148,7 @@ bei Bedarf automatisch auch aus den Repo-`vendor/*/site-packages`-Pfaden.
 Wenn diese Pakete im `vendor`-Ordner liegen, ist kein zusätzlicher manueller
 `pip install`-Schritt nötig.
 
-## 8. N6-Variationssuite generieren (Basis)
+## 11. N6-Variationssuite generieren (Basis)
 
 ```bash
 python -m tools.generate_svg_variation_suite

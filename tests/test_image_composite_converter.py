@@ -6274,12 +6274,22 @@ def test_readme_links_local_workflow_doc() -> None:
 
 def test_local_workflow_doc_tracks_current_commands() -> None:
     workflow_doc = Path("docs/image_converter_workflow.md").read_text(encoding="utf-8")
+    ci_workflow = Path(".github/workflows/local-completion-checks.yml").read_text(
+        encoding="utf-8"
+    )
 
     assert "python -m compileall src tests" in workflow_doc
     assert "python -m pytest" in workflow_doc
     assert "python -m src.imageCompositeConverter --help" in workflow_doc
     assert "--descriptions-path" in workflow_doc
     assert "--ac08-regression-set" in workflow_doc
+    assert "python tools/check_chain_telemetry_drift_gate.py" in workflow_doc
+    assert "./tools/run_local_completion_checks.sh" in workflow_doc
+    assert "--require-drift-summary" in workflow_doc
+    assert ".github/workflows/local-completion-checks.yml" in workflow_doc
+    assert "./tools/run_local_completion_checks.sh" in ci_workflow
+    assert "pull_request:" in ci_workflow
+    assert "workflow_dispatch:" in ci_workflow
     assert "--print-linux-vendor-command" in workflow_doc
 
 

@@ -2,6 +2,11 @@
 
 from __future__ import annotations
 
+from src.iCCModules import imageCompositeConverterGeometryIr as geometry_ir_helpers
+from src.iCCModules import imageCompositeConverterGeometryIrOptimizer as geometry_ir_optimizer
+from src.iCCModules import imageCompositeConverterPolicyPhase as policy_phase_helpers
+from src.iCCModules import imageCompositeConverterChainTelemetry as chain_telemetry_helpers
+
 
 def _approximate_contour_points(contour, *, cv2_module, np_module, ratio: float = 0.10):
     """Iteratively approximate a contour and target ~ratio of original points."""
@@ -174,25 +179,40 @@ def generateCompositeSvgImpl(
                 )
             )
 
-    if params["bottom_shape"] == "square_cross":
-        cx = w / 2
-        cy = h * 0.75
-        s = min(w, h) * 0.15
-        sw = w * 0.02
-        svg_elements.append(
-            f'  <rect x="{cx-s}" y="{cy-s}" width="{s*2}" height="{s*2}" fill="#e6e6e6" stroke="#4d4d4d" stroke-width="{sw}"/>'
-        )
-        inset = sw * 0.5
-        x0 = cx - s + inset
-        x1 = cx + s - inset
-        y0 = cy - s + inset
-        y1 = cy + s - inset
-        svg_elements.append(
-            f'  <path d="M {x0} {y0} L {x1} {y1}" stroke="#4d4d4d" stroke-width="{sw}" fill="none" stroke-linecap="butt"/>'
-        )
-        svg_elements.append(
-            f'  <path d="M {x1} {y0} L {x0} {y1}" stroke="#4d4d4d" stroke-width="{sw}" fill="none" stroke-linecap="butt"/>'
-        )
+    geometry_ir = geometry_ir_optimizer.selectGeometryIrForRenderingImpl(params)
+    geometry_ir = policy_phase_helpers.applyPolicyPhaseAfterGeometryImpl(params, geometry_ir)
+    params["chain_phase_telemetry"] = chain_telemetry_helpers.summarizeChainTelemetryImpl(params)
+    params["chain_phase_telemetry_line"] = chain_telemetry_helpers.formatChainTelemetryLineImpl(
+        params["chain_phase_telemetry"]
+    )
+    if geometry_ir:
+        svg_elements.extend(geometry_ir_helpers.renderGeometryIrToSvgElementsImpl(w, h, geometry_ir))
+    elif params["bottom_shape"] == "square_cross":
+        square_cross_ir = [
+            {
+                "kind": "RectBorder",
+                "id": "square_cross_rect",
+                "bbox": [0.35, 0.60, 0.30, 0.30],
+                "fill": "#e6e6e6",
+                "stroke": "#4d4d4d",
+                "stroke_width": 0.02,
+            },
+            {
+                "kind": "DiagonalBand",
+                "id": "square_cross_tl_br",
+                "direction": "tl_br",
+                "stroke": "#4d4d4d",
+                "stroke_width": 0.02,
+            },
+            {
+                "kind": "DiagonalBand",
+                "id": "square_cross_tr_bl",
+                "direction": "tr_bl",
+                "stroke": "#4d4d4d",
+                "stroke_width": 0.02,
+            },
+        ]
+        svg_elements.extend(geometry_ir_helpers.renderGeometryIrToSvgElementsImpl(w, h, square_cross_ir))
 
     svg_elements.append("</svg>")
     return "\n".join(svg_elements)

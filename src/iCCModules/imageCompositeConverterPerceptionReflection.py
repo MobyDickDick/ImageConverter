@@ -8,6 +8,7 @@ from dataclasses import dataclass
 from src.iCCModules import imageCompositeConverterAudit as audit_helpers
 from src.iCCModules import imageCompositeConverterDescriptions as description_mapping_helpers
 from src.iCCModules import imageCompositeConverterDualArrowBadge as dual_arrow_badge_helpers
+from src.iCCModules import imageCompositeConverterGeometryIr as geometry_ir_helpers
 from src.iCCModules import imageCompositeConverterSemantic as semantic_helpers
 
 
@@ -124,6 +125,7 @@ class Reflection:
             "semantic_conflicts": [],
             "semantic_sources": {},
             "description_contract": _build_description_contract(desc_raw),
+            "geometry_ir": geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(desc_raw),
         }
 
         contract_status = str(params["description_contract"].get("status", "ok"))
@@ -163,9 +165,9 @@ class Reflection:
         has_cooler_hint = any(token in desc for token in ("kühlelement", "rechteck", "minus-minus"))
         if ac0030_alias and (has_cross_hint or has_cooler_hint):
             params["mode"] = "composite"
-            params["top_source_ref"] = "AC0030"
+            params["top_source_ref"] = None
             params["bottom_shape"] = "square_cross"
-            params["elements"].append("OBEN: Alias-Referenz auf AC0030")
+            params["elements"].append("GEOMETRIE: AC0030-artige Beschreibung wird über Geometry-IR rekonstruiert")
             params["elements"].append("UNTEN: Parametrisch generiertes Viereck mit Andreaskreuz")
             return desc, params
 

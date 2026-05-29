@@ -392,6 +392,7 @@ def runConversionFinalizationImpl(
     write_iteration_log_and_collect_semantic_results_fn,
     harmonize_semantic_size_variants_fn,
     run_post_conversion_reporting_fn,
+    write_chain_telemetry_batch_report_fn=None,
 ) -> list[dict[str, object]]:
     """Write run artifacts and trigger semantic harmonization/reporting."""
     write_quality_pass_report_fn(reports_out_dir, quality_logs)
@@ -399,6 +400,8 @@ def runConversionFinalizationImpl(
     write_batch_failure_summary_fn(reports_out_dir, batch_failures)
     if strategy_logs:
         write_strategy_switch_template_transfers_report_fn(reports_out_dir, strategy_logs)
+    if write_chain_telemetry_batch_report_fn is not None:
+        write_chain_telemetry_batch_report_fn(reports_out_dir, result_map)
 
     log_path = os.path.join(reports_out_dir, "Iteration_Log.csv")
     semantic_results = write_iteration_log_and_collect_semantic_results_fn(files, result_map, log_path)
