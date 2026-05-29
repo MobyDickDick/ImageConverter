@@ -116,9 +116,12 @@ verbindlich gemacht:
 Das lokale Abschlussprofil ist zusätzlich in GitHub Actions verdrahtet. Der
 Workflow `.github/workflows/local-completion-checks.yml` startet auf Pull
 Requests, Pushes auf die Hauptarbeitszweige und manuell per `workflow_dispatch`
-denselben Sammelbefehl:
+denselben Sammelbefehl. Vor dem Sammelprofil installiert der Workflow `pytest`,
+damit ein frischer `actions/setup-python`-Runner die Pytest-Suite überhaupt als
+Modul starten kann:
 
 ```bash
+python -m pip install pytest
 ./tools/run_local_completion_checks.sh
 ```
 

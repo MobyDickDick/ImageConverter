@@ -6288,6 +6288,8 @@ def test_local_workflow_doc_tracks_current_commands() -> None:
     assert "--summary" in workflow_doc
     assert "--require-drift-summary" in workflow_doc
     assert ".github/workflows/local-completion-checks.yml" in workflow_doc
+    assert "python -m pip install pytest" in workflow_doc
+    assert "python -m pip install pytest" in ci_workflow
     assert "./tools/run_local_completion_checks.sh" in ci_workflow
     assert "--summary" in ci_workflow
     assert "--require-drift-summary" in ci_workflow
