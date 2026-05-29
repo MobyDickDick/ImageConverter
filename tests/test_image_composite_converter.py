@@ -6290,6 +6290,7 @@ def test_local_workflow_doc_tracks_current_commands() -> None:
     assert ".github/workflows/local-completion-checks.yml" in workflow_doc
     assert "python -m pip install pytest" in workflow_doc
     assert "python -m pip install pytest" in ci_workflow
+    assert ci_workflow.count("python -m pip install pytest") >= 2
     assert "./tools/run_local_completion_checks.sh" in ci_workflow
     assert "batch-artifact-drift-gate:" in ci_workflow
     assert "drift_status=pass" in ci_workflow
