@@ -1,0 +1,289 @@
+==> compileall
+Listing 'src'...
+Listing 'src/artifacts'...
+Listing 'src/artifacts/converted_images'...
+Listing 'src/artifacts/converted_images/converted_svgs'...
+Listing 'src/artifacts/converted_images/converterted_svgs'...
+Listing 'src/artifacts/converted_images/diff_pngs'...
+Listing 'src/artifacts/converted_images/reports'...
+Listing 'src/artifacts/converted_images/reports/conversion_bestlist_snapshots'...
+Listing 'src/artifacts/converted_images/reports/successful_conversions_bestlist'...
+Listing 'src/iCCModules'...
+Listing 'tests'...
+Listing 'tests/detailtests'...
+==> pytest
+============================= test session starts ==============================
+platform linux -- Python 3.10.20, pytest-9.0.3, pluggy-1.6.0
+rootdir: /workspace/ImageConverter
+configfile: pytest.ini
+testpaths: tests
+collected 566 items
+
+tests/detailtests/test_ac0223_runtime_helpers.py ..                      [  0%]
+tests/detailtests/test_ac0223_semantic_helpers.py ....                   [  1%]
+tests/detailtests/test_automate_function_extraction_tool.py ...          [  1%]
+tests/detailtests/test_batch_reporting_helpers.py ........               [  3%]
+tests/detailtests/test_chain_telemetry_helpers.py ...                    [  3%]
+tests/detailtests/test_circle_geometry_optimization_helpers.py ..        [  3%]
+tests/detailtests/test_circle_radius_optimization_helpers.py ..          [  4%]
+tests/detailtests/test_cli_helpers.py ..................                 [  7%]
+tests/detailtests/test_color_utils_helpers.py .....                      [  8%]
+tests/detailtests/test_composite_svg_helpers.py ..                       [  8%]
+tests/detailtests/test_conversion_bestlist_helpers.py ........           [ 10%]
+tests/detailtests/test_conversion_composite_helpers.py .                 [ 10%]
+tests/detailtests/test_conversion_execution_helpers.py ................. [ 13%]
+                                                                         [ 13%]
+tests/detailtests/test_conversion_finalization_helpers.py .............. [ 15%]
+...                                                                      [ 16%]
+tests/detailtests/test_conversion_initial_pass_helpers.py ...            [ 16%]
+tests/detailtests/test_conversion_inputs_helpers.py ...                  [ 17%]
+tests/detailtests/test_conversion_quality_pass_helpers.py ...            [ 17%]
+tests/detailtests/test_conversion_random_helpers.py ..                   [ 18%]
+tests/detailtests/test_conversion_reporting_helpers.py ..                [ 18%]
+tests/detailtests/test_dependency_bootstrap_runtime_helpers.py ..        [ 18%]
+tests/detailtests/test_dependency_helpers.py ....                        [ 19%]
+tests/detailtests/test_description_contract_helpers.py .....             [ 20%]
+tests/detailtests/test_diffing_helpers.py ...                            [ 21%]
+tests/detailtests/test_dual_arrow_runtime_helpers.py ..                  [ 21%]
+tests/detailtests/test_element_mask_helpers.py ..                        [ 21%]
+tests/detailtests/test_element_validation_helpers.py ...                 [ 22%]
+tests/detailtests/test_error_metric_helpers.py .......                   [ 23%]
+tests/detailtests/test_extract_remaining_functions_batch_tool.py .       [ 23%]
+tests/detailtests/test_fallback_helpers.py .                             [ 23%]
+tests/detailtests/test_fill_missing_parameters_tool.py .                 [ 24%]
+tests/detailtests/test_filling_parameter_tool.py .                       [ 24%]
+tests/detailtests/test_forms_symmetric_chords_helpers.py ...             [ 24%]
+tests/detailtests/test_generalization_guardrails.py .                    [ 24%]
+tests/detailtests/test_generate_function_modularization_plan_tool.py .   [ 25%]
+tests/detailtests/test_geometry_brackets_helpers.py ..                   [ 25%]
+tests/detailtests/test_geometry_ir_helpers.py ...                        [ 25%]
+tests/detailtests/test_geometry_ir_optimizer_helpers.py ...              [ 26%]
+tests/detailtests/test_geometry_optimization_helpers.py ..               [ 26%]
+tests/detailtests/test_global_search_optimization_helpers.py ........... [ 28%]
+..........                                                               [ 30%]
+tests/detailtests/test_global_vector_bounds_helpers.py ..                [ 30%]
+tests/detailtests/test_gradient_stripe_strategy_helpers.py ...           [ 31%]
+tests/detailtests/test_image_backend_helpers.py ...                      [ 31%]
+tests/detailtests/test_image_loading_helpers.py ...                      [ 32%]
+tests/detailtests/test_iteration_artifacts_helpers.py ......             [ 33%]
+tests/detailtests/test_iteration_bindings_helpers.py .......             [ 34%]
+tests/detailtests/test_iteration_context_helpers.py ...                  [ 35%]
+tests/detailtests/test_iteration_dispatch_helpers.py ...                 [ 35%]
+tests/detailtests/test_iteration_execution_context_helpers.py .......... [ 37%]
+...                                                                      [ 38%]
+tests/detailtests/test_iteration_execution_helpers.py ..                 [ 38%]
+tests/detailtests/test_iteration_finalization_helpers.py ...             [ 39%]
+tests/detailtests/test_iteration_initialization_helpers.py ..            [ 39%]
+tests/detailtests/test_iteration_log_helpers.py .                        [ 39%]
+tests/detailtests/test_iteration_mode_dependencies_helpers.py .          [ 39%]
+tests/detailtests/test_iteration_mode_dependency_setup_helpers.py .      [ 39%]
+tests/detailtests/test_iteration_mode_preparation_helpers.py .           [ 40%]
+tests/detailtests/test_iteration_mode_runtime_helpers.py ..              [ 40%]
+tests/detailtests/test_iteration_mode_runtime_preparation_helpers.py ... [ 40%]
+.                                                                        [ 41%]
+tests/detailtests/test_iteration_mode_setup_helpers.py .                 [ 41%]
+tests/detailtests/test_iteration_orchestration_helpers.py .............. [ 43%]
+........                                                                 [ 45%]
+tests/detailtests/test_iteration_pipeline_helpers.py ................... [ 48%]
+........................................................................ [ 61%]
+..................                                                       [ 64%]
+tests/detailtests/test_iteration_preparation_helpers.py ..               [ 64%]
+tests/detailtests/test_iteration_run_preparation_helpers.py .........    [ 66%]
+tests/detailtests/test_iteration_runtime_helpers.py ...                  [ 66%]
+tests/detailtests/test_iteration_setup_helpers.py ...                    [ 67%]
+tests/detailtests/test_legacy_api_vtracer_helpers.py ..                  [ 67%]
+tests/detailtests/test_mask_metrics_helpers.py .                         [ 68%]
+tests/detailtests/test_multi_objective_prototype_tool.py .               [ 68%]
+tests/detailtests/test_non_composite_runtime_helpers.py ................ [ 71%]
+....                                                                     [ 71%]
+tests/detailtests/test_nonconvertable_move_helpers.py .                  [ 71%]
+tests/detailtests/test_optimization_element_alignment_helpers.py ..      [ 72%]
+tests/detailtests/test_optimization_element_search_helpers.py ...        [ 72%]
+tests/detailtests/test_optimization_facade_helpers.py .                  [ 72%]
+tests/detailtests/test_optimization_pass_helpers.py ..                   [ 73%]
+tests/detailtests/test_optimization_quantization_helpers.py ..           [ 73%]
+tests/detailtests/test_output_paths_helpers.py ..                        [ 74%]
+tests/detailtests/test_overview_tiles_helpers.py ..                      [ 74%]
+tests/detailtests/test_perception_geometry_helpers.py ..                 [ 74%]
+tests/detailtests/test_perception_reflection_reference_inheritance.py .. [ 75%]
+                                                                         [ 75%]
+tests/detailtests/test_policy_phase_helpers.py ...                       [ 75%]
+tests/detailtests/test_quality_config_helpers.py ....                    [ 76%]
+tests/detailtests/test_quality_threshold_helpers.py ..                   [ 76%]
+tests/detailtests/test_ranking_helpers.py .                              [ 76%]
+tests/detailtests/test_remaining_geometry_helpers.py ..                  [ 77%]
+tests/detailtests/test_render_dispatch_helpers.py ...                    [ 77%]
+tests/detailtests/test_semantic_ac0050_helpers.py .......                [ 78%]
+tests/detailtests/test_semantic_ac0811_helpers.py .                      [ 79%]
+tests/detailtests/test_semantic_ac08_family_helpers.py .....             [ 80%]
+tests/detailtests/test_semantic_ac08_params_helpers.py ....              [ 80%]
+tests/detailtests/test_semantic_ar0100_params_helpers.py .               [ 80%]
+tests/detailtests/test_semantic_audit_bootstrap_helpers.py ..            [ 81%]
+tests/detailtests/test_semantic_audit_helpers.py ..                      [ 81%]
+tests/detailtests/test_semantic_audit_logging_helpers.py ..              [ 81%]
+tests/detailtests/test_semantic_audit_runtime_helpers.py ..              [ 82%]
+tests/detailtests/test_semantic_badge_geometry_helpers.py .....          [ 83%]
+tests/detailtests/test_semantic_badge_runtime_helpers.py ..              [ 83%]
+tests/detailtests/test_semantic_badge_svg_helpers.py ...                 [ 84%]
+tests/detailtests/test_semantic_circle_style_helpers.py ....             [ 84%]
+tests/detailtests/test_semantic_connector_helpers.py ....                [ 85%]
+tests/detailtests/test_semantic_family_rules_helpers.py ..               [ 85%]
+tests/detailtests/test_semantic_fitting_helpers.py ..                    [ 86%]
+tests/detailtests/test_semantic_harmonization_helpers.py .....           [ 87%]
+tests/detailtests/test_semantic_iteration_finalization_helpers.py ..     [ 87%]
+tests/detailtests/test_semantic_label_helpers.py ......                  [ 88%]
+tests/detailtests/test_semantic_mismatch_reporting_helpers.py ..         [ 88%]
+tests/detailtests/test_semantic_mismatch_runtime_helpers.py ..           [ 89%]
+tests/detailtests/test_semantic_params_helpers.py ...                    [ 89%]
+tests/detailtests/test_semantic_post_validation_helpers.py .             [ 89%]
+tests/detailtests/test_semantic_quality_flags.py .....                   [ 90%]
+tests/detailtests/test_semantic_validation_context_helpers.py ...        [ 91%]
+tests/detailtests/test_semantic_validation_finalization_helpers.py ..    [ 91%]
+tests/detailtests/test_semantic_validation_helpers.py ...                [ 92%]
+tests/detailtests/test_semantic_validation_logging_helpers.py ..         [ 92%]
+tests/detailtests/test_semantic_validation_runtime_helpers.py ....       [ 93%]
+tests/detailtests/test_semantic_visual_override_helpers.py ..            [ 93%]
+tests/detailtests/test_successful_conversion_helpers.py .......          [ 94%]
+tests/detailtests/test_successful_conversion_quality_helpers.py ....     [ 95%]
+tests/detailtests/test_svg_render_timeout_defaults.py ..                 [ 95%]
+tests/detailtests/test_width_optimization_helpers.py ..                  [ 96%]
+tests/test_generate_form_code_inventory.py ...                           [ 96%]
+tests/test_image_composite_converter_element_decomposition.py ..         [ 97%]
+tests/test_image_composite_converter_naming.py ..                        [ 97%]
+tests/test_non_composite_sample_candidates.py ..                         [ 97%]
+tests/test_retry_failed_image_conversions.py ...                         [ 98%]
+tests/test_shape_detection_classification.py ...                         [ 98%]
+tests/test_shape_detection_colors.py .                                   [ 99%]
+tests/test_shape_detection_eval.py .                                     [ 99%]
+tests/test_shape_detection_vertical_lines.py ..                          [ 99%]
+tests/test_weak_family_pipeline.py ..                                    [100%]
+
+=============================== warnings summary ===============================
+<frozen importlib._bootstrap>:241
+<frozen importlib._bootstrap>:241
+  <frozen importlib._bootstrap>:241: DeprecationWarning: builtin type SwigPyPacked has no __module__ attribute
+
+<frozen importlib._bootstrap>:241
+<frozen importlib._bootstrap>:241
+  <frozen importlib._bootstrap>:241: DeprecationWarning: builtin type SwigPyObject has no __module__ attribute
+
+<frozen importlib._bootstrap>:241
+  <frozen importlib._bootstrap>:241: DeprecationWarning: builtin type swigvarlink has no __module__ attribute
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================= 566 passed, 5 warnings in 5.13s ========================
+==> ImageConverter CLI help
+usage: imageCompositeConverter.py [-h] [--mode {annotate,convert}]
+                                  [--input-dir INPUT_DIR]
+                                  [--csv-path CSV_PATH]
+                                  [--output-dir OUTPUT_DIR]
+                                  [--iterations ITERATIONS_OVERRIDE]
+                                  [--start START] [--end END]
+                                  [--interactive-range]
+                                  [--debug-ac0811-dir DEBUG_AC0811_DIR]
+                                  [--debug-element-diff-dir DEBUG_ELEMENT_DIFF_DIR]
+                                  [--debug-jpeg-load] [--bootstrap-deps]
+                                  [--ac08-regression-set]
+                                  [--log-file LOG_FILE]
+                                  [--print-linux-vendor-command]
+                                  [--vendor-dir VENDOR_DIR]
+                                  [--vendor-platform VENDOR_PLATFORM]
+                                  [--vendor-python-version VENDOR_PYTHON_VERSION]
+                                  [--isolate-svg-render]
+                                  [--isolate-svg-render-timeout-sec ISOLATE_SVG_RENDER_TIMEOUT_SEC]
+                                  [--deterministic-order]
+                                  [--repair-ac0223-bestlist]
+                                  [folder_path] [csv_or_output] [iterations]
+
+Verarbeite einen Bildordner entweder im Analysemodus (Bounding-Boxes/JSON) oder im Konvertierungsmodus (SVG-/Diff-/Report-Ausgaben).
+
+positional arguments:
+  folder_path           Pfad zum Ordner mit den Bildern (Default:
+                        artifacts/images_to_convert)
+  csv_or_output         Optional: Pfad zur CSV/TSV/XML-Export-Tabelle ODER
+                        Ausgabeverzeichnis für konvertierte Dateien.
+                        (Kompatibilität: bisheriger 2. Positionsparameter)
+  iterations            Anzahl der Iterationen (optional, default: 128)
+
+options:
+  -h, --help            show this help message and exit
+  --mode {annotate,convert}
+                        annotate=markiere Kreis/Kellenstiel/Schrift und
+                        schreibe Koordinaten; convert=SVG-Konvertierung mit
+                        Reports
+  --input-dir INPUT_DIR
+                        Alias für folder_path (Kompatibilität mit älteren
+                        Skriptaufrufen).
+  --csv-path CSV_PATH, --descriptions-path CSV_PATH
+                        Expliziter Pfad zur CSV/TSV/XML-Export-Tabelle mit den
+                        Beschreibungen
+  --output-dir OUTPUT_DIR
+                        Explizites Ausgabeverzeichnis
+  --iterations ITERATIONS_OVERRIDE
+                        Benannter Alias für die Iterationszahl; überschreibt
+                        den optionalen Positionswert
+  --start START         Start-Referenz (inkl.); wenn nicht gesetzt, erfolgt
+                        eine Konsolenabfrage
+  --end END             End-Referenz (inkl.); wenn nicht gesetzt, erfolgt eine
+                        Konsolenabfrage
+  --interactive-range   Fragt auf der Konsole 'Namen von' und 'Namen bis' ab
+                        und verarbeitet nur diesen Bereich. Wenn beide
+                        Eingaben keine volle Referenz sind, wird nach ihrem
+                        gemeinsamen Teilstring gefiltert (z. B. AC08 und A08
+                        => alle A08*-Dateien).
+  --debug-ac0811-dir DEBUG_AC0811_DIR
+                        Optional: Ordner für AC0811 Element-Diff-Dumps pro
+                        Runde/Element
+  --debug-element-diff-dir DEBUG_ELEMENT_DIFF_DIR
+                        Optional: Ordner für Element-Diff-Dumps pro
+                        Runde/Element für alle Semantic-Badges
+  --debug-jpeg-load     Schreibt bei fehlgeschlagenen JPG-Konvertierungen
+                        automatisch JPEG-Lade-Diagnosen als JSON in den
+                        Report-Ordner.
+  --bootstrap-deps      Installiert fehlende Bild-Abhängigkeiten (numpy,
+                        opencv-python-headless) automatisch via pip vor der
+                        Konvertierung.
+  --ac08-regression-set
+                        Verarbeitet genau das feste AC08-Regression-Set
+                        (ac08_core_14: AC0800_L, AC0800_M, AC0800_S, AC0811_L,
+                        AC0811_M, AC0811_S, AC0882_S, AC0837_L, AC0839_S,
+                        AC0820_L, AC0831_L, AC0834_S, AC0835_S, AC0812_M)
+  --log-file LOG_FILE   Optional: Schreibt den kompletten Konsolen-Output
+                        zusätzlich in diese Datei (z. B. --log-file
+                        logs/konverter.log). Wenn nicht gesetzt, wird bei
+                        lokalen CLI-Läufen automatisch
+                        imageCompositeConverter.local.log verwendet. Kann
+                        alternativ über IMAGE_COMPOSITE_CONVERTER_LOG_FILE
+                        gesetzt werden.
+  --print-linux-vendor-command
+                        Gibt einen pip-Aufruf aus, der Linux-kompatible Wheels
+                        für numpy/opencv/Pillow/PyMuPDF in das Vendor-
+                        Verzeichnis installiert.
+  --vendor-dir VENDOR_DIR
+                        Zielordner für vendorte Python-Pakete
+  --vendor-platform VENDOR_PLATFORM
+                        pip --platform Wert für Linux-Wheels, z. B.
+                        manylinux2014_x86_64
+  --vendor-python-version VENDOR_PYTHON_VERSION
+                        pip --python-version Wert ohne Punkt, z. B. 311 oder
+                        312
+  --isolate-svg-render  Rendert SVGs in einem isolierten Subprozess, damit
+                        native PyMuPDF-Abstürze den Hauptlauf nicht beenden.
+  --isolate-svg-render-timeout-sec ISOLATE_SVG_RENDER_TIMEOUT_SEC
+                        Timeout pro isoliertem SVG-Render-Aufruf in Sekunden
+                        (Default: 20).
+  --deterministic-order
+                        Deaktiviert Shuffle-Schritte bei
+                        Dateireihenfolge/Template-Donor-Auswahl für
+                        reproduzierbare Diagnoseläufe.
+  --repair-ac0223-bestlist
+                        Bereinigt einmalig veraltete AC0223-Bestlist/Snapshot-
+                        Artefakte (L/M/S ohne Ventilkopf-Metadaten) im
+                        Ausgabeverzeichnis und beendet danach.
+
+Beispiele:
+  python -m src.imageCompositeConverter artifacts/images_to_convert --descriptions-path artifacts/images_to_convert/Finale_Wurzelformen_V3.xml --output-dir artifacts/converted_images --start AC0000 --end ZZ9999
+  python -m src.imageCompositeConverter artifacts/images_to_convert --mode annotate --output-dir artifacts/annotated --start AC0811 --end AC0814
+  python -m src.imageCompositeConverter --print-linux-vendor-command --vendor-dir vendor
+==> chain telemetry drift gate
+SKIP: drift summary artifact is missing: artifacts/converted_images/reports/chain_phase_telemetry_summary.txt

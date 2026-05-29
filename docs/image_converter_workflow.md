@@ -92,13 +92,32 @@ dann mit Exit `0`. Warnungen, fehlende Artefakte oder ein fehlender
 Batch-Artefakte nicht nur erzeugt, sondern auch automatisiert gegen die
 dokumentierte Drift-Grenze abgesichert werden.
 
-## 6. Linux-Vendor-Kommando ausgeben
+## 6. Gebündeltes lokales Abschlussprofil
+
+Für reguläre Arbeitspakete kann der verbindliche lokale Abschlussblock als
+ein ausführbares Sammelprofil gestartet werden:
+
+```bash
+./tools/run_local_completion_checks.sh
+```
+
+Das Skript führt `compileall`, die Pytest-Suite, den CLI-Help-Smoke und – sofern
+ein `chain_phase_telemetry_summary.txt` vorhanden ist – den
+Ketten-Telemetrie-Drift-Gate-Check aus. Wenn ein Batchlauf zwingend ein Summary
+erzeugen muss, wird die Drift-Artefaktprüfung mit `--require-drift-summary`
+verbindlich gemacht:
+
+```bash
+./tools/run_local_completion_checks.sh --require-drift-summary
+```
+
+## 7. Linux-Vendor-Kommando ausgeben
 
 ```bash
 python -m src.imageCompositeConverter --print-linux-vendor-command --vendor-dir vendor
 ```
 
-## 7. VS Code Debugging unter Windows
+## 8. VS Code Debugging unter Windows
 
 - Nutze nach Möglichkeit die Workspace-Launch-Konfiguration
   `ImageConverter: convert interactive range`.
@@ -106,7 +125,7 @@ python -m src.imageCompositeConverter --print-linux-vendor-command --vendor-dir 
   `.venv\\Scripts` startet, ist der Interpreter falsch gewählt. In diesem Fall
   in VS Code explizit `.venv\\Scripts\\python.exe` auswählen.
 
-## 8. Sample-Paar-Validierung (N5)
+## 9. Sample-Paar-Validierung (N5)
 
 ```bash
 python -m tools.validate_sample_pairs --strict
@@ -118,7 +137,7 @@ bei Bedarf automatisch auch aus den Repo-`vendor/*/site-packages`-Pfaden.
 Wenn diese Pakete im `vendor`-Ordner liegen, ist kein zusätzlicher manueller
 `pip install`-Schritt nötig.
 
-## 9. N6-Variationssuite generieren (Basis)
+## 10. N6-Variationssuite generieren (Basis)
 
 ```bash
 python -m tools.generate_svg_variation_suite

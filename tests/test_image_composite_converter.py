@@ -6281,6 +6281,8 @@ def test_local_workflow_doc_tracks_current_commands() -> None:
     assert "--descriptions-path" in workflow_doc
     assert "--ac08-regression-set" in workflow_doc
     assert "python tools/check_chain_telemetry_drift_gate.py" in workflow_doc
+    assert "./tools/run_local_completion_checks.sh" in workflow_doc
+    assert "--require-drift-summary" in workflow_doc
     assert "--print-linux-vendor-command" in workflow_doc
 
 
