@@ -3015,3 +3015,10 @@ Ziel: Die Konvertierung soll strikt als **Kette** laufen:
 - **Sicherung:** Detailtests liefen grün (`python -m pytest -q tests/detailtests/test_batch_reporting_helpers.py`, `8 passed`, Exit `0`); der erweiterte Detailtest-Block lief grün (`28 passed`, Exit `0`); die Vollsuite lief grün (`PYENV_VERSION=3.10.20 timeout 300 python -m pytest -q -rs`, `566 passed, 5 warnings`, Exit `0`).
 - **Blocker:** Keine neuen Blocker. Der neue Check bewertet vorhandene Summary-Artefakte; Batchläufe müssen das Summary weiterhin vorher erzeugen.
 - **Nächster sinnvoller Schritt:** Den Artefakt-Check in das dokumentierte Gate-/Pre-Commit-Profil aufnehmen oder wieder auf das nächste Bild-/Testhygiene-Paket rotieren.
+
+### Fortschritt vs. Blocker (Session 2026-05-29, Drift-Gate im Abschlussprofil Run LV)
+
+- **Fortschritt:** Der nach Run LU dokumentierte Anschluss wurde umgesetzt: `tools/check_chain_telemetry_drift_gate.py` ist nun im lokalen Workflow als eigener Gate-Schritt dokumentiert und zusätzlich im README-Checkblock sichtbar.
+- **Sicherung:** Der Workflow-Dokumentationstest wurde erweitert und lief grün (`PYENV_VERSION=3.10.20 python -m pytest -q tests/test_image_composite_converter.py::test_local_workflow_doc_tracks_current_commands`, `1 passed`, Exit `0`); eine synthetische Pass-Artefakt-Probe für den Drift-Gate-Check endete mit Exit `0`; die Vollsuite lief grün (`PYENV_VERSION=3.10.20 timeout 300 python -m pytest -q -rs`, `566 passed, 5 warnings`, Exit `0`).
+- **Blocker:** Keine neuen Blocker. Der Gate-Check setzt weiterhin voraus, dass ein Batchlauf vorher `chain_phase_telemetry_summary.txt` erzeugt hat.
+- **Nächster sinnvoller Schritt:** Wieder auf das nächste dokumentierte Bild-/Testhygiene-Paket rotieren oder das Drift-Gate zusätzlich in ein ausführbares Sammelskript für lokale Abschlusschecks bündeln.

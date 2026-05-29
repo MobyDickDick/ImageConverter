@@ -6280,6 +6280,7 @@ def test_local_workflow_doc_tracks_current_commands() -> None:
     assert "python -m src.imageCompositeConverter --help" in workflow_doc
     assert "--descriptions-path" in workflow_doc
     assert "--ac08-regression-set" in workflow_doc
+    assert "python tools/check_chain_telemetry_drift_gate.py" in workflow_doc
     assert "--print-linux-vendor-command" in workflow_doc
 
 
