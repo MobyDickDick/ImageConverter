@@ -6,7 +6,7 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-05-28)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `374` · Erledigt `280` · Offen `94`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `378` · Erledigt `281` · Offen `97`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -3115,3 +3115,16 @@ Ziel: Die Konvertierung soll strikt als **Kette** laufen:
 - **Sicherung:** Der gezielte Detailtestblock lief grün (`PYTHONPATH=vendor/linux-py310/site-packages:. python -m pytest -q tests/detailtests/test_geometry_ir_helpers.py tests/detailtests/test_description_contract_helpers.py tests/detailtests/test_non_composite_runtime_helpers.py`, `71 passed`, Exit `0`); der externe AC0221-S-Repro lief grün (`PYTHONPATH=vendor/linux-py310/site-packages:. timeout 120 python -m src.iCCModules.imageCompositeConverterCli --input-dir artifacts/images_to_convert --output-dir /tmp/ic-ac0221-runmm --start AC0221_S --end AC0221_S --deterministic-order`, Exit `0`) und protokollierte `status=non_composite_description_geometry_ir`; die Vollsuite lief grün (`PYENV_VERSION=3.10.20 PYTHONPATH=vendor/linux-py310/site-packages:. timeout 300 python -m pytest -q -rs`, `614 passed, 5 warnings`, Exit `0`).
 - **Kandidatenrotation:** `PLAN_B_KANDIDATEN.md` zeigt nach Entfernung von `AC0221_S.jpg` nun `AC0222_S.jpg` als nächste Rotation und `AC0224_S.jpg` als aufgefüllten AC02-Folgekandidaten.
 - **Nächster sinnvoller Schritt:** Mit dem nächsten Plan-B-Kandidaten `AC0222_S.jpg` rotieren oder einen echten Batchlauf zuschneiden, der ein produktives `chain_phase_telemetry_summary.txt` für das Pflicht-Gate liefert.
+
+## Qualitätsreview bisheriger Konvertierungen (2026-05-30)
+
+- [x] **QR-2026-05-30-1:** Bisherige erfolgreiche Konvertierungen aus `successed_conversions.txt` erneut gegen Originalbilder und SVG-Artefakte prüfen. Ergebnis: 48 Varianten geprüft, 47 renderbare Paare, 1 fehlendes Paar; Detailbericht siehe `docs/converted_images_quality_review_2026-05-30.md`.
+- [ ] **QR-2026-05-30-2:** `AC0838_M.jpg` erneut konvertieren bzw. per Plan B verbessern, weil das vorhandene SVG-Paar die Review-Grenze überschreitet (`normalized_mse=0.04729276` > `0.045945679012345676`).
+- [ ] **QR-2026-05-30-3:** `AC0881_M.jpg` erneut konvertieren oder das fehlende SVG-Artefakt rekonstruieren, weil beim Review kein passendes SVG in den geprüften Konvertierungs-/Baseline-Pfaden gefunden wurde.
+- [ ] **QR-2026-05-30-4:** `AC0835_S.jpg` nach der nächsten AC08-/Plan-B-Rotation erneut beobachten, weil der Messwert knapp unterhalb der Review-Grenze liegt (`normalized_mse=0.04467485`).
+
+### Fortschritt vs. Blocker (Session 2026-05-30, Qualitätsreview bisheriger Konvertierungen)
+
+- **Fortschritt:** Die bisher als erfolgreich geführten Konvertierungen wurden pixelmetrisch nachgeprüft und in `docs/converted_images_quality_review_2026-05-30.md` dokumentiert; `AC0838_M.jpg` und `AC0881_M.jpg` wurden zusätzlich in `PLAN_B_KANDIDATEN.md` aufgenommen.
+- **Blocker:** Für `AC0881_M.jpg` fehlt im geprüften Artefaktbestand ein passendes SVG; für `AC0838_M.jpg` ist ein SVG vorhanden, die Qualität liegt aber oberhalb der Review-Grenze.
+- **Nächster sinnvoller Schritt:** Vor der regulären Rotation mindestens einen der neuen QR-Folgepunkte (`AC0838_M` oder `AC0881_M`) als isolierten Plan-B-/Re-Konvertierungslauf abarbeiten.
