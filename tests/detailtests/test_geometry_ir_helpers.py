@@ -215,6 +215,35 @@ def test_render_geometry_ir_to_svg_contains_ac0203_mirrored_compressor_primitive
     assert "#df2249" in svg
 
 
+
+def test_build_geometry_ir_maps_ac0221_top_kelle_three_way_valve_description() -> None:
+    ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
+        'Wie AC0231, jedoch ohne "M" in der Kelle oben. '
+        'Der Griff liegt auf einer Symmetrieachse des Kreises.'
+    )
+
+    assert [element["kind"] for element in ir] == ["TopKelleThreeWayValveGlyph"]
+    assert ir[0]["id"] == "top_kelle_three_way_valve"
+    assert ir[0]["label"] == ""
+
+
+def test_render_geometry_ir_to_svg_contains_ac0221_top_kelle_three_way_valve_primitives() -> None:
+    ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
+        'Wie AC0231, jedoch ohne "M" in der Kelle oben. '
+        'Der Griff liegt auf einer Symmetrieachse des Kreises.'
+    )
+
+    svg = geometry_ir_helpers.renderGeometryIrToSvgImpl(20, 30, ir)
+
+    assert "vertical-two-way-valve-body-gradient" in svg
+    assert "vertical-two-way-valve-circle-gradient" in svg
+    assert 'id="top_kelle_three_way_valve_body_1"' in svg
+    assert 'id="top_kelle_three_way_valve_body_2"' in svg
+    assert 'id="top_kelle_three_way_valve_body_3"' in svg
+    assert 'id="top_kelle_three_way_valve_connector"' in svg
+    assert 'id="top_kelle_three_way_valve_circle"' in svg
+    assert 'top_kelle_three_way_valve_label' not in svg
+
 def test_build_geometry_ir_maps_ac0212_vertical_two_way_valve_motor_description() -> None:
     ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
         '2-Weg Ventil vertikal: Kelle mit Kreis rechts, horizontale Verbindungslinie, '

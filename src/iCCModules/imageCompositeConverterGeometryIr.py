@@ -46,6 +46,33 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
     rotated_180_two_way_valve_hint = two_way_vertical_valve_hint and _has_any(
         desc, ("180° gedreht", "180 grad gedreht", "um 180°", "um 180 grad")
     )
+    top_kelle_three_way_valve_hint = _has_any(desc, ("ac0231", "3-weg ventil", "3 wege ventil", "3. spitzes dreieck")) and _has_any(
+        desc, ("ohne \"m\"", "ohne 'm'", "ohne m", "kein \"m\"", "kein m")
+    ) and _has_any(desc, ("kelle oben", "kreis oben", "kelle mit kreis", "symmetrieachse des kreises"))
+
+    if top_kelle_three_way_valve_hint:
+        elements.append(
+            {
+                "kind": "TopKelleThreeWayValveGlyph",
+                "id": "top_kelle_three_way_valve",
+                "body_paths": [
+                    [[0.500, 0.610], [0.020, 0.455], [0.020, 0.765]],
+                    [[0.500, 0.610], [0.980, 0.455], [0.980, 0.765]],
+                    [[0.500, 0.610], [0.333, 0.960], [0.667, 0.960]],
+                ],
+                "circle": [0.500, 0.235, 0.225],
+                "connector": [[0.500, 0.450], [0.500, 0.610]],
+                "label": "",
+                "body_fill": "url(#vertical-two-way-valve-body-gradient)",
+                "circle_fill": "url(#vertical-two-way-valve-circle-gradient)",
+                "stroke": "#969696",
+                "connector_stroke": "#8f8f8f",
+                "text_fill": "#666666",
+                "stroke_width": 0.040,
+                "connector_width": 0.075,
+            }
+        )
+        return elements
 
     if two_way_vertical_valve_hint:
         if rotated_180_two_way_valve_hint:
@@ -392,10 +419,13 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
     svg: list[str] = []
     rect_x, rect_y, rect_w, rect_h = _find_rect(geometry_ir, w, h)
     needs_gradient = any(element.get("kind") == "HorizontalGradient" for element in geometry_ir)
-    needs_vertical_valve_defs = any(
-        element.get("kind") in {"VerticalTwoWayValveMotorGlyph", "LeftRotatedTwoWayValveMotorGlyph", "Rotated180TwoWayValveMotorGlyph"}
-        for element in geometry_ir
-    )
+    valve_gradient_kinds = {
+        "VerticalTwoWayValveMotorGlyph",
+        "LeftRotatedTwoWayValveMotorGlyph",
+        "Rotated180TwoWayValveMotorGlyph",
+        "TopKelleThreeWayValveGlyph",
+    }
+    needs_vertical_valve_defs = any(element.get("kind") in valve_gradient_kinds for element in geometry_ir)
     if needs_gradient or needs_vertical_valve_defs:
         svg.append("  <defs>")
         if needs_gradient:
@@ -418,7 +448,7 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
     for element in geometry_ir:
         kind = str(element.get("kind", ""))
         element_id = html.escape(str(element.get("id", kind)))
-        if kind in {"VerticalTwoWayValveMotorGlyph", "LeftRotatedTwoWayValveMotorGlyph", "Rotated180TwoWayValveMotorGlyph"}:
+        if kind in valve_gradient_kinds:
             stroke = html.escape(str(element.get("stroke", "#969696")))
             connector_stroke = html.escape(str(element.get("connector_stroke", "#8f8f8f")))
             text_fill = html.escape(str(element.get("text_fill", "#666666")))
@@ -438,17 +468,20 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
                         f'  <path id="{element_id}_connector" d="M {_fmt(x0)} {_fmt(y0)} L {_fmt(x1)} {_fmt(y1)}" '
                         f'stroke="{connector_stroke}" stroke-width="{_fmt(connector_sw)}" fill="none" stroke-linecap="butt"/>'
                     )
-            raw_body = element.get("body_path", [])
-            body_points: list[str] = []
-            if isinstance(raw_body, list):
-                for raw_point in raw_body:
-                    if isinstance(raw_point, list) and len(raw_point) == 2:
-                        body_points.append(f"{_fmt(float(raw_point[0]) * w)} {_fmt(float(raw_point[1]) * h)}")
-            if body_points:
-                svg.append(
-                    f'  <path id="{element_id}_body" d="M {" L ".join(body_points)} Z" '
-                    f'fill="{body_fill}" stroke="{stroke}" stroke-width="{_fmt(sw)}" stroke-linejoin="miter"/>'
-                )
+            raw_body_paths = element.get("body_paths")
+            body_path_groups = raw_body_paths if isinstance(raw_body_paths, list) else [element.get("body_path", [])]
+            for body_idx, raw_body in enumerate(body_path_groups, start=1):
+                body_points: list[str] = []
+                if isinstance(raw_body, list):
+                    for raw_point in raw_body:
+                        if isinstance(raw_point, list) and len(raw_point) == 2:
+                            body_points.append(f"{_fmt(float(raw_point[0]) * w)} {_fmt(float(raw_point[1]) * h)}")
+                if body_points:
+                    body_id = f"{element_id}_body" if len(body_path_groups) == 1 else f"{element_id}_body_{body_idx}"
+                    svg.append(
+                        f'  <path id="{body_id}" d="M {" L ".join(body_points)} Z" '
+                        f'fill="{body_fill}" stroke="{stroke}" stroke-width="{_fmt(sw)}" stroke-linejoin="miter"/>'
+                    )
             raw_circle = element.get("circle", [0.721, 0.501, 0.263])
             if isinstance(raw_circle, list) and len(raw_circle) == 3:
                 cx, cy, radius = [float(value) for value in raw_circle]
