@@ -1,0 +1,45 @@
+{
+  "base": "Z_298",
+  "best_error": 38.41729323308271,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.14442591441008537,
+  "filename": "z_298.jpg",
+  "h": 14,
+  "mean_delta2": 8187.455078125,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": false,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "z_298",
+        "source": "base_name",
+        "text": "z_-Dateien sind Rohr-Symbole mit Verzierungen; enthalten sind gerade Rohre, gebogene Rohre und T-Stücke."
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "geometry_ir": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "Z_298"
+  },
+  "std_delta2": 10160.443359375,
+  "variant": "Z_298",
+  "w": 19
+}

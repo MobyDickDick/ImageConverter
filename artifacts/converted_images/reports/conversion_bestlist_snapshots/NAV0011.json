@@ -1,0 +1,47 @@
+{
+  "base": "NAV0011",
+  "best_error": 40.28296296296296,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.029839231824417008,
+  "filename": "NAV0011.JPG",
+  "h": 30,
+  "mean_delta2": 8108.56884765625,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "NAV0011",
+        "source": "base_name",
+        "text": "Hintergrund: NAV0010, Vordergrund wie GE0201 Symbol (nicht Hintergrund)"
+      }
+    ],
+    "documented_alias_refs": [
+      "GE0201"
+    ],
+    "elements": [],
+    "geometry_ir": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "NAV0011"
+  },
+  "std_delta2": 9444.3759765625,
+  "variant": "NAV0011",
+  "w": 45
+}

@@ -1,0 +1,83 @@
+{
+  "base": "AC0160",
+  "best_error": 13.10575625,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 8.191097656250001e-05,
+  "filename": "AC0160_L.jpg",
+  "h": 400,
+  "mean_delta2": 2380.006591796875,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": false,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "AC0160",
+        "source": "base_name",
+        "text": "Differenzdruckmessung oben kleines graues Rechteck mit \"dp\" geschrieben, vor halbem Rechteck mit doppelten grauen Rand"
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "geometry_ir": [
+      {
+        "bbox": [
+          0.22,
+          0.38,
+          0.56,
+          0.34
+        ],
+        "fill": "none",
+        "id": "half_double_rect",
+        "inner_inset": 0.075,
+        "kind": "HalfDoubleRectBorder",
+        "open_side": "left",
+        "stroke": "#777777",
+        "stroke_width": 0.024
+      },
+      {
+        "bbox": [
+          0.35,
+          0.16,
+          0.3,
+          0.2
+        ],
+        "fill": "#d7d7d7",
+        "id": "dp_label_box",
+        "kind": "LabelBox",
+        "stroke": "#777777",
+        "stroke_width": 0.02
+      },
+      {
+        "bbox_ref": "dp_label_box",
+        "fill": "#555555",
+        "font_size": 0.105,
+        "font_weight": "600",
+        "id": "dp_label_text",
+        "kind": "TextGlyph",
+        "text": "dp"
+      }
+    ],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "AC0160_L"
+  },
+  "std_delta2": 8727.9140625,
+  "variant": "AC0160_L",
+  "w": 400
+}

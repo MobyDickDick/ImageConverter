@@ -1,14 +1,24 @@
 {
   "base": "GE0302",
-  "best_error": 43.741203703703704,
+  "best_error": 66.3275,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.012150334362139917,
+  "error_per_pixel": 0.018424305555555555,
   "filename": "GE0302_M.jpg",
   "h": 60,
-  "mean_delta2": 11759.4248046875,
+  "mean_delta2": 26169.033203125,
   "params": {
     "bottom_shape": null,
+    "contract_status": "insufficient_description",
+    "description_contract": {
+      "deficits": [
+        "missing_geometry_terms"
+      ],
+      "has_conditions": false,
+      "has_geometry_terms": false,
+      "has_reference": false,
+      "status": "insufficient_description"
+    },
     "description_fragments": [
       {
         "key": "GE0302",
@@ -17,9 +27,12 @@
       }
     ],
     "documented_alias_refs": [],
-    "elements": [],
-    "label": "M",
-    "mode": "auto",
+    "elements": [
+      "MANUELL: Beschreibung unzureichend (fehlende Geometriehinweise oder leerer Beschreibungstext)."
+    ],
+    "geometry_ir": [],
+    "label": "",
+    "mode": "insufficient_description",
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
@@ -30,7 +43,7 @@
     "top_source_ref": null,
     "variant_name": "GE0302_M"
   },
-  "std_delta2": 17355.029296875,
+  "std_delta2": 43133.4765625,
   "variant": "GE0302_M",
   "w": 60
 }

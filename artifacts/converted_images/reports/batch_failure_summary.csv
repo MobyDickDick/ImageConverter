@@ -1,2 +1,6 @@
 filename;status;reason;details;log_file
-GE9910_W.jpg;batch_error;KeyError;'img_path';GE9910_W_element_validation.log
+AC0221_S_sia.jpg;conversion_failed;no_result;;AC0221_S_sia_element_validation.log
+AR0061.jpg;conversion_failed;no_result;;AR0061_element_validation.log
+AC0232_L.jpg;conversion_failed;no_result;no_result_returned;AC0232_L_element_validation.log
+AC1000_M.jpg;conversion_failed;no_result;;AC1000_M_element_validation.log
+GE1302_S.jpg;batch_error;KeyError;'img_path';GE1302_S_element_validation.log
