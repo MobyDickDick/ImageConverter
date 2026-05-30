@@ -1,0 +1,78 @@
+{
+  "schema_version": "perception_seeded_geometry_ir_report_v1",
+  "candidate_schema_version": "perception_primitive_candidate_v1",
+  "runtime_status": "non_composite_perception_seeded_geometry_ir",
+  "samples": [
+    {
+      "sample_id": "minus_seed_synthetic",
+      "description": "oben mittig befindet sich eine Markierung",
+      "expected_seed_kind": "HorizontalRule",
+      "geometry_ir_kinds": [
+        "HorizontalRule"
+      ],
+      "seeded_element_count": 1,
+      "match": true,
+      "seeded_elements": [
+        {
+          "kind": "HorizontalRule",
+          "id": "perception_horizontal_rule",
+          "bbox": [
+            0.37109,
+            0.17188,
+            0.26953,
+            0.03516
+          ],
+          "stroke": "#292929",
+          "stroke_width": 0.03516,
+          "perception_seed": {
+            "kind": "horizontal_rule",
+            "confidence": 0.9823,
+            "source": "pf4_perception_seeded_geometry_ir",
+            "detector": "detect_horizontal_rules",
+            "candidate_schema_version": "perception_primitive_candidate_v1",
+            "text_equivalent": "-"
+          }
+        }
+      ]
+    },
+    {
+      "sample_id": "circle_seed_synthetic",
+      "description": "Kompressor grau nach rechts",
+      "expected_seed_kind": "CircleBackground",
+      "geometry_ir_kinds": [
+        "CircleBackground",
+        "RightwardCompressorGlyph"
+      ],
+      "seeded_element_count": 1,
+      "match": true,
+      "seeded_elements": [
+        {
+          "kind": "CircleBackground",
+          "id": "compressor_circle",
+          "bbox": [
+            0.19922,
+            0.20312,
+            0.60156,
+            0.60156
+          ],
+          "fill": "#000000",
+          "stroke": "#5D5D5D",
+          "stroke_width": 0.02406,
+          "perception_seed": {
+            "kind": "circle",
+            "confidence": 0.99,
+            "source": "pf4_perception_seeded_geometry_ir",
+            "detector": "detect_circle_rings",
+            "detection_source": "hough",
+            "candidate_schema_version": "perception_primitive_candidate_v1"
+          }
+        }
+      ]
+    }
+  ],
+  "accepted_seed_kinds": [
+    "CircleBackground",
+    "HorizontalRule",
+    "RectBorder"
+  ]
+}

@@ -612,6 +612,15 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
                 f'fill="{fill}" font-family="Arial, Helvetica, sans-serif" font-size="{_fmt(font_size)}" '
                 f'font-weight="{font_weight}" text-anchor="middle" dominant-baseline="middle">{raw_text}</text>'
             )
+        elif kind == "HorizontalRule":
+            x, y, bw, bh = _scaled_bbox(element, w, h)
+            stroke = html.escape(str(element.get("stroke", "#4f4f4f")))
+            sw = float(element.get("stroke_width", 0.025)) * min(w, h)
+            cy = y + bh * 0.5
+            svg.append(
+                f'  <path id="{element_id}" d="M {_fmt(x)} {_fmt(cy)} L {_fmt(x + bw)} {_fmt(cy)}" '
+                f'stroke="{stroke}" stroke-width="{_fmt(sw)}" fill="none" stroke-linecap="square"/>'
+            )
         elif kind == "HorizontalRuleSet":
             stroke = html.escape(str(element.get("stroke", "#707070")))
             sw = float(element.get("stroke_width", 0.026)) * min(w, h)

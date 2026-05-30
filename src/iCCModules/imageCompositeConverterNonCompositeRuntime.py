@@ -6,6 +6,7 @@ from pathlib import Path
 import numpy as np
 
 from src.iCCModules import imageCompositeConverterGeometryIr as geometry_ir_helpers
+from tools.perception_detection_contract import build_perception_seeded_geometry_ir
 
 FORCED_PLAN_B_SAMPLE_VARIANTS: set[str] = {"AC0011"}
 
@@ -200,29 +201,75 @@ def _fit_symbol_element_by_element(
     return best[0], best[1], best[2], current, step_logs
 
 
+DESCRIPTION_DRIVEN_GEOMETRY_IR_KINDS = {
+    "HorizontalRule",
+    "HorizontalRuleSet",
+    "OrthogonalPolyline",
+    "HalfDoubleRectBorder",
+    "LabelBox",
+    "TextGlyph",
+    "CircleBackground",
+    "RectBorder",
+    "UpwardCompressorGlyph",
+    "RightwardCompressorGlyph",
+    "MainDiagonalMirroredCompressorGlyph",
+    "VerticalTwoWayValveMotorGlyph",
+    "LeftRotatedTwoWayValveMotorGlyph",
+    "Rotated180TwoWayValveMotorGlyph",
+    "TopKelleThreeWayValveGlyph",
+}
+
+
 def _try_build_description_geometry_ir_svg(width: int, height: int, *, description: str) -> str | None:
     geometry_ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(description)
     if not geometry_ir:
         return None
     kinds = {str(element.get("kind", "")) for element in geometry_ir}
-    description_driven_kinds = {
-        "HorizontalRuleSet",
-        "OrthogonalPolyline",
-        "HalfDoubleRectBorder",
-        "LabelBox",
-        "TextGlyph",
-        "CircleBackground",
-        "UpwardCompressorGlyph",
-        "RightwardCompressorGlyph",
-        "MainDiagonalMirroredCompressorGlyph",
-        "VerticalTwoWayValveMotorGlyph",
-        "LeftRotatedTwoWayValveMotorGlyph",
-        "Rotated180TwoWayValveMotorGlyph",
-        "TopKelleThreeWayValveGlyph",
-    }
-    if not (description_driven_kinds & kinds):
+    if not (DESCRIPTION_DRIVEN_GEOMETRY_IR_KINDS & kinds):
         return None
     return geometry_ir_helpers.renderGeometryIrToSvgImpl(width, height, geometry_ir)
+
+
+def _try_build_perception_seeded_geometry_ir_svg(
+    width: int,
+    height: int,
+    *,
+    description: str,
+    perc_img,
+) -> tuple[str, list[dict[str, object]], int] | None:
+    if not hasattr(perc_img, "shape"):
+        return None
+    try:
+        image = np.asarray(perc_img)
+    except (TypeError, ValueError):
+        return None
+    if image.ndim < 2 or image.size == 0:
+        return None
+    try:
+        geometry_ir = build_perception_seeded_geometry_ir(
+            image,
+            description=description,
+            source="non_composite_perception_seed",
+        )
+    except (RuntimeError, TypeError, ValueError, AttributeError):
+        return None
+    if not geometry_ir:
+        return None
+    seeded_elements = [
+        element
+        for element in geometry_ir
+        if isinstance(element, dict) and element.get("perception_seed")
+    ]
+    if not seeded_elements:
+        return None
+    kinds = {str(element.get("kind", "")) for element in geometry_ir}
+    if not (DESCRIPTION_DRIVEN_GEOMETRY_IR_KINDS & kinds):
+        return None
+    return (
+        geometry_ir_helpers.renderGeometryIrToSvgImpl(width, height, geometry_ir),
+        geometry_ir,
+        len(seeded_elements),
+    )
 
 
 def _contains_svg_image_tag(svg_content: str) -> bool:
@@ -514,8 +561,40 @@ def runNonCompositeIterationImpl(
         )
     else:
         print_fn("  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.")
-        geometry_ir_svg = _try_build_description_geometry_ir_svg(width, height, description=description)
-        if geometry_ir_svg is not None:
+        perception_seeded = _try_build_perception_seeded_geometry_ir_svg(
+            width, height, description=description, perc_img=perc_img
+        )
+        geometry_ir_svg = None
+        if perception_seeded is not None:
+            geometry_ir_svg, geometry_ir, perception_seed_count = perception_seeded
+            svg_content = geometry_ir_svg
+            svg_rendered = render_svg_to_numpy_fn(svg_content, width, height)
+            if svg_rendered is None:
+                record_render_failure_fn(
+                    "non_composite_perception_seeded_geometry_ir_render_failed",
+                    svg_content=svg_content,
+                    params_snapshot=params,
+                )
+                return None
+            svg_err = calculate_error_fn(perc_img, svg_rendered)
+            write_validation_log_fn(
+                [
+                    "status=non_composite_perception_seeded_geometry_ir",
+                    f"perception_seeded_geometry_ir=1",
+                    f"perception_seed_count={perception_seed_count}",
+                    f"geometry_ir_element_count={len(geometry_ir)}",
+                    *(
+                        f"geometry_ir_element_{idx}={element.get('kind')}"
+                        for idx, element in enumerate(geometry_ir, start=1)
+                    ),
+                ]
+            )
+        else:
+            geometry_ir_svg = _try_build_description_geometry_ir_svg(
+                width, height, description=description
+            )
+
+        if perception_seeded is None and geometry_ir_svg is not None:
             svg_content = geometry_ir_svg
             svg_rendered = render_svg_to_numpy_fn(svg_content, width, height)
             if svg_rendered is None:
@@ -537,7 +616,7 @@ def runNonCompositeIterationImpl(
                     ),
                 ]
             )
-        else:
+        elif perception_seeded is None:
             try:
                 best_structured = _fit_symbol_element_by_element(
                     width=width,
