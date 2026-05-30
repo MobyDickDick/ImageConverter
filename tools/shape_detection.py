@@ -36,6 +36,21 @@ class PrimitiveColorDetection:
     stroke_confidence: float
 
 
+@dataclass(frozen=True)
+class CircleRingDetection:
+    cx: float
+    cy: float
+    radius_px: float
+    inner_radius_px: float
+    bbox: tuple[float, float, float, float]
+    circularity: float
+    ring: bool
+    fill_ratio: float
+    stroke_width_px: float
+    confidence: float
+    detection_source: str
+
+
 def detect_vertical_lines(
     image,
     *,
@@ -51,14 +66,23 @@ def detect_vertical_lines(
         import cv2  # type: ignore
         import numpy as np  # type: ignore
     except ModuleNotFoundError as exc:
-        raise RuntimeError("detect_vertical_lines requires numpy and opencv-python") from exc
+        raise RuntimeError(
+            "detect_vertical_lines requires numpy and opencv-python"
+        ) from exc
 
     if image.ndim == 3:
         gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     else:
         gray = image
     edges = cv2.Canny(gray, canny_low, canny_high)
-    segments = cv2.HoughLinesP(edges, 1, np.pi / 180, hough_threshold, minLineLength=min_length_px, maxLineGap=max_gap_px)
+    segments = cv2.HoughLinesP(
+        edges,
+        1,
+        np.pi / 180,
+        hough_threshold,
+        minLineLength=min_length_px,
+        maxLineGap=max_gap_px,
+    )
     if segments is None:
         return []
 
@@ -76,9 +100,23 @@ def detect_vertical_lines(
         cv2.line(mask, (int(x1), int(y1)), (int(x2), int(y2)), 255, 5)
         stroke_pixels = cv2.bitwise_and(edges, edges, mask=mask)
         ys, xs = np.where(stroke_pixels > 0)
-        width_px = float(max(1.0, np.percentile(xs, 95) - np.percentile(xs, 5))) if xs.size > 0 else 1.0
+        width_px = (
+            float(max(1.0, np.percentile(xs, 95) - np.percentile(xs, 5)))
+            if xs.size > 0
+            else 1.0
+        )
         confidence = max(0.0, 1.0 - deviation / max(angle_tolerance_deg, 1e-6))
-        detections.append(VerticalLineDetection((x1 + x2) / 2.0, float(min(y1, y2)), float(max(y1, y2)), length, width_px, angle, confidence))
+        detections.append(
+            VerticalLineDetection(
+                (x1 + x2) / 2.0,
+                float(min(y1, y2)),
+                float(max(y1, y2)),
+                length,
+                width_px,
+                angle,
+                confidence,
+            )
+        )
     return sorted(detections, key=lambda d: (d.confidence, d.length_px), reverse=True)
 
 
@@ -95,7 +133,9 @@ def detect_horizontal_rules(
         import cv2  # type: ignore
         import numpy as np  # type: ignore
     except ModuleNotFoundError as exc:
-        raise RuntimeError("detect_horizontal_rules requires numpy and opencv-python") from exc
+        raise RuntimeError(
+            "detect_horizontal_rules requires numpy and opencv-python"
+        ) from exc
 
     if image.ndim == 3:
         gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
@@ -123,7 +163,9 @@ def detect_horizontal_rules(
     opened = cv2.morphologyEx(threshold, cv2.MORPH_OPEN, kernel)
     contours, _ = cv2.findContours(opened, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
-    minimum_length = float(min_length_px if min_length_px is not None else max(4, round(width * 0.08)))
+    minimum_length = float(
+        min_length_px if min_length_px is not None else max(4, round(width * 0.08))
+    )
     detections: list[HorizontalRuleDetection] = []
     for contour in contours:
         x, y, w, h = cv2.boundingRect(contour)
@@ -132,7 +174,9 @@ def detect_horizontal_rules(
         aspect = w / max(float(h), 1.0)
         if aspect < min_aspect_ratio:
             continue
-        fill_ratio = float(np.count_nonzero(opened[y : y + h, x : x + w]) / max(w * h, 1))
+        fill_ratio = float(
+            np.count_nonzero(opened[y : y + h, x : x + w]) / max(w * h, 1)
+        )
         rect = cv2.minAreaRect(contour)
         (_, _), (_, _), raw_angle = rect
         angle = float(raw_angle)
@@ -166,7 +210,175 @@ def detect_horizontal_rules(
     return sorted(detections, key=lambda d: (d.confidence, d.length_px), reverse=True)
 
 
-def detection_to_dict(d: VerticalLineDetection | HorizontalRuleDetection) -> dict[str, Any]:
+def detect_circle_rings(
+    image,
+    *,
+    threshold_value: int = 220,
+    min_radius_px: int | None = None,
+    max_radius_px: int | None = None,
+) -> list[CircleRingDetection]:
+    """Detect filled circles and ring/annulus candidates using Hough plus foreground-mask contours."""
+    try:
+        import cv2  # type: ignore
+        import numpy as np  # type: ignore
+    except ModuleNotFoundError as exc:
+        raise RuntimeError(
+            "detect_circle_rings requires numpy and opencv-python"
+        ) from exc
+
+    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY) if image.ndim == 3 else image
+    height, width = gray.shape[:2]
+    min_side = max(1, min(height, width))
+    min_radius = int(
+        min_radius_px if min_radius_px is not None else max(4, round(min_side * 0.08))
+    )
+    max_radius = int(
+        max_radius_px
+        if max_radius_px is not None
+        else max(min_radius + 1, round(min_side * 0.48))
+    )
+    foreground = cv2.threshold(gray, threshold_value, 255, cv2.THRESH_BINARY_INV)[1]
+
+    def _ring_metrics(
+        cx: float,
+        cy: float,
+        radius: float,
+        contour_area: float,
+        perimeter: float,
+        bbox: tuple[float, float, float, float],
+        source: str,
+    ):
+        yy, xx = np.ogrid[:height, :width]
+        dist = np.sqrt((xx - cx) ** 2 + (yy - cy) ** 2)
+        outer = dist <= max(radius, 1.0)
+        inner_probe = dist <= max(radius * 0.58, 1.0)
+        ring_band_width = max(1.4, radius * 0.16)
+        ring_band = np.abs(dist - radius) <= ring_band_width
+        outer_fg = float(np.mean(foreground[outer] > 0)) if np.any(outer) else 0.0
+        inner_fg = (
+            float(np.mean(foreground[inner_probe] > 0)) if np.any(inner_probe) else 0.0
+        )
+        ring_fg = (
+            float(np.mean(foreground[ring_band] > 0)) if np.any(ring_band) else 0.0
+        )
+        is_ring = ring_fg >= 0.22 and inner_fg < max(0.42, outer_fg * 0.65)
+        inner_radius = radius * 0.58 if is_ring else 0.0
+        circularity = (
+            float(4.0 * np.pi * contour_area / (perimeter * perimeter + 1e-9))
+            if perimeter > 0
+            else 0.0
+        )
+        radius_score = min(1.0, max(0.0, radius / max(min_side * 0.18, 1.0)))
+        shape_score = min(1.0, max(0.0, circularity))
+        coverage_score = ring_fg if is_ring else outer_fg
+        confidence = min(
+            0.99,
+            0.30 + 0.38 * shape_score + 0.22 * coverage_score + 0.09 * radius_score,
+        )
+        stroke_width = (
+            max(1.0, radius - inner_radius) if is_ring else max(1.0, radius * 0.08)
+        )
+        return CircleRingDetection(
+            cx=float(cx),
+            cy=float(cy),
+            radius_px=float(radius),
+            inner_radius_px=float(inner_radius),
+            bbox=tuple(float(v) for v in bbox),
+            circularity=circularity,
+            ring=bool(is_ring),
+            fill_ratio=float(outer_fg),
+            stroke_width_px=float(stroke_width),
+            confidence=float(confidence),
+            detection_source=source,
+        )
+
+    candidates: list[CircleRingDetection] = []
+    blurred = cv2.GaussianBlur(gray, (5, 5), 0)
+    circles = cv2.HoughCircles(
+        blurred,
+        cv2.HOUGH_GRADIENT,
+        dp=1.1,
+        minDist=max(8.0, min_side * 0.25),
+        param1=90,
+        param2=max(8, int(round(min_side * 0.16))),
+        minRadius=min_radius,
+        maxRadius=max_radius,
+    )
+    if circles is not None and circles.size > 0:
+        for cx, cy, radius in np.round(circles[0, :]).astype(int):
+            r = float(max(min_radius, min(max_radius, int(radius))))
+            x = max(0.0, float(cx) - r)
+            y = max(0.0, float(cy) - r)
+            bbox = (
+                x,
+                y,
+                min(float(width) - x, 2.0 * r),
+                min(float(height) - y, 2.0 * r),
+            )
+            contour_area = float(np.pi * r * r)
+            perimeter = float(2.0 * np.pi * r)
+            candidates.append(
+                _ring_metrics(
+                    float(cx), float(cy), r, contour_area, perimeter, bbox, "hough"
+                )
+            )
+
+    contours, _ = cv2.findContours(
+        foreground, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
+    )
+    for contour in contours:
+        area = float(cv2.contourArea(contour))
+        if area < max(30.0, float(min_radius * min_radius) * 0.35):
+            continue
+        perimeter = float(cv2.arcLength(contour, True))
+        if perimeter <= 0:
+            continue
+        (cx, cy), radius = cv2.minEnclosingCircle(contour)
+        if not (min_radius <= radius <= max_radius):
+            continue
+        x, y, w, h = cv2.boundingRect(contour)
+        aspect = w / max(float(h), 1.0)
+        if not 0.72 <= aspect <= 1.38:
+            continue
+        candidates.append(
+            _ring_metrics(
+                cx, cy, float(radius), area, perimeter, (x, y, w, h), "foreground_mask"
+            )
+        )
+
+    deduped: list[CircleRingDetection] = []
+    for candidate in sorted(candidates, key=lambda item: item.confidence, reverse=True):
+        duplicate = False
+        for kept in deduped:
+            center_dist = float(
+                np.hypot(candidate.cx - kept.cx, candidate.cy - kept.cy)
+            )
+            if center_dist <= max(3.0, kept.radius_px * 0.12) and abs(
+                candidate.radius_px - kept.radius_px
+            ) <= max(3.0, kept.radius_px * 0.16):
+                duplicate = True
+                break
+        if not duplicate:
+            deduped.append(candidate)
+    return deduped
+
+
+def detection_to_dict(
+    d: VerticalLineDetection | HorizontalRuleDetection | CircleRingDetection,
+) -> dict[str, Any]:
+    if isinstance(d, CircleRingDetection):
+        return {
+            "primitive": "ring" if d.ring else "circle",
+            "cx": round(d.cx, 2),
+            "cy": round(d.cy, 2),
+            "radius_px": round(d.radius_px, 2),
+            "inner_radius_px": round(d.inner_radius_px, 2),
+            "circularity": round(d.circularity, 4),
+            "fill_ratio": round(d.fill_ratio, 4),
+            "stroke_width_px": round(d.stroke_width_px, 2),
+            "confidence": round(d.confidence, 4),
+            "source": d.detection_source,
+        }
     if isinstance(d, HorizontalRuleDetection):
         return {
             "primitive": "horizontal_rule",
@@ -204,7 +416,9 @@ def detect_primitive_colors(
         import cv2  # type: ignore
         import numpy as np  # type: ignore
     except ModuleNotFoundError as exc:
-        raise RuntimeError("detect_primitive_colors requires numpy and opencv-python") from exc
+        raise RuntimeError(
+            "detect_primitive_colors requires numpy and opencv-python"
+        ) from exc
 
     if image.ndim == 2:
         bgr = cv2.cvtColor(image, cv2.COLOR_GRAY2BGR)
@@ -248,7 +462,9 @@ class ShapeClassification:
     is_convex: bool
 
 
-def classify_contour_shape(contour, *, approx_epsilon_factor: float = 0.02) -> ShapeClassification:
+def classify_contour_shape(
+    contour, *, approx_epsilon_factor: float = 0.02
+) -> ShapeClassification:
     """Classify contour as triangle/rectangle/arrow/unknown via polygon and convexity heuristics."""
     try:
         import cv2  # type: ignore
@@ -273,4 +489,6 @@ def classify_contour_shape(contour, *, approx_epsilon_factor: float = 0.02) -> S
         confidence = min(0.92, 0.6 + defects * 0.08)
         return ShapeClassification("arrow", confidence, vertices, False)
 
-    return ShapeClassification("unknown", 0.3 if vertices >= 3 else 0.0, vertices, is_convex)
+    return ShapeClassification(
+        "unknown", 0.3 if vertices >= 3 else 0.0, vertices, is_convex
+    )

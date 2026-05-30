@@ -1,0 +1,388 @@
+{
+  "schema_version": "perception_circle_ring_seed_report_v1",
+  "candidate_schema_version": "perception_primitive_candidate_v1",
+  "samples": [
+    {
+      "sample_id": "circle_synthetic",
+      "image_path": null,
+      "description": "Kompressor nach rechts mit kreisf\u00f6rmigem Hintergrund",
+      "expected_kind": "circle",
+      "candidate_count": 1,
+      "match": true,
+      "top_candidate": {
+        "schema_version": "perception_primitive_candidate_v1",
+        "kind": "circle",
+        "bbox": {
+          "x": 51.0,
+          "y": 52.0,
+          "width": 154.0,
+          "height": 154.0
+        },
+        "center": {
+          "x": 128.0,
+          "y": 129.0
+        },
+        "geometry": {
+          "radius_px": 77.0,
+          "inner_radius_px": 0.0,
+          "stroke_width_px": 6.16,
+          "circularity": 1.0,
+          "ring": false,
+          "fill_ratio": 1.0,
+          "geometry_ir_kind": "CircleBackground",
+          "geometry_ir_bbox": [
+            0.19922,
+            0.20312,
+            0.60156,
+            0.60156
+          ]
+        },
+        "color": {
+          "fill_rgb": [
+            0,
+            0,
+            0
+          ],
+          "stroke_rgb": [
+            93,
+            93,
+            93
+          ],
+          "fill_hex": "#000000",
+          "stroke_hex": "#5D5D5D",
+          "fill_confidence": 1.0,
+          "stroke_confidence": 0.042
+        },
+        "confidence": 0.99,
+        "roi": {
+          "type": "image",
+          "hint": "full_image",
+          "bbox": {
+            "x": 0.0,
+            "y": 0.0,
+            "width": 256.0,
+            "height": 256.0
+          }
+        },
+        "evidence": {
+          "detector": "detect_circle_rings",
+          "detection_source": "hough",
+          "threshold_model": "hough_plus_foreground_mask"
+        },
+        "source": "pf3_circle_ring_seed"
+      },
+      "geometry_ir_kinds": [
+        "CircleBackground",
+        "RightwardCompressorGlyph"
+      ],
+      "circle_background": {
+        "kind": "CircleBackground",
+        "id": "compressor_circle",
+        "bbox": [
+          0.19922,
+          0.20312,
+          0.60156,
+          0.60156
+        ],
+        "fill": "#000000",
+        "stroke": "#5D5D5D",
+        "stroke_width": 0.02406,
+        "perception_seed": {
+          "kind": "circle",
+          "confidence": 0.99,
+          "source": "pf3_circle_ring_seed",
+          "detector": "detect_circle_rings",
+          "detection_source": "hough",
+          "candidate_schema_version": "perception_primitive_candidate_v1"
+        }
+      }
+    },
+    {
+      "sample_id": "ring_synthetic",
+      "image_path": null,
+      "description": "Plain-Ring Kreis Hintergrund",
+      "expected_kind": "ring",
+      "candidate_count": 1,
+      "match": true,
+      "top_candidate": {
+        "schema_version": "perception_primitive_candidate_v1",
+        "kind": "ring",
+        "bbox": {
+          "x": 44.0,
+          "y": 44.0,
+          "width": 168.0,
+          "height": 168.0
+        },
+        "center": {
+          "x": 128.0,
+          "y": 128.0
+        },
+        "geometry": {
+          "radius_px": 84.0,
+          "inner_radius_px": 48.72,
+          "stroke_width_px": 35.28,
+          "circularity": 1.0,
+          "ring": true,
+          "fill_ratio": 0.2438,
+          "geometry_ir_kind": "CircleBackground",
+          "geometry_ir_bbox": [
+            0.17188,
+            0.17188,
+            0.65625,
+            0.65625
+          ]
+        },
+        "color": {
+          "fill_rgb": [
+            161,
+            161,
+            161
+          ],
+          "stroke_rgb": [
+            184,
+            184,
+            184
+          ],
+          "fill_hex": "#A1A1A1",
+          "stroke_hex": "#B8B8B8",
+          "fill_confidence": 0.0385,
+          "stroke_confidence": 0.1087
+        },
+        "confidence": 0.8536,
+        "roi": {
+          "type": "image",
+          "hint": "full_image",
+          "bbox": {
+            "x": 0.0,
+            "y": 0.0,
+            "width": 256.0,
+            "height": 256.0
+          }
+        },
+        "evidence": {
+          "detector": "detect_circle_rings",
+          "detection_source": "hough",
+          "threshold_model": "hough_plus_foreground_mask"
+        },
+        "source": "pf3_circle_ring_seed"
+      },
+      "geometry_ir_kinds": [
+        "CircleBackground"
+      ],
+      "circle_background": {
+        "kind": "CircleBackground",
+        "id": "perception_circle_background",
+        "bbox": [
+          0.17188,
+          0.17188,
+          0.65625,
+          0.65625
+        ],
+        "fill": "#A1A1A1",
+        "stroke": "#B8B8B8",
+        "stroke_width": 0.13781,
+        "perception_seed": {
+          "kind": "ring",
+          "confidence": 0.8536,
+          "source": "pf3_circle_ring_seed",
+          "detector": "detect_circle_rings",
+          "detection_source": "hough",
+          "candidate_schema_version": "perception_primitive_candidate_v1"
+        }
+      }
+    },
+    {
+      "sample_id": "AC0201_S_real",
+      "image_path": "artifacts/images_to_convert/AC0201_S.jpg",
+      "description": "AC0201 Kompressor-/Ventilkandidat mit Kreis",
+      "expected_kind": "circle",
+      "candidate_count": 2,
+      "match": true,
+      "top_candidate": {
+        "schema_version": "perception_primitive_candidate_v1",
+        "kind": "circle",
+        "bbox": {
+          "x": 9.0,
+          "y": 11.0,
+          "width": 11.0,
+          "height": 12.0
+        },
+        "center": {
+          "x": 15.0,
+          "y": 17.0
+        },
+        "geometry": {
+          "radius_px": 6.0,
+          "inner_radius_px": 0.0,
+          "stroke_width_px": 1.0,
+          "circularity": 1.0,
+          "ring": false,
+          "fill_ratio": 0.6,
+          "geometry_ir_kind": "CircleBackground",
+          "geometry_ir_bbox": [
+            0.45,
+            0.44,
+            0.55,
+            0.48
+          ]
+        },
+        "color": {
+          "fill_rgb": [
+            212,
+            212,
+            212
+          ],
+          "stroke_rgb": [
+            193,
+            193,
+            193
+          ],
+          "fill_hex": "#D4D4D4",
+          "stroke_hex": "#C1C1C1",
+          "fill_confidence": 0.7284,
+          "stroke_confidence": 0.7245
+        },
+        "confidence": 0.902,
+        "roi": {
+          "type": "image",
+          "hint": "full_image",
+          "bbox": {
+            "x": 0.0,
+            "y": 0.0,
+            "width": 20.0,
+            "height": 25.0
+          }
+        },
+        "evidence": {
+          "detector": "detect_circle_rings",
+          "detection_source": "hough",
+          "threshold_model": "hough_plus_foreground_mask"
+        },
+        "source": "pf3_circle_ring_seed"
+      },
+      "geometry_ir_kinds": [
+        "CircleBackground"
+      ],
+      "circle_background": {
+        "kind": "CircleBackground",
+        "id": "perception_circle_background",
+        "bbox": [
+          0.45,
+          0.44,
+          0.55,
+          0.48
+        ],
+        "fill": "#D4D4D4",
+        "stroke": "#C1C1C1",
+        "stroke_width": 0.05,
+        "perception_seed": {
+          "kind": "circle",
+          "confidence": 0.902,
+          "source": "pf3_circle_ring_seed",
+          "detector": "detect_circle_rings",
+          "detection_source": "hough",
+          "candidate_schema_version": "perception_primitive_candidate_v1"
+        }
+      }
+    },
+    {
+      "sample_id": "AC0800_S_real",
+      "image_path": "artifacts/images_to_convert/AC0800_S.jpg",
+      "description": "AC0800 Plain-Ring Kreis",
+      "expected_kind": "circle",
+      "candidate_count": 1,
+      "match": true,
+      "top_candidate": {
+        "schema_version": "perception_primitive_candidate_v1",
+        "kind": "circle",
+        "bbox": {
+          "x": 2.0,
+          "y": 2.0,
+          "width": 10.0,
+          "height": 10.0
+        },
+        "center": {
+          "x": 7.0,
+          "y": 7.0
+        },
+        "geometry": {
+          "radius_px": 5.0,
+          "inner_radius_px": 0.0,
+          "stroke_width_px": 1.0,
+          "circularity": 1.0,
+          "ring": false,
+          "fill_ratio": 0.0,
+          "geometry_ir_kind": "CircleBackground",
+          "geometry_ir_bbox": [
+            0.13333,
+            0.13333,
+            0.66667,
+            0.66667
+          ]
+        },
+        "color": {
+          "fill_rgb": [
+            242,
+            242,
+            242
+          ],
+          "stroke_rgb": [
+            242,
+            242,
+            242
+          ],
+          "fill_hex": "#F2F2F2",
+          "stroke_hex": "#F2F2F2",
+          "fill_confidence": 0.9884,
+          "stroke_confidence": 0.9878
+        },
+        "confidence": 0.77,
+        "roi": {
+          "type": "image",
+          "hint": "full_image",
+          "bbox": {
+            "x": 0.0,
+            "y": 0.0,
+            "width": 15.0,
+            "height": 15.0
+          }
+        },
+        "evidence": {
+          "detector": "detect_circle_rings",
+          "detection_source": "hough",
+          "threshold_model": "hough_plus_foreground_mask"
+        },
+        "source": "pf3_circle_ring_seed"
+      },
+      "geometry_ir_kinds": [
+        "CircleBackground"
+      ],
+      "circle_background": {
+        "kind": "CircleBackground",
+        "id": "perception_circle_background",
+        "bbox": [
+          0.13333,
+          0.13333,
+          0.66667,
+          0.66667
+        ],
+        "fill": "#F2F2F2",
+        "stroke": "#F2F2F2",
+        "stroke_width": 0.06667,
+        "perception_seed": {
+          "kind": "circle",
+          "confidence": 0.77,
+          "source": "pf3_circle_ring_seed",
+          "detector": "detect_circle_rings",
+          "detection_source": "hough",
+          "candidate_schema_version": "perception_primitive_candidate_v1"
+        }
+      }
+    }
+  ],
+  "accepted_kinds": [
+    "circle",
+    "ring"
+  ],
+  "geometry_ir_seed_kind": "CircleBackground"
+}

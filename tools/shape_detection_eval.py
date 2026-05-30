@@ -28,10 +28,23 @@ def make_synthetic_image(primitive: str, variant: str):
     elif primitive == "rectangle":
         cv2.rectangle(img, (56, 56), (200, 200), (0, 0, 0), -1)
     elif primitive == "arrow":
-        pts = np.array([[40, 120], [150, 120], [150, 90], [220, 128], [150, 166], [150, 136], [40, 136]], dtype=np.int32)
+        pts = np.array(
+            [
+                [40, 120],
+                [150, 120],
+                [150, 90],
+                [220, 128],
+                [150, 166],
+                [150, 136],
+                [40, 136],
+            ],
+            dtype=np.int32,
+        )
         cv2.fillPoly(img, [pts], (0, 0, 0))
     elif primitive == "circle":
         cv2.circle(img, (128, 128), 78, (0, 0, 0), -1)
+    elif primitive == "ring":
+        cv2.circle(img, (128, 128), 78, (0, 0, 0), 10)
 
     if variant == "real":
         noise = np.random.default_rng(42).normal(0, 9, img.shape).astype(np.int16)
@@ -69,16 +82,29 @@ def run_eval(output_dir: Path) -> dict:
         for variant in ["synthetic", "real"]:
             img = make_synthetic_image(primitive, variant)
             pred = detect_primitive_label(img)
-            rows.append({"sample_id": f"{primitive}_{variant}", "expected": primitive, "predicted": pred, "match": int(pred == primitive)})
+            rows.append(
+                {
+                    "sample_id": f"{primitive}_{variant}",
+                    "expected": primitive,
+                    "predicted": pred,
+                    "match": int(pred == primitive),
+                }
+            )
 
     csv_path = output_dir / "shape_detection_eval_report.csv"
     with csv_path.open("w", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(f, fieldnames=["sample_id", "expected", "predicted", "match"])
+        writer = csv.DictWriter(
+            f, fieldnames=["sample_id", "expected", "predicted", "match"]
+        )
         writer.writeheader()
         writer.writerows(rows)
 
     acc = sum(r["match"] for r in rows) / len(rows)
-    summary = {"samples": len(rows), "accuracy": round(acc, 4), "csv_report": str(csv_path)}
+    summary = {
+        "samples": len(rows),
+        "accuracy": round(acc, 4),
+        "csv_report": str(csv_path),
+    }
     json_path = output_dir / "shape_detection_eval_summary.json"
     json_path.write_text(json.dumps(summary, indent=2), encoding="utf-8")
     return summary
