@@ -154,7 +154,8 @@ def apply_semantic_badge_description_rules(*, desc: str, params: dict[str, objec
 
     geometry_ir = params.get("geometry_ir")
     if isinstance(geometry_ir, list) and any(
-        str(element.get("kind", "")) == "VerticalTwoWayValveMotorGlyph"
+        str(element.get("kind", ""))
+        in {"VerticalTwoWayValveMotorGlyph", "LeftRotatedTwoWayValveMotorGlyph"}
         for element in geometry_ir
         if isinstance(element, dict)
     ):

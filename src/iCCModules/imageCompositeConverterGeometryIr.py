@@ -40,8 +40,40 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
     two_way_vertical_valve_hint = _has_any(desc, ("2-weg ventil", "2 weg ventil")) and _has_any(
         desc, ("kelle mit kreis", "horizontale verbindungslinie", "zwei spitze dreiecke")
     )
+    left_rotated_two_way_valve_hint = two_way_vertical_valve_hint and _has_any(
+        desc, ("90° nach links", "90° links", "90 grad nach links", "nach links gedreht")
+    )
 
     if two_way_vertical_valve_hint:
+        if left_rotated_two_way_valve_hint:
+            elements.append(
+                {
+                    "kind": "LeftRotatedTwoWayValveMotorGlyph",
+                    "id": "left_rotated_two_way_valve_motor",
+                    "body_path": [
+                        [0.980, 0.025],
+                        [0.980, 0.384],
+                        [0.491, 0.207],
+                        [0.020, 0.384],
+                        [0.020, 0.025],
+                        [0.491, 0.207],
+                    ],
+                    "circle": [0.499, 0.721, 0.263],
+                    "connector": [[0.499, 0.213], [0.499, 0.460]],
+                    "label": "M",
+                    "label_center": [0.499, 0.815],
+                    "body_fill": "url(#vertical-two-way-valve-body-gradient)",
+                    "circle_fill": "url(#vertical-two-way-valve-circle-gradient)",
+                    "stroke": "#969696",
+                    "connector_stroke": "#8f8f8f",
+                    "text_fill": "#666666",
+                    "stroke_width": 0.040,
+                    "connector_width": 0.060,
+                    "font_size": 0.415,
+                    "font_weight": "700",
+                }
+            )
+            return elements
         elements.append(
             {
                 "kind": "VerticalTwoWayValveMotorGlyph",
@@ -328,7 +360,10 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
     svg: list[str] = []
     rect_x, rect_y, rect_w, rect_h = _find_rect(geometry_ir, w, h)
     needs_gradient = any(element.get("kind") == "HorizontalGradient" for element in geometry_ir)
-    needs_vertical_valve_defs = any(element.get("kind") == "VerticalTwoWayValveMotorGlyph" for element in geometry_ir)
+    needs_vertical_valve_defs = any(
+        element.get("kind") in {"VerticalTwoWayValveMotorGlyph", "LeftRotatedTwoWayValveMotorGlyph"}
+        for element in geometry_ir
+    )
     if needs_gradient or needs_vertical_valve_defs:
         svg.append("  <defs>")
         if needs_gradient:
@@ -351,7 +386,7 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
     for element in geometry_ir:
         kind = str(element.get("kind", ""))
         element_id = html.escape(str(element.get("id", kind)))
-        if kind == "VerticalTwoWayValveMotorGlyph":
+        if kind in {"VerticalTwoWayValveMotorGlyph", "LeftRotatedTwoWayValveMotorGlyph"}:
             stroke = html.escape(str(element.get("stroke", "#969696")))
             connector_stroke = html.escape(str(element.get("connector_stroke", "#8f8f8f")))
             text_fill = html.escape(str(element.get("text_fill", "#666666")))

@@ -2,10 +2,10 @@
 
 Ziel: maximal **5** aktive JPG-Kandidaten, die derzeit noch nicht zufriedenstellend konvertieren, aber voraussichtlich nicht "hoffnungslos komplex" sind.
 
-## Aktuelle Kandidaten (Stand: 2026-05-30, nach AC0212_L-Plan-B)
+## Aktuelle Kandidaten (Stand: 2026-05-30, nach AC0213_L-Plan-B)
 
-1. `AC0213_L.jpg` – AC0212-Variantenkandidat mit vorhandenem Diff-Artefakt für die nächste Auffüllrotation.
-2. `AC0214_S.jpg` – AC0212-Variantenkandidat mit 180°-Drehung und vorhandenem Diff-Artefakt.
+1. `AC0214_S.jpg` – AC0212-Variantenkandidat mit 180°-Drehung und vorhandenem Diff-Artefakt.
+2. `AC0221_S.jpg` – einfacher AC02-Kellenkandidat ohne `M` in der oberen Kelle und mit vorhandenem Diff-Artefakt.
 
 ## Pflege-Regel (fortan)
 
