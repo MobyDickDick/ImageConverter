@@ -2,10 +2,10 @@
 
 Ziel: maximal **5** aktive JPG-Kandidaten, die derzeit noch nicht zufriedenstellend konvertieren, aber voraussichtlich nicht "hoffnungslos komplex" sind.
 
-## Aktuelle Kandidaten (Stand: 2026-05-30, nach AC0201_2-Plan-B)
+## Aktuelle Kandidaten (Stand: 2026-05-30, nach AC0203_1-Plan-B)
 
-1. `AC0202_2.jpg` – einfacher Anschlusskandidat aus den Diff-Artefakten der AC02-Kompressor-/Griff-Familie.
-2. `AC0203_1.jpg` – weiterer AC02-Kandidat mit vorhandenen Diff-Artefakten für eine spätere Rotation.
+1. `AC0204_S_sia.jpg` – naheliegender AC02-Anschlusskandidat mit vorhandenem Diff-Artefakt.
+2. `AC0211_S.jpg` – einfacher AC02-Kandidat mit vorhandenem Diff-Artefakt für eine spätere Rotation.
 
 ## Pflege-Regel (fortan)
 

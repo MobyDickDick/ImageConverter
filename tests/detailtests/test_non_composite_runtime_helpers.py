@@ -4,7 +4,6 @@ import numpy as np
 
 from src.iCCModules import imageCompositeConverterNonCompositeRuntime as non_composite_runtime_helpers
 
-
 def test_run_non_composite_iteration_impl_manual_review_plan_b_uses_sample_svg(tmp_path) -> None:
     logs: list[list[str]] = []
     prints: list[str] = []
@@ -40,9 +39,6 @@ def test_run_non_composite_iteration_impl_manual_review_plan_b_uses_sample_svg(t
     assert logs[0][0] == "status=manual_review_plan_b_sample_svg"
     assert prints and "Plan B aktiv" in prints[0]
     assert artifacts == [("<svg><circle r='1'/></svg>", "sample_rendered")]
-
-
-
 
 def test_run_non_composite_iteration_impl_manual_review_uses_iterative_symbol_fit() -> None:
     logs: list[list[str]] = []
@@ -106,7 +102,6 @@ def test_run_non_composite_iteration_impl_manual_review_writes_skip_log() -> Non
     assert logs == [["status=skipped_manual_review", "manual_review_reason=Bitte prüfen"]]
     assert prints and prints[-1] == "  -> Überspringe Bild: Bitte prüfen"
 
-
 def test_run_non_composite_iteration_impl_manual_review_uses_gradient_stripe_plan_b() -> None:
     logs: list[list[str]] = []
     artifacts: list[tuple[str, object]] = []
@@ -138,7 +133,6 @@ def test_run_non_composite_iteration_impl_manual_review_uses_gradient_stripe_pla
     assert logs == [["status=non_composite_gradient_stripe"]]
     assert artifacts == [("<svg gradient/>", "rendered")]
     assert prints and "Plan B aktiv" in prints[0]
-
 
 def test_run_non_composite_iteration_impl_gradient_stripe_returns_iteration_tuple() -> None:
     logs: list[list[str]] = []
@@ -172,7 +166,6 @@ def test_run_non_composite_iteration_impl_gradient_stripe_returns_iteration_tupl
     assert result == ("Z_203", "desc", {"mode": "non_composite"}, 1, 1.25)
     assert logs == [["status=non_composite_gradient_stripe_visual_override", "stops=3"]]
     assert artifacts == [("<svg gradient/>", "rendered")]
-
 
 def test_run_non_composite_iteration_impl_prefers_sample_svg_when_better(tmp_path) -> None:
     logs: list[list[str]] = []
@@ -209,7 +202,6 @@ def test_run_non_composite_iteration_impl_prefers_sample_svg_when_better(tmp_pat
     assert logs[-1][0] == "status=non_composite_plan_b_sample_svg_selected"
     assert prints and "Plan B Vergleich aktiv" in prints[-1]
     assert artifacts == [("<svg sample/>", "sample_rendered")]
-
 
 def test_run_non_composite_iteration_impl_forces_ac0011_sample_svg_even_when_sample_error_is_worse(tmp_path) -> None:
     logs: list[list[str]] = []
@@ -250,7 +242,6 @@ def test_run_non_composite_iteration_impl_forces_ac0011_sample_svg_even_when_sam
     assert prints and "forcierte Sample-Auswahl" in prints[-1]
     assert artifacts == [("<svg sample/>", "sample_rendered")]
 
-
 def test_run_non_composite_iteration_impl_forced_ac0011_prefers_exact_sample_over_reference(tmp_path) -> None:
     logs: list[list[str]] = []
     artifacts: list[tuple[str, object]] = []
@@ -288,7 +279,6 @@ def test_run_non_composite_iteration_impl_forced_ac0011_prefers_exact_sample_ove
     assert "force_sample_svg=1" in logs[-1]
     assert artifacts == [("<svg exact-sample/>", "exact_rendered")]
 
-
 def test_run_non_composite_iteration_impl_keeps_vector_placeholder_when_non_forced_sample_render_fails(tmp_path) -> None:
     logs: list[list[str]] = []
     artifacts: list[tuple[str, object]] = []
@@ -323,7 +313,6 @@ def test_run_non_composite_iteration_impl_keeps_vector_placeholder_when_non_forc
     assert logs[0][0] == "status=non_composite_pure_svg_placeholder_vector"
     assert not any("sample_render_failed=1" in line for row in logs for line in row)
     assert artifacts and artifacts[0][1] == "baseline_rendered"
-
 
 def test_run_non_composite_iteration_impl_vector_placeholder_has_no_embedded_image() -> None:
     logs: list[list[str]] = []
@@ -397,7 +386,6 @@ def test_run_non_composite_iteration_impl_uses_same_root_sample_svg_when_exact_m
     assert prints and "Plan B Vergleich aktiv" in prints[-1]
     assert artifacts == [("<svg same-root-sample/>", "sample_rendered")]
 
-
 def test_run_non_composite_iteration_impl_uses_root_sample_svg_without_size_suffix(tmp_path) -> None:
     logs: list[list[str]] = []
     prints: list[str] = []
@@ -435,7 +423,6 @@ def test_run_non_composite_iteration_impl_uses_root_sample_svg_without_size_suff
     assert prints and "Plan B Vergleich aktiv" in prints[-1]
     assert artifacts == [("<svg own-nosize-sample/>", "sample_rendered")]
 
-
 def test_run_non_composite_iteration_impl_uses_plain_root_sample_when_size_variant_missing(tmp_path) -> None:
     logs: list[list[str]] = []
     prints: list[str] = []
@@ -472,7 +459,6 @@ def test_run_non_composite_iteration_impl_uses_plain_root_sample_when_size_varia
     assert "sample_svg_path=" in logs[-1][1] and "AC0010.svg" in logs[-1][1]
     assert prints and "Plan B Vergleich aktiv" in prints[-1]
     assert artifacts == [("<svg plain-root-sample/>", "sample_rendered")]
-
 
 def test_run_non_composite_iteration_impl_uses_own_size_sample_for_base_without_size_suffix(tmp_path) -> None:
     logs: list[list[str]] = []
@@ -564,7 +550,6 @@ def test_extract_reference_family_from_description() -> None:
     )
     assert ref == "AC0030"
 
-
 def test_run_non_composite_iteration_impl_does_not_force_sample_for_known_problem_variant(tmp_path) -> None:
     logs: list[list[str]] = []
     prints: list[str] = []
@@ -600,7 +585,6 @@ def test_run_non_composite_iteration_impl_does_not_force_sample_for_known_proble
     assert not any("status=non_composite_plan_b_sample_svg_selected" in line for row in logs for line in row)
     assert artifacts and artifacts[0][1] == "baseline_rendered"
 
-
 def test_try_load_sample_svg_prefers_reference_family_from_description(tmp_path) -> None:
     image_dir = tmp_path / "images"
     samples_dir = image_dir / "samples"
@@ -618,7 +602,6 @@ def test_try_load_sample_svg_prefers_reference_family_from_description(tmp_path)
     sample_path, sample_content = sample
     assert sample_path.endswith("AC0030.svg")
     assert sample_content == "<svg ref/>"
-
 
 def test_try_load_sample_svg_auto_converts_inkscape_file(tmp_path) -> None:
     image_dir = tmp_path / "images"
@@ -641,7 +624,6 @@ def test_try_load_sample_svg_auto_converts_inkscape_file(tmp_path) -> None:
     persisted = sample_path.read_text(encoding="utf-8")
     assert "inkscape:" not in persisted
 
-
 def test_try_load_sample_svg_does_not_rewrite_non_inkscape_svg(tmp_path) -> None:
     image_dir = tmp_path / "images"
     samples_dir = image_dir / "samples"
@@ -657,7 +639,6 @@ def test_try_load_sample_svg_does_not_rewrite_non_inkscape_svg(tmp_path) -> None
 
     assert sample is not None
     assert sample_path.read_text(encoding="utf-8") == original
-
 
 def test_run_non_composite_iteration_impl_uses_description_geometry_ir_for_ac0150_like_shape() -> None:
     logs: list[list[str]] = []
@@ -696,7 +677,6 @@ def test_run_non_composite_iteration_impl_uses_description_geometry_ir_for_ac015
     assert "horizontal_rule_set" in artifacts[0][0]
     assert "right_side_orthogonal_line" in artifacts[0][0]
 
-
 def test_run_non_composite_iteration_impl_uses_description_geometry_ir_for_ac0160_like_shape() -> None:
     logs: list[list[str]] = []
     artifacts: list[tuple[str, object]] = []
@@ -734,7 +714,6 @@ def test_run_non_composite_iteration_impl_uses_description_geometry_ir_for_ac016
     assert "half_double_rect_outer" in artifacts[0][0]
     assert "dp_label_text" in artifacts[0][0]
 
-
 def test_run_non_composite_iteration_impl_uses_description_geometry_ir_for_ac0201_compressor() -> None:
     logs: list[list[str]] = []
     artifacts: list[tuple[str, object]] = []
@@ -768,7 +747,6 @@ def test_run_non_composite_iteration_impl_uses_description_geometry_ir_for_ac020
     assert logs[-1][:2] == ["status=non_composite_description_geometry_ir", "geometry_ir_element_count=2"]
     assert "compressor_circle" in artifacts[0][0]
     assert "upward_compressor_right_line" in artifacts[0][0]
-
 
 def test_run_non_composite_iteration_impl_uses_description_geometry_ir_for_ac0202_compressor() -> None:
     logs: list[list[str]] = []
@@ -806,3 +784,38 @@ def test_run_non_composite_iteration_impl_uses_description_geometry_ir_for_ac020
     assert "compressor_circle" in artifacts[0][0]
     assert "rightward_compressor_lower_line" in artifacts[0][0]
 
+def test_run_non_composite_iteration_impl_uses_description_geometry_ir_for_ac0203_mirrored_compressor() -> None:
+    logs: list[list[str]] = []
+    artifacts: list[tuple[str, object]] = []
+    description = "Wie AC0202: Kompressor grau nach rechts. Geometrische Variante: Hauptdiagonal gespiegelt."
+
+    result = non_composite_runtime_helpers.runNonCompositeIterationImpl(
+        mode="non_composite",
+        params={"mode": "non_composite"},
+        stripe_strategy=None,
+        semantic_mode_visual_override=False,
+        width=50,
+        height=50,
+        base_name="AC0203_1",
+        description=description,
+        perc_img="target",
+        img_path="/tmp/no-sample/AC0203_1.jpg",
+        print_fn=lambda *_args, **_kwargs: None,
+        render_embedded_raster_svg_fn=lambda _path: "<svg embedded/>",
+        build_gradient_stripe_svg_fn=lambda *_args, **_kwargs: "<svg gradient/>",
+        build_gradient_stripe_validation_log_lines_fn=lambda **_kwargs: ["status=non_composite_gradient_stripe"],
+        write_validation_log_fn=logs.append,
+        render_svg_to_numpy_fn=(
+            lambda content, *_args, **_kwargs: (
+                "geometry_rendered" if "mirrored_compressor_left_line" in content else None
+            )
+        ),
+        record_render_failure_fn=lambda *args, **kwargs: None,
+        write_attempt_artifacts_fn=lambda svg, rendered: artifacts.append((svg, rendered)),
+        calculate_error_fn=lambda _target, rendered: 0.13 if rendered == "geometry_rendered" else 99.0,
+    )
+
+    assert result == ("AC0203_1", description, {"mode": "non_composite"}, 1, 0.13)
+    assert logs[-1][:2] == ["status=non_composite_description_geometry_ir", "geometry_ir_element_count=2"]
+    assert "compressor_circle" in artifacts[0][0]
+    assert "mirrored_compressor_right_line" in artifacts[0][0]
