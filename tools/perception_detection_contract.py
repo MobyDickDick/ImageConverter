@@ -514,6 +514,121 @@ def detect_perception_candidates(
     return sorted(candidates, key=lambda item: item.confidence, reverse=True)
 
 
+def _candidate_normalized_bbox(
+    candidate: PerceptionPrimitiveCandidate, image
+) -> list[float]:
+    bbox = candidate.geometry.get("geometry_ir_bbox")
+    if isinstance(bbox, list) and len(bbox) == 4:
+        return [_round_number(float(value), 5) for value in bbox]
+    return _normalized_bbox_dict(candidate, image)
+
+
+def merge_perception_candidates_into_geometry_ir(
+    image,
+    candidates: list[PerceptionPrimitiveCandidate],
+    geometry_ir: list[dict[str, object]] | None = None,
+) -> list[dict[str, object]]:
+    """Merge image-derived candidates into the description Geometry-IR before fallback fitting."""
+    merged = merge_circle_ring_candidates_into_geometry_ir(
+        image, candidates, geometry_ir
+    )
+    existing_kinds = {str(element.get("kind", "")) for element in merged}
+
+    horizontal_rules = [
+        candidate for candidate in candidates if candidate.kind == "horizontal_rule"
+    ]
+    if (
+        horizontal_rules
+        and "MinusGlyph" not in existing_kinds
+        and "HorizontalRule" not in existing_kinds
+    ):
+        best = sorted(
+            horizontal_rules, key=lambda item: item.confidence, reverse=True
+        )[0]
+        bbox = _candidate_normalized_bbox(best, image)
+        stroke_width_px = float(
+            best.geometry.get(
+                "stroke_width_px", max(best.bbox.get("height", 1.0), 1.0)
+            )
+        )
+        stroke_width = _round_number(
+            stroke_width_px / max(float(min(image.shape[:2])), 1.0), 5
+        )
+        merged.append(
+            {
+                "kind": "HorizontalRule",
+                "id": "perception_horizontal_rule",
+                "bbox": bbox,
+                "stroke": best.color.get("stroke_hex") or "#4f4f4f",
+                "stroke_width": max(0.006, stroke_width),
+                "perception_seed": {
+                    "kind": best.kind,
+                    "confidence": best.confidence,
+                    "source": best.source,
+                    "detector": best.evidence.get("detector"),
+                    "candidate_schema_version": best.schema_version,
+                    "text_equivalent": best.geometry.get("text_equivalent"),
+                },
+            }
+        )
+        existing_kinds.add("HorizontalRule")
+
+    rectangles = [
+        candidate for candidate in candidates if candidate.kind == "rectangle"
+    ]
+    if (
+        rectangles
+        and "RectBorder" not in existing_kinds
+        and "HalfDoubleRectBorder" not in existing_kinds
+    ):
+        best = sorted(rectangles, key=lambda item: item.confidence, reverse=True)[0]
+        bbox = _candidate_normalized_bbox(best, image)
+        stroke_width_px = max(
+            1.0,
+            min(
+                float(best.bbox.get("width", 1.0)),
+                float(best.bbox.get("height", 1.0)),
+            )
+            * 0.06,
+        )
+        merged.insert(
+            0,
+            {
+                "kind": "RectBorder",
+                "id": "perception_rect_border",
+                "bbox": bbox,
+                "fill": best.color.get("fill_hex") or "none",
+                "stroke": best.color.get("stroke_hex") or "#666666",
+                "stroke_width": _round_number(
+                    stroke_width_px / max(float(min(image.shape[:2])), 1.0), 5
+                ),
+                "perception_seed": {
+                    "kind": best.kind,
+                    "confidence": best.confidence,
+                    "source": best.source,
+                    "detector": best.evidence.get("detector"),
+                    "candidate_schema_version": best.schema_version,
+                },
+            },
+        )
+
+    return merged
+
+
+def build_perception_seeded_geometry_ir(
+    image,
+    *,
+    description: str | None = None,
+    source: str = "perception_seeded_geometry_ir",
+) -> list[dict[str, object]]:
+    """Build description IR and seed it with PF candidates before non-composite fitting."""
+    base = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(description or "")
+    candidates = detect_perception_candidates(
+        image, source=source, description=description
+    )
+    return merge_perception_candidates_into_geometry_ir(image, candidates, base)
+
+
 def run_minus_roi_report(output_dir: Path) -> dict[str, Any]:
     output_dir.mkdir(parents=True, exist_ok=True)
     synthetic_description = 'oben mittig ist ein "-"-Zeichen'
@@ -681,6 +796,67 @@ def run_circle_ring_seed_report(output_dir: Path) -> dict[str, Any]:
     }
 
 
+def run_perception_seeded_geometry_ir_report(output_dir: Path) -> dict[str, Any]:
+    output_dir.mkdir(parents=True, exist_ok=True)
+    samples: list[dict[str, Any]] = [
+        {
+            "sample_id": "minus_seed_synthetic",
+            "image": make_synthetic_image("minus", "synthetic"),
+            "description": "oben mittig befindet sich eine Markierung",
+            "expected_seed_kind": "HorizontalRule",
+        },
+        {
+            "sample_id": "circle_seed_synthetic",
+            "image": make_synthetic_image("circle", "synthetic"),
+            "description": "Kompressor grau nach rechts",
+            "expected_seed_kind": "CircleBackground",
+        },
+    ]
+
+    rows = []
+    for sample in samples:
+        seeded_ir = build_perception_seeded_geometry_ir(
+            sample["image"],
+            description=sample["description"],
+            source="pf4_perception_seeded_geometry_ir",
+        )
+        seeded_elements = [
+            element
+            for element in seeded_ir
+            if isinstance(element, dict) and element.get("perception_seed")
+        ]
+        rows.append(
+            {
+                "sample_id": sample["sample_id"],
+                "description": sample["description"],
+                "expected_seed_kind": sample["expected_seed_kind"],
+                "geometry_ir_kinds": [element.get("kind") for element in seeded_ir],
+                "seeded_element_count": len(seeded_elements),
+                "match": any(
+                    element.get("kind") == sample["expected_seed_kind"]
+                    and element.get("perception_seed")
+                    for element in seeded_ir
+                ),
+                "seeded_elements": seeded_elements,
+            }
+        )
+
+    report = {
+        "schema_version": "perception_seeded_geometry_ir_report_v1",
+        "candidate_schema_version": "perception_primitive_candidate_v1",
+        "runtime_status": "non_composite_perception_seeded_geometry_ir",
+        "samples": rows,
+        "accepted_seed_kinds": ["CircleBackground", "HorizontalRule", "RectBorder"],
+    }
+    report_path = output_dir / "perception_seeded_geometry_ir_report_v1.json"
+    report_path.write_text(json.dumps(report, indent=2), encoding="utf-8")
+    return {
+        "samples": len(rows),
+        "all_matched": all(row["match"] for row in rows),
+        "json_report": str(report_path),
+    }
+
+
 def run_contract_report(output_dir: Path) -> dict[str, Any]:
     output_dir.mkdir(parents=True, exist_ok=True)
     samples = ["line", "circle", "rectangle"]
@@ -725,7 +901,7 @@ def main() -> int:
     )
     parser.add_argument(
         "--report",
-        choices=["contract", "minus-roi", "circle-ring-seed"],
+        choices=["contract", "minus-roi", "circle-ring-seed", "perception-seeded-ir"],
         default="contract",
     )
     args = parser.parse_args()
@@ -733,6 +909,8 @@ def main() -> int:
         summary = run_minus_roi_report(Path(args.output_dir))
     elif args.report == "circle-ring-seed":
         summary = run_circle_ring_seed_report(Path(args.output_dir))
+    elif args.report == "perception-seeded-ir":
+        summary = run_perception_seeded_geometry_ir_report(Path(args.output_dir))
     else:
         summary = run_contract_report(Path(args.output_dir))
     print(json.dumps(summary, indent=2))

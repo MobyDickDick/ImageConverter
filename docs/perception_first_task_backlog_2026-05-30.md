@@ -67,7 +67,7 @@ ein kleiner Perception-Schritt plus ein eng begrenzter Repro-/Qualitätsnachweis
 - **Plan-B-Kopplung:** Bei instabiler Realbild-Erkennung zuerst synthetische
   Kreis-/Ring-Szenen mit JPEG-Weichzeichnung prüfen.
 
-### PF4 – Perception-Kandidaten vor dem generischen Non-Composite-Fallback nutzen
+### PF4 – Perception-Kandidaten vor dem generischen Non-Composite-Fallback nutzen (erledigt 2026-05-30)
 
 - **Problem:** Selbst wenn Erkennungskandidaten existieren, startet der
   Fallback-Pfad bisher nicht systematisch aus diesen Kandidaten.
@@ -79,6 +79,7 @@ ein kleiner Perception-Schritt plus ein eng begrenzter Repro-/Qualitätsnachweis
   Fallback.
 - **Plan-B-Kopplung:** Zunächst nur für `HorizontalRule`/Minus und
   `CircleBackground` freischalten, damit der Scope klein bleibt.
+- **Ergebnis 2026-05-30:** Runtime-Hook `non_composite_perception_seeded_geometry_ir` ergänzt; Seeds für `HorizontalRule`, `CircleBackground` und `RectBorder` werden vor dem generischen Element-Fit gerendert und geloggt. Nachweis: `artifacts/evaluation/perception_seeded_geometry_ir_v1/perception_seeded_geometry_ir_report_v1.json`.
 
 ### PF5 – Evaluationsharness für Perception-Seeds aufbauen
 

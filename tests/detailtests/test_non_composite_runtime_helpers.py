@@ -314,6 +314,61 @@ def test_run_non_composite_iteration_impl_keeps_vector_placeholder_when_non_forc
     assert not any("sample_render_failed=1" in line for row in logs for line in row)
     assert artifacts and artifacts[0][1] == "baseline_rendered"
 
+
+
+def test_run_non_composite_iteration_impl_prefers_perception_seeded_geometry_ir(monkeypatch) -> None:
+    logs: list[list[str]] = []
+    artifacts: list[tuple[str, object]] = []
+
+    def fake_seeded_ir(image, *, description: str | None = None, source: str = ""):
+        assert image.shape == (20, 40, 3)
+        assert description == "unbekannte Beschreibung"
+        assert source == "non_composite_perception_seed"
+        return [
+            {
+                "kind": "HorizontalRule",
+                "id": "seeded_rule",
+                "bbox": [0.25, 0.45, 0.5, 0.1],
+                "perception_seed": {"kind": "horizontal_rule", "confidence": 0.91},
+            }
+        ]
+
+    monkeypatch.setattr(
+        non_composite_runtime_helpers,
+        "build_perception_seeded_geometry_ir",
+        fake_seeded_ir,
+    )
+
+    result = non_composite_runtime_helpers.runNonCompositeIterationImpl(
+        mode="non_composite",
+        params={"mode": "non_composite"},
+        stripe_strategy=None,
+        semantic_mode_visual_override=False,
+        width=40,
+        height=20,
+        base_name="ACPF4",
+        description="unbekannte Beschreibung",
+        perc_img=np.ones((20, 40, 3), dtype=np.uint8) * 255,
+        img_path="input.jpg",
+        print_fn=lambda *_args, **_kwargs: None,
+        render_embedded_raster_svg_fn=lambda _path: "<svg />",
+        build_gradient_stripe_svg_fn=lambda *_args, **_kwargs: "<svg gradient/>",
+        build_gradient_stripe_validation_log_lines_fn=lambda **_kwargs: ["status=non_composite_gradient_stripe"],
+        write_validation_log_fn=logs.append,
+        render_svg_to_numpy_fn=lambda *_args, **_kwargs: "rendered",
+        record_render_failure_fn=lambda *args, **kwargs: None,
+        write_attempt_artifacts_fn=lambda svg, rendered: artifacts.append((svg, rendered)),
+        calculate_error_fn=lambda _target, _rendered: 0.25,
+    )
+
+    assert result == ("ACPF4", "unbekannte Beschreibung", {"mode": "non_composite"}, 1, 0.25)
+    assert logs[0][:3] == [
+        "status=non_composite_perception_seeded_geometry_ir",
+        "perception_seeded_geometry_ir=1",
+        "perception_seed_count=1",
+    ]
+    assert 'id="seeded_rule"' in artifacts[0][0]
+
 def test_run_non_composite_iteration_impl_vector_placeholder_has_no_embedded_image() -> None:
     logs: list[list[str]] = []
     artifacts: list[tuple[str, object]] = []
