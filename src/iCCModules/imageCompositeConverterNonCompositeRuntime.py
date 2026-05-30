@@ -5,6 +5,8 @@ import re
 from pathlib import Path
 import numpy as np
 
+from src.iCCModules import imageCompositeConverterGeometryIr as geometry_ir_helpers
+
 FORCED_PLAN_B_SAMPLE_VARIANTS: set[str] = {"AC0011"}
 
 def _build_vector_placeholder_svg(width: int, height: int, *, description: str = "") -> str:
@@ -196,6 +198,18 @@ def _fit_symbol_element_by_element(
     if best is None:
         return None
     return best[0], best[1], best[2], current, step_logs
+
+
+def _try_build_description_geometry_ir_svg(width: int, height: int, *, description: str) -> str | None:
+    geometry_ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(description)
+    if not geometry_ir:
+        return None
+    kinds = {str(element.get("kind", "")) for element in geometry_ir}
+    if not ({"HorizontalRuleSet", "OrthogonalPolyline"} & kinds):
+        return None
+    return geometry_ir_helpers.renderGeometryIrToSvgImpl(width, height, geometry_ir)
+
+
 def _contains_svg_image_tag(svg_content: str) -> bool:
     lowered = svg_content.lower()
     return "<image" in lowered and ('href="data:image' in lowered or 'xlink:href="data:image' in lowered)
@@ -485,39 +499,63 @@ def runNonCompositeIterationImpl(
         )
     else:
         print_fn("  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.")
-        try:
-            best_structured = _fit_symbol_element_by_element(
-                width=width,
-                height=height,
-                perc_img=perc_img,
-                render_svg_to_numpy_fn=render_svg_to_numpy_fn,
-                calculate_error_fn=calculate_error_fn,
-            )
-        except Exception:
-            best_structured = None
-        if best_structured is not None:
-            svg_err, svg_content, svg_rendered, fitted_params, step_logs = best_structured
-            write_validation_log_fn(
-                [
-                    "status=non_composite_elementwise_symbol_fit",
-                    *step_logs,
-                    *[f"fit_{k}={v}" for k, v in sorted(fitted_params.items())],
-                ]
-            )
-        else:
-            print_fn("  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).")
-            svg_content = _build_vector_placeholder_svg(width, height, description=description)
-            write_validation_log_fn(["status=non_composite_pure_svg_placeholder_vector"])
+        geometry_ir_svg = _try_build_description_geometry_ir_svg(width, height, description=description)
+        if geometry_ir_svg is not None:
+            svg_content = geometry_ir_svg
             svg_rendered = render_svg_to_numpy_fn(svg_content, width, height)
             if svg_rendered is None:
                 record_render_failure_fn(
-                    "non_composite_pure_svg_render_failed",
+                    "non_composite_geometry_ir_render_failed",
                     svg_content=svg_content,
                     params_snapshot=params,
                 )
                 return None
             svg_err = calculate_error_fn(perc_img, svg_rendered)
-            # continue with plan-b sample comparison below using placeholder baseline
+            geometry_ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(description)
+            write_validation_log_fn(
+                [
+                    "status=non_composite_description_geometry_ir",
+                    f"geometry_ir_element_count={len(geometry_ir)}",
+                    *(
+                        f"geometry_ir_element_{idx}={element.get('kind')}"
+                        for idx, element in enumerate(geometry_ir, start=1)
+                    ),
+                ]
+            )
+        else:
+            try:
+                best_structured = _fit_symbol_element_by_element(
+                    width=width,
+                    height=height,
+                    perc_img=perc_img,
+                    render_svg_to_numpy_fn=render_svg_to_numpy_fn,
+                    calculate_error_fn=calculate_error_fn,
+                )
+            except Exception:
+                best_structured = None
+            if best_structured is not None:
+                svg_err, svg_content, svg_rendered, fitted_params, step_logs = best_structured
+                write_validation_log_fn(
+                    [
+                        "status=non_composite_elementwise_symbol_fit",
+                        *step_logs,
+                        *[f"fit_{k}={v}" for k, v in sorted(fitted_params.items())],
+                    ]
+                )
+            else:
+                print_fn("  -> Fallback aktiv: verwende reine SVG-Platzhalter-Konvertierung (kein eingebettetes Raster).")
+                svg_content = _build_vector_placeholder_svg(width, height, description=description)
+                write_validation_log_fn(["status=non_composite_pure_svg_placeholder_vector"])
+                svg_rendered = render_svg_to_numpy_fn(svg_content, width, height)
+                if svg_rendered is None:
+                    record_render_failure_fn(
+                        "non_composite_pure_svg_render_failed",
+                        svg_content=svg_content,
+                        params_snapshot=params,
+                    )
+                    return None
+                svg_err = calculate_error_fn(perc_img, svg_rendered)
+                # continue with plan-b sample comparison below using placeholder baseline
 
     if stripe_strategy:
         svg_rendered = render_svg_to_numpy_fn(svg_content, width, height)

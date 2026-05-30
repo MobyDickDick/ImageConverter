@@ -42,15 +42,49 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
             }
         )
 
+    if rect_hint and "hochkant" in desc:
+        for element in elements:
+            if element.get("kind") == "HorizontalGradient":
+                element["bbox"] = [0.32, 0.12, 0.36, 0.76]
+
     if rect_hint:
+        rect_bbox = [0.32, 0.12, 0.36, 0.76] if "hochkant" in desc else [0.18, 0.24, 0.64, 0.56]
         elements.append(
             {
                 "kind": "RectBorder",
                 "id": "main_rect",
-                "bbox": [0.18, 0.24, 0.64, 0.56],
+                "bbox": rect_bbox,
                 "fill": "none" if gradient_hint else "#d8d8d8",
                 "stroke": "#666666",
                 "stroke_width": 0.035,
+            }
+        )
+
+    has_horizontal_rules = _has_any(desc, ("horizontale linien", "horizontallinien")) or re.search(
+        r"\bdrei\s+graue\s+horizontale\s+linien", desc
+    )
+    if has_horizontal_rules:
+        elements.append(
+            {
+                "kind": "HorizontalRuleSet",
+                "id": "horizontal_rule_set",
+                "rect_ref": "main_rect",
+                "positions": [0.30, 0.50, 0.70],
+                "stroke": "#707070",
+                "stroke_width": 0.026,
+                "x_inset": 0.10,
+            }
+        )
+
+    if re.search(r"oben[-\s]*mitte.*rechts[-\s]*mitte.*unten[-\s]*mitte", desc):
+        elements.append(
+            {
+                "kind": "OrthogonalPolyline",
+                "id": "right_side_orthogonal_line",
+                "rect_ref": "main_rect",
+                "points": [[0.50, 0.02], [1.02, 0.50], [0.50, 0.98]],
+                "stroke": "#707070",
+                "stroke_width": 0.034,
             }
         )
 
@@ -172,6 +206,39 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
                 f'  <rect id="{element_id}" x="{_fmt(x)}" y="{_fmt(y)}" width="{_fmt(bw)}" height="{_fmt(bh)}" '
                 f'fill="{fill}" stroke="{stroke}" stroke-width="{_fmt(sw)}"/>'
             )
+        elif kind == "HorizontalRuleSet":
+            stroke = html.escape(str(element.get("stroke", "#707070")))
+            sw = float(element.get("stroke_width", 0.026)) * min(w, h)
+            x_inset = float(element.get("x_inset", 0.10)) * rect_w
+            raw_positions = element.get("positions", [0.30, 0.50, 0.70])
+            if not isinstance(raw_positions, list) or not raw_positions:
+                raw_positions = [0.30, 0.50, 0.70]
+            for rule_index, raw_pos in enumerate(raw_positions, start=1):
+                y = rect_y + rect_h * float(raw_pos)
+                svg.append(
+                    f'  <path id="{element_id}_{rule_index}" d="M {_fmt(rect_x + x_inset)} {_fmt(y)} '
+                    f'L {_fmt(rect_x + rect_w - x_inset)} {_fmt(y)}" '
+                    f'stroke="{stroke}" stroke-width="{_fmt(sw)}" fill="none" stroke-linecap="butt"/>'
+                )
+        elif kind == "OrthogonalPolyline":
+            stroke = html.escape(str(element.get("stroke", "#707070")))
+            sw = float(element.get("stroke_width", 0.034)) * min(w, h)
+            raw_points = element.get("points", [])
+            if not isinstance(raw_points, list) or len(raw_points) < 2:
+                raw_points = [[0.50, 0.02], [1.02, 0.50], [0.50, 0.98]]
+            points: list[str] = []
+            for raw_point in raw_points:
+                if isinstance(raw_point, list) and len(raw_point) == 2:
+                    px = rect_x + rect_w * float(raw_point[0])
+                    py = rect_y + rect_h * float(raw_point[1])
+                    points.append(f"{_fmt(px)} {_fmt(py)}")
+            if len(points) >= 2:
+                path_points = " L ".join(points)
+                svg.append(
+                    f'  <path id="{element_id}" d="M {path_points}" '
+                    f'stroke="{stroke}" stroke-width="{_fmt(sw)}" fill="none" '
+                    'stroke-linejoin="round" stroke-linecap="butt"/>'
+                )
         elif kind == "DiagonalBand":
             stroke = html.escape(str(element.get("stroke", "#707070")))
             sw = float(element.get("stroke_width", 0.045)) * min(w, h)
