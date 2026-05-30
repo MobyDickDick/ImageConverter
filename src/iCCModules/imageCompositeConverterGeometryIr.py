@@ -31,7 +31,9 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
     gradient_hint = _has_any(desc, ("farbverlauf", "gradient")) and _has_any(desc, ("horizontal", "dunkel-hell-dunkel", "dunkel–hell–dunkel"))
     diagonal_hint = _has_any(desc, ("diagonal", "diagonale", "diagonalen", "andreaskreuz", "kreuz"))
     differential_pressure_hint = _has_any(desc, ("differenzdruckmessung", "dp")) and "doppelten grauen rand" in desc
-    upward_compressor_hint = "kompressor" in desc and _has_any(desc, ("nach oben", "oben", "aufwärts", "aufwaerts"))
+    compressor_hint = "kompressor" in desc
+    upward_compressor_hint = compressor_hint and _has_any(desc, ("nach oben", "oben", "aufwärts", "aufwaerts"))
+    rightward_compressor_hint = compressor_hint and _has_any(desc, ("nach rechts", "rechts"))
 
     if upward_compressor_hint:
         elements.extend(
@@ -52,6 +54,30 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
                     "right_line": [[0.72, 0.78], [0.58, 0.16]],
                     "stroke": "#d7d7d7",
                     "stroke_width": 0.040,
+                },
+            ]
+        )
+        return elements
+
+    if rightward_compressor_hint:
+        elements.extend(
+            [
+                {
+                    "kind": "CircleBackground",
+                    "id": "compressor_circle",
+                    "bbox": [0.06, 0.06, 0.88, 0.88],
+                    "fill": "#45aa5e",
+                    "stroke": "#8d8d8d",
+                    "stroke_width": 0.020,
+                },
+                {
+                    "kind": "RightwardCompressorGlyph",
+                    "id": "rightward_compressor",
+                    "circle_ref": "compressor_circle",
+                    "upper_line": [[0.22, 0.09], [1.01, 0.39]],
+                    "lower_line": [[0.22, 0.91], [1.01, 0.61]],
+                    "stroke": "#f4f4f4",
+                    "stroke_width": 0.032,
                 },
             ]
         )
@@ -271,12 +297,18 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
                 f'rx="{_fmt(bw * 0.5)}" ry="{_fmt(bh * 0.5)}" fill="{fill}" stroke="{stroke}" '
                 f'stroke-width="{_fmt(sw)}"/>'
             )
-        elif kind == "UpwardCompressorGlyph":
+        elif kind in {"UpwardCompressorGlyph", "RightwardCompressorGlyph"}:
             circle_ref = str(element.get("circle_ref", "compressor_circle"))
             circle_x, circle_y, circle_w, circle_h = _find_circle(geometry_ir, circle_ref, w, h)
             stroke = html.escape(str(element.get("stroke", "#d7d7d7")))
             sw = float(element.get("stroke_width", 0.040)) * min(w, h)
-            line_specs = (("left_line", "upward_compressor_left_line"), ("right_line", "upward_compressor_right_line"))
+            if kind == "RightwardCompressorGlyph":
+                line_specs = (
+                    ("upper_line", "rightward_compressor_upper_line"),
+                    ("lower_line", "rightward_compressor_lower_line"),
+                )
+            else:
+                line_specs = (("left_line", "upward_compressor_left_line"), ("right_line", "upward_compressor_right_line"))
             for line_key, stable_id in line_specs:
                 raw_line = element.get(line_key, [])
                 if not isinstance(raw_line, list) or len(raw_line) != 2:

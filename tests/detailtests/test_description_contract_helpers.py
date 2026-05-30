@@ -78,3 +78,13 @@ def test_description_parser_attaches_geometry_ir_for_ac0201_upward_compressor() 
         "UpwardCompressorGlyph",
     ]
 
+
+def test_description_parser_attaches_geometry_ir_for_ac0202_rightward_compressor() -> None:
+    _desc, params = _parse("Kompressor grau nach rechts")
+
+    assert params["contract_status"] == "ok"
+    assert [element["kind"] for element in params["geometry_ir"]] == [
+        "CircleBackground",
+        "RightwardCompressorGlyph",
+    ]
+
