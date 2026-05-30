@@ -6,7 +6,7 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-05-30)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `383` · Erledigt `279` · Offen `104`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `383` · Erledigt `280` · Offen `103`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -73,7 +73,7 @@ Ziel: Die beschreibungsgetriebene Geometry-IR bleibt Zielrepräsentation, wird a
 künftig aus einfachen Bild-/Beschreibungshinweisen vorinitialisiert. Das
 detaillierte Backlog steht in `docs/perception_first_task_backlog_2026-05-30.md`.
 
-- [ ] **PF1 – Detection-Contract v1 für erkannte Primitive festlegen:** ein stabiles Format für Linien-, Kreis-/Ring- und Rechteckkandidaten definieren und reporten.
+- [x] **PF1 – Detection-Contract v1 für erkannte Primitive festlegen:** ein stabiles Format für Linien-, Kreis-/Ring- und Rechteckkandidaten definieren und reporten. (2026-05-30: Contract-Modul `tools/perception_detection_contract.py` ergänzt; Kandidatenschema `perception_primitive_candidate_v1` serialisiert `kind`, `bbox`, `center`, `geometry`, `color`, `confidence`, `roi`, `evidence` und `source`. Plan-B-Synthesereport für `line`, `circle` und `rectangle` unter `artifacts/evaluation/perception_detection_contract_v1/perception_detection_contract_v1_report.json`; Basistests in `tests/test_perception_detection_contract.py`.)
 - [ ] **PF2 – Horizontalstrich-/Minus-Erkennung mit ROI-Hinweis implementieren:** Hinweise wie „oben mittig ist ein `-`-Zeichen“ in einen `HorizontalRule`- oder `TextGlyph("-")`-Seed übersetzen.
 - [ ] **PF3 – Kreis-/Ring-Erkennung als Geometry-IR-Seed stabilisieren:** erkannte Kreise/Ringe mit `CircleBackground` und bestehenden Masken-/Hough-Heuristiken zusammenführen.
 - [ ] **PF4 – Perception-Kandidaten vor dem generischen Non-Composite-Fallback nutzen:** Beschreibung + Bildanalyse als `perception_seeded_geometry_ir` vor dem Element-Fit ausführen.
@@ -81,6 +81,13 @@ detaillierte Backlog steht in `docs/perception_first_task_backlog_2026-05-30.md`
 - [ ] **PF6 – Perception-Telemetrie in bestehende Reports integrieren:** erkannte/abgelehnte Kandidaten, Seed-Auswahl und Fehlerdeltas pro Lauf als CSV/JSON protokollieren.
 - [ ] **PF7 – Einfache Text-/Glyph-Erkennung für `M`, `+`, `-` und kurze Labels prüfen:** Template-Matching/OCR-Nutzen ohne neue Pflichtdependency evaluieren.
 - [ ] **PF8 – Plan-B-Rotation mit Perception-Aufgaben verzahnen:** jedes kommende Plan-B-Paket erhält einen Abschnitt „Perception-Lerneffekt“.
+
+### Fortschritt vs. Blocker (Session 2026-05-30, PF1 Detection-Contract Run MO)
+
+- **Fortschritt:** Die nächste dokumentierte Perception-First-Aufgabe **PF1** wurde umgesetzt: erkannte Linien-, Kreis- und Rechteckprimitive werden nun in das gemeinsame Schema `perception_primitive_candidate_v1` mit Geometrie-, Farb-, ROI-, Evidence- und Source-Feldern serialisiert.
+- **Gekoppelte Plan-B-Aufgabe:** Die im Backlog vorgesehene synthetische Minimalprobe wurde als Contract-Report mit den drei Fixtures `line`, `circle` und `rectangle` ausgeführt; alle drei erwarteten Kandidatentypen wurden gematcht.
+- **Blocker:** Keine für PF1; reale Bildkandidaten bleiben bewusst Folgeaufgabe für PF2/PF3/PF6, damit der Contract zuerst stabil bleibt.
+- **Nächster sinnvoller Schritt:** PF2 umsetzen: Horizontalstrich-/Minus-Erkennung mit ROI-Hinweis auf Basis des neuen Candidate-Contracts protokollieren.
 
 ## How to use this list
 
