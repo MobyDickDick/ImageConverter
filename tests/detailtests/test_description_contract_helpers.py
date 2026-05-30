@@ -102,6 +102,16 @@ def test_description_parser_attaches_geometry_ir_for_ac0211_typo_upward_compress
     ]
 
 
+def test_description_parser_attaches_geometry_ir_for_ac0221_top_kelle_three_way_valve() -> None:
+    _desc, params = _parse(
+        'Wie AC0231, jedoch ohne "M" in der Kelle oben. '
+        'Der Griff liegt auf einer Symmetrieachse des Kreises.'
+    )
+
+    assert params["contract_status"] == "ok"
+    assert [element["kind"] for element in params["geometry_ir"]] == ["TopKelleThreeWayValveGlyph"]
+
+
 def test_description_parser_attaches_geometry_ir_for_ac0212_vertical_two_way_valve_motor() -> None:
     _desc, params = _parse(
         '2-Weg Ventil vertikal: Kelle mit Kreis rechts, horizontale Verbindungslinie, '
