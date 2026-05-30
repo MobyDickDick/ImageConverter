@@ -53,3 +53,17 @@ def test_description_parser_attaches_geometry_ir_for_ac0120_like_description() -
         "DiagonalBand",
         "DiagonalBand",
     ]
+
+
+def test_description_parser_attaches_geometry_ir_for_ac0160_like_description() -> None:
+    _desc, params = _parse(
+        'Differenzdruckmessung oben kleines graues Rechteck mit "dp" geschrieben, '
+        'vor halbem Rechteck mit doppelten grauen Rand'
+    )
+
+    assert params["contract_status"] == "ok"
+    assert [element["kind"] for element in params["geometry_ir"]] == [
+        "HalfDoubleRectBorder",
+        "LabelBox",
+        "TextGlyph",
+    ]

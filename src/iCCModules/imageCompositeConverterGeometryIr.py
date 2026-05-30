@@ -30,6 +30,41 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
     rect_hint = _has_any(desc, ("rechteck", "viereck", "kühlelement", "heizelement", "ac0120-bildbeschreibung"))
     gradient_hint = _has_any(desc, ("farbverlauf", "gradient")) and _has_any(desc, ("horizontal", "dunkel-hell-dunkel", "dunkel–hell–dunkel"))
     diagonal_hint = _has_any(desc, ("diagonal", "diagonale", "diagonalen", "andreaskreuz", "kreuz"))
+    differential_pressure_hint = _has_any(desc, ("differenzdruckmessung", "dp")) and "doppelten grauen rand" in desc
+
+    if differential_pressure_hint:
+        elements.extend(
+            [
+                {
+                    "kind": "HalfDoubleRectBorder",
+                    "id": "half_double_rect",
+                    "bbox": [0.22, 0.38, 0.56, 0.34],
+                    "fill": "none",
+                    "stroke": "#777777",
+                    "stroke_width": 0.024,
+                    "inner_inset": 0.075,
+                    "open_side": "left",
+                },
+                {
+                    "kind": "LabelBox",
+                    "id": "dp_label_box",
+                    "bbox": [0.35, 0.16, 0.30, 0.20],
+                    "fill": "#d7d7d7",
+                    "stroke": "#777777",
+                    "stroke_width": 0.020,
+                },
+                {
+                    "kind": "TextGlyph",
+                    "id": "dp_label_text",
+                    "text": "dp",
+                    "bbox_ref": "dp_label_box",
+                    "fill": "#555555",
+                    "font_size": 0.105,
+                    "font_weight": "600",
+                },
+            ]
+        )
+        return elements
 
     if gradient_hint:
         elements.append(
@@ -205,6 +240,48 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
             svg.append(
                 f'  <rect id="{element_id}" x="{_fmt(x)}" y="{_fmt(y)}" width="{_fmt(bw)}" height="{_fmt(bh)}" '
                 f'fill="{fill}" stroke="{stroke}" stroke-width="{_fmt(sw)}"/>'
+            )
+        elif kind == "HalfDoubleRectBorder":
+            x, y, bw, bh = _scaled_bbox(element, w, h)
+            fill = html.escape(str(element.get("fill", "none")))
+            stroke = html.escape(str(element.get("stroke", "#777777")))
+            sw = float(element.get("stroke_width", 0.024)) * min(w, h)
+            inset = float(element.get("inner_inset", 0.075)) * min(bw, bh)
+            svg.append(
+                f'  <rect id="{element_id}_outer" x="{_fmt(x)}" y="{_fmt(y)}" width="{_fmt(bw)}" height="{_fmt(bh)}" '
+                f'fill="{fill}" stroke="{stroke}" stroke-width="{_fmt(sw)}"/>'
+            )
+            svg.append(
+                f'  <rect id="{element_id}_inner" x="{_fmt(x + inset)}" y="{_fmt(y + inset)}" '
+                f'width="{_fmt(max(0.0, bw - 2 * inset))}" height="{_fmt(max(0.0, bh - 2 * inset))}" '
+                f'fill="none" stroke="{stroke}" stroke-width="{_fmt(sw)}"/>'
+            )
+            cut_w = max(sw * 1.6, bw * 0.20)
+            svg.append(
+                f'  <rect id="{element_id}_left_half_mask" x="{_fmt(x - sw)}" y="{_fmt(y - sw)}" '
+                f'width="{_fmt(cut_w)}" height="{_fmt(bh + 2 * sw)}" fill="white" stroke="none"/>'
+            )
+        elif kind == "LabelBox":
+            x, y, bw, bh = _scaled_bbox(element, w, h)
+            fill = html.escape(str(element.get("fill", "#d7d7d7")))
+            stroke = html.escape(str(element.get("stroke", "#777777")))
+            sw = float(element.get("stroke_width", 0.020)) * min(w, h)
+            svg.append(
+                f'  <rect id="{element_id}" x="{_fmt(x)}" y="{_fmt(y)}" width="{_fmt(bw)}" height="{_fmt(bh)}" '
+                f'fill="{fill}" stroke="{stroke}" stroke-width="{_fmt(sw)}"/>'
+            )
+        elif kind == "TextGlyph":
+            raw_text = html.escape(str(element.get("text", "")))
+            ref_id = str(element.get("bbox_ref", ""))
+            ref_element = next((candidate for candidate in geometry_ir if str(candidate.get("id", "")) == ref_id), None)
+            x, y, bw, bh = _scaled_bbox(ref_element or element, w, h)
+            fill = html.escape(str(element.get("fill", "#555555")))
+            font_size = float(element.get("font_size", 0.105)) * min(w, h)
+            font_weight = html.escape(str(element.get("font_weight", "600")))
+            svg.append(
+                f'  <text id="{element_id}" x="{_fmt(x + bw * 0.50)}" y="{_fmt(y + bh * 0.55)}" '
+                f'fill="{fill}" font-family="Arial, Helvetica, sans-serif" font-size="{_fmt(font_size)}" '
+                f'font-weight="{font_weight}" text-anchor="middle" dominant-baseline="middle">{raw_text}</text>'
             )
         elif kind == "HorizontalRuleSet":
             stroke = html.escape(str(element.get("stroke", "#707070")))

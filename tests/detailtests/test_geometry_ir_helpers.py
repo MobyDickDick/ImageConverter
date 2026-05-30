@@ -84,3 +84,33 @@ def test_render_geometry_ir_to_svg_contains_ac0150_rule_and_polyline_primitives(
     assert 'id="horizontal_rule_set_3"' in svg
     assert 'id="right_side_orthogonal_line"' in svg
     assert 'L' in svg
+
+
+def test_build_geometry_ir_maps_ac0160_differential_pressure_description() -> None:
+    description = (
+        'Differenzdruckmessung oben kleines graues Rechteck mit "dp" geschrieben, '
+        'vor halbem Rechteck mit doppelten grauen Rand'
+    )
+
+    ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(description)
+
+    assert [element["kind"] for element in ir] == ["HalfDoubleRectBorder", "LabelBox", "TextGlyph"]
+    assert ir[0]["id"] == "half_double_rect"
+    assert ir[2]["text"] == "dp"
+    assert ir[2]["bbox_ref"] == "dp_label_box"
+
+
+def test_render_geometry_ir_to_svg_contains_ac0160_box_and_dp_primitives() -> None:
+    ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
+        'Differenzdruckmessung oben kleines graues Rechteck mit "dp" geschrieben, '
+        'vor halbem Rechteck mit doppelten grauen Rand'
+    )
+
+    svg = geometry_ir_helpers.renderGeometryIrToSvgImpl(400, 400, ir)
+
+    assert 'id="half_double_rect_outer"' in svg
+    assert 'id="half_double_rect_inner"' in svg
+    assert 'id="half_double_rect_left_half_mask"' in svg
+    assert 'id="dp_label_box"' in svg
+    assert 'id="dp_label_text"' in svg
+    assert '>dp</text>' in svg
