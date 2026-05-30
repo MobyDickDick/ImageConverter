@@ -211,6 +211,8 @@ def _try_build_description_geometry_ir_svg(width: int, height: int, *, descripti
         "HalfDoubleRectBorder",
         "LabelBox",
         "TextGlyph",
+        "CircleBackground",
+        "UpwardCompressorGlyph",
     }
     if not (description_driven_kinds & kinds):
         return None
