@@ -39,6 +39,13 @@ python -m src.imageCompositeConverter \
   --end ZZ9999
 ```
 
+Wenn einzelne Bilder im Batch nicht vektorisierbar sind, läuft die Konvertierung
+weiter und schreibt die Details nach
+`artifacts/converted_images/reports/batch_failure_summary.csv`. Der CLI-Prozess
+endet in diesem Fall standardmäßig trotzdem mit Exitcode `0`; für CI-/Gate-Läufe,
+die bei solchen Einzelfehlern abbrechen sollen, kann `--fail-on-batch-failures`
+gesetzt werden.
+
 ### Qualitätsparameter für als gut markierte Konvertierungen
 
 ```bash

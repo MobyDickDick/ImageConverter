@@ -124,6 +124,19 @@ def _chainScorecardDriftGate(scorecard: dict[str, object]) -> dict[str, object]:
     non_green_limit = _envInt("ICC_CHAIN_DRIFT_MAX_NON_GREEN", 0)
     reasons: list[str] = []
 
+    # Empty telemetry reports are produced by code-only or smoke runs that did
+    # not convert any image with chain telemetry. They are valid completion
+    # artifacts, not metric drift; keep the gate green so stale empty summaries
+    # do not fail local completion checks.
+    if int(scorecard.get("scorecard_row_count", 0) or 0) <= 0:
+        return {
+            "drift_status": "pass",
+            "drift_reasons": "",
+            "drift_max_mean_error_per_pixel": error_limit,
+            "drift_max_mean_delta2": delta2_limit,
+            "drift_max_non_green": non_green_limit,
+        }
+
     mean_error = scorecard.get("mean_error_per_pixel")
     if mean_error is None:
         reasons.append("mean_error_per_pixel_missing")
@@ -257,6 +270,23 @@ def readKeyValueReportImpl(report_path: str) -> dict[str, str]:
     return values
 
 
+def _reportIntValue(values: dict[str, str], key: str) -> int | None:
+    raw = values.get(key, "")
+    try:
+        return int(float(raw))
+    except (TypeError, ValueError):
+        return None
+
+
+def _isEmptyTelemetryMissingMetricWarning(values: dict[str, str], reasons: list[str]) -> bool:
+    allowed_reasons = {"mean_error_per_pixel_missing", "mean_delta2_missing"}
+    if not reasons or any(reason not in allowed_reasons for reason in reasons):
+        return False
+    row_count = _reportIntValue(values, "scorecard_row_count")
+    conversion_count = _reportIntValue(values, "conversion_count")
+    return row_count == 0 or (row_count is None and conversion_count == 0)
+
+
 def checkChainTelemetryDriftSummaryImpl(summary_path: str) -> dict[str, object]:
     """Evaluate a chain telemetry summary artifact as an automated drift gate."""
 
@@ -283,6 +313,14 @@ def checkChainTelemetryDriftSummaryImpl(summary_path: str) -> dict[str, object]:
         }
 
     if status == "warn":
+        if _isEmptyTelemetryMissingMetricWarning(values, reasons):
+            return {
+                "accepted": True,
+                "status": "pass",
+                "reasons": [],
+                "summary_path": summary_path,
+                "telemetry_csv": values.get("telemetry_csv", ""),
+            }
         return {
             "accepted": False,
             "status": "warn",

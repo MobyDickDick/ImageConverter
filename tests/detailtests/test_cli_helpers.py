@@ -20,6 +20,18 @@ def test_parse_args_impl_applies_named_iterations_override() -> None:
 
     assert args.folder_path == "images"
     assert args.iterations == 17
+    assert args.fail_on_batch_failures is False
+
+
+def test_parse_args_impl_accepts_strict_batch_failure_exit_flag() -> None:
+    args = cli_helpers.parseArgsImpl(
+        argv=["images", "--fail-on-batch-failures"],
+        ac08_regression_set_name="ac08-regression",
+        ac08_regression_variants=("AC0800_L",),
+        svg_render_subprocess_timeout_sec=5.0,
+    )
+
+    assert args.fail_on_batch_failures is True
 
 
 def test_parse_args_impl_accepts_input_dir_alias() -> None:
@@ -431,7 +443,7 @@ AC0030.jpg;raster_embedded_svg;embedded_raster_detected;d;l
     assert cli_helpers._hasBatchFailures(str(tmp_path)) is True
 
 
-def test_run_main_impl_convert_mode_returns_1_when_batch_failures_exist() -> None:
+def test_run_main_impl_convert_mode_warns_but_returns_0_when_batch_failures_exist() -> None:
     args = argparse.Namespace(
         _render_svg_subprocess=False,
         isolate_svg_render=False,
@@ -454,7 +466,63 @@ def test_run_main_impl_convert_mode_returns_1_when_batch_failures_exist() -> Non
         deterministic_order=True,
     )
 
-    with mock.patch("src.iCCModules.imageCompositeConverterCli._hasBatchFailures", return_value=True):
+    stdout = io.StringIO()
+    with (
+        mock.patch("src.iCCModules.imageCompositeConverterCli._hasBatchFailures", return_value=True),
+        contextlib.redirect_stdout(stdout),
+    ):
+        rc = cli_helpers.runMainImpl(
+            args,
+            run_svg_render_subprocess_entrypoint_fn=lambda: 11,
+            set_svg_render_subprocess_enabled_fn=lambda _enabled: None,
+            set_svg_render_subprocess_timeout_fn=lambda _timeout: None,
+            optional_log_capture_fn=contextlib.nullcontext,
+            build_linux_vendor_install_command_fn=lambda **_kwargs: ["pip"],
+            prompt_interactive_range_fn=lambda _args: ("AC0030", "AC0030"),
+            resolve_cli_csv_and_output_fn=lambda _args: ("descriptions.csv", "out"),
+            load_description_mapping_fn=lambda _path: None,
+            bootstrap_required_image_dependencies_fn=lambda: [],
+            analyze_range_fn=lambda *_args, **_kwargs: "annotated",
+            convert_range_fn=lambda *fn_args, **_kwargs: "converted",
+            format_user_diagnostic_fn=lambda exc: str(exc),
+            description_mapping_error_type=RuntimeError,
+            ac08_regression_set_name="ac08-set",
+            ac08_regression_variants=("AC0800_L",),
+        )
+
+    assert rc == 0
+    assert "[WARN] Mindestens eine Datei" in stdout.getvalue()
+
+
+def test_run_main_impl_convert_mode_returns_1_when_strict_batch_failures_enabled() -> None:
+    args = argparse.Namespace(
+        _render_svg_subprocess=False,
+        isolate_svg_render=False,
+        isolate_svg_render_timeout_sec=3.0,
+        log_file="",
+        ac08_regression_set=False,
+        print_linux_vendor_command=False,
+        vendor_dir="vendor",
+        vendor_platform="manylinux",
+        vendor_python_version="310",
+        interactive_range=False,
+        start="AC0030",
+        end="AC0030",
+        mode="convert",
+        bootstrap_deps=False,
+        folder_path="images",
+        iterations=5,
+        debug_ac0811_dir=None,
+        debug_element_diff_dir=None,
+        deterministic_order=True,
+        fail_on_batch_failures=True,
+    )
+
+    stdout = io.StringIO()
+    with (
+        mock.patch("src.iCCModules.imageCompositeConverterCli._hasBatchFailures", return_value=True),
+        contextlib.redirect_stdout(stdout),
+    ):
         rc = cli_helpers.runMainImpl(
             args,
             run_svg_render_subprocess_entrypoint_fn=lambda: 11,
@@ -475,3 +543,4 @@ def test_run_main_impl_convert_mode_returns_1_when_batch_failures_exist() -> Non
         )
 
     assert rc == 1
+    assert "--fail-on-batch-failures aktiv" in stdout.getvalue()

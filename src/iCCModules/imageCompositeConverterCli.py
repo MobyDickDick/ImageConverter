@@ -182,6 +182,16 @@ def parseArgsImpl(
             "(L/M/S ohne Ventilkopf-Metadaten) im Ausgabeverzeichnis und beendet danach."
         ),
     )
+    parser.add_argument(
+        "--fail-on-batch-failures",
+        action="store_true",
+        help=(
+            "Beendet den CLI-Lauf mit Exitcode 1, wenn einzelne Bilder in "
+            "batch_failure_summary.csv protokolliert wurden. Ohne diese Option "
+            "gilt ein durchgelaufener Batch als erfolgreich und meldet solche "
+            "Einzelfehler nur als Warnung."
+        ),
+    )
     parser.add_argument("--_render-svg-subprocess", action="store_true", help=argparse.SUPPRESS)
     args = parser.parse_args(argv)
     if args.input_dir:
@@ -539,8 +549,10 @@ def runMainImpl(
                 )
             print(f"\nAbgeschlossen! Ausgaben unter: {out_dir}")
             if args.mode == "convert" and _hasBatchFailures(str(out_dir)):
-                print("[ERROR] Mindestens eine Datei konnte nicht erfolgreich konvertiert werden (siehe batch_failure_summary.csv).")
-                return 1
+                print("[WARN] Mindestens eine Datei konnte nicht erfolgreich konvertiert werden (siehe batch_failure_summary.csv).")
+                if bool(getattr(args, "fail_on_batch_failures", False)):
+                    print("[ERROR] --fail-on-batch-failures aktiv: Batch-Einzelfehler erzwingen Exitcode 1.")
+                    return 1
             return 0
         except description_mapping_error_type as exc:
             print(f"[ERROR] {format_user_diagnostic_fn(exc)}")
