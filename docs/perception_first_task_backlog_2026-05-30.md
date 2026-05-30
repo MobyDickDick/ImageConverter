@@ -94,7 +94,7 @@ ein kleiner Perception-Schritt plus ein eng begrenzter Repro-/Qualitätsnachweis
 - **Plan-B-Kopplung:** Falls reale Bilddaten fehlen, bleibt der Report mit
   synthetischen Fixtures grün und markiert Realbildfälle als offen.
 
-### PF6 – Perception-Telemetrie in bestehende Reports integrieren
+### PF6 – Perception-Telemetrie in bestehende Reports integrieren (erledigt 2026-05-30)
 
 - **Problem:** In Folgearbeiten muss nachvollziehbar sein, ob ein Bild wegen
   Erkennung, Beschreibung oder manuellem Geometry-IR-Sonderfall funktioniert.
@@ -106,6 +106,7 @@ ein kleiner Perception-Schritt plus ein eng begrenzter Repro-/Qualitätsnachweis
   genutzt werden kann.
 - **Plan-B-Kopplung:** Wenn der Hauptpfad noch nicht schreibt, zunächst ein
   externes Tool `tools/...` verwenden und später in den Runtime-Pfad ziehen.
+- **Ergebnis 2026-05-30:** `tools/perception_detection_contract.py --report perception-telemetry` schreibt `perception_telemetry_report_v1.json` und `perception_telemetry_candidates_v1.csv` mit Kandidatenentscheidungen, gewählten Geometry-IR-Seeds sowie Fehlerwerten vor/nach Seed. Nachweis: `artifacts/evaluation/perception_telemetry_v1/`.
 
 ### PF7 – Einfache Text-/Glyph-Erkennung für `M`, `+`, `-` und kurze Labels prüfen
 
@@ -138,7 +139,7 @@ ein kleiner Perception-Schritt plus ein eng begrenzter Repro-/Qualitätsnachweis
 1. **PF1** als Grundlage: gemeinsames Datenformat für erkannte Primitive.
 2. **PF2** als kleinstes Nutzerbeispiel: „oben mittig ist ein `-`-Zeichen“.
 3. **PF6** früh einziehen, damit die folgenden Schritte nicht wieder unsichtbar
-   bleiben.
+   bleiben. (erledigt 2026-05-30)
 4. **PF3/PF4** koppeln, sobald `minus/line` stabil protokolliert wird.
 5. **PF5** nach den ersten zwei erkannten Primitiven, damit Fortschritt messbar
    bleibt.

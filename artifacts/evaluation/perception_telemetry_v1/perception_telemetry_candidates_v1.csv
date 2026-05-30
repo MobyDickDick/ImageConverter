@@ -1,0 +1,17 @@
+sample_id,candidate_rank,candidate_kind,confidence,decision,reason,seed_count,error_before_seed,error_after_seed,error_delta_before_minus_after
+AC0120_L_plan_b_real,1,line,1.0,rejected,not_selected_lower_confidence_or_no_seed_mapping,3,53.568542,31.99625,21.572292
+AC0120_L_plan_b_real,2,line,1.0,rejected,not_selected_lower_confidence_or_no_seed_mapping,3,53.568542,31.99625,21.572292
+AC0120_L_plan_b_real,3,line,1.0,rejected,not_selected_lower_confidence_or_no_seed_mapping,3,53.568542,31.99625,21.572292
+AC0120_L_plan_b_real,4,line,1.0,rejected,not_selected_lower_confidence_or_no_seed_mapping,3,53.568542,31.99625,21.572292
+AC0120_L_plan_b_real,5,circle,0.9563,accepted,selected_for_geometry_ir_seed,3,53.568542,31.99625,21.572292
+AC0120_L_plan_b_real,6,circle,0.9555,rejected,not_selected_lower_confidence_or_no_seed_mapping,3,53.568542,31.99625,21.572292
+AC0120_L_plan_b_real,7,rectangle,0.9407,accepted,selected_for_geometry_ir_seed,3,53.568542,31.99625,21.572292
+AC0120_L_plan_b_real,8,circle,0.9347,rejected,not_selected_lower_confidence_or_no_seed_mapping,3,53.568542,31.99625,21.572292
+AC0120_L_plan_b_real,9,ring,0.9337,rejected,not_selected_lower_confidence_or_no_seed_mapping,3,53.568542,31.99625,21.572292
+AC0120_L_plan_b_real,10,ring,0.9221,rejected,not_selected_lower_confidence_or_no_seed_mapping,3,53.568542,31.99625,21.572292
+AC0120_L_plan_b_real,11,ring,0.916,rejected,not_selected_lower_confidence_or_no_seed_mapping,3,53.568542,31.99625,21.572292
+AC0120_L_plan_b_real,12,ring,0.9125,rejected,not_selected_lower_confidence_or_no_seed_mapping,3,53.568542,31.99625,21.572292
+AC0120_L_plan_b_real,13,circle,0.8973,rejected,not_selected_lower_confidence_or_no_seed_mapping,3,53.568542,31.99625,21.572292
+AC0120_L_plan_b_real,14,ring,0.8846,rejected,not_selected_lower_confidence_or_no_seed_mapping,3,53.568542,31.99625,21.572292
+AC0120_L_plan_b_real,15,ring,0.8679,rejected,not_selected_lower_confidence_or_no_seed_mapping,3,53.568542,31.99625,21.572292
+AC0120_L_plan_b_real,16,horizontal_rule,0.7467,accepted,selected_for_geometry_ir_seed,3,53.568542,31.99625,21.572292

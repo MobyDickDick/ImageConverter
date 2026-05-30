@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import csv
 import importlib.util
 import json
 import sys
@@ -537,40 +538,50 @@ def merge_perception_candidates_into_geometry_ir(
     horizontal_rules = [
         candidate for candidate in candidates if candidate.kind == "horizontal_rule"
     ]
-    if (
-        horizontal_rules
-        and "MinusGlyph" not in existing_kinds
-        and "HorizontalRule" not in existing_kinds
-    ):
+    if horizontal_rules:
         best = sorted(
             horizontal_rules, key=lambda item: item.confidence, reverse=True
         )[0]
-        bbox = _candidate_normalized_bbox(best, image)
-        stroke_width_px = float(
-            best.geometry.get(
-                "stroke_width_px", max(best.bbox.get("height", 1.0), 1.0)
+        seed_meta = {
+            "kind": best.kind,
+            "confidence": best.confidence,
+            "source": best.source,
+            "detector": best.evidence.get("detector"),
+            "candidate_schema_version": best.schema_version,
+            "text_equivalent": best.geometry.get("text_equivalent"),
+        }
+        existing_rule_index = next(
+            (
+                idx
+                for idx, element in enumerate(merged)
+                if element.get("kind") in {"HorizontalRule", "MinusGlyph"}
+            ),
+            None,
+        )
+        if existing_rule_index is not None:
+            updated = dict(merged[existing_rule_index])
+            updated["perception_seed"] = seed_meta
+            merged[existing_rule_index] = updated
+        else:
+            bbox = _candidate_normalized_bbox(best, image)
+            stroke_width_px = float(
+                best.geometry.get(
+                    "stroke_width_px", max(best.bbox.get("height", 1.0), 1.0)
+                )
             )
-        )
-        stroke_width = _round_number(
-            stroke_width_px / max(float(min(image.shape[:2])), 1.0), 5
-        )
-        merged.append(
-            {
-                "kind": "HorizontalRule",
-                "id": "perception_horizontal_rule",
-                "bbox": bbox,
-                "stroke": best.color.get("stroke_hex") or "#4f4f4f",
-                "stroke_width": max(0.006, stroke_width),
-                "perception_seed": {
-                    "kind": best.kind,
-                    "confidence": best.confidence,
-                    "source": best.source,
-                    "detector": best.evidence.get("detector"),
-                    "candidate_schema_version": best.schema_version,
-                    "text_equivalent": best.geometry.get("text_equivalent"),
-                },
-            }
-        )
+            stroke_width = _round_number(
+                stroke_width_px / max(float(min(image.shape[:2])), 1.0), 5
+            )
+            merged.append(
+                {
+                    "kind": "HorizontalRule",
+                    "id": "perception_horizontal_rule",
+                    "bbox": bbox,
+                    "stroke": best.color.get("stroke_hex") or "#4f4f4f",
+                    "stroke_width": max(0.006, stroke_width),
+                    "perception_seed": seed_meta,
+                }
+            )
         existing_kinds.add("HorizontalRule")
 
     rectangles = [
@@ -628,6 +639,244 @@ def build_perception_seeded_geometry_ir(
     )
     return merge_perception_candidates_into_geometry_ir(image, candidates, base)
 
+
+
+def _candidate_decision_key(candidate: PerceptionPrimitiveCandidate) -> tuple[str, str, float]:
+    return (
+        candidate.kind,
+        str(candidate.evidence.get("detector", "")),
+        _round_number(candidate.confidence, 4),
+    )
+
+
+def _seed_decision_keys(seeded_ir: list[dict[str, object]]) -> set[tuple[str, str, float]]:
+    keys: set[tuple[str, str, float]] = set()
+    for element in seeded_ir:
+        if not isinstance(element, dict):
+            continue
+        seed = element.get("perception_seed")
+        if not isinstance(seed, dict):
+            continue
+        keys.add(
+            (
+                str(seed.get("kind", "")),
+                str(seed.get("detector", "")),
+                _round_number(float(seed.get("confidence", 0.0)), 4),
+            )
+        )
+    return keys
+
+
+def _render_svg_for_telemetry(svg: str, width: int, height: int):
+    try:
+        import cv2  # type: ignore
+        import fitz  # type: ignore
+        import numpy as np  # type: ignore
+    except ModuleNotFoundError:
+        return None
+    from src.iCCModules.imageCompositeConverterRendering import (
+        render_svg_to_numpy_inprocess,
+    )
+
+    return render_svg_to_numpy_inprocess(
+        svg,
+        width,
+        height,
+        fitz_module=fitz,
+        np_module=np,
+        cv2_module=cv2,
+    )
+
+
+def _calculate_telemetry_error(target, rendered) -> float | None:
+    if rendered is None:
+        return None
+    import numpy as np  # type: ignore
+
+    target_arr = np.asarray(target, dtype=np.float32)
+    rendered_arr = np.asarray(rendered, dtype=np.float32)
+    if target_arr.shape != rendered_arr.shape:
+        return None
+    return _round_number(float(np.mean(np.abs(target_arr - rendered_arr))), 6)
+
+
+def _geometry_ir_error_for_telemetry(image, geometry_ir: list[dict[str, object]]) -> tuple[float | None, str]:
+    height, width = image.shape[:2]
+    if geometry_ir:
+        svg = geometry_ir_helpers.renderGeometryIrToSvgImpl(width, height, geometry_ir)
+    else:
+        svg = (
+            f'<svg width="{width}" height="{height}" viewBox="0 0 {width} {height}" '
+            'xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="100%" fill="#ffffff"/></svg>'
+        )
+    rendered = _render_svg_for_telemetry(svg, width, height)
+    if rendered is None:
+        return None, "render_unavailable"
+    error = _calculate_telemetry_error(image, rendered)
+    return error, "rendered" if error is not None else "error_unavailable"
+
+
+def build_perception_telemetry_record(
+    image,
+    *,
+    sample_id: str,
+    description: str | None = None,
+    image_path: str | None = None,
+    source: str = "pf6_perception_telemetry",
+) -> dict[str, Any]:
+    """Build a PF6 telemetry record with candidates, decisions, seeds and error deltas."""
+    base_ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(description or "")
+    candidates = detect_perception_candidates(
+        image,
+        source=source,
+        description=description,
+    )
+    seeded_ir = merge_perception_candidates_into_geometry_ir(image, candidates, base_ir)
+    accepted_keys = _seed_decision_keys(seeded_ir)
+    candidate_rows: list[dict[str, Any]] = []
+    for rank, candidate in enumerate(candidates, start=1):
+        accepted = _candidate_decision_key(candidate) in accepted_keys
+        candidate_rows.append(
+            {
+                "rank": rank,
+                "candidate": candidate.to_dict(),
+                "decision": "accepted" if accepted else "rejected",
+                "reason": (
+                    "selected_for_geometry_ir_seed"
+                    if accepted
+                    else "not_selected_lower_confidence_or_no_seed_mapping"
+                ),
+            }
+        )
+
+    selected_seed_elements = [
+        element
+        for element in seeded_ir
+        if isinstance(element, dict) and element.get("perception_seed")
+    ]
+    error_before, render_status_before = _geometry_ir_error_for_telemetry(image, base_ir)
+    error_after, render_status_after = _geometry_ir_error_for_telemetry(image, seeded_ir)
+    if error_before is not None and error_after is not None:
+        error_delta = _round_number(error_before - error_after, 6)
+    else:
+        error_delta = None
+    height, width = image.shape[:2]
+    return {
+        "schema_version": "perception_telemetry_record_v1",
+        "candidate_schema_version": "perception_primitive_candidate_v1",
+        "sample_id": sample_id,
+        "image_path": image_path,
+        "image_size": {"width": int(width), "height": int(height)},
+        "description": description or "",
+        "runtime_status": "non_composite_perception_seeded_geometry_ir",
+        "candidate_count": len(candidates),
+        "accepted_candidate_count": sum(1 for row in candidate_rows if row["decision"] == "accepted"),
+        "rejected_candidate_count": sum(1 for row in candidate_rows if row["decision"] == "rejected"),
+        "candidates": candidate_rows,
+        "selected_geometry_ir_seed_count": len(selected_seed_elements),
+        "selected_geometry_ir_seeds": selected_seed_elements,
+        "geometry_ir_before_seed_kinds": [element.get("kind") for element in base_ir],
+        "geometry_ir_after_seed_kinds": [element.get("kind") for element in seeded_ir],
+        "error_before_seed": error_before,
+        "error_after_seed": error_after,
+        "error_delta_before_minus_after": error_delta,
+        "render_status_before_seed": render_status_before,
+        "render_status_after_seed": render_status_after,
+    }
+
+
+def write_perception_telemetry_report(
+    records: list[dict[str, Any]], output_dir: Path
+) -> dict[str, Any]:
+    output_dir.mkdir(parents=True, exist_ok=True)
+    report = {
+        "schema_version": "perception_telemetry_report_v1",
+        "candidate_schema_version": "perception_primitive_candidate_v1",
+        "records": records,
+        "summary": {
+            "samples": len(records),
+            "total_candidates": sum(int(record["candidate_count"]) for record in records),
+            "accepted_candidates": sum(int(record["accepted_candidate_count"]) for record in records),
+            "rejected_candidates": sum(int(record["rejected_candidate_count"]) for record in records),
+            "all_have_selected_seed": all(
+                int(record["selected_geometry_ir_seed_count"]) > 0 for record in records
+            ),
+        },
+    }
+    json_path = output_dir / "perception_telemetry_report_v1.json"
+    csv_path = output_dir / "perception_telemetry_candidates_v1.csv"
+    json_path.write_text(json.dumps(report, indent=2), encoding="utf-8")
+    with csv_path.open("w", newline="", encoding="utf-8") as fh:
+        writer = csv.DictWriter(
+            fh,
+            fieldnames=[
+                "sample_id",
+                "candidate_rank",
+                "candidate_kind",
+                "confidence",
+                "decision",
+                "reason",
+                "seed_count",
+                "error_before_seed",
+                "error_after_seed",
+                "error_delta_before_minus_after",
+            ],
+        )
+        writer.writeheader()
+        for record in records:
+            for row in record["candidates"]:
+                candidate = row["candidate"]
+                writer.writerow(
+                    {
+                        "sample_id": record["sample_id"],
+                        "candidate_rank": row["rank"],
+                        "candidate_kind": candidate["kind"],
+                        "confidence": candidate["confidence"],
+                        "decision": row["decision"],
+                        "reason": row["reason"],
+                        "seed_count": record["selected_geometry_ir_seed_count"],
+                        "error_before_seed": record["error_before_seed"],
+                        "error_after_seed": record["error_after_seed"],
+                        "error_delta_before_minus_after": record[
+                            "error_delta_before_minus_after"
+                        ],
+                    }
+                )
+    return {
+        "samples": report["summary"]["samples"],
+        "accepted_candidates": report["summary"]["accepted_candidates"],
+        "json_report": str(json_path),
+        "csv_report": str(csv_path),
+        "all_have_selected_seed": report["summary"]["all_have_selected_seed"],
+    }
+
+
+def run_perception_telemetry_report(output_dir: Path) -> dict[str, Any]:
+    """Write PF6 JSON/CSV telemetry for a Plan-B-style single candidate run."""
+    real_path = PROJECT_ROOT / "artifacts" / "images_to_convert" / "AC0120_L.jpg"
+    description = 'Plan-B-Kandidat AC0120_L: oben auf der vertikalen Symmetrieachse werden ein "+"- und ein "-"-Zeichen eingefügt.'
+    try:
+        import cv2  # type: ignore
+    except ModuleNotFoundError:
+        cv2 = None
+    if cv2 is not None and real_path.exists():
+        image = cv2.imread(str(real_path))
+        sample_id = "AC0120_L_plan_b_real"
+        image_path = str(real_path.relative_to(PROJECT_ROOT))
+    else:
+        image = None
+    if image is None:
+        image = make_synthetic_image("minus", "synthetic")
+        sample_id = "minus_top_center_plan_b_synthetic"
+        image_path = None
+    record = build_perception_telemetry_record(
+        image,
+        sample_id=sample_id,
+        image_path=image_path,
+        description=description,
+        source="pf6_perception_telemetry",
+    )
+    return write_perception_telemetry_report([record], output_dir)
 
 def run_minus_roi_report(output_dir: Path) -> dict[str, Any]:
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -901,7 +1150,7 @@ def main() -> int:
     )
     parser.add_argument(
         "--report",
-        choices=["contract", "minus-roi", "circle-ring-seed", "perception-seeded-ir"],
+        choices=["contract", "minus-roi", "circle-ring-seed", "perception-seeded-ir", "perception-telemetry"],
         default="contract",
     )
     args = parser.parse_args()
@@ -911,6 +1160,8 @@ def main() -> int:
         summary = run_circle_ring_seed_report(Path(args.output_dir))
     elif args.report == "perception-seeded-ir":
         summary = run_perception_seeded_geometry_ir_report(Path(args.output_dir))
+    elif args.report == "perception-telemetry":
+        summary = run_perception_telemetry_report(Path(args.output_dir))
     else:
         summary = run_contract_report(Path(args.output_dir))
     print(json.dumps(summary, indent=2))

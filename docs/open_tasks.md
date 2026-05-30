@@ -6,7 +6,7 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-05-30)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `383` · Erledigt `283` · Offen `100`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `383` · Erledigt `284` · Offen `99`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -78,7 +78,7 @@ detaillierte Backlog steht in `docs/perception_first_task_backlog_2026-05-30.md`
 - [x] **PF3 – Kreis-/Ring-Erkennung als Geometry-IR-Seed stabilisieren:** erkannte Kreise/Ringe mit `CircleBackground` und bestehenden Masken-/Hough-Heuristiken zusammenführen. (2026-05-30: `detect_circle_rings(...)` kombiniert Hough- und Foreground-Masken-Heuristiken, serialisiert `circle`-/`ring`-Kandidaten mit `geometry_ir_kind=CircleBackground` und merged den stärksten Treffer via `merge_circle_ring_candidates_into_geometry_ir(...)` in bestehende oder neue Geometry-IR-Kreise; Report mit synthetischem Kreis/Ring plus `AC0201_S.jpg`/`AC0800_S.jpg` unter `artifacts/evaluation/perception_circle_ring_seed_v1/perception_circle_ring_seed_report_v1.json`, Basistests in `tests/test_perception_circle_ring_seed.py`.)
 - [x] **PF4 – Perception-Kandidaten vor dem generischen Non-Composite-Fallback nutzen:** Beschreibung + Bildanalyse als `perception_seeded_geometry_ir` vor dem Element-Fit ausführen. (2026-05-30: Non-Composite-Runtime versucht nun vor Description-only-IR und generischem Element-Fit einen `non_composite_perception_seeded_geometry_ir`-Pfad; Perception-Seeds für `CircleBackground`, `HorizontalRule` und `RectBorder` werden aus PF-Kandidaten in Geometry-IR gemerged, gerendert und mit eigener Validation-Log-Spur protokolliert. Report: `artifacts/evaluation/perception_seeded_geometry_ir_v1/perception_seeded_geometry_ir_report_v1.json`; Basistests in `tests/test_perception_seeded_geometry_ir.py` und `tests/detailtests/test_non_composite_runtime_helpers.py`. )
 - [ ] **PF5 – Evaluationsharness für Perception-Seeds aufbauen:** Precision/Recall, Confidence und Renderfehler vor/nach Seed für mindestens drei Primitive ausweisen.
-- [ ] **PF6 – Perception-Telemetrie in bestehende Reports integrieren:** erkannte/abgelehnte Kandidaten, Seed-Auswahl und Fehlerdeltas pro Lauf als CSV/JSON protokollieren.
+- [x] **PF6 – Perception-Telemetrie in bestehende Reports integrieren:** erkannte/abgelehnte Kandidaten, Seed-Auswahl und Fehlerdeltas pro Lauf als CSV/JSON protokollieren. (2026-05-30: PF6-Telemetrie ergänzt `build_perception_telemetry_record(...)` sowie den CLI-Report `--report perception-telemetry`; JSON/CSV-Artefakte unter `artifacts/evaluation/perception_telemetry_v1/` protokollieren erkannte und abgelehnte Kandidaten, ausgewählte Geometry-IR-Seeds sowie Fehlerwerte vor/nach Seed. Basistests in `tests/test_perception_telemetry_report.py`.)
 - [ ] **PF7 – Einfache Text-/Glyph-Erkennung für `M`, `+`, `-` und kurze Labels prüfen:** Template-Matching/OCR-Nutzen ohne neue Pflichtdependency evaluieren.
 - [ ] **PF8 – Plan-B-Rotation mit Perception-Aufgaben verzahnen:** jedes kommende Plan-B-Paket erhält einen Abschnitt „Perception-Lerneffekt“.
 
@@ -95,6 +95,13 @@ detaillierte Backlog steht in `docs/perception_first_task_backlog_2026-05-30.md`
 - **Gekoppelte Plan-B-Aufgabe:** Der PF3-Report prüft synthetische `circle`-/`ring`-Fixtures sowie `AC0201_S.jpg` und `AC0800_S.jpg`; alle erwarteten Kandidatentypen werden gematcht und der stärkste Kandidat erzeugt einen `CircleBackground`-Seed.
 - **Blocker:** Keine für PF3; reale Kleinstbilder wie `AC0201_S.jpg`/`AC0800_S.jpg` liefern aktuell bewusst einen CircleBackground-Kreis-Seed statt eine robuste Ring-Innenradius-Schätzung.
 - **Nächster sinnvoller Schritt:** PF4 umsetzen: den neuen `perception_seeded_geometry_ir`-Pfad vor dem generischen Non-Composite-Fallback in die Laufzeit integrieren.
+
+### Fortschritt vs. Blocker (Session 2026-05-30, PF6 Perception-Telemetrie Run MR)
+
+- **Fortschritt:** Die nächste dokumentierte Perception-First-Aufgabe **PF6** wurde umgesetzt: Ein Telemetrie-Record hält Kandidatenentscheidungen (`accepted`/`rejected`), ausgewählte Geometry-IR-Seeds und Fehlerwerte vor/nach Perception-Seed fest.
+- **Gekoppelte Plan-B-Aufgabe:** Der Einzelreport für `AC0120_L.jpg` schreibt JSON und CSV unter `artifacts/evaluation/perception_telemetry_v1/`; der Lauf selektiert Perception-Seeds und weist ein Fehlerdelta vor/nach Seed aus.
+- **Blocker:** Keine für PF6; die Telemetrie ist zunächst als externes Tool verfügbar und kann in einem späteren Paket direkt an breitere Runtime-Batches angebunden werden.
+- **Nächster sinnvoller Schritt:** PF5 umsetzen: Evaluationsharness für Perception-Seeds mit Precision/Recall, Confidence-Verteilung und Qualitätsänderung für mindestens drei Primitive aufbauen.
 
 ### Fortschritt vs. Blocker (Session 2026-05-30, PF4 Perception-Seeded-Geometry-IR Run MR)
 
