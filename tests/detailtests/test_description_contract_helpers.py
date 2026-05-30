@@ -90,3 +90,13 @@ def test_description_parser_attaches_geometry_ir_for_ac0203_main_diagonal_mirror
         "CircleBackground",
         "MainDiagonalMirroredCompressorGlyph",
     ]
+
+
+def test_description_parser_attaches_geometry_ir_for_ac0211_typo_upward_compressor() -> None:
+    _desc, params = _parse("Kopressor grau nach oben")
+
+    assert params["contract_status"] == "ok"
+    assert [element["kind"] for element in params["geometry_ir"]] == [
+        "CircleBackground",
+        "UpwardCompressorGlyph",
+    ]

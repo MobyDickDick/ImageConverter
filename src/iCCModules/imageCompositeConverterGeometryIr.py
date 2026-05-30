@@ -31,7 +31,7 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
     gradient_hint = _has_any(desc, ("farbverlauf", "gradient")) and _has_any(desc, ("horizontal", "dunkel-hell-dunkel", "dunkel–hell–dunkel"))
     diagonal_hint = _has_any(desc, ("diagonal", "diagonale", "diagonalen", "andreaskreuz", "kreuz"))
     differential_pressure_hint = _has_any(desc, ("differenzdruckmessung", "dp")) and "doppelten grauen rand" in desc
-    compressor_hint = "kompressor" in desc
+    compressor_hint = _has_any(desc, ("kompressor", "kopressor"))
     upward_compressor_hint = compressor_hint and _has_any(desc, ("nach oben", "oben", "aufwärts", "aufwaerts"))
     rightward_compressor_hint = compressor_hint and _has_any(desc, ("nach rechts", "rechts"))
     main_diagonal_mirrored_compressor_hint = rightward_compressor_hint and _has_any(
