@@ -152,6 +152,14 @@ def apply_semantic_badge_description_rules(*, desc: str, params: dict[str, objec
     if not normalized:
         return False
 
+    geometry_ir = params.get("geometry_ir")
+    if isinstance(geometry_ir, list) and any(
+        str(element.get("kind", "")) == "VerticalTwoWayValveMotorGlyph"
+        for element in geometry_ir
+        if isinstance(element, dict)
+    ):
+        return False
+
     has_badge_shape = any(token in normalized for token in ("kelle", "kreis", "badge"))
     has_orientation_hint = any(
         token in normalized

@@ -893,3 +893,45 @@ def test_run_non_composite_iteration_impl_uses_description_geometry_ir_for_ac021
     assert logs[-1][:2] == ["status=non_composite_description_geometry_ir", "geometry_ir_element_count=2"]
     assert "compressor_circle" in artifacts[0][0]
     assert "upward_compressor_left_line" in artifacts[0][0]
+
+
+def test_run_non_composite_iteration_impl_uses_description_geometry_ir_for_ac0212_vertical_two_way_valve_motor() -> None:
+    logs: list[list[str]] = []
+    artifacts: list[tuple[str, object]] = []
+    description = (
+        '2-Weg Ventil vertikal: Kelle mit Kreis rechts, horizontale Verbindungslinie, '
+        '"M" als Text (M = Motor), zwei spitze Dreiecke, welche sich in der Mitte berühren, '
+        'graue Umrandung, Dreiecke besitzen emeinsamen Farübergang von dunkelgrau rechts oben nach hellgrau links unten. '
+        'Der Griff liegt auf einer Symmetrieachse des Kreises.'
+    )
+
+    result = non_composite_runtime_helpers.runNonCompositeIterationImpl(
+        mode="non_composite",
+        params={"mode": "non_composite"},
+        stripe_strategy=None,
+        semantic_mode_visual_override=False,
+        width=65,
+        height=50,
+        base_name="AC0212_L",
+        description=description,
+        perc_img="target",
+        img_path="/tmp/no-sample/AC0212_L.jpg",
+        print_fn=lambda *_args, **_kwargs: None,
+        render_embedded_raster_svg_fn=lambda _path: "<svg embedded/>",
+        build_gradient_stripe_svg_fn=lambda *_args, **_kwargs: "<svg gradient/>",
+        build_gradient_stripe_validation_log_lines_fn=lambda **_kwargs: ["status=non_composite_gradient_stripe"],
+        write_validation_log_fn=logs.append,
+        render_svg_to_numpy_fn=(
+            lambda content, *_args, **_kwargs: (
+                "geometry_rendered" if "vertical_two_way_valve_motor_circle" in content else None
+            )
+        ),
+        record_render_failure_fn=lambda *args, **kwargs: None,
+        write_attempt_artifacts_fn=lambda svg, rendered: artifacts.append((svg, rendered)),
+        calculate_error_fn=lambda _target, rendered: 0.16 if rendered == "geometry_rendered" else 99.0,
+    )
+
+    assert result == ("AC0212_L", description, {"mode": "non_composite"}, 1, 0.16)
+    assert logs[-1][:2] == ["status=non_composite_description_geometry_ir", "geometry_ir_element_count=1"]
+    assert "vertical_two_way_valve_motor_body" in artifacts[0][0]
+    assert "vertical_two_way_valve_motor_label" in artifacts[0][0]

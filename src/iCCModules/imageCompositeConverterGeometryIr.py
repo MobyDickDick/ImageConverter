@@ -37,6 +37,32 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
     main_diagonal_mirrored_compressor_hint = rightward_compressor_hint and _has_any(
         desc, ("hauptdiagonal gespiegelt", "diagonal gespiegelt", "gespiegelt")
     )
+    two_way_vertical_valve_hint = _has_any(desc, ("2-weg ventil", "2 weg ventil")) and _has_any(
+        desc, ("kelle mit kreis", "horizontale verbindungslinie", "zwei spitze dreiecke")
+    )
+
+    if two_way_vertical_valve_hint:
+        elements.append(
+            {
+                "kind": "VerticalTwoWayValveMotorGlyph",
+                "id": "vertical_two_way_valve_motor",
+                "body_path": [[0.025, 0.020], [0.384, 0.020], [0.207, 0.509], [0.384, 0.980], [0.025, 0.980], [0.207, 0.509]],
+                "circle": [0.721, 0.501, 0.263],
+                "connector": [[0.213, 0.501], [0.460, 0.501]],
+                "label": "M",
+                "label_center": [0.721, 0.595],
+                "body_fill": "url(#vertical-two-way-valve-body-gradient)",
+                "circle_fill": "url(#vertical-two-way-valve-circle-gradient)",
+                "stroke": "#969696",
+                "connector_stroke": "#8f8f8f",
+                "text_fill": "#666666",
+                "stroke_width": 0.040,
+                "connector_width": 0.060,
+                "font_size": 0.540,
+                "font_weight": "700",
+            }
+        )
+        return elements
 
     if upward_compressor_hint:
         elements.extend(
@@ -302,19 +328,79 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
     svg: list[str] = []
     rect_x, rect_y, rect_w, rect_h = _find_rect(geometry_ir, w, h)
     needs_gradient = any(element.get("kind") == "HorizontalGradient" for element in geometry_ir)
-    if needs_gradient:
+    needs_vertical_valve_defs = any(element.get("kind") == "VerticalTwoWayValveMotorGlyph" for element in geometry_ir)
+    if needs_gradient or needs_vertical_valve_defs:
         svg.append("  <defs>")
-        svg.append('    <linearGradient id="geometry-ir-horizontal-gradient" x1="0%" y1="0%" x2="100%" y2="0%">')
-        svg.append('      <stop offset="0%" stop-color="#8f8f8f"/>')
-        svg.append('      <stop offset="50%" stop-color="#dedede"/>')
-        svg.append('      <stop offset="100%" stop-color="#8f8f8f"/>')
-        svg.append("    </linearGradient>")
+        if needs_gradient:
+            svg.append('    <linearGradient id="geometry-ir-horizontal-gradient" x1="0%" y1="0%" x2="100%" y2="0%">')
+            svg.append('      <stop offset="0%" stop-color="#8f8f8f"/>')
+            svg.append('      <stop offset="50%" stop-color="#dedede"/>')
+            svg.append('      <stop offset="100%" stop-color="#8f8f8f"/>')
+            svg.append("    </linearGradient>")
+        if needs_vertical_valve_defs:
+            svg.append('    <linearGradient id="vertical-two-way-valve-body-gradient" x1="0%" y1="0%" x2="100%" y2="100%">')
+            svg.append('      <stop offset="0%" stop-color="#a8a8a8"/>')
+            svg.append('      <stop offset="100%" stop-color="#fbfbfb"/>')
+            svg.append("    </linearGradient>")
+            svg.append('    <linearGradient id="vertical-two-way-valve-circle-gradient" x1="0%" y1="0%" x2="100%" y2="100%">')
+            svg.append('      <stop offset="0%" stop-color="#ffffff"/>')
+            svg.append('      <stop offset="100%" stop-color="#f7f7f7"/>')
+            svg.append("    </linearGradient>")
         svg.append("  </defs>")
 
     for element in geometry_ir:
         kind = str(element.get("kind", ""))
         element_id = html.escape(str(element.get("id", kind)))
-        if kind == "CircleBackground":
+        if kind == "VerticalTwoWayValveMotorGlyph":
+            stroke = html.escape(str(element.get("stroke", "#969696")))
+            connector_stroke = html.escape(str(element.get("connector_stroke", "#8f8f8f")))
+            text_fill = html.escape(str(element.get("text_fill", "#666666")))
+            body_fill = html.escape(str(element.get("body_fill", "url(#vertical-two-way-valve-body-gradient)")))
+            circle_fill = html.escape(str(element.get("circle_fill", "url(#vertical-two-way-valve-circle-gradient)")))
+            sw = float(element.get("stroke_width", 0.040)) * min(w, h)
+            connector_sw = float(element.get("connector_width", 0.060)) * min(w, h)
+            raw_connector = element.get("connector", [[0.213, 0.501], [0.460, 0.501]])
+            if isinstance(raw_connector, list) and len(raw_connector) == 2:
+                points = []
+                for raw_point in raw_connector:
+                    if isinstance(raw_point, list) and len(raw_point) == 2:
+                        points.append((float(raw_point[0]) * w, float(raw_point[1]) * h))
+                if len(points) == 2:
+                    (x0, y0), (x1, y1) = points
+                    svg.append(
+                        f'  <path id="{element_id}_connector" d="M {_fmt(x0)} {_fmt(y0)} L {_fmt(x1)} {_fmt(y1)}" '
+                        f'stroke="{connector_stroke}" stroke-width="{_fmt(connector_sw)}" fill="none" stroke-linecap="butt"/>'
+                    )
+            raw_body = element.get("body_path", [])
+            body_points: list[str] = []
+            if isinstance(raw_body, list):
+                for raw_point in raw_body:
+                    if isinstance(raw_point, list) and len(raw_point) == 2:
+                        body_points.append(f"{_fmt(float(raw_point[0]) * w)} {_fmt(float(raw_point[1]) * h)}")
+            if body_points:
+                svg.append(
+                    f'  <path id="{element_id}_body" d="M {" L ".join(body_points)} Z" '
+                    f'fill="{body_fill}" stroke="{stroke}" stroke-width="{_fmt(sw)}" stroke-linejoin="miter"/>'
+                )
+            raw_circle = element.get("circle", [0.721, 0.501, 0.263])
+            if isinstance(raw_circle, list) and len(raw_circle) == 3:
+                cx, cy, radius = [float(value) for value in raw_circle]
+                svg.append(
+                    f'  <circle id="{element_id}_circle" cx="{_fmt(cx * w)}" cy="{_fmt(cy * h)}" '
+                    f'r="{_fmt(radius * min(w, h))}" fill="{circle_fill}" stroke="{stroke}" stroke-width="{_fmt(sw)}"/>'
+                )
+            label = html.escape(str(element.get("label", "M")))
+            raw_label_center = element.get("label_center", [0.721, 0.595])
+            if label and isinstance(raw_label_center, list) and len(raw_label_center) == 2:
+                font_size = float(element.get("font_size", 0.540)) * min(w, h)
+                font_weight = html.escape(str(element.get("font_weight", "700")))
+                svg.append(
+                    f'  <text id="{element_id}_label" x="{_fmt(float(raw_label_center[0]) * w)}" '
+                    f'y="{_fmt(float(raw_label_center[1]) * h)}" fill="{text_fill}" '
+                    f'font-family="Arial, Helvetica, sans-serif" font-size="{_fmt(font_size)}" font-weight="{font_weight}" '
+                    f'text-anchor="middle" dominant-baseline="middle">{label}</text>'
+                )
+        elif kind == "CircleBackground":
             x, y, bw, bh = _scaled_bbox(element, w, h)
             fill = html.escape(str(element.get("fill", "#45aa5e")))
             stroke = html.escape(str(element.get("stroke", "#8d8d8d")))
