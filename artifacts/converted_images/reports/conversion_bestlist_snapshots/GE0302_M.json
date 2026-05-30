@@ -1,12 +1,12 @@
 {
   "base": "GE0302",
-  "best_error": 66.3275,
+  "best_error": 51.14861111111111,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.018424305555555555,
+  "error_per_pixel": 0.014207947530864197,
   "filename": "GE0302_M.jpg",
   "h": 60,
-  "mean_delta2": 26169.033203125,
+  "mean_delta2": 15242.0166015625,
   "params": {
     "bottom_shape": null,
     "contract_status": "insufficient_description",
@@ -43,7 +43,7 @@
     "top_source_ref": null,
     "variant_name": "GE0302_M"
   },
-  "std_delta2": 43133.4765625,
+  "std_delta2": 20351.689453125,
   "variant": "GE0302_M",
   "w": 60
 }

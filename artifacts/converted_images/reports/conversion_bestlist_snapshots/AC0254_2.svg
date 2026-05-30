@@ -1,0 +1,37 @@
+<svg width="31" height="31" viewBox="0 0 31 31" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+  <g transform="translate(15.500 15.500) rotate(90) scale(1.0000) translate(-15.500 -15.500)">
+<g transform="translate(20.000 20.000) rotate(90) scale(1.5500) translate(-20.000 -20.000)">
+<defs id="defs1">
+    <clipPath id="circleClip">
+      <circle cx="20" cy="20" r="19" id="circle1" />
+    </clipPath>
+  </defs>
+
+  <!-- Hintergrundkreis -->
+  <ellipse
+     cx="20"
+     cy="20"
+     fill="#e6e6e6"
+     id="circle2"
+     rx="19"
+     ry="18.58252" />
+
+  <!-- Gleichseitiges Dreieck, Spitzen auf dem Innenkreis -->
+  <path
+     d="M 39,20 10.5,3.545 10.5,36.455 Z"
+     clip-path="url(#circleClip)"
+     id="path2"
+     style="fill:none;stroke:#808080;stroke-width:1.4;stroke-linecap:butt;stroke-dasharray:none;stroke-opacity:1" />
+
+  <!-- Kreisumrandung -->
+  <circle
+     cx="20"
+     cy="20"
+     r="19"
+     fill="none"
+     stroke="#808080"
+     stroke-width="1.4"
+     id="circle3" />
+  </g>
+  </g>
+</svg>

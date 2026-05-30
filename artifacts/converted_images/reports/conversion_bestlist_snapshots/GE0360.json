@@ -1,14 +1,22 @@
 {
   "base": "GE0360",
-  "best_error": 44.35468345057386,
+  "best_error": 40.70825620140689,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.008210789235574575,
+  "error_per_pixel": 0.0075357749354696205,
   "filename": "GE0360.jpg",
   "h": 74,
-  "mean_delta2": 12378.0634765625,
+  "mean_delta2": 9915.9091796875,
   "params": {
     "bottom_shape": null,
+    "contract_status": "ok",
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": true,
+      "has_reference": false,
+      "status": "ok"
+    },
     "description_fragments": [
       {
         "key": "GE0360",
@@ -18,6 +26,7 @@
     ],
     "documented_alias_refs": [],
     "elements": [],
+    "geometry_ir": [],
     "label": "M",
     "mode": "auto",
     "semantic_conflicts": [],
@@ -30,7 +39,7 @@
     "top_source_ref": null,
     "variant_name": "GE0360"
   },
-  "std_delta2": 18237.0859375,
+  "std_delta2": 15478.9462890625,
   "variant": "GE0360",
   "w": 73
 }

@@ -1,0 +1,47 @@
+{
+  "base": "GE0203",
+  "best_error": 40.70074074074074,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.011305761316872429,
+  "filename": "GE0203_M.jpg",
+  "h": 60,
+  "mean_delta2": 11661.7314453125,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "GE0203",
+        "source": "base_name",
+        "text": "Wie GE0201: Hintergrund: GE0999. 3 Wellensymbole übereinander. Unten mit einer art Sinuswelle, oben eine Art weißes Band. Farbverlauf des weißen Bndes von hell rechts nach dunkel links. Versinnbildlicht Luftströmung. Geometrische Variante: identisch zur Referenz."
+      }
+    ],
+    "documented_alias_refs": [
+      "GE0201"
+    ],
+    "elements": [],
+    "geometry_ir": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "GE0203_M"
+  },
+  "std_delta2": 14539.912109375,
+  "variant": "GE0203_M",
+  "w": 60
+}

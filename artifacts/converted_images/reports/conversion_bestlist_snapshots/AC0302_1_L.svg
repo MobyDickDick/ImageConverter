@@ -1,20 +1,7 @@
 <svg width="80" height="80" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-  <g transform="translate(40.000 40.000) rotate(0) scale(1.5336) translate(-40.000 -40.000)">
-<g transform="translate(22.500 12.500) rotate(90) scale(1.4632) translate(-22.500 -12.500)">
-<g transform="translate(30.000 15.000) rotate(90) scale(0.9830) translate(-30.000 -15.000)">
-<g transform="translate(15.000 30.000) rotate(180) scale(1.0465) translate(-15.000 -30.000)">
-<g transform="translate(20.000 40.000) rotate(0) scale(1.9000) translate(-20.000 -40.000)">
-<g transform="translate(20.000 40.000) rotate(270) scale(1.9000) translate(-20.000 -40.000)">
-<g transform="translate(30.000 30.000) rotate(90) scale(1.9000) translate(-30.000 -30.000)">
-<line x1="5.5000" y1="0.0000" x2="5.5000" y2="128.0000" stroke="#2f6bff" stroke-width="2.0000" stroke-linecap="butt"/>
-  <polygon points="5.5000,129.0000 0.5000,137.0000 10.5000,137.0000" fill="#2f6bff"/>
-  <line x1="33.5000" y1="0.0000" x2="33.5000" y2="128.0000" stroke="#e53935" stroke-width="2.0000" stroke-linecap="butt"/>
-  <polygon points="33.5000,137.0000 28.5000,129.0000 38.5000,129.0000" fill="#e53935"/>
-  </g>
-  </g>
-  </g>
-  </g>
-  </g>
-  </g>
+  <g transform="translate(40.000 40.000) rotate(90) scale(1.0000) translate(-40.000 -40.000)">
+<ellipse id="compressor_circle" cx="30" cy="30" rx="26.4" ry="26.4" fill="#45aa5e" stroke="#8d8d8d" stroke-width="1.2"/>
+  <path id="upward_compressor_left_line" d="M 18.384 44.784 L 25.776 12.048" stroke="#d7d7d7" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+  <path id="upward_compressor_right_line" d="M 41.616 44.784 L 34.224 12.048" stroke="#d7d7d7" stroke-width="2.4" fill="none" stroke-linecap="round"/>
   </g>
 </svg>

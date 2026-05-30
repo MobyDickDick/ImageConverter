@@ -1,21 +1,17 @@
 <svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-  <g transform="translate(30.000 30.000) rotate(180) scale(1.9000) translate(-30.000 -30.000)">
-<g transform="translate(27.000 18.000) rotate(90) scale(0.9000) translate(-27.000 -18.000)">
-<g transform="translate(16.000 16.000) rotate(90) scale(0.7165) translate(-16.000 -16.000)">
+  <g transform="translate(30.000 30.000) rotate(0) scale(1.9000) translate(-30.000 -30.000)">
+<g transform="translate(75.000 17.500) rotate(0) scale(1.5960) translate(-75.000 -17.500)">
+<g transform="translate(10.000 15.000) rotate(90) scale(1.4060) translate(-10.000 -15.000)">
 <defs>
-    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#757575"/>
-      <stop offset="40.0%" stop-color="#eeeeee"/>
-      <stop offset="100%" stop-color="#757575"/>
+    <linearGradient id="detectedStripeGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0.000%" stop-color="#8ab8d9"/>
+      <stop offset="20.000%" stop-color="#7292c5"/>
+      <stop offset="40.000%" stop-color="#bdc8da"/>
+      <stop offset="80.000%" stop-color="#7193c1"/>
+      <stop offset="100.000%" stop-color="#8bb9db"/>
     </linearGradient>
-    <clipPath id="innerRect"><rect x="0.5" y="0.5" width="59" height="59"/></clipPath>
   </defs>
-  <rect x="0.5" y="0.5" width="59" height="59" fill="url(#bg)" stroke="#9a9a9a" stroke-width="1.80"/>
-  <line x1="59" y1="0.5" x2="0.5" y2="59" stroke="#8f8f8f" stroke-width="2.80" clip-path="url(#innerRect)"/>
-  <line x1="0.5" y1="0.5" x2="59" y2="59" stroke="#8f8f8f" stroke-width="2.80" clip-path="url(#innerRect)"/>
-  <line x1="25.20" y1="21.60" x2="34.80" y2="21.60" stroke="#f1f1f1" stroke-width="2.20" stroke-linecap="round"/>
-  <line x1="30.00" y1="16.80" x2="30.00" y2="26.40" stroke="#f1f1f1" stroke-width="2.20" stroke-linecap="round"/>
-  <line x1="38.64" y1="21.60" x2="46.20" y2="21.60" stroke="#f1f1f1" stroke-width="2.20" stroke-linecap="round"/>
+  <rect x="0.0000" y="2.0000" width="60.0000" height="6.0000" fill="url(#detectedStripeGradient)"/>
   </g>
   </g>
   </g>

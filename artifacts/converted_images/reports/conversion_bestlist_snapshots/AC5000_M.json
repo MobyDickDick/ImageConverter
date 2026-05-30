@@ -1,14 +1,22 @@
 {
   "base": "AC5000",
-  "best_error": 36.6675,
+  "best_error": 28.00522727272727,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.008333522727272726,
+  "error_per_pixel": 0.006364824380165289,
   "filename": "AC5000_M.jpg",
   "h": 55,
-  "mean_delta2": 8640.4892578125,
+  "mean_delta2": 6398.5380859375,
   "params": {
     "bottom_shape": null,
+    "contract_status": "ok",
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": true,
+      "has_reference": false,
+      "status": "ok"
+    },
     "description_fragments": [
       {
         "key": "AC5000",
@@ -18,6 +26,21 @@
     ],
     "documented_alias_refs": [],
     "elements": [],
+    "geometry_ir": [
+      {
+        "bbox": [
+          0.18,
+          0.24,
+          0.64,
+          0.56
+        ],
+        "fill": "#d8d8d8",
+        "id": "main_rect",
+        "kind": "RectBorder",
+        "stroke": "#666666",
+        "stroke_width": 0.035
+      }
+    ],
     "label": "M",
     "mode": "auto",
     "semantic_conflicts": [],
@@ -30,7 +53,7 @@
     "top_source_ref": null,
     "variant_name": "AC5000_M"
   },
-  "std_delta2": 14049.4853515625,
+  "std_delta2": 11189.0087890625,
   "variant": "AC5000_M",
   "w": 80
 }

@@ -1,0 +1,48 @@
+{
+  "base": "BG_DECO_NORM",
+  "best_error": 47.40890264877881,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.00012231399032192676,
+  "filename": "bg_deco_norm.jpg",
+  "h": 1200,
+  "mean_delta2": 9591.2783203125,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "bg_deco_norm",
+        "source": "base_name",
+        "text": "Wie AC0551: Wie AC0150. Geometrische Variante: identisch zur Referenz. Auf der rechten Seite jedoch durch ein vertikale Gerade statt durch eine geschwungene Linie begrenzt."
+      }
+    ],
+    "documented_alias_refs": [
+      "AC0150",
+      "AC0551"
+    ],
+    "elements": [],
+    "geometry_ir": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "BG_DECO_NORM"
+  },
+  "std_delta2": 3454.535888671875,
+  "variant": "BG_DECO_NORM",
+  "w": 323
+}

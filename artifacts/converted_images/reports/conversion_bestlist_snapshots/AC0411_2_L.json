@@ -1,0 +1,53 @@
+{
+  "base": "AC0411",
+  "best_error": 40.556041666666665,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.025347526041666665,
+  "filename": "AC0411_2_L.jpg",
+  "h": 40,
+  "mean_delta2": 13599.16796875,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": false,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "AC0411",
+        "source": "base_name",
+        "text": "Unzugeordnete Wurzelform aus der Serie AC0411. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen."
+      },
+      {
+        "key": "AC0411_2_L",
+        "source": "variant_name",
+        "text": "Unzugeordnete Wurzelform aus der Serie AC0411_2. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die große Variante (L). Bitte einer finalen Wurzelform-Kategorie zuordnen."
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [
+      "MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie."
+    ],
+    "geometry_ir": [],
+    "label": "",
+    "mode": "manual_review",
+    "review_reason": "Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "AC0411_2_L"
+  },
+  "std_delta2": 23375.275390625,
+  "variant": "AC0411_2_L",
+  "w": 40
+}

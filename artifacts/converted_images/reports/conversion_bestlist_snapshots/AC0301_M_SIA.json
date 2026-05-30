@@ -1,14 +1,24 @@
 {
   "base": "AC0301",
-  "best_error": 32.31722222222222,
+  "best_error": 26.03611111111111,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.008977006172839506,
+  "error_per_pixel": 0.007232253086419753,
   "filename": "AC0301_M_sia.jpg",
   "h": 60,
-  "mean_delta2": 7258.73681640625,
+  "mean_delta2": 5742.2568359375,
   "params": {
     "bottom_shape": null,
+    "contract_status": "insufficient_description",
+    "description_contract": {
+      "deficits": [
+        "missing_geometry_terms"
+      ],
+      "has_conditions": false,
+      "has_geometry_terms": false,
+      "has_reference": false,
+      "status": "insufficient_description"
+    },
     "description_fragments": [
       {
         "key": "AC0301",
@@ -17,9 +27,12 @@
       }
     ],
     "documented_alias_refs": [],
-    "elements": [],
-    "label": "M",
-    "mode": "auto",
+    "elements": [
+      "MANUELL: Beschreibung unzureichend (fehlende Geometriehinweise oder leerer Beschreibungstext)."
+    ],
+    "geometry_ir": [],
+    "label": "",
+    "mode": "insufficient_description",
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
@@ -30,7 +43,7 @@
     "top_source_ref": null,
     "variant_name": "AC0301_M_SIA"
   },
-  "std_delta2": 13421.6376953125,
+  "std_delta2": 10626.775390625,
   "variant": "AC0301_M_SIA",
   "w": 60
 }

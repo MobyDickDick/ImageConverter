@@ -1,14 +1,22 @@
 {
   "base": "GE0014",
-  "best_error": 45.28775510204082,
+  "best_error": 53.59530612244898,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.009242399000416493,
+  "error_per_pixel": 0.010937817576009996,
   "filename": "GE0014_L.jpg",
   "h": 70,
-  "mean_delta2": 12201.78125,
+  "mean_delta2": 16600.8359375,
   "params": {
     "bottom_shape": null,
+    "contract_status": "ok",
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": false,
+      "has_reference": true,
+      "status": "ok"
+    },
     "description_fragments": [
       {
         "key": "GE0014",
@@ -20,6 +28,15 @@
       "GE0999"
     ],
     "elements": [],
+    "geometry_ir": [
+      {
+        "id": "plus_glyph",
+        "kind": "PlusGlyph",
+        "position": "top_center",
+        "stroke": "#4f4f4f",
+        "stroke_width": 0.025
+      }
+    ],
     "label": "M",
     "mode": "auto",
     "semantic_conflicts": [],
@@ -32,7 +49,7 @@
     "top_source_ref": null,
     "variant_name": "GE0014_L"
   },
-  "std_delta2": 17722.796875,
+  "std_delta2": 23431.716796875,
   "variant": "GE0014_L",
   "w": 70
 }

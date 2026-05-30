@@ -1,20 +1,16 @@
-<svg width="20" height="40" viewBox="0 0 20 40" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-  <g transform="translate(10.000 20.000) rotate(0) scale(1.4643) translate(-10.000 -20.000)">
-<g transform="translate(20.000 20.000) rotate(0) scale(1.0000) translate(-20.000 -20.000)">
-<g transform="translate(17.500 10.000) rotate(180) scale(1.1525) translate(-17.500 -10.000)">
-<g transform="translate(15.000 30.000) rotate(180) scale(1.0465) translate(-15.000 -30.000)">
-<g transform="translate(20.000 40.000) rotate(0) scale(1.9000) translate(-20.000 -40.000)">
-<g transform="translate(20.000 40.000) rotate(270) scale(1.9000) translate(-20.000 -40.000)">
-<g transform="translate(30.000 30.000) rotate(90) scale(1.9000) translate(-30.000 -30.000)">
-<line x1="5.5000" y1="0.0000" x2="5.5000" y2="128.0000" stroke="#2f6bff" stroke-width="2.0000" stroke-linecap="butt"/>
-  <polygon points="5.5000,129.0000 0.5000,137.0000 10.5000,137.0000" fill="#2f6bff"/>
-  <line x1="33.5000" y1="0.0000" x2="33.5000" y2="128.0000" stroke="#e53935" stroke-width="2.0000" stroke-linecap="butt"/>
-  <polygon points="33.5000,137.0000 28.5000,129.0000 38.5000,129.0000" fill="#e53935"/>
-  </g>
-  </g>
-  </g>
-  </g>
-  </g>
-  </g>
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="40" viewBox="0 0 20 40">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#7e7e7e"/>
+      <stop offset="40.0%" stop-color="#e8e8e8"/>
+      <stop offset="100%" stop-color="#7e7e7e"/>
+    </linearGradient>
+    <clipPath id="innerRect"><rect x="0.5" y="0.5" width="19" height="39"/></clipPath>
+  </defs>
+  <rect x="0.5" y="0.5" width="19" height="39" fill="url(#bg)" stroke="#9a9a9a" stroke-width="1.80"/>
+  <line x1="19" y1="0.5" x2="0.5" y2="39" stroke="#8f8f8f" stroke-width="2.80" clip-path="url(#innerRect)"/>
+  <line x1="0.5" y1="0.5" x2="19" y2="39" stroke="#8f8f8f" stroke-width="2.80" clip-path="url(#innerRect)"/>
+  <line x1="8.00" y1="14.40" x2="12.00" y2="14.40" stroke="#f1f1f1" stroke-width="0.80" stroke-linecap="round"/>
+  <line x1="10.00" y1="12.40" x2="10.00" y2="16.40" stroke="#f1f1f1" stroke-width="0.80" stroke-linecap="round"/>
+  <line x1="13.60" y1="14.40" x2="17.20" y2="14.40" stroke="#f1f1f1" stroke-width="1.60" stroke-linecap="round"/>
 </svg>

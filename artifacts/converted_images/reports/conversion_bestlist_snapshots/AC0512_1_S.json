@@ -1,14 +1,22 @@
 {
   "base": "AC0512",
-  "best_error": 98.8,
+  "best_error": 39.48583333333333,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.1235,
+  "error_per_pixel": 0.049357291666666664,
   "filename": "AC0512_1_S.jpg",
   "h": 20,
-  "mean_delta2": 43027.7734375,
+  "mean_delta2": 12928.517578125,
   "params": {
     "bottom_shape": null,
+    "contract_status": "ok",
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
     "description_fragments": [
       {
         "key": "AC0512",
@@ -20,6 +28,50 @@
       "AC0511"
     ],
     "elements": [],
+    "geometry_ir": [
+      {
+        "bbox": [
+          0.32,
+          0.12,
+          0.36,
+          0.76
+        ],
+        "constraint": "inside_rect_border",
+        "id": "background_gradient",
+        "kind": "HorizontalGradient",
+        "stops": [
+          "#8f8f8f",
+          "#dedede",
+          "#8f8f8f"
+        ]
+      },
+      {
+        "bbox": [
+          0.32,
+          0.12,
+          0.36,
+          0.76
+        ],
+        "fill": "none",
+        "id": "main_rect",
+        "kind": "RectBorder",
+        "stroke": "#666666",
+        "stroke_width": 0.035
+      },
+      {
+        "id": "horizontal_rule_set",
+        "kind": "HorizontalRuleSet",
+        "positions": [
+          0.3,
+          0.5,
+          0.7
+        ],
+        "rect_ref": "main_rect",
+        "stroke": "#707070",
+        "stroke_width": 0.026,
+        "x_inset": 0.1
+      }
+    ],
     "label": "M",
     "mode": "auto",
     "semantic_conflicts": [],
@@ -32,7 +84,7 @@
     "top_source_ref": null,
     "variant_name": "AC0512_1_S"
   },
-  "std_delta2": 25799.435546875,
+  "std_delta2": 21978.5078125,
   "variant": "AC0512_1_S",
   "w": 40
 }

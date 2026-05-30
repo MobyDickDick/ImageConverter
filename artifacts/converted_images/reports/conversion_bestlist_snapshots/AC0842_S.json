@@ -9,6 +9,14 @@
   "mean_delta2": 6341.744140625,
   "params": {
     "bottom_shape": null,
+    "contract_status": "ok",
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": false,
+      "status": "ok"
+    },
     "description_fragments": [
       {
         "key": "AC0842",
@@ -21,6 +29,7 @@
       "SEMANTIC: waagrechter Strich links vom Kreis",
       "SEMANTIC: Kreis + Buchstabe rF"
     ],
+    "geometry_ir": [],
     "label": "rF",
     "mode": "semantic_badge",
     "semantic_conflicts": [],

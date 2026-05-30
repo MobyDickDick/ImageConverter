@@ -1,0 +1,62 @@
+{
+  "base": "Z_202",
+  "best_error": 53.54983660130719,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.13124959951300783,
+  "filename": "z_202.jpg",
+  "h": 6,
+  "mean_delta2": 13946.212890625,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": false,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "z_202",
+        "source": "base_name",
+        "text": "z_-Dateien sind Rohr-Symbole mit Verzierungen; enthalten sind gerade Rohre, gebogene Rohre und T-Stücke. Geometrie: liegendes, stark langgezogenes Rechteck (Rohr). Farbverlauf vertikal von oben nach unten: dunkel → hell → dunkel → sehr dunkel, mit zusätzlicher heller Linie ganz unten. Konverter-Hinweis: Grundform Rechteck ist nachzeichnbar; komplexer Mehrzonen-Verlauf und schmale Abschlusslinie sind nur eingeschränkt bzw. derzeit nicht exakt mit Standard-Primitive des image_composite_converter reproduzierbar."
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [
+      "MANUELL: Beschreibung markiert Symbol als nur eingeschränkt reproduzierbar."
+    ],
+    "geometry_ir": [
+      {
+        "bbox": [
+          0.18,
+          0.24,
+          0.64,
+          0.56
+        ],
+        "fill": "#d8d8d8",
+        "id": "main_rect",
+        "kind": "RectBorder",
+        "stroke": "#666666",
+        "stroke_width": 0.035
+      }
+    ],
+    "label": "",
+    "mode": "manual_review",
+    "review_reason": "Beschreibung markiert Symbol als nur eingeschränkt reproduzierbar.",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "Z_202"
+  },
+  "std_delta2": 19966.853515625,
+  "variant": "Z_202",
+  "w": 68
+}

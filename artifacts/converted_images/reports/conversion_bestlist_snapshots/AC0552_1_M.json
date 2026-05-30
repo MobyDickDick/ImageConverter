@@ -1,0 +1,48 @@
+{
+  "base": "AC0552",
+  "best_error": 30.522777777777776,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.016957098765432096,
+  "filename": "AC0552_1_M.jpg",
+  "h": 30,
+  "mean_delta2": 8567.8232421875,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": false,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "AC0552",
+        "source": "base_name",
+        "text": "Wie AC0551: Wie AC0150. Geometrische Variante: 90° nach rechts gedreht."
+      }
+    ],
+    "documented_alias_refs": [
+      "AC0150",
+      "AC0551"
+    ],
+    "elements": [],
+    "geometry_ir": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "AC0552_1_M"
+  },
+  "std_delta2": 17378.64453125,
+  "variant": "AC0552_1_M",
+  "w": 60
+}

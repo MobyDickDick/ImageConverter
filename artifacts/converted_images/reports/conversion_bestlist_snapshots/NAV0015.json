@@ -1,12 +1,12 @@
 {
   "base": "NAV0015",
-  "best_error": 71.01308641975308,
+  "best_error": 36.59185185185185,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.05260228623685413,
+  "error_per_pixel": 0.027105075445816185,
   "filename": "NAV0015.JPG",
   "h": 30,
-  "mean_delta2": 30310.703125,
+  "mean_delta2": 9634.0234375,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -26,6 +26,7 @@
     ],
     "documented_alias_refs": [],
     "elements": [],
+    "geometry_ir": [],
     "label": "M",
     "mode": "auto",
     "semantic_conflicts": [],
@@ -38,7 +39,7 @@
     "top_source_ref": null,
     "variant_name": "NAV0015"
   },
-  "std_delta2": 44321.1015625,
+  "std_delta2": 16421.6875,
   "variant": "NAV0015",
   "w": 45
 }

@@ -1,11 +1,12 @@
 <svg width="15" height="25" viewBox="0 0 15 25" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-  <g transform="translate(7.500 12.500) rotate(180) scale(0.8000) translate(-7.500 -12.500)">
-<g transform="translate(12.500 22.500) rotate(180) scale(1.9000) translate(-12.500 -22.500)">
-<g transform="translate(40.000 40.000) rotate(90) scale(1.9000) translate(-40.000 -40.000)">
-<line x1="5.5000" y1="0.0000" x2="5.5000" y2="128.0000" stroke="#2f6bff" stroke-width="2.0000" stroke-linecap="butt"/>
-  <polygon points="5.5000,129.0000 0.5000,137.0000 10.5000,137.0000" fill="#2f6bff"/>
-  <line x1="33.5000" y1="0.0000" x2="33.5000" y2="128.0000" stroke="#e53935" stroke-width="2.0000" stroke-linecap="butt"/>
-  <polygon points="33.5000,137.0000 28.5000,129.0000 38.5000,129.0000" fill="#e53935"/>
+  <g transform="translate(7.500 12.500) rotate(270) scale(0.9635) translate(-7.500 -12.500)">
+<g transform="translate(22.500 12.500) rotate(0) scale(0.8510) translate(-22.500 -12.500)">
+<g transform="translate(15.000 15.000) rotate(0) scale(0.8000) translate(-15.000 -15.000)">
+<g transform="translate(12.500 22.500) rotate(270) scale(0.8000) translate(-12.500 -22.500)">
+<ellipse id="compressor_circle" cx="25" cy="25" rx="22" ry="22" fill="#df2249" stroke="#8d8d8d" stroke-width="1"/>
+  <path id="mirrored_compressor_left_line" d="M 6.96 12.68 L 20.16 47.44" stroke="#f4f4f4" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+  <path id="mirrored_compressor_right_line" d="M 43.04 12.68 L 29.84 47.44" stroke="#f4f4f4" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+  </g>
   </g>
   </g>
   </g>

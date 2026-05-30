@@ -1,14 +1,22 @@
 {
   "base": "AC0870",
-  "best_error": 32.85777777777778,
+  "best_error": 32.08888888888889,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.14603456790123456,
+  "error_per_pixel": 0.1426172839506173,
   "filename": "AC0870_S.jpg",
   "h": 15,
-  "mean_delta2": 6242.06689453125,
+  "mean_delta2": 6247.43994140625,
   "params": {
     "bottom_shape": null,
+    "contract_status": "ok",
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": false,
+      "status": "ok"
+    },
     "description_fragments": [
       {
         "key": "AC0870",
@@ -20,6 +28,7 @@
     "elements": [
       "SEMANTIC: Kreis + Buchstabe"
     ],
+    "geometry_ir": [],
     "label": "T",
     "mode": "semantic_badge",
     "semantic_conflicts": [],
@@ -37,7 +46,7 @@
     "top_source_ref": null,
     "variant_name": "AC0870_S"
   },
-  "std_delta2": 8996.4228515625,
+  "std_delta2": 8724.423828125,
   "variant": "AC0870_S",
   "w": 15
 }

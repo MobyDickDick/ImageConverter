@@ -1,0 +1,75 @@
+{
+  "base": "DLG0017",
+  "best_error": 17.84311111111111,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.00793027160493827,
+  "filename": "DLG0017.JPG",
+  "h": 25,
+  "mean_delta2": 1038.333740234375,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "DLG0017",
+        "source": "base_name",
+        "text": "leicht abgerundetes Rechteck mit horizontalem Farbverlauf zwischen wie grauen Farbtönen (hell oben links, dunkel unten rechts)"
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "geometry_ir": [
+      {
+        "bbox": [
+          0.18,
+          0.24,
+          0.64,
+          0.56
+        ],
+        "constraint": "inside_rect_border",
+        "id": "background_gradient",
+        "kind": "HorizontalGradient",
+        "stops": [
+          "#8f8f8f",
+          "#dedede",
+          "#8f8f8f"
+        ]
+      },
+      {
+        "bbox": [
+          0.18,
+          0.24,
+          0.64,
+          0.56
+        ],
+        "fill": "none",
+        "id": "main_rect",
+        "kind": "RectBorder",
+        "stroke": "#666666",
+        "stroke_width": 0.035
+      }
+    ],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "DLG0017"
+  },
+  "std_delta2": 531.2051391601562,
+  "variant": "DLG0017",
+  "w": 90
+}

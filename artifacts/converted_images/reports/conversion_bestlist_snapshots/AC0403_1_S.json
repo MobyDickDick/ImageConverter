@@ -1,0 +1,48 @@
+{
+  "base": "AC0403",
+  "best_error": 59.365833333333335,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.14841458333333335,
+  "filename": "AC0403_1_S.jpg",
+  "h": 20,
+  "mean_delta2": 21299.0625,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "AC0403",
+        "source": "base_name",
+        "text": "Wie AC0401: Wie AC0251, jedoch Hintergrund Kreis ein wenig dunkler. . Geometrische Variante: 180° gedreht."
+      }
+    ],
+    "documented_alias_refs": [
+      "AC0251",
+      "AC0401"
+    ],
+    "elements": [],
+    "geometry_ir": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "AC0403_1_S"
+  },
+  "std_delta2": 23842.634765625,
+  "variant": "AC0403_1_S",
+  "w": 20
+}

@@ -9,6 +9,14 @@
   "mean_delta2": 4562.490234375,
   "params": {
     "bottom_shape": null,
+    "contract_status": "ok",
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
     "description_fragments": [
       {
         "key": "AC0834",
@@ -23,6 +31,7 @@
       "SEMANTIC: waagrechter Strich rechts vom Kreis",
       "SEMANTIC: Kreis + Buchstabe"
     ],
+    "geometry_ir": [],
     "label": "T",
     "mode": "semantic_badge",
     "semantic_conflicts": [],

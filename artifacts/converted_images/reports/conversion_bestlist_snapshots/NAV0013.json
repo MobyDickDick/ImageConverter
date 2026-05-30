@@ -1,0 +1,59 @@
+{
+  "base": "NAV0013",
+  "best_error": 24.67827160493827,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.018280201188843163,
+  "filename": "NAV0013.JPG",
+  "h": 30,
+  "mean_delta2": 5841.59765625,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "NAV0013",
+        "source": "base_name",
+        "text": "Wie NAV0010: Rechteck mit vertikalem Farbverlauf weiss nach grau. Geometrische Variante: identisch zur Referenz."
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "geometry_ir": [
+      {
+        "bbox": [
+          0.18,
+          0.24,
+          0.64,
+          0.56
+        ],
+        "fill": "#d8d8d8",
+        "id": "main_rect",
+        "kind": "RectBorder",
+        "stroke": "#666666",
+        "stroke_width": 0.035
+      }
+    ],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "NAV0013"
+  },
+  "std_delta2": 12213.1328125,
+  "variant": "NAV0013",
+  "w": 45
+}

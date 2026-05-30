@@ -1,0 +1,47 @@
+{
+  "base": "B_TREND_ONLINE",
+  "best_error": 39.2560553633218,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.015092677955909958,
+  "filename": "b_trend_online.jpg",
+  "h": 51,
+  "mean_delta2": 10321.7841796875,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "b_trend_online",
+        "source": "base_name",
+        "text": "Hintergrund: GE0999, oben rechts ein Play-Symbol (Dreieck nach rechts) wie in GE0034."
+      }
+    ],
+    "documented_alias_refs": [
+      "GE0034"
+    ],
+    "elements": [],
+    "geometry_ir": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "B_TREND_ONLINE"
+  },
+  "std_delta2": 16396.642578125,
+  "variant": "B_TREND_ONLINE",
+  "w": 51
+}

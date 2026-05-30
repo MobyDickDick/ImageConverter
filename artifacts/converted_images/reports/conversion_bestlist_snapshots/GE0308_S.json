@@ -1,14 +1,22 @@
 {
   "base": "GE0308",
-  "best_error": 48.2352,
+  "best_error": 62.8008,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.019294079999999998,
+  "error_per_pixel": 0.02512032,
   "filename": "GE0308_S.jpg",
   "h": 50,
-  "mean_delta2": 13422.7646484375,
+  "mean_delta2": 25014.013671875,
   "params": {
     "bottom_shape": null,
+    "contract_status": "ok",
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": false,
+      "has_reference": true,
+      "status": "ok"
+    },
     "description_fragments": [
       {
         "key": "GE0308",
@@ -20,6 +28,7 @@
       "GE0301"
     ],
     "elements": [],
+    "geometry_ir": [],
     "label": "M",
     "mode": "auto",
     "semantic_conflicts": [],
@@ -32,7 +41,7 @@
     "top_source_ref": null,
     "variant_name": "GE0308_S"
   },
-  "std_delta2": 16997.884765625,
+  "std_delta2": 36197.37109375,
   "variant": "GE0308_S",
   "w": 50
 }

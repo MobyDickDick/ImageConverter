@@ -1,0 +1,45 @@
+{
+  "base": "GE9042_4M",
+  "best_error": 9.68875,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.00605546875,
+  "filename": "GE9042_4M.jpg",
+  "h": 40,
+  "mean_delta2": 1314.5274658203125,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": false,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "GE9042_4M",
+        "source": "base_name",
+        "text": "Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz."
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "geometry_ir": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "GE9042_4M"
+  },
+  "std_delta2": 3717.971923828125,
+  "variant": "GE9042_4M",
+  "w": 40
+}

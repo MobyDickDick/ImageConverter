@@ -1,0 +1,57 @@
+{
+  "base": "AC0839",
+  "best_error": 19.575714285714287,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.02796530612244898,
+  "filename": "AC0839_M.jpg",
+  "h": 20,
+  "mean_delta2": 5129.7900390625,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "AC0839",
+        "source": "base_name",
+        "text": "Wie AC0836, jedoch 90° nach rechts gedreht. Der Griff verläuft waagrecht nach rechts, der Text \"VOC\" bleibt horizontal lesbar. Der Griff liegt auf einer Symmetrieachse des Kreises."
+      }
+    ],
+    "documented_alias_refs": [
+      "AC0836"
+    ],
+    "elements": [
+      "SEMANTIC: waagrechter Strich rechts vom Kreis",
+      "SEMANTIC: Kreis + Buchstabe VOC"
+    ],
+    "geometry_ir": [],
+    "label": "VOC",
+    "mode": "semantic_badge",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {
+      "description_heuristic": [
+        "SEMANTIC: Kreis + Buchstabe VOC"
+      ],
+      "family_rule": [
+        "SEMANTIC: waagrechter Strich rechts vom Kreis"
+      ]
+    },
+    "top_source_ref": null,
+    "variant_name": "AC0839_M"
+  },
+  "std_delta2": 12930.7783203125,
+  "variant": "AC0839_M",
+  "w": 35
+}

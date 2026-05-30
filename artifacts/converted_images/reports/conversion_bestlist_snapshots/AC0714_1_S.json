@@ -1,14 +1,22 @@
 {
   "base": "AC0714",
-  "best_error": 30.851555555555557,
+  "best_error": 36.288,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.08227081481481481,
+  "error_per_pixel": 0.09676799999999999,
   "filename": "AC0714_1_S.jpg",
   "h": 15,
-  "mean_delta2": 8693.7177734375,
+  "mean_delta2": 12918.1494140625,
   "params": {
     "bottom_shape": null,
+    "contract_status": "ok",
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
     "description_fragments": [
       {
         "key": "AC0714",
@@ -20,6 +28,7 @@
       "AC0701"
     ],
     "elements": [],
+    "geometry_ir": [],
     "label": "M",
     "mode": "auto",
     "semantic_conflicts": [],
@@ -32,7 +41,7 @@
     "top_source_ref": null,
     "variant_name": "AC0714_1_S"
   },
-  "std_delta2": 16392.30078125,
+  "std_delta2": 22736.73046875,
   "variant": "AC0714_1_S",
   "w": 25
 }

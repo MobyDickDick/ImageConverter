@@ -1,14 +1,22 @@
 {
   "base": "L60X",
-  "best_error": 25.33053333333333,
+  "best_error": 35.87446666666666,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.002533053333333333,
+  "error_per_pixel": 0.0035874466666666665,
   "filename": "L60x_TS.jpg",
   "h": 100,
-  "mean_delta2": 4386.07177734375,
+  "mean_delta2": 6073.8427734375,
   "params": {
     "bottom_shape": null,
+    "contract_status": "ok",
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": false,
+      "status": "ok"
+    },
     "description_fragments": [
       {
         "key": "L60x",
@@ -23,6 +31,7 @@
     ],
     "documented_alias_refs": [],
     "elements": [],
+    "geometry_ir": [],
     "label": "M",
     "mode": "auto",
     "semantic_conflicts": [],
@@ -35,7 +44,7 @@
     "top_source_ref": null,
     "variant_name": "L60X_TS"
   },
-  "std_delta2": 16625.033203125,
+  "std_delta2": 16106.4462890625,
   "variant": "L60X_TS",
   "w": 100
 }

@@ -1,14 +1,22 @@
 {
   "base": "AC0882",
-  "best_error": 23.10857142857143,
+  "best_error": 23.33,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.03301224489795919,
+  "error_per_pixel": 0.03332857142857142,
   "filename": "AC0882_M.jpg",
   "h": 20,
-  "mean_delta2": 6749.9140625,
+  "mean_delta2": 6822.88720703125,
   "params": {
     "bottom_shape": null,
+    "contract_status": "ok",
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": false,
+      "status": "ok"
+    },
     "description_fragments": [
       {
         "key": "AC0882",
@@ -21,6 +29,7 @@
       "SEMANTIC: waagrechter Strich links vom Kreis",
       "SEMANTIC: Kreis + Buchstabe"
     ],
+    "geometry_ir": [],
     "label": "T",
     "mode": "semantic_badge",
     "semantic_conflicts": [],
@@ -40,7 +49,7 @@
     "top_source_ref": null,
     "variant_name": "AC0882_M"
   },
-  "std_delta2": 15363.970703125,
+  "std_delta2": 15440.734375,
   "variant": "AC0882_M",
   "w": 35
 }

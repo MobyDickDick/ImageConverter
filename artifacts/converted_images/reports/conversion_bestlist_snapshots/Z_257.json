@@ -1,0 +1,45 @@
+{
+  "base": "Z_257",
+  "best_error": 34.06516290726817,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.12806452220777506,
+  "filename": "z_257.jpg",
+  "h": 14,
+  "mean_delta2": 7436.38330078125,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": false,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "z_257",
+        "source": "base_name",
+        "text": "z_-Dateien sind Rohr-Symbole mit Verzierungen; enthalten sind gerade Rohre, gebogene Rohre und T-Stücke."
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "geometry_ir": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "Z_257"
+  },
+  "std_delta2": 10319.4443359375,
+  "variant": "Z_257",
+  "w": 19
+}

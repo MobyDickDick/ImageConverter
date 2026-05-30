@@ -1,14 +1,22 @@
 {
   "base": "AC0203",
-  "best_error": 29.28,
+  "best_error": 28.616,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.05856,
+  "error_per_pixel": 0.057232,
   "filename": "AC0203_S.jpg",
   "h": 25,
-  "mean_delta2": 5242.66796875,
+  "mean_delta2": 5521.3681640625,
   "params": {
     "bottom_shape": null,
+    "contract_status": "ok",
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
     "description_fragments": [
       {
         "key": "AC0203",
@@ -20,6 +28,48 @@
       "AC0202"
     ],
     "elements": [],
+    "geometry_ir": [
+      {
+        "bbox": [
+          0.06,
+          0.06,
+          0.88,
+          0.88
+        ],
+        "fill": "#df2249",
+        "id": "compressor_circle",
+        "kind": "CircleBackground",
+        "stroke": "#8d8d8d",
+        "stroke_width": 0.02
+      },
+      {
+        "circle_ref": "compressor_circle",
+        "id": "main_diagonal_mirrored_compressor",
+        "kind": "MainDiagonalMirroredCompressorGlyph",
+        "left_line": [
+          [
+            0.09,
+            0.22
+          ],
+          [
+            0.39,
+            1.01
+          ]
+        ],
+        "right_line": [
+          [
+            0.91,
+            0.22
+          ],
+          [
+            0.61,
+            1.01
+          ]
+        ],
+        "stroke": "#f4f4f4",
+        "stroke_width": 0.032
+      }
+    ],
     "label": "M",
     "mode": "auto",
     "semantic_conflicts": [],
@@ -32,7 +82,7 @@
     "top_source_ref": null,
     "variant_name": "AC0203_S"
   },
-  "std_delta2": 8416.3857421875,
+  "std_delta2": 8772.7578125,
   "variant": "AC0203_S",
   "w": 20
 }

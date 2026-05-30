@@ -1,0 +1,45 @@
+{
+  "base": "GE9034",
+  "best_error": 27.5025,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.06875625,
+  "filename": "GE9034_1S.jpg",
+  "h": 20,
+  "mean_delta2": 7146.45751953125,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": false,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "GE9034",
+        "source": "base_name",
+        "text": "Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz."
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "geometry_ir": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "GE9034_1S"
+  },
+  "std_delta2": 11063.31640625,
+  "variant": "GE9034_1S",
+  "w": 20
+}
