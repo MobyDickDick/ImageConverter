@@ -177,6 +177,27 @@ def test_write_chain_telemetry_batch_report_marks_drift_pass(tmp_path: Path):
     assert "drift_max_non_green=0" in summary
 
 
+def test_write_chain_telemetry_batch_report_accepts_empty_scorecard(tmp_path: Path):
+    _csv_path, txt_path, rows = helpers.writeChainTelemetryBatchReportImpl(
+        str(tmp_path),
+        {},
+        lambda telemetry_rows: {
+            "conversion_count": len(telemetry_rows),
+            "mean_step_success_rate": 0.0,
+            "override_frequency": 0.0,
+            "placeholder_emergency_rate": 0.0,
+        },
+    )
+
+    assert rows == []
+    summary = Path(txt_path).read_text(encoding="utf-8")
+    assert "scorecard_row_count=0" in summary
+    assert "mean_error_per_pixel=" in summary
+    assert "mean_delta2=" in summary
+    assert "drift_status=pass" in summary
+    assert "drift_reasons=" in summary
+
+
 def test_write_chain_telemetry_batch_report_marks_drift_warning(tmp_path: Path, monkeypatch):
     monkeypatch.setenv("ICC_CHAIN_DRIFT_MAX_MEAN_ERROR_PER_PIXEL", "0.02")
     monkeypatch.setenv("ICC_CHAIN_DRIFT_MAX_MEAN_DELTA2", "20.0")
@@ -213,6 +234,27 @@ def test_check_chain_telemetry_drift_summary_accepts_pass_artifact(tmp_path: Pat
         "telemetry_csv=/tmp/chain_phase_telemetry.csv\n"
         "drift_status=pass\n"
         "drift_reasons=\n",
+        encoding="utf-8",
+    )
+
+    result = helpers.checkChainTelemetryDriftSummaryImpl(str(summary_path))
+
+    assert result["accepted"] is True
+    assert result["status"] == "pass"
+    assert result["reasons"] == []
+    assert result["telemetry_csv"] == "/tmp/chain_phase_telemetry.csv"
+
+
+def test_check_chain_telemetry_drift_summary_accepts_legacy_empty_metric_warning(tmp_path: Path):
+    summary_path = tmp_path / "chain_phase_telemetry_summary.txt"
+    summary_path.write_text(
+        "telemetry_csv=/tmp/chain_phase_telemetry.csv\n"
+        "conversion_count=0\n"
+        "scorecard_row_count=0\n"
+        "mean_error_per_pixel=\n"
+        "mean_delta2=\n"
+        "drift_status=warn\n"
+        "drift_reasons=mean_error_per_pixel_missing,mean_delta2_missing\n",
         encoding="utf-8",
     )
 
