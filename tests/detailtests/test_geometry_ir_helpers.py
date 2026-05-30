@@ -126,6 +126,32 @@ def test_render_geometry_ir_to_svg_contains_ac0201_compressor_primitives() -> No
     assert 'id="upward_compressor_right_line"' in svg
     assert "#45aa5e" in svg
 
+
+def test_build_geometry_ir_maps_ac0204_identical_reference_compressor_description() -> None:
+    ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
+        "Wie AC0201: Kompressor grau nach oben. Geometrische Variante: identisch zur Referenz."
+    )
+
+    assert [element["kind"] for element in ir] == ["CircleBackground", "UpwardCompressorGlyph"]
+    assert ir[0]["id"] == "compressor_circle"
+    assert ir[0]["fill"] == "#45aa5e"
+    assert ir[1]["id"] == "upward_compressor"
+    assert ir[1]["circle_ref"] == "compressor_circle"
+
+
+def test_render_geometry_ir_to_svg_contains_ac0204_identical_reference_primitives() -> None:
+    ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
+        "Wie AC0201: Kompressor grau nach oben. Geometrische Variante: identisch zur Referenz."
+    )
+
+    svg = geometry_ir_helpers.renderGeometryIrToSvgImpl(25, 20, ir)
+
+    assert 'id="compressor_circle"' in svg
+    assert 'id="upward_compressor_left_line"' in svg
+    assert 'id="upward_compressor_right_line"' in svg
+    assert "#45aa5e" in svg
+
+
 def test_build_geometry_ir_maps_ac0202_rightward_compressor_description() -> None:
     ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl("Kompressor grau nach rechts")
 
