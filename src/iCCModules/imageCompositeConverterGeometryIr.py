@@ -43,8 +43,40 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
     left_rotated_two_way_valve_hint = two_way_vertical_valve_hint and _has_any(
         desc, ("90° nach links", "90° links", "90 grad nach links", "nach links gedreht")
     )
+    rotated_180_two_way_valve_hint = two_way_vertical_valve_hint and _has_any(
+        desc, ("180° gedreht", "180 grad gedreht", "um 180°", "um 180 grad")
+    )
 
     if two_way_vertical_valve_hint:
+        if rotated_180_two_way_valve_hint:
+            elements.append(
+                {
+                    "kind": "Rotated180TwoWayValveMotorGlyph",
+                    "id": "rotated_180_two_way_valve_motor",
+                    "body_path": [
+                        [0.975, 0.980],
+                        [0.616, 0.980],
+                        [0.793, 0.491],
+                        [0.616, 0.020],
+                        [0.975, 0.020],
+                        [0.793, 0.491],
+                    ],
+                    "circle": [0.279, 0.499, 0.263],
+                    "connector": [[0.787, 0.499], [0.540, 0.499]],
+                    "label": "M",
+                    "label_center": [0.279, 0.593],
+                    "body_fill": "url(#vertical-two-way-valve-body-gradient)",
+                    "circle_fill": "url(#vertical-two-way-valve-circle-gradient)",
+                    "stroke": "#969696",
+                    "connector_stroke": "#8f8f8f",
+                    "text_fill": "#666666",
+                    "stroke_width": 0.040,
+                    "connector_width": 0.060,
+                    "font_size": 0.540,
+                    "font_weight": "700",
+                }
+            )
+            return elements
         if left_rotated_two_way_valve_hint:
             elements.append(
                 {
@@ -361,7 +393,7 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
     rect_x, rect_y, rect_w, rect_h = _find_rect(geometry_ir, w, h)
     needs_gradient = any(element.get("kind") == "HorizontalGradient" for element in geometry_ir)
     needs_vertical_valve_defs = any(
-        element.get("kind") in {"VerticalTwoWayValveMotorGlyph", "LeftRotatedTwoWayValveMotorGlyph"}
+        element.get("kind") in {"VerticalTwoWayValveMotorGlyph", "LeftRotatedTwoWayValveMotorGlyph", "Rotated180TwoWayValveMotorGlyph"}
         for element in geometry_ir
     )
     if needs_gradient or needs_vertical_valve_defs:
@@ -386,7 +418,7 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
     for element in geometry_ir:
         kind = str(element.get("kind", ""))
         element_id = html.escape(str(element.get("id", kind)))
-        if kind in {"VerticalTwoWayValveMotorGlyph", "LeftRotatedTwoWayValveMotorGlyph"}:
+        if kind in {"VerticalTwoWayValveMotorGlyph", "LeftRotatedTwoWayValveMotorGlyph", "Rotated180TwoWayValveMotorGlyph"}:
             stroke = html.escape(str(element.get("stroke", "#969696")))
             connector_stroke = html.escape(str(element.get("connector_stroke", "#8f8f8f")))
             text_fill = html.escape(str(element.get("text_fill", "#666666")))

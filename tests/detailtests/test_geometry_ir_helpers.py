@@ -276,3 +276,34 @@ def test_render_geometry_ir_to_svg_contains_ac0213_left_rotated_two_way_valve_mo
     assert 'id="left_rotated_two_way_valve_motor_circle"' in svg
     assert 'id="left_rotated_two_way_valve_motor_label"' in svg
     assert ">M</text>" in svg
+
+def test_build_geometry_ir_maps_ac0214_180_rotated_two_way_valve_motor_description() -> None:
+    ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
+        'Wie AC0212: 2-Weg Ventil vertikal: Kelle mit Kreis rechts, horizontale Verbindungslinie, '
+        '"M" als Text (M = Motor), zwei spitze Dreiecke, welche sich in der Mitte berühren, '
+        'graue Umrandung, Dreiecke besitzen emeinsamen Farübergang von dunkelgrau rechts oben nach hellgrau links unten. '
+        'Geometrische Variante: 180° gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.'
+    )
+
+    assert [element["kind"] for element in ir] == ["Rotated180TwoWayValveMotorGlyph"]
+    assert ir[0]["id"] == "rotated_180_two_way_valve_motor"
+    assert ir[0]["label"] == "M"
+
+
+def test_render_geometry_ir_to_svg_contains_ac0214_180_rotated_two_way_valve_motor_primitives() -> None:
+    ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
+        'Wie AC0212: 2-Weg Ventil vertikal: Kelle mit Kreis rechts, horizontale Verbindungslinie, '
+        '"M" als Text (M = Motor), zwei spitze Dreiecke, welche sich in der Mitte berühren, '
+        'graue Umrandung, Dreiecke besitzen emeinsamen Farübergang von dunkelgrau rechts oben nach hellgrau links unten. '
+        'Geometrische Variante: 180° gedreht.'
+    )
+
+    svg = geometry_ir_helpers.renderGeometryIrToSvgImpl(65, 50, ir)
+
+    assert "vertical-two-way-valve-body-gradient" in svg
+    assert "vertical-two-way-valve-circle-gradient" in svg
+    assert 'id="rotated_180_two_way_valve_motor_body"' in svg
+    assert 'id="rotated_180_two_way_valve_motor_connector"' in svg
+    assert 'id="rotated_180_two_way_valve_motor_circle"' in svg
+    assert 'id="rotated_180_two_way_valve_motor_label"' in svg
+    assert ">M</text>" in svg
