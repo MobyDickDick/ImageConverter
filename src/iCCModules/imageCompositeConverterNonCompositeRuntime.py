@@ -215,6 +215,7 @@ def _try_build_description_geometry_ir_svg(width: int, height: int, *, descripti
         "UpwardCompressorGlyph",
         "RightwardCompressorGlyph",
         "MainDiagonalMirroredCompressorGlyph",
+        "VerticalTwoWayValveMotorGlyph",
     }
     if not (description_driven_kinds & kinds):
         return None
