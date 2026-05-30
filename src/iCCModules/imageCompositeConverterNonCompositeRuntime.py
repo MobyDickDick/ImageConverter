@@ -205,7 +205,14 @@ def _try_build_description_geometry_ir_svg(width: int, height: int, *, descripti
     if not geometry_ir:
         return None
     kinds = {str(element.get("kind", "")) for element in geometry_ir}
-    if not ({"HorizontalRuleSet", "OrthogonalPolyline"} & kinds):
+    description_driven_kinds = {
+        "HorizontalRuleSet",
+        "OrthogonalPolyline",
+        "HalfDoubleRectBorder",
+        "LabelBox",
+        "TextGlyph",
+    }
+    if not (description_driven_kinds & kinds):
         return None
     return geometry_ir_helpers.renderGeometryIrToSvgImpl(width, height, geometry_ir)
 
