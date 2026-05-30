@@ -1,0 +1,1101 @@
+{
+  "schema_version": "perception_telemetry_report_v1",
+  "candidate_schema_version": "perception_primitive_candidate_v1",
+  "records": [
+    {
+      "schema_version": "perception_telemetry_record_v1",
+      "candidate_schema_version": "perception_primitive_candidate_v1",
+      "sample_id": "AC0120_L_plan_b_real",
+      "image_path": "artifacts/images_to_convert/AC0120_L.jpg",
+      "image_size": {
+        "width": 40,
+        "height": 80
+      },
+      "description": "Plan-B-Kandidat AC0120_L: oben auf der vertikalen Symmetrieachse werden ein \"+\"- und ein \"-\"-Zeichen eingef\u00fcgt.",
+      "runtime_status": "non_composite_perception_seeded_geometry_ir",
+      "candidate_count": 16,
+      "accepted_candidate_count": 3,
+      "rejected_candidate_count": 13,
+      "candidates": [
+        {
+          "rank": 1,
+          "candidate": {
+            "schema_version": "perception_primitive_candidate_v1",
+            "kind": "line",
+            "bbox": {
+              "x": 35.0,
+              "y": 6.0,
+              "width": 4.0,
+              "height": 68.0
+            },
+            "center": {
+              "x": 37.0,
+              "y": 40.0
+            },
+            "geometry": {
+              "orientation": "vertical",
+              "x_center": 37.0,
+              "y_top": 6.0,
+              "y_bottom": 74.0,
+              "length_px": 68.0,
+              "stroke_width_px": 4.0,
+              "angle_deg": 90.0
+            },
+            "color": {
+              "fill_rgb": null,
+              "stroke_rgb": null,
+              "fill_hex": null,
+              "stroke_hex": null,
+              "fill_confidence": 0.0,
+              "stroke_confidence": 0.0
+            },
+            "confidence": 1.0,
+            "roi": {
+              "type": "image",
+              "hint": "full_image",
+              "bbox": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 40.0,
+                "height": 80.0
+              }
+            },
+            "evidence": {
+              "detector": "detect_vertical_lines",
+              "edge_model": "canny+hough_lines_p"
+            },
+            "source": "hough"
+          },
+          "decision": "rejected",
+          "reason": "not_selected_lower_confidence_or_no_seed_mapping"
+        },
+        {
+          "rank": 2,
+          "candidate": {
+            "schema_version": "perception_primitive_candidate_v1",
+            "kind": "line",
+            "bbox": {
+              "x": 0.0,
+              "y": 6.0,
+              "width": 4.0,
+              "height": 68.0
+            },
+            "center": {
+              "x": 2.0,
+              "y": 40.0
+            },
+            "geometry": {
+              "orientation": "vertical",
+              "x_center": 2.0,
+              "y_top": 6.0,
+              "y_bottom": 74.0,
+              "length_px": 68.0,
+              "stroke_width_px": 4.0,
+              "angle_deg": 90.0
+            },
+            "color": {
+              "fill_rgb": null,
+              "stroke_rgb": null,
+              "fill_hex": null,
+              "stroke_hex": null,
+              "fill_confidence": 0.0,
+              "stroke_confidence": 0.0
+            },
+            "confidence": 1.0,
+            "roi": {
+              "type": "image",
+              "hint": "full_image",
+              "bbox": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 40.0,
+                "height": 80.0
+              }
+            },
+            "evidence": {
+              "detector": "detect_vertical_lines",
+              "edge_model": "canny+hough_lines_p"
+            },
+            "source": "hough"
+          },
+          "decision": "rejected",
+          "reason": "not_selected_lower_confidence_or_no_seed_mapping"
+        },
+        {
+          "rank": 3,
+          "candidate": {
+            "schema_version": "perception_primitive_candidate_v1",
+            "kind": "line",
+            "bbox": {
+              "x": -1.0,
+              "y": 6.0,
+              "width": 2.0,
+              "height": 67.0
+            },
+            "center": {
+              "x": 0.0,
+              "y": 39.5
+            },
+            "geometry": {
+              "orientation": "vertical",
+              "x_center": 0.0,
+              "y_top": 6.0,
+              "y_bottom": 73.0,
+              "length_px": 67.0,
+              "stroke_width_px": 2.0,
+              "angle_deg": 90.0
+            },
+            "color": {
+              "fill_rgb": null,
+              "stroke_rgb": null,
+              "fill_hex": null,
+              "stroke_hex": null,
+              "fill_confidence": 0.0,
+              "stroke_confidence": 0.0
+            },
+            "confidence": 1.0,
+            "roi": {
+              "type": "image",
+              "hint": "full_image",
+              "bbox": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 40.0,
+                "height": 80.0
+              }
+            },
+            "evidence": {
+              "detector": "detect_vertical_lines",
+              "edge_model": "canny+hough_lines_p"
+            },
+            "source": "hough"
+          },
+          "decision": "rejected",
+          "reason": "not_selected_lower_confidence_or_no_seed_mapping"
+        },
+        {
+          "rank": 4,
+          "candidate": {
+            "schema_version": "perception_primitive_candidate_v1",
+            "kind": "line",
+            "bbox": {
+              "x": 37.55,
+              "y": 6.0,
+              "width": 2.9,
+              "height": 67.0
+            },
+            "center": {
+              "x": 39.0,
+              "y": 39.5
+            },
+            "geometry": {
+              "orientation": "vertical",
+              "x_center": 39.0,
+              "y_top": 6.0,
+              "y_bottom": 73.0,
+              "length_px": 67.0,
+              "stroke_width_px": 2.9,
+              "angle_deg": 90.0
+            },
+            "color": {
+              "fill_rgb": null,
+              "stroke_rgb": null,
+              "fill_hex": null,
+              "stroke_hex": null,
+              "fill_confidence": 0.0,
+              "stroke_confidence": 0.0
+            },
+            "confidence": 1.0,
+            "roi": {
+              "type": "image",
+              "hint": "full_image",
+              "bbox": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 40.0,
+                "height": 80.0
+              }
+            },
+            "evidence": {
+              "detector": "detect_vertical_lines",
+              "edge_model": "canny+hough_lines_p"
+            },
+            "source": "hough"
+          },
+          "decision": "rejected",
+          "reason": "not_selected_lower_confidence_or_no_seed_mapping"
+        },
+        {
+          "rank": 5,
+          "candidate": {
+            "schema_version": "perception_primitive_candidate_v1",
+            "kind": "circle",
+            "bbox": {
+              "x": 17.0,
+              "y": 20.0,
+              "width": 23.0,
+              "height": 34.0
+            },
+            "center": {
+              "x": 34.0,
+              "y": 37.0
+            },
+            "geometry": {
+              "radius_px": 17.0,
+              "inner_radius_px": 0.0,
+              "stroke_width_px": 1.36,
+              "circularity": 1.0,
+              "ring": false,
+              "fill_ratio": 0.8468,
+              "geometry_ir_kind": "CircleBackground",
+              "geometry_ir_bbox": [
+                0.425,
+                0.25,
+                0.575,
+                0.425
+              ]
+            },
+            "color": {
+              "fill_rgb": [
+                196,
+                196,
+                197
+              ],
+              "stroke_rgb": [
+                183,
+                183,
+                184
+              ],
+              "fill_hex": "#C4C4C5",
+              "stroke_hex": "#B7B7B8",
+              "fill_confidence": 0.7817,
+              "stroke_confidence": 0.7072
+            },
+            "confidence": 0.9563,
+            "roi": {
+              "type": "image",
+              "hint": "full_image",
+              "bbox": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 40.0,
+                "height": 80.0
+              }
+            },
+            "evidence": {
+              "detector": "detect_circle_rings",
+              "detection_source": "hough",
+              "threshold_model": "hough_plus_foreground_mask"
+            },
+            "source": "pf6_perception_telemetry"
+          },
+          "decision": "accepted",
+          "reason": "selected_for_geometry_ir_seed"
+        },
+        {
+          "rank": 6,
+          "candidate": {
+            "schema_version": "perception_primitive_candidate_v1",
+            "kind": "circle",
+            "bbox": {
+              "x": 23.0,
+              "y": 20.0,
+              "width": 12.0,
+              "height": 12.0
+            },
+            "center": {
+              "x": 29.0,
+              "y": 26.0
+            },
+            "geometry": {
+              "radius_px": 6.0,
+              "inner_radius_px": 0.0,
+              "stroke_width_px": 1.0,
+              "circularity": 1.0,
+              "ring": false,
+              "fill_ratio": 0.9115,
+              "geometry_ir_kind": "CircleBackground",
+              "geometry_ir_bbox": [
+                0.575,
+                0.25,
+                0.3,
+                0.15
+              ]
+            },
+            "color": {
+              "fill_rgb": [
+                192,
+                192,
+                193
+              ],
+              "stroke_rgb": [
+                197,
+                197,
+                199
+              ],
+              "fill_hex": "#C0C0C1",
+              "stroke_hex": "#C5C5C7",
+              "fill_confidence": 0.7456,
+              "stroke_confidence": 0.7709
+            },
+            "confidence": 0.9555,
+            "roi": {
+              "type": "image",
+              "hint": "full_image",
+              "bbox": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 40.0,
+                "height": 80.0
+              }
+            },
+            "evidence": {
+              "detector": "detect_circle_rings",
+              "detection_source": "hough",
+              "threshold_model": "hough_plus_foreground_mask"
+            },
+            "source": "pf6_perception_telemetry"
+          },
+          "decision": "rejected",
+          "reason": "not_selected_lower_confidence_or_no_seed_mapping"
+        },
+        {
+          "rank": 7,
+          "candidate": {
+            "schema_version": "perception_primitive_candidate_v1",
+            "kind": "rectangle",
+            "bbox": {
+              "x": 0.0,
+              "y": 0.0,
+              "width": 40.0,
+              "height": 80.0
+            },
+            "center": {
+              "x": 20.0,
+              "y": 40.0
+            },
+            "geometry": {
+              "width_px": 79.0,
+              "height_px": 39.0,
+              "angle_deg": -90.0,
+              "area_px": 3081.0,
+              "extent": 0.9628
+            },
+            "color": {
+              "fill_rgb": [
+                202,
+                202,
+                203
+              ],
+              "stroke_rgb": [
+                182,
+                182,
+                182
+              ],
+              "fill_hex": "#CACACB",
+              "stroke_hex": "#B6B6B6",
+              "fill_confidence": 0.731,
+              "stroke_confidence": 0.8067
+            },
+            "confidence": 0.9407,
+            "roi": {
+              "type": "image",
+              "hint": "full_image",
+              "bbox": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 40.0,
+                "height": 80.0
+              }
+            },
+            "evidence": {
+              "detector": "contour",
+              "vertices": 4,
+              "convex": true
+            },
+            "source": "pf6_perception_telemetry"
+          },
+          "decision": "accepted",
+          "reason": "selected_for_geometry_ir_seed"
+        },
+        {
+          "rank": 8,
+          "candidate": {
+            "schema_version": "perception_primitive_candidate_v1",
+            "kind": "circle",
+            "bbox": {
+              "x": 0.0,
+              "y": 15.0,
+              "width": 18.0,
+              "height": 18.0
+            },
+            "center": {
+              "x": 5.0,
+              "y": 24.0
+            },
+            "geometry": {
+              "radius_px": 9.0,
+              "inner_radius_px": 0.0,
+              "stroke_width_px": 1.0,
+              "circularity": 1.0,
+              "ring": false,
+              "fill_ratio": 0.7489,
+              "geometry_ir_kind": "CircleBackground",
+              "geometry_ir_bbox": [
+                0.0,
+                0.1875,
+                0.45,
+                0.225
+              ]
+            },
+            "color": {
+              "fill_rgb": [
+                201,
+                201,
+                201
+              ],
+              "stroke_rgb": [
+                188,
+                188,
+                189
+              ],
+              "fill_hex": "#C9C9C9",
+              "stroke_hex": "#BCBCBD",
+              "fill_confidence": 0.7775,
+              "stroke_confidence": 0.7311
+            },
+            "confidence": 0.9347,
+            "roi": {
+              "type": "image",
+              "hint": "full_image",
+              "bbox": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 40.0,
+                "height": 80.0
+              }
+            },
+            "evidence": {
+              "detector": "detect_circle_rings",
+              "detection_source": "hough",
+              "threshold_model": "hough_plus_foreground_mask"
+            },
+            "source": "pf6_perception_telemetry"
+          },
+          "decision": "rejected",
+          "reason": "not_selected_lower_confidence_or_no_seed_mapping"
+        },
+        {
+          "rank": 9,
+          "candidate": {
+            "schema_version": "perception_primitive_candidate_v1",
+            "kind": "ring",
+            "bbox": {
+              "x": 5.0,
+              "y": 0.0,
+              "width": 32.0,
+              "height": 32.0
+            },
+            "center": {
+              "x": 21.0,
+              "y": 3.0
+            },
+            "geometry": {
+              "radius_px": 16.0,
+              "inner_radius_px": 9.28,
+              "stroke_width_px": 6.72,
+              "circularity": 1.0,
+              "ring": true,
+              "fill_ratio": 0.4921,
+              "geometry_ir_kind": "CircleBackground",
+              "geometry_ir_bbox": [
+                0.125,
+                0.0,
+                0.8,
+                0.4
+              ]
+            },
+            "color": {
+              "fill_rgb": [
+                195,
+                195,
+                196
+              ],
+              "stroke_rgb": [
+                187,
+                187,
+                189
+              ],
+              "fill_hex": "#C3C3C4",
+              "stroke_hex": "#BBBBBD",
+              "fill_confidence": 0.6484,
+              "stroke_confidence": 0.6836
+            },
+            "confidence": 0.9337,
+            "roi": {
+              "type": "image",
+              "hint": "full_image",
+              "bbox": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 40.0,
+                "height": 80.0
+              }
+            },
+            "evidence": {
+              "detector": "detect_circle_rings",
+              "detection_source": "hough",
+              "threshold_model": "hough_plus_foreground_mask"
+            },
+            "source": "pf6_perception_telemetry"
+          },
+          "decision": "rejected",
+          "reason": "not_selected_lower_confidence_or_no_seed_mapping"
+        },
+        {
+          "rank": 10,
+          "candidate": {
+            "schema_version": "perception_primitive_candidate_v1",
+            "kind": "ring",
+            "bbox": {
+              "x": 2.0,
+              "y": 61.0,
+              "width": 36.0,
+              "height": 19.0
+            },
+            "center": {
+              "x": 20.0,
+              "y": 79.0
+            },
+            "geometry": {
+              "radius_px": 18.0,
+              "inner_radius_px": 10.44,
+              "stroke_width_px": 7.56,
+              "circularity": 1.0,
+              "ring": true,
+              "fill_ratio": 0.3824,
+              "geometry_ir_kind": "CircleBackground",
+              "geometry_ir_bbox": [
+                0.05,
+                0.7625,
+                0.9,
+                0.2375
+              ]
+            },
+            "color": {
+              "fill_rgb": [
+                208,
+                209,
+                209
+              ],
+              "stroke_rgb": [
+                193,
+                194,
+                195
+              ],
+              "fill_hex": "#D0D1D1",
+              "stroke_hex": "#C1C2C3",
+              "fill_confidence": 0.6981,
+              "stroke_confidence": 0.6857
+            },
+            "confidence": 0.9221,
+            "roi": {
+              "type": "image",
+              "hint": "full_image",
+              "bbox": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 40.0,
+                "height": 80.0
+              }
+            },
+            "evidence": {
+              "detector": "detect_circle_rings",
+              "detection_source": "hough",
+              "threshold_model": "hough_plus_foreground_mask"
+            },
+            "source": "pf6_perception_telemetry"
+          },
+          "decision": "rejected",
+          "reason": "not_selected_lower_confidence_or_no_seed_mapping"
+        },
+        {
+          "rank": 11,
+          "candidate": {
+            "schema_version": "perception_primitive_candidate_v1",
+            "kind": "ring",
+            "bbox": {
+              "x": 9.0,
+              "y": 8.0,
+              "width": 22.0,
+              "height": 22.0
+            },
+            "center": {
+              "x": 20.0,
+              "y": 19.0
+            },
+            "geometry": {
+              "radius_px": 11.0,
+              "inner_radius_px": 6.38,
+              "stroke_width_px": 4.62,
+              "circularity": 1.0,
+              "ring": true,
+              "fill_ratio": 0.5119,
+              "geometry_ir_kind": "CircleBackground",
+              "geometry_ir_bbox": [
+                0.225,
+                0.1,
+                0.55,
+                0.275
+              ]
+            },
+            "color": {
+              "fill_rgb": [
+                185,
+                185,
+                186
+              ],
+              "stroke_rgb": [
+                192,
+                192,
+                193
+              ],
+              "fill_hex": "#B9B9BA",
+              "stroke_hex": "#C0C0C1",
+              "fill_confidence": 0.6107,
+              "stroke_confidence": 0.6656
+            },
+            "confidence": 0.916,
+            "roi": {
+              "type": "image",
+              "hint": "full_image",
+              "bbox": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 40.0,
+                "height": 80.0
+              }
+            },
+            "evidence": {
+              "detector": "detect_circle_rings",
+              "detection_source": "hough",
+              "threshold_model": "hough_plus_foreground_mask"
+            },
+            "source": "pf6_perception_telemetry"
+          },
+          "decision": "rejected",
+          "reason": "not_selected_lower_confidence_or_no_seed_mapping"
+        },
+        {
+          "rank": 12,
+          "candidate": {
+            "schema_version": "perception_primitive_candidate_v1",
+            "kind": "ring",
+            "bbox": {
+              "x": 6.0,
+              "y": 54.0,
+              "width": 26.0,
+              "height": 26.0
+            },
+            "center": {
+              "x": 19.0,
+              "y": 67.0
+            },
+            "geometry": {
+              "radius_px": 13.0,
+              "inner_radius_px": 7.54,
+              "stroke_width_px": 5.46,
+              "circularity": 1.0,
+              "ring": true,
+              "fill_ratio": 0.2481,
+              "geometry_ir_kind": "CircleBackground",
+              "geometry_ir_bbox": [
+                0.15,
+                0.675,
+                0.65,
+                0.325
+              ]
+            },
+            "color": {
+              "fill_rgb": [
+                211,
+                211,
+                211
+              ],
+              "stroke_rgb": [
+                196,
+                196,
+                197
+              ],
+              "fill_hex": "#D3D3D3",
+              "stroke_hex": "#C4C4C5",
+              "fill_confidence": 0.695,
+              "stroke_confidence": 0.689
+            },
+            "confidence": 0.9125,
+            "roi": {
+              "type": "image",
+              "hint": "full_image",
+              "bbox": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 40.0,
+                "height": 80.0
+              }
+            },
+            "evidence": {
+              "detector": "detect_circle_rings",
+              "detection_source": "hough",
+              "threshold_model": "hough_plus_foreground_mask"
+            },
+            "source": "pf6_perception_telemetry"
+          },
+          "decision": "rejected",
+          "reason": "not_selected_lower_confidence_or_no_seed_mapping"
+        },
+        {
+          "rank": 13,
+          "candidate": {
+            "schema_version": "perception_primitive_candidate_v1",
+            "kind": "circle",
+            "bbox": {
+              "x": 0.0,
+              "y": 19.0,
+              "width": 34.0,
+              "height": 34.0
+            },
+            "center": {
+              "x": 2.0,
+              "y": 36.0
+            },
+            "geometry": {
+              "radius_px": 17.0,
+              "inner_radius_px": 0.0,
+              "stroke_width_px": 1.36,
+              "circularity": 1.0,
+              "ring": false,
+              "fill_ratio": 0.5787,
+              "geometry_ir_kind": "CircleBackground",
+              "geometry_ir_bbox": [
+                0.0,
+                0.2375,
+                0.85,
+                0.425
+              ]
+            },
+            "color": {
+              "fill_rgb": [
+                210,
+                210,
+                211
+              ],
+              "stroke_rgb": [
+                185,
+                185,
+                186
+              ],
+              "fill_hex": "#D2D2D3",
+              "stroke_hex": "#B9B9BA",
+              "fill_confidence": 0.7815,
+              "stroke_confidence": 0.6957
+            },
+            "confidence": 0.8973,
+            "roi": {
+              "type": "image",
+              "hint": "full_image",
+              "bbox": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 40.0,
+                "height": 80.0
+              }
+            },
+            "evidence": {
+              "detector": "detect_circle_rings",
+              "detection_source": "hough",
+              "threshold_model": "hough_plus_foreground_mask"
+            },
+            "source": "pf6_perception_telemetry"
+          },
+          "decision": "rejected",
+          "reason": "not_selected_lower_confidence_or_no_seed_mapping"
+        },
+        {
+          "rank": 14,
+          "candidate": {
+            "schema_version": "perception_primitive_candidate_v1",
+            "kind": "ring",
+            "bbox": {
+              "x": 1.0,
+              "y": 0.0,
+              "width": 14.0,
+              "height": 14.0
+            },
+            "center": {
+              "x": 8.0,
+              "y": 2.0
+            },
+            "geometry": {
+              "radius_px": 7.0,
+              "inner_radius_px": 4.06,
+              "stroke_width_px": 2.94,
+              "circularity": 1.0,
+              "ring": true,
+              "fill_ratio": 0.4444,
+              "geometry_ir_kind": "CircleBackground",
+              "geometry_ir_bbox": [
+                0.025,
+                0.0,
+                0.35,
+                0.175
+              ]
+            },
+            "color": {
+              "fill_rgb": [
+                192,
+                192,
+                193
+              ],
+              "stroke_rgb": [
+                199,
+                199,
+                200
+              ],
+              "fill_hex": "#C0C0C1",
+              "stroke_hex": "#C7C7C8",
+              "fill_confidence": 0.6238,
+              "stroke_confidence": 0.6416
+            },
+            "confidence": 0.8846,
+            "roi": {
+              "type": "image",
+              "hint": "full_image",
+              "bbox": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 40.0,
+                "height": 80.0
+              }
+            },
+            "evidence": {
+              "detector": "detect_circle_rings",
+              "detection_source": "hough",
+              "threshold_model": "hough_plus_foreground_mask"
+            },
+            "source": "pf6_perception_telemetry"
+          },
+          "decision": "rejected",
+          "reason": "not_selected_lower_confidence_or_no_seed_mapping"
+        },
+        {
+          "rank": 15,
+          "candidate": {
+            "schema_version": "perception_primitive_candidate_v1",
+            "kind": "ring",
+            "bbox": {
+              "x": 6.0,
+              "y": 1.0,
+              "width": 18.0,
+              "height": 18.0
+            },
+            "center": {
+              "x": 15.0,
+              "y": 10.0
+            },
+            "geometry": {
+              "radius_px": 9.0,
+              "inner_radius_px": 5.22,
+              "stroke_width_px": 3.78,
+              "circularity": 1.0,
+              "ring": true,
+              "fill_ratio": 0.3794,
+              "geometry_ir_kind": "CircleBackground",
+              "geometry_ir_bbox": [
+                0.15,
+                0.0125,
+                0.45,
+                0.225
+              ]
+            },
+            "color": {
+              "fill_rgb": [
+                203,
+                203,
+                203
+              ],
+              "stroke_rgb": [
+                202,
+                202,
+                202
+              ],
+              "fill_hex": "#CBCBCB",
+              "stroke_hex": "#CACACA",
+              "fill_confidence": 0.5977,
+              "stroke_confidence": 0.6518
+            },
+            "confidence": 0.8679,
+            "roi": {
+              "type": "image",
+              "hint": "full_image",
+              "bbox": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 40.0,
+                "height": 80.0
+              }
+            },
+            "evidence": {
+              "detector": "detect_circle_rings",
+              "detection_source": "hough",
+              "threshold_model": "hough_plus_foreground_mask"
+            },
+            "source": "pf6_perception_telemetry"
+          },
+          "decision": "rejected",
+          "reason": "not_selected_lower_confidence_or_no_seed_mapping"
+        },
+        {
+          "rank": 16,
+          "candidate": {
+            "schema_version": "perception_primitive_candidate_v1",
+            "kind": "horizontal_rule",
+            "bbox": {
+              "x": 15.0,
+              "y": 17.0,
+              "width": 10.0,
+              "height": 3.0
+            },
+            "center": {
+              "x": 20.0,
+              "y": 18.5
+            },
+            "geometry": {
+              "orientation": "horizontal",
+              "x_left": 15.0,
+              "x_right": 25.0,
+              "y_center": 18.5,
+              "length_px": 10.0,
+              "stroke_width_px": 3.0,
+              "angle_deg": 0.0,
+              "text_equivalent": "-",
+              "geometry_ir_kind": "HorizontalRule"
+            },
+            "color": {
+              "fill_rgb": null,
+              "stroke_rgb": [
+                163,
+                163,
+                163
+              ],
+              "fill_hex": null,
+              "stroke_hex": "#A3A3A3",
+              "fill_confidence": 0.0,
+              "stroke_confidence": 0.5816
+            },
+            "confidence": 0.7467,
+            "roi": {
+              "type": "description_hint",
+              "hint": "top+center",
+              "bbox": {
+                "x": 8.0,
+                "y": 0.0,
+                "width": 24.0,
+                "height": 33.6
+              },
+              "description": "Plan-B-Kandidat AC0120_L: oben auf der vertikalen Symmetrieachse werden ein \"+\"- und ein \"-\"-Zeichen eingef\u00fcgt."
+            },
+            "evidence": {
+              "detector": "detect_horizontal_rules",
+              "threshold_model": "dark_contour_horizontal_opening",
+              "description_hint": "top+center"
+            },
+            "source": "pf6_perception_telemetry"
+          },
+          "decision": "accepted",
+          "reason": "selected_for_geometry_ir_seed"
+        }
+      ],
+      "selected_geometry_ir_seed_count": 3,
+      "selected_geometry_ir_seeds": [
+        {
+          "kind": "RectBorder",
+          "id": "perception_rect_border",
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "fill": "#CACACB",
+          "stroke": "#B6B6B6",
+          "stroke_width": 0.06,
+          "perception_seed": {
+            "kind": "rectangle",
+            "confidence": 0.9407,
+            "source": "pf6_perception_telemetry",
+            "detector": "contour",
+            "candidate_schema_version": "perception_primitive_candidate_v1"
+          }
+        },
+        {
+          "kind": "CircleBackground",
+          "id": "perception_circle_background",
+          "bbox": [
+            0.425,
+            0.25,
+            0.575,
+            0.425
+          ],
+          "fill": "#C4C4C5",
+          "stroke": "#B7B7B8",
+          "stroke_width": 0.034,
+          "perception_seed": {
+            "kind": "circle",
+            "confidence": 0.9563,
+            "source": "pf6_perception_telemetry",
+            "detector": "detect_circle_rings",
+            "detection_source": "hough",
+            "candidate_schema_version": "perception_primitive_candidate_v1"
+          }
+        },
+        {
+          "kind": "MinusGlyph",
+          "id": "minus_glyph",
+          "position": "top_center",
+          "stroke": "#4f4f4f",
+          "stroke_width": 0.025,
+          "perception_seed": {
+            "kind": "horizontal_rule",
+            "confidence": 0.7467,
+            "source": "pf6_perception_telemetry",
+            "detector": "detect_horizontal_rules",
+            "candidate_schema_version": "perception_primitive_candidate_v1",
+            "text_equivalent": "-"
+          }
+        }
+      ],
+      "geometry_ir_before_seed_kinds": [
+        "PlusGlyph",
+        "MinusGlyph"
+      ],
+      "geometry_ir_after_seed_kinds": [
+        "RectBorder",
+        "CircleBackground",
+        "PlusGlyph",
+        "MinusGlyph"
+      ],
+      "error_before_seed": 53.568542,
+      "error_after_seed": 31.99625,
+      "error_delta_before_minus_after": 21.572292,
+      "render_status_before_seed": "rendered",
+      "render_status_after_seed": "rendered"
+    }
+  ],
+  "summary": {
+    "samples": 1,
+    "total_candidates": 16,
+    "accepted_candidates": 3,
+    "rejected_candidates": 13,
+    "all_have_selected_seed": true
+  }
+}
