@@ -6,7 +6,7 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-05-30)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `383` · Erledigt `285` · Offen `98`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `383` · Erledigt `286` · Offen `97`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -79,8 +79,15 @@ detaillierte Backlog steht in `docs/perception_first_task_backlog_2026-05-30.md`
 - [x] **PF4 – Perception-Kandidaten vor dem generischen Non-Composite-Fallback nutzen:** Beschreibung + Bildanalyse als `perception_seeded_geometry_ir` vor dem Element-Fit ausführen. (2026-05-30: Non-Composite-Runtime versucht nun vor Description-only-IR und generischem Element-Fit einen `non_composite_perception_seeded_geometry_ir`-Pfad; Perception-Seeds für `CircleBackground`, `HorizontalRule` und `RectBorder` werden aus PF-Kandidaten in Geometry-IR gemerged, gerendert und mit eigener Validation-Log-Spur protokolliert. Report: `artifacts/evaluation/perception_seeded_geometry_ir_v1/perception_seeded_geometry_ir_report_v1.json`; Basistests in `tests/test_perception_seeded_geometry_ir.py` und `tests/detailtests/test_non_composite_runtime_helpers.py`. )
 - [x] **PF5 – Evaluationsharness für Perception-Seeds aufbauen:** Precision/Recall, Confidence und Renderfehler vor/nach Seed für mindestens drei Primitive ausweisen. (2026-05-30: PF5-Harness `--report perception-seed-eval` ergänzt; Report `artifacts/evaluation/perception_seed_evaluation_v1/perception_seed_evaluation_report_v1.json` und CSV `artifacts/evaluation/perception_seed_evaluation_v1/perception_seed_evaluation_samples_v1.csv` verdichten Minus-/Linien-, Kreis-/Ring- und Rechteck-Seeds zu Precision/Recall, Confidence-Verteilung und Renderfehlern vor/nach Seed. Basistests in `tests/test_perception_seed_evaluation.py`.)
 - [x] **PF6 – Perception-Telemetrie in bestehende Reports integrieren:** erkannte/abgelehnte Kandidaten, Seed-Auswahl und Fehlerdeltas pro Lauf als CSV/JSON protokollieren. (2026-05-30: PF6-Telemetrie ergänzt `build_perception_telemetry_record(...)` sowie den CLI-Report `--report perception-telemetry`; JSON/CSV-Artefakte unter `artifacts/evaluation/perception_telemetry_v1/` protokollieren erkannte und abgelehnte Kandidaten, ausgewählte Geometry-IR-Seeds sowie Fehlerwerte vor/nach Seed. Basistests in `tests/test_perception_telemetry_report.py`.)
-- [ ] **PF7 – Einfache Text-/Glyph-Erkennung für `M`, `+`, `-` und kurze Labels prüfen:** Template-Matching/OCR-Nutzen ohne neue Pflichtdependency evaluieren.
+- [x] **PF7 – Einfache Text-/Glyph-Erkennung für `M`, `+`, `-` und kurze Labels prüfen:** Template-Matching/OCR-Nutzen ohne neue Pflichtdependency evaluieren. (2026-05-30: Template-Matching-Detector `detect_text_glyph_candidates(...)` ergänzt; PF7-Report `artifacts/evaluation/perception_text_glyph_evaluation_v1/perception_text_glyph_evaluation_report_v1.json` und CSV `.../perception_text_glyph_evaluation_samples_v1.csv` prüfen synthetische Glyphen `M`, `+`, `-`, das Kurzlabel `VOC` sowie den realen Plus-Kandidaten `AC0120_L.jpg` ohne neue Pflicht-OCR-Dependency; Basistests in `tests/test_perception_text_glyph_eval.py`.)
 - [ ] **PF8 – Plan-B-Rotation mit Perception-Aufgaben verzahnen:** jedes kommende Plan-B-Paket erhält einen Abschnitt „Perception-Lerneffekt“.
+
+### Fortschritt vs. Blocker (Session 2026-05-30, PF7 Text-/Glyph-Evaluation Run MT)
+
+- **Fortschritt:** Die nächste dokumentierte Perception-First-Aufgabe **PF7** wurde umgesetzt: Ein einfacher Template-Matching-Detector bewertet bekannte Glyphen und kurze Labels (`M`, `+`, `-`, `VOC`) über den vorhandenen `cv2`/`numpy`-Pfad und serialisiert Treffer als `text_glyph`-Kandidaten im bestehenden Candidate-Contract.
+- **Gekoppelte Plan-B-/Repro-Aufgabe:** Der PF7-Report enthält vier synthetische Glyph-/Label-Fixtures und den realen Plan-B-nahen Plus-Kandidaten `AC0120_L.jpg`; alle fünf Samples matchen den erwarteten Text.
+- **Blocker:** Kein neuer technischer Blocker; vollständiges OCR bleibt bewusst keine Pflichtdependency. Für natürlichere kleine Labels wie `rF` sollte erst PF8 entscheiden, ob Template-Varianten reichen oder ein optionales OCR-Backend sinnvoll ist.
+- **Nächster sinnvoller Schritt:** PF8 umsetzen: kommende Plan-B-Pakete mit einem dokumentierten Abschnitt „Perception-Lerneffekt“ verzahnen.
 
 ### Fortschritt vs. Blocker (Session 2026-05-30, PF5 Evaluationsharness Run MS)
 
