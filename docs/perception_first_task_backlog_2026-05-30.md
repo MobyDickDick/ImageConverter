@@ -109,7 +109,7 @@ ein kleiner Perception-Schritt plus ein eng begrenzter Repro-/Qualitätsnachweis
   externes Tool `tools/...` verwenden und später in den Runtime-Pfad ziehen.
 - **Ergebnis 2026-05-30:** `tools/perception_detection_contract.py --report perception-telemetry` schreibt `perception_telemetry_report_v1.json` und `perception_telemetry_candidates_v1.csv` mit Kandidatenentscheidungen, gewählten Geometry-IR-Seeds sowie Fehlerwerten vor/nach Seed. Nachweis: `artifacts/evaluation/perception_telemetry_v1/`.
 
-### PF7 – Einfache Text-/Glyph-Erkennung für `M`, `+`, `-` und kurze Labels prüfen
+### PF7 – Einfache Text-/Glyph-Erkennung für `M`, `+`, `-` und kurze Labels prüfen (erledigt 2026-05-30)
 
 - **Problem:** Mehrere Symbolfamilien enthalten kleine Buchstaben oder Zeichen;
   vollständiges OCR wäre überdimensioniert, aber wenige Glyphen sind wertvoll.
@@ -120,6 +120,8 @@ ein kleiner Perception-Schritt plus ein eng begrenzter Repro-/Qualitätsnachweis
   ein OCR-Backend nötig ist.
 - **Plan-B-Kopplung:** Wenn OCR-Abhängigkeiten den Lauf erschweren, bleibt die
   Aufgabe auf Template-Matching ohne neue Pflichtdependency begrenzt.
+
+- **Ergebnis 2026-05-30:** `detect_text_glyph_candidates(...)` nutzt Template-Matching auf binarisierten ROIs und bleibt auf vorhandene `cv2`/`numpy`-Abhängigkeiten begrenzt. Der Report `tools/perception_detection_contract.py --report text-glyph-eval` dokumentiert synthetische Treffer für `M`, `+`, `-`, `VOC` sowie den realen Plus-Kandidaten `AC0120_L.jpg` mit `match_rate=1.0`; vollständiges OCR bleibt damit optionaler Folgeentscheid statt Pflichtdependency.
 
 ### PF8 – Plan-B-Rotation mit Perception-Aufgaben verzahnen
 
