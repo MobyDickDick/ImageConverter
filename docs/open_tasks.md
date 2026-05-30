@@ -6,7 +6,7 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-05-30)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `383` · Erledigt `281` · Offen `102`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `383` · Erledigt `282` · Offen `101`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -75,7 +75,7 @@ detaillierte Backlog steht in `docs/perception_first_task_backlog_2026-05-30.md`
 
 - [x] **PF1 – Detection-Contract v1 für erkannte Primitive festlegen:** ein stabiles Format für Linien-, Kreis-/Ring- und Rechteckkandidaten definieren und reporten. (2026-05-30: Contract-Modul `tools/perception_detection_contract.py` ergänzt; Kandidatenschema `perception_primitive_candidate_v1` serialisiert `kind`, `bbox`, `center`, `geometry`, `color`, `confidence`, `roi`, `evidence` und `source`. Plan-B-Synthesereport für `line`, `circle` und `rectangle` unter `artifacts/evaluation/perception_detection_contract_v1/perception_detection_contract_v1_report.json`; Basistests in `tests/test_perception_detection_contract.py`.)
 - [x] **PF2 – Horizontalstrich-/Minus-Erkennung mit ROI-Hinweis implementieren:** Hinweise wie „oben mittig ist ein `-`-Zeichen“ in einen `HorizontalRule`- oder `TextGlyph("-")`-Seed übersetzen. (2026-05-30: `detect_horizontal_rules(...)` und `detect_minus_candidates(...)` ergänzen einen ROI-basierten `horizontal_rule`-/`HorizontalRule`-Kandidaten inklusive `text_equivalent="-"`; synthetischer Top-Center-Minus und reales `AC0120_L.jpg` werden im Report `artifacts/evaluation/perception_minus_roi_v1/perception_minus_roi_report_v1.json` erfolgreich gematcht; Basistests in `tests/test_perception_minus_roi.py`.)
-- [ ] **PF3 – Kreis-/Ring-Erkennung als Geometry-IR-Seed stabilisieren:** erkannte Kreise/Ringe mit `CircleBackground` und bestehenden Masken-/Hough-Heuristiken zusammenführen.
+- [x] **PF3 – Kreis-/Ring-Erkennung als Geometry-IR-Seed stabilisieren:** erkannte Kreise/Ringe mit `CircleBackground` und bestehenden Masken-/Hough-Heuristiken zusammenführen. (2026-05-30: `detect_circle_rings(...)` kombiniert Hough- und Foreground-Masken-Heuristiken, serialisiert `circle`-/`ring`-Kandidaten mit `geometry_ir_kind=CircleBackground` und merged den stärksten Treffer via `merge_circle_ring_candidates_into_geometry_ir(...)` in bestehende oder neue Geometry-IR-Kreise; Report mit synthetischem Kreis/Ring plus `AC0201_S.jpg`/`AC0800_S.jpg` unter `artifacts/evaluation/perception_circle_ring_seed_v1/perception_circle_ring_seed_report_v1.json`, Basistests in `tests/test_perception_circle_ring_seed.py`.)
 - [ ] **PF4 – Perception-Kandidaten vor dem generischen Non-Composite-Fallback nutzen:** Beschreibung + Bildanalyse als `perception_seeded_geometry_ir` vor dem Element-Fit ausführen.
 - [ ] **PF5 – Evaluationsharness für Perception-Seeds aufbauen:** Precision/Recall, Confidence und Renderfehler vor/nach Seed für mindestens drei Primitive ausweisen.
 - [ ] **PF6 – Perception-Telemetrie in bestehende Reports integrieren:** erkannte/abgelehnte Kandidaten, Seed-Auswahl und Fehlerdeltas pro Lauf als CSV/JSON protokollieren.
@@ -88,6 +88,13 @@ detaillierte Backlog steht in `docs/perception_first_task_backlog_2026-05-30.md`
 - **Gekoppelte Plan-B-Aufgabe:** Die im Backlog vorgesehene synthetische Minimalprobe wurde als Contract-Report mit den drei Fixtures `line`, `circle` und `rectangle` ausgeführt; alle drei erwarteten Kandidatentypen wurden gematcht.
 - **Blocker:** Keine für PF1; reale Bildkandidaten bleiben bewusst Folgeaufgabe für PF2/PF3/PF6, damit der Contract zuerst stabil bleibt.
 - **Nächster sinnvoller Schritt:** PF2 umsetzen: Horizontalstrich-/Minus-Erkennung mit ROI-Hinweis auf Basis des neuen Candidate-Contracts protokollieren.
+
+### Fortschritt vs. Blocker (Session 2026-05-30, PF3 Kreis-/Ring-Seed Run MQ)
+
+- **Fortschritt:** Die nächste dokumentierte Perception-First-Aufgabe **PF3** wurde umgesetzt: Kreis-/Ring-Kandidaten werden über Hough- und Foreground-Masken-Heuristiken stabilisiert, als Contract-Kandidaten serialisiert und in `CircleBackground`-Geometry-IR gemerged.
+- **Gekoppelte Plan-B-Aufgabe:** Der PF3-Report prüft synthetische `circle`-/`ring`-Fixtures sowie `AC0201_S.jpg` und `AC0800_S.jpg`; alle erwarteten Kandidatentypen werden gematcht und der stärkste Kandidat erzeugt einen `CircleBackground`-Seed.
+- **Blocker:** Keine für PF3; reale Kleinstbilder wie `AC0201_S.jpg`/`AC0800_S.jpg` liefern aktuell bewusst einen CircleBackground-Kreis-Seed statt eine robuste Ring-Innenradius-Schätzung.
+- **Nächster sinnvoller Schritt:** PF4 umsetzen: den neuen `perception_seeded_geometry_ir`-Pfad vor dem generischen Non-Composite-Fallback in die Laufzeit integrieren.
 
 ### Fortschritt vs. Blocker (Session 2026-05-30, PF2 Minus-ROI Run MP)
 

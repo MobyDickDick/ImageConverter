@@ -18,8 +18,14 @@ if importlib.util.find_spec("numpy") is None:
     if vendor_site_packages.exists() and str(vendor_site_packages) not in sys.path:
         sys.path.insert(0, str(vendor_site_packages))
 
-from tools.shape_detection import detect_horizontal_rules, detect_primitive_colors, detect_vertical_lines
+from tools.shape_detection import (
+    detect_circle_rings,
+    detect_horizontal_rules,
+    detect_primitive_colors,
+    detect_vertical_lines,
+)
 from tools.shape_detection_eval import make_synthetic_image
+from src.iCCModules import imageCompositeConverterGeometryIr as geometry_ir_helpers
 
 
 @dataclass(frozen=True)
@@ -78,7 +84,10 @@ def description_hint_to_roi(image, description: str | None) -> dict[str, Any]:
         y = height * 0.58
         h = height * 0.42
         hints.append("bottom")
-    if any(token in text for token in ["mittig", "mitte", "symmetrieachse", "center", "zentral"]):
+    if any(
+        token in text
+        for token in ["mittig", "mitte", "symmetrieachse", "center", "zentral"]
+    ):
         x = width * 0.2
         w = width * 0.6
         hints.append("center")
@@ -120,6 +129,172 @@ def _color_dict(color_detection) -> dict[str, Any]:
     }
 
 
+def _normalized_bbox_dict(
+    candidate: PerceptionPrimitiveCandidate, image
+) -> list[float]:
+    height, width = image.shape[:2]
+    bbox = candidate.bbox
+    return [
+        _round_number(float(bbox["x"]) / max(float(width), 1.0), 5),
+        _round_number(float(bbox["y"]) / max(float(height), 1.0), 5),
+        _round_number(float(bbox["width"]) / max(float(width), 1.0), 5),
+        _round_number(float(bbox["height"]) / max(float(height), 1.0), 5),
+    ]
+
+
+def make_circle_ring_candidate(
+    image,
+    detection,
+    *,
+    source: str = "circle_ring_detector",
+) -> PerceptionPrimitiveCandidate:
+    import cv2  # type: ignore
+    import numpy as np  # type: ignore
+
+    x, y, w, h = detection.bbox
+    fill_mask = np.zeros(image.shape[:2], dtype=np.uint8)
+    stroke_mask = np.zeros(image.shape[:2], dtype=np.uint8)
+    cv2.circle(
+        fill_mask,
+        (int(round(detection.cx)), int(round(detection.cy))),
+        int(round(detection.radius_px)),
+        255,
+        thickness=-1,
+    )
+    if detection.ring and detection.inner_radius_px > 0:
+        cv2.circle(
+            fill_mask,
+            (int(round(detection.cx)), int(round(detection.cy))),
+            int(round(detection.inner_radius_px)),
+            0,
+            thickness=-1,
+        )
+    cv2.circle(
+        stroke_mask,
+        (int(round(detection.cx)), int(round(detection.cy))),
+        int(round(detection.radius_px)),
+        255,
+        thickness=max(1, int(round(detection.stroke_width_px))),
+    )
+    color = _color_dict(
+        detect_primitive_colors(image, fill_mask=fill_mask, stroke_mask=stroke_mask)
+    )
+    kind = "ring" if detection.ring else "circle"
+    height, width = image.shape[:2]
+    normalized_bbox = [
+        _round_number(x / max(float(width), 1.0), 5),
+        _round_number(y / max(float(height), 1.0), 5),
+        _round_number(w / max(float(width), 1.0), 5),
+        _round_number(h / max(float(height), 1.0), 5),
+    ]
+    return PerceptionPrimitiveCandidate(
+        schema_version="perception_primitive_candidate_v1",
+        kind=kind,
+        bbox=_bbox_dict(x, y, w, h),
+        center=_center_dict(detection.cx, detection.cy),
+        geometry={
+            "radius_px": _round_number(detection.radius_px),
+            "inner_radius_px": _round_number(detection.inner_radius_px),
+            "stroke_width_px": _round_number(detection.stroke_width_px),
+            "circularity": _round_number(detection.circularity, 4),
+            "ring": bool(detection.ring),
+            "fill_ratio": _round_number(detection.fill_ratio, 4),
+            "geometry_ir_kind": "CircleBackground",
+            "geometry_ir_bbox": normalized_bbox,
+        },
+        color=color,
+        confidence=_round_number(detection.confidence, 4),
+        roi=_full_image_roi(image),
+        evidence={
+            "detector": "detect_circle_rings",
+            "detection_source": detection.detection_source,
+            "threshold_model": "hough_plus_foreground_mask",
+        },
+        source=source,
+    )
+
+
+def detect_circle_ring_candidates(
+    image,
+    *,
+    source: str = "circle_ring_detector",
+) -> list[PerceptionPrimitiveCandidate]:
+    """Return stabilized circle/ring candidates prepared for CircleBackground seeding."""
+    return [
+        make_circle_ring_candidate(image, detection, source=source)
+        for detection in detect_circle_rings(image)
+    ]
+
+
+def merge_circle_ring_candidates_into_geometry_ir(
+    image,
+    candidates: list[PerceptionPrimitiveCandidate],
+    geometry_ir: list[dict[str, object]] | None = None,
+) -> list[dict[str, object]]:
+    """Merge the strongest circle/ring perception candidate into a CircleBackground Geometry-IR element."""
+    merged = [dict(element) for element in (geometry_ir or [])]
+    circle_candidates = [
+        candidate for candidate in candidates if candidate.kind in {"circle", "ring"}
+    ]
+    if not circle_candidates:
+        return merged
+    best = sorted(circle_candidates, key=lambda item: item.confidence, reverse=True)[0]
+    bbox = best.geometry.get("geometry_ir_bbox")
+    if not isinstance(bbox, list) or len(bbox) != 4:
+        bbox = _normalized_bbox_dict(best, image)
+    color = best.color
+    seed = {
+        "kind": "CircleBackground",
+        "id": "perception_circle_background",
+        "bbox": bbox,
+        "fill": color.get("fill_hex") or ("none" if best.kind == "ring" else "#d8d8d8"),
+        "stroke": color.get("stroke_hex") or "#666666",
+        "stroke_width": _round_number(
+            max(
+                0.006,
+                float(best.geometry.get("stroke_width_px", 1.0))
+                / max(float(min(image.shape[:2])), 1.0),
+            ),
+            5,
+        ),
+        "perception_seed": {
+            "kind": best.kind,
+            "confidence": best.confidence,
+            "source": best.source,
+            "detector": best.evidence.get("detector"),
+            "detection_source": best.evidence.get("detection_source"),
+            "candidate_schema_version": best.schema_version,
+        },
+    }
+    for idx, element in enumerate(merged):
+        if element.get("kind") == "CircleBackground":
+            updated = dict(element)
+            updated.update(
+                {
+                    key: value
+                    for key, value in seed.items()
+                    if key not in {"id"} or not updated.get("id")
+                }
+            )
+            updated["perception_seed"] = seed["perception_seed"]
+            merged[idx] = updated
+            return merged
+    return [seed, *merged]
+
+
+def build_circle_seeded_geometry_ir(
+    image,
+    *,
+    description: str | None = None,
+    source: str = "circle_ring_detector",
+) -> list[dict[str, object]]:
+    """Build description Geometry-IR and pre-seed CircleBackground from detected circles/rings."""
+    base = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(description or "")
+    return merge_circle_ring_candidates_into_geometry_ir(
+        image, detect_circle_ring_candidates(image, source=source), base
+    )
+
+
 def make_horizontal_rule_candidate(
     image,
     detection,
@@ -145,7 +320,9 @@ def make_horizontal_rule_candidate(
         schema_version="perception_primitive_candidate_v1",
         kind="horizontal_rule",
         bbox=_bbox_dict(x, y, detection.length_px, detection.height_px),
-        center=_center_dict((detection.x_left + detection.x_right) / 2.0, detection.y_center),
+        center=_center_dict(
+            (detection.x_left + detection.x_right) / 2.0, detection.y_center
+        ),
         geometry={
             "orientation": "horizontal",
             "x_left": _round_number(detection.x_left),
@@ -169,7 +346,9 @@ def make_horizontal_rule_candidate(
     )
 
 
-def make_line_candidate(image, detection, *, source: str = "hough") -> PerceptionPrimitiveCandidate:
+def make_line_candidate(
+    image, detection, *, source: str = "hough"
+) -> PerceptionPrimitiveCandidate:
     x = detection.x_center - detection.width_px / 2.0
     y = detection.y_top
     height = detection.y_bottom - detection.y_top
@@ -197,7 +376,10 @@ def make_line_candidate(image, detection, *, source: str = "hough") -> Perceptio
         },
         confidence=_round_number(detection.confidence, 4),
         roi=_full_image_roi(image),
-        evidence={"detector": "detect_vertical_lines", "edge_model": "canny+hough_lines_p"},
+        evidence={
+            "detector": "detect_vertical_lines",
+            "edge_model": "canny+hough_lines_p",
+        },
         source=source,
     )
 
@@ -208,7 +390,9 @@ def _contour_candidates(image, *, source: str) -> list[PerceptionPrimitiveCandid
 
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY) if image.ndim == 3 else image
     _, threshold = cv2.threshold(gray, 220, 255, cv2.THRESH_BINARY_INV)
-    contours, _ = cv2.findContours(threshold, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    contours, _ = cv2.findContours(
+        threshold, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
+    )
     candidates: list[PerceptionPrimitiveCandidate] = []
 
     for contour in contours:
@@ -226,7 +410,9 @@ def _contour_candidates(image, *, source: str) -> list[PerceptionPrimitiveCandid
         cv2.drawContours(fill_mask, [contour], -1, 255, thickness=-1)
         stroke_mask = np.zeros(gray.shape, dtype=np.uint8)
         cv2.drawContours(stroke_mask, [contour], -1, 255, thickness=2)
-        color = _color_dict(detect_primitive_colors(image, fill_mask=fill_mask, stroke_mask=stroke_mask))
+        color = _color_dict(
+            detect_primitive_colors(image, fill_mask=fill_mask, stroke_mask=stroke_mask)
+        )
 
         if circularity > 0.82:
             (cx, cy), radius = cv2.minEnclosingCircle(contour)
@@ -245,7 +431,11 @@ def _contour_candidates(image, *, source: str) -> list[PerceptionPrimitiveCandid
                     color=color,
                     confidence=_round_number(min(0.99, max(0.0, circularity)), 4),
                     roi=_full_image_roi(image),
-                    evidence={"detector": "contour", "vertices": vertices, "area_px": _round_number(area)},
+                    evidence={
+                        "detector": "contour",
+                        "vertices": vertices,
+                        "area_px": _round_number(area),
+                    },
                     source=source,
                 )
             )
@@ -269,9 +459,15 @@ def _contour_candidates(image, *, source: str) -> list[PerceptionPrimitiveCandid
                         "extent": _round_number(extent, 4),
                     },
                     color=color,
-                    confidence=_round_number(min(0.98, 0.7 + max(0.0, extent) * 0.25), 4),
+                    confidence=_round_number(
+                        min(0.98, 0.7 + max(0.0, extent) * 0.25), 4
+                    ),
                     roi=_full_image_roi(image),
-                    evidence={"detector": "contour", "vertices": vertices, "convex": True},
+                    evidence={
+                        "detector": "contour",
+                        "vertices": vertices,
+                        "convex": True,
+                    },
                     source=source,
                 )
             )
@@ -288,7 +484,10 @@ def detect_minus_candidates(
     """Return horizontal-rule/minus candidates, constrained by description-derived ROI when available."""
     roi = description_hint_to_roi(image, description)
     detections = detect_horizontal_rules(image, roi_bbox=_roi_tuple(roi))
-    return [make_horizontal_rule_candidate(image, detection, roi=roi, source=source) for detection in detections]
+    return [
+        make_horizontal_rule_candidate(image, detection, roi=roi, source=source)
+        for detection in detections
+    ]
 
 
 def detect_perception_candidates(
@@ -298,9 +497,20 @@ def detect_perception_candidates(
     description: str | None = None,
 ) -> list[PerceptionPrimitiveCandidate]:
     """Return line/circle/rectangle/minus detections in the shared PF1/PF2 contract."""
-    candidates = [make_line_candidate(image, line, source="hough") for line in detect_vertical_lines(image)]
-    candidates.extend(detect_minus_candidates(image, description=description, source=source))
-    candidates.extend(_contour_candidates(image, source=source))
+    candidates = [
+        make_line_candidate(image, line, source="hough")
+        for line in detect_vertical_lines(image)
+    ]
+    candidates.extend(
+        detect_minus_candidates(image, description=description, source=source)
+    )
+    candidates.extend(detect_circle_ring_candidates(image, source=source))
+    contour_candidates = [
+        candidate
+        for candidate in _contour_candidates(image, source=source)
+        if candidate.kind != "circle"
+    ]
+    candidates.extend(contour_candidates)
     return sorted(candidates, key=lambda item: item.confidence, reverse=True)
 
 
@@ -336,7 +546,9 @@ def run_minus_roi_report(output_dir: Path) -> dict[str, Any]:
 
     rows = []
     for sample in samples:
-        candidates = detect_minus_candidates(sample["image"], description=sample["description"], source="pf2_minus_roi")
+        candidates = detect_minus_candidates(
+            sample["image"], description=sample["description"], source="pf2_minus_roi"
+        )
         rows.append(
             {
                 "sample_id": sample["sample_id"],
@@ -344,7 +556,10 @@ def run_minus_roi_report(output_dir: Path) -> dict[str, Any]:
                 "description": sample["description"],
                 "expected_kind": sample["expected_kind"],
                 "candidate_count": len(candidates),
-                "match": any(candidate.kind == sample["expected_kind"] for candidate in candidates),
+                "match": any(
+                    candidate.kind == sample["expected_kind"]
+                    for candidate in candidates
+                ),
                 "top_candidate": candidates[0].to_dict() if candidates else None,
             }
         )
@@ -357,7 +572,113 @@ def run_minus_roi_report(output_dir: Path) -> dict[str, Any]:
     }
     report_path = output_dir / "perception_minus_roi_report_v1.json"
     report_path.write_text(json.dumps(report, indent=2), encoding="utf-8")
-    return {"samples": len(rows), "all_matched": all(row["match"] for row in rows), "json_report": str(report_path)}
+    return {
+        "samples": len(rows),
+        "all_matched": all(row["match"] for row in rows),
+        "json_report": str(report_path),
+    }
+
+
+def run_circle_ring_seed_report(output_dir: Path) -> dict[str, Any]:
+    output_dir.mkdir(parents=True, exist_ok=True)
+    samples: list[dict[str, Any]] = [
+        {
+            "sample_id": "circle_synthetic",
+            "image": make_synthetic_image("circle", "synthetic"),
+            "description": "Kompressor nach rechts mit kreisförmigem Hintergrund",
+            "expected_kind": "circle",
+        },
+        {
+            "sample_id": "ring_synthetic",
+            "image": make_synthetic_image("ring", "synthetic"),
+            "description": "Plain-Ring Kreis Hintergrund",
+            "expected_kind": "ring",
+        },
+    ]
+    real_samples = [
+        (
+            "AC0201_S_real",
+            PROJECT_ROOT / "artifacts" / "images_to_convert" / "AC0201_S.jpg",
+            "AC0201 Kompressor-/Ventilkandidat mit Kreis",
+            "circle",
+        ),
+        (
+            "AC0800_S_real",
+            PROJECT_ROOT / "artifacts" / "images_to_convert" / "AC0800_S.jpg",
+            "AC0800 Plain-Ring Kreis",
+            "circle",
+        ),
+    ]
+    try:
+        import cv2  # type: ignore
+    except ModuleNotFoundError:
+        cv2 = None
+    if cv2 is not None:
+        for sample_id, real_path, description, expected_kind in real_samples:
+            real_image = cv2.imread(str(real_path))
+            if real_image is None:
+                continue
+            samples.append(
+                {
+                    "sample_id": sample_id,
+                    "image": real_image,
+                    "description": description,
+                    "expected_kind": expected_kind,
+                    "image_path": str(real_path.relative_to(PROJECT_ROOT)),
+                }
+            )
+
+    rows = []
+    for sample in samples:
+        candidates = detect_circle_ring_candidates(
+            sample["image"], source="pf3_circle_ring_seed"
+        )
+        seeded_ir = merge_circle_ring_candidates_into_geometry_ir(
+            sample["image"],
+            candidates,
+            geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
+                sample["description"]
+            ),
+        )
+        top_candidate = candidates[0] if candidates else None
+        rows.append(
+            {
+                "sample_id": sample["sample_id"],
+                "image_path": sample.get("image_path"),
+                "description": sample["description"],
+                "expected_kind": sample["expected_kind"],
+                "candidate_count": len(candidates),
+                "match": any(
+                    candidate.kind == sample["expected_kind"]
+                    for candidate in candidates
+                ),
+                "top_candidate": top_candidate.to_dict() if top_candidate else None,
+                "geometry_ir_kinds": [element.get("kind") for element in seeded_ir],
+                "circle_background": next(
+                    (
+                        element
+                        for element in seeded_ir
+                        if element.get("kind") == "CircleBackground"
+                    ),
+                    None,
+                ),
+            }
+        )
+
+    report = {
+        "schema_version": "perception_circle_ring_seed_report_v1",
+        "candidate_schema_version": "perception_primitive_candidate_v1",
+        "samples": rows,
+        "accepted_kinds": ["circle", "ring"],
+        "geometry_ir_seed_kind": "CircleBackground",
+    }
+    report_path = output_dir / "perception_circle_ring_seed_report_v1.json"
+    report_path.write_text(json.dumps(report, indent=2), encoding="utf-8")
+    return {
+        "samples": len(rows),
+        "all_matched": all(row["match"] for row in rows),
+        "json_report": str(report_path),
+    }
 
 
 def run_contract_report(output_dir: Path) -> dict[str, Any]:
@@ -374,7 +695,11 @@ def run_contract_report(output_dir: Path) -> dict[str, Any]:
                 "expected_kind": sample,
                 "candidate_count": len(candidates),
                 "match": bool(matching),
-                "top_candidate": (matching[0] if matching else candidates[0]).to_dict() if candidates else None,
+                "top_candidate": (
+                    (matching[0] if matching else candidates[0]).to_dict()
+                    if candidates
+                    else None
+                ),
             }
         )
 
@@ -386,16 +711,28 @@ def run_contract_report(output_dir: Path) -> dict[str, Any]:
     }
     report_path = output_dir / "perception_detection_contract_v1_report.json"
     report_path.write_text(json.dumps(report, indent=2), encoding="utf-8")
-    return {"samples": len(rows), "all_matched": all(row["match"] for row in rows), "json_report": str(report_path)}
+    return {
+        "samples": len(rows),
+        "all_matched": all(row["match"] for row in rows),
+        "json_report": str(report_path),
+    }
 
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--output-dir", default="artifacts/evaluation/perception_detection_contract_v1")
-    parser.add_argument("--report", choices=["contract", "minus-roi"], default="contract")
+    parser.add_argument(
+        "--output-dir", default="artifacts/evaluation/perception_detection_contract_v1"
+    )
+    parser.add_argument(
+        "--report",
+        choices=["contract", "minus-roi", "circle-ring-seed"],
+        default="contract",
+    )
     args = parser.parse_args()
     if args.report == "minus-roi":
         summary = run_minus_roi_report(Path(args.output_dir))
+    elif args.report == "circle-ring-seed":
+        summary = run_circle_ring_seed_report(Path(args.output_dir))
     else:
         summary = run_contract_report(Path(args.output_dir))
     print(json.dumps(summary, indent=2))
