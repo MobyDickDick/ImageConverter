@@ -2,10 +2,10 @@
 
 Ziel: maximal **5** aktive JPG-Kandidaten, die derzeit noch nicht zufriedenstellend konvertieren, aber voraussichtlich nicht "hoffnungslos komplex" sind.
 
-## Aktuelle Kandidaten (Stand: 2026-05-27, nach AC0130_L-Plan-B)
+## Aktuelle Kandidaten (Stand: 2026-05-29, nach AC0150_L-Plan-B)
 
-1. `AC0150_L.jpg` – nächster einfacher L-Kandidat mit vorhandenen Referenzartefakten als Plan-B-Option.
-2. `AC0160_L.jpg` – ergänzender einfacher L-Kandidat aus den Diff-Artefakten für die nächste Rotation.
+1. `AC0160_L.jpg` – ergänzender einfacher L-Kandidat aus den Diff-Artefakten für die nächste Rotation.
+2. `AC0201_2.jpg` – nächster einfacher Kompressor-Kandidat aus den Diff-Artefakten für die Rotation.
 
 ## Pflege-Regel (fortan)
 

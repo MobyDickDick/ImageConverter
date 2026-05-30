@@ -51,3 +51,36 @@ def test_render_geometry_ir_to_svg_contains_centralized_primitives() -> None:
     assert 'id="plus_glyph"' in svg
     assert 'id="minus_glyph"' in svg
     assert svg.endswith("</svg>")
+
+
+def test_build_geometry_ir_maps_ac0150_vertical_heat_exchanger_description() -> None:
+    description = (
+        "Graues Rechteck hochkant, graue Umrandung, drei graue horizontale Linien, "
+        "Farbverlauf dunkel-hell-dunkel, Graue Linien Oben-Mitte nach Rechts-Mitte nach Unten-Mitte"
+    )
+
+    ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(description)
+
+    assert [element["kind"] for element in ir] == [
+        "HorizontalGradient",
+        "RectBorder",
+        "HorizontalRuleSet",
+        "OrthogonalPolyline",
+    ]
+    assert ir[0]["bbox"] == [0.32, 0.12, 0.36, 0.76]
+    assert ir[2]["positions"] == [0.30, 0.50, 0.70]
+
+
+def test_render_geometry_ir_to_svg_contains_ac0150_rule_and_polyline_primitives() -> None:
+    ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
+        "Graues Rechteck hochkant, graue Umrandung, drei graue horizontale Linien, "
+        "Farbverlauf dunkel-hell-dunkel, Graue Linien Oben-Mitte nach Rechts-Mitte nach Unten-Mitte"
+    )
+
+    svg = geometry_ir_helpers.renderGeometryIrToSvgImpl(120, 200, ir)
+
+    assert 'id="horizontal_rule_set_1"' in svg
+    assert 'id="horizontal_rule_set_2"' in svg
+    assert 'id="horizontal_rule_set_3"' in svg
+    assert 'id="right_side_orthogonal_line"' in svg
+    assert 'L' in svg
