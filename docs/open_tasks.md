@@ -6,7 +6,7 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-05-30)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `383` · Erledigt `280` · Offen `103`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `383` · Erledigt `281` · Offen `102`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -74,7 +74,7 @@ künftig aus einfachen Bild-/Beschreibungshinweisen vorinitialisiert. Das
 detaillierte Backlog steht in `docs/perception_first_task_backlog_2026-05-30.md`.
 
 - [x] **PF1 – Detection-Contract v1 für erkannte Primitive festlegen:** ein stabiles Format für Linien-, Kreis-/Ring- und Rechteckkandidaten definieren und reporten. (2026-05-30: Contract-Modul `tools/perception_detection_contract.py` ergänzt; Kandidatenschema `perception_primitive_candidate_v1` serialisiert `kind`, `bbox`, `center`, `geometry`, `color`, `confidence`, `roi`, `evidence` und `source`. Plan-B-Synthesereport für `line`, `circle` und `rectangle` unter `artifacts/evaluation/perception_detection_contract_v1/perception_detection_contract_v1_report.json`; Basistests in `tests/test_perception_detection_contract.py`.)
-- [ ] **PF2 – Horizontalstrich-/Minus-Erkennung mit ROI-Hinweis implementieren:** Hinweise wie „oben mittig ist ein `-`-Zeichen“ in einen `HorizontalRule`- oder `TextGlyph("-")`-Seed übersetzen.
+- [x] **PF2 – Horizontalstrich-/Minus-Erkennung mit ROI-Hinweis implementieren:** Hinweise wie „oben mittig ist ein `-`-Zeichen“ in einen `HorizontalRule`- oder `TextGlyph("-")`-Seed übersetzen. (2026-05-30: `detect_horizontal_rules(...)` und `detect_minus_candidates(...)` ergänzen einen ROI-basierten `horizontal_rule`-/`HorizontalRule`-Kandidaten inklusive `text_equivalent="-"`; synthetischer Top-Center-Minus und reales `AC0120_L.jpg` werden im Report `artifacts/evaluation/perception_minus_roi_v1/perception_minus_roi_report_v1.json` erfolgreich gematcht; Basistests in `tests/test_perception_minus_roi.py`.)
 - [ ] **PF3 – Kreis-/Ring-Erkennung als Geometry-IR-Seed stabilisieren:** erkannte Kreise/Ringe mit `CircleBackground` und bestehenden Masken-/Hough-Heuristiken zusammenführen.
 - [ ] **PF4 – Perception-Kandidaten vor dem generischen Non-Composite-Fallback nutzen:** Beschreibung + Bildanalyse als `perception_seeded_geometry_ir` vor dem Element-Fit ausführen.
 - [ ] **PF5 – Evaluationsharness für Perception-Seeds aufbauen:** Precision/Recall, Confidence und Renderfehler vor/nach Seed für mindestens drei Primitive ausweisen.
@@ -88,6 +88,13 @@ detaillierte Backlog steht in `docs/perception_first_task_backlog_2026-05-30.md`
 - **Gekoppelte Plan-B-Aufgabe:** Die im Backlog vorgesehene synthetische Minimalprobe wurde als Contract-Report mit den drei Fixtures `line`, `circle` und `rectangle` ausgeführt; alle drei erwarteten Kandidatentypen wurden gematcht.
 - **Blocker:** Keine für PF1; reale Bildkandidaten bleiben bewusst Folgeaufgabe für PF2/PF3/PF6, damit der Contract zuerst stabil bleibt.
 - **Nächster sinnvoller Schritt:** PF2 umsetzen: Horizontalstrich-/Minus-Erkennung mit ROI-Hinweis auf Basis des neuen Candidate-Contracts protokollieren.
+
+### Fortschritt vs. Blocker (Session 2026-05-30, PF2 Minus-ROI Run MP)
+
+- **Fortschritt:** Die nächste dokumentierte Perception-First-Aufgabe **PF2** wurde umgesetzt: Beschreibungen mit `oben`/`mittig`/`Symmetrieachse` leiten nun eine Top-Center-ROI ab, in der horizontale Minus-/Rule-Konturen erkannt und als `horizontal_rule`-Kandidaten mit `geometry_ir_kind=HorizontalRule` serialisiert werden.
+- **Gekoppelte Plan-B-Aufgabe:** Der PF2-Report prüft eine synthetische Top-Center-Minus-Szene und das reale Bild `AC0120_L.jpg`; beide erzeugen einen passenden `horizontal_rule`-Kandidaten.
+- **Blocker:** Keine für PF2; die Kandidaten werden noch nicht im Runtime-Fallback genutzt, weil das laut Backlog PF4 vorbehalten bleibt.
+- **Nächster sinnvoller Schritt:** PF6 früh einziehen: erkannte/abgelehnte Perception-Kandidaten als Telemetrie-Report protokollieren, bevor PF3/PF4 in den Runtime-Pfad wandern.
 
 ## How to use this list
 

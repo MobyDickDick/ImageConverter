@@ -18,7 +18,7 @@ if importlib.util.find_spec("numpy") is None:
     if vendor_site_packages.exists() and str(vendor_site_packages) not in sys.path:
         sys.path.insert(0, str(vendor_site_packages))
 
-from tools.shape_detection import detect_primitive_colors, detect_vertical_lines
+from tools.shape_detection import detect_horizontal_rules, detect_primitive_colors, detect_vertical_lines
 from tools.shape_detection_eval import make_synthetic_image
 
 
@@ -46,7 +46,12 @@ def _round_number(value: float, digits: int = 3) -> float:
 
 
 def _bbox_dict(x: float, y: float, width: float, height: float) -> dict[str, float]:
-    return {"x": _round_number(x), "y": _round_number(y), "width": _round_number(width), "height": _round_number(height)}
+    return {
+        "x": _round_number(x),
+        "y": _round_number(y),
+        "width": _round_number(width),
+        "height": _round_number(height),
+    }
 
 
 def _center_dict(x: float, y: float) -> dict[str, float]:
@@ -58,6 +63,52 @@ def _full_image_roi(image, *, hint: str = "full_image") -> dict[str, Any]:
     return {"type": "image", "hint": hint, "bbox": _bbox_dict(0, 0, width, height)}
 
 
+def description_hint_to_roi(image, description: str | None) -> dict[str, Any]:
+    """Derive a small ROI from German/English position hints in the description."""
+    height, width = image.shape[:2]
+    text = (description or "").casefold()
+    x, y, w, h = 0.0, 0.0, float(width), float(height)
+    hints: list[str] = []
+
+    if any(token in text for token in ["oben", "top", "upper"]):
+        y = 0.0
+        h = height * 0.42
+        hints.append("top")
+    if any(token in text for token in ["unten", "bottom", "lower"]):
+        y = height * 0.58
+        h = height * 0.42
+        hints.append("bottom")
+    if any(token in text for token in ["mittig", "mitte", "symmetrieachse", "center", "zentral"]):
+        x = width * 0.2
+        w = width * 0.6
+        hints.append("center")
+    elif "links" in text or "left" in text:
+        x = 0.0
+        w = width * 0.55
+        hints.append("left")
+    elif "rechts" in text or "right" in text:
+        x = width * 0.45
+        w = width * 0.55
+        hints.append("right")
+
+    return {
+        "type": "description_hint",
+        "hint": "+".join(hints) or "full_image",
+        "bbox": _bbox_dict(x, y, w, h),
+        "description": description or "",
+    }
+
+
+def _roi_tuple(roi: dict[str, Any]) -> tuple[int, int, int, int]:
+    bbox = roi["bbox"]
+    return (
+        int(round(bbox["x"])),
+        int(round(bbox["y"])),
+        int(round(bbox["width"])),
+        int(round(bbox["height"])),
+    )
+
+
 def _color_dict(color_detection) -> dict[str, Any]:
     return {
         "fill_rgb": color_detection.fill_rgb,
@@ -67,6 +118,55 @@ def _color_dict(color_detection) -> dict[str, Any]:
         "fill_confidence": color_detection.fill_confidence,
         "stroke_confidence": color_detection.stroke_confidence,
     }
+
+
+def make_horizontal_rule_candidate(
+    image,
+    detection,
+    *,
+    roi: dict[str, Any] | None = None,
+    source: str = "horizontal_rule_detector",
+) -> PerceptionPrimitiveCandidate:
+    import cv2  # type: ignore
+    import numpy as np  # type: ignore
+
+    x = detection.x_left
+    y = detection.y_center - detection.height_px / 2.0
+    mask = np.zeros(image.shape[:2], dtype=np.uint8)
+    cv2.rectangle(
+        mask,
+        (int(round(detection.x_left)), int(round(y))),
+        (int(round(detection.x_right)), int(round(y + detection.height_px))),
+        255,
+        thickness=-1,
+    )
+    color = _color_dict(detect_primitive_colors(image, stroke_mask=mask))
+    return PerceptionPrimitiveCandidate(
+        schema_version="perception_primitive_candidate_v1",
+        kind="horizontal_rule",
+        bbox=_bbox_dict(x, y, detection.length_px, detection.height_px),
+        center=_center_dict((detection.x_left + detection.x_right) / 2.0, detection.y_center),
+        geometry={
+            "orientation": "horizontal",
+            "x_left": _round_number(detection.x_left),
+            "x_right": _round_number(detection.x_right),
+            "y_center": _round_number(detection.y_center),
+            "length_px": _round_number(detection.length_px),
+            "stroke_width_px": _round_number(detection.height_px),
+            "angle_deg": _round_number(detection.angle_deg),
+            "text_equivalent": "-",
+            "geometry_ir_kind": "HorizontalRule",
+        },
+        color=color,
+        confidence=_round_number(detection.confidence, 4),
+        roi=roi or _full_image_roi(image),
+        evidence={
+            "detector": "detect_horizontal_rules",
+            "threshold_model": "dark_contour_horizontal_opening",
+            "description_hint": (roi or {}).get("hint"),
+        },
+        source=source,
+    )
 
 
 def make_line_candidate(image, detection, *, source: str = "hough") -> PerceptionPrimitiveCandidate:
@@ -179,11 +279,85 @@ def _contour_candidates(image, *, source: str) -> list[PerceptionPrimitiveCandid
     return sorted(candidates, key=lambda item: item.confidence, reverse=True)
 
 
-def detect_perception_candidates(image, *, source: str = "perception_contract") -> list[PerceptionPrimitiveCandidate]:
-    """Return line/circle/rectangle detections in the shared PF1 contract."""
+def detect_minus_candidates(
+    image,
+    *,
+    description: str | None = None,
+    source: str = "description_roi_minus",
+) -> list[PerceptionPrimitiveCandidate]:
+    """Return horizontal-rule/minus candidates, constrained by description-derived ROI when available."""
+    roi = description_hint_to_roi(image, description)
+    detections = detect_horizontal_rules(image, roi_bbox=_roi_tuple(roi))
+    return [make_horizontal_rule_candidate(image, detection, roi=roi, source=source) for detection in detections]
+
+
+def detect_perception_candidates(
+    image,
+    *,
+    source: str = "perception_contract",
+    description: str | None = None,
+) -> list[PerceptionPrimitiveCandidate]:
+    """Return line/circle/rectangle/minus detections in the shared PF1/PF2 contract."""
     candidates = [make_line_candidate(image, line, source="hough") for line in detect_vertical_lines(image)]
+    candidates.extend(detect_minus_candidates(image, description=description, source=source))
     candidates.extend(_contour_candidates(image, source=source))
     return sorted(candidates, key=lambda item: item.confidence, reverse=True)
+
+
+def run_minus_roi_report(output_dir: Path) -> dict[str, Any]:
+    output_dir.mkdir(parents=True, exist_ok=True)
+    synthetic_description = 'oben mittig ist ein "-"-Zeichen'
+    real_description = 'Wie AC0120-Bildbeschreibung; oben auf der vertikalen Symmetrieachse werden ein "+"- und ein "-"-Zeichen eingefügt.'
+    samples: list[dict[str, Any]] = [
+        {
+            "sample_id": "minus_top_center_synthetic",
+            "image": make_synthetic_image("minus", "synthetic"),
+            "description": synthetic_description,
+            "expected_kind": "horizontal_rule",
+        },
+    ]
+    real_path = PROJECT_ROOT / "artifacts" / "images_to_convert" / "AC0120_L.jpg"
+    try:
+        import cv2  # type: ignore
+
+        real_image = cv2.imread(str(real_path))
+    except ModuleNotFoundError:
+        real_image = None
+    if real_image is not None:
+        samples.append(
+            {
+                "sample_id": "AC0120_L_real",
+                "image": real_image,
+                "description": real_description,
+                "expected_kind": "horizontal_rule",
+                "image_path": str(real_path.relative_to(PROJECT_ROOT)),
+            }
+        )
+
+    rows = []
+    for sample in samples:
+        candidates = detect_minus_candidates(sample["image"], description=sample["description"], source="pf2_minus_roi")
+        rows.append(
+            {
+                "sample_id": sample["sample_id"],
+                "image_path": sample.get("image_path"),
+                "description": sample["description"],
+                "expected_kind": sample["expected_kind"],
+                "candidate_count": len(candidates),
+                "match": any(candidate.kind == sample["expected_kind"] for candidate in candidates),
+                "top_candidate": candidates[0].to_dict() if candidates else None,
+            }
+        )
+
+    report = {
+        "schema_version": "perception_minus_roi_report_v1",
+        "candidate_schema_version": "perception_primitive_candidate_v1",
+        "samples": rows,
+        "accepted_kinds": ["horizontal_rule"],
+    }
+    report_path = output_dir / "perception_minus_roi_report_v1.json"
+    report_path.write_text(json.dumps(report, indent=2), encoding="utf-8")
+    return {"samples": len(rows), "all_matched": all(row["match"] for row in rows), "json_report": str(report_path)}
 
 
 def run_contract_report(output_dir: Path) -> dict[str, Any]:
@@ -218,8 +392,12 @@ def run_contract_report(output_dir: Path) -> dict[str, Any]:
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--output-dir", default="artifacts/evaluation/perception_detection_contract_v1")
+    parser.add_argument("--report", choices=["contract", "minus-roi"], default="contract")
     args = parser.parse_args()
-    summary = run_contract_report(Path(args.output_dir))
+    if args.report == "minus-roi":
+        summary = run_minus_roi_report(Path(args.output_dir))
+    else:
+        summary = run_contract_report(Path(args.output_dir))
     print(json.dumps(summary, indent=2))
     return 0
 

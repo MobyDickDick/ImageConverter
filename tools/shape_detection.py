@@ -16,6 +16,17 @@ class VerticalLineDetection:
 
 
 @dataclass(frozen=True)
+class HorizontalRuleDetection:
+    x_left: float
+    x_right: float
+    y_center: float
+    length_px: float
+    height_px: float
+    angle_deg: float
+    confidence: float
+
+
+@dataclass(frozen=True)
 class PrimitiveColorDetection:
     fill_rgb: tuple[int, int, int] | None
     stroke_rgb: tuple[int, int, int] | None
@@ -71,7 +82,103 @@ def detect_vertical_lines(
     return sorted(detections, key=lambda d: (d.confidence, d.length_px), reverse=True)
 
 
-def detection_to_dict(d: VerticalLineDetection) -> dict[str, Any]:
+def detect_horizontal_rules(
+    image,
+    *,
+    roi_bbox: tuple[int, int, int, int] | None = None,
+    threshold_value: int = 215,
+    min_length_px: int | None = None,
+    min_aspect_ratio: float = 2.0,
+) -> list[HorizontalRuleDetection]:
+    """Detect short horizontal rule/minus glyph candidates, optionally inside an ROI."""
+    try:
+        import cv2  # type: ignore
+        import numpy as np  # type: ignore
+    except ModuleNotFoundError as exc:
+        raise RuntimeError("detect_horizontal_rules requires numpy and opencv-python") from exc
+
+    if image.ndim == 3:
+        gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    else:
+        gray = image
+
+    height, width = gray.shape[:2]
+    if roi_bbox is None:
+        x0, y0, rw, rh = 0, 0, width, height
+    else:
+        x, y, w, h = roi_bbox
+        x0 = max(0, min(width - 1, int(round(x))))
+        y0 = max(0, min(height - 1, int(round(y))))
+        x1 = max(x0 + 1, min(width, int(round(x + w))))
+        y1 = max(y0 + 1, min(height, int(round(y + h))))
+        rw, rh = x1 - x0, y1 - y0
+
+    roi = gray[y0 : y0 + rh, x0 : x0 + rw]
+    if roi.size == 0:
+        return []
+
+    threshold = cv2.threshold(roi, threshold_value, 255, cv2.THRESH_BINARY_INV)[1]
+    kernel_width = max(3, min(rw, int(round(rw * 0.12))))
+    kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (kernel_width, 1))
+    opened = cv2.morphologyEx(threshold, cv2.MORPH_OPEN, kernel)
+    contours, _ = cv2.findContours(opened, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
+    minimum_length = float(min_length_px if min_length_px is not None else max(4, round(width * 0.08)))
+    detections: list[HorizontalRuleDetection] = []
+    for contour in contours:
+        x, y, w, h = cv2.boundingRect(contour)
+        if w < minimum_length or h <= 0:
+            continue
+        aspect = w / max(float(h), 1.0)
+        if aspect < min_aspect_ratio:
+            continue
+        fill_ratio = float(np.count_nonzero(opened[y : y + h, x : x + w]) / max(w * h, 1))
+        rect = cv2.minAreaRect(contour)
+        (_, _), (_, _), raw_angle = rect
+        angle = float(raw_angle)
+        if angle < -45.0:
+            angle += 90.0
+        angle_deviation = abs(angle)
+        if angle_deviation > 15.0:
+            continue
+        confidence = min(
+            0.99,
+            max(
+                0.0,
+                0.45
+                + min(0.35, (aspect - min_aspect_ratio) * 0.08)
+                + min(0.15, fill_ratio * 0.15)
+                + max(0.0, 0.04 - angle_deviation / 400.0),
+            ),
+        )
+        detections.append(
+            HorizontalRuleDetection(
+                x_left=float(x0 + x),
+                x_right=float(x0 + x + w),
+                y_center=float(y0 + y + h / 2.0),
+                length_px=float(w),
+                height_px=float(h),
+                angle_deg=angle,
+                confidence=confidence,
+            )
+        )
+
+    return sorted(detections, key=lambda d: (d.confidence, d.length_px), reverse=True)
+
+
+def detection_to_dict(d: VerticalLineDetection | HorizontalRuleDetection) -> dict[str, Any]:
+    if isinstance(d, HorizontalRuleDetection):
+        return {
+            "primitive": "horizontal_rule",
+            "orientation": "horizontal",
+            "x_left": round(d.x_left, 2),
+            "x_right": round(d.x_right, 2),
+            "y_center": round(d.y_center, 2),
+            "length_px": round(d.length_px, 2),
+            "stroke_width_px": round(d.height_px, 2),
+            "angle_deg": round(d.angle_deg, 2),
+            "confidence": round(d.confidence, 4),
+        }
     return {
         "primitive": "line",
         "orientation": "vertical",
