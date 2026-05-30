@@ -112,3 +112,15 @@ def test_description_parser_attaches_geometry_ir_for_ac0212_vertical_two_way_val
 
     assert params["contract_status"] == "ok"
     assert [element["kind"] for element in params["geometry_ir"]] == ["VerticalTwoWayValveMotorGlyph"]
+
+
+def test_description_parser_attaches_geometry_ir_for_ac0213_left_rotated_two_way_valve_motor() -> None:
+    _desc, params = _parse(
+        'Wie AC0212: 2-Weg Ventil vertikal: Kelle mit Kreis rechts, horizontale Verbindungslinie, '
+        '"M" als Text (M = Motor), zwei spitze Dreiecke, welche sich in der Mitte berühren, '
+        'graue Umrandung, Dreiecke besitzen emeinsamen Farübergang von dunkelgrau rechts oben nach hellgrau links unten. '
+        'Geometrische Variante: 90° nach links gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.'
+    )
+
+    assert params["contract_status"] == "ok"
+    assert [element["kind"] for element in params["geometry_ir"]] == ["LeftRotatedTwoWayValveMotorGlyph"]
