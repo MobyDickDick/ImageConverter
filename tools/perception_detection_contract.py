@@ -851,6 +851,313 @@ def write_perception_telemetry_report(
     }
 
 
+def _perception_seed_family(kind: str) -> str:
+    if kind in {"horizontal_rule", "line"}:
+        return "minus_line"
+    if kind in {"circle", "ring"}:
+        return "circle_ring"
+    if kind == "rectangle":
+        return "rectangle"
+    return kind
+
+
+def _confidence_summary(values: list[float]) -> dict[str, float | int | None]:
+    if not values:
+        return {"count": 0, "min": None, "max": None, "mean": None}
+    rounded = [_round_number(value, 4) for value in values]
+    return {
+        "count": len(rounded),
+        "min": min(rounded),
+        "max": max(rounded),
+        "mean": _round_number(sum(rounded) / len(rounded), 4),
+    }
+
+
+def _safe_divide(numerator: int, denominator: int) -> float:
+    if denominator <= 0:
+        return 0.0
+    return _round_number(numerator / denominator, 4)
+
+
+def build_perception_seed_evaluation_record(
+    image,
+    *,
+    sample_id: str,
+    expected_family: str,
+    expected_candidate_kinds: set[str],
+    expected_seed_kinds: set[str],
+    description: str | None = None,
+    image_path: str | None = None,
+    sample_type: str = "synthetic",
+) -> dict[str, Any]:
+    """Evaluate one PF5 sample from detection through Geometry-IR seed quality."""
+    telemetry = build_perception_telemetry_record(
+        image,
+        sample_id=sample_id,
+        image_path=image_path,
+        description=description,
+        source="pf5_perception_seed_evaluation",
+    )
+    candidates = telemetry["candidates"]
+    predicted_kinds = [str(row["candidate"]["kind"]) for row in candidates]
+    matching_candidates = [
+        row
+        for row in candidates
+        if str(row["candidate"]["kind"]) in expected_candidate_kinds
+    ]
+    top_candidate_kind = predicted_kinds[0] if predicted_kinds else None
+    top_candidate_family = (
+        _perception_seed_family(top_candidate_kind) if top_candidate_kind else None
+    )
+    selected_seed_kinds = {
+        str(seed.get("kind")) for seed in telemetry["selected_geometry_ir_seeds"]
+    }
+    detection_match = bool(matching_candidates)
+    top_match = top_candidate_family == expected_family
+    seed_match = bool(selected_seed_kinds & expected_seed_kinds)
+    quality_delta = telemetry["error_delta_before_minus_after"]
+    quality_improved = quality_delta is not None and float(quality_delta) > 0
+
+    return {
+        "sample_id": sample_id,
+        "sample_type": sample_type,
+        "image_path": image_path,
+        "description": description or "",
+        "expected_family": expected_family,
+        "expected_candidate_kinds": sorted(expected_candidate_kinds),
+        "expected_seed_kinds": sorted(expected_seed_kinds),
+        "candidate_count": telemetry["candidate_count"],
+        "predicted_candidate_kinds": predicted_kinds,
+        "top_candidate_kind": top_candidate_kind,
+        "top_candidate_family": top_candidate_family,
+        "detection_match": detection_match,
+        "top_candidate_match": top_match,
+        "seed_match": seed_match,
+        "matching_confidences": [
+            row["candidate"]["confidence"] for row in matching_candidates
+        ],
+        "selected_geometry_ir_seed_kinds": sorted(selected_seed_kinds),
+        "error_before_seed": telemetry["error_before_seed"],
+        "error_after_seed": telemetry["error_after_seed"],
+        "error_delta_before_minus_after": quality_delta,
+        "quality_improved": quality_improved,
+        "runtime_status": telemetry["runtime_status"],
+    }
+
+
+def summarize_perception_seed_evaluation(
+    records: list[dict[str, Any]],
+) -> dict[str, Any]:
+    """Summarize PF5 records as precision/recall, confidence and quality metrics."""
+    families = sorted({str(record["expected_family"]) for record in records})
+    by_family: dict[str, dict[str, Any]] = {}
+    for family in families:
+        family_records = [
+            record for record in records if record["expected_family"] == family
+        ]
+        tp = sum(1 for record in family_records if record["top_candidate_match"])
+        fn = sum(1 for record in family_records if not record["detection_match"])
+        fp = sum(
+            1
+            for record in records
+            if record.get("top_candidate_family") == family
+            and record["expected_family"] != family
+        )
+        detection_tp = sum(1 for record in family_records if record["detection_match"])
+        seed_tp = sum(1 for record in family_records if record["seed_match"])
+        confidences = [
+            float(confidence)
+            for record in family_records
+            for confidence in record["matching_confidences"]
+        ]
+        quality_deltas = [
+            float(record["error_delta_before_minus_after"])
+            for record in family_records
+            if record["error_delta_before_minus_after"] is not None
+        ]
+        by_family[family] = {
+            "samples": len(family_records),
+            "true_positive_top_candidate": tp,
+            "false_positive_top_candidate": fp,
+            "false_negative_detection": fn,
+            "top_candidate_precision": _safe_divide(tp, tp + fp),
+            "detection_recall": _safe_divide(detection_tp, len(family_records)),
+            "seed_recall": _safe_divide(seed_tp, len(family_records)),
+            "confidence": _confidence_summary(confidences),
+            "quality_delta_mean": (
+                _round_number(sum(quality_deltas) / len(quality_deltas), 6)
+                if quality_deltas
+                else None
+            ),
+            "quality_improved_samples": sum(
+                1 for record in family_records if record["quality_improved"]
+            ),
+        }
+
+    total_tp = sum(
+        int(metrics["true_positive_top_candidate"]) for metrics in by_family.values()
+    )
+    total_fp = sum(
+        int(metrics["false_positive_top_candidate"]) for metrics in by_family.values()
+    )
+    detection_matches = sum(1 for record in records if record["detection_match"])
+    seed_matches = sum(1 for record in records if record["seed_match"])
+    return {
+        "samples": len(records),
+        "families": families,
+        "by_family": by_family,
+        "overall": {
+            "top_candidate_precision": _safe_divide(total_tp, total_tp + total_fp),
+            "detection_recall": _safe_divide(detection_matches, len(records)),
+            "seed_recall": _safe_divide(seed_matches, len(records)),
+            "all_detection_matched": detection_matches == len(records),
+            "all_seed_matched": seed_matches == len(records),
+            "quality_improved_samples": sum(
+                1 for record in records if record["quality_improved"]
+            ),
+        },
+    }
+
+
+def write_perception_seed_evaluation_report(
+    records: list[dict[str, Any]], output_dir: Path
+) -> dict[str, Any]:
+    output_dir.mkdir(parents=True, exist_ok=True)
+    metrics = summarize_perception_seed_evaluation(records)
+    report = {
+        "schema_version": "perception_seed_evaluation_report_v1",
+        "candidate_schema_version": "perception_primitive_candidate_v1",
+        "records": records,
+        "metrics": metrics,
+        "open_real_image_cases": [
+            {
+                "family": "rectangle",
+                "reason": "no stable real rectangle candidate is documented for PF5 yet",
+            }
+        ],
+    }
+    json_path = output_dir / "perception_seed_evaluation_report_v1.json"
+    csv_path = output_dir / "perception_seed_evaluation_samples_v1.csv"
+    json_path.write_text(json.dumps(report, indent=2), encoding="utf-8")
+    with csv_path.open("w", newline="", encoding="utf-8") as fh:
+        writer = csv.DictWriter(
+            fh,
+            fieldnames=[
+                "sample_id",
+                "sample_type",
+                "expected_family",
+                "top_candidate_family",
+                "detection_match",
+                "seed_match",
+                "error_before_seed",
+                "error_after_seed",
+                "error_delta_before_minus_after",
+                "quality_improved",
+            ],
+            lineterminator="\n",
+        )
+        writer.writeheader()
+        for record in records:
+            writer.writerow(
+                {
+                    "sample_id": record["sample_id"],
+                    "sample_type": record["sample_type"],
+                    "expected_family": record["expected_family"],
+                    "top_candidate_family": record["top_candidate_family"],
+                    "detection_match": record["detection_match"],
+                    "seed_match": record["seed_match"],
+                    "error_before_seed": record["error_before_seed"],
+                    "error_after_seed": record["error_after_seed"],
+                    "error_delta_before_minus_after": record[
+                        "error_delta_before_minus_after"
+                    ],
+                    "quality_improved": record["quality_improved"],
+                }
+            )
+    return {
+        "samples": metrics["samples"],
+        "families": metrics["families"],
+        "overall_top_candidate_precision": metrics["overall"][
+            "top_candidate_precision"
+        ],
+        "overall_detection_recall": metrics["overall"]["detection_recall"],
+        "overall_seed_recall": metrics["overall"]["seed_recall"],
+        "json_report": str(json_path),
+        "csv_report": str(csv_path),
+    }
+
+
+def run_perception_seed_evaluation_report(output_dir: Path) -> dict[str, Any]:
+    """Build PF5 evaluation metrics for minus/line, circle/ring and rectangle seeds."""
+    samples: list[dict[str, Any]] = [
+        {
+            "sample_id": "minus_line_synthetic",
+            "image": make_synthetic_image("minus", "synthetic"),
+            "description": "oben mittig befindet sich eine Markierung",
+            "expected_family": "minus_line",
+            "expected_candidate_kinds": {"horizontal_rule"},
+            "expected_seed_kinds": {"HorizontalRule", "MinusGlyph"},
+            "sample_type": "synthetic",
+        },
+        {
+            "sample_id": "circle_ring_synthetic",
+            "image": make_synthetic_image("circle", "synthetic"),
+            "description": "Kompressor grau nach rechts",
+            "expected_family": "circle_ring",
+            "expected_candidate_kinds": {"circle", "ring"},
+            "expected_seed_kinds": {"CircleBackground"},
+            "sample_type": "synthetic",
+        },
+        {
+            "sample_id": "rectangle_synthetic",
+            "image": make_synthetic_image("rectangle", "synthetic"),
+            "description": "",
+            "expected_family": "rectangle",
+            "expected_candidate_kinds": {"rectangle"},
+            "expected_seed_kinds": {"RectBorder", "HalfDoubleRectBorder"},
+            "sample_type": "synthetic",
+        },
+    ]
+
+    real_path = PROJECT_ROOT / "artifacts" / "images_to_convert" / "AC0120_L.jpg"
+    cv2_spec = importlib.util.find_spec("cv2")
+    if cv2_spec is not None and real_path.exists():
+        import cv2  # type: ignore
+
+        real_image = cv2.imread(str(real_path))
+        if real_image is not None:
+            samples.append(
+                {
+                    "sample_id": "AC0120_L_minus_line_real",
+                    "image": real_image,
+                    "image_path": str(real_path.relative_to(PROJECT_ROOT)),
+                    "description": (
+                        'oben auf der vertikalen Symmetrieachse werden ein "+"- '
+                        'und ein "-"-Zeichen eingefügt'
+                    ),
+                    "expected_family": "minus_line",
+                    "expected_candidate_kinds": {"horizontal_rule"},
+                    "expected_seed_kinds": {"HorizontalRule", "MinusGlyph"},
+                    "sample_type": "real",
+                }
+            )
+
+    records = [
+        build_perception_seed_evaluation_record(
+            sample["image"],
+            sample_id=sample["sample_id"],
+            image_path=sample.get("image_path"),
+            description=sample.get("description"),
+            expected_family=sample["expected_family"],
+            expected_candidate_kinds=set(sample["expected_candidate_kinds"]),
+            expected_seed_kinds=set(sample["expected_seed_kinds"]),
+            sample_type=sample.get("sample_type", "synthetic"),
+        )
+        for sample in samples
+    ]
+    return write_perception_seed_evaluation_report(records, output_dir)
+
+
 def run_perception_telemetry_report(output_dir: Path) -> dict[str, Any]:
     """Write PF6 JSON/CSV telemetry for a Plan-B-style single candidate run."""
     real_path = PROJECT_ROOT / "artifacts" / "images_to_convert" / "AC0120_L.jpg"
@@ -1150,7 +1457,14 @@ def main() -> int:
     )
     parser.add_argument(
         "--report",
-        choices=["contract", "minus-roi", "circle-ring-seed", "perception-seeded-ir", "perception-telemetry"],
+        choices=[
+            "contract",
+            "minus-roi",
+            "circle-ring-seed",
+            "perception-seeded-ir",
+            "perception-telemetry",
+            "perception-seed-eval",
+        ],
         default="contract",
     )
     args = parser.parse_args()
@@ -1162,6 +1476,8 @@ def main() -> int:
         summary = run_perception_seeded_geometry_ir_report(Path(args.output_dir))
     elif args.report == "perception-telemetry":
         summary = run_perception_telemetry_report(Path(args.output_dir))
+    elif args.report == "perception-seed-eval":
+        summary = run_perception_seed_evaluation_report(Path(args.output_dir))
     else:
         summary = run_contract_report(Path(args.output_dir))
     print(json.dumps(summary, indent=2))
