@@ -135,3 +135,23 @@ def test_render_geometry_ir_to_svg_contains_ac0201_compressor_primitives() -> No
     assert 'id="upward_compressor_right_line"' in svg
     assert "#45aa5e" in svg
 
+
+def test_build_geometry_ir_maps_ac0202_rightward_compressor_description() -> None:
+    ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl("Kompressor grau nach rechts")
+
+    assert [element["kind"] for element in ir] == ["CircleBackground", "RightwardCompressorGlyph"]
+    assert ir[0]["id"] == "compressor_circle"
+    assert ir[1]["id"] == "rightward_compressor"
+    assert ir[1]["circle_ref"] == "compressor_circle"
+
+
+def test_render_geometry_ir_to_svg_contains_ac0202_compressor_primitives() -> None:
+    ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl("Kompressor grau nach rechts")
+
+    svg = geometry_ir_helpers.renderGeometryIrToSvgImpl(50, 50, ir)
+
+    assert 'id="compressor_circle"' in svg
+    assert 'id="rightward_compressor_upper_line"' in svg
+    assert 'id="rightward_compressor_lower_line"' in svg
+    assert "#f4f4f4" in svg
+

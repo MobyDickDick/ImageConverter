@@ -769,3 +769,40 @@ def test_run_non_composite_iteration_impl_uses_description_geometry_ir_for_ac020
     assert "compressor_circle" in artifacts[0][0]
     assert "upward_compressor_right_line" in artifacts[0][0]
 
+
+def test_run_non_composite_iteration_impl_uses_description_geometry_ir_for_ac0202_compressor() -> None:
+    logs: list[list[str]] = []
+    artifacts: list[tuple[str, object]] = []
+    description = "Kompressor grau nach rechts"
+
+    result = non_composite_runtime_helpers.runNonCompositeIterationImpl(
+        mode="non_composite",
+        params={"mode": "non_composite"},
+        stripe_strategy=None,
+        semantic_mode_visual_override=False,
+        width=50,
+        height=50,
+        base_name="AC0202_2",
+        description=description,
+        perc_img="target",
+        img_path="/tmp/no-sample/AC0202_2.jpg",
+        print_fn=lambda *_args, **_kwargs: None,
+        render_embedded_raster_svg_fn=lambda _path: "<svg embedded/>",
+        build_gradient_stripe_svg_fn=lambda *_args, **_kwargs: "<svg gradient/>",
+        build_gradient_stripe_validation_log_lines_fn=lambda **_kwargs: ["status=non_composite_gradient_stripe"],
+        write_validation_log_fn=logs.append,
+        render_svg_to_numpy_fn=(
+            lambda content, *_args, **_kwargs: (
+                "geometry_rendered" if "rightward_compressor_upper_line" in content else None
+            )
+        ),
+        record_render_failure_fn=lambda *args, **kwargs: None,
+        write_attempt_artifacts_fn=lambda svg, rendered: artifacts.append((svg, rendered)),
+        calculate_error_fn=lambda _target, rendered: 0.12 if rendered == "geometry_rendered" else 99.0,
+    )
+
+    assert result == ("AC0202_2", description, {"mode": "non_composite"}, 1, 0.12)
+    assert logs[-1][:2] == ["status=non_composite_description_geometry_ir", "geometry_ir_element_count=2"]
+    assert "compressor_circle" in artifacts[0][0]
+    assert "rightward_compressor_lower_line" in artifacts[0][0]
+
