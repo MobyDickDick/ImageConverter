@@ -33,6 +33,9 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
     differential_pressure_hint = _has_any(desc, ("differenzdruckmessung", "dp")) and "doppelten grauen rand" in desc
     compressor_hint = _has_any(desc, ("kompressor", "kopressor"))
     upward_compressor_hint = compressor_hint and _has_any(desc, ("nach oben", "oben", "aufwärts", "aufwaerts"))
+    grey_background_compressor_hint = upward_compressor_hint and _has_any(
+        desc, ("grauer hintergrund", "grauem hintergrund", "grau hintergrund")
+    )
     rightward_compressor_hint = compressor_hint and _has_any(desc, ("nach rechts", "rechts"))
     main_diagonal_mirrored_compressor_hint = rightward_compressor_hint and _has_any(
         desc, ("hauptdiagonal gespiegelt", "diagonal gespiegelt", "gespiegelt")
@@ -156,13 +159,15 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
         return elements
 
     if upward_compressor_hint:
+        circle_fill = "#d8d8d8" if grey_background_compressor_hint else "#45aa5e"
+        glyph_stroke = "#666666" if grey_background_compressor_hint else "#d7d7d7"
         elements.extend(
             [
                 {
                     "kind": "CircleBackground",
                     "id": "compressor_circle",
                     "bbox": [0.06, 0.06, 0.88, 0.88],
-                    "fill": "#45aa5e",
+                    "fill": circle_fill,
                     "stroke": "#8d8d8d",
                     "stroke_width": 0.020,
                 },
@@ -172,7 +177,7 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
                     "circle_ref": "compressor_circle",
                     "left_line": [[0.28, 0.78], [0.42, 0.16]],
                     "right_line": [[0.72, 0.78], [0.58, 0.16]],
-                    "stroke": "#d7d7d7",
+                    "stroke": glyph_stroke,
                     "stroke_width": 0.040,
                 },
             ]

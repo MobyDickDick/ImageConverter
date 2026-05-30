@@ -102,6 +102,18 @@ def test_description_parser_attaches_geometry_ir_for_ac0211_typo_upward_compress
     ]
 
 
+def test_description_parser_attaches_geometry_ir_for_ac0222_grey_background_upward_compressor() -> None:
+    _desc, params = _parse("Kompressor grauer Hintergrund nach oben.")
+
+    assert params["contract_status"] == "ok"
+    assert [element["kind"] for element in params["geometry_ir"]] == [
+        "CircleBackground",
+        "UpwardCompressorGlyph",
+    ]
+    assert params["geometry_ir"][0]["fill"] == "#d8d8d8"
+    assert params["geometry_ir"][1]["stroke"] == "#666666"
+
+
 def test_description_parser_attaches_geometry_ir_for_ac0221_top_kelle_three_way_valve() -> None:
     _desc, params = _parse(
         'Wie AC0231, jedoch ohne "M" in der Kelle oben. '
