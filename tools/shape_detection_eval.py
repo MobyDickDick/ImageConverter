@@ -20,6 +20,8 @@ def make_synthetic_image(primitive: str, variant: str):
     img = np.full((256, 256, 3), 255, dtype=np.uint8)
     if primitive == "line":
         cv2.line(img, (128, 30), (128, 226), (0, 0, 0), 8)
+    elif primitive == "minus":
+        cv2.line(img, (98, 48), (158, 48), (0, 0, 0), 8)
     elif primitive == "triangle":
         pts = np.array([[128, 30], [40, 220], [216, 220]], dtype=np.int32)
         cv2.fillPoly(img, [pts], (0, 0, 0))
