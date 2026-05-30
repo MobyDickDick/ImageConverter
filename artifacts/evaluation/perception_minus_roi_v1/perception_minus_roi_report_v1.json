@@ -1,0 +1,135 @@
+{
+  "schema_version": "perception_minus_roi_report_v1",
+  "candidate_schema_version": "perception_primitive_candidate_v1",
+  "samples": [
+    {
+      "sample_id": "minus_top_center_synthetic",
+      "image_path": null,
+      "description": "oben mittig ist ein \"-\"-Zeichen",
+      "expected_kind": "horizontal_rule",
+      "candidate_count": 1,
+      "match": true,
+      "top_candidate": {
+        "schema_version": "perception_primitive_candidate_v1",
+        "kind": "horizontal_rule",
+        "bbox": {
+          "x": 95.0,
+          "y": 44.0,
+          "width": 69.0,
+          "height": 9.0
+        },
+        "center": {
+          "x": 129.5,
+          "y": 48.5
+        },
+        "geometry": {
+          "orientation": "horizontal",
+          "x_left": 95.0,
+          "x_right": 164.0,
+          "y_center": 48.5,
+          "length_px": 69.0,
+          "stroke_width_px": 9.0,
+          "angle_deg": 0.0,
+          "text_equivalent": "-",
+          "geometry_ir_kind": "HorizontalRule"
+        },
+        "color": {
+          "fill_rgb": null,
+          "stroke_rgb": [
+            41,
+            41,
+            41
+          ],
+          "fill_hex": null,
+          "stroke_hex": "#292929",
+          "fill_confidence": 0.0,
+          "stroke_confidence": 0.2697
+        },
+        "confidence": 0.9823,
+        "roi": {
+          "type": "description_hint",
+          "hint": "top+center",
+          "bbox": {
+            "x": 51.2,
+            "y": 0.0,
+            "width": 153.6,
+            "height": 107.52
+          },
+          "description": "oben mittig ist ein \"-\"-Zeichen"
+        },
+        "evidence": {
+          "detector": "detect_horizontal_rules",
+          "threshold_model": "dark_contour_horizontal_opening",
+          "description_hint": "top+center"
+        },
+        "source": "pf2_minus_roi"
+      }
+    },
+    {
+      "sample_id": "AC0120_L_real",
+      "image_path": "artifacts/images_to_convert/AC0120_L.jpg",
+      "description": "Wie AC0120-Bildbeschreibung; oben auf der vertikalen Symmetrieachse werden ein \"+\"- und ein \"-\"-Zeichen eingef\u00fcgt.",
+      "expected_kind": "horizontal_rule",
+      "candidate_count": 1,
+      "match": true,
+      "top_candidate": {
+        "schema_version": "perception_primitive_candidate_v1",
+        "kind": "horizontal_rule",
+        "bbox": {
+          "x": 15.0,
+          "y": 17.0,
+          "width": 10.0,
+          "height": 3.0
+        },
+        "center": {
+          "x": 20.0,
+          "y": 18.5
+        },
+        "geometry": {
+          "orientation": "horizontal",
+          "x_left": 15.0,
+          "x_right": 25.0,
+          "y_center": 18.5,
+          "length_px": 10.0,
+          "stroke_width_px": 3.0,
+          "angle_deg": 0.0,
+          "text_equivalent": "-",
+          "geometry_ir_kind": "HorizontalRule"
+        },
+        "color": {
+          "fill_rgb": null,
+          "stroke_rgb": [
+            163,
+            163,
+            163
+          ],
+          "fill_hex": null,
+          "stroke_hex": "#A3A3A3",
+          "fill_confidence": 0.0,
+          "stroke_confidence": 0.5816
+        },
+        "confidence": 0.7467,
+        "roi": {
+          "type": "description_hint",
+          "hint": "top+center",
+          "bbox": {
+            "x": 8.0,
+            "y": 0.0,
+            "width": 24.0,
+            "height": 33.6
+          },
+          "description": "Wie AC0120-Bildbeschreibung; oben auf der vertikalen Symmetrieachse werden ein \"+\"- und ein \"-\"-Zeichen eingef\u00fcgt."
+        },
+        "evidence": {
+          "detector": "detect_horizontal_rules",
+          "threshold_model": "dark_contour_horizontal_opening",
+          "description_hint": "top+center"
+        },
+        "source": "pf2_minus_roi"
+      }
+    }
+  ],
+  "accepted_kinds": [
+    "horizontal_rule"
+  ]
+}

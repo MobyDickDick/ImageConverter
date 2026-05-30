@@ -33,19 +33,141 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
     differential_pressure_hint = _has_any(desc, ("differenzdruckmessung", "dp")) and "doppelten grauen rand" in desc
     compressor_hint = _has_any(desc, ("kompressor", "kopressor"))
     upward_compressor_hint = compressor_hint and _has_any(desc, ("nach oben", "oben", "aufwärts", "aufwaerts"))
+    grey_background_compressor_hint = upward_compressor_hint and _has_any(
+        desc, ("grauer hintergrund", "grauem hintergrund", "grau hintergrund")
+    )
     rightward_compressor_hint = compressor_hint and _has_any(desc, ("nach rechts", "rechts"))
     main_diagonal_mirrored_compressor_hint = rightward_compressor_hint and _has_any(
         desc, ("hauptdiagonal gespiegelt", "diagonal gespiegelt", "gespiegelt")
     )
+    two_way_vertical_valve_hint = _has_any(desc, ("2-weg ventil", "2 weg ventil")) and _has_any(
+        desc, ("kelle mit kreis", "horizontale verbindungslinie", "zwei spitze dreiecke")
+    )
+    left_rotated_two_way_valve_hint = two_way_vertical_valve_hint and _has_any(
+        desc, ("90° nach links", "90° links", "90 grad nach links", "nach links gedreht")
+    )
+    rotated_180_two_way_valve_hint = two_way_vertical_valve_hint and _has_any(
+        desc, ("180° gedreht", "180 grad gedreht", "um 180°", "um 180 grad")
+    )
+    top_kelle_three_way_valve_hint = _has_any(desc, ("ac0231", "3-weg ventil", "3 wege ventil", "3. spitzes dreieck")) and _has_any(
+        desc, ("ohne \"m\"", "ohne 'm'", "ohne m", "kein \"m\"", "kein m")
+    ) and _has_any(desc, ("kelle oben", "kreis oben", "kelle mit kreis", "symmetrieachse des kreises"))
+
+    if top_kelle_three_way_valve_hint:
+        elements.append(
+            {
+                "kind": "TopKelleThreeWayValveGlyph",
+                "id": "top_kelle_three_way_valve",
+                "body_paths": [
+                    [[0.500, 0.610], [0.020, 0.455], [0.020, 0.765]],
+                    [[0.500, 0.610], [0.980, 0.455], [0.980, 0.765]],
+                    [[0.500, 0.610], [0.333, 0.960], [0.667, 0.960]],
+                ],
+                "circle": [0.500, 0.235, 0.225],
+                "connector": [[0.500, 0.450], [0.500, 0.610]],
+                "label": "",
+                "body_fill": "url(#vertical-two-way-valve-body-gradient)",
+                "circle_fill": "url(#vertical-two-way-valve-circle-gradient)",
+                "stroke": "#969696",
+                "connector_stroke": "#8f8f8f",
+                "text_fill": "#666666",
+                "stroke_width": 0.040,
+                "connector_width": 0.075,
+            }
+        )
+        return elements
+
+    if two_way_vertical_valve_hint:
+        if rotated_180_two_way_valve_hint:
+            elements.append(
+                {
+                    "kind": "Rotated180TwoWayValveMotorGlyph",
+                    "id": "rotated_180_two_way_valve_motor",
+                    "body_path": [
+                        [0.975, 0.980],
+                        [0.616, 0.980],
+                        [0.793, 0.491],
+                        [0.616, 0.020],
+                        [0.975, 0.020],
+                        [0.793, 0.491],
+                    ],
+                    "circle": [0.279, 0.499, 0.263],
+                    "connector": [[0.787, 0.499], [0.540, 0.499]],
+                    "label": "M",
+                    "label_center": [0.279, 0.593],
+                    "body_fill": "url(#vertical-two-way-valve-body-gradient)",
+                    "circle_fill": "url(#vertical-two-way-valve-circle-gradient)",
+                    "stroke": "#969696",
+                    "connector_stroke": "#8f8f8f",
+                    "text_fill": "#666666",
+                    "stroke_width": 0.040,
+                    "connector_width": 0.060,
+                    "font_size": 0.540,
+                    "font_weight": "700",
+                }
+            )
+            return elements
+        if left_rotated_two_way_valve_hint:
+            elements.append(
+                {
+                    "kind": "LeftRotatedTwoWayValveMotorGlyph",
+                    "id": "left_rotated_two_way_valve_motor",
+                    "body_path": [
+                        [0.980, 0.025],
+                        [0.980, 0.384],
+                        [0.491, 0.207],
+                        [0.020, 0.384],
+                        [0.020, 0.025],
+                        [0.491, 0.207],
+                    ],
+                    "circle": [0.499, 0.721, 0.263],
+                    "connector": [[0.499, 0.213], [0.499, 0.460]],
+                    "label": "M",
+                    "label_center": [0.499, 0.815],
+                    "body_fill": "url(#vertical-two-way-valve-body-gradient)",
+                    "circle_fill": "url(#vertical-two-way-valve-circle-gradient)",
+                    "stroke": "#969696",
+                    "connector_stroke": "#8f8f8f",
+                    "text_fill": "#666666",
+                    "stroke_width": 0.040,
+                    "connector_width": 0.060,
+                    "font_size": 0.415,
+                    "font_weight": "700",
+                }
+            )
+            return elements
+        elements.append(
+            {
+                "kind": "VerticalTwoWayValveMotorGlyph",
+                "id": "vertical_two_way_valve_motor",
+                "body_path": [[0.025, 0.020], [0.384, 0.020], [0.207, 0.509], [0.384, 0.980], [0.025, 0.980], [0.207, 0.509]],
+                "circle": [0.721, 0.501, 0.263],
+                "connector": [[0.213, 0.501], [0.460, 0.501]],
+                "label": "M",
+                "label_center": [0.721, 0.595],
+                "body_fill": "url(#vertical-two-way-valve-body-gradient)",
+                "circle_fill": "url(#vertical-two-way-valve-circle-gradient)",
+                "stroke": "#969696",
+                "connector_stroke": "#8f8f8f",
+                "text_fill": "#666666",
+                "stroke_width": 0.040,
+                "connector_width": 0.060,
+                "font_size": 0.540,
+                "font_weight": "700",
+            }
+        )
+        return elements
 
     if upward_compressor_hint:
+        circle_fill = "#d8d8d8" if grey_background_compressor_hint else "#45aa5e"
+        glyph_stroke = "#666666" if grey_background_compressor_hint else "#d7d7d7"
         elements.extend(
             [
                 {
                     "kind": "CircleBackground",
                     "id": "compressor_circle",
                     "bbox": [0.06, 0.06, 0.88, 0.88],
-                    "fill": "#45aa5e",
+                    "fill": circle_fill,
                     "stroke": "#8d8d8d",
                     "stroke_width": 0.020,
                 },
@@ -55,7 +177,7 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
                     "circle_ref": "compressor_circle",
                     "left_line": [[0.28, 0.78], [0.42, 0.16]],
                     "right_line": [[0.72, 0.78], [0.58, 0.16]],
-                    "stroke": "#d7d7d7",
+                    "stroke": glyph_stroke,
                     "stroke_width": 0.040,
                 },
             ]
@@ -302,19 +424,88 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
     svg: list[str] = []
     rect_x, rect_y, rect_w, rect_h = _find_rect(geometry_ir, w, h)
     needs_gradient = any(element.get("kind") == "HorizontalGradient" for element in geometry_ir)
-    if needs_gradient:
+    valve_gradient_kinds = {
+        "VerticalTwoWayValveMotorGlyph",
+        "LeftRotatedTwoWayValveMotorGlyph",
+        "Rotated180TwoWayValveMotorGlyph",
+        "TopKelleThreeWayValveGlyph",
+    }
+    needs_vertical_valve_defs = any(element.get("kind") in valve_gradient_kinds for element in geometry_ir)
+    if needs_gradient or needs_vertical_valve_defs:
         svg.append("  <defs>")
-        svg.append('    <linearGradient id="geometry-ir-horizontal-gradient" x1="0%" y1="0%" x2="100%" y2="0%">')
-        svg.append('      <stop offset="0%" stop-color="#8f8f8f"/>')
-        svg.append('      <stop offset="50%" stop-color="#dedede"/>')
-        svg.append('      <stop offset="100%" stop-color="#8f8f8f"/>')
-        svg.append("    </linearGradient>")
+        if needs_gradient:
+            svg.append('    <linearGradient id="geometry-ir-horizontal-gradient" x1="0%" y1="0%" x2="100%" y2="0%">')
+            svg.append('      <stop offset="0%" stop-color="#8f8f8f"/>')
+            svg.append('      <stop offset="50%" stop-color="#dedede"/>')
+            svg.append('      <stop offset="100%" stop-color="#8f8f8f"/>')
+            svg.append("    </linearGradient>")
+        if needs_vertical_valve_defs:
+            svg.append('    <linearGradient id="vertical-two-way-valve-body-gradient" x1="0%" y1="0%" x2="100%" y2="100%">')
+            svg.append('      <stop offset="0%" stop-color="#a8a8a8"/>')
+            svg.append('      <stop offset="100%" stop-color="#fbfbfb"/>')
+            svg.append("    </linearGradient>")
+            svg.append('    <linearGradient id="vertical-two-way-valve-circle-gradient" x1="0%" y1="0%" x2="100%" y2="100%">')
+            svg.append('      <stop offset="0%" stop-color="#ffffff"/>')
+            svg.append('      <stop offset="100%" stop-color="#f7f7f7"/>')
+            svg.append("    </linearGradient>")
         svg.append("  </defs>")
 
     for element in geometry_ir:
         kind = str(element.get("kind", ""))
         element_id = html.escape(str(element.get("id", kind)))
-        if kind == "CircleBackground":
+        if kind in valve_gradient_kinds:
+            stroke = html.escape(str(element.get("stroke", "#969696")))
+            connector_stroke = html.escape(str(element.get("connector_stroke", "#8f8f8f")))
+            text_fill = html.escape(str(element.get("text_fill", "#666666")))
+            body_fill = html.escape(str(element.get("body_fill", "url(#vertical-two-way-valve-body-gradient)")))
+            circle_fill = html.escape(str(element.get("circle_fill", "url(#vertical-two-way-valve-circle-gradient)")))
+            sw = float(element.get("stroke_width", 0.040)) * min(w, h)
+            connector_sw = float(element.get("connector_width", 0.060)) * min(w, h)
+            raw_connector = element.get("connector", [[0.213, 0.501], [0.460, 0.501]])
+            if isinstance(raw_connector, list) and len(raw_connector) == 2:
+                points = []
+                for raw_point in raw_connector:
+                    if isinstance(raw_point, list) and len(raw_point) == 2:
+                        points.append((float(raw_point[0]) * w, float(raw_point[1]) * h))
+                if len(points) == 2:
+                    (x0, y0), (x1, y1) = points
+                    svg.append(
+                        f'  <path id="{element_id}_connector" d="M {_fmt(x0)} {_fmt(y0)} L {_fmt(x1)} {_fmt(y1)}" '
+                        f'stroke="{connector_stroke}" stroke-width="{_fmt(connector_sw)}" fill="none" stroke-linecap="butt"/>'
+                    )
+            raw_body_paths = element.get("body_paths")
+            body_path_groups = raw_body_paths if isinstance(raw_body_paths, list) else [element.get("body_path", [])]
+            for body_idx, raw_body in enumerate(body_path_groups, start=1):
+                body_points: list[str] = []
+                if isinstance(raw_body, list):
+                    for raw_point in raw_body:
+                        if isinstance(raw_point, list) and len(raw_point) == 2:
+                            body_points.append(f"{_fmt(float(raw_point[0]) * w)} {_fmt(float(raw_point[1]) * h)}")
+                if body_points:
+                    body_id = f"{element_id}_body" if len(body_path_groups) == 1 else f"{element_id}_body_{body_idx}"
+                    svg.append(
+                        f'  <path id="{body_id}" d="M {" L ".join(body_points)} Z" '
+                        f'fill="{body_fill}" stroke="{stroke}" stroke-width="{_fmt(sw)}" stroke-linejoin="miter"/>'
+                    )
+            raw_circle = element.get("circle", [0.721, 0.501, 0.263])
+            if isinstance(raw_circle, list) and len(raw_circle) == 3:
+                cx, cy, radius = [float(value) for value in raw_circle]
+                svg.append(
+                    f'  <circle id="{element_id}_circle" cx="{_fmt(cx * w)}" cy="{_fmt(cy * h)}" '
+                    f'r="{_fmt(radius * min(w, h))}" fill="{circle_fill}" stroke="{stroke}" stroke-width="{_fmt(sw)}"/>'
+                )
+            label = html.escape(str(element.get("label", "M")))
+            raw_label_center = element.get("label_center", [0.721, 0.595])
+            if label and isinstance(raw_label_center, list) and len(raw_label_center) == 2:
+                font_size = float(element.get("font_size", 0.540)) * min(w, h)
+                font_weight = html.escape(str(element.get("font_weight", "700")))
+                svg.append(
+                    f'  <text id="{element_id}_label" x="{_fmt(float(raw_label_center[0]) * w)}" '
+                    f'y="{_fmt(float(raw_label_center[1]) * h)}" fill="{text_fill}" '
+                    f'font-family="Arial, Helvetica, sans-serif" font-size="{_fmt(font_size)}" font-weight="{font_weight}" '
+                    f'text-anchor="middle" dominant-baseline="middle">{label}</text>'
+                )
+        elif kind == "CircleBackground":
             x, y, bw, bh = _scaled_bbox(element, w, h)
             fill = html.escape(str(element.get("fill", "#45aa5e")))
             stroke = html.escape(str(element.get("stroke", "#8d8d8d")))

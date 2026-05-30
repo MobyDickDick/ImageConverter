@@ -4,9 +4,9 @@ This checklist only tracks work that is actionable for the ImageConverter in the
 current repository snapshot. Older unrelated language/compiler/runtime tasks were removed so the list stays
 focused on the actual project scope.
 
-## Aufgaben-Gesamtzähler (Snapshot 2026-05-28)
+## Aufgaben-Gesamtzähler (Snapshot 2026-05-30)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `374` · Erledigt `280` · Offen `94`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `383` · Erledigt `282` · Offen `101`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -66,13 +66,50 @@ Zielbild: Nicht-binäre Vektorisierung über echte SVG-Primitive mit semantische
   - Deliverable: katalogisierte Failure-Modes + empfohlene Zusatzbedingungen.
   - Akzeptanz: Jeder dokumentierte Fehlschlag ist einem bekannten Failure-Mode zugeordnet.
 
+
+## Perception-First-Track: Bildhinweise vor der ersten Iteration nutzen (neu 2026-05-30)
+
+Ziel: Die beschreibungsgetriebene Geometry-IR bleibt Zielrepräsentation, wird aber
+künftig aus einfachen Bild-/Beschreibungshinweisen vorinitialisiert. Das
+detaillierte Backlog steht in `docs/perception_first_task_backlog_2026-05-30.md`.
+
+- [x] **PF1 – Detection-Contract v1 für erkannte Primitive festlegen:** ein stabiles Format für Linien-, Kreis-/Ring- und Rechteckkandidaten definieren und reporten. (2026-05-30: Contract-Modul `tools/perception_detection_contract.py` ergänzt; Kandidatenschema `perception_primitive_candidate_v1` serialisiert `kind`, `bbox`, `center`, `geometry`, `color`, `confidence`, `roi`, `evidence` und `source`. Plan-B-Synthesereport für `line`, `circle` und `rectangle` unter `artifacts/evaluation/perception_detection_contract_v1/perception_detection_contract_v1_report.json`; Basistests in `tests/test_perception_detection_contract.py`.)
+- [x] **PF2 – Horizontalstrich-/Minus-Erkennung mit ROI-Hinweis implementieren:** Hinweise wie „oben mittig ist ein `-`-Zeichen“ in einen `HorizontalRule`- oder `TextGlyph("-")`-Seed übersetzen. (2026-05-30: `detect_horizontal_rules(...)` und `detect_minus_candidates(...)` ergänzen einen ROI-basierten `horizontal_rule`-/`HorizontalRule`-Kandidaten inklusive `text_equivalent="-"`; synthetischer Top-Center-Minus und reales `AC0120_L.jpg` werden im Report `artifacts/evaluation/perception_minus_roi_v1/perception_minus_roi_report_v1.json` erfolgreich gematcht; Basistests in `tests/test_perception_minus_roi.py`.)
+- [x] **PF3 – Kreis-/Ring-Erkennung als Geometry-IR-Seed stabilisieren:** erkannte Kreise/Ringe mit `CircleBackground` und bestehenden Masken-/Hough-Heuristiken zusammenführen. (2026-05-30: `detect_circle_rings(...)` kombiniert Hough- und Foreground-Masken-Heuristiken, serialisiert `circle`-/`ring`-Kandidaten mit `geometry_ir_kind=CircleBackground` und merged den stärksten Treffer via `merge_circle_ring_candidates_into_geometry_ir(...)` in bestehende oder neue Geometry-IR-Kreise; Report mit synthetischem Kreis/Ring plus `AC0201_S.jpg`/`AC0800_S.jpg` unter `artifacts/evaluation/perception_circle_ring_seed_v1/perception_circle_ring_seed_report_v1.json`, Basistests in `tests/test_perception_circle_ring_seed.py`.)
+- [ ] **PF4 – Perception-Kandidaten vor dem generischen Non-Composite-Fallback nutzen:** Beschreibung + Bildanalyse als `perception_seeded_geometry_ir` vor dem Element-Fit ausführen.
+- [ ] **PF5 – Evaluationsharness für Perception-Seeds aufbauen:** Precision/Recall, Confidence und Renderfehler vor/nach Seed für mindestens drei Primitive ausweisen.
+- [ ] **PF6 – Perception-Telemetrie in bestehende Reports integrieren:** erkannte/abgelehnte Kandidaten, Seed-Auswahl und Fehlerdeltas pro Lauf als CSV/JSON protokollieren.
+- [ ] **PF7 – Einfache Text-/Glyph-Erkennung für `M`, `+`, `-` und kurze Labels prüfen:** Template-Matching/OCR-Nutzen ohne neue Pflichtdependency evaluieren.
+- [ ] **PF8 – Plan-B-Rotation mit Perception-Aufgaben verzahnen:** jedes kommende Plan-B-Paket erhält einen Abschnitt „Perception-Lerneffekt“.
+
+### Fortschritt vs. Blocker (Session 2026-05-30, PF1 Detection-Contract Run MO)
+
+- **Fortschritt:** Die nächste dokumentierte Perception-First-Aufgabe **PF1** wurde umgesetzt: erkannte Linien-, Kreis- und Rechteckprimitive werden nun in das gemeinsame Schema `perception_primitive_candidate_v1` mit Geometrie-, Farb-, ROI-, Evidence- und Source-Feldern serialisiert.
+- **Gekoppelte Plan-B-Aufgabe:** Die im Backlog vorgesehene synthetische Minimalprobe wurde als Contract-Report mit den drei Fixtures `line`, `circle` und `rectangle` ausgeführt; alle drei erwarteten Kandidatentypen wurden gematcht.
+- **Blocker:** Keine für PF1; reale Bildkandidaten bleiben bewusst Folgeaufgabe für PF2/PF3/PF6, damit der Contract zuerst stabil bleibt.
+- **Nächster sinnvoller Schritt:** PF2 umsetzen: Horizontalstrich-/Minus-Erkennung mit ROI-Hinweis auf Basis des neuen Candidate-Contracts protokollieren.
+
+### Fortschritt vs. Blocker (Session 2026-05-30, PF3 Kreis-/Ring-Seed Run MQ)
+
+- **Fortschritt:** Die nächste dokumentierte Perception-First-Aufgabe **PF3** wurde umgesetzt: Kreis-/Ring-Kandidaten werden über Hough- und Foreground-Masken-Heuristiken stabilisiert, als Contract-Kandidaten serialisiert und in `CircleBackground`-Geometry-IR gemerged.
+- **Gekoppelte Plan-B-Aufgabe:** Der PF3-Report prüft synthetische `circle`-/`ring`-Fixtures sowie `AC0201_S.jpg` und `AC0800_S.jpg`; alle erwarteten Kandidatentypen werden gematcht und der stärkste Kandidat erzeugt einen `CircleBackground`-Seed.
+- **Blocker:** Keine für PF3; reale Kleinstbilder wie `AC0201_S.jpg`/`AC0800_S.jpg` liefern aktuell bewusst einen CircleBackground-Kreis-Seed statt eine robuste Ring-Innenradius-Schätzung.
+- **Nächster sinnvoller Schritt:** PF4 umsetzen: den neuen `perception_seeded_geometry_ir`-Pfad vor dem generischen Non-Composite-Fallback in die Laufzeit integrieren.
+
+### Fortschritt vs. Blocker (Session 2026-05-30, PF2 Minus-ROI Run MP)
+
+- **Fortschritt:** Die nächste dokumentierte Perception-First-Aufgabe **PF2** wurde umgesetzt: Beschreibungen mit `oben`/`mittig`/`Symmetrieachse` leiten nun eine Top-Center-ROI ab, in der horizontale Minus-/Rule-Konturen erkannt und als `horizontal_rule`-Kandidaten mit `geometry_ir_kind=HorizontalRule` serialisiert werden.
+- **Gekoppelte Plan-B-Aufgabe:** Der PF2-Report prüft eine synthetische Top-Center-Minus-Szene und das reale Bild `AC0120_L.jpg`; beide erzeugen einen passenden `horizontal_rule`-Kandidaten.
+- **Blocker:** Keine für PF2; die Kandidaten werden noch nicht im Runtime-Fallback genutzt, weil das laut Backlog PF4 vorbehalten bleibt.
+- **Nächster sinnvoller Schritt:** PF6 früh einziehen: erkannte/abgelehnte Perception-Kandidaten als Telemetrie-Report protokollieren, bevor PF3/PF4 in den Runtime-Pfad wandern.
+
 ## How to use this list
 
 - Work from top to bottom unless a dependency requires a different order.
 - When a task is completed, change its checkbox to `- [x]` and add a short note.
 - If a task splits into multiple deliverables, keep the parent item and add nested
   subtasks below it.
-- **Aktuelle Gewichtung (2026-05-28):** Beschleunigung der Algorithmus-Umstellung hat Vorrang vor weiteren Routine-/Testhygiene-Paketen. Das nächste Arbeitspaket startet daher bei PR-R2/R3 der Ketten-Architektur statt erneut bei T6/TB-A3.
+- **Aktuelle Gewichtung (2026-05-30):** Nach der Geometry-IR-Stabilisierung rotiert das nächste Arbeitspaket vorrangig in den Perception-First-Track: zuerst PF1 (Detection-Contract), danach PF2 (Minus-/Horizontalstrich mit ROI), jeweils gekoppelt mit genau einem Plan-B-/Repro-Kandidaten.
 
 ## Current status
 
@@ -80,7 +117,7 @@ Zielbild: Nicht-binäre Vektorisierung über echte SVG-Primitive mit semantische
 - The refresh run currently covers the most recently touched connector/circle families present in `artifacts/converted_images/reports` (`AC0811`, `AC0832`, `AC0835`, `AC0836`, `AC0870`, `AC0882`).
 - Continue to add new work items here before implementation starts, then mark them in-place when they are done.
 
-## Next execution tasks (neu gewichtet am 2026-05-28: Ketten-Architektur vor Testhygiene)
+## Next execution tasks (neu gewichtet am 2026-05-30: Perception-First vor weiterer Einzelfall-Rotation)
 
 ### Begriffskonvention (ab 2026-05-16)
 
@@ -3101,3 +3138,37 @@ Ziel: Die Konvertierung soll strikt als **Kette** laufen:
 - **Sicherung:** Der gezielte Detailtestblock lief grün (`PYTHONPATH=vendor/linux-py310/site-packages:. python -m pytest -q tests/detailtests/test_geometry_ir_helpers.py tests/detailtests/test_description_contract_helpers.py tests/detailtests/test_non_composite_runtime_helpers.py`, `51 passed`, Exit `0`); der externe AC0204-S-sia-Repro lief grün (`PYTHONPATH=vendor/linux-py310/site-packages:. timeout 120 python -m src.iCCModules.imageCompositeConverterCli --input-dir artifacts/images_to_convert --output-dir /tmp/ic-ac0204-runmh --start AC0204_S_sia --end AC0204_S_sia --deterministic-order`, Exit `0`) und protokollierte `status=non_composite_description_geometry_ir`; die Vollsuite lief grün (`PYENV_VERSION=3.10.20 PYTHONPATH=vendor/linux-py310/site-packages:. timeout 300 python -m pytest -q -rs`, `590 passed, 5 warnings`, Exit `0`).
 - **Blocker:** Keine neuen Blocker. Der bestehende AC0201-Referenzpfad ist nun für AC0204-Identisch-zur-Referenz-Beschreibungen durch eigene Regressionsfälle abgesichert und bleibt im echten Call-Path sichtbar.
 - **Nächster sinnvoller Schritt:** Mit dem nächsten Plan-B-Kandidaten `AC0211_S.jpg` rotieren oder einen echten Batchlauf zuschneiden, der ein produktives `chain_phase_telemetry_summary.txt` für das Pflicht-Gate liefert.
+
+### Fortschritt vs. Blocker (Session 2026-05-30, AC0214_S Geometry-IR Plan-B Run ML)
+
+- **Fortschritt:** Der nächste dokumentierte Plan-B-Kandidat `AC0214_S.jpg` wurde im echten Non-Composite-Pfad auf beschreibungsgetriebene Geometry-IR umgestellt: der 180° gedrehte 2-Wege-Ventilkörper, der horizontale Connector, die linke Kreis-Kelle und das `M`-Label werden nun als `Rotated180TwoWayValveMotorGlyph` gerendert.
+- **Sicherung:** Der gezielte Detailtestblock lief grün (`PYTHONPATH=vendor/linux-py310/site-packages:. python -m pytest -q tests/detailtests/test_geometry_ir_helpers.py tests/detailtests/test_description_contract_helpers.py tests/detailtests/test_non_composite_runtime_helpers.py`, `67 passed`, Exit `0`); der externe AC0214-S-Repro lief grün (`PYTHONPATH=vendor/linux-py310/site-packages:. timeout 120 python -m src.iCCModules.imageCompositeConverterCli --input-dir artifacts/images_to_convert --output-dir /tmp/ic-ac0214-runml --start AC0214_S --end AC0214_S --deterministic-order`, Exit `0`) und protokollierte `status=non_composite_description_geometry_ir`; die Vollsuite lief grün (`PYENV_VERSION=3.10.20 PYTHONPATH=vendor/linux-py310/site-packages:. timeout 300 python -m pytest -q -rs`, `610 passed, 5 warnings`, Exit `0`).
+- **Blocker:** Keine neuen Blocker. Der neue Pfad erweitert die beschreibungsgetriebene Geometry-IR gezielt um 180° gedrehte 2-Wege-Ventil-Motorsymbole und lässt andere Non-Composite-Fälle beim bisherigen generischen Fallback.
+- **Nächster sinnvoller Schritt:** Mit dem nächsten Plan-B-Kandidaten `AC0221_S.jpg` rotieren oder einen echten Batchlauf zuschneiden, der ein produktives `chain_phase_telemetry_summary.txt` für das Pflicht-Gate liefert.
+
+### Fortschritt vs. Blocker (Session 2026-05-30, AC0221_S Geometry-IR Plan-B Run MM)
+
+- **Fortschritt:** Der nächste dokumentierte Plan-B-Kandidat `AC0221_S.jpg` wurde im echten Non-Composite-Pfad auf beschreibungsgetriebene Geometry-IR umgestellt: obere Kreis-Kelle ohne `M`, vertikaler Connector und dreiflügeliger Ventilkörper werden nun als `TopKelleThreeWayValveGlyph` gerendert.
+- **Sicherung:** Der gezielte Detailtestblock lief grün (`PYTHONPATH=vendor/linux-py310/site-packages:. python -m pytest -q tests/detailtests/test_geometry_ir_helpers.py tests/detailtests/test_description_contract_helpers.py tests/detailtests/test_non_composite_runtime_helpers.py`, `71 passed`, Exit `0`); der externe AC0221-S-Repro lief grün (`PYTHONPATH=vendor/linux-py310/site-packages:. timeout 120 python -m src.iCCModules.imageCompositeConverterCli --input-dir artifacts/images_to_convert --output-dir /tmp/ic-ac0221-runmm --start AC0221_S --end AC0221_S --deterministic-order`, Exit `0`) und protokollierte `status=non_composite_description_geometry_ir`; die Vollsuite lief grün (`PYENV_VERSION=3.10.20 PYTHONPATH=vendor/linux-py310/site-packages:. timeout 300 python -m pytest -q -rs`, `614 passed, 5 warnings`, Exit `0`).
+- **Kandidatenrotation:** `PLAN_B_KANDIDATEN.md` zeigt nach Entfernung von `AC0221_S.jpg` nun `AC0222_S.jpg` als nächste Rotation und `AC0224_S.jpg` als aufgefüllten AC02-Folgekandidaten.
+- **Nächster sinnvoller Schritt:** Mit dem nächsten Plan-B-Kandidaten `AC0222_S.jpg` rotieren oder einen echten Batchlauf zuschneiden, der ein produktives `chain_phase_telemetry_summary.txt` für das Pflicht-Gate liefert.
+
+## Qualitätsreview bisheriger Konvertierungen (2026-05-30)
+
+- [x] **QR-2026-05-30-1:** Bisherige erfolgreiche Konvertierungen aus `successed_conversions.txt` erneut gegen Originalbilder und SVG-Artefakte prüfen. Ergebnis: 48 Varianten geprüft, 47 renderbare Paare, 1 fehlendes Paar; Detailbericht siehe `docs/converted_images_quality_review_2026-05-30.md`.
+- [ ] **QR-2026-05-30-2:** `AC0838_M.jpg` erneut konvertieren bzw. per Plan B verbessern, weil das vorhandene SVG-Paar die Review-Grenze überschreitet (`normalized_mse=0.04729276` > `0.045945679012345676`).
+- [ ] **QR-2026-05-30-3:** `AC0881_M.jpg` erneut konvertieren oder das fehlende SVG-Artefakt rekonstruieren, weil beim Review kein passendes SVG in den geprüften Konvertierungs-/Baseline-Pfaden gefunden wurde.
+- [ ] **QR-2026-05-30-4:** `AC0835_S.jpg` nach der nächsten AC08-/Plan-B-Rotation erneut beobachten, weil der Messwert knapp unterhalb der Review-Grenze liegt (`normalized_mse=0.04467485`).
+
+### Fortschritt vs. Blocker (Session 2026-05-30, Qualitätsreview bisheriger Konvertierungen)
+
+- **Fortschritt:** Die bisher als erfolgreich geführten Konvertierungen wurden pixelmetrisch nachgeprüft und in `docs/converted_images_quality_review_2026-05-30.md` dokumentiert; `AC0838_M.jpg` und `AC0881_M.jpg` wurden zusätzlich in `PLAN_B_KANDIDATEN.md` aufgenommen.
+- **Blocker:** Für `AC0881_M.jpg` fehlt im geprüften Artefaktbestand ein passendes SVG; für `AC0838_M.jpg` ist ein SVG vorhanden, die Qualität liegt aber oberhalb der Review-Grenze.
+- **Nächster sinnvoller Schritt:** Vor der regulären Rotation mindestens einen der neuen QR-Folgepunkte (`AC0838_M` oder `AC0881_M`) als isolierten Plan-B-/Re-Konvertierungslauf abarbeiten.
+
+### Fortschritt vs. Blocker (Session 2026-05-30, AC0222_S Geometry-IR Plan-B Run MN)
+
+- **Fortschritt:** Der nächste dokumentierte Plan-B-Kandidat `AC0222_S.jpg` wurde im echten Non-Composite-Pfad auf beschreibungsgetriebene Geometry-IR umgestellt: grauer Kreis-Hintergrund und zwei dunkle aufwärts gerichtete Kompressorlinien werden nun als `CircleBackground` und `UpwardCompressorGlyph` gerendert.
+- **Sicherung:** Der gezielte Detailtestblock lief grün (`PYTHONPATH=vendor/linux-py310/site-packages:. python -m pytest -q tests/detailtests/test_geometry_ir_helpers.py tests/detailtests/test_description_contract_helpers.py tests/detailtests/test_non_composite_runtime_helpers.py`, `75 passed`, Exit `0`); der externe AC0222-S-Repro lief grün (`PYTHONPATH=vendor/linux-py310/site-packages:. timeout 120 python -m src.iCCModules.imageCompositeConverterCli --input-dir artifacts/images_to_convert --output-dir /tmp/ic-ac0222-runmn --start AC0222_S --end AC0222_S --deterministic-order`, Exit `0`) und protokollierte `status=non_composite_description_geometry_ir`; die Vollsuite lief grün (`PYENV_VERSION=3.10.20 PYTHONPATH=vendor/linux-py310/site-packages:. timeout 300 python -m pytest -q -rs`, `618 passed, 5 warnings`, Exit `0`).
+- **Kandidatenrotation:** `PLAN_B_KANDIDATEN.md` zeigt nach Entfernung von `AC0222_S.jpg` nun `AC0224_S.jpg` als nächste Rotation und `AC0231_S.jpg` als aufgefüllten AC02-Folgekandidaten.
+- **Nächster sinnvoller Schritt:** Mit dem nächsten Plan-B-Kandidaten `AC0224_S.jpg` rotieren oder vor der regulären Rotation einen QR-Folgepunkt (`AC0838_M` oder `AC0881_M`) als isolierten Plan-B-/Re-Konvertierungslauf abarbeiten.

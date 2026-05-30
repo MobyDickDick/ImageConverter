@@ -173,6 +173,29 @@ def test_render_geometry_ir_to_svg_contains_ac0211_typo_upward_compressor_primit
     assert "#45aa5e" in svg
 
 
+def test_build_geometry_ir_maps_ac0222_grey_background_upward_compressor_description() -> None:
+    ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl("Kompressor grauer Hintergrund nach oben.")
+
+    assert [element["kind"] for element in ir] == ["CircleBackground", "UpwardCompressorGlyph"]
+    assert ir[0]["id"] == "compressor_circle"
+    assert ir[0]["fill"] == "#d8d8d8"
+    assert ir[1]["id"] == "upward_compressor"
+    assert ir[1]["circle_ref"] == "compressor_circle"
+    assert ir[1]["stroke"] == "#666666"
+
+
+def test_render_geometry_ir_to_svg_contains_ac0222_grey_background_compressor_primitives() -> None:
+    ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl("Kompressor grauer Hintergrund nach oben.")
+
+    svg = geometry_ir_helpers.renderGeometryIrToSvgImpl(30, 20, ir)
+
+    assert 'id="compressor_circle"' in svg
+    assert 'id="upward_compressor_left_line"' in svg
+    assert 'id="upward_compressor_right_line"' in svg
+    assert "#d8d8d8" in svg
+    assert "#666666" in svg
+
+
 def test_build_geometry_ir_maps_ac0202_rightward_compressor_description() -> None:
     ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl("Kompressor grau nach rechts")
 
@@ -213,3 +236,126 @@ def test_render_geometry_ir_to_svg_contains_ac0203_mirrored_compressor_primitive
     assert 'id="mirrored_compressor_left_line"' in svg
     assert 'id="mirrored_compressor_right_line"' in svg
     assert "#df2249" in svg
+
+
+
+def test_build_geometry_ir_maps_ac0221_top_kelle_three_way_valve_description() -> None:
+    ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
+        'Wie AC0231, jedoch ohne "M" in der Kelle oben. '
+        'Der Griff liegt auf einer Symmetrieachse des Kreises.'
+    )
+
+    assert [element["kind"] for element in ir] == ["TopKelleThreeWayValveGlyph"]
+    assert ir[0]["id"] == "top_kelle_three_way_valve"
+    assert ir[0]["label"] == ""
+
+
+def test_render_geometry_ir_to_svg_contains_ac0221_top_kelle_three_way_valve_primitives() -> None:
+    ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
+        'Wie AC0231, jedoch ohne "M" in der Kelle oben. '
+        'Der Griff liegt auf einer Symmetrieachse des Kreises.'
+    )
+
+    svg = geometry_ir_helpers.renderGeometryIrToSvgImpl(20, 30, ir)
+
+    assert "vertical-two-way-valve-body-gradient" in svg
+    assert "vertical-two-way-valve-circle-gradient" in svg
+    assert 'id="top_kelle_three_way_valve_body_1"' in svg
+    assert 'id="top_kelle_three_way_valve_body_2"' in svg
+    assert 'id="top_kelle_three_way_valve_body_3"' in svg
+    assert 'id="top_kelle_three_way_valve_connector"' in svg
+    assert 'id="top_kelle_three_way_valve_circle"' in svg
+    assert 'top_kelle_three_way_valve_label' not in svg
+
+def test_build_geometry_ir_maps_ac0212_vertical_two_way_valve_motor_description() -> None:
+    ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
+        '2-Weg Ventil vertikal: Kelle mit Kreis rechts, horizontale Verbindungslinie, '
+        '"M" als Text (M = Motor), zwei spitze Dreiecke, welche sich in der Mitte berühren, '
+        'graue Umrandung, Dreiecke besitzen emeinsamen Farübergang von dunkelgrau rechts oben nach hellgrau links unten. '
+        'Der Griff liegt auf einer Symmetrieachse des Kreises.'
+    )
+
+    assert [element["kind"] for element in ir] == ["VerticalTwoWayValveMotorGlyph"]
+    assert ir[0]["id"] == "vertical_two_way_valve_motor"
+    assert ir[0]["label"] == "M"
+
+
+def test_render_geometry_ir_to_svg_contains_ac0212_vertical_two_way_valve_motor_primitives() -> None:
+    ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
+        '2-Weg Ventil vertikal: Kelle mit Kreis rechts, horizontale Verbindungslinie, '
+        '"M" als Text (M = Motor), zwei spitze Dreiecke, welche sich in der Mitte berühren, '
+        'graue Umrandung, Dreiecke besitzen emeinsamen Farübergang von dunkelgrau rechts oben nach hellgrau links unten.'
+    )
+
+    svg = geometry_ir_helpers.renderGeometryIrToSvgImpl(65, 50, ir)
+
+    assert "vertical-two-way-valve-body-gradient" in svg
+    assert "vertical-two-way-valve-circle-gradient" in svg
+    assert 'id="vertical_two_way_valve_motor_body"' in svg
+    assert 'id="vertical_two_way_valve_motor_connector"' in svg
+    assert 'id="vertical_two_way_valve_motor_circle"' in svg
+    assert 'id="vertical_two_way_valve_motor_label"' in svg
+    assert ">M</text>" in svg
+
+
+def test_build_geometry_ir_maps_ac0213_left_rotated_two_way_valve_motor_description() -> None:
+    ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
+        'Wie AC0212: 2-Weg Ventil vertikal: Kelle mit Kreis rechts, horizontale Verbindungslinie, '
+        '"M" als Text (M = Motor), zwei spitze Dreiecke, welche sich in der Mitte berühren, '
+        'graue Umrandung, Dreiecke besitzen emeinsamen Farübergang von dunkelgrau rechts oben nach hellgrau links unten. '
+        'Geometrische Variante: 90° nach links gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.'
+    )
+
+    assert [element["kind"] for element in ir] == ["LeftRotatedTwoWayValveMotorGlyph"]
+    assert ir[0]["id"] == "left_rotated_two_way_valve_motor"
+    assert ir[0]["label"] == "M"
+
+
+def test_render_geometry_ir_to_svg_contains_ac0213_left_rotated_two_way_valve_motor_primitives() -> None:
+    ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
+        'Wie AC0212: 2-Weg Ventil vertikal: Kelle mit Kreis rechts, horizontale Verbindungslinie, '
+        '"M" als Text (M = Motor), zwei spitze Dreiecke, welche sich in der Mitte berühren, '
+        'graue Umrandung, Dreiecke besitzen emeinsamen Farübergang von dunkelgrau rechts oben nach hellgrau links unten. '
+        'Geometrische Variante: 90° nach links gedreht.'
+    )
+
+    svg = geometry_ir_helpers.renderGeometryIrToSvgImpl(50, 65, ir)
+
+    assert "vertical-two-way-valve-body-gradient" in svg
+    assert "vertical-two-way-valve-circle-gradient" in svg
+    assert 'id="left_rotated_two_way_valve_motor_body"' in svg
+    assert 'id="left_rotated_two_way_valve_motor_connector"' in svg
+    assert 'id="left_rotated_two_way_valve_motor_circle"' in svg
+    assert 'id="left_rotated_two_way_valve_motor_label"' in svg
+    assert ">M</text>" in svg
+
+def test_build_geometry_ir_maps_ac0214_180_rotated_two_way_valve_motor_description() -> None:
+    ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
+        'Wie AC0212: 2-Weg Ventil vertikal: Kelle mit Kreis rechts, horizontale Verbindungslinie, '
+        '"M" als Text (M = Motor), zwei spitze Dreiecke, welche sich in der Mitte berühren, '
+        'graue Umrandung, Dreiecke besitzen emeinsamen Farübergang von dunkelgrau rechts oben nach hellgrau links unten. '
+        'Geometrische Variante: 180° gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.'
+    )
+
+    assert [element["kind"] for element in ir] == ["Rotated180TwoWayValveMotorGlyph"]
+    assert ir[0]["id"] == "rotated_180_two_way_valve_motor"
+    assert ir[0]["label"] == "M"
+
+
+def test_render_geometry_ir_to_svg_contains_ac0214_180_rotated_two_way_valve_motor_primitives() -> None:
+    ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
+        'Wie AC0212: 2-Weg Ventil vertikal: Kelle mit Kreis rechts, horizontale Verbindungslinie, '
+        '"M" als Text (M = Motor), zwei spitze Dreiecke, welche sich in der Mitte berühren, '
+        'graue Umrandung, Dreiecke besitzen emeinsamen Farübergang von dunkelgrau rechts oben nach hellgrau links unten. '
+        'Geometrische Variante: 180° gedreht.'
+    )
+
+    svg = geometry_ir_helpers.renderGeometryIrToSvgImpl(65, 50, ir)
+
+    assert "vertical-two-way-valve-body-gradient" in svg
+    assert "vertical-two-way-valve-circle-gradient" in svg
+    assert 'id="rotated_180_two_way_valve_motor_body"' in svg
+    assert 'id="rotated_180_two_way_valve_motor_connector"' in svg
+    assert 'id="rotated_180_two_way_valve_motor_circle"' in svg
+    assert 'id="rotated_180_two_way_valve_motor_label"' in svg
+    assert ">M</text>" in svg

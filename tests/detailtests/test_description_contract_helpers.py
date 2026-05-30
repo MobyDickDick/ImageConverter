@@ -100,3 +100,60 @@ def test_description_parser_attaches_geometry_ir_for_ac0211_typo_upward_compress
         "CircleBackground",
         "UpwardCompressorGlyph",
     ]
+
+
+def test_description_parser_attaches_geometry_ir_for_ac0222_grey_background_upward_compressor() -> None:
+    _desc, params = _parse("Kompressor grauer Hintergrund nach oben.")
+
+    assert params["contract_status"] == "ok"
+    assert [element["kind"] for element in params["geometry_ir"]] == [
+        "CircleBackground",
+        "UpwardCompressorGlyph",
+    ]
+    assert params["geometry_ir"][0]["fill"] == "#d8d8d8"
+    assert params["geometry_ir"][1]["stroke"] == "#666666"
+
+
+def test_description_parser_attaches_geometry_ir_for_ac0221_top_kelle_three_way_valve() -> None:
+    _desc, params = _parse(
+        'Wie AC0231, jedoch ohne "M" in der Kelle oben. '
+        'Der Griff liegt auf einer Symmetrieachse des Kreises.'
+    )
+
+    assert params["contract_status"] == "ok"
+    assert [element["kind"] for element in params["geometry_ir"]] == ["TopKelleThreeWayValveGlyph"]
+
+
+def test_description_parser_attaches_geometry_ir_for_ac0212_vertical_two_way_valve_motor() -> None:
+    _desc, params = _parse(
+        '2-Weg Ventil vertikal: Kelle mit Kreis rechts, horizontale Verbindungslinie, '
+        '"M" als Text (M = Motor), zwei spitze Dreiecke, welche sich in der Mitte berühren, '
+        'graue Umrandung, Dreiecke besitzen emeinsamen Farübergang von dunkelgrau rechts oben nach hellgrau links unten. '
+        'Der Griff liegt auf einer Symmetrieachse des Kreises.'
+    )
+
+    assert params["contract_status"] == "ok"
+    assert [element["kind"] for element in params["geometry_ir"]] == ["VerticalTwoWayValveMotorGlyph"]
+
+
+def test_description_parser_attaches_geometry_ir_for_ac0213_left_rotated_two_way_valve_motor() -> None:
+    _desc, params = _parse(
+        'Wie AC0212: 2-Weg Ventil vertikal: Kelle mit Kreis rechts, horizontale Verbindungslinie, '
+        '"M" als Text (M = Motor), zwei spitze Dreiecke, welche sich in der Mitte berühren, '
+        'graue Umrandung, Dreiecke besitzen emeinsamen Farübergang von dunkelgrau rechts oben nach hellgrau links unten. '
+        'Geometrische Variante: 90° nach links gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.'
+    )
+
+    assert params["contract_status"] == "ok"
+    assert [element["kind"] for element in params["geometry_ir"]] == ["LeftRotatedTwoWayValveMotorGlyph"]
+
+def test_description_parser_attaches_geometry_ir_for_ac0214_180_rotated_two_way_valve_motor() -> None:
+    _desc, params = _parse(
+        'Wie AC0212: 2-Weg Ventil vertikal: Kelle mit Kreis rechts, horizontale Verbindungslinie, '
+        '"M" als Text (M = Motor), zwei spitze Dreiecke, welche sich in der Mitte berühren, '
+        'graue Umrandung, Dreiecke besitzen emeinsamen Farübergang von dunkelgrau rechts oben nach hellgrau links unten. '
+        'Geometrische Variante: 180° gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.'
+    )
+
+    assert params["contract_status"] == "ok"
+    assert [element["kind"] for element in params["geometry_ir"]] == ["Rotated180TwoWayValveMotorGlyph"]
