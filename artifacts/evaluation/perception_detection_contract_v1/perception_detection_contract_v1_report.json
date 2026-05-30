@@ -1,0 +1,183 @@
+{
+  "schema_version": "perception_detection_contract_report_v1",
+  "candidate_schema_version": "perception_primitive_candidate_v1",
+  "samples": [
+    {
+      "sample_id": "line_synthetic",
+      "expected_kind": "line",
+      "candidate_count": 2,
+      "match": true,
+      "top_candidate": {
+        "schema_version": "perception_primitive_candidate_v1",
+        "kind": "line",
+        "bbox": {
+          "x": 131.5,
+          "y": 29.0,
+          "width": 1.0,
+          "height": 198.0
+        },
+        "center": {
+          "x": 132.0,
+          "y": 128.0
+        },
+        "geometry": {
+          "orientation": "vertical",
+          "x_center": 132.0,
+          "y_top": 29.0,
+          "y_bottom": 227.0,
+          "length_px": 198.0,
+          "stroke_width_px": 1.0,
+          "angle_deg": 90.0
+        },
+        "color": {
+          "fill_rgb": null,
+          "stroke_rgb": null,
+          "fill_hex": null,
+          "stroke_hex": null,
+          "fill_confidence": 0.0,
+          "stroke_confidence": 0.0
+        },
+        "confidence": 1.0,
+        "roi": {
+          "type": "image",
+          "hint": "full_image",
+          "bbox": {
+            "x": 0.0,
+            "y": 0.0,
+            "width": 256.0,
+            "height": 256.0
+          }
+        },
+        "evidence": {
+          "detector": "detect_vertical_lines",
+          "edge_model": "canny+hough_lines_p"
+        },
+        "source": "hough"
+      }
+    },
+    {
+      "sample_id": "circle_synthetic",
+      "expected_kind": "circle",
+      "candidate_count": 1,
+      "match": true,
+      "top_candidate": {
+        "schema_version": "perception_primitive_candidate_v1",
+        "kind": "circle",
+        "bbox": {
+          "x": 50.0,
+          "y": 50.0,
+          "width": 157.0,
+          "height": 157.0
+        },
+        "center": {
+          "x": 128.0,
+          "y": 128.0
+        },
+        "geometry": {
+          "radius_px": 78.0,
+          "area_px": 18888.0,
+          "circularity": 0.8907,
+          "ring": false
+        },
+        "color": {
+          "fill_rgb": [
+            0,
+            0,
+            0
+          ],
+          "stroke_rgb": [
+            96,
+            96,
+            96
+          ],
+          "fill_hex": "#000000",
+          "stroke_hex": "#606060",
+          "fill_confidence": 1.0,
+          "stroke_confidence": 0.0354
+        },
+        "confidence": 0.8907,
+        "roi": {
+          "type": "image",
+          "hint": "full_image",
+          "bbox": {
+            "x": 0.0,
+            "y": 0.0,
+            "width": 256.0,
+            "height": 256.0
+          }
+        },
+        "evidence": {
+          "detector": "contour",
+          "vertices": 8,
+          "area_px": 18888.0
+        },
+        "source": "synthetic_fixture"
+      }
+    },
+    {
+      "sample_id": "rectangle_synthetic",
+      "expected_kind": "rectangle",
+      "candidate_count": 3,
+      "match": true,
+      "top_candidate": {
+        "schema_version": "perception_primitive_candidate_v1",
+        "kind": "rectangle",
+        "bbox": {
+          "x": 56.0,
+          "y": 56.0,
+          "width": 145.0,
+          "height": 145.0
+        },
+        "center": {
+          "x": 128.5,
+          "y": 128.5
+        },
+        "geometry": {
+          "width_px": 144.0,
+          "height_px": 144.0,
+          "angle_deg": -90.0,
+          "area_px": 20736.0,
+          "extent": 0.9863
+        },
+        "color": {
+          "fill_rgb": [
+            0,
+            0,
+            0
+          ],
+          "stroke_rgb": [
+            86,
+            86,
+            86
+          ],
+          "fill_hex": "#000000",
+          "stroke_hex": "#565656",
+          "fill_confidence": 1.0,
+          "stroke_confidence": 0.0587
+        },
+        "confidence": 0.9466,
+        "roi": {
+          "type": "image",
+          "hint": "full_image",
+          "bbox": {
+            "x": 0.0,
+            "y": 0.0,
+            "width": 256.0,
+            "height": 256.0
+          }
+        },
+        "evidence": {
+          "detector": "contour",
+          "vertices": 4,
+          "convex": true
+        },
+        "source": "synthetic_fixture"
+      }
+    }
+  ],
+  "accepted_kinds": [
+    "line",
+    "circle",
+    "rectangle"
+  ]
+}
