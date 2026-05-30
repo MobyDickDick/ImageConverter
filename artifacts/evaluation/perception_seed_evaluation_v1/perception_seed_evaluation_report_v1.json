@@ -1,0 +1,238 @@
+{
+  "schema_version": "perception_seed_evaluation_report_v1",
+  "candidate_schema_version": "perception_primitive_candidate_v1",
+  "records": [
+    {
+      "sample_id": "minus_line_synthetic",
+      "sample_type": "synthetic",
+      "image_path": null,
+      "description": "oben mittig befindet sich eine Markierung",
+      "expected_family": "minus_line",
+      "expected_candidate_kinds": [
+        "horizontal_rule"
+      ],
+      "expected_seed_kinds": [
+        "HorizontalRule",
+        "MinusGlyph"
+      ],
+      "candidate_count": 1,
+      "predicted_candidate_kinds": [
+        "horizontal_rule"
+      ],
+      "top_candidate_kind": "horizontal_rule",
+      "top_candidate_family": "minus_line",
+      "detection_match": true,
+      "top_candidate_match": true,
+      "seed_match": true,
+      "matching_confidences": [
+        0.9823
+      ],
+      "selected_geometry_ir_seed_kinds": [
+        "HorizontalRule"
+      ],
+      "error_before_seed": 2.291794,
+      "error_after_seed": 0.73761,
+      "error_delta_before_minus_after": 1.554184,
+      "quality_improved": true,
+      "runtime_status": "non_composite_perception_seeded_geometry_ir"
+    },
+    {
+      "sample_id": "circle_ring_synthetic",
+      "sample_type": "synthetic",
+      "image_path": null,
+      "description": "Kompressor grau nach rechts",
+      "expected_family": "circle_ring",
+      "expected_candidate_kinds": [
+        "circle",
+        "ring"
+      ],
+      "expected_seed_kinds": [
+        "CircleBackground"
+      ],
+      "candidate_count": 1,
+      "predicted_candidate_kinds": [
+        "circle"
+      ],
+      "top_candidate_kind": "circle",
+      "top_candidate_family": "circle_ring",
+      "detection_match": true,
+      "top_candidate_match": true,
+      "seed_match": true,
+      "matching_confidences": [
+        0.99
+      ],
+      "selected_geometry_ir_seed_kinds": [
+        "CircleBackground"
+      ],
+      "error_before_seed": 80.05291,
+      "error_after_seed": 12.820679,
+      "error_delta_before_minus_after": 67.232231,
+      "quality_improved": true,
+      "runtime_status": "non_composite_perception_seeded_geometry_ir"
+    },
+    {
+      "sample_id": "rectangle_synthetic",
+      "sample_type": "synthetic",
+      "image_path": null,
+      "description": "",
+      "expected_family": "rectangle",
+      "expected_candidate_kinds": [
+        "rectangle"
+      ],
+      "expected_seed_kinds": [
+        "HalfDoubleRectBorder",
+        "RectBorder"
+      ],
+      "candidate_count": 4,
+      "predicted_candidate_kinds": [
+        "line",
+        "line",
+        "rectangle",
+        "circle"
+      ],
+      "top_candidate_kind": "line",
+      "top_candidate_family": "minus_line",
+      "detection_match": true,
+      "top_candidate_match": false,
+      "seed_match": true,
+      "matching_confidences": [
+        0.9466
+      ],
+      "selected_geometry_ir_seed_kinds": [
+        "CircleBackground",
+        "RectBorder"
+      ],
+      "error_before_seed": 81.80809,
+      "error_after_seed": 39.891891,
+      "error_delta_before_minus_after": 41.916199,
+      "quality_improved": true,
+      "runtime_status": "non_composite_perception_seeded_geometry_ir"
+    },
+    {
+      "sample_id": "AC0120_L_minus_line_real",
+      "sample_type": "real",
+      "image_path": "artifacts/images_to_convert/AC0120_L.jpg",
+      "description": "oben auf der vertikalen Symmetrieachse werden ein \"+\"- und ein \"-\"-Zeichen eingef\u00fcgt",
+      "expected_family": "minus_line",
+      "expected_candidate_kinds": [
+        "horizontal_rule"
+      ],
+      "expected_seed_kinds": [
+        "HorizontalRule",
+        "MinusGlyph"
+      ],
+      "candidate_count": 16,
+      "predicted_candidate_kinds": [
+        "line",
+        "line",
+        "line",
+        "line",
+        "circle",
+        "circle",
+        "rectangle",
+        "circle",
+        "ring",
+        "ring",
+        "ring",
+        "ring",
+        "circle",
+        "ring",
+        "ring",
+        "horizontal_rule"
+      ],
+      "top_candidate_kind": "line",
+      "top_candidate_family": "minus_line",
+      "detection_match": true,
+      "top_candidate_match": true,
+      "seed_match": true,
+      "matching_confidences": [
+        0.7467
+      ],
+      "selected_geometry_ir_seed_kinds": [
+        "CircleBackground",
+        "MinusGlyph",
+        "RectBorder"
+      ],
+      "error_before_seed": 53.568542,
+      "error_after_seed": 31.99625,
+      "error_delta_before_minus_after": 21.572292,
+      "quality_improved": true,
+      "runtime_status": "non_composite_perception_seeded_geometry_ir"
+    }
+  ],
+  "metrics": {
+    "samples": 4,
+    "families": [
+      "circle_ring",
+      "minus_line",
+      "rectangle"
+    ],
+    "by_family": {
+      "circle_ring": {
+        "samples": 1,
+        "true_positive_top_candidate": 1,
+        "false_positive_top_candidate": 0,
+        "false_negative_detection": 0,
+        "top_candidate_precision": 1.0,
+        "detection_recall": 1.0,
+        "seed_recall": 1.0,
+        "confidence": {
+          "count": 1,
+          "min": 0.99,
+          "max": 0.99,
+          "mean": 0.99
+        },
+        "quality_delta_mean": 67.232231,
+        "quality_improved_samples": 1
+      },
+      "minus_line": {
+        "samples": 2,
+        "true_positive_top_candidate": 2,
+        "false_positive_top_candidate": 1,
+        "false_negative_detection": 0,
+        "top_candidate_precision": 0.6667,
+        "detection_recall": 1.0,
+        "seed_recall": 1.0,
+        "confidence": {
+          "count": 2,
+          "min": 0.7467,
+          "max": 0.9823,
+          "mean": 0.8645
+        },
+        "quality_delta_mean": 11.563238,
+        "quality_improved_samples": 2
+      },
+      "rectangle": {
+        "samples": 1,
+        "true_positive_top_candidate": 0,
+        "false_positive_top_candidate": 0,
+        "false_negative_detection": 0,
+        "top_candidate_precision": 0.0,
+        "detection_recall": 1.0,
+        "seed_recall": 1.0,
+        "confidence": {
+          "count": 1,
+          "min": 0.9466,
+          "max": 0.9466,
+          "mean": 0.9466
+        },
+        "quality_delta_mean": 41.916199,
+        "quality_improved_samples": 1
+      }
+    },
+    "overall": {
+      "top_candidate_precision": 0.75,
+      "detection_recall": 1.0,
+      "seed_recall": 1.0,
+      "all_detection_matched": true,
+      "all_seed_matched": true,
+      "quality_improved_samples": 4
+    }
+  },
+  "open_real_image_cases": [
+    {
+      "family": "rectangle",
+      "reason": "no stable real rectangle candidate is documented for PF5 yet"
+    }
+  ]
+}

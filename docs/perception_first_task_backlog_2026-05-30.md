@@ -81,7 +81,7 @@ ein kleiner Perception-Schritt plus ein eng begrenzter Repro-/Qualitätsnachweis
   `CircleBackground` freischalten, damit der Scope klein bleibt.
 - **Ergebnis 2026-05-30:** Runtime-Hook `non_composite_perception_seeded_geometry_ir` ergänzt; Seeds für `HorizontalRule`, `CircleBackground` und `RectBorder` werden vor dem generischen Element-Fit gerendert und geloggt. Nachweis: `artifacts/evaluation/perception_seeded_geometry_ir_v1/perception_seeded_geometry_ir_report_v1.json`.
 
-### PF5 – Evaluationsharness für Perception-Seeds aufbauen
+### PF5 – Evaluationsharness für Perception-Seeds aufbauen (erledigt 2026-05-30)
 
 - **Problem:** Ohne Metriken lässt sich nicht unterscheiden, ob Erkennung nur
   Einzelfälle rettet oder echte Automatisierung verbessert.
@@ -93,6 +93,7 @@ ein kleiner Perception-Schritt plus ein eng begrenzter Repro-/Qualitätsnachweis
   bisherigen Startpunkt.
 - **Plan-B-Kopplung:** Falls reale Bilddaten fehlen, bleibt der Report mit
   synthetischen Fixtures grün und markiert Realbildfälle als offen.
+- **Ergebnis 2026-05-30:** `tools/perception_detection_contract.py --report perception-seed-eval` schreibt einen JSON/CSV-Harness mit Top-Candidate-Precision, Detection-/Seed-Recall, Confidence-Verteilung und Fehlerdelta vor/nach Seed für `minus_line`, `circle_ring` und `rectangle`. Nachweis: `artifacts/evaluation/perception_seed_evaluation_v1/`.
 
 ### PF6 – Perception-Telemetrie in bestehende Reports integrieren (erledigt 2026-05-30)
 
@@ -142,7 +143,7 @@ ein kleiner Perception-Schritt plus ein eng begrenzter Repro-/Qualitätsnachweis
    bleiben. (erledigt 2026-05-30)
 4. **PF3/PF4** koppeln, sobald `minus/line` stabil protokolliert wird.
 5. **PF5** nach den ersten zwei erkannten Primitiven, damit Fortschritt messbar
-   bleibt.
+   bleibt. (erledigt 2026-05-30)
 6. **PF7/PF8** laufend mit der Plan-B-Rotation verbinden.
 
 ## Definition of Done für den Perception-First-Track

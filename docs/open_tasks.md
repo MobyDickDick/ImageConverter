@@ -6,7 +6,7 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-05-30)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `383` · Erledigt `284` · Offen `99`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `383` · Erledigt `285` · Offen `98`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -77,10 +77,17 @@ detaillierte Backlog steht in `docs/perception_first_task_backlog_2026-05-30.md`
 - [x] **PF2 – Horizontalstrich-/Minus-Erkennung mit ROI-Hinweis implementieren:** Hinweise wie „oben mittig ist ein `-`-Zeichen“ in einen `HorizontalRule`- oder `TextGlyph("-")`-Seed übersetzen. (2026-05-30: `detect_horizontal_rules(...)` und `detect_minus_candidates(...)` ergänzen einen ROI-basierten `horizontal_rule`-/`HorizontalRule`-Kandidaten inklusive `text_equivalent="-"`; synthetischer Top-Center-Minus und reales `AC0120_L.jpg` werden im Report `artifacts/evaluation/perception_minus_roi_v1/perception_minus_roi_report_v1.json` erfolgreich gematcht; Basistests in `tests/test_perception_minus_roi.py`.)
 - [x] **PF3 – Kreis-/Ring-Erkennung als Geometry-IR-Seed stabilisieren:** erkannte Kreise/Ringe mit `CircleBackground` und bestehenden Masken-/Hough-Heuristiken zusammenführen. (2026-05-30: `detect_circle_rings(...)` kombiniert Hough- und Foreground-Masken-Heuristiken, serialisiert `circle`-/`ring`-Kandidaten mit `geometry_ir_kind=CircleBackground` und merged den stärksten Treffer via `merge_circle_ring_candidates_into_geometry_ir(...)` in bestehende oder neue Geometry-IR-Kreise; Report mit synthetischem Kreis/Ring plus `AC0201_S.jpg`/`AC0800_S.jpg` unter `artifacts/evaluation/perception_circle_ring_seed_v1/perception_circle_ring_seed_report_v1.json`, Basistests in `tests/test_perception_circle_ring_seed.py`.)
 - [x] **PF4 – Perception-Kandidaten vor dem generischen Non-Composite-Fallback nutzen:** Beschreibung + Bildanalyse als `perception_seeded_geometry_ir` vor dem Element-Fit ausführen. (2026-05-30: Non-Composite-Runtime versucht nun vor Description-only-IR und generischem Element-Fit einen `non_composite_perception_seeded_geometry_ir`-Pfad; Perception-Seeds für `CircleBackground`, `HorizontalRule` und `RectBorder` werden aus PF-Kandidaten in Geometry-IR gemerged, gerendert und mit eigener Validation-Log-Spur protokolliert. Report: `artifacts/evaluation/perception_seeded_geometry_ir_v1/perception_seeded_geometry_ir_report_v1.json`; Basistests in `tests/test_perception_seeded_geometry_ir.py` und `tests/detailtests/test_non_composite_runtime_helpers.py`. )
-- [ ] **PF5 – Evaluationsharness für Perception-Seeds aufbauen:** Precision/Recall, Confidence und Renderfehler vor/nach Seed für mindestens drei Primitive ausweisen.
+- [x] **PF5 – Evaluationsharness für Perception-Seeds aufbauen:** Precision/Recall, Confidence und Renderfehler vor/nach Seed für mindestens drei Primitive ausweisen. (2026-05-30: PF5-Harness `--report perception-seed-eval` ergänzt; Report `artifacts/evaluation/perception_seed_evaluation_v1/perception_seed_evaluation_report_v1.json` und CSV `artifacts/evaluation/perception_seed_evaluation_v1/perception_seed_evaluation_samples_v1.csv` verdichten Minus-/Linien-, Kreis-/Ring- und Rechteck-Seeds zu Precision/Recall, Confidence-Verteilung und Renderfehlern vor/nach Seed. Basistests in `tests/test_perception_seed_evaluation.py`.)
 - [x] **PF6 – Perception-Telemetrie in bestehende Reports integrieren:** erkannte/abgelehnte Kandidaten, Seed-Auswahl und Fehlerdeltas pro Lauf als CSV/JSON protokollieren. (2026-05-30: PF6-Telemetrie ergänzt `build_perception_telemetry_record(...)` sowie den CLI-Report `--report perception-telemetry`; JSON/CSV-Artefakte unter `artifacts/evaluation/perception_telemetry_v1/` protokollieren erkannte und abgelehnte Kandidaten, ausgewählte Geometry-IR-Seeds sowie Fehlerwerte vor/nach Seed. Basistests in `tests/test_perception_telemetry_report.py`.)
 - [ ] **PF7 – Einfache Text-/Glyph-Erkennung für `M`, `+`, `-` und kurze Labels prüfen:** Template-Matching/OCR-Nutzen ohne neue Pflichtdependency evaluieren.
 - [ ] **PF8 – Plan-B-Rotation mit Perception-Aufgaben verzahnen:** jedes kommende Plan-B-Paket erhält einen Abschnitt „Perception-Lerneffekt“.
+
+### Fortschritt vs. Blocker (Session 2026-05-30, PF5 Evaluationsharness Run MS)
+
+- **Fortschritt:** Die nächste dokumentierte Perception-First-Aufgabe **PF5** wurde umgesetzt: Der neue Evaluationsharness aggregiert Perception-Telemetrie zu Precision/Recall, Confidence-Verteilung und Renderfehlern vor/nach Geometry-IR-Seed.
+- **Gekoppelte Plan-B-/Repro-Aufgabe:** Der PF5-Report prüft synthetische Fixtures für `minus_line`, `circle_ring` und `rectangle` sowie, falls vorhanden, den realen Minus-/Plan-B-Kandidaten `AC0120_L.jpg`; alle Samples matchen Detection und Seed.
+- **Blocker:** Kein technischer Blocker; ein stabiler realer Rechteckkandidat ist noch nicht dokumentiert und wird im PF5-Report als offener Realbildfall markiert.
+- **Nächster sinnvoller Schritt:** PF7 prüfen: Minimalstrategie für Glyphen/Text (`M`, `+`, `-`, kurze Labels) ohne neue Pflichtdependency evaluieren.
 
 ### Fortschritt vs. Blocker (Session 2026-05-30, PF1 Detection-Contract Run MO)
 
