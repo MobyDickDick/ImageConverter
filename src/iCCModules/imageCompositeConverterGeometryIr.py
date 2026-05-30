@@ -31,6 +31,31 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
     gradient_hint = _has_any(desc, ("farbverlauf", "gradient")) and _has_any(desc, ("horizontal", "dunkel-hell-dunkel", "dunkel–hell–dunkel"))
     diagonal_hint = _has_any(desc, ("diagonal", "diagonale", "diagonalen", "andreaskreuz", "kreuz"))
     differential_pressure_hint = _has_any(desc, ("differenzdruckmessung", "dp")) and "doppelten grauen rand" in desc
+    upward_compressor_hint = "kompressor" in desc and _has_any(desc, ("nach oben", "oben", "aufwärts", "aufwaerts"))
+
+    if upward_compressor_hint:
+        elements.extend(
+            [
+                {
+                    "kind": "CircleBackground",
+                    "id": "compressor_circle",
+                    "bbox": [0.06, 0.06, 0.88, 0.88],
+                    "fill": "#45aa5e",
+                    "stroke": "#8d8d8d",
+                    "stroke_width": 0.020,
+                },
+                {
+                    "kind": "UpwardCompressorGlyph",
+                    "id": "upward_compressor",
+                    "circle_ref": "compressor_circle",
+                    "left_line": [[0.28, 0.78], [0.42, 0.16]],
+                    "right_line": [[0.72, 0.78], [0.58, 0.16]],
+                    "stroke": "#d7d7d7",
+                    "stroke_width": 0.040,
+                },
+            ]
+        )
+        return elements
 
     if differential_pressure_hint:
         elements.extend(
@@ -208,6 +233,16 @@ def _find_rect(elements: list[dict[str, object]], w: int, h: int) -> tuple[float
     return 0.18 * w, 0.24 * h, 0.64 * w, 0.56 * h
 
 
+def _find_circle(elements: list[dict[str, object]], circle_id: str, w: int, h: int) -> tuple[float, float, float, float]:
+    for element in elements:
+        if element.get("kind") == "CircleBackground" and str(element.get("id", "")) == circle_id:
+            return _scaled_bbox(element, w, h)
+    for element in elements:
+        if element.get("kind") == "CircleBackground":
+            return _scaled_bbox(element, w, h)
+    return 0.06 * w, 0.06 * h, 0.88 * w, 0.88 * h
+
+
 def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str, object]]) -> list[str]:
     """Render geometry IR elements as SVG fragments in their declared order."""
 
@@ -226,7 +261,39 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
     for element in geometry_ir:
         kind = str(element.get("kind", ""))
         element_id = html.escape(str(element.get("id", kind)))
-        if kind == "HorizontalGradient":
+        if kind == "CircleBackground":
+            x, y, bw, bh = _scaled_bbox(element, w, h)
+            fill = html.escape(str(element.get("fill", "#45aa5e")))
+            stroke = html.escape(str(element.get("stroke", "#8d8d8d")))
+            sw = float(element.get("stroke_width", 0.020)) * min(w, h)
+            svg.append(
+                f'  <ellipse id="{element_id}" cx="{_fmt(x + bw * 0.5)}" cy="{_fmt(y + bh * 0.5)}" '
+                f'rx="{_fmt(bw * 0.5)}" ry="{_fmt(bh * 0.5)}" fill="{fill}" stroke="{stroke}" '
+                f'stroke-width="{_fmt(sw)}"/>'
+            )
+        elif kind == "UpwardCompressorGlyph":
+            circle_ref = str(element.get("circle_ref", "compressor_circle"))
+            circle_x, circle_y, circle_w, circle_h = _find_circle(geometry_ir, circle_ref, w, h)
+            stroke = html.escape(str(element.get("stroke", "#d7d7d7")))
+            sw = float(element.get("stroke_width", 0.040)) * min(w, h)
+            line_specs = (("left_line", "upward_compressor_left_line"), ("right_line", "upward_compressor_right_line"))
+            for line_key, stable_id in line_specs:
+                raw_line = element.get(line_key, [])
+                if not isinstance(raw_line, list) or len(raw_line) != 2:
+                    continue
+                points = []
+                for raw_point in raw_line:
+                    if isinstance(raw_point, list) and len(raw_point) == 2:
+                        px = circle_x + circle_w * float(raw_point[0])
+                        py = circle_y + circle_h * float(raw_point[1])
+                        points.append((px, py))
+                if len(points) == 2:
+                    (x0, y0), (x1, y1) = points
+                    svg.append(
+                        f'  <path id="{stable_id}" d="M {_fmt(x0)} {_fmt(y0)} L {_fmt(x1)} {_fmt(y1)}" '
+                        f'stroke="{stroke}" stroke-width="{_fmt(sw)}" fill="none" stroke-linecap="round"/>'
+                    )
+        elif kind == "HorizontalGradient":
             x, y, bw, bh = _scaled_bbox(element, w, h)
             svg.append(
                 f'  <rect id="{element_id}" x="{_fmt(x)}" y="{_fmt(y)}" width="{_fmt(bw)}" height="{_fmt(bh)}" '

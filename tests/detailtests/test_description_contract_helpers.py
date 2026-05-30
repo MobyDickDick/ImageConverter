@@ -67,3 +67,14 @@ def test_description_parser_attaches_geometry_ir_for_ac0160_like_description() -
         "LabelBox",
         "TextGlyph",
     ]
+
+
+def test_description_parser_attaches_geometry_ir_for_ac0201_upward_compressor() -> None:
+    _desc, params = _parse("Kompressor grau nach oben")
+
+    assert params["contract_status"] == "ok"
+    assert [element["kind"] for element in params["geometry_ir"]] == [
+        "CircleBackground",
+        "UpwardCompressorGlyph",
+    ]
+

@@ -114,3 +114,24 @@ def test_render_geometry_ir_to_svg_contains_ac0160_box_and_dp_primitives() -> No
     assert 'id="dp_label_box"' in svg
     assert 'id="dp_label_text"' in svg
     assert '>dp</text>' in svg
+
+
+def test_build_geometry_ir_maps_ac0201_upward_compressor_description() -> None:
+    ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl("Kompressor grau nach oben")
+
+    assert [element["kind"] for element in ir] == ["CircleBackground", "UpwardCompressorGlyph"]
+    assert ir[0]["id"] == "compressor_circle"
+    assert ir[1]["id"] == "upward_compressor"
+    assert ir[1]["circle_ref"] == "compressor_circle"
+
+
+def test_render_geometry_ir_to_svg_contains_ac0201_compressor_primitives() -> None:
+    ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl("Kompressor grau nach oben")
+
+    svg = geometry_ir_helpers.renderGeometryIrToSvgImpl(50, 50, ir)
+
+    assert 'id="compressor_circle"' in svg
+    assert 'id="upward_compressor_left_line"' in svg
+    assert 'id="upward_compressor_right_line"' in svg
+    assert "#45aa5e" in svg
+
