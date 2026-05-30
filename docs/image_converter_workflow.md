@@ -103,10 +103,13 @@ ein ausführbares Sammelprofil gestartet werden:
 
 Das Skript führt `compileall`, die Pytest-Suite, den CLI-Help-Smoke und – sofern
 ein `chain_phase_telemetry_summary.txt` vorhanden ist – den
-Ketten-Telemetrie-Drift-Gate-Check aus. Wenn ein Batchlauf zwingend ein Summary
-erzeugen muss, wird die Drift-Artefaktprüfung mit `--require-drift-summary`
-verbindlich gemacht. Für abweichende Artefaktpfade kann der Summary-Pfad mit
-`--summary` explizit gesetzt werden:
+Ketten-Telemetrie-Drift-Gate-Check aus. Im Standardprofil ist dieser Drift-Schritt
+bewusst nur beratend: fehlende Summaries werden übersprungen und vorhandene
+Warn-Summaries werden ausgegeben, ohne Code-only-Abschlussprofile fehlschlagen
+zu lassen. Wenn ein Batchlauf zwingend ein Summary erzeugen und bestehen muss,
+wird die Drift-Artefaktprüfung mit `--require-drift-summary` verbindlich gemacht.
+Für abweichende Artefaktpfade kann der Summary-Pfad mit `--summary` explizit
+gesetzt werden:
 
 ```bash
 ./tools/run_local_completion_checks.sh --require-drift-summary

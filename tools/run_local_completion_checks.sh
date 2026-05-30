@@ -21,9 +21,9 @@ Runs the standard local completion profile:
 
 The repo vendor path is prepended to PYTHONPATH when available so CLI smoke
 checks can resolve bundled runtime dependencies. By default the drift-gate
-step is skipped when the summary artifact is missing, because not every local
-code-only change creates batch telemetry. Use --require-drift-summary to make
-a missing summary fail the profile.
+step is advisory: missing summaries are skipped, and existing drift warnings
+are printed without failing code-only completion profiles. Use
+--require-drift-summary to make a missing or warning summary fail the profile.
 USAGE
 }
 
@@ -66,7 +66,17 @@ run_step "pytest" "$PYTHON_BIN" -m pytest
 run_step "ImageConverter CLI help" "$PYTHON_BIN" -m src.imageCompositeConverter --help
 
 if [[ -f "$SUMMARY_PATH" ]]; then
-  run_step "chain telemetry drift gate" "$PYTHON_BIN" tools/check_chain_telemetry_drift_gate.py "$SUMMARY_PATH"
+  echo "==> chain telemetry drift gate"
+  set +e
+  "$PYTHON_BIN" tools/check_chain_telemetry_drift_gate.py "$SUMMARY_PATH"
+  DRIFT_STATUS=$?
+  set -e
+  if [[ "$DRIFT_STATUS" -ne 0 ]]; then
+    if [[ "$REQUIRE_DRIFT_SUMMARY" -eq 1 ]]; then
+      exit "$DRIFT_STATUS"
+    fi
+    echo "WARN: advisory drift gate failed for ${SUMMARY_PATH}; use --require-drift-summary to make this fatal."
+  fi
 elif [[ "$REQUIRE_DRIFT_SUMMARY" -eq 1 ]]; then
   echo "ERROR: required drift summary artifact is missing: ${SUMMARY_PATH}" >&2
   exit 1
