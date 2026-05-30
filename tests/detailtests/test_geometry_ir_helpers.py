@@ -1,6 +1,5 @@
 from src.iCCModules import imageCompositeConverterGeometryIr as geometry_ir_helpers
 
-
 def test_build_geometry_ir_maps_ac0130_like_description_to_ordered_chain() -> None:
     description = (
         "Wie AC0030: Kühlelement, graues Rechteck, Minus-Minus-Zeichen oben Mitte, "
@@ -21,7 +20,6 @@ def test_build_geometry_ir_maps_ac0130_like_description_to_ordered_chain() -> No
     assert [element["direction"] for element in ir if element["kind"] == "DiagonalBand"] == ["tl_br", "tr_bl"]
     assert all(element.get("position") == "top_center" for element in ir if element["kind"] == "MinusGlyph")
 
-
 def test_build_geometry_ir_maps_ac0120_self_description_to_plus_minus_chain() -> None:
     description = (
         "Wie AC0120-Bildbeschreibung, zusätzlich analog AC0VR2_M4.svg mit einer zusätzlichen "
@@ -35,7 +33,6 @@ def test_build_geometry_ir_maps_ac0120_self_description_to_plus_minus_chain() ->
     assert "RectBorder" in kinds
     assert kinds.count("DiagonalBand") == 2
     assert kinds[-2:] == ["PlusGlyph", "MinusGlyph"]
-
 
 def test_render_geometry_ir_to_svg_contains_centralized_primitives() -> None:
     ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
@@ -51,7 +48,6 @@ def test_render_geometry_ir_to_svg_contains_centralized_primitives() -> None:
     assert 'id="plus_glyph"' in svg
     assert 'id="minus_glyph"' in svg
     assert svg.endswith("</svg>")
-
 
 def test_build_geometry_ir_maps_ac0150_vertical_heat_exchanger_description() -> None:
     description = (
@@ -70,7 +66,6 @@ def test_build_geometry_ir_maps_ac0150_vertical_heat_exchanger_description() -> 
     assert ir[0]["bbox"] == [0.32, 0.12, 0.36, 0.76]
     assert ir[2]["positions"] == [0.30, 0.50, 0.70]
 
-
 def test_render_geometry_ir_to_svg_contains_ac0150_rule_and_polyline_primitives() -> None:
     ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
         "Graues Rechteck hochkant, graue Umrandung, drei graue horizontale Linien, "
@@ -85,7 +80,6 @@ def test_render_geometry_ir_to_svg_contains_ac0150_rule_and_polyline_primitives(
     assert 'id="right_side_orthogonal_line"' in svg
     assert 'L' in svg
 
-
 def test_build_geometry_ir_maps_ac0160_differential_pressure_description() -> None:
     description = (
         'Differenzdruckmessung oben kleines graues Rechteck mit "dp" geschrieben, '
@@ -98,7 +92,6 @@ def test_build_geometry_ir_maps_ac0160_differential_pressure_description() -> No
     assert ir[0]["id"] == "half_double_rect"
     assert ir[2]["text"] == "dp"
     assert ir[2]["bbox_ref"] == "dp_label_box"
-
 
 def test_render_geometry_ir_to_svg_contains_ac0160_box_and_dp_primitives() -> None:
     ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
@@ -115,7 +108,6 @@ def test_render_geometry_ir_to_svg_contains_ac0160_box_and_dp_primitives() -> No
     assert 'id="dp_label_text"' in svg
     assert '>dp</text>' in svg
 
-
 def test_build_geometry_ir_maps_ac0201_upward_compressor_description() -> None:
     ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl("Kompressor grau nach oben")
 
@@ -123,7 +115,6 @@ def test_build_geometry_ir_maps_ac0201_upward_compressor_description() -> None:
     assert ir[0]["id"] == "compressor_circle"
     assert ir[1]["id"] == "upward_compressor"
     assert ir[1]["circle_ref"] == "compressor_circle"
-
 
 def test_render_geometry_ir_to_svg_contains_ac0201_compressor_primitives() -> None:
     ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl("Kompressor grau nach oben")
@@ -135,7 +126,6 @@ def test_render_geometry_ir_to_svg_contains_ac0201_compressor_primitives() -> No
     assert 'id="upward_compressor_right_line"' in svg
     assert "#45aa5e" in svg
 
-
 def test_build_geometry_ir_maps_ac0202_rightward_compressor_description() -> None:
     ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl("Kompressor grau nach rechts")
 
@@ -143,7 +133,6 @@ def test_build_geometry_ir_maps_ac0202_rightward_compressor_description() -> Non
     assert ir[0]["id"] == "compressor_circle"
     assert ir[1]["id"] == "rightward_compressor"
     assert ir[1]["circle_ref"] == "compressor_circle"
-
 
 def test_render_geometry_ir_to_svg_contains_ac0202_compressor_primitives() -> None:
     ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl("Kompressor grau nach rechts")
@@ -155,3 +144,25 @@ def test_render_geometry_ir_to_svg_contains_ac0202_compressor_primitives() -> No
     assert 'id="rightward_compressor_lower_line"' in svg
     assert "#f4f4f4" in svg
 
+def test_build_geometry_ir_maps_ac0203_main_diagonal_mirrored_compressor_description() -> None:
+    ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
+        "Wie AC0202: Kompressor grau nach rechts. Geometrische Variante: Hauptdiagonal gespiegelt."
+    )
+
+    assert [element["kind"] for element in ir] == ["CircleBackground", "MainDiagonalMirroredCompressorGlyph"]
+    assert ir[0]["id"] == "compressor_circle"
+    assert ir[0]["fill"] == "#df2249"
+    assert ir[1]["id"] == "main_diagonal_mirrored_compressor"
+    assert ir[1]["circle_ref"] == "compressor_circle"
+
+def test_render_geometry_ir_to_svg_contains_ac0203_mirrored_compressor_primitives() -> None:
+    ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
+        "Wie AC0202: Kompressor grau nach rechts. Geometrische Variante: Hauptdiagonal gespiegelt."
+    )
+
+    svg = geometry_ir_helpers.renderGeometryIrToSvgImpl(50, 50, ir)
+
+    assert 'id="compressor_circle"' in svg
+    assert 'id="mirrored_compressor_left_line"' in svg
+    assert 'id="mirrored_compressor_right_line"' in svg
+    assert "#df2249" in svg
