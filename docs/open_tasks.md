@@ -4,9 +4,9 @@ This checklist only tracks work that is actionable for the ImageConverter in the
 current repository snapshot. Older unrelated language/compiler/runtime tasks were removed so the list stays
 focused on the actual project scope.
 
-## Aufgaben-Gesamtzähler (Snapshot 2026-05-28)
+## Aufgaben-Gesamtzähler (Snapshot 2026-05-30)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `378` · Erledigt `281` · Offen `97`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `383` · Erledigt `279` · Offen `104`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -66,13 +66,29 @@ Zielbild: Nicht-binäre Vektorisierung über echte SVG-Primitive mit semantische
   - Deliverable: katalogisierte Failure-Modes + empfohlene Zusatzbedingungen.
   - Akzeptanz: Jeder dokumentierte Fehlschlag ist einem bekannten Failure-Mode zugeordnet.
 
+
+## Perception-First-Track: Bildhinweise vor der ersten Iteration nutzen (neu 2026-05-30)
+
+Ziel: Die beschreibungsgetriebene Geometry-IR bleibt Zielrepräsentation, wird aber
+künftig aus einfachen Bild-/Beschreibungshinweisen vorinitialisiert. Das
+detaillierte Backlog steht in `docs/perception_first_task_backlog_2026-05-30.md`.
+
+- [ ] **PF1 – Detection-Contract v1 für erkannte Primitive festlegen:** ein stabiles Format für Linien-, Kreis-/Ring- und Rechteckkandidaten definieren und reporten.
+- [ ] **PF2 – Horizontalstrich-/Minus-Erkennung mit ROI-Hinweis implementieren:** Hinweise wie „oben mittig ist ein `-`-Zeichen“ in einen `HorizontalRule`- oder `TextGlyph("-")`-Seed übersetzen.
+- [ ] **PF3 – Kreis-/Ring-Erkennung als Geometry-IR-Seed stabilisieren:** erkannte Kreise/Ringe mit `CircleBackground` und bestehenden Masken-/Hough-Heuristiken zusammenführen.
+- [ ] **PF4 – Perception-Kandidaten vor dem generischen Non-Composite-Fallback nutzen:** Beschreibung + Bildanalyse als `perception_seeded_geometry_ir` vor dem Element-Fit ausführen.
+- [ ] **PF5 – Evaluationsharness für Perception-Seeds aufbauen:** Precision/Recall, Confidence und Renderfehler vor/nach Seed für mindestens drei Primitive ausweisen.
+- [ ] **PF6 – Perception-Telemetrie in bestehende Reports integrieren:** erkannte/abgelehnte Kandidaten, Seed-Auswahl und Fehlerdeltas pro Lauf als CSV/JSON protokollieren.
+- [ ] **PF7 – Einfache Text-/Glyph-Erkennung für `M`, `+`, `-` und kurze Labels prüfen:** Template-Matching/OCR-Nutzen ohne neue Pflichtdependency evaluieren.
+- [ ] **PF8 – Plan-B-Rotation mit Perception-Aufgaben verzahnen:** jedes kommende Plan-B-Paket erhält einen Abschnitt „Perception-Lerneffekt“.
+
 ## How to use this list
 
 - Work from top to bottom unless a dependency requires a different order.
 - When a task is completed, change its checkbox to `- [x]` and add a short note.
 - If a task splits into multiple deliverables, keep the parent item and add nested
   subtasks below it.
-- **Aktuelle Gewichtung (2026-05-28):** Beschleunigung der Algorithmus-Umstellung hat Vorrang vor weiteren Routine-/Testhygiene-Paketen. Das nächste Arbeitspaket startet daher bei PR-R2/R3 der Ketten-Architektur statt erneut bei T6/TB-A3.
+- **Aktuelle Gewichtung (2026-05-30):** Nach der Geometry-IR-Stabilisierung rotiert das nächste Arbeitspaket vorrangig in den Perception-First-Track: zuerst PF1 (Detection-Contract), danach PF2 (Minus-/Horizontalstrich mit ROI), jeweils gekoppelt mit genau einem Plan-B-/Repro-Kandidaten.
 
 ## Current status
 
@@ -80,7 +96,7 @@ Zielbild: Nicht-binäre Vektorisierung über echte SVG-Primitive mit semantische
 - The refresh run currently covers the most recently touched connector/circle families present in `artifacts/converted_images/reports` (`AC0811`, `AC0832`, `AC0835`, `AC0836`, `AC0870`, `AC0882`).
 - Continue to add new work items here before implementation starts, then mark them in-place when they are done.
 
-## Next execution tasks (neu gewichtet am 2026-05-28: Ketten-Architektur vor Testhygiene)
+## Next execution tasks (neu gewichtet am 2026-05-30: Perception-First vor weiterer Einzelfall-Rotation)
 
 ### Begriffskonvention (ab 2026-05-16)
 
