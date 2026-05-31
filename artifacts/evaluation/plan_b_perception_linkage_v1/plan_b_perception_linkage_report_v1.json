@@ -105,14 +105,14 @@
     },
     {
       "schema_version": "plan_b_perception_linkage_record_v1",
-      "variant": "AC0234_S",
-      "image_path": "artifacts/images_to_convert/AC0234_S.jpg",
+      "variant": "AC0870_S",
+      "image_path": "artifacts/images_to_convert/AC0870_S.jpg",
       "status": "evaluated",
-      "plan_b_reason": "AC0231-verwandtes 3-Wege-Ventil, hauptdiagonal gespiegelt und mit vorhandenem Diff-Artefakt.",
-      "description": "Plan-B-Kandidat AC0234_S: AC0231-verwandtes 3-Wege-Ventil, hauptdiagonal gespiegelt; Kelle mit gespiegeltem Buchstaben `M`.",
+      "plan_b_reason": "Weak-Family-Befund: rundes T-Badge mit auff\u00e4lligem Textgr\u00f6ssen-, Zentrierungs- und Antialiasingfehler.",
+      "description": "Plan-B-Kandidat AC0870_S: rundes T-Badge; Kreis und zentriertes Kurzlabel zuerst pr\u00fcfen.",
       "perception_lerneffekt": {
-        "question": "Kann die gespiegelte M-Beschriftung oder die runde Kelle vorab als TextGlyph/CircleBackground dokumentiert werden?",
-        "expected_first_primitive": "text_glyph_or_circle_ring",
+        "question": "Kann der dominante T-Kreis vorab als CircleBackground und das zentrierte Kurzlabel als TextGlyph-Hinweis festgehalten werden?",
+        "expected_first_primitive": "circle_ring_or_t_label",
         "expected_candidate_kinds": [
           "circle",
           "ring",
@@ -130,63 +130,63 @@
           "CircleBackground"
         ],
         "top_candidate_kind": "circle",
-        "top_confidence": 0.938,
+        "top_confidence": 0.8912,
         "next_action": "Im n\u00e4chsten Plan-B-Paket als vorinitialisierten Geometry-IR-Seed protokollieren."
       },
-      "candidate_count": 8,
+      "candidate_count": 3,
       "top_candidate": {
         "schema_version": "perception_primitive_candidate_v1",
         "kind": "circle",
         "bbox": {
-          "x": 23.0,
-          "y": 4.0,
-          "width": 7.0,
-          "height": 10.0
+          "x": 2.0,
+          "y": 3.0,
+          "width": 8.0,
+          "height": 8.0
         },
         "center": {
-          "x": 28.0,
-          "y": 9.0
+          "x": 6.0,
+          "y": 7.0
         },
         "geometry": {
-          "radius_px": 5.0,
+          "radius_px": 4.0,
           "inner_radius_px": 0.0,
           "stroke_width_px": 1.0,
           "circularity": 1.0,
           "ring": false,
-          "fill_ratio": 0.7636,
+          "fill_ratio": 0.551,
           "geometry_ir_kind": "CircleBackground",
           "geometry_ir_bbox": [
-            0.76667,
+            0.13333,
             0.2,
-            0.23333,
-            0.5
+            0.53333,
+            0.53333
           ]
         },
         "color": {
           "fill_rgb": [
-            184,
-            184,
-            185
+            190,
+            190,
+            190
           ],
           "stroke_rgb": [
-            195,
-            195,
-            196
+            198,
+            198,
+            198
           ],
-          "fill_hex": "#B8B8B9",
-          "stroke_hex": "#C3C3C4",
-          "fill_confidence": 0.7974,
-          "stroke_confidence": 0.7347
+          "fill_hex": "#BEBEBE",
+          "stroke_hex": "#C6C6C6",
+          "fill_confidence": 0.5942,
+          "stroke_confidence": 0.5637
         },
-        "confidence": 0.938,
+        "confidence": 0.8912,
         "roi": {
           "type": "image",
           "hint": "full_image",
           "bbox": {
             "x": 0.0,
             "y": 0.0,
-            "width": 30.0,
-            "height": 20.0
+            "width": 15.0,
+            "height": 15.0
           }
         },
         "evidence": {

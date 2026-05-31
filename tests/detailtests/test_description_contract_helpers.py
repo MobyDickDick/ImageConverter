@@ -130,6 +130,21 @@ def test_description_parser_attaches_geometry_ir_for_ac0232_left_rotated_m_top_k
     assert params["geometry_ir"][0]["label"] == "M"
 
 
+def test_description_parser_attaches_geometry_ir_for_ac0234_main_diagonal_mirrored_m_top_kelle_three_way_valve() -> None:
+    _desc, params = _parse(
+        'Wie AC0231: 3-Weg Ventil ähnlich AC0211, um 90° im Uhrzeigersinn gedreht, '
+        '"M" wird immer noch senkrecht geschrieben. Noch ein 3. spitzes Dreieck unten. '
+        'Wieder Farbwechsel von Dunkelgrau nach hellgrau (von links unten nach rechts oben). '
+        'Geometrische Variante: Hauptdiagonal gespiegelt.'
+    )
+
+    assert params["contract_status"] == "ok"
+    assert [element["kind"] for element in params["geometry_ir"]] == [
+        "MainDiagonalMirroredTopKelleThreeWayValveGlyph"
+    ]
+    assert params["geometry_ir"][0]["label"] == "M"
+
+
 def test_description_parser_attaches_geometry_ir_for_ac0233_180_rotated_m_top_kelle_three_way_valve() -> None:
     _desc, params = _parse(
         'Wie AC0231: 3-Weg Ventil ähnlich AC0211, um 90° im Uhrzeigersinn gedreht, '
