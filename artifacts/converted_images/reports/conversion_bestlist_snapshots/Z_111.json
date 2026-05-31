@@ -1,0 +1,62 @@
+{
+  "base": "Z_111",
+  "best_error": 28.69304152637486,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.04830478371443579,
+  "filename": "z_111.jpg",
+  "h": 22,
+  "mean_delta2": 6035.69873046875,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": false,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "z_111",
+        "source": "base_name",
+        "text": "z_-Dateien sind Rohr-Symbole mit Verzierungen; enthalten sind gerade Rohre, gebogene Rohre und T-Stücke. Geometrie: halb offene Hand. Kontur dunkelgrau, Innenfläche hautfarben und weitgehend einfarbig. Konverter-Hinweis: Freiform-Handkontur liegt außerhalb der robust unterstützten Standard-Geometrien (Kreis/Ellipse/Rechteck/Badge-Bestandteile) und sollte als \"nicht automatisch nachzeichnbar\" markiert werden."
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [
+      "MANUELL: Beschreibung markiert Symbol als nicht automatisch nachzeichnbar."
+    ],
+    "geometry_ir": [
+      {
+        "bbox": [
+          0.18,
+          0.24,
+          0.64,
+          0.56
+        ],
+        "fill": "#d8d8d8",
+        "id": "main_rect",
+        "kind": "RectBorder",
+        "stroke": "#666666",
+        "stroke_width": 0.035
+      }
+    ],
+    "label": "",
+    "mode": "manual_review",
+    "review_reason": "Beschreibung markiert Symbol als nicht automatisch nachzeichnbar.",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "Z_111"
+  },
+  "std_delta2": 10602.8291015625,
+  "variant": "Z_111",
+  "w": 27
+}

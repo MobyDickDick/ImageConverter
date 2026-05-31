@@ -1,14 +1,24 @@
 {
   "base": "GE0202",
-  "best_error": 42.59786666666667,
+  "best_error": 49.45706666666667,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.017039146666666668,
+  "error_per_pixel": 0.019782826666666666,
   "filename": "GE0202_S.jpg",
   "h": 50,
-  "mean_delta2": 10591.69921875,
+  "mean_delta2": 13826.193359375,
   "params": {
     "bottom_shape": null,
+    "contract_status": "insufficient_description",
+    "description_contract": {
+      "deficits": [
+        "missing_geometry_terms"
+      ],
+      "has_conditions": false,
+      "has_geometry_terms": false,
+      "has_reference": false,
+      "status": "insufficient_description"
+    },
     "description_fragments": [
       {
         "key": "GE0202",
@@ -17,9 +27,12 @@
       }
     ],
     "documented_alias_refs": [],
-    "elements": [],
-    "label": "M",
-    "mode": "auto",
+    "elements": [
+      "MANUELL: Beschreibung unzureichend (fehlende Geometriehinweise oder leerer Beschreibungstext)."
+    ],
+    "geometry_ir": [],
+    "label": "",
+    "mode": "insufficient_description",
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
@@ -30,7 +43,7 @@
     "top_source_ref": null,
     "variant_name": "GE0202_S"
   },
-  "std_delta2": 11316.294921875,
+  "std_delta2": 14078.1982421875,
   "variant": "GE0202_S",
   "w": 50
 }

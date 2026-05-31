@@ -1,0 +1,75 @@
+{
+  "base": "GE9001",
+  "best_error": 31.010555555555555,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.051684259259259256,
+  "filename": "GE9001_4S.jpg",
+  "h": 60,
+  "mean_delta2": 5198.544921875,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": true,
+      "has_reference": false,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "GE9001",
+        "source": "base_name",
+        "text": "stillisierte Röhre. Im Prinzip sehr dünnes Rechteck, hochkant, horizontaler Farbverlauf rot/grau/rot"
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "geometry_ir": [
+      {
+        "bbox": [
+          0.32,
+          0.12,
+          0.36,
+          0.76
+        ],
+        "constraint": "inside_rect_border",
+        "id": "background_gradient",
+        "kind": "HorizontalGradient",
+        "stops": [
+          "#8f8f8f",
+          "#dedede",
+          "#8f8f8f"
+        ]
+      },
+      {
+        "bbox": [
+          0.32,
+          0.12,
+          0.36,
+          0.76
+        ],
+        "fill": "none",
+        "id": "main_rect",
+        "kind": "RectBorder",
+        "stroke": "#666666",
+        "stroke_width": 0.035
+      }
+    ],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "GE9001_4S"
+  },
+  "std_delta2": 5574.31884765625,
+  "variant": "GE9001_4S",
+  "w": 10
+}

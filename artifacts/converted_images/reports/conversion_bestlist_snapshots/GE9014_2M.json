@@ -1,12 +1,12 @@
 {
   "base": "GE9014_2M",
-  "best_error": 48.18694444444444,
+  "best_error": 53.18,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.04015578703703704,
+  "error_per_pixel": 0.044316666666666664,
   "filename": "GE9014_2M.jpg",
   "h": 20,
-  "mean_delta2": 17422.74609375,
+  "mean_delta2": 22279.767578125,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -39,7 +39,7 @@
     "top_source_ref": null,
     "variant_name": "GE9014_2M"
   },
-  "std_delta2": 25396.0625,
+  "std_delta2": 31874.90625,
   "variant": "GE9014_2M",
   "w": 60
 }
