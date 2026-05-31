@@ -90,6 +90,14 @@ detaillierte Backlog steht in `docs/perception_first_task_backlog_2026-05-30.md`
 - **Nächster sinnvoller Schritt:** In der normalen Plan-B-Rotation mit `AC0232_S.jpg` fortfahren oder einen QR-Folgepunkt (`AC0838_M`/`AC0881_M`) isoliert abarbeiten.
 
 
+
+### Fortschritt vs. Blocker (Session 2026-05-31, Plan-B AC0838_M Perception-Review Run MZ)
+
+- **Fortschritt:** Der nächste dokumentierte Plan-B-/Perception-Kandidat `AC0838_M.jpg` wurde isoliert aus `artifacts/images_to_convert/nonconvertable` erneut konvertiert. Der Lauf blieb im semantischen VOC-Badge-Pfad (`SEMANTIC: senkrechter Strich oben vom Kreis` plus `SEMANTIC: Kreis + Buchstabe VOC`) und erreichte `error_per_pixel=0.04151429`, also wieder unter dem dokumentierten Review-Grenzwert `0.045945679012345676`.
+- **Perception-Lerneffekt:** Die PF8-Frage nach dominantem VOC-Kreis/Label bleibt `generalisiert`; der maschinenlesbare Linkage-Report rotiert `AC0838_M` aus und führt nun `AC0881_M` sowie `AC0234_S` mit je einem Perception-Lerneffekt.
+- **Blocker:** Kein neuer technischer Blocker für `AC0838_M`; der Kandidat ist nicht mehr aktiv in `PLAN_B_KANDIDATEN.md`.
+- **Nächster sinnvoller Schritt:** In der normalen Rotation mit `AC0881_M.jpg` fortfahren oder den AC02-Folgekandidaten `AC0234_S.jpg` abarbeiten.
+
 ### Fortschritt vs. Blocker (Session 2026-05-31, AC0232_S Perception-seeded Geometry-IR Plan-B Run MX)
 
 - **Fortschritt:** Der nächste dokumentierte Plan-B-Kandidat `AC0232_S.jpg` wurde im echten Non-Composite-Pfad abgesichert: Die Beschreibung `Wie AC0231 ... 90° nach links gedreht` wird als `LeftRotatedTopKelleThreeWayValveGlyph` mit `label=M` modelliert; im Repro-Lauf wird zusätzlich ein `CircleBackground`-Seed als `non_composite_perception_seeded_geometry_ir` protokolliert.
