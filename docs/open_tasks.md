@@ -4,15 +4,16 @@ This checklist only tracks work that is actionable for the ImageConverter in the
 current repository snapshot. Older unrelated language/compiler/runtime tasks were removed so the list stays
 focused on the actual project scope.
 
-## Aufgaben-Gesamtzähler (Snapshot 2026-05-30)
+## Aufgaben-Gesamtzähler (Snapshot 2026-05-31)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `383` · Erledigt `287` · Offen `96`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `384` · Erledigt `287` · Offen `97`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
 ## Testhygiene – nur echte Grün-Tests in der Kernliste (neu 2026-05-20)
 
 - [x] **TH1:** Nicht-grüne Testergebnisse als Aufgaben pflegen und abbauen (Skips, Deselections, XFails, Warnings), siehe `docs/test_followup_tasks_2026-05-20.md`. (2026-05-21: Follow-up-Liste um aktuellen Timeout-/Nicht-Grün-Snapshot aus `pytest -q` ergänzt, inkl. neuer Aufgabe A6 und Session-Artefakt unter `docs/test_followup_tasks_2026-05-20.md`.)
+- [ ] **TH2/AC0100-QA:** Der AC0100_L/M/S-Kurzlauf ist technisch grün (Exit `0`), verfehlt aber die strenge `pixel_delta2`-Qualität (`images_with_mean_delta2_le_threshold=0` bei `threshold_mean_delta2=18.000`). Als eigene Qualitätsaufgabe weiterführen; Repro, aktuelle Metriken und Akzeptanzkriterien stehen in `docs/ac0100_quality_followup_2026-05-31.md`.
 
 ## Neue Vision-Roadmap: semantische SVG-Rekonstruktion (abgeglichen am 2026-05-10)
 

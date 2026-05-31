@@ -3066,6 +3066,86 @@ def test_template_transfer_skips_cross_family_donor_for_non_semantic(
     assert called["build"] == 0
 
 
+def test_template_transfer_skips_description_driven_geometry_ir_target(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Description-driven non-composite SVGs must not be replaced by donor transforms."""
+    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+        pytest.skip("numpy/cv2 not available in this environment")
+
+    np = image_composite_converter.np
+    cv2 = image_composite_converter.cv2
+    folder = tmp_path / "images"
+    svg_dir = tmp_path / "svg"
+    diff_dir = tmp_path / "diff"
+    folder.mkdir()
+    svg_dir.mkdir()
+    diff_dir.mkdir()
+
+    target_filename = "AC0100_M.jpg"
+    img = np.full((60, 30, 3), 220, dtype=np.uint8)
+    assert cv2.imwrite(str(folder / target_filename), img)
+    (svg_dir / "AC0100_M.svg").write_text(
+        '<svg width="30" height="60" xmlns="http://www.w3.org/2000/svg"></svg>',
+        encoding="utf-8",
+    )
+    (svg_dir / "AC0100_L.svg").write_text(
+        '<svg width="40" height="80" xmlns="http://www.w3.org/2000/svg"></svg>',
+        encoding="utf-8",
+    )
+
+    target_row = {
+        "filename": target_filename,
+        "variant": "AC0100_M",
+        "base": "AC0100",
+        "params": {
+            "mode": "auto",
+            "geometry_ir": [
+                {"kind": "HorizontalGradient"},
+                {"kind": "RectBorder"},
+                {"kind": "DiagonalBand"},
+                {"kind": "PlusGlyph"},
+                {"kind": "MinusGlyph"},
+            ],
+        },
+        "best_error": 999.0,
+        "error_per_pixel": 0.5,
+        "w": 30,
+        "h": 60,
+    }
+    donor_rows = [
+        {
+            "variant": "AC0100_L",
+            "base": "AC0100",
+            "params": {"mode": "auto"},
+            "error_per_pixel": 0.1,
+            "w": 40,
+            "h": 80,
+        }
+    ]
+
+    called: dict[str, int] = {"build": 0}
+
+    def fail_if_called(*_args, **_kwargs):
+        called["build"] += 1
+        return "<svg/>"
+
+    monkeypatch.setattr(image_composite_converter, "_buildTransformedSvgFromTemplate", fail_if_called)
+
+    updated_row, detail = image_composite_converter._tryTemplateTransfer(
+        target_row=target_row,
+        donor_rows=donor_rows,
+        folder_path=str(folder),
+        svg_out_dir=str(svg_dir),
+        diff_out_dir=str(diff_dir),
+        rng=None,
+    )
+
+    assert updated_row is None
+    assert detail is None
+    assert called["build"] == 0
+
+
 def test_co2_layout_keeps_subscript_inside_inner_circle_for_centered_badges() -> None:
     """Centered CO₂ badges should keep the subscript inside the inner circle."""
     params = Action._apply_co2_label(Action._default_ac0870_params(15, 15))

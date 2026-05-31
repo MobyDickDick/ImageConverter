@@ -8,12 +8,6 @@ import numpy as np
 from src.iCCModules import imageCompositeConverterGeometryIr as geometry_ir_helpers
 from tools.perception_detection_contract import build_perception_seeded_geometry_ir
 
-FORCED_PLAN_B_SAMPLE_VARIANTS: set[str] = {"AC0011", "AC0100"}
-
-
-def _is_forced_plan_b_sample_variant(base_name: str) -> bool:
-    family_name = base_name.rpartition("_")[0] or base_name
-    return base_name in FORCED_PLAN_B_SAMPLE_VARIANTS or family_name in FORCED_PLAN_B_SAMPLE_VARIANTS
 
 def _build_vector_placeholder_svg(width: int, height: int, *, description: str = "") -> str:
     safe_w = max(1, int(width or 1))
@@ -214,6 +208,10 @@ DESCRIPTION_DRIVEN_GEOMETRY_IR_KINDS = {
     "LabelBox",
     "TextGlyph",
     "CircleBackground",
+    "HorizontalGradient",
+    "DiagonalBand",
+    "PlusGlyph",
+    "MinusGlyph",
     "RectBorder",
     "UpwardCompressorGlyph",
     "RightwardCompressorGlyph",
@@ -388,11 +386,7 @@ def _try_load_sample_svg(*, img_path: str, base_name: str, description: str = ""
 
     sample_candidates = _build_sample_candidates(base_name)
     reference_family = _extract_reference_family_from_description(description)
-    if (
-        reference_family
-        and reference_family != base_name.upper()
-        and not _is_forced_plan_b_sample_variant(base_name)
-    ):
+    if reference_family and reference_family != base_name.upper():
         sample_candidates = _prepend_reference_candidates(sample_candidates, reference_family)
     for samples_dir in samples_dirs:
         for sample_name in sample_candidates:
@@ -737,22 +731,18 @@ def runNonCompositeIterationImpl(
         if sample_rendered is not None:
             sample_err = calculate_error_fn(perc_img, sample_rendered)
             baseline_is_embedded_raster = _contains_svg_image_tag(svg_content)
-            force_sample_svg = _is_forced_plan_b_sample_variant(base_name)
-            # Favor curated sample SVGs over generated placeholders when they are
-            # in a similar quality range, because sample assets usually carry
-            # richer semantic structure than our generic non-composite fallback.
+            # Favor curated sample SVGs only when they materially improve the
+            # current algorithmic result (or replace an embedded raster).  This
+            # keeps samples as fallback evidence, not as per-symbol fixed output.
             sample_preference_factor = 1.08 if baseline_is_embedded_raster else 1.25
             sample_improvement_ratio = (svg_err / sample_err) if sample_err > 0 else float("inf")
             prefer_sample_svg = (
-                force_sample_svg
-                or baseline_is_embedded_raster
+                baseline_is_embedded_raster
                 or sample_improvement_ratio >= sample_preference_factor
             )
             if prefer_sample_svg:
                 decision_note = ""
-                if force_sample_svg:
-                    decision_note = " (forcierte Sample-Auswahl für bekannte Problemvariante)"
-                elif baseline_is_embedded_raster and sample_err > svg_err:
+                if baseline_is_embedded_raster and sample_err > svg_err:
                     decision_note = " (Vector-Sample gegenüber Embedded-Raster bevorzugt)"
                 print_fn(
                     "  -> Plan B Vergleich aktiv: nutze Sample-SVG "
@@ -768,7 +758,7 @@ def runNonCompositeIterationImpl(
                         f"baseline_is_embedded_raster={int(baseline_is_embedded_raster)}",
                         f"sample_preference_factor={sample_preference_factor:.2f}",
                         f"sample_improvement_ratio={sample_improvement_ratio:.6f}",
-                        f"force_sample_svg={int(force_sample_svg)}",
+                        "sample_selection_policy=algorithmic_threshold",
                     ]
                 )
                 write_attempt_artifacts_fn(sample_svg_content, sample_rendered)
