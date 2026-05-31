@@ -220,6 +220,7 @@ DESCRIPTION_DRIVEN_GEOMETRY_IR_KINDS = {
     "LeftRotatedTopKelleThreeWayValveGlyph",
     "RightRotatedTopKelleThreeWayValveGlyph",
     "Rotated180TopKelleThreeWayValveGlyph",
+    "MainDiagonalMirroredTopKelleThreeWayValveGlyph",
 }
 
 
@@ -567,59 +568,119 @@ def runNonCompositeIterationImpl(
         perception_seeded = _try_build_perception_seeded_geometry_ir_svg(
             width, height, description=description, perc_img=perc_img
         )
-        geometry_ir_svg = None
-        if perception_seeded is not None:
-            geometry_ir_svg, geometry_ir, perception_seed_count = perception_seeded
-            svg_content = geometry_ir_svg
-            svg_rendered = render_svg_to_numpy_fn(svg_content, width, height)
-            if svg_rendered is None:
-                record_render_failure_fn(
-                    "non_composite_perception_seeded_geometry_ir_render_failed",
-                    svg_content=svg_content,
-                    params_snapshot=params,
-                )
-                return None
-            svg_err = calculate_error_fn(perc_img, svg_rendered)
-            write_validation_log_fn(
-                [
-                    "status=non_composite_perception_seeded_geometry_ir",
-                    f"perception_seeded_geometry_ir=1",
-                    f"perception_seed_count={perception_seed_count}",
-                    f"geometry_ir_element_count={len(geometry_ir)}",
-                    *(
-                        f"geometry_ir_element_{idx}={element.get('kind')}"
-                        for idx, element in enumerate(geometry_ir, start=1)
-                    ),
-                ]
+        description_geometry_ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(description)
+        geometry_ir_svg = (
+            geometry_ir_helpers.renderGeometryIrToSvgImpl(width, height, description_geometry_ir)
+            if description_geometry_ir
+            and (
+                DESCRIPTION_DRIVEN_GEOMETRY_IR_KINDS
+                & {str(element.get("kind", "")) for element in description_geometry_ir}
             )
+            else None
+        )
+        if perception_seeded is not None or geometry_ir_svg is not None:
+            candidates: list[dict[str, object]] = []
+            if perception_seeded is not None:
+                seeded_svg, seeded_ir, perception_seed_count = perception_seeded
+                seeded_rendered = render_svg_to_numpy_fn(seeded_svg, width, height)
+                if seeded_rendered is None:
+                    record_render_failure_fn(
+                        "non_composite_perception_seeded_geometry_ir_render_failed",
+                        svg_content=seeded_svg,
+                        params_snapshot=params,
+                    )
+                    return None
+                candidates.append(
+                    {
+                        "status": "non_composite_perception_seeded_geometry_ir",
+                        "svg": seeded_svg,
+                        "rendered": seeded_rendered,
+                        "error": calculate_error_fn(perc_img, seeded_rendered),
+                        "geometry_ir": seeded_ir,
+                        "perception_seed_count": perception_seed_count,
+                    }
+                )
+            if geometry_ir_svg is not None:
+                description_rendered = render_svg_to_numpy_fn(geometry_ir_svg, width, height)
+                if description_rendered is None:
+                    record_render_failure_fn(
+                        "non_composite_geometry_ir_render_failed",
+                        svg_content=geometry_ir_svg,
+                        params_snapshot=params,
+                    )
+                    return None
+                candidates.append(
+                    {
+                        "status": "non_composite_description_geometry_ir",
+                        "svg": geometry_ir_svg,
+                        "rendered": description_rendered,
+                        "error": calculate_error_fn(perc_img, description_rendered),
+                        "geometry_ir": description_geometry_ir,
+                        "perception_seed_count": 0,
+                    }
+                )
+            try:
+                best_structured = _fit_symbol_element_by_element(
+                    width=width,
+                    height=height,
+                    perc_img=perc_img,
+                    render_svg_to_numpy_fn=render_svg_to_numpy_fn,
+                    calculate_error_fn=calculate_error_fn,
+                )
+            except Exception:
+                best_structured = None
+            if best_structured is not None:
+                structured_err, structured_svg, structured_rendered, fitted_params, step_logs = best_structured
+                candidates.append(
+                    {
+                        "status": "non_composite_elementwise_symbol_fit",
+                        "svg": structured_svg,
+                        "rendered": structured_rendered,
+                        "error": structured_err,
+                        "geometry_ir": [],
+                        "perception_seed_count": 0,
+                        "fit_params": fitted_params,
+                        "step_logs": step_logs,
+                    }
+                )
+            best_geometry_candidate = min(candidates, key=lambda candidate: float(candidate["error"]))
+            svg_content = str(best_geometry_candidate["svg"])
+            svg_rendered = best_geometry_candidate["rendered"]
+            svg_err = float(best_geometry_candidate["error"])
+            geometry_ir = best_geometry_candidate["geometry_ir"]
+            perception_seed_count = int(best_geometry_candidate["perception_seed_count"])
+            status = str(best_geometry_candidate["status"])
+            log_lines = [f"status={status}"]
+            if status == "non_composite_elementwise_symbol_fit":
+                log_lines.extend(str(line) for line in best_geometry_candidate.get("step_logs", []))
+                fit_params = best_geometry_candidate.get("fit_params", {})
+                if isinstance(fit_params, dict):
+                    log_lines.extend(f"fit_{k}={v}" for k, v in sorted(fit_params.items()))
+            else:
+                if perception_seed_count:
+                    log_lines.extend(
+                        [
+                            f"perception_seeded_geometry_ir=1",
+                            f"perception_seed_count={perception_seed_count}",
+                        ]
+                    )
+                log_lines.extend(
+                    [
+                        f"geometry_ir_element_count={len(geometry_ir)}",
+                        *(
+                            f"geometry_ir_element_{idx}={element.get('kind')}"
+                            for idx, element in enumerate(geometry_ir, start=1)
+                        ),
+                    ]
+                )
+            if len(candidates) > 1:
+                log_lines.append("non_composite_selection=best_pixel_error")
+                for candidate in candidates:
+                    log_lines.append(
+                        f"non_composite_candidate_error_{candidate['status']}={float(candidate['error']):.6f}"
+                    )
+            write_validation_log_fn(log_lines)
         else:
-            geometry_ir_svg = _try_build_description_geometry_ir_svg(
-                width, height, description=description
-            )
-
-        if perception_seeded is None and geometry_ir_svg is not None:
-            svg_content = geometry_ir_svg
-            svg_rendered = render_svg_to_numpy_fn(svg_content, width, height)
-            if svg_rendered is None:
-                record_render_failure_fn(
-                    "non_composite_geometry_ir_render_failed",
-                    svg_content=svg_content,
-                    params_snapshot=params,
-                )
-                return None
-            svg_err = calculate_error_fn(perc_img, svg_rendered)
-            geometry_ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(description)
-            write_validation_log_fn(
-                [
-                    "status=non_composite_description_geometry_ir",
-                    f"geometry_ir_element_count={len(geometry_ir)}",
-                    *(
-                        f"geometry_ir_element_{idx}={element.get('kind')}"
-                        for idx, element in enumerate(geometry_ir, start=1)
-                    ),
-                ]
-            )
-        elif perception_seeded is None:
             try:
                 best_structured = _fit_symbol_element_by_element(
                     width=width,
