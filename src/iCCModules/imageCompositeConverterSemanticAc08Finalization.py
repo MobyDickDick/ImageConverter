@@ -244,10 +244,38 @@ def finalizeAc08StyleImpl(
                 p.pop("voc_font_scale_max", None)
     p = configure_ac08_small_variant_mode_fn(name, p)
     preserve_plain_ring_geometry = symbol_name == "AC0800"
+    preserve_centered_t_badge_geometry = (
+        symbol_name == "AC0870"
+        and bool(p.get("ac08_small_variant_mode", False))
+        and str(p.get("text_mode", "")).lower() == "path_t"
+    )
+    if preserve_centered_t_badge_geometry:
+        p["lock_circle_cx"] = True
+        p["lock_circle_cy"] = True
+        p["lock_text_position"] = True
+        p["lock_text_scale"] = True
+        p["min_circle_radius"] = float(
+            max(float(p.get("min_circle_radius", 1.0)), float(p.get("r", 1.0)) * 0.98)
+        )
+        p["max_circle_radius"] = float(
+            max(float(p.get("max_circle_radius", 1.0)), float(p.get("r", 1.0)) * 1.02)
+        )
     preserved_plain_ring_keys = {
         key: p[key]
         for key in ("lock_circle_cx", "lock_circle_cy", "min_circle_radius", "max_circle_radius")
         if preserve_plain_ring_geometry and key in p
+    }
+    preserved_centered_t_keys = {
+        key: p[key]
+        for key in (
+            "lock_circle_cx",
+            "lock_circle_cy",
+            "lock_text_position",
+            "lock_text_scale",
+            "min_circle_radius",
+            "max_circle_radius",
+        )
+        if preserve_centered_t_badge_geometry and key in p
     }
     for key in (
         "lock_circle_cx",
@@ -276,6 +304,12 @@ def finalizeAc08StyleImpl(
         "connector_family_direction",
     ):
         p.pop(key, None)
+    if preserve_centered_t_badge_geometry:
+        p.update(preserved_centered_t_keys)
+        min_r = float(max(1.0, p.get("min_circle_radius", p.get("r", 1.0))))
+        max_r = float(max(min_r, p.get("max_circle_radius", min_r)))
+        p["max_circle_radius"] = max_r
+        p["r"] = float(clip_scalar_fn(float(p.get("r", min_r)), min_r, max_r))
     if preserve_plain_ring_geometry:
         p.update(preserved_plain_ring_keys)
         if "template_circle_cx" in p:

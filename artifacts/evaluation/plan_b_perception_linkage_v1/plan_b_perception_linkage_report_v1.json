@@ -106,14 +106,14 @@
     },
     {
       "schema_version": "plan_b_perception_linkage_record_v1",
-      "variant": "AC0870_S",
-      "image_path": "artifacts/images_to_convert/AC0870_S.jpg",
+      "variant": "AC0835_S",
+      "image_path": "artifacts/images_to_convert/AC0835_S.jpg",
       "status": "evaluated",
-      "plan_b_reason": "Weak-Family-Befund: rundes T-Badge mit auff\u00e4lligem Textgr\u00f6ssen-, Zentrierungs- und Antialiasingfehler.",
-      "description": "Plan-B-Kandidat AC0870_S: rundes T-Badge; Kreis und zentriertes Kurzlabel zuerst pr\u00fcfen.",
+      "plan_b_reason": "Weak-Family-Befund: rundes VOC-Badge ohne Griff mit auff\u00e4lliger Textgr\u00f6sse, Zentrierung und Grauwert.",
+      "description": "Plan-B-Kandidat AC0835_S: rundes VOC-Badge ohne Griff; Kreis und zentriertes Label zuerst pr\u00fcfen.",
       "perception_lerneffekt": {
-        "question": "Kann der dominante T-Kreis vorab als CircleBackground und das zentrierte Kurzlabel als TextGlyph-Hinweis festgehalten werden?",
-        "expected_first_primitive": "circle_ring_or_t_label",
+        "question": "Kann der dominante VOC-Kreis vorab als CircleBackground und das dreibuchstabige Label als TextGlyph-Hinweis festgehalten werden?",
+        "expected_first_primitive": "circle_ring_or_voc_label",
         "expected_candidate_kinds": [
           "circle",
           "ring",
@@ -131,55 +131,55 @@
           "CircleBackground"
         ],
         "top_candidate_kind": "circle",
-        "top_confidence": 0.8912,
+        "top_confidence": 0.8759,
         "next_action": "Im n\u00e4chsten Plan-B-Paket als vorinitialisierten Geometry-IR-Seed protokollieren."
       },
-      "candidate_count": 3,
+      "candidate_count": 4,
       "top_candidate": {
         "schema_version": "perception_primitive_candidate_v1",
         "kind": "circle",
         "bbox": {
           "x": 2.0,
-          "y": 3.0,
-          "width": 8.0,
-          "height": 8.0
+          "y": 1.0,
+          "width": 10.0,
+          "height": 10.0
         },
         "center": {
-          "x": 6.0,
-          "y": 7.0
+          "x": 7.0,
+          "y": 6.0
         },
         "geometry": {
-          "radius_px": 4.0,
+          "radius_px": 5.0,
           "inner_radius_px": 0.0,
           "stroke_width_px": 1.0,
           "circularity": 1.0,
           "ring": false,
-          "fill_ratio": 0.551,
+          "fill_ratio": 0.4815,
           "geometry_ir_kind": "CircleBackground",
           "geometry_ir_bbox": [
             0.13333,
-            0.2,
-            0.53333,
-            0.53333
+            0.06667,
+            0.66667,
+            0.66667
           ]
         },
         "color": {
           "fill_rgb": [
-            190,
-            190,
-            190
+            199,
+            199,
+            199
           ],
           "stroke_rgb": [
-            198,
-            198,
-            198
+            219,
+            219,
+            219
           ],
-          "fill_hex": "#BEBEBE",
-          "stroke_hex": "#C6C6C6",
-          "fill_confidence": 0.5942,
-          "stroke_confidence": 0.5637
+          "fill_hex": "#C7C7C7",
+          "stroke_hex": "#DBDBDB",
+          "fill_confidence": 0.609,
+          "stroke_confidence": 0.6408
         },
-        "confidence": 0.8912,
+        "confidence": 0.8759,
         "roi": {
           "type": "image",
           "hint": "full_image",

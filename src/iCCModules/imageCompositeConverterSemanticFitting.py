@@ -162,6 +162,15 @@ def fitAc0870ParamsFromImageImpl(
         params["cy"] = float(c[1])
         params["r"] = float(c[2])
 
+    if min_side <= 15.5:
+        # Tiny AC0870 badges are heavily anti-aliased; Hough frequently snaps to
+        # the dark T glyph instead of the outer ring.  Keep the dominant
+        # circle/text seed on the optical badge center and use the template-scale
+        # radius so validation starts from the documented centered T badge.
+        params["cx"] = float(w) / 2.0
+        params["cy"] = (float(h) - 1.0) / 2.0
+        params["r"] = max(float(params.get("r", 1.0)), min_side * 0.40)
+
     yy, xx = np.indices(gray.shape)
     dist = np.sqrt((xx - params["cx"]) ** 2 + (yy - params["cy"]) ** 2)
     inner_mask = dist <= params["r"] * 0.88
