@@ -1,279 +1,34 @@
 [INFO] Schreibe Konsolen-Output nach: C:\Users\marku\myCloud\imageConverter\imageCompositeConverter.local.log
+Namen von: Namen bis: [INFO] Verwende Bereich von 'AC010' bis 'AC010'.
 
---- Verarbeite z_111.jpg ---
-Bildbeschreibung: z_-Dateien sind Rohr-Symbole mit Verzierungen; enthalten sind gerade Rohre, gebogene Rohre und T-Stücke. Geometrie: halb offene Hand. Kontur dunkelgrau, Innenfläche hautfarben und weitgehend einfarbig. Konverter-Hinweis: Freiform-Handkontur liegt außerhalb der robust unterstützten Standard-Geometrien (Kreis/Ellipse/Rechteck/Badge-Bestandteile) und sollte als "nicht automatisch nachzeichnbar" markiert werden.
-Befehl erkannt: MANUELL: Beschreibung markiert Symbol als nicht automatisch nachzeichnbar.
-  -> Plan B aktiv: elementweise iterative Annäherung aus Rasterbild.
-  -> Plan B Vergleich aktiv: verwende vorhandene Sample-SVG C:\Users\marku\myCloud\imageConverter\artifacts\images_to_convert\samples\z_111.svg (sample=28.693, generated=148.460).
-
---- Verarbeite AC0551_2_S.jpg ---
-Bildbeschreibung: Graues Rechteck hochkant, graue Umrandung, drei graue horizontale Linien, Farbverlauf dunkel-hell-dunkel, Graue Linien Oben-Mitte nach Rechts-Mitte nach Unten-Mitte
+--- Verarbeite AC0100_L.jpg ---
+Bildbeschreibung: Wie AC0010: Heizelement, graues Rechteck, Plus-Minus-Zeichen oben links, horizontaler Farbverlauf dunkel–hell–dunkel sowie graue Diagonale von oben rechts nach unten links.
 Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
   -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+  -> Plan B Vergleich aktiv: nutze Sample-SVG C:\Users\marku\myCloud\imageConverter\artifacts\images_to_convert\samples\AC0100_L.svg (err=182.491, baseline=102.655). (forcierte Sample-Auswahl für bekannte Problemvariante)
+[WARN] AC0100_L.jpg: Keine echte Konvertierung; verwende Plan-B/Sample-SVG als Platzhalter.
+  -> Überspringe Bild, da keine begleitende textliche Beschreibung vorliegt.
+[WARN] AC0100_from_sample.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
 
---- Verarbeite GE0039_M.jpg ---
-Bildbeschreibung: Wie GE0038: Hintergrund: GE0999. Pfeil GE0030 jedoch vertikal gespiegelt. . Geometrische Variante: 90° nach links gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.
+--- Verarbeite AC0100_M.jpg ---
+Bildbeschreibung: Wie AC0010: Heizelement, graues Rechteck, Plus-Minus-Zeichen oben links, horizontaler Farbverlauf dunkel–hell–dunkel sowie graue Diagonale von oben rechts nach unten links.
 Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
   -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+  -> Plan B Vergleich aktiv: nutze Sample-SVG C:\Users\marku\myCloud\imageConverter\artifacts\images_to_convert\samples\AC0100_L.svg (err=180.694, baseline=101.766). (forcierte Sample-Auswahl für bekannte Problemvariante)
+[WARN] AC0100_M.jpg: Keine echte Konvertierung; verwende Plan-B/Sample-SVG als Platzhalter.
 
---- Verarbeite AC5040_S.jpg ---
-Bildbeschreibung: Wie AC5041, aber mit einem Flammensymbol, wie es GE0204 (ohne blaugrauem Hintergrund) gezeichnet wurde. Das Flammensymbol ist hier jedoch gegen Rechts gedreht.
+--- Verarbeite AC0100_S.jpg ---
+Bildbeschreibung: Wie AC0010: Heizelement, graues Rechteck, Plus-Minus-Zeichen oben links, horizontaler Farbverlauf dunkel–hell–dunkel sowie graue Diagonale von oben rechts nach unten links.
 Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
   -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+  -> Plan B Vergleich aktiv: nutze Sample-SVG C:\Users\marku\myCloud\imageConverter\artifacts\images_to_convert\samples\AC0100_L.svg (err=176.170, baseline=105.422). (forcierte Sample-Auswahl für bekannte Problemvariante)
+[WARN] AC0100_S.jpg: Keine echte Konvertierung; verwende Plan-B/Sample-SVG als Platzhalter.
 
---- Verarbeite GE0036.jpg ---
-Bildbeschreibung: Wie GE0028, aber ohne Hintergrund
+--- Verarbeite AC0010.jpg ---
+Bildbeschreibung: Heizelement, graues Rechteck, Plus-Minus-Zeichen oben links, Farbverlauf horizontal dunkel-hell-dunkel graue Diagonale oben rechts nach unten links
 Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
   -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[INFO] Übersichts-Kacheln erzeugt: diff=C:\Users\marku\myCloud\imageConverter\artifacts\converted_images\reports\overview_diff_tiles.png, svg=C:\Users\marku\myCloud\imageConverter\artifacts\converted_images\reports\overview_svg_tiles.png
 
---- Verarbeite GE9041_3S.jpg ---
-Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
-
---- Verarbeite b_forward.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie b_forward. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (forward). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Plan B aktiv: elementweise iterative Annäherung aus Rasterbild.
-  -> Plan B Vergleich aktiv: verwende generierte Vektor-Lösung (status=manual_review_elementwise_symbol_fit, err=158.480).
-
---- Verarbeite GE0202_S.jpg ---
-Bildbeschreibung: Hintergrund: GE0999. Stillisierte Schneeflocke. Sechs dunkle Strahlen, nach aussen. Aussen ein dunkle Strahlen in Rechtekform. 3-D Effekt (weiss) von links (?) angestrahlt
-Befehl erkannt: MANUELL: Beschreibung unzureichend (fehlende Geometriehinweise oder leerer Beschreibungstext).
-  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
-
---- Verarbeite AC0924_L.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0924. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0924. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die große Variante (L). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Plan B aktiv: elementweise iterative Annäherung aus Rasterbild.
-  -> Plan B Vergleich aktiv: verwende generierte Vektor-Lösung (status=manual_review_elementwise_symbol_fit, err=166.876).
-
---- Verarbeite AC0930_L.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0930. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0930. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die große Variante (L). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Plan B aktiv: elementweise iterative Annäherung aus Rasterbild.
-  -> Plan B Vergleich aktiv: verwende generierte Vektor-Lösung (status=manual_review_elementwise_symbol_fit, err=144.960).
-
---- Verarbeite DLG0000.jpg ---
-Bildbeschreibung: Wie AC0100: Wie AC0010. Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
-
---- Verarbeite AC0304_2_L.jpg ---
-Bildbeschreibung: Wie AC0301: Kompresor grauer Hintergrund nach oben. Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
-
---- Verarbeite AR0083.jpg ---
-Bildbeschreibung: Wie AR0082, nach rechts gedreht, Text "M" horizontal
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
-
---- Verarbeite RepEin.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie RepEin. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (—). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Plan B aktiv: elementweise iterative Annäherung aus Rasterbild.
-  -> Plan B Vergleich aktiv: verwende generierte Vektor-Lösung (status=manual_review_elementwise_symbol_fit, err=130.925).
-
---- Verarbeite AR0104.jpg ---
-Bildbeschreibung: Wie AR0101, nach links gedreht, Text horizontal
-Befehl erkannt: SEMANTIC: senkrechter Strich oben vom Kreis, REFERENZ: Abgeleitet aus AR0101
-[WARN] AR0104.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
-
---- Verarbeite GE0025.jpg ---
-Bildbeschreibung: Hintergrund: GE0999. Play-Button (Dreieck ) nach rechts
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
-
---- Verarbeite GE9014_2M.jpg ---
-Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
-
---- Verarbeite AC0834_S.jpg ---
-Bildbeschreibung: Wie AC080, jedoch Griff unten (als Kelle ausfeführt) Abweichung: nach links gedreht, Text immer noch horizontal. Der Griff liegt auf einer Symmetrieachse des Kreises.
-Befehl erkannt: SEMANTIC: waagrechter Strich rechts vom Kreis, SEMANTIC: Kreis + Buchstabe
-
---- Verarbeite z_257.jpg ---
-Bildbeschreibung: z_-Dateien sind Rohr-Symbole mit Verzierungen; enthalten sind gerade Rohre, gebogene Rohre und T-Stücke.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
-
---- Verarbeite AC0501_1_L.jpg ---
-Bildbeschreibung: Klappensymbol: Rechteck hochkant, graue Umrandung. Graue Diagonale von unten links nach oben Rechts, in der Mitte ein dunkelgrauer Punkt. Farbverlauf Hintergrund: Dunkelgrau, hellgrau, dunkelgrau
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
-
---- Verarbeite AC0241_M.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0241. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0241. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die mittlere Variante (M). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Plan B aktiv: elementweise iterative Annäherung aus Rasterbild.
-  -> Plan B Vergleich aktiv: verwende generierte Vektor-Lösung (status=manual_review_elementwise_symbol_fit, err=173.288).
-
---- Verarbeite AC0080_M.jpg ---
-Bildbeschreibung: Wie AC0020: zwei vertikale Striche links blau, rechts, rot, unten Dreiecke blau rot, links Spitze nach unten, rechts Spitze nach oben. Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch)
-
---- Verarbeite AC0304_1S_sia.jpg ---
-Bildbeschreibung: Wie AC0301: Kompresor grauer Hintergrund nach oben. Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
-
---- Verarbeite GE9033_6S.jpg ---
-Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
-
---- Verarbeite AC0723_1_M.jpg ---
-Bildbeschreibung: Wie AC0701: Kelle, aber mit Quadrat anstelle von Kreis oben. Geometrische Variante: Vertikal gespiegelt. Der Griff liegt auf einer Symmetrieachse des Kreises.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
-
---- Verarbeite GE9022_5S.jpg ---
-Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
-
---- Verarbeite GE9001_4S.jpg ---
-Bildbeschreibung: stillisierte Röhre. Im Prinzip sehr dünnes Rechteck, hochkant, horizontaler Farbverlauf rot/grau/rot
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
-
---- Verarbeite z_302.jpg ---
-Bildbeschreibung: z_-Dateien sind Rohr-Symbole mit Verzierungen; enthalten sind gerade Rohre, gebogene Rohre und T-Stücke.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
-
---- Verarbeite AC0412_L.jpg ---
-Bildbeschreibung: Wie AC0222: Kompressor grauer Hintergrund nach oben. . Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
-
---- Verarbeite GE9033_3M.jpg ---
-Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
-
---- Verarbeite AC0731_S.jpg ---
-Bildbeschreibung: Wie AC071, aber mit "P" als Text
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
-
---- Verarbeite AC0404_M.jpg ---
-Bildbeschreibung: Wie AC0401: Wie AC0251, jedoch Hintergrund Kreis ein wenig dunkler. . Geometrische Variante: 90° nach rechts gedreht.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
-
---- Verarbeite AC0424_1_S.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0424. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0424_1. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Plan B aktiv: elementweise iterative Annäherung aus Rasterbild.
-  -> Plan B Vergleich aktiv: verwende generierte Vektor-Lösung (status=manual_review_elementwise_symbol_fit, err=95.123).
-
---- Verarbeite AC0844_M.jpg ---
-Bildbeschreibung: Kreisförmiges Badge. Abweichung: mit Text "rF" (relative Feuchtigkeit) Abweichung: mit Griff (dunkelgraue Linie nach unten) Abweichung: nach links gedreht, Text immer noch horizontal. Der Griff liegt auf einer Symmetrieachse des Kreises.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-[WARN] AC0844_M.jpg: Kein verwertbares Konvertierungsergebnis, als Fehler protokolliert (conversion_failed).
-
---- Verarbeite BackBottom.jpg ---
-Bildbeschreibung: hellgraues Quadrat.
-Befehl erkannt: MANUELL: Beschreibung unzureichend (fehlende Geometriehinweise oder leerer Beschreibungstext).
-  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
-
---- Verarbeite GE1401_S.jpg ---
-Bildbeschreibung: Graues Rechteck hochkant, graue Umrandung, drei graue horizontale Linien, Farbverlauf dunkel-hell-dunkel, Graue Linien Oben-Mitte nach Rechts-Mitte nach Unten-Mitte Abweichung: ist die kräftige graue Ecke/ Winkel unten statt rechts.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
-
---- Verarbeite AC0030_L.jpg ---
-Bildbeschreibung: AC0030 ist ein Luftkühler. AC0030_L, AC0030_M und AC0030_S sind Röhren mit links roter und rechts blauer Seite; der linke Pfeil zeigt nach oben, der rechte Pfeil nach unten.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
-
---- Verarbeite AC0421_1_S.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0421. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0421_1. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Plan B aktiv: elementweise iterative Annäherung aus Rasterbild.
-  -> Plan B Vergleich aktiv: verwende generierte Vektor-Lösung (status=manual_review_elementwise_symbol_fit, err=95.546).
-
---- Verarbeite AC0241_L.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0241. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0241. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die große Variante (L). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Plan B aktiv: elementweise iterative Annäherung aus Rasterbild.
-  -> Plan B Vergleich aktiv: verwende generierte Vektor-Lösung (status=manual_review_elementwise_symbol_fit, err=193.440).
-
---- Verarbeite GE0036_M.jpg ---
-Bildbeschreibung: Wie GE0028, aber ohne Hintergrund
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
-
---- Verarbeite NAV0012.JPG ---
-Bildbeschreibung: Hintergrund NAV0010, Vordergrund Schneeflocke von GE0202
-Befehl erkannt: MANUELL: Beschreibung unzureichend (fehlende Geometriehinweise oder leerer Beschreibungstext).
-  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
-
---- Verarbeite AC0252_1.jpg ---
-Bildbeschreibung: Wie AC0251: Pumpensymbol grau: grauer Kreis, hellgrauer Hintergund. Im Kreis ist ein dunkelgraues dreieck, Symmetrisch zu senkrechter Linie, nicht ganz gleichseitig (waagrechte Line unten ist ein weig kürzer). Geometrische Variante: 90° nach links gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
-
---- Verarbeite AC0503_S_sia.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0503_S_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Plan B aktiv: elementweise iterative Annäherung aus Rasterbild.
-  -> Plan B Vergleich aktiv: verwende generierte Vektor-Lösung (status=manual_review_elementwise_symbol_fit, err=169.278).
-
---- Verarbeite AC0702_1_S.jpg ---
-Bildbeschreibung: Wie AC0701: Kelle, aber mit Quadrat anstelle von Kreis oben. Geometrische Variante: 90° nach links gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
-
---- Verarbeite AC0222_L_sia.jpg ---
-Bildbeschreibung: Kompressor grauer Hintergrund nach oben.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
-
---- Verarbeite b_climate1.jpg ---
-Bildbeschreibung: Hintergrund: GE0999, Symbol wie GE0202 (Schneeflocke)
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
-
---- Verarbeite GE9005_7M.jpg ---
-Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
-
---- Verarbeite AC0912_S.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0912. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Plan B aktiv: elementweise iterative Annäherung aus Rasterbild.
-  -> Plan B Vergleich aktiv: verwende generierte Vektor-Lösung (status=manual_review_elementwise_symbol_fit, err=126.520).
-
---- Verarbeite GE9041_4S.jpg ---
-Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
-
---- Verarbeite AC0922_M.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0922. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0922. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die mittlere Variante (M). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Plan B aktiv: elementweise iterative Annäherung aus Rasterbild.
-  -> Plan B Vergleich aktiv: verwende generierte Vektor-Lösung (status=manual_review_elementwise_symbol_fit, err=152.127).
-
---- Verarbeite AC0538_L_sia.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0538_S_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie AC0538_L_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Plan B aktiv: elementweise iterative Annäherung aus Rasterbild.
-  -> Plan B Vergleich aktiv: verwende generierte Vektor-Lösung (status=manual_review_elementwise_symbol_fit, err=206.291).
-
---- Verarbeite AC0538_2L_sia.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie AC0538_2L_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Plan B aktiv: elementweise iterative Annäherung aus Rasterbild.
-  -> Plan B Vergleich aktiv: verwende generierte Vektor-Lösung (status=manual_review_elementwise_symbol_fit, err=195.753).
-
---- Verarbeite GE0111_L.jpg ---
-Bildbeschreibung: Unzugeordnete Wurzelform aus der Serie GE0111. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen. Unzugeordnete Wurzelform aus der Serie GE0111. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die große Variante (L). Bitte einer finalen Wurzelform-Kategorie zuordnen.
-Befehl erkannt: MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.
-  -> Plan B aktiv: elementweise iterative Annäherung aus Rasterbild.
-  -> Plan B Vergleich aktiv: verwende generierte Vektor-Lösung (status=manual_review_elementwise_symbol_fit, err=191.447).
+Abgeschlossen! Ausgaben unter: C:\Users\marku\myCloud\imageConverter\artifacts\converted_images
+[WARN] Mindestens eine Datei konnte nicht erfolgreich konvertiert werden (siehe batch_failure_summary.csv).

@@ -1,12 +1,12 @@
 {
-  "base": "AC0100",
-  "best_error": 48.14625,
+  "base": "AC0010",
+  "best_error": 39.252604166666664,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.0601828125,
-  "filename": "AC0100_S.jpg",
-  "h": 40,
-  "mean_delta2": 10482.38671875,
+  "error_per_pixel": 0.012266438802083333,
+  "filename": "AC0010.jpg",
+  "h": 80,
+  "mean_delta2": 8923.3486328125,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -14,19 +14,17 @@
       "deficits": [],
       "has_conditions": false,
       "has_geometry_terms": true,
-      "has_reference": true,
+      "has_reference": false,
       "status": "ok"
     },
     "description_fragments": [
       {
-        "key": "AC0100",
+        "key": "AC0010",
         "source": "base_name",
-        "text": "Wie AC0010: Heizelement, graues Rechteck, Plus-Minus-Zeichen oben links, horizontaler Farbverlauf dunkel–hell–dunkel sowie graue Diagonale von oben rechts nach unten links."
+        "text": "Heizelement, graues Rechteck, Plus-Minus-Zeichen oben links, Farbverlauf horizontal dunkel-hell-dunkel graue Diagonale oben rechts nach unten links"
       }
     ],
-    "documented_alias_refs": [
-      "AC0010"
-    ],
+    "documented_alias_refs": [],
     "elements": [],
     "geometry_ir": [
       {
@@ -92,9 +90,9 @@
     ],
     "semantic_sources": {},
     "top_source_ref": null,
-    "variant_name": "AC0100_S"
+    "variant_name": "AC0010"
   },
-  "std_delta2": 14199.265625,
-  "variant": "AC0100_S",
-  "w": 20
+  "std_delta2": 15079.91015625,
+  "variant": "AC0010",
+  "w": 40
 }
