@@ -5631,6 +5631,8 @@ def test_validate_badge_by_elements_raises_timeout_error_when_budget_exceeded() 
             optimize_element_color_bracket_fn=lambda *_a, **_k: False,
             apply_canonical_badge_colors_fn=lambda _p: {},
         )
+
+
 @pytest.mark.blocking_conversion
 def test_make_badge_params_keeps_ac0838_m_circle_near_full_width_for_voc_layout() -> None:
     """AC0838_M should preserve the dominant near-full-width VOC circle instead of collapsing."""
@@ -5638,7 +5640,10 @@ def test_make_badge_params_keeps_ac0838_m_circle_near_full_width_for_voc_layout(
         pytest.skip("numpy/cv2 not available in this environment")
 
     cv2 = image_composite_converter.cv2
-    img = cv2.imread("artifacts/images_to_convert/AC0838_M.jpg")
+    image_path = Path("artifacts/images_to_convert/AC0838_M.jpg")
+    if not image_path.exists():
+        image_path = Path("artifacts/images_to_convert/nonconvertable/AC0838_M.jpg")
+    img = cv2.imread(str(image_path))
     if img is None:
         pytest.skip("AC0838_M.jpg not available in this environment")
 
