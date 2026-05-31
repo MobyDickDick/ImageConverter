@@ -711,24 +711,23 @@ def test_finalize_ac0820_keeps_default_anchor_mode() -> None:
 
 
 def test_finalize_ac0820_variant_name_keeps_default_anchor_mode() -> None:
-    """AC0820 variants should keep superscript CO² without forcing centered anchoring."""
+    """AC0820 variants should keep lowered CO₂ without forcing centered anchoring."""
     params = Action._apply_co2_label(Action._default_ac0870_params(30, 30))
     params = Action._finalize_ac08_style("AC0820_L", params)
 
     assert params["co2_anchor_mode"] == "center_co"
-    assert params["co2_index_mode"] == "superscript"
-    assert float(params["co2_optical_bias"]) >= 0.125
+    assert params["co2_index_mode"] == "subscript"
+    assert float(params["co2_optical_bias"]) == pytest.approx(0.080)
 
 
-def test_finalize_ac0820_m_enforces_larger_superscript_gap() -> None:
-    """AC0820_M should keep a stronger horizontal separation between O and superscript 2."""
+def test_finalize_ac0820_m_enforces_lowered_index_placement() -> None:
+    """AC0820_M should keep the trailing 2 below the CO baseline."""
     params = Action._apply_co2_label(Action._default_ac0870_params(20, 20))
     params = Action._finalize_ac08_style("AC0820_M", params)
     layout = Action._co2_layout(params)
 
-    o_right = float(layout["co_x"]) + (float(layout["font_size"]) * 1.04 * float(layout["width_scale"]) / 2.0)
-    min_gap = float(layout["font_size"]) * 0.16
-    assert float(layout["subscript_x"]) - o_right >= (min_gap - 1e-6)
+    assert layout["index_mode"] == "subscript"
+    assert float(layout["subscript_y"]) > float(layout["y_base"])
 
 
 def test_finalize_ac0800_keeps_ring_darker_than_fill() -> None:

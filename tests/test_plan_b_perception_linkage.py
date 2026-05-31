@@ -20,10 +20,10 @@ def test_build_plan_b_perception_linkage_record_has_lerneffekt_decision() -> Non
     record = build_plan_b_perception_linkage_record(PLAN_B_PERCEPTION_TARGETS[0])
 
     assert record["schema_version"] == "plan_b_perception_linkage_record_v1"
-    assert record["variant"] == "AC0820_S"
+    assert record["variant"] == "AC0836_S"
     lerneffekt = record["perception_lerneffekt"]
     assert lerneffekt["question"]
-    assert lerneffekt["expected_first_primitive"] == "circle_ring_or_co2_label"
+    assert lerneffekt["expected_first_primitive"] == "circle_ring_or_vertical_connector"
     assert lerneffekt["decision"] in {
         "generalisiert",
         "nur Sonderfall",
@@ -31,6 +31,7 @@ def test_build_plan_b_perception_linkage_record_has_lerneffekt_decision() -> Non
     }
     assert lerneffekt["expected_candidate_kinds"] == [
         "circle",
+        "line",
         "ring",
         "text_glyph",
     ]
@@ -55,7 +56,7 @@ def test_run_plan_b_perception_linkage_report_writes_json_and_csv(
     assert report["schema_version"] == "plan_b_perception_linkage_report_v1"
     assert report["metrics"]["all_have_perception_lerneffekt"] is True
     assert {record["variant"] for record in report["records"]} == {
-        "AC0820_S",
+        "AC0836_S",
         "AC0870_S",
         "AC0850_M",
     }

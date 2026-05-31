@@ -1397,15 +1397,18 @@ def write_text_glyph_evaluation_report(
 
 PLAN_B_PERCEPTION_TARGETS: list[dict[str, Any]] = [
     {
-        "variant": "AC0820_S",
-        "image_candidates": ["artifacts/images_to_convert/AC0820_S.jpg"],
-        "plan_b_reason": "Weak-Family-Befund: rundes CO2-Badge mit tiefgestelltem Label und auffälligem Text-/Grauwertfehler.",
-        "perception_question": "Kann der dominante CO2-Kreis vorab als CircleBackground und das kurze Label als TextGlyph-Hinweis festgehalten werden?",
-        "expected_first_primitive": "circle_ring_or_co2_label",
-        "expected_candidate_kinds": {"circle", "ring", "text_glyph"},
+        "variant": "AC0836_S",
+        "image_candidates": [
+            "artifacts/images_to_convert/AC0836_S.jpg",
+            "artifacts/images_to_convert/nonconvertable/AC0836_S.jpg",
+        ],
+        "plan_b_reason": "Weak-Family-Befund: rundes VOC-Badge mit senkrechtem Griff und auffälligem Text-/Connector-Fehler.",
+        "perception_question": "Kann der dominante VOC-Kreis vorab als CircleBackground und der senkrechte Griff als Linien-Hinweis festgehalten werden?",
+        "expected_first_primitive": "circle_ring_or_vertical_connector",
+        "expected_candidate_kinds": {"circle", "ring", "line", "text_glyph"},
         "expected_seed_kinds": {"CircleBackground", "TextGlyph"},
-        "description": "Plan-B-Kandidat AC0820_S: rundes CO2-Badge; Kreis und kurzes Label zuerst prüfen.",
-        "glyphs": ["CO2"],
+        "description": "Plan-B-Kandidat AC0836_S: rundes VOC-Badge mit senkrechtem Griff; Kreis, Label und Griff zuerst prüfen.",
+        "glyphs": ["VOC"],
     },
     {
         "variant": "AC0870_S",

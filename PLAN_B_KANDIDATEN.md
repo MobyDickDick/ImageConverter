@@ -2,11 +2,11 @@
 
 Ziel: maximal **5** aktive JPG-Kandidaten, die derzeit noch nicht zufriedenstellend konvertieren, aber voraussichtlich nicht "hoffnungslos komplex" sind.
 
-## Aktuelle Kandidaten (Stand: 2026-05-31, nach AC0835-S-Refresh)
+## Aktuelle Kandidaten (Stand: 2026-05-31, nach AC0820-S-Refresh)
 
-1. `AC0820_S.jpg` – Weak-Family-Befund: rundes `CO2`-Badge mit tiefgestelltem Label; die Priorität-A-Familie bleibt wegen Text-/Grauwertfehlern eine geeignete nächste Nachzeichnungsprobe.
-2. `AC0870_S.jpg` – Weak-Family-Befund: rundes `T`-Badge; einfache Grundform, aber Textgrösse, Zentrierung und Antialiasing sind weiterhin auffällig.
-3. `AC0850_M.jpg` – Weak-Family-Befund: rundes `rF`-Badge ohne Griff mit sehr hohem Text-/Grauwertfehler (`mean_delta2=13599.945312` in der AC08-Weak-Family-Rangliste).
+1. `AC0870_S.jpg` – Weak-Family-Befund: rundes `T`-Badge; einfache Grundform, aber Textgrösse, Zentrierung und Antialiasing sind weiterhin auffällig.
+2. `AC0850_M.jpg` – Weak-Family-Befund: rundes `rF`-Badge ohne Griff mit sehr hohem Text-/Grauwertfehler (`mean_delta2=13599.945312` in der AC08-Weak-Family-Rangliste).
+3. `AC0836_S.jpg` – Weak-Family-Befund: rundes `VOC`-Badge mit senkrechtem Griff; gute nächste Probe für Kreis, Label und einfachen Connector.
 
 ## Perception-Lerneffekt (Pflichtabschnitt ab PF8)
 
@@ -18,9 +18,9 @@ maschinenlesbare Stand liegt unter
 
 | Kandidat | Erste Perception-Frage | Erwartetes erstes Primitive | PF8-Entscheidung | Seed-Folge |
 | --- | --- | --- | --- | --- |
-| `AC0820_S.jpg` | Dominanten CO2-Kreis und kurzes Label vorab festhalten? | `circle_ring_or_co2_label` | `generalisiert` | Kreis als `CircleBackground` seedbar; `CO2` bleibt ergänzende TextGlyph-Prüfung für die tiefgestellte Ziffer. |
 | `AC0870_S.jpg` | Dominanten T-Kreis und zentriertes Kurzlabel vorab festhalten? | `circle_ring_or_t_label` | `generalisiert` | Kreis als `CircleBackground` seedbar; `T` bleibt ergänzende TextGlyph-Prüfung für Zentrierung und Antialiasing. |
 | `AC0850_M.jpg` | Dominanten rF-Kreis und zweibuchstabiges Label vorab festhalten? | `circle_ring_or_rf_label` | `generalisiert` | Kreis als `CircleBackground` seedbar; `rF` bleibt ergänzende TextGlyph-Prüfung für Textgrösse und Grauwert. |
+| `AC0836_S.jpg` | Dominanten VOC-Kreis und senkrechten Griff vorab festhalten? | `circle_ring_or_vertical_connector` | `generalisiert` | Kreis als `CircleBackground` seedbar; `VOC` und der Griff bleiben gekoppelte TextGlyph-/Linien-Prüfung. |
 
 ## Pflege-Regel (fortan)
 

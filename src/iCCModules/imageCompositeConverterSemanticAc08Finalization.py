@@ -41,10 +41,14 @@ def finalizeAc08StyleImpl(
         p = tune_ac0833_co2_badge_fn(p)
     if symbol_name == "AC0820" and str(p.get("text_mode", "")).lower() == "co2":
         p["co2_anchor_mode"] = str(p.get("co2_anchor_mode", "center_co"))
-        p["co2_index_mode"] = "superscript"
-        p["co2_superscript_offset_scale"] = float(min(float(p.get("co2_superscript_offset_scale", 0.16)), 0.18))
-        p["co2_superscript_min_gap_scale"] = float(max(float(p.get("co2_superscript_min_gap_scale", 0.16)), 0.16))
-        p["co2_optical_bias"] = 0.125
+        # AC0820 is documented as the plain CO₂ badge; the source XML explicitly
+        # notes that a raised 2 is wrong for this family. Keep connector CO²
+        # families on their superscript-specific tuners, but render AC0820 with
+        # a lowered index by default.
+        p["co2_index_mode"] = "subscript"
+        p.pop("co2_superscript_offset_scale", None)
+        p.pop("co2_superscript_min_gap_scale", None)
+        p["co2_optical_bias"] = 0.080
         r = max(1.0, float(p.get("r", 1.0)))
         if r >= 10.0:
             p["co2_font_scale"] = 0.82
