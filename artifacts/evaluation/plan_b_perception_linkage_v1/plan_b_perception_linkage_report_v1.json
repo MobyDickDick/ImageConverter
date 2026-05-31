@@ -11,100 +11,6 @@
   "records": [
     {
       "schema_version": "plan_b_perception_linkage_record_v1",
-      "variant": "AC0232_S",
-      "image_path": "artifacts/images_to_convert/AC0232_S.jpg",
-      "status": "evaluated",
-      "plan_b_reason": "AC0231-verwandtes 3-Wege-Ventil, 90 Grad nach links gedreht.",
-      "description": "Plan-B-Kandidat AC0232_S: AC0231-verwandtes 3-Wege-Ventil, 90 Grad nach links gedreht; Kelle mit senkrechtem Buchstaben `M`.",
-      "perception_lerneffekt": {
-        "question": "Kann die gedrehte M-Beschriftung oder die runde Kelle vorab als TextGlyph/CircleBackground dokumentiert werden?",
-        "expected_first_primitive": "text_glyph_or_circle_ring",
-        "expected_candidate_kinds": [
-          "circle",
-          "ring",
-          "text_glyph"
-        ],
-        "expected_seed_kinds": [
-          "CircleBackground",
-          "TextGlyph"
-        ],
-        "decision": "generalisiert",
-        "matched_candidate_kinds": [
-          "circle"
-        ],
-        "matched_seed_kinds": [
-          "CircleBackground"
-        ],
-        "top_candidate_kind": "circle",
-        "top_confidence": 0.9236,
-        "next_action": "Im n\u00e4chsten Plan-B-Paket als vorinitialisierten Geometry-IR-Seed protokollieren."
-      },
-      "candidate_count": 2,
-      "top_candidate": {
-        "schema_version": "perception_primitive_candidate_v1",
-        "kind": "circle",
-        "bbox": {
-          "x": 14.0,
-          "y": 2.0,
-          "width": 14.0,
-          "height": 14.0
-        },
-        "center": {
-          "x": 21.0,
-          "y": 9.0
-        },
-        "geometry": {
-          "radius_px": 7.0,
-          "inner_radius_px": 0.0,
-          "stroke_width_px": 1.0,
-          "circularity": 1.0,
-          "ring": false,
-          "fill_ratio": 0.698,
-          "geometry_ir_kind": "CircleBackground",
-          "geometry_ir_bbox": [
-            0.46667,
-            0.1,
-            0.46667,
-            0.7
-          ]
-        },
-        "color": {
-          "fill_rgb": [
-            182,
-            182,
-            182
-          ],
-          "stroke_rgb": [
-            200,
-            200,
-            200
-          ],
-          "fill_hex": "#B6B6B6",
-          "stroke_hex": "#C8C8C8",
-          "fill_confidence": 0.6483,
-          "stroke_confidence": 0.7097
-        },
-        "confidence": 0.9236,
-        "roi": {
-          "type": "image",
-          "hint": "full_image",
-          "bbox": {
-            "x": 0.0,
-            "y": 0.0,
-            "width": 30.0,
-            "height": 20.0
-          }
-        },
-        "evidence": {
-          "detector": "detect_circle_rings",
-          "detection_source": "hough",
-          "threshold_model": "hough_plus_foreground_mask"
-        },
-        "source": "pf8_plan_b_perception_linkage"
-      }
-    },
-    {
-      "schema_version": "plan_b_perception_linkage_record_v1",
       "variant": "AC0233_S",
       "image_path": "artifacts/images_to_convert/AC0233_S.jpg",
       "status": "evaluated",
@@ -380,6 +286,100 @@
           "detector": "detect_horizontal_rules",
           "threshold_model": "dark_contour_horizontal_opening",
           "description_hint": "full_image"
+        },
+        "source": "pf8_plan_b_perception_linkage"
+      }
+    },
+    {
+      "schema_version": "plan_b_perception_linkage_record_v1",
+      "variant": "AC0234_S",
+      "image_path": "artifacts/images_to_convert/AC0234_S.jpg",
+      "status": "evaluated",
+      "plan_b_reason": "AC0231-verwandtes 3-Wege-Ventil, hauptdiagonal gespiegelt und mit vorhandenem Diff-Artefakt.",
+      "description": "Plan-B-Kandidat AC0234_S: AC0231-verwandtes 3-Wege-Ventil, hauptdiagonal gespiegelt; Kelle mit gespiegeltem Buchstaben `M`.",
+      "perception_lerneffekt": {
+        "question": "Kann die gespiegelte M-Beschriftung oder die runde Kelle vorab als TextGlyph/CircleBackground dokumentiert werden?",
+        "expected_first_primitive": "text_glyph_or_circle_ring",
+        "expected_candidate_kinds": [
+          "circle",
+          "ring",
+          "text_glyph"
+        ],
+        "expected_seed_kinds": [
+          "CircleBackground",
+          "TextGlyph"
+        ],
+        "decision": "generalisiert",
+        "matched_candidate_kinds": [
+          "circle"
+        ],
+        "matched_seed_kinds": [
+          "CircleBackground"
+        ],
+        "top_candidate_kind": "circle",
+        "top_confidence": 0.938,
+        "next_action": "Im n\u00e4chsten Plan-B-Paket als vorinitialisierten Geometry-IR-Seed protokollieren."
+      },
+      "candidate_count": 8,
+      "top_candidate": {
+        "schema_version": "perception_primitive_candidate_v1",
+        "kind": "circle",
+        "bbox": {
+          "x": 23.0,
+          "y": 4.0,
+          "width": 7.0,
+          "height": 10.0
+        },
+        "center": {
+          "x": 28.0,
+          "y": 9.0
+        },
+        "geometry": {
+          "radius_px": 5.0,
+          "inner_radius_px": 0.0,
+          "stroke_width_px": 1.0,
+          "circularity": 1.0,
+          "ring": false,
+          "fill_ratio": 0.7636,
+          "geometry_ir_kind": "CircleBackground",
+          "geometry_ir_bbox": [
+            0.76667,
+            0.2,
+            0.23333,
+            0.5
+          ]
+        },
+        "color": {
+          "fill_rgb": [
+            184,
+            184,
+            185
+          ],
+          "stroke_rgb": [
+            195,
+            195,
+            196
+          ],
+          "fill_hex": "#B8B8B9",
+          "stroke_hex": "#C3C3C4",
+          "fill_confidence": 0.7974,
+          "stroke_confidence": 0.7347
+        },
+        "confidence": 0.938,
+        "roi": {
+          "type": "image",
+          "hint": "full_image",
+          "bbox": {
+            "x": 0.0,
+            "y": 0.0,
+            "width": 30.0,
+            "height": 20.0
+          }
+        },
+        "evidence": {
+          "detector": "detect_circle_rings",
+          "detection_source": "hough",
+          "threshold_model": "hough_plus_foreground_mask"
         },
         "source": "pf8_plan_b_perception_linkage"
       }

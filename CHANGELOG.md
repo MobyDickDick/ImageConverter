@@ -4,6 +4,7 @@ All notable changes to ImageConverter will be documented in this file.
 
 ## Unreleased
 
+- AC0232_S now uses a description-driven, left-rotated top-kelle Geometry-IR glyph with an `M` label before the generic non-composite fallback.
 - AC0203_1 now uses a description-driven Geometry-IR path with a red circle and main-diagonal mirrored compressor line primitives before the generic non-composite symbol fallback.
 - AC0150_L now uses a description-driven Geometry-IR path with vertical rectangle, horizontal rule-set, and right-side orthogonal polyline primitives before the generic non-composite symbol fallback.
 - CI now includes a separate batch-artifact drift-gate job that runs the local completion profile with `--require-drift-summary` against a representative passing telemetry summary.

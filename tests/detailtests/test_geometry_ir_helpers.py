@@ -239,6 +239,34 @@ def test_render_geometry_ir_to_svg_contains_ac0203_mirrored_compressor_primitive
 
 
 
+def test_build_geometry_ir_maps_ac0232_left_rotated_m_top_kelle_three_way_valve_description() -> None:
+    ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
+        'Wie AC0231: 3-Weg Ventil ähnlich AC0211, um 90° im Uhrzeigersinn gedreht, '
+        '"M" wird immer noch senkrecht geschrieben. Noch ein 3. spitzes Dreieck unten. '
+        'Wieder Farbwechsel von Dunkelgrau nach hellgrau (von links unten nach rechts oben). '
+        'Geometrische Variante: 90° nach links gedreht. '
+        'Der Griff liegt auf einer Symmetrieachse des Kreises.'
+    )
+
+    assert [element["kind"] for element in ir] == ["LeftRotatedTopKelleThreeWayValveGlyph"]
+    assert ir[0]["id"] == "left_rotated_top_kelle_three_way_valve"
+    assert ir[0]["label"] == "M"
+    assert ir[0]["circle"] == [0.235, 0.500, 0.225]
+
+
+def test_render_geometry_ir_to_svg_contains_ac0232_left_rotated_m_top_kelle_label() -> None:
+    ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
+        'Plan-B-Kandidat AC0232_S: AC0231-verwandtes 3-Wege-Ventil, '
+        '90 Grad nach links gedreht; Kelle mit senkrechtem Buchstaben `M`.'
+    )
+
+    svg = geometry_ir_helpers.renderGeometryIrToSvgImpl(30, 20, ir)
+
+    assert 'id="left_rotated_top_kelle_three_way_valve_circle"' in svg
+    assert 'id="left_rotated_top_kelle_three_way_valve_label"' in svg
+    assert '>M</text>' in svg
+
+
 def test_build_geometry_ir_maps_ac0231_m_top_kelle_three_way_valve_description() -> None:
     ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
         '3-Weg Ventil ähnlich AC0211, um 90° im Uhrzeigersinn gedreht, '
