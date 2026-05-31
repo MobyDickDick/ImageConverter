@@ -11,100 +11,6 @@
   "records": [
     {
       "schema_version": "plan_b_perception_linkage_record_v1",
-      "variant": "AC0838_M",
-      "image_path": "artifacts/images_to_convert/nonconvertable/AC0838_M.jpg",
-      "status": "evaluated",
-      "plan_b_reason": "Qualit\u00e4tsreview-Befund: vorhandenes SVG-Paar rendert, \u00fcberschreitet aber die Review-Grenze.",
-      "description": "Plan-B-Kandidat AC0838_M: dominant ist ein Kreis mit kurzem Label `VOC`.",
-      "perception_lerneffekt": {
-        "question": "Kann der dominante VOC-Kreis vorab als CircleBackground und Label-Signal festgehalten werden?",
-        "expected_first_primitive": "circle_ring_or_voc_label",
-        "expected_candidate_kinds": [
-          "circle",
-          "ring",
-          "text_glyph"
-        ],
-        "expected_seed_kinds": [
-          "CircleBackground",
-          "TextGlyph"
-        ],
-        "decision": "generalisiert",
-        "matched_candidate_kinds": [
-          "circle"
-        ],
-        "matched_seed_kinds": [
-          "CircleBackground"
-        ],
-        "top_candidate_kind": "circle",
-        "top_confidence": 0.8601,
-        "next_action": "Im n\u00e4chsten Plan-B-Paket als vorinitialisierten Geometry-IR-Seed protokollieren."
-      },
-      "candidate_count": 4,
-      "top_candidate": {
-        "schema_version": "perception_primitive_candidate_v1",
-        "kind": "circle",
-        "bbox": {
-          "x": 2.0,
-          "y": 16.0,
-          "width": 14.0,
-          "height": 14.0
-        },
-        "center": {
-          "x": 9.0,
-          "y": 23.0
-        },
-        "geometry": {
-          "radius_px": 7.0,
-          "inner_radius_px": 0.0,
-          "stroke_width_px": 1.0,
-          "circularity": 1.0,
-          "ring": false,
-          "fill_ratio": 0.4094,
-          "geometry_ir_kind": "CircleBackground",
-          "geometry_ir_bbox": [
-            0.1,
-            0.45714,
-            0.7,
-            0.4
-          ]
-        },
-        "color": {
-          "fill_rgb": [
-            213,
-            213,
-            213
-          ],
-          "stroke_rgb": [
-            237,
-            237,
-            237
-          ],
-          "fill_hex": "#D5D5D5",
-          "stroke_hex": "#EDEDED",
-          "fill_confidence": 0.576,
-          "stroke_confidence": 0.6818
-        },
-        "confidence": 0.8601,
-        "roi": {
-          "type": "image",
-          "hint": "full_image",
-          "bbox": {
-            "x": 0.0,
-            "y": 0.0,
-            "width": 20.0,
-            "height": 35.0
-          }
-        },
-        "evidence": {
-          "detector": "detect_circle_rings",
-          "detection_source": "hough",
-          "threshold_model": "hough_plus_foreground_mask"
-        },
-        "source": "pf8_plan_b_perception_linkage"
-      }
-    },
-    {
-      "schema_version": "plan_b_perception_linkage_record_v1",
       "variant": "AC0881_M",
       "image_path": "artifacts/images_to_convert/nonconvertable/AC0881_M.jpg",
       "status": "evaluated",
@@ -279,6 +185,100 @@
             "y": 0.0,
             "width": 30.0,
             "height": 20.0
+          }
+        },
+        "evidence": {
+          "detector": "detect_circle_rings",
+          "detection_source": "hough",
+          "threshold_model": "hough_plus_foreground_mask"
+        },
+        "source": "pf8_plan_b_perception_linkage"
+      }
+    },
+    {
+      "schema_version": "plan_b_perception_linkage_record_v1",
+      "variant": "AC0835_S",
+      "image_path": "artifacts/images_to_convert/AC0835_S.jpg",
+      "status": "evaluated",
+      "plan_b_reason": "Weak-Family-Befund: rundes VOC-Badge ohne Griff mit auff\u00e4lligem Text-/Grauwertfehler.",
+      "description": "Plan-B-Kandidat AC0835_S: rundes VOC-Badge ohne Griff; Kreis und Label zuerst pr\u00fcfen.",
+      "perception_lerneffekt": {
+        "question": "Kann der dominante VOC-Kreis vorab als CircleBackground und das Label als TextGlyph-Hinweis festgehalten werden?",
+        "expected_first_primitive": "circle_ring_or_voc_label",
+        "expected_candidate_kinds": [
+          "circle",
+          "ring",
+          "text_glyph"
+        ],
+        "expected_seed_kinds": [
+          "CircleBackground",
+          "TextGlyph"
+        ],
+        "decision": "generalisiert",
+        "matched_candidate_kinds": [
+          "circle"
+        ],
+        "matched_seed_kinds": [
+          "CircleBackground"
+        ],
+        "top_candidate_kind": "circle",
+        "top_confidence": 0.8759,
+        "next_action": "Im n\u00e4chsten Plan-B-Paket als vorinitialisierten Geometry-IR-Seed protokollieren."
+      },
+      "candidate_count": 4,
+      "top_candidate": {
+        "schema_version": "perception_primitive_candidate_v1",
+        "kind": "circle",
+        "bbox": {
+          "x": 2.0,
+          "y": 1.0,
+          "width": 10.0,
+          "height": 10.0
+        },
+        "center": {
+          "x": 7.0,
+          "y": 6.0
+        },
+        "geometry": {
+          "radius_px": 5.0,
+          "inner_radius_px": 0.0,
+          "stroke_width_px": 1.0,
+          "circularity": 1.0,
+          "ring": false,
+          "fill_ratio": 0.4815,
+          "geometry_ir_kind": "CircleBackground",
+          "geometry_ir_bbox": [
+            0.13333,
+            0.06667,
+            0.66667,
+            0.66667
+          ]
+        },
+        "color": {
+          "fill_rgb": [
+            199,
+            199,
+            199
+          ],
+          "stroke_rgb": [
+            219,
+            219,
+            219
+          ],
+          "fill_hex": "#C7C7C7",
+          "stroke_hex": "#DBDBDB",
+          "fill_confidence": 0.609,
+          "stroke_confidence": 0.6408
+        },
+        "confidence": 0.8759,
+        "roi": {
+          "type": "image",
+          "hint": "full_image",
+          "bbox": {
+            "x": 0.0,
+            "y": 0.0,
+            "width": 15.0,
+            "height": 15.0
           }
         },
         "evidence": {
