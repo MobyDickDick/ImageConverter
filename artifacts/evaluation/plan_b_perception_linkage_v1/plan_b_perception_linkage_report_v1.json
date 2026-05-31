@@ -11,16 +11,17 @@
   "records": [
     {
       "schema_version": "plan_b_perception_linkage_record_v1",
-      "variant": "AC0820_S",
-      "image_path": "artifacts/images_to_convert/AC0820_S.jpg",
+      "variant": "AC0836_S",
+      "image_path": "artifacts/images_to_convert/nonconvertable/AC0836_S.jpg",
       "status": "evaluated",
-      "plan_b_reason": "Weak-Family-Befund: rundes CO2-Badge mit tiefgestelltem Label und auff\u00e4lligem Text-/Grauwertfehler.",
-      "description": "Plan-B-Kandidat AC0820_S: rundes CO2-Badge; Kreis und kurzes Label zuerst pr\u00fcfen.",
+      "plan_b_reason": "Weak-Family-Befund: rundes VOC-Badge mit senkrechtem Griff und auff\u00e4lligem Text-/Connector-Fehler.",
+      "description": "Plan-B-Kandidat AC0836_S: rundes VOC-Badge mit senkrechtem Griff; Kreis, Label und Griff zuerst pr\u00fcfen.",
       "perception_lerneffekt": {
-        "question": "Kann der dominante CO2-Kreis vorab als CircleBackground und das kurze Label als TextGlyph-Hinweis festgehalten werden?",
-        "expected_first_primitive": "circle_ring_or_co2_label",
+        "question": "Kann der dominante VOC-Kreis vorab als CircleBackground und der senkrechte Griff als Linien-Hinweis festgehalten werden?",
+        "expected_first_primitive": "circle_ring_or_vertical_connector",
         "expected_candidate_kinds": [
           "circle",
+          "line",
           "ring",
           "text_glyph"
         ],
@@ -36,7 +37,7 @@
           "CircleBackground"
         ],
         "top_candidate_kind": "circle",
-        "top_confidence": 0.8759,
+        "top_confidence": 0.8786,
         "next_action": "Im n\u00e4chsten Plan-B-Paket als vorinitialisierten Geometry-IR-Seed protokollieren."
       },
       "candidate_count": 4,
@@ -59,32 +60,32 @@
           "stroke_width_px": 1.0,
           "circularity": 1.0,
           "ring": false,
-          "fill_ratio": 0.4815,
+          "fill_ratio": 0.4938,
           "geometry_ir_kind": "CircleBackground",
           "geometry_ir_bbox": [
             0.13333,
-            0.2,
+            0.12,
             0.66667,
-            0.66667
+            0.4
           ]
         },
         "color": {
           "fill_rgb": [
-            201,
-            201,
-            201
+            202,
+            202,
+            202
           ],
           "stroke_rgb": [
-            220,
-            220,
-            220
+            226,
+            226,
+            226
           ],
-          "fill_hex": "#C9C9C9",
-          "stroke_hex": "#DCDCDC",
-          "fill_confidence": 0.648,
-          "stroke_confidence": 0.7125
+          "fill_hex": "#CACACA",
+          "stroke_hex": "#E2E2E2",
+          "fill_confidence": 0.6399,
+          "stroke_confidence": 0.756
         },
-        "confidence": 0.8759,
+        "confidence": 0.8786,
         "roi": {
           "type": "image",
           "hint": "full_image",
@@ -92,7 +93,7 @@
             "x": 0.0,
             "y": 0.0,
             "width": 15.0,
-            "height": 15.0
+            "height": 25.0
           }
         },
         "evidence": {
