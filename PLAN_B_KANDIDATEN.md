@@ -20,7 +20,7 @@ maschinenlesbare Stand liegt unter
 | Kandidat | Erste Perception-Frage | Erwartetes erstes Primitive | PF8-Entscheidung | Seed-Folge |
 | --- | --- | --- | --- | --- |
 | `AC0231_S.jpg` | Obere `M`-Kelle über Label- oder Kreis-Signal absichern? | `text_glyph_or_circle_ring` | `generalisiert` | Kreis zunächst als `CircleBackground` seedbar; `M` zusätzlich als Label-Hinweis dokumentieren. |
-| `AC0232_S.jpg` | Gedrehte Kelle mit Kreis- und `M`-Signal vor der ersten Iteration erkennen? | `text_glyph_or_circle_ring` | `noch nicht erkannt` | Im nächsten Plan-B-Paket Kreis-Seed und `M`-Label-Hinweis wie bei `AC0231_S` prüfen. |
+| `AC0232_S.jpg` | Gedrehte Kelle mit Kreis- und `M`-Signal vor der ersten Iteration erkennen? | `text_glyph_or_circle_ring` | `generalisiert` | Kreis als `CircleBackground` seedbar; `M` bleibt ergänzender Label-Hinweis wie bei `AC0231_S`. |
 | `AC0838_M.jpg` | Dominanten VOC-Kreis und Label-Signal vorab festhalten? | `circle_ring_or_voc_label` | `generalisiert` | Kreis als `CircleBackground` seedbar; `VOC` bleibt ergänzende TextGlyph-Prüfung. |
 | `AC0881_M.jpg` | Einfaches Rahmen-, Kreis- oder Linienprimitive zuerst erkennen? | `simple_shape_probe` | `generalisiert` | Gefundene Kreis-/HorizontalRule-Signale als Startseed prüfen. |
 

@@ -1397,14 +1397,15 @@ def write_text_glyph_evaluation_report(
 
 PLAN_B_PERCEPTION_TARGETS: list[dict[str, Any]] = [
     {
-        "variant": "AC0224_S",
-        "image_candidates": ["artifacts/images_to_convert/AC0224_S.jpg"],
-        "plan_b_reason": "AC0221-verwandter Kellenkandidat ohne M, 90 Grad nach rechts gedreht.",
-        "perception_question": "Kann die runde Kellen-/Kreisform vor der ersten Iteration als CircleBackground erkannt werden?",
-        "expected_first_primitive": "circle_ring",
-        "expected_candidate_kinds": {"circle", "ring"},
-        "expected_seed_kinds": {"CircleBackground"},
-        "description": "Plan-B-Kandidat AC0224_S: gedrehte Kelle mit runder Kreisform ohne M.",
+        "variant": "AC0232_S",
+        "image_candidates": ["artifacts/images_to_convert/AC0232_S.jpg"],
+        "plan_b_reason": "AC0231-verwandtes 3-Wege-Ventil, 90 Grad nach links gedreht.",
+        "perception_question": "Kann die gedrehte M-Beschriftung oder die runde Kelle vorab als TextGlyph/CircleBackground dokumentiert werden?",
+        "expected_first_primitive": "text_glyph_or_circle_ring",
+        "expected_candidate_kinds": {"text_glyph", "circle", "ring"},
+        "expected_seed_kinds": {"TextGlyph", "CircleBackground"},
+        "description": "Plan-B-Kandidat AC0232_S: AC0231-verwandtes 3-Wege-Ventil, 90 Grad nach links gedreht; Kelle mit senkrechtem Buchstaben `M`.",
+        "glyphs": ["M"],
     },
     {
         "variant": "AC0231_S",
