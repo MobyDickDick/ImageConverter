@@ -1,0 +1,394 @@
+{
+  "schema_version": "plan_b_perception_linkage_report_v1",
+  "candidate_schema_version": "perception_primitive_candidate_v1",
+  "plan_b_source": "PLAN_B_KANDIDATEN.md",
+  "acceptance_rule": "Each upcoming Plan-B package carries exactly one Perception-Lerneffekt decision.",
+  "allowed_decisions": [
+    "generalisiert",
+    "nur Sonderfall",
+    "noch nicht erkannt"
+  ],
+  "records": [
+    {
+      "schema_version": "plan_b_perception_linkage_record_v1",
+      "variant": "AC0224_S",
+      "image_path": "artifacts/images_to_convert/AC0224_S.jpg",
+      "status": "evaluated",
+      "plan_b_reason": "AC0221-verwandter Kellenkandidat ohne M, 90 Grad nach rechts gedreht.",
+      "description": "Plan-B-Kandidat AC0224_S: gedrehte Kelle mit runder Kreisform ohne M.",
+      "perception_lerneffekt": {
+        "question": "Kann die runde Kellen-/Kreisform vor der ersten Iteration als CircleBackground erkannt werden?",
+        "expected_first_primitive": "circle_ring",
+        "expected_candidate_kinds": [
+          "circle",
+          "ring"
+        ],
+        "expected_seed_kinds": [
+          "CircleBackground"
+        ],
+        "decision": "generalisiert",
+        "matched_candidate_kinds": [
+          "circle",
+          "ring"
+        ],
+        "matched_seed_kinds": [
+          "CircleBackground"
+        ],
+        "top_candidate_kind": "circle",
+        "top_confidence": 0.9493,
+        "next_action": "Im n\u00e4chsten Plan-B-Paket als vorinitialisierten Geometry-IR-Seed protokollieren."
+      },
+      "candidate_count": 6,
+      "top_candidate": {
+        "schema_version": "perception_primitive_candidate_v1",
+        "kind": "circle",
+        "bbox": {
+          "x": 16.0,
+          "y": 3.0,
+          "width": 10.0,
+          "height": 10.0
+        },
+        "center": {
+          "x": 21.0,
+          "y": 8.0
+        },
+        "geometry": {
+          "radius_px": 5.0,
+          "inner_radius_px": 0.0,
+          "stroke_width_px": 1.0,
+          "circularity": 1.0,
+          "ring": false,
+          "fill_ratio": 0.8148,
+          "geometry_ir_kind": "CircleBackground",
+          "geometry_ir_bbox": [
+            0.53333,
+            0.15,
+            0.33333,
+            0.5
+          ]
+        },
+        "color": {
+          "fill_rgb": [
+            193,
+            193,
+            193
+          ],
+          "stroke_rgb": [
+            203,
+            203,
+            203
+          ],
+          "fill_hex": "#C1C1C1",
+          "stroke_hex": "#CBCBCB",
+          "fill_confidence": 0.7405,
+          "stroke_confidence": 0.7252
+        },
+        "confidence": 0.9493,
+        "roi": {
+          "type": "image",
+          "hint": "full_image",
+          "bbox": {
+            "x": 0.0,
+            "y": 0.0,
+            "width": 30.0,
+            "height": 20.0
+          }
+        },
+        "evidence": {
+          "detector": "detect_circle_rings",
+          "detection_source": "hough",
+          "threshold_model": "hough_plus_foreground_mask"
+        },
+        "source": "pf8_plan_b_perception_linkage"
+      }
+    },
+    {
+      "schema_version": "plan_b_perception_linkage_record_v1",
+      "variant": "AC0231_S",
+      "image_path": "artifacts/images_to_convert/AC0231_S.jpg",
+      "status": "evaluated",
+      "plan_b_reason": "AC0221-verwandtes 3-Wege-Ventil mit oberer M-Kelle.",
+      "description": "Plan-B-Kandidat AC0231_S: oben befindet sich eine Kelle mit dem Buchstaben `M`.",
+      "perception_lerneffekt": {
+        "question": "Kann die obere M-Beschriftung oder die runde Kelle vorab als TextGlyph/CircleBackground dokumentiert werden?",
+        "expected_first_primitive": "text_glyph_or_circle_ring",
+        "expected_candidate_kinds": [
+          "circle",
+          "ring",
+          "text_glyph"
+        ],
+        "expected_seed_kinds": [
+          "CircleBackground",
+          "TextGlyph"
+        ],
+        "decision": "generalisiert",
+        "matched_candidate_kinds": [
+          "circle"
+        ],
+        "matched_seed_kinds": [
+          "CircleBackground"
+        ],
+        "top_candidate_kind": "circle",
+        "top_confidence": 0.926,
+        "next_action": "Im n\u00e4chsten Plan-B-Paket als vorinitialisierten Geometry-IR-Seed protokollieren."
+      },
+      "candidate_count": 3,
+      "top_candidate": {
+        "schema_version": "perception_primitive_candidate_v1",
+        "kind": "circle",
+        "bbox": {
+          "x": 13.0,
+          "y": 13.0,
+          "width": 7.0,
+          "height": 10.0
+        },
+        "center": {
+          "x": 18.0,
+          "y": 18.0
+        },
+        "geometry": {
+          "radius_px": 5.0,
+          "inner_radius_px": 0.0,
+          "stroke_width_px": 1.0,
+          "circularity": 1.0,
+          "ring": false,
+          "fill_ratio": 0.7091,
+          "geometry_ir_kind": "CircleBackground",
+          "geometry_ir_bbox": [
+            0.65,
+            0.43333,
+            0.35,
+            0.33333
+          ]
+        },
+        "color": {
+          "fill_rgb": [
+            208,
+            208,
+            208
+          ],
+          "stroke_rgb": [
+            214,
+            214,
+            214
+          ],
+          "fill_hex": "#D0D0D0",
+          "stroke_hex": "#D6D6D6",
+          "fill_confidence": 0.7744,
+          "stroke_confidence": 0.7
+        },
+        "confidence": 0.926,
+        "roi": {
+          "type": "image",
+          "hint": "full_image",
+          "bbox": {
+            "x": 0.0,
+            "y": 0.0,
+            "width": 20.0,
+            "height": 30.0
+          }
+        },
+        "evidence": {
+          "detector": "detect_circle_rings",
+          "detection_source": "hough",
+          "threshold_model": "hough_plus_foreground_mask"
+        },
+        "source": "pf8_plan_b_perception_linkage"
+      }
+    },
+    {
+      "schema_version": "plan_b_perception_linkage_record_v1",
+      "variant": "AC0838_M",
+      "image_path": "artifacts/images_to_convert/nonconvertable/AC0838_M.jpg",
+      "status": "evaluated",
+      "plan_b_reason": "Qualit\u00e4tsreview-Befund: vorhandenes SVG-Paar rendert, \u00fcberschreitet aber die Review-Grenze.",
+      "description": "Plan-B-Kandidat AC0838_M: dominant ist ein Kreis mit kurzem Label `VOC`.",
+      "perception_lerneffekt": {
+        "question": "Kann der dominante VOC-Kreis vorab als CircleBackground und Label-Signal festgehalten werden?",
+        "expected_first_primitive": "circle_ring_or_voc_label",
+        "expected_candidate_kinds": [
+          "circle",
+          "ring",
+          "text_glyph"
+        ],
+        "expected_seed_kinds": [
+          "CircleBackground",
+          "TextGlyph"
+        ],
+        "decision": "generalisiert",
+        "matched_candidate_kinds": [
+          "circle"
+        ],
+        "matched_seed_kinds": [
+          "CircleBackground"
+        ],
+        "top_candidate_kind": "circle",
+        "top_confidence": 0.8601,
+        "next_action": "Im n\u00e4chsten Plan-B-Paket als vorinitialisierten Geometry-IR-Seed protokollieren."
+      },
+      "candidate_count": 4,
+      "top_candidate": {
+        "schema_version": "perception_primitive_candidate_v1",
+        "kind": "circle",
+        "bbox": {
+          "x": 2.0,
+          "y": 16.0,
+          "width": 14.0,
+          "height": 14.0
+        },
+        "center": {
+          "x": 9.0,
+          "y": 23.0
+        },
+        "geometry": {
+          "radius_px": 7.0,
+          "inner_radius_px": 0.0,
+          "stroke_width_px": 1.0,
+          "circularity": 1.0,
+          "ring": false,
+          "fill_ratio": 0.4094,
+          "geometry_ir_kind": "CircleBackground",
+          "geometry_ir_bbox": [
+            0.1,
+            0.45714,
+            0.7,
+            0.4
+          ]
+        },
+        "color": {
+          "fill_rgb": [
+            213,
+            213,
+            213
+          ],
+          "stroke_rgb": [
+            237,
+            237,
+            237
+          ],
+          "fill_hex": "#D5D5D5",
+          "stroke_hex": "#EDEDED",
+          "fill_confidence": 0.576,
+          "stroke_confidence": 0.6818
+        },
+        "confidence": 0.8601,
+        "roi": {
+          "type": "image",
+          "hint": "full_image",
+          "bbox": {
+            "x": 0.0,
+            "y": 0.0,
+            "width": 20.0,
+            "height": 35.0
+          }
+        },
+        "evidence": {
+          "detector": "detect_circle_rings",
+          "detection_source": "hough",
+          "threshold_model": "hough_plus_foreground_mask"
+        },
+        "source": "pf8_plan_b_perception_linkage"
+      }
+    },
+    {
+      "schema_version": "plan_b_perception_linkage_record_v1",
+      "variant": "AC0881_M",
+      "image_path": "artifacts/images_to_convert/nonconvertable/AC0881_M.jpg",
+      "status": "evaluated",
+      "plan_b_reason": "Qualit\u00e4tsreview-Befund: Originalbild vorhanden, aber kein passendes SVG-Artefakt in gepr\u00fcften Pfaden.",
+      "description": "Plan-B-Kandidat AC0881_M: einfache sichtbare Grundform zuerst als Perception-Seed pr\u00fcfen.",
+      "perception_lerneffekt": {
+        "question": "Welches einfache Rahmen-, Kreis- oder Linienprimitive ist vor der ersten Iteration sichtbar?",
+        "expected_first_primitive": "simple_shape_probe",
+        "expected_candidate_kinds": [
+          "circle",
+          "horizontal_rule",
+          "line",
+          "rectangle",
+          "ring"
+        ],
+        "expected_seed_kinds": [
+          "CircleBackground",
+          "HorizontalRule",
+          "RectBorder"
+        ],
+        "decision": "generalisiert",
+        "matched_candidate_kinds": [
+          "circle",
+          "horizontal_rule"
+        ],
+        "matched_seed_kinds": [
+          "CircleBackground",
+          "HorizontalRule"
+        ],
+        "top_candidate_kind": "horizontal_rule",
+        "top_confidence": 0.8975,
+        "next_action": "Im n\u00e4chsten Plan-B-Paket als vorinitialisierten Geometry-IR-Seed protokollieren."
+      },
+      "candidate_count": 3,
+      "top_candidate": {
+        "schema_version": "perception_primitive_candidate_v1",
+        "kind": "horizontal_rule",
+        "bbox": {
+          "x": 4.0,
+          "y": 3.0,
+          "width": 12.0,
+          "height": 2.0
+        },
+        "center": {
+          "x": 10.0,
+          "y": 4.0
+        },
+        "geometry": {
+          "orientation": "horizontal",
+          "x_left": 4.0,
+          "x_right": 16.0,
+          "y_center": 4.0,
+          "length_px": 12.0,
+          "stroke_width_px": 2.0,
+          "angle_deg": 0.0,
+          "text_equivalent": "-",
+          "geometry_ir_kind": "HorizontalRule"
+        },
+        "color": {
+          "fill_rgb": null,
+          "stroke_rgb": [
+            207,
+            207,
+            207
+          ],
+          "fill_hex": null,
+          "stroke_hex": "#CFCFCF",
+          "fill_confidence": 0.0,
+          "stroke_confidence": 0.6729
+        },
+        "confidence": 0.8975,
+        "roi": {
+          "type": "description_hint",
+          "hint": "full_image",
+          "bbox": {
+            "x": 0.0,
+            "y": 0.0,
+            "width": 20.0,
+            "height": 35.0
+          },
+          "description": "Plan-B-Kandidat AC0881_M: einfache sichtbare Grundform zuerst als Perception-Seed pr\u00fcfen."
+        },
+        "evidence": {
+          "detector": "detect_horizontal_rules",
+          "threshold_model": "dark_contour_horizontal_opening",
+          "description_hint": "full_image"
+        },
+        "source": "pf8_plan_b_perception_linkage"
+      }
+    }
+  ],
+  "metrics": {
+    "samples": 4,
+    "evaluated_samples": 4,
+    "generalisiert": 4,
+    "nur_sonderfall": 0,
+    "noch_nicht_erkannt": 0,
+    "all_have_perception_lerneffekt": true
+  }
+}

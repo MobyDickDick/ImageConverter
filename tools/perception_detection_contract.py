@@ -555,7 +555,9 @@ def _best_template_match(binary_roi, text: str) -> dict[str, Any] | None:
     roi_height, roi_width = binary_roi.shape[:2]
     for scale in [0.65, 0.85, 1.05, 1.25, 1.5, 1.8, 2.1]:
         for thickness in [2, 3, 4]:
-            template = _render_glyph_template(text, font_scale=scale, thickness=thickness)
+            template = _render_glyph_template(
+                text, font_scale=scale, thickness=thickness
+            )
             template_height, template_width = template.shape[:2]
             if template_height > roi_height or template_width > roi_width:
                 continue
@@ -640,7 +642,11 @@ def detect_text_glyph_candidates(
     roi_x, roi_y, roi_w, roi_h = _roi_tuple(roi)
     binary = _threshold_text_image(image)
     binary_roi = binary[roi_y : roi_y + roi_h, roi_x : roi_x + roi_w]
-    requested_glyphs = list(glyphs) if glyphs is not None else _glyph_tokens_from_description(description)
+    requested_glyphs = (
+        list(glyphs)
+        if glyphs is not None
+        else _glyph_tokens_from_description(description)
+    )
     candidates: list[PerceptionPrimitiveCandidate] = []
     for raw_glyph in requested_glyphs:
         glyph = str(raw_glyph).strip().upper()
@@ -705,9 +711,9 @@ def merge_perception_candidates_into_geometry_ir(
         candidate for candidate in candidates if candidate.kind == "horizontal_rule"
     ]
     if horizontal_rules:
-        best = sorted(
-            horizontal_rules, key=lambda item: item.confidence, reverse=True
-        )[0]
+        best = sorted(horizontal_rules, key=lambda item: item.confidence, reverse=True)[
+            0
+        ]
         seed_meta = {
             "kind": best.kind,
             "confidence": best.confidence,
@@ -806,8 +812,9 @@ def build_perception_seeded_geometry_ir(
     return merge_perception_candidates_into_geometry_ir(image, candidates, base)
 
 
-
-def _candidate_decision_key(candidate: PerceptionPrimitiveCandidate) -> tuple[str, str, float]:
+def _candidate_decision_key(
+    candidate: PerceptionPrimitiveCandidate,
+) -> tuple[str, str, float]:
     return (
         candidate.kind,
         str(candidate.evidence.get("detector", "")),
@@ -815,7 +822,9 @@ def _candidate_decision_key(candidate: PerceptionPrimitiveCandidate) -> tuple[st
     )
 
 
-def _seed_decision_keys(seeded_ir: list[dict[str, object]]) -> set[tuple[str, str, float]]:
+def _seed_decision_keys(
+    seeded_ir: list[dict[str, object]],
+) -> set[tuple[str, str, float]]:
     keys: set[tuple[str, str, float]] = set()
     for element in seeded_ir:
         if not isinstance(element, dict):
@@ -866,7 +875,9 @@ def _calculate_telemetry_error(target, rendered) -> float | None:
     return _round_number(float(np.mean(np.abs(target_arr - rendered_arr))), 6)
 
 
-def _geometry_ir_error_for_telemetry(image, geometry_ir: list[dict[str, object]]) -> tuple[float | None, str]:
+def _geometry_ir_error_for_telemetry(
+    image, geometry_ir: list[dict[str, object]]
+) -> tuple[float | None, str]:
     height, width = image.shape[:2]
     if geometry_ir:
         svg = geometry_ir_helpers.renderGeometryIrToSvgImpl(width, height, geometry_ir)
@@ -920,8 +931,12 @@ def build_perception_telemetry_record(
         for element in seeded_ir
         if isinstance(element, dict) and element.get("perception_seed")
     ]
-    error_before, render_status_before = _geometry_ir_error_for_telemetry(image, base_ir)
-    error_after, render_status_after = _geometry_ir_error_for_telemetry(image, seeded_ir)
+    error_before, render_status_before = _geometry_ir_error_for_telemetry(
+        image, base_ir
+    )
+    error_after, render_status_after = _geometry_ir_error_for_telemetry(
+        image, seeded_ir
+    )
     if error_before is not None and error_after is not None:
         error_delta = _round_number(error_before - error_after, 6)
     else:
@@ -936,8 +951,12 @@ def build_perception_telemetry_record(
         "description": description or "",
         "runtime_status": "non_composite_perception_seeded_geometry_ir",
         "candidate_count": len(candidates),
-        "accepted_candidate_count": sum(1 for row in candidate_rows if row["decision"] == "accepted"),
-        "rejected_candidate_count": sum(1 for row in candidate_rows if row["decision"] == "rejected"),
+        "accepted_candidate_count": sum(
+            1 for row in candidate_rows if row["decision"] == "accepted"
+        ),
+        "rejected_candidate_count": sum(
+            1 for row in candidate_rows if row["decision"] == "rejected"
+        ),
         "candidates": candidate_rows,
         "selected_geometry_ir_seed_count": len(selected_seed_elements),
         "selected_geometry_ir_seeds": selected_seed_elements,
@@ -961,9 +980,15 @@ def write_perception_telemetry_report(
         "records": records,
         "summary": {
             "samples": len(records),
-            "total_candidates": sum(int(record["candidate_count"]) for record in records),
-            "accepted_candidates": sum(int(record["accepted_candidate_count"]) for record in records),
-            "rejected_candidates": sum(int(record["rejected_candidate_count"]) for record in records),
+            "total_candidates": sum(
+                int(record["candidate_count"]) for record in records
+            ),
+            "accepted_candidates": sum(
+                int(record["accepted_candidate_count"]) for record in records
+            ),
+            "rejected_candidates": sum(
+                int(record["rejected_candidate_count"]) for record in records
+            ),
             "all_have_selected_seed": all(
                 int(record["selected_geometry_ir_seed_count"]) > 0 for record in records
             ),
@@ -1370,6 +1395,272 @@ def write_text_glyph_evaluation_report(
     }
 
 
+PLAN_B_PERCEPTION_TARGETS: list[dict[str, Any]] = [
+    {
+        "variant": "AC0224_S",
+        "image_candidates": ["artifacts/images_to_convert/AC0224_S.jpg"],
+        "plan_b_reason": "AC0221-verwandter Kellenkandidat ohne M, 90 Grad nach rechts gedreht.",
+        "perception_question": "Kann die runde Kellen-/Kreisform vor der ersten Iteration als CircleBackground erkannt werden?",
+        "expected_first_primitive": "circle_ring",
+        "expected_candidate_kinds": {"circle", "ring"},
+        "expected_seed_kinds": {"CircleBackground"},
+        "description": "Plan-B-Kandidat AC0224_S: gedrehte Kelle mit runder Kreisform ohne M.",
+    },
+    {
+        "variant": "AC0231_S",
+        "image_candidates": ["artifacts/images_to_convert/AC0231_S.jpg"],
+        "plan_b_reason": "AC0221-verwandtes 3-Wege-Ventil mit oberer M-Kelle.",
+        "perception_question": "Kann die obere M-Beschriftung oder die runde Kelle vorab als TextGlyph/CircleBackground dokumentiert werden?",
+        "expected_first_primitive": "text_glyph_or_circle_ring",
+        "expected_candidate_kinds": {"text_glyph", "circle", "ring"},
+        "expected_seed_kinds": {"TextGlyph", "CircleBackground"},
+        "description": "Plan-B-Kandidat AC0231_S: oben befindet sich eine Kelle mit dem Buchstaben `M`.",
+        "glyphs": ["M"],
+    },
+    {
+        "variant": "AC0838_M",
+        "image_candidates": [
+            "artifacts/images_to_convert/AC0838_M.jpg",
+            "artifacts/images_to_convert/nonconvertable/AC0838_M.jpg",
+        ],
+        "plan_b_reason": "Qualitätsreview-Befund: vorhandenes SVG-Paar rendert, überschreitet aber die Review-Grenze.",
+        "perception_question": "Kann der dominante VOC-Kreis vorab als CircleBackground und Label-Signal festgehalten werden?",
+        "expected_first_primitive": "circle_ring_or_voc_label",
+        "expected_candidate_kinds": {"circle", "ring", "text_glyph"},
+        "expected_seed_kinds": {"CircleBackground", "TextGlyph"},
+        "description": "Plan-B-Kandidat AC0838_M: dominant ist ein Kreis mit kurzem Label `VOC`.",
+        "glyphs": ["VOC"],
+    },
+    {
+        "variant": "AC0881_M",
+        "image_candidates": [
+            "artifacts/images_to_convert/AC0881_M.jpg",
+            "artifacts/images_to_convert/nonconvertable/AC0881_M.jpg",
+        ],
+        "plan_b_reason": "Qualitätsreview-Befund: Originalbild vorhanden, aber kein passendes SVG-Artefakt in geprüften Pfaden.",
+        "perception_question": "Welches einfache Rahmen-, Kreis- oder Linienprimitive ist vor der ersten Iteration sichtbar?",
+        "expected_first_primitive": "simple_shape_probe",
+        "expected_candidate_kinds": {
+            "rectangle",
+            "circle",
+            "ring",
+            "line",
+            "horizontal_rule",
+        },
+        "expected_seed_kinds": {"RectBorder", "CircleBackground", "HorizontalRule"},
+        "description": "Plan-B-Kandidat AC0881_M: einfache sichtbare Grundform zuerst als Perception-Seed prüfen.",
+    },
+]
+
+
+def _resolve_first_existing_path(candidates: list[str]) -> Path | None:
+    for candidate in candidates:
+        path = PROJECT_ROOT / candidate
+        if path.exists():
+            return path
+    return None
+
+
+def _candidate_seed_kind(candidate: PerceptionPrimitiveCandidate) -> str | None:
+    geometry_kind = candidate.geometry.get("geometry_ir_kind")
+    return str(geometry_kind) if geometry_kind else None
+
+
+def _plan_b_decision(
+    *,
+    matched_candidates: list[PerceptionPrimitiveCandidate],
+    matched_seed_kinds: set[str],
+    expected_seed_kinds: set[str],
+) -> str:
+    if not matched_candidates:
+        return "noch nicht erkannt"
+    if matched_seed_kinds & expected_seed_kinds:
+        return "generalisiert"
+    return "nur Sonderfall"
+
+
+def build_plan_b_perception_linkage_record(target: dict[str, Any]) -> dict[str, Any]:
+    """Build one PF8 Plan-B record with an explicit Perception-Lerneffekt decision."""
+    image_path = _resolve_first_existing_path(list(target.get("image_candidates", [])))
+    expected_candidate_kinds = {
+        str(kind) for kind in target["expected_candidate_kinds"]
+    }
+    expected_seed_kinds = {str(kind) for kind in target["expected_seed_kinds"]}
+    candidates: list[PerceptionPrimitiveCandidate] = []
+    status = "image_not_available"
+    if image_path is not None and importlib.util.find_spec("cv2") is not None:
+        import cv2  # type: ignore
+
+        image = cv2.imread(str(image_path))
+        if image is not None:
+            status = "evaluated"
+            candidates = detect_perception_candidates(
+                image,
+                source="pf8_plan_b_perception_linkage",
+                description=str(target.get("description", "")),
+            )
+            glyphs = target.get("glyphs")
+            if glyphs:
+                candidates.extend(
+                    detect_text_glyph_candidates(
+                        image,
+                        description=str(target.get("description", "")),
+                        glyphs=list(glyphs),
+                        source="pf8_plan_b_text_glyph_linkage",
+                    )
+                )
+                candidates = sorted(
+                    candidates, key=lambda item: item.confidence, reverse=True
+                )
+        else:
+            status = "image_read_failed"
+    elif image_path is not None:
+        status = "cv2_not_available"
+
+    matched_candidates = [
+        candidate
+        for candidate in candidates
+        if candidate.kind in expected_candidate_kinds
+    ]
+    matched_seed_kinds = {
+        seed_kind
+        for candidate in matched_candidates
+        if (seed_kind := _candidate_seed_kind(candidate)) is not None
+    }
+    decision = _plan_b_decision(
+        matched_candidates=matched_candidates,
+        matched_seed_kinds=matched_seed_kinds,
+        expected_seed_kinds=expected_seed_kinds,
+    )
+    top = (
+        matched_candidates[0]
+        if matched_candidates
+        else (candidates[0] if candidates else None)
+    )
+    if decision == "generalisiert":
+        next_action = "Im nächsten Plan-B-Paket als vorinitialisierten Geometry-IR-Seed protokollieren."
+    elif decision == "nur Sonderfall":
+        next_action = "Als Perception-Hinweis dokumentieren, aber noch keinen generischen Seed erzwingen."
+    else:
+        next_action = "Vor der Plan-B-Umsetzung zusätzliche Detector-/ROI-Regel oder manuelle Seed-Annahme festhalten."
+
+    return {
+        "schema_version": "plan_b_perception_linkage_record_v1",
+        "variant": target["variant"],
+        "image_path": str(image_path.relative_to(PROJECT_ROOT)) if image_path else None,
+        "status": status,
+        "plan_b_reason": target["plan_b_reason"],
+        "description": target.get("description", ""),
+        "perception_lerneffekt": {
+            "question": target["perception_question"],
+            "expected_first_primitive": target["expected_first_primitive"],
+            "expected_candidate_kinds": sorted(expected_candidate_kinds),
+            "expected_seed_kinds": sorted(expected_seed_kinds),
+            "decision": decision,
+            "matched_candidate_kinds": sorted(
+                {candidate.kind for candidate in matched_candidates}
+            ),
+            "matched_seed_kinds": sorted(matched_seed_kinds),
+            "top_candidate_kind": top.kind if top else None,
+            "top_confidence": top.confidence if top else None,
+            "next_action": next_action,
+        },
+        "candidate_count": len(candidates),
+        "top_candidate": top.to_dict() if top else None,
+    }
+
+
+def summarize_plan_b_perception_linkage(
+    records: list[dict[str, Any]],
+) -> dict[str, Any]:
+    decisions = [record["perception_lerneffekt"]["decision"] for record in records]
+    return {
+        "samples": len(records),
+        "evaluated_samples": sum(
+            1 for record in records if record["status"] == "evaluated"
+        ),
+        "generalisiert": decisions.count("generalisiert"),
+        "nur_sonderfall": decisions.count("nur Sonderfall"),
+        "noch_nicht_erkannt": decisions.count("noch nicht erkannt"),
+        "all_have_perception_lerneffekt": all(
+            bool(record.get("perception_lerneffekt", {}).get("question"))
+            and record.get("perception_lerneffekt", {}).get("decision")
+            in {"generalisiert", "nur Sonderfall", "noch nicht erkannt"}
+            for record in records
+        ),
+    }
+
+
+def write_plan_b_perception_linkage_report(
+    records: list[dict[str, Any]], output_dir: Path
+) -> dict[str, Any]:
+    output_dir.mkdir(parents=True, exist_ok=True)
+    metrics = summarize_plan_b_perception_linkage(records)
+    report = {
+        "schema_version": "plan_b_perception_linkage_report_v1",
+        "candidate_schema_version": "perception_primitive_candidate_v1",
+        "plan_b_source": "PLAN_B_KANDIDATEN.md",
+        "acceptance_rule": "Each upcoming Plan-B package carries exactly one Perception-Lerneffekt decision.",
+        "allowed_decisions": ["generalisiert", "nur Sonderfall", "noch nicht erkannt"],
+        "records": records,
+        "metrics": metrics,
+    }
+    json_path = output_dir / "plan_b_perception_linkage_report_v1.json"
+    csv_path = output_dir / "plan_b_perception_linkage_samples_v1.csv"
+    json_path.write_text(json.dumps(report, indent=2), encoding="utf-8")
+    with csv_path.open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.DictWriter(
+            handle,
+            fieldnames=[
+                "variant",
+                "image_path",
+                "status",
+                "expected_first_primitive",
+                "decision",
+                "matched_candidate_kinds",
+                "matched_seed_kinds",
+                "top_candidate_kind",
+                "top_confidence",
+                "next_action",
+            ],
+        )
+        writer.writeheader()
+        for record in records:
+            lerneffekt = record["perception_lerneffekt"]
+            writer.writerow(
+                {
+                    "variant": record["variant"],
+                    "image_path": record["image_path"],
+                    "status": record["status"],
+                    "expected_first_primitive": lerneffekt["expected_first_primitive"],
+                    "decision": lerneffekt["decision"],
+                    "matched_candidate_kinds": ",".join(
+                        lerneffekt["matched_candidate_kinds"]
+                    ),
+                    "matched_seed_kinds": ",".join(lerneffekt["matched_seed_kinds"]),
+                    "top_candidate_kind": lerneffekt["top_candidate_kind"],
+                    "top_confidence": lerneffekt["top_confidence"],
+                    "next_action": lerneffekt["next_action"],
+                }
+            )
+    return {
+        "samples": metrics["samples"],
+        "evaluated_samples": metrics["evaluated_samples"],
+        "all_have_perception_lerneffekt": metrics["all_have_perception_lerneffekt"],
+        "json_report": str(json_path),
+        "csv_report": str(csv_path),
+    }
+
+
+def run_plan_b_perception_linkage_report(output_dir: Path) -> dict[str, Any]:
+    """Run PF8 linkage between active Plan-B candidates and Perception-Lerneffekt decisions."""
+    records = [
+        build_plan_b_perception_linkage_record(target)
+        for target in PLAN_B_PERCEPTION_TARGETS
+    ]
+    return write_plan_b_perception_linkage_report(records, output_dir)
+
+
 def run_text_glyph_evaluation_report(output_dir: Path) -> dict[str, Any]:
     """Run PF7 glyph/short-label evaluation without introducing OCR as a hard dependency."""
     samples = [
@@ -1528,6 +1819,7 @@ def run_perception_telemetry_report(output_dir: Path) -> dict[str, Any]:
         source="pf6_perception_telemetry",
     )
     return write_perception_telemetry_report([record], output_dir)
+
 
 def run_minus_roi_report(output_dir: Path) -> dict[str, Any]:
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -1809,6 +2101,7 @@ def main() -> int:
             "perception-telemetry",
             "perception-seed-eval",
             "text-glyph-eval",
+            "plan-b-perception-linkage",
         ],
         default="contract",
     )
@@ -1825,6 +2118,8 @@ def main() -> int:
         summary = run_perception_seed_evaluation_report(Path(args.output_dir))
     elif args.report == "text-glyph-eval":
         summary = run_text_glyph_evaluation_report(Path(args.output_dir))
+    elif args.report == "plan-b-perception-linkage":
+        summary = run_plan_b_perception_linkage_report(Path(args.output_dir))
     else:
         summary = run_contract_report(Path(args.output_dir))
     print(json.dumps(summary, indent=2))
