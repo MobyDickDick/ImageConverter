@@ -2,12 +2,11 @@
 
 Ziel: maximal **5** aktive JPG-Kandidaten, die derzeit noch nicht zufriedenstellend konvertieren, aber voraussichtlich nicht "hoffnungslos komplex" sind.
 
-## Aktuelle Kandidaten (Stand: 2026-05-31, nach AC0232-S-Plan-B-Rotation)
+## Aktuelle Kandidaten (Stand: 2026-05-31, nach AC0233-S-Plan-B-Rotation)
 
-1. `AC0233_S.jpg` – AC0231-verwandtes 3-Wege-Ventil, 180° gedreht und mit vorhandenem Diff-Artefakt.
-2. `AC0838_M.jpg` – Qualitätsreview-Befund: vorhandenes SVG-Paar rendert, überschreitet aber die Review-Grenze (`normalized_mse=0.04729276`).
-3. `AC0881_M.jpg` – Qualitätsreview-Befund: Originalbild vorhanden, aber kein passendes SVG-Artefakt in den geprüften Konvertierungs-/Baseline-Pfaden.
-4. `AC0234_S.jpg` – AC0231-verwandtes 3-Wege-Ventil, hauptdiagonal gespiegelt und mit vorhandenem Diff-Artefakt.
+1. `AC0838_M.jpg` – Qualitätsreview-Befund: vorhandenes SVG-Paar rendert, überschreitet aber die Review-Grenze (`normalized_mse=0.04729276`).
+2. `AC0881_M.jpg` – Qualitätsreview-Befund: Originalbild vorhanden, aber kein passendes SVG-Artefakt in den geprüften Konvertierungs-/Baseline-Pfaden.
+3. `AC0234_S.jpg` – AC0231-verwandtes 3-Wege-Ventil, hauptdiagonal gespiegelt und mit vorhandenem Diff-Artefakt.
 
 ## Perception-Lerneffekt (Pflichtabschnitt ab PF8)
 
@@ -19,7 +18,6 @@ maschinenlesbare Stand liegt unter
 
 | Kandidat | Erste Perception-Frage | Erwartetes erstes Primitive | PF8-Entscheidung | Seed-Folge |
 | --- | --- | --- | --- | --- |
-| `AC0233_S.jpg` | Gedrehte Kelle mit Kreis- und `M`-Signal vor der ersten Iteration erkennen? | `text_glyph_or_circle_ring` | `generalisiert` | Kreis als `CircleBackground` seedbar; `M` bleibt ergänzender Label-Hinweis für die gedrehte AC0231-Folgeform. |
 | `AC0838_M.jpg` | Dominanten VOC-Kreis und Label-Signal vorab festhalten? | `circle_ring_or_voc_label` | `generalisiert` | Kreis als `CircleBackground` seedbar; `VOC` bleibt ergänzende TextGlyph-Prüfung. |
 | `AC0881_M.jpg` | Einfaches Rahmen-, Kreis- oder Linienprimitive zuerst erkennen? | `simple_shape_probe` | `generalisiert` | Gefundene Kreis-/HorizontalRule-Signale als Startseed prüfen. |
 | `AC0234_S.jpg` | Gespiegelte Kelle mit Kreis- und `M`-Signal vor der ersten Iteration erkennen? | `text_glyph_or_circle_ring` | `generalisiert` | Kreis als `CircleBackground` seedbar; `M` bleibt ergänzender Label-Hinweis für die gespiegelte AC0231-Folgeform. |
