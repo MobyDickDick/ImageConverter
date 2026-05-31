@@ -1,0 +1,55 @@
+{
+  "base": "AC0881",
+  "best_error": 15.644285714285715,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.022348979591836737,
+  "filename": "AC0881_M.jpg",
+  "h": 35,
+  "mean_delta2": 2780.935791015625,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": false,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "AC0881",
+        "source": "base_name",
+        "text": "Grauer Kreis mit grauem Rand und hellgrauem Hintergrund Abweichung: mit Text \"T\" (Temperatur) Abweichung: mit Griff (dunkelgraue Linie nach unten). Der Griff liegt auf einer Symmetrieachse des Kreises."
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [
+      "SEMANTIC: senkrechter Strich hinter dem Kreis",
+      "SEMANTIC: Kreis + Buchstabe"
+    ],
+    "geometry_ir": [],
+    "label": "T",
+    "mode": "semantic_badge",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {
+      "description_heuristic": [
+        "SEMANTIC: Kreis + Buchstabe"
+      ],
+      "family_rule": [
+        "SEMANTIC: senkrechter Strich hinter dem Kreis"
+      ]
+    },
+    "top_source_ref": null,
+    "variant_name": "AC0881_M"
+  },
+  "std_delta2": 6173.26171875,
+  "variant": "AC0881_M",
+  "w": 20
+}
