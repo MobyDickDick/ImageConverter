@@ -2,11 +2,11 @@
 
 Ziel: maximal **5** aktive JPG-Kandidaten, die derzeit noch nicht zufriedenstellend konvertieren, aber voraussichtlich nicht "hoffnungslos komplex" sind.
 
-## Aktuelle Kandidaten (Stand: 2026-05-31, nach AC0820-S-Refresh)
+## Aktuelle Kandidaten (Stand: 2026-05-31, nach AC0836-S-Refresh)
 
-1. `AC0870_S.jpg` – Weak-Family-Befund: rundes `T`-Badge; einfache Grundform, aber Textgrösse, Zentrierung und Antialiasing sind weiterhin auffällig.
-2. `AC0850_M.jpg` – Weak-Family-Befund: rundes `rF`-Badge ohne Griff mit sehr hohem Text-/Grauwertfehler (`mean_delta2=13599.945312` in der AC08-Weak-Family-Rangliste).
-3. `AC0836_S.jpg` – Weak-Family-Befund: rundes `VOC`-Badge mit senkrechtem Griff; gute nächste Probe für Kreis, Label und einfachen Connector.
+1. `AC0835_S.jpg` – Weak-Family-Befund: rundes `VOC`-Badge ohne Griff; Priorität-A-Familie für reine Kreis-/Label-Zentrierung.
+2. `AC0861_S.jpg` – Anschlussprobe aus der rF-Familie: rundes `rF`-Badge mit senkrechtem Griff; prüft, ob der AC0850-Lerneffekt auf Connector-Badges übertragbar bleibt.
+3. `AC0862_S.jpg` – Anschlussprobe aus der rF-Connector-Familie: nach rechts gedrehtes `rF`-Badge mit horizontal lesbarem Text; prüft die gedrehte Griff-/Kreis-Kopplung.
 
 ## Perception-Lerneffekt (Pflichtabschnitt ab PF8)
 
@@ -18,9 +18,9 @@ maschinenlesbare Stand liegt unter
 
 | Kandidat | Erste Perception-Frage | Erwartetes erstes Primitive | PF8-Entscheidung | Seed-Folge |
 | --- | --- | --- | --- | --- |
-| `AC0870_S.jpg` | Dominanten T-Kreis und zentriertes Kurzlabel vorab festhalten? | `circle_ring_or_t_label` | `generalisiert` | Kreis als `CircleBackground` seedbar; `T` bleibt ergänzende TextGlyph-Prüfung für Zentrierung und Antialiasing. |
-| `AC0850_M.jpg` | Dominanten rF-Kreis und zweibuchstabiges Label vorab festhalten? | `circle_ring_or_rf_label` | `generalisiert` | Kreis als `CircleBackground` seedbar; `rF` bleibt ergänzende TextGlyph-Prüfung für Textgrösse und Grauwert. |
-| `AC0836_S.jpg` | Dominanten VOC-Kreis und senkrechten Griff vorab festhalten? | `circle_ring_or_vertical_connector` | `generalisiert` | Kreis als `CircleBackground` seedbar; `VOC` und der Griff bleiben gekoppelte TextGlyph-/Linien-Prüfung. |
+| `AC0835_S.jpg` | Dominanten VOC-Kreis und dreibuchstabiges Label vorab festhalten? | `circle_ring_or_voc_label` | `generalisiert` | Kreis als `CircleBackground` seedbar; `VOC` bleibt ergänzende TextGlyph-Prüfung für reine Kreis-/Label-Zentrierung. |
+| `AC0861_S.jpg` | Dominanten rF-Kreis und senkrechten Griff gemeinsam vorab festhalten? | `circle_ring_or_rf_vertical_connector` | `generalisiert` | Kreis als `CircleBackground` seedbar; der senkrechte Griff wird zusätzlich als `line`-Kandidat erkannt. |
+| `AC0862_S.jpg` | Dominanten rF-Kreis und gedrehten Griff gemeinsam vorab festhalten? | `circle_ring_or_rf_rotated_connector` | `generalisiert` | Kreis als `CircleBackground` seedbar; gedrehte Griff-/Text-Signale bleiben gekoppelte Linien-/TextGlyph-Prüfung. |
 
 ## Pflege-Regel (fortan)
 

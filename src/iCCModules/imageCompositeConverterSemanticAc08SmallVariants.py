@@ -97,4 +97,9 @@ def configureAc08SmallVariantModeImpl(
         p["lock_text_scale"] = False
         p["voc_font_scale_min"] = float(max(float(p.get("voc_font_scale_min", base_scale)), max(0.46, base_scale * 0.92)))
         p["voc_font_scale_max"] = float(min(float(p.get("voc_font_scale_max", 0.96)), min(0.96, base_scale * 1.10)))
+    elif text_mode == "rf":
+        base_scale = float(p.get("rf_font_scale", 0.58))
+        p["lock_text_scale"] = False
+        p["rf_font_scale_min"] = float(max(float(p.get("rf_font_scale_min", base_scale)), max(0.48, base_scale * 0.90)))
+        p["rf_font_scale_max"] = float(min(float(p.get("rf_font_scale_max", 1.08)), min(1.08, base_scale * 1.18)))
     return p

@@ -203,7 +203,7 @@ def test_run_non_composite_iteration_impl_prefers_sample_svg_when_better(tmp_pat
     assert prints and "Plan B Vergleich aktiv" in prints[-1]
     assert artifacts == [("<svg sample/>", "sample_rendered")]
 
-def test_run_non_composite_iteration_impl_forces_ac0011_sample_svg_even_when_sample_error_is_worse(tmp_path) -> None:
+def test_run_non_composite_iteration_impl_keeps_algorithmic_svg_when_sample_error_is_worse(tmp_path) -> None:
     logs: list[list[str]] = []
     prints: list[str] = []
     artifacts: list[tuple[str, object]] = []
@@ -234,15 +234,13 @@ def test_run_non_composite_iteration_impl_forces_ac0011_sample_svg_even_when_sam
         calculate_error_fn=lambda _target, rendered: 1.7 if rendered == "sample_rendered" else 1.1,
     )
 
-    assert result == ("AC0011", "desc", {"mode": "non_composite"}, 1, 1.7)
+    assert result == ("AC0011", "desc", {"mode": "non_composite"}, 1, 1.1)
     assert logs[0][0] == "status=non_composite_pure_svg_placeholder_vector"
-    assert logs[-1][0] == "status=non_composite_plan_b_sample_svg_selected"
-    assert any(line.endswith("AC0011.svg") for line in logs[-1] if line.startswith("sample_svg_path="))
-    assert "force_sample_svg=1" in logs[-1]
-    assert prints and "forcierte Sample-Auswahl" in prints[-1]
-    assert artifacts == [("<svg sample/>", "sample_rendered")]
+    assert not any("status=non_composite_plan_b_sample_svg_selected" in line for row in logs for line in row)
+    assert artifacts and artifacts[0][0].startswith("<svg")
+    assert artifacts[0][1] == "baseline_rendered"
 
-def test_run_non_composite_iteration_impl_forced_ac0011_prefers_exact_sample_over_reference(tmp_path) -> None:
+def test_run_non_composite_iteration_impl_prefers_documented_reference_sample_over_exact_alias(tmp_path) -> None:
     logs: list[list[str]] = []
     artifacts: list[tuple[str, object]] = []
     image_dir = tmp_path / "images"
@@ -273,11 +271,9 @@ def test_run_non_composite_iteration_impl_forced_ac0011_prefers_exact_sample_ove
         calculate_error_fn=lambda _target, rendered: 1.7 if rendered == "exact_rendered" else 1.1,
     )
 
-    assert result == ("AC0011", "Wie AC0010: geometrische Variante", {"mode": "non_composite"}, 1, 1.7)
-    assert logs[-1][0] == "status=non_composite_plan_b_sample_svg_selected"
-    assert any(line.endswith("AC0011.svg") for line in logs[-1] if line.startswith("sample_svg_path="))
-    assert "force_sample_svg=1" in logs[-1]
-    assert artifacts == [("<svg exact-sample/>", "exact_rendered")]
+    assert result == ("AC0011", "Wie AC0010: geometrische Variante", {"mode": "non_composite"}, 1, 1.1)
+    assert not any("status=non_composite_plan_b_sample_svg_selected" in line for row in logs for line in row)
+    assert artifacts and artifacts[0][1] == "other_rendered"
 
 def test_run_non_composite_iteration_impl_keeps_vector_placeholder_when_non_forced_sample_render_fails(tmp_path) -> None:
     logs: list[list[str]] = []
@@ -659,7 +655,7 @@ def test_try_load_sample_svg_prefers_reference_family_from_description(tmp_path)
     assert sample_content == "<svg ref/>"
 
 
-def test_try_load_sample_svg_forced_ac0100_prefers_exact_family_over_reference(tmp_path) -> None:
+def test_try_load_sample_svg_prefers_ac0100_documented_reference_over_exact_family(tmp_path) -> None:
     image_dir = tmp_path / "images"
     samples_dir = image_dir / "samples"
     samples_dir.mkdir(parents=True)
@@ -669,16 +665,16 @@ def test_try_load_sample_svg_forced_ac0100_prefers_exact_family_over_reference(t
     sample = non_composite_runtime_helpers._try_load_sample_svg(
         img_path=str(image_dir / "AC0100_M.jpg"),
         base_name="AC0100_M",
-        description="Wie AC0010: Heizelement mit Diagonale.",
+        description="Wie AC0010: Heizelement, graues Rechteck, Plus-Minus-Zeichen oben links, horizontaler Farbverlauf dunkel–hell–dunkel sowie graue Diagonale von oben rechts nach unten links.",
     )
 
     assert sample is not None
     sample_path, sample_content = sample
-    assert sample_path.endswith("AC0100_L.svg")
-    assert sample_content == "<svg exact-family/>"
+    assert sample_path.endswith("AC0010.svg")
+    assert sample_content == "<svg reference/>"
 
 
-def test_run_non_composite_iteration_impl_forced_ac0100_size_variant_uses_sample_even_when_error_is_higher(tmp_path) -> None:
+def test_run_non_composite_iteration_impl_ac0100_size_variant_keeps_algorithmic_result_when_sample_error_is_higher(tmp_path) -> None:
     logs: list[list[str]] = []
     prints: list[str] = []
     artifacts: list[tuple[str, object]] = []
@@ -695,7 +691,7 @@ def test_run_non_composite_iteration_impl_forced_ac0100_size_variant_uses_sample
         width=64,
         height=64,
         base_name="AC0100_M",
-        description="Wie AC0010: Heizelement mit Diagonale.",
+        description="Wie AC0010: Heizelement, graues Rechteck, Plus-Minus-Zeichen oben links, horizontaler Farbverlauf dunkel–hell–dunkel sowie graue Diagonale von oben rechts nach unten links.",
         perc_img="target",
         img_path=str(image_dir / "AC0100_M.jpg"),
         print_fn=prints.append,
@@ -709,12 +705,13 @@ def test_run_non_composite_iteration_impl_forced_ac0100_size_variant_uses_sample
         calculate_error_fn=lambda _target, rendered: 200.0 if rendered == "sample_rendered" else 100.0,
     )
 
-    assert result == ("AC0100_M", "Wie AC0010: Heizelement mit Diagonale.", {"mode": "non_composite"}, 1, 200.0)
-    assert logs[-1][0] == "status=non_composite_plan_b_sample_svg_selected"
-    assert any(line.endswith("AC0100_L.svg") for line in logs[-1] if line.startswith("sample_svg_path="))
-    assert "force_sample_svg=1" in logs[-1]
-    assert prints and "forcierte Sample-Auswahl" in prints[-1]
-    assert artifacts == [("<svg sample/>", "sample_rendered")]
+    assert result == ("AC0100_M", "Wie AC0010: Heizelement, graues Rechteck, Plus-Minus-Zeichen oben links, horizontaler Farbverlauf dunkel–hell–dunkel sowie graue Diagonale von oben rechts nach unten links.", {"mode": "non_composite"}, 1, 100.0)
+    assert logs[0][0] == "status=non_composite_description_geometry_ir"
+    assert any("geometry_ir_element_1=HorizontalGradient" in line for line in logs[0])
+    assert any("geometry_ir_element_3=DiagonalBand" in line for line in logs[0])
+    assert not any("status=non_composite_plan_b_sample_svg_selected" in line for row in logs for line in row)
+    assert artifacts and artifacts[0][0].startswith("<svg")
+    assert artifacts[0][1] == "baseline_rendered"
 
 def test_try_load_sample_svg_auto_converts_inkscape_file(tmp_path) -> None:
     image_dir = tmp_path / "images"

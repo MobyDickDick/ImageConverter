@@ -340,7 +340,7 @@ def tuneAc08CircleTextFamilyImpl(
     """Apply shared guardrails for connector-free AC08 circle/text badges."""
     p = dict(params)
     symbol_name = get_base_name_from_file_fn(str(name)).upper().split("_", 1)[0]
-    if symbol_name not in {"AC0820", "AC0835", "AC0870"}:
+    if symbol_name not in {"AC0820", "AC0835", "AC0850", "AC0870"}:
         return p
 
     p["connector_family_group"] = "ac08_circle_text"
@@ -364,7 +364,7 @@ def tuneAc08CircleTextFamilyImpl(
         min_dim = max(1.0, template_r * 2.0)
 
     text_mode = str(p.get("text_mode", "")).lower()
-    radius_floor_ratio = 0.94 if text_mode in {"co2", "voc"} else 0.96
+    radius_floor_ratio = 0.94 if text_mode in {"co2", "voc", "rf"} else 0.96
     p["min_circle_radius"] = float(max(float(p.get("min_circle_radius", 1.0)), template_r * radius_floor_ratio))
 
     canvas_w = int(round(float(p.get("width", 0.0) or p.get("badge_width", 0.0) or min_dim)))
@@ -399,6 +399,17 @@ def tuneAc08CircleTextFamilyImpl(
             p["voc_font_scale"] = float(max(base_scale, 0.60))
             p["voc_font_scale_min"] = float(max(float(p.get("voc_font_scale_min", p["voc_font_scale"])), 0.60))
             p["voc_font_scale_max"] = float(min(float(p.get("voc_font_scale_max", 1.02)), 1.02))
+    elif text_mode == "rf":
+        base_scale = float(p.get("rf_font_scale", 0.58))
+        p["lock_text_scale"] = False
+        p["rf_dy"] = float(max(-0.10 * template_r, min(0.10 * template_r, float(p.get("rf_dy", -0.02 * template_r)))))
+        if min_dim <= 15.5:
+            p["rf_font_scale_min"] = float(max(float(p.get("rf_font_scale_min", base_scale)), max(0.50, base_scale * 0.92)))
+            p["rf_font_scale_max"] = float(min(float(p.get("rf_font_scale_max", 1.02)), min(1.02, max(base_scale, 0.58) * 1.15)))
+        else:
+            p["rf_font_scale"] = float(max(base_scale, 0.58))
+            p["rf_font_scale_min"] = float(max(float(p.get("rf_font_scale_min", p["rf_font_scale"])), 0.52))
+            p["rf_font_scale_max"] = float(min(float(p.get("rf_font_scale_max", 1.12)), 1.12))
     else:
         p["s"] = float(max(float(p.get("s", 0.0100)), 0.0100))
         center_glyph_bbox_fn(p)

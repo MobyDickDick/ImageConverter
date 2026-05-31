@@ -20,22 +20,29 @@ def test_build_plan_b_perception_linkage_record_has_lerneffekt_decision() -> Non
     record = build_plan_b_perception_linkage_record(PLAN_B_PERCEPTION_TARGETS[0])
 
     assert record["schema_version"] == "plan_b_perception_linkage_record_v1"
-    assert record["variant"] == "AC0836_S"
+    assert record["variant"] == "AC0835_S"
     lerneffekt = record["perception_lerneffekt"]
     assert lerneffekt["question"]
-    assert lerneffekt["expected_first_primitive"] == "circle_ring_or_vertical_connector"
+    assert lerneffekt["expected_first_primitive"] == "circle_ring_or_voc_label"
     assert lerneffekt["decision"] in {
         "generalisiert",
         "nur Sonderfall",
         "noch nicht erkannt",
     }
-    assert lerneffekt["expected_candidate_kinds"] == [
-        "circle",
-        "line",
-        "ring",
-        "text_glyph",
-    ]
+    assert lerneffekt["expected_candidate_kinds"] == ["circle", "ring", "text_glyph"]
+    assert "circle" in lerneffekt["matched_candidate_kinds"]
     assert lerneffekt["next_action"]
+
+
+def test_build_plan_b_perception_linkage_record_matches_rf_vertical_connector() -> None:
+    record = build_plan_b_perception_linkage_record(PLAN_B_PERCEPTION_TARGETS[1])
+
+    assert record["variant"] == "AC0861_S"
+    lerneffekt = record["perception_lerneffekt"]
+    assert lerneffekt["expected_first_primitive"] == "circle_ring_or_rf_vertical_connector"
+    assert "line" in lerneffekt["matched_candidate_kinds"]
+    assert record["top_candidate"]["geometry"]["orientation"] == "vertical"
+    assert record["top_candidate"]["geometry"]["length_px"] >= 10.0
 
 
 def test_run_plan_b_perception_linkage_report_writes_json_and_csv(
@@ -56,9 +63,9 @@ def test_run_plan_b_perception_linkage_report_writes_json_and_csv(
     assert report["schema_version"] == "plan_b_perception_linkage_report_v1"
     assert report["metrics"]["all_have_perception_lerneffekt"] is True
     assert {record["variant"] for record in report["records"]} == {
-        "AC0836_S",
-        "AC0870_S",
-        "AC0850_M",
+        "AC0835_S",
+        "AC0861_S",
+        "AC0862_S",
     }
 
     rows = list(csv.DictReader(csv_report.open(encoding="utf-8")))

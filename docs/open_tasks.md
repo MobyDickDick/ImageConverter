@@ -4,15 +4,16 @@ This checklist only tracks work that is actionable for the ImageConverter in the
 current repository snapshot. Older unrelated language/compiler/runtime tasks were removed so the list stays
 focused on the actual project scope.
 
-## Aufgaben-Gesamtzähler (Snapshot 2026-05-30)
+## Aufgaben-Gesamtzähler (Snapshot 2026-05-31)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `383` · Erledigt `287` · Offen `96`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `384` · Erledigt `287` · Offen `97`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
 ## Testhygiene – nur echte Grün-Tests in der Kernliste (neu 2026-05-20)
 
 - [x] **TH1:** Nicht-grüne Testergebnisse als Aufgaben pflegen und abbauen (Skips, Deselections, XFails, Warnings), siehe `docs/test_followup_tasks_2026-05-20.md`. (2026-05-21: Follow-up-Liste um aktuellen Timeout-/Nicht-Grün-Snapshot aus `pytest -q` ergänzt, inkl. neuer Aufgabe A6 und Session-Artefakt unter `docs/test_followup_tasks_2026-05-20.md`.)
+- [ ] **TH2/AC0100-QA:** Der AC0100_L/M/S-Kurzlauf ist technisch grün (Exit `0`), verfehlt aber die strenge `pixel_delta2`-Qualität (`images_with_mean_delta2_le_threshold=0` bei `threshold_mean_delta2=18.000`). Als eigene Qualitätsaufgabe weiterführen; Repro, aktuelle Metriken und Akzeptanzkriterien stehen in `docs/ac0100_quality_followup_2026-05-31.md`.
 
 ## Neue Vision-Roadmap: semantische SVG-Rekonstruktion (abgeglichen am 2026-05-10)
 
@@ -81,6 +82,28 @@ detaillierte Backlog steht in `docs/perception_first_task_backlog_2026-05-30.md`
 - [x] **PF6 – Perception-Telemetrie in bestehende Reports integrieren:** erkannte/abgelehnte Kandidaten, Seed-Auswahl und Fehlerdeltas pro Lauf als CSV/JSON protokollieren. (2026-05-30: PF6-Telemetrie ergänzt `build_perception_telemetry_record(...)` sowie den CLI-Report `--report perception-telemetry`; JSON/CSV-Artefakte unter `artifacts/evaluation/perception_telemetry_v1/` protokollieren erkannte und abgelehnte Kandidaten, ausgewählte Geometry-IR-Seeds sowie Fehlerwerte vor/nach Seed. Basistests in `tests/test_perception_telemetry_report.py`.)
 - [x] **PF7 – Einfache Text-/Glyph-Erkennung für `M`, `+`, `-` und kurze Labels prüfen:** Template-Matching/OCR-Nutzen ohne neue Pflichtdependency evaluieren. (2026-05-30: Template-Matching-Detector `detect_text_glyph_candidates(...)` ergänzt; PF7-Report `artifacts/evaluation/perception_text_glyph_evaluation_v1/perception_text_glyph_evaluation_report_v1.json` und CSV `.../perception_text_glyph_evaluation_samples_v1.csv` prüfen synthetische Glyphen `M`, `+`, `-`, das Kurzlabel `VOC` sowie den realen Plus-Kandidaten `AC0120_L.jpg` ohne neue Pflicht-OCR-Dependency; Basistests in `tests/test_perception_text_glyph_eval.py`.)
 - [x] **PF8 – Plan-B-Rotation mit Perception-Aufgaben verzahnen:** jedes kommende Plan-B-Paket erhält einen Abschnitt „Perception-Lerneffekt“. (2026-05-30: PF8-Linkage-Report `--report plan-b-perception-linkage` ergänzt; JSON/CSV-Artefakte unter `artifacts/evaluation/plan_b_perception_linkage_v1/` dokumentieren für `AC0224_S`, `AC0231_S`, `AC0838_M` und `AC0881_M` je eine Perception-Frage, erwartete erste Primitive und die Entscheidung `generalisiert`/`nur Sonderfall`/`noch nicht erkannt`. `PLAN_B_KANDIDATEN.md` enthält ab sofort den Pflichtabschnitt „Perception-Lerneffekt“.)
+
+### Fortschritt vs. Blocker (Session 2026-05-31, Plan-B AC0850_M rF-Badge Run NF)
+
+- **Fortschritt:** Der nächste dokumentierte Plan-B-/Perception-Kandidat `AC0850_M.jpg` wurde semantisch abgearbeitet: Die AC0850-Familie startet nun als connector-freies AC08-`rF`-Kreis/Text-Badge und läuft im echten Einzelpfad bis `status=semantic_ok` statt mit `conversion_failed/no_result` abzubrechen.
+- **Perception-Lerneffekt:** Der erledigte Kandidat `AC0850_M` wurde aus der aktiven PF8-/Plan-B-Liste rotiert; der Linkage-Report führt nun `AC0836_S`, `AC0835_S` und als Anschlussprobe `AC0861_S`, jeweils mit `decision=generalisiert` und `CircleBackground` als Seed-Folge.
+- **Sicherung:** Der externe AC0850-M-Repro lief grün (`PYTHONPATH=vendor/linux-py310/site-packages:. timeout 180 python -m src.iCCModules.imageCompositeConverterCli artifacts/images_to_convert --descriptions-path artifacts/images_to_convert/Finale_Wurzelformen_V3.xml --output-dir /tmp/ic-ac0850-after --start AC0850_M --end AC0850_M --deterministic-order`, Exit `0`) und protokollierte `status=semantic_ok`; `conversion_bestlist.csv` enthält `AC0850_M` mit `best_error=26.802500` und `mean_delta2=6655.042480`.
+- **Nächster sinnvoller Schritt:** In der normalen Plan-B-Rotation mit dem aktiven Kreis-/VOC-/Vertikalgriff-Kandidaten `AC0836_S.jpg` fortfahren oder den neuen rF-Connector-Folgepunkt `AC0861_S.jpg` isoliert abarbeiten.
+
+### Fortschritt vs. Blocker (Session 2026-05-31, Plan-B AC0836_S VOC-Connector Run NH)
+
+- **Fortschritt:** Der nächste dokumentierte Plan-B-/Perception-Kandidat `AC0836_S.jpg` wurde abgearbeitet: Die vertikale Linienerkennung besitzt nun einen konturbasierten Fallback für sehr kleine Badge-Bilder, sodass der senkrechte Griff zusätzlich zum dominanten `CircleBackground`-Kreis als `line`-Kandidat im PF8-Linkage auftaucht.
+- **Perception-Lerneffekt:** Der erledigte Kandidat `AC0836_S` wurde aus der aktiven PF8-/Plan-B-Liste rotiert; der Linkage-Report führt nun `AC0835_S`, `AC0861_S` und den neuen gedrehten rF-Connector-Folgepunkt `AC0862_S`, jeweils mit `decision=generalisiert`.
+- **Sicherung:** Der externe AC0836-S-Repro lief grün (`PYTHONPATH=vendor/linux-py310/site-packages:. timeout 180 python -m src.iCCModules.imageCompositeConverterCli artifacts/images_to_convert/nonconvertable --descriptions-path artifacts/images_to_convert/Finale_Wurzelformen_V3.xml --output-dir /tmp/ic-ac0836-runnh --start AC0836_S --end AC0836_S --deterministic-order`, Exit `0`) und protokollierte `status=semantic_ok`; der PF8-Linkage-Report wurde erfolgreich neu geschrieben; der gezielte Testblock lief mit `5 passed`.
+- **Nächster sinnvoller Schritt:** In der normalen Plan-B-Rotation mit `AC0835_S.jpg` fortfahren oder den rF-Connector-Folgepunkt `AC0861_S.jpg` isoliert abarbeiten.
+
+### Fortschritt vs. Blocker (Session 2026-05-31, Plan-B AC0870_S T-Badge Run NE)
+
+- **Fortschritt:** Der nächste dokumentierte Plan-B-/Perception-Kandidat `AC0870_S.jpg` wurde semantisch abgearbeitet: Kleine AC0870-`path_t`-Badges starten nun mit zentriertem Kreis-/T-Seed, explizitem `draw_text=True`, gesperrter Textposition/-skalierung und engem Radiuskorridor statt mit einer durch das T-Maskensignal nach links/unten verzogenen Ersatzpose.
+- **Perception-Lerneffekt:** Der erledigte Kandidat `AC0870_S` wurde aus der aktiven PF8-/Plan-B-Liste rotiert; der Linkage-Report führt nun `AC0836_S`, `AC0835_S` und `AC0850_M`, jeweils mit `decision=generalisiert` und `CircleBackground` als Seed-Folge.
+- **Sicherung:** Der AC0870-S-Einzellauf lief grün (Exit `0`) und erzeugte ein SVG mit `cx=7.5000`, `cy=7.0000`, `r=6.0000`; der gezielte PF8-/Regressionstestblock lief mit `3 passed`.
+- **Blocker:** Kein neuer technischer Blocker; der Pixel-Fehler bleibt wegen Antialiasing/Glyphenrasterung sichtbar (`error_per_pixel=0.12578765`), sinkt aber gegenüber dem Vorlauf (`mean_delta2=6242.066895`) auf `mean_delta2=4968.879883`.
+- **Nächster sinnvoller Schritt:** In der normalen Plan-B-Rotation mit `AC0850_M.jpg` fortfahren oder den aktiven Kreis-/VOC-/Vertikalgriff-Kandidaten `AC0836_S.jpg` isoliert abarbeiten.
 
 ### Fortschritt vs. Blocker (Session 2026-05-31, Plan-B AC0820_S CO2-Subscript Run ND)
 

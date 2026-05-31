@@ -23,6 +23,7 @@ SEMANTIC_BADGE_FAMILIES: set[str] = {
     "AC0838",
     "AC0839",
     "AC0842",
+    "AC0850",
     "AC0870",
     "AC0881",
     "AC0882",
