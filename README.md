@@ -111,6 +111,9 @@ python -m pytest
 ./tools/run_local_completion_checks.sh --require-drift-summary
 python tools/manage_satisfactory_baseline.py
 ./tools/run_satisfactory_regression_battery.sh
+# Die Satisfactory-Batterie konvertiert alle in artifacts/regression_baseline/satisfactory/variants.txt
+# gespeicherten erfolgreichen Varianten erneut und vergleicht die neue mean_delta2-Qualität
+# streng gegen die dort gespeicherten Baseline-SVGs. Jede Verschlechterung schlägt den Test fehl.
 python -m src.imageCompositeConverter --help
 python tools/check_vendored_cv2.py
 python -m src.imageCompositeConverter artifacts/images_to_convert --descriptions-path artifacts/images_to_convert/Finale_Wurzelformen_V3.xml --ac08-regression-set --output-dir artifacts/converted_images
