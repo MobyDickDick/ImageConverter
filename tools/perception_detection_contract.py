@@ -1426,6 +1426,17 @@ PLAN_B_PERCEPTION_TARGETS: list[dict[str, Any]] = [
         "description": "Plan-B-Kandidat AC0234_S: AC0231-verwandtes 3-Wege-Ventil, hauptdiagonal gespiegelt; Kelle mit gespiegeltem Buchstaben `M`.",
         "glyphs": ["M"],
     },
+    {
+        "variant": "AC0835_S",
+        "image_candidates": ["artifacts/images_to_convert/AC0835_S.jpg"],
+        "plan_b_reason": "Weak-Family-Befund: rundes VOC-Badge ohne Griff mit auffälligem Text-/Grauwertfehler.",
+        "perception_question": "Kann der dominante VOC-Kreis vorab als CircleBackground und das Label als TextGlyph-Hinweis festgehalten werden?",
+        "expected_first_primitive": "circle_ring_or_voc_label",
+        "expected_candidate_kinds": {"circle", "ring", "text_glyph"},
+        "expected_seed_kinds": {"CircleBackground", "TextGlyph"},
+        "description": "Plan-B-Kandidat AC0835_S: rundes VOC-Badge ohne Griff; Kreis und Label zuerst prüfen.",
+        "glyphs": ["VOC"],
+    },
 ]
 
 

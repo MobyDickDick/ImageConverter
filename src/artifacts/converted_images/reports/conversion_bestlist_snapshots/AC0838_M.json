@@ -1,43 +1,37 @@
 {
   "base": "AC0838",
-  "best_error": 28.96857142857143,
+  "best_error": 29.06,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.041383673469387754,
+  "error_per_pixel": 0.04151428571428571,
   "filename": "AC0838_M.jpg",
   "h": 35,
-  "mean_delta2": 9225.634765625,
+  "mean_delta2": 7789.17431640625,
   "params": {
     "bottom_shape": null,
+    "contract_status": "ok",
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
     "description_fragments": [
       {
         "key": "AC0838",
         "source": "base_name",
-        "text": "Wie AC0836, jedoch in der gegenüberliegenden Drehlage. Der Griff bleibt als klarer Zusatzarm am Kreis erkennbar, der Text \"VOC\" bleibt horizontal lesbar."
-      },
-      {
-        "key": "AC0838_M",
-        "source": "variant_name",
-        "text": "Wie AC0836, jedoch in der gegenüberliegenden Drehlage. Der Griff bleibt als klarer Zusatzarm am Kreis erkennbar, der Text \"VOC\" bleibt horizontal lesbar."
-      },
-      {
-        "key": "AC0838",
-        "source": "canonical_base",
-        "text": "Wie AC0836, jedoch in der gegenüberliegenden Drehlage. Der Griff bleibt als klarer Zusatzarm am Kreis erkennbar, der Text \"VOC\" bleibt horizontal lesbar."
-      },
-      {
-        "key": "AC0838",
-        "source": "canonical_variant",
-        "text": "Wie AC0836, jedoch in der gegenüberliegenden Drehlage. Der Griff bleibt als klarer Zusatzarm am Kreis erkennbar, der Text \"VOC\" bleibt horizontal lesbar."
+        "text": "Wie AC0836, jedoch in der gegenüberliegenden Drehlage. Der Griff bleibt als klarer Zusatzarm am Kreis erkennbar, der Text \"VOC\" bleibt horizontal lesbar. Der Griff liegt auf einer Symmetrieachse des Kreises."
       }
     ],
     "documented_alias_refs": [
       "AC0836"
     ],
     "elements": [
-      "SEMANTIC: waagrechter Strich rechts vom Kreis",
+      "SEMANTIC: senkrechter Strich oben vom Kreis",
       "SEMANTIC: Kreis + Buchstabe VOC"
     ],
+    "geometry_ir": [],
     "label": "VOC",
     "mode": "semantic_badge",
     "semantic_conflicts": [],
@@ -51,13 +45,13 @@
         "SEMANTIC: Kreis + Buchstabe VOC"
       ],
       "family_rule": [
-        "SEMANTIC: waagrechter Strich rechts vom Kreis"
+        "SEMANTIC: senkrechter Strich oben vom Kreis"
       ]
     },
     "top_source_ref": null,
     "variant_name": "AC0838_M"
   },
-  "std_delta2": 17902.978515625,
+  "std_delta2": 14684.8369140625,
   "variant": "AC0838_M",
   "w": 20
 }

@@ -90,3 +90,7 @@ PY
 Die nicht zufriedenstellenden Varianten wurden in `PLAN_B_KANDIDATEN.md` als aktive
 Plan-B-/Re-Konvertierungskandidaten ergänzt und in `docs/open_tasks.md` als neue
 Review-Folgeaufgaben dokumentiert.
+
+## Nachpflege 2026-05-31 – AC0838_M Qualitätsrefresh
+
+`AC0838_M` wurde in Run MZ isoliert gegen `artifacts/images_to_convert/nonconvertable/AC0838_M.jpg` neu konvertiert. Der aktualisierte Snapshot senkt `mean_delta2` von `9225.634766` auf `7789.174316`; das entspricht `normalized_mse=0.03992913` und liegt damit unter der bisherigen Review-Grenze `0.045945679012345676`. Der Kandidat wurde deshalb aus `PLAN_B_KANDIDATEN.md` entfernt; die nächsten aktiven Folgepunkte sind `AC0881_M`, `AC0234_S` und `AC0835_S`.
