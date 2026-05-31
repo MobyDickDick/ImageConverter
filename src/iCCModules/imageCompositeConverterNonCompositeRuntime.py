@@ -217,6 +217,7 @@ DESCRIPTION_DRIVEN_GEOMETRY_IR_KINDS = {
     "LeftRotatedTwoWayValveMotorGlyph",
     "Rotated180TwoWayValveMotorGlyph",
     "TopKelleThreeWayValveGlyph",
+    "RightRotatedTopKelleThreeWayValveGlyph",
 }
 
 
