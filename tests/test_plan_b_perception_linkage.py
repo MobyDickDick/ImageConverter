@@ -20,7 +20,7 @@ def test_build_plan_b_perception_linkage_record_has_lerneffekt_decision() -> Non
     record = build_plan_b_perception_linkage_record(PLAN_B_PERCEPTION_TARGETS[0])
 
     assert record["schema_version"] == "plan_b_perception_linkage_record_v1"
-    assert record["variant"] == "AC0232_S"
+    assert record["variant"] == "AC0233_S"
     lerneffekt = record["perception_lerneffekt"]
     assert lerneffekt["question"]
     assert lerneffekt["expected_first_primitive"] == "text_glyph_or_circle_ring"
@@ -51,10 +51,10 @@ def test_run_plan_b_perception_linkage_report_writes_json_and_csv(
     assert report["schema_version"] == "plan_b_perception_linkage_report_v1"
     assert report["metrics"]["all_have_perception_lerneffekt"] is True
     assert {record["variant"] for record in report["records"]} == {
-        "AC0232_S",
         "AC0233_S",
         "AC0838_M",
         "AC0881_M",
+        "AC0234_S",
     }
 
     rows = list(csv.DictReader(csv_report.open(encoding="utf-8")))

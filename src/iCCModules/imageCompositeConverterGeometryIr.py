@@ -63,6 +63,7 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
             "kelle mit kreis",
             "symmetrieachse des kreises",
             "oben befindet sich eine kelle",
+            "kelle mit senkrechtem",
             "3. spitzes dreieck unten",
             "3. dreieck unten",
             "im uhrzeigersinn",
@@ -82,6 +83,35 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
     right_rotated_top_kelle_three_way_valve_hint = top_kelle_three_way_valve_hint and _has_any(
         desc, ("90° nach rechts", "90° rechts", "90 grad nach rechts", "nach rechts gedreht")
     )
+    left_rotated_m_top_kelle_three_way_valve_hint = m_top_kelle_three_way_valve_hint and _has_any(
+        desc, ("90° nach links", "90° links", "90 grad nach links", "nach links gedreht")
+    )
+
+    if left_rotated_m_top_kelle_three_way_valve_hint:
+        elements.append(
+            {
+                "kind": "LeftRotatedTopKelleThreeWayValveGlyph",
+                "id": "left_rotated_top_kelle_three_way_valve",
+                "body_paths": [
+                    [[0.610, 0.500], [0.455, 0.980], [0.765, 0.980]],
+                    [[0.610, 0.500], [0.455, 0.020], [0.765, 0.020]],
+                    [[0.610, 0.500], [0.960, 0.667], [0.960, 0.333]],
+                ],
+                "circle": [0.235, 0.500, 0.225],
+                "connector": [[0.450, 0.500], [0.610, 0.500]],
+                "label": "M",
+                "label_center": [0.235, 0.500],
+                "font_size": 0.320,
+                "body_fill": "url(#vertical-two-way-valve-body-gradient)",
+                "circle_fill": "url(#vertical-two-way-valve-circle-gradient)",
+                "stroke": "#969696",
+                "connector_stroke": "#8f8f8f",
+                "text_fill": "#666666",
+                "stroke_width": 0.040,
+                "connector_width": 0.075,
+            }
+        )
+        return elements
 
     if right_rotated_top_kelle_three_way_valve_hint:
         elements.append(
@@ -509,6 +539,7 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
         "LeftRotatedTwoWayValveMotorGlyph",
         "Rotated180TwoWayValveMotorGlyph",
         "TopKelleThreeWayValveGlyph",
+        "LeftRotatedTopKelleThreeWayValveGlyph",
         "RightRotatedTopKelleThreeWayValveGlyph",
     }
     needs_vertical_valve_defs = any(element.get("kind") in valve_gradient_kinds for element in geometry_ir)
