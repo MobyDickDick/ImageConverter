@@ -6,7 +6,7 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-05-30)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `383` · Erledigt `286` · Offen `97`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `383` · Erledigt `287` · Offen `96`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -80,7 +80,14 @@ detaillierte Backlog steht in `docs/perception_first_task_backlog_2026-05-30.md`
 - [x] **PF5 – Evaluationsharness für Perception-Seeds aufbauen:** Precision/Recall, Confidence und Renderfehler vor/nach Seed für mindestens drei Primitive ausweisen. (2026-05-30: PF5-Harness `--report perception-seed-eval` ergänzt; Report `artifacts/evaluation/perception_seed_evaluation_v1/perception_seed_evaluation_report_v1.json` und CSV `artifacts/evaluation/perception_seed_evaluation_v1/perception_seed_evaluation_samples_v1.csv` verdichten Minus-/Linien-, Kreis-/Ring- und Rechteck-Seeds zu Precision/Recall, Confidence-Verteilung und Renderfehlern vor/nach Seed. Basistests in `tests/test_perception_seed_evaluation.py`.)
 - [x] **PF6 – Perception-Telemetrie in bestehende Reports integrieren:** erkannte/abgelehnte Kandidaten, Seed-Auswahl und Fehlerdeltas pro Lauf als CSV/JSON protokollieren. (2026-05-30: PF6-Telemetrie ergänzt `build_perception_telemetry_record(...)` sowie den CLI-Report `--report perception-telemetry`; JSON/CSV-Artefakte unter `artifacts/evaluation/perception_telemetry_v1/` protokollieren erkannte und abgelehnte Kandidaten, ausgewählte Geometry-IR-Seeds sowie Fehlerwerte vor/nach Seed. Basistests in `tests/test_perception_telemetry_report.py`.)
 - [x] **PF7 – Einfache Text-/Glyph-Erkennung für `M`, `+`, `-` und kurze Labels prüfen:** Template-Matching/OCR-Nutzen ohne neue Pflichtdependency evaluieren. (2026-05-30: Template-Matching-Detector `detect_text_glyph_candidates(...)` ergänzt; PF7-Report `artifacts/evaluation/perception_text_glyph_evaluation_v1/perception_text_glyph_evaluation_report_v1.json` und CSV `.../perception_text_glyph_evaluation_samples_v1.csv` prüfen synthetische Glyphen `M`, `+`, `-`, das Kurzlabel `VOC` sowie den realen Plus-Kandidaten `AC0120_L.jpg` ohne neue Pflicht-OCR-Dependency; Basistests in `tests/test_perception_text_glyph_eval.py`.)
-- [ ] **PF8 – Plan-B-Rotation mit Perception-Aufgaben verzahnen:** jedes kommende Plan-B-Paket erhält einen Abschnitt „Perception-Lerneffekt“.
+- [x] **PF8 – Plan-B-Rotation mit Perception-Aufgaben verzahnen:** jedes kommende Plan-B-Paket erhält einen Abschnitt „Perception-Lerneffekt“. (2026-05-30: PF8-Linkage-Report `--report plan-b-perception-linkage` ergänzt; JSON/CSV-Artefakte unter `artifacts/evaluation/plan_b_perception_linkage_v1/` dokumentieren für `AC0224_S`, `AC0231_S`, `AC0838_M` und `AC0881_M` je eine Perception-Frage, erwartete erste Primitive und die Entscheidung `generalisiert`/`nur Sonderfall`/`noch nicht erkannt`. `PLAN_B_KANDIDATEN.md` enthält ab sofort den Pflichtabschnitt „Perception-Lerneffekt“.)
+
+### Fortschritt vs. Blocker (Session 2026-05-30, PF8 Plan-B-/Perception-Verzahnung Run MU)
+
+- **Fortschritt:** Die nächste dokumentierte Perception-First-Aufgabe **PF8** wurde umgesetzt: Aktive Plan-B-Kandidaten werden maschinenlesbar mit genau einer Perception-Frage, erwarteten ersten Primitive-Familien und einer Entscheidung aus `generalisiert`, `nur Sonderfall` oder `noch nicht erkannt` verknüpft.
+- **Gekoppelte Plan-B-/Repro-Aufgabe:** Der neue Report `artifacts/evaluation/plan_b_perception_linkage_v1/plan_b_perception_linkage_report_v1.json` bewertet `AC0224_S`, `AC0231_S`, `AC0838_M` und `AC0881_M`; alle vier Kandidaten wurden als `generalisiert` entschieden, weil mindestens ein erwarteter Candidate in einen bestehenden Seed-Pfad (`CircleBackground` oder `HorizontalRule`) passt.
+- **Blocker:** Kein neuer technischer Blocker; TextGlyph-Signale bleiben für Plan-B-Labels dokumentiert, werden aber erst dann als generischer Seed erzwungen, wenn ein nachgelagerter Geometry-IR-Textpfad die Renderintegration abschließt.
+- **Nächster sinnvoller Schritt:** Zurück in die normale Plan-B-Rotation gehen und beim nächsten konkreten Kandidaten den neuen Pflichtabschnitt „Perception-Lerneffekt“ aus dem PF8-Report übernehmen.
 
 ### Fortschritt vs. Blocker (Session 2026-05-30, PF7 Text-/Glyph-Evaluation Run MT)
 
