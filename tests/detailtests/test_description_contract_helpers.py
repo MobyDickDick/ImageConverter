@@ -114,6 +114,18 @@ def test_description_parser_attaches_geometry_ir_for_ac0222_grey_background_upwa
     assert params["geometry_ir"][1]["stroke"] == "#666666"
 
 
+def test_description_parser_attaches_geometry_ir_for_ac0231_m_top_kelle_three_way_valve() -> None:
+    _desc, params = _parse(
+        '3-Weg Ventil ähnlich AC0211, um 90° im Uhrzeigersinn gedreht, '
+        '"M" wird immer noch senkrecht geschrieben. Noch ein 3. spitzes Dreieck unten. '
+        'Wieder Farbwechsel von Dunkelgrau nach hellgrau (von links unten nach rechts oben)'
+    )
+
+    assert params["contract_status"] == "ok"
+    assert [element["kind"] for element in params["geometry_ir"]] == ["TopKelleThreeWayValveGlyph"]
+    assert params["geometry_ir"][0]["label"] == "M"
+
+
 def test_description_parser_attaches_geometry_ir_for_ac0221_top_kelle_three_way_valve() -> None:
     _desc, params = _parse(
         'Wie AC0231, jedoch ohne "M" in der Kelle oben. '

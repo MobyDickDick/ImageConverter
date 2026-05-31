@@ -239,6 +239,30 @@ def test_render_geometry_ir_to_svg_contains_ac0203_mirrored_compressor_primitive
 
 
 
+def test_build_geometry_ir_maps_ac0231_m_top_kelle_three_way_valve_description() -> None:
+    ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
+        '3-Weg Ventil ähnlich AC0211, um 90° im Uhrzeigersinn gedreht, '
+        '"M" wird immer noch senkrecht geschrieben. Noch ein 3. spitzes Dreieck unten. '
+        'Wieder Farbwechsel von Dunkelgrau nach hellgrau (von links unten nach rechts oben)'
+    )
+
+    assert [element["kind"] for element in ir] == ["TopKelleThreeWayValveGlyph"]
+    assert ir[0]["id"] == "top_kelle_three_way_valve"
+    assert ir[0]["label"] == "M"
+    assert ir[0]["label_center"] == [0.500, 0.235]
+
+
+def test_render_geometry_ir_to_svg_contains_ac0231_m_top_kelle_label() -> None:
+    ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
+        'Plan-B-Kandidat AC0231_S: oben befindet sich eine Kelle mit dem Buchstaben `M`.'
+    )
+
+    svg = geometry_ir_helpers.renderGeometryIrToSvgImpl(20, 30, ir)
+
+    assert 'id="top_kelle_three_way_valve_label"' in svg
+    assert '>M</text>' in svg
+
+
 def test_build_geometry_ir_maps_ac0221_top_kelle_three_way_valve_description() -> None:
     ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
         'Wie AC0231, jedoch ohne "M" in der Kelle oben. '

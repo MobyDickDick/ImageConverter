@@ -105,13 +105,13 @@
     },
     {
       "schema_version": "plan_b_perception_linkage_record_v1",
-      "variant": "AC0231_S",
-      "image_path": "artifacts/images_to_convert/AC0231_S.jpg",
+      "variant": "AC0233_S",
+      "image_path": "artifacts/images_to_convert/AC0233_S.jpg",
       "status": "evaluated",
-      "plan_b_reason": "AC0221-verwandtes 3-Wege-Ventil mit oberer M-Kelle.",
-      "description": "Plan-B-Kandidat AC0231_S: oben befindet sich eine Kelle mit dem Buchstaben `M`.",
+      "plan_b_reason": "AC0231-verwandtes 3-Wege-Ventil, 180 Grad gedreht und mit vorhandenem Diff-Artefakt.",
+      "description": "Plan-B-Kandidat AC0233_S: AC0231-verwandtes 3-Wege-Ventil, 180 Grad gedreht; Kelle mit gedrehtem Buchstaben `M`.",
       "perception_lerneffekt": {
-        "question": "Kann die obere M-Beschriftung oder die runde Kelle vorab als TextGlyph/CircleBackground dokumentiert werden?",
+        "question": "Kann die gedrehte M-Beschriftung oder die runde Kelle vorab als TextGlyph/CircleBackground dokumentiert werden?",
         "expected_first_primitive": "text_glyph_or_circle_ring",
         "expected_candidate_kinds": [
           "circle",
@@ -124,61 +124,62 @@
         ],
         "decision": "generalisiert",
         "matched_candidate_kinds": [
-          "circle"
+          "circle",
+          "ring"
         ],
         "matched_seed_kinds": [
           "CircleBackground"
         ],
         "top_candidate_kind": "circle",
-        "top_confidence": 0.926,
+        "top_confidence": 0.9221,
         "next_action": "Im n\u00e4chsten Plan-B-Paket als vorinitialisierten Geometry-IR-Seed protokollieren."
       },
-      "candidate_count": 3,
+      "candidate_count": 5,
       "top_candidate": {
         "schema_version": "perception_primitive_candidate_v1",
         "kind": "circle",
         "bbox": {
-          "x": 13.0,
-          "y": 13.0,
-          "width": 7.0,
-          "height": 10.0
+          "x": 2.0,
+          "y": 14.0,
+          "width": 14.0,
+          "height": 14.0
         },
         "center": {
-          "x": 18.0,
-          "y": 18.0
+          "x": 9.0,
+          "y": 21.0
         },
         "geometry": {
-          "radius_px": 5.0,
+          "radius_px": 7.0,
           "inner_radius_px": 0.0,
           "stroke_width_px": 1.0,
           "circularity": 1.0,
           "ring": false,
-          "fill_ratio": 0.7091,
+          "fill_ratio": 0.6913,
           "geometry_ir_kind": "CircleBackground",
           "geometry_ir_bbox": [
-            0.65,
-            0.43333,
-            0.35,
-            0.33333
+            0.1,
+            0.46667,
+            0.7,
+            0.46667
           ]
         },
         "color": {
           "fill_rgb": [
-            208,
-            208,
-            208
+            182,
+            182,
+            182
           ],
           "stroke_rgb": [
-            214,
-            214,
-            214
+            202,
+            202,
+            202
           ],
-          "fill_hex": "#D0D0D0",
-          "stroke_hex": "#D6D6D6",
-          "fill_confidence": 0.7744,
-          "stroke_confidence": 0.7
+          "fill_hex": "#B6B6B6",
+          "stroke_hex": "#CACACA",
+          "fill_confidence": 0.6272,
+          "stroke_confidence": 0.6872
         },
-        "confidence": 0.926,
+        "confidence": 0.9221,
         "roi": {
           "type": "image",
           "hint": "full_image",
