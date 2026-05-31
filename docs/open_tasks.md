@@ -82,6 +82,13 @@ detaillierte Backlog steht in `docs/perception_first_task_backlog_2026-05-30.md`
 - [x] **PF7 – Einfache Text-/Glyph-Erkennung für `M`, `+`, `-` und kurze Labels prüfen:** Template-Matching/OCR-Nutzen ohne neue Pflichtdependency evaluieren. (2026-05-30: Template-Matching-Detector `detect_text_glyph_candidates(...)` ergänzt; PF7-Report `artifacts/evaluation/perception_text_glyph_evaluation_v1/perception_text_glyph_evaluation_report_v1.json` und CSV `.../perception_text_glyph_evaluation_samples_v1.csv` prüfen synthetische Glyphen `M`, `+`, `-`, das Kurzlabel `VOC` sowie den realen Plus-Kandidaten `AC0120_L.jpg` ohne neue Pflicht-OCR-Dependency; Basistests in `tests/test_perception_text_glyph_eval.py`.)
 - [x] **PF8 – Plan-B-Rotation mit Perception-Aufgaben verzahnen:** jedes kommende Plan-B-Paket erhält einen Abschnitt „Perception-Lerneffekt“. (2026-05-30: PF8-Linkage-Report `--report plan-b-perception-linkage` ergänzt; JSON/CSV-Artefakte unter `artifacts/evaluation/plan_b_perception_linkage_v1/` dokumentieren für `AC0224_S`, `AC0231_S`, `AC0838_M` und `AC0881_M` je eine Perception-Frage, erwartete erste Primitive und die Entscheidung `generalisiert`/`nur Sonderfall`/`noch nicht erkannt`. `PLAN_B_KANDIDATEN.md` enthält ab sofort den Pflichtabschnitt „Perception-Lerneffekt“.)
 
+### Fortschritt vs. Blocker (Session 2026-05-31, Plan-B AC0232_S Perception-Rotation Run MV)
+
+- **Fortschritt:** Das nächste Plan-B-/Perception-Arbeitspaket wurde für `AC0232_S` abgearbeitet: Der PF8-Linkage-Report rotiert den erledigten Kandidaten `AC0224_S` aus und bewertet nun `AC0232_S`, `AC0231_S`, `AC0838_M` und `AC0881_M`.
+- **Gekoppelte Plan-B-/Repro-Aufgabe:** `AC0232_S` wird mit der Frage nach gedrehter `M`-Beschriftung bzw. runder Kelle als `text_glyph_or_circle_ring` geführt; der aktuelle Lauf erkennt einen `circle`-Kandidaten mit `CircleBackground`-Seed (`top_confidence=0.9236`) und entscheidet den Lerneffekt damit als `generalisiert`.
+- **Blocker:** Kein neuer technischer Blocker; wie bei `AC0231_S` bleibt das `M`-Signal vorerst Label-Hinweis, während der generische vorinitialisierte Seed über `CircleBackground` läuft.
+- **Nächster sinnvoller Schritt:** In der normalen Plan-B-Rotation den nächsten konkreten Kandidaten mit dem aktualisierten PF8-Report fortführen oder `AC0232_S` als vorinitialisierten Geometry-IR-Seed im Einzellauf prüfen.
+
 ### Fortschritt vs. Blocker (Session 2026-05-30, PF8 Plan-B-/Perception-Verzahnung Run MU)
 
 - **Fortschritt:** Die nächste dokumentierte Perception-First-Aufgabe **PF8** wurde umgesetzt: Aktive Plan-B-Kandidaten werden maschinenlesbar mit genau einer Perception-Frage, erwarteten ersten Primitive-Familien und einer Entscheidung aus `generalisiert`, `nur Sonderfall` oder `noch nicht erkannt` verknüpft.
