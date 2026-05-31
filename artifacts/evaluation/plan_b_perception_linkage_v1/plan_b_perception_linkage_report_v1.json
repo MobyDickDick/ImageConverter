@@ -11,92 +11,94 @@
   "records": [
     {
       "schema_version": "plan_b_perception_linkage_record_v1",
-      "variant": "AC0881_M",
-      "image_path": "artifacts/images_to_convert/nonconvertable/AC0881_M.jpg",
+      "variant": "AC0820_S",
+      "image_path": "artifacts/images_to_convert/AC0820_S.jpg",
       "status": "evaluated",
-      "plan_b_reason": "Qualit\u00e4tsreview-Befund: Originalbild vorhanden, aber kein passendes SVG-Artefakt in gepr\u00fcften Pfaden.",
-      "description": "Plan-B-Kandidat AC0881_M: einfache sichtbare Grundform zuerst als Perception-Seed pr\u00fcfen.",
+      "plan_b_reason": "Weak-Family-Befund: rundes CO2-Badge mit tiefgestelltem Label und auff\u00e4lligem Text-/Grauwertfehler.",
+      "description": "Plan-B-Kandidat AC0820_S: rundes CO2-Badge; Kreis und kurzes Label zuerst pr\u00fcfen.",
       "perception_lerneffekt": {
-        "question": "Welches einfache Rahmen-, Kreis- oder Linienprimitive ist vor der ersten Iteration sichtbar?",
-        "expected_first_primitive": "simple_shape_probe",
+        "question": "Kann der dominante CO2-Kreis vorab als CircleBackground und das kurze Label als TextGlyph-Hinweis festgehalten werden?",
+        "expected_first_primitive": "circle_ring_or_co2_label",
         "expected_candidate_kinds": [
           "circle",
-          "horizontal_rule",
-          "line",
-          "rectangle",
-          "ring"
+          "ring",
+          "text_glyph"
         ],
         "expected_seed_kinds": [
           "CircleBackground",
-          "HorizontalRule",
-          "RectBorder"
+          "TextGlyph"
         ],
         "decision": "generalisiert",
         "matched_candidate_kinds": [
-          "circle",
-          "horizontal_rule"
+          "circle"
         ],
         "matched_seed_kinds": [
-          "CircleBackground",
-          "HorizontalRule"
+          "CircleBackground"
         ],
-        "top_candidate_kind": "horizontal_rule",
-        "top_confidence": 0.8975,
+        "top_candidate_kind": "circle",
+        "top_confidence": 0.8759,
         "next_action": "Im n\u00e4chsten Plan-B-Paket als vorinitialisierten Geometry-IR-Seed protokollieren."
       },
-      "candidate_count": 3,
+      "candidate_count": 4,
       "top_candidate": {
         "schema_version": "perception_primitive_candidate_v1",
-        "kind": "horizontal_rule",
+        "kind": "circle",
         "bbox": {
-          "x": 4.0,
+          "x": 2.0,
           "y": 3.0,
-          "width": 12.0,
-          "height": 2.0
+          "width": 10.0,
+          "height": 10.0
         },
         "center": {
-          "x": 10.0,
-          "y": 4.0
+          "x": 7.0,
+          "y": 8.0
         },
         "geometry": {
-          "orientation": "horizontal",
-          "x_left": 4.0,
-          "x_right": 16.0,
-          "y_center": 4.0,
-          "length_px": 12.0,
-          "stroke_width_px": 2.0,
-          "angle_deg": 0.0,
-          "text_equivalent": "-",
-          "geometry_ir_kind": "HorizontalRule"
+          "radius_px": 5.0,
+          "inner_radius_px": 0.0,
+          "stroke_width_px": 1.0,
+          "circularity": 1.0,
+          "ring": false,
+          "fill_ratio": 0.4815,
+          "geometry_ir_kind": "CircleBackground",
+          "geometry_ir_bbox": [
+            0.13333,
+            0.2,
+            0.66667,
+            0.66667
+          ]
         },
         "color": {
-          "fill_rgb": null,
-          "stroke_rgb": [
-            207,
-            207,
-            207
+          "fill_rgb": [
+            201,
+            201,
+            201
           ],
-          "fill_hex": null,
-          "stroke_hex": "#CFCFCF",
-          "fill_confidence": 0.0,
-          "stroke_confidence": 0.6729
+          "stroke_rgb": [
+            220,
+            220,
+            220
+          ],
+          "fill_hex": "#C9C9C9",
+          "stroke_hex": "#DCDCDC",
+          "fill_confidence": 0.648,
+          "stroke_confidence": 0.7125
         },
-        "confidence": 0.8975,
+        "confidence": 0.8759,
         "roi": {
-          "type": "description_hint",
+          "type": "image",
           "hint": "full_image",
           "bbox": {
             "x": 0.0,
             "y": 0.0,
-            "width": 20.0,
-            "height": 35.0
-          },
-          "description": "Plan-B-Kandidat AC0881_M: einfache sichtbare Grundform zuerst als Perception-Seed pr\u00fcfen."
+            "width": 15.0,
+            "height": 15.0
+          }
         },
         "evidence": {
-          "detector": "detect_horizontal_rules",
-          "threshold_model": "dark_contour_horizontal_opening",
-          "description_hint": "full_image"
+          "detector": "detect_circle_rings",
+          "detection_source": "hough",
+          "threshold_model": "hough_plus_foreground_mask"
         },
         "source": "pf8_plan_b_perception_linkage"
       }
@@ -291,9 +293,9 @@
     }
   ],
   "metrics": {
-    "samples": 2,
-    "evaluated_samples": 2,
-    "generalisiert": 2,
+    "samples": 3,
+    "evaluated_samples": 3,
+    "generalisiert": 3,
     "nur_sonderfall": 0,
     "noch_nicht_erkannt": 0,
     "all_have_perception_lerneffekt": true

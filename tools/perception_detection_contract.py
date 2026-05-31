@@ -1397,23 +1397,15 @@ def write_text_glyph_evaluation_report(
 
 PLAN_B_PERCEPTION_TARGETS: list[dict[str, Any]] = [
     {
-        "variant": "AC0881_M",
-        "image_candidates": [
-            "artifacts/images_to_convert/AC0881_M.jpg",
-            "artifacts/images_to_convert/nonconvertable/AC0881_M.jpg",
-        ],
-        "plan_b_reason": "Qualitätsreview-Befund: Originalbild vorhanden, aber kein passendes SVG-Artefakt in geprüften Pfaden.",
-        "perception_question": "Welches einfache Rahmen-, Kreis- oder Linienprimitive ist vor der ersten Iteration sichtbar?",
-        "expected_first_primitive": "simple_shape_probe",
-        "expected_candidate_kinds": {
-            "rectangle",
-            "circle",
-            "ring",
-            "line",
-            "horizontal_rule",
-        },
-        "expected_seed_kinds": {"RectBorder", "CircleBackground", "HorizontalRule"},
-        "description": "Plan-B-Kandidat AC0881_M: einfache sichtbare Grundform zuerst als Perception-Seed prüfen.",
+        "variant": "AC0820_S",
+        "image_candidates": ["artifacts/images_to_convert/AC0820_S.jpg"],
+        "plan_b_reason": "Weak-Family-Befund: rundes CO2-Badge mit tiefgestelltem Label und auffälligem Text-/Grauwertfehler.",
+        "perception_question": "Kann der dominante CO2-Kreis vorab als CircleBackground und das kurze Label als TextGlyph-Hinweis festgehalten werden?",
+        "expected_first_primitive": "circle_ring_or_co2_label",
+        "expected_candidate_kinds": {"circle", "ring", "text_glyph"},
+        "expected_seed_kinds": {"CircleBackground", "TextGlyph"},
+        "description": "Plan-B-Kandidat AC0820_S: rundes CO2-Badge; Kreis und kurzes Label zuerst prüfen.",
+        "glyphs": ["CO2"],
     },
     {
         "variant": "AC0234_S",
