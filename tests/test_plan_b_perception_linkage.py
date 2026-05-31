@@ -57,7 +57,7 @@ def test_run_plan_b_perception_linkage_report_writes_json_and_csv(
     assert report["metrics"]["all_have_perception_lerneffekt"] is True
     assert {record["variant"] for record in report["records"]} == {
         "AC0836_S",
-        "AC0870_S",
+        "AC0844_S",
         "AC0850_M",
     }
 

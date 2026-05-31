@@ -56,7 +56,16 @@ def applyRedrawVariationImpl(
     _applyNumericJitter("arm_stroke", 0.12, minimum=0.4)
     _applyNumericJitter("stem_height", max(0.12, float(h) * 0.012), minimum=0.5, maximum=float(max(w, h)))
     _applyNumericJitter("stem_width", 0.12, minimum=0.4, maximum=float(max(1, w)))
-    _applyNumericJitter("text_scale", 0.03, minimum=0.35, maximum=4.0)
+    if str(p.get("text_mode", "")).lower() in {"path", "path_t"}:
+        current_text_scale = float(p.get("text_scale", p.get("s", 0.01)) or 0.01)
+        _applyNumericJitter(
+            "text_scale",
+            max(0.0001, current_text_scale * 0.08),
+            minimum=max(0.0001, current_text_scale * 0.60),
+            maximum=max(0.0001, current_text_scale * 1.80),
+        )
+    else:
+        _applyNumericJitter("text_scale", 0.03, minimum=0.35, maximum=4.0)
     _applyNumericJitter("text_x", max(0.10, float(w) * 0.01), minimum=0.0, maximum=float(w))
     _applyNumericJitter("text_y", max(0.10, float(h) * 0.01), minimum=0.0, maximum=float(h))
     _applyNumericJitter("co2_dx", 0.08)
