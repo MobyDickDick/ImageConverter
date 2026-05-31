@@ -1073,6 +1073,47 @@ def test_run_non_composite_iteration_impl_uses_description_geometry_ir_for_ac023
     assert "left_rotated_top_kelle_three_way_valve_label" in artifacts[0][0]
 
 
+def test_run_non_composite_iteration_impl_uses_description_geometry_ir_for_ac0233_180_rotated_m_top_kelle_three_way_valve() -> None:
+    logs: list[list[str]] = []
+    artifacts: list[tuple[str, object]] = []
+    description = (
+        'Wie AC0231: 3-Weg Ventil ähnlich AC0211, um 90° im Uhrzeigersinn gedreht, '
+        '"M" wird immer noch senkrecht geschrieben. Noch ein 3. spitzes Dreieck unten. '
+        'Wieder Farbwechsel von Dunkelgrau nach hellgrau (von links unten nach rechts oben). '
+        'Geometrische Variante: 180° gedreht.'
+    )
+
+    result = non_composite_runtime_helpers.runNonCompositeIterationImpl(
+        mode="non_composite",
+        params={"mode": "non_composite"},
+        stripe_strategy=None,
+        semantic_mode_visual_override=False,
+        width=60,
+        height=40,
+        base_name="AC0233_S",
+        description=description,
+        perc_img="target",
+        img_path="/tmp/no-sample/AC0233_S.jpg",
+        print_fn=lambda *_args, **_kwargs: None,
+        render_embedded_raster_svg_fn=lambda _path: "<svg embedded/>",
+        build_gradient_stripe_svg_fn=lambda *_args, **_kwargs: "<svg gradient/>",
+        build_gradient_stripe_validation_log_lines_fn=lambda **_kwargs: ["status=non_composite_gradient_stripe"],
+        write_validation_log_fn=logs.append,
+        render_svg_to_numpy_fn=(
+            lambda content, *_args, **_kwargs: (
+                "geometry_rendered" if "rotated_180_top_kelle_three_way_valve_label" in content else None
+            )
+        ),
+        record_render_failure_fn=lambda *args, **kwargs: None,
+        write_attempt_artifacts_fn=lambda svg, rendered: artifacts.append((svg, rendered)),
+        calculate_error_fn=lambda _target, rendered: 0.21 if rendered == "geometry_rendered" else 99.0,
+    )
+
+    assert result == ("AC0233_S", description, {"mode": "non_composite"}, 1, 0.21)
+    assert logs[-1][:2] == ["status=non_composite_description_geometry_ir", "geometry_ir_element_count=1"]
+    assert "rotated_180_top_kelle_three_way_valve_body_1" in artifacts[0][0]
+    assert "rotated_180_top_kelle_three_way_valve_label" in artifacts[0][0]
+
 def test_run_non_composite_iteration_impl_uses_description_geometry_ir_for_ac0224_right_rotated_top_kelle_three_way_valve() -> None:
     logs: list[list[str]] = []
     artifacts: list[tuple[str, object]] = []
