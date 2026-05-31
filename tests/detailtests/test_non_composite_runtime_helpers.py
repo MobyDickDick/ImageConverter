@@ -658,6 +658,64 @@ def test_try_load_sample_svg_prefers_reference_family_from_description(tmp_path)
     assert sample_path.endswith("AC0030.svg")
     assert sample_content == "<svg ref/>"
 
+
+def test_try_load_sample_svg_forced_ac0100_prefers_exact_family_over_reference(tmp_path) -> None:
+    image_dir = tmp_path / "images"
+    samples_dir = image_dir / "samples"
+    samples_dir.mkdir(parents=True)
+    (samples_dir / "AC0010.svg").write_text("<svg reference/>", encoding="utf-8")
+    (samples_dir / "AC0100_L.svg").write_text("<svg exact-family/>", encoding="utf-8")
+
+    sample = non_composite_runtime_helpers._try_load_sample_svg(
+        img_path=str(image_dir / "AC0100_M.jpg"),
+        base_name="AC0100_M",
+        description="Wie AC0010: Heizelement mit Diagonale.",
+    )
+
+    assert sample is not None
+    sample_path, sample_content = sample
+    assert sample_path.endswith("AC0100_L.svg")
+    assert sample_content == "<svg exact-family/>"
+
+
+def test_run_non_composite_iteration_impl_forced_ac0100_size_variant_uses_sample_even_when_error_is_higher(tmp_path) -> None:
+    logs: list[list[str]] = []
+    prints: list[str] = []
+    artifacts: list[tuple[str, object]] = []
+    image_dir = tmp_path / "images"
+    samples_dir = image_dir / "samples"
+    samples_dir.mkdir(parents=True)
+    (samples_dir / "AC0100_L.svg").write_text("<svg sample/>", encoding="utf-8")
+
+    result = non_composite_runtime_helpers.runNonCompositeIterationImpl(
+        mode="non_composite",
+        params={"mode": "non_composite"},
+        stripe_strategy=None,
+        semantic_mode_visual_override=False,
+        width=64,
+        height=64,
+        base_name="AC0100_M",
+        description="Wie AC0010: Heizelement mit Diagonale.",
+        perc_img="target",
+        img_path=str(image_dir / "AC0100_M.jpg"),
+        print_fn=prints.append,
+        render_embedded_raster_svg_fn=lambda _path: "<svg baseline/>",
+        build_gradient_stripe_svg_fn=lambda *_args, **_kwargs: "<svg gradient/>",
+        build_gradient_stripe_validation_log_lines_fn=lambda **_kwargs: ["status=non_composite_gradient_stripe"],
+        write_validation_log_fn=logs.append,
+        render_svg_to_numpy_fn=lambda content, *_args, **_kwargs: "sample_rendered" if "sample" in content else "baseline_rendered",
+        record_render_failure_fn=lambda *args, **kwargs: None,
+        write_attempt_artifacts_fn=lambda svg, rendered: artifacts.append((svg, rendered)),
+        calculate_error_fn=lambda _target, rendered: 200.0 if rendered == "sample_rendered" else 100.0,
+    )
+
+    assert result == ("AC0100_M", "Wie AC0010: Heizelement mit Diagonale.", {"mode": "non_composite"}, 1, 200.0)
+    assert logs[-1][0] == "status=non_composite_plan_b_sample_svg_selected"
+    assert any(line.endswith("AC0100_L.svg") for line in logs[-1] if line.startswith("sample_svg_path="))
+    assert "force_sample_svg=1" in logs[-1]
+    assert prints and "forcierte Sample-Auswahl" in prints[-1]
+    assert artifacts == [("<svg sample/>", "sample_rendered")]
+
 def test_try_load_sample_svg_auto_converts_inkscape_file(tmp_path) -> None:
     image_dir = tmp_path / "images"
     samples_dir = image_dir / "samples"
