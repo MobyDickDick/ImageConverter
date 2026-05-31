@@ -8,7 +8,12 @@ import numpy as np
 from src.iCCModules import imageCompositeConverterGeometryIr as geometry_ir_helpers
 from tools.perception_detection_contract import build_perception_seeded_geometry_ir
 
-FORCED_PLAN_B_SAMPLE_VARIANTS: set[str] = {"AC0011"}
+FORCED_PLAN_B_SAMPLE_VARIANTS: set[str] = {"AC0011", "AC0100"}
+
+
+def _is_forced_plan_b_sample_variant(base_name: str) -> bool:
+    family_name = base_name.rpartition("_")[0] or base_name
+    return base_name in FORCED_PLAN_B_SAMPLE_VARIANTS or family_name in FORCED_PLAN_B_SAMPLE_VARIANTS
 
 def _build_vector_placeholder_svg(width: int, height: int, *, description: str = "") -> str:
     safe_w = max(1, int(width or 1))
@@ -386,7 +391,7 @@ def _try_load_sample_svg(*, img_path: str, base_name: str, description: str = ""
     if (
         reference_family
         and reference_family != base_name.upper()
-        and base_name not in FORCED_PLAN_B_SAMPLE_VARIANTS
+        and not _is_forced_plan_b_sample_variant(base_name)
     ):
         sample_candidates = _prepend_reference_candidates(sample_candidates, reference_family)
     for samples_dir in samples_dirs:
@@ -732,7 +737,7 @@ def runNonCompositeIterationImpl(
         if sample_rendered is not None:
             sample_err = calculate_error_fn(perc_img, sample_rendered)
             baseline_is_embedded_raster = _contains_svg_image_tag(svg_content)
-            force_sample_svg = base_name in FORCED_PLAN_B_SAMPLE_VARIANTS
+            force_sample_svg = _is_forced_plan_b_sample_variant(base_name)
             # Favor curated sample SVGs over generated placeholders when they are
             # in a similar quality range, because sample assets usually carry
             # richer semantic structure than our generic non-composite fallback.
