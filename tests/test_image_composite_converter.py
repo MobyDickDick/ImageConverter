@@ -730,6 +730,26 @@ def test_finalize_ac0820_m_enforces_lowered_index_placement() -> None:
     assert float(layout["subscript_y"]) > float(layout["y_base"])
 
 
+def test_make_badge_params_ac0870_s_uses_centered_t_badge_seed() -> None:
+    """Tiny AC0870_S should keep the documented centered T badge before validation."""
+    img = conv.cv2.imread("artifacts/images_to_convert/AC0870_S.jpg")
+    assert img is not None
+
+    params = Action.make_badge_params(img.shape[1], img.shape[0], "AC0870_S", img)
+
+    assert params is not None
+    assert params["draw_text"] is True
+    assert params["text_mode"] == "path_t"
+    assert params["lock_circle_cx"] is True
+    assert params["lock_circle_cy"] is True
+    assert params["lock_text_position"] is True
+    assert params["lock_text_scale"] is True
+    assert float(params["cx"]) == pytest.approx(7.5)
+    assert float(params["cy"]) == pytest.approx(7.0)
+    assert float(params["r"]) >= 5.88
+    assert float(params["min_circle_radius"]) >= float(params["r"]) * 0.98
+    assert float(params["max_circle_radius"]) <= float(params["r"]) * 1.02 + 1e-6
+
 def test_finalize_ac0800_keeps_ring_darker_than_fill() -> None:
     """AC0800 should preserve generic ring semantics: darker stroke than fill."""
     params = Action.make_badge_params(30, 30, "AC0800")
