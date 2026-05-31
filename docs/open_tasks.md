@@ -90,6 +90,13 @@ detaillierte Backlog steht in `docs/perception_first_task_backlog_2026-05-30.md`
 - **Sicherung:** Der externe AC0850-M-Repro lief grün (`PYTHONPATH=vendor/linux-py310/site-packages:. timeout 180 python -m src.iCCModules.imageCompositeConverterCli artifacts/images_to_convert --descriptions-path artifacts/images_to_convert/Finale_Wurzelformen_V3.xml --output-dir /tmp/ic-ac0850-after --start AC0850_M --end AC0850_M --deterministic-order`, Exit `0`) und protokollierte `status=semantic_ok`; `conversion_bestlist.csv` enthält `AC0850_M` mit `best_error=26.802500` und `mean_delta2=6655.042480`.
 - **Nächster sinnvoller Schritt:** In der normalen Plan-B-Rotation mit dem aktiven Kreis-/VOC-/Vertikalgriff-Kandidaten `AC0836_S.jpg` fortfahren oder den neuen rF-Connector-Folgepunkt `AC0861_S.jpg` isoliert abarbeiten.
 
+### Fortschritt vs. Blocker (Session 2026-05-31, Plan-B AC0836_S VOC-Connector Run NH)
+
+- **Fortschritt:** Der nächste dokumentierte Plan-B-/Perception-Kandidat `AC0836_S.jpg` wurde abgearbeitet: Die vertikale Linienerkennung besitzt nun einen konturbasierten Fallback für sehr kleine Badge-Bilder, sodass der senkrechte Griff zusätzlich zum dominanten `CircleBackground`-Kreis als `line`-Kandidat im PF8-Linkage auftaucht.
+- **Perception-Lerneffekt:** Der erledigte Kandidat `AC0836_S` wurde aus der aktiven PF8-/Plan-B-Liste rotiert; der Linkage-Report führt nun `AC0835_S`, `AC0861_S` und den neuen gedrehten rF-Connector-Folgepunkt `AC0862_S`, jeweils mit `decision=generalisiert`.
+- **Sicherung:** Der externe AC0836-S-Repro lief grün (`PYTHONPATH=vendor/linux-py310/site-packages:. timeout 180 python -m src.iCCModules.imageCompositeConverterCli artifacts/images_to_convert/nonconvertable --descriptions-path artifacts/images_to_convert/Finale_Wurzelformen_V3.xml --output-dir /tmp/ic-ac0836-runnh --start AC0836_S --end AC0836_S --deterministic-order`, Exit `0`) und protokollierte `status=semantic_ok`; der PF8-Linkage-Report wurde erfolgreich neu geschrieben; der gezielte Testblock lief mit `5 passed`.
+- **Nächster sinnvoller Schritt:** In der normalen Plan-B-Rotation mit `AC0835_S.jpg` fortfahren oder den rF-Connector-Folgepunkt `AC0861_S.jpg` isoliert abarbeiten.
+
 ### Fortschritt vs. Blocker (Session 2026-05-31, Plan-B AC0870_S T-Badge Run NE)
 
 - **Fortschritt:** Der nächste dokumentierte Plan-B-/Perception-Kandidat `AC0870_S.jpg` wurde semantisch abgearbeitet: Kleine AC0870-`path_t`-Badges starten nun mit zentriertem Kreis-/T-Seed, explizitem `draw_text=True`, gesperrter Textposition/-skalierung und engem Radiuskorridor statt mit einer durch das T-Maskensignal nach links/unten verzogenen Ersatzpose.
