@@ -49,9 +49,149 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
     rotated_180_two_way_valve_hint = two_way_vertical_valve_hint and _has_any(
         desc, ("180° gedreht", "180 grad gedreht", "um 180°", "um 180 grad")
     )
-    top_kelle_three_way_valve_hint = _has_any(desc, ("ac0231", "3-weg ventil", "3 wege ventil", "3. spitzes dreieck")) and _has_any(
+    no_m_top_kelle_hint = _has_any(
         desc, ("ohne \"m\"", "ohne 'm'", "ohne m", "kein \"m\"", "kein m")
-    ) and _has_any(desc, ("kelle oben", "kreis oben", "kelle mit kreis", "symmetrieachse des kreises"))
+    )
+    top_kelle_family_hint = _has_any(
+        desc, ("ac0231", "3-weg ventil", "3 wege ventil", "3. spitzes dreieck")
+    )
+    top_kelle_position_hint = _has_any(
+        desc,
+        (
+            "kelle oben",
+            "kreis oben",
+            "kelle mit kreis",
+            "symmetrieachse des kreises",
+            "oben befindet sich eine kelle",
+            "kelle mit senkrechtem",
+            "kelle mit gedrehtem",
+            "3. spitzes dreieck unten",
+            "3. dreieck unten",
+            "im uhrzeigersinn",
+        ),
+    )
+    top_kelle_three_way_valve_hint = (
+        top_kelle_family_hint and no_m_top_kelle_hint and top_kelle_position_hint
+    )
+    m_top_kelle_three_way_valve_hint = (
+        top_kelle_family_hint
+        and top_kelle_position_hint
+        and not no_m_top_kelle_hint
+        and _has_any(
+            desc, ('"m"', "buchstaben `m`", "buchstaben m", "senkrecht geschrieben")
+        )
+    )
+    right_rotated_top_kelle_three_way_valve_hint = top_kelle_three_way_valve_hint and _has_any(
+        desc, ("90° nach rechts", "90° rechts", "90 grad nach rechts", "nach rechts gedreht")
+    )
+    left_rotated_m_top_kelle_three_way_valve_hint = m_top_kelle_three_way_valve_hint and _has_any(
+        desc, ("90° nach links", "90° links", "90 grad nach links", "nach links gedreht")
+    )
+    rotated_180_m_top_kelle_three_way_valve_hint = m_top_kelle_three_way_valve_hint and _has_any(
+        desc, ("180° gedreht", "180 grad gedreht", "um 180°", "um 180 grad")
+    )
+
+    if rotated_180_m_top_kelle_three_way_valve_hint:
+        elements.append(
+            {
+                "kind": "Rotated180TopKelleThreeWayValveGlyph",
+                "id": "rotated_180_top_kelle_three_way_valve",
+                "body_paths": [
+                    [[0.500, 0.390], [0.980, 0.545], [0.980, 0.235]],
+                    [[0.500, 0.390], [0.020, 0.545], [0.020, 0.235]],
+                    [[0.500, 0.390], [0.667, 0.040], [0.333, 0.040]],
+                ],
+                "circle": [0.500, 0.765, 0.225],
+                "connector": [[0.500, 0.550], [0.500, 0.390]],
+                "label": "M",
+                "label_center": [0.500, 0.765],
+                "font_size": 0.320,
+                "body_fill": "url(#vertical-two-way-valve-body-gradient)",
+                "circle_fill": "url(#vertical-two-way-valve-circle-gradient)",
+                "stroke": "#969696",
+                "connector_stroke": "#8f8f8f",
+                "text_fill": "#666666",
+                "stroke_width": 0.040,
+                "connector_width": 0.075,
+            }
+        )
+        return elements
+
+    if left_rotated_m_top_kelle_three_way_valve_hint:
+        elements.append(
+            {
+                "kind": "LeftRotatedTopKelleThreeWayValveGlyph",
+                "id": "left_rotated_top_kelle_three_way_valve",
+                "body_paths": [
+                    [[0.610, 0.500], [0.455, 0.980], [0.765, 0.980]],
+                    [[0.610, 0.500], [0.455, 0.020], [0.765, 0.020]],
+                    [[0.610, 0.500], [0.960, 0.667], [0.960, 0.333]],
+                ],
+                "circle": [0.235, 0.500, 0.225],
+                "connector": [[0.450, 0.500], [0.610, 0.500]],
+                "label": "M",
+                "label_center": [0.235, 0.500],
+                "font_size": 0.320,
+                "body_fill": "url(#vertical-two-way-valve-body-gradient)",
+                "circle_fill": "url(#vertical-two-way-valve-circle-gradient)",
+                "stroke": "#969696",
+                "connector_stroke": "#8f8f8f",
+                "text_fill": "#666666",
+                "stroke_width": 0.040,
+                "connector_width": 0.075,
+            }
+        )
+        return elements
+
+    if right_rotated_top_kelle_three_way_valve_hint:
+        elements.append(
+            {
+                "kind": "RightRotatedTopKelleThreeWayValveGlyph",
+                "id": "right_rotated_top_kelle_three_way_valve",
+                "body_paths": [
+                    [[0.390, 0.500], [0.545, 0.020], [0.235, 0.020]],
+                    [[0.390, 0.500], [0.545, 0.980], [0.235, 0.980]],
+                    [[0.390, 0.500], [0.040, 0.333], [0.040, 0.667]],
+                ],
+                "circle": [0.765, 0.500, 0.225],
+                "connector": [[0.550, 0.500], [0.390, 0.500]],
+                "label": "",
+                "body_fill": "url(#vertical-two-way-valve-body-gradient)",
+                "circle_fill": "url(#vertical-two-way-valve-circle-gradient)",
+                "stroke": "#969696",
+                "connector_stroke": "#8f8f8f",
+                "text_fill": "#666666",
+                "stroke_width": 0.040,
+                "connector_width": 0.075,
+            }
+        )
+        return elements
+
+    if m_top_kelle_three_way_valve_hint:
+        elements.append(
+            {
+                "kind": "TopKelleThreeWayValveGlyph",
+                "id": "top_kelle_three_way_valve",
+                "body_paths": [
+                    [[0.500, 0.610], [0.020, 0.455], [0.020, 0.765]],
+                    [[0.500, 0.610], [0.980, 0.455], [0.980, 0.765]],
+                    [[0.500, 0.610], [0.333, 0.960], [0.667, 0.960]],
+                ],
+                "circle": [0.500, 0.235, 0.225],
+                "connector": [[0.500, 0.450], [0.500, 0.610]],
+                "label": "M",
+                "label_center": [0.500, 0.235],
+                "font_size": 0.320,
+                "body_fill": "url(#vertical-two-way-valve-body-gradient)",
+                "circle_fill": "url(#vertical-two-way-valve-circle-gradient)",
+                "stroke": "#969696",
+                "connector_stroke": "#8f8f8f",
+                "text_fill": "#666666",
+                "stroke_width": 0.040,
+                "connector_width": 0.075,
+            }
+        )
+        return elements
 
     if top_kelle_three_way_valve_hint:
         elements.append(
@@ -429,6 +569,9 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
         "LeftRotatedTwoWayValveMotorGlyph",
         "Rotated180TwoWayValveMotorGlyph",
         "TopKelleThreeWayValveGlyph",
+        "LeftRotatedTopKelleThreeWayValveGlyph",
+        "RightRotatedTopKelleThreeWayValveGlyph",
+        "Rotated180TopKelleThreeWayValveGlyph",
     }
     needs_vertical_valve_defs = any(element.get("kind") in valve_gradient_kinds for element in geometry_ir)
     if needs_gradient or needs_vertical_valve_defs:
@@ -611,6 +754,15 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
                 f'  <text id="{element_id}" x="{_fmt(x + bw * 0.50)}" y="{_fmt(y + bh * 0.55)}" '
                 f'fill="{fill}" font-family="Arial, Helvetica, sans-serif" font-size="{_fmt(font_size)}" '
                 f'font-weight="{font_weight}" text-anchor="middle" dominant-baseline="middle">{raw_text}</text>'
+            )
+        elif kind == "HorizontalRule":
+            x, y, bw, bh = _scaled_bbox(element, w, h)
+            stroke = html.escape(str(element.get("stroke", "#4f4f4f")))
+            sw = float(element.get("stroke_width", 0.025)) * min(w, h)
+            cy = y + bh * 0.5
+            svg.append(
+                f'  <path id="{element_id}" d="M {_fmt(x)} {_fmt(cy)} L {_fmt(x + bw)} {_fmt(cy)}" '
+                f'stroke="{stroke}" stroke-width="{_fmt(sw)}" fill="none" stroke-linecap="square"/>'
             )
         elif kind == "HorizontalRuleSet":
             stroke = html.escape(str(element.get("stroke", "#707070")))

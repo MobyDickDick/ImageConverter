@@ -1,0 +1,6 @@
+sample_id,sample_type,expected_text,top_text,candidate_count,top_confidence,match
+glyph_m_synthetic,synthetic,M,M,1,0.8405,True
+glyph_plus_synthetic,synthetic,+,+,1,0.8867,True
+glyph_minus_synthetic,synthetic,-,-,1,0.7707,True
+short_label_voc_synthetic,synthetic,VOC,VOC,1,0.6418,True
+AC0120_L_plus_real,real,+,+,1,0.6148,True

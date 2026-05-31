@@ -6,7 +6,7 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-05-30)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `383` · Erledigt `282` · Offen `101`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `383` · Erledigt `287` · Offen `96`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -76,11 +76,63 @@ detaillierte Backlog steht in `docs/perception_first_task_backlog_2026-05-30.md`
 - [x] **PF1 – Detection-Contract v1 für erkannte Primitive festlegen:** ein stabiles Format für Linien-, Kreis-/Ring- und Rechteckkandidaten definieren und reporten. (2026-05-30: Contract-Modul `tools/perception_detection_contract.py` ergänzt; Kandidatenschema `perception_primitive_candidate_v1` serialisiert `kind`, `bbox`, `center`, `geometry`, `color`, `confidence`, `roi`, `evidence` und `source`. Plan-B-Synthesereport für `line`, `circle` und `rectangle` unter `artifacts/evaluation/perception_detection_contract_v1/perception_detection_contract_v1_report.json`; Basistests in `tests/test_perception_detection_contract.py`.)
 - [x] **PF2 – Horizontalstrich-/Minus-Erkennung mit ROI-Hinweis implementieren:** Hinweise wie „oben mittig ist ein `-`-Zeichen“ in einen `HorizontalRule`- oder `TextGlyph("-")`-Seed übersetzen. (2026-05-30: `detect_horizontal_rules(...)` und `detect_minus_candidates(...)` ergänzen einen ROI-basierten `horizontal_rule`-/`HorizontalRule`-Kandidaten inklusive `text_equivalent="-"`; synthetischer Top-Center-Minus und reales `AC0120_L.jpg` werden im Report `artifacts/evaluation/perception_minus_roi_v1/perception_minus_roi_report_v1.json` erfolgreich gematcht; Basistests in `tests/test_perception_minus_roi.py`.)
 - [x] **PF3 – Kreis-/Ring-Erkennung als Geometry-IR-Seed stabilisieren:** erkannte Kreise/Ringe mit `CircleBackground` und bestehenden Masken-/Hough-Heuristiken zusammenführen. (2026-05-30: `detect_circle_rings(...)` kombiniert Hough- und Foreground-Masken-Heuristiken, serialisiert `circle`-/`ring`-Kandidaten mit `geometry_ir_kind=CircleBackground` und merged den stärksten Treffer via `merge_circle_ring_candidates_into_geometry_ir(...)` in bestehende oder neue Geometry-IR-Kreise; Report mit synthetischem Kreis/Ring plus `AC0201_S.jpg`/`AC0800_S.jpg` unter `artifacts/evaluation/perception_circle_ring_seed_v1/perception_circle_ring_seed_report_v1.json`, Basistests in `tests/test_perception_circle_ring_seed.py`.)
-- [ ] **PF4 – Perception-Kandidaten vor dem generischen Non-Composite-Fallback nutzen:** Beschreibung + Bildanalyse als `perception_seeded_geometry_ir` vor dem Element-Fit ausführen.
-- [ ] **PF5 – Evaluationsharness für Perception-Seeds aufbauen:** Precision/Recall, Confidence und Renderfehler vor/nach Seed für mindestens drei Primitive ausweisen.
-- [ ] **PF6 – Perception-Telemetrie in bestehende Reports integrieren:** erkannte/abgelehnte Kandidaten, Seed-Auswahl und Fehlerdeltas pro Lauf als CSV/JSON protokollieren.
-- [ ] **PF7 – Einfache Text-/Glyph-Erkennung für `M`, `+`, `-` und kurze Labels prüfen:** Template-Matching/OCR-Nutzen ohne neue Pflichtdependency evaluieren.
-- [ ] **PF8 – Plan-B-Rotation mit Perception-Aufgaben verzahnen:** jedes kommende Plan-B-Paket erhält einen Abschnitt „Perception-Lerneffekt“.
+- [x] **PF4 – Perception-Kandidaten vor dem generischen Non-Composite-Fallback nutzen:** Beschreibung + Bildanalyse als `perception_seeded_geometry_ir` vor dem Element-Fit ausführen. (2026-05-30: Non-Composite-Runtime versucht nun vor Description-only-IR und generischem Element-Fit einen `non_composite_perception_seeded_geometry_ir`-Pfad; Perception-Seeds für `CircleBackground`, `HorizontalRule` und `RectBorder` werden aus PF-Kandidaten in Geometry-IR gemerged, gerendert und mit eigener Validation-Log-Spur protokolliert. Report: `artifacts/evaluation/perception_seeded_geometry_ir_v1/perception_seeded_geometry_ir_report_v1.json`; Basistests in `tests/test_perception_seeded_geometry_ir.py` und `tests/detailtests/test_non_composite_runtime_helpers.py`. )
+- [x] **PF5 – Evaluationsharness für Perception-Seeds aufbauen:** Precision/Recall, Confidence und Renderfehler vor/nach Seed für mindestens drei Primitive ausweisen. (2026-05-30: PF5-Harness `--report perception-seed-eval` ergänzt; Report `artifacts/evaluation/perception_seed_evaluation_v1/perception_seed_evaluation_report_v1.json` und CSV `artifacts/evaluation/perception_seed_evaluation_v1/perception_seed_evaluation_samples_v1.csv` verdichten Minus-/Linien-, Kreis-/Ring- und Rechteck-Seeds zu Precision/Recall, Confidence-Verteilung und Renderfehlern vor/nach Seed. Basistests in `tests/test_perception_seed_evaluation.py`.)
+- [x] **PF6 – Perception-Telemetrie in bestehende Reports integrieren:** erkannte/abgelehnte Kandidaten, Seed-Auswahl und Fehlerdeltas pro Lauf als CSV/JSON protokollieren. (2026-05-30: PF6-Telemetrie ergänzt `build_perception_telemetry_record(...)` sowie den CLI-Report `--report perception-telemetry`; JSON/CSV-Artefakte unter `artifacts/evaluation/perception_telemetry_v1/` protokollieren erkannte und abgelehnte Kandidaten, ausgewählte Geometry-IR-Seeds sowie Fehlerwerte vor/nach Seed. Basistests in `tests/test_perception_telemetry_report.py`.)
+- [x] **PF7 – Einfache Text-/Glyph-Erkennung für `M`, `+`, `-` und kurze Labels prüfen:** Template-Matching/OCR-Nutzen ohne neue Pflichtdependency evaluieren. (2026-05-30: Template-Matching-Detector `detect_text_glyph_candidates(...)` ergänzt; PF7-Report `artifacts/evaluation/perception_text_glyph_evaluation_v1/perception_text_glyph_evaluation_report_v1.json` und CSV `.../perception_text_glyph_evaluation_samples_v1.csv` prüfen synthetische Glyphen `M`, `+`, `-`, das Kurzlabel `VOC` sowie den realen Plus-Kandidaten `AC0120_L.jpg` ohne neue Pflicht-OCR-Dependency; Basistests in `tests/test_perception_text_glyph_eval.py`.)
+- [x] **PF8 – Plan-B-Rotation mit Perception-Aufgaben verzahnen:** jedes kommende Plan-B-Paket erhält einen Abschnitt „Perception-Lerneffekt“. (2026-05-30: PF8-Linkage-Report `--report plan-b-perception-linkage` ergänzt; JSON/CSV-Artefakte unter `artifacts/evaluation/plan_b_perception_linkage_v1/` dokumentieren für `AC0224_S`, `AC0231_S`, `AC0838_M` und `AC0881_M` je eine Perception-Frage, erwartete erste Primitive und die Entscheidung `generalisiert`/`nur Sonderfall`/`noch nicht erkannt`. `PLAN_B_KANDIDATEN.md` enthält ab sofort den Pflichtabschnitt „Perception-Lerneffekt“.)
+
+### Fortschritt vs. Blocker (Session 2026-05-31, Plan-B AC0231_S Perception-Rotation Run MW)
+
+- **Fortschritt:** Das nächste Plan-B-/Perception-Arbeitspaket wurde für `AC0231_S` abgearbeitet: Die Beschreibung wird nun als `TopKelleThreeWayValveGlyph` mit `label=M` erkannt, und der echte Einzellauf protokolliert `status=non_composite_perception_seeded_geometry_ir` mit `CircleBackground` plus `TopKelleThreeWayValveGlyph`.
+- **Gekoppelte Plan-B-/Repro-Aufgabe:** Der PF8-Linkage-Report rotiert den erledigten Kandidaten `AC0231_S` aus und bewertet nun `AC0232_S`, `AC0233_S`, `AC0838_M` und `AC0881_M`; alle vier Samples bleiben evaluiert und besitzen einen Perception-Lerneffekt.
+- **Blocker:** Kein neuer technischer Blocker; das `M`-Signal ist für AC0231 jetzt über die beschreibungsgetriebene Geometry-IR im SVG gerendert, während der vorinitialisierte Seed weiterhin über `CircleBackground` läuft.
+- **Nächster sinnvoller Schritt:** In der normalen Plan-B-Rotation mit `AC0232_S.jpg` fortfahren oder einen QR-Folgepunkt (`AC0838_M`/`AC0881_M`) isoliert abarbeiten.
+
+
+
+### Fortschritt vs. Blocker (Session 2026-05-31, Plan-B AC0838_M Perception-Review Run MZ)
+
+- **Fortschritt:** Der nächste dokumentierte Plan-B-/Perception-Kandidat `AC0838_M.jpg` wurde isoliert aus `artifacts/images_to_convert/nonconvertable` erneut konvertiert. Der Lauf blieb im semantischen VOC-Badge-Pfad (`SEMANTIC: senkrechter Strich oben vom Kreis` plus `SEMANTIC: Kreis + Buchstabe VOC`) und erreichte `error_per_pixel=0.04151429`, also wieder unter dem dokumentierten Review-Grenzwert `0.045945679012345676`.
+- **Perception-Lerneffekt:** Die PF8-Frage nach dominantem VOC-Kreis/Label bleibt `generalisiert`; der maschinenlesbare Linkage-Report rotiert `AC0838_M` aus und führt nun `AC0881_M` sowie `AC0234_S` mit je einem Perception-Lerneffekt.
+- **Blocker:** Kein neuer technischer Blocker für `AC0838_M`; der Kandidat ist nicht mehr aktiv in `PLAN_B_KANDIDATEN.md`.
+- **Nächster sinnvoller Schritt:** In der normalen Rotation mit `AC0881_M.jpg` fortfahren oder den AC02-Folgekandidaten `AC0234_S.jpg` abarbeiten.
+
+### Fortschritt vs. Blocker (Session 2026-05-31, AC0232_S Perception-seeded Geometry-IR Plan-B Run MX)
+
+- **Fortschritt:** Der nächste dokumentierte Plan-B-Kandidat `AC0232_S.jpg` wurde im echten Non-Composite-Pfad abgesichert: Die Beschreibung `Wie AC0231 ... 90° nach links gedreht` wird als `LeftRotatedTopKelleThreeWayValveGlyph` mit `label=M` modelliert; im Repro-Lauf wird zusätzlich ein `CircleBackground`-Seed als `non_composite_perception_seeded_geometry_ir` protokolliert.
+- **Perception-Lerneffekt:** Die PF8-Frage nach gedrehter `M`-Beschriftung bzw. runder Kelle bleibt `generalisiert`, weil der echte Einzellauf `CircleBackground`, `LeftRotatedTopKelleThreeWayValveGlyph` und `HorizontalRule` als vorinitialisierte Geometry-IR-Kette schreibt.
+- **Sicherung:** Der gezielte Detailtest-/PF8-Block lief grün (`PYTHONPATH=vendor/linux-py310/site-packages:. python -m pytest -q tests/detailtests/test_geometry_ir_helpers.py tests/detailtests/test_description_contract_helpers.py tests/detailtests/test_non_composite_runtime_helpers.py tests/test_plan_b_perception_linkage.py`, `89 passed`, Exit `0`); der externe AC0232-S-Repro lief grün (`PYTHONPATH=vendor/linux-py310/site-packages:. timeout 120 python -m src.iCCModules.imageCompositeConverterCli --input-dir artifacts/images_to_convert --output-dir /tmp/ic-ac0232-runmx --start AC0232_S --end AC0232_S --deterministic-order`, Exit `0`) und protokollierte `status=non_composite_perception_seeded_geometry_ir`.
+- **Kandidatenrotation:** `PLAN_B_KANDIDATEN.md` zeigt nach Entfernung von `AC0232_S.jpg` nun `AC0233_S.jpg` als nächste Rotation und füllt mit `AC0234_S.jpg` als weiterem AC02-Kandidaten auf.
+- **Nächster sinnvoller Schritt:** Mit `AC0233_S.jpg` rotieren oder vor der regulären Rotation einen QR-Folgepunkt (`AC0838_M` oder `AC0881_M`) als isolierten Plan-B-/Re-Konvertierungslauf abarbeiten.
+
+### Fortschritt vs. Blocker (Session 2026-05-31, Plan-B AC0232_S Perception-Rotation Run MV)
+
+- **Fortschritt:** Das nächste Plan-B-/Perception-Arbeitspaket wurde für `AC0232_S` abgearbeitet: Der PF8-Linkage-Report rotiert den erledigten Kandidaten `AC0224_S` aus und bewertet nun `AC0232_S`, `AC0231_S`, `AC0838_M` und `AC0881_M`.
+- **Gekoppelte Plan-B-/Repro-Aufgabe:** `AC0232_S` wird mit der Frage nach gedrehter `M`-Beschriftung bzw. runder Kelle als `text_glyph_or_circle_ring` geführt; der aktuelle Lauf erkennt einen `circle`-Kandidaten mit `CircleBackground`-Seed (`top_confidence=0.9236`) und entscheidet den Lerneffekt damit als `generalisiert`.
+- **Blocker:** Kein neuer technischer Blocker; wie bei `AC0231_S` bleibt das `M`-Signal vorerst Label-Hinweis, während der generische vorinitialisierte Seed über `CircleBackground` läuft.
+- **Nächster sinnvoller Schritt:** In der normalen Plan-B-Rotation den nächsten konkreten Kandidaten mit dem aktualisierten PF8-Report fortführen oder `AC0232_S` als vorinitialisierten Geometry-IR-Seed im Einzellauf prüfen.
+
+### Fortschritt vs. Blocker (Session 2026-05-30, PF8 Plan-B-/Perception-Verzahnung Run MU)
+
+- **Fortschritt:** Die nächste dokumentierte Perception-First-Aufgabe **PF8** wurde umgesetzt: Aktive Plan-B-Kandidaten werden maschinenlesbar mit genau einer Perception-Frage, erwarteten ersten Primitive-Familien und einer Entscheidung aus `generalisiert`, `nur Sonderfall` oder `noch nicht erkannt` verknüpft.
+- **Gekoppelte Plan-B-/Repro-Aufgabe:** Der neue Report `artifacts/evaluation/plan_b_perception_linkage_v1/plan_b_perception_linkage_report_v1.json` bewertet `AC0224_S`, `AC0231_S`, `AC0838_M` und `AC0881_M`; alle vier Kandidaten wurden als `generalisiert` entschieden, weil mindestens ein erwarteter Candidate in einen bestehenden Seed-Pfad (`CircleBackground` oder `HorizontalRule`) passt.
+- **Blocker:** Kein neuer technischer Blocker; TextGlyph-Signale bleiben für Plan-B-Labels dokumentiert, werden aber erst dann als generischer Seed erzwungen, wenn ein nachgelagerter Geometry-IR-Textpfad die Renderintegration abschließt.
+- **Nächster sinnvoller Schritt:** Zurück in die normale Plan-B-Rotation gehen und beim nächsten konkreten Kandidaten den neuen Pflichtabschnitt „Perception-Lerneffekt“ aus dem PF8-Report übernehmen.
+
+### Fortschritt vs. Blocker (Session 2026-05-30, PF7 Text-/Glyph-Evaluation Run MT)
+
+- **Fortschritt:** Die nächste dokumentierte Perception-First-Aufgabe **PF7** wurde umgesetzt: Ein einfacher Template-Matching-Detector bewertet bekannte Glyphen und kurze Labels (`M`, `+`, `-`, `VOC`) über den vorhandenen `cv2`/`numpy`-Pfad und serialisiert Treffer als `text_glyph`-Kandidaten im bestehenden Candidate-Contract.
+- **Gekoppelte Plan-B-/Repro-Aufgabe:** Der PF7-Report enthält vier synthetische Glyph-/Label-Fixtures und den realen Plan-B-nahen Plus-Kandidaten `AC0120_L.jpg`; alle fünf Samples matchen den erwarteten Text.
+- **Blocker:** Kein neuer technischer Blocker; vollständiges OCR bleibt bewusst keine Pflichtdependency. Für natürlichere kleine Labels wie `rF` sollte erst PF8 entscheiden, ob Template-Varianten reichen oder ein optionales OCR-Backend sinnvoll ist.
+- **Nächster sinnvoller Schritt:** PF8 umsetzen: kommende Plan-B-Pakete mit einem dokumentierten Abschnitt „Perception-Lerneffekt“ verzahnen.
+
+### Fortschritt vs. Blocker (Session 2026-05-30, PF5 Evaluationsharness Run MS)
+
+- **Fortschritt:** Die nächste dokumentierte Perception-First-Aufgabe **PF5** wurde umgesetzt: Der neue Evaluationsharness aggregiert Perception-Telemetrie zu Precision/Recall, Confidence-Verteilung und Renderfehlern vor/nach Geometry-IR-Seed.
+- **Gekoppelte Plan-B-/Repro-Aufgabe:** Der PF5-Report prüft synthetische Fixtures für `minus_line`, `circle_ring` und `rectangle` sowie, falls vorhanden, den realen Minus-/Plan-B-Kandidaten `AC0120_L.jpg`; alle Samples matchen Detection und Seed.
+- **Blocker:** Kein technischer Blocker; ein stabiler realer Rechteckkandidat ist noch nicht dokumentiert und wird im PF5-Report als offener Realbildfall markiert.
+- **Nächster sinnvoller Schritt:** PF7 prüfen: Minimalstrategie für Glyphen/Text (`M`, `+`, `-`, kurze Labels) ohne neue Pflichtdependency evaluieren.
 
 ### Fortschritt vs. Blocker (Session 2026-05-30, PF1 Detection-Contract Run MO)
 
@@ -95,6 +147,20 @@ detaillierte Backlog steht in `docs/perception_first_task_backlog_2026-05-30.md`
 - **Gekoppelte Plan-B-Aufgabe:** Der PF3-Report prüft synthetische `circle`-/`ring`-Fixtures sowie `AC0201_S.jpg` und `AC0800_S.jpg`; alle erwarteten Kandidatentypen werden gematcht und der stärkste Kandidat erzeugt einen `CircleBackground`-Seed.
 - **Blocker:** Keine für PF3; reale Kleinstbilder wie `AC0201_S.jpg`/`AC0800_S.jpg` liefern aktuell bewusst einen CircleBackground-Kreis-Seed statt eine robuste Ring-Innenradius-Schätzung.
 - **Nächster sinnvoller Schritt:** PF4 umsetzen: den neuen `perception_seeded_geometry_ir`-Pfad vor dem generischen Non-Composite-Fallback in die Laufzeit integrieren.
+
+### Fortschritt vs. Blocker (Session 2026-05-30, PF6 Perception-Telemetrie Run MR)
+
+- **Fortschritt:** Die nächste dokumentierte Perception-First-Aufgabe **PF6** wurde umgesetzt: Ein Telemetrie-Record hält Kandidatenentscheidungen (`accepted`/`rejected`), ausgewählte Geometry-IR-Seeds und Fehlerwerte vor/nach Perception-Seed fest.
+- **Gekoppelte Plan-B-Aufgabe:** Der Einzelreport für `AC0120_L.jpg` schreibt JSON und CSV unter `artifacts/evaluation/perception_telemetry_v1/`; der Lauf selektiert Perception-Seeds und weist ein Fehlerdelta vor/nach Seed aus.
+- **Blocker:** Keine für PF6; die Telemetrie ist zunächst als externes Tool verfügbar und kann in einem späteren Paket direkt an breitere Runtime-Batches angebunden werden.
+- **Nächster sinnvoller Schritt:** PF5 umsetzen: Evaluationsharness für Perception-Seeds mit Precision/Recall, Confidence-Verteilung und Qualitätsänderung für mindestens drei Primitive aufbauen.
+
+### Fortschritt vs. Blocker (Session 2026-05-30, PF4 Perception-Seeded-Geometry-IR Run MR)
+
+- **Fortschritt:** Die nächste dokumentierte Perception-First-Aufgabe **PF4** wurde umgesetzt: der Non-Composite-Pfad versucht vor dem Description-only-IR und vor dem generischen Element-Fit einen `non_composite_perception_seeded_geometry_ir`-Hook aus Beschreibung + Bildanalyse.
+- **Gekoppelte Plan-B-Aufgabe:** Der neue PF4-Report `artifacts/evaluation/perception_seeded_geometry_ir_v1/perception_seeded_geometry_ir_report_v1.json` prüft synthetische Minus-/Kreis-Seeds; beide erwarteten Geometry-IR-Seeds (`HorizontalRule`, `CircleBackground`) werden gematcht.
+- **Blocker:** Keine für PF4; echte Fehlerdeltas/Precision-Recall bleiben bewusst PF5/PF6, damit PF4 zunächst nur den Runtime-Hook und unterscheidbare Validation-Logs liefert.
+- **Nächster sinnvoller Schritt:** PF5 umsetzen: Evaluationsharness mit Precision/Recall, Confidence und Renderfehler vor/nach Seed für mindestens drei Primitive aufbauen.
 
 ### Fortschritt vs. Blocker (Session 2026-05-30, PF2 Minus-ROI Run MP)
 
@@ -3172,3 +3238,19 @@ Ziel: Die Konvertierung soll strikt als **Kette** laufen:
 - **Sicherung:** Der gezielte Detailtestblock lief grün (`PYTHONPATH=vendor/linux-py310/site-packages:. python -m pytest -q tests/detailtests/test_geometry_ir_helpers.py tests/detailtests/test_description_contract_helpers.py tests/detailtests/test_non_composite_runtime_helpers.py`, `75 passed`, Exit `0`); der externe AC0222-S-Repro lief grün (`PYTHONPATH=vendor/linux-py310/site-packages:. timeout 120 python -m src.iCCModules.imageCompositeConverterCli --input-dir artifacts/images_to_convert --output-dir /tmp/ic-ac0222-runmn --start AC0222_S --end AC0222_S --deterministic-order`, Exit `0`) und protokollierte `status=non_composite_description_geometry_ir`; die Vollsuite lief grün (`PYENV_VERSION=3.10.20 PYTHONPATH=vendor/linux-py310/site-packages:. timeout 300 python -m pytest -q -rs`, `618 passed, 5 warnings`, Exit `0`).
 - **Kandidatenrotation:** `PLAN_B_KANDIDATEN.md` zeigt nach Entfernung von `AC0222_S.jpg` nun `AC0224_S.jpg` als nächste Rotation und `AC0231_S.jpg` als aufgefüllten AC02-Folgekandidaten.
 - **Nächster sinnvoller Schritt:** Mit dem nächsten Plan-B-Kandidaten `AC0224_S.jpg` rotieren oder vor der regulären Rotation einen QR-Folgepunkt (`AC0838_M` oder `AC0881_M`) als isolierten Plan-B-/Re-Konvertierungslauf abarbeiten.
+
+### Fortschritt vs. Blocker (Session 2026-05-31, AC0224_S Perception-seeded Geometry-IR Plan-B Run MV)
+
+- **Fortschritt:** Der nächste dokumentierte Plan-B-Kandidat `AC0224_S.jpg` wurde im echten Non-Composite-Pfad abgesichert: Die Beschreibung `Wie AC0221 ... 90° nach rechts gedreht` wird als `RightRotatedTopKelleThreeWayValveGlyph` modelliert; im echten Repro-Lauf wird zusätzlich der PF8-Lerneffekt über `CircleBackground` und `HorizontalRule` als `non_composite_perception_seeded_geometry_ir` protokolliert.
+- **Perception-Lerneffekt:** Die runde Kellenform wird vor der ersten Iteration erkannt und als `CircleBackground` vorinitialisiert; damit bleibt die PF8-Entscheidung für `AC0224_S.jpg` `generalisiert` statt Einzelfall-Nachzeichnung.
+- **Sicherung:** Der gezielte Detailtestblock lief grün (`PYTHONPATH=vendor/linux-py310/site-packages:. python -m pytest -q tests/detailtests/test_geometry_ir_helpers.py tests/detailtests/test_description_contract_helpers.py tests/detailtests/test_non_composite_runtime_helpers.py`, `80 passed`, Exit `0`); der externe AC0224-S-Repro lief grün (`PYTHONPATH=vendor/linux-py310/site-packages:. timeout 120 python -m src.iCCModules.imageCompositeConverterCli --input-dir artifacts/images_to_convert --output-dir /tmp/ic-ac0224-runmv --start AC0224_S --end AC0224_S --deterministic-order`, Exit `0`) und protokollierte `status=non_composite_perception_seeded_geometry_ir`.
+- **Kandidatenrotation:** `PLAN_B_KANDIDATEN.md` zeigt nach Entfernung von `AC0224_S.jpg` nun `AC0231_S.jpg` als nächste Rotation und füllt mit `AC0232_S.jpg` als weiterem AC02-Kandidaten auf.
+- **Nächster sinnvoller Schritt:** Mit `AC0231_S.jpg` rotieren oder vor der regulären Rotation einen QR-Folgepunkt (`AC0838_M` oder `AC0881_M`) als isolierten Plan-B-/Re-Konvertierungslauf abarbeiten.
+
+### Fortschritt vs. Blocker (Session 2026-05-31, AC0231_S Perception-seeded Geometry-IR Plan-B Run MW)
+
+- **Fortschritt:** Der nächste dokumentierte Plan-B-Kandidat `AC0231_S.jpg` wurde im echten Non-Composite-Pfad abgesichert: Die Beschreibung mit senkrechtem `M` wird als `TopKelleThreeWayValveGlyph` mit Label modelliert; im Repro-Lauf wird zusätzlich ein `CircleBackground`-Seed als `non_composite_perception_seeded_geometry_ir` protokolliert.
+- **Perception-Lerneffekt:** Die runde obere Kellenform wird vor der ersten Iteration erkannt und als `CircleBackground` vorinitialisiert; die `M`-Beschriftung ist als explizites Label im Glyph gerendert.
+- **Sicherung:** Der gezielte Detailtestblock lief grün (`PYTHONPATH=vendor/linux-py310/site-packages:. python -m pytest -q tests/detailtests/test_geometry_ir_helpers.py tests/detailtests/test_description_contract_helpers.py tests/detailtests/test_non_composite_runtime_helpers.py`, `83 passed`, Exit `0`); der PF8-Linkage-Test lief grün (`PYTHONPATH=vendor/linux-py310/site-packages:. python -m pytest -q tests/test_plan_b_perception_linkage.py`, `2 passed`, Exit `0`); der externe AC0231-S-Repro lief grün (`PYTHONPATH=vendor/linux-py310/site-packages:. timeout 120 python -m src.iCCModules.imageCompositeConverterCli --input-dir artifacts/images_to_convert --output-dir /tmp/ic-ac0231-runmw --start AC0231_S --end AC0231_S --deterministic-order`, Exit `0`) und protokollierte `status=non_composite_perception_seeded_geometry_ir`.
+- **Kandidatenrotation:** `PLAN_B_KANDIDATEN.md` zeigt nach Entfernung von `AC0231_S.jpg` nun `AC0232_S.jpg` als nächste Rotation und füllt mit `AC0233_S.jpg` als weiterem AC02-Kandidaten auf.
+- **Nächster sinnvoller Schritt:** Mit `AC0232_S.jpg` rotieren oder vor der regulären Rotation einen QR-Folgepunkt (`AC0838_M` oder `AC0881_M`) als isolierten Plan-B-/Re-Konvertierungslauf abarbeiten. (2026-05-31: Danach in Run MX mit `AC0232_S` erledigt; nächste reguläre Rotation ist `AC0233_S`.)

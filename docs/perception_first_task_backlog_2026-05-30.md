@@ -67,7 +67,7 @@ ein kleiner Perception-Schritt plus ein eng begrenzter Repro-/Qualitätsnachweis
 - **Plan-B-Kopplung:** Bei instabiler Realbild-Erkennung zuerst synthetische
   Kreis-/Ring-Szenen mit JPEG-Weichzeichnung prüfen.
 
-### PF4 – Perception-Kandidaten vor dem generischen Non-Composite-Fallback nutzen
+### PF4 – Perception-Kandidaten vor dem generischen Non-Composite-Fallback nutzen (erledigt 2026-05-30)
 
 - **Problem:** Selbst wenn Erkennungskandidaten existieren, startet der
   Fallback-Pfad bisher nicht systematisch aus diesen Kandidaten.
@@ -79,8 +79,9 @@ ein kleiner Perception-Schritt plus ein eng begrenzter Repro-/Qualitätsnachweis
   Fallback.
 - **Plan-B-Kopplung:** Zunächst nur für `HorizontalRule`/Minus und
   `CircleBackground` freischalten, damit der Scope klein bleibt.
+- **Ergebnis 2026-05-30:** Runtime-Hook `non_composite_perception_seeded_geometry_ir` ergänzt; Seeds für `HorizontalRule`, `CircleBackground` und `RectBorder` werden vor dem generischen Element-Fit gerendert und geloggt. Nachweis: `artifacts/evaluation/perception_seeded_geometry_ir_v1/perception_seeded_geometry_ir_report_v1.json`.
 
-### PF5 – Evaluationsharness für Perception-Seeds aufbauen
+### PF5 – Evaluationsharness für Perception-Seeds aufbauen (erledigt 2026-05-30)
 
 - **Problem:** Ohne Metriken lässt sich nicht unterscheiden, ob Erkennung nur
   Einzelfälle rettet oder echte Automatisierung verbessert.
@@ -92,8 +93,9 @@ ein kleiner Perception-Schritt plus ein eng begrenzter Repro-/Qualitätsnachweis
   bisherigen Startpunkt.
 - **Plan-B-Kopplung:** Falls reale Bilddaten fehlen, bleibt der Report mit
   synthetischen Fixtures grün und markiert Realbildfälle als offen.
+- **Ergebnis 2026-05-30:** `tools/perception_detection_contract.py --report perception-seed-eval` schreibt einen JSON/CSV-Harness mit Top-Candidate-Precision, Detection-/Seed-Recall, Confidence-Verteilung und Fehlerdelta vor/nach Seed für `minus_line`, `circle_ring` und `rectangle`. Nachweis: `artifacts/evaluation/perception_seed_evaluation_v1/`.
 
-### PF6 – Perception-Telemetrie in bestehende Reports integrieren
+### PF6 – Perception-Telemetrie in bestehende Reports integrieren (erledigt 2026-05-30)
 
 - **Problem:** In Folgearbeiten muss nachvollziehbar sein, ob ein Bild wegen
   Erkennung, Beschreibung oder manuellem Geometry-IR-Sonderfall funktioniert.
@@ -105,8 +107,9 @@ ein kleiner Perception-Schritt plus ein eng begrenzter Repro-/Qualitätsnachweis
   genutzt werden kann.
 - **Plan-B-Kopplung:** Wenn der Hauptpfad noch nicht schreibt, zunächst ein
   externes Tool `tools/...` verwenden und später in den Runtime-Pfad ziehen.
+- **Ergebnis 2026-05-30:** `tools/perception_detection_contract.py --report perception-telemetry` schreibt `perception_telemetry_report_v1.json` und `perception_telemetry_candidates_v1.csv` mit Kandidatenentscheidungen, gewählten Geometry-IR-Seeds sowie Fehlerwerten vor/nach Seed. Nachweis: `artifacts/evaluation/perception_telemetry_v1/`.
 
-### PF7 – Einfache Text-/Glyph-Erkennung für `M`, `+`, `-` und kurze Labels prüfen
+### PF7 – Einfache Text-/Glyph-Erkennung für `M`, `+`, `-` und kurze Labels prüfen (erledigt 2026-05-30)
 
 - **Problem:** Mehrere Symbolfamilien enthalten kleine Buchstaben oder Zeichen;
   vollständiges OCR wäre überdimensioniert, aber wenige Glyphen sind wertvoll.
@@ -117,6 +120,8 @@ ein kleiner Perception-Schritt plus ein eng begrenzter Repro-/Qualitätsnachweis
   ein OCR-Backend nötig ist.
 - **Plan-B-Kopplung:** Wenn OCR-Abhängigkeiten den Lauf erschweren, bleibt die
   Aufgabe auf Template-Matching ohne neue Pflichtdependency begrenzt.
+
+- **Ergebnis 2026-05-30:** `detect_text_glyph_candidates(...)` nutzt Template-Matching auf binarisierten ROIs und bleibt auf vorhandene `cv2`/`numpy`-Abhängigkeiten begrenzt. Der Report `tools/perception_detection_contract.py --report text-glyph-eval` dokumentiert synthetische Treffer für `M`, `+`, `-`, `VOC` sowie den realen Plus-Kandidaten `AC0120_L.jpg` mit `match_rate=1.0`; vollständiges OCR bleibt damit optionaler Folgeentscheid statt Pflichtdependency.
 
 ### PF8 – Plan-B-Rotation mit Perception-Aufgaben verzahnen
 
@@ -137,10 +142,10 @@ ein kleiner Perception-Schritt plus ein eng begrenzter Repro-/Qualitätsnachweis
 1. **PF1** als Grundlage: gemeinsames Datenformat für erkannte Primitive.
 2. **PF2** als kleinstes Nutzerbeispiel: „oben mittig ist ein `-`-Zeichen“.
 3. **PF6** früh einziehen, damit die folgenden Schritte nicht wieder unsichtbar
-   bleiben.
+   bleiben. (erledigt 2026-05-30)
 4. **PF3/PF4** koppeln, sobald `minus/line` stabil protokolliert wird.
 5. **PF5** nach den ersten zwei erkannten Primitiven, damit Fortschritt messbar
-   bleibt.
+   bleibt. (erledigt 2026-05-30)
 6. **PF7/PF8** laufend mit der Plan-B-Rotation verbinden.
 
 ## Definition of Done für den Perception-First-Track

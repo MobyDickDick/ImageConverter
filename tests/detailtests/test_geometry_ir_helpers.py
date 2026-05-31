@@ -239,6 +239,85 @@ def test_render_geometry_ir_to_svg_contains_ac0203_mirrored_compressor_primitive
 
 
 
+def test_build_geometry_ir_maps_ac0232_left_rotated_m_top_kelle_three_way_valve_description() -> None:
+    ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
+        'Wie AC0231: 3-Weg Ventil ähnlich AC0211, um 90° im Uhrzeigersinn gedreht, '
+        '"M" wird immer noch senkrecht geschrieben. Noch ein 3. spitzes Dreieck unten. '
+        'Wieder Farbwechsel von Dunkelgrau nach hellgrau (von links unten nach rechts oben). '
+        'Geometrische Variante: 90° nach links gedreht. '
+        'Der Griff liegt auf einer Symmetrieachse des Kreises.'
+    )
+
+    assert [element["kind"] for element in ir] == ["LeftRotatedTopKelleThreeWayValveGlyph"]
+    assert ir[0]["id"] == "left_rotated_top_kelle_three_way_valve"
+    assert ir[0]["label"] == "M"
+    assert ir[0]["circle"] == [0.235, 0.500, 0.225]
+
+
+def test_render_geometry_ir_to_svg_contains_ac0232_left_rotated_m_top_kelle_label() -> None:
+    ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
+        'Plan-B-Kandidat AC0232_S: AC0231-verwandtes 3-Wege-Ventil, '
+        '90 Grad nach links gedreht; Kelle mit senkrechtem Buchstaben `M`.'
+    )
+
+    svg = geometry_ir_helpers.renderGeometryIrToSvgImpl(30, 20, ir)
+
+    assert 'id="left_rotated_top_kelle_three_way_valve_circle"' in svg
+    assert 'id="left_rotated_top_kelle_three_way_valve_label"' in svg
+    assert '>M</text>' in svg
+
+
+def test_build_geometry_ir_maps_ac0233_180_rotated_m_top_kelle_three_way_valve_description() -> None:
+    ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
+        'Wie AC0231: 3-Weg Ventil ähnlich AC0211, um 90° im Uhrzeigersinn gedreht, '
+        '"M" wird immer noch senkrecht geschrieben. Noch ein 3. spitzes Dreieck unten. '
+        'Wieder Farbwechsel von Dunkelgrau nach hellgrau (von links unten nach rechts oben). '
+        'Geometrische Variante: 180° gedreht.'
+    )
+
+    assert [element["kind"] for element in ir] == ["Rotated180TopKelleThreeWayValveGlyph"]
+    assert ir[0]["id"] == "rotated_180_top_kelle_three_way_valve"
+    assert ir[0]["label"] == "M"
+    assert ir[0]["circle"] == [0.500, 0.765, 0.225]
+
+
+def test_render_geometry_ir_to_svg_contains_ac0233_180_rotated_m_top_kelle_label() -> None:
+    ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
+        'Plan-B-Kandidat AC0233_S: AC0231-verwandtes 3-Wege-Ventil, '
+        '180 Grad gedreht; Kelle mit gedrehtem Buchstaben `M`.'
+    )
+
+    svg = geometry_ir_helpers.renderGeometryIrToSvgImpl(30, 20, ir)
+
+    assert 'id="rotated_180_top_kelle_three_way_valve_circle"' in svg
+    assert 'id="rotated_180_top_kelle_three_way_valve_label"' in svg
+    assert '>M</text>' in svg
+
+
+def test_build_geometry_ir_maps_ac0231_m_top_kelle_three_way_valve_description() -> None:
+    ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
+        '3-Weg Ventil ähnlich AC0211, um 90° im Uhrzeigersinn gedreht, '
+        '"M" wird immer noch senkrecht geschrieben. Noch ein 3. spitzes Dreieck unten. '
+        'Wieder Farbwechsel von Dunkelgrau nach hellgrau (von links unten nach rechts oben)'
+    )
+
+    assert [element["kind"] for element in ir] == ["TopKelleThreeWayValveGlyph"]
+    assert ir[0]["id"] == "top_kelle_three_way_valve"
+    assert ir[0]["label"] == "M"
+    assert ir[0]["label_center"] == [0.500, 0.235]
+
+
+def test_render_geometry_ir_to_svg_contains_ac0231_m_top_kelle_label() -> None:
+    ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
+        'Plan-B-Kandidat AC0231_S: oben befindet sich eine Kelle mit dem Buchstaben `M`.'
+    )
+
+    svg = geometry_ir_helpers.renderGeometryIrToSvgImpl(20, 30, ir)
+
+    assert 'id="top_kelle_three_way_valve_label"' in svg
+    assert '>M</text>' in svg
+
+
 def test_build_geometry_ir_maps_ac0221_top_kelle_three_way_valve_description() -> None:
     ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
         'Wie AC0231, jedoch ohne "M" in der Kelle oben. '
@@ -266,6 +345,38 @@ def test_render_geometry_ir_to_svg_contains_ac0221_top_kelle_three_way_valve_pri
     assert 'id="top_kelle_three_way_valve_connector"' in svg
     assert 'id="top_kelle_three_way_valve_circle"' in svg
     assert 'top_kelle_three_way_valve_label' not in svg
+
+
+def test_build_geometry_ir_maps_ac0224_right_rotated_top_kelle_three_way_valve_description() -> None:
+    ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
+        'Wie AC0221: Wie AC0231, jedoch ohne "M" in der Kelle oben. '
+        'Geometrische Variante: 90° nach rechts gedreht. '
+        'Der Griff liegt auf einer Symmetrieachse des Kreises.'
+    )
+
+    assert [element["kind"] for element in ir] == ["RightRotatedTopKelleThreeWayValveGlyph"]
+    assert ir[0]["id"] == "right_rotated_top_kelle_three_way_valve"
+    assert ir[0]["label"] == ""
+    assert ir[0]["circle"] == [0.765, 0.500, 0.225]
+
+
+def test_render_geometry_ir_to_svg_contains_ac0224_right_rotated_top_kelle_three_way_valve_primitives() -> None:
+    ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
+        'Wie AC0221: Wie AC0231, jedoch ohne "M" in der Kelle oben. '
+        'Geometrische Variante: 90° nach rechts gedreht. '
+        'Der Griff liegt auf einer Symmetrieachse des Kreises.'
+    )
+
+    svg = geometry_ir_helpers.renderGeometryIrToSvgImpl(30, 20, ir)
+
+    assert "vertical-two-way-valve-body-gradient" in svg
+    assert "vertical-two-way-valve-circle-gradient" in svg
+    assert 'id="right_rotated_top_kelle_three_way_valve_body_1"' in svg
+    assert 'id="right_rotated_top_kelle_three_way_valve_body_2"' in svg
+    assert 'id="right_rotated_top_kelle_three_way_valve_body_3"' in svg
+    assert 'id="right_rotated_top_kelle_three_way_valve_connector"' in svg
+    assert 'id="right_rotated_top_kelle_three_way_valve_circle"' in svg
+    assert 'right_rotated_top_kelle_three_way_valve_label' not in svg
 
 def test_build_geometry_ir_maps_ac0212_vertical_two_way_valve_motor_description() -> None:
     ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(

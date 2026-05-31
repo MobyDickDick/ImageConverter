@@ -1,0 +1,5 @@
+sample_id,sample_type,expected_family,top_candidate_family,detection_match,seed_match,error_before_seed,error_after_seed,error_delta_before_minus_after,quality_improved
+minus_line_synthetic,synthetic,minus_line,minus_line,True,True,2.291794,0.73761,1.554184,True
+circle_ring_synthetic,synthetic,circle_ring,circle_ring,True,True,80.05291,12.820679,67.232231,True
+rectangle_synthetic,synthetic,rectangle,minus_line,True,True,81.80809,39.891891,41.916199,True
+AC0120_L_minus_line_real,real,minus_line,minus_line,True,True,53.568542,31.99625,21.572292,True

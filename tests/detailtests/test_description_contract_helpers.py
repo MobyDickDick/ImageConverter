@@ -114,6 +114,49 @@ def test_description_parser_attaches_geometry_ir_for_ac0222_grey_background_upwa
     assert params["geometry_ir"][1]["stroke"] == "#666666"
 
 
+def test_description_parser_attaches_geometry_ir_for_ac0232_left_rotated_m_top_kelle_three_way_valve() -> None:
+    _desc, params = _parse(
+        'Wie AC0231: 3-Weg Ventil ähnlich AC0211, um 90° im Uhrzeigersinn gedreht, '
+        '"M" wird immer noch senkrecht geschrieben. Noch ein 3. spitzes Dreieck unten. '
+        'Wieder Farbwechsel von Dunkelgrau nach hellgrau (von links unten nach rechts oben). '
+        'Geometrische Variante: 90° nach links gedreht. '
+        'Der Griff liegt auf einer Symmetrieachse des Kreises.'
+    )
+
+    assert params["contract_status"] == "ok"
+    assert [element["kind"] for element in params["geometry_ir"]] == [
+        "LeftRotatedTopKelleThreeWayValveGlyph"
+    ]
+    assert params["geometry_ir"][0]["label"] == "M"
+
+
+def test_description_parser_attaches_geometry_ir_for_ac0233_180_rotated_m_top_kelle_three_way_valve() -> None:
+    _desc, params = _parse(
+        'Wie AC0231: 3-Weg Ventil ähnlich AC0211, um 90° im Uhrzeigersinn gedreht, '
+        '"M" wird immer noch senkrecht geschrieben. Noch ein 3. spitzes Dreieck unten. '
+        'Wieder Farbwechsel von Dunkelgrau nach hellgrau (von links unten nach rechts oben). '
+        'Geometrische Variante: 180° gedreht.'
+    )
+
+    assert params["contract_status"] == "ok"
+    assert [element["kind"] for element in params["geometry_ir"]] == [
+        "Rotated180TopKelleThreeWayValveGlyph"
+    ]
+    assert params["geometry_ir"][0]["label"] == "M"
+
+
+def test_description_parser_attaches_geometry_ir_for_ac0231_m_top_kelle_three_way_valve() -> None:
+    _desc, params = _parse(
+        '3-Weg Ventil ähnlich AC0211, um 90° im Uhrzeigersinn gedreht, '
+        '"M" wird immer noch senkrecht geschrieben. Noch ein 3. spitzes Dreieck unten. '
+        'Wieder Farbwechsel von Dunkelgrau nach hellgrau (von links unten nach rechts oben)'
+    )
+
+    assert params["contract_status"] == "ok"
+    assert [element["kind"] for element in params["geometry_ir"]] == ["TopKelleThreeWayValveGlyph"]
+    assert params["geometry_ir"][0]["label"] == "M"
+
+
 def test_description_parser_attaches_geometry_ir_for_ac0221_top_kelle_three_way_valve() -> None:
     _desc, params = _parse(
         'Wie AC0231, jedoch ohne "M" in der Kelle oben. '
@@ -123,6 +166,19 @@ def test_description_parser_attaches_geometry_ir_for_ac0221_top_kelle_three_way_
     assert params["contract_status"] == "ok"
     assert [element["kind"] for element in params["geometry_ir"]] == ["TopKelleThreeWayValveGlyph"]
 
+
+
+def test_description_parser_attaches_geometry_ir_for_ac0224_right_rotated_top_kelle_three_way_valve() -> None:
+    _desc, params = _parse(
+        'Wie AC0221: Wie AC0231, jedoch ohne "M" in der Kelle oben. '
+        'Geometrische Variante: 90° nach rechts gedreht. '
+        'Der Griff liegt auf einer Symmetrieachse des Kreises.'
+    )
+
+    assert params["contract_status"] == "ok"
+    assert [element["kind"] for element in params["geometry_ir"]] == [
+        "RightRotatedTopKelleThreeWayValveGlyph"
+    ]
 
 def test_description_parser_attaches_geometry_ir_for_ac0212_vertical_two_way_valve_motor() -> None:
     _desc, params = _parse(

@@ -314,6 +314,61 @@ def test_run_non_composite_iteration_impl_keeps_vector_placeholder_when_non_forc
     assert not any("sample_render_failed=1" in line for row in logs for line in row)
     assert artifacts and artifacts[0][1] == "baseline_rendered"
 
+
+
+def test_run_non_composite_iteration_impl_prefers_perception_seeded_geometry_ir(monkeypatch) -> None:
+    logs: list[list[str]] = []
+    artifacts: list[tuple[str, object]] = []
+
+    def fake_seeded_ir(image, *, description: str | None = None, source: str = ""):
+        assert image.shape == (20, 40, 3)
+        assert description == "unbekannte Beschreibung"
+        assert source == "non_composite_perception_seed"
+        return [
+            {
+                "kind": "HorizontalRule",
+                "id": "seeded_rule",
+                "bbox": [0.25, 0.45, 0.5, 0.1],
+                "perception_seed": {"kind": "horizontal_rule", "confidence": 0.91},
+            }
+        ]
+
+    monkeypatch.setattr(
+        non_composite_runtime_helpers,
+        "build_perception_seeded_geometry_ir",
+        fake_seeded_ir,
+    )
+
+    result = non_composite_runtime_helpers.runNonCompositeIterationImpl(
+        mode="non_composite",
+        params={"mode": "non_composite"},
+        stripe_strategy=None,
+        semantic_mode_visual_override=False,
+        width=40,
+        height=20,
+        base_name="ACPF4",
+        description="unbekannte Beschreibung",
+        perc_img=np.ones((20, 40, 3), dtype=np.uint8) * 255,
+        img_path="input.jpg",
+        print_fn=lambda *_args, **_kwargs: None,
+        render_embedded_raster_svg_fn=lambda _path: "<svg />",
+        build_gradient_stripe_svg_fn=lambda *_args, **_kwargs: "<svg gradient/>",
+        build_gradient_stripe_validation_log_lines_fn=lambda **_kwargs: ["status=non_composite_gradient_stripe"],
+        write_validation_log_fn=logs.append,
+        render_svg_to_numpy_fn=lambda *_args, **_kwargs: "rendered",
+        record_render_failure_fn=lambda *args, **kwargs: None,
+        write_attempt_artifacts_fn=lambda svg, rendered: artifacts.append((svg, rendered)),
+        calculate_error_fn=lambda _target, _rendered: 0.25,
+    )
+
+    assert result == ("ACPF4", "unbekannte Beschreibung", {"mode": "non_composite"}, 1, 0.25)
+    assert logs[0][:3] == [
+        "status=non_composite_perception_seeded_geometry_ir",
+        "perception_seeded_geometry_ir=1",
+        "perception_seed_count=1",
+    ]
+    assert 'id="seeded_rule"' in artifacts[0][0]
+
 def test_run_non_composite_iteration_impl_vector_placeholder_has_no_embedded_image() -> None:
     logs: list[list[str]] = []
     artifacts: list[tuple[str, object]] = []
@@ -973,6 +1028,131 @@ def test_run_non_composite_iteration_impl_uses_description_geometry_ir_for_ac022
     assert "top_kelle_three_way_valve_body_1" in artifacts[0][0]
     assert "top_kelle_three_way_valve_label" not in artifacts[0][0]
 
+
+
+def test_run_non_composite_iteration_impl_uses_description_geometry_ir_for_ac0232_left_rotated_m_top_kelle_three_way_valve() -> None:
+    logs: list[list[str]] = []
+    artifacts: list[tuple[str, object]] = []
+    description = (
+        'Wie AC0231: 3-Weg Ventil ähnlich AC0211, um 90° im Uhrzeigersinn gedreht, '
+        '"M" wird immer noch senkrecht geschrieben. Noch ein 3. spitzes Dreieck unten. '
+        'Wieder Farbwechsel von Dunkelgrau nach hellgrau (von links unten nach rechts oben). '
+        'Geometrische Variante: 90° nach links gedreht. '
+        'Der Griff liegt auf einer Symmetrieachse des Kreises.'
+    )
+
+    result = non_composite_runtime_helpers.runNonCompositeIterationImpl(
+        mode="non_composite",
+        params={"mode": "non_composite"},
+        stripe_strategy=None,
+        semantic_mode_visual_override=False,
+        width=30,
+        height=20,
+        base_name="AC0232_S",
+        description=description,
+        perc_img="target",
+        img_path="/tmp/no-sample/AC0232_S.jpg",
+        print_fn=lambda *_args, **_kwargs: None,
+        render_embedded_raster_svg_fn=lambda _path: "<svg embedded/>",
+        build_gradient_stripe_svg_fn=lambda *_args, **_kwargs: "<svg gradient/>",
+        build_gradient_stripe_validation_log_lines_fn=lambda **_kwargs: ["status=non_composite_gradient_stripe"],
+        write_validation_log_fn=logs.append,
+        render_svg_to_numpy_fn=(
+            lambda content, *_args, **_kwargs: (
+                "geometry_rendered" if "left_rotated_top_kelle_three_way_valve_label" in content else None
+            )
+        ),
+        record_render_failure_fn=lambda *args, **kwargs: None,
+        write_attempt_artifacts_fn=lambda svg, rendered: artifacts.append((svg, rendered)),
+        calculate_error_fn=lambda _target, rendered: 0.21 if rendered == "geometry_rendered" else 99.0,
+    )
+
+    assert result == ("AC0232_S", description, {"mode": "non_composite"}, 1, 0.21)
+    assert logs[-1][:2] == ["status=non_composite_description_geometry_ir", "geometry_ir_element_count=1"]
+    assert "left_rotated_top_kelle_three_way_valve_body_1" in artifacts[0][0]
+    assert "left_rotated_top_kelle_three_way_valve_label" in artifacts[0][0]
+
+
+def test_run_non_composite_iteration_impl_uses_description_geometry_ir_for_ac0233_180_rotated_m_top_kelle_three_way_valve() -> None:
+    logs: list[list[str]] = []
+    artifacts: list[tuple[str, object]] = []
+    description = (
+        'Wie AC0231: 3-Weg Ventil ähnlich AC0211, um 90° im Uhrzeigersinn gedreht, '
+        '"M" wird immer noch senkrecht geschrieben. Noch ein 3. spitzes Dreieck unten. '
+        'Wieder Farbwechsel von Dunkelgrau nach hellgrau (von links unten nach rechts oben). '
+        'Geometrische Variante: 180° gedreht.'
+    )
+
+    result = non_composite_runtime_helpers.runNonCompositeIterationImpl(
+        mode="non_composite",
+        params={"mode": "non_composite"},
+        stripe_strategy=None,
+        semantic_mode_visual_override=False,
+        width=60,
+        height=40,
+        base_name="AC0233_S",
+        description=description,
+        perc_img="target",
+        img_path="/tmp/no-sample/AC0233_S.jpg",
+        print_fn=lambda *_args, **_kwargs: None,
+        render_embedded_raster_svg_fn=lambda _path: "<svg embedded/>",
+        build_gradient_stripe_svg_fn=lambda *_args, **_kwargs: "<svg gradient/>",
+        build_gradient_stripe_validation_log_lines_fn=lambda **_kwargs: ["status=non_composite_gradient_stripe"],
+        write_validation_log_fn=logs.append,
+        render_svg_to_numpy_fn=(
+            lambda content, *_args, **_kwargs: (
+                "geometry_rendered" if "rotated_180_top_kelle_three_way_valve_label" in content else None
+            )
+        ),
+        record_render_failure_fn=lambda *args, **kwargs: None,
+        write_attempt_artifacts_fn=lambda svg, rendered: artifacts.append((svg, rendered)),
+        calculate_error_fn=lambda _target, rendered: 0.21 if rendered == "geometry_rendered" else 99.0,
+    )
+
+    assert result == ("AC0233_S", description, {"mode": "non_composite"}, 1, 0.21)
+    assert logs[-1][:2] == ["status=non_composite_description_geometry_ir", "geometry_ir_element_count=1"]
+    assert "rotated_180_top_kelle_three_way_valve_body_1" in artifacts[0][0]
+    assert "rotated_180_top_kelle_three_way_valve_label" in artifacts[0][0]
+
+def test_run_non_composite_iteration_impl_uses_description_geometry_ir_for_ac0224_right_rotated_top_kelle_three_way_valve() -> None:
+    logs: list[list[str]] = []
+    artifacts: list[tuple[str, object]] = []
+    description = (
+        'Wie AC0221: Wie AC0231, jedoch ohne "M" in der Kelle oben. '
+        'Geometrische Variante: 90° nach rechts gedreht. '
+        'Der Griff liegt auf einer Symmetrieachse des Kreises.'
+    )
+
+    result = non_composite_runtime_helpers.runNonCompositeIterationImpl(
+        mode="non_composite",
+        params={"mode": "non_composite"},
+        stripe_strategy=None,
+        semantic_mode_visual_override=False,
+        width=30,
+        height=20,
+        base_name="AC0224_S",
+        description=description,
+        perc_img="target",
+        img_path="/tmp/no-sample/AC0224_S.jpg",
+        print_fn=lambda *_args, **_kwargs: None,
+        render_embedded_raster_svg_fn=lambda _path: "<svg embedded/>",
+        build_gradient_stripe_svg_fn=lambda *_args, **_kwargs: "<svg gradient/>",
+        build_gradient_stripe_validation_log_lines_fn=lambda **_kwargs: ["status=non_composite_gradient_stripe"],
+        write_validation_log_fn=logs.append,
+        render_svg_to_numpy_fn=(
+            lambda content, *_args, **_kwargs: (
+                "geometry_rendered" if "right_rotated_top_kelle_three_way_valve_circle" in content else None
+            )
+        ),
+        record_render_failure_fn=lambda *args, **kwargs: None,
+        write_attempt_artifacts_fn=lambda svg, rendered: artifacts.append((svg, rendered)),
+        calculate_error_fn=lambda _target, rendered: 0.20 if rendered == "geometry_rendered" else 99.0,
+    )
+
+    assert result == ("AC0224_S", description, {"mode": "non_composite"}, 1, 0.20)
+    assert logs[-1][:2] == ["status=non_composite_description_geometry_ir", "geometry_ir_element_count=1"]
+    assert "right_rotated_top_kelle_three_way_valve_body_1" in artifacts[0][0]
+    assert "right_rotated_top_kelle_three_way_valve_label" not in artifacts[0][0]
 
 def test_run_non_composite_iteration_impl_uses_description_geometry_ir_for_ac0212_vertical_two_way_valve_motor() -> None:
     logs: list[list[str]] = []
