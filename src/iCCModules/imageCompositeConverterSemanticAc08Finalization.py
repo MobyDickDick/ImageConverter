@@ -228,6 +228,10 @@ def finalizeAc08StyleImpl(
             base_scale = float(p.get("co2_font_scale", 0.82))
             p["co2_font_scale_min"] = float(max(0.74, base_scale * 0.90))
             p["co2_font_scale_max"] = float(min(1.18, base_scale * 1.25))
+    if str(p.get("text_mode", "")).lower() == "rf":
+        p["lock_text_scale"] = False
+        r = max(1.0, float(p.get("r", 1.0)))
+        p["rf_dy"] = float(max(-0.10 * r, min(0.10 * r, float(p.get("rf_dy", -0.02 * r)))))
     if str(p.get("text_mode", "")).lower() == "voc":
         min_dim = float(min(float(p.get("width", 0.0) or 0.0), float(p.get("height", 0.0) or 0.0)))
         if min_dim <= 0.0:
@@ -290,6 +294,8 @@ def finalizeAc08StyleImpl(
         "co2_font_scale_max",
         "voc_font_scale_min",
         "voc_font_scale_max",
+        "rf_font_scale_min",
+        "rf_font_scale_max",
         "fill_gray_min",
         "fill_gray_max",
         "stroke_gray_min",

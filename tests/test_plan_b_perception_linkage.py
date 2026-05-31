@@ -58,7 +58,7 @@ def test_run_plan_b_perception_linkage_report_writes_json_and_csv(
     assert {record["variant"] for record in report["records"]} == {
         "AC0836_S",
         "AC0835_S",
-        "AC0850_M",
+        "AC0861_S",
     }
 
     rows = list(csv.DictReader(csv_report.open(encoding="utf-8")))

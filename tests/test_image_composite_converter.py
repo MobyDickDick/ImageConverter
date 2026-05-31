@@ -1061,6 +1061,36 @@ def test_make_badge_params_ac0835_uses_plain_voc_circle_geometry() -> None:
     assert params.get("label") == "VOC"
 
 
+def test_make_badge_params_ac0850_uses_plain_rf_circle_geometry() -> None:
+    """AC0850 defaults must render the connector-free relative-humidity rF badge."""
+    params = image_composite_converter.Action.make_badge_params(20, 20, "AC0850")
+
+    assert params is not None
+    assert not bool(params.get("arm_enabled", False))
+    assert not bool(params.get("stem_enabled", False))
+    assert bool(params.get("circle_enabled", True))
+    assert str(params.get("text_mode", "")).lower() == "rf"
+    assert params.get("label") == "rF"
+
+
+def test_parse_description_marks_ac0850_as_rf_text_badge() -> None:
+    """AC0850 descriptions should activate the semantic rF circle/text family."""
+    ref = image_composite_converter.Reflection(
+        {
+            "AC0850": (
+                'Grauer Kreis mit grauem Rand und hellgrauem Hintergrund '
+                'Abweichung: mit Text "rF" (relative Feuchtigkeit)'
+            )
+        }
+    )
+
+    _desc, params = ref.parse_description("AC0850_M", "AC0850_M.jpg")
+
+    assert params["mode"] == "semantic_badge"
+    assert params["label"] == "rF"
+    assert "SEMANTIC: Kreis + Buchstabe rF" in list(params.get("elements", []))
+
+
 def test_parse_description_marks_ac0800_as_plain_ring_family() -> None:
     """AC0800 should remain a semantic plain ring even without text clues in the XML."""
     ref = image_composite_converter.Reflection({})
@@ -4535,6 +4565,23 @@ def test_tune_ac0835_voc_badge_lowers_tiny_variant_text() -> None:
     assert int(tuned["text_gray"]) == Action.LIGHT_CIRCLE_STROKE_GRAY
 
 
+def test_rf_font_scale_bounds_support_relative_humidity_badges() -> None:
+    """rF badges should expose an optimizable text scale like VOC/CO₂ text badges."""
+    params = {
+        "draw_text": True,
+        "text_mode": "rf",
+        "rf_font_scale": 0.58,
+    }
+
+    info = Action._element_width_key_and_bounds("text", params, 20, 20)
+
+    assert info is not None
+    key, low, high = info
+    assert key == "rf_font_scale"
+    assert low <= 0.48
+    assert high >= 1.20
+
+
 def test_finalize_ac08_circle_text_family_leaves_ac0820_unlocked() -> None:
     """AC0820 should no longer inject centered-family circle/text guardrails."""
     params = Action._apply_co2_label(Action._default_ac0870_params(30, 30))
@@ -5550,6 +5597,27 @@ def test_validate_semantic_alignment_accepts_ac0870_small_circle_text_variant() 
         params,
     )
 
+    assert "Beschreibung erwartet Kreis, im Bild aber nicht robust erkennbar" not in issues
+    assert "Strukturprüfung: Kein belastbarer Kreis-Kandidat im Rohbild erkannt" not in issues
+
+
+def test_validate_semantic_alignment_ignores_plain_rf_text_as_connector() -> None:
+    """Tiny plain rF badges should not be rejected when glyph strokes look like vertical connectors."""
+    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+        pytest.skip("numpy/cv2 not available in this environment")
+
+    cv2 = image_composite_converter.cv2
+    img = cv2.imread("artifacts/images_to_convert/AC0850_S.jpg")
+    assert img is not None
+
+    params = Action.make_badge_params(img.shape[1], img.shape[0], "AC0850", img)
+    issues = Action.validate_semantic_description_alignment(
+        img,
+        ["SEMANTIC: Kreis + Buchstabe rF"],
+        params,
+    )
+
+    assert "Im Bild ist senkrechter Strich erkennbar, aber nicht in der Beschreibung enthalten" not in issues
     assert "Beschreibung erwartet Kreis, im Bild aber nicht robust erkennbar" not in issues
     assert "Strukturprüfung: Kein belastbarer Kreis-Kandidat im Rohbild erkannt" not in issues
 
