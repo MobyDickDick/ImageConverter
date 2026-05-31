@@ -2,10 +2,10 @@
 
 Ziel: maximal **5** aktive JPG-Kandidaten, die derzeit noch nicht zufriedenstellend konvertieren, aber voraussichtlich nicht "hoffnungslos komplex" sind.
 
-## Aktuelle Kandidaten (Stand: 2026-05-30, nach Qualitätsreview bisheriger Konvertierungen)
+## Aktuelle Kandidaten (Stand: 2026-05-31, nach AC0224-S-Plan-B-Rotation)
 
-1. `AC0224_S.jpg` – AC0221-verwandter Kellenkandidat ohne `M`, 90° nach rechts gedreht und mit vorhandenem Diff-Artefakt.
-2. `AC0231_S.jpg` – AC0221-verwandtes 3-Wege-Ventil mit oberer `M`-Kelle und vorhandenem Diff-Artefakt.
+1. `AC0231_S.jpg` – AC0221-verwandtes 3-Wege-Ventil mit oberer `M`-Kelle und vorhandenem Diff-Artefakt.
+2. `AC0232_S.jpg` – AC0231-verwandtes 3-Wege-Ventil, 90° nach links gedreht und mit vorhandenem Diff-Artefakt.
 3. `AC0838_M.jpg` – Qualitätsreview-Befund: vorhandenes SVG-Paar rendert, überschreitet aber die Review-Grenze (`normalized_mse=0.04729276`).
 4. `AC0881_M.jpg` – Qualitätsreview-Befund: Originalbild vorhanden, aber kein passendes SVG-Artefakt in den geprüften Konvertierungs-/Baseline-Pfaden.
 
@@ -19,8 +19,8 @@ maschinenlesbare Stand liegt unter
 
 | Kandidat | Erste Perception-Frage | Erwartetes erstes Primitive | PF8-Entscheidung | Seed-Folge |
 | --- | --- | --- | --- | --- |
-| `AC0224_S.jpg` | Runde Kellen-/Kreisform vor der ersten Iteration erkennen? | `circle_ring` | `generalisiert` | `CircleBackground` im nächsten Plan-B-Paket vorinitialisieren. |
 | `AC0231_S.jpg` | Obere `M`-Kelle über Label- oder Kreis-Signal absichern? | `text_glyph_or_circle_ring` | `generalisiert` | Kreis zunächst als `CircleBackground` seedbar; `M` zusätzlich als Label-Hinweis dokumentieren. |
+| `AC0232_S.jpg` | Gedrehte Kelle mit Kreis- und `M`-Signal vor der ersten Iteration erkennen? | `text_glyph_or_circle_ring` | `noch nicht erkannt` | Im nächsten Plan-B-Paket Kreis-Seed und `M`-Label-Hinweis wie bei `AC0231_S` prüfen. |
 | `AC0838_M.jpg` | Dominanten VOC-Kreis und Label-Signal vorab festhalten? | `circle_ring_or_voc_label` | `generalisiert` | Kreis als `CircleBackground` seedbar; `VOC` bleibt ergänzende TextGlyph-Prüfung. |
 | `AC0881_M.jpg` | Einfaches Rahmen-, Kreis- oder Linienprimitive zuerst erkennen? | `simple_shape_probe` | `generalisiert` | Gefundene Kreis-/HorizontalRule-Signale als Startseed prüfen. |
 

@@ -267,6 +267,38 @@ def test_render_geometry_ir_to_svg_contains_ac0221_top_kelle_three_way_valve_pri
     assert 'id="top_kelle_three_way_valve_circle"' in svg
     assert 'top_kelle_three_way_valve_label' not in svg
 
+
+def test_build_geometry_ir_maps_ac0224_right_rotated_top_kelle_three_way_valve_description() -> None:
+    ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
+        'Wie AC0221: Wie AC0231, jedoch ohne "M" in der Kelle oben. '
+        'Geometrische Variante: 90° nach rechts gedreht. '
+        'Der Griff liegt auf einer Symmetrieachse des Kreises.'
+    )
+
+    assert [element["kind"] for element in ir] == ["RightRotatedTopKelleThreeWayValveGlyph"]
+    assert ir[0]["id"] == "right_rotated_top_kelle_three_way_valve"
+    assert ir[0]["label"] == ""
+    assert ir[0]["circle"] == [0.765, 0.500, 0.225]
+
+
+def test_render_geometry_ir_to_svg_contains_ac0224_right_rotated_top_kelle_three_way_valve_primitives() -> None:
+    ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
+        'Wie AC0221: Wie AC0231, jedoch ohne "M" in der Kelle oben. '
+        'Geometrische Variante: 90° nach rechts gedreht. '
+        'Der Griff liegt auf einer Symmetrieachse des Kreises.'
+    )
+
+    svg = geometry_ir_helpers.renderGeometryIrToSvgImpl(30, 20, ir)
+
+    assert "vertical-two-way-valve-body-gradient" in svg
+    assert "vertical-two-way-valve-circle-gradient" in svg
+    assert 'id="right_rotated_top_kelle_three_way_valve_body_1"' in svg
+    assert 'id="right_rotated_top_kelle_three_way_valve_body_2"' in svg
+    assert 'id="right_rotated_top_kelle_three_way_valve_body_3"' in svg
+    assert 'id="right_rotated_top_kelle_three_way_valve_connector"' in svg
+    assert 'id="right_rotated_top_kelle_three_way_valve_circle"' in svg
+    assert 'right_rotated_top_kelle_three_way_valve_label' not in svg
+
 def test_build_geometry_ir_maps_ac0212_vertical_two_way_valve_motor_description() -> None:
     ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
         '2-Weg Ventil vertikal: Kelle mit Kreis rechts, horizontale Verbindungslinie, '

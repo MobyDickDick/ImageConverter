@@ -52,6 +52,33 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
     top_kelle_three_way_valve_hint = _has_any(desc, ("ac0231", "3-weg ventil", "3 wege ventil", "3. spitzes dreieck")) and _has_any(
         desc, ("ohne \"m\"", "ohne 'm'", "ohne m", "kein \"m\"", "kein m")
     ) and _has_any(desc, ("kelle oben", "kreis oben", "kelle mit kreis", "symmetrieachse des kreises"))
+    right_rotated_top_kelle_three_way_valve_hint = top_kelle_three_way_valve_hint and _has_any(
+        desc, ("90° nach rechts", "90° rechts", "90 grad nach rechts", "nach rechts gedreht")
+    )
+
+    if right_rotated_top_kelle_three_way_valve_hint:
+        elements.append(
+            {
+                "kind": "RightRotatedTopKelleThreeWayValveGlyph",
+                "id": "right_rotated_top_kelle_three_way_valve",
+                "body_paths": [
+                    [[0.390, 0.500], [0.545, 0.020], [0.235, 0.020]],
+                    [[0.390, 0.500], [0.545, 0.980], [0.235, 0.980]],
+                    [[0.390, 0.500], [0.040, 0.333], [0.040, 0.667]],
+                ],
+                "circle": [0.765, 0.500, 0.225],
+                "connector": [[0.550, 0.500], [0.390, 0.500]],
+                "label": "",
+                "body_fill": "url(#vertical-two-way-valve-body-gradient)",
+                "circle_fill": "url(#vertical-two-way-valve-circle-gradient)",
+                "stroke": "#969696",
+                "connector_stroke": "#8f8f8f",
+                "text_fill": "#666666",
+                "stroke_width": 0.040,
+                "connector_width": 0.075,
+            }
+        )
+        return elements
 
     if top_kelle_three_way_valve_hint:
         elements.append(
@@ -429,6 +456,7 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
         "LeftRotatedTwoWayValveMotorGlyph",
         "Rotated180TwoWayValveMotorGlyph",
         "TopKelleThreeWayValveGlyph",
+        "RightRotatedTopKelleThreeWayValveGlyph",
     }
     needs_vertical_valve_defs = any(element.get("kind") in valve_gradient_kinds for element in geometry_ir)
     if needs_gradient or needs_vertical_valve_defs:
