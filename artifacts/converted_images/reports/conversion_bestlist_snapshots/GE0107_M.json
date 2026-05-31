@@ -1,14 +1,22 @@
 {
   "base": "GE0107",
-  "best_error": 26.114809523809523,
+  "best_error": 31.791238095238096,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.003730687074829932,
+  "error_per_pixel": 0.004541605442176871,
   "filename": "GE0107_M.jpg",
   "h": 40,
-  "mean_delta2": 5155.791015625,
+  "mean_delta2": 5702.609375,
   "params": {
     "bottom_shape": null,
+    "contract_status": "ok",
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
     "description_fragments": [
       {
         "key": "GE0107",
@@ -20,6 +28,21 @@
       "GE0100"
     ],
     "elements": [],
+    "geometry_ir": [
+      {
+        "bbox": [
+          0.18,
+          0.24,
+          0.64,
+          0.56
+        ],
+        "fill": "#d8d8d8",
+        "id": "main_rect",
+        "kind": "RectBorder",
+        "stroke": "#666666",
+        "stroke_width": 0.035
+      }
+    ],
     "label": "M",
     "mode": "auto",
     "semantic_conflicts": [],
@@ -32,7 +55,7 @@
     "top_source_ref": null,
     "variant_name": "GE0107_M"
   },
-  "std_delta2": 15421.17578125,
+  "std_delta2": 12652.017578125,
   "variant": "GE0107_M",
   "w": 175
 }

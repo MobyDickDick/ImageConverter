@@ -1,0 +1,47 @@
+{
+  "base": "B_CLIMATE1",
+  "best_error": 38.48768225238813,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.01451270069848723,
+  "filename": "b_climate1.jpg",
+  "h": 51,
+  "mean_delta2": 7996.7509765625,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "b_climate1",
+        "source": "base_name",
+        "text": "Hintergrund: GE0999, Symbol wie GE0202 (Schneeflocke)"
+      }
+    ],
+    "documented_alias_refs": [
+      "GE0202"
+    ],
+    "elements": [],
+    "geometry_ir": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "B_CLIMATE1"
+  },
+  "std_delta2": 7481.4345703125,
+  "variant": "B_CLIMATE1",
+  "w": 52
+}

@@ -1,9 +1,0 @@
-[INFO] Schreibe Konsolen-Output nach: /workspace/ImageConverter/imageCompositeConverter.local.log
-
---- Verarbeite AC0110_L.jpg ---
-Bildbeschreibung: Graues Rechteck hochkant, graue Umrandung, drei graue horizontale Linien, Farbverlauf dunkel-hell-dunkel
-Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
-  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
-[INFO] Übersichts-Kacheln erzeugt: diff=artifacts/converted_images/reports/overview_diff_tiles.png, svg=artifacts/converted_images/reports/overview_svg_tiles.png
-
-Abgeschlossen! Ausgaben unter: artifacts/converted_images

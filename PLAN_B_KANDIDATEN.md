@@ -2,7 +2,7 @@
 
 Ziel: maximal **5** aktive JPG-Kandidaten, die derzeit noch nicht zufriedenstellend konvertieren, aber voraussichtlich nicht "hoffnungslos komplex" sind.
 
-Ergänzende Vorprüfung zu schwach, aber machbar konvertierbaren Formfamilien: `docs/weak_but_feasible_shape_families_2026-05-31.md`.
+## Aktuelle Kandidaten (Stand: 2026-05-31, nach AC0838-M-Plan-B-Review)
 
 ## Aktuelle Kandidaten (Stand: 2026-05-31, nach AC0838-M-Qualitätsrefresh)
 
