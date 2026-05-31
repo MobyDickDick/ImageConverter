@@ -1030,15 +1030,16 @@ def test_make_badge_params_ac0838_uses_top_vertical_connector_geometry() -> None
     )
 
 
-def test_make_badge_params_ac0835_uses_right_horizontal_connector_geometry() -> None:
-    """AC0835 defaults must follow the right-arm VOC connector family."""
+def test_make_badge_params_ac0835_uses_plain_voc_circle_geometry() -> None:
+    """AC0835 defaults must stay connector-free and render only the VOC circle/text badge."""
     params = image_composite_converter.Action.make_badge_params(24, 24, "AC0835")
 
     assert params is not None
-    assert bool(params.get("arm_enabled", False))
-    assert abs(float(params.get("arm_x2", 0.0)) - float(params.get("arm_x1", 0.0))) >= abs(
-        float(params.get("arm_y2", 0.0)) - float(params.get("arm_y1", 0.0))
-    )
+    assert not bool(params.get("arm_enabled", False))
+    assert not bool(params.get("stem_enabled", False))
+    assert bool(params.get("circle_enabled", True))
+    assert str(params.get("text_mode", "")).lower() == "voc"
+    assert params.get("label") == "VOC"
 
 
 def test_parse_description_marks_ac0800_as_plain_ring_family() -> None:
