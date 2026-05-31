@@ -1419,15 +1419,15 @@ PLAN_B_PERCEPTION_TARGETS: list[dict[str, Any]] = [
         "glyphs": ["T"],
     },
     {
-        "variant": "AC0835_S",
-        "image_candidates": ["artifacts/images_to_convert/AC0835_S.jpg"],
-        "plan_b_reason": "Weak-Family-Befund: rundes VOC-Badge ohne Griff mit auffälligem Text-/Grauwertfehler.",
-        "perception_question": "Kann der dominante VOC-Kreis vorab als CircleBackground und das Label als TextGlyph-Hinweis festgehalten werden?",
-        "expected_first_primitive": "circle_ring_or_voc_label",
+        "variant": "AC0850_M",
+        "image_candidates": ["artifacts/images_to_convert/AC0850_M.jpg"],
+        "plan_b_reason": "Weak-Family-Befund: rundes rF-Badge mit auffälligem Text-/Grauwertfehler.",
+        "perception_question": "Kann der dominante rF-Kreis vorab als CircleBackground und das zweibuchstabige Label als TextGlyph-Hinweis festgehalten werden?",
+        "expected_first_primitive": "circle_ring_or_rf_label",
         "expected_candidate_kinds": {"circle", "ring", "text_glyph"},
         "expected_seed_kinds": {"CircleBackground", "TextGlyph"},
-        "description": "Plan-B-Kandidat AC0835_S: rundes VOC-Badge ohne Griff; Kreis und Label zuerst prüfen.",
-        "glyphs": ["VOC"],
+        "description": "Plan-B-Kandidat AC0850_M: rundes rF-Badge; Kreis und zweibuchstabiges Label zuerst prüfen.",
+        "glyphs": ["rF"],
     },
 ]
 

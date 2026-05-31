@@ -202,6 +202,7 @@ def applyVocLabelImpl(
 ) -> dict:
     params["draw_text"] = True
     params["text_mode"] = "voc"
+    params["label"] = "VOC"
     params["text_gray"] = int(round(params.get("stroke_gray", light_circle_stroke_gray)))
     params["voc_font_scale"] = float(params.get("voc_font_scale", 0.52 * semantic_text_base_scale))
     params["voc_dy"] = float(params.get("voc_dy", -0.01 * float(params.get("r", 0.0))))

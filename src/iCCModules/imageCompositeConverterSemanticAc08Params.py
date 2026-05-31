@@ -160,14 +160,15 @@ def makeAc08BadgeParamsImpl(
         )
 
     if name == "AC0835":
-        # AC0835 belongs to the right-arm VOC connector family.
-        defaults = apply_voc_label_fn(default_ac0814_params_fn(w, h))
+        # AC0835 is the connector-free VOC circle/text badge. Its follow-up
+        # variants (for example AC0836/AC0839) add explicit connector geometry.
+        defaults = apply_voc_label_fn(default_ac0870_params_fn(w, h))
         if img is None:
             return finalize_ac08_style_fn(name, tune_ac0835_voc_badge_fn(defaults, w, h))
         return finalize_ac08_style_fn(
             name,
             tune_ac0835_voc_badge_fn(
-                fit_ac0814_params_from_image_fn(img, defaults),
+                fit_semantic_badge_from_image_fn(img, defaults),
                 w,
                 h,
             ),
