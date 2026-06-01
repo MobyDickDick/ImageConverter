@@ -139,6 +139,16 @@ dasselbe Abschlussprofil mit verpflichtender Drift-Artefaktprüfung:
 ./tools/run_local_completion_checks.sh --require-drift-summary
 ```
 
+Der separate CI-Job `satisfactory-regression-battery` delegiert den teuren
+Qualitäts-Nachweis für alle gespeicherten zufriedenstellenden Konvertierungen an
+GitHub Actions. Er startet die Satisfactory-Batterie, die alle Varianten aus
+`artifacts/regression_baseline/satisfactory/variants.txt` neu konvertiert und die
+neue `mean_delta2`-Qualität gegen die gespeicherten Baseline-SVGs vergleicht:
+
+```bash
+./tools/run_satisfactory_regression_battery.sh
+```
+
 ## 8. Linux-Vendor-Kommando ausgeben
 
 ```bash
