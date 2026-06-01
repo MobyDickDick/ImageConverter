@@ -6463,14 +6463,18 @@ def test_local_workflow_doc_tracks_current_commands() -> None:
     assert ".github/workflows/local-completion-checks.yml" in workflow_doc
     assert "python -m pip install pytest" in workflow_doc
     assert "python -m pip install pytest" in ci_workflow
-    assert ci_workflow.count("python -m pip install pytest") >= 2
+    assert ci_workflow.count("python -m pip install pytest") >= 3
     assert "./tools/run_local_completion_checks.sh" in ci_workflow
     assert "batch-artifact-drift-gate:" in ci_workflow
     assert "drift_status=pass" in ci_workflow
     assert "./tools/run_local_completion_checks.sh --require-drift-summary" in ci_workflow
+    assert "satisfactory-regression-battery:" in ci_workflow
+    assert "./tools/run_satisfactory_regression_battery.sh" in ci_workflow
     assert "pull_request:" in ci_workflow
     assert "workflow_dispatch:" in ci_workflow
     assert "--print-linux-vendor-command" in workflow_doc
+    assert "satisfactory-regression-battery" in workflow_doc
+    assert "./tools/run_satisfactory_regression_battery.sh" in workflow_doc
 
 
 def test_parse_args_help_mentions_canonical_image_converter_flags(capsys: pytest.CaptureFixture[str]) -> None:
