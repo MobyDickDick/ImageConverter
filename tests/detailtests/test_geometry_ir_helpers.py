@@ -49,6 +49,20 @@ def test_render_geometry_ir_to_svg_contains_centralized_primitives() -> None:
     assert 'id="minus_glyph"' in svg
     assert svg.endswith("</svg>")
 
+
+
+def test_render_geometry_ir_horizontal_gradient_uses_renderer_stable_bands() -> None:
+    ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
+        "Heizelement, graues Rechteck, Plus-Minus-Zeichen oben links, "
+        "Farbverlauf horizontal dunkel-hell-dunkel graue Diagonale oben rechts nach unten links"
+    )
+
+    svg = geometry_ir_helpers.renderGeometryIrToSvgImpl(40, 80, ir)
+
+    assert 'id="background_gradient"' in svg
+    assert 'fill="url(#geometry-ir-horizontal-gradient)"' not in svg
+    assert svg.count('<rect x=') >= 12
+
 def test_build_geometry_ir_maps_ac0150_vertical_heat_exchanger_description() -> None:
     description = (
         "Graues Rechteck hochkant, graue Umrandung, drei graue horizontale Linien, "
