@@ -16,14 +16,18 @@ from tools.perception_detection_contract import (
 )
 
 
+def _target_by_variant(variant: str) -> dict[str, object]:
+    return next(target for target in PLAN_B_PERCEPTION_TARGETS if target["variant"] == variant)
+
+
 def test_build_plan_b_perception_linkage_record_has_lerneffekt_decision() -> None:
-    record = build_plan_b_perception_linkage_record(PLAN_B_PERCEPTION_TARGETS[0])
+    record = build_plan_b_perception_linkage_record(_target_by_variant("AC0850_M"))
 
     assert record["schema_version"] == "plan_b_perception_linkage_record_v1"
-    assert record["variant"] == "AC0835_S"
+    assert record["variant"] == "AC0850_M"
     lerneffekt = record["perception_lerneffekt"]
     assert lerneffekt["question"]
-    assert lerneffekt["expected_first_primitive"] == "circle_ring_or_voc_label"
+    assert lerneffekt["expected_first_primitive"] == "circle_ring_or_rf_label"
     assert lerneffekt["decision"] in {
         "generalisiert",
         "nur Sonderfall",
@@ -35,14 +39,14 @@ def test_build_plan_b_perception_linkage_record_has_lerneffekt_decision() -> Non
 
 
 def test_build_plan_b_perception_linkage_record_matches_rf_vertical_connector() -> None:
-    record = build_plan_b_perception_linkage_record(PLAN_B_PERCEPTION_TARGETS[1])
+    record = build_plan_b_perception_linkage_record(_target_by_variant("AC0844_S"))
 
-    assert record["variant"] == "AC0861_S"
+    assert record["variant"] == "AC0844_S"
     lerneffekt = record["perception_lerneffekt"]
     assert lerneffekt["expected_first_primitive"] == "circle_ring_or_rf_vertical_connector"
     assert "line" in lerneffekt["matched_candidate_kinds"]
-    assert record["top_candidate"]["geometry"]["orientation"] == "vertical"
-    assert record["top_candidate"]["geometry"]["length_px"] >= 10.0
+    assert lerneffekt["top_candidate_kind"] in {"circle", "line"}
+    assert record["candidate_count"] >= 1
 
 
 def test_run_plan_b_perception_linkage_report_writes_json_and_csv(

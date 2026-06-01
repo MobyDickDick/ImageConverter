@@ -71,4 +71,16 @@ jobs:
         run: python -m pip install pytest
 
       - name: Reconvert satisfactory baseline and compare quality
+        env:
+          RUN_HEAVY_CONVERSION_TESTS: '1'
+          SATISFACTORY_REGRESSION_TIMEOUT_SECONDS: '3300'
+          SATISFACTORY_REGRESSION_DEBUG_DIR: artifacts/converted_images/reports/satisfactory-regression-debug
         run: ./tools/run_satisfactory_regression_battery.sh
+
+      - name: Upload satisfactory regression debug data
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: satisfactory-regression-debug
+          path: artifacts/converted_images/reports/satisfactory-regression-debug
+          if-no-files-found: warn

@@ -11,14 +11,14 @@
   "records": [
     {
       "schema_version": "plan_b_perception_linkage_record_v1",
-      "variant": "AC0835_S",
-      "image_path": "artifacts/images_to_convert/AC0835_S.jpg",
+      "variant": "AC0850_M",
+      "image_path": "artifacts/images_to_convert/AC0850_M.jpg",
       "status": "evaluated",
-      "plan_b_reason": "Weak-Family-Befund: rundes VOC-Badge ohne Griff mit auff\u00e4lliger Textgr\u00f6sse, Zentrierung und Grauwert.",
-      "description": "Plan-B-Kandidat AC0835_S: rundes VOC-Badge ohne Griff; Kreis und zentriertes Label zuerst pr\u00fcfen.",
+      "plan_b_reason": "Weak-Family-Befund: rundes rF-Badge ohne Griff mit sehr hohem Text-/Grauwertfehler.",
+      "description": "Plan-B-Kandidat AC0850_M: rundes rF-Badge ohne Griff; Kreis und zweibuchstabiges Label zuerst pr\u00fcfen.",
       "perception_lerneffekt": {
-        "question": "Kann der dominante VOC-Kreis vorab als CircleBackground und das dreibuchstabige Label als TextGlyph-Hinweis festgehalten werden?",
-        "expected_first_primitive": "circle_ring_or_voc_label",
+        "question": "Kann der dominante rF-Kreis vorab als CircleBackground und das zweibuchstabige Label als TextGlyph-Hinweis festgehalten werden?",
+        "expected_first_primitive": "circle_ring_or_rf_label",
         "expected_candidate_kinds": [
           "circle",
           "ring",
@@ -36,63 +36,63 @@
           "CircleBackground"
         ],
         "top_candidate_kind": "circle",
-        "top_confidence": 0.8759,
+        "top_confidence": 0.8616,
         "next_action": "Im n\u00e4chsten Plan-B-Paket als vorinitialisierten Geometry-IR-Seed protokollieren."
       },
-      "candidate_count": 10,
+      "candidate_count": 7,
       "top_candidate": {
         "schema_version": "perception_primitive_candidate_v1",
         "kind": "circle",
         "bbox": {
-          "x": 2.0,
+          "x": 1.0,
           "y": 1.0,
-          "width": 10.0,
-          "height": 10.0
+          "width": 16.0,
+          "height": 16.0
         },
         "center": {
-          "x": 7.0,
-          "y": 6.0
+          "x": 9.0,
+          "y": 9.0
         },
         "geometry": {
-          "radius_px": 5.0,
+          "radius_px": 8.0,
           "inner_radius_px": 0.0,
           "stroke_width_px": 1.0,
           "circularity": 1.0,
           "ring": false,
-          "fill_ratio": 0.4815,
+          "fill_ratio": 0.4162,
           "geometry_ir_kind": "CircleBackground",
           "geometry_ir_bbox": [
-            0.13333,
-            0.06667,
-            0.66667,
-            0.66667
+            0.05,
+            0.05,
+            0.8,
+            0.8
           ]
         },
         "color": {
           "fill_rgb": [
-            199,
-            199,
-            199
+            206,
+            206,
+            206
           ],
           "stroke_rgb": [
-            219,
-            219,
-            219
+            238,
+            238,
+            238
           ],
-          "fill_hex": "#C7C7C7",
-          "stroke_hex": "#DBDBDB",
-          "fill_confidence": 0.609,
-          "stroke_confidence": 0.6408
+          "fill_hex": "#CECECE",
+          "stroke_hex": "#EEEEEE",
+          "fill_confidence": 0.5932,
+          "stroke_confidence": 0.9189
         },
-        "confidence": 0.8759,
+        "confidence": 0.8616,
         "roi": {
           "type": "image",
           "hint": "full_image",
           "bbox": {
             "x": 0.0,
             "y": 0.0,
-            "width": 15.0,
-            "height": 15.0
+            "width": 20.0,
+            "height": 20.0
           }
         },
         "evidence": {
@@ -101,6 +101,87 @@
           "threshold_model": "hough_plus_foreground_mask"
         },
         "source": "pf8_plan_b_perception_linkage"
+      }
+    },
+    {
+      "schema_version": "plan_b_perception_linkage_record_v1",
+      "variant": "AC0836_S",
+      "image_path": "artifacts/images_to_convert/nonconvertable/AC0836_S.jpg",
+      "status": "evaluated",
+      "plan_b_reason": "Weak-Family-Befund: rundes VOC-Badge mit senkrechtem Griff; gute n\u00e4chste Probe f\u00fcr Kreis, Label und einfachen Connector.",
+      "description": "Plan-B-Kandidat AC0836_S: rundes VOC-Badge mit senkrechtem Griff; Kreis, Label und Griff zuerst pr\u00fcfen.",
+      "perception_lerneffekt": {
+        "question": "Kann der dominante VOC-Kreis vorab als CircleBackground und der senkrechte Griff als Linien-Hinweis festgehalten werden?",
+        "expected_first_primitive": "circle_ring_or_vertical_connector",
+        "expected_candidate_kinds": [
+          "circle",
+          "line",
+          "ring",
+          "text_glyph"
+        ],
+        "expected_seed_kinds": [
+          "CircleBackground",
+          "TextGlyph"
+        ],
+        "decision": "generalisiert",
+        "matched_candidate_kinds": [
+          "circle",
+          "line"
+        ],
+        "matched_seed_kinds": [
+          "CircleBackground"
+        ],
+        "top_candidate_kind": "line",
+        "top_confidence": 0.92,
+        "next_action": "Im n\u00e4chsten Plan-B-Paket als vorinitialisierten Geometry-IR-Seed protokollieren."
+      },
+      "candidate_count": 5,
+      "top_candidate": {
+        "schema_version": "perception_primitive_candidate_v1",
+        "kind": "line",
+        "bbox": {
+          "x": 7.0,
+          "y": 14.0,
+          "width": 1.0,
+          "height": 11.0
+        },
+        "center": {
+          "x": 7.5,
+          "y": 19.5
+        },
+        "geometry": {
+          "orientation": "vertical",
+          "x_center": 7.5,
+          "y_top": 14.0,
+          "y_bottom": 25.0,
+          "length_px": 11.0,
+          "stroke_width_px": 1.0,
+          "angle_deg": 90.0
+        },
+        "color": {
+          "fill_rgb": null,
+          "stroke_rgb": null,
+          "fill_hex": null,
+          "stroke_hex": null,
+          "fill_confidence": 0.0,
+          "stroke_confidence": 0.0
+        },
+        "confidence": 0.92,
+        "roi": {
+          "type": "image",
+          "hint": "full_image",
+          "bbox": {
+            "x": 0.0,
+            "y": 0.0,
+            "width": 15.0,
+            "height": 25.0
+          }
+        },
+        "evidence": {
+          "detector": "detect_vertical_lines",
+          "edge_model": "canny+hough_lines_p"
+        },
+        "source": "hough"
       }
     },
     {
@@ -135,10 +216,10 @@
         "top_confidence": 0.8957,
         "next_action": "Im n\u00e4chsten Plan-B-Paket als vorinitialisierten Geometry-IR-Seed protokollieren."
       },
-      "candidate_count": 6,
+      "candidate_count": 10,
       "top_candidate": {
         "schema_version": "perception_primitive_candidate_v1",
-        "kind": "line",
+        "kind": "circle",
         "bbox": {
           "x": 1.0,
           "y": 3.0,
@@ -181,104 +262,6 @@
           "stroke_confidence": 0.7055
         },
         "confidence": 0.8957,
-        "roi": {
-          "type": "image",
-          "hint": "full_image",
-          "bbox": {
-            "x": 0.0,
-            "y": 0.0,
-            "width": 25.0,
-            "height": 15.0
-          }
-        },
-        "evidence": {
-          "detector": "detect_vertical_lines",
-          "edge_model": "canny+hough_lines_p"
-        },
-        "source": "hough"
-      }
-    },
-    {
-      "schema_version": "plan_b_perception_linkage_record_v1",
-      "variant": "AC0862_S",
-      "image_path": "artifacts/images_to_convert/AC0862_S.jpg",
-      "status": "evaluated",
-      "plan_b_reason": "Anschlussprobe aus der rF-Connector-Familie: nach rechts gedrehtes rF-Badge mit horizontal lesbarem Text.",
-      "description": "Plan-B-Kandidat AC0862_S: nach rechts gedrehtes rF-Badge; Kreis, horizontal lesbares Label und Griff zuerst pr\u00fcfen.",
-      "perception_lerneffekt": {
-        "question": "Kann der dominante rF-Kreis vorab als CircleBackground und der gedrehte Griff als Linien-Hinweis festgehalten werden?",
-        "expected_first_primitive": "circle_ring_or_rf_rotated_connector",
-        "expected_candidate_kinds": [
-          "circle",
-          "horizontal_rule",
-          "line",
-          "ring",
-          "text_glyph"
-        ],
-        "expected_seed_kinds": [
-          "CircleBackground",
-          "TextGlyph"
-        ],
-        "decision": "generalisiert",
-        "matched_candidate_kinds": [
-          "circle",
-          "horizontal_rule",
-          "line"
-        ],
-        "matched_seed_kinds": [
-          "CircleBackground",
-          "HorizontalRule"
-        ],
-        "top_candidate_kind": "circle",
-        "top_confidence": 0.8922,
-        "next_action": "Im n\u00e4chsten Plan-B-Paket als vorinitialisierten Geometry-IR-Seed protokollieren."
-      },
-      "candidate_count": 7,
-      "top_candidate": {
-        "schema_version": "perception_primitive_candidate_v1",
-        "kind": "circle",
-        "bbox": {
-          "x": 12.0,
-          "y": 2.0,
-          "width": 10.0,
-          "height": 10.0
-        },
-        "center": {
-          "x": 17.0,
-          "y": 7.0
-        },
-        "geometry": {
-          "radius_px": 5.0,
-          "inner_radius_px": 0.0,
-          "stroke_width_px": 1.0,
-          "circularity": 1.0,
-          "ring": false,
-          "fill_ratio": 0.5556,
-          "geometry_ir_kind": "CircleBackground",
-          "geometry_ir_bbox": [
-            0.48,
-            0.13333,
-            0.4,
-            0.66667
-          ]
-        },
-        "color": {
-          "fill_rgb": [
-            189,
-            189,
-            189
-          ],
-          "stroke_rgb": [
-            228,
-            228,
-            228
-          ],
-          "fill_hex": "#BDBDBD",
-          "stroke_hex": "#E4E4E4",
-          "fill_confidence": 0.5625,
-          "stroke_confidence": 0.8698
-        },
-        "confidence": 0.8922,
         "roi": {
           "type": "image",
           "hint": "full_image",
