@@ -6494,11 +6494,16 @@ def test_local_workflow_doc_tracks_current_commands() -> None:
     assert "./tools/run_local_completion_checks.sh --require-drift-summary" in ci_workflow
     assert "satisfactory-regression-battery:" in ci_workflow
     assert "./tools/run_satisfactory_regression_battery.sh" in ci_workflow
+    assert "SATISFACTORY_REGRESSION_DEBUG_DIR" in ci_workflow
+    assert "actions/upload-artifact@v4" in ci_workflow
+    assert "satisfactory-regression-debug" in ci_workflow
     assert "pull_request:" in ci_workflow
     assert "workflow_dispatch:" in ci_workflow
     assert "--print-linux-vendor-command" in workflow_doc
     assert "satisfactory-regression-battery" in workflow_doc
     assert "./tools/run_satisfactory_regression_battery.sh" in workflow_doc
+    assert "SATISFACTORY_REGRESSION_DEBUG_DIR" in workflow_doc
+    assert "satisfactory-regression-debug" in workflow_doc
 
 
 def test_parse_args_help_mentions_canonical_image_converter_flags(capsys: pytest.CaptureFixture[str]) -> None:

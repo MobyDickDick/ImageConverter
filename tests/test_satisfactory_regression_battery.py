@@ -1,7 +1,11 @@
 from __future__ import annotations
 
+import json
 import math
+import os
 import shutil
+import time
+from datetime import datetime, timezone
 from pathlib import Path
 
 import pytest
@@ -11,6 +15,32 @@ BASE = Path("artifacts/regression_baseline/satisfactory")
 SOURCE_IMAGES = Path("artifacts/images_to_convert")
 SOURCE_SVGS = Path("src/artifacts/converted_images/converted_svgs")
 FALLBACK_VARIANTS: tuple[str, ...] = ("AC0800_L", "AC0800_M", "AC0800_S", "AC0811_L", "AC0811_M", "AC0811_S")
+
+
+def _debug_log(debug_log: Path, event: str, **fields: object) -> None:
+    """Persist and print live milestones for the long reconversion battery."""
+
+    debug_log.parent.mkdir(parents=True, exist_ok=True)
+    payload = {
+        "event": event,
+        "monotonic_seconds": round(time.perf_counter(), 6),
+        "timestamp_utc": datetime.now(timezone.utc).isoformat(),
+        **fields,
+    }
+    with debug_log.open("a", encoding="utf-8") as handle:
+        handle.write(json.dumps(payload, sort_keys=True) + "\n")
+    details = " ".join(f"{key}={value}" for key, value in fields.items())
+    print(f"[satisfactory-regression] {event} {details}".rstrip(), flush=True)
+
+
+def _debug_log_path(tmp_path: Path, test_name: str) -> Path:
+    debug_dir = Path(
+        os.environ.get(
+            "SATISFACTORY_REGRESSION_DEBUG_DIR",
+            str(tmp_path / "satisfactory-regression-debug"),
+        )
+    )
+    return debug_dir / f"{test_name}.jsonl"
 
 
 def _variants() -> list[str]:
@@ -141,28 +171,51 @@ def test_satisfactory_baseline_reconversion_smoke(tmp_path: Path) -> None:
 
 
 @pytest.mark.blocking_conversion
-def test_all_satisfactory_successful_variants_reconversion_keeps_or_improves_quality(tmp_path: Path) -> None:
+def test_all_satisfactory_successful_variants_reconversion_keeps_or_improves_quality(
+    tmp_path: Path, request: pytest.FixtureRequest
+) -> None:
+    debug_log = _debug_log_path(tmp_path, request.node.name)
+    start_time = time.perf_counter()
+    _debug_log(debug_log, "test_start", nodeid=request.node.nodeid)
+
     _ensure_baseline(limit=5)
     variants = _variants()
+    _debug_log(debug_log, "variants_loaded", variant_count=len(variants))
     if not variants:
         pytest.skip("No baseline variants found.")
 
     baseline_mean_delta2: dict[str, float] = {}
     missing_pairs: list[str] = []
     for variant in variants:
+        _debug_log(debug_log, "baseline_metric_start", variant=variant)
         image_path = _source_image_path(variant)
         svg_path = BASE / "svgs" / f"{variant}.svg"
         if not image_path.exists() or not svg_path.exists():
             missing_pairs.append(variant)
             continue
         baseline_mean_delta2[variant.upper()] = _rendered_mean_delta2(image_path, svg_path)
+        _debug_log(
+            debug_log,
+            "baseline_metric_done",
+            variant=variant,
+            mean_delta2=f"{baseline_mean_delta2[variant.upper()]:.6f}",
+        )
 
     assert not missing_pairs, "Missing baseline image/SVG pairs: " + ", ".join(missing_pairs[:20])
     if not baseline_mean_delta2:
         pytest.skip("No satisfactory baseline quality metrics could be rendered.")
 
     out = tmp_path / "all_successful_reconversion"
-    for family, family_variants in _group_variants_by_family(variants).items():
+    grouped_variants = _group_variants_by_family(variants)
+    _debug_log(debug_log, "family_groups_ready", family_count=len(grouped_variants))
+    for family, family_variants in grouped_variants.items():
+        family_start = time.perf_counter()
+        _debug_log(
+            debug_log,
+            "family_conversion_start",
+            family=family,
+            variant_count=len(family_variants),
+        )
         exit_code = converter.main(
             [
                 str(SOURCE_IMAGES),
@@ -176,8 +229,16 @@ def test_all_satisfactory_successful_variants_reconversion_keeps_or_improves_qua
                 family,
             ]
         )
+        _debug_log(
+            debug_log,
+            "family_conversion_done",
+            family=family,
+            exit_code=exit_code,
+            duration_seconds=f"{time.perf_counter() - family_start:.3f}",
+        )
         assert exit_code == 0
         for variant in family_variants:
+            _debug_log(debug_log, "output_check", family=family, variant=variant)
             assert (out / family.lower() / "converted_svgs" / f"{variant}.svg").exists(), (
                 f"No reconverted SVG output produced for successful variant {variant}."
             )
@@ -186,10 +247,19 @@ def test_all_satisfactory_successful_variants_reconversion_keeps_or_improves_qua
     checked = 0
     quality_epsilon = 1e-6
     for variant, previous_mean_delta2 in baseline_mean_delta2.items():
+        _debug_log(debug_log, "quality_compare_start", variant=variant)
         family = variant.rsplit("_", 1)[0]
         new_svg = out / family.lower() / "converted_svgs" / f"{variant}.svg"
         new_mean_delta2 = _rendered_mean_delta2(_source_image_path(variant), new_svg)
         allowed_max = previous_mean_delta2 + max(quality_epsilon, abs(previous_mean_delta2) * quality_epsilon)
+        _debug_log(
+            debug_log,
+            "quality_compare_done",
+            variant=variant,
+            previous_mean_delta2=f"{previous_mean_delta2:.6f}",
+            new_mean_delta2=f"{new_mean_delta2:.6f}",
+            allowed_max=f"{allowed_max:.6f}",
+        )
         if not math.isfinite(new_mean_delta2) or new_mean_delta2 > allowed_max:
             regressions.append(
                 f"{variant}: previous_mean_delta2={previous_mean_delta2:.6f}, "
@@ -197,6 +267,13 @@ def test_all_satisfactory_successful_variants_reconversion_keeps_or_improves_qua
             )
         checked += 1
 
+    _debug_log(
+        debug_log,
+        "test_done",
+        checked=checked,
+        regression_count=len(regressions),
+        duration_seconds=f"{time.perf_counter() - start_time:.3f}",
+    )
     assert checked == len(variants)
     assert not regressions, (
         "Successful-conversion quality regressed since the stored baseline conversion: "
