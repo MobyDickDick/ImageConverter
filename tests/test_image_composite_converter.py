@@ -784,6 +784,30 @@ def test_apply_redraw_variation_jitters_params_and_logs_seed(monkeypatch: pytest
     assert 0.0 <= float(varied["cy"]) <= 20.0
 
 
+
+def test_apply_redraw_variation_keeps_path_t_scale_in_glyph_domain(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Path-based T glyphs use tiny SVG scale factors, not generic font multipliers."""
+    monkeypatch.setattr(conv.time, "time_ns", lambda: 123_456_789)
+    conv.Action.STOCHASTIC_RUN_SEED = 11
+    conv.Action.STOCHASTIC_SEED_OFFSET = 2
+    params = {
+        "circle_enabled": True,
+        "cx": 10.0,
+        "cy": 10.0,
+        "r": 4.0,
+        "stroke_circle": 1.0,
+        "draw_text": True,
+        "text_mode": "path_t",
+        "text_scale": 0.006,
+        "tx": 4.0,
+        "ty": 5.0,
+        "s": 0.006,
+    }
+
+    varied, _logs = conv.Action.apply_redraw_variation(params, 20, 20)
+
+    assert 0.0036 <= float(varied["text_scale"]) <= 0.0108
+
 def test_apply_redraw_variation_uses_new_time_nonce_per_run(monkeypatch: pytest.MonkeyPatch) -> None:
     """Separate redraw passes should produce different logged parameter jitters."""
     timestamps = iter([100, 200])

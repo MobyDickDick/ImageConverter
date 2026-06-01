@@ -58,9 +58,27 @@ class GlobalParameterVector:
             stem_top=float(params["stem_top"]) if "stem_top" in params else None,
             stem_bottom=float(params["stem_bottom"]) if "stem_bottom" in params else None,
             stem_width=float(params["stem_width"]) if "stem_width" in params else None,
-            text_x=float(params["text_x"]) if "text_x" in params else None,
-            text_y=float(params["text_y"]) if "text_y" in params else None,
-            text_scale=float(params["text_scale"]) if "text_scale" in params else None,
+            text_x=(
+                float(params["text_x"])
+                if "text_x" in params
+                else float(params["tx"])
+                if str(params.get("text_mode", "")).lower() in {"path", "path_t"} and "tx" in params
+                else None
+            ),
+            text_y=(
+                float(params["text_y"])
+                if "text_y" in params
+                else float(params["ty"])
+                if str(params.get("text_mode", "")).lower() in {"path", "path_t"} and "ty" in params
+                else None
+            ),
+            text_scale=(
+                float(params["text_scale"])
+                if "text_scale" in params
+                else float(params["s"])
+                if str(params.get("text_mode", "")).lower() in {"path", "path_t"} and "s" in params
+                else None
+            ),
         )
 
     def applyToParams(self, params: dict) -> dict:
@@ -85,4 +103,11 @@ class GlobalParameterVector:
         for key, value in optional_values.items():
             if value is not None:
                 out[key] = float(value)
+        if str(out.get("text_mode", "")).lower() in {"path", "path_t"}:
+            if self.text_x is not None:
+                out["tx"] = float(self.text_x)
+            if self.text_y is not None:
+                out["ty"] = float(self.text_y)
+            if self.text_scale is not None:
+                out["s"] = float(self.text_scale)
         return out

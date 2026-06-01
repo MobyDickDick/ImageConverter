@@ -105,13 +105,13 @@
     },
     {
       "schema_version": "plan_b_perception_linkage_record_v1",
-      "variant": "AC0861_S",
-      "image_path": "artifacts/images_to_convert/AC0861_S.jpg",
+      "variant": "AC0844_S",
+      "image_path": "artifacts/images_to_convert/AC0844_S.jpg",
       "status": "evaluated",
-      "plan_b_reason": "Anschlussprobe aus der rF-Familie: rundes rF-Badge mit senkrechtem Griff nach dem AC0850-Refresh.",
-      "description": "Plan-B-Kandidat AC0861_S: rundes rF-Badge mit senkrechtem Griff; Kreis, Label und Griff zuerst pr\u00fcfen.",
+      "plan_b_reason": "Weak-Family-Befund: rundes rF-Badge mit Griff/gedrehter Lage und auff\u00e4lligem Text-/Connector-Fehler.",
+      "description": "Plan-B-Kandidat AC0844_S: rundes rF-Badge mit gedrehtem Griff; Kreis, Label und Griff zuerst pr\u00fcfen.",
       "perception_lerneffekt": {
-        "question": "Kann der dominante rF-Kreis vorab als CircleBackground und der senkrechte Griff als Linien-Hinweis festgehalten werden?",
+        "question": "Kann der dominante rF-Kreis vorab als CircleBackground und der gedrehte Griff als Linien-Hinweis festgehalten werden?",
         "expected_first_primitive": "circle_ring_or_rf_vertical_connector",
         "expected_candidate_kinds": [
           "circle",
@@ -131,50 +131,64 @@
         "matched_seed_kinds": [
           "CircleBackground"
         ],
-        "top_candidate_kind": "line",
-        "top_confidence": 0.92,
+        "top_candidate_kind": "circle",
+        "top_confidence": 0.8957,
         "next_action": "Im n\u00e4chsten Plan-B-Paket als vorinitialisierten Geometry-IR-Seed protokollieren."
       },
-      "candidate_count": 4,
+      "candidate_count": 6,
       "top_candidate": {
         "schema_version": "perception_primitive_candidate_v1",
         "kind": "line",
         "bbox": {
-          "x": 7.0,
-          "y": 14.0,
-          "width": 1.0,
-          "height": 11.0
+          "x": 1.0,
+          "y": 3.0,
+          "width": 12.0,
+          "height": 12.0
         },
         "center": {
-          "x": 7.5,
-          "y": 19.5
+          "x": 7.0,
+          "y": 9.0
         },
         "geometry": {
-          "orientation": "vertical",
-          "x_center": 7.5,
-          "y_top": 14.0,
-          "y_bottom": 25.0,
-          "length_px": 11.0,
+          "radius_px": 6.0,
+          "inner_radius_px": 0.0,
           "stroke_width_px": 1.0,
-          "angle_deg": 90.0
+          "circularity": 1.0,
+          "ring": false,
+          "fill_ratio": 0.5714,
+          "geometry_ir_kind": "CircleBackground",
+          "geometry_ir_bbox": [
+            0.04,
+            0.2,
+            0.48,
+            0.8
+          ]
         },
         "color": {
-          "fill_rgb": null,
-          "stroke_rgb": null,
-          "fill_hex": null,
-          "stroke_hex": null,
-          "fill_confidence": 0.0,
-          "stroke_confidence": 0.0
+          "fill_rgb": [
+            192,
+            192,
+            192
+          ],
+          "stroke_rgb": [
+            207,
+            207,
+            207
+          ],
+          "fill_hex": "#C0C0C0",
+          "stroke_hex": "#CFCFCF",
+          "fill_confidence": 0.6097,
+          "stroke_confidence": 0.7055
         },
-        "confidence": 0.92,
+        "confidence": 0.8957,
         "roi": {
           "type": "image",
           "hint": "full_image",
           "bbox": {
             "x": 0.0,
             "y": 0.0,
-            "width": 15.0,
-            "height": 25.0
+            "width": 25.0,
+            "height": 15.0
           }
         },
         "evidence": {
