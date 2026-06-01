@@ -72,6 +72,30 @@ def elementWidthKeyAndBoundsImpl(
             if "voc_font_scale_max" in params:
                 high = min(high, float(params["voc_font_scale_max"]))
             return "voc_font_scale", low, max(low, high)
+        if mode == "rf":
+            cur = float(params.get("rf_font_scale", 0.58))
+            if bool(params.get("lock_text_scale", False)):
+                return "rf_font_scale", cur, cur
+            low = max(0.34, min(cur * 0.62, 0.48))
+            high = min(1.80, max(1.20, cur * 1.55))
+            if img_orig is not None:
+                text_mask = extract_badge_element_mask_fn(img_orig, params, "text")
+                bbox = mask_bbox_fn(text_mask) if text_mask is not None else None
+                if bbox is not None:
+                    x1, y1, x2, y2 = bbox
+                    text_w = max(1.0, (float(x2) - float(x1)) + 1.0)
+                    text_h = max(1.0, (float(y2) - float(y1)) + 1.0)
+                    implied_scale = max(
+                        text_w / max(1.0, float(params.get("r", min_dim)) * 1.55),
+                        text_h / max(1.0, float(params.get("r", min_dim)) * 0.95),
+                    )
+                    low = max(low, min(1.05, implied_scale * 0.70))
+                    high = max(high, min(2.20, implied_scale * 1.35))
+            if "rf_font_scale_min" in params:
+                low = max(low, float(params["rf_font_scale_min"]))
+            if "rf_font_scale_max" in params:
+                high = min(high, float(params["rf_font_scale_max"]))
+            return "rf_font_scale", low, max(low, high)
         if mode == "co2":
             cur = float(params.get("co2_font_scale", 0.82))
             if bool(params.get("lock_text_scale", False)):

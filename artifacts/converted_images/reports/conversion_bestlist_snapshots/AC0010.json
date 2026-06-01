@@ -1,0 +1,98 @@
+{
+  "base": "AC0010",
+  "best_error": 39.252604166666664,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.012266438802083333,
+  "filename": "AC0010.jpg",
+  "h": 80,
+  "mean_delta2": 8923.3486328125,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": true,
+      "has_reference": false,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "AC0010",
+        "source": "base_name",
+        "text": "Heizelement, graues Rechteck, Plus-Minus-Zeichen oben links, Farbverlauf horizontal dunkel-hell-dunkel graue Diagonale oben rechts nach unten links"
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "geometry_ir": [
+      {
+        "bbox": [
+          0.18,
+          0.24,
+          0.64,
+          0.56
+        ],
+        "constraint": "inside_rect_border",
+        "id": "background_gradient",
+        "kind": "HorizontalGradient",
+        "stops": [
+          "#8f8f8f",
+          "#dedede",
+          "#8f8f8f"
+        ]
+      },
+      {
+        "bbox": [
+          0.18,
+          0.24,
+          0.64,
+          0.56
+        ],
+        "fill": "none",
+        "id": "main_rect",
+        "kind": "RectBorder",
+        "stroke": "#666666",
+        "stroke_width": 0.035
+      },
+      {
+        "clip_to": "main_rect",
+        "direction": "tr_bl",
+        "id": "diagonal_1_tr_bl",
+        "kind": "DiagonalBand",
+        "rect_ref": "main_rect",
+        "stroke": "#707070",
+        "stroke_width": 0.045
+      },
+      {
+        "id": "plus_glyph",
+        "kind": "PlusGlyph",
+        "position": "top_left",
+        "stroke": "#4f4f4f",
+        "stroke_width": 0.025
+      },
+      {
+        "id": "minus_glyph",
+        "kind": "MinusGlyph",
+        "position": "top_left",
+        "stroke": "#4f4f4f",
+        "stroke_width": 0.025
+      }
+    ],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "AC0010"
+  },
+  "std_delta2": 15079.91015625,
+  "variant": "AC0010",
+  "w": 40
+}

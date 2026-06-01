@@ -366,6 +366,14 @@ def validateSemanticDescriptionAlignmentImpl(
         and not bool(badge_params.get("arm_enabled", False))
         and not bool(badge_params.get("draw_text", False))
     )
+    plain_text_circle_badge = bool(
+        expected.get("circle", False)
+        and expected.get("text", False)
+        and not expected.get("stem", False)
+        and not expected.get("arm", False)
+        and not bool(badge_params.get("stem_enabled", False))
+        and not bool(badge_params.get("arm_enabled", False))
+    )
     require_circle_mask_confirmation = expected.get("circle", False) and not (
         allow_circle_mask_fallback
         or connector_circle_mask_fallback
@@ -390,6 +398,7 @@ def validateSemanticDescriptionAlignmentImpl(
             or (
                 structural.get("stem", False)
                 and not plain_circle_badge
+                and not plain_text_circle_badge
                 and not suppress_structural_stem_for_horizontal_connector
             )
         ),
@@ -399,6 +408,7 @@ def validateSemanticDescriptionAlignmentImpl(
                 structural.get("arm", False)
                 and not structural.get("stem", False)
                 and not plain_circle_badge
+                and not plain_text_circle_badge
                 and not (
                     vertical_connector_family
                     and expected.get("arm", False) is False

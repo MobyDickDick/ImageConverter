@@ -8,7 +8,6 @@ import numpy as np
 from src.iCCModules import imageCompositeConverterGeometryIr as geometry_ir_helpers
 from tools.perception_detection_contract import build_perception_seeded_geometry_ir
 
-FORCED_PLAN_B_SAMPLE_VARIANTS: set[str] = {"AC0011"}
 
 def _build_vector_placeholder_svg(width: int, height: int, *, description: str = "") -> str:
     safe_w = max(1, int(width or 1))
@@ -85,6 +84,52 @@ def _fit_diagonal_band_iterative(*, width: int, height: int, description: str, p
 
 
 
+
+def _gray_hex(value: float) -> str:
+    gray = int(max(0, min(255, round(float(value)))))
+    return f"#{gray:02x}{gray:02x}{gray:02x}"
+
+
+def _gradient_band_svg_rects(
+    *,
+    x: float,
+    y: float,
+    width: float,
+    height: float,
+    edge_hex: str,
+    mid_hex: str,
+    center_percent: float,
+    bands: int = 48,
+) -> str:
+    def _gray(color: str, fallback: int) -> int:
+        value = str(color or "").strip().lstrip("#")
+        if len(value) >= 6:
+            try:
+                return int(round((int(value[0:2], 16) + int(value[2:4], 16) + int(value[4:6], 16)) / 3.0))
+            except ValueError:
+                return fallback
+        return fallback
+
+    edge = _gray(edge_hex, 0x8F)
+    mid = _gray(mid_hex, 0xDE)
+    safe_bands = max(4, int(bands))
+    center = max(1.0, min(99.0, float(center_percent))) / 100.0
+    parts: list[str] = []
+    for index in range(safe_bands):
+        t = (index + 0.5) / safe_bands
+        if t <= center:
+            ratio = t / center
+            gray = edge * (1.0 - ratio) + mid * ratio
+        else:
+            ratio = (t - center) / (1.0 - center)
+            gray = mid * (1.0 - ratio) + edge * ratio
+        band_x = x + width * index / safe_bands
+        band_w = width / safe_bands + max(0.02, width * 0.001)
+        parts.append(
+            f'  <rect x="{band_x:.3f}" y="{y:.3f}" width="{band_w:.3f}" height="{height:.3f}" '
+            f'fill="{_gray_hex(gray)}" stroke="none"/>')
+    return "\n".join(parts) + ("\n" if parts else "")
+
 def _build_structured_symbol_svg(
     width: int,
     height: int,
@@ -106,17 +151,23 @@ def _build_structured_symbol_svg(
     plus_half = max(2.0, min(safe_w, safe_h) * 0.08)
     minus_y = safe_h * 0.36
     minus_half = max(2.0, min(safe_w, safe_h) * 0.07)
+    gradient_rects = _gradient_band_svg_rects(
+        x=inset,
+        y=inset,
+        width=safe_w - 1,
+        height=safe_h - 1,
+        edge_hex=gradient_edge,
+        mid_hex=gradient_mid,
+        center_percent=gradient_center,
+        bands=max(16, min(64, safe_w * 2)),
+    )
     return (
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{safe_w}" height="{safe_h}" viewBox="0 0 {safe_w} {safe_h}">\n'
         '  <defs>\n'
-        '    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="0%">\n'
-        f'      <stop offset="0%" stop-color="{gradient_edge}"/>\n'
-        f'      <stop offset="{gradient_center:.1f}%" stop-color="{gradient_mid}"/>\n'
-        f'      <stop offset="100%" stop-color="{gradient_edge}"/>\n'
-        '    </linearGradient>\n'
         f'    <clipPath id="innerRect"><rect x="{inset}" y="{inset}" width="{safe_w-1}" height="{safe_h-1}"/></clipPath>\n'
         '  </defs>\n'
-        f'  <rect x="{inset}" y="{inset}" width="{safe_w-1}" height="{safe_h-1}" fill="url(#bg)" stroke="#9a9a9a" stroke-width="{border_thickness:.2f}"/>\n'
+        f'{gradient_rects}'
+        f'  <rect x="{inset}" y="{inset}" width="{safe_w-1}" height="{safe_h-1}" fill="none" stroke="#9a9a9a" stroke-width="{border_thickness:.2f}"/>\n'
         f'  <line x1="{safe_w-1}" y1="{inset}" x2="{inset}" y2="{safe_h-1}" stroke="#8f8f8f" stroke-width="{diag1_width:.2f}" clip-path="url(#innerRect)"/>\n'
         f'  <line x1="{inset}" y1="{inset}" x2="{safe_w-1}" y2="{safe_h-1}" stroke="#8f8f8f" stroke-width="{diag2_width:.2f}" clip-path="url(#innerRect)"/>\n'
         f'  <line x1="{plus_cx-plus_half:.2f}" y1="{plus_cy:.2f}" x2="{plus_cx+plus_half:.2f}" y2="{plus_cy:.2f}" stroke="#f1f1f1" stroke-width="{plus_width:.2f}" stroke-linecap="round"/>\n'
@@ -209,6 +260,10 @@ DESCRIPTION_DRIVEN_GEOMETRY_IR_KINDS = {
     "LabelBox",
     "TextGlyph",
     "CircleBackground",
+    "HorizontalGradient",
+    "DiagonalBand",
+    "PlusGlyph",
+    "MinusGlyph",
     "RectBorder",
     "UpwardCompressorGlyph",
     "RightwardCompressorGlyph",
@@ -383,11 +438,7 @@ def _try_load_sample_svg(*, img_path: str, base_name: str, description: str = ""
 
     sample_candidates = _build_sample_candidates(base_name)
     reference_family = _extract_reference_family_from_description(description)
-    if (
-        reference_family
-        and reference_family != base_name.upper()
-        and base_name not in FORCED_PLAN_B_SAMPLE_VARIANTS
-    ):
+    if reference_family and reference_family != base_name.upper():
         sample_candidates = _prepend_reference_candidates(sample_candidates, reference_family)
     for samples_dir in samples_dirs:
         for sample_name in sample_candidates:
@@ -732,22 +783,18 @@ def runNonCompositeIterationImpl(
         if sample_rendered is not None:
             sample_err = calculate_error_fn(perc_img, sample_rendered)
             baseline_is_embedded_raster = _contains_svg_image_tag(svg_content)
-            force_sample_svg = base_name in FORCED_PLAN_B_SAMPLE_VARIANTS
-            # Favor curated sample SVGs over generated placeholders when they are
-            # in a similar quality range, because sample assets usually carry
-            # richer semantic structure than our generic non-composite fallback.
+            # Favor curated sample SVGs only when they materially improve the
+            # current algorithmic result (or replace an embedded raster).  This
+            # keeps samples as fallback evidence, not as per-symbol fixed output.
             sample_preference_factor = 1.08 if baseline_is_embedded_raster else 1.25
             sample_improvement_ratio = (svg_err / sample_err) if sample_err > 0 else float("inf")
             prefer_sample_svg = (
-                force_sample_svg
-                or baseline_is_embedded_raster
+                baseline_is_embedded_raster
                 or sample_improvement_ratio >= sample_preference_factor
             )
             if prefer_sample_svg:
                 decision_note = ""
-                if force_sample_svg:
-                    decision_note = " (forcierte Sample-Auswahl für bekannte Problemvariante)"
-                elif baseline_is_embedded_raster and sample_err > svg_err:
+                if baseline_is_embedded_raster and sample_err > svg_err:
                     decision_note = " (Vector-Sample gegenüber Embedded-Raster bevorzugt)"
                 print_fn(
                     "  -> Plan B Vergleich aktiv: nutze Sample-SVG "
@@ -763,7 +810,7 @@ def runNonCompositeIterationImpl(
                         f"baseline_is_embedded_raster={int(baseline_is_embedded_raster)}",
                         f"sample_preference_factor={sample_preference_factor:.2f}",
                         f"sample_improvement_ratio={sample_improvement_ratio:.6f}",
-                        f"force_sample_svg={int(force_sample_svg)}",
+                        "sample_selection_policy=algorithmic_threshold",
                     ]
                 )
                 write_attempt_artifacts_fn(sample_svg_content, sample_rendered)

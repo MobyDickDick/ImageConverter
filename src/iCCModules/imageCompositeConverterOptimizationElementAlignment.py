@@ -105,6 +105,10 @@ def applyElementAlignmentStepImpl(
             old_dy = float(params.get("voc_dy", 0.0))
             params["voc_dy"] = float(clip_scalar_fn(old_dy + center_dy * 0.75, -0.45 * r, 0.45 * r))
             changed = abs(params["voc_dy"] - old_dy) > 0.02
+        elif mode == "rf":
+            old_dy = float(params.get("rf_dy", 0.0))
+            params["rf_dy"] = float(clip_scalar_fn(old_dy + center_dy * 0.75, -0.45 * r, 0.45 * r))
+            changed = abs(params["rf_dy"] - old_dy) > 0.02
         elif "ty" in params:
             old_ty = float(params.get("ty", 0.0))
             params["ty"] = float(clip_scalar_fn(old_ty + center_dy * 0.75, 0.0, float(h - 1)))

@@ -1,14 +1,22 @@
 {
   "base": "AC0100",
-  "best_error": 38.11541666666667,
+  "best_error": 48.14625,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.047644270833333335,
+  "error_per_pixel": 0.0601828125,
   "filename": "AC0100_S.jpg",
   "h": 40,
-  "mean_delta2": 7215.31103515625,
+  "mean_delta2": 10482.38671875,
   "params": {
     "bottom_shape": null,
+    "contract_status": "ok",
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
     "description_fragments": [
       {
         "key": "AC0100",
@@ -20,6 +28,60 @@
       "AC0010"
     ],
     "elements": [],
+    "geometry_ir": [
+      {
+        "bbox": [
+          0.18,
+          0.24,
+          0.64,
+          0.56
+        ],
+        "constraint": "inside_rect_border",
+        "id": "background_gradient",
+        "kind": "HorizontalGradient",
+        "stops": [
+          "#8f8f8f",
+          "#dedede",
+          "#8f8f8f"
+        ]
+      },
+      {
+        "bbox": [
+          0.18,
+          0.24,
+          0.64,
+          0.56
+        ],
+        "fill": "none",
+        "id": "main_rect",
+        "kind": "RectBorder",
+        "stroke": "#666666",
+        "stroke_width": 0.035
+      },
+      {
+        "clip_to": "main_rect",
+        "direction": "tr_bl",
+        "id": "diagonal_1_tr_bl",
+        "kind": "DiagonalBand",
+        "rect_ref": "main_rect",
+        "stroke": "#707070",
+        "stroke_width": 0.045
+      },
+      {
+        "id": "plus_glyph",
+        "kind": "PlusGlyph",
+        "position": "top_left",
+        "stroke": "#4f4f4f",
+        "stroke_width": 0.025
+      },
+      {
+        "id": "minus_glyph",
+        "kind": "MinusGlyph",
+        "position": "top_left",
+        "stroke": "#4f4f4f",
+        "stroke_width": 0.025
+      }
+    ],
     "label": "M",
     "mode": "auto",
     "semantic_conflicts": [],
@@ -32,7 +94,7 @@
     "top_source_ref": null,
     "variant_name": "AC0100_S"
   },
-  "std_delta2": 10340.4677734375,
+  "std_delta2": 14199.265625,
   "variant": "AC0100_S",
   "w": 20
 }

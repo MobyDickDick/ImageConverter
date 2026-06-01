@@ -588,6 +588,60 @@ def _find_circle(elements: list[dict[str, object]], circle_id: str, w: int, h: i
     return 0.06 * w, 0.06 * h, 0.88 * w, 0.88 * h
 
 
+
+def _parse_hex_gray(color: str, fallback: int) -> int:
+    value = str(color or "").strip().lstrip("#")
+    if len(value) >= 6:
+        try:
+            r = int(value[0:2], 16)
+            g = int(value[2:4], 16)
+            b = int(value[4:6], 16)
+            return int(round((r + g + b) / 3.0))
+        except ValueError:
+            return fallback
+    return fallback
+
+
+def _interpolate_gray(left: int, right: int, ratio: float) -> int:
+    ratio = max(0.0, min(1.0, float(ratio)))
+    return int(round(left * (1.0 - ratio) + right * ratio))
+
+
+def _horizontal_gradient_rects(
+    *,
+    element_id: str,
+    x: float,
+    y: float,
+    width: float,
+    height: float,
+    stops: list[object] | None = None,
+    bands: int = 32,
+) -> list[str]:
+    """Approximate a horizontal 3-stop gradient with renderer-stable bands."""
+
+    stop_values = list(stops or ["#8f8f8f", "#dedede", "#8f8f8f"])
+    edge_left = _parse_hex_gray(str(stop_values[0]) if len(stop_values) >= 1 else "", 0x8F)
+    center = _parse_hex_gray(str(stop_values[1]) if len(stop_values) >= 2 else "", 0xDE)
+    edge_right = _parse_hex_gray(str(stop_values[2]) if len(stop_values) >= 3 else "", 0x8F)
+    safe_bands = max(4, int(bands))
+    rects: list[str] = [f'  <g id="{element_id}">']
+    for index in range(safe_bands):
+        t = (index + 0.5) / safe_bands
+        if t <= 0.5:
+            gray = _interpolate_gray(edge_left, center, t / 0.5)
+        else:
+            gray = _interpolate_gray(center, edge_right, (t - 0.5) / 0.5)
+        band_x = x + width * index / safe_bands
+        # A tiny overlap avoids anti-aliased seams between adjacent bands.
+        band_w = width / safe_bands + max(0.02, width * 0.001)
+        color = f"#{gray:02x}{gray:02x}{gray:02x}"
+        rects.append(
+            f'    <rect x="{_fmt(band_x)}" y="{_fmt(y)}" width="{_fmt(band_w)}" '
+            f'height="{_fmt(height)}" fill="{color}" stroke="none"/>'
+        )
+    rects.append("  </g>")
+    return rects
+
 def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str, object]]) -> list[str]:
     """Render geometry IR elements as SVG fragments in their declared order."""
 
@@ -731,9 +785,18 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
                     )
         elif kind == "HorizontalGradient":
             x, y, bw, bh = _scaled_bbox(element, w, h)
-            svg.append(
-                f'  <rect id="{element_id}" x="{_fmt(x)}" y="{_fmt(y)}" width="{_fmt(bw)}" height="{_fmt(bh)}" '
-                'fill="url(#geometry-ir-horizontal-gradient)" stroke="none"/>'
+            raw_stops = element.get("stops")
+            stops = raw_stops if isinstance(raw_stops, list) else None
+            svg.extend(
+                _horizontal_gradient_rects(
+                    element_id=element_id,
+                    x=x,
+                    y=y,
+                    width=bw,
+                    height=bh,
+                    stops=stops,
+                    bands=int(max(12, min(64, round(bw)))),
+                )
             )
         elif kind == "RectBorder":
             x, y, bw, bh = _scaled_bbox(element, w, h)

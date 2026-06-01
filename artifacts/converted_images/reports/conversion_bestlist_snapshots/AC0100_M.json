@@ -1,14 +1,22 @@
 {
   "base": "AC0100",
-  "best_error": 36.01833333333333,
+  "best_error": 47.16388888888889,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.020010185185185183,
+  "error_per_pixel": 0.026202160493827162,
   "filename": "AC0100_M.jpg",
   "h": 60,
-  "mean_delta2": 7586.431640625,
+  "mean_delta2": 10366.4892578125,
   "params": {
     "bottom_shape": null,
+    "contract_status": "ok",
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
     "description_fragments": [
       {
         "key": "AC0100",
@@ -20,6 +28,60 @@
       "AC0010"
     ],
     "elements": [],
+    "geometry_ir": [
+      {
+        "bbox": [
+          0.18,
+          0.24,
+          0.64,
+          0.56
+        ],
+        "constraint": "inside_rect_border",
+        "id": "background_gradient",
+        "kind": "HorizontalGradient",
+        "stops": [
+          "#8f8f8f",
+          "#dedede",
+          "#8f8f8f"
+        ]
+      },
+      {
+        "bbox": [
+          0.18,
+          0.24,
+          0.64,
+          0.56
+        ],
+        "fill": "none",
+        "id": "main_rect",
+        "kind": "RectBorder",
+        "stroke": "#666666",
+        "stroke_width": 0.035
+      },
+      {
+        "clip_to": "main_rect",
+        "direction": "tr_bl",
+        "id": "diagonal_1_tr_bl",
+        "kind": "DiagonalBand",
+        "rect_ref": "main_rect",
+        "stroke": "#707070",
+        "stroke_width": 0.045
+      },
+      {
+        "id": "plus_glyph",
+        "kind": "PlusGlyph",
+        "position": "top_left",
+        "stroke": "#4f4f4f",
+        "stroke_width": 0.025
+      },
+      {
+        "id": "minus_glyph",
+        "kind": "MinusGlyph",
+        "position": "top_left",
+        "stroke": "#4f4f4f",
+        "stroke_width": 0.025
+      }
+    ],
     "label": "M",
     "mode": "auto",
     "semantic_conflicts": [],
@@ -32,7 +94,7 @@
     "top_source_ref": null,
     "variant_name": "AC0100_M"
   },
-  "std_delta2": 14057.93359375,
+  "std_delta2": 14730.236328125,
   "variant": "AC0100_M",
   "w": 30
 }

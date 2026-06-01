@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-import csv
+import math
 import shutil
 from pathlib import Path
 
@@ -8,11 +8,9 @@ import pytest
 import src.imageCompositeConverter as converter
 
 BASE = Path("artifacts/regression_baseline/satisfactory")
-BASELINE_BESTLIST = Path("src/artifacts/converted_images/reports/conversion_bestlist.csv")
 SOURCE_IMAGES = Path("artifacts/images_to_convert")
 SOURCE_SVGS = Path("src/artifacts/converted_images/converted_svgs")
 FALLBACK_VARIANTS: tuple[str, ...] = ("AC0800_L", "AC0800_M", "AC0800_S", "AC0811_L", "AC0811_M", "AC0811_S")
-KNOWN_QUALITY_DRIFT_VARIANTS: tuple[str, ...] = ("AC0800_L", "AC0800_M", "AC0800_S")
 
 
 def _variants() -> list[str]:
@@ -20,6 +18,13 @@ def _variants() -> list[str]:
     if not manifest.exists():
         return []
     return [line.strip() for line in manifest.read_text(encoding="utf-8").splitlines() if line.strip()]
+
+
+def _source_image_path(variant: str) -> Path:
+    baseline_image = BASE / "images" / f"{variant}.jpg"
+    if baseline_image.exists():
+        return baseline_image
+    return SOURCE_IMAGES / f"{variant}.jpg"
 
 
 def _prepare_mini_baseline(base_dir: Path, limit: int = 3) -> list[str]:
@@ -54,54 +59,41 @@ def _prepare_mini_baseline(base_dir: Path, limit: int = 3) -> list[str]:
     return copied
 
 
-def _load_baseline_error_per_pixel() -> dict[str, float]:
-    if not BASELINE_BESTLIST.exists():
-        return {}
-    rows: dict[str, float] = {}
-    with BASELINE_BESTLIST.open("r", encoding="utf-8", newline="") as handle:
-        reader = csv.DictReader(handle, delimiter=";")
-        for row in reader:
-            variant = str(row.get("variant", "")).strip().upper()
-            if not variant:
-                continue
-            try:
-                rows[variant] = float(str(row.get("error_per_pixel", "")).strip().replace(",", "."))
-            except ValueError:
-                continue
-    return rows
+def _rendered_mean_delta2(image_path: Path, svg_path: Path) -> float:
+    if converter.cv2 is None or converter.np is None:
+        pytest.skip("numpy/cv2 not available in this environment")
+
+    image = converter.cv2.imread(str(image_path))
+    assert image is not None, f"Could not read source image {image_path}."
+    rendered = converter.Action.render_svg_to_numpy(
+        svg_path.read_text(encoding="utf-8"),
+        image.shape[1],
+        image.shape[0],
+    )
+    if rendered is None:
+        pytest.skip(f"SVG rendering not available for quality comparison: {svg_path}")
+
+    diff = image.astype(converter.np.float32) - rendered.astype(converter.np.float32)
+    delta2 = converter.np.sum(diff * diff, axis=2)
+    return float(converter.np.mean(delta2))
 
 
-def _load_iteration_error_per_pixel(iteration_log: Path) -> dict[str, float]:
-    if not iteration_log.exists():
-        return {}
-    rows: dict[str, float] = {}
-    with iteration_log.open("r", encoding="utf-8", newline="") as handle:
-        reader = csv.DictReader(handle, delimiter=";")
-        for row in reader:
-            row_normalized = {str(k).lstrip("\ufeff"): v for k, v in row.items()}
-            variant = str(row_normalized.get("Dateiname", "")).strip().rsplit(".", 1)[0].upper()
-            if not variant:
-                continue
-            try:
-                err = float(str(row_normalized.get("FehlerProPixel", "")).strip().replace(",", "."))
-            except ValueError:
-                continue
-            prev = rows.get(variant)
-            if prev is None or err < prev:
-                rows[variant] = err
-    return rows
+def _group_variants_by_family(variants: list[str]) -> dict[str, list[str]]:
+    grouped: dict[str, list[str]] = {}
+    for variant in variants:
+        grouped.setdefault(variant.rsplit("_", 1)[0], []).append(variant)
+    return grouped
 
 
 def _baseline_ready() -> bool:
-    images_dir = BASE / "images"
     svgs_dir = BASE / "svgs"
     manifest = BASE / "variants.txt"
-    if not (images_dir.exists() and svgs_dir.exists() and manifest.exists()):
+    if not (svgs_dir.exists() and manifest.exists()):
         return False
     variants = _variants()
     if not variants:
         return False
-    return any((images_dir / f"{variant}.jpg").exists() and (svgs_dir / f"{variant}.svg").exists() for variant in variants)
+    return any(_source_image_path(variant).exists() and (svgs_dir / f"{variant}.svg").exists() for variant in variants)
 
 
 def _ensure_baseline(limit: int = 3) -> None:
@@ -116,8 +108,8 @@ def test_satisfactory_baseline_has_pairs() -> None:
     if not variants:
         pytest.skip("No baseline variants found. Run tools/manage_satisfactory_baseline.py first.")
 
-    for variant in variants[:20]:
-        assert (BASE / "images" / f"{variant}.jpg").exists()
+    for variant in variants:
+        assert _source_image_path(variant).exists()
         assert (BASE / "svgs" / f"{variant}.svg").exists()
 
 
@@ -132,7 +124,7 @@ def test_satisfactory_baseline_reconversion_smoke(tmp_path: Path) -> None:
     out = tmp_path / "out"
     exit_code = converter.main(
         [
-            str(BASE / "images"),
+            str(SOURCE_IMAGES),
             "--descriptions-path",
             "artifacts/images_to_convert/Finale_Wurzelformen_V3.xml",
             "--output-dir",
@@ -149,36 +141,35 @@ def test_satisfactory_baseline_reconversion_smoke(tmp_path: Path) -> None:
 
 
 @pytest.mark.blocking_conversion
-def test_satisfactory_successful_variants_reconversion_keeps_or_improves_quality(tmp_path: Path) -> None:
+def test_all_satisfactory_successful_variants_reconversion_keeps_or_improves_quality(tmp_path: Path) -> None:
     _ensure_baseline(limit=5)
     variants = _variants()
     if not variants:
         pytest.skip("No baseline variants found.")
 
-    baseline_error_pp = _load_baseline_error_per_pixel()
-    checked = 0
-    regressions: list[str] = []
-
-    # Reconversion quality should remain within a broad but still meaningful band.
-    # This suite runs across heterogeneous CI/dev environments where rasterization
-    # and optimization paths may diverge noticeably.
-    quality_epsilon = 0.02
-
-    for variant in variants[:5]:
-        if variant.upper() in KNOWN_QUALITY_DRIFT_VARIANTS:
+    baseline_mean_delta2: dict[str, float] = {}
+    missing_pairs: list[str] = []
+    for variant in variants:
+        image_path = _source_image_path(variant)
+        svg_path = BASE / "svgs" / f"{variant}.svg"
+        if not image_path.exists() or not svg_path.exists():
+            missing_pairs.append(variant)
             continue
-        baseline_value = baseline_error_pp.get(variant.upper())
-        if baseline_value is None:
-            continue
-        family = variant.rsplit("_", 1)[0]
-        out = tmp_path / f"run_{variant.lower()}"
+        baseline_mean_delta2[variant.upper()] = _rendered_mean_delta2(image_path, svg_path)
+
+    assert not missing_pairs, "Missing baseline image/SVG pairs: " + ", ".join(missing_pairs[:20])
+    if not baseline_mean_delta2:
+        pytest.skip("No satisfactory baseline quality metrics could be rendered.")
+
+    out = tmp_path / "all_successful_reconversion"
+    for family, family_variants in _group_variants_by_family(variants).items():
         exit_code = converter.main(
             [
-                str(BASE / "images"),
+                str(SOURCE_IMAGES),
                 "--descriptions-path",
                 "artifacts/images_to_convert/Finale_Wurzelformen_V3.xml",
                 "--output-dir",
-                str(out),
+                str(out / family.lower()),
                 "--start",
                 family,
                 "--end",
@@ -186,20 +177,28 @@ def test_satisfactory_successful_variants_reconversion_keeps_or_improves_quality
             ]
         )
         assert exit_code == 0
-        rows = _load_iteration_error_per_pixel(out / "reports" / "Iteration_Log.csv")
-        assert variant.upper() in rows, f"No reconversion metric found for {variant}."
-        allowed_max = max(baseline_value + quality_epsilon, baseline_value * 4.0)
-        if rows[variant.upper()] > allowed_max:
+        for variant in family_variants:
+            assert (out / family.lower() / "converted_svgs" / f"{variant}.svg").exists(), (
+                f"No reconverted SVG output produced for successful variant {variant}."
+            )
+
+    regressions: list[str] = []
+    checked = 0
+    quality_epsilon = 1e-6
+    for variant, previous_mean_delta2 in baseline_mean_delta2.items():
+        family = variant.rsplit("_", 1)[0]
+        new_svg = out / family.lower() / "converted_svgs" / f"{variant}.svg"
+        new_mean_delta2 = _rendered_mean_delta2(_source_image_path(variant), new_svg)
+        allowed_max = previous_mean_delta2 + max(quality_epsilon, abs(previous_mean_delta2) * quality_epsilon)
+        if not math.isfinite(new_mean_delta2) or new_mean_delta2 > allowed_max:
             regressions.append(
-                f"{variant}: old={baseline_value:.8f}, new={rows[variant.upper()]:.8f}, max={allowed_max:.8f}"
+                f"{variant}: previous_mean_delta2={previous_mean_delta2:.6f}, "
+                f"new_mean_delta2={new_mean_delta2:.6f}, allowed_max={allowed_max:.6f}"
             )
         checked += 1
 
-    if checked == 0:
-        pytest.skip(
-            "No overlap between satisfactory variants and baseline quality bestlist found "
-            "after excluding known AC0800 drift fixtures."
-        )
+    assert checked == len(variants)
     assert not regressions, (
-        "Open quality follow-up tasks for reconversion drift: " + "; ".join(regressions[:5])
+        "Successful-conversion quality regressed since the stored baseline conversion: "
+        + "; ".join(regressions[:20])
     )

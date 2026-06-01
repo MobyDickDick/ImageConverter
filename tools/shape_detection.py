@@ -83,40 +83,88 @@ def detect_vertical_lines(
         minLineLength=min_length_px,
         maxLineGap=max_gap_px,
     )
-    if segments is None:
-        return []
-
     detections: list[VerticalLineDetection] = []
-    for x1, y1, x2, y2 in segments[:, 0, :]:
-        dx, dy = x2 - x1, y2 - y1
-        length = float(np.hypot(dx, dy))
-        if length <= 0:
+    if segments is not None:
+        for x1, y1, x2, y2 in segments[:, 0, :]:
+            dx, dy = x2 - x1, y2 - y1
+            length = float(np.hypot(dx, dy))
+            if length <= 0:
+                continue
+            angle = abs(float(np.degrees(np.arctan2(dy, dx))))
+            deviation = min(abs(angle - 90.0), abs(angle - 270.0))
+            if deviation > angle_tolerance_deg:
+                continue
+            mask = np.zeros(gray.shape, dtype=np.uint8)
+            cv2.line(mask, (int(x1), int(y1)), (int(x2), int(y2)), 255, 5)
+            stroke_pixels = cv2.bitwise_and(edges, edges, mask=mask)
+            _, xs = np.where(stroke_pixels > 0)
+            width_px = (
+                float(max(1.0, np.percentile(xs, 95) - np.percentile(xs, 5)))
+                if xs.size > 0
+                else 1.0
+            )
+            confidence = max(0.0, 1.0 - deviation / max(angle_tolerance_deg, 1e-6))
+            detections.append(
+                VerticalLineDetection(
+                    (x1 + x2) / 2.0,
+                    float(min(y1, y2)),
+                    float(max(y1, y2)),
+                    length,
+                    width_px,
+                    angle,
+                    confidence,
+                )
+            )
+
+    height, width = gray.shape[:2]
+    adaptive_min_length = float(min(min_length_px, max(5, round(height * 0.32))))
+    threshold = cv2.threshold(gray, 215, 255, cv2.THRESH_BINARY_INV)[1]
+    kernel_height = max(3, min(height, int(round(height * 0.36))))
+    kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (1, kernel_height))
+    opened = cv2.morphologyEx(threshold, cv2.MORPH_OPEN, kernel)
+    contours, _ = cv2.findContours(opened, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    for contour in contours:
+        x, y, w, h = cv2.boundingRect(contour)
+        if h < adaptive_min_length or w <= 0:
             continue
-        angle = abs(float(np.degrees(np.arctan2(dy, dx))))
-        deviation = min(abs(angle - 90.0), abs(angle - 270.0))
-        if deviation > angle_tolerance_deg:
+        aspect = h / max(float(w), 1.0)
+        if aspect < 2.5:
             continue
-        mask = np.zeros(gray.shape, dtype=np.uint8)
-        cv2.line(mask, (int(x1), int(y1)), (int(x2), int(y2)), 255, 5)
-        stroke_pixels = cv2.bitwise_and(edges, edges, mask=mask)
-        ys, xs = np.where(stroke_pixels > 0)
-        width_px = (
-            float(max(1.0, np.percentile(xs, 95) - np.percentile(xs, 5)))
-            if xs.size > 0
-            else 1.0
+        x_center = float(x + w / 2.0)
+        y_top = float(y)
+        y_bottom = float(y + h)
+        duplicate = any(
+            abs(existing.x_center - x_center) <= max(1.0, w)
+            and abs(existing.y_top - y_top) <= 2.0
+            and abs(existing.y_bottom - y_bottom) <= 2.0
+            for existing in detections
         )
-        confidence = max(0.0, 1.0 - deviation / max(angle_tolerance_deg, 1e-6))
+        if duplicate:
+            continue
+        fill_ratio = float(
+            np.count_nonzero(opened[y : y + h, x : x + w]) / max(w * h, 1)
+        )
+        lower_half_bonus = 0.08 if y_top >= height * 0.45 else 0.0
+        confidence = min(
+            0.92,
+            0.48
+            + min(0.22, (aspect - 2.5) * 0.025)
+            + min(0.16, (h / max(height, 1)) * 0.2)
+            + min(0.08, fill_ratio * 0.08)
+            + lower_half_bonus,
+        )
         detections.append(
             VerticalLineDetection(
-                (x1 + x2) / 2.0,
-                float(min(y1, y2)),
-                float(max(y1, y2)),
-                length,
-                width_px,
-                angle,
-                confidence,
+                x_center=x_center,
+                y_top=y_top,
+                y_bottom=y_bottom,
+                length_px=float(h),
+                width_px=float(max(1, w)),
+                angle_deg=90.0,
+                confidence=confidence,
             )
         )
+
     return sorted(detections, key=lambda d: (d.confidence, d.length_px), reverse=True)
 
 

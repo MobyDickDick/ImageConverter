@@ -204,9 +204,7 @@ def makeAc08BadgeParamsImpl(
             return finalize_ac08_style_fn(name, defaults)
         return finalize_ac08_style_fn(name, fit_ac0814_params_from_image_fn(img, defaults))
 
-    if name == "AC0842":
-        # AC0842 follows the left-arm connector geometry (same arm placement as AC0812).
-        defaults = default_ac0812_params_fn(w, h)
+    def _apply_rf_label(defaults: dict) -> dict:
         defaults["draw_text"] = True
         defaults["text_mode"] = "rf"
         defaults["label"] = "rF"
@@ -214,6 +212,11 @@ def makeAc08BadgeParamsImpl(
         defaults["rf_font_scale"] = float(defaults.get("rf_font_scale", 0.58))
         defaults["rf_dy"] = float(defaults.get("rf_dy", -0.02 * float(defaults.get("r", 0.0))))
         defaults["rf_weight"] = int(defaults.get("rf_weight", 600))
+        return defaults
+
+    if name == "AC0842":
+        # AC0842 follows the left-arm connector geometry (same arm placement as AC0812).
+        defaults = _apply_rf_label(default_ac0812_params_fn(w, h))
         if img is None:
             return enforce_left_arm_badge_geometry_fn(finalize_ac08_style_fn(name, defaults), w, h)
         return enforce_left_arm_badge_geometry_fn(
@@ -221,5 +224,12 @@ def makeAc08BadgeParamsImpl(
             w,
             h,
         )
+
+    if name == "AC0850":
+        # AC0850 is the connector-free relative-humidity rF circle/text badge.
+        defaults = _apply_rf_label(default_ac0870_params_fn(w, h))
+        if img is None:
+            return finalize_ac08_style_fn(name, defaults)
+        return finalize_ac08_style_fn(name, fit_semantic_badge_from_image_fn(img, defaults))
 
     return None

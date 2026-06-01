@@ -48,6 +48,31 @@ def buildTransformedSvgFromTemplateImpl(
     )
 
 
+def _has_description_driven_geometry_ir(params: object) -> bool:
+    if not isinstance(params, dict):
+        return False
+    geometry_ir = params.get("geometry_ir")
+    if not isinstance(geometry_ir, list):
+        return False
+    description_kinds = {
+        "HorizontalGradient",
+        "RectBorder",
+        "DiagonalBand",
+        "PlusGlyph",
+        "MinusGlyph",
+        "HorizontalRule",
+        "HorizontalRuleSet",
+        "OrthogonalPolyline",
+        "HalfDoubleRectBorder",
+        "LabelBox",
+        "TextGlyph",
+    }
+    return any(
+        isinstance(element, dict) and str(element.get("kind", "")) in description_kinds
+        for element in geometry_ir
+    )
+
+
 def templateTransferScaleCandidatesImpl(base_scale: float) -> list[float]:
     if not math.isfinite(base_scale) or base_scale <= 0.0:
         base_scale = 1.0
@@ -258,6 +283,13 @@ def tryTemplateTransferImpl(
         # AC002x dual-arrow badges are fully semantics-driven. Generic template
         # transfer can replace them with unrelated AC donors (for example
         # AC0223 valve heads) when historical bestlist rows exist.
+        return None, None
+    if _has_description_driven_geometry_ir(target_params_raw):
+        # Description-driven non-composite outputs already encode the intended
+        # symbol algorithm (e.g. AC0100 gradient/diagonal/plus-minus). Generic
+        # donor transfer can improve the pixel score by rotating/scaling a prior
+        # variant while destroying that algorithmic structure, so keep the
+        # native renderer output.
         return None, None
 
     target_alias_refs: set[str] = set()

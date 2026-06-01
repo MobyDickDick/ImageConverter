@@ -22,6 +22,7 @@ def defaultAc0870ParamsImpl(
         "stroke_gray": int(b["stroke_gray"]),
         "text_gray": int(b["text_gray"]),
         "label": str(b["label"]),
+        "draw_text": True,
         "tx": 8.7 * scale,
         "ty": 6.5 * scale,
         "s": 0.0100 * scale,
