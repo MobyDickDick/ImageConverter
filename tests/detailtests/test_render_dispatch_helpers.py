@@ -77,3 +77,33 @@ def test_render_svg_to_numpy_reuses_cached_render_result() -> None:
     assert calls["count"] == 1
     assert first is not second
     assert first.payload == second.payload == 7
+
+
+def test_render_svg_to_numpy_uses_inprocess_for_implicit_pytest_simple_svg() -> None:
+    helpers._RENDER_CACHE.clear()
+    calls = {"subprocess": 0, "inprocess": 0}
+    marker = object()
+
+    def subprocess_render(*_a, **_k):
+        calls["subprocess"] += 1
+        return object()
+
+    def inprocess_render(*_a, **_k):
+        calls["inprocess"] += 1
+        return marker
+
+    result = helpers.renderSvgToNumpyImpl(
+        '<svg xmlns="http://www.w3.org/2000/svg"><line x1="0" y1="0" x2="1" y2="1"/></svg>',
+        8,
+        8,
+        svg_render_subprocess_enabled=True,
+        under_pytest_runtime=True,
+        svg_render_subprocess_explicit=False,
+        is_fitz_open_monkeypatched_fn=lambda: False,
+        render_svg_to_numpy_via_subprocess_fn=subprocess_render,
+        is_inprocess_renderer_monkeypatched_fn=lambda: False,
+        render_svg_to_numpy_inprocess_fn=inprocess_render,
+    )
+
+    assert result is marker
+    assert calls == {"subprocess": 0, "inprocess": 1}
