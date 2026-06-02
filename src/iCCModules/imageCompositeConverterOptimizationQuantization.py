@@ -148,7 +148,8 @@ def quantizeBadgeParamsImpl(
         snapped_canvas_fit_r = float(snap_half_fn(canvas_fit_r))
         radius_gap_to_canvas = canvas_fit_r - raw_circle_radius
         if (
-            snapped_canvas_fit_r > float(p["r"])
+            not bool(p.get("preserve_exact_circle_radius", False))
+            and snapped_canvas_fit_r > float(p["r"])
             and radius_gap_to_canvas >= 0.0
             and radius_gap_to_canvas <= 0.5
             and (canvas_fit_r - float(p["r"])) <= 0.5
