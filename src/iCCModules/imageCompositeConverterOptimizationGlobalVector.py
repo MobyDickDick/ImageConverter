@@ -38,9 +38,15 @@ def globalParameterVectorBoundsImpl(
     x_low, x_high, y_low, y_high, r_low, r_high = circle_bounds_fn(params, w, h)
     max_x = float(max(0, w - 1))
     max_y = float(max(0, h - 1))
-    text_scale = float(params.get("text_scale", 1.0))
-    text_scale_min = float(params.get("text_scale_min", max(0.2, text_scale * 0.5)))
-    text_scale_max = float(params.get("text_scale_max", max(text_scale_min, text_scale * 1.8)))
+    path_text_mode = str(params.get("text_mode", "")).lower() in {"path", "path_t"}
+    text_scale_default = float(params.get("s", 1.0)) if path_text_mode and "s" in params else 1.0
+    text_scale = float(params.get("text_scale", text_scale_default))
+    if path_text_mode:
+        text_scale_min = float(params.get("text_scale_min", max(0.0001, text_scale * 0.5)))
+        text_scale_max = float(params.get("text_scale_max", max(text_scale_min, text_scale * 1.8)))
+    else:
+        text_scale_min = float(params.get("text_scale_min", max(0.2, text_scale * 0.5)))
+        text_scale_max = float(params.get("text_scale_max", max(text_scale_min, text_scale * 1.8)))
     bounds = {
         "cx": (x_low, x_high, bool(params.get("lock_circle_cx", False)), "canvas"),
         "cy": (y_low, y_high, bool(params.get("lock_circle_cy", False)), "canvas"),

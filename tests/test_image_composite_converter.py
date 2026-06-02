@@ -784,6 +784,30 @@ def test_apply_redraw_variation_jitters_params_and_logs_seed(monkeypatch: pytest
     assert 0.0 <= float(varied["cy"]) <= 20.0
 
 
+
+def test_apply_redraw_variation_keeps_path_t_scale_in_glyph_domain(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Path-based T glyphs use tiny SVG scale factors, not generic font multipliers."""
+    monkeypatch.setattr(conv.time, "time_ns", lambda: 123_456_789)
+    conv.Action.STOCHASTIC_RUN_SEED = 11
+    conv.Action.STOCHASTIC_SEED_OFFSET = 2
+    params = {
+        "circle_enabled": True,
+        "cx": 10.0,
+        "cy": 10.0,
+        "r": 4.0,
+        "stroke_circle": 1.0,
+        "draw_text": True,
+        "text_mode": "path_t",
+        "text_scale": 0.006,
+        "tx": 4.0,
+        "ty": 5.0,
+        "s": 0.006,
+    }
+
+    varied, _logs = conv.Action.apply_redraw_variation(params, 20, 20)
+
+    assert 0.0036 <= float(varied["text_scale"]) <= 0.0108
+
 def test_apply_redraw_variation_uses_new_time_nonce_per_run(monkeypatch: pytest.MonkeyPatch) -> None:
     """Separate redraw passes should produce different logged parameter jitters."""
     timestamps = iter([100, 200])
@@ -3915,6 +3939,16 @@ def test_enforce_left_arm_badge_geometry_restores_missing_arm() -> None:
     assert float(fixed["arm_len_min"]) >= 22.0 * 0.75
 
 
+def test_finalize_ac0812_plain_left_arm_disables_expensive_global_search() -> None:
+    """AC0812 local circle/arm bracketing should skip the costly global sampler."""
+    params = Action._default_ac0812_params(35, 20)
+
+    finalized = Action._finalize_ac08_style("AC0812_M", params)
+
+    assert finalized.get("enable_global_search_mode") is False
+    assert finalized.get("global_search_disabled_reason") == "ac0812_plain_left_arm_local_fit"
+
+
 def test_tune_ac08_left_connector_family_keeps_template_right_extent() -> None:
     """Left-connector families should keep most of the template right edge circle extent."""
     defaults = Action._default_ac0812_params(25, 15)
@@ -6463,14 +6497,23 @@ def test_local_workflow_doc_tracks_current_commands() -> None:
     assert ".github/workflows/local-completion-checks.yml" in workflow_doc
     assert "python -m pip install pytest" in workflow_doc
     assert "python -m pip install pytest" in ci_workflow
-    assert ci_workflow.count("python -m pip install pytest") >= 2
+    assert ci_workflow.count("python -m pip install pytest") >= 3
     assert "./tools/run_local_completion_checks.sh" in ci_workflow
     assert "batch-artifact-drift-gate:" in ci_workflow
     assert "drift_status=pass" in ci_workflow
     assert "./tools/run_local_completion_checks.sh --require-drift-summary" in ci_workflow
+    assert "satisfactory-regression-battery:" in ci_workflow
+    assert "./tools/run_satisfactory_regression_battery.sh" in ci_workflow
+    assert "SATISFACTORY_REGRESSION_DEBUG_DIR" in ci_workflow
+    assert "actions/upload-artifact@v4" in ci_workflow
+    assert "satisfactory-regression-debug" in ci_workflow
     assert "pull_request:" in ci_workflow
     assert "workflow_dispatch:" in ci_workflow
     assert "--print-linux-vendor-command" in workflow_doc
+    assert "satisfactory-regression-battery" in workflow_doc
+    assert "./tools/run_satisfactory_regression_battery.sh" in workflow_doc
+    assert "SATISFACTORY_REGRESSION_DEBUG_DIR" in workflow_doc
+    assert "satisfactory-regression-debug" in workflow_doc
 
 
 def test_parse_args_help_mentions_canonical_image_converter_flags(capsys: pytest.CaptureFixture[str]) -> None:

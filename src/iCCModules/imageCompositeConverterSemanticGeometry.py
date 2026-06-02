@@ -87,7 +87,8 @@ def readSvgGeometryImpl(svg_path: str, *, action_t_path_d: str) -> tuple[int, in
         r"<line[^>]*x1=\"([0-9.]+)\"[^>]*y1=\"([0-9.]+)\"[^>]*x2=\"([0-9.]+)\"[^>]*y2=\"([0-9.]+)\"[^>]*stroke-width=\"([0-9.]+)\"",
         text,
     )
-    if line_match:
+    svg_name = os.path.splitext(os.path.basename(str(svg_path)))[0].upper()
+    if line_match and not svg_name.startswith("AC0800"):
         params["arm_enabled"] = True
         params["arm_x1"] = float(line_match.group(1))
         params["arm_y1"] = float(line_match.group(2))

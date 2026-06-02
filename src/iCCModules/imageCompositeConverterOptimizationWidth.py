@@ -107,6 +107,17 @@ def elementWidthKeyAndBoundsImpl(
             if "co2_font_scale_max" in params:
                 high = min(high, float(params["co2_font_scale_max"]))
             return "co2_font_scale", low, max(low, high)
+        if mode == "path_t":
+            cur = float(params.get("s", 0.01))
+            if bool(params.get("lock_text_scale", False)):
+                return "s", cur, cur
+            low = max(0.0001, cur * 0.60)
+            high = max(low, cur * 1.80)
+            if "path_t_scale_min" in params:
+                low = max(low, float(params["path_t_scale_min"]))
+            if "path_t_scale_max" in params:
+                high = min(high, float(params["path_t_scale_max"]))
+            return "s", low, max(low, high)
     return None
 
 

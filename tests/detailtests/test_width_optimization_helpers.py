@@ -49,3 +49,44 @@ def test_element_error_for_width_returns_inf_if_element_is_not_supported() -> No
     )
 
     assert err == float("inf")
+
+
+def test_element_width_key_and_bounds_exposes_path_t_scale() -> None:
+    params: dict[str, object] = {
+        "draw_text": True,
+        "text_mode": "path_t",
+        "s": 0.005,
+    }
+
+    result = width_helpers.elementWidthKeyAndBoundsImpl(
+        "text",
+        params,
+        15,
+        15,
+        ac08_stroke_width_px=1.0,
+        extract_badge_element_mask_fn=lambda *_args, **_kwargs: None,
+        mask_bbox_fn=lambda _mask: None,
+    )
+
+    assert result == ("s", 0.003, 0.009000000000000001)
+
+
+def test_element_width_key_and_bounds_respects_path_t_scale_locks() -> None:
+    params: dict[str, object] = {
+        "draw_text": True,
+        "text_mode": "path_t",
+        "s": 0.006,
+        "lock_text_scale": True,
+    }
+
+    result = width_helpers.elementWidthKeyAndBoundsImpl(
+        "text",
+        params,
+        15,
+        15,
+        ac08_stroke_width_px=1.0,
+        extract_badge_element_mask_fn=lambda *_args, **_kwargs: None,
+        mask_bbox_fn=lambda _mask: None,
+    )
+
+    assert result == ("s", 0.006, 0.006)

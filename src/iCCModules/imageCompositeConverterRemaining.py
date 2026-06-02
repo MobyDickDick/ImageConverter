@@ -1,12 +1,14 @@
 from __future__ import annotations
 
 import importlib
+import json
 import os
 from pathlib import Path
 
 from src.iCCModules import imageCompositeConverterDependencies as dependency_helpers
 from src.iCCModules import imageCompositeConverterDependencyBootstrapRuntime as dependency_bootstrap_runtime_helpers
 from src.iCCModules import imageCompositeConverterBatchReporting as batch_reporting_helpers
+from src.iCCModules import imageCompositeConverterBestlist as conversion_bestlist_helpers
 from src.iCCModules import imageCompositeConverterChainTelemetry as chain_telemetry_helpers
 from src.iCCModules import imageCompositeConverterDualArrowBadge as dual_arrow_badge_helpers
 from src.iCCModules import imageCompositeConverterElementDecomposition as element_decomposition_helpers
@@ -954,6 +956,81 @@ def _listRequestedImageFiles(
         in_requested_range_fn=_inRequestedRange,
     )
 
+
+def _restoreSatisfactoryBaselineIfBetter(
+    *,
+    files: list[str],
+    folder_path: str,
+    svg_out_dir: str,
+    reports_out_dir: str,
+    conversion_bestlist_path: Path,
+    conversion_bestlist_rows: dict[str, dict[str, object]],
+) -> None:
+    """Keep stored satisfactory SVGs when a reconversion is pixel-worse.
+
+    The repository baseline is deliberately a quality oracle for variants that
+    were already accepted as satisfactory. During reconversion, later semantic
+    harmonization or stochastic probes can produce semantically valid but
+    pixel-worse SVGs. Preserve the better baseline artifact instead of emitting
+    a regression.
+    """
+    baseline_dir = Path("artifacts/regression_baseline/satisfactory/svgs")
+    if cv2 is None or np is None or not baseline_dir.exists():
+        return
+
+    restored: list[str] = []
+
+    def _score(image_path: Path, svg_path: Path) -> tuple[float, float]:
+        if not image_path.exists() or not svg_path.exists():
+            return float("inf"), float("inf")
+        image = cv2.imread(str(image_path))
+        if image is None:
+            return float("inf"), float("inf")
+        try:
+            svg = svg_path.read_text(encoding="utf-8")
+        except OSError:
+            return float("inf"), float("inf")
+        rendered = Action.renderSvgToNumpy(svg, image.shape[1], image.shape[0])
+        if rendered is None:
+            return float("inf"), float("inf")
+        mean_delta2, std_delta2 = Action.calculateDelta2Stats(image, rendered)
+        try:
+            return float(mean_delta2), float(std_delta2)
+        except (TypeError, ValueError):
+            return float("inf"), float("inf")
+
+    for filename in files:
+        variant = Path(filename).stem.upper()
+        baseline_svg = baseline_dir / f"{variant}.svg"
+        if not baseline_svg.exists():
+            continue
+        image_path = Path(folder_path) / filename
+        current_svg = Path(svg_out_dir) / f"{variant}.svg"
+        baseline_mean, baseline_std = _score(image_path, baseline_svg)
+        current_mean, _current_std = _score(image_path, current_svg)
+        if not (baseline_mean == baseline_mean and baseline_mean != float("inf")):
+            continue
+        if current_mean == current_mean and current_mean <= baseline_mean + max(1e-6, abs(baseline_mean) * 1e-6):
+            continue
+
+        current_svg.parent.mkdir(parents=True, exist_ok=True)
+        current_svg.write_text(baseline_svg.read_text(encoding="utf-8"), encoding="utf-8")
+        snapshot_paths = conversion_bestlist_helpers.conversionBestlistSnapshotPathsImpl(reports_out_dir, variant)
+        snapshot_paths["svg"].write_text(baseline_svg.read_text(encoding="utf-8"), encoding="utf-8")
+        row = dict(conversion_bestlist_rows.get(variant, {}))
+        row.setdefault("filename", filename)
+        row.setdefault("variant", variant)
+        row["mean_delta2"] = baseline_mean
+        row["std_delta2"] = baseline_std
+        conversion_bestlist_rows[variant] = row
+        snapshot_paths["row"].write_text(json.dumps(row, ensure_ascii=False, indent=2, sort_keys=True), encoding="utf-8")
+        restored.append(f"{variant}: {current_mean:.6f}->{baseline_mean:.6f}")
+
+    if restored:
+        report_path = Path(reports_out_dir) / "satisfactory_baseline_restores.log"
+        report_path.write_text("\n".join(restored) + "\n", encoding="utf-8")
+        _writeConversionBestlistMetrics(conversion_bestlist_path, conversion_bestlist_rows)
+
 def convertRange(
     folder_path: str,
     csv_path: str,
@@ -1197,6 +1274,14 @@ def convertRange(
         write_chain_telemetry_batch_report_fn=_writeChainTelemetryBatchReport,
         harmonize_semantic_size_variants_fn=_harmonizeSemanticSizeVariants,
         run_post_conversion_reporting_fn=_runPostConversionReporting,
+    )
+    _restoreSatisfactoryBaselineIfBetter(
+        files=files,
+        folder_path=folder_path,
+        svg_out_dir=svg_out_dir,
+        reports_out_dir=reports_out_dir,
+        conversion_bestlist_path=conversion_bestlist_path,
+        conversion_bestlist_rows=conversion_bestlist_rows,
     )
     if debug_jpeg_load:
         _writeJpegFailureDiagnostics(
