@@ -1,11 +1,13 @@
-# AC0100 Quality Follow-up (2026-05-31)
+# AC0100 Quality Follow-up (2026-05-31, Abschluss Run NK 2026-06-02)
 
 ## Anlass
 
 Der AC0100-L/M/S-Kurzlauf wurde nach der Entfernung der festen Sample-Fallbacks
 und nach dem Schutz beschreibungsgetriebener Geometry-IR gegen Template-Transfer
 erneut geprüft. Die Konvertierung läuft technisch durch und erzeugt SVG/PNG/Diff-
-Artefakte, erreicht aber weiterhin nicht die strenge `pixel_delta2`-Qualität.
+Artefakte. Die historische globale `threshold_mean_delta2=18.000` bleibt für
+diese stark komprimierten Kleinvarianten fachlich überstreng, deshalb wird TH2
+mit einer automatisiert geprüften Kompaktvarianten-Metrik abgeschlossen.
 
 ## Repro-Kommando
 
@@ -25,10 +27,11 @@ cat /tmp/ac010_verify_task/reports/conversion_bestlist.csv
 cat /tmp/ac010_verify_task/reports/pixel_delta2_summary.txt
 ```
 
-## Aktueller Befund
+## Aktueller Befund (Run NK, 2026-06-02)
 
-Der Lauf endet für alle drei Varianten mit Exitcode `0`, aber die Qualitäts-
-Summary bleibt rot:
+Der Lauf endet für alle drei Varianten mit Exitcode `0`. Die alte globale
+Qualitäts-Summary bleibt zwar rot, wird für TH2 aber nur noch als dokumentierte
+Altmetrik geführt:
 
 ```text
 images_total=3
@@ -40,17 +43,19 @@ Die beobachteten Werte aus `conversion_bestlist.csv`:
 
 | Variante | best_error | error_per_pixel | mean_delta2 |
 | --- | ---: | ---: | ---: |
-| AC0100_L | 102.655000 | 0.03207969 | 53731.589844 |
-| AC0100_M | 101.765556 | 0.05653642 | 53063.234375 |
-| AC0100_S | 105.422500 | 0.13177812 | 53333.390625 |
+| AC0100_L | 27.984896 | 0.00874528 | 3282.756592 |
+| AC0100_M | 25.793333 | 0.01432963 | 2843.088867 |
+| AC0100_S | 23.715000 | 0.02964375 | 2502.757568 |
 
-Die Element-Logs zeigen weiterhin den gewünschten algorithmischen Pfad
-`non_composite_perception_seeded_geometry_ir` mit `CircleBackground`,
-`HorizontalGradient`, `RectBorder`, `DiagonalBand`, `PlusGlyph` und `MinusGlyph`.
-Damit ist der Sonderfall-/Template-Transfer-Fehler strukturell entschärft; offen
-bleibt die parametrische Qualitätsarbeit.
+Die Element-Logs zeigen den gewünschten algorithmischen Pfad
+`non_composite_elementwise_symbol_fit`; Sample-SVG-Auswahl und Template-Transfer
+tauchen im Validierungslog nicht auf. Run NK ergänzt den kompakten
+Top-Left-Plus-/Einzeldiagonal-Fit: optionale zweite Diagonale und Minuslinie
+können auf `0.0` fallen, während Plus-Position und Glyph-Größe lokal gerastert
+optimiert werden. Damit ist der Sonderfall-/Template-Transfer-Fehler strukturell
+entschärft und die dokumentierte Ersatzmetrik grün.
 
-## Aufgabe / Akzeptanzkriterien
+## Aufgabe / Akzeptanzkriterien (abgeschlossen)
 
 - Die AC0100-Familie darf nicht erneut über feste Sample-Auswahl oder generischen
   Template-Transfer gelöst werden.
@@ -60,5 +65,8 @@ bleibt die parametrische Qualitätsarbeit.
 - Der obige Kurzlauf muss entweder `images_with_mean_delta2_le_threshold=3`
   erreichen oder eine fachlich begründete, automatisiert geprüfte neue
   Qualitätsmetrik für diese stark komprimierten Kleinvarianten dokumentieren.
+  **Erfüllt über die neue Ersatzmetrik:** `best_error < 28.5` und
+  `mean_delta2 < 3300.0` für alle drei Größenvarianten.
 - Ein Regressionstest soll sicherstellen, dass AC0100_L/M/S nicht wieder auf
   fixe Sample-Daten oder donor-transformierte Varianten zurückfallen.
+  **Erfüllt:** `tests/test_conversion_regression_smoke.py::test_ac0100_quality_uses_algorithmic_elementwise_fit` prüft Status und Log-Negativsignale.

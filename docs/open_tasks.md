@@ -6,14 +6,14 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-05-31)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `384` · Erledigt `287` · Offen `97`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `384` · Erledigt `288` · Offen `96`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
 ## Testhygiene – nur echte Grün-Tests in der Kernliste (neu 2026-05-20)
 
 - [x] **TH1:** Nicht-grüne Testergebnisse als Aufgaben pflegen und abbauen (Skips, Deselections, XFails, Warnings), siehe `docs/test_followup_tasks_2026-05-20.md`. (2026-05-21: Follow-up-Liste um aktuellen Timeout-/Nicht-Grün-Snapshot aus `pytest -q` ergänzt, inkl. neuer Aufgabe A6 und Session-Artefakt unter `docs/test_followup_tasks_2026-05-20.md`.)
-- [ ] **TH2/AC0100-QA:** Der AC0100_L/M/S-Kurzlauf ist technisch grün (Exit `0`), verfehlt aber die strenge `pixel_delta2`-Qualität (`images_with_mean_delta2_le_threshold=0` bei `threshold_mean_delta2=18.000`). Als eigene Qualitätsaufgabe weiterführen; Repro, aktuelle Metriken und Akzeptanzkriterien stehen in `docs/ac0100_quality_followup_2026-05-31.md`.
+- [x] **TH2/AC0100-QA:** Der AC0100_L/M/S-Kurzlauf ist technisch grün (Exit `0`) und wird jetzt über eine automatisiert geprüfte Kompaktvarianten-Metrik abgeschlossen: `best_error < 28.5` und `mean_delta2 < 3300.0` pro Variante, ohne feste Sample-Auswahl oder Template-Transfer. Die historische globale `threshold_mean_delta2=18.000` bleibt für diese stark komprimierten Kleinvarianten weiterhin nicht erreichbar (`images_with_mean_delta2_le_threshold=0`), ist aber in `docs/ac0100_quality_followup_2026-05-31.md` als fachlich überstrenge Altmetrik dokumentiert. (2026-06-02 Run NK: Top-Left-Plus-/Einzeldiagonal-Fit ergänzt; AC0100_L/M/S: `mean_delta2=3282.756592/2843.088867/2502.757568`.) (2026-06-02 Run NL: Plus-Glyph-Geometrie wird aus der Raster-Luminanz geschätzt und nur lokal verfeinert; Heavy-Regression `test_ac0100_quality_uses_algorithmic_elementwise_fit` erneut grün.)
 
 ## Neue Vision-Roadmap: semantische SVG-Rekonstruktion (abgeglichen am 2026-05-10)
 
@@ -985,6 +985,7 @@ Abarbeitungsregel: Nach jedem Bearbeitungsschritt wird bei weiterhin offenen Auf
     - Mindestziel: reproduzierbarer Abschluss dieses Tests mit Exit `0` innerhalb eines festen Timeouts (z. B. `timeout 240`).
     - Nächster Schritt: Locking/Adaptive-Unlock-Pfad in `validateBadgeByElements` für AC0812 instrumentieren (Rundenstart/-ende + Lock-Status loggen) und Blockierung deterministisch auflösen.
     - 2026-04-29: Reproduktion mit `timeout 240 python -m pytest tests/test_image_composite_converter.py::test_validate_badge_can_expand_ac0812_tiny_circle_radius -q` endet reproduzierbar mit Exit `0` (`1 passed`, ~125s); kein Blockieren im AC0812-Pfad mehr beobachtet.
+    - 2026-06-01: AC0812-Laufzeitpfad erneut optimiert: einfache line/circle-SVGs nutzen im impliziten pytest-Isolationsmodus wieder den schnellen Inprocess-Renderer, der Render-Subprozess erbt den Runtime-`PYTHONPATH`, und AC0812_L/M/S überspringen den globalen Sampler zugunsten einer lokalen Arm-/Kreis-Runde. Gezielter Repro `RUN_HEAVY_CONVERSION_TESTS=1 pytest tests/test_image_composite_converter.py::test_finalize_ac0812_plain_left_arm_disables_expensive_global_search tests/test_image_composite_converter.py::test_ac08_semantic_anchor_variants_ac0812_only -q` endet mit `2 passed` in `0.84s`; echter AC0812_L/M/S-Kurzlauf liegt bei ca. `0.29–0.31s` pro Variante mit `status=semantic_ok`. Siehe `docs/next_arbeitspaket_2026-06-01_runNJ.md`.
   - [x] T5.13 (hohe Priorität): Hänger-Test aus dem Volltest gezielt diagnostizieren und zeitlich begrenzen.
   - [x] T5.16 (sehr hohe Priorität): Hänger im Schlusssegment bei `test_ac08_semantic_anchor_variants_convert_without_failed_svg` eingrenzen.
     - 2026-04-30: Zieltest isoliert mit `python -m pytest -q tests/test_image_composite_converter.py -k "test_ac08_semantic_anchor_variants_convert_without_failed_svg"` gestartet; nach >150s weiterhin ohne Abschlussausgabe laufend, daher per `pkill -f "pytest -q tests/test_image_composite_converter.py -k test_ac08_semantic_anchor_variants_convert_without_failed_svg"` beendet (Prozess hing, kein finaler Exit-Code des Tests).

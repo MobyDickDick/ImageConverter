@@ -24,7 +24,7 @@ def generateBadgeSvgImpl(
 ) -> str:
     """Build a semantic badge SVG from quantized parameters."""
     p = align_stem_to_circle_center_fn(dict(params))
-    variant_ref = str(p.get("variant_name", p.get("base_name", ""))).upper()
+    variant_ref = str(p.get("variant_name") or p.get("badge_symbol_name") or p.get("base_name", "")).upper()
     if variant_ref.startswith("AC0223"):
         # AC0223 must always retain its valve-head geometry. Some late-stage
         # optimization/fallback paths can strip the dedicated styling keys;
@@ -79,6 +79,27 @@ def generateBadgeSvgImpl(
     background_fill = p.get("background_fill")
     if background_fill:
         elements.append(f'  <rect x="0" y="0" width="{float(w):.4f}" height="{float(h):.4f}" fill="{background_fill}"/>')
+
+    plain_ac0800_ring = (
+        (variant_ref.startswith("AC0800") or str(p.get("badge_symbol_name", "")).upper() == "AC0800")
+        and not bool(p.get("arm_enabled") or p.get("stem_enabled") or p.get("draw_text", False))
+    )
+    if plain_ac0800_ring:
+        if h <= 15:
+            marker_y1 = float(h) / 2.0
+            marker_y2 = 1.0
+        else:
+            marker_y1 = max(0.0, float(h) - (1.5 if h >= 30 else 1.0))
+            marker_y2 = max(0.0, float(h) - 1.0)
+        marker_x = float(w) / 2.0
+        elements.append(
+            (
+                f'  <line x1="{marker_x:.4f}" y1="{marker_y1:.4f}" '
+                f'x2="{marker_x:.4f}" y2="{marker_y2:.4f}" '
+                f'stroke="{grayhex_fn(p.get("stroke_gray", 127))}" '
+                f'stroke-width="1.0000" stroke-linecap="round"/>'
+            )
+        )
 
     if p.get("arm_enabled"):
         arm_x1 = float(clip_scalar_fn(float(p.get("arm_x1", 0.0)), 0.0, float(w)))

@@ -1,12 +1,12 @@
 {
   "base": "AC0910",
-  "best_error": 45.07111111111111,
+  "best_error": 34.89333333333333,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.20031604938271605,
+  "error_per_pixel": 0.15508148148148146,
   "filename": "AC0910_S.jpg",
   "h": 15,
-  "mean_delta2": 11880.3330078125,
+  "mean_delta2": 5372.5732421875,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -42,7 +42,7 @@
     "top_source_ref": null,
     "variant_name": "AC0910_S"
   },
-  "std_delta2": 17805.15625,
+  "std_delta2": 7490.52978515625,
   "variant": "AC0910_S",
   "w": 15
 }

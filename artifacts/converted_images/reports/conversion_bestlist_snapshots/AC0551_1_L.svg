@@ -1,12 +1,16 @@
 <svg width="40" height="80" viewBox="0 0 40 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-  <g transform="translate(20.000 40.000) rotate(0) scale(1.9000) translate(-20.000 -40.000)">
-<g transform="translate(20.000 40.000) rotate(270) scale(1.9000) translate(-20.000 -40.000)">
-<g transform="translate(30.000 30.000) rotate(90) scale(1.9000) translate(-30.000 -30.000)">
-<line x1="5.5000" y1="0.0000" x2="5.5000" y2="128.0000" stroke="#2f6bff" stroke-width="2.0000" stroke-linecap="butt"/>
-  <polygon points="5.5000,129.0000 0.5000,137.0000 10.5000,137.0000" fill="#2f6bff"/>
-  <line x1="33.5000" y1="0.0000" x2="33.5000" y2="128.0000" stroke="#e53935" stroke-width="2.0000" stroke-linecap="butt"/>
-  <polygon points="33.5000,137.0000 28.5000,129.0000 38.5000,129.0000" fill="#e53935"/>
-  </g>
-  </g>
-  </g>
+  <defs>
+    <linearGradient id="geometry-ir-horizontal-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8f8f8f"/>
+      <stop offset="50%" stop-color="#dedede"/>
+      <stop offset="100%" stop-color="#8f8f8f"/>
+    </linearGradient>
+  </defs>
+  <ellipse id="perception_circle_background" cx="18" cy="34" rx="18" ry="18" fill="#EE3943" stroke="#E95764" stroke-width="1.44"/>
+  <rect id="background_gradient" x="12.8" y="9.6" width="14.4" height="60.8" fill="url(#geometry-ir-horizontal-gradient)" stroke="none"/>
+  <rect id="main_rect" x="12.8" y="9.6" width="14.4" height="60.8" fill="none" stroke="#666666" stroke-width="1.4"/>
+  <path id="horizontal_rule_set_1" d="M 14.24 27.84 L 25.76 27.84" stroke="#707070" stroke-width="1.04" fill="none" stroke-linecap="butt"/>
+  <path id="horizontal_rule_set_2" d="M 14.24 40 L 25.76 40" stroke="#707070" stroke-width="1.04" fill="none" stroke-linecap="butt"/>
+  <path id="horizontal_rule_set_3" d="M 14.24 52.16 L 25.76 52.16" stroke="#707070" stroke-width="1.04" fill="none" stroke-linecap="butt"/>
+  <path id="right_side_orthogonal_line" d="M 20 10.816 L 27.488 40 L 20 69.184" stroke="#707070" stroke-width="1.36" fill="none" stroke-linejoin="round" stroke-linecap="butt"/>
 </svg>

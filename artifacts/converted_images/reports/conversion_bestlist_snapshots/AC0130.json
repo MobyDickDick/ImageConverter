@@ -1,0 +1,134 @@
+{
+  "base": "AC0130",
+  "best_error": 90.20791666666666,
+  "best_iter": 1,
+  "convergence": "plateau",
+  "error_per_pixel": 0.028189973958333333,
+  "filename": "AC0130.jpg",
+  "h": 80,
+  "mean_delta2": 45778.234375,
+  "params": {
+    "bottom_shape": "square_cross",
+    "chain_phase_telemetry": {
+      "geometry_phase": "geometry_chain.elementwise",
+      "geometry_phase_mode": "elementwise_geometry_ir",
+      "override_applied": false,
+      "override_reason": null,
+      "placeholder_emergency_used": false,
+      "policy_phase": "policy.geometry_selected",
+      "policy_phase_decision": "geometry_wins",
+      "step_accepted_count": 0,
+      "step_count": 0,
+      "step_success_rate": 0.0
+    },
+    "chain_phase_telemetry_line": "chain_telemetry: geometry_phase=geometry_chain.elementwise; policy_phase=policy.geometry_selected; step_success_rate=0.0; overrides=False; placeholder_emergency=False",
+    "contract_status": "ok",
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "AC0130",
+        "source": "base_name",
+        "text": "Wie AC0030: Kühlelement, graues Rechteck, Minus-Minus-Zeichen oben Mitte, Farbverlauf horizontal dunkel-hell-dunkel, graue Linien in beiden Diagonalen. Das Andreaskreuz besteht aus zwei Geraden, welche jedoch in Pfade konvertiert werden. Die Enden der Geraden werden derart abgeschnitten, dass sie nicht über das Rechteck hinaus reichen. Geometrische Variante: identisch zur Referenz."
+      }
+    ],
+    "documented_alias_refs": [
+      "AC0030"
+    ],
+    "elements": [
+      "GEOMETRIE: AC0030-artige Beschreibung wird über Geometry-IR rekonstruiert",
+      "UNTEN: Parametrisch generiertes Viereck mit Andreaskreuz"
+    ],
+    "geometry_ir": [
+      {
+        "bbox": [
+          0.18,
+          0.24,
+          0.64,
+          0.56
+        ],
+        "constraint": "inside_rect_border",
+        "id": "background_gradient",
+        "kind": "HorizontalGradient",
+        "stops": [
+          "#8f8f8f",
+          "#dedede",
+          "#8f8f8f"
+        ]
+      },
+      {
+        "bbox": [
+          0.18,
+          0.24,
+          0.64,
+          0.56
+        ],
+        "fill": "none",
+        "id": "main_rect",
+        "kind": "RectBorder",
+        "stroke": "#666666",
+        "stroke_width": 0.035
+      },
+      {
+        "clip_to": "main_rect",
+        "direction": "tl_br",
+        "id": "diagonal_1_tl_br",
+        "kind": "DiagonalBand",
+        "rect_ref": "main_rect",
+        "stroke": "#707070",
+        "stroke_width": 0.045
+      },
+      {
+        "clip_to": "main_rect",
+        "direction": "tr_bl",
+        "id": "diagonal_2_tr_bl",
+        "kind": "DiagonalBand",
+        "rect_ref": "main_rect",
+        "stroke": "#707070",
+        "stroke_width": 0.045
+      },
+      {
+        "id": "minus_glyph",
+        "kind": "MinusGlyph",
+        "position": "top_center",
+        "stroke": "#4f4f4f",
+        "stroke_width": 0.025
+      },
+      {
+        "dy": 0.08,
+        "id": "minus_glyph_2",
+        "kind": "MinusGlyph",
+        "position": "top_center",
+        "stroke": "#4f4f4f",
+        "stroke_width": 0.025
+      }
+    ],
+    "geometry_phase_mode": "elementwise_geometry_ir",
+    "geometry_phase_result": {
+      "element_count": 6,
+      "has_geometry_ir": true,
+      "mode": "elementwise_geometry_ir"
+    },
+    "label": "M",
+    "mode": "composite",
+    "override_reason": null,
+    "policy_phase_decision": "geometry_wins",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "AC0130"
+  },
+  "std_delta2": 62523.83984375,
+  "variant": "AC0130",
+  "w": 40
+}

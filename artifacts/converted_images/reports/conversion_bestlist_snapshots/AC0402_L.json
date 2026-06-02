@@ -1,0 +1,88 @@
+{
+  "base": "AC0402",
+  "best_error": 6.800625,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.004250390625,
+  "filename": "AC0402_L.jpg",
+  "h": 40,
+  "mean_delta2": 1013.9306030273438,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "AC0402",
+        "source": "base_name",
+        "text": "Wie AC0211: Kopressor grau nach oben. Geometrische Variante: identisch zur Referenz."
+      }
+    ],
+    "documented_alias_refs": [
+      "AC0211"
+    ],
+    "elements": [],
+    "geometry_ir": [
+      {
+        "bbox": [
+          0.06,
+          0.06,
+          0.88,
+          0.88
+        ],
+        "fill": "#45aa5e",
+        "id": "compressor_circle",
+        "kind": "CircleBackground",
+        "stroke": "#8d8d8d",
+        "stroke_width": 0.02
+      },
+      {
+        "circle_ref": "compressor_circle",
+        "id": "upward_compressor",
+        "kind": "UpwardCompressorGlyph",
+        "left_line": [
+          [
+            0.28,
+            0.78
+          ],
+          [
+            0.42,
+            0.16
+          ]
+        ],
+        "right_line": [
+          [
+            0.72,
+            0.78
+          ],
+          [
+            0.58,
+            0.16
+          ]
+        ],
+        "stroke": "#d7d7d7",
+        "stroke_width": 0.04
+      }
+    ],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "AC0402_L"
+  },
+  "std_delta2": 4667.33447265625,
+  "variant": "AC0402_L",
+  "w": 40
+}

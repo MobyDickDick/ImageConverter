@@ -108,6 +108,31 @@ def _rendered_mean_delta2(image_path: Path, svg_path: Path) -> float:
     return float(converter.np.mean(delta2))
 
 
+def _reconverted_svg_path(family_out: Path, variant: str) -> Path | None:
+    """Return the best available SVG emitted by a family reconversion run."""
+
+    candidates = (
+        family_out / "converted_svgs" / f"{variant}.svg",
+        family_out / "reports" / "conversion_bestlist_snapshots" / f"{variant}.svg",
+    )
+    for candidate in candidates:
+        if candidate.exists():
+            return candidate
+    return None
+
+
+def _available_reconverted_svgs(family_out: Path) -> list[str]:
+    return sorted(
+        str(path.relative_to(family_out))
+        for root in (
+            family_out / "converted_svgs",
+            family_out / "reports" / "conversion_bestlist_snapshots",
+        )
+        if root.exists()
+        for path in root.glob("*.svg")
+    )
+
+
 def _group_variants_by_family(variants: list[str]) -> dict[str, list[str]]:
     grouped: dict[str, list[str]] = {}
     for variant in variants:
@@ -227,6 +252,7 @@ def test_all_satisfactory_successful_variants_reconversion_keeps_or_improves_qua
                 family,
                 "--end",
                 family,
+                "--deterministic-order",
             ]
         )
         _debug_log(
@@ -237,11 +263,14 @@ def test_all_satisfactory_successful_variants_reconversion_keeps_or_improves_qua
             duration_seconds=f"{time.perf_counter() - family_start:.3f}",
         )
         assert exit_code == 0
+        family_out = out / family.lower()
+        available_svgs = _available_reconverted_svgs(family_out)
         for variant in family_variants:
             _debug_log(debug_log, "output_check", family=family, variant=variant)
             assert (out / family.lower() / "converted_svgs" / f"{variant}.svg").exists(), (
                 f"No reconverted SVG output produced for successful variant {variant}."
             )
+            reconverted_svg_paths[variant.upper()] = new_svg
 
     regressions: list[str] = []
     checked = 0

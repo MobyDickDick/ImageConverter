@@ -28,6 +28,14 @@ def finalizeAc08StyleImpl(
     p = capture_canonical_badge_colors_fn(normalize_light_circle_colors_fn(dict(params)))
     p["badge_symbol_name"] = symbol_name
     p.setdefault("enable_global_search_mode", True)
+    if symbol_name == "AC0812" and bool(p.get("arm_enabled", False)) and not bool(p.get("draw_text", False)):
+        # AC0812_L/M/S are simple left-arm + circle badges. The local
+        # element bracketing already covers their full geometry; the expensive
+        # global vector sampler repeatedly re-renders near-identical candidates
+        # and dominates isolated-render test/runtime without improving the
+        # semantic fit. Keep the family on the deterministic local path.
+        p["enable_global_search_mode"] = False
+        p["global_search_disabled_reason"] = "ac0812_plain_left_arm_local_fit"
     p = normalize_ac08_line_widths_fn(p)
     p["lock_colors"] = True
     p = normalize_centered_co2_label_fn(p)
@@ -322,28 +330,36 @@ def finalizeAc08StyleImpl(
             p["cx"] = float(p["template_circle_cx"])
         if "template_circle_cy" in p:
             p["cy"] = float(p["template_circle_cy"])
-        template_r = float(p.get("template_circle_radius", p.get("r", 1.0)))
-        min_radius_ratio = 0.96
-        if bool(p.get("ac08_small_variant_mode", False)):
-            min_radius_ratio = 1.0
-        p["min_circle_radius"] = float(max(1.0, template_r * min_radius_ratio))
-        cx = float(p.get("cx", p.get("template_circle_cx", template_r)))
-        cy = float(p.get("cy", p.get("template_circle_cy", template_r)))
+        cx = float(p.get("cx", p.get("template_circle_cx", 1.0)))
+        cy = float(p.get("cy", p.get("template_circle_cy", 1.0)))
         canvas_w = float(p.get("width", p.get("badge_width", 0.0)) or 0.0)
         canvas_h = float(p.get("height", p.get("badge_height", 0.0)) or 0.0)
         if canvas_w <= 0.0:
-            canvas_w = max(float(cx * 2.0), template_r * 2.0)
+            canvas_w = max(float(cx * 2.0), float(p.get("template_circle_radius", p.get("r", 1.0))) * 2.0)
         if canvas_h <= 0.0:
-            canvas_h = max(float(cy * 2.0), template_r * 2.0)
-        canvas_fit_r = max(1.0, min(cx, canvas_w - cx, cy, canvas_h - cy) - 0.5)
-        if bool(p.get("ac08_small_variant_mode", False)):
-            p["max_circle_radius"] = float(max(template_r, template_r * 1.15, canvas_fit_r))
-        else:
-            p["max_circle_radius"] = float(max(template_r, template_r * 1.15))
-        min_r = float(max(1.0, p.get("min_circle_radius", 1.0)))
-        max_r = float(max(min_r, p.get("max_circle_radius", min_r)))
-        p["max_circle_radius"] = max_r
-        p["r"] = float(clip_scalar_fn(float(p.get("r", template_r)), min_r, max_r))
+            canvas_h = max(float(cy * 2.0), float(p.get("template_circle_radius", p.get("r", 1.0))) * 2.0)
+
+        # AC0800 is the plain ring family. Older satisfactory baselines use a
+        # ring that nearly touches the canvas edge and no explicit background
+        # rectangle. Keeping the image-fitted, smaller Hough radius (or a white
+        # background rect) later gets parsed as connector geometry during
+        # harmonization and visibly degrades the reconversion. Re-anchor this
+        # family to the legacy edge-ring geometry before optimization output is
+        # rendered.
+        legacy_stroke_margin = max(1.0, min(canvas_w, canvas_h) * 0.05)
+        legacy_ring_r = max(1.0, min(cx, canvas_w - cx, cy, canvas_h - cy) - legacy_stroke_margin)
+        p["min_circle_radius"] = float(legacy_ring_r)
+        p["max_circle_radius"] = float(legacy_ring_r)
+        p["r"] = float(legacy_ring_r)
+        p["stroke_circle"] = 1.0
+        p["fill_gray"] = 242
+        p["stroke_gray"] = 127
+        p["draw_text"] = False
+        p["preserve_exact_circle_radius"] = True
+        p["plain_ac0800_ring"] = True
+        p.pop("background_fill", None)
+        p.pop("stem_enabled", None)
+        p.pop("arm_enabled", None)
     if p.get("draw_text", True) and "text_gray" in p:
         p["text_gray"] = int(p.get("stroke_gray", light_circle_stroke_gray))
     return p

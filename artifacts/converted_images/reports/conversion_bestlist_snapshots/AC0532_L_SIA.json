@@ -1,0 +1,70 @@
+{
+  "base": "AC0532",
+  "best_error": 24.1496875,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.00754677734375,
+  "filename": "AC0532_L_sia.jpg",
+  "h": 40,
+  "mean_delta2": 5598.548828125,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "AC0532",
+        "source": "base_name",
+        "text": "Wie AC0501: Klappensymbol: Rechteck hochkant, graue Umrandung. Graue Diagonale von unten links nach oben Rechts, in der Mitte ein dunkelgrauer Punkt. Farbverlauf Hintergrund: Dunkelgrau, hellgrau, dunkelgrau. Geometrische Variante: 90° nach rechts gedreht."
+      }
+    ],
+    "documented_alias_refs": [
+      "AC0501"
+    ],
+    "elements": [],
+    "geometry_ir": [
+      {
+        "bbox": [
+          0.32,
+          0.12,
+          0.36,
+          0.76
+        ],
+        "fill": "#d8d8d8",
+        "id": "main_rect",
+        "kind": "RectBorder",
+        "stroke": "#666666",
+        "stroke_width": 0.035
+      },
+      {
+        "clip_to": "main_rect",
+        "direction": "tr_bl",
+        "id": "diagonal_1_tr_bl",
+        "kind": "DiagonalBand",
+        "rect_ref": "main_rect",
+        "stroke": "#707070",
+        "stroke_width": 0.045
+      }
+    ],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "AC0532_L_SIA"
+  },
+  "std_delta2": 13476.1015625,
+  "variant": "AC0532_L_SIA",
+  "w": 80
+}
