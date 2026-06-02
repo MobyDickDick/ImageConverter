@@ -4,6 +4,30 @@ import numpy as np
 
 from src.iCCModules import imageCompositeConverterNonCompositeRuntime as non_composite_runtime_helpers
 
+
+def test_structured_symbol_svg_can_fit_single_diagonal_top_left_plus() -> None:
+    svg = non_composite_runtime_helpers._build_structured_symbol_svg(
+        40,
+        80,
+        border_thickness=1.0,
+        gradient_center=50.0,
+        gradient_edge="#8f8f8f",
+        gradient_mid="#dedede",
+        diag1_width=1.4,
+        diag2_width=0.0,
+        plus_width=1.2,
+        minus_width=0.0,
+        plus_x_ratio=0.16,
+        glyph_y_ratio=0.12,
+        plus_half_ratio=0.08,
+        minus_gap_ratio=1.8,
+    )
+
+    assert 'x1="39" y1="0.5" x2="0.5" y2="79"' in svg
+    assert 'x1="0.5" y1="0.5" x2="39" y2="79"' not in svg
+    assert 'x1="3.20" y1="9.60" x2="9.60" y2="9.60"' in svg
+    assert svg.count('stroke="#f1f1f1"') == 2
+
 def test_run_non_composite_iteration_impl_manual_review_plan_b_uses_sample_svg(tmp_path) -> None:
     logs: list[list[str]] = []
     prints: list[str] = []

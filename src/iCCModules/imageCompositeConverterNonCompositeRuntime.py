@@ -142,15 +142,20 @@ def _build_structured_symbol_svg(
     diag2_width: float,
     plus_width: float,
     minus_width: float,
+    plus_x_ratio: float,
+    glyph_y_ratio: float,
+    plus_half_ratio: float,
+    minus_gap_ratio: float,
 ) -> str:
     safe_w = max(1, int(width or 1))
     safe_h = max(1, int(height or 1))
     inset = 0.5
-    plus_cx = safe_w * 0.5
-    plus_cy = safe_h * 0.36
-    plus_half = max(2.0, min(safe_w, safe_h) * 0.08)
-    minus_y = safe_h * 0.36
+    plus_cx = safe_w * float(plus_x_ratio)
+    plus_cy = safe_h * float(glyph_y_ratio)
+    plus_half = max(2.0, min(safe_w, safe_h) * float(plus_half_ratio))
+    minus_y = plus_cy
     minus_half = max(2.0, min(safe_w, safe_h) * 0.07)
+    minus_start_x = plus_cx + plus_half * float(minus_gap_ratio)
     gradient_rects = _gradient_band_svg_rects(
         x=inset,
         y=inset,
@@ -168,12 +173,12 @@ def _build_structured_symbol_svg(
         '  </defs>\n'
         f'{gradient_rects}'
         f'  <rect x="{inset}" y="{inset}" width="{safe_w-1}" height="{safe_h-1}" fill="none" stroke="#9a9a9a" stroke-width="{border_thickness:.2f}"/>\n'
-        f'  <line x1="{safe_w-1}" y1="{inset}" x2="{inset}" y2="{safe_h-1}" stroke="#8f8f8f" stroke-width="{diag1_width:.2f}" clip-path="url(#innerRect)"/>\n'
-        f'  <line x1="{inset}" y1="{inset}" x2="{safe_w-1}" y2="{safe_h-1}" stroke="#8f8f8f" stroke-width="{diag2_width:.2f}" clip-path="url(#innerRect)"/>\n'
-        f'  <line x1="{plus_cx-plus_half:.2f}" y1="{plus_cy:.2f}" x2="{plus_cx+plus_half:.2f}" y2="{plus_cy:.2f}" stroke="#f1f1f1" stroke-width="{plus_width:.2f}" stroke-linecap="round"/>\n'
-        f'  <line x1="{plus_cx:.2f}" y1="{plus_cy-plus_half:.2f}" x2="{plus_cx:.2f}" y2="{plus_cy+plus_half:.2f}" stroke="#f1f1f1" stroke-width="{plus_width:.2f}" stroke-linecap="round"/>\n'
-        f'  <line x1="{plus_cx+plus_half*1.8:.2f}" y1="{minus_y:.2f}" x2="{plus_cx+plus_half*1.8+minus_half*1.8:.2f}" y2="{minus_y:.2f}" stroke="#f1f1f1" stroke-width="{minus_width:.2f}" stroke-linecap="round"/>\n'
-        '</svg>\n'
+        + (f'  <line x1="{safe_w-1}" y1="{inset}" x2="{inset}" y2="{safe_h-1}" stroke="#8f8f8f" stroke-width="{diag1_width:.2f}" clip-path="url(#innerRect)"/>\n' if diag1_width > 0 else '')
+        + (f'  <line x1="{inset}" y1="{inset}" x2="{safe_w-1}" y2="{safe_h-1}" stroke="#8f8f8f" stroke-width="{diag2_width:.2f}" clip-path="url(#innerRect)"/>\n' if diag2_width > 0 else '')
+        + f'  <line x1="{plus_cx-plus_half:.2f}" y1="{plus_cy:.2f}" x2="{plus_cx+plus_half:.2f}" y2="{plus_cy:.2f}" stroke="#f1f1f1" stroke-width="{plus_width:.2f}" stroke-linecap="round"/>\n'
+        + f'  <line x1="{plus_cx:.2f}" y1="{plus_cy-plus_half:.2f}" x2="{plus_cx:.2f}" y2="{plus_cy+plus_half:.2f}" stroke="#f1f1f1" stroke-width="{plus_width:.2f}" stroke-linecap="round"/>\n'
+        + (f'  <line x1="{minus_start_x:.2f}" y1="{minus_y:.2f}" x2="{minus_start_x+minus_half*1.8:.2f}" y2="{minus_y:.2f}" stroke="#f1f1f1" stroke-width="{minus_width:.2f}" stroke-linecap="round"/>\n' if minus_width > 0 else '')
+        + '</svg>\n'
     )
 
 
@@ -204,9 +209,13 @@ def _derive_symbol_params_from_raster(*, width: int, height: int, perc_img) -> d
         "gradient_edge": f"#{edge:02x}{edge:02x}{edge:02x}",
         "gradient_mid": f"#{midc:02x}{midc:02x}{midc:02x}",
         "diag1_width": max(1.0, min(2.8, 1.0 + dark_ratio * scale * 0.02)),
-        "diag2_width": max(1.0, min(2.8, 1.0 + dark_ratio * scale * 0.02)),
+        "diag2_width": 0.0,
         "plus_width": max(0.8, min(2.2, 0.8 + light_ratio * scale * 0.012)),
-        "minus_width": max(0.8, min(2.2, 0.8 + light_ratio * scale * 0.012)),
+        "minus_width": 0.0,
+        "plus_x_ratio": 0.16,
+        "glyph_y_ratio": 0.12,
+        "plus_half_ratio": 0.08,
+        "minus_gap_ratio": 1.8,
     }
 
 
@@ -223,10 +232,14 @@ def _fit_symbol_element_by_element(
     refinement_steps: list[tuple[str, tuple[float, ...]]] = [
         ("border_thickness", (0.8, 1.0, 1.2, 1.4, 1.8)),
         ("gradient_center", (40.0, 45.0, 50.0, 55.0, 60.0)),
-        ("diag1_width", (1.0, 1.4, 1.8, 2.2, 2.8)),
-        ("diag2_width", (1.0, 1.4, 1.8, 2.2, 2.8)),
+        ("diag1_width", (0.0, 1.0, 1.4, 1.8, 2.2, 2.8)),
+        ("diag2_width", (0.0, 1.0, 1.4, 1.8, 2.2, 2.8)),
+        ("plus_x_ratio", (0.12, 0.16, 0.20, 0.24, 0.50)),
+        ("glyph_y_ratio", (0.08, 0.10, 0.12, 0.16, 0.36)),
+        ("plus_half_ratio", (0.06, 0.08, 0.10, 0.12)),
         ("plus_width", (0.8, 1.0, 1.2, 1.6, 2.2)),
-        ("minus_width", (0.8, 1.0, 1.2, 1.6, 2.2)),
+        ("minus_gap_ratio", (1.5, 1.8, 2.1)),
+        ("minus_width", (0.0, 0.8, 1.0, 1.2, 1.6, 2.2)),
     ]
     step_logs: list[str] = []
     best: tuple[float, str, object] | None = None
