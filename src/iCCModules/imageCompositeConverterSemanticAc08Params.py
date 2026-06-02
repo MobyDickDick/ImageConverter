@@ -225,6 +225,13 @@ def makeAc08BadgeParamsImpl(
             h,
         )
 
+    if name == "AC0844":
+        # AC0844 is the rF counterpart of the right-arm AC0814/AC0839 connector badge.
+        defaults = _apply_rf_label(default_ac0814_params_fn(w, h))
+        if img is None:
+            return finalize_ac08_style_fn(name, defaults)
+        return finalize_ac08_style_fn(name, fit_ac0814_params_from_image_fn(img, defaults))
+
     if name == "AC0850":
         # AC0850 is the connector-free relative-humidity rF circle/text badge.
         defaults = _apply_rf_label(default_ac0870_params_fn(w, h))

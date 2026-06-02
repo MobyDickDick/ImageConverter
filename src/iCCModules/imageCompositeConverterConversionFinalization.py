@@ -295,9 +295,8 @@ def _appendFailureFollowUpTasks(*, reports_out_dir: str, batch_failures: list[di
     if not batch_failures:
         return
 
-    repo_root = Path(reports_out_dir).resolve().parents[3]
-    open_tasks_path = repo_root / "docs" / "open_tasks.md"
-    if not open_tasks_path.exists():
+    open_tasks_path = _findOpenTasksPathForReportsDir(reports_out_dir)
+    if open_tasks_path is None:
         return
 
     try:

@@ -1097,6 +1097,19 @@ def test_make_badge_params_ac0850_uses_plain_rf_circle_geometry() -> None:
     assert params.get("label") == "rF"
 
 
+def test_make_badge_params_ac0844_uses_right_arm_rf_geometry() -> None:
+    """AC0844 defaults must render the rF badge with the AC0814/AC0839 right-arm connector."""
+    params = image_composite_converter.Action.make_badge_params(25, 15, "AC0844")
+
+    assert params is not None
+    assert bool(params.get("arm_enabled", False))
+    assert not bool(params.get("stem_enabled", False))
+    assert float(params.get("arm_x2", 0.0)) > float(params.get("arm_x1", 0.0))
+    assert abs(float(params.get("arm_y2", 0.0)) - float(params.get("arm_y1", 0.0))) <= 0.01
+    assert str(params.get("text_mode", "")).lower() == "rf"
+    assert params.get("label") == "rF"
+
+
 def test_parse_description_marks_ac0850_as_rf_text_badge() -> None:
     """AC0850 descriptions should activate the semantic rF circle/text family."""
     ref = image_composite_converter.Reflection(
@@ -1113,6 +1126,27 @@ def test_parse_description_marks_ac0850_as_rf_text_badge() -> None:
     assert params["mode"] == "semantic_badge"
     assert params["label"] == "rF"
     assert "SEMANTIC: Kreis + Buchstabe rF" in list(params.get("elements", []))
+
+
+def test_parse_description_marks_ac0844_as_rf_right_arm_badge() -> None:
+    """AC0844 descriptions should activate the rF right-arm connector family."""
+    ref = image_composite_converter.Reflection(
+        {
+            "AC0844": (
+                'Grauer Kreis mit grauem Rand und hellgrauem Hintergrund '
+                'Abweichung: mit Text "rF" (relative Feuchtigkeit) '
+                'Abweichung: mit Griff (dunkelgraue Linie nach unten) '
+                'Abweichung: nach links gedreht, Text immer noch horizontal.'
+            )
+        }
+    )
+
+    _desc, params = ref.parse_description("AC0844_S", "AC0844_S.jpg")
+
+    assert params["mode"] == "semantic_badge"
+    assert params["label"] == "rF"
+    assert "SEMANTIC: Kreis + Buchstabe rF" in list(params.get("elements", []))
+    assert "SEMANTIC: waagrechter Strich rechts vom Kreis" in list(params.get("elements", []))
 
 
 def test_parse_description_marks_ac0800_as_plain_ring_family() -> None:
