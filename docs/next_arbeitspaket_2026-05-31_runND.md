@@ -10,8 +10,7 @@ bisherige AC0820-Spezialisierung die Ziffer als Superscript gerendert hat.
 - Anlass:
   - `PLAN_B_KANDIDATEN.md` führte `AC0820_S.jpg` als nächsten regulären
     Kandidaten.
-  - Die Beschreibung lautet: `Textg "CO2" (Die 2 ist fälschlicherweise
-    hochgestellt, dieses muss jedoch tiefgestellt sein)`.
+  - Die Beschreibung lautet: `Text "CO^2" (Die 2 ist hochgestellt)`.
   - PF8 fordert für diesen Kandidaten, Kreis- und Label-Signal vor der ersten
     Iteration abzusichern.
 - Umsetzung:
