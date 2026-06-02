@@ -398,3 +398,17 @@ def test_append_failure_followup_tasks_skips_existing_variant_entries(tmp_path):
 
     content = open_tasks.read_text(encoding="utf-8")
     assert "Automatisch erzeugte Folgeaufgaben" not in content
+
+
+def test_append_failure_followup_tasks_ignores_shallow_external_reports_dir(tmp_path):
+    reports_dir = tmp_path / "reports"
+    reports_dir.mkdir()
+
+    finalization_helpers._appendFailureFollowUpTasks(
+        reports_out_dir=str(reports_dir),
+        batch_failures=[
+            {"filename": "AC0844_S.jpg", "status": "conversion_failed", "reason": "no_result"},
+        ],
+    )
+
+    assert not (tmp_path / "docs" / "open_tasks.md").exists()
