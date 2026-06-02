@@ -3939,6 +3939,16 @@ def test_enforce_left_arm_badge_geometry_restores_missing_arm() -> None:
     assert float(fixed["arm_len_min"]) >= 22.0 * 0.75
 
 
+def test_finalize_ac0812_plain_left_arm_disables_expensive_global_search() -> None:
+    """AC0812 local circle/arm bracketing should skip the costly global sampler."""
+    params = Action._default_ac0812_params(35, 20)
+
+    finalized = Action._finalize_ac08_style("AC0812_M", params)
+
+    assert finalized.get("enable_global_search_mode") is False
+    assert finalized.get("global_search_disabled_reason") == "ac0812_plain_left_arm_local_fit"
+
+
 def test_tune_ac08_left_connector_family_keeps_template_right_extent() -> None:
     """Left-connector families should keep most of the template right edge circle extent."""
     defaults = Action._default_ac0812_params(25, 15)

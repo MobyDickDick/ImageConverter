@@ -140,6 +140,7 @@ AC08_PREVIOUSLY_GOOD_VARIANTS = ("AC0800_L", "AC0800_M", "AC0800_S", "AC0811_L")
 
 _UNDER_PYTEST_RUNTIME = "pytest" in sys.modules or bool(os.environ.get("PYTEST_CURRENT_TEST"))
 
+SVG_RENDER_SUBPROCESS_EXPLICIT = bool(os.environ.get("IMAGE_CONVERTER_ISOLATE_SVG_RENDER", "").strip())
 SVG_RENDER_SUBPROCESS_ENABLED = os.environ.get("IMAGE_CONVERTER_ISOLATE_SVG_RENDER", "").strip().lower() in {
     "1",
     "true",
@@ -1324,6 +1325,7 @@ class Action:
             size_h,
             svg_render_subprocess_enabled=SVG_RENDER_SUBPROCESS_ENABLED,
             under_pytest_runtime=_UNDER_PYTEST_RUNTIME,
+            svg_render_subprocess_explicit=SVG_RENDER_SUBPROCESS_EXPLICIT,
             is_fitz_open_monkeypatched_fn=_is_fitz_open_monkeypatched,
             render_svg_to_numpy_via_subprocess_fn=_render_svg_to_numpy_via_subprocess,
             is_inprocess_renderer_monkeypatched_fn=_is_inprocess_renderer_monkeypatched,

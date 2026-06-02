@@ -89,6 +89,19 @@ def render_svg_to_numpy_via_subprocess(
         ensure_ascii=False,
     ).encode("utf-8")
     cmd = [sys.executable, "-m", "src.imageCompositeConverter", "--_render-svg-subprocess"]
+    child_env = os.environ.copy()
+    pythonpath_entries: list[str] = []
+    for entry in sys.path:
+        if not entry:
+            entry = os.getcwd()
+        if entry and entry not in pythonpath_entries:
+            pythonpath_entries.append(entry)
+    existing_pythonpath = child_env.get("PYTHONPATH", "")
+    if existing_pythonpath:
+        for entry in existing_pythonpath.split(os.pathsep):
+            if entry and entry not in pythonpath_entries:
+                pythonpath_entries.append(entry)
+    child_env["PYTHONPATH"] = os.pathsep.join(pythonpath_entries)
     anchor_test_active = "test_ac08_semantic_anchor_variants_convert_without_failed_svg" in str(
         os.environ.get("PYTEST_CURRENT_TEST", "")
     )
@@ -108,6 +121,7 @@ def render_svg_to_numpy_via_subprocess(
             stderr=subprocess.PIPE,
             check=False,
             timeout=timeout_sec,
+            env=child_env,
         )
     except subprocess.TimeoutExpired:
         elapsed = time.monotonic() - started

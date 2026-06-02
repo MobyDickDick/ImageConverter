@@ -65,3 +65,46 @@ def test_svg_render_subprocess_defaults_activate_when_pytest_env_is_inherited() 
     )
 
     assert completed.stdout.strip() == "1 5.0"
+
+
+def test_svg_render_subprocess_inherits_runtime_pythonpath(monkeypatch) -> None:
+    from src.iCCModules import imageCompositeConverterRendering as rendering
+
+    np = __import__("numpy")
+    captured: dict[str, object] = {}
+
+    def fake_run(cmd, *, input, stdout, stderr, check, timeout, env):
+        captured["cmd"] = cmd
+        captured["env"] = env
+        raw = bytes([1, 2, 3])
+        payload = {
+            "ok": True,
+            "w": 1,
+            "h": 1,
+            "data": __import__("base64").b64encode(raw).decode("ascii"),
+        }
+
+        class Completed:
+            returncode = 0
+            stdout = __import__("json").dumps(payload).encode("utf-8")
+            stderr = b""
+
+        return Completed()
+
+    monkeypatch.setattr(rendering.subprocess, "run", fake_run)
+    monkeypatch.setattr(rendering.sys, "path", ["/runtime/vendor", "/workspace/project", ""])
+
+    result = rendering.render_svg_to_numpy_via_subprocess(
+        '<svg xmlns="http://www.w3.org/2000/svg"/>',
+        1,
+        1,
+        np_module=np,
+        timeout_sec=1.0,
+    )
+
+    assert result is not None
+    child_env = captured["env"]
+    assert isinstance(child_env, dict)
+    pythonpath = str(child_env.get("PYTHONPATH", ""))
+    assert "/runtime/vendor" in pythonpath.split(os.pathsep)
+    assert "/workspace/project" in pythonpath.split(os.pathsep)
