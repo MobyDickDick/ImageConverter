@@ -28,6 +28,24 @@ def test_structured_symbol_svg_can_fit_single_diagonal_top_left_plus() -> None:
     assert 'x1="3.20" y1="9.60" x2="9.60" y2="9.60"' in svg
     assert svg.count('stroke="#f1f1f1"') == 2
 
+
+def test_symbol_params_detect_glyph_geometry_from_raster() -> None:
+    raster = np.ones((80, 40, 3), dtype=np.uint8) * 150
+    raster[:, 18:22] = 210
+    raster[14, 8:16] = 245
+    raster[10:19, 12] = 245
+
+    params = non_composite_runtime_helpers._derive_symbol_params_from_raster(
+        width=40,
+        height=80,
+        perc_img=raster,
+    )
+
+    assert 0.24 <= params["plus_x_ratio"] <= 0.34
+    assert 0.14 <= params["glyph_y_ratio"] <= 0.22
+    assert 0.07 <= params["plus_half_ratio"] <= 0.13
+
+
 def test_run_non_composite_iteration_impl_manual_review_plan_b_uses_sample_svg(tmp_path) -> None:
     logs: list[list[str]] = []
     prints: list[str] = []

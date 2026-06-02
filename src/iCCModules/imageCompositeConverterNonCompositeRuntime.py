@@ -182,6 +182,39 @@ def _build_structured_symbol_svg(
     )
 
 
+def _estimate_symbol_glyph_geometry_from_luminance(lum: np.ndarray) -> dict[str, float]:
+    h, w = lum.shape[:2]
+    if h <= 0 or w <= 0:
+        return {"plus_x_ratio": 0.16, "glyph_y_ratio": 0.12, "plus_half_ratio": 0.08}
+
+    top_limit = max(1, min(h, int(round(h * 0.45))))
+    left_limit = max(1, min(w, int(round(w * 0.65))))
+    roi = lum[:top_limit, :left_limit]
+    contrast = max(1.0, float(np.nanpercentile(lum, 90) - np.nanpercentile(lum, 10)))
+    high_threshold = max(
+        float(np.nanpercentile(lum, 97)),
+        float(np.nanmean(lum) + np.nanstd(lum) * 1.2),
+        float(np.nanmax(roi) - max(6.0, contrast * 0.18)),
+    )
+    mask = roi >= high_threshold
+    if int(mask.sum()) < 2:
+        return {"plus_x_ratio": 0.16, "glyph_y_ratio": 0.12, "plus_half_ratio": 0.08}
+
+    ys, xs = np.nonzero(mask)
+    weights = np.maximum(roi[ys, xs].astype(np.float32) - high_threshold + 1.0, 1.0)
+    plus_x = float(np.average(xs, weights=weights))
+    plus_y = float(np.average(ys, weights=weights))
+    span_x = float(np.nanpercentile(xs, 90) - np.nanpercentile(xs, 10) + 1.0)
+    span_y = float(np.nanpercentile(ys, 90) - np.nanpercentile(ys, 10) + 1.0)
+    scale = max(1.0, min(float(w), float(h)))
+    half = max(span_x, span_y) / (2.0 * scale)
+    return {
+        "plus_x_ratio": max(0.05, min(0.50, plus_x / max(1.0, float(w)))),
+        "glyph_y_ratio": max(0.05, min(0.45, plus_y / max(1.0, float(h)))),
+        "plus_half_ratio": max(0.04, min(0.16, half)),
+    }
+
+
 def _derive_symbol_params_from_raster(*, width: int, height: int, perc_img) -> dict[str, float | str]:
     # Data-driven estimation from the actual raster instead of per-figure hardcoded sweeps.
     arr = np.asarray(perc_img) if perc_img is not None else None
@@ -203,6 +236,7 @@ def _derive_symbol_params_from_raster(*, width: int, height: int, perc_img) -> d
     dark_ratio = float((lum < np.nanpercentile(lum, 35)).mean())
     light_ratio = float((lum > np.nanpercentile(lum, 70)).mean())
     scale = max(1.0, min(width, height))
+    glyph_geometry = _estimate_symbol_glyph_geometry_from_luminance(lum)
     return {
         "border_thickness": max(0.8, min(1.8, 0.9 + dark_ratio * 1.8)),
         "gradient_center": grad_center,
@@ -212,11 +246,19 @@ def _derive_symbol_params_from_raster(*, width: int, height: int, perc_img) -> d
         "diag2_width": 0.0,
         "plus_width": max(0.8, min(2.2, 0.8 + light_ratio * scale * 0.012)),
         "minus_width": 0.0,
-        "plus_x_ratio": 0.16,
-        "glyph_y_ratio": 0.12,
-        "plus_half_ratio": 0.08,
+        "plus_x_ratio": glyph_geometry["plus_x_ratio"],
+        "glyph_y_ratio": glyph_geometry["glyph_y_ratio"],
+        "plus_half_ratio": glyph_geometry["plus_half_ratio"],
         "minus_gap_ratio": 1.8,
     }
+
+
+def _candidate_window(current_value: float, offsets: tuple[float, ...], *, minimum: float, maximum: float) -> tuple[float, ...]:
+    values = [minimum, maximum]
+    for offset in offsets:
+        values.append(max(minimum, min(maximum, float(current_value) + offset)))
+    values.append(max(minimum, min(maximum, float(current_value))))
+    return tuple(sorted({round(value, 4) for value in values}))
 
 
 def _fit_symbol_element_by_element(
@@ -228,15 +270,26 @@ def _fit_symbol_element_by_element(
     calculate_error_fn,
 ) -> tuple[float, str, object, dict[str, float | str], list[str]] | None:
     current = _derive_symbol_params_from_raster(width=width, height=height, perc_img=perc_img)
-    # Element-wise refinement order requested by project idea.
+    # Element-wise refinement order requested by project idea.  Position and
+    # size windows are centered on raster measurements so AC0100-like variants
+    # are fitted from the image evidence instead of from one fixed sample pose.
     refinement_steps: list[tuple[str, tuple[float, ...]]] = [
         ("border_thickness", (0.8, 1.0, 1.2, 1.4, 1.8)),
         ("gradient_center", (40.0, 45.0, 50.0, 55.0, 60.0)),
         ("diag1_width", (0.0, 1.0, 1.4, 1.8, 2.2, 2.8)),
         ("diag2_width", (0.0, 1.0, 1.4, 1.8, 2.2, 2.8)),
-        ("plus_x_ratio", (0.12, 0.16, 0.20, 0.24, 0.50)),
-        ("glyph_y_ratio", (0.08, 0.10, 0.12, 0.16, 0.36)),
-        ("plus_half_ratio", (0.06, 0.08, 0.10, 0.12)),
+        (
+            "plus_x_ratio",
+            _candidate_window(float(current["plus_x_ratio"]), (-0.08, -0.04, 0.0, 0.04, 0.08), minimum=0.05, maximum=0.55),
+        ),
+        (
+            "glyph_y_ratio",
+            _candidate_window(float(current["glyph_y_ratio"]), (-0.08, -0.04, 0.0, 0.04, 0.08), minimum=0.05, maximum=0.45),
+        ),
+        (
+            "plus_half_ratio",
+            _candidate_window(float(current["plus_half_ratio"]), (-0.03, -0.015, 0.0, 0.015, 0.03), minimum=0.04, maximum=0.16),
+        ),
         ("plus_width", (0.8, 1.0, 1.2, 1.6, 2.2)),
         ("minus_gap_ratio", (1.5, 1.8, 2.1)),
         ("minus_width", (0.0, 0.8, 1.0, 1.2, 1.6, 2.2)),
