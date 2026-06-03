@@ -139,6 +139,21 @@ dasselbe Abschlussprofil mit verpflichtender Drift-Artefaktprüfung:
 ./tools/run_local_completion_checks.sh --require-drift-summary
 ```
 
+Damit möglichst wenige längere Testbatterien lokal gestartet werden müssen,
+lagert GitHub Actions außerdem die dokumentierten Zusatzprofile in eigene Jobs
+aus:
+
+```bash
+python tools/run_pytest_profile.py core-green
+python tools/run_pytest_profile.py extended
+./tools/run_safe_test_baseline.sh
+./tools/run_regression_checks.sh
+```
+
+Die beiden Shell-Profile laufen in CI mit `RUN_HEAVY_CONVERSION_TESTS=1`, damit
+auch explizit ausgelagerte Konvertierungsregressionen nicht durch das lokale
+Default-Skip-Gate aus `conftest.py` ausgeblendet werden.
+
 Der separate CI-Job `satisfactory-regression-battery` delegiert den teuren
 Qualitäts-Nachweis für alle gespeicherten zufriedenstellenden Konvertierungen an
 GitHub Actions. Er startet die Satisfactory-Batterie mit
@@ -157,6 +172,17 @@ Der Test schreibt zusätzlich JSONL-Debugdaten in das per
 `SATISFACTORY_REGRESSION_DEBUG_DIR` konfigurierte Verzeichnis. GitHub Actions lädt
 diese Dateien als Artefakt `satisfactory-regression-debug` hoch; die wichtigsten
 Ereignisse erscheinen wegen `-s` auch live im Job-Log.
+
+Für seltene Vollprüfungen enthält der Workflow zusätzlich den manuellen
+`workflow_dispatch`-Job `full-heavy-conversion-suite`. Er sammelt das schwere
+`tests/test_image_composite_converter.py`-Modul mit
+`RUN_HEAVY_CONVERSION_TESTS=1`, läuft aber bewusst nicht automatisch auf jedem
+Pull Request, damit bekannte Langläufer nicht die normale CI-Rückmeldung
+blockieren:
+
+```bash
+RUN_HEAVY_CONVERSION_TESTS=1 python -m pytest -q -rs tests/test_image_composite_converter.py
+```
 
 ## 8. Linux-Vendor-Kommando ausgeben
 

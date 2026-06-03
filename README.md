@@ -107,10 +107,17 @@ python -m pytest
 ./tools/run_safe_test_baseline.sh
 ./tools/run_local_completion_checks.sh
 # CI nutzt denselben Abschlussbefehl in .github/workflows/local-completion-checks.yml
+# Zusätzliche GitHub-Jobs lagern die längeren Profile aus:
+python tools/run_pytest_profile.py core-green
+python tools/run_pytest_profile.py extended
+RUN_HEAVY_CONVERSION_TESTS=1 ./tools/run_safe_test_baseline.sh
+RUN_HEAVY_CONVERSION_TESTS=1 ./tools/run_regression_checks.sh
 # Der CI-Job batch-artifact-drift-gate installiert ebenfalls pytest und erzwingt zusätzlich ein vorhandenes Drift-Summary:
 ./tools/run_local_completion_checks.sh --require-drift-summary
 python tools/manage_satisfactory_baseline.py
 ./tools/run_satisfactory_regression_battery.sh
+# Der manuelle GitHub-Job full-heavy-conversion-suite startet bei Bedarf:
+RUN_HEAVY_CONVERSION_TESTS=1 python -m pytest -q -rs tests/test_image_composite_converter.py
 # Die Satisfactory-Batterie konvertiert alle in artifacts/regression_baseline/satisfactory/variants.txt
 # gespeicherten erfolgreichen Varianten erneut und vergleicht die neue mean_delta2-Qualität
 # streng gegen die dort gespeicherten Baseline-SVGs. Jede Verschlechterung schlägt den Test fehl.
