@@ -6,7 +6,7 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-05-31)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `384` · Erledigt `288` · Offen `96`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `384` · Erledigt `289` · Offen `95`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -2893,7 +2893,7 @@ Jeder Tag hat genau definierte Aufgaben mit einem harten Exit-Kriterium.
 
 ### Tag 3 (2026-05-26) – Commit-Test-Gate erzwingen
 
-- [ ] **FP-D3-1:** Pflicht-Pre-Commit-Checks definieren (mindestens: Kern-`pytest` + AC08-Smoke).
+- [x] **FP-D3-1:** Pflicht-Pre-Commit-Checks definieren (mindestens: Kern-`pytest` + AC08-Smoke). (2026-06-02 Run NM, korrigiert 2026-06-03: GitHub Actions führt lokale Abschlusschecks, Profilmatrix und Satisfactory-Batterie automatisch aus; Safe-Baseline, Regression-Checks und Full-Heavy laufen als `workflow_dispatch`-Heavy-Diagnosen nur mit `run_heavy_diagnostics`, damit bekannte Langläufer/instabile Konvertierungsdiagnosen PRs nicht blockieren. Der Workflow-Dokumentationstest hält diese CI-Auslagerung fest.)
 - [ ] **FP-D3-2:** Für jeden Tages-Commit Testausgabe + Bewertung (`PASS`/`FAIL`) protokollieren.
 - [ ] **FP-D3-EXIT:** 100% der Tages-Commits mit zugehörigem Testnachweis.
 
@@ -3309,3 +3309,10 @@ Ziel: Die Konvertierung soll strikt als **Kette** laufen:
 - **Sicherung:** Die gezielten Helper-/Redraw-Tests liefen grün (`PYTHONPATH=vendor/linux-py310/site-packages:. python -m pytest -q tests/detailtests/test_core_class_helpers.py tests/detailtests/test_width_optimization_helpers.py tests/detailtests/test_global_vector_helpers.py tests/test_image_composite_converter.py::test_apply_redraw_variation_jitters_params_and_logs_seed tests/test_image_composite_converter.py::test_apply_redraw_variation_keeps_path_t_scale_in_glyph_domain`, `8 passed, 5 warnings`, Exit `0`); der PF8-Linkage-Test lief grün (`PYTHONPATH=vendor/linux-py310/site-packages:. python -m pytest -q tests/test_plan_b_perception_linkage.py`, `2 passed`, Exit `0`).
 - **Kandidatenrotation:** `PLAN_B_KANDIDATEN.md` entfernt `AC0870_S.jpg`, führt nun `AC0850_M.jpg` als nächste reguläre Rotation und ergänzt `AC0844_S.jpg` als neuen rF-Kreis/Connector-Folgekandidaten.
 - **Nächster sinnvoller Schritt:** Mit `AC0850_M.jpg` rotieren oder den neuen `AC0844_S.jpg`-rF-Kreis/Connector-Lerneffekt als isolierten Plan-B-/Re-Konvertierungslauf abarbeiten.
+
+### Fortschritt vs. Blocker (Session 2026-06-02, CI-Testauslagerung Run NM)
+
+- **Fortschritt:** Das nächste Arbeitspaket wurde auf Testhygiene/CI-Auslagerung fokussiert: `.github/workflows/local-completion-checks.yml` startet nun zusätzlich eine Pytest-Profilmatrix (`core-green`, `extended`), die bestehende Satisfactory-Batterie und per `workflow_dispatch` + `run_heavy_diagnostics` opt-in die Safe-Baseline, die dokumentierten Regression-Checks sowie einen Full-Heavy-Conversion-Job.
+- **Sicherung:** `docs/image_converter_workflow.md` und `README.md` dokumentieren, welche längeren Checks jetzt nach GitHub Actions verlagert sind und welche Kommandos lokal nur noch bei Bedarf gespiegelt werden. Der Workflow-Dokumentationstest wurde erweitert, damit neue CI-Jobs, Heavy-Env-Gates und der manuelle Volljob nicht versehentlich aus der Doku oder Workflow-Datei verschwinden.
+- **Blocker:** Die bekannten schweren Konvertierungsdiagnosen bleiben wegen Langläufer-/Blockerhistorie bewusst opt-in und blockieren Pull Requests nicht automatisch; ein lokaler Gegencheck zeigte, dass `RUN_HEAVY_CONVERSION_TESTS=1 ./tools/run_safe_test_baseline.sh` aktuell weiterhin nicht als automatisches Pflichtgate geeignet ist.
+- **Nächster sinnvoller Schritt:** Die GitHub-Jobs auf dem nächsten Push beobachten; falls ein ausgelagerter Heavy-Job echte Laufzeit-/Datenblocker zeigt, diese als konkrete T6-/TB1-Folgeaufgabe mit Job-Log und NodeID zurückführen.

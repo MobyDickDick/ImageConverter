@@ -133,6 +133,15 @@ def _available_reconverted_svgs(family_out: Path) -> list[str]:
     )
 
 
+def _require_reconverted_svg_path(family_out: Path, variant: str, available_svgs: list[str]) -> Path:
+    new_svg = _reconverted_svg_path(family_out, variant)
+    assert new_svg is not None, (
+        f"No reconverted SVG output produced for successful variant {variant}. "
+        f"Available SVGs: {available_svgs}"
+    )
+    return new_svg
+
+
 def _group_variants_by_family(variants: list[str]) -> dict[str, list[str]]:
     grouped: dict[str, list[str]] = {}
     for variant in variants:
@@ -231,6 +240,7 @@ def test_all_satisfactory_successful_variants_reconversion_keeps_or_improves_qua
         pytest.skip("No satisfactory baseline quality metrics could be rendered.")
 
     out = tmp_path / "all_successful_reconversion"
+    reconverted_svg_paths: dict[str, Path] = {}
     grouped_variants = _group_variants_by_family(variants)
     _debug_log(debug_log, "family_groups_ready", family_count=len(grouped_variants))
     for family, family_variants in grouped_variants.items():
@@ -267,18 +277,18 @@ def test_all_satisfactory_successful_variants_reconversion_keeps_or_improves_qua
         available_svgs = _available_reconverted_svgs(family_out)
         for variant in family_variants:
             _debug_log(debug_log, "output_check", family=family, variant=variant)
-            assert (out / family.lower() / "converted_svgs" / f"{variant}.svg").exists(), (
-                f"No reconverted SVG output produced for successful variant {variant}."
+            reconverted_svg_paths[variant.upper()] = _require_reconverted_svg_path(
+                family_out,
+                variant,
+                available_svgs,
             )
-            reconverted_svg_paths[variant.upper()] = new_svg
 
     regressions: list[str] = []
     checked = 0
     quality_epsilon = 1e-6
     for variant, previous_mean_delta2 in baseline_mean_delta2.items():
         _debug_log(debug_log, "quality_compare_start", variant=variant)
-        family = variant.rsplit("_", 1)[0]
-        new_svg = out / family.lower() / "converted_svgs" / f"{variant}.svg"
+        new_svg = reconverted_svg_paths[variant.upper()]
         new_mean_delta2 = _rendered_mean_delta2(_source_image_path(variant), new_svg)
         allowed_max = previous_mean_delta2 + max(quality_epsilon, abs(previous_mean_delta2) * quality_epsilon)
         _debug_log(

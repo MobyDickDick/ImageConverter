@@ -8,6 +8,12 @@ on:
       - master
       - work
   workflow_dispatch:
+    inputs:
+      run_heavy_diagnostics:
+        description: 'Run opt-in heavy conversion diagnostics (safe baseline, regression checks, full heavy suite)'
+        required: false
+        type: boolean
+        default: false
 
 jobs:
   completion-profile:
@@ -55,6 +61,73 @@ jobs:
         run: ./tools/run_local_completion_checks.sh --require-drift-summary
 
 
+  pytest-profile-matrix:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        profile:
+          - core-green
+          - extended
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install test dependencies
+        run: python -m pip install pytest
+
+      - name: Run pytest profile
+        run: python tools/run_pytest_profile.py ${{ matrix.profile }}
+
+  safe-baseline:
+    if: github.event_name == 'workflow_dispatch' && inputs.run_heavy_diagnostics
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install test dependencies
+        run: python -m pip install pytest
+
+      - name: Run safe baseline
+        env:
+          RUN_HEAVY_CONVERSION_TESTS: '1'
+        run: ./tools/run_safe_test_baseline.sh
+
+  regression-checks:
+    if: github.event_name == 'workflow_dispatch' && inputs.run_heavy_diagnostics
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install test dependencies
+        run: python -m pip install pytest
+
+      - name: Run documented regression checks
+        env:
+          RUN_HEAVY_CONVERSION_TESTS: '1'
+        run: ./tools/run_regression_checks.sh
+
+
   satisfactory-regression-battery:
     runs-on: ubuntu-latest
     timeout-minutes: 60
@@ -84,3 +157,24 @@ jobs:
           name: satisfactory-regression-debug
           path: artifacts/converted_images/reports/satisfactory-regression-debug
           if-no-files-found: warn
+
+  full-heavy-conversion-suite:
+    if: github.event_name == 'workflow_dispatch' && inputs.run_heavy_diagnostics
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install test dependencies
+        run: python -m pip install pytest
+
+      - name: Run full heavy image composite suite
+        env:
+          RUN_HEAVY_CONVERSION_TESTS: '1'
+        run: python -m pytest -q -rs tests/test_image_composite_converter.py
