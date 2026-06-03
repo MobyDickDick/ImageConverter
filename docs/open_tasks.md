@@ -2899,9 +2899,16 @@ Jeder Tag hat genau definierte Aufgaben mit einem harten Exit-Kriterium.
 
 ### Tag 4 (2026-05-27) – Nicht-grüne Signale abbauen
 
-- [ ] **FP-D4-1:** Warnings/Skips/Xfails aus dem aktuellen Lauf priorisieren.
-- [ ] **FP-D4-2:** Mindestens ein Nicht-Grün-Thema in ein reproduzierbares Ticket mit Repro-Befehl überführen.
-- [ ] **FP-D4-EXIT:** Offene Nicht-Grün-Liste aktualisiert und priorisiert (keine unsortierten Restpunkte).
+- [x] **FP-D4-1:** Warnings/Skips/Xfails aus dem aktuellen Lauf priorisieren. (2026-06-03 Run NO: Kernlauf `680 passed, 5 warnings` priorisiert; keine Skips/Xfails im Kernprofil, P1 sind bekannte PyMuPDF/SWIG-Deprecations; siehe `docs/non_green_triage_2026-06-03_runNO.md`.)
+- [x] **FP-D4-2:** Mindestens ein Nicht-Grün-Thema in ein reproduzierbares Ticket mit Repro-Befehl überführen. (2026-06-03 Run NO: A4-FU1/SWIG-Warnungen mit Repro-Befehl, Allowlist-Entscheidung und Recovery-Plan dokumentiert.)
+- [x] **FP-D4-EXIT:** Offene Nicht-Grün-Liste aktualisiert und priorisiert (keine unsortierten Restpunkte). (2026-06-03 Run NO: `docs/test_followup_tasks_2026-05-20.md` aktualisiert; Kernprofil nach enger Allowlist ohne Warning-Summary.)
+
+### Fortschritt vs. Blocker (Session 2026-06-03, Nicht-Grün-Triage FP-D4 Run NO)
+
+- **Fortschritt:** FP-D4 wurde abgeschlossen: Der aktuelle Kernlauf wurde priorisiert (`680 passed, 5 warnings` vor Triage), die bekannten PyMuPDF/SWIG-Deprecation-Warnungen wurden als P1-Nicht-Grün-Signal klassifiziert und eng in `pytest.ini` allowlisted; Skips/Xfails sind im Kernprofil aktuell nicht sichtbar.
+- **Ticketisierung:** A4-FU1 wurde als reproduzierbares Warnungs-Ticket mit Befehl, Allowlist-Entscheidung und Recovery-Plan in `docs/non_green_triage_2026-06-03_runNO.md` dokumentiert; `docs/test_followup_tasks_2026-05-20.md` verweist auf diese Entscheidung.
+- **Sicherung:** Der Kernlauf nach Allowlist lief ohne Warning-Summary durch (`PYTHONPATH=vendor/linux-py310/site-packages:. PYENV_VERSION=3.10.20 timeout 300 python -m pytest -q -rs`, `680 passed`, Exit `0`).
+- **Nächster sinnvoller Schritt:** FP-D5 starten und die Vollbereichs-/Heavy-Läufe in messbare Batches mit Laufzeit, Exit-Code und Fehlertyp zerlegen.
 
 ### Tag 5 (2026-05-28) – Laufzeitblocker zerlegen
 
