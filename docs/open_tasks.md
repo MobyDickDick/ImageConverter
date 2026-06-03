@@ -2894,8 +2894,8 @@ Jeder Tag hat genau definierte Aufgaben mit einem harten Exit-Kriterium.
 ### Tag 3 (2026-05-26) – Commit-Test-Gate erzwingen
 
 - [x] **FP-D3-1:** Pflicht-Pre-Commit-Checks definieren (mindestens: Kern-`pytest` + AC08-Smoke). (2026-06-02 Run NM, korrigiert 2026-06-03: GitHub Actions führt lokale Abschlusschecks, Profilmatrix und Satisfactory-Batterie automatisch aus; Safe-Baseline, Regression-Checks und Full-Heavy laufen als `workflow_dispatch`-Heavy-Diagnosen nur mit `run_heavy_diagnostics`, damit bekannte Langläufer/instabile Konvertierungsdiagnosen PRs nicht blockieren. Der Workflow-Dokumentationstest hält diese CI-Auslagerung fest.)
-- [ ] **FP-D3-2:** Für jeden Tages-Commit Testausgabe + Bewertung (`PASS`/`FAIL`) protokollieren.
-- [ ] **FP-D3-EXIT:** 100% der Tages-Commits mit zugehörigem Testnachweis.
+- [x] **FP-D3-2:** Für jeden Tages-Commit Testausgabe + Bewertung (`PASS`/`FAIL`) protokollieren. (2026-06-03 Run NN: `completion-profile` läuft in GitHub Actions über `tools/run_test_evidence.sh`; der Wrapper schreibt Log + Markdown-Summary mit `PASS`/`FAIL` und Exit-Code nach `artifacts/test-evidence`, lädt diese als `completion-profile-test-evidence` hoch und gibt den Original-Exit-Code an den Job zurück.)
+- [x] **FP-D3-EXIT:** 100% der Tages-Commits mit zugehörigem Testnachweis. (2026-06-03 Run NN: Push-/PR-/manuelle Workflow-Auslöser erzeugen für den Pflicht-Abschlussjob automatisch ein GitHub-Artefakt mit Testausgabe und Bewertung; lokale Nachweise bleiben zusätzlich über denselben Wrapper reproduzierbar.)
 
 ### Tag 4 (2026-05-27) – Nicht-grüne Signale abbauen
 

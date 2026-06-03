@@ -127,8 +127,20 @@ Modul starten kann:
 
 ```bash
 python -m pip install pytest
-./tools/run_local_completion_checks.sh
+./tools/run_test_evidence.sh \
+  --name completion-profile \
+  --log artifacts/test-evidence/completion-profile.log \
+  --summary artifacts/test-evidence/completion-profile-summary.md \
+  -- ./tools/run_local_completion_checks.sh
 ```
+
+Der Wrapper `tools/run_test_evidence.sh` spiegelt die Testausgabe in ein
+Log-Artefakt, schreibt eine Markdown-Zusammenfassung mit `PASS`/`FAIL` und
+dem Exit-Code und gibt denselben Exit-Code wieder an den Workflow zurück. Der
+Job lädt `artifacts/test-evidence` anschließend als Artefakt
+`completion-profile-test-evidence` hoch. Damit hat jeder Pull-Request-/Push-
+Commit ein maschinenlesbares Testsignal in GitHub Actions, ohne dass lokale
+Abschlusslogs manuell in Commits kopiert werden müssen.
 
 Der Workflow enthält zusätzlich den Job `batch-artifact-drift-gate`. Dieser
 installiert ebenfalls die Testabhängigkeit `pytest`, legt ein repräsentatives
