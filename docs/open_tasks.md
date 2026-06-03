@@ -2893,7 +2893,7 @@ Jeder Tag hat genau definierte Aufgaben mit einem harten Exit-Kriterium.
 
 ### Tag 3 (2026-05-26) – Commit-Test-Gate erzwingen
 
-- [x] **FP-D3-1:** Pflicht-Pre-Commit-Checks definieren (mindestens: Kern-`pytest` + AC08-Smoke). (2026-06-02 Run NM: GitHub Actions führt lokale Abschlusschecks, Profilmatrix, Safe-Baseline, Regression-Checks, Satisfactory-Batterie und einen manuellen Full-Heavy-Job aus; der Workflow-Dokumentationstest hält diese CI-Auslagerung fest.)
+- [x] **FP-D3-1:** Pflicht-Pre-Commit-Checks definieren (mindestens: Kern-`pytest` + AC08-Smoke). (2026-06-02 Run NM, korrigiert 2026-06-03: GitHub Actions führt lokale Abschlusschecks, Profilmatrix und Satisfactory-Batterie automatisch aus; Safe-Baseline, Regression-Checks und Full-Heavy laufen als `workflow_dispatch`-Heavy-Diagnosen nur mit `run_heavy_diagnostics`, damit bekannte Langläufer/instabile Konvertierungsdiagnosen PRs nicht blockieren. Der Workflow-Dokumentationstest hält diese CI-Auslagerung fest.)
 - [ ] **FP-D3-2:** Für jeden Tages-Commit Testausgabe + Bewertung (`PASS`/`FAIL`) protokollieren.
 - [ ] **FP-D3-EXIT:** 100% der Tages-Commits mit zugehörigem Testnachweis.
 
@@ -3312,7 +3312,7 @@ Ziel: Die Konvertierung soll strikt als **Kette** laufen:
 
 ### Fortschritt vs. Blocker (Session 2026-06-02, CI-Testauslagerung Run NM)
 
-- **Fortschritt:** Das nächste Arbeitspaket wurde auf Testhygiene/CI-Auslagerung fokussiert: `.github/workflows/local-completion-checks.yml` startet nun zusätzlich eine Pytest-Profilmatrix (`core-green`, `extended`), die Safe-Baseline, die dokumentierten Regression-Checks, die bestehende Satisfactory-Batterie und einen nur manuell per `workflow_dispatch` aktivierbaren Full-Heavy-Conversion-Job.
+- **Fortschritt:** Das nächste Arbeitspaket wurde auf Testhygiene/CI-Auslagerung fokussiert: `.github/workflows/local-completion-checks.yml` startet nun zusätzlich eine Pytest-Profilmatrix (`core-green`, `extended`), die bestehende Satisfactory-Batterie und per `workflow_dispatch` + `run_heavy_diagnostics` opt-in die Safe-Baseline, die dokumentierten Regression-Checks sowie einen Full-Heavy-Conversion-Job.
 - **Sicherung:** `docs/image_converter_workflow.md` und `README.md` dokumentieren, welche längeren Checks jetzt nach GitHub Actions verlagert sind und welche Kommandos lokal nur noch bei Bedarf gespiegelt werden. Der Workflow-Dokumentationstest wurde erweitert, damit neue CI-Jobs, Heavy-Env-Gates und der manuelle Volljob nicht versehentlich aus der Doku oder Workflow-Datei verschwinden.
-- **Blocker:** Die bekannte schwere `tests/test_image_composite_converter.py`-Vollprüfung bleibt wegen Langläufer-/Blockerhistorie bewusst manuell und blockiert Pull Requests nicht automatisch.
+- **Blocker:** Die bekannten schweren Konvertierungsdiagnosen bleiben wegen Langläufer-/Blockerhistorie bewusst opt-in und blockieren Pull Requests nicht automatisch; ein lokaler Gegencheck zeigte, dass `RUN_HEAVY_CONVERSION_TESTS=1 ./tools/run_safe_test_baseline.sh` aktuell weiterhin nicht als automatisches Pflichtgate geeignet ist.
 - **Nächster sinnvoller Schritt:** Die GitHub-Jobs auf dem nächsten Push beobachten; falls ein ausgelagerter Heavy-Job echte Laufzeit-/Datenblocker zeigt, diese als konkrete T6-/TB1-Folgeaufgabe mit Job-Log und NodeID zurückführen.

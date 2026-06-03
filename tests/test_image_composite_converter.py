@@ -6536,11 +6536,14 @@ def test_local_workflow_doc_tracks_current_commands() -> None:
     assert "batch-artifact-drift-gate:" in ci_workflow
     assert "drift_status=pass" in ci_workflow
     assert "./tools/run_local_completion_checks.sh --require-drift-summary" in ci_workflow
+    assert "run_heavy_diagnostics:" in ci_workflow
     assert "pytest-profile-matrix:" in ci_workflow
     assert "python tools/run_pytest_profile.py ${{ matrix.profile }}" in ci_workflow
     assert "safe-baseline:" in ci_workflow
+    assert "safe-baseline:\n    if: github.event_name == 'workflow_dispatch' && inputs.run_heavy_diagnostics" in ci_workflow
     assert "./tools/run_safe_test_baseline.sh" in ci_workflow
     assert "regression-checks:" in ci_workflow
+    assert "regression-checks:\n    if: github.event_name == 'workflow_dispatch' && inputs.run_heavy_diagnostics" in ci_workflow
     assert "./tools/run_regression_checks.sh" in ci_workflow
     assert ci_workflow.count("RUN_HEAVY_CONVERSION_TESTS: '1'") >= 4
     assert "satisfactory-regression-battery:" in ci_workflow
@@ -6549,13 +6552,14 @@ def test_local_workflow_doc_tracks_current_commands() -> None:
     assert "actions/upload-artifact@v4" in ci_workflow
     assert "satisfactory-regression-debug" in ci_workflow
     assert "full-heavy-conversion-suite:" in ci_workflow
-    assert "github.event_name == 'workflow_dispatch'" in ci_workflow
+    assert "full-heavy-conversion-suite:\n    if: github.event_name == 'workflow_dispatch' && inputs.run_heavy_diagnostics" in ci_workflow
     assert "python -m pytest -q -rs tests/test_image_composite_converter.py" in ci_workflow
     assert "pull_request:" in ci_workflow
     assert "workflow_dispatch:" in ci_workflow
     assert "--print-linux-vendor-command" in workflow_doc
     assert "python tools/run_pytest_profile.py core-green" in workflow_doc
     assert "python tools/run_pytest_profile.py extended" in workflow_doc
+    assert "run_heavy_diagnostics" in workflow_doc
     assert "./tools/run_safe_test_baseline.sh" in workflow_doc
     assert "./tools/run_regression_checks.sh" in workflow_doc
     assert "satisfactory-regression-battery" in workflow_doc

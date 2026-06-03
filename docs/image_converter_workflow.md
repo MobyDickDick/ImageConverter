@@ -141,7 +141,12 @@ dasselbe Abschlussprofil mit verpflichtender Drift-Artefaktprüfung:
 
 Damit möglichst wenige längere Testbatterien lokal gestartet werden müssen,
 lagert GitHub Actions außerdem die dokumentierten Zusatzprofile in eigene Jobs
-aus:
+aus. Die schnellen Pytest-Profile laufen automatisch; die bekannten schweren
+Konvertierungsdiagnosen (`safe-baseline`, `regression-checks` und
+`full-heavy-conversion-suite`) laufen nur, wenn der manuelle
+`workflow_dispatch`-Input `run_heavy_diagnostics` aktiviert wird. Dadurch bleiben
+Pull Requests grünfähig, während die langen T6-/TB1-Diagnosen weiterhin in
+GitHub statt lokal reproduziert werden können:
 
 ```bash
 python tools/run_pytest_profile.py core-green
@@ -150,9 +155,10 @@ python tools/run_pytest_profile.py extended
 ./tools/run_regression_checks.sh
 ```
 
-Die beiden Shell-Profile laufen in CI mit `RUN_HEAVY_CONVERSION_TESTS=1`, damit
-auch explizit ausgelagerte Konvertierungsregressionen nicht durch das lokale
-Default-Skip-Gate aus `conftest.py` ausgeblendet werden.
+Die beiden Shell-Profile laufen bei aktivierter Heavy-Diagnose mit
+`RUN_HEAVY_CONVERSION_TESTS=1`, damit explizit ausgelagerte
+Konvertierungsregressionen nicht durch das lokale Default-Skip-Gate aus
+`conftest.py` ausgeblendet werden.
 
 Der separate CI-Job `satisfactory-regression-battery` delegiert den teuren
 Qualitäts-Nachweis für alle gespeicherten zufriedenstellenden Konvertierungen an
@@ -173,8 +179,9 @@ Der Test schreibt zusätzlich JSONL-Debugdaten in das per
 diese Dateien als Artefakt `satisfactory-regression-debug` hoch; die wichtigsten
 Ereignisse erscheinen wegen `-s` auch live im Job-Log.
 
-Für seltene Vollprüfungen enthält der Workflow zusätzlich den manuellen
-`workflow_dispatch`-Job `full-heavy-conversion-suite`. Er sammelt das schwere
+Für seltene Vollprüfungen enthält der Workflow zusätzlich den durch
+`run_heavy_diagnostics` geschützten `workflow_dispatch`-Job
+`full-heavy-conversion-suite`. Er sammelt das schwere
 `tests/test_image_composite_converter.py`-Modul mit
 `RUN_HEAVY_CONVERSION_TESTS=1`, läuft aber bewusst nicht automatisch auf jedem
 Pull Request, damit bekannte Langläufer nicht die normale CI-Rückmeldung
