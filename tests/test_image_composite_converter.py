@@ -6532,6 +6532,15 @@ def test_local_workflow_doc_tracks_current_commands() -> None:
     assert "python -m pip install pytest" in workflow_doc
     assert "python -m pip install pytest" in ci_workflow
     assert ci_workflow.count("python -m pip install pytest") >= 3
+    assert "./tools/run_test_evidence.sh" in workflow_doc
+    assert "./tools/run_test_evidence.sh" in ci_workflow
+    assert "artifacts/test-evidence/completion-profile.log" in workflow_doc
+    assert "artifacts/test-evidence/completion-profile.log" in ci_workflow
+    assert "artifacts/test-evidence/completion-profile-summary.md" in workflow_doc
+    assert "artifacts/test-evidence/completion-profile-summary.md" in ci_workflow
+    assert "completion-profile-test-evidence" in workflow_doc
+    assert "completion-profile-test-evidence" in ci_workflow
+    assert "if-no-files-found: error" in ci_workflow
     assert "./tools/run_local_completion_checks.sh" in ci_workflow
     assert "batch-artifact-drift-gate:" in ci_workflow
     assert "drift_status=pass" in ci_workflow

@@ -31,8 +31,21 @@ jobs:
       - name: Install test dependencies
         run: python -m pip install pytest
 
-      - name: Run documented local completion profile
-        run: ./tools/run_local_completion_checks.sh
+      - name: Run documented local completion profile with test evidence
+        run: >-
+          ./tools/run_test_evidence.sh
+          --name completion-profile
+          --log artifacts/test-evidence/completion-profile.log
+          --summary artifacts/test-evidence/completion-profile-summary.md
+          -- ./tools/run_local_completion_checks.sh
+
+      - name: Upload completion-profile test evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: completion-profile-test-evidence
+          path: artifacts/test-evidence
+          if-no-files-found: error
 
   batch-artifact-drift-gate:
     runs-on: ubuntu-latest
