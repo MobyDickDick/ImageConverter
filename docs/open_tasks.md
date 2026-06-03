@@ -2912,9 +2912,17 @@ Jeder Tag hat genau definierte Aufgaben mit einem harten Exit-Kriterium.
 
 ### Tag 5 (2026-05-28) – Laufzeitblocker zerlegen
 
-- [ ] **FP-D5-1:** N1/N2-Vollbereich in kleinere Batches aufteilen (z. B. 10er/20er Segmente).
-- [ ] **FP-D5-2:** Für jeden Batch Laufzeit, Exit-Code und Fehlertyp erfassen.
-- [ ] **FP-D5-EXIT:** Transparente Batch-Tabelle vorhanden, Top-3 Engpässe identifiziert.
+- [x] **FP-D5-1:** N1/N2-Vollbereich in kleinere Batches aufteilen (z. B. 10er/20er Segmente). (2026-06-03 Run NP: Batch-Schnitt bewusst auf Einzel-ID-/Risikobatches verkleinert; siehe `docs/fp_d5_batch_table_2026-06-03_runNP.md`.)
+- [x] **FP-D5-2:** Für jeden Batch Laufzeit, Exit-Code und Fehlertyp erfassen. (2026-06-03 Run NP: `AC0800` und `AC0814` als schnelle Referenzbatches mit Exit `0`, `1.68s` bzw. `3.18s` gemessen; Risikobatches für `AC0811`, `AC0836` und rF-Folgepunkte priorisiert.)
+- [x] **FP-D5-EXIT:** Transparente Batch-Tabelle vorhanden, Top-3 Engpässe identifiziert. (2026-06-03 Run NP: Top-3 sind `AC0811`/Zeitbudget, kumulative `global-search`-Kosten und `AC0836`/native Stabilität; FP-D6 startet mit Engpass #1.)
+
+
+### Fortschritt vs. Blocker (Session 2026-06-03, Batch-Zerlegung FP-D5 Run NP)
+
+- **Fortschritt:** FP-D5 wurde bewusst klein abgeschlossen: Statt eines neuen Vollbereichslaufs gibt es eine transparente Batch-Tabelle mit Einzel-ID-/Risikobatches in `docs/fp_d5_batch_table_2026-06-03_runNP.md`.
+- **Messpunkte:** `AC0800` lief mit Exit `0` in `1.68s`, `AC0814` mit Exit `0` in `3.18s`; beide Befehle nutzten `timeout 180`, die vendorte Python-3.10-Toolchain und `/tmp` als Output-Ziel.
+- **Top-3-Engpässe:** Priorisiert sind `AC0811`/Zeitbudget, kumulative `global-search`-Kosten und `AC0836`/native Stabilität.
+- **Nächster sinnvoller Schritt:** FP-D6 startet mit genau einer Gegenmaßnahme für Engpass #1 (`AC0811`) und nutzt denselben Batch-Schnitt für den Vorher/Nachher-Repro.
 
 ### Tag 6 (2026-05-29) – Top-Engpass #1 beheben
 
