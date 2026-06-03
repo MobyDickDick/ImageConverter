@@ -783,6 +783,54 @@ def test_run_non_composite_iteration_impl_ac0100_size_variant_keeps_algorithmic_
     assert artifacts and artifacts[0][0].startswith("<svg")
     assert artifacts[0][1] == "baseline_rendered"
 
+
+def test_run_non_composite_iteration_impl_ac0100_keeps_description_algorithm_even_when_sample_error_is_lower(tmp_path) -> None:
+    logs: list[list[str]] = []
+    artifacts: list[tuple[str, object]] = []
+    image_dir = tmp_path / "images"
+    samples_dir = image_dir / "samples"
+    samples_dir.mkdir(parents=True)
+    (samples_dir / "AC0100_L.svg").write_text("<svg sample/>", encoding="utf-8")
+
+    result = non_composite_runtime_helpers.runNonCompositeIterationImpl(
+        mode="non_composite",
+        params={"mode": "non_composite"},
+        stripe_strategy=None,
+        semantic_mode_visual_override=False,
+        width=64,
+        height=64,
+        base_name="AC0100_S",
+        description=(
+            "Wie AC0010: Heizelement, graues Rechteck, Plus-Minus-Zeichen oben links, "
+            "horizontaler Farbverlauf dunkel–hell–dunkel sowie graue Diagonale von oben rechts nach unten links."
+        ),
+        perc_img="target",
+        img_path=str(image_dir / "AC0100_S.jpg"),
+        print_fn=lambda _message: None,
+        render_embedded_raster_svg_fn=lambda _path: "<svg baseline/>",
+        build_gradient_stripe_svg_fn=lambda *_args, **_kwargs: "<svg gradient/>",
+        build_gradient_stripe_validation_log_lines_fn=lambda **_kwargs: ["status=non_composite_gradient_stripe"],
+        write_validation_log_fn=logs.append,
+        render_svg_to_numpy_fn=lambda content, *_args, **_kwargs: (
+            "sample_rendered" if "sample" in content else "algorithm_rendered"
+        ),
+        record_render_failure_fn=lambda *args, **kwargs: None,
+        write_attempt_artifacts_fn=lambda svg, rendered: artifacts.append((svg, rendered)),
+        calculate_error_fn=lambda _target, rendered: 10.0 if rendered == "sample_rendered" else 100.0,
+    )
+
+    assert result == (
+        "AC0100_S",
+        "Wie AC0010: Heizelement, graues Rechteck, Plus-Minus-Zeichen oben links, "
+        "horizontaler Farbverlauf dunkel–hell–dunkel sowie graue Diagonale von oben rechts nach unten links.",
+        {"mode": "non_composite"},
+        1,
+        100.0,
+    )
+    assert logs[0][0] in {"status=non_composite_description_geometry_ir", "status=non_composite_elementwise_symbol_fit"}
+    assert not any("status=non_composite_plan_b_sample_svg_selected" in line for row in logs for line in row)
+    assert artifacts and artifacts[0][1] == "algorithm_rendered"
+
 def test_try_load_sample_svg_auto_converts_inkscape_file(tmp_path) -> None:
     image_dir = tmp_path / "images"
     samples_dir = image_dir / "samples"

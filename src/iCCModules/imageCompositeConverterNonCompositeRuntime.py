@@ -712,6 +712,7 @@ def runNonCompositeIterationImpl(
         )
         return None
 
+    description_driven_algorithm_available = False
     if stripe_strategy:
         print_fn("  -> Fallback aktiv: verwende Gradient-Stripe-Strategie.")
         svg_content = build_gradient_stripe_svg_fn(width, height, stripe_strategy)
@@ -737,6 +738,7 @@ def runNonCompositeIterationImpl(
             )
             else None
         )
+        description_driven_algorithm_available = geometry_ir_svg is not None
         if perception_seeded is not None or geometry_ir_svg is not None:
             candidates: list[dict[str, object]] = []
             if perception_seeded is not None:
@@ -748,17 +750,17 @@ def runNonCompositeIterationImpl(
                         svg_content=seeded_svg,
                         params_snapshot=params,
                     )
-                    return None
-                candidates.append(
-                    {
-                        "status": "non_composite_perception_seeded_geometry_ir",
-                        "svg": seeded_svg,
-                        "rendered": seeded_rendered,
-                        "error": calculate_error_fn(perc_img, seeded_rendered),
-                        "geometry_ir": seeded_ir,
-                        "perception_seed_count": perception_seed_count,
-                    }
-                )
+                else:
+                    candidates.append(
+                        {
+                            "status": "non_composite_perception_seeded_geometry_ir",
+                            "svg": seeded_svg,
+                            "rendered": seeded_rendered,
+                            "error": calculate_error_fn(perc_img, seeded_rendered),
+                            "geometry_ir": seeded_ir,
+                            "perception_seed_count": perception_seed_count,
+                        }
+                    )
             if geometry_ir_svg is not None:
                 description_rendered = render_svg_to_numpy_fn(geometry_ir_svg, width, height)
                 if description_rendered is None:
@@ -767,17 +769,17 @@ def runNonCompositeIterationImpl(
                         svg_content=geometry_ir_svg,
                         params_snapshot=params,
                     )
-                    return None
-                candidates.append(
-                    {
-                        "status": "non_composite_description_geometry_ir",
-                        "svg": geometry_ir_svg,
-                        "rendered": description_rendered,
-                        "error": calculate_error_fn(perc_img, description_rendered),
-                        "geometry_ir": description_geometry_ir,
-                        "perception_seed_count": 0,
-                    }
-                )
+                else:
+                    candidates.append(
+                        {
+                            "status": "non_composite_description_geometry_ir",
+                            "svg": geometry_ir_svg,
+                            "rendered": description_rendered,
+                            "error": calculate_error_fn(perc_img, description_rendered),
+                            "geometry_ir": description_geometry_ir,
+                            "perception_seed_count": 0,
+                        }
+                    )
             try:
                 best_structured = _fit_symbol_element_by_element(
                     width=width,
@@ -802,6 +804,8 @@ def runNonCompositeIterationImpl(
                         "step_logs": step_logs,
                     }
                 )
+            if not candidates:
+                return None
             best_geometry_candidate = min(candidates, key=lambda candidate: float(candidate["error"]))
             svg_content = str(best_geometry_candidate["svg"])
             svg_rendered = best_geometry_candidate["rendered"]
@@ -840,6 +844,7 @@ def runNonCompositeIterationImpl(
                     )
             write_validation_log_fn(log_lines)
         else:
+            description_driven_algorithm_available = False
             try:
                 best_structured = _fit_symbol_element_by_element(
                     width=width,
@@ -885,7 +890,7 @@ def runNonCompositeIterationImpl(
             return None
         svg_err = calculate_error_fn(perc_img, svg_rendered)
 
-    if sample_svg:
+    if sample_svg and not description_driven_algorithm_available:
         sample_svg_path, sample_svg_content = sample_svg
         sample_rendered = render_svg_to_numpy_fn(sample_svg_content, width, height)
         if sample_rendered is not None:
