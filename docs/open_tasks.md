@@ -2971,9 +2971,16 @@ Jeder Tag hat genau definierte Aufgaben mit einem harten Exit-Kriterium.
 
 ### Tag 8 (2026-05-31) – Semantik-Fokusfamilien Teil 1
 
-- [ ] **FP-D8-1:** Fokusfamilie aus AC08-Prioritäten wählen (z. B. kleine Kreisvarianten).
-- [ ] **FP-D8-2:** Pro bearbeiteter Familie mindestens einen gezielten Regressionstest ergänzen/aktualisieren.
-- [ ] **FP-D8-EXIT:** Familienänderung + zugehöriger grüner Test sind gemeinsam dokumentiert.
+- [x] **FP-D8-1:** Fokusfamilie aus AC08-Prioritäten wählen (z. B. kleine Kreisvarianten). (2026-06-04 Run NS: Fokusfamilie `AC08_SMALL_CIRCLE_FALLBACK_FAMILIES` gewählt; Startbelege sind `AC0811_S`, `AC0814_S` und `AC0870_S` aus Priorität 2 des AC08-Plans.)
+- [x] **FP-D8-2:** Pro bearbeiteter Familie mindestens einen gezielten Regressionstest ergänzen/aktualisieren. (2026-06-04 Run NS: Fallback-Quellen-Test für die drei Startvarianten parametrisiert und die Familie im Semantic-Primitive-Check zentralisiert.)
+- [x] **FP-D8-EXIT:** Familienänderung + zugehöriger grüner Test sind gemeinsam dokumentiert. (2026-06-04 Run NS: `PYTHONPATH=vendor/linux-py310/site-packages:. python -m pytest -q tests/test_image_composite_converter.py::test_detect_semantic_primitives_reports_small_circle_family_fallback_source tests/detailtests/test_semantic_family_rules_helpers.py tests/detailtests/test_semantic_ac08_family_helpers.py` lief grün mit `12 passed`; Abschlussnotiz siehe `docs/next_arbeitspaket_2026-06-04_runNS.md`.)
+
+### Fortschritt vs. Blocker (Session 2026-06-04, Semantik-Fokusfamilien Teil 1 FP-D8 Run NS)
+
+- **Fortschritt:** FP-D8 wurde abgeschlossen: Die bisherigen Einzelfall-Fallbacks für `AC0811_S`, `AC0814_S` und `AC0870_S` wurden als kleine AC08-Kreisfamilie gebündelt und auf weitere semantische AC08-Kleinfamilien vorbereitet.
+- **Sicherung:** Der gezielte Regressionstest erzwingt bei deaktivierter Hough-/Foreground-Kreisdetektion weiterhin `circle_detection_source=family_fallback` für die drei Prioritätsvarianten.
+- **Blocker:** Kein FP-D8-Blocker; der Fallback greift weiterhin nur im Small-Variant-Modus, bei aktivem Kreis und nach positivem Ring-/Sektorbeleg.
+- **Nächster sinnvoller Schritt:** FP-D9 kann mit der Plain-Ring-Semantik für `AC0800_*` starten und zusätzlich eine Familienkonsistenzmetrik protokollieren.
 
 ### Tag 9 (2026-06-01) – Semantik-Fokusfamilien Teil 2
 
