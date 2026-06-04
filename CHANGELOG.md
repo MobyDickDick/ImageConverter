@@ -8,6 +8,7 @@ All notable changes to ImageConverter will be documented in this file.
 
 ## Unreleased
 
+- AC0861_S now uses the semantic AC08 rF lower-stem connector badge path, with PF8 rotation updated to AC0862_S/AC0863_S/AC0864_S.
 - AC0850_M now uses the semantic AC08 rF circle/text badge path instead of failing conversion, including rF text-scale tuning and Plan-B rotation to the next rF connector probe.
 - AC0838_M was revalidated in the Plan-B/Perception rotation and removed from the active candidate list after the isolated VOC badge run fell below the review threshold.
 - AC0232_S now uses a description-driven, left-rotated top-kelle Geometry-IR glyph with an `M` label before the generic non-composite fallback.

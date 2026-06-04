@@ -239,4 +239,12 @@ def makeAc08BadgeParamsImpl(
             return finalize_ac08_style_fn(name, defaults)
         return finalize_ac08_style_fn(name, fit_semantic_badge_from_image_fn(img, defaults))
 
+    if name == "AC0861":
+        # AC0861 is the rF counterpart of the lower vertical-connector
+        # AC0881/AC0836 badge: circle/text badge with a stem below the circle.
+        defaults = _apply_rf_label(default_ac0881_params_fn(w, h))
+        if img is None:
+            return finalize_ac08_style_fn(name, defaults)
+        return finalize_ac08_style_fn(name, fit_ac0811_params_from_image_fn(img, defaults))
+
     return None

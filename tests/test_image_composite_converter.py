@@ -1149,6 +1149,39 @@ def test_parse_description_marks_ac0844_as_rf_right_arm_badge() -> None:
     assert "SEMANTIC: waagrechter Strich rechts vom Kreis" in list(params.get("elements", []))
 
 
+def test_make_badge_params_ac0861_uses_lower_stem_rf_geometry() -> None:
+    """AC0861 defaults must render the rF badge with a lower vertical connector."""
+    params = image_composite_converter.Action.make_badge_params(15, 25, "AC0861")
+
+    assert params is not None
+    assert bool(params.get("stem_enabled", False))
+    assert not bool(params.get("arm_enabled", False))
+    assert float(params.get("stem_bottom", 0.0)) > float(params.get("stem_top", 0.0))
+    assert str(params.get("text_mode", "")).lower() == "rf"
+    assert params.get("label") == "rF"
+
+
+def test_parse_description_marks_ac0861_as_rf_lower_stem_badge() -> None:
+    """AC0861 descriptions should activate the rF lower-stem connector family."""
+    ref = image_composite_converter.Reflection(
+        {
+            "AC0861": (
+                'Grauer Kreis mit grauem Rand und hellgrauem Hintergrund '
+                'Abweichung: mit Text "rF" (relative Feuchtigkeit) '
+                'Abweichung: mit Griff (dunkelgraue Linie nach unten). '
+                'Der Griff liegt auf einer Symmetrieachse des Kreises.'
+            )
+        }
+    )
+
+    _desc, params = ref.parse_description("AC0861_S", "AC0861_S.jpg")
+
+    assert params["mode"] == "semantic_badge"
+    assert params["label"] == "rF"
+    assert "SEMANTIC: Kreis + Buchstabe rF" in list(params.get("elements", []))
+    assert "SEMANTIC: senkrechter Strich hinter dem Kreis" in list(params.get("elements", []))
+
+
 def test_parse_description_marks_ac0800_as_plain_ring_family() -> None:
     """AC0800 should remain a semantic plain ring even without text clues in the XML."""
     ref = image_composite_converter.Reflection({})
