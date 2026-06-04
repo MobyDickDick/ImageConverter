@@ -4,10 +4,11 @@ from __future__ import annotations
 
 import dataclasses
 import math
+import weakref
 from collections import OrderedDict
 
 _CROSS_ROUND_EVAL_CACHE_MAX = 4096
-_CROSS_ROUND_EVAL_CACHE: OrderedDict[tuple[int, tuple], float] = OrderedDict()
+_CROSS_ROUND_EVAL_CACHE: OrderedDict[tuple[int, tuple], tuple[weakref.ReferenceType, float]] = OrderedDict()
 
 
 def _freeze_eval_value(value):
@@ -166,20 +167,28 @@ def optimizeGlobalParameterVectorSamplingImpl(
         cross_round_key = (id(img_orig), cache_key)
         cross_round_cached = _CROSS_ROUND_EVAL_CACHE.get(cross_round_key)
         if cross_round_cached is not None:
-            eval_hits += 1
-            _CROSS_ROUND_EVAL_CACHE.move_to_end(cross_round_key)
-            eval_cache[cache_key] = cross_round_cached
-            return cross_round_cached
+            cached_image_ref, cached_error = cross_round_cached
+            if cached_image_ref() is img_orig:
+                eval_hits += 1
+                _CROSS_ROUND_EVAL_CACHE.move_to_end(cross_round_key)
+                eval_cache[cache_key] = cached_error
+                return cached_error
+            _CROSS_ROUND_EVAL_CACHE.pop(cross_round_key, None)
         cached = eval_cache.get(cache_key)
         if cached is not None:
             eval_hits += 1
             return cached
         err = float(full_badge_error_for_params_fn(img_orig, probe))
         eval_cache[cache_key] = err
-        _CROSS_ROUND_EVAL_CACHE[cross_round_key] = err
-        _CROSS_ROUND_EVAL_CACHE.move_to_end(cross_round_key)
-        if len(_CROSS_ROUND_EVAL_CACHE) > _CROSS_ROUND_EVAL_CACHE_MAX:
-            _CROSS_ROUND_EVAL_CACHE.popitem(last=False)
+        try:
+            image_ref = weakref.ref(img_orig)
+        except TypeError:
+            image_ref = None
+        if image_ref is not None:
+            _CROSS_ROUND_EVAL_CACHE[cross_round_key] = (image_ref, err)
+            _CROSS_ROUND_EVAL_CACHE.move_to_end(cross_round_key)
+            if len(_CROSS_ROUND_EVAL_CACHE) > _CROSS_ROUND_EVAL_CACHE_MAX:
+                _CROSS_ROUND_EVAL_CACHE.popitem(last=False)
         return err
 
     def withinHardBounds(candidate) -> tuple[bool, str]:
