@@ -8,6 +8,45 @@ from typing import Any
 
 from src.iCCModules import imageCompositeConverterSemanticValidation as semantic_validation_helpers
 
+AC08_SMALL_CIRCLE_FALLBACK_FAMILIES = frozenset(
+    {
+        "AC0810",
+        "AC0811",
+        "AC0812",
+        "AC0813",
+        "AC0814",
+        "AC0820",
+        "AC0831",
+        "AC0832",
+        "AC0833",
+        "AC0834",
+        "AC0835",
+        "AC0836",
+        "AC0837",
+        "AC0838",
+        "AC0839",
+        "AC0842",
+        "AC0844",
+        "AC0850",
+        "AC0861",
+        "AC0862",
+        "AC0863",
+        "AC0870",
+        "AC0881",
+        "AC0882",
+    }
+)
+
+
+def _supports_ac08_small_circle_family_fallback(badge: dict, symbol_hint: str) -> bool:
+    """Return whether the semantic AC08 small-variant circle fallback may be used."""
+    if not bool(badge.get("ac08_small_variant_mode", False)):
+        return False
+    if not bool(badge.get("circle_enabled", True)):
+        return False
+    return symbol_hint in AC08_SMALL_CIRCLE_FALLBACK_FAMILIES
+
+
 def detectSemanticPrimitivesImpl(
     img_orig: Any,
     badge_params: dict | None,
@@ -38,7 +77,6 @@ def detectSemanticPrimitivesImpl(
     fg_mask = foreground_mask_fn(img_orig).astype(np.uint8)
     min_side = max(1, min(h, w))
     badge = badge_params or {}
-    small_variant = bool(badge.get("ac08_small_variant_mode", False))
     symbol_hint = str(badge.get("badge_symbol_name", "")).upper()
     circle_detection_source = "none"
 
@@ -89,7 +127,7 @@ def detectSemanticPrimitivesImpl(
             circle_detection_source = "foreground_mask"
 
     if not has_circle and badge:
-        if small_variant and symbol_hint in {"AC0811", "AC0814", "AC0870"}:
+        if _supports_ac08_small_circle_family_fallback(badge, symbol_hint):
             exp_cx = float(badge.get("cx", float(w) / 2.0))
             exp_cy = float(badge.get("cy", float(h) / 2.0))
             exp_r = float(badge.get("r", max(2.0, float(min_side) * 0.28)))

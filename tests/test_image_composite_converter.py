@@ -5995,17 +5995,32 @@ def test_make_badge_params_keeps_ac0838_m_circle_near_full_width_for_voc_layout(
     assert float(params["cy"]) >= 24.0
 
 
-def test_detect_semantic_primitives_reports_family_circle_fallback_source(monkeypatch: pytest.MonkeyPatch) -> None:
-    """Semantic primitive detection should expose when AC08 small-family fallback provided circle evidence."""
+@pytest.mark.parametrize(
+    ("variant", "image_path", "symbol"),
+    [
+        ("AC0811_S", "artifacts/images_to_convert/nonconvertable/AC0811_S.jpg", "AC0811"),
+        ("AC0814_S", "artifacts/images_to_convert/AC0814_S.jpg", "AC0814"),
+        ("AC0870_S", "artifacts/images_to_convert/AC0870_S.jpg", "AC0870"),
+    ],
+)
+def test_detect_semantic_primitives_reports_small_circle_family_fallback_source(
+    variant: str,
+    image_path: str,
+    symbol: str,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Priority AC08 small-circle variants should expose family fallback circle evidence."""
     if image_composite_converter.np is None or image_composite_converter.cv2 is None:
         pytest.skip("numpy/cv2 not available in this environment")
 
     cv2 = image_composite_converter.cv2
-    img = cv2.imread("artifacts/images_to_convert/AC0814_S.jpg")
-    assert img is not None
+    img = cv2.imread(image_path)
+    if img is None:
+        pytest.skip(f"{variant} fixture image not available")
 
-    params = Action.make_badge_params(img.shape[1], img.shape[0], "AC0814", img)
+    params = Action.make_badge_params(img.shape[1], img.shape[0], symbol, img)
     assert params is not None
+    params["variant_name"] = variant
 
     monkeypatch.setattr(cv2, "HoughCircles", lambda *args, **kwargs: None)
     monkeypatch.setattr(Action, "_circle_from_foreground_mask", staticmethod(lambda _mask: None))
