@@ -247,4 +247,13 @@ def makeAc08BadgeParamsImpl(
             return finalize_ac08_style_fn(name, defaults)
         return finalize_ac08_style_fn(name, fit_ac0811_params_from_image_fn(img, defaults))
 
+    if name == "AC0863":
+        # AC0863 continues the AC0842/AC0862 rF weak-family rotation: the
+        # connector is rotated into the upper vertical-arm geometry while the
+        # rF label remains horizontally oriented.
+        defaults = _apply_rf_label(default_ac0813_params_fn(w, h))
+        if img is None:
+            return finalize_ac08_style_fn(name, defaults)
+        return finalize_ac08_style_fn(name, fit_ac0813_params_from_image_fn(img, defaults))
+
     return None
