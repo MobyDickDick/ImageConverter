@@ -117,6 +117,12 @@ def test_harmonize_semantic_size_variants_writes_catalog_and_harmonized_svg(tmp_
     assert "prototype_group" in catalog_text
     assert "geometry_signature_delta" in catalog_text
     assert "text_orientation_policy" in catalog_text
+    metrics_path = tmp_path / "reports" / "family_consistency_metrics.csv"
+    assert metrics_path.exists()
+    metrics_text = metrics_path.read_text(encoding="utf-8")
+    assert "intra_family_max_delta" in metrics_text
+    assert "prototype_max_delta" in metrics_text
+    assert "AC9999;AC9999_L|AC9999_M;base:AC9999" in metrics_text
     assert (tmp_path / "reports" / "variant_harmonization.log").exists()
 
 

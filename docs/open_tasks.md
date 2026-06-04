@@ -2984,9 +2984,16 @@ Jeder Tag hat genau definierte Aufgaben mit einem harten Exit-Kriterium.
 
 ### Tag 9 (2026-06-01) – Semantik-Fokusfamilien Teil 2
 
-- [ ] **FP-D9-1:** Nächste AC08-Fokusfamilie bearbeiten (z. B. Plain-Ring `AC0800_*`).
-- [ ] **FP-D9-2:** Qualitätsmetrik zur Familienkonsistenz protokollieren.
-- [ ] **FP-D9-EXIT:** Regressionsschutz für die zweite Fokusfamilie grün.
+- [x] **FP-D9-1:** Nächste AC08-Fokusfamilie bearbeiten (z. B. Plain-Ring `AC0800_*`). (2026-06-04 Run NT: `AC0800_L/M/S` leiten auch ohne Beschreibungstext explizit `SEMANTIC: Kreis ohne Buchstabe` aus der Familienregel ab; der Description-Contract wird dafür als `family_rule` abgeschlossen.)
+- [x] **FP-D9-2:** Qualitätsmetrik zur Familienkonsistenz protokollieren. (2026-06-04 Run NT: `family_consistency_metrics.csv` ergänzt den Harmonization-Report; AC0800-Repro: `intra_family_max_delta=0.0333`, `prototype_max_delta=0.0000`, `variant_count=3`.)
+- [x] **FP-D9-EXIT:** Regressionsschutz für die zweite Fokusfamilie grün. (2026-06-04 Run NT: gezielte AC0800-/Harmonization-Regression `11 passed`; AC0800-Batch Exit `0`, alle Varianten mit `SEMANTIC: Kreis ohne Buchstabe`.)
+
+### Fortschritt vs. Blocker (Session 2026-06-04, Semantik-Fokusfamilien Teil 2 FP-D9 Run NT)
+
+- **Fortschritt:** FP-D9 wurde abgeschlossen: Die Plain-Ring-Familie `AC0800_L/M/S` wird vor dem Insufficient-Description-Exit über die bekannte AC08-Familienregel als `Kreis ohne Buchstabe` klassifiziert.
+- **Gekoppelte Metrik:** Der Harmonization-Report schreibt zusätzlich `family_consistency_metrics.csv`; der AC0800-Repro protokolliert `intra_family_max_delta=0.0333`, `prototype_max_delta=0.0000` und `variant_count=3`.
+- **Blocker:** Kein FP-D9-Blocker; der Batch läuft mit Exit `0`, bleibt aber erwartungsgemäß ein schneller Fokus-Repro statt Vollbereichsgate.
+- **Nächster sinnvoller Schritt:** FP-D10 mit einer familienübergreifenden Harmonisierungshypothese aus `docs/ac08_improvement_plan.md` praktisch prüfen.
 
 ### Tag 10 (2026-06-02) – Familienübergreifende Harmonisierung
 
