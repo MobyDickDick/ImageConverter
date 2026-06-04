@@ -214,8 +214,8 @@ def makeAc08BadgeParamsImpl(
         defaults["rf_weight"] = int(defaults.get("rf_weight", 600))
         return defaults
 
-    if name == "AC0842":
-        # AC0842 follows the left-arm connector geometry (same arm placement as AC0812).
+    if name in {"AC0842", "AC0862"}:
+        # AC0842/AC0862 follow the left-arm connector geometry (same arm placement as AC0812).
         defaults = _apply_rf_label(default_ac0812_params_fn(w, h))
         if img is None:
             return enforce_left_arm_badge_geometry_fn(finalize_ac08_style_fn(name, defaults), w, h)

@@ -26,6 +26,7 @@ SEMANTIC_BADGE_FAMILIES: set[str] = {
     "AC0844",
     "AC0850",
     "AC0861",
+    "AC0862",
     "AC0870",
     "AC0881",
     "AC0882",
@@ -118,7 +119,7 @@ def apply_semantic_badge_family_rules(
         family_elements.append("SEMANTIC: Ventilkopf mit drei Dreiecken oberhalb des Stiels")
         family_elements.append("SEMANTIC: Dreiecks-Spitzen treffen zentriert am oberen Stielende zusammen")
         family_elements.append("SEMANTIC: Drei Dreiecke sind zu einem Polygon vereint")
-    if base_upper in {"AC0812", "AC0832", "AC0837", "AC0842", "AC0882"}:
+    if base_upper in {"AC0812", "AC0832", "AC0837", "AC0842", "AC0862", "AC0882"}:
         family_elements.append("SEMANTIC: waagrechter Strich links vom Kreis")
 
     if "waagrechter strich rechts" in desc:

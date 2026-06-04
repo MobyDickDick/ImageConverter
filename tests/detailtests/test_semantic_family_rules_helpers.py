@@ -18,6 +18,23 @@ def test_apply_semantic_badge_family_rules_supports_ac0842_left_connector() -> N
     assert "SEMANTIC: Kreis + Buchstabe rF" in params["elements"]
 
 
+def test_apply_semantic_badge_family_rules_supports_ac0862_left_connector() -> None:
+    params: dict[str, object] = {"elements": []}
+
+    applied = helpers.apply_semantic_badge_family_rules(
+        base_upper="AC0862",
+        symbol_upper="AC0862",
+        desc='grauer kreis mit text "rf" (relative feuchtigkeit) und griff nach rechts gedreht',
+        params=params,
+    )
+
+    assert applied is True
+    assert params["mode"] == "semantic_badge"
+    assert params["label"] == "rF"
+    assert "SEMANTIC: waagrechter Strich links vom Kreis" in params["elements"]
+    assert "SEMANTIC: Kreis + Buchstabe rF" in params["elements"]
+
+
 def test_apply_semantic_badge_family_rules_parses_explicit_color_count_override() -> None:
     params: dict[str, object] = {"elements": []}
 
