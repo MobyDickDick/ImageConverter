@@ -40,7 +40,7 @@ def writeAc08RegressionManifestImpl(
         f"folder_path={folder_path}",
         f"csv_path={csv_path}",
         "expected_reports=Iteration_Log.csv,quality_tercile_passes.csv,pixel_delta2_ranking.csv,pixel_delta2_summary.txt,ac08_weak_family_status.csv,ac08_weak_family_status.txt,ac08_success_metrics.csv,ac08_success_criteria.txt",
-        "expected_logs=variant_harmonization.log,shape_catalog.csv",
+        "expected_logs=variant_harmonization.log,shape_catalog.csv,family_consistency_metrics.csv,cross_family_hypothesis_metrics.csv",
         (
             "recommended_command=python -m src.imageCompositeConverter "
             f"{folder_path} --csv-path {csv_path} --ac08-regression-set {int(iterations)}"

@@ -6,7 +6,7 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-05-31)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `384` · Erledigt `289` · Offen `95`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `384` · Erledigt `312` · Offen `72`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -2997,9 +2997,17 @@ Jeder Tag hat genau definierte Aufgaben mit einem harten Exit-Kriterium.
 
 ### Tag 10 (2026-06-02) – Familienübergreifende Harmonisierung
 
-- [ ] **FP-D10-1:** Eine familienübergreifende Harmonisierungshypothese aus `docs/ac08_improvement_plan.md` praktisch prüfen.
-- [ ] **FP-D10-2:** Ergebnis als `bestätigt` oder `verworfen` mit Evidenz festhalten.
-- [ ] **FP-D10-EXIT:** Eine Hypothese datenbasiert abgeschlossen (nicht nur diskutiert).
+- [x] **FP-D10-1:** Eine familienübergreifende Harmonisierungshypothese aus `docs/ac08_improvement_plan.md` praktisch prüfen. (2026-06-04 Run NU: AC0800/AC0820-Skalenhypothese via neuem `cross_family_hypothesis_metrics.csv` im Harmonization-Report geprüft.)
+- [x] **FP-D10-2:** Ergebnis als `bestätigt` oder `verworfen` mit Evidenz festhalten. (2026-06-04 Run NU: `ac08_ring_scale_no_geometry_change` ist wegen zwei Topologiesignaturen `no_text` vs. `text_mode:co2` datenbasiert `rejected`.)
+- [x] **FP-D10-EXIT:** Eine Hypothese datenbasiert abgeschlossen (nicht nur diskutiert). (2026-06-04 Run NU: Detailtest grün; Fokuslauf Exit `0`; Evidenz unter `artifacts/converted_images/reports/FP_D10_cross_family_hypothesis_metrics_2026-06-04_runNU.csv`.)
+
+### Fortschritt vs. Blocker (Session 2026-06-04, Familienübergreifende Harmonisierung FP-D10 Run NU)
+
+- **Fortschritt:** FP-D10 wurde abgeschlossen: Der Harmonization-Report schreibt jetzt eine datenorientierte `cross_family_hypothesis_metrics.csv`, ohne die aktive Proto-Anker-Harmonisierung für riskante Text-/Nichttext-Gruppen auszuweiten.
+- **Evidenz:** Die geprüfte AC0800/AC0820-Hypothese wird als `rejected` protokolliert (`max_geometry_delta=0.1000`, `topology_signature_count=2`), weil AC0800 textlos ist und AC0820 CO₂-Text trägt.
+- **Sicherung:** `PYTHONPATH=vendor/linux-py310/site-packages:. python -m pytest -q tests/detailtests/test_semantic_harmonization_helpers.py` lief grün mit `7 passed`; der AC0800–AC0820-Fokuslauf endete mit Exit `0`.
+- **Blocker:** Kein technischer FP-D10-Blocker; fachlich bleibt als spätere Verbesserung eine getrennte Ringgeometrie-/Textlagen-Harmonisierung statt kompletter Proto-Anker-Übernahme.
+- **Nächster sinnvoller Schritt:** FP-D11 bereitet das Release-Kandidaten-Gate mit Kernsuite, AC08-Smoke und Qualitätsvergleich vor.
 
 ### Tag 11 (2026-06-03) – Release-Kandidaten-Gate vorbereiten
 
