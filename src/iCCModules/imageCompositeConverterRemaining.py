@@ -52,6 +52,7 @@ from src.iCCModules import imageCompositeConverterSemanticVisualOverride as sema
 from src.iCCModules import imageCompositeConverterSemanticBadgeRuntime as semantic_badge_runtime_helpers
 from src.iCCModules import imageCompositeConverterDualArrowRuntime as dual_arrow_runtime_helpers
 from src.iCCModules import imageCompositeConverterNonCompositeRuntime as non_composite_runtime_helpers
+from src.iCCModules import imageCompositeConverterQualityPassPolicy as quality_pass_policy_helpers
 from src.iCCModules.imageCompositeConverterPerceptionReflection import Perception, Reflection
 
 def detectRelevantRegions(img) -> list[dict[str, object]]:
@@ -1108,21 +1109,20 @@ def convertRange(
     max_quality_passes = 4
     # Fast-path for tightly scoped runs (e.g. AC0811-only diagnostics): extra
     # global quality passes mostly re-queue M/S variants with diminishing
-    # returns. Keep one refinement pass by default and allow explicit override.
-    single_base_run = False
+    # returns. AC0811 is the documented FP-D6 runtime-risk batch, so its focused
+    # repro command stays initial-pass-only unless explicitly overridden.
     try:
-        base_names = {str(getBaseNameFromFile(name)).upper() for name in process_files}
-        single_base_run = len(base_names) == 1
+        base_names = quality_pass_policy_helpers.baseNamesFromFilenamesImpl(
+            process_files,
+            get_base_name_from_file_fn=getBaseNameFromFile,
+        )
     except Exception:
-        single_base_run = False
-    if single_base_run:
-        max_quality_passes = 1
-    override_quality_passes = os.environ.get("ICC_MAX_QUALITY_PASSES", "").strip()
-    if override_quality_passes:
-        try:
-            max_quality_passes = max(0, int(override_quality_passes))
-        except ValueError:
-            pass
+        base_names = set()
+    max_quality_passes, quality_pass_policy_reason = quality_pass_policy_helpers.resolveMaxQualityPassesImpl(
+        default_max_quality_passes=max_quality_passes,
+        base_names=base_names,
+        override_quality_passes=os.environ.get("ICC_MAX_QUALITY_PASSES", ""),
+    )
     quality_logs: list[dict[str, object]] = []
     result_map: dict[str, dict[str, object]] = {}
     conversion_bestlist_path = _conversionBestlistManifestPath(reports_out_dir)
