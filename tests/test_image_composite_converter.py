@@ -1217,6 +1217,42 @@ def test_parse_description_marks_ac0861_as_rf_lower_stem_badge() -> None:
     assert "SEMANTIC: senkrechter Strich hinter dem Kreis" in list(params.get("elements", []))
 
 
+def test_make_badge_params_ac0863_uses_upper_arm_rf_geometry() -> None:
+    """AC0863 defaults must render the rF badge with an upper vertical connector."""
+    params = image_composite_converter.Action.make_badge_params(15, 25, "AC0863")
+
+    assert params is not None
+    assert bool(params.get("arm_enabled", False))
+    assert not bool(params.get("stem_enabled", False))
+    assert abs(float(params.get("arm_x2", 0.0)) - float(params.get("arm_x1", 0.0))) <= 0.01
+    assert float(params.get("arm_y1", 999.0)) <= 0.01
+    assert float(params.get("arm_y2", 999.0)) < float(params.get("cy", 0.0))
+    assert str(params.get("text_mode", "")).lower() == "rf"
+    assert params.get("label") == "rF"
+
+
+def test_parse_description_marks_ac0863_as_rf_upper_arm_badge() -> None:
+    """AC0863 descriptions should activate the rF upper vertical connector family."""
+    ref = image_composite_converter.Reflection(
+        {
+            "AC0842": (
+                'Grauer Kreis mit grauem Rand und hellgrauem Hintergrund '
+                'Abweichung: mit Text "rF" (relative Feuchtigkeit) '
+                'Abweichung: mit Griff (dunkelgraue Linie nach unten) '
+                'Abweichung: nach rechts gedreht, Text immer noch horizontal.'
+            ),
+            "AC0863": 'Wie AC0842, jecoch nach rechts gedreht, Text immer noch horizontal',
+        }
+    )
+
+    _desc, params = ref.parse_description("AC0863_S", "AC0863_S.jpg")
+
+    assert params["mode"] == "semantic_badge"
+    assert params["label"] == "rF"
+    assert "SEMANTIC: Kreis + Buchstabe rF" in list(params.get("elements", []))
+    assert "SEMANTIC: senkrechter Strich oben vom Kreis" in list(params.get("elements", []))
+
+
 def test_parse_description_marks_ac0800_as_plain_ring_family() -> None:
     """AC0800 should remain a semantic plain ring even without text clues in the XML."""
     ref = image_composite_converter.Reflection({})
