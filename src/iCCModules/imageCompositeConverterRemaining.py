@@ -620,6 +620,14 @@ def _diffOutputDir(output_root: str) -> str:
 def _convertedPngOutputDir(output_root: str) -> str:
     return output_path_helpers.convertedPngOutputDirImpl(output_root)
 
+def _failedSvgOutputDir(output_root: str) -> str:
+    return output_path_helpers.failedSvgOutputDirImpl(output_root)
+
+
+def _failedPngOutputDir(output_root: str) -> str:
+    return output_path_helpers.failedPngOutputDirImpl(output_root)
+
+
 def _reportsOutputDir(output_root: str) -> str:
     return output_path_helpers.reportsOutputDirImpl(output_root)
 
@@ -1048,11 +1056,15 @@ def convertRange(
     svg_out_dir = _convertedSvgOutputDir(out_root)
     diff_out_dir = _diffOutputDir(out_root)
     png_out_dir = _convertedPngOutputDir(out_root)
+    failed_svg_out_dir = _failedSvgOutputDir(out_root)
+    failed_png_out_dir = _failedPngOutputDir(out_root)
     reports_out_dir = _reportsOutputDir(out_root)
 
     os.makedirs(svg_out_dir, exist_ok=True)
     os.makedirs(diff_out_dir, exist_ok=True)
     os.makedirs(png_out_dir, exist_ok=True)
+    os.makedirs(failed_svg_out_dir, exist_ok=True)
+    os.makedirs(failed_png_out_dir, exist_ok=True)
     os.makedirs(reports_out_dir, exist_ok=True)
 
     normalized_selected_variants, files = _listRequestedImageFiles(

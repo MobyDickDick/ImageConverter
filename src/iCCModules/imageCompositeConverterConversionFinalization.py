@@ -217,6 +217,67 @@ def _markPoorConversionsWithFailedPrefix(
             failed_svg.unlink()
 
 
+def _failedArtifactDirsForSvgDir(svg_out_dir: str) -> tuple[Path, Path]:
+    """Return sibling directories for failed SVG and rendered PNG artifacts."""
+    output_root = Path(svg_out_dir).parent
+    return output_root / "converted_svg_failed", output_root / "converted_images_png_failed"
+
+
+def _moveFailedConversionArtifactsToFailedDirs(
+    *,
+    svg_out_dir: str,
+    result_map: dict[str, dict[str, object]],
+) -> set[str]:
+    """Move rejected conversion artifacts out of the successful output folders.
+
+    Poor conversions are first normalized to ``Failed_<variant>.svg`` by
+    ``_markPoorConversionsWithFailedPrefix``.  This helper then quarantines the
+    rejected SVG and its rendered PNG preview in dedicated failed-artifact
+    directories so the regular converted folders contain only acceptable
+    candidates.
+    """
+    svg_dir = Path(svg_out_dir)
+    if not svg_dir.exists():
+        return set()
+
+    failed_svg_dir, failed_png_dir = _failedArtifactDirsForSvgDir(svg_out_dir)
+    failed_svg_dir.mkdir(parents=True, exist_ok=True)
+    failed_png_dir.mkdir(parents=True, exist_ok=True)
+    png_dir = svg_dir.parent / "converted_images_png"
+
+    failed_variants: set[str] = set()
+    for failed_svg in sorted(svg_dir.glob("Failed_*.svg")):
+        variant = failed_svg.stem[len("Failed_") :].strip().upper()
+        if not variant:
+            continue
+        failed_variants.add(variant)
+
+        target_svg = failed_svg_dir / f"{variant}.svg"
+        if target_svg.exists():
+            target_svg.unlink()
+        failed_svg.replace(target_svg)
+
+        base_svg = svg_dir / f"{variant}.svg"
+        if base_svg.exists():
+            base_svg.unlink()
+
+        source_png = png_dir / f"{variant}.png"
+        if source_png.exists():
+            target_png = failed_png_dir / source_png.name
+            if target_png.exists():
+                target_png.unlink()
+            source_png.replace(target_png)
+
+    if failed_variants:
+        for row in result_map.values():
+            variant = str(row.get("variant", "")).strip().upper()
+            if variant in failed_variants:
+                row["status"] = "quality_failed"
+                row["failure_reason"] = "unsatisfactory_result"
+
+    return failed_variants
+
+
 def _archiveSuccessfulConversionArtifacts(*,
     folder_path: str,
     svg_out_dir: str,
@@ -430,6 +491,10 @@ def runConversionFinalizationImpl(
         svg_out_dir=svg_out_dir,
         result_map=result_map,
         reports_out_dir=reports_out_dir,
+    )
+    _moveFailedConversionArtifactsToFailedDirs(
+        svg_out_dir=svg_out_dir,
+        result_map=result_map,
     )
     _archiveSuccessfulConversionArtifacts(
         folder_path=folder_path,

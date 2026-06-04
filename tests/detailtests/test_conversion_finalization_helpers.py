@@ -412,3 +412,78 @@ def test_append_failure_followup_tasks_ignores_shallow_external_reports_dir(tmp_
     )
 
     assert not (tmp_path / "docs" / "open_tasks.md").exists()
+
+
+def test_move_failed_conversion_artifacts_to_failed_dirs_moves_svg_and_png(tmp_path):
+    output_root = tmp_path / "converted_images"
+    svg_dir = output_root / "converted_svgs"
+    png_dir = output_root / "converted_images_png"
+    svg_dir.mkdir(parents=True)
+    png_dir.mkdir(parents=True)
+    (svg_dir / "Failed_AC0800_L.svg").write_text("<svg/>", encoding="utf-8")
+    (png_dir / "AC0800_L.png").write_text("png", encoding="utf-8")
+    result_map = {"AC0800_L.jpg": {"variant": "AC0800_L", "status": "semantic_ok"}}
+
+    failed_variants = finalization_helpers._moveFailedConversionArtifactsToFailedDirs(
+        svg_out_dir=str(svg_dir),
+        result_map=result_map,
+    )
+
+    assert failed_variants == {"AC0800_L"}
+    assert (output_root / "converted_svg_failed" / "AC0800_L.svg").exists()
+    assert (output_root / "converted_images_png_failed" / "AC0800_L.png").exists()
+    assert not (svg_dir / "Failed_AC0800_L.svg").exists()
+    assert not (png_dir / "AC0800_L.png").exists()
+    assert result_map["AC0800_L.jpg"]["status"] == "quality_failed"
+    assert result_map["AC0800_L.jpg"]["failure_reason"] == "unsatisfactory_result"
+
+
+def test_run_conversion_finalization_quarantines_unsatisfactory_artifacts_before_archive(tmp_path):
+    output_root = tmp_path / "converted_images"
+    svg_dir = output_root / "converted_svgs"
+    png_dir = output_root / "converted_images_png"
+    reports_dir = output_root / "reports"
+    source_dir = tmp_path / "input"
+    svg_dir.mkdir(parents=True)
+    png_dir.mkdir(parents=True)
+    reports_dir.mkdir(parents=True)
+    source_dir.mkdir()
+    (reports_dir / "successful_conversions.txt").write_text("", encoding="utf-8")
+    (source_dir / "AC0801_L.jpg").write_text("source", encoding="utf-8")
+    (svg_dir / "AC0801_L.svg").write_text(
+        '<svg xmlns="http://www.w3.org/2000/svg"><image href="data:image/png;base64,abc"/></svg>',
+        encoding="utf-8",
+    )
+    (png_dir / "AC0801_L.png").write_text("png", encoding="utf-8")
+    result_map = {"AC0801_L.jpg": {"variant": "AC0801_L", "status": "semantic_ok", "mean_delta2": 0.0}}
+
+    finalization_helpers.runConversionFinalizationImpl(
+        reports_out_dir=str(reports_dir),
+        quality_logs=[],
+        conversion_bestlist_path=tmp_path / "bestlist.csv",
+        conversion_bestlist_rows={},
+        batch_failures=[],
+        strategy_logs=[],
+        files=["AC0801_L.jpg"],
+        result_map=result_map,
+        folder_path=str(source_dir),
+        csv_path="map.csv",
+        iterations=1,
+        svg_out_dir=str(svg_dir),
+        diff_out_dir="diff",
+        normalized_selected_variants=set(),
+        write_quality_pass_report_fn=lambda *args, **kwargs: None,
+        write_conversion_bestlist_metrics_fn=lambda *args, **kwargs: None,
+        write_batch_failure_summary_fn=lambda *args, **kwargs: None,
+        write_strategy_switch_template_transfers_report_fn=lambda *args, **kwargs: None,
+        write_iteration_log_and_collect_semantic_results_fn=lambda *args, **kwargs: [],
+        harmonize_semantic_size_variants_fn=lambda *args, **kwargs: None,
+        run_post_conversion_reporting_fn=lambda *args, **kwargs: None,
+    )
+
+    assert (output_root / "converted_svg_failed" / "AC0801_L.svg").exists()
+    assert (output_root / "converted_images_png_failed" / "AC0801_L.png").exists()
+    assert not (svg_dir / "AC0801_L.svg").exists()
+    assert not (reports_dir / "successful_conversions_bestlist" / "AC0801_L.svg").exists()
+    assert (source_dir / "AC0801_L.jpg").exists()
+    assert result_map["AC0801_L.jpg"]["status"] == "quality_failed"

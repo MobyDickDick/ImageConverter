@@ -26,3 +26,11 @@ def convertedPngOutputDirImpl(output_root: str) -> str:
 
 def reportsOutputDirImpl(output_root: str) -> str:
     return os.path.join(output_root, "reports")
+
+
+def failedSvgOutputDirImpl(output_root: str) -> str:
+    return os.path.join(output_root, "converted_svg_failed")
+
+
+def failedPngOutputDirImpl(output_root: str) -> str:
+    return os.path.join(output_root, "converted_images_png_failed")
