@@ -20,4 +20,6 @@ def test_output_subdir_helpers_use_expected_folder_names() -> None:
     assert output_path_helpers.convertedSvgOutputDirImpl(output_root).endswith("/converted_svgs")
     assert output_path_helpers.diffOutputDirImpl(output_root).endswith("/diff_pngs")
     assert output_path_helpers.convertedPngOutputDirImpl(output_root).endswith("/converted_images_png")
+    assert output_path_helpers.failedSvgOutputDirImpl(output_root).endswith("/converted_svg_failed")
+    assert output_path_helpers.failedPngOutputDirImpl(output_root).endswith("/converted_images_png_failed")
     assert output_path_helpers.reportsOutputDirImpl(output_root).endswith("/reports")
