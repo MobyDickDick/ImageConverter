@@ -1253,15 +1253,19 @@ def test_parse_description_marks_ac0863_as_rf_upper_arm_badge() -> None:
     assert "SEMANTIC: senkrechter Strich oben vom Kreis" in list(params.get("elements", []))
 
 
-def test_parse_description_marks_ac0800_as_plain_ring_family() -> None:
-    """AC0800 should remain a semantic plain ring even without text clues in the XML."""
+@pytest.mark.parametrize("variant", ["AC0800_L", "AC0800_M", "AC0800_S"])
+def test_parse_description_marks_ac0800_as_plain_ring_family(variant: str) -> None:
+    """AC0800 variants should derive plain-ring semantics from the family rule alone."""
     ref = image_composite_converter.Reflection({})
 
-    _desc, params = ref.parse_description("AC0800", "AC0800_M.jpg")
+    _desc, params = ref.parse_description(variant, f"{variant}.jpg")
 
     assert params["mode"] == "semantic_badge"
-    assert params["label"] in {"", "M"}
-    assert "SEMANTIC: Kreis ohne Buchstabe" in list(params.get("elements", []))
+    assert params["label"] == ""
+    assert params["contract_status"] == "family_rule"
+    assert params["semantic_sources"]["family_rule"] == ["SEMANTIC: Kreis ohne Buchstabe"]
+    assert params["semantic_sources"]["description_heuristic"] == []
+    assert list(params.get("elements", [])) == ["SEMANTIC: Kreis ohne Buchstabe"]
 
 
 def test_parse_description_recognizes_ac08_family_when_given_variant_name() -> None:
@@ -1471,8 +1475,9 @@ def test_finalize_ac0800_preserves_plain_ring_geometry_bounds() -> None:
 
     assert params["lock_circle_cx"] is True
     assert params["lock_circle_cy"] is True
-    assert float(params["min_circle_radius"]) >= (10.8 * 0.96) - 0.01
-    assert float(params["max_circle_radius"]) <= (10.8 * 1.15) + 0.01
+    assert float(params["min_circle_radius"]) == pytest.approx(float(params["r"]))
+    assert float(params["max_circle_radius"]) == pytest.approx(float(params["r"]))
+    assert params["plain_ac0800_ring"] is True
 
 
 def test_finalize_ac0800_small_variant_keeps_template_radius_floor() -> None:

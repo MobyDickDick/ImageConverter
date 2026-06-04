@@ -298,6 +298,7 @@ def harmonizeSemanticSizeVariantsImpl(
 
     harmonized_logs: list[str] = []
     category_logs: list[str] = []
+    family_consistency_logs: list[str] = []
     for base, variant_rows in sorted(variant_rows_by_base.items()):
         if str(base).upper() == "AC0223":
             # AC0223 has a dedicated valve-head overlay that is not represented
@@ -349,6 +350,12 @@ def harmonizeSemanticSizeVariantsImpl(
             (
                 f"{base};{category};{variants_joined};{prototype_group};"
                 f"{prototype_delta:.4f};{text_orientation_policy}"
+            )
+        )
+        family_consistency_logs.append(
+            (
+                f"{base};{variants_joined};{prototype_group};"
+                f"{max_delta:.4f};{prototype_delta:.4f};{len(variant_rows)}"
             )
         )
 
@@ -422,3 +429,7 @@ def harmonizeSemanticSizeVariantsImpl(
         with open(os.path.join(reports_out_dir, "shape_catalog.csv"), "w", encoding="utf-8") as f:
             f.write("base;category;variants;prototype_group;geometry_signature_delta;text_orientation_policy\n")
             f.write("\n".join(category_logs).rstrip() + "\n")
+    if family_consistency_logs:
+        with open(os.path.join(reports_out_dir, "family_consistency_metrics.csv"), "w", encoding="utf-8") as f:
+            f.write("base;variants;prototype_group;intra_family_max_delta;prototype_max_delta;variant_count\n")
+            f.write("\n".join(family_consistency_logs).rstrip() + "\n")

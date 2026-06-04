@@ -134,13 +134,6 @@ class Reflection:
 
         contract_status = str(params["description_contract"].get("status", "ok"))
         params["contract_status"] = contract_status
-        if contract_status == "insufficient_description":
-            params["mode"] = "insufficient_description"
-            params["label"] = ""
-            params["elements"].append(
-                "MANUELL: Beschreibung unzureichend (fehlende Geometriehinweise oder leerer Beschreibungstext)."
-            )
-            return desc, params
 
         semantic_symbol = symbol_upper.startswith("AC08") or symbol_upper == "AR0100"
         if semantic_symbol:
@@ -152,6 +145,17 @@ class Reflection:
             desc=desc,
             params=params,
         ):
+            if contract_status == "insufficient_description":
+                params["contract_status"] = "family_rule"
+                params["description_contract"]["status"] = "family_rule"
+            return desc, params
+
+        if contract_status == "insufficient_description":
+            params["mode"] = "insufficient_description"
+            params["label"] = ""
+            params["elements"].append(
+                "MANUELL: Beschreibung unzureichend (fehlende Geometriehinweise oder leerer Beschreibungstext)."
+            )
             return desc, params
 
         if semantic_helpers.apply_semantic_badge_description_rules(desc=desc, params=params):
