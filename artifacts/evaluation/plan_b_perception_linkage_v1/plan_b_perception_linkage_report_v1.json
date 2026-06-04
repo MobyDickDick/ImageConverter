@@ -107,14 +107,14 @@
     },
     {
       "schema_version": "plan_b_perception_linkage_record_v1",
-      "variant": "AC0861_S",
-      "image_path": "artifacts/images_to_convert/AC0861_S.jpg",
+      "variant": "AC0864_S",
+      "image_path": "artifacts/images_to_convert/AC0864_S.jpg",
       "status": "evaluated",
-      "plan_b_reason": "Weak-Family-Folgepunkt: rundes rF-Badge mit senkrechtem Griff unterhalb des Kreises.",
-      "description": "Plan-B-Kandidat AC0861_S: rundes rF-Badge mit unterem senkrechtem Griff; Kreis, Label und Griff zuerst pr\u00fcfen.",
+      "plan_b_reason": "Weak-Family-Folgepunkt: horizontal gespiegeltes gedrehtes rF-Badge nach AC0862.",
+      "description": "Plan-B-Kandidat AC0864_S: gespiegeltes gedrehtes rF-Badge; Kreis, Label und Connector zuerst pr\u00fcfen.",
       "perception_lerneffekt": {
-        "question": "Kann der dominante rF-Kreis vorab als CircleBackground und der untere senkrechte Griff als Linien-Hinweis festgehalten werden?",
-        "expected_first_primitive": "circle_ring_or_rf_vertical_connector",
+        "question": "Kann der dominante rF-Kreis samt gespiegeltem Connector vorab als CircleBackground plus Linien-Hinweis festgehalten werden?",
+        "expected_first_primitive": "circle_ring_or_rf_mirrored_connector",
         "expected_candidate_kinds": [
           "circle",
           "line",
@@ -133,57 +133,72 @@
         "matched_seed_kinds": [
           "CircleBackground"
         ],
-        "top_candidate_kind": "line",
-        "top_confidence": 0.92,
+        "top_candidate_kind": "circle",
+        "top_confidence": 0.8907,
         "next_action": "Im n\u00e4chsten Plan-B-Paket als vorinitialisierten Geometry-IR-Seed protokollieren."
       },
-      "candidate_count": 4,
+      "candidate_count": 8,
       "top_candidate": {
         "schema_version": "perception_primitive_candidate_v1",
-        "kind": "line",
+        "kind": "circle",
         "bbox": {
-          "x": 7.0,
-          "y": 14.0,
-          "width": 1.0,
-          "height": 11.0
+          "x": 1.0,
+          "y": 0.0,
+          "width": 12.0,
+          "height": 12.0
         },
         "center": {
-          "x": 7.5,
-          "y": 19.5
+          "x": 7.0,
+          "y": 6.0
         },
         "geometry": {
-          "orientation": "vertical",
-          "x_center": 7.5,
-          "y_top": 14.0,
-          "y_bottom": 25.0,
-          "length_px": 11.0,
+          "radius_px": 6.0,
+          "inner_radius_px": 0.0,
           "stroke_width_px": 1.0,
-          "angle_deg": 90.0
+          "circularity": 1.0,
+          "ring": false,
+          "fill_ratio": 0.5487,
+          "geometry_ir_kind": "CircleBackground",
+          "geometry_ir_bbox": [
+            0.04,
+            0.0,
+            0.48,
+            0.8
+          ]
         },
         "color": {
-          "fill_rgb": null,
-          "stroke_rgb": null,
-          "fill_hex": null,
-          "stroke_hex": null,
-          "fill_confidence": 0.0,
-          "stroke_confidence": 0.0
+          "fill_rgb": [
+            199,
+            199,
+            199
+          ],
+          "stroke_rgb": [
+            218,
+            218,
+            218
+          ],
+          "fill_hex": "#C7C7C7",
+          "stroke_hex": "#DADADA",
+          "fill_confidence": 0.6174,
+          "stroke_confidence": 0.7749
         },
-        "confidence": 0.92,
+        "confidence": 0.8907,
         "roi": {
           "type": "image",
           "hint": "full_image",
           "bbox": {
             "x": 0.0,
             "y": 0.0,
-            "width": 15.0,
-            "height": 25.0
+            "width": 25.0,
+            "height": 15.0
           }
         },
         "evidence": {
-          "detector": "detect_vertical_lines",
-          "edge_model": "canny+hough_lines_p"
+          "detector": "detect_circle_rings",
+          "detection_source": "hough",
+          "threshold_model": "hough_plus_foreground_mask"
         },
-        "source": "hough"
+        "source": "pf8_plan_b_perception_linkage"
       }
     },
     {

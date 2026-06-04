@@ -25,6 +25,7 @@ SEMANTIC_BADGE_FAMILIES: set[str] = {
     "AC0842",
     "AC0844",
     "AC0850",
+    "AC0861",
     "AC0870",
     "AC0881",
     "AC0882",
@@ -109,7 +110,7 @@ def apply_semantic_badge_family_rules(
 
     if base_upper in {"AC0810", "AC0814", "AC0834", "AC0839", "AC0844"}:
         family_elements.append("SEMANTIC: waagrechter Strich rechts vom Kreis")
-    if base_upper in {"AC0811", "AC0881", "AC0831", "AC0836"}:
+    if base_upper in {"AC0811", "AC0881", "AC0831", "AC0836", "AC0861"}:
         family_elements.append("SEMANTIC: senkrechter Strich hinter dem Kreis")
     if base_upper in {"AC0813", "AC0833", "AC0838", "AC0223"}:
         family_elements.append("SEMANTIC: senkrechter Strich oben vom Kreis")
