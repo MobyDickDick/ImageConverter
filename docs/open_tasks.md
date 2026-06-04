@@ -2934,9 +2934,18 @@ Jeder Tag hat genau definierte Aufgaben mit einem harten Exit-Kriterium.
 
 ### Tag 6 (2026-05-29) – Top-Engpass #1 beheben
 
-- [ ] **FP-D6-1:** Für Engpass #1 genau eine Gegenmaßnahme implementieren.
-- [ ] **FP-D6-2:** Vorher/Nachher-Reprolauf mit identischem Batch durchführen.
-- [ ] **FP-D6-EXIT:** Messbarer Effekt dokumentiert (Laufzeit, Timeout-Rate oder semantische Qualität).
+- [x] **FP-D6-1:** Für Engpass #1 genau eine Gegenmaßnahme implementieren. (2026-06-04 Run NQ: AC0811-only-Batches überspringen den generischen Middle-/Lower-Tercile-Qualitätsretry und bleiben initial-pass-only, sofern `ICC_MAX_QUALITY_PASSES` nicht gesetzt ist.)
+- [x] **FP-D6-2:** Vorher/Nachher-Reprolauf mit identischem Batch durchführen. (2026-06-04 Run NQ: identischer `AC0811..AC0811`-Batch mit `timeout 180`, vendorter Python-3.10-Toolchain und `/tmp`-Output; siehe `docs/next_arbeitspaket_2026-06-04_runNQ.md`.)
+- [x] **FP-D6-EXIT:** Messbarer Effekt dokumentiert (Laufzeit, Timeout-Rate oder semantische Qualität). (2026-06-04 Run NQ: Laufzeit `3.70s -> 3.16s`, Verarbeitungseinträge `5 -> 3`, Exit jeweils `0`, keine sichtbare Bestlist-Regression.)
+
+
+### Fortschritt vs. Blocker (Session 2026-06-04, Top-Engpass #1 FP-D6 Run NQ)
+
+- **Fortschritt:** FP-D6 wurde abgeschlossen: Für den priorisierten Engpass `AC0811` wurde genau eine Gegenmaßnahme implementiert, nämlich eine fokussierte Qualitätspass-Policy, die AC0811-only-Repros initial-pass-only ausführt und den bisherigen blanket retry nur per explizitem `ICC_MAX_QUALITY_PASSES` wieder aktiviert.
+- **Vorher/Nachher:** Der identische `AC0811..AC0811`-Batch lief vor der Änderung mit 5 Verarbeitungseinträgen in `3.70s` und nach der Änderung mit 3 Verarbeitungseinträgen in `3.16s`, jeweils Exit `0`.
+- **Qualität:** Die Bestlist zeigt keine sichtbare Regression: `AC0811_L` und `AC0811_M` verbessern `error_per_pixel`/`mean_delta2`, `AC0811_S` bleibt identisch.
+- **Sicherung:** Neuer Detailtest `tests/detailtests/test_quality_pass_policy_helpers.py` deckt AC0811-Skip, normale Single-Base-Policy, Env-Override und Base-Name-Aggregation ab.
+- **Nächster sinnvoller Schritt:** FP-D7 bearbeitet Engpass #2 (`global-search`-Kosten) separat, ohne die AC0811-spezifische Policy weiter auszudehnen.
 
 ### Tag 7 (2026-05-30) – Top-Engpass #2 beheben
 
