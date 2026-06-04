@@ -8,6 +8,7 @@ All notable changes to ImageConverter will be documented in this file.
 
 ## Unreleased
 
+- AC0862_S now uses the semantic AC08 rF left-connector badge path, giving the Plan-B candidate a real SVG output with a 3853.575928 mean_delta2 one-iteration probe and rotating the queue to AC0863_S/AC0864_S.
 - AC0861_S now uses the semantic AC08 rF lower-stem connector badge path, with PF8 rotation updated to AC0862_S/AC0863_S/AC0864_S.
 - AC0850_M now uses the semantic AC08 rF circle/text badge path instead of failing conversion, including rF text-scale tuning and Plan-B rotation to the next rF connector probe.
 - AC0838_M was revalidated in the Plan-B/Perception rotation and removed from the active candidate list after the isolated VOC badge run fell below the review threshold.

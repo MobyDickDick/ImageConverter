@@ -1149,6 +1149,41 @@ def test_parse_description_marks_ac0844_as_rf_right_arm_badge() -> None:
     assert "SEMANTIC: waagrechter Strich rechts vom Kreis" in list(params.get("elements", []))
 
 
+def test_make_badge_params_ac0862_uses_left_arm_rf_geometry() -> None:
+    """AC0862 defaults must render the rF badge with the left horizontal connector."""
+    params = image_composite_converter.Action.make_badge_params(25, 15, "AC0862")
+
+    assert params is not None
+    assert bool(params.get("arm_enabled", False))
+    assert not bool(params.get("stem_enabled", False))
+    assert float(params.get("arm_x1", 1.0)) <= 0.01
+    assert float(params.get("arm_x2", 0.0)) < float(params.get("cx", 999.0))
+    assert abs(float(params.get("arm_y2", 0.0)) - float(params.get("arm_y1", 0.0))) <= 0.01
+    assert str(params.get("text_mode", "")).lower() == "rf"
+    assert params.get("label") == "rF"
+
+
+def test_parse_description_marks_ac0862_as_rf_left_arm_badge() -> None:
+    """AC0862 descriptions should activate the rF left-arm connector family."""
+    ref = image_composite_converter.Reflection(
+        {
+            "AC0862": (
+                'Grauer Kreis mit grauem Rand und hellgrauem Hintergrund '
+                'Abweichung: mit Text "rF" (relative Feuchtigkeit) '
+                'Abweichung: mit Griff (dunkelgraue Linie nach unten) '
+                'Abweichung: nach rechts gedreht, Text immer noch horizontal.'
+            )
+        }
+    )
+
+    _desc, params = ref.parse_description("AC0862_S", "AC0862_S.jpg")
+
+    assert params["mode"] == "semantic_badge"
+    assert params["label"] == "rF"
+    assert "SEMANTIC: Kreis + Buchstabe rF" in list(params.get("elements", []))
+    assert "SEMANTIC: waagrechter Strich links vom Kreis" in list(params.get("elements", []))
+
+
 def test_make_badge_params_ac0861_uses_lower_stem_rf_geometry() -> None:
     """AC0861 defaults must render the rF badge with a lower vertical connector."""
     params = image_composite_converter.Action.make_badge_params(15, 25, "AC0861")
