@@ -103,6 +103,26 @@ def optimizeGlobalParameterVectorSamplingImpl(
 
     active_key_set = set(active_keys)
 
+    def _current_search_signature() -> tuple:
+        return tuple(
+            (
+                key,
+                _freeze_eval_value(getattr(vector, key)),
+                _freeze_eval_value(bounds[key][0]),
+                _freeze_eval_value(bounds[key][1]),
+                str(bounds[key][3]),
+            )
+            for key in active_keys
+        )
+
+    search_signature = _current_search_signature()
+    if params.get("_global_search_no_improvement_signature") == search_signature:
+        logs.append(
+            "global-search: übersprungen "
+            "(grund=unveränderte_no-improvement_signatur, vorheriger_lauf=keine_relevante_verbesserung)"
+        )
+        return False
+
     min_active_keys = 2
     search_mode = "voll" if len(active_keys) >= 4 else "reduziert"
     if len(active_keys) < min_active_keys:
@@ -491,10 +511,12 @@ def optimizeGlobalParameterVectorSamplingImpl(
     )
 
     if not winner_improved and winner_err >= start_err - 0.01:
+        params["_global_search_no_improvement_signature"] = search_signature
         logs.append("global-search: keine relevante Verbesserung")
         log_eval_telemetry()
         return False
 
+    params.pop("_global_search_no_improvement_signature", None)
     old_values = {key: float(getattr(vector, key)) for key in active_keys}
     new_values = {key: float(getattr(winner, key)) for key in active_keys}
     params.update(winner.applyToParams(params))

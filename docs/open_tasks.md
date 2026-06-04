@@ -2957,9 +2957,17 @@ Jeder Tag hat genau definierte Aufgaben mit einem harten Exit-Kriterium.
 
 ### Tag 7 (2026-05-30) – Top-Engpass #2 beheben
 
-- [ ] **FP-D7-1:** Gegenmaßnahme für Engpass #2 implementieren und separat testen.
-- [ ] **FP-D7-2:** Regressionsprüfung gegen Kernsuite durchführen.
-- [ ] **FP-D7-EXIT:** Keine neue Kernregression, Engpass #2 messbar verbessert oder sauber falsifiziert.
+- [x] **FP-D7-1:** Gegenmaßnahme für Engpass #2 implementieren und separat testen. (2026-06-04 Run NR: unveränderte Global-Search-No-Improvement-Signaturen werden in Folgeaufrufen übersprungen.)
+- [x] **FP-D7-2:** Regressionsprüfung gegen Kernsuite durchführen. (2026-06-04 Run NR: `PYTHONPATH=vendor/linux-py310/site-packages:. PYENV_VERSION=3.10.20 timeout 300 python -m pytest -q -rs`, Exit `0`, `695 passed`.)
+- [x] **FP-D7-EXIT:** Keine neue Kernregression, Engpass #2 messbar verbessert oder sauber falsifiziert. (2026-06-04 Run NR: Detailtest belegt keine zusätzlichen Rendercalls beim zweiten identischen No-Improvement-Lauf; AC0814-Smoke protokolliert Folge-Skips mit `global_search_elapsed ... 0.00s`.)
+
+### Fortschritt vs. Blocker (Session 2026-06-04, Top-Engpass #2 FP-D7 Run NR)
+
+- **Fortschritt:** FP-D7 wurde abgeschlossen: Der Global-Search-Helfer speichert eine kompakte No-Improvement-Signatur und überspringt direkt folgende identische Global-Search-Aufrufe, wenn der vorherige Lauf keine relevante Verbesserung geliefert hat.
+- **Messsignal:** Der neue Detailtest in `tests/detailtests/test_global_search_optimization_helpers.py` zeigt, dass der zweite identische No-Improvement-Aufruf keine neuen Renderbewertungen auslöst; der AC0814-Smoke protokolliert bei `AC0814_L`/`AC0814_S` Folge-Skips mit `global_search_elapsed ... 0.00s`.
+- **Sicherung:** Die vollständige Kernsuite lief grün (`PYTHONPATH=vendor/linux-py310/site-packages:. PYENV_VERSION=3.10.20 timeout 300 python -m pytest -q -rs`, Exit `0`, `695 passed`).
+- **Blocker:** Keine neuen FP-D7-Blocker; Verbesserungen setzen die Signatur zurück, damit wirksame Global-Search-Folgeoptimierung aktiv bleibt.
+- **Nächster sinnvoller Schritt:** FP-D8 startet mit einer AC08-Semantik-Fokusfamilie und einem gezielten Regressionstest.
 
 ### Tag 8 (2026-05-31) – Semantik-Fokusfamilien Teil 1
 

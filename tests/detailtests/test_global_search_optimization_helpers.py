@@ -214,6 +214,48 @@ def test_global_search_logs_evaluate_telemetry_when_no_improvement() -> None:
     assert any("evaluate-telemetrie" in line for line in logs)
 
 
+def test_global_search_skips_repeated_no_improvement_signature() -> None:
+    img = _Image(10, 10)
+    logs: list[str] = []
+    params = {
+        "enable_global_search_mode": True,
+        "cx": 5.0,
+        "cy": 5.0,
+        "r": 3.0,
+    }
+    render_calls = 0
+
+    def evaluate(_img, _probe) -> float:
+        nonlocal render_calls
+        render_calls += 1
+        return 1.0
+
+    common_kwargs = dict(
+        rounds=1,
+        samples_per_round=2,
+        global_parameter_vector_cls=_Vector,
+        global_parameter_vector_bounds_fn=_bounds,
+        clip_scalar_fn=lambda value, low, high: max(low, min(high, value)),
+        snap_half_fn=lambda value: round(value * 2.0) / 2.0,
+        make_rng_fn=lambda _seed: _Rng(),
+        reanchor_arm_to_circle_edge_fn=lambda _probe, _r: None,
+        full_badge_error_for_params_fn=evaluate,
+        log_global_parameter_vector_fn=lambda _logs, _params, _w, _h, label: _logs.append(label),
+        stochastic_run_seed=0,
+        stochastic_seed_offset=0,
+    )
+
+    first = helpers.optimizeGlobalParameterVectorSamplingImpl(img, params, logs, **common_kwargs)
+    calls_after_first = render_calls
+    second = helpers.optimizeGlobalParameterVectorSamplingImpl(img, params, logs, **common_kwargs)
+
+    assert first is False
+    assert second is False
+    assert calls_after_first > 0
+    assert render_calls == calls_after_first
+    assert any("unveränderte_no-improvement_signatur" in line for line in logs)
+
+
 def test_global_search_caches_duplicate_evaluations() -> None:
     img = _Image(10, 10)
     logs: list[str] = []
