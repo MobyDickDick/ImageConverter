@@ -3064,9 +3064,17 @@ Jeder Tag hat genau definierte Aufgaben mit einem harten Exit-Kriterium.
 
 ### Tag 14 (2026-06-06) – Abschlussentscheidung
 
-- [ ] **FP-D14-1:** 1-seitiges Abschlussdokument schreiben (stabil, verbessert, offen).
-- [ ] **FP-D14-2:** „Durch“ vs. „noch offen“ mit 3 harten Kennzahlen entscheiden.
-- [ ] **FP-D14-EXIT:** Entscheidung ist datenbasiert und für Dritte nachvollziehbar.
+- [x] **FP-D14-1:** 1-seitiges Abschlussdokument schreiben (stabil, verbessert, offen). (2026-06-05 Run OA: `docs/abschlussentscheidung_2026-06-05_runOA.md` trennt belastbare Stabilität, nicht belegte Verbesserung und offene Release-Blocker.)
+- [x] **FP-D14-2:** „Durch“ vs. „noch offen“ mit 3 harten Kennzahlen entscheiden. (2026-06-05 Run OA: Entscheidung **noch offen** anhand von `10/14` reportseitig vollständigen Varianten, `3/6` erhaltenen Previously-Good-Ankern und `0` gemessenen Verbesserungen; zusätzlich bestätigt `overall_success=0` den Blockerstatus.)
+- [x] **FP-D14-EXIT:** Entscheidung ist datenbasiert und für Dritte nachvollziehbar. (2026-06-05 Run OA: Kennzahlen, Schwellen, FP-D13-Reproduktionsbefehle und konkrete Wiederaufnahmebedingungen sind im Abschlussdokument festgehalten.)
+
+### Fortschritt vs. Blocker (Session 2026-06-05, Abschlussentscheidung FP-D14 Run OA)
+
+- **Stabil:** Die Kernsuite ist mit `710 passed` grün, alle 14 isolierten AC08-Prozesse endeten im FP-D13-Abschlusslauf mit Exit `0`, und es wurden weder akzeptierte Regressionen noch semantische Mismatches gemessen.
+- **Nicht als Verbesserung gewertet:** Der Abschlusslauf weist `0` Verbesserungen bei `error_per_pixel` und `mean_delta2` aus; aus dem leeren optionalen Quality-Pass-Report wird bewusst kein Erfolg abgeleitet.
+- **Harte Entscheidung:** Das Projekt ist **noch offen**: nur `10/14` Varianten besitzen einen Iteration-Datensatz, nur `3/6` Previously-Good-Anker sind reportseitig erhalten und `overall_success=0`.
+- **Wiederaufnahmebedingung:** Erst ein erneuter vollständiger 14/14-Lauf mit 6/6 erhaltenen Previously-Good-Ankern, mindestens einer belegten Qualitätsverbesserung und `overall_success=1` rechtfertigt die Entscheidung „durch“.
+- **Abschluss:** Das 14-Tage-Finish-Playbook ist vollständig abgearbeitet; FP-D14 dokumentiert ausdrücklich keine Release-Freigabe, sondern den nachvollziehbaren Restblocker.
 
 ### Fortschritt vs. Blocker (Session 2026-05-24, AC0020_L Plan-B + Re-Conversion + T5 Run ZZ)
 

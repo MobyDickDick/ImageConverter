@@ -7,6 +7,8 @@ All notable changes to ImageConverter will be documented in this file.
 
 ## Unreleased
 
+- FP-D14 now records the final data-based decision as **not yet complete**: only 10/14 variants have iteration records, 3/6 Previously-Good anchors are retained, no quality improvement is measured, and release remains blocked until the documented recovery thresholds are met.
+
 - The FP-D13 release gate now propagates named evidence paths into segmented AC08 runs and can aggregate an empty optional quality-pass report without fabricating improvements; the quantitative gate remains red when the baseline criteria are not met.
 
 - The release-candidate AC08 smoke now runs each fixed regression variant in an isolated timeout segment and publishes aggregate success metrics only after all 14 segments complete.
