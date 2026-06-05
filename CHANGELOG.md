@@ -7,6 +7,8 @@ All notable changes to ImageConverter will be documented in this file.
 
 ## Unreleased
 
+- The FP-D13 release gate now propagates named evidence paths into segmented AC08 runs and can aggregate an empty optional quality-pass report without fabricating improvements; the quantitative gate remains red when the baseline criteria are not met.
+
 - The release-candidate AC08 smoke now runs each fixed regression variant in an isolated timeout segment and publishes aggregate success metrics only after all 14 segments complete.
 
 - AC0862_S now uses the semantic AC08 rF left-connector badge path, giving the Plan-B candidate a real SVG output with a 3853.575928 mean_delta2 one-iteration probe and rotating the queue to AC0863_S/AC0864_S.

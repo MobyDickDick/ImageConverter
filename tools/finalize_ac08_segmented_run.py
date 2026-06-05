@@ -26,9 +26,23 @@ from src.successfulConversions import (
 )
 
 MERGED_REPORTS = ("Iteration_Log.csv", "quality_tercile_passes.csv")
+OPTIONAL_REPORT_HEADERS = {
+    "quality_tercile_passes.csv": [
+        "pass",
+        "filename",
+        "old_error_per_pixel",
+        "new_error_per_pixel",
+        "old_mean_delta2",
+        "new_mean_delta2",
+        "improved",
+        "decision",
+        "iteration_budget",
+        "badge_validation_rounds",
+    ],
+}
 
 
-def _merge_csv(inputs: list[Path], output: Path) -> None:
+def _merge_csv(inputs: list[Path], output: Path, *, empty_header: list[str] | None = None) -> None:
     header: list[str] | None = None
     rows: list[list[str]] = []
     for path in inputs:
@@ -45,7 +59,9 @@ def _merge_csv(inputs: list[Path], output: Path) -> None:
                 raise ValueError(f"incompatible CSV header in {path}")
             rows.extend(reader)
     if header is None:
-        raise FileNotFoundError(f"no segment report found for {output.name}")
+        if empty_header is None:
+            raise FileNotFoundError(f"no segment report found for {output.name}")
+        header = empty_header
     output.parent.mkdir(parents=True, exist_ok=True)
     with output.open("w", encoding="utf-8", newline="") as handle:
         writer = csv.writer(handle, delimiter=";")
@@ -92,6 +108,7 @@ def finalize(segments_root: Path, output_dir: Path, input_dir: str, descriptions
         _merge_csv(
             [segments_root / variant / "reports" / report_name for variant in expected],
             reports_dir / report_name,
+            empty_header=OPTIONAL_REPORT_HEADERS.get(report_name),
         )
 
     selected = sorted(expected)
