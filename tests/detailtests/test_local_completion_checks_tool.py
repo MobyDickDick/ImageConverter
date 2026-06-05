@@ -291,6 +291,40 @@ def test_release_candidate_gate_discards_stale_metrics_before_smoke(tmp_path: Pa
     assert "missing metrics file" in quality_log
 
 
+def test_release_candidate_gate_propagates_paths_to_segmented_smoke(tmp_path: Path) -> None:
+    evidence_dir = tmp_path / "named-evidence"
+    output_dir = tmp_path / "named-output"
+    finalized = tmp_path / "finalized"
+    segments_dir = tmp_path / "named-segments"
+    env = {
+        **os.environ,
+        "RC_GATE_EVIDENCE_DIR": str(evidence_dir),
+        "RC_GATE_OUTPUT_DIR": str(output_dir),
+        "RC_GATE_AC08_SEGMENTS_DIR": str(segments_dir),
+        "RC_GATE_CORE_CMD": "echo core ok",
+        "RC_GATE_AC08_VARIANTS": "AC0800_L",
+        "RC_GATE_AC08_SEGMENT_CMD_TEMPLATE": "echo {variant} > {output_dir}/variant.txt",
+        "RC_GATE_AC08_FINALIZE_CMD": f"mkdir -p {output_dir}/reports; touch {finalized}",
+        "RC_GATE_QUALITY_CMD": "echo quality ok",
+    }
+
+    result = subprocess.run(
+        ["./tools/run_release_candidate_gate.sh"],
+        cwd=Path(__file__).resolve().parents[2],
+        env=env,
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        check=False,
+    )
+
+    assert result.returncode == 0
+    assert finalized.exists()
+    segment_status = evidence_dir / "ac08_segment_status.csv"
+    assert segment_status.exists()
+    assert f"AC0800_L;0;PASS;{segments_dir}/AC0800_L" in segment_status.read_text(encoding="utf-8")
+
+
 def test_release_candidate_gate_help_documents_hard_gate_controls() -> None:
     result = subprocess.run(
         ["./tools/run_release_candidate_gate.sh", "--help"],
@@ -382,6 +416,45 @@ def test_finalize_ac08_segmented_run_requires_every_fixed_variant(tmp_path: Path
     assert result.returncode == 1
     assert "incomplete AC08 segments" in result.stdout
     assert not (tmp_path / "out" / "reports" / "ac08_success_metrics.csv").exists()
+
+
+def test_finalize_ac08_segmented_run_writes_empty_optional_quality_report(tmp_path: Path) -> None:
+    from src.successfulConversions import AC08_REGRESSION_VARIANTS
+
+    segments = tmp_path / "segments"
+    output = tmp_path / "output"
+    for variant in AC08_REGRESSION_VARIANTS:
+        reports = segments / variant / "reports"
+        reports.mkdir(parents=True)
+        (segments / variant / ".segment-complete").touch()
+        (reports / "Iteration_Log.csv").write_text(
+            f"Dateiname;Fehler\n{variant}.jpg;1\n",
+            encoding="utf-8",
+        )
+        (reports / f"{variant}_element_validation.log").write_text(
+            "Runde 1: elementweise Validierung gestartet\nstatus=semantic_ok\n",
+            encoding="utf-8",
+        )
+
+    env = {key: value for key, value in os.environ.items() if key != "PYTHONPATH"}
+    result = subprocess.run(
+        ["python", "tools/finalize_ac08_segmented_run.py", str(segments), str(output)],
+        cwd=Path(__file__).resolve().parents[2],
+        env=env,
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        check=False,
+    )
+
+    assert result.returncode == 0, result.stdout
+    quality_report = (output / "reports" / "quality_tercile_passes.csv").read_text(encoding="utf-8")
+    assert quality_report.splitlines() == [
+        "pass;filename;old_error_per_pixel;new_error_per_pixel;old_mean_delta2;new_mean_delta2;improved;decision;iteration_budget;badge_validation_rounds"
+    ]
+    metrics = (output / "reports" / "ac08_success_metrics.csv").read_text(encoding="utf-8")
+    assert "criterion_regression_set_improved;0" in metrics
+    assert "overall_success;0" in metrics
 
 
 def test_finalize_ac08_segmented_run_merges_complete_artifact_chain(tmp_path: Path) -> None:

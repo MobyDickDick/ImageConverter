@@ -3050,9 +3050,17 @@ Jeder Tag hat genau definierte Aufgaben mit einem harten Exit-Kriterium.
 
 ### Tag 13 (2026-06-05) – Abschlusslauf
 
-- [ ] **FP-D13-1:** Finalen End-to-End-Lauf mit vollständiger Artefaktkette ausführen.
-- [ ] **FP-D13-2:** Ergebnis gegen Baseline quantitativ vergleichen.
-- [ ] **FP-D13-EXIT:** Abschlusslauf reproduzierbar und vollständig dokumentiert.
+- [x] **FP-D13-1:** Finalen End-to-End-Lauf mit vollständiger Artefaktkette ausführen. (2026-06-05 Run NZ: Kernsuite und alle 14 isolierten AC08-Segmente mit 600s Segmentbudget ausgeführt; alle Segmentprozesse Exit `0`, die Aggregation deckte jedoch vier Varianten ohne Iteration-Report auf und das Gate blieb `FAIL/BLOCKER`.)
+- [x] **FP-D13-2:** Ergebnis gegen Baseline quantitativ vergleichen. (2026-06-05 Run NZ: `14` erwartet, `10` reportseitig konvertiert, `4` fehlend; `3/6` Previously-Good-Anker erhalten, `3/6` fehlend; `0` akzeptierte Regressionen, aber auch `0` gemessene Verbesserungen; `overall_success=0`.)
+- [x] **FP-D13-EXIT:** Abschlusslauf reproduzierbar und vollständig dokumentiert. (2026-06-05 Run NZ: explizites `FAIL/BLOCKER` mit Kommandos, Gate-/Segmentstatus, quantitativer Metrik und Recovery-Punkten in `docs/next_arbeitspaket_2026-06-05_runNZ.md`; keine Release-Freigabe.)
+
+### Fortschritt vs. Blocker (Session 2026-06-05, Abschlusslauf FP-D13 Run NZ)
+
+- **Fortschritt:** Der segmentierte End-to-End-Lauf ist technisch vollständig durchgelaufen: Kernsuite nach den FP-D13-Fixes `710 passed`; mit 600 Sekunden Budget endeten alle 14 AC08-Segmentprozesse mit Exit `0`.
+- **No silent regression:** Die Finalisierung akzeptiert ein fachlich optionales, vollständig leeres `quality_tercile_passes.csv`, erzeugt daraus aber keine erfundene Verbesserung. Der quantitative Gate-Status bleibt deshalb rot.
+- **Baselinevergleich:** `images_converted=10/14`, `images_missing=4` (`AC0811_L/M/S`, `AC0831_L`), Previously-Good-Anker `3/6` erhalten und `3/6` fehlend, `improved_*_count=0`, `accepted_regression_count=0`, `overall_success=0`.
+- **Tooling-Fix:** Der Gate-Runner exportiert Output-, Evidence-, Timeout- und Work-Package-Kontext an den segmentierten Unterprozess; Segmentstatus und Logs landen damit im benannten Gate-Evidence-Verzeichnis.
+- **Blocker / nächster sinnvoller Schritt:** Vor FP-D14 müssen die vier Exit-0-ohne-Iteration-Report-Fälle geklärt und ein echter Baseline-Verbesserungsnachweis erzeugt werden. FP-D14 darf auf Basis der harten Kennzahlen nur „noch offen“ entscheiden, sofern dieser Recovery-Schritt nicht vorher grün wird.
 
 ### Tag 14 (2026-06-06) – Abschlussentscheidung
 
