@@ -303,7 +303,11 @@ def test_release_candidate_gate_propagates_paths_to_segmented_smoke(tmp_path: Pa
         "RC_GATE_AC08_SEGMENTS_DIR": str(segments_dir),
         "RC_GATE_CORE_CMD": "echo core ok",
         "RC_GATE_AC08_VARIANTS": "AC0800_L",
-        "RC_GATE_AC08_SEGMENT_CMD_TEMPLATE": "echo {variant} > {output_dir}/variant.txt",
+        "RC_GATE_AC08_SEGMENT_CMD_TEMPLATE": (
+            "mkdir -p {output_dir}/reports; "
+            "echo {variant} > {output_dir}/variant.txt; "
+            "printf 'Dateiname;Fehler\n{variant}.jpg;1\n' > {output_dir}/reports/Iteration_Log.csv"
+        ),
         "RC_GATE_AC08_FINALIZE_CMD": f"mkdir -p {output_dir}/reports; touch {finalized}",
         "RC_GATE_QUALITY_CMD": "echo quality ok",
     }
@@ -350,7 +354,12 @@ def test_segmented_ac08_smoke_withholds_aggregation_when_one_variant_fails(tmp_p
         "RC_GATE_EVIDENCE_DIR": str(evidence_dir),
         "RC_GATE_OUTPUT_DIR": str(output_dir),
         "RC_GATE_AC08_VARIANTS": "AC0800_L,AC0800_M",
-        "RC_GATE_AC08_SEGMENT_CMD_TEMPLATE": "test '{variant}' = AC0800_L",
+        "RC_GATE_AC08_SEGMENT_CMD_TEMPLATE": (
+            "mkdir -p {output_dir}/reports; "
+            "if test '{variant}' = AC0800_L; then "
+            "printf 'Dateiname;Fehler\n{variant}.jpg;1\n' > {output_dir}/reports/Iteration_Log.csv; "
+            "else exit 1; fi"
+        ),
         "RC_GATE_AC08_FINALIZE_CMD": f"touch {finalized}",
     }
 
@@ -372,6 +381,36 @@ def test_segmented_ac08_smoke_withholds_aggregation_when_one_variant_fails(tmp_p
     assert "aggregate metrics withheld" in result.stdout
 
 
+def test_segmented_ac08_smoke_rejects_exit_zero_without_expected_iteration_row(tmp_path: Path) -> None:
+    evidence_dir = tmp_path / "evidence"
+    output_dir = tmp_path / "output"
+    finalized = tmp_path / "finalized"
+    env = {
+        **os.environ,
+        "RC_GATE_EVIDENCE_DIR": str(evidence_dir),
+        "RC_GATE_OUTPUT_DIR": str(output_dir),
+        "RC_GATE_AC08_VARIANTS": "AC0811_L",
+        "RC_GATE_AC08_SEGMENT_CMD_TEMPLATE": "mkdir -p {output_dir}/reports; printf 'Dateiname;Fehler\n' > {output_dir}/reports/Iteration_Log.csv",
+        "RC_GATE_AC08_FINALIZE_CMD": f"touch {finalized}",
+    }
+
+    result = subprocess.run(
+        ["./tools/run_ac08_segmented_smoke.sh"],
+        cwd=Path(__file__).resolve().parents[2],
+        env=env,
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        check=False,
+    )
+
+    assert result.returncode == 1
+    assert not finalized.exists()
+    assert not (output_dir.parent / f"{output_dir.name}.segments" / "AC0811_L" / ".segment-complete").exists()
+    status = (evidence_dir / "ac08_segment_status.csv").read_text(encoding="utf-8")
+    assert "AC0811_L;0;BLOCKER_MISSING_REPORT" in status
+
+
 def test_segmented_ac08_smoke_runs_aggregation_after_all_segments_pass(tmp_path: Path) -> None:
     evidence_dir = tmp_path / "evidence"
     output_dir = tmp_path / "output"
@@ -381,7 +420,11 @@ def test_segmented_ac08_smoke_runs_aggregation_after_all_segments_pass(tmp_path:
         "RC_GATE_EVIDENCE_DIR": str(evidence_dir),
         "RC_GATE_OUTPUT_DIR": str(output_dir),
         "RC_GATE_AC08_VARIANTS": "AC0800_L,AC0800_M",
-        "RC_GATE_AC08_SEGMENT_CMD_TEMPLATE": "echo {variant} > {output_dir}/variant.txt",
+        "RC_GATE_AC08_SEGMENT_CMD_TEMPLATE": (
+            "mkdir -p {output_dir}/reports; "
+            "echo {variant} > {output_dir}/variant.txt; "
+            "printf 'Dateiname;Fehler\n{variant}.jpg;1\n' > {output_dir}/reports/Iteration_Log.csv"
+        ),
         "RC_GATE_AC08_FINALIZE_CMD": f"touch {finalized}",
     }
 
@@ -416,6 +459,33 @@ def test_finalize_ac08_segmented_run_requires_every_fixed_variant(tmp_path: Path
     assert result.returncode == 1
     assert "incomplete AC08 segments" in result.stdout
     assert not (tmp_path / "out" / "reports" / "ac08_success_metrics.csv").exists()
+
+
+def test_finalize_ac08_segmented_run_rejects_marker_without_expected_iteration_row(tmp_path: Path) -> None:
+    from src.successfulConversions import AC08_REGRESSION_VARIANTS
+
+    segments = tmp_path / "segments"
+    output = tmp_path / "output"
+    missing_variant = AC08_REGRESSION_VARIANTS[0]
+    for variant in AC08_REGRESSION_VARIANTS:
+        reports = segments / variant / "reports"
+        reports.mkdir(parents=True)
+        (segments / variant / ".segment-complete").touch()
+        row = "" if variant == missing_variant else f"{variant}.jpg;1\n"
+        (reports / "Iteration_Log.csv").write_text(f"Dateiname;Fehler\n{row}", encoding="utf-8")
+
+    result = subprocess.run(
+        ["python", "tools/finalize_ac08_segmented_run.py", str(segments), str(output)],
+        cwd=Path(__file__).resolve().parents[2],
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        check=False,
+    )
+
+    assert result.returncode == 1
+    assert f"missing expected iteration row: {missing_variant}" in result.stdout
+    assert not (output / "reports" / "ac08_success_metrics.csv").exists()
 
 
 def test_finalize_ac08_segmented_run_writes_empty_optional_quality_report(tmp_path: Path) -> None:

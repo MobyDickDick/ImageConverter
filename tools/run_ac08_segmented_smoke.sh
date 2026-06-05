@@ -39,7 +39,8 @@ for variant in "${VARIANTS[@]}"; do
     command="${RC_GATE_AC08_SEGMENT_CMD_TEMPLATE//\{variant\}/$variant}"
     command="${command//\{output_dir\}/$segment_dir}"
   else
-    command="${PYTHON_BIN} -m src.iCCModules.imageCompositeConverterCli --input-dir ${INPUT_DIR} --descriptions-path ${DESCRIPTIONS_PATH} --output-dir ${segment_dir} --ac08-regression-set --ac08-regression-variant ${variant} --deterministic-order --iterations ${ITERATIONS}"
+    segment_input_dir="$($PYTHON_BIN tools/ac08_segment_contract.py resolve-input-dir "$INPUT_DIR" "$variant")"
+    command="${PYTHON_BIN} -m src.iCCModules.imageCompositeConverterCli --input-dir ${segment_input_dir} --descriptions-path ${DESCRIPTIONS_PATH} --output-dir ${segment_dir} --ac08-regression-set --ac08-regression-variant ${variant} --deterministic-order --iterations ${ITERATIONS}"
   fi
   echo "==> AC08 segment ${variant}"
   set +e
@@ -48,7 +49,14 @@ for variant in "${VARIANTS[@]}"; do
   set -e
   classification=PASS
   if [[ "$status" -eq 0 ]]; then
-    touch "${segment_dir}/.segment-complete"
+    if "$PYTHON_BIN" tools/ac08_segment_contract.py check-iteration-report "$segment_dir/reports/Iteration_Log.csv" "$variant"
+    then
+      touch "${segment_dir}/.segment-complete"
+    else
+      classification=BLOCKER_MISSING_REPORT
+      BLOCKERS=1
+      echo "AC08 segment ${variant} exited 0 but produced no matching Iteration_Log.csv row" >>"$log_path"
+    fi
   else
     classification=BLOCKER
     BLOCKERS=1
