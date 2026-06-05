@@ -1,12 +1,13 @@
 # Changelog
 ## 2026-06-01
-
 - AC0100_L/M/S now use renderer-stable algorithmic gradient bands in the non-composite elementwise symbol fit, dropping the local QA metric from roughly 53k mean_delta2 to below 4k without selecting fixed sample SVGs or template transfer.
 - GitHub Actions now runs the satisfactory regression battery as a separate heavy job, reconverting all stored successful baseline variants and failing on worse mean_delta2 quality.
 
 All notable changes to ImageConverter will be documented in this file.
 
 ## Unreleased
+
+- The release-candidate AC08 smoke now runs each fixed regression variant in an isolated timeout segment and publishes aggregate success metrics only after all 14 segments complete.
 
 - AC0862_S now uses the semantic AC08 rF left-connector badge path, giving the Plan-B candidate a real SVG output with a 3853.575928 mean_delta2 one-iteration probe and rotating the queue to AC0863_S/AC0864_S.
 - AC0861_S now uses the semantic AC08 rF lower-stem connector badge path, with PF8 rotation updated to AC0862_S/AC0863_S/AC0864_S.
