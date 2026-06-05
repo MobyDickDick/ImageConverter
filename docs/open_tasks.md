@@ -3011,9 +3011,16 @@ Jeder Tag hat genau definierte Aufgaben mit einem harten Exit-Kriterium.
 
 ### Tag 11 (2026-06-03) – Release-Kandidaten-Gate vorbereiten
 
-- [ ] **FP-D11-1:** Fixe Gate-Checkliste ausführen (Kernsuite, AC08-Smoke, Qualitätsvergleich zur Baseline).
-- [ ] **FP-D11-2:** Jede Abweichung als Blocker oder akzeptierte Ausnahme markieren.
-- [ ] **FP-D11-EXIT:** Vollständiger Gate-Probelauf mit eindeutigem Status.
+- [x] **FP-D11-1:** Fixe Gate-Checkliste ausführen (Kernsuite, AC08-Smoke, Qualitätsvergleich zur Baseline). (2026-06-04 Run NV: Gate-Runner `tools/run_release_candidate_gate.sh` ergänzt; Kernsuite `701 passed`, AC08-Regression-Set-Smoke lief im 300s-Probelauf bis `AC0812_M` und endete mit Timeout `124`.)
+- [x] **FP-D11-2:** Jede Abweichung als Blocker oder akzeptierte Ausnahme markieren. (2026-06-04 Run NV: AC08-Smoke-Timeout ist ein **Blocker**, nicht akzeptiert; Qualitätsgate ist Folge-Blocker, weil `ac08_success_metrics.csv` nach Timeout fehlt.)
+- [x] **FP-D11-EXIT:** Vollständiger Gate-Probelauf mit eindeutigem Status. (2026-06-04 Run NV: Status `FAIL/BLOCKER`; Recovery für FP-D12 ist entweder Laufzeitbudget erhöhen/Smoke segmentieren oder Performance-Blocker vor hartem Gate beheben.)
+
+### Fortschritt vs. Blocker (Session 2026-06-04, Release-Kandidaten-Gate vorbereiten FP-D11 Run NV)
+
+- **Fortschritt:** FP-D11 ist operationalisiert: `tools/run_release_candidate_gate.sh` führt Kernsuite, deterministischen AC08-Smoke und Qualitätsgate mit Evidenzlogs aus; `tools/check_ac08_success_metrics_gate.py` prüft die AC08-Erfolgskriterien einschließlich Baseline-/Regressionskriterien.
+- **Sicherung:** Die Kernsuite lief grün (`PYTHONPATH=vendor/linux-py310/site-packages:. PYENV_VERSION=3.10.20 timeout 300 python -m pytest -q -rs`, Exit `0`, `701 passed`). Der neue Gate-/Metrics-Test lief grün (`PYTHONPATH=vendor/linux-py310/site-packages:. python -m pytest -q tests/detailtests/test_local_completion_checks_tool.py`, Exit `0`, `8 passed`).
+- **Blocker:** Der deterministische AC08-Regression-Set-Smoke überschritt das 300s-Probelaufbudget (Exit `124`) und erzeugte dadurch kein finales `ac08_success_metrics.csv`; das Qualitätsgate meldet deshalb `missing metrics file`.
+- **Nächster sinnvoller Schritt:** FP-D12 fährt dasselbe Gate hart: entweder mit ausreichend hohem Laufzeitbudget oder nach Segmentierung des AC08-Smokes, aber weiterhin ohne stumme Regressionen.
 
 ### Tag 12 (2026-06-04) – Release-Kandidaten-Gate hart fahren
 

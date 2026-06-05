@@ -106,6 +106,7 @@ python -m pytest
 ./tools/run_regression_checks.sh
 ./tools/run_safe_test_baseline.sh
 ./tools/run_local_completion_checks.sh
+./tools/run_release_candidate_gate.sh
 # CI nutzt denselben Abschlussbefehl in .github/workflows/local-completion-checks.yml
 # und protokolliert Testausgabe + PASS/FAIL pro Commit als GitHub-Artefakt:
 ./tools/run_test_evidence.sh --name completion-profile --log artifacts/test-evidence/completion-profile.log --summary artifacts/test-evidence/completion-profile-summary.md -- ./tools/run_local_completion_checks.sh
