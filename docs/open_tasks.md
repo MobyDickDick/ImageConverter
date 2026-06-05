@@ -3036,6 +3036,18 @@ Jeder Tag hat genau definierte Aufgaben mit einem harten Exit-Kriterium.
 - **Entscheidung:** FP-D12 endet explizit mit `FAIL/BLOCKER`, ohne akzeptierte Ausnahme. Erzeugt wurden sechs Teilvarianten (`AC0800_L/M/S`, `AC0812_M`, `AC0820_L`, `AC0834_S`), aber keine vollständige Metrikkette.
 - **Recovery-Plan / nächster sinnvoller Schritt:** Vor FP-D13 den festen AC08-Satz in einzeln timeout-gesicherte Variantensegmente zerlegen, Segmentstatus zusammenführen und `ac08_success_metrics.csv` erst nach vollständigem Erfolg aller Segmente freigeben.
 
+### Recovery vor Tag 13 (2026-06-05) – AC08-Gate segmentieren
+
+- [x] **FP-D12-R1:** Festen AC08-Regressionssatz in einzeln timeout-gesicherte Variantenläufe zerlegen. (2026-06-05 Run NX: `tools/run_ac08_segmented_smoke.sh` führt jede der 14 Varianten in einem isolierten Segmentverzeichnis mit eigenem Status und Log aus.)
+- [x] **FP-D12-R2:** Gesamtmetrik ausschließlich nach erfolgreichem Abschluss aller Segmente freigeben. (2026-06-05 Run NX: `.segment-complete`-Marker und `tools/finalize_ac08_segmented_run.py` verhindern Aggregation bei fehlenden/fehlgeschlagenen Segmenten; erst danach werden die zusammengeführten AC08-Erfolgskriterien geschrieben.)
+- [x] **FP-D12-R-EXIT:** Segmentstatus und vollständige Artefaktkette sind reproduzierbar getestet. (2026-06-05 Run NX: Detailtests decken PASS, BLOCKER, zurückgehaltene Metrik und vollständige 14-Varianten-Aggregation ab.)
+
+### Fortschritt vs. Blocker (Session 2026-06-05, AC08-Gate-Recovery Run NX)
+
+- **Fortschritt:** Der Release-Candidate-Runner nutzt standardmäßig den segmentierten AC08-Smoke statt eines einzigen globalen Timeout-Prozesses.
+- **Sicherheitsregel:** Ein Segmentfehler beendet den Smoke mit Blockerstatus; `ac08_success_metrics.csv` wird dann nicht erzeugt.
+- **Nächster sinnvoller Schritt:** FP-D13 führt den vollständigen segmentierten End-to-End-Lauf aus und vergleicht die aggregierten Kennzahlen mit der Baseline.
+
 ### Tag 13 (2026-06-05) – Abschlusslauf
 
 - [ ] **FP-D13-1:** Finalen End-to-End-Lauf mit vollständiger Artefaktkette ausführen.

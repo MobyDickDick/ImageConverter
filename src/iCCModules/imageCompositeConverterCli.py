@@ -124,6 +124,16 @@ def parseArgsImpl(
         ),
     )
     parser.add_argument(
+        "--ac08-regression-variant",
+        action="append",
+        choices=ac08_regression_variants,
+        default=[],
+        help=(
+            "Begrenzt --ac08-regression-set auf eine feste Variante; kann mehrfach "
+            "angegeben werden und dient timeout-isolierten Gate-Segmenten."
+        ),
+    )
+    parser.add_argument(
         "--log-file",
         default=os.environ.get("IMAGE_COMPOSITE_CONVERTER_LOG_FILE", ""),
         help=(
@@ -519,12 +529,17 @@ def runMainImpl(
                 if installed:
                     print(f"[INFO] Installiert: {', '.join(installed)}")
 
+            ac08_regression_variant = list(getattr(args, "ac08_regression_variant", []) or [])
+            if ac08_regression_variant and not args.ac08_regression_set:
+                print("[ERROR] --ac08-regression-variant erfordert --ac08-regression-set")
+                return 2
+            selected_variants = None
             if args.ac08_regression_set:
+                selected_variants = set(ac08_regression_variant or ac08_regression_variants)
                 print(
-                    "[INFO] Verwende festes AC08-Regression-Set "
-                    f"{ac08_regression_set_name}: {', '.join(ac08_regression_variants)}"
+                    "[INFO] Verwende AC08-Regression-Auswahl "
+                    f"{ac08_regression_set_name}: {', '.join(sorted(selected_variants))}"
                 )
-            selected_variants = set(ac08_regression_variants) if args.ac08_regression_set else None
 
             if args.mode == "annotate":
                 out_dir = analyze_range_fn(

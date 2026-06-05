@@ -302,6 +302,129 @@ def test_release_candidate_gate_help_documents_hard_gate_controls() -> None:
     )
 
     assert result.returncode == 0
-    assert "RC_GATE_AC08_TIMEOUT_SECONDS" in result.stdout
-    assert "default: 900" in result.stdout
+    assert "RC_GATE_AC08_SEGMENT_TIMEOUT_SECONDS" in result.stdout
+    assert "default: 240" in result.stdout
     assert "RC_GATE_WORK_PACKAGE" in result.stdout
+
+
+def test_segmented_ac08_smoke_withholds_aggregation_when_one_variant_fails(tmp_path: Path) -> None:
+    evidence_dir = tmp_path / "evidence"
+    output_dir = tmp_path / "output"
+    finalized = tmp_path / "finalized"
+    env = {
+        **os.environ,
+        "RC_GATE_EVIDENCE_DIR": str(evidence_dir),
+        "RC_GATE_OUTPUT_DIR": str(output_dir),
+        "RC_GATE_AC08_VARIANTS": "AC0800_L,AC0800_M",
+        "RC_GATE_AC08_SEGMENT_CMD_TEMPLATE": "test '{variant}' = AC0800_L",
+        "RC_GATE_AC08_FINALIZE_CMD": f"touch {finalized}",
+    }
+
+    result = subprocess.run(
+        ["./tools/run_ac08_segmented_smoke.sh"],
+        cwd=Path(__file__).resolve().parents[2],
+        env=env,
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        check=False,
+    )
+
+    assert result.returncode == 1
+    assert not finalized.exists()
+    status = (evidence_dir / "ac08_segment_status.csv").read_text(encoding="utf-8")
+    assert "AC0800_L;0;PASS" in status
+    assert "AC0800_M;1;BLOCKER" in status
+    assert "aggregate metrics withheld" in result.stdout
+
+
+def test_segmented_ac08_smoke_runs_aggregation_after_all_segments_pass(tmp_path: Path) -> None:
+    evidence_dir = tmp_path / "evidence"
+    output_dir = tmp_path / "output"
+    finalized = tmp_path / "finalized"
+    env = {
+        **os.environ,
+        "RC_GATE_EVIDENCE_DIR": str(evidence_dir),
+        "RC_GATE_OUTPUT_DIR": str(output_dir),
+        "RC_GATE_AC08_VARIANTS": "AC0800_L,AC0800_M",
+        "RC_GATE_AC08_SEGMENT_CMD_TEMPLATE": "echo {variant} > {output_dir}/variant.txt",
+        "RC_GATE_AC08_FINALIZE_CMD": f"touch {finalized}",
+    }
+
+    result = subprocess.run(
+        ["./tools/run_ac08_segmented_smoke.sh"],
+        cwd=Path(__file__).resolve().parents[2],
+        env=env,
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        check=False,
+    )
+
+    assert result.returncode == 0
+    assert finalized.exists()
+    status = (evidence_dir / "ac08_segment_status.csv").read_text(encoding="utf-8")
+    assert status.count(";PASS;") == 2
+
+
+def test_finalize_ac08_segmented_run_requires_every_fixed_variant(tmp_path: Path) -> None:
+    env = {key: value for key, value in os.environ.items() if key != "PYTHONPATH"}
+    result = subprocess.run(
+        ["python", "tools/finalize_ac08_segmented_run.py", str(tmp_path / "segments"), str(tmp_path / "out")],
+        cwd=Path(__file__).resolve().parents[2],
+        env=env,
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        check=False,
+    )
+
+    assert result.returncode == 1
+    assert "incomplete AC08 segments" in result.stdout
+    assert not (tmp_path / "out" / "reports" / "ac08_success_metrics.csv").exists()
+
+
+def test_finalize_ac08_segmented_run_merges_complete_artifact_chain(tmp_path: Path) -> None:
+    from src.successfulConversions import AC08_REGRESSION_VARIANTS
+
+    segments = tmp_path / "segments"
+    output = tmp_path / "output"
+    for index, variant in enumerate(AC08_REGRESSION_VARIANTS):
+        segment = segments / variant
+        reports = segment / "reports"
+        svg = segment / "converted_svgs"
+        reports.mkdir(parents=True)
+        svg.mkdir()
+        (segment / ".segment-complete").touch()
+        (svg / f"{variant}.svg").write_text("<svg/>", encoding="utf-8")
+        (reports / "Iteration_Log.csv").write_text(
+            f"Dateiname;Fehler\n{variant}.jpg;1\n",
+            encoding="utf-8",
+        )
+        quality_row = (
+            "variant;decision;old_error_per_pixel;new_error_per_pixel;old_mean_delta2;new_mean_delta2\n"
+            + (f"{variant};accepted_improvement;2;1;2;1\n" if index == 0 else "")
+        )
+        (reports / "quality_tercile_passes.csv").write_text(quality_row, encoding="utf-8")
+        (reports / f"{variant}_element_validation.log").write_text(
+            "Runde 1: elementweise Validierung gestartet\nstatus=semantic_ok\n",
+            encoding="utf-8",
+        )
+
+    env = {key: value for key, value in os.environ.items() if key != "PYTHONPATH"}
+    result = subprocess.run(
+        ["python", "tools/finalize_ac08_segmented_run.py", str(segments), str(output)],
+        cwd=Path(__file__).resolve().parents[2],
+        env=env,
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        check=False,
+    )
+
+    assert result.returncode == 0, result.stdout
+    metrics = (output / "reports" / "ac08_success_metrics.csv").read_text(encoding="utf-8")
+    assert f"images_converted;{len(AC08_REGRESSION_VARIANTS)}" in metrics
+    assert "images_missing;0" in metrics
+    assert "overall_success;1" in metrics
+    assert len(list((output / "converted_svgs").glob("*.svg"))) == len(AC08_REGRESSION_VARIANTS)

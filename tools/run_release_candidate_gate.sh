@@ -6,7 +6,7 @@ RC_GATE_NAME="${RC_GATE_NAME:-release-candidate-gate}"
 RC_GATE_OUTPUT_DIR="${RC_GATE_OUTPUT_DIR:-/tmp/ic-release-candidate-gate}"
 RC_GATE_EVIDENCE_DIR="${RC_GATE_EVIDENCE_DIR:-artifacts/test-evidence/${RC_GATE_NAME}}"
 RC_GATE_ACCEPTED_EXCEPTIONS=",${RC_GATE_ACCEPTED_EXCEPTIONS:-},"
-RC_GATE_AC08_TIMEOUT_SECONDS="${RC_GATE_AC08_TIMEOUT_SECONDS:-900}"
+RC_GATE_AC08_SEGMENT_TIMEOUT_SECONDS="${RC_GATE_AC08_SEGMENT_TIMEOUT_SECONDS:-240}"
 RC_GATE_WORK_PACKAGE="${RC_GATE_WORK_PACKAGE:-FP-D12}"
 VENDOR_SITE_PACKAGES="vendor/linux-py310/site-packages"
 if [[ -d "$VENDOR_SITE_PACKAGES" ]]; then
@@ -28,7 +28,7 @@ Environment overrides:
   RC_GATE_OUTPUT_DIR             Converter output directory for the AC08 smoke
   RC_GATE_EVIDENCE_DIR           Evidence log/summary directory
   RC_GATE_ACCEPTED_EXCEPTIONS    Comma-separated step names allowed to fail
-  RC_GATE_AC08_TIMEOUT_SECONDS   AC08 smoke timeout in seconds (default: 900)
+  RC_GATE_AC08_SEGMENT_TIMEOUT_SECONDS Per-variant timeout in seconds (default: 240)
   RC_GATE_WORK_PACKAGE           Work-package label in logs (default: FP-D12)
   RC_GATE_CORE_CMD               Shell command override for the core suite
   RC_GATE_AC08_SMOKE_CMD         Shell command override for the AC08 smoke
@@ -78,7 +78,7 @@ run_gate_step() {
 echo "step;exit;classification;log" > "${RC_GATE_EVIDENCE_DIR}/gate_status.csv"
 
 CORE_DEFAULT="${PYTHON_BIN} -m pytest -q -rs"
-AC08_SMOKE_DEFAULT="timeout ${RC_GATE_AC08_TIMEOUT_SECONDS} ${PYTHON_BIN} -m src.iCCModules.imageCompositeConverterCli --input-dir artifacts/images_to_convert --descriptions-path artifacts/images_to_convert/Finale_Wurzelformen_V3.xml --output-dir ${RC_GATE_OUTPUT_DIR} --ac08-regression-set --deterministic-order"
+AC08_SMOKE_DEFAULT="RC_GATE_AC08_SEGMENT_TIMEOUT_SECONDS=${RC_GATE_AC08_SEGMENT_TIMEOUT_SECONDS} ./tools/run_ac08_segmented_smoke.sh"
 QUALITY_DEFAULT="${PYTHON_BIN} tools/check_ac08_success_metrics_gate.py ${RC_GATE_OUTPUT_DIR}/reports/ac08_success_metrics.csv"
 
 BLOCKERS=0
