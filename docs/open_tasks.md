@@ -3076,6 +3076,17 @@ Jeder Tag hat genau definierte Aufgaben mit einem harten Exit-Kriterium.
 - **Wiederaufnahmebedingung:** Erst ein erneuter vollständiger 14/14-Lauf mit 6/6 erhaltenen Previously-Good-Ankern, mindestens einer belegten Qualitätsverbesserung und `overall_success=1` rechtfertigt die Entscheidung „durch“.
 - **Abschluss:** Das 14-Tage-Finish-Playbook ist vollständig abgearbeitet; FP-D14 dokumentiert ausdrücklich keine Release-Freigabe, sondern den nachvollziehbaren Restblocker.
 
+### FP-Recovery nach Abschlussentscheidung (Session 2026-06-05, Run OB)
+
+- [x] **FP-RCV-1:** Root Cause der vier Exit-0-Segmente ohne Iteration-Datensatz beheben. (`AC0811_L/M/S` und `AC0831_L` lagen unter `nonconvertable/`; der segmentierte Runner löst nun je Variante den tatsächlichen Quellordner auf.)
+- [x] **FP-RCV-2:** Segmentvollständigkeit zusätzlich am erwarteten `Iteration_Log.csv`-Datensatz prüfen. (Exit `0` ohne passende Zeile wird `BLOCKER_MISSING_REPORT`; die Finalisierung validiert dieselbe Invariante unabhängig.)
+- [x] **FP-RCV-3:** Die vier fehlenden Varianten real über den korrigierten Segmentpfad verifizieren. (Run OB mit Ein-Iterations-Budget: 4/4 Exit `0`, 4/4 `PASS`, 4/4 erwartete Reportzeilen; Details in `docs/next_arbeitspaket_2026-06-05_runOB.md`.)
+- [ ] **FP-RCV-4:** Vollständigen festen 14er-Satz mit regulärem Budget wiederholen und die FP-D14-Schwellen (`14/14`, `6/6`, mindestens eine Verbesserung, `overall_success=1`) neu bewerten.
+
+- **Fortschritt:** Der konkrete Reportvollständigkeitsfehler ist reproduziert und geschlossen; die vier ehemals fehlenden Varianten erscheinen im echten Recovery-Smoke wieder in `Iteration_Log.csv`.
+- **No silent success:** Weder ein bloßer Prozess-Exit `0` noch ein isolierter `.segment-complete`-Marker genügt künftig zur Aggregation.
+- **Nächster sinnvoller Schritt:** FP-RCV-4 als vollständigen Release-Candidate-Gate-Lauf ausführen; bis dahin bleibt die FP-D14-Entscheidung „noch offen“.
+
 ### Fortschritt vs. Blocker (Session 2026-05-24, AC0020_L Plan-B + Re-Conversion + T5 Run ZZ)
 
 - **Fortschritt (Plan B):** Für `AC0020_L` wurde eine gekoppelte Plan-B-Syntheseprobe ausgeführt (`python -m tools.plan_b_synthetic_probe ... --variant AC0020_L`), Exit `0`; neues Log-Artefakt: `artifacts/converted_images/reports/AC0020_L_planb_synthetic_2026-05-24_runZZ.log`.

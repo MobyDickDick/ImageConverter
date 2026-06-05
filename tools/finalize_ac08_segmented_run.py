@@ -13,6 +13,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
+from tools.ac08_segment_contract import iteration_report_contains_variant
 from src.iCCModules.imageCompositeConverterAc08Reporting import (
     summarizePreviousGoodAc08VariantsImpl,
     writeAc08RegressionManifestImpl,
@@ -96,6 +97,16 @@ def finalize(segments_root: Path, output_dir: Path, input_dir: str, descriptions
     missing = [variant for variant in expected if not (segments_root / variant / ".segment-complete").is_file()]
     if missing:
         raise RuntimeError("incomplete AC08 segments: " + ",".join(missing))
+    missing_reports = [
+        variant
+        for variant in expected
+        if not iteration_report_contains_variant(
+            segments_root / variant / "reports" / "Iteration_Log.csv",
+            variant,
+        )
+    ]
+    if missing_reports:
+        raise RuntimeError("AC08 segments missing expected iteration row: " + ",".join(missing_reports))
 
     if output_dir.exists():
         shutil.rmtree(output_dir)
