@@ -83,3 +83,20 @@ explizit blockiert.
 - **Blocker:** 4 fehlende Variantendatensätze, 3 fehlende Previously-Good-Anker, 0 Verbesserungen.
 - **Nächster Schritt:** Reportvollständigkeit reparieren und den festen 14er-Satz wiederholen.
 - **Startbefehl:** `PYTHONPATH=vendor/linux-py310/site-packages:. PYENV_VERSION=3.10.20 python -m pytest -q tests/detailtests/test_local_completion_checks_tool.py`.
+
+## Recovery-Nachtrag – Run OC (2026-06-05)
+
+Der vollständige Wiederholungslauf nach der Report-Reparatur verbessert den
+FP-D14-Iststand von `10/14` auf `14/14` Variantendatensätze und von `3/6` auf
+`6/6` erhaltene Previously-Good-Anker. Kernsuite (`714 passed`) und
+segmentierter AC08-Smoke sind grün; es gab keine semantischen Mismatches,
+Batch-/Render-Fehler oder akzeptierten Regressionen.
+
+Die Abschlussentscheidung bleibt trotzdem **„noch offen“**, weil der dritte
+harte Schwellenwert weiterhin `0` statt mindestens einer gemessenen
+Qualitätsverbesserung beträgt und `overall_success=0` bleibt. Run OC grenzt den
+Restblocker auf die batchbasierte Quality-Pass-Auswahl ein: Die isolierten
+Ein-Datei-Segmente liegen unter dem offenen Fehlergrenzwert und sind zu klein
+für den Terzil-Fallback, sodass kein Refinement-Vergleich protokolliert wird.
+Die vollständige Evidenz und das nächste Abnahmepaket stehen in
+`docs/next_arbeitspaket_2026-06-05_runOC.md`.
