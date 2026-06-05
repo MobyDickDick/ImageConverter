@@ -1,0 +1,3 @@
+==> FP-D12 quality-gate
+Command: bash -lc python\ tools/check_ac08_success_metrics_gate.py\ /tmp/ic-fpd12-ac08/reports/ac08_success_metrics.csv
+FAIL AC08 quality gate: missing metrics file: /tmp/ic-fpd12-ac08/reports/ac08_success_metrics.csv

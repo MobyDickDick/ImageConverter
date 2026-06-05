@@ -246,3 +246,62 @@ def test_release_candidate_gate_fails_unaccepted_blocker(tmp_path: Path) -> None
     assert result.returncode == 1
     status = (evidence_dir / "gate_status.csv").read_text(encoding="utf-8")
     assert "ac08-smoke;5;BLOCKER" in status
+
+
+def test_release_candidate_gate_discards_stale_metrics_before_smoke(tmp_path: Path) -> None:
+    evidence_dir = tmp_path / "evidence"
+    output_dir = tmp_path / "output"
+    reports_dir = output_dir / "reports"
+    reports_dir.mkdir(parents=True)
+    stale_metrics = reports_dir / "ac08_success_metrics.csv"
+    stale_metrics.write_text(
+        "metric;value\n"
+        "criterion_no_new_batch_aborts;1\n"
+        "criterion_no_accepted_regressions;1\n"
+        "criterion_validation_rounds_recorded;1\n"
+        "criterion_regression_set_improved;1\n"
+        "criterion_stable_families_not_worse;1\n"
+        "overall_success;1\n",
+        encoding="utf-8",
+    )
+    env = {
+        **os.environ,
+        "RC_GATE_EVIDENCE_DIR": str(evidence_dir),
+        "RC_GATE_OUTPUT_DIR": str(output_dir),
+        "RC_GATE_CORE_CMD": "echo core ok",
+        "RC_GATE_AC08_SMOKE_CMD": "echo smoke blocker; exit 124",
+    }
+
+    result = subprocess.run(
+        ["./tools/run_release_candidate_gate.sh"],
+        cwd=Path(__file__).resolve().parents[2],
+        env=env,
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        check=False,
+    )
+
+    assert result.returncode == 1
+    assert not stale_metrics.exists()
+    status = (evidence_dir / "gate_status.csv").read_text(encoding="utf-8")
+    assert "ac08-smoke;124;BLOCKER" in status
+    assert "quality-gate;1;BLOCKER" in status
+    quality_log = (evidence_dir / "quality-gate.log").read_text(encoding="utf-8")
+    assert "missing metrics file" in quality_log
+
+
+def test_release_candidate_gate_help_documents_hard_gate_controls() -> None:
+    result = subprocess.run(
+        ["./tools/run_release_candidate_gate.sh", "--help"],
+        cwd=Path(__file__).resolve().parents[2],
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        check=False,
+    )
+
+    assert result.returncode == 0
+    assert "RC_GATE_AC08_TIMEOUT_SECONDS" in result.stdout
+    assert "default: 900" in result.stdout
+    assert "RC_GATE_WORK_PACKAGE" in result.stdout

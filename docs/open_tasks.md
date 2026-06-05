@@ -3024,9 +3024,17 @@ Jeder Tag hat genau definierte Aufgaben mit einem harten Exit-Kriterium.
 
 ### Tag 12 (2026-06-04) – Release-Kandidaten-Gate hart fahren
 
-- [ ] **FP-D12-1:** Gate erneut unter denselben Bedingungen ausführen.
-- [ ] **FP-D12-2:** Regel „No silent regression“ strikt anwenden.
-- [ ] **FP-D12-EXIT:** Gate `PASS` oder explizit dokumentiertes `FAIL` mit konkretem Recovery-Plan.
+- [x] **FP-D12-1:** Gate erneut unter denselben Bedingungen ausführen. (2026-06-05 Run NW: derselbe dreistufige Gate-Runner mit frischem Output und erhöhtem, explizitem AC08-Budget von 900s ausgeführt; Kernsuite `703 passed`, AC08-Smoke endet weiterhin mit Timeout `124`.)
+- [x] **FP-D12-2:** Regel „No silent regression“ strikt anwenden. (2026-06-05 Run NW: Der Runner verwirft das Output-Verzeichnis vor dem Smoke; ein fehlgeschlagener Smoke kann dadurch keine alte Erfolgsmessung wiederverwenden. Regressionstest erzwingt `ac08-smoke=BLOCKER` und `quality-gate=BLOCKER` bei zuvor vorhandener grüner Metrics-Datei.)
+- [x] **FP-D12-EXIT:** Gate `PASS` oder explizit dokumentiertes `FAIL` mit konkretem Recovery-Plan. (2026-06-05 Run NW: explizites `FAIL/BLOCKER`; Recovery: AC08-Regression-Set in deterministische Einzelvarianten-Segmente mit je eigenem Timeout/Evidence aufteilen und die Gesamtmetrik ausschließlich nach vollständigem Segmentabschluss erzeugen.)
+
+### Fortschritt vs. Blocker (Session 2026-06-05, Release-Kandidaten-Gate hart FP-D12 Run NW)
+
+- **Fortschritt:** FP-D12 wurde vollständig ausgeführt. Der Gate-Runner unterstützt ein explizites AC08-Zeitbudget (`RC_GATE_AC08_TIMEOUT_SECONDS`, Standard `900`) und kennzeichnet den Lauf als FP-D12.
+- **No silent regression:** Vor jedem AC08-Smoke wird das Zielverzeichnis vollständig neu angelegt. Eine alte grüne `ac08_success_metrics.csv` kann nach Timeout oder Abbruch nicht mehr zu einem falschen Qualitäts-PASS führen.
+- **Sicherung:** Gate-/Metrics-Detailtests `10 passed`; echte Kernsuite `703 passed`; der echte AC08-Smoke endete nach 900s mit Exit `124`, das nachgelagerte Qualitätsgate wegen fehlender finaler Metrics-Datei mit Exit `1`. Beide Zeilen stehen als `BLOCKER` in `artifacts/test-evidence/fp-d12-run-nw/gate_status.csv`.
+- **Entscheidung:** FP-D12 endet explizit mit `FAIL/BLOCKER`, ohne akzeptierte Ausnahme. Erzeugt wurden sechs Teilvarianten (`AC0800_L/M/S`, `AC0812_M`, `AC0820_L`, `AC0834_S`), aber keine vollständige Metrikkette.
+- **Recovery-Plan / nächster sinnvoller Schritt:** Vor FP-D13 den festen AC08-Satz in einzeln timeout-gesicherte Variantensegmente zerlegen, Segmentstatus zusammenführen und `ac08_success_metrics.csv` erst nach vollständigem Erfolg aller Segmente freigeben.
 
 ### Tag 13 (2026-06-05) – Abschlusslauf
 

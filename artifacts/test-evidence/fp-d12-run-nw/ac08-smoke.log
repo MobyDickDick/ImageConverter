@@ -1,0 +1,2 @@
+==> FP-D12 ac08-smoke
+Command: bash -lc timeout\ 900\ python\ -m\ src.iCCModules.imageCompositeConverterCli\ --input-dir\ artifacts/images_to_convert\ --descriptions-path\ artifacts/images_to_convert/Finale_Wurzelformen_V3.xml\ --output-dir\ /tmp/ic-fpd12-ac08\ --ac08-regression-set\ --deterministic-order
