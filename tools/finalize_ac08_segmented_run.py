@@ -6,7 +6,12 @@ from __future__ import annotations
 import argparse
 import csv
 import shutil
+import sys
 from pathlib import Path
+
+REPO_ROOT = Path(__file__).resolve().parents[1]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
 
 from src.iCCModules.imageCompositeConverterAc08Reporting import (
     summarizePreviousGoodAc08VariantsImpl,
@@ -49,7 +54,14 @@ def _merge_csv(inputs: list[Path], output: Path) -> None:
 
 
 def _copy_segment_artifacts(segment_dir: Path, output_dir: Path) -> None:
-    for relative_dir in ("converted_svgs", "converted_images_png", "diff_pngs", "converted_svg_failed", "converted_images_png_failed"):
+    artifact_dirs = (
+        "converted_svgs",
+        "converted_images_png",
+        "diff_pngs",
+        "converted_svg_failed",
+        "converted_images_png_failed",
+    )
+    for relative_dir in artifact_dirs:
         source = segment_dir / relative_dir
         if not source.exists():
             continue

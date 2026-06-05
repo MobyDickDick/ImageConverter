@@ -368,9 +368,11 @@ def test_segmented_ac08_smoke_runs_aggregation_after_all_segments_pass(tmp_path:
 
 
 def test_finalize_ac08_segmented_run_requires_every_fixed_variant(tmp_path: Path) -> None:
+    env = {key: value for key, value in os.environ.items() if key != "PYTHONPATH"}
     result = subprocess.run(
         ["python", "tools/finalize_ac08_segmented_run.py", str(tmp_path / "segments"), str(tmp_path / "out")],
         cwd=Path(__file__).resolve().parents[2],
+        env=env,
         text=True,
         stdout=subprocess.PIPE,
         stderr=subprocess.STDOUT,
@@ -409,9 +411,11 @@ def test_finalize_ac08_segmented_run_merges_complete_artifact_chain(tmp_path: Pa
             encoding="utf-8",
         )
 
+    env = {key: value for key, value in os.environ.items() if key != "PYTHONPATH"}
     result = subprocess.run(
         ["python", "tools/finalize_ac08_segmented_run.py", str(segments), str(output)],
         cwd=Path(__file__).resolve().parents[2],
+        env=env,
         text=True,
         stdout=subprocess.PIPE,
         stderr=subprocess.STDOUT,
