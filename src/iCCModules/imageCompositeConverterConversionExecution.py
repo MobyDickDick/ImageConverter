@@ -8,6 +8,7 @@ import os
 import re
 import signal
 import shutil
+import time
 from contextlib import contextmanager
 
 _ONE_BY_ONE_TRANSPARENT_PNG = (
@@ -299,6 +300,30 @@ def _formatFailureTelemetry(details: dict[str, object] | None) -> str:
     return "; ".join(parts)
 
 
+def _formatCompactParams(params: object, *, max_chars: int = 240) -> str:
+    """Render conversion parameters as a stable, single-line console summary."""
+    if not isinstance(params, dict) or not params:
+        return "{}"
+    try:
+        rendered = json.dumps(params, ensure_ascii=False, sort_keys=True, separators=(",", ":"), default=str)
+    except (TypeError, ValueError):
+        rendered = str(params).replace("\n", " ")
+    if len(rendered) <= max_chars:
+        return rendered
+    return rendered[: max(0, max_chars - 3)].rstrip() + "..."
+
+
+def _formatQualityValue(value: object) -> str:
+    """Format a quality metric compactly while preserving unavailable values."""
+    try:
+        numeric = float(value)
+    except (TypeError, ValueError):
+        return "n/a"
+    if not math.isfinite(numeric):
+        return "n/a"
+    return f"{numeric:.6f}"
+
+
 def _formatFailureTelemetryJson(details: dict[str, object] | None) -> str:
     if not details:
         return ""
@@ -401,6 +426,12 @@ def convertOneImpl(
 
     if anchor_test_active:
         _emit_anchor_variant_event("variant_start", attempt_idx=attempt_idx)
+    started_at = time.monotonic()
+    print_fn(
+        f"[INFO] Konvertiere {filename} | "
+        f"Parameter: Iterationen={max(1, int(iteration_budget))}, "
+        f"Validierungsrunden={max(1, int(badge_rounds))}"
+    )
     try:
         with _wallClockTimeout(run_timeout_sec):
             res = run_iteration_pipeline_fn(
@@ -778,6 +809,14 @@ def convertOneImpl(
             "validation_log_text": _safeReadTextFile(log_file),
         },
         print_fn=print_fn,
+    )
+    elapsed_sec = max(0.0, time.monotonic() - started_at)
+    print_fn(
+        f"[INFO] Konvertiert {filename} | "
+        f"Parameter: {_formatCompactParams(params)} | "
+        f"Qualität: Fehler/Pixel={_formatQualityValue(row['error_per_pixel'])}, "
+        f"Mean-Delta²={_formatQualityValue(row['mean_delta2'])}, "
+        f"beste Iteration={int(best_iter)} | Dauer={elapsed_sec:.1f}s"
     )
     _emit_anchor_variant_event("variant_done", status="ok")
     if os.path.exists(svg_path) and img is not None and hasattr(cv2_module, "imwrite"):

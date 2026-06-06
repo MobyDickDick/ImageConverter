@@ -56,6 +56,7 @@ def test_convert_one_impl_success_reads_convergence_and_delta2(tmp_path: Path) -
     (svg_out / "AC0800_S.svg").write_text("<svg/>", encoding="utf-8")
 
     batch_failures: list[dict[str, str]] = []
+    console_messages: list[str] = []
     row, failed = conversion_execution_helpers.convertOneImpl(
         filename=filename,
         folder_path=str(folder),
@@ -76,7 +77,7 @@ def test_convert_one_impl_success_reads_convergence_and_delta2(tmp_path: Path) -
         cv2_module=_Cv2Stub(_ImageStub((4, 3, 3))),
         render_embedded_raster_svg_fn=lambda _path: "<svg/>",
         append_batch_failure_fn=batch_failures.append,
-        print_fn=lambda _msg: None,
+        print_fn=console_messages.append,
     )
 
     assert failed is False
@@ -85,6 +86,25 @@ def test_convert_one_impl_success_reads_convergence_and_delta2(tmp_path: Path) -
     assert row["mean_delta2"] == 1.25
     assert row["error_per_pixel"] == 1.0
     assert batch_failures == []
+    assert console_messages[0] == (
+        "[INFO] Konvertiere AC0800_S.jpg | Parameter: Iterationen=3, Validierungsrunden=5"
+    )
+    assert console_messages[1].startswith(
+        "[INFO] Konvertiert AC0800_S.jpg | Parameter: {\"mode\":\"semantic_badge\"} | "
+        "Qualität: Fehler/Pixel=1.000000, Mean-Delta²=1.250000, beste Iteration=2 | Dauer="
+    )
+    assert console_messages[1].endswith("s")
+
+
+def test_compact_params_truncates_long_single_line_payload() -> None:
+    rendered = conversion_execution_helpers._formatCompactParams(
+        {"mode": "semantic_badge", "values": list(range(100))},
+        max_chars=48,
+    )
+
+    assert len(rendered) == 48
+    assert rendered.endswith("...")
+    assert "\n" not in rendered
 
 
 def test_convert_one_impl_semantic_mismatch_is_reported_as_failure(tmp_path: Path) -> None:
