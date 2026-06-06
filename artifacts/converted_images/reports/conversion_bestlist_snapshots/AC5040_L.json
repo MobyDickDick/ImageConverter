@@ -1,14 +1,22 @@
 {
   "base": "AC5040",
-  "best_error": 69.41449029982363,
+  "best_error": 84.54055731922399,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.001469089741795209,
+  "error_per_pixel": 0.0017892181443222009,
   "filename": "AC5040_L.jpg",
   "h": 210,
-  "mean_delta2": 24527.826171875,
+  "mean_delta2": 30917.310546875,
   "params": {
     "bottom_shape": null,
+    "contract_status": "ok",
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
     "description_fragments": [
       {
         "key": "AC5040",
@@ -20,6 +28,7 @@
       "AC5041"
     ],
     "elements": [],
+    "geometry_ir": [],
     "label": "M",
     "mode": "auto",
     "semantic_conflicts": [],
@@ -32,7 +41,7 @@
     "top_source_ref": null,
     "variant_name": "AC5040_L"
   },
-  "std_delta2": 23620.306640625,
+  "std_delta2": 20604.009765625,
   "variant": "AC5040_L",
   "w": 225
 }

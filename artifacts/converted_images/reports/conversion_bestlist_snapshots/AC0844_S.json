@@ -1,0 +1,55 @@
+{
+  "base": "AC0844",
+  "best_error": 20.216,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.05390933333333334,
+  "filename": "AC0844_S.jpg",
+  "h": 15,
+  "mean_delta2": 4330.087890625,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": false,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "AC0844",
+        "source": "base_name",
+        "text": "Kreisförmiges Badge. Abweichung: mit Text \"rF\" (relative Feuchtigkeit) Abweichung: mit Griff (dunkelgraue Linie nach unten) Abweichung: nach links gedreht, Text immer noch horizontal. Der Griff liegt auf einer Symmetrieachse des Kreises."
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [
+      "SEMANTIC: waagrechter Strich rechts vom Kreis",
+      "SEMANTIC: Kreis + Buchstabe rF"
+    ],
+    "geometry_ir": [],
+    "label": "rF",
+    "mode": "semantic_badge",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {
+      "description_heuristic": [
+        "SEMANTIC: Kreis + Buchstabe rF"
+      ],
+      "family_rule": [
+        "SEMANTIC: waagrechter Strich rechts vom Kreis"
+      ]
+    },
+    "top_source_ref": null,
+    "variant_name": "AC0844_S"
+  },
+  "std_delta2": 11013.8046875,
+  "variant": "AC0844_S",
+  "w": 25
+}

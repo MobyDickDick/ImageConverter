@@ -1,12 +1,12 @@
 {
   "base": "AC0412",
-  "best_error": 37.33833333333333,
+  "best_error": 29.734166666666667,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.09334583333333332,
+  "error_per_pixel": 0.07433541666666667,
   "filename": "AC0412_1_S.jpg",
   "h": 20,
-  "mean_delta2": 12329.5849609375,
+  "mean_delta2": 6896.90234375,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -36,7 +36,7 @@
           0.88,
           0.88
         ],
-        "fill": "#45aa5e",
+        "fill": "#d8d8d8",
         "id": "compressor_circle",
         "kind": "CircleBackground",
         "stroke": "#8d8d8d",
@@ -66,7 +66,7 @@
             0.16
           ]
         ],
-        "stroke": "#d7d7d7",
+        "stroke": "#666666",
         "stroke_width": 0.04
       }
     ],
@@ -82,7 +82,7 @@
     "top_source_ref": null,
     "variant_name": "AC0412_1_S"
   },
-  "std_delta2": 22242.51953125,
+  "std_delta2": 13052.107421875,
   "variant": "AC0412_1_S",
   "w": 20
 }

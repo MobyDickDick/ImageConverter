@@ -1,14 +1,22 @@
 {
   "base": "AC0150",
-  "best_error": 29.2534375,
+  "best_error": 36.5403125,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.00914169921875,
+  "error_per_pixel": 0.01141884765625,
   "filename": "AC0150.jpg",
   "h": 80,
-  "mean_delta2": 5769.830078125,
+  "mean_delta2": 6369.3125,
   "params": {
     "bottom_shape": null,
+    "contract_status": "ok",
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": false,
+      "status": "ok"
+    },
     "description_fragments": [
       {
         "key": "AC0150",
@@ -18,6 +26,71 @@
     ],
     "documented_alias_refs": [],
     "elements": [],
+    "geometry_ir": [
+      {
+        "bbox": [
+          0.32,
+          0.12,
+          0.36,
+          0.76
+        ],
+        "constraint": "inside_rect_border",
+        "id": "background_gradient",
+        "kind": "HorizontalGradient",
+        "stops": [
+          "#8f8f8f",
+          "#dedede",
+          "#8f8f8f"
+        ]
+      },
+      {
+        "bbox": [
+          0.32,
+          0.12,
+          0.36,
+          0.76
+        ],
+        "fill": "none",
+        "id": "main_rect",
+        "kind": "RectBorder",
+        "stroke": "#666666",
+        "stroke_width": 0.035
+      },
+      {
+        "id": "horizontal_rule_set",
+        "kind": "HorizontalRuleSet",
+        "positions": [
+          0.3,
+          0.5,
+          0.7
+        ],
+        "rect_ref": "main_rect",
+        "stroke": "#707070",
+        "stroke_width": 0.026,
+        "x_inset": 0.1
+      },
+      {
+        "id": "right_side_orthogonal_line",
+        "kind": "OrthogonalPolyline",
+        "points": [
+          [
+            0.5,
+            0.02
+          ],
+          [
+            1.02,
+            0.5
+          ],
+          [
+            0.5,
+            0.98
+          ]
+        ],
+        "rect_ref": "main_rect",
+        "stroke": "#707070",
+        "stroke_width": 0.034
+      }
+    ],
     "label": "M",
     "mode": "auto",
     "semantic_conflicts": [],
@@ -30,7 +103,7 @@
     "top_source_ref": null,
     "variant_name": "AC0150"
   },
-  "std_delta2": 10882.033203125,
+  "std_delta2": 9120.064453125,
   "variant": "AC0150",
   "w": 40
 }

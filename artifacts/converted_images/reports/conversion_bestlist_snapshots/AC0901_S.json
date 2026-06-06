@@ -1,0 +1,48 @@
+{
+  "base": "AC0901",
+  "best_error": 11.219166666666666,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.004674652777777778,
+  "filename": "AC0901_S.jpg",
+  "h": 40,
+  "mean_delta2": 3576.1826171875,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": false,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "AC0901",
+        "source": "base_name",
+        "text": "Unzugeordnete Wurzelform aus der Serie AC0901. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen."
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [
+      "MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie."
+    ],
+    "geometry_ir": [],
+    "label": "",
+    "mode": "manual_review",
+    "review_reason": "Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "AC0901_S"
+  },
+  "std_delta2": 11757.400390625,
+  "variant": "AC0901_S",
+  "w": 60
+}

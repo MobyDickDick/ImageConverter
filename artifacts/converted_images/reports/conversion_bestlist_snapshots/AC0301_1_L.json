@@ -1,14 +1,24 @@
 {
   "base": "AC0301",
-  "best_error": 98.84489583333334,
+  "best_error": 13.468125,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.015444514973958334,
+  "error_per_pixel": 0.00210439453125,
   "filename": "AC0301_1_L.jpg",
   "h": 80,
-  "mean_delta2": 54092.94921875,
+  "mean_delta2": 3987.5556640625,
   "params": {
     "bottom_shape": null,
+    "contract_status": "insufficient_description",
+    "description_contract": {
+      "deficits": [
+        "missing_geometry_terms"
+      ],
+      "has_conditions": false,
+      "has_geometry_terms": false,
+      "has_reference": false,
+      "status": "insufficient_description"
+    },
     "description_fragments": [
       {
         "key": "AC0301",
@@ -17,9 +27,12 @@
       }
     ],
     "documented_alias_refs": [],
-    "elements": [],
-    "label": "M",
-    "mode": "auto",
+    "elements": [
+      "MANUELL: Beschreibung unzureichend (fehlende Geometriehinweise oder leerer Beschreibungstext)."
+    ],
+    "geometry_ir": [],
+    "label": "",
+    "mode": "insufficient_description",
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
@@ -30,7 +43,7 @@
     "top_source_ref": null,
     "variant_name": "AC0301_1_L"
   },
-  "std_delta2": 38555.578125,
+  "std_delta2": 12754.9189453125,
   "variant": "AC0301_1_L",
   "w": 80
 }

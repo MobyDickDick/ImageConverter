@@ -1,0 +1,120 @@
+{
+  "base": "AC0224",
+  "best_error": 29.73604938271605,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.022026703246456333,
+  "filename": "AC0224_M.jpg",
+  "h": 30,
+  "mean_delta2": 6363.49560546875,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "AC0224",
+        "source": "base_name",
+        "text": "Wie AC0221: Wie AC0231, jedoch ohne \"M\" in der Kelle oben. Geometrische Variante: 90° nach rechts gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises."
+      }
+    ],
+    "documented_alias_refs": [
+      "AC0221",
+      "AC0231"
+    ],
+    "elements": [],
+    "geometry_ir": [
+      {
+        "body_fill": "url(#vertical-two-way-valve-body-gradient)",
+        "body_paths": [
+          [
+            [
+              0.39,
+              0.5
+            ],
+            [
+              0.545,
+              0.02
+            ],
+            [
+              0.235,
+              0.02
+            ]
+          ],
+          [
+            [
+              0.39,
+              0.5
+            ],
+            [
+              0.545,
+              0.98
+            ],
+            [
+              0.235,
+              0.98
+            ]
+          ],
+          [
+            [
+              0.39,
+              0.5
+            ],
+            [
+              0.04,
+              0.333
+            ],
+            [
+              0.04,
+              0.667
+            ]
+          ]
+        ],
+        "circle": [
+          0.765,
+          0.5,
+          0.225
+        ],
+        "circle_fill": "url(#vertical-two-way-valve-circle-gradient)",
+        "connector": [
+          [
+            0.55,
+            0.5
+          ],
+          [
+            0.39,
+            0.5
+          ]
+        ],
+        "connector_stroke": "#8f8f8f",
+        "connector_width": 0.075,
+        "id": "right_rotated_top_kelle_three_way_valve",
+        "kind": "RightRotatedTopKelleThreeWayValveGlyph",
+        "label": "",
+        "stroke": "#969696",
+        "stroke_width": 0.04,
+        "text_fill": "#666666"
+      }
+    ],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "AC0224_M"
+  },
+  "std_delta2": 11867.2880859375,
+  "variant": "AC0224_M",
+  "w": 45
+}

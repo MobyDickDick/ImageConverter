@@ -1,12 +1,12 @@
 {
   "base": "AC0301_1M",
-  "best_error": 56.27898148148148,
+  "best_error": 21.74185185185185,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.015633050411522634,
+  "error_per_pixel": 0.00603940329218107,
   "filename": "AC0301_1M_sia.jpg",
   "h": 60,
-  "mean_delta2": 26770.240234375,
+  "mean_delta2": 6959.25390625,
   "params": {
     "bottom_shape": null,
     "contract_status": "insufficient_description",
@@ -43,7 +43,7 @@
     "top_source_ref": null,
     "variant_name": "AC0301_1M_SIA"
   },
-  "std_delta2": 34531.125,
+  "std_delta2": 16242.44140625,
   "variant": "AC0301_1M_SIA",
   "w": 60
 }

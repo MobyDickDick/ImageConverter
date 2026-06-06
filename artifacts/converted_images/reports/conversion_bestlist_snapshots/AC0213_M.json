@@ -1,0 +1,107 @@
+{
+  "base": "AC0213",
+  "best_error": 35.009166666666665,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.029174305555555554,
+  "filename": "AC0213_M.jpg",
+  "h": 40,
+  "mean_delta2": 7747.791015625,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "AC0213",
+        "source": "base_name",
+        "text": "Wie AC0212: 2-Weg Ventil vertikal: Kelle mit Kreis rechts, horizontale Verbindungslinie, \"M\" als Text (M = Motor), zwei spitze Dreiecke, welche sich in der Mitte berühren, graue Umrandung, Dreiecke besitzen emeinsamen Farübergang von dunkelgrau rechts oben nach hellgrau links unten. Geometrische Variante: 90° nach links gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises."
+      }
+    ],
+    "documented_alias_refs": [
+      "AC0212"
+    ],
+    "elements": [],
+    "geometry_ir": [
+      {
+        "body_fill": "url(#vertical-two-way-valve-body-gradient)",
+        "body_path": [
+          [
+            0.98,
+            0.025
+          ],
+          [
+            0.98,
+            0.384
+          ],
+          [
+            0.491,
+            0.207
+          ],
+          [
+            0.02,
+            0.384
+          ],
+          [
+            0.02,
+            0.025
+          ],
+          [
+            0.491,
+            0.207
+          ]
+        ],
+        "circle": [
+          0.499,
+          0.721,
+          0.263
+        ],
+        "circle_fill": "url(#vertical-two-way-valve-circle-gradient)",
+        "connector": [
+          [
+            0.499,
+            0.213
+          ],
+          [
+            0.499,
+            0.46
+          ]
+        ],
+        "connector_stroke": "#8f8f8f",
+        "connector_width": 0.06,
+        "font_size": 0.415,
+        "font_weight": "700",
+        "id": "left_rotated_two_way_valve_motor",
+        "kind": "LeftRotatedTwoWayValveMotorGlyph",
+        "label": "M",
+        "label_center": [
+          0.499,
+          0.815
+        ],
+        "stroke": "#969696",
+        "stroke_width": 0.04,
+        "text_fill": "#666666"
+      }
+    ],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "AC0213_M"
+  },
+  "std_delta2": 11978.63671875,
+  "variant": "AC0213_M",
+  "w": 30
+}

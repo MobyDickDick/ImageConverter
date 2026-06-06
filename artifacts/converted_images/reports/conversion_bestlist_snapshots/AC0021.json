@@ -9,6 +9,14 @@
   "mean_delta2": 7961.6689453125,
   "params": {
     "bottom_shape": null,
+    "contract_status": "ok",
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": true,
+      "has_reference": false,
+      "status": "ok"
+    },
     "description_fragments": [
       {
         "key": "AC0021",
@@ -20,6 +28,7 @@
     "elements": [
       "SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch)"
     ],
+    "geometry_ir": [],
     "label": "",
     "mode": "dual_arrow_badge",
     "semantic_conflicts": [],

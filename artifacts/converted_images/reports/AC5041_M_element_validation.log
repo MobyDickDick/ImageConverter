@@ -1,9 +1,27 @@
-run-meta: run_seed=217074518 pass_seed_offset=0 nonce_ns=1780247845568730300
-status=non_composite_perception_seeded_geometry_ir
-perception_seeded_geometry_ir=1
-perception_seed_count=1
-geometry_ir_element_count=1
-geometry_ir_element_1=CircleBackground
+run-meta: run_seed=566401811 pass_seed_offset=0 nonce_ns=1780516957495891600
+status=non_composite_elementwise_symbol_fit
+step_border_thickness=1.8
+step_gradient_center=40.0
+step_diag1_width=2.8
+step_diag2_width=1.8
+step_plus_x_ratio=0.0735
+step_glyph_y_ratio=0.1813
+step_plus_half_ratio=0.16
+step_plus_width=2.2
+step_minus_gap_ratio=1.5
+step_minus_width=2.2
+fit_border_thickness=1.8
+fit_diag1_width=2.8
+fit_diag2_width=1.8
+fit_glyph_y_ratio=0.1813
+fit_gradient_center=40.0
+fit_gradient_edge=#606060
+fit_gradient_mid=#fafafa
+fit_minus_gap_ratio=1.5
+fit_minus_width=2.2
+fit_plus_half_ratio=0.16
+fit_plus_width=2.2
+fit_plus_x_ratio=0.0735
 non_composite_selection=best_pixel_error
 non_composite_candidate_error_non_composite_perception_seeded_geometry_ir=87.455238
-non_composite_candidate_error_non_composite_elementwise_symbol_fit=153.971905
+non_composite_candidate_error_non_composite_elementwise_symbol_fit=83.608302

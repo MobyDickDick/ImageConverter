@@ -1,14 +1,22 @@
 {
   "base": "AC5010",
-  "best_error": 73.26169841269841,
+  "best_error": 48.80395238095238,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.003488652305366591,
+  "error_per_pixel": 0.002323997732426304,
   "filename": "AC5010_M.jpg",
   "h": 200,
-  "mean_delta2": 23872.5390625,
+  "mean_delta2": 11849.8125,
   "params": {
     "bottom_shape": null,
+    "contract_status": "ok",
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": false,
+      "status": "ok"
+    },
     "description_fragments": [
       {
         "key": "AC5010",
@@ -18,6 +26,21 @@
     ],
     "documented_alias_refs": [],
     "elements": [],
+    "geometry_ir": [
+      {
+        "bbox": [
+          0.18,
+          0.24,
+          0.64,
+          0.56
+        ],
+        "fill": "#d8d8d8",
+        "id": "main_rect",
+        "kind": "RectBorder",
+        "stroke": "#666666",
+        "stroke_width": 0.035
+      }
+    ],
     "label": "M",
     "mode": "auto",
     "semantic_conflicts": [],
@@ -30,7 +53,7 @@
     "top_source_ref": null,
     "variant_name": "AC5010_M"
   },
-  "std_delta2": 22248.76171875,
+  "std_delta2": 13879.5107421875,
   "variant": "AC5010_M",
   "w": 105
 }

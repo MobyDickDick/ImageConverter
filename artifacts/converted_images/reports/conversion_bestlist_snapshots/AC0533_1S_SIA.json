@@ -1,0 +1,53 @@
+{
+  "base": "AC0533",
+  "best_error": 14.65125,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.0183140625,
+  "filename": "AC0533_1S_sia.jpg",
+  "h": 40,
+  "mean_delta2": 4748.04638671875,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": false,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "AC0533",
+        "source": "base_name",
+        "text": "Unzugeordnete Wurzelform aus der Serie AC0533_S_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen."
+      },
+      {
+        "key": "AC0533_1S_sia",
+        "source": "variant_name",
+        "text": "Unzugeordnete Wurzelform aus der Serie AC0533_1S_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen."
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [
+      "MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie."
+    ],
+    "geometry_ir": [],
+    "label": "",
+    "mode": "manual_review",
+    "review_reason": "Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "AC0533_1S_SIA"
+  },
+  "std_delta2": 14332.521484375,
+  "variant": "AC0533_1S_SIA",
+  "w": 20
+}

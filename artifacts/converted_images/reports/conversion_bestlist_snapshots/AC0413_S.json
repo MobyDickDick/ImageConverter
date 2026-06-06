@@ -1,0 +1,48 @@
+{
+  "base": "AC0413",
+  "best_error": 18.8725,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.047181249999999994,
+  "filename": "AC0413_S.jpg",
+  "h": 20,
+  "mean_delta2": 2025.3525390625,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": false,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "AC0413",
+        "source": "base_name",
+        "text": "Unzugeordnete Wurzelform aus der Serie AC0413 (Variante S). Die automatische Regionsanalyse hat nur eine Textfläche erkannt; dadurch wurde bisher eine generische Platzhalterbeschreibung erzeugt. Für die Konvertierung ist die Geometrie als kleiner Kreis (ca. 20×20 px) mit innenliegender Zeichenkette zu behandeln; die konkrete Zeichenkette bleibt ohne belastbares OCR-Ergebnis manuell zu prüfen."
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [
+      "MANUELL: Beschreibung markiert Symbol als unzugeordnete Wurzelform."
+    ],
+    "geometry_ir": [],
+    "label": "",
+    "mode": "manual_review",
+    "review_reason": "Beschreibung markiert Symbol als unzugeordnete Wurzelform.",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "AC0413_S"
+  },
+  "std_delta2": 3003.768798828125,
+  "variant": "AC0413_S",
+  "w": 20
+}

@@ -1,0 +1,48 @@
+{
+  "base": "AC0404_2L",
+  "best_error": 38.41041666666667,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.024006510416666668,
+  "filename": "AC0404_2L_sia.jpg",
+  "h": 40,
+  "mean_delta2": 12692.443359375,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "AC0404_2L_sia",
+        "source": "variant_name",
+        "text": "Wie AC0401: Wie AC0251, jedoch Hintergrund Kreis ein wenig dunkler. . Geometrische Variante: 90° nach rechts gedreht."
+      }
+    ],
+    "documented_alias_refs": [
+      "AC0251",
+      "AC0401"
+    ],
+    "elements": [],
+    "geometry_ir": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "AC0404_2L_SIA"
+  },
+  "std_delta2": 19254.11328125,
+  "variant": "AC0404_2L_SIA",
+  "w": 40
+}

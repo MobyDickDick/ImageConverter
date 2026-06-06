@@ -6,7 +6,27 @@
       <stop offset="100%" stop-color="#8f8f8f"/>
     </linearGradient>
   </defs>
-  <rect id="background_gradient" x="5.4" y="14.4" width="19.2" height="33.6" fill="url(#geometry-ir-horizontal-gradient)" stroke="none"/>
+  <g id="background_gradient">
+    <rect x="5.4" y="14.4" width="1.031" height="33.6" fill="#939393" stroke="none"/>
+    <rect x="6.411" y="14.4" width="1.031" height="33.6" fill="#9b9b9b" stroke="none"/>
+    <rect x="7.421" y="14.4" width="1.031" height="33.6" fill="#a4a4a4" stroke="none"/>
+    <rect x="8.432" y="14.4" width="1.031" height="33.6" fill="#acacac" stroke="none"/>
+    <rect x="9.442" y="14.4" width="1.031" height="33.6" fill="#b4b4b4" stroke="none"/>
+    <rect x="10.453" y="14.4" width="1.031" height="33.6" fill="#bdbdbd" stroke="none"/>
+    <rect x="11.463" y="14.4" width="1.031" height="33.6" fill="#c5c5c5" stroke="none"/>
+    <rect x="12.474" y="14.4" width="1.031" height="33.6" fill="#cdcdcd" stroke="none"/>
+    <rect x="13.484" y="14.4" width="1.031" height="33.6" fill="#d6d6d6" stroke="none"/>
+    <rect x="14.495" y="14.4" width="1.031" height="33.6" fill="#dedede" stroke="none"/>
+    <rect x="15.505" y="14.4" width="1.031" height="33.6" fill="#d6d6d6" stroke="none"/>
+    <rect x="16.516" y="14.4" width="1.031" height="33.6" fill="#cdcdcd" stroke="none"/>
+    <rect x="17.526" y="14.4" width="1.031" height="33.6" fill="#c5c5c5" stroke="none"/>
+    <rect x="18.537" y="14.4" width="1.031" height="33.6" fill="#bdbdbd" stroke="none"/>
+    <rect x="19.547" y="14.4" width="1.031" height="33.6" fill="#b4b4b4" stroke="none"/>
+    <rect x="20.558" y="14.4" width="1.031" height="33.6" fill="#acacac" stroke="none"/>
+    <rect x="21.568" y="14.4" width="1.031" height="33.6" fill="#a4a4a4" stroke="none"/>
+    <rect x="22.579" y="14.4" width="1.031" height="33.6" fill="#9b9b9b" stroke="none"/>
+    <rect x="23.589" y="14.4" width="1.031" height="33.6" fill="#939393" stroke="none"/>
+  </g>
   <rect id="main_rect" x="5.4" y="14.4" width="19.2" height="33.6" fill="none" stroke="#666666" stroke-width="1.05"/>
   <path id="diagonal_1_tl_br" d="M 6.075 15.075 L 23.925 47.325" stroke="#707070" stroke-width="1.35" fill="none" stroke-linecap="butt"/>
   <path id="diagonal_2_tr_bl" d="M 23.925 15.075 L 6.075 47.325" stroke="#707070" stroke-width="1.35" fill="none" stroke-linecap="butt"/>

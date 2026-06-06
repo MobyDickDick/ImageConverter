@@ -1,0 +1,47 @@
+{
+  "base": "AC0703",
+  "best_error": 22.161428571428573,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.03165918367346939,
+  "filename": "AC0703_1_M.jpg",
+  "h": 35,
+  "mean_delta2": 6179.38720703125,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "AC0703",
+        "source": "base_name",
+        "text": "Wie AC0701: Kelle, aber mit Quadrat anstelle von Kreis oben. Geometrische Variante: 180° gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises."
+      }
+    ],
+    "documented_alias_refs": [
+      "AC0701"
+    ],
+    "elements": [],
+    "geometry_ir": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "AC0703_1_M"
+  },
+  "std_delta2": 14981.734375,
+  "variant": "AC0703_1_M",
+  "w": 20
+}

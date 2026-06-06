@@ -1,0 +1,59 @@
+{
+  "base": "AC5000",
+  "best_error": 40.87871428571429,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.005839816326530613,
+  "filename": "AC5000_L.jpg",
+  "h": 70,
+  "mean_delta2": 9864.3564453125,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": true,
+      "has_reference": false,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "AC5000",
+        "source": "base_name",
+        "text": "Radiator (komplexe Zeichnung) ca. 10 ganz dünne Rechtecke, Ecken abgerundet. Zwei dünne dunkelgraue Linien oben und unten hinter den dünnen Rechtecken."
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "geometry_ir": [
+      {
+        "bbox": [
+          0.18,
+          0.24,
+          0.64,
+          0.56
+        ],
+        "fill": "#d8d8d8",
+        "id": "main_rect",
+        "kind": "RectBorder",
+        "stroke": "#666666",
+        "stroke_width": 0.035
+      }
+    ],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "AC5000_L"
+  },
+  "std_delta2": 15985.185546875,
+  "variant": "AC5000_L",
+  "w": 100
+}

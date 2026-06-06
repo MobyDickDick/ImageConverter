@@ -1,14 +1,22 @@
 {
   "base": "AC0233",
-  "best_error": 41.52,
+  "best_error": 34.34777777777778,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.06920000000000001,
+  "error_per_pixel": 0.057246296296296295,
   "filename": "AC0233_S.jpg",
   "h": 30,
-  "mean_delta2": 9239.04296875,
+  "mean_delta2": 5801.52978515625,
   "params": {
     "bottom_shape": null,
+    "contract_status": "ok",
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
     "description_fragments": [
       {
         "key": "AC0233",
@@ -20,6 +28,84 @@
       "AC0231"
     ],
     "elements": [],
+    "geometry_ir": [
+      {
+        "body_fill": "url(#vertical-two-way-valve-body-gradient)",
+        "body_paths": [
+          [
+            [
+              0.5,
+              0.39
+            ],
+            [
+              0.98,
+              0.545
+            ],
+            [
+              0.98,
+              0.235
+            ]
+          ],
+          [
+            [
+              0.5,
+              0.39
+            ],
+            [
+              0.02,
+              0.545
+            ],
+            [
+              0.02,
+              0.235
+            ]
+          ],
+          [
+            [
+              0.5,
+              0.39
+            ],
+            [
+              0.667,
+              0.04
+            ],
+            [
+              0.333,
+              0.04
+            ]
+          ]
+        ],
+        "circle": [
+          0.5,
+          0.765,
+          0.225
+        ],
+        "circle_fill": "url(#vertical-two-way-valve-circle-gradient)",
+        "connector": [
+          [
+            0.5,
+            0.55
+          ],
+          [
+            0.5,
+            0.39
+          ]
+        ],
+        "connector_stroke": "#8f8f8f",
+        "connector_width": 0.075,
+        "font_size": 0.32,
+        "id": "rotated_180_top_kelle_three_way_valve",
+        "kind": "Rotated180TopKelleThreeWayValveGlyph",
+        "label": "M",
+        "label_center": [
+          0.5,
+          0.765
+        ],
+        "stroke": "#969696",
+        "stroke_width": 0.04,
+        "text_fill": "#666666"
+      }
+    ],
     "label": "M",
     "mode": "auto",
     "semantic_conflicts": [],
@@ -32,7 +118,7 @@
     "top_source_ref": null,
     "variant_name": "AC0233_S"
   },
-  "std_delta2": 13710.8759765625,
+  "std_delta2": 7470.49462890625,
   "variant": "AC0233_S",
   "w": 20
 }

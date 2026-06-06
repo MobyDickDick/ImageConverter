@@ -1,0 +1,49 @@
+{
+  "base": "AC0151",
+  "best_error": 27.54653125,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.0008608291015625001,
+  "filename": "AC0151_L.jpg",
+  "h": 400,
+  "mean_delta2": 4130.44775390625,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "insufficient_description",
+    "description_contract": {
+      "deficits": [
+        "missing_geometry_terms"
+      ],
+      "has_conditions": true,
+      "has_geometry_terms": false,
+      "has_reference": false,
+      "status": "insufficient_description"
+    },
+    "description_fragments": [
+      {
+        "key": "AC0151",
+        "source": "base_name",
+        "text": "Röhre oben und unten grau; vertikaler Verlauf von gelbgrün nach dunkelgrün. Gesamter Farbverlauf: links dunkel, Mitte hell, rechts dunkel (Röhreneffekt)"
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [
+      "MANUELL: Beschreibung unzureichend (fehlende Geometriehinweise oder leerer Beschreibungstext)."
+    ],
+    "geometry_ir": [],
+    "label": "",
+    "mode": "insufficient_description",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "AC0151_L"
+  },
+  "std_delta2": 6280.39990234375,
+  "variant": "AC0151_L",
+  "w": 80
+}

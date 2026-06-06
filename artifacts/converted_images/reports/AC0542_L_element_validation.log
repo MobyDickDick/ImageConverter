@@ -1,12 +1,28 @@
-run-meta: run_seed=217074518 pass_seed_offset=0 nonce_ns=1780247867341175700
-status=non_composite_perception_seeded_geometry_ir
-perception_seeded_geometry_ir=1
-perception_seed_count=1
-geometry_ir_element_count=3
-geometry_ir_element_1=CircleBackground
-geometry_ir_element_2=RectBorder
-geometry_ir_element_3=DiagonalBand
+run-meta: run_seed=566401811 pass_seed_offset=0 nonce_ns=1780516956797990300
+status=non_composite_elementwise_symbol_fit
+step_border_thickness=0.8
+step_gradient_center=60.0
+step_diag1_width=0.0
+step_diag2_width=0.0
+step_plus_x_ratio=0.08
+step_glyph_y_ratio=0.45
+step_plus_half_ratio=0.16
+step_plus_width=2.2
+step_minus_gap_ratio=1.5
+step_minus_width=0.0
+fit_border_thickness=0.8
+fit_diag1_width=0.0
+fit_diag2_width=0.0
+fit_glyph_y_ratio=0.45
+fit_gradient_center=60.0
+fit_gradient_edge=#777777
+fit_gradient_mid=#ececec
+fit_minus_gap_ratio=1.5
+fit_minus_width=0.0
+fit_plus_half_ratio=0.16
+fit_plus_width=2.2
+fit_plus_x_ratio=0.08
 non_composite_selection=best_pixel_error
 non_composite_candidate_error_non_composite_perception_seeded_geometry_ir=46.827500
 non_composite_candidate_error_non_composite_description_geometry_ir=51.019375
-non_composite_candidate_error_non_composite_elementwise_symbol_fit=158.997500
+non_composite_candidate_error_non_composite_elementwise_symbol_fit=39.561667

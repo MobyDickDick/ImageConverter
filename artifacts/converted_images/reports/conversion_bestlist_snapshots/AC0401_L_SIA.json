@@ -1,14 +1,22 @@
 {
   "base": "AC0401",
-  "best_error": 31.764375,
+  "best_error": 22.77125,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.019852734375,
+  "error_per_pixel": 0.014232031249999999,
   "filename": "AC0401_L_sia.jpg",
   "h": 40,
-  "mean_delta2": 7770.283203125,
+  "mean_delta2": 5944.39501953125,
   "params": {
     "bottom_shape": null,
+    "contract_status": "ok",
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": false,
+      "status": "ok"
+    },
     "description_fragments": [
       {
         "key": "AC0401",
@@ -18,6 +26,7 @@
     ],
     "documented_alias_refs": [],
     "elements": [],
+    "geometry_ir": [],
     "label": "M",
     "mode": "auto",
     "semantic_conflicts": [],
@@ -30,7 +39,7 @@
     "top_source_ref": null,
     "variant_name": "AC0401_L_SIA"
   },
-  "std_delta2": 14056.0703125,
+  "std_delta2": 11733.2646484375,
   "variant": "AC0401_L_SIA",
   "w": 40
 }

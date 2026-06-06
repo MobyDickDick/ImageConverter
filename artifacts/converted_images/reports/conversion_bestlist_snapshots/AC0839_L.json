@@ -1,14 +1,22 @@
 {
   "base": "AC0839",
-  "best_error": 18.019555555555556,
+  "best_error": 15.856,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.016017382716049383,
+  "error_per_pixel": 0.014094222222222222,
   "filename": "AC0839_L.jpg",
   "h": 25,
-  "mean_delta2": 4386.94384765625,
+  "mean_delta2": 4039.99462890625,
   "params": {
     "bottom_shape": null,
+    "contract_status": "ok",
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
     "description_fragments": [
       {
         "key": "AC0839",
@@ -23,6 +31,7 @@
       "SEMANTIC: waagrechter Strich rechts vom Kreis",
       "SEMANTIC: Kreis + Buchstabe VOC"
     ],
+    "geometry_ir": [],
     "label": "VOC",
     "mode": "semantic_badge",
     "semantic_conflicts": [],
@@ -42,7 +51,7 @@
     "top_source_ref": null,
     "variant_name": "AC0839_L"
   },
-  "std_delta2": 11619.1748046875,
+  "std_delta2": 11982.94921875,
   "variant": "AC0839_L",
   "w": 45
 }

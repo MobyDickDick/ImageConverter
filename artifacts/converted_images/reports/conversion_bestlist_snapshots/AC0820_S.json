@@ -1,14 +1,22 @@
 {
   "base": "AC0820",
-  "best_error": 24.36,
+  "best_error": 29.511111111111113,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.10826666666666666,
+  "error_per_pixel": 0.1311604938271605,
   "filename": "AC0820_S.jpg",
   "h": 15,
-  "mean_delta2": 4106.94677734375,
+  "mean_delta2": 5785.01318359375,
   "params": {
     "bottom_shape": null,
+    "contract_status": "ok",
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": false,
+      "has_reference": true,
+      "status": "ok"
+    },
     "description_fragments": [
       {
         "key": "AC0820",
@@ -22,6 +30,7 @@
     "elements": [
       "SEMANTIC: Kreis + Buchstabe CO_2"
     ],
+    "geometry_ir": [],
     "label": "CO_2",
     "mode": "semantic_badge",
     "semantic_conflicts": [],
@@ -39,7 +48,7 @@
     "top_source_ref": null,
     "variant_name": "AC0820_S"
   },
-  "std_delta2": 7095.81640625,
+  "std_delta2": 9320.7578125,
   "variant": "AC0820_S",
   "w": 15
 }

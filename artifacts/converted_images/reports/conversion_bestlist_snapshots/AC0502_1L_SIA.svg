@@ -1,8 +1,5 @@
 <svg width="80" height="40" viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-  <g transform="translate(40.000 20.000) rotate(180) scale(0.9000) translate(-40.000 -20.000)">
-<g transform="translate(7.500 12.500) rotate(180) scale(1.1877) translate(-7.500 -12.500)">
-<rect x="0" y="0" width="15.0000" height="15.0000" fill="#ffffff"/>
-  <circle cx="7.5000" cy="7.5000" r="7.0000" fill="#f2f2f2" stroke="#7f7f7f" stroke-width="1.0000"/>
-  </g>
-  </g>
+  <ellipse id="perception_circle_background" cx="69" cy="17" rx="7" ry="7" fill="#DE3B5E" stroke="#CB4865" stroke-width="1"/>
+  <rect id="main_rect" x="25.6" y="4.8" width="28.8" height="30.4" fill="#d8d8d8" stroke="#666666" stroke-width="1.4"/>
+  <path id="diagonal_1_tr_bl" d="M 53.5 5.7 L 26.5 34.3" stroke="#707070" stroke-width="1.8" fill="none" stroke-linecap="butt"/>
 </svg>

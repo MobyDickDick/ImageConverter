@@ -1,12 +1,12 @@
 {
   "base": "AC0504_2M",
-  "best_error": 17.424074074074074,
+  "best_error": 16.744074074074074,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.009680041152263374,
+  "error_per_pixel": 0.009302263374485597,
   "filename": "AC0504_2M_sia.jpg",
   "h": 30,
-  "mean_delta2": 5542.5087890625,
+  "mean_delta2": 4267.4853515625,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -42,7 +42,7 @@
     "top_source_ref": null,
     "variant_name": "AC0504_2M_SIA"
   },
-  "std_delta2": 14282.009765625,
+  "std_delta2": 10190.07421875,
   "variant": "AC0504_2M_SIA",
   "w": 60
 }

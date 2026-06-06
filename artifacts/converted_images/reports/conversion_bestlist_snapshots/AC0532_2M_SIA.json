@@ -1,12 +1,12 @@
 {
   "base": "AC0532_2M",
-  "best_error": 17.301296296296297,
+  "best_error": 25.590740740740742,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.009611831275720165,
+  "error_per_pixel": 0.014217078189300411,
   "filename": "AC0532_2M_sia.jpg",
   "h": 30,
-  "mean_delta2": 5059.3994140625,
+  "mean_delta2": 6356.71875,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -64,7 +64,7 @@
     "top_source_ref": null,
     "variant_name": "AC0532_2M_SIA"
   },
-  "std_delta2": 13574.9306640625,
+  "std_delta2": 14186.6767578125,
   "variant": "AC0532_2M_SIA",
   "w": 60
 }

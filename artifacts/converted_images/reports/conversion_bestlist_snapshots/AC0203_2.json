@@ -1,0 +1,88 @@
+{
+  "base": "AC0203",
+  "best_error": 17.486133333333335,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.006994453333333334,
+  "filename": "AC0203_2.jpg",
+  "h": 50,
+  "mean_delta2": 2862.164794921875,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "AC0203",
+        "source": "base_name",
+        "text": "Wie AC0202: Kompressor grau nach rechts. Geometrische Variante: Hauptdiagonal gespiegelt."
+      }
+    ],
+    "documented_alias_refs": [
+      "AC0202"
+    ],
+    "elements": [],
+    "geometry_ir": [
+      {
+        "bbox": [
+          0.06,
+          0.06,
+          0.88,
+          0.88
+        ],
+        "fill": "#df2249",
+        "id": "compressor_circle",
+        "kind": "CircleBackground",
+        "stroke": "#8d8d8d",
+        "stroke_width": 0.02
+      },
+      {
+        "circle_ref": "compressor_circle",
+        "id": "main_diagonal_mirrored_compressor",
+        "kind": "MainDiagonalMirroredCompressorGlyph",
+        "left_line": [
+          [
+            0.09,
+            0.22
+          ],
+          [
+            0.39,
+            1.01
+          ]
+        ],
+        "right_line": [
+          [
+            0.91,
+            0.22
+          ],
+          [
+            0.61,
+            1.01
+          ]
+        ],
+        "stroke": "#f4f4f4",
+        "stroke_width": 0.032
+      }
+    ],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "AC0203_2"
+  },
+  "std_delta2": 7140.2353515625,
+  "variant": "AC0203_2",
+  "w": 50
+}

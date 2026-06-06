@@ -1,0 +1,53 @@
+{
+  "base": "AC5050",
+  "best_error": 17.36995238095238,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.0008271405895691609,
+  "filename": "AC5050_M.jpg",
+  "h": 140,
+  "mean_delta2": 4187.90234375,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": false,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "AC5050",
+        "source": "base_name",
+        "text": "Unzugeordnete Wurzelform aus der Serie AC5050. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen."
+      },
+      {
+        "key": "AC5050_M",
+        "source": "variant_name",
+        "text": "Unzugeordnete Wurzelform aus der Serie AC5050. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die mittlere Variante (M). Bitte einer finalen Wurzelform-Kategorie zuordnen."
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [
+      "MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie."
+    ],
+    "geometry_ir": [],
+    "label": "",
+    "mode": "manual_review",
+    "review_reason": "Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "AC5050_M"
+  },
+  "std_delta2": 11037.9873046875,
+  "variant": "AC5050_M",
+  "w": 150
+}

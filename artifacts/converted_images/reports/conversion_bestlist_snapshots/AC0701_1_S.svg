@@ -1,9 +1,11 @@
 <svg width="15" height="25" viewBox="0 0 15 25" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-  <g transform="translate(7.500 12.500) rotate(270) scale(1.3906) translate(-7.500 -12.500)">
+  <g transform="translate(7.500 12.500) rotate(180) scale(1.0000) translate(-7.500 -12.500)">
+<g transform="translate(7.500 12.500) rotate(90) scale(1.4750) translate(-7.500 -12.500)">
 <g transform="translate(25.000 25.000) rotate(270) scale(1.0000) translate(-25.000 -25.000)">
 <ellipse id="compressor_circle" cx="25" cy="26" rx="22" ry="22" fill="#DD234A" stroke="#C2677A" stroke-width="1.76"/>
   <path id="mirrored_compressor_left_line" d="M 6.96 13.68 L 20.16 48.44" stroke="#f4f4f4" stroke-width="1.6" fill="none" stroke-linecap="round"/>
   <path id="mirrored_compressor_right_line" d="M 43.04 13.68 L 29.84 48.44" stroke="#f4f4f4" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+  </g>
   </g>
   </g>
 </svg>

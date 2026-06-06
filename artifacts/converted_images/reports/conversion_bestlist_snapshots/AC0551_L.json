@@ -1,12 +1,12 @@
 {
   "base": "AC0551",
-  "best_error": 33.83260416666667,
+  "best_error": 28.865625,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.010572688802083334,
+  "error_per_pixel": 0.0090205078125,
   "filename": "AC0551_L.jpg",
   "h": 80,
-  "mean_delta2": 6695.486328125,
+  "mean_delta2": 3285.6767578125,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -103,7 +103,7 @@
     "top_source_ref": null,
     "variant_name": "AC0551_L"
   },
-  "std_delta2": 10490.6796875,
+  "std_delta2": 3811.2001953125,
   "variant": "AC0551_L",
   "w": 40
 }

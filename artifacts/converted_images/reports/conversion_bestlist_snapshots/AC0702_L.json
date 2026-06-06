@@ -1,12 +1,12 @@
 {
   "base": "AC0702",
-  "best_error": 21.731555555555556,
+  "best_error": 14.528,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.01931693827160494,
+  "error_per_pixel": 0.012913777777777777,
   "filename": "AC0702_L.jpg",
   "h": 25,
-  "mean_delta2": 5111.7119140625,
+  "mean_delta2": 3189.968017578125,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -41,7 +41,7 @@
     "top_source_ref": null,
     "variant_name": "AC0702_L"
   },
-  "std_delta2": 12493.2060546875,
+  "std_delta2": 8631.6611328125,
   "variant": "AC0702_L",
   "w": 45
 }

@@ -1,10 +1,39 @@
 <svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-  <g transform="translate(10.000 10.000) rotate(180) scale(1.4636) translate(-10.000 -10.000)">
-<g transform="translate(20.000 10.000) rotate(270) scale(1.7898) translate(-20.000 -10.000)">
-<g transform="translate(15.500 15.500) rotate(270) scale(1.9000) translate(-15.500 -15.500)">
-<g transform="translate(10.000 12.500) rotate(90) scale(1.5787) translate(-10.000 -12.500)">
-<rect x="0" y="0" width="15.0000" height="15.0000" fill="#ffffff"/>
-  <circle cx="7.5000" cy="7.5000" r="7.0000" fill="#f2f2f2" stroke="#7f7f7f" stroke-width="1.0000"/>
+  <g transform="translate(10.000 10.000) rotate(0) scale(1.5500) translate(-10.000 -10.000)">
+<g transform="translate(20.000 20.000) rotate(270) scale(1.0000) translate(-20.000 -20.000)">
+<g transform="translate(20.000 20.000) rotate(180) scale(1.0000) translate(-20.000 -20.000)">
+<g transform="translate(20.000 20.000) rotate(0) scale(1.0000) translate(-20.000 -20.000)">
+<defs>
+    <clipPath id="circleClip">
+      <circle
+         cx="20"
+         cy="20"
+         r="19" />
+    </clipPath>
+  </defs>
+
+  <!-- Hintergrundkreis -->
+  <circle
+     cx="20"
+     cy="20"
+     r="19"
+     fill="#e6e6e6" />
+
+  <!-- Dreieck / Pfeilfläche:
+       Spitzen berühren die Kreisumrandung von innen -->
+  <path
+     d="M 10.23761,4.54943 L 38.3,20 L 10.23761,35.45057 Z"
+     fill="#808080"
+     clip-path="url(#circleClip)" />
+
+  <!-- Kreisumrandung -->
+  <circle
+     cx="20"
+     cy="20"
+     r="19"
+     fill="none"
+     stroke="#808080"
+     stroke-width="1.4" />
   </g>
   </g>
   </g>

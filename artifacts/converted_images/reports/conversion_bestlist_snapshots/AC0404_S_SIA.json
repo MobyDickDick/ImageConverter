@@ -1,12 +1,12 @@
 {
   "base": "AC0404",
-  "best_error": 34.2625,
+  "best_error": 39.505,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.08565625,
+  "error_per_pixel": 0.0987625,
   "filename": "AC0404_S_sia.jpg",
   "h": 20,
-  "mean_delta2": 7257.57763671875,
+  "mean_delta2": 7086.2099609375,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -42,7 +42,7 @@
     "top_source_ref": null,
     "variant_name": "AC0404_S_SIA"
   },
-  "std_delta2": 11605.4892578125,
+  "std_delta2": 8304.9091796875,
   "variant": "AC0404_S_SIA",
   "w": 20
 }

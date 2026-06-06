@@ -1,14 +1,22 @@
 {
   "base": "AC0412",
-  "best_error": 26.5625,
+  "best_error": 18.855,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.06640625,
+  "error_per_pixel": 0.0471375,
   "filename": "AC0412_S.jpg",
   "h": 20,
-  "mean_delta2": 3489.517578125,
+  "mean_delta2": 2030.010009765625,
   "params": {
     "bottom_shape": null,
+    "contract_status": "ok",
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
     "description_fragments": [
       {
         "key": "AC0412",
@@ -20,6 +28,48 @@
       "AC0222"
     ],
     "elements": [],
+    "geometry_ir": [
+      {
+        "bbox": [
+          0.06,
+          0.06,
+          0.88,
+          0.88
+        ],
+        "fill": "#d8d8d8",
+        "id": "compressor_circle",
+        "kind": "CircleBackground",
+        "stroke": "#8d8d8d",
+        "stroke_width": 0.02
+      },
+      {
+        "circle_ref": "compressor_circle",
+        "id": "upward_compressor",
+        "kind": "UpwardCompressorGlyph",
+        "left_line": [
+          [
+            0.28,
+            0.78
+          ],
+          [
+            0.42,
+            0.16
+          ]
+        ],
+        "right_line": [
+          [
+            0.72,
+            0.78
+          ],
+          [
+            0.58,
+            0.16
+          ]
+        ],
+        "stroke": "#666666",
+        "stroke_width": 0.04
+      }
+    ],
     "label": "M",
     "mode": "auto",
     "semantic_conflicts": [],
@@ -32,7 +82,7 @@
     "top_source_ref": null,
     "variant_name": "AC0412_S"
   },
-  "std_delta2": 4991.2763671875,
+  "std_delta2": 3076.052734375,
   "variant": "AC0412_S",
   "w": 20
 }

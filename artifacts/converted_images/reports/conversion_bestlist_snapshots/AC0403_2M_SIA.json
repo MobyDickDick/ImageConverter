@@ -1,12 +1,12 @@
 {
   "base": "AC0403_2M",
-  "best_error": 51.15777777777778,
+  "best_error": 47.278888888888886,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.056841975308641976,
+  "error_per_pixel": 0.0525320987654321,
   "filename": "AC0403_2M_sia.jpg",
   "h": 30,
-  "mean_delta2": 13979.517578125,
+  "mean_delta2": 11139.16796875,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -42,7 +42,7 @@
     "top_source_ref": null,
     "variant_name": "AC0403_2M_SIA"
   },
-  "std_delta2": 18750.58984375,
+  "std_delta2": 12326.005859375,
   "variant": "AC0403_2M_SIA",
   "w": 30
 }

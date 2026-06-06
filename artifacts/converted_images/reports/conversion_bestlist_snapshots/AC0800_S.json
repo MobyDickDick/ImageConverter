@@ -1,14 +1,22 @@
 {
   "base": "AC0800",
-  "best_error": 13.057777777777778,
+  "best_error": 10.306666666666667,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.05803456790123457,
+  "error_per_pixel": 0.04580740740740741,
   "filename": "AC0800_S.jpg",
   "h": 15,
-  "mean_delta2": 1429.8399658203125,
+  "mean_delta2": 899.7733154296875,
   "params": {
     "bottom_shape": null,
+    "contract_status": "ok",
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": true,
+      "has_reference": false,
+      "status": "ok"
+    },
     "description_fragments": [
       {
         "key": "AC0800",
@@ -20,6 +28,7 @@
     "elements": [
       "SEMANTIC: Kreis ohne Buchstabe"
     ],
+    "geometry_ir": [],
     "label": "",
     "mode": "semantic_badge",
     "semantic_conflicts": [],
@@ -37,7 +46,7 @@
     "top_source_ref": null,
     "variant_name": "AC0800_S"
   },
-  "std_delta2": 2677.035888671875,
+  "std_delta2": 1675.5811767578125,
   "variant": "AC0800_S",
   "w": 15
 }

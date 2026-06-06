@@ -1,0 +1,47 @@
+{
+  "base": "AC0253",
+  "best_error": 57.21852237252862,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.05954060600679357,
+  "filename": "AC0253_1.jpg",
+  "h": 31,
+  "mean_delta2": 20431.55078125,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "AC0253",
+        "source": "base_name",
+        "text": "Wie AC0251: Pumpensymbol grau: grauer Kreis, hellgrauer Hintergund. Im Kreis ist ein dunkelgraues dreieck, Symmetrisch zu senkrechter Linie, nicht ganz gleichseitig (waagrechte Line unten ist ein weig kürzer). Geometrische Variante: 180° gedreht."
+      }
+    ],
+    "documented_alias_refs": [
+      "AC0251"
+    ],
+    "elements": [],
+    "geometry_ir": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "AC0253_1"
+  },
+  "std_delta2": 22372.29296875,
+  "variant": "AC0253_1",
+  "w": 31
+}

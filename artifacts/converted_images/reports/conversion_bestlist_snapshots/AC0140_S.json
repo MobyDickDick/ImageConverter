@@ -1,0 +1,49 @@
+{
+  "base": "AC0140",
+  "best_error": 16.775454545454547,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.005083471074380166,
+  "filename": "AC0140_S.jpg",
+  "h": 110,
+  "mean_delta2": 1484.0020751953125,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "insufficient_description",
+    "description_contract": {
+      "deficits": [
+        "missing_geometry_terms"
+      ],
+      "has_conditions": false,
+      "has_geometry_terms": false,
+      "has_reference": false,
+      "status": "insufficient_description"
+    },
+    "description_fragments": [
+      {
+        "key": "AC0140",
+        "source": "base_name",
+        "text": "Ähnlich AC0140_S"
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [
+      "MANUELL: Beschreibung unzureichend (fehlende Geometriehinweise oder leerer Beschreibungstext)."
+    ],
+    "geometry_ir": [],
+    "label": "",
+    "mode": "insufficient_description",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "AC0140_S"
+  },
+  "std_delta2": 2706.294677734375,
+  "variant": "AC0140_S",
+  "w": 30
+}

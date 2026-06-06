@@ -1,14 +1,22 @@
 {
   "base": "AC0404",
-  "best_error": 59.31916666666667,
+  "best_error": 47.33833333333333,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.14829791666666667,
+  "error_per_pixel": 0.11834583333333333,
   "filename": "AC0404_2_S.jpg",
   "h": 20,
-  "mean_delta2": 19150.712890625,
+  "mean_delta2": 10759.14453125,
   "params": {
     "bottom_shape": null,
+    "contract_status": "ok",
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
     "description_fragments": [
       {
         "key": "AC0404",
@@ -21,6 +29,7 @@
       "AC0401"
     ],
     "elements": [],
+    "geometry_ir": [],
     "label": "M",
     "mode": "auto",
     "semantic_conflicts": [],
@@ -33,7 +42,7 @@
     "top_source_ref": null,
     "variant_name": "AC0404_2_S"
   },
-  "std_delta2": 22650.28515625,
+  "std_delta2": 12550.5712890625,
   "variant": "AC0404_2_S",
   "w": 20
 }

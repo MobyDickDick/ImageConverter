@@ -1,12 +1,12 @@
 {
   "base": "AC0870",
-  "best_error": 28.12,
+  "best_error": 17.804444444444446,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.12497777777777778,
+  "error_per_pixel": 0.07913086419753088,
   "filename": "AC0870_S.jpg",
   "h": 15,
-  "mean_delta2": 5075.66650390625,
+  "mean_delta2": 2290.320068359375,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -21,7 +21,7 @@
       {
         "key": "AC0870",
         "source": "base_name",
-        "text": "Grauer Kreis mit grauem Rand und hellgrauem Hintergrund Abweichung: mit Text \"T\" (Temperatur)"
+        "text": "Kreisförmiges Badge. Abweichung: mit Text \"T\" (Temperatur)"
       }
     ],
     "documented_alias_refs": [],
@@ -46,7 +46,7 @@
     "top_source_ref": null,
     "variant_name": "AC0870_S"
   },
-  "std_delta2": 8480.4365234375,
+  "std_delta2": 4192.75439453125,
   "variant": "AC0870_S",
   "w": 15
 }

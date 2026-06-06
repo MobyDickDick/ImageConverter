@@ -1,0 +1,52 @@
+{
+  "base": "AC0850",
+  "best_error": 28.5375,
+  "best_iter": 1,
+  "convergence": "",
+  "error_per_pixel": 0.07134375,
+  "filename": "AC0850_M.jpg",
+  "h": 20,
+  "mean_delta2": 7917.74267578125,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": false,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "AC0850",
+        "source": "base_name",
+        "text": "Kreisförmiges Badge. Abweichung: mit Text \"rF\" (relative Feuchtigkeit)"
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [
+      "SEMANTIC: Kreis + Buchstabe rF"
+    ],
+    "geometry_ir": [],
+    "label": "rF",
+    "mode": "semantic_badge",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {
+      "description_heuristic": [
+        "SEMANTIC: Kreis + Buchstabe rF"
+      ],
+      "family_rule": []
+    },
+    "top_source_ref": null,
+    "variant_name": "AC0850_M"
+  },
+  "std_delta2": 17474.26171875,
+  "variant": "AC0850_M",
+  "w": 20
+}
