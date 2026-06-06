@@ -2,7 +2,7 @@
 
 Ziel: maximal **5** aktive JPG-Kandidaten, die derzeit noch nicht zufriedenstellend konvertieren, aber voraussichtlich nicht "hoffnungslos komplex" sind.
 
-## Aktuelle Kandidaten (Stand: 2026-06-06, nach AC0922-S-Run OI)
+## Aktuelle Kandidaten (Stand: 2026-06-06, nach AC0414-S-Run OJ)
 
 Die Rotation wurde reproduzierbar aus dem aktualisierten Qualitätsreview erzeugt.
 Priorisiert werden zuerst nicht zufriedenstellende Einträge aus
@@ -12,11 +12,10 @@ Diff-Inventar. Die vollständige Evidenz liegt unter
 
 | Priorität | Kandidat | Quelle | `normalized_mse` | Auswahlgrund |
 | ---: | --- | --- | ---: | --- |
-| 1 | `AC0414_S.jpg` | Diff-Inventar | `0.31829609` | Sehr kompakte Kreis-/Innengeometrie mit hoher Abweichung. |
-| 2 | `AC0130_M.jpg` | Diff-Inventar | `0.27991071` | Rechteck und Diagonalen sind als einfache bis mittlere Primitive abgrenzbar. |
-| 3 | `AC0130.jpg` | Diff-Inventar | `0.23466992` | Größenverwandter Folgepunkt an der festgelegten Flächengrenze. |
+| 1 | `AC0130_M.jpg` | Diff-Inventar | `0.27991071` | Rechteck und Diagonalen sind als einfache bis mittlere Primitive abgrenzbar. |
+| 2 | `AC0130.jpg` | Diff-Inventar | `0.23466992` | Größenverwandter Folgepunkt an der festgelegten Flächengrenze. |
 
-Die Qualitätsnachmessung von `AC0922_S.jpg` korrigierte den veralteten Review-Wert `0.33015759` auf `0.02747206`. Der reale Re-Konvertierungsversuch wurde als semantische Regression verworfen, weil er Kreis und linken Anschluss durch ein Rechteck ersetzt hätte. Das bereits committete Kreis-/Anschluss-SVG bleibt deshalb die akzeptierte Ausgabe; die nächste Rotation beginnt mit `AC0414_S.jpg`.
+`AC0414_S.jpg` wurde als partitionierter Kreis mit drei Speichen und rechter vertikaler Innenkante nachgezeichnet. Die Qualitätsmetrik sank von `0.31829609` auf `0.00360827`; der reguläre Gradient-/Glyph-Vorschlag wurde trotz niedriger Pixelmetrik wegen falscher Topologie verworfen. Die nächste Rotation beginnt mit `AC0130_M.jpg`.
 
 ## Perception-Lerneffekt (Pflichtabschnitt ab PF8)
 
@@ -26,11 +25,10 @@ dem PF8-Linkage-Report und dokumentiert die Entscheidung als
 maschinenlesbare Stand liegt unter
 `artifacts/evaluation/plan_b_perception_linkage_v1/plan_b_perception_linkage_report_v1.json`.
 
-Der aktualisierte Linkage-Report enthält die drei verbleibenden aktiven Kandidaten. Zwei
-Perception-Fragen sind `generalisiert`: Kreis-/Ring-Signale für
-`AC0414_S` und `AC0130`. `AC0130_M` ist `nur Sonderfall`, weil Rechteck und Diagonalen
-zwar erkannt werden, aber noch kein allgemeiner Rechteck-Geometry-IR-Seed
-zugeordnet ist.
+Der aktualisierte Linkage-Report enthält die zwei verbleibenden aktiven Kandidaten.
+Die Kreis-/Ring-Signale für `AC0130` sind `generalisiert`; `AC0130_M` ist
+`nur Sonderfall`, weil Rechteck und Diagonalen zwar erkannt werden, aber noch
+kein allgemeiner Rechteck-Geometry-IR-Seed zugeordnet ist.
 
 ## Pflege-Regel (fortan)
 

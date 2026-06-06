@@ -1,4 +1,3 @@
 variant,image_path,status,expected_first_primitive,decision,matched_candidate_kinds,matched_seed_kinds,top_candidate_kind,top_confidence,next_action
-AC0414_S,artifacts/images_to_convert/AC0414_S.jpg,evaluated,circle_or_ring,generalisiert,ring,CircleBackground,ring,0.8548,Im nächsten Plan-B-Paket als vorinitialisierten Geometry-IR-Seed protokollieren.
 AC0130_M,artifacts/images_to_convert/AC0130_M.jpg,evaluated,rectangle_with_diagonal_lines,nur Sonderfall,"line,rectangle",,line,1.0,"Als Perception-Hinweis dokumentieren, aber noch keinen generischen Seed erzwingen."
 AC0130,artifacts/images_to_convert/AC0130.jpg,evaluated,rectangle_diagonals_and_top_glyph,generalisiert,"circle,line,rectangle,ring",CircleBackground,line,1.0,Im nächsten Plan-B-Paket als vorinitialisierten Geometry-IR-Seed protokollieren.

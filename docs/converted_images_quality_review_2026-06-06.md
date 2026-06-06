@@ -89,3 +89,17 @@ formal grünen Pixelwerts eine klare Semantik- und Topologieregression und wurde
 daher nicht übernommen. `AC0922_S` ist durch die bestehende bessere Ausgabe und
 einen Regressionstest abgeschlossen; die aktive Rotation lautet nun
 `AC0414_S`, `AC0130_M`, `AC0130`.
+
+## Folgeaktualisierung Run OJ
+
+`AC0414_S` wurde als 20x20-Kreis mit drei vom linken Kreisrand ausgehenden
+Innenlinien und einer rechten vertikalen Innenkante rekonstruiert. Der reguläre
+Ein-Datei-Lauf erzeugte stattdessen einen horizontalen Grauverlauf mit kleinem
+Pluszeichen; dieser Vorschlag hatte zwar `mean_delta2=3324.787598`, verfehlte
+aber die dokumentierte Topologie und wurde verworfen.
+
+Das akzeptierte SVG senkt `mean_delta2` von `62091.609375` auf `703.882507`
+und `normalized_mse` von `0.31829609` auf `0.00360827`. Kreis-/Ring-Erkennung
+ist damit als `generalisiert` abgeschlossen. `AC0414_S` wurde aus Triage und
+PF8-Linkage entfernt; als nächste Kandidaten bleiben synchron `AC0130_M` und
+`AC0130`.
