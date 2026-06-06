@@ -2113,6 +2113,7 @@ class Action:
             optimize_circle_radius_bracket_fn=Action._optimize_circle_radius_bracket,
             optimize_global_parameter_vector_sampling_fn=Action._optimize_global_parameter_vector_sampling,
             calculate_error_fn=Action.calculate_error,
+            calculate_delta2_stats_fn=Action.calculateDelta2Stats,
             activate_ac08_adaptive_locks_fn=Action._activateAc08AdaptiveLocks,
             release_ac08_adaptive_locks_fn=Action._release_ac08_adaptive_locks,
             optimize_element_color_bracket_fn=Action._optimize_element_color_bracket,

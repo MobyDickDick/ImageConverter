@@ -8,9 +8,16 @@ def _clip_scalar(value: float, low: float, high: float) -> float:
 
 
 def test_format_round_quality_progress_reports_improvement() -> None:
-    message = element_validation_helpers.formatRoundQualityProgressImpl(120.0, 90.0)
+    message = element_validation_helpers.formatRoundQualityProgressImpl(
+        120.0,
+        90.0,
+        start_mean_delta2=18000.0,
+        end_mean_delta2=12000.0,
+    )
 
-    assert "120.000 -> 90.000" in message
+    assert "Qualität (MAE-basiert, höher=besser): 52.94% -> 64.71%" in message
+    assert "mittlere Pixelabweichung (MAE, kleiner=besser): 120.000 -> 90.000" in message
+    assert "Mean-Delta² (kleiner=besser): 18000.000 -> 12000.000" in message
     assert "Qualitätsgewinn=+30.000 (+25.00%)" in message
     assert "Wirkung=verbessert" in message
 
@@ -115,6 +122,7 @@ def test_validate_badge_by_elements_stops_on_stable_non_improvement_after_fallba
         optimize_circle_radius_bracket_fn=lambda *_a, **_k: False,
         optimize_global_parameter_vector_sampling_fn=lambda *_a, **_k: False,
         calculate_error_fn=lambda *_a, **_k: 25.0,
+        calculate_delta2_stats_fn=lambda *_a, **_k: (1875.0, 0.0),
         activate_ac08_adaptive_locks_fn=lambda p, l, **_k: p.setdefault("ac08_adaptive_unlock_applied", True) or True,
         release_ac08_adaptive_locks_fn=lambda *_a, **_k: False,
         optimize_element_color_bracket_fn=lambda *_a, **_k: False,
@@ -128,7 +136,9 @@ def test_validate_badge_by_elements_stops_on_stable_non_improvement_after_fallba
     assert any("Validierungsrunde 1/3 gestartet" in message for message in progress_messages)
     assert any("optimiere Element 'circle'" in message for message in progress_messages)
     assert any(
-        "Fehler (kleiner=besser): 25.000 -> 25.000" in message
+        "Qualität (MAE-basiert, höher=besser): 90.20% -> 90.20%" in message
+        and "mittlere Pixelabweichung (MAE, kleiner=besser): 25.000 -> 25.000" in message
+        and "Mean-Delta² (kleiner=besser): 1875.000 -> 1875.000" in message
         and "Wirkung=unverändert" in message
         for message in progress_messages
     )
@@ -156,3 +166,4 @@ def test_action_validation_wrappers_forward_progress_callback(monkeypatch) -> No
         object(), {}, progress_fn=callback
     ) == ["ok"]
     assert captured[0]["progress_fn"] is callback
+    assert callable(captured[0]["calculate_delta2_stats_fn"])

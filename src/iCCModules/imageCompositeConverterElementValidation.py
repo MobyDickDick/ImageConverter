@@ -7,13 +7,31 @@ import math
 from .imageCompositeConverterOptimizationFacade import OptimizationHooks
 
 
-def formatRoundQualityProgressImpl(start_error: float, end_error: float) -> str:
-    """Describe whether a validation round reduced the render error."""
+def _maeQualityPercent(error: float) -> float:
+    """Map mean absolute channel error (0..255) to an intuitive similarity score."""
+
+    if not math.isfinite(error):
+        return float("nan")
+    return max(0.0, min(100.0, (1.0 - (max(0.0, error) / 255.0)) * 100.0))
+
+
+def formatRoundQualityProgressImpl(
+    start_error: float,
+    end_error: float,
+    *,
+    start_mean_delta2: float | None = None,
+    end_mean_delta2: float | None = None,
+) -> str:
+    """Describe a round with intuitive pixel-quality measures and its effect."""
 
     start = float(start_error)
     end = float(end_error)
     if not math.isfinite(start) or not math.isfinite(end):
-        return f"Fehler (kleiner=besser): {start:.3f} -> {end:.3f} | Wirkung=nicht verfügbar"
+        return (
+            f"Qualität (MAE-basiert, höher=besser)=n/a | "
+            f"mittlere Pixelabweichung (MAE, kleiner=besser): {start:.3f} -> {end:.3f} | "
+            "Wirkung=nicht verfügbar"
+        )
 
     gain = start - end
     tolerance = max(1e-9, abs(start) * 1e-9)
@@ -29,10 +47,22 @@ def formatRoundQualityProgressImpl(start_error: float, end_error: float) -> str:
         gain_text = f"{gain:+.3f} ({gain_percent:+.2f}%)"
     else:
         gain_text = f"{gain:+.3f} (n/a)"
-    return (
-        f"Fehler (kleiner=besser): {start:.3f} -> {end:.3f} | "
-        f"Qualitätsgewinn={gain_text} | Wirkung={effect}"
-    )
+
+    start_quality = _maeQualityPercent(start)
+    end_quality = _maeQualityPercent(end)
+    metrics = [
+        f"Qualität (MAE-basiert, höher=besser): {start_quality:.2f}% -> {end_quality:.2f}%",
+        f"mittlere Pixelabweichung (MAE, kleiner=besser): {start:.3f} -> {end:.3f}",
+    ]
+    if start_mean_delta2 is not None and end_mean_delta2 is not None:
+        start_delta2 = float(start_mean_delta2)
+        end_delta2 = float(end_mean_delta2)
+        if math.isfinite(start_delta2) and math.isfinite(end_delta2):
+            metrics.append(
+                f"Mean-Delta² (kleiner=besser): {start_delta2:.3f} -> {end_delta2:.3f}"
+            )
+    metrics.extend((f"Qualitätsgewinn={gain_text}", f"Wirkung={effect}"))
+    return " | ".join(metrics)
 
 
 def applyElementAlignmentStepImpl(
@@ -261,6 +291,7 @@ def validateBadgeByElementsImpl(
     optimize_element_color_bracket_fn,
     apply_canonical_badge_colors_fn,
     progress_fn=None,
+    calculate_delta2_stats_fn=None,
 ):
     if optimization_hooks is not None:
         optimize_element_width_bracket_fn = optimization_hooks.optimize_element_width_bracket_fn
@@ -608,6 +639,9 @@ def validateBadgeByElementsImpl(
             logs.append("Abbruch: SVG konnte nicht gerendert werden")
             break
         round_start_err = calculate_error_fn(img_orig, full_render)
+        round_start_mean_delta2 = None
+        if calculate_delta2_stats_fn is not None:
+            round_start_mean_delta2, _ = calculate_delta2_stats_fn(img_orig, full_render)
 
         if debug_out_dir:
             full_diff = create_diff_image_fn(img_orig, full_render)
@@ -806,7 +840,15 @@ def validateBadgeByElementsImpl(
         full_svg = generate_badge_svg_fn(w, h, params)
         full_render = fit_to_original_size_fn(img_orig, render_svg_to_numpy_fn(full_svg, w, h))
         full_err = calculate_error_fn(img_orig, full_render)
-        quality_progress = formatRoundQualityProgressImpl(round_start_err, full_err)
+        full_mean_delta2 = None
+        if calculate_delta2_stats_fn is not None:
+            full_mean_delta2, _ = calculate_delta2_stats_fn(img_orig, full_render)
+        quality_progress = formatRoundQualityProgressImpl(
+            round_start_err,
+            full_err,
+            start_mean_delta2=round_start_mean_delta2,
+            end_mean_delta2=full_mean_delta2,
+        )
         logs.append(f"Runde {round_idx + 1}: Gesamtfehler={full_err:.3f}; {quality_progress}")
         _report_progress(
             f"Validierungsrunde {round_idx + 1}/{max_rounds} abgeschlossen | "
