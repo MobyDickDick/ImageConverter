@@ -1,35 +1,36 @@
-<svg width="30" height="60" viewBox="0 0 30 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-  <defs>
-    <linearGradient id="geometry-ir-horizontal-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#8f8f8f"/>
-      <stop offset="50%" stop-color="#dedede"/>
-      <stop offset="100%" stop-color="#8f8f8f"/>
-    </linearGradient>
-  </defs>
-  <g id="background_gradient">
-    <rect x="5.4" y="14.4" width="1.031" height="33.6" fill="#939393" stroke="none"/>
-    <rect x="6.411" y="14.4" width="1.031" height="33.6" fill="#9b9b9b" stroke="none"/>
-    <rect x="7.421" y="14.4" width="1.031" height="33.6" fill="#a4a4a4" stroke="none"/>
-    <rect x="8.432" y="14.4" width="1.031" height="33.6" fill="#acacac" stroke="none"/>
-    <rect x="9.442" y="14.4" width="1.031" height="33.6" fill="#b4b4b4" stroke="none"/>
-    <rect x="10.453" y="14.4" width="1.031" height="33.6" fill="#bdbdbd" stroke="none"/>
-    <rect x="11.463" y="14.4" width="1.031" height="33.6" fill="#c5c5c5" stroke="none"/>
-    <rect x="12.474" y="14.4" width="1.031" height="33.6" fill="#cdcdcd" stroke="none"/>
-    <rect x="13.484" y="14.4" width="1.031" height="33.6" fill="#d6d6d6" stroke="none"/>
-    <rect x="14.495" y="14.4" width="1.031" height="33.6" fill="#dedede" stroke="none"/>
-    <rect x="15.505" y="14.4" width="1.031" height="33.6" fill="#d6d6d6" stroke="none"/>
-    <rect x="16.516" y="14.4" width="1.031" height="33.6" fill="#cdcdcd" stroke="none"/>
-    <rect x="17.526" y="14.4" width="1.031" height="33.6" fill="#c5c5c5" stroke="none"/>
-    <rect x="18.537" y="14.4" width="1.031" height="33.6" fill="#bdbdbd" stroke="none"/>
-    <rect x="19.547" y="14.4" width="1.031" height="33.6" fill="#b4b4b4" stroke="none"/>
-    <rect x="20.558" y="14.4" width="1.031" height="33.6" fill="#acacac" stroke="none"/>
-    <rect x="21.568" y="14.4" width="1.031" height="33.6" fill="#a4a4a4" stroke="none"/>
-    <rect x="22.579" y="14.4" width="1.031" height="33.6" fill="#9b9b9b" stroke="none"/>
-    <rect x="23.589" y="14.4" width="1.031" height="33.6" fill="#939393" stroke="none"/>
-  </g>
-  <rect id="main_rect" x="5.4" y="14.4" width="19.2" height="33.6" fill="none" stroke="#666666" stroke-width="1.05"/>
-  <path id="diagonal_1_tl_br" d="M 6.075 15.075 L 23.925 47.325" stroke="#707070" stroke-width="1.35" fill="none" stroke-linecap="butt"/>
-  <path id="diagonal_2_tr_bl" d="M 23.925 15.075 L 6.075 47.325" stroke="#707070" stroke-width="1.35" fill="none" stroke-linecap="butt"/>
-  <path id="minus_glyph" d="M 13.35 9.6 L 16.65 9.6" stroke="#4f4f4f" stroke-width="0.75" fill="none" stroke-linecap="square"/>
-  <path id="minus_glyph_2" d="M 13.35 14.4 L 16.65 14.4" stroke="#4f4f4f" stroke-width="0.75" fill="none" stroke-linecap="square"/>
+<svg width="30" height="60" viewBox="0 0 30 60" xmlns="http://www.w3.org/2000/svg">
+<g id="metal_gradient">
+<rect x="0" y="0" width="1" height="60" fill="rgb(176,176,176)"/>
+<rect id="left_partition_1" x="1" y="0" width="1" height="60" fill="rgb(128,128,128)"/>
+<rect id="left_partition_2" x="2" y="0" width="1" height="60" fill="rgb(128,128,128)"/>
+<rect x="3" y="0" width="1" height="60" fill="rgb(171,171,171)"/>
+<rect x="4" y="0" width="1" height="60" fill="rgb(217,217,217)"/>
+<rect x="5" y="0" width="1" height="60" fill="rgb(223,223,223)"/>
+<rect x="6" y="0" width="1" height="60" fill="rgb(222,222,222)"/>
+<rect x="7" y="0" width="1" height="60" fill="rgb(229,229,229)"/>
+<rect x="8" y="0" width="1" height="60" fill="rgb(231,231,231)"/>
+<rect x="9" y="0" width="1" height="60" fill="rgb(239,239,239)"/>
+<rect x="10" y="0" width="1" height="60" fill="rgb(237,237,237)"/>
+<rect x="11" y="0" width="1" height="60" fill="rgb(249,249,249)"/>
+<rect x="12" y="0" width="1" height="60" fill="rgb(250,250,250)"/>
+<rect x="13" y="0" width="1" height="60" fill="rgb(248,248,248)"/>
+<rect x="14" y="0" width="1" height="60" fill="rgb(243,243,243)"/>
+<rect x="15" y="0" width="1" height="60" fill="rgb(240,240,240)"/>
+<rect id="center_partition" x="16" y="0" width="1" height="60" fill="rgb(194,194,194)"/>
+<rect x="17" y="0" width="1" height="60" fill="rgb(233,233,233)"/>
+<rect x="18" y="0" width="1" height="60" fill="rgb(229,229,229)"/>
+<rect x="19" y="0" width="1" height="60" fill="rgb(226,226,226)"/>
+<rect x="20" y="0" width="1" height="60" fill="rgb(222,222,222)"/>
+<rect x="21" y="0" width="1" height="60" fill="rgb(220,220,220)"/>
+<rect x="22" y="0" width="1" height="60" fill="rgb(216,216,216)"/>
+<rect x="23" y="0" width="1" height="60" fill="rgb(213,213,213)"/>
+<rect x="24" y="0" width="1" height="60" fill="rgb(211,211,211)"/>
+<rect x="25" y="0" width="1" height="60" fill="rgb(208,208,208)"/>
+<rect id="right_partition" x="26" y="0" width="1" height="60" fill="rgb(175,175,175)"/>
+<rect x="27" y="0" width="1" height="60" fill="rgb(203,203,203)"/>
+<rect x="28" y="0" width="1" height="60" fill="rgb(201,201,201)"/>
+<rect x="29" y="0" width="1" height="60" fill="rgb(176,176,176)"/>
+</g>
+<path id="top_border" d="M 0 0.5 H 30" stroke="#b0b0b0" stroke-width="1"/>
+<path id="bottom_border" d="M 0 59.5 H 30" stroke="#b0b0b0" stroke-width="1"/>
 </svg>

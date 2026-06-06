@@ -3501,3 +3501,12 @@ Ziel: Die Konvertierung soll strikt als **Kette** laufen:
 - **Perception-Lerneffekt:** Kreis-/Ring-Erkennung ist `generalisiert`; die vier Innenkanten werden im akzeptierten SVG explizit als gemeinsame Liniengruppe erhalten.
 - **Rotation:** `AC0414_S` wurde aus Triage und PF8-Linkage entfernt; `AC0130_M` und `AC0130` bleiben synchron aktiv.
 - **Nächster sinnvoller Schritt:** Die reguläre Plan-B-Rotation mit `AC0130_M.jpg` fortsetzen.
+
+
+### Fortschritt vs. Blocker (Session 2026-06-06, Plan-B AC0130_M Run OK)
+
+- **Fortschritt:** `AC0130_M.jpg` wurde real re-konvertiert. Der zu klein skalierte reguläre AC0030-Vorschlag wurde durch ein dimensionstreues 30x60-Vektor-SVG mit Metallverlauf, horizontalen Außenkanten und den im JPG sichtbaren vertikalen Partitionen ersetzt.
+- **Qualität:** `mean_delta2` sank von `54603.582031` auf `300.156097`, `normalized_mse` von `0.27991071` auf `0.00153867` und damit deutlich unter die Review-Grenze `0.04594568`.
+- **Perception-Lerneffekt:** Die PF8-Frage bleibt `nur Sonderfall`: Linien und Rechteck werden erkannt, aber kein allgemeiner `RectangleBackground`-Seed erzeugt; die beschriebenen Diagonalen sind im realen JPG nicht stabil sichtbar.
+- **Rotation:** `AC0130_M` wurde aus Triage und PF8-Linkage entfernt; `AC0130` bleibt als letzter aktiver Kandidat.
+- **Nächster sinnvoller Schritt:** Die reguläre Plan-B-Rotation mit `AC0130.jpg` abschließen.

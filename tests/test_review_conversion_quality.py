@@ -144,3 +144,23 @@ def test_ac0414_s_committed_svg_preserves_partitioned_circle_quality() -> None:
     assert '<circle id="partitioned_circle"' in svg
     assert '<g id="partition_lines"' in svg
     assert svg.count(" M ") == 3
+
+
+def test_ac0130_m_committed_svg_preserves_visible_vertical_partition_quality() -> None:
+    record = review_variant("AC0130_M", source="diff_inventory")
+
+    assert record.status == "ok"
+    assert record.width == 30
+    assert record.height == 60
+    assert record.svg_path == "artifacts/converted_images/converted_svgs/AC0130_M.svg"
+    assert record.mean_delta2 == pytest.approx(300.1560974121094)
+    assert record.normalized_mse is not None
+    assert record.normalized_mse < 0.045945679012345676
+
+    svg = Path(record.svg_path).read_text(encoding="utf-8")
+    assert '<g id="metal_gradient">' in svg
+    assert '<path id="top_border"' in svg
+    assert '<path id="bottom_border"' in svg
+    assert 'id="left_partition_1"' in svg
+    assert 'id="center_partition"' in svg
+    assert 'id="right_partition"' in svg
