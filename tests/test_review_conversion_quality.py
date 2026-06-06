@@ -5,10 +5,12 @@ import json
 from pathlib import Path
 
 import numpy as np
+import pytest
 
 from tools.review_conversion_quality import (
     QualityRecord,
     normalized_mse,
+    review_variant,
     select_plan_b_candidates,
     write_reports,
 )
@@ -95,3 +97,15 @@ def test_write_reports_keeps_candidate_priority_machine_readable(tmp_path: Path)
     ]
     rows = list(csv.DictReader((tmp_path / "plan_b_candidate_triage_v1.csv").open()))
     assert [row["priority"] for row in rows] == ["1", "2"]
+
+
+def test_ac0835_l_committed_svg_is_below_review_threshold() -> None:
+    record = review_variant("AC0835_L", source="successful_conversion")
+
+    assert record.status == "ok"
+    assert record.width == 25
+    assert record.height == 25
+    assert record.mean_delta2 is not None
+    assert record.mean_delta2 == pytest.approx(7629.90234375)
+    assert record.normalized_mse is not None
+    assert record.normalized_mse < 0.045945679012345676

@@ -7,6 +7,8 @@ All notable changes to ImageConverter will be documented in this file.
 
 ## Unreleased
 
+- AC0835_L was re-converted as a connector-free semantic VOC badge, reducing normalized MSE from 0.05726039 to 0.03911266 and rotating Plan-B/PF8 to AC0922_S.
+
 - AC0863_S completed its real Plan-B/PF8 acceptance run as a semantic rF badge with an upper connector (`status=semantic_ok`, `mean_delta2=4155.215820`); active perception targets now rotate strictly to AC0864_S.
 
 - FP-Recovery Run OD makes isolated one-file refinement measurable without weakening multi-file quality selection; the full gate now passes with 14/14 reports, 6/6 preserved anchors, 3 accepted improvements, and 0 accepted regressions.

@@ -1397,17 +1397,6 @@ def write_text_glyph_evaluation_report(
 
 PLAN_B_PERCEPTION_TARGETS: list[dict[str, Any]] = [
     {
-        "variant": "AC0835_L",
-        "image_candidates": ["artifacts/images_to_convert/AC0835_L.jpg"],
-        "plan_b_reason": "Einziger erfolgreicher Altbestand oberhalb der aktualisierten Review-Grenze.",
-        "perception_question": "Kann der dominante VOC-Kreis vor der ersten Iteration als CircleBackground erkannt werden?",
-        "expected_first_primitive": "circle_or_voc_text",
-        "expected_candidate_kinds": {"circle", "ring", "text_glyph"},
-        "expected_seed_kinds": {"CircleBackground", "TextGlyph"},
-        "description": "Plan-B-Kandidat AC0835_L: VOC-Kreis und kurze Beschriftung zuerst prüfen.",
-        "glyphs": ["VOC"],
-    },
-    {
         "variant": "AC0922_S",
         "image_candidates": ["artifacts/images_to_convert/AC0922_S.jpg"],
         "plan_b_reason": "Kompakter Diff-Kandidat mit höchster aktueller Pixelabweichung.",

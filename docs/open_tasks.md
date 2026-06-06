@@ -3477,3 +3477,11 @@ Ziel: Die Konvertierung soll strikt als **Kette** laufen:
 - **Perception-Lerneffekt:** Der PF8-Linkage-Report enthält synchron alle fünf Kandidaten (`5/5` ausgewertet, vier `generalisiert`, einer `nur Sonderfall`, keiner `noch nicht erkannt`).
 - **Sicherung:** Tool- und Linkage-Tests prüfen Metriknormalisierung, Auswahlpriorität, maschinenlesbare Reports und die Synchronität zwischen Triage und PF8-Zielen.
 - **Nächster sinnvoller Schritt:** Die reguläre Plan-B-Rotation mit `AC0835_L.jpg` beginnen und Kreis-/VOC-Erkennung gegen die reale Re-Konvertierung absichern.
+
+### Fortschritt vs. Blocker (Session 2026-06-06, Plan-B AC0835_L Run OH)
+
+- **Fortschritt:** `AC0835_L.jpg` wurde real re-konvertiert; das fehlerhafte Alt-SVG mit falschem Connector und fehlendem Text wurde durch ein semantisches 25x25-Kreis-/`VOC`-Badge ersetzt.
+- **Qualität:** `mean_delta2` sank von `11170.070312` auf `7629.902344` (`-31.69 %`), `normalized_mse` von `0.05726039` auf `0.03911266` und damit unter die Review-Grenze `0.04594568`.
+- **Perception-Lerneffekt:** Die Kreisfrage ist `generalisiert` (`circle` → `CircleBackground`); `AC0835_L` wurde aus Triage und PF8-Linkage entfernt. Die vier verbleibenden Ziele sind synchron.
+- **Sicherung:** Der isolierte CLI-Lauf endete mit Exit `0`; ein Regressionstest erzwingt für das committete SVG Dimensionstreue und die Review-Grenze.
+- **Nächster sinnvoller Schritt:** Die reguläre Plan-B-Rotation mit `AC0922_S.jpg` fortsetzen.

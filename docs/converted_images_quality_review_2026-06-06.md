@@ -62,3 +62,14 @@ Die neue Rotation ist freigegeben. Der nächste Kandidat ist `AC0835_L.jpg`:
 Zuerst sollen der dominante Kreis als `CircleBackground` und die kurze
 `VOC`-Beschriftung als Textsignal genutzt werden; anschließend ist die reale
 Konvertierung gegen die aktualisierte Review-Grenze zu prüfen.
+
+
+## Folgeaktualisierung Run OH
+
+`AC0835_L` wurde im realen semantischen Konverterpfad erneut erzeugt. Das neue
+25x25-SVG enthält den dominanten Kreis und horizontalen `VOC`-Text, aber keinen
+Connector. `mean_delta2` sinkt von `11170.070312` auf `7629.902344`; daraus
+folgt `normalized_mse=0.03911266`, also ein Wert unterhalb der Review-Grenze.
+Der Kandidat ist deshalb abgeschlossen und aus der aktiven Triage entfernt.
+Die Rotation wird mit `AC0922_S`, `AC0414_S`, `AC0130_M` und `AC0130`
+fortgesetzt.

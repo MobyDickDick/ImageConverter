@@ -16,7 +16,7 @@ from tools.perception_detection_contract import (
 )
 
 
-ACTIVE_VARIANTS = ["AC0835_L", "AC0922_S", "AC0414_S", "AC0130_M", "AC0130"]
+ACTIVE_VARIANTS = ["AC0922_S", "AC0414_S", "AC0130_M", "AC0130"]
 
 
 def _target_by_variant(variant: str) -> dict[str, object]:
@@ -24,19 +24,19 @@ def _target_by_variant(variant: str) -> dict[str, object]:
 
 
 def test_build_plan_b_perception_linkage_record_has_lerneffekt_decision() -> None:
-    record = build_plan_b_perception_linkage_record(_target_by_variant("AC0835_L"))
+    record = build_plan_b_perception_linkage_record(_target_by_variant("AC0922_S"))
 
     assert record["schema_version"] == "plan_b_perception_linkage_record_v1"
-    assert record["variant"] == "AC0835_L"
+    assert record["variant"] == "AC0922_S"
     lerneffekt = record["perception_lerneffekt"]
     assert lerneffekt["question"]
-    assert lerneffekt["expected_first_primitive"] == "circle_or_voc_text"
+    assert lerneffekt["expected_first_primitive"] == "circle_with_left_horizontal_rule"
     assert lerneffekt["decision"] in {
         "generalisiert",
         "nur Sonderfall",
         "noch nicht erkannt",
     }
-    assert lerneffekt["expected_candidate_kinds"] == ["circle", "ring", "text_glyph"]
+    assert lerneffekt["expected_candidate_kinds"] == ["circle", "horizontal_rule", "line", "ring"]
     assert "circle" in lerneffekt["matched_candidate_kinds"]
     assert lerneffekt["next_action"]
 
@@ -56,8 +56,8 @@ def test_run_plan_b_perception_linkage_report_writes_json_and_csv(
 ) -> None:
     summary = run_plan_b_perception_linkage_report(tmp_path)
 
-    assert summary["samples"] == 5
-    assert summary["evaluated_samples"] == 5
+    assert summary["samples"] == 4
+    assert summary["evaluated_samples"] == 4
     assert summary["all_have_perception_lerneffekt"] is True
 
     json_report = tmp_path / "plan_b_perception_linkage_report_v1.json"
@@ -71,5 +71,5 @@ def test_run_plan_b_perception_linkage_report_writes_json_and_csv(
     assert [record["variant"] for record in report["records"]] == ACTIVE_VARIANTS
 
     rows = list(csv.DictReader(csv_report.open(encoding="utf-8")))
-    assert len(rows) == 5
+    assert len(rows) == 4
     assert {"variant", "decision", "next_action"} <= set(rows[0])
