@@ -3453,3 +3453,11 @@ Ziel: Die Konvertierung soll strikt als **Kette** laufen:
 - **Sicherung:** Gezielte Tests `16 passed`; vollständige Kernsuite `716 passed`; segmentierter AC08-Smoke 14/14 `PASS`. Der zusammengeführte Report weist 3 akzeptierte Verbesserungen und 4 verworfene Regressionen aus.
 - **Abschluss:** Alle FP-D14-Schwellen sind erfüllt: 14/14 Variantendatensätze, 6/6 Previously-Good-Anker, 3 gemessene Verbesserungen, 0 akzeptierte Regressionen und `overall_success=1`.
 - **Nächster sinnvoller Schritt:** Das abgeschlossene Finish-Playbook verlassen und mit der regulären Roadmap-/Plan-B-Rotation fortfahren.
+
+### Fortschritt vs. Blocker (Session 2026-06-06, Plan-B AC0863_S Run OE)
+
+- **Fortschritt:** Der aktive Plan-B-/Perception-Kandidat `AC0863_S.jpg` wurde im echten Ein-Datei-Pfad erfolgreich als semantisches AC08-`rF`-Badge mit oberem vertikalem Connector konvertiert. Das erzeugte SVG behält die Quellabmessungen `15x25`; die Validierung endet mit `status=semantic_ok`, `best_error=18.522667` und `mean_delta2=4155.215820`.
+- **Perception-Lerneffekt:** Die Frage nach dominantem Kreis und gedrehtem Connector ist `generalisiert`: `CircleBackground` und ein Linienkandidat werden erkannt. Erledigte PF8-Ziele (`AC0862_S`, `AC0863_S`) wurden aus dem aktiven Report entfernt; die maschinenlesbare Rotation enthält jetzt nur `AC0864_S` und wird durch einen Synchronitätstest abgesichert.
+- **Sicherung:** Der isolierte CLI-Lauf endete mit Exit `0`; der PF8-Linkage-Report wurde mit `samples=1`, `evaluated_samples=1` und `all_have_perception_lerneffekt=true` neu erzeugt.
+- **Blocker:** Kein technischer Blocker; die verbleibende Pixelabweichung ist ein Text-/Antialiasing-Folgepunkt, kein Semantik- oder Topologiefehler.
+- **Nächster sinnvoller Schritt:** Die reguläre Plan-B-Rotation mit `AC0864_S.jpg` fortsetzen.

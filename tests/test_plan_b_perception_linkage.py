@@ -21,13 +21,13 @@ def _target_by_variant(variant: str) -> dict[str, object]:
 
 
 def test_build_plan_b_perception_linkage_record_has_lerneffekt_decision() -> None:
-    record = build_plan_b_perception_linkage_record(_target_by_variant("AC0863_S"))
+    record = build_plan_b_perception_linkage_record(_target_by_variant("AC0864_S"))
 
     assert record["schema_version"] == "plan_b_perception_linkage_record_v1"
-    assert record["variant"] == "AC0863_S"
+    assert record["variant"] == "AC0864_S"
     lerneffekt = record["perception_lerneffekt"]
     assert lerneffekt["question"]
-    assert lerneffekt["expected_first_primitive"] == "circle_ring_or_rf_rotated_connector"
+    assert lerneffekt["expected_first_primitive"] == "circle_ring_or_rf_mirrored_connector"
     assert lerneffekt["decision"] in {
         "generalisiert",
         "nur Sonderfall",
@@ -39,15 +39,8 @@ def test_build_plan_b_perception_linkage_record_has_lerneffekt_decision() -> Non
     assert lerneffekt["next_action"]
 
 
-def test_build_plan_b_perception_linkage_record_matches_rf_vertical_connector() -> None:
-    record = build_plan_b_perception_linkage_record(_target_by_variant("AC0862_S"))
-
-    assert record["variant"] == "AC0862_S"
-    lerneffekt = record["perception_lerneffekt"]
-    assert lerneffekt["expected_first_primitive"] == "circle_ring_or_rf_horizontal_connector"
-    assert "line" in lerneffekt["matched_candidate_kinds"]
-    assert lerneffekt["top_candidate_kind"] in {"circle", "line"}
-    assert record["candidate_count"] >= 1
+def test_plan_b_perception_targets_only_include_active_candidates() -> None:
+    assert [target["variant"] for target in PLAN_B_PERCEPTION_TARGETS] == ["AC0864_S"]
 
 
 def test_run_plan_b_perception_linkage_report_writes_json_and_csv(
@@ -55,7 +48,7 @@ def test_run_plan_b_perception_linkage_report_writes_json_and_csv(
 ) -> None:
     summary = run_plan_b_perception_linkage_report(tmp_path)
 
-    assert summary["samples"] == 3
+    assert summary["samples"] == 1
     assert summary["evaluated_samples"] >= 1
     assert summary["all_have_perception_lerneffekt"] is True
 
@@ -67,12 +60,8 @@ def test_run_plan_b_perception_linkage_report_writes_json_and_csv(
     report = json.loads(json_report.read_text(encoding="utf-8"))
     assert report["schema_version"] == "plan_b_perception_linkage_report_v1"
     assert report["metrics"]["all_have_perception_lerneffekt"] is True
-    assert {record["variant"] for record in report["records"]} == {
-        "AC0862_S",
-        "AC0863_S",
-        "AC0864_S",
-    }
+    assert {record["variant"] for record in report["records"]} == {"AC0864_S"}
 
     rows = list(csv.DictReader(csv_report.open(encoding="utf-8")))
-    assert len(rows) == 3
+    assert len(rows) == 1
     assert {"variant", "decision", "next_action"} <= set(rows[0])
