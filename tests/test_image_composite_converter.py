@@ -1231,6 +1231,42 @@ def test_make_badge_params_ac0863_uses_upper_arm_rf_geometry() -> None:
     assert params.get("label") == "rF"
 
 
+def test_make_badge_params_ac0864_uses_right_arm_rf_geometry() -> None:
+    """AC0864 defaults must mirror AC0862 into the right horizontal connector."""
+    params = image_composite_converter.Action.make_badge_params(25, 15, "AC0864")
+
+    assert params is not None
+    assert bool(params.get("arm_enabled", False))
+    assert not bool(params.get("stem_enabled", False))
+    assert float(params.get("arm_x1", 0.0)) > float(params.get("cx", 0.0))
+    assert float(params.get("arm_x2", 0.0)) >= 24.99
+    assert abs(float(params.get("arm_y2", 0.0)) - float(params.get("arm_y1", 0.0))) <= 0.01
+    assert str(params.get("text_mode", "")).lower() == "rf"
+    assert params.get("label") == "rF"
+
+
+def test_parse_description_marks_ac0864_as_rf_right_arm_badge() -> None:
+    """AC0864 descriptions should activate the mirrored rF right-arm family."""
+    ref = image_composite_converter.Reflection(
+        {
+            "AC0862": (
+                'Grauer Kreis mit grauem Rand und hellgrauem Hintergrund '
+                'Abweichung: mit Text "rF" (relative Feuchtigkeit) '
+                'Abweichung: nach rechts gedreht, Text immer noch horizontal.'
+            ),
+            "AC0864": "Wie AC0862. Geometrische Variante: Horizontal gespiegelt.",
+        }
+    )
+
+    _desc, params = ref.parse_description("AC0864_S", "AC0864_S.jpg")
+
+    assert params["mode"] == "semantic_badge"
+    assert params["label"] == "rF"
+    assert "SEMANTIC: Kreis + Buchstabe rF" in list(params.get("elements", []))
+    assert "SEMANTIC: waagrechter Strich rechts vom Kreis" in list(params.get("elements", []))
+    assert "SEMANTIC: waagrechter Strich links vom Kreis" not in list(params.get("elements", []))
+
+
 def test_parse_description_marks_ac0863_as_rf_upper_arm_badge() -> None:
     """AC0863 descriptions should activate the rF upper vertical connector family."""
     ref = image_composite_converter.Reflection(
