@@ -3461,3 +3461,11 @@ Ziel: Die Konvertierung soll strikt als **Kette** laufen:
 - **Sicherung:** Der isolierte CLI-Lauf endete mit Exit `0`; der PF8-Linkage-Report wurde mit `samples=1`, `evaluated_samples=1` und `all_have_perception_lerneffekt=true` neu erzeugt.
 - **Blocker:** Kein technischer Blocker; die verbleibende Pixelabweichung ist ein Text-/Antialiasing-Folgepunkt, kein Semantik- oder Topologiefehler.
 - **Nächster sinnvoller Schritt:** Die reguläre Plan-B-Rotation mit `AC0864_S.jpg` fortsetzen.
+
+### Fortschritt vs. Blocker (Session 2026-06-06, Plan-B AC0864_S Run OF)
+
+- **Fortschritt:** Der letzte aktive Plan-B-/Perception-Kandidat `AC0864_S.jpg` wird jetzt als semantisches AC08-`rF`-Badge mit rechtem horizontalem Connector konvertiert. Der reale Lauf endet mit Exit `0`, `status=semantic_ok`, `best_error=17.986667` und `mean_delta2=3699.607910`.
+- **Perception-Lerneffekt:** Kreis (`CircleBackground`) und Linienhinweis sind `generalisiert`; die Ausgabe verwendet Beschreibung und allgemeine AC08-Rechtsarm-Geometrie statt eines Sample-SVGs.
+- **Rotation:** `AC0864_S` ist aus der aktiven Zielliste entfernt. Plan-B-Liste und PF8-Linkage-Report sind mit `samples=0`, `evaluated_samples=0` und `all_have_perception_lerneffekt=true` synchron leer.
+- **Blocker:** Kein technischer Blocker; die dokumentierte Weak-Family-Rotation ist vollständig abgearbeitet.
+- **Nächster sinnvoller Schritt:** Qualitätsreports aktualisieren und daraus eine neue, noch nicht erledigte Plan-B-Kandidatenrotation kuratieren.

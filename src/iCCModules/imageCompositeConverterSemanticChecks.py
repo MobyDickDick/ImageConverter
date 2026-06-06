@@ -31,6 +31,7 @@ AC08_SMALL_CIRCLE_FALLBACK_FAMILIES = frozenset(
         "AC0861",
         "AC0862",
         "AC0863",
+        "AC0864",
         "AC0870",
         "AC0881",
         "AC0882",

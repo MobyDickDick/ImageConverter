@@ -256,4 +256,12 @@ def makeAc08BadgeParamsImpl(
             return finalize_ac08_style_fn(name, defaults)
         return finalize_ac08_style_fn(name, fit_ac0813_params_from_image_fn(img, defaults))
 
+    if name == "AC0864":
+        # AC0864 is the horizontal mirror of AC0862: retain the horizontal rF
+        # label while moving the connector to the right-arm geometry.
+        defaults = _apply_rf_label(default_ac0814_params_fn(w, h))
+        if img is None:
+            return finalize_ac08_style_fn(name, defaults)
+        return finalize_ac08_style_fn(name, fit_ac0814_params_from_image_fn(img, defaults))
+
     return None

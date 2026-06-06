@@ -1395,19 +1395,7 @@ def write_text_glyph_evaluation_report(
     }
 
 
-PLAN_B_PERCEPTION_TARGETS: list[dict[str, Any]] = [
-    {
-        "variant": "AC0864_S",
-        "image_candidates": ["artifacts/images_to_convert/AC0864_S.jpg"],
-        "plan_b_reason": "Weak-Family-Folgepunkt: horizontal gespiegeltes gedrehtes rF-Badge nach AC0862.",
-        "perception_question": "Kann der dominante rF-Kreis samt gespiegeltem Connector vorab als CircleBackground plus Linien-Hinweis festgehalten werden?",
-        "expected_first_primitive": "circle_ring_or_rf_mirrored_connector",
-        "expected_candidate_kinds": {"circle", "ring", "line", "text_glyph"},
-        "expected_seed_kinds": {"CircleBackground", "TextGlyph"},
-        "description": "Plan-B-Kandidat AC0864_S: gespiegeltes gedrehtes rF-Badge; Kreis, Label und Connector zuerst prüfen.",
-        "glyphs": ["rF"],
-    },
-]
+PLAN_B_PERCEPTION_TARGETS: list[dict[str, Any]] = []
 
 
 def _resolve_first_existing_path(candidates: list[str]) -> Path | None:
