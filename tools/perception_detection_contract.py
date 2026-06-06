@@ -1397,16 +1397,6 @@ def write_text_glyph_evaluation_report(
 
 PLAN_B_PERCEPTION_TARGETS: list[dict[str, Any]] = [
     {
-        "variant": "AC0414_S",
-        "image_candidates": ["artifacts/images_to_convert/AC0414_S.jpg"],
-        "plan_b_reason": "Sehr kompakter kreisförmiger Diff-Kandidat mit hoher Abweichung.",
-        "perception_question": "Kann die kreisförmige Grundform vorab als CircleBackground erkannt werden?",
-        "expected_first_primitive": "circle_or_ring",
-        "expected_candidate_kinds": {"circle", "ring"},
-        "expected_seed_kinds": {"CircleBackground"},
-        "description": "Plan-B-Kandidat AC0414_S: kreisförmigen Grundkörper vor Innengeometrie erkennen.",
-    },
-    {
         "variant": "AC0130_M",
         "image_candidates": ["artifacts/images_to_convert/AC0130_M.jpg"],
         "plan_b_reason": "Kompakter rechteckiger Diff-Kandidat mit hoher Abweichung.",

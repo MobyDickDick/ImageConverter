@@ -127,3 +127,20 @@ def test_ac0922_s_committed_snapshot_preserves_circle_connector_quality() -> Non
     svg = Path(record.svg_path).read_text(encoding="utf-8")
     assert "<circle" in svg
     assert "<line" in svg
+
+
+def test_ac0414_s_committed_svg_preserves_partitioned_circle_quality() -> None:
+    record = review_variant("AC0414_S", source="diff_inventory")
+
+    assert record.status == "ok"
+    assert record.width == 20
+    assert record.height == 20
+    assert record.svg_path == "artifacts/converted_images/converted_svgs/AC0414_S.svg"
+    assert record.mean_delta2 == pytest.approx(703.8825073242188)
+    assert record.normalized_mse is not None
+    assert record.normalized_mse < 0.045945679012345676
+
+    svg = Path(record.svg_path).read_text(encoding="utf-8")
+    assert '<circle id="partitioned_circle"' in svg
+    assert '<g id="partition_lines"' in svg
+    assert svg.count(" M ") == 3

@@ -3493,3 +3493,11 @@ Ziel: Die Konvertierung soll strikt als **Kette** laufen:
 - **Perception-Lerneffekt:** Kreis und linker Horizontalanschluss sind `generalisiert`; ein Regressionstest sichert Dimensionen, Snapshot-Pfadauflösung, Primitive und Qualitätswert.
 - **Rotation:** `AC0922_S` wurde aus Triage und PF8-Linkage entfernt; `AC0414_S`, `AC0130_M` und `AC0130` bleiben synchron aktiv.
 - **Nächster sinnvoller Schritt:** Die reguläre Plan-B-Rotation mit `AC0414_S.jpg` fortsetzen.
+
+### Fortschritt vs. Blocker (Session 2026-06-06, Plan-B AC0414_S Run OJ)
+
+- **Fortschritt:** `AC0414_S.jpg` wurde real re-konvertiert; der semantisch falsche Gradient-/Plus-Vorschlag wurde verworfen und durch einen dimensionstreuen partitionierten Kreis ersetzt.
+- **Qualität:** `mean_delta2` sank von `62091.609375` auf `703.882507`, `normalized_mse` von `0.31829609` auf `0.00360827` und damit deutlich unter die Review-Grenze `0.04594568`.
+- **Perception-Lerneffekt:** Kreis-/Ring-Erkennung ist `generalisiert`; die vier Innenkanten werden im akzeptierten SVG explizit als gemeinsame Liniengruppe erhalten.
+- **Rotation:** `AC0414_S` wurde aus Triage und PF8-Linkage entfernt; `AC0130_M` und `AC0130` bleiben synchron aktiv.
+- **Nächster sinnvoller Schritt:** Die reguläre Plan-B-Rotation mit `AC0130_M.jpg` fortsetzen.

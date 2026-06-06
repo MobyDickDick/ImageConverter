@@ -11,98 +11,6 @@
   "records": [
     {
       "schema_version": "plan_b_perception_linkage_record_v1",
-      "variant": "AC0414_S",
-      "image_path": "artifacts/images_to_convert/AC0414_S.jpg",
-      "status": "evaluated",
-      "plan_b_reason": "Sehr kompakter kreisf\u00f6rmiger Diff-Kandidat mit hoher Abweichung.",
-      "description": "Plan-B-Kandidat AC0414_S: kreisf\u00f6rmigen Grundk\u00f6rper vor Innengeometrie erkennen.",
-      "perception_lerneffekt": {
-        "question": "Kann die kreisf\u00f6rmige Grundform vorab als CircleBackground erkannt werden?",
-        "expected_first_primitive": "circle_or_ring",
-        "expected_candidate_kinds": [
-          "circle",
-          "ring"
-        ],
-        "expected_seed_kinds": [
-          "CircleBackground"
-        ],
-        "decision": "generalisiert",
-        "matched_candidate_kinds": [
-          "ring"
-        ],
-        "matched_seed_kinds": [
-          "CircleBackground"
-        ],
-        "top_candidate_kind": "ring",
-        "top_confidence": 0.8548,
-        "next_action": "Im n\u00e4chsten Plan-B-Paket als vorinitialisierten Geometry-IR-Seed protokollieren."
-      },
-      "candidate_count": 6,
-      "top_candidate": {
-        "schema_version": "perception_primitive_candidate_v1",
-        "kind": "ring",
-        "bbox": {
-          "x": 0.0,
-          "y": 6.0,
-          "width": 14.0,
-          "height": 14.0
-        },
-        "center": {
-          "x": 6.0,
-          "y": 13.0
-        },
-        "geometry": {
-          "radius_px": 7.0,
-          "inner_radius_px": 4.06,
-          "stroke_width_px": 2.94,
-          "circularity": 1.0,
-          "ring": true,
-          "fill_ratio": 0.3741,
-          "geometry_ir_kind": "CircleBackground",
-          "geometry_ir_bbox": [
-            0.0,
-            0.3,
-            0.7,
-            0.7
-          ]
-        },
-        "color": {
-          "fill_rgb": [
-            222,
-            222,
-            222
-          ],
-          "stroke_rgb": [
-            219,
-            219,
-            219
-          ],
-          "fill_hex": "#DEDEDE",
-          "stroke_hex": "#DBDBDB",
-          "fill_confidence": 0.8408,
-          "stroke_confidence": 0.8259
-        },
-        "confidence": 0.8548,
-        "roi": {
-          "type": "image",
-          "hint": "full_image",
-          "bbox": {
-            "x": 0.0,
-            "y": 0.0,
-            "width": 20.0,
-            "height": 20.0
-          }
-        },
-        "evidence": {
-          "detector": "detect_circle_rings",
-          "detection_source": "hough",
-          "threshold_model": "hough_plus_foreground_mask"
-        },
-        "source": "pf8_plan_b_perception_linkage"
-      }
-    },
-    {
-      "schema_version": "plan_b_perception_linkage_record_v1",
       "variant": "AC0130_M",
       "image_path": "artifacts/images_to_convert/AC0130_M.jpg",
       "status": "evaluated",
@@ -261,9 +169,9 @@
     }
   ],
   "metrics": {
-    "samples": 3,
-    "evaluated_samples": 3,
-    "generalisiert": 2,
+    "samples": 2,
+    "evaluated_samples": 2,
+    "generalisiert": 1,
     "nur_sonderfall": 1,
     "noch_nicht_erkannt": 0,
     "all_have_perception_lerneffekt": true
