@@ -1397,17 +1397,6 @@ def write_text_glyph_evaluation_report(
 
 PLAN_B_PERCEPTION_TARGETS: list[dict[str, Any]] = [
     {
-        "variant": "AC0863_S",
-        "image_candidates": ["artifacts/images_to_convert/AC0863_S.jpg"],
-        "plan_b_reason": "Weak-Family-Folgepunkt: gedrehtes rF-Badge nach AC0842 mit horizontal bleibendem Text.",
-        "perception_question": "Kann der dominante rF-Kreis samt gedrehtem Connector vorab als CircleBackground plus Linien-Hinweis festgehalten werden?",
-        "expected_first_primitive": "circle_ring_or_rf_rotated_connector",
-        "expected_candidate_kinds": {"circle", "ring", "line", "text_glyph"},
-        "expected_seed_kinds": {"CircleBackground", "TextGlyph"},
-        "description": "Plan-B-Kandidat AC0863_S: gedrehtes rF-Badge; Kreis, Label und Connector zuerst prüfen.",
-        "glyphs": ["rF"],
-    },
-    {
         "variant": "AC0864_S",
         "image_candidates": ["artifacts/images_to_convert/AC0864_S.jpg"],
         "plan_b_reason": "Weak-Family-Folgepunkt: horizontal gespiegeltes gedrehtes rF-Badge nach AC0862.",
@@ -1416,17 +1405,6 @@ PLAN_B_PERCEPTION_TARGETS: list[dict[str, Any]] = [
         "expected_candidate_kinds": {"circle", "ring", "line", "text_glyph"},
         "expected_seed_kinds": {"CircleBackground", "TextGlyph"},
         "description": "Plan-B-Kandidat AC0864_S: gespiegeltes gedrehtes rF-Badge; Kreis, Label und Connector zuerst prüfen.",
-        "glyphs": ["rF"],
-    },
-    {
-        "variant": "AC0862_S",
-        "image_candidates": ["artifacts/images_to_convert/AC0862_S.jpg"],
-        "plan_b_reason": "Weak-Family-Folgepunkt: rundes rF-Badge mit seitlichem Griff nach links.",
-        "perception_question": "Kann der dominante rF-Kreis vorab als CircleBackground und der seitliche Griff als Linien-Hinweis festgehalten werden?",
-        "expected_first_primitive": "circle_ring_or_rf_horizontal_connector",
-        "expected_candidate_kinds": {"circle", "ring", "line", "text_glyph"},
-        "expected_seed_kinds": {"CircleBackground", "TextGlyph"},
-        "description": "Plan-B-Kandidat AC0862_S: rundes rF-Badge mit linkem horizontalem Griff; Kreis, Label und Griff zuerst prüfen.",
         "glyphs": ["rF"],
     },
 ]

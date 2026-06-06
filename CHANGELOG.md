@@ -7,6 +7,8 @@ All notable changes to ImageConverter will be documented in this file.
 
 ## Unreleased
 
+- AC0863_S completed its real Plan-B/PF8 acceptance run as a semantic rF badge with an upper connector (`status=semantic_ok`, `mean_delta2=4155.215820`); active perception targets now rotate strictly to AC0864_S.
+
 - FP-Recovery Run OD makes isolated one-file refinement measurable without weakening multi-file quality selection; the full gate now passes with 14/14 reports, 6/6 preserved anchors, 3 accepted improvements, and 0 accepted regressions.
 
 - FP-Recovery Run OC now confirms 14/14 AC08 iteration reports and all 6 Previously-Good anchors at the regular 32-iteration budget; release remains blocked because isolated one-file segments produce no measurable quality-pass improvement.

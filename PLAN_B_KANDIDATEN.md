@@ -2,10 +2,9 @@
 
 Ziel: maximal **5** aktive JPG-Kandidaten, die derzeit noch nicht zufriedenstellend konvertieren, aber voraussichtlich nicht "hoffnungslos komplex" sind.
 
-## Aktuelle Kandidaten (Stand: 2026-06-04, nach AC0862-S-Run)
+## Aktuelle Kandidaten (Stand: 2026-06-06, nach AC0863-S-Run)
 
-1. `AC0863_S.jpg` – Weak-Family-Folgepunkt: gedrehtes `rF`-Badge nach AC0842 mit horizontal bleibendem Text; gute Probe für Kreis, zweibuchstabiges Label und gedrehten Connector.
-2. `AC0864_S.jpg` – Weak-Family-Folgepunkt: horizontal gespiegeltes gedrehtes `rF`-Badge nach AC0862; gute Probe für Kreis, zweibuchstabiges Label und gespiegelten Connector.
+1. `AC0864_S.jpg` – Weak-Family-Folgepunkt: horizontal gespiegeltes gedrehtes `rF`-Badge nach AC0862; gute Probe für Kreis, zweibuchstabiges Label und gespiegelten Connector.
 
 ## Perception-Lerneffekt (Pflichtabschnitt ab PF8)
 
@@ -17,7 +16,6 @@ maschinenlesbare Stand liegt unter
 
 | Kandidat | Erste Perception-Frage | Erwartetes erstes Primitive | PF8-Entscheidung | Seed-Folge |
 | --- | --- | --- | --- | --- |
-| `AC0863_S.jpg` | Dominanten rF-Kreis und gedrehten Connector vorab festhalten? | `circle_ring_or_rf_rotated_connector` | `generalisiert` | Kreis als `CircleBackground` seedbar; `rF` und der gedrehte Connector bleiben gekoppelte TextGlyph-/Linien-Prüfung. |
 | `AC0864_S.jpg` | Dominanten rF-Kreis und gespiegelten Connector vorab festhalten? | `circle_ring_or_rf_mirrored_connector` | `generalisiert` | Kreis als `CircleBackground` seedbar; `rF` und der gespiegelte Connector bleiben gekoppelte TextGlyph-/Linien-Prüfung. |
 
 ## Pflege-Regel (fortan)
