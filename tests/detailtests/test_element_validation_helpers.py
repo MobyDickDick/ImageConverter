@@ -7,6 +7,24 @@ def _clip_scalar(value: float, low: float, high: float) -> float:
     return max(low, min(high, value))
 
 
+def test_format_round_quality_progress_reports_improvement() -> None:
+    message = element_validation_helpers.formatRoundQualityProgressImpl(120.0, 90.0)
+
+    assert "120.000 -> 90.000" in message
+    assert "Qualitätsgewinn=+30.000 (+25.00%)" in message
+    assert "Wirkung=verbessert" in message
+
+
+def test_format_round_quality_progress_reports_stagnation_and_regression() -> None:
+    unchanged = element_validation_helpers.formatRoundQualityProgressImpl(25.0, 25.0)
+    worsened = element_validation_helpers.formatRoundQualityProgressImpl(80.0, 100.0)
+
+    assert "Qualitätsgewinn=+0.000 (+0.00%)" in unchanged
+    assert "Wirkung=unverändert" in unchanged
+    assert "Qualitätsgewinn=-20.000 (-25.00%)" in worsened
+    assert "Wirkung=verschlechtert" in worsened
+
+
 def test_apply_element_alignment_step_updates_circle_geometry() -> None:
     params = {"cx": 20.0, "cy": 20.0, "r": 10.0}
 
@@ -109,7 +127,11 @@ def test_validate_badge_by_elements_stops_on_stable_non_improvement_after_fallba
     )
     assert any("Validierungsrunde 1/3 gestartet" in message for message in progress_messages)
     assert any("optimiere Element 'circle'" in message for message in progress_messages)
-    assert any("Gesamtfehler=25.000" in message for message in progress_messages)
+    assert any(
+        "Fehler (kleiner=besser): 25.000 -> 25.000" in message
+        and "Wirkung=unverändert" in message
+        for message in progress_messages
+    )
     assert any("stopped_due_to_stable_non_improvement" in line for line in logs)
     assert any("validation_abort_decision: stage=round_loop, reason=stable_non_improvement" in line for line in logs)
 

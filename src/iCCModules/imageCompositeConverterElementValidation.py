@@ -2,7 +2,38 @@
 
 from __future__ import annotations
 
+import math
+
 from .imageCompositeConverterOptimizationFacade import OptimizationHooks
+
+
+def formatRoundQualityProgressImpl(start_error: float, end_error: float) -> str:
+    """Describe whether a validation round reduced the render error."""
+
+    start = float(start_error)
+    end = float(end_error)
+    if not math.isfinite(start) or not math.isfinite(end):
+        return f"Fehler (kleiner=besser): {start:.3f} -> {end:.3f} | Wirkung=nicht verfügbar"
+
+    gain = start - end
+    tolerance = max(1e-9, abs(start) * 1e-9)
+    if gain > tolerance:
+        effect = "verbessert"
+    elif gain < -tolerance:
+        effect = "verschlechtert"
+    else:
+        effect = "unverändert"
+
+    if abs(start) > 1e-12:
+        gain_percent = (gain / abs(start)) * 100.0
+        gain_text = f"{gain:+.3f} ({gain_percent:+.2f}%)"
+    else:
+        gain_text = f"{gain:+.3f} (n/a)"
+    return (
+        f"Fehler (kleiner=besser): {start:.3f} -> {end:.3f} | "
+        f"Qualitätsgewinn={gain_text} | Wirkung={effect}"
+    )
+
 
 def applyElementAlignmentStepImpl(
     params: dict,
@@ -576,6 +607,7 @@ def validateBadgeByElementsImpl(
         if full_render is None:
             logs.append("Abbruch: SVG konnte nicht gerendert werden")
             break
+        round_start_err = calculate_error_fn(img_orig, full_render)
 
         if debug_out_dir:
             full_diff = create_diff_image_fn(img_orig, full_render)
@@ -774,10 +806,11 @@ def validateBadgeByElementsImpl(
         full_svg = generate_badge_svg_fn(w, h, params)
         full_render = fit_to_original_size_fn(img_orig, render_svg_to_numpy_fn(full_svg, w, h))
         full_err = calculate_error_fn(img_orig, full_render)
-        logs.append(f"Runde {round_idx + 1}: Gesamtfehler={full_err:.3f}")
+        quality_progress = formatRoundQualityProgressImpl(round_start_err, full_err)
+        logs.append(f"Runde {round_idx + 1}: Gesamtfehler={full_err:.3f}; {quality_progress}")
         _report_progress(
             f"Validierungsrunde {round_idx + 1}/{max_rounds} abgeschlossen | "
-            f"Gesamtfehler={full_err:.3f}, Parameter geändert={'ja' if round_changed else 'nein'}"
+            f"{quality_progress} | Parameter geändert={'ja' if round_changed else 'nein'}"
         )
         _log_deep_trace("round_end", round_number=round_idx + 1)
         previous_best_err = best_full_err
