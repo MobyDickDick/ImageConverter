@@ -8,6 +8,7 @@ import os
 import re
 import signal
 import shutil
+import time
 from contextlib import contextmanager
 
 _ONE_BY_ONE_TRANSPARENT_PNG = (
@@ -299,6 +300,55 @@ def _formatFailureTelemetry(details: dict[str, object] | None) -> str:
     return "; ".join(parts)
 
 
+def _formatCompactParams(params: object, *, max_items: int = 14, max_chars: int = 240) -> str:
+    """Render only useful scalar conversion parameters as a short summary."""
+    if not isinstance(params, dict) or not params:
+        return "keine"
+
+    priority = (
+        "mode", "cx", "cy", "r", "stem_x", "stem_width", "stem_top", "stem_bottom",
+        "arm_x1", "arm_y1", "arm_x2", "arm_y2", "arm_stroke", "text_mode",
+        "text_scale", "co2_font_scale", "voc_scale",
+    )
+    excluded_fragments = ("description", "contract", "audit", "fragment", "semantic", "log", "reason", "status")
+
+    def _is_useful(key: str, value: object) -> bool:
+        return (
+            value is not None
+            and isinstance(value, (str, int, float, bool))
+            and not any(fragment in key.lower() for fragment in excluded_fragments)
+        )
+
+    ordered_keys = [key for key in priority if key in params]
+    ordered_keys.extend(sorted(str(key) for key in params if str(key) not in ordered_keys))
+    parts: list[str] = []
+    for key in ordered_keys:
+        value = params.get(key)
+        if not _is_useful(key, value):
+            continue
+        if isinstance(value, float):
+            rendered_value = f"{value:.3f}"
+        else:
+            rendered_value = str(value)
+        candidate = f"{key}={rendered_value}"
+        if len(parts) >= max_items or len(", ".join([*parts, candidate])) > max_chars:
+            parts.append("…")
+            break
+        parts.append(candidate)
+    return ", ".join(parts) if parts else "keine skalaren Parameter"
+
+
+def _formatQualityValue(value: object) -> str:
+    """Format a quality metric compactly while preserving unavailable values."""
+    try:
+        numeric = float(value)
+    except (TypeError, ValueError):
+        return "n/a"
+    if not math.isfinite(numeric):
+        return "n/a"
+    return f"{numeric:.6f}"
+
+
 def _formatFailureTelemetryJson(details: dict[str, object] | None) -> str:
     if not details:
         return ""
@@ -401,6 +451,12 @@ def convertOneImpl(
 
     if anchor_test_active:
         _emit_anchor_variant_event("variant_start", attempt_idx=attempt_idx)
+    started_at = time.monotonic()
+    print_fn(
+        f"[INFO] Konvertiere {filename} | "
+        f"Parameter: Iterationen={max(1, int(iteration_budget))}, "
+        f"Validierungsrunden={max(1, int(badge_rounds))}"
+    )
     try:
         with _wallClockTimeout(run_timeout_sec):
             res = run_iteration_pipeline_fn(
@@ -778,6 +834,14 @@ def convertOneImpl(
             "validation_log_text": _safeReadTextFile(log_file),
         },
         print_fn=print_fn,
+    )
+    elapsed_sec = max(0.0, time.monotonic() - started_at)
+    print_fn(
+        f"[INFO] Konvertiert {filename} | "
+        f"Parameter: {_formatCompactParams(params)} | "
+        f"Qualität: Fehler/Pixel={_formatQualityValue(row['error_per_pixel'])}, "
+        f"Mean-Delta²={_formatQualityValue(row['mean_delta2'])}, "
+        f"beste Iteration={int(best_iter)} | Dauer={elapsed_sec:.1f}s"
     )
     _emit_anchor_variant_event("variant_done", status="ok")
     if os.path.exists(svg_path) and img is not None and hasattr(cv2_module, "imwrite"):

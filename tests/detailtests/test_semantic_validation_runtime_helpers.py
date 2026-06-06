@@ -12,11 +12,12 @@ def test_build_semantic_text_mode_validation_log_line_impl_reports_plain_ring() 
 def test_collect_semantic_badge_validation_logs_impl_uses_guard_line_and_round_floor() -> None:
     captured: dict[str, object] = {}
 
-    def _validate(img, params, *, max_rounds: int, debug_out_dir: str | None):
+    def _validate(img, params, *, max_rounds: int, debug_out_dir: str | None, progress_fn=None):
         captured["img"] = img
         captured["params"] = params
         captured["max_rounds"] = max_rounds
         captured["debug_out_dir"] = debug_out_dir
+        captured["progress_fn"] = progress_fn
         return ["semantic-check: ok"]
 
     badge_params = {"draw_text": True, "text_mode": "co2"}
@@ -26,6 +27,7 @@ def test_collect_semantic_badge_validation_logs_impl_uses_guard_line_and_round_f
         badge_validation_rounds=0,
         debug_dir="/tmp/sem-debug",
         validate_badge_by_elements_fn=_validate,
+        progress_fn="progress-callback",
     )
 
     assert logs == [
@@ -37,6 +39,7 @@ def test_collect_semantic_badge_validation_logs_impl_uses_guard_line_and_round_f
         "params": badge_params,
         "max_rounds": 1,
         "debug_out_dir": "/tmp/sem-debug",
+        "progress_fn": "progress-callback",
     }
 
 

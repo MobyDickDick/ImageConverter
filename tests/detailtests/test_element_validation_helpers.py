@@ -7,6 +7,31 @@ def _clip_scalar(value: float, low: float, high: float) -> float:
     return max(low, min(high, value))
 
 
+def test_format_round_quality_progress_reports_improvement() -> None:
+    message = element_validation_helpers.formatRoundQualityProgressImpl(
+        120.0,
+        90.0,
+        start_mean_delta2=18000.0,
+        end_mean_delta2=12000.0,
+    )
+
+    assert "Qualität (MAE-basiert, höher=besser): 52.94% -> 64.71%" in message
+    assert "mittlere Pixelabweichung (MAE, kleiner=besser): 120.000 -> 90.000" in message
+    assert "Mean-Delta² (kleiner=besser): 18000.000 -> 12000.000" in message
+    assert "Qualitätsgewinn=+30.000 (+25.00%)" in message
+    assert "Wirkung=verbessert" in message
+
+
+def test_format_round_quality_progress_reports_stagnation_and_regression() -> None:
+    unchanged = element_validation_helpers.formatRoundQualityProgressImpl(25.0, 25.0)
+    worsened = element_validation_helpers.formatRoundQualityProgressImpl(80.0, 100.0)
+
+    assert "Qualitätsgewinn=+0.000 (+0.00%)" in unchanged
+    assert "Wirkung=unverändert" in unchanged
+    assert "Qualitätsgewinn=-20.000 (-25.00%)" in worsened
+    assert "Wirkung=verschlechtert" in worsened
+
+
 def test_apply_element_alignment_step_updates_circle_geometry() -> None:
     params = {"cx": 20.0, "cy": 20.0, "r": 10.0}
 
@@ -68,6 +93,7 @@ def test_validate_badge_by_elements_stops_on_stable_non_improvement_after_fallba
         "validation_stable_improvement_epsilon": 0.05,
     }
 
+    progress_messages: list[str] = []
     logs = element_validation_helpers.validateBadgeByElementsImpl(
         img,
         params,
@@ -96,11 +122,48 @@ def test_validate_badge_by_elements_stops_on_stable_non_improvement_after_fallba
         optimize_circle_radius_bracket_fn=lambda *_a, **_k: False,
         optimize_global_parameter_vector_sampling_fn=lambda *_a, **_k: False,
         calculate_error_fn=lambda *_a, **_k: 25.0,
+        calculate_delta2_stats_fn=lambda *_a, **_k: (1875.0, 0.0),
         activate_ac08_adaptive_locks_fn=lambda p, l, **_k: p.setdefault("ac08_adaptive_unlock_applied", True) or True,
         release_ac08_adaptive_locks_fn=lambda *_a, **_k: False,
         optimize_element_color_bracket_fn=lambda *_a, **_k: False,
         apply_canonical_badge_colors_fn=lambda _p: {},
+        progress_fn=progress_messages.append,
     )
 
+    assert progress_messages[0].startswith(
+        "[INFO] unknown: Elementvalidierung gestartet | Runden=3, Elemente=circle,text | Laufzeit="
+    )
+    assert any("Validierungsrunde 1/3 gestartet" in message for message in progress_messages)
+    assert any("optimiere Element 'circle'" in message for message in progress_messages)
+    assert any(
+        "Qualität (MAE-basiert, höher=besser): 90.20% -> 90.20%" in message
+        and "mittlere Pixelabweichung (MAE, kleiner=besser): 25.000 -> 25.000" in message
+        and "Mean-Delta² (kleiner=besser): 1875.000 -> 1875.000" in message
+        and "Wirkung=unverändert" in message
+        for message in progress_messages
+    )
     assert any("stopped_due_to_stable_non_improvement" in line for line in logs)
     assert any("validation_abort_decision: stage=round_loop, reason=stable_non_improvement" in line for line in logs)
+
+
+def test_action_validation_wrappers_forward_progress_callback(monkeypatch) -> None:
+    import src.imageCompositeConverter as converter
+
+    callback = object()
+    captured: list[dict[str, object]] = []
+
+    def _validate_impl(*_args, **kwargs):
+        captured.append(kwargs)
+        return ["ok"]
+
+    monkeypatch.setattr(
+        converter.element_validation_helpers,
+        "validateBadgeByElementsImpl",
+        _validate_impl,
+    )
+
+    assert converter.Action.validate_badge_by_elements(
+        object(), {}, progress_fn=callback
+    ) == ["ok"]
+    assert captured[0]["progress_fn"] is callback
+    assert callable(captured[0]["calculate_delta2_stats_fn"])

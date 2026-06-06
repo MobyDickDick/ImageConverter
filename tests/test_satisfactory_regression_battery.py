@@ -177,6 +177,23 @@ def _group_variants_by_family(variants: list[str]) -> dict[str, list[str]]:
     return grouped
 
 
+def _copy_family_inputs(
+    family: str,
+    variants: list[str],
+    input_dir: Path,
+    source_paths: dict[str, Path] | None = None,
+) -> Path:
+    """Create a disposable input folder so conversion failures cannot move fixtures."""
+
+    input_dir.mkdir(parents=True, exist_ok=True)
+    for variant in variants:
+        if variant.rsplit("_", 1)[0] != family:
+            continue
+        source_path = (source_paths or {}).get(variant.upper(), _source_image_path(variant))
+        shutil.copy2(source_path, input_dir / f"{variant}.jpg")
+    return input_dir
+
+
 def _baseline_ready() -> bool:
     svgs_dir = BASE / "svgs"
     manifest = BASE / "variants.txt"
@@ -214,9 +231,12 @@ def test_satisfactory_baseline_reconversion_smoke(tmp_path: Path) -> None:
     first = variants[0]
     family = first.rsplit("_", 1)[0]
     out = tmp_path / "out"
+    family_input = _copy_family_inputs(
+        family, variants, tmp_path / "smoke-input"
+    )
     exit_code = converter.main(
         [
-            str(SOURCE_IMAGES),
+            str(family_input),
             "--descriptions-path",
             "artifacts/images_to_convert/Finale_Wurzelformen_V3.xml",
             "--output-dir",
@@ -288,9 +308,15 @@ def test_all_satisfactory_successful_variants_reconversion_keeps_or_improves_qua
             family=family,
             variant_count=len(family_variants),
         )
+        family_input = _copy_family_inputs(
+            family,
+            family_variants,
+            tmp_path / "family-inputs" / family.lower(),
+            source_image_snapshots,
+        )
         exit_code = converter.main(
             [
-                str(SOURCE_IMAGES),
+                str(family_input),
                 "--descriptions-path",
                 "artifacts/images_to_convert/Finale_Wurzelformen_V3.xml",
                 "--output-dir",
@@ -401,3 +427,26 @@ def test_snapshot_source_images_reports_unreadable_sources(
 
     with pytest.raises(AssertionError, match="AC9999_S"):
         _snapshot_source_images(["AC9999_S"], tmp_path / "snapshots")
+
+
+def test_copy_family_inputs_uses_disposable_copies(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    source_dir = tmp_path / "source"
+    source_dir.mkdir()
+    source_path = source_dir / "AC9999_S.jpg"
+    source_path.write_bytes(b"source-image")
+    monkeypatch.setattr(
+        __import__(__name__, fromlist=["SOURCE_IMAGES"]),
+        "SOURCE_IMAGES",
+        source_dir,
+    )
+
+    input_dir = _copy_family_inputs(
+        "AC9999", ["AC9999_S"], tmp_path / "conversion-input"
+    )
+    disposable_path = input_dir / source_path.name
+    assert disposable_path.read_bytes() == b"source-image"
+
+    disposable_path.unlink()
+    assert source_path.read_bytes() == b"source-image"

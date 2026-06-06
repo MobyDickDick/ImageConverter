@@ -66,6 +66,7 @@ def test_build_iteration_mode_runners_impl_wires_semantic_validation_collector()
     assert result == "semantic-ok"
     assert captured["collector_kwargs"]["sample"] == 1
     assert callable(captured["collector_kwargs"]["validate_badge_by_elements_fn"])
+    assert callable(captured["collector_kwargs"]["progress_fn"])
     assert captured["semantic_ok_kwargs"]["answer"] == 42
     assert callable(captured["semantic_ok_kwargs"]["build_semantic_ok_validation_log_lines_fn"])
 

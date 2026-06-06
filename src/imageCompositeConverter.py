@@ -1123,6 +1123,7 @@ class Action:
         max_rounds: int = 2,
         debug_out_dir: str | None = None,
         stop_when_error_below_threshold: bool = False,
+        progress_fn=None,
     ) -> list[str]:
         return Action.validateBadgeByElements(
             img_orig,
@@ -1130,6 +1131,7 @@ class Action:
             max_rounds=max_rounds,
             debug_out_dir=debug_out_dir,
             stop_when_error_below_threshold=stop_when_error_below_threshold,
+            progress_fn=progress_fn,
         )
 
     @staticmethod
@@ -2081,6 +2083,7 @@ class Action:
         debug_out_dir: str | None = None,
         apply_circle_geometry_penalty: bool = True,
         stop_when_error_below_threshold: bool = False,
+        progress_fn=None,
     ) -> list[str]:
         return element_validation_helpers.validateBadgeByElementsImpl(
             img_orig,
@@ -2110,10 +2113,12 @@ class Action:
             optimize_circle_radius_bracket_fn=Action._optimize_circle_radius_bracket,
             optimize_global_parameter_vector_sampling_fn=Action._optimize_global_parameter_vector_sampling,
             calculate_error_fn=Action.calculate_error,
+            calculate_delta2_stats_fn=Action.calculateDelta2Stats,
             activate_ac08_adaptive_locks_fn=Action._activateAc08AdaptiveLocks,
             release_ac08_adaptive_locks_fn=Action._release_ac08_adaptive_locks,
             optimize_element_color_bracket_fn=Action._optimize_element_color_bracket,
             apply_canonical_badge_colors_fn=Action._apply_canonical_badge_colors,
+            progress_fn=progress_fn,
         )
 
 
