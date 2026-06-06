@@ -229,6 +229,7 @@ def validateBadgeByElementsImpl(
     release_ac08_adaptive_locks_fn,
     optimize_element_color_bracket_fn,
     apply_canonical_badge_colors_fn,
+    progress_fn=None,
 ):
     if optimization_hooks is not None:
         optimize_element_width_bracket_fn = optimization_hooks.optimize_element_width_bracket_fn
@@ -452,6 +453,15 @@ def validateBadgeByElementsImpl(
     if params.get("draw_text", True):
         elements.append("text")
 
+    def _report_progress(message: str) -> None:
+        if progress_fn is not None:
+            elapsed = max(0.0, float(time_module.monotonic()) - validation_started_at)
+            progress_fn(f"[INFO] {variant_name}: {message} | Laufzeit={elapsed:.1f}s")
+
+    _report_progress(
+        f"Elementvalidierung gestartet | Runden={max_rounds}, Elemente={','.join(elements)}"
+    )
+
     radius_floor = float(params.get("min_circle_radius", params.get("r", 0.0)) or 0.0)
     radius_cap = float(params.get("max_circle_radius", params.get("r", 0.0)) or 0.0)
     narrow_locked_circle_only = (
@@ -542,6 +552,7 @@ def validateBadgeByElementsImpl(
     params["defer_connector_symmetry"] = True
 
     for round_idx in range(max_rounds):
+        _report_progress(f"Validierungsrunde {round_idx + 1}/{max_rounds} gestartet")
         if is_anchor_telemetry_test:
             logs.append(f"{anchor_telemetry_prefix} PHASE round_start round={round_idx + 1}")
         _maybe_anchor_heartbeat(phase="round_start", round_number=round_idx + 1)
@@ -572,6 +583,9 @@ def validateBadgeByElementsImpl(
 
         round_changed = False
         for element in elements:
+            _report_progress(
+                f"Runde {round_idx + 1}/{max_rounds}: optimiere Element '{element}'"
+            )
             if is_anchor_telemetry_test:
                 logs.append(f"{anchor_telemetry_prefix} PHASE element_start round={round_idx + 1} element={element}")
             _maybe_anchor_heartbeat(phase="element_loop", round_number=round_idx + 1, element=element)
@@ -761,6 +775,10 @@ def validateBadgeByElementsImpl(
         full_render = fit_to_original_size_fn(img_orig, render_svg_to_numpy_fn(full_svg, w, h))
         full_err = calculate_error_fn(img_orig, full_render)
         logs.append(f"Runde {round_idx + 1}: Gesamtfehler={full_err:.3f}")
+        _report_progress(
+            f"Validierungsrunde {round_idx + 1}/{max_rounds} abgeschlossen | "
+            f"Gesamtfehler={full_err:.3f}, Parameter geändert={'ja' if round_changed else 'nein'}"
+        )
         _log_deep_trace("round_end", round_number=round_idx + 1)
         previous_best_err = best_full_err
         improved_this_round = False

@@ -1123,6 +1123,7 @@ class Action:
         max_rounds: int = 2,
         debug_out_dir: str | None = None,
         stop_when_error_below_threshold: bool = False,
+        progress_fn=None,
     ) -> list[str]:
         return Action.validateBadgeByElements(
             img_orig,
@@ -2114,6 +2115,7 @@ class Action:
             release_ac08_adaptive_locks_fn=Action._release_ac08_adaptive_locks,
             optimize_element_color_bracket_fn=Action._optimize_element_color_bracket,
             apply_canonical_badge_colors_fn=Action._apply_canonical_badge_colors,
+            progress_fn=progress_fn,
         )
 
 

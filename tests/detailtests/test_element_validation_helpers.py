@@ -68,6 +68,7 @@ def test_validate_badge_by_elements_stops_on_stable_non_improvement_after_fallba
         "validation_stable_improvement_epsilon": 0.05,
     }
 
+    progress_messages: list[str] = []
     logs = element_validation_helpers.validateBadgeByElementsImpl(
         img,
         params,
@@ -100,7 +101,14 @@ def test_validate_badge_by_elements_stops_on_stable_non_improvement_after_fallba
         release_ac08_adaptive_locks_fn=lambda *_a, **_k: False,
         optimize_element_color_bracket_fn=lambda *_a, **_k: False,
         apply_canonical_badge_colors_fn=lambda _p: {},
+        progress_fn=progress_messages.append,
     )
 
+    assert progress_messages[0].startswith(
+        "[INFO] unknown: Elementvalidierung gestartet | Runden=3, Elemente=circle,text | Laufzeit="
+    )
+    assert any("Validierungsrunde 1/3 gestartet" in message for message in progress_messages)
+    assert any("optimiere Element 'circle'" in message for message in progress_messages)
+    assert any("Gesamtfehler=25.000" in message for message in progress_messages)
     assert any("stopped_due_to_stable_non_improvement" in line for line in logs)
     assert any("validation_abort_decision: stage=round_loop, reason=stable_non_improvement" in line for line in logs)

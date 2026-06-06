@@ -72,6 +72,7 @@ def buildIterationModeRunnersImpl(
             collect_semantic_badge_validation_logs_fn=lambda **log_kwargs: collect_semantic_badge_validation_logs_fn(
                 **log_kwargs,
                 validate_badge_by_elements_fn=validate_badge_by_elements_fn,
+                progress_fn=print_fn,
             ),
             prepare_semantic_badge_post_validation_fn=prepare_semantic_badge_post_validation_fn,
             append_semantic_connector_expectation_log_fn=append_semantic_connector_expectation_log_fn,

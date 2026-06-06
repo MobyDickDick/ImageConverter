@@ -16,6 +16,7 @@ def collectSemanticBadgeValidationLogsImpl(
     badge_validation_rounds: int,
     debug_dir: str | None,
     validate_badge_by_elements_fn,
+    progress_fn=None,
 ) -> list[str]:
     validation_logs: list[str] = [
         buildSemanticTextModeValidationLogLineImpl(
@@ -23,14 +24,13 @@ def collectSemanticBadgeValidationLogsImpl(
             text_mode=badge_params.get("text_mode", "unknown"),
         )
     ]
-    validation_logs.extend(
-        validate_badge_by_elements_fn(
-            perc_img,
-            badge_params,
-            max_rounds=max(1, int(badge_validation_rounds)),
-            debug_out_dir=debug_dir,
-        )
-    )
+    validation_kwargs = {
+        "max_rounds": max(1, int(badge_validation_rounds)),
+        "debug_out_dir": debug_dir,
+    }
+    if progress_fn is not None:
+        validation_kwargs["progress_fn"] = progress_fn
+    validation_logs.extend(validate_badge_by_elements_fn(perc_img, badge_params, **validation_kwargs))
     return validation_logs
 
 
