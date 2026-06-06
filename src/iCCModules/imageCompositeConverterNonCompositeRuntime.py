@@ -38,7 +38,6 @@ def _build_vector_placeholder_svg(width: int, height: int, *, description: str =
     )
 
 
-
 def _description_requests_diagonal_band(description: str) -> bool:
     text = (description or "").lower()
     return "diagon" in text and "links unten" in text and "rechts oben" in text
@@ -81,8 +80,6 @@ def _fit_diagonal_band_iterative(*, width: int, height: int, description: str, p
         if best is None or err < best[0]:
             best = (err, svg, rendered, stroke_w)
     return best
-
-
 
 
 def _gray_hex(value: float) -> str:
@@ -146,6 +143,9 @@ def _build_structured_symbol_svg(
     glyph_y_ratio: float,
     plus_half_ratio: float,
     minus_gap_ratio: float,
+    glyph_gray: float = 241.0,
+    diag_gray: float = 143.0,
+    border_gray: float = 154.0,
 ) -> str:
     safe_w = max(1, int(width or 1))
     safe_h = max(1, int(height or 1))
@@ -172,12 +172,12 @@ def _build_structured_symbol_svg(
         f'    <clipPath id="innerRect"><rect x="{inset}" y="{inset}" width="{safe_w-1}" height="{safe_h-1}"/></clipPath>\n'
         '  </defs>\n'
         f'{gradient_rects}'
-        f'  <rect x="{inset}" y="{inset}" width="{safe_w-1}" height="{safe_h-1}" fill="none" stroke="#9a9a9a" stroke-width="{border_thickness:.2f}"/>\n'
-        + (f'  <line x1="{safe_w-1}" y1="{inset}" x2="{inset}" y2="{safe_h-1}" stroke="#8f8f8f" stroke-width="{diag1_width:.2f}" clip-path="url(#innerRect)"/>\n' if diag1_width > 0 else '')
-        + (f'  <line x1="{inset}" y1="{inset}" x2="{safe_w-1}" y2="{safe_h-1}" stroke="#8f8f8f" stroke-width="{diag2_width:.2f}" clip-path="url(#innerRect)"/>\n' if diag2_width > 0 else '')
-        + f'  <line x1="{plus_cx-plus_half:.2f}" y1="{plus_cy:.2f}" x2="{plus_cx+plus_half:.2f}" y2="{plus_cy:.2f}" stroke="#f1f1f1" stroke-width="{plus_width:.2f}" stroke-linecap="round"/>\n'
-        + f'  <line x1="{plus_cx:.2f}" y1="{plus_cy-plus_half:.2f}" x2="{plus_cx:.2f}" y2="{plus_cy+plus_half:.2f}" stroke="#f1f1f1" stroke-width="{plus_width:.2f}" stroke-linecap="round"/>\n'
-        + (f'  <line x1="{minus_start_x:.2f}" y1="{minus_y:.2f}" x2="{minus_start_x+minus_half*1.8:.2f}" y2="{minus_y:.2f}" stroke="#f1f1f1" stroke-width="{minus_width:.2f}" stroke-linecap="round"/>\n' if minus_width > 0 else '')
+        f'  <rect x="{inset}" y="{inset}" width="{safe_w-1}" height="{safe_h-1}" fill="none" stroke="{_gray_hex(border_gray)}" stroke-width="{border_thickness:.2f}"/>\n'
+        + (f'  <line x1="{safe_w-1}" y1="{inset}" x2="{inset}" y2="{safe_h-1}" stroke="{_gray_hex(diag_gray)}" stroke-width="{diag1_width:.2f}" clip-path="url(#innerRect)"/>\n' if diag1_width > 0 else '')
+        + (f'  <line x1="{inset}" y1="{inset}" x2="{safe_w-1}" y2="{safe_h-1}" stroke="{_gray_hex(diag_gray)}" stroke-width="{diag2_width:.2f}" clip-path="url(#innerRect)"/>\n' if diag2_width > 0 else '')
+        + f'  <line x1="{plus_cx-plus_half:.2f}" y1="{plus_cy:.2f}" x2="{plus_cx+plus_half:.2f}" y2="{plus_cy:.2f}" stroke="{_gray_hex(glyph_gray)}" stroke-width="{plus_width:.2f}" stroke-linecap="round"/>\n'
+        + f'  <line x1="{plus_cx:.2f}" y1="{plus_cy-plus_half:.2f}" x2="{plus_cx:.2f}" y2="{plus_cy+plus_half:.2f}" stroke="{_gray_hex(glyph_gray)}" stroke-width="{plus_width:.2f}" stroke-linecap="round"/>\n'
+        + (f'  <line x1="{minus_start_x:.2f}" y1="{minus_y:.2f}" x2="{minus_start_x+minus_half*1.8:.2f}" y2="{minus_y:.2f}" stroke="{_gray_hex(glyph_gray)}" stroke-width="{minus_width:.2f}" stroke-linecap="round"/>\n' if minus_width > 0 else '')
         + '</svg>\n'
     )
 
@@ -250,16 +250,52 @@ def _derive_symbol_params_from_raster(*, width: int, height: int, perc_img) -> d
         "glyph_y_ratio": glyph_geometry["glyph_y_ratio"],
         "plus_half_ratio": glyph_geometry["plus_half_ratio"],
         "minus_gap_ratio": 1.8,
+        "glyph_gray": max(55.0, min(180.0, float(np.nanpercentile(lum[: max(1, int(h * 0.18)), : max(1, int(w * 0.40))], 15)))),
+        "diag_gray": max(70.0, min(170.0, float(np.nanpercentile(lum, 25)))),
+        "border_gray": max(80.0, min(180.0, float(np.nanpercentile(lum, 30)))),
     }
 
 
-def _candidate_window(current_value: float, offsets: tuple[float, ...], *, minimum: float, maximum: float) -> tuple[float, ...]:
-    values = [minimum, maximum]
+def _candidate_window(
+    current_value: float,
+    offsets: tuple[float, ...],
+    *,
+    minimum: float,
+    maximum: float,
+    include_limits: bool = True,
+) -> tuple[float, ...]:
+    values = [minimum, maximum] if include_limits else []
     for offset in offsets:
         values.append(max(minimum, min(maximum, float(current_value) + offset)))
     values.append(max(minimum, min(maximum, float(current_value))))
     return tuple(sorted({round(value, 4) for value in values}))
 
+
+def _weighted_symbol_candidate_error(
+    perc_img,
+    rendered,
+    *,
+    base_error: float,
+    key: str,
+) -> float:
+    if key not in {"plus_x_ratio", "glyph_y_ratio", "plus_half_ratio", "plus_width", "minus_gap_ratio", "minus_width", "glyph_gray"}:
+        return float(base_error)
+    try:
+        target = np.asarray(perc_img, dtype=np.float32)
+        candidate = np.asarray(rendered, dtype=np.float32)
+    except (TypeError, ValueError):
+        return float(base_error)
+    if target.shape[:2] != candidate.shape[:2] or target.size == 0 or candidate.size == 0:
+        return float(base_error)
+    h, w = target.shape[:2]
+    y_end = max(1, min(h, int(round(h * 0.24))))
+    x_end = max(1, min(w, int(round(w * 0.58))))
+    target_roi = target[:y_end, :x_end]
+    candidate_roi = candidate[:y_end, :x_end]
+    if target_roi.size == 0 or candidate_roi.size == 0:
+        return float(base_error)
+    roi_error = float(np.mean(np.abs(target_roi - candidate_roi)))
+    return float(base_error) + roi_error * 1.6
 
 def _fit_symbol_element_by_element(
     *,
@@ -273,26 +309,31 @@ def _fit_symbol_element_by_element(
     # Element-wise refinement order requested by project idea.  Position and
     # size windows are centered on raster measurements so AC0100-like variants
     # are fitted from the image evidence instead of from one fixed sample pose.
-    refinement_steps: list[tuple[str, tuple[float, ...]]] = [
+    refinement_steps: list[tuple[str, tuple[float | str, ...]]] = [
         ("border_thickness", (0.8, 1.0, 1.2, 1.4, 1.8)),
         ("gradient_center", (40.0, 45.0, 50.0, 55.0, 60.0)),
         ("diag1_width", (0.0, 1.0, 1.4, 1.8, 2.2, 2.8)),
         ("diag2_width", (0.0, 1.0, 1.4, 1.8, 2.2, 2.8)),
         (
             "plus_x_ratio",
-            _candidate_window(float(current["plus_x_ratio"]), (-0.08, -0.04, 0.0, 0.04, 0.08), minimum=0.05, maximum=0.55),
+            _candidate_window(float(current["plus_x_ratio"]), (-0.08, -0.04, 0.0, 0.04, 0.08), minimum=0.05, maximum=0.55, include_limits=False),
         ),
         (
             "glyph_y_ratio",
-            _candidate_window(float(current["glyph_y_ratio"]), (-0.08, -0.04, 0.0, 0.04, 0.08), minimum=0.05, maximum=0.45),
+            _candidate_window(float(current["glyph_y_ratio"]), (-0.08, -0.04, 0.0, 0.04, 0.08), minimum=0.05, maximum=0.45, include_limits=False),
         ),
         (
             "plus_half_ratio",
-            _candidate_window(float(current["plus_half_ratio"]), (-0.03, -0.015, 0.0, 0.015, 0.03), minimum=0.04, maximum=0.16),
+            _candidate_window(float(current["plus_half_ratio"]), (-0.03, -0.015, 0.0, 0.015, 0.03), minimum=0.04, maximum=0.16, include_limits=False),
         ),
         ("plus_width", (0.8, 1.0, 1.2, 1.6, 2.2)),
         ("minus_gap_ratio", (1.5, 1.8, 2.1)),
         ("minus_width", (0.0, 0.8, 1.0, 1.2, 1.6, 2.2)),
+        ("glyph_gray", (55.0, 70.0, 85.0, 100.0, 115.0, 130.0, 150.0, 180.0, 210.0, 241.0)),
+        ("diag_gray", (80.0, 95.0, 110.0, 125.0, 143.0, 160.0, 180.0)),
+        ("border_gray", (90.0, 110.0, 130.0, 154.0, 170.0, 190.0)),
+        ("gradient_edge", tuple(_gray_hex(v) for v in (70.0, 85.0, 100.0, 110.0, 120.0, 135.0, 150.0))),
+        ("gradient_mid", tuple(_gray_hex(v) for v in (190.0, 205.0, 220.0, 235.0, 245.0, 250.0))),
     ]
     step_logs: list[str] = []
     best: tuple[float, str, object] | None = None
@@ -306,13 +347,14 @@ def _fit_symbol_element_by_element(
             if rendered is None:
                 continue
             err = calculate_error_fn(perc_img, rendered)
-            if local_best is None or err < local_best[0]:
-                local_best = (err, candidate_value, svg, rendered)
+            score = _weighted_symbol_candidate_error(perc_img, rendered, base_error=err, key=key)
+            if local_best is None or score < local_best[0]:
+                local_best = (score, err, candidate_value, svg, rendered)
         if local_best is None:
             continue
-        current[key] = local_best[1]
-        step_logs.append(f"step_{key}={local_best[1]}")
-        best = (local_best[0], local_best[2], local_best[3])
+        current[key] = local_best[2]
+        step_logs.append(f"step_{key}={local_best[2]}")
+        best = (local_best[1], local_best[3], local_best[4])
     if best is None:
         return None
     return best[0], best[1], best[2], current, step_logs
@@ -670,6 +712,7 @@ def runNonCompositeIterationImpl(
         )
         return None
 
+    description_driven_algorithm_available = False
     if stripe_strategy:
         print_fn("  -> Fallback aktiv: verwende Gradient-Stripe-Strategie.")
         svg_content = build_gradient_stripe_svg_fn(width, height, stripe_strategy)
@@ -695,6 +738,7 @@ def runNonCompositeIterationImpl(
             )
             else None
         )
+        description_driven_algorithm_available = geometry_ir_svg is not None
         if perception_seeded is not None or geometry_ir_svg is not None:
             candidates: list[dict[str, object]] = []
             if perception_seeded is not None:
@@ -706,17 +750,17 @@ def runNonCompositeIterationImpl(
                         svg_content=seeded_svg,
                         params_snapshot=params,
                     )
-                    return None
-                candidates.append(
-                    {
-                        "status": "non_composite_perception_seeded_geometry_ir",
-                        "svg": seeded_svg,
-                        "rendered": seeded_rendered,
-                        "error": calculate_error_fn(perc_img, seeded_rendered),
-                        "geometry_ir": seeded_ir,
-                        "perception_seed_count": perception_seed_count,
-                    }
-                )
+                else:
+                    candidates.append(
+                        {
+                            "status": "non_composite_perception_seeded_geometry_ir",
+                            "svg": seeded_svg,
+                            "rendered": seeded_rendered,
+                            "error": calculate_error_fn(perc_img, seeded_rendered),
+                            "geometry_ir": seeded_ir,
+                            "perception_seed_count": perception_seed_count,
+                        }
+                    )
             if geometry_ir_svg is not None:
                 description_rendered = render_svg_to_numpy_fn(geometry_ir_svg, width, height)
                 if description_rendered is None:
@@ -725,17 +769,17 @@ def runNonCompositeIterationImpl(
                         svg_content=geometry_ir_svg,
                         params_snapshot=params,
                     )
-                    return None
-                candidates.append(
-                    {
-                        "status": "non_composite_description_geometry_ir",
-                        "svg": geometry_ir_svg,
-                        "rendered": description_rendered,
-                        "error": calculate_error_fn(perc_img, description_rendered),
-                        "geometry_ir": description_geometry_ir,
-                        "perception_seed_count": 0,
-                    }
-                )
+                else:
+                    candidates.append(
+                        {
+                            "status": "non_composite_description_geometry_ir",
+                            "svg": geometry_ir_svg,
+                            "rendered": description_rendered,
+                            "error": calculate_error_fn(perc_img, description_rendered),
+                            "geometry_ir": description_geometry_ir,
+                            "perception_seed_count": 0,
+                        }
+                    )
             try:
                 best_structured = _fit_symbol_element_by_element(
                     width=width,
@@ -760,6 +804,8 @@ def runNonCompositeIterationImpl(
                         "step_logs": step_logs,
                     }
                 )
+            if not candidates:
+                return None
             best_geometry_candidate = min(candidates, key=lambda candidate: float(candidate["error"]))
             svg_content = str(best_geometry_candidate["svg"])
             svg_rendered = best_geometry_candidate["rendered"]
@@ -798,6 +844,7 @@ def runNonCompositeIterationImpl(
                     )
             write_validation_log_fn(log_lines)
         else:
+            description_driven_algorithm_available = False
             try:
                 best_structured = _fit_symbol_element_by_element(
                     width=width,
@@ -843,7 +890,7 @@ def runNonCompositeIterationImpl(
             return None
         svg_err = calculate_error_fn(perc_img, svg_rendered)
 
-    if sample_svg:
+    if sample_svg and not description_driven_algorithm_available:
         sample_svg_path, sample_svg_content = sample_svg
         sample_rendered = render_svg_to_numpy_fn(sample_svg_content, width, height)
         if sample_rendered is not None:

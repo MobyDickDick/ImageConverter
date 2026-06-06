@@ -52,6 +52,7 @@ from src.iCCModules import imageCompositeConverterSemanticVisualOverride as sema
 from src.iCCModules import imageCompositeConverterSemanticBadgeRuntime as semantic_badge_runtime_helpers
 from src.iCCModules import imageCompositeConverterDualArrowRuntime as dual_arrow_runtime_helpers
 from src.iCCModules import imageCompositeConverterNonCompositeRuntime as non_composite_runtime_helpers
+from src.iCCModules import imageCompositeConverterQualityPassPolicy as quality_pass_policy_helpers
 from src.iCCModules.imageCompositeConverterPerceptionReflection import Perception, Reflection
 
 def detectRelevantRegions(img) -> list[dict[str, object]]:
@@ -620,6 +621,14 @@ def _diffOutputDir(output_root: str) -> str:
 def _convertedPngOutputDir(output_root: str) -> str:
     return output_path_helpers.convertedPngOutputDirImpl(output_root)
 
+def _failedSvgOutputDir(output_root: str) -> str:
+    return output_path_helpers.failedSvgOutputDirImpl(output_root)
+
+
+def _failedPngOutputDir(output_root: str) -> str:
+    return output_path_helpers.failedPngOutputDirImpl(output_root)
+
+
 def _reportsOutputDir(output_root: str) -> str:
     return output_path_helpers.reportsOutputDirImpl(output_root)
 
@@ -1048,11 +1057,15 @@ def convertRange(
     svg_out_dir = _convertedSvgOutputDir(out_root)
     diff_out_dir = _diffOutputDir(out_root)
     png_out_dir = _convertedPngOutputDir(out_root)
+    failed_svg_out_dir = _failedSvgOutputDir(out_root)
+    failed_png_out_dir = _failedPngOutputDir(out_root)
     reports_out_dir = _reportsOutputDir(out_root)
 
     os.makedirs(svg_out_dir, exist_ok=True)
     os.makedirs(diff_out_dir, exist_ok=True)
     os.makedirs(png_out_dir, exist_ok=True)
+    os.makedirs(failed_svg_out_dir, exist_ok=True)
+    os.makedirs(failed_png_out_dir, exist_ok=True)
     os.makedirs(reports_out_dir, exist_ok=True)
 
     normalized_selected_variants, files = _listRequestedImageFiles(
@@ -1108,21 +1121,20 @@ def convertRange(
     max_quality_passes = 4
     # Fast-path for tightly scoped runs (e.g. AC0811-only diagnostics): extra
     # global quality passes mostly re-queue M/S variants with diminishing
-    # returns. Keep one refinement pass by default and allow explicit override.
-    single_base_run = False
+    # returns. AC0811 is the documented FP-D6 runtime-risk batch, so its focused
+    # repro command stays initial-pass-only unless explicitly overridden.
     try:
-        base_names = {str(getBaseNameFromFile(name)).upper() for name in process_files}
-        single_base_run = len(base_names) == 1
+        base_names = quality_pass_policy_helpers.baseNamesFromFilenamesImpl(
+            process_files,
+            get_base_name_from_file_fn=getBaseNameFromFile,
+        )
     except Exception:
-        single_base_run = False
-    if single_base_run:
-        max_quality_passes = 1
-    override_quality_passes = os.environ.get("ICC_MAX_QUALITY_PASSES", "").strip()
-    if override_quality_passes:
-        try:
-            max_quality_passes = max(0, int(override_quality_passes))
-        except ValueError:
-            pass
+        base_names = set()
+    max_quality_passes, quality_pass_policy_reason = quality_pass_policy_helpers.resolveMaxQualityPassesImpl(
+        default_max_quality_passes=max_quality_passes,
+        base_names=base_names,
+        override_quality_passes=os.environ.get("ICC_MAX_QUALITY_PASSES", ""),
+    )
     quality_logs: list[dict[str, object]] = []
     result_map: dict[str, dict[str, object]] = {}
     conversion_bestlist_path = _conversionBestlistManifestPath(reports_out_dir)

@@ -1149,15 +1149,159 @@ def test_parse_description_marks_ac0844_as_rf_right_arm_badge() -> None:
     assert "SEMANTIC: waagrechter Strich rechts vom Kreis" in list(params.get("elements", []))
 
 
-def test_parse_description_marks_ac0800_as_plain_ring_family() -> None:
-    """AC0800 should remain a semantic plain ring even without text clues in the XML."""
-    ref = image_composite_converter.Reflection({})
+def test_make_badge_params_ac0862_uses_left_arm_rf_geometry() -> None:
+    """AC0862 defaults must render the rF badge with the left horizontal connector."""
+    params = image_composite_converter.Action.make_badge_params(25, 15, "AC0862")
 
-    _desc, params = ref.parse_description("AC0800", "AC0800_M.jpg")
+    assert params is not None
+    assert bool(params.get("arm_enabled", False))
+    assert not bool(params.get("stem_enabled", False))
+    assert float(params.get("arm_x1", 1.0)) <= 0.01
+    assert float(params.get("arm_x2", 0.0)) < float(params.get("cx", 999.0))
+    assert abs(float(params.get("arm_y2", 0.0)) - float(params.get("arm_y1", 0.0))) <= 0.01
+    assert str(params.get("text_mode", "")).lower() == "rf"
+    assert params.get("label") == "rF"
+
+
+def test_parse_description_marks_ac0862_as_rf_left_arm_badge() -> None:
+    """AC0862 descriptions should activate the rF left-arm connector family."""
+    ref = image_composite_converter.Reflection(
+        {
+            "AC0862": (
+                'Grauer Kreis mit grauem Rand und hellgrauem Hintergrund '
+                'Abweichung: mit Text "rF" (relative Feuchtigkeit) '
+                'Abweichung: mit Griff (dunkelgraue Linie nach unten) '
+                'Abweichung: nach rechts gedreht, Text immer noch horizontal.'
+            )
+        }
+    )
+
+    _desc, params = ref.parse_description("AC0862_S", "AC0862_S.jpg")
 
     assert params["mode"] == "semantic_badge"
-    assert params["label"] in {"", "M"}
-    assert "SEMANTIC: Kreis ohne Buchstabe" in list(params.get("elements", []))
+    assert params["label"] == "rF"
+    assert "SEMANTIC: Kreis + Buchstabe rF" in list(params.get("elements", []))
+    assert "SEMANTIC: waagrechter Strich links vom Kreis" in list(params.get("elements", []))
+
+
+def test_make_badge_params_ac0861_uses_lower_stem_rf_geometry() -> None:
+    """AC0861 defaults must render the rF badge with a lower vertical connector."""
+    params = image_composite_converter.Action.make_badge_params(15, 25, "AC0861")
+
+    assert params is not None
+    assert bool(params.get("stem_enabled", False))
+    assert not bool(params.get("arm_enabled", False))
+    assert float(params.get("stem_bottom", 0.0)) > float(params.get("stem_top", 0.0))
+    assert str(params.get("text_mode", "")).lower() == "rf"
+    assert params.get("label") == "rF"
+
+
+def test_parse_description_marks_ac0861_as_rf_lower_stem_badge() -> None:
+    """AC0861 descriptions should activate the rF lower-stem connector family."""
+    ref = image_composite_converter.Reflection(
+        {
+            "AC0861": (
+                'Grauer Kreis mit grauem Rand und hellgrauem Hintergrund '
+                'Abweichung: mit Text "rF" (relative Feuchtigkeit) '
+                'Abweichung: mit Griff (dunkelgraue Linie nach unten). '
+                'Der Griff liegt auf einer Symmetrieachse des Kreises.'
+            )
+        }
+    )
+
+    _desc, params = ref.parse_description("AC0861_S", "AC0861_S.jpg")
+
+    assert params["mode"] == "semantic_badge"
+    assert params["label"] == "rF"
+    assert "SEMANTIC: Kreis + Buchstabe rF" in list(params.get("elements", []))
+    assert "SEMANTIC: senkrechter Strich hinter dem Kreis" in list(params.get("elements", []))
+
+
+def test_make_badge_params_ac0863_uses_upper_arm_rf_geometry() -> None:
+    """AC0863 defaults must render the rF badge with an upper vertical connector."""
+    params = image_composite_converter.Action.make_badge_params(15, 25, "AC0863")
+
+    assert params is not None
+    assert bool(params.get("arm_enabled", False))
+    assert not bool(params.get("stem_enabled", False))
+    assert abs(float(params.get("arm_x2", 0.0)) - float(params.get("arm_x1", 0.0))) <= 0.01
+    assert float(params.get("arm_y1", 999.0)) <= 0.01
+    assert float(params.get("arm_y2", 999.0)) < float(params.get("cy", 0.0))
+    assert str(params.get("text_mode", "")).lower() == "rf"
+    assert params.get("label") == "rF"
+
+
+def test_make_badge_params_ac0864_uses_right_arm_rf_geometry() -> None:
+    """AC0864 defaults must mirror AC0862 into the right horizontal connector."""
+    params = image_composite_converter.Action.make_badge_params(25, 15, "AC0864")
+
+    assert params is not None
+    assert bool(params.get("arm_enabled", False))
+    assert not bool(params.get("stem_enabled", False))
+    assert float(params.get("arm_x1", 0.0)) > float(params.get("cx", 0.0))
+    assert float(params.get("arm_x2", 0.0)) >= 24.99
+    assert abs(float(params.get("arm_y2", 0.0)) - float(params.get("arm_y1", 0.0))) <= 0.01
+    assert str(params.get("text_mode", "")).lower() == "rf"
+    assert params.get("label") == "rF"
+
+
+def test_parse_description_marks_ac0864_as_rf_right_arm_badge() -> None:
+    """AC0864 descriptions should activate the mirrored rF right-arm family."""
+    ref = image_composite_converter.Reflection(
+        {
+            "AC0862": (
+                'Grauer Kreis mit grauem Rand und hellgrauem Hintergrund '
+                'Abweichung: mit Text "rF" (relative Feuchtigkeit) '
+                'Abweichung: nach rechts gedreht, Text immer noch horizontal.'
+            ),
+            "AC0864": "Wie AC0862. Geometrische Variante: Horizontal gespiegelt.",
+        }
+    )
+
+    _desc, params = ref.parse_description("AC0864_S", "AC0864_S.jpg")
+
+    assert params["mode"] == "semantic_badge"
+    assert params["label"] == "rF"
+    assert "SEMANTIC: Kreis + Buchstabe rF" in list(params.get("elements", []))
+    assert "SEMANTIC: waagrechter Strich rechts vom Kreis" in list(params.get("elements", []))
+    assert "SEMANTIC: waagrechter Strich links vom Kreis" not in list(params.get("elements", []))
+
+
+def test_parse_description_marks_ac0863_as_rf_upper_arm_badge() -> None:
+    """AC0863 descriptions should activate the rF upper vertical connector family."""
+    ref = image_composite_converter.Reflection(
+        {
+            "AC0842": (
+                'Grauer Kreis mit grauem Rand und hellgrauem Hintergrund '
+                'Abweichung: mit Text "rF" (relative Feuchtigkeit) '
+                'Abweichung: mit Griff (dunkelgraue Linie nach unten) '
+                'Abweichung: nach rechts gedreht, Text immer noch horizontal.'
+            ),
+            "AC0863": 'Wie AC0842, jecoch nach rechts gedreht, Text immer noch horizontal',
+        }
+    )
+
+    _desc, params = ref.parse_description("AC0863_S", "AC0863_S.jpg")
+
+    assert params["mode"] == "semantic_badge"
+    assert params["label"] == "rF"
+    assert "SEMANTIC: Kreis + Buchstabe rF" in list(params.get("elements", []))
+    assert "SEMANTIC: senkrechter Strich oben vom Kreis" in list(params.get("elements", []))
+
+
+@pytest.mark.parametrize("variant", ["AC0800_L", "AC0800_M", "AC0800_S"])
+def test_parse_description_marks_ac0800_as_plain_ring_family(variant: str) -> None:
+    """AC0800 variants should derive plain-ring semantics from the family rule alone."""
+    ref = image_composite_converter.Reflection({})
+
+    _desc, params = ref.parse_description(variant, f"{variant}.jpg")
+
+    assert params["mode"] == "semantic_badge"
+    assert params["label"] == ""
+    assert params["contract_status"] == "family_rule"
+    assert params["semantic_sources"]["family_rule"] == ["SEMANTIC: Kreis ohne Buchstabe"]
+    assert params["semantic_sources"]["description_heuristic"] == []
+    assert list(params.get("elements", [])) == ["SEMANTIC: Kreis ohne Buchstabe"]
 
 
 def test_parse_description_recognizes_ac08_family_when_given_variant_name() -> None:
@@ -1367,8 +1511,9 @@ def test_finalize_ac0800_preserves_plain_ring_geometry_bounds() -> None:
 
     assert params["lock_circle_cx"] is True
     assert params["lock_circle_cy"] is True
-    assert float(params["min_circle_radius"]) >= (10.8 * 0.96) - 0.01
-    assert float(params["max_circle_radius"]) <= (10.8 * 1.15) + 0.01
+    assert float(params["min_circle_radius"]) == pytest.approx(float(params["r"]))
+    assert float(params["max_circle_radius"]) == pytest.approx(float(params["r"]))
+    assert params["plain_ac0800_ring"] is True
 
 
 def test_finalize_ac0800_small_variant_keeps_template_radius_floor() -> None:
@@ -2646,7 +2791,7 @@ def test_convert_range_accepts_quality_pass_when_mean_delta2_improves(
     monkeypatch.setattr(image_composite_converter, "_writeQualityConfig", lambda *_args, **_kwargs: None)
     monkeypatch.setattr(image_composite_converter, "_harmonizeSemanticSizeVariants", lambda *_args, **_kwargs: None)
     monkeypatch.setattr(image_composite_converter, "_writePixelDelta2Ranking", lambda *_args, **_kwargs: None)
-    monkeypatch.setattr(image_composite_converter, "_selectOpenQualityCases", lambda rows, **_kwargs: list(rows))
+    monkeypatch.setattr(image_composite_converter, "_selectOpenQualityCases", lambda _rows, **_kwargs: [])
     monkeypatch.setattr(image_composite_converter, "_selectMiddleLowerTercile", lambda _rows: [])
     monkeypatch.setattr(image_composite_converter, "_tryTemplateTransfer", lambda **_kwargs: (None, None))
 
@@ -2715,7 +2860,7 @@ def test_convert_range_rejects_quality_pass_regression_and_keeps_previous_output
     monkeypatch.setattr(image_composite_converter, "_writeQualityConfig", lambda *_args, **_kwargs: None)
     monkeypatch.setattr(image_composite_converter, "_harmonizeSemanticSizeVariants", lambda *_args, **_kwargs: None)
     monkeypatch.setattr(image_composite_converter, "_writePixelDelta2Ranking", lambda *_args, **_kwargs: None)
-    monkeypatch.setattr(image_composite_converter, "_selectOpenQualityCases", lambda rows, **_kwargs: list(rows))
+    monkeypatch.setattr(image_composite_converter, "_selectOpenQualityCases", lambda _rows, **_kwargs: [])
     monkeypatch.setattr(image_composite_converter, "_selectMiddleLowerTercile", lambda _rows: [])
     monkeypatch.setattr(image_composite_converter, "_tryTemplateTransfer", lambda **_kwargs: (None, None))
 
@@ -5891,17 +6036,32 @@ def test_make_badge_params_keeps_ac0838_m_circle_near_full_width_for_voc_layout(
     assert float(params["cy"]) >= 24.0
 
 
-def test_detect_semantic_primitives_reports_family_circle_fallback_source(monkeypatch: pytest.MonkeyPatch) -> None:
-    """Semantic primitive detection should expose when AC08 small-family fallback provided circle evidence."""
+@pytest.mark.parametrize(
+    ("variant", "image_path", "symbol"),
+    [
+        ("AC0811_S", "artifacts/images_to_convert/nonconvertable/AC0811_S.jpg", "AC0811"),
+        ("AC0814_S", "artifacts/images_to_convert/AC0814_S.jpg", "AC0814"),
+        ("AC0870_S", "artifacts/images_to_convert/AC0870_S.jpg", "AC0870"),
+    ],
+)
+def test_detect_semantic_primitives_reports_small_circle_family_fallback_source(
+    variant: str,
+    image_path: str,
+    symbol: str,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Priority AC08 small-circle variants should expose family fallback circle evidence."""
     if image_composite_converter.np is None or image_composite_converter.cv2 is None:
         pytest.skip("numpy/cv2 not available in this environment")
 
     cv2 = image_composite_converter.cv2
-    img = cv2.imread("artifacts/images_to_convert/AC0814_S.jpg")
-    assert img is not None
+    img = cv2.imread(image_path)
+    if img is None:
+        pytest.skip(f"{variant} fixture image not available")
 
-    params = Action.make_badge_params(img.shape[1], img.shape[0], "AC0814", img)
+    params = Action.make_badge_params(img.shape[1], img.shape[0], symbol, img)
     assert params is not None
+    params["variant_name"] = variant
 
     monkeypatch.setattr(cv2, "HoughCircles", lambda *args, **kwargs: None)
     monkeypatch.setattr(Action, "_circle_from_foreground_mask", staticmethod(lambda _mask: None))
@@ -6532,6 +6692,15 @@ def test_local_workflow_doc_tracks_current_commands() -> None:
     assert "python -m pip install pytest" in workflow_doc
     assert "python -m pip install pytest" in ci_workflow
     assert ci_workflow.count("python -m pip install pytest") >= 3
+    assert "./tools/run_test_evidence.sh" in workflow_doc
+    assert "./tools/run_test_evidence.sh" in ci_workflow
+    assert "artifacts/test-evidence/completion-profile.log" in workflow_doc
+    assert "artifacts/test-evidence/completion-profile.log" in ci_workflow
+    assert "artifacts/test-evidence/completion-profile-summary.md" in workflow_doc
+    assert "artifacts/test-evidence/completion-profile-summary.md" in ci_workflow
+    assert "completion-profile-test-evidence" in workflow_doc
+    assert "completion-profile-test-evidence" in ci_workflow
+    assert "if-no-files-found: error" in ci_workflow
     assert "./tools/run_local_completion_checks.sh" in ci_workflow
     assert "batch-artifact-drift-gate:" in ci_workflow
     assert "drift_status=pass" in ci_workflow

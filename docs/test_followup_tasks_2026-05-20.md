@@ -111,7 +111,7 @@ Alles andere (skip/deselect/xfail/warnings) wird hier als explizite Aufgabe gef�
 - [x] Die 5 Warnungen (aktuell `SwigPyPacked/SwigPyObject/swigvarlink` Deprecations) technisch bewerten. (2026-05-21: Warnungsbild in `pytest --collect-only` und Zieltestlauf bestätigt; Quelle ist weiterhin `<frozen importlib._bootstrap>:241` über PyMuPDF/SWIG-Bindings.)
 - [ ] Entweder:
   - [ ] Ursache beheben (Abhängigkeiten/Bindings aktualisieren), oder
-  - [ ] temporär als bekannte, explizit erlaubte Warnungen dokumentieren.
+  - [x] temporär als bekannte, explizit erlaubte Warnungen dokumentieren. (2026-06-03 Run NO: enge `pytest.ini`-Allowlist für die drei bekannten PyMuPDF/SWIG-Deprecation-Meldungen ergänzt; Triage und Recovery-Plan in `docs/non_green_triage_2026-06-03_runNO.md`.)
 - [ ] Mittelfristig CI-Profil mit `-W error` für `core-green` vorbereiten.
 
 
@@ -183,8 +183,8 @@ Ein Test zählt nur als **wirklich grün**, wenn er:
 
 - [ ] **A3-FU3 (Baseline-Guard im Testpfad):** Vor dem Aufruf von `converter.main(...)` sicherstellen, dass der erwartete Eingabeordner `artifacts/regression_baseline/satisfactory/images` existiert und mindestens eine verwertbare Datei enthält; andernfalls deterministisch mit klarer Setup-Fehlermeldung abbrechen.
   - **Akzeptanzkriterium:** Der A3-Repro endet in 2 direkten Wiederholungen ohne `FileNotFoundError`; Ergebnis ist entweder valider Assert-Lauf oder klarer, reproduzierbarer Setup-Fehler mit finalem Pytest-Summary.
-- [ ] **A4-FU1 (Warnungen im A3-Repro auflösen/klassifizieren):** Die weiterhin sichtbaren 5 SWIG-Deprecation-Warnungen im A3-Repro entweder technisch beheben oder explizit als erlaubte Übergangswarnungen dokumentieren.
-  - **Akzeptanzkriterium:** A3-Repro liefert entweder `0 warnings` oder eine verlinkte Allowlist-Entscheidung inkl. Begründung pro Warnungstyp.
+- [x] **A4-FU1 (Warnungen im A3-Repro auflösen/klassifizieren):** Die weiterhin sichtbaren 5 SWIG-Deprecation-Warnungen im A3-Repro entweder technisch beheben oder explizit als erlaubte Übergangswarnungen dokumentieren. (2026-06-03 Run NO: als externe PyMuPDF/SWIG-Übergangswarnungen klassifiziert und in `pytest.ini` eng allowlisted; siehe `docs/non_green_triage_2026-06-03_runNO.md`.)
+  - **Akzeptanzkriterium:** A3-Repro liefert entweder `0 warnings` oder eine verlinkte Allowlist-Entscheidung inkl. Begründung pro Warnungstyp. (Erfüllt durch `docs/non_green_triage_2026-06-03_runNO.md`; technische Entfernung bleibt nach Dependency-Upgrade zu prüfen.)
 - [ ] **A1-FU3 (Skip-Pfad nach Baseline-Fix verifizieren):** Nach Bereitstellung der Baseline den Fall `No baseline variants found.` gezielt reproen und als expliziten Skip-Kandidaten (NodeID + Entscheidungsweg) dokumentieren.
   - **Akzeptanzkriterium:** Für den Skip-Text liegt ein reproduzierbarer NodeID-Lauf mit dokumentierter Einordnung „Fixture bereitstellen“ oder „optional markieren" vor.
 

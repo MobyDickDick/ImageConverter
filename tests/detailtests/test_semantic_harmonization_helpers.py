@@ -117,6 +117,12 @@ def test_harmonize_semantic_size_variants_writes_catalog_and_harmonized_svg(tmp_
     assert "prototype_group" in catalog_text
     assert "geometry_signature_delta" in catalog_text
     assert "text_orientation_policy" in catalog_text
+    metrics_path = tmp_path / "reports" / "family_consistency_metrics.csv"
+    assert metrics_path.exists()
+    metrics_text = metrics_path.read_text(encoding="utf-8")
+    assert "intra_family_max_delta" in metrics_text
+    assert "prototype_max_delta" in metrics_text
+    assert "AC9999;AC9999_L|AC9999_M;base:AC9999" in metrics_text
     assert (tmp_path / "reports" / "variant_harmonization.log").exists()
 
 
@@ -173,3 +179,115 @@ def test_harmonize_semantic_size_variants_uses_cross_family_prototype_anchor(tmp
     )
 
     assert any(call.startswith("AC0811_") for call in scale_calls)
+
+
+def test_harmonize_semantic_size_variants_reports_cross_family_ring_hypothesis_rejected_by_text_topology(tmp_path) -> None:
+    folder_path = str(tmp_path / "images")
+    svg_out_dir = str(tmp_path / "svg")
+    reports_out_dir = str(tmp_path / "reports")
+    os.makedirs(folder_path)
+    os.makedirs(svg_out_dir)
+    os.makedirs(reports_out_dir)
+
+    results = [
+        {"base": "AC0800", "variant": "AC0800_L", "filename": "AC0800_L.jpg", "error": 1.0},
+        {"base": "AC0820", "variant": "AC0820_L", "filename": "AC0820_L.jpg", "error": 1.0},
+    ]
+
+    class _Cv2Stub:
+        @staticmethod
+        def imread(_path):
+            return object()
+
+    def _read_svg_geometry(path: str):
+        variant = os.path.splitext(os.path.basename(path))[0]
+        draw_text = variant.startswith("AC0820")
+        params = {
+            "circle_enabled": True,
+            "draw_text": draw_text,
+            "text_mode": "co2" if draw_text else "",
+            "stem_enabled": False,
+            "arm_enabled": False,
+        }
+        return 30, 30, params
+
+    semantic_harmonization_helpers.harmonizeSemanticSizeVariantsImpl(
+        results=results,
+        folder_path=folder_path,
+        svg_out_dir=svg_out_dir,
+        reports_out_dir=reports_out_dir,
+        read_svg_geometry_fn=_read_svg_geometry,
+        normalized_geometry_signature_fn=lambda _w, _h, _params: {"cx": 0.5, "cy": 0.5, "r": 0.4},
+        max_signature_delta_fn=lambda _a, _b: 0.0,
+        harmonization_anchor_priority_fn=lambda _suffix, _prefer_large: 0,
+        family_harmonized_badge_colors_fn=lambda _rows: {
+            "fill_gray": 200,
+            "stroke_gray": 120,
+            "text_gray": 110,
+            "stem_gray": 110,
+        },
+        scale_badge_params_fn=lambda _a, _aw, _ah, _tw, _th, **_kwargs: {},
+        generate_badge_svg_fn=lambda _w, _h, _params: "<svg/>",
+        render_svg_to_numpy_fn=lambda _svg, _w, _h: object(),
+        calculate_error_fn=lambda _target, _rendered: 1.0,
+        cv2_module=_Cv2Stub(),
+    )
+
+    metrics_text = (tmp_path / "reports" / "cross_family_hypothesis_metrics.csv").read_text(encoding="utf-8")
+    assert "hypothesis_group;bases;variants;max_geometry_delta;topology_signature_count" in metrics_text
+    assert "ac08_ring_scale_no_geometry_change;AC0800,AC0820;AC0800_L|AC0820_L;0.0000;2;" in metrics_text
+    assert metrics_text.rstrip().endswith(";rejected")
+
+
+def test_harmonize_semantic_size_variants_reports_cross_family_rotation_hypothesis_confirmed(tmp_path) -> None:
+    folder_path = str(tmp_path / "images")
+    svg_out_dir = str(tmp_path / "svg")
+    reports_out_dir = str(tmp_path / "reports")
+    os.makedirs(folder_path)
+    os.makedirs(svg_out_dir)
+    os.makedirs(reports_out_dir)
+
+    results = [
+        {"base": "AC0811", "variant": "AC0811_L", "filename": "AC0811_L.jpg", "error": 1.0},
+        {"base": "AC0812", "variant": "AC0812_L", "filename": "AC0812_L.jpg", "error": 1.0},
+    ]
+
+    class _Cv2Stub:
+        @staticmethod
+        def imread(_path):
+            return object()
+
+    def _read_svg_geometry(_path: str):
+        return 30, 30, {
+            "circle_enabled": True,
+            "draw_text": True,
+            "text_mode": "path",
+            "stem_enabled": True,
+            "arm_enabled": False,
+        }
+
+    semantic_harmonization_helpers.harmonizeSemanticSizeVariantsImpl(
+        results=results,
+        folder_path=folder_path,
+        svg_out_dir=svg_out_dir,
+        reports_out_dir=reports_out_dir,
+        read_svg_geometry_fn=_read_svg_geometry,
+        normalized_geometry_signature_fn=lambda _w, _h, _params: {"cx": 0.5, "cy": 0.5, "r": 0.4},
+        max_signature_delta_fn=lambda _a, _b: 0.01,
+        harmonization_anchor_priority_fn=lambda _suffix, _prefer_large: 0,
+        family_harmonized_badge_colors_fn=lambda _rows: {
+            "fill_gray": 200,
+            "stroke_gray": 120,
+            "text_gray": 110,
+            "stem_gray": 110,
+        },
+        scale_badge_params_fn=lambda _a, _aw, _ah, _tw, _th, **_kwargs: {},
+        generate_badge_svg_fn=lambda _w, _h, _params: "<svg/>",
+        render_svg_to_numpy_fn=lambda _svg, _w, _h: object(),
+        calculate_error_fn=lambda _target, _rendered: 1.0,
+        cv2_module=_Cv2Stub(),
+    )
+
+    metrics_text = (tmp_path / "reports" / "cross_family_hypothesis_metrics.csv").read_text(encoding="utf-8")
+    assert "ac08_rotational_topology;AC0811,AC0812;AC0811_L|AC0812_L;0.0100;1;" in metrics_text
+    assert metrics_text.rstrip().endswith(";confirmed")

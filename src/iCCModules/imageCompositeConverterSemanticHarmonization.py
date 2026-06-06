@@ -24,6 +24,68 @@ def _textOrientationPolicyForBase(base: str) -> str:
     return "inherit_variant"
 
 
+def _crossFamilyHypothesisGroupForBase(base: str) -> str | None:
+    """Return the AC08 cross-family hypothesis group for data-only reports."""
+    if base in {"AC0800", "AC0820"}:
+        return "ac08_ring_scale_no_geometry_change"
+    if base in {"AC0811", "AC0812", "AC0813", "AC0814"}:
+        return "ac08_rotational_topology"
+    if base in {"AC0831", "AC0832", "AC0833", "AC0834"}:
+        return "ac08_static_text_alias"
+    return None
+
+
+def _topologySignatureForParams(params: dict) -> str:
+    parts = ["circle" if bool(params.get("circle_enabled", False)) else "no_circle"]
+    parts.append("text" if bool(params.get("draw_text", False)) else "no_text")
+    parts.append("stem" if bool(params.get("stem_enabled", False)) else "no_stem")
+    parts.append("arm" if bool(params.get("arm_enabled", False)) else "no_arm")
+    text_mode = str(params.get("text_mode", "")).strip().lower() if bool(params.get("draw_text", False)) else "none"
+    parts.append(f"text_mode:{text_mode or 'generic'}")
+    return "+".join(parts)
+
+
+def _appendCrossFamilyHypothesisLogs(
+    *,
+    variant_rows_by_base: dict[str, list[dict[str, object]]],
+    normalized_geometry_signature_fn: Callable[[int, int, dict], dict[str, float]],
+    max_signature_delta_fn: Callable[[dict[str, float], dict[str, float]], float],
+) -> list[str]:
+    grouped_rows: dict[str, list[tuple[str, dict[str, object]]]] = {}
+    for base, rows in variant_rows_by_base.items():
+        hypothesis_group = _crossFamilyHypothesisGroupForBase(base)
+        if hypothesis_group is None:
+            continue
+        for row in rows:
+            grouped_rows.setdefault(hypothesis_group, []).append((base, row))
+
+    logs: list[str] = []
+    for hypothesis_group, rows in sorted(grouped_rows.items()):
+        bases = sorted({base for base, _row in rows})
+        if len(bases) < 2:
+            continue
+
+        signatures = [
+            normalized_geometry_signature_fn(int(row["w"]), int(row["h"]), dict(row["params"]))
+            for _base, row in rows
+        ]
+        max_delta = 0.0
+        for i in range(len(signatures)):
+            for j in range(i + 1, len(signatures)):
+                max_delta = max(max_delta, max_signature_delta_fn(signatures[i], signatures[j]))
+
+        topology_signatures = sorted({_topologySignatureForParams(dict(row["params"])) for _base, row in rows})
+        text_policies = sorted({_textOrientationPolicyForBase(base) for base, _row in rows})
+        status = "confirmed" if max_delta <= 0.075 and len(topology_signatures) == 1 else "rejected"
+        variants_joined = "|".join(sorted(str(row["variant"]) for _base, row in rows))
+        logs.append(
+            (
+                f"{hypothesis_group};{','.join(bases)};{variants_joined};"
+                f"{max_delta:.4f};{len(topology_signatures)};"
+                f"{','.join(topology_signatures)};{','.join(text_policies)};{status}"
+            )
+        )
+    return logs
 
 
 def captureCanonicalBadgeColorsImpl(
@@ -298,6 +360,12 @@ def harmonizeSemanticSizeVariantsImpl(
 
     harmonized_logs: list[str] = []
     category_logs: list[str] = []
+    family_consistency_logs: list[str] = []
+    cross_family_hypothesis_logs = _appendCrossFamilyHypothesisLogs(
+        variant_rows_by_base=variant_rows_by_base,
+        normalized_geometry_signature_fn=normalized_geometry_signature_fn,
+        max_signature_delta_fn=max_signature_delta_fn,
+    )
     for base, variant_rows in sorted(variant_rows_by_base.items()):
         if str(base).upper() == "AC0223":
             # AC0223 has a dedicated valve-head overlay that is not represented
@@ -349,6 +417,12 @@ def harmonizeSemanticSizeVariantsImpl(
             (
                 f"{base};{category};{variants_joined};{prototype_group};"
                 f"{prototype_delta:.4f};{text_orientation_policy}"
+            )
+        )
+        family_consistency_logs.append(
+            (
+                f"{base};{variants_joined};{prototype_group};"
+                f"{max_delta:.4f};{prototype_delta:.4f};{len(variant_rows)}"
             )
         )
 
@@ -422,3 +496,14 @@ def harmonizeSemanticSizeVariantsImpl(
         with open(os.path.join(reports_out_dir, "shape_catalog.csv"), "w", encoding="utf-8") as f:
             f.write("base;category;variants;prototype_group;geometry_signature_delta;text_orientation_policy\n")
             f.write("\n".join(category_logs).rstrip() + "\n")
+    if family_consistency_logs:
+        with open(os.path.join(reports_out_dir, "family_consistency_metrics.csv"), "w", encoding="utf-8") as f:
+            f.write("base;variants;prototype_group;intra_family_max_delta;prototype_max_delta;variant_count\n")
+            f.write("\n".join(family_consistency_logs).rstrip() + "\n")
+    if cross_family_hypothesis_logs:
+        with open(os.path.join(reports_out_dir, "cross_family_hypothesis_metrics.csv"), "w", encoding="utf-8") as f:
+            f.write(
+                "hypothesis_group;bases;variants;max_geometry_delta;topology_signature_count;"
+                "topology_signatures;text_orientation_policies;status\n"
+            )
+            f.write("\n".join(cross_family_hypothesis_logs).rstrip() + "\n")

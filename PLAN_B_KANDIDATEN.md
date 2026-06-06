@@ -2,11 +2,23 @@
 
 Ziel: maximal **5** aktive JPG-Kandidaten, die derzeit noch nicht zufriedenstellend konvertieren, aber voraussichtlich nicht "hoffnungslos komplex" sind.
 
-## Aktuelle Kandidaten (Stand: 2026-06-02, nach AC0844-S-Refresh)
+## Aktuelle Kandidaten (Stand: 2026-06-06, Qualitätsrefresh Run OG)
 
-1. `AC0835_S.jpg` – Weak-Family-/QR-Befund: connector-freies rundes `VOC`-Badge mit knappem Review-Messwert (`normalized_mse=0.04467485`); gute Folgeprobe für Kreis und dreibuchstabiges Label.
-2. `AC0861_S.jpg` – Weak-Family-Folgepunkt: rundes `rF`-Badge mit senkrechtem Griff unterhalb des Kreises; gute Probe für Kreis, zweibuchstabiges Label und unteren Connector.
-3. `AC0862_S.jpg` – Weak-Family-Folgepunkt: rundes `rF`-Badge mit seitlichem Griff nach links; gute Probe für Kreis, zweibuchstabiges Label und horizontalen Connector.
+Die Rotation wurde reproduzierbar aus dem aktualisierten Qualitätsreview erzeugt.
+Priorisiert werden zuerst nicht zufriedenstellende Einträge aus
+`successed_conversions.txt`, danach kompakte Varianten aus dem vorhandenen
+Diff-Inventar. Die vollständige Evidenz liegt unter
+`artifacts/evaluation/conversion_quality_review_v2/`.
+
+| Priorität | Kandidat | Quelle | `normalized_mse` | Auswahlgrund |
+| ---: | --- | --- | ---: | --- |
+| 1 | `AC0835_L.jpg` | erfolgreicher Altbestand | `0.05726039` | Einziger der 48 erfolgreichen Einträge oberhalb der Review-Grenze `0.04594568`. |
+| 2 | `AC0922_S.jpg` | Diff-Inventar | `0.33015759` | Höchste Abweichung unter den kompakten, renderbaren Kandidaten. |
+| 3 | `AC0414_S.jpg` | Diff-Inventar | `0.31829609` | Sehr kompakte Kreis-/Innengeometrie mit hoher Abweichung. |
+| 4 | `AC0130_M.jpg` | Diff-Inventar | `0.27991071` | Rechteck und Diagonalen sind als einfache bis mittlere Primitive abgrenzbar. |
+| 5 | `AC0130.jpg` | Diff-Inventar | `0.23466992` | Größenverwandter Folgepunkt an der festgelegten Flächengrenze. |
+
+Die nächste reguläre Rotation beginnt mit `AC0835_L.jpg`.
 
 ## Perception-Lerneffekt (Pflichtabschnitt ab PF8)
 
@@ -16,11 +28,12 @@ dem PF8-Linkage-Report und dokumentiert die Entscheidung als
 maschinenlesbare Stand liegt unter
 `artifacts/evaluation/plan_b_perception_linkage_v1/plan_b_perception_linkage_report_v1.json`.
 
-| Kandidat | Erste Perception-Frage | Erwartetes erstes Primitive | PF8-Entscheidung | Seed-Folge |
-| --- | --- | --- | --- | --- |
-| `AC0835_S.jpg` | Dominanten VOC-Kreis und dreibuchstabiges Label vorab festhalten? | `circle_ring_or_voc_label` | `generalisiert` | Kreis als `CircleBackground` seedbar; `VOC` bleibt ergänzende TextGlyph-Prüfung für Textgrösse und Grauwert. |
-| `AC0861_S.jpg` | Dominanten rF-Kreis und unteren senkrechten Griff vorab festhalten? | `circle_ring_or_rf_vertical_connector` | `generalisiert` | Kreis als `CircleBackground` seedbar; `rF` und der senkrechte Griff bleiben gekoppelte TextGlyph-/Linien-Prüfung. |
-| `AC0862_S.jpg` | Dominanten rF-Kreis und seitlichen Griff vorab festhalten? | `circle_ring_or_rf_horizontal_connector` | `generalisiert` | Kreis als `CircleBackground` seedbar; `rF` und der horizontale Griff bleiben gekoppelte TextGlyph-/Linien-Prüfung. |
+Der aktualisierte Linkage-Report enthält alle fünf aktiven Kandidaten. Vier
+Perception-Fragen sind bereits `generalisiert`: Kreis-/Ring-Signale für
+`AC0835_L`, `AC0922_S`, `AC0414_S` und `AC0130` sowie der horizontale Anschluss
+von `AC0922_S`. `AC0130_M` ist `nur Sonderfall`, weil Rechteck und Diagonalen
+zwar erkannt werden, aber noch kein allgemeiner Rechteck-Geometry-IR-Seed
+zugeordnet ist.
 
 ## Pflege-Regel (fortan)
 
@@ -28,6 +41,7 @@ Bei jedem abgeschlossenen Arbeitspaket:
 
 - erledigte/gelöste Einträge entfernen,
 - auf **maximal 5** Einträge auffüllen,
+- den Review mit `tools/review_conversion_quality.py` reproduzierbar erneuern,
 - bevorzugt Kandidaten wählen, die
   - in `artifacts/converted_images/diff_pngs/*_diff.png` weiterhin als problematisch auftauchen,
   - noch nicht häufig in expliziten Aufgaben genannt wurden,

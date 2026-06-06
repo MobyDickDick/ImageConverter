@@ -16,18 +16,21 @@ from tools.perception_detection_contract import (
 )
 
 
+ACTIVE_VARIANTS = ["AC0835_L", "AC0922_S", "AC0414_S", "AC0130_M", "AC0130"]
+
+
 def _target_by_variant(variant: str) -> dict[str, object]:
     return next(target for target in PLAN_B_PERCEPTION_TARGETS if target["variant"] == variant)
 
 
 def test_build_plan_b_perception_linkage_record_has_lerneffekt_decision() -> None:
-    record = build_plan_b_perception_linkage_record(_target_by_variant("AC0835_S"))
+    record = build_plan_b_perception_linkage_record(_target_by_variant("AC0835_L"))
 
     assert record["schema_version"] == "plan_b_perception_linkage_record_v1"
-    assert record["variant"] == "AC0835_S"
+    assert record["variant"] == "AC0835_L"
     lerneffekt = record["perception_lerneffekt"]
     assert lerneffekt["question"]
-    assert lerneffekt["expected_first_primitive"] == "circle_ring_or_voc_label"
+    assert lerneffekt["expected_first_primitive"] == "circle_or_voc_text"
     assert lerneffekt["decision"] in {
         "generalisiert",
         "nur Sonderfall",
@@ -38,15 +41,14 @@ def test_build_plan_b_perception_linkage_record_has_lerneffekt_decision() -> Non
     assert lerneffekt["next_action"]
 
 
-def test_build_plan_b_perception_linkage_record_matches_rf_vertical_connector() -> None:
-    record = build_plan_b_perception_linkage_record(_target_by_variant("AC0862_S"))
+def test_plan_b_perception_targets_match_quality_triage() -> None:
+    assert [target["variant"] for target in PLAN_B_PERCEPTION_TARGETS] == ACTIVE_VARIANTS
 
-    assert record["variant"] == "AC0862_S"
-    lerneffekt = record["perception_lerneffekt"]
-    assert lerneffekt["expected_first_primitive"] == "circle_ring_or_rf_horizontal_connector"
-    assert "line" in lerneffekt["matched_candidate_kinds"]
-    assert lerneffekt["top_candidate_kind"] in {"circle", "line"}
-    assert record["candidate_count"] >= 1
+    triage_path = Path(
+        "artifacts/evaluation/conversion_quality_review_v2/plan_b_candidate_triage_v1.csv"
+    )
+    rows = list(csv.DictReader(triage_path.open(encoding="utf-8")))
+    assert [row["variant"] for row in rows] == ACTIVE_VARIANTS
 
 
 def test_run_plan_b_perception_linkage_report_writes_json_and_csv(
@@ -54,8 +56,8 @@ def test_run_plan_b_perception_linkage_report_writes_json_and_csv(
 ) -> None:
     summary = run_plan_b_perception_linkage_report(tmp_path)
 
-    assert summary["samples"] == 3
-    assert summary["evaluated_samples"] >= 1
+    assert summary["samples"] == 5
+    assert summary["evaluated_samples"] == 5
     assert summary["all_have_perception_lerneffekt"] is True
 
     json_report = tmp_path / "plan_b_perception_linkage_report_v1.json"
@@ -66,12 +68,8 @@ def test_run_plan_b_perception_linkage_report_writes_json_and_csv(
     report = json.loads(json_report.read_text(encoding="utf-8"))
     assert report["schema_version"] == "plan_b_perception_linkage_report_v1"
     assert report["metrics"]["all_have_perception_lerneffekt"] is True
-    assert {record["variant"] for record in report["records"]} == {
-        "AC0835_S",
-        "AC0861_S",
-        "AC0862_S",
-    }
+    assert [record["variant"] for record in report["records"]] == ACTIVE_VARIANTS
 
     rows = list(csv.DictReader(csv_report.open(encoding="utf-8")))
-    assert len(rows) == 3
+    assert len(rows) == 5
     assert {"variant", "decision", "next_action"} <= set(rows[0])

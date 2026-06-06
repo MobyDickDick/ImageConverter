@@ -544,3 +544,15 @@ def test_run_main_impl_convert_mode_returns_1_when_strict_batch_failures_enabled
 
     assert rc == 1
     assert "--fail-on-batch-failures aktiv" in stdout.getvalue()
+
+
+def test_parse_args_accepts_single_ac08_regression_segment() -> None:
+    args = cli_helpers.parseArgsImpl(
+        argv=["images", "--ac08-regression-set", "--ac08-regression-variant", "AC0800_L"],
+        ac08_regression_set_name="set",
+        ac08_regression_variants=("AC0800_L", "AC0800_M"),
+        svg_render_subprocess_timeout_sec=10.0,
+    )
+
+    assert args.ac08_regression_set is True
+    assert args.ac08_regression_variant == ["AC0800_L"]

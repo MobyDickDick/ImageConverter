@@ -214,8 +214,8 @@ def makeAc08BadgeParamsImpl(
         defaults["rf_weight"] = int(defaults.get("rf_weight", 600))
         return defaults
 
-    if name == "AC0842":
-        # AC0842 follows the left-arm connector geometry (same arm placement as AC0812).
+    if name in {"AC0842", "AC0862"}:
+        # AC0842/AC0862 follow the left-arm connector geometry (same arm placement as AC0812).
         defaults = _apply_rf_label(default_ac0812_params_fn(w, h))
         if img is None:
             return enforce_left_arm_badge_geometry_fn(finalize_ac08_style_fn(name, defaults), w, h)
@@ -238,5 +238,30 @@ def makeAc08BadgeParamsImpl(
         if img is None:
             return finalize_ac08_style_fn(name, defaults)
         return finalize_ac08_style_fn(name, fit_semantic_badge_from_image_fn(img, defaults))
+
+    if name == "AC0861":
+        # AC0861 is the rF counterpart of the lower vertical-connector
+        # AC0881/AC0836 badge: circle/text badge with a stem below the circle.
+        defaults = _apply_rf_label(default_ac0881_params_fn(w, h))
+        if img is None:
+            return finalize_ac08_style_fn(name, defaults)
+        return finalize_ac08_style_fn(name, fit_ac0811_params_from_image_fn(img, defaults))
+
+    if name == "AC0863":
+        # AC0863 continues the AC0842/AC0862 rF weak-family rotation: the
+        # connector is rotated into the upper vertical-arm geometry while the
+        # rF label remains horizontally oriented.
+        defaults = _apply_rf_label(default_ac0813_params_fn(w, h))
+        if img is None:
+            return finalize_ac08_style_fn(name, defaults)
+        return finalize_ac08_style_fn(name, fit_ac0813_params_from_image_fn(img, defaults))
+
+    if name == "AC0864":
+        # AC0864 is the horizontal mirror of AC0862: retain the horizontal rF
+        # label while moving the connector to the right-arm geometry.
+        defaults = _apply_rf_label(default_ac0814_params_fn(w, h))
+        if img is None:
+            return finalize_ac08_style_fn(name, defaults)
+        return finalize_ac08_style_fn(name, fit_ac0814_params_from_image_fn(img, defaults))
 
     return None

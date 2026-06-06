@@ -25,6 +25,29 @@ def generateBadgeSvgImpl(
     """Build a semantic badge SVG from quantized parameters."""
     p = align_stem_to_circle_center_fn(dict(params))
     variant_ref = str(p.get("variant_name") or p.get("badge_symbol_name") or p.get("base_name", "")).upper()
+    connector_free_circle_text_symbols = {"AC0820", "AC0835", "AC0850", "AC0870"}
+    connector_free_symbol = variant_ref.split("_", 1)[0]
+    if connector_free_symbol in connector_free_circle_text_symbols:
+        # Connector-free AC08 circle/text badges must not inherit stale arm/stem
+        # geometry from optimization probes or family-template transfer.  The
+        # connected follow-up families (for example AC0836/AC0861) use their own
+        # symbol ids and therefore keep explicit connector geometry.
+        for connector_key in (
+            "arm_enabled",
+            "arm_x1",
+            "arm_y1",
+            "arm_x2",
+            "arm_y2",
+            "arm_stroke",
+            "arm_color",
+            "stem_enabled",
+            "stem_x",
+            "stem_top",
+            "stem_bottom",
+            "stem_width",
+            "stem_gray",
+        ):
+            p.pop(connector_key, None)
     if variant_ref.startswith("AC0223"):
         # AC0223 must always retain its valve-head geometry. Some late-stage
         # optimization/fallback paths can strip the dedicated styling keys;
@@ -107,15 +130,17 @@ def generateBadgeSvgImpl(
         arm_x2 = float(clip_scalar_fn(float(p.get("arm_x2", 0.0)), 0.0, float(w)))
         arm_y2 = float(clip_scalar_fn(float(p.get("arm_y2", p.get("arm_y", arm_y1))), 0.0, float(h)))
         arm_stroke = float(p["arm_stroke"])
+        arm_length = ((arm_x2 - arm_x1) ** 2 + (arm_y2 - arm_y1) ** 2) ** 0.5
 
-        elements.append(
-            (
-                f'  <line x1="{arm_x1:.4f}" y1="{arm_y1:.4f}" '
-                f'x2="{arm_x2:.4f}" y2="{arm_y2:.4f}" '
-                f'stroke="{str(p.get("arm_color", grayhex_fn(p.get("stroke_gray", 152))))}" '
-                f'stroke-width="{arm_stroke:.4f}" stroke-linecap="round"/>'
+        if arm_length >= max(0.75, arm_stroke * 0.75):
+            elements.append(
+                (
+                    f'  <line x1="{arm_x1:.4f}" y1="{arm_y1:.4f}" '
+                    f'x2="{arm_x2:.4f}" y2="{arm_y2:.4f}" '
+                    f'stroke="{str(p.get("arm_color", grayhex_fn(p.get("stroke_gray", 152))))}" '
+                    f'stroke-width="{arm_stroke:.4f}" stroke-linecap="round"/>'
+                )
             )
-        )
 
     if p.get("stem_enabled"):
         stem_x = float(clip_scalar_fn(float(p.get("stem_x", 0.0)), 0.0, float(w)))

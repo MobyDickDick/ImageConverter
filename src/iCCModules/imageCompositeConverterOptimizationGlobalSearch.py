@@ -4,10 +4,11 @@ from __future__ import annotations
 
 import dataclasses
 import math
+import weakref
 from collections import OrderedDict
 
 _CROSS_ROUND_EVAL_CACHE_MAX = 4096
-_CROSS_ROUND_EVAL_CACHE: OrderedDict[tuple[int, tuple], float] = OrderedDict()
+_CROSS_ROUND_EVAL_CACHE: OrderedDict[tuple[int, tuple], tuple[weakref.ReferenceType, float]] = OrderedDict()
 
 
 def _freeze_eval_value(value):
@@ -102,6 +103,26 @@ def optimizeGlobalParameterVectorSamplingImpl(
 
     active_key_set = set(active_keys)
 
+    def _current_search_signature() -> tuple:
+        return tuple(
+            (
+                key,
+                _freeze_eval_value(getattr(vector, key)),
+                _freeze_eval_value(bounds[key][0]),
+                _freeze_eval_value(bounds[key][1]),
+                str(bounds[key][3]),
+            )
+            for key in active_keys
+        )
+
+    search_signature = _current_search_signature()
+    if params.get("_global_search_no_improvement_signature") == search_signature:
+        logs.append(
+            "global-search: übersprungen "
+            "(grund=unveränderte_no-improvement_signatur, vorheriger_lauf=keine_relevante_verbesserung)"
+        )
+        return False
+
     min_active_keys = 2
     search_mode = "voll" if len(active_keys) >= 4 else "reduziert"
     if len(active_keys) < min_active_keys:
@@ -166,20 +187,28 @@ def optimizeGlobalParameterVectorSamplingImpl(
         cross_round_key = (id(img_orig), cache_key)
         cross_round_cached = _CROSS_ROUND_EVAL_CACHE.get(cross_round_key)
         if cross_round_cached is not None:
-            eval_hits += 1
-            _CROSS_ROUND_EVAL_CACHE.move_to_end(cross_round_key)
-            eval_cache[cache_key] = cross_round_cached
-            return cross_round_cached
+            cached_image_ref, cached_error = cross_round_cached
+            if cached_image_ref() is img_orig:
+                eval_hits += 1
+                _CROSS_ROUND_EVAL_CACHE.move_to_end(cross_round_key)
+                eval_cache[cache_key] = cached_error
+                return cached_error
+            _CROSS_ROUND_EVAL_CACHE.pop(cross_round_key, None)
         cached = eval_cache.get(cache_key)
         if cached is not None:
             eval_hits += 1
             return cached
         err = float(full_badge_error_for_params_fn(img_orig, probe))
         eval_cache[cache_key] = err
-        _CROSS_ROUND_EVAL_CACHE[cross_round_key] = err
-        _CROSS_ROUND_EVAL_CACHE.move_to_end(cross_round_key)
-        if len(_CROSS_ROUND_EVAL_CACHE) > _CROSS_ROUND_EVAL_CACHE_MAX:
-            _CROSS_ROUND_EVAL_CACHE.popitem(last=False)
+        try:
+            image_ref = weakref.ref(img_orig)
+        except TypeError:
+            image_ref = None
+        if image_ref is not None:
+            _CROSS_ROUND_EVAL_CACHE[cross_round_key] = (image_ref, err)
+            _CROSS_ROUND_EVAL_CACHE.move_to_end(cross_round_key)
+            if len(_CROSS_ROUND_EVAL_CACHE) > _CROSS_ROUND_EVAL_CACHE_MAX:
+                _CROSS_ROUND_EVAL_CACHE.popitem(last=False)
         return err
 
     def withinHardBounds(candidate) -> tuple[bool, str]:
@@ -482,10 +511,12 @@ def optimizeGlobalParameterVectorSamplingImpl(
     )
 
     if not winner_improved and winner_err >= start_err - 0.01:
+        params["_global_search_no_improvement_signature"] = search_signature
         logs.append("global-search: keine relevante Verbesserung")
         log_eval_telemetry()
         return False
 
+    params.pop("_global_search_no_improvement_signature", None)
     old_values = {key: float(getattr(vector, key)) for key in active_keys}
     new_values = {key: float(getattr(winner, key)) for key in active_keys}
     params.update(winner.applyToParams(params))

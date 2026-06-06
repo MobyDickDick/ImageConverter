@@ -106,7 +106,12 @@ python -m pytest
 ./tools/run_regression_checks.sh
 ./tools/run_safe_test_baseline.sh
 ./tools/run_local_completion_checks.sh
+./tools/run_release_candidate_gate.sh
+# Der AC08-Schritt läuft dabei pro Variante isoliert; optionales Segmentlimit:
+RC_GATE_AC08_SEGMENT_TIMEOUT_SECONDS=300 ./tools/run_release_candidate_gate.sh
 # CI nutzt denselben Abschlussbefehl in .github/workflows/local-completion-checks.yml
+# und protokolliert Testausgabe + PASS/FAIL pro Commit als GitHub-Artefakt:
+./tools/run_test_evidence.sh --name completion-profile --log artifacts/test-evidence/completion-profile.log --summary artifacts/test-evidence/completion-profile-summary.md -- ./tools/run_local_completion_checks.sh
 # Zusätzliche GitHub-Jobs lagern Profile aus:
 python tools/run_pytest_profile.py core-green
 python tools/run_pytest_profile.py extended
