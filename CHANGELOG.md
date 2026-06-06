@@ -7,6 +7,8 @@ All notable changes to ImageConverter will be documented in this file.
 
 ## Unreleased
 
+- AC0922_S now has a corrected quality baseline (`normalized_mse=0.02747206`); a rectangle-shaped re-conversion regression is rejected while the accepted circle/left-connector snapshot is regression-tested and Plan-B/PF8 rotates to AC0414_S.
+
 - AC0835_L was re-converted as a connector-free semantic VOC badge, reducing normalized MSE from 0.05726039 to 0.03911266 and rotating Plan-B/PF8 to AC0922_S.
 
 - AC0863_S completed its real Plan-B/PF8 acceptance run as a semantic rF badge with an upper connector (`status=semantic_ok`, `mean_delta2=4155.215820`); active perception targets now rotate strictly to AC0864_S.

@@ -1397,16 +1397,6 @@ def write_text_glyph_evaluation_report(
 
 PLAN_B_PERCEPTION_TARGETS: list[dict[str, Any]] = [
     {
-        "variant": "AC0922_S",
-        "image_candidates": ["artifacts/images_to_convert/AC0922_S.jpg"],
-        "plan_b_reason": "Kompakter Diff-Kandidat mit höchster aktueller Pixelabweichung.",
-        "perception_question": "Können Kreis und linker Horizontalanschluss vorab als CircleBackground und HorizontalRule erkannt werden?",
-        "expected_first_primitive": "circle_with_left_horizontal_rule",
-        "expected_candidate_kinds": {"circle", "ring", "horizontal_rule", "line"},
-        "expected_seed_kinds": {"CircleBackground", "HorizontalRule"},
-        "description": "Plan-B-Kandidat AC0922_S: kleiner Kreis mit linkem horizontalem Anschluss.",
-    },
-    {
         "variant": "AC0414_S",
         "image_candidates": ["artifacts/images_to_convert/AC0414_S.jpg"],
         "plan_b_reason": "Sehr kompakter kreisförmiger Diff-Kandidat mit hoher Abweichung.",

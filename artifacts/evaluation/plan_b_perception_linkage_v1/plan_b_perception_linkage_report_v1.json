@@ -11,97 +11,6 @@
   "records": [
     {
       "schema_version": "plan_b_perception_linkage_record_v1",
-      "variant": "AC0922_S",
-      "image_path": "artifacts/images_to_convert/AC0922_S.jpg",
-      "status": "evaluated",
-      "plan_b_reason": "Kompakter Diff-Kandidat mit h\u00f6chster aktueller Pixelabweichung.",
-      "description": "Plan-B-Kandidat AC0922_S: kleiner Kreis mit linkem horizontalem Anschluss.",
-      "perception_lerneffekt": {
-        "question": "K\u00f6nnen Kreis und linker Horizontalanschluss vorab als CircleBackground und HorizontalRule erkannt werden?",
-        "expected_first_primitive": "circle_with_left_horizontal_rule",
-        "expected_candidate_kinds": [
-          "circle",
-          "horizontal_rule",
-          "line",
-          "ring"
-        ],
-        "expected_seed_kinds": [
-          "CircleBackground",
-          "HorizontalRule"
-        ],
-        "decision": "generalisiert",
-        "matched_candidate_kinds": [
-          "circle",
-          "horizontal_rule",
-          "line"
-        ],
-        "matched_seed_kinds": [
-          "CircleBackground",
-          "HorizontalRule"
-        ],
-        "top_candidate_kind": "horizontal_rule",
-        "top_confidence": 0.99,
-        "next_action": "Im n\u00e4chsten Plan-B-Paket als vorinitialisierten Geometry-IR-Seed protokollieren."
-      },
-      "candidate_count": 8,
-      "top_candidate": {
-        "schema_version": "perception_primitive_candidate_v1",
-        "kind": "horizontal_rule",
-        "bbox": {
-          "x": 0.0,
-          "y": 7.0,
-          "width": 11.0,
-          "height": 1.0
-        },
-        "center": {
-          "x": 5.5,
-          "y": 7.5
-        },
-        "geometry": {
-          "orientation": "horizontal",
-          "x_left": 0.0,
-          "x_right": 11.0,
-          "y_center": 7.5,
-          "length_px": 11.0,
-          "stroke_width_px": 1.0,
-          "angle_deg": 0.0,
-          "text_equivalent": "-",
-          "geometry_ir_kind": "HorizontalRule"
-        },
-        "color": {
-          "fill_rgb": null,
-          "stroke_rgb": [
-            179,
-            179,
-            179
-          ],
-          "fill_hex": null,
-          "stroke_hex": "#B3B3B3",
-          "fill_confidence": 0.0,
-          "stroke_confidence": 0.6409
-        },
-        "confidence": 0.99,
-        "roi": {
-          "type": "description_hint",
-          "hint": "full_image",
-          "bbox": {
-            "x": 0.0,
-            "y": 0.0,
-            "width": 25.0,
-            "height": 15.0
-          },
-          "description": "Plan-B-Kandidat AC0922_S: kleiner Kreis mit linkem horizontalem Anschluss."
-        },
-        "evidence": {
-          "detector": "detect_horizontal_rules",
-          "threshold_model": "dark_contour_horizontal_opening",
-          "description_hint": "full_image"
-        },
-        "source": "pf8_plan_b_perception_linkage"
-      }
-    },
-    {
-      "schema_version": "plan_b_perception_linkage_record_v1",
       "variant": "AC0414_S",
       "image_path": "artifacts/images_to_convert/AC0414_S.jpg",
       "status": "evaluated",
@@ -352,9 +261,9 @@
     }
   ],
   "metrics": {
-    "samples": 4,
-    "evaluated_samples": 4,
-    "generalisiert": 3,
+    "samples": 3,
+    "evaluated_samples": 3,
+    "generalisiert": 2,
     "nur_sonderfall": 1,
     "noch_nicht_erkannt": 0,
     "all_have_perception_lerneffekt": true

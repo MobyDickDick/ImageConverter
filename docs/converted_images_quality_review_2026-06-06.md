@@ -73,3 +73,19 @@ folgt `normalized_mse=0.03911266`, also ein Wert unterhalb der Review-Grenze.
 Der Kandidat ist deshalb abgeschlossen und aus der aktiven Triage entfernt.
 Die Rotation wird mit `AC0922_S`, `AC0414_S`, `AC0130_M` und `AC0130`
 fortgesetzt.
+
+
+## Folgeaktualisierung Run OI
+
+Die Nachmessung des tatsächlich aufgelösten Snapshot-SVGs für `AC0922_S`
+korrigiert den veralteten Triage-Wert von `normalized_mse=0.33015759` auf
+`0.02747206` (`mean_delta2=5359.111816`). Das akzeptierte 25x15-SVG enthält
+einen Kreis mit linkem Horizontalanschluss und liegt damit unter der
+Review-Grenze.
+
+Der reale Ein-Datei-Lauf endete zwar mit Exit `0`, schlug jedoch ein einzelnes
+Rechteck mit `normalized_mse=0.03932264` vor. Diese Ausgabe wäre trotz des
+formal grünen Pixelwerts eine klare Semantik- und Topologieregression und wurde
+daher nicht übernommen. `AC0922_S` ist durch die bestehende bessere Ausgabe und
+einen Regressionstest abgeschlossen; die aktive Rotation lautet nun
+`AC0414_S`, `AC0130_M`, `AC0130`.
