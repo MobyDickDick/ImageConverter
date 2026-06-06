@@ -112,3 +112,25 @@ def test_validate_badge_by_elements_stops_on_stable_non_improvement_after_fallba
     assert any("Gesamtfehler=25.000" in message for message in progress_messages)
     assert any("stopped_due_to_stable_non_improvement" in line for line in logs)
     assert any("validation_abort_decision: stage=round_loop, reason=stable_non_improvement" in line for line in logs)
+
+
+def test_action_validation_wrappers_forward_progress_callback(monkeypatch) -> None:
+    import src.imageCompositeConverter as converter
+
+    callback = object()
+    captured: list[dict[str, object]] = []
+
+    def _validate_impl(*_args, **kwargs):
+        captured.append(kwargs)
+        return ["ok"]
+
+    monkeypatch.setattr(
+        converter.element_validation_helpers,
+        "validateBadgeByElementsImpl",
+        _validate_impl,
+    )
+
+    assert converter.Action.validate_badge_by_elements(
+        object(), {}, progress_fn=callback
+    ) == ["ok"]
+    assert captured[0]["progress_fn"] is callback

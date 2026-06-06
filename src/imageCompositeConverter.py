@@ -1131,6 +1131,7 @@ class Action:
             max_rounds=max_rounds,
             debug_out_dir=debug_out_dir,
             stop_when_error_below_threshold=stop_when_error_below_threshold,
+            progress_fn=progress_fn,
         )
 
     @staticmethod
@@ -2082,6 +2083,7 @@ class Action:
         debug_out_dir: str | None = None,
         apply_circle_geometry_penalty: bool = True,
         stop_when_error_below_threshold: bool = False,
+        progress_fn=None,
     ) -> list[str]:
         return element_validation_helpers.validateBadgeByElementsImpl(
             img_orig,
