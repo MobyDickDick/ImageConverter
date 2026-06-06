@@ -1,0 +1,79 @@
+{
+  "schema_version": "conversion_quality_review_v2",
+  "threshold_normalized_mse": 0.045945679012345676,
+  "max_plan_b_candidates": 5,
+  "max_candidate_image_area": 3200,
+  "metrics": {
+    "successful_variants": 48,
+    "successful_renderable_pairs": 48,
+    "successful_above_threshold": 1,
+    "successful_missing_or_failed": 0,
+    "diff_variants": 131,
+    "diff_renderable_pairs": 121,
+    "selected_candidates": 5
+  },
+  "selected_candidates": [
+    {
+      "variant": "AC0835_L",
+      "source": "successful_conversion",
+      "image_path": "artifacts/images_to_convert/AC0835_L.jpg",
+      "svg_path": "src/artifacts/converted_images/converted_svgs/AC0835_L.svg",
+      "width": 25,
+      "height": 25,
+      "mean_delta2": 11170.0703125,
+      "normalized_mse": 0.057260388632577215,
+      "status": "ok",
+      "image_area": 625
+    },
+    {
+      "variant": "AC0922_S",
+      "source": "diff_inventory",
+      "image_path": "artifacts/images_to_convert/AC0922_S.jpg",
+      "svg_path": "artifacts/converted_images/converted_svgs/AC0922_S.svg",
+      "width": 25,
+      "height": 15,
+      "mean_delta2": 64405.4921875,
+      "normalized_mse": 0.33015759163142383,
+      "status": "ok",
+      "image_area": 375
+    },
+    {
+      "variant": "AC0414_S",
+      "source": "diff_inventory",
+      "image_path": "artifacts/images_to_convert/AC0414_S.jpg",
+      "svg_path": "artifacts/converted_images/converted_svgs/AC0414_S.svg",
+      "width": 20,
+      "height": 20,
+      "mean_delta2": 62091.609375,
+      "normalized_mse": 0.31829608804306037,
+      "status": "ok",
+      "image_area": 400
+    },
+    {
+      "variant": "AC0130_M",
+      "source": "diff_inventory",
+      "image_path": "artifacts/images_to_convert/AC0130_M.jpg",
+      "svg_path": "artifacts/converted_images/converted_svgs/AC0130_M.svg",
+      "width": 30,
+      "height": 60,
+      "mean_delta2": 54603.58203125,
+      "normalized_mse": 0.27991071142509294,
+      "status": "ok",
+      "image_area": 1800
+    },
+    {
+      "variant": "AC0130",
+      "source": "diff_inventory",
+      "image_path": "artifacts/images_to_convert/AC0130.jpg",
+      "svg_path": "artifacts/converted_images/converted_svgs/AC0130.svg",
+      "width": 40,
+      "height": 80,
+      "mean_delta2": 45778.234375,
+      "normalized_mse": 0.2346699186210432,
+      "status": "ok",
+      "image_area": 3200
+    }
+  ],
+  "records_csv": "artifacts/evaluation/conversion_quality_review_v2/conversion_quality_records_v2.csv",
+  "candidate_triage_csv": "artifacts/evaluation/conversion_quality_review_v2/plan_b_candidate_triage_v1.csv"
+}

@@ -3469,3 +3469,11 @@ Ziel: Die Konvertierung soll strikt als **Kette** laufen:
 - **Rotation:** `AC0864_S` ist aus der aktiven Zielliste entfernt. Plan-B-Liste und PF8-Linkage-Report sind mit `samples=0`, `evaluated_samples=0` und `all_have_perception_lerneffekt=true` synchron leer.
 - **Blocker:** Kein technischer Blocker; die dokumentierte Weak-Family-Rotation ist vollständig abgearbeitet.
 - **Nächster sinnvoller Schritt:** Qualitätsreports aktualisieren und daraus eine neue, noch nicht erledigte Plan-B-Kandidatenrotation kuratieren.
+
+### Fortschritt vs. Blocker (Session 2026-06-06, Qualitätsrefresh und Plan-B-Triage Run OG)
+
+- **Fortschritt:** Der bislang nur inline dokumentierte Qualitätsreview ist als `tools/review_conversion_quality.py` reproduzierbar. Er prüft 48 erfolgreiche Varianten und 131 Diff-Inventarvarianten, schreibt JSON-/CSV-Evidenz und kuratiert deterministisch höchstens fünf kompakte Plan-B-Kandidaten.
+- **Ergebnis:** Alle 48 Erfolgsvarianten sind renderbar; nur `AC0835_L` liegt mit `normalized_mse=0.05726039` über der Grenze `0.04594568`. Die neue Rotation lautet `AC0835_L`, `AC0922_S`, `AC0414_S`, `AC0130_M`, `AC0130`.
+- **Perception-Lerneffekt:** Der PF8-Linkage-Report enthält synchron alle fünf Kandidaten (`5/5` ausgewertet, vier `generalisiert`, einer `nur Sonderfall`, keiner `noch nicht erkannt`).
+- **Sicherung:** Tool- und Linkage-Tests prüfen Metriknormalisierung, Auswahlpriorität, maschinenlesbare Reports und die Synchronität zwischen Triage und PF8-Zielen.
+- **Nächster sinnvoller Schritt:** Die reguläre Plan-B-Rotation mit `AC0835_L.jpg` beginnen und Kreis-/VOC-Erkennung gegen die reale Re-Konvertierung absichern.

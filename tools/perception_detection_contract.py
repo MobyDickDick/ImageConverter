@@ -1395,7 +1395,59 @@ def write_text_glyph_evaluation_report(
     }
 
 
-PLAN_B_PERCEPTION_TARGETS: list[dict[str, Any]] = []
+PLAN_B_PERCEPTION_TARGETS: list[dict[str, Any]] = [
+    {
+        "variant": "AC0835_L",
+        "image_candidates": ["artifacts/images_to_convert/AC0835_L.jpg"],
+        "plan_b_reason": "Einziger erfolgreicher Altbestand oberhalb der aktualisierten Review-Grenze.",
+        "perception_question": "Kann der dominante VOC-Kreis vor der ersten Iteration als CircleBackground erkannt werden?",
+        "expected_first_primitive": "circle_or_voc_text",
+        "expected_candidate_kinds": {"circle", "ring", "text_glyph"},
+        "expected_seed_kinds": {"CircleBackground", "TextGlyph"},
+        "description": "Plan-B-Kandidat AC0835_L: VOC-Kreis und kurze Beschriftung zuerst prüfen.",
+        "glyphs": ["VOC"],
+    },
+    {
+        "variant": "AC0922_S",
+        "image_candidates": ["artifacts/images_to_convert/AC0922_S.jpg"],
+        "plan_b_reason": "Kompakter Diff-Kandidat mit höchster aktueller Pixelabweichung.",
+        "perception_question": "Können Kreis und linker Horizontalanschluss vorab als CircleBackground und HorizontalRule erkannt werden?",
+        "expected_first_primitive": "circle_with_left_horizontal_rule",
+        "expected_candidate_kinds": {"circle", "ring", "horizontal_rule", "line"},
+        "expected_seed_kinds": {"CircleBackground", "HorizontalRule"},
+        "description": "Plan-B-Kandidat AC0922_S: kleiner Kreis mit linkem horizontalem Anschluss.",
+    },
+    {
+        "variant": "AC0414_S",
+        "image_candidates": ["artifacts/images_to_convert/AC0414_S.jpg"],
+        "plan_b_reason": "Sehr kompakter kreisförmiger Diff-Kandidat mit hoher Abweichung.",
+        "perception_question": "Kann die kreisförmige Grundform vorab als CircleBackground erkannt werden?",
+        "expected_first_primitive": "circle_or_ring",
+        "expected_candidate_kinds": {"circle", "ring"},
+        "expected_seed_kinds": {"CircleBackground"},
+        "description": "Plan-B-Kandidat AC0414_S: kreisförmigen Grundkörper vor Innengeometrie erkennen.",
+    },
+    {
+        "variant": "AC0130_M",
+        "image_candidates": ["artifacts/images_to_convert/AC0130_M.jpg"],
+        "plan_b_reason": "Kompakter rechteckiger Diff-Kandidat mit hoher Abweichung.",
+        "perception_question": "Können Außenrechteck und diagonale Linien als allgemeine Primitive erkannt werden?",
+        "expected_first_primitive": "rectangle_with_diagonal_lines",
+        "expected_candidate_kinds": {"rectangle", "line"},
+        "expected_seed_kinds": {"RectangleBackground"},
+        "description": "Plan-B-Kandidat AC0130_M: rechteckigen Grundkörper und Diagonalen zuerst prüfen.",
+    },
+    {
+        "variant": "AC0130",
+        "image_candidates": ["artifacts/images_to_convert/AC0130.jpg"],
+        "plan_b_reason": "Größenverwandter rechteckiger Diff-Kandidat an der Kuratierungsgrenze.",
+        "perception_question": "Können Außenrechteck, Diagonalen und obere Zeichenregion getrennt erkannt werden?",
+        "expected_first_primitive": "rectangle_diagonals_and_top_glyph",
+        "expected_candidate_kinds": {"rectangle", "line", "circle", "ring"},
+        "expected_seed_kinds": {"CircleBackground"},
+        "description": "Plan-B-Kandidat AC0130: Rechteck, Diagonalen und obere Zeichenregion zuerst prüfen.",
+    },
+]
 
 
 def _resolve_first_existing_path(candidates: list[str]) -> Path | None:
@@ -1568,6 +1620,7 @@ def write_plan_b_perception_linkage_report(
                 "top_confidence",
                 "next_action",
             ],
+            lineterminator="\n",
         )
         writer.writeheader()
         for record in records:
