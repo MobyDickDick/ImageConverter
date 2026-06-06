@@ -3485,3 +3485,11 @@ Ziel: Die Konvertierung soll strikt als **Kette** laufen:
 - **Perception-Lerneffekt:** Die Kreisfrage ist `generalisiert` (`circle` → `CircleBackground`); `AC0835_L` wurde aus Triage und PF8-Linkage entfernt. Die vier verbleibenden Ziele sind synchron.
 - **Sicherung:** Der isolierte CLI-Lauf endete mit Exit `0`; ein Regressionstest erzwingt für das committete SVG Dimensionstreue und die Review-Grenze.
 - **Nächster sinnvoller Schritt:** Die reguläre Plan-B-Rotation mit `AC0922_S.jpg` fortsetzen.
+
+### Fortschritt vs. Blocker (Session 2026-06-06, Plan-B AC0922_S Run OI)
+
+- **Fortschritt:** Der reale `AC0922_S`-Einzellauf endete mit Exit `0`; sein Rechteckvorschlag wurde als Semantik-/Topologieregression gegen den erwarteten Kreis mit linkem Anschluss verworfen.
+- **Qualität:** Die Nachmessung des tatsächlich committeten Snapshot-SVGs korrigiert `normalized_mse` von veralteten `0.33015759` auf `0.02747206` (`mean_delta2=5359.111816`) und liegt unter der Review-Grenze `0.04594568` sowie unter dem Rechteckvorschlag `0.03932264`.
+- **Perception-Lerneffekt:** Kreis und linker Horizontalanschluss sind `generalisiert`; ein Regressionstest sichert Dimensionen, Snapshot-Pfadauflösung, Primitive und Qualitätswert.
+- **Rotation:** `AC0922_S` wurde aus Triage und PF8-Linkage entfernt; `AC0414_S`, `AC0130_M` und `AC0130` bleiben synchron aktiv.
+- **Nächster sinnvoller Schritt:** Die reguläre Plan-B-Rotation mit `AC0414_S.jpg` fortsetzen.

@@ -109,3 +109,21 @@ def test_ac0835_l_committed_svg_is_below_review_threshold() -> None:
     assert record.mean_delta2 == pytest.approx(7629.90234375)
     assert record.normalized_mse is not None
     assert record.normalized_mse < 0.045945679012345676
+
+
+def test_ac0922_s_committed_snapshot_preserves_circle_connector_quality() -> None:
+    record = review_variant("AC0922_S", source="diff_inventory")
+
+    assert record.status == "ok"
+    assert record.width == 25
+    assert record.height == 15
+    assert record.svg_path == (
+        "artifacts/converted_images/reports/conversion_bestlist_snapshots/AC0922_S.svg"
+    )
+    assert record.mean_delta2 == pytest.approx(5359.11181640625)
+    assert record.normalized_mse is not None
+    assert record.normalized_mse < 0.045945679012345676
+
+    svg = Path(record.svg_path).read_text(encoding="utf-8")
+    assert "<circle" in svg
+    assert "<line" in svg

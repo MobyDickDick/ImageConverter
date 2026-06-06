@@ -2,7 +2,7 @@
 
 Ziel: maximal **5** aktive JPG-Kandidaten, die derzeit noch nicht zufriedenstellend konvertieren, aber voraussichtlich nicht "hoffnungslos komplex" sind.
 
-## Aktuelle Kandidaten (Stand: 2026-06-06, nach AC0835-L-Run OH)
+## Aktuelle Kandidaten (Stand: 2026-06-06, nach AC0922-S-Run OI)
 
 Die Rotation wurde reproduzierbar aus dem aktualisierten Qualitätsreview erzeugt.
 Priorisiert werden zuerst nicht zufriedenstellende Einträge aus
@@ -12,12 +12,11 @@ Diff-Inventar. Die vollständige Evidenz liegt unter
 
 | Priorität | Kandidat | Quelle | `normalized_mse` | Auswahlgrund |
 | ---: | --- | --- | ---: | --- |
-| 1 | `AC0922_S.jpg` | Diff-Inventar | `0.33015759` | Höchste Abweichung unter den kompakten, renderbaren Kandidaten. |
-| 2 | `AC0414_S.jpg` | Diff-Inventar | `0.31829609` | Sehr kompakte Kreis-/Innengeometrie mit hoher Abweichung. |
-| 3 | `AC0130_M.jpg` | Diff-Inventar | `0.27991071` | Rechteck und Diagonalen sind als einfache bis mittlere Primitive abgrenzbar. |
-| 4 | `AC0130.jpg` | Diff-Inventar | `0.23466992` | Größenverwandter Folgepunkt an der festgelegten Flächengrenze. |
+| 1 | `AC0414_S.jpg` | Diff-Inventar | `0.31829609` | Sehr kompakte Kreis-/Innengeometrie mit hoher Abweichung. |
+| 2 | `AC0130_M.jpg` | Diff-Inventar | `0.27991071` | Rechteck und Diagonalen sind als einfache bis mittlere Primitive abgrenzbar. |
+| 3 | `AC0130.jpg` | Diff-Inventar | `0.23466992` | Größenverwandter Folgepunkt an der festgelegten Flächengrenze. |
 
-Die reale Re-Konvertierung von `AC0835_L.jpg` senkte `normalized_mse` von `0.05726039` auf `0.03911266` und damit unter die Review-Grenze. Der erledigte Kandidat wurde aus der Rotation entfernt; die nächste reguläre Rotation beginnt mit `AC0922_S.jpg`.
+Die Qualitätsnachmessung von `AC0922_S.jpg` korrigierte den veralteten Review-Wert `0.33015759` auf `0.02747206`. Der reale Re-Konvertierungsversuch wurde als semantische Regression verworfen, weil er Kreis und linken Anschluss durch ein Rechteck ersetzt hätte. Das bereits committete Kreis-/Anschluss-SVG bleibt deshalb die akzeptierte Ausgabe; die nächste Rotation beginnt mit `AC0414_S.jpg`.
 
 ## Perception-Lerneffekt (Pflichtabschnitt ab PF8)
 
@@ -27,10 +26,9 @@ dem PF8-Linkage-Report und dokumentiert die Entscheidung als
 maschinenlesbare Stand liegt unter
 `artifacts/evaluation/plan_b_perception_linkage_v1/plan_b_perception_linkage_report_v1.json`.
 
-Der aktualisierte Linkage-Report enthält die vier verbleibenden aktiven Kandidaten. Drei
+Der aktualisierte Linkage-Report enthält die drei verbleibenden aktiven Kandidaten. Zwei
 Perception-Fragen sind `generalisiert`: Kreis-/Ring-Signale für
-`AC0922_S`, `AC0414_S` und `AC0130` sowie der horizontale Anschluss
-von `AC0922_S`. `AC0130_M` ist `nur Sonderfall`, weil Rechteck und Diagonalen
+`AC0414_S` und `AC0130`. `AC0130_M` ist `nur Sonderfall`, weil Rechteck und Diagonalen
 zwar erkannt werden, aber noch kein allgemeiner Rechteck-Geometry-IR-Seed
 zugeordnet ist.
 
