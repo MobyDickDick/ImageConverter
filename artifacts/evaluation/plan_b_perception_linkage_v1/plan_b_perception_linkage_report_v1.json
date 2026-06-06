@@ -8,94 +8,11 @@
     "nur Sonderfall",
     "noch nicht erkannt"
   ],
-  "records": [
-    {
-      "schema_version": "plan_b_perception_linkage_record_v1",
-      "variant": "AC0130",
-      "image_path": "artifacts/images_to_convert/AC0130.jpg",
-      "status": "evaluated",
-      "plan_b_reason": "Gr\u00f6\u00dfenverwandter rechteckiger Diff-Kandidat an der Kuratierungsgrenze.",
-      "description": "Plan-B-Kandidat AC0130: Rechteck, Diagonalen und obere Zeichenregion zuerst pr\u00fcfen.",
-      "perception_lerneffekt": {
-        "question": "K\u00f6nnen Au\u00dfenrechteck, Diagonalen und obere Zeichenregion getrennt erkannt werden?",
-        "expected_first_primitive": "rectangle_diagonals_and_top_glyph",
-        "expected_candidate_kinds": [
-          "circle",
-          "line",
-          "rectangle",
-          "ring"
-        ],
-        "expected_seed_kinds": [
-          "CircleBackground"
-        ],
-        "decision": "generalisiert",
-        "matched_candidate_kinds": [
-          "circle",
-          "line",
-          "rectangle",
-          "ring"
-        ],
-        "matched_seed_kinds": [
-          "CircleBackground"
-        ],
-        "top_candidate_kind": "line",
-        "top_confidence": 1.0,
-        "next_action": "Im n\u00e4chsten Plan-B-Paket als vorinitialisierten Geometry-IR-Seed protokollieren."
-      },
-      "candidate_count": 25,
-      "top_candidate": {
-        "schema_version": "perception_primitive_candidate_v1",
-        "kind": "line",
-        "bbox": {
-          "x": 1.0,
-          "y": 9.0,
-          "width": 2.0,
-          "height": 61.0
-        },
-        "center": {
-          "x": 2.0,
-          "y": 39.5
-        },
-        "geometry": {
-          "orientation": "vertical",
-          "x_center": 2.0,
-          "y_top": 9.0,
-          "y_bottom": 70.0,
-          "length_px": 61.0,
-          "stroke_width_px": 2.0,
-          "angle_deg": 90.0
-        },
-        "color": {
-          "fill_rgb": null,
-          "stroke_rgb": null,
-          "fill_hex": null,
-          "stroke_hex": null,
-          "fill_confidence": 0.0,
-          "stroke_confidence": 0.0
-        },
-        "confidence": 1.0,
-        "roi": {
-          "type": "image",
-          "hint": "full_image",
-          "bbox": {
-            "x": 0.0,
-            "y": 0.0,
-            "width": 40.0,
-            "height": 80.0
-          }
-        },
-        "evidence": {
-          "detector": "detect_vertical_lines",
-          "edge_model": "canny+hough_lines_p"
-        },
-        "source": "hough"
-      }
-    }
-  ],
+  "records": [],
   "metrics": {
-    "samples": 1,
-    "evaluated_samples": 1,
-    "generalisiert": 1,
+    "samples": 0,
+    "evaluated_samples": 0,
+    "generalisiert": 0,
     "nur_sonderfall": 0,
     "noch_nicht_erkannt": 0,
     "all_have_perception_lerneffekt": true

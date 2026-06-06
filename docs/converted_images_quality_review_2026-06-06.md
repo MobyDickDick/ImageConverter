@@ -120,3 +120,19 @@ Die Nachmessung sinkt von `mean_delta2=54603.582031` auf `300.156097` und von
 allgemeinen `RectangleBackground`-Seed; außerdem zeigt das reale JPG die in der
 Beschreibung genannten Diagonalen nicht stabil. `AC0130_M` ist aus Triage und
 Linkage entfernt, sodass `AC0130` als letzter Kandidat verbleibt.
+
+
+## Folgeaktualisierung Run OL
+
+`AC0130` wurde im realen Ein-Datei-Pfad erneut konvertiert. Der reguläre
+AC0030-Geometry-IR-Vorschlag erreichte `mean_delta2=9027.247070`, setzte das
+Rechteck und Andreaskreuz jedoch deutlich zu klein in die 40x80-Fläche und lag
+mit `normalized_mse=0.04627578` knapp über der Review-Grenze.
+
+Das akzeptierte reine Vektor-SVG bildet den horizontalen Metallverlauf, das
+fast vollflächige Außenrechteck, beide beschnittenen Diagonalpfade und die zwei
+oberen Minuszeichen dimensionstreu ab. Die Nachmessung sinkt vom bisherigen
+Review-Wert `mean_delta2=45778.234375` auf `1921.981201` und von
+`normalized_mse=0.23466992` auf `0.00985252`. Die PF8-Frage ist
+`generalisiert`; `AC0130` ist aus Triage und Linkage entfernt. Damit ist die in
+Run OG kuratierte Rotation vollständig abgeschlossen und synchron leer.

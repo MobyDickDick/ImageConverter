@@ -2,19 +2,15 @@
 
 Ziel: maximal **5** aktive JPG-Kandidaten, die derzeit noch nicht zufriedenstellend konvertieren, aber voraussichtlich nicht "hoffnungslos komplex" sind.
 
-## Aktuelle Kandidaten (Stand: 2026-06-06, nach AC0130-M-Run OK)
+## Aktuelle Kandidaten (Stand: 2026-06-06, nach AC0130-Run OL)
 
-Die Rotation wurde reproduzierbar aus dem aktualisierten Qualitätsreview erzeugt.
-Priorisiert werden zuerst nicht zufriedenstellende Einträge aus
-`successed_conversions.txt`, danach kompakte Varianten aus dem vorhandenen
-Diff-Inventar. Die vollständige Evidenz liegt unter
-`artifacts/evaluation/conversion_quality_review_v2/`.
+Die mit Run OG kuratierte Plan-B-/Perception-Rotation ist vollständig
+abgearbeitet. Aktuell ist kein Kandidat aktiv; eine neue Rotation wird erst aus
+einem reproduzierbaren Qualitätsrefresh abgeleitet.
 
-| Priorität | Kandidat | Quelle | `normalized_mse` | Auswahlgrund |
-| ---: | --- | --- | ---: | --- |
-| 1 | `AC0130.jpg` | Diff-Inventar | `0.23466992` | Größenverwandter Folgepunkt an der festgelegten Flächengrenze. |
-
-`AC0130_M.jpg` wurde als dimensionstreuer Metallverlauf mit den im Referenzbild sichtbaren vertikalen Partitionen rekonstruiert. Die Qualitätsmetrik sank von `0.27991071` auf `0.00153867`; die beschriebene Diagonalgeometrie ist im realen JPG nicht stabil sichtbar und wurde deshalb nicht gegen die Bildtopologie erzwungen. Die nächste Rotation beginnt mit `AC0130.jpg`.
+`AC0130.jpg` wurde als dimensionstreues 40x80-Kühlelement mit Metallverlauf,
+Außenrechteck, zwei beschnittenen Diagonalpfaden und zwei oberen Minuszeichen
+rekonstruiert. Die Qualitätsmetrik sank von `0.23466992` auf `0.00985252`.
 
 ## Perception-Lerneffekt (Pflichtabschnitt ab PF8)
 
@@ -24,10 +20,10 @@ dem PF8-Linkage-Report und dokumentiert die Entscheidung als
 maschinenlesbare Stand liegt unter
 `artifacts/evaluation/plan_b_perception_linkage_v1/plan_b_perception_linkage_report_v1.json`.
 
-Der aktualisierte Linkage-Report enthält den letzten aktiven Kandidaten `AC0130`.
-Seine Kreis-/Ring-Signale sind `generalisiert`; die AC0130-M-Frage bleibt als
-abgeschlossener Sonderfall dokumentiert, weil der allgemeine Rechteck-Seed fehlt
-und das reale JPG vertikale Partitionen statt stabiler Diagonalen zeigt.
+Die AC0130-Frage ist `generalisiert`: Außenlinien und Diagonalen werden als
+Linien-/Rechteckkandidaten erkannt; die vorhandene Kreis-/Ring-Seed-Zuordnung
+liefert zusätzlich einen vorinitialisierten Geometry-IR-Hinweis. Nach dem
+Abschluss ist der aktive Linkage-Report synchron leer.
 
 ## Pflege-Regel (fortan)
 

@@ -1395,18 +1395,7 @@ def write_text_glyph_evaluation_report(
     }
 
 
-PLAN_B_PERCEPTION_TARGETS: list[dict[str, Any]] = [
-    {
-        "variant": "AC0130",
-        "image_candidates": ["artifacts/images_to_convert/AC0130.jpg"],
-        "plan_b_reason": "Größenverwandter rechteckiger Diff-Kandidat an der Kuratierungsgrenze.",
-        "perception_question": "Können Außenrechteck, Diagonalen und obere Zeichenregion getrennt erkannt werden?",
-        "expected_first_primitive": "rectangle_diagonals_and_top_glyph",
-        "expected_candidate_kinds": {"rectangle", "line", "circle", "ring"},
-        "expected_seed_kinds": {"CircleBackground"},
-        "description": "Plan-B-Kandidat AC0130: Rechteck, Diagonalen und obere Zeichenregion zuerst prüfen.",
-    },
-]
+PLAN_B_PERCEPTION_TARGETS: list[dict[str, Any]] = []
 
 
 def _resolve_first_existing_path(candidates: list[str]) -> Path | None:
