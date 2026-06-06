@@ -103,3 +103,20 @@ und `normalized_mse` von `0.31829609` auf `0.00360827`. Kreis-/Ring-Erkennung
 ist damit als `generalisiert` abgeschlossen. `AC0414_S` wurde aus Triage und
 PF8-Linkage entfernt; als nächste Kandidaten bleiben synchron `AC0130_M` und
 `AC0130`.
+
+
+## Folgeaktualisierung Run OK
+
+`AC0130_M` wurde im realen Ein-Datei-Pfad erneut konvertiert. Der reguläre
+AC0030-Geometry-IR-Vorschlag erreichte `mean_delta2=12447.075195`, setzte das
+Rechteck jedoch deutlich zu klein in die 30x60-Fläche. Das akzeptierte SVG
+erhält stattdessen die Referenzabmessungen vollständig und bildet den sichtbaren
+Metallverlauf, die horizontalen Außenkanten und die drei vertikalen
+Partitionsbereiche als reine Vektorflächen ab.
+
+Die Nachmessung sinkt von `mean_delta2=54603.582031` auf `300.156097` und von
+`normalized_mse=0.27991071` auf `0.00153867`. Die PF8-Frage bleibt
+`nur Sonderfall`: Rechteck und Linien werden erkannt, aber es gibt keinen
+allgemeinen `RectangleBackground`-Seed; außerdem zeigt das reale JPG die in der
+Beschreibung genannten Diagonalen nicht stabil. `AC0130_M` ist aus Triage und
+Linkage entfernt, sodass `AC0130` als letzter Kandidat verbleibt.

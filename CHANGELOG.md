@@ -7,6 +7,8 @@ All notable changes to ImageConverter will be documented in this file.
 
 ## Unreleased
 
+- Plan-B Run OK rekonstruiert `AC0130_M` als dimensionstreuen Metallverlauf mit sichtbaren vertikalen Partitionen, senkt `normalized_mse` auf `0.00153867` und rotiert den Kandidaten aus PF8/Triage.
+
 - AC0414_S now uses a topology-preserving partitioned-circle SVG, reducing normalized MSE from 0.31829609 to 0.00360827 while rotating Plan-B/PF8 to AC0130_M.
 
 - AC0922_S now has a corrected quality baseline (`normalized_mse=0.02747206`); a rectangle-shaped re-conversion regression is rejected while the accepted circle/left-connector snapshot is regression-tested and Plan-B/PF8 rotates to AC0414_S.

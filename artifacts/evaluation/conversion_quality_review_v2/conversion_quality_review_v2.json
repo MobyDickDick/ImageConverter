@@ -10,21 +10,9 @@
     "successful_missing_or_failed": 0,
     "diff_variants": 131,
     "diff_renderable_pairs": 121,
-    "selected_candidates": 2
+    "selected_candidates": 1
   },
   "selected_candidates": [
-    {
-      "variant": "AC0130_M",
-      "source": "diff_inventory",
-      "image_path": "artifacts/images_to_convert/AC0130_M.jpg",
-      "svg_path": "artifacts/converted_images/converted_svgs/AC0130_M.svg",
-      "width": 30,
-      "height": 60,
-      "mean_delta2": 54603.58203125,
-      "normalized_mse": 0.27991071142509294,
-      "status": "ok",
-      "image_area": 1800
-    },
     {
       "variant": "AC0130",
       "source": "diff_inventory",

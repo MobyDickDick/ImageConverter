@@ -1397,16 +1397,6 @@ def write_text_glyph_evaluation_report(
 
 PLAN_B_PERCEPTION_TARGETS: list[dict[str, Any]] = [
     {
-        "variant": "AC0130_M",
-        "image_candidates": ["artifacts/images_to_convert/AC0130_M.jpg"],
-        "plan_b_reason": "Kompakter rechteckiger Diff-Kandidat mit hoher Abweichung.",
-        "perception_question": "Können Außenrechteck und diagonale Linien als allgemeine Primitive erkannt werden?",
-        "expected_first_primitive": "rectangle_with_diagonal_lines",
-        "expected_candidate_kinds": {"rectangle", "line"},
-        "expected_seed_kinds": {"RectangleBackground"},
-        "description": "Plan-B-Kandidat AC0130_M: rechteckigen Grundkörper und Diagonalen zuerst prüfen.",
-    },
-    {
         "variant": "AC0130",
         "image_candidates": ["artifacts/images_to_convert/AC0130.jpg"],
         "plan_b_reason": "Größenverwandter rechteckiger Diff-Kandidat an der Kuratierungsgrenze.",
