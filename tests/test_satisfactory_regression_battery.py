@@ -89,6 +89,34 @@ def _prepare_mini_baseline(base_dir: Path, limit: int = 3) -> list[str]:
     return copied
 
 
+def _snapshot_source_images(variants: list[str], snapshot_dir: Path) -> dict[str, Path]:
+    """Copy and validate immutable source images for a long reconversion run."""
+
+    if converter.cv2 is None:
+        pytest.skip("cv2 not available in this environment")
+
+    snapshot_dir.mkdir(parents=True, exist_ok=True)
+    snapshots: dict[str, Path] = {}
+    missing_or_unreadable: list[str] = []
+    for variant in variants:
+        source_path = _source_image_path(variant)
+        image = converter.cv2.imread(str(source_path))
+        if image is None:
+            missing_or_unreadable.append(f"{variant} ({source_path})")
+            continue
+        snapshot_path = snapshot_dir / f"{variant.upper()}.jpg"
+        shutil.copy2(source_path, snapshot_path)
+        if converter.cv2.imread(str(snapshot_path)) is None:
+            missing_or_unreadable.append(f"{variant} ({snapshot_path})")
+            continue
+        snapshots[variant.upper()] = snapshot_path
+
+    assert not missing_or_unreadable, (
+        "Missing or unreadable source images: " + ", ".join(missing_or_unreadable[:20])
+    )
+    return snapshots
+
+
 def _rendered_mean_delta2(image_path: Path, svg_path: Path) -> float:
     if converter.cv2 is None or converter.np is None:
         pytest.skip("numpy/cv2 not available in this environment")
@@ -218,13 +246,22 @@ def test_all_satisfactory_successful_variants_reconversion_keeps_or_improves_qua
     if not variants:
         pytest.skip("No baseline variants found.")
 
+    source_image_snapshots = _snapshot_source_images(
+        variants, tmp_path / "source-image-snapshots"
+    )
+    _debug_log(
+        debug_log,
+        "source_images_snapshotted",
+        snapshot_count=len(source_image_snapshots),
+    )
+
     baseline_mean_delta2: dict[str, float] = {}
     missing_pairs: list[str] = []
     for variant in variants:
         _debug_log(debug_log, "baseline_metric_start", variant=variant)
-        image_path = _source_image_path(variant)
+        image_path = source_image_snapshots[variant.upper()]
         svg_path = BASE / "svgs" / f"{variant}.svg"
-        if not image_path.exists() or not svg_path.exists():
+        if not svg_path.exists():
             missing_pairs.append(variant)
             continue
         baseline_mean_delta2[variant.upper()] = _rendered_mean_delta2(image_path, svg_path)
@@ -289,7 +326,9 @@ def test_all_satisfactory_successful_variants_reconversion_keeps_or_improves_qua
     for variant, previous_mean_delta2 in baseline_mean_delta2.items():
         _debug_log(debug_log, "quality_compare_start", variant=variant)
         new_svg = reconverted_svg_paths[variant.upper()]
-        new_mean_delta2 = _rendered_mean_delta2(_source_image_path(variant), new_svg)
+        new_mean_delta2 = _rendered_mean_delta2(
+            source_image_snapshots[variant.upper()], new_svg
+        )
         allowed_max = previous_mean_delta2 + max(quality_epsilon, abs(previous_mean_delta2) * quality_epsilon)
         _debug_log(
             debug_log,
@@ -318,3 +357,47 @@ def test_all_satisfactory_successful_variants_reconversion_keeps_or_improves_qua
         "Successful-conversion quality regressed since the stored baseline conversion: "
         + "; ".join(regressions[:20])
     )
+
+
+def test_snapshot_source_images_preserves_readable_image_bytes(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    if converter.cv2 is None or converter.np is None:
+        pytest.skip("numpy/cv2 not available in this environment")
+
+    source_dir = tmp_path / "source"
+    source_dir.mkdir()
+    source_path = source_dir / "AC9999_S.jpg"
+    image = converter.np.full((3, 4, 3), 127, dtype=converter.np.uint8)
+    assert converter.cv2.imwrite(str(source_path), image)
+    monkeypatch.setattr(
+        __import__(__name__, fromlist=["SOURCE_IMAGES"]),
+        "SOURCE_IMAGES",
+        source_dir,
+    )
+
+    snapshots = _snapshot_source_images(["AC9999_S"], tmp_path / "snapshots")
+
+    snapshot_path = snapshots["AC9999_S"]
+    assert snapshot_path != source_path
+    source_bytes = source_path.read_bytes()
+    assert snapshot_path.read_bytes() == source_bytes
+
+    source_path.unlink()
+    assert converter.cv2.imread(str(snapshot_path)) is not None
+    assert snapshot_path.read_bytes() == source_bytes
+
+
+def test_snapshot_source_images_reports_unreadable_sources(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    source_dir = tmp_path / "source"
+    source_dir.mkdir()
+    monkeypatch.setattr(
+        __import__(__name__, fromlist=["SOURCE_IMAGES"]),
+        "SOURCE_IMAGES",
+        source_dir,
+    )
+
+    with pytest.raises(AssertionError, match="AC9999_S"):
+        _snapshot_source_images(["AC9999_S"], tmp_path / "snapshots")

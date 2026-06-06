@@ -2,12 +2,23 @@
 
 Ziel: maximal **5** aktive JPG-Kandidaten, die derzeit noch nicht zufriedenstellend konvertieren, aber voraussichtlich nicht "hoffnungslos komplex" sind.
 
-## Aktuelle Kandidaten (Stand: 2026-06-06, nach AC0864-S-Run)
+## Aktuelle Kandidaten (Stand: 2026-06-06, Qualitätsrefresh Run OG)
 
-Die dokumentierte AC08-Weak-Family-Rotation ist vollständig abgearbeitet. Aktuell
-gibt es keinen aktiv freigegebenen Plan-B-Kandidaten. Vor einer neuen Rotation
-muss die Qualitätsauswertung erneut erzeugt und daraus ein noch nicht erledigter,
-visuell einfacher bis mittlerer Kandidat ausgewählt werden.
+Die Rotation wurde reproduzierbar aus dem aktualisierten Qualitätsreview erzeugt.
+Priorisiert werden zuerst nicht zufriedenstellende Einträge aus
+`successed_conversions.txt`, danach kompakte Varianten aus dem vorhandenen
+Diff-Inventar. Die vollständige Evidenz liegt unter
+`artifacts/evaluation/conversion_quality_review_v2/`.
+
+| Priorität | Kandidat | Quelle | `normalized_mse` | Auswahlgrund |
+| ---: | --- | --- | ---: | --- |
+| 1 | `AC0835_L.jpg` | erfolgreicher Altbestand | `0.05726039` | Einziger der 48 erfolgreichen Einträge oberhalb der Review-Grenze `0.04594568`. |
+| 2 | `AC0922_S.jpg` | Diff-Inventar | `0.33015759` | Höchste Abweichung unter den kompakten, renderbaren Kandidaten. |
+| 3 | `AC0414_S.jpg` | Diff-Inventar | `0.31829609` | Sehr kompakte Kreis-/Innengeometrie mit hoher Abweichung. |
+| 4 | `AC0130_M.jpg` | Diff-Inventar | `0.27991071` | Rechteck und Diagonalen sind als einfache bis mittlere Primitive abgrenzbar. |
+| 5 | `AC0130.jpg` | Diff-Inventar | `0.23466992` | Größenverwandter Folgepunkt an der festgelegten Flächengrenze. |
+
+Die nächste reguläre Rotation beginnt mit `AC0835_L.jpg`.
 
 ## Perception-Lerneffekt (Pflichtabschnitt ab PF8)
 
@@ -17,10 +28,12 @@ dem PF8-Linkage-Report und dokumentiert die Entscheidung als
 maschinenlesbare Stand liegt unter
 `artifacts/evaluation/plan_b_perception_linkage_v1/plan_b_perception_linkage_report_v1.json`.
 
-Der aktive PF8-Linkage-Report ist nach Abschluss von `AC0864_S.jpg` leer. Der
-Lerneffekt dieses letzten Kandidaten ist abgeschlossen: Kreis und Linie wurden
-`generalisiert` erkannt, und die semantische Ausgabe nutzt die allgemeine
-AC08-Geometrie für ein horizontal gespiegeltes `rF`-Badge.
+Der aktualisierte Linkage-Report enthält alle fünf aktiven Kandidaten. Vier
+Perception-Fragen sind bereits `generalisiert`: Kreis-/Ring-Signale für
+`AC0835_L`, `AC0922_S`, `AC0414_S` und `AC0130` sowie der horizontale Anschluss
+von `AC0922_S`. `AC0130_M` ist `nur Sonderfall`, weil Rechteck und Diagonalen
+zwar erkannt werden, aber noch kein allgemeiner Rechteck-Geometry-IR-Seed
+zugeordnet ist.
 
 ## Pflege-Regel (fortan)
 
@@ -28,6 +41,7 @@ Bei jedem abgeschlossenen Arbeitspaket:
 
 - erledigte/gelöste Einträge entfernen,
 - auf **maximal 5** Einträge auffüllen,
+- den Review mit `tools/review_conversion_quality.py` reproduzierbar erneuern,
 - bevorzugt Kandidaten wählen, die
   - in `artifacts/converted_images/diff_pngs/*_diff.png` weiterhin als problematisch auftauchen,
   - noch nicht häufig in expliziten Aufgaben genannt wurden,
