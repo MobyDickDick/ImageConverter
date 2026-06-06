@@ -42,6 +42,11 @@ def runQualityPassesImpl(
         if not candidates:
             candidates = select_middle_lower_tercile_fn(current_rows)
         if not candidates:
+            candidates = _selectIsolatedRefinementCandidate(
+                current_rows,
+                skip_variants=skip_variants,
+            )
+        if not candidates:
             break
 
         improved_in_pass = False
@@ -109,3 +114,28 @@ def _isFiniteNumber(value: object) -> bool:
     except (TypeError, ValueError):
         return False
     return numeric == numeric and numeric not in (float("inf"), float("-inf"))
+
+
+def _selectIsolatedRefinementCandidate(
+    rows: list[dict[str, object]],
+    *,
+    skip_variants: set[str],
+) -> list[dict[str, object]]:
+    """Keep a one-file segment eligible for one explicit refinement attempt.
+
+    Threshold and tercile selection intentionally target unresolved multi-file
+    batches.  A segmented run contains exactly one finite result, however, so
+    neither selector can nominate it once its initial error is below the open
+    threshold.  Returning that sole non-skipped row lets the existing strict
+    accept/reject comparison measure a real refinement without weakening the
+    quality threshold for larger batches.
+    """
+    if len(rows) != 1:
+        return []
+
+    row = rows[0]
+    variant = str(row.get("variant", "")).strip().upper()
+    normalized_skips = {str(value).strip().upper() for value in skip_variants if str(value).strip()}
+    if variant and variant in normalized_skips:
+        return []
+    return [row]

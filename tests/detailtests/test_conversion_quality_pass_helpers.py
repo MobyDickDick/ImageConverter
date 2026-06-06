@@ -119,3 +119,75 @@ def test_run_quality_passes_continues_after_failed_candidate() -> None:
 
     assert stop is True
     assert result_map["AC0801_S.jpg"]["error_per_pixel"] == 0.3
+
+
+def test_run_quality_passes_refines_single_below_threshold_row() -> None:
+    row = {
+        "filename": "AC0820_L.jpg",
+        "variant": "AC0820_L",
+        "error_per_pixel": 0.25,
+        "mean_delta2": 8.0,
+    }
+    converted: list[str] = []
+    quality_logs: list[dict[str, object]] = []
+
+    stop = conversion_quality_pass_helpers.runQualityPassesImpl(
+        max_quality_passes=1,
+        stop_after_failure=False,
+        deterministic_order=True,
+        rng=object(),
+        base_iterations=5,
+        allowed_error_per_pixel=1.0,
+        skip_variants=set(),
+        result_map={"AC0820_L.jpg": row},
+        quality_logs=quality_logs,
+        conversion_bestlist_rows={},
+        convert_one_fn=lambda filename, **_kwargs: (
+            converted.append(filename)
+            or {**row, "error_per_pixel": 0.20, "mean_delta2": 6.0},
+            False,
+        ),
+        select_open_quality_cases_fn=lambda _rows, **_kwargs: [],
+        select_middle_lower_tercile_fn=lambda _rows: [],
+        iteration_strategy_for_pass_fn=lambda _pass_idx, base: (base + 1, 7),
+        adaptive_iteration_budget_for_quality_row_fn=lambda _row, planned: planned,
+        evaluate_quality_pass_candidate_fn=lambda _old, _new: (True, "accepted_improvement", 0.25, 0.20, 8.0, 6.0),
+        store_conversion_bestlist_snapshot_fn=lambda _variant, _row: None,
+        restore_conversion_bestlist_snapshot_fn=lambda _variant: None,
+    )
+
+    assert stop is False
+    assert converted == ["AC0820_L.jpg"]
+    assert quality_logs[0]["decision"] == "accepted_improvement"
+
+
+def test_run_quality_passes_does_not_force_isolated_skipped_variant() -> None:
+    row = {
+        "filename": "AC0820_L.jpg",
+        "variant": "AC0820_L",
+        "error_per_pixel": 0.25,
+        "mean_delta2": 8.0,
+    }
+
+    stop = conversion_quality_pass_helpers.runQualityPassesImpl(
+        max_quality_passes=1,
+        stop_after_failure=False,
+        deterministic_order=True,
+        rng=object(),
+        base_iterations=5,
+        allowed_error_per_pixel=1.0,
+        skip_variants={"AC0820_L"},
+        result_map={"AC0820_L.jpg": row},
+        quality_logs=[],
+        conversion_bestlist_rows={},
+        convert_one_fn=lambda *_args, **_kwargs: (_ for _ in ()).throw(AssertionError("skipped variant retried")),
+        select_open_quality_cases_fn=lambda _rows, **_kwargs: [],
+        select_middle_lower_tercile_fn=lambda _rows: [],
+        iteration_strategy_for_pass_fn=lambda _pass_idx, base: (base, 7),
+        adaptive_iteration_budget_for_quality_row_fn=lambda _row, planned: planned,
+        evaluate_quality_pass_candidate_fn=lambda _old, _new: (False, "rejected_regression", 0.25, 0.30, 8.0, 9.0),
+        store_conversion_bestlist_snapshot_fn=lambda _variant, _row: None,
+        restore_conversion_bestlist_snapshot_fn=lambda _variant: None,
+    )
+
+    assert stop is False

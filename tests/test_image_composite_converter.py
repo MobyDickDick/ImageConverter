@@ -2755,7 +2755,7 @@ def test_convert_range_accepts_quality_pass_when_mean_delta2_improves(
     monkeypatch.setattr(image_composite_converter, "_writeQualityConfig", lambda *_args, **_kwargs: None)
     monkeypatch.setattr(image_composite_converter, "_harmonizeSemanticSizeVariants", lambda *_args, **_kwargs: None)
     monkeypatch.setattr(image_composite_converter, "_writePixelDelta2Ranking", lambda *_args, **_kwargs: None)
-    monkeypatch.setattr(image_composite_converter, "_selectOpenQualityCases", lambda rows, **_kwargs: list(rows))
+    monkeypatch.setattr(image_composite_converter, "_selectOpenQualityCases", lambda _rows, **_kwargs: [])
     monkeypatch.setattr(image_composite_converter, "_selectMiddleLowerTercile", lambda _rows: [])
     monkeypatch.setattr(image_composite_converter, "_tryTemplateTransfer", lambda **_kwargs: (None, None))
 
@@ -2824,7 +2824,7 @@ def test_convert_range_rejects_quality_pass_regression_and_keeps_previous_output
     monkeypatch.setattr(image_composite_converter, "_writeQualityConfig", lambda *_args, **_kwargs: None)
     monkeypatch.setattr(image_composite_converter, "_harmonizeSemanticSizeVariants", lambda *_args, **_kwargs: None)
     monkeypatch.setattr(image_composite_converter, "_writePixelDelta2Ranking", lambda *_args, **_kwargs: None)
-    monkeypatch.setattr(image_composite_converter, "_selectOpenQualityCases", lambda rows, **_kwargs: list(rows))
+    monkeypatch.setattr(image_composite_converter, "_selectOpenQualityCases", lambda _rows, **_kwargs: [])
     monkeypatch.setattr(image_composite_converter, "_selectMiddleLowerTercile", lambda _rows: [])
     monkeypatch.setattr(image_composite_converter, "_tryTemplateTransfer", lambda **_kwargs: (None, None))
 
