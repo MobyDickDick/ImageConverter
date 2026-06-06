@@ -7,6 +7,8 @@ All notable changes to ImageConverter will be documented in this file.
 
 ## Unreleased
 
+- FP-Recovery Run OD makes isolated one-file refinement measurable without weakening multi-file quality selection; the full gate now passes with 14/14 reports, 6/6 preserved anchors, 3 accepted improvements, and 0 accepted regressions.
+
 - FP-Recovery Run OC now confirms 14/14 AC08 iteration reports and all 6 Previously-Good anchors at the regular 32-iteration budget; release remains blocked because isolated one-file segments produce no measurable quality-pass improvement.
 
 - The segmented AC08 runner now resolves quarantined variant source folders and requires the expected `Iteration_Log.csv` row before marking a segment complete; aggregation independently rejects stale markers without matching report data.

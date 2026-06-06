@@ -3446,3 +3446,10 @@ Ziel: Die Konvertierung soll strikt als **Kette** laufen:
 - **Fortschritt:** Der vollständige feste AC08-Satz lief mit regulären 32 Iterationen segmentiert durch: Kernsuite `714 passed`, 14/14 Segmente `PASS`, 14/14 `Iteration_Log.csv`-Datensätze und 6/6 erhaltene Previously-Good-Anker. Die in FP-D13 fehlenden Reports für `AC0811_L`, `AC0811_M`, `AC0811_S` und `AC0831_L` sind damit auch unter dem regulären Budget wiederhergestellt.
 - **Blocker:** Das Qualitätsgate bleibt mit `criterion_regression_set_improved=0` und `overall_success=0` rot. Die Ein-Datei-Segmente erzeugen keine Quality-Pass-Kandidaten: Alle initialen Fehlerwerte liegen unter dem offenen Grenzwert `1.0`, während der Terzil-Fallback mindestens drei Ergebnisse benötigt; fokussierte `AC0811`-Läufe deaktivieren Quality-Pässe zusätzlich.
 - **Nächster sinnvoller Schritt:** Einen segmentierungsfesten isolierten Refinement-Pass implementieren, der Verbesserungen gegen das initiale Segmentergebnis akzeptiert, Verschlechterungen verwirft und erst danach den vollständigen 14er-Lauf erneut gegen die FP-D14-Schwellen ausführt.
+
+### Fortschritt vs. Blocker (Session 2026-06-05, isoliertes Refinement Run OD)
+
+- **Fortschritt:** Ein-Datei-Segmente erhalten nach leerer Open-Case- und Terzil-Auswahl genau einen expliziten Refinement-Kandidaten, sofern die Variante nicht übersprungen ist. Die bestehende strikte Accept/Reject-Auswertung bleibt unverändert.
+- **Sicherung:** Gezielte Tests `16 passed`; vollständige Kernsuite `716 passed`; segmentierter AC08-Smoke 14/14 `PASS`. Der zusammengeführte Report weist 3 akzeptierte Verbesserungen und 4 verworfene Regressionen aus.
+- **Abschluss:** Alle FP-D14-Schwellen sind erfüllt: 14/14 Variantendatensätze, 6/6 Previously-Good-Anker, 3 gemessene Verbesserungen, 0 akzeptierte Regressionen und `overall_success=1`.
+- **Nächster sinnvoller Schritt:** Das abgeschlossene Finish-Playbook verlassen und mit der regulären Roadmap-/Plan-B-Rotation fortfahren.

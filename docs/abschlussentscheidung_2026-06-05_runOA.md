@@ -2,13 +2,14 @@
 
 ## Entscheidung
 
-**Noch offen – keine Release-Freigabe.**
+**Durch – Release-Gate freigegeben durch Run OD.**
 
 FP-D14 schließt das 14-Tage-Finish-Playbook als Entscheidungs- und
-Dokumentationspaket ab. Die Entscheidung selbst bleibt rot: Der technisch
-vollständig gestartete FP-D13-Lauf hat keine vollständige fachliche
-Artefaktkette und keine messbare Verbesserung gegenüber der Baseline belegt.
-Ein grüner Prozess-Exit wird deshalb nicht mit fachlichem Erfolg gleichgesetzt.
+Dokumentationspaket ab. Die ursprüngliche Run-OA-Entscheidung blieb rot, weil
+der technisch vollständig gestartete FP-D13-Lauf weder eine vollständige
+fachliche Artefaktkette noch eine messbare Verbesserung gegenüber der Baseline
+belegte. Run OD liefert nun die zuvor fehlende vollständige Evidenz und
+überschreibt diese historische Zwischenentscheidung mit der Freigabe.
 
 ## Drei harte Entscheidungskennzahlen
 
@@ -100,3 +101,17 @@ Ein-Datei-Segmente liegen unter dem offenen Fehlergrenzwert und sind zu klein
 für den Terzil-Fallback, sodass kein Refinement-Vergleich protokolliert wird.
 Die vollständige Evidenz und das nächste Abnahmepaket stehen in
 `docs/next_arbeitspaket_2026-06-05_runOC.md`.
+
+## Finale Freigabe – Run OD (2026-06-05)
+
+Run OD behebt den letzten in Run OC eingegrenzten Blocker durch einen eng
+begrenzten Ein-Datei-Refinement-Fallback. Der vollständige Wiederholungslauf
+erfüllt nun gleichzeitig alle harten Schwellen: `14/14` Variantendatensätze,
+`6/6` erhaltene Previously-Good-Anker, `3` gemessene Verbesserungen, `0`
+akzeptierte Regressionen und `overall_success=1`. Kernsuite (`716 passed`),
+segmentierter AC08-Smoke und Qualitätsgate sind grün.
+
+Damit ist die frühere Entscheidung „noch offen“ durch neue vollständige
+Evidenz überholt. Die Abschlussentscheidung lautet **„durch“**. Details,
+Befehle und Einzelmetriken stehen in
+`docs/next_arbeitspaket_2026-06-05_runOD.md`.
