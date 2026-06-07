@@ -136,3 +136,18 @@ Review-Wert `mean_delta2=45778.234375` auf `1921.981201` und von
 `normalized_mse=0.23466992` auf `0.00985252`. Die PF8-Frage ist
 `generalisiert`; `AC0130` ist aus Triage und Linkage entfernt. Damit ist die in
 Run OG kuratierte Rotation vollständig abgeschlossen und synchron leer.
+
+
+## Folgeaktualisierung Run OM (2026-06-07)
+
+Nach Abschluss der bisherigen Rotation wurde der Review ohne manuelle
+Kandidatenvorgabe erneut ausgeführt. Alle 48 Erfolgsvarianten sind renderbar;
+`AC0820_L` ist mit `normalized_mse=0.05117826` der einzige Eintrag oberhalb der
+Review-Grenze `0.04594568`. Im Diff-Inventar sind 120 von 129 Varianten als
+Bild-/SVG-Paar renderbar.
+
+Die deterministische Auswahl ergibt `AC0820_L`, `AC0531_1_S`, `AC0502_1_M`,
+`AC0551_1_M` und `AC0403_1_M`. Triage, Plan-B-Liste und PF8-Linkage führen
+diese fünf Varianten in derselben Reihenfolge. Der Perception-Report bewertet
+vier Fragen als `generalisiert`; `AC0551_1_M` bleibt mangels allgemeinem
+Rechteck-/HorizontalRule-Seed `nur Sonderfall`.

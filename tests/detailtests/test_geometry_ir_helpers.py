@@ -399,7 +399,9 @@ def test_build_geometry_ir_maps_ac0224_right_rotated_top_kelle_three_way_valve_d
     assert [element["kind"] for element in ir] == ["RightRotatedTopKelleThreeWayValveGlyph"]
     assert ir[0]["id"] == "right_rotated_top_kelle_three_way_valve"
     assert ir[0]["label"] == ""
-    assert ir[0]["circle"] == [0.765, 0.500, 0.225]
+    assert ir[0]["circle"] == [0.235, 0.500, 0.225]
+    assert ir[0]["connector"] == [[0.450, 0.500], [0.610, 0.500]]
+    assert ir[0]["body_paths"][2] == [[0.610, 0.500], [0.960, 0.667], [0.960, 0.333]]
 
 
 def test_render_geometry_ir_to_svg_contains_ac0224_right_rotated_top_kelle_three_way_valve_primitives() -> None:
@@ -418,6 +420,8 @@ def test_render_geometry_ir_to_svg_contains_ac0224_right_rotated_top_kelle_three
     assert 'id="right_rotated_top_kelle_three_way_valve_body_3"' in svg
     assert 'id="right_rotated_top_kelle_three_way_valve_connector"' in svg
     assert 'id="right_rotated_top_kelle_three_way_valve_circle"' in svg
+    assert 'fill="#d7d7d7"' in svg
+    assert 'fill="#fafafa"' in svg
     assert 'right_rotated_top_kelle_three_way_valve_label' not in svg
 
 def test_build_geometry_ir_maps_ac0212_vertical_two_way_valve_motor_description() -> None:
