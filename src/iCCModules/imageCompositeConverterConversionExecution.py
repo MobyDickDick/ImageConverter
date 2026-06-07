@@ -854,3 +854,61 @@ def convertOneImpl(
         except OSError:
             pass
     return row, False
+
+
+def recordEarlyQualityAbortImpl(
+    *,
+    filename: str,
+    row: dict[str, object],
+    svg_out_dir: str,
+    diff_out_dir: str,
+    png_out_dir: str,
+    reports_out_dir: str,
+    gate: dict[str, object],
+    append_batch_failure_fn,
+    print_fn=print,
+) -> None:
+    """Preserve the probe SVG as a failed artifact and report a controlled abort."""
+    base = os.path.splitext(filename)[0]
+    svg_path = os.path.join(svg_out_dir, f"{base}.svg")
+    failed_svg_path = os.path.join(svg_out_dir, f"Failed_{base}.svg")
+    if os.path.exists(failed_svg_path):
+        os.unlink(failed_svg_path)
+    if os.path.exists(svg_path):
+        os.replace(svg_path, failed_svg_path)
+    _deleteDiffIfPresent(os.path.join(diff_out_dir, f"{base}_diff.png"))
+    png_path = os.path.join(png_out_dir, f"{base}.png")
+    if os.path.exists(png_path):
+        os.unlink(png_path)
+
+    error = float(row.get("error_per_pixel", float("inf")))
+    threshold = float(gate.get("abort_error_per_pixel", float("inf")))
+    probe_iterations = int(gate.get("probe_iterations", 3))
+    details = (
+        f"probe_error_per_pixel={error:.6f}; abort_threshold={threshold:.6f}; "
+        f"probe_iterations={probe_iterations}; source={gate.get('source', '')}"
+    )
+    append_batch_failure_fn(
+        {
+            "filename": filename,
+            "status": "early_quality_abort",
+            "reason": "probe_far_above_success_threshold",
+            "details": details,
+            "log_file": f"{base}_element_validation.log",
+            "failed_svg": os.path.basename(failed_svg_path) if os.path.exists(failed_svg_path) else "",
+        }
+    )
+    log_path = os.path.join(reports_out_dir, f"{base}_element_validation.log")
+    prior_log = _safeReadTextFile(log_path)
+    with open(log_path, "w", encoding="utf-8") as handle:
+        if prior_log:
+            handle.write(prior_log.rstrip() + "\n")
+        handle.write(
+            "status=early_quality_abort\n"
+            "reason=probe_far_above_success_threshold\n"
+            f"{details}\n"
+        )
+    print_fn(
+        f"[WARN] {filename}: Früher Qualitätsabbruch nach {probe_iterations} Probe-Iterationen "
+        f"(Fehler/Pixel={error:.6f} > Abbruchgrenze={threshold:.6f})."
+    )

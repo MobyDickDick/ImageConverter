@@ -66,11 +66,29 @@ def writeQualityConfigImpl(
 ) -> None:
     path = quality_config_path_fn(reports_out_dir)
     normalized_error_pp = float(allowed_error_per_pixel) if math.isfinite(allowed_error_per_pixel) else 0.0
+    early_abort_config: dict[str, object] = {
+        "enabled": True,
+        "probe_iterations": 3,
+        "threshold_multiplier": 8.0,
+    }
+    if os.path.exists(path):
+        try:
+            with open(path, "r", encoding="utf-8") as existing_file:
+                existing_payload = json.load(existing_file)
+            existing_early_abort = existing_payload.get("early_abort", {}) if isinstance(existing_payload, dict) else {}
+            if isinstance(existing_early_abort, dict):
+                early_abort_config.update(existing_early_abort)
+        except (json.JSONDecodeError, OSError):
+            pass
+
     payload = {
         "allowed_error_per_pixel": float(max(0.0, normalized_error_pp)),
         "skip_variants": sorted(set(skipped_variants)),
+        "early_abort": early_abort_config,
         "notes": (
             "Varianten in skip_variants werden in Folge-Pässen nicht erneut konvertiert. "
+            "early_abort prueft einen kurzen Probelauf gegen die gespeicherte Erfolgsgrenze; "
+            "threshold_multiplier ist bewusst konservativ, um aufholbare Starts nicht abzubrechen. "
             "Loeschen der Datei setzt den Ablauf zurueck, dann werden wieder alle Bitmaps bearbeitet."
         ),
         "source": source,

@@ -55,6 +55,13 @@ python -m src.successful_conversion_quality_app
 Die kleine Anwendung liest `artifacts/converted_images/reports/successful_conversions.txt` als Bestenliste, ergänzt die dort bereits als erfolgreich markierten Varianten automatisch um Qualitätskennzahlen wie `total_delta2 = Σ((ΔR)^2 + (ΔG)^2 + (ΔB)^2)`, `mean_delta2` und `std_delta2` und übernimmt neue Konvertierungen nur dann in Manifest und Snapshot, wenn sich mindestens eine Kernmetrik verbessert. Schlechtere Neu-Konvertierungen werden verworfen und – falls vorhanden – aus der gespeicherten Bestenlisten-Sicherung wiederhergestellt. Zusätzlich wird eine sortierte CSV-Bestenliste unter `artifacts/converted_images/reports/successful_conversions.csv` erzeugt bzw. aktualisiert; die Einträge sind nach dem Namen der konvertierten Bilder (`variant`) geordnet.
 
 
+#### Früher Qualitätsabbruch
+
+Wenn bereits Report-Daten vorhanden sind, führt der Konverter vor dem langen Initiallauf standardmäßig einen kurzen Probelauf aus. Als Erfolgsbasis dient `reports/quality_tercile_config.json`; fehlt dort eine Grenze, wird sie aus den in `successful_conversions.txt` markierten und im `Iteration_Log.csv` vermessenen Konvertierungen abgeleitet. Überschreitet der Probe-Fehler die Erfolgsbasis um den konservativen Faktor `8`, wird die Vollkonvertierung nicht mehr gestartet. Der Fall erscheint mit Status `early_quality_abort` in `batch_failure_summary.csv`, und das Probe-SVG bleibt als fehlgeschlagenes Diagnose-Artefakt erhalten. Ohne belastbare historische Report-Daten ist die Prüfung deaktiviert.
+
+Die Parameter können im Block `early_abort` der `quality_tercile_config.json` angepasst werden (`enabled`, `probe_iterations`, `threshold_multiplier`). Für einzelne Läufe stehen außerdem `ICC_EARLY_QUALITY_ABORT`, `ICC_EARLY_QUALITY_PROBE_ITERATIONS` und `ICC_EARLY_QUALITY_MULTIPLIER` zur Verfügung.
+
+
 ### Weak-Family-Pipeline (Top-N + Vorher/Nachher)
 
 ```bash

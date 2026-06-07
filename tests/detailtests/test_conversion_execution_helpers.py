@@ -774,3 +774,42 @@ def test_convert_one_impl_uses_implicit_sample_svg_for_non_composite_placeholder
     assert row is not None
     assert (svg_out / "AC0030_L.svg").read_text(encoding="utf-8") == sample_svg.read_text(encoding="utf-8")
     assert not (svg_out / "Failed_AC0030_L.svg").exists()
+
+
+def test_record_early_quality_abort_preserves_probe_as_failed_artifact(tmp_path: Path) -> None:
+    svg_out = tmp_path / "svg"
+    diff_out = tmp_path / "diff"
+    png_out = tmp_path / "png"
+    reports = tmp_path / "reports"
+    for path in (svg_out, diff_out, png_out, reports):
+        path.mkdir()
+    (svg_out / "AC0999.svg").write_text("<svg><path/></svg>", encoding="utf-8")
+    (diff_out / "AC0999_diff.png").write_bytes(b"diff")
+    (png_out / "AC0999.png").write_bytes(b"png")
+    (reports / "AC0999_element_validation.log").write_text("status=ok\n", encoding="utf-8")
+    failures: list[dict[str, str]] = []
+    messages: list[str] = []
+
+    conversion_execution_helpers.recordEarlyQualityAbortImpl(
+        filename="AC0999.jpg",
+        row={"error_per_pixel": 9.0},
+        svg_out_dir=str(svg_out),
+        diff_out_dir=str(diff_out),
+        png_out_dir=str(png_out),
+        reports_out_dir=str(reports),
+        gate={
+            "probe_iterations": 3,
+            "abort_error_per_pixel": 8.0,
+            "source": "quality-config",
+        },
+        append_batch_failure_fn=failures.append,
+        print_fn=messages.append,
+    )
+
+    assert not (svg_out / "AC0999.svg").exists()
+    assert (svg_out / "Failed_AC0999.svg").read_text(encoding="utf-8") == "<svg><path/></svg>"
+    assert not (diff_out / "AC0999_diff.png").exists()
+    assert not (png_out / "AC0999.png").exists()
+    assert failures[0]["status"] == "early_quality_abort"
+    assert "status=early_quality_abort" in (reports / "AC0999_element_validation.log").read_text(encoding="utf-8")
+    assert "Früher Qualitätsabbruch" in messages[0]

@@ -63,3 +63,28 @@ def test_load_quality_config_handles_invalid_payload(tmp_path: Path) -> None:
         quality_config_path_fn=quality_config_helpers.qualityConfigPathImpl,
     )
     assert loaded_invalid == {}
+
+
+def test_write_quality_config_preserves_early_abort_tuning(tmp_path: Path) -> None:
+    path = tmp_path / "quality_tercile_config.json"
+    path.write_text(
+        '{"early_abort":{"enabled":false,"probe_iterations":5,"threshold_multiplier":12.0}}',
+        encoding="utf-8",
+    )
+
+    quality_config_helpers.writeQualityConfigImpl(
+        str(tmp_path),
+        allowed_error_per_pixel=0.5,
+        skipped_variants=[],
+        source="test",
+        quality_config_path_fn=lambda _reports: str(path),
+    )
+
+    loaded = quality_config_helpers.loadQualityConfigImpl(
+        str(tmp_path), quality_config_path_fn=lambda _reports: str(path)
+    )
+    assert loaded["early_abort"] == {
+        "enabled": False,
+        "probe_iterations": 5,
+        "threshold_multiplier": 12.0,
+    }
