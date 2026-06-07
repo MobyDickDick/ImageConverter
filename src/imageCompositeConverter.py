@@ -62,6 +62,7 @@ from src.iCCModules import imageCompositeConverterQuality as quality_helpers
 from src.iCCModules import imageCompositeConverterQualityConfig as quality_config_helpers
 from src.iCCModules import imageCompositeConverterQualityThreshold as quality_threshold_helpers
 from src.iCCModules import imageCompositeConverterQualityPassPolicy as quality_pass_policy_helpers
+from src.iCCModules import imageCompositeConverterEarlyQualityGate as early_quality_gate_helpers
 from src.iCCModules import imageCompositeConverterAudit as audit_helpers
 from src.iCCModules import imageCompositeConverterTransfer as transfer_helpers
 from src.iCCModules import imageCompositeConverterGeometryBrackets as geometry_bracket_helpers

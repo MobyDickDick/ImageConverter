@@ -53,6 +53,7 @@ from src.iCCModules import imageCompositeConverterSemanticBadgeRuntime as semant
 from src.iCCModules import imageCompositeConverterDualArrowRuntime as dual_arrow_runtime_helpers
 from src.iCCModules import imageCompositeConverterNonCompositeRuntime as non_composite_runtime_helpers
 from src.iCCModules import imageCompositeConverterQualityPassPolicy as quality_pass_policy_helpers
+from src.iCCModules import imageCompositeConverterEarlyQualityGate as early_quality_gate_helpers
 from src.iCCModules.imageCompositeConverterPerceptionReflection import Perception, Reflection
 
 def detectRelevantRegions(img) -> list[dict[str, object]]:
@@ -1142,9 +1143,16 @@ def convertRange(
     batch_failures: list[dict[str, str]] = []
     stop_after_failure = False
     existing_donor_rows = _loadExistingConversionRows(out_root, folder_path)
+    cfg = _loadQualityConfig(reports_out_dir)
+    early_quality_gate = early_quality_gate_helpers.resolveEarlyQualityGateImpl(
+        cfg,
+        existing_donor_rows,
+        successful_threshold_fn=_computeSuccessfulConversionsErrorThreshold,
+    )
+    early_gate_pending = set(process_files)
     conversion_timeout_sec = max(0.0, float(os.environ.get("ICC_CONVERSION_TIMEOUT_SEC", "0") or "0"))
 
-    def _convertOne(filename: str, iteration_budget: int, badge_rounds: int) -> tuple[dict[str, object] | None, bool]:
+    def _runOne(filename: str, iteration_budget: int, badge_rounds: int) -> tuple[dict[str, object] | None, bool]:
         return conversion_execution_helpers.convertOneImpl(
             filename=filename,
             folder_path=folder_path,
@@ -1168,6 +1176,45 @@ def convertRange(
             run_timeout_sec=conversion_timeout_sec,
             print_fn=print,
         )
+
+    def _convertOne(filename: str, iteration_budget: int, badge_rounds: int) -> tuple[dict[str, object] | None, bool]:
+        requested_iterations = max(1, int(iteration_budget))
+        probe_iterations = int(early_quality_gate.get("probe_iterations", 3))
+        use_probe = (
+            filename in early_gate_pending
+            and bool(early_quality_gate.get("enabled", False))
+            and requested_iterations > probe_iterations
+        )
+        early_gate_pending.discard(filename)
+        if not use_probe:
+            return _runOne(filename, requested_iterations, badge_rounds)
+
+        print(
+            f"[INFO] {filename}: Frühe Qualitätsprobe mit {probe_iterations} Iterationen "
+            f"(Erfolgsbasis={float(early_quality_gate['baseline_error_per_pixel']):.6f}, "
+            f"Abbruchgrenze={float(early_quality_gate['abort_error_per_pixel']):.6f})."
+        )
+        probe_row, failed = _runOne(filename, probe_iterations, badge_rounds)
+        if failed or probe_row is None:
+            return probe_row, failed
+        if early_quality_gate_helpers.shouldAbortAfterProbeImpl(
+            probe_row,
+            requested_iterations=requested_iterations,
+            gate=early_quality_gate,
+        ):
+            conversion_execution_helpers.recordEarlyQualityAbortImpl(
+                filename=filename,
+                row=probe_row,
+                svg_out_dir=svg_out_dir,
+                diff_out_dir=diff_out_dir,
+                png_out_dir=png_out_dir,
+                reports_out_dir=reports_out_dir,
+                gate=early_quality_gate,
+                append_batch_failure_fn=batch_failures.append,
+                print_fn=print,
+            )
+            return None, True
+        return _runOne(filename, requested_iterations, badge_rounds)
 
     # Initial conversion pass for all forms.
     stop_after_failure = conversion_initial_pass_helpers.runInitialConversionPassImpl(
@@ -1210,7 +1257,6 @@ def convertRange(
         for row in result_map.values()
         if math.isfinite(float(row.get("error_per_pixel", float("inf"))))
     ]
-    cfg = _loadQualityConfig(reports_out_dir)
     allowed_error_pp, threshold_source, _successful_threshold, _initial_threshold = _resolveAllowedErrorPerPixel(
         current_rows,
         cfg,
