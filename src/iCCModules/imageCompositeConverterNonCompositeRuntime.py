@@ -412,6 +412,10 @@ def _apply_image_variant_geometry(
     for element in geometry_ir:
         if element.get("kind") == "RightRotatedTopKelleThreeWayValveGlyph":
             element["handle_shape"] = "crossed_square"
+            # The SIA handle is a compact crossed square, not the enlarged
+            # unlabelled circle used by the regular AC0224 variants.
+            element["circle"] = [0.235, 0.500, 0.225]
+            element["connector"][0] = [0.450, 0.500]
     return geometry_ir
 
 

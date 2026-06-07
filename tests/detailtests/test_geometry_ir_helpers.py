@@ -399,8 +399,8 @@ def test_build_geometry_ir_maps_ac0224_right_rotated_top_kelle_three_way_valve_d
     assert [element["kind"] for element in ir] == ["RightRotatedTopKelleThreeWayValveGlyph"]
     assert ir[0]["id"] == "right_rotated_top_kelle_three_way_valve"
     assert ir[0]["label"] == ""
-    assert ir[0]["circle"] == [0.235, 0.500, 0.225]
-    assert ir[0]["connector"] == [[0.450, 0.500], [0.610, 0.500]]
+    assert ir[0]["circle"] == [0.215, 0.500, 0.295]
+    assert ir[0]["connector"] == [[0.412, 0.500], [0.610, 0.500]]
     assert ir[0]["body_paths"][2] == [[0.610, 0.500], [0.960, 0.667], [0.960, 0.333]]
 
 

@@ -1286,6 +1286,37 @@ def test_run_non_composite_iteration_impl_uses_description_geometry_ir_for_ac023
     assert "rotated_180_top_kelle_three_way_valve_body_1" in artifacts[0][0]
     assert "rotated_180_top_kelle_three_way_valve_label" in artifacts[0][0]
 
+def test_ac0224_sia_variant_restores_compact_crossed_square_handle_profile() -> None:
+    geometry_ir = [
+        {
+            "kind": "RightRotatedTopKelleThreeWayValveGlyph",
+            "circle": [0.215, 0.500, 0.295],
+            "connector": [[0.412, 0.500], [0.610, 0.500]],
+        }
+    ]
+
+    regular = non_composite_runtime_helpers._apply_image_variant_geometry(
+        [dict(element) for element in geometry_ir], base_name="AC0224_L"
+    )
+    sia = non_composite_runtime_helpers._apply_image_variant_geometry(
+        [
+            {
+                **element,
+                "circle": list(element["circle"]),
+                "connector": [list(point) for point in element["connector"]],
+            }
+            for element in geometry_ir
+        ],
+        base_name="AC0224_L_sia",
+    )
+
+    assert regular[0]["circle"] == [0.215, 0.500, 0.295]
+    assert "handle_shape" not in regular[0]
+    assert sia[0]["handle_shape"] == "crossed_square"
+    assert sia[0]["circle"] == [0.235, 0.500, 0.225]
+    assert sia[0]["connector"] == [[0.450, 0.500], [0.610, 0.500]]
+
+
 def test_run_non_composite_iteration_impl_uses_description_geometry_ir_for_ac0224_right_rotated_top_kelle_three_way_valve() -> None:
     logs: list[list[str]] = []
     artifacts: list[tuple[str, object]] = []
