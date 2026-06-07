@@ -41,15 +41,23 @@ def loadExistingConversionRowsImpl(
                 if not filename:
                     continue
 
-                variant = os.path.splitext(filename)[0].upper()
-                svg_path = svg_out_dir / f"{variant}.svg"
+                source_stem = os.path.splitext(filename)[0]
+                variant = source_stem.upper()
+                svg_path = svg_out_dir / f"{source_stem}.svg"
+                if not svg_path.exists() and source_stem != variant:
+                    svg_path = svg_out_dir / f"{variant}.svg"
                 if not svg_path.exists():
                     continue
 
                 geometry = read_svg_geometry_fn(str(svg_path))
                 if geometry is None:
-                    continue
-                w, h, params = geometry
+                    # A successful SVG can use semantic/nested primitives that the
+                    # donor-geometry parser does not understand.  It is still a
+                    # valid incremental result and must not be reconverted solely
+                    # because no reusable donor parameters can be extracted.
+                    w, h, params = 0, 0, {}
+                else:
+                    w, h, params = geometry
                 base = get_base_name_fn(variant).upper()
                 if is_semantic_template_variant_fn(base, params):
                     params["mode"] = "semantic_badge"

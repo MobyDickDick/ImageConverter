@@ -55,6 +55,29 @@ def test_partition_reconverts_when_source_or_descriptions_are_newer(tmp_path: Pa
     assert reusable == {}
 
 
+def test_partition_reuses_mixed_case_sia_svg_stem(tmp_path: Path) -> None:
+    source = tmp_path / "input" / "AC0224_L_sia.jpg"
+    svg = tmp_path / "output" / "AC0224_L_sia.svg"
+    _touch(source, 1_000_000_000)
+    _touch(svg, 2_000_000_000)
+    row = {
+        "filename": source.name,
+        "variant": "AC0224_L_SIA",
+        "error_per_pixel": 0.25,
+    }
+
+    pending, reusable = incremental_helpers.partitionReusableConversionsImpl(
+        filenames=[source.name],
+        existing_rows=[row],
+        folder_path=str(source.parent),
+        svg_out_dir=str(svg.parent),
+        descriptions_path=None,
+    )
+
+    assert pending == []
+    assert reusable == {source.name: row}
+
+
 def test_partition_force_reconvert_disables_reuse(tmp_path: Path) -> None:
     pending, reusable = incremental_helpers.partitionReusableConversionsImpl(
         filenames=["AC0800_L.jpg"],

@@ -6895,6 +6895,36 @@ def test_load_existing_conversion_rows_reads_prior_iteration_log(tmp_path: Path)
     assert rows[0]["params"]["mode"] == "semantic_badge"
 
 
+def test_load_existing_conversion_rows_preserves_mixed_case_sia_svg_stem(tmp_path: Path) -> None:
+    output_root = tmp_path / "converted"
+    reports_dir = output_root / "reports"
+    svg_dir = output_root / "converted_svgs"
+    images_dir = tmp_path / "images"
+    reports_dir.mkdir(parents=True)
+    svg_dir.mkdir(parents=True)
+    images_dir.mkdir()
+
+    (reports_dir / "Iteration_Log.csv").write_text(
+        "Dateiname;Gefundene Elemente;Beste Iteration;Diff-Score;FehlerProPixel\n"
+        "AC0224_L_sia.jpg;;1;30.58;0.00815578\n",
+        encoding="utf-8",
+    )
+    (svg_dir / "AC0224_L_sia.svg").write_text(
+        '<svg width="75px" height="50px" viewBox="0 0 75 50" xmlns="http://www.w3.org/2000/svg">'
+        '<g transform="rotate(90)"><path id="right_rotated_top_kelle_three_way_valve_square_cross"/></g>'
+        "</svg>",
+        encoding="utf-8",
+    )
+    shutil.copyfile("artifacts/images_to_convert/AC0224_L_sia.jpg", images_dir / "AC0224_L_sia.jpg")
+
+    rows = conv._loadExistingConversionRows(str(output_root), str(images_dir))
+
+    assert len(rows) == 1
+    assert rows[0]["filename"] == "AC0224_L_sia.jpg"
+    assert rows[0]["variant"] == "AC0224_L_SIA"
+    assert rows[0]["error_per_pixel"] == pytest.approx(0.00815578)
+
+
 def test_read_svg_geometry_detects_co2_text_from_single_text_node(tmp_path: Path) -> None:
     svg_path = tmp_path / "AC0831_L.svg"
     svg_path.write_text(
