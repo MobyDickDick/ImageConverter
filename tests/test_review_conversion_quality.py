@@ -164,3 +164,24 @@ def test_ac0130_m_committed_svg_preserves_visible_vertical_partition_quality() -
     assert 'id="left_partition_1"' in svg
     assert 'id="center_partition"' in svg
     assert 'id="right_partition"' in svg
+
+
+def test_ac0130_committed_svg_preserves_full_size_cross_quality() -> None:
+    record = review_variant("AC0130", source="diff_inventory")
+
+    assert record.status == "ok"
+    assert record.width == 40
+    assert record.height == 80
+    assert record.svg_path == "artifacts/converted_images/converted_svgs/AC0130.svg"
+    assert record.mean_delta2 == pytest.approx(1921.981201171875)
+    assert record.normalized_mse is not None
+    assert record.normalized_mse < 0.045945679012345676
+
+    svg = Path(record.svg_path).read_text(encoding="utf-8")
+    assert '<g id="metal_gradient">' in svg
+    assert '<rect id="main_rect"' in svg
+    assert 'id="diagonal_1_tl_br"' in svg
+    assert 'id="diagonal_2_tr_bl"' in svg
+    assert 'id="minus_glyph_1"' in svg
+    assert 'id="minus_glyph_2"' in svg
+    assert "<image" not in svg

@@ -7,6 +7,8 @@ All notable changes to ImageConverter will be documented in this file.
 
 ## Unreleased
 
+- Plan-B Run OL schließt die Run-OG-Rotation mit einem dimensionstreuen AC0130-Kühlelement aus Metallverlauf, Außenrechteck, beschnittenem Andreaskreuz und zwei Minuszeichen ab; `normalized_mse` sinkt auf `0.00985252` und PF8/Triage sind synchron leer.
+
 - Plan-B Run OK rekonstruiert `AC0130_M` als dimensionstreuen Metallverlauf mit sichtbaren vertikalen Partitionen, senkt `normalized_mse` auf `0.00153867` und rotiert den Kandidaten aus PF8/Triage.
 
 - AC0414_S now uses a topology-preserving partitioned-circle SVG, reducing normalized MSE from 0.31829609 to 0.00360827 while rotating Plan-B/PF8 to AC0130_M.

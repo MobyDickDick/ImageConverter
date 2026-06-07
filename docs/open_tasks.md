@@ -3510,3 +3510,12 @@ Ziel: Die Konvertierung soll strikt als **Kette** laufen:
 - **Perception-Lerneffekt:** Die PF8-Frage bleibt `nur Sonderfall`: Linien und Rechteck werden erkannt, aber kein allgemeiner `RectangleBackground`-Seed erzeugt; die beschriebenen Diagonalen sind im realen JPG nicht stabil sichtbar.
 - **Rotation:** `AC0130_M` wurde aus Triage und PF8-Linkage entfernt; `AC0130` bleibt als letzter aktiver Kandidat.
 - **Nächster sinnvoller Schritt:** Die reguläre Plan-B-Rotation mit `AC0130.jpg` abschließen.
+
+
+### Fortschritt vs. Blocker (Session 2026-06-06, Plan-B AC0130 Run OL)
+
+- **Fortschritt:** `AC0130.jpg` wurde real re-konvertiert. Der zu klein skalierte reguläre AC0030-Vorschlag wurde durch ein dimensionstreues 40x80-Vektor-SVG mit Metallverlauf, Außenrechteck, beschnittenem Andreaskreuz und zwei oberen Minuszeichen ersetzt.
+- **Qualität:** `mean_delta2` sank vom bisherigen Review-Wert `45778.234375` auf `1921.981201`, `normalized_mse` von `0.23466992` auf `0.00985252` und damit deutlich unter die Review-Grenze `0.04594568`.
+- **Perception-Lerneffekt:** Die PF8-Frage ist `generalisiert`; Linien-, Rechteck-, Kreis- und Ringkandidaten sowie ein `CircleBackground`-Seed werden erkannt, während das akzeptierte SVG nur die bildlich relevante Rechteck-/Diagonalgeometrie übernimmt.
+- **Rotation:** `AC0130` wurde aus Triage und PF8-Linkage entfernt; alle fünf Kandidaten aus Run OG sind abgeschlossen und die aktive Rotation ist synchron leer.
+- **Nächster sinnvoller Schritt:** Qualitätsreports erneut reproduzierbar aktualisieren und daraus eine neue Plan-B-Kandidatenrotation kuratieren.
