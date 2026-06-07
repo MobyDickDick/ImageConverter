@@ -179,12 +179,12 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
                 "kind": "RightRotatedTopKelleThreeWayValveGlyph",
                 "id": "right_rotated_top_kelle_three_way_valve",
                 "body_paths": [
-                    [[0.390, 0.500], [0.545, 0.020], [0.235, 0.020]],
-                    [[0.390, 0.500], [0.545, 0.980], [0.235, 0.980]],
-                    [[0.390, 0.500], [0.040, 0.333], [0.040, 0.667]],
+                    [[0.610, 0.500], [0.455, 0.980], [0.765, 0.980]],
+                    [[0.610, 0.500], [0.455, 0.020], [0.765, 0.020]],
+                    [[0.610, 0.500], [0.960, 0.667], [0.960, 0.333]],
                 ],
-                "circle": [0.765, 0.500, 0.225],
-                "connector": [[0.550, 0.500], [0.390, 0.500]],
+                "circle": [0.235, 0.500, 0.225],
+                "connector": [[0.450, 0.500], [0.610, 0.500]],
                 "label": "",
                 "body_fill": "url(#vertical-two-way-valve-body-gradient)",
                 "circle_fill": "url(#vertical-two-way-valve-circle-gradient)",
@@ -687,6 +687,11 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
             text_fill = html.escape(str(element.get("text_fill", "#666666")))
             body_fill = html.escape(str(element.get("body_fill", "url(#vertical-two-way-valve-body-gradient)")))
             circle_fill = html.escape(str(element.get("circle_fill", "url(#vertical-two-way-valve-circle-gradient)")))
+            # PyMuPDF's SVG-to-PDF path renders paint-server fills in these compound
+            # valve paths as black. Use stable grayscale fallbacks so the actual
+            # conversion matches the light source artwork instead of a black glyph.
+            rendered_body_fill = "#d7d7d7" if body_fill.startswith("url(") else body_fill
+            rendered_circle_fill = "#fafafa" if circle_fill.startswith("url(") else circle_fill
             sw = float(element.get("stroke_width", 0.040)) * min(w, h)
             connector_sw = float(element.get("connector_width", 0.060)) * min(w, h)
             raw_connector = element.get("connector", [[0.213, 0.501], [0.460, 0.501]])
@@ -713,14 +718,14 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
                     body_id = f"{element_id}_body" if len(body_path_groups) == 1 else f"{element_id}_body_{body_idx}"
                     svg.append(
                         f'  <path id="{body_id}" d="M {" L ".join(body_points)} Z" '
-                        f'fill="{body_fill}" stroke="{stroke}" stroke-width="{_fmt(sw)}" stroke-linejoin="miter"/>'
+                        f'fill="{rendered_body_fill}" stroke="{stroke}" stroke-width="{_fmt(sw)}" stroke-linejoin="miter"/>'
                     )
             raw_circle = element.get("circle", [0.721, 0.501, 0.263])
             if isinstance(raw_circle, list) and len(raw_circle) == 3:
                 cx, cy, radius = [float(value) for value in raw_circle]
                 svg.append(
                     f'  <circle id="{element_id}_circle" cx="{_fmt(cx * w)}" cy="{_fmt(cy * h)}" '
-                    f'r="{_fmt(radius * min(w, h))}" fill="{circle_fill}" stroke="{stroke}" stroke-width="{_fmt(sw)}"/>'
+                    f'r="{_fmt(radius * min(w, h))}" fill="{rendered_circle_fill}" stroke="{stroke}" stroke-width="{_fmt(sw)}"/>'
                 )
             label = html.escape(str(element.get("label", "M")))
             raw_label_center = element.get("label_center", [0.721, 0.595])
