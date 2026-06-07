@@ -424,6 +424,22 @@ def test_render_geometry_ir_to_svg_contains_ac0224_right_rotated_top_kelle_three
     assert 'fill="#fafafa"' in svg
     assert 'right_rotated_top_kelle_three_way_valve_label' not in svg
 
+
+def test_render_geometry_ir_to_svg_uses_crossed_square_for_sia_valve_handle() -> None:
+    ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
+        'Wie AC0221: Wie AC0231, jedoch ohne "M" in der Kelle oben. '
+        'Geometrische Variante: 90° nach rechts gedreht. '
+        'Der Griff liegt auf einer Symmetrieachse des Kreises.'
+    )
+    ir[0]["handle_shape"] = "crossed_square"
+
+    svg = geometry_ir_helpers.renderGeometryIrToSvgImpl(45, 30, ir)
+
+    assert 'id="right_rotated_top_kelle_three_way_valve_square"' in svg
+    assert 'id="right_rotated_top_kelle_three_way_valve_square_cross"' in svg
+    assert 'id="right_rotated_top_kelle_three_way_valve_circle"' not in svg
+
+
 def test_build_geometry_ir_maps_ac0212_vertical_two_way_valve_motor_description() -> None:
     ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
         '2-Weg Ventil vertikal: Kelle mit Kreis rechts, horizontale Verbindungslinie, '

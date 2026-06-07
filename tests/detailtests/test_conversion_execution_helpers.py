@@ -864,3 +864,54 @@ def test_record_early_quality_abort_preserves_probe_as_failed_artifact(tmp_path:
     assert failures[0]["status"] == "early_quality_abort"
     assert "status=early_quality_abort" in (reports / "AC0999_element_validation.log").read_text(encoding="utf-8")
     assert "Früher Qualitätsabbruch" in messages[0]
+
+
+def test_convert_one_impl_keeps_crossed_square_semantic_upgrade_even_when_pixel_score_is_worse(
+    tmp_path: Path,
+) -> None:
+    folder = tmp_path / "images"
+    svg_out = tmp_path / "svg"
+    diff_out = tmp_path / "diff"
+    reports = tmp_path / "reports"
+    for path in (folder, svg_out, diff_out, reports):
+        path.mkdir()
+    filename = "AC0224_M_sia.jpg"
+    (folder / filename).write_bytes(b"fake")
+    (svg_out / "AC0224_M_sia.svg").write_text(
+        '<svg><circle id="right_rotated_top_kelle_three_way_valve_circle"/></svg>',
+        encoding="utf-8",
+    )
+
+    def _run(*_args, **_kwargs):
+        (svg_out / "AC0224_M_sia.svg").write_text(
+            '<svg><path id="right_rotated_top_kelle_three_way_valve_square_cross"/></svg>',
+            encoding="utf-8",
+        )
+        return ("AC0224_M_sia", "desc", {"mode": "non_composite"}, 1, 12.0)
+
+    row, failed = conversion_execution_helpers.convertOneImpl(
+        filename=filename,
+        folder_path=str(folder),
+        csv_path="descriptions.csv",
+        iteration_budget=1,
+        badge_rounds=5,
+        svg_out_dir=str(svg_out),
+        diff_out_dir=str(diff_out),
+        png_out_dir=str(tmp_path / "png"),
+        reports_out_dir=str(reports),
+        debug_ac0811_dir=None,
+        debug_element_diff_dir=None,
+        run_iteration_pipeline_fn=_run,
+        read_validation_log_details_fn=lambda _path: {"convergence": "plateau"},
+        render_svg_to_numpy_fn=lambda svg, _w, _h: svg,
+        calculate_delta2_stats_fn=lambda _img, rendered: (2.0 if "square_cross" in rendered else 1.0, 0.0),
+        get_base_name_from_file_fn=lambda stem: stem.split("_")[0],
+        cv2_module=_Cv2Stub(_ImageStub((4, 3, 3))),
+        render_embedded_raster_svg_fn=lambda _path: "<svg/>",
+        append_batch_failure_fn=lambda _row: None,
+        print_fn=lambda _msg: None,
+    )
+
+    assert failed is False
+    assert row is not None
+    assert "square_cross" in (svg_out / "AC0224_M_sia.svg").read_text(encoding="utf-8")

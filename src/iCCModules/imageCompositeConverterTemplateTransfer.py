@@ -66,6 +66,14 @@ def _has_description_driven_geometry_ir(params: object) -> bool:
         "HalfDoubleRectBorder",
         "LabelBox",
         "TextGlyph",
+        "VerticalTwoWayValveMotorGlyph",
+        "LeftRotatedTwoWayValveMotorGlyph",
+        "Rotated180TwoWayValveMotorGlyph",
+        "TopKelleThreeWayValveGlyph",
+        "LeftRotatedTopKelleThreeWayValveGlyph",
+        "RightRotatedTopKelleThreeWayValveGlyph",
+        "Rotated180TopKelleThreeWayValveGlyph",
+        "MainDiagonalMirroredTopKelleThreeWayValveGlyph",
     }
     return any(
         isinstance(element, dict) and str(element.get("kind", "")) in description_kinds

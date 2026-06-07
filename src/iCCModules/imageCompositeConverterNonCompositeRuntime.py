@@ -387,6 +387,38 @@ DESCRIPTION_DRIVEN_GEOMETRY_IR_KINDS = {
 }
 
 
+SEMANTIC_GEOMETRY_IR_KINDS = {
+    "VerticalTwoWayValveMotorGlyph",
+    "LeftRotatedTwoWayValveMotorGlyph",
+    "Rotated180TwoWayValveMotorGlyph",
+    "TopKelleThreeWayValveGlyph",
+    "LeftRotatedTopKelleThreeWayValveGlyph",
+    "RightRotatedTopKelleThreeWayValveGlyph",
+    "Rotated180TopKelleThreeWayValveGlyph",
+    "MainDiagonalMirroredTopKelleThreeWayValveGlyph",
+}
+
+
+def _apply_image_variant_geometry(
+    geometry_ir: list[dict[str, object]], *, base_name: str
+) -> list[dict[str, object]]:
+    """Add image-specific geometry omitted by family-level descriptions."""
+
+    normalized_name = Path(str(base_name or "")).stem.upper()
+    if not (normalized_name.startswith("AC0224_") and normalized_name.endswith("_SIA")):
+        return geometry_ir
+
+    for element in geometry_ir:
+        if element.get("kind") == "RightRotatedTopKelleThreeWayValveGlyph":
+            element["handle_shape"] = "crossed_square"
+    return geometry_ir
+
+
+def _prefer_semantic_description_geometry(geometry_ir: list[dict[str, object]]) -> bool:
+    kinds = {str(element.get("kind", "")) for element in geometry_ir}
+    return bool(SEMANTIC_GEOMETRY_IR_KINDS & kinds)
+
+
 def _try_build_description_geometry_ir_svg(width: int, height: int, *, description: str) -> str | None:
     geometry_ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(description)
     if not geometry_ir:
@@ -583,6 +615,7 @@ def runNonCompositeIterationImpl(
     record_render_failure_fn,
     write_attempt_artifacts_fn,
     calculate_error_fn,
+    image_variant_name: str | None = None,
 ) -> tuple[str, str, dict[str, object], int, float] | None:
     sample_svg = _try_load_sample_svg(img_path=img_path, base_name=base_name, description=description)
 
@@ -729,6 +762,12 @@ def runNonCompositeIterationImpl(
             width, height, description=description, perc_img=perc_img
         )
         description_geometry_ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(description)
+        resolved_variant_name = str(
+            image_variant_name or params.get("variant_name") or Path(img_path).stem or base_name
+        )
+        description_geometry_ir = _apply_image_variant_geometry(
+            description_geometry_ir, base_name=resolved_variant_name
+        )
         geometry_ir_svg = (
             geometry_ir_helpers.renderGeometryIrToSvgImpl(width, height, description_geometry_ir)
             if description_geometry_ir
@@ -806,7 +845,21 @@ def runNonCompositeIterationImpl(
                 )
             if not candidates:
                 return None
-            best_geometry_candidate = min(candidates, key=lambda candidate: float(candidate["error"]))
+            semantic_description_candidate = next(
+                (
+                    candidate
+                    for candidate in candidates
+                    if candidate["status"] == "non_composite_description_geometry_ir"
+                    and _prefer_semantic_description_geometry(candidate["geometry_ir"])
+                ),
+                None,
+            )
+            if semantic_description_candidate is not None:
+                best_geometry_candidate = semantic_description_candidate
+                selection_reason = "semantic_description_geometry"
+            else:
+                best_geometry_candidate = min(candidates, key=lambda candidate: float(candidate["error"]))
+                selection_reason = "best_pixel_error"
             svg_content = str(best_geometry_candidate["svg"])
             svg_rendered = best_geometry_candidate["rendered"]
             svg_err = float(best_geometry_candidate["error"])
@@ -834,10 +887,15 @@ def runNonCompositeIterationImpl(
                             f"geometry_ir_element_{idx}={element.get('kind')}"
                             for idx, element in enumerate(geometry_ir, start=1)
                         ),
+                        *(
+                            f"geometry_ir_handle_shape_{idx}={element.get('handle_shape')}"
+                            for idx, element in enumerate(geometry_ir, start=1)
+                            if element.get("handle_shape")
+                        ),
                     ]
                 )
             if len(candidates) > 1:
-                log_lines.append("non_composite_selection=best_pixel_error")
+                log_lines.append(f"non_composite_selection={selection_reason}")
                 for candidate in candidates:
                     log_lines.append(
                         f"non_composite_candidate_error_{candidate['status']}={float(candidate['error']):.6f}"
