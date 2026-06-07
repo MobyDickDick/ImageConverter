@@ -61,6 +61,8 @@ Wenn bereits Report-Daten vorhanden sind, führt der Konverter vor dem langen In
 
 Wiederholte Batch-Läufe arbeiten inkrementell: Eine vorhandene erfolgreiche SVG-Konvertierung wird wiederverwendet, wenn sie neuer als Rasterquelle und Beschreibungstabelle ist. Dadurch werden unveränderte Bilder nicht erneut mit dem vollständigen Iterationsbudget berechnet. `ICC_FORCE_RECONVERT=1` erzwingt bei Bedarf einen vollständigen Neuaufbau. Das Standardbudget beträgt 64 statt 128 Iterationen; eine Tiefensuche kann weiterhin explizit über `--iterations 128` (oder höher) angefordert werden. Große Batches führen standardmäßig nur einen gezielten Qualitäts-Nachbesserungslauf aus; für bewusst tiefe Optimierung kann die Anzahl weiterhin über `ICC_MAX_QUALITY_PASSES` gesetzt werden.
 
+Auch frische Composite-Konvertierungen beenden ihre Epsilon-Suche nun selbstständig, sobald 60 % des Budgets geprüft wurden und über ein konservatives Geduldsfenster keine relevante Verbesserung mehr eintritt. Im Validierungslog stehen dazu `convergence`, `actual_iterations` und `requested_iterations`; die Konsolenausgabe zeigt zusätzlich `ausgeführt=<tatsächlich>/<angefordert>`. Diese Online-Anpassung reagiert auf jedes Bild einzeln und behält das vollständige Budget für Bilder bei, die weiterhin messbar besser werden.
+
 Die Parameter können im Block `early_abort` der `quality_tercile_config.json` angepasst werden (`enabled`, `probe_iterations`, `threshold_multiplier`). Für einzelne Läufe stehen außerdem `ICC_EARLY_QUALITY_ABORT`, `ICC_EARLY_QUALITY_PROBE_ITERATIONS` und `ICC_EARLY_QUALITY_MULTIPLIER` zur Verfügung.
 
 

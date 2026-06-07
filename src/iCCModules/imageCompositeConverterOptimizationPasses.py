@@ -96,7 +96,7 @@ def adaptiveIterationBudgetForQualityRowImpl(row: dict[str, object], planned_bud
 
     usage_ratio = (best_iter / budget) if budget > 0 else 0.0
 
-    if convergence == "plateau":
+    if convergence in {"plateau", "stagnation"}:
         if usage_ratio <= 0.35:
             return max(1, int(round(budget * 0.60)))
         if usage_ratio <= 0.55:

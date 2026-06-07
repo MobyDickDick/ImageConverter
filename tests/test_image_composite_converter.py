@@ -2757,6 +2757,16 @@ def test_adaptive_iteration_budget_reduces_for_early_plateau() -> None:
     ) == 77
 
 
+def test_adaptive_iteration_budget_reduces_after_online_stagnation() -> None:
+    assert conv._adaptiveIterationBudgetForQualityRow(
+        {
+            "convergence": "stagnation",
+            "best_iter": 18,
+        },
+        64,
+    ) == 38
+
+
 def test_adaptive_iteration_budget_increases_for_budget_edge_minimum() -> None:
     assert conv._adaptiveIterationBudgetForQualityRow(
         {
