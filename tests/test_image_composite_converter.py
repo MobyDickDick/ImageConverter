@@ -2597,6 +2597,28 @@ def test_in_requested_range_exact_variant_bounds_match_single_variant_only() -> 
     assert image_composite_converter._inRequestedRange("AC0800_M.jpg", "AC0800_L.jpg", "AC0800_L.jpg") is False
 
 
+def test_in_requested_range_exact_sia_variant_matches_single_variant_only() -> None:
+    """An explicit ``_sia`` bound must not expand to every size in the family."""
+    assert image_composite_converter._inRequestedRange(
+        "AC0224_L_sia.jpg", "AC0224_L_sia", "AC0224_L_sia"
+    ) is True
+    assert image_composite_converter._inRequestedRange(
+        "AC0224_L.jpg", "AC0224_L_sia", "AC0224_L_sia"
+    ) is False
+    assert image_composite_converter._inRequestedRange(
+        "AC0224_M_sia.jpg", "AC0224_L_sia", "AC0224_L_sia"
+    ) is False
+
+
+def test_in_requested_range_limits_same_symbol_variant_span() -> None:
+    """AC0224_L..AC0224_L_sia should select exactly those two variants."""
+    bounds = ("AC0224_L", "AC0224_L_sia")
+    assert image_composite_converter._inRequestedRange("AC0224_L.jpg", *bounds) is True
+    assert image_composite_converter._inRequestedRange("AC0224_L_sia.jpg", *bounds) is True
+    assert image_composite_converter._inRequestedRange("AC0224_M.jpg", *bounds) is False
+    assert image_composite_converter._inRequestedRange("AC0224_M_sia.jpg", *bounds) is False
+
+
 def test_in_requested_range_supports_one_sided_bounds() -> None:
     """When one bound is invalid, the valid bound should still be applied."""
     assert image_composite_converter._inRequestedRange("AC0812_L.jpg", "", "AC0812") is True

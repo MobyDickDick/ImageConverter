@@ -54,6 +54,7 @@ from src.iCCModules import imageCompositeConverterSemanticBadgeRuntime as semant
 from src.iCCModules import imageCompositeConverterDualArrowRuntime as dual_arrow_runtime_helpers
 from src.iCCModules import imageCompositeConverterNonCompositeRuntime as non_composite_runtime_helpers
 from src.iCCModules import imageCompositeConverterQualityPassPolicy as quality_pass_policy_helpers
+from src.iCCModules import imageCompositeConverterRange as range_helpers
 from src.iCCModules import imageCompositeConverterEarlyQualityGate as early_quality_gate_helpers
 from src.iCCModules.imageCompositeConverterPerceptionReflection import Perception, Reflection
 
