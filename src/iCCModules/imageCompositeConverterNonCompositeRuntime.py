@@ -920,6 +920,16 @@ def runNonCompositeIterationImpl(
                             ),
                         ]
                     )
+                    element_refinement = optimizer_result.get("element_refinement")
+                    if isinstance(element_refinement, dict) and element_refinement.get("steps"):
+                        log_lines.extend(
+                            [
+                                "geometry_ir_element_refinement=1",
+                                f"geometry_ir_element_refinement_initial_error={float(element_refinement['initial_error']):.6f}",
+                                f"geometry_ir_element_refinement_final_error={float(element_refinement['final_error']):.6f}",
+                                f"geometry_ir_element_refinement_steps={len(element_refinement['steps'])}",
+                            ]
+                        )
                 log_lines.extend(
                     [
                         f"geometry_ir_element_count={len(geometry_ir)}",
