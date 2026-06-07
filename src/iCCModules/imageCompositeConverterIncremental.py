@@ -50,6 +50,9 @@ def partitionReusableConversionsImpl(
         if source_mtime_ns <= 0 or svg_mtime_ns < max(source_mtime_ns, descriptions_mtime_ns):
             pending.append(filename)
             continue
+        if _violatesSemanticOutputContract(filename=filename, variant=variant, svg_path=svg_path):
+            pending.append(filename)
+            continue
 
         reusable[filename] = dict(row)
 
@@ -68,3 +71,26 @@ def _hasFiniteError(row: dict[str, object]) -> bool:
         return math.isfinite(float(row.get("error_per_pixel", float("inf"))))
     except (TypeError, ValueError):
         return False
+
+
+def _violatesSemanticOutputContract(*, filename: str, variant: str, svg_path: Path) -> bool:
+    """Return whether a fresh-by-mtime SVG is stale by a known semantic contract."""
+    normalized_variant = (variant or Path(filename).stem).strip().upper()
+    if not normalized_variant.startswith("AC0224_"):
+        return False
+
+    try:
+        svg_content = svg_path.read_text(encoding="utf-8").lower()
+    except OSError:
+        return True
+
+    family_marker = "right_rotated_top_kelle_three_way_valve_"
+    if family_marker not in svg_content:
+        return True
+    if normalized_variant.endswith("_SIA"):
+        return (
+            f'{family_marker}square"' not in svg_content
+            or f'{family_marker}square_cross"' not in svg_content
+            or f'{family_marker}circle"' in svg_content
+        )
+    return f'{family_marker}circle"' not in svg_content
