@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import pytest
+
 from src.iCCModules import imageCompositeConverterGeometryIrOptimizer as optimizer_helpers
 
 
@@ -82,3 +84,78 @@ def test_select_geometry_ir_prefers_elementwise_result_and_requires_explicit_one
     params = {"one_shot_emergency_geometry_ir": emergency, "allow_one_shot_emergency": True}
     assert optimizer_helpers.selectGeometryIrForRenderingImpl(params) == emergency
     assert params["geometry_phase_mode"] == "one_shot_emergency"
+
+
+def test_transform_geometry_ir_preserves_semantics_and_transforms_supported_geometry() -> None:
+    ir = [
+        {
+            "kind": "ExampleGlyph",
+            "id": "semantic-id",
+            "body_paths": [[[0.2, 0.3], [0.4, 0.5]]],
+            "circle": [0.7, 0.6, 0.1],
+            "connector": [[0.4, 0.5], [0.6, 0.5]],
+            "label": "M",
+            "font_size": 0.2,
+            "stroke_width": 0.04,
+            "connector_width": 0.06,
+        }
+    ]
+
+    transformed = optimizer_helpers.transformGeometryIrImpl(
+        ir,
+        translate_x=0.1,
+        translate_y=-0.1,
+        scale_x=2.0,
+        scale_y=0.5,
+        stroke_scale=1.5,
+    )
+
+    assert transformed[0]["id"] == "semantic-id"
+    assert transformed[0]["label"] == "M"
+    assert transformed[0]["body_paths"][0][0] == pytest.approx([0.0, 0.3])
+    assert transformed[0]["body_paths"][0][1] == pytest.approx([0.4, 0.4])
+    assert transformed[0]["circle"] == pytest.approx([1.0, 0.45, 0.05])
+    assert transformed[0]["connector"][0] == pytest.approx([0.4, 0.4])
+    assert transformed[0]["connector"][1] == pytest.approx([0.8, 0.4])
+    assert transformed[0]["font_size"] == 0.1
+    assert transformed[0]["stroke_width"] == 0.06
+    assert transformed[0]["connector_width"] == 0.09
+    assert ir[0]["circle"] == [0.7, 0.6, 0.1]
+
+
+def test_registration_optimizer_reduces_error_without_changing_semantic_shape() -> None:
+    ir = [
+        {
+            "kind": "CircleGlyph",
+            "id": "circle",
+            "circle": [0.3, 0.5, 0.2],
+            "stroke_width": 0.04,
+        }
+    ]
+
+    def error_fn(candidate_ir):
+        circle = candidate_ir[0]["circle"]
+        return (
+            abs(circle[0] - 0.36)
+            + abs(circle[1] - 0.48)
+            + abs(circle[2] - 0.18)
+            + abs(candidate_ir[0]["stroke_width"] - 0.05)
+        )
+
+    result = optimizer_helpers.optimizeGeometryIrRegistrationImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=error_fn,
+    )
+
+    assert result["final_error"] < result["initial_error"]
+    assert result["geometry_ir"][0]["kind"] == "CircleGlyph"
+    assert result["geometry_ir"][0]["id"] == "circle"
+    assert result["steps"]
+    assert set(result["parameters"]) == {
+        "translate_x",
+        "translate_y",
+        "scale_x",
+        "scale_y",
+        "stroke_scale",
+    }
