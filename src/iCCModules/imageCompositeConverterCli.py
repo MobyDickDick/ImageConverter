@@ -63,8 +63,8 @@ def parseArgsImpl(
         "iterations",
         nargs="?",
         type=int,
-        default=128,
-        help="Anzahl der Iterationen (optional, default: 128)",
+        default=64,
+        help="Anzahl der Iterationen (optional, default: 64; für Tiefensuche explizit erhöhen)",
     )
     parser.add_argument(
         "--csv-path",

@@ -14,6 +14,7 @@ from src.iCCModules import imageCompositeConverterDualArrowBadge as dual_arrow_b
 from src.iCCModules import imageCompositeConverterElementDecomposition as element_decomposition_helpers
 from src.iCCModules import imageCompositeConverterGradientStripeStrategy as gradient_stripe_strategy_helpers
 from src.iCCModules import imageCompositeConverterImageLoading as image_loading_helpers
+from src.iCCModules import imageCompositeConverterIncremental as incremental_helpers
 from src.iCCModules import imageCompositeConverterIterationInitialization as iteration_initialization_helpers
 from src.iCCModules import imageCompositeConverterIterationBindings as iteration_bindings_helpers
 from src.iCCModules import imageCompositeConverterIterationContext as iteration_context_helpers
@@ -1143,6 +1144,27 @@ def convertRange(
     batch_failures: list[dict[str, str]] = []
     stop_after_failure = False
     existing_donor_rows = _loadExistingConversionRows(out_root, folder_path)
+    force_reconvert = os.environ.get("ICC_FORCE_RECONVERT", "").strip().lower() in {"1", "true", "yes", "on"}
+    process_files, reusable_rows = incremental_helpers.partitionReusableConversionsImpl(
+        filenames=process_files,
+        existing_rows=existing_donor_rows,
+        folder_path=folder_path,
+        svg_out_dir=svg_out_dir,
+        descriptions_path=csv_path,
+        force_reconvert=force_reconvert,
+    )
+    result_map.update(reusable_rows)
+    reused_variants = {
+        str(row.get("variant", "")).strip().upper()
+        for row in reusable_rows.values()
+        if str(row.get("variant", "")).strip()
+    }
+    if reusable_rows:
+        print(
+            f"[INFO] Inkrementeller Lauf: {len(reusable_rows)} unveränderte Konvertierungen wiederverwendet; "
+            f"{len(process_files)} Dateien werden neu berechnet. "
+            "Mit ICC_FORCE_RECONVERT=1 kann eine vollständige Neuberechnung erzwungen werden."
+        )
     cfg = _loadQualityConfig(reports_out_dir)
     early_quality_gate = early_quality_gate_helpers.resolveEarlyQualityGateImpl(
         cfg,
@@ -1262,10 +1284,10 @@ def convertRange(
         cfg,
     )
 
-    # Global policy: do not freeze individual variants. Every quality pass keeps
-    # all variants eligible so each run can re-evaluate with stochastic search
-    # while still converging by only accepting strict improvements.
-    skip_variants: set[str] = set()
+    # Newly calculated variants remain eligible for stochastic quality passes.
+    # Reused rows are already fresh relative to their source and description;
+    # retrying them in the same invocation would defeat incremental conversion.
+    skip_variants: set[str] = set(reused_variants)
 
     _writeQualityConfig(
         reports_out_dir,

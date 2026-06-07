@@ -41,6 +41,13 @@ def resolveMaxQualityPassesImpl(
         else:
             max_quality_passes = min(max_quality_passes, 1)
             reason = "single_base_one_refinement_pass"
+    elif len(normalized_bases) > 1:
+        # A broad batch used to retry the lower two terciles up to four times,
+        # multiplying end-to-end runtime even when only marginal gains remained.
+        # Keep one targeted refinement pass by default; ICC_MAX_QUALITY_PASSES
+        # remains available for deliberate deep-quality runs.
+        max_quality_passes = min(max_quality_passes, 1)
+        reason = "multi_base_one_refinement_pass"
 
     override = str(override_quality_passes or "").strip()
     if override:
