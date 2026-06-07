@@ -2,15 +2,22 @@
 
 Ziel: maximal **5** aktive JPG-Kandidaten, die derzeit noch nicht zufriedenstellend konvertieren, aber voraussichtlich nicht "hoffnungslos komplex" sind.
 
-## Aktuelle Kandidaten (Stand: 2026-06-06, nach AC0130-Run OL)
+## Aktuelle Kandidaten (Stand: 2026-06-07, Qualitätsrefresh Run OM)
 
-Die mit Run OG kuratierte Plan-B-/Perception-Rotation ist vollständig
-abgearbeitet. Aktuell ist kein Kandidat aktiv; eine neue Rotation wird erst aus
-einem reproduzierbaren Qualitätsrefresh abgeleitet.
+Die neue Rotation wurde reproduzierbar aus dem aktualisierten Qualitätsreview
+abgeleitet. Zuerst wird der nicht mehr zufriedenstellende Eintrag aus
+`successed_conversions.txt` priorisiert; danach folgen kompakte, renderbare
+Varianten aus dem Diff-Inventar.
 
-`AC0130.jpg` wurde als dimensionstreues 40x80-Kühlelement mit Metallverlauf,
-Außenrechteck, zwei beschnittenen Diagonalpfaden und zwei oberen Minuszeichen
-rekonstruiert. Die Qualitätsmetrik sank von `0.23466992` auf `0.00985252`.
+| Priorität | Kandidat | Quelle | `normalized_mse` | Auswahlgrund |
+| ---: | --- | --- | ---: | --- |
+| 1 | `AC0820_L.jpg` | erfolgreicher Altbestand | `0.05117826` | Einziger der 48 erfolgreichen Einträge oberhalb der Review-Grenze `0.04594568`. |
+| 2 | `AC0531_1_S.jpg` | Diff-Inventar | `0.15610678` | Höchste verbleibende Abweichung unter den kompakten renderbaren Fällen; Rechteck, Diagonale und Mittelpunkt sind klar abgrenzbar. |
+| 3 | `AC0502_1_M.jpg` | Diff-Inventar | `0.15533278` | Gedrehte Klappengeometrie mit sehr hoher Abweichung und wiederverwendbaren Rechteck-/Punkt-Primitiven. |
+| 4 | `AC0551_1_M.jpg` | Diff-Inventar | `0.14916385` | Kompaktes Rechteckmotiv mit horizontalen Teilungen und mittiger Winkelkontur. |
+| 5 | `AC0403_1_M.jpg` | Diff-Inventar | `0.11117438` | Sehr kompakte gedrehte Kreis-/Innengeometrie oberhalb der Review-Grenze. |
+
+Die nächste reguläre Rotation beginnt mit `AC0820_L.jpg`.
 
 ## Perception-Lerneffekt (Pflichtabschnitt ab PF8)
 
@@ -20,10 +27,12 @@ dem PF8-Linkage-Report und dokumentiert die Entscheidung als
 maschinenlesbare Stand liegt unter
 `artifacts/evaluation/plan_b_perception_linkage_v1/plan_b_perception_linkage_report_v1.json`.
 
-Die AC0130-Frage ist `generalisiert`: Außenlinien und Diagonalen werden als
-Linien-/Rechteckkandidaten erkannt; die vorhandene Kreis-/Ring-Seed-Zuordnung
-liefert zusätzlich einen vorinitialisierten Geometry-IR-Hinweis. Nach dem
-Abschluss ist der aktive Linkage-Report synchron leer.
+Der aktualisierte Linkage-Report enthält alle fünf aktiven Kandidaten. Vier
+Fragen sind `generalisiert`: Kreis-/Ring-Erkennung für `AC0820_L` und
+`AC0403_1_M` sowie allgemeine Primitive und ein Kreis-Seed für die beiden
+Klappenvarianten `AC0531_1_S` und `AC0502_1_M`. `AC0551_1_M` bleibt
+`nur Sonderfall`, weil Linien und Rechteck erkannt werden, aber weder ein
+allgemeiner Rechteck- noch HorizontalRule-Seed vorliegt.
 
 ## Pflege-Regel (fortan)
 

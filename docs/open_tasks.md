@@ -3519,3 +3519,12 @@ Ziel: Die Konvertierung soll strikt als **Kette** laufen:
 - **Perception-Lerneffekt:** Die PF8-Frage ist `generalisiert`; Linien-, Rechteck-, Kreis- und Ringkandidaten sowie ein `CircleBackground`-Seed werden erkannt, während das akzeptierte SVG nur die bildlich relevante Rechteck-/Diagonalgeometrie übernimmt.
 - **Rotation:** `AC0130` wurde aus Triage und PF8-Linkage entfernt; alle fünf Kandidaten aus Run OG sind abgeschlossen und die aktive Rotation ist synchron leer.
 - **Nächster sinnvoller Schritt:** Qualitätsreports erneut reproduzierbar aktualisieren und daraus eine neue Plan-B-Kandidatenrotation kuratieren.
+
+
+### Fortschritt vs. Blocker (Session 2026-06-07, Qualitätsrefresh und Plan-B-Triage Run OM)
+
+- **Fortschritt:** Der Qualitätsreview wurde nach Abschluss der alten Rotation reproduzierbar erneuert; alle 48 Erfolgsvarianten und 129 Diff-Inventarfälle wurden geprüft.
+- **Qualitätsbefund:** `AC0820_L` ist mit `normalized_mse=0.05117826` der einzige erfolgreiche Altbestand oberhalb der Review-Grenze; 120 Diff-Fälle besitzen ein renderbares Bild-/SVG-Paar.
+- **Kandidatenrotation:** Plan-B-Liste, Triage und PF8-Linkage sind synchron auf `AC0820_L`, `AC0531_1_S`, `AC0502_1_M`, `AC0551_1_M` und `AC0403_1_M` gesetzt.
+- **Perception-Lerneffekt:** Vier Fragen sind `generalisiert`; `AC0551_1_M` bleibt wegen fehlendem Rechteck-/HorizontalRule-Seed `nur Sonderfall`.
+- **Nächster sinnvoller Schritt:** `AC0820_L.jpg` real re-konvertieren und den Kreis-/CO²-Lerneffekt als erstes Paket der neuen Rotation abschließen.
