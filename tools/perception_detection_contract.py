@@ -1395,7 +1395,59 @@ def write_text_glyph_evaluation_report(
     }
 
 
-PLAN_B_PERCEPTION_TARGETS: list[dict[str, Any]] = []
+PLAN_B_PERCEPTION_TARGETS: list[dict[str, Any]] = [
+    {
+        "variant": "AC0820_L",
+        "image_candidates": ["artifacts/images_to_convert/AC0820_L.jpg"],
+        "plan_b_reason": "Einziger erfolgreicher Altbestand oberhalb der aktualisierten Review-Grenze.",
+        "perception_question": "Können Kreisgrundkörper und CO²-Kurztext vor der ersten Iteration getrennt erkannt werden?",
+        "expected_first_primitive": "circle_with_co2_text",
+        "expected_candidate_kinds": {"circle", "ring", "text_glyph"},
+        "expected_seed_kinds": {"CircleBackground", "TextGlyph"},
+        "description": "Plan-B-Kandidat AC0820_L: Kreisgrundkörper und CO²-Beschriftung zuerst prüfen.",
+        "glyphs": ["CO2"],
+    },
+    {
+        "variant": "AC0531_1_S",
+        "image_candidates": ["artifacts/images_to_convert/AC0531_1_S.jpg"],
+        "plan_b_reason": "Kompakter rechteckiger Diff-Kandidat mit der höchsten aktuellen Pixelabweichung.",
+        "perception_question": "Können Außenrechteck, Diagonale und Mittelpunkt als getrennte Primitive erkannt werden?",
+        "expected_first_primitive": "rectangle_diagonal_and_center_dot",
+        "expected_candidate_kinds": {"rectangle", "line", "circle", "ring"},
+        "expected_seed_kinds": {"RectangleBackground", "CircleBackground"},
+        "description": "Plan-B-Kandidat AC0531_1_S: Klappenrechteck, Diagonale und Mittelpunkt zuerst prüfen.",
+    },
+    {
+        "variant": "AC0502_1_M",
+        "image_candidates": ["artifacts/images_to_convert/AC0502_1_M.jpg"],
+        "plan_b_reason": "Kompakte gedrehte Klappengeometrie mit sehr hoher Diff-Abweichung.",
+        "perception_question": "Bleiben Rechteck, Diagonale und Mittelpunkt auch in der gedrehten Variante allgemein erkennbar?",
+        "expected_first_primitive": "rotated_rectangle_diagonal_and_center_dot",
+        "expected_candidate_kinds": {"rectangle", "line", "circle", "ring"},
+        "expected_seed_kinds": {"RectangleBackground", "CircleBackground"},
+        "description": "Plan-B-Kandidat AC0502_1_M: gedrehte Klappengeometrie vor der Iteration zerlegen.",
+    },
+    {
+        "variant": "AC0551_1_M",
+        "image_candidates": ["artifacts/images_to_convert/AC0551_1_M.jpg"],
+        "plan_b_reason": "Kompaktes Linien-/Rechteckmotiv mit hoher Diff-Abweichung.",
+        "perception_question": "Können Außenrechteck, horizontale Teilungen und die mittige Winkelkontur getrennt erkannt werden?",
+        "expected_first_primitive": "rectangle_horizontal_rules_and_chevron",
+        "expected_candidate_kinds": {"rectangle", "horizontal_rule", "line"},
+        "expected_seed_kinds": {"RectangleBackground", "HorizontalRule"},
+        "description": "Plan-B-Kandidat AC0551_1_M: Rechteck, Teilungslinien und Winkelkontur zuerst prüfen.",
+    },
+    {
+        "variant": "AC0403_1_M",
+        "image_candidates": ["artifacts/images_to_convert/AC0403_1_M.jpg"],
+        "plan_b_reason": "Sehr kompakter kreisförmiger Diff-Kandidat oberhalb der Review-Grenze.",
+        "perception_question": "Kann die gedrehte kreisförmige Grundform unabhängig von ihrer Innengeometrie erkannt werden?",
+        "expected_first_primitive": "rotated_circle_or_ring",
+        "expected_candidate_kinds": {"circle", "ring"},
+        "expected_seed_kinds": {"CircleBackground"},
+        "description": "Plan-B-Kandidat AC0403_1_M: Kreisgrundkörper vor der gedrehten Innengeometrie erkennen.",
+    },
+]
 
 
 def _resolve_first_existing_path(candidates: list[str]) -> Path | None:

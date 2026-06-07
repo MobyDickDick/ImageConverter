@@ -8,12 +8,457 @@
     "nur Sonderfall",
     "noch nicht erkannt"
   ],
-  "records": [],
+  "records": [
+    {
+      "schema_version": "plan_b_perception_linkage_record_v1",
+      "variant": "AC0820_L",
+      "image_path": "artifacts/images_to_convert/AC0820_L.jpg",
+      "status": "evaluated",
+      "plan_b_reason": "Einziger erfolgreicher Altbestand oberhalb der aktualisierten Review-Grenze.",
+      "description": "Plan-B-Kandidat AC0820_L: Kreisgrundk\u00f6rper und CO\u00b2-Beschriftung zuerst pr\u00fcfen.",
+      "perception_lerneffekt": {
+        "question": "K\u00f6nnen Kreisgrundk\u00f6rper und CO\u00b2-Kurztext vor der ersten Iteration getrennt erkannt werden?",
+        "expected_first_primitive": "circle_with_co2_text",
+        "expected_candidate_kinds": [
+          "circle",
+          "ring",
+          "text_glyph"
+        ],
+        "expected_seed_kinds": [
+          "CircleBackground",
+          "TextGlyph"
+        ],
+        "decision": "generalisiert",
+        "matched_candidate_kinds": [
+          "circle",
+          "ring"
+        ],
+        "matched_seed_kinds": [
+          "CircleBackground"
+        ],
+        "top_candidate_kind": "ring",
+        "top_confidence": 0.8762,
+        "next_action": "Im n\u00e4chsten Plan-B-Paket als vorinitialisierten Geometry-IR-Seed protokollieren."
+      },
+      "candidate_count": 11,
+      "top_candidate": {
+        "schema_version": "perception_primitive_candidate_v1",
+        "kind": "ring",
+        "bbox": {
+          "x": 6.0,
+          "y": 0.0,
+          "width": 20.0,
+          "height": 20.0
+        },
+        "center": {
+          "x": 16.0,
+          "y": 6.0
+        },
+        "geometry": {
+          "radius_px": 10.0,
+          "inner_radius_px": 5.8,
+          "stroke_width_px": 4.2,
+          "circularity": 1.0,
+          "ring": true,
+          "fill_ratio": 0.3763,
+          "geometry_ir_kind": "CircleBackground",
+          "geometry_ir_bbox": [
+            0.2,
+            0.0,
+            0.66667,
+            0.66667
+          ]
+        },
+        "color": {
+          "fill_rgb": [
+            205,
+            205,
+            205
+          ],
+          "stroke_rgb": [
+            204,
+            204,
+            204
+          ],
+          "fill_hex": "#CDCDCD",
+          "stroke_hex": "#CCCCCC",
+          "fill_confidence": 0.609,
+          "stroke_confidence": 0.5836
+        },
+        "confidence": 0.8762,
+        "roi": {
+          "type": "image",
+          "hint": "full_image",
+          "bbox": {
+            "x": 0.0,
+            "y": 0.0,
+            "width": 30.0,
+            "height": 30.0
+          }
+        },
+        "evidence": {
+          "detector": "detect_circle_rings",
+          "detection_source": "hough",
+          "threshold_model": "hough_plus_foreground_mask"
+        },
+        "source": "pf8_plan_b_perception_linkage"
+      }
+    },
+    {
+      "schema_version": "plan_b_perception_linkage_record_v1",
+      "variant": "AC0531_1_S",
+      "image_path": "artifacts/images_to_convert/AC0531_1_S.jpg",
+      "status": "evaluated",
+      "plan_b_reason": "Kompakter rechteckiger Diff-Kandidat mit der h\u00f6chsten aktuellen Pixelabweichung.",
+      "description": "Plan-B-Kandidat AC0531_1_S: Klappenrechteck, Diagonale und Mittelpunkt zuerst pr\u00fcfen.",
+      "perception_lerneffekt": {
+        "question": "K\u00f6nnen Au\u00dfenrechteck, Diagonale und Mittelpunkt als getrennte Primitive erkannt werden?",
+        "expected_first_primitive": "rectangle_diagonal_and_center_dot",
+        "expected_candidate_kinds": [
+          "circle",
+          "line",
+          "rectangle",
+          "ring"
+        ],
+        "expected_seed_kinds": [
+          "CircleBackground",
+          "RectangleBackground"
+        ],
+        "decision": "generalisiert",
+        "matched_candidate_kinds": [
+          "circle",
+          "line",
+          "rectangle"
+        ],
+        "matched_seed_kinds": [
+          "CircleBackground"
+        ],
+        "top_candidate_kind": "line",
+        "top_confidence": 1.0,
+        "next_action": "Im n\u00e4chsten Plan-B-Paket als vorinitialisierten Geometry-IR-Seed protokollieren."
+      },
+      "candidate_count": 4,
+      "top_candidate": {
+        "schema_version": "perception_primitive_candidate_v1",
+        "kind": "line",
+        "bbox": {
+          "x": -0.5,
+          "y": 2.0,
+          "width": 1.0,
+          "height": 35.0
+        },
+        "center": {
+          "x": 0.0,
+          "y": 19.5
+        },
+        "geometry": {
+          "orientation": "vertical",
+          "x_center": 0.0,
+          "y_top": 2.0,
+          "y_bottom": 37.0,
+          "length_px": 35.0,
+          "stroke_width_px": 1.0,
+          "angle_deg": 90.0
+        },
+        "color": {
+          "fill_rgb": null,
+          "stroke_rgb": null,
+          "fill_hex": null,
+          "stroke_hex": null,
+          "fill_confidence": 0.0,
+          "stroke_confidence": 0.0
+        },
+        "confidence": 1.0,
+        "roi": {
+          "type": "image",
+          "hint": "full_image",
+          "bbox": {
+            "x": 0.0,
+            "y": 0.0,
+            "width": 20.0,
+            "height": 40.0
+          }
+        },
+        "evidence": {
+          "detector": "detect_vertical_lines",
+          "edge_model": "canny+hough_lines_p"
+        },
+        "source": "hough"
+      }
+    },
+    {
+      "schema_version": "plan_b_perception_linkage_record_v1",
+      "variant": "AC0502_1_M",
+      "image_path": "artifacts/images_to_convert/AC0502_1_M.jpg",
+      "status": "evaluated",
+      "plan_b_reason": "Kompakte gedrehte Klappengeometrie mit sehr hoher Diff-Abweichung.",
+      "description": "Plan-B-Kandidat AC0502_1_M: gedrehte Klappengeometrie vor der Iteration zerlegen.",
+      "perception_lerneffekt": {
+        "question": "Bleiben Rechteck, Diagonale und Mittelpunkt auch in der gedrehten Variante allgemein erkennbar?",
+        "expected_first_primitive": "rotated_rectangle_diagonal_and_center_dot",
+        "expected_candidate_kinds": [
+          "circle",
+          "line",
+          "rectangle",
+          "ring"
+        ],
+        "expected_seed_kinds": [
+          "CircleBackground",
+          "RectangleBackground"
+        ],
+        "decision": "generalisiert",
+        "matched_candidate_kinds": [
+          "circle",
+          "rectangle"
+        ],
+        "matched_seed_kinds": [
+          "CircleBackground"
+        ],
+        "top_candidate_kind": "circle",
+        "top_confidence": 0.9833,
+        "next_action": "Im n\u00e4chsten Plan-B-Paket als vorinitialisierten Geometry-IR-Seed protokollieren."
+      },
+      "candidate_count": 4,
+      "top_candidate": {
+        "schema_version": "perception_primitive_candidate_v1",
+        "kind": "circle",
+        "bbox": {
+          "x": 25.0,
+          "y": 9.0,
+          "width": 10.0,
+          "height": 10.0
+        },
+        "center": {
+          "x": 30.0,
+          "y": 14.0
+        },
+        "geometry": {
+          "radius_px": 5.0,
+          "inner_radius_px": 0.0,
+          "stroke_width_px": 1.0,
+          "circularity": 1.0,
+          "ring": false,
+          "fill_ratio": 1.0,
+          "geometry_ir_kind": "CircleBackground",
+          "geometry_ir_bbox": [
+            0.41667,
+            0.3,
+            0.16667,
+            0.33333
+          ]
+        },
+        "color": {
+          "fill_rgb": [
+            95,
+            75,
+            75
+          ],
+          "stroke_rgb": [
+            142,
+            71,
+            74
+          ],
+          "fill_hex": "#5F4B4B",
+          "stroke_hex": "#8E474A",
+          "fill_confidence": 0.8728,
+          "stroke_confidence": 0.8104
+        },
+        "confidence": 0.9833,
+        "roi": {
+          "type": "image",
+          "hint": "full_image",
+          "bbox": {
+            "x": 0.0,
+            "y": 0.0,
+            "width": 60.0,
+            "height": 30.0
+          }
+        },
+        "evidence": {
+          "detector": "detect_circle_rings",
+          "detection_source": "hough",
+          "threshold_model": "hough_plus_foreground_mask"
+        },
+        "source": "pf8_plan_b_perception_linkage"
+      }
+    },
+    {
+      "schema_version": "plan_b_perception_linkage_record_v1",
+      "variant": "AC0551_1_M",
+      "image_path": "artifacts/images_to_convert/AC0551_1_M.jpg",
+      "status": "evaluated",
+      "plan_b_reason": "Kompaktes Linien-/Rechteckmotiv mit hoher Diff-Abweichung.",
+      "description": "Plan-B-Kandidat AC0551_1_M: Rechteck, Teilungslinien und Winkelkontur zuerst pr\u00fcfen.",
+      "perception_lerneffekt": {
+        "question": "K\u00f6nnen Au\u00dfenrechteck, horizontale Teilungen und die mittige Winkelkontur getrennt erkannt werden?",
+        "expected_first_primitive": "rectangle_horizontal_rules_and_chevron",
+        "expected_candidate_kinds": [
+          "horizontal_rule",
+          "line",
+          "rectangle"
+        ],
+        "expected_seed_kinds": [
+          "HorizontalRule",
+          "RectangleBackground"
+        ],
+        "decision": "nur Sonderfall",
+        "matched_candidate_kinds": [
+          "line",
+          "rectangle"
+        ],
+        "matched_seed_kinds": [],
+        "top_candidate_kind": "line",
+        "top_confidence": 1.0,
+        "next_action": "Als Perception-Hinweis dokumentieren, aber noch keinen generischen Seed erzwingen."
+      },
+      "candidate_count": 5,
+      "top_candidate": {
+        "schema_version": "perception_primitive_candidate_v1",
+        "kind": "line",
+        "bbox": {
+          "x": 0.125,
+          "y": 0.0,
+          "width": 1.75,
+          "height": 59.0
+        },
+        "center": {
+          "x": 1.0,
+          "y": 29.5
+        },
+        "geometry": {
+          "orientation": "vertical",
+          "x_center": 1.0,
+          "y_top": 0.0,
+          "y_bottom": 59.0,
+          "length_px": 59.0,
+          "stroke_width_px": 1.75,
+          "angle_deg": 90.0
+        },
+        "color": {
+          "fill_rgb": null,
+          "stroke_rgb": null,
+          "fill_hex": null,
+          "stroke_hex": null,
+          "fill_confidence": 0.0,
+          "stroke_confidence": 0.0
+        },
+        "confidence": 1.0,
+        "roi": {
+          "type": "image",
+          "hint": "full_image",
+          "bbox": {
+            "x": 0.0,
+            "y": 0.0,
+            "width": 30.0,
+            "height": 60.0
+          }
+        },
+        "evidence": {
+          "detector": "detect_vertical_lines",
+          "edge_model": "canny+hough_lines_p"
+        },
+        "source": "hough"
+      }
+    },
+    {
+      "schema_version": "plan_b_perception_linkage_record_v1",
+      "variant": "AC0403_1_M",
+      "image_path": "artifacts/images_to_convert/AC0403_1_M.jpg",
+      "status": "evaluated",
+      "plan_b_reason": "Sehr kompakter kreisf\u00f6rmiger Diff-Kandidat oberhalb der Review-Grenze.",
+      "description": "Plan-B-Kandidat AC0403_1_M: Kreisgrundk\u00f6rper vor der gedrehten Innengeometrie erkennen.",
+      "perception_lerneffekt": {
+        "question": "Kann die gedrehte kreisf\u00f6rmige Grundform unabh\u00e4ngig von ihrer Innengeometrie erkannt werden?",
+        "expected_first_primitive": "rotated_circle_or_ring",
+        "expected_candidate_kinds": [
+          "circle",
+          "ring"
+        ],
+        "expected_seed_kinds": [
+          "CircleBackground"
+        ],
+        "decision": "generalisiert",
+        "matched_candidate_kinds": [
+          "circle",
+          "ring"
+        ],
+        "matched_seed_kinds": [
+          "CircleBackground"
+        ],
+        "top_candidate_kind": "ring",
+        "top_confidence": 0.9303,
+        "next_action": "Im n\u00e4chsten Plan-B-Paket als vorinitialisierten Geometry-IR-Seed protokollieren."
+      },
+      "candidate_count": 6,
+      "top_candidate": {
+        "schema_version": "perception_primitive_candidate_v1",
+        "kind": "ring",
+        "bbox": {
+          "x": 1.0,
+          "y": 6.0,
+          "width": 22.0,
+          "height": 22.0
+        },
+        "center": {
+          "x": 12.0,
+          "y": 17.0
+        },
+        "geometry": {
+          "radius_px": 11.0,
+          "inner_radius_px": 6.38,
+          "stroke_width_px": 4.62,
+          "circularity": 1.0,
+          "ring": true,
+          "fill_ratio": 0.4881,
+          "geometry_ir_kind": "CircleBackground",
+          "geometry_ir_bbox": [
+            0.03333,
+            0.2,
+            0.73333,
+            0.73333
+          ]
+        },
+        "color": {
+          "fill_rgb": [
+            226,
+            120,
+            143
+          ],
+          "stroke_rgb": [
+            218,
+            113,
+            135
+          ],
+          "fill_hex": "#E2788F",
+          "stroke_hex": "#DA7187",
+          "fill_confidence": 0.5464,
+          "stroke_confidence": 0.5411
+        },
+        "confidence": 0.9303,
+        "roi": {
+          "type": "image",
+          "hint": "full_image",
+          "bbox": {
+            "x": 0.0,
+            "y": 0.0,
+            "width": 30.0,
+            "height": 30.0
+          }
+        },
+        "evidence": {
+          "detector": "detect_circle_rings",
+          "detection_source": "hough",
+          "threshold_model": "hough_plus_foreground_mask"
+        },
+        "source": "pf8_plan_b_perception_linkage"
+      }
+    }
+  ],
   "metrics": {
-    "samples": 0,
-    "evaluated_samples": 0,
-    "generalisiert": 0,
-    "nur_sonderfall": 0,
+    "samples": 5,
+    "evaluated_samples": 5,
+    "generalisiert": 4,
+    "nur_sonderfall": 1,
     "noch_nicht_erkannt": 0,
     "all_have_perception_lerneffekt": true
   }
