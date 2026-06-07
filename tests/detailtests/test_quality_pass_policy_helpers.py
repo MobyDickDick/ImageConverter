@@ -41,3 +41,13 @@ def test_base_names_from_filenames_uses_converter_base_parser() -> None:
     )
 
     assert bases == {"AC0811", "AC0800"}
+
+
+def test_multi_base_batch_keeps_one_refinement_pass_by_default() -> None:
+    max_passes, reason = policy_helpers.resolveMaxQualityPassesImpl(
+        default_max_quality_passes=4,
+        base_names={"AC0800", "AC0838"},
+    )
+
+    assert max_passes == 1
+    assert reason == "multi_base_one_refinement_pass"

@@ -6517,7 +6517,7 @@ def test_parse_args_allows_two_positional_paths_with_default_iterations() -> Non
 
     assert args.folder_path == "in_folder"
     assert args.csv_or_output == "out_folder"
-    assert int(args.iterations) == 128
+    assert int(args.iterations) == 64
 
 
 def test_parse_args_keeps_legacy_three_positional_arguments() -> None:
