@@ -25,7 +25,12 @@ def normalizeExplicitRangeTokenImpl(value: str) -> str:
 
 
 def isExplicitSizeVariantTokenImpl(token: str) -> bool:
-    return bool(re.match(r"^[A-Z]{2,3}\d{4}(?:[1-9]|[1-9]S|L|M|S|W|X)$", token))
+    return bool(
+        re.match(
+            r"^[A-Z]{2,3}\d{4}(?:[1-9]|[1-9]S|L|M|S|W|X)(?:SIA)?$",
+            token,
+        )
+    )
 
 
 def compactRangeTokenImpl(value: str, normalize_range_token_fn: Callable[[str], str]) -> str:
@@ -146,6 +151,19 @@ def inRequestedRangeImpl(
     explicit_start = normalize_explicit_range_token_fn(start_ref)
     explicit_end = normalize_explicit_range_token_fn(end_ref)
     normalized_start = normalize_range_token_fn(start_ref)
+
+    explicit_variant_span = (
+        explicit_start
+        and explicit_end
+        and explicit_start != explicit_end
+        and is_explicit_size_variant_token_fn(explicit_start)
+        and is_explicit_size_variant_token_fn(explicit_end)
+        and normalize_range_token_fn(start_ref) == normalize_range_token_fn(end_ref)
+    )
+    if explicit_variant_span:
+        lower, upper = sorted((explicit_start, explicit_end))
+        explicit_stem = normalize_explicit_range_token_fn(filename)
+        return lower <= explicit_stem <= upper
 
     exact_prefix_match = matches_exact_prefix_filter_fn(filename, start_ref, end_ref)
     if exact_prefix_match:
