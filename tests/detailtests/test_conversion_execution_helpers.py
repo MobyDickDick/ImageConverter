@@ -583,6 +583,53 @@ def test_convert_one_impl_keeps_existing_svg_when_new_is_not_better(tmp_path: Pa
     assert (svg_out / "AC0801_S.svg").read_text(encoding="utf-8") == "<svg>old</svg>"
 
 
+def test_convert_one_impl_keeps_poor_existing_svg_when_quality_retry_is_not_better(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    folder = tmp_path / "images"
+    svg_out = tmp_path / "svg"
+    diff_out = tmp_path / "diff"
+    reports = tmp_path / "reports"
+    for path in (folder, svg_out, diff_out, reports):
+        path.mkdir()
+    filename = "AC0224_M.jpg"
+    (folder / filename).write_bytes(b"fake")
+    (svg_out / "AC0224_M.svg").write_text("<svg>old-ac0224</svg>", encoding="utf-8")
+    monkeypatch.setenv("ICC_POOR_SVG_MEAN_DELTA2", "2500")
+
+    def _run(*_args, **_kwargs):
+        (svg_out / "AC0224_M.svg").write_text("<svg>new-ac0224</svg>", encoding="utf-8")
+        return ("AC0224_M", "desc", {"mode": "non_composite"}, 2, 12.0)
+
+    row, failed = conversion_execution_helpers.convertOneImpl(
+        filename=filename,
+        folder_path=str(folder),
+        csv_path="descriptions.csv",
+        iteration_budget=3,
+        badge_rounds=5,
+        svg_out_dir=str(svg_out),
+        diff_out_dir=str(diff_out),
+        png_out_dir=str(tmp_path / "png"),
+        reports_out_dir=str(reports),
+        debug_ac0811_dir=None,
+        debug_element_diff_dir=None,
+        run_iteration_pipeline_fn=_run,
+        read_validation_log_details_fn=lambda _path: {"convergence": "plateau"},
+        render_svg_to_numpy_fn=lambda svg, _w, _h: svg,
+        calculate_delta2_stats_fn=lambda _img, rendered: (3000.0 if "old" in rendered else 3100.0, 0.0),
+        get_base_name_from_file_fn=lambda stem: stem.split("_")[0],
+        cv2_module=_Cv2Stub(_ImageStub((4, 3, 3))),
+        render_embedded_raster_svg_fn=lambda _path: "<svg/>",
+        append_batch_failure_fn=lambda _row: None,
+        print_fn=lambda _msg: None,
+    )
+
+    assert failed is False
+    assert row is not None
+    assert row["mean_delta2"] == 3000.0
+    assert (svg_out / "AC0224_M.svg").read_text(encoding="utf-8") == "<svg>old-ac0224</svg>"
+
+
 def test_convert_one_impl_prefers_new_vector_svg_over_existing_embedded_raster_even_when_delta2_is_worse(tmp_path: Path) -> None:
     folder = tmp_path / "images"
     svg_out = tmp_path / "svg"
