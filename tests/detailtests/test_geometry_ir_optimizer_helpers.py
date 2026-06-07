@@ -159,3 +159,71 @@ def test_registration_optimizer_reduces_error_without_changing_semantic_shape() 
         "scale_y",
         "stroke_scale",
     }
+
+
+def test_registration_optimizer_continues_coarse_stage_until_convergence() -> None:
+    ir = [{"kind": "CircleGlyph", "id": "circle", "circle": [0.5, 0.5, 0.2]}]
+
+    result = optimizer_helpers.optimizeGeometryIrRegistrationImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: abs(candidate_ir[0]["circle"][0] - 1.1),
+    )
+
+    assert result["final_error"] == pytest.approx(0.0)
+    assert result["geometry_ir"][0]["circle"][0] == pytest.approx(1.1)
+    translate_steps = [
+        step for step in result["steps"] if step["parameter"] == "translate_x"
+    ]
+    assert len(translate_steps) > 4
+
+
+def test_right_rotated_valve_refinement_fits_relative_geometry_and_palette() -> None:
+    ir = [
+        {
+            "kind": "RightRotatedTopKelleThreeWayValveGlyph",
+            "id": "right_rotated_top_kelle_three_way_valve",
+            "body_paths": [
+                [[0.61, 0.50], [0.455, 0.98], [0.765, 0.98]],
+                [[0.61, 0.50], [0.455, 0.02], [0.765, 0.02]],
+                [[0.61, 0.50], [0.96, 0.667], [0.96, 0.333]],
+            ],
+            "circle": [0.235, 0.50, 0.225],
+            "connector": [[0.45, 0.50], [0.61, 0.50]],
+            "body_fill": "url(#body)",
+            "circle_fill": "url(#circle)",
+            "stroke": "#969696",
+            "connector_stroke": "#8f8f8f",
+            "stroke_width": 0.04,
+            "connector_width": 0.075,
+        }
+    ]
+
+    def gray(value: str, fallback: int) -> int:
+        return fallback if value.startswith("url(") else int(value[1:3], 16)
+
+    def error_fn(candidate_ir):
+        element = candidate_ir[0]
+        return (
+            abs(element["circle"][0] - 0.715)
+            + abs(element["circle"][2] - 0.19)
+            + abs(element["body_paths"][2][1][1] - 0.72)
+            + abs(gray(element["body_fill"], 215) - 195) / 255.0
+            + abs(gray(element["circle_fill"], 250) - 240) / 255.0
+        )
+
+    result = optimizer_helpers.refineRightRotatedValveGeometryImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=error_fn,
+    )
+
+    assert result["final_error"] < result["initial_error"]
+    assert result["geometry_ir"][0]["kind"] == "RightRotatedTopKelleThreeWayValveGlyph"
+    assert result["geometry_ir"][0]["circle"][0] == pytest.approx(0.715)
+    assert result["geometry_ir"][0]["body_fill"] == "#c3c3c3"
+    assert result["geometry_ir"][0]["circle_fill"] == "#f0f0f0"
+    circle_x_steps = [
+        step for step in result["steps"] if step["parameter"] == "circle_x"
+    ]
+    assert len(circle_x_steps) > 4

@@ -293,6 +293,207 @@ def transformGeometryIrImpl(
     return transformed
 
 
+def _gray_hex(value: float) -> str:
+    gray = max(0, min(255, int(round(value))))
+    return f"#{gray:02x}{gray:02x}{gray:02x}"
+
+
+def _mutate_right_rotated_valve_parameter(
+    geometry_ir: GeometryIr,
+    *,
+    parameter: str,
+    delta: float,
+) -> GeometryIr:
+    """Adjust one topology-preserving parameter of the AC0224 valve glyph."""
+
+    candidate = _clone_ir(geometry_ir)
+    element = candidate[0]
+    body_paths = element.get("body_paths")
+    circle = element.get("circle")
+    connector = element.get("connector")
+    if not (
+        isinstance(body_paths, list)
+        and len(body_paths) == 3
+        and all(isinstance(path, list) and len(path) == 3 for path in body_paths)
+        and isinstance(circle, list)
+        and len(circle) == 3
+        and isinstance(connector, list)
+        and len(connector) == 2
+    ):
+        return candidate
+
+    if parameter == "circle_x":
+        circle[0] = float(circle[0]) + delta
+    elif parameter == "circle_y":
+        circle[1] = float(circle[1]) + delta
+    elif parameter == "circle_radius":
+        circle[2] = max(0.02, float(circle[2]) + delta)
+    elif parameter == "body_center_x":
+        for path in body_paths:
+            path[0][0] = float(path[0][0]) + delta
+        connector[1][0] = float(connector[1][0]) + delta
+    elif parameter == "body_center_y":
+        for path in body_paths:
+            path[0][1] = float(path[0][1]) + delta
+        for point in connector:
+            point[1] = float(point[1]) + delta
+    elif parameter == "vertical_inner_x":
+        body_paths[0][1][0] = float(body_paths[0][1][0]) + delta
+        body_paths[1][1][0] = float(body_paths[1][1][0]) + delta
+    elif parameter == "vertical_outer_x":
+        body_paths[0][2][0] = float(body_paths[0][2][0]) + delta
+        body_paths[1][2][0] = float(body_paths[1][2][0]) + delta
+    elif parameter == "vertical_extent":
+        for point in body_paths[0][1:]:
+            point[1] = float(point[1]) + delta
+        for point in body_paths[1][1:]:
+            point[1] = float(point[1]) - delta
+    elif parameter == "right_extent":
+        body_paths[2][1][0] = float(body_paths[2][1][0]) + delta
+        body_paths[2][2][0] = float(body_paths[2][2][0]) + delta
+    elif parameter == "right_half_height":
+        body_paths[2][1][1] = float(body_paths[2][1][1]) + delta
+        body_paths[2][2][1] = float(body_paths[2][2][1]) - delta
+    elif parameter == "connector_start_x":
+        connector[0][0] = float(connector[0][0]) + delta
+    elif parameter == "stroke_width":
+        element["stroke_width"] = max(0.002, float(element.get("stroke_width", 0.04)) + delta)
+    elif parameter == "connector_width":
+        element["connector_width"] = max(0.002, float(element.get("connector_width", 0.075)) + delta)
+    return candidate
+
+
+def refineRightRotatedValveGeometryImpl(
+    geometry_ir: GeometryIr,
+    *,
+    render_fn: RenderFn,
+    error_fn: ErrorFn,
+    min_improvement: float = 1e-9,
+) -> dict[str, Any]:
+    """Refine AC0224 geometry beyond a single global registration transform.
+
+    A global transform cannot independently fit the handle and the three-way
+    valve body.  This second phase retains the semantic topology and bilateral
+    symmetry while fitting their relative geometry, line weights, and grayscale
+    palette.  Every scale is exhausted until a complete pass finds no
+    improvement; the previous fixed four-pass ceiling could stop while the same
+    parameter was still improving.
+    """
+
+    current_ir = _clone_ir(geometry_ir)
+    current_rendered = render_fn(current_ir)
+    current_error = float("inf") if current_rendered is None else float(error_fn(current_rendered))
+    initial_error = current_error
+    steps: list[dict[str, object]] = []
+    if not current_ir or current_ir[0].get("kind") != "RightRotatedTopKelleThreeWayValveGlyph":
+        return {
+            "mode": "right_rotated_valve_geometry",
+            "geometry_ir": current_ir,
+            "rendered": current_rendered,
+            "initial_error": initial_error,
+            "final_error": current_error,
+            "steps": steps,
+        }
+
+    parameters = (
+        "circle_x",
+        "circle_y",
+        "circle_radius",
+        "body_center_x",
+        "body_center_y",
+        "vertical_inner_x",
+        "vertical_outer_x",
+        "vertical_extent",
+        "right_extent",
+        "right_half_height",
+        "connector_start_x",
+        "stroke_width",
+        "connector_width",
+    )
+    for stage_index, step in enumerate((0.08, 0.04, 0.02, 0.01, 0.005, 0.0025)):
+        pass_index = 0
+        while pass_index < 64:
+            pass_improved = False
+            for parameter in parameters:
+                best_probe = None
+                for direction in (-1.0, 1.0):
+                    probe_ir = _mutate_right_rotated_valve_parameter(
+                        current_ir,
+                        parameter=parameter,
+                        delta=direction * step,
+                    )
+                    probe_rendered = render_fn(probe_ir)
+                    if probe_rendered is None:
+                        continue
+                    probe_error = float(error_fn(probe_rendered))
+                    if probe_error < current_error - min_improvement and (
+                        best_probe is None or probe_error < best_probe[0]
+                    ):
+                        best_probe = (probe_error, probe_ir, probe_rendered, direction * step)
+                if best_probe is None:
+                    continue
+                previous_error = current_error
+                current_error, current_ir, current_rendered, accepted_delta = best_probe
+                steps.append(
+                    {
+                        "stage": stage_index,
+                        "pass": pass_index,
+                        "parameter": parameter,
+                        "delta": float(accepted_delta),
+                        "best_delta": float(previous_error - current_error),
+                    }
+                )
+                pass_improved = True
+            if not pass_improved:
+                break
+            pass_index += 1
+
+    palette_defaults = {
+        "body_fill": 215.0,
+        "circle_fill": 250.0,
+        "stroke": 150.0,
+        "connector_stroke": 143.0,
+    }
+    for palette_key, initial_gray in palette_defaults.items():
+        gray = initial_gray
+        for stage_index, step in enumerate((40.0, 20.0, 10.0, 5.0, 2.0, 1.0)):
+            while True:
+                best_probe = None
+                for direction in (-1.0, 1.0):
+                    probe_gray = max(0.0, min(255.0, gray + direction * step))
+                    probe_ir = _clone_ir(current_ir)
+                    probe_ir[0][palette_key] = _gray_hex(probe_gray)
+                    probe_rendered = render_fn(probe_ir)
+                    if probe_rendered is None:
+                        continue
+                    probe_error = float(error_fn(probe_rendered))
+                    if probe_error < current_error - min_improvement and (
+                        best_probe is None or probe_error < best_probe[0]
+                    ):
+                        best_probe = (probe_error, probe_ir, probe_rendered, probe_gray)
+                if best_probe is None:
+                    break
+                previous_error = current_error
+                current_error, current_ir, current_rendered, gray = best_probe
+                steps.append(
+                    {
+                        "stage": stage_index,
+                        "parameter": palette_key,
+                        "value": float(gray),
+                        "best_delta": float(previous_error - current_error),
+                    }
+                )
+
+    return {
+        "mode": "right_rotated_valve_geometry",
+        "geometry_ir": current_ir,
+        "rendered": current_rendered,
+        "initial_error": float(initial_error),
+        "final_error": float(current_error),
+        "steps": steps,
+    }
+
+
 def optimizeGeometryIrRegistrationImpl(
     geometry_ir: GeometryIr,
     *,
@@ -338,7 +539,8 @@ def optimizeGeometryIrRegistrationImpl(
     )
 
     for stage_index, stage_steps in enumerate(stages):
-        for _pass_index in range(4):
+        pass_index = 0
+        while pass_index < 64:
             pass_improved = False
             for parameter_index, step in enumerate(stage_steps):
                 best_probe = None
@@ -367,6 +569,18 @@ def optimizeGeometryIrRegistrationImpl(
                 pass_improved = True
             if not pass_improved:
                 break
+            pass_index += 1
+
+    element_refinement = refineRightRotatedValveGeometryImpl(
+        current_ir,
+        render_fn=render_fn,
+        error_fn=error_fn,
+        min_improvement=min_improvement,
+    )
+    if float(element_refinement["final_error"]) < current_error - min_improvement:
+        current_ir = element_refinement["geometry_ir"]
+        current_rendered = element_refinement["rendered"]
+        current_error = float(element_refinement["final_error"])
 
     return {
         "mode": "geometry_ir_raster_registration",
@@ -376,4 +590,9 @@ def optimizeGeometryIrRegistrationImpl(
         "final_error": float(current_error),
         "parameters": dict(zip(parameter_names, parameters)),
         "steps": accepted_steps,
+        "element_refinement": {
+            key: value
+            for key, value in element_refinement.items()
+            if key not in {"geometry_ir", "rendered"}
+        },
     }
