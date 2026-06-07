@@ -1,14 +1,14 @@
 {
   "actual_iterations": 64,
   "base": "AC0224",
-  "best_error": 35.07833333333333,
+  "best_error": 30.346666666666668,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 0.2969999999986612,
-  "error_per_pixel": 0.05846388888888889,
-  "filename": "AC0224_S.jpg",
-  "h": 20,
-  "mean_delta2": 5456.71142578125,
+  "elapsed_seconds": 0.25,
+  "error_per_pixel": 0.022479012345679013,
+  "filename": "AC0224_M_sia.jpg",
+  "h": 30,
+  "mean_delta2": 5640.6591796875,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -114,10 +114,10 @@
     ],
     "semantic_sources": {},
     "top_source_ref": null,
-    "variant_name": "AC0224_S"
+    "variant_name": "AC0224_M_SIA"
   },
   "requested_iterations": 64,
-  "std_delta2": 6493.11962890625,
-  "variant": "AC0224_S",
-  "w": 30
+  "std_delta2": 8869.44140625,
+  "variant": "AC0224_M_SIA",
+  "w": 45
 }

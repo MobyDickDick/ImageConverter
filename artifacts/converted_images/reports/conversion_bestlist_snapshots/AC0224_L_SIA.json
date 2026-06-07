@@ -1,12 +1,14 @@
 {
+  "actual_iterations": 64,
   "base": "AC0224",
-  "best_error": 28.124266666666667,
+  "best_error": 30.58417777777778,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.0074998044444444445,
+  "elapsed_seconds": 0.28100000000267755,
+  "error_per_pixel": 0.008155780740740741,
   "filename": "AC0224_L_sia.jpg",
   "h": 50,
-  "mean_delta2": 6592.37158203125,
+  "mean_delta2": 6848.69384765625,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -114,7 +116,8 @@
     "top_source_ref": null,
     "variant_name": "AC0224_L_SIA"
   },
-  "std_delta2": 12367.9169921875,
+  "requested_iterations": 64,
+  "std_delta2": 11872.994140625,
   "variant": "AC0224_L_SIA",
   "w": 75
 }
