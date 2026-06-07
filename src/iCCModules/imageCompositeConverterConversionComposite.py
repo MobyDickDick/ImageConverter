@@ -35,8 +35,19 @@ def runCompositeIterationImpl(
     plateau_streak = 0
     previous_error: float | None = None
     stop_reason = "max_iterations"
+    actual_iterations = 0
+
+    # The old early-stop rule only recognized virtually identical adjacent
+    # errors. Real rasterization noise usually keeps those values moving by a
+    # tiny amount, so expensive searches consumed the complete budget even
+    # after the useful optimum had stabilized. Track *meaningful* best-score
+    # progress as a second, conservative online convergence signal.
+    min_stagnation_iterations = min(max_iterations, max(16, int(max_iterations * 0.60)))
+    stagnation_patience = min(max_iterations, max(8, max_iterations // 5))
+    iterations_since_meaningful_improvement = 0
 
     for i, eps in enumerate(epsilon_factors):
+        actual_iterations = i + 1
         svg_content = generate_composite_svg_fn(width, height, params, folder_path, float(eps))
 
         svg_rendered = render_svg_to_numpy_fn(svg_content, width, height)
@@ -55,7 +66,19 @@ def runCompositeIterationImpl(
         else:
             plateau_streak = 0
 
+        previous_best_error = best_error
         improved = error < best_error
+        meaningful_improvement = False
+        if improved:
+            improvement = previous_best_error - error
+            meaningful_tolerance = max(plateau_tolerance, abs(previous_best_error) * 1e-5)
+            meaningful_improvement = previous_best_error == float("inf") or improvement > meaningful_tolerance
+
+        if meaningful_improvement:
+            iterations_since_meaningful_improvement = 0
+        else:
+            iterations_since_meaningful_improvement += 1
+
         if improved or i == 0 or (i + 1) == max_iterations:
             print_fn(f"  [Iter {i+1}/{max_iterations}] Epsilon={eps:.4f} -> Diff-Fehler: {error:.2f}")
 
@@ -73,8 +96,19 @@ def runCompositeIterationImpl(
             stop_reason = "plateau"
             break
 
+        if (
+            (i + 1) >= min_stagnation_iterations
+            and iterations_since_meaningful_improvement >= stagnation_patience
+        ):
+            print_fn(
+                "  -> Früher Abbruch: Keine relevante Verbesserung seit "
+                f"{iterations_since_meaningful_improvement} Iterationen"
+            )
+            stop_reason = "stagnation"
+            break
+
     print_fn(f"-> Bester Match in Iteration {best_iter} (Fehler auf {best_error:.2f} reduziert)")
-    if stop_reason == "plateau":
+    if stop_reason in {"plateau", "stagnation"}:
         if best_iter <= 1:
             print_fn("-> Konvergenzdiagnose: Plateau ohne messbare Verbesserung (Parameterraum ggf. erweitern)")
         else:
@@ -89,6 +123,8 @@ def runCompositeIterationImpl(
         [
             "status=composite_ok",
             f"convergence={stop_reason}",
+            f"actual_iterations={int(actual_iterations)}",
+            f"requested_iterations={int(max_iterations)}",
             f"best_iter={int(best_iter)}",
             f"best_error={float(best_error):.6f}",
         ]

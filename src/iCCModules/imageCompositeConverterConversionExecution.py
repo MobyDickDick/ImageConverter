@@ -798,10 +798,18 @@ def convertOneImpl(
     if not _isMeaningfulDiffArtifact(diff_path, cv2_module):
         _deleteDiffIfPresent(diff_path)
     _ensureOutputArtifacts(svg_path=svg_path, diff_path=diff_path, create_svg_fallback=True, create_diff_fallback=False)
+    elapsed_sec = max(0.0, time.monotonic() - started_at)
+    try:
+        actual_iterations = int(details.get("actual_iterations", iteration_budget))
+    except (TypeError, ValueError):
+        actual_iterations = int(iteration_budget)
     row = {
         "filename": filename,
         "params": params,
         "best_iter": int(best_iter),
+        "requested_iterations": int(iteration_budget),
+        "actual_iterations": max(0, actual_iterations),
+        "elapsed_seconds": float(elapsed_sec),
         "best_error": float(best_error),
         "convergence": str(details.get("convergence", "")).strip().lower(),
         "error_per_pixel": float(best_error) / pixel_count,
@@ -835,13 +843,14 @@ def convertOneImpl(
         },
         print_fn=print_fn,
     )
-    elapsed_sec = max(0.0, time.monotonic() - started_at)
     print_fn(
         f"[INFO] Konvertiert {filename} | "
         f"Parameter: {_formatCompactParams(params)} | "
         f"Qualität: Fehler/Pixel={_formatQualityValue(row['error_per_pixel'])}, "
         f"Mean-Delta²={_formatQualityValue(row['mean_delta2'])}, "
-        f"beste Iteration={int(best_iter)} | Dauer={elapsed_sec:.1f}s"
+        f"beste Iteration={int(best_iter)}, "
+        f"ausgeführt={row['actual_iterations']}/{row['requested_iterations']} | "
+        f"Dauer={elapsed_sec:.1f}s"
     )
     _emit_anchor_variant_event("variant_done", status="ok")
     if os.path.exists(svg_path) and img is not None and hasattr(cv2_module, "imwrite"):
