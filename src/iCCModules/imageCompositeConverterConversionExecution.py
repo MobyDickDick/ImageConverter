@@ -765,7 +765,12 @@ def convertOneImpl(
         new_is_better = new_quality < previous_quality
         previous_contains_embedded_raster = "data:image/" in previous_svg_content.lower()
         new_contains_embedded_raster = _svgContainsEmbeddedRasterArtifact(svg_path)
-        if previous_contains_embedded_raster and not new_contains_embedded_raster:
+        new_svg_content = _safeReadTextFile(svg_path)
+        semantic_shape_upgrade = (
+            "_square_cross" in new_svg_content
+            and "_square_cross" not in previous_svg_content
+        )
+        if (previous_contains_embedded_raster and not new_contains_embedded_raster) or semantic_shape_upgrade:
             new_is_better = True
         if not new_is_better:
             # A quality retry must never erase the usable result from the

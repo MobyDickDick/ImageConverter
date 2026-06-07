@@ -70,6 +70,17 @@ def readConversionBestlistMetricsImpl(manifest_path: Path) -> dict[str, dict[str
     return rows
 
 
+def _runtime_variant_stem(variant: str, row: dict[str, object] | None = None) -> str:
+    if isinstance(row, dict):
+        filename = str(row.get("filename", "")).strip()
+        if filename:
+            return Path(filename).stem
+    normalized = str(variant).strip()
+    if normalized.upper().endswith("_SIA"):
+        return f"{normalized[:-4]}_sia"
+    return normalized
+
+
 def pruneConversionBestlistRowsWithoutSvgImpl(
     rows: dict[str, dict[str, object]],
     svg_out_dir: str,
@@ -83,7 +94,8 @@ def pruneConversionBestlistRowsWithoutSvgImpl(
         normalized_variant = str(variant).strip().upper()
         if not normalized_variant:
             continue
-        if (svg_dir / f"{normalized_variant}.svg").exists():
+        runtime_stem = _runtime_variant_stem(normalized_variant, row)
+        if (svg_dir / f"{runtime_stem}.svg").exists():
             pruned[normalized_variant] = row
     return pruned
 
@@ -116,11 +128,12 @@ def storeConversionBestlistSnapshotImpl(
     reports_out_dir: str,
 ) -> None:
     paths = conversionBestlistSnapshotPathsImpl(reports_out_dir, variant)
-    svg_path = Path(svg_out_dir) / f"{variant}.svg"
+    runtime_stem = _runtime_variant_stem(variant, row)
+    svg_path = Path(svg_out_dir) / f"{runtime_stem}.svg"
     if svg_path.exists():
         paths["svg"].write_text(svg_path.read_text(encoding="utf-8"), encoding="utf-8")
 
-    log_path = Path(reports_out_dir) / f"{variant}_element_validation.log"
+    log_path = Path(reports_out_dir) / f"{runtime_stem}_element_validation.log"
     if log_path.exists():
         paths["log"].write_text(log_path.read_text(encoding="utf-8"), encoding="utf-8")
 
@@ -134,13 +147,14 @@ def restoreConversionBestlistSnapshotImpl(
 ) -> dict[str, object] | None:
     paths = conversionBestlistSnapshotPathsImpl(reports_out_dir, variant)
     restored = False
-    svg_path = Path(svg_out_dir) / f"{variant}.svg"
+    runtime_stem = _runtime_variant_stem(variant)
+    svg_path = Path(svg_out_dir) / f"{runtime_stem}.svg"
     if paths["svg"].exists():
         svg_path.parent.mkdir(parents=True, exist_ok=True)
         svg_path.write_text(paths["svg"].read_text(encoding="utf-8"), encoding="utf-8")
         restored = True
 
-    log_path = Path(reports_out_dir) / f"{variant}_element_validation.log"
+    log_path = Path(reports_out_dir) / f"{runtime_stem}_element_validation.log"
     if paths["log"].exists():
         log_path.write_text(paths["log"].read_text(encoding="utf-8"), encoding="utf-8")
         restored = True

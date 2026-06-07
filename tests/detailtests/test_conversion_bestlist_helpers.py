@@ -176,3 +176,35 @@ def test_repair_ac0223_bestlist_artifacts_removes_stale_snapshots(tmp_path: Path
     manifest = bestlist.read_text(encoding="utf-8")
     assert "AC0223_L;" not in manifest
     assert "AC0223_M;" in manifest
+
+
+def test_store_and_restore_sia_snapshot_uses_runtime_filename_casing(tmp_path: Path) -> None:
+    svg_out = tmp_path / "svg"
+    reports = tmp_path / "reports"
+    svg_out.mkdir()
+    reports.mkdir()
+    variant = "AC0224_M_SIA"
+    runtime_stem = "AC0224_M_sia"
+    row = {"variant": variant, "filename": f"{runtime_stem}.jpg", "status": "converted"}
+
+    (svg_out / f"{runtime_stem}.svg").write_text("<svg>crossed-square</svg>", encoding="utf-8")
+    (reports / f"{runtime_stem}_element_validation.log").write_text(
+        "geometry_ir_handle_shape_1=crossed_square", encoding="utf-8"
+    )
+
+    bestlist_helpers.storeConversionBestlistSnapshotImpl(
+        variant=variant,
+        row=row,
+        svg_out_dir=str(svg_out),
+        reports_out_dir=str(reports),
+    )
+    (svg_out / f"{runtime_stem}.svg").write_text("<svg>circle</svg>", encoding="utf-8")
+
+    restored = bestlist_helpers.restoreConversionBestlistSnapshotImpl(
+        variant=variant,
+        svg_out_dir=str(svg_out),
+        reports_out_dir=str(reports),
+    )
+
+    assert (svg_out / f"{runtime_stem}.svg").read_text(encoding="utf-8") == "<svg>crossed-square</svg>"
+    assert restored == row

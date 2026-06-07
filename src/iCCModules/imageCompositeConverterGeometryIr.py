@@ -723,10 +723,29 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
             raw_circle = element.get("circle", [0.721, 0.501, 0.263])
             if isinstance(raw_circle, list) and len(raw_circle) == 3:
                 cx, cy, radius = [float(value) for value in raw_circle]
-                svg.append(
-                    f'  <circle id="{element_id}_circle" cx="{_fmt(cx * w)}" cy="{_fmt(cy * h)}" '
-                    f'r="{_fmt(radius * min(w, h))}" fill="{rendered_circle_fill}" stroke="{stroke}" stroke-width="{_fmt(sw)}"/>'
-                )
+                center_x = cx * w
+                center_y = cy * h
+                scaled_radius = radius * min(w, h)
+                if element.get("handle_shape") == "crossed_square":
+                    square_x = center_x - scaled_radius
+                    square_y = center_y - scaled_radius
+                    square_size = scaled_radius * 2.0
+                    svg.append(
+                        f'  <rect id="{element_id}_square" x="{_fmt(square_x)}" y="{_fmt(square_y)}" '
+                        f'width="{_fmt(square_size)}" height="{_fmt(square_size)}" fill="{rendered_circle_fill}" '
+                        f'stroke="{stroke}" stroke-width="{_fmt(sw)}"/>'
+                    )
+                    svg.append(
+                        f'  <path id="{element_id}_square_cross" '
+                        f'd="M {_fmt(square_x)} {_fmt(square_y)} L {_fmt(square_x + square_size)} {_fmt(square_y + square_size)} '
+                        f'M {_fmt(square_x + square_size)} {_fmt(square_y)} L {_fmt(square_x)} {_fmt(square_y + square_size)}" '
+                        f'fill="none" stroke="{stroke}" stroke-width="{_fmt(sw)}"/>'
+                    )
+                else:
+                    svg.append(
+                        f'  <circle id="{element_id}_circle" cx="{_fmt(center_x)}" cy="{_fmt(center_y)}" '
+                        f'r="{_fmt(scaled_radius)}" fill="{rendered_circle_fill}" stroke="{stroke}" stroke-width="{_fmt(sw)}"/>'
+                    )
             label = html.escape(str(element.get("label", "M")))
             raw_label_center = element.get("label_center", [0.721, 0.595])
             if label and isinstance(raw_label_center, list) and len(raw_label_center) == 2:

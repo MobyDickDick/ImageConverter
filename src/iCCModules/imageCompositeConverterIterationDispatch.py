@@ -77,6 +77,7 @@ def runPreparedIterationModeImpl(
             description=description,
             perc_img=perc_img,
             img_path=img_path,
+            image_variant_name=filename,
             print_fn=print_fn,
             write_validation_log_fn=write_validation_log_fn,
             record_render_failure_fn=record_render_failure_fn,
