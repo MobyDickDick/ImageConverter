@@ -762,19 +762,17 @@ def convertOneImpl(
             render_svg_to_numpy_fn=render_svg_to_numpy_fn,
             calculate_delta2_stats_fn=calculate_delta2_stats_fn,
         )
-        poor_threshold = float(os.environ.get("ICC_POOR_SVG_MEAN_DELTA2", "2500.0") or "2500.0")
-        old_is_poor = math.isfinite(previous_quality) and previous_quality >= poor_threshold
         new_is_better = new_quality < previous_quality
         previous_contains_embedded_raster = "data:image/" in previous_svg_content.lower()
         new_contains_embedded_raster = _svgContainsEmbeddedRasterArtifact(svg_path)
         if previous_contains_embedded_raster and not new_contains_embedded_raster:
             new_is_better = True
         if not new_is_better:
-            if old_is_poor:
-                _deleteDiffIfPresent(diff_path)
-                if os.path.exists(svg_path):
-                    os.unlink(svg_path)
-                return None, True
+            # A quality retry must never erase the usable result from the
+            # preceding pass.  The previous implementation treated a high
+            # mean-delta2 baseline as a hard failure and deleted it whenever a
+            # retry was not better.  This left families such as AC0224 without
+            # their M/S outputs even though the initial conversion succeeded.
             with open(svg_path, "w", encoding="utf-8") as handle:
                 handle.write(previous_svg_content)
     img = cv2_module.imread(image_path)
