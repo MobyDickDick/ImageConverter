@@ -173,3 +173,207 @@ def selectGeometryIrForRenderingImpl(params: dict[str, Any]) -> GeometryIr:
 
     params.setdefault("geometry_phase_mode", "no_geometry_ir")
     return []
+
+
+def _transform_point(
+    point: list[object],
+    *,
+    translate_x: float,
+    translate_y: float,
+    scale_x: float,
+    scale_y: float,
+) -> list[float]:
+    return [
+        0.5 + (float(point[0]) - 0.5) * scale_x + translate_x,
+        0.5 + (float(point[1]) - 0.5) * scale_y + translate_y,
+    ]
+
+
+def transformGeometryIrImpl(
+    geometry_ir: GeometryIr,
+    *,
+    translate_x: float = 0.0,
+    translate_y: float = 0.0,
+    scale_x: float = 1.0,
+    scale_y: float = 1.0,
+    stroke_scale: float = 1.0,
+) -> GeometryIr:
+    """Apply a structure-preserving global registration transform to Geometry-IR.
+
+    Coordinates remain normalized and may deliberately extend beyond ``0..1``;
+    SVG clipping then handles symbols whose antialiased strokes touch an image
+    edge.  Only documented geometry fields are transformed, so labels, colors,
+    semantic IDs, and element ordering remain unchanged.
+    """
+
+    transformed = _clone_ir(geometry_ir)
+    point_list_fields = ("points", "body_path", "connector")
+    point_fields = ("center", "label_center")
+
+    for element in transformed:
+        for field in point_list_fields:
+            points = element.get(field)
+            if isinstance(points, list):
+                element[field] = [
+                    _transform_point(
+                        point,
+                        translate_x=translate_x,
+                        translate_y=translate_y,
+                        scale_x=scale_x,
+                        scale_y=scale_y,
+                    )
+                    for point in points
+                    if isinstance(point, list) and len(point) == 2
+                ]
+
+        body_paths = element.get("body_paths")
+        if isinstance(body_paths, list):
+            element["body_paths"] = [
+                [
+                    _transform_point(
+                        point,
+                        translate_x=translate_x,
+                        translate_y=translate_y,
+                        scale_x=scale_x,
+                        scale_y=scale_y,
+                    )
+                    for point in path
+                    if isinstance(point, list) and len(point) == 2
+                ]
+                for path in body_paths
+                if isinstance(path, list)
+            ]
+
+        for field in point_fields:
+            point = element.get(field)
+            if isinstance(point, list) and len(point) == 2:
+                element[field] = _transform_point(
+                    point,
+                    translate_x=translate_x,
+                    translate_y=translate_y,
+                    scale_x=scale_x,
+                    scale_y=scale_y,
+                )
+
+        circle = element.get("circle")
+        if isinstance(circle, list) and len(circle) == 3:
+            center = _transform_point(
+                circle[:2],
+                translate_x=translate_x,
+                translate_y=translate_y,
+                scale_x=scale_x,
+                scale_y=scale_y,
+            )
+            element["circle"] = [*center, float(circle[2]) * min(scale_x, scale_y)]
+
+        bbox = element.get("bbox")
+        if isinstance(bbox, list) and len(bbox) == 4:
+            origin = _transform_point(
+                bbox[:2],
+                translate_x=translate_x,
+                translate_y=translate_y,
+                scale_x=scale_x,
+                scale_y=scale_y,
+            )
+            element["bbox"] = [
+                *origin,
+                float(bbox[2]) * scale_x,
+                float(bbox[3]) * scale_y,
+            ]
+
+        for field in ("stroke_width", "connector_width"):
+            if field in element:
+                element[field] = max(0.001, float(element[field]) * stroke_scale)
+        if "font_size" in element:
+            element["font_size"] = max(
+                0.001,
+                float(element["font_size"]) * min(scale_x, scale_y),
+            )
+
+    return transformed
+
+
+def optimizeGeometryIrRegistrationImpl(
+    geometry_ir: GeometryIr,
+    *,
+    render_fn: RenderFn,
+    error_fn: ErrorFn,
+    min_improvement: float = 1e-9,
+) -> dict[str, Any]:
+    """Fit semantic vector geometry to its source raster without changing meaning.
+
+    A deterministic coarse-to-fine coordinate descent calibrates horizontal and
+    vertical placement, scale, and line weight.  Every accepted probe must lower
+    the caller-provided image error, making this safe for all Geometry-IR
+    families rather than relying on family-specific coordinates.
+    """
+
+    parameter_names = (
+        "translate_x",
+        "translate_y",
+        "scale_x",
+        "scale_y",
+        "stroke_scale",
+    )
+    parameters = [0.0, 0.0, 1.0, 1.0, 1.0]
+
+    def evaluate(values: list[float]) -> tuple[float, GeometryIr, object]:
+        candidate_ir = transformGeometryIrImpl(
+            geometry_ir,
+            **dict(zip(parameter_names, values)),
+        )
+        rendered = render_fn(candidate_ir)
+        if rendered is None:
+            return float("inf"), candidate_ir, rendered
+        return float(error_fn(rendered)), candidate_ir, rendered
+
+    current_error, current_ir, current_rendered = evaluate(parameters)
+    initial_error = current_error
+    accepted_steps: list[dict[str, object]] = []
+    stages = (
+        (0.08, 0.08, 0.15, 0.15, 0.25),
+        (0.04, 0.04, 0.08, 0.08, 0.15),
+        (0.02, 0.02, 0.04, 0.04, 0.08),
+        (0.01, 0.01, 0.02, 0.02, 0.04),
+    )
+
+    for stage_index, stage_steps in enumerate(stages):
+        for _pass_index in range(4):
+            pass_improved = False
+            for parameter_index, step in enumerate(stage_steps):
+                best_probe = None
+                for direction in (-1.0, 1.0):
+                    probe = list(parameters)
+                    probe[parameter_index] += direction * step
+                    if parameter_index >= 2 and probe[parameter_index] <= 0.2:
+                        continue
+                    probe_error, probe_ir, probe_rendered = evaluate(probe)
+                    if probe_error < current_error - min_improvement and (
+                        best_probe is None or probe_error < best_probe[0]
+                    ):
+                        best_probe = (probe_error, probe, probe_ir, probe_rendered)
+                if best_probe is None:
+                    continue
+                previous_error = current_error
+                current_error, parameters, current_ir, current_rendered = best_probe
+                accepted_steps.append(
+                    {
+                        "stage": stage_index,
+                        "parameter": parameter_names[parameter_index],
+                        "value": float(parameters[parameter_index]),
+                        "best_delta": float(previous_error - current_error),
+                    }
+                )
+                pass_improved = True
+            if not pass_improved:
+                break
+
+    return {
+        "mode": "geometry_ir_raster_registration",
+        "geometry_ir": current_ir,
+        "rendered": current_rendered,
+        "initial_error": float(initial_error),
+        "final_error": float(current_error),
+        "parameters": dict(zip(parameter_names, parameters)),
+        "steps": accepted_steps,
+    }

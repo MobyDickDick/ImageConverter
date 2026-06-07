@@ -6,6 +6,7 @@ from pathlib import Path
 import numpy as np
 
 from src.iCCModules import imageCompositeConverterGeometryIr as geometry_ir_helpers
+from src.iCCModules import imageCompositeConverterGeometryIrOptimizer as geometry_ir_optimizer
 from tools.perception_detection_contract import build_perception_seeded_geometry_ir
 
 
@@ -809,14 +810,40 @@ def runNonCompositeIterationImpl(
                         params_snapshot=params,
                     )
                 else:
+                    description_error = calculate_error_fn(perc_img, description_rendered)
+                    optimizer_result = None
+                    if hasattr(perc_img, "shape"):
+                        optimizer_result = geometry_ir_optimizer.optimizeGeometryIrRegistrationImpl(
+                            description_geometry_ir,
+                            render_fn=lambda candidate_ir: render_svg_to_numpy_fn(
+                                geometry_ir_helpers.renderGeometryIrToSvgImpl(width, height, candidate_ir),
+                                width,
+                                height,
+                            ),
+                            error_fn=lambda rendered: calculate_error_fn(perc_img, rendered),
+                        )
+                        if float(optimizer_result["final_error"]) < float(description_error):
+                            description_geometry_ir = optimizer_result["geometry_ir"]
+                            description_rendered = optimizer_result["rendered"]
+                            description_error = float(optimizer_result["final_error"])
+                            geometry_ir_svg = geometry_ir_helpers.renderGeometryIrToSvgImpl(
+                                width, height, description_geometry_ir
+                            )
+                            params["optimized_geometry_ir"] = description_geometry_ir
+                        params["geometry_ir_optimizer_result"] = {
+                            key: value
+                            for key, value in optimizer_result.items()
+                            if key not in {"geometry_ir", "rendered"}
+                        }
                     candidates.append(
                         {
                             "status": "non_composite_description_geometry_ir",
                             "svg": geometry_ir_svg,
                             "rendered": description_rendered,
-                            "error": calculate_error_fn(perc_img, description_rendered),
+                            "error": description_error,
                             "geometry_ir": description_geometry_ir,
                             "perception_seed_count": 0,
+                            "optimizer_result": optimizer_result,
                         }
                     )
             try:
@@ -878,6 +905,19 @@ def runNonCompositeIterationImpl(
                         [
                             f"perception_seeded_geometry_ir=1",
                             f"perception_seed_count={perception_seed_count}",
+                        ]
+                    )
+                optimizer_result = best_geometry_candidate.get("optimizer_result")
+                if isinstance(optimizer_result, dict):
+                    log_lines.extend(
+                        [
+                            "geometry_ir_raster_registration=1",
+                            f"geometry_ir_registration_initial_error={float(optimizer_result['initial_error']):.6f}",
+                            f"geometry_ir_registration_final_error={float(optimizer_result['final_error']):.6f}",
+                            *(
+                                f"geometry_ir_registration_{key}={float(value):.6f}"
+                                for key, value in optimizer_result["parameters"].items()
+                            ),
                         ]
                     )
                 log_lines.extend(
