@@ -40,8 +40,11 @@ def partitionReusableConversionsImpl(
             continue
 
         source_path = Path(folder_path) / filename
-        variant = str(row.get("variant", "")).strip().upper() or Path(filename).stem.upper()
-        svg_path = Path(svg_out_dir) / f"{variant}.svg"
+        source_stem = Path(filename).stem
+        variant = str(row.get("variant", "")).strip().upper() or source_stem.upper()
+        svg_path = Path(svg_out_dir) / f"{source_stem}.svg"
+        if not svg_path.exists() and source_stem != variant:
+            svg_path = Path(svg_out_dir) / f"{variant}.svg"
         source_mtime_ns = _mtimeNs(source_path)
         svg_mtime_ns = _mtimeNs(svg_path)
         if source_mtime_ns <= 0 or svg_mtime_ns < max(source_mtime_ns, descriptions_mtime_ns):
