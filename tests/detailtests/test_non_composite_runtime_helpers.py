@@ -1533,3 +1533,62 @@ def test_ac0224_sia_prefers_semantic_geometry_and_uses_crossed_square(monkeypatc
     assert "non_composite_selection=semantic_description_geometry" in logs[-1]
     assert 'id="right_rotated_top_kelle_three_way_valve_square"' in artifacts[0][0]
     assert 'id="right_rotated_top_kelle_three_way_valve_circle"' not in artifacts[0][0]
+
+
+def test_symbol_fit_keeps_description_declared_top_left_glyph_in_top_region(monkeypatch) -> None:
+    initial = {
+        "border_thickness": 1.0,
+        "gradient_center": 50.0,
+        "gradient_edge": "#808080",
+        "gradient_mid": "#e0e0e0",
+        "diag1_width": 1.4,
+        "diag2_width": 0.0,
+        "plus_width": 1.2,
+        "minus_width": 0.0,
+        "plus_x_ratio": 0.30,
+        "glyph_y_ratio": 0.45,
+        "plus_half_ratio": 0.08,
+        "minus_gap_ratio": 1.8,
+        "glyph_gray": 100.0,
+        "diag_gray": 130.0,
+        "border_gray": 150.0,
+    }
+    monkeypatch.setattr(
+        non_composite_runtime_helpers,
+        "_derive_symbol_params_from_raster",
+        lambda **_kwargs: dict(initial),
+    )
+
+    def render(svg: str, _width: int, height: int):
+        import re
+
+        matches = re.findall(r'<line x1="[^"]+" y1="([0-9.]+)" x2="[^"]+" y2="([0-9.]+)"', svg)
+        horizontal_y = next(float(y1) for y1, y2 in matches if y1 == y2)
+        return np.full((height, 20, 3), horizontal_y / height * 255.0, dtype=np.float32)
+
+    target = np.full((60, 20, 3), 0.15 * 255.0, dtype=np.float32)
+    result = non_composite_runtime_helpers._fit_symbol_element_by_element(
+        width=20,
+        height=60,
+        description="Plus-Zeichen oben links auf einem grauen Rechteck",
+        perc_img=target,
+        render_svg_to_numpy_fn=render,
+        calculate_error_fn=lambda expected, actual: float(np.mean(np.abs(expected - actual))),
+    )
+
+    assert result is not None
+    assert 0.05 <= result[3]["glyph_y_ratio"] <= 0.30
+    assert result[3]["glyph_y_ratio"] == 0.15
+
+    unconstrained_target = np.full((60, 20, 3), 0.45 * 255.0, dtype=np.float32)
+    unconstrained = non_composite_runtime_helpers._fit_symbol_element_by_element(
+        width=20,
+        height=60,
+        description="Plus-Zeichen auf einem grauen Rechteck",
+        perc_img=unconstrained_target,
+        render_svg_to_numpy_fn=render,
+        calculate_error_fn=lambda expected, actual: float(np.mean(np.abs(expected - actual))),
+    )
+
+    assert unconstrained is not None
+    assert unconstrained[3]["glyph_y_ratio"] == 0.45

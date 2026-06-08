@@ -62,11 +62,17 @@ def test_ac0100_quality_uses_algorithmic_elementwise_fit(tmp_path: Path) -> None
     for row in rows:
         best_error = float(row[4])
         mean_delta2 = float(row[6])
-        assert best_error < 28.5
-        assert mean_delta2 < 3300.0
+        assert best_error < 18.0
+        assert mean_delta2 < 1600.0
 
     for suffix in ("L", "M", "S"):
         log = (output_dir / "reports" / f"AC0100_{suffix}_element_validation.log").read_text(encoding="utf-8")
         assert "status=non_composite_elementwise_symbol_fit" in log
         assert "status=non_composite_plan_b_sample_svg_selected" not in log
         assert "template_transfer" not in log
+        fit_values = dict(
+            line.split("=", 1)
+            for line in log.splitlines()
+            if line.startswith("fit_") and "=" in line
+        )
+        assert 0.05 <= float(fit_values["fit_glyph_y_ratio"]) <= 0.30

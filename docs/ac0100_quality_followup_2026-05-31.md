@@ -70,3 +70,42 @@ entschärft und die dokumentierte Ersatzmetrik grün.
 - Ein Regressionstest soll sicherstellen, dass AC0100_L/M/S nicht wieder auf
   fixe Sample-Daten oder donor-transformierte Varianten zurückfallen.
   **Erfüllt:** `tests/test_conversion_regression_smoke.py::test_ac0100_quality_uses_algorithmic_elementwise_fit` prüft Status und Log-Negativsignale.
+
+## Allgemeingültige Korrektur vom 8. Juni 2026
+
+### Ursache
+
+Die elementweise Symboloptimierung verwendete für die vertikale Position des
+Pluszeichens ausschließlich die Raster-Schätzung und einen bis `0.45` reichenden
+Suchraum. Bei den kompakten AC0100-Varianten konnte der helle Bereich des
+horizontalen Verlaufs als Glyphenhinweis fehlinterpretiert werden. Der reine
+globale Pixelvergleich verschob das in der Beschreibung ausdrücklich „oben
+links“ geforderte Zeichen dadurch bis auf 45 % der Bildhöhe. Das war zwar
+metrisch günstiger als die damalige Ausgangslösung, durchbrach aber den Vertrag
+„Bild + Bildbeschreibung => konvertiertes Bild“.
+
+### Korrektur
+
+Die vorhandene allgemeine Elementoptimierung erhält nun auch die Beschreibung.
+Nur wenn diese die Lage „oben links“ (deutsch oder englisch) ausdrücklich
+vorgibt, wird eine offensichtlich aus dem oberen Bereich entwichene
+Raster-Schätzung auf eine neutrale obere Startposition zurückgesetzt und die
+anschließende pixelbasierte Suche auf die oberen 30 % begrenzt. X-Position,
+Glyphengröße, Strichbreite, Farbe, Verlauf, Rand und Diagonale werden weiterhin
+aus dem jeweiligen Rasterbild geschätzt und optimiert. Es wurden weder
+AC0100-Koordinaten noch SVG-Ausgaben oder Größenvarianten fest abgespeichert.
+
+### Verifikation
+
+Der vollständige deterministische L/M/S-Lauf vom 8. Juni 2026 ergab:
+
+| Variante | best_error | mean_delta2 | fit_glyph_y_ratio |
+| --- | ---: | ---: | ---: |
+| AC0100_L | 15.756354 | 1529.933472 | 0.1595 |
+| AC0100_M | 12.982037 | 1091.986084 | 0.1475 |
+| AC0100_S | 16.377500 | 1491.727539 | 0.1809 |
+
+Alle drei Varianten verwenden `non_composite_elementwise_symbol_fit`; weder
+Sample-SVG-Auswahl noch Template-Transfer kommt zum Einsatz. Der schwere
+Regressionstest prüft nun zusätzlich `best_error < 18.0`,
+`mean_delta2 < 1600.0` und die beschreibungskonforme obere Glyphenposition.
