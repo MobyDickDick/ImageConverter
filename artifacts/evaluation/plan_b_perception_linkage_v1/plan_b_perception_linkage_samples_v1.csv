@@ -1,6 +1,6 @@
 variant,image_path,status,expected_first_primitive,decision,matched_candidate_kinds,matched_seed_kinds,top_candidate_kind,top_confidence,next_action
-AC0531_1_S,artifacts/images_to_convert/AC0531_1_S.jpg,evaluated,rectangle_diagonal_and_center_dot,generalisiert,"circle,line,rectangle",CircleBackground,line,1.0,Im nächsten Plan-B-Paket als vorinitialisierten Geometry-IR-Seed protokollieren.
 AC0502_1_M,artifacts/images_to_convert/AC0502_1_M.jpg,evaluated,rotated_rectangle_diagonal_and_center_dot,generalisiert,"circle,rectangle",CircleBackground,circle,0.9833,Im nächsten Plan-B-Paket als vorinitialisierten Geometry-IR-Seed protokollieren.
 AC0551_1_M,artifacts/images_to_convert/AC0551_1_M.jpg,evaluated,rectangle_horizontal_rules_and_chevron,nur Sonderfall,"line,rectangle",,line,1.0,"Als Perception-Hinweis dokumentieren, aber noch keinen generischen Seed erzwingen."
 AC0403_1_M,artifacts/images_to_convert/AC0403_1_M.jpg,evaluated,rotated_circle_or_ring,generalisiert,"circle,ring",CircleBackground,ring,0.9303,Im nächsten Plan-B-Paket als vorinitialisierten Geometry-IR-Seed protokollieren.
 AC0150_2,artifacts/images_to_convert/AC0150_2.jpg,evaluated,rectangle_horizontal_rules_and_right_polyline,nur Sonderfall,"line,rectangle",,line,1.0,"Als Perception-Hinweis dokumentieren, aber noch keinen generischen Seed erzwingen."
+AC0253_1,artifacts/images_to_convert/AC0253_1.jpg,evaluated,circle_with_rotated_triangle,generalisiert,"circle,line,ring",CircleBackground,circle,0.9671,Im nächsten Plan-B-Paket als vorinitialisierten Geometry-IR-Seed protokollieren.
