@@ -302,11 +302,20 @@ def _fit_symbol_element_by_element(
     *,
     width: int,
     height: int,
+    description: str = "",
     perc_img,
     render_svg_to_numpy_fn,
     calculate_error_fn,
 ) -> tuple[float, str, object, dict[str, float | str], list[str]] | None:
     current = _derive_symbol_params_from_raster(width=width, height=height, perc_img=perc_img)
+    description_text = (description or "").casefold()
+    glyph_is_top = any(token in description_text for token in ("oben links", "top left", "top-left"))
+    if glyph_is_top and float(current["glyph_y_ratio"]) > 0.30:
+        # A bright gradient highlight can otherwise be mistaken for the glyph.
+        # Keep the raster-derived x/size estimates, but restore the semantic
+        # top region before pixel fitting refines the exact placement.
+        current["glyph_y_ratio"] = 0.15
+    glyph_y_maximum = 0.30 if glyph_is_top else 0.45
     # Element-wise refinement order requested by project idea.  Position and
     # size windows are centered on raster measurements so AC0100-like variants
     # are fitted from the image evidence instead of from one fixed sample pose.
@@ -321,7 +330,13 @@ def _fit_symbol_element_by_element(
         ),
         (
             "glyph_y_ratio",
-            _candidate_window(float(current["glyph_y_ratio"]), (-0.08, -0.04, 0.0, 0.04, 0.08), minimum=0.05, maximum=0.45, include_limits=False),
+            _candidate_window(
+                float(current["glyph_y_ratio"]),
+                (-0.08, -0.04, 0.0, 0.04, 0.08),
+                minimum=0.05,
+                maximum=glyph_y_maximum,
+                include_limits=False,
+            ),
         ),
         (
             "plus_half_ratio",
@@ -673,6 +688,7 @@ def runNonCompositeIterationImpl(
                 best_structured = _fit_symbol_element_by_element(
                     width=width,
                     height=height,
+                    description=description,
                     perc_img=perc_img,
                     render_svg_to_numpy_fn=render_svg_to_numpy_fn,
                     calculate_error_fn=calculate_error_fn,
@@ -854,6 +870,7 @@ def runNonCompositeIterationImpl(
                 best_structured = _fit_symbol_element_by_element(
                     width=width,
                     height=height,
+                    description=description,
                     perc_img=perc_img,
                     render_svg_to_numpy_fn=render_svg_to_numpy_fn,
                     calculate_error_fn=calculate_error_fn,
@@ -961,6 +978,7 @@ def runNonCompositeIterationImpl(
                 best_structured = _fit_symbol_element_by_element(
                     width=width,
                     height=height,
+                    description=description,
                     perc_img=perc_img,
                     render_svg_to_numpy_fn=render_svg_to_numpy_fn,
                     calculate_error_fn=calculate_error_fn,
