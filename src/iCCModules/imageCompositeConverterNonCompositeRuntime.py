@@ -383,6 +383,19 @@ def _fit_symbol_element_by_element(
     )
     diagonal_tl_br = bool(re.search(r"oben\s+links.*unten\s+rechts|unten\s+rechts.*oben\s+links", description_text))
     diagonal_tr_bl = bool(re.search(r"oben\s+rechts.*unten\s+links|unten\s+links.*oben\s+rechts", description_text))
+    quarter_turn = bool(
+        re.search(
+            r"(?:90\s*°?|90\s*grad|vierteldrehung).*?(?:gedreht|drehung)|"
+            r"(?:gedreht|drehung).*?(?:90\s*°?|90\s*grad|vierteldrehung)",
+            description_text,
+        )
+    )
+    if quarter_turn and diagonal_tl_br != diagonal_tr_bl:
+        # A quarter turn swaps the two diagonal axes.  Family descriptions
+        # commonly state the base orientation first and append the geometric
+        # variant afterwards, so the rendered direction must follow the
+        # transformed image rather than the unrotated wording.
+        diagonal_tl_br, diagonal_tr_bl = diagonal_tr_bl, diagonal_tl_br
     if "diagon" in description_text:
         current["diag1_width"] = float(current["diag1_width"]) if (diagonal_tr_bl or not diagonal_tl_br) else 0.0
         current["diag2_width"] = float(current["diag1_width"] or 1.4) if (diagonal_tl_br or has_both_diagonals) else 0.0

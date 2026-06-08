@@ -181,3 +181,19 @@ Review-Grenze. Der Kandidat wurde aus Triage und PF8-Linkage entfernt; die
 Rotation lautet nun `AC0502_1_M`, `AC0551_1_M`, `AC0403_1_M`, `AC0150_2`
 und `AC0253_1`. Der neue Pumpenkandidat wird durch Kreis-/Ring-Erkennung und
 einen allgemeinen `CircleBackground`-Seed als `generalisiert` eingestuft.
+
+
+## Folgeaktualisierung Run OR (2026-06-08)
+
+`AC0502_1_M` wurde im realen Non-Composite-Pfad erneut konvertiert. Der
+Element-Fit transformiert die in der Familienbeschreibung genannte Diagonale
+bei einer deklarierten 90-Grad-Variante auf die andere Diagonalachse. Das
+akzeptierte 60x30-SVG enthält den rastergemessenen roten Verlauf, genau eine
+helle Diagonale von oben links nach unten rechts und einen dunklen Mittelpunkt.
+
+`mean_delta2` sinkt von `30301.542969` auf `3126.661621`,
+`normalized_mse` von `0.15533278` auf `0.01602799` und damit deutlich unter
+die Review-Grenze. `AC0502_1_M` wurde aus Triage und PF8-Linkage entfernt;
+die Rotation lautet nun `AC0551_1_M`, `AC0403_1_M`, `AC0150_2`, `AC0253_1`
+und `AC0551_2_M`. Die neue AC0551-Frage bleibt mangels allgemeinem
+Rechteck-/HorizontalRule-Seed `nur Sonderfall`.

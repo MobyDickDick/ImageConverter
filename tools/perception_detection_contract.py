@@ -1397,16 +1397,6 @@ def write_text_glyph_evaluation_report(
 
 PLAN_B_PERCEPTION_TARGETS: list[dict[str, Any]] = [
     {
-        "variant": "AC0502_1_M",
-        "image_candidates": ["artifacts/images_to_convert/AC0502_1_M.jpg"],
-        "plan_b_reason": "Kompakte gedrehte Klappengeometrie mit sehr hoher Diff-Abweichung.",
-        "perception_question": "Bleiben Rechteck, Diagonale und Mittelpunkt auch in der gedrehten Variante allgemein erkennbar?",
-        "expected_first_primitive": "rotated_rectangle_diagonal_and_center_dot",
-        "expected_candidate_kinds": {"rectangle", "line", "circle", "ring"},
-        "expected_seed_kinds": {"RectangleBackground", "CircleBackground"},
-        "description": "Plan-B-Kandidat AC0502_1_M: gedrehte Klappengeometrie vor der Iteration zerlegen.",
-    },
-    {
         "variant": "AC0551_1_M",
         "image_candidates": ["artifacts/images_to_convert/AC0551_1_M.jpg"],
         "plan_b_reason": "Kompaktes Linien-/Rechteckmotiv mit hoher Diff-Abweichung.",
@@ -1445,6 +1435,16 @@ PLAN_B_PERCEPTION_TARGETS: list[dict[str, Any]] = [
         "expected_candidate_kinds": {"circle", "ring", "line"},
         "expected_seed_kinds": {"CircleBackground"},
         "description": "Plan-B-Kandidat AC0253_1: äußeren Pumpenkreis vor dem gedrehten Innendreieck erkennen.",
+    },
+    {
+        "variant": "AC0551_2_M",
+        "image_candidates": ["artifacts/images_to_convert/AC0551_2_M.jpg"],
+        "plan_b_reason": "Zweite kompakte Linien-/Rechteckvariante mit hoher Diff-Abweichung.",
+        "perception_question": "Bleiben Außenrechteck, horizontale Teilungen und Winkelkontur auch in der zweiten Variante getrennt erkennbar?",
+        "expected_first_primitive": "rectangle_horizontal_rules_and_chevron",
+        "expected_candidate_kinds": {"rectangle", "horizontal_rule", "line"},
+        "expected_seed_kinds": {"RectangleBackground", "HorizontalRule"},
+        "description": "Plan-B-Kandidat AC0551_2_M: Rechteck, Teilungslinien und Winkelkontur zuerst prüfen.",
     },
 ]
 
