@@ -99,6 +99,24 @@ def test_write_reports_keeps_candidate_priority_machine_readable(tmp_path: Path)
     assert [row["priority"] for row in rows] == ["1", "2"]
 
 
+def test_ac0820_l_committed_svg_preserves_co2_badge_quality() -> None:
+    record = review_variant("AC0820_L", source="successful_conversion")
+
+    assert record.status == "ok"
+    assert record.width == 30
+    assert record.height == 30
+    assert record.mean_delta2 is not None
+    assert record.mean_delta2 == pytest.approx(7458.4033203125)
+    assert record.normalized_mse is not None
+    assert record.normalized_mse < 0.045945679012345676
+
+    svg = Path(record.svg_path).read_text(encoding="utf-8")
+    assert svg.count("<circle") == 1
+    assert ">CO</text>" in svg
+    assert ">2</text>" in svg
+    assert "<line" not in svg
+
+
 def test_ac0835_l_committed_svg_is_below_review_threshold() -> None:
     record = review_variant("AC0835_L", source="successful_conversion")
 

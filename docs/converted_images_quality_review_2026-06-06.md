@@ -151,3 +151,17 @@ Die deterministische Auswahl ergibt `AC0820_L`, `AC0531_1_S`, `AC0502_1_M`,
 diese fünf Varianten in derselben Reihenfolge. Der Perception-Report bewertet
 vier Fragen als `generalisiert`; `AC0551_1_M` bleibt mangels allgemeinem
 Rechteck-/HorizontalRule-Seed `nur Sonderfall`.
+
+
+## Folgeaktualisierung Run OP (2026-06-08)
+
+`AC0820_L` wurde aus der XML-Beschreibung im realen semantischen AC08-Pfad
+erneut konvertiert. Das neue 30x30-SVG enthält einen Kreis und getrennt
+gerendertes `CO`/tiefgestelltes `2`, aber keinen Connector. `mean_delta2` sinkt
+von `9983.599609` auf `7458.403320`; daraus folgt
+`normalized_mse=0.03823352`, also ein Wert unterhalb der Review-Grenze.
+
+Der Qualitätsrefresh meldet nun `0/48` erfolgreiche Varianten oberhalb der
+Grenze und rotiert auf `AC0531_1_S`, `AC0502_1_M`, `AC0551_1_M`,
+`AC0403_1_M` und den neu aufgefüllten Kandidaten `AC0150_2`. Der PF8-Report
+führt dieselben fünf Varianten in derselben Reihenfolge.

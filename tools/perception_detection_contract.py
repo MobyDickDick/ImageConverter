@@ -1397,17 +1397,6 @@ def write_text_glyph_evaluation_report(
 
 PLAN_B_PERCEPTION_TARGETS: list[dict[str, Any]] = [
     {
-        "variant": "AC0820_L",
-        "image_candidates": ["artifacts/images_to_convert/AC0820_L.jpg"],
-        "plan_b_reason": "Einziger erfolgreicher Altbestand oberhalb der aktualisierten Review-Grenze.",
-        "perception_question": "Können Kreisgrundkörper und CO²-Kurztext vor der ersten Iteration getrennt erkannt werden?",
-        "expected_first_primitive": "circle_with_co2_text",
-        "expected_candidate_kinds": {"circle", "ring", "text_glyph"},
-        "expected_seed_kinds": {"CircleBackground", "TextGlyph"},
-        "description": "Plan-B-Kandidat AC0820_L: Kreisgrundkörper und CO²-Beschriftung zuerst prüfen.",
-        "glyphs": ["CO2"],
-    },
-    {
         "variant": "AC0531_1_S",
         "image_candidates": ["artifacts/images_to_convert/AC0531_1_S.jpg"],
         "plan_b_reason": "Kompakter rechteckiger Diff-Kandidat mit der höchsten aktuellen Pixelabweichung.",
@@ -1446,6 +1435,16 @@ PLAN_B_PERCEPTION_TARGETS: list[dict[str, Any]] = [
         "expected_candidate_kinds": {"circle", "ring"},
         "expected_seed_kinds": {"CircleBackground"},
         "description": "Plan-B-Kandidat AC0403_1_M: Kreisgrundkörper vor der gedrehten Innengeometrie erkennen.",
+    },
+    {
+        "variant": "AC0150_2",
+        "image_candidates": ["artifacts/images_to_convert/AC0150_2.jpg"],
+        "plan_b_reason": "Dimensionstreues Rechteck-/Linienmotiv an der maximalen kompakten Review-Fläche.",
+        "perception_question": "Können Außenrechteck, horizontale Teilungen und die rechte Winkelkontur getrennt erkannt werden?",
+        "expected_first_primitive": "rectangle_horizontal_rules_and_right_polyline",
+        "expected_candidate_kinds": {"rectangle", "horizontal_rule", "line"},
+        "expected_seed_kinds": {"RectangleBackground", "HorizontalRule"},
+        "description": "Plan-B-Kandidat AC0150_2: Rechteck, horizontale Teilungen und rechte Polylinie zuerst prüfen.",
     },
 ]
 
