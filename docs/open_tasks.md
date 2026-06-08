@@ -3528,3 +3528,12 @@ Ziel: Die Konvertierung soll strikt als **Kette** laufen:
 - **Kandidatenrotation:** Plan-B-Liste, Triage und PF8-Linkage sind synchron auf `AC0820_L`, `AC0531_1_S`, `AC0502_1_M`, `AC0551_1_M` und `AC0403_1_M` gesetzt.
 - **Perception-Lerneffekt:** Vier Fragen sind `generalisiert`; `AC0551_1_M` bleibt wegen fehlendem Rechteck-/HorizontalRule-Seed `nur Sonderfall`.
 - **Nächster sinnvoller Schritt:** `AC0820_L.jpg` real re-konvertieren und den Kreis-/CO²-Lerneffekt als erstes Paket der neuen Rotation abschließen.
+
+
+### Fortschritt vs. Blocker (Session 2026-06-08, Plan-B AC0820_L Run OP)
+
+- **Fortschritt:** `AC0820_L.jpg` wurde real über den beschreibungsgetriebenen semantischen AC08-Pfad re-konvertiert; das veraltete Connector-SVG wurde durch ein 30x30-Kreis-/CO₂-Badge ersetzt.
+- **Qualität:** `mean_delta2` sank von `9983.599609` auf `7458.403320` (`-25.29 %`), `normalized_mse` von `0.05117826` auf `0.03823352` und damit unter die Review-Grenze `0.04594568`.
+- **Perception-Lerneffekt:** Die Kreisfrage ist `generalisiert` (`circle`/`ring` → `CircleBackground`); `AC0820_L` wurde aus Triage und PF8-Linkage entfernt.
+- **Rotation:** Die fünf synchronen Ziele lauten nun `AC0531_1_S`, `AC0502_1_M`, `AC0551_1_M`, `AC0403_1_M` und `AC0150_2`.
+- **Nächster sinnvoller Schritt:** Die reguläre Plan-B-Rotation mit `AC0531_1_S.jpg` fortsetzen.

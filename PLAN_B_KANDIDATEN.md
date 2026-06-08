@@ -2,22 +2,21 @@
 
 Ziel: maximal **5** aktive JPG-Kandidaten, die derzeit noch nicht zufriedenstellend konvertieren, aber voraussichtlich nicht "hoffnungslos komplex" sind.
 
-## Aktuelle Kandidaten (Stand: 2026-06-07, Qualitätsrefresh Run OM)
+## Aktuelle Kandidaten (Stand: 2026-06-08, Plan-B Run OP)
 
-Die neue Rotation wurde reproduzierbar aus dem aktualisierten Qualitätsreview
-abgeleitet. Zuerst wird der nicht mehr zufriedenstellende Eintrag aus
-`successed_conversions.txt` priorisiert; danach folgen kompakte, renderbare
-Varianten aus dem Diff-Inventar.
+Die reale AC0820-L-Re-Konvertierung hat den einzigen roten Eintrag aus der
+Erfolgsliste unter die Review-Grenze gebracht. Der reproduzierbare Review füllt
+die Rotation anschließend wieder auf maximal fünf kompakte Diff-Fälle auf.
 
 | Priorität | Kandidat | Quelle | `normalized_mse` | Auswahlgrund |
 | ---: | --- | --- | ---: | --- |
-| 1 | `AC0820_L.jpg` | erfolgreicher Altbestand | `0.05117826` | Einziger der 48 erfolgreichen Einträge oberhalb der Review-Grenze `0.04594568`. |
-| 2 | `AC0531_1_S.jpg` | Diff-Inventar | `0.15610678` | Höchste verbleibende Abweichung unter den kompakten renderbaren Fällen; Rechteck, Diagonale und Mittelpunkt sind klar abgrenzbar. |
-| 3 | `AC0502_1_M.jpg` | Diff-Inventar | `0.15533278` | Gedrehte Klappengeometrie mit sehr hoher Abweichung und wiederverwendbaren Rechteck-/Punkt-Primitiven. |
-| 4 | `AC0551_1_M.jpg` | Diff-Inventar | `0.14916385` | Kompaktes Rechteckmotiv mit horizontalen Teilungen und mittiger Winkelkontur. |
-| 5 | `AC0403_1_M.jpg` | Diff-Inventar | `0.11117438` | Sehr kompakte gedrehte Kreis-/Innengeometrie oberhalb der Review-Grenze. |
+| 1 | `AC0531_1_S.jpg` | Diff-Inventar | `0.15610678` | Höchste verbleibende Abweichung unter den kompakten renderbaren Fällen; Rechteck, Diagonale und Mittelpunkt sind klar abgrenzbar. |
+| 2 | `AC0502_1_M.jpg` | Diff-Inventar | `0.15533278` | Gedrehte Klappengeometrie mit sehr hoher Abweichung und wiederverwendbaren Rechteck-/Punkt-Primitiven. |
+| 3 | `AC0551_1_M.jpg` | Diff-Inventar | `0.14916385` | Kompaktes Rechteckmotiv mit horizontalen Teilungen und mittiger Winkelkontur. |
+| 4 | `AC0403_1_M.jpg` | Diff-Inventar | `0.11117438` | Sehr kompakte gedrehte Kreis-/Innengeometrie oberhalb der Review-Grenze. |
+| 5 | `AC0150_2.jpg` | Diff-Inventar | `0.10493784` | Dimensionstreues Rechteck-/Linienmotiv an der maximal zulässigen kompakten Bildfläche. |
 
-Die nächste reguläre Rotation beginnt mit `AC0820_L.jpg`.
+Die nächste reguläre Rotation beginnt mit `AC0531_1_S.jpg`.
 
 ## Perception-Lerneffekt (Pflichtabschnitt ab PF8)
 
@@ -27,12 +26,13 @@ dem PF8-Linkage-Report und dokumentiert die Entscheidung als
 maschinenlesbare Stand liegt unter
 `artifacts/evaluation/plan_b_perception_linkage_v1/plan_b_perception_linkage_report_v1.json`.
 
-Der aktualisierte Linkage-Report enthält alle fünf aktiven Kandidaten. Vier
-Fragen sind `generalisiert`: Kreis-/Ring-Erkennung für `AC0820_L` und
-`AC0403_1_M` sowie allgemeine Primitive und ein Kreis-Seed für die beiden
-Klappenvarianten `AC0531_1_S` und `AC0502_1_M`. `AC0551_1_M` bleibt
+Der aktualisierte Linkage-Report enthält alle fünf aktiven Kandidaten. Drei
+Fragen sind `generalisiert`: Kreis-/Ring-Erkennung für `AC0403_1_M` sowie
+allgemeine Primitive und ein Kreis-Seed für die beiden Klappenvarianten
+`AC0531_1_S` und `AC0502_1_M`. `AC0551_1_M` und `AC0150_2` bleiben
 `nur Sonderfall`, weil Linien und Rechteck erkannt werden, aber weder ein
-allgemeiner Rechteck- noch HorizontalRule-Seed vorliegt.
+allgemeiner Rechteck- noch HorizontalRule-Seed vorliegt. Der Kreis-/CO₂-
+Lerneffekt von `AC0820_L` ist mit dem realen Lauf abgeschlossen.
 
 ## Pflege-Regel (fortan)
 

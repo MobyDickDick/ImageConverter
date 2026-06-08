@@ -6,25 +6,13 @@
   "metrics": {
     "successful_variants": 48,
     "successful_renderable_pairs": 48,
-    "successful_above_threshold": 1,
+    "successful_above_threshold": 0,
     "successful_missing_or_failed": 0,
-    "diff_variants": 129,
-    "diff_renderable_pairs": 120,
+    "diff_variants": 132,
+    "diff_renderable_pairs": 123,
     "selected_candidates": 5
   },
   "selected_candidates": [
-    {
-      "variant": "AC0820_L",
-      "source": "successful_conversion",
-      "image_path": "artifacts/images_to_convert/AC0820_L.jpg",
-      "svg_path": "src/artifacts/converted_images/converted_svgs/AC0820_L.svg",
-      "width": 30,
-      "height": 30,
-      "mean_delta2": 9983.599609375,
-      "normalized_mse": 0.05117826276752531,
-      "status": "ok",
-      "image_area": 900
-    },
     {
       "variant": "AC0531_1_S",
       "source": "diff_inventory",
@@ -72,6 +60,18 @@
       "normalized_mse": 0.11117437804370114,
       "status": "ok",
       "image_area": 900
+    },
+    {
+      "variant": "AC0150_2",
+      "source": "diff_inventory",
+      "image_path": "artifacts/images_to_convert/AC0150_2.jpg",
+      "svg_path": "artifacts/converted_images/converted_svgs/AC0150_2.svg",
+      "width": 40,
+      "height": 80,
+      "mean_delta2": 20470.75,
+      "normalized_mse": 0.10493784441881328,
+      "status": "ok",
+      "image_area": 3200
     }
   ],
   "records_csv": "artifacts/evaluation/conversion_quality_review_v2/conversion_quality_records_v2.csv",

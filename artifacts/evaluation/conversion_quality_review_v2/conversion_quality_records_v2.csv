@@ -14,7 +14,7 @@ AC0813_S,successful_conversion,artifacts/images_to_convert/nonconvertable/AC0813
 AC0814_L,successful_conversion,artifacts/images_to_convert/AC0814_L.jpg,artifacts/converted_images/converted_svgs/AC0814_L.svg,45,25,1422.6319580078125,0.007292743601219082,ok,1125
 AC0814_M,successful_conversion,artifacts/images_to_convert/AC0814_M.jpg,src/artifacts/converted_images/converted_svgs/AC0814_M.svg,35,20,1679.704345703125,0.008610556686931309,ok,700
 AC0814_S,successful_conversion,artifacts/images_to_convert/AC0814_S.jpg,src/artifacts/converted_images/converted_svgs/AC0814_S.svg,25,15,816.9039916992188,0.004187640608479912,ok,375
-AC0820_L,successful_conversion,artifacts/images_to_convert/AC0820_L.jpg,src/artifacts/converted_images/converted_svgs/AC0820_L.svg,30,30,9983.599609375,0.05117826276752531,ok,900
+AC0820_L,successful_conversion,artifacts/images_to_convert/AC0820_L.jpg,src/artifacts/converted_images/converted_svgs/AC0820_L.svg,30,30,7458.4033203125,0.03823351695661925,ok,900
 AC0820_M,successful_conversion,artifacts/images_to_convert/nonconvertable/AC0820_M.jpg,src/artifacts/converted_images/converted_svgs/AC0820_M.svg,20,20,6335.06982421875,0.03247504715734333,ok,400
 AC0831_L,successful_conversion,artifacts/images_to_convert/nonconvertable/AC0831_L.jpg,src/artifacts/converted_images/converted_svgs/AC0831_L.svg,25,45,4602.1572265625,0.02359173254677688,ok,1125
 AC0831_M,successful_conversion,artifacts/images_to_convert/nonconvertable/AC0831_M.jpg,src/artifacts/converted_images/converted_svgs/AC0831_M.svg,20,35,5450.80712890625,0.027942110105888762,ok,700
@@ -61,8 +61,11 @@ AC0202_1,diff_inventory,artifacts/images_to_convert/AC0202_1.jpg,artifacts/conve
 AC0203_1,diff_inventory,artifacts/images_to_convert/AC0203_1.jpg,artifacts/converted_images/converted_svgs/AC0203_1.svg,50,50,2518.096435546875,0.012908350303969626,ok,2500
 AC0204,diff_inventory,artifacts/images_to_convert/AC0204.jpg,artifacts/converted_images/converted_svgs/AC0204.svg,50,50,2200.721923828125,0.011281414449971165,ok,2500
 AC0222_L_sia,diff_inventory,artifacts/images_to_convert/AC0222_L_sia.jpg,artifacts/converted_images/converted_svgs/AC0222_L_sia.svg,75,50,5360.68896484375,0.02748014335431885,ok,3750
-AC0224_L,diff_inventory,artifacts/images_to_convert/AC0224_L.jpg,artifacts/converted_images/converted_svgs/AC0224_L.svg,75,50,8685.3076171875,0.0445229148644752,ok,3750
-AC0224_M,diff_inventory,artifacts/images_to_convert/AC0224_M.jpg,artifacts/converted_images/converted_svgs/AC0224_M.svg,45,30,6363.49560546875,0.03262076434944893,ok,1350
+AC0224_L,diff_inventory,artifacts/images_to_convert/AC0224_L.jpg,artifacts/converted_images/converted_svgs/AC0224_L.svg,75,50,7086.01708984375,0.03632457818707548,ok,3750
+AC0224_L_sia,diff_inventory,artifacts/images_to_convert/AC0224_L_sia.jpg,artifacts/converted_images/converted_svgs/AC0224_L_sia.svg,75,50,6848.69384765625,0.035108003832660516,ok,3750
+AC0224_M_sia,diff_inventory,artifacts/images_to_convert/AC0224_M_sia.jpg,artifacts/converted_images/converted_svgs/AC0224_M_sia.svg,45,30,5640.6591796875,0.02891533604863514,ok,1350
+AC0224_S,diff_inventory,artifacts/images_to_convert/AC0224_S.jpg,artifacts/converted_images/converted_svgs/AC0224_S.svg,30,20,5456.71142578125,0.027972376910322953,ok,600
+AC0224_S_sia,diff_inventory,artifacts/images_to_convert/AC0224_S_sia.jpg,artifacts/converted_images/converted_svgs/AC0224_S_sia.svg,30,20,5085.966796875,0.026071853373702422,ok,600
 AC0232_M,diff_inventory,artifacts/images_to_convert/AC0232_M.jpg,artifacts/converted_images/converted_svgs/AC0232_M.svg,45,30,8796.923828125,0.04509508562411893,ok,1350
 AC0232_S,diff_inventory,artifacts/images_to_convert/AC0232_S.jpg,artifacts/converted_images/converted_svgs/AC0232_S.svg,30,20,6133.046875,0.031439430347302316,ok,600
 AC0241_M,diff_inventory,artifacts/images_to_convert/AC0241_M.jpg,artifacts/converted_images/converted_svgs/AC0241_M.svg,30,40,3713.618408203125,0.019036875090109574,ok,1200

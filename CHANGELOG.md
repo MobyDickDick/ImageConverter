@@ -7,6 +7,8 @@ All notable changes to ImageConverter will be documented in this file.
 
 ## Unreleased
 
+- Plan-B Run OP re-converts `AC0820_L` through the description-driven semantic CO₂ badge path, replaces the stale connector-only SVG, lowers `normalized_mse` from `0.05117826` to `0.03823352`, and rotates PF8/triage to `AC0531_1_S` through `AC0150_2`.
+
 - Plan-B Run OM refreshes all quality evidence and synchronizes a new five-item rotation led by `AC0820_L`; PF8 classifies four perception questions as generalized and the `AC0551_1_M` rectangle/rule case as special-case only.
 
 - Plan-B Run OL schließt die Run-OG-Rotation mit einem dimensionstreuen AC0130-Kühlelement aus Metallverlauf, Außenrechteck, beschnittenem Andreaskreuz und zwei Minuszeichen ab; `normalized_mse` sinkt auf `0.00985252` und PF8/Triage sind synchron leer.

@@ -17,11 +17,11 @@ from tools.perception_detection_contract import (
 
 
 ACTIVE_VARIANTS = [
-    "AC0820_L",
     "AC0531_1_S",
     "AC0502_1_M",
     "AC0551_1_M",
     "AC0403_1_M",
+    "AC0150_2",
 ]
 
 
@@ -30,19 +30,19 @@ def _target_by_variant(variant: str) -> dict[str, object]:
 
 
 def test_build_plan_b_perception_linkage_record_has_lerneffekt_decision() -> None:
-    record = build_plan_b_perception_linkage_record(_target_by_variant("AC0820_L"))
+    record = build_plan_b_perception_linkage_record(_target_by_variant("AC0531_1_S"))
 
     assert record["schema_version"] == "plan_b_perception_linkage_record_v1"
-    assert record["variant"] == "AC0820_L"
+    assert record["variant"] == "AC0531_1_S"
     lerneffekt = record["perception_lerneffekt"]
     assert lerneffekt["question"]
-    assert lerneffekt["expected_first_primitive"] == "circle_with_co2_text"
+    assert lerneffekt["expected_first_primitive"] == "rectangle_diagonal_and_center_dot"
     assert lerneffekt["decision"] in {
         "generalisiert",
         "nur Sonderfall",
         "noch nicht erkannt",
     }
-    assert lerneffekt["expected_candidate_kinds"] == ["circle", "ring", "text_glyph"]
+    assert lerneffekt["expected_candidate_kinds"] == ["circle", "line", "rectangle", "ring"]
     assert "circle" in lerneffekt["matched_candidate_kinds"]
     assert lerneffekt["next_action"]
 
