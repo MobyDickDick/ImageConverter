@@ -117,6 +117,22 @@ def test_ac0820_l_committed_svg_preserves_co2_badge_quality() -> None:
     assert "<line" not in svg
 
 
+def test_ac0531_1_s_committed_svg_preserves_flap_primitives_and_quality() -> None:
+    record = review_variant("AC0531_1_S", source="diff_inventory")
+
+    assert record.status == "ok"
+    assert record.width == 20
+    assert record.height == 40
+    assert record.mean_delta2 == pytest.approx(4837.7900390625)
+    assert record.normalized_mse is not None
+    assert record.normalized_mse < 0.045945679012345676
+
+    svg = Path(record.svg_path).read_text(encoding="utf-8")
+    assert svg.count("<line") == 1
+    assert svg.count("<circle") == 1
+    assert 'fill="#e' in svg
+
+
 def test_ac0835_l_committed_svg_is_below_review_threshold() -> None:
     record = review_variant("AC0835_L", source="successful_conversion")
 

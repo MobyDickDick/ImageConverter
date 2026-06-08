@@ -11,88 +11,6 @@
   "records": [
     {
       "schema_version": "plan_b_perception_linkage_record_v1",
-      "variant": "AC0531_1_S",
-      "image_path": "artifacts/images_to_convert/AC0531_1_S.jpg",
-      "status": "evaluated",
-      "plan_b_reason": "Kompakter rechteckiger Diff-Kandidat mit der h\u00f6chsten aktuellen Pixelabweichung.",
-      "description": "Plan-B-Kandidat AC0531_1_S: Klappenrechteck, Diagonale und Mittelpunkt zuerst pr\u00fcfen.",
-      "perception_lerneffekt": {
-        "question": "K\u00f6nnen Au\u00dfenrechteck, Diagonale und Mittelpunkt als getrennte Primitive erkannt werden?",
-        "expected_first_primitive": "rectangle_diagonal_and_center_dot",
-        "expected_candidate_kinds": [
-          "circle",
-          "line",
-          "rectangle",
-          "ring"
-        ],
-        "expected_seed_kinds": [
-          "CircleBackground",
-          "RectangleBackground"
-        ],
-        "decision": "generalisiert",
-        "matched_candidate_kinds": [
-          "circle",
-          "line",
-          "rectangle"
-        ],
-        "matched_seed_kinds": [
-          "CircleBackground"
-        ],
-        "top_candidate_kind": "line",
-        "top_confidence": 1.0,
-        "next_action": "Im n\u00e4chsten Plan-B-Paket als vorinitialisierten Geometry-IR-Seed protokollieren."
-      },
-      "candidate_count": 4,
-      "top_candidate": {
-        "schema_version": "perception_primitive_candidate_v1",
-        "kind": "line",
-        "bbox": {
-          "x": -0.5,
-          "y": 2.0,
-          "width": 1.0,
-          "height": 35.0
-        },
-        "center": {
-          "x": 0.0,
-          "y": 19.5
-        },
-        "geometry": {
-          "orientation": "vertical",
-          "x_center": 0.0,
-          "y_top": 2.0,
-          "y_bottom": 37.0,
-          "length_px": 35.0,
-          "stroke_width_px": 1.0,
-          "angle_deg": 90.0
-        },
-        "color": {
-          "fill_rgb": null,
-          "stroke_rgb": null,
-          "fill_hex": null,
-          "stroke_hex": null,
-          "fill_confidence": 0.0,
-          "stroke_confidence": 0.0
-        },
-        "confidence": 1.0,
-        "roi": {
-          "type": "image",
-          "hint": "full_image",
-          "bbox": {
-            "x": 0.0,
-            "y": 0.0,
-            "width": 20.0,
-            "height": 40.0
-          }
-        },
-        "evidence": {
-          "detector": "detect_vertical_lines",
-          "edge_model": "canny+hough_lines_p"
-        },
-        "source": "hough"
-      }
-    },
-    {
-      "schema_version": "plan_b_perception_linkage_record_v1",
       "variant": "AC0502_1_M",
       "image_path": "artifacts/images_to_convert/AC0502_1_M.jpg",
       "status": "evaluated",
@@ -434,6 +352,101 @@
           "edge_model": "canny+hough_lines_p"
         },
         "source": "hough"
+      }
+    },
+    {
+      "schema_version": "plan_b_perception_linkage_record_v1",
+      "variant": "AC0253_1",
+      "image_path": "artifacts/images_to_convert/AC0253_1.jpg",
+      "status": "evaluated",
+      "plan_b_reason": "Kompaktes gedrehtes Pumpensymbol mit hoher verbleibender Diff-Abweichung.",
+      "description": "Plan-B-Kandidat AC0253_1: \u00e4u\u00dferen Pumpenkreis vor dem gedrehten Innendreieck erkennen.",
+      "perception_lerneffekt": {
+        "question": "Kann der \u00e4u\u00dfere Pumpenkreis unabh\u00e4ngig vom gedrehten inneren Dreieck erkannt werden?",
+        "expected_first_primitive": "circle_with_rotated_triangle",
+        "expected_candidate_kinds": [
+          "circle",
+          "line",
+          "ring"
+        ],
+        "expected_seed_kinds": [
+          "CircleBackground"
+        ],
+        "decision": "generalisiert",
+        "matched_candidate_kinds": [
+          "circle",
+          "line",
+          "ring"
+        ],
+        "matched_seed_kinds": [
+          "CircleBackground"
+        ],
+        "top_candidate_kind": "circle",
+        "top_confidence": 0.9671,
+        "next_action": "Im n\u00e4chsten Plan-B-Paket als vorinitialisierten Geometry-IR-Seed protokollieren."
+      },
+      "candidate_count": 6,
+      "top_candidate": {
+        "schema_version": "perception_primitive_candidate_v1",
+        "kind": "circle",
+        "bbox": {
+          "x": 18.0,
+          "y": 16.0,
+          "width": 10.0,
+          "height": 10.0
+        },
+        "center": {
+          "x": 23.0,
+          "y": 21.0
+        },
+        "geometry": {
+          "radius_px": 5.0,
+          "inner_radius_px": 0.0,
+          "stroke_width_px": 1.0,
+          "circularity": 1.0,
+          "ring": false,
+          "fill_ratio": 0.9383,
+          "geometry_ir_kind": "CircleBackground",
+          "geometry_ir_bbox": [
+            0.58065,
+            0.51613,
+            0.32258,
+            0.32258
+          ]
+        },
+        "color": {
+          "fill_rgb": [
+            216,
+            51,
+            87
+          ],
+          "stroke_rgb": [
+            205,
+            86,
+            111
+          ],
+          "fill_hex": "#D83357",
+          "stroke_hex": "#CD566F",
+          "fill_confidence": 0.7533,
+          "stroke_confidence": 0.6492
+        },
+        "confidence": 0.9671,
+        "roi": {
+          "type": "image",
+          "hint": "full_image",
+          "bbox": {
+            "x": 0.0,
+            "y": 0.0,
+            "width": 31.0,
+            "height": 31.0
+          }
+        },
+        "evidence": {
+          "detector": "detect_circle_rings",
+          "detection_source": "hough",
+          "threshold_model": "hough_plus_foreground_mask"
+        },
+        "source": "pf8_plan_b_perception_linkage"
       }
     }
   ],

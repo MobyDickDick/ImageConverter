@@ -1592,3 +1592,45 @@ def test_symbol_fit_keeps_description_declared_top_left_glyph_in_top_region(monk
 
     assert unconstrained is not None
     assert unconstrained[3]["glyph_y_ratio"] == 0.45
+
+
+def test_symbol_fit_honors_declared_diagonal_and_center_dot_without_inventing_glyphs() -> None:
+    target = np.zeros((40, 20, 3), dtype=np.uint8)
+
+    result = non_composite_runtime_helpers._fit_symbol_element_by_element(
+        width=20,
+        height=40,
+        description=(
+            "Rechteck hochkant mit Diagonale von unten links nach oben rechts, "
+            "in der Mitte ein dunkelgrauer Punkt und Farbverlauf."
+        ),
+        perc_img=target,
+        render_svg_to_numpy_fn=lambda svg, *_args: np.zeros_like(target),
+        calculate_error_fn=lambda *_args: 0.0,
+    )
+
+    assert result is not None
+    svg = result[1]
+    params = result[3]
+    assert params["diag1_width"] > 0
+    assert params["diag2_width"] == 0
+    assert params["center_dot_radius"] > 0
+    assert params["plus_width"] == 0
+    assert params["minus_width"] == 0
+    assert svg.count("<line") == 1
+    assert svg.count("<circle") == 1
+
+
+def test_symbol_raster_estimation_preserves_bgr_source_colors_for_svg() -> None:
+    raster = np.zeros((12, 12, 3), dtype=np.uint8)
+    raster[:, :] = (70, 40, 230)  # OpenCV BGR -> SVG RGB #e62846.
+    raster[:, 5:7] = (65, 70, 242)
+
+    params = non_composite_runtime_helpers._derive_symbol_params_from_raster(
+        width=12,
+        height=12,
+        perc_img=raster,
+    )
+
+    assert params["gradient_edge"] == "#e62846"
+    assert params["gradient_mid"] == "#f24641"

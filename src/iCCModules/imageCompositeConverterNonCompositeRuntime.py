@@ -88,6 +88,18 @@ def _gray_hex(value: float) -> str:
     return f"#{gray:02x}{gray:02x}{gray:02x}"
 
 
+def _color_hex(value: float | str) -> str:
+    text = str(value or "").strip()
+    if re.fullmatch(r"#[0-9a-fA-F]{6}", text):
+        return text.lower()
+    return _gray_hex(float(value))
+
+
+def _rgb_hex(values) -> str:
+    channels = [int(max(0, min(255, round(float(channel))))) for channel in values[:3]]
+    return "#" + "".join(f"{channel:02x}" for channel in channels)
+
+
 def _gradient_band_svg_rects(
     *,
     x: float,
@@ -99,17 +111,17 @@ def _gradient_band_svg_rects(
     center_percent: float,
     bands: int = 48,
 ) -> str:
-    def _gray(color: str, fallback: int) -> int:
+    def _rgb(color: str, fallback: int) -> np.ndarray:
         value = str(color or "").strip().lstrip("#")
         if len(value) >= 6:
             try:
-                return int(round((int(value[0:2], 16) + int(value[2:4], 16) + int(value[4:6], 16)) / 3.0))
+                return np.asarray([int(value[index:index + 2], 16) for index in (0, 2, 4)], dtype=np.float32)
             except ValueError:
-                return fallback
-        return fallback
+                pass
+        return np.asarray([fallback, fallback, fallback], dtype=np.float32)
 
-    edge = _gray(edge_hex, 0x8F)
-    mid = _gray(mid_hex, 0xDE)
+    edge = _rgb(edge_hex, 0x8F)
+    mid = _rgb(mid_hex, 0xDE)
     safe_bands = max(4, int(bands))
     center = max(1.0, min(99.0, float(center_percent))) / 100.0
     parts: list[str] = []
@@ -117,16 +129,17 @@ def _gradient_band_svg_rects(
         t = (index + 0.5) / safe_bands
         if t <= center:
             ratio = t / center
-            gray = edge * (1.0 - ratio) + mid * ratio
+            color = edge * (1.0 - ratio) + mid * ratio
         else:
             ratio = (t - center) / (1.0 - center)
-            gray = mid * (1.0 - ratio) + edge * ratio
+            color = mid * (1.0 - ratio) + edge * ratio
         band_x = x + width * index / safe_bands
         band_w = width / safe_bands + max(0.02, width * 0.001)
         parts.append(
             f'  <rect x="{band_x:.3f}" y="{y:.3f}" width="{band_w:.3f}" height="{height:.3f}" '
-            f'fill="{_gray_hex(gray)}" stroke="none"/>')
+            f'fill="{_rgb_hex(color)}" stroke="none"/>')
     return "\n".join(parts) + ("\n" if parts else "")
+
 
 def _build_structured_symbol_svg(
     width: int,
@@ -144,9 +157,12 @@ def _build_structured_symbol_svg(
     glyph_y_ratio: float,
     plus_half_ratio: float,
     minus_gap_ratio: float,
-    glyph_gray: float = 241.0,
-    diag_gray: float = 143.0,
-    border_gray: float = 154.0,
+    diagonal_inset_ratio: float = 0.0,
+    center_dot_radius: float = 0.0,
+    center_dot_gray: float | str = 79.0,
+    glyph_gray: float | str = 241.0,
+    diag_gray: float | str = 143.0,
+    border_gray: float | str = 154.0,
 ) -> str:
     safe_w = max(1, int(width or 1))
     safe_h = max(1, int(height or 1))
@@ -157,6 +173,11 @@ def _build_structured_symbol_svg(
     minus_y = plus_cy
     minus_half = max(2.0, min(safe_w, safe_h) * 0.07)
     minus_start_x = plus_cx + plus_half * float(minus_gap_ratio)
+    diagonal_inset = max(0.0, min(0.45, float(diagonal_inset_ratio)))
+    diag_x0 = inset + (safe_w - 1 - 2 * inset) * diagonal_inset
+    diag_x1 = safe_w - 1 - (safe_w - 1 - 2 * inset) * diagonal_inset
+    diag_y0 = inset + (safe_h - 1 - 2 * inset) * diagonal_inset
+    diag_y1 = safe_h - 1 - (safe_h - 1 - 2 * inset) * diagonal_inset
     gradient_rects = _gradient_band_svg_rects(
         x=inset,
         y=inset,
@@ -173,12 +194,13 @@ def _build_structured_symbol_svg(
         f'    <clipPath id="innerRect"><rect x="{inset}" y="{inset}" width="{safe_w-1}" height="{safe_h-1}"/></clipPath>\n'
         '  </defs>\n'
         f'{gradient_rects}'
-        f'  <rect x="{inset}" y="{inset}" width="{safe_w-1}" height="{safe_h-1}" fill="none" stroke="{_gray_hex(border_gray)}" stroke-width="{border_thickness:.2f}"/>\n'
-        + (f'  <line x1="{safe_w-1}" y1="{inset}" x2="{inset}" y2="{safe_h-1}" stroke="{_gray_hex(diag_gray)}" stroke-width="{diag1_width:.2f}" clip-path="url(#innerRect)"/>\n' if diag1_width > 0 else '')
-        + (f'  <line x1="{inset}" y1="{inset}" x2="{safe_w-1}" y2="{safe_h-1}" stroke="{_gray_hex(diag_gray)}" stroke-width="{diag2_width:.2f}" clip-path="url(#innerRect)"/>\n' if diag2_width > 0 else '')
-        + f'  <line x1="{plus_cx-plus_half:.2f}" y1="{plus_cy:.2f}" x2="{plus_cx+plus_half:.2f}" y2="{plus_cy:.2f}" stroke="{_gray_hex(glyph_gray)}" stroke-width="{plus_width:.2f}" stroke-linecap="round"/>\n'
-        + f'  <line x1="{plus_cx:.2f}" y1="{plus_cy-plus_half:.2f}" x2="{plus_cx:.2f}" y2="{plus_cy+plus_half:.2f}" stroke="{_gray_hex(glyph_gray)}" stroke-width="{plus_width:.2f}" stroke-linecap="round"/>\n'
-        + (f'  <line x1="{minus_start_x:.2f}" y1="{minus_y:.2f}" x2="{minus_start_x+minus_half*1.8:.2f}" y2="{minus_y:.2f}" stroke="{_gray_hex(glyph_gray)}" stroke-width="{minus_width:.2f}" stroke-linecap="round"/>\n' if minus_width > 0 else '')
+        f'  <rect x="{inset}" y="{inset}" width="{safe_w-1}" height="{safe_h-1}" fill="none" stroke="{_color_hex(border_gray)}" stroke-width="{border_thickness:.2f}"/>\n'
+        + (f'  <line x1="{diag_x1:g}" y1="{diag_y0:g}" x2="{diag_x0:g}" y2="{diag_y1:g}" stroke="{_color_hex(diag_gray)}" stroke-width="{diag1_width:.2f}" clip-path="url(#innerRect)"/>\n' if diag1_width > 0 else '')
+        + (f'  <line x1="{diag_x0:g}" y1="{diag_y0:g}" x2="{diag_x1:g}" y2="{diag_y1:g}" stroke="{_color_hex(diag_gray)}" stroke-width="{diag2_width:.2f}" clip-path="url(#innerRect)"/>\n' if diag2_width > 0 else '')
+        + (f'  <line x1="{plus_cx-plus_half:.2f}" y1="{plus_cy:.2f}" x2="{plus_cx+plus_half:.2f}" y2="{plus_cy:.2f}" stroke="{_color_hex(glyph_gray)}" stroke-width="{plus_width:.2f}" stroke-linecap="round"/>\n' if plus_width > 0 else '')
+        + (f'  <line x1="{plus_cx:.2f}" y1="{plus_cy-plus_half:.2f}" x2="{plus_cx:.2f}" y2="{plus_cy+plus_half:.2f}" stroke="{_color_hex(glyph_gray)}" stroke-width="{plus_width:.2f}" stroke-linecap="round"/>\n' if plus_width > 0 else '')
+        + (f'  <line x1="{minus_start_x:.2f}" y1="{minus_y:.2f}" x2="{minus_start_x+minus_half*1.8:.2f}" y2="{minus_y:.2f}" stroke="{_color_hex(glyph_gray)}" stroke-width="{minus_width:.2f}" stroke-linecap="round"/>\n' if minus_width > 0 else '')
+        + (f'  <circle cx="{safe_w * 0.5:.2f}" cy="{safe_h * 0.5:.2f}" r="{center_dot_radius:.2f}" fill="{_color_hex(center_dot_gray)}"/>\n' if center_dot_radius > 0 else '')
         + '</svg>\n'
     )
 
@@ -221,8 +243,10 @@ def _derive_symbol_params_from_raster(*, width: int, height: int, perc_img) -> d
     arr = np.asarray(perc_img) if perc_img is not None else None
     if arr is None or arr.ndim < 2:
         raise ValueError("invalid raster input")
-    if arr.ndim == 3:
-        lum = arr[..., :3].mean(axis=2).astype(np.float32)
+    # Runtime rasters originate from OpenCV (BGR); SVG colors are RGB.
+    color = arr[..., :3][..., ::-1].astype(np.float32) if arr.ndim == 3 else None
+    if color is not None:
+        lum = color.mean(axis=2)
     else:
         lum = arr.astype(np.float32)
     h, w = lum.shape[:2]
@@ -232,27 +256,64 @@ def _derive_symbol_params_from_raster(*, width: int, height: int, perc_img) -> d
     center_is_brighter = float(np.nanmean(mid)) > float((np.nanmean(left) + np.nanmean(right)) * 0.5)
     grad_center = 50.0 if center_is_brighter else 45.0
     contrast = max(1.0, float(np.nanpercentile(lum, 90) - np.nanpercentile(lum, 10)))
-    edge = int(max(70, min(150, 150 - contrast * 0.35)))
-    midc = int(max(190, min(250, 215 + contrast * 0.25)))
+    # Estimate the horizontal background from robust column medians. This
+    # rejects thin diagonals and glyphs and works for both dark and light
+    # symbol families without imposing the former 190..250 midpoint clamp.
+    inner = lum[1:-1, 1:-1] if h > 2 and w > 2 else lum
+    column_profile = np.nanmedian(inner, axis=0)
+    flank_count = max(1, int(round(column_profile.size * 0.20)))
+    edge = int(round(float(np.nanmedian(np.concatenate((column_profile[:flank_count], column_profile[-flank_count:]))))))
+    midc = int(round(float(np.nanmax(column_profile))))
+    edge = max(0, min(255, edge))
+    midc = max(0, min(255, midc))
+    edge_color = _gray_hex(edge)
+    mid_color = _gray_hex(midc)
+    if color is not None:
+        color_inner = color[1:-1, 1:-1] if h > 2 and w > 2 else color
+        color_profile = np.nanmedian(color_inner, axis=0)
+        flank_colors = np.concatenate((color_profile[:flank_count], color_profile[-flank_count:]), axis=0)
+        edge_color = _rgb_hex(np.nanmedian(flank_colors, axis=0))
+        brightest_column = int(np.nanargmax(column_profile))
+        mid_color = _rgb_hex(color_profile[brightest_column])
     dark_ratio = float((lum < np.nanpercentile(lum, 35)).mean())
     light_ratio = float((lum > np.nanpercentile(lum, 70)).mean())
     scale = max(1.0, min(width, height))
+    background = np.broadcast_to(column_profile.reshape(1, -1), inner.shape)
+    bright_residual = inner - background
+    bright_cutoff = max(15.0, float(np.nanpercentile(bright_residual, 94)))
+    bright_y, bright_x = np.nonzero(bright_residual >= bright_cutoff)
+    diagonal_inset_ratio = 0.0
+    diagonal_gray: float | str = float(np.nanpercentile(lum, 25))
+    if bright_x.size >= 4:
+        x_span = int(bright_x.max() - bright_x.min())
+        y_span = int(bright_y.max() - bright_y.min())
+        if x_span >= max(2, inner.shape[1] // 4) and y_span >= max(2, inner.shape[0] // 4):
+            x_margin = min(float(bright_x.min()), float(inner.shape[1] - 1 - bright_x.max())) / max(1.0, float(inner.shape[1] - 1))
+            y_margin = min(float(bright_y.min()), float(inner.shape[0] - 1 - bright_y.max())) / max(1.0, float(inner.shape[0] - 1))
+            diagonal_inset_ratio = max(0.0, min(0.40, (x_margin + y_margin) * 0.5))
+            if color is not None:
+                diagonal_gray = _rgb_hex(np.nanmedian(color_inner[bright_y, bright_x], axis=0))
+            else:
+                diagonal_gray = float(np.nanmedian(inner[bright_y, bright_x]))
     glyph_geometry = _estimate_symbol_glyph_geometry_from_luminance(lum)
     return {
         "border_thickness": max(0.8, min(1.8, 0.9 + dark_ratio * 1.8)),
         "gradient_center": grad_center,
-        "gradient_edge": f"#{edge:02x}{edge:02x}{edge:02x}",
-        "gradient_mid": f"#{midc:02x}{midc:02x}{midc:02x}",
+        "gradient_edge": edge_color,
+        "gradient_mid": mid_color,
         "diag1_width": max(1.0, min(2.8, 1.0 + dark_ratio * scale * 0.02)),
         "diag2_width": 0.0,
+        "diagonal_inset_ratio": diagonal_inset_ratio,
         "plus_width": max(0.8, min(2.2, 0.8 + light_ratio * scale * 0.012)),
         "minus_width": 0.0,
         "plus_x_ratio": glyph_geometry["plus_x_ratio"],
         "glyph_y_ratio": glyph_geometry["glyph_y_ratio"],
         "plus_half_ratio": glyph_geometry["plus_half_ratio"],
         "minus_gap_ratio": 1.8,
+        "center_dot_radius": 0.0,
+        "center_dot_gray": max(30.0, min(180.0, float(np.nanpercentile(lum, 10)))),
         "glyph_gray": max(55.0, min(180.0, float(np.nanpercentile(lum[: max(1, int(h * 0.18)), : max(1, int(w * 0.40))], 15)))),
-        "diag_gray": max(70.0, min(170.0, float(np.nanpercentile(lum, 25)))),
+        "diag_gray": diagonal_gray if isinstance(diagonal_gray, str) else max(30.0, min(245.0, diagonal_gray)),
         "border_gray": max(80.0, min(180.0, float(np.nanpercentile(lum, 30)))),
     }
 
@@ -298,6 +359,7 @@ def _weighted_symbol_candidate_error(
     roi_error = float(np.mean(np.abs(target_roi - candidate_roi)))
     return float(base_error) + roi_error * 1.6
 
+
 def _fit_symbol_element_by_element(
     *,
     width: int,
@@ -310,6 +372,29 @@ def _fit_symbol_element_by_element(
     current = _derive_symbol_params_from_raster(width=width, height=height, perc_img=perc_img)
     description_text = (description or "").casefold()
     glyph_is_top = any(token in description_text for token in ("oben links", "top left", "top-left"))
+    has_plus = "plus" in description_text or "+" in description_text
+    has_minus = "minus" in description_text
+    has_center_dot = "punkt" in description_text and any(
+        token in description_text for token in ("mitte", "mittig", "zentrum", "center")
+    )
+    has_both_diagonals = any(
+        token in description_text
+        for token in ("beide diagonalen", "beiden diagonalen", "andreaskreuz", "diagonalkreuz")
+    )
+    diagonal_tl_br = bool(re.search(r"oben\s+links.*unten\s+rechts|unten\s+rechts.*oben\s+links", description_text))
+    diagonal_tr_bl = bool(re.search(r"oben\s+rechts.*unten\s+links|unten\s+links.*oben\s+rechts", description_text))
+    if "diagon" in description_text:
+        current["diag1_width"] = float(current["diag1_width"]) if (diagonal_tr_bl or not diagonal_tl_br) else 0.0
+        current["diag2_width"] = float(current["diag1_width"] or 1.4) if (diagonal_tl_br or has_both_diagonals) else 0.0
+    else:
+        current["diag1_width"] = 0.0
+        current["diag2_width"] = 0.0
+    current.setdefault("diagonal_inset_ratio", 0.0)
+    current.setdefault("center_dot_radius", 0.0)
+    current.setdefault("center_dot_gray", 79.0)
+    current["plus_width"] = float(current["plus_width"]) if has_plus else 0.0
+    current["minus_width"] = 1.0 if has_minus else 0.0
+    current["center_dot_radius"] = max(1.0, min(width, height) * 0.12) if has_center_dot else 0.0
     if glyph_is_top and float(current["glyph_y_ratio"]) > 0.30:
         # A bright gradient highlight can otherwise be mistaken for the glyph.
         # Keep the raster-derived x/size estimates, but restore the semantic
@@ -319,11 +404,20 @@ def _fit_symbol_element_by_element(
     # Element-wise refinement order requested by project idea.  Position and
     # size windows are centered on raster measurements so AC0100-like variants
     # are fitted from the image evidence instead of from one fixed sample pose.
+    gradient_edge_seed = float(int(str(current["gradient_edge"])[1:3], 16))
+    gradient_mid_seed = float(int(str(current["gradient_mid"])[1:3], 16))
+    diagonal_gray_seed = current["diag_gray"]
     refinement_steps: list[tuple[str, tuple[float | str, ...]]] = [
         ("border_thickness", (0.8, 1.0, 1.2, 1.4, 1.8)),
         ("gradient_center", (40.0, 45.0, 50.0, 55.0, 60.0)),
-        ("diag1_width", (0.0, 1.0, 1.4, 1.8, 2.2, 2.8)),
-        ("diag2_width", (0.0, 1.0, 1.4, 1.8, 2.2, 2.8)),
+        ("diag1_width", (0.8, 1.0, 1.4, 1.8, 2.2, 2.8) if float(current["diag1_width"]) > 0 else (0.0,)),
+        ("diag2_width", (0.8, 1.0, 1.4, 1.8, 2.2, 2.8) if float(current["diag2_width"]) > 0 else (0.0,)),
+        (
+            "diagonal_inset_ratio",
+            _candidate_window(float(current["diagonal_inset_ratio"]), (-0.08, -0.04, 0.0, 0.04, 0.08), minimum=0.0, maximum=0.40, include_limits=False)
+            if (float(current["diag1_width"]) > 0 or float(current["diag2_width"]) > 0)
+            else (0.0,),
+        ),
         (
             "plus_x_ratio",
             _candidate_window(float(current["plus_x_ratio"]), (-0.08, -0.04, 0.0, 0.04, 0.08), minimum=0.05, maximum=0.55, include_limits=False),
@@ -342,14 +436,16 @@ def _fit_symbol_element_by_element(
             "plus_half_ratio",
             _candidate_window(float(current["plus_half_ratio"]), (-0.03, -0.015, 0.0, 0.015, 0.03), minimum=0.04, maximum=0.16, include_limits=False),
         ),
-        ("plus_width", (0.8, 1.0, 1.2, 1.6, 2.2)),
+        ("plus_width", (0.8, 1.0, 1.2, 1.6, 2.2) if has_plus else (0.0,)),
         ("minus_gap_ratio", (1.5, 1.8, 2.1)),
-        ("minus_width", (0.0, 0.8, 1.0, 1.2, 1.6, 2.2)),
+        ("minus_width", (0.8, 1.0, 1.2, 1.6, 2.2) if has_minus else (0.0,)),
+        ("center_dot_radius", (0.8, 1.2, 1.6, 2.0, 2.4, 2.8, 3.2) if has_center_dot else (0.0,)),
+        ("center_dot_gray", (40.0, 55.0, 70.0, 80.0, 95.0, 110.0, 130.0, 150.0) if has_center_dot else (float(current["center_dot_gray"]),)),
         ("glyph_gray", (55.0, 70.0, 85.0, 100.0, 115.0, 130.0, 150.0, 180.0, 210.0, 241.0)),
-        ("diag_gray", (80.0, 95.0, 110.0, 125.0, 143.0, 160.0, 180.0)),
+        ("diag_gray", (diagonal_gray_seed, 70.0, 95.0, 120.0, 145.0, 170.0, 195.0, 220.0, 241.0)),
         ("border_gray", (90.0, 110.0, 130.0, 154.0, 170.0, 190.0)),
-        ("gradient_edge", tuple(_gray_hex(v) for v in (70.0, 85.0, 100.0, 110.0, 120.0, 135.0, 150.0))),
-        ("gradient_mid", tuple(_gray_hex(v) for v in (190.0, 205.0, 220.0, 235.0, 245.0, 250.0))),
+        ("gradient_edge", (str(current["gradient_edge"]),) + tuple(_gray_hex(v) for v in sorted({70.0, 85.0, 100.0, 120.0, 150.0, gradient_edge_seed}))),
+        ("gradient_mid", (str(current["gradient_mid"]),) + tuple(_gray_hex(v) for v in sorted({100.0, 120.0, 140.0, 170.0, 190.0, 220.0, 245.0, gradient_mid_seed}))),
     ]
     step_logs: list[str] = []
     best: tuple[float, str, object] | None = None

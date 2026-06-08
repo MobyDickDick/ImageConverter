@@ -165,3 +165,19 @@ Der Qualitätsrefresh meldet nun `0/48` erfolgreiche Varianten oberhalb der
 Grenze und rotiert auf `AC0531_1_S`, `AC0502_1_M`, `AC0551_1_M`,
 `AC0403_1_M` und den neu aufgefüllten Kandidaten `AC0150_2`. Der PF8-Report
 führt dieselben fünf Varianten in derselben Reihenfolge.
+
+
+## Folgeaktualisierung Run OQ (2026-06-08)
+
+`AC0531_1_S` wurde im realen Non-Composite-Pfad erneut konvertiert. Der
+allgemeine Element-Fit leitet nun deklarierte Primitive aus der Beschreibung
+ab, erfindet also weder eine zweite Diagonale noch Plus-/Minuszeichen, und
+schätzt Farbverlauf, gekürzte Diagonale sowie deren RGB-Farbe aus dem Raster.
+Das akzeptierte 20x40-SVG enthält genau eine Diagonale und einen Mittelpunkt.
+
+`mean_delta2` sinkt von `30452.529297` auf `4837.790039`,
+`normalized_mse` von `0.15610678` auf `0.02479964` und damit unter die
+Review-Grenze. Der Kandidat wurde aus Triage und PF8-Linkage entfernt; die
+Rotation lautet nun `AC0502_1_M`, `AC0551_1_M`, `AC0403_1_M`, `AC0150_2`
+und `AC0253_1`. Der neue Pumpenkandidat wird durch Kreis-/Ring-Erkennung und
+einen allgemeinen `CircleBackground`-Seed als `generalisiert` eingestuft.

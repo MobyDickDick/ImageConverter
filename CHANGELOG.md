@@ -7,6 +7,8 @@ All notable changes to ImageConverter will be documented in this file.
 
 ## Unreleased
 
+- Plan-B Run OQ generalizes the non-composite symbol fit for description-declared diagonals, center dots, raster-derived RGB gradients, and shortened diagonal extents; `AC0531_1_S` drops from `normalized_mse=0.15610678` to `0.02479964` and rotates out in favor of `AC0253_1`.
+
 - Plan-B Run OP re-converts `AC0820_L` through the description-driven semantic CO₂ badge path, replaces the stale connector-only SVG, lowers `normalized_mse` from `0.05117826` to `0.03823352`, and rotates PF8/triage to `AC0531_1_S` through `AC0150_2`.
 
 - Plan-B Run OM refreshes all quality evidence and synchronizes a new five-item rotation led by `AC0820_L`; PF8 classifies four perception questions as generalized and the `AC0551_1_M` rectangle/rule case as special-case only.

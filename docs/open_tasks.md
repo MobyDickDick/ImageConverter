@@ -3537,3 +3537,12 @@ Ziel: Die Konvertierung soll strikt als **Kette** laufen:
 - **Perception-Lerneffekt:** Die Kreisfrage ist `generalisiert` (`circle`/`ring` → `CircleBackground`); `AC0820_L` wurde aus Triage und PF8-Linkage entfernt.
 - **Rotation:** Die fünf synchronen Ziele lauten nun `AC0531_1_S`, `AC0502_1_M`, `AC0551_1_M`, `AC0403_1_M` und `AC0150_2`.
 - **Nächster sinnvoller Schritt:** Die reguläre Plan-B-Rotation mit `AC0531_1_S.jpg` fortsetzen.
+
+
+### Fortschritt vs. Blocker (Session 2026-06-08, Plan-B AC0531_1_S Run OQ)
+
+- **Fortschritt:** `AC0531_1_S.jpg` wurde real über den allgemeinen Non-Composite-Element-Fit re-konvertiert; der Fit respektiert jetzt deklarierte Einzel-/Doppeldiagonalen, Mittelpunkt sowie Plus-/Minus-Glyphen und erhält rastergemessene RGB-Verläufe.
+- **Qualität:** `mean_delta2` sank von `30452.529297` auf `4837.790039` (`-84.11 %`), `normalized_mse` von `0.15610678` auf `0.02479964` und damit unter die Review-Grenze `0.04594568`.
+- **Perception-Lerneffekt:** Rechteck, Diagonale und Mittelpunkt sind `generalisiert`; Beschreibung und Bildmessung erzeugen genau eine gekürzte Diagonale und einen Mittelpunkt ohne erfundene Glyphen.
+- **Rotation:** `AC0531_1_S` wurde aus Triage und PF8-Linkage entfernt; `AC0253_1` füllt als allgemein erkannter Kreis-/Pumpenkandidat auf.
+- **Nächster sinnvoller Schritt:** Die reguläre Plan-B-Rotation mit `AC0502_1_M.jpg` fortsetzen.

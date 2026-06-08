@@ -1397,16 +1397,6 @@ def write_text_glyph_evaluation_report(
 
 PLAN_B_PERCEPTION_TARGETS: list[dict[str, Any]] = [
     {
-        "variant": "AC0531_1_S",
-        "image_candidates": ["artifacts/images_to_convert/AC0531_1_S.jpg"],
-        "plan_b_reason": "Kompakter rechteckiger Diff-Kandidat mit der höchsten aktuellen Pixelabweichung.",
-        "perception_question": "Können Außenrechteck, Diagonale und Mittelpunkt als getrennte Primitive erkannt werden?",
-        "expected_first_primitive": "rectangle_diagonal_and_center_dot",
-        "expected_candidate_kinds": {"rectangle", "line", "circle", "ring"},
-        "expected_seed_kinds": {"RectangleBackground", "CircleBackground"},
-        "description": "Plan-B-Kandidat AC0531_1_S: Klappenrechteck, Diagonale und Mittelpunkt zuerst prüfen.",
-    },
-    {
         "variant": "AC0502_1_M",
         "image_candidates": ["artifacts/images_to_convert/AC0502_1_M.jpg"],
         "plan_b_reason": "Kompakte gedrehte Klappengeometrie mit sehr hoher Diff-Abweichung.",
@@ -1445,6 +1435,16 @@ PLAN_B_PERCEPTION_TARGETS: list[dict[str, Any]] = [
         "expected_candidate_kinds": {"rectangle", "horizontal_rule", "line"},
         "expected_seed_kinds": {"RectangleBackground", "HorizontalRule"},
         "description": "Plan-B-Kandidat AC0150_2: Rechteck, horizontale Teilungen und rechte Polylinie zuerst prüfen.",
+    },
+    {
+        "variant": "AC0253_1",
+        "image_candidates": ["artifacts/images_to_convert/AC0253_1.jpg"],
+        "plan_b_reason": "Kompaktes gedrehtes Pumpensymbol mit hoher verbleibender Diff-Abweichung.",
+        "perception_question": "Kann der äußere Pumpenkreis unabhängig vom gedrehten inneren Dreieck erkannt werden?",
+        "expected_first_primitive": "circle_with_rotated_triangle",
+        "expected_candidate_kinds": {"circle", "ring", "line"},
+        "expected_seed_kinds": {"CircleBackground"},
+        "description": "Plan-B-Kandidat AC0253_1: äußeren Pumpenkreis vor dem gedrehten Innendreieck erkennen.",
     },
 ]
 
