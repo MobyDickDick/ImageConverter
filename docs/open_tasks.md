@@ -3564,3 +3564,10 @@ Ziel: Die Konvertierung soll strikt als **Kette** laufen:
 - **Perception-Lerneffekt:** Die Konturtopologie ist im Rekonstruktionsalgorithmus `generalisiert`; die vorgelagerte Primitive-Detection bleibt für Rechteck-/HorizontalRule-Seeds weiterhin `nur Sonderfall`, daher wurden keine variantenspezifischen Koordinaten hinterlegt.
 - **Rotation:** `AC0551_1_M` wurde aus Triage und PF8-Linkage entfernt; `AC0733_1_L` füllt die fünf aktiven Plätze auf.
 - **Nächster sinnvoller Schritt:** Die reguläre Plan-B-Rotation mit `AC0403_1_M.jpg` fortsetzen.
+
+
+### Fortschritt vs. Blocker (Session 2026-06-09, vollständiger Core-Testlauf)
+
+- **Fortschritt:** Als bewusst kleines Testhygiene-Arbeitspaket wurde die vollständige Core-Suite mit `PYTHONPATH=. python -m pytest -q -rs` ausgeführt und das vollständige Protokoll unter `artifacts/pytest/full_core_suite_2026-06-09.log` für GitHub versioniert.
+- **Ergebnis:** `765 passed in 45.10s`, Exit `0`; keine Skips, Warnungen oder Fehlschläge wurden gemeldet.
+- **Blocker:** Kein Testblocker. Die reguläre Plan-B-Rotation mit `AC0403_1_M.jpg` bleibt das nächste fachliche Arbeitspaket.
