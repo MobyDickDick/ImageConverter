@@ -3571,3 +3571,12 @@ Ziel: Die Konvertierung soll strikt als **Kette** laufen:
 - **Fortschritt:** Als bewusst kleines Testhygiene-Arbeitspaket wurde die vollständige Core-Suite mit `PYTHONPATH=. python -m pytest -q -rs` ausgeführt und das vollständige Protokoll unter `artifacts/pytest/full_core_suite_2026-06-09.log` für GitHub versioniert.
 - **Ergebnis:** `765 passed in 45.10s`, Exit `0`; keine Skips, Warnungen oder Fehlschläge wurden gemeldet.
 - **Blocker:** Kein Testblocker. Die reguläre Plan-B-Rotation mit `AC0403_1_M.jpg` bleibt das nächste fachliche Arbeitspaket.
+
+
+### Fortschritt vs. Blocker (Session 2026-06-09, Plan-B AC0403_1_M Run OT)
+
+- **Fortschritt:** `AC0403_1_M.jpg` wurde real re-konvertiert; das allgemeine Geometry-IR erkennt referenzierende AC0251-/AC0401-Beschreibungen als Pumpensymbol und rendert Kreisgrundkörper sowie rotationsfähiges Innendreieck als getrennte Primitive.
+- **Qualität:** `mean_delta2` sank von `21687.341797` auf `4297.878906` (`-80.18 %`), `normalized_mse` von `0.11117438` auf `0.02203193` und damit unter die Review-Grenze `0.04594568`.
+- **Perception-Lerneffekt:** Kreis und gedrehtes Dreieck sind im Rekonstruktionsalgorithmus `generalisiert`; die Rasterregistrierung passt die normalisierte Geometrie ohne variantenspezifische Koordinaten an.
+- **Rotation:** `AC0403_1_M` wurde aus Triage und PF8-Linkage entfernt; `AC0733_1_M` füllt die fünf aktiven Plätze auf.
+- **Nächster sinnvoller Schritt:** Die reguläre Plan-B-Rotation mit `AC0150_2.jpg` fortsetzen.

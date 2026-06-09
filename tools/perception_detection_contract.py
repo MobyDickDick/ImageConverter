@@ -1397,16 +1397,6 @@ def write_text_glyph_evaluation_report(
 
 PLAN_B_PERCEPTION_TARGETS: list[dict[str, Any]] = [
     {
-        "variant": "AC0403_1_M",
-        "image_candidates": ["artifacts/images_to_convert/AC0403_1_M.jpg"],
-        "plan_b_reason": "Sehr kompakter kreisförmiger Diff-Kandidat oberhalb der Review-Grenze.",
-        "perception_question": "Kann die gedrehte kreisförmige Grundform unabhängig von ihrer Innengeometrie erkannt werden?",
-        "expected_first_primitive": "rotated_circle_or_ring",
-        "expected_candidate_kinds": {"circle", "ring"},
-        "expected_seed_kinds": {"CircleBackground"},
-        "description": "Plan-B-Kandidat AC0403_1_M: Kreisgrundkörper vor der gedrehten Innengeometrie erkennen.",
-    },
-    {
         "variant": "AC0150_2",
         "image_candidates": ["artifacts/images_to_convert/AC0150_2.jpg"],
         "plan_b_reason": "Dimensionstreues Rechteck-/Linienmotiv an der maximalen kompakten Review-Fläche.",
@@ -1445,6 +1435,16 @@ PLAN_B_PERCEPTION_TARGETS: list[dict[str, Any]] = [
         "expected_candidate_kinds": {"rectangle", "line", "text_glyph"},
         "expected_seed_kinds": {"RectangleBackground", "TextGlyph"},
         "description": "Plan-B-Kandidat AC0733_1_L: gedrehte Grundgeometrie und horizontalen P-Glyph getrennt prüfen.",
+    },
+    {
+        "variant": "AC0733_1_M",
+        "image_candidates": ["artifacts/images_to_convert/AC0733_1_M.jpg"],
+        "plan_b_reason": "Mittlere kompakte Variante des gedrehten Symbols mit horizontal bleibendem P-Glyph.",
+        "perception_question": "Bleiben gedrehte Grundgeometrie und horizontaler P-Glyph auch in der mittleren Variante getrennt erkennbar?",
+        "expected_first_primitive": "rotated_symbol_with_horizontal_p_glyph",
+        "expected_candidate_kinds": {"rectangle", "line", "text_glyph"},
+        "expected_seed_kinds": {"RectangleBackground", "TextGlyph"},
+        "description": "Plan-B-Kandidat AC0733_1_M: gedrehte Grundgeometrie und horizontalen P-Glyph getrennt prüfen.",
     },
 ]
 

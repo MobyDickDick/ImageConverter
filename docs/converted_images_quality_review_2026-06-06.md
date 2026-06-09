@@ -197,3 +197,18 @@ die Review-Grenze. `AC0502_1_M` wurde aus Triage und PF8-Linkage entfernt;
 die Rotation lautet nun `AC0551_1_M`, `AC0403_1_M`, `AC0150_2`, `AC0253_1`
 und `AC0551_2_M`. Die neue AC0551-Frage bleibt mangels allgemeinem
 Rechteck-/HorizontalRule-Seed `nur Sonderfall`.
+
+
+## Folgeaktualisierung Run OT (2026-06-09)
+
+`AC0403_1_M` wurde im realen Non-Composite-Pfad aus der referenzierenden
+Familienbeschreibung als semantisches Pumpensymbol re-konvertiert. Das neue
+Geometry-IR trennt den dunkleren Kreisgrundkörper vom um 180 Grad gedrehten
+Innendreieck; die Rasterregistrierung skaliert die allgemeine Geometrie ohne
+variantenspezifische Koordinaten.
+
+`mean_delta2` sinkt von `21687.341797` auf `4297.878906`,
+`normalized_mse` von `0.11117438` auf `0.02203193` und damit unter die
+Review-Grenze. `AC0403_1_M` wurde aus Triage und PF8-Linkage entfernt; die
+Rotation lautet nun `AC0150_2`, `AC0253_1`, `AC0551_2_M`, `AC0733_1_L` und
+`AC0733_1_M`.

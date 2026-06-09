@@ -532,3 +532,29 @@ def test_render_geometry_ir_to_svg_contains_ac0214_180_rotated_two_way_valve_mot
     assert 'id="rotated_180_two_way_valve_motor_circle"' in svg
     assert 'id="rotated_180_two_way_valve_motor_label"' in svg
     assert ">M</text>" in svg
+
+
+def test_builds_rotated_grey_pump_symbol_as_circle_and_triangle():
+    description = (
+        "Pumpensymbol grau: grauer Kreis, hellgrauer Hintergund. Im Kreis ist ein "
+        "dunkelgraues dreieck. Abweichung: Hintergrund Kreis ein wenig dunkler. "
+        "Geometrische Variante: 180° gedreht."
+    )
+
+    ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(description)
+
+    assert [element["kind"] for element in ir] == ["CircleBackground", "PumpTriangleGlyph"]
+    assert ir[0]["id"] == "pump_circle"
+    assert ir[1]["points"][0][1] < ir[1]["points"][2][1]
+
+
+def test_renders_pump_triangle_relative_to_its_circle():
+    ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
+        "Pumpensymbol grau: grauer Kreis mit Dreieck. Geometrische Variante: 180° gedreht."
+    )
+
+    svg = geometry_ir_helpers.renderGeometryIrToSvgImpl(30, 30, ir)
+
+    assert 'id="pump_circle"' in svg
+    assert 'id="pump_triangle"' in svg
+    assert "<polygon" in svg
