@@ -3555,3 +3555,12 @@ Ziel: Die Konvertierung soll strikt als **Kette** laufen:
 - **Perception-Lerneffekt:** Rechteck, Diagonale und Mittelpunkt sind `generalisiert`; die Runtime verbindet die Beschreibungstopologie mit der rastergemessenen Farbe und Ausdehnung.
 - **Rotation:** `AC0502_1_M` wurde aus Triage und PF8-Linkage entfernt; `AC0551_2_M` füllt die fünf aktiven Plätze auf.
 - **Nächster sinnvoller Schritt:** Die reguläre Plan-B-Rotation mit `AC0551_1_M.jpg` fortsetzen.
+
+
+### Fortschritt vs. Blocker (Session 2026-06-09, Plan-B AC0551_1_M Run OS)
+
+- **Fortschritt:** `AC0551_1_M.jpg` wurde real re-konvertiert; der allgemeine Element-Fit erzeugt die beschriebene Kontur Oben-Mitte → Rechts-Mitte → Unten-Mitte nun als parametrisierte Polylinie und passt Breite, Einzüge, Scheitelpunkt und Farbe aus Beschreibung und Raster an.
+- **Qualität:** `mean_delta2` sank von `29098.138672` auf `4518.557129` (`-84.47 %`), `normalized_mse` von `0.14916385` auf `0.02316318` und damit unter die Review-Grenze `0.04594568`.
+- **Perception-Lerneffekt:** Die Konturtopologie ist im Rekonstruktionsalgorithmus `generalisiert`; die vorgelagerte Primitive-Detection bleibt für Rechteck-/HorizontalRule-Seeds weiterhin `nur Sonderfall`, daher wurden keine variantenspezifischen Koordinaten hinterlegt.
+- **Rotation:** `AC0551_1_M` wurde aus Triage und PF8-Linkage entfernt; `AC0733_1_L` füllt die fünf aktiven Plätze auf.
+- **Nächster sinnvoller Schritt:** Die reguläre Plan-B-Rotation mit `AC0403_1_M.jpg` fortsetzen.

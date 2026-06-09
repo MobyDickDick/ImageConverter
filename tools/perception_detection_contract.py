@@ -1397,16 +1397,6 @@ def write_text_glyph_evaluation_report(
 
 PLAN_B_PERCEPTION_TARGETS: list[dict[str, Any]] = [
     {
-        "variant": "AC0551_1_M",
-        "image_candidates": ["artifacts/images_to_convert/AC0551_1_M.jpg"],
-        "plan_b_reason": "Kompaktes Linien-/Rechteckmotiv mit hoher Diff-Abweichung.",
-        "perception_question": "Können Außenrechteck, horizontale Teilungen und die mittige Winkelkontur getrennt erkannt werden?",
-        "expected_first_primitive": "rectangle_horizontal_rules_and_chevron",
-        "expected_candidate_kinds": {"rectangle", "horizontal_rule", "line"},
-        "expected_seed_kinds": {"RectangleBackground", "HorizontalRule"},
-        "description": "Plan-B-Kandidat AC0551_1_M: Rechteck, Teilungslinien und Winkelkontur zuerst prüfen.",
-    },
-    {
         "variant": "AC0403_1_M",
         "image_candidates": ["artifacts/images_to_convert/AC0403_1_M.jpg"],
         "plan_b_reason": "Sehr kompakter kreisförmiger Diff-Kandidat oberhalb der Review-Grenze.",
@@ -1445,6 +1435,16 @@ PLAN_B_PERCEPTION_TARGETS: list[dict[str, Any]] = [
         "expected_candidate_kinds": {"rectangle", "horizontal_rule", "line"},
         "expected_seed_kinds": {"RectangleBackground", "HorizontalRule"},
         "description": "Plan-B-Kandidat AC0551_2_M: Rechteck, Teilungslinien und Winkelkontur zuerst prüfen.",
+    },
+    {
+        "variant": "AC0733_1_L",
+        "image_candidates": ["artifacts/images_to_convert/AC0733_1_L.jpg"],
+        "plan_b_reason": "Kompaktes gedrehtes Symbol mit horizontal bleibendem P-Glyph und hoher Diff-Abweichung.",
+        "perception_question": "Bleiben gedrehte Grundgeometrie und horizontaler P-Glyph als getrennte Primitive erkennbar?",
+        "expected_first_primitive": "rotated_symbol_with_horizontal_p_glyph",
+        "expected_candidate_kinds": {"rectangle", "line", "text_glyph"},
+        "expected_seed_kinds": {"RectangleBackground", "TextGlyph"},
+        "description": "Plan-B-Kandidat AC0733_1_L: gedrehte Grundgeometrie und horizontalen P-Glyph getrennt prüfen.",
     },
 ]
 

@@ -1621,6 +1621,32 @@ def test_symbol_fit_honors_declared_diagonal_and_center_dot_without_inventing_gl
     assert svg.count("<circle") == 1
 
 
+def test_symbol_fit_renders_description_declared_right_chevron_without_inventing_diagonals() -> None:
+    target = np.zeros((60, 30, 3), dtype=np.uint8)
+
+    result = non_composite_runtime_helpers._fit_symbol_element_by_element(
+        width=30,
+        height=60,
+        description=(
+            "Graues Rechteck hochkant, drei graue horizontale Linien, "
+            "graue Linien Oben-Mitte nach Rechts-Mitte nach Unten-Mitte"
+        ),
+        perc_img=target,
+        render_svg_to_numpy_fn=lambda svg, *_args: np.zeros_like(target),
+        calculate_error_fn=lambda *_args: 0.0,
+    )
+
+    assert result is not None
+    svg = result[1]
+    params = result[3]
+    assert params["chevron_width"] > 0
+    assert params["diag1_width"] == 0
+    assert params["diag2_width"] == 0
+    assert params["chevron_peak_x_ratio"] >= 0.88
+    assert svg.count("<path") == 1
+    assert svg.count("<line") == 0
+
+
 def test_symbol_fit_rotates_declared_diagonal_for_quarter_turn_variant() -> None:
     import re
 

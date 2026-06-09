@@ -7,6 +7,8 @@ All notable changes to ImageConverter will be documented in this file.
 
 ## Unreleased
 
+- Plan-B Run OS adds a description-driven, raster-fitted right-chevron primitive to the non-composite symbol fit, reducing `AC0551_1_M` from `normalized_mse=0.14916385` to `0.02316318` and rotating the queue to `AC0403_1_M` through `AC0733_1_L`.
+
 - Plan-B Run OR applies description-declared quarter turns to diagonal topology, reducing `AC0502_1_M` from `normalized_mse=0.15533278` to `0.01602799` and rotating the queue to `AC0551_1_M` through `AC0551_2_M`.
 
 - Plan-B Run OQ generalizes the non-composite symbol fit for description-declared diagonals, center dots, raster-derived RGB gradients, and shortened diagonal extents; `AC0531_1_S` drops from `normalized_mse=0.15610678` to `0.02479964` and rotates out in favor of `AC0253_1`.
