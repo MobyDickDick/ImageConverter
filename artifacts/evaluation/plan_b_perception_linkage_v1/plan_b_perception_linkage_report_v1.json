@@ -11,99 +11,6 @@
   "records": [
     {
       "schema_version": "plan_b_perception_linkage_record_v1",
-      "variant": "AC0403_1_M",
-      "image_path": "artifacts/images_to_convert/AC0403_1_M.jpg",
-      "status": "evaluated",
-      "plan_b_reason": "Sehr kompakter kreisf\u00f6rmiger Diff-Kandidat oberhalb der Review-Grenze.",
-      "description": "Plan-B-Kandidat AC0403_1_M: Kreisgrundk\u00f6rper vor der gedrehten Innengeometrie erkennen.",
-      "perception_lerneffekt": {
-        "question": "Kann die gedrehte kreisf\u00f6rmige Grundform unabh\u00e4ngig von ihrer Innengeometrie erkannt werden?",
-        "expected_first_primitive": "rotated_circle_or_ring",
-        "expected_candidate_kinds": [
-          "circle",
-          "ring"
-        ],
-        "expected_seed_kinds": [
-          "CircleBackground"
-        ],
-        "decision": "generalisiert",
-        "matched_candidate_kinds": [
-          "circle",
-          "ring"
-        ],
-        "matched_seed_kinds": [
-          "CircleBackground"
-        ],
-        "top_candidate_kind": "ring",
-        "top_confidence": 0.9303,
-        "next_action": "Im n\u00e4chsten Plan-B-Paket als vorinitialisierten Geometry-IR-Seed protokollieren."
-      },
-      "candidate_count": 6,
-      "top_candidate": {
-        "schema_version": "perception_primitive_candidate_v1",
-        "kind": "ring",
-        "bbox": {
-          "x": 1.0,
-          "y": 6.0,
-          "width": 22.0,
-          "height": 22.0
-        },
-        "center": {
-          "x": 12.0,
-          "y": 17.0
-        },
-        "geometry": {
-          "radius_px": 11.0,
-          "inner_radius_px": 6.38,
-          "stroke_width_px": 4.62,
-          "circularity": 1.0,
-          "ring": true,
-          "fill_ratio": 0.4881,
-          "geometry_ir_kind": "CircleBackground",
-          "geometry_ir_bbox": [
-            0.03333,
-            0.2,
-            0.73333,
-            0.73333
-          ]
-        },
-        "color": {
-          "fill_rgb": [
-            226,
-            120,
-            143
-          ],
-          "stroke_rgb": [
-            218,
-            113,
-            135
-          ],
-          "fill_hex": "#E2788F",
-          "stroke_hex": "#DA7187",
-          "fill_confidence": 0.5464,
-          "stroke_confidence": 0.5411
-        },
-        "confidence": 0.9303,
-        "roi": {
-          "type": "image",
-          "hint": "full_image",
-          "bbox": {
-            "x": 0.0,
-            "y": 0.0,
-            "width": 30.0,
-            "height": 30.0
-          }
-        },
-        "evidence": {
-          "detector": "detect_circle_rings",
-          "detection_source": "hough",
-          "threshold_model": "hough_plus_foreground_mask"
-        },
-        "source": "pf8_plan_b_perception_linkage"
-      }
-    },
-    {
-      "schema_version": "plan_b_perception_linkage_record_v1",
       "variant": "AC0150_2",
       "image_path": "artifacts/images_to_convert/AC0150_2.jpg",
       "status": "evaluated",
@@ -429,13 +336,90 @@
         },
         "source": "hough"
       }
+    },
+    {
+      "schema_version": "plan_b_perception_linkage_record_v1",
+      "variant": "AC0733_1_M",
+      "image_path": "artifacts/images_to_convert/AC0733_1_M.jpg",
+      "status": "evaluated",
+      "plan_b_reason": "Mittlere kompakte Variante des gedrehten Symbols mit horizontal bleibendem P-Glyph.",
+      "description": "Plan-B-Kandidat AC0733_1_M: gedrehte Grundgeometrie und horizontalen P-Glyph getrennt pr\u00fcfen.",
+      "perception_lerneffekt": {
+        "question": "Bleiben gedrehte Grundgeometrie und horizontaler P-Glyph auch in der mittleren Variante getrennt erkennbar?",
+        "expected_first_primitive": "rotated_symbol_with_horizontal_p_glyph",
+        "expected_candidate_kinds": [
+          "line",
+          "rectangle",
+          "text_glyph"
+        ],
+        "expected_seed_kinds": [
+          "RectangleBackground",
+          "TextGlyph"
+        ],
+        "decision": "nur Sonderfall",
+        "matched_candidate_kinds": [
+          "line"
+        ],
+        "matched_seed_kinds": [],
+        "top_candidate_kind": "line",
+        "top_confidence": 0.8254,
+        "next_action": "Als Perception-Hinweis dokumentieren, aber noch keinen generischen Seed erzwingen."
+      },
+      "candidate_count": 5,
+      "top_candidate": {
+        "schema_version": "perception_primitive_candidate_v1",
+        "kind": "line",
+        "bbox": {
+          "x": 9.0,
+          "y": 0.0,
+          "width": 2.0,
+          "height": 18.0
+        },
+        "center": {
+          "x": 10.0,
+          "y": 9.0
+        },
+        "geometry": {
+          "orientation": "vertical",
+          "x_center": 10.0,
+          "y_top": 0.0,
+          "y_bottom": 18.0,
+          "length_px": 18.0,
+          "stroke_width_px": 2.0,
+          "angle_deg": 90.0
+        },
+        "color": {
+          "fill_rgb": null,
+          "stroke_rgb": null,
+          "fill_hex": null,
+          "stroke_hex": null,
+          "fill_confidence": 0.0,
+          "stroke_confidence": 0.0
+        },
+        "confidence": 0.8254,
+        "roi": {
+          "type": "image",
+          "hint": "full_image",
+          "bbox": {
+            "x": 0.0,
+            "y": 0.0,
+            "width": 20.0,
+            "height": 35.0
+          }
+        },
+        "evidence": {
+          "detector": "detect_vertical_lines",
+          "edge_model": "canny+hough_lines_p"
+        },
+        "source": "hough"
+      }
     }
   ],
   "metrics": {
     "samples": 5,
     "evaluated_samples": 5,
-    "generalisiert": 2,
-    "nur_sonderfall": 3,
+    "generalisiert": 1,
+    "nur_sonderfall": 4,
     "noch_nicht_erkannt": 0,
     "all_have_perception_lerneffekt": true
   }

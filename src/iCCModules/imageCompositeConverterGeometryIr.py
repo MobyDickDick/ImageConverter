@@ -31,6 +31,15 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
     gradient_hint = _has_any(desc, ("farbverlauf", "gradient")) and _has_any(desc, ("horizontal", "dunkel-hell-dunkel", "dunkel–hell–dunkel"))
     diagonal_hint = _has_any(desc, ("diagonal", "diagonale", "diagonalen", "andreaskreuz", "kreuz"))
     differential_pressure_hint = _has_any(desc, ("differenzdruckmessung", "dp")) and "doppelten grauen rand" in desc
+    pump_symbol_hint = (
+        "pumpensymbol" in desc and "kreis" in desc and "dreieck" in desc
+    ) or _has_any(desc, ("ac0251", "ac0401"))
+    pump_rotated_180_hint = pump_symbol_hint and _has_any(
+        desc, ("180° gedreht", "180 grad gedreht", "um 180°", "um 180 grad")
+    )
+    darker_pump_circle_hint = pump_symbol_hint and _has_any(
+        desc, ("kreis ein wenig dunkler", "kreis etwas dunkler")
+    )
     compressor_hint = _has_any(desc, ("kompressor", "kopressor"))
     upward_compressor_hint = compressor_hint and _has_any(desc, ("nach oben", "oben", "aufwärts", "aufwaerts"))
     grey_background_compressor_hint = upward_compressor_hint and _has_any(
@@ -329,6 +338,34 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
                 "font_size": 0.540,
                 "font_weight": "700",
             }
+        )
+        return elements
+
+    if pump_symbol_hint:
+        circle_fill = "#de2048" if darker_pump_circle_hint else "#e42a4f"
+        triangle_points = (
+            [[0.18, 0.24], [0.82, 0.24], [0.50, 0.90]]
+            if pump_rotated_180_hint
+            else [[0.18, 0.76], [0.82, 0.76], [0.50, 0.10]]
+        )
+        elements.extend(
+            [
+                {
+                    "kind": "CircleBackground",
+                    "id": "pump_circle",
+                    "bbox": [0.015, 0.015, 0.97, 0.97],
+                    "fill": circle_fill,
+                    "stroke": "#9a7d82",
+                    "stroke_width": 0.018,
+                },
+                {
+                    "kind": "PumpTriangleGlyph",
+                    "id": "pump_triangle",
+                    "circle_ref": "pump_circle",
+                    "points": triangle_points,
+                    "fill": "#e7e7e7",
+                },
+            ]
         )
         return elements
 
@@ -771,6 +808,24 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
                 f'rx="{_fmt(bw * 0.5)}" ry="{_fmt(bh * 0.5)}" fill="{fill}" stroke="{stroke}" '
                 f'stroke-width="{_fmt(sw)}"/>'
             )
+        elif kind == "PumpTriangleGlyph":
+            circle_ref = str(element.get("circle_ref", "pump_circle"))
+            circle_x, circle_y, circle_w, circle_h = _find_circle(geometry_ir, circle_ref, w, h)
+            fill = html.escape(str(element.get("fill", "#e7e7e7")))
+            raw_points = element.get("points", [])
+            points = []
+            if isinstance(raw_points, list):
+                for raw_point in raw_points:
+                    if isinstance(raw_point, list) and len(raw_point) == 2:
+                        points.append(
+                            (
+                                circle_x + circle_w * float(raw_point[0]),
+                                circle_y + circle_h * float(raw_point[1]),
+                            )
+                        )
+            if len(points) == 3:
+                point_text = " ".join(f"{_fmt(px)},{_fmt(py)}" for px, py in points)
+                svg.append(f'  <polygon id="{element_id}" points="{point_text}" fill="{fill}"/>')
         elif kind in {
             "UpwardCompressorGlyph",
             "RightwardCompressorGlyph",
