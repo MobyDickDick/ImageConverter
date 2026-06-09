@@ -163,6 +163,11 @@ def _build_structured_symbol_svg(
     glyph_gray: float | str = 241.0,
     diag_gray: float | str = 143.0,
     border_gray: float | str = 154.0,
+    chevron_width: float = 0.0,
+    chevron_inset_ratio: float = 0.0,
+    chevron_center_x_ratio: float = 0.5,
+    chevron_peak_x_ratio: float = 1.0,
+    chevron_peak_y_ratio: float = 0.5,
 ) -> str:
     safe_w = max(1, int(width or 1))
     safe_h = max(1, int(height or 1))
@@ -178,6 +183,12 @@ def _build_structured_symbol_svg(
     diag_x1 = safe_w - 1 - (safe_w - 1 - 2 * inset) * diagonal_inset
     diag_y0 = inset + (safe_h - 1 - 2 * inset) * diagonal_inset
     diag_y1 = safe_h - 1 - (safe_h - 1 - 2 * inset) * diagonal_inset
+    chevron_inset = max(0.0, min(0.40, float(chevron_inset_ratio)))
+    chevron_x0 = safe_w * max(0.0, min(1.0, float(chevron_center_x_ratio)))
+    chevron_x1 = inset + (safe_w - 1 - inset) * max(0.5, min(1.0, float(chevron_peak_x_ratio)))
+    chevron_peak_y = safe_h * max(0.0, min(1.0, float(chevron_peak_y_ratio)))
+    chevron_y0 = inset + (safe_h - 1 - 2 * inset) * chevron_inset
+    chevron_y1 = safe_h - 1 - (safe_h - 1 - 2 * inset) * chevron_inset
     gradient_rects = _gradient_band_svg_rects(
         x=inset,
         y=inset,
@@ -197,6 +208,7 @@ def _build_structured_symbol_svg(
         f'  <rect x="{inset}" y="{inset}" width="{safe_w-1}" height="{safe_h-1}" fill="none" stroke="{_color_hex(border_gray)}" stroke-width="{border_thickness:.2f}"/>\n'
         + (f'  <line x1="{diag_x1:g}" y1="{diag_y0:g}" x2="{diag_x0:g}" y2="{diag_y1:g}" stroke="{_color_hex(diag_gray)}" stroke-width="{diag1_width:.2f}" clip-path="url(#innerRect)"/>\n' if diag1_width > 0 else '')
         + (f'  <line x1="{diag_x0:g}" y1="{diag_y0:g}" x2="{diag_x1:g}" y2="{diag_y1:g}" stroke="{_color_hex(diag_gray)}" stroke-width="{diag2_width:.2f}" clip-path="url(#innerRect)"/>\n' if diag2_width > 0 else '')
+        + (f'  <path d="M {chevron_x0:g} {chevron_y0:g} L {chevron_x1:g} {chevron_peak_y:g} L {chevron_x0:g} {chevron_y1:g}" fill="none" stroke="{_color_hex(diag_gray)}" stroke-width="{chevron_width:.2f}" stroke-linejoin="round" stroke-linecap="butt" clip-path="url(#innerRect)"/>\n' if chevron_width > 0 else '')
         + (f'  <line x1="{plus_cx-plus_half:.2f}" y1="{plus_cy:.2f}" x2="{plus_cx+plus_half:.2f}" y2="{plus_cy:.2f}" stroke="{_color_hex(glyph_gray)}" stroke-width="{plus_width:.2f}" stroke-linecap="round"/>\n' if plus_width > 0 else '')
         + (f'  <line x1="{plus_cx:.2f}" y1="{plus_cy-plus_half:.2f}" x2="{plus_cx:.2f}" y2="{plus_cy+plus_half:.2f}" stroke="{_color_hex(glyph_gray)}" stroke-width="{plus_width:.2f}" stroke-linecap="round"/>\n' if plus_width > 0 else '')
         + (f'  <line x1="{minus_start_x:.2f}" y1="{minus_y:.2f}" x2="{minus_start_x+minus_half*1.8:.2f}" y2="{minus_y:.2f}" stroke="{_color_hex(glyph_gray)}" stroke-width="{minus_width:.2f}" stroke-linecap="round"/>\n' if minus_width > 0 else '')
@@ -402,7 +414,15 @@ def _fit_symbol_element_by_element(
     else:
         current["diag1_width"] = 0.0
         current["diag2_width"] = 0.0
+    has_right_chevron = bool(
+        re.search(r"oben[-\s]*mitte.*rechts[-\s]*mitte.*unten[-\s]*mitte", description_text)
+    )
     current.setdefault("diagonal_inset_ratio", 0.0)
+    current.setdefault("chevron_inset_ratio", float(current["diagonal_inset_ratio"]))
+    current.setdefault("chevron_center_x_ratio", 0.5)
+    current.setdefault("chevron_peak_x_ratio", 1.0)
+    current.setdefault("chevron_peak_y_ratio", 0.5)
+    current["chevron_width"] = float(current["diag1_width"]) if has_right_chevron else 0.0
     current.setdefault("center_dot_radius", 0.0)
     current.setdefault("center_dot_gray", 79.0)
     current["plus_width"] = float(current["plus_width"]) if has_plus else 0.0
@@ -431,6 +451,20 @@ def _fit_symbol_element_by_element(
             if (float(current["diag1_width"]) > 0 or float(current["diag2_width"]) > 0)
             else (0.0,),
         ),
+        ("chevron_width", (0.8, 1.0, 1.4, 1.8, 2.2, 2.8) if has_right_chevron else (0.0,)),
+        (
+            "chevron_inset_ratio",
+            _candidate_window(
+                float(current["chevron_inset_ratio"]),
+                (-0.06, -0.03, 0.0, 0.03, 0.06),
+                minimum=0.0,
+                maximum=0.24,
+                include_limits=True,
+            ) if has_right_chevron else (0.0,),
+        ),
+        ("chevron_center_x_ratio", (0.44, 0.46, 0.48, 0.50, 0.52) if has_right_chevron else (0.5,)),
+        ("chevron_peak_x_ratio", (0.88, 0.92, 0.96, 1.0) if has_right_chevron else (1.0,)),
+        ("chevron_peak_y_ratio", (0.46, 0.48, 0.50, 0.52, 0.54) if has_right_chevron else (0.5,)),
         (
             "plus_x_ratio",
             _candidate_window(float(current["plus_x_ratio"]), (-0.08, -0.04, 0.0, 0.04, 0.08), minimum=0.05, maximum=0.55, include_limits=False),

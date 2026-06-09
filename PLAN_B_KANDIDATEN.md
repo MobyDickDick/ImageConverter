@@ -2,22 +2,23 @@
 
 Ziel: maximal **5** aktive JPG-Kandidaten, die derzeit noch nicht zufriedenstellend konvertieren, aber voraussichtlich nicht "hoffnungslos komplex" sind.
 
-## Aktuelle Kandidaten (Stand: 2026-06-08, Plan-B Run OR)
+## Aktuelle Kandidaten (Stand: 2026-06-09, Plan-B Run OS)
 
-Die reale AC0502-1-M-Re-Konvertierung berücksichtigt die beschriebene
-90-Grad-Drehung nun auch für die Diagonalachse. Der reproduzierbare Review
-entfernt den abgeschlossenen Kandidaten und füllt die Rotation mit der zweiten
-kompakten AC0551-Variante wieder auf maximal fünf Diff-Fälle auf.
+Die reale AC0551-1-M-Re-Konvertierung rekonstruiert die beschriebene rechte
+Winkelkontur nun als allgemeine, rasterangepasste Polylinie. Der
+reproduzierbare Review entfernt den abgeschlossenen Kandidaten und füllt die
+Rotation mit dem kompakten gedrehten P-Symbol `AC0733_1_L` wieder auf maximal
+fünf Diff-Fälle auf.
 
 | Priorität | Kandidat | Quelle | `normalized_mse` | Auswahlgrund |
 | ---: | --- | --- | ---: | --- |
-| 1 | `AC0551_1_M.jpg` | Diff-Inventar | `0.14916385` | Kompaktes Rechteckmotiv mit horizontalen Teilungen und mittiger Winkelkontur. |
-| 2 | `AC0403_1_M.jpg` | Diff-Inventar | `0.11117438` | Sehr kompakte gedrehte Kreis-/Innengeometrie oberhalb der Review-Grenze. |
-| 3 | `AC0150_2.jpg` | Diff-Inventar | `0.10493784` | Dimensionstreues Rechteck-/Linienmotiv an der maximal zulässigen kompakten Bildfläche. |
-| 4 | `AC0253_1.jpg` | Diff-Inventar | `0.10473690` | Kompaktes um 180° gedrehtes Pumpensymbol; Außenkreis und inneres Dreieck sind klar getrennt prüfbar. |
-| 5 | `AC0551_2_M.jpg` | Diff-Inventar | `0.09445446` | Zweite kompakte Rechteck-/Linienvariante derselben Familie zur Prüfung der Generalisierung. |
+| 1 | `AC0403_1_M.jpg` | Diff-Inventar | `0.11117438` | Sehr kompakte gedrehte Kreis-/Innengeometrie oberhalb der Review-Grenze. |
+| 2 | `AC0150_2.jpg` | Diff-Inventar | `0.10493784` | Dimensionstreues Rechteck-/Linienmotiv an der maximal zulässigen kompakten Bildfläche. |
+| 3 | `AC0253_1.jpg` | Diff-Inventar | `0.10473690` | Kompaktes um 180° gedrehtes Pumpensymbol; Außenkreis und inneres Dreieck sind klar getrennt prüfbar. |
+| 4 | `AC0551_2_M.jpg` | Diff-Inventar | `0.09445446` | Zweite kompakte Rechteck-/Linienvariante derselben Familie zur Prüfung der Generalisierung. |
+| 5 | `AC0733_1_L.jpg` | Diff-Inventar | `0.09223704` | Kompaktes gedrehtes Symbol, dessen P-Glyph laut Beschreibung horizontal bleiben muss. |
 
-Die nächste reguläre Rotation beginnt mit `AC0551_1_M.jpg`.
+Die nächste reguläre Rotation beginnt mit `AC0403_1_M.jpg`.
 
 ## Perception-Lerneffekt (Pflichtabschnitt ab PF8)
 
@@ -29,10 +30,10 @@ maschinenlesbare Stand liegt unter
 
 Der aktualisierte Linkage-Report enthält alle fünf aktiven Kandidaten. Die
 Kreis-/Ring-Fragen für `AC0403_1_M` und `AC0253_1` sind `generalisiert`.
-`AC0551_1_M`, `AC0150_2` und `AC0551_2_M` bleiben `nur Sonderfall`, weil
-Linien und Rechteck erkannt werden, aber weder ein allgemeiner Rechteck- noch
-HorizontalRule-Seed vorliegt. Der gedrehte Rechteck-/Diagonal-/Mittelpunkt-
-Lerneffekt von `AC0502_1_M` ist mit dem realen Lauf abgeschlossen.
+`AC0150_2`, `AC0551_2_M` und `AC0733_1_L` bleiben `nur Sonderfall`, weil ihre
+Linien-/Rechteck- beziehungsweise Textprimitive noch keinen passenden
+allgemeinen Seed liefern. Der Beschreibungs- und Raster-Fit der rechten
+Winkelkontur von `AC0551_1_M` ist mit dem realen Lauf abgeschlossen.
 
 ## Pflege-Regel (fortan)
 

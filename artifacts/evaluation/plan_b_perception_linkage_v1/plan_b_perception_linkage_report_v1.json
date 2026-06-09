@@ -11,84 +11,6 @@
   "records": [
     {
       "schema_version": "plan_b_perception_linkage_record_v1",
-      "variant": "AC0551_1_M",
-      "image_path": "artifacts/images_to_convert/AC0551_1_M.jpg",
-      "status": "evaluated",
-      "plan_b_reason": "Kompaktes Linien-/Rechteckmotiv mit hoher Diff-Abweichung.",
-      "description": "Plan-B-Kandidat AC0551_1_M: Rechteck, Teilungslinien und Winkelkontur zuerst pr\u00fcfen.",
-      "perception_lerneffekt": {
-        "question": "K\u00f6nnen Au\u00dfenrechteck, horizontale Teilungen und die mittige Winkelkontur getrennt erkannt werden?",
-        "expected_first_primitive": "rectangle_horizontal_rules_and_chevron",
-        "expected_candidate_kinds": [
-          "horizontal_rule",
-          "line",
-          "rectangle"
-        ],
-        "expected_seed_kinds": [
-          "HorizontalRule",
-          "RectangleBackground"
-        ],
-        "decision": "nur Sonderfall",
-        "matched_candidate_kinds": [
-          "line",
-          "rectangle"
-        ],
-        "matched_seed_kinds": [],
-        "top_candidate_kind": "line",
-        "top_confidence": 1.0,
-        "next_action": "Als Perception-Hinweis dokumentieren, aber noch keinen generischen Seed erzwingen."
-      },
-      "candidate_count": 5,
-      "top_candidate": {
-        "schema_version": "perception_primitive_candidate_v1",
-        "kind": "line",
-        "bbox": {
-          "x": 0.125,
-          "y": 0.0,
-          "width": 1.75,
-          "height": 59.0
-        },
-        "center": {
-          "x": 1.0,
-          "y": 29.5
-        },
-        "geometry": {
-          "orientation": "vertical",
-          "x_center": 1.0,
-          "y_top": 0.0,
-          "y_bottom": 59.0,
-          "length_px": 59.0,
-          "stroke_width_px": 1.75,
-          "angle_deg": 90.0
-        },
-        "color": {
-          "fill_rgb": null,
-          "stroke_rgb": null,
-          "fill_hex": null,
-          "stroke_hex": null,
-          "fill_confidence": 0.0,
-          "stroke_confidence": 0.0
-        },
-        "confidence": 1.0,
-        "roi": {
-          "type": "image",
-          "hint": "full_image",
-          "bbox": {
-            "x": 0.0,
-            "y": 0.0,
-            "width": 30.0,
-            "height": 60.0
-          }
-        },
-        "evidence": {
-          "detector": "detect_vertical_lines",
-          "edge_model": "canny+hough_lines_p"
-        },
-        "source": "hough"
-      }
-    },
-    {
-      "schema_version": "plan_b_perception_linkage_record_v1",
       "variant": "AC0403_1_M",
       "image_path": "artifacts/images_to_convert/AC0403_1_M.jpg",
       "status": "evaluated",
@@ -422,6 +344,83 @@
             "y": 0.0,
             "width": 30.0,
             "height": 60.0
+          }
+        },
+        "evidence": {
+          "detector": "detect_vertical_lines",
+          "edge_model": "canny+hough_lines_p"
+        },
+        "source": "hough"
+      }
+    },
+    {
+      "schema_version": "plan_b_perception_linkage_record_v1",
+      "variant": "AC0733_1_L",
+      "image_path": "artifacts/images_to_convert/AC0733_1_L.jpg",
+      "status": "evaluated",
+      "plan_b_reason": "Kompaktes gedrehtes Symbol mit horizontal bleibendem P-Glyph und hoher Diff-Abweichung.",
+      "description": "Plan-B-Kandidat AC0733_1_L: gedrehte Grundgeometrie und horizontalen P-Glyph getrennt pr\u00fcfen.",
+      "perception_lerneffekt": {
+        "question": "Bleiben gedrehte Grundgeometrie und horizontaler P-Glyph als getrennte Primitive erkennbar?",
+        "expected_first_primitive": "rotated_symbol_with_horizontal_p_glyph",
+        "expected_candidate_kinds": [
+          "line",
+          "rectangle",
+          "text_glyph"
+        ],
+        "expected_seed_kinds": [
+          "RectangleBackground",
+          "TextGlyph"
+        ],
+        "decision": "nur Sonderfall",
+        "matched_candidate_kinds": [
+          "line"
+        ],
+        "matched_seed_kinds": [],
+        "top_candidate_kind": "line",
+        "top_confidence": 0.8042,
+        "next_action": "Als Perception-Hinweis dokumentieren, aber noch keinen generischen Seed erzwingen."
+      },
+      "candidate_count": 7,
+      "top_candidate": {
+        "schema_version": "perception_primitive_candidate_v1",
+        "kind": "line",
+        "bbox": {
+          "x": 11.0,
+          "y": 0.0,
+          "width": 3.0,
+          "height": 24.0
+        },
+        "center": {
+          "x": 12.5,
+          "y": 12.0
+        },
+        "geometry": {
+          "orientation": "vertical",
+          "x_center": 12.5,
+          "y_top": 0.0,
+          "y_bottom": 24.0,
+          "length_px": 24.0,
+          "stroke_width_px": 3.0,
+          "angle_deg": 90.0
+        },
+        "color": {
+          "fill_rgb": null,
+          "stroke_rgb": null,
+          "fill_hex": null,
+          "stroke_hex": null,
+          "fill_confidence": 0.0,
+          "stroke_confidence": 0.0
+        },
+        "confidence": 0.8042,
+        "roi": {
+          "type": "image",
+          "hint": "full_image",
+          "bbox": {
+            "x": 0.0,
+            "y": 0.0,
+            "width": 25.0,
+            "height": 45.0
           }
         },
         "evidence": {
