@@ -3546,3 +3546,12 @@ Ziel: Die Konvertierung soll strikt als **Kette** laufen:
 - **Perception-Lerneffekt:** Rechteck, Diagonale und Mittelpunkt sind `generalisiert`; Beschreibung und Bildmessung erzeugen genau eine gekürzte Diagonale und einen Mittelpunkt ohne erfundene Glyphen.
 - **Rotation:** `AC0531_1_S` wurde aus Triage und PF8-Linkage entfernt; `AC0253_1` füllt als allgemein erkannter Kreis-/Pumpenkandidat auf.
 - **Nächster sinnvoller Schritt:** Die reguläre Plan-B-Rotation mit `AC0502_1_M.jpg` fortsetzen.
+
+
+### Fortschritt vs. Blocker (Session 2026-06-08, Plan-B AC0502_1_M Run OR)
+
+- **Fortschritt:** `AC0502_1_M.jpg` wurde real re-konvertiert; deklarierte 90-Grad-Varianten tauschen im allgemeinen Element-Fit nun die Diagonalachse, statt die ungedrehte Familienrichtung zu rendern.
+- **Qualität:** `mean_delta2` sank von `30301.542969` auf `3126.661621` (`-89.68 %`), `normalized_mse` von `0.15533278` auf `0.01602799` und damit unter die Review-Grenze `0.04594568`.
+- **Perception-Lerneffekt:** Rechteck, Diagonale und Mittelpunkt sind `generalisiert`; die Runtime verbindet die Beschreibungstopologie mit der rastergemessenen Farbe und Ausdehnung.
+- **Rotation:** `AC0502_1_M` wurde aus Triage und PF8-Linkage entfernt; `AC0551_2_M` füllt die fünf aktiven Plätze auf.
+- **Nächster sinnvoller Schritt:** Die reguläre Plan-B-Rotation mit `AC0551_1_M.jpg` fortsetzen.

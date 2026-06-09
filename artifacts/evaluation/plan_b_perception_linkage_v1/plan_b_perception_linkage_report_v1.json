@@ -11,102 +11,6 @@
   "records": [
     {
       "schema_version": "plan_b_perception_linkage_record_v1",
-      "variant": "AC0502_1_M",
-      "image_path": "artifacts/images_to_convert/AC0502_1_M.jpg",
-      "status": "evaluated",
-      "plan_b_reason": "Kompakte gedrehte Klappengeometrie mit sehr hoher Diff-Abweichung.",
-      "description": "Plan-B-Kandidat AC0502_1_M: gedrehte Klappengeometrie vor der Iteration zerlegen.",
-      "perception_lerneffekt": {
-        "question": "Bleiben Rechteck, Diagonale und Mittelpunkt auch in der gedrehten Variante allgemein erkennbar?",
-        "expected_first_primitive": "rotated_rectangle_diagonal_and_center_dot",
-        "expected_candidate_kinds": [
-          "circle",
-          "line",
-          "rectangle",
-          "ring"
-        ],
-        "expected_seed_kinds": [
-          "CircleBackground",
-          "RectangleBackground"
-        ],
-        "decision": "generalisiert",
-        "matched_candidate_kinds": [
-          "circle",
-          "rectangle"
-        ],
-        "matched_seed_kinds": [
-          "CircleBackground"
-        ],
-        "top_candidate_kind": "circle",
-        "top_confidence": 0.9833,
-        "next_action": "Im n\u00e4chsten Plan-B-Paket als vorinitialisierten Geometry-IR-Seed protokollieren."
-      },
-      "candidate_count": 4,
-      "top_candidate": {
-        "schema_version": "perception_primitive_candidate_v1",
-        "kind": "circle",
-        "bbox": {
-          "x": 25.0,
-          "y": 9.0,
-          "width": 10.0,
-          "height": 10.0
-        },
-        "center": {
-          "x": 30.0,
-          "y": 14.0
-        },
-        "geometry": {
-          "radius_px": 5.0,
-          "inner_radius_px": 0.0,
-          "stroke_width_px": 1.0,
-          "circularity": 1.0,
-          "ring": false,
-          "fill_ratio": 1.0,
-          "geometry_ir_kind": "CircleBackground",
-          "geometry_ir_bbox": [
-            0.41667,
-            0.3,
-            0.16667,
-            0.33333
-          ]
-        },
-        "color": {
-          "fill_rgb": [
-            95,
-            75,
-            75
-          ],
-          "stroke_rgb": [
-            142,
-            71,
-            74
-          ],
-          "fill_hex": "#5F4B4B",
-          "stroke_hex": "#8E474A",
-          "fill_confidence": 0.8728,
-          "stroke_confidence": 0.8104
-        },
-        "confidence": 0.9833,
-        "roi": {
-          "type": "image",
-          "hint": "full_image",
-          "bbox": {
-            "x": 0.0,
-            "y": 0.0,
-            "width": 60.0,
-            "height": 30.0
-          }
-        },
-        "evidence": {
-          "detector": "detect_circle_rings",
-          "detection_source": "hough",
-          "threshold_model": "hough_plus_foreground_mask"
-        },
-        "source": "pf8_plan_b_perception_linkage"
-      }
-    },
-    {
-      "schema_version": "plan_b_perception_linkage_record_v1",
       "variant": "AC0551_1_M",
       "image_path": "artifacts/images_to_convert/AC0551_1_M.jpg",
       "status": "evaluated",
@@ -448,13 +352,91 @@
         },
         "source": "pf8_plan_b_perception_linkage"
       }
+    },
+    {
+      "schema_version": "plan_b_perception_linkage_record_v1",
+      "variant": "AC0551_2_M",
+      "image_path": "artifacts/images_to_convert/AC0551_2_M.jpg",
+      "status": "evaluated",
+      "plan_b_reason": "Zweite kompakte Linien-/Rechteckvariante mit hoher Diff-Abweichung.",
+      "description": "Plan-B-Kandidat AC0551_2_M: Rechteck, Teilungslinien und Winkelkontur zuerst pr\u00fcfen.",
+      "perception_lerneffekt": {
+        "question": "Bleiben Au\u00dfenrechteck, horizontale Teilungen und Winkelkontur auch in der zweiten Variante getrennt erkennbar?",
+        "expected_first_primitive": "rectangle_horizontal_rules_and_chevron",
+        "expected_candidate_kinds": [
+          "horizontal_rule",
+          "line",
+          "rectangle"
+        ],
+        "expected_seed_kinds": [
+          "HorizontalRule",
+          "RectangleBackground"
+        ],
+        "decision": "nur Sonderfall",
+        "matched_candidate_kinds": [
+          "line",
+          "rectangle"
+        ],
+        "matched_seed_kinds": [],
+        "top_candidate_kind": "line",
+        "top_confidence": 1.0,
+        "next_action": "Als Perception-Hinweis dokumentieren, aber noch keinen generischen Seed erzwingen."
+      },
+      "candidate_count": 4,
+      "top_candidate": {
+        "schema_version": "perception_primitive_candidate_v1",
+        "kind": "line",
+        "bbox": {
+          "x": 26.0,
+          "y": 0.0,
+          "width": 4.0,
+          "height": 59.0
+        },
+        "center": {
+          "x": 28.0,
+          "y": 29.5
+        },
+        "geometry": {
+          "orientation": "vertical",
+          "x_center": 28.0,
+          "y_top": 0.0,
+          "y_bottom": 59.0,
+          "length_px": 59.0,
+          "stroke_width_px": 4.0,
+          "angle_deg": 90.0
+        },
+        "color": {
+          "fill_rgb": null,
+          "stroke_rgb": null,
+          "fill_hex": null,
+          "stroke_hex": null,
+          "fill_confidence": 0.0,
+          "stroke_confidence": 0.0
+        },
+        "confidence": 1.0,
+        "roi": {
+          "type": "image",
+          "hint": "full_image",
+          "bbox": {
+            "x": 0.0,
+            "y": 0.0,
+            "width": 30.0,
+            "height": 60.0
+          }
+        },
+        "evidence": {
+          "detector": "detect_vertical_lines",
+          "edge_model": "canny+hough_lines_p"
+        },
+        "source": "hough"
+      }
     }
   ],
   "metrics": {
     "samples": 5,
     "evaluated_samples": 5,
-    "generalisiert": 3,
-    "nur_sonderfall": 2,
+    "generalisiert": 2,
+    "nur_sonderfall": 3,
     "noch_nicht_erkannt": 0,
     "all_have_perception_lerneffekt": true
   }

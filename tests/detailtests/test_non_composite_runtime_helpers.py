@@ -1621,6 +1621,41 @@ def test_symbol_fit_honors_declared_diagonal_and_center_dot_without_inventing_gl
     assert svg.count("<circle") == 1
 
 
+def test_symbol_fit_rotates_declared_diagonal_for_quarter_turn_variant() -> None:
+    import re
+
+    target = np.zeros((30, 60, 3), dtype=np.uint8)
+
+    result = non_composite_runtime_helpers._fit_symbol_element_by_element(
+        width=60,
+        height=30,
+        description=(
+            "Rechteck hochkant mit Diagonale von unten links nach oben rechts, "
+            "in der Mitte ein dunkelgrauer Punkt. Geometrische Variante: "
+            "90° nach rechts gedreht."
+        ),
+        perc_img=target,
+        render_svg_to_numpy_fn=lambda svg, *_args: np.zeros_like(target),
+        calculate_error_fn=lambda *_args: 0.0,
+    )
+
+    assert result is not None
+    svg = result[1]
+    params = result[3]
+    assert params["diag1_width"] == 0
+    assert params["diag2_width"] > 0
+    line_match = re.search(
+        r'<line x1="([0-9.]+)" y1="([0-9.]+)" x2="([0-9.]+)" y2="([0-9.]+)"',
+        svg,
+    )
+    assert line_match is not None
+    x1, y1, x2, y2 = map(float, line_match.groups())
+    assert x1 < x2
+    assert y1 < y2
+    assert svg.count("<line") == 1
+    assert svg.count("<circle") == 1
+
+
 def test_symbol_raster_estimation_preserves_bgr_source_colors_for_svg() -> None:
     raster = np.zeros((12, 12, 3), dtype=np.uint8)
     raster[:, :] = (70, 40, 230)  # OpenCV BGR -> SVG RGB #e62846.

@@ -14,18 +14,6 @@
   },
   "selected_candidates": [
     {
-      "variant": "AC0502_1_M",
-      "source": "diff_inventory",
-      "image_path": "artifacts/images_to_convert/AC0502_1_M.jpg",
-      "svg_path": "artifacts/converted_images/converted_svgs/AC0502_1_M.svg",
-      "width": 60,
-      "height": 30,
-      "mean_delta2": 30301.54296875,
-      "normalized_mse": 0.15533278466615405,
-      "status": "ok",
-      "image_area": 1800
-    },
-    {
       "variant": "AC0551_1_M",
       "source": "diff_inventory",
       "image_path": "artifacts/images_to_convert/AC0551_1_M.jpg",
@@ -72,6 +60,18 @@
       "normalized_mse": 0.10473690007048571,
       "status": "ok",
       "image_area": 961
+    },
+    {
+      "variant": "AC0551_2_M",
+      "source": "diff_inventory",
+      "image_path": "artifacts/images_to_convert/AC0551_2_M.jpg",
+      "svg_path": "artifacts/converted_images/converted_svgs/AC0551_2_M.svg",
+      "width": 30,
+      "height": 60,
+      "mean_delta2": 18425.703125,
+      "normalized_mse": 0.094454456619249,
+      "status": "ok",
+      "image_area": 1800
     }
   ],
   "records_csv": "artifacts/evaluation/conversion_quality_review_v2/conversion_quality_records_v2.csv",

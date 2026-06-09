@@ -133,6 +133,24 @@ def test_ac0531_1_s_committed_svg_preserves_flap_primitives_and_quality() -> Non
     assert 'fill="#e' in svg
 
 
+def test_ac0502_1_m_committed_svg_preserves_rotated_flap_quality() -> None:
+    record = review_variant("AC0502_1_M", source="diff_inventory")
+
+    assert record.status == "ok"
+    assert record.width == 60
+    assert record.height == 30
+    assert record.mean_delta2 == pytest.approx(3126.66162109375)
+    assert record.normalized_mse is not None
+    assert record.normalized_mse < 0.045945679012345676
+
+    svg = Path(record.svg_path).read_text(encoding="utf-8")
+    assert svg.count("<line") == 1
+    assert svg.count("<circle") == 1
+    assert 'x1="0.5" y1="0.5" x2="59" y2="29"' in svg
+    assert 'stroke="#e5e5e4"' in svg
+    assert 'fill="#ec' in svg
+
+
 def test_ac0835_l_committed_svg_is_below_review_threshold() -> None:
     record = review_variant("AC0835_L", source="successful_conversion")
 

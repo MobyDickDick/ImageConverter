@@ -7,6 +7,8 @@ All notable changes to ImageConverter will be documented in this file.
 
 ## Unreleased
 
+- Plan-B Run OR applies description-declared quarter turns to diagonal topology, reducing `AC0502_1_M` from `normalized_mse=0.15533278` to `0.01602799` and rotating the queue to `AC0551_1_M` through `AC0551_2_M`.
+
 - Plan-B Run OQ generalizes the non-composite symbol fit for description-declared diagonals, center dots, raster-derived RGB gradients, and shortened diagonal extents; `AC0531_1_S` drops from `normalized_mse=0.15610678` to `0.02479964` and rotates out in favor of `AC0253_1`.
 
 - Plan-B Run OP re-converts `AC0820_L` through the description-driven semantic CO₂ badge path, replaces the stale connector-only SVG, lowers `normalized_mse` from `0.05117826` to `0.03823352`, and rotates PF8/triage to `AC0531_1_S` through `AC0150_2`.
