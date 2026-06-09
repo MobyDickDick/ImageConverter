@@ -1682,6 +1682,25 @@ def test_symbol_fit_rotates_declared_diagonal_for_quarter_turn_variant() -> None
     assert svg.count("<circle") == 1
 
 
+def test_symbol_raster_estimation_ignores_bright_frame_for_gradient_midpoint() -> None:
+    raster = np.zeros((80, 40, 3), dtype=np.uint8)
+    raster[:, :] = (90, 190, 70)  # OpenCV BGR -> saturated green SVG background.
+    raster[:, 14:26] = (90, 205, 75)
+    raster[:, :2] = 255
+    raster[:, -2:] = 255
+    raster[:2, :] = 255
+    raster[-2:, :] = 255
+
+    params = non_composite_runtime_helpers._derive_symbol_params_from_raster(
+        width=40,
+        height=80,
+        perc_img=raster,
+    )
+
+    assert params["gradient_mid"] == "#4bcd5a"
+    assert params["gradient_mid"] != "#ffffff"
+
+
 def test_symbol_raster_estimation_preserves_bgr_source_colors_for_svg() -> None:
     raster = np.zeros((12, 12, 3), dtype=np.uint8)
     raster[:, :] = (70, 40, 230)  # OpenCV BGR -> SVG RGB #e62846.

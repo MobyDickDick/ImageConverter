@@ -11,84 +11,6 @@
   "records": [
     {
       "schema_version": "plan_b_perception_linkage_record_v1",
-      "variant": "AC0150_2",
-      "image_path": "artifacts/images_to_convert/AC0150_2.jpg",
-      "status": "evaluated",
-      "plan_b_reason": "Dimensionstreues Rechteck-/Linienmotiv an der maximalen kompakten Review-Fl\u00e4che.",
-      "description": "Plan-B-Kandidat AC0150_2: Rechteck, horizontale Teilungen und rechte Polylinie zuerst pr\u00fcfen.",
-      "perception_lerneffekt": {
-        "question": "K\u00f6nnen Au\u00dfenrechteck, horizontale Teilungen und die rechte Winkelkontur getrennt erkannt werden?",
-        "expected_first_primitive": "rectangle_horizontal_rules_and_right_polyline",
-        "expected_candidate_kinds": [
-          "horizontal_rule",
-          "line",
-          "rectangle"
-        ],
-        "expected_seed_kinds": [
-          "HorizontalRule",
-          "RectangleBackground"
-        ],
-        "decision": "nur Sonderfall",
-        "matched_candidate_kinds": [
-          "line",
-          "rectangle"
-        ],
-        "matched_seed_kinds": [],
-        "top_candidate_kind": "line",
-        "top_confidence": 1.0,
-        "next_action": "Als Perception-Hinweis dokumentieren, aber noch keinen generischen Seed erzwingen."
-      },
-      "candidate_count": 13,
-      "top_candidate": {
-        "schema_version": "perception_primitive_candidate_v1",
-        "kind": "line",
-        "bbox": {
-          "x": 1.5,
-          "y": 6.0,
-          "width": 1.0,
-          "height": 68.0
-        },
-        "center": {
-          "x": 2.0,
-          "y": 40.0
-        },
-        "geometry": {
-          "orientation": "vertical",
-          "x_center": 2.0,
-          "y_top": 6.0,
-          "y_bottom": 74.0,
-          "length_px": 68.0,
-          "stroke_width_px": 1.0,
-          "angle_deg": 90.0
-        },
-        "color": {
-          "fill_rgb": null,
-          "stroke_rgb": null,
-          "fill_hex": null,
-          "stroke_hex": null,
-          "fill_confidence": 0.0,
-          "stroke_confidence": 0.0
-        },
-        "confidence": 1.0,
-        "roi": {
-          "type": "image",
-          "hint": "full_image",
-          "bbox": {
-            "x": 0.0,
-            "y": 0.0,
-            "width": 40.0,
-            "height": 80.0
-          }
-        },
-        "evidence": {
-          "detector": "detect_vertical_lines",
-          "edge_model": "canny+hough_lines_p"
-        },
-        "source": "hough"
-      }
-    },
-    {
-      "schema_version": "plan_b_perception_linkage_record_v1",
       "variant": "AC0253_1",
       "image_path": "artifacts/images_to_convert/AC0253_1.jpg",
       "status": "evaluated",
@@ -413,14 +335,104 @@
         },
         "source": "hough"
       }
+    },
+    {
+      "schema_version": "plan_b_perception_linkage_record_v1",
+      "variant": "AC0722_1_L",
+      "image_path": "artifacts/images_to_convert/AC0722_1_L.jpg",
+      "status": "evaluated",
+      "plan_b_reason": "Kompaktes links gedrehtes Kellen-Symbol mit rotem Quadrat und T-Glyph.",
+      "description": "Plan-B-Kandidat AC0722_1_L: Anschluss, Quadratgrundk\u00f6rper und T-Glyph getrennt pr\u00fcfen.",
+      "perception_lerneffekt": {
+        "question": "K\u00f6nnen horizontaler Anschluss, Quadratgrundk\u00f6rper und T-Glyph als getrennte Primitive erkannt werden?",
+        "expected_first_primitive": "left_connector_square_with_t_glyph",
+        "expected_candidate_kinds": [
+          "line",
+          "rectangle",
+          "text_glyph"
+        ],
+        "expected_seed_kinds": [
+          "RectangleBackground",
+          "TextGlyph"
+        ],
+        "decision": "noch nicht erkannt",
+        "matched_candidate_kinds": [],
+        "matched_seed_kinds": [],
+        "top_candidate_kind": "circle",
+        "top_confidence": 0.9632,
+        "next_action": "Vor der Plan-B-Umsetzung zus\u00e4tzliche Detector-/ROI-Regel oder manuelle Seed-Annahme festhalten."
+      },
+      "candidate_count": 3,
+      "top_candidate": {
+        "schema_version": "perception_primitive_candidate_v1",
+        "kind": "circle",
+        "bbox": {
+          "x": 26.0,
+          "y": 7.0,
+          "width": 16.0,
+          "height": 16.0
+        },
+        "center": {
+          "x": 34.0,
+          "y": 15.0
+        },
+        "geometry": {
+          "radius_px": 8.0,
+          "inner_radius_px": 0.0,
+          "stroke_width_px": 1.0,
+          "circularity": 1.0,
+          "ring": false,
+          "fill_ratio": 0.8782,
+          "geometry_ir_kind": "CircleBackground",
+          "geometry_ir_bbox": [
+            0.57778,
+            0.28,
+            0.35556,
+            0.64
+          ]
+        },
+        "color": {
+          "fill_rgb": [
+            220,
+            70,
+            102
+          ],
+          "stroke_rgb": [
+            227,
+            146,
+            163
+          ],
+          "fill_hex": "#DC4666",
+          "stroke_hex": "#E392A3",
+          "fill_confidence": 0.6375,
+          "stroke_confidence": 0.5132
+        },
+        "confidence": 0.9632,
+        "roi": {
+          "type": "image",
+          "hint": "full_image",
+          "bbox": {
+            "x": 0.0,
+            "y": 0.0,
+            "width": 45.0,
+            "height": 25.0
+          }
+        },
+        "evidence": {
+          "detector": "detect_circle_rings",
+          "detection_source": "hough",
+          "threshold_model": "hough_plus_foreground_mask"
+        },
+        "source": "pf8_plan_b_perception_linkage"
+      }
     }
   ],
   "metrics": {
     "samples": 5,
     "evaluated_samples": 5,
     "generalisiert": 1,
-    "nur_sonderfall": 4,
-    "noch_nicht_erkannt": 0,
+    "nur_sonderfall": 3,
+    "noch_nicht_erkannt": 1,
     "all_have_perception_lerneffekt": true
   }
 }

@@ -9,6 +9,8 @@ All notable changes to ImageConverter will be documented in this file.
 
 ## Unreleased
 
+- Plan-B Run OU makes saturated dark-light-dark gradient estimation robust against bright frames and chevrons, reducing `AC0150_2` from `normalized_mse=0.10493784` to `0.04095022` and rotating the queue to `AC0253_1` through `AC0722_1_L`.
+
 - Plan-B Run OT adds a description-driven pump Geometry-IR with a circle and rotation-aware triangle, reducing `AC0403_1_M` from `normalized_mse=0.11117438` to `0.02203193` and rotating the queue to `AC0150_2` through `AC0733_1_M`.
 
 - Plan-B Run OS adds a description-driven, raster-fitted right-chevron primitive to the non-composite symbol fit, reducing `AC0551_1_M` from `normalized_mse=0.14916385` to `0.02316318` and rotating the queue to `AC0403_1_M` through `AC0733_1_L`.

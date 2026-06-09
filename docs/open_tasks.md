@@ -3580,3 +3580,12 @@ Ziel: Die Konvertierung soll strikt als **Kette** laufen:
 - **Perception-Lerneffekt:** Kreis und gedrehtes Dreieck sind im Rekonstruktionsalgorithmus `generalisiert`; die Rasterregistrierung passt die normalisierte Geometrie ohne variantenspezifische Koordinaten an.
 - **Rotation:** `AC0403_1_M` wurde aus Triage und PF8-Linkage entfernt; `AC0733_1_M` füllt die fünf aktiven Plätze auf.
 - **Nächster sinnvoller Schritt:** Die reguläre Plan-B-Rotation mit `AC0150_2.jpg` fortsetzen.
+
+
+### Fortschritt vs. Blocker (Session 2026-06-09, Plan-B AC0150_2 Run OU)
+
+- **Fortschritt:** `AC0150_2.jpg` wurde real re-konvertiert; die allgemeine Chevron-Topologie bleibt erhalten, während die Rasterableitung den mittleren RGB-Verlauf nun aus einem robusten Zentralband statt aus der vom weißen Rahmen verfälschten hellsten Spalte bestimmt.
+- **Qualität:** `mean_delta2` sank von `20470.750000` auf `7988.364258` (`-60.98 %`), `normalized_mse` von `0.10493784` auf `0.04095022` und damit unter die Review-Grenze `0.04594568`.
+- **Perception-Lerneffekt:** Beschreibung und Rasterfit generalisieren die rechte Winkelkontur und den gesättigten Verlauf ohne AC0150-spezifische Koordinaten; `AC0150_2` wurde aus Triage und PF8-Linkage entfernt.
+- **Rotation:** `AC0722_1_L` füllt den fünften Platz auf und ist wegen einer fälschlich priorisierten Kreisdetektion zunächst `noch nicht erkannt`.
+- **Nächster sinnvoller Schritt:** Die reguläre Plan-B-Rotation mit `AC0253_1.jpg` fortsetzen.
