@@ -212,3 +212,19 @@ variantenspezifische Koordinaten.
 Review-Grenze. `AC0403_1_M` wurde aus Triage und PF8-Linkage entfernt; die
 Rotation lautet nun `AC0150_2`, `AC0253_1`, `AC0551_2_M`, `AC0733_1_L` und
 `AC0733_1_M`.
+
+
+## Folgeaktualisierung Run OU (2026-06-09)
+
+`AC0150_2` wurde im realen Non-Composite-Pfad erneut konvertiert. Die bereits
+allgemeine, beschreibungsgetriebene Chevron-Topologie wird mit einer robusten
+RGB-Verlaufsschätzung kombiniert: Der helle Verlaufsstopp stammt aus dem
+zentralen Farbbereich und nicht mehr aus einer vom weißen Rahmen oder der
+hellen Winkelkontur dominierten Maximalspalte.
+
+`mean_delta2` sinkt von `20470.750000` auf `7988.364258`,
+`normalized_mse` von `0.10493784` auf `0.04095022` und damit unter die
+Review-Grenze. `AC0150_2` wurde aus Triage und PF8-Linkage entfernt; die
+Rotation lautet nun `AC0253_1`, `AC0551_2_M`, `AC0733_1_L`, `AC0733_1_M`
+und `AC0722_1_L`. Der neue AC0722-Kandidat ist in der Perception-Auswertung
+wegen einer fälschlich priorisierten Kreisdetektion `noch nicht erkannt`.

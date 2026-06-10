@@ -285,8 +285,18 @@ def _derive_symbol_params_from_raster(*, width: int, height: int, perc_img) -> d
         color_profile = np.nanmedian(color_inner, axis=0)
         flank_colors = np.concatenate((color_profile[:flank_count], color_profile[-flank_count:]), axis=0)
         edge_color = _rgb_hex(np.nanmedian(flank_colors, axis=0))
-        brightest_column = int(np.nanargmax(column_profile))
-        mid_color = _rgb_hex(color_profile[brightest_column])
+        # The SVG frame and a bright chevron can dominate the absolute
+        # brightest column.  Estimate the light gradient stop from the central
+        # band instead, where a dark-light-dark horizontal gradient declares
+        # its midpoint.  This preserves saturated source colours instead of
+        # accidentally promoting a white border to the background midpoint.
+        center_start = max(0, int(round(color_profile.shape[0] * 0.35)))
+        center_end = min(color_profile.shape[0], int(round(color_profile.shape[0] * 0.65)))
+        center_colors = color_profile[center_start:center_end]
+        if center_colors.size:
+            mid_color = _rgb_hex(np.nanmedian(center_colors, axis=0))
+        else:
+            mid_color = _rgb_hex(color_profile[color_profile.shape[0] // 2])
     dark_ratio = float((lum < np.nanpercentile(lum, 35)).mean())
     light_ratio = float((lum > np.nanpercentile(lum, 70)).mean())
     scale = max(1.0, min(width, height))
