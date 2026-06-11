@@ -14,18 +14,6 @@
   },
   "selected_candidates": [
     {
-      "variant": "AC0723_1_S",
-      "source": "diff_inventory",
-      "image_path": "artifacts/images_to_convert/AC0723_1_S.jpg",
-      "svg_path": "artifacts/converted_images/converted_svgs/AC0723_1_S.svg",
-      "width": 15,
-      "height": 25,
-      "mean_delta2": 14441.021484375,
-      "normalized_mse": 0.0740280481064975,
-      "status": "ok",
-      "image_area": 375
-    },
-    {
       "variant": "AC0732_1_M",
       "source": "diff_inventory",
       "image_path": "artifacts/images_to_convert/AC0732_1_M.jpg",
@@ -70,6 +58,18 @@
       "height": 15,
       "mean_delta2": 11705.263671875,
       "normalized_mse": 0.06000391476034858,
+      "status": "ok",
+      "image_area": 375
+    },
+    {
+      "variant": "AC0701_1_S",
+      "source": "diff_inventory",
+      "image_path": "artifacts/images_to_convert/AC0701_1_S.jpg",
+      "svg_path": "artifacts/converted_images/converted_svgs/AC0701_1_S.svg",
+      "width": 15,
+      "height": 25,
+      "mean_delta2": 11579.4853515625,
+      "normalized_mse": 0.05935914572119697,
       "status": "ok",
       "image_area": 375
     }

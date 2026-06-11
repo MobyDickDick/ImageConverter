@@ -40,6 +40,11 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
     darker_pump_circle_hint = pump_symbol_hint and _has_any(
         desc, ("kreis ein wenig dunkler", "kreis etwas dunkler")
     )
+    vertically_mirrored_square_kelle_t_hint = (
+        "kelle" in desc
+        and _has_any(desc, ("vertikal gespiegelt", "senkrecht gespiegelt"))
+        and _has_any(desc, ("quadrat", "viereck"))
+    )
     left_rotated_square_kelle_t_hint = (
         "kelle" in desc
         and _has_any(desc, ("nach links gedreht", "90° nach links", "90 grad nach links"))
@@ -113,6 +118,27 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
         m_top_kelle_three_way_valve_hint
         and _has_any(desc, ("hauptdiagonal gespiegelt", "diagonal gespiegelt"))
     )
+
+    if vertically_mirrored_square_kelle_t_hint:
+        elements.append(
+            {
+                "kind": "VerticallyMirroredSquareKelleTGlyph",
+                "id": "vertically_mirrored_square_kelle_t",
+                "body_bbox": [0.020, 0.400, 0.960, 0.580],
+                "body_fill": "#d92645",
+                "body_stroke": "#a0a0a0",
+                "body_stroke_width": 0.040,
+                "connector": [[0.500, 0.000], [0.500, 0.400]],
+                "connector_stroke": "#808080",
+                "connector_width": 0.080,
+                "label": "T",
+                "label_center": [0.500, 0.660],
+                "label_fill": "#dedede",
+                "font_size": 0.440,
+                "font_weight": "600",
+            }
+        )
+        return elements
 
     if left_rotated_square_kelle_t_hint:
         elements.append(
@@ -774,12 +800,16 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
     for element in geometry_ir:
         kind = str(element.get("kind", ""))
         element_id = html.escape(str(element.get("id", kind)))
-        if kind in {"LeftRotatedSquareKelleTGlyph", "RightRotatedSquareKellePGlyph"}:
-            default_body_bbox = (
-                [0.378, 0.040, 0.467, 0.920]
-                if kind == "LeftRotatedSquareKelleTGlyph"
-                else [0.020, 0.389, 0.960, 0.511]
-            )
+        if kind in {
+            "VerticallyMirroredSquareKelleTGlyph",
+            "LeftRotatedSquareKelleTGlyph",
+            "RightRotatedSquareKellePGlyph",
+        }:
+            default_body_bbox = {
+                "VerticallyMirroredSquareKelleTGlyph": [0.020, 0.400, 0.960, 0.580],
+                "LeftRotatedSquareKelleTGlyph": [0.378, 0.040, 0.467, 0.920],
+                "RightRotatedSquareKellePGlyph": [0.020, 0.389, 0.960, 0.511],
+            }[kind]
             raw_body_bbox = element.get("body_bbox", default_body_bbox)
             if not isinstance(raw_body_bbox, list) or len(raw_body_bbox) != 4:
                 raw_body_bbox = default_body_bbox
@@ -794,11 +824,11 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
             body_sw = float(element.get("body_stroke_width", 0.040)) * min(w, h)
             connector_stroke = html.escape(str(element.get("connector_stroke", "#808080")))
             connector_sw = float(element.get("connector_width", 0.080)) * min(w, h)
-            default_connector = (
-                [[0.000, 0.500], [0.378, 0.500]]
-                if kind == "LeftRotatedSquareKelleTGlyph"
-                else [[0.500, 0.000], [0.500, 0.389]]
-            )
+            default_connector = {
+                "VerticallyMirroredSquareKelleTGlyph": [[0.500, 0.000], [0.500, 0.400]],
+                "LeftRotatedSquareKelleTGlyph": [[0.000, 0.500], [0.378, 0.500]],
+                "RightRotatedSquareKellePGlyph": [[0.500, 0.000], [0.500, 0.389]],
+            }[kind]
             raw_connector = element.get("connector", default_connector)
             if isinstance(raw_connector, list) and len(raw_connector) == 2:
                 points = [
@@ -817,11 +847,15 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
                 f'width="{_fmt(body_w)}" height="{_fmt(body_h)}" fill="{body_fill}" '
                 f'stroke="{body_stroke}" stroke-width="{_fmt(body_sw)}"/>'
             )
-            default_label_center = [0.611, 0.520] if kind == "LeftRotatedSquareKelleTGlyph" else [0.460, 0.656]
+            default_label_center = {
+                "VerticallyMirroredSquareKelleTGlyph": [0.500, 0.660],
+                "LeftRotatedSquareKelleTGlyph": [0.611, 0.520],
+                "RightRotatedSquareKellePGlyph": [0.460, 0.656],
+            }[kind]
             raw_label_center = element.get("label_center", default_label_center)
             if not isinstance(raw_label_center, list) or len(raw_label_center) != 2:
                 raw_label_center = default_label_center
-            default_label = "T" if kind == "LeftRotatedSquareKelleTGlyph" else "P"
+            default_label = "P" if kind == "RightRotatedSquareKellePGlyph" else "T"
             label = html.escape(str(element.get("label", default_label)))
             label_fill = html.escape(str(element.get("label_fill", "#dedede")))
             font_size = float(element.get("font_size", 0.440)) * min(w, h)
