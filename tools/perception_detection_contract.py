@@ -1397,16 +1397,6 @@ def write_text_glyph_evaluation_report(
 
 PLAN_B_PERCEPTION_TARGETS: list[dict[str, Any]] = [
     {
-        "variant": "AC0722_1_L",
-        "image_candidates": ["artifacts/images_to_convert/AC0722_1_L.jpg"],
-        "plan_b_reason": "Kompaktes links gedrehtes Kellen-Symbol mit rotem Quadrat und T-Glyph.",
-        "perception_question": "Können horizontaler Anschluss, Quadratgrundkörper und T-Glyph als getrennte Primitive erkannt werden?",
-        "expected_first_primitive": "left_connector_square_with_t_glyph",
-        "expected_candidate_kinds": {"rectangle", "line", "text_glyph"},
-        "expected_seed_kinds": {"RectangleBackground", "TextGlyph"},
-        "description": "Plan-B-Kandidat AC0722_1_L: Anschluss, Quadratgrundkörper und T-Glyph getrennt prüfen.",
-    },
-    {
         "variant": "AC0723_1_S",
         "image_candidates": ["artifacts/images_to_convert/AC0723_1_S.jpg"],
         "plan_b_reason": "Kompakte vertikal gespiegelte Kellen-Variante mit quadratischem Grundkörper.",
@@ -1445,6 +1435,16 @@ PLAN_B_PERCEPTION_TARGETS: list[dict[str, Any]] = [
         "expected_candidate_kinds": {"rectangle", "line"},
         "expected_seed_kinds": {"RectangleBackground", "HorizontalRule"},
         "description": "Plan-B-Kandidat AC0254_2: links gedrehte Klappe und drei Schließflächen getrennt prüfen.",
+    },
+    {
+        "variant": "AC0732_1_S",
+        "image_candidates": ["artifacts/images_to_convert/AC0732_1_S.jpg"],
+        "plan_b_reason": "Kleine kompakte Variante eines nach rechts gedrehten Symbols mit horizontal bleibendem P-Glyph.",
+        "perception_question": "Bleiben nach rechts gedrehte Grundgeometrie und horizontaler P-Glyph auch in der kleinen Variante getrennt erkennbar?",
+        "expected_first_primitive": "right_rotated_symbol_with_horizontal_p_glyph",
+        "expected_candidate_kinds": {"rectangle", "line", "text_glyph"},
+        "expected_seed_kinds": {"RectangleBackground", "TextGlyph"},
+        "description": "Plan-B-Kandidat AC0732_1_S: nach rechts gedrehte Grundgeometrie und horizontalen P-Glyph getrennt prüfen.",
     },
 ]
 

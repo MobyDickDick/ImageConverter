@@ -293,3 +293,18 @@ Review-Grenze. `AC0733_1_M` wurde aus Triage und PF8-Linkage entfernt; die
 Rotation lautet nun `AC0722_1_L`, `AC0723_1_S`, `AC0732_1_M`,
 `AC0732_1_L` und `AC0254_2`. Der neue AC0254-Kandidat bleibt mangels eines
 allgemeinen Rechteck-/Rule-Seeds zunächst `nur Sonderfall`.
+
+
+## Folgeaktualisierung Run OZ (2026-06-11)
+
+`AC0722_1_L` wurde im realen Non-Composite-Pfad als semantisches
+Quadrat-Kellen-Symbol erneut konvertiert. Das neue Geometry-IR trennt den
+horizontalen Anschluss, den roten Quadratgrundkörper und den horizontal
+bleibenden T-Glyph; alle Koordinaten bleiben größenrelativ.
+
+`mean_delta2` sinkt von `14995.260742` auf `4721.479004`,
+`normalized_mse` von `0.07686921` auf `0.02420340` und damit unter die
+Review-Grenze. `AC0722_1_L` wurde aus Triage und PF8-Linkage entfernt; die
+Rotation lautet nun `AC0723_1_S`, `AC0732_1_M`, `AC0732_1_L`, `AC0254_2`
+und `AC0732_1_S`. Der neue AC0732-Kandidat bleibt wegen einer priorisierten
+Kreisdetektion zunächst `noch nicht erkannt`.

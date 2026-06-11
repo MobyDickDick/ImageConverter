@@ -3625,3 +3625,12 @@ Ziel: Die Konvertierung soll strikt als **Kette** laufen:
 - **Perception-Lerneffekt:** Der Geometry-IR-Familienpfad ist über große und mittlere Realvariante generalisiert; PF8 benötigt weiterhin allgemeine Rechteck-/Text-Seeds statt des bislang unvollständigen Linienhinweises.
 - **Rotation:** `AC0733_1_M` wurde aus Triage und PF8-Linkage entfernt; `AC0254_2` füllt den fünften Platz auf und bleibt mit einer Linienerkennung ohne passenden Rechteck-/Rule-Seed zunächst `nur Sonderfall`.
 - **Nächster sinnvoller Schritt:** Die reguläre Plan-B-Rotation mit `AC0722_1_L.jpg` fortsetzen.
+
+
+### Fortschritt vs. Blocker (Session 2026-06-11, Plan-B AC0722_1_L Run OZ)
+
+- **Fortschritt:** `AC0722_1_L.jpg` wurde real re-konvertiert; ein neues beschreibungsgetriebenes Geometry-IR trennt horizontalen Anschluss, roten Quadratgrundkörper und horizontal bleibenden T-Glyph ohne variantenspezifische Pixelkoordinaten.
+- **Messwert:** `mean_delta2` sinkt von `14995.260742` auf `4721.479004` (`-68.51 %`), `normalized_mse` von `0.07686921` auf `0.02420340` und damit unter die Review-Grenze `0.04594568`.
+- **Perception-Lerneffekt:** Das Beschreibungs-Geometry-IR generalisiert die semantische Elementtrennung; PF8 benötigt weiterhin allgemeine Rechteck-/Text-Seeds statt der priorisierten Kreisdetektion.
+- **Rotation:** `AC0722_1_L` wurde aus Triage und PF8-Linkage entfernt; `AC0732_1_S` füllt den fünften Platz auf und ist zunächst `noch nicht erkannt`.
+- **Nächster sinnvoller Schritt:** Die reguläre Plan-B-Rotation mit `AC0723_1_S.jpg` fortsetzen.
