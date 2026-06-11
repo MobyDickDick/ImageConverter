@@ -3589,3 +3589,12 @@ Ziel: Die Konvertierung soll strikt als **Kette** laufen:
 - **Perception-Lerneffekt:** Beschreibung und Rasterfit generalisieren die rechte Winkelkontur und den gesättigten Verlauf ohne AC0150-spezifische Koordinaten; `AC0150_2` wurde aus Triage und PF8-Linkage entfernt.
 - **Rotation:** `AC0722_1_L` füllt den fünften Platz auf und ist wegen einer fälschlich priorisierten Kreisdetektion zunächst `noch nicht erkannt`.
 - **Nächster sinnvoller Schritt:** Die reguläre Plan-B-Rotation mit `AC0253_1.jpg` fortsetzen.
+
+
+### Fortschritt vs. Blocker (Session 2026-06-11, Plan-B AC0253_1 Run OV)
+
+- **Fortschritt:** `AC0253_1.jpg` wurde real re-konvertiert; das allgemeine AC0251-Pumpen-Geometry-IR rendert den Kreisgrundkörper und das um 180 Grad gedrehte Innendreieck als getrennte Primitive und passt sie per Rasterregistrierung an die 31x31-Variante an.
+- **Qualität:** `mean_delta2` sank von `20431.550781` auf `3327.906250` (`-83.71 %`), `normalized_mse` von `0.10473690` auf `0.01705962` und damit unter die Review-Grenze `0.04594568`.
+- **Perception-Lerneffekt:** Der zuvor für eine referenzierende Pumpenvariante eingeführte Kreis-/Dreieck-Pfad ist ohne AC0253-spezifische Koordinaten auf die AC0253-Familie übertragbar und damit im realen Lauf `generalisiert` bestätigt.
+- **Rotation:** `AC0253_1` wurde aus Triage und PF8-Linkage entfernt; `AC0723_1_S` füllt den fünften Platz auf und bleibt mangels allgemeinem Rechteck-Seed zunächst `nur Sonderfall`.
+- **Nächster sinnvoller Schritt:** Die reguläre Plan-B-Rotation mit `AC0551_2_M.jpg` fortsetzen.
