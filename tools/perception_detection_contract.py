@@ -1397,16 +1397,6 @@ def write_text_glyph_evaluation_report(
 
 PLAN_B_PERCEPTION_TARGETS: list[dict[str, Any]] = [
     {
-        "variant": "AC0551_2_M",
-        "image_candidates": ["artifacts/images_to_convert/AC0551_2_M.jpg"],
-        "plan_b_reason": "Zweite kompakte Linien-/Rechteckvariante mit hoher Diff-Abweichung.",
-        "perception_question": "Bleiben Außenrechteck, horizontale Teilungen und Winkelkontur auch in der zweiten Variante getrennt erkennbar?",
-        "expected_first_primitive": "rectangle_horizontal_rules_and_chevron",
-        "expected_candidate_kinds": {"rectangle", "horizontal_rule", "line"},
-        "expected_seed_kinds": {"RectangleBackground", "HorizontalRule"},
-        "description": "Plan-B-Kandidat AC0551_2_M: Rechteck, Teilungslinien und Winkelkontur zuerst prüfen.",
-    },
-    {
         "variant": "AC0733_1_L",
         "image_candidates": ["artifacts/images_to_convert/AC0733_1_L.jpg"],
         "plan_b_reason": "Kompaktes gedrehtes Symbol mit horizontal bleibendem P-Glyph und hoher Diff-Abweichung.",
@@ -1445,6 +1435,16 @@ PLAN_B_PERCEPTION_TARGETS: list[dict[str, Any]] = [
         "expected_candidate_kinds": {"rectangle", "line"},
         "expected_seed_kinds": {"RectangleBackground"},
         "description": "Plan-B-Kandidat AC0723_1_S: vertikalen Anschluss und Quadratgrundkörper getrennt prüfen.",
+    },
+    {
+        "variant": "AC0732_1_M",
+        "image_candidates": ["artifacts/images_to_convert/AC0732_1_M.jpg"],
+        "plan_b_reason": "Mittlere kompakte Variante eines nach rechts gedrehten Symbols mit horizontal bleibendem P-Glyph.",
+        "perception_question": "Bleiben nach rechts gedrehte Grundgeometrie und horizontaler P-Glyph als getrennte Primitive erkennbar?",
+        "expected_first_primitive": "right_rotated_symbol_with_horizontal_p_glyph",
+        "expected_candidate_kinds": {"rectangle", "line", "text_glyph"},
+        "expected_seed_kinds": {"RectangleBackground", "TextGlyph"},
+        "description": "Plan-B-Kandidat AC0732_1_M: nach rechts gedrehte Grundgeometrie und horizontalen P-Glyph getrennt prüfen.",
     },
 ]
 

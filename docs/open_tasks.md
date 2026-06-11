@@ -3598,3 +3598,12 @@ Ziel: Die Konvertierung soll strikt als **Kette** laufen:
 - **Perception-Lerneffekt:** Der zuvor für eine referenzierende Pumpenvariante eingeführte Kreis-/Dreieck-Pfad ist ohne AC0253-spezifische Koordinaten auf die AC0253-Familie übertragbar und damit im realen Lauf `generalisiert` bestätigt.
 - **Rotation:** `AC0253_1` wurde aus Triage und PF8-Linkage entfernt; `AC0723_1_S` füllt den fünften Platz auf und bleibt mangels allgemeinem Rechteck-Seed zunächst `nur Sonderfall`.
 - **Nächster sinnvoller Schritt:** Die reguläre Plan-B-Rotation mit `AC0551_2_M.jpg` fortsetzen.
+
+
+### Fortschritt vs. Blocker (Session 2026-06-11, Plan-B AC0551_2_M Run OW)
+
+- **Fortschritt:** `AC0551_2_M.jpg` wurde real re-konvertiert; der allgemeine Chevron-Fit aus der ersten AC0551-Variante passt Punktfolge, Breite, Einzug, Scheitelpunkt, Farbe und Verlauf ohne neue variantenspezifische Koordinaten an.
+- **Qualität:** `mean_delta2` sank von `18425.703125` auf `3294.235596` (`-82.12 %`), `normalized_mse` von `0.09445446` auf `0.01688702` und damit unter die Review-Grenze `0.04594568`.
+- **Perception-Lerneffekt:** Die Winkelkontur ist als beschreibungsgetriebener Familienpfad `generalisiert`; das akzeptierte SVG enthält genau eine Polylinie und keine erfundenen Diagonalen oder Glyphen.
+- **Rotation:** `AC0551_2_M` wurde aus Triage und PF8-Linkage entfernt; `AC0732_1_M` füllt den fünften Platz auf und ist wegen einer priorisierten Kreisdetektion zunächst `noch nicht erkannt`.
+- **Nächster sinnvoller Schritt:** Die reguläre Plan-B-Rotation mit `AC0733_1_L.jpg` fortsetzen.
