@@ -553,6 +553,7 @@ DESCRIPTION_DRIVEN_GEOMETRY_IR_KINDS = {
     "RightRotatedTopKelleThreeWayValveGlyph",
     "Rotated180TopKelleThreeWayValveGlyph",
     "MainDiagonalMirroredTopKelleThreeWayValveGlyph",
+    "RightRotatedSquareKellePGlyph",
 }
 
 
@@ -565,6 +566,7 @@ SEMANTIC_GEOMETRY_IR_KINDS = {
     "RightRotatedTopKelleThreeWayValveGlyph",
     "Rotated180TopKelleThreeWayValveGlyph",
     "MainDiagonalMirroredTopKelleThreeWayValveGlyph",
+    "RightRotatedSquareKellePGlyph",
 }
 
 

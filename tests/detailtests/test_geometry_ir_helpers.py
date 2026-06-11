@@ -558,3 +558,30 @@ def test_renders_pump_triangle_relative_to_its_circle():
     assert 'id="pump_circle"' in svg
     assert 'id="pump_triangle"' in svg
     assert "<polygon" in svg
+
+
+def test_build_geometry_ir_models_ac0733_right_rotated_square_kelle_with_horizontal_p() -> None:
+    ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
+        'Wie AC0733, aber nach rechts gedreht, Text immer noch horizontal "P"'
+    )
+
+    assert len(ir) == 1
+    assert ir[0]["kind"] == "RightRotatedSquareKellePGlyph"
+    assert ir[0]["body_bbox"] == [0.020, 0.389, 0.960, 0.511]
+    assert ir[0]["connector"] == [[0.500, 0.000], [0.500, 0.389]]
+    assert ir[0]["label"] == "P"
+
+
+def test_render_geometry_ir_keeps_ac0733_p_horizontal_and_separate_from_body() -> None:
+    ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
+        'Wie AC0733, aber nach rechts gedreht, Text immer noch horizontal "P"'
+    )
+
+    svg = geometry_ir_helpers.renderGeometryIrToSvgImpl(25, 45, ir)
+
+    assert 'id="right_rotated_square_kelle_p_connector"' in svg
+    assert 'id="right_rotated_square_kelle_p_body"' in svg
+    assert 'id="right_rotated_square_kelle_p_label"' in svg
+    assert '>P</text>' in svg
+    assert "rotate(" not in svg
+    assert "<image" not in svg

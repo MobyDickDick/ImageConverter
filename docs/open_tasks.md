@@ -3607,3 +3607,12 @@ Ziel: Die Konvertierung soll strikt als **Kette** laufen:
 - **Perception-Lerneffekt:** Die Winkelkontur ist als beschreibungsgetriebener Familienpfad `generalisiert`; das akzeptierte SVG enthält genau eine Polylinie und keine erfundenen Diagonalen oder Glyphen.
 - **Rotation:** `AC0551_2_M` wurde aus Triage und PF8-Linkage entfernt; `AC0732_1_M` füllt den fünften Platz auf und ist wegen einer priorisierten Kreisdetektion zunächst `noch nicht erkannt`.
 - **Nächster sinnvoller Schritt:** Die reguläre Plan-B-Rotation mit `AC0733_1_L.jpg` fortsetzen.
+
+
+### Fortschritt vs. Blocker (Session 2026-06-11, Plan-B AC0733_1_L Run OX)
+
+- **Fortschritt:** `AC0733_1_L.jpg` wurde real re-konvertiert; ein neues beschreibungsgetriebenes Geometry-IR trennt Anschluss, roten Quadratgrundkörper und horizontal bleibenden P-Glyph und lässt die bestehende Rasterregistrierung die größenrelativen Familienparameter anpassen.
+- **Messwert:** `mean_delta2` sinkt von `17993.140625` auf `2707.703125` (`-84.95 %`), `normalized_mse` von `0.09223704` auf `0.01388032` und damit unter die Review-Grenze `0.04594568`.
+- **Perception-Lerneffekt:** Das Beschreibungs-Geometry-IR ist generalisiert; PF8 erkennt im Raster bislang nur den Anschluss als Linie und benötigt für eine vollständige vorgelagerte Generalisierung weiterhin Rechteck-/Text-Seeds.
+- **Rotation:** `AC0733_1_L` wurde aus Triage und PF8-Linkage entfernt; `AC0732_1_L` füllt den fünften Platz auf und ist wegen einer priorisierten Kreisdetektion zunächst `noch nicht erkannt`.
+- **Nächster sinnvoller Schritt:** Die reguläre Plan-B-Rotation mit `AC0733_1_M.jpg` fortsetzen.

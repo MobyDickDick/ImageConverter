@@ -261,3 +261,19 @@ Review-Grenze. `AC0551_2_M` wurde aus Triage und PF8-Linkage entfernt; die
 Rotation lautet nun `AC0733_1_L`, `AC0733_1_M`, `AC0722_1_L`,
 `AC0723_1_S` und `AC0732_1_M`. Der neue Kandidat wird wegen einer
 priorisierten Kreisdetektion zunächst als `noch nicht erkannt` eingestuft.
+
+
+## Folgeaktualisierung Run OX (2026-06-11)
+
+`AC0733_1_L` wurde im realen Non-Composite-Pfad als semantisches
+Quadrat-Kellen-Symbol erneut konvertiert. Das neue Geometry-IR trennt den
+vertikalen Anschluss, den roten Quadratgrundkörper und den horizontal
+bleibenden P-Glyph; die Rasterregistrierung passt Lage und Skalierung an die
+25x45-Variante an, ohne den Text zu rotieren.
+
+`mean_delta2` sinkt von `17993.140625` auf `2707.703125`,
+`normalized_mse` von `0.09223704` auf `0.01388032` und damit unter die
+Review-Grenze. `AC0733_1_L` wurde aus Triage und PF8-Linkage entfernt; die
+Rotation lautet nun `AC0733_1_M`, `AC0722_1_L`, `AC0723_1_S`,
+`AC0732_1_M` und `AC0732_1_L`. Der neue AC0732-Kandidat bleibt wegen einer
+priorisierten Kreisdetektion zunächst `noch nicht erkannt`.
