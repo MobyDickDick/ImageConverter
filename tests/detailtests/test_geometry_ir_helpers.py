@@ -589,6 +589,35 @@ def test_render_geometry_ir_keeps_ac0722_t_horizontal_and_separate_from_body() -
     assert "<image" not in svg
 
 
+
+def test_build_geometry_ir_models_ac0723_vertically_mirrored_square_kelle_with_t() -> None:
+    ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
+        "Wie AC0701: Kelle, aber mit Quadrat anstelle von Kreis oben. "
+        "Geometrische Variante: Vertikal gespiegelt."
+    )
+
+    assert len(ir) == 1
+    assert ir[0]["kind"] == "VerticallyMirroredSquareKelleTGlyph"
+    assert ir[0]["body_bbox"] == [0.020, 0.400, 0.960, 0.580]
+    assert ir[0]["connector"] == [[0.500, 0.000], [0.500, 0.400]]
+    assert ir[0]["label"] == "T"
+
+
+def test_render_geometry_ir_keeps_ac0723_t_horizontal_and_separate_from_body() -> None:
+    ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
+        "Wie AC0701: Kelle, aber mit Quadrat anstelle von Kreis oben. "
+        "Geometrische Variante: Vertikal gespiegelt."
+    )
+
+    svg = geometry_ir_helpers.renderGeometryIrToSvgImpl(15, 25, ir)
+
+    assert 'id="vertically_mirrored_square_kelle_t_connector"' in svg
+    assert 'id="vertically_mirrored_square_kelle_t_body"' in svg
+    assert 'id="vertically_mirrored_square_kelle_t_label"' in svg
+    assert ">T</text>" in svg
+    assert "rotate(" not in svg
+    assert "<image" not in svg
+
 def test_build_geometry_ir_models_ac0733_right_rotated_square_kelle_with_horizontal_p() -> None:
     ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
         'Wie AC0733, aber nach rechts gedreht, Text immer noch horizontal "P"'

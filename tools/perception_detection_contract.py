@@ -1397,16 +1397,6 @@ def write_text_glyph_evaluation_report(
 
 PLAN_B_PERCEPTION_TARGETS: list[dict[str, Any]] = [
     {
-        "variant": "AC0723_1_S",
-        "image_candidates": ["artifacts/images_to_convert/AC0723_1_S.jpg"],
-        "plan_b_reason": "Kompakte vertikal gespiegelte Kellen-Variante mit quadratischem Grundkörper.",
-        "perception_question": "Können vertikaler Anschluss und Quadratgrundkörper als getrennte Primitive erkannt werden?",
-        "expected_first_primitive": "vertical_connector_with_square",
-        "expected_candidate_kinds": {"rectangle", "line"},
-        "expected_seed_kinds": {"RectangleBackground"},
-        "description": "Plan-B-Kandidat AC0723_1_S: vertikalen Anschluss und Quadratgrundkörper getrennt prüfen.",
-    },
-    {
         "variant": "AC0732_1_M",
         "image_candidates": ["artifacts/images_to_convert/AC0732_1_M.jpg"],
         "plan_b_reason": "Mittlere kompakte Variante eines nach rechts gedrehten Symbols mit horizontal bleibendem P-Glyph.",
@@ -1445,6 +1435,16 @@ PLAN_B_PERCEPTION_TARGETS: list[dict[str, Any]] = [
         "expected_candidate_kinds": {"rectangle", "line", "text_glyph"},
         "expected_seed_kinds": {"RectangleBackground", "TextGlyph"},
         "description": "Plan-B-Kandidat AC0732_1_S: nach rechts gedrehte Grundgeometrie und horizontalen P-Glyph getrennt prüfen.",
+    },
+    {
+        "variant": "AC0701_1_S",
+        "image_candidates": ["artifacts/images_to_convert/AC0701_1_S.jpg"],
+        "plan_b_reason": "Kompakte aufrechte Kellen-Variante mit quadratischem Grundkörper und unterem Anschluss.",
+        "perception_question": "Können Quadratgrundkörper und unterer vertikaler Anschluss als getrennte Primitive erkannt werden?",
+        "expected_first_primitive": "square_with_lower_vertical_connector",
+        "expected_candidate_kinds": {"rectangle", "line"},
+        "expected_seed_kinds": {"RectangleBackground"},
+        "description": "Plan-B-Kandidat AC0701_1_S: Quadratgrundkörper und unteren vertikalen Anschluss getrennt prüfen.",
     },
 ]
 

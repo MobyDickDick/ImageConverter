@@ -11,81 +11,6 @@
   "records": [
     {
       "schema_version": "plan_b_perception_linkage_record_v1",
-      "variant": "AC0723_1_S",
-      "image_path": "artifacts/images_to_convert/AC0723_1_S.jpg",
-      "status": "evaluated",
-      "plan_b_reason": "Kompakte vertikal gespiegelte Kellen-Variante mit quadratischem Grundk\u00f6rper.",
-      "description": "Plan-B-Kandidat AC0723_1_S: vertikalen Anschluss und Quadratgrundk\u00f6rper getrennt pr\u00fcfen.",
-      "perception_lerneffekt": {
-        "question": "K\u00f6nnen vertikaler Anschluss und Quadratgrundk\u00f6rper als getrennte Primitive erkannt werden?",
-        "expected_first_primitive": "vertical_connector_with_square",
-        "expected_candidate_kinds": [
-          "line",
-          "rectangle"
-        ],
-        "expected_seed_kinds": [
-          "RectangleBackground"
-        ],
-        "decision": "nur Sonderfall",
-        "matched_candidate_kinds": [
-          "line"
-        ],
-        "matched_seed_kinds": [],
-        "top_candidate_kind": "line",
-        "top_confidence": 0.884,
-        "next_action": "Als Perception-Hinweis dokumentieren, aber noch keinen generischen Seed erzwingen."
-      },
-      "candidate_count": 2,
-      "top_candidate": {
-        "schema_version": "perception_primitive_candidate_v1",
-        "kind": "line",
-        "bbox": {
-          "x": 7.0,
-          "y": 0.0,
-          "width": 1.0,
-          "height": 13.0
-        },
-        "center": {
-          "x": 7.5,
-          "y": 6.5
-        },
-        "geometry": {
-          "orientation": "vertical",
-          "x_center": 7.5,
-          "y_top": 0.0,
-          "y_bottom": 13.0,
-          "length_px": 13.0,
-          "stroke_width_px": 1.0,
-          "angle_deg": 90.0
-        },
-        "color": {
-          "fill_rgb": null,
-          "stroke_rgb": null,
-          "fill_hex": null,
-          "stroke_hex": null,
-          "fill_confidence": 0.0,
-          "stroke_confidence": 0.0
-        },
-        "confidence": 0.884,
-        "roi": {
-          "type": "image",
-          "hint": "full_image",
-          "bbox": {
-            "x": 0.0,
-            "y": 0.0,
-            "width": 15.0,
-            "height": 25.0
-          }
-        },
-        "evidence": {
-          "detector": "detect_vertical_lines",
-          "edge_model": "canny+hough_lines_p"
-        },
-        "source": "hough"
-      }
-    },
-    {
-      "schema_version": "plan_b_perception_linkage_record_v1",
       "variant": "AC0732_1_M",
       "image_path": "artifacts/images_to_convert/AC0732_1_M.jpg",
       "status": "evaluated",
@@ -429,14 +354,41 @@
         },
         "source": "pf8_plan_b_perception_linkage"
       }
+    },
+    {
+      "schema_version": "plan_b_perception_linkage_record_v1",
+      "variant": "AC0701_1_S",
+      "image_path": "artifacts/images_to_convert/AC0701_1_S.jpg",
+      "status": "evaluated",
+      "plan_b_reason": "Kompakte aufrechte Kellen-Variante mit quadratischem Grundk\u00f6rper und unterem Anschluss.",
+      "description": "Plan-B-Kandidat AC0701_1_S: Quadratgrundk\u00f6rper und unteren vertikalen Anschluss getrennt pr\u00fcfen.",
+      "perception_lerneffekt": {
+        "question": "K\u00f6nnen Quadratgrundk\u00f6rper und unterer vertikaler Anschluss als getrennte Primitive erkannt werden?",
+        "expected_first_primitive": "square_with_lower_vertical_connector",
+        "expected_candidate_kinds": [
+          "line",
+          "rectangle"
+        ],
+        "expected_seed_kinds": [
+          "RectangleBackground"
+        ],
+        "decision": "noch nicht erkannt",
+        "matched_candidate_kinds": [],
+        "matched_seed_kinds": [],
+        "top_candidate_kind": null,
+        "top_confidence": null,
+        "next_action": "Vor der Plan-B-Umsetzung zus\u00e4tzliche Detector-/ROI-Regel oder manuelle Seed-Annahme festhalten."
+      },
+      "candidate_count": 0,
+      "top_candidate": null
     }
   ],
   "metrics": {
     "samples": 5,
     "evaluated_samples": 5,
     "generalisiert": 0,
-    "nur_sonderfall": 2,
-    "noch_nicht_erkannt": 3,
+    "nur_sonderfall": 1,
+    "noch_nicht_erkannt": 4,
     "all_have_perception_lerneffekt": true
   }
 }

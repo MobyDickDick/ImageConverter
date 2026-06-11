@@ -308,3 +308,18 @@ Review-Grenze. `AC0722_1_L` wurde aus Triage und PF8-Linkage entfernt; die
 Rotation lautet nun `AC0723_1_S`, `AC0732_1_M`, `AC0732_1_L`, `AC0254_2`
 und `AC0732_1_S`. Der neue AC0732-Kandidat bleibt wegen einer priorisierten
 Kreisdetektion zunächst `noch nicht erkannt`.
+
+
+## Folgeaktualisierung Run PA (2026-06-11)
+
+`AC0723_1_S` wurde im realen Non-Composite-Pfad als vertikal gespiegeltes
+Quadrat-Kellen-Symbol erneut konvertiert. Das neue Geometry-IR trennt den oberen
+vertikalen Anschluss, den roten Quadratgrundkörper und den horizontal bleibenden
+T-Glyph; alle Koordinaten bleiben größenrelativ.
+
+`mean_delta2` sinkt von `14441.021484` auf `2197.709229`,
+`normalized_mse` von `0.07402805` auf `0.01126597` und damit unter die
+Review-Grenze. `AC0723_1_S` wurde aus Triage und PF8-Linkage entfernt; die
+Rotation lautet nun `AC0732_1_M`, `AC0732_1_L`, `AC0254_2`, `AC0732_1_S`
+und `AC0701_1_S`. Der neue AC0701-Kandidat ist mangels passender allgemeiner
+Rechteck-/Linienkandidaten zunächst `noch nicht erkannt`.
