@@ -228,3 +228,19 @@ Review-Grenze. `AC0150_2` wurde aus Triage und PF8-Linkage entfernt; die
 Rotation lautet nun `AC0253_1`, `AC0551_2_M`, `AC0733_1_L`, `AC0733_1_M`
 und `AC0722_1_L`. Der neue AC0722-Kandidat ist in der Perception-Auswertung
 wegen einer fälschlich priorisierten Kreisdetektion `noch nicht erkannt`.
+
+
+## Folgeaktualisierung Run OV (2026-06-11)
+
+`AC0253_1` wurde im realen Non-Composite-Pfad aus der AC0251-referenzierenden
+Familienbeschreibung erneut konvertiert. Das bereits allgemeine Geometry-IR
+trennt Kreisgrundkörper und um 180 Grad gedrehtes Innendreieck; die
+Rasterregistrierung passt Farben und Geometrie an die 31x31-Variante an.
+
+`mean_delta2` sinkt von `20431.550781` auf `3327.906250`,
+`normalized_mse` von `0.10473690` auf `0.01705962` und damit unter die
+Review-Grenze. `AC0253_1` wurde aus Triage und PF8-Linkage entfernt; die
+Rotation lautet nun `AC0551_2_M`, `AC0733_1_L`, `AC0733_1_M`,
+`AC0722_1_L` und `AC0723_1_S`. Der neue AC0723-Kandidat wird als
+`nur Sonderfall` bewertet, weil zwar der Anschluss als Linie erkannt wird,
+aber noch kein allgemeiner Rechteck-Seed vorliegt.

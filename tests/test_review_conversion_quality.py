@@ -168,6 +168,23 @@ def test_ac0403_1_m_committed_svg_preserves_rotated_pump_quality() -> None:
     assert 'id="pump_triangle"' in svg
 
 
+def test_ac0253_1_committed_svg_preserves_rotated_pump_quality() -> None:
+    record = review_variant("AC0253_1", source="diff_inventory")
+
+    assert record.status == "ok"
+    assert record.width == 31
+    assert record.height == 31
+    assert record.mean_delta2 == pytest.approx(3327.90625)
+    assert record.normalized_mse is not None
+    assert record.normalized_mse < 0.045945679012345676
+
+    svg = Path(record.svg_path).read_text(encoding="utf-8")
+    assert svg.count("<ellipse") == 1
+    assert svg.count("<polygon") == 1
+    assert 'id="pump_circle"' in svg
+    assert 'id="pump_triangle"' in svg
+
+
 def test_ac0150_2_committed_svg_preserves_saturated_chevron_quality() -> None:
     record = review_variant("AC0150_2", source="diff_inventory")
 
