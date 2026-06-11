@@ -244,3 +244,20 @@ Rotation lautet nun `AC0551_2_M`, `AC0733_1_L`, `AC0733_1_M`,
 `AC0722_1_L` und `AC0723_1_S`. Der neue AC0723-Kandidat wird als
 `nur Sonderfall` bewertet, weil zwar der Anschluss als Linie erkannt wird,
 aber noch kein allgemeiner Rechteck-Seed vorliegt.
+
+
+## Folgeaktualisierung Run OW (2026-06-11)
+
+`AC0551_2_M` wurde im realen Non-Composite-Pfad erneut konvertiert. Der für
+die erste Familienvariante eingeführte allgemeine Chevron-Fit überträgt die
+beschriebene Punktfolge Oben-Mitte → Rechts-Mitte → Unten-Mitte ohne neue
+Sonderfalllogik auf die zweite Variante. Das akzeptierte 30x60-SVG enthält
+genau eine rasterangepasste Winkelkontur und keine erfundenen Diagonalen oder
+Glyphen.
+
+`mean_delta2` sinkt von `18425.703125` auf `3294.235596`,
+`normalized_mse` von `0.09445446` auf `0.01688702` und damit unter die
+Review-Grenze. `AC0551_2_M` wurde aus Triage und PF8-Linkage entfernt; die
+Rotation lautet nun `AC0733_1_L`, `AC0733_1_M`, `AC0722_1_L`,
+`AC0723_1_S` und `AC0732_1_M`. Der neue Kandidat wird wegen einer
+priorisierten Kreisdetektion zunächst als `noch nicht erkannt` eingestuft.

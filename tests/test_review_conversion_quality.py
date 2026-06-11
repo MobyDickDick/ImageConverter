@@ -305,3 +305,20 @@ def test_ac0130_committed_svg_preserves_full_size_cross_quality() -> None:
     assert 'id="minus_glyph_1"' in svg
     assert 'id="minus_glyph_2"' in svg
     assert "<image" not in svg
+
+
+def test_ac0551_2_m_committed_svg_preserves_chevron_quality() -> None:
+    record = review_variant("AC0551_2_M", source="diff_inventory")
+
+    assert record.status == "ok"
+    assert record.width == 30
+    assert record.height == 60
+    assert record.mean_delta2 == pytest.approx(3294.235595703125)
+    assert record.normalized_mse is not None
+    assert record.normalized_mse < 0.045945679012345676
+
+    svg = Path(record.svg_path).read_text(encoding="utf-8")
+    assert svg.count("<path") == 1
+    assert svg.count("<line") == 0
+    assert 'stroke="#e7e6e7"' in svg
+    assert 'fill="#4c' in svg
