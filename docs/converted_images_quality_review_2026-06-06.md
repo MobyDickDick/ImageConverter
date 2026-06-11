@@ -277,3 +277,19 @@ Review-Grenze. `AC0733_1_L` wurde aus Triage und PF8-Linkage entfernt; die
 Rotation lautet nun `AC0733_1_M`, `AC0722_1_L`, `AC0723_1_S`,
 `AC0732_1_M` und `AC0732_1_L`. Der neue AC0732-Kandidat bleibt wegen einer
 priorisierten Kreisdetektion zunächst `noch nicht erkannt`.
+
+
+## Folgeaktualisierung Run OY (2026-06-11)
+
+`AC0733_1_M` wurde im realen Non-Composite-Pfad mit demselben semantischen
+Quadrat-Kellen-Geometry-IR wie die große Variante erneut konvertiert. Anschluss,
+roter Quadratgrundkörper und horizontaler P-Glyph bleiben getrennte Elemente;
+die Rasterregistrierung passt ausschließlich größenrelative Lage-, Skalierungs-
+und Strichparameter an die 20x35-Variante an.
+
+`mean_delta2` sinkt von `17248.937500` auf `3555.331543`,
+`normalized_mse` von `0.08842208` auf `0.01822546` und damit unter die
+Review-Grenze. `AC0733_1_M` wurde aus Triage und PF8-Linkage entfernt; die
+Rotation lautet nun `AC0722_1_L`, `AC0723_1_S`, `AC0732_1_M`,
+`AC0732_1_L` und `AC0254_2`. Der neue AC0254-Kandidat bleibt mangels eines
+allgemeinen Rechteck-/Rule-Seeds zunächst `nur Sonderfall`.

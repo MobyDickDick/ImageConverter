@@ -341,3 +341,22 @@ def test_ac0733_1_l_committed_svg_preserves_horizontal_p_kelle_quality() -> None
     assert ">P</text>" in svg
     assert "rotate(" not in svg
     assert "<image" not in svg
+
+
+def test_ac0733_1_m_committed_svg_preserves_horizontal_p_kelle_quality() -> None:
+    record = review_variant("AC0733_1_M", source="diff_inventory")
+
+    assert record.status == "ok"
+    assert record.width == 20
+    assert record.height == 35
+    assert record.mean_delta2 == pytest.approx(3555.33154296875)
+    assert record.normalized_mse is not None
+    assert record.normalized_mse < 0.045945679012345676
+
+    svg = Path(record.svg_path).read_text(encoding="utf-8")
+    assert 'id="right_rotated_square_kelle_p_connector"' in svg
+    assert 'id="right_rotated_square_kelle_p_body"' in svg
+    assert 'id="right_rotated_square_kelle_p_label"' in svg
+    assert ">P</text>" in svg
+    assert "rotate(" not in svg
+    assert "<image" not in svg
