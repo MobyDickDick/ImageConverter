@@ -9,6 +9,8 @@ All notable changes to ImageConverter will be documented in this file.
 
 ## Unreleased
 
+- Plan-B Run OX adds a description-driven Geometry-IR for the right-rotated AC0733 square-kelle symbol while keeping its P glyph horizontal, reducing `AC0733_1_L` from `normalized_mse=0.09223704` to `0.01388032` and rotating the queue to `AC0733_1_M` through `AC0732_1_L`.
+
 - Plan-B Run OW confirms that the description-driven, raster-fitted AC0551 chevron topology generalizes to `AC0551_2_M`, reducing `normalized_mse` from `0.09445446` to `0.01688702` and rotating the queue to `AC0733_1_L` through `AC0732_1_M`.
 
 - Plan-B Run OV validates the description-driven pump Geometry-IR on `AC0253_1`, reducing `normalized_mse` from `0.10473690` to `0.01705962` and rotating the queue to `AC0551_2_M` through `AC0723_1_S`.

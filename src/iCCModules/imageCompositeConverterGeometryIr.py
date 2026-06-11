@@ -40,6 +40,11 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
     darker_pump_circle_hint = pump_symbol_hint and _has_any(
         desc, ("kreis ein wenig dunkler", "kreis etwas dunkler")
     )
+    right_rotated_square_kelle_p_hint = (
+        "ac0733" in desc
+        and _has_any(desc, ("nach rechts gedreht", "90° nach rechts", "90 grad nach rechts"))
+        and _has_any(desc, ('horizontal "p"', "horizontal 'p'", "text immer noch horizontal"))
+    )
     compressor_hint = _has_any(desc, ("kompressor", "kopressor"))
     upward_compressor_hint = compressor_hint and _has_any(desc, ("nach oben", "oben", "aufwärts", "aufwaerts"))
     grey_background_compressor_hint = upward_compressor_hint and _has_any(
@@ -103,6 +108,27 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
         m_top_kelle_three_way_valve_hint
         and _has_any(desc, ("hauptdiagonal gespiegelt", "diagonal gespiegelt"))
     )
+
+    if right_rotated_square_kelle_p_hint:
+        elements.append(
+            {
+                "kind": "RightRotatedSquareKellePGlyph",
+                "id": "right_rotated_square_kelle_p",
+                "body_bbox": [0.020, 0.389, 0.960, 0.511],
+                "body_fill": "#d92645",
+                "body_stroke": "#a0a0a0",
+                "body_stroke_width": 0.040,
+                "connector": [[0.500, 0.000], [0.500, 0.389]],
+                "connector_stroke": "#808080",
+                "connector_width": 0.080,
+                "label": "P",
+                "label_center": [0.460, 0.656],
+                "label_fill": "#dedede",
+                "font_size": 0.440,
+                "font_weight": "600",
+            }
+        )
+        return elements
 
     if main_diagonal_mirrored_m_top_kelle_three_way_valve_hint:
         elements.append(
@@ -722,7 +748,53 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
     for element in geometry_ir:
         kind = str(element.get("kind", ""))
         element_id = html.escape(str(element.get("id", kind)))
-        if kind in valve_gradient_kinds:
+        if kind == "RightRotatedSquareKellePGlyph":
+            raw_body_bbox = element.get("body_bbox", [0.020, 0.389, 0.960, 0.511])
+            if not isinstance(raw_body_bbox, list) or len(raw_body_bbox) != 4:
+                raw_body_bbox = [0.020, 0.389, 0.960, 0.511]
+            body_x, body_y, body_w, body_h = (
+                float(raw_body_bbox[0]) * w,
+                float(raw_body_bbox[1]) * h,
+                float(raw_body_bbox[2]) * w,
+                float(raw_body_bbox[3]) * h,
+            )
+            body_fill = html.escape(str(element.get("body_fill", "#d92645")))
+            body_stroke = html.escape(str(element.get("body_stroke", "#a0a0a0")))
+            body_sw = float(element.get("body_stroke_width", 0.040)) * min(w, h)
+            connector_stroke = html.escape(str(element.get("connector_stroke", "#808080")))
+            connector_sw = float(element.get("connector_width", 0.080)) * min(w, h)
+            raw_connector = element.get("connector", [[0.500, 0.000], [0.500, 0.389]])
+            if isinstance(raw_connector, list) and len(raw_connector) == 2:
+                points = [
+                    (float(point[0]) * w, float(point[1]) * h)
+                    for point in raw_connector
+                    if isinstance(point, list) and len(point) == 2
+                ]
+                if len(points) == 2:
+                    (x0, y0), (x1, y1) = points
+                    svg.append(
+                        f'  <path id="{element_id}_connector" d="M {_fmt(x0)} {_fmt(y0)} L {_fmt(x1)} {_fmt(y1)}" '
+                        f'stroke="{connector_stroke}" stroke-width="{_fmt(connector_sw)}" fill="none" stroke-linecap="butt"/>'
+                    )
+            svg.append(
+                f'  <rect id="{element_id}_body" x="{_fmt(body_x)}" y="{_fmt(body_y)}" '
+                f'width="{_fmt(body_w)}" height="{_fmt(body_h)}" fill="{body_fill}" '
+                f'stroke="{body_stroke}" stroke-width="{_fmt(body_sw)}"/>'
+            )
+            raw_label_center = element.get("label_center", [0.460, 0.656])
+            if not isinstance(raw_label_center, list) or len(raw_label_center) != 2:
+                raw_label_center = [0.460, 0.656]
+            label = html.escape(str(element.get("label", "P")))
+            label_fill = html.escape(str(element.get("label_fill", "#dedede")))
+            font_size = float(element.get("font_size", 0.440)) * min(w, h)
+            font_weight = html.escape(str(element.get("font_weight", "600")))
+            svg.append(
+                f'  <text id="{element_id}_label" x="{_fmt(float(raw_label_center[0]) * w)}" '
+                f'y="{_fmt(float(raw_label_center[1]) * h)}" fill="{label_fill}" '
+                f'font-family="Arial, Helvetica, sans-serif" font-size="{_fmt(font_size)}" '
+                f'font-weight="{font_weight}" text-anchor="middle" dominant-baseline="middle">{label}</text>'
+            )
+        elif kind in valve_gradient_kinds:
             stroke = html.escape(str(element.get("stroke", "#969696")))
             connector_stroke = html.escape(str(element.get("connector_stroke", "#8f8f8f")))
             text_fill = html.escape(str(element.get("text_fill", "#666666")))
