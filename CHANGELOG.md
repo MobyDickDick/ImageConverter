@@ -9,6 +9,8 @@ All notable changes to ImageConverter will be documented in this file.
 
 ## Unreleased
 
+- The AC0010/AC0100 family regression now covers the unsuffixed `AC0010` base image together with `AC0100_L/M/S`, enforcing algorithmic Geometry-IR or raster-fit output, per-path quality limits, and the absence of sample/template fallback for every real family member.
+
 - Plan-B Run PA adds a description-driven Geometry-IR for the vertically mirrored AC0723 square-kelle symbol while keeping its T glyph horizontal, reducing `AC0723_1_S` from `normalized_mse=0.07402805` to `0.01126597` and rotating the queue to `AC0732_1_M` through `AC0701_1_S`.
 
 - Plan-B Run OZ adds a description-driven Geometry-IR for the left-rotated AC0722 square-kelle symbol while keeping its T glyph horizontal, reducing `AC0722_1_L` from `normalized_mse=0.07686921` to `0.02420340` and rotating the queue to `AC0723_1_S` through `AC0732_1_S`.
