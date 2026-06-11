@@ -560,6 +560,35 @@ def test_renders_pump_triangle_relative_to_its_circle():
     assert "<polygon" in svg
 
 
+def test_build_geometry_ir_models_ac0722_left_rotated_square_kelle_with_t() -> None:
+    ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
+        "Wie AC0701: Kelle, aber mit Quadrat anstelle von Kreis oben. "
+        "Geometrische Variante: 90° nach links gedreht."
+    )
+
+    assert len(ir) == 1
+    assert ir[0]["kind"] == "LeftRotatedSquareKelleTGlyph"
+    assert ir[0]["body_bbox"] == [0.378, 0.040, 0.467, 0.920]
+    assert ir[0]["connector"] == [[0.000, 0.500], [0.378, 0.500]]
+    assert ir[0]["label"] == "T"
+
+
+def test_render_geometry_ir_keeps_ac0722_t_horizontal_and_separate_from_body() -> None:
+    ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
+        "Wie AC0701: Kelle, aber mit Quadrat anstelle von Kreis oben. "
+        "Geometrische Variante: 90° nach links gedreht."
+    )
+
+    svg = geometry_ir_helpers.renderGeometryIrToSvgImpl(45, 25, ir)
+
+    assert 'id="left_rotated_square_kelle_t_connector"' in svg
+    assert 'id="left_rotated_square_kelle_t_body"' in svg
+    assert 'id="left_rotated_square_kelle_t_label"' in svg
+    assert '>T</text>' in svg
+    assert "rotate(" not in svg
+    assert "<image" not in svg
+
+
 def test_build_geometry_ir_models_ac0733_right_rotated_square_kelle_with_horizontal_p() -> None:
     ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
         'Wie AC0733, aber nach rechts gedreht, Text immer noch horizontal "P"'

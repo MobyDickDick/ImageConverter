@@ -11,96 +11,6 @@
   "records": [
     {
       "schema_version": "plan_b_perception_linkage_record_v1",
-      "variant": "AC0722_1_L",
-      "image_path": "artifacts/images_to_convert/AC0722_1_L.jpg",
-      "status": "evaluated",
-      "plan_b_reason": "Kompaktes links gedrehtes Kellen-Symbol mit rotem Quadrat und T-Glyph.",
-      "description": "Plan-B-Kandidat AC0722_1_L: Anschluss, Quadratgrundk\u00f6rper und T-Glyph getrennt pr\u00fcfen.",
-      "perception_lerneffekt": {
-        "question": "K\u00f6nnen horizontaler Anschluss, Quadratgrundk\u00f6rper und T-Glyph als getrennte Primitive erkannt werden?",
-        "expected_first_primitive": "left_connector_square_with_t_glyph",
-        "expected_candidate_kinds": [
-          "line",
-          "rectangle",
-          "text_glyph"
-        ],
-        "expected_seed_kinds": [
-          "RectangleBackground",
-          "TextGlyph"
-        ],
-        "decision": "noch nicht erkannt",
-        "matched_candidate_kinds": [],
-        "matched_seed_kinds": [],
-        "top_candidate_kind": "circle",
-        "top_confidence": 0.9632,
-        "next_action": "Vor der Plan-B-Umsetzung zus\u00e4tzliche Detector-/ROI-Regel oder manuelle Seed-Annahme festhalten."
-      },
-      "candidate_count": 3,
-      "top_candidate": {
-        "schema_version": "perception_primitive_candidate_v1",
-        "kind": "circle",
-        "bbox": {
-          "x": 26.0,
-          "y": 7.0,
-          "width": 16.0,
-          "height": 16.0
-        },
-        "center": {
-          "x": 34.0,
-          "y": 15.0
-        },
-        "geometry": {
-          "radius_px": 8.0,
-          "inner_radius_px": 0.0,
-          "stroke_width_px": 1.0,
-          "circularity": 1.0,
-          "ring": false,
-          "fill_ratio": 0.8782,
-          "geometry_ir_kind": "CircleBackground",
-          "geometry_ir_bbox": [
-            0.57778,
-            0.28,
-            0.35556,
-            0.64
-          ]
-        },
-        "color": {
-          "fill_rgb": [
-            220,
-            70,
-            102
-          ],
-          "stroke_rgb": [
-            227,
-            146,
-            163
-          ],
-          "fill_hex": "#DC4666",
-          "stroke_hex": "#E392A3",
-          "fill_confidence": 0.6375,
-          "stroke_confidence": 0.5132
-        },
-        "confidence": 0.9632,
-        "roi": {
-          "type": "image",
-          "hint": "full_image",
-          "bbox": {
-            "x": 0.0,
-            "y": 0.0,
-            "width": 45.0,
-            "height": 25.0
-          }
-        },
-        "evidence": {
-          "detector": "detect_circle_rings",
-          "detection_source": "hough",
-          "threshold_model": "hough_plus_foreground_mask"
-        },
-        "source": "pf8_plan_b_perception_linkage"
-      }
-    },
-    {
-      "schema_version": "plan_b_perception_linkage_record_v1",
       "variant": "AC0723_1_S",
       "image_path": "artifacts/images_to_convert/AC0723_1_S.jpg",
       "status": "evaluated",
@@ -428,6 +338,96 @@
           "edge_model": "canny+hough_lines_p"
         },
         "source": "hough"
+      }
+    },
+    {
+      "schema_version": "plan_b_perception_linkage_record_v1",
+      "variant": "AC0732_1_S",
+      "image_path": "artifacts/images_to_convert/AC0732_1_S.jpg",
+      "status": "evaluated",
+      "plan_b_reason": "Kleine kompakte Variante eines nach rechts gedrehten Symbols mit horizontal bleibendem P-Glyph.",
+      "description": "Plan-B-Kandidat AC0732_1_S: nach rechts gedrehte Grundgeometrie und horizontalen P-Glyph getrennt pr\u00fcfen.",
+      "perception_lerneffekt": {
+        "question": "Bleiben nach rechts gedrehte Grundgeometrie und horizontaler P-Glyph auch in der kleinen Variante getrennt erkennbar?",
+        "expected_first_primitive": "right_rotated_symbol_with_horizontal_p_glyph",
+        "expected_candidate_kinds": [
+          "line",
+          "rectangle",
+          "text_glyph"
+        ],
+        "expected_seed_kinds": [
+          "RectangleBackground",
+          "TextGlyph"
+        ],
+        "decision": "noch nicht erkannt",
+        "matched_candidate_kinds": [],
+        "matched_seed_kinds": [],
+        "top_candidate_kind": "circle",
+        "top_confidence": 0.9448,
+        "next_action": "Vor der Plan-B-Umsetzung zus\u00e4tzliche Detector-/ROI-Regel oder manuelle Seed-Annahme festhalten."
+      },
+      "candidate_count": 1,
+      "top_candidate": {
+        "schema_version": "perception_primitive_candidate_v1",
+        "kind": "circle",
+        "bbox": {
+          "x": 13.0,
+          "y": 1.0,
+          "width": 12.0,
+          "height": 12.0
+        },
+        "center": {
+          "x": 19.0,
+          "y": 7.0
+        },
+        "geometry": {
+          "radius_px": 6.0,
+          "inner_radius_px": 0.0,
+          "stroke_width_px": 1.0,
+          "circularity": 1.0,
+          "ring": false,
+          "fill_ratio": 0.7946,
+          "geometry_ir_kind": "CircleBackground",
+          "geometry_ir_bbox": [
+            0.52,
+            0.06667,
+            0.48,
+            0.8
+          ]
+        },
+        "color": {
+          "fill_rgb": [
+            224,
+            86,
+            115
+          ],
+          "stroke_rgb": [
+            223,
+            100,
+            127
+          ],
+          "fill_hex": "#E05673",
+          "stroke_hex": "#DF647F",
+          "fill_confidence": 0.628,
+          "stroke_confidence": 0.5839
+        },
+        "confidence": 0.9448,
+        "roi": {
+          "type": "image",
+          "hint": "full_image",
+          "bbox": {
+            "x": 0.0,
+            "y": 0.0,
+            "width": 25.0,
+            "height": 15.0
+          }
+        },
+        "evidence": {
+          "detector": "detect_circle_rings",
+          "detection_source": "hough",
+          "threshold_model": "hough_plus_foreground_mask"
+        },
+        "source": "pf8_plan_b_perception_linkage"
       }
     }
   ],
