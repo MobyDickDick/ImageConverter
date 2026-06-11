@@ -2,23 +2,22 @@
 
 Ziel: maximal **5** aktive JPG-Kandidaten, die derzeit noch nicht zufriedenstellend konvertieren, aber voraussichtlich nicht "hoffnungslos komplex" sind.
 
-## Aktuelle Kandidaten (Stand: 2026-06-11, Plan-B Run OX)
+## Aktuelle Kandidaten (Stand: 2026-06-11, Plan-B Run OY)
 
-Die reale AC0733-1-L-Re-Konvertierung führt erstmals eine semantische,
-beschreibungsgetriebene Quadrat-Kellen-Geometrie mit getrenntem Anschluss und
-horizontalem P-Glyph ein. Der reproduzierbare Review entfernt den
-abgeschlossenen Kandidaten und füllt die Rotation mit `AC0732_1_L` wieder auf
-fünf Diff-Fälle auf.
+Die mittlere AC0733-1-Variante bestätigt das im vorherigen Paket eingeführte
+beschreibungsgetriebene Quadrat-Kellen-Geometry-IR ohne neue Sonderfalllogik.
+Der reproduzierbare Review entfernt `AC0733_1_M` und füllt die Rotation mit
+`AC0254_2` wieder auf fünf Diff-Fälle auf.
 
 | Priorität | Kandidat | Quelle | `normalized_mse` | Auswahlgrund |
 | ---: | --- | --- | ---: | --- |
-| 1 | `AC0733_1_M.jpg` | Diff-Inventar | `0.08842208` | Mittlere Variante desselben gedrehten Symbols zur Prüfung der P-Glyph-Generalisierung. |
-| 2 | `AC0722_1_L.jpg` | Diff-Inventar | `0.07686921` | Kompaktes links gedrehtes Kellen-Symbol mit Anschluss, rotem Quadrat und T-Glyph. |
-| 3 | `AC0723_1_S.jpg` | Diff-Inventar | `0.07402805` | Kleine vertikal gespiegelte Kellen-Variante mit quadratischem Grundkörper und Anschluss. |
-| 4 | `AC0732_1_M.jpg` | Diff-Inventar | `0.06993533` | Mittlere nach rechts gedrehte Symbolvariante mit horizontal bleibendem P-Glyph. |
-| 5 | `AC0732_1_L.jpg` | Diff-Inventar | `0.06552955` | Große nach rechts gedrehte Symbolvariante zur Prüfung von Grundgeometrie und horizontalem P-Glyph. |
+| 1 | `AC0722_1_L.jpg` | Diff-Inventar | `0.07686921` | Kompaktes links gedrehtes Kellen-Symbol mit Anschluss, rotem Quadrat und T-Glyph. |
+| 2 | `AC0723_1_S.jpg` | Diff-Inventar | `0.07402805` | Kleine vertikal gespiegelte Kellen-Variante mit quadratischem Grundkörper und Anschluss. |
+| 3 | `AC0732_1_M.jpg` | Diff-Inventar | `0.06993533` | Mittlere nach rechts gedrehte Symbolvariante mit horizontal bleibendem P-Glyph. |
+| 4 | `AC0732_1_L.jpg` | Diff-Inventar | `0.06552955` | Große nach rechts gedrehte Symbolvariante zur Prüfung von Grundgeometrie und horizontalem P-Glyph. |
+| 5 | `AC0254_2.jpg` | Diff-Inventar | `0.06059016` | Kompakte links gedrehte Klappenvariante mit Rechteckgrundkörper und drei Schließflächen. |
 
-Die nächste reguläre Rotation beginnt mit `AC0733_1_M.jpg`.
+Die nächste reguläre Rotation beginnt mit `AC0722_1_L.jpg`.
 
 ## Perception-Lerneffekt (Pflichtabschnitt ab PF8)
 
@@ -28,13 +27,11 @@ Primitiven und einer Entscheidung `generalisiert`, `nur Sonderfall` oder
 `artifacts/evaluation/plan_b_perception_linkage_v1/`.
 
 Der aktualisierte Linkage-Report enthält alle fünf aktiven Kandidaten.
-`AC0733_1_M` und `AC0723_1_S` bleiben `nur Sonderfall`, solange ihre Linien-
-oder Textprimitive keinen passenden allgemeinen Seed liefern. `AC0722_1_L`,
-`AC0732_1_M` und der neu rotierte Kandidat `AC0732_1_L` sind wegen einer
-fälschlich priorisierten Kreisdetektion `noch nicht erkannt`. Die semantische
-AC0733-Rekonstruktion trennt Anschluss, Quadratgrundkörper und horizontalen
-P-Glyph bereits im Geometry-IR; ein allgemeiner Perception-Seed bleibt ein
-separater Folgeschritt.
+`AC0723_1_S` und `AC0254_2` bleiben `nur Sonderfall`, weil jeweils eine Linie,
+aber kein passender allgemeiner Rechteck-/Rule-Seed erkannt wird. `AC0722_1_L`,
+`AC0732_1_M` und `AC0732_1_L` sind wegen einer fälschlich priorisierten
+Kreisdetektion `noch nicht erkannt`. Das AC0733-Geometry-IR ist durch zwei
+reale Größenvarianten als größenrelativer Familienpfad bestätigt.
 
 ## Pflege-Regel (fortan)
 

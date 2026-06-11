@@ -9,6 +9,8 @@ All notable changes to ImageConverter will be documented in this file.
 
 ## Unreleased
 
+- Plan-B Run OY confirms the right-rotated AC0733 square-kelle Geometry-IR on `AC0733_1_M`, reducing `normalized_mse` from `0.08842208` to `0.01822546` without variant-specific geometry and rotating the queue to `AC0722_1_L` through `AC0254_2`.
+
 - Plan-B Run OX adds a description-driven Geometry-IR for the right-rotated AC0733 square-kelle symbol while keeping its P glyph horizontal, reducing `AC0733_1_L` from `normalized_mse=0.09223704` to `0.01388032` and rotating the queue to `AC0733_1_M` through `AC0732_1_L`.
 
 - Plan-B Run OW confirms that the description-driven, raster-fitted AC0551 chevron topology generalizes to `AC0551_2_M`, reducing `normalized_mse` from `0.09445446` to `0.01688702` and rotating the queue to `AC0733_1_L` through `AC0732_1_M`.

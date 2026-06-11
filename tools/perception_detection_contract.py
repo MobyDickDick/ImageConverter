@@ -1397,16 +1397,6 @@ def write_text_glyph_evaluation_report(
 
 PLAN_B_PERCEPTION_TARGETS: list[dict[str, Any]] = [
     {
-        "variant": "AC0733_1_M",
-        "image_candidates": ["artifacts/images_to_convert/AC0733_1_M.jpg"],
-        "plan_b_reason": "Mittlere kompakte Variante des gedrehten Symbols mit horizontal bleibendem P-Glyph.",
-        "perception_question": "Bleiben gedrehte Grundgeometrie und horizontaler P-Glyph auch in der mittleren Variante getrennt erkennbar?",
-        "expected_first_primitive": "rotated_symbol_with_horizontal_p_glyph",
-        "expected_candidate_kinds": {"rectangle", "line", "text_glyph"},
-        "expected_seed_kinds": {"RectangleBackground", "TextGlyph"},
-        "description": "Plan-B-Kandidat AC0733_1_M: gedrehte Grundgeometrie und horizontalen P-Glyph getrennt prüfen.",
-    },
-    {
         "variant": "AC0722_1_L",
         "image_candidates": ["artifacts/images_to_convert/AC0722_1_L.jpg"],
         "plan_b_reason": "Kompaktes links gedrehtes Kellen-Symbol mit rotem Quadrat und T-Glyph.",
@@ -1445,6 +1435,16 @@ PLAN_B_PERCEPTION_TARGETS: list[dict[str, Any]] = [
         "expected_candidate_kinds": {"rectangle", "line", "text_glyph"},
         "expected_seed_kinds": {"RectangleBackground", "TextGlyph"},
         "description": "Plan-B-Kandidat AC0732_1_L: nach rechts gedrehte Grundgeometrie und horizontalen P-Glyph getrennt prüfen.",
+    },
+    {
+        "variant": "AC0254_2",
+        "image_candidates": ["artifacts/images_to_convert/AC0254_2.jpg"],
+        "plan_b_reason": "Kompakte links gedrehte Klappenvariante mit Rechteckgrundkörper und drei Schließflächen.",
+        "perception_question": "Werden Rechteckgrundkörper und drei gedrehte Schließflächen als allgemeine Rechteck-/Linienprimitive erkannt?",
+        "expected_first_primitive": "left_rotated_flap_with_three_closing_surfaces",
+        "expected_candidate_kinds": {"rectangle", "line"},
+        "expected_seed_kinds": {"RectangleBackground", "HorizontalRule"},
+        "description": "Plan-B-Kandidat AC0254_2: links gedrehte Klappe und drei Schließflächen getrennt prüfen.",
     },
 ]
 
