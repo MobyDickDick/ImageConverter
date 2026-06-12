@@ -171,3 +171,30 @@ def test_element_match_error_impl_applies_circle_undersize_penalty() -> None:
     )
 
     assert with_penalty > no_penalty
+
+
+def test_spatial_delta2_quality_penalizes_localized_structure() -> None:
+    img_orig = np.zeros((16, 16, 3), dtype=np.uint8)
+    clustered = np.zeros_like(img_orig)
+    distributed = np.zeros_like(img_orig)
+    clustered[:8, :8, :] = 10
+    distributed[::2, ::2, :] = 10
+
+    clustered_metrics = error_metric_helpers.calculateSpatialDelta2QualityImpl(
+        img_orig,
+        clustered,
+        cv2_module=_FakeCv2,
+        np_module=np,
+    )
+    distributed_metrics = error_metric_helpers.calculateSpatialDelta2QualityImpl(
+        img_orig,
+        distributed,
+        cv2_module=_FakeCv2,
+        np_module=np,
+    )
+
+    assert clustered_metrics["mean_delta2"] == distributed_metrics["mean_delta2"]
+    assert clustered_metrics["std_delta2"] == distributed_metrics["std_delta2"]
+    assert clustered_metrics["tile_std_delta2"] > distributed_metrics["tile_std_delta2"]
+    assert clustered_metrics["localized_error_fraction"] > distributed_metrics["localized_error_fraction"]
+    assert clustered_metrics["spatial_quality_score"] > distributed_metrics["spatial_quality_score"]

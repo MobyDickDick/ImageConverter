@@ -54,6 +54,8 @@ python -m src.successful_conversion_quality_app
 
 Die kleine Anwendung liest `artifacts/converted_images/reports/successful_conversions.txt` als Bestenliste, ergänzt die dort bereits als erfolgreich markierten Varianten automatisch um Qualitätskennzahlen wie `total_delta2 = Σ((ΔR)^2 + (ΔG)^2 + (ΔB)^2)`, `mean_delta2` und `std_delta2` und übernimmt neue Konvertierungen nur dann in Manifest und Snapshot, wenn sich mindestens eine Kernmetrik verbessert. Schlechtere Neu-Konvertierungen werden verworfen und – falls vorhanden – aus der gespeicherten Bestenlisten-Sicherung wiederhergestellt. Zusätzlich wird eine sortierte CSV-Bestenliste unter `artifacts/converted_images/reports/successful_conversions.csv` erzeugt bzw. aktualisiert; die Einträge sind nach dem Namen der konvertierten Bilder (`variant`) geordnet.
 
+Bei der Auswahl zwischen einem vorhandenen und einem neu erzeugten SVG wird zusätzlich die räumliche Struktur des Differenzbilds bewertet. Der `spatial_quality_score` kombiniert `mean_delta2`, die Streuung der einzelnen Pixel, die Streuung lokaler Bildkacheln (`tile_std_delta2`) und den Fehleranteil in den schlechtesten 25 Prozent der Kacheln (`localized_error_fraction`). Damit wird ein kleiner, gleichmäßig verteilter Restfehler gegenüber lokalisierten Konturen oder deutlich falschen Bildstrukturen bevorzugt. Die zusätzlichen Werte erscheinen auch in `pixel_delta2_ranking.csv`; kleinere Werte sind jeweils besser.
+
 
 #### Früher Qualitätsabbruch
 

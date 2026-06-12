@@ -100,6 +100,7 @@ def _svgQualityScore(
     cv2_module,
     render_svg_to_numpy_fn,
     calculate_delta2_stats_fn,
+    calculate_spatial_delta2_quality_fn=None,
 ) -> float:
     if not os.path.exists(svg_path):
         return float("inf")
@@ -115,9 +116,14 @@ def _svgQualityScore(
         return float("inf")
     height, width = img.shape[:2]
     rendered = render_svg_to_numpy_fn(svg_content, width, height)
-    mean_delta2, _std_delta2 = calculate_delta2_stats_fn(img, rendered)
+    if calculate_spatial_delta2_quality_fn is not None:
+        metrics = calculate_spatial_delta2_quality_fn(img, rendered)
+        raw_score = metrics.get("spatial_quality_score", float("inf"))
+    else:
+        mean_delta2, _std_delta2 = calculate_delta2_stats_fn(img, rendered)
+        raw_score = mean_delta2
     try:
-        score = float(mean_delta2)
+        score = float(raw_score)
     except (TypeError, ValueError):
         return float("inf")
     return score if math.isfinite(score) else float("inf")
@@ -426,6 +432,7 @@ def convertOneImpl(
     append_batch_failure_fn,
     run_timeout_sec: float | int | None = None,
     print_fn=print,
+    calculate_spatial_delta2_quality_fn=None,
 ) -> tuple[dict[str, object] | None, bool]:
     image_path = os.path.join(folder_path, filename)
     base = os.path.splitext(filename)[0]
@@ -751,6 +758,7 @@ def convertOneImpl(
                 cv2_module=cv2_module,
                 render_svg_to_numpy_fn=render_svg_to_numpy_fn,
                 calculate_delta2_stats_fn=calculate_delta2_stats_fn,
+                calculate_spatial_delta2_quality_fn=calculate_spatial_delta2_quality_fn,
             )
         finally:
             if os.path.exists(previous_svg_path):
@@ -761,6 +769,7 @@ def convertOneImpl(
             cv2_module=cv2_module,
             render_svg_to_numpy_fn=render_svg_to_numpy_fn,
             calculate_delta2_stats_fn=calculate_delta2_stats_fn,
+            calculate_spatial_delta2_quality_fn=calculate_spatial_delta2_quality_fn,
         )
         new_is_better = new_quality < previous_quality
         previous_contains_embedded_raster = "data:image/" in previous_svg_content.lower()
@@ -786,6 +795,9 @@ def convertOneImpl(
     height = 0
     mean_delta2 = float("inf")
     std_delta2 = float("inf")
+    tile_std_delta2 = float("inf")
+    localized_error_fraction = float("inf")
+    spatial_quality_score = float("inf")
     if img is not None:
         height, width = img.shape[:2]
         pixel_count = float(max(1, width * height))
@@ -798,6 +810,15 @@ def convertOneImpl(
             if svg_content:
                 rendered = render_svg_to_numpy_fn(svg_content, width, height)
                 mean_delta2, std_delta2 = calculate_delta2_stats_fn(img, rendered)
+                if calculate_spatial_delta2_quality_fn is not None:
+                    spatial_metrics = calculate_spatial_delta2_quality_fn(img, rendered)
+                    tile_std_delta2 = float(spatial_metrics.get("tile_std_delta2", float("inf")))
+                    localized_error_fraction = float(
+                        spatial_metrics.get("localized_error_fraction", float("inf"))
+                    )
+                    spatial_quality_score = float(
+                        spatial_metrics.get("spatial_quality_score", float("inf"))
+                    )
     if not _isMeaningfulDiffArtifact(diff_path, cv2_module):
         _deleteDiffIfPresent(diff_path)
     _ensureOutputArtifacts(svg_path=svg_path, diff_path=diff_path, create_svg_fallback=True, create_diff_fallback=False)
@@ -818,6 +839,9 @@ def convertOneImpl(
         "error_per_pixel": float(best_error) / pixel_count,
         "mean_delta2": float(mean_delta2),
         "std_delta2": float(std_delta2),
+        "tile_std_delta2": float(tile_std_delta2),
+        "localized_error_fraction": float(localized_error_fraction),
+        "spatial_quality_score": float(spatial_quality_score),
         "w": int(width),
         "h": int(height),
         "base": base_name,
@@ -846,11 +870,17 @@ def convertOneImpl(
         },
         print_fn=print_fn,
     )
+    spatial_quality_text = (
+        f"Raumscore={_formatQualityValue(row['spatial_quality_score'])}, "
+        if math.isfinite(float(row["spatial_quality_score"]))
+        else ""
+    )
     print_fn(
         f"[INFO] Konvertiert {filename} | "
         f"Parameter: {_formatCompactParams(params)} | "
         f"Qualität: Fehler/Pixel={_formatQualityValue(row['error_per_pixel'])}, "
         f"Mean-Delta²={_formatQualityValue(row['mean_delta2'])}, "
+        f"{spatial_quality_text}"
         f"beste Iteration={int(best_iter)}, "
         f"ausgeführt={row['actual_iterations']}/{row['requested_iterations']} | "
         f"Dauer={elapsed_sec:.1f}s"
