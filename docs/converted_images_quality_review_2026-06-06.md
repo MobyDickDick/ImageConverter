@@ -352,3 +352,17 @@ Review-Grenze. `AC0732_1_L` wurde aus Triage und PF8-Linkage entfernt; die
 Rotation lautet nun `AC0254_2`, `AC0732_1_S`, `AC0701_1_S`, `AC0722_1_S` und
 `AC0845_S`. PF8 erkennt für den neuen rH-Badge-Kandidaten bereits einen
 allgemeinen `CircleBackground`-Seed und entscheidet `generalisiert`.
+
+
+## Folgeaktualisierung Run PD (2026-06-12)
+
+`AC0254_2` wurde nach Sichtprüfung als kreisförmige, nach links gedrehte Klappe
+rekonstruiert. Das neue beschreibungsgetriebene Geometry-IR trennt den grünen
+Kreisgrundkörper und das helle dreieckige Schließblatt; die allgemeine
+Rasterregistrierung verschiebt und skaliert beide Primitive gemeinsam.
+
+`mean_delta2` sinkt von `11819.625000` auf `587.050964`,
+`normalized_mse` von `0.06059016` auf `0.00300936` und damit deutlich unter die
+Review-Grenze. `AC0254_2` wurde aus Triage und PF8-Linkage entfernt. Der
+qualifizierte Diff-Pool enthält aktuell vier verbleibende Kandidaten:
+`AC0732_1_S`, `AC0701_1_S`, `AC0722_1_S` und `AC0845_S`.

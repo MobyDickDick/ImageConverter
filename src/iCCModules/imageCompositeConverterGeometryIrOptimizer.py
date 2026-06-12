@@ -207,7 +207,7 @@ def transformGeometryIrImpl(
     """
 
     transformed = _clone_ir(geometry_ir)
-    point_list_fields = ("points", "body_path", "connector")
+    point_list_fields = ("points", "body_path", "connector", "blade_points")
     point_fields = ("center", "label_center")
 
     for element in transformed:

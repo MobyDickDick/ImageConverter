@@ -17,7 +17,6 @@ from tools.perception_detection_contract import (
 
 
 ACTIVE_VARIANTS = [
-    "AC0254_2",
     "AC0732_1_S",
     "AC0701_1_S",
     "AC0722_1_S",
@@ -70,8 +69,8 @@ def test_run_plan_b_perception_linkage_report_writes_json_and_csv(
 ) -> None:
     summary = run_plan_b_perception_linkage_report(tmp_path)
 
-    assert summary["samples"] == 5
-    assert summary["evaluated_samples"] == 5
+    assert summary["samples"] == len(ACTIVE_VARIANTS)
+    assert summary["evaluated_samples"] == len(ACTIVE_VARIANTS)
     assert summary["all_have_perception_lerneffekt"] is True
 
     json_report = tmp_path / "plan_b_perception_linkage_report_v1.json"
@@ -85,5 +84,5 @@ def test_run_plan_b_perception_linkage_report_writes_json_and_csv(
     assert [record["variant"] for record in report["records"]] == ACTIVE_VARIANTS
 
     rows = list(csv.DictReader(csv_report.open(encoding="utf-8")))
-    assert len(rows) == 5
+    assert len(rows) == len(ACTIVE_VARIANTS)
     assert {"variant", "decision", "next_action"} <= set(rows[0])

@@ -1397,16 +1397,6 @@ def write_text_glyph_evaluation_report(
 
 PLAN_B_PERCEPTION_TARGETS: list[dict[str, Any]] = [
     {
-        "variant": "AC0254_2",
-        "image_candidates": ["artifacts/images_to_convert/AC0254_2.jpg"],
-        "plan_b_reason": "Kompakte links gedrehte Klappenvariante mit Rechteckgrundkörper und drei Schließflächen.",
-        "perception_question": "Werden Rechteckgrundkörper und drei gedrehte Schließflächen als allgemeine Rechteck-/Linienprimitive erkannt?",
-        "expected_first_primitive": "left_rotated_flap_with_three_closing_surfaces",
-        "expected_candidate_kinds": {"rectangle", "line"},
-        "expected_seed_kinds": {"RectangleBackground", "HorizontalRule"},
-        "description": "Plan-B-Kandidat AC0254_2: links gedrehte Klappe und drei Schließflächen getrennt prüfen.",
-    },
-    {
         "variant": "AC0732_1_S",
         "image_candidates": ["artifacts/images_to_convert/AC0732_1_S.jpg"],
         "plan_b_reason": "Kleine kompakte Variante eines nach rechts gedrehten Symbols mit horizontal bleibendem P-Glyph.",

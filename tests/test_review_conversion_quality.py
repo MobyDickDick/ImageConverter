@@ -324,6 +324,24 @@ def test_ac0551_2_m_committed_svg_preserves_chevron_quality() -> None:
     assert 'fill="#4c' in svg
 
 
+def test_ac0254_2_committed_svg_preserves_left_rotated_circular_damper_quality() -> None:
+    record = review_variant("AC0254_2", source="diff_inventory")
+
+    assert record.status == "ok"
+    assert record.width == 31
+    assert record.height == 31
+    assert record.mean_delta2 == pytest.approx(587.0509643554688)
+    assert record.normalized_mse is not None
+    assert record.normalized_mse < 0.045945679012345676
+
+    svg = Path(record.svg_path).read_text(encoding="utf-8")
+    assert 'id="left_rotated_circular_damper_circle"' in svg
+    assert 'id="left_rotated_circular_damper_blade"' in svg
+    assert svg.count("<circle") == 1
+    assert svg.count("<polygon") == 1
+    assert "<image" not in svg
+
+
 def test_ac0732_1_l_committed_svg_preserves_right_facing_p_kelle_quality() -> None:
     record = review_variant("AC0732_1_L", source="diff_inventory")
 

@@ -619,6 +619,31 @@ def test_render_geometry_ir_keeps_ac0723_t_horizontal_and_separate_from_body() -
     assert "<image" not in svg
 
 
+def test_build_geometry_ir_models_ac0254_left_rotated_circular_damper() -> None:
+    ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
+        "Wie AC0521, aber nach links gedreht"
+    )
+
+    assert len(ir) == 1
+    assert ir[0]["kind"] == "LeftRotatedCircularDamperGlyph"
+    assert ir[0]["circle"] == [0.500, 0.500, 0.455]
+    assert ir[0]["blade_points"] == [[0.055, 0.500], [0.765, 0.155], [0.765, 0.845]]
+
+
+def test_render_geometry_ir_models_ac0254_circle_and_separate_closure_blade() -> None:
+    ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
+        "Wie AC0521, aber nach links gedreht"
+    )
+
+    svg = geometry_ir_helpers.renderGeometryIrToSvgImpl(31, 31, ir)
+
+    assert 'id="left_rotated_circular_damper_circle"' in svg
+    assert 'id="left_rotated_circular_damper_blade"' in svg
+    assert svg.count("<circle") == 1
+    assert svg.count("<polygon") == 1
+    assert "<image" not in svg
+
+
 def test_build_geometry_ir_models_ac0732_right_facing_square_kelle_with_horizontal_p() -> None:
     ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
         'wie AC072, aber nach rechts gredreht, Text immer noch horizontal "P"'
