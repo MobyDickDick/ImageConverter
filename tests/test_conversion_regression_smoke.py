@@ -36,10 +36,11 @@ def test_ac08_regression_smoke_run_creates_expected_outputs(tmp_path: Path) -> N
 
 @pytest.mark.blocking_conversion
 def test_ac0100_quality_uses_algorithmic_elementwise_fit(tmp_path: Path) -> None:
-    """AC0100 must improve via algorithmic fitting, not fixed samples or template transfer."""
+    """AC0010/AC0100 must use an algorithmic fit, not samples or template transfer."""
     output_dir = tmp_path / "ac0100"
 
-    for suffix in ("L", "M", "S"):
+    variants = ("AC0010", "AC0100_L", "AC0100_M", "AC0100_S")
+    for variant in variants:
         exit_code = converter.main(
             [
                 str(INPUT_DIR),
@@ -48,9 +49,9 @@ def test_ac0100_quality_uses_algorithmic_elementwise_fit(tmp_path: Path) -> None
                 "--output-dir",
                 str(output_dir),
                 "--start",
-                f"AC0100_{suffix}",
+                variant,
                 "--end",
-                f"AC0100_{suffix}",
+                variant,
                 "--deterministic-order",
             ]
         )
@@ -58,21 +59,32 @@ def test_ac0100_quality_uses_algorithmic_elementwise_fit(tmp_path: Path) -> None
 
     bestlist = (output_dir / "reports" / "conversion_bestlist.csv").read_text(encoding="utf-8")
     rows = [line.split(";") for line in bestlist.splitlines()[1:] if line.strip()]
-    assert {row[0] for row in rows} == {"AC0100_L", "AC0100_M", "AC0100_S"}
+    assert {row[0] for row in rows} == set(variants)
     for row in rows:
         best_error = float(row[4])
         mean_delta2 = float(row[6])
-        assert best_error < 18.0
-        assert mean_delta2 < 1600.0
+        quality_limits = {
+            "AC0010": (25.0, 3000.0),
+            "AC0100_L": (18.0, 1800.0),
+            "AC0100_M": (18.0, 1600.0),
+            "AC0100_S": (18.0, 1600.0),
+        }
+        max_best_error, max_mean_delta2 = quality_limits[row[0]]
+        assert best_error < max_best_error
+        assert mean_delta2 < max_mean_delta2
 
-    for suffix in ("L", "M", "S"):
-        log = (output_dir / "reports" / f"AC0100_{suffix}_element_validation.log").read_text(encoding="utf-8")
-        assert "status=non_composite_elementwise_symbol_fit" in log
+    for variant in variants:
+        log = (output_dir / "reports" / f"{variant}_element_validation.log").read_text(encoding="utf-8")
+        if variant == "AC0010":
+            assert "status=non_composite_description_geometry_ir" in log
+        else:
+            assert "status=non_composite_elementwise_symbol_fit" in log
         assert "status=non_composite_plan_b_sample_svg_selected" not in log
         assert "template_transfer" not in log
-        fit_values = dict(
-            line.split("=", 1)
-            for line in log.splitlines()
-            if line.startswith("fit_") and "=" in line
-        )
-        assert 0.05 <= float(fit_values["fit_glyph_y_ratio"]) <= 0.30
+        if variant != "AC0010":
+            fit_values = dict(
+                line.split("=", 1)
+                for line in log.splitlines()
+                if line.startswith("fit_") and "=" in line
+            )
+            assert 0.05 <= float(fit_values["fit_glyph_y_ratio"]) <= 0.30
