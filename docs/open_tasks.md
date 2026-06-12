@@ -3670,3 +3670,12 @@ Ziel: Die Konvertierung soll strikt als **Kette** laufen:
 - **Perception-Lerneffekt:** Die frühere Rechteck-/Linienfrage war nur ein Sonderfall; die reale Topologie ist Kreis plus Dreiecksblatt. Das Paket erzwingt deshalb keinen falschen allgemeinen Rechteck-Seed.
 - **Rotation:** `AC0254_2` wurde aus Triage und PF8-Linkage entfernt; der qualifizierte Pool enthält aktuell vier Kandidaten.
 - **Nächster sinnvoller Schritt:** Die reguläre Plan-B-Rotation mit `AC0732_1_S.jpg` fortsetzen.
+
+
+### Fortschritt vs. Blocker (Session 2026-06-12, Plan-B AC0732_1_S Run PE)
+
+- **Fortschritt:** `AC0732_1_S.jpg` wurde real mit dem gemeinsamen AC0732-Geometry-IR re-konvertiert; linker Anschluss, roter Quadratgrundkörper und horizontal bleibender P-Glyph sind getrennte, größenrelative Vektorelemente.
+- **Qualität:** `mean_delta2` sank von `11705.263672` auf `3659.341309` (`-68.74 %`), `normalized_mse` von `0.06000391` auf `0.01875864` und damit unter die Review-Grenze `0.04594568`.
+- **Perception-Lerneffekt:** Der allgemeine beschreibungsgetriebene AC0732-Pfad ist nun auf S, M und L real bestätigt; es wurde kein variantenspezifischer PF8-Sonderfall ergänzt.
+- **Rotation:** `AC0732_1_S` wurde aus Triage und PF8-Linkage entfernt; aktiv bleiben `AC0701_1_S`, `AC0722_1_S` und `AC0845_S`.
+- **Nächster sinnvoller Schritt:** Die reguläre Plan-B-Rotation mit `AC0701_1_S.jpg` fortsetzen.

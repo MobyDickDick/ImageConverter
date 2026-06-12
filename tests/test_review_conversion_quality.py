@@ -342,6 +342,25 @@ def test_ac0254_2_committed_svg_preserves_left_rotated_circular_damper_quality()
     assert "<image" not in svg
 
 
+def test_ac0732_1_s_committed_svg_preserves_right_facing_p_kelle_quality() -> None:
+    record = review_variant("AC0732_1_S", source="diff_inventory")
+
+    assert record.status == "ok"
+    assert record.width == 25
+    assert record.height == 15
+    assert record.mean_delta2 == pytest.approx(3659.34130859375)
+    assert record.normalized_mse is not None
+    assert record.normalized_mse < 0.045945679012345676
+
+    svg = Path(record.svg_path).read_text(encoding="utf-8")
+    assert 'id="right_facing_square_kelle_p_connector"' in svg
+    assert 'id="right_facing_square_kelle_p_body"' in svg
+    assert 'id="right_facing_square_kelle_p_label"' in svg
+    assert ">P</text>" in svg
+    assert "rotate(" not in svg
+    assert "<image" not in svg
+
+
 def test_ac0732_1_l_committed_svg_preserves_right_facing_p_kelle_quality() -> None:
     record = review_variant("AC0732_1_L", source="diff_inventory")
 

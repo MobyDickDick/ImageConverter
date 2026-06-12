@@ -17,7 +17,6 @@ from tools.perception_detection_contract import (
 
 
 ACTIVE_VARIANTS = [
-    "AC0732_1_S",
     "AC0701_1_S",
     "AC0722_1_S",
     "AC0845_S",
