@@ -3679,3 +3679,11 @@ Ziel: Die Konvertierung soll strikt als **Kette** laufen:
 - **Perception-Lerneffekt:** Der allgemeine beschreibungsgetriebene AC0732-Pfad ist nun auf S, M und L real bestätigt; es wurde kein variantenspezifischer PF8-Sonderfall ergänzt.
 - **Rotation:** `AC0732_1_S` wurde aus Triage und PF8-Linkage entfernt; aktiv bleiben `AC0701_1_S`, `AC0722_1_S` und `AC0845_S`.
 - **Nächster sinnvoller Schritt:** Die reguläre Plan-B-Rotation mit `AC0701_1_S.jpg` fortsetzen.
+
+### Fortschritt vs. Blocker (Session 2026-06-12, Plan-B AC0701_1_S Run PF)
+
+- **Fortschritt:** `AC0701_1_S.jpg` wurde real mit einem neuen allgemeinen, beschreibungsgetriebenen `UprightSquareKelleGlyph` re-konvertiert; roter Quadratgrundkörper und unterer vertikaler Anschluss sind getrennte, größenrelative Vektorelemente.
+- **Qualität:** `mean_delta2` sank von `11579.485352` auf `560.104004` (`-95.16 %`), `normalized_mse` von `0.05935915` auf `0.00287122` und damit unter die Review-Grenze `0.04594568`.
+- **Perception-Lerneffekt:** Die allgemeine Rechteck-/Linien-Topologie wird aus der Beschreibung rekonstruiert; es wurde kein variantenspezifischer PF8-Sonderfall und kein Sample-SVG ergänzt.
+- **Rotation:** `AC0701_1_S` wurde aus Triage und PF8-Linkage entfernt; aktiv bleiben `AC0722_1_S` und `AC0845_S`.
+- **Nächster sinnvoller Schritt:** Die reguläre Plan-B-Rotation mit `AC0722_1_S.jpg` fortsetzen.
