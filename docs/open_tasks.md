@@ -3652,3 +3652,12 @@ Ziel: Die Konvertierung soll strikt als **Kette** laufen:
 - **Perception-Lerneffekt:** Das Beschreibungs-Geometry-IR generalisiert die semantische Elementtrennung; PF8 erkennt beim neu aufgenommenen `AC0722_1_S` noch keine passenden allgemeinen Rechteck-/Linien-/Text-Seeds.
 - **Rotation:** `AC0732_1_M` wurde aus Triage und PF8-Linkage entfernt; `AC0722_1_S` füllt den fünften Platz auf und ist zunächst `noch nicht erkannt`.
 - **Nächster sinnvoller Schritt:** Die reguläre Plan-B-Rotation mit `AC0732_1_L.jpg` fortsetzen.
+
+
+### Fortschritt vs. Blocker (Session 2026-06-12, Plan-B AC0732_1_L Run PC)
+
+- **Fortschritt:** `AC0732_1_L.jpg` wurde real mit dem allgemeinen, schreibfehlertoleranten AC0732-Geometry-IR re-konvertiert; Anschluss, Quadratgrundkörper und horizontaler P-Glyph bleiben getrennte größenrelative SVG-Elemente.
+- **Qualität:** `mean_delta2` sank von `12783.177734` auf `6015.989258` (`-52.94 %`), `normalized_mse` von `0.06552955` auf `0.03083937` und damit unter die Review-Grenze `0.04594568`.
+- **Perception-Lerneffekt:** `AC0845_S` wurde neu aufgenommen; PF8 erkennt den Kreis mit Konfidenz `0.914` als allgemeinen `CircleBackground`-Seed und entscheidet `generalisiert`, während die zentrierte rH-Glyph noch nachzuführen ist.
+- **Rotation:** `AC0732_1_L` wurde aus Triage und PF8-Linkage entfernt; `AC0845_S` füllt den fünften Platz auf.
+- **Nächster sinnvoller Schritt:** Die reguläre Plan-B-Rotation mit `AC0254_2.jpg` fortsetzen.

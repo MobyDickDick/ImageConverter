@@ -1397,16 +1397,6 @@ def write_text_glyph_evaluation_report(
 
 PLAN_B_PERCEPTION_TARGETS: list[dict[str, Any]] = [
     {
-        "variant": "AC0732_1_L",
-        "image_candidates": ["artifacts/images_to_convert/AC0732_1_L.jpg"],
-        "plan_b_reason": "Große kompakte Variante eines nach rechts gedrehten Symbols mit horizontal bleibendem P-Glyph.",
-        "perception_question": "Bleiben nach rechts gedrehte Grundgeometrie und horizontaler P-Glyph auch in der großen Variante getrennt erkennbar?",
-        "expected_first_primitive": "right_rotated_symbol_with_horizontal_p_glyph",
-        "expected_candidate_kinds": {"rectangle", "line", "text_glyph"},
-        "expected_seed_kinds": {"RectangleBackground", "TextGlyph"},
-        "description": "Plan-B-Kandidat AC0732_1_L: nach rechts gedrehte Grundgeometrie und horizontalen P-Glyph getrennt prüfen.",
-    },
-    {
         "variant": "AC0254_2",
         "image_candidates": ["artifacts/images_to_convert/AC0254_2.jpg"],
         "plan_b_reason": "Kompakte links gedrehte Klappenvariante mit Rechteckgrundkörper und drei Schließflächen.",
@@ -1445,6 +1435,16 @@ PLAN_B_PERCEPTION_TARGETS: list[dict[str, Any]] = [
         "expected_candidate_kinds": {"rectangle", "line", "text_glyph"},
         "expected_seed_kinds": {"RectangleBackground", "TextGlyph"},
         "description": "Plan-B-Kandidat AC0722_1_S: Anschluss, Quadratgrundkörper und T-Glyph getrennt prüfen.",
+    },
+    {
+        "variant": "AC0845_S",
+        "image_candidates": ["artifacts/images_to_convert/AC0845_S.jpg"],
+        "plan_b_reason": "Kleines kreisförmiges rH-Badge ohne äußere Griff- oder Leitungslinie.",
+        "perception_question": "Werden Kreisring und zentrierter rH-Glyph ohne fälschlichen Außenanschluss getrennt erkannt?",
+        "expected_first_primitive": "circle_ring_with_centered_rh_glyph",
+        "expected_candidate_kinds": {"circle", "text_glyph"},
+        "expected_seed_kinds": {"CircleBackground", "TextGlyph"},
+        "description": "Plan-B-Kandidat AC0845_S: Kreisring und zentrierten rH-Glyph ohne Außenanschluss prüfen.",
     },
 ]
 
