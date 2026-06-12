@@ -167,3 +167,76 @@ def calculateDelta2StatsImpl(img_orig, img_svg, *, cv2_module, np_module) -> tup
     delta2 = np_module.sum(diff * diff, axis=2)
     return float(np_module.mean(delta2)), float(np_module.std(delta2))
 
+
+def calculateSpatialDelta2QualityImpl(
+    img_orig,
+    img_svg,
+    *,
+    cv2_module,
+    np_module,
+    grid_size: int = 8,
+) -> dict[str, float]:
+    """Measure both the amount and spatial organization of squared RGB deltas.
+
+    A plain image-wide mean cannot distinguish a broadly distributed, low-level
+    error from a recognizable wrong edge or shape.  This score therefore adds
+    three penalties to mean delta²: pixel-level spread, variation between local
+    tiles, and excess error concentrated in the worst quarter of those tiles.
+    Lower values are better for every returned metric.
+    """
+    metric_names = (
+        "mean_delta2",
+        "std_delta2",
+        "tile_std_delta2",
+        "localized_error_fraction",
+        "spatial_quality_score",
+    )
+    if img_svg is None:
+        return {name: float("inf") for name in metric_names}
+    if img_svg.shape[:2] != img_orig.shape[:2]:
+        img_svg = cv2_module.resize(
+            img_svg,
+            (img_orig.shape[1], img_orig.shape[0]),
+            interpolation=cv2_module.INTER_AREA,
+        )
+
+    diff = img_orig.astype(np_module.float32) - img_svg.astype(np_module.float32)
+    delta2 = np_module.sum(diff * diff, axis=2)
+    mean_delta2 = float(np_module.mean(delta2))
+    std_delta2 = float(np_module.std(delta2))
+    height, width = delta2.shape
+    rows = max(1, min(int(grid_size), int(height)))
+    columns = max(1, min(int(grid_size), int(width)))
+
+    tile_means: list[float] = []
+    tile_sums: list[float] = []
+    for y_indices in np_module.array_split(np_module.arange(height), rows):
+        for x_indices in np_module.array_split(np_module.arange(width), columns):
+            tile = delta2[np_module.ix_(y_indices, x_indices)]
+            tile_means.append(float(np_module.mean(tile)))
+            tile_sums.append(float(np_module.sum(tile)))
+
+    tile_std_delta2 = float(np_module.std(np_module.asarray(tile_means, dtype=np_module.float64)))
+    total_error = float(np_module.sum(delta2))
+    worst_tile_count = max(1, int(math.ceil(len(tile_sums) * 0.25)))
+    expected_error_fraction = float(worst_tile_count / len(tile_sums))
+    if total_error > 0.0:
+        localized_error_fraction = float(sum(sorted(tile_sums, reverse=True)[:worst_tile_count]) / total_error)
+    else:
+        localized_error_fraction = expected_error_fraction
+    concentration_excess = max(0.0, localized_error_fraction - expected_error_fraction)
+
+    spatial_quality_score = (
+        mean_delta2
+        + (0.10 * std_delta2)
+        + (0.35 * tile_std_delta2)
+        + (2.0 * mean_delta2 * concentration_excess)
+    )
+    return {
+        "mean_delta2": mean_delta2,
+        "std_delta2": std_delta2,
+        "tile_std_delta2": tile_std_delta2,
+        "localized_error_fraction": localized_error_fraction,
+        "spatial_quality_score": float(spatial_quality_score),
+    }
+

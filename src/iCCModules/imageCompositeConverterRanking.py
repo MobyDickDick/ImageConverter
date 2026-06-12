@@ -16,6 +16,7 @@ def writePixelDelta2RankingImpl(
     cv2_module,
     render_svg_to_numpy_fn,
     calculate_delta2_stats_fn,
+    calculate_spatial_delta2_quality_fn=None,
 ) -> None:
     ranking: list[dict[str, float | str]] = []
     for svg_name in sorted(f for f in os.listdir(svg_out_dir) if f.lower().endswith(".svg")):
@@ -42,21 +43,45 @@ def writePixelDelta2RankingImpl(
             continue
 
         mean_delta2, std_delta2 = calculate_delta2_stats_fn(img_orig, rendered)
+        spatial_metrics = (
+            calculate_spatial_delta2_quality_fn(img_orig, rendered)
+            if calculate_spatial_delta2_quality_fn is not None
+            else {}
+        )
         ranking.append(
             {
                 "image": os.path.basename(orig_path),
                 "mean_delta2": float(mean_delta2),
                 "std_delta2": float(std_delta2),
+                "tile_std_delta2": float(spatial_metrics.get("tile_std_delta2", float("nan"))),
+                "localized_error_fraction": float(
+                    spatial_metrics.get("localized_error_fraction", float("nan"))
+                ),
+                "spatial_quality_score": float(spatial_metrics.get("spatial_quality_score", mean_delta2)),
             }
         )
 
-    ranking.sort(key=lambda row: float(row["mean_delta2"]), reverse=True)
+    ranking.sort(key=lambda row: float(row["spatial_quality_score"]), reverse=True)
     csv_path = os.path.join(reports_out_dir, "pixel_delta2_ranking.csv")
     with open(csv_path, "w", encoding="utf-8", newline="") as f:
         writer = csv.writer(f, delimiter=";")
-        writer.writerow(["image", "mean_delta2", "std_delta2"])
+        writer.writerow([
+            "image",
+            "mean_delta2",
+            "std_delta2",
+            "tile_std_delta2",
+            "localized_error_fraction",
+            "spatial_quality_score",
+        ])
         for row in ranking:
-            writer.writerow([row["image"], f"{float(row['mean_delta2']):.6f}", f"{float(row['std_delta2']):.6f}"])
+            writer.writerow([
+                row["image"],
+                f"{float(row['mean_delta2']):.6f}",
+                f"{float(row['std_delta2']):.6f}",
+                f"{float(row['tile_std_delta2']):.6f}",
+                f"{float(row['localized_error_fraction']):.6f}",
+                f"{float(row['spatial_quality_score']):.6f}",
+            ])
 
     valid = [row for row in ranking if math.isfinite(float(row["mean_delta2"]))]
     count_ok = sum(1 for row in valid if float(row["mean_delta2"]) <= threshold)

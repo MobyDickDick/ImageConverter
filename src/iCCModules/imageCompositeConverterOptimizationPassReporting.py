@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import csv
+import math
 import os
 
 
@@ -53,8 +54,15 @@ def evaluateQualityPassCandidateImpl(
     new_error_pp = float(new_row.get("error_per_pixel", float("inf")))
     prev_mean_delta2 = float(old_row.get("mean_delta2", float("inf")))
     new_mean_delta2 = float(new_row.get("mean_delta2", float("inf")))
-    error_improved = new_error_pp + 1e-9 < prev_error_pp
-    delta2_improved = new_mean_delta2 + 1e-6 < prev_mean_delta2
-    improved = error_improved or delta2_improved
-    decision = "accepted_improvement" if improved else "rejected_regression"
+    prev_spatial_score = float(old_row.get("spatial_quality_score", float("inf")))
+    new_spatial_score = float(new_row.get("spatial_quality_score", float("inf")))
+    spatial_scores_available = math.isfinite(prev_spatial_score) and math.isfinite(new_spatial_score)
+    if spatial_scores_available:
+        improved = new_spatial_score + 1e-6 < prev_spatial_score
+        decision = "accepted_spatial_improvement" if improved else "rejected_spatial_regression"
+    else:
+        error_improved = new_error_pp + 1e-9 < prev_error_pp
+        delta2_improved = new_mean_delta2 + 1e-6 < prev_mean_delta2
+        improved = error_improved or delta2_improved
+        decision = "accepted_improvement" if improved else "rejected_regression"
     return improved, decision, prev_error_pp, new_error_pp, prev_mean_delta2, new_mean_delta2

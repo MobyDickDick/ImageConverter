@@ -1192,6 +1192,7 @@ def convertRange(
             read_validation_log_details_fn=_readValidationLogDetails,
             render_svg_to_numpy_fn=Action.renderSvgToNumpy,
             calculate_delta2_stats_fn=Action.calculateDelta2Stats,
+            calculate_spatial_delta2_quality_fn=Action.calculateSpatialDelta2Quality,
             get_base_name_from_file_fn=getBaseNameFromFile,
             cv2_module=cv2,
             render_embedded_raster_svg_fn=_renderEmbeddedRasterSvg,
@@ -1591,6 +1592,7 @@ def _writePixelDelta2Ranking(folder_path: str, svg_out_dir: str, reports_out_dir
         cv2_module=cv2,
         render_svg_to_numpy_fn=Action.render_svg_to_numpy,
         calculate_delta2_stats_fn=Action.calculateDelta2Stats,
+        calculate_spatial_delta2_quality_fn=Action.calculateSpatialDelta2Quality,
     )
 
 def _loadIterationLogRows(reports_out_dir: str) -> dict[str, dict[str, str]]:

@@ -1369,6 +1369,15 @@ class Action:
         )
 
     @staticmethod
+    def calculateSpatialDelta2Quality(img_orig: np.ndarray, img_svg: np.ndarray) -> dict[str, float]:
+        return element_error_metric_helpers.calculateSpatialDelta2QualityImpl(
+            img_orig,
+            img_svg,
+            cv2_module=cv2,
+            np_module=np,
+        )
+
+    @staticmethod
     def _fitToOriginalSize(img_orig: np.ndarray, img_svg: np.ndarray | None) -> np.ndarray | None:
         return mask_geometry_helpers.fitToOriginalSizeImpl(img_orig, img_svg, cv2)
 
