@@ -618,6 +618,34 @@ def test_render_geometry_ir_keeps_ac0723_t_horizontal_and_separate_from_body() -
     assert "rotate(" not in svg
     assert "<image" not in svg
 
+
+def test_build_geometry_ir_models_ac0732_right_facing_square_kelle_with_horizontal_p() -> None:
+    ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
+        'wie AC072, aber nach rechts gredreht, Text immer noch horizontal "P"'
+    )
+
+    assert len(ir) == 1
+    assert ir[0]["kind"] == "RightFacingSquareKellePGlyph"
+    assert ir[0]["body_bbox"] == [0.400, 0.040, 0.540, 0.920]
+    assert ir[0]["connector"] == [[0.000, 0.500], [0.400, 0.500]]
+    assert ir[0]["label"] == "P"
+
+
+def test_render_geometry_ir_keeps_ac0732_p_horizontal_and_separate_from_body() -> None:
+    ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
+        'wie AC072, aber nach rechts gredreht, Text immer noch horizontal "P"'
+    )
+
+    svg = geometry_ir_helpers.renderGeometryIrToSvgImpl(35, 20, ir)
+
+    assert 'id="right_facing_square_kelle_p_connector"' in svg
+    assert 'id="right_facing_square_kelle_p_body"' in svg
+    assert 'id="right_facing_square_kelle_p_label"' in svg
+    assert '>P</text>' in svg
+    assert "rotate(" not in svg
+    assert "<image" not in svg
+
+
 def test_build_geometry_ir_models_ac0733_right_rotated_square_kelle_with_horizontal_p() -> None:
     ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
         'Wie AC0733, aber nach rechts gedreht, Text immer noch horizontal "P"'

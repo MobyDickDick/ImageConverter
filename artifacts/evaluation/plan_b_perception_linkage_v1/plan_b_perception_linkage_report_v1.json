@@ -11,96 +11,6 @@
   "records": [
     {
       "schema_version": "plan_b_perception_linkage_record_v1",
-      "variant": "AC0732_1_M",
-      "image_path": "artifacts/images_to_convert/AC0732_1_M.jpg",
-      "status": "evaluated",
-      "plan_b_reason": "Mittlere kompakte Variante eines nach rechts gedrehten Symbols mit horizontal bleibendem P-Glyph.",
-      "description": "Plan-B-Kandidat AC0732_1_M: nach rechts gedrehte Grundgeometrie und horizontalen P-Glyph getrennt pr\u00fcfen.",
-      "perception_lerneffekt": {
-        "question": "Bleiben nach rechts gedrehte Grundgeometrie und horizontaler P-Glyph als getrennte Primitive erkennbar?",
-        "expected_first_primitive": "right_rotated_symbol_with_horizontal_p_glyph",
-        "expected_candidate_kinds": [
-          "line",
-          "rectangle",
-          "text_glyph"
-        ],
-        "expected_seed_kinds": [
-          "RectangleBackground",
-          "TextGlyph"
-        ],
-        "decision": "noch nicht erkannt",
-        "matched_candidate_kinds": [],
-        "matched_seed_kinds": [],
-        "top_candidate_kind": "circle",
-        "top_confidence": 0.9413,
-        "next_action": "Vor der Plan-B-Umsetzung zus\u00e4tzliche Detector-/ROI-Regel oder manuelle Seed-Annahme festhalten."
-      },
-      "candidate_count": 1,
-      "top_candidate": {
-        "schema_version": "perception_primitive_candidate_v1",
-        "kind": "circle",
-        "bbox": {
-          "x": 14.0,
-          "y": 5.0,
-          "width": 14.0,
-          "height": 14.0
-        },
-        "center": {
-          "x": 21.0,
-          "y": 12.0
-        },
-        "geometry": {
-          "radius_px": 7.0,
-          "inner_radius_px": 0.0,
-          "stroke_width_px": 1.0,
-          "circularity": 1.0,
-          "ring": false,
-          "fill_ratio": 0.7785,
-          "geometry_ir_kind": "CircleBackground",
-          "geometry_ir_bbox": [
-            0.4,
-            0.25,
-            0.4,
-            0.7
-          ]
-        },
-        "color": {
-          "fill_rgb": [
-            224,
-            81,
-            112
-          ],
-          "stroke_rgb": [
-            212,
-            79,
-            107
-          ],
-          "fill_hex": "#E05170",
-          "stroke_hex": "#D44F6B",
-          "fill_confidence": 0.6325,
-          "stroke_confidence": 0.6157
-        },
-        "confidence": 0.9413,
-        "roi": {
-          "type": "image",
-          "hint": "full_image",
-          "bbox": {
-            "x": 0.0,
-            "y": 0.0,
-            "width": 35.0,
-            "height": 20.0
-          }
-        },
-        "evidence": {
-          "detector": "detect_circle_rings",
-          "detection_source": "hough",
-          "threshold_model": "hough_plus_foreground_mask"
-        },
-        "source": "pf8_plan_b_perception_linkage"
-      }
-    },
-    {
-      "schema_version": "plan_b_perception_linkage_record_v1",
       "variant": "AC0732_1_L",
       "image_path": "artifacts/images_to_convert/AC0732_1_L.jpg",
       "status": "evaluated",
@@ -371,6 +281,35 @@
         ],
         "expected_seed_kinds": [
           "RectangleBackground"
+        ],
+        "decision": "noch nicht erkannt",
+        "matched_candidate_kinds": [],
+        "matched_seed_kinds": [],
+        "top_candidate_kind": null,
+        "top_confidence": null,
+        "next_action": "Vor der Plan-B-Umsetzung zus\u00e4tzliche Detector-/ROI-Regel oder manuelle Seed-Annahme festhalten."
+      },
+      "candidate_count": 0,
+      "top_candidate": null
+    },
+    {
+      "schema_version": "plan_b_perception_linkage_record_v1",
+      "variant": "AC0722_1_S",
+      "image_path": "artifacts/images_to_convert/AC0722_1_S.jpg",
+      "status": "evaluated",
+      "plan_b_reason": "Kleine links gedrehte Kellen-Variante mit rotem Quadrat und horizontalem T-Glyph.",
+      "description": "Plan-B-Kandidat AC0722_1_S: Anschluss, Quadratgrundk\u00f6rper und T-Glyph getrennt pr\u00fcfen.",
+      "perception_lerneffekt": {
+        "question": "K\u00f6nnen horizontaler Anschluss, Quadratgrundk\u00f6rper und T-Glyph in der kleinen Variante getrennt erkannt werden?",
+        "expected_first_primitive": "left_connector_square_with_t_glyph",
+        "expected_candidate_kinds": [
+          "line",
+          "rectangle",
+          "text_glyph"
+        ],
+        "expected_seed_kinds": [
+          "RectangleBackground",
+          "TextGlyph"
         ],
         "decision": "noch nicht erkannt",
         "matched_candidate_kinds": [],

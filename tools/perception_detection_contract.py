@@ -1397,16 +1397,6 @@ def write_text_glyph_evaluation_report(
 
 PLAN_B_PERCEPTION_TARGETS: list[dict[str, Any]] = [
     {
-        "variant": "AC0732_1_M",
-        "image_candidates": ["artifacts/images_to_convert/AC0732_1_M.jpg"],
-        "plan_b_reason": "Mittlere kompakte Variante eines nach rechts gedrehten Symbols mit horizontal bleibendem P-Glyph.",
-        "perception_question": "Bleiben nach rechts gedrehte Grundgeometrie und horizontaler P-Glyph als getrennte Primitive erkennbar?",
-        "expected_first_primitive": "right_rotated_symbol_with_horizontal_p_glyph",
-        "expected_candidate_kinds": {"rectangle", "line", "text_glyph"},
-        "expected_seed_kinds": {"RectangleBackground", "TextGlyph"},
-        "description": "Plan-B-Kandidat AC0732_1_M: nach rechts gedrehte Grundgeometrie und horizontalen P-Glyph getrennt prüfen.",
-    },
-    {
         "variant": "AC0732_1_L",
         "image_candidates": ["artifacts/images_to_convert/AC0732_1_L.jpg"],
         "plan_b_reason": "Große kompakte Variante eines nach rechts gedrehten Symbols mit horizontal bleibendem P-Glyph.",
@@ -1445,6 +1435,16 @@ PLAN_B_PERCEPTION_TARGETS: list[dict[str, Any]] = [
         "expected_candidate_kinds": {"rectangle", "line"},
         "expected_seed_kinds": {"RectangleBackground"},
         "description": "Plan-B-Kandidat AC0701_1_S: Quadratgrundkörper und unteren vertikalen Anschluss getrennt prüfen.",
+    },
+    {
+        "variant": "AC0722_1_S",
+        "image_candidates": ["artifacts/images_to_convert/AC0722_1_S.jpg"],
+        "plan_b_reason": "Kleine links gedrehte Kellen-Variante mit rotem Quadrat und horizontalem T-Glyph.",
+        "perception_question": "Können horizontaler Anschluss, Quadratgrundkörper und T-Glyph in der kleinen Variante getrennt erkannt werden?",
+        "expected_first_primitive": "left_connector_square_with_t_glyph",
+        "expected_candidate_kinds": {"rectangle", "line", "text_glyph"},
+        "expected_seed_kinds": {"RectangleBackground", "TextGlyph"},
+        "description": "Plan-B-Kandidat AC0722_1_S: Anschluss, Quadratgrundkörper und T-Glyph getrennt prüfen.",
     },
 ]
 
