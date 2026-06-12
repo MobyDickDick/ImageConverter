@@ -323,3 +323,18 @@ Review-Grenze. `AC0723_1_S` wurde aus Triage und PF8-Linkage entfernt; die
 Rotation lautet nun `AC0732_1_M`, `AC0732_1_L`, `AC0254_2`, `AC0732_1_S`
 und `AC0701_1_S`. Der neue AC0701-Kandidat ist mangels passender allgemeiner
 Rechteck-/Linienkandidaten zunächst `noch nicht erkannt`.
+
+
+## Folgeaktualisierung Run PB (2026-06-12)
+
+`AC0732_1_M` wurde im realen Non-Composite-Pfad als nach rechts gedrehte
+Quadrat-Kelle erneut konvertiert. Das neue Geometry-IR trennt linken Anschluss,
+roten Quadratgrundkörper und horizontal bleibenden P-Glyph und toleriert den
+Schreibfehler `gredreht` in der Quelldatenbeschreibung.
+
+`mean_delta2` sinkt von `13642.634766` auf `3317.628662`,
+`normalized_mse` von `0.06993533` auf `0.01700694` und damit unter die
+Review-Grenze. `AC0732_1_M` wurde aus Triage und PF8-Linkage entfernt; die
+Rotation lautet nun `AC0732_1_L`, `AC0254_2`, `AC0732_1_S`, `AC0701_1_S`
+und `AC0722_1_S`. Der neue AC0722-Kandidat bleibt mangels allgemeiner
+Rechteck-/Linien-/Text-Seeds zunächst `noch nicht erkannt`.

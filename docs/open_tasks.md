@@ -3643,3 +3643,12 @@ Ziel: Die Konvertierung soll strikt als **Kette** laufen:
 - **Perception-Lerneffekt:** Das Beschreibungs-Geometry-IR generalisiert die semantische Elementtrennung; PF8 erkennt beim neu aufgenommenen `AC0701_1_S` noch keinen passenden allgemeinen Rechteck-/Linienkandidaten.
 - **Rotation:** `AC0723_1_S` wurde aus Triage und PF8-Linkage entfernt; `AC0701_1_S` füllt den fünften Platz auf und ist zunächst `noch nicht erkannt`.
 - **Nächster sinnvoller Schritt:** Die reguläre Plan-B-Rotation mit `AC0732_1_M.jpg` fortsetzen.
+
+
+### Fortschritt vs. Blocker (Session 2026-06-12, Plan-B AC0732_1_M Run PB)
+
+- **Fortschritt:** `AC0732_1_M.jpg` wurde real re-konvertiert; ein neues beschreibungsgetriebenes Geometry-IR toleriert `gredreht` und trennt linken Anschluss, roten Quadratgrundkörper und horizontal bleibenden P-Glyph ohne variantenspezifische Pixelkoordinaten.
+- **Messwert:** `mean_delta2` sinkt von `13642.634766` auf `3317.628662` (`-75.68 %`), `normalized_mse` von `0.06993533` auf `0.01700694` und damit unter die Review-Grenze `0.04594568`.
+- **Perception-Lerneffekt:** Das Beschreibungs-Geometry-IR generalisiert die semantische Elementtrennung; PF8 erkennt beim neu aufgenommenen `AC0722_1_S` noch keine passenden allgemeinen Rechteck-/Linien-/Text-Seeds.
+- **Rotation:** `AC0732_1_M` wurde aus Triage und PF8-Linkage entfernt; `AC0722_1_S` füllt den fünften Platz auf und ist zunächst `noch nicht erkannt`.
+- **Nächster sinnvoller Schritt:** Die reguläre Plan-B-Rotation mit `AC0732_1_L.jpg` fortsetzen.

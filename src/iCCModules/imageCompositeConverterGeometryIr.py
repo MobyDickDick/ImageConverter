@@ -50,6 +50,19 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
         and _has_any(desc, ("nach links gedreht", "90° nach links", "90 grad nach links"))
         and _has_any(desc, ("quadrat", "viereck"))
     )
+    right_facing_square_kelle_p_hint = (
+        _has_any(desc, ("ac0732", "ac072"))
+        and _has_any(
+            desc,
+            (
+                "nach rechts gedreht",
+                "nach rechts gredreht",
+                "90° nach rechts",
+                "90 grad nach rechts",
+            ),
+        )
+        and _has_any(desc, ('horizontal "p"', "horizontal 'p'", "text immer noch horizontal"))
+    )
     right_rotated_square_kelle_p_hint = (
         "ac0733" in desc
         and _has_any(desc, ("nach rechts gedreht", "90° nach rechts", "90 grad nach rechts"))
@@ -156,6 +169,27 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
                 "label_center": [0.611, 0.520],
                 "label_fill": "#dedede",
                 "font_size": 0.440,
+                "font_weight": "600",
+            }
+        )
+        return elements
+
+    if right_facing_square_kelle_p_hint:
+        elements.append(
+            {
+                "kind": "RightFacingSquareKellePGlyph",
+                "id": "right_facing_square_kelle_p",
+                "body_bbox": [0.400, 0.040, 0.540, 0.920],
+                "body_fill": "#d92645",
+                "body_stroke": "#a0a0a0",
+                "body_stroke_width": 0.040,
+                "connector": [[0.000, 0.500], [0.400, 0.500]],
+                "connector_stroke": "#808080",
+                "connector_width": 0.080,
+                "label": "P",
+                "label_center": [0.640, 0.520],
+                "label_fill": "#dedede",
+                "font_size": 0.380,
                 "font_weight": "600",
             }
         )
@@ -803,11 +837,13 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
         if kind in {
             "VerticallyMirroredSquareKelleTGlyph",
             "LeftRotatedSquareKelleTGlyph",
+            "RightFacingSquareKellePGlyph",
             "RightRotatedSquareKellePGlyph",
         }:
             default_body_bbox = {
                 "VerticallyMirroredSquareKelleTGlyph": [0.020, 0.400, 0.960, 0.580],
                 "LeftRotatedSquareKelleTGlyph": [0.378, 0.040, 0.467, 0.920],
+                "RightFacingSquareKellePGlyph": [0.400, 0.040, 0.540, 0.920],
                 "RightRotatedSquareKellePGlyph": [0.020, 0.389, 0.960, 0.511],
             }[kind]
             raw_body_bbox = element.get("body_bbox", default_body_bbox)
@@ -827,6 +863,7 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
             default_connector = {
                 "VerticallyMirroredSquareKelleTGlyph": [[0.500, 0.000], [0.500, 0.400]],
                 "LeftRotatedSquareKelleTGlyph": [[0.000, 0.500], [0.378, 0.500]],
+                "RightFacingSquareKellePGlyph": [[0.000, 0.500], [0.400, 0.500]],
                 "RightRotatedSquareKellePGlyph": [[0.500, 0.000], [0.500, 0.389]],
             }[kind]
             raw_connector = element.get("connector", default_connector)
@@ -850,12 +887,17 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
             default_label_center = {
                 "VerticallyMirroredSquareKelleTGlyph": [0.500, 0.660],
                 "LeftRotatedSquareKelleTGlyph": [0.611, 0.520],
+                "RightFacingSquareKellePGlyph": [0.640, 0.520],
                 "RightRotatedSquareKellePGlyph": [0.460, 0.656],
             }[kind]
             raw_label_center = element.get("label_center", default_label_center)
             if not isinstance(raw_label_center, list) or len(raw_label_center) != 2:
                 raw_label_center = default_label_center
-            default_label = "P" if kind == "RightRotatedSquareKellePGlyph" else "T"
+            default_label = (
+                "P"
+                if kind in {"RightFacingSquareKellePGlyph", "RightRotatedSquareKellePGlyph"}
+                else "T"
+            )
             label = html.escape(str(element.get("label", default_label)))
             label_fill = html.escape(str(element.get("label_fill", "#dedede")))
             font_size = float(element.get("font_size", 0.440)) * min(w, h)
