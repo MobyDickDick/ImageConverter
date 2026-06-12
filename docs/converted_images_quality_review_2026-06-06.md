@@ -366,3 +366,18 @@ Rasterregistrierung verschiebt und skaliert beide Primitive gemeinsam.
 Review-Grenze. `AC0254_2` wurde aus Triage und PF8-Linkage entfernt. Der
 qualifizierte Diff-Pool enthält aktuell vier verbleibende Kandidaten:
 `AC0732_1_S`, `AC0701_1_S`, `AC0722_1_S` und `AC0845_S`.
+
+
+## Folgeaktualisierung Run PE (2026-06-12)
+
+`AC0732_1_S` wurde mit demselben allgemeinen AC0732-Geometry-IR wie die große
+und mittlere Variante real re-konvertiert. Linker Anschluss, roter
+Quadratgrundkörper und horizontal bleibender P-Glyph bleiben getrennte,
+größenrelative Vektorelemente; die Rasterregistrierung passt nur die gemeinsame
+Geometrie an das `25x15`-Eingabebild an.
+
+`mean_delta2` sinkt von `11705.263672` auf `3659.341309`,
+`normalized_mse` von `0.06000391` auf `0.01875864` und damit unter die
+Review-Grenze. `AC0732_1_S` wurde aus Triage und PF8-Linkage entfernt. Der
+qualifizierte Diff-Pool enthält aktuell drei verbleibende Kandidaten:
+`AC0701_1_S`, `AC0722_1_S` und `AC0845_S`.
