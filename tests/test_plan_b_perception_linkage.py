@@ -17,11 +17,11 @@ from tools.perception_detection_contract import (
 
 
 ACTIVE_VARIANTS = [
-    "AC0732_1_L",
     "AC0254_2",
     "AC0732_1_S",
     "AC0701_1_S",
     "AC0722_1_S",
+    "AC0845_S",
 ]
 
 
@@ -42,6 +42,17 @@ def test_build_plan_b_perception_linkage_record_has_lerneffekt_decision() -> Non
     assert lerneffekt["matched_candidate_kinds"] == []
     assert lerneffekt["matched_seed_kinds"] == []
     assert lerneffekt["next_action"]
+
+
+def test_ac0845_circle_seed_is_generalized_without_claiming_text_detection() -> None:
+    record = build_plan_b_perception_linkage_record(_target_by_variant("AC0845_S"))
+
+    assert record["variant"] == "AC0845_S"
+    lerneffekt = record["perception_lerneffekt"]
+    assert lerneffekt["decision"] == "generalisiert"
+    assert lerneffekt["matched_candidate_kinds"] == ["circle"]
+    assert lerneffekt["matched_seed_kinds"] == ["CircleBackground"]
+    assert "text_glyph" in lerneffekt["expected_candidate_kinds"]
 
 
 def test_plan_b_perception_targets_match_quality_triage() -> None:

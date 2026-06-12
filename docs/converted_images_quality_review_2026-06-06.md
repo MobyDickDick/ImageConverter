@@ -338,3 +338,17 @@ Review-Grenze. `AC0732_1_M` wurde aus Triage und PF8-Linkage entfernt; die
 Rotation lautet nun `AC0732_1_L`, `AC0254_2`, `AC0732_1_S`, `AC0701_1_S`
 und `AC0722_1_S`. Der neue AC0722-Kandidat bleibt mangels allgemeiner
 Rechteck-/Linien-/Text-Seeds zunächst `noch nicht erkannt`.
+
+
+## Folgeaktualisierung Run PC (2026-06-12)
+
+`AC0732_1_L` wurde mit demselben allgemeingültigen AC0732-Geometry-IR wie die
+mittlere Variante real re-konvertiert. Anschluss, roter Quadratgrundkörper und
+horizontal bleibender P-Glyph bleiben getrennte, größenrelative Elemente.
+
+`mean_delta2` sinkt von `12783.177734` auf `6015.989258`,
+`normalized_mse` von `0.06552955` auf `0.03083937` und damit unter die
+Review-Grenze. `AC0732_1_L` wurde aus Triage und PF8-Linkage entfernt; die
+Rotation lautet nun `AC0254_2`, `AC0732_1_S`, `AC0701_1_S`, `AC0722_1_S` und
+`AC0845_S`. PF8 erkennt für den neuen rH-Badge-Kandidaten bereits einen
+allgemeinen `CircleBackground`-Seed und entscheidet `generalisiert`.
