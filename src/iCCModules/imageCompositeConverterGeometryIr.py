@@ -31,6 +31,22 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
     gradient_hint = _has_any(desc, ("farbverlauf", "gradient")) and _has_any(desc, ("horizontal", "dunkel-hell-dunkel", "dunkel–hell–dunkel"))
     diagonal_hint = _has_any(desc, ("diagonal", "diagonale", "diagonalen", "andreaskreuz", "kreuz"))
     differential_pressure_hint = _has_any(desc, ("differenzdruckmessung", "dp")) and "doppelten grauen rand" in desc
+    connector_free_rh_badge_hint = (
+        _has_any(
+            desc,
+            ('steht "rh"', "steht 'rh'", "zentrierter rh-glyph", "zentrierten rh-glyph"),
+        )
+        and _has_any(desc, ("kreis", "kreisring"))
+        and _has_any(
+            desc,
+            (
+                "keine griff-/leitungslinie außerhalb",
+                "ohne außenanschluss",
+                "ohne äussere griff",
+                "ohne äußere griff",
+            ),
+        )
+    )
     pump_symbol_hint = (
         "pumpensymbol" in desc and "kreis" in desc and "dreieck" in desc
     ) or _has_any(desc, ("ac0251", "ac0401"))
@@ -502,6 +518,30 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
                 "font_size": 0.540,
                 "font_weight": "700",
             }
+        )
+        return elements
+
+    if connector_free_rh_badge_hint:
+        elements.extend(
+            [
+                {
+                    "kind": "CircleBackground",
+                    "id": "rh_badge_circle",
+                    "bbox": [0.035, 0.035, 0.93, 0.93],
+                    "fill": "#f2f2f2",
+                    "stroke": "#7f7f7f",
+                    "stroke_width": 0.055,
+                },
+                {
+                    "kind": "TextGlyph",
+                    "id": "rh_badge_text",
+                    "text": "rH",
+                    "bbox_ref": "rh_badge_circle",
+                    "fill": "#666666",
+                    "font_size": 0.48,
+                    "font_weight": "700",
+                },
+            ]
         )
         return elements
 

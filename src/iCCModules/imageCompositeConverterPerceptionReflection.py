@@ -150,6 +150,17 @@ class Reflection:
                 params["description_contract"]["status"] = "family_rule"
             return desc, params
 
+        if any(
+            str(element.get("id", "")) == "rh_badge_circle"
+            for element in params["geometry_ir"]
+        ):
+            params["mode"] = "non_composite"
+            params["label"] = ""
+            params["elements"].append(
+                "GEOMETRIE: Anschlussfreies Kreis-/Text-Badge wird über Geometry-IR rekonstruiert"
+            )
+            return desc, params
+
         if contract_status == "insufficient_description":
             params["mode"] = "insufficient_description"
             params["label"] = ""

@@ -8,105 +8,11 @@
     "nur Sonderfall",
     "noch nicht erkannt"
   ],
-  "records": [
-    {
-      "schema_version": "plan_b_perception_linkage_record_v1",
-      "variant": "AC0845_S",
-      "image_path": "artifacts/images_to_convert/AC0845_S.jpg",
-      "status": "evaluated",
-      "plan_b_reason": "Kleines kreisf\u00f6rmiges rH-Badge ohne \u00e4u\u00dfere Griff- oder Leitungslinie.",
-      "description": "Plan-B-Kandidat AC0845_S: Kreisring und zentrierten rH-Glyph ohne Au\u00dfenanschluss pr\u00fcfen.",
-      "perception_lerneffekt": {
-        "question": "Werden Kreisring und zentrierter rH-Glyph ohne f\u00e4lschlichen Au\u00dfenanschluss getrennt erkannt?",
-        "expected_first_primitive": "circle_ring_with_centered_rh_glyph",
-        "expected_candidate_kinds": [
-          "circle",
-          "text_glyph"
-        ],
-        "expected_seed_kinds": [
-          "CircleBackground",
-          "TextGlyph"
-        ],
-        "decision": "generalisiert",
-        "matched_candidate_kinds": [
-          "circle"
-        ],
-        "matched_seed_kinds": [
-          "CircleBackground"
-        ],
-        "top_candidate_kind": "circle",
-        "top_confidence": 0.914,
-        "next_action": "Im n\u00e4chsten Plan-B-Paket als vorinitialisierten Geometry-IR-Seed protokollieren."
-      },
-      "candidate_count": 5,
-      "top_candidate": {
-        "schema_version": "perception_primitive_candidate_v1",
-        "kind": "circle",
-        "bbox": {
-          "x": 2.0,
-          "y": 3.0,
-          "width": 10.0,
-          "height": 10.0
-        },
-        "center": {
-          "x": 7.0,
-          "y": 8.0
-        },
-        "geometry": {
-          "radius_px": 5.0,
-          "inner_radius_px": 0.0,
-          "stroke_width_px": 1.0,
-          "circularity": 1.0,
-          "ring": false,
-          "fill_ratio": 0.6543,
-          "geometry_ir_kind": "CircleBackground",
-          "geometry_ir_bbox": [
-            0.13333,
-            0.2,
-            0.66667,
-            0.66667
-          ]
-        },
-        "color": {
-          "fill_rgb": [
-            178,
-            178,
-            178
-          ],
-          "stroke_rgb": [
-            180,
-            180,
-            180
-          ],
-          "fill_hex": "#B2B2B2",
-          "stroke_hex": "#B4B4B4",
-          "fill_confidence": 0.5725,
-          "stroke_confidence": 0.5542
-        },
-        "confidence": 0.914,
-        "roi": {
-          "type": "image",
-          "hint": "full_image",
-          "bbox": {
-            "x": 0.0,
-            "y": 0.0,
-            "width": 15.0,
-            "height": 15.0
-          }
-        },
-        "evidence": {
-          "detector": "detect_circle_rings",
-          "detection_source": "hough",
-          "threshold_model": "hough_plus_foreground_mask"
-        },
-        "source": "pf8_plan_b_perception_linkage"
-      }
-    }
-  ],
+  "records": [],
   "metrics": {
-    "samples": 1,
-    "evaluated_samples": 1,
-    "generalisiert": 1,
+    "samples": 0,
+    "evaluated_samples": 0,
+    "generalisiert": 0,
     "nur_sonderfall": 0,
     "noch_nicht_erkannt": 0,
     "all_have_perception_lerneffekt": true

@@ -724,3 +724,31 @@ def test_render_geometry_ir_keeps_ac0733_p_horizontal_and_separate_from_body() -
     assert '>P</text>' in svg
     assert "rotate(" not in svg
     assert "<image" not in svg
+
+
+def test_build_geometry_ir_maps_connector_free_rh_badge_description() -> None:
+    ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
+        'Grauer Kreis mit dunkler Kontur und hellem Innenverlauf; im Kreis steht "rH". '
+        'Keine Griff-/Leitungslinie außerhalb des Kreises. Geometrische Beschreibung: '
+        'konzentrischer Kreisring mit zentrierter horizontaler Textachse.'
+    )
+
+    assert [element["kind"] for element in ir] == ["CircleBackground", "TextGlyph"]
+    assert ir[0]["id"] == "rh_badge_circle"
+    assert ir[1]["text"] == "rH"
+    assert ir[1]["bbox_ref"] == "rh_badge_circle"
+
+
+def test_render_geometry_ir_to_svg_contains_connector_free_rh_badge_primitives() -> None:
+    ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
+        'Grauer Kreis mit dunkler Kontur und hellem Innenverlauf; im Kreis steht "rH". '
+        'Keine Griff-/Leitungslinie außerhalb des Kreises.'
+    )
+
+    svg = geometry_ir_helpers.renderGeometryIrToSvgImpl(15, 15, ir)
+
+    assert 'id="rh_badge_circle"' in svg
+    assert 'id="rh_badge_text"' in svg
+    assert '>rH</text>' in svg
+    assert "<line" not in svg
+    assert "<image" not in svg
