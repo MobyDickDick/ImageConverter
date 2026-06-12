@@ -17,7 +17,6 @@ from tools.perception_detection_contract import (
 
 
 ACTIVE_VARIANTS = [
-    "AC0701_1_S",
     "AC0722_1_S",
     "AC0845_S",
 ]
@@ -25,21 +24,6 @@ ACTIVE_VARIANTS = [
 
 def _target_by_variant(variant: str) -> dict[str, object]:
     return next(target for target in PLAN_B_PERCEPTION_TARGETS if target["variant"] == variant)
-
-
-def test_build_plan_b_perception_linkage_record_has_lerneffekt_decision() -> None:
-    record = build_plan_b_perception_linkage_record(_target_by_variant("AC0701_1_S"))
-
-    assert record["schema_version"] == "plan_b_perception_linkage_record_v1"
-    assert record["variant"] == "AC0701_1_S"
-    lerneffekt = record["perception_lerneffekt"]
-    assert lerneffekt["question"]
-    assert lerneffekt["expected_first_primitive"] == "square_with_lower_vertical_connector"
-    assert lerneffekt["decision"] == "noch nicht erkannt"
-    assert lerneffekt["expected_candidate_kinds"] == ["line", "rectangle"]
-    assert lerneffekt["matched_candidate_kinds"] == []
-    assert lerneffekt["matched_seed_kinds"] == []
-    assert lerneffekt["next_action"]
 
 
 def test_ac0845_circle_seed_is_generalized_without_claiming_text_detection() -> None:

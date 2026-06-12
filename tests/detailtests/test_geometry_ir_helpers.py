@@ -560,6 +560,34 @@ def test_renders_pump_triangle_relative_to_its_circle():
     assert "<polygon" in svg
 
 
+def test_build_geometry_ir_models_ac0701_upright_square_kelle() -> None:
+    ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
+        "Kelle, aber mit Quadrat anstelle von Kreis oben."
+    )
+
+    assert len(ir) == 1
+    assert ir[0]["kind"] == "UprightSquareKelleGlyph"
+    assert ir[0]["body_bbox"] == [0.020, 0.040, 0.960, 0.560]
+    assert ir[0]["connector"] == [[0.500, 0.600], [0.500, 1.000]]
+    assert "label" not in ir[0]
+
+
+def test_render_geometry_ir_models_ac0701_body_and_lower_connector() -> None:
+    ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
+        "Kelle, aber mit Quadrat anstelle von Kreis oben."
+    )
+
+    svg = geometry_ir_helpers.renderGeometryIrToSvgImpl(15, 25, ir)
+
+    assert 'id="upright_square_kelle_connector"' in svg
+    assert 'id="upright_square_kelle_body"' in svg
+    assert svg.count("<rect") == 1
+    assert svg.count("<path") == 1
+    assert "<text" not in svg
+    assert "rotate(" not in svg
+    assert "<image" not in svg
+
+
 def test_build_geometry_ir_models_ac0722_left_rotated_square_kelle_with_t() -> None:
     ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
         "Wie AC0701: Kelle, aber mit Quadrat anstelle von Kreis oben. "

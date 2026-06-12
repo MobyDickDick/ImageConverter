@@ -11,33 +11,6 @@
   "records": [
     {
       "schema_version": "plan_b_perception_linkage_record_v1",
-      "variant": "AC0701_1_S",
-      "image_path": "artifacts/images_to_convert/AC0701_1_S.jpg",
-      "status": "evaluated",
-      "plan_b_reason": "Kompakte aufrechte Kellen-Variante mit quadratischem Grundk\u00f6rper und unterem Anschluss.",
-      "description": "Plan-B-Kandidat AC0701_1_S: Quadratgrundk\u00f6rper und unteren vertikalen Anschluss getrennt pr\u00fcfen.",
-      "perception_lerneffekt": {
-        "question": "K\u00f6nnen Quadratgrundk\u00f6rper und unterer vertikaler Anschluss als getrennte Primitive erkannt werden?",
-        "expected_first_primitive": "square_with_lower_vertical_connector",
-        "expected_candidate_kinds": [
-          "line",
-          "rectangle"
-        ],
-        "expected_seed_kinds": [
-          "RectangleBackground"
-        ],
-        "decision": "noch nicht erkannt",
-        "matched_candidate_kinds": [],
-        "matched_seed_kinds": [],
-        "top_candidate_kind": null,
-        "top_confidence": null,
-        "next_action": "Vor der Plan-B-Umsetzung zus\u00e4tzliche Detector-/ROI-Regel oder manuelle Seed-Annahme festhalten."
-      },
-      "candidate_count": 0,
-      "top_candidate": null
-    },
-    {
-      "schema_version": "plan_b_perception_linkage_record_v1",
       "variant": "AC0722_1_S",
       "image_path": "artifacts/images_to_convert/AC0722_1_S.jpg",
       "status": "evaluated",
@@ -160,11 +133,11 @@
     }
   ],
   "metrics": {
-    "samples": 3,
-    "evaluated_samples": 3,
+    "samples": 2,
+    "evaluated_samples": 2,
     "generalisiert": 1,
     "nur_sonderfall": 0,
-    "noch_nicht_erkannt": 2,
+    "noch_nicht_erkannt": 1,
     "all_have_perception_lerneffekt": true
   }
 }

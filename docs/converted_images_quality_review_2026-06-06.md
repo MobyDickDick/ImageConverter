@@ -381,3 +381,17 @@ Geometrie an das `25x15`-Eingabebild an.
 Review-Grenze. `AC0732_1_S` wurde aus Triage und PF8-Linkage entfernt. Der
 qualifizierte Diff-Pool enthält aktuell drei verbleibende Kandidaten:
 `AC0701_1_S`, `AC0722_1_S` und `AC0845_S`.
+
+
+## Folgeaktualisierung Run PF (2026-06-12)
+
+`AC0701_1_S` wurde real mit einem neuen allgemeinen AC0701-Geometry-IR
+re-konvertiert. Der rote Quadratgrundkörper und der untere vertikale Anschluss
+bleiben getrennte, größenrelative Vektorelemente; die Auswahl folgt aus der
+Beschreibung und speichert keine Bild- oder Sample-Geometrie.
+
+`mean_delta2` sinkt von `11579.485352` auf `560.104004`,
+`normalized_mse` von `0.05935915` auf `0.00287122` und damit deutlich unter die
+Review-Grenze. `AC0701_1_S` wurde aus Triage und PF8-Linkage entfernt. Der
+qualifizierte Diff-Pool enthält aktuell zwei verbleibende Kandidaten:
+`AC0722_1_S` und `AC0845_S`.

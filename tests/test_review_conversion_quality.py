@@ -473,3 +473,23 @@ def test_ac0723_1_s_committed_svg_preserves_vertical_square_t_kelle_quality() ->
     assert ">T</text>" in svg
     assert "rotate(" not in svg
     assert "<image" not in svg
+
+
+def test_ac0701_1_s_committed_svg_preserves_upright_square_kelle_quality() -> None:
+    record = review_variant("AC0701_1_S", source="diff_inventory")
+
+    assert record.status == "ok"
+    assert record.width == 15
+    assert record.height == 25
+    assert record.mean_delta2 == pytest.approx(560.10400390625)
+    assert record.normalized_mse is not None
+    assert record.normalized_mse < 0.045945679012345676
+
+    svg = Path(record.svg_path).read_text(encoding="utf-8")
+    assert 'id="upright_square_kelle_connector"' in svg
+    assert 'id="upright_square_kelle_body"' in svg
+    assert svg.count("<rect") == 1
+    assert svg.count("<path") == 1
+    assert "<text" not in svg
+    assert "rotate(" not in svg
+    assert "<image" not in svg

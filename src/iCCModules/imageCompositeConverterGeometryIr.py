@@ -40,6 +40,22 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
     darker_pump_circle_hint = pump_symbol_hint and _has_any(
         desc, ("kreis ein wenig dunkler", "kreis etwas dunkler")
     )
+    upright_square_kelle_hint = (
+        "kelle" in desc
+        and _has_any(desc, ("quadrat", "viereck"))
+        and not _has_any(
+            desc,
+            (
+                "gedreht",
+                "gredreht",
+                "gespiegelt",
+                "90°",
+                "90 grad",
+                "180°",
+                "180 grad",
+            ),
+        )
+    )
     vertically_mirrored_square_kelle_t_hint = (
         "kelle" in desc
         and _has_any(desc, ("vertikal gespiegelt", "senkrecht gespiegelt"))
@@ -148,6 +164,22 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
                 "blade_fill": "#f2f5f3",
                 "blade_stroke": "#b4c9b8",
                 "blade_stroke_width": 0.020,
+            }
+        )
+        return elements
+
+    if upright_square_kelle_hint:
+        elements.append(
+            {
+                "kind": "UprightSquareKelleGlyph",
+                "id": "upright_square_kelle",
+                "body_bbox": [0.020, 0.040, 0.960, 0.560],
+                "body_fill": "#e11e48",
+                "body_stroke": "#a0a0a0",
+                "body_stroke_width": 0.040,
+                "connector": [[0.500, 0.600], [0.500, 1.000]],
+                "connector_stroke": "#808080",
+                "connector_width": 0.080,
             }
         )
         return elements
@@ -888,12 +920,14 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
                         f'stroke-linejoin="round"/>'
                     )
         elif kind in {
+            "UprightSquareKelleGlyph",
             "VerticallyMirroredSquareKelleTGlyph",
             "LeftRotatedSquareKelleTGlyph",
             "RightFacingSquareKellePGlyph",
             "RightRotatedSquareKellePGlyph",
         }:
             default_body_bbox = {
+                "UprightSquareKelleGlyph": [0.020, 0.040, 0.960, 0.560],
                 "VerticallyMirroredSquareKelleTGlyph": [0.020, 0.400, 0.960, 0.580],
                 "LeftRotatedSquareKelleTGlyph": [0.378, 0.040, 0.467, 0.920],
                 "RightFacingSquareKellePGlyph": [0.400, 0.040, 0.540, 0.920],
@@ -914,6 +948,7 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
             connector_stroke = html.escape(str(element.get("connector_stroke", "#808080")))
             connector_sw = float(element.get("connector_width", 0.080)) * min(w, h)
             default_connector = {
+                "UprightSquareKelleGlyph": [[0.500, 0.600], [0.500, 1.000]],
                 "VerticallyMirroredSquareKelleTGlyph": [[0.500, 0.000], [0.500, 0.400]],
                 "LeftRotatedSquareKelleTGlyph": [[0.000, 0.500], [0.378, 0.500]],
                 "RightFacingSquareKellePGlyph": [[0.000, 0.500], [0.400, 0.500]],
@@ -937,6 +972,8 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
                 f'width="{_fmt(body_w)}" height="{_fmt(body_h)}" fill="{body_fill}" '
                 f'stroke="{body_stroke}" stroke-width="{_fmt(body_sw)}"/>'
             )
+            if kind == "UprightSquareKelleGlyph":
+                continue
             default_label_center = {
                 "VerticallyMirroredSquareKelleTGlyph": [0.500, 0.660],
                 "LeftRotatedSquareKelleTGlyph": [0.611, 0.520],

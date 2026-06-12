@@ -9,6 +9,8 @@ All notable changes to ImageConverter will be documented in this file.
 
 ## Unreleased
 
+- Plan-B Run PF adds a description-driven, size-relative Geometry-IR for the upright AC0701 square-kelle, reducing `AC0701_1_S` from `normalized_mse=0.05935915` to `0.00287122` and rotating the queue to `AC0722_1_S` and `AC0845_S`.
+
 - Plan-B Run PE confirms the shared right-facing AC0732 square-kelle Geometry-IR on `AC0732_1_S`, reducing `normalized_mse` from `0.06000391` to `0.01875864` and rotating the queue to the three remaining qualified candidates.
 
 - Plan-B Run PD adds a description-driven circular-damper Geometry-IR for `AC0254_2`, correcting the former rectangle assumption, reducing `normalized_mse` from `0.06059016` to `0.00300936`, and rotating the queue to `AC0732_1_S` through `AC0845_S`.
