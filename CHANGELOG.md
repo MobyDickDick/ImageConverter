@@ -9,6 +9,8 @@ All notable changes to ImageConverter will be documented in this file.
 
 ## Unreleased
 
+- Plan-B Run PG extends general Geometry-IR registration to rectangle bodies, reducing `AC0722_1_S` from `normalized_mse=0.05681223` to `0.01399280` with the shared left-rotated square-kelle topology and rotating the queue to `AC0845_S`.
+
 - Plan-B Run PF adds a description-driven, size-relative Geometry-IR for the upright AC0701 square-kelle, reducing `AC0701_1_S` from `normalized_mse=0.05935915` to `0.00287122` and rotating the queue to `AC0722_1_S` and `AC0845_S`.
 
 - Plan-B Run PE confirms the shared right-facing AC0732 square-kelle Geometry-IR on `AC0732_1_S`, reducing `normalized_mse` from `0.06000391` to `0.01875864` and rotating the queue to the three remaining qualified candidates.

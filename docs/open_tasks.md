@@ -3687,3 +3687,12 @@ Ziel: Die Konvertierung soll strikt als **Kette** laufen:
 - **Perception-Lerneffekt:** Die allgemeine Rechteck-/Linien-Topologie wird aus der Beschreibung rekonstruiert; es wurde kein variantenspezifischer PF8-Sonderfall und kein Sample-SVG ergänzt.
 - **Rotation:** `AC0701_1_S` wurde aus Triage und PF8-Linkage entfernt; aktiv bleiben `AC0722_1_S` und `AC0845_S`.
 - **Nächster sinnvoller Schritt:** Die reguläre Plan-B-Rotation mit `AC0722_1_S.jpg` fortsetzen.
+
+
+### Fortschritt vs. Blocker (Session 2026-06-12, Plan-B AC0722_1_S Run PG)
+
+- **Fortschritt:** `AC0722_1_S.jpg` wurde real mit dem allgemeinen AC0722-Geometry-IR re-konvertiert; die größenrelative Rasterregistrierung erfasst nun auch `body_bbox`-Rechtecke und überträgt damit Anschluss, roten Quadratgrundkörper und horizontalen T-Glyph auf die kleine Variante.
+- **Messwert:** `mean_delta2` sinkt von `11082.645508` auf `2729.645264` (`-75.37 %`), `normalized_mse` von `0.05681223` auf `0.01399280` und damit unter die Review-Grenze `0.04594568`.
+- **Perception-Lerneffekt:** Die reale Konvertierung bestätigt die allgemeine beschreibungsgetriebene Rechteck-/Linien-/Text-Topologie; ein variantenspezifischer PF8-Sonderfall ist nicht erforderlich.
+- **Rotation:** `AC0722_1_S` wurde aus Triage und PF8-Linkage entfernt; der qualifizierte Diff-Pool enthält nur noch `AC0845_S`.
+- **Nächster sinnvoller Schritt:** Die reguläre Plan-B-Rotation mit `AC0845_S.jpg` fortsetzen.

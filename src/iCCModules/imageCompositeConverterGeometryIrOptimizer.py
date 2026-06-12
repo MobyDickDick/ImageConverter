@@ -266,20 +266,21 @@ def transformGeometryIrImpl(
             )
             element["circle"] = [*center, float(circle[2]) * min(scale_x, scale_y)]
 
-        bbox = element.get("bbox")
-        if isinstance(bbox, list) and len(bbox) == 4:
-            origin = _transform_point(
-                bbox[:2],
-                translate_x=translate_x,
-                translate_y=translate_y,
-                scale_x=scale_x,
-                scale_y=scale_y,
-            )
-            element["bbox"] = [
-                *origin,
-                float(bbox[2]) * scale_x,
-                float(bbox[3]) * scale_y,
-            ]
+        for field in ("bbox", "body_bbox"):
+            bbox = element.get(field)
+            if isinstance(bbox, list) and len(bbox) == 4:
+                origin = _transform_point(
+                    bbox[:2],
+                    translate_x=translate_x,
+                    translate_y=translate_y,
+                    scale_x=scale_x,
+                    scale_y=scale_y,
+                )
+                element[field] = [
+                    *origin,
+                    float(bbox[2]) * scale_x,
+                    float(bbox[3]) * scale_y,
+                ]
 
         for field in ("stroke_width", "connector_width"):
             if field in element:

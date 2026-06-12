@@ -395,3 +395,16 @@ Beschreibung und speichert keine Bild- oder Sample-Geometrie.
 Review-Grenze. `AC0701_1_S` wurde aus Triage und PF8-Linkage entfernt. Der
 qualifizierte Diff-Pool enthält aktuell zwei verbleibende Kandidaten:
 `AC0722_1_S` und `AC0845_S`.
+
+
+## Folgeaktualisierung Run PG (2026-06-12)
+
+`AC0722_1_S` wurde real mit dem allgemeinen, beschreibungsgetriebenen
+`LeftRotatedSquareKelleTGlyph` re-konvertiert. Die Rasterregistrierung
+transformiert nun auch den `body_bbox` des roten Quadratgrundkörpers; Anschluss,
+Körper und horizontaler T-Glyph bleiben getrennte semantische SVG-Elemente.
+
+`mean_delta2` sinkt von `11082.645508` auf `2729.645264`,
+`normalized_mse` von `0.05681223` auf `0.01399280` und damit unter die
+Review-Grenze. `AC0722_1_S` wurde aus Triage und PF8-Linkage entfernt. Der
+qualifizierte Diff-Pool enthält aktuell nur noch `AC0845_S`.

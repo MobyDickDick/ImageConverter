@@ -92,6 +92,7 @@ def test_transform_geometry_ir_preserves_semantics_and_transforms_supported_geom
             "kind": "ExampleGlyph",
             "id": "semantic-id",
             "body_paths": [[[0.2, 0.3], [0.4, 0.5]]],
+            "body_bbox": [0.2, 0.3, 0.4, 0.5],
             "circle": [0.7, 0.6, 0.1],
             "connector": [[0.4, 0.5], [0.6, 0.5]],
             "blade_points": [[0.2, 0.5], [0.6, 0.2], [0.6, 0.8]],
@@ -115,6 +116,7 @@ def test_transform_geometry_ir_preserves_semantics_and_transforms_supported_geom
     assert transformed[0]["label"] == "M"
     assert transformed[0]["body_paths"][0][0] == pytest.approx([0.0, 0.3])
     assert transformed[0]["body_paths"][0][1] == pytest.approx([0.4, 0.4])
+    assert transformed[0]["body_bbox"] == pytest.approx([0.0, 0.3, 0.8, 0.25])
     assert transformed[0]["circle"] == pytest.approx([1.0, 0.45, 0.05])
     assert transformed[0]["connector"][0] == pytest.approx([0.4, 0.4])
     assert transformed[0]["connector"][1] == pytest.approx([0.8, 0.4])

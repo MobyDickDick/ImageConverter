@@ -1397,16 +1397,6 @@ def write_text_glyph_evaluation_report(
 
 PLAN_B_PERCEPTION_TARGETS: list[dict[str, Any]] = [
     {
-        "variant": "AC0722_1_S",
-        "image_candidates": ["artifacts/images_to_convert/AC0722_1_S.jpg"],
-        "plan_b_reason": "Kleine links gedrehte Kellen-Variante mit rotem Quadrat und horizontalem T-Glyph.",
-        "perception_question": "Können horizontaler Anschluss, Quadratgrundkörper und T-Glyph in der kleinen Variante getrennt erkannt werden?",
-        "expected_first_primitive": "left_connector_square_with_t_glyph",
-        "expected_candidate_kinds": {"rectangle", "line", "text_glyph"},
-        "expected_seed_kinds": {"RectangleBackground", "TextGlyph"},
-        "description": "Plan-B-Kandidat AC0722_1_S: Anschluss, Quadratgrundkörper und T-Glyph getrennt prüfen.",
-    },
-    {
         "variant": "AC0845_S",
         "image_candidates": ["artifacts/images_to_convert/AC0845_S.jpg"],
         "plan_b_reason": "Kleines kreisförmiges rH-Badge ohne äußere Griff- oder Leitungslinie.",
