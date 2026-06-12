@@ -1,5 +1,4 @@
 variant,image_path,status,expected_first_primitive,decision,matched_candidate_kinds,matched_seed_kinds,top_candidate_kind,top_confidence,next_action
-AC0254_2,artifacts/images_to_convert/AC0254_2.jpg,evaluated,left_rotated_flap_with_three_closing_surfaces,nur Sonderfall,line,,line,0.92,"Als Perception-Hinweis dokumentieren, aber noch keinen generischen Seed erzwingen."
 AC0732_1_S,artifacts/images_to_convert/AC0732_1_S.jpg,evaluated,right_rotated_symbol_with_horizontal_p_glyph,noch nicht erkannt,,,circle,0.9448,Vor der Plan-B-Umsetzung zusätzliche Detector-/ROI-Regel oder manuelle Seed-Annahme festhalten.
 AC0701_1_S,artifacts/images_to_convert/AC0701_1_S.jpg,evaluated,square_with_lower_vertical_connector,noch nicht erkannt,,,,,Vor der Plan-B-Umsetzung zusätzliche Detector-/ROI-Regel oder manuelle Seed-Annahme festhalten.
 AC0722_1_S,artifacts/images_to_convert/AC0722_1_S.jpg,evaluated,left_connector_square_with_t_glyph,noch nicht erkannt,,,,,Vor der Plan-B-Umsetzung zusätzliche Detector-/ROI-Regel oder manuelle Seed-Annahme festhalten.

@@ -9,6 +9,8 @@ All notable changes to ImageConverter will be documented in this file.
 
 ## Unreleased
 
+- Plan-B Run PD adds a description-driven circular-damper Geometry-IR for `AC0254_2`, correcting the former rectangle assumption, reducing `normalized_mse` from `0.06059016` to `0.00300936`, and rotating the queue to `AC0732_1_S` through `AC0845_S`.
+
 - Plan-B Run PC verifies the shared right-facing AC0732 square-kelle Geometry-IR on `AC0732_1_L`, reducing `normalized_mse` from `0.06552955` to `0.03083937` and rotating the queue to `AC0254_2` through `AC0845_S`.
 
 - Plan-B Run PB adds a typo-tolerant, description-driven Geometry-IR for the right-facing AC0732 square-kelle with a horizontal P glyph, reducing `AC0732_1_M` from `normalized_mse=0.06993533` to `0.01700694` and rotating the queue to `AC0732_1_L` through `AC0722_1_S`.

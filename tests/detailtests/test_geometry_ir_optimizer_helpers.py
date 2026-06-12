@@ -94,6 +94,7 @@ def test_transform_geometry_ir_preserves_semantics_and_transforms_supported_geom
             "body_paths": [[[0.2, 0.3], [0.4, 0.5]]],
             "circle": [0.7, 0.6, 0.1],
             "connector": [[0.4, 0.5], [0.6, 0.5]],
+            "blade_points": [[0.2, 0.5], [0.6, 0.2], [0.6, 0.8]],
             "label": "M",
             "font_size": 0.2,
             "stroke_width": 0.04,
@@ -117,6 +118,9 @@ def test_transform_geometry_ir_preserves_semantics_and_transforms_supported_geom
     assert transformed[0]["circle"] == pytest.approx([1.0, 0.45, 0.05])
     assert transformed[0]["connector"][0] == pytest.approx([0.4, 0.4])
     assert transformed[0]["connector"][1] == pytest.approx([0.8, 0.4])
+    assert transformed[0]["blade_points"][0] == pytest.approx([0.0, 0.4])
+    assert transformed[0]["blade_points"][1] == pytest.approx([0.8, 0.25])
+    assert transformed[0]["blade_points"][2] == pytest.approx([0.8, 0.55])
     assert transformed[0]["font_size"] == 0.1
     assert transformed[0]["stroke_width"] == 0.06
     assert transformed[0]["connector_width"] == 0.09

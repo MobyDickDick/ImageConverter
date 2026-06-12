@@ -11,82 +11,6 @@
   "records": [
     {
       "schema_version": "plan_b_perception_linkage_record_v1",
-      "variant": "AC0254_2",
-      "image_path": "artifacts/images_to_convert/AC0254_2.jpg",
-      "status": "evaluated",
-      "plan_b_reason": "Kompakte links gedrehte Klappenvariante mit Rechteckgrundk\u00f6rper und drei Schlie\u00dffl\u00e4chen.",
-      "description": "Plan-B-Kandidat AC0254_2: links gedrehte Klappe und drei Schlie\u00dffl\u00e4chen getrennt pr\u00fcfen.",
-      "perception_lerneffekt": {
-        "question": "Werden Rechteckgrundk\u00f6rper und drei gedrehte Schlie\u00dffl\u00e4chen als allgemeine Rechteck-/Linienprimitive erkannt?",
-        "expected_first_primitive": "left_rotated_flap_with_three_closing_surfaces",
-        "expected_candidate_kinds": [
-          "line",
-          "rectangle"
-        ],
-        "expected_seed_kinds": [
-          "HorizontalRule",
-          "RectangleBackground"
-        ],
-        "decision": "nur Sonderfall",
-        "matched_candidate_kinds": [
-          "line"
-        ],
-        "matched_seed_kinds": [],
-        "top_candidate_kind": "line",
-        "top_confidence": 0.92,
-        "next_action": "Als Perception-Hinweis dokumentieren, aber noch keinen generischen Seed erzwingen."
-      },
-      "candidate_count": 9,
-      "top_candidate": {
-        "schema_version": "perception_primitive_candidate_v1",
-        "kind": "line",
-        "bbox": {
-          "x": 11.0,
-          "y": 19.0,
-          "width": 1.0,
-          "height": 11.0
-        },
-        "center": {
-          "x": 11.5,
-          "y": 24.5
-        },
-        "geometry": {
-          "orientation": "vertical",
-          "x_center": 11.5,
-          "y_top": 19.0,
-          "y_bottom": 30.0,
-          "length_px": 11.0,
-          "stroke_width_px": 1.0,
-          "angle_deg": 90.0
-        },
-        "color": {
-          "fill_rgb": null,
-          "stroke_rgb": null,
-          "fill_hex": null,
-          "stroke_hex": null,
-          "fill_confidence": 0.0,
-          "stroke_confidence": 0.0
-        },
-        "confidence": 0.92,
-        "roi": {
-          "type": "image",
-          "hint": "full_image",
-          "bbox": {
-            "x": 0.0,
-            "y": 0.0,
-            "width": 31.0,
-            "height": 31.0
-          }
-        },
-        "evidence": {
-          "detector": "detect_vertical_lines",
-          "edge_model": "canny+hough_lines_p"
-        },
-        "source": "hough"
-      }
-    },
-    {
-      "schema_version": "plan_b_perception_linkage_record_v1",
       "variant": "AC0732_1_S",
       "image_path": "artifacts/images_to_convert/AC0732_1_S.jpg",
       "status": "evaluated",
@@ -326,10 +250,10 @@
     }
   ],
   "metrics": {
-    "samples": 5,
-    "evaluated_samples": 5,
+    "samples": 4,
+    "evaluated_samples": 4,
     "generalisiert": 1,
-    "nur_sonderfall": 1,
+    "nur_sonderfall": 0,
     "noch_nicht_erkannt": 3,
     "all_have_perception_lerneffekt": true
   }

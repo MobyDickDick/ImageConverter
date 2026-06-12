@@ -68,6 +68,9 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
         and _has_any(desc, ("nach rechts gedreht", "90° nach rechts", "90 grad nach rechts"))
         and _has_any(desc, ('horizontal "p"', "horizontal 'p'", "text immer noch horizontal"))
     )
+    left_rotated_circular_damper_hint = "ac0521" in desc and _has_any(
+        desc, ("nach links gedreht", "90° nach links", "90 grad nach links")
+    )
     compressor_hint = _has_any(desc, ("kompressor", "kopressor"))
     upward_compressor_hint = compressor_hint and _has_any(desc, ("nach oben", "oben", "aufwärts", "aufwaerts"))
     grey_background_compressor_hint = upward_compressor_hint and _has_any(
@@ -131,6 +134,23 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
         m_top_kelle_three_way_valve_hint
         and _has_any(desc, ("hauptdiagonal gespiegelt", "diagonal gespiegelt"))
     )
+
+    if left_rotated_circular_damper_hint:
+        elements.append(
+            {
+                "kind": "LeftRotatedCircularDamperGlyph",
+                "id": "left_rotated_circular_damper",
+                "circle": [0.500, 0.500, 0.455],
+                "circle_fill": "#45aa5e",
+                "circle_stroke": "#78957d",
+                "stroke_width": 0.040,
+                "blade_points": [[0.055, 0.500], [0.765, 0.155], [0.765, 0.845]],
+                "blade_fill": "#f2f5f3",
+                "blade_stroke": "#b4c9b8",
+                "blade_stroke_width": 0.020,
+            }
+        )
+        return elements
 
     if vertically_mirrored_square_kelle_t_hint:
         elements.append(
@@ -834,7 +854,40 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
     for element in geometry_ir:
         kind = str(element.get("kind", ""))
         element_id = html.escape(str(element.get("id", kind)))
-        if kind in {
+        if kind == "LeftRotatedCircularDamperGlyph":
+            raw_circle = element.get("circle", [0.500, 0.500, 0.455])
+            if not isinstance(raw_circle, list) or len(raw_circle) != 3:
+                raw_circle = [0.500, 0.500, 0.455]
+            cx = float(raw_circle[0]) * w
+            cy = float(raw_circle[1]) * h
+            radius = float(raw_circle[2]) * min(w, h)
+            circle_fill = html.escape(str(element.get("circle_fill", "#45aa5e")))
+            circle_stroke = html.escape(str(element.get("circle_stroke", "#78957d")))
+            circle_sw = float(element.get("stroke_width", 0.040)) * min(w, h)
+            svg.append(
+                f'  <circle id="{element_id}_circle" cx="{_fmt(cx)}" cy="{_fmt(cy)}" '
+                f'r="{_fmt(radius)}" fill="{circle_fill}" stroke="{circle_stroke}" '
+                f'stroke-width="{_fmt(circle_sw)}"/>'
+            )
+            raw_blade_points = element.get(
+                "blade_points", [[0.055, 0.500], [0.765, 0.155], [0.765, 0.845]]
+            )
+            if isinstance(raw_blade_points, list) and len(raw_blade_points) == 3:
+                blade_points = [
+                    f"{_fmt(float(point[0]) * w)},{_fmt(float(point[1]) * h)}"
+                    for point in raw_blade_points
+                    if isinstance(point, list) and len(point) == 2
+                ]
+                if len(blade_points) == 3:
+                    blade_fill = html.escape(str(element.get("blade_fill", "#f2f5f3")))
+                    blade_stroke = html.escape(str(element.get("blade_stroke", "#b4c9b8")))
+                    blade_sw = float(element.get("blade_stroke_width", 0.020)) * min(w, h)
+                    svg.append(
+                        f'  <polygon id="{element_id}_blade" points="{" ".join(blade_points)}" '
+                        f'fill="{blade_fill}" stroke="{blade_stroke}" stroke-width="{_fmt(blade_sw)}" '
+                        f'stroke-linejoin="round"/>'
+                    )
+        elif kind in {
             "VerticallyMirroredSquareKelleTGlyph",
             "LeftRotatedSquareKelleTGlyph",
             "RightFacingSquareKellePGlyph",

@@ -3661,3 +3661,12 @@ Ziel: Die Konvertierung soll strikt als **Kette** laufen:
 - **Perception-Lerneffekt:** `AC0845_S` wurde neu aufgenommen; PF8 erkennt den Kreis mit Konfidenz `0.914` als allgemeinen `CircleBackground`-Seed und entscheidet `generalisiert`, während die zentrierte rH-Glyph noch nachzuführen ist.
 - **Rotation:** `AC0732_1_L` wurde aus Triage und PF8-Linkage entfernt; `AC0845_S` füllt den fünften Platz auf.
 - **Nächster sinnvoller Schritt:** Die reguläre Plan-B-Rotation mit `AC0254_2.jpg` fortsetzen.
+
+
+### Fortschritt vs. Blocker (Session 2026-06-12, Plan-B AC0254_2 Run PD)
+
+- **Fortschritt:** `AC0254_2.jpg` wurde real re-konvertiert; ein neues beschreibungsgetriebenes Geometry-IR korrigiert die frühere Rechteckannahme und trennt grünen Kreisgrundkörper und links zeigendes helles Schließblatt.
+- **Qualität:** `mean_delta2` sank von `11819.625000` auf `587.050964` (`-95.03 %`), `normalized_mse` von `0.06059016` auf `0.00300936` und damit unter die Review-Grenze `0.04594568`.
+- **Perception-Lerneffekt:** Die frühere Rechteck-/Linienfrage war nur ein Sonderfall; die reale Topologie ist Kreis plus Dreiecksblatt. Das Paket erzwingt deshalb keinen falschen allgemeinen Rechteck-Seed.
+- **Rotation:** `AC0254_2` wurde aus Triage und PF8-Linkage entfernt; der qualifizierte Pool enthält aktuell vier Kandidaten.
+- **Nächster sinnvoller Schritt:** Die reguläre Plan-B-Rotation mit `AC0732_1_S.jpg` fortsetzen.
