@@ -40,10 +40,12 @@ def test_report_failure_emits_github_error_annotation(monkeypatch, capsys) -> No
 
     report_failure("AC0010", "converter_error", 1)
 
-    assert capsys.readouterr().out == (
+    captured = capsys.readouterr()
+    assert captured.out == (
         "::error title=Catalog conversion failed::"
         "AC0010: converter_error (return code 1)\n"
     )
+    assert captured.err == "[CATALOG] ERROR: AC0010: converter_error (return code 1)\n"
 
 
 def test_conversion_environment_prepends_matching_vendor_bundle(tmp_path: Path, monkeypatch) -> None:

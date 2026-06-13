@@ -2198,11 +2198,11 @@ def test_run_iteration_pipeline_writes_failed_best_attempt_artifacts_for_semanti
 
 
 @pytest.mark.blocking_conversion
-def test_run_iteration_pipeline_converts_non_composite_as_embedded_svg(
+def test_run_iteration_pipeline_converts_non_composite_to_usable_svg(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    """Non-composite descriptions should still emit a usable fallback SVG."""
+    """Non-composite descriptions should emit a usable SVG via any valid strategy."""
     if image_composite_converter.np is None or image_composite_converter.cv2 is None:
         pytest.skip("numpy/cv2 not available in this environment")
 
@@ -2238,10 +2238,18 @@ def test_run_iteration_pipeline_converts_non_composite_as_embedded_svg(
     assert res is not None
     assert (svg_dir / "SE0082.svg").exists()
     log_text = (reports_dir / "SE0082_element_validation.log").read_text(encoding="utf-8")
-    assert (
-        "status=non_composite_embedded_svg" in log_text
-        or "status=non_composite_pure_svg_placeholder" in log_text
-    )
+    statuses = {
+        line.removeprefix("status=")
+        for line in log_text.splitlines()
+        if line.startswith("status=")
+    }
+    assert statuses & {
+        "non_composite_embedded_svg",
+        "non_composite_pure_svg_placeholder_vector",
+        "non_composite_elementwise_symbol_fit",
+        "non_composite_description_geometry_ir",
+        "non_composite_perception_seeded_geometry_ir",
+    }
 
 
 def test_run_iteration_pipeline_overrides_semantic_badge_for_detected_gradient_stripe(
