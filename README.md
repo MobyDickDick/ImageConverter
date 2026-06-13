@@ -135,7 +135,7 @@ RC_GATE_AC08_SEGMENT_TIMEOUT_SECONDS=300 ./tools/run_release_candidate_gate.sh
 ./tools/run_test_evidence.sh --name completion-profile --log artifacts/test-evidence/completion-profile.log --summary artifacts/test-evidence/completion-profile-summary.md -- ./tools/run_local_completion_checks.sh
 # Erwartete Negativpfade behalten Verdict und Exit-Code bei und weisen die
 # erfüllte Erwartung separat maschinenlesbar aus:
-./tools/run_test_evidence.sh --name expected-failure --log artifacts/test-evidence/expected-failure.log --summary artifacts/test-evidence/expected-failure-summary.md --expected-exit 3 -- bash -c 'exit 3'
+./tools/run_test_evidence.sh --name expected-failure --log artifacts/test-evidence/expected-failure.log --summary artifacts/test-evidence/expected-failure-summary.md --scenario-id expected-failure --test-context tests/example.py::test_expected_failure --run-id local-example --expected-exit 3 -- bash -c 'exit 3'
 # Zusätzliche GitHub-Jobs lagern Profile aus:
 python tools/run_pytest_profile.py core-green
 python tools/run_pytest_profile.py extended

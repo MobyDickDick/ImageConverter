@@ -108,6 +108,9 @@ def test_run_test_evidence_records_pass_summary(tmp_path: Path) -> None:
     assert "- Exit code: 0" in summary
     assert "- Expected exit code: not specified" in summary
     assert "- Expectation: NOT_SPECIFIED" in summary
+    assert "- Scenario ID: unit-pass" in summary
+    assert "- Test context: not specified" in summary
+    assert "- Run ID: not specified" in summary
 
 
 def test_run_test_evidence_records_fail_summary(tmp_path: Path) -> None:
@@ -143,6 +146,40 @@ def test_run_test_evidence_records_fail_summary(tmp_path: Path) -> None:
     assert "- Exit code: 3" in summary
     assert "- Expected exit code: not specified" in summary
     assert "- Expectation: NOT_SPECIFIED" in summary
+
+
+def test_run_test_evidence_records_explicit_identity_metadata(tmp_path: Path) -> None:
+    summary_path = tmp_path / "identity.md"
+    result = subprocess.run(
+        [
+            "./tools/run_test_evidence.sh",
+            "--name",
+            "FP-D12 accepted-exception ac08-smoke",
+            "--log",
+            str(tmp_path / "identity.log"),
+            "--summary",
+            str(summary_path),
+            "--scenario-id",
+            "accepted-exception",
+            "--test-context",
+            "tests/detailtests/test_local_completion_checks_tool.py::test_release_candidate_gate_records_blockers_and_accepted_exceptions",
+            "--run-id",
+            "fp-d12-test-run",
+            "--",
+            "true",
+        ],
+        cwd=Path(__file__).resolve().parents[2],
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        check=False,
+    )
+
+    assert result.returncode == 0
+    summary = summary_path.read_text(encoding="utf-8")
+    assert "- Scenario ID: accepted-exception" in summary
+    assert "- Test context: tests/detailtests/test_local_completion_checks_tool.py::test_release_candidate_gate_records_blockers_and_accepted_exceptions" in summary
+    assert "- Run ID: fp-d12-test-run" in summary
 
 
 def _run_expected_exit_evidence(
@@ -309,6 +346,9 @@ def test_release_candidate_gate_records_blockers_and_accepted_exceptions(tmp_pat
         "RC_GATE_AC08_SMOKE_CMD": "echo smoke deviation; exit 7",
         "RC_GATE_QUALITY_CMD": "echo quality ok",
         "RC_GATE_ACCEPTED_EXCEPTIONS": "ac08-smoke",
+        "RC_GATE_SCENARIO_ID": "accepted-exception",
+        "RC_GATE_RUN_ID": "fp-d12-accepted-exception",
+        "RC_GATE_TEST_CONTEXT": "tests/detailtests/test_local_completion_checks_tool.py::test_release_candidate_gate_records_blockers_and_accepted_exceptions",
     }
 
     result = subprocess.run(
@@ -326,6 +366,11 @@ def test_release_candidate_gate_records_blockers_and_accepted_exceptions(tmp_pat
     assert "core-suite;0;PASS" in status
     assert "ac08-smoke;7;ACCEPTED_EXCEPTION" in status
     assert "quality-gate;0;PASS" in status
+    smoke_summary = (evidence_dir / "ac08-smoke-summary.md").read_text(encoding="utf-8")
+    assert "# Test evidence: FP-D12 accepted-exception ac08-smoke" in smoke_summary
+    assert "- Scenario ID: accepted-exception" in smoke_summary
+    assert "- Run ID: fp-d12-accepted-exception" in smoke_summary
+    assert "test_release_candidate_gate_records_blockers_and_accepted_exceptions" in smoke_summary
 
 
 def test_release_candidate_gate_fails_unaccepted_blocker(tmp_path: Path) -> None:
@@ -336,6 +381,8 @@ def test_release_candidate_gate_fails_unaccepted_blocker(tmp_path: Path) -> None
         "RC_GATE_CORE_CMD": "echo core ok",
         "RC_GATE_AC08_SMOKE_CMD": "echo smoke blocker; exit 5",
         "RC_GATE_QUALITY_CMD": "echo quality ok",
+        "RC_GATE_SCENARIO_ID": "unaccepted-blocker",
+        "RC_GATE_TEST_CONTEXT": "tests/detailtests/test_local_completion_checks_tool.py::test_release_candidate_gate_fails_unaccepted_blocker",
     }
 
     result = subprocess.run(
@@ -375,6 +422,8 @@ def test_release_candidate_gate_discards_stale_metrics_before_smoke(tmp_path: Pa
         "RC_GATE_OUTPUT_DIR": str(output_dir),
         "RC_GATE_CORE_CMD": "echo core ok",
         "RC_GATE_AC08_SMOKE_CMD": "echo smoke blocker; exit 124",
+        "RC_GATE_SCENARIO_ID": "stale-metrics-timeout",
+        "RC_GATE_TEST_CONTEXT": "tests/detailtests/test_local_completion_checks_tool.py::test_release_candidate_gate_discards_stale_metrics_before_smoke",
     }
 
     result = subprocess.run(
@@ -415,6 +464,8 @@ def test_release_candidate_gate_propagates_paths_to_segmented_smoke(tmp_path: Pa
         ),
         "RC_GATE_AC08_FINALIZE_CMD": f"mkdir -p {output_dir}/reports; touch {finalized}",
         "RC_GATE_QUALITY_CMD": "echo quality ok",
+        "RC_GATE_SCENARIO_ID": "path-propagation",
+        "RC_GATE_TEST_CONTEXT": "tests/detailtests/test_local_completion_checks_tool.py::test_release_candidate_gate_propagates_paths_to_segmented_smoke",
     }
 
     result = subprocess.run(
@@ -448,6 +499,9 @@ def test_release_candidate_gate_help_documents_hard_gate_controls() -> None:
     assert "RC_GATE_AC08_SEGMENT_TIMEOUT_SECONDS" in result.stdout
     assert "default: 240" in result.stdout
     assert "RC_GATE_WORK_PACKAGE" in result.stdout
+    assert "RC_GATE_SCENARIO_ID" in result.stdout
+    assert "RC_GATE_RUN_ID" in result.stdout
+    assert "RC_GATE_TEST_CONTEXT" in result.stdout
 
 
 def test_segmented_ac08_smoke_withholds_aggregation_when_one_variant_fails(tmp_path: Path) -> None:

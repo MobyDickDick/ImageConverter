@@ -8,6 +8,9 @@ RC_GATE_EVIDENCE_DIR="${RC_GATE_EVIDENCE_DIR:-artifacts/test-evidence/${RC_GATE_
 RC_GATE_ACCEPTED_EXCEPTIONS=",${RC_GATE_ACCEPTED_EXCEPTIONS:-},"
 RC_GATE_AC08_SEGMENT_TIMEOUT_SECONDS="${RC_GATE_AC08_SEGMENT_TIMEOUT_SECONDS:-240}"
 RC_GATE_WORK_PACKAGE="${RC_GATE_WORK_PACKAGE:-FP-D12}"
+RC_GATE_SCENARIO_ID="${RC_GATE_SCENARIO_ID:-standard}"
+RC_GATE_RUN_ID="${RC_GATE_RUN_ID:-${RC_GATE_NAME}-${RC_GATE_SCENARIO_ID}}"
+RC_GATE_TEST_CONTEXT="${RC_GATE_TEST_CONTEXT:-tools/run_release_candidate_gate.sh}"
 export RC_GATE_OUTPUT_DIR RC_GATE_EVIDENCE_DIR RC_GATE_AC08_SEGMENT_TIMEOUT_SECONDS RC_GATE_WORK_PACKAGE
 VENDOR_SITE_PACKAGES="vendor/linux-py310/site-packages"
 if [[ -d "$VENDOR_SITE_PACKAGES" ]]; then
@@ -31,6 +34,9 @@ Environment overrides:
   RC_GATE_ACCEPTED_EXCEPTIONS    Comma-separated step names allowed to fail
   RC_GATE_AC08_SEGMENT_TIMEOUT_SECONDS Per-variant timeout in seconds (default: 240)
   RC_GATE_WORK_PACKAGE           Work-package label in logs (default: FP-D12)
+  RC_GATE_SCENARIO_ID            Stable scenario identity (default: standard)
+  RC_GATE_RUN_ID                 Correlation key shared by all three gate steps
+  RC_GATE_TEST_CONTEXT           Producing test NodeID or stable caller context
   RC_GATE_CORE_CMD               Shell command override for the core suite
   RC_GATE_AC08_SMOKE_CMD         Shell command override for the AC08 smoke
   RC_GATE_QUALITY_CMD            Shell command override for the quality gate
@@ -52,12 +58,16 @@ run_gate_step() {
   local log_path="${RC_GATE_EVIDENCE_DIR}/${step_name}.log"
   local summary_path="${RC_GATE_EVIDENCE_DIR}/${step_name}-summary.md"
 
-  echo "==> ${RC_GATE_WORK_PACKAGE} ${step_name}"
+  local evidence_name="${RC_GATE_WORK_PACKAGE} ${RC_GATE_SCENARIO_ID} ${step_name}"
+  echo "==> ${evidence_name}"
   set +e
   ./tools/run_test_evidence.sh \
-    --name "${RC_GATE_WORK_PACKAGE} ${step_name}" \
+    --name "$evidence_name" \
     --log "$log_path" \
     --summary "$summary_path" \
+    --scenario-id "$RC_GATE_SCENARIO_ID" \
+    --test-context "$RC_GATE_TEST_CONTEXT" \
+    --run-id "$RC_GATE_RUN_ID" \
     -- bash -lc "$command"
   local status=$?
   set -e
