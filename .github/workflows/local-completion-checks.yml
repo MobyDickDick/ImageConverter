@@ -14,6 +14,11 @@ on:
         required: false
         type: boolean
         default: false
+      run_full_catalog:
+        description: 'Convert the complete raster catalog in parallel shards (60 second limit per image)'
+        required: false
+        type: boolean
+        default: false
 
 jobs:
   completion-profile:
@@ -191,3 +196,36 @@ jobs:
         env:
           RUN_HEAVY_CONVERSION_TESTS: '1'
         run: python -m pytest -q -rs tests/test_image_composite_converter.py
+
+  full-catalog-conversion:
+    if: github.event_name == 'workflow_dispatch' && inputs.run_full_catalog
+    runs-on: ubuntu-latest
+    timeout-minutes: 330
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2, 3, 4, 5, 6, 7]
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Convert catalog shard
+        run: >-
+          python tools/run_catalog_conversion.py
+          --shard-index ${{ matrix.shard }}
+          --shard-count 8
+          --timeout-seconds 60
+
+      - name: Upload catalog shard
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: catalog-conversion-shard-${{ matrix.shard }}
+          path: artifacts/catalog-conversion/shard-*
+          if-no-files-found: error
+          retention-days: 14
