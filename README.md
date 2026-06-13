@@ -138,6 +138,8 @@ RC_GATE_AC08_SEGMENT_TIMEOUT_SECONDS=300 ./tools/run_release_candidate_gate.sh
 ./tools/run_test_evidence.sh --name expected-failure --log artifacts/test-evidence/expected-failure.log --summary artifacts/test-evidence/expected-failure-summary.md --scenario-id expected-failure --test-context tests/example.py::test_expected_failure --run-id local-example --expected-exit 3 -- bash -c 'exit 3'
 # Einzel-Summaries getrennt als Szenario-Evidenz und Abschlussurteil aggregieren:
 python tools/aggregate_test_evidence.py --output artifacts/test-evidence/aggregate.md --json-output artifacts/test-evidence/aggregate.json --correction-task artifacts/test-evidence/completion-correction-task.md artifacts/test-evidence/*-summary.md
+# Verbindliche Regeln für Produkt- gegenüber Evidence-Korrekturaufgaben:
+# docs/test_evidence_task_derivation.md
 # Zusätzliche GitHub-Jobs lagern Profile aus:
 python tools/run_pytest_profile.py core-green
 python tools/run_pytest_profile.py extended

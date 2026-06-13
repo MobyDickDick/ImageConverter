@@ -6709,6 +6709,7 @@ def test_readme_links_local_workflow_doc() -> None:
     readme = Path("README.md").read_text(encoding="utf-8")
 
     assert "docs/image_converter_workflow.md" in readme
+    assert "docs/test_evidence_task_derivation.md" in readme
 
 
 def test_local_workflow_doc_tracks_current_commands() -> None:
@@ -6738,6 +6739,7 @@ def test_local_workflow_doc_tracks_current_commands() -> None:
     assert "artifacts/test-evidence/completion-profile-summary.md" in ci_workflow
     assert "completion-profile-test-evidence" in workflow_doc
     assert "completion-profile-test-evidence" in ci_workflow
+    assert "docs/test_evidence_task_derivation.md" in workflow_doc
     assert "if-no-files-found: error" in ci_workflow
     assert "./tools/run_local_completion_checks.sh" in ci_workflow
     assert "batch-artifact-drift-gate:" in ci_workflow
@@ -6775,6 +6777,25 @@ def test_local_workflow_doc_tracks_current_commands() -> None:
     assert "satisfactory-regression-debug" in workflow_doc
     assert "full-heavy-conversion-suite" in workflow_doc
     assert "RUN_HEAVY_CONVERSION_TESTS=1 python -m pytest -q -rs tests/test_image_composite_converter.py" in workflow_doc
+
+
+def test_evidence_task_derivation_doc_defines_required_decisions_and_template() -> None:
+    policy = Path("docs/test_evidence_task_derivation.md").read_text(encoding="utf-8")
+
+    assert "`Verdict: FAIL`, `Expectation: MET`" in policy
+    assert "`Expectation: UNMET`" in policy
+    assert "Abschlussprofil fehlt oder ist rot" in policy
+    assert "Evidence-Korrekturaufgabe" in policy
+    for required_field in (
+        "Symptom:",
+        "Szenario-ID:",
+        "Reproduktionsbefehl:",
+        "Erwartetes Ergebnis:",
+        "Tatsächlicher Exit-Code:",
+        "Logpfad:",
+        "Akzeptanztest:",
+    ):
+        assert required_field in policy
 
 
 def test_parse_args_help_mentions_canonical_image_converter_flags(capsys: pytest.CaptureFixture[str]) -> None:
