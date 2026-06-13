@@ -2,14 +2,15 @@
 
 Ziel: maximal **5** aktive JPG-Kandidaten, die derzeit noch nicht zufriedenstellend konvertieren, aber voraussichtlich nicht "hoffnungslos komplex" sind.
 
-## Aktuelle Kandidaten (Stand: 2026-06-12, Plan-B Run PH)
+## Aktuelle Kandidaten (Stand: 2026-06-13, Review-Refresh Run PI)
 
-`AC0845_S` wird nun als anschlussfreies Kreis-/Text-Badge aus der Beschreibung
+`AC0845_S` wurde als anschlussfreies Kreis-/Text-Badge aus der Beschreibung
 rekonstruiert. Kreisgrundkörper und zentrierter `rH`-Glyph bleiben getrennte,
 größenrelative Geometry-IR-Elemente; die allgemeine Rasterregistrierung passt
 die gemeinsame Geometrie an die kleine Rastervariante an.
 
-Der reproduzierbare Review findet aktuell **keinen** qualifizierten Diff-Fall
+Der reproduzierbare Review findet auch nach der erneuten Inventur mit `132`
+Diff-Varianten und `123` renderbaren Paaren **keinen** qualifizierten Diff-Fall
 oberhalb der Review-Grenze. Die reguläre Rotation ist daher leer und wird erst
 bei einem neu qualifizierten Kandidaten fortgesetzt.
 
