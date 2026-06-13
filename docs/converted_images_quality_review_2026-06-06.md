@@ -422,3 +422,19 @@ Außenleitung entfällt.
 Review-Grenze. `AC0845_S` wurde aus Triage und PF8-Linkage entfernt. Der
 reproduzierbare Review findet aktuell keinen weiteren qualifizierten
 Diff-Kandidaten oberhalb der Grenze.
+
+
+## Folgeaktualisierung Run PI (2026-06-13)
+
+Nach Abschluss der Rotation wurde der Qualitätsreview wie in Run PH vorgesehen
+ohne manuelle Kandidatenvorgabe erneut ausgeführt. Alle 48 Erfolgsvarianten
+sind weiterhin renderbar; keine überschreitet die Review-Grenze
+`0.045945679012345676`, und kein Erfolgsartefakt fehlt oder schlägt beim
+Rendern fehl.
+
+Das aktuelle Diff-Inventar umfasst 132 Varianten, davon 123 renderbare
+Bild-/SVG-Paare. Die deterministische Auswahl qualifiziert aus dieser
+Inventur keinen neuen Plan-B-Kandidaten. Der synchron
+erneuerte PF8-Linkage-Report bleibt folgerichtig bei `0` Samples. Die Rotation
+bleibt pausiert, bis neue oder geänderte Konvertierungsartefakte einen Fall
+oberhalb der Grenze erzeugen.
