@@ -106,6 +106,8 @@ def test_run_test_evidence_records_pass_summary(tmp_path: Path) -> None:
     assert "# Test evidence: unit-pass" in summary
     assert "- Verdict: PASS" in summary
     assert "- Exit code: 0" in summary
+    assert "- Expected exit code: not specified" in summary
+    assert "- Expectation: NOT_SPECIFIED" in summary
 
 
 def test_run_test_evidence_records_fail_summary(tmp_path: Path) -> None:
@@ -139,6 +141,109 @@ def test_run_test_evidence_records_fail_summary(tmp_path: Path) -> None:
     assert "# Test evidence: unit-fail" in summary
     assert "- Verdict: FAIL" in summary
     assert "- Exit code: 3" in summary
+    assert "- Expected exit code: not specified" in summary
+    assert "- Expectation: NOT_SPECIFIED" in summary
+
+
+def _run_expected_exit_evidence(
+    tmp_path: Path,
+    *,
+    expected_exit: str,
+    observed_exit: int,
+) -> tuple[subprocess.CompletedProcess[str], str]:
+    log_path = tmp_path / f"expected-{expected_exit}-{observed_exit}.log"
+    summary_path = tmp_path / f"expected-{expected_exit}-{observed_exit}.md"
+    result = subprocess.run(
+        [
+            "./tools/run_test_evidence.sh",
+            "--name",
+            "expected-exit",
+            "--log",
+            str(log_path),
+            "--summary",
+            str(summary_path),
+            "--expected-exit",
+            expected_exit,
+            "--",
+            "bash",
+            "-c",
+            f"exit {observed_exit}",
+        ],
+        cwd=Path(__file__).resolve().parents[2],
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        check=False,
+    )
+    return result, summary_path.read_text(encoding="utf-8")
+
+
+def test_run_test_evidence_marks_expected_failure_as_met(tmp_path: Path) -> None:
+    result, summary = _run_expected_exit_evidence(
+        tmp_path,
+        expected_exit="3",
+        observed_exit=3,
+    )
+
+    assert result.returncode == 3
+    assert "- Verdict: FAIL" in summary
+    assert "- Exit code: 3" in summary
+    assert "- Expected exit code: 3" in summary
+    assert "- Expectation: MET" in summary
+
+
+def test_run_test_evidence_marks_unexpected_success_as_unmet(tmp_path: Path) -> None:
+    result, summary = _run_expected_exit_evidence(
+        tmp_path,
+        expected_exit="3",
+        observed_exit=0,
+    )
+
+    assert result.returncode == 0
+    assert "- Verdict: PASS" in summary
+    assert "- Exit code: 0" in summary
+    assert "- Expected exit code: 3" in summary
+    assert "- Expectation: UNMET" in summary
+
+
+def test_run_test_evidence_marks_wrong_failure_code_as_unmet(tmp_path: Path) -> None:
+    result, summary = _run_expected_exit_evidence(
+        tmp_path,
+        expected_exit="3",
+        observed_exit=5,
+    )
+
+    assert result.returncode == 5
+    assert "- Verdict: FAIL" in summary
+    assert "- Exit code: 5" in summary
+    assert "- Expected exit code: 3" in summary
+    assert "- Expectation: UNMET" in summary
+
+
+def test_run_test_evidence_rejects_invalid_expected_exit(tmp_path: Path) -> None:
+    result = subprocess.run(
+        [
+            "./tools/run_test_evidence.sh",
+            "--name",
+            "invalid-expected-exit",
+            "--log",
+            str(tmp_path / "invalid.log"),
+            "--summary",
+            str(tmp_path / "invalid.md"),
+            "--expected-exit",
+            "failure",
+            "--",
+            "true",
+        ],
+        cwd=Path(__file__).resolve().parents[2],
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        check=False,
+    )
+
+    assert result.returncode == 2
+    assert "--expected-exit must be an integer from 0 to 255" in result.stdout
 
 
 def test_ac08_success_metrics_gate_passes_for_complete_green_metrics(tmp_path: Path) -> None:
