@@ -12,6 +12,7 @@ import time
 from pathlib import Path
 
 SUPPORTED_SUFFIXES = {".bmp", ".jpeg", ".jpg", ".png"}
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
 
 
 def parse_args() -> argparse.Namespace:
@@ -47,6 +48,27 @@ def completed_variants(report_path: Path) -> set[str]:
         return {row["variant"] for row in csv.DictReader(handle) if row.get("variant")}
 
 
+def report_failure(variant: str, status: str, returncode: int) -> None:
+    message = f"{variant}: {status} (return code {returncode})"
+    if os.environ.get("GITHUB_ACTIONS") == "true":
+        print(f"::error title=Catalog conversion failed::{message}", flush=True)
+    else:
+        print(f"[CATALOG] ERROR: {message}", file=sys.stderr, flush=True)
+
+
+def conversion_environment() -> dict[str, str]:
+    env = os.environ.copy()
+    py_tag = f"py{sys.version_info.major}{sys.version_info.minor}"
+    vendor_site_packages = PROJECT_ROOT / "vendor" / f"linux-{py_tag}" / "site-packages"
+    if vendor_site_packages.is_dir():
+        existing_pythonpath = env.get("PYTHONPATH")
+        pythonpath = [str(vendor_site_packages)]
+        if existing_pythonpath:
+            pythonpath.append(existing_pythonpath)
+        env["PYTHONPATH"] = os.pathsep.join(pythonpath)
+    return env
+
+
 def main() -> int:
     args = parse_args()
     if args.shard_count < 1 or not 0 <= args.shard_index < args.shard_count:
@@ -68,6 +90,7 @@ def main() -> int:
 
     write_header = not report_path.exists() or not args.resume
     mode = "a" if args.resume else "w"
+    failure_count = 0
     with report_path.open(mode, encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(
             handle,
@@ -96,7 +119,7 @@ def main() -> int:
                 variant,
                 "--deterministic-order",
             ]
-            env = os.environ.copy()
+            env = conversion_environment()
             env["ICC_CONVERSION_TIMEOUT_SEC"] = str(args.timeout_seconds)
             started = time.monotonic()
             status = "completed"
@@ -130,8 +153,16 @@ def main() -> int:
                 f"{status} rc={returncode} elapsed={elapsed:.1f}s",
                 flush=True,
             )
+            if status != "completed":
+                failure_count += 1
+                report_failure(variant, status, returncode)
 
-    return 0
+    print(
+        f"[CATALOG] finished={len(pending)} failed={failure_count} "
+        f"succeeded={len(pending) - failure_count}",
+        flush=True,
+    )
+    return 1 if failure_count else 0
 
 
 if __name__ == "__main__":
