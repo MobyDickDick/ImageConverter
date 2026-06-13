@@ -70,16 +70,24 @@ zuordnen.
 
 ### TE-K3 – Roh-Evidenz und Abschlussurteil getrennt aggregieren
 
-- [ ] Die Sammelausgabe in die Bereiche `Scenario evidence` und
+- [x] Die Sammelausgabe in die Bereiche `Scenario evidence` und
   `Completion verdict` gliedern.
-- [ ] Das Gesamturteil ausschließlich aus dem übergeordneten
+- [x] Das Gesamturteil ausschließlich aus dem übergeordneten
   `completion-profile` beziehungsweise einem expliziten Aggregatstatus
   ableiten.
-- [ ] Erwartete Negativpfade als abgedeckte Szenarien zählen, nicht als offene
+- [x] Erwartete Negativpfade als abgedeckte Szenarien zählen, nicht als offene
   Produktblocker.
-- [ ] Bei einem roten `completion-profile` weiterhin automatisch eine echte
+- [x] Bei einem roten `completion-profile` weiterhin automatisch eine echte
   Korrekturaufgabe mit Logpfad, Exit-Code, Git-SHA und reproduzierbarem
   Startbefehl erzeugen.
+
+**Umgesetzt am 2026-06-13:** `tools/aggregate_test_evidence.py` liest die
+unveränderten Einzel-Summaries, weist erfüllte Negativpfade als `COVERED` aus
+und leitet `overall_verdict` ausschließlich aus dem konfigurierten
+Abschlussszenario ab. Neben Markdown kann ein JSON-Aggregat geschrieben
+werden. Bei fehlendem oder rotem Abschlussprofil erzeugt das Tool optional
+eine strukturierte Korrekturaufgabe; bei einem grünen Profil entfernt es eine
+veraltete automatische Aufgabe.
 
 **Akzeptanzkriterium:** Für die vorliegende Evidenz lautet das maschinenlesbare
 Gesamturteil `PASS`; zugleich bleiben alle beobachteten Unterprozess-Exit-Codes
