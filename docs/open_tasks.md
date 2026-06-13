@@ -3722,7 +3722,7 @@ Negativtests, während das übergeordnete `completion-profile` mit Exit-Code `0`
 endet. Die Detailableitung und Akzeptanzkriterien stehen in
 `docs/test_evidence_correction_tasks_2026-06-13.md`.
 
-- [ ] **TE-K1:** Erwartete Negativpfade im Evidence-Wrapper explizit und
+- [x] **TE-K1:** Erwartete Negativpfade im Evidence-Wrapper explizit und
   maschinenlesbar kennzeichnen.
 - [ ] **TE-K2:** Evidence-Einträge mit stabiler Szenario-ID, Testkontext und
   optionalem Korrelationsschlüssel eindeutig machen.

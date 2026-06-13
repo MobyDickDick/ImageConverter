@@ -26,16 +26,21 @@ die Eindeutigkeit und Auswertbarkeit der Test-Evidence.
 
 ### TE-K1 – Erwarteten Negativpfad explizit kennzeichnen
 
-- [ ] `tools/run_test_evidence.sh` um eine maschinenlesbare
-  Erwartungsangabe ergänzen, zum Beispiel `--expected-exit 3` oder
-  `--expect-failure`.
-- [ ] Neben dem beobachteten `Verdict` ein separates Ergebnis der
-  Erwartungsprüfung ausgeben, etwa `Expectation: MET`.
-- [ ] Der Wrapper muss weiterhin den beobachteten Exit-Code dokumentieren; ein
+- [x] `tools/run_test_evidence.sh` um die maschinenlesbare Erwartungsangabe
+  `--expected-exit CODE` ergänzen.
+- [x] Neben dem beobachteten `Verdict` ein separates Ergebnis der
+  Erwartungsprüfung als `Expectation: MET`, `UNMET` oder `NOT_SPECIFIED`
+  ausgeben.
+- [x] Der Wrapper dokumentiert weiterhin den beobachteten Exit-Code; ein
   erwartetes Unterkommando-`FAIL` darf nicht nachträglich als beobachtetes
   `PASS` umetikettiert werden.
-- [ ] Detailtests für erwarteten Exit-Code, unerwartetes Grün und unerwarteten
+- [x] Detailtests für erwarteten Exit-Code, unerwartetes Grün und unerwarteten
   abweichenden Fehlercode ergänzen.
+
+**Umgesetzt am 2026-06-13:** Der Wrapper validiert erwartete Exit-Codes im
+Bereich `0..255`, schreibt Erwartung und Erwartungsergebnis in jedes Summary
+und gibt unabhängig davon weiterhin den tatsächlich beobachteten Exit-Code
+zurück.
 
 **Akzeptanzkriterium:** Ein Mensch und ein Parser können unterscheiden, ob
 `Verdict: FAIL` einen absichtlich getesteten Negativpfad oder einen Fehler des
