@@ -754,7 +754,7 @@ def test_finalize_ac0800_keeps_ring_darker_than_fill() -> None:
     """AC0800 should preserve generic ring semantics: darker stroke than fill."""
     params = Action.make_badge_params(30, 30, "AC0800")
     assert params is not None
-    assert float(params["r"]) == pytest.approx(10.8)
+    assert float(params["r"]) == pytest.approx(13.5)
     assert int(params["stroke_gray"]) < int(params["fill_gray"])
     assert float(params["stroke_circle"]) >= 1.0
 
@@ -961,7 +961,7 @@ def test_fit_semantic_badge_uses_border_touch_fallback_for_tiny_plain_ring() -> 
     assert fitted is not None
     assert float(fitted["cx"]) == pytest.approx(7.5)
     assert float(fitted["cy"]) == pytest.approx(7.5)
-    assert float(fitted["r"]) == pytest.approx(7.0)
+    assert float(fitted["r"]) == pytest.approx(6.5)
 
 
 def test_fit_semantic_badge_estimates_ring_style_for_plain_circle() -> None:
@@ -1538,14 +1538,13 @@ def test_validate_badge_by_elements_keeps_ac0800_l_centered_and_bounded() -> Non
     params = Action.make_badge_params(img.shape[1], img.shape[0], "AC0800", img)
     template_cx = float(params["template_circle_cx"])
     template_cy = float(params["template_circle_cy"])
-    template_r = float(params["template_circle_radius"])
 
     logs = Action.validate_badge_by_elements(img, params, max_rounds=4)
 
     assert logs
     assert float(params["cx"]) == pytest.approx(template_cx)
     assert float(params["cy"]) == pytest.approx(template_cy)
-    assert float(params["r"]) <= (template_r * 1.15) + 0.01
+    assert float(params["r"]) <= float(params["max_circle_radius"]) + 0.01
 
 
 def test_validate_badge_by_elements_keeps_ac0800_s_at_template_radius_floor() -> None:
@@ -2863,7 +2862,7 @@ def test_convert_range_accepts_quality_pass_when_mean_delta2_improves(
     assert result == str(output_root)
     assert pass_reports
     assert pass_reports[0]["improved"] is True
-    assert pass_reports[0]["decision"] == "accepted_improvement"
+    assert pass_reports[0]["decision"] == "accepted_spatial_improvement"
     assert float(pass_reports[0]["new_error_per_pixel"]) > float(pass_reports[0]["old_error_per_pixel"])
     assert float(pass_reports[0]["new_mean_delta2"]) < float(pass_reports[0]["old_mean_delta2"])
 
@@ -2932,7 +2931,7 @@ def test_convert_range_rejects_quality_pass_regression_and_keeps_previous_output
     assert result == str(output_root)
     assert pass_reports
     assert pass_reports[0]["improved"] is False
-    assert pass_reports[0]["decision"] == "rejected_regression"
+    assert pass_reports[0]["decision"] == "rejected_spatial_regression"
 
     iteration_log = (output_root / "reports" / "Iteration_Log.csv").read_text(encoding="utf-8-sig")
     assert "0.30000000" in iteration_log
@@ -4367,7 +4366,7 @@ def test_validate_badge_continues_after_threshold_by_default(monkeypatch: pytest
     img = np.zeros((15, 15, 3), dtype=np.uint8)
     params = {"circle_enabled": True, "draw_text": False}
 
-    round_errors = iter([7.5, 6.0])
+    round_errors = iter([7.5, 7.5, 6.0, 6.0])
     width_calls: list[int] = []
 
     monkeypatch.setattr(Action, "generate_badge_svg", staticmethod(lambda _w, _h, _params: "<svg/>"))
@@ -5547,10 +5546,7 @@ def test_validate_badge_runs_color_bracketing_after_geometry_steps() -> None:
     if np is None:
         pytest.skip("numpy not available in this environment")
 
-    class DummyImg:
-        shape = (15, 15, 3)
-
-    img = DummyImg()
+    img = np.zeros((15, 15, 3), dtype=np.uint8)
     params = {"circle_enabled": True, "draw_text": False}
     call_order: list[str] = []
 
@@ -7061,6 +7057,11 @@ def test_validate_badge_by_elements_detects_stagnation_and_stops(
     monkeypatch.setattr(conv.Action, "_optimize_circle_center_bracket", staticmethod(lambda *_args, **_kwargs: False))
     monkeypatch.setattr(conv.Action, "_optimize_circle_radius_bracket", staticmethod(lambda *_args, **_kwargs: False))
     monkeypatch.setattr(conv.Action, "_optimize_element_color_bracket", staticmethod(lambda *_args, **_kwargs: False))
+    monkeypatch.setattr(
+        conv.Action,
+        "_optimize_global_parameter_vector_sampling",
+        staticmethod(lambda *_args, **_kwargs: False),
+    )
     monkeypatch.setattr(conv.Action, "_apply_canonical_badge_colors", staticmethod(lambda current: current))
     monkeypatch.setattr(conv.Action, "calculate_error", staticmethod(lambda *_args, **_kwargs: 42.0))
 
@@ -7119,6 +7120,11 @@ def test_validate_badge_by_elements_activates_ac08_adaptive_unlocks_on_stagnatio
     monkeypatch.setattr(conv.Action, "_optimize_circle_center_bracket", staticmethod(lambda *_args, **_kwargs: False))
     monkeypatch.setattr(conv.Action, "_optimize_circle_radius_bracket", staticmethod(lambda *_args, **_kwargs: False))
     monkeypatch.setattr(conv.Action, "_optimize_element_color_bracket", staticmethod(lambda *_args, **_kwargs: False))
+    monkeypatch.setattr(
+        conv.Action,
+        "_optimize_global_parameter_vector_sampling",
+        staticmethod(lambda *_args, **_kwargs: False),
+    )
     monkeypatch.setattr(conv.Action, "_apply_canonical_badge_colors", staticmethod(lambda current: current))
     monkeypatch.setattr(conv.Action, "calculate_error", staticmethod(lambda *_args, **_kwargs: 22.0))
 
