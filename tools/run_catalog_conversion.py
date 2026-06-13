@@ -52,8 +52,7 @@ def report_failure(variant: str, status: str, returncode: int) -> None:
     message = f"{variant}: {status} (return code {returncode})"
     if os.environ.get("GITHUB_ACTIONS") == "true":
         print(f"::error title=Catalog conversion failed::{message}", flush=True)
-    else:
-        print(f"[CATALOG] ERROR: {message}", file=sys.stderr, flush=True)
+    print(f"[CATALOG] ERROR: {message}", file=sys.stderr, flush=True)
 
 
 def conversion_environment() -> dict[str, str]:
