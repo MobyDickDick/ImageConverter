@@ -3713,3 +3713,23 @@ Ziel: Die Konvertierung soll strikt als **Kette** laufen:
 - **Messwert:** `48/48` Erfolgspaare sind renderbar, `0` liegen oberhalb der Grenze; das Diff-Inventar umfasst `132` Varianten und `123` renderbare Paare.
 - **Rotation:** Die deterministische Triage und der PF8-Linkage-Report enthalten weiterhin `0` aktive Kandidaten.
 - **Nächster sinnvoller Schritt:** Die Rotation pausieren und erst nach neuen oder geänderten Konvertierungsartefakten erneut reviewen.
+
+
+### Korrekturaufgaben aus Test-Evidence (Session 2026-06-13)
+
+Die zusammengeführte Evidence enthält absichtlich rote Unterprozessläufe aus
+Negativtests, während das übergeordnete `completion-profile` mit Exit-Code `0`
+endet. Die Detailableitung und Akzeptanzkriterien stehen in
+`docs/test_evidence_correction_tasks_2026-06-13.md`.
+
+- [ ] **TE-K1:** Erwartete Negativpfade im Evidence-Wrapper explizit und
+  maschinenlesbar kennzeichnen.
+- [ ] **TE-K2:** Evidence-Einträge mit stabiler Szenario-ID, Testkontext und
+  optionalem Korrelationsschlüssel eindeutig machen.
+- [ ] **TE-K3:** Roh-Evidenz von dem maßgeblichen Abschlussurteil trennen und
+  Aufgaben nur aus unerwarteten Ergebnissen ableiten.
+- [ ] **TE-K4:** Regeln und Schablone für die automatische Ableitung echter
+  Korrekturaufgaben dokumentieren.
+- **Bewertung des vorliegenden Laufs:** Kein nachgewiesener Produkt- oder
+  Release-Blocker; offen sind ausschließlich die vier
+  Evidence-/Auswertungsverbesserungen.
