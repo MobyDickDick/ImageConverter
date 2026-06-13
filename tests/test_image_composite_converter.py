@@ -751,10 +751,11 @@ def test_make_badge_params_ac0870_s_uses_centered_t_badge_seed() -> None:
     assert float(params["max_circle_radius"]) <= float(params["r"]) * 1.02 + 1e-6
 
 def test_finalize_ac0800_keeps_ring_darker_than_fill() -> None:
-    """AC0800 should preserve generic ring semantics: darker stroke than fill."""
+    """AC0800 finalization should expand the seed to the legacy edge-ring geometry."""
     params = Action.make_badge_params(30, 30, "AC0800")
     assert params is not None
-    assert float(params["r"]) == pytest.approx(13.5)
+    expected_legacy_radius = 15.0 - max(1.0, 30.0 * 0.05)
+    assert float(params["r"]) == pytest.approx(expected_legacy_radius)
     assert int(params["stroke_gray"]) < int(params["fill_gray"])
     assert float(params["stroke_circle"]) >= 1.0
 
@@ -949,7 +950,7 @@ def test_generate_badge_svg_keeps_border_touching_stem_inside_viewbox() -> None:
 
 
 def test_fit_semantic_badge_uses_border_touch_fallback_for_tiny_plain_ring() -> None:
-    """Tiny plain rings that touch every border should expand to the canvas-fitting circle."""
+    """Tiny plain rings should retain the finalized legacy stroke margin after fitting."""
     if image_composite_converter.np is None or image_composite_converter.cv2 is None:
         pytest.skip("numpy/cv2 not available in this environment")
 
@@ -961,7 +962,8 @@ def test_fit_semantic_badge_uses_border_touch_fallback_for_tiny_plain_ring() -> 
     assert fitted is not None
     assert float(fitted["cx"]) == pytest.approx(7.5)
     assert float(fitted["cy"]) == pytest.approx(7.5)
-    assert float(fitted["r"]) == pytest.approx(6.5)
+    expected_legacy_radius = 7.5 - max(1.0, 15.0 * 0.05)
+    assert float(fitted["r"]) == pytest.approx(expected_legacy_radius)
 
 
 def test_fit_semantic_badge_estimates_ring_style_for_plain_circle() -> None:
