@@ -46,6 +46,14 @@ endet in diesem Fall standardmäßig trotzdem mit Exitcode `0`; für CI-/Gate-L�
 die bei solchen Einzelfehlern abbrechen sollen, kann `--fail-on-batch-failures`
 gesetzt werden.
 
+Für einen vollständigen, kostenkontrollierten Kataloglauf steht
+`tools/run_catalog_conversion.py` zur Verfügung. Das Skript verarbeitet eine
+stabile Teilmenge des Katalogs, startet jedes Bild isoliert und setzt standardmäßig
+nach 60 Sekunden mit dem nächsten Bild fort. Der manuelle GitHub-Workflow
+`Local completion checks` kann diesen Lauf über `run_full_catalog` in acht
+parallelen Shards starten; jeder Shard schreibt eine fortlaufend aktualisierte
+`catalog_results.csv` und wird als Workflow-Artefakt hochgeladen.
+
 ### Qualitätsparameter für als gut markierte Konvertierungen
 
 ```bash
