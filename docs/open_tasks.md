@@ -3724,12 +3724,12 @@ endet. Die Detailableitung und Akzeptanzkriterien stehen in
 
 - [x] **TE-K1:** Erwartete Negativpfade im Evidence-Wrapper explizit und
   maschinenlesbar kennzeichnen.
-- [ ] **TE-K2:** Evidence-Einträge mit stabiler Szenario-ID, Testkontext und
+- [x] **TE-K2:** Evidence-Einträge mit stabiler Szenario-ID, Testkontext und
   optionalem Korrelationsschlüssel eindeutig machen.
-- [ ] **TE-K3:** Roh-Evidenz von dem maßgeblichen Abschlussurteil trennen und
+- [x] **TE-K3:** Roh-Evidenz von dem maßgeblichen Abschlussurteil trennen und
   Aufgaben nur aus unerwarteten Ergebnissen ableiten.
-- [ ] **TE-K4:** Regeln und Schablone für die automatische Ableitung echter
+- [x] **TE-K4:** Regeln und Schablone für die automatische Ableitung echter
   Korrekturaufgaben dokumentieren.
 - **Bewertung des vorliegenden Laufs:** Kein nachgewiesener Produkt- oder
-  Release-Blocker; offen sind ausschließlich die vier
-  Evidence-/Auswertungsverbesserungen.
+  Release-Blocker; die vier Evidence-/Auswertungsverbesserungen sind
+  abgeschlossen.

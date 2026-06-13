@@ -95,14 +95,21 @@ unverändert und auditierbar erhalten.
 
 ### TE-K4 – Dokumentierte Regeln für die Aufgabenableitung ergänzen
 
-- [ ] In der Test-/Release-Dokumentation festhalten, dass ein einzelner
+- [x] In der Test-/Release-Dokumentation festhalten, dass ein einzelner
   `Verdict: FAIL` nur dann eine Produkt-Korrekturaufgabe eröffnet, wenn die
   Erwartung nicht erfüllt wurde oder das Abschlussprofil rot ist.
-- [ ] Für echte Fehler eine minimale Aufgabenschablone definieren:
+- [x] Für echte Fehler eine minimale Aufgabenschablone definieren:
   Symptom, Szenario-ID, Reproduktionsbefehl, erwartetes Ergebnis, tatsächlicher
   Exit-Code, Logpfad und Akzeptanztest.
-- [ ] Für erwartete Negativtests festlegen, dass lediglich fehlende oder
+- [x] Für erwartete Negativtests festlegen, dass lediglich fehlende oder
   widersprüchliche Metadaten als Evidence-Korrekturaufgabe gelten.
+
+**Umgesetzt am 2026-06-13:** `docs/test_evidence_task_derivation.md` definiert
+die Entscheidungsmatrix für Positivpfade, erwartete Negativpfade,
+Erwartungsverletzungen und Abschlussprofile. Die Richtlinie enthält außerdem
+die minimale Produkt-Aufgabenschablone und grenzt Metadatenfehler ausdrücklich
+als Evidence-Korrekturaufgaben ab. README und Workflow-Dokumentation verweisen
+auf diese verbindliche Regel.
 
 **Akzeptanzkriterium:** Eine erneute Auswertung derselben Daten erzeugt die
 Evidence-Aufgaben TE-K1 bis TE-K4, aber keine irreführende Aufgabe zur

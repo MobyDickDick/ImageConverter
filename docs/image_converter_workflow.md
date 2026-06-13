@@ -142,6 +142,14 @@ Job lädt `artifacts/test-evidence` anschließend als Artefakt
 Commit ein maschinenlesbares Testsignal in GitHub Actions, ohne dass lokale
 Abschlusslogs manuell in Commits kopiert werden müssen.
 
+Ein roter Unterprozess ist nicht automatisch ein Produktfehler. Erwartete
+Negativpfade behalten `Verdict: FAIL` und ihren tatsächlichen Exit-Code, werden
+aber mit `Expectation: MET` als abgedeckt ausgewiesen. Das Gesamturteil wird
+ausschließlich aus dem konfigurierten `completion-profile` abgeleitet. Die
+verbindlichen Entscheidungsregeln, Metadatenanforderungen und die minimale
+Schablone für echte Korrekturaufgaben stehen in
+`docs/test_evidence_task_derivation.md`.
+
 Der Workflow enthält zusätzlich den Job `batch-artifact-drift-gate`. Dieser
 installiert ebenfalls die Testabhängigkeit `pytest`, legt ein repräsentatives
 `chain_phase_telemetry_summary.txt` mit `drift_status=pass` an und startet
