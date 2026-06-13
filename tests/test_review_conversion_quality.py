@@ -512,3 +512,21 @@ def test_ac0701_1_s_committed_svg_preserves_upright_square_kelle_quality() -> No
     assert "<text" not in svg
     assert "rotate(" not in svg
     assert "<image" not in svg
+
+
+def test_ac0845_s_committed_svg_preserves_connector_free_rh_badge_quality() -> None:
+    record = review_variant("AC0845_S", source="diff_inventory")
+
+    assert record.status == "ok"
+    assert record.width == 15
+    assert record.height == 15
+    assert record.mean_delta2 == pytest.approx(6536.853515625)
+    assert record.normalized_mse is not None
+    assert record.normalized_mse < 0.045945679012345676
+
+    svg = Path(record.svg_path).read_text(encoding="utf-8")
+    assert 'id="rh_badge_circle"' in svg
+    assert 'id="rh_badge_text"' in svg
+    assert ">rH</text>" in svg
+    assert "<line" not in svg
+    assert "<image" not in svg

@@ -8428,3 +8428,24 @@ def test_dual_arrow_badge_triangle_width_is_clamped_to_canvas() -> None:
     n_left, n_right = dual_arrow_helpers._normalizeDualArrowPairGeometry(left, right, 140, width=40)
     assert float(n_left["triangle_half_width"]) <= 7.0
     assert float(n_right["triangle_half_width"]) <= 7.0
+
+
+def test_reflection_routes_connector_free_rh_badge_to_geometry_ir() -> None:
+    raw = {
+        "AC0845": (
+            'Grauer Kreis mit dunkler Kontur und hellem Innenverlauf; im Kreis steht "rH". '
+            'Keine Griff-/Leitungslinie außerhalb des Kreises. Geometrische Beschreibung: '
+            'konzentrischer Kreisring mit zentrierter horizontaler Textachse.'
+        )
+    }
+
+    _desc, params = image_composite_converter.Reflection(raw).parse_description(
+        "AC0845", "AC0845_S.jpg"
+    )
+
+    assert params["mode"] == "non_composite"
+    assert [element["kind"] for element in params["geometry_ir"]] == [
+        "CircleBackground",
+        "TextGlyph",
+    ]
+    assert "anschlussfreies kreis-/text-badge" in params["elements"][0].lower()

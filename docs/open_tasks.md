@@ -3696,3 +3696,12 @@ Ziel: Die Konvertierung soll strikt als **Kette** laufen:
 - **Perception-Lerneffekt:** Die reale Konvertierung bestätigt die allgemeine beschreibungsgetriebene Rechteck-/Linien-/Text-Topologie; ein variantenspezifischer PF8-Sonderfall ist nicht erforderlich.
 - **Rotation:** `AC0722_1_S` wurde aus Triage und PF8-Linkage entfernt; der qualifizierte Diff-Pool enthält nur noch `AC0845_S`.
 - **Nächster sinnvoller Schritt:** Die reguläre Plan-B-Rotation mit `AC0845_S.jpg` fortsetzen.
+
+
+### Fortschritt vs. Blocker (Session 2026-06-12, Plan-B AC0845_S Run PH)
+
+- **Fortschritt:** `AC0845_S.jpg` wurde real als anschlussfreies Kreis-/Text-Badge re-konvertiert; das beschreibungsgetriebene Geometry-IR trennt grauen Kreisgrundkörper und zentrierten `rH`-Glyph und enthält weder Außenleitung noch Rastereinbettung.
+- **Messwert:** `mean_delta2` sinkt von `9612.787109` auf `6536.853516` (`-32.00 %`), `normalized_mse` von `0.04927739` auf `0.03350944` und damit unter die Review-Grenze `0.04594568`.
+- **Perception-Lerneffekt:** Der allgemeine Kreis-Seed wird durch einen aus der expliziten Beschreibung erzeugten `TextGlyph` ergänzt; ein variantenspezifischer PF8-Sonderfall oder ein Sample-SVG ist nicht erforderlich.
+- **Rotation:** `AC0845_S` wurde aus Triage und PF8-Linkage entfernt; der reproduzierbare Review enthält aktuell keinen qualifizierten Diff-Kandidaten.
+- **Nächster sinnvoller Schritt:** Die Rotation pausieren, bis der Qualitätsreview einen neuen Fall oberhalb der Grenze qualifiziert.

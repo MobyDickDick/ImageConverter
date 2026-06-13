@@ -408,3 +408,17 @@ Körper und horizontaler T-Glyph bleiben getrennte semantische SVG-Elemente.
 `normalized_mse` von `0.05681223` auf `0.01399280` und damit unter die
 Review-Grenze. `AC0722_1_S` wurde aus Triage und PF8-Linkage entfernt. Der
 qualifizierte Diff-Pool enthält aktuell nur noch `AC0845_S`.
+
+
+## Folgeaktualisierung Run PH (2026-06-12)
+
+`AC0845_S` wurde real als anschlussfreies Kreis-/Text-Badge re-konvertiert. Das
+beschreibungsgetriebene Geometry-IR erzeugt einen grauen Kreis mit dunkler
+Kontur und einen getrennten, zentrierten `rH`-Glyph; die alte falsche
+Außenleitung entfällt.
+
+`mean_delta2` sinkt von `9612.787109` auf `6536.853516`,
+`normalized_mse` von `0.04927739` auf `0.03350944` und damit unter die
+Review-Grenze. `AC0845_S` wurde aus Triage und PF8-Linkage entfernt. Der
+reproduzierbare Review findet aktuell keinen weiteren qualifizierten
+Diff-Kandidaten oberhalb der Grenze.

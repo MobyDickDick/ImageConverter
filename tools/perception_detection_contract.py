@@ -1395,18 +1395,7 @@ def write_text_glyph_evaluation_report(
     }
 
 
-PLAN_B_PERCEPTION_TARGETS: list[dict[str, Any]] = [
-    {
-        "variant": "AC0845_S",
-        "image_candidates": ["artifacts/images_to_convert/AC0845_S.jpg"],
-        "plan_b_reason": "Kleines kreisförmiges rH-Badge ohne äußere Griff- oder Leitungslinie.",
-        "perception_question": "Werden Kreisring und zentrierter rH-Glyph ohne fälschlichen Außenanschluss getrennt erkannt?",
-        "expected_first_primitive": "circle_ring_with_centered_rh_glyph",
-        "expected_candidate_kinds": {"circle", "text_glyph"},
-        "expected_seed_kinds": {"CircleBackground", "TextGlyph"},
-        "description": "Plan-B-Kandidat AC0845_S: Kreisring und zentrierten rH-Glyph ohne Außenanschluss prüfen.",
-    },
-]
+PLAN_B_PERCEPTION_TARGETS: list[dict[str, Any]] = []
 
 
 def _resolve_first_existing_path(candidates: list[str]) -> Path | None:

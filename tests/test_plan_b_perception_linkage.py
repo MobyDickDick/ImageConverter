@@ -11,29 +11,11 @@ pytest.importorskip("numpy")
 
 from tools.perception_detection_contract import (
     PLAN_B_PERCEPTION_TARGETS,
-    build_plan_b_perception_linkage_record,
     run_plan_b_perception_linkage_report,
 )
 
 
-ACTIVE_VARIANTS = [
-    "AC0845_S",
-]
-
-
-def _target_by_variant(variant: str) -> dict[str, object]:
-    return next(target for target in PLAN_B_PERCEPTION_TARGETS if target["variant"] == variant)
-
-
-def test_ac0845_circle_seed_is_generalized_without_claiming_text_detection() -> None:
-    record = build_plan_b_perception_linkage_record(_target_by_variant("AC0845_S"))
-
-    assert record["variant"] == "AC0845_S"
-    lerneffekt = record["perception_lerneffekt"]
-    assert lerneffekt["decision"] == "generalisiert"
-    assert lerneffekt["matched_candidate_kinds"] == ["circle"]
-    assert lerneffekt["matched_seed_kinds"] == ["CircleBackground"]
-    assert "text_glyph" in lerneffekt["expected_candidate_kinds"]
+ACTIVE_VARIANTS: list[str] = []
 
 
 def test_plan_b_perception_targets_match_quality_triage() -> None:
@@ -65,6 +47,8 @@ def test_run_plan_b_perception_linkage_report_writes_json_and_csv(
     assert report["metrics"]["all_have_perception_lerneffekt"] is True
     assert [record["variant"] for record in report["records"]] == ACTIVE_VARIANTS
 
-    rows = list(csv.DictReader(csv_report.open(encoding="utf-8")))
+    with csv_report.open(encoding="utf-8") as handle:
+        reader = csv.DictReader(handle)
+        rows = list(reader)
     assert len(rows) == len(ACTIVE_VARIANTS)
-    assert {"variant", "decision", "next_action"} <= set(rows[0])
+    assert {"variant", "decision", "next_action"} <= set(reader.fieldnames or [])
