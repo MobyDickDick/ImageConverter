@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import os
 import subprocess
 from pathlib import Path
@@ -281,6 +282,126 @@ def test_run_test_evidence_rejects_invalid_expected_exit(tmp_path: Path) -> None
 
     assert result.returncode == 2
     assert "--expected-exit must be an integer from 0 to 255" in result.stdout
+
+
+def _write_evidence_summary(
+    path: Path,
+    *,
+    name: str,
+    verdict: str,
+    exit_code: int,
+    expectation: str,
+    scenario_id: str,
+) -> None:
+    path.write_text(
+        f"# Test evidence: {name}\n\n"
+        f"- Verdict: {verdict}\n"
+        f"- Exit code: {exit_code}\n"
+        f"- Expected exit code: {'not specified' if expectation == 'NOT_SPECIFIED' else exit_code}\n"
+        f"- Expectation: {expectation}\n"
+        f"- Scenario ID: {scenario_id}\n"
+        "- Test context: test-context\n"
+        "- Run ID: test-run\n"
+        "- UTC time: 2026-06-13T00:00:00Z\n"
+        "- Git ref: refs/heads/main\n"
+        "- Git SHA: test-sha\n"
+        f"- Log: {path.with_suffix('.log')}\n",
+        encoding="utf-8",
+    )
+
+
+def test_aggregate_test_evidence_uses_completion_profile_for_overall_pass(tmp_path: Path) -> None:
+    expected_failure = tmp_path / "expected-failure.md"
+    completion = tmp_path / "completion.md"
+    aggregate = tmp_path / "aggregate.md"
+    aggregate_json = tmp_path / "aggregate.json"
+    correction_task = tmp_path / "correction.md"
+    _write_evidence_summary(
+        expected_failure,
+        name="negative-path",
+        verdict="FAIL",
+        exit_code=7,
+        expectation="MET",
+        scenario_id="accepted-exception",
+    )
+    _write_evidence_summary(
+        completion,
+        name="completion-profile",
+        verdict="PASS",
+        exit_code=0,
+        expectation="NOT_SPECIFIED",
+        scenario_id="completion-profile",
+    )
+
+    result = subprocess.run(
+        [
+            "python",
+            "tools/aggregate_test_evidence.py",
+            "--output",
+            str(aggregate),
+            "--json-output",
+            str(aggregate_json),
+            "--correction-task",
+            str(correction_task),
+            str(expected_failure),
+            str(completion),
+        ],
+        cwd=Path(__file__).resolve().parents[2],
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        check=False,
+    )
+
+    assert result.returncode == 0
+    report = aggregate.read_text(encoding="utf-8")
+    assert "## Scenario evidence" in report
+    assert "| accepted-exception | FAIL | 7 | MET | COVERED |" in report
+    assert "## Completion verdict" in report
+    assert "- Overall verdict: PASS" in report
+    assert not correction_task.exists()
+    assert json.loads(aggregate_json.read_text(encoding="utf-8"))["overall_verdict"] == "PASS"
+
+
+def test_aggregate_test_evidence_creates_task_for_failed_completion(tmp_path: Path) -> None:
+    completion = tmp_path / "completion.md"
+    aggregate = tmp_path / "aggregate.md"
+    correction_task = tmp_path / "correction.md"
+    _write_evidence_summary(
+        completion,
+        name="completion-profile",
+        verdict="FAIL",
+        exit_code=5,
+        expectation="NOT_SPECIFIED",
+        scenario_id="completion-profile",
+    )
+
+    result = subprocess.run(
+        [
+            "python",
+            "tools/aggregate_test_evidence.py",
+            "--output",
+            str(aggregate),
+            "--correction-task",
+            str(correction_task),
+            "--reproduction-command",
+            "./tools/run_local_completion_checks.sh --require-drift-summary",
+            str(completion),
+        ],
+        cwd=Path(__file__).resolve().parents[2],
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        check=False,
+    )
+
+    assert result.returncode == 1
+    assert "- Overall verdict: FAIL" in aggregate.read_text(encoding="utf-8")
+    task = correction_task.read_text(encoding="utf-8")
+    assert "Szenario-ID: completion-profile" in task
+    assert "Tatsächlicher Exit-Code: 5" in task
+    assert "Git-SHA: `test-sha`" in task
+    assert "./tools/run_local_completion_checks.sh --require-drift-summary" in task
 
 
 def test_ac08_success_metrics_gate_passes_for_complete_green_metrics(tmp_path: Path) -> None:
