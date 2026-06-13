@@ -48,14 +48,21 @@ zurück.
 
 ### TE-K2 – Evidence-Einträge mit Testkontext und eindeutiger Identität versehen
 
-- [ ] In jedem Summary-Eintrag mindestens die erzeugende Pytest-NodeID oder
+- [x] In jedem Summary-Eintrag mindestens die erzeugende Pytest-NodeID oder
   eine stabile Szenario-ID protokollieren.
-- [ ] Wiederholte Anzeigenamen wie `FP-D12 core-suite`, `FP-D12 ac08-smoke`
+- [x] Wiederholte Anzeigenamen wie `FP-D12 core-suite`, `FP-D12 ac08-smoke`
   und `FP-D12 quality-gate` um das Szenario ergänzen, beispielsweise
   `accepted-exception`, `unaccepted-blocker`, `stale-metrics-timeout` und
   `path-propagation`.
-- [ ] Optional einen Lauf-/Korrelationsschlüssel ausgeben, damit die drei
+- [x] Optional einen Lauf-/Korrelationsschlüssel ausgeben, damit die drei
   Schritte eines Gate-Szenarios eindeutig zusammengehören.
+
+**Umgesetzt am 2026-06-13:** Der Evidence-Wrapper schreibt nun `Scenario ID`,
+`Test context` und `Run ID`. Das FP-D12-Gate ergänzt die Szenario-ID in jedem
+Anzeigenamen und reicht einen gemeinsamen Korrelationsschlüssel an alle drei
+Gate-Schritte weiter. Die vier Detailtests setzen die stabilen Szenarien
+`accepted-exception`, `unaccepted-blocker`, `stale-metrics-timeout` und
+`path-propagation`.
 
 **Akzeptanzkriterium:** Die vier FP-D12-Szenarien lassen sich ohne Auswertung
 temporärer Dateipfade eindeutig gruppieren und den zuständigen Detailtests

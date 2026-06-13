@@ -5,15 +5,19 @@ NAME=""
 LOG_PATH=""
 SUMMARY_PATH=""
 EXPECTED_EXIT=""
+SCENARIO_ID=""
+TEST_CONTEXT=""
+RUN_ID=""
 
 usage() {
   cat <<'USAGE'
-Usage: tools/run_test_evidence.sh --name NAME --log PATH --summary PATH [--expected-exit CODE] -- COMMAND [ARG...]
+Usage: tools/run_test_evidence.sh --name NAME --log PATH --summary PATH [--scenario-id ID] [--test-context CONTEXT] [--run-id ID] [--expected-exit CODE] -- COMMAND [ARG...]
 
 Runs COMMAND, mirrors its output to LOG, writes a compact Markdown evidence
 summary with PASS/FAIL, the observed command exit code, and whether an optional
-expected exit code was met. The wrapper always exits with the observed command
-exit code. When GITHUB_STEP_SUMMARY is set, the summary is appended there too.
+expected exit code was met. Scenario ID defaults to NAME; test context and run
+ID are optional. The wrapper always exits with the observed command exit code.
+When GITHUB_STEP_SUMMARY is set, the summary is appended there too.
 USAGE
 }
 
@@ -55,6 +59,33 @@ while [[ $# -gt 0 ]]; do
       EXPECTED_EXIT="$2"
       shift 2
       ;;
+    --scenario-id)
+      if [[ $# -lt 2 || -z "$2" ]]; then
+        echo "ERROR: --scenario-id requires a value" >&2
+        usage >&2
+        exit 2
+      fi
+      SCENARIO_ID="$2"
+      shift 2
+      ;;
+    --test-context)
+      if [[ $# -lt 2 || -z "$2" ]]; then
+        echo "ERROR: --test-context requires a value" >&2
+        usage >&2
+        exit 2
+      fi
+      TEST_CONTEXT="$2"
+      shift 2
+      ;;
+    --run-id)
+      if [[ $# -lt 2 || -z "$2" ]]; then
+        echo "ERROR: --run-id requires a value" >&2
+        usage >&2
+        exit 2
+      fi
+      RUN_ID="$2"
+      shift 2
+      ;;
     --)
       shift
       break
@@ -76,6 +107,8 @@ if [[ -z "$NAME" || -z "$LOG_PATH" || -z "$SUMMARY_PATH" ]]; then
   usage >&2
   exit 2
 fi
+
+SCENARIO_ID="${SCENARIO_ID:-$NAME}"
 
 if [[ -n "$EXPECTED_EXIT" ]] && {
   [[ ! "$EXPECTED_EXIT" =~ ^[0-9]+$ ]] ||
@@ -133,6 +166,9 @@ RUN_AT="$(date -u '+%Y-%m-%dT%H:%M:%SZ')"
   echo "- Exit code: ${STATUS}"
   echo "- Expected exit code: ${EXPECTED_EXIT_SUMMARY}"
   echo "- Expectation: ${EXPECTATION}"
+  echo "- Scenario ID: ${SCENARIO_ID}"
+  echo "- Test context: ${TEST_CONTEXT:-not specified}"
+  echo "- Run ID: ${RUN_ID:-not specified}"
   echo "- UTC time: ${RUN_AT}"
   echo "- Git ref: ${GITHUB_REF:-local}"
   echo "- Git SHA: ${GITHUB_SHA:-local}"
