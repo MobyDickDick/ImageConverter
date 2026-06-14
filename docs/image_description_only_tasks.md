@@ -18,12 +18,17 @@ Für jedes Arbeitspaket gelten zusätzlich zu den jeweiligen Akzeptanzkriterien:
 
 ## Priorität 0 – Generalisierung messbar und verbindlich machen
 
-- [ ] **IDO-01 – Dateinamen-Invarianztest einführen**
+- [x] **IDO-01 – Dateinamen-Invarianztest einführen**
   - Aufgabe: Eine Eingabe unter mindestens zwei zufälligen, katalogfremden
     Dateinamen konvertieren und die SVG-Ergebnisse normalisiert vergleichen.
   - Zu ignorieren: Ausgabename, Zeitstempel und andere reine Metadaten.
   - Akzeptanz: Identische Pixel und identische Beschreibung erzeugen identische
     Geometry-IR und geometrisch äquivalente SVG-Ausgaben.
+  - Umsetzung: Der Regressionstest führt dieselben synthetischen Pixel und
+    dieselbe Beschreibung unter zwei deterministisch zufälligen, katalogfremden
+    Namen durch den Non-Composite-Runtime-Pfad. Geometry-IR, kanonisiertes SVG,
+    gerenderte Pixel und Fehlerwert müssen übereinstimmen. Gemeinsame
+    Normalisierer entfernen ausschließlich Ausgabename und volatile Metadaten.
 
 - [ ] **IDO-02 – Runtime-Abhängigkeit von Bild-IDs instrumentieren**
   - Aufgabe: Alle Stellen protokollieren, an denen `base_name`, `variant_name`
