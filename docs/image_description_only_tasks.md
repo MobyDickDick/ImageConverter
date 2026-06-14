@@ -30,7 +30,7 @@ Für jedes Arbeitspaket gelten zusätzlich zu den jeweiligen Akzeptanzkriterien:
     gerenderte Pixel und Fehlerwert müssen übereinstimmen. Gemeinsame
     Normalisierer entfernen ausschließlich Ausgabename und volatile Metadaten.
 
-- [ ] **IDO-02 – Runtime-Abhängigkeit von Bild-IDs instrumentieren**
+- [x] **IDO-02 – Runtime-Abhängigkeit von Bild-IDs instrumentieren**
   - Aufgabe: Alle Stellen protokollieren, an denen `base_name`, `variant_name`
     oder ein Dateistamm eine semantische oder geometrische Entscheidung
     beeinflusst.
@@ -38,6 +38,12 @@ Für jedes Arbeitspaket gelten zusätzlich zu den jeweiligen Akzeptanzkriterien:
     und aufgerufener Speziallogik.
   - Akzeptanz: Der Report unterscheidet legitime Verwendung als Ausgabename von
     verbotener Verwendung für Geometrie, Stil, Renderer- oder Optimiererwahl.
+  - Umsetzung: `tools/report_runtime_image_id_dependencies.py` inventarisiert
+    die Python-Runtime statisch per AST und schreibt Datei, Funktion, Zeilen,
+    Entscheidungsart und aufgerufene Speziallogik als versionierten JSON-Report.
+    Verzweigungen sowie Geometrie-/Stil-/Renderer-/Optimiereraufrufe werden als
+    verbotene Runtime-Entscheidung, Ausgabe-/Reporting-Verwendungen als legitim
+    und nicht eindeutig klassifizierbare Datenflüsse als prüfpflichtig markiert.
 
 - [ ] **IDO-03 – Hardcoding-Ratchet in den verbindlichen CI-Pfad aufnehmen**
   - Aufgabe: `tools/check_no_new_image_id_hardcoding.py` in den lokalen
