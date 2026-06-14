@@ -6798,6 +6798,26 @@ def test_evidence_task_derivation_doc_defines_required_decisions_and_template() 
         assert required_field in policy
 
 
+def test_open_tasks_marks_fp_recovery_complete_with_run_od_evidence() -> None:
+    open_tasks = Path("docs/open_tasks.md").read_text(encoding="utf-8")
+
+    assert "- [x] **FP-RCV-4:**" in open_tasks
+    assert "docs/next_arbeitspaket_2026-06-05_runOD.md" in open_tasks
+    assert "3 akzeptierte Verbesserungen" in open_tasks
+    assert "0 akzeptierte Regressionen" in open_tasks
+    assert "`overall_success=1`" in open_tasks
+    assert "FP-RCV-4 als vollständigen Release-Candidate-Gate-Lauf ausführen" not in open_tasks
+
+    completion = Path("docs/next_arbeitspaket_2026-06-13_runPJ.md").read_text(
+        encoding="utf-8"
+    )
+    assert "FP-RCV-4-Abschluss" in completion
+    assert "docs/next_arbeitspaket_2026-06-05_runOD.md" in completion
+    assert "`14/14`" in completion
+    assert "`6/6`" in completion
+    assert "`overall_success=1`" in completion
+
+
 def test_parse_args_help_mentions_canonical_image_converter_flags(capsys: pytest.CaptureFixture[str]) -> None:
     with pytest.raises(SystemExit) as excinfo:
         conv.parseArgs(["--help"])

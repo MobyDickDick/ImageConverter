@@ -3081,11 +3081,11 @@ Jeder Tag hat genau definierte Aufgaben mit einem harten Exit-Kriterium.
 - [x] **FP-RCV-1:** Root Cause der vier Exit-0-Segmente ohne Iteration-Datensatz beheben. (`AC0811_L/M/S` und `AC0831_L` lagen unter `nonconvertable/`; der segmentierte Runner löst nun je Variante den tatsächlichen Quellordner auf.)
 - [x] **FP-RCV-2:** Segmentvollständigkeit zusätzlich am erwarteten `Iteration_Log.csv`-Datensatz prüfen. (Exit `0` ohne passende Zeile wird `BLOCKER_MISSING_REPORT`; die Finalisierung validiert dieselbe Invariante unabhängig.)
 - [x] **FP-RCV-3:** Die vier fehlenden Varianten real über den korrigierten Segmentpfad verifizieren. (Run OB mit Ein-Iterations-Budget: 4/4 Exit `0`, 4/4 `PASS`, 4/4 erwartete Reportzeilen; Details in `docs/next_arbeitspaket_2026-06-05_runOB.md`.)
-- [ ] **FP-RCV-4:** Vollständigen festen 14er-Satz mit regulärem Budget wiederholen und die FP-D14-Schwellen (`14/14`, `6/6`, mindestens eine Verbesserung, `overall_success=1`) neu bewerten.
+- [x] **FP-RCV-4:** Vollständigen festen 14er-Satz mit regulärem Budget wiederholen und die FP-D14-Schwellen (`14/14`, `6/6`, mindestens eine Verbesserung, `overall_success=1`) neu bewerten. (2026-06-05 Run OD: `14/14` Variantendatensätze, `6/6` Previously-Good-Anker, 3 akzeptierte Verbesserungen, 0 akzeptierte Regressionen und `overall_success=1`; vollständige Evidenz in `docs/next_arbeitspaket_2026-06-05_runOD.md`.)
 
 - **Fortschritt:** Der konkrete Reportvollständigkeitsfehler ist reproduziert und geschlossen; die vier ehemals fehlenden Varianten erscheinen im echten Recovery-Smoke wieder in `Iteration_Log.csv`.
 - **No silent success:** Weder ein bloßer Prozess-Exit `0` noch ein isolierter `.segment-complete`-Marker genügt künftig zur Aggregation.
-- **Nächster sinnvoller Schritt:** FP-RCV-4 als vollständigen Release-Candidate-Gate-Lauf ausführen; bis dahin bleibt die FP-D14-Entscheidung „noch offen“.
+- **Abschluss:** FP-RCV-4 wurde in Run OD vollständig ausgeführt. Die frühere FP-D14-Entscheidung „noch offen“ ist durch die erreichten harten Schwellen überholt; das Finish-Playbook ist abgeschlossen.
 
 ### Fortschritt vs. Blocker (Session 2026-05-24, AC0020_L Plan-B + Re-Conversion + T5 Run ZZ)
 
