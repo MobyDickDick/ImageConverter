@@ -25,6 +25,10 @@ The recommended local verification workflow lives in
 - `docs/ac08_artifact_analysis.md` — AC08 artifact analysis notes.
 - `docs/open_tasks.md` — current ImageConverter task list.
 - `docs/Forms.md` — formal forms model (circle + handle) with constraints and orientations.
+- `docs/image_description_only_architecture.md` — Zielarchitektur und Migrationsplan
+  für eine ausschließlich aus Bild und Beschreibung abgeleitete Konvertierung.
+- `docs/image_description_only_tasks.md` — priorisierte, prüfbare Arbeitspakete
+  für die schrittweise Entfernung bildspezifischer Runtime-Logik.
 
 ## Quick start
 
@@ -123,6 +127,7 @@ python -m src.imageCompositeConverter \
 
 ```bash
 python -m compileall src tests
+python tools/check_no_new_image_id_hardcoding.py
 python -m pytest
 ./tools/run_regression_checks.sh
 ./tools/run_safe_test_baseline.sh
