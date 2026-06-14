@@ -7999,6 +7999,7 @@ def test_ac0820_l_conversion_keeps_circle_diameter_above_half_image_width(tmp_pa
         str(svg_dir),
         str(diff_dir),
         str(reports_dir),
+        badge_validation_rounds=1,
     )
 
     assert result is not None
