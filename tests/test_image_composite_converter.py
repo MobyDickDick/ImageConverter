@@ -7998,12 +7998,24 @@ def test_ac08_semantic_anchor_variants_convert_without_failed_svg(tmp_path: Path
     ):
         pytest.skip("numpy/cv2/fitz not available in this environment")
 
-    images_dir = Path("artifacts/images_to_convert")
-    csv_path = images_dir / "Finale_Wurzelformen_V3.xml"
-    if not images_dir.exists() or not csv_path.exists():
+    fixture_root = Path("artifacts/images_to_convert")
+    source_csv = fixture_root / "Finale_Wurzelformen_V3.xml"
+    if not fixture_root.exists() or not source_csv.exists():
         pytest.skip("AC08 fixture inputs not available")
-    if not (images_dir / "AC0811_L.jpg").exists() or not (images_dir / "AC0812_M.jpg").exists():
+
+    fixture_paths = {
+        "AC0811_L.jpg": fixture_root / "nonconvertable" / "AC0811_L.jpg",
+        "AC0812_M.jpg": fixture_root / "AC0812_M.jpg",
+    }
+    if any(not path.exists() for path in fixture_paths.values()):
         pytest.skip("AC08 anchor fixture images missing (AC0811_L/AC0812_M)")
+
+    images_dir = tmp_path / "ac08_anchor_inputs"
+    images_dir.mkdir()
+    csv_path = images_dir / source_csv.name
+    shutil.copy2(source_csv, csv_path)
+    for filename, source_path in fixture_paths.items():
+        shutil.copy2(source_path, images_dir / filename)
 
     output_root = tmp_path / "ac08_anchor_smoke"
     result = image_composite_converter.convertRange(
