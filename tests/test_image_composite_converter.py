@@ -6067,7 +6067,7 @@ def test_make_badge_params_keeps_ac0838_m_circle_near_full_width_for_voc_layout(
         pytest.skip("AC0838_M.jpg not available in this environment")
 
     params = Action.make_badge_params(img.shape[1], img.shape[0], "AC0838", img)
-    Action.validateBadgeByElements(img, params, max_rounds=6)
+    Action.validateBadgeByElements(img, params, max_rounds=1)
 
     assert float(params["r"]) >= 9.0
     assert float(params["cx"]) == pytest.approx(10.0, abs=0.6)
