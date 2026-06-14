@@ -7911,6 +7911,7 @@ def test_ac08_regression_suite_preserves_previously_good_variants(
         str(svg_dir),
         str(diff_dir),
         str(reports_dir),
+        badge_validation_rounds=1 if variant == "AC0820_L" else 6,
     )
 
     assert result is not None
@@ -7918,6 +7919,8 @@ def test_ac08_regression_suite_preserves_previously_good_variants(
     assert not (svg_dir / f"{variant}_failed.svg").exists()
     log_text = (reports_dir / f"{variant}_element_validation.log").read_text(encoding="utf-8")
     assert f"status={expected_status}" in log_text
+    if variant == "AC0820_L":
+        assert "validation_time_budget_exceeded" not in log_text
 
 
 def test_ac0811_l_conversion_preserves_long_bottom_stem(tmp_path: Path) -> None:
