@@ -4,11 +4,32 @@ This checklist only tracks work that is actionable for the ImageConverter in the
 current repository snapshot. Older unrelated language/compiler/runtime tasks were removed so the list stays
 focused on the actual project scope.
 
-## Aufgaben-Gesamtzähler (Snapshot 2026-05-31)
+## Aufgaben-Gesamtzähler (Snapshot 2026-06-14)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `384` · Erledigt `312` · Offen `72`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `194` · Erledigt `159` · Offen `35`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
+
+## Bild + Beschreibung ohne Bildwissen im Runtime-Code (neu 2026-06-14)
+
+Das detaillierte Backlog mit Definition of Done, Abhängigkeiten und
+Akzeptanzkriterien steht in `docs/image_description_only_tasks.md`.
+
+- [ ] **IDO-P0 – Generalisierung verbindlich messen:** Dateinamen-Invarianz,
+  Runtime-ID-Instrumentierung, CI-Ratchet und Holdout-Protokoll umsetzen
+  (IDO-01 bis IDO-04).
+- [ ] **IDO-P1 – Gemeinsame Geometry-IR fertigstellen:** Beschreibung und
+  Bildwahrnehmung als Constraints/Kandidaten fusionieren und Unsicherheit
+  explizit modellieren (IDO-05 bis IDO-09).
+- [ ] **IDO-P2 – ID-spezifische Runtime-Pfade ablösen:** Connector-, Badge-,
+  Ventil-/Kellen- und Optimierungslogik anhand messbarer Merkmale statt
+  Katalog-IDs auswählen (IDO-10 bis IDO-15).
+- [ ] **IDO-P3 – Runtime und Konfiguration bereinigen:** ausschließlich globale
+  Konfiguration zulassen, Runtime-ID-Vorkommen auf null senken und die
+  temporäre Legacy-Baseline danach löschen (IDO-16 bis IDO-18).
+- [ ] **IDO-P4 – Zielqualität am Holdout beweisen:** Ablation,
+  Qualitäts-/Komplexitätsgate und End-to-End-Abnahme mit umbenannten,
+  zurückgehaltenen Bildern durchführen (IDO-19 bis IDO-21).
 
 ## Testhygiene – nur echte Grün-Tests in der Kernliste (neu 2026-05-20)
 
