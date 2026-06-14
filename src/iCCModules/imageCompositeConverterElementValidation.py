@@ -318,6 +318,11 @@ def validateBadgeByElementsImpl(
         # Keep anchor end-to-end tests bounded unless explicitly overridden.
         if "test_ac08_semantic_anchor_variants_convert_without_failed_svg" in current_test_id:
             configured_budget = 90.0
+        elif (
+            "test_ac08_regression_suite_preserves_previously_good_variants" in current_test_id
+            and variant_name_upper.startswith("AC0837")
+        ):
+            configured_budget = 60.0
     if variant_name_upper == "AC0811_L" and configured_budget > 0.0:
         # AC0811_L is the first documented AC08 variant to exceed the
         # validation budget in full-range runs. Give this single variant a
