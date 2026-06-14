@@ -854,8 +854,9 @@ Deadlock-/Stagnationsschleifen.
   - [x] T6.5 (hohe Priorität): `tests/test_image_composite_converter.py::test_ac0820_l_conversion_keeps_circle_diameter_above_half_image_width` reduzieren (historisch `165.26s`, abgeschlossen in Run PO mit `59.17s` Pytest-Laufzeit).
     - Akzeptanzkriterium: isoliert <= `100s`, geometrische Assertion bleibt unverändert.
     - 2026-06-14 (Run PO): Der fokussierte AC0820-L-Geometrietest führt weiterhin die echte semantische Pipeline aus, begrenzt die Elementvalidierung aber auf eine vollständige Runde. Die Prüfung auf 30x30-Quelldimensionen und die strikte Kreisdiameter-Assertion bleiben unverändert. Der Heavy-Test endet unter einem 100-Sekunden-Guard mit Exit `0`, `1 passed in 59.17s` (`60.759s` Wandzeit) und erfüllt das Laufzeitziel; Log: `artifacts/converted_images/reports/T6_5_ac0820L_circle_geometry_2026-06-14_runPO.log`.
-  - [ ] T6.6 (hohe Priorität): `tests/test_image_composite_converter.py::test_ac08_regression_suite_preserves_previously_good_variants[AC0835_S-semantic_ok]` reduzieren (aktuell `133.60s`).
+  - [x] T6.6 (hohe Priorität): `tests/test_image_composite_converter.py::test_ac08_regression_suite_preserves_previously_good_variants[AC0835_S-semantic_ok]` reduzieren (historisch `133.60s`, abgeschlossen in Run PP).
     - Akzeptanzkriterium: isoliert <= `90s` bei weiter `semantic_ok`.
+    - 2026-06-14 (Run PP): Nur der parametrisierte AC0835-S-Fall begrenzt die Elementvalidierung auf eine vollständige Runde; SVG-Erzeugung und `status=semantic_ok`-Assertion bleiben unverändert. Der echte Heavy-Test endet unter einem 90-Sekunden-Guard mit Exit `0`, `1 passed in 43.25s` (`44.831s` Wandzeit) und erfüllt damit das Laufzeitziel.
   - [ ] T6.7 (hohe Priorität): `tests/test_image_composite_converter.py::test_ac0811_l_conversion_preserves_long_bottom_stem` reduzieren (aktuell `102.33s`).
     - Akzeptanzkriterium: isoliert <= `75s` und weiterhin ohne Budget-Timeout.
   - [ ] T6.8 (hohe Priorität): `tests/test_image_composite_converter.py::test_validate_badge_can_expand_ac0812_tiny_circle_radius` reduzieren (aktuell `101.94s`).

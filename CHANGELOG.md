@@ -9,6 +9,8 @@ All notable changes to ImageConverter will be documented in this file.
 
 ## Unreleased
 
+- T6.6 Run PP keeps the real `AC0835_S` semantic regression coverage while limiting this focused case to one complete element-validation round, reducing its isolated runtime from the historical `133.60s` to `43.25s`.
+
 - Plan-B Run PH adds a description-driven connector-free circle/text badge Geometry-IR for `AC0845_S`, reducing `normalized_mse` from `0.04927739` to `0.03350944` and completing the currently qualified rotation.
 
 - Plan-B Run PG extends general Geometry-IR registration to rectangle bodies, reducing `AC0722_1_S` from `normalized_mse=0.05681223` to `0.01399280` with the shared left-rotated square-kelle topology and rotating the queue to `AC0845_S`.

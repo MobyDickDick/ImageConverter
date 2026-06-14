@@ -7911,7 +7911,7 @@ def test_ac08_regression_suite_preserves_previously_good_variants(
         str(svg_dir),
         str(diff_dir),
         str(reports_dir),
-        badge_validation_rounds=1 if variant == "AC0820_L" else 6,
+        badge_validation_rounds=1 if variant in {"AC0820_L", "AC0835_S"} else 6,
     )
 
     assert result is not None
