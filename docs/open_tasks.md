@@ -6,7 +6,7 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-06-14)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `194` · Erledigt `159` · Offen `35`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `194` · Erledigt `160` · Offen `34`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -857,8 +857,9 @@ Deadlock-/Stagnationsschleifen.
   - [x] T6.6 (hohe Priorität): `tests/test_image_composite_converter.py::test_ac08_regression_suite_preserves_previously_good_variants[AC0835_S-semantic_ok]` reduzieren (historisch `133.60s`, abgeschlossen in Run PP).
     - Akzeptanzkriterium: isoliert <= `90s` bei weiter `semantic_ok`.
     - 2026-06-14 (Run PP): Nur der parametrisierte AC0835-S-Fall begrenzt die Elementvalidierung auf eine vollständige Runde; SVG-Erzeugung und `status=semantic_ok`-Assertion bleiben unverändert. Der echte Heavy-Test endet unter einem 90-Sekunden-Guard mit Exit `0`, `1 passed in 43.25s` (`44.831s` Wandzeit) und erfüllt damit das Laufzeitziel.
-  - [ ] T6.7 (hohe Priorität): `tests/test_image_composite_converter.py::test_ac0811_l_conversion_preserves_long_bottom_stem` reduzieren (aktuell `102.33s`).
+  - [x] T6.7 (hohe Priorität): `tests/test_image_composite_converter.py::test_ac0811_l_conversion_preserves_long_bottom_stem` reduzieren (historisch `102.33s`, abgeschlossen in Run PQ).
     - Akzeptanzkriterium: isoliert <= `75s` und weiterhin ohne Budget-Timeout.
+    - 2026-06-14 (Run PQ): Das AC0811-L-Fixture wird aus `artifacts/images_to_convert/nonconvertable/` in ein isoliertes Eingabeverzeichnis kopiert, sodass der Geometrietest die echte Einvarianten-Konvertierung statt eines stillen Fixture-Skips ausführt, sie aber auf eine vollständige Iteration begrenzt. Die Assertions für den langen unteren Stem bleiben unverändert; zusätzlich prüft der Test das Validierungslog explizit auf Abwesenheit von `validation_time_budget_exceeded`. Der Heavy-Test endet unter einem 75-Sekunden-Guard mit Exit `0`, `1 passed in 2.80s` (`3.601s` Wandzeit) und erfüllt damit das Laufzeitziel.
   - [ ] T6.8 (hohe Priorität): `tests/test_image_composite_converter.py::test_validate_badge_can_expand_ac0812_tiny_circle_radius` reduzieren (aktuell `101.94s`).
     - Akzeptanzkriterium: isoliert <= `75s`, keine Regression der Radius-Erweiterungslogik.
   - [ ] T6.9 (mittel-hohe Priorität): `tests/test_image_composite_converter.py::test_validate_badge_by_elements_activates_ac08_adaptive_unlocks_on_stagnation` reduzieren (aktuell `65.09s`).

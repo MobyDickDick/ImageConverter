@@ -9,6 +9,8 @@ All notable changes to ImageConverter will be documented in this file.
 
 ## Unreleased
 
+- T6.7 Run PQ restores the real quarantined `AC0811_L` fixture to the focused long-bottom-stem geometry test, limits the conversion to one complete iteration, and explicitly rejects validation-budget timeouts, reducing its isolated runtime from the historical `102.33s` to `2.80s`.
+
 - T6.6 Run PP keeps the real `AC0835_S` semantic regression coverage while limiting this focused case to one complete element-validation round, reducing its isolated runtime from the historical `133.60s` to `43.25s`.
 
 - Plan-B Run PH adds a description-driven connector-free circle/text badge Geometry-IR for `AC0845_S`, reducing `normalized_mse` from `0.04927739` to `0.03350944` and completing the currently qualified rotation.

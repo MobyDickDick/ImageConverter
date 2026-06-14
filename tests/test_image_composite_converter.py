@@ -7932,20 +7932,25 @@ def test_ac0811_l_conversion_preserves_long_bottom_stem(tmp_path: Path) -> None:
     ):
         pytest.skip("numpy/cv2/fitz not available in this environment")
 
-    images_dir = Path("artifacts/images_to_convert")
-    csv_path = images_dir / "Finale_Wurzelformen_V3.xml"
-    if not images_dir.exists() or not csv_path.exists():
+    fixture_root = Path("artifacts/images_to_convert")
+    source_csv = fixture_root / "Finale_Wurzelformen_V3.xml"
+    img_path = fixture_root / "nonconvertable" / "AC0811_L.jpg"
+    if not fixture_root.exists() or not source_csv.exists():
         pytest.skip("AC0811 fixture inputs not available")
-
-    img_path = images_dir / "AC0811_L.jpg"
     if not img_path.exists():
         pytest.skip(f"missing regression fixture: {img_path}")
+
+    images_dir = tmp_path / "ac0811_l_input"
+    images_dir.mkdir()
+    csv_path = images_dir / source_csv.name
+    shutil.copy2(source_csv, csv_path)
+    shutil.copy2(img_path, images_dir / img_path.name)
 
     output_root = tmp_path / "ac0811_l_out"
     result = image_composite_converter.convertRange(
         str(images_dir),
         str(csv_path),
-        iterations=3,
+        iterations=1,
         start_ref="AC0811",
         end_ref="AC0811",
         output_root=str(output_root),
@@ -7955,6 +7960,8 @@ def test_ac0811_l_conversion_preserves_long_bottom_stem(tmp_path: Path) -> None:
 
     assert result == str(output_root)
     svg_text = (output_root / "converted_svgs" / "AC0811_L.svg").read_text(encoding="utf-8")
+    log_text = (output_root / "reports" / "AC0811_L_element_validation.log").read_text(encoding="utf-8")
+    assert "validation_time_budget_exceeded" not in log_text
 
     import re
 
