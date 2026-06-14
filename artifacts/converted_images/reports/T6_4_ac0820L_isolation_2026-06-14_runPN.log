@@ -1,0 +1,7 @@
+command=timeout 120 env RUN_HEAVY_CONVERSION_TESTS=1 PYTEST_PER_TEST_TIMEOUT_SECONDS=120 PYTHONPATH=vendor/linux-py310/site-packages:. python -m pytest -q tests/test_image_composite_converter.py::test_ac08_regression_suite_preserves_previously_good_variants[AC0820_L-semantic_ok]
+.                                                                        [100%]
+1 passed in 55.67s
+WALL_SECONDS=56.511
+EXIT_CODE=0
+element_validation_status=semantic_ok
+validation_time_budget_exceeded=false
