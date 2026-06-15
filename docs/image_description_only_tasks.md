@@ -45,11 +45,15 @@ Für jedes Arbeitspaket gelten zusätzlich zu den jeweiligen Akzeptanzkriterien:
     verbotene Runtime-Entscheidung, Ausgabe-/Reporting-Verwendungen als legitim
     und nicht eindeutig klassifizierbare Datenflüsse als prüfpflichtig markiert.
 
-- [ ] **IDO-03 – Hardcoding-Ratchet in den verbindlichen CI-Pfad aufnehmen**
+- [x] **IDO-03 – Hardcoding-Ratchet in den verbindlichen CI-Pfad aufnehmen**
   - Aufgabe: `tools/check_no_new_image_id_hardcoding.py` in den lokalen
     Completion-Check und den entsprechenden CI-Workflow integrieren.
   - Akzeptanz: Eine künstlich ergänzte Runtime-ID lässt den Check fehlschlagen;
     das Entfernen bestehender IDs bleibt erlaubt.
+  - Umsetzung: Das lokale Abschlussprofil führt den Ratchet vor Compilation
+    und Tests aus; GitHub Actions besitzt zusätzlich einen eigenständigen,
+    verpflichtenden Ratchet-Job. Ein CLI-Negativtest scannt einen temporären
+    Runtime-Quellbaum mit künstlicher ID und prüft den fehlschlagenden Exitcode.
 
 - [ ] **IDO-04 – Holdout- und Rename-Evaluationsprotokoll definieren**
   - Aufgabe: Trainings-/Entwicklungsbilder, Validierung und strikt

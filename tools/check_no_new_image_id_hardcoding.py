@@ -13,12 +13,17 @@ DEFAULT_BASELINE = ROOT / "config" / "legacy_image_id_baseline.json"
 ID_PATTERN = re.compile(r"\b(?:AC|AR|GE|DLG|SE)\d{3,4}\b", re.IGNORECASE)
 
 
-def scan_source() -> dict[str, dict[str, int]]:
+def scan_source(source_root: Path | None = None) -> dict[str, dict[str, int]]:
+    source_root = source_root or ROOT / "src"
     result: dict[str, dict[str, int]] = {}
-    for path in sorted((ROOT / "src").rglob("*.py")):
+    for path in sorted(source_root.rglob("*.py")):
         counts = Counter(match.upper() for match in ID_PATTERN.findall(path.read_text(encoding="utf-8")))
         if counts:
-            result[path.relative_to(ROOT).as_posix()] = dict(sorted(counts.items()))
+            try:
+                report_path = path.relative_to(ROOT).as_posix()
+            except ValueError:
+                report_path = f"src/{path.relative_to(source_root).as_posix()}"
+            result[report_path] = dict(sorted(counts.items()))
     return result
 
 
@@ -36,9 +41,15 @@ def violations(current: dict[str, dict[str, int]], baseline: dict[str, dict[str,
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--baseline", type=Path, default=DEFAULT_BASELINE)
+    parser.add_argument(
+        "--source-root",
+        type=Path,
+        default=ROOT / "src",
+        help="Python source tree to scan (defaults to the repository src directory).",
+    )
     parser.add_argument("--update", action="store_true", help="Replace the migration baseline with the current inventory.")
     args = parser.parse_args()
-    current = scan_source()
+    current = scan_source(args.source_root)
     if args.update:
         payload = {
             "schema_version": 1,

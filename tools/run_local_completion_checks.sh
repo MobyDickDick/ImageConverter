@@ -14,10 +14,11 @@ usage() {
 Usage: tools/run_local_completion_checks.sh [--summary PATH] [--require-drift-summary]
 
 Runs the standard local completion profile:
-  1. syntax/import compilation for src and tests
-  2. the pytest suite
-  3. the ImageConverter CLI help smoke test
-  4. the chain-telemetry drift gate when a summary artifact is present
+  1. image-ID hardcoding ratchet
+  2. syntax/import compilation for src and tests
+  3. the pytest suite
+  4. the ImageConverter CLI help smoke test
+  5. the chain-telemetry drift gate when a summary artifact is present
 
 The repo vendor path is prepended to PYTHONPATH when available so CLI smoke
 checks can resolve bundled runtime dependencies. By default the drift-gate
@@ -61,6 +62,7 @@ run_step() {
   "$@"
 }
 
+run_step "image-ID hardcoding ratchet" "$PYTHON_BIN" tools/check_no_new_image_id_hardcoding.py
 run_step "compileall" "$PYTHON_BIN" -m compileall src tests
 run_step "pytest" "$PYTHON_BIN" -m pytest
 run_step "ImageConverter CLI help" "$PYTHON_BIN" -m src.imageCompositeConverter --help
