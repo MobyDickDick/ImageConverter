@@ -884,9 +884,10 @@ Deadlock-/Stagnationsschleifen.
       3) nächstes Bild aus `not_satisfactory_converted_images.csv` nach bereits bearbeiteten `AC0010`, `AC0011`, `AC0020_L` als `AC0020_M` über Plan-B-Syntheseprobe ausgeführt (`python -m tools.plan_b_synthetic_probe ... --variant AC0020_M ...`) mit Exit `0` (`status=ok`), Log `artifacts/converted_images/reports/AC0020_M_planb_synthetic_2026-05-16_runFA.log`.
     - Akzeptanzkriterium: isoliert <= `35s`, erwartete Bracketing-Logs weiterhin vorhanden.
     - 2026-06-15 (Run PT): Der unveränderte fokussierte Extent-Bracketing-Test wurde auf der aktuellen vendorten Python-3.10-Toolchain mit aktiviertem Heavy-Test-Pfad, äußerem 35-Sekunden-Guard und gleich großem pytest-Einzeltest-Timeout ausgeführt. Der reale AC0812-S-Pfad führt weiterhin eine vollständige Validierungsrunde aus und prüft die erwartete Logzeile `arm: Längen-Bracketing`. Der Lauf endet mit Exit `0`, `1 passed in 4.33s` (auf ganze Sekunden gemessene Wandzeit `6s`); Änderungen am Produktions- oder Testcode sind nicht erforderlich. Log: `artifacts/converted_images/reports/T6_10_extent_bracketing_2026-06-15_runPT.log`.
-  - [ ] T6.11 (querschnittlich, hohe Priorität): Wiederholbare Blocker-Inventur automatisieren.
+  - [x] T6.11 (querschnittlich, hohe Priorität): Wiederholbare Blocker-Inventur automatisieren (abgeschlossen in Run PU).
     - Befehl: `python -m pytest --maxfail=1 -vv --durations=20`.
     - Akzeptanzkriterium: pro Inventurlauf ein Run-Log + eine aktualisierte Top-Blocker-Liste in `docs/open_tasks.md`.
+    - 2026-06-15 (Run PU): `tools/run_blocker_inventory.py` führt die Inventur mit dem dokumentierten Standardbefehl aus, spiegelt die pytest-Ausgabe in ein datiertes Run-Log und ersetzt die markierte Top-Blocker-Tabelle in diesem Dokument. Parser- und Dokumentaktualisierung sind durch fokussierte Tooltests abgesichert. Der erste reale Inventurlauf endet mit Exit `0`, `818 passed in 68.22s`; die längsten aktuellen Nodes liegen in den Release-Candidate-/Segmented-Smoke-Helfertests. Log: `artifacts/converted_images/reports/blocker_inventory_2026-06-15-runPU.log`.
   - [ ] T6.12 (hoch): `tests/test_image_composite_converter.py::test_ac08_regression_suite_preserves_previously_good_variants[AC0800_L-semantic_ok]` isolieren und Laufzeit dokumentiert reduzieren.
     - Akzeptanzkriterium: isoliert <= `120s`, Status weiterhin `semantic_ok`.
   - [ ] T6.13 (hoch): `tests/test_image_composite_converter.py::test_ac08_regression_suite_preserves_previously_good_variants[AC0800_M-semantic_ok]` isolieren und Laufzeit dokumentiert reduzieren.
@@ -3764,3 +3765,36 @@ endet. Die Detailableitung und Akzeptanzkriterien stehen in
 - **Bewertung des vorliegenden Laufs:** Kein nachgewiesener Produkt- oder
   Release-Blocker; die vier Evidence-/Auswertungsverbesserungen sind
   abgeschlossen.
+
+<!-- blocker-inventory:start -->
+### Aktuelle automatisierte Top-Blocker-Inventur
+
+- Run: `2026-06-15-runPU`
+- Log: `artifacts/converted_images/reports/blocker_inventory_2026-06-15-runPU.log`
+- Exit-Code: `0`
+- Befehl: `/root/.pyenv/versions/3.10.20/bin/python -m pytest --maxfail=1 -vv --durations=20`
+- Fehlgeschlagene Nodes: `0`
+
+| Rang | Dauer | Phase | Test-Node |
+| ---: | ---: | --- | --- |
+| 1 | 10.61s | `call` | `tests/detailtests/test_local_completion_checks_tool.py::test_release_candidate_gate_propagates_paths_to_segmented_smoke` |
+| 2 | 6.76s | `call` | `tests/detailtests/test_local_completion_checks_tool.py::test_release_candidate_gate_discards_stale_metrics_before_smoke` |
+| 3 | 6.51s | `call` | `tests/detailtests/test_local_completion_checks_tool.py::test_release_candidate_gate_fails_unaccepted_blocker` |
+| 4 | 6.37s | `call` | `tests/detailtests/test_local_completion_checks_tool.py::test_release_candidate_gate_records_blockers_and_accepted_exceptions` |
+| 5 | 5.80s | `call` | `tests/detailtests/test_local_completion_checks_tool.py::test_segmented_ac08_smoke_runs_aggregation_after_all_segments_pass` |
+| 6 | 3.85s | `call` | `tests/detailtests/test_local_completion_checks_tool.py::test_segmented_ac08_smoke_withholds_aggregation_when_one_variant_fails` |
+| 7 | 1.95s | `call` | `tests/detailtests/test_local_completion_checks_tool.py::test_segmented_ac08_smoke_rejects_exit_zero_without_expected_iteration_row` |
+| 8 | 0.76s | `call` | `tests/test_review_conversion_quality.py::test_ac0820_l_committed_svg_preserves_co2_badge_quality` |
+| 9 | 0.72s | `call` | `tests/test_review_conversion_quality.py::test_ac0732_1_s_committed_svg_preserves_right_facing_p_kelle_quality` |
+| 10 | 0.71s | `call` | `tests/detailtests/test_svg_render_timeout_defaults.py::test_svg_render_subprocess_defaults_activate_when_pytest_env_is_inherited` |
+| 11 | 0.71s | `call` | `tests/test_review_conversion_quality.py::test_ac0723_1_s_committed_svg_preserves_vertical_square_t_kelle_quality` |
+| 12 | 0.70s | `call` | `tests/test_review_conversion_quality.py::test_ac0733_1_m_committed_svg_preserves_horizontal_p_kelle_quality` |
+| 13 | 0.69s | `call` | `tests/test_review_conversion_quality.py::test_ac0733_1_l_committed_svg_preserves_horizontal_p_kelle_quality` |
+| 14 | 0.69s | `call` | `tests/test_review_conversion_quality.py::test_ac0845_s_committed_svg_preserves_connector_free_rh_badge_quality` |
+| 15 | 0.68s | `call` | `tests/test_review_conversion_quality.py::test_ac0130_committed_svg_preserves_full_size_cross_quality` |
+| 16 | 0.68s | `call` | `tests/detailtests/test_svg_render_timeout_defaults.py::test_svg_render_subprocess_timeout_defaults_to_five_seconds_under_pytest_context` |
+| 17 | 0.67s | `call` | `tests/test_review_conversion_quality.py::test_ac0150_2_committed_svg_preserves_saturated_chevron_quality` |
+| 18 | 0.67s | `call` | `tests/test_review_conversion_quality.py::test_ac0732_1_l_committed_svg_preserves_right_facing_p_kelle_quality` |
+| 19 | 0.67s | `call` | `tests/test_review_conversion_quality.py::test_ac0732_1_m_committed_svg_preserves_right_facing_p_kelle_quality` |
+| 20 | 0.67s | `call` | `tests/test_review_conversion_quality.py::test_ac0701_1_s_committed_svg_preserves_upright_square_kelle_quality` |
+<!-- blocker-inventory:end -->
