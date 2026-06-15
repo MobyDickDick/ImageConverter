@@ -101,7 +101,8 @@ ein ausführbares Sammelprofil gestartet werden:
 ./tools/run_local_completion_checks.sh
 ```
 
-Das Skript führt `compileall`, die Pytest-Suite, den CLI-Help-Smoke und – sofern
+Das Skript führt zuerst den Image-ID-Hardcoding-Ratchet aus, danach `compileall`,
+die Pytest-Suite, den CLI-Help-Smoke und – sofern
 ein `chain_phase_telemetry_summary.txt` vorhanden ist – den
 Ketten-Telemetrie-Drift-Gate-Check aus. Im Standardprofil ist dieser Drift-Schritt
 bewusst nur beratend: fehlende Summaries werden übersprungen und vorhandene
@@ -121,7 +122,9 @@ gesetzt werden:
 Das lokale Abschlussprofil ist zusätzlich in GitHub Actions verdrahtet. Der
 Workflow `.github/workflows/local-completion-checks.yml` startet auf Pull
 Requests, Pushes auf die Hauptarbeitszweige und manuell per `workflow_dispatch`
-denselben Sammelbefehl. Vor dem Sammelprofil installiert der Workflow `pytest`,
+denselben Sammelbefehl. Der eigenständige Job `image-id-hardcoding-ratchet`
+führt den Ratchet außerdem als direkt sichtbares Pflichtsignal aus. Vor dem
+Sammelprofil installiert der Workflow `pytest`,
 damit ein frischer `actions/setup-python`-Runner die Pytest-Suite überhaupt als
 Modul starten kann:
 

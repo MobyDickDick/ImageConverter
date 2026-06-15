@@ -19,6 +19,36 @@ def _write_fake_python(path: Path) -> None:
     path.chmod(0o755)
 
 
+def test_local_completion_checks_runs_image_id_ratchet_before_tests(tmp_path: Path) -> None:
+    fake_python = tmp_path / "fake-python"
+    fake_python.write_text(
+        "#!/usr/bin/env bash\n"
+        "if [[ \"$*\" == *\"tools/check_no_new_image_id_hardcoding.py\"* ]]; then\n"
+        "  echo 'synthetic ratchet failure'\n"
+        "  exit 7\n"
+        "fi\n"
+        "echo \"unexpected later command: $*\"\n"
+        "exit 0\n",
+        encoding="utf-8",
+    )
+    fake_python.chmod(0o755)
+
+    result = subprocess.run(
+        ["./tools/run_local_completion_checks.sh"],
+        cwd=Path(__file__).resolve().parents[2],
+        env={**os.environ, "PYTHON": str(fake_python)},
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        check=False,
+    )
+
+    assert result.returncode == 7
+    assert "==> image-ID hardcoding ratchet" in result.stdout
+    assert "synthetic ratchet failure" in result.stdout
+    assert "==> compileall" not in result.stdout
+
+
 def test_local_completion_checks_drift_warning_is_advisory_by_default(tmp_path: Path) -> None:
     fake_python = tmp_path / "fake-python"
     _write_fake_python(fake_python)
