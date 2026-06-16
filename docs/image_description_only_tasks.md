@@ -70,13 +70,19 @@ Für jedes Arbeitspaket gelten zusätzlich zu den jeweiligen Akzeptanzkriterien:
 
 ## Priorität 1 – Beschreibung und Bild in eine gemeinsame Geometry-IR überführen
 
-- [ ] **IDO-05 – Bildunabhängiges Beschreibungsvokabular spezifizieren**
+- [x] **IDO-05 – Bildunabhängiges Beschreibungsvokabular spezifizieren**
   - Aufgabe: Primitive, Richtungen, Relationen, Farben, Text/Glyphen,
     Überdeckungen und Negationen als versioniertes Schema definieren.
   - Beispiele: „Kreis“, „Linie links am Kreis“, „Text CO₂ im Kreis“,
     „ohne Beschriftung“.
   - Akzeptanz: Das Schema enthält keine Katalog-ID und kann Beschreibungen aus
     mindestens drei unterschiedlichen Symbolfamilien repräsentieren.
+  - Umsetzung: `docs/vision/semantic_scene_description_v1.schema.json` definiert
+    ein katalog-ID-freies Vokabular für Primitive, Richtungen, Relationen,
+    Farben, Text/Glyphen, Überdeckungen, Negationen und Unsicherheiten.
+    `artifacts/evaluation/semantic_scene_description_v1/description_vocabulary_examples.json`
+    enthält prüfbare Beispiele für linken Kreis-Connector, Text-Badge und
+    überdeckten Polygon-Pfeil.
 
 - [ ] **IDO-06 – Beschreibung ausschließlich in Constraints übersetzen**
   - Aufgabe: Den Parser so umbauen, dass er nur Geometry-IR-Elemente,

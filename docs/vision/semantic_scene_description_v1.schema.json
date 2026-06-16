@@ -2,85 +2,143 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://imageconverter.local/schemas/semantic_scene_description_v1.schema.json",
   "title": "Semantic Scene Description v1",
+  "description": "Catalog-id-free vocabulary for translating human image descriptions into Geometry-IR constraints.",
   "type": "object",
-  "required": ["scene_id", "canvas", "objects", "relations", "constraints"],
+  "required": ["schema_version", "description_id", "canvas", "objects", "relations", "constraints", "negations"],
   "properties": {
-    "scene_id": { "type": "string", "minLength": 1 },
+    "schema_version": { "const": "semantic_scene_description_v1" },
+    "description_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Opaque, catalog-neutral identifier for this description fixture or parse result."
+    },
+    "source_text": { "type": "string" },
+    "language": { "type": "string", "enum": ["de", "en", "und"] },
     "canvas": {
       "type": "object",
       "required": ["width", "height", "units"],
       "properties": {
         "width": { "type": "number", "exclusiveMinimum": 0 },
         "height": { "type": "number", "exclusiveMinimum": 0 },
-        "units": { "type": "string", "enum": ["px"] }
+        "units": { "type": "string", "enum": ["px", "relative"] }
       },
       "additionalProperties": false
     },
     "objects": {
       "type": "array",
       "minItems": 1,
-      "items": {
-        "type": "object",
-        "required": ["id", "type", "geometry", "style", "confidence"],
-        "properties": {
-          "id": { "type": "string", "minLength": 1 },
-          "type": { "type": "string", "minLength": 1 },
-          "geometry": { "type": "object" },
-          "style": {
-            "type": "object",
-            "required": ["stroke", "stroke_width", "fill"],
-            "properties": {
-              "stroke": { "type": "string" },
-              "stroke_width": { "type": "number", "minimum": 0 },
-              "fill": { "type": "string" },
-              "gradient_ref": { "type": "string" }
-            },
-            "additionalProperties": true
-          },
-          "confidence": { "type": "number", "minimum": 0, "maximum": 1 }
-        },
-        "additionalProperties": false
-      }
+      "items": { "$ref": "#/$defs/semantic_object" }
     },
     "relations": {
       "type": "array",
-      "items": {
-        "type": "object",
-        "required": ["subject", "predicate", "object"],
-        "properties": {
-          "subject": { "type": "string" },
-          "predicate": {
-            "type": "string",
-            "enum": [
-              "attached_to", "left_of", "right_of", "above", "below", "inside", "overlaps",
-              "covers", "behind", "continues_behind"
-            ]
-          },
-          "object": { "type": "string" },
-          "tolerance_px": { "type": "number", "minimum": 0 }
-        },
-        "additionalProperties": false
-      }
+      "items": { "$ref": "#/$defs/relation" }
     },
     "constraints": {
       "type": "array",
-      "items": {
-        "type": "object",
-        "required": ["kind", "rule", "targets", "params"],
-        "properties": {
-          "kind": { "type": "string", "enum": ["hard", "soft"] },
-          "rule": { "type": "string", "minLength": 1 },
-          "targets": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
-          "params": { "type": "object" },
-          "weight": { "type": "number", "minimum": 0 }
-        },
-        "additionalProperties": false
-      }
+      "items": { "$ref": "#/$defs/constraint" }
     },
-    "labels": {
+    "negations": {
       "type": "array",
-      "items": { "type": "string" }
+      "items": { "$ref": "#/$defs/negation" }
+    },
+    "uncertainties": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/uncertainty" }
+    },
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "created_by": { "type": "string" },
+        "notes": { "type": "string" }
+      },
+      "additionalProperties": false
     }
   },
-  "additionalProperties": false
+  "additionalProperties": false,
+  "$defs": {
+    "identifier": { "type": "string", "pattern": "^[a-z][a-z0-9_]*$" },
+    "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+    "primitive_type": {
+      "type": "string",
+      "enum": ["circle", "ring", "line", "rectangle", "polygon", "path", "text", "glyph", "connector", "group"]
+    },
+    "direction": {
+      "type": "string",
+      "enum": ["left", "right", "top", "bottom", "upper_left", "upper_right", "lower_left", "lower_right", "horizontal", "vertical", "diagonal", "center"]
+    },
+    "color": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "enum": ["black", "white", "gray", "red", "green", "blue", "yellow", "orange", "brown", "transparent", "unknown"] },
+        "hex": { "type": "string", "pattern": "^#[0-9A-Fa-f]{6}$" },
+        "role": { "type": "string", "enum": ["stroke", "fill", "text", "background", "highlight"] },
+        "confidence": { "$ref": "#/$defs/confidence" }
+      },
+      "additionalProperties": false,
+      "anyOf": [{ "required": ["name"] }, { "required": ["hex"] }]
+    },
+    "semantic_object": {
+      "type": "object",
+      "required": ["id", "type", "confidence", "evidence"],
+      "properties": {
+        "id": { "$ref": "#/$defs/identifier" },
+        "type": { "$ref": "#/$defs/primitive_type" },
+        "role": { "type": "string", "enum": ["primary_shape", "connector", "label", "outline", "fill_area", "occluder", "unknown"] },
+        "directions": { "type": "array", "items": { "$ref": "#/$defs/direction" }, "uniqueItems": true },
+        "text": { "type": "string", "description": "Literal text or glyph content such as T, M, VOC or CO₂." },
+        "colors": { "type": "array", "items": { "$ref": "#/$defs/color" } },
+        "confidence": { "$ref": "#/$defs/confidence" },
+        "evidence": { "type": "array", "minItems": 1, "items": { "type": "string", "enum": ["description", "perception", "inferred"] } }
+      },
+      "additionalProperties": false
+    },
+    "relation": {
+      "type": "object",
+      "required": ["subject", "predicate", "object", "confidence", "evidence"],
+      "properties": {
+        "subject": { "$ref": "#/$defs/identifier" },
+        "predicate": { "type": "string", "enum": ["attached_to", "touches", "left_of", "right_of", "above", "below", "inside", "outside", "centered_in", "parallel_to", "perpendicular_to", "overlaps", "covers", "behind", "continues_behind", "same_color_as", "aligned_with"] },
+        "object": { "$ref": "#/$defs/identifier" },
+        "direction": { "$ref": "#/$defs/direction" },
+        "tolerance_px": { "type": "number", "minimum": 0 },
+        "confidence": { "$ref": "#/$defs/confidence" },
+        "evidence": { "type": "array", "minItems": 1, "items": { "type": "string", "enum": ["description", "perception", "inferred"] } }
+      },
+      "additionalProperties": false
+    },
+    "constraint": {
+      "type": "object",
+      "required": ["kind", "rule", "targets", "params", "weight"],
+      "properties": {
+        "kind": { "type": "string", "enum": ["hard", "soft"] },
+        "rule": { "type": "string", "enum": ["primitive_required", "geometry_hint", "direction_hint", "color_hint", "text_content", "text_absent", "relation_required", "occlusion_order", "symmetry", "alignment", "size_ratio"] },
+        "targets": { "type": "array", "items": { "$ref": "#/$defs/identifier" }, "minItems": 1 },
+        "params": { "type": "object", "additionalProperties": true },
+        "weight": { "type": "number", "minimum": 0 }
+      },
+      "additionalProperties": false
+    },
+    "negation": {
+      "type": "object",
+      "required": ["rule", "targets", "confidence", "evidence"],
+      "properties": {
+        "rule": { "type": "string", "enum": ["without_label", "without_connector", "without_fill", "not_inside", "not_touching", "not_occluded"] },
+        "targets": { "type": "array", "items": { "$ref": "#/$defs/identifier" } },
+        "confidence": { "$ref": "#/$defs/confidence" },
+        "evidence": { "type": "array", "minItems": 1, "items": { "type": "string", "enum": ["description", "perception", "inferred"] } }
+      },
+      "additionalProperties": false
+    },
+    "uncertainty": {
+      "type": "object",
+      "required": ["status", "reason", "targets", "confidence"],
+      "properties": {
+        "status": { "type": "string", "enum": ["resolved", "ambiguous", "insufficient_evidence", "contradictory"] },
+        "reason": { "type": "string" },
+        "targets": { "type": "array", "items": { "$ref": "#/$defs/identifier" } },
+        "confidence": { "$ref": "#/$defs/confidence" }
+      },
+      "additionalProperties": false
+    }
+  }
 }
