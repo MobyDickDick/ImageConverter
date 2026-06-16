@@ -661,6 +661,16 @@ def _contains_svg_image_tag(svg_content: str) -> bool:
     return "<image" in lowered and ('href="data:image' in lowered or 'xlink:href="data:image' in lowered)
 
 
+def _has_description_driven_symbol_algorithm(description: str) -> bool:
+    """Return true when the text can be rendered algorithmically without sample SVGs."""
+
+    geometry_ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(description)
+    if not geometry_ir:
+        return False
+    kinds = {str(element.get("kind", "")) for element in geometry_ir}
+    return bool(DESCRIPTION_DRIVEN_GEOMETRY_IR_KINDS & kinds)
+
+
 def _build_sample_candidates(base_name: str) -> list[str]:
     candidates: list[str] = []
     seen: set[str] = set()
@@ -802,7 +812,14 @@ def runNonCompositeIterationImpl(
     calculate_error_fn,
     image_variant_name: str | None = None,
 ) -> tuple[str, str, dict[str, object], int, float] | None:
-    sample_svg = _try_load_sample_svg(img_path=img_path, base_name=base_name, description=description)
+    algorithmic_description_available = mode != "manual_review" and (
+        bool(stripe_strategy) or _has_description_driven_symbol_algorithm(description)
+    )
+    sample_svg = (
+        None
+        if algorithmic_description_available
+        else _try_load_sample_svg(img_path=img_path, base_name=base_name, description=description)
+    )
 
     if mode == "manual_review":
         generated_svg_content = None
