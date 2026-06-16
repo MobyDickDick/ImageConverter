@@ -228,3 +228,40 @@ def test_description_parser_attaches_geometry_ir_for_ac0214_180_rotated_two_way_
 
     assert params["contract_status"] == "ok"
     assert [element["kind"] for element in params["geometry_ir"]] == ["Rotated180TwoWayValveMotorGlyph"]
+
+
+def test_description_parser_emits_catalog_free_constraints_for_neutral_names() -> None:
+    desc = 'Kompressor grau nach oben mit Kreis und zwei diagonalen Linien.'
+    _desc_a, params_a = Reflection({"NEUTRAL_ALPHA": desc}).parse_description(
+        "NEUTRAL_ALPHA", "neutral_alpha.svg.png"
+    )
+    _desc_b, params_b = Reflection({"NEUTRAL_BETA": desc}).parse_description(
+        "NEUTRAL_BETA", "neutral_beta.svg.png"
+    )
+
+    assert params_a["description_constraints"] == params_b["description_constraints"]
+    constraints = params_a["description_constraints"]
+    assert constraints["schema_version"] == "description_geometry_constraints_v1"
+    assert constraints["source"] == "description"
+    assert constraints["uncertainty"]["status"] == "ok"
+    serialized = repr(constraints).lower()
+    assert "neutral_alpha" not in serialized
+    assert "neutral_beta" not in serialized
+    assert "semantic_badge" not in serialized
+    assert "mode" not in serialized
+
+
+def test_description_constraints_report_uncertainty_without_renderer_choice() -> None:
+    _desc, params = Reflection({"RANDOM_SYMBOL": "Unbekannter technischer Hinweis."}).parse_description(
+        "RANDOM_SYMBOL", "renamed_holdout_input.png"
+    )
+
+    constraints = params["description_constraints"]
+    assert constraints["elements"] == []
+    assert constraints["relations"] == []
+    assert constraints["uncertainty"] == {
+        "status": "needs_review",
+        "reasons": ["no_supported_geometry_constraint"],
+        "confidence": 0.0,
+    }
+    assert "mode" not in constraints

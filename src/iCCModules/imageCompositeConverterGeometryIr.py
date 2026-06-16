@@ -1337,3 +1337,61 @@ def renderGeometryIrToSvgImpl(w: int, h: int, geometry_ir: list[dict[str, object
     svg.extend(renderGeometryIrToSvgElementsImpl(w, h, geometry_ir))
     svg.append("</svg>")
     return "\n".join(svg)
+
+
+def buildDescriptionConstraintsImpl(description: str) -> dict[str, object]:
+    """Translate free-form descriptions into catalog-free Geometry-IR constraints.
+
+    This is the parser-facing contract for IDO-06: descriptions contribute only
+    declarative primitive/geometry/style constraints plus uncertainty metadata.
+    Renderer selection, catalog family selection and output names intentionally do
+    not appear in this structure.
+    """
+
+    desc = _normalize_text(description)
+    elements = buildGeometryIrFromDescriptionImpl(description)
+    constraints: list[dict[str, object]] = []
+    relations: list[dict[str, object]] = []
+    for index, element in enumerate(elements, start=1):
+        if not isinstance(element, dict):
+            continue
+        constraint_id = f"description_element_{index}"
+        normalized: dict[str, object] = {
+            "id": constraint_id,
+            "kind": str(element.get("kind", "UnknownPrimitive")),
+            "source": "description",
+            "confidence": 0.75,
+        }
+        for key, value in element.items():
+            if key in {"id", "kind"}:
+                continue
+            normalized[key] = value
+            if key.endswith("_ref") and isinstance(value, str):
+                relations.append(
+                    {
+                        "type": key.removesuffix("_ref"),
+                        "subject": constraint_id,
+                        "object": value,
+                        "source": "description",
+                        "confidence": 0.75,
+                    }
+                )
+        constraints.append(normalized)
+
+    uncertainty_reasons: list[str] = []
+    if not desc:
+        uncertainty_reasons.append("missing_description")
+    if desc and not constraints:
+        uncertainty_reasons.append("no_supported_geometry_constraint")
+
+    return {
+        "schema_version": "description_geometry_constraints_v1",
+        "source": "description",
+        "elements": constraints,
+        "relations": relations,
+        "uncertainty": {
+            "status": "ok" if not uncertainty_reasons else "needs_review",
+            "reasons": uncertainty_reasons,
+            "confidence": 0.75 if constraints else 0.0,
+        },
+    }

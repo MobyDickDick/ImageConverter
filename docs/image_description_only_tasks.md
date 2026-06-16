@@ -84,12 +84,19 @@ Für jedes Arbeitspaket gelten zusätzlich zu den jeweiligen Akzeptanzkriterien:
     enthält prüfbare Beispiele für linken Kreis-Connector, Text-Badge und
     überdeckten Polygon-Pfeil.
 
-- [ ] **IDO-06 – Beschreibung ausschließlich in Constraints übersetzen**
+- [x] **IDO-06 – Beschreibung ausschließlich in Constraints übersetzen**
   - Aufgabe: Den Parser so umbauen, dass er nur Geometry-IR-Elemente,
     Relationen und Unsicherheiten erzeugt, niemals einen katalogspezifischen
     Renderer auswählt.
   - Akzeptanz: Parser-Tests verwenden ausschließlich erfundene Namen; gleiche
     Beschreibung ergibt unabhängig vom Dateinamen die gleichen Constraints.
+  - Umsetzung: `buildDescriptionConstraintsImpl(...)` erzeugt einen
+    katalogfreien `description_geometry_constraints_v1`-Vertrag mit
+    Geometry-IR-Elementen, Relationen und Unsicherheitsstatus.
+    `Reflection.parse_description(...)` hängt diesen Vertrag zusätzlich an die
+    Parser-Parameter; Regressionstests mit erfundenen Dateinamen sichern, dass
+    gleiche Beschreibung identische Constraints ohne Renderer-/Mode-Auswahl und
+    ohne Dateinamenspuren liefert.
 
 - [ ] **IDO-07 – Perception-Kandidaten vollständig auf dieselbe IR abbilden**
   - Aufgabe: Kreis/Ring, Linie, Rechteck, Polygon/Pfad, Textbereich und Farbe mit
