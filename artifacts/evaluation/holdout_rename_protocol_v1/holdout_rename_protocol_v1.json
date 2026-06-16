@@ -1,0 +1,132 @@
+{
+  "schema_version": "holdout_rename_protocol_v1",
+  "seed": "ido-04-holdout-rename-v1",
+  "split_policy": {
+    "development": "Samples available for implementation and threshold tuning.",
+    "holdout": "Strictly withheld samples; evaluation must use anonymized filenames only.",
+    "forbidden_leakage": [
+      "holdout original filenames in runtime code",
+      "holdout geometry copied to configuration",
+      "threshold tuning on holdout results"
+    ]
+  },
+  "rename_policy": {
+    "holdout_renamed_before_conversion": true,
+    "rename_algorithm": "sha256(seed + NUL + original_name) first 16 hex characters",
+    "development_renamed": false
+  },
+  "metric_contract": {
+    "pixel": {
+      "required": true,
+      "metrics": [
+        "mean_delta2",
+        "error_per_pixel",
+        "non_background_iou"
+      ],
+      "reported_per_split": [
+        "development",
+        "holdout"
+      ]
+    },
+    "edge": {
+      "required": true,
+      "metrics": [
+        "edge_iou",
+        "chamfer_distance_px",
+        "edge_recall"
+      ],
+      "reported_per_split": [
+        "development",
+        "holdout"
+      ]
+    },
+    "structure": {
+      "required": true,
+      "metrics": [
+        "primitive_count_delta",
+        "bbox_iou",
+        "path_complexity_ratio"
+      ],
+      "reported_per_split": [
+        "development",
+        "holdout"
+      ]
+    },
+    "semantic": {
+      "required": true,
+      "metrics": [
+        "constraint_precision",
+        "constraint_recall",
+        "semantic_status"
+      ],
+      "reported_per_split": [
+        "development",
+        "holdout"
+      ]
+    }
+  },
+  "required_split_reports": {
+    "development": {
+      "pixel": {
+        "required": true
+      },
+      "edge": {
+        "required": true
+      },
+      "structure": {
+        "required": true
+      },
+      "semantic": {
+        "required": true
+      }
+    },
+    "holdout": {
+      "pixel": {
+        "required": true
+      },
+      "edge": {
+        "required": true
+      },
+      "structure": {
+        "required": true
+      },
+      "semantic": {
+        "required": true
+      }
+    }
+  },
+  "split_counts": {
+    "development": 2,
+    "holdout": 2
+  },
+  "samples": [
+    {
+      "original_name": "development_circle_badge.png",
+      "description": "Kreis mit zentriertem Text und ohne Anschlusslinie",
+      "split": "development",
+      "evaluation_name": "development_circle_badge.png",
+      "rename_required": false
+    },
+    {
+      "original_name": "development_left_connector.png",
+      "description": "Kreis mit linker horizontaler Anschlusslinie",
+      "split": "development",
+      "evaluation_name": "development_left_connector.png",
+      "rename_required": false
+    },
+    {
+      "original_name": "strict_holdout_ring_top_stem.png",
+      "description": "Ring mit oberem senkrechtem Anschluss und kurzer Beschriftung",
+      "split": "holdout",
+      "evaluation_name": "holdout_2fe95d0292dd8db5.png",
+      "rename_required": true
+    },
+    {
+      "original_name": "strict_holdout_plain_valve.png",
+      "description": "Einfache Ventilform aus Kreis, Linie und Dreieck ohne Text",
+      "split": "holdout",
+      "evaluation_name": "holdout_72cd31856282cdfe.png",
+      "rename_required": true
+    }
+  ]
+}
