@@ -9,6 +9,8 @@ All notable changes to ImageConverter will be documented in this file.
 
 ## Unreleased
 
+- T6.13 Run PW confirms the real `AC0800_M` semantic regression case in `3.03s` Pytest time (`5s` wall time), preserving `semantic_ok` well below the 120-second acceptance limit without changing production or test budgets.
+
 - T6.7 Run PQ restores the real quarantined `AC0811_L` fixture to the focused long-bottom-stem geometry test, limits the conversion to one complete iteration, and explicitly rejects validation-budget timeouts, reducing its isolated runtime from the historical `102.33s` to `2.80s`.
 
 - T6.6 Run PP keeps the real `AC0835_S` semantic regression coverage while limiting this focused case to one complete element-validation round, reducing its isolated runtime from the historical `133.60s` to `43.25s`.
