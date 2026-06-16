@@ -112,11 +112,18 @@ Für jedes Arbeitspaket gelten zusätzlich zu den jeweiligen Akzeptanzkriterien:
     Geometry-IR-Seed und SVG-Renderbarkeit für jeden unterstützten
     Primitive-Typ.
 
-- [ ] **IDO-08 – Generische Fusionslogik implementieren**
+- [x] **IDO-08 – Generische Fusionslogik implementieren**
   - Aufgabe: Bildkandidaten und Beschreibungs-Constraints über gewichtete Kosten
     beziehungsweise Wahrscheinlichkeiten zusammenführen.
   - Akzeptanz: Tests decken Übereinstimmung, fehlende Bildevidenz,
     widersprüchliche Beschreibung und mehrere plausible Kandidaten ab.
+  - Umsetzung: `fuse_description_constraints_with_perception_candidates(...)`
+    führt Beschreibungselemente und neutrale Perception-Kandidaten über
+    Primitive-Kompatibilität, Confidence und optionale Bounding-Box-Überlappung
+    in einem katalogfreien `description_perception_fusion_v1`-Vertrag zusammen.
+    Der Entscheidungs-Trace unterscheidet `matched`, `missing_image_evidence`,
+    `contradiction` und `ambiguous`; Regressionstests decken genau diese vier
+    Akzeptanzfälle mit neutralen synthetischen Kandidaten ab.
 
 - [ ] **IDO-09 – Unsicherheitsvertrag definieren**
   - Aufgabe: Status, Gründe und Confidence für unzureichende oder

@@ -795,9 +795,13 @@ def merge_perception_candidates_into_geometry_ir(
             },
         )
 
-    line_candidates = [candidate for candidate in candidates if candidate.kind == "line"]
+    line_candidates = [
+        candidate for candidate in candidates if candidate.kind == "line"
+    ]
     if line_candidates and "OrthogonalPolyline" not in existing_kinds:
-        best = sorted(line_candidates, key=lambda item: item.confidence, reverse=True)[0]
+        best = sorted(line_candidates, key=lambda item: item.confidence, reverse=True)[
+            0
+        ]
         bbox = _candidate_normalized_bbox(best, image)
         x, y, bw, bh = bbox
         orientation = str(best.geometry.get("orientation", "vertical"))
@@ -810,7 +814,9 @@ def merge_perception_candidates_into_geometry_ir(
                 "kind": "OrthogonalPolyline",
                 "id": "perception_line",
                 "bbox": bbox,
-                "points": [[_round_number(px, 5), _round_number(py, 5)] for px, py in points],
+                "points": [
+                    [_round_number(px, 5), _round_number(py, 5)] for px, py in points
+                ],
                 "stroke": best.color.get("stroke_hex") or "#4f4f4f",
                 "stroke_width": _round_number(
                     float(best.geometry.get("stroke_width_px", 1.0))
@@ -826,7 +832,9 @@ def merge_perception_candidates_into_geometry_ir(
         candidate for candidate in candidates if candidate.kind in {"polygon", "path"}
     ]
     if polygon_candidates and "PolygonPath" not in existing_kinds:
-        best = sorted(polygon_candidates, key=lambda item: item.confidence, reverse=True)[0]
+        best = sorted(
+            polygon_candidates, key=lambda item: item.confidence, reverse=True
+        )[0]
         raw_points = best.geometry.get("points")
         if not isinstance(raw_points, list) or len(raw_points) < 3:
             x, y, bw, bh = _candidate_normalized_bbox(best, image)
@@ -836,7 +844,10 @@ def merge_perception_candidates_into_geometry_ir(
                 "kind": "PolygonPath",
                 "id": "perception_polygon_path",
                 "points": [
-                    [_round_number(float(point[0]), 5), _round_number(float(point[1]), 5)]
+                    [
+                        _round_number(float(point[0]), 5),
+                        _round_number(float(point[1]), 5),
+                    ]
                     for point in raw_points
                     if isinstance(point, list) and len(point) == 2
                 ],
@@ -850,10 +861,14 @@ def merge_perception_candidates_into_geometry_ir(
         existing_kinds.add("PolygonPath")
 
     text_candidates = [
-        candidate for candidate in candidates if candidate.kind in {"text_glyph", "text_area"}
+        candidate
+        for candidate in candidates
+        if candidate.kind in {"text_glyph", "text_area"}
     ]
     if text_candidates and "TextGlyph" not in existing_kinds:
-        best = sorted(text_candidates, key=lambda item: item.confidence, reverse=True)[0]
+        best = sorted(text_candidates, key=lambda item: item.confidence, reverse=True)[
+            0
+        ]
         bbox = _candidate_normalized_bbox(best, image)
         text = str(best.geometry.get("text") or best.geometry.get("glyph") or "?")
         merged.append(
@@ -862,16 +877,22 @@ def merge_perception_candidates_into_geometry_ir(
                 "id": "perception_text_glyph",
                 "bbox": bbox,
                 "text": text,
-                "fill": best.color.get("stroke_hex") or best.color.get("fill_hex") or "#4f4f4f",
+                "fill": best.color.get("stroke_hex")
+                or best.color.get("fill_hex")
+                or "#4f4f4f",
                 "font_size": _round_number(max(bbox[2], bbox[3]) * 0.9, 5),
                 "perception_seed": _perception_seed_meta(best),
             }
         )
         existing_kinds.add("TextGlyph")
 
-    color_candidates = [candidate for candidate in candidates if candidate.kind == "color"]
+    color_candidates = [
+        candidate for candidate in candidates if candidate.kind == "color"
+    ]
     if color_candidates and "ColorPatch" not in existing_kinds:
-        best = sorted(color_candidates, key=lambda item: item.confidence, reverse=True)[0]
+        best = sorted(color_candidates, key=lambda item: item.confidence, reverse=True)[
+            0
+        ]
         merged.append(
             {
                 "kind": "ColorPatch",
@@ -894,6 +915,198 @@ def _perception_seed_meta(candidate: PerceptionPrimitiveCandidate) -> dict[str, 
         "detector": candidate.evidence.get("detector"),
         "candidate_schema_version": candidate.schema_version,
         "evidence": dict(candidate.evidence),
+    }
+
+
+def _description_constraint_to_candidate_kind(kind: str) -> set[str]:
+    mapping = {
+        "CircleBackground": {"circle", "ring"},
+        "RectBorder": {"rectangle"},
+        "HalfDoubleRectBorder": {"rectangle"},
+        "HorizontalRule": {"horizontal_rule", "line"},
+        "MinusGlyph": {"horizontal_rule", "text_glyph", "text_area"},
+        "OrthogonalPolyline": {"line", "horizontal_rule"},
+        "PolygonPath": {"polygon", "path"},
+        "TextGlyph": {"text_glyph", "text_area"},
+        "ColorPatch": {"color"},
+    }
+    return mapping.get(kind, {kind.casefold()})
+
+
+def _bbox_iou(a: object, b: object) -> float:
+    if not (
+        isinstance(a, list) and isinstance(b, list) and len(a) == 4 and len(b) == 4
+    ):
+        return 0.0
+    ax, ay, aw, ah = [float(v) for v in a]
+    bx, by, bw, bh = [float(v) for v in b]
+    ix0, iy0 = max(ax, bx), max(ay, by)
+    ix1, iy1 = min(ax + aw, bx + bw), min(ay + ah, by + bh)
+    iw, ih = max(0.0, ix1 - ix0), max(0.0, iy1 - iy0)
+    inter = iw * ih
+    union = max(aw * ah + bw * bh - inter, 1e-9)
+    return inter / union
+
+
+def _candidate_fusion_cost(
+    image, constraint: dict[str, Any], candidate: PerceptionPrimitiveCandidate
+) -> float:
+    expected = _description_constraint_to_candidate_kind(
+        str(constraint.get("kind", ""))
+    )
+    kind_penalty = 0.0 if candidate.kind in expected else 0.45
+    confidence_reward = 1.0 - max(0.0, min(1.0, float(candidate.confidence)))
+    spatial_penalty = 0.0
+    constraint_bbox = constraint.get("bbox")
+    candidate_bbox = _candidate_normalized_bbox(candidate, image)
+    if isinstance(constraint_bbox, list) and len(constraint_bbox) == 4:
+        spatial_penalty = 1.0 - _bbox_iou(constraint_bbox, candidate_bbox)
+    return _round_number(
+        kind_penalty + confidence_reward * 0.45 + spatial_penalty * 0.65, 6
+    )
+
+
+def fuse_description_constraints_with_perception_candidates(
+    image,
+    description_constraints: dict[str, Any],
+    candidates: list[PerceptionPrimitiveCandidate],
+    *,
+    max_match_cost: float = 0.62,
+) -> dict[str, Any]:
+    """Fuse description constraints and image candidates with generic weighted costs.
+
+    The IDO-08 contract is deliberately catalog-free: it matches constraints to
+    perception candidates by primitive compatibility, confidence and optional
+    normalized bbox overlap.  It returns both the fused renderable Geometry-IR and
+    a machine-readable decision trace for agreement, missing evidence,
+    contradictions and ambiguous alternatives.
+    """
+
+    constraints = [
+        item
+        for item in description_constraints.get("elements", [])
+        if isinstance(item, dict)
+    ]
+    used_candidate_ids: set[int] = set()
+    fused_ir: list[dict[str, object]] = []
+    decisions: list[dict[str, Any]] = []
+
+    for index, constraint in enumerate(constraints, start=1):
+        ranked = sorted(
+            (
+                (_candidate_fusion_cost(image, constraint, candidate), candidate)
+                for candidate in candidates
+            ),
+            key=lambda item: (item[0], -item[1].confidence),
+        )
+        plausible = [
+            (cost, candidate) for cost, candidate in ranked if cost <= max_match_cost
+        ]
+        compatible = [
+            (cost, candidate)
+            for cost, candidate in ranked
+            if candidate.kind
+            in _description_constraint_to_candidate_kind(
+                str(constraint.get("kind", ""))
+            )
+        ]
+        element = {
+            k: v for k, v in constraint.items() if k not in {"source", "confidence"}
+        }
+        element.setdefault("id", f"fused_description_element_{index}")
+        element["description_constraint"] = {
+            "id": constraint.get("id"),
+            "confidence": constraint.get("confidence", 0.0),
+            "source": constraint.get("source", "description"),
+        }
+
+        if plausible:
+            best_cost, best = plausible[0]
+            used_candidate_ids.add(id(best))
+            seeded = merge_perception_candidates_into_geometry_ir(
+                image, [best], [element]
+            )
+            element = seeded[0] if seeded else element
+            status = "matched"
+            if len(plausible) > 1 and plausible[1][0] - best_cost <= 0.08:
+                status = "ambiguous"
+            element["fusion"] = {
+                "status": status,
+                "cost": best_cost,
+                "confidence": _round_number(
+                    (float(constraint.get("confidence", 0.0)) + best.confidence) / 2.0,
+                    4,
+                ),
+            }
+            decisions.append(
+                {
+                    "constraint_id": constraint.get("id"),
+                    "status": status,
+                    "matched_candidate_kind": best.kind,
+                    "cost": best_cost,
+                    "alternatives": [
+                        {"kind": alt.kind, "confidence": alt.confidence, "cost": cost}
+                        for cost, alt in plausible[1:4]
+                    ],
+                }
+            )
+        elif compatible:
+            best_cost, best = compatible[0]
+            used_candidate_ids.add(id(best))
+            element["fusion"] = {
+                "status": "contradiction",
+                "cost": best_cost,
+                "confidence": 0.0,
+            }
+            decisions.append(
+                {
+                    "constraint_id": constraint.get("id"),
+                    "status": "contradiction",
+                    "matched_candidate_kind": best.kind,
+                    "cost": best_cost,
+                    "reason": "compatible_candidate_exceeds_cost_threshold",
+                }
+            )
+        else:
+            element["fusion"] = {
+                "status": "missing_image_evidence",
+                "cost": None,
+                "confidence": constraint.get("confidence", 0.0),
+            }
+            decisions.append(
+                {
+                    "constraint_id": constraint.get("id"),
+                    "status": "missing_image_evidence",
+                    "reason": "no_compatible_perception_candidate",
+                }
+            )
+        fused_ir.append(element)
+
+    residual_candidates = [
+        candidate for candidate in candidates if id(candidate) not in used_candidate_ids
+    ]
+    if residual_candidates:
+        fused_ir = merge_perception_candidates_into_geometry_ir(
+            image, residual_candidates, fused_ir
+        )
+
+    statuses = {str(decision.get("status")) for decision in decisions}
+    if "contradiction" in statuses:
+        overall_status = "contradiction"
+    elif "ambiguous" in statuses:
+        overall_status = "ambiguous"
+    elif "missing_image_evidence" in statuses:
+        overall_status = "partial"
+    else:
+        overall_status = "matched"
+
+    return {
+        "schema_version": "description_perception_fusion_v1",
+        "status": overall_status,
+        "geometry_ir": fused_ir,
+        "decisions": decisions,
+        "relations": description_constraints.get("relations", []),
+        "weights": {"kind": 0.45, "confidence": 0.45, "spatial": 0.65},
     }
 
 
