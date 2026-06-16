@@ -6,7 +6,7 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-06-14)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `194` · Erledigt `162` · Offen `32`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `194` · Erledigt `163` · Offen `31`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -18,9 +18,9 @@ Akzeptanzkriterien steht in `docs/image_description_only_tasks.md`.
 - [x] **IDO-P0 – Generalisierung verbindlich messen:** Dateinamen-Invarianz,
   Runtime-ID-Instrumentierung, CI-Ratchet und Holdout-Protokoll umsetzen
   (IDO-01 bis IDO-04).
-- [ ] **IDO-P1 – Gemeinsame Geometry-IR fertigstellen:** Beschreibung und
+- [x] **IDO-P1 – Gemeinsame Geometry-IR fertigstellen:** Beschreibung und
   Bildwahrnehmung als Constraints/Kandidaten fusionieren und Unsicherheit
-  explizit modellieren (IDO-05 bis IDO-09).
+  explizit modellieren (IDO-05 bis IDO-09). (2026-06-16 Run PZ: IDO-09 ergänzt den `fusion_uncertainty_v1`-Vertrag und trennt sichere `safe_geometry_ir` von Review-Fällen.)
 - [ ] **IDO-P2 – ID-spezifische Runtime-Pfade ablösen:** Connector-, Badge-,
   Ventil-/Kellen- und Optimierungslogik anhand messbarer Merkmale statt
   Katalog-IDs auswählen (IDO-10 bis IDO-15).

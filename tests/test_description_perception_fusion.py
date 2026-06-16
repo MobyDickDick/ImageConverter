@@ -142,3 +142,55 @@ def test_ido08_fusion_reports_multiple_plausible_candidates_as_ambiguous() -> No
     assert fused["status"] == "ambiguous"
     assert fused["decisions"][0]["status"] == "ambiguous"
     assert len(fused["decisions"][0]["alternatives"]) == 1
+
+
+def test_ido09_uncertainty_contract_marks_missing_evidence_for_review() -> None:
+    image = np.full((100, 100, 3), 255, dtype=np.uint8)
+
+    fused = fuse_description_constraints_with_perception_candidates(
+        image, _constraints("TextGlyph"), []
+    )
+
+    assert fused["uncertainty"] == {
+        "schema_version": "fusion_uncertainty_v1",
+        "status": "insufficient_evidence",
+        "reason": "description_constraints_lack_image_support",
+        "targets": ["description_element_1"],
+        "confidence": 0.0,
+        "review_required": True,
+    }
+    assert fused["safe_geometry_ir"] == []
+
+
+def test_ido09_uncertainty_contract_does_not_mark_conflict_as_safe_geometry() -> None:
+    image = np.full((100, 100, 3), 255, dtype=np.uint8)
+
+    fused = fuse_description_constraints_with_perception_candidates(
+        image,
+        _constraints("CircleBackground", bbox=[0.0, 0.0, 0.15, 0.15]),
+        [
+            _candidate(
+                "circle", bbox={"x": 70.0, "y": 70.0, "width": 20.0, "height": 20.0}
+            )
+        ],
+    )
+
+    assert fused["uncertainty"]["status"] == "contradictory"
+    assert fused["uncertainty"]["review_required"] is True
+    assert fused["uncertainty"]["targets"] == ["description_element_1"]
+    assert fused["safe_geometry_ir"] == []
+
+
+def test_ido09_uncertainty_contract_resolves_matched_geometry_as_safe() -> None:
+    image = np.full((100, 100, 3), 255, dtype=np.uint8)
+
+    fused = fuse_description_constraints_with_perception_candidates(
+        image,
+        _constraints("CircleBackground", bbox=[0.2, 0.2, 0.4, 0.4]),
+        [_candidate("circle")],
+    )
+
+    assert fused["uncertainty"]["status"] == "resolved"
+    assert fused["uncertainty"]["review_required"] is False
+    assert len(fused["safe_geometry_ir"]) == 1
+    assert fused["safe_geometry_ir"][0]["fusion"]["status"] == "matched"
