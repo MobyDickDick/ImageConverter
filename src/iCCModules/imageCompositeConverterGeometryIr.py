@@ -1206,6 +1206,14 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
                 f'  <rect id="{element_id}" x="{_fmt(x)}" y="{_fmt(y)}" width="{_fmt(bw)}" height="{_fmt(bh)}" '
                 f'fill="{fill}" stroke="{stroke}" stroke-width="{_fmt(sw)}"/>'
             )
+        elif kind == "ColorPatch":
+            x, y, bw, bh = _scaled_bbox(element, w, h)
+            fill = html.escape(str(element.get("fill", "#d8d8d8")))
+            stroke = html.escape(str(element.get("stroke", "none")))
+            svg.append(
+                f'  <rect id="{element_id}" x="{_fmt(x)}" y="{_fmt(y)}" width="{_fmt(bw)}" height="{_fmt(bh)}" '
+                f'fill="{fill}" stroke="{stroke}"/>'
+            )
         elif kind == "HalfDoubleRectBorder":
             x, y, bw, bh = _scaled_bbox(element, w, h)
             fill = html.escape(str(element.get("fill", "none")))
@@ -1288,6 +1296,23 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
                 svg.append(
                     f'  <path id="{element_id}" d="M {path_points}" '
                     f'stroke="{stroke}" stroke-width="{_fmt(sw)}" fill="none" '
+                    'stroke-linejoin="round" stroke-linecap="butt"/>'
+                )
+        elif kind == "PolygonPath":
+            stroke = html.escape(str(element.get("stroke", "#707070")))
+            fill = html.escape(str(element.get("fill", "none")))
+            sw = float(element.get("stroke_width", 0.020)) * min(w, h)
+            raw_points = element.get("points", [])
+            points: list[str] = []
+            if isinstance(raw_points, list):
+                for raw_point in raw_points:
+                    if isinstance(raw_point, list) and len(raw_point) == 2:
+                        points.append(f"{_fmt(float(raw_point[0]) * w)} {_fmt(float(raw_point[1]) * h)}")
+            if len(points) >= 2:
+                suffix = " Z" if bool(element.get("closed", False)) else ""
+                svg.append(
+                    f'  <path id="{element_id}" d="M {" L ".join(points)}{suffix}" '
+                    f'stroke="{stroke}" stroke-width="{_fmt(sw)}" fill="{fill}" '
                     'stroke-linejoin="round" stroke-linecap="butt"/>'
                 )
         elif kind == "DiagonalBand":

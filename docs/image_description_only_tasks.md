@@ -98,11 +98,19 @@ Für jedes Arbeitspaket gelten zusätzlich zu den jeweiligen Akzeptanzkriterien:
     gleiche Beschreibung identische Constraints ohne Renderer-/Mode-Auswahl und
     ohne Dateinamenspuren liefert.
 
-- [ ] **IDO-07 – Perception-Kandidaten vollständig auf dieselbe IR abbilden**
+- [x] **IDO-07 – Perception-Kandidaten vollständig auf dieselbe IR abbilden**
   - Aufgabe: Kreis/Ring, Linie, Rechteck, Polygon/Pfad, Textbereich und Farbe mit
     Confidence und Evidenz in die gemeinsame Geometry-IR überführen.
   - Akzeptanz: Jeder unterstützte Primitive-Typ besitzt mindestens einen
     synthetischen Detektions-, Serialisierungs- und Render-Roundtrip-Test.
+  - Umsetzung: `merge_perception_candidates_into_geometry_ir(...)` mappt den
+    stabilen `perception_primitive_candidate_v1`-Contract jetzt für Kreis/Ring,
+    Linie, Rechteck, Polygon/Pfad, Text-Glyph/Textbereich und Farbfeld in
+    Geometry-IR-Elemente mit Confidence-/Evidence-Metadaten. Der Renderer
+    unterstützt dafür zusätzlich generische `PolygonPath`- und `ColorPatch`-
+    Elemente. Synthetische Roundtrip-Regressionen prüfen Serialisierung,
+    Geometry-IR-Seed und SVG-Renderbarkeit für jeden unterstützten
+    Primitive-Typ.
 
 - [ ] **IDO-08 – Generische Fusionslogik implementieren**
   - Aufgabe: Bildkandidaten und Beschreibungs-Constraints über gewichtete Kosten

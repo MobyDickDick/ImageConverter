@@ -795,7 +795,106 @@ def merge_perception_candidates_into_geometry_ir(
             },
         )
 
+    line_candidates = [candidate for candidate in candidates if candidate.kind == "line"]
+    if line_candidates and "OrthogonalPolyline" not in existing_kinds:
+        best = sorted(line_candidates, key=lambda item: item.confidence, reverse=True)[0]
+        bbox = _candidate_normalized_bbox(best, image)
+        x, y, bw, bh = bbox
+        orientation = str(best.geometry.get("orientation", "vertical"))
+        if orientation == "horizontal":
+            points = [[x, y + bh * 0.5], [x + bw, y + bh * 0.5]]
+        else:
+            points = [[x + bw * 0.5, y], [x + bw * 0.5, y + bh]]
+        merged.append(
+            {
+                "kind": "OrthogonalPolyline",
+                "id": "perception_line",
+                "bbox": bbox,
+                "points": [[_round_number(px, 5), _round_number(py, 5)] for px, py in points],
+                "stroke": best.color.get("stroke_hex") or "#4f4f4f",
+                "stroke_width": _round_number(
+                    float(best.geometry.get("stroke_width_px", 1.0))
+                    / max(float(min(image.shape[:2])), 1.0),
+                    5,
+                ),
+                "perception_seed": _perception_seed_meta(best),
+            }
+        )
+        existing_kinds.add("OrthogonalPolyline")
+
+    polygon_candidates = [
+        candidate for candidate in candidates if candidate.kind in {"polygon", "path"}
+    ]
+    if polygon_candidates and "PolygonPath" not in existing_kinds:
+        best = sorted(polygon_candidates, key=lambda item: item.confidence, reverse=True)[0]
+        raw_points = best.geometry.get("points")
+        if not isinstance(raw_points, list) or len(raw_points) < 3:
+            x, y, bw, bh = _candidate_normalized_bbox(best, image)
+            raw_points = [[x, y], [x + bw, y], [x + bw * 0.5, y + bh]]
+        merged.append(
+            {
+                "kind": "PolygonPath",
+                "id": "perception_polygon_path",
+                "points": [
+                    [_round_number(float(point[0]), 5), _round_number(float(point[1]), 5)]
+                    for point in raw_points
+                    if isinstance(point, list) and len(point) == 2
+                ],
+                "fill": best.color.get("fill_hex") or "none",
+                "stroke": best.color.get("stroke_hex") or "#666666",
+                "stroke_width": 0.02,
+                "closed": best.kind == "polygon",
+                "perception_seed": _perception_seed_meta(best),
+            }
+        )
+        existing_kinds.add("PolygonPath")
+
+    text_candidates = [
+        candidate for candidate in candidates if candidate.kind in {"text_glyph", "text_area"}
+    ]
+    if text_candidates and "TextGlyph" not in existing_kinds:
+        best = sorted(text_candidates, key=lambda item: item.confidence, reverse=True)[0]
+        bbox = _candidate_normalized_bbox(best, image)
+        text = str(best.geometry.get("text") or best.geometry.get("glyph") or "?")
+        merged.append(
+            {
+                "kind": "TextGlyph",
+                "id": "perception_text_glyph",
+                "bbox": bbox,
+                "text": text,
+                "fill": best.color.get("stroke_hex") or best.color.get("fill_hex") or "#4f4f4f",
+                "font_size": _round_number(max(bbox[2], bbox[3]) * 0.9, 5),
+                "perception_seed": _perception_seed_meta(best),
+            }
+        )
+        existing_kinds.add("TextGlyph")
+
+    color_candidates = [candidate for candidate in candidates if candidate.kind == "color"]
+    if color_candidates and "ColorPatch" not in existing_kinds:
+        best = sorted(color_candidates, key=lambda item: item.confidence, reverse=True)[0]
+        merged.append(
+            {
+                "kind": "ColorPatch",
+                "id": "perception_color_patch",
+                "bbox": _candidate_normalized_bbox(best, image),
+                "fill": best.color.get("fill_hex") or "#d8d8d8",
+                "stroke": "none",
+                "perception_seed": _perception_seed_meta(best),
+            }
+        )
+
     return merged
+
+
+def _perception_seed_meta(candidate: PerceptionPrimitiveCandidate) -> dict[str, Any]:
+    return {
+        "kind": candidate.kind,
+        "confidence": candidate.confidence,
+        "source": candidate.source,
+        "detector": candidate.evidence.get("detector"),
+        "candidate_schema_version": candidate.schema_version,
+        "evidence": dict(candidate.evidence),
+    }
 
 
 def build_perception_seeded_geometry_ir(
