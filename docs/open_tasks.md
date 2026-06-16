@@ -897,8 +897,9 @@ Deadlock-/Stagnationsschleifen.
   - [x] T6.14 (hoch): `tests/test_image_composite_converter.py::test_ac08_regression_suite_preserves_previously_good_variants[AC0820_L-semantic_ok]` als separaten Langläufer-Track führen (abgeschlossen in Run PX).
     - Akzeptanzkriterium: isoliert <= `120s` ohne `validation_time_budget_exceeded` im Element-Log.
     - 2026-06-16 (Run PX): Der parametrisierte AC0820-L-Regressionsfall wurde mit aktiviertem Heavy-Test-Pfad, äußerem 120-Sekunden-Guard und passendem pytest-Einzeltest-Timeout isoliert ausgeführt. Der Lauf endet mit Exit `0`, `1 passed in 61.45s` (auf ganze Sekunden gemessene Wandzeit `62s`) und bestätigt weiterhin `status=semantic_ok`; das aktuelle `AC0820_L_element_validation.log` enthält keinen `validation_time_budget_exceeded`-Eintrag. Produktions- und Testcode bleiben unverändert. Log: `artifacts/converted_images/reports/T6_14_ac0820L_isolation_2026-06-16_runPX.log`.
-  - [ ] T6.15 (hoch): `tests/test_image_composite_converter.py::test_ac08_regression_suite_preserves_previously_good_variants[AC0835_S-semantic_ok]` isolieren und Laufzeit dokumentiert reduzieren.
+  - [x] T6.15 (hoch): `tests/test_image_composite_converter.py::test_ac08_regression_suite_preserves_previously_good_variants[AC0835_S-semantic_ok]` isolieren und Laufzeit dokumentiert reduzieren (abgeschlossen in Run PY).
     - Akzeptanzkriterium: isoliert <= `90s`, Status weiterhin `semantic_ok`.
+    - 2026-06-16 (Run PY): Der unveränderte parametrisierte AC0835-S-Regressionsfall wurde mit aktiviertem Heavy-Test-Pfad, äußerem 90-Sekunden-Guard und passendem pytest-Einzeltest-Timeout isoliert ausgeführt. Der Lauf endet mit Exit `0`, `1 passed in 45.66s` (auf ganze Sekunden gemessene Wandzeit `49s`) und bestätigt weiterhin `status=semantic_ok`; das aktuelle `AC0835_S_element_validation.log` enthält keinen `validation_time_budget_exceeded`-Eintrag. Produktions- und Testcode bleiben unverändert. Log: `artifacts/converted_images/reports/T6_15_ac0835S_isolation_2026-06-16_runPY.log`.
 
 ## Prioritätsvergabe (aktualisiert am 2026-05-03)
 
