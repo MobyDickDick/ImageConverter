@@ -129,6 +129,7 @@ class Reflection:
             "semantic_conflicts": [],
             "semantic_sources": {},
             "description_contract": _build_description_contract(desc_raw),
+            "description_constraints": geometry_ir_helpers.buildDescriptionConstraintsImpl(desc_raw),
             "geometry_ir": geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(desc_raw),
         }
 
