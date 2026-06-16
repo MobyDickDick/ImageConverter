@@ -55,12 +55,18 @@ Für jedes Arbeitspaket gelten zusätzlich zu den jeweiligen Akzeptanzkriterien:
     verpflichtenden Ratchet-Job. Ein CLI-Negativtest scannt einen temporären
     Runtime-Quellbaum mit künstlicher ID und prüft den fehlschlagenden Exitcode.
 
-- [ ] **IDO-04 – Holdout- und Rename-Evaluationsprotokoll definieren**
+- [x] **IDO-04 – Holdout- und Rename-Evaluationsprotokoll definieren**
   - Aufgabe: Trainings-/Entwicklungsbilder, Validierung und strikt
     zurückgehaltene Bilder trennen; Holdout-Dateien bei der Auswertung zufällig
     umbenennen.
   - Akzeptanz: Der Report weist Pixel-, Kanten-, Struktur- und Semantikmetriken
     getrennt für Entwicklungs- und Holdout-Satz aus.
+  - Umsetzung: `tools/define_holdout_rename_protocol.py` schreibt den versionierten
+    Report `artifacts/evaluation/holdout_rename_protocol_v1/holdout_rename_protocol_v1.json`
+    mit Entwicklungs-/Holdout-Trennung, deterministischer katalogfreier
+    Holdout-Umbenennung und verpflichtendem Pixel-, Kanten-, Struktur- und
+    Semantikmetrikvertrag je Split; Regressionstests sichern die Umbenennung
+    und das maschinenlesbare Reportformat ab.
 
 ## Priorität 1 – Beschreibung und Bild in eine gemeinsame Geometry-IR überführen
 

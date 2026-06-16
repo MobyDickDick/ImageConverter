@@ -6,7 +6,7 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-06-14)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `194` · Erledigt `160` · Offen `34`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `194` · Erledigt `161` · Offen `33`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -15,7 +15,7 @@ focused on the actual project scope.
 Das detaillierte Backlog mit Definition of Done, Abhängigkeiten und
 Akzeptanzkriterien steht in `docs/image_description_only_tasks.md`.
 
-- [ ] **IDO-P0 – Generalisierung verbindlich messen:** Dateinamen-Invarianz,
+- [x] **IDO-P0 – Generalisierung verbindlich messen:** Dateinamen-Invarianz,
   Runtime-ID-Instrumentierung, CI-Ratchet und Holdout-Protokoll umsetzen
   (IDO-01 bis IDO-04).
 - [ ] **IDO-P1 – Gemeinsame Geometry-IR fertigstellen:** Beschreibung und
