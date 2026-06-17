@@ -69,6 +69,36 @@ def parse_semantic_badge_layout_overrides(text: str) -> dict[str, float | str]:
     return overrides
 
 
+def _description_expects_left_circle_connector(desc: str) -> bool:
+    """Return true when text describes a horizontal connector left of a circle."""
+    normalized = re.sub(r"\s+", " ", str(desc or "").lower()).strip()
+    if not normalized:
+        return False
+    direct_left = any(
+        token in normalized
+        for token in (
+            "waagrechter strich links",
+            "horizontaler strich links",
+            "linie links vom kreis",
+            "strich links vom kreis",
+            "anschluss links vom kreis",
+            "links am kreis",
+            "links vom kreis",
+            "waagrecht nach links",
+        )
+    )
+    rotated_right_handle = (
+        "griff nach rechts gedreht" in normalized
+        or "anschluss nach rechts gedreht" in normalized
+    )
+    has_circle = any(token in normalized for token in ("kreis", "badge", "kelle"))
+    has_horizontal_connector = any(
+        token in normalized
+        for token in ("waagrecht", "horizontal", "strich", "linie", "anschluss", "griff")
+    )
+    return bool((direct_left or rotated_right_handle) and has_circle and has_horizontal_connector)
+
+
 def apply_semantic_badge_family_rules(
     *,
     base_upper: str,
@@ -124,8 +154,8 @@ def apply_semantic_badge_family_rules(
         family_elements.append("SEMANTIC: Ventilkopf mit drei Dreiecken oberhalb des Stiels")
         family_elements.append("SEMANTIC: Dreiecks-Spitzen treffen zentriert am oberen Stielende zusammen")
         family_elements.append("SEMANTIC: Drei Dreiecke sind zu einem Polygon vereint")
-    if base_upper in {"AC0812", "AC0832", "AC0837", "AC0842", "AC0862", "AC0882"}:
-        family_elements.append("SEMANTIC: waagrechter Strich links vom Kreis")
+    if _description_expects_left_circle_connector(desc):
+        heuristic_elements.append("SEMANTIC: waagrechter Strich links vom Kreis")
 
     if "waagrechter strich rechts" in desc:
         heuristic_elements.append("SEMANTIC: waagrechter Strich rechts vom Kreis")
