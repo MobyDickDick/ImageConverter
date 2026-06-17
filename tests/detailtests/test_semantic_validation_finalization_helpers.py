@@ -11,7 +11,7 @@ def test_append_semantic_connector_expectation_log_impl_appends_guard_for_arm() 
 
     assert lines == [
         "semantic-guard: Textmodus aktiv",
-        "semantic-guard: Erwartete Arm-Geometrie bestätigt/wiederhergestellt (z.B. AC0812 links).",
+        "semantic-guard: Erwartete Arm-Geometrie bestätigt/wiederhergestellt (links/rechts aus Parametern).",
     ]
 
 
