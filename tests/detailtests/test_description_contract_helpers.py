@@ -296,3 +296,18 @@ def test_description_constraints_report_uncertainty_without_renderer_choice() ->
         "confidence": 0.0,
     }
     assert "mode" not in constraints
+
+def test_left_circle_connector_constraints_include_explicit_relation() -> None:
+    _desc, params = _parse("Grauer Kreis mit Linie links vom Kreis.")
+
+    assert [element["kind"] for element in params["geometry_ir"]] == [
+        "CircleBackground",
+        "HorizontalRule",
+    ]
+    assert {
+        "type": "left_of",
+        "subject": "description_element_2",
+        "object": "described_circle",
+        "source": "description",
+        "confidence": 0.75,
+    } in params["description_constraints"]["relations"]
