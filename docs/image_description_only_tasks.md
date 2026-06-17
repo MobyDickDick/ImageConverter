@@ -155,7 +155,11 @@ Für jedes Arbeitspaket gelten zusätzlich zu den jeweiligen Akzeptanzkriterien:
     dem Kreis“, „linker Anschluss“ und „Kreis rechts von der Linie“. Run QE
     reduziert die IDO-10-Legacy-Baseline weiter, indem Connector-Guards,
     Transfer-Kommentare und Validierungslogs linke/rechte Horizontalarme über
-    Parameter und Richtung statt über konkrete Katalogfamilien dokumentieren.
+    Parameter und Richtung statt über konkrete Katalogfamilien dokumentieren. Run
+    QF bündelt die verbleibenden linken AC08-Connector-Branches in einem
+    gemeinsamen `connector_direction=left`-Finalisierungspfad, sodass
+    Enforcement und Fit-Dispatch über gerichtete Parameter statt duplizierte
+    Familienzweige laufen; der Ratchet sinkt weiter auf 379 Runtime-ID-Vorkommen.
 
 - [ ] **IDO-11 – Rechter Kreis-Connector generalisieren**
   - Aufgabe: Spiegelung nicht über Familiennamen, sondern über erkannte
