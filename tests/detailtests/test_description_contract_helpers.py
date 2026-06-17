@@ -145,6 +145,38 @@ def test_left_circle_connector_description_is_filename_invariant() -> None:
     assert first["geometry_ir"] == second["geometry_ir"]
 
 
+def test_description_parser_derives_right_circle_connector_without_catalog_id() -> None:
+    _desc, params = _parse("Grauer Kreis mit waagrechtem Strich rechts vom Kreis.")
+
+    assert params["contract_status"] == "ok"
+    assert [element["kind"] for element in params["geometry_ir"]] == [
+        "CircleBackground",
+        "HorizontalRule",
+    ]
+    assert params["geometry_ir"][1]["relation"] == "right_of"
+    assert params["geometry_ir"][1]["target_ref"] == "described_circle"
+
+
+def test_right_circle_connector_description_is_filename_invariant() -> None:
+    description = "Grauer Kreis mit rechter Anschlusslinie."
+    mapping = {
+        "neutral_symbol_gamma": description,
+        "renamed_holdout_theta": description,
+    }
+    reflection = Reflection(mapping)
+
+    _first_desc, first = reflection.parse_description(
+        "neutral_symbol_gamma", "neutral_symbol_gamma.png"
+    )
+    _second_desc, second = reflection.parse_description(
+        "renamed_holdout_theta", "renamed_holdout_theta.png"
+    )
+
+    assert first["description_constraints"] == second["description_constraints"]
+    assert first["geometry_ir"] == second["geometry_ir"]
+    assert first["description_constraints"]["relations"][-1]["type"] == "right_of"
+
+
 def test_description_parser_attaches_geometry_ir_for_ac0232_left_rotated_m_top_kelle_three_way_valve() -> None:
     _desc, params = _parse(
         'Wie AC0231: 3-Weg Ventil ähnlich AC0211, um 90° im Uhrzeigersinn gedreht, '

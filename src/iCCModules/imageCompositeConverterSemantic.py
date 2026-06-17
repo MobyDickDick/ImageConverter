@@ -108,6 +108,45 @@ def _description_expects_left_circle_connector(desc: str) -> bool:
     return bool((direct_left or rotated_right_handle) and has_circle and has_horizontal_connector)
 
 
+def _description_expects_right_circle_connector(desc: str) -> bool:
+    """Return true when text describes a horizontal connector right of a circle."""
+    normalized = re.sub(r"\s+", " ", str(desc or "").lower()).strip()
+    if not normalized:
+        return False
+    direct_right = any(
+        token in normalized
+        for token in (
+            "waagrechter strich rechts",
+            "horizontaler strich rechts",
+            "linie rechts vom kreis",
+            "linie rechts neben dem kreis",
+            "strich rechts vom kreis",
+            "strich rechts neben dem kreis",
+            "anschluss rechts vom kreis",
+            "rechter anschluss",
+            "rechte anschlusslinie",
+            "rechte linie",
+            "kreis links von der linie",
+            "kreis links vom strich",
+            "kreis links vom anschluss",
+            "rechts am kreis",
+            "rechts neben dem kreis",
+            "rechts vom kreis",
+            "waagrecht nach rechts",
+        )
+    )
+    rotated_down_handle = (
+        "griff nach unten" in normalized
+        or "anschluss nach unten" in normalized
+    )
+    has_circle = any(token in normalized for token in ("kreis", "badge", "kelle"))
+    has_horizontal_connector = any(
+        token in normalized
+        for token in ("waagrecht", "horizontal", "strich", "linie", "anschluss", "griff")
+    )
+    return bool((direct_right or rotated_down_handle) and has_circle and has_horizontal_connector)
+
+
 def apply_semantic_badge_family_rules(
     *,
     base_upper: str,
@@ -166,7 +205,7 @@ def apply_semantic_badge_family_rules(
     if _description_expects_left_circle_connector(desc):
         heuristic_elements.append("SEMANTIC: waagrechter Strich links vom Kreis")
 
-    if "waagrechter strich rechts" in desc:
+    if _description_expects_right_circle_connector(desc):
         heuristic_elements.append("SEMANTIC: waagrechter Strich rechts vom Kreis")
     if "senkrechter strich oben" in desc:
         heuristic_elements.append("SEMANTIC: senkrechter Strich oben vom Kreis")
@@ -263,7 +302,7 @@ def apply_semantic_badge_description_rules(*, desc: str, params: dict[str, objec
         elements.append("SEMANTIC: senkrechter Strich hinter dem Kreis")
     if _description_expects_left_circle_connector(normalized):
         elements.append("SEMANTIC: waagrechter Strich links vom Kreis")
-    if "waagrecht nach rechts" in normalized or "waagrechter strich rechts" in normalized:
+    if _description_expects_right_circle_connector(normalized):
         elements.append("SEMANTIC: waagrechter Strich rechts vom Kreis")
 
     if not elements and has_orientation_hint:

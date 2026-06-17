@@ -171,7 +171,11 @@ Für jedes Arbeitspaket gelten zusätzlich zu den jeweiligen Akzeptanzkriterien:
     rechten AC08-Varianten für einfache, CO₂-, VOC- und rF-Badges setzen ihre
     Richtung nun vor/nach optionalem Bild-Fit über denselben Parameterpfad und
     laufen durch die gemeinsame rechte Arm-Enforcement-Callback-Schnittstelle;
-    der Ratchet sinkt auf 374 Runtime-ID-Vorkommen.
+    der Ratchet sinkt auf 374 Runtime-ID-Vorkommen. Run QH spiegelt die
+    rechten Relationsformulierungen im katalogfreien Beschreibungspfad: Texte
+    wie „Linie rechts vom Kreis“, „rechter Anschluss“ und „Kreis links von der
+    Linie“ erzeugen `CircleBackground` + `HorizontalRule` mit `right_of`-Relation
+    und werden durch neutrale Rename-Tests abgesichert.
 
 - [ ] **IDO-12 – Vertikale Kreis-Connectoren generalisieren**
   - Aufgabe: Obere und untere Anschlüsse anhand von Bildgeometrie,

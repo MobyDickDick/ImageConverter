@@ -68,6 +68,27 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
             ),
         )
     )
+    right_circle_connector_hint = (
+        _has_any(desc, ("kreis", "kreisring"))
+        and _has_any(desc, ("waagrecht", "horizontal", "linie", "strich", "anschluss", "connector"))
+        and _has_any(
+            desc,
+            (
+                "rechts vom kreis",
+                "rechts neben dem kreis",
+                "rechts an dem kreis",
+                "rechts am kreis",
+                "rechter anschluss",
+                "rechte anschlusslinie",
+                "rechte linie",
+                "kreis links von der linie",
+                "kreis links vom strich",
+                "kreis links vom anschluss",
+                "right of the circle",
+                "right connector",
+            ),
+        )
+    )
     pump_symbol_hint = (
         "pumpensymbol" in desc and "kreis" in desc and "dreieck" in desc
     ) or _has_any(desc, ("ac0251", "ac0401"))
@@ -583,6 +604,30 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
                     "bbox": [0.02, 0.48, 0.30, 0.08],
                     "target_ref": "described_circle",
                     "relation": "left_of",
+                    "stroke": "#666666",
+                    "stroke_width": 0.055,
+                },
+            ]
+        )
+        return elements
+
+    if right_circle_connector_hint:
+        elements.extend(
+            [
+                {
+                    "kind": "CircleBackground",
+                    "id": "described_circle",
+                    "bbox": [0.12, 0.12, 0.58, 0.76],
+                    "fill": "#f2f2f2",
+                    "stroke": "#7f7f7f",
+                    "stroke_width": 0.055,
+                },
+                {
+                    "kind": "HorizontalRule",
+                    "id": "right_circle_connector",
+                    "bbox": [0.68, 0.48, 0.30, 0.08],
+                    "target_ref": "described_circle",
+                    "relation": "right_of",
                     "stroke": "#666666",
                     "stroke_width": 0.055,
                 },
