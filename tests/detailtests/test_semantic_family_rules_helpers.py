@@ -121,3 +121,35 @@ def test_apply_semantic_badge_description_rules_derives_left_connector_from_inve
     assert params["mode"] == "semantic_badge"
     assert params["label"] == ""
     assert "SEMANTIC: waagrechter Strich links vom Kreis" in params["elements"]
+
+
+def test_apply_semantic_badge_description_rules_derives_right_connector_from_relation_text() -> None:
+    params: dict[str, object] = {"elements": []}
+
+    applied = helpers.apply_semantic_badge_description_rules(
+        desc="neutraler Kreis mit Linie rechts vom Kreis und ohne Buchstabe",
+        params=params,
+    )
+
+    assert applied is True
+    assert params["mode"] == "semantic_badge"
+    assert params["label"] == ""
+    assert "SEMANTIC: waagrechter Strich rechts vom Kreis" in params["elements"]
+    assert params["semantic_sources"]["description_heuristic"] == [
+        "SEMANTIC: Kreis ohne Buchstabe",
+        "SEMANTIC: waagrechter Strich rechts vom Kreis",
+    ]
+
+
+def test_apply_semantic_badge_description_rules_derives_right_connector_from_inverse_relation_text() -> None:
+    params: dict[str, object] = {"elements": []}
+
+    applied = helpers.apply_semantic_badge_description_rules(
+        desc="neutraler Kreis links vom Strich mit rechter Anschlusslinie und ohne Buchstabe",
+        params=params,
+    )
+
+    assert applied is True
+    assert params["mode"] == "semantic_badge"
+    assert params["label"] == ""
+    assert "SEMANTIC: waagrechter Strich rechts vom Kreis" in params["elements"]
