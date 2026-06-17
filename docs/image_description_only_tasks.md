@@ -144,6 +144,11 @@ Für jedes Arbeitspaket gelten zusätzlich zu den jeweiligen Akzeptanzkriterien:
   - Akzeptanz: Umbenennungstests sind grün; bestehende Qualitätsfixtures
     regressieren nicht über die festgelegte Toleranz; zugehörige
     Baseline-Einträge sinken.
+  - Fortschritt: Der erste katalogfreie Beschreibungspfad erzeugt für „Kreis
+    mit waagrechtem Strich links vom Kreis“ eine `CircleBackground` +
+    `HorizontalRule`-Geometry-IR mit `left_of`-Relation. Ein neutraler
+    Rename-Test sichert, dass diese Beschreibung unabhängig vom Dateinamen
+    dieselben Constraints und dieselbe Geometry-IR liefert.
 
 - [ ] **IDO-11 – Rechter Kreis-Connector generalisieren**
   - Aufgabe: Spiegelung nicht über Familiennamen, sondern über erkannte

@@ -47,6 +47,11 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
             ),
         )
     )
+    left_circle_connector_hint = (
+        _has_any(desc, ("kreis", "kreisring"))
+        and _has_any(desc, ("waagrecht", "horizontal", "linie", "strich", "anschluss", "connector"))
+        and _has_any(desc, ("links vom kreis", "links an dem kreis", "links am kreis", "left of the circle", "left connector"))
+    )
     pump_symbol_hint = (
         "pumpensymbol" in desc and "kreis" in desc and "dreieck" in desc
     ) or _has_any(desc, ("ac0251", "ac0401"))
@@ -540,6 +545,30 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
                     "fill": "#666666",
                     "font_size": 0.48,
                     "font_weight": "700",
+                },
+            ]
+        )
+        return elements
+
+    if left_circle_connector_hint:
+        elements.extend(
+            [
+                {
+                    "kind": "CircleBackground",
+                    "id": "described_circle",
+                    "bbox": [0.30, 0.12, 0.58, 0.76],
+                    "fill": "#f2f2f2",
+                    "stroke": "#7f7f7f",
+                    "stroke_width": 0.055,
+                },
+                {
+                    "kind": "HorizontalRule",
+                    "id": "left_circle_connector",
+                    "bbox": [0.02, 0.48, 0.30, 0.08],
+                    "target_ref": "described_circle",
+                    "relation": "left_of",
+                    "stroke": "#666666",
+                    "stroke_width": 0.055,
                 },
             ]
         )
