@@ -1100,13 +1100,71 @@ def fuse_description_constraints_with_perception_candidates(
     else:
         overall_status = "matched"
 
+    uncertainty = build_fusion_uncertainty_contract(decisions)
+    safe_geometry_ir = [
+        element
+        for element in fused_ir
+        if isinstance(element, dict)
+        and isinstance(element.get("fusion"), dict)
+        and element["fusion"].get("status") == "matched"
+    ]
+
     return {
         "schema_version": "description_perception_fusion_v1",
         "status": overall_status,
         "geometry_ir": fused_ir,
+        "safe_geometry_ir": safe_geometry_ir,
         "decisions": decisions,
         "relations": description_constraints.get("relations", []),
+        "uncertainty": uncertainty,
         "weights": {"kind": 0.45, "confidence": 0.45, "spatial": 0.65},
+    }
+
+
+def build_fusion_uncertainty_contract(decisions: list[dict[str, Any]]) -> dict[str, Any]:
+    """Return the IDO-09 machine-readable review contract for fusion results.
+
+    The contract deliberately separates confidently matched geometry from cases
+    where the converter must not present a description-only or image-only guess as
+    a secure reconstruction.  Callers can render ``safe_geometry_ir`` only, or
+    route non-resolved statuses to manual/automated review with explicit reasons.
+    """
+
+    statuses = {str(decision.get("status")) for decision in decisions}
+    if not decisions or "contradiction" in statuses:
+        status = "contradictory"
+        reason = "description_and_image_evidence_conflict"
+    elif "ambiguous" in statuses:
+        status = "ambiguous"
+        reason = "multiple_plausible_image_candidates"
+    elif "missing_image_evidence" in statuses:
+        status = "insufficient_evidence"
+        reason = "description_constraints_lack_image_support"
+    else:
+        status = "resolved"
+        reason = "all_description_constraints_have_matching_image_evidence"
+
+    targets = [
+        str(decision.get("constraint_id"))
+        for decision in decisions
+        if decision.get("constraint_id") is not None
+        and (status != "resolved" or decision.get("status") != "matched")
+    ]
+    confidences = [
+        1.0 - min(1.0, max(0.0, float(decision.get("cost", 0.0) or 0.0)))
+        for decision in decisions
+        if decision.get("status") == "matched"
+    ]
+    confidence = _round_number(
+        sum(confidences) / len(confidences) if confidences else 0.0, 4
+    )
+    return {
+        "schema_version": "fusion_uncertainty_v1",
+        "status": status,
+        "reason": reason,
+        "targets": targets,
+        "confidence": confidence,
+        "review_required": status != "resolved",
     }
 
 

@@ -125,11 +125,16 @@ Für jedes Arbeitspaket gelten zusätzlich zu den jeweiligen Akzeptanzkriterien:
     `contradiction` und `ambiguous`; Regressionstests decken genau diese vier
     Akzeptanzfälle mit neutralen synthetischen Kandidaten ab.
 
-- [ ] **IDO-09 – Unsicherheitsvertrag definieren**
+- [x] **IDO-09 – Unsicherheitsvertrag definieren**
   - Aufgabe: Status, Gründe und Confidence für unzureichende oder
     widersprüchliche Evidenz festlegen.
   - Akzeptanz: Der Konverter halluziniert in Negativtests keine sichere
     Geometrie, sondern liefert einen maschinenlesbaren Review-/Unsicherheitsstatus.
+  - Umsetzung: Die Fusionslogik erzeugt einen `fusion_uncertainty_v1`-Vertrag
+    mit Status, Grund, betroffenen Constraint-Zielen, Confidence und
+    `review_required`; `safe_geometry_ir` enthält nur eindeutig gematchte
+    Geometrie. Negativtests sichern fehlende Bildevidenz und widersprüchliche
+    Evidenz gegen sichere Geometrie-Halluzination ab.
 
 ## Priorität 2 – ID-spezifische Pfade schrittweise ersetzen
 
