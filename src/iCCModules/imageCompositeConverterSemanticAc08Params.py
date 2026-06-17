@@ -35,6 +35,7 @@ def makeAc08BadgeParamsImpl(
     tune_ac0835_voc_badge_fn,
     finalize_ac08_style_fn,
     enforce_left_arm_badge_geometry_fn,
+    enforce_right_arm_badge_geometry_fn=None,
 ) -> dict | None:
     """Build semantic AC08 badge params for defaults and image-based fitting."""
     if name == "AC0870":
@@ -70,12 +71,28 @@ def makeAc08BadgeParamsImpl(
             return finalize_ac08_style_fn(name, defaults)
         return finalize_ac08_style_fn(name, fit_ac0810_params_from_image_fn(img, defaults))
 
-    def _finalize_left_arm_badge_params(defaults: dict, fit_fn, tune_fn=lambda params: params) -> dict:
-        defaults["connector_direction"] = "left"
+    def _finalize_horizontal_arm_badge_params(
+        direction: str,
+        defaults: dict,
+        fit_fn,
+        tune_fn=lambda params: params,
+    ) -> dict:
+        defaults["connector_direction"] = direction
         params = defaults if img is None else fit_fn(img, defaults)
         params = tune_fn(params)
-        params["connector_direction"] = "left"
-        return enforce_left_arm_badge_geometry_fn(finalize_ac08_style_fn(name, params), w, h)
+        params["connector_direction"] = direction
+        finalized = finalize_ac08_style_fn(name, params)
+        if direction == "right":
+            if enforce_right_arm_badge_geometry_fn is None:
+                return finalized
+            return enforce_right_arm_badge_geometry_fn(finalized, w, h)
+        return enforce_left_arm_badge_geometry_fn(finalized, w, h)
+
+    def _finalize_left_arm_badge_params(defaults: dict, fit_fn, tune_fn=lambda params: params) -> dict:
+        return _finalize_horizontal_arm_badge_params("left", defaults, fit_fn, tune_fn)
+
+    def _finalize_right_arm_badge_params(defaults: dict, fit_fn, tune_fn=lambda params: params) -> dict:
+        return _finalize_horizontal_arm_badge_params("right", defaults, fit_fn, tune_fn)
 
     if name == "AC0812":
         return _finalize_left_arm_badge_params(default_ac0812_params_fn(w, h), fit_ac0812_params_from_image_fn)
@@ -87,10 +104,7 @@ def makeAc08BadgeParamsImpl(
         return finalize_ac08_style_fn(name, fit_ac0813_params_from_image_fn(img, defaults))
 
     if name == "AC0814":
-        defaults = default_ac0814_params_fn(w, h)
-        if img is None:
-            return finalize_ac08_style_fn(name, defaults)
-        return finalize_ac08_style_fn(name, fit_ac0814_params_from_image_fn(img, defaults))
+        return _finalize_right_arm_badge_params(default_ac0814_params_fn(w, h), fit_ac0814_params_from_image_fn)
 
     if name == "AC0881":
         defaults = default_ac0881_params_fn(w, h)
@@ -128,15 +142,10 @@ def makeAc08BadgeParamsImpl(
 
     if name == "AC0834":
         defaults = apply_co2_label_fn(default_ac0814_params_fn(w, h))
-        if img is None:
-            return finalize_ac08_style_fn(name, tune_ac0834_co2_badge_fn(defaults, w, h))
-        return finalize_ac08_style_fn(
-            name,
-            tune_ac0834_co2_badge_fn(
-                fit_ac0814_params_from_image_fn(img, defaults),
-                w,
-                h,
-            ),
+        return _finalize_right_arm_badge_params(
+            defaults,
+            fit_ac0814_params_from_image_fn,
+            lambda params: tune_ac0834_co2_badge_fn(params, w, h),
         )
 
     if name == "AC0835":
@@ -175,10 +184,10 @@ def makeAc08BadgeParamsImpl(
         return finalize_ac08_style_fn(name, fit_ac0813_params_from_image_fn(img, defaults))
 
     if name == "AC0839":
-        defaults = apply_voc_label_fn(default_ac0814_params_fn(w, h))
-        if img is None:
-            return finalize_ac08_style_fn(name, defaults)
-        return finalize_ac08_style_fn(name, fit_ac0814_params_from_image_fn(img, defaults))
+        return _finalize_right_arm_badge_params(
+            apply_voc_label_fn(default_ac0814_params_fn(w, h)),
+            fit_ac0814_params_from_image_fn,
+        )
 
     def _apply_rf_label(defaults: dict) -> dict:
         defaults["draw_text"] = True
@@ -195,11 +204,8 @@ def makeAc08BadgeParamsImpl(
         return _finalize_left_arm_badge_params(defaults, fit_ac0812_params_from_image_fn)
 
     if name == "AC0844":
-        # AC0844 is the rF counterpart of the right-arm AC0814/AC0839 connector badge.
         defaults = _apply_rf_label(default_ac0814_params_fn(w, h))
-        if img is None:
-            return finalize_ac08_style_fn(name, defaults)
-        return finalize_ac08_style_fn(name, fit_ac0814_params_from_image_fn(img, defaults))
+        return _finalize_right_arm_badge_params(defaults, fit_ac0814_params_from_image_fn)
 
     if name == "AC0850":
         # AC0850 is the connector-free relative-humidity rF circle/text badge.
@@ -226,11 +232,7 @@ def makeAc08BadgeParamsImpl(
         return finalize_ac08_style_fn(name, fit_ac0813_params_from_image_fn(img, defaults))
 
     if name == "AC0864":
-        # AC0864 is the horizontal mirror of AC0862: retain the horizontal rF
-        # label while moving the connector to the right-arm geometry.
         defaults = _apply_rf_label(default_ac0814_params_fn(w, h))
-        if img is None:
-            return finalize_ac08_style_fn(name, defaults)
-        return finalize_ac08_style_fn(name, fit_ac0814_params_from_image_fn(img, defaults))
+        return _finalize_right_arm_badge_params(defaults, fit_ac0814_params_from_image_fn)
 
     return None
