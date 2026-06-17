@@ -50,7 +50,23 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
     left_circle_connector_hint = (
         _has_any(desc, ("kreis", "kreisring"))
         and _has_any(desc, ("waagrecht", "horizontal", "linie", "strich", "anschluss", "connector"))
-        and _has_any(desc, ("links vom kreis", "links an dem kreis", "links am kreis", "left of the circle", "left connector"))
+        and _has_any(
+            desc,
+            (
+                "links vom kreis",
+                "links neben dem kreis",
+                "links an dem kreis",
+                "links am kreis",
+                "linker anschluss",
+                "linke anschlusslinie",
+                "linke linie",
+                "kreis rechts von der linie",
+                "kreis rechts vom strich",
+                "kreis rechts vom anschluss",
+                "left of the circle",
+                "left connector",
+            ),
+        )
     )
     pump_symbol_hint = (
         "pumpensymbol" in desc and "kreis" in desc and "dreieck" in desc
