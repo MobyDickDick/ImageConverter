@@ -166,6 +166,12 @@ Für jedes Arbeitspaket gelten zusätzlich zu den jeweiligen Akzeptanzkriterien:
     Anschlussrichtung und Relationen modellieren.
   - Akzeptanz: Ein gemeinsamer Algorithmus verarbeitet linke und rechte
     Varianten; keine getrennten Bild-ID-Mengen bleiben in diesem Dispatch.
+  - Fortschritt: Run QG erweitert den in IDO-10 eingeführten gemeinsamen
+    Horizontalarm-Finalisierungspfad auf `connector_direction=right`. Die
+    rechten AC08-Varianten für einfache, CO₂-, VOC- und rF-Badges setzen ihre
+    Richtung nun vor/nach optionalem Bild-Fit über denselben Parameterpfad und
+    laufen durch die gemeinsame rechte Arm-Enforcement-Callback-Schnittstelle;
+    der Ratchet sinkt auf 374 Runtime-ID-Vorkommen.
 
 - [ ] **IDO-12 – Vertikale Kreis-Connectoren generalisieren**
   - Aufgabe: Obere und untere Anschlüsse anhand von Bildgeometrie,

@@ -1264,6 +1264,7 @@ class Action:
                 tune_ac0835_voc_badge_fn=Action._tuneAc0835VocBadge,
                 finalize_ac08_style_fn=Action._finalizeAc08Style,
                 enforce_left_arm_badge_geometry_fn=Action._enforceLeftArmBadgeGeometry,
+                enforce_right_arm_badge_geometry_fn=Action._enforceRightArmBadgeGeometry,
             ),
         )
 
