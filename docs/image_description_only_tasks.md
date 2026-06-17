@@ -152,7 +152,10 @@ Für jedes Arbeitspaket gelten zusätzlich zu den jeweiligen Akzeptanzkriterien:
     den Constraint-Vertrag um die explizite `left_of`-Relation und erkennt
     relationale Texte wie „Linie links vom Kreis“ ohne Familien-ID-Liste. Run
     QD ergänzt synonyme und inverse Relationsformulierungen wie „links neben
-    dem Kreis“, „linker Anschluss“ und „Kreis rechts von der Linie“.
+    dem Kreis“, „linker Anschluss“ und „Kreis rechts von der Linie“. Run QE
+    reduziert die IDO-10-Legacy-Baseline weiter, indem Connector-Guards,
+    Transfer-Kommentare und Validierungslogs linke/rechte Horizontalarme über
+    Parameter und Richtung statt über konkrete Katalogfamilien dokumentieren.
 
 - [ ] **IDO-11 – Rechter Kreis-Connector generalisieren**
   - Aufgabe: Spiegelung nicht über Familiennamen, sondern über erkannte

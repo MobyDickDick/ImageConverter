@@ -19,7 +19,7 @@ def semanticTransferRotationsImpl(
         or donor_params.get("stem_enabled", False)
     )
     if has_text or has_connector:
-        # Directional semantic badges (e.g. AC0812 left arm) encode orientation in
+        # Directional semantic badges encode orientation in
         # geometry. Rotating donor templates can improve pixel error but flips the
         # meaning of connector-side symbols. Keep transfer upright/unrotated.
         return (0,)
@@ -93,7 +93,7 @@ def semanticTransferIsCompatibleImpl(
         if target_mode and donor_mode and target_mode != donor_mode:
             return False
 
-    # Directional connector families (e.g. AC0810 right arm vs AC0812 left arm)
+    # Directional connector families with mirrored horizontal arms
     # must keep side/orientation stable during semantic transfer.
     if target_has_arm and donor_has_arm:
         target_arm_dir = connector_arm_direction_fn(target_params)

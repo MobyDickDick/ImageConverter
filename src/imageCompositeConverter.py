@@ -768,7 +768,7 @@ class Action:
     def _alignStemToCircleCenter(params: dict) -> dict:
         """Ensure vertical handle/stem extension runs through circle center.
 
-        For vertical connector badges (e.g. AC0811/AC0831/AC0836), force the
+        For vertical connector badges, force the
         connector start to the circle edge so quantization does not leave a
         visible gap between circle and stem.
         """
@@ -968,7 +968,7 @@ class Action:
 
     @staticmethod
     def _enforceLeftArmBadgeGeometry(params: dict, w: int, h: int) -> dict:
-        """Ensure AC0812-like badges always keep a visible left connector arm."""
+        """Ensure left-connector badges always keep a visible horizontal arm."""
         return semantic_connector_helpers.enforceLeftArmBadgeGeometryImpl(
             params,
             ac08_stroke_width_px=Action.AC08_STROKE_WIDTH_PX,
@@ -976,7 +976,7 @@ class Action:
 
     @staticmethod
     def _enforceRightArmBadgeGeometry(params: dict, w: int, h: int) -> dict:
-        """Ensure AC0810/AC0814-like badges always keep a visible right connector arm."""
+        """Ensure right-connector badges always keep a visible horizontal arm."""
         return semantic_connector_helpers.enforceRightArmBadgeGeometryImpl(
             params,
             w=w,

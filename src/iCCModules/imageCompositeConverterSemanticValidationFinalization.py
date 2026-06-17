@@ -9,7 +9,7 @@ def appendSemanticConnectorExpectationLogImpl(
     result = list(validation_logs)
     if badge_params.get("arm_enabled"):
         result.append(
-            "semantic-guard: Erwartete Arm-Geometrie bestätigt/wiederhergestellt (z.B. AC0812 links)."
+            "semantic-guard: Erwartete Arm-Geometrie bestätigt/wiederhergestellt (links/rechts aus Parametern)."
         )
     return result
 

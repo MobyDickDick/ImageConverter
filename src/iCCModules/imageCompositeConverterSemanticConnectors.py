@@ -10,7 +10,7 @@ def enforceLeftArmBadgeGeometryImpl(
     *,
     ac08_stroke_width_px: float,
 ) -> dict[str, object]:
-    """Ensure AC0812-like badges always keep a visible left connector arm."""
+    """Ensure left-connector badges always keep a visible horizontal arm."""
     p = dict(params)
     if not p.get("circle_enabled", True):
         return p
@@ -44,7 +44,7 @@ def enforceRightArmBadgeGeometryImpl(
     w: int,
     ac08_stroke_width_px: float,
 ) -> dict[str, object]:
-    """Ensure AC0810/AC0814-like badges always keep a visible right connector arm."""
+    """Ensure right-connector badges always keep a visible horizontal arm."""
     p = dict(params)
     if not p.get("circle_enabled", True):
         return p
