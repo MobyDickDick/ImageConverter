@@ -311,3 +311,21 @@ def test_left_circle_connector_constraints_include_explicit_relation() -> None:
         "source": "description",
         "confidence": 0.75,
     } in params["description_constraints"]["relations"]
+
+
+def test_left_circle_connector_constraints_accept_inverse_relation_text() -> None:
+    _desc, params = _parse("Grauer Kreis rechts von der Linie, linker Anschluss ohne Buchstabe.")
+
+    assert [element["kind"] for element in params["geometry_ir"]] == [
+        "CircleBackground",
+        "HorizontalRule",
+    ]
+    assert params["geometry_ir"][1]["target_ref"] == "described_circle"
+    assert params["geometry_ir"][1]["relation"] == "left_of"
+    assert {
+        "type": "left_of",
+        "subject": "description_element_2",
+        "object": "described_circle",
+        "source": "description",
+        "confidence": 0.75,
+    } in params["description_constraints"]["relations"]

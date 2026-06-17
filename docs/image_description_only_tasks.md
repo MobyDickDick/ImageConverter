@@ -150,7 +150,9 @@ Für jedes Arbeitspaket gelten zusätzlich zu den jeweiligen Akzeptanzkriterien:
     Rename-Test sichert, dass diese Beschreibung unabhängig vom Dateinamen
     dieselben Constraints und dieselbe Geometry-IR liefert. Run QC erweitert
     den Constraint-Vertrag um die explizite `left_of`-Relation und erkennt
-    relationale Texte wie „Linie links vom Kreis“ ohne Familien-ID-Liste.
+    relationale Texte wie „Linie links vom Kreis“ ohne Familien-ID-Liste. Run
+    QD ergänzt synonyme und inverse Relationsformulierungen wie „links neben
+    dem Kreis“, „linker Anschluss“ und „Kreis rechts von der Linie“.
 
 - [ ] **IDO-11 – Rechter Kreis-Connector generalisieren**
   - Aufgabe: Spiegelung nicht über Familiennamen, sondern über erkannte
