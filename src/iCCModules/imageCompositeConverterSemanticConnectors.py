@@ -152,7 +152,7 @@ def enforceSemanticConnectorExpectationImpl(
     expects_right_arm = any("waagrechter strich rechts" in elem for elem in normalized_elements)
     expects_top_stem = any("senkrechter strich oben" in elem for elem in normalized_elements)
 
-    if normalized_base in {"AC0812", "AC0837", "AC0882"} or expects_left_arm:
+    if expects_left_arm:
         return enforce_left_fn(params)
     if normalized_base in {"AC0810", "AC0814", "AC0834", "AC0839"} or expects_right_arm:
         return enforce_right_fn(params)
