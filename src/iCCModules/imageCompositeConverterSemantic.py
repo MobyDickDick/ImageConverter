@@ -221,6 +221,9 @@ def apply_semantic_badge_description_rules(*, desc: str, params: dict[str, objec
             "waagrecht nach rechts",
             "waagrechter strich links",
             "waagrechter strich rechts",
+            "linie links vom kreis",
+            "strich links vom kreis",
+            "anschluss links vom kreis",
             "horizontale linie",
             "vertikale linie",
         )
@@ -243,7 +246,7 @@ def apply_semantic_badge_description_rules(*, desc: str, params: dict[str, objec
         elements.append("SEMANTIC: senkrechter Strich oben vom Kreis")
     if "griff nach oben" in normalized or "senkrecht nach oben" in normalized:
         elements.append("SEMANTIC: senkrechter Strich hinter dem Kreis")
-    if "waagrecht nach links" in normalized or "waagrechter strich links" in normalized:
+    if _description_expects_left_circle_connector(normalized):
         elements.append("SEMANTIC: waagrechter Strich links vom Kreis")
     if "waagrecht nach rechts" in normalized or "waagrechter strich rechts" in normalized:
         elements.append("SEMANTIC: waagrechter Strich rechts vom Kreis")

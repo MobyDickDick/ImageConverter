@@ -1416,6 +1416,8 @@ def buildDescriptionConstraintsImpl(description: str) -> dict[str, object]:
             "source": "description",
             "confidence": 0.75,
         }
+        explicit_relation = str(element.get("relation", "") or "")
+        explicit_target = element.get("target_ref")
         for key, value in element.items():
             if key in {"id", "kind"}:
                 continue
@@ -1430,6 +1432,16 @@ def buildDescriptionConstraintsImpl(description: str) -> dict[str, object]:
                         "confidence": 0.75,
                     }
                 )
+        if explicit_relation and isinstance(explicit_target, str):
+            relations.append(
+                {
+                    "type": explicit_relation,
+                    "subject": constraint_id,
+                    "object": explicit_target,
+                    "source": "description",
+                    "confidence": 0.75,
+                }
+            )
         constraints.append(normalized)
 
     uncertainty_reasons: list[str] = []

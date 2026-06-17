@@ -148,7 +148,9 @@ Für jedes Arbeitspaket gelten zusätzlich zu den jeweiligen Akzeptanzkriterien:
     mit waagrechtem Strich links vom Kreis“ eine `CircleBackground` +
     `HorizontalRule`-Geometry-IR mit `left_of`-Relation. Ein neutraler
     Rename-Test sichert, dass diese Beschreibung unabhängig vom Dateinamen
-    dieselben Constraints und dieselbe Geometry-IR liefert.
+    dieselben Constraints und dieselbe Geometry-IR liefert. Run QC erweitert
+    den Constraint-Vertrag um die explizite `left_of`-Relation und erkennt
+    relationale Texte wie „Linie links vom Kreis“ ohne Familien-ID-Liste.
 
 - [ ] **IDO-11 – Rechter Kreis-Connector generalisieren**
   - Aufgabe: Spiegelung nicht über Familiennamen, sondern über erkannte
