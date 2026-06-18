@@ -151,6 +151,76 @@ def _description_expects_right_circle_connector(desc: str) -> bool:
     return bool((direct_right or rotated_down_handle) and has_circle and has_horizontal_connector)
 
 
+def _description_expects_top_circle_connector(desc: str) -> bool:
+    """Return true when text describes a vertical connector above a circle."""
+    normalized = re.sub(r"\s+", " ", str(desc or "").lower()).strip()
+    if not normalized:
+        return False
+    direct_top = any(
+        token in normalized
+        for token in (
+            "senkrechter strich oben",
+            "vertikaler strich oben",
+            "linie oberhalb vom kreis",
+            "linie oberhalb des kreises",
+            "linie oben vom kreis",
+            "strich oberhalb vom kreis",
+            "strich oberhalb des kreises",
+            "anschluss oben vom kreis",
+            "anschluss oberhalb des kreises",
+            "oberer anschluss",
+            "obere anschlusslinie",
+            "obere linie",
+            "kreis unter der linie",
+            "kreis unter dem strich",
+            "oben am kreis",
+            "oben vom kreis",
+        )
+    )
+    has_circle = any(token in normalized for token in ("kreis", "badge", "kelle"))
+    has_vertical_connector = any(
+        token in normalized
+        for token in ("senkrecht", "vertikal", "strich", "linie", "anschluss", "griff")
+    )
+    return bool(direct_top and has_circle and has_vertical_connector)
+
+
+def _description_expects_bottom_circle_connector(desc: str) -> bool:
+    """Return true when text describes a vertical connector below a circle."""
+    normalized = re.sub(r"\s+", " ", str(desc or "").lower()).strip()
+    if not normalized:
+        return False
+    direct_bottom = any(
+        token in normalized
+        for token in (
+            "senkrechter strich unten",
+            "vertikaler strich unten",
+            "linie unterhalb vom kreis",
+            "linie unterhalb des kreises",
+            "linie unten vom kreis",
+            "strich unterhalb vom kreis",
+            "strich unterhalb des kreises",
+            "anschluss unten vom kreis",
+            "anschluss unterhalb des kreises",
+            "unterer anschluss",
+            "untere anschlusslinie",
+            "untere linie",
+            "kreis über der linie",
+            "kreis ueber der linie",
+            "kreis über dem strich",
+            "kreis ueber dem strich",
+            "unten am kreis",
+            "unten vom kreis",
+        )
+    )
+    has_circle = any(token in normalized for token in ("kreis", "badge", "kelle"))
+    has_vertical_connector = any(
+        token in normalized
+        for token in ("senkrecht", "vertikal", "strich", "linie", "anschluss", "griff")
+    )
+    return bool(direct_bottom and has_circle and has_vertical_connector)
+
+
 def apply_semantic_badge_family_rules(
     *,
     base_upper: str,
@@ -209,8 +279,10 @@ def apply_semantic_badge_family_rules(
 
     if _description_expects_right_circle_connector(desc):
         heuristic_elements.append("SEMANTIC: waagrechter Strich rechts vom Kreis")
-    if "senkrechter strich oben" in desc:
+    if _description_expects_top_circle_connector(desc):
         heuristic_elements.append("SEMANTIC: senkrechter Strich oben vom Kreis")
+    if _description_expects_bottom_circle_connector(desc):
+        heuristic_elements.append("SEMANTIC: senkrechter Strich hinter dem Kreis")
     if "senkrechter strich hinter" in desc:
         heuristic_elements.append("SEMANTIC: senkrechter Strich hinter dem Kreis")
 
@@ -280,6 +352,10 @@ def apply_semantic_badge_description_rules(*, desc: str, params: dict[str, objec
             "linke anschlusslinie",
             "kreis rechts von der linie",
             "kreis rechts vom strich",
+            "oberer anschluss",
+            "obere anschlusslinie",
+            "unterer anschluss",
+            "untere anschlusslinie",
             "horizontale linie",
             "vertikale linie",
         )
@@ -298,9 +374,9 @@ def apply_semantic_badge_description_rules(*, desc: str, params: dict[str, objec
         elements.append("SEMANTIC: Kreis + Buchstabe VOC")
         params["label"] = "VOC"
 
-    if "griff nach unten" in normalized or "senkrecht nach unten" in normalized:
+    if _description_expects_top_circle_connector(normalized):
         elements.append("SEMANTIC: senkrechter Strich oben vom Kreis")
-    if "griff nach oben" in normalized or "senkrecht nach oben" in normalized:
+    if _description_expects_bottom_circle_connector(normalized):
         elements.append("SEMANTIC: senkrechter Strich hinter dem Kreis")
     if _description_expects_left_circle_connector(normalized):
         elements.append("SEMANTIC: waagrechter Strich links vom Kreis")

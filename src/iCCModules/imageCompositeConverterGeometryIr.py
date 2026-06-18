@@ -89,6 +89,48 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
             ),
         )
     )
+    top_circle_connector_hint = (
+        _has_any(desc, ("kreis", "kreisring"))
+        and _has_any(desc, ("senkrecht", "vertikal", "linie", "strich", "anschluss", "connector"))
+        and _has_any(
+            desc,
+            (
+                "oben vom kreis",
+                "oben am kreis",
+                "oberhalb des kreises",
+                "oberhalb vom kreis",
+                "oberer anschluss",
+                "obere anschlusslinie",
+                "obere linie",
+                "kreis unter der linie",
+                "kreis unter dem strich",
+                "top of the circle",
+                "top connector",
+            ),
+        )
+    )
+    bottom_circle_connector_hint = (
+        _has_any(desc, ("kreis", "kreisring"))
+        and _has_any(desc, ("senkrecht", "vertikal", "linie", "strich", "anschluss", "connector"))
+        and _has_any(
+            desc,
+            (
+                "unten vom kreis",
+                "unten am kreis",
+                "unterhalb des kreises",
+                "unterhalb vom kreis",
+                "unterer anschluss",
+                "untere anschlusslinie",
+                "untere linie",
+                "kreis über der linie",
+                "kreis ueber der linie",
+                "kreis über dem strich",
+                "kreis ueber dem strich",
+                "bottom of the circle",
+                "bottom connector",
+            ),
+        )
+    )
     pump_symbol_hint = (
         "pumpensymbol" in desc and "kreis" in desc and "dreieck" in desc
     ) or _has_any(desc, ("ac0251", "ac0401"))
@@ -628,6 +670,54 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
                     "bbox": [0.68, 0.48, 0.30, 0.08],
                     "target_ref": "described_circle",
                     "relation": "right_of",
+                    "stroke": "#666666",
+                    "stroke_width": 0.055,
+                },
+            ]
+        )
+        return elements
+
+    if top_circle_connector_hint:
+        elements.extend(
+            [
+                {
+                    "kind": "CircleBackground",
+                    "id": "described_circle",
+                    "bbox": [0.18, 0.32, 0.64, 0.58],
+                    "fill": "#f2f2f2",
+                    "stroke": "#7f7f7f",
+                    "stroke_width": 0.055,
+                },
+                {
+                    "kind": "VerticalRule",
+                    "id": "top_circle_connector",
+                    "bbox": [0.46, 0.02, 0.08, 0.32],
+                    "target_ref": "described_circle",
+                    "relation": "top_of",
+                    "stroke": "#666666",
+                    "stroke_width": 0.055,
+                },
+            ]
+        )
+        return elements
+
+    if bottom_circle_connector_hint:
+        elements.extend(
+            [
+                {
+                    "kind": "CircleBackground",
+                    "id": "described_circle",
+                    "bbox": [0.18, 0.10, 0.64, 0.58],
+                    "fill": "#f2f2f2",
+                    "stroke": "#7f7f7f",
+                    "stroke_width": 0.055,
+                },
+                {
+                    "kind": "VerticalRule",
+                    "id": "bottom_circle_connector",
+                    "bbox": [0.46, 0.66, 0.08, 0.32],
+                    "target_ref": "described_circle",
+                    "relation": "bottom_of",
                     "stroke": "#666666",
                     "stroke_width": 0.055,
                 },
@@ -1353,6 +1443,15 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
             cy = y + bh * 0.5
             svg.append(
                 f'  <path id="{element_id}" d="M {_fmt(x)} {_fmt(cy)} L {_fmt(x + bw)} {_fmt(cy)}" '
+                f'stroke="{stroke}" stroke-width="{_fmt(sw)}" fill="none" stroke-linecap="square"/>'
+            )
+        elif kind == "VerticalRule":
+            x, y, bw, bh = _scaled_bbox(element, w, h)
+            stroke = html.escape(str(element.get("stroke", "#4f4f4f")))
+            sw = float(element.get("stroke_width", 0.025)) * min(w, h)
+            cx = x + bw * 0.5
+            svg.append(
+                f'  <path id="{element_id}" d="M {_fmt(cx)} {_fmt(y)} L {_fmt(cx)} {_fmt(y + bh)}" '
                 f'stroke="{stroke}" stroke-width="{_fmt(sw)}" fill="none" stroke-linecap="square"/>'
             )
         elif kind == "HorizontalRuleSet":

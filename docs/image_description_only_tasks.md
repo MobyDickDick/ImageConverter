@@ -191,6 +191,13 @@ Für jedes Arbeitspaket gelten zusätzlich zu den jeweiligen Akzeptanzkriterien:
     Überdeckung/Z-Order und Beschreibung unterscheiden.
   - Akzeptanz: Tests umfassen Anschluss oben, Anschluss unten, teilweise
     verdeckten Anschluss und connector-freien Kreis.
+  - Fortschritt: Run QK startet den katalogfreien Vertikalpfad: Beschreibungen
+    mit oberer/unterer Anschlusslinie erzeugen jetzt `CircleBackground` +
+    `VerticalRule` mit `top_of`-/`bottom_of`-Relation. Neutrale Rename-Tests
+    sichern Dateinamen-Invarianz; Semantik-Heuristiktests leiten obere und
+    untere Connectoren aus Relationsformulierungen statt aus neuen
+    Familien-ID-Regeln ab. Überdeckte Anschlüsse und connector-freie
+    Negativfälle bleiben als nächster Ausbau offen.
 
 - [ ] **IDO-13 – Kreis-/Text-Badges generalisieren**
   - Aufgabe: Labelinhalt, Textlage und Kreisgeometrie aus Beschreibung,
