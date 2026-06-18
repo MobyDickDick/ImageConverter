@@ -15,31 +15,53 @@ def _has_any(text: str, tokens: Iterable[str]) -> bool:
     return any(token in text for token in tokens)
 
 
+def _normalize_circle_badge_label(raw: str) -> str:
+    if raw in {"co2", "co₂"}:
+        return "CO₂"
+    if raw == "voc":
+        return "VOC"
+    if raw in {"rf", "rh"}:
+        return "rF" if raw == "rf" else "rH"
+    return raw.upper()
+
+
 def _extract_circle_badge_label(desc: str) -> str | None:
     if not _has_any(desc, ("kreis", "kreisring", "badge")):
         return None
     if _has_any(desc, ("ohne buchstabe", "ohne text", "ohne beschriftung", "ohne label", "kein buchstabe")):
         return ""
     label_patterns = (
-        (r'(?:steht|text|label|buchstabe|beschriftung|glyph)[^\w]*(?:\"|\'|„|“)?(co2|co₂|voc|rf|rh|t|m)(?:\"|\'|“)?',),
-        (r'(?:zentrierter|zentrierten|mittiger|mittigen)\s+(co2|co₂|voc|rf|rh|t|m)(?:-glyph|-text|-label|\b)',),
-        (r'\b(co2|co₂|voc|rf|rh|t|m)\s+(?:im|in dem|innerhalb des|zentriert im|zentriert in dem)\s+kreis',),
+        r'(?:steht|text|label|buchstabe|beschriftung|glyph)[^\w]*(?:\"|\'|„|“)?(co2|co₂|voc|rf|rh|t|m)(?:\"|\'|“)?',
+        r'(?:zentrierter|zentrierten|mittiger|mittigen)\s+(co2|co₂|voc|rf|rh|t|m)(?:-glyph|-text|-label|\b)',
+        r'\b(co2|co₂|voc|rf|rh|t|m)\s+(?:im|in dem|innerhalb des|zentriert im|zentriert in dem)\s+kreis',
+        r'\b(co2|co₂|voc|rf|rh|t|m)\s+(?:oben|unten|links|rechts)\s+(?:im|in dem|innerhalb des)\s+kreis',
     )
-    for patterns in label_patterns:
-        for pattern in patterns:
-            match = re.search(pattern, desc)
-            if match:
-                raw = match.group(1)
-                if raw == "co2":
-                    return "CO₂"
-                if raw == "co₂":
-                    return "CO₂"
-                if raw == "voc":
-                    return "VOC"
-                if raw in {"rf", "rh"}:
-                    return "rF" if raw == "rf" else "rH"
-                return raw.upper()
+    for pattern in label_patterns:
+        match = re.search(pattern, desc)
+        if match:
+            return _normalize_circle_badge_label(match.group(1))
     return None
+
+
+def _extract_circle_badge_text_position(desc: str) -> str:
+    if _has_any(desc, ("oben im kreis", "im oberen kreisbereich", "oberhalb der kreismitte")):
+        return "top"
+    if _has_any(desc, ("unten im kreis", "im unteren kreisbereich", "unterhalb der kreismitte")):
+        return "bottom"
+    if _has_any(desc, ("links im kreis", "im linken kreisbereich", "links der kreismitte")):
+        return "left"
+    if _has_any(desc, ("rechts im kreis", "im rechten kreisbereich", "rechts der kreismitte")):
+        return "right"
+    return "center"
+
+
+def _circle_badge_text_anchor(position: str) -> list[float]:
+    return {
+        "top": [0.5, 0.32],
+        "bottom": [0.5, 0.68],
+        "left": [0.32, 0.5],
+        "right": [0.68, 0.5],
+    }.get(position, [0.5, 0.5])
 
 def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, object]]:
     """Map a normalized German image description to an ordered geometry IR chain.
@@ -680,6 +702,8 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
         elements.append(circle)
         if circle_badge_label:
             font_size = 0.42 if len(circle_badge_label) <= 2 else 0.30
+            text_position = _extract_circle_badge_text_position(desc)
+            relation = "centered_in" if text_position == "center" else f"{text_position}_inside"
             elements.append(
                 {
                     "kind": "TextGlyph",
@@ -687,8 +711,14 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
                     "text": circle_badge_label,
                     "bbox_ref": circle_id,
                     "target_ref": circle_id,
-                    "relation": "centered_in",
-                    "text_position": "center",
+                    "relation": relation,
+                    "text_position": text_position,
+                    "text_anchor": _circle_badge_text_anchor(text_position),
+                    "glyph_evidence": {
+                        "source": "description_text",
+                        "normalized_text": circle_badge_label,
+                        "position": text_position,
+                    },
                     "fill": "#666666",
                     "font_size": font_size,
                     "font_weight": "700",
