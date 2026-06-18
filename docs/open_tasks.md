@@ -3820,3 +3820,11 @@ endet. Die Detailableitung und Akzeptanzkriterien stehen in
 - **Blocker:** Kein neuer technischer Blocker; die spätere Kopplung an echte Perception-/Bildgeometrie-Evidenz bleibt ein fachlicher Folgeausbau, sobald neue Rasterfälle dafür qualifiziert sind.
 - **Nächster sinnvoller Schritt:** IDO-13 starten und Kreis-/Text-Badges für Labelinhalt, Textlage und Kreisgeometrie ohne Bild-ID-Dispatch generalisieren.
 
+
+### Fortschritt vs. Blocker (Session 2026-06-18, IDO-13 Kreis-/Text-Badges Run QM)
+
+- **Fortschritt:** IDO-13 startet mit einem katalogfreien Kreis-/Text-Badge-Pfad. Beschreibungen für `T`, `M`, `VOC`, `CO₂`, `rF`/`rH` und explizit textfreie Kreise werden jetzt aus Label- und Negativformulierungen in `CircleBackground`-/`TextGlyph`-Geometry-IR übersetzt.
+- **Geometrie/Relation:** Kleine/große Kreisformulierungen setzen messbare Badge-Bounding-Boxes; Text-Glyphen tragen `text_position=center` und eine `centered_in`-Relation zum beschriebenen Kreis.
+- **Negativfall:** `ohne Buchstabe` in Kombination mit connector-freien Kreisformulierungen erzeugt weiterhin nur einen Kreis mit `connector_policy=forbid` und keine Text- oder Relations-Constraints.
+- **Sicherung:** Neue Description-Contract-Tests decken VOC, CO₂, rF und textfreie Kreis-Badges ab; der Bild-ID-Ratchet bleibt bei `368 legacy occurrences remain` grün.
+- **Nächster sinnvoller Schritt:** IDO-13 an echte Text-/Glyph-Evidenz koppeln und weitere Lageformulierungen neben der zentrierten Badge-Position absichern.

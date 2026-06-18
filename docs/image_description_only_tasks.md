@@ -205,6 +205,12 @@ Für jedes Arbeitspaket gelten zusätzlich zu den jeweiligen Akzeptanzkriterien:
     Text-/Glyph-Evidenz und Bildmessung bestimmen.
   - Akzeptanz: `T`, `M`, `VOC`, `CO₂`, `rF` und „ohne Buchstabe“ werden ohne
     Bild-ID-Dispatch verarbeitet.
+  - Fortschritt: Run QM startet den katalogfreien Badge-Pfad: Labeltexte für
+    `T`, `M`, `VOC`, `CO₂`, `rF`/`rH` sowie textfreie Kreisformulierungen werden
+    aus der Beschreibung in `CircleBackground`-/`TextGlyph`-IR übersetzt.
+    Zentrierte Textlage wird als `centered_in`-Relation modelliert; kleine und
+    große Kreisformulierungen setzen generische Badge-Bounding-Boxes, und
+    connector-freie textlose Kreise behalten `connector_policy=forbid`.
 
 - [ ] **IDO-14 – Ventil-/Kellen-Spezialpfade in Primitive zerlegen**
   - Aufgabe: Bisherige Spezialformen als Polygon-, Kreis-, Linien-,

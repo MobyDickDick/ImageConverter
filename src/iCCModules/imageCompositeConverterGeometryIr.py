@@ -15,6 +15,32 @@ def _has_any(text: str, tokens: Iterable[str]) -> bool:
     return any(token in text for token in tokens)
 
 
+def _extract_circle_badge_label(desc: str) -> str | None:
+    if not _has_any(desc, ("kreis", "kreisring", "badge")):
+        return None
+    if _has_any(desc, ("ohne buchstabe", "ohne text", "ohne beschriftung", "ohne label", "kein buchstabe")):
+        return ""
+    label_patterns = (
+        (r'(?:steht|text|label|buchstabe|beschriftung|glyph)[^\w]*(?:\"|\'|„|“)?(co2|co₂|voc|rf|rh|t|m)(?:\"|\'|“)?',),
+        (r'(?:zentrierter|zentrierten|mittiger|mittigen)\s+(co2|co₂|voc|rf|rh|t|m)(?:-glyph|-text|-label|\b)',),
+        (r'\b(co2|co₂|voc|rf|rh|t|m)\s+(?:im|in dem|innerhalb des|zentriert im|zentriert in dem)\s+kreis',),
+    )
+    for patterns in label_patterns:
+        for pattern in patterns:
+            match = re.search(pattern, desc)
+            if match:
+                raw = match.group(1)
+                if raw == "co2":
+                    return "CO₂"
+                if raw == "co₂":
+                    return "CO₂"
+                if raw == "voc":
+                    return "VOC"
+                if raw in {"rf", "rh"}:
+                    return "rF" if raw == "rf" else "rH"
+                return raw.upper()
+    return None
+
 def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, object]]:
     """Map a normalized German image description to an ordered geometry IR chain.
 
@@ -45,12 +71,19 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
             "ohne äußere griff",
         ),
     )
+    circle_badge_label = _extract_circle_badge_label(desc)
+    circle_badge_hint = (
+        circle_badge_label is not None
+        and _has_any(desc, ("kreis", "kreisring", "badge"))
+        and (circle_badge_label != "" or connector_free_hint)
+    )
     connector_free_rh_badge_hint = (
         _has_any(
             desc,
             ('steht "rh"', "steht 'rh'", "zentrierter rh-glyph", "zentrierten rh-glyph"),
         )
         and connector_free_hint
+        and not circle_badge_hint
     )
     occluded_vertical_circle_connector_hint = _has_any(
         desc,
@@ -620,6 +653,42 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
                 "font_weight": "700",
             }
         )
+        return elements
+
+    if circle_badge_hint:
+        circle_bbox = [0.08, 0.08, 0.84, 0.84]
+        if _has_any(desc, ("kleiner kreis", "kleines badge", "kleiner badge")):
+            circle_bbox = [0.16, 0.16, 0.68, 0.68]
+        elif _has_any(desc, ("großer kreis", "grosser kreis", "großes badge", "grosses badge")):
+            circle_bbox = [0.035, 0.035, 0.93, 0.93]
+        circle = {
+            "kind": "CircleBackground",
+            "id": "described_circle",
+            "bbox": circle_bbox,
+            "fill": "#f2f2f2",
+            "stroke": "#7f7f7f",
+            "stroke_width": 0.055,
+            "badge_role": "circle_text_badge",
+        }
+        if connector_free_hint:
+            circle["connector_policy"] = "forbid"
+        elements.append(circle)
+        if circle_badge_label:
+            font_size = 0.42 if len(circle_badge_label) <= 2 else 0.30
+            elements.append(
+                {
+                    "kind": "TextGlyph",
+                    "id": "circle_badge_text",
+                    "text": circle_badge_label,
+                    "bbox_ref": "described_circle",
+                    "target_ref": "described_circle",
+                    "relation": "centered_in",
+                    "text_position": "center",
+                    "fill": "#666666",
+                    "font_size": font_size,
+                    "font_weight": "700",
+                }
+            )
         return elements
 
     if connector_free_rh_badge_hint:
