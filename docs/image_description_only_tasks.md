@@ -179,7 +179,12 @@ Für jedes Arbeitspaket gelten zusätzlich zu den jeweiligen Akzeptanzkriterien:
     rF-Rechtsconnector-Folgepunkte aus der verbliebenen Familien-ID-Liste für
     rechte Horizontalarme; `AC0844`/`AC0864` erhalten ihren rechten Anschluss nun
     aus der Beschreibung-Heuristik, und der Ratchet sinkt auf 372
-    Runtime-ID-Vorkommen.
+    Runtime-ID-Vorkommen. Run QJ entfernt auch die verbleibenden rechten
+    Basis-/CO₂-/VOC-Familienanker `AC0810`, `AC0814`, `AC0834` und `AC0839`
+    aus der expliziten rechten Connector-Liste; knappe Beschreibungen wie
+    „Griff unten“ und „gegenüberliegende Drehlage“ liefern den rechten
+    Horizontalarm nun über `description_heuristic`, und der Ratchet sinkt auf
+    368 Runtime-ID-Vorkommen.
 
 - [ ] **IDO-12 – Vertikale Kreis-Connectoren generalisieren**
   - Aufgabe: Obere und untere Anschlüsse anhand von Bildgeometrie,

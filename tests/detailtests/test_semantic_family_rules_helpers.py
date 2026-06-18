@@ -99,6 +99,41 @@ def test_apply_semantic_badge_family_rules_derives_left_connector_without_family
         in params["semantic_sources"]["description_heuristic"]
     )
 
+
+def test_apply_semantic_badge_family_rules_derives_legacy_right_connectors_without_family_id_list() -> None:
+    cases = [
+        ("AC0810", "Kelle mit Kreis, Griff nach unten."),
+        ("AC0814", "Wie AC0811: Kelle mit Kreis oben und Griff nach unten."),
+        ("AC0834", "Kelle mit Kreis und Griff unten, Text bleibt horizontal."),
+        (
+            "AC0839",
+            "VOC-Kreis in der gegenüberliegenden Drehlage; "
+            "der Griff bleibt als Zusatzarm am Kreis erkennbar.",
+        ),
+    ]
+
+    for base_upper, desc in cases:
+        params: dict[str, object] = {"elements": []}
+
+        applied = helpers.apply_semantic_badge_family_rules(
+            base_upper=base_upper,
+            symbol_upper=base_upper,
+            desc=desc.lower(),
+            params=params,
+        )
+
+        assert applied is True
+        assert "SEMANTIC: waagrechter Strich rechts vom Kreis" in params["elements"]
+        assert (
+            "SEMANTIC: waagrechter Strich rechts vom Kreis"
+            not in params["semantic_sources"]["family_rule"]
+        )
+        assert (
+            "SEMANTIC: waagrechter Strich rechts vom Kreis"
+            in params["semantic_sources"]["description_heuristic"]
+        )
+
+
 def test_apply_semantic_badge_description_rules_derives_left_connector_from_relation_text() -> None:
     params: dict[str, object] = {"elements": []}
 
