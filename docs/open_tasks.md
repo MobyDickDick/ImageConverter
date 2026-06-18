@@ -3828,3 +3828,10 @@ endet. Die Detailableitung und Akzeptanzkriterien stehen in
 - **Negativfall:** `ohne Buchstabe` in Kombination mit connector-freien Kreisformulierungen erzeugt weiterhin nur einen Kreis mit `connector_policy=forbid` und keine Text- oder Relations-Constraints.
 - **Sicherung:** Neue Description-Contract-Tests decken VOC, CO₂, rF und textfreie Kreis-Badges ab; der Bild-ID-Ratchet bleibt bei `368 legacy occurrences remain` grün.
 - **Nächster sinnvoller Schritt:** IDO-13 an echte Text-/Glyph-Evidenz koppeln und weitere Lageformulierungen neben der zentrierten Badge-Position absichern.
+
+### Fortschritt vs. Blocker (Session 2026-06-18, IDO-13 Text-/Glyph-Evidenz und Textlagen Run QN)
+
+- **Fortschritt:** Kreis-/Text-Badges speichern nun `glyph_evidence` mit Quelle, normalisiertem Labeltext und erkannter Textlage; nicht-zentrierte Beschreibungen wie `T oben im Kreis` erzeugen lagebezogene Relationen (`top_inside`) und normierte `text_anchor`-Werte.
+- **Sicherung:** Neue Description-Contract-Tests decken Glyph-Evidenz sowie obere Textlage ab; der Bild-ID-Ratchet bleibt bei `368 legacy occurrences remain` grün.
+- **Blocker:** Kein neuer technischer Blocker; echte Raster-/Perception-Glyph-Detektion und Render-Kalibrierung bleiben Folgeausbau.
+- **Nächster sinnvoller Schritt:** IDO-14 starten und die generische Badge-IR an Perception-Glyph-/OCR-Signale sowie Render-Parameter-Kalibrierung koppeln.

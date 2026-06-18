@@ -474,6 +474,36 @@ def test_description_parser_generalizes_circle_badge_label_content_and_centering
     } in params["description_constraints"]["relations"]
 
 
+
+def test_description_parser_exposes_circle_badge_glyph_evidence() -> None:
+    _desc, params = _parse('Grauer Kreis; Text "CO2" zentriert im Kreis, ohne Anschlusslinie.')
+
+    text = params["geometry_ir"][1]
+    assert text["text"] == "CO₂"
+    assert text["text_anchor"] == [0.5, 0.5]
+    assert text["glyph_evidence"] == {
+        "source": "description_text",
+        "normalized_text": "CO₂",
+        "position": "center",
+    }
+
+
+def test_description_parser_supports_non_center_circle_badge_text_positions() -> None:
+    _desc, params = _parse('Grauer Kreis; T oben im Kreis, ohne Anschlusslinie.')
+
+    text = params["geometry_ir"][1]
+    assert text["text"] == "T"
+    assert text["text_position"] == "top"
+    assert text["relation"] == "top_inside"
+    assert text["text_anchor"] == [0.5, 0.32]
+    assert {
+        "type": "top_inside",
+        "subject": "description_element_2",
+        "object": "described_circle",
+        "source": "description",
+        "confidence": 0.75,
+    } in params["description_constraints"]["relations"]
+
 def test_description_parser_generalizes_co2_rf_and_empty_circle_badges() -> None:
     examples = [
         ('Kleiner Kreis mit Text "CO2" zentriert im Kreis.', "CO₂", [0.16, 0.16, 0.68, 0.68]),
