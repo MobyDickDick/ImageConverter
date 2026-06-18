@@ -133,11 +133,15 @@ def _description_expects_right_circle_connector(desc: str) -> bool:
             "rechts neben dem kreis",
             "rechts vom kreis",
             "waagrecht nach rechts",
+            "gegenüberliegenden drehlage",
+            "gegenueberliegenden drehlage",
         )
     )
     rotated_down_handle = (
         "griff nach unten" in normalized
+        or "griff unten" in normalized
         or "anschluss nach unten" in normalized
+        or "anschluss unten" in normalized
     )
     has_circle = any(token in normalized for token in ("kreis", "badge", "kelle"))
     has_horizontal_connector = any(
@@ -192,8 +196,6 @@ def apply_semantic_badge_family_rules(
         heuristic_elements.append("SEMANTIC: Kreis + Buchstabe")
         params["label"] = "M" if base_upper == "AR0100" else "T"
 
-    if base_upper in {"AC0810", "AC0814", "AC0834", "AC0839"}:
-        family_elements.append("SEMANTIC: waagrechter Strich rechts vom Kreis")
     if base_upper in {"AC0811", "AC0881", "AC0831", "AC0836", "AC0861"}:
         family_elements.append("SEMANTIC: senkrechter Strich hinter dem Kreis")
     if base_upper in {"AC0813", "AC0833", "AC0838", "AC0223", "AC0863"}:
