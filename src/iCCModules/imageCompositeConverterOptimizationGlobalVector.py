@@ -74,9 +74,13 @@ def globalParameterVectorBoundsImpl(
         "text_y": (0.0, max_y, bool(params.get("lock_text_position", False)), "template"),
         "text_scale": (text_scale_min, text_scale_max, bool(params.get("lock_text_scale", False)), "semantic"),
     }
-    if bool(params.get("ac0811_no_restrictions", False)):
-        # Exploratory AC0811 mode: unlock all global-vector dimensions and relax
-        # range limits so the optimizer can leave template guardrails entirely.
+    unrestricted_profile = str(params.get("optimization_profile", "")).strip().lower() == "unrestricted"
+    # Keep the legacy flag as an input alias while new callers select the same
+    # behavior through measurable profile metadata instead of a catalog ID.
+    legacy_unrestricted_profile = bool(params.get("ac0811_no_restrictions", False))
+    if unrestricted_profile or legacy_unrestricted_profile:
+        # Exploratory unrestricted mode: unlock all global-vector dimensions and
+        # relax range limits so the optimizer can leave template guardrails.
         bounds["r"] = (max(1.0, r_low * 0.65), max(r_high, float(min(w, h)) * 0.75), False, "unrestricted")
         bounds["arm_stroke"] = (1.0, max(1.0, float(min(w, h)) * 0.35), False, "unrestricted")
         bounds["stem_width"] = (

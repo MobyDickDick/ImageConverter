@@ -229,6 +229,11 @@ Für jedes Arbeitspaket gelten zusätzlich zu den jeweiligen Akzeptanzkriterien:
     Objektgröße, Connector-Richtung, Textdichte, Kontrast und
     Konvergenzverhalten ableiten.
   - Akzeptanz: Keine Bild-ID wählt Radius-, Farb-, Text- oder Connector-Limits.
+  - Fortschritt: Run QQ ergänzt einen katalogfreien `optimization_profile=unrestricted`-
+    Eingang für die globalen Optimierungsgrenzen. Der bisherige AC0811-
+    Kompatibilitätsflag bleibt als Alias erhalten, aber neue neutrale Tests
+    sichern, dass Radius-, Text- und Connector-Locks ohne Bild-ID über
+    Profilmetadaten entsperrt werden können.
 
 ## Priorität 3 – Konfiguration und Runtime bereinigen
 
