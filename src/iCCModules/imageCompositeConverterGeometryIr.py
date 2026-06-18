@@ -63,6 +63,49 @@ def _circle_badge_text_anchor(position: str) -> list[float]:
         "right": [0.68, 0.5],
     }.get(position, [0.5, 0.5])
 
+def _kelle_valve_primitive_decomposition(*, label: str = "", orientation: str = "top") -> dict[str, object]:
+    primitives: list[dict[str, object]] = [
+        {"role": "valve_body", "kind": "PolygonPath", "count": 3},
+        {"role": "handle_circle", "kind": "CircleBackground"},
+        {"role": "handle_connector", "kind": "LineSegment"},
+    ]
+    if label:
+        primitives.append({"role": "handle_label", "kind": "TextGlyph", "text": label})
+    return {
+        "schema_version": "kelle_valve_primitive_decomposition_v1",
+        "orientation": orientation,
+        "primitives": primitives,
+    }
+
+
+def _generic_transform(*, rotation_deg: int = 0, mirror_axis: str | None = None) -> dict[str, object]:
+    transform: dict[str, object] = {
+        "schema_version": "generic_geometry_transform_v1",
+        "rotation_deg": rotation_deg,
+    }
+    if mirror_axis:
+        transform["mirror_axis"] = mirror_axis
+    return transform
+
+
+def _annotate_kelle_valve_element(
+    element: dict[str, object],
+    *,
+    label: str = "",
+    orientation: str = "top",
+    rotation_deg: int = 0,
+    mirror_axis: str | None = None,
+) -> dict[str, object]:
+    element["primitive_decomposition"] = _kelle_valve_primitive_decomposition(
+        label=label,
+        orientation=orientation,
+    )
+    element["transform"] = _generic_transform(
+        rotation_deg=rotation_deg,
+        mirror_axis=mirror_axis,
+    )
+    return element
+
 def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, object]]:
     """Map a normalized German image description to an ordered geometry IR chain.
 
@@ -282,6 +325,10 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
     )
     top_kelle_family_hint = _has_any(
         desc, ("ac0231", "3-weg ventil", "3 wege ventil", "3. spitzes dreieck")
+    ) or (
+        "kelle" in desc
+        and "kreis" in desc
+        and _has_any(desc, ("drei dreiecke", "3 dreiecke", "drei polygon", "ventilkörper"))
     )
     top_kelle_position_hint = _has_any(
         desc,
@@ -464,6 +511,12 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
                 "connector_width": 0.075,
             }
         )
+        _annotate_kelle_valve_element(
+            elements[-1],
+            label="M",
+            orientation="main_diagonal_mirrored",
+            mirror_axis="main_diagonal",
+        )
         return elements
 
     if rotated_180_m_top_kelle_three_way_valve_hint:
@@ -490,6 +543,12 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
                 "connector_width": 0.075,
             }
         )
+        _annotate_kelle_valve_element(
+            elements[-1],
+            label="M",
+            orientation="bottom",
+            rotation_deg=180,
+        )
         return elements
 
     if left_rotated_m_top_kelle_three_way_valve_hint:
@@ -515,6 +574,12 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
                 "stroke_width": 0.040,
                 "connector_width": 0.075,
             }
+        )
+        _annotate_kelle_valve_element(
+            elements[-1],
+            label="M",
+            orientation="left",
+            rotation_deg=270,
         )
         return elements
 
@@ -544,6 +609,11 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
                 "connector_width": 0.075,
             }
         )
+        _annotate_kelle_valve_element(
+            elements[-1],
+            orientation="right",
+            rotation_deg=90,
+        )
         return elements
 
     if m_top_kelle_three_way_valve_hint:
@@ -570,6 +640,7 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
                 "connector_width": 0.075,
             }
         )
+        _annotate_kelle_valve_element(elements[-1], label="M")
         return elements
 
     if top_kelle_three_way_valve_hint:
@@ -594,6 +665,7 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
                 "connector_width": 0.075,
             }
         )
+        _annotate_kelle_valve_element(elements[-1])
         return elements
 
     if two_way_vertical_valve_hint:

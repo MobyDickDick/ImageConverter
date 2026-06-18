@@ -217,6 +217,12 @@ Für jedes Arbeitspaket gelten zusätzlich zu den jeweiligen Akzeptanzkriterien:
     Symmetrie- und Rotationsrelationen ausdrücken.
   - Akzeptanz: Rotation und Spiegelung sind generische IR-Transformationen und
     keine katalogspezifischen Funktionen.
+  - Fortschritt: Run QO startet den Primitive-/Transformationsvertrag für
+    Top-Kellen-/3-Wege-Ventile: Die Geometry-IR enthält nun eine
+    `primitive_decomposition` aus Polygonkörper, Kreisgriff, Linien-Connector
+    und optionalem Text-Glyph sowie einen generischen `transform`-Block für
+    Rotation beziehungsweise Spiegelung. Ein neutraler, katalogfreier
+    Description-Test sichert die 180°-Rotation ohne neue Bild-ID-Regel ab.
 
 - [ ] **IDO-15 – Adaptive Locks und Optimierungsprofile entkoppeln**
   - Aufgabe: Profilwahl ausschließlich aus messbaren Eigenschaften wie
