@@ -222,6 +222,50 @@ def test_vertical_circle_connector_description_is_filename_invariant() -> None:
     assert first["geometry_ir"] == second["geometry_ir"]
     assert first["description_constraints"]["relations"][-1]["type"] == "top_of"
 
+
+def test_description_parser_marks_partly_occluded_top_connector_z_order() -> None:
+    _desc, params = _parse(
+        "Grauer Kreis mit teilweise verdeckter vertikaler Anschlusslinie oberhalb des Kreises."
+    )
+
+    assert params["contract_status"] == "ok"
+    assert [element["kind"] for element in params["geometry_ir"]] == [
+        "VerticalRule",
+        "CircleBackground",
+    ]
+    connector = params["geometry_ir"][0]
+    assert connector["relation"] == "top_of"
+    assert connector["z_order"] == "behind_target"
+    assert connector["continues_behind_ref"] == "described_circle"
+    relations = params["description_constraints"]["relations"]
+    assert {relation["type"] for relation in relations} >= {"top_of", "continues_behind"}
+
+
+def test_description_parser_marks_partly_occluded_bottom_connector_z_order() -> None:
+    _desc, params = _parse(
+        "Grauer Kreis über der Linie; der untere Anschluss ist teilweise verdeckt."
+    )
+
+    assert params["contract_status"] == "ok"
+    assert [element["kind"] for element in params["geometry_ir"]] == [
+        "VerticalRule",
+        "CircleBackground",
+    ]
+    connector = params["geometry_ir"][0]
+    assert connector["relation"] == "bottom_of"
+    assert connector["z_order"] == "behind_target"
+    relations = params["description_constraints"]["relations"]
+    assert {relation["type"] for relation in relations} >= {"bottom_of", "continues_behind"}
+
+
+def test_description_parser_keeps_connector_free_circle_without_vertical_rule() -> None:
+    _desc, params = _parse("Grauer Kreis ohne Anschluss und ohne Buchstabe.")
+
+    assert params["contract_status"] == "ok"
+    assert [element["kind"] for element in params["geometry_ir"]] == ["CircleBackground"]
+    assert params["geometry_ir"][0]["connector_policy"] == "forbid"
+    assert params["description_constraints"]["relations"] == []
+
 def test_description_parser_attaches_geometry_ir_for_ac0232_left_rotated_m_top_kelle_three_way_valve() -> None:
     _desc, params = _parse(
         'Wie AC0231: 3-Weg Ventil ähnlich AC0211, um 90° im Uhrzeigersinn gedreht, '

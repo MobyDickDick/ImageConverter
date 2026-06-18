@@ -31,21 +31,38 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
     gradient_hint = _has_any(desc, ("farbverlauf", "gradient")) and _has_any(desc, ("horizontal", "dunkel-hell-dunkel", "dunkel–hell–dunkel"))
     diagonal_hint = _has_any(desc, ("diagonal", "diagonale", "diagonalen", "andreaskreuz", "kreuz"))
     differential_pressure_hint = _has_any(desc, ("differenzdruckmessung", "dp")) and "doppelten grauen rand" in desc
+    connector_free_hint = _has_any(desc, ("kreis", "kreisring")) and _has_any(
+        desc,
+        (
+            "ohne anschluss",
+            "ohne anschlusslinie",
+            "anschlussfrei",
+            "connector-frei",
+            "connectorfrei",
+            "keine griff-/leitungslinie außerhalb",
+            "ohne außenanschluss",
+            "ohne äussere griff",
+            "ohne äußere griff",
+        ),
+    )
     connector_free_rh_badge_hint = (
         _has_any(
             desc,
             ('steht "rh"', "steht 'rh'", "zentrierter rh-glyph", "zentrierten rh-glyph"),
         )
-        and _has_any(desc, ("kreis", "kreisring"))
-        and _has_any(
-            desc,
-            (
-                "keine griff-/leitungslinie außerhalb",
-                "ohne außenanschluss",
-                "ohne äussere griff",
-                "ohne äußere griff",
-            ),
-        )
+        and connector_free_hint
+    )
+    occluded_vertical_circle_connector_hint = _has_any(
+        desc,
+        (
+            "teilweise verdeckt",
+            "teilverdeckt",
+            "verdeckt",
+            "hinter dem kreis",
+            "hinter der kreisfläche",
+            "kreis überdeckt",
+            "kreis verdeckt",
+        ),
     )
     left_circle_connector_hint = (
         _has_any(desc, ("kreis", "kreisring"))
@@ -629,6 +646,20 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
         )
         return elements
 
+    if connector_free_hint:
+        elements.append(
+            {
+                "kind": "CircleBackground",
+                "id": "described_circle",
+                "bbox": [0.08, 0.08, 0.84, 0.84],
+                "fill": "#f2f2f2",
+                "stroke": "#7f7f7f",
+                "stroke_width": 0.055,
+                "connector_policy": "forbid",
+            }
+        )
+        return elements
+
     if left_circle_connector_hint:
         elements.extend(
             [
@@ -678,51 +709,55 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
         return elements
 
     if top_circle_connector_hint:
-        elements.extend(
-            [
-                {
-                    "kind": "CircleBackground",
-                    "id": "described_circle",
-                    "bbox": [0.18, 0.32, 0.64, 0.58],
-                    "fill": "#f2f2f2",
-                    "stroke": "#7f7f7f",
-                    "stroke_width": 0.055,
-                },
-                {
-                    "kind": "VerticalRule",
-                    "id": "top_circle_connector",
-                    "bbox": [0.46, 0.02, 0.08, 0.32],
-                    "target_ref": "described_circle",
-                    "relation": "top_of",
-                    "stroke": "#666666",
-                    "stroke_width": 0.055,
-                },
-            ]
-        )
+        circle = {
+            "kind": "CircleBackground",
+            "id": "described_circle",
+            "bbox": [0.18, 0.32, 0.64, 0.58],
+            "fill": "#f2f2f2",
+            "stroke": "#7f7f7f",
+            "stroke_width": 0.055,
+        }
+        connector = {
+            "kind": "VerticalRule",
+            "id": "top_circle_connector",
+            "bbox": [0.46, 0.02, 0.08, 0.42 if occluded_vertical_circle_connector_hint else 0.32],
+            "target_ref": "described_circle",
+            "relation": "top_of",
+            "stroke": "#666666",
+            "stroke_width": 0.055,
+        }
+        if occluded_vertical_circle_connector_hint:
+            connector["continues_behind_ref"] = "described_circle"
+            connector["z_order"] = "behind_target"
+            elements.extend([connector, circle])
+        else:
+            elements.extend([circle, connector])
         return elements
 
     if bottom_circle_connector_hint:
-        elements.extend(
-            [
-                {
-                    "kind": "CircleBackground",
-                    "id": "described_circle",
-                    "bbox": [0.18, 0.10, 0.64, 0.58],
-                    "fill": "#f2f2f2",
-                    "stroke": "#7f7f7f",
-                    "stroke_width": 0.055,
-                },
-                {
-                    "kind": "VerticalRule",
-                    "id": "bottom_circle_connector",
-                    "bbox": [0.46, 0.66, 0.08, 0.32],
-                    "target_ref": "described_circle",
-                    "relation": "bottom_of",
-                    "stroke": "#666666",
-                    "stroke_width": 0.055,
-                },
-            ]
-        )
+        circle = {
+            "kind": "CircleBackground",
+            "id": "described_circle",
+            "bbox": [0.18, 0.10, 0.64, 0.58],
+            "fill": "#f2f2f2",
+            "stroke": "#7f7f7f",
+            "stroke_width": 0.055,
+        }
+        connector = {
+            "kind": "VerticalRule",
+            "id": "bottom_circle_connector",
+            "bbox": [0.46, 0.56 if occluded_vertical_circle_connector_hint else 0.66, 0.08, 0.42 if occluded_vertical_circle_connector_hint else 0.32],
+            "target_ref": "described_circle",
+            "relation": "bottom_of",
+            "stroke": "#666666",
+            "stroke_width": 0.055,
+        }
+        if occluded_vertical_circle_connector_hint:
+            connector["continues_behind_ref"] = "described_circle"
+            connector["z_order"] = "behind_target"
+            elements.extend([connector, circle])
+        else:
+            elements.extend([circle, connector])
         return elements
 
     if pump_symbol_hint:
