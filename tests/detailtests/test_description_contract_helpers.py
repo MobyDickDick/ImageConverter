@@ -310,6 +310,10 @@ def test_description_parser_attaches_geometry_ir_for_ac0233_180_rotated_m_top_ke
         "Rotated180TopKelleThreeWayValveGlyph"
     ]
     assert params["geometry_ir"][0]["label"] == "M"
+    assert params["geometry_ir"][0]["transform"] == {
+        "schema_version": "generic_geometry_transform_v1",
+        "rotation_deg": 180,
+    }
 
 
 def test_description_parser_attaches_geometry_ir_for_ac0231_m_top_kelle_three_way_valve() -> None:
@@ -322,6 +326,37 @@ def test_description_parser_attaches_geometry_ir_for_ac0231_m_top_kelle_three_wa
     assert params["contract_status"] == "ok"
     assert [element["kind"] for element in params["geometry_ir"]] == ["TopKelleThreeWayValveGlyph"]
     assert params["geometry_ir"][0]["label"] == "M"
+    assert params["geometry_ir"][0]["primitive_decomposition"]["primitives"] == [
+        {"role": "valve_body", "kind": "PolygonPath", "count": 3},
+        {"role": "handle_circle", "kind": "CircleBackground"},
+        {"role": "handle_connector", "kind": "LineSegment"},
+        {"role": "handle_label", "kind": "TextGlyph", "text": "M"},
+    ]
+
+
+def test_description_parser_decomposes_neutral_rotated_kelle_valve_without_catalog_id() -> None:
+    _desc, params = _parse(
+        '3-Weg Ventil mit Kelle oben, Kreis-Griff, drei Dreiecke als Ventilkörper, '
+        'senkrechtem Griff und "M" im Kreis. Geometrische Variante: 180° gedreht.'
+    )
+
+    assert params["contract_status"] == "ok"
+    element = params["geometry_ir"][0]
+    assert element["kind"] == "Rotated180TopKelleThreeWayValveGlyph"
+    assert element["transform"] == {
+        "schema_version": "generic_geometry_transform_v1",
+        "rotation_deg": 180,
+    }
+    assert element["primitive_decomposition"] == {
+        "schema_version": "kelle_valve_primitive_decomposition_v1",
+        "orientation": "bottom",
+        "primitives": [
+            {"role": "valve_body", "kind": "PolygonPath", "count": 3},
+            {"role": "handle_circle", "kind": "CircleBackground"},
+            {"role": "handle_connector", "kind": "LineSegment"},
+            {"role": "handle_label", "kind": "TextGlyph", "text": "M"},
+        ],
+    }
 
 
 def test_description_parser_attaches_geometry_ir_for_ac0221_top_kelle_three_way_valve() -> None:
