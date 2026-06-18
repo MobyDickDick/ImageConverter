@@ -3811,3 +3811,12 @@ endet. Die Detailableitung und Akzeptanzkriterien stehen in
 - **Ratchet:** `tools/check_no_new_image_id_hardcoding.py` bleibt grün und meldet weiterhin `368 legacy occurrences remain`.
 - **Blocker:** Kein neuer technischer Blocker; teilweise verdeckte Anschlüsse und connector-freie Negativfälle bleiben als nächster IDO-12-Ausbau offen.
 - **Nächster sinnvoller Schritt:** IDO-12 um Z-Order-/Überdeckungsfälle und connector-freie Kreis-Negativtests erweitern.
+
+### Fortschritt vs. Blocker (Session 2026-06-18, IDO-12 Z-Order und Negativfälle Run QL)
+
+- **Fortschritt:** IDO-12 unterscheidet nun auch teilweise verdeckte obere und untere Kreis-Connectoren. Der Beschreibungspfad erzeugt für diese Fälle `VerticalRule`-Elemente mit `z_order=behind_target` und einer maschinenlesbaren `continues_behind`-Relation zum Kreis.
+- **Negativfall:** Connector-freie Kreisformulierungen wie `ohne Anschluss` werden als reiner `CircleBackground` mit `connector_policy=forbid` modelliert und erzeugen keine implizite Vertikallinie.
+- **Sicherung:** Neue Description-Contract-Tests decken oberen verdeckten Anschluss, unteren verdeckten Anschluss und connector-freien Kreis ab; der Bild-ID-Ratchet bleibt bei `368 legacy occurrences remain` grün.
+- **Blocker:** Kein neuer technischer Blocker; die spätere Kopplung an echte Perception-/Bildgeometrie-Evidenz bleibt ein fachlicher Folgeausbau, sobald neue Rasterfälle dafür qualifiziert sind.
+- **Nächster sinnvoller Schritt:** IDO-13 starten und Kreis-/Text-Badges für Labelinhalt, Textlage und Kreisgeometrie ohne Bild-ID-Dispatch generalisieren.
+

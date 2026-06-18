@@ -196,8 +196,9 @@ Für jedes Arbeitspaket gelten zusätzlich zu den jeweiligen Akzeptanzkriterien:
     `VerticalRule` mit `top_of`-/`bottom_of`-Relation. Neutrale Rename-Tests
     sichern Dateinamen-Invarianz; Semantik-Heuristiktests leiten obere und
     untere Connectoren aus Relationsformulierungen statt aus neuen
-    Familien-ID-Regeln ab. Überdeckte Anschlüsse und connector-freie
-    Negativfälle bleiben als nächster Ausbau offen.
+    Familien-ID-Regeln ab. Run QL ergänzt teilverdeckte obere/untere Anschlüsse
+    mit `z_order=behind_target` und `continues_behind`-Relation sowie
+    connector-freie Kreis-Negativtests mit `connector_policy=forbid`.
 
 - [ ] **IDO-13 – Kreis-/Text-Badges generalisieren**
   - Aufgabe: Labelinhalt, Textlage und Kreisgeometrie aus Beschreibung,
