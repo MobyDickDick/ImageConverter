@@ -453,8 +453,18 @@ def _fit_symbol_element_by_element(
     refinement_steps: list[tuple[str, tuple[float | str, ...]]] = [
         ("border_thickness", (0.8, 1.0, 1.2, 1.4, 1.8)),
         ("gradient_center", (40.0, 45.0, 50.0, 55.0, 60.0)),
-        ("diag1_width", (0.8, 1.0, 1.4, 1.8, 2.2, 2.8) if float(current["diag1_width"]) > 0 else (0.0,)),
-        ("diag2_width", (0.8, 1.0, 1.4, 1.8, 2.2, 2.8) if float(current["diag2_width"]) > 0 else (0.0,)),
+        (
+            "diag1_width",
+            (0.8, 1.0, 1.4, 1.8, 2.2, 2.8, 3.2, 3.6, 4.0)
+            if float(current["diag1_width"]) > 0
+            else (0.0,),
+        ),
+        (
+            "diag2_width",
+            (0.8, 1.0, 1.4, 1.8, 2.2, 2.8, 3.2, 3.6, 4.0)
+            if float(current["diag2_width"]) > 0
+            else (0.0,),
+        ),
         (
             "diagonal_inset_ratio",
             _candidate_window(float(current["diagonal_inset_ratio"]), (-0.08, -0.04, 0.0, 0.04, 0.08), minimum=0.0, maximum=0.40, include_limits=False)
