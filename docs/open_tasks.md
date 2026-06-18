@@ -3802,3 +3802,12 @@ endet. Die Detailableitung und Akzeptanzkriterien stehen in
 | 19 | 0.67s | `call` | `tests/test_review_conversion_quality.py::test_ac0732_1_m_committed_svg_preserves_right_facing_p_kelle_quality` |
 | 20 | 0.67s | `call` | `tests/test_review_conversion_quality.py::test_ac0701_1_s_committed_svg_preserves_upright_square_kelle_quality` |
 <!-- blocker-inventory:end -->
+
+
+### Fortschritt vs. Blocker (Session 2026-06-18, IDO-12 Vertikale Kreis-Connectoren Run QK)
+
+- **Fortschritt:** Der IDO-12-Einstieg ist umgesetzt: Der Beschreibungspfad erzeugt für obere und untere Kreis-Connectoren generische `VerticalRule`-Geometry-IR mit `top_of`-/`bottom_of`-Relation statt neuer Katalog-ID-Regeln.
+- **Sicherung:** Neutrale Rename-Tests und Semantik-Heuristiktests prüfen obere/untere Relationsformulierungen einschließlich inverser Texte wie „Kreis über der Linie“.
+- **Ratchet:** `tools/check_no_new_image_id_hardcoding.py` bleibt grün und meldet weiterhin `368 legacy occurrences remain`.
+- **Blocker:** Kein neuer technischer Blocker; teilweise verdeckte Anschlüsse und connector-freie Negativfälle bleiben als nächster IDO-12-Ausbau offen.
+- **Nächster sinnvoller Schritt:** IDO-12 um Z-Order-/Überdeckungsfälle und connector-freie Kreis-Negativtests erweitern.
