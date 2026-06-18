@@ -661,9 +661,14 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
             circle_bbox = [0.16, 0.16, 0.68, 0.68]
         elif _has_any(desc, ("großer kreis", "grosser kreis", "großes badge", "grosses badge")):
             circle_bbox = [0.035, 0.035, 0.93, 0.93]
+        # Preserve the canonical IDs used by the established connector-free rH
+        # badge path while still routing through the generic badge parser.
+        canonical_rh_badge = connector_free_hint and circle_badge_label == "rH"
+        circle_id = "rh_badge_circle" if canonical_rh_badge else "described_circle"
+        text_id = "rh_badge_text" if canonical_rh_badge else "circle_badge_text"
         circle = {
             "kind": "CircleBackground",
-            "id": "described_circle",
+            "id": circle_id,
             "bbox": circle_bbox,
             "fill": "#f2f2f2",
             "stroke": "#7f7f7f",
@@ -678,10 +683,10 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
             elements.append(
                 {
                     "kind": "TextGlyph",
-                    "id": "circle_badge_text",
+                    "id": text_id,
                     "text": circle_badge_label,
-                    "bbox_ref": "described_circle",
-                    "target_ref": "described_circle",
+                    "bbox_ref": circle_id,
+                    "target_ref": circle_id,
                     "relation": "centered_in",
                     "text_position": "center",
                     "fill": "#666666",
