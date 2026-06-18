@@ -175,7 +175,11 @@ Für jedes Arbeitspaket gelten zusätzlich zu den jeweiligen Akzeptanzkriterien:
     rechten Relationsformulierungen im katalogfreien Beschreibungspfad: Texte
     wie „Linie rechts vom Kreis“, „rechter Anschluss“ und „Kreis links von der
     Linie“ erzeugen `CircleBackground` + `HorizontalRule` mit `right_of`-Relation
-    und werden durch neutrale Rename-Tests abgesichert.
+    und werden durch neutrale Rename-Tests abgesichert. Run QI entfernt die
+    rF-Rechtsconnector-Folgepunkte aus der verbliebenen Familien-ID-Liste für
+    rechte Horizontalarme; `AC0844`/`AC0864` erhalten ihren rechten Anschluss nun
+    aus der Beschreibung-Heuristik, und der Ratchet sinkt auf 372
+    Runtime-ID-Vorkommen.
 
 - [ ] **IDO-12 – Vertikale Kreis-Connectoren generalisieren**
   - Aufgabe: Obere und untere Anschlüsse anhand von Bildgeometrie,

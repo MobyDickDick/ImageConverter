@@ -64,6 +64,14 @@ def test_apply_semantic_badge_family_rules_supports_ac0844_right_connector() -> 
     assert params["mode"] == "semantic_badge"
     assert params["label"] == "rF"
     assert "SEMANTIC: waagrechter Strich rechts vom Kreis" in params["elements"]
+    assert (
+        "SEMANTIC: waagrechter Strich rechts vom Kreis"
+        not in params["semantic_sources"]["family_rule"]
+    )
+    assert (
+        "SEMANTIC: waagrechter Strich rechts vom Kreis"
+        in params["semantic_sources"]["description_heuristic"]
+    )
     assert "SEMANTIC: Kreis + Buchstabe rF" in params["elements"]
 
 
