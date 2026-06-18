@@ -192,7 +192,7 @@ def apply_semantic_badge_family_rules(
         heuristic_elements.append("SEMANTIC: Kreis + Buchstabe")
         params["label"] = "M" if base_upper == "AR0100" else "T"
 
-    if base_upper in {"AC0810", "AC0814", "AC0834", "AC0839", "AC0844", "AC0864"}:
+    if base_upper in {"AC0810", "AC0814", "AC0834", "AC0839"}:
         family_elements.append("SEMANTIC: waagrechter Strich rechts vom Kreis")
     if base_upper in {"AC0811", "AC0881", "AC0831", "AC0836", "AC0861"}:
         family_elements.append("SEMANTIC: senkrechter Strich hinter dem Kreis")
