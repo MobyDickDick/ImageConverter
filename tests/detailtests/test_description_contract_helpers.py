@@ -450,3 +450,43 @@ def test_left_circle_connector_constraints_accept_inverse_relation_text() -> Non
         "source": "description",
         "confidence": 0.75,
     } in params["description_constraints"]["relations"]
+
+
+def test_description_parser_generalizes_circle_badge_label_content_and_centering() -> None:
+    _desc, params = _parse('Grauer Kreis; zentrierter VOC-Glyph im Kreis, ohne Anschlusslinie.')
+
+    assert [element["kind"] for element in params["geometry_ir"]] == [
+        "CircleBackground",
+        "TextGlyph",
+    ]
+    circle, text = params["geometry_ir"]
+    assert circle["badge_role"] == "circle_text_badge"
+    assert circle["connector_policy"] == "forbid"
+    assert text["text"] == "VOC"
+    assert text["text_position"] == "center"
+    assert text["relation"] == "centered_in"
+    assert {
+        "type": "centered_in",
+        "subject": "description_element_2",
+        "object": "described_circle",
+        "source": "description",
+        "confidence": 0.75,
+    } in params["description_constraints"]["relations"]
+
+
+def test_description_parser_generalizes_co2_rf_and_empty_circle_badges() -> None:
+    examples = [
+        ('Kleiner Kreis mit Text "CO2" zentriert im Kreis.', "CO₂", [0.16, 0.16, 0.68, 0.68]),
+        ("Großer Kreis, Label rF in dem Kreis.", "rF", [0.035, 0.035, 0.93, 0.93]),
+    ]
+
+    for description, label, bbox in examples:
+        _desc, params = _parse(description)
+        assert params["geometry_ir"][0]["bbox"] == bbox
+        assert params["geometry_ir"][1]["text"] == label
+        assert params["geometry_ir"][1]["target_ref"] == "described_circle"
+
+    _desc, params = _parse("Grauer Kreis ohne Buchstabe und ohne Anschluss.")
+    assert [element["kind"] for element in params["geometry_ir"]] == ["CircleBackground"]
+    assert params["geometry_ir"][0]["connector_policy"] == "forbid"
+    assert params["description_constraints"]["relations"] == []
