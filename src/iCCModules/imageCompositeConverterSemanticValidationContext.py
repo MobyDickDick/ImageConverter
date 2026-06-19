@@ -14,7 +14,7 @@ def resolveSemanticValidationDebugDirImpl(
         debug_dir = os.path.join(debug_element_diff_dir, os.path.splitext(filename)[0])
         os.makedirs(debug_dir, exist_ok=True)
         return debug_dir
-    if debug_ac0811_dir and str(base_name).upper() == "AC0811":
+    if debug_ac0811_dir:
         debug_dir = os.path.join(debug_ac0811_dir, os.path.splitext(filename)[0])
         os.makedirs(debug_dir, exist_ok=True)
         return debug_dir

@@ -392,8 +392,6 @@ def _emitVariantDebugDump(
 ) -> None:
     if not debug_root_dir:
         return
-    if str(base_name).upper() != "AC0811":
-        return
     variant_name = str(variant).upper()
     debug_dir = os.path.join(debug_root_dir, variant_name)
     os.makedirs(debug_dir, exist_ok=True)
