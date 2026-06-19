@@ -88,3 +88,41 @@ def test_write_quality_config_preserves_early_abort_tuning(tmp_path: Path) -> No
         "probe_iterations": 5,
         "threshold_multiplier": 12.0,
     }
+
+
+def test_global_converter_config_defaults_are_schema_valid() -> None:
+    payload = quality_config_helpers.defaultGlobalConverterConfigV1Impl()
+
+    validated = quality_config_helpers.validateGlobalConverterConfigV1Impl(payload)
+
+    assert validated["valid"] is True
+    assert payload["schema_version"] == "image_converter_global_config_v1"
+    assert payload["primitive_thresholds"]["min_circle_confidence"] == 0.55
+    assert payload["budgets"]["validation_time_budget_sec"] == 90.0
+
+
+def test_global_converter_config_rejects_unknown_and_image_scoped_keys() -> None:
+    valid = quality_config_helpers.defaultGlobalConverterConfigV1Impl()
+    with_unknown = {**valid, "unexpected": True}
+    with_image_scope = {**valid, "image_overrides": {"AC0001": {}}}
+
+    assert quality_config_helpers.validateGlobalConverterConfigV1Impl(with_unknown)["valid"] is False
+    rejected = quality_config_helpers.validateGlobalConverterConfigV1Impl(with_image_scope)
+
+    assert rejected["valid"] is False
+    assert any("image_overrides" in error for error in rejected["errors"])
+
+
+def test_load_global_converter_config_falls_back_to_defaults(tmp_path: Path) -> None:
+    config_path = tmp_path / "global_converter_config_v1.json"
+    loaded_missing = quality_config_helpers.loadGlobalConverterConfigV1Impl(
+        str(tmp_path), global_config_path_fn=lambda _root: str(config_path)
+    )
+    assert loaded_missing["source"] == "defaults"
+
+    config_path.write_text('{"schema_version":"image_converter_global_config_v1","unknown":1}', encoding="utf-8")
+    loaded_invalid = quality_config_helpers.loadGlobalConverterConfigV1Impl(
+        str(tmp_path), global_config_path_fn=lambda _root: str(config_path)
+    )
+    assert loaded_invalid["source"] == "defaults"
+    assert loaded_invalid["validation"]["valid"] is False

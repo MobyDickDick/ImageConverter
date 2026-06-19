@@ -247,6 +247,11 @@ Für jedes Arbeitspaket gelten zusätzlich zu den jeweiligen Akzeptanzkriterien:
   - Akzeptanz: Schema-Validierung lehnt unbekannte Schlüssel und alle
     bildbezogenen Bereiche ab; Standardwerte reproduzieren das Verhalten ohne
     lokale Konfigurationsdatei.
+  - Fortschritt: Run QR führt `global_converter_config_v1` als katalogfreie
+    globale Konfiguration ein. Schema und versionierte Default-Datei enthalten
+    ausschließlich Primitive-Schwellen, Kostenfunktionsgewichte, Budgets und
+    Unsicherheitsgrenzen; Loader-/Validator-Tests sichern Defaults, Fallback
+    sowie die Ablehnung unbekannter und bildbezogener Konfigurationsbereiche.
 
 - [ ] **IDO-17 – Runtime-Code von Katalog-IDs befreien**
   - Aufgabe: Nach Abschluss der vertikalen Migrationspakete verbleibende

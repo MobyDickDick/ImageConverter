@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/image-converter/global_converter_config_v1.schema.json",
+  "title": "ImageConverter global converter config v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "primitive_thresholds",
+    "cost_function_weights",
+    "budgets",
+    "uncertainty_thresholds"
+  ],
+  "properties": {
+    "schema_version": { "const": "image_converter_global_config_v1" },
+    "primitive_thresholds": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "min_circle_confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+        "min_line_confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+        "min_text_glyph_confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+        "min_color_patch_confidence": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    },
+    "cost_function_weights": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "pixel_error": { "type": "number", "minimum": 0 },
+        "edge_alignment": { "type": "number", "minimum": 0 },
+        "structure_match": { "type": "number", "minimum": 0 },
+        "semantic_match": { "type": "number", "minimum": 0 },
+        "complexity_penalty": { "type": "number", "minimum": 0 }
+      }
+    },
+    "budgets": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "validation_time_budget_sec": { "type": "number", "minimum": 0 },
+        "global_search_rounds": { "type": "integer", "minimum": 1 },
+        "max_svg_elements": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "uncertainty_thresholds": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "review_below_confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+        "contradiction_cost": { "type": "number", "minimum": 0, "maximum": 1 },
+        "ambiguous_delta": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    }
+  }
+}
