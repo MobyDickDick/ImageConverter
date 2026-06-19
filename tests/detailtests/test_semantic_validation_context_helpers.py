@@ -16,17 +16,17 @@ def test_resolve_semantic_validation_debug_dir_impl_prefers_element_debug_dir(tm
     assert (tmp_path / "elem" / "AC0811_S").is_dir()
 
 
-def test_resolve_semantic_validation_debug_dir_impl_uses_ac0811_fallback(tmp_path) -> None:
+def test_resolve_semantic_validation_debug_dir_impl_uses_generic_debug_fallback(tmp_path) -> None:
     debug_dir = helpers.resolveSemanticValidationDebugDirImpl(
         debug_element_diff_dir=None,
-        debug_ac0811_dir=str(tmp_path / "ac0811"),
-        filename="ac0811_m.jpg",
-        base_name="ac0811",
+        debug_ac0811_dir=str(tmp_path / "semantic-debug"),
+        filename="neutral_symbol_m.jpg",
+        base_name="neutral_symbol",
     )
 
     assert debug_dir is not None
-    assert debug_dir.endswith("ac0811/ac0811_m")
-    assert (tmp_path / "ac0811" / "ac0811_m").is_dir()
+    assert debug_dir.endswith("semantic-debug/neutral_symbol_m")
+    assert (tmp_path / "semantic-debug" / "neutral_symbol_m").is_dir()
 
 
 def test_build_non_composite_gradient_stripe_validation_log_lines_impl_marks_override() -> None:
