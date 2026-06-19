@@ -291,7 +291,11 @@ Für jedes Arbeitspaket gelten zusätzlich zu den jeweiligen Akzeptanzkriterien:
     vertikale VOC-Connector-Badges durch messbare Geometrie (`arm_enabled`,
     vertikale Arm-Koordinaten, Textmodus `voc` und Template-Radius). Ein
     neutraler `AC08XX_VERTICAL_VOC`-Test sichert die katalogfreie Ring-Floor-
-    Auswahl; der Ratchet sinkt auf 324 Runtime-ID-Vorkommen.
+    Auswahl; der Ratchet sinkt auf 324 Runtime-ID-Vorkommen. Run QZ ersetzt
+    auch die verbliebene vertikale VOC-CY-Guardrail in der Elementvalidierung
+    durch messbare Parameter (`text_mode=voc`, vertikale Arm-Geometrie,
+    Template-Kreis-CY) und entfernt die katalogspezifische Logmeldung; der
+    Ratchet sinkt auf 322 Runtime-ID-Vorkommen.
 
 - [ ] **IDO-18 – Legacy-Baseline und Ratchet entfernen**
   - Voraussetzung: IDO-17 ist abgeschlossen.
