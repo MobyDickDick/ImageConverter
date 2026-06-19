@@ -255,7 +255,7 @@ def finalizeAc08StyleImpl(
                 p.setdefault("voc_font_scale_min", 0.60)
                 p.pop("voc_font_scale_max", None)
     p = configure_ac08_small_variant_mode_fn(name, p)
-    preserve_plain_ring_geometry = symbol_name == "AC0800"
+    preserve_plain_ring_geometry = bool(p.get("preserve_plain_ring_geometry", False))
     preserve_centered_t_badge_geometry = (
         symbol_name == "AC0870"
         and bool(p.get("ac08_small_variant_mode", False))
@@ -339,13 +339,11 @@ def finalizeAc08StyleImpl(
         if canvas_h <= 0.0:
             canvas_h = max(float(cy * 2.0), float(p.get("template_circle_radius", p.get("r", 1.0))) * 2.0)
 
-        # AC0800 is the plain ring family. Older satisfactory baselines use a
-        # ring that nearly touches the canvas edge and no explicit background
-        # rectangle. Keeping the image-fitted, smaller Hough radius (or a white
-        # background rect) later gets parsed as connector geometry during
-        # harmonization and visibly degrades the reconversion. Re-anchor this
-        # family to the legacy edge-ring geometry before optimization output is
-        # rendered.
+        # Plain ring badges use a ring that nearly touches the canvas edge and
+        # no explicit background rectangle. Keeping an image-fitted, smaller
+        # Hough radius (or a white background rect) later gets parsed as connector
+        # geometry during harmonization and visibly degrades reconversion.
+        # Re-anchor these badges to edge-ring geometry before rendering.
         legacy_stroke_margin = max(1.0, min(canvas_w, canvas_h) * 0.05)
         legacy_ring_r = max(1.0, min(cx, canvas_w - cx, cy, canvas_h - cy) - legacy_stroke_margin)
         p["min_circle_radius"] = float(legacy_ring_r)
@@ -356,7 +354,7 @@ def finalizeAc08StyleImpl(
         p["stroke_gray"] = 127
         p["draw_text"] = False
         p["preserve_exact_circle_radius"] = True
-        p["plain_ac0800_ring"] = True
+        p["plain_ring_geometry"] = True
         p.pop("background_fill", None)
         p.pop("stem_enabled", None)
         p.pop("arm_enabled", None)

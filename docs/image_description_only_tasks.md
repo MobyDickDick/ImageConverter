@@ -270,7 +270,11 @@ Für jedes Arbeitspaket gelten zusätzlich zu den jeweiligen Akzeptanzkriterien:
     `ac08_small_variant_mode`, aktivierter Kreisgeometrie und einer endlichen
     erwarteten Kreis-Schätzung. Ein neutraler synthetischer Small-Ring-Test
     sichert den katalognamenfreien Pfad; der Ratchet sinkt weiter auf 335
-    Runtime-ID-Vorkommen.
+    Runtime-ID-Vorkommen. Run QU entkoppelt die Plain-Ring-Erhaltung im
+    Finalisierungs- und SVG-Pfad von `AC0800`-Namensguards: Der Pfad hängt nun
+    an `preserve_plain_ring_geometry`/`plain_ring_geometry`, ein neutraler
+    `AC08XX_RING`-Test sichert die parameterbasierte Auswahl, und der Ratchet
+    sinkt auf 331 Runtime-ID-Vorkommen.
 
 - [ ] **IDO-18 – Legacy-Baseline und Ratchet entfernen**
   - Voraussetzung: IDO-17 ist abgeschlossen.

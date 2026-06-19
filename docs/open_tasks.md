@@ -3835,3 +3835,12 @@ endet. Die Detailableitung und Akzeptanzkriterien stehen in
 - **Sicherung:** Neue Description-Contract-Tests decken Glyph-Evidenz sowie obere Textlage ab; der Bild-ID-Ratchet bleibt bei `368 legacy occurrences remain` grün.
 - **Blocker:** Kein neuer technischer Blocker; echte Raster-/Perception-Glyph-Detektion und Render-Kalibrierung bleiben Folgeausbau.
 - **Nächster sinnvoller Schritt:** IDO-14 starten und die generische Badge-IR an Perception-Glyph-/OCR-Signale sowie Render-Parameter-Kalibrierung koppeln.
+
+
+### Fortschritt vs. Blocker (Session 2026-06-19, IDO-17 Plain-Ring-Entkopplung Run QU)
+
+- **Fortschritt:** Die Plain-Ring-Erhaltung im AC08-Finalisierungs- und SVG-Pfad nutzt nun `preserve_plain_ring_geometry`/`plain_ring_geometry` statt `AC0800`-Namensguards.
+- **Sicherung:** Ein neutraler `AC08XX_RING`-Test prüft Radius-/Center-Locks und Edge-Ring-Reankerung ohne konkrete Katalog-ID; die bestehende AC0800-Regression bleibt erhalten.
+- **Ratchet:** `tools/check_no_new_image_id_hardcoding.py` meldet `331 legacy occurrences remain` nach aktualisierter Baseline.
+- **Blocker:** IDO-17 ist noch nicht abgeschlossen; weitere Runtime-Katalog-IDs bleiben in anderen Spezialpfaden.
+- **Nächster sinnvoller Schritt:** IDO-17 fortsetzen und weitere ID-spezifische Runtime-Guards in struktur-/beschreibungsgesteuerte Parameter überführen.
