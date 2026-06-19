@@ -1,40 +1,43 @@
-# Nächstes Arbeitspaket – IDO-17 Generische Semantic-Debug-Ausgabe Run QS (2026-06-19)
+# Nächstes Arbeitspaket – IDO-17 Adaptive-Unlock-Entkopplung Run QS (2026-06-19)
 
-Run QS setzt nach IDO-16 das nächste dokumentierte Arbeitspaket aus
-`docs/image_description_only_tasks.md` fort: IDO-17 entfernt weitere
-Runtime-Katalog-ID-Kopplung aus `src/`, ohne neue Bild-/Katalog-ID in der
-Runtime einzuführen.
+## Ziel
+
+Run QS startet nach IDO-16 das nächste dokumentierte Arbeitspaket aus
+`docs/image_description_only_tasks.md`: IDO-17 reduziert verbleibende Runtime-
+Katalog-IDs in `src/`. Als erster kleiner, prüfbarer Schritt wird die AC08-
+Adaptive-Unlock-Auswahl von expliziten Familienlisten auf messbare Badge-
+Merkmale umgestellt.
 
 ## Umsetzung
 
-- Die Conversion-Debug-Ausgabe unter `debug_ac0811_dir` ist nicht mehr auf die
-  konkrete AC0811-Basis eingeschränkt. Wenn ein Debug-Verzeichnis gesetzt ist,
-  schreibt `_emitVariantDebugDump(...)` den maschinenlesbaren Dump nun für jede
-  Variante unter dem neutralen Variantennamen.
-- Der Semantic-Validation-Debug-Fallback ist ebenfalls katalogfrei: Ein
-  gesetztes Debug-Verzeichnis erzeugt den Varianten-Unterordner unabhängig vom
-  Dateistamm beziehungsweise der Bild-ID.
-- Die zugehörigen Regressionstests verwenden neutrale Dateinamen und sichern,
-  dass der Debug-Fallback sowie der Conversion-Dump ohne AC0811-Sonderfall
-  funktionieren.
+- `imageCompositeConverterSemanticAdaptiveLocks` prüft keine fest codierte
+  Familienliste mehr, sondern aktiviert Phase 2 nur noch über den generischen
+  Parameter `enable_adaptive_unlock`.
+- Die Mindestfehlerschwelle kommt nun aus `adaptive_unlock_min_error` statt aus
+  einer nach Katalogfamilien indizierten Map.
+- `finalizeAc08StyleImpl(...)` leitet diese Parameter aus Textmodus und
+  vorhandener Connector-Geometrie ab: VOC-Badges mit vertikalem Connector-Setup
+  erhalten die bisherige höhere Schwelle; CO₂-Badges mit horizontalem Arm ohne
+  Stem erhalten die kleinere Schwelle.
+- Ein neuer neutraler Test mit katalogfremdem Namen `AC08XX_NEUTRAL` sichert ab,
+  dass die Adaptive-Unlock-Eignung aus der Geometry-/Text-IR entsteht und nicht
+  aus einer konkreten Bild-ID.
+- Die Legacy-Ratchet-Baseline wurde nach der Entfernung der Adaptive-Unlock-
+  Familienliste von 367 auf 362 Runtime-ID-Vorkommen abgesenkt.
 
-## Qualität / Ratchet
+## Laufzeit- und Akzeptanznachweis
 
-- `tools/check_no_new_image_id_hardcoding.py --update` verkleinert die Legacy-
-  Baseline um die entfernten Runtime-ID-Vorkommen aus Conversion-Debug,
-  Semantic-Validation-Debug und dem bereits katalogfrei gewordenen
-  Optimierungsprofil-Alias.
-- Der Ratchet meldet anschließend `365 legacy occurrences remain` und bleibt
-  grün.
+```bash
+python -m compileall -q src tests/test_image_composite_converter.py && python tools/check_no_new_image_id_hardcoding.py && pytest -q tests/test_image_composite_converter.py::test_finalize_ac08_style_derives_adaptive_unlock_from_geometry_not_catalog_id tests/test_image_composite_converter.py::test_activate_ac08_adaptive_locks_supports_ac0882_family tests/test_image_composite_converter.py::test_validate_badge_by_elements_runs_ac0838_phase2_unlock_and_relock
+```
 
-## Abschluss
+Ergebnis: Exit `0`; der Ratchet meldet `362 legacy occurrences remain`, und der
+gezielte Adaptive-Unlock-Testblock läuft mit `3 passed`.
 
-- **Fortschritt:** IDO-17 ist weiter reduziert: Debug-Instrumentierung für
-  Semantic-/Conversion-Dumps entscheidet nicht mehr über `AC0811`, sondern über
-  das Vorhandensein eines explizit gesetzten Debug-Verzeichnisses.
-- **Blocker:** Kein neuer technischer Blocker; die verbleibenden Runtime-IDs
-  liegen weiterhin in älteren Qualitäts-, Reporting- und Semantikpfaden und
-  müssen paketweise in generische Merkmale überführt werden.
-- **Nächster sinnvoller Schritt:** IDO-17 fortsetzen und den nächsten kleinen
-  Runtime-ID-Cluster aus `src/` in einen parameter- oder metrikbasierten Pfad
-  verschieben.
+## 5-Zeilen-Log
+
+- **Getestet:** Compileall, Hardcoding-Ratchet und gezielte Adaptive-Unlock-Regressionen.
+- **Ergebnis:** Exit `0`; `3 passed`, Ratchet jetzt `362`.
+- **Blocker:** IDO-17 ist noch nicht abgeschlossen; weitere Runtime-Katalog-IDs bleiben in anderen Spezialpfaden.
+- **Dokumentation:** IDO-17 dokumentiert den ersten Baseline-Abbau und die geometriebasierte Adaptive-Unlock-Auswahl.
+- **Nächster Schritt:** IDO-17 fortsetzen und die nächsten kleinen ID-spezifischen Runtime-Guards in struktur-/beschreibungsgesteuerte Parameter überführen.

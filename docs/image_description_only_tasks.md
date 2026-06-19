@@ -259,10 +259,12 @@ Für jedes Arbeitspaket gelten zusätzlich zu den jeweiligen Akzeptanzkriterien:
     der Runtime verschieben.
   - Akzeptanz: `tools/check_no_new_image_id_hardcoding.py` meldet für `src/`
     exakt `0` Vorkommen.
-  - Fortschritt: Run QS entkoppelt die Semantic-/Conversion-Debug-Ausgabe vom
-    AC0811-Dateistamm. Debug-Dumps werden nun generisch über ein gesetztes
-    Debug-Verzeichnis aktiviert; neutrale Regressionstests sichern den Pfad,
-    und der Ratchet sinkt auf 365 Runtime-ID-Vorkommen.
+  - Fortschritt: Run QS entkoppelt die AC08-Adaptive-Unlock-Auswahl von
+    expliziten Familienlisten. Die Aktivierung läuft jetzt über generische
+    Parameter (`enable_adaptive_unlock`, `adaptive_unlock_min_error`), die aus
+    Text-/Connector-Merkmalen der finalisierten Badge-IR abgeleitet werden; ein
+    neutraler Rename-/Katalog-fremder Test sichert den geometriebasierten Pfad.
+    Der Ratchet sinkt von 367 auf 362 Runtime-ID-Vorkommen.
 
 - [ ] **IDO-18 – Legacy-Baseline und Ratchet entfernen**
   - Voraussetzung: IDO-17 ist abgeschlossen.

@@ -360,6 +360,16 @@ def finalizeAc08StyleImpl(
         p.pop("background_fill", None)
         p.pop("stem_enabled", None)
         p.pop("arm_enabled", None)
+    if bool(p.get("circle_enabled", True)) and bool(p.get("draw_text", False)):
+        text_mode = str(p.get("text_mode", "")).lower()
+        has_stem = bool(p.get("stem_enabled", False))
+        has_arm = bool(p.get("arm_enabled", False))
+        if text_mode == "voc" and has_arm and has_stem:
+            p["enable_adaptive_unlock"] = True
+            p["adaptive_unlock_min_error"] = 18.0
+        elif text_mode == "co2" and has_arm and not has_stem:
+            p["enable_adaptive_unlock"] = True
+            p["adaptive_unlock_min_error"] = 16.0
     if p.get("draw_text", True) and "text_gray" in p:
         p["text_gray"] = int(p.get("stroke_gray", light_circle_stroke_gray))
     return p
