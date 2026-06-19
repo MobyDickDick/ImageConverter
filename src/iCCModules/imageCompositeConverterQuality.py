@@ -11,9 +11,14 @@ def semanticQualityFlagsImpl(
     validation_logs: list[str],
     get_base_name_fn: Callable[[str], str],
 ) -> list[str]:
-    """Derive non-fatal quality markers from semantic element-validation logs."""
-    if get_base_name_fn(base_name).upper() != "AC0811":
-        return []
+    """Derive non-fatal quality markers from semantic element-validation logs.
+
+    The marker is based on element-level validation errors only.  Older builds
+    limited this review hint to one catalog family; applying the same threshold
+    to every semantic badge keeps the quality annotation independent from image
+    IDs while preserving the existing numeric policy.
+    """
+    _ = get_base_name_fn(base_name)
 
     error_pattern = re.compile(r"^(circle|stem|arm|text): Fehler=([0-9]+(?:\.[0-9]+)?)$")
     element_errors: dict[str, float] = {}
