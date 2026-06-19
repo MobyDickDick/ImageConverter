@@ -54,6 +54,7 @@ def makeAc08BadgeParamsImpl(
             "fill_gray": 220,
             "stroke_gray": 152,
             "draw_text": False,
+            "preserve_plain_ring_geometry": True,
         }
         if img is None:
             return finalize_ac08_style_fn(name, defaults)

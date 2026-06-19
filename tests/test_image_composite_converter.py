@@ -1515,7 +1515,35 @@ def test_finalize_ac0800_preserves_plain_ring_geometry_bounds() -> None:
     assert params["lock_circle_cy"] is True
     assert float(params["min_circle_radius"]) == pytest.approx(float(params["r"]))
     assert float(params["max_circle_radius"]) == pytest.approx(float(params["r"]))
-    assert params["plain_ac0800_ring"] is True
+    assert params["plain_ring_geometry"] is True
+
+
+def test_finalize_plain_ring_geometry_uses_parameter_not_catalog_id() -> None:
+    """Plain-ring preservation should be driven by geometry metadata, not a catalog family."""
+    params = Action._finalize_ac08_style(
+        "AC08XX_RING",
+        {
+            "width": 30,
+            "height": 30,
+            "circle_enabled": True,
+            "draw_text": False,
+            "cx": 14.0,
+            "cy": 14.0,
+            "r": 9.0,
+            "template_circle_cx": 15.0,
+            "template_circle_cy": 15.0,
+            "template_circle_radius": 10.8,
+            "stroke_circle": 1.5,
+            "fill_gray": 220,
+            "stroke_gray": 152,
+            "preserve_plain_ring_geometry": True,
+        },
+    )
+
+    assert params["plain_ring_geometry"] is True
+    assert params["cx"] == pytest.approx(15.0)
+    assert params["cy"] == pytest.approx(15.0)
+    assert float(params["min_circle_radius"]) == pytest.approx(float(params["r"]))
 
 
 def test_finalize_ac0800_small_variant_keeps_template_radius_floor() -> None:
