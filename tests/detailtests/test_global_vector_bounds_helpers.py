@@ -43,3 +43,25 @@ def test_global_parameter_vector_bounds_unlocks_when_ac0811_unrestricted_flag_se
     assert bounds["stem_x"][2] is False
     assert bounds["text_scale"][2] is False
     assert bounds["r"][3] == "unrestricted"
+
+
+def test_global_parameter_vector_bounds_unrestricted_profile_is_catalog_id_free() -> None:
+    bounds = helpers.globalParameterVectorBoundsImpl(
+        {
+            "cx": 10.0,
+            "cy": 10.0,
+            "r": 8.0,
+            "lock_circle_cx": True,
+            "lock_stem": True,
+            "lock_text_scale": True,
+            "optimization_profile": "unrestricted",
+        },
+        30,
+        50,
+        circle_bounds_fn=lambda _params, _w, _h: (0.0, 29.0, 0.0, 49.0, 3.0, 12.0),
+    )
+
+    assert bounds["cx"][2] is False
+    assert bounds["stem_x"][2] is False
+    assert bounds["text_scale"][2] is False
+    assert bounds["r"][3] == "unrestricted"
