@@ -278,7 +278,11 @@ Für jedes Arbeitspaket gelten zusätzlich zu den jeweiligen Akzeptanzkriterien:
     Validierungsrunden-Cap für einfache linke Arm-Badges vom `AC0812`-Namen;
     `arm_enabled`, `connector_direction=left` und `draw_text=False` steuern den
     Pfad nun katalogfrei, ein neutraler `ZZ_NEUTRAL_LEFT_ARM`-Test sichert ihn,
-    und der Ratchet sinkt auf 330 Runtime-ID-Vorkommen.
+    und der Ratchet sinkt auf 330 Runtime-ID-Vorkommen. Run QW entfernt den
+    `AC0811`-Guard aus den semantischen Quality-Markern; Borderline-Hinweise
+    entstehen jetzt aus Elementfehlern allein und ein neutraler Badge-Test
+    sichert die katalogfreie Bewertung. Der Ratchet sinkt auf 329
+    Runtime-ID-Vorkommen.
 
 - [ ] **IDO-18 – Legacy-Baseline und Ratchet entfernen**
   - Voraussetzung: IDO-17 ist abgeschlossen.
