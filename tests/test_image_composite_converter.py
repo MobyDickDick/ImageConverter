@@ -5515,6 +5515,40 @@ def test_activate_ac08_adaptive_locks_supports_ac0882_family() -> None:
     assert any("adaptive_unlock_applied: phase=2 family=AC0882" in line for line in logs)
 
 
+def test_finalize_ac08_style_derives_adaptive_unlock_from_geometry_not_catalog_id() -> None:
+    """Adaptive unlock eligibility is selected by text/connector features, not a catalog family."""
+    params = Action._finalize_ac08_style(
+        "AC08XX_NEUTRAL",
+        {
+            "width": 24,
+            "height": 24,
+            "circle_enabled": True,
+            "stem_enabled": True,
+            "arm_enabled": True,
+            "draw_text": True,
+            "text_mode": "voc",
+            "cx": 12.0,
+            "cy": 10.0,
+            "r": 6.0,
+            "stem_x": 12.0,
+            "stem_top": 16.0,
+            "stem_bottom": 23.0,
+            "stem_width": 1.0,
+            "arm_x1": 12.0,
+            "arm_y1": 1.0,
+            "arm_x2": 12.0,
+            "arm_y2": 8.0,
+            "arm_stroke": 1.0,
+            "fill_gray": 220,
+            "stroke_gray": 152,
+            "text_gray": 152,
+        },
+    )
+
+    assert params["enable_adaptive_unlock"] is True
+    assert params["adaptive_unlock_min_error"] == 18.0
+
+
 def test_optimize_element_color_bracket_respects_adaptive_color_corridor(monkeypatch: pytest.MonkeyPatch) -> None:
     """Adaptive unlock color tuning must stay inside the configured narrow palette corridor."""
     np = image_composite_converter.np
