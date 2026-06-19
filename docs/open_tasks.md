@@ -3852,3 +3852,11 @@ endet. Die Detailableitung und Akzeptanzkriterien stehen in
 - **Ratchet:** `tools/check_no_new_image_id_hardcoding.py` meldet `317 legacy occurrences remain` nach aktualisierter Baseline.
 - **Blocker:** IDO-17 ist noch nicht abgeschlossen; weitere Runtime-Katalog-IDs bleiben in anderen Spezialpfaden.
 - **Nächster sinnvoller Schritt:** IDO-17 fortsetzen und den nächsten verbleibenden katalogspezifischen Runtime-Guard durch messbare Parameter, neutrale Metadaten oder reine Testdaten ersetzen.
+
+### Fortschritt vs. Blocker (Session 2026-06-19, IDO-17 Elementvalidierungs-Diagnostik-De-ID Run RB)
+
+- **Fortschritt:** Budget-Floor und Deep-Trace der Elementvalidierung werden nicht mehr anhand einer konkreten Anker-Variante aktiviert, sondern über neutrale Runtime-Parameter (`validation_time_budget_floor_sec`, `validation_deep_trace_enabled`, `validation_deep_trace_label`).
+- **Sicherung:** Die zugehörigen Regressionstests verwenden katalogfreie Varianten (`ZZWORKLOAD`, `ZZTRACE`) und prüfen weiterhin Budget-Anhebung sowie Deep-Trace-Logging.
+- **Ratchet:** `tools/check_no_new_image_id_hardcoding.py` meldet `316 legacy occurrences remain` nach aktualisierter Baseline.
+- **Blocker:** IDO-17 ist noch nicht abgeschlossen; weitere Runtime-Katalog-IDs bleiben in anderen Spezialpfaden.
+- **Nächster sinnvoller Schritt:** IDO-17 fortsetzen und den nächsten verbleibenden katalogspezifischen Runtime-Guard durch messbare Parameter, neutrale Metadaten oder reine Testdaten ersetzen.
