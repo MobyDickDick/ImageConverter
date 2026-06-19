@@ -99,8 +99,15 @@ def _description_expects_left_circle_connector(desc: str) -> bool:
     rotated_right_handle = (
         "griff nach rechts gedreht" in normalized
         or "anschluss nach rechts gedreht" in normalized
+        or (
+            "nach rechts gedreht" in normalized
+            and "text" in normalized
+            and "horizontal" in normalized
+        )
     )
-    has_circle = any(token in normalized for token in ("kreis", "badge", "kelle"))
+    has_circle = any(token in normalized for token in ("kreis", "badge", "kelle")) or bool(
+        extract_documented_alias_refs(normalized)
+    )
     has_horizontal_connector = any(
         token in normalized
         for token in ("waagrecht", "horizontal", "strich", "linie", "anschluss", "griff")
