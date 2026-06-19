@@ -78,6 +78,39 @@ def _kelle_valve_primitive_decomposition(*, label: str = "", orientation: str = 
     }
 
 
+def _two_way_valve_primitive_decomposition(*, label: str = "", orientation: str = "right") -> dict[str, object]:
+    primitives: list[dict[str, object]] = [
+        {"role": "valve_body", "kind": "PolygonPath", "count": 2},
+        {"role": "handle_circle", "kind": "CircleBackground"},
+        {"role": "handle_connector", "kind": "LineSegment"},
+    ]
+    if label:
+        primitives.append({"role": "handle_label", "kind": "TextGlyph", "text": label})
+    return {
+        "schema_version": "two_way_valve_primitive_decomposition_v1",
+        "orientation": orientation,
+        "primitives": primitives,
+    }
+
+
+def _annotate_two_way_valve_element(
+    element: dict[str, object],
+    *,
+    label: str = "",
+    orientation: str = "right",
+    rotation_deg: int = 0,
+    mirror_axis: str | None = None,
+) -> dict[str, object]:
+    element["primitive_decomposition"] = _two_way_valve_primitive_decomposition(
+        label=label,
+        orientation=orientation,
+    )
+    element["transform"] = _generic_transform(
+        rotation_deg=rotation_deg,
+        mirror_axis=mirror_axis,
+    )
+    return element
+
 def _generic_transform(*, rotation_deg: int = 0, mirror_axis: str | None = None) -> dict[str, object]:
     transform: dict[str, object] = {
         "schema_version": "generic_geometry_transform_v1",
@@ -697,6 +730,12 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
                     "font_weight": "700",
                 }
             )
+            _annotate_two_way_valve_element(
+                elements[-1],
+                label="M",
+                orientation="left",
+                rotation_deg=180,
+            )
             return elements
         if left_rotated_two_way_valve_hint:
             elements.append(
@@ -726,6 +765,12 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
                     "font_weight": "700",
                 }
             )
+            _annotate_two_way_valve_element(
+                elements[-1],
+                label="M",
+                orientation="bottom",
+                rotation_deg=270,
+            )
             return elements
         elements.append(
             {
@@ -746,6 +791,11 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
                 "font_size": 0.540,
                 "font_weight": "700",
             }
+        )
+        _annotate_two_way_valve_element(
+            elements[-1],
+            label="M",
+            orientation="right",
         )
         return elements
 

@@ -222,7 +222,10 @@ Für jedes Arbeitspaket gelten zusätzlich zu den jeweiligen Akzeptanzkriterien:
     `primitive_decomposition` aus Polygonkörper, Kreisgriff, Linien-Connector
     und optionalem Text-Glyph sowie einen generischen `transform`-Block für
     Rotation beziehungsweise Spiegelung. Ein neutraler, katalogfreier
-    Description-Test sichert die 180°-Rotation ohne neue Bild-ID-Regel ab.
+    Description-Test sichert die 180°-Rotation ohne neue Bild-ID-Regel ab. Run QP
+    erweitert denselben Vertrag auf vertikale 2-Wege-Motorventile: Die
+    Geometry-IR beschreibt nun zwei Polygonhälften, Kreisgriff, Linien-Connector
+    und Motor-Text sowie generische Rotationen für neutrale Beschreibungen.
 
 - [ ] **IDO-15 – Adaptive Locks und Optimierungsprofile entkoppeln**
   - Aufgabe: Profilwahl ausschließlich aus messbaren Eigenschaften wie
