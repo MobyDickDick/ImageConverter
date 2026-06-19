@@ -3844,3 +3844,11 @@ endet. Die Detailableitung und Akzeptanzkriterien stehen in
 - **Ratchet:** `tools/check_no_new_image_id_hardcoding.py` meldet `331 legacy occurrences remain` nach aktualisierter Baseline.
 - **Blocker:** IDO-17 ist noch nicht abgeschlossen; weitere Runtime-Katalog-IDs bleiben in anderen Spezialpfaden.
 - **Nächster sinnvoller Schritt:** IDO-17 fortsetzen und weitere ID-spezifische Runtime-Guards in struktur-/beschreibungsgesteuerte Parameter überführen.
+
+### Fortschritt vs. Blocker (Session 2026-06-19, IDO-17 Quality-Pass-Policy-De-ID Run RA)
+
+- **Fortschritt:** Die fokussierte Initial-Pass-only-Quality-Pass-Policy hängt nicht mehr an einer konkreten Runtime-Risk-ID, sondern an neutralen `initial_pass_only_base_names`-Metadaten.
+- **Sicherung:** Die Quality-Pass-Policy-Tests nutzen katalogfreie Basen (`ZZRISK`, `ZZREGULAR`, `ZZBASE`, `ZZOTHER`) und prüfen Initial-Pass-only-Auswahl, Override-Vorrang sowie Single-/Multi-Base-Defaults.
+- **Ratchet:** `tools/check_no_new_image_id_hardcoding.py` meldet `317 legacy occurrences remain` nach aktualisierter Baseline.
+- **Blocker:** IDO-17 ist noch nicht abgeschlossen; weitere Runtime-Katalog-IDs bleiben in anderen Spezialpfaden.
+- **Nächster sinnvoller Schritt:** IDO-17 fortsetzen und den nächsten verbleibenden katalogspezifischen Runtime-Guard durch messbare Parameter, neutrale Metadaten oder reine Testdaten ersetzen.
