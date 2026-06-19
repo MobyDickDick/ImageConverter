@@ -1117,14 +1117,23 @@ def validateBadgeByElementsImpl(
             logs.append(f"{anchor_telemetry_prefix} PHASE final_color_pass_end")
 
     params.update(apply_canonical_badge_colors_fn(params))
-    normalized_base = str(params.get("base_name", params.get("badge_symbol_name", ""))).upper().split("_")[0]
-    if normalized_base == "AC0838" and str(params.get("text_mode", "")).lower() == "voc":
+    has_vertical_arm = bool(params.get("arm_enabled")) and (
+        abs(float(params.get("arm_x1", 0.0)) - float(params.get("arm_x2", 1.0)))
+        <= max(1.25, float(params.get("arm_stroke", 1.0)) * 1.5)
+    )
+    is_voc_vertical_connector_badge = (
+        str(params.get("text_mode", "")).lower() == "voc"
+        and bool(params.get("draw_text", False))
+        and has_vertical_arm
+        and "template_circle_cy" in params
+    )
+    if is_voc_vertical_connector_badge:
         template_cy = float(params.get("template_circle_cy", params.get("cy", 0.0)))
         enforced_cy = float(max(float(params.get("cy", template_cy)), template_cy - 0.8))
         if enforced_cy != float(params.get("cy", enforced_cy)):
             params["cy"] = enforced_cy
             logs.append(
-                "circle: AC0838-VOC cy-Guardrail auf Template-Nähe zurückgesetzt "
+                "circle: vertical VOC cy-Guardrail auf Template-Nähe zurückgesetzt "
                 f"(cy={enforced_cy:.3f})"
             )
 

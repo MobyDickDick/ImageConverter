@@ -9,17 +9,17 @@
     "variant_name"
   ],
   "summary": {
-    "total": 134,
+    "total": 125,
     "by_classification": {
-      "forbidden_runtime_decision": 32,
+      "forbidden_runtime_decision": 28,
       "legitimate_output_or_metadata": 39,
-      "review_required": 63
+      "review_required": 58
     },
     "by_decision_type": {
       "output_name_or_reporting": 39,
       "renderer_optimizer_or_geometry_selection": 15,
-      "semantic_or_geometric_branch": 17,
-      "unclassified_runtime_flow": 63
+      "semantic_or_geometric_branch": 13,
+      "unclassified_runtime_flow": 58
     }
   },
   "dependencies": [
@@ -234,41 +234,15 @@
     {
       "file": "src/iCCModules/imageCompositeConverterConversionExecution.py",
       "function": "_emitVariantDebugDump",
-      "line": 395,
-      "end_line": 395,
+      "line": 396,
+      "end_line": 396,
       "tracked_names": [
-        "base_name"
+        "variant_name"
       ],
-      "classification": "forbidden_runtime_decision",
-      "decision_type": "semantic_or_geometric_branch",
-      "called_special_logic": null,
-      "source": "if str(base_name).upper() != \"AC0811\":"
-    },
-    {
-      "file": "src/iCCModules/imageCompositeConverterConversionExecution.py",
-      "function": "_emitVariantDebugDump",
-      "line": 395,
-      "end_line": 395,
-      "tracked_names": [
-        "base_name"
-      ],
-      "classification": "review_required",
-      "decision_type": "unclassified_runtime_flow",
-      "called_special_logic": "upper",
-      "source": "if str(base_name).upper() != \"AC0811\":"
-    },
-    {
-      "file": "src/iCCModules/imageCompositeConverterConversionExecution.py",
-      "function": "_emitVariantDebugDump",
-      "line": 395,
-      "end_line": 395,
-      "tracked_names": [
-        "base_name"
-      ],
-      "classification": "review_required",
-      "decision_type": "unclassified_runtime_flow",
-      "called_special_logic": "str",
-      "source": "if str(base_name).upper() != \"AC0811\":"
+      "classification": "legitimate_output_or_metadata",
+      "decision_type": "output_name_or_reporting",
+      "called_special_logic": "os.path.join",
+      "source": "debug_dir = os.path.join(debug_root_dir, variant_name)"
     },
     {
       "file": "src/iCCModules/imageCompositeConverterConversionExecution.py",
@@ -281,26 +255,13 @@
       "classification": "legitimate_output_or_metadata",
       "decision_type": "output_name_or_reporting",
       "called_special_logic": "os.path.join",
-      "source": "debug_dir = os.path.join(debug_root_dir, variant_name)"
-    },
-    {
-      "file": "src/iCCModules/imageCompositeConverterConversionExecution.py",
-      "function": "_emitVariantDebugDump",
-      "line": 400,
-      "end_line": 400,
-      "tracked_names": [
-        "variant_name"
-      ],
-      "classification": "legitimate_output_or_metadata",
-      "decision_type": "output_name_or_reporting",
-      "called_special_logic": "os.path.join",
       "source": "dump_path = os.path.join(debug_dir, f\"{variant_name}_conversion_debug.json\")"
     },
     {
       "file": "src/iCCModules/imageCompositeConverterConversionExecution.py",
       "function": "_emitVariantDebugDump",
-      "line": 400,
-      "end_line": 400,
+      "line": 398,
+      "end_line": 398,
       "tracked_names": [
         "variant_name"
       ],
@@ -312,8 +273,8 @@
     {
       "file": "src/iCCModules/imageCompositeConverterConversionExecution.py",
       "function": "_emitVariantDebugDump",
-      "line": 402,
-      "end_line": 402,
+      "line": 400,
+      "end_line": 400,
       "tracked_names": [
         "variant_name"
       ],
@@ -325,8 +286,8 @@
     {
       "file": "src/iCCModules/imageCompositeConverterConversionExecution.py",
       "function": "_emitVariantDebugDump",
-      "line": 403,
-      "end_line": 403,
+      "line": 401,
+      "end_line": 401,
       "tracked_names": [
         "base_name"
       ],
@@ -338,8 +299,8 @@
     {
       "file": "src/iCCModules/imageCompositeConverterConversionExecution.py",
       "function": "_emitVariantDebugDump",
-      "line": 403,
-      "end_line": 403,
+      "line": 401,
+      "end_line": 401,
       "tracked_names": [
         "base_name"
       ],
@@ -351,8 +312,8 @@
     {
       "file": "src/iCCModules/imageCompositeConverterConversionExecution.py",
       "function": "_emitVariantDebugDump",
-      "line": 403,
-      "end_line": 403,
+      "line": 401,
+      "end_line": 401,
       "tracked_names": [
         "base_name"
       ],
@@ -364,8 +325,8 @@
     {
       "file": "src/iCCModules/imageCompositeConverterConversionExecution.py",
       "function": "_emitVariantDebugDump",
-      "line": 409,
-      "end_line": 409,
+      "line": 407,
+      "end_line": 407,
       "tracked_names": [
         "variant_name"
       ],
@@ -377,8 +338,8 @@
     {
       "file": "src/iCCModules/imageCompositeConverterConversionExecution.py",
       "function": "_emitVariantDebugDump",
-      "line": 409,
-      "end_line": 409,
+      "line": 407,
+      "end_line": 407,
       "tracked_names": [
         "variant_name"
       ],
@@ -390,8 +351,8 @@
     {
       "file": "src/iCCModules/imageCompositeConverterConversionExecution.py",
       "function": "convertOneImpl",
-      "line": 510,
-      "end_line": 529,
+      "line": 508,
+      "end_line": 527,
       "tracked_names": [
         "base_name"
       ],
@@ -403,8 +364,8 @@
     {
       "file": "src/iCCModules/imageCompositeConverterConversionExecution.py",
       "function": "convertOneImpl",
-      "line": 643,
-      "end_line": 658,
+      "line": 641,
+      "end_line": 656,
       "tracked_names": [
         "base_name"
       ],
@@ -416,8 +377,8 @@
     {
       "file": "src/iCCModules/imageCompositeConverterConversionExecution.py",
       "function": "convertOneImpl",
-      "line": 847,
-      "end_line": 847,
+      "line": 845,
+      "end_line": 845,
       "tracked_names": [
         "base_name"
       ],
@@ -429,8 +390,8 @@
     {
       "file": "src/iCCModules/imageCompositeConverterConversionExecution.py",
       "function": "convertOneImpl",
-      "line": 850,
-      "end_line": 872,
+      "line": 848,
+      "end_line": 870,
       "tracked_names": [
         "base_name"
       ],
@@ -975,8 +936,8 @@
     {
       "file": "src/iCCModules/imageCompositeConverterNonCompositeRuntime.py",
       "function": "_apply_image_variant_geometry",
-      "line": 588,
-      "end_line": 588,
+      "line": 598,
+      "end_line": 598,
       "tracked_names": [
         "base_name"
       ],
@@ -988,8 +949,8 @@
     {
       "file": "src/iCCModules/imageCompositeConverterNonCompositeRuntime.py",
       "function": "_apply_image_variant_geometry",
-      "line": 588,
-      "end_line": 588,
+      "line": 598,
+      "end_line": 598,
       "tracked_names": [
         "base_name"
       ],
@@ -1001,8 +962,8 @@
     {
       "file": "src/iCCModules/imageCompositeConverterNonCompositeRuntime.py",
       "function": "_apply_image_variant_geometry",
-      "line": 588,
-      "end_line": 588,
+      "line": 598,
+      "end_line": 598,
       "tracked_names": [
         "base_name"
       ],
@@ -1014,8 +975,8 @@
     {
       "file": "src/iCCModules/imageCompositeConverterNonCompositeRuntime.py",
       "function": "_build_sample_candidates",
-      "line": 673,
-      "end_line": 673,
+      "line": 693,
+      "end_line": 693,
       "tracked_names": [
         "base_name"
       ],
@@ -1027,8 +988,8 @@
     {
       "file": "src/iCCModules/imageCompositeConverterNonCompositeRuntime.py",
       "function": "_build_sample_candidates",
-      "line": 674,
-      "end_line": 674,
+      "line": 694,
+      "end_line": 694,
       "tracked_names": [
         "base_name"
       ],
@@ -1040,8 +1001,8 @@
     {
       "file": "src/iCCModules/imageCompositeConverterNonCompositeRuntime.py",
       "function": "_build_sample_candidates",
-      "line": 681,
-      "end_line": 681,
+      "line": 701,
+      "end_line": 701,
       "tracked_names": [
         "base_name"
       ],
@@ -1053,8 +1014,8 @@
     {
       "file": "src/iCCModules/imageCompositeConverterNonCompositeRuntime.py",
       "function": "_build_sample_candidates",
-      "line": 681,
-      "end_line": 681,
+      "line": 701,
+      "end_line": 701,
       "tracked_names": [
         "base_name"
       ],
@@ -1066,8 +1027,8 @@
     {
       "file": "src/iCCModules/imageCompositeConverterNonCompositeRuntime.py",
       "function": "_try_load_sample_svg",
-      "line": 764,
-      "end_line": 764,
+      "line": 784,
+      "end_line": 784,
       "tracked_names": [
         "base_name"
       ],
@@ -1079,8 +1040,8 @@
     {
       "file": "src/iCCModules/imageCompositeConverterNonCompositeRuntime.py",
       "function": "_try_load_sample_svg",
-      "line": 766,
-      "end_line": 766,
+      "line": 786,
+      "end_line": 786,
       "tracked_names": [
         "base_name"
       ],
@@ -1092,8 +1053,8 @@
     {
       "file": "src/iCCModules/imageCompositeConverterNonCompositeRuntime.py",
       "function": "_try_load_sample_svg",
-      "line": 766,
-      "end_line": 766,
+      "line": 786,
+      "end_line": 786,
       "tracked_names": [
         "base_name"
       ],
@@ -1105,8 +1066,8 @@
     {
       "file": "src/iCCModules/imageCompositeConverterNonCompositeRuntime.py",
       "function": "_try_load_sample_svg",
-      "line": 766,
-      "end_line": 766,
+      "line": 786,
+      "end_line": 786,
       "tracked_names": [
         "base_name"
       ],
@@ -1118,21 +1079,21 @@
     {
       "file": "src/iCCModules/imageCompositeConverterNonCompositeRuntime.py",
       "function": "runNonCompositeIterationImpl",
-      "line": 805,
-      "end_line": 805,
+      "line": 831,
+      "end_line": 831,
       "tracked_names": [
         "base_name"
       ],
       "classification": "review_required",
       "decision_type": "unclassified_runtime_flow",
       "called_special_logic": "_try_load_sample_svg",
-      "source": "sample_svg = _try_load_sample_svg(img_path=img_path, base_name=base_name, description=description)"
+      "source": "else _try_load_sample_svg(img_path=img_path, base_name=base_name, description=description)"
     },
     {
       "file": "src/iCCModules/imageCompositeConverterNonCompositeRuntime.py",
       "function": "runNonCompositeIterationImpl",
-      "line": 951,
-      "end_line": 953,
+      "line": 978,
+      "end_line": 980,
       "tracked_names": [
         "base_name"
       ],
@@ -1209,8 +1170,8 @@
     {
       "file": "src/iCCModules/imageCompositeConverterPerceptionReflection.py",
       "function": "parse_description",
-      "line": 230,
-      "end_line": 230,
+      "line": 231,
+      "end_line": 231,
       "tracked_names": [
         "base_name"
       ],
@@ -1222,41 +1183,15 @@
     {
       "file": "src/iCCModules/imageCompositeConverterQuality.py",
       "function": "semanticQualityFlagsImpl",
-      "line": 15,
-      "end_line": 15,
-      "tracked_names": [
-        "base_name"
-      ],
-      "classification": "forbidden_runtime_decision",
-      "decision_type": "semantic_or_geometric_branch",
-      "called_special_logic": null,
-      "source": "if get_base_name_fn(base_name).upper() != \"AC0811\":"
-    },
-    {
-      "file": "src/iCCModules/imageCompositeConverterQuality.py",
-      "function": "semanticQualityFlagsImpl",
-      "line": 15,
-      "end_line": 15,
-      "tracked_names": [
-        "base_name"
-      ],
-      "classification": "review_required",
-      "decision_type": "unclassified_runtime_flow",
-      "called_special_logic": "upper",
-      "source": "if get_base_name_fn(base_name).upper() != \"AC0811\":"
-    },
-    {
-      "file": "src/iCCModules/imageCompositeConverterQuality.py",
-      "function": "semanticQualityFlagsImpl",
-      "line": 15,
-      "end_line": 15,
+      "line": 21,
+      "end_line": 21,
       "tracked_names": [
         "base_name"
       ],
       "classification": "review_required",
       "decision_type": "unclassified_runtime_flow",
       "called_special_logic": "get_base_name_fn",
-      "source": "if get_base_name_fn(base_name).upper() != \"AC0811\":"
+      "source": "_ = get_base_name_fn(base_name)"
     },
     {
       "file": "src/iCCModules/imageCompositeConverterRemaining.py",
@@ -1558,58 +1493,6 @@
       "source": "post_guard_badge_params = enforce_semantic_connector_expectation_fn( base_name, list(elements), badge_params, width, height, )"
     },
     {
-      "file": "src/iCCModules/imageCompositeConverterSemanticValidationContext.py",
-      "function": "resolveSemanticValidationDebugDirImpl",
-      "line": 17,
-      "end_line": 17,
-      "tracked_names": [
-        "base_name"
-      ],
-      "classification": "forbidden_runtime_decision",
-      "decision_type": "semantic_or_geometric_branch",
-      "called_special_logic": null,
-      "source": "if debug_ac0811_dir and str(base_name).upper() == \"AC0811\":"
-    },
-    {
-      "file": "src/iCCModules/imageCompositeConverterSemanticValidationContext.py",
-      "function": "resolveSemanticValidationDebugDirImpl",
-      "line": 17,
-      "end_line": 17,
-      "tracked_names": [
-        "base_name"
-      ],
-      "classification": "forbidden_runtime_decision",
-      "decision_type": "semantic_or_geometric_branch",
-      "called_special_logic": null,
-      "source": "if debug_ac0811_dir and str(base_name).upper() == \"AC0811\":"
-    },
-    {
-      "file": "src/iCCModules/imageCompositeConverterSemanticValidationContext.py",
-      "function": "resolveSemanticValidationDebugDirImpl",
-      "line": 17,
-      "end_line": 17,
-      "tracked_names": [
-        "base_name"
-      ],
-      "classification": "review_required",
-      "decision_type": "unclassified_runtime_flow",
-      "called_special_logic": "upper",
-      "source": "if debug_ac0811_dir and str(base_name).upper() == \"AC0811\":"
-    },
-    {
-      "file": "src/iCCModules/imageCompositeConverterSemanticValidationContext.py",
-      "function": "resolveSemanticValidationDebugDirImpl",
-      "line": 17,
-      "end_line": 17,
-      "tracked_names": [
-        "base_name"
-      ],
-      "classification": "review_required",
-      "decision_type": "unclassified_runtime_flow",
-      "called_special_logic": "str",
-      "source": "if debug_ac0811_dir and str(base_name).upper() == \"AC0811\":"
-    },
-    {
       "file": "src/iCCModules/imageCompositeConverterSemanticValidationFinalization.py",
       "function": "buildSemanticOkValidationOutcomeImpl",
       "line": 33,
@@ -1691,20 +1574,20 @@
       "file": "src/imageCompositeConverter.py",
       "function": "makeBadgeParams",
       "line": 1201,
-      "end_line": 1268,
+      "end_line": 1269,
       "tracked_names": [
         "base_name"
       ],
       "classification": "forbidden_runtime_decision",
       "decision_type": "renderer_optimizer_or_geometry_selection",
       "called_special_logic": "semantic_param_helpers.makeBadgeParamsImpl",
-      "source": "return semantic_param_helpers.makeBadgeParamsImpl( w, h, base_name, img, get_base_name_fn=getBaseNameFromFile, build_ar0100_badge_params_fn=lambda _w, _h, name: ( semantic_ar0100_helpers.buildAr0100BadgeParamsImpl( _w, _h, ar0100_base=Action.AR0100_BASE, center_glyph_bbox_fn=Action._centerGlyphBbox, ) if name == \"AR0100\" else None ), build_ac0223_badge_params_fn=lambda _w, _h, name, _img: ( ( semantic_ac0223_helpers.defaultAc0223ParamsImpl( _w, _h, default_ac0813_params_fn=Action._defaultAc0813Params, ) if _img is None else semantic_ac0223_helpers.fitAc0223ParamsFromImageImpl( _img, semantic_ac0223_helpers.defaultAc0223ParamsImpl( _w, _h, default_ac0813_params_fn=Action._defaultAc0813Params, ), fit_ac0813_params_from_image_fn=Action._fitAc0813ParamsFromImage, ) ) if name == \"AC0223\" else None ), make_ac08_badge_params_fn=lambda _w, _h, name, _img: semantic_ac08_param_helpers.makeAc08BadgeParamsImpl( _w, _h, name, _img, default_ac0870_params_fn=Action._defaultAc0870Params, default_ac0811_params_fn=Action._defaultAc0811Params, default_ac0810_params_fn=Action._defaultAc0810Params, default_ac0812_params_fn=Action._defaultAc0812Params, default_ac0813_params_fn=Action._defaultAc0813Params, default_ac0814_params_fn=Action._defaultAc0814Params, default_ac0881_params_fn=Action._defaultAc0881Params, default_ac0882_params_fn=Action._defaultAc0882Params, fit_ac0870_params_from_image_fn=Action._fitAc0870ParamsFromImage, fit_semantic_badge_from_image_fn=Action._fit_semantic_badge_from_image, fit_ac0811_params_from_image_fn=Action._fit_ac0811_params_from_image, fit_ac0810_params_from_image_fn=Action._fitAc0810ParamsFromImage, fit_ac0812_params_from_image_fn=Action._fit_ac0812_params_from_image, fit_ac0813_params_from_image_fn=Action._fitAc0813ParamsFromImage, fit_ac0814_params_from_image_fn=Action._fit_ac0814_params_from_image, apply_co2_label_fn=Action._applyCo2Label, apply_voc_label_fn=Action._applyVocLabel, tune_ac0831_co2_badge_fn=Action._tuneAc0831Co2Badge, tune_ac0832_co2_badge_fn=Action._tuneAc0832Co2Badge, tune_ac0833_co2_badge_fn=Action._tuneAc0833Co2Badge, tune_ac0834_co2_badge_fn=Action._tuneAc0834Co2Badge, tune_ac0835_voc_badge_fn=Action._tuneAc0835VocBadge, finalize_ac08_style_fn=Action._finalizeAc08Style, enforce_left_arm_badge_geometry_fn=Action._enforceLeftArmBadgeGeometry, ), )"
+      "source": "return semantic_param_helpers.makeBadgeParamsImpl( w, h, base_name, img, get_base_name_fn=getBaseNameFromFile, build_ar0100_badge_params_fn=lambda _w, _h, name: ( semantic_ar0100_helpers.buildAr0100BadgeParamsImpl( _w, _h, ar0100_base=Action.AR0100_BASE, center_glyph_bbox_fn=Action._centerGlyphBbox, ) if name == \"AR0100\" else None ), build_ac0223_badge_params_fn=lambda _w, _h, name, _img: ( ( semantic_ac0223_helpers.defaultAc0223ParamsImpl( _w, _h, default_ac0813_params_fn=Action._defaultAc0813Params, ) if _img is None else semantic_ac0223_helpers.fitAc0223ParamsFromImageImpl( _img, semantic_ac0223_helpers.defaultAc0223ParamsImpl( _w, _h, default_ac0813_params_fn=Action._defaultAc0813Params, ), fit_ac0813_params_from_image_fn=Action._fitAc0813ParamsFromImage, ) ) if name == \"AC0223\" else None ), make_ac08_badge_params_fn=lambda _w, _h, name, _img: semantic_ac08_param_helpers.makeAc08BadgeParamsImpl( _w, _h, name, _img, default_ac0870_params_fn=Action._defaultAc0870Params, default_ac0811_params_fn=Action._defaultAc0811Params, default_ac0810_params_fn=Action._defaultAc0810Params, default_ac0812_params_fn=Action._defaultAc0812Params, default_ac0813_params_fn=Action._defaultAc0813Params, default_ac0814_params_fn=Action._defaultAc0814Params, default_ac0881_params_fn=Action._defaultAc0881Params, default_ac0882_params_fn=Action._defaultAc0882Params, fit_ac0870_params_from_image_fn=Action._fitAc0870ParamsFromImage, fit_semantic_badge_from_image_fn=Action._fit_semantic_badge_from_image, fit_ac0811_params_from_image_fn=Action._fit_ac0811_params_from_image, fit_ac0810_params_from_image_fn=Action._fitAc0810ParamsFromImage, fit_ac0812_params_from_image_fn=Action._fit_ac0812_params_from_image, fit_ac0813_params_from_image_fn=Action._fitAc0813ParamsFromImage, fit_ac0814_params_from_image_fn=Action._fit_ac0814_params_from_image, apply_co2_label_fn=Action._applyCo2Label, apply_voc_label_fn=Action._applyVocLabel, tune_ac0831_co2_badge_fn=Action._tuneAc0831Co2Badge, tune_ac0832_co2_badge_fn=Action._tuneAc0832Co2Badge, tune_ac0833_co2_badge_fn=Action._tuneAc0833Co2Badge, tune_ac0834_co2_badge_fn=Action._tuneAc0834Co2Badge, tune_ac0835_voc_badge_fn=Action._tuneAc0835VocBadge, finalize_ac08_style_fn=Action._finalizeAc08Style, enforce_left_arm_badge_geometry_fn=Action._enforceLeftArmBadgeGeometry, enforce_right_arm_badge_geometry_fn=Action._enforceRightArmBadgeGeometry, ), )"
     },
     {
       "file": "src/imageCompositeConverter.py",
       "function": "_enforceSemanticConnectorExpectation",
-      "line": 1740,
-      "end_line": 1752,
+      "line": 1741,
+      "end_line": 1753,
       "tracked_names": [
         "base_name"
       ],
@@ -1716,8 +1599,8 @@
     {
       "file": "src/imageCompositeConverter.py",
       "function": "_semanticQualityFlags",
-      "line": 2136,
-      "end_line": 2136,
+      "line": 2137,
+      "end_line": 2137,
       "tracked_names": [
         "base_name"
       ],
@@ -1729,8 +1612,8 @@
     {
       "file": "src/imageCompositeConverter.py",
       "function": "_collectDescriptionFragments",
-      "line": 2248,
-      "end_line": 2248,
+      "line": 2249,
+      "end_line": 2249,
       "tracked_names": [
         "base_name"
       ],
@@ -1742,8 +1625,8 @@
     {
       "file": "src/imageCompositeConverter.py",
       "function": "_semanticAuditRecord",
-      "line": 2263,
-      "end_line": 2263,
+      "line": 2264,
+      "end_line": 2264,
       "tracked_names": [
         "base_name"
       ],
@@ -1755,8 +1638,8 @@
     {
       "file": "src/imageCompositeConverter.py",
       "function": "_isSemanticTemplateVariant",
-      "line": 2279,
-      "end_line": 2279,
+      "line": 2280,
+      "end_line": 2280,
       "tracked_names": [
         "base_name"
       ],
