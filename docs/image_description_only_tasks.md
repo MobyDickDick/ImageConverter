@@ -259,10 +259,43 @@ Für jedes Arbeitspaket gelten zusätzlich zu den jeweiligen Akzeptanzkriterien:
     der Runtime verschieben.
   - Akzeptanz: `tools/check_no_new_image_id_hardcoding.py` meldet für `src/`
     exakt `0` Vorkommen.
-  - Fortschritt: Run QS entkoppelt die Semantic-/Conversion-Debug-Ausgabe vom
-    AC0811-Dateistamm. Debug-Dumps werden nun generisch über ein gesetztes
-    Debug-Verzeichnis aktiviert; neutrale Regressionstests sichern den Pfad,
-    und der Ratchet sinkt auf 365 Runtime-ID-Vorkommen.
+  - Fortschritt: Run QS entkoppelt die AC08-Adaptive-Unlock-Auswahl von
+    expliziten Familienlisten. Die Aktivierung läuft jetzt über generische
+    Parameter (`enable_adaptive_unlock`, `adaptive_unlock_min_error`), die aus
+    Text-/Connector-Merkmalen der finalisierten Badge-IR abgeleitet werden; ein
+    neutraler Rename-/Katalog-fremder Test sichert den geometriebasierten Pfad.
+    Der Ratchet sinkt von 367 auf 362 Runtime-ID-Vorkommen. Run QT entfernt die
+    AC08-Small-Circle-Fallback-Familienliste aus der semantischen
+    Primitive-Erkennung: Der Rescue-Pfad hängt jetzt nur noch an
+    `ac08_small_variant_mode`, aktivierter Kreisgeometrie und einer endlichen
+    erwarteten Kreis-Schätzung. Ein neutraler synthetischer Small-Ring-Test
+    sichert den katalognamenfreien Pfad; der Ratchet sinkt weiter auf 335
+    Runtime-ID-Vorkommen. Run QU entkoppelt die Plain-Ring-Erhaltung im
+    Finalisierungs- und SVG-Pfad von `AC0800`-Namensguards: Der Pfad hängt nun
+    an `preserve_plain_ring_geometry`/`plain_ring_geometry`, ein neutraler
+    `AC08XX_RING`-Test sichert die parameterbasierte Auswahl, und der Ratchet
+    sinkt auf 331 Runtime-ID-Vorkommen. Run QV entkoppelt die
+    Validierungsrunden-Cap für einfache linke Arm-Badges vom `AC0812`-Namen;
+    `arm_enabled`, `connector_direction=left` und `draw_text=False` steuern den
+    Pfad nun katalogfrei, ein neutraler `ZZ_NEUTRAL_LEFT_ARM`-Test sichert ihn,
+    und der Ratchet sinkt auf 330 Runtime-ID-Vorkommen. Run QW entfernt den
+    `AC0811`-Guard aus den semantischen Quality-Markern; Borderline-Hinweise
+    entstehen jetzt aus Elementfehlern allein und ein neutraler Badge-Test
+    sichert die katalogfreie Bewertung. Der Ratchet sinkt auf 329
+    Runtime-ID-Vorkommen. Run QX ersetzt den `AC0812`-Guard für das Deaktivieren
+    des teuren Global-Search-Samplers bei einfachen linken Arm-Badges durch
+    Geometrieparameter (`arm_enabled`, `draw_text=False`, linke
+    Anschlussrichtung beziehungsweise Arm-/Kreis-Koordinaten). Ein neutraler
+    `AC08XX_LEFT_ARM`-Test sichert die katalogfreie Auswahl; der Ratchet sinkt
+    auf 328 Runtime-ID-Vorkommen. Run QY ersetzt den `AC0838`-Radiusfloor für
+    vertikale VOC-Connector-Badges durch messbare Geometrie (`arm_enabled`,
+    vertikale Arm-Koordinaten, Textmodus `voc` und Template-Radius). Ein
+    neutraler `AC08XX_VERTICAL_VOC`-Test sichert die katalogfreie Ring-Floor-
+    Auswahl; der Ratchet sinkt auf 324 Runtime-ID-Vorkommen. Run QZ ersetzt
+    auch die verbliebene vertikale VOC-CY-Guardrail in der Elementvalidierung
+    durch messbare Parameter (`text_mode=voc`, vertikale Arm-Geometrie,
+    Template-Kreis-CY) und entfernt die katalogspezifische Logmeldung; der
+    Ratchet sinkt auf 322 Runtime-ID-Vorkommen. Run RA entkoppelt den fokussierten Initial-Pass-only-Pfad der Quality-Pass-Policy von einer konkreten Runtime-Risk-ID; die Auswahl läuft nun über neutrale `initial_pass_only_base_names`-Metadaten und die Tests verwenden katalogfreie Basen. Der Ratchet sinkt auf 317 Runtime-ID-Vorkommen.
 
 - [ ] **IDO-18 – Legacy-Baseline und Ratchet entfernen**
   - Voraussetzung: IDO-17 ist abgeschlossen.

@@ -4,9 +4,9 @@ This checklist only tracks work that is actionable for the ImageConverter in the
 current repository snapshot. Older unrelated language/compiler/runtime tasks were removed so the list stays
 focused on the actual project scope.
 
-## Aufgaben-Gesamtzähler (Snapshot 2026-06-14)
+## Aufgaben-Gesamtzähler (Snapshot 2026-06-19)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `194` · Erledigt `163` · Offen `31`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `400` · Erledigt `353` · Offen `47`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -3835,3 +3835,20 @@ endet. Die Detailableitung und Akzeptanzkriterien stehen in
 - **Sicherung:** Neue Description-Contract-Tests decken Glyph-Evidenz sowie obere Textlage ab; der Bild-ID-Ratchet bleibt bei `368 legacy occurrences remain` grün.
 - **Blocker:** Kein neuer technischer Blocker; echte Raster-/Perception-Glyph-Detektion und Render-Kalibrierung bleiben Folgeausbau.
 - **Nächster sinnvoller Schritt:** IDO-14 starten und die generische Badge-IR an Perception-Glyph-/OCR-Signale sowie Render-Parameter-Kalibrierung koppeln.
+
+
+### Fortschritt vs. Blocker (Session 2026-06-19, IDO-17 Plain-Ring-Entkopplung Run QU)
+
+- **Fortschritt:** Die Plain-Ring-Erhaltung im AC08-Finalisierungs- und SVG-Pfad nutzt nun `preserve_plain_ring_geometry`/`plain_ring_geometry` statt `AC0800`-Namensguards.
+- **Sicherung:** Ein neutraler `AC08XX_RING`-Test prüft Radius-/Center-Locks und Edge-Ring-Reankerung ohne konkrete Katalog-ID; die bestehende AC0800-Regression bleibt erhalten.
+- **Ratchet:** `tools/check_no_new_image_id_hardcoding.py` meldet `331 legacy occurrences remain` nach aktualisierter Baseline.
+- **Blocker:** IDO-17 ist noch nicht abgeschlossen; weitere Runtime-Katalog-IDs bleiben in anderen Spezialpfaden.
+- **Nächster sinnvoller Schritt:** IDO-17 fortsetzen und weitere ID-spezifische Runtime-Guards in struktur-/beschreibungsgesteuerte Parameter überführen.
+
+### Fortschritt vs. Blocker (Session 2026-06-19, IDO-17 Quality-Pass-Policy-De-ID Run RA)
+
+- **Fortschritt:** Die fokussierte Initial-Pass-only-Quality-Pass-Policy hängt nicht mehr an einer konkreten Runtime-Risk-ID, sondern an neutralen `initial_pass_only_base_names`-Metadaten.
+- **Sicherung:** Die Quality-Pass-Policy-Tests nutzen katalogfreie Basen (`ZZRISK`, `ZZREGULAR`, `ZZBASE`, `ZZOTHER`) und prüfen Initial-Pass-only-Auswahl, Override-Vorrang sowie Single-/Multi-Base-Defaults.
+- **Ratchet:** `tools/check_no_new_image_id_hardcoding.py` meldet `317 legacy occurrences remain` nach aktualisierter Baseline.
+- **Blocker:** IDO-17 ist noch nicht abgeschlossen; weitere Runtime-Katalog-IDs bleiben in anderen Spezialpfaden.
+- **Nächster sinnvoller Schritt:** IDO-17 fortsetzen und den nächsten verbleibenden katalogspezifischen Runtime-Guard durch messbare Parameter, neutrale Metadaten oder reine Testdaten ersetzen.

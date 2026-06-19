@@ -1122,10 +1122,11 @@ def convertRange(
     # policy for all run sizes so quality behavior stays deterministic and
     # observable across full batches and focused runs alike.
     max_quality_passes = 4
-    # Fast-path for tightly scoped runs (e.g. AC0811-only diagnostics): extra
-    # global quality passes mostly re-queue M/S variants with diminishing
-    # returns. AC0811 is the documented FP-D6 runtime-risk batch, so its focused
-    # repro command stays initial-pass-only unless explicitly overridden.
+    # Fast-path for tightly scoped runtime-risk diagnostics: extra global
+    # quality passes mostly re-queue M/S variants with diminishing returns.
+    # Callers can provide an explicit metadata set for focused initial-pass-only
+    # repro commands without embedding catalog-specific decisions in runtime
+    # policy code.
     try:
         base_names = quality_pass_policy_helpers.baseNamesFromFilenamesImpl(
             process_files,
@@ -1133,10 +1134,16 @@ def convertRange(
         )
     except Exception:
         base_names = set()
+    initial_pass_only_base_names = {
+        base.strip().upper()
+        for base in os.environ.get("ICC_INITIAL_PASS_ONLY_BASE_NAMES", "").split(",")
+        if base.strip()
+    }
     max_quality_passes, quality_pass_policy_reason = quality_pass_policy_helpers.resolveMaxQualityPassesImpl(
         default_max_quality_passes=max_quality_passes,
         base_names=base_names,
         override_quality_passes=os.environ.get("ICC_MAX_QUALITY_PASSES", ""),
+        initial_pass_only_base_names=initial_pass_only_base_names,
     )
     quality_logs: list[dict[str, object]] = []
     result_map: dict[str, dict[str, object]] = {}

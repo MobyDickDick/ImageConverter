@@ -50,6 +50,24 @@ def test_apply_semantic_badge_family_rules_parses_explicit_color_count_override(
     assert params["badge_overrides"]["palette_color_count"] == "2"
 
 
+def test_apply_semantic_badge_family_rules_derives_left_connector_from_rotated_alias_text() -> None:
+    params: dict[str, object] = {"elements": []}
+
+    applied = helpers.apply_semantic_badge_family_rules(
+        base_upper="AC0832",
+        symbol_upper="AC0832",
+        desc="wie AC0832, jedoch nach rechts gedreht, text immer noch horizontal",
+        params=params,
+    )
+
+    assert applied is True
+    assert "SEMANTIC: waagrechter Strich links vom Kreis" in params["elements"]
+    assert (
+        "SEMANTIC: waagrechter Strich links vom Kreis"
+        in params["semantic_sources"]["description_heuristic"]
+    )
+
+
 def test_apply_semantic_badge_family_rules_supports_ac0844_right_connector() -> None:
     params: dict[str, object] = {"elements": []}
 

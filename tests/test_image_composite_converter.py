@@ -1515,7 +1515,35 @@ def test_finalize_ac0800_preserves_plain_ring_geometry_bounds() -> None:
     assert params["lock_circle_cy"] is True
     assert float(params["min_circle_radius"]) == pytest.approx(float(params["r"]))
     assert float(params["max_circle_radius"]) == pytest.approx(float(params["r"]))
-    assert params["plain_ac0800_ring"] is True
+    assert params["plain_ring_geometry"] is True
+
+
+def test_finalize_plain_ring_geometry_uses_parameter_not_catalog_id() -> None:
+    """Plain-ring preservation should be driven by geometry metadata, not a catalog family."""
+    params = Action._finalize_ac08_style(
+        "AC08XX_RING",
+        {
+            "width": 30,
+            "height": 30,
+            "circle_enabled": True,
+            "draw_text": False,
+            "cx": 14.0,
+            "cy": 14.0,
+            "r": 9.0,
+            "template_circle_cx": 15.0,
+            "template_circle_cy": 15.0,
+            "template_circle_radius": 10.8,
+            "stroke_circle": 1.5,
+            "fill_gray": 220,
+            "stroke_gray": 152,
+            "preserve_plain_ring_geometry": True,
+        },
+    )
+
+    assert params["plain_ring_geometry"] is True
+    assert params["cx"] == pytest.approx(15.0)
+    assert params["cy"] == pytest.approx(15.0)
+    assert float(params["min_circle_radius"]) == pytest.approx(float(params["r"]))
 
 
 def test_finalize_ac0800_small_variant_keeps_template_radius_floor() -> None:
@@ -4159,14 +4187,27 @@ def test_enforce_left_arm_badge_geometry_restores_missing_arm() -> None:
     assert float(fixed["arm_len_min"]) >= 22.0 * 0.75
 
 
-def test_finalize_ac0812_plain_left_arm_disables_expensive_global_search() -> None:
-    """AC0812 local circle/arm bracketing should skip the costly global sampler."""
-    params = Action._default_ac0812_params(35, 20)
+def test_finalize_plain_left_arm_badge_disables_expensive_global_search_without_catalog_id() -> None:
+    """Local circle/arm bracketing should skip the costly global sampler by geometry."""
+    params = {
+        "width": 35,
+        "height": 20,
+        "cx": 24.0,
+        "cy": 10.0,
+        "r": 9.0,
+        "arm_enabled": True,
+        "arm_x1": 0.0,
+        "arm_x2": 15.0,
+        "arm_y1": 10.0,
+        "arm_y2": 10.0,
+        "draw_text": False,
+        "connector_direction": "left",
+    }
 
-    finalized = Action._finalize_ac08_style("AC0812_M", params)
+    finalized = Action._finalize_ac08_style("AC08XX_LEFT_ARM", params)
 
     assert finalized.get("enable_global_search_mode") is False
-    assert finalized.get("global_search_disabled_reason") == "ac0812_plain_left_arm_local_fit"
+    assert finalized.get("global_search_disabled_reason") == "plain_left_arm_local_fit"
 
 
 def test_tune_ac08_left_connector_family_keeps_template_right_extent() -> None:
@@ -5515,6 +5556,71 @@ def test_activate_ac08_adaptive_locks_supports_ac0882_family() -> None:
     assert any("adaptive_unlock_applied: phase=2 family=AC0882" in line for line in logs)
 
 
+def test_finalize_ac08_style_derives_adaptive_unlock_from_geometry_not_catalog_id() -> None:
+    """Adaptive unlock eligibility is selected by text/connector features, not a catalog family."""
+    params = Action._finalize_ac08_style(
+        "AC08XX_NEUTRAL",
+        {
+            "width": 24,
+            "height": 24,
+            "circle_enabled": True,
+            "stem_enabled": True,
+            "arm_enabled": True,
+            "draw_text": True,
+            "text_mode": "voc",
+            "cx": 12.0,
+            "cy": 10.0,
+            "r": 6.0,
+            "stem_x": 12.0,
+            "stem_top": 16.0,
+            "stem_bottom": 23.0,
+            "stem_width": 1.0,
+            "arm_x1": 12.0,
+            "arm_y1": 1.0,
+            "arm_x2": 12.0,
+            "arm_y2": 8.0,
+            "arm_stroke": 1.0,
+            "fill_gray": 220,
+            "stroke_gray": 152,
+            "text_gray": 152,
+        },
+    )
+
+    assert params["enable_adaptive_unlock"] is True
+    assert params["adaptive_unlock_min_error"] == 18.0
+
+
+
+def test_finalize_ac08_style_applies_vertical_voc_radius_floor_without_catalog_id() -> None:
+    """Vertical VOC connector badges keep the ring floor through measured geometry."""
+    params = Action._finalize_ac08_style(
+        "AC08XX_VERTICAL_VOC",
+        {
+            "width": 18,
+            "height": 24,
+            "circle_enabled": True,
+            "arm_enabled": True,
+            "draw_text": True,
+            "text_mode": "voc",
+            "cx": 9.0,
+            "cy": 12.0,
+            "r": 6.0,
+            "template_circle_radius": 6.0,
+            "arm_x1": 9.0,
+            "arm_y1": 0.0,
+            "arm_x2": 9.0,
+            "arm_y2": 6.0,
+            "arm_stroke": 1.0,
+            "stroke_circle": 1.0,
+            "fill_gray": 220,
+            "stroke_gray": 152,
+            "text_gray": 152,
+        },
+    )
+
+    assert params["min_circle_radius"] >= 5.76
+    assert params["circle_radius_lower_bound_px"] >= 5.76
+
 def test_optimize_element_color_bracket_respects_adaptive_color_corridor(monkeypatch: pytest.MonkeyPatch) -> None:
     """Adaptive unlock color tuning must stay inside the configured narrow palette corridor."""
     np = image_composite_converter.np
@@ -6082,13 +6188,13 @@ def test_make_badge_params_keeps_ac0838_m_circle_near_full_width_for_voc_layout(
         ("AC0870_S", "artifacts/images_to_convert/AC0870_S.jpg", "AC0870"),
     ],
 )
-def test_detect_semantic_primitives_reports_small_circle_family_fallback_source(
+def test_detect_semantic_primitives_reports_small_circle_geometry_fallback_source(
     variant: str,
     image_path: str,
     symbol: str,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    """Priority AC08 small-circle variants should expose family fallback circle evidence."""
+    """Priority AC08 small-circle variants should expose geometry fallback circle evidence."""
     if image_composite_converter.np is None or image_composite_converter.cv2 is None:
         pytest.skip("numpy/cv2 not available in this environment")
 
@@ -6102,12 +6208,42 @@ def test_detect_semantic_primitives_reports_small_circle_family_fallback_source(
     params["variant_name"] = variant
 
     monkeypatch.setattr(cv2, "HoughCircles", lambda *args, **kwargs: None)
-    monkeypatch.setattr(Action, "_circle_from_foreground_mask", staticmethod(lambda _mask: None))
+    monkeypatch.setattr(Action, "_circleFromForegroundMask", staticmethod(lambda _mask: None))
 
     structural = Action._detect_semantic_primitives(img, params)
 
     assert structural["circle"] is True
-    assert structural["circle_detection_source"] == "family_fallback"
+    assert structural["circle_detection_source"] == "geometry_fallback"
+
+
+def test_detect_semantic_primitives_small_circle_fallback_is_catalog_name_free(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Small-circle fallback should depend on geometry params, not catalog IDs."""
+    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+        pytest.skip("numpy/cv2 not available in this environment")
+
+    np = image_composite_converter.np
+    cv2 = image_composite_converter.cv2
+    img = np.full((24, 24, 3), 255, dtype=np.uint8)
+    cv2.circle(img, (12, 12), 7, (0, 0, 0), 1)
+    params = {
+        "variant_name": "NEUTRAL_SMALL_RING",
+        "badge_symbol_name": "NEUTRAL_SMALL_RING",
+        "ac08_small_variant_mode": True,
+        "circle_enabled": True,
+        "cx": 12.0,
+        "cy": 12.0,
+        "r": 7.0,
+    }
+
+    monkeypatch.setattr(cv2, "HoughCircles", lambda *args, **kwargs: None)
+    monkeypatch.setattr(Action, "_circleFromForegroundMask", staticmethod(lambda _mask: None))
+
+    structural = Action._detect_semantic_primitives(img, params)
+
+    assert structural["circle"] is True
+    assert structural["circle_detection_source"] == "geometry_fallback"
 
 
 @pytest.mark.blocking_conversion

@@ -1,3 +1,4 @@
+- IDO-17 Run QZ removes the remaining vertical VOC badge CY guardrail from catalog-ID dispatch; element validation now uses text/connector/template geometry signals and the runtime-ID ratchet drops to 322 legacy occurrences.
 # Changelog
 - The complete core test suite was revalidated with 765 passing tests, and its full pytest output is now versioned as a GitHub review artifact.
 

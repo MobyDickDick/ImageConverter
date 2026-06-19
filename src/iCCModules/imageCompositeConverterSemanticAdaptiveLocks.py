@@ -12,14 +12,6 @@ _ADAPTIVE_CORRIDOR_KEYS = (
     "ac08_phase2_cy_min",
     "ac08_phase2_cy_max",
 )
-_ADAPTIVE_UNLOCK_FAMILIES = {"AC0838", "AC0882"}
-_ADAPTIVE_MIN_ERROR_BY_FAMILY = {
-    "AC0838": 18.0,
-    "AC0870": 16.0,
-    "AC0882": 16.0,
-}
-
-
 def activateAc08AdaptiveLocksImpl(
     params: dict,
     logs: list[str],
@@ -29,7 +21,7 @@ def activateAc08AdaptiveLocksImpl(
 ) -> bool:
     """Activate a narrow AC08 phase-2 unlock corridor when stagnation is detected."""
     symbol_name = str(params.get("badge_symbol_name", "")).upper()
-    if symbol_name not in _ADAPTIVE_UNLOCK_FAMILIES:
+    if not bool(params.get("enable_adaptive_unlock", False)):
         return False
     if not bool(params.get("circle_enabled", True)):
         return False
@@ -40,7 +32,7 @@ def activateAc08AdaptiveLocksImpl(
         full_err_value = float(full_err)
     except (TypeError, ValueError):
         return False
-    min_error = float(_ADAPTIVE_MIN_ERROR_BY_FAMILY.get(symbol_name, 18.0))
+    min_error = float(params.get("adaptive_unlock_min_error", 18.0))
     if not math.isfinite(full_err_value) or full_err_value < min_error:
         return False
 

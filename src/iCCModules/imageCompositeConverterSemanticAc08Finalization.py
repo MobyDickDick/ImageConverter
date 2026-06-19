@@ -28,14 +28,20 @@ def finalizeAc08StyleImpl(
     p = capture_canonical_badge_colors_fn(normalize_light_circle_colors_fn(dict(params)))
     p["badge_symbol_name"] = symbol_name
     p.setdefault("enable_global_search_mode", True)
-    if symbol_name == "AC0812" and bool(p.get("arm_enabled", False)) and not bool(p.get("draw_text", False)):
-        # AC0812_L/M/S are simple left-arm + circle badges. The local
-        # element bracketing already covers their full geometry; the expensive
-        # global vector sampler repeatedly re-renders near-identical candidates
-        # and dominates isolated-render test/runtime without improving the
-        # semantic fit. Keep the family on the deterministic local path.
+    plain_connector_badge = bool(p.get("arm_enabled", False)) and not bool(p.get("draw_text", False))
+    left_connector_badge = str(p.get("connector_direction", "")).lower() == "left" or (
+        plain_connector_badge
+        and float(p.get("arm_x1", 1.0)) <= 0.5
+        and float(p.get("arm_x2", 0.0)) <= float(p.get("cx", 0.0))
+    )
+    if plain_connector_badge and left_connector_badge:
+        # Plain left-arm + circle badges are fully covered by local element
+        # bracketing. The expensive global vector sampler repeatedly re-renders
+        # near-identical candidates and dominates isolated-render test/runtime
+        # without improving the semantic fit. Keep this geometry class on the
+        # deterministic local path.
         p["enable_global_search_mode"] = False
-        p["global_search_disabled_reason"] = "ac0812_plain_left_arm_local_fit"
+        p["global_search_disabled_reason"] = "plain_left_arm_local_fit"
     p = normalize_ac08_line_widths_fn(p)
     p["lock_colors"] = True
     p = normalize_centered_co2_label_fn(p)
@@ -137,9 +143,10 @@ def finalizeAc08StyleImpl(
         if has_connector:
             template_floor_ratio = max(template_floor_ratio, 0.93)
         width_fill_floor = 1.0
+        vertical_text_connector_badge = False
         if has_connector and has_text and p.get("arm_enabled"):
-            # Vertical top/bottom connector families (e.g. AC0813/AC0833/AC0838)
-            # usually use a near full-width circle. Enforce a geometric lower
+            # Vertical top/bottom connector badges usually use a near full-width
+            # circle. Enforce a geometric lower
             # bound from the available lateral clearance so weak-mask fits do not
             # collapse to undersized circles.
             arm_x1 = float(p.get("arm_x1", p.get("cx", 0.0)))
@@ -174,6 +181,7 @@ def finalizeAc08StyleImpl(
                     arm_y2,
                     max(arm_y1, arm_y2) + template_r,
                 )
+            vertical_text_connector_badge = bool(is_vertical_connector)
             if is_vertical_connector and canvas_w > 0.0 and canvas_h > 0.0 and cx_now > 0.0 and cy_now > 0.0:
                 lateral_clearance = max(1.0, min(cx_now, canvas_w - cx_now) - (stroke / 2.0))
                 vertical_clearance = max(1.0, min(cy_now, canvas_h - cy_now) - (stroke / 2.0))
@@ -185,14 +193,14 @@ def finalizeAc08StyleImpl(
                 width_fill_floor,
             )
         )
-        if symbol_name == "AC0838" and str(p.get("text_mode", "")).lower() == "voc":
-            # AC0838_M often underfits the ring to satisfy noisy masks around the
-            # vertical connector. Keep the circle close to template scale so the
-            # VOC badge does not collapse visibly below the source glyph.
-            ac0838_radius_floor = max(1.0, template_r * 0.96)
-            p["min_circle_radius"] = float(max(float(p.get("min_circle_radius", 1.0)), ac0838_radius_floor))
+        if vertical_text_connector_badge and str(p.get("text_mode", "")).lower() == "voc":
+            # VOC badges with a vertical connector can underfit the ring to satisfy
+            # noisy connector masks. Keep the circle close to template scale so
+            # the badge does not collapse visibly below the source glyph.
+            vertical_voc_radius_floor = max(1.0, template_r * 0.96)
+            p["min_circle_radius"] = float(max(float(p.get("min_circle_radius", 1.0)), vertical_voc_radius_floor))
             p["circle_radius_lower_bound_px"] = float(
-                max(float(p.get("circle_radius_lower_bound_px", 1.0)), ac0838_radius_floor)
+                max(float(p.get("circle_radius_lower_bound_px", 1.0)), vertical_voc_radius_floor)
             )
 
         if not has_connector:
@@ -255,7 +263,7 @@ def finalizeAc08StyleImpl(
                 p.setdefault("voc_font_scale_min", 0.60)
                 p.pop("voc_font_scale_max", None)
     p = configure_ac08_small_variant_mode_fn(name, p)
-    preserve_plain_ring_geometry = symbol_name == "AC0800"
+    preserve_plain_ring_geometry = bool(p.get("preserve_plain_ring_geometry", False))
     preserve_centered_t_badge_geometry = (
         symbol_name == "AC0870"
         and bool(p.get("ac08_small_variant_mode", False))
@@ -289,6 +297,11 @@ def finalizeAc08StyleImpl(
         )
         if preserve_centered_t_badge_geometry and key in p
     }
+    preserved_vertical_voc_keys = {
+        key: p[key]
+        for key in ("min_circle_radius", "circle_radius_lower_bound_px")
+        if vertical_text_connector_badge and str(p.get("text_mode", "")).lower() == "voc" and key in p
+    }
     for key in (
         "lock_circle_cx",
         "lock_circle_cy",
@@ -318,6 +331,8 @@ def finalizeAc08StyleImpl(
         "connector_family_direction",
     ):
         p.pop(key, None)
+    if preserved_vertical_voc_keys:
+        p.update(preserved_vertical_voc_keys)
     if preserve_centered_t_badge_geometry:
         p.update(preserved_centered_t_keys)
         min_r = float(max(1.0, p.get("min_circle_radius", p.get("r", 1.0))))
@@ -339,13 +354,11 @@ def finalizeAc08StyleImpl(
         if canvas_h <= 0.0:
             canvas_h = max(float(cy * 2.0), float(p.get("template_circle_radius", p.get("r", 1.0))) * 2.0)
 
-        # AC0800 is the plain ring family. Older satisfactory baselines use a
-        # ring that nearly touches the canvas edge and no explicit background
-        # rectangle. Keeping the image-fitted, smaller Hough radius (or a white
-        # background rect) later gets parsed as connector geometry during
-        # harmonization and visibly degrades the reconversion. Re-anchor this
-        # family to the legacy edge-ring geometry before optimization output is
-        # rendered.
+        # Plain ring badges use a ring that nearly touches the canvas edge and
+        # no explicit background rectangle. Keeping an image-fitted, smaller
+        # Hough radius (or a white background rect) later gets parsed as connector
+        # geometry during harmonization and visibly degrades reconversion.
+        # Re-anchor these badges to edge-ring geometry before rendering.
         legacy_stroke_margin = max(1.0, min(canvas_w, canvas_h) * 0.05)
         legacy_ring_r = max(1.0, min(cx, canvas_w - cx, cy, canvas_h - cy) - legacy_stroke_margin)
         p["min_circle_radius"] = float(legacy_ring_r)
@@ -356,10 +369,20 @@ def finalizeAc08StyleImpl(
         p["stroke_gray"] = 127
         p["draw_text"] = False
         p["preserve_exact_circle_radius"] = True
-        p["plain_ac0800_ring"] = True
+        p["plain_ring_geometry"] = True
         p.pop("background_fill", None)
         p.pop("stem_enabled", None)
         p.pop("arm_enabled", None)
+    if bool(p.get("circle_enabled", True)) and bool(p.get("draw_text", False)):
+        text_mode = str(p.get("text_mode", "")).lower()
+        has_stem = bool(p.get("stem_enabled", False))
+        has_arm = bool(p.get("arm_enabled", False))
+        if text_mode == "voc" and has_arm and has_stem:
+            p["enable_adaptive_unlock"] = True
+            p["adaptive_unlock_min_error"] = 18.0
+        elif text_mode == "co2" and has_arm and not has_stem:
+            p["enable_adaptive_unlock"] = True
+            p["adaptive_unlock_min_error"] = 16.0
     if p.get("draw_text", True) and "text_gray" in p:
         p["text_gray"] = int(p.get("stroke_gray", light_circle_stroke_gray))
     return p

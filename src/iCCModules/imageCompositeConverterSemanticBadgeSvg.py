@@ -103,11 +103,11 @@ def generateBadgeSvgImpl(
     if background_fill:
         elements.append(f'  <rect x="0" y="0" width="{float(w):.4f}" height="{float(h):.4f}" fill="{background_fill}"/>')
 
-    plain_ac0800_ring = (
-        (variant_ref.startswith("AC0800") or str(p.get("badge_symbol_name", "")).upper() == "AC0800")
+    plain_ring_geometry = (
+        bool(p.get("plain_ring_geometry", False))
         and not bool(p.get("arm_enabled") or p.get("stem_enabled") or p.get("draw_text", False))
     )
-    if plain_ac0800_ring:
+    if plain_ring_geometry:
         if h <= 15:
             marker_y1 = float(h) / 2.0
             marker_y2 = 1.0

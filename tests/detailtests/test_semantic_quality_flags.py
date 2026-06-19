@@ -7,9 +7,9 @@ import pytest
 import src.imageCompositeConverter as image_composite_converter
 
 
-def test_semantic_quality_flags_marks_ac0811_with_high_element_error() -> None:
+def test_semantic_quality_flags_marks_neutral_badge_with_high_element_error() -> None:
     flags = image_composite_converter._semanticQualityFlags(
-        "AC0811_L",
+        "ZZ_NEUTRAL_BADGE",
         [
             "circle: Fehler=4.200",
             "stem: Fehler=10.750",
@@ -22,12 +22,12 @@ def test_semantic_quality_flags_marks_ac0811_with_high_element_error() -> None:
     assert "quality_elevated_elements=stem" in flags
 
 
-def test_semantic_quality_flags_ignores_non_ac0811_variants() -> None:
+def test_semantic_quality_flags_ignores_low_element_errors() -> None:
     flags = image_composite_converter._semanticQualityFlags(
-        "AC0812_L",
+        "ZZ_NEUTRAL_BADGE",
         [
             "circle: Fehler=3.000",
-            "arm: Fehler=12.000",
+            "arm: Fehler=7.500",
         ],
     )
 
