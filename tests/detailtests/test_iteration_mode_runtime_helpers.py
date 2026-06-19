@@ -133,3 +133,69 @@ def test_build_iteration_mode_runners_impl_wires_dual_arrow_detector_with_numpy_
     assert result == "dual-ok"
     assert captured["detector"]["image"] == "pixel-grid"
     assert captured["detector"]["np_module"] is sentinel_np
+
+
+def test_semantic_badge_iteration_caps_plain_left_arm_validation_without_catalog_id() -> None:
+    from src.iCCModules.imageCompositeConverterSemanticBadgeRuntime import runSemanticBadgeIterationImpl
+
+    captured: dict[str, object] = {}
+    badge_params = {
+        "arm_enabled": True,
+        "connector_direction": "left",
+        "draw_text": False,
+    }
+
+    def _collect_semantic_badge_validation_logs_fn(**kwargs):
+        captured["validation_rounds"] = kwargs["badge_validation_rounds"]
+        return ["validated"]
+
+    def _prepare_semantic_badge_post_validation_fn(**kwargs):
+        captured["cap_reason"] = kwargs["badge_params"].get("validation_round_cap_reason")
+        return kwargs["badge_params"], kwargs["validation_logs"], []
+
+    result = runSemanticBadgeIterationImpl(
+        width=24,
+        height=16,
+        perc_img=None,
+        perc_base_name="ZZ_NEUTRAL_LEFT_ARM",
+        filename="ZZ_NEUTRAL_LEFT_ARM.png",
+        base="ZZ_NEUTRAL_LEFT_ARM",
+        description="neutraler Kreis mit linkem waagrechtem Anschluss",
+        params={"elements": []},
+        semantic_audit_row=None,
+        badge_validation_rounds=4,
+        debug_element_diff_dir=None,
+        debug_ac0811_dir=None,
+        write_attempt_artifacts_fn=lambda *_args, **_kwargs: None,
+        write_validation_log_fn=lambda *_args, **_kwargs: None,
+        record_render_failure_fn=lambda *_args, **_kwargs: None,
+        make_badge_params_fn=lambda *_args, **_kwargs: dict(badge_params),
+        generate_badge_svg_fn=lambda *_args, **_kwargs: "<svg/>",
+        validate_semantic_description_alignment_fn=lambda *_args, **_kwargs: [],
+        detect_semantic_primitives_fn=lambda *_args, **_kwargs: {},
+        build_semantic_connector_debug_line_fn=lambda *_args, **_kwargs: "",
+        build_semantic_mismatch_console_lines_fn=lambda *_args, **_kwargs: [],
+        build_semantic_mismatch_validation_log_lines_fn=lambda *_args, **_kwargs: [],
+        build_semantic_mismatch_outcome_fn=lambda *_args, **_kwargs: (None, [], []),
+        build_semantic_audit_log_lines_fn=lambda *_args, **_kwargs: [],
+        build_semantic_audit_record_kwargs_fn=lambda *_args, **_kwargs: {},
+        semantic_audit_record_fn=lambda *_args, **_kwargs: None,
+        resolve_semantic_validation_debug_dir_fn=lambda *_args, **_kwargs: None,
+        collect_semantic_badge_validation_logs_fn=_collect_semantic_badge_validation_logs_fn,
+        prepare_semantic_badge_post_validation_fn=_prepare_semantic_badge_post_validation_fn,
+        append_semantic_connector_expectation_log_fn=lambda *_args, **_kwargs: None,
+        build_semantic_ok_validation_outcome_fn=lambda **_kwargs: (None, ["ok"]),
+        semantic_quality_flags_fn=lambda *_args, **_kwargs: {},
+        finalize_semantic_badge_run_fn=lambda **kwargs: kwargs["badge_params"],
+        finalize_semantic_badge_iteration_result_fn=lambda **_kwargs: None,
+        finalize_ac0223_badge_params_fn=lambda *_args, **_kwargs: {},
+        render_svg_to_numpy_fn=lambda *_args, **_kwargs: None,
+        calculate_error_fn=lambda *_args, **_kwargs: 0.0,
+        enforce_semantic_connector_expectation_fn=lambda *_args, **_kwargs: {},
+        apply_redraw_variation_fn=lambda *_args, **_kwargs: {},
+        print_fn=lambda _msg: None,
+    )
+
+    assert captured["validation_rounds"] == 1
+    assert captured["cap_reason"] == "plain_left_arm_single_round"
+    assert result["validation_round_cap_reason"] == "plain_left_arm_single_round"

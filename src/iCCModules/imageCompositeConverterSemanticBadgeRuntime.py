@@ -94,16 +94,16 @@ def runSemanticBadgeIterationImpl(
     )
     effective_badge_validation_rounds = int(badge_validation_rounds)
     if (
-        str(perc_base_name).upper().split("_", 1)[0] == "AC0812"
-        and bool(badge_params.get("arm_enabled", False))
+        bool(badge_params.get("arm_enabled", False))
+        and str(badge_params.get("connector_direction", "")).lower() == "left"
         and not bool(badge_params.get("draw_text", False))
     ):
-        # AC0812_L/M/S consist only of the horizontal arm and right circle. One
-        # local element-validation round is sufficient after image fitting;
-        # further rounds mostly replay expensive render probes, especially when
-        # pytest uses the isolated SVG renderer.
+        # Plain left-arm circle badges need only one local element-validation
+        # round after image fitting. Additional rounds mostly replay expensive
+        # render probes, so the cap is keyed to measured/derived geometry
+        # metadata instead of a catalog family name.
         effective_badge_validation_rounds = min(effective_badge_validation_rounds, 1)
-        badge_params["validation_round_cap_reason"] = "ac0812_plain_left_arm_single_round"
+        badge_params["validation_round_cap_reason"] = "plain_left_arm_single_round"
     validation_logs = collect_semantic_badge_validation_logs_fn(
         perc_img=perc_img,
         badge_params=badge_params,

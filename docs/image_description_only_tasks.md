@@ -274,7 +274,11 @@ Für jedes Arbeitspaket gelten zusätzlich zu den jeweiligen Akzeptanzkriterien:
     Finalisierungs- und SVG-Pfad von `AC0800`-Namensguards: Der Pfad hängt nun
     an `preserve_plain_ring_geometry`/`plain_ring_geometry`, ein neutraler
     `AC08XX_RING`-Test sichert die parameterbasierte Auswahl, und der Ratchet
-    sinkt auf 331 Runtime-ID-Vorkommen.
+    sinkt auf 331 Runtime-ID-Vorkommen. Run QV entkoppelt die
+    Validierungsrunden-Cap für einfache linke Arm-Badges vom `AC0812`-Namen;
+    `arm_enabled`, `connector_direction=left` und `draw_text=False` steuern den
+    Pfad nun katalogfrei, ein neutraler `ZZ_NEUTRAL_LEFT_ARM`-Test sichert ihn,
+    und der Ratchet sinkt auf 330 Runtime-ID-Vorkommen.
 
 - [ ] **IDO-18 – Legacy-Baseline und Ratchet entfernen**
   - Voraussetzung: IDO-17 ist abgeschlossen.
