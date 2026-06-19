@@ -394,6 +394,48 @@ def test_description_parser_attaches_geometry_ir_for_ac0212_vertical_two_way_val
     assert [element["kind"] for element in params["geometry_ir"]] == ["VerticalTwoWayValveMotorGlyph"]
 
 
+def test_description_parser_decomposes_neutral_two_way_valve_without_catalog_id() -> None:
+    _desc, params = _parse(
+        '2-Weg Ventil vertikal: Kelle mit Kreis rechts, horizontale Verbindungslinie, '
+        'M als Motor-Text im Kreis und zwei spitze Dreiecke, die sich in der Mitte berühren.'
+    )
+
+    assert params["contract_status"] == "ok"
+    element = params["geometry_ir"][0]
+    assert element["kind"] == "VerticalTwoWayValveMotorGlyph"
+    assert element["transform"] == {
+        "schema_version": "generic_geometry_transform_v1",
+        "rotation_deg": 0,
+    }
+    assert element["primitive_decomposition"] == {
+        "schema_version": "two_way_valve_primitive_decomposition_v1",
+        "orientation": "right",
+        "primitives": [
+            {"role": "valve_body", "kind": "PolygonPath", "count": 2},
+            {"role": "handle_circle", "kind": "CircleBackground"},
+            {"role": "handle_connector", "kind": "LineSegment"},
+            {"role": "handle_label", "kind": "TextGlyph", "text": "M"},
+        ],
+    }
+
+
+def test_description_parser_decomposes_neutral_rotated_two_way_valve_without_catalog_id() -> None:
+    _desc, params = _parse(
+        '2-Weg Ventil vertikal: Kelle mit Kreis rechts, horizontale Verbindungslinie, '
+        'M als Motor-Text im Kreis und zwei spitze Dreiecke, die sich in der Mitte berühren. '
+        'Geometrische Variante: 180° gedreht.'
+    )
+
+    assert params["contract_status"] == "ok"
+    element = params["geometry_ir"][0]
+    assert element["kind"] == "Rotated180TwoWayValveMotorGlyph"
+    assert element["transform"] == {
+        "schema_version": "generic_geometry_transform_v1",
+        "rotation_deg": 180,
+    }
+    assert element["primitive_decomposition"]["orientation"] == "left"
+
+
 def test_description_parser_attaches_geometry_ir_for_ac0213_left_rotated_two_way_valve_motor() -> None:
     _desc, params = _parse(
         'Wie AC0212: 2-Weg Ventil vertikal: Kelle mit Kreis rechts, horizontale Verbindungslinie, '
