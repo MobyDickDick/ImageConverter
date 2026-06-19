@@ -143,9 +143,10 @@ def finalizeAc08StyleImpl(
         if has_connector:
             template_floor_ratio = max(template_floor_ratio, 0.93)
         width_fill_floor = 1.0
+        vertical_text_connector_badge = False
         if has_connector and has_text and p.get("arm_enabled"):
-            # Vertical top/bottom connector families (e.g. AC0813/AC0833/AC0838)
-            # usually use a near full-width circle. Enforce a geometric lower
+            # Vertical top/bottom connector badges usually use a near full-width
+            # circle. Enforce a geometric lower
             # bound from the available lateral clearance so weak-mask fits do not
             # collapse to undersized circles.
             arm_x1 = float(p.get("arm_x1", p.get("cx", 0.0)))
@@ -180,6 +181,7 @@ def finalizeAc08StyleImpl(
                     arm_y2,
                     max(arm_y1, arm_y2) + template_r,
                 )
+            vertical_text_connector_badge = bool(is_vertical_connector)
             if is_vertical_connector and canvas_w > 0.0 and canvas_h > 0.0 and cx_now > 0.0 and cy_now > 0.0:
                 lateral_clearance = max(1.0, min(cx_now, canvas_w - cx_now) - (stroke / 2.0))
                 vertical_clearance = max(1.0, min(cy_now, canvas_h - cy_now) - (stroke / 2.0))
@@ -191,14 +193,14 @@ def finalizeAc08StyleImpl(
                 width_fill_floor,
             )
         )
-        if symbol_name == "AC0838" and str(p.get("text_mode", "")).lower() == "voc":
-            # AC0838_M often underfits the ring to satisfy noisy masks around the
-            # vertical connector. Keep the circle close to template scale so the
-            # VOC badge does not collapse visibly below the source glyph.
-            ac0838_radius_floor = max(1.0, template_r * 0.96)
-            p["min_circle_radius"] = float(max(float(p.get("min_circle_radius", 1.0)), ac0838_radius_floor))
+        if vertical_text_connector_badge and str(p.get("text_mode", "")).lower() == "voc":
+            # VOC badges with a vertical connector can underfit the ring to satisfy
+            # noisy connector masks. Keep the circle close to template scale so
+            # the badge does not collapse visibly below the source glyph.
+            vertical_voc_radius_floor = max(1.0, template_r * 0.96)
+            p["min_circle_radius"] = float(max(float(p.get("min_circle_radius", 1.0)), vertical_voc_radius_floor))
             p["circle_radius_lower_bound_px"] = float(
-                max(float(p.get("circle_radius_lower_bound_px", 1.0)), ac0838_radius_floor)
+                max(float(p.get("circle_radius_lower_bound_px", 1.0)), vertical_voc_radius_floor)
             )
 
         if not has_connector:
@@ -295,6 +297,11 @@ def finalizeAc08StyleImpl(
         )
         if preserve_centered_t_badge_geometry and key in p
     }
+    preserved_vertical_voc_keys = {
+        key: p[key]
+        for key in ("min_circle_radius", "circle_radius_lower_bound_px")
+        if vertical_text_connector_badge and str(p.get("text_mode", "")).lower() == "voc" and key in p
+    }
     for key in (
         "lock_circle_cx",
         "lock_circle_cy",
@@ -324,6 +331,8 @@ def finalizeAc08StyleImpl(
         "connector_family_direction",
     ):
         p.pop(key, None)
+    if preserved_vertical_voc_keys:
+        p.update(preserved_vertical_voc_keys)
     if preserve_centered_t_badge_geometry:
         p.update(preserved_centered_t_keys)
         min_r = float(max(1.0, p.get("min_circle_radius", p.get("r", 1.0))))
