@@ -5590,6 +5590,37 @@ def test_finalize_ac08_style_derives_adaptive_unlock_from_geometry_not_catalog_i
     assert params["adaptive_unlock_min_error"] == 18.0
 
 
+
+def test_finalize_ac08_style_applies_vertical_voc_radius_floor_without_catalog_id() -> None:
+    """Vertical VOC connector badges keep the ring floor through measured geometry."""
+    params = Action._finalize_ac08_style(
+        "AC08XX_VERTICAL_VOC",
+        {
+            "width": 18,
+            "height": 24,
+            "circle_enabled": True,
+            "arm_enabled": True,
+            "draw_text": True,
+            "text_mode": "voc",
+            "cx": 9.0,
+            "cy": 12.0,
+            "r": 6.0,
+            "template_circle_radius": 6.0,
+            "arm_x1": 9.0,
+            "arm_y1": 0.0,
+            "arm_x2": 9.0,
+            "arm_y2": 6.0,
+            "arm_stroke": 1.0,
+            "stroke_circle": 1.0,
+            "fill_gray": 220,
+            "stroke_gray": 152,
+            "text_gray": 152,
+        },
+    )
+
+    assert params["min_circle_radius"] >= 5.76
+    assert params["circle_radius_lower_bound_px"] >= 5.76
+
 def test_optimize_element_color_bracket_respects_adaptive_color_corridor(monkeypatch: pytest.MonkeyPatch) -> None:
     """Adaptive unlock color tuning must stay inside the configured narrow palette corridor."""
     np = image_composite_converter.np

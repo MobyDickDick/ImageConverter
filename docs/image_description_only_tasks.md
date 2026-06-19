@@ -287,7 +287,11 @@ Für jedes Arbeitspaket gelten zusätzlich zu den jeweiligen Akzeptanzkriterien:
     Geometrieparameter (`arm_enabled`, `draw_text=False`, linke
     Anschlussrichtung beziehungsweise Arm-/Kreis-Koordinaten). Ein neutraler
     `AC08XX_LEFT_ARM`-Test sichert die katalogfreie Auswahl; der Ratchet sinkt
-    auf 328 Runtime-ID-Vorkommen.
+    auf 328 Runtime-ID-Vorkommen. Run QY ersetzt den `AC0838`-Radiusfloor für
+    vertikale VOC-Connector-Badges durch messbare Geometrie (`arm_enabled`,
+    vertikale Arm-Koordinaten, Textmodus `voc` und Template-Radius). Ein
+    neutraler `AC08XX_VERTICAL_VOC`-Test sichert die katalogfreie Ring-Floor-
+    Auswahl; der Ratchet sinkt auf 324 Runtime-ID-Vorkommen.
 
 - [ ] **IDO-18 – Legacy-Baseline und Ratchet entfernen**
   - Voraussetzung: IDO-17 ist abgeschlossen.
