@@ -28,14 +28,20 @@ def finalizeAc08StyleImpl(
     p = capture_canonical_badge_colors_fn(normalize_light_circle_colors_fn(dict(params)))
     p["badge_symbol_name"] = symbol_name
     p.setdefault("enable_global_search_mode", True)
-    if symbol_name == "AC0812" and bool(p.get("arm_enabled", False)) and not bool(p.get("draw_text", False)):
-        # AC0812_L/M/S are simple left-arm + circle badges. The local
-        # element bracketing already covers their full geometry; the expensive
-        # global vector sampler repeatedly re-renders near-identical candidates
-        # and dominates isolated-render test/runtime without improving the
-        # semantic fit. Keep the family on the deterministic local path.
+    plain_connector_badge = bool(p.get("arm_enabled", False)) and not bool(p.get("draw_text", False))
+    left_connector_badge = str(p.get("connector_direction", "")).lower() == "left" or (
+        plain_connector_badge
+        and float(p.get("arm_x1", 1.0)) <= 0.5
+        and float(p.get("arm_x2", 0.0)) <= float(p.get("cx", 0.0))
+    )
+    if plain_connector_badge and left_connector_badge:
+        # Plain left-arm + circle badges are fully covered by local element
+        # bracketing. The expensive global vector sampler repeatedly re-renders
+        # near-identical candidates and dominates isolated-render test/runtime
+        # without improving the semantic fit. Keep this geometry class on the
+        # deterministic local path.
         p["enable_global_search_mode"] = False
-        p["global_search_disabled_reason"] = "ac0812_plain_left_arm_local_fit"
+        p["global_search_disabled_reason"] = "plain_left_arm_local_fit"
     p = normalize_ac08_line_widths_fn(p)
     p["lock_colors"] = True
     p = normalize_centered_co2_label_fn(p)

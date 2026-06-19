@@ -282,7 +282,12 @@ Für jedes Arbeitspaket gelten zusätzlich zu den jeweiligen Akzeptanzkriterien:
     `AC0811`-Guard aus den semantischen Quality-Markern; Borderline-Hinweise
     entstehen jetzt aus Elementfehlern allein und ein neutraler Badge-Test
     sichert die katalogfreie Bewertung. Der Ratchet sinkt auf 329
-    Runtime-ID-Vorkommen.
+    Runtime-ID-Vorkommen. Run QX ersetzt den `AC0812`-Guard für das Deaktivieren
+    des teuren Global-Search-Samplers bei einfachen linken Arm-Badges durch
+    Geometrieparameter (`arm_enabled`, `draw_text=False`, linke
+    Anschlussrichtung beziehungsweise Arm-/Kreis-Koordinaten). Ein neutraler
+    `AC08XX_LEFT_ARM`-Test sichert die katalogfreie Auswahl; der Ratchet sinkt
+    auf 328 Runtime-ID-Vorkommen.
 
 - [ ] **IDO-18 – Legacy-Baseline und Ratchet entfernen**
   - Voraussetzung: IDO-17 ist abgeschlossen.
