@@ -1,0 +1,255 @@
+{
+  "actual_iterations": 64,
+  "base": "GE9001",
+  "best_error": 23.655555555555555,
+  "best_iter": 1,
+  "convergence": "",
+  "elapsed_seconds": 0.5310000000172295,
+  "error_per_pixel": 0.03942592592592593,
+  "filename": "GE9001_1S.jpg",
+  "h": 60,
+  "localized_error_fraction": 0.7861442528824337,
+  "mean_delta2": 4535.22998046875,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [
+        {
+          "bbox": [
+            0.32,
+            0.12,
+            0.36,
+            0.76
+          ],
+          "confidence": 0.75,
+          "constraint": "inside_rect_border",
+          "id": "description_element_1",
+          "kind": "HorizontalGradient",
+          "source": "description",
+          "stops": [
+            "#8f8f8f",
+            "#dedede",
+            "#8f8f8f"
+          ]
+        },
+        {
+          "bbox": [
+            0.32,
+            0.12,
+            0.36,
+            0.76
+          ],
+          "confidence": 0.75,
+          "fill": "none",
+          "id": "description_element_2",
+          "kind": "RectBorder",
+          "source": "description",
+          "stroke": "#666666",
+          "stroke_width": 0.035
+        }
+      ],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": true,
+      "has_reference": false,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "GE9001",
+        "source": "base_name",
+        "text": "stillisierte Röhre. Im Prinzip sehr dünnes Rechteck, hochkant, horizontaler Farbverlauf rot/grau/rot"
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "geometry_ir": [
+      {
+        "bbox": [
+          0.32,
+          0.12,
+          0.36,
+          0.76
+        ],
+        "constraint": "inside_rect_border",
+        "id": "background_gradient",
+        "kind": "HorizontalGradient",
+        "stops": [
+          "#8f8f8f",
+          "#dedede",
+          "#8f8f8f"
+        ]
+      },
+      {
+        "bbox": [
+          0.32,
+          0.12,
+          0.36,
+          0.76
+        ],
+        "fill": "none",
+        "id": "main_rect",
+        "kind": "RectBorder",
+        "stroke": "#666666",
+        "stroke_width": 0.035
+      }
+    ],
+    "geometry_ir_optimizer_result": {
+      "element_refinement": {
+        "final_error": 23.655555555555555,
+        "initial_error": 23.655555555555555,
+        "mode": "right_rotated_valve_geometry",
+        "steps": []
+      },
+      "final_error": 23.655555555555555,
+      "initial_error": 32.55722222222222,
+      "mode": "geometry_ir_raster_registration",
+      "parameters": {
+        "scale_x": 1.38,
+        "scale_y": 1.3199999999999998,
+        "stroke_scale": 1.25,
+        "translate_x": 0.0,
+        "translate_y": 0.0
+      },
+      "steps": [
+        {
+          "best_delta": 0.2944444444444443,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": 0.08
+        },
+        {
+          "best_delta": 0.16222222222221916,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": 0.08
+        },
+        {
+          "best_delta": 1.161111111111115,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 1.15
+        },
+        {
+          "best_delta": 1.4461111111111116,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 1.15
+        },
+        {
+          "best_delta": 1.581666666666667,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": 0.0
+        },
+        {
+          "best_delta": 0.556111111111111,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": 0.0
+        },
+        {
+          "best_delta": 0.9622222222222199,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 1.2999999999999998
+        },
+        {
+          "best_delta": 1.9761111111111127,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 1.2999999999999998
+        },
+        {
+          "best_delta": 0.46444444444444244,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 1.25
+        },
+        {
+          "best_delta": 0.2766666666666673,
+          "parameter": "scale_x",
+          "stage": 1,
+          "value": 1.38
+        },
+        {
+          "best_delta": 0.00611111111111029,
+          "parameter": "translate_x",
+          "stage": 3,
+          "value": 0.01
+        },
+        {
+          "best_delta": 0.004444444444445139,
+          "parameter": "scale_y",
+          "stage": 3,
+          "value": 1.3199999999999998
+        },
+        {
+          "best_delta": 0.010000000000001563,
+          "parameter": "translate_x",
+          "stage": 3,
+          "value": 0.0
+        }
+      ]
+    },
+    "label": "M",
+    "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "bbox": [
+          0.25160000000000005,
+          -0.0015999999999999348,
+          0.49679999999999996,
+          1.0031999999999999
+        ],
+        "constraint": "inside_rect_border",
+        "id": "background_gradient",
+        "kind": "HorizontalGradient",
+        "stops": [
+          "#8f8f8f",
+          "#dedede",
+          "#8f8f8f"
+        ]
+      },
+      {
+        "bbox": [
+          0.25160000000000005,
+          -0.0015999999999999348,
+          0.49679999999999996,
+          1.0031999999999999
+        ],
+        "fill": "none",
+        "id": "main_rect",
+        "kind": "RectBorder",
+        "stroke": "#666666",
+        "stroke_width": 0.043750000000000004
+      }
+    ],
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "GE9001_1S"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 11751.03316287012,
+  "std_delta2": 5496.7724609375,
+  "tile_std_delta2": 5151.574163573587,
+  "variant": "GE9001_1S",
+  "w": 10
+}

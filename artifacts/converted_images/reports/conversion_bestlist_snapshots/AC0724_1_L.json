@@ -1,15 +1,49 @@
 {
+  "actual_iterations": 64,
   "base": "AC0724",
-  "best_error": 59.605037037037036,
+  "best_error": 49.16237037037037,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.05298225514403292,
+  "elapsed_seconds": 1.2660000000032596,
+  "error_per_pixel": 0.04369988477366255,
   "filename": "AC0724_1_L.jpg",
   "h": 25,
-  "mean_delta2": 27689.208984375,
+  "localized_error_fraction": 0.4982798475419453,
+  "mean_delta2": 11974.9072265625,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
+    "description_constraints": {
+      "elements": [
+        {
+          "clip_to": "main_rect",
+          "confidence": 0.75,
+          "direction": "tr_bl",
+          "id": "description_element_1",
+          "kind": "DiagonalBand",
+          "rect_ref": "main_rect",
+          "source": "description",
+          "stroke": "#707070",
+          "stroke_width": 0.045
+        }
+      ],
+      "relations": [
+        {
+          "confidence": 0.75,
+          "object": "main_rect",
+          "source": "description",
+          "subject": "description_element_1",
+          "type": "rect"
+        }
+      ],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
+      }
+    },
     "description_contract": {
       "deficits": [],
       "has_conditions": true,
@@ -39,8 +73,57 @@
         "stroke_width": 0.045
       }
     ],
+    "geometry_ir_optimizer_result": {
+      "element_refinement": {
+        "final_error": 68.83733333333333,
+        "initial_error": 68.83733333333333,
+        "mode": "right_rotated_valve_geometry",
+        "steps": []
+      },
+      "final_error": 68.83733333333333,
+      "initial_error": 68.98518518518519,
+      "mode": "geometry_ir_raster_registration",
+      "parameters": {
+        "scale_x": 1.0,
+        "scale_y": 1.0,
+        "stroke_scale": 0.25,
+        "translate_x": 0.0,
+        "translate_y": 0.0
+      },
+      "steps": [
+        {
+          "best_delta": 0.05303703703704343,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 0.75
+        },
+        {
+          "best_delta": 0.06399999999999295,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 0.5
+        },
+        {
+          "best_delta": 0.030814814814817737,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 0.25
+        }
+      ]
+    },
     "label": "M",
     "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "clip_to": "main_rect",
+        "direction": "tr_bl",
+        "id": "diagonal_1_tr_bl",
+        "kind": "DiagonalBand",
+        "rect_ref": "main_rect",
+        "stroke": "#707070",
+        "stroke_width": 0.01125
+      }
+    ],
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
@@ -51,7 +134,10 @@
     "top_source_ref": null,
     "variant_name": "AC0724_1_L"
   },
-  "std_delta2": 35501.7578125,
+  "requested_iterations": 64,
+  "spatial_quality_score": 21777.53115484423,
+  "std_delta2": 10772.7900390625,
+  "tile_std_delta2": 7940.253266559221,
   "variant": "AC0724_1_L",
   "w": 45
 }

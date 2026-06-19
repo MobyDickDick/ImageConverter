@@ -1,6 +1,6 @@
-run-meta: run_seed=717299025 pass_seed_offset=0 nonce_ns=1780496326389595500
+run-meta: run_seed=57493285 pass_seed_offset=0 nonce_ns=1781865967569004100
 status=semantic_ok
-redraw_variation: seed=724680837534 changed_params=cx:7.500->7.482 | cy:7.000->7.043 | r:6.000->6.086 | stroke_circle:1.000->1.059
+redraw_variation: seed=58106666980 changed_params=cx:7.500->7.531 | cy:7.000->7.027 | r:6.000->5.975 | stroke_circle:1.000->0.998
 semantic-guard: Textmodus aktiv (path_t).
 small_variant_mode_active: reason=min_dim, min_dim=12.000, mask_dilate_px=1, text_mode=path_t, arm_min_ratio=0.000, stem_min_ratio=0.000
 Runde 1: elementweise Validierung gestartet
@@ -13,7 +13,7 @@ text: Fehler=43.729
 text: Breiten-Bracketing übersprungen (s: current=0.005, Range=0.005..0.005)
 global-search: übersprungen (zu wenige aktive Parameter; benötigt >=2, aktiv=1)
 perf_probe: global_search_elapsed round=1 elapsed=0.00s
-Runde 1: Gesamtfehler=17.804
+Runde 1: Gesamtfehler=17.804; Qualität (MAE-basiert, höher=besser): 93.02% -> 93.02% | mittlere Pixelabweichung (MAE, kleiner=besser): 17.804 -> 17.804 | Mean-Delta² (kleiner=besser): 2290.320 -> 2290.320 | Qualitätsgewinn=+0.000 (+0.00%) | Wirkung=unverändert
 stagnation_detected: keine relevante Geometrieänderung in der letzten Validierungsrunde
 switch_to_fallback_search: deaktiviere Circle-Geometry-Penalty für eine letzte Ausweichrunde
 Runde 2: elementweise Validierung gestartet
@@ -23,7 +23,7 @@ text: Fehler=43.729
 text: Breiten-Bracketing übersprungen (s: current=0.005, Range=0.005..0.005)
 global-search: übersprungen (zu wenige aktive Parameter; benötigt >=2, aktiv=1)
 perf_probe: global_search_elapsed round=2 elapsed=0.00s
-Runde 2: Gesamtfehler=17.804
+Runde 2: Gesamtfehler=17.804; Qualität (MAE-basiert, höher=besser): 93.02% -> 93.02% | mittlere Pixelabweichung (MAE, kleiner=besser): 17.804 -> 17.804 | Mean-Delta² (kleiner=besser): 2290.320 -> 2290.320 | Qualitätsgewinn=+0.000 (+0.00%) | Wirkung=unverändert
 stable_improvement_probe: round=2, improved=false, count=1/2, eps=0.0200
 stagnation_detected: identischer Parameter-Fingerprint und praktisch unveränderter Gesamtfehler
 stopped_due_to_stagnation: Validierung vorzeitig beendet

@@ -1,15 +1,75 @@
 {
+  "actual_iterations": 64,
   "base": "AC0403",
-  "best_error": 46.87583333333333,
+  "best_error": 25.900833333333335,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.11718958333333333,
+  "elapsed_seconds": 0.6720000000204891,
+  "error_per_pixel": 0.06475208333333334,
   "filename": "AC0403_1S_sia.jpg",
   "h": 20,
-  "mean_delta2": 12670.2021484375,
+  "localized_error_fraction": 0.6910523675075511,
+  "mean_delta2": 9437.0078125,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
+    "description_constraints": {
+      "elements": [
+        {
+          "bbox": [
+            0.015,
+            0.015,
+            0.97,
+            0.97
+          ],
+          "confidence": 0.75,
+          "fill": "#de2048",
+          "id": "description_element_1",
+          "kind": "CircleBackground",
+          "source": "description",
+          "stroke": "#9a7d82",
+          "stroke_width": 0.018
+        },
+        {
+          "circle_ref": "pump_circle",
+          "confidence": 0.75,
+          "fill": "#e7e7e7",
+          "id": "description_element_2",
+          "kind": "PumpTriangleGlyph",
+          "points": [
+            [
+              0.18,
+              0.24
+            ],
+            [
+              0.82,
+              0.24
+            ],
+            [
+              0.5,
+              0.9
+            ]
+          ],
+          "source": "description"
+        }
+      ],
+      "relations": [
+        {
+          "confidence": 0.75,
+          "object": "pump_circle",
+          "source": "description",
+          "subject": "description_element_2",
+          "type": "circle"
+        }
+      ],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
+      }
+    },
     "description_contract": {
       "deficits": [],
       "has_conditions": false,
@@ -29,9 +89,176 @@
       "AC0401"
     ],
     "elements": [],
-    "geometry_ir": [],
+    "geometry_ir": [
+      {
+        "bbox": [
+          0.015,
+          0.015,
+          0.97,
+          0.97
+        ],
+        "fill": "#de2048",
+        "id": "pump_circle",
+        "kind": "CircleBackground",
+        "stroke": "#9a7d82",
+        "stroke_width": 0.018
+      },
+      {
+        "circle_ref": "pump_circle",
+        "fill": "#e7e7e7",
+        "id": "pump_triangle",
+        "kind": "PumpTriangleGlyph",
+        "points": [
+          [
+            0.18,
+            0.24
+          ],
+          [
+            0.82,
+            0.24
+          ],
+          [
+            0.5,
+            0.9
+          ]
+        ]
+      }
+    ],
+    "geometry_ir_optimizer_result": {
+      "element_refinement": {
+        "final_error": 36.11666666666667,
+        "initial_error": 36.11666666666667,
+        "mode": "right_rotated_valve_geometry",
+        "steps": []
+      },
+      "final_error": 36.11666666666667,
+      "initial_error": 38.461666666666666,
+      "mode": "geometry_ir_raster_registration",
+      "parameters": {
+        "scale_x": 1.02,
+        "scale_y": 1.19,
+        "stroke_scale": 2.32,
+        "translate_x": 0.0,
+        "translate_y": 0.11
+      },
+      "steps": [
+        {
+          "best_delta": 0.44583333333333286,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": 0.08
+        },
+        {
+          "best_delta": 0.7700000000000031,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 1.15
+        },
+        {
+          "best_delta": 0.19499999999999318,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 1.25
+        },
+        {
+          "best_delta": 0.1600000000000037,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 1.5
+        },
+        {
+          "best_delta": 0.11500000000000199,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 1.75
+        },
+        {
+          "best_delta": 0.09833333333332916,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 2.0
+        },
+        {
+          "best_delta": 0.021666666666668277,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 2.25
+        },
+        {
+          "best_delta": 0.030833333333333712,
+          "parameter": "stroke_scale",
+          "stage": 1,
+          "value": 2.4
+        },
+        {
+          "best_delta": 0.17166666666666686,
+          "parameter": "translate_y",
+          "stage": 2,
+          "value": 0.1
+        },
+        {
+          "best_delta": 0.0625,
+          "parameter": "scale_y",
+          "stage": 2,
+          "value": 1.19
+        },
+        {
+          "best_delta": 0.011666666666663161,
+          "parameter": "stroke_scale",
+          "stage": 2,
+          "value": 2.32
+        },
+        {
+          "best_delta": 0.1525000000000034,
+          "parameter": "translate_y",
+          "stage": 3,
+          "value": 0.11
+        },
+        {
+          "best_delta": 0.10999999999999943,
+          "parameter": "scale_x",
+          "stage": 3,
+          "value": 1.02
+        }
+      ]
+    },
     "label": "M",
     "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "bbox": [
+          0.005300000000000027,
+          0.03285000000000006,
+          0.9894,
+          1.1542999999999999
+        ],
+        "fill": "#de2048",
+        "id": "pump_circle",
+        "kind": "CircleBackground",
+        "stroke": "#9a7d82",
+        "stroke_width": 0.04175999999999999
+      },
+      {
+        "circle_ref": "pump_circle",
+        "fill": "#e7e7e7",
+        "id": "pump_triangle",
+        "kind": "PumpTriangleGlyph",
+        "points": [
+          [
+            0.17359999999999998,
+            0.3006
+          ],
+          [
+            0.8264,
+            0.3006
+          ],
+          [
+            0.5,
+            1.086
+          ]
+        ]
+      }
+    ],
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
@@ -42,7 +269,10 @@
     "top_source_ref": null,
     "variant_name": "AC0403_1S_SIA"
   },
-  "std_delta2": 14341.4736328125,
+  "requested_iterations": 64,
+  "spatial_quality_score": 31742.160487097557,
+  "std_delta2": 20163.919921875,
+  "tile_std_delta2": 17294.30271149155,
   "variant": "AC0403_1S_SIA",
   "w": 20
 }

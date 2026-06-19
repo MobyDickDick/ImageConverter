@@ -1,14 +1,38 @@
 {
+  "actual_iterations": 64,
   "base": "Z_204",
-  "best_error": 37.94035947712418,
+  "best_error": 29.319444444444443,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.09299107714981418,
+  "elapsed_seconds": 0.5469999999913853,
+  "error_per_pixel": 0.0718613834422658,
   "filename": "z_204.jpg",
   "h": 6,
-  "mean_delta2": 7176.93359375,
+  "localized_error_fraction": 0.7488888156591333,
+  "mean_delta2": 6173.30615234375,
   "params": {
     "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": false,
+      "status": "ok"
+    },
     "description_fragments": [
       {
         "key": "z_204",
@@ -18,6 +42,7 @@
     ],
     "documented_alias_refs": [],
     "elements": [],
+    "geometry_ir": [],
     "label": "M",
     "mode": "auto",
     "semantic_conflicts": [],
@@ -30,7 +55,10 @@
     "top_source_ref": null,
     "variant_name": "Z_204"
   },
-  "std_delta2": 3519.235107421875,
+  "requested_iterations": 64,
+  "spatial_quality_score": 15973.683945573557,
+  "std_delta2": 8115.7646484375,
+  "tile_std_delta2": 8083.470109422936,
   "variant": "Z_204",
   "w": 68
 }

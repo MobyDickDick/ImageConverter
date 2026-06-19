@@ -1,15 +1,31 @@
 {
+  "actual_iterations": 64,
   "base": "AC110",
   "best_error": 28.360185185185184,
   "best_iter": 1,
   "convergence": "",
+  "elapsed_seconds": 0.3129999999946449,
   "error_per_pixel": 0.01575565843621399,
   "filename": "AC110_1_M.jpg",
   "h": 60,
+  "localized_error_fraction": 0.33033116597357104,
   "mean_delta2": 5392.96728515625,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
     "description_contract": {
       "deficits": [],
       "has_conditions": true,
@@ -42,7 +58,10 @@
     "top_source_ref": null,
     "variant_name": "AC110_1_M"
   },
+  "requested_iterations": 64,
+  "spatial_quality_score": 7995.474453922136,
   "std_delta2": 8145.3212890625,
+  "tile_std_delta2": 1232.9075047802382,
   "variant": "AC110_1_M",
   "w": 30
 }

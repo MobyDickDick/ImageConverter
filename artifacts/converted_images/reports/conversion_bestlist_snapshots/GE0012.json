@@ -1,0 +1,211 @@
+{
+  "actual_iterations": 64,
+  "base": "GE0012",
+  "best_error": 25.96477567667779,
+  "best_iter": 1,
+  "convergence": "",
+  "elapsed_seconds": 0.5469999999913853,
+  "error_per_pixel": 0.028881841687072068,
+  "filename": "GE0012.jpg",
+  "h": 31,
+  "localized_error_fraction": 0.38665531210248383,
+  "mean_delta2": 2918.04345703125,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [
+        {
+          "bbox": [
+            0.18,
+            0.24,
+            0.64,
+            0.56
+          ],
+          "confidence": 0.75,
+          "fill": "#d8d8d8",
+          "id": "description_element_1",
+          "kind": "RectBorder",
+          "source": "description",
+          "stroke": "#666666",
+          "stroke_width": 0.035
+        }
+      ],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": false,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "GE0012",
+        "source": "base_name",
+        "text": "Schematischer Kalender (mit der Zahl 31) Unten: Tabellenform mit weißen Rechtecken, ca 7 horizontal, 4 - 5 vertikal. Hintergrund Farbverflauf: Links dunkelgrau, rechts hellgrau"
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "geometry_ir": [
+      {
+        "bbox": [
+          0.18,
+          0.24,
+          0.64,
+          0.56
+        ],
+        "fill": "#d8d8d8",
+        "id": "main_rect",
+        "kind": "RectBorder",
+        "stroke": "#666666",
+        "stroke_width": 0.035
+      }
+    ],
+    "geometry_ir_optimizer_result": {
+      "element_refinement": {
+        "final_error": 31.492769744160178,
+        "initial_error": 31.492769744160178,
+        "mode": "right_rotated_valve_geometry",
+        "steps": []
+      },
+      "final_error": 31.492769744160178,
+      "initial_error": 45.9358546533185,
+      "mode": "geometry_ir_raster_registration",
+      "parameters": {
+        "scale_x": 1.23,
+        "scale_y": 1.4499999999999997,
+        "stroke_scale": 0.77,
+        "translate_x": -0.04,
+        "translate_y": 0.0
+      },
+      "steps": [
+        {
+          "best_delta": 0.08305524657026098,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": -0.08
+        },
+        {
+          "best_delta": 2.824990730441229,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": 0.08
+        },
+        {
+          "best_delta": 1.5977011494252906,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 1.15
+        },
+        {
+          "best_delta": 0.7119021134594021,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 1.15
+        },
+        {
+          "best_delta": 0.8023730070448636,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 0.75
+        },
+        {
+          "best_delta": 0.13014460511679715,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 1.2999999999999998
+        },
+        {
+          "best_delta": 1.8431590656284698,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 0.5
+        },
+        {
+          "best_delta": 1.258435298479796,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": 0.0
+        },
+        {
+          "best_delta": 3.160177975528363,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 1.4499999999999997
+        },
+        {
+          "best_delta": 0.6789024842417533,
+          "parameter": "translate_x",
+          "stage": 1,
+          "value": -0.04
+        },
+        {
+          "best_delta": 0.7886540600667402,
+          "parameter": "scale_x",
+          "stage": 1,
+          "value": 1.23
+        },
+        {
+          "best_delta": 0.4701520207638126,
+          "parameter": "stroke_scale",
+          "stage": 1,
+          "value": 0.65
+        },
+        {
+          "best_delta": 0.09269558769002373,
+          "parameter": "stroke_scale",
+          "stage": 2,
+          "value": 0.73
+        },
+        {
+          "best_delta": 0.0007415647015207583,
+          "parameter": "stroke_scale",
+          "stage": 3,
+          "value": 0.77
+        }
+      ]
+    },
+    "label": "M",
+    "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "bbox": [
+          0.06639999999999999,
+          0.12300000000000005,
+          0.7872,
+          0.8119999999999999
+        ],
+        "fill": "#d8d8d8",
+        "id": "main_rect",
+        "kind": "RectBorder",
+        "stroke": "#666666",
+        "stroke_width": 0.02695
+      }
+    ],
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "GE0012"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 4247.6305277245465,
+  "std_delta2": 2009.6136474609375,
+  "tile_std_delta2": 945.9812207107728,
+  "variant": "GE0012",
+  "w": 29
+}

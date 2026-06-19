@@ -1,0 +1,241 @@
+{
+  "actual_iterations": 64,
+  "base": "GE0043",
+  "best_error": 21.3792,
+  "best_iter": 1,
+  "convergence": "",
+  "elapsed_seconds": 0.75,
+  "error_per_pixel": 0.03420672,
+  "filename": "GE0043_S.jpg",
+  "h": 25,
+  "localized_error_fraction": 0.43013264129181084,
+  "mean_delta2": 2164.031982421875,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [
+        {
+          "bbox": [
+            0.18,
+            0.24,
+            0.64,
+            0.56
+          ],
+          "confidence": 0.75,
+          "fill": "#d8d8d8",
+          "id": "description_element_1",
+          "kind": "RectBorder",
+          "source": "description",
+          "stroke": "#666666",
+          "stroke_width": 0.035
+        }
+      ],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": false,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "GE0043",
+        "source": "base_name",
+        "text": "Schematischer Kalender (mit der Zahl 31) Unten: Tabellenform mit weißen Rechtecken, ca 7 horizontal, 4 - 5 vertikal. Hintergrund Farbverflauf: Links dunkelgrau, rechts hellgrau"
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "geometry_ir": [
+      {
+        "bbox": [
+          0.18,
+          0.24,
+          0.64,
+          0.56
+        ],
+        "fill": "#d8d8d8",
+        "id": "main_rect",
+        "kind": "RectBorder",
+        "stroke": "#666666",
+        "stroke_width": 0.035
+      }
+    ],
+    "geometry_ir_optimizer_result": {
+      "element_refinement": {
+        "final_error": 27.540266666666668,
+        "initial_error": 27.540266666666668,
+        "mode": "right_rotated_valve_geometry",
+        "steps": []
+      },
+      "final_error": 27.540266666666668,
+      "initial_error": 49.5424,
+      "mode": "geometry_ir_raster_registration",
+      "parameters": {
+        "scale_x": 1.7499999999999996,
+        "scale_y": 1.7699999999999996,
+        "stroke_scale": 0.9,
+        "translate_x": 0.0,
+        "translate_y": 0.0
+      },
+      "steps": [
+        {
+          "best_delta": 1.0069333333333361,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": 0.08
+        },
+        {
+          "best_delta": 2.018666666666661,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 1.15
+        },
+        {
+          "best_delta": 3.251733333333334,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 1.15
+        },
+        {
+          "best_delta": 1.748266666666666,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": -0.08
+        },
+        {
+          "best_delta": 1.482133333333337,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 1.2999999999999998
+        },
+        {
+          "best_delta": 0.6368000000000009,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 1.2999999999999998
+        },
+        {
+          "best_delta": 1.2511999999999972,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 0.75
+        },
+        {
+          "best_delta": 0.26773333333333227,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": 0.0
+        },
+        {
+          "best_delta": 1.0335999999999999,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 1.4499999999999997
+        },
+        {
+          "best_delta": 2.656000000000006,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 1.4499999999999997
+        },
+        {
+          "best_delta": 0.16159999999999997,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 0.5
+        },
+        {
+          "best_delta": 2.3877333333333297,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": 0.0
+        },
+        {
+          "best_delta": 2.1962666666666664,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 1.5999999999999996
+        },
+        {
+          "best_delta": 1.623466666666669,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 1.7499999999999996
+        },
+        {
+          "best_delta": 0.009599999999998943,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 0.75
+        },
+        {
+          "best_delta": 0.12906666666666666,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 1.5999999999999996
+        },
+        {
+          "best_delta": 0.09759999999999991,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 1.7499999999999996
+        },
+        {
+          "best_delta": 0.008533333333332394,
+          "parameter": "stroke_scale",
+          "stage": 1,
+          "value": 0.9
+        },
+        {
+          "best_delta": 0.035199999999999676,
+          "parameter": "scale_y",
+          "stage": 3,
+          "value": 1.7699999999999996
+        }
+      ]
+    },
+    "label": "M",
+    "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "bbox": [
+          -0.05999999999999983,
+          0.03980000000000011,
+          1.1199999999999997,
+          0.9911999999999999
+        ],
+        "fill": "#d8d8d8",
+        "id": "main_rect",
+        "kind": "RectBorder",
+        "stroke": "#666666",
+        "stroke_width": 0.03150000000000001
+      }
+    ],
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "GE0043_S"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 3507.0942443435865,
+  "std_delta2": 1834.4483642578125,
+  "tile_std_delta2": 1085.6909480820523,
+  "variant": "GE0043_S",
+  "w": 25
+}

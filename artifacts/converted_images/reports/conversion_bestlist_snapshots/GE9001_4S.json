@@ -1,15 +1,63 @@
 {
+  "actual_iterations": 64,
   "base": "GE9001",
-  "best_error": 31.010555555555555,
+  "best_error": 3.4,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.051684259259259256,
+  "elapsed_seconds": 0.625,
+  "error_per_pixel": 0.005666666666666666,
   "filename": "GE9001_4S.jpg",
   "h": 60,
-  "mean_delta2": 5198.544921875,
+  "localized_error_fraction": 0.6038152610441767,
+  "mean_delta2": 66.4000015258789,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
+    "description_constraints": {
+      "elements": [
+        {
+          "bbox": [
+            0.32,
+            0.12,
+            0.36,
+            0.76
+          ],
+          "confidence": 0.75,
+          "constraint": "inside_rect_border",
+          "id": "description_element_1",
+          "kind": "HorizontalGradient",
+          "source": "description",
+          "stops": [
+            "#8f8f8f",
+            "#dedede",
+            "#8f8f8f"
+          ]
+        },
+        {
+          "bbox": [
+            0.32,
+            0.12,
+            0.36,
+            0.76
+          ],
+          "confidence": 0.75,
+          "fill": "none",
+          "id": "description_element_2",
+          "kind": "RectBorder",
+          "source": "description",
+          "stroke": "#666666",
+          "stroke_width": 0.035
+        }
+      ],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
+      }
+    },
     "description_contract": {
       "deficits": [],
       "has_conditions": false,
@@ -57,8 +105,107 @@
         "stroke_width": 0.035
       }
     ],
+    "geometry_ir_optimizer_result": {
+      "element_refinement": {
+        "final_error": 3.4,
+        "initial_error": 3.4,
+        "mode": "right_rotated_valve_geometry",
+        "steps": []
+      },
+      "final_error": 3.4,
+      "initial_error": 18.057222222222222,
+      "mode": "geometry_ir_raster_registration",
+      "parameters": {
+        "scale_x": 1.15,
+        "scale_y": 1.4499999999999997,
+        "stroke_scale": 1.0,
+        "translate_x": 0.0,
+        "translate_y": 0.0
+      },
+      "steps": [
+        {
+          "best_delta": 0.34666666666666757,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": 0.08
+        },
+        {
+          "best_delta": 7.733888888888888,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 1.15
+        },
+        {
+          "best_delta": 2.6783333333333337,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 1.15
+        },
+        {
+          "best_delta": 0.8049999999999997,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": 0.0
+        },
+        {
+          "best_delta": 2.7516666666666665,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 1.2999999999999998
+        },
+        {
+          "best_delta": 0.03833333333333355,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 0.75
+        },
+        {
+          "best_delta": 0.20333333333333314,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 1.4499999999999997
+        },
+        {
+          "best_delta": 0.10000000000000009,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 1.0
+        }
+      ]
+    },
     "label": "M",
     "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "bbox": [
+          0.29300000000000004,
+          -0.050999999999999934,
+          0.414,
+          1.1019999999999999
+        ],
+        "constraint": "inside_rect_border",
+        "id": "background_gradient",
+        "kind": "HorizontalGradient",
+        "stops": [
+          "#8f8f8f",
+          "#dedede",
+          "#8f8f8f"
+        ]
+      },
+      {
+        "bbox": [
+          0.29300000000000004,
+          -0.050999999999999934,
+          0.414,
+          1.1019999999999999
+        ],
+        "fill": "none",
+        "id": "main_rect",
+        "kind": "RectBorder",
+        "stroke": "#666666",
+        "stroke_width": 0.035
+      }
+    ],
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
@@ -69,7 +216,10 @@
     "top_source_ref": null,
     "variant_name": "GE9001_4S"
   },
-  "std_delta2": 5574.31884765625,
+  "requested_iterations": 64,
+  "spatial_quality_score": 143.5745226419272,
+  "std_delta2": 72.09188842773438,
+  "tile_std_delta2": 65.65332721957053,
   "variant": "GE9001_4S",
   "w": 10
 }

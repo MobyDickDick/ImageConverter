@@ -1,0 +1,188 @@
+{
+  "actual_iterations": 64,
+  "base": "GE1312",
+  "best_error": 249.32095238095238,
+  "best_iter": 1,
+  "convergence": "",
+  "elapsed_seconds": 0.35899999999674037,
+  "error_per_pixel": 0.05936213151927438,
+  "filename": "GE1312_S.jpg",
+  "h": 20,
+  "localized_error_fraction": 0.31249369030979673,
+  "mean_delta2": 187278.078125,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [
+        {
+          "bbox": [
+            0.18,
+            0.24,
+            0.64,
+            0.56
+          ],
+          "confidence": 0.75,
+          "constraint": "inside_rect_border",
+          "id": "description_element_1",
+          "kind": "HorizontalGradient",
+          "source": "description",
+          "stops": [
+            "#8f8f8f",
+            "#dedede",
+            "#8f8f8f"
+          ]
+        },
+        {
+          "bbox": [
+            0.18,
+            0.24,
+            0.64,
+            0.56
+          ],
+          "confidence": 0.75,
+          "fill": "none",
+          "id": "description_element_2",
+          "kind": "RectBorder",
+          "source": "description",
+          "stroke": "#666666",
+          "stroke_width": 0.035
+        },
+        {
+          "clip_to": "main_rect",
+          "confidence": 0.75,
+          "direction": "tr_bl",
+          "id": "description_element_3",
+          "kind": "DiagonalBand",
+          "rect_ref": "main_rect",
+          "source": "description",
+          "stroke": "#707070",
+          "stroke_width": 0.045
+        },
+        {
+          "confidence": 0.75,
+          "id": "description_element_4",
+          "kind": "PlusGlyph",
+          "position": "top_left",
+          "source": "description",
+          "stroke": "#4f4f4f",
+          "stroke_width": 0.025
+        },
+        {
+          "confidence": 0.75,
+          "id": "description_element_5",
+          "kind": "MinusGlyph",
+          "position": "top_left",
+          "source": "description",
+          "stroke": "#4f4f4f",
+          "stroke_width": 0.025
+        }
+      ],
+      "relations": [
+        {
+          "confidence": 0.75,
+          "object": "main_rect",
+          "source": "description",
+          "subject": "description_element_3",
+          "type": "rect"
+        }
+      ],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "GE1312",
+        "source": "base_name",
+        "text": "Wie AC0010: Heizelement, graues Rechteck, Plus-Minus-Zeichen oben links, Farbverlauf horizontal dunkel-hell-dunkel graue Diagonale oben rechts nach unten links. Geometrische Variante: identisch zur Referenz."
+      }
+    ],
+    "documented_alias_refs": [
+      "AC0010"
+    ],
+    "elements": [],
+    "geometry_ir": [
+      {
+        "bbox": [
+          0.18,
+          0.24,
+          0.64,
+          0.56
+        ],
+        "constraint": "inside_rect_border",
+        "id": "background_gradient",
+        "kind": "HorizontalGradient",
+        "stops": [
+          "#8f8f8f",
+          "#dedede",
+          "#8f8f8f"
+        ]
+      },
+      {
+        "bbox": [
+          0.18,
+          0.24,
+          0.64,
+          0.56
+        ],
+        "fill": "none",
+        "id": "main_rect",
+        "kind": "RectBorder",
+        "stroke": "#666666",
+        "stroke_width": 0.035
+      },
+      {
+        "clip_to": "main_rect",
+        "direction": "tr_bl",
+        "id": "diagonal_1_tr_bl",
+        "kind": "DiagonalBand",
+        "rect_ref": "main_rect",
+        "stroke": "#707070",
+        "stroke_width": 0.045
+      },
+      {
+        "id": "plus_glyph",
+        "kind": "PlusGlyph",
+        "position": "top_left",
+        "stroke": "#4f4f4f",
+        "stroke_width": 0.025
+      },
+      {
+        "id": "minus_glyph",
+        "kind": "MinusGlyph",
+        "position": "top_left",
+        "stroke": "#4f4f4f",
+        "stroke_width": 0.025
+      }
+    ],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "GE1312_S"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 217167.46993442415,
+  "std_delta2": 20945.65234375,
+  "tile_std_delta2": 12535.51469352512,
+  "variant": "GE1312_S",
+  "w": 210
+}

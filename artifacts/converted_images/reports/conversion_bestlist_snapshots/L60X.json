@@ -1,0 +1,64 @@
+{
+  "actual_iterations": 64,
+  "base": "L60X",
+  "best_error": 56.25337349397591,
+  "best_iter": 1,
+  "convergence": "",
+  "elapsed_seconds": 0.7190000000118744,
+  "error_per_pixel": 0.006777514878792278,
+  "filename": "L60x.jpg",
+  "h": 83,
+  "localized_error_fraction": 0.6635994883862215,
+  "mean_delta2": 19057.296875,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": false,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "L60x",
+        "source": "base_name",
+        "text": "sehr komplexe Form, wahrscheinlich sehr schwierig zum nachzeichnen. Grundform von L60x_T. Mit LCD-Display und Bedienung auf der rechten Seite. Ellipse in der Mitte, oben und unten Dreiecke mit gebogenen unterer respektive oberen Seite. Zuunterst noch ein grauer kleiner Punkt"
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "geometry_ir": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "L60X"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 44882.37970655473,
+  "std_delta2": 27735.486328125,
+  "tile_std_delta2": 20821.02206769587,
+  "variant": "L60X",
+  "w": 100
+}

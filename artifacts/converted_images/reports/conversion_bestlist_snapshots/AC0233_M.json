@@ -1,0 +1,486 @@
+{
+  "actual_iterations": 64,
+  "base": "AC0233",
+  "best_error": 26.12814814814815,
+  "best_iter": 1,
+  "convergence": "",
+  "elapsed_seconds": 0.3129999999946449,
+  "error_per_pixel": 0.019354183813443074,
+  "filename": "AC0233_M.jpg",
+  "h": 45,
+  "localized_error_fraction": 0.7173895929268935,
+  "mean_delta2": 6351.193359375,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [
+        {
+          "body_fill": "url(#vertical-two-way-valve-body-gradient)",
+          "body_paths": [
+            [
+              [
+                0.5,
+                0.39
+              ],
+              [
+                0.98,
+                0.545
+              ],
+              [
+                0.98,
+                0.235
+              ]
+            ],
+            [
+              [
+                0.5,
+                0.39
+              ],
+              [
+                0.02,
+                0.545
+              ],
+              [
+                0.02,
+                0.235
+              ]
+            ],
+            [
+              [
+                0.5,
+                0.39
+              ],
+              [
+                0.667,
+                0.04
+              ],
+              [
+                0.333,
+                0.04
+              ]
+            ]
+          ],
+          "circle": [
+            0.5,
+            0.765,
+            0.225
+          ],
+          "circle_fill": "url(#vertical-two-way-valve-circle-gradient)",
+          "confidence": 0.75,
+          "connector": [
+            [
+              0.5,
+              0.55
+            ],
+            [
+              0.5,
+              0.39
+            ]
+          ],
+          "connector_stroke": "#8f8f8f",
+          "connector_width": 0.075,
+          "font_size": 0.32,
+          "id": "description_element_1",
+          "kind": "Rotated180TopKelleThreeWayValveGlyph",
+          "label": "M",
+          "label_center": [
+            0.5,
+            0.765
+          ],
+          "primitive_decomposition": {
+            "orientation": "bottom",
+            "primitives": [
+              {
+                "count": 3,
+                "kind": "PolygonPath",
+                "role": "valve_body"
+              },
+              {
+                "kind": "CircleBackground",
+                "role": "handle_circle"
+              },
+              {
+                "kind": "LineSegment",
+                "role": "handle_connector"
+              },
+              {
+                "kind": "TextGlyph",
+                "role": "handle_label",
+                "text": "M"
+              }
+            ],
+            "schema_version": "kelle_valve_primitive_decomposition_v1"
+          },
+          "source": "description",
+          "stroke": "#969696",
+          "stroke_width": 0.04,
+          "text_fill": "#666666",
+          "transform": {
+            "rotation_deg": 180,
+            "schema_version": "generic_geometry_transform_v1"
+          }
+        }
+      ],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "AC0233",
+        "source": "base_name",
+        "text": "Wie AC0231: 3-Weg Ventil ähnlich AC0211, um 90° im Uhrzeigersinn gedreht, \"M\" wird immer noch senkrecht geschrieben. Noch ein 3. spitzes Dreieck unten. Wieder Farbwechsel von Dunkelgrau nach hellgrau (von links unten nach rechts oben). Geometrische Variante: 180° gedreht."
+      }
+    ],
+    "documented_alias_refs": [
+      "AC0231"
+    ],
+    "elements": [],
+    "geometry_ir": [
+      {
+        "body_fill": "url(#vertical-two-way-valve-body-gradient)",
+        "body_paths": [
+          [
+            [
+              0.5,
+              0.39
+            ],
+            [
+              0.98,
+              0.545
+            ],
+            [
+              0.98,
+              0.235
+            ]
+          ],
+          [
+            [
+              0.5,
+              0.39
+            ],
+            [
+              0.02,
+              0.545
+            ],
+            [
+              0.02,
+              0.235
+            ]
+          ],
+          [
+            [
+              0.5,
+              0.39
+            ],
+            [
+              0.667,
+              0.04
+            ],
+            [
+              0.333,
+              0.04
+            ]
+          ]
+        ],
+        "circle": [
+          0.5,
+          0.765,
+          0.225
+        ],
+        "circle_fill": "url(#vertical-two-way-valve-circle-gradient)",
+        "connector": [
+          [
+            0.5,
+            0.55
+          ],
+          [
+            0.5,
+            0.39
+          ]
+        ],
+        "connector_stroke": "#8f8f8f",
+        "connector_width": 0.075,
+        "font_size": 0.32,
+        "id": "rotated_180_top_kelle_three_way_valve",
+        "kind": "Rotated180TopKelleThreeWayValveGlyph",
+        "label": "M",
+        "label_center": [
+          0.5,
+          0.765
+        ],
+        "primitive_decomposition": {
+          "orientation": "bottom",
+          "primitives": [
+            {
+              "count": 3,
+              "kind": "PolygonPath",
+              "role": "valve_body"
+            },
+            {
+              "kind": "CircleBackground",
+              "role": "handle_circle"
+            },
+            {
+              "kind": "LineSegment",
+              "role": "handle_connector"
+            },
+            {
+              "kind": "TextGlyph",
+              "role": "handle_label",
+              "text": "M"
+            }
+          ],
+          "schema_version": "kelle_valve_primitive_decomposition_v1"
+        },
+        "stroke": "#969696",
+        "stroke_width": 0.04,
+        "text_fill": "#666666",
+        "transform": {
+          "rotation_deg": 180,
+          "schema_version": "generic_geometry_transform_v1"
+        }
+      }
+    ],
+    "geometry_ir_optimizer_result": {
+      "element_refinement": {
+        "final_error": 26.12814814814815,
+        "initial_error": 26.12814814814815,
+        "mode": "right_rotated_valve_geometry",
+        "steps": []
+      },
+      "final_error": 26.12814814814815,
+      "initial_error": 35.61283950617284,
+      "mode": "geometry_ir_raster_registration",
+      "parameters": {
+        "scale_x": 0.9199999999999999,
+        "scale_y": 0.79,
+        "stroke_scale": 2.26,
+        "translate_x": 0.0,
+        "translate_y": -0.08
+      },
+      "steps": [
+        {
+          "best_delta": 1.2918518518518525,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": -0.08
+        },
+        {
+          "best_delta": 1.05506172839506,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 1.15
+        },
+        {
+          "best_delta": 2.068888888888889,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 0.85
+        },
+        {
+          "best_delta": 0.7575308641975305,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 1.25
+        },
+        {
+          "best_delta": 1.0439506172839508,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.9999999999999999
+        },
+        {
+          "best_delta": 0.7622222222222241,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 1.5
+        },
+        {
+          "best_delta": 0.041975308641973186,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 1.75
+        },
+        {
+          "best_delta": 0.09382716049382722,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 2.0
+        },
+        {
+          "best_delta": 0.24444444444444713,
+          "parameter": "scale_x",
+          "stage": 1,
+          "value": 0.9199999999999999
+        },
+        {
+          "best_delta": 1.3404938271604934,
+          "parameter": "scale_y",
+          "stage": 1,
+          "value": 0.77
+        },
+        {
+          "best_delta": 0.18172839506172878,
+          "parameter": "stroke_scale",
+          "stage": 1,
+          "value": 2.15
+        },
+        {
+          "best_delta": 0.20938271604938308,
+          "parameter": "stroke_scale",
+          "stage": 1,
+          "value": 2.3
+        },
+        {
+          "best_delta": 0.3414814814814804,
+          "parameter": "scale_y",
+          "stage": 3,
+          "value": 0.79
+        },
+        {
+          "best_delta": 0.05185185185185048,
+          "parameter": "stroke_scale",
+          "stage": 3,
+          "value": 2.26
+        }
+      ]
+    },
+    "label": "M",
+    "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "body_fill": "url(#vertical-two-way-valve-body-gradient)",
+        "body_paths": [
+          [
+            [
+              0.5,
+              0.3331
+            ],
+            [
+              0.9416,
+              0.45555000000000007
+            ],
+            [
+              0.9416,
+              0.21064999999999995
+            ]
+          ],
+          [
+            [
+              0.5,
+              0.3331
+            ],
+            [
+              0.05840000000000006,
+              0.45555000000000007
+            ],
+            [
+              0.05840000000000006,
+              0.21064999999999995
+            ]
+          ],
+          [
+            [
+              0.5,
+              0.3331
+            ],
+            [
+              0.65364,
+              0.05659999999999994
+            ],
+            [
+              0.34636,
+              0.05659999999999994
+            ]
+          ]
+        ],
+        "circle": [
+          0.5,
+          0.6293500000000001,
+          0.17775000000000002
+        ],
+        "circle_fill": "url(#vertical-two-way-valve-circle-gradient)",
+        "connector": [
+          [
+            0.5,
+            0.4595000000000001
+          ],
+          [
+            0.5,
+            0.3331
+          ]
+        ],
+        "connector_stroke": "#8f8f8f",
+        "connector_width": 0.16949999999999998,
+        "font_size": 0.2528,
+        "id": "rotated_180_top_kelle_three_way_valve",
+        "kind": "Rotated180TopKelleThreeWayValveGlyph",
+        "label": "M",
+        "label_center": [
+          0.5,
+          0.6293500000000001
+        ],
+        "primitive_decomposition": {
+          "orientation": "bottom",
+          "primitives": [
+            {
+              "count": 3,
+              "kind": "PolygonPath",
+              "role": "valve_body"
+            },
+            {
+              "kind": "CircleBackground",
+              "role": "handle_circle"
+            },
+            {
+              "kind": "LineSegment",
+              "role": "handle_connector"
+            },
+            {
+              "kind": "TextGlyph",
+              "role": "handle_label",
+              "text": "M"
+            }
+          ],
+          "schema_version": "kelle_valve_primitive_decomposition_v1"
+        },
+        "stroke": "#969696",
+        "stroke_width": 0.0904,
+        "text_fill": "#666666",
+        "transform": {
+          "rotation_deg": 180,
+          "schema_version": "generic_geometry_transform_v1"
+        }
+      }
+    ],
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "AC0233_M"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 16766.934629938016,
+  "std_delta2": 14558.625,
+  "tile_std_delta2": 8636.901179675646,
+  "variant": "AC0233_M",
+  "w": 30
+}

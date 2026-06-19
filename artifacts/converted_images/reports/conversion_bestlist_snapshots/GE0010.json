@@ -1,0 +1,64 @@
+{
+  "actual_iterations": 64,
+  "base": "GE0010",
+  "best_error": 7.166294521755642,
+  "best_iter": 1,
+  "convergence": "",
+  "elapsed_seconds": 3.375,
+  "error_per_pixel": 9.112414705601555e-06,
+  "filename": "GE0010.jpg",
+  "h": 768,
+  "localized_error_fraction": 0.7763136597361949,
+  "mean_delta2": 277.601318359375,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": false,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "GE0010",
+        "source": "base_name",
+        "text": "grauer Hintergrund links blaue Fläche mit vertikalem Farbverlauf oben dunkel, unten ein wenig heller und rechts geschwungene Linie (Wellenform mit 1-Ausbuchtung nach und 1-Ausbuchtung nach rechts). Auf der linken Seite ist noch eine Art Sichelform und ganz links eine einzelne weiße Linie."
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "geometry_ir": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "GE0010"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 3038.8999935824254,
+  "std_delta2": 930.4453125,
+  "tile_std_delta2": 1530.9824965450255,
+  "variant": "GE0010",
+  "w": 1024
+}

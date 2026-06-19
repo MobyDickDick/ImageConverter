@@ -1,15 +1,65 @@
 {
+  "actual_iterations": 64,
   "base": "AC0723",
-  "best_error": 23.20952380952381,
+  "best_error": 24.625714285714285,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.03315646258503401,
+  "elapsed_seconds": 0.9219999999913853,
+  "error_per_pixel": 0.03517959183673469,
   "filename": "AC0723_M.jpg",
   "h": 35,
-  "mean_delta2": 4563.75439453125,
+  "localized_error_fraction": 0.6956457476422214,
+  "mean_delta2": 4956.93408203125,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
+    "description_constraints": {
+      "elements": [
+        {
+          "body_bbox": [
+            0.02,
+            0.4,
+            0.96,
+            0.58
+          ],
+          "body_fill": "#d92645",
+          "body_stroke": "#a0a0a0",
+          "body_stroke_width": 0.04,
+          "confidence": 0.75,
+          "connector": [
+            [
+              0.5,
+              0.0
+            ],
+            [
+              0.5,
+              0.4
+            ]
+          ],
+          "connector_stroke": "#808080",
+          "connector_width": 0.08,
+          "font_size": 0.44,
+          "font_weight": "600",
+          "id": "description_element_1",
+          "kind": "VerticallyMirroredSquareKelleTGlyph",
+          "label": "T",
+          "label_center": [
+            0.5,
+            0.66
+          ],
+          "label_fill": "#dedede",
+          "source": "description"
+        }
+      ],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
+      }
+    },
     "description_contract": {
       "deficits": [],
       "has_conditions": true,
@@ -28,9 +78,212 @@
       "AC0701"
     ],
     "elements": [],
-    "geometry_ir": [],
+    "geometry_ir": [
+      {
+        "body_bbox": [
+          0.02,
+          0.4,
+          0.96,
+          0.58
+        ],
+        "body_fill": "#d92645",
+        "body_stroke": "#a0a0a0",
+        "body_stroke_width": 0.04,
+        "connector": [
+          [
+            0.5,
+            0.0
+          ],
+          [
+            0.5,
+            0.4
+          ]
+        ],
+        "connector_stroke": "#808080",
+        "connector_width": 0.08,
+        "font_size": 0.44,
+        "font_weight": "600",
+        "id": "vertically_mirrored_square_kelle_t",
+        "kind": "VerticallyMirroredSquareKelleTGlyph",
+        "label": "T",
+        "label_center": [
+          0.5,
+          0.66
+        ],
+        "label_fill": "#dedede"
+      }
+    ],
+    "geometry_ir_optimizer_result": {
+      "element_refinement": {
+        "final_error": 25.91952380952381,
+        "initial_error": 25.91952380952381,
+        "mode": "right_rotated_valve_geometry",
+        "steps": []
+      },
+      "final_error": 25.91952380952381,
+      "initial_error": 65.00333333333333,
+      "mode": "geometry_ir_raster_registration",
+      "parameters": {
+        "scale_x": 0.2099999999999999,
+        "scale_y": 0.72,
+        "stroke_scale": 1.25,
+        "translate_x": 0.0,
+        "translate_y": -0.05
+      },
+      "steps": [
+        {
+          "best_delta": 0.2923809523809524,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": 0.08
+        },
+        {
+          "best_delta": 4.2352380952380955,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.85
+        },
+        {
+          "best_delta": 2.6757142857142853,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 0.85
+        },
+        {
+          "best_delta": 0.3923809523809467,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 1.25
+        },
+        {
+          "best_delta": 4.41476190476191,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": 0.0
+        },
+        {
+          "best_delta": 3.8438095238095187,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.7
+        },
+        {
+          "best_delta": 2.366666666666667,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 0.7
+        },
+        {
+          "best_delta": 2.6290476190476184,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": -0.08
+        },
+        {
+          "best_delta": 5.092380952380957,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.5499999999999999
+        },
+        {
+          "best_delta": 2.9290476190476156,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 0.5499999999999999
+        },
+        {
+          "best_delta": 5.271904761904764,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.3999999999999999
+        },
+        {
+          "best_delta": 1.1566666666666663,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 0.3999999999999999
+        },
+        {
+          "best_delta": 0.9280952380952385,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.24999999999999992
+        },
+        {
+          "best_delta": 0.20619047619047493,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 0.5499999999999999
+        },
+        {
+          "best_delta": 0.20904761904762026,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 0.7
+        },
+        {
+          "best_delta": 0.44571428571428484,
+          "parameter": "translate_y",
+          "stage": 1,
+          "value": -0.04
+        },
+        {
+          "best_delta": 1.822857142857142,
+          "parameter": "scale_x",
+          "stage": 2,
+          "value": 0.2099999999999999
+        },
+        {
+          "best_delta": 0.043809523809525075,
+          "parameter": "translate_y",
+          "stage": 3,
+          "value": -0.05
+        },
+        {
+          "best_delta": 0.12809523809523782,
+          "parameter": "scale_y",
+          "stage": 3,
+          "value": 0.72
+        }
+      ]
+    },
     "label": "M",
     "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "body_bbox": [
+          0.39920000000000005,
+          0.37800000000000006,
+          0.20159999999999992,
+          0.41759999999999997
+        ],
+        "body_fill": "#d92645",
+        "body_stroke": "#a0a0a0",
+        "body_stroke_width": 0.04,
+        "connector": [
+          [
+            0.5,
+            0.09000000000000001
+          ],
+          [
+            0.5,
+            0.37800000000000006
+          ]
+        ],
+        "connector_stroke": "#808080",
+        "connector_width": 0.1,
+        "font_size": 0.09239999999999995,
+        "font_weight": "600",
+        "id": "vertically_mirrored_square_kelle_t",
+        "kind": "VerticallyMirroredSquareKelleTGlyph",
+        "label": "T",
+        "label_center": [
+          0.5,
+          0.5651999999999999
+        ],
+        "label_fill": "#dedede"
+      }
+    ],
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
@@ -41,7 +294,10 @@
     "top_source_ref": null,
     "variant_name": "AC0723_M"
   },
-  "std_delta2": 11231.056640625,
+  "requested_iterations": 64,
+  "spatial_quality_score": 14410.79476347473,
+  "std_delta2": 12286.884765625,
+  "tile_std_delta2": 7307.536698735778,
   "variant": "AC0723_M",
   "w": 20
 }

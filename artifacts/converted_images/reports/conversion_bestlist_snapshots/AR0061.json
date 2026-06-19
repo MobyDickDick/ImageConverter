@@ -1,0 +1,66 @@
+{
+  "actual_iterations": 64,
+  "base": "AR0061",
+  "best_error": 18.857239057239056,
+  "best_iter": 1,
+  "convergence": "",
+  "elapsed_seconds": 0.7349999999860302,
+  "error_per_pixel": 0.01269847747962226,
+  "filename": "AR0061.jpg",
+  "h": 45,
+  "localized_error_fraction": 0.536486995706647,
+  "mean_delta2": 2879.83642578125,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "AR0061",
+        "source": "base_name",
+        "text": "Wie AR0021, ohne drittes spitzes Dreieck"
+      }
+    ],
+    "documented_alias_refs": [
+      "AR0021"
+    ],
+    "elements": [],
+    "geometry_ir": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "AR0061"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 9596.18622516177,
+  "std_delta2": 7487.53271484375,
+  "tile_std_delta2": 4030.7140843716247,
+  "variant": "AR0061",
+  "w": 33
+}

@@ -1,0 +1,71 @@
+{
+  "actual_iterations": 64,
+  "base": "AC0800",
+  "best_error": 2.405,
+  "best_iter": 1,
+  "convergence": "",
+  "elapsed_seconds": 0.6879999999946449,
+  "error_per_pixel": 0.0060125,
+  "filename": "AC0800_M.jpg",
+  "h": 20,
+  "localized_error_fraction": 0.7700333889816361,
+  "mean_delta2": 53.90999984741211,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": true,
+      "has_reference": false,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "AC0800",
+        "source": "base_name",
+        "text": "Kreisförmiges Badge."
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [
+      "SEMANTIC: Kreis ohne Buchstabe"
+    ],
+    "geometry_ir": [],
+    "label": "",
+    "mode": "semantic_badge",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {
+      "description_heuristic": [],
+      "family_rule": [
+        "SEMANTIC: Kreis ohne Buchstabe"
+      ]
+    },
+    "top_source_ref": null,
+    "variant_name": "AC0800_M"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 148.61500030063684,
+  "std_delta2": 149.6554718017578,
+  "tile_std_delta2": 67.62700980500155,
+  "variant": "AC0800_M",
+  "w": 20
+}

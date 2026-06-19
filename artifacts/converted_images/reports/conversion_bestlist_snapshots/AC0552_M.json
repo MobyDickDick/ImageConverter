@@ -1,14 +1,38 @@
 {
+  "actual_iterations": 64,
   "base": "AC0552",
-  "best_error": 32.89944444444444,
+  "best_error": 20.420925925925925,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.018277469135802468,
+  "elapsed_seconds": 1.047000000020489,
+  "error_per_pixel": 0.011344958847736624,
   "filename": "AC0552_M.jpg",
   "h": 30,
-  "mean_delta2": 6015.08154296875,
+  "localized_error_fraction": 0.7690135269594854,
+  "mean_delta2": 2697.37060546875,
   "params": {
     "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": false,
+      "has_reference": true,
+      "status": "ok"
+    },
     "description_fragments": [
       {
         "key": "AC0552",
@@ -21,6 +45,7 @@
       "AC0551"
     ],
     "elements": [],
+    "geometry_ir": [],
     "label": "M",
     "mode": "auto",
     "semantic_conflicts": [],
@@ -33,7 +58,10 @@
     "top_source_ref": null,
     "variant_name": "AC0552_M"
   },
-  "std_delta2": 9108.6064453125,
+  "requested_iterations": 64,
+  "spatial_quality_score": 7551.698052892798,
+  "std_delta2": 6144.3427734375,
+  "tile_std_delta2": 4114.141449022688,
   "variant": "AC0552_M",
   "w": 60
 }

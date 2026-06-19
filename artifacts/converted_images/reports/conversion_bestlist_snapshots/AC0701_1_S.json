@@ -1,15 +1,57 @@
 {
+  "actual_iterations": 64,
   "base": "AC0701",
-  "best_error": 33.803555555555555,
+  "best_error": 6.107555555555556,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.09014281481481481,
+  "elapsed_seconds": 0.5940000000118744,
+  "error_per_pixel": 0.016286814814814816,
   "filename": "AC0701_1_S.jpg",
   "h": 25,
-  "mean_delta2": 11579.4853515625,
+  "localized_error_fraction": 0.8617512097708165,
+  "mean_delta2": 425.97601318359375,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
+    "description_constraints": {
+      "elements": [
+        {
+          "body_bbox": [
+            0.02,
+            0.04,
+            0.96,
+            0.56
+          ],
+          "body_fill": "#e11e48",
+          "body_stroke": "#a0a0a0",
+          "body_stroke_width": 0.04,
+          "confidence": 0.75,
+          "connector": [
+            [
+              0.5,
+              0.6
+            ],
+            [
+              0.5,
+              1.0
+            ]
+          ],
+          "connector_stroke": "#808080",
+          "connector_width": 0.08,
+          "id": "description_element_1",
+          "kind": "UprightSquareKelleGlyph",
+          "source": "description"
+        }
+      ],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
+      }
+    },
     "description_contract": {
       "deficits": [],
       "has_conditions": true,
@@ -26,9 +68,100 @@
     ],
     "documented_alias_refs": [],
     "elements": [],
-    "geometry_ir": [],
+    "geometry_ir": [
+      {
+        "body_bbox": [
+          0.02,
+          0.04,
+          0.96,
+          0.56
+        ],
+        "body_fill": "#e11e48",
+        "body_stroke": "#a0a0a0",
+        "body_stroke_width": 0.04,
+        "connector": [
+          [
+            0.5,
+            0.6
+          ],
+          [
+            0.5,
+            1.0
+          ]
+        ],
+        "connector_stroke": "#808080",
+        "connector_width": 0.08,
+        "id": "upright_square_kelle",
+        "kind": "UprightSquareKelleGlyph"
+      }
+    ],
+    "geometry_ir_optimizer_result": {
+      "element_refinement": {
+        "final_error": 6.107555555555556,
+        "initial_error": 6.107555555555556,
+        "mode": "right_rotated_valve_geometry",
+        "steps": []
+      },
+      "final_error": 6.107555555555556,
+      "initial_error": 7.538666666666667,
+      "mode": "geometry_ir_raster_registration",
+      "parameters": {
+        "scale_x": 0.9600000000000001,
+        "scale_y": 1.0,
+        "stroke_scale": 1.25,
+        "translate_x": 0.0,
+        "translate_y": 0.0
+      },
+      "steps": [
+        {
+          "best_delta": 0.7128888888888891,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 1.25
+        },
+        {
+          "best_delta": 0.22222222222222232,
+          "parameter": "scale_x",
+          "stage": 1,
+          "value": 0.92
+        },
+        {
+          "best_delta": 0.49599999999999955,
+          "parameter": "scale_x",
+          "stage": 2,
+          "value": 0.9600000000000001
+        }
+      ]
+    },
     "label": "M",
     "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "body_bbox": [
+          0.03919999999999996,
+          0.03999999999999998,
+          0.9216000000000001,
+          0.56
+        ],
+        "body_fill": "#e11e48",
+        "body_stroke": "#a0a0a0",
+        "body_stroke_width": 0.04,
+        "connector": [
+          [
+            0.5,
+            0.6
+          ],
+          [
+            0.5,
+            1.0
+          ]
+        ],
+        "connector_stroke": "#808080",
+        "connector_width": 0.1,
+        "id": "upright_square_kelle",
+        "kind": "UprightSquareKelleGlyph"
+      }
+    ],
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
@@ -39,7 +172,10 @@
     "top_source_ref": null,
     "variant_name": "AC0701_1_S"
   },
-  "std_delta2": 21969.810546875,
+  "requested_iterations": 64,
+  "spatial_quality_score": 1268.158608068879,
+  "std_delta2": 848.1056518554688,
+  "tile_std_delta2": 674.8267054368935,
   "variant": "AC0701_1_S",
   "w": 15
 }

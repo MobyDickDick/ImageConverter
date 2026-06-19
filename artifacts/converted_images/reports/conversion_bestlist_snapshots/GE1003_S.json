@@ -1,0 +1,66 @@
+{
+  "actual_iterations": 64,
+  "base": "GE1003",
+  "best_error": 33.38,
+  "best_iter": 1,
+  "convergence": "",
+  "elapsed_seconds": 1.062999999994645,
+  "error_per_pixel": 0.08345000000000001,
+  "filename": "GE1003_S.jpg",
+  "h": 20,
+  "localized_error_fraction": 0.8983623914789444,
+  "mean_delta2": 12164.6904296875,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": false,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "GE1003",
+        "source": "base_name",
+        "text": "Hintergrund GE1002, Vordergrund Haken wie in GE1001"
+      }
+    ],
+    "documented_alias_refs": [
+      "GE1001"
+    ],
+    "elements": [],
+    "geometry_ir": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "GE1003_S"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 38603.65870587518,
+  "std_delta2": 28507.412109375,
+  "tile_std_delta2": 22325.632880182147,
+  "variant": "GE1003_S",
+  "w": 20
+}

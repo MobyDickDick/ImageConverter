@@ -1,15 +1,63 @@
 {
+  "actual_iterations": 64,
   "base": "GE9002_4M",
-  "best_error": 30.198888888888888,
+  "best_error": 109.63333333333334,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.01258287037037037,
+  "elapsed_seconds": 0.3909999999741558,
+  "error_per_pixel": 0.04568055555555556,
   "filename": "GE9002_4M.jpg",
   "h": 20,
-  "mean_delta2": 6317.1982421875,
+  "localized_error_fraction": 0.6140008549410211,
+  "mean_delta2": 66905.203125,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
+    "description_constraints": {
+      "elements": [
+        {
+          "bbox": [
+            0.32,
+            0.12,
+            0.36,
+            0.76
+          ],
+          "confidence": 0.75,
+          "constraint": "inside_rect_border",
+          "id": "description_element_1",
+          "kind": "HorizontalGradient",
+          "source": "description",
+          "stops": [
+            "#8f8f8f",
+            "#dedede",
+            "#8f8f8f"
+          ]
+        },
+        {
+          "bbox": [
+            0.32,
+            0.12,
+            0.36,
+            0.76
+          ],
+          "confidence": 0.75,
+          "fill": "none",
+          "id": "description_element_2",
+          "kind": "RectBorder",
+          "source": "description",
+          "stroke": "#666666",
+          "stroke_width": 0.035
+        }
+      ],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
+      }
+    },
     "description_contract": {
       "deficits": [],
       "has_conditions": false,
@@ -71,7 +119,10 @@
     "top_source_ref": null,
     "variant_name": "GE9002_4M"
   },
-  "std_delta2": 9270.169921875,
+  "requested_iterations": 64,
+  "spatial_quality_score": 143534.09212499938,
+  "std_delta2": 65555.5546875,
+  "tile_std_delta2": 61046.37501784008,
   "variant": "GE9002_4M",
   "w": 120
 }

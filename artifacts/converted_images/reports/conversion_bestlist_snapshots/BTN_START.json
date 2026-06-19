@@ -1,0 +1,64 @@
+{
+  "actual_iterations": 64,
+  "base": "BTN_START",
+  "best_error": 20.05237669231228,
+  "best_iter": 1,
+  "convergence": "",
+  "elapsed_seconds": 1.2190000000118744,
+  "error_per_pixel": 0.0007175658147186358,
+  "filename": "btn_start.jpg",
+  "h": 81,
+  "localized_error_fraction": 0.9105059002567993,
+  "mean_delta2": 5371.67822265625,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": false,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "btn_start",
+        "source": "base_name",
+        "text": "Hintergrund wie DLG002, Haus wie bei GE0346 (ohne Blaugrauen Hintergrund)"
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "geometry_ir": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "BTN_START"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 18471.990087662372,
+  "std_delta2": 18280.056640625,
+  "tile_std_delta2": 11633.878704489132,
+  "variant": "BTN_START",
+  "w": 345
+}

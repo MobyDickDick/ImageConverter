@@ -1,14 +1,38 @@
 {
+  "actual_iterations": 64,
   "base": "GE0039",
-  "best_error": 45.82666666666667,
+  "best_error": 26.206133333333334,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.01833066666666667,
+  "elapsed_seconds": 0.8129999999946449,
+  "error_per_pixel": 0.010482453333333334,
   "filename": "GE0039_S.jpg",
   "h": 50,
-  "mean_delta2": 11102.6240234375,
+  "localized_error_fraction": 0.5975323424026091,
+  "mean_delta2": 5710.6630859375,
   "params": {
     "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
     "description_fragments": [
       {
         "key": "GE0039",
@@ -20,6 +44,7 @@
       "GE0038"
     ],
     "elements": [],
+    "geometry_ir": [],
     "label": "M",
     "mode": "auto",
     "semantic_conflicts": [],
@@ -32,7 +57,10 @@
     "top_source_ref": null,
     "variant_name": "GE0039_S"
   },
-  "std_delta2": 11848.8583984375,
+  "requested_iterations": 64,
+  "spatial_quality_score": 19629.88165668775,
+  "std_delta2": 11430.15625,
+  "tile_std_delta2": 9488.179357454508,
   "variant": "GE0039_S",
   "w": 50
 }

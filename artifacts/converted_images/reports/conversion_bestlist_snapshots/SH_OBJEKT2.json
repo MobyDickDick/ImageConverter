@@ -1,0 +1,67 @@
+{
+  "actual_iterations": 64,
+  "base": "SH_OBJEKT2",
+  "best_error": 5.915555555555556,
+  "best_iter": 1,
+  "convergence": "",
+  "elapsed_seconds": 0.6870000000053551,
+  "error_per_pixel": 0.0032864197530864197,
+  "filename": "SH_Objekt2.jpg",
+  "h": 30,
+  "localized_error_fraction": 0.5391552254482707,
+  "mean_delta2": 247.07333374023438,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": false,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "SH_Objekt2",
+        "source": "base_name",
+        "text": "Unzugeordnete Wurzelform aus der Serie SH_Objekt2. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (Objekt2). Bitte einer finalen Wurzelform-Kategorie zuordnen."
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [
+      "MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie."
+    ],
+    "geometry_ir": [],
+    "label": "",
+    "mode": "manual_review",
+    "review_reason": "Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "SH_OBJEKT2"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 1299.2643433686112,
+  "std_delta2": 645.6361694335938,
+  "tile_std_delta2": 494.0796467092001,
+  "variant": "SH_OBJEKT2",
+  "w": 60
+}

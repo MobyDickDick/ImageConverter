@@ -1,0 +1,820 @@
+{
+  "actual_iterations": 64,
+  "base": "DLG0013",
+  "best_error": 8.144495238095239,
+  "best_iter": 1,
+  "convergence": "",
+  "elapsed_seconds": 4.39000000001397,
+  "error_per_pixel": 0.000930799455782313,
+  "filename": "DLG0013.JPG",
+  "h": 25,
+  "localized_error_fraction": 0.8347366381935358,
+  "mean_delta2": 812.381591796875,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [
+        {
+          "bbox": [
+            0.18,
+            0.24,
+            0.64,
+            0.56
+          ],
+          "confidence": 0.75,
+          "constraint": "inside_rect_border",
+          "id": "description_element_1",
+          "kind": "HorizontalGradient",
+          "source": "description",
+          "stops": [
+            "#8f8f8f",
+            "#dedede",
+            "#8f8f8f"
+          ]
+        },
+        {
+          "bbox": [
+            0.18,
+            0.24,
+            0.64,
+            0.56
+          ],
+          "confidence": 0.75,
+          "fill": "none",
+          "id": "description_element_2",
+          "kind": "RectBorder",
+          "source": "description",
+          "stroke": "#666666",
+          "stroke_width": 0.035
+        },
+        {
+          "clip_to": "main_rect",
+          "confidence": 0.75,
+          "direction": "tr_bl",
+          "id": "description_element_3",
+          "kind": "DiagonalBand",
+          "rect_ref": "main_rect",
+          "source": "description",
+          "stroke": "#707070",
+          "stroke_width": 0.045
+        },
+        {
+          "confidence": 0.75,
+          "id": "description_element_4",
+          "kind": "PlusGlyph",
+          "position": "top_left",
+          "source": "description",
+          "stroke": "#4f4f4f",
+          "stroke_width": 0.025
+        },
+        {
+          "confidence": 0.75,
+          "id": "description_element_5",
+          "kind": "MinusGlyph",
+          "position": "top_left",
+          "source": "description",
+          "stroke": "#4f4f4f",
+          "stroke_width": 0.025
+        }
+      ],
+      "relations": [
+        {
+          "confidence": 0.75,
+          "object": "main_rect",
+          "source": "description",
+          "subject": "description_element_3",
+          "type": "rect"
+        }
+      ],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "DLG0013",
+        "source": "base_name",
+        "text": "Wie AC0010: Heizelement, graues Rechteck, Plus-Minus-Zeichen oben links, Farbverlauf horizontal dunkel-hell-dunkel graue Diagonale oben rechts nach unten links. Geometrische Variante: identisch zur Referenz."
+      }
+    ],
+    "documented_alias_refs": [
+      "AC0010"
+    ],
+    "elements": [],
+    "geometry_ir": [
+      {
+        "bbox": [
+          0.18,
+          0.24,
+          0.64,
+          0.56
+        ],
+        "constraint": "inside_rect_border",
+        "id": "background_gradient",
+        "kind": "HorizontalGradient",
+        "stops": [
+          "#8f8f8f",
+          "#dedede",
+          "#8f8f8f"
+        ]
+      },
+      {
+        "bbox": [
+          0.18,
+          0.24,
+          0.64,
+          0.56
+        ],
+        "fill": "none",
+        "id": "main_rect",
+        "kind": "RectBorder",
+        "stroke": "#666666",
+        "stroke_width": 0.035
+      },
+      {
+        "clip_to": "main_rect",
+        "direction": "tr_bl",
+        "id": "diagonal_1_tr_bl",
+        "kind": "DiagonalBand",
+        "rect_ref": "main_rect",
+        "stroke": "#707070",
+        "stroke_width": 0.045
+      },
+      {
+        "id": "plus_glyph",
+        "kind": "PlusGlyph",
+        "position": "top_left",
+        "stroke": "#4f4f4f",
+        "stroke_width": 0.025
+      },
+      {
+        "id": "minus_glyph",
+        "kind": "MinusGlyph",
+        "position": "top_left",
+        "stroke": "#4f4f4f",
+        "stroke_width": 0.025
+      }
+    ],
+    "geometry_ir_optimizer_result": {
+      "element_refinement": {
+        "final_error": 9.922171428571428,
+        "initial_error": 9.922171428571428,
+        "mode": "right_rotated_valve_geometry",
+        "steps": []
+      },
+      "final_error": 9.922171428571428,
+      "initial_error": 43.767161904761906,
+      "mode": "geometry_ir_raster_registration",
+      "parameters": {
+        "scale_x": 8.250000000000005,
+        "scale_y": 0.41999999999999993,
+        "stroke_scale": 0.25,
+        "translate_x": 0.020000000000000028,
+        "translate_y": -0.56
+      },
+      "steps": [
+        {
+          "best_delta": 0.011809523809525047,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": -0.08
+        },
+        {
+          "best_delta": 0.0216380952380959,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": -0.08
+        },
+        {
+          "best_delta": 4.968038095238093,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.85
+        },
+        {
+          "best_delta": 2.6934476190476175,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 0.85
+        },
+        {
+          "best_delta": 1.442057142857145,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 0.75
+        },
+        {
+          "best_delta": 0.41188571428571663,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": -0.16
+        },
+        {
+          "best_delta": 3.785866666666667,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.7
+        },
+        {
+          "best_delta": 2.50262857142857,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 0.7
+        },
+        {
+          "best_delta": 1.1699047619047604,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 0.5
+        },
+        {
+          "best_delta": 0.012723809523809138,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": -0.16
+        },
+        {
+          "best_delta": 1.787352380952381,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": -0.24
+        },
+        {
+          "best_delta": 2.7891809523809528,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.5499999999999999
+        },
+        {
+          "best_delta": 0.730438095238096,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 0.5499999999999999
+        },
+        {
+          "best_delta": 0.9569904761904766,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 0.25
+        },
+        {
+          "best_delta": 0.004647619047620566,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": -0.24
+        },
+        {
+          "best_delta": 2.2054095238095215,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": -0.32
+        },
+        {
+          "best_delta": 1.7253333333333352,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.3999999999999999
+        },
+        {
+          "best_delta": 0.5703999999999994,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 0.3999999999999999
+        },
+        {
+          "best_delta": 0.007999999999999119,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": -0.32
+        },
+        {
+          "best_delta": 1.321942857142858,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": -0.4
+        },
+        {
+          "best_delta": 0.5596952380952374,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.24999999999999992
+        },
+        {
+          "best_delta": 0.5460190476190476,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 0.24999999999999992
+        },
+        {
+          "best_delta": 0.07375238095238146,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": -0.24
+        },
+        {
+          "best_delta": 0.7955428571428573,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": -0.48000000000000004
+        },
+        {
+          "best_delta": 0.012190476190475863,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": -0.15999999999999998
+        },
+        {
+          "best_delta": 0.25839999999999996,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": -0.56
+        },
+        {
+          "best_delta": 0.08552380952381,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.3999999999999999
+        },
+        {
+          "best_delta": 0.19988571428571333,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 0.3999999999999999
+        },
+        {
+          "best_delta": 0.02758095238095315,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": -0.07999999999999997
+        },
+        {
+          "best_delta": 0.20982857142857192,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.5499999999999999
+        },
+        {
+          "best_delta": 0.15908571428571427,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.7
+        },
+        {
+          "best_delta": 0.09356190476190385,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.85
+        },
+        {
+          "best_delta": 0.0048761904761907005,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": 2.7755575615628914e-17
+        },
+        {
+          "best_delta": 0.10480000000000089,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 1.0
+        },
+        {
+          "best_delta": 0.08518095238095214,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": 0.08000000000000003
+        },
+        {
+          "best_delta": 0.14636190476190336,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 1.15
+        },
+        {
+          "best_delta": 0.0650666666666666,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 1.2999999999999998
+        },
+        {
+          "best_delta": 0.002742857142857602,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": 2.7755575615628914e-17
+        },
+        {
+          "best_delta": 0.1669333333333345,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 1.4499999999999997
+        },
+        {
+          "best_delta": 0.02678095238095146,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": -0.07999999999999997
+        },
+        {
+          "best_delta": 0.15744761904761972,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 1.5999999999999996
+        },
+        {
+          "best_delta": 0.11439999999999984,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 1.7499999999999996
+        },
+        {
+          "best_delta": 0.09196190476190402,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 1.8999999999999995
+        },
+        {
+          "best_delta": 0.11116190476190546,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 2.0499999999999994
+        },
+        {
+          "best_delta": 0.10335238095237997,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 2.1999999999999993
+        },
+        {
+          "best_delta": 0.0800761904761913,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 2.349999999999999
+        },
+        {
+          "best_delta": 0.06803809523809434,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 2.499999999999999
+        },
+        {
+          "best_delta": 0.05443809523809584,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 2.649999999999999
+        },
+        {
+          "best_delta": 0.03539047619047686,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 2.799999999999999
+        },
+        {
+          "best_delta": 0.0297904761904757,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 2.949999999999999
+        },
+        {
+          "best_delta": 0.024533333333334184,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 3.0999999999999988
+        },
+        {
+          "best_delta": 0.006057142857141429,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": 2.7755575615628914e-17
+        },
+        {
+          "best_delta": 0.02400000000000091,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 3.2499999999999987
+        },
+        {
+          "best_delta": 0.019847619047618892,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 3.3999999999999986
+        },
+        {
+          "best_delta": 0.01310476190476173,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 3.5499999999999985
+        },
+        {
+          "best_delta": 0.013219047619047686,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 3.6999999999999984
+        },
+        {
+          "best_delta": 0.010895238095237403,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 3.8499999999999983
+        },
+        {
+          "best_delta": 0.008952380952381489,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 3.9999999999999982
+        },
+        {
+          "best_delta": 0.00952380952380949,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 4.149999999999999
+        },
+        {
+          "best_delta": 0.009714285714286675,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 4.299999999999999
+        },
+        {
+          "best_delta": 0.005676190476188836,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 4.449999999999999
+        },
+        {
+          "best_delta": 0.007695238095239532,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 4.6
+        },
+        {
+          "best_delta": 0.006247619047618613,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 4.75
+        },
+        {
+          "best_delta": 0.005066666666666109,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 4.9
+        },
+        {
+          "best_delta": 0.007771428571428984,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 5.050000000000001
+        },
+        {
+          "best_delta": 0.0034285714285715585,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 5.200000000000001
+        },
+        {
+          "best_delta": 0.004114285714285515,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 5.350000000000001
+        },
+        {
+          "best_delta": 0.0036571428571434694,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 5.500000000000002
+        },
+        {
+          "best_delta": 0.006057142857141429,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 5.650000000000002
+        },
+        {
+          "best_delta": 0.003619047619048743,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 5.8000000000000025
+        },
+        {
+          "best_delta": 0.002819047619047055,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 5.950000000000003
+        },
+        {
+          "best_delta": 0.003733333333332922,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 6.100000000000003
+        },
+        {
+          "best_delta": 0.0030476190476189657,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 6.2500000000000036
+        },
+        {
+          "best_delta": 0.0032380952380961503,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 6.400000000000004
+        },
+        {
+          "best_delta": 0.0027047619047610993,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 6.550000000000004
+        },
+        {
+          "best_delta": 0.002819047619048831,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 6.700000000000005
+        },
+        {
+          "best_delta": 0.0023999999999997357,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 6.850000000000005
+        },
+        {
+          "best_delta": 0.0007999999999999119,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 7.000000000000005
+        },
+        {
+          "best_delta": 0.003542857142857514,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 7.150000000000006
+        },
+        {
+          "best_delta": 0.002019047619047143,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 7.300000000000006
+        },
+        {
+          "best_delta": 0.001790476190475232,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 7.450000000000006
+        },
+        {
+          "best_delta": 0.0018285714285717347,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 7.600000000000007
+        },
+        {
+          "best_delta": 0.001447619047619142,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 7.750000000000007
+        },
+        {
+          "best_delta": 0.001523809523810371,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 7.9000000000000075
+        },
+        {
+          "best_delta": 0.0010666666666665492,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 8.050000000000008
+        },
+        {
+          "best_delta": 0.0002666666666666373,
+          "parameter": "scale_x",
+          "stage": 1,
+          "value": 8.130000000000008
+        },
+        {
+          "best_delta": 0.0013714285714279129,
+          "parameter": "translate_x",
+          "stage": 2,
+          "value": 0.020000000000000028
+        },
+        {
+          "best_delta": 0.00019047619047718456,
+          "parameter": "scale_x",
+          "stage": 2,
+          "value": 8.170000000000007
+        },
+        {
+          "best_delta": 0.0006857142857139564,
+          "parameter": "scale_x",
+          "stage": 2,
+          "value": 8.210000000000006
+        },
+        {
+          "best_delta": 7.619047618945274e-05,
+          "parameter": "scale_x",
+          "stage": 2,
+          "value": 8.250000000000005
+        },
+        {
+          "best_delta": 3.8095238096502726e-05,
+          "parameter": "scale_x",
+          "stage": 3,
+          "value": 8.270000000000005
+        },
+        {
+          "best_delta": 0.024609523809523637,
+          "parameter": "scale_y",
+          "stage": 3,
+          "value": 0.41999999999999993
+        },
+        {
+          "best_delta": 0.00022857142857191093,
+          "parameter": "scale_x",
+          "stage": 3,
+          "value": 8.250000000000005
+        }
+      ]
+    },
+    "label": "M",
+    "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "bbox": [
+          -2.120000000000002,
+          -0.16920000000000002,
+          5.280000000000004,
+          0.2352
+        ],
+        "constraint": "inside_rect_border",
+        "id": "background_gradient",
+        "kind": "HorizontalGradient",
+        "stops": [
+          "#8f8f8f",
+          "#dedede",
+          "#8f8f8f"
+        ]
+      },
+      {
+        "bbox": [
+          -2.120000000000002,
+          -0.16920000000000002,
+          5.280000000000004,
+          0.2352
+        ],
+        "fill": "none",
+        "id": "main_rect",
+        "kind": "RectBorder",
+        "stroke": "#666666",
+        "stroke_width": 0.00875
+      },
+      {
+        "clip_to": "main_rect",
+        "direction": "tr_bl",
+        "id": "diagonal_1_tr_bl",
+        "kind": "DiagonalBand",
+        "rect_ref": "main_rect",
+        "stroke": "#707070",
+        "stroke_width": 0.01125
+      },
+      {
+        "id": "plus_glyph",
+        "kind": "PlusGlyph",
+        "position": "top_left",
+        "stroke": "#4f4f4f",
+        "stroke_width": 0.00625
+      },
+      {
+        "id": "minus_glyph",
+        "kind": "MinusGlyph",
+        "position": "top_left",
+        "stroke": "#4f4f4f",
+        "stroke_width": 0.00625
+      }
+    ],
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "DLG0013"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 2409.9536526653314,
+  "std_delta2": 1926.8453369140625,
+  "tile_std_delta2": 1299.5113295480403,
+  "variant": "DLG0013",
+  "w": 350
+}

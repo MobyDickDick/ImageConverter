@@ -1,15 +1,63 @@
 {
+  "actual_iterations": 64,
   "base": "GE9001_7M",
-  "best_error": 24.880555555555556,
+  "best_error": 21.08,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.010366898148148148,
+  "elapsed_seconds": 0.28200000000651926,
+  "error_per_pixel": 0.008783333333333332,
   "filename": "GE9001_7M.jpg",
   "h": 120,
-  "mean_delta2": 8031.98583984375,
+  "localized_error_fraction": 0.6094202847771959,
+  "mean_delta2": 5232.51171875,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
+    "description_constraints": {
+      "elements": [
+        {
+          "bbox": [
+            0.32,
+            0.12,
+            0.36,
+            0.76
+          ],
+          "confidence": 0.75,
+          "constraint": "inside_rect_border",
+          "id": "description_element_1",
+          "kind": "HorizontalGradient",
+          "source": "description",
+          "stops": [
+            "#8f8f8f",
+            "#dedede",
+            "#8f8f8f"
+          ]
+        },
+        {
+          "bbox": [
+            0.32,
+            0.12,
+            0.36,
+            0.76
+          ],
+          "confidence": 0.75,
+          "fill": "none",
+          "id": "description_element_2",
+          "kind": "RectBorder",
+          "source": "description",
+          "stroke": "#666666",
+          "stroke_width": 0.035
+        }
+      ],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
+      }
+    },
     "description_contract": {
       "deficits": [],
       "has_conditions": false,
@@ -57,8 +105,125 @@
         "stroke_width": 0.035
       }
     ],
+    "geometry_ir_optimizer_result": {
+      "element_refinement": {
+        "final_error": 21.08,
+        "initial_error": 21.08,
+        "mode": "right_rotated_valve_geometry",
+        "steps": []
+      },
+      "final_error": 21.08,
+      "initial_error": 24.720833333333335,
+      "mode": "geometry_ir_raster_registration",
+      "parameters": {
+        "scale_x": 1.13,
+        "scale_y": 1.2999999999999998,
+        "stroke_scale": 0.25,
+        "translate_x": 0.0,
+        "translate_y": 0.0
+      },
+      "steps": [
+        {
+          "best_delta": 0.14166666666666927,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": 0.08
+        },
+        {
+          "best_delta": 0.9390277777777776,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 1.15
+        },
+        {
+          "best_delta": 0.29097222222222285,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 1.15
+        },
+        {
+          "best_delta": 0.6325000000000003,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 0.75
+        },
+        {
+          "best_delta": 0.061805555555555,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 1.2999999999999998
+        },
+        {
+          "best_delta": 0.5455555555555556,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 0.5
+        },
+        {
+          "best_delta": 0.272083333333331,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": 0.0
+        },
+        {
+          "best_delta": 0.03722222222222271,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 1.4499999999999997
+        },
+        {
+          "best_delta": 0.46666666666666856,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 0.25
+        },
+        {
+          "best_delta": 0.011388888888888005,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 1.2999999999999998
+        },
+        {
+          "best_delta": 0.24194444444444585,
+          "parameter": "scale_x",
+          "stage": 3,
+          "value": 1.13
+        }
+      ]
+    },
     "label": "M",
     "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "bbox": [
+          0.29660000000000003,
+          0.006000000000000061,
+          0.40679999999999994,
+          0.9879999999999999
+        ],
+        "constraint": "inside_rect_border",
+        "id": "background_gradient",
+        "kind": "HorizontalGradient",
+        "stops": [
+          "#8f8f8f",
+          "#dedede",
+          "#8f8f8f"
+        ]
+      },
+      {
+        "bbox": [
+          0.29660000000000003,
+          0.006000000000000061,
+          0.40679999999999994,
+          0.9879999999999999
+        ],
+        "fill": "none",
+        "id": "main_rect",
+        "kind": "RectBorder",
+        "stroke": "#666666",
+        "stroke_width": 0.00875
+      }
+    ],
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
@@ -69,7 +234,10 @@
     "top_source_ref": null,
     "variant_name": "GE9001_7M"
   },
-  "std_delta2": 13362.4921875,
+  "requested_iterations": 64,
+  "spatial_quality_score": 11942.93080487393,
+  "std_delta2": 9664.798828125,
+  "tile_std_delta2": 5664.5642834432865,
   "variant": "GE9001_7M",
   "w": 20
 }

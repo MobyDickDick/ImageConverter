@@ -1,0 +1,64 @@
+{
+  "actual_iterations": 64,
+  "base": "B_TREND",
+  "best_error": 20.900166602588747,
+  "best_iter": 1,
+  "convergence": "",
+  "elapsed_seconds": 0.7349999999860302,
+  "error_per_pixel": 0.008035435064432429,
+  "filename": "b_trend_his.jpg",
+  "h": 51,
+  "localized_error_fraction": 0.597064383994464,
+  "mean_delta2": 3731.31640625,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": false,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "b_trend",
+        "source": "base_name",
+        "text": "Hintergrund: GE0999 b-Trend, oben rechts eine Uhr wie in Abbildung GE0015 (dunkle Uhr)"
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "geometry_ir": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "B_TREND_HIS"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 15263.170090808075,
+  "std_delta2": 8686.0205078125,
+  "tile_std_delta2": 7444.968666847412,
+  "variant": "B_TREND_HIS",
+  "w": 51
+}

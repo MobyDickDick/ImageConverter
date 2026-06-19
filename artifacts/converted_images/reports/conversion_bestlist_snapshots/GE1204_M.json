@@ -1,0 +1,67 @@
+{
+  "actual_iterations": 64,
+  "base": "GE1204",
+  "best_error": 25.5975,
+  "best_iter": 1,
+  "convergence": "",
+  "elapsed_seconds": 0.9529999999795109,
+  "error_per_pixel": 0.06399375,
+  "filename": "GE1204_M.jpg",
+  "h": 20,
+  "localized_error_fraction": 0.7708021236845938,
+  "mean_delta2": 4754.47265625,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": false,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "GE1204",
+        "source": "base_name",
+        "text": "Wie GE1202: Wie GE1200, jedoch rote Farbe innen (grauer Rand ist gleich). Geometrische Variante: identisch zur Referenz."
+      }
+    ],
+    "documented_alias_refs": [
+      "GE1200",
+      "GE1202"
+    ],
+    "elements": [],
+    "geometry_ir": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "GE1204_M"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 12989.749824176255,
+  "std_delta2": 8841.2900390625,
+  "tile_std_delta2": 6853.912146483839,
+  "variant": "GE1204_M",
+  "w": 20
+}

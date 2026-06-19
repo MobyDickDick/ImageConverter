@@ -1,15 +1,100 @@
 {
+  "actual_iterations": 64,
   "base": "AC0010",
-  "best_error": 37.87739583333333,
+  "best_error": 24.281458333333333,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.011836686197916666,
+  "elapsed_seconds": 1.0780000000086147,
+  "error_per_pixel": 0.007587955729166667,
   "filename": "AC0010.jpg",
   "h": 80,
-  "mean_delta2": 6950.0673828125,
+  "localized_error_fraction": 0.5725270552896721,
+  "mean_delta2": 2966.263671875,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
+    "description_constraints": {
+      "elements": [
+        {
+          "bbox": [
+            0.18,
+            0.24,
+            0.64,
+            0.56
+          ],
+          "confidence": 0.75,
+          "constraint": "inside_rect_border",
+          "id": "description_element_1",
+          "kind": "HorizontalGradient",
+          "source": "description",
+          "stops": [
+            "#8f8f8f",
+            "#dedede",
+            "#8f8f8f"
+          ]
+        },
+        {
+          "bbox": [
+            0.18,
+            0.24,
+            0.64,
+            0.56
+          ],
+          "confidence": 0.75,
+          "fill": "none",
+          "id": "description_element_2",
+          "kind": "RectBorder",
+          "source": "description",
+          "stroke": "#666666",
+          "stroke_width": 0.035
+        },
+        {
+          "clip_to": "main_rect",
+          "confidence": 0.75,
+          "direction": "tr_bl",
+          "id": "description_element_3",
+          "kind": "DiagonalBand",
+          "rect_ref": "main_rect",
+          "source": "description",
+          "stroke": "#707070",
+          "stroke_width": 0.045
+        },
+        {
+          "confidence": 0.75,
+          "id": "description_element_4",
+          "kind": "PlusGlyph",
+          "position": "top_left",
+          "source": "description",
+          "stroke": "#4f4f4f",
+          "stroke_width": 0.025
+        },
+        {
+          "confidence": 0.75,
+          "id": "description_element_5",
+          "kind": "MinusGlyph",
+          "position": "top_left",
+          "source": "description",
+          "stroke": "#4f4f4f",
+          "stroke_width": 0.025
+        }
+      ],
+      "relations": [
+        {
+          "confidence": 0.75,
+          "object": "main_rect",
+          "source": "description",
+          "subject": "description_element_3",
+          "type": "rect"
+        }
+      ],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
+      }
+    },
     "description_contract": {
       "deficits": [],
       "has_conditions": false,
@@ -80,8 +165,196 @@
         "stroke_width": 0.025
       }
     ],
+    "geometry_ir_optimizer_result": {
+      "element_refinement": {
+        "final_error": 24.281458333333333,
+        "initial_error": 24.281458333333333,
+        "mode": "right_rotated_valve_geometry",
+        "steps": []
+      },
+      "final_error": 24.281458333333333,
+      "initial_error": 42.76677083333333,
+      "mode": "geometry_ir_raster_registration",
+      "parameters": {
+        "scale_x": 1.3599999999999999,
+        "scale_y": 1.5899999999999999,
+        "stroke_scale": 0.48,
+        "translate_x": 0.0,
+        "translate_y": -0.03
+      },
+      "steps": [
+        {
+          "best_delta": 3.1165625000000006,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 1.15
+        },
+        {
+          "best_delta": 1.2046874999999986,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 1.15
+        },
+        {
+          "best_delta": 0.8106250000000017,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 0.75
+        },
+        {
+          "best_delta": 2.7156249999999957,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 1.2999999999999998
+        },
+        {
+          "best_delta": 2.5193750000000037,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 1.2999999999999998
+        },
+        {
+          "best_delta": 0.8610416666666652,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 0.5
+        },
+        {
+          "best_delta": 1.8767708333333353,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 1.4499999999999997
+        },
+        {
+          "best_delta": 0.06656249999999986,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 0.25
+        },
+        {
+          "best_delta": 0.7899999999999991,
+          "parameter": "scale_x",
+          "stage": 1,
+          "value": 1.38
+        },
+        {
+          "best_delta": 0.4734374999999993,
+          "parameter": "scale_y",
+          "stage": 1,
+          "value": 1.5299999999999998
+        },
+        {
+          "best_delta": 0.09812499999999957,
+          "parameter": "stroke_scale",
+          "stage": 1,
+          "value": 0.4
+        },
+        {
+          "best_delta": 1.4750000000000014,
+          "parameter": "translate_y",
+          "stage": 1,
+          "value": -0.04
+        },
+        {
+          "best_delta": 0.7284374999999983,
+          "parameter": "scale_y",
+          "stage": 1,
+          "value": 1.6099999999999999
+        },
+        {
+          "best_delta": 0.23062499999999986,
+          "parameter": "translate_y",
+          "stage": 2,
+          "value": -0.02
+        },
+        {
+          "best_delta": 0.14000000000000057,
+          "parameter": "translate_y",
+          "stage": 3,
+          "value": -0.03
+        },
+        {
+          "best_delta": 0.009687500000001847,
+          "parameter": "scale_x",
+          "stage": 3,
+          "value": 1.3599999999999999
+        },
+        {
+          "best_delta": 1.1434374999999974,
+          "parameter": "scale_y",
+          "stage": 3,
+          "value": 1.5899999999999999
+        },
+        {
+          "best_delta": 0.15875000000000128,
+          "parameter": "stroke_scale",
+          "stage": 3,
+          "value": 0.44
+        },
+        {
+          "best_delta": 0.06656249999999986,
+          "parameter": "stroke_scale",
+          "stage": 3,
+          "value": 0.48
+        }
+      ]
+    },
     "label": "M",
     "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "bbox": [
+          0.06480000000000002,
+          0.05660000000000001,
+          0.8704,
+          0.8904
+        ],
+        "constraint": "inside_rect_border",
+        "id": "background_gradient",
+        "kind": "HorizontalGradient",
+        "stops": [
+          "#8f8f8f",
+          "#dedede",
+          "#8f8f8f"
+        ]
+      },
+      {
+        "bbox": [
+          0.06480000000000002,
+          0.05660000000000001,
+          0.8704,
+          0.8904
+        ],
+        "fill": "none",
+        "id": "main_rect",
+        "kind": "RectBorder",
+        "stroke": "#666666",
+        "stroke_width": 0.016800000000000002
+      },
+      {
+        "clip_to": "main_rect",
+        "direction": "tr_bl",
+        "id": "diagonal_1_tr_bl",
+        "kind": "DiagonalBand",
+        "rect_ref": "main_rect",
+        "stroke": "#707070",
+        "stroke_width": 0.021599999999999998
+      },
+      {
+        "id": "plus_glyph",
+        "kind": "PlusGlyph",
+        "position": "top_left",
+        "stroke": "#4f4f4f",
+        "stroke_width": 0.012
+      },
+      {
+        "id": "minus_glyph",
+        "kind": "MinusGlyph",
+        "position": "top_left",
+        "stroke": "#4f4f4f",
+        "stroke_width": 0.012
+      }
+    ],
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
@@ -92,7 +365,10 @@
     "top_source_ref": null,
     "variant_name": "AC0010"
   },
-  "std_delta2": 9785.1708984375,
+  "requested_iterations": 64,
+  "spatial_quality_score": 6420.593457366625,
+  "std_delta2": 6221.82373046875,
+  "tile_std_delta2": 2624.9909652560077,
   "variant": "AC0010",
   "w": 40
 }

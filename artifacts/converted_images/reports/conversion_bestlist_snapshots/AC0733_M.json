@@ -1,0 +1,345 @@
+{
+  "actual_iterations": 64,
+  "base": "AC0733",
+  "best_error": 27.41857142857143,
+  "best_iter": 1,
+  "convergence": "",
+  "elapsed_seconds": 1.0469999999913853,
+  "error_per_pixel": 0.03916938775510204,
+  "filename": "AC0733_M.jpg",
+  "h": 35,
+  "localized_error_fraction": 0.6882581486400408,
+  "mean_delta2": 6300.95556640625,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [
+        {
+          "body_bbox": [
+            0.02,
+            0.389,
+            0.96,
+            0.511
+          ],
+          "body_fill": "#d92645",
+          "body_stroke": "#a0a0a0",
+          "body_stroke_width": 0.04,
+          "confidence": 0.75,
+          "connector": [
+            [
+              0.5,
+              0.0
+            ],
+            [
+              0.5,
+              0.389
+            ]
+          ],
+          "connector_stroke": "#808080",
+          "connector_width": 0.08,
+          "font_size": 0.44,
+          "font_weight": "600",
+          "id": "description_element_1",
+          "kind": "RightRotatedSquareKellePGlyph",
+          "label": "P",
+          "label_center": [
+            0.46,
+            0.656
+          ],
+          "label_fill": "#dedede",
+          "source": "description"
+        }
+      ],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": false,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "AC0733",
+        "source": "base_name",
+        "text": "Wie AC0733, aber nach rechts gedreht, Text immer noch horizontal \"P\""
+      }
+    ],
+    "documented_alias_refs": [
+      "AC0733"
+    ],
+    "elements": [],
+    "geometry_ir": [
+      {
+        "body_bbox": [
+          0.02,
+          0.389,
+          0.96,
+          0.511
+        ],
+        "body_fill": "#d92645",
+        "body_stroke": "#a0a0a0",
+        "body_stroke_width": 0.04,
+        "connector": [
+          [
+            0.5,
+            0.0
+          ],
+          [
+            0.5,
+            0.389
+          ]
+        ],
+        "connector_stroke": "#808080",
+        "connector_width": 0.08,
+        "font_size": 0.44,
+        "font_weight": "600",
+        "id": "right_rotated_square_kelle_p",
+        "kind": "RightRotatedSquareKellePGlyph",
+        "label": "P",
+        "label_center": [
+          0.46,
+          0.656
+        ],
+        "label_fill": "#dedede"
+      }
+    ],
+    "geometry_ir_optimizer_result": {
+      "element_refinement": {
+        "final_error": 29.548571428571428,
+        "initial_error": 29.548571428571428,
+        "mode": "right_rotated_valve_geometry",
+        "steps": []
+      },
+      "final_error": 29.548571428571428,
+      "initial_error": 57.451904761904764,
+      "mode": "geometry_ir_raster_registration",
+      "parameters": {
+        "scale_x": 0.4399999999999999,
+        "scale_y": 0.22999999999999993,
+        "stroke_scale": 2.3000000000000003,
+        "translate_x": -0.02,
+        "translate_y": 0.09
+      },
+      "steps": [
+        {
+          "best_delta": 3.165238095238095,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.85
+        },
+        {
+          "best_delta": 5.362380952380953,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 0.85
+        },
+        {
+          "best_delta": 0.8071428571428569,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 1.25
+        },
+        {
+          "best_delta": 3.7047619047619094,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.7
+        },
+        {
+          "best_delta": 3.538571428571423,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 0.7
+        },
+        {
+          "best_delta": 4.3552380952381,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.5499999999999999
+        },
+        {
+          "best_delta": 1.1666666666666643,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 0.5499999999999999
+        },
+        {
+          "best_delta": 0.326666666666668,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": 0.08
+        },
+        {
+          "best_delta": 3.8566666666666656,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.3999999999999999
+        },
+        {
+          "best_delta": 0.43619047619047535,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 0.3999999999999999
+        },
+        {
+          "best_delta": 0.23523809523809547,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 1.5
+        },
+        {
+          "best_delta": 0.3947619047619071,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 0.24999999999999992
+        },
+        {
+          "best_delta": 0.02619047619047521,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 1.75
+        },
+        {
+          "best_delta": 0.06857142857142762,
+          "parameter": "translate_x",
+          "stage": 1,
+          "value": -0.04
+        },
+        {
+          "best_delta": 0.0019047619047611875,
+          "parameter": "stroke_scale",
+          "stage": 1,
+          "value": 1.9
+        },
+        {
+          "best_delta": 0.014285714285716011,
+          "parameter": "translate_x",
+          "stage": 2,
+          "value": -0.02
+        },
+        {
+          "best_delta": 0.09333333333333371,
+          "parameter": "scale_x",
+          "stage": 2,
+          "value": 0.4399999999999999
+        },
+        {
+          "best_delta": 0.005238095238095042,
+          "parameter": "stroke_scale",
+          "stage": 2,
+          "value": 1.98
+        },
+        {
+          "best_delta": 0.04095238095237974,
+          "parameter": "stroke_scale",
+          "stage": 2,
+          "value": 2.06
+        },
+        {
+          "best_delta": 0.04238095238095241,
+          "parameter": "stroke_scale",
+          "stage": 2,
+          "value": 2.14
+        },
+        {
+          "best_delta": 0.008571428571428896,
+          "parameter": "translate_y",
+          "stage": 3,
+          "value": 0.09
+        },
+        {
+          "best_delta": 0.16666666666666785,
+          "parameter": "scale_y",
+          "stage": 3,
+          "value": 0.22999999999999993
+        },
+        {
+          "best_delta": 0.029999999999997584,
+          "parameter": "stroke_scale",
+          "stage": 3,
+          "value": 2.18
+        },
+        {
+          "best_delta": 0.0038095238095259276,
+          "parameter": "stroke_scale",
+          "stage": 3,
+          "value": 2.22
+        },
+        {
+          "best_delta": 0.02571428571428669,
+          "parameter": "stroke_scale",
+          "stage": 3,
+          "value": 2.2600000000000002
+        },
+        {
+          "best_delta": 0.02619047619047521,
+          "parameter": "stroke_scale",
+          "stage": 3,
+          "value": 2.3000000000000003
+        }
+      ]
+    },
+    "label": "M",
+    "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "body_bbox": [
+          0.26880000000000004,
+          0.56447,
+          0.4223999999999999,
+          0.11752999999999997
+        ],
+        "body_fill": "#d92645",
+        "body_stroke": "#a0a0a0",
+        "body_stroke_width": 0.04,
+        "connector": [
+          [
+            0.48,
+            0.475
+          ],
+          [
+            0.48,
+            0.56447
+          ]
+        ],
+        "connector_stroke": "#808080",
+        "connector_width": 0.18400000000000002,
+        "font_size": 0.10119999999999997,
+        "font_weight": "600",
+        "id": "right_rotated_square_kelle_p",
+        "kind": "RightRotatedSquareKellePGlyph",
+        "label": "P",
+        "label_center": [
+          0.4624,
+          0.62588
+        ],
+        "label_fill": "#dedede"
+      }
+    ],
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "AC0733_M"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 18403.550002334967,
+  "std_delta2": 13591.4580078125,
+  "tile_std_delta2": 8623.84731649784,
+  "variant": "AC0733_M",
+  "w": 20
+}

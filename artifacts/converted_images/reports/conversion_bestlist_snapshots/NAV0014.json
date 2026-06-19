@@ -1,0 +1,64 @@
+{
+  "actual_iterations": 64,
+  "base": "NAV0014",
+  "best_error": 31.41037037037037,
+  "best_iter": 1,
+  "convergence": "",
+  "elapsed_seconds": 0.9370000000053551,
+  "error_per_pixel": 0.023266941015089162,
+  "filename": "NAV0014.JPG",
+  "h": 30,
+  "localized_error_fraction": 0.5771483658079929,
+  "mean_delta2": 5448.65478515625,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": false,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "NAV0014",
+        "source": "base_name",
+        "text": "Hintergrund NAV0010, Vordergrund Flamme (Symbol) von GE0204 ohne Hintergrund"
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "geometry_ir": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "NAV0014"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 11942.940829644884,
+  "std_delta2": 9775.3486328125,
+  "tile_std_delta2": 5576.326181645282,
+  "variant": "NAV0014",
+  "w": 45
+}

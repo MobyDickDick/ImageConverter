@@ -1,0 +1,399 @@
+{
+  "actual_iterations": 64,
+  "base": "AC0214",
+  "best_error": 24.056923076923077,
+  "best_iter": 1,
+  "convergence": "",
+  "elapsed_seconds": 0.7029999999795109,
+  "error_per_pixel": 0.007402130177514793,
+  "filename": "AC0214_L.jpg",
+  "h": 50,
+  "localized_error_fraction": 0.6475986313458104,
+  "mean_delta2": 5873.21484375,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [
+        {
+          "body_fill": "url(#vertical-two-way-valve-body-gradient)",
+          "body_path": [
+            [
+              0.975,
+              0.98
+            ],
+            [
+              0.616,
+              0.98
+            ],
+            [
+              0.793,
+              0.491
+            ],
+            [
+              0.616,
+              0.02
+            ],
+            [
+              0.975,
+              0.02
+            ],
+            [
+              0.793,
+              0.491
+            ]
+          ],
+          "circle": [
+            0.279,
+            0.499,
+            0.263
+          ],
+          "circle_fill": "url(#vertical-two-way-valve-circle-gradient)",
+          "confidence": 0.75,
+          "connector": [
+            [
+              0.787,
+              0.499
+            ],
+            [
+              0.54,
+              0.499
+            ]
+          ],
+          "connector_stroke": "#8f8f8f",
+          "connector_width": 0.06,
+          "font_size": 0.54,
+          "font_weight": "700",
+          "id": "description_element_1",
+          "kind": "Rotated180TwoWayValveMotorGlyph",
+          "label": "M",
+          "label_center": [
+            0.279,
+            0.593
+          ],
+          "primitive_decomposition": {
+            "orientation": "left",
+            "primitives": [
+              {
+                "count": 2,
+                "kind": "PolygonPath",
+                "role": "valve_body"
+              },
+              {
+                "kind": "CircleBackground",
+                "role": "handle_circle"
+              },
+              {
+                "kind": "LineSegment",
+                "role": "handle_connector"
+              },
+              {
+                "kind": "TextGlyph",
+                "role": "handle_label",
+                "text": "M"
+              }
+            ],
+            "schema_version": "two_way_valve_primitive_decomposition_v1"
+          },
+          "source": "description",
+          "stroke": "#969696",
+          "stroke_width": 0.04,
+          "text_fill": "#666666",
+          "transform": {
+            "rotation_deg": 180,
+            "schema_version": "generic_geometry_transform_v1"
+          }
+        }
+      ],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "AC0214",
+        "source": "base_name",
+        "text": "Wie AC0212: 2-Weg Ventil vertikal: Kelle mit Kreis rechts, horizontale Verbindungslinie, \"M\" als Text (M = Motor), zwei spitze Dreiecke, welche sich in der Mitte berühren, graue Umrandung, Dreiecke besitzen emeinsamen Farübergang von dunkelgrau rechts oben nach hellgrau links unten. Geometrische Variante: 180° gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises."
+      }
+    ],
+    "documented_alias_refs": [
+      "AC0212"
+    ],
+    "elements": [],
+    "geometry_ir": [
+      {
+        "body_fill": "url(#vertical-two-way-valve-body-gradient)",
+        "body_path": [
+          [
+            0.975,
+            0.98
+          ],
+          [
+            0.616,
+            0.98
+          ],
+          [
+            0.793,
+            0.491
+          ],
+          [
+            0.616,
+            0.02
+          ],
+          [
+            0.975,
+            0.02
+          ],
+          [
+            0.793,
+            0.491
+          ]
+        ],
+        "circle": [
+          0.279,
+          0.499,
+          0.263
+        ],
+        "circle_fill": "url(#vertical-two-way-valve-circle-gradient)",
+        "connector": [
+          [
+            0.787,
+            0.499
+          ],
+          [
+            0.54,
+            0.499
+          ]
+        ],
+        "connector_stroke": "#8f8f8f",
+        "connector_width": 0.06,
+        "font_size": 0.54,
+        "font_weight": "700",
+        "id": "rotated_180_two_way_valve_motor",
+        "kind": "Rotated180TwoWayValveMotorGlyph",
+        "label": "M",
+        "label_center": [
+          0.279,
+          0.593
+        ],
+        "primitive_decomposition": {
+          "orientation": "left",
+          "primitives": [
+            {
+              "count": 2,
+              "kind": "PolygonPath",
+              "role": "valve_body"
+            },
+            {
+              "kind": "CircleBackground",
+              "role": "handle_circle"
+            },
+            {
+              "kind": "LineSegment",
+              "role": "handle_connector"
+            },
+            {
+              "kind": "TextGlyph",
+              "role": "handle_label",
+              "text": "M"
+            }
+          ],
+          "schema_version": "two_way_valve_primitive_decomposition_v1"
+        },
+        "stroke": "#969696",
+        "stroke_width": 0.04,
+        "text_fill": "#666666",
+        "transform": {
+          "rotation_deg": 180,
+          "schema_version": "generic_geometry_transform_v1"
+        }
+      }
+    ],
+    "geometry_ir_optimizer_result": {
+      "element_refinement": {
+        "final_error": 24.056923076923077,
+        "initial_error": 24.056923076923077,
+        "mode": "right_rotated_valve_geometry",
+        "steps": []
+      },
+      "final_error": 24.056923076923077,
+      "initial_error": 30.913333333333334,
+      "mode": "geometry_ir_raster_registration",
+      "parameters": {
+        "scale_x": 0.9199999999999999,
+        "scale_y": 1.15,
+        "stroke_scale": 0.58,
+        "translate_x": -0.02,
+        "translate_y": 0.08
+      },
+      "steps": [
+        {
+          "best_delta": 2.46123076923077,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": 0.08
+        },
+        {
+          "best_delta": 0.99148717948718,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 1.15
+        },
+        {
+          "best_delta": 0.37948717948717814,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 0.75
+        },
+        {
+          "best_delta": 0.13610256410256483,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 0.5
+        },
+        {
+          "best_delta": 0.07702564102564224,
+          "parameter": "scale_x",
+          "stage": 2,
+          "value": 0.96
+        },
+        {
+          "best_delta": 0.08974358974358765,
+          "parameter": "stroke_scale",
+          "stage": 2,
+          "value": 0.58
+        },
+        {
+          "best_delta": 1.4381538461538454,
+          "parameter": "translate_x",
+          "stage": 2,
+          "value": -0.02
+        },
+        {
+          "best_delta": 1.2831794871794884,
+          "parameter": "scale_x",
+          "stage": 2,
+          "value": 0.9199999999999999
+        }
+      ]
+    },
+    "label": "M",
+    "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "body_fill": "url(#vertical-two-way-valve-body-gradient)",
+        "body_path": [
+          [
+            0.9169999999999999,
+            1.1320000000000001
+          ],
+          [
+            0.5867199999999999,
+            1.1320000000000001
+          ],
+          [
+            0.74956,
+            0.56965
+          ],
+          [
+            0.5867199999999999,
+            0.028000000000000067
+          ],
+          [
+            0.9169999999999999,
+            0.028000000000000067
+          ],
+          [
+            0.74956,
+            0.56965
+          ]
+        ],
+        "circle": [
+          0.27668000000000004,
+          0.57885,
+          0.24195999999999998
+        ],
+        "circle_fill": "url(#vertical-two-way-valve-circle-gradient)",
+        "connector": [
+          [
+            0.74404,
+            0.57885
+          ],
+          [
+            0.5168,
+            0.57885
+          ]
+        ],
+        "connector_stroke": "#8f8f8f",
+        "connector_width": 0.0348,
+        "font_size": 0.4968,
+        "font_weight": "700",
+        "id": "rotated_180_two_way_valve_motor",
+        "kind": "Rotated180TwoWayValveMotorGlyph",
+        "label": "M",
+        "label_center": [
+          0.27668000000000004,
+          0.68695
+        ],
+        "primitive_decomposition": {
+          "orientation": "left",
+          "primitives": [
+            {
+              "count": 2,
+              "kind": "PolygonPath",
+              "role": "valve_body"
+            },
+            {
+              "kind": "CircleBackground",
+              "role": "handle_circle"
+            },
+            {
+              "kind": "LineSegment",
+              "role": "handle_connector"
+            },
+            {
+              "kind": "TextGlyph",
+              "role": "handle_label",
+              "text": "M"
+            }
+          ],
+          "schema_version": "two_way_valve_primitive_decomposition_v1"
+        },
+        "stroke": "#969696",
+        "stroke_width": 0.0232,
+        "text_fill": "#666666",
+        "transform": {
+          "rotation_deg": 180,
+          "schema_version": "generic_geometry_transform_v1"
+        }
+      }
+    ],
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "AC0214_L"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 13962.767858739335,
+  "std_delta2": 12509.8642578125,
+  "tile_std_delta2": 6194.863492166549,
+  "variant": "AC0214_L",
+  "w": 65
+}

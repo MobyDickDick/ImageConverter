@@ -1,0 +1,66 @@
+{
+  "actual_iterations": 64,
+  "base": "HC0010",
+  "best_error": 12.535714285714286,
+  "best_iter": 1,
+  "convergence": "",
+  "elapsed_seconds": 0.75,
+  "error_per_pixel": 0.0026970125399557415,
+  "filename": "HC0010.JPG",
+  "h": 56,
+  "localized_error_fraction": 0.33406301004878824,
+  "mean_delta2": 1219.309326171875,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": false,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "HC0010",
+        "source": "base_name",
+        "text": "Wie AC5000 (Radiator)"
+      }
+    ],
+    "documented_alias_refs": [
+      "AC5000"
+    ],
+    "elements": [],
+    "geometry_ir": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "HC0010"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 1774.9954088293102,
+  "std_delta2": 2394.283447265625,
+  "tile_std_delta2": 317.88603901067876,
+  "variant": "HC0010",
+  "w": 83
+}

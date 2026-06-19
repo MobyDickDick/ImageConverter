@@ -1,14 +1,40 @@
 {
+  "actual_iterations": 64,
   "base": "GE0002",
-  "best_error": 45.16891156462585,
+  "best_error": 16.861292517006802,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.009218145217270582,
+  "elapsed_seconds": 1.375,
+  "error_per_pixel": 0.0034410801055115925,
   "filename": "GE0002_L.jpg",
   "h": 70,
-  "mean_delta2": 11475.7080078125,
+  "localized_error_fraction": 0.880721478908966,
+  "mean_delta2": 2715.480224609375,
   "params": {
     "bottom_shape": null,
+    "contract_status": "insufficient_description",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [
+        "missing_geometry_terms"
+      ],
+      "has_conditions": false,
+      "has_geometry_terms": false,
+      "has_reference": false,
+      "status": "insufficient_description"
+    },
     "description_fragments": [
       {
         "key": "GE0002",
@@ -17,9 +43,12 @@
       }
     ],
     "documented_alias_refs": [],
-    "elements": [],
-    "label": "M",
-    "mode": "auto",
+    "elements": [
+      "MANUELL: Beschreibung unzureichend (fehlende Geometriehinweise oder leerer Beschreibungstext)."
+    ],
+    "geometry_ir": [],
+    "label": "",
+    "mode": "insufficient_description",
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
@@ -30,7 +59,10 @@
     "top_source_ref": null,
     "variant_name": "GE0002_L"
   },
-  "std_delta2": 16332.908203125,
+  "requested_iterations": 64,
+  "spatial_quality_score": 9112.563657513792,
+  "std_delta2": 7579.56396484375,
+  "tile_std_delta2": 5502.923518570813,
   "variant": "GE0002_L",
   "w": 70
 }

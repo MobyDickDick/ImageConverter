@@ -1,14 +1,98 @@
 {
+  "actual_iterations": 64,
   "base": "AC0839",
-  "best_error": 18.704,
+  "best_error": 21.770666666666667,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.049877333333333336,
+  "elapsed_seconds": 0.8120000000053551,
+  "error_per_pixel": 0.05805511111111111,
   "filename": "AC0839_S.jpg",
   "h": 15,
-  "mean_delta2": 4136.7998046875,
+  "localized_error_fraction": 0.8081678610882927,
+  "mean_delta2": 4518.7841796875,
   "params": {
     "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [
+        {
+          "badge_role": "circle_text_badge",
+          "bbox": [
+            0.08,
+            0.08,
+            0.84,
+            0.84
+          ],
+          "confidence": 0.75,
+          "fill": "#f2f2f2",
+          "id": "description_element_1",
+          "kind": "CircleBackground",
+          "source": "description",
+          "stroke": "#7f7f7f",
+          "stroke_width": 0.055
+        },
+        {
+          "bbox_ref": "described_circle",
+          "confidence": 0.75,
+          "fill": "#666666",
+          "font_size": 0.3,
+          "font_weight": "700",
+          "glyph_evidence": {
+            "normalized_text": "VOC",
+            "position": "center",
+            "source": "description_text"
+          },
+          "id": "description_element_2",
+          "kind": "TextGlyph",
+          "relation": "centered_in",
+          "source": "description",
+          "target_ref": "described_circle",
+          "text": "VOC",
+          "text_anchor": [
+            0.5,
+            0.5
+          ],
+          "text_position": "center"
+        }
+      ],
+      "relations": [
+        {
+          "confidence": 0.75,
+          "object": "described_circle",
+          "source": "description",
+          "subject": "description_element_2",
+          "type": "bbox"
+        },
+        {
+          "confidence": 0.75,
+          "object": "described_circle",
+          "source": "description",
+          "subject": "description_element_2",
+          "type": "target"
+        },
+        {
+          "confidence": 0.75,
+          "object": "described_circle",
+          "source": "description",
+          "subject": "description_element_2",
+          "type": "centered_in"
+        }
+      ],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
     "description_fragments": [
       {
         "key": "AC0839",
@@ -20,8 +104,45 @@
       "AC0836"
     ],
     "elements": [
-      "SEMANTIC: waagrechter Strich rechts vom Kreis",
-      "SEMANTIC: Kreis + Buchstabe VOC"
+      "SEMANTIC: Kreis + Buchstabe VOC",
+      "SEMANTIC: waagrechter Strich rechts vom Kreis"
+    ],
+    "geometry_ir": [
+      {
+        "badge_role": "circle_text_badge",
+        "bbox": [
+          0.08,
+          0.08,
+          0.84,
+          0.84
+        ],
+        "fill": "#f2f2f2",
+        "id": "described_circle",
+        "kind": "CircleBackground",
+        "stroke": "#7f7f7f",
+        "stroke_width": 0.055
+      },
+      {
+        "bbox_ref": "described_circle",
+        "fill": "#666666",
+        "font_size": 0.3,
+        "font_weight": "700",
+        "glyph_evidence": {
+          "normalized_text": "VOC",
+          "position": "center",
+          "source": "description_text"
+        },
+        "id": "circle_badge_text",
+        "kind": "TextGlyph",
+        "relation": "centered_in",
+        "target_ref": "described_circle",
+        "text": "VOC",
+        "text_anchor": [
+          0.5,
+          0.5
+        ],
+        "text_position": "center"
+      }
     ],
     "label": "VOC",
     "mode": "semantic_badge",
@@ -33,16 +154,18 @@
     ],
     "semantic_sources": {
       "description_heuristic": [
-        "SEMANTIC: Kreis + Buchstabe VOC"
-      ],
-      "family_rule": [
+        "SEMANTIC: Kreis + Buchstabe VOC",
         "SEMANTIC: waagrechter Strich rechts vom Kreis"
-      ]
+      ],
+      "family_rule": []
     },
     "top_source_ref": null,
     "variant_name": "AC0839_S"
   },
-  "std_delta2": 11457.779296875,
+  "requested_iterations": 64,
+  "spatial_quality_score": 13116.272923973138,
+  "std_delta2": 10669.8046875,
+  "tile_std_delta2": 7102.937356983039,
   "variant": "AC0839_S",
   "w": 25
 }

@@ -1,15 +1,82 @@
 {
+  "actual_iterations": 64,
   "base": "AC0203",
-  "best_error": 26.436666666666667,
+  "best_error": 24.94611111111111,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.022030555555555557,
+  "elapsed_seconds": 1.187999999994645,
+  "error_per_pixel": 0.020788425925925925,
   "filename": "AC0203_M.jpg",
   "h": 40,
-  "mean_delta2": 5364.521484375,
+  "localized_error_fraction": 0.585269467539632,
+  "mean_delta2": 5708.7265625,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
+    "description_constraints": {
+      "elements": [
+        {
+          "bbox": [
+            0.06,
+            0.06,
+            0.88,
+            0.88
+          ],
+          "confidence": 0.75,
+          "fill": "#df2249",
+          "id": "description_element_1",
+          "kind": "CircleBackground",
+          "source": "description",
+          "stroke": "#8d8d8d",
+          "stroke_width": 0.02
+        },
+        {
+          "circle_ref": "compressor_circle",
+          "confidence": 0.75,
+          "id": "description_element_2",
+          "kind": "MainDiagonalMirroredCompressorGlyph",
+          "left_line": [
+            [
+              0.09,
+              0.22
+            ],
+            [
+              0.39,
+              1.01
+            ]
+          ],
+          "right_line": [
+            [
+              0.91,
+              0.22
+            ],
+            [
+              0.61,
+              1.01
+            ]
+          ],
+          "source": "description",
+          "stroke": "#f4f4f4",
+          "stroke_width": 0.032
+        }
+      ],
+      "relations": [
+        {
+          "confidence": 0.75,
+          "object": "compressor_circle",
+          "source": "description",
+          "subject": "description_element_2",
+          "type": "circle"
+        }
+      ],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
+      }
+    },
     "description_contract": {
       "deficits": [],
       "has_conditions": false,
@@ -70,8 +137,298 @@
         "stroke_width": 0.032
       }
     ],
+    "geometry_ir_optimizer_result": {
+      "element_refinement": {
+        "final_error": 29.209722222222222,
+        "initial_error": 29.209722222222222,
+        "mode": "right_rotated_valve_geometry",
+        "steps": []
+      },
+      "final_error": 29.209722222222222,
+      "initial_error": 77.87,
+      "mode": "geometry_ir_raster_registration",
+      "parameters": {
+        "scale_x": 0.3099999999999999,
+        "scale_y": 0.24999999999999992,
+        "stroke_scale": 3.5300000000000002,
+        "translate_x": 0.33,
+        "translate_y": -0.24
+      },
+      "steps": [
+        {
+          "best_delta": 7.487222222222229,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.85
+        },
+        {
+          "best_delta": 5.594999999999999,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 0.85
+        },
+        {
+          "best_delta": 0.8975000000000009,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 1.25
+        },
+        {
+          "best_delta": 0.7422222222222175,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": 0.08
+        },
+        {
+          "best_delta": 0.11638888888889198,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": -0.08
+        },
+        {
+          "best_delta": 6.383055555555558,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.7
+        },
+        {
+          "best_delta": 6.116944444444442,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 0.7
+        },
+        {
+          "best_delta": 0.802500000000002,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 1.5
+        },
+        {
+          "best_delta": 0.46666666666666146,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": 0.16
+        },
+        {
+          "best_delta": 4.4594444444444505,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.5499999999999999
+        },
+        {
+          "best_delta": 4.211111111111109,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 0.5499999999999999
+        },
+        {
+          "best_delta": 0.3774999999999977,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 1.75
+        },
+        {
+          "best_delta": 1.016944444444448,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": 0.24
+        },
+        {
+          "best_delta": 1.4158333333333317,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": -0.16
+        },
+        {
+          "best_delta": 1.600833333333334,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.3999999999999999
+        },
+        {
+          "best_delta": 2.079444444444441,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 0.3999999999999999
+        },
+        {
+          "best_delta": 0.375,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 2.0
+        },
+        {
+          "best_delta": 1.0705555555555577,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": 0.15999999999999998
+        },
+        {
+          "best_delta": 0.5736111111111128,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.24999999999999992
+        },
+        {
+          "best_delta": 0.24916666666666387,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 0.24999999999999992
+        },
+        {
+          "best_delta": 0.275555555555556,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 2.25
+        },
+        {
+          "best_delta": 0.4136111111111127,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": 0.07999999999999997
+        },
+        {
+          "best_delta": 0.13555555555555543,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": -0.24
+        },
+        {
+          "best_delta": 0.02527777777777729,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 2.5
+        },
+        {
+          "best_delta": 0.27111111111111086,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": 0.15999999999999998
+        },
+        {
+          "best_delta": 0.012222222222224133,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 2.75
+        },
+        {
+          "best_delta": 0.5319444444444414,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": 0.24
+        },
+        {
+          "best_delta": 0.02916666666666856,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 3.0
+        },
+        {
+          "best_delta": 0.7241666666666653,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": 0.32
+        },
+        {
+          "best_delta": 0.061388888888888715,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 3.25
+        },
+        {
+          "best_delta": 0.0016666666666687036,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 3.5
+        },
+        {
+          "best_delta": 0.013333333333331865,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 3.75
+        },
+        {
+          "best_delta": 0.05000000000000071,
+          "parameter": "scale_x",
+          "stage": 1,
+          "value": 0.3299999999999999
+        },
+        {
+          "best_delta": 0.015833333333333144,
+          "parameter": "stroke_scale",
+          "stage": 1,
+          "value": 3.6
+        },
+        {
+          "best_delta": 0.004722222222223849,
+          "parameter": "stroke_scale",
+          "stage": 1,
+          "value": 3.45
+        },
+        {
+          "best_delta": 0.006388888888885447,
+          "parameter": "stroke_scale",
+          "stage": 2,
+          "value": 3.5300000000000002
+        },
+        {
+          "best_delta": 0.0336111111111137,
+          "parameter": "scale_x",
+          "stage": 3,
+          "value": 0.3099999999999999
+        },
+        {
+          "best_delta": 0.017777777777777004,
+          "parameter": "translate_x",
+          "stage": 3,
+          "value": 0.33
+        }
+      ]
+    },
     "label": "M",
     "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "bbox": [
+          0.6936,
+          0.15000000000000002,
+          0.2727999999999999,
+          0.21999999999999992
+        ],
+        "fill": "#df2249",
+        "id": "compressor_circle",
+        "kind": "CircleBackground",
+        "stroke": "#8d8d8d",
+        "stroke_width": 0.07060000000000001
+      },
+      {
+        "circle_ref": "compressor_circle",
+        "id": "main_diagonal_mirrored_compressor",
+        "kind": "MainDiagonalMirroredCompressorGlyph",
+        "left_line": [
+          [
+            0.09,
+            0.22
+          ],
+          [
+            0.39,
+            1.01
+          ]
+        ],
+        "right_line": [
+          [
+            0.91,
+            0.22
+          ],
+          [
+            0.61,
+            1.01
+          ]
+        ],
+        "stroke": "#f4f4f4",
+        "stroke_width": 0.11296
+      }
+    ],
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
@@ -82,7 +439,10 @@
     "top_source_ref": null,
     "variant_name": "AC0203_M"
   },
-  "std_delta2": 11435.9560546875,
+  "requested_iterations": 64,
+  "spatial_quality_score": 15539.000637863537,
+  "std_delta2": 12014.9072265625,
+  "tile_std_delta2": 6826.696217596633,
   "variant": "AC0203_M",
   "w": 30
 }

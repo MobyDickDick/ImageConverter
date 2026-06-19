@@ -1,15 +1,31 @@
 {
+  "actual_iterations": 64,
   "base": "BTN",
-  "best_error": 20.310979900996003,
+  "best_error": 16.458173793761556,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.0007268198211127573,
+  "elapsed_seconds": 1.0940000000118744,
+  "error_per_pixel": 0.000588948784890376,
   "filename": "btn_air.jpg",
   "h": 81,
-  "mean_delta2": 2518.80712890625,
+  "localized_error_fraction": 0.6700705364781342,
+  "mean_delta2": 1601.69091796875,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
     "description_contract": {
       "deficits": [],
       "has_conditions": true,
@@ -42,7 +58,10 @@
     "top_source_ref": null,
     "variant_name": "BTN_AIR"
   },
-  "std_delta2": 5905.68798828125,
+  "requested_iterations": 64,
+  "spatial_quality_score": 4078.2168455031187,
+  "std_delta2": 4269.8427734375,
+  "tile_std_delta2": 2011.1294966401222,
   "variant": "BTN_AIR",
   "w": 345
 }

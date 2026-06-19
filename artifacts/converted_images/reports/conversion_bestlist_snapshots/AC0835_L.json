@@ -1,15 +1,31 @@
 {
+  "actual_iterations": 64,
   "base": "AC0835",
-  "best_error": 31.6912,
+  "best_error": 31.0736,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.050705919999999995,
+  "elapsed_seconds": 1.2030000000086147,
+  "error_per_pixel": 0.04971776,
   "filename": "AC0835_L.jpg",
   "h": 25,
-  "mean_delta2": 7679.40966796875,
+  "localized_error_fraction": 0.5740002991015752,
+  "mean_delta2": 7285.8193359375,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
     "description_contract": {
       "deficits": [],
       "has_conditions": true,
@@ -46,7 +62,10 @@
     "top_source_ref": null,
     "variant_name": "AC0835_L"
   },
-  "std_delta2": 14094.05078125,
+  "requested_iterations": 64,
+  "spatial_quality_score": 15466.592762896893,
+  "std_delta2": 13064.341796875,
+  "tile_std_delta2": 6151.782740526608,
   "variant": "AC0835_L",
   "w": 25
 }

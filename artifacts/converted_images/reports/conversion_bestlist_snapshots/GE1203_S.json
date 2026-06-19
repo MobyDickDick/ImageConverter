@@ -1,15 +1,31 @@
 {
+  "actual_iterations": 64,
   "base": "GE1203",
-  "best_error": 69.99555555555555,
+  "best_error": 24.435555555555556,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.31109135802469134,
+  "elapsed_seconds": 0.7179999999934807,
+  "error_per_pixel": 0.10860246913580247,
   "filename": "GE1203_S.jpg",
   "h": 15,
-  "mean_delta2": 19474.359375,
+  "localized_error_fraction": 0.8117961407801477,
+  "mean_delta2": 4817.09326171875,
   "params": {
     "bottom_shape": null,
     "contract_status": "insufficient_description",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
     "description_contract": {
       "deficits": [
         "missing_geometry_terms"
@@ -43,7 +59,10 @@
     "top_source_ref": null,
     "variant_name": "GE1203_S"
   },
-  "std_delta2": 12477.4814453125,
+  "requested_iterations": 64,
+  "spatial_quality_score": 13889.281245652823,
+  "std_delta2": 10583.5263671875,
+  "tile_std_delta2": 7432.532967977227,
   "variant": "GE1203_S",
   "w": 15
 }

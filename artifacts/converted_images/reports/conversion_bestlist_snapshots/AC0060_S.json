@@ -1,14 +1,38 @@
 {
+  "actual_iterations": 64,
   "base": "AC0060",
   "best_error": 17.85375,
   "best_iter": 1,
   "convergence": "",
+  "elapsed_seconds": 0.5940000000118744,
   "error_per_pixel": 0.0074390625,
   "filename": "AC0060_S.jpg",
   "h": 80,
+  "localized_error_fraction": 0.8332744017966741,
   "mean_delta2": 6767.50439453125,
   "params": {
     "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
     "description_fragments": [
       {
         "key": "AC0060",
@@ -22,6 +46,7 @@
     "elements": [
       "SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch)"
     ],
+    "geometry_ir": [],
     "label": "",
     "mode": "dual_arrow_badge",
     "semantic_conflicts": [],
@@ -34,7 +59,10 @@
     "top_source_ref": null,
     "variant_name": "AC0060_S"
   },
+  "requested_iterations": 64,
+  "spatial_quality_score": 20934.92674430279,
   "std_delta2": 19083.6796875,
+  "tile_std_delta2": 12469.800646481091,
   "variant": "AC0060_S",
   "w": 30
 }

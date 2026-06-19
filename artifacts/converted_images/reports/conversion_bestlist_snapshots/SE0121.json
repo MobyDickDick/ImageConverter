@@ -1,14 +1,98 @@
 {
+  "actual_iterations": 64,
   "base": "SE0121",
-  "best_error": 30.80921052631579,
+  "best_error": 26.31798245614035,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.03378202908587258,
+  "elapsed_seconds": 0.625,
+  "error_per_pixel": 0.028857436903662662,
   "filename": "SE0121.jpg",
   "h": 38,
-  "mean_delta2": 8373.5,
+  "localized_error_fraction": 0.6531884220076308,
+  "mean_delta2": 6352.34228515625,
   "params": {
     "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [
+        {
+          "badge_role": "circle_text_badge",
+          "bbox": [
+            0.08,
+            0.08,
+            0.84,
+            0.84
+          ],
+          "confidence": 0.75,
+          "fill": "#f2f2f2",
+          "id": "description_element_1",
+          "kind": "CircleBackground",
+          "source": "description",
+          "stroke": "#7f7f7f",
+          "stroke_width": 0.055
+        },
+        {
+          "bbox_ref": "described_circle",
+          "confidence": 0.75,
+          "fill": "#666666",
+          "font_size": 0.42,
+          "font_weight": "700",
+          "glyph_evidence": {
+            "normalized_text": "rF",
+            "position": "center",
+            "source": "description_text"
+          },
+          "id": "description_element_2",
+          "kind": "TextGlyph",
+          "relation": "centered_in",
+          "source": "description",
+          "target_ref": "described_circle",
+          "text": "rF",
+          "text_anchor": [
+            0.5,
+            0.5
+          ],
+          "text_position": "center"
+        }
+      ],
+      "relations": [
+        {
+          "confidence": 0.75,
+          "object": "described_circle",
+          "source": "description",
+          "subject": "description_element_2",
+          "type": "bbox"
+        },
+        {
+          "confidence": 0.75,
+          "object": "described_circle",
+          "source": "description",
+          "subject": "description_element_2",
+          "type": "target"
+        },
+        {
+          "confidence": 0.75,
+          "object": "described_circle",
+          "source": "description",
+          "subject": "description_element_2",
+          "type": "centered_in"
+        }
+      ],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": false,
+      "status": "ok"
+    },
     "description_fragments": [
       {
         "key": "SE0121",
@@ -18,8 +102,222 @@
     ],
     "documented_alias_refs": [],
     "elements": [],
+    "geometry_ir": [
+      {
+        "badge_role": "circle_text_badge",
+        "bbox": [
+          0.08,
+          0.08,
+          0.84,
+          0.84
+        ],
+        "fill": "#f2f2f2",
+        "id": "described_circle",
+        "kind": "CircleBackground",
+        "stroke": "#7f7f7f",
+        "stroke_width": 0.055
+      },
+      {
+        "bbox_ref": "described_circle",
+        "fill": "#666666",
+        "font_size": 0.42,
+        "font_weight": "700",
+        "glyph_evidence": {
+          "normalized_text": "rF",
+          "position": "center",
+          "source": "description_text"
+        },
+        "id": "circle_badge_text",
+        "kind": "TextGlyph",
+        "relation": "centered_in",
+        "target_ref": "described_circle",
+        "text": "rF",
+        "text_anchor": [
+          0.5,
+          0.5
+        ],
+        "text_position": "center"
+      }
+    ],
+    "geometry_ir_optimizer_result": {
+      "element_refinement": {
+        "final_error": 26.31798245614035,
+        "initial_error": 26.31798245614035,
+        "mode": "right_rotated_valve_geometry",
+        "steps": []
+      },
+      "final_error": 26.31798245614035,
+      "initial_error": 40.093201754385966,
+      "mode": "geometry_ir_raster_registration",
+      "parameters": {
+        "scale_x": 0.7999999999999999,
+        "scale_y": 1.06,
+        "stroke_scale": 0.21,
+        "translate_x": -0.12,
+        "translate_y": -0.23
+      },
+      "steps": [
+        {
+          "best_delta": 2.800438596491226,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": -0.08
+        },
+        {
+          "best_delta": 3.875,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": -0.08
+        },
+        {
+          "best_delta": 1.2412280701754383,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.85
+        },
+        {
+          "best_delta": 1.8848684210526336,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 0.75
+        },
+        {
+          "best_delta": 0.16885964912280826,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": -0.16
+        },
+        {
+          "best_delta": 0.23135964912280826,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.7
+        },
+        {
+          "best_delta": 0.5285087719298218,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 0.85
+        },
+        {
+          "best_delta": 1.1677631578947398,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 0.5
+        },
+        {
+          "best_delta": 0.3103070175438596,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": -0.24
+        },
+        {
+          "best_delta": 0.5690789473684212,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 0.25
+        },
+        {
+          "best_delta": 0.17543859649122595,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 1.0
+        },
+        {
+          "best_delta": 0.13377192982456165,
+          "parameter": "translate_x",
+          "stage": 1,
+          "value": -0.12
+        },
+        {
+          "best_delta": 0.3421052631578938,
+          "parameter": "scale_x",
+          "stage": 1,
+          "value": 0.7799999999999999
+        },
+        {
+          "best_delta": 0.004385964912280826,
+          "parameter": "scale_y",
+          "stage": 1,
+          "value": 1.08
+        },
+        {
+          "best_delta": 0.17653508771929793,
+          "parameter": "translate_y",
+          "stage": 2,
+          "value": -0.22
+        },
+        {
+          "best_delta": 0.08552631578947612,
+          "parameter": "scale_y",
+          "stage": 2,
+          "value": 1.04
+        },
+        {
+          "best_delta": 0.01425438596491091,
+          "parameter": "translate_y",
+          "stage": 3,
+          "value": -0.23
+        },
+        {
+          "best_delta": 0.023026315789472562,
+          "parameter": "scale_y",
+          "stage": 3,
+          "value": 1.06
+        },
+        {
+          "best_delta": 0.02631578947368496,
+          "parameter": "stroke_scale",
+          "stage": 3,
+          "value": 0.21
+        },
+        {
+          "best_delta": 0.016447368421054875,
+          "parameter": "scale_x",
+          "stage": 3,
+          "value": 0.7999999999999999
+        }
+      ]
+    },
     "label": "M",
     "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "badge_role": "circle_text_badge",
+        "bbox": [
+          0.04400000000000004,
+          -0.1752,
+          0.6719999999999999,
+          0.8904
+        ],
+        "fill": "#f2f2f2",
+        "id": "described_circle",
+        "kind": "CircleBackground",
+        "stroke": "#7f7f7f",
+        "stroke_width": 0.01155
+      },
+      {
+        "bbox_ref": "described_circle",
+        "fill": "#666666",
+        "font_size": 0.33599999999999997,
+        "font_weight": "700",
+        "glyph_evidence": {
+          "normalized_text": "rF",
+          "position": "center",
+          "source": "description_text"
+        },
+        "id": "circle_badge_text",
+        "kind": "TextGlyph",
+        "relation": "centered_in",
+        "target_ref": "described_circle",
+        "text": "rF",
+        "text_anchor": [
+          0.5,
+          0.5
+        ],
+        "text_position": "center"
+      }
+    ],
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
@@ -30,7 +328,10 @@
     "top_source_ref": null,
     "variant_name": "SE0121"
   },
-  "std_delta2": 18077.46484375,
+  "requested_iterations": 64,
+  "spatial_quality_score": 15458.688699067856,
+  "std_delta2": 14147.0048828125,
+  "tile_std_delta2": 7340.754861775327,
   "variant": "SE0121",
   "w": 24
 }

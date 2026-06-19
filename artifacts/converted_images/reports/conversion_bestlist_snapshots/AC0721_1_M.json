@@ -1,15 +1,57 @@
 {
+  "actual_iterations": 64,
   "base": "AC0721",
-  "best_error": 32.90428571428571,
+  "best_error": 11.096190476190475,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.04700612244897959,
+  "elapsed_seconds": 0.5150000000139698,
+  "error_per_pixel": 0.01585170068027211,
   "filename": "AC0721_1_M.jpg",
   "h": 35,
-  "mean_delta2": 10319.341796875,
+  "localized_error_fraction": 0.9536083893239466,
+  "mean_delta2": 3113.6171875,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
+    "description_constraints": {
+      "elements": [
+        {
+          "body_bbox": [
+            0.02,
+            0.04,
+            0.96,
+            0.56
+          ],
+          "body_fill": "#e11e48",
+          "body_stroke": "#a0a0a0",
+          "body_stroke_width": 0.04,
+          "confidence": 0.75,
+          "connector": [
+            [
+              0.5,
+              0.6
+            ],
+            [
+              0.5,
+              1.0
+            ]
+          ],
+          "connector_stroke": "#808080",
+          "connector_width": 0.08,
+          "id": "description_element_1",
+          "kind": "UprightSquareKelleGlyph",
+          "source": "description"
+        }
+      ],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
+      }
+    },
     "description_contract": {
       "deficits": [],
       "has_conditions": true,
@@ -28,9 +70,130 @@
       "AC0701"
     ],
     "elements": [],
-    "geometry_ir": [],
+    "geometry_ir": [
+      {
+        "body_bbox": [
+          0.02,
+          0.04,
+          0.96,
+          0.56
+        ],
+        "body_fill": "#e11e48",
+        "body_stroke": "#a0a0a0",
+        "body_stroke_width": 0.04,
+        "connector": [
+          [
+            0.5,
+            0.6
+          ],
+          [
+            0.5,
+            1.0
+          ]
+        ],
+        "connector_stroke": "#808080",
+        "connector_width": 0.08,
+        "id": "upright_square_kelle",
+        "kind": "UprightSquareKelleGlyph"
+      }
+    ],
+    "geometry_ir_optimizer_result": {
+      "element_refinement": {
+        "final_error": 11.096190476190475,
+        "initial_error": 11.096190476190475,
+        "mode": "right_rotated_valve_geometry",
+        "steps": []
+      },
+      "final_error": 11.096190476190475,
+      "initial_error": 21.21904761904762,
+      "mode": "geometry_ir_raster_registration",
+      "parameters": {
+        "scale_x": 0.9600000000000001,
+        "scale_y": 0.9299999999999999,
+        "stroke_scale": 1.25,
+        "translate_x": 0.0,
+        "translate_y": 0.02
+      },
+      "steps": [
+        {
+          "best_delta": 1.7852380952380962,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 0.85
+        },
+        {
+          "best_delta": 0.8219047619047615,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 1.25
+        },
+        {
+          "best_delta": 0.4771428571428551,
+          "parameter": "scale_y",
+          "stage": 1,
+          "value": 0.9299999999999999
+        },
+        {
+          "best_delta": 0.07857142857142918,
+          "parameter": "translate_y",
+          "stage": 1,
+          "value": 0.04
+        },
+        {
+          "best_delta": 0.10666666666666558,
+          "parameter": "scale_x",
+          "stage": 1,
+          "value": 0.92
+        },
+        {
+          "best_delta": 0.021904761904764314,
+          "parameter": "translate_y",
+          "stage": 1,
+          "value": 0.0
+        },
+        {
+          "best_delta": 4.612857142857141,
+          "parameter": "translate_y",
+          "stage": 2,
+          "value": 0.02
+        },
+        {
+          "best_delta": 2.2185714285714297,
+          "parameter": "scale_x",
+          "stage": 2,
+          "value": 0.9600000000000001
+        }
+      ]
+    },
     "label": "M",
     "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "body_bbox": [
+          0.03919999999999996,
+          0.09219999999999999,
+          0.9216000000000001,
+          0.5208
+        ],
+        "body_fill": "#e11e48",
+        "body_stroke": "#a0a0a0",
+        "body_stroke_width": 0.04,
+        "connector": [
+          [
+            0.5,
+            0.613
+          ],
+          [
+            0.5,
+            0.985
+          ]
+        ],
+        "connector_stroke": "#808080",
+        "connector_width": 0.1,
+        "id": "upright_square_kelle",
+        "kind": "UprightSquareKelleGlyph"
+      }
+    ],
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
@@ -41,7 +204,10 @@
     "top_source_ref": null,
     "variant_name": "AC0721_1_M"
   },
-  "std_delta2": 19150.677734375,
+  "requested_iterations": 64,
+  "spatial_quality_score": 11458.362680801984,
+  "std_delta2": 12184.603515625,
+  "tile_std_delta2": 7842.145123437197,
   "variant": "AC0721_1_M",
   "w": 20
 }

@@ -1,15 +1,31 @@
 {
+  "actual_iterations": 64,
   "base": "Z_113",
-  "best_error": 23.298039215686273,
+  "best_error": 15.561904761904762,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.03915636842972483,
+  "elapsed_seconds": 0.5469999999913853,
+  "error_per_pixel": 0.026154461784713885,
   "filename": "z_113.jpg",
   "h": 35,
-  "mean_delta2": 3078.237060546875,
+  "localized_error_fraction": 0.5395292379142917,
+  "mean_delta2": 1664.11767578125,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
     "description_contract": {
       "deficits": [],
       "has_conditions": true,
@@ -39,7 +55,10 @@
     "top_source_ref": null,
     "variant_name": "Z_113"
   },
-  "std_delta2": 4439.25146484375,
+  "requested_iterations": 64,
+  "spatial_quality_score": 4432.837626489875,
+  "std_delta2": 3273.39501953125,
+  "tile_std_delta2": 1544.3657236651895,
   "variant": "Z_113",
   "w": 17
 }

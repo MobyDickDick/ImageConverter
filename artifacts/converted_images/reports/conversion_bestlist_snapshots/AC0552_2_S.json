@@ -1,15 +1,31 @@
 {
+  "actual_iterations": 64,
   "base": "AC0552",
-  "best_error": 23.104583333333334,
+  "best_error": 25.535416666666666,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.028880729166666667,
+  "elapsed_seconds": 0.6410000000032596,
+  "error_per_pixel": 0.03191927083333333,
   "filename": "AC0552_2_S.jpg",
   "h": 20,
-  "mean_delta2": 4103.2060546875,
+  "localized_error_fraction": 0.6760038894120134,
+  "mean_delta2": 3986.4638671875,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
     "description_contract": {
       "deficits": [],
       "has_conditions": false,
@@ -42,7 +58,10 @@
     "top_source_ref": null,
     "variant_name": "AC0552_2_S"
   },
-  "std_delta2": 8882.1748046875,
+  "requested_iterations": 64,
+  "spatial_quality_score": 10149.72238545719,
+  "std_delta2": 7737.48388671875,
+  "tile_std_delta2": 5694.319727866151,
   "variant": "AC0552_2_S",
   "w": 40
 }

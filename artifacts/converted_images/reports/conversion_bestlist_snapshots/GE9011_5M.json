@@ -1,15 +1,31 @@
 {
+  "actual_iterations": 64,
   "base": "GE9011_5M",
-  "best_error": 36.45444444444445,
+  "best_error": 24.015555555555554,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.030378703703703706,
+  "elapsed_seconds": 0.9379999999946449,
+  "error_per_pixel": 0.02001296296296296,
   "filename": "GE9011_5M.jpg",
   "h": 60,
-  "mean_delta2": 13654.421875,
+  "localized_error_fraction": 0.5062708441687798,
+  "mean_delta2": 6076.44189453125,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
     "description_contract": {
       "deficits": [],
       "has_conditions": false,
@@ -39,7 +55,10 @@
     "top_source_ref": null,
     "variant_name": "GE9011_5M"
   },
-  "std_delta2": 18729.41015625,
+  "requested_iterations": 64,
+  "spatial_quality_score": 19958.206437995752,
+  "std_delta2": 9514.130859375,
+  "tile_std_delta2": 7897.556279361648,
   "variant": "GE9011_5M",
   "w": 20
 }

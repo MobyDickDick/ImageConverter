@@ -1,0 +1,66 @@
+{
+  "actual_iterations": 64,
+  "base": "AC0734",
+  "best_error": 15.289185185185184,
+  "best_iter": 1,
+  "convergence": "",
+  "elapsed_seconds": 0.9839999999967404,
+  "error_per_pixel": 0.01359038683127572,
+  "filename": "AC0734_1_L.jpg",
+  "h": 25,
+  "localized_error_fraction": 0.49740830312832807,
+  "mean_delta2": 4638.11279296875,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": false,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "AC0734",
+        "source": "base_name",
+        "text": "Wie AC0734, aber nach rechts gedreht, Text immer noch horizontal \"P\""
+      }
+    ],
+    "documented_alias_refs": [
+      "AC0734"
+    ],
+    "elements": [],
+    "geometry_ir": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "AC0734_1_L"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 21090.638173469317,
+  "std_delta2": 14758.3447265625,
+  "tile_std_delta2": 7715.5099408878905,
+  "variant": "AC0734_1_L",
+  "w": 45
+}

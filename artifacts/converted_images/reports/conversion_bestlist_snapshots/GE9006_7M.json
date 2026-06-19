@@ -1,15 +1,31 @@
 {
+  "actual_iterations": 64,
   "base": "GE9006_7M",
-  "best_error": 24.696666666666665,
+  "best_error": 19.465,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.06174166666666667,
+  "elapsed_seconds": 0.75,
+  "error_per_pixel": 0.0486625,
   "filename": "GE9006_7M.jpg",
   "h": 20,
-  "mean_delta2": 8528.365234375,
+  "localized_error_fraction": 0.49963777919368774,
+  "mean_delta2": 5520.6748046875,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
     "description_contract": {
       "deficits": [],
       "has_conditions": false,
@@ -39,7 +55,10 @@
     "top_source_ref": null,
     "variant_name": "GE9006_7M"
   },
-  "std_delta2": 14008.5302734375,
+  "requested_iterations": 64,
+  "spatial_quality_score": 14797.02810951803,
+  "std_delta2": 10819.111328125,
+  "tile_std_delta2": 6071.853220234304,
   "variant": "GE9006_7M",
   "w": 20
 }

@@ -1,8 +1,26 @@
 <svg width="20" height="60" viewBox="0 0 20 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-  <g transform="translate(10.000 30.000) rotate(180) scale(1.7480) translate(-10.000 -30.000)">
-<line x1="33.4877" y1="0.0000" x2="33.4877" y2="81.0000" stroke="#2f6bff" stroke-width="2.0000" stroke-linecap="butt"/>
-  <polygon points="33.4877,112.8000 23.9877,82.0000 42.9877,82.0000" fill="#2f6bff"/>
-  <line x1="8.1898" y1="0.0000" x2="8.1898" y2="81.0000" stroke="#e53935" stroke-width="2.0000" stroke-linecap="butt"/>
-  <polygon points="8.1898,82.0000 -1.3102,112.8000 17.6898,112.8000" fill="#e53935"/>
+  <g transform="translate(10.000 30.000) rotate(180) scale(1.1327) translate(-10.000 -30.000)">
+<defs>
+    <linearGradient id="geometry-ir-horizontal-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8f8f8f"/>
+      <stop offset="50%" stop-color="#dedede"/>
+      <stop offset="100%" stop-color="#8f8f8f"/>
+    </linearGradient>
+  </defs>
+  <g id="background_gradient">
+    <rect x="5.932" y="0.72" width="0.698" height="118.56" fill="#969696" stroke="none"/>
+    <rect x="6.61" y="0.72" width="0.698" height="118.56" fill="#a3a3a3" stroke="none"/>
+    <rect x="7.288" y="0.72" width="0.698" height="118.56" fill="#b0b0b0" stroke="none"/>
+    <rect x="7.966" y="0.72" width="0.698" height="118.56" fill="#bdbdbd" stroke="none"/>
+    <rect x="8.644" y="0.72" width="0.698" height="118.56" fill="#cacaca" stroke="none"/>
+    <rect x="9.322" y="0.72" width="0.698" height="118.56" fill="#d7d7d7" stroke="none"/>
+    <rect x="10" y="0.72" width="0.698" height="118.56" fill="#d7d7d7" stroke="none"/>
+    <rect x="10.678" y="0.72" width="0.698" height="118.56" fill="#cacaca" stroke="none"/>
+    <rect x="11.356" y="0.72" width="0.698" height="118.56" fill="#bdbdbd" stroke="none"/>
+    <rect x="12.034" y="0.72" width="0.698" height="118.56" fill="#b0b0b0" stroke="none"/>
+    <rect x="12.712" y="0.72" width="0.698" height="118.56" fill="#a3a3a3" stroke="none"/>
+    <rect x="13.39" y="0.72" width="0.698" height="118.56" fill="#969696" stroke="none"/>
+  </g>
+  <rect id="main_rect" x="5.932" y="0.72" width="8.136" height="118.56" fill="none" stroke="#666666" stroke-width="0.175"/>
   </g>
 </svg>

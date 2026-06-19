@@ -1,14 +1,38 @@
 {
+  "actual_iterations": 64,
   "base": "GE1100",
-  "best_error": 20.70311111111111,
+  "best_error": 13.532444444444444,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.027604148148148145,
+  "elapsed_seconds": 0.5,
+  "error_per_pixel": 0.01804325925925926,
   "filename": "GE1100_M.jpg",
   "h": 25,
-  "mean_delta2": 2041.7440185546875,
+  "localized_error_fraction": 0.6558344795965153,
+  "mean_delta2": 1279.52001953125,
   "params": {
     "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": false,
+      "has_reference": true,
+      "status": "ok"
+    },
     "description_fragments": [
       {
         "key": "GE1100",
@@ -18,6 +42,7 @@
     ],
     "documented_alias_refs": [],
     "elements": [],
+    "geometry_ir": [],
     "label": "M",
     "mode": "auto",
     "semantic_conflicts": [],
@@ -30,7 +55,10 @@
     "top_source_ref": null,
     "variant_name": "GE1100_M"
   },
-  "std_delta2": 2028.9078369140625,
+  "requested_iterations": 64,
+  "spatial_quality_score": 3008.959693038591,
+  "std_delta2": 1998.3096923828125,
+  "tile_std_delta2": 1403.034347855668,
   "variant": "GE1100_M",
   "w": 30
 }

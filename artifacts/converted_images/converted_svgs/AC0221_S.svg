@@ -1,0 +1,17 @@
+<svg width="20" height="30" viewBox="0 0 20 30" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+  <defs>
+    <linearGradient id="vertical-two-way-valve-body-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a8a8a8"/>
+      <stop offset="100%" stop-color="#fbfbfb"/>
+    </linearGradient>
+    <linearGradient id="vertical-two-way-valve-circle-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f7f7f7"/>
+    </linearGradient>
+  </defs>
+  <path id="top_kelle_three_way_valve_connector" d="M 10 15.495 L 10 19.671" stroke="#8f8f8f" stroke-width="1.83" fill="none" stroke-linecap="butt"/>
+  <path id="top_kelle_three_way_valve_body_1" d="M 10 19.671 L 0.784 15.626 L 0.784 23.717 Z" fill="#d7d7d7" stroke="#969696" stroke-width="0.976" stroke-linejoin="miter"/>
+  <path id="top_kelle_three_way_valve_body_2" d="M 10 19.671 L 19.216 15.626 L 19.216 23.717 Z" fill="#d7d7d7" stroke="#969696" stroke-width="0.976" stroke-linejoin="miter"/>
+  <path id="top_kelle_three_way_valve_body_3" d="M 10 19.671 L 6.794 28.806 L 13.206 28.806 Z" fill="#d7d7d7" stroke="#969696" stroke-width="0.976" stroke-linejoin="miter"/>
+  <circle id="top_kelle_three_way_valve_circle" cx="10" cy="9.883" r="3.915" fill="#fafafa" stroke="#969696" stroke-width="0.976"/>
+</svg>

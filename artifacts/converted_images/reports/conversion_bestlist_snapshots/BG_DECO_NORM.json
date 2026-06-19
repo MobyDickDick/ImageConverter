@@ -1,15 +1,31 @@
 {
+  "actual_iterations": 64,
   "base": "BG_DECO_NORM",
-  "best_error": 47.40890264877881,
+  "best_error": 9.629791021671826,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.00012231399032192676,
+  "elapsed_seconds": 2.047000000020489,
+  "error_per_pixel": 2.484466207861668e-05,
   "filename": "bg_deco_norm.jpg",
   "h": 1200,
-  "mean_delta2": 9591.2783203125,
+  "localized_error_fraction": 0.5677274097971969,
+  "mean_delta2": 382.4703369140625,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
     "description_contract": {
       "deficits": [],
       "has_conditions": false,
@@ -42,7 +58,10 @@
     "top_source_ref": null,
     "variant_name": "BG_DECO_NORM"
   },
-  "std_delta2": 3454.535888671875,
+  "requested_iterations": 64,
+  "spatial_quality_score": 775.0226339254277,
+  "std_delta2": 417.1537780761719,
+  "tile_std_delta2": 307.98371502804395,
   "variant": "BG_DECO_NORM",
   "w": 323
 }

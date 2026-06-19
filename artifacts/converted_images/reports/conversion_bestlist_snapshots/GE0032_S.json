@@ -1,14 +1,38 @@
 {
+  "actual_iterations": 64,
   "base": "GE0032",
-  "best_error": 43.510666666666665,
+  "best_error": 19.271333333333335,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.017404266666666668,
+  "elapsed_seconds": 0.8439999999827705,
+  "error_per_pixel": 0.007708533333333334,
   "filename": "GE0032_S.jpg",
   "h": 50,
-  "mean_delta2": 9931.55078125,
+  "localized_error_fraction": 0.6748606215213901,
+  "mean_delta2": 3379.205078125,
   "params": {
     "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
     "description_fragments": [
       {
         "key": "GE0032",
@@ -21,6 +45,7 @@
       "GE0031"
     ],
     "elements": [],
+    "geometry_ir": [],
     "label": "M",
     "mode": "auto",
     "semantic_conflicts": [],
@@ -33,7 +58,10 @@
     "top_source_ref": null,
     "variant_name": "GE0032_S"
   },
-  "std_delta2": 9711.650390625,
+  "requested_iterations": 64,
+  "spatial_quality_score": 17095.643646589386,
+  "std_delta2": 8543.158203125,
+  "tile_std_delta2": 9319.619859834553,
   "variant": "GE0032_S",
   "w": 50
 }

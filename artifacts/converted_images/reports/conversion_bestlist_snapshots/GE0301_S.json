@@ -1,0 +1,68 @@
+{
+  "actual_iterations": 64,
+  "base": "GE0301",
+  "best_error": 14.9784,
+  "best_iter": 1,
+  "convergence": "",
+  "elapsed_seconds": 0.6879999999946449,
+  "error_per_pixel": 0.00599136,
+  "filename": "GE0301_S.jpg",
+  "h": 50,
+  "localized_error_fraction": 0.7854473373627703,
+  "mean_delta2": 1912.1944580078125,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "insufficient_description",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [
+        "missing_geometry_terms"
+      ],
+      "has_conditions": false,
+      "has_geometry_terms": false,
+      "has_reference": false,
+      "status": "insufficient_description"
+    },
+    "description_fragments": [
+      {
+        "key": "GE0301",
+        "source": "base_name",
+        "text": "Hintergrund: GE0999 Vordergrund tschechische Flagge"
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [
+      "MANUELL: Beschreibung unzureichend (fehlende Geometriehinweise oder leerer Beschreibungstext)."
+    ],
+    "geometry_ir": [],
+    "label": "",
+    "mode": "insufficient_description",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "GE0301_S"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 5695.948931573412,
+  "std_delta2": 5515.650390625,
+  "tile_std_delta2": 3384.0873496652625,
+  "variant": "GE0301_S",
+  "w": 50
+}

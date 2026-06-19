@@ -1,14 +1,70 @@
 {
+  "actual_iterations": 64,
   "base": "GE9002_3M",
-  "best_error": 35.03791666666667,
+  "best_error": 103.48333333333333,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.014599131944444444,
+  "elapsed_seconds": 0.46799999999348074,
+  "error_per_pixel": 0.043118055555555555,
   "filename": "GE9002_3M.jpg",
   "h": 20,
-  "mean_delta2": 9580.6015625,
+  "localized_error_fraction": 0.630059025392268,
+  "mean_delta2": 61559.9453125,
   "params": {
     "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [
+        {
+          "bbox": [
+            0.32,
+            0.12,
+            0.36,
+            0.76
+          ],
+          "confidence": 0.75,
+          "constraint": "inside_rect_border",
+          "id": "description_element_1",
+          "kind": "HorizontalGradient",
+          "source": "description",
+          "stops": [
+            "#8f8f8f",
+            "#dedede",
+            "#8f8f8f"
+          ]
+        },
+        {
+          "bbox": [
+            0.32,
+            0.12,
+            0.36,
+            0.76
+          ],
+          "confidence": 0.75,
+          "fill": "none",
+          "id": "description_element_2",
+          "kind": "RectBorder",
+          "source": "description",
+          "stroke": "#666666",
+          "stroke_width": 0.035
+        }
+      ],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
     "description_fragments": [
       {
         "key": "GE9002_3M",
@@ -20,6 +76,37 @@
       "GE9001"
     ],
     "elements": [],
+    "geometry_ir": [
+      {
+        "bbox": [
+          0.32,
+          0.12,
+          0.36,
+          0.76
+        ],
+        "constraint": "inside_rect_border",
+        "id": "background_gradient",
+        "kind": "HorizontalGradient",
+        "stops": [
+          "#8f8f8f",
+          "#dedede",
+          "#8f8f8f"
+        ]
+      },
+      {
+        "bbox": [
+          0.32,
+          0.12,
+          0.36,
+          0.76
+        ],
+        "fill": "none",
+        "id": "main_rect",
+        "kind": "RectBorder",
+        "stroke": "#666666",
+        "stroke_width": 0.035
+      }
+    ],
     "label": "M",
     "mode": "auto",
     "semantic_conflicts": [],
@@ -32,7 +119,10 @@
     "top_source_ref": null,
     "variant_name": "GE9002_3M"
   },
-  "std_delta2": 14631.7841796875,
+  "requested_iterations": 64,
+  "spatial_quality_score": 134378.37310775803,
+  "std_delta2": 61558.37890625,
+  "tile_std_delta2": 56770.75504940828,
   "variant": "GE9002_3M",
   "w": 120
 }

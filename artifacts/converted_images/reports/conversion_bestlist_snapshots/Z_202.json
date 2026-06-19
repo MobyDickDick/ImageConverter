@@ -1,15 +1,45 @@
 {
+  "actual_iterations": 64,
   "base": "Z_202",
-  "best_error": 53.54983660130719,
+  "best_error": 36.875,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.13124959951300783,
+  "elapsed_seconds": 1.077999999979511,
+  "error_per_pixel": 0.09037990196078431,
   "filename": "z_202.jpg",
   "h": 6,
-  "mean_delta2": 13946.212890625,
+  "localized_error_fraction": 0.6785449867240301,
+  "mean_delta2": 6233.6201171875,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
+    "description_constraints": {
+      "elements": [
+        {
+          "bbox": [
+            0.18,
+            0.24,
+            0.64,
+            0.56
+          ],
+          "confidence": 0.75,
+          "fill": "#d8d8d8",
+          "id": "description_element_1",
+          "kind": "RectBorder",
+          "source": "description",
+          "stroke": "#666666",
+          "stroke_width": 0.035
+        }
+      ],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
+      }
+    },
     "description_contract": {
       "deficits": [],
       "has_conditions": true,
@@ -56,7 +86,10 @@
     "top_source_ref": null,
     "variant_name": "Z_202"
   },
-  "std_delta2": 19966.853515625,
+  "requested_iterations": 64,
+  "spatial_quality_score": 14860.96328914871,
+  "std_delta2": 7382.4736328125,
+  "tile_std_delta2": 7275.2071655840955,
   "variant": "Z_202",
   "w": 68
 }

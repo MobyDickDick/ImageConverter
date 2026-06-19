@@ -1,15 +1,63 @@
 {
+  "actual_iterations": 64,
   "base": "GE9002",
   "best_error": 107.2,
   "best_iter": 1,
   "convergence": "",
+  "elapsed_seconds": 0.7030000000086147,
   "error_per_pixel": 0.17866666666666667,
   "filename": "GE9002_2S.jpg",
   "h": 10,
+  "localized_error_fraction": 0.5139492644213456,
   "mean_delta2": 59608.3984375,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
+    "description_constraints": {
+      "elements": [
+        {
+          "bbox": [
+            0.32,
+            0.12,
+            0.36,
+            0.76
+          ],
+          "confidence": 0.75,
+          "constraint": "inside_rect_border",
+          "id": "description_element_1",
+          "kind": "HorizontalGradient",
+          "source": "description",
+          "stops": [
+            "#8f8f8f",
+            "#dedede",
+            "#8f8f8f"
+          ]
+        },
+        {
+          "bbox": [
+            0.32,
+            0.12,
+            0.36,
+            0.76
+          ],
+          "confidence": 0.75,
+          "fill": "none",
+          "id": "description_element_2",
+          "kind": "RectBorder",
+          "source": "description",
+          "stroke": "#666666",
+          "stroke_width": 0.035
+        }
+      ],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
+      }
+    },
     "description_contract": {
       "deficits": [],
       "has_conditions": false,
@@ -71,7 +119,10 @@
     "top_source_ref": null,
     "variant_name": "GE9002_2S"
   },
+  "requested_iterations": 64,
+  "spatial_quality_score": 114443.5252081321,
   "std_delta2": 51441.3125,
+  "tile_std_delta2": 52068.027653733916,
   "variant": "GE9002_2S",
   "w": 60
 }

@@ -1,0 +1,68 @@
+{
+  "actual_iterations": 64,
+  "base": "AC0301_2M",
+  "best_error": 18.599166666666665,
+  "best_iter": 1,
+  "convergence": "",
+  "elapsed_seconds": 1.0,
+  "error_per_pixel": 0.0051664351851851845,
+  "filename": "AC0301_2M_sia.jpg",
+  "h": 60,
+  "localized_error_fraction": 0.5946854643313142,
+  "mean_delta2": 4203.94970703125,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "insufficient_description",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [
+        "missing_geometry_terms"
+      ],
+      "has_conditions": false,
+      "has_geometry_terms": false,
+      "has_reference": false,
+      "status": "insufficient_description"
+    },
+    "description_fragments": [
+      {
+        "key": "AC0301_2M_sia",
+        "source": "variant_name",
+        "text": "Kompresor grauer Hintergrund nach oben"
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [
+      "MANUELL: Beschreibung unzureichend (fehlende Geometriehinweise oder leerer Beschreibungstext)."
+    ],
+    "geometry_ir": [],
+    "label": "",
+    "mode": "insufficient_description",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "AC0301_2M_SIA"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 22314.75408810546,
+  "std_delta2": 11088.740234375,
+  "tile_std_delta2": 9403.404422765074,
+  "variant": "AC0301_2M_SIA",
+  "w": 60
+}

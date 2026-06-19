@@ -1,0 +1,67 @@
+{
+  "actual_iterations": 64,
+  "base": "GE0032",
+  "best_error": 18.673055555555557,
+  "best_iter": 1,
+  "convergence": "",
+  "elapsed_seconds": 0.7030000000086147,
+  "error_per_pixel": 0.00518695987654321,
+  "filename": "GE0032_M.jpg",
+  "h": 60,
+  "localized_error_fraction": 0.8340693861216216,
+  "mean_delta2": 3162.94091796875,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "GE0032",
+        "source": "base_name",
+        "text": "Wie GE0031: Wie GE0030, nach rechts gedreht. Geometrische Variante: 90° nach links gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises."
+      }
+    ],
+    "documented_alias_refs": [
+      "GE0030",
+      "GE0031"
+    ],
+    "elements": [],
+    "geometry_ir": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "GE0032_M"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 10075.13188921412,
+  "std_delta2": 8185.73974609375,
+  "tile_std_delta2": 6239.124982420949,
+  "variant": "GE0032_M",
+  "w": 60
+}

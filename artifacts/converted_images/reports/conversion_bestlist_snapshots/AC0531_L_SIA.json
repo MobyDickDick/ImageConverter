@@ -1,15 +1,64 @@
 {
+  "actual_iterations": 64,
   "base": "AC0531",
-  "best_error": 26.4215625,
+  "best_error": 10.3165625,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.00825673828125,
+  "elapsed_seconds": 1.3440000000118744,
+  "error_per_pixel": 0.00322392578125,
   "filename": "AC0531_L_sia.jpg",
   "h": 80,
-  "mean_delta2": 7372.81005859375,
+  "localized_error_fraction": 0.8958132922724664,
+  "mean_delta2": 2086.53662109375,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
+    "description_constraints": {
+      "elements": [
+        {
+          "bbox": [
+            0.32,
+            0.12,
+            0.36,
+            0.76
+          ],
+          "confidence": 0.75,
+          "fill": "#d8d8d8",
+          "id": "description_element_1",
+          "kind": "RectBorder",
+          "source": "description",
+          "stroke": "#666666",
+          "stroke_width": 0.035
+        },
+        {
+          "clip_to": "main_rect",
+          "confidence": 0.75,
+          "direction": "tr_bl",
+          "id": "description_element_2",
+          "kind": "DiagonalBand",
+          "rect_ref": "main_rect",
+          "source": "description",
+          "stroke": "#707070",
+          "stroke_width": 0.045
+        }
+      ],
+      "relations": [
+        {
+          "confidence": 0.75,
+          "object": "main_rect",
+          "source": "description",
+          "subject": "description_element_2",
+          "type": "rect"
+        }
+      ],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
+      }
+    },
     "description_contract": {
       "deficits": [],
       "has_conditions": true,
@@ -52,8 +101,142 @@
         "stroke_width": 0.045
       }
     ],
+    "geometry_ir_optimizer_result": {
+      "element_refinement": {
+        "final_error": 10.3165625,
+        "initial_error": 10.3165625,
+        "mode": "right_rotated_valve_geometry",
+        "steps": []
+      },
+      "final_error": 10.3165625,
+      "initial_error": 26.605,
+      "mode": "geometry_ir_raster_registration",
+      "parameters": {
+        "scale_x": 0.89,
+        "scale_y": 0.5499999999999999,
+        "stroke_scale": 0.21,
+        "translate_x": 0.09,
+        "translate_y": 0.24
+      },
+      "steps": [
+        {
+          "best_delta": 2.1015625,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": 0.08
+        },
+        {
+          "best_delta": 1.4915625000000006,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": 0.08
+        },
+        {
+          "best_delta": 1.9059375000000003,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.85
+        },
+        {
+          "best_delta": 1.7349999999999994,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 0.85
+        },
+        {
+          "best_delta": 2.0365624999999987,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 0.75
+        },
+        {
+          "best_delta": 1.1037500000000016,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": 0.16
+        },
+        {
+          "best_delta": 1.7553125000000005,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 0.7
+        },
+        {
+          "best_delta": 1.3443749999999994,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 0.5
+        },
+        {
+          "best_delta": 1.3081250000000004,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": 0.24
+        },
+        {
+          "best_delta": 1.0321874999999991,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 0.5499999999999999
+        },
+        {
+          "best_delta": 0.375,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 0.25
+        },
+        {
+          "best_delta": 0.01750000000000007,
+          "parameter": "translate_x",
+          "stage": 3,
+          "value": 0.09
+        },
+        {
+          "best_delta": 0.0015625000000003553,
+          "parameter": "scale_x",
+          "stage": 3,
+          "value": 0.87
+        },
+        {
+          "best_delta": 0.03062500000000057,
+          "parameter": "stroke_scale",
+          "stage": 3,
+          "value": 0.21
+        },
+        {
+          "best_delta": 0.0493749999999995,
+          "parameter": "scale_x",
+          "stage": 3,
+          "value": 0.89
+        }
+      ]
+    },
     "label": "M",
     "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "bbox": [
+          0.42979999999999996,
+          0.531,
+          0.3204,
+          0.4179999999999999
+        ],
+        "fill": "#d8d8d8",
+        "id": "main_rect",
+        "kind": "RectBorder",
+        "stroke": "#666666",
+        "stroke_width": 0.007350000000000001
+      },
+      {
+        "clip_to": "main_rect",
+        "direction": "tr_bl",
+        "id": "diagonal_1_tr_bl",
+        "kind": "DiagonalBand",
+        "rect_ref": "main_rect",
+        "stroke": "#707070",
+        "stroke_width": 0.00945
+      }
+    ],
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
@@ -64,7 +247,10 @@
     "top_source_ref": null,
     "variant_name": "AC0531_L_SIA"
   },
-  "std_delta2": 15911.673828125,
+  "requested_iterations": 64,
+  "spatial_quality_score": 6684.6048897804785,
+  "std_delta2": 7155.86962890625,
+  "tile_std_delta2": 3392.728961042454,
   "variant": "AC0531_L_SIA",
   "w": 40
 }

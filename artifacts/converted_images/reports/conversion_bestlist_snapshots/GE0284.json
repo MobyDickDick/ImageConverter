@@ -1,0 +1,64 @@
+{
+  "actual_iterations": 64,
+  "base": "GE0284",
+  "best_error": 25.855631141345427,
+  "best_iter": 1,
+  "convergence": "",
+  "elapsed_seconds": 0.6559999999881256,
+  "error_per_pixel": 0.05862954907334564,
+  "filename": "GE0284.jpg",
+  "h": 21,
+  "localized_error_fraction": 0.791809083253144,
+  "mean_delta2": 5097.06787109375,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": false,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "GE0284",
+        "source": "base_name",
+        "text": "roter Kugelform (roter Kreis mit radialem Farbverlauf, aussen dunkel, innen hell)"
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "geometry_ir": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "GE0284"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 14363.797904541418,
+  "std_delta2": 10979.0947265625,
+  "tile_std_delta2": 7558.700627881998,
+  "variant": "GE0284",
+  "w": 21
+}

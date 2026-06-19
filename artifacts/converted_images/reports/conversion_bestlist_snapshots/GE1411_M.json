@@ -1,0 +1,64 @@
+{
+  "actual_iterations": 64,
+  "base": "GE1411",
+  "best_error": 15.575,
+  "best_iter": 1,
+  "convergence": "",
+  "elapsed_seconds": 0.5789999999979045,
+  "error_per_pixel": 0.0389375,
+  "filename": "GE1411_M.jpg",
+  "h": 20,
+  "localized_error_fraction": 0.9340729554993857,
+  "mean_delta2": 5477.94482421875,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "GE1411",
+        "source": "base_name",
+        "text": "Diagrammlinie (x-/y-Achse schwarz) wie bei GE1410, rote Sinuslinie nach oben verschoben"
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "geometry_ir": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "GE1411_M"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 26224.163441625424,
+  "std_delta2": 19069.435546875,
+  "tile_std_delta2": 14296.109234092077,
+  "variant": "GE1411_M",
+  "w": 20
+}

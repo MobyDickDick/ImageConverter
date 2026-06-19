@@ -1,0 +1,121 @@
+{
+  "actual_iterations": 64,
+  "base": "GE0001",
+  "best_error": 46.79906666666667,
+  "best_iter": 1,
+  "convergence": "",
+  "elapsed_seconds": 0.48399999999674037,
+  "error_per_pixel": 0.018719626666666666,
+  "filename": "GE0001_S.jpg",
+  "h": 50,
+  "localized_error_fraction": 0.6519886124771068,
+  "mean_delta2": 12749.673828125,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [
+        {
+          "confidence": 0.75,
+          "id": "description_element_1",
+          "kind": "MinusGlyph",
+          "position": "top_center",
+          "source": "description",
+          "stroke": "#4f4f4f",
+          "stroke_width": 0.025
+        }
+      ],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": false,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "GE0001",
+        "source": "base_name",
+        "text": "Vorsicht-Zeichen vor blaugrauem Kreis mit Farbverlauf. Hintergrund GE0999"
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "geometry_ir": [
+      {
+        "id": "minus_glyph",
+        "kind": "MinusGlyph",
+        "position": "top_center",
+        "stroke": "#4f4f4f",
+        "stroke_width": 0.025
+      }
+    ],
+    "geometry_ir_optimizer_result": {
+      "element_refinement": {
+        "final_error": 59.33493333333333,
+        "initial_error": 59.33493333333333,
+        "mode": "right_rotated_valve_geometry",
+        "steps": []
+      },
+      "final_error": 59.33493333333333,
+      "initial_error": 59.346,
+      "mode": "geometry_ir_raster_registration",
+      "parameters": {
+        "scale_x": 1.0,
+        "scale_y": 1.0,
+        "stroke_scale": 1.1,
+        "translate_x": 0.0,
+        "translate_y": 0.0
+      },
+      "steps": [
+        {
+          "best_delta": 0.003066666666661888,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 1.25
+        },
+        {
+          "best_delta": 0.008000000000002672,
+          "parameter": "stroke_scale",
+          "stage": 1,
+          "value": 1.1
+        }
+      ]
+    },
+    "label": "M",
+    "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "id": "minus_glyph",
+        "kind": "MinusGlyph",
+        "position": "top_center",
+        "stroke": "#4f4f4f",
+        "stroke_width": 0.027500000000000004
+      }
+    ],
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "GE0001_S"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 29908.36651715242,
+  "std_delta2": 21372.6953125,
+  "tile_std_delta2": 13631.359355343191,
+  "variant": "GE0001_S",
+  "w": 50
+}

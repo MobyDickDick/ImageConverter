@@ -1,0 +1,64 @@
+{
+  "actual_iterations": 64,
+  "base": "GE0104",
+  "best_error": 21.40457142857143,
+  "best_iter": 1,
+  "convergence": "",
+  "elapsed_seconds": 0.6560000000172295,
+  "error_per_pixel": 0.003057795918367347,
+  "filename": "GE0104_M.jpg",
+  "h": 40,
+  "localized_error_fraction": 0.8129208243361656,
+  "mean_delta2": 4374.78955078125,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": true,
+      "has_reference": false,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "GE0104",
+        "source": "base_name",
+        "text": "Flammensymbol von GE02024 links und Hintergrund GE0100"
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "geometry_ir": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "GE0104_M"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 13291.016548572738,
+  "std_delta2": 13802.73828125,
+  "tile_std_delta2": 7458.951112058396,
+  "variant": "GE0104_M",
+  "w": 175
+}

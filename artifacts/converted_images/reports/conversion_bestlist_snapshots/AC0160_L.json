@@ -1,15 +1,81 @@
 {
+  "actual_iterations": 64,
   "base": "AC0160",
-  "best_error": 13.10575625,
+  "best_error": 12.9509875,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 8.191097656250001e-05,
+  "elapsed_seconds": 1.125,
+  "error_per_pixel": 8.0943671875e-05,
   "filename": "AC0160_L.jpg",
   "h": 400,
-  "mean_delta2": 2380.006591796875,
+  "localized_error_fraction": 0.7787030064802223,
+  "mean_delta2": 2296.7421875,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
+    "description_constraints": {
+      "elements": [
+        {
+          "bbox": [
+            0.22,
+            0.38,
+            0.56,
+            0.34
+          ],
+          "confidence": 0.75,
+          "fill": "none",
+          "id": "description_element_1",
+          "inner_inset": 0.075,
+          "kind": "HalfDoubleRectBorder",
+          "open_side": "left",
+          "source": "description",
+          "stroke": "#777777",
+          "stroke_width": 0.024
+        },
+        {
+          "bbox": [
+            0.35,
+            0.16,
+            0.3,
+            0.2
+          ],
+          "confidence": 0.75,
+          "fill": "#d7d7d7",
+          "id": "description_element_2",
+          "kind": "LabelBox",
+          "source": "description",
+          "stroke": "#777777",
+          "stroke_width": 0.02
+        },
+        {
+          "bbox_ref": "dp_label_box",
+          "confidence": 0.75,
+          "fill": "#555555",
+          "font_size": 0.105,
+          "font_weight": "600",
+          "id": "description_element_3",
+          "kind": "TextGlyph",
+          "source": "description",
+          "text": "dp"
+        }
+      ],
+      "relations": [
+        {
+          "confidence": 0.75,
+          "object": "dp_label_box",
+          "source": "description",
+          "subject": "description_element_3",
+          "type": "bbox"
+        }
+      ],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
+      }
+    },
     "description_contract": {
       "deficits": [],
       "has_conditions": true,
@@ -65,8 +131,145 @@
         "text": "dp"
       }
     ],
+    "geometry_ir_optimizer_result": {
+      "element_refinement": {
+        "final_error": 12.9509875,
+        "initial_error": 12.9509875,
+        "mode": "right_rotated_valve_geometry",
+        "steps": []
+      },
+      "final_error": 12.9509875,
+      "initial_error": 18.86781875,
+      "mode": "geometry_ir_raster_registration",
+      "parameters": {
+        "scale_x": 0.41999999999999993,
+        "scale_y": 0.83,
+        "stroke_scale": 0.25,
+        "translate_x": 0.0,
+        "translate_y": 0.08
+      },
+      "steps": [
+        {
+          "best_delta": 0.029812500000002018,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": 0.08
+        },
+        {
+          "best_delta": 0.8853374999999986,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.85
+        },
+        {
+          "best_delta": 0.9584125000000014,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 0.85
+        },
+        {
+          "best_delta": 1.1173749999999991,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 0.75
+        },
+        {
+          "best_delta": 0.49772500000000086,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": 0.0
+        },
+        {
+          "best_delta": 0.38061875,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.7
+        },
+        {
+          "best_delta": 0.998631249999999,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 0.5
+        },
+        {
+          "best_delta": 0.19581875000000082,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.5499999999999999
+        },
+        {
+          "best_delta": 0.7610250000000001,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 0.25
+        },
+        {
+          "best_delta": 0.005593749999999176,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.3999999999999999
+        },
+        {
+          "best_delta": 0.009337500000000887,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": 0.08
+        },
+        {
+          "best_delta": 0.014450000000000074,
+          "parameter": "scale_x",
+          "stage": 3,
+          "value": 0.41999999999999993
+        },
+        {
+          "best_delta": 0.06269374999999933,
+          "parameter": "scale_y",
+          "stage": 3,
+          "value": 0.83
+        }
+      ]
+    },
     "label": "M",
     "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "bbox": [
+          0.3824,
+          0.4804,
+          0.2352,
+          0.2822
+        ],
+        "fill": "none",
+        "id": "half_double_rect",
+        "inner_inset": 0.075,
+        "kind": "HalfDoubleRectBorder",
+        "open_side": "left",
+        "stroke": "#777777",
+        "stroke_width": 0.006
+      },
+      {
+        "bbox": [
+          0.437,
+          0.29780000000000006,
+          0.12599999999999997,
+          0.166
+        ],
+        "fill": "#d7d7d7",
+        "id": "dp_label_box",
+        "kind": "LabelBox",
+        "stroke": "#777777",
+        "stroke_width": 0.005
+      },
+      {
+        "bbox_ref": "dp_label_box",
+        "fill": "#555555",
+        "font_size": 0.04409999999999999,
+        "font_weight": "600",
+        "id": "dp_label_text",
+        "kind": "TextGlyph",
+        "text": "dp"
+      }
+    ],
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
@@ -77,7 +280,10 @@
     "top_source_ref": null,
     "variant_name": "AC0160_L"
   },
-  "std_delta2": 8727.9140625,
+  "requested_iterations": 64,
+  "spatial_quality_score": 6660.102323294568,
+  "std_delta2": 7860.81591796875,
+  "tile_std_delta2": 3281.9701277579097,
   "variant": "AC0160_L",
   "w": 400
 }

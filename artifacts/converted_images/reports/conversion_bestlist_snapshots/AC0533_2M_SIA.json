@@ -1,0 +1,67 @@
+{
+  "actual_iterations": 64,
+  "base": "AC0533_2M",
+  "best_error": 17.253703703703703,
+  "best_iter": 1,
+  "convergence": "",
+  "elapsed_seconds": 0.5929999999934807,
+  "error_per_pixel": 0.009585390946502056,
+  "filename": "AC0533_2M_sia.jpg",
+  "h": 60,
+  "localized_error_fraction": 0.8600214130381856,
+  "mean_delta2": 5057.46435546875,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": false,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "AC0533_2M",
+        "source": "base_name",
+        "text": "Unzugeordnete Wurzelform aus der Serie AC0533_2M_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen."
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [
+      "MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie."
+    ],
+    "geometry_ir": [],
+    "label": "",
+    "mode": "manual_review",
+    "review_reason": "Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "AC0533_2M_SIA"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 25395.039926131933,
+  "std_delta2": 13173.1435546875,
+  "tile_std_delta2": 13046.199450695098,
+  "variant": "AC0533_2M_SIA",
+  "w": 30
+}

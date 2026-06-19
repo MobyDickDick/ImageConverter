@@ -1,14 +1,38 @@
 {
+  "actual_iterations": 64,
   "base": "AC0090",
   "best_error": 21.764141414141413,
   "best_iter": 1,
   "convergence": "",
+  "elapsed_seconds": 0.6870000000053551,
   "error_per_pixel": 0.006595194367921641,
   "filename": "AC0090_M.jpg",
   "h": 110,
+  "localized_error_fraction": 0.7840823375800947,
   "mean_delta2": 8823.8359375,
   "params": {
     "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
     "description_fragments": [
       {
         "key": "AC0090",
@@ -22,6 +46,7 @@
     "elements": [
       "SEMANTIC: zwei vertikale farbige Pfeile (blau runter, rot hoch)"
     ],
+    "geometry_ir": [],
     "label": "",
     "mode": "dual_arrow_badge",
     "semantic_conflicts": [],
@@ -34,7 +59,10 @@
     "top_source_ref": null,
     "variant_name": "AC0090_M"
   },
+  "requested_iterations": 64,
+  "spatial_quality_score": 24850.457569868006,
   "std_delta2": 21429.51171875,
+  "tile_std_delta2": 12738.173178990044,
   "variant": "AC0090_M",
   "w": 30
 }

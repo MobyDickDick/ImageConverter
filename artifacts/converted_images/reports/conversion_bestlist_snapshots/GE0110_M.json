@@ -1,0 +1,72 @@
+{
+  "actual_iterations": 64,
+  "base": "GE0110",
+  "best_error": 17.326666666666668,
+  "best_iter": 1,
+  "convergence": "",
+  "elapsed_seconds": 0.5150000000139698,
+  "error_per_pixel": 0.0024752380952380955,
+  "filename": "GE0110_M.jpg",
+  "h": 40,
+  "localized_error_fraction": 0.7689776919704876,
+  "mean_delta2": 2466.952880859375,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": false,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "GE0110",
+        "source": "base_name",
+        "text": "Unzugeordnete Wurzelform aus der Serie GE0110. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen."
+      },
+      {
+        "key": "GE0110_M",
+        "source": "variant_name",
+        "text": "Unzugeordnete Wurzelform aus der Serie GE0110. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die mittlere Variante (M). Bitte einer finalen Wurzelform-Kategorie zuordnen."
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [
+      "MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie."
+    ],
+    "geometry_ir": [],
+    "label": "",
+    "mode": "manual_review",
+    "review_reason": "Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "GE0110_M"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 7429.713266515952,
+  "std_delta2": 11257.1865234375,
+  "tile_std_delta2": 3647.0134534175386,
+  "variant": "GE0110_M",
+  "w": 175
+}

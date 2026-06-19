@@ -1,37 +1,4 @@
 <svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-  <g transform="translate(20.000 20.000) rotate(270) scale(1.0000) translate(-20.000 -20.000)">
-<g transform="translate(20.000 20.000) rotate(90) scale(1.0000) translate(-20.000 -20.000)">
-<defs>
-    <clipPath id="circleClip">
-      <circle
-         cx="20"
-         cy="20"
-         r="19" />
-    </clipPath>
-  </defs>
-
-  <!-- Hintergrundkreis -->
-  <circle
-     cx="20"
-     cy="20"
-     r="19"
-     fill="#e6e6e6" />
-
-  <!-- Dreieck / Pfeilfläche:
-       Spitzen berühren die Kreisumrandung von innen -->
-  <path
-     d="M 10.23761,4.54943 L 38.3,20 L 10.23761,35.45057 Z"
-     fill="#808080"
-     clip-path="url(#circleClip)" />
-
-  <!-- Kreisumrandung -->
-  <circle
-     cx="20"
-     cy="20"
-     r="19"
-     fill="none"
-     stroke="#808080"
-     stroke-width="1.4" />
-  </g>
-  </g>
+  <ellipse id="pump_circle" cx="14" cy="23.2" rx="4.074" ry="18.624" fill="#de2048" stroke="#9a7d82" stroke-width="7.286"/>
+  <polygon id="pump_triangle" points="12.23,35.477 13.325,35.477 12.778,11.877" fill="#e7e7e7"/>
 </svg>
