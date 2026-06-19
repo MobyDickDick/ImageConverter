@@ -8,44 +8,25 @@ from typing import Any
 
 from src.iCCModules import imageCompositeConverterSemanticValidation as semantic_validation_helpers
 
-AC08_SMALL_CIRCLE_FALLBACK_FAMILIES = frozenset(
-    {
-        "AC0810",
-        "AC0811",
-        "AC0812",
-        "AC0813",
-        "AC0814",
-        "AC0820",
-        "AC0831",
-        "AC0832",
-        "AC0833",
-        "AC0834",
-        "AC0835",
-        "AC0836",
-        "AC0837",
-        "AC0838",
-        "AC0839",
-        "AC0842",
-        "AC0844",
-        "AC0850",
-        "AC0861",
-        "AC0862",
-        "AC0863",
-        "AC0864",
-        "AC0870",
-        "AC0881",
-        "AC0882",
-    }
-)
+def _supports_ac08_small_circle_geometry_fallback(badge: dict) -> bool:
+    """Return whether the semantic small-variant circle fallback may be used.
 
-
-def _supports_ac08_small_circle_family_fallback(badge: dict, symbol_hint: str) -> bool:
-    """Return whether the semantic AC08 small-variant circle fallback may be used."""
+    The fallback is intentionally controlled by measured/derived badge
+    properties instead of a catalog-family allowlist: it is only a rescue path
+    for small variants with enabled circle geometry and a finite expected
+    circle estimate.
+    """
     if not bool(badge.get("ac08_small_variant_mode", False)):
         return False
     if not bool(badge.get("circle_enabled", True)):
         return False
-    return symbol_hint in AC08_SMALL_CIRCLE_FALLBACK_FAMILIES
+    try:
+        cx = float(badge.get("cx", 0.0))
+        cy = float(badge.get("cy", 0.0))
+        radius = float(badge.get("r", 0.0))
+    except (TypeError, ValueError):
+        return False
+    return math.isfinite(cx) and math.isfinite(cy) and math.isfinite(radius) and radius > 0.0
 
 
 def detectSemanticPrimitivesImpl(
@@ -78,7 +59,6 @@ def detectSemanticPrimitivesImpl(
     fg_mask = foreground_mask_fn(img_orig).astype(np.uint8)
     min_side = max(1, min(h, w))
     badge = badge_params or {}
-    symbol_hint = str(badge.get("badge_symbol_name", "")).upper()
     circle_detection_source = "none"
 
     circles = cv2.HoughCircles(
@@ -128,7 +108,7 @@ def detectSemanticPrimitivesImpl(
             circle_detection_source = "foreground_mask"
 
     if not has_circle and badge:
-        if _supports_ac08_small_circle_family_fallback(badge, symbol_hint):
+        if _supports_ac08_small_circle_geometry_fallback(badge):
             exp_cx = float(badge.get("cx", float(w) / 2.0))
             exp_cy = float(badge.get("cy", float(h) / 2.0))
             exp_r = float(badge.get("r", max(2.0, float(min_side) * 0.28)))
@@ -147,7 +127,7 @@ def detectSemanticPrimitivesImpl(
                 if int(np.sum(coverage_bins)) >= 5:
                     has_circle = True
                     circle_geom = (exp_cx, exp_cy, exp_r)
-                    circle_detection_source = "family_fallback"
+                    circle_detection_source = "geometry_fallback"
 
     has_arm = False
     has_stem = False

@@ -264,7 +264,13 @@ Für jedes Arbeitspaket gelten zusätzlich zu den jeweiligen Akzeptanzkriterien:
     Parameter (`enable_adaptive_unlock`, `adaptive_unlock_min_error`), die aus
     Text-/Connector-Merkmalen der finalisierten Badge-IR abgeleitet werden; ein
     neutraler Rename-/Katalog-fremder Test sichert den geometriebasierten Pfad.
-    Der Ratchet sinkt von 367 auf 362 Runtime-ID-Vorkommen.
+    Der Ratchet sinkt von 367 auf 362 Runtime-ID-Vorkommen. Run QT entfernt die
+    AC08-Small-Circle-Fallback-Familienliste aus der semantischen
+    Primitive-Erkennung: Der Rescue-Pfad hängt jetzt nur noch an
+    `ac08_small_variant_mode`, aktivierter Kreisgeometrie und einer endlichen
+    erwarteten Kreis-Schätzung. Ein neutraler synthetischer Small-Ring-Test
+    sichert den katalognamenfreien Pfad; der Ratchet sinkt weiter auf 335
+    Runtime-ID-Vorkommen.
 
 - [ ] **IDO-18 – Legacy-Baseline und Ratchet entfernen**
   - Voraussetzung: IDO-17 ist abgeschlossen.

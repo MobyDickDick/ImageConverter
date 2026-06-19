@@ -6116,13 +6116,13 @@ def test_make_badge_params_keeps_ac0838_m_circle_near_full_width_for_voc_layout(
         ("AC0870_S", "artifacts/images_to_convert/AC0870_S.jpg", "AC0870"),
     ],
 )
-def test_detect_semantic_primitives_reports_small_circle_family_fallback_source(
+def test_detect_semantic_primitives_reports_small_circle_geometry_fallback_source(
     variant: str,
     image_path: str,
     symbol: str,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    """Priority AC08 small-circle variants should expose family fallback circle evidence."""
+    """Priority AC08 small-circle variants should expose geometry fallback circle evidence."""
     if image_composite_converter.np is None or image_composite_converter.cv2 is None:
         pytest.skip("numpy/cv2 not available in this environment")
 
@@ -6136,12 +6136,42 @@ def test_detect_semantic_primitives_reports_small_circle_family_fallback_source(
     params["variant_name"] = variant
 
     monkeypatch.setattr(cv2, "HoughCircles", lambda *args, **kwargs: None)
-    monkeypatch.setattr(Action, "_circle_from_foreground_mask", staticmethod(lambda _mask: None))
+    monkeypatch.setattr(Action, "_circleFromForegroundMask", staticmethod(lambda _mask: None))
 
     structural = Action._detect_semantic_primitives(img, params)
 
     assert structural["circle"] is True
-    assert structural["circle_detection_source"] == "family_fallback"
+    assert structural["circle_detection_source"] == "geometry_fallback"
+
+
+def test_detect_semantic_primitives_small_circle_fallback_is_catalog_name_free(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Small-circle fallback should depend on geometry params, not catalog IDs."""
+    if image_composite_converter.np is None or image_composite_converter.cv2 is None:
+        pytest.skip("numpy/cv2 not available in this environment")
+
+    np = image_composite_converter.np
+    cv2 = image_composite_converter.cv2
+    img = np.full((24, 24, 3), 255, dtype=np.uint8)
+    cv2.circle(img, (12, 12), 7, (0, 0, 0), 1)
+    params = {
+        "variant_name": "NEUTRAL_SMALL_RING",
+        "badge_symbol_name": "NEUTRAL_SMALL_RING",
+        "ac08_small_variant_mode": True,
+        "circle_enabled": True,
+        "cx": 12.0,
+        "cy": 12.0,
+        "r": 7.0,
+    }
+
+    monkeypatch.setattr(cv2, "HoughCircles", lambda *args, **kwargs: None)
+    monkeypatch.setattr(Action, "_circleFromForegroundMask", staticmethod(lambda _mask: None))
+
+    structural = Action._detect_semantic_primitives(img, params)
+
+    assert structural["circle"] is True
+    assert structural["circle_detection_source"] == "geometry_fallback"
 
 
 @pytest.mark.blocking_conversion
