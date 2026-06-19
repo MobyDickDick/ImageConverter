@@ -4187,14 +4187,27 @@ def test_enforce_left_arm_badge_geometry_restores_missing_arm() -> None:
     assert float(fixed["arm_len_min"]) >= 22.0 * 0.75
 
 
-def test_finalize_ac0812_plain_left_arm_disables_expensive_global_search() -> None:
-    """AC0812 local circle/arm bracketing should skip the costly global sampler."""
-    params = Action._default_ac0812_params(35, 20)
+def test_finalize_plain_left_arm_badge_disables_expensive_global_search_without_catalog_id() -> None:
+    """Local circle/arm bracketing should skip the costly global sampler by geometry."""
+    params = {
+        "width": 35,
+        "height": 20,
+        "cx": 24.0,
+        "cy": 10.0,
+        "r": 9.0,
+        "arm_enabled": True,
+        "arm_x1": 0.0,
+        "arm_x2": 15.0,
+        "arm_y1": 10.0,
+        "arm_y2": 10.0,
+        "draw_text": False,
+        "connector_direction": "left",
+    }
 
-    finalized = Action._finalize_ac08_style("AC0812_M", params)
+    finalized = Action._finalize_ac08_style("AC08XX_LEFT_ARM", params)
 
     assert finalized.get("enable_global_search_mode") is False
-    assert finalized.get("global_search_disabled_reason") == "ac0812_plain_left_arm_local_fit"
+    assert finalized.get("global_search_disabled_reason") == "plain_left_arm_local_fit"
 
 
 def test_tune_ac08_left_connector_family_keeps_template_right_extent() -> None:
