@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "stable_good_reason_overrides": {
+    "AC0800_L": "Previously marked good plain-ring large variant that must stay semantic_ok after every AC08 adjustment.",
+    "AC0800_M": "Previously marked good plain-ring medium variant that must stay semantic_ok after every AC08 adjustment.",
+    "AC0800_S": "Previously marked good plain-ring small variant that must stay semantic_ok after every AC08 adjustment.",
+    "AC0811_L": "Known regression-safe good conversion anchor for circle-with-stem semantics; must remain semantic_ok.",
+    "AC0811_M": "Known regression-safe good conversion anchor for circle-with-stem semantics; must remain semantic_ok.",
+    "AC0811_S": "Known regression-safe good conversion anchor for circle-with-stem semantics; must remain semantic_ok."
+  },
+  "base_regression_cases": [
+    {"variant": "AC0882_S", "focus": "stagnation", "reason": "Small left-connector outlier that previously burned many near-identical validation rounds."},
+    {"variant": "AC0837_L", "focus": "stagnation", "reason": "Large left-connector case used to verify adaptive search still moves on stubborn families."},
+    {"variant": "AC0839_S", "focus": "small_variant", "reason": "Small right-connector badge that tends to drift in geometry and text placement."},
+    {"variant": "AC0820_L", "focus": "circle_text", "reason": "Plain circle/text badge used as a connector-free baseline for quality passes."},
+    {"variant": "AC0831_L", "focus": "semantic_vertical", "reason": "Vertical connector family representative for stem alignment and text balance."},
+    {"variant": "AC0834_S", "focus": "small_variant", "reason": "Small mirrored connector badge included to catch asymmetric regressions on _S variants."},
+    {"variant": "AC0835_S", "focus": "small_variant", "reason": "Small circle/text family member that stresses compact text scaling without connectors."},
+    {"variant": "AC0812_M", "focus": "semantic_horizontal", "reason": "Medium left-connector case that complements AC0811_L and covers family-specific semantic overrides."}
+  ],
+  "mitigation_status": {
+    "AC0882": {"family": "left_connector", "risk": "high", "implemented": "adaptive_locks,left_connector_family,small_variant_mode", "status": "Mitigated via adaptive fallback search, connector-family guardrails, and _S-specific tuning."},
+    "AC0837": {"family": "left_connector", "risk": "high", "implemented": "adaptive_locks,left_connector_family", "status": "Mitigated via adaptive fallback search plus shared left-connector geometry locks."},
+    "AC0839": {"family": "right_connector", "risk": "high", "implemented": "adaptive_locks,right_connector_family,small_variant_mode", "status": "Mitigated via mirrored connector guardrails with stagnation-triggered unlocks and _S handling."},
+    "AC0820": {"family": "circle_text", "risk": "medium", "implemented": "adaptive_locks,quality_pass_guardrails,co2_cluster_anchor", "status": "Mitigated via bounded quality-pass rollbacks, adaptive text scaling, and centered CO₂ layout."},
+    "AC0831": {"family": "semantic_vertical", "risk": "medium", "implemented": "adaptive_locks,semantic_vertical_family", "status": "Mitigated via semantic vertical-family tuning plus bounded fallback search on stubborn runs."},
+    "AC0834": {"family": "right_connector", "risk": "medium", "implemented": "right_connector_family,small_variant_mode", "status": "Mitigated via shared right-connector geometry enforcement and _S-specific connector/text floors."},
+    "AC0835": {"family": "circle_text", "risk": "medium", "implemented": "small_variant_mode,circle_text_family", "status": "Mitigated primarily through compact circle/text tuning for small variants."},
+    "AC0811": {"family": "semantic_vertical", "risk": "medium", "implemented": "semantic_audit,semantic_priority_rules,semantic_vertical_family", "status": "Mitigated via semantic audit output and strict family-priority rules for circle-with-stem badges."},
+    "AC0812": {"family": "semantic_horizontal", "risk": "medium", "implemented": "semantic_audit,semantic_priority_rules,left_connector_family", "status": "Mitigated via semantic conflict logging and shared left-connector family reconstruction."}
+  }
+}
