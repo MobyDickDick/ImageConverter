@@ -9,7 +9,7 @@ def finalizeAc0223BadgeParamsImpl(
     height: int,
     badge_params: dict[str, object],
 ) -> dict[str, object]:
-    if str(base_name).upper() != "AC0223":
+    if str(badge_params.get("head_style", "")).lower() != "ac0223_triple_valve":
         return badge_params
 
     scale_y = (float(height) / 75.0) if height > 0 else 1.0
@@ -17,8 +17,7 @@ def finalizeAc0223BadgeParamsImpl(
     hub_y = float(badge_params.get("head_hub_cy", 25.153 * scale_y))
     hub_y = max(0.0, min(head_base_y, hub_y))
     circle_top = float(badge_params.get("cy", head_base_y)) - float(badge_params.get("r", 0.0))
-    badge_params["variant_name"] = str(filename).rsplit(".", 1)[0]
-    badge_params["head_style"] = "ac0223_triple_valve"
+    badge_params.setdefault("variant_name", str(filename).rsplit(".", 1)[0])
     badge_params.setdefault("head_gradient_dark", "#b2b2b3")
     badge_params.setdefault("head_gradient_light", "#d9d9d9")
     badge_params.setdefault("head_stroke", "#808080")
