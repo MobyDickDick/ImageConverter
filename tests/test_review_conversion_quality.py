@@ -16,6 +16,24 @@ from tools.review_conversion_quality import (
 )
 
 
+def _read_committed_validation_log(variant: str) -> str:
+    candidates = (
+        Path("artifacts/converted_images/reports") / f"{variant}_element_validation.log",
+        Path("artifacts/converted_images/reports/reports") / f"{variant}_element_validation.log",
+        (
+            Path("artifacts/converted_images/reports/conversion_bestlist_snapshots")
+            / f"{variant}_element_validation.log"
+        ),
+    )
+    for candidate in candidates:
+        if candidate.exists():
+            return candidate.read_text(encoding="utf-8")
+    searched = ", ".join(str(candidate) for candidate in candidates)
+    raise AssertionError(
+        f"Missing committed validation log for {variant}; searched: {searched}"
+    )
+
+
 def _record(
     variant: str,
     mse: float | None,
@@ -100,7 +118,6 @@ def test_write_reports_keeps_candidate_priority_machine_readable(tmp_path: Path)
 
 
 
-
 def test_ac0022_committed_dual_arrow_svg_uses_mask_refinement_below_review_gate() -> None:
     record = review_variant("AC0022", source="diff_inventory")
 
@@ -111,13 +128,14 @@ def test_ac0022_committed_dual_arrow_svg_uses_mask_refinement_below_review_gate(
     assert record.normalized_mse is not None
     assert record.normalized_mse < 0.045945679012345676
 
-    log = Path("artifacts/converted_images/reports/AC0022_element_validation.log").read_text(encoding="utf-8")
+    log = _read_committed_validation_log("AC0022")
     assert "status=dual_arrow_badge_ok" in log
     assert "quality_refinement=mask_runs" in log
 
     svg = Path(record.svg_path).read_text(encoding="utf-8")
     assert '<rect ' in svg
     assert svg.index('fill="#e53935"') < svg.index('fill="#2f6bff"')
+
 
 def test_ac0820_l_committed_svg_preserves_co2_badge_quality() -> None:
     record = review_variant("AC0820_L", source="successful_conversion")
