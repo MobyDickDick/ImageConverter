@@ -62,7 +62,7 @@ def test_generate_badge_svg_ac0223_polygon_uses_gradient_fill() -> None:
         m_ymax=0.0,
     )
 
-    assert 'fill="url(#ac0223ValveGradient)" stroke="#808080"' in svg
+    assert 'fill="url(#valveHeadGradient)" stroke="#808080"' in svg
     assert 'fill="#d9d9d9" stroke="#808080"' not in svg
 
 
@@ -93,7 +93,7 @@ def test_generate_badge_svg_restores_ac0223_head_when_style_keys_missing() -> No
         m_ymax=0.0,
     )
 
-    assert "ac0223ValveGradient" in svg
+    assert "valveHeadGradient" in svg
     assert '<line x1="25.0000"' in svg
     assert 'stroke="#136fad"' in svg
     assert "<circle" in svg
