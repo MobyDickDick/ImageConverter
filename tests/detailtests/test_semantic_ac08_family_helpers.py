@@ -123,8 +123,10 @@ def test_tune_vertical_connector_family_treats_top_direction_as_arm_variant():
 
 def test_tune_circle_text_family_applies_voc_bounds_for_small_badges():
     tuned = helpers.tuneAc08CircleTextFamilyImpl(
-        "AC0835_S",
+        "NEUTRAL_CENTERED_TEXT_BADGE",
         {
+            "connector_policy": "forbid",
+            "draw_text": True,
             "template_circle_cx": 10,
             "template_circle_cy": 10,
             "template_circle_radius": 5,

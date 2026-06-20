@@ -343,8 +343,20 @@ def tuneAc08CircleTextFamilyImpl(
 ) -> dict:
     """Apply shared guardrails for connector-free AC08 circle/text badges."""
     p = dict(params)
-    symbol_name = get_base_name_from_file_fn(str(name)).upper().split("_", 1)[0]
-    if symbol_name not in {"AC0820", "AC0835", "AC0850", "AC0870"}:
+    text_mode = str(p.get("text_mode", "")).lower()
+    connector_direction = str(p.get("connector_direction", p.get("connector_family_direction", ""))).lower()
+    centered_evidence = (
+        connector_direction in {"centered", "none"}
+        or str(p.get("connector_policy", "")).lower() == "forbid"
+        or bool(p.get("suppress_stale_connector_geometry", False))
+        or (
+            bool(p.get("circle_enabled", True))
+            and bool(p.get("draw_text", False))
+            and not p.get("arm_enabled")
+            and not p.get("stem_enabled")
+        )
+    )
+    if not centered_evidence:
         return p
 
     p["connector_family_group"] = "ac08_circle_text"
@@ -367,7 +379,6 @@ def tuneAc08CircleTextFamilyImpl(
     if min_dim <= 0.0:
         min_dim = max(1.0, template_r * 2.0)
 
-    text_mode = str(p.get("text_mode", "")).lower()
     radius_floor_ratio = 0.94 if text_mode in {"co2", "voc", "rf"} else 0.96
     p["min_circle_radius"] = float(max(float(p.get("min_circle_radius", 1.0)), template_r * radius_floor_ratio))
 
@@ -385,10 +396,11 @@ def tuneAc08CircleTextFamilyImpl(
         p["max_circle_radius"] = float(min(canvas_cap, relaxed_cap)) if canvas_cap > 0.0 else float(relaxed_cap)
 
     if text_mode == "co2":
-        base_scale = float(p.get("co2_font_scale", 0.94 if symbol_name == "AC0820" else 0.88))
+        uses_subscript_index = str(p.get("co2_index_mode", "")).lower() == "subscript"
+        base_scale = float(p.get("co2_font_scale", 0.94 if uses_subscript_index else 0.88))
         p["lock_text_scale"] = False
         p["co2_anchor_mode"] = "cluster"
-        p["co2_optical_bias"] = float(max(float(p.get("co2_optical_bias", 0.125)), 0.125 if symbol_name == "AC0820" else 0.10))
+        p["co2_optical_bias"] = float(max(float(p.get("co2_optical_bias", 0.125)), 0.125 if uses_subscript_index else 0.10))
         p["co2_dy"] = float(max(-0.06 * template_r, min(0.16 * template_r, float(p.get("co2_dy", 0.03 * template_r)))))
         p["co2_font_scale_min"] = float(max(float(p.get("co2_font_scale_min", base_scale)), max(0.84, base_scale * 0.92)))
         p["co2_font_scale_max"] = float(min(float(p.get("co2_font_scale_max", 1.12)), min(1.12, base_scale * 1.18)))

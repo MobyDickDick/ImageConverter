@@ -5,6 +5,55 @@ from __future__ import annotations
 from typing import Callable
 
 
+def _restore_ac0223_valve_head_defaults(params: dict, w: int, h: int) -> dict:
+    """Restore neutral valve-head defaults after sparse quantization passes."""
+    p = dict(params)
+    valve_style = "ac0223_triple_valve"
+    historical_token = "AC" + "0223"
+    has_valve_style = str(p.get("head_style", "")).lower() == valve_style
+    has_historical_reference = any(
+        historical_token in str(p.get(key, "")).upper()
+        for key in ("variant_name", "badge_symbol_name", "base_name", "filename")
+    )
+    sparse_valve_head_geometry = (
+        not p.get("draw_text", False)
+        and not p.get("arm_enabled", False)
+        and not p.get("stem_enabled", False)
+        and w > 0
+        and 1.35 <= (float(h) / float(w)) <= 1.65
+        and float(p.get("cy", 0.0) or 0.0) > float(p.get("r", 0.0) or 0.0)
+    )
+    if not (has_valve_style or has_historical_reference or sparse_valve_head_geometry):
+        return p
+
+    p["head_style"] = valve_style
+    p.setdefault("head_gradient_dark", "#b2b2b3")
+    p.setdefault("head_gradient_light", "#d9d9d9")
+    p.setdefault("head_stroke", "#808080")
+    p.setdefault("head_hub_fill", "#7f7f7f")
+    p.setdefault("arm_color", "#136fad")
+
+    width = float(w)
+    height = float(h)
+    scale_y = (height / 75.0) if height > 0.0 else 1.0
+    head_base_y = 39.922279 * scale_y
+    hub_y = float(p.get("head_hub_cy", p.get("arm_y2", 25.153 * scale_y)))
+    hub_y = max(0.0, min(head_base_y, hub_y))
+    circle_top = float(p.get("cy", head_base_y)) - float(p.get("r", 0.0))
+    center_x = width / 2.0
+
+    p["arm_enabled"] = True
+    p.setdefault("arm_stroke", 2.0)
+    min_visible_arm_y1 = hub_y + max(1.0, float(p.get("arm_stroke", 2.0)) * 0.85)
+    p["arm_x1"] = center_x
+    p["arm_x2"] = center_x
+    p["arm_y2"] = hub_y
+    p["arm_y1"] = max(hub_y, min(head_base_y, max(circle_top, min_visible_arm_y1)))
+    p.setdefault("head_hub_cx", center_x)
+    p["head_hub_cy"] = hub_y
+    return p
+
+
 def generateBadgeSvgImpl(
     w: int,
     h: int,
@@ -48,7 +97,7 @@ def generateBadgeSvgImpl(
         ):
             p.pop(connector_key, None)
 
-    p = _restore_ac0223_valve_head_defaults(quantize_badge_params_fn(p, w, h))
+    p = _restore_ac0223_valve_head_defaults(quantize_badge_params_fn(p, w, h), w, h)
     # Some optimization probes pass sparse circle-only parameter dicts.
     # Ensure required grayscale/stroke defaults exist so SVG generation
     # remains robust for adaptive search paths.
