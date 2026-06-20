@@ -54,12 +54,13 @@ def test_generate_badge_svg_impl_renders_voc_text() -> None:
     assert ">VOC</text>" in svg
 
 
-def test_generate_badge_svg_impl_strips_stale_connectors_for_ac0835() -> None:
+def test_generate_badge_svg_impl_strips_stale_connectors_from_connector_free_badge() -> None:
     svg = semantic_badge_svg_helpers.generateBadgeSvgImpl(
         15,
         15,
         {
-            "badge_symbol_name": "AC0835",
+            "badge_symbol_name": "ZZ_NEUTRAL_VOC_BADGE",
+            "connector_policy": "forbid",
             "cx": 7.5,
             "cy": 7.5,
             "r": 6.0,
