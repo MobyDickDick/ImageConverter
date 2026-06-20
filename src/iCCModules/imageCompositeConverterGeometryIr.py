@@ -151,7 +151,7 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
         return []
 
     elements: list[dict[str, object]] = []
-    rect_hint = _has_any(desc, ("rechteck", "viereck", "kühlelement", "heizelement", "ac0120-bildbeschreibung"))
+    rect_hint = _has_any(desc, ("rechteck", "viereck", "kühlelement", "heizelement", "rechteck-plus-minus-bildbeschreibung"))
     gradient_hint = _has_any(desc, ("farbverlauf", "gradient")) and _has_any(desc, ("horizontal", "dunkel-hell-dunkel", "dunkel–hell–dunkel"))
     diagonal_hint = _has_any(desc, ("diagonal", "diagonale", "diagonalen", "andreaskreuz", "kreuz"))
     differential_pressure_hint = _has_any(desc, ("differenzdruckmessung", "dp")) and "doppelten grauen rand" in desc
@@ -1182,7 +1182,7 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
     directions: list[str] = []
     if diagonal_hint:
         both_diagonals = _has_any(desc, ("beiden diagonalen", "beide diagonalen", "andreaskreuz", "kreuz"))
-        if both_diagonals or "ac0120-bildbeschreibung" in desc:
+        if both_diagonals or "rechteck-plus-minus-bildbeschreibung" in desc:
             directions = ["tl_br", "tr_bl"]
         elif re.search(r"oben\s+rechts.*unten\s+links|unten\s+links.*oben\s+rechts", desc):
             directions = ["tr_bl"]

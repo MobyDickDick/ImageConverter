@@ -20,9 +20,9 @@ def test_build_geometry_ir_maps_ac0130_like_description_to_ordered_chain() -> No
     assert [element["direction"] for element in ir if element["kind"] == "DiagonalBand"] == ["tl_br", "tr_bl"]
     assert all(element.get("position") == "top_center" for element in ir if element["kind"] == "MinusGlyph")
 
-def test_build_geometry_ir_maps_ac0120_self_description_to_plus_minus_chain() -> None:
+def test_build_geometry_ir_maps_neutral_self_description_to_plus_minus_chain() -> None:
     description = (
-        "Wie AC0120-Bildbeschreibung, zusätzlich analog AC0VR2_M4.svg mit einer zusätzlichen "
+        "Wie Rechteck-Plus-Minus-Bildbeschreibung, zusätzlich mit einer zusätzlichen "
         "an der vertikalen Symmetrieachse ausgerichteten Diagonale; außerdem werden oben auf "
         "der vertikalen Symmetrieachse ein \"+\"- und ein \"-\"-Zeichen eingefügt."
     )

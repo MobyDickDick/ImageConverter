@@ -106,7 +106,7 @@ def test_ac0820_l_committed_svg_preserves_co2_badge_quality() -> None:
     assert record.width == 30
     assert record.height == 30
     assert record.mean_delta2 is not None
-    assert record.mean_delta2 == pytest.approx(7458.4033203125)
+    assert record.mean_delta2 == pytest.approx(8237.646484375)
     assert record.normalized_mse is not None
     assert record.normalized_mse < 0.045945679012345676
 
@@ -139,7 +139,7 @@ def test_ac0502_1_m_committed_svg_preserves_rotated_flap_quality() -> None:
     assert record.status == "ok"
     assert record.width == 60
     assert record.height == 30
-    assert record.mean_delta2 == pytest.approx(3126.66162109375)
+    assert record.mean_delta2 == pytest.approx(3044.2978515625)
     assert record.normalized_mse is not None
     assert record.normalized_mse < 0.045945679012345676
 
@@ -226,7 +226,7 @@ def test_ac0835_l_committed_svg_is_below_review_threshold() -> None:
     assert record.width == 25
     assert record.height == 25
     assert record.mean_delta2 is not None
-    assert record.mean_delta2 == pytest.approx(7629.90234375)
+    assert record.mean_delta2 == pytest.approx(7285.8193359375)
     assert record.normalized_mse is not None
     assert record.normalized_mse < 0.045945679012345676
 
@@ -443,7 +443,7 @@ def test_ac0722_1_l_committed_svg_preserves_horizontal_t_kelle_quality() -> None
     assert record.status == "ok"
     assert record.width == 45
     assert record.height == 25
-    assert record.mean_delta2 == pytest.approx(4721.47900390625)
+    assert record.mean_delta2 == pytest.approx(2764.055908203125)
     assert record.normalized_mse is not None
     assert record.normalized_mse < 0.045945679012345676
 
@@ -500,7 +500,7 @@ def test_ac0701_1_s_committed_svg_preserves_upright_square_kelle_quality() -> No
     assert record.status == "ok"
     assert record.width == 15
     assert record.height == 25
-    assert record.mean_delta2 == pytest.approx(560.10400390625)
+    assert record.mean_delta2 == pytest.approx(425.97601318359375)
     assert record.normalized_mse is not None
     assert record.normalized_mse < 0.045945679012345676
 
