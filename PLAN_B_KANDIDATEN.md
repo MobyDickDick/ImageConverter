@@ -2,27 +2,31 @@
 
 Ziel: maximal **5** aktive JPG-Kandidaten, die derzeit noch nicht zufriedenstellend konvertieren, aber voraussichtlich nicht "hoffnungslos komplex" sind.
 
-## Aktuelle Kandidaten (Stand: 2026-06-17, Review-Refresh Run PII)
+## Aktuelle Kandidaten (Stand: 2026-06-19, Review-Refresh Run RC)
 
-`AC0845_S` wurde als anschlussfreies Kreis-/Text-Badge aus der Beschreibung
-rekonstruiert. Kreisgrundkörper und zentrierter `rH`-Glyph bleiben getrennte,
-größenrelative Geometry-IR-Elemente; die allgemeine Rasterregistrierung passt
-die gemeinsame Geometrie an die kleine Rastervariante an.
+Der reproduzierbare Review mit `tools/review_conversion_quality.py` findet wieder
+qualifizierte Diff-Fälle oberhalb der Review-Grenze. Die Reihenfolge folgt der
+automatisch erzeugten Triage `artifacts/evaluation/conversion_quality_review_v2/plan_b_candidate_triage_v1.csv` und wird in
+`docs/conversion_quality_review_2026-06-19_runRC.md` begründet. Wichtig: Die
+Review-Grenze ist nur ein grobes technisches Gate; die harte Pixelnähe-Metrik
+`mean_delta2 <= 18.000` zeigt weiterhin, dass nahezu alle Diff-Paare sichtbar
+verbesserungsbedürftig sind.
 
-Der reproduzierbare Review findet auch nach der erneuten Inventur mit `132`
-Diff-Varianten, `123` renderbaren Diff-Paaren und `48` renderbaren erfolgreichen
-Konvertierungen **keinen** qualifizierten Diff-Fall oberhalb der Review-Grenze. Die reguläre Rotation ist daher leer und wird erst
-bei einem neu qualifizierten Kandidaten fortgesetzt.
+1. `GE9002_7S` – höchster `normalized_mse`-Fehler der kompakten Plan-B-Triage.
+2. `GE9002_5S` – zweithöchster Fehler in derselben einfachen GE9002-Familie.
+3. `GE9002_3S` – weiterer kompakter Hochfehlerfall.
+4. `GE9002_4M` – mittlere Variante mit weiterhin sehr großem Diff-Abstand.
+5. `GE9002_1S` – fünfter automatisch priorisierter GE9002-Fall.
 
 ## Perception-Lerneffekt (Pflichtabschnitt ab PF8)
 
-Der abgeschlossene Kandidat bestätigte den allgemeinen `CircleBackground`-Seed.
-Die `rH`-Glyph wird derzeit zuverlässig aus der expliziten Bildbeschreibung als
-`TextGlyph` ergänzt; ein bild- oder variantenspezifisches Sample-SVG ist nicht
-erforderlich. Der maschinenlesbare PF8-Linkage-Report ist nach Abschluss der
-Rotation leer. Der Review-Refresh vom 2026-06-17 bestätigt außerdem `0`
-ausgewählte Plan-B-Kandidaten; die Kandidatenrotation bleibt deshalb bewusst
-leer, bis neue qualifizierte Diff-Fälle entstehen.
+Die neue Run-RC-Triage verschiebt die aktive Rotation von AC08-Badges auf die
+GE9002-Diff-Familie. Vor der konkreten Nachzeichnung ist für den jeweils ersten
+Kandidaten zu prüfen, ob die dominanten Primitive bereits als katalogfreie
+Perception-Kandidaten (`circle`, `line`, `polygon_path`, `text_glyph` oder
+`color_patch`) auftauchen. Der Lerneffekt wird pro Kandidat im nächsten
+Arbeitspaket als `generalisiert`, `nur Sonderfall` oder `noch nicht erkannt`
+dokumentiert.
 
 ## Pflege-Regel (fortan)
 

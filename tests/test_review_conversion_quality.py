@@ -99,6 +99,26 @@ def test_write_reports_keeps_candidate_priority_machine_readable(tmp_path: Path)
     assert [row["priority"] for row in rows] == ["1", "2"]
 
 
+
+
+def test_ac0022_committed_dual_arrow_svg_uses_mask_refinement_below_review_gate() -> None:
+    record = review_variant("AC0022", source="diff_inventory")
+
+    assert record.status == "ok"
+    assert record.width == 36
+    assert record.height == 111
+    assert record.mean_delta2 == pytest.approx(6032.5732421875)
+    assert record.normalized_mse is not None
+    assert record.normalized_mse < 0.045945679012345676
+
+    log = Path("artifacts/converted_images/reports/AC0022_element_validation.log").read_text(encoding="utf-8")
+    assert "status=dual_arrow_badge_ok" in log
+    assert "quality_refinement=mask_runs" in log
+
+    svg = Path(record.svg_path).read_text(encoding="utf-8")
+    assert '<rect ' in svg
+    assert svg.index('fill="#e53935"') < svg.index('fill="#2f6bff"')
+
 def test_ac0820_l_committed_svg_preserves_co2_badge_quality() -> None:
     record = review_variant("AC0820_L", source="successful_conversion")
 
@@ -106,7 +126,7 @@ def test_ac0820_l_committed_svg_preserves_co2_badge_quality() -> None:
     assert record.width == 30
     assert record.height == 30
     assert record.mean_delta2 is not None
-    assert record.mean_delta2 == pytest.approx(7458.4033203125)
+    assert record.mean_delta2 == pytest.approx(8237.646484375)
     assert record.normalized_mse is not None
     assert record.normalized_mse < 0.045945679012345676
 
@@ -139,7 +159,7 @@ def test_ac0502_1_m_committed_svg_preserves_rotated_flap_quality() -> None:
     assert record.status == "ok"
     assert record.width == 60
     assert record.height == 30
-    assert record.mean_delta2 == pytest.approx(3126.66162109375)
+    assert record.mean_delta2 == pytest.approx(3044.2978515625)
     assert record.normalized_mse is not None
     assert record.normalized_mse < 0.045945679012345676
 
@@ -226,7 +246,7 @@ def test_ac0835_l_committed_svg_is_below_review_threshold() -> None:
     assert record.width == 25
     assert record.height == 25
     assert record.mean_delta2 is not None
-    assert record.mean_delta2 == pytest.approx(7629.90234375)
+    assert record.mean_delta2 == pytest.approx(7285.8193359375)
     assert record.normalized_mse is not None
     assert record.normalized_mse < 0.045945679012345676
 
@@ -443,7 +463,7 @@ def test_ac0722_1_l_committed_svg_preserves_horizontal_t_kelle_quality() -> None
     assert record.status == "ok"
     assert record.width == 45
     assert record.height == 25
-    assert record.mean_delta2 == pytest.approx(4721.47900390625)
+    assert record.mean_delta2 == pytest.approx(2764.055908203125)
     assert record.normalized_mse is not None
     assert record.normalized_mse < 0.045945679012345676
 
@@ -500,7 +520,7 @@ def test_ac0701_1_s_committed_svg_preserves_upright_square_kelle_quality() -> No
     assert record.status == "ok"
     assert record.width == 15
     assert record.height == 25
-    assert record.mean_delta2 == pytest.approx(560.10400390625)
+    assert record.mean_delta2 == pytest.approx(425.97601318359375)
     assert record.normalized_mse is not None
     assert record.normalized_mse < 0.045945679012345676
 

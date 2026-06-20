@@ -295,7 +295,7 @@ Für jedes Arbeitspaket gelten zusätzlich zu den jeweiligen Akzeptanzkriterien:
     auch die verbliebene vertikale VOC-CY-Guardrail in der Elementvalidierung
     durch messbare Parameter (`text_mode=voc`, vertikale Arm-Geometrie,
     Template-Kreis-CY) und entfernt die katalogspezifische Logmeldung; der
-    Ratchet sinkt auf 322 Runtime-ID-Vorkommen. Run RA entkoppelt den fokussierten Initial-Pass-only-Pfad der Quality-Pass-Policy von einer konkreten Runtime-Risk-ID; die Auswahl läuft nun über neutrale `initial_pass_only_base_names`-Metadaten und die Tests verwenden katalogfreie Basen. Der Ratchet sinkt auf 317 Runtime-ID-Vorkommen.
+    Ratchet sinkt auf 322 Runtime-ID-Vorkommen. Run RA entkoppelt den fokussierten Initial-Pass-only-Pfad der Quality-Pass-Policy von einer konkreten Runtime-Risk-ID; die Auswahl läuft nun über neutrale `initial_pass_only_base_names`-Metadaten und die Tests verwenden katalogfreie Basen. Der Ratchet sinkt auf 317 Runtime-ID-Vorkommen. Run RB entkoppelt Budget-Floor und Deep-Trace der Elementvalidierung von der bisherigen Anker-Variante; beide Entscheidungen hängen nun an neutralen Parametern (`validation_time_budget_floor_sec`, `validation_deep_trace_enabled`, `validation_deep_trace_label`) und werden mit katalogfreien Testvarianten abgesichert. Der Ratchet sinkt auf 316 Runtime-ID-Vorkommen. Run RC entfernt den katalogspezifischen Self-Reference-Token aus dem beschreibungsgetriebenen Geometry-IR-Pfad; Rechteck-/Plus-/Minus-Ketten werden nun über `rechteck-plus-minus-bildbeschreibung` erkannt und mit einem neutralen Detailtest abgesichert. Der Ratchet sinkt auf 314 Runtime-ID-Vorkommen.
 
 - [ ] **IDO-18 – Legacy-Baseline und Ratchet entfernen**
   - Voraussetzung: IDO-17 ist abgeschlossen.

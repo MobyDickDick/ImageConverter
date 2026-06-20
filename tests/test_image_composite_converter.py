@@ -6007,8 +6007,8 @@ def test_validate_semantic_alignment_accepts_ac0838_large_top_connector_voc_vari
 
 
 
-def test_validate_badge_by_elements_applies_ac0811_l_budget_floor() -> None:
-    """AC0811_L should uplift too-small explicit validation budgets to the variant floor."""
+def test_validate_badge_by_elements_applies_neutral_budget_floor() -> None:
+    """Neutral workload metadata should uplift too-small explicit validation budgets."""
     if image_composite_converter.np is None:
         pytest.skip("numpy not available in this environment")
 
@@ -6022,7 +6022,7 @@ def test_validate_badge_by_elements_applies_ac0811_l_budget_floor() -> None:
             return next(self._values)
 
     img = image_composite_converter.np.zeros((4, 4, 3), dtype=image_composite_converter.np.uint8)
-    params = {"validation_time_budget_sec": 18.0, "variant_name": "AC0811_L"}
+    params = {"validation_time_budget_sec": 18.0, "validation_time_budget_floor_sec": 48.0, "variant_name": "ZZWORKLOAD"}
 
     with pytest.raises(TimeoutError, match=r"budget=48\.00s"):
         validation_helpers.validateBadgeByElementsImpl(
@@ -6059,14 +6059,14 @@ def test_validate_badge_by_elements_applies_ac0811_l_budget_floor() -> None:
             apply_canonical_badge_colors_fn=lambda _p: {},
         )
 
-def test_validate_badge_by_elements_logs_deep_trace_for_ac0811_l() -> None:
+def test_validate_badge_by_elements_logs_deep_trace_from_neutral_flag() -> None:
     if image_composite_converter.np is None:
         pytest.skip("numpy not available in this environment")
 
     from src.iCCModules import imageCompositeConverterElementValidation as validation_helpers
 
     img = image_composite_converter.np.zeros((4, 4, 3), dtype=image_composite_converter.np.uint8)
-    params = {"variant_name": "AC0811_L", "validation_time_budget_sec": 120.0, "cx": 1.0, "cy": 2.0, "r": 3.0}
+    params = {"variant_name": "ZZTRACE", "validation_time_budget_sec": 120.0, "validation_deep_trace_enabled": True, "validation_deep_trace_label": "neutral_deep_trace", "cx": 1.0, "cy": 2.0, "r": 3.0}
 
     logs = validation_helpers.validateBadgeByElementsImpl(
         img,
@@ -6102,7 +6102,7 @@ def test_validate_badge_by_elements_logs_deep_trace_for_ac0811_l() -> None:
         apply_canonical_badge_colors_fn=lambda _p: {},
     )
 
-    assert any("ac0811_l_deep_trace:" in line for line in logs)
+    assert any("neutral_deep_trace:" in line for line in logs)
 
 
 def test_validate_badge_by_elements_raises_timeout_error_when_budget_exceeded() -> None:
@@ -8644,6 +8644,37 @@ def test_dual_arrow_badge_detection_forces_opposite_arrow_directions() -> None:
     svg = dual_arrow_helpers.generateDualArrowBadgeSvgImpl(22, 32, params)
     assert 'stroke-linecap="butt"' in svg
 
+
+
+
+def test_dual_arrow_badge_detection_preserves_physical_color_order() -> None:
+    np = image_composite_converter.np
+    if np is None:
+        pytest.skip("numpy not available in this environment")
+    from src.iCCModules import imageCompositeConverterDualArrowBadge as dual_arrow_helpers
+
+    img = np.full((35, 20, 3), 255, dtype=np.uint8)
+    # left red up-arrow
+    img[19:33, 5:7] = (0, 0, 255)
+    for y in range(4, 18):
+        half = max(1, (17 - y) // 2)
+        img[y, 6 - half : 6 + half + 1] = (0, 0, 255)
+    # right blue down-arrow
+    img[2:16, 13:15] = (255, 0, 0)
+    for y in range(18, 32):
+        half = max(1, (y - 18) // 2)
+        img[y, 14 - half : 14 + half + 1] = (255, 0, 0)
+
+    params = dual_arrow_helpers.detectDualArrowBadgeParamsFromImageImpl(img, np_module=np)
+    assert params is not None
+    assert params["left_color"] == "#e53935"
+    assert params["right_color"] == "#2f6bff"
+    assert float(params["left"]["center_x"]) < float(params["right"]["center_x"])
+
+    svg = dual_arrow_helpers.generateDualArrowBadgeSvgImpl(20, 35, params)
+    left_red_pos = svg.index('stroke="#e53935"')
+    right_blue_pos = svg.index('stroke="#2f6bff"')
+    assert left_red_pos < right_blue_pos
 
 def test_dual_arrow_badge_triangle_width_is_clamped_to_canvas() -> None:
     from src.iCCModules import imageCompositeConverterDualArrowBadge as dual_arrow_helpers

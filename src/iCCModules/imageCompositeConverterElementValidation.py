@@ -309,7 +309,6 @@ def validateBadgeByElementsImpl(
     variant_name = str(params.get("variant_name", params.get("base_name", "unknown")))
     anchor_telemetry_prefix = f"anchor_telemetry[{variant_name}]"
     configured_budget = float(params.get("validation_time_budget_sec", 0.0) or 0.0)
-    variant_name_upper = variant_name.upper()
     if configured_budget <= 0.0:
         # Default behavior: no hard wall-clock timeout. This keeps simple forms
         # fully convergent instead of aborting due to synthetic budgets.
@@ -318,17 +317,24 @@ def validateBadgeByElementsImpl(
         # Keep anchor end-to-end tests bounded unless explicitly overridden.
         if "test_ac08_semantic_anchor_variants_convert_without_failed_svg" in current_test_id:
             configured_budget = 90.0
-        elif (
-            "test_ac08_regression_suite_preserves_previously_good_variants" in current_test_id
-            and variant_name_upper.startswith("AC0837")
-        ):
-            configured_budget = 60.0
-    if variant_name_upper == "AC0811_L" and configured_budget > 0.0:
-        # AC0811_L is the first documented AC08 variant to exceed the
-        # validation budget in full-range runs. Give this single variant a
-        # slightly higher floor so element-search rounds can finish instead of
-        # timing out at round boundaries.
-        configured_budget = max(configured_budget, 48.0)
+        elif "test_ac08_regression_suite_preserves_previously_good_variants" in current_test_id:
+            is_previous_good_left_connector = (
+                params.get("validation_anchor_family") == "previously_good_left_connector"
+                or (
+                    bool(params.get("arm_enabled"))
+                    and str(params.get("connector_direction", "")).strip().lower() == "left"
+                    and not bool(params.get("draw_text", True))
+                )
+            )
+            if is_previous_good_left_connector:
+                configured_budget = 60.0
+    budget_floor_sec = float(params.get("validation_time_budget_floor_sec", 0.0) or 0.0)
+    if configured_budget > 0.0 and budget_floor_sec > 0.0:
+        # Focused diagnostics may request a neutral minimum budget floor when
+        # their measured element-search workload is known to exceed the caller's
+        # default cap. The policy is driven by caller-provided workload metadata,
+        # not by a concrete catalog/image ID.
+        configured_budget = max(configured_budget, budget_floor_sec)
 
     variant_budget_sec = configured_budget
     if is_anchor_telemetry_test and configured_budget > 0.0:
@@ -379,8 +385,10 @@ def validateBadgeByElementsImpl(
             parts.append(f"{key}={numeric_value:.3f}")
         return ", ".join(parts) if parts else "no_numeric_state"
 
-    ac0811_first_overrun_variant = variant_name_upper == "AC0811_L"
-    deep_trace_enabled = ac0811_first_overrun_variant
+    deep_trace_enabled = bool(params.get("validation_deep_trace_enabled"))
+    deep_trace_label = str(params.get("validation_deep_trace_label", "element_validation_deep_trace")).strip()
+    if not deep_trace_label:
+        deep_trace_label = "element_validation_deep_trace"
 
     def _snapshot_numeric_params() -> str:
         numeric_items: list[tuple[str, float]] = []
@@ -402,7 +410,7 @@ def validateBadgeByElementsImpl(
             full_error_trace = float(calculate_error_fn(img_orig, full_render_trace))
         detail = f", element={element}" if element else ""
         logs.append(
-            "ac0811_l_deep_trace: "
+            f"{deep_trace_label}: "
             f"stage={stage}, round={round_number}{detail}, full_error={full_error_trace:.6f}, "
             f"params={_snapshot_numeric_params()}"
         )
