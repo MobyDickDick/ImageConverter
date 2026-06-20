@@ -1275,6 +1275,72 @@ def _find_circle(elements: list[dict[str, object]], circle_id: str, w: int, h: i
 
 
 
+
+def _glyph_layout_metrics(
+    element: dict[str, object],
+    *,
+    w: int,
+    h: int,
+    rect_x: float,
+    rect_y: float,
+    rect_w: float,
+    rect_h: float,
+) -> dict[str, float]:
+    sw = float(element.get("stroke_width", 0.025)) * min(w, h)
+    pos = str(element.get("position", "top_center"))
+    dy = float(element.get("dy", 0.0)) * h
+    half = min(w, h) * 0.055
+    if pos == "top_left":
+        cx, cy = rect_x + rect_w * 0.18, rect_y + rect_h * 0.085 + dy
+    else:
+        cx, cy = rect_x + rect_w * 0.50, rect_y + rect_h * 0.085 + dy
+    padding = (sw * 0.5) + 0.001
+    cx = min(max(cx, half + padding), w - half - padding)
+    cy = min(max(cy, half + padding), h - half - padding)
+    return {
+        "cx": cx,
+        "cy": cy,
+        "half": half,
+        "stroke_width": sw,
+        "x0": cx - half - (sw * 0.5),
+        "y0": cy - half - (sw * 0.5),
+        "x1": cx + half + (sw * 0.5),
+        "y1": cy + half + (sw * 0.5),
+    }
+
+
+def validateGeometryIrGlyphLayoutImpl(w: int, h: int, geometry_ir: list[dict[str, object]]) -> list[str]:
+    """Return structural layout warnings for rendered Geometry-IR glyphs.
+
+    The pixel score can miss tiny clipped glyphs, so this validates declared
+    plus/minus glyph geometry against the canvas and the primary rectangle.
+    """
+    rect_x, rect_y, rect_w, rect_h = _find_rect(geometry_ir, w, h)
+    warnings: list[str] = []
+    for element in geometry_ir:
+        if element.get("kind") not in {"PlusGlyph", "MinusGlyph"}:
+            continue
+        metrics = _glyph_layout_metrics(
+            element,
+            w=w,
+            h=h,
+            rect_x=rect_x,
+            rect_y=rect_y,
+            rect_w=rect_w,
+            rect_h=rect_h,
+        )
+        element_id = str(element.get("id", element.get("kind", "glyph")))
+        if metrics["x0"] < 0 or metrics["y0"] < 0 or metrics["x1"] > w or metrics["y1"] > h:
+            warnings.append(f"{element_id}: glyph_outside_canvas")
+        if str(element.get("position", "")).startswith("top") and (
+            metrics["x0"] < rect_x
+            or metrics["y0"] < rect_y
+            or metrics["x1"] > rect_x + rect_w
+            or metrics["y1"] > rect_y + rect_h
+        ):
+            warnings.append(f"{element_id}: top_glyph_outside_main_rect")
+    return warnings
+
 def _parse_hex_gray(color: str, fallback: int) -> int:
     value = str(color or "").strip().lstrip("#")
     if len(value) >= 6:
@@ -1780,14 +1846,19 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
             )
         elif kind in {"PlusGlyph", "MinusGlyph"}:
             stroke = html.escape(str(element.get("stroke", "#4f4f4f")))
-            sw = float(element.get("stroke_width", 0.025)) * min(w, h)
-            pos = str(element.get("position", "top_center"))
-            dy = float(element.get("dy", 0.0)) * h
-            if pos == "top_left":
-                cx, cy = rect_x + rect_w * 0.18, rect_y - h * 0.08 + dy
-            else:
-                cx, cy = rect_x + rect_w * 0.50, rect_y - h * 0.08 + dy
-            half = min(w, h) * 0.055
+            metrics = _glyph_layout_metrics(
+                element,
+                w=w,
+                h=h,
+                rect_x=rect_x,
+                rect_y=rect_y,
+                rect_w=rect_w,
+                rect_h=rect_h,
+            )
+            sw = metrics["stroke_width"]
+            cx = metrics["cx"]
+            cy = metrics["cy"]
+            half = metrics["half"]
             if kind == "PlusGlyph":
                 svg.append(
                     f'  <path id="{element_id}" d="M {_fmt(cx-half)} {_fmt(cy)} L {_fmt(cx+half)} {_fmt(cy)} '
