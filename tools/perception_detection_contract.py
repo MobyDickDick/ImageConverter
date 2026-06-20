@@ -1765,7 +1765,63 @@ def write_text_glyph_evaluation_report(
     }
 
 
-PLAN_B_PERCEPTION_TARGETS: list[dict[str, Any]] = []
+PLAN_B_PERCEPTION_TARGETS: list[dict[str, Any]] = [
+    {
+        "variant": "GE9002_7S",
+        "image_candidates": ["artifacts/images_to_convert/GE9002_7S.jpg"],
+        "plan_b_reason": "Run-RC-Triage: höchster kompakter GE9002-Diff-Fehler.",
+        "description": "Kompakte GE9002-Textmarke mit dominantem M-Glyph auf farbigem Grund.",
+        "perception_question": "Wird der dominante M-Textbereich als katalogfreier TextGlyph-Kandidat erkannt?",
+        "expected_first_primitive": "TextGlyph",
+        "expected_candidate_kinds": ["text_glyph"],
+        "expected_seed_kinds": ["TextGlyph"],
+        "glyphs": ["M"],
+    },
+    {
+        "variant": "GE9002_5S",
+        "image_candidates": ["artifacts/images_to_convert/GE9002_5S.jpg"],
+        "plan_b_reason": "Run-RC-Triage: zweithöchster kompakter GE9002-Diff-Fehler.",
+        "description": "Kompakte GE9002-Textmarke mit dominantem M-Glyph auf farbigem Grund.",
+        "perception_question": "Wird der dominante M-Textbereich als katalogfreier TextGlyph-Kandidat erkannt?",
+        "expected_first_primitive": "TextGlyph",
+        "expected_candidate_kinds": ["text_glyph"],
+        "expected_seed_kinds": ["TextGlyph"],
+        "glyphs": ["M"],
+    },
+    {
+        "variant": "GE9002_3S",
+        "image_candidates": ["artifacts/images_to_convert/GE9002_3S.jpg"],
+        "plan_b_reason": "Run-RC-Triage: weiterer kompakter Hochfehlerfall der GE9002-Familie.",
+        "description": "Kompakte GE9002-Textmarke mit dominantem M-Glyph auf farbigem Grund.",
+        "perception_question": "Wird der dominante M-Textbereich als katalogfreier TextGlyph-Kandidat erkannt?",
+        "expected_first_primitive": "TextGlyph",
+        "expected_candidate_kinds": ["text_glyph"],
+        "expected_seed_kinds": ["TextGlyph"],
+        "glyphs": ["M"],
+    },
+    {
+        "variant": "GE9002_4M",
+        "image_candidates": ["artifacts/images_to_convert/GE9002_4M.jpg"],
+        "plan_b_reason": "Run-RC-Triage: mittlere GE9002-Variante mit sehr großem Diff-Abstand.",
+        "description": "Mittlere GE9002-Textmarke mit dominantem M-Glyph auf farbigem Grund.",
+        "perception_question": "Wird der dominante M-Textbereich als katalogfreier TextGlyph-Kandidat erkannt?",
+        "expected_first_primitive": "TextGlyph",
+        "expected_candidate_kinds": ["text_glyph"],
+        "expected_seed_kinds": ["TextGlyph"],
+        "glyphs": ["M"],
+    },
+    {
+        "variant": "GE9002_1S",
+        "image_candidates": ["artifacts/images_to_convert/GE9002_1S.jpg"],
+        "plan_b_reason": "Run-RC-Triage: fünfter automatisch priorisierter kompakter GE9002-Fall.",
+        "description": "Kompakte GE9002-Textmarke mit dominantem M-Glyph auf farbigem Grund.",
+        "perception_question": "Wird der dominante M-Textbereich als katalogfreier TextGlyph-Kandidat erkannt?",
+        "expected_first_primitive": "TextGlyph",
+        "expected_candidate_kinds": ["text_glyph"],
+        "expected_seed_kinds": ["TextGlyph"],
+        "glyphs": ["M"],
+    },
+]
 
 
 def _resolve_first_existing_path(candidates: list[str]) -> Path | None:

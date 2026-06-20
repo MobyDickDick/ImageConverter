@@ -99,6 +99,26 @@ def test_write_reports_keeps_candidate_priority_machine_readable(tmp_path: Path)
     assert [row["priority"] for row in rows] == ["1", "2"]
 
 
+
+
+def test_ac0022_committed_dual_arrow_svg_uses_mask_refinement_below_review_gate() -> None:
+    record = review_variant("AC0022", source="diff_inventory")
+
+    assert record.status == "ok"
+    assert record.width == 36
+    assert record.height == 111
+    assert record.mean_delta2 == pytest.approx(6032.5732421875)
+    assert record.normalized_mse is not None
+    assert record.normalized_mse < 0.045945679012345676
+
+    log = Path("artifacts/converted_images/reports/AC0022_element_validation.log").read_text(encoding="utf-8")
+    assert "status=dual_arrow_badge_ok" in log
+    assert "quality_refinement=mask_runs" in log
+
+    svg = Path(record.svg_path).read_text(encoding="utf-8")
+    assert '<rect ' in svg
+    assert svg.index('fill="#e53935"') < svg.index('fill="#2f6bff"')
+
 def test_ac0820_l_committed_svg_preserves_co2_badge_quality() -> None:
     record = review_variant("AC0820_L", source="successful_conversion")
 

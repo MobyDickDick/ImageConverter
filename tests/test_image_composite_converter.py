@@ -8645,6 +8645,37 @@ def test_dual_arrow_badge_detection_forces_opposite_arrow_directions() -> None:
     assert 'stroke-linecap="butt"' in svg
 
 
+
+
+def test_dual_arrow_badge_detection_preserves_physical_color_order() -> None:
+    np = image_composite_converter.np
+    if np is None:
+        pytest.skip("numpy not available in this environment")
+    from src.iCCModules import imageCompositeConverterDualArrowBadge as dual_arrow_helpers
+
+    img = np.full((35, 20, 3), 255, dtype=np.uint8)
+    # left red up-arrow
+    img[19:33, 5:7] = (0, 0, 255)
+    for y in range(4, 18):
+        half = max(1, (17 - y) // 2)
+        img[y, 6 - half : 6 + half + 1] = (0, 0, 255)
+    # right blue down-arrow
+    img[2:16, 13:15] = (255, 0, 0)
+    for y in range(18, 32):
+        half = max(1, (y - 18) // 2)
+        img[y, 14 - half : 14 + half + 1] = (255, 0, 0)
+
+    params = dual_arrow_helpers.detectDualArrowBadgeParamsFromImageImpl(img, np_module=np)
+    assert params is not None
+    assert params["left_color"] == "#e53935"
+    assert params["right_color"] == "#2f6bff"
+    assert float(params["left"]["center_x"]) < float(params["right"]["center_x"])
+
+    svg = dual_arrow_helpers.generateDualArrowBadgeSvgImpl(20, 35, params)
+    left_red_pos = svg.index('stroke="#e53935"')
+    right_blue_pos = svg.index('stroke="#2f6bff"')
+    assert left_red_pos < right_blue_pos
+
 def test_dual_arrow_badge_triangle_width_is_clamped_to_canvas() -> None:
     from src.iCCModules import imageCompositeConverterDualArrowBadge as dual_arrow_helpers
 

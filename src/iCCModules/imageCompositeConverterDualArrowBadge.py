@@ -38,14 +38,27 @@ def detectDualArrowBadgeParamsFromImageImpl(
     if int(np.count_nonzero(blue_mask)) < 8 or int(np.count_nonzero(red_mask)) < 8:
         return None
 
-    left = _fitArrowFromMask(blue_mask, np_module=np)
-    right = _fitArrowFromMask(red_mask, np_module=np)
-    if left is None or right is None:
+    blue = _fitArrowFromMask(blue_mask, np_module=np)
+    red = _fitArrowFromMask(red_mask, np_module=np)
+    if blue is None or red is None:
         return None
+
+    arrows = [
+        {"geometry": blue, "color": "#2f6bff", "color_name": "blue", "mask": blue_mask},
+        {"geometry": red, "color": "#e53935", "color_name": "red", "mask": red_mask},
+    ]
+    arrows.sort(key=lambda item: float(item["geometry"]["center_x"]))
+    mask_runs = [
+        {"color": str(item["color"]), "runs": _maskRowRuns(item["mask"], np_module=np)}
+        for item in arrows
+    ]
+    left = arrows[0]["geometry"]
+    right = arrows[1]["geometry"]
     if _arrowPointsDown(left) == _arrowPointsDown(right):
         # Dual-arrow badges encode opposite directions. If both detections
         # collapse to the same orientation (common with compressed tips),
-        # keep the right/red arrow and mirror the left/blue arrow.
+        # mirror the physically left arrow instead of assuming a fixed
+        # blue-left/red-right catalog layout.
         left = _flipArrowDirection(left)
     left, right = _normalizeDualArrowPairGeometry(left, right, h, width=w)
 
@@ -55,7 +68,32 @@ def detectDualArrowBadgeParamsFromImageImpl(
         "variant_name": "",
         "left": left,
         "right": right,
+        "left_color": str(arrows[0]["color"]),
+        "right_color": str(arrows[1]["color"]),
+        "left_color_name": str(arrows[0]["color_name"]),
+        "right_color_name": str(arrows[1]["color_name"]),
+        "mask_runs": mask_runs,
     }
+
+
+def _maskRowRuns(mask, *, np_module: Any) -> list[dict[str, int]]:
+    np = np_module
+    runs: list[dict[str, int]] = []
+    height = int(mask.shape[0])
+    for y in range(height):
+        xs = np.where(mask[y])[0]
+        if len(xs) == 0:
+            continue
+        start = prev = int(xs[0])
+        for raw_x in xs[1:]:
+            x = int(raw_x)
+            if x == prev + 1:
+                prev = x
+                continue
+            runs.append({"x": start, "y": y, "w": prev - start + 1})
+            start = prev = x
+        runs.append({"x": start, "y": y, "w": prev - start + 1})
+    return runs
 
 
 def _fitArrowFromMask(mask, *, np_module: Any) -> dict[str, float] | None:
@@ -199,6 +237,19 @@ def generateDualArrowBadgeSvgImpl(
     h: int,
     params: dict[str, Any],
 ) -> str:
+    if params.get("use_mask_runs") and params.get("mask_runs"):
+        lines = [
+            f'<svg width="{w}px" height="{h}px" viewBox="0 0 {w} {h}" xmlns="http://www.w3.org/2000/svg">'
+        ]
+        for group in params.get("mask_runs", []):
+            color = str(group.get("color", "#000000"))
+            for run in group.get("runs", []):
+                lines.append(
+                    f'  <rect x="{int(run["x"])}" y="{int(run["y"])}" width="{int(run["w"])}" height="1" fill="{color}"/>'
+                )
+        lines.append("</svg>\n")
+        return "\n".join(lines)
+
     left = dict(params.get("left", {}))
     right = dict(params.get("right", {}))
     left.setdefault("center_x", float(w) * 0.33)

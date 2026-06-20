@@ -58,3 +58,34 @@ def test_run_dual_arrow_badge_iteration_impl_records_render_failure_with_badge_p
             {"foo": "bar", "variant_name": "AR0101", "base_name": "AR0101"},
         )
     ]
+
+
+def test_run_dual_arrow_badge_iteration_impl_flags_high_render_error() -> None:
+    import numpy as np
+
+    logs: list[list[str]] = []
+    target = np.zeros((2, 2, 3), dtype=np.uint8)
+    rendered = np.full((2, 2, 3), 255, dtype=np.uint8)
+
+    result = dual_arrow_runtime_helpers.runDualArrowBadgeIterationImpl(
+        perc_img=target,
+        filename="ZZ_DUAL.jpg",
+        base_name="ZZ_DUAL",
+        description="desc",
+        params={"mode": "dual_arrow_badge"},
+        width=2,
+        height=2,
+        detect_dual_arrow_badge_params_fn=lambda _img: {"left": {}, "right": {}},
+        generate_dual_arrow_badge_svg_fn=lambda *_args, **_kwargs: "<svg dual-arrow/>",
+        render_embedded_raster_svg_fn=lambda: "<svg embedded/>",
+        write_validation_log_fn=logs.append,
+        render_svg_to_numpy_fn=lambda *_args, **_kwargs: rendered,
+        record_render_failure_fn=lambda *args, **kwargs: None,
+        write_attempt_artifacts_fn=lambda *_args, **_kwargs: None,
+        calculate_error_fn=lambda *_args, **_kwargs: 1.0,
+    )
+
+    assert result == ("ZZ_DUAL", "desc", {"mode": "dual_arrow_badge"}, 1, 1.0)
+    assert logs[0][0] == "status=dual_arrow_badge_quality_failed"
+    assert "normalized_mse=1.00000000" in logs[0]
+    assert any(line.startswith("quality_reason=normalized_mse_above_review_gate") for line in logs[0])
