@@ -26,7 +26,7 @@ def enforceCircleConnectorSymmetryImpl(params: dict, w: int, h: int) -> dict:
 
         vertical = abs(x2 - x1) <= abs(y2 - y1)
         if str(p.get("head_style", "")).lower() == "ac0223_triple_valve" and vertical:
-            # AC0223 requires a short vertical connector between the circle top
+            # Valve-head badges require a short vertical connector between the circle top
             # and the valve hub. Keep it centered and clamp it to the canvas
             # so iterative searches cannot stretch it to y=0.
             p["arm_x1"] = cx
