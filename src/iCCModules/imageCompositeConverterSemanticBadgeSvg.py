@@ -23,23 +23,64 @@ def generateBadgeSvgImpl(
     m_ymax: float,
 ) -> str:
     """Build a semantic badge SVG from quantized parameters."""
-    p = align_stem_to_circle_center_fn(dict(params))
-    variant_ref = " ".join(
-        str(p.get(key, ""))
-        for key in (
-            "variant_name",
-            "variant",
-            "badge_symbol_name",
-            "symbol_name",
-            "base_name",
-            "filename",
-            "name",
-        )
-    ).upper()
-    if "head_style" not in p and "AC0223" in variant_ref:
-        # Preserve sparse legacy valve-head params for historical callers while
-        # newer paths pass neutral head_style metadata directly.
-        p.setdefault("head_style", "ac0223_triple_valve")
+    variant_reference_keys = (
+        "variant_name",
+        "variant",
+        "badge_symbol_name",
+        "symbol_name",
+        "base_name",
+        "filename",
+        "name",
+    )
+
+    def _references_ac0223(source: dict) -> bool:
+        variant_ref = " ".join(str(source.get(key, "")) for key in variant_reference_keys).upper()
+        return "AC0223" in variant_ref
+
+    source_references_ac0223 = _references_ac0223(params)
+
+    def _restore_ac0223_valve_head_defaults(target: dict) -> dict:
+        if "head_style" not in target and source_references_ac0223:
+            # Preserve sparse legacy valve-head params for historical callers
+            # while newer paths pass neutral head_style metadata directly. The
+            # original params are consulted too because align/quantize callbacks
+            # can return geometry-only dicts that drop variant_name/filename.
+            target.setdefault("head_style", "ac0223_triple_valve")
+
+        valve_head_requested = str(target.get("head_style", "")).lower() == "ac0223_triple_valve"
+        if not valve_head_requested:
+            return target
+
+        # Valve-head badges must retain their dedicated head geometry even when
+        # late optimization/fallback paths pass sparse circle-only params. The
+        # decision is driven by neutral style metadata instead of catalog ids.
+        sy = float(h) / 75.0 if h > 0 else 1.0
+        centered_cx = float(w) / 2.0 if w > 0 else float(target.get("cx", 0.0))
+        target["cx"] = centered_cx
+        head_base_y = 39.922279 * sy
+        hub_y = float(target.get("head_hub_cy", 25.153 * sy))
+        hub_y = max(0.0, min(head_base_y, hub_y))
+        circle_top = float(target.get("cy", head_base_y)) - float(target.get("r", 0.0))
+        target.setdefault("head_gradient_dark", "#b2b2b3")
+        target.setdefault("head_gradient_light", "#d9d9d9")
+        target.setdefault("head_stroke", "#808080")
+        target.setdefault("head_hub_fill", "#7f7f7f")
+        target.setdefault("arm_color", "#136fad")
+        target["arm_stroke"] = 1.0
+        target["arm_enabled"] = True
+        target["head_hub_cy"] = hub_y
+        target["arm_x1"] = centered_cx
+        target["arm_x2"] = centered_cx
+        target["arm_y2"] = hub_y
+        target["arm_y1"] = max(hub_y, min(head_base_y, circle_top))
+        handle_style = str(target.get("ac0223_handle_style", "circle")).lower()
+        target["ac0223_handle_style"] = handle_style
+        if handle_style == "square_diagonals":
+            square_top = 41.518044 * sy
+            target["arm_y1"] = max(hub_y, min(float(h), square_top))
+        return target
+
+    p = _restore_ac0223_valve_head_defaults(align_stem_to_circle_center_fn(dict(params)))
     connector_policy = str(p.get("connector_policy", "")).lower()
     connector_suppression_requested = bool(p.get("suppress_stale_connector_geometry", False))
     if connector_policy == "forbid" or connector_suppression_requested:
@@ -63,37 +104,8 @@ def generateBadgeSvgImpl(
             "stem_gray",
         ):
             p.pop(connector_key, None)
-    valve_head_requested = str(p.get("head_style", "")).lower() == "ac0223_triple_valve"
-    if valve_head_requested:
-        # Valve-head badges must retain their dedicated head geometry even when
-        # late optimization/fallback paths pass sparse circle-only params. The
-        # decision is driven by neutral style metadata instead of catalog ids.
-        sy = float(h) / 75.0 if h > 0 else 1.0
-        centered_cx = float(w) / 2.0 if w > 0 else float(p.get("cx", 0.0))
-        p["cx"] = centered_cx
-        head_base_y = 39.922279 * sy
-        hub_y = float(p.get("head_hub_cy", 25.153 * sy))
-        hub_y = max(0.0, min(head_base_y, hub_y))
-        circle_top = float(p.get("cy", head_base_y)) - float(p.get("r", 0.0))
-        p.setdefault("head_gradient_dark", "#b2b2b3")
-        p.setdefault("head_gradient_light", "#d9d9d9")
-        p.setdefault("head_stroke", "#808080")
-        p.setdefault("head_hub_fill", "#7f7f7f")
-        p.setdefault("arm_color", "#136fad")
-        p["arm_stroke"] = 1.0
-        p["arm_enabled"] = True
-        p["head_hub_cy"] = hub_y
-        p["arm_x1"] = centered_cx
-        p["arm_x2"] = centered_cx
-        p["arm_y2"] = hub_y
-        p["arm_y1"] = max(hub_y, min(head_base_y, circle_top))
-        handle_style = str(p.get("ac0223_handle_style", "circle")).lower()
-        p["ac0223_handle_style"] = handle_style
-        if handle_style == "square_diagonals":
-            square_top = 41.518044 * sy
-            p["arm_y1"] = max(hub_y, min(float(h), square_top))
 
-    p = quantize_badge_params_fn(p, w, h)
+    p = _restore_ac0223_valve_head_defaults(quantize_badge_params_fn(p, w, h))
     # Some optimization probes pass sparse circle-only parameter dicts.
     # Ensure required grayscale/stroke defaults exist so SVG generation
     # remains robust for adaptive search paths.
