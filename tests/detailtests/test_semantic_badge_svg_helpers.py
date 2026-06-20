@@ -151,3 +151,36 @@ def test_generate_badge_svg_impl_renders_rf_text() -> None:
     )
 
     assert ">rF</text>" in svg
+
+
+def test_generate_badge_svg_impl_restores_valve_head_from_neutral_style_metadata() -> None:
+    svg = semantic_badge_svg_helpers.generateBadgeSvgImpl(
+        50,
+        75,
+        {
+            "badge_symbol_name": "ZZ_NEUTRAL_VALVE_HEAD",
+            "head_style": "ac0223_triple_valve",
+            "cx": 20.0,
+            "cy": 45.0,
+            "r": 10.0,
+            "stroke_circle": 1.0,
+            "fill_gray": 220,
+            "stroke_gray": 152,
+            "draw_text": False,
+        },
+        align_stem_to_circle_center_fn=lambda p: dict(p),
+        quantize_badge_params_fn=lambda p, _w, _h: dict(p),
+        clip_scalar_fn=lambda value, lower, upper: min(max(value, lower), upper),
+        grayhex_fn=lambda _value: "#808080",
+        co2_layout_fn=lambda _p: {},
+        t_path_d="T",
+        t_xmin=0.0,
+        t_ymax=0.0,
+        m_path_d="M",
+        m_xmin=0.0,
+        m_ymax=0.0,
+    )
+
+    assert "ac0223ValveGradient" in svg
+    assert 'fill="url(#ac0223ValveGradient)"' in svg
+    assert '<line x1="25.0000"' in svg
