@@ -24,7 +24,6 @@ def generateBadgeSvgImpl(
 ) -> str:
     """Build a semantic badge SVG from quantized parameters."""
     p = align_stem_to_circle_center_fn(dict(params))
-    variant_ref = str(p.get("variant_name") or p.get("badge_symbol_name") or p.get("base_name", "")).upper()
     connector_policy = str(p.get("connector_policy", "")).lower()
     connector_suppression_requested = bool(p.get("suppress_stale_connector_geometry", False))
     if connector_policy == "forbid" or connector_suppression_requested:
@@ -48,10 +47,11 @@ def generateBadgeSvgImpl(
             "stem_gray",
         ):
             p.pop(connector_key, None)
-    if variant_ref.startswith("AC0223"):
-        # AC0223 must always retain its valve-head geometry. Some late-stage
-        # optimization/fallback paths can strip the dedicated styling keys;
-        # restore safe defaults so the output remains semantically correct.
+    valve_head_requested = str(p.get("head_style", "")).lower() == "ac0223_triple_valve"
+    if valve_head_requested:
+        # Valve-head badges must retain their dedicated head geometry even when
+        # late optimization/fallback paths pass sparse circle-only params. The
+        # decision is driven by neutral style metadata instead of catalog ids.
         sy = float(h) / 75.0 if h > 0 else 1.0
         centered_cx = float(w) / 2.0 if w > 0 else float(p.get("cx", 0.0))
         p["cx"] = centered_cx
@@ -59,7 +59,6 @@ def generateBadgeSvgImpl(
         hub_y = float(p.get("head_hub_cy", 25.153 * sy))
         hub_y = max(0.0, min(head_base_y, hub_y))
         circle_top = float(p.get("cy", head_base_y)) - float(p.get("r", 0.0))
-        p.setdefault("head_style", "ac0223_triple_valve")
         p.setdefault("head_gradient_dark", "#b2b2b3")
         p.setdefault("head_gradient_light", "#d9d9d9")
         p.setdefault("head_stroke", "#808080")
@@ -72,9 +71,9 @@ def generateBadgeSvgImpl(
         p["arm_x2"] = centered_cx
         p["arm_y2"] = hub_y
         p["arm_y1"] = max(hub_y, min(head_base_y, circle_top))
-        is_sia = "_SIA" in variant_ref
-        p["ac0223_handle_style"] = "square_diagonals" if is_sia else "circle"
-        if is_sia:
+        handle_style = str(p.get("ac0223_handle_style", "circle")).lower()
+        p["ac0223_handle_style"] = handle_style
+        if handle_style == "square_diagonals":
             square_top = 41.518044 * sy
             p["arm_y1"] = max(hub_y, min(float(h), square_top))
 
