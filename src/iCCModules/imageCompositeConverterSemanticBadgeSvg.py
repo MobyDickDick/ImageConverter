@@ -24,11 +24,21 @@ def generateBadgeSvgImpl(
 ) -> str:
     """Build a semantic badge SVG from quantized parameters."""
     p = align_stem_to_circle_center_fn(dict(params))
-    variant_ref = str(p.get("variant_name") or p.get("badge_symbol_name") or p.get("base_name", "")).upper()
-    if "head_style" not in p and variant_ref.startswith("AC0223"):
-        # Compatibility path for sparse legacy valve-head params. Prefer the
-        # neutral head_style metadata when present, but restore safe style
-        # defaults for historical callers that still only provide a variant.
+    variant_ref = " ".join(
+        str(p.get(key, ""))
+        for key in (
+            "variant_name",
+            "variant",
+            "badge_symbol_name",
+            "symbol_name",
+            "base_name",
+            "filename",
+            "name",
+        )
+    ).upper()
+    if "head_style" not in p and "AC0223" in variant_ref:
+        # Preserve sparse legacy valve-head params for historical callers while
+        # newer paths pass neutral head_style metadata directly.
         p.setdefault("head_style", "ac0223_triple_valve")
     connector_policy = str(p.get("connector_policy", "")).lower()
     connector_suppression_requested = bool(p.get("suppress_stale_connector_geometry", False))
