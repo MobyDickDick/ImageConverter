@@ -631,6 +631,16 @@ def test_try_load_sample_svg_does_not_fallback_to_standalone_size_suffix_file(tm
 
     assert sample is None
 
+def test_try_load_sample_svg_ignores_repo_samples_for_bare_img_path(monkeypatch) -> None:
+    monkeypatch.delenv("IMAGE_CONVERTER_SAMPLE_SVG_DIRS", raising=False)
+
+    sample = non_composite_runtime_helpers._try_load_sample_svg(
+        img_path="input.jpg",
+        base_name="AC0120_L",
+    )
+
+    assert sample is None
+
 def test_run_non_composite_iteration_impl_rejects_sample_without_sufficient_gain(tmp_path) -> None:
     logs: list[list[str]] = []
     artifacts: list[tuple[str, object]] = []
