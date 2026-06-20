@@ -86,7 +86,7 @@ def stabilizeSemanticCirclePoseImpl(params: dict, defaults: dict, w: int, h: int
 
 
 def enforceDirectionalCircleSideImpl(params: dict, defaults: dict, w: int, h: int) -> dict:
-    """Keep circle on the expected side of directional connectors (generic AC08 guardrail)."""
+    """Keep circle on the expected side of directional connectors."""
     if not params.get("arm_enabled"):
         return params
     if "cx" not in defaults or "cy" not in defaults or "r" not in defaults:
@@ -163,7 +163,7 @@ def fitAc0870ParamsFromImageImpl(
         params["r"] = float(c[2])
 
     if min_side <= 15.5:
-        # Tiny AC0870 badges are heavily anti-aliased; Hough frequently snaps to
+        # Tiny text badges are heavily anti-aliased; Hough frequently snaps to
         # the dark T glyph instead of the outer ring.  Keep the dominant
         # circle/text seed on the optical badge center and use the template-scale
         # radius so validation starts from the documented centered T badge.
