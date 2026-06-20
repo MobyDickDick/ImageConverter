@@ -1,3 +1,4 @@
+- IDO-17 Run RE removes three documentation-only catalog tokens from semantic badge defaults/fitting and ratchets the legacy runtime-ID baseline to 302 occurrences.
 - IDO-17 Run QZ removes the remaining vertical VOC badge CY guardrail from catalog-ID dispatch; element validation now uses text/connector/template geometry signals and the runtime-ID ratchet drops to 322 legacy occurrences.
 # Changelog
 - The complete core test suite was revalidated with 765 passing tests, and its full pytest output is now versioned as a GitHub review artifact.
