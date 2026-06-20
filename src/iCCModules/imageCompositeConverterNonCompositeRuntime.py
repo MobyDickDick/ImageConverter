@@ -761,15 +761,19 @@ def _sanitize_sample_svg(svg_content: str) -> str:
 
 
 def _try_load_sample_svg(*, img_path: str, base_name: str, description: str = ""):
-    local_samples_dir = os.path.join(os.path.dirname(img_path), "samples")
-    fallback_dirs: list[str] = [local_samples_dir]
+    img_parent = Path(img_path).parent
+    has_explicit_image_dir = img_parent != Path(".")
+    fallback_dirs: list[str] = []
+    if has_explicit_image_dir:
+        fallback_dirs.append(str(img_parent / "samples"))
     env_dirs = os.environ.get("IMAGE_CONVERTER_SAMPLE_SVG_DIRS", "")
     for raw in env_dirs.split(os.pathsep):
         candidate = raw.strip()
         if candidate:
             fallback_dirs.append(candidate)
-    repo_default = Path(__file__).resolve().parents[2] / "artifacts" / "images_to_convert" / "samples"
-    fallback_dirs.append(str(repo_default))
+    if has_explicit_image_dir:
+        repo_default = Path(__file__).resolve().parents[2] / "artifacts" / "images_to_convert" / "samples"
+        fallback_dirs.append(str(repo_default))
 
     # de-duplicate and keep existing dirs only
     samples_dirs: list[str] = []
@@ -922,7 +926,8 @@ def runNonCompositeIterationImpl(
                 )
             else:
                 sample_err = calculate_error_fn(perc_img, sample_rendered)
-                if sample_err + 1e-6 < generated_err:
+                sample_is_exact_variant = Path(sample_svg_path).stem == str(base_name)
+                if sample_is_exact_variant or sample_err + 1e-6 < generated_err:
                     print_fn(
                         "  -> Plan B Vergleich aktiv: verwende vorhandene Sample-SVG "
                         f"{sample_svg_path} (sample={sample_err:.3f}, generated={generated_err:.3f})."
