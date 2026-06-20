@@ -47,37 +47,8 @@ def generateBadgeSvgImpl(
             "stem_gray",
         ):
             p.pop(connector_key, None)
-    valve_head_requested = str(p.get("head_style", "")).lower() == "ac0223_triple_valve"
-    if valve_head_requested:
-        # Valve-head badges must retain their dedicated head geometry even when
-        # late optimization/fallback paths pass sparse circle-only params. The
-        # decision is driven by neutral style metadata instead of catalog ids.
-        sy = float(h) / 75.0 if h > 0 else 1.0
-        centered_cx = float(w) / 2.0 if w > 0 else float(p.get("cx", 0.0))
-        p["cx"] = centered_cx
-        head_base_y = 39.922279 * sy
-        hub_y = float(p.get("head_hub_cy", 25.153 * sy))
-        hub_y = max(0.0, min(head_base_y, hub_y))
-        circle_top = float(p.get("cy", head_base_y)) - float(p.get("r", 0.0))
-        p.setdefault("head_gradient_dark", "#b2b2b3")
-        p.setdefault("head_gradient_light", "#d9d9d9")
-        p.setdefault("head_stroke", "#808080")
-        p.setdefault("head_hub_fill", "#7f7f7f")
-        p.setdefault("arm_color", "#136fad")
-        p["arm_stroke"] = 1.0
-        p["arm_enabled"] = True
-        p["head_hub_cy"] = hub_y
-        p["arm_x1"] = centered_cx
-        p["arm_x2"] = centered_cx
-        p["arm_y2"] = hub_y
-        p["arm_y1"] = max(hub_y, min(head_base_y, circle_top))
-        handle_style = str(p.get("ac0223_handle_style", "circle")).lower()
-        p["ac0223_handle_style"] = handle_style
-        if handle_style == "square_diagonals":
-            square_top = 41.518044 * sy
-            p["arm_y1"] = max(hub_y, min(float(h), square_top))
 
-    p = quantize_badge_params_fn(p, w, h)
+    p = _restore_ac0223_valve_head_defaults(quantize_badge_params_fn(p, w, h))
     # Some optimization probes pass sparse circle-only parameter dicts.
     # Ensure required grayscale/stroke defaults exist so SVG generation
     # remains robust for adaptive search paths.
@@ -89,7 +60,7 @@ def generateBadgeSvgImpl(
     defs: list[str] = []
 
     if str(p.get("head_style", "")).lower() == "ac0223_triple_valve":
-        defs.append("  <linearGradient id=\"ac0223ValveGradient\" x1=\"1\" y1=\"0\" x2=\"0\" y2=\"1\">")
+        defs.append("  <linearGradient id=\"valveHeadGradient\" x1=\"1\" y1=\"0\" x2=\"0\" y2=\"1\">")
         defs.append(f'    <stop offset="0%" stop-color="{str(p.get("head_gradient_dark", "#b2b2b3"))}"/>')
         defs.append(f'    <stop offset="100%" stop-color="{str(p.get("head_gradient_light", "#d9d9d9"))}"/>')
         defs.append("  </linearGradient>")
@@ -205,12 +176,12 @@ def generateBadgeSvgImpl(
             'A 2.5 2.500001 0 0 0 22.748047 23.722656 L 2.0195312 13.308594 L 2.1113281 36.294922 '
             'L 22.75 25.882812 A 2.5 2.500001 0 0 0 25 27.300781 A 2.5 2.500001 0 0 0 27.207031 25.962891 '
             'L 47.78125 36.294922 L 47.873047 13.308594 L 27.212891 23.640625 A 2.5 2.500001 0 0 0 26.580078 '
-            '22.863281 L 36.492188 3.0410156 z" fill="url(#ac0223ValveGradient)" stroke="none"/>'
+            '22.863281 L 36.492188 3.0410156 z" fill="url(#valveHeadGradient)" stroke="none"/>'
         )
         elements.append(
             f'    <polygon points="36.492188,2.6959677 25,25 47.87305,12.963546 47.78125,35.949874 25,25 '
             f'2.1132824,35.949874 2.0195324,12.963546 25,25 13.50586,2.7897177" '
-            f'fill="url(#ac0223ValveGradient)" stroke="{head_stroke}" stroke-width="1"/>'
+            f'fill="url(#valveHeadGradient)" stroke="{head_stroke}" stroke-width="1"/>'
         )
         elements.append(f'    <ellipse cx="25" cy="25.153" rx="2.5" ry="2.500001" fill="{head_hub_fill}" stroke="{head_stroke}" stroke-width="1"/>')
         elements.append("  </g>")

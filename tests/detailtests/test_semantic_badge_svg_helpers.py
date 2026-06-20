@@ -181,6 +181,128 @@ def test_generate_badge_svg_impl_restores_valve_head_from_neutral_style_metadata
         m_ymax=0.0,
     )
 
-    assert "ac0223ValveGradient" in svg
-    assert 'fill="url(#ac0223ValveGradient)"' in svg
+    assert "valveHeadGradient" in svg
+    assert 'fill="url(#valveHeadGradient)"' in svg
     assert '<line x1="25.0000"' in svg
+
+
+def test_generate_badge_svg_restores_ac0223_head_when_style_keys_missing() -> None:
+    svg = semantic_badge_svg_helpers.generateBadgeSvgImpl(
+        50,
+        75,
+        {
+            "variant_name": "AC0223_L",
+            "cx": 20.0,
+            "cy": 45.0,
+            "r": 10.0,
+            "stroke_circle": 1.0,
+            "fill_gray": 220,
+            "stroke_gray": 152,
+            "draw_text": False,
+        },
+        align_stem_to_circle_center_fn=lambda p: dict(p),
+        quantize_badge_params_fn=lambda p, _w, _h: dict(p),
+        clip_scalar_fn=lambda value, lower, upper: min(max(value, lower), upper),
+        grayhex_fn=lambda _value: "#808080",
+        co2_layout_fn=lambda _p: {},
+        t_path_d="T",
+        t_xmin=0.0,
+        t_ymax=0.0,
+        m_path_d="M",
+        m_xmin=0.0,
+        m_ymax=0.0,
+    )
+
+    assert "valveHeadGradient" in svg
+    assert '<line x1="25.0000"' in svg
+    assert 'stroke="#136fad"' in svg
+    assert svg.index("<line") < svg.index("<circle")
+
+
+def test_generate_badge_svg_restores_ac0223_head_from_filename_reference() -> None:
+    svg = semantic_badge_svg_helpers.generateBadgeSvgImpl(
+        50,
+        75,
+        {
+            "filename": "Failed_AC0223_L.svg",
+            "cx": 25.0,
+            "cy": 57.0,
+            "r": 16.5,
+            "stroke_circle": 3.0,
+            "fill_gray": 235,
+            "stroke_gray": 88,
+            "draw_text": False,
+        },
+        align_stem_to_circle_center_fn=lambda p: dict(p),
+        quantize_badge_params_fn=lambda p, _w, _h: dict(p),
+        clip_scalar_fn=lambda value, lower, upper: min(max(value, lower), upper),
+        grayhex_fn=lambda value: f"#{int(value):02x}{int(value):02x}{int(value):02x}",
+        co2_layout_fn=lambda _p: {},
+        t_path_d="T",
+        t_xmin=0.0,
+        t_ymax=0.0,
+        m_path_d="M",
+        m_xmin=0.0,
+        m_ymax=0.0,
+    )
+
+    assert "valveHeadGradient" in svg
+    assert '<line x1="25.0000"' in svg
+    assert '<circle cx="25.0000" cy="57.0000" r="16.5000"' in svg
+
+
+def test_generate_badge_svg_restores_ac0223_head_after_metadata_stripped() -> None:
+    def _strip_metadata(p: dict) -> dict:
+        return {
+            key: value
+            for key, value in p.items()
+            if key
+            not in {
+                "variant_name",
+                "head_style",
+                "head_gradient_dark",
+                "head_gradient_light",
+                "head_stroke",
+                "head_hub_fill",
+                "arm_color",
+                "arm_stroke",
+                "arm_enabled",
+                "head_hub_cy",
+                "arm_x1",
+                "arm_x2",
+                "arm_y1",
+                "arm_y2",
+                "ac0223_handle_style",
+            }
+        }
+
+    svg = semantic_badge_svg_helpers.generateBadgeSvgImpl(
+        50,
+        75,
+        {
+            "variant_name": "AC0223_L",
+            "cx": 25.0,
+            "cy": 57.0,
+            "r": 16.5,
+            "stroke_circle": 3.0,
+            "fill_gray": 235,
+            "stroke_gray": 88,
+            "draw_text": False,
+        },
+        align_stem_to_circle_center_fn=_strip_metadata,
+        quantize_badge_params_fn=lambda p, _w, _h: _strip_metadata(p),
+        clip_scalar_fn=lambda value, lower, upper: min(max(value, lower), upper),
+        grayhex_fn=lambda value: f"#{int(value):02x}{int(value):02x}{int(value):02x}",
+        co2_layout_fn=lambda _p: {},
+        t_path_d="T",
+        t_xmin=0.0,
+        t_ymax=0.0,
+        m_path_d="M",
+        m_xmin=0.0,
+        m_ymax=0.0,
+    )
+
+    assert "valveHeadGradient" in svg
+    assert '<line x1="25.0000"' in svg
+    assert 'stroke="#136fad"' in svg
+    assert svg.index("<line") < svg.index("<circle")

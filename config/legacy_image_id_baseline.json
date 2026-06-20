@@ -41,12 +41,6 @@
       "AC0100": 1,
       "AC0224": 1
     },
-    "src/iCCModules/imageCompositeConverterOptimizationCircleGeometry.py": {
-      "AC0223": 1
-    },
-    "src/iCCModules/imageCompositeConverterOptimizationQuantization.py": {
-      "AC0223": 1
-    },
     "src/iCCModules/imageCompositeConverterPerceptionReflection.py": {
       "AC0030": 3,
       "AR0100": 1
@@ -107,25 +101,20 @@
     },
     "src/iCCModules/imageCompositeConverterSemanticAc08Families.py": {
       "AC0810": 1,
-      "AC0811": 3,
+      "AC0811": 1,
       "AC0812": 1,
-      "AC0813": 3,
+      "AC0813": 1,
       "AC0814": 1,
       "AC0820": 3,
-      "AC0831": 2,
       "AC0832": 1,
-      "AC0833": 2,
       "AC0834": 1,
       "AC0835": 1,
-      "AC0836": 2,
       "AC0837": 1,
-      "AC0838": 2,
       "AC0839": 1,
       "AC0842": 1,
       "AC0850": 1,
       "AC0862": 1,
       "AC0870": 1,
-      "AC0881": 2,
       "AC0882": 1
     },
     "src/iCCModules/imageCompositeConverterSemanticAc08Finalization.py": {
@@ -182,13 +171,8 @@
       "AC0838": 3,
       "AC0839": 1
     },
-    "src/iCCModules/imageCompositeConverterSemanticDefaults.py": {
-      "AC0870": 1,
-      "AR0100": 1
-    },
     "src/iCCModules/imageCompositeConverterSemanticFitting.py": {
-      "AC0838": 1,
-      "AC0870": 1
+      "AC0838": 1
     },
     "src/iCCModules/imageCompositeConverterSemanticGeometry.py": {
       "AC0800": 1
