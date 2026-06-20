@@ -11,7 +11,7 @@ Run the converter via:
 python -m src.imageCompositeConverter
 ```
 
-The detailed CLI reference lives in [docs/image_converter_cli.md](docs/image_converter_cli.md).
+The detailed CLI reference lives in [docs/image_converter_cli.md](docs/image_converter_cli.md), and all repository documentation is reachable via [docs/README.md](docs/README.md).
 The recommended local verification workflow lives in
 [docs/image_converter_workflow.md](docs/image_converter_workflow.md).
 
@@ -19,6 +19,7 @@ The recommended local verification workflow lives in
 
 - `src/imageCompositeConverter.py` — converter implementation and CLI.
 - `tests/test_imageCompositeConverter.py` — regression tests for the converter.
+- `docs/README.md` — vollständiger Dokumentationsindex.
 - `docs/image_converter_cli.md` — command reference.
 - `docs/image_converter_workflow.md` — local verification workflow.
 - `docs/ac08_improvement_plan.md` — AC08 improvement backlog/history.
