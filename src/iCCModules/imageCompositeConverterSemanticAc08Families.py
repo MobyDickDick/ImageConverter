@@ -265,19 +265,24 @@ def tuneAc08VerticalConnectorFamilyImpl(
     is_ac08_small_variant_fn,
     enforce_vertical_connector_badge_geometry_fn,
 ) -> dict:
-    """Apply shared guardrails for AC08 families with vertical connectors."""
+    """Apply shared guardrails for badge families with vertical connectors."""
     p = dict(params)
-    symbol_name = get_base_name_from_file_fn(str(name)).upper().split("_", 1)[0]
-    if symbol_name not in {"AC0811", "AC0813", "AC0831", "AC0833", "AC0836", "AC0838", "AC0881"}:
+    direction = str(p.get("connector_direction", p.get("connector_family_direction", ""))).lower()
+    has_stem = bool(p.get("stem_enabled", False))
+    has_arm = bool(p.get("arm_enabled", False))
+    vertical_evidence = direction in {"vertical", "top", "bottom", "up", "down"} or has_stem or has_arm
+    if not vertical_evidence:
         return p
 
-    p["connector_family_group"] = "ac08_vertical_connector"
+    p["connector_family_group"] = "vertical_connector_badge"
     p["connector_family_direction"] = "vertical"
-    if symbol_name in {"AC0811", "AC0831", "AC0836", "AC0881"}:
+
+    if direction in {"bottom", "down"}:
         p["stem_enabled"] = True
         p.pop("arm_enabled", None)
-    elif symbol_name in {"AC0813", "AC0833", "AC0838"}:
+    elif direction in {"top", "up"}:
         p["arm_enabled"] = True
+
     p["lock_circle_cx"] = True
     p["lock_circle_cy"] = True
     p["lock_stem_center_to_circle"] = bool(p.get("stem_enabled", False))
@@ -327,7 +332,6 @@ def tuneAc08VerticalConnectorFamilyImpl(
         p["voc_font_scale_min"] = float(max(float(p.get("voc_font_scale_min", base_scale)), max(0.50, base_scale * 0.94)))
         p["voc_font_scale_max"] = float(min(float(p.get("voc_font_scale_max", 0.98)), min(0.98, base_scale * 1.14)))
     return p
-
 
 def tuneAc08CircleTextFamilyImpl(
     name: str,

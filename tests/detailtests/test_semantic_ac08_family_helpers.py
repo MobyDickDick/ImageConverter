@@ -71,8 +71,9 @@ def test_tune_vertical_connector_family_sets_text_and_stem_defaults():
         return patched
 
     tuned = helpers.tuneAc08VerticalConnectorFamilyImpl(
-        "AC0831_S",
+        "NEUTRAL_VERTICAL_BADGE",
         {
+            "connector_direction": "bottom",
             "template_circle_cx": 8,
             "template_circle_cy": 8,
             "template_circle_radius": 7,
@@ -84,6 +85,7 @@ def test_tune_vertical_connector_family_sets_text_and_stem_defaults():
         enforce_vertical_connector_badge_geometry_fn=_enforce_vertical,
     )
 
+    assert tuned["connector_family_group"] == "vertical_connector_badge"
     assert tuned["connector_family_direction"] == "vertical"
     assert tuned["stem_enabled"] is True
     assert tuned["lock_stem_center_to_circle"] is True
@@ -92,15 +94,16 @@ def test_tune_vertical_connector_family_sets_text_and_stem_defaults():
     assert tuned["co2_font_scale_min"] >= 0.78
 
 
-def test_tune_vertical_connector_family_treats_ac0838_as_top_arm_variant():
+def test_tune_vertical_connector_family_treats_top_direction_as_arm_variant():
     def _enforce_vertical(params: dict, _w: int, _h: int):
         patched = dict(params)
         patched["geometry_enforced"] = True
         return patched
 
     tuned = helpers.tuneAc08VerticalConnectorFamilyImpl(
-        "AC0838_M",
+        "NEUTRAL_TOP_VOC_BADGE",
         {
+            "connector_direction": "top",
             "template_circle_cx": 8,
             "template_circle_cy": 8,
             "template_circle_radius": 7,
