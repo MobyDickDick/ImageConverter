@@ -15,12 +15,14 @@ Migration weiterhin sicher gerendert werden.
 ## 2) Umsetzung
 
 - `generateBadgeSvgImpl(...)` behält eine eng begrenzte Legacy-Kompatibilität:
-  Wenn `head_style` fehlt und eine historische Valve-Head-Variant-Referenz
-  anliegt, wird `head_style=ac0223_triple_valve` nachgesetzt.
+  Wenn `head_style` fehlt und eine historische Valve-Head-Referenz
+  (z. B. Variant-, Symbol-, Base- oder Dateiname) anliegt, wird
+  `head_style=ac0223_triple_valve` nachgesetzt.
 - Die Valve-Head-Geometrie selbst bleibt weiterhin am neutralen Metadatum
   `head_style=ac0223_triple_valve` gekoppelt.
-- Ein Detailtest sichert den Legacy-Fall mit fehlenden Style-Keys und prüft
-  Gradient, Connector-Farbe sowie die Reihenfolge Connector vor Kreis.
+- Detailtests sichern Legacy-Fälle mit fehlenden Style-Keys und prüfen
+  Gradient, Connector-Farbe, Dateiname-Erkennung sowie die Reihenfolge Connector
+  vor Kreis.
 - Zwei Kommentare in Optimierungs-/Quantisierungspfaden wurden auf neutrale
   Valve-Head-Beschreibungen umgestellt, damit der Runtime-ID-Ratchet diese
   Vorkommen abbaut.
@@ -31,7 +33,7 @@ Migration weiterhin sicher gerendert werden.
 - `python -m compileall -q src tests/detailtests/test_semantic_badge_svg_helpers.py`
   → Exit `0`.
 - `pytest -q tests/detailtests/test_semantic_badge_svg_helpers.py tests/test_image_composite_converter.py::test_make_badge_params_supports_ac0223_valve_head tests/test_image_composite_converter.py::test_generate_badge_svg_renders_ac0223_valve_head_gradient tests/test_image_composite_converter.py::test_quantize_badge_params_keeps_ac0223_top_stem_span`
-  → `10 passed`.
+  → `11 passed`.
 - `python tools/check_no_new_image_id_hardcoding.py`
   → `PASS: no image-ID hardcoding above legacy baseline (305 legacy occurrences remain).`
 
