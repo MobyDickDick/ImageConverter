@@ -31,7 +31,7 @@ aber nicht mehr über einen konkreten Katalog-Symbolnamen erfolgen.
 - `pytest -q tests/detailtests/test_semantic_badge_svg_helpers.py`
   → `6 passed`.
 - `python tools/check_no_new_image_id_hardcoding.py`
-  → `PASS: no image-ID hardcoding above legacy baseline (306 legacy occurrences remain).`
+  → `PASS: no image-ID hardcoding above legacy baseline (307 legacy occurrences remain).`
 - `PYTHONPATH=vendor/linux-py310/site-packages:. python tools/review_conversion_quality.py`
   → `diff_renderable_pairs=630`, `successful_renderable_pairs=48`, `selected=GE9002_7S,GE9002_5S,GE9002_3S,GE9002_4M,GE9002_1S`.
 
@@ -39,7 +39,7 @@ aber nicht mehr über einen konkreten Katalog-Symbolnamen erfolgen.
 
 IDO-17 baut die Legacy-Baseline weiter ab: Der Badge-SVG-Pfad stellt
 Valve-Head-Geometrie nicht mehr anhand einer konkreten Runtime-Katalog-ID wieder
-her; der Ratchet sinkt von 308 auf 306 Runtime-ID-Vorkommen.
+her; der Ratchet sinkt von 308 auf 307 Runtime-ID-Vorkommen.
 
 ## 5) Nächster Schritt
 
