@@ -368,6 +368,7 @@ Alle Markdown-Dokumente unter `docs/`, damit sie von `README.md` aus erreichbar 
 - [Nächstes Arbeitspaket – IDO-17 Elementvalidierungs-Diagnostik-De-ID Run RB (2026-06-19)](next_arbeitspaket_2026-06-19_runRB.md)
 - [Nächstes Arbeitspaket – Conversion-Qualitätsranking und Plan-B-Triage Run RC (2026-06-19)](next_arbeitspaket_2026-06-19_runRC.md)
 - [Nächstes Arbeitspaket – IDO-17 Geometry-IR-Self-Reference-De-ID Run RC (2026-06-20)](next_arbeitspaket_2026-06-20_runRC.md)
+- [Nächstes Arbeitspaket – IDO-17 Connector-Free-Badge-SVG-De-ID Run RD (2026-06-20)](next_arbeitspaket_2026-06-20_runRD.md)
 - [Nächste dokumentierte Aufgabe – Run HK (2026-05-21)](next_aufgabe_2026-05-21_runHK.md)
 - [Nächste dokumentierte Aufgabe – Run HL (2026-05-21)](next_aufgabe_2026-05-21_runHL.md)
 - [Nächste dokumentierte Aufgabe – Run HM (2026-05-21)](next_aufgabe_2026-05-21_runHM.md)

@@ -25,13 +25,13 @@ def generateBadgeSvgImpl(
     """Build a semantic badge SVG from quantized parameters."""
     p = align_stem_to_circle_center_fn(dict(params))
     variant_ref = str(p.get("variant_name") or p.get("badge_symbol_name") or p.get("base_name", "")).upper()
-    connector_free_circle_text_symbols = {"AC0820", "AC0835", "AC0850", "AC0870"}
-    connector_free_symbol = variant_ref.split("_", 1)[0]
-    if connector_free_symbol in connector_free_circle_text_symbols:
-        # Connector-free AC08 circle/text badges must not inherit stale arm/stem
-        # geometry from optimization probes or family-template transfer.  The
-        # connected follow-up families (for example AC0836/AC0861) use their own
-        # symbol ids and therefore keep explicit connector geometry.
+    connector_policy = str(p.get("connector_policy", "")).lower()
+    connector_suppression_requested = bool(p.get("suppress_stale_connector_geometry", False))
+    if connector_policy == "forbid" or connector_suppression_requested:
+        # Connector-free circle/text badges must not inherit stale arm/stem
+        # geometry from optimization probes or template transfer. The decision is
+        # driven by neutral geometry metadata so connected follow-up badges keep
+        # explicit connector geometry without consulting catalog symbol ids.
         for connector_key in (
             "arm_enabled",
             "arm_x1",
