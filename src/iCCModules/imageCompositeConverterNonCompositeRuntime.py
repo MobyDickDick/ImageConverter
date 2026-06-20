@@ -922,7 +922,8 @@ def runNonCompositeIterationImpl(
                 )
             else:
                 sample_err = calculate_error_fn(perc_img, sample_rendered)
-                if sample_err + 1e-6 < generated_err:
+                sample_is_exact_variant = Path(sample_svg_path).stem == str(base_name)
+                if sample_is_exact_variant or sample_err + 1e-6 < generated_err:
                     print_fn(
                         "  -> Plan B Vergleich aktiv: verwende vorhandene Sample-SVG "
                         f"{sample_svg_path} (sample={sample_err:.3f}, generated={generated_err:.3f})."

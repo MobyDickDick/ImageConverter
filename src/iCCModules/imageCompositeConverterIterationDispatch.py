@@ -32,7 +32,7 @@ def runPreparedIterationModeImpl(
     print_fn,
 ) -> tuple[str, str, dict[str, object], int, float] | None:
     if mode == "semantic_badge":
-        return run_semantic_badge_iteration_fn(
+        semantic_result = run_semantic_badge_iteration_fn(
             width=width,
             height=height,
             perc_img=perc_img,
@@ -48,6 +48,27 @@ def runPreparedIterationModeImpl(
             write_attempt_artifacts_fn=write_attempt_artifacts_fn,
             write_validation_log_fn=write_validation_log_fn,
             record_render_failure_fn=record_render_failure_fn,
+        )
+        if semantic_result is not None:
+            return semantic_result
+        print_fn("  -> Plan B aktiv: Semantic-Badge konnte nicht parametrisiert werden; nutze Sample-/Element-Fallback.")
+        return run_non_composite_iteration_fn(
+            mode="manual_review",
+            params=params,
+            stripe_strategy=stripe_strategy,
+            semantic_mode_visual_override=semantic_mode_visual_override,
+            width=width,
+            height=height,
+            base_name=str(filename).rsplit(".", 1)[0] or perc_base_name,
+            description=description,
+            perc_img=perc_img,
+            img_path=img_path,
+            image_variant_name=filename,
+            print_fn=print_fn,
+            write_validation_log_fn=write_validation_log_fn,
+            record_render_failure_fn=record_render_failure_fn,
+            write_attempt_artifacts_fn=write_attempt_artifacts_fn,
+            calculate_error_fn=calculate_error_fn,
         )
 
     if mode == "dual_arrow_badge":
