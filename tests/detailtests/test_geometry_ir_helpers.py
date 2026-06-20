@@ -50,6 +50,41 @@ def test_render_geometry_ir_to_svg_contains_centralized_primitives() -> None:
     assert svg.endswith("</svg>")
 
 
+def test_render_geometry_ir_top_glyphs_stay_inside_canvas() -> None:
+    ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
+        "Heizelement, graues Rechteck, Plus-Minus-Zeichen oben links, "
+        "Farbverlauf horizontal dunkel-hell-dunkel graue Diagonale oben rechts nach unten links"
+    )
+
+    svg = geometry_ir_helpers.renderGeometryIrToSvgImpl(40, 80, ir)
+
+    assert 'id="plus_glyph" d="M 9.608 23.008 L 14.008 23.008 M 11.808 20.808 L 11.808 25.208"' in svg
+    assert 'id="minus_glyph" d="M 9.608 23.008 L 14.008 23.008"' in svg
+    assert ' -' not in svg
+
+
+def test_validate_geometry_ir_glyph_layout_reports_top_glyph_outside_rect() -> None:
+    ir = [
+        {"kind": "RectBorder", "id": "main_rect", "bbox": [0.18, 0.24, 0.64, 0.56]},
+        {"kind": "PlusGlyph", "id": "plus_glyph", "position": "top_left", "dy": -0.5},
+    ]
+
+    warnings = geometry_ir_helpers.validateGeometryIrGlyphLayoutImpl(40, 80, ir)
+
+    assert "plus_glyph: top_glyph_outside_main_rect" in warnings
+
+
+def test_validate_geometry_ir_glyph_layout_accepts_ac0010_top_left_glyphs() -> None:
+    ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
+        "Heizelement, graues Rechteck, Plus-Minus-Zeichen oben links, "
+        "Farbverlauf horizontal dunkel-hell-dunkel graue Diagonale oben rechts nach unten links"
+    )
+
+    warnings = geometry_ir_helpers.validateGeometryIrGlyphLayoutImpl(40, 80, ir)
+
+    assert warnings == []
+
+
 
 def test_render_geometry_ir_horizontal_gradient_uses_renderer_stable_bands() -> None:
     ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(

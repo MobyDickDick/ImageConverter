@@ -1143,9 +1143,12 @@ def runNonCompositeIterationImpl(
                                 f"geometry_ir_element_refinement_steps={len(element_refinement['steps'])}",
                             ]
                         )
+                layout_warnings = geometry_ir_helpers.validateGeometryIrGlyphLayoutImpl(width, height, geometry_ir)
                 log_lines.extend(
                     [
                         f"geometry_ir_element_count={len(geometry_ir)}",
+                        f"geometry_ir_layout_check={'warning' if layout_warnings else 'ok'}",
+                        *(f"geometry_ir_layout_warning={warning}" for warning in layout_warnings),
                         *(
                             f"geometry_ir_element_{idx}={element.get('kind')}"
                             for idx, element in enumerate(geometry_ir, start=1)
