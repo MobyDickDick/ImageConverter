@@ -1,4 +1,4 @@
-"""AC0223 semantic badge helper block (triple-triangle valve head + top stem)."""
+"""Semantic valve-head badge helper block (triple-triangle head + top stem)."""
 
 from __future__ import annotations
 
@@ -11,7 +11,7 @@ def defaultAc0223ParamsImpl(
     *,
     default_ac0813_params_fn: Callable[[int, int], dict[str, Any]],
 ) -> dict[str, Any]:
-    """Build AC0223 defaults from AC0813 and add the valve-head style metadata."""
+    """Build valve-head defaults from the top-connector badge template and add style metadata."""
     params = dict(default_ac0813_params_fn(w, h))
     scale_x = (float(w) / 50.0) if w > 0 else 1.0
     scale_y = (float(h) / 75.0) if h > 0 else 1.0
@@ -48,12 +48,12 @@ def fitAc0223ParamsFromImageImpl(
     *,
     fit_ac0813_params_from_image_fn: Callable[[Any, dict[str, Any]], dict[str, Any]],
 ) -> dict[str, Any]:
-    """Fit AC0223 via AC0813 geometry while preserving valve-head styling."""
+    """Fit valve-head badges via top-connector geometry while preserving head styling."""
     params = dict(fit_ac0813_params_from_image_fn(img, defaults))
     h, _w = img.shape[:2]
     scale_y = (float(h) / 75.0) if h > 0 else 1.0
     valve_center_y = 25.153 * scale_y
-    # AC0223 uses a symmetric valve-head template. Re-anchor to the template
+    # The symmetric valve-head template is re-anchored to the template
     # center so medium/small variants keep stem + head alignment even when the
     # circle fitter drifts horizontally.
     cx = float(defaults.get("cx", float(img.shape[1]) / 2.0))
@@ -67,7 +67,7 @@ def fitAc0223ParamsFromImageImpl(
 
     params["arm_x1"] = cx
     params["arm_x2"] = cx
-    # Keep AC0223's connector anchored between valve hub and circle top edge.
+    # Keep the connector anchored between valve hub and circle top edge.
     # This avoids regressions where iterative geometry search stretches the arm
     # to the canvas top instead of the valve center.
     params["arm_y2"] = float(defaults.get("head_hub_cy", valve_center_y))

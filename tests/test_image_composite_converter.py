@@ -5815,9 +5815,9 @@ def test_generate_badge_svg_renders_ac0223_valve_head_gradient() -> None:
 
     svg = Action.generate_badge_svg(50, 75, params)
 
-    assert "ac0223ValveGradient" in svg
+    assert "valveHeadGradient" in svg
     assert "head_style" not in svg
-    assert 'fill="url(#ac0223ValveGradient)"' in svg
+    assert 'fill="url(#valveHeadGradient)"' in svg
     assert "#136fad" in svg
     assert "<polygon" in svg
     assert 'ellipse cx="25" cy="25.153"' in svg

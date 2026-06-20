@@ -181,8 +181,8 @@ def test_generate_badge_svg_impl_restores_valve_head_from_neutral_style_metadata
         m_ymax=0.0,
     )
 
-    assert "ac0223ValveGradient" in svg
-    assert 'fill="url(#ac0223ValveGradient)"' in svg
+    assert "valveHeadGradient" in svg
+    assert 'fill="url(#valveHeadGradient)"' in svg
     assert '<line x1="25.0000"' in svg
 
 
@@ -213,7 +213,7 @@ def test_generate_badge_svg_restores_ac0223_head_when_style_keys_missing() -> No
         m_ymax=0.0,
     )
 
-    assert "ac0223ValveGradient" in svg
+    assert "valveHeadGradient" in svg
     assert '<line x1="25.0000"' in svg
     assert 'stroke="#136fad"' in svg
     assert svg.index("<line") < svg.index("<circle")
@@ -246,7 +246,7 @@ def test_generate_badge_svg_restores_ac0223_head_from_filename_reference() -> No
         m_ymax=0.0,
     )
 
-    assert "ac0223ValveGradient" in svg
+    assert "valveHeadGradient" in svg
     assert '<line x1="25.0000"' in svg
     assert '<circle cx="25.0000" cy="57.0000" r="16.5000"' in svg
 
@@ -302,7 +302,7 @@ def test_generate_badge_svg_restores_ac0223_head_after_metadata_stripped() -> No
         m_ymax=0.0,
     )
 
-    assert "ac0223ValveGradient" in svg
+    assert "valveHeadGradient" in svg
     assert '<line x1="25.0000"' in svg
     assert 'stroke="#136fad"' in svg
     assert svg.index("<line") < svg.index("<circle")
