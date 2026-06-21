@@ -186,9 +186,6 @@ def isConversionBestlistCandidateBetterImpl(
     def _has_ac0223_valve_head(row: dict[str, object] | None) -> bool:
         if not isinstance(row, dict):
             return False
-        base = str(row.get("base", "")).upper()
-        if base != "AC0223":
-            return False
         params = row.get("params")
         if not isinstance(params, dict):
             return False
