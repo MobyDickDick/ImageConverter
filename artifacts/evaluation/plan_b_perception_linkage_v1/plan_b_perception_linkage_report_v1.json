@@ -11,357 +11,192 @@
   "records": [
     {
       "schema_version": "plan_b_perception_linkage_record_v1",
-      "variant": "GE9002_7S",
-      "image_path": "artifacts/images_to_convert/GE9002_7S.jpg",
+      "variant": "GE1001_M",
+      "image_path": "artifacts/images_to_convert/GE1001_M.jpg",
       "status": "evaluated",
-      "plan_b_reason": "Run-RC-Triage: h\u00f6chster kompakter GE9002-Diff-Fehler.",
-      "description": "Kompakte GE9002-Textmarke mit dominantem M-Glyph auf farbigem Grund.",
+      "plan_b_reason": "Run-RQ-Triage: h\u00f6chster aktueller GE-Diff-Fehler.",
+      "description": "Kompaktes GE-Symbol mit dominanten Kontur- und Farbfl\u00e4chen.",
       "perception_lerneffekt": {
-        "question": "Wird der dominante M-Textbereich als katalogfreier TextGlyph-Kandidat erkannt?",
-        "expected_first_primitive": "TextGlyph",
+        "question": "Werden die dominanten Kontur- oder Farbfl\u00e4chen als katalogfreie Primitive erkannt?",
+        "expected_first_primitive": "color_patch",
         "expected_candidate_kinds": [
-          "text_glyph"
+          "circle",
+          "color_patch",
+          "line",
+          "polygon_path",
+          "rectangle"
         ],
         "expected_seed_kinds": [
-          "TextGlyph"
+          "CircleBackground",
+          "ColorPatch",
+          "HorizontalRule",
+          "PolygonPath",
+          "RectBorder",
+          "VerticalRule"
         ],
-        "decision": "noch nicht erkannt",
-        "matched_candidate_kinds": [],
-        "matched_seed_kinds": [],
-        "top_candidate_kind": null,
-        "top_confidence": null,
-        "next_action": "Vor der Plan-B-Umsetzung zus\u00e4tzliche Detector-/ROI-Regel oder manuelle Seed-Annahme festhalten."
+        "decision": "generalisiert",
+        "matched_candidate_kinds": [
+          "circle",
+          "line"
+        ],
+        "matched_seed_kinds": [
+          "CircleBackground"
+        ],
+        "top_candidate_kind": "circle",
+        "top_confidence": 0.952,
+        "next_action": "Im n\u00e4chsten Plan-B-Paket als vorinitialisierten Geometry-IR-Seed protokollieren."
       },
-      "candidate_count": 0,
-      "top_candidate": null
-    },
-    {
-      "schema_version": "plan_b_perception_linkage_record_v1",
-      "variant": "GE9002_5S",
-      "image_path": "artifacts/images_to_convert/GE9002_5S.jpg",
-      "status": "evaluated",
-      "plan_b_reason": "Run-RC-Triage: zweith\u00f6chster kompakter GE9002-Diff-Fehler.",
-      "description": "Kompakte GE9002-Textmarke mit dominantem M-Glyph auf farbigem Grund.",
-      "perception_lerneffekt": {
-        "question": "Wird der dominante M-Textbereich als katalogfreier TextGlyph-Kandidat erkannt?",
-        "expected_first_primitive": "TextGlyph",
-        "expected_candidate_kinds": [
-          "text_glyph"
-        ],
-        "expected_seed_kinds": [
-          "TextGlyph"
-        ],
-        "decision": "noch nicht erkannt",
-        "matched_candidate_kinds": [],
-        "matched_seed_kinds": [],
-        "top_candidate_kind": "horizontal_rule",
-        "top_confidence": 0.99,
-        "next_action": "Vor der Plan-B-Umsetzung zus\u00e4tzliche Detector-/ROI-Regel oder manuelle Seed-Annahme festhalten."
-      },
-      "candidate_count": 3,
+      "candidate_count": 5,
       "top_candidate": {
         "schema_version": "perception_primitive_candidate_v1",
-        "kind": "horizontal_rule",
+        "kind": "circle",
         "bbox": {
-          "x": 0.0,
-          "y": 6.0,
-          "width": 60.0,
-          "height": 2.0
+          "x": 2.0,
+          "y": 9.0,
+          "width": 10.0,
+          "height": 10.0
         },
         "center": {
-          "x": 30.0,
-          "y": 7.0
+          "x": 7.0,
+          "y": 14.0
         },
         "geometry": {
-          "orientation": "horizontal",
-          "x_left": 0.0,
-          "x_right": 60.0,
-          "y_center": 7.0,
-          "length_px": 60.0,
-          "stroke_width_px": 2.0,
-          "angle_deg": 0.0,
-          "text_equivalent": "-",
-          "geometry_ir_kind": "HorizontalRule"
+          "radius_px": 5.0,
+          "inner_radius_px": 0.0,
+          "stroke_width_px": 1.0,
+          "circularity": 1.0,
+          "ring": false,
+          "fill_ratio": 0.8272,
+          "geometry_ir_kind": "CircleBackground",
+          "geometry_ir_bbox": [
+            0.08,
+            0.36,
+            0.4,
+            0.4
+          ]
         },
         "color": {
-          "fill_rgb": null,
-          "stroke_rgb": [
-            247,
-            211,
-            169
+          "fill_rgb": [
+            91,
+            165,
+            115
           ],
-          "fill_hex": null,
-          "stroke_hex": "#F7D3A9",
-          "fill_confidence": 0.0,
-          "stroke_confidence": 0.733
+          "stroke_rgb": [
+            112,
+            162,
+            127
+          ],
+          "fill_hex": "#5BA573",
+          "stroke_hex": "#70A27F",
+          "fill_confidence": 0.4975,
+          "stroke_confidence": 0.6298
         },
-        "confidence": 0.99,
+        "confidence": 0.952,
         "roi": {
-          "type": "description_hint",
+          "type": "image",
           "hint": "full_image",
           "bbox": {
             "x": 0.0,
             "y": 0.0,
-            "width": 60.0,
-            "height": 10.0
-          },
-          "description": "Kompakte GE9002-Textmarke mit dominantem M-Glyph auf farbigem Grund."
+            "width": 25.0,
+            "height": 25.0
+          }
         },
         "evidence": {
-          "detector": "detect_horizontal_rules",
-          "threshold_model": "dark_contour_horizontal_opening",
-          "description_hint": "full_image"
+          "detector": "detect_circle_rings",
+          "detection_source": "hough",
+          "threshold_model": "hough_plus_foreground_mask"
         },
         "source": "pf8_plan_b_perception_linkage"
       }
     },
     {
       "schema_version": "plan_b_perception_linkage_record_v1",
-      "variant": "GE9002_3S",
-      "image_path": "artifacts/images_to_convert/GE9002_3S.jpg",
+      "variant": "GE9021_7M",
+      "image_path": "artifacts/images_to_convert/GE9021_7M.jpg",
       "status": "evaluated",
-      "plan_b_reason": "Run-RC-Triage: weiterer kompakter Hochfehlerfall der GE9002-Familie.",
-      "description": "Kompakte GE9002-Textmarke mit dominantem M-Glyph auf farbigem Grund.",
+      "plan_b_reason": "Run-RQ-Triage: zweiter aktueller Diff-Fall oberhalb der Review-Grenze.",
+      "description": "Schmales GE-Symbol mit vertikaler Kontur und farbigen Fl\u00e4chen.",
       "perception_lerneffekt": {
-        "question": "Wird der dominante M-Textbereich als katalogfreier TextGlyph-Kandidat erkannt?",
-        "expected_first_primitive": "TextGlyph",
+        "question": "Wird die dominante vertikale Struktur als katalogfreier Linien-/Polygon- oder Farbfl\u00e4chenkandidat erkannt?",
+        "expected_first_primitive": "line",
         "expected_candidate_kinds": [
-          "text_glyph"
+          "color_patch",
+          "line",
+          "polygon_path",
+          "rectangle"
         ],
         "expected_seed_kinds": [
-          "TextGlyph"
+          "ColorPatch",
+          "PolygonPath",
+          "RectBorder",
+          "VerticalRule"
         ],
-        "decision": "noch nicht erkannt",
-        "matched_candidate_kinds": [],
+        "decision": "nur Sonderfall",
+        "matched_candidate_kinds": [
+          "line"
+        ],
         "matched_seed_kinds": [],
-        "top_candidate_kind": "horizontal_rule",
-        "top_confidence": 0.99,
-        "next_action": "Vor der Plan-B-Umsetzung zus\u00e4tzliche Detector-/ROI-Regel oder manuelle Seed-Annahme festhalten."
+        "top_candidate_kind": "line",
+        "top_confidence": 1.0,
+        "next_action": "Als Perception-Hinweis dokumentieren, aber noch keinen generischen Seed erzwingen."
       },
-      "candidate_count": 3,
+      "candidate_count": 6,
       "top_candidate": {
         "schema_version": "perception_primitive_candidate_v1",
-        "kind": "horizontal_rule",
+        "kind": "line",
         "bbox": {
-          "x": 0.0,
-          "y": 6.0,
-          "width": 60.0,
-          "height": 2.0
+          "x": 2.0,
+          "y": 0.0,
+          "width": 4.0,
+          "height": 57.0
         },
         "center": {
-          "x": 30.0,
-          "y": 7.0
+          "x": 4.0,
+          "y": 28.5
         },
         "geometry": {
-          "orientation": "horizontal",
-          "x_left": 0.0,
-          "x_right": 60.0,
-          "y_center": 7.0,
-          "length_px": 60.0,
-          "stroke_width_px": 2.0,
-          "angle_deg": 0.0,
-          "text_equivalent": "-",
-          "geometry_ir_kind": "HorizontalRule"
+          "orientation": "vertical",
+          "x_center": 4.0,
+          "y_top": 0.0,
+          "y_bottom": 57.0,
+          "length_px": 57.0,
+          "stroke_width_px": 4.0,
+          "angle_deg": 90.0
         },
         "color": {
           "fill_rgb": null,
-          "stroke_rgb": [
-            211,
-            227,
-            181
-          ],
+          "stroke_rgb": null,
           "fill_hex": null,
-          "stroke_hex": "#D3E3B5",
+          "stroke_hex": null,
           "fill_confidence": 0.0,
-          "stroke_confidence": 0.7167
+          "stroke_confidence": 0.0
         },
-        "confidence": 0.99,
+        "confidence": 1.0,
         "roi": {
-          "type": "description_hint",
+          "type": "image",
           "hint": "full_image",
           "bbox": {
             "x": 0.0,
             "y": 0.0,
-            "width": 60.0,
-            "height": 10.0
-          },
-          "description": "Kompakte GE9002-Textmarke mit dominantem M-Glyph auf farbigem Grund."
+            "width": 20.0,
+            "height": 60.0
+          }
         },
         "evidence": {
-          "detector": "detect_horizontal_rules",
-          "threshold_model": "dark_contour_horizontal_opening",
-          "description_hint": "full_image"
+          "detector": "detect_vertical_lines",
+          "edge_model": "canny+hough_lines_p"
         },
-        "source": "pf8_plan_b_perception_linkage"
-      }
-    },
-    {
-      "schema_version": "plan_b_perception_linkage_record_v1",
-      "variant": "GE9002_4M",
-      "image_path": "artifacts/images_to_convert/GE9002_4M.jpg",
-      "status": "evaluated",
-      "plan_b_reason": "Run-RC-Triage: mittlere GE9002-Variante mit sehr gro\u00dfem Diff-Abstand.",
-      "description": "Mittlere GE9002-Textmarke mit dominantem M-Glyph auf farbigem Grund.",
-      "perception_lerneffekt": {
-        "question": "Wird der dominante M-Textbereich als katalogfreier TextGlyph-Kandidat erkannt?",
-        "expected_first_primitive": "TextGlyph",
-        "expected_candidate_kinds": [
-          "text_glyph"
-        ],
-        "expected_seed_kinds": [
-          "TextGlyph"
-        ],
-        "decision": "noch nicht erkannt",
-        "matched_candidate_kinds": [],
-        "matched_seed_kinds": [],
-        "top_candidate_kind": "horizontal_rule",
-        "top_confidence": 0.99,
-        "next_action": "Vor der Plan-B-Umsetzung zus\u00e4tzliche Detector-/ROI-Regel oder manuelle Seed-Annahme festhalten."
-      },
-      "candidate_count": 2,
-      "top_candidate": {
-        "schema_version": "perception_primitive_candidate_v1",
-        "kind": "horizontal_rule",
-        "bbox": {
-          "x": 0.0,
-          "y": 12.0,
-          "width": 120.0,
-          "height": 3.0
-        },
-        "center": {
-          "x": 60.0,
-          "y": 13.5
-        },
-        "geometry": {
-          "orientation": "horizontal",
-          "x_left": 0.0,
-          "x_right": 120.0,
-          "y_center": 13.5,
-          "length_px": 120.0,
-          "stroke_width_px": 3.0,
-          "angle_deg": 0.0,
-          "text_equivalent": "-",
-          "geometry_ir_kind": "HorizontalRule"
-        },
-        "color": {
-          "fill_rgb": null,
-          "stroke_rgb": [
-            188,
-            190,
-            192
-          ],
-          "fill_hex": null,
-          "stroke_hex": "#BCBEC0",
-          "fill_confidence": 0.0,
-          "stroke_confidence": 0.788
-        },
-        "confidence": 0.99,
-        "roi": {
-          "type": "description_hint",
-          "hint": "full_image",
-          "bbox": {
-            "x": 0.0,
-            "y": 0.0,
-            "width": 120.0,
-            "height": 20.0
-          },
-          "description": "Mittlere GE9002-Textmarke mit dominantem M-Glyph auf farbigem Grund."
-        },
-        "evidence": {
-          "detector": "detect_horizontal_rules",
-          "threshold_model": "dark_contour_horizontal_opening",
-          "description_hint": "full_image"
-        },
-        "source": "pf8_plan_b_perception_linkage"
-      }
-    },
-    {
-      "schema_version": "plan_b_perception_linkage_record_v1",
-      "variant": "GE9002_1S",
-      "image_path": "artifacts/images_to_convert/GE9002_1S.jpg",
-      "status": "evaluated",
-      "plan_b_reason": "Run-RC-Triage: f\u00fcnfter automatisch priorisierter kompakter GE9002-Fall.",
-      "description": "Kompakte GE9002-Textmarke mit dominantem M-Glyph auf farbigem Grund.",
-      "perception_lerneffekt": {
-        "question": "Wird der dominante M-Textbereich als katalogfreier TextGlyph-Kandidat erkannt?",
-        "expected_first_primitive": "TextGlyph",
-        "expected_candidate_kinds": [
-          "text_glyph"
-        ],
-        "expected_seed_kinds": [
-          "TextGlyph"
-        ],
-        "decision": "noch nicht erkannt",
-        "matched_candidate_kinds": [],
-        "matched_seed_kinds": [],
-        "top_candidate_kind": "horizontal_rule",
-        "top_confidence": 0.99,
-        "next_action": "Vor der Plan-B-Umsetzung zus\u00e4tzliche Detector-/ROI-Regel oder manuelle Seed-Annahme festhalten."
-      },
-      "candidate_count": 2,
-      "top_candidate": {
-        "schema_version": "perception_primitive_candidate_v1",
-        "kind": "horizontal_rule",
-        "bbox": {
-          "x": 0.0,
-          "y": 2.0,
-          "width": 60.0,
-          "height": 6.0
-        },
-        "center": {
-          "x": 30.0,
-          "y": 5.0
-        },
-        "geometry": {
-          "orientation": "horizontal",
-          "x_left": 0.0,
-          "x_right": 60.0,
-          "y_center": 5.0,
-          "length_px": 60.0,
-          "stroke_width_px": 6.0,
-          "angle_deg": 0.0,
-          "text_equivalent": "-",
-          "geometry_ir_kind": "HorizontalRule"
-        },
-        "color": {
-          "fill_rgb": null,
-          "stroke_rgb": [
-            239,
-            174,
-            165
-          ],
-          "fill_hex": null,
-          "stroke_hex": "#EFAEA5",
-          "fill_confidence": 0.0,
-          "stroke_confidence": 0.7447
-        },
-        "confidence": 0.99,
-        "roi": {
-          "type": "description_hint",
-          "hint": "full_image",
-          "bbox": {
-            "x": 0.0,
-            "y": 0.0,
-            "width": 60.0,
-            "height": 10.0
-          },
-          "description": "Kompakte GE9002-Textmarke mit dominantem M-Glyph auf farbigem Grund."
-        },
-        "evidence": {
-          "detector": "detect_horizontal_rules",
-          "threshold_model": "dark_contour_horizontal_opening",
-          "description_hint": "full_image"
-        },
-        "source": "pf8_plan_b_perception_linkage"
+        "source": "hough"
       }
     }
   ],
   "metrics": {
-    "samples": 5,
-    "evaluated_samples": 5,
-    "generalisiert": 0,
-    "nur_sonderfall": 0,
-    "noch_nicht_erkannt": 5,
+    "samples": 2,
+    "evaluated_samples": 2,
+    "generalisiert": 1,
+    "nur_sonderfall": 1,
+    "noch_nicht_erkannt": 0,
     "all_have_perception_lerneffekt": true
   }
 }

@@ -279,25 +279,25 @@ def tryTemplateTransferImpl(
     target_variant = str(target_row.get("variant", "")).upper()
     target_base = str(target_row.get("base", "")).upper()
     if target_base == "AC0223":
-        # AC0223 includes a dedicated valve-head overlay that is not encoded in
-        # generic geometry extraction. Transferring donor templates can drop the
-        # polygon/hub semantics, so keep native conversion output only.
+        # Dedicated valve-head overlays are not encoded in generic geometry
+        # extraction. Transferring donor templates can drop the polygon/hub
+        # semantics, so keep native conversion output only.
         return None, None
     target_svg_path = os.path.join(svg_out_dir, f"{target_variant}.svg")
     target_svg_geometry = read_svg_geometry_fn(target_svg_path)
     target_geom_params = dict(target_svg_geometry[2]) if target_svg_geometry is not None else None
     target_params_raw = target_row.get("params")
     if isinstance(target_params_raw, dict) and str(target_params_raw.get("mode", "")) == "dual_arrow_badge":
-        # AC002x dual-arrow badges are fully semantics-driven. Generic template
-        # transfer can replace them with unrelated AC donors (for example
-        # AC0223 valve heads) when historical bestlist rows exist.
+        # Dual-arrow badges are fully semantics-driven. Generic template
+        # transfer can replace them with unrelated historical donors when
+        # prior bestlist rows exist.
         return None, None
     if _has_description_driven_geometry_ir(target_params_raw):
         # Description-driven non-composite outputs already encode the intended
-        # symbol algorithm (e.g. AC0100 gradient/diagonal/plus-minus). Generic
-        # donor transfer can improve the pixel score by rotating/scaling a prior
-        # variant while destroying that algorithmic structure, so keep the
-        # native renderer output.
+        # symbol algorithm (for example gradient/diagonal/plus-minus chains).
+        # Generic donor transfer can improve the pixel score by rotating/scaling
+        # a prior variant while destroying that algorithmic structure, so keep
+        # the native renderer output.
         return None, None
 
     target_alias_refs: set[str] = set()

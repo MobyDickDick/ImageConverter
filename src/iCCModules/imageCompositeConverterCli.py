@@ -25,9 +25,9 @@ def parseArgsImpl(
             "Beispiele:\n"
             "  python -m src.imageCompositeConverter artifacts/images_to_convert "
             "--descriptions-path artifacts/images_to_convert/Finale_Wurzelformen_V3.xml "
-            "--output-dir artifacts/converted_images --start AC0000 --end ZZ9999\n"
+            "--output-dir artifacts/converted_images --start FIRST --end LAST\n"
             "  python -m src.imageCompositeConverter artifacts/images_to_convert "
-            "--mode annotate --output-dir artifacts/annotated --start AC0811 --end AC0814\n"
+            "--mode annotate --output-dir artifacts/annotated --start SAMPLE_A --end SAMPLE_B\n"
             "  python -m src.imageCompositeConverter --print-linux-vendor-command --vendor-dir vendor"
         ),
         formatter_class=argparse.RawDescriptionHelpFormatter,
@@ -95,7 +95,7 @@ def parseArgsImpl(
     parser.add_argument(
         "--debug-ac0811-dir",
         default=None,
-        help="Optional: Ordner für AC0811 Element-Diff-Dumps pro Runde/Element",
+        help="Optional: Ordner für fokussierte Element-Diff-Dumps pro Runde/Element",
     )
     parser.add_argument(
         "--debug-element-diff-dir",
@@ -188,7 +188,7 @@ def parseArgsImpl(
         "--repair-ac0223-bestlist",
         action="store_true",
         help=(
-            "Bereinigt einmalig veraltete AC0223-Bestlist/Snapshot-Artefakte "
+            "Bereinigt einmalig veraltete Valve-Head-Bestlist/Snapshot-Artefakte "
             "(L/M/S ohne Ventilkopf-Metadaten) im Ausgabeverzeichnis und beendet danach."
         ),
     )
@@ -444,7 +444,7 @@ def runMainImpl(
                 )
             else:
                 print(
-                    "[INFO] Vollbereich AC0800..AC0899 aktiviert isoliertes SVG-Rendering automatisch "
+                    "[INFO] Vollbereichs-Konvertierung aktiviert isoliertes SVG-Rendering automatisch "
                     "(entspricht --isolate-svg-render)."
                 )
     set_svg_render_subprocess_timeout_fn(max(1.0, float(args.isolate_svg_render_timeout_sec)))
@@ -497,7 +497,7 @@ def runMainImpl(
             if bool(getattr(args, "repair_ac0223_bestlist", False)):
                 if repair_ac0223_bestlist_fn is None:
                     print(
-                        "[ERROR] AC0223-Bestlist-Reparatur ist angefordert, "
+                        "[ERROR] Valve-Head-Bestlist-Reparatur ist angefordert, "
                         "aber kein repair_ac0223_bestlist_fn-Callback wurde übergeben."
                     )
                     return 2
@@ -506,7 +506,7 @@ def runMainImpl(
                 removed = int(repair_result.get("removed_count", 0) or 0)
                 variants = ", ".join(str(v) for v in repair_result.get("removed_variants", []))
                 print(
-                    "[INFO] AC0223-Bestlist-Reparatur abgeschlossen: "
+                    "[INFO] Valve-Head-Bestlist-Reparatur abgeschlossen: "
                     f"entfernte Varianten={removed}"
                     + (f" ({variants})" if variants else "")
                 )
