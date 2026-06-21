@@ -12,14 +12,6 @@ from pathlib import Path
 
 SUCCESSFUL_CONVERSIONS_MANIFEST = Path("artifacts/converted_images/reports/successful_conversions.txt")
 SUCCESSFUL_CONVERSIONS_SOURCE_DIR = Path("artifacts/images_to_convert")
-SUCCESSFUL_CONVERSIONS_FALLBACK: tuple[str, ...] = (
-    "AC0800_L",
-    "AC0800_M",
-    "AC0800_S",
-    "AC0811_L",
-    "AC0811_M",
-    "AC0811_S",
-)
 
 
 AC08_REGRESSION_METADATA_PATH = Path("config/regression_metadata/ac08_regression_cases_v1.json")
@@ -39,9 +31,18 @@ AC08_REGRESSION_METADATA = _loadAc08RegressionMetadata()
 AC08_STABLE_GOOD_REASON_OVERRIDES: dict[str, str] = dict(
     AC08_REGRESSION_METADATA.get("stable_good_reason_overrides", {})
 )
+AC08_PREVIOUSLY_GOOD_ANCHOR_COUNT = int(
+    AC08_REGRESSION_METADATA.get("previously_good_anchor_count", 0) or 0
+)
 _AC08_BASE_REGRESSION_CASES: tuple[dict[str, str], ...] = tuple(
     dict(case) for case in AC08_REGRESSION_METADATA.get("base_regression_cases", ())
 )
+SUCCESSFUL_CONVERSIONS_FALLBACK: tuple[str, ...] = tuple(
+    str(variant).strip().upper()
+    for variant in AC08_REGRESSION_METADATA.get("successful_conversions_fallback", ())
+    if str(variant).strip()
+)
+
 
 def _iterAvailableSuccessfulConversionVariants(
     source_dir: Path = SUCCESSFUL_CONVERSIONS_SOURCE_DIR,
