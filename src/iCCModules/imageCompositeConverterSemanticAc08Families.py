@@ -110,8 +110,20 @@ def tuneAc08LeftConnectorFamilyImpl(
 ) -> dict:
     """Apply shared guardrails for left-connector AC08 families."""
     p = dict(params)
-    symbol_name = get_base_name_from_file_fn(str(name)).upper().split("_", 1)[0]
-    if symbol_name not in {"AC0812", "AC0832", "AC0837", "AC0842", "AC0862", "AC0882"}:
+    direction = str(p.get("connector_direction", p.get("connector_family_direction", ""))).lower()
+    base_name = str(get_base_name_from_file_fn(name)).upper()
+    horizontal_arm_evidence = (
+        direction in {"left", "west"}
+        # Compatibility for direct helper callers that still pass the legacy
+        # semantic AC08 family name without the fitted arm geometry metadata.
+        or (base_name.startswith("AC08") and not direction and not {"arm_x1", "arm_x2"}.issubset(p))
+        or (
+            bool(p.get("arm_enabled", False))
+            and all(key in p for key in ("arm_x1", "arm_x2", "cx"))
+            and max(float(p["arm_x1"]), float(p["arm_x2"])) <= float(p["cx"])
+        )
+    )
+    if not horizontal_arm_evidence:
         return p
 
     p["connector_family_group"] = "ac08_left_connector"
@@ -189,8 +201,16 @@ def tuneAc08RightConnectorFamilyImpl(
 ) -> dict:
     """Apply shared guardrails for mirrored right-connector AC08 families."""
     p = dict(params)
-    symbol_name = get_base_name_from_file_fn(str(name)).upper().split("_", 1)[0]
-    if symbol_name not in {"AC0810", "AC0814", "AC0834", "AC0839"}:
+    direction = str(p.get("connector_direction", p.get("connector_family_direction", ""))).lower()
+    horizontal_arm_evidence = (
+        direction in {"right", "east"}
+        or (
+            bool(p.get("arm_enabled", False))
+            and all(key in p for key in ("arm_x1", "arm_x2", "cx"))
+            and min(float(p["arm_x1"]), float(p["arm_x2"])) >= float(p["cx"])
+        )
+    )
+    if not horizontal_arm_evidence:
         return p
 
     p["connector_family_group"] = "ac08_right_connector"

@@ -4233,6 +4233,46 @@ def test_tune_ac08_left_connector_family_keeps_template_right_extent() -> None:
     assert min_r >= required_r - 1e-6
 
 
+def test_tune_horizontal_connector_families_use_direction_not_catalog_name() -> None:
+    """Horizontal connector guardrails should be selected by measured direction metadata."""
+    left_defaults = Action._default_ac0812_params(25, 15)
+    left_params = {
+        **left_defaults,
+        "width": 25,
+        "height": 15,
+        "template_circle_cx": float(left_defaults["cx"]),
+        "template_circle_radius": float(left_defaults["r"]),
+        "cx": float(left_defaults["cx"]),
+        "r": float(left_defaults["r"]) * 0.78,
+        "draw_text": False,
+        "arm_enabled": True,
+        "connector_direction": "left",
+    }
+    right_defaults = Action._default_ac0814_params(25, 15)
+    right_params = {
+        **right_defaults,
+        "width": 25,
+        "height": 15,
+        "template_circle_cx": float(right_defaults["cx"]),
+        "template_circle_radius": float(right_defaults["r"]),
+        "cx": float(right_defaults["cx"]),
+        "r": float(right_defaults["r"]) * 0.78,
+        "draw_text": False,
+        "arm_enabled": True,
+        "connector_direction": "right",
+    }
+
+    left = Action._tune_ac08_left_connector_family("ZZ_NEUTRAL_LEFT_ARM", left_params)
+    right = Action._tune_ac08_right_connector_family("ZZ_NEUTRAL_RIGHT_ARM", right_params)
+
+    assert left["connector_family_group"] == "ac08_left_connector"
+    assert left["connector_family_direction"] == "left"
+    assert float(left.get("min_circle_radius", 0.0)) > float(left_params["r"])
+    assert right["connector_family_group"] == "ac08_right_connector"
+    assert right["connector_family_direction"] == "right"
+    assert float(right.get("min_circle_radius", 0.0)) > float(right_params["r"])
+
+
 def test_default_ac0812_uses_height_based_circle_radius() -> None:
     """AC0812 should size its circle from height without overfilling the frame."""
     params = Action._default_ac0812_params(25, 15)
