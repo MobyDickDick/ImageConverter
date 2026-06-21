@@ -95,7 +95,8 @@ def parseArgsImpl(
         ),
     )
     parser.add_argument(
-        "--debug-ac0811-dir",
+        "--debug-semantic-focus-dir",
+        dest="debug_ac0811_dir",
         default=None,
         help="Optional: Ordner für fokussierte Element-Diff-Dumps pro Runde/Element",
     )
@@ -187,7 +188,8 @@ def parseArgsImpl(
         ),
     )
     parser.add_argument(
-        "--repair-ac0223-bestlist",
+        "--repair-valve-head-bestlist",
+        dest="repair_ac0223_bestlist",
         action="store_true",
         help=(
             "Bereinigt einmalig veraltete Valve-Head-Bestlist/Snapshot-Artefakte "
