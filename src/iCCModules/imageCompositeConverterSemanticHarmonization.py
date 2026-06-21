@@ -367,10 +367,11 @@ def harmonizeSemanticSizeVariantsImpl(
         max_signature_delta_fn=max_signature_delta_fn,
     )
     for base, variant_rows in sorted(variant_rows_by_base.items()):
-        if str(base).upper() == "AC0223":
-            # AC0223 has a dedicated valve-head overlay that is not represented
-            # in generic geometry signatures; skip cross-size harmonization to
-            # avoid collapsing the valve head into plain circle+stem output.
+        params_by_row = [dict(row["params"]) for row in variant_rows]
+        if any(str(params.get("head_style", "")).strip().lower() == "ac0223_triple_valve" for params in params_by_row):
+            # Dedicated valve-head overlays are not represented in generic
+            # geometry signatures; skip cross-size harmonization to avoid
+            # collapsing the head into plain circle+stem output.
             continue
         if len(variant_rows) < 2:
             continue
