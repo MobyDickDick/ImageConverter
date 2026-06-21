@@ -123,6 +123,7 @@ from src.iCCModules.imageCompositeConverterPerceptionReflection import Perceptio
 from src.iCCModules import imageCompositeConverterColorUtils as color_utils_helpers
 from src.successfulConversions import (
     AC08_MITIGATION_STATUS,
+    AC08_PREVIOUSLY_GOOD_ANCHOR_COUNT,
     AC08_PREVIOUSLY_GOOD_VARIANTS,
     AC08_REGRESSION_CASES,
     AC08_REGRESSION_SET_NAME,
@@ -136,9 +137,11 @@ from src.iCCModules import imageCompositeConverterRemaining as imageCompositeCon
 # Keep regression variant list deterministic and duplicate-free for batch
 # selection/tests even when upstream manifests accidentally repeat entries.
 AC08_REGRESSION_VARIANTS = tuple(dict.fromkeys(AC08_REGRESSION_VARIANTS))
-# Keep the historical "previously good" anchor subset stable for AC08 success
-# criteria reports used by this converter/test suite.
-AC08_PREVIOUSLY_GOOD_VARIANTS = ("AC0800_L", "AC0800_M", "AC0800_S", "AC0811_L")
+# Keep the historical "previously good" anchor subset stable for success
+# criteria reports used by this converter/test suite. The exact catalog anchors
+# live in the external regression-metadata contract instead of runtime code.
+if AC08_PREVIOUSLY_GOOD_ANCHOR_COUNT > 0:
+    AC08_PREVIOUSLY_GOOD_VARIANTS = AC08_PREVIOUSLY_GOOD_VARIANTS[:AC08_PREVIOUSLY_GOOD_ANCHOR_COUNT]
 
 _UNDER_PYTEST_RUNTIME = "pytest" in sys.modules or bool(os.environ.get("PYTEST_CURRENT_TEST"))
 

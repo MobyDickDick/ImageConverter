@@ -18,6 +18,15 @@
     {"variant": "AC0835_S", "focus": "small_variant", "reason": "Small circle/text family member that stresses compact text scaling without connectors."},
     {"variant": "AC0812_M", "focus": "semantic_horizontal", "reason": "Medium left-connector case that complements AC0811_L and covers family-specific semantic overrides."}
   ],
+  "successful_conversions_fallback": [
+    "AC0800_L",
+    "AC0800_M",
+    "AC0800_S",
+    "AC0811_L",
+    "AC0811_M",
+    "AC0811_S"
+  ],
+  "previously_good_anchor_count": 4,
   "mitigation_status": {
     "AC0882": {"family": "left_connector", "risk": "high", "implemented": "adaptive_locks,left_connector_family,small_variant_mode", "status": "Mitigated via adaptive fallback search, connector-family guardrails, and _S-specific tuning."},
     "AC0837": {"family": "left_connector", "risk": "high", "implemented": "adaptive_locks,left_connector_family", "status": "Mitigated via adaptive fallback search plus shared left-connector geometry locks."},
