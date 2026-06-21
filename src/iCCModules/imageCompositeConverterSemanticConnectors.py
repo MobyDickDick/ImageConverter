@@ -99,7 +99,7 @@ def enforceTopStemBadgeGeometryImpl(
     h: int,
     ac08_stroke_width_px: float,
 ) -> dict[str, object]:
-    """Ensure AC0813-like badges keep a visible vertical top connector."""
+    """Ensure top-stem circle badges keep a visible vertical top connector."""
     p = dict(params)
     if not p.get("circle_enabled", True):
         return p
@@ -117,9 +117,9 @@ def enforceTopStemBadgeGeometryImpl(
     # of the badge, otherwise tiny crops can flip into an upper-half optimum.
     min_cy = min(float(h) - 1.0, max(default_cy - max(1.0, float(min(h, max(1, int(2 * r)))) * 0.12), float(h) * 0.55))
     if normalized_base_root == "AC0838" and text_mode == "voc":
-        # AC0838 VOC variants rely on a low-placed near-full-width circle. Keep
-        # the center close to the template value so validation rounds do not
-        # drift into a visibly collapsed upper-circle placement.
+        # Top-stem VOC variants rely on a low-placed near-full-width circle.
+        # Keep the center close to the template value so validation rounds do
+        # not drift into a visibly collapsed upper-circle placement.
         min_cy = min(float(h) - 1.0, max(min_cy, default_cy - 0.8))
     if cy < min_cy:
         cy = min(float(h) - 1.0, default_cy)
