@@ -111,8 +111,12 @@ def tuneAc08LeftConnectorFamilyImpl(
     """Apply shared guardrails for left-connector AC08 families."""
     p = dict(params)
     direction = str(p.get("connector_direction", p.get("connector_family_direction", ""))).lower()
+    base_name = str(get_base_name_from_file_fn(name)).upper()
     horizontal_arm_evidence = (
         direction in {"left", "west"}
+        # Compatibility for direct helper callers that still pass the legacy
+        # semantic AC08 family name without the fitted arm geometry metadata.
+        or (base_name.startswith("AC08") and not direction and not {"arm_x1", "arm_x2"}.issubset(p))
         or (
             bool(p.get("arm_enabled", False))
             and all(key in p for key in ("arm_x1", "arm_x2", "cx"))
