@@ -41,6 +41,25 @@ def test_candidate_prefers_ac0223_with_valve_head_metadata() -> None:
     assert better is True
 
 
+def test_candidate_prefers_neutral_valve_head_metadata_without_catalog_base() -> None:
+    better = bestlist_helpers.isConversionBestlistCandidateBetterImpl(
+        previous_row={
+            "base": "ZZ_NEUTRAL_VALVE",
+            "status": "semantic_ok",
+            "params": {"arm_enabled": True},
+            "error_per_pixel": 0.02,
+        },
+        candidate_row={
+            "base": "ZZ_NEUTRAL_VALVE",
+            "status": "semantic_ok",
+            "params": {"head_style": "ac0223_triple_valve", "arm_enabled": True},
+            "error_per_pixel": 0.03,
+        },
+        evaluate_candidate_fn=lambda _a, _b: (False, "", 0.0, 0.0, 0.0, 0.0),
+    )
+    assert better is True
+
+
 def test_bestlist_manifest_read_write_roundtrip(tmp_path: Path) -> None:
     manifest = tmp_path / "conversion_bestlist.csv"
     rows = {

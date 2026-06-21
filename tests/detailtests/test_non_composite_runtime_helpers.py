@@ -1638,9 +1638,67 @@ def test_ac0224_sia_prefers_semantic_geometry_and_uses_crossed_square(monkeypatc
     assert result == ("AC0224_M_sia", description, {"mode": "non_composite"}, 1, 40.0)
     assert logs[-1][0] == "status=non_composite_description_geometry_ir"
     assert "non_composite_selection=semantic_description_geometry" in logs[-1]
+    assert "geometry_ir_raster_registration=1" not in logs[-1]
     assert 'id="right_rotated_top_kelle_three_way_valve_square"' in artifacts[0][0]
     assert 'id="right_rotated_top_kelle_three_way_valve_circle"' not in artifacts[0][0]
 
+
+
+def test_ac0010_prefers_description_geometry_over_pixel_fit_stripes(monkeypatch) -> None:
+    logs: list[list[str]] = []
+    artifacts: list[tuple[str, object]] = []
+    description = (
+        "Heizelement, graues Rechteck, Plus-Minus-Zeichen oben links, "
+        "Farbverlauf horizontal dunkel-hell-dunkel graue Diagonale oben rechts nach unten links"
+    )
+    monkeypatch.setattr(
+        non_composite_runtime_helpers,
+        "_fit_symbol_element_by_element",
+        lambda **_kwargs: (
+            1.0,
+            "<svg id='generic-stripe-pixel-fit'><rect/><rect/></svg>",
+            "generic_rendered",
+            {},
+            [],
+        ),
+    )
+
+    target = type("RasterStub", (), {"shape": (80, 40, 3)})()
+
+    result = non_composite_runtime_helpers.runNonCompositeIterationImpl(
+        mode="non_composite",
+        params={"mode": "non_composite"},
+        stripe_strategy=None,
+        semantic_mode_visual_override=False,
+        width=40,
+        height=80,
+        base_name="AC0010",
+        description=description,
+        perc_img=target,
+        img_path="/tmp/no-sample/AC0010.jpg",
+        print_fn=lambda *_args, **_kwargs: None,
+        render_embedded_raster_svg_fn=lambda _path: "<svg embedded/>",
+        build_gradient_stripe_svg_fn=lambda *_args, **_kwargs: "<svg gradient/>",
+        build_gradient_stripe_validation_log_lines_fn=lambda **_kwargs: ["status=gradient"],
+        write_validation_log_fn=logs.append,
+        render_svg_to_numpy_fn=lambda content, *_args, **_kwargs: (
+            "geometry_rendered"
+            if 'fill="url(#geometry-ir-horizontal-gradient)"' in content
+            else "generic_rendered"
+        ),
+        record_render_failure_fn=lambda *args, **kwargs: None,
+        write_attempt_artifacts_fn=lambda svg, rendered: artifacts.append((svg, rendered)),
+        calculate_error_fn=lambda _target, rendered: 40.0 if rendered == "geometry_rendered" else 1.0,
+        image_variant_name="AC0010",
+    )
+
+    assert result == ("AC0010", description, {"mode": "non_composite"}, 1, 40.0)
+    assert logs[-1][0] == "status=non_composite_description_geometry_ir"
+    assert "non_composite_selection=semantic_description_geometry" in logs[-1]
+    assert "geometry_ir_raster_registration=1" not in logs[-1]
+    assert 'fill="url(#geometry-ir-horizontal-gradient)"' in artifacts[0][0]
+    assert 'id="plus_glyph"' in artifacts[0][0]
+    assert "generic-stripe-pixel-fit" not in artifacts[0][0]
 
 def test_symbol_fit_keeps_description_declared_top_left_glyph_in_top_region(monkeypatch) -> None:
     initial = {

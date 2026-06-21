@@ -36,7 +36,7 @@ SEMANTIC_BADGE_FAMILIES: set[str] = {
 
 
 def extract_documented_alias_refs(text: str) -> set[str]:
-    """Extract explicit "Wie AC0000" style alias references from descriptions."""
+    """Extract explicit "Wie <catalog-code>" style alias references from descriptions."""
     if not text:
         return set()
 
@@ -235,7 +235,7 @@ def apply_semantic_badge_family_rules(
     desc: str,
     params: dict[str, object],
 ) -> bool:
-    """Fill semantic-badge params for known AC08/AR0100 family descriptions."""
+    """Fill semantic-badge params for legacy semantic-family descriptions."""
     if base_upper not in SEMANTIC_BADGE_FAMILIES:
         return False
 

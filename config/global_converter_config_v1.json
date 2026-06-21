@@ -22,5 +22,11 @@
     "review_below_confidence": 0.65,
     "contradiction_cost": 0.8,
     "ambiguous_delta": 0.08
+  },
+  "cli_ranges": {
+    "semantic_badge_full_range": {
+      "start": "AC0800",
+      "end": "AC0899"
+    }
   }
 }

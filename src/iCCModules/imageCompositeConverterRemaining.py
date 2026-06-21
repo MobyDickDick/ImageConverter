@@ -645,8 +645,9 @@ def _isSemanticTemplateVariant(base_name: str, params: dict[str, object] | None 
 def _loadExistingConversionRows(output_root: str, folder_path: str) -> list[dict[str, object]]:
     """Load previously converted variants so they can act as donor templates.
 
-    This lets an earlier conversion batch (for example the already converted
-    ``AC08*`` symbols) improve later runs without requiring a fresh full pass.
+    This lets an earlier conversion batch (for example a previously converted
+    semantic-badge symbol group) improve later runs without requiring a fresh
+    full pass.
     """
     return conversion_row_helpers.loadExistingConversionRowsImpl(
         output_root=output_root,
@@ -762,7 +763,7 @@ def _evaluateQualityPassCandidate(
 ) -> tuple[bool, str, float, float, float, float]:
     """Return whether a quality-pass candidate should replace the previous result.
 
-    The acceptance rule mirrors AC08 task 1.1: keep the new candidate only when
+    The acceptance rule mirrors the semantic-badge quality task: keep the new candidate only when
     at least one core quality metric improves (`error_per_pixel` or
     `mean_delta2`). The caller also receives the normalized metrics so reporting
     can use one consistent decision path for stochastic re-runs and fallback

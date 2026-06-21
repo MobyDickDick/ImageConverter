@@ -4,8 +4,10 @@ import argparse
 import builtins
 import contextlib
 import io
+import json
 import os
 import sys
+from functools import lru_cache
 from pathlib import Path
 
 
@@ -89,11 +91,12 @@ def parseArgsImpl(
         help=(
             "Fragt auf der Konsole 'Namen von' und 'Namen bis' ab und verarbeitet nur diesen Bereich. "
             "Wenn beide Eingaben keine volle Referenz sind, wird nach ihrem gemeinsamen Teilstring gefiltert "
-            "(z. B. AC08 und A08 => alle A08*-Dateien)."
+            "(z. B. gemeinsames Präfix und gekürztes Präfix => alle passenden Dateien)."
         ),
     )
     parser.add_argument(
-        "--debug-ac0811-dir",
+        "--debug-semantic-focus-dir",
+        dest="debug_ac0811_dir",
         default=None,
         help="Optional: Ordner für fokussierte Element-Diff-Dumps pro Runde/Element",
     )
@@ -185,7 +188,8 @@ def parseArgsImpl(
         ),
     )
     parser.add_argument(
-        "--repair-ac0223-bestlist",
+        "--repair-valve-head-bestlist",
+        dest="repair_ac0223_bestlist",
         action="store_true",
         help=(
             "Bereinigt einmalig veraltete Valve-Head-Bestlist/Snapshot-Artefakte "
@@ -404,10 +408,34 @@ def _hasBatchFailures(reports_out_dir: str) -> bool:
         return False
 
 
+@lru_cache(maxsize=1)
+def _semanticBadgeFullRange() -> tuple[str, str] | None:
+    config_path = (
+        Path(__file__).resolve().parents[2] / "config" / "global_converter_config_v1.json"
+    )
+    try:
+        with config_path.open("r", encoding="utf-8") as handle:
+            config = json.load(handle)
+    except (OSError, json.JSONDecodeError):
+        return None
+    ranges = config.get("cli_ranges") if isinstance(config, dict) else None
+    full_range = ranges.get("semantic_badge_full_range") if isinstance(ranges, dict) else None
+    if not isinstance(full_range, dict):
+        return None
+    start = str(full_range.get("start", "") or "").strip().upper()
+    end = str(full_range.get("end", "") or "").strip().upper()
+    if not start or not end:
+        return None
+    return start, end
+
+
 def _isFullAc08Range(args: argparse.Namespace) -> bool:
+    configured_range = _semanticBadgeFullRange()
+    if configured_range is None:
+        return False
     start = str(getattr(args, "start", "") or "").strip().upper()
     end = str(getattr(args, "end", "") or "").strip().upper()
-    return start == "AC0800" and end == "AC0899"
+    return (start, end) == configured_range
 
 
 def runMainImpl(
@@ -439,12 +467,18 @@ def runMainImpl(
         if auto_enable_isolated_render and not bool(args.isolate_svg_render):
             if bool(getattr(args, "ac08_regression_set", False)):
                 print(
-                    "[INFO] AC08-Regression aktiviert isoliertes SVG-Rendering automatisch "
+                    "[INFO] Semantic-Badge-Regression aktiviert isoliertes SVG-Rendering automatisch "
                     "(entspricht --isolate-svg-render)."
                 )
             else:
+                configured_range = _semanticBadgeFullRange()
+                range_label = (
+                    f"{configured_range[0]}..{configured_range[1]}"
+                    if configured_range is not None
+                    else "Semantic-Badge"
+                )
                 print(
-                    "[INFO] Vollbereich AC0800..AC0899 aktiviert isoliertes SVG-Rendering automatisch "
+                    f"[INFO] Vollbereich {range_label} aktiviert isoliertes SVG-Rendering automatisch "
                     "(entspricht --isolate-svg-render)."
                 )
     set_svg_render_subprocess_timeout_fn(max(1.0, float(args.isolate_svg_render_timeout_sec)))
@@ -537,7 +571,7 @@ def runMainImpl(
             if args.ac08_regression_set:
                 selected_variants = set(ac08_regression_variant or ac08_regression_variants)
                 print(
-                    "[INFO] Verwende AC08-Regression-Auswahl "
+                    "[INFO] Verwende Semantic-Badge-Regression-Auswahl "
                     f"{ac08_regression_set_name}: {', '.join(sorted(selected_variants))}"
                 )
 
