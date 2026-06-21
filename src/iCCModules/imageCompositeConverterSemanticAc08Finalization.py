@@ -55,10 +55,10 @@ def finalizeAc08StyleImpl(
         p = tune_ac0833_co2_badge_fn(p)
     if symbol_name == "AC0820" and str(p.get("text_mode", "")).lower() == "co2":
         p["co2_anchor_mode"] = str(p.get("co2_anchor_mode", "center_co"))
-        # AC0820 is documented as the plain CO₂ badge; the source XML explicitly
-        # notes that a raised 2 is wrong for this family. Keep connector CO²
-        # families on their superscript-specific tuners, but render AC0820 with
-        # a lowered index by default.
+        # Plain centered CO₂ badges are documented with a lowered index; the
+        # source XML explicitly notes that a raised 2 is wrong for this topology.
+        # Keep connector CO² families on their superscript-specific tuners, but
+        # render this centered topology with a lowered index by default.
         p["co2_index_mode"] = "subscript"
         p.pop("co2_superscript_offset_scale", None)
         p.pop("co2_superscript_min_gap_scale", None)
