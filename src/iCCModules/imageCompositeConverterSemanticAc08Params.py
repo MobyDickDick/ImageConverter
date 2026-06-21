@@ -1,4 +1,4 @@
-"""AC08 badge-parameter dispatch extracted from the converter monolith."""
+"""Semantic badge-parameter dispatch extracted from the converter monolith."""
 
 from __future__ import annotations
 
@@ -37,7 +37,7 @@ def makeAc08BadgeParamsImpl(
     enforce_left_arm_badge_geometry_fn,
     enforce_right_arm_badge_geometry_fn=None,
 ) -> dict | None:
-    """Build semantic AC08 badge params for defaults and image-based fitting."""
+    """Build semantic badge params for defaults and image-based fitting."""
     if name == "AC0870":
         defaults = default_ac0870_params_fn(w, h)
         if img is None:

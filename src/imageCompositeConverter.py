@@ -179,7 +179,7 @@ except ValueError:
 
 
 AC08_ADAPTIVE_LOCK_PROFILES: dict[str, dict[str, float | bool]] = {
-    # Known AC08 outlier families from the improvement plan. Profiles only relax
+    # Known semantic-badge outlier families from the improvement plan. Profiles only relax
     # tightly bounded locks after validation stagnates or when the residual
     # error stays clearly above the "good enough" range.
     "AC0882": {
@@ -465,7 +465,7 @@ class Action:
     T_YMIN = 0
     T_YMAX = 1493
 
-    # AR0100 tuned defaults for 25x25.
+    # Tuned defaults for the compact reference badge.
     AR0100_BASE = {
         "cx": 12.654,
         "cy": 12.065,
@@ -491,7 +491,7 @@ class Action:
     }
 
     LIGHT_CIRCLE_FILL_GRAY = 242
-    # Einheitliche AC08xx-Grauwerte (entspricht #7F7F7F).
+    # Einheitliche Semantic-Badge-Grauwerte (entspricht #7F7F7F).
     LIGHT_CIRCLE_STROKE_GRAY = 127
     LIGHT_CIRCLE_TEXT_GRAY = 127
 
@@ -931,7 +931,7 @@ class Action:
 
     @staticmethod
     def _defaultAc0834Params(w: int, h: int) -> dict:
-        """Compatibility helper for AC0834 semantic tests and callers."""
+        """Compatibility helper for CO2 semantic-badge tests and callers."""
         return semantic_label_helpers.defaultAc0834ParamsImpl(
             w,
             h,

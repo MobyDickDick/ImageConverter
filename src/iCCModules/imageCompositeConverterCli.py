@@ -89,7 +89,7 @@ def parseArgsImpl(
         help=(
             "Fragt auf der Konsole 'Namen von' und 'Namen bis' ab und verarbeitet nur diesen Bereich. "
             "Wenn beide Eingaben keine volle Referenz sind, wird nach ihrem gemeinsamen Teilstring gefiltert "
-            "(z. B. AC08 und A08 => alle A08*-Dateien)."
+            "(z. B. gemeinsames Präfix und gekürztes Präfix => alle passenden Dateien)."
         ),
     )
     parser.add_argument(
@@ -439,12 +439,12 @@ def runMainImpl(
         if auto_enable_isolated_render and not bool(args.isolate_svg_render):
             if bool(getattr(args, "ac08_regression_set", False)):
                 print(
-                    "[INFO] AC08-Regression aktiviert isoliertes SVG-Rendering automatisch "
+                    "[INFO] Semantic-Badge-Regression aktiviert isoliertes SVG-Rendering automatisch "
                     "(entspricht --isolate-svg-render)."
                 )
             else:
                 print(
-                    "[INFO] Vollbereich AC0800..AC0899 aktiviert isoliertes SVG-Rendering automatisch "
+                    "[INFO] Semantic-Badge-Vollbereich aktiviert isoliertes SVG-Rendering automatisch "
                     "(entspricht --isolate-svg-render)."
                 )
     set_svg_render_subprocess_timeout_fn(max(1.0, float(args.isolate_svg_render_timeout_sec)))
@@ -537,7 +537,7 @@ def runMainImpl(
             if args.ac08_regression_set:
                 selected_variants = set(ac08_regression_variant or ac08_regression_variants)
                 print(
-                    "[INFO] Verwende AC08-Regression-Auswahl "
+                    "[INFO] Verwende Semantic-Badge-Regression-Auswahl "
                     f"{ac08_regression_set_name}: {', '.join(sorted(selected_variants))}"
                 )
 
