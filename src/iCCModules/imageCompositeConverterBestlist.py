@@ -195,8 +195,8 @@ def isConversionBestlistCandidateBetterImpl(
         return str(params.get("head_style", "")).lower() == "ac0223_triple_valve"
 
     if _has_ac0223_valve_head(candidate_row) and not _has_ac0223_valve_head(previous_row):
-        # AC0223 ohne Ventilkopf ist semantisch falsch, selbst wenn der reine
-        # Pixel-Fehler zufällig niedriger ausfällt.
+        # Three-way valve badges without the valve head are semantically wrong,
+        # even when the raw pixel error happens to be lower.
         return True
 
     improved, *_ = evaluate_candidate_fn(previous_row, candidate_row)
@@ -223,7 +223,7 @@ def chooseConversionBestlistRowImpl(
 
 
 def repairAc0223BestlistArtifactsImpl(output_root: str) -> dict[str, object]:
-    """Remove stale AC0223 bestlist artifacts that miss valve-head semantics."""
+    """Remove stale three-way valve bestlist artifacts that miss head semantics."""
     root = Path(output_root)
     svg_out_dir = root / "converted_svgs"
     reports_out_dir = root / "reports"
