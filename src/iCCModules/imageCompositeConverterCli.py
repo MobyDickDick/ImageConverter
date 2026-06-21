@@ -444,7 +444,7 @@ def runMainImpl(
                 )
             else:
                 print(
-                    "[INFO] Semantic-Badge-Vollbereich aktiviert isoliertes SVG-Rendering automatisch "
+                    "[INFO] Vollbereich AC0800..AC0899 aktiviert isoliertes SVG-Rendering automatisch "
                     "(entspricht --isolate-svg-render)."
                 )
     set_svg_render_subprocess_timeout_fn(max(1.0, float(args.isolate_svg_render_timeout_sec)))
