@@ -1,0 +1,64 @@
+{
+  "actual_iterations": 64,
+  "base": "GE9034",
+  "best_error": 26.2875,
+  "best_iter": 1,
+  "convergence": "",
+  "elapsed_seconds": 0.40700000000651926,
+  "error_per_pixel": 0.06571875,
+  "filename": "GE9034_2S.jpg",
+  "h": 20,
+  "localized_error_fraction": 0.4804575149802544,
+  "mean_delta2": 5931.552734375,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": false,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "GE9034",
+        "source": "base_name",
+        "text": "Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz."
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "geometry_ir": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "GE9034_2S"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 7935.206030708248,
+  "std_delta2": 9238.75390625,
+  "tile_std_delta2": 2184.6929800333137,
+  "variant": "GE9034_2S",
+  "w": 20
+}
