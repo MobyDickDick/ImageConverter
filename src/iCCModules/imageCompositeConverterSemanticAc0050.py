@@ -1,7 +1,7 @@
 """Geometry helpers for dual-stem symbols with bottom isosceles triangles.
 
-The module is named after AC0050, but the implementation is intentionally
-shape-driven so similar icons can be measured/refined with the same logic.
+The module keeps its historical API name, but the implementation is
+intentionally shape-driven so similar icons can be measured/refined with the same logic.
 """
 
 from __future__ import annotations
@@ -26,7 +26,7 @@ class Ac0050Geometry:
 
 @dataclass(frozen=True)
 class Ac0050DetectionConfig:
-    """Generalized detection config for AC0050-like geometries."""
+    """Generalized detection config for dual-stem triangle geometries."""
 
     min_peak_separation_ratio: float = 0.18
     line_window_ratio: float = 0.03
@@ -229,7 +229,7 @@ def measureAndDrawAc0050Impl(
     line_width = _estimateLineWidth(mask, int(left_x), int(right_x), np_module=np_module)
 
     # Color sampling is also generalized: read line and triangle tones from the
-    # measured image; fallback to canonical AC0050 colors when unavailable.
+    # measured image; fallback to canonical dual-stem colors when unavailable.
     sample_y_line = max(0.0, min(float(h - 1), (line_top + line_bottom) / 2.0))
     sample_y_tri = max(0.0, min(float(h - 1), line_bottom + max(1.0, (left_tri_h + right_tri_h) / 2.0)))
 

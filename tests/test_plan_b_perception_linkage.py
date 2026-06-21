@@ -15,7 +15,7 @@ from tools.perception_detection_contract import (
 )
 
 
-ACTIVE_VARIANTS: list[str] = ["GE9002_7S", "GE9002_5S", "GE9002_3S", "GE9002_4M", "GE9002_1S"]
+ACTIVE_VARIANTS: list[str] = ["GE1001_M", "GE9021_7M"]
 
 
 def test_plan_b_perception_targets_match_quality_triage() -> None:
