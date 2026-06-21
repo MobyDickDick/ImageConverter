@@ -783,7 +783,7 @@ def convertOneImpl(
             # A quality retry must never erase the usable result from the
             # preceding pass.  The previous implementation treated a high
             # mean-delta2 baseline as a hard failure and deleted it whenever a
-            # retry was not better.  This left families such as AC0224 without
+            # retry was not better.  This left right-rotated valve families without
             # their M/S outputs even though the initial conversion succeeded.
             with open(svg_path, "w", encoding="utf-8") as handle:
                 handle.write(previous_svg_content)

@@ -1,6 +1,6 @@
 """Generalized helpers for circle + symmetric chord form conversion.
 
-This module models forms like AC0204: a stroked circle with two oblique lines
+This module models symmetric chord-circle forms: a stroked circle with two oblique lines
 that are mirrored around the horizontal circle diameter and visually terminate
 at the circle border.
 """

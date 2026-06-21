@@ -305,7 +305,7 @@ def _mutate_right_rotated_valve_parameter(
     parameter: str,
     delta: float,
 ) -> GeometryIr:
-    """Adjust one topology-preserving parameter of the AC0224 valve glyph."""
+    """Adjust one topology-preserving parameter of the right-rotated valve glyph."""
 
     candidate = _clone_ir(geometry_ir)
     element = candidate[0]
@@ -371,7 +371,7 @@ def refineRightRotatedValveGeometryImpl(
     error_fn: ErrorFn,
     min_improvement: float = 1e-9,
 ) -> dict[str, Any]:
-    """Refine AC0224 geometry beyond a single global registration transform.
+    """Refine right-rotated valve geometry beyond a single global registration transform.
 
     A global transform cannot independently fit the handle and the three-way
     valve body.  This second phase retains the semantic topology and bilateral
