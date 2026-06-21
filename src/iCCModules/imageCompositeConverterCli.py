@@ -4,8 +4,10 @@ import argparse
 import builtins
 import contextlib
 import io
+import json
 import os
 import sys
+from functools import lru_cache
 from pathlib import Path
 
 
@@ -404,10 +406,34 @@ def _hasBatchFailures(reports_out_dir: str) -> bool:
         return False
 
 
+@lru_cache(maxsize=1)
+def _semanticBadgeFullRange() -> tuple[str, str] | None:
+    config_path = (
+        Path(__file__).resolve().parents[2] / "config" / "global_converter_config_v1.json"
+    )
+    try:
+        with config_path.open("r", encoding="utf-8") as handle:
+            config = json.load(handle)
+    except (OSError, json.JSONDecodeError):
+        return None
+    ranges = config.get("cli_ranges") if isinstance(config, dict) else None
+    full_range = ranges.get("semantic_badge_full_range") if isinstance(ranges, dict) else None
+    if not isinstance(full_range, dict):
+        return None
+    start = str(full_range.get("start", "") or "").strip().upper()
+    end = str(full_range.get("end", "") or "").strip().upper()
+    if not start or not end:
+        return None
+    return start, end
+
+
 def _isFullAc08Range(args: argparse.Namespace) -> bool:
+    configured_range = _semanticBadgeFullRange()
+    if configured_range is None:
+        return False
     start = str(getattr(args, "start", "") or "").strip().upper()
     end = str(getattr(args, "end", "") or "").strip().upper()
-    return start == "AC0800" and end == "AC0899"
+    return (start, end) == configured_range
 
 
 def runMainImpl(
@@ -443,8 +469,14 @@ def runMainImpl(
                     "(entspricht --isolate-svg-render)."
                 )
             else:
+                configured_range = _semanticBadgeFullRange()
+                range_label = (
+                    f"{configured_range[0]}..{configured_range[1]}"
+                    if configured_range is not None
+                    else "Semantic-Badge"
+                )
                 print(
-                    "[INFO] Vollbereich AC0800..AC0899 aktiviert isoliertes SVG-Rendering automatisch "
+                    f"[INFO] Vollbereich {range_label} aktiviert isoliertes SVG-Rendering automatisch "
                     "(entspricht --isolate-svg-render)."
                 )
     set_svg_render_subprocess_timeout_fn(max(1.0, float(args.isolate_svg_render_timeout_sec)))
