@@ -187,7 +187,7 @@ class Reflection:
             params["mode"] = "composite"
             params["top_source_ref"] = None
             params["bottom_shape"] = "square_cross"
-            params["elements"].append("GEOMETRIE: AC0030-artige Beschreibung wird über Geometry-IR rekonstruiert")
+            params["elements"].append("GEOMETRIE: Referenzartige Kreuz-/Kühlelement-Beschreibung wird über Geometry-IR rekonstruiert")
             params["elements"].append("UNTEN: Parametrisch generiertes Viereck mit Andreaskreuz")
             return desc, params
 

@@ -626,8 +626,8 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
                     [[0.610, 0.500], [0.455, 0.020], [0.765, 0.020]],
                     [[0.610, 0.500], [0.960, 0.667], [0.960, 0.333]],
                 ],
-                # AC0224's unlabelled circular handle is substantially larger
-                # than the motor-labelled handle inherited from AC0231.  Keep
+                # The unlabelled circular handle is substantially larger
+                # than the motor-labelled handle inherited from the related valve.  Keep
                 # its right edge aligned with the connector while extending the
                 # circle to the left, matching the raster family at every size.
                 "circle": [0.215, 0.500, 0.295],

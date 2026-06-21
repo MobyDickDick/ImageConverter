@@ -1,4 +1,6 @@
 - IDO-17 Run RG neutralizes Valve-Head SVG gradient identifiers and helper documentation in runtime code, lowering the legacy runtime-ID ratchet to 295 occurrences while keeping `head_style=ac0223_triple_valve` behavior intact.
+- IDO-17 Run RM neutralizes non-decision catalog-ID mentions in comments, docstrings, and a Geometry-IR log message; the hardcoding ratchet now passes with 246 legacy occurrences remaining.
+
 - IDO-17 Run RE removes three documentation-only catalog tokens from semantic badge defaults/fitting and ratchets the legacy runtime-ID baseline to 302 occurrences.
 - IDO-17 Run QZ removes the remaining vertical VOC badge CY guardrail from catalog-ID dispatch; element validation now uses text/connector/template geometry signals and the runtime-ID ratchet drops to 322 legacy occurrences.
 # Changelog
