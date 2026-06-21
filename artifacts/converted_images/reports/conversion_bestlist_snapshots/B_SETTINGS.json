@@ -1,0 +1,66 @@
+{
+  "actual_iterations": 64,
+  "base": "B_SETTINGS",
+  "best_error": 23.70135746606335,
+  "best_iter": 1,
+  "convergence": "",
+  "elapsed_seconds": 0.7809999999990396,
+  "error_per_pixel": 0.008937163448741837,
+  "filename": "b_settings.jpg",
+  "h": 52,
+  "localized_error_fraction": 0.7947948158235872,
+  "mean_delta2": 3912.939697265625,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "b_settings",
+        "source": "base_name",
+        "text": "Hintergrund: GE0999. Symbol wie GE0349 (Schrabenschlüssel unter Schraubendreher)"
+      }
+    ],
+    "documented_alias_refs": [
+      "GE0349"
+    ],
+    "elements": [],
+    "geometry_ir": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "B_SETTINGS"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 11068.832198755346,
+  "std_delta2": 9160.630859375,
+  "tile_std_delta2": 5646.659691859893,
+  "variant": "B_SETTINGS",
+  "w": 51
+}

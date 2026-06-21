@@ -3860,3 +3860,7 @@ endet. Die Detailableitung und Akzeptanzkriterien stehen in
 - **Ratchet:** `tools/check_no_new_image_id_hardcoding.py` meldet `316 legacy occurrences remain` nach aktualisierter Baseline.
 - **Blocker:** IDO-17 ist noch nicht abgeschlossen; weitere Runtime-Katalog-IDs bleiben in anderen Spezialpfaden.
 - **Nächster sinnvoller Schritt:** IDO-17 fortsetzen und den nächsten verbleibenden katalogspezifischen Runtime-Guard durch messbare Parameter, neutrale Metadaten oder reine Testdaten ersetzen.
+
+## Automatisch erzeugte Folgeaufgaben (Konvertierungsfehler)
+- [ ] AUFGABE: Fehleranalyse `DLG0016` (status=batch_error, reason=KeyError) und Gegenmaßnahme ableiten.
+

@@ -1,15 +1,15 @@
 {
   "actual_iterations": 64,
   "base": "GE9022",
-  "best_error": 22.537777777777777,
+  "best_error": 29.64666666666667,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 0.6719999999913853,
-  "error_per_pixel": 0.07512592592592592,
+  "elapsed_seconds": 0.31199999999989814,
+  "error_per_pixel": 0.09882222222222223,
   "filename": "GE9022_7S.jpg",
   "h": 10,
-  "localized_error_fraction": 0.6796005624742971,
-  "mean_delta2": 7139.83984375,
+  "localized_error_fraction": 0.840437133978726,
+  "mean_delta2": 9951.287109375,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -56,9 +56,9 @@
     "variant_name": "GE9022_7S"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 24703.39236882726,
-  "std_delta2": 14306.2001953125,
-  "tile_std_delta2": 11151.302524119423,
+  "spatial_quality_score": 20780.748747480284,
+  "std_delta2": 13961.044921875,
+  "tile_std_delta2": 10797.244958220874,
   "variant": "GE9022_7S",
   "w": 30
 }

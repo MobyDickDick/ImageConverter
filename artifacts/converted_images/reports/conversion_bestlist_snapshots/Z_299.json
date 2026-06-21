@@ -1,15 +1,15 @@
 {
   "actual_iterations": 64,
   "base": "Z_299",
-  "best_error": 25.804511278195488,
+  "best_error": 27.271929824561404,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 0.6570000000065193,
-  "error_per_pixel": 0.09700944089547175,
+  "elapsed_seconds": 0.7660000000014406,
+  "error_per_pixel": 0.10252605197203535,
   "filename": "z_299.jpg",
   "h": 14,
-  "localized_error_fraction": 0.6641517719180446,
-  "mean_delta2": 4155.48876953125,
+  "localized_error_fraction": 0.7545496489831367,
+  "mean_delta2": 4359.23681640625,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -56,9 +56,9 @@
     "variant_name": "Z_299"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 11605.072488347454,
-  "std_delta2": 7309.24560546875,
-  "tile_std_delta2": 5045.71832102368,
+  "spatial_quality_score": 10944.687337605239,
+  "std_delta2": 7486.1591796875,
+  "tile_std_delta2": 5328.4948785325605,
   "variant": "Z_299",
   "w": 19
 }

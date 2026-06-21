@@ -1,15 +1,15 @@
 {
   "actual_iterations": 64,
   "base": "GE9021",
-  "best_error": 28.942222222222224,
+  "best_error": 36.95333333333333,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 0.625,
-  "error_per_pixel": 0.09647407407407407,
+  "elapsed_seconds": 0.7029999999995198,
+  "error_per_pixel": 0.12317777777777777,
   "filename": "GE9021_2S.jpg",
   "h": 30,
   "localized_error_fraction": 0.5097714380975785,
-  "mean_delta2": 7736.3798828125,
+  "mean_delta2": 9076.4404296875,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -57,7 +57,7 @@
   },
   "requested_iterations": 64,
   "spatial_quality_score": 17929.123675412062,
-  "std_delta2": 16373.52734375,
+  "std_delta2": 16799.931640625,
   "tile_std_delta2": 8252.755568528535,
   "variant": "GE9021_2S",
   "w": 10

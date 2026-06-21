@@ -1,15 +1,61 @@
 {
+  "actual_iterations": 64,
   "base": "AC0254",
-  "best_error": 56.32258064516129,
+  "best_error": 21.56989247311828,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.05860830452149978,
+  "elapsed_seconds": 1.1560000000008586,
+  "error_per_pixel": 0.022445257516252114,
   "filename": "AC0254_1.jpg",
   "h": 31,
-  "mean_delta2": 22121.3515625,
+  "localized_error_fraction": 0.7023022357185243,
+  "mean_delta2": 4799.24853515625,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
+    "description_constraints": {
+      "elements": [
+        {
+          "blade_fill": "#f2f5f3",
+          "blade_points": [
+            [
+              0.055,
+              0.5
+            ],
+            [
+              0.765,
+              0.155
+            ],
+            [
+              0.765,
+              0.845
+            ]
+          ],
+          "blade_stroke": "#b4c9b8",
+          "blade_stroke_width": 0.02,
+          "circle": [
+            0.5,
+            0.5,
+            0.455
+          ],
+          "circle_fill": "#45aa5e",
+          "circle_stroke": "#78957d",
+          "confidence": 0.75,
+          "id": "description_element_1",
+          "kind": "LeftRotatedCircularDamperGlyph",
+          "source": "description",
+          "stroke_width": 0.04
+        }
+      ],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
+      }
+    },
     "description_contract": {
       "deficits": [],
       "has_conditions": false,
@@ -28,9 +74,174 @@
       "AC0521"
     ],
     "elements": [],
-    "geometry_ir": [],
+    "geometry_ir": [
+      {
+        "blade_fill": "#f2f5f3",
+        "blade_points": [
+          [
+            0.055,
+            0.5
+          ],
+          [
+            0.765,
+            0.155
+          ],
+          [
+            0.765,
+            0.845
+          ]
+        ],
+        "blade_stroke": "#b4c9b8",
+        "blade_stroke_width": 0.02,
+        "circle": [
+          0.5,
+          0.5,
+          0.455
+        ],
+        "circle_fill": "#45aa5e",
+        "circle_stroke": "#78957d",
+        "id": "left_rotated_circular_damper",
+        "kind": "LeftRotatedCircularDamperGlyph",
+        "stroke_width": 0.04
+      }
+    ],
+    "geometry_ir_optimizer_result": {
+      "element_refinement": {
+        "final_error": 44.38501560874089,
+        "initial_error": 44.38501560874089,
+        "mode": "right_rotated_valve_geometry",
+        "steps": []
+      },
+      "final_error": 44.38501560874089,
+      "initial_error": 47.763440860215056,
+      "mode": "geometry_ir_raster_registration",
+      "parameters": {
+        "scale_x": 1.0,
+        "scale_y": 1.04,
+        "stroke_scale": 1.62,
+        "translate_x": 0.01,
+        "translate_y": 0.0
+      },
+      "steps": [
+        {
+          "best_delta": 0.8241415192507802,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 1.25
+        },
+        {
+          "best_delta": 0.392646548733957,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 1.5
+        },
+        {
+          "best_delta": 0.24210891432535675,
+          "parameter": "scale_x",
+          "stage": 1,
+          "value": 1.08
+        },
+        {
+          "best_delta": 0.8196323274367003,
+          "parameter": "translate_x",
+          "stage": 2,
+          "value": 0.02
+        },
+        {
+          "best_delta": 0.2892819979188346,
+          "parameter": "scale_x",
+          "stage": 2,
+          "value": 1.04
+        },
+        {
+          "best_delta": 0.07734998265695481,
+          "parameter": "stroke_scale",
+          "stage": 2,
+          "value": 1.58
+        },
+        {
+          "best_delta": 0.057925771765518164,
+          "parameter": "scale_x",
+          "stage": 2,
+          "value": 1.0
+        },
+        {
+          "best_delta": 0.4415539368713155,
+          "parameter": "scale_y",
+          "stage": 2,
+          "value": 1.04
+        },
+        {
+          "best_delta": 0.02670828997572272,
+          "parameter": "stroke_scale",
+          "stage": 2,
+          "value": 1.6600000000000001
+        },
+        {
+          "best_delta": 0.08706208810266958,
+          "parameter": "scale_y",
+          "stage": 2,
+          "value": 1.08
+        },
+        {
+          "best_delta": 0.001387443635103125,
+          "parameter": "scale_y",
+          "stage": 3,
+          "value": 1.06
+        },
+        {
+          "best_delta": 0.059660076309398846,
+          "parameter": "translate_x",
+          "stage": 3,
+          "value": 0.01
+        },
+        {
+          "best_delta": 0.03468609087755681,
+          "parameter": "scale_y",
+          "stage": 3,
+          "value": 1.04
+        },
+        {
+          "best_delta": 0.02428026361429403,
+          "parameter": "stroke_scale",
+          "stage": 3,
+          "value": 1.62
+        }
+      ]
+    },
     "label": "M",
     "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "blade_fill": "#f2f5f3",
+        "blade_points": [
+          [
+            0.06499999999999999,
+            0.5
+          ],
+          [
+            0.775,
+            0.1412
+          ],
+          [
+            0.775,
+            0.8588
+          ]
+        ],
+        "blade_stroke": "#b4c9b8",
+        "blade_stroke_width": 0.02,
+        "circle": [
+          0.51,
+          0.5,
+          0.455
+        ],
+        "circle_fill": "#45aa5e",
+        "circle_stroke": "#78957d",
+        "id": "left_rotated_circular_damper",
+        "kind": "LeftRotatedCircularDamperGlyph",
+        "stroke_width": 0.06480000000000001
+      }
+    ],
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
@@ -41,7 +252,10 @@
     "top_source_ref": null,
     "variant_name": "AC0254_1"
   },
-  "std_delta2": 26492.125,
+  "requested_iterations": 64,
+  "spatial_quality_score": 32301.184479350613,
+  "std_delta2": 12070.9677734375,
+  "tile_std_delta2": 14339.0971009959,
   "variant": "AC0254_1",
   "w": 31
 }

@@ -1,15 +1,15 @@
 {
   "actual_iterations": 64,
   "base": "AC0424",
-  "best_error": 38.62148148148148,
+  "best_error": 43.955555555555556,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 0.5,
-  "error_per_pixel": 0.04291275720164609,
+  "elapsed_seconds": 0.7970000000004802,
+  "error_per_pixel": 0.048839506172839504,
   "filename": "AC0424_2_M.jpg",
   "h": 30,
   "localized_error_fraction": 0.5076192084205277,
-  "mean_delta2": 8275.353515625,
+  "mean_delta2": 13310.388671875,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -65,7 +65,7 @@
   },
   "requested_iterations": 64,
   "spatial_quality_score": 16867.040632784563,
-  "std_delta2": 13312.7939453125,
+  "std_delta2": 19878.9140625,
   "tile_std_delta2": 7004.140751065486,
   "variant": "AC0424_2_M",
   "w": 30

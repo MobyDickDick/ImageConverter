@@ -1,14 +1,70 @@
 {
+  "actual_iterations": 64,
   "base": "GE9001_3SX",
-  "best_error": 6.372849462365592,
+  "best_error": 6.4759856630824375,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.001713131575904729,
+  "elapsed_seconds": 1.139999999999418,
+  "error_per_pixel": 0.001740856361043666,
   "filename": "GE9001_3Sx.jpg",
   "h": 60,
-  "mean_delta2": 1190.66796875,
+  "localized_error_fraction": 0.9649730093500766,
+  "mean_delta2": 1201.5311279296875,
   "params": {
     "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [
+        {
+          "bbox": [
+            0.32,
+            0.12,
+            0.36,
+            0.76
+          ],
+          "confidence": 0.75,
+          "constraint": "inside_rect_border",
+          "id": "description_element_1",
+          "kind": "HorizontalGradient",
+          "source": "description",
+          "stops": [
+            "#8f8f8f",
+            "#dedede",
+            "#8f8f8f"
+          ]
+        },
+        {
+          "bbox": [
+            0.32,
+            0.12,
+            0.36,
+            0.76
+          ],
+          "confidence": 0.75,
+          "fill": "none",
+          "id": "description_element_2",
+          "kind": "RectBorder",
+          "source": "description",
+          "stroke": "#666666",
+          "stroke_width": 0.035
+        }
+      ],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": true,
+      "has_reference": false,
+      "status": "ok"
+    },
     "description_fragments": [
       {
         "key": "GE9001_3Sx",
@@ -18,8 +74,222 @@
     ],
     "documented_alias_refs": [],
     "elements": [],
+    "geometry_ir": [
+      {
+        "bbox": [
+          0.32,
+          0.12,
+          0.36,
+          0.76
+        ],
+        "constraint": "inside_rect_border",
+        "id": "background_gradient",
+        "kind": "HorizontalGradient",
+        "stops": [
+          "#8f8f8f",
+          "#dedede",
+          "#8f8f8f"
+        ]
+      },
+      {
+        "bbox": [
+          0.32,
+          0.12,
+          0.36,
+          0.76
+        ],
+        "fill": "none",
+        "id": "main_rect",
+        "kind": "RectBorder",
+        "stroke": "#666666",
+        "stroke_width": 0.035
+      }
+    ],
+    "geometry_ir_optimizer_result": {
+      "element_refinement": {
+        "final_error": 6.4759856630824375,
+        "initial_error": 6.4759856630824375,
+        "mode": "right_rotated_valve_geometry",
+        "steps": []
+      },
+      "final_error": 6.4759856630824375,
+      "initial_error": 28.59704301075269,
+      "mode": "geometry_ir_raster_registration",
+      "parameters": {
+        "scale_x": 0.2099999999999999,
+        "scale_y": 0.2099999999999999,
+        "stroke_scale": 0.21,
+        "translate_x": 0.02,
+        "translate_y": 0.0
+      },
+      "steps": [
+        {
+          "best_delta": 0.17401433691756196,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": 0.08
+        },
+        {
+          "best_delta": 0.0247311827957013,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": -0.08
+        },
+        {
+          "best_delta": 4.3758064516129025,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.85
+        },
+        {
+          "best_delta": 2.7407706093189965,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 0.85
+        },
+        {
+          "best_delta": 1.8539426523297493,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 0.75
+        },
+        {
+          "best_delta": 0.14417562724014132,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": 0.0
+        },
+        {
+          "best_delta": 0.02652329749104254,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": 0.0
+        },
+        {
+          "best_delta": 0.4481182795698899,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.7
+        },
+        {
+          "best_delta": 2.4662186379928315,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 0.7
+        },
+        {
+          "best_delta": 1.516845878136202,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 0.5
+        },
+        {
+          "best_delta": 1.0444444444444443,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.5499999999999999
+        },
+        {
+          "best_delta": 2.025268817204301,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 0.5499999999999999
+        },
+        {
+          "best_delta": 1.0522401433691755,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 0.25
+        },
+        {
+          "best_delta": 1.4060035842293903,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.3999999999999999
+        },
+        {
+          "best_delta": 1.1691756272401435,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 0.3999999999999999
+        },
+        {
+          "best_delta": 0.6171146953405016,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.24999999999999992
+        },
+        {
+          "best_delta": 0.6913082437275992,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 0.24999999999999992
+        },
+        {
+          "best_delta": 0.026164874551970918,
+          "parameter": "translate_x",
+          "stage": 1,
+          "value": 0.04
+        },
+        {
+          "best_delta": 0.05949820788530502,
+          "parameter": "translate_x",
+          "stage": 2,
+          "value": 0.02
+        },
+        {
+          "best_delta": 0.04077060931899634,
+          "parameter": "scale_x",
+          "stage": 2,
+          "value": 0.2099999999999999
+        },
+        {
+          "best_delta": 0.15170250896057347,
+          "parameter": "scale_y",
+          "stage": 2,
+          "value": 0.2099999999999999
+        },
+        {
+          "best_delta": 0.06621863799283112,
+          "parameter": "stroke_scale",
+          "stage": 3,
+          "value": 0.21
+        }
+      ]
+    },
     "label": "M",
     "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "bbox": [
+          0.4822,
+          0.4202,
+          0.07559999999999996,
+          0.15959999999999994
+        ],
+        "constraint": "inside_rect_border",
+        "id": "background_gradient",
+        "kind": "HorizontalGradient",
+        "stops": [
+          "#8f8f8f",
+          "#dedede",
+          "#8f8f8f"
+        ]
+      },
+      {
+        "bbox": [
+          0.4822,
+          0.4202,
+          0.07559999999999996,
+          0.15959999999999994
+        ],
+        "fill": "none",
+        "id": "main_rect",
+        "kind": "RectBorder",
+        "stroke": "#666666",
+        "stroke_width": 0.007350000000000001
+      }
+    ],
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
@@ -30,7 +300,10 @@
     "top_source_ref": null,
     "variant_name": "GE9001_3SX"
   },
-  "std_delta2": 3997.08203125,
+  "requested_iterations": 64,
+  "spatial_quality_score": 4170.730987007028,
+  "std_delta2": 4033.90478515625,
+  "tile_std_delta2": 2421.956365241011,
   "variant": "GE9001_3SX",
   "w": 62
 }

@@ -1,0 +1,166 @@
+{
+  "actual_iterations": 64,
+  "base": "AC1001",
+  "best_error": 39.016,
+  "best_iter": 1,
+  "convergence": "",
+  "elapsed_seconds": 0.75,
+  "error_per_pixel": 0.10404266666666666,
+  "filename": "AC1001_S.jpg",
+  "h": 25,
+  "localized_error_fraction": 0.6386655038109204,
+  "mean_delta2": 8723.3515625,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [
+        {
+          "badge_role": "circle_text_badge",
+          "bbox": [
+            0.08,
+            0.08,
+            0.84,
+            0.84
+          ],
+          "confidence": 0.75,
+          "fill": "#f2f2f2",
+          "id": "description_element_1",
+          "kind": "CircleBackground",
+          "source": "description",
+          "stroke": "#7f7f7f",
+          "stroke_width": 0.055
+        },
+        {
+          "bbox_ref": "described_circle",
+          "confidence": 0.75,
+          "fill": "#666666",
+          "font_size": 0.42,
+          "font_weight": "700",
+          "glyph_evidence": {
+            "normalized_text": "M",
+            "position": "center",
+            "source": "description_text"
+          },
+          "id": "description_element_2",
+          "kind": "TextGlyph",
+          "relation": "centered_in",
+          "source": "description",
+          "target_ref": "described_circle",
+          "text": "M",
+          "text_anchor": [
+            0.5,
+            0.5
+          ],
+          "text_position": "center"
+        }
+      ],
+      "relations": [
+        {
+          "confidence": 0.75,
+          "object": "described_circle",
+          "source": "description",
+          "subject": "description_element_2",
+          "type": "bbox"
+        },
+        {
+          "confidence": 0.75,
+          "object": "described_circle",
+          "source": "description",
+          "subject": "description_element_2",
+          "type": "target"
+        },
+        {
+          "confidence": 0.75,
+          "object": "described_circle",
+          "source": "description",
+          "subject": "description_element_2",
+          "type": "centered_in"
+        }
+      ],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": false,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "AC1001",
+        "source": "base_name",
+        "text": "Kreisförmiges Badge. Abweichung: mit Text \"M\" (Motor) Abweichung: mit Kelle (graue horizontale Linie) nach unten. Der Griff liegt auf einer Symmetrieachse des Kreises."
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [
+      "SEMANTIC: Kreis + Buchstabe"
+    ],
+    "geometry_ir": [
+      {
+        "badge_role": "circle_text_badge",
+        "bbox": [
+          0.08,
+          0.08,
+          0.84,
+          0.84
+        ],
+        "fill": "#f2f2f2",
+        "id": "described_circle",
+        "kind": "CircleBackground",
+        "stroke": "#7f7f7f",
+        "stroke_width": 0.055
+      },
+      {
+        "bbox_ref": "described_circle",
+        "fill": "#666666",
+        "font_size": 0.42,
+        "font_weight": "700",
+        "glyph_evidence": {
+          "normalized_text": "M",
+          "position": "center",
+          "source": "description_text"
+        },
+        "id": "circle_badge_text",
+        "kind": "TextGlyph",
+        "relation": "centered_in",
+        "target_ref": "described_circle",
+        "text": "M",
+        "text_anchor": [
+          0.5,
+          0.5
+        ],
+        "text_position": "center"
+      }
+    ],
+    "label": "M",
+    "mode": "semantic_badge",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {
+      "description_heuristic": [
+        "SEMANTIC: Kreis + Buchstabe"
+      ]
+    },
+    "top_source_ref": null,
+    "variant_name": "AC1001_S"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 20246.7488253969,
+  "std_delta2": 14084.59375,
+  "tile_std_delta2": 9525.73207994061,
+  "variant": "AC1001_S",
+  "w": 15
+}

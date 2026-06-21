@@ -1,0 +1,175 @@
+{
+  "actual_iterations": 64,
+  "base": "SE0102",
+  "best_error": 28.009375,
+  "best_iter": 1,
+  "convergence": "",
+  "elapsed_seconds": 0.34399999999914144,
+  "error_per_pixel": 0.029176432291666665,
+  "filename": "SE0102.jpg",
+  "h": 24,
+  "localized_error_fraction": 0.5915323957246572,
+  "mean_delta2": 6544.796875,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [
+        {
+          "badge_role": "circle_text_badge",
+          "bbox": [
+            0.08,
+            0.08,
+            0.84,
+            0.84
+          ],
+          "confidence": 0.75,
+          "fill": "#f2f2f2",
+          "id": "description_element_1",
+          "kind": "CircleBackground",
+          "source": "description",
+          "stroke": "#7f7f7f",
+          "stroke_width": 0.055
+        },
+        {
+          "bbox_ref": "described_circle",
+          "confidence": 0.75,
+          "fill": "#666666",
+          "font_size": 0.3,
+          "font_weight": "700",
+          "glyph_evidence": {
+            "normalized_text": "CO₂",
+            "position": "center",
+            "source": "description_text"
+          },
+          "id": "description_element_2",
+          "kind": "TextGlyph",
+          "relation": "centered_in",
+          "source": "description",
+          "target_ref": "described_circle",
+          "text": "CO₂",
+          "text_anchor": [
+            0.5,
+            0.5
+          ],
+          "text_position": "center"
+        }
+      ],
+      "relations": [
+        {
+          "confidence": 0.75,
+          "object": "described_circle",
+          "source": "description",
+          "subject": "description_element_2",
+          "type": "bbox"
+        },
+        {
+          "confidence": 0.75,
+          "object": "described_circle",
+          "source": "description",
+          "subject": "description_element_2",
+          "type": "target"
+        },
+        {
+          "confidence": 0.75,
+          "object": "described_circle",
+          "source": "description",
+          "subject": "description_element_2",
+          "type": "centered_in"
+        }
+      ],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "SE0102",
+        "source": "base_name",
+        "text": "Wie AC0831, mit Text \"CO2\". Abweichung: nach rechts gekippt."
+      }
+    ],
+    "documented_alias_refs": [
+      "AC0831"
+    ],
+    "elements": [
+      "SEMANTIC: senkrechter Strich hinter dem Kreis",
+      "SEMANTIC: Kreis + Buchstabe CO_2",
+      "SEMANTIC: waagrechter Strich rechts vom Kreis",
+      "REFERENZ: Abgeleitet aus AC0831"
+    ],
+    "geometry_ir": [
+      {
+        "badge_role": "circle_text_badge",
+        "bbox": [
+          0.08,
+          0.08,
+          0.84,
+          0.84
+        ],
+        "fill": "#f2f2f2",
+        "id": "described_circle",
+        "kind": "CircleBackground",
+        "stroke": "#7f7f7f",
+        "stroke_width": 0.055
+      },
+      {
+        "bbox_ref": "described_circle",
+        "fill": "#666666",
+        "font_size": 0.3,
+        "font_weight": "700",
+        "glyph_evidence": {
+          "normalized_text": "CO₂",
+          "position": "center",
+          "source": "description_text"
+        },
+        "id": "circle_badge_text",
+        "kind": "TextGlyph",
+        "relation": "centered_in",
+        "target_ref": "described_circle",
+        "text": "CO₂",
+        "text_anchor": [
+          0.5,
+          0.5
+        ],
+        "text_position": "center"
+      }
+    ],
+    "label": "CO_2",
+    "mode": "semantic_badge",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {
+      "description_heuristic": [
+        "SEMANTIC: Kreis + Buchstabe CO_2",
+        "SEMANTIC: waagrechter Strich rechts vom Kreis"
+      ],
+      "family_rule": [
+        "SEMANTIC: senkrechter Strich hinter dem Kreis"
+      ]
+    },
+    "top_source_ref": null,
+    "variant_name": "SE0102"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 14577.895983495611,
+  "std_delta2": 13536.1083984375,
+  "tile_std_delta2": 6311.33701757675,
+  "variant": "SE0102",
+  "w": 40
+}

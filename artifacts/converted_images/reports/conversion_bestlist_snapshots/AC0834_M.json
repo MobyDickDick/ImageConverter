@@ -1,57 +1,6 @@
 {
-  "base": "AC0834",
-  "best_error": 17.824285714285715,
-  "best_iter": 1,
-  "convergence": "",
-  "error_per_pixel": 0.02546326530612245,
   "filename": "AC0834_M.jpg",
-  "h": 20,
-  "mean_delta2": 4562.490234375,
-  "params": {
-    "bottom_shape": null,
-    "contract_status": "ok",
-    "description_contract": {
-      "deficits": [],
-      "has_conditions": false,
-      "has_geometry_terms": true,
-      "has_reference": true,
-      "status": "ok"
-    },
-    "description_fragments": [
-      {
-        "key": "AC0834",
-        "source": "base_name",
-        "text": "Wie AC080, jedoch Griff unten (als Kelle ausfeführt) Abweichung: nach links gedreht, Text immer noch horizontal. Der Griff liegt auf einer Symmetrieachse des Kreises."
-      }
-    ],
-    "documented_alias_refs": [
-      "AC080"
-    ],
-    "elements": [
-      "SEMANTIC: waagrechter Strich rechts vom Kreis",
-      "SEMANTIC: Kreis + Buchstabe"
-    ],
-    "geometry_ir": [],
-    "label": "T",
-    "mode": "semantic_badge",
-    "semantic_conflicts": [],
-    "semantic_priority_order": [
-      "family_rule",
-      "layout_override",
-      "description_heuristic"
-    ],
-    "semantic_sources": {
-      "description_heuristic": [
-        "SEMANTIC: Kreis + Buchstabe"
-      ],
-      "family_rule": [
-        "SEMANTIC: waagrechter Strich rechts vom Kreis"
-      ]
-    },
-    "top_source_ref": null,
-    "variant_name": "AC0834_M"
-  },
-  "std_delta2": 12438.166015625,
-  "variant": "AC0834_M",
-  "w": 35
+  "mean_delta2": 4659.2958984375,
+  "std_delta2": 11822.0068359375,
+  "variant": "AC0834_M"
 }

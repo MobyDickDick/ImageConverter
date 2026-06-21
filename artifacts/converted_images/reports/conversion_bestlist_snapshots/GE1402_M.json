@@ -1,15 +1,15 @@
 {
   "actual_iterations": 64,
   "base": "GE1402",
-  "best_error": 12.459809523809524,
+  "best_error": 13.69104761904762,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 1.0780000000086147,
-  "error_per_pixel": 0.01423978231292517,
+  "elapsed_seconds": 0.35900000000037835,
+  "error_per_pixel": 0.015646911564625852,
   "filename": "GE1402_M.jpg",
   "h": 25,
   "localized_error_fraction": 0.5537625338517057,
-  "mean_delta2": 984.41943359375,
+  "mean_delta2": 900.9885864257812,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -60,7 +60,7 @@
   },
   "requested_iterations": 64,
   "spatial_quality_score": 1846.1301676356775,
-  "std_delta2": 2473.88037109375,
+  "std_delta2": 1705.520263671875,
   "tile_std_delta2": 649.1897224982432,
   "variant": "GE1402_M",
   "w": 35

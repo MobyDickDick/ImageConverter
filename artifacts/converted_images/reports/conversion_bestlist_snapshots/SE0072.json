@@ -1,0 +1,80 @@
+{
+  "actual_iterations": 64,
+  "base": "SE0072",
+  "best_error": 27.60457142857143,
+  "best_iter": 1,
+  "convergence": "",
+  "elapsed_seconds": 0.40600000000085856,
+  "error_per_pixel": 0.03154808163265306,
+  "filename": "SE0072.jpg",
+  "h": 25,
+  "localized_error_fraction": 0.5860960757780784,
+  "mean_delta2": 7378.17578125,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "SE0072",
+        "source": "base_name",
+        "text": "Wie SE0041, aber nach rechts gekippt. \"T\" steht waagrecht geschrieben."
+      }
+    ],
+    "documented_alias_refs": [
+      "SE0041"
+    ],
+    "elements": [
+      "SEMANTIC: Kreis ohne Buchstabe",
+      "SEMANTIC: senkrechter Strich hinter dem Kreis",
+      "SEMANTIC: waagrechter Strich rechts vom Kreis",
+      "REFERENZ: Abgeleitet aus AC0811",
+      "REFERENZ: Abgeleitet aus SE0041"
+    ],
+    "geometry_ir": [],
+    "label": "",
+    "mode": "semantic_badge",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {
+      "description_heuristic": [
+        "SEMANTIC: waagrechter Strich rechts vom Kreis"
+      ],
+      "family_rule": [
+        "SEMANTIC: Kreis ohne Buchstabe",
+        "SEMANTIC: senkrechter Strich hinter dem Kreis"
+      ]
+    },
+    "top_source_ref": null,
+    "variant_name": "SE0072"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 16542.568735414585,
+  "std_delta2": 15426.099609375,
+  "tile_std_delta2": 7606.374686483202,
+  "variant": "SE0072",
+  "w": 35
+}

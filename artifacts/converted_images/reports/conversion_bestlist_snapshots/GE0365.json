@@ -1,14 +1,38 @@
 {
+  "actual_iterations": 64,
   "base": "GE0365",
-  "best_error": 45.56812291743799,
+  "best_error": 22.86338393187708,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.008435417052469084,
+  "elapsed_seconds": 0.7649999999994179,
+  "error_per_pixel": 0.004232392434631077,
   "filename": "GE0365.jpg",
   "h": 74,
-  "mean_delta2": 13589.5537109375,
+  "localized_error_fraction": 0.623648792153094,
+  "mean_delta2": 4646.4677734375,
   "params": {
     "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
     "description_fragments": [
       {
         "key": "GE0365",
@@ -20,6 +44,7 @@
       "GE0360"
     ],
     "elements": [],
+    "geometry_ir": [],
     "label": "M",
     "mode": "auto",
     "semantic_conflicts": [],
@@ -32,7 +57,10 @@
     "top_source_ref": null,
     "variant_name": "GE0365"
   },
-  "std_delta2": 19609.68359375,
+  "requested_iterations": 64,
+  "spatial_quality_score": 16525.90664453828,
+  "std_delta2": 11156.5458984375,
+  "tile_std_delta2": 7908.414813726962,
   "variant": "GE0365",
   "w": 73
 }

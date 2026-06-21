@@ -1,0 +1,64 @@
+{
+  "actual_iterations": 64,
+  "base": "GE0021",
+  "best_error": 10.376481481481482,
+  "best_iter": 1,
+  "convergence": "",
+  "elapsed_seconds": 0.875,
+  "error_per_pixel": 0.0028823559670781897,
+  "filename": "GE0021_M.jpg",
+  "h": 60,
+  "localized_error_fraction": 0.5715697315269659,
+  "mean_delta2": 583.314453125,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": true,
+      "has_reference": false,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "GE0021",
+        "source": "base_name",
+        "text": "Dicker Pfeil nach oben vor blaugrauem Hintergrund. Hintergrund GE0999"
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "geometry_ir": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "GE0021_M"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 1386.285920127571,
+  "std_delta2": 743.072998046875,
+  "tile_std_delta2": 625.646895061185,
+  "variant": "GE0021_M",
+  "w": 60
+}

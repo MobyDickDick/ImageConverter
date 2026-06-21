@@ -1,15 +1,15 @@
 {
   "actual_iterations": 64,
   "base": "AC0153",
-  "best_error": 25.71053613053613,
+  "best_error": 34.53925407925408,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 1.1400000000139698,
-  "error_per_pixel": 0.003595879179095962,
+  "elapsed_seconds": 1.0319999999992433,
+  "error_per_pixel": 0.0048306649061893815,
   "filename": "AC0153_S.jpg",
   "h": 110,
   "localized_error_fraction": 0.5102946903674879,
-  "mean_delta2": 6747.15869140625,
+  "mean_delta2": 10776.96484375,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -57,7 +57,7 @@
   },
   "requested_iterations": 64,
   "spatial_quality_score": 14942.16643011209,
-  "std_delta2": 14805.21484375,
+  "std_delta2": 19395.07421875,
   "tile_std_delta2": 5628.229840760655,
   "variant": "AC0153_S",
   "w": 65

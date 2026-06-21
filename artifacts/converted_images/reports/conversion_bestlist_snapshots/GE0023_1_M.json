@@ -1,15 +1,15 @@
 {
   "actual_iterations": 64,
   "base": "GE0023",
-  "best_error": 19.209814814814816,
+  "best_error": 19.406111111111112,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 0.75,
-  "error_per_pixel": 0.005336059670781893,
+  "elapsed_seconds": 0.8600000000005821,
+  "error_per_pixel": 0.005390586419753087,
   "filename": "GE0023_1_M.jpg",
   "h": 60,
   "localized_error_fraction": 0.3870067098738023,
-  "mean_delta2": 2757.66455078125,
+  "mean_delta2": 2770.62548828125,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -59,7 +59,7 @@
   },
   "requested_iterations": 64,
   "spatial_quality_score": 5450.931886710978,
-  "std_delta2": 4013.490234375,
+  "std_delta2": 4004.759033203125,
   "tile_std_delta2": 1566.008942458334,
   "variant": "GE0023_1_M",
   "w": 60

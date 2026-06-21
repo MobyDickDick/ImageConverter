@@ -1,14 +1,38 @@
 {
+  "actual_iterations": 64,
   "base": "GE9042",
-  "best_error": 14.339166666666667,
+  "best_error": 15.2725,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.03584791666666667,
+  "elapsed_seconds": 0.3279999999995198,
+  "error_per_pixel": 0.03818125,
   "filename": "GE9042_3S.jpg",
   "h": 20,
-  "mean_delta2": 2375.1923828125,
+  "localized_error_fraction": 0.7813752075889895,
+  "mean_delta2": 2316.777587890625,
   "params": {
     "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": false,
+      "has_reference": true,
+      "status": "ok"
+    },
     "description_fragments": [
       {
         "key": "GE9042",
@@ -18,6 +42,7 @@
     ],
     "documented_alias_refs": [],
     "elements": [],
+    "geometry_ir": [],
     "label": "M",
     "mode": "auto",
     "semantic_conflicts": [],
@@ -30,7 +55,10 @@
     "top_source_ref": null,
     "variant_name": "GE9042_3S"
   },
-  "std_delta2": 4847.0400390625,
+  "requested_iterations": 64,
+  "spatial_quality_score": 7130.711833064104,
+  "std_delta2": 6214.07861328125,
+  "tile_std_delta2": 4943.9144012558745,
   "variant": "GE9042_3S",
   "w": 20
 }

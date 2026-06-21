@@ -1,0 +1,64 @@
+{
+  "actual_iterations": 64,
+  "base": "BTN_SETT",
+  "best_error": 20.539989264626946,
+  "best_iter": 1,
+  "convergence": "",
+  "elapsed_seconds": 0.625,
+  "error_per_pixel": 0.0007350148242843781,
+  "filename": "btn_sett.jpg",
+  "h": 81,
+  "localized_error_fraction": 0.8927279948712603,
+  "mean_delta2": 4330.59326171875,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": false,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "btn_sett",
+        "source": "base_name",
+        "text": "Hintergrund wie DLG002, Werkzeuge wie bei b_settings"
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "geometry_ir": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "BTN_SETT"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 14490.454139138481,
+  "std_delta2": 15140.400390625,
+  "tile_std_delta2": 8797.239402692187,
+  "variant": "BTN_SETT",
+  "w": 345
+}

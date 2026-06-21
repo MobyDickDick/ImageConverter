@@ -1,0 +1,229 @@
+{
+  "actual_iterations": 64,
+  "base": "DLG0003",
+  "best_error": 10.224885015734689,
+  "best_iter": 1,
+  "convergence": "",
+  "elapsed_seconds": 1.3430000000007567,
+  "error_per_pixel": 0.00037127396571295164,
+  "filename": "DLG0003.jpg",
+  "h": 81,
+  "localized_error_fraction": 0.5723454107541319,
+  "mean_delta2": 531.3375244140625,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [
+        {
+          "bbox": [
+            0.18,
+            0.24,
+            0.64,
+            0.56
+          ],
+          "confidence": 0.75,
+          "fill": "#d8d8d8",
+          "id": "description_element_1",
+          "kind": "RectBorder",
+          "source": "description",
+          "stroke": "#666666",
+          "stroke_width": 0.035
+        }
+      ],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "DLG0003",
+        "source": "base_name",
+        "text": "Wie DLG0002: Rechteck mit vertikalem Farbverlauf weiss nach grau. Geometrische Variante: identisch zur Referenz."
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "geometry_ir": [
+      {
+        "bbox": [
+          0.18,
+          0.24,
+          0.64,
+          0.56
+        ],
+        "fill": "#d8d8d8",
+        "id": "main_rect",
+        "kind": "RectBorder",
+        "stroke": "#666666",
+        "stroke_width": 0.035
+      }
+    ],
+    "geometry_ir_optimizer_result": {
+      "element_refinement": {
+        "final_error": 10.224885015734689,
+        "initial_error": 10.224885015734689,
+        "mode": "right_rotated_valve_geometry",
+        "steps": []
+      },
+      "final_error": 10.224885015734689,
+      "initial_error": 26.719474703461632,
+      "mode": "geometry_ir_raster_registration",
+      "parameters": {
+        "scale_x": 1.5999999999999996,
+        "scale_y": 1.1799999999999997,
+        "stroke_scale": 0.21,
+        "translate_x": 0.0,
+        "translate_y": 0.24
+      },
+      "steps": [
+        {
+          "best_delta": 2.987012829823289,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": 0.08
+        },
+        {
+          "best_delta": 0.39732510288065725,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 1.15
+        },
+        {
+          "best_delta": 1.2376906318082774,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 1.15
+        },
+        {
+          "best_delta": 1.1553982086661847,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 0.75
+        },
+        {
+          "best_delta": 3.58460421205519,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": 0.16
+        },
+        {
+          "best_delta": 1.2067296054224173,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 1.2999999999999998
+        },
+        {
+          "best_delta": 0.1113047688211104,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 1.2999999999999998
+        },
+        {
+          "best_delta": 1.28902202856451,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 0.5
+        },
+        {
+          "best_delta": 0.04002662793512535,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": -0.08
+        },
+        {
+          "best_delta": 0.507709997579278,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": 0.24
+        },
+        {
+          "best_delta": 0.9409828128782376,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 1.4499999999999997
+        },
+        {
+          "best_delta": 0.7926167998063427,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 0.25
+        },
+        {
+          "best_delta": 0.6117647058823525,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": 0.0
+        },
+        {
+          "best_delta": 1.2772089082546607,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 1.5999999999999996
+        },
+        {
+          "best_delta": 0.2316388283708548,
+          "parameter": "scale_y",
+          "stage": 1,
+          "value": 1.2199999999999998
+        },
+        {
+          "best_delta": 0.024788186879689533,
+          "parameter": "scale_y",
+          "stage": 2,
+          "value": 1.1799999999999997
+        },
+        {
+          "best_delta": 0.09876543209876587,
+          "parameter": "stroke_scale",
+          "stage": 3,
+          "value": 0.21
+        }
+      ]
+    },
+    "label": "M",
+    "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "bbox": [
+          -0.0119999999999999,
+          0.43320000000000003,
+          1.0239999999999998,
+          0.6607999999999999
+        ],
+        "fill": "#d8d8d8",
+        "id": "main_rect",
+        "kind": "RectBorder",
+        "stroke": "#666666",
+        "stroke_width": 0.007350000000000001
+      }
+    ],
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "DLG0003"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 1165.597194588607,
+  "std_delta2": 1201.255126953125,
+  "tile_std_delta2": 490.24494961875075,
+  "variant": "DLG0003",
+  "w": 340
+}

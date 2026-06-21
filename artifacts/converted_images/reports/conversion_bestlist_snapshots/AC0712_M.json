@@ -1,14 +1,72 @@
 {
+  "actual_iterations": 64,
   "base": "AC0712",
-  "best_error": 21.86,
+  "best_error": 22.61904761904762,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.03122857142857143,
+  "elapsed_seconds": 0.9530000000013388,
+  "error_per_pixel": 0.03231292517006803,
   "filename": "AC0712_M.jpg",
   "h": 20,
-  "mean_delta2": 4708.259765625,
+  "localized_error_fraction": 0.6818828625147357,
+  "mean_delta2": 4151.12841796875,
   "params": {
     "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [
+        {
+          "body_bbox": [
+            0.378,
+            0.04,
+            0.467,
+            0.92
+          ],
+          "body_fill": "#d92645",
+          "body_stroke": "#a0a0a0",
+          "body_stroke_width": 0.04,
+          "confidence": 0.75,
+          "connector": [
+            [
+              0.0,
+              0.5
+            ],
+            [
+              0.378,
+              0.5
+            ]
+          ],
+          "connector_stroke": "#808080",
+          "connector_width": 0.08,
+          "font_size": 0.44,
+          "font_weight": "600",
+          "id": "description_element_1",
+          "kind": "LeftRotatedSquareKelleTGlyph",
+          "label": "T",
+          "label_center": [
+            0.611,
+            0.52
+          ],
+          "label_fill": "#dedede",
+          "source": "description"
+        }
+      ],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
     "description_fragments": [
       {
         "key": "AC0712",
@@ -20,8 +78,158 @@
       "AC0701"
     ],
     "elements": [],
+    "geometry_ir": [
+      {
+        "body_bbox": [
+          0.378,
+          0.04,
+          0.467,
+          0.92
+        ],
+        "body_fill": "#d92645",
+        "body_stroke": "#a0a0a0",
+        "body_stroke_width": 0.04,
+        "connector": [
+          [
+            0.0,
+            0.5
+          ],
+          [
+            0.378,
+            0.5
+          ]
+        ],
+        "connector_stroke": "#808080",
+        "connector_width": 0.08,
+        "font_size": 0.44,
+        "font_weight": "600",
+        "id": "left_rotated_square_kelle_t",
+        "kind": "LeftRotatedSquareKelleTGlyph",
+        "label": "T",
+        "label_center": [
+          0.611,
+          0.52
+        ],
+        "label_fill": "#dedede"
+      }
+    ],
+    "geometry_ir_optimizer_result": {
+      "element_refinement": {
+        "final_error": 30.430476190476192,
+        "initial_error": 30.430476190476192,
+        "mode": "right_rotated_valve_geometry",
+        "steps": []
+      },
+      "final_error": 30.430476190476192,
+      "initial_error": 53.249047619047616,
+      "mode": "geometry_ir_raster_registration",
+      "parameters": {
+        "scale_x": 0.2099999999999999,
+        "scale_y": 0.98,
+        "stroke_scale": 1.25,
+        "translate_x": -0.09,
+        "translate_y": 0.0
+      },
+      "steps": [
+        {
+          "best_delta": 5.834761904761905,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.85
+        },
+        {
+          "best_delta": 0.7371428571428567,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 1.25
+        },
+        {
+          "best_delta": 3.1885714285714286,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.7
+        },
+        {
+          "best_delta": 1.7385714285714258,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.5499999999999999
+        },
+        {
+          "best_delta": 0.5447619047619057,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.3999999999999999
+        },
+        {
+          "best_delta": 3.0238095238095255,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": -0.08
+        },
+        {
+          "best_delta": 5.833333333333329,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.24999999999999992
+        },
+        {
+          "best_delta": 1.12857142857143,
+          "parameter": "scale_x",
+          "stage": 2,
+          "value": 0.2099999999999999
+        },
+        {
+          "best_delta": 0.7666666666666657,
+          "parameter": "translate_x",
+          "stage": 3,
+          "value": -0.09
+        },
+        {
+          "best_delta": 0.022380952380952834,
+          "parameter": "scale_y",
+          "stage": 3,
+          "value": 0.98
+        }
+      ]
+    },
     "label": "M",
     "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "body_bbox": [
+          0.38438000000000005,
+          0.049199999999999966,
+          0.09806999999999996,
+          0.9016000000000001
+        ],
+        "body_fill": "#d92645",
+        "body_stroke": "#a0a0a0",
+        "body_stroke_width": 0.04,
+        "connector": [
+          [
+            0.30500000000000005,
+            0.5
+          ],
+          [
+            0.38438000000000005,
+            0.5
+          ]
+        ],
+        "connector_stroke": "#808080",
+        "connector_width": 0.1,
+        "font_size": 0.09239999999999995,
+        "font_weight": "600",
+        "id": "left_rotated_square_kelle_t",
+        "kind": "LeftRotatedSquareKelleTGlyph",
+        "label": "T",
+        "label_center": [
+          0.43331,
+          0.5196000000000001
+        ],
+        "label_fill": "#dedede"
+      }
+    ],
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
@@ -32,7 +240,10 @@
     "top_source_ref": null,
     "variant_name": "AC0712_M"
   },
-  "std_delta2": 10419.892578125,
+  "requested_iterations": 64,
+  "spatial_quality_score": 21039.224629490367,
+  "std_delta2": 10715.068359375,
+  "tile_std_delta2": 9699.270814092813,
   "variant": "AC0712_M",
   "w": 35
 }

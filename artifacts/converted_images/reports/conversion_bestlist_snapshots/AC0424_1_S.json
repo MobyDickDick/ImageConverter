@@ -1,15 +1,31 @@
 {
+  "actual_iterations": 64,
   "base": "AC0424",
-  "best_error": 37.7025,
+  "best_error": 41.83416666666667,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.09425625,
+  "elapsed_seconds": 0.5160000000014406,
+  "error_per_pixel": 0.10458541666666667,
   "filename": "AC0424_1_S.jpg",
   "h": 20,
-  "mean_delta2": 11210.0771484375,
+  "localized_error_fraction": 0.4792184466952118,
+  "mean_delta2": 8889.537109375,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
     "description_contract": {
       "deficits": [],
       "has_conditions": true,
@@ -47,7 +63,10 @@
     "top_source_ref": null,
     "variant_name": "AC0424_1_S"
   },
-  "std_delta2": 19706.81640625,
+  "requested_iterations": 64,
+  "spatial_quality_score": 15390.362626942693,
+  "std_delta2": 10251.154296875,
+  "tile_std_delta2": 5468.756789381605,
   "variant": "AC0424_1_S",
   "w": 20
 }

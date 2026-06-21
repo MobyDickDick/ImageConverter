@@ -1,0 +1,72 @@
+{
+  "actual_iterations": 64,
+  "base": "GE1310",
+  "best_error": 1.808888888888889,
+  "best_iter": 1,
+  "convergence": "",
+  "elapsed_seconds": 0.7970000000004802,
+  "error_per_pixel": 0.0009647407407407408,
+  "filename": "GE1310_M.jpg",
+  "h": 25,
+  "localized_error_fraction": 0.8054301490573055,
+  "mean_delta2": 93.20800018310547,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "GE1310",
+        "source": "base_name",
+        "text": "Wie AC0811: Kelle, ohne Text Kreis oben, Griff nach unten (dunkelgraue Linie). Geometrische Variante: identisch zur Referenz. Der Griff liegt auf einer Symmetrieachse des Kreises."
+      }
+    ],
+    "documented_alias_refs": [
+      "AC0811"
+    ],
+    "elements": [
+      "SEMANTIC: waagrechter Strich rechts vom Kreis"
+    ],
+    "geometry_ir": [],
+    "label": "M",
+    "mode": "semantic_badge",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {
+      "description_heuristic": [
+        "SEMANTIC: waagrechter Strich rechts vom Kreis"
+      ]
+    },
+    "top_source_ref": null,
+    "variant_name": "GE1310_M"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 266.3393642161327,
+  "std_delta2": 287.3486328125,
+  "tile_std_delta2": 116.72981109058856,
+  "variant": "GE1310_M",
+  "w": 75
+}

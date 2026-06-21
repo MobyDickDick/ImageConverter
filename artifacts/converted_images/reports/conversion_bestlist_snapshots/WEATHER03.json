@@ -1,15 +1,15 @@
 {
   "actual_iterations": 64,
   "base": "WEATHER03",
-  "best_error": 35.46286840455075,
+  "best_error": 35.40087790020604,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 0.7190000000118744,
-  "error_per_pixel": 0.009530467187463249,
+  "elapsed_seconds": 0.9850000000005821,
+  "error_per_pixel": 0.009513807551788777,
   "filename": "weather03.jpg",
   "h": 61,
-  "localized_error_fraction": 0.5597204910282616,
-  "mean_delta2": 8030.05322265625,
+  "localized_error_fraction": 0.5560107774287291,
+  "mean_delta2": 7922.63623046875,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -61,45 +61,33 @@
     ],
     "geometry_ir_optimizer_result": {
       "element_refinement": {
-        "final_error": 56.7344799785004,
-        "initial_error": 56.7344799785004,
+        "final_error": 56.463047567858105,
+        "initial_error": 56.463047567858105,
         "mode": "right_rotated_valve_geometry",
         "steps": []
       },
-      "final_error": 56.7344799785004,
-      "initial_error": 57.002239541341936,
+      "final_error": 56.463047567858105,
+      "initial_error": 56.53059213473081,
       "mode": "geometry_ir_raster_registration",
       "parameters": {
         "scale_x": 1.0,
         "scale_y": 1.0,
-        "stroke_scale": 0.21,
+        "stroke_scale": 1.17,
         "translate_x": 0.0,
         "translate_y": 0.0
       },
       "steps": [
         {
-          "best_delta": 0.04989698109827145,
+          "best_delta": 0.05786974827555724,
           "parameter": "stroke_scale",
           "stage": 0,
-          "value": 0.75
+          "value": 1.25
         },
         {
-          "best_delta": 0.07865269192869562,
+          "best_delta": 0.009674818597147805,
           "parameter": "stroke_scale",
-          "stage": 0,
-          "value": 0.5
-        },
-        {
-          "best_delta": 0.12568306010928865,
-          "parameter": "stroke_scale",
-          "stage": 0,
-          "value": 0.25
-        },
-        {
-          "best_delta": 0.013526829705277521,
-          "parameter": "stroke_scale",
-          "stage": 3,
-          "value": 0.21
+          "stage": 2,
+          "value": 1.17
         }
       ]
     },
@@ -111,7 +99,7 @@
         "kind": "PlusGlyph",
         "position": "top_center",
         "stroke": "#4f4f4f",
-        "stroke_width": 0.00525
+        "stroke_width": 0.029249999999999998
       }
     ],
     "semantic_conflicts": [],
@@ -125,9 +113,9 @@
     "variant_name": "WEATHER03"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 16891.04198125732,
-  "std_delta2": 14168.98828125,
-  "tile_std_delta2": 7056.988217907808,
+  "spatial_quality_score": 16606.668648478306,
+  "std_delta2": 13936.216796875,
+  "tile_std_delta2": 6975.961697087266,
   "variant": "WEATHER03",
   "w": 61
 }

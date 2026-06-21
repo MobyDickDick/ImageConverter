@@ -1,0 +1,72 @@
+{
+  "actual_iterations": 64,
+  "base": "AC0932",
+  "best_error": 21.785777777777778,
+  "best_iter": 1,
+  "convergence": "",
+  "elapsed_seconds": 0.7649999999994179,
+  "error_per_pixel": 0.019365135802469135,
+  "filename": "AC0932_L.jpg",
+  "h": 25,
+  "localized_error_fraction": 0.6728740693483594,
+  "mean_delta2": 5653.37890625,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": false,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "AC0932",
+        "source": "base_name",
+        "text": "Unzugeordnete Wurzelform aus der Serie AC0932. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen."
+      },
+      {
+        "key": "AC0932_L",
+        "source": "variant_name",
+        "text": "Unzugeordnete Wurzelform aus der Serie AC0932. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die große Variante (L). Bitte einer finalen Wurzelform-Kategorie zuordnen."
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [
+      "MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie."
+    ],
+    "geometry_ir": [],
+    "label": "",
+    "mode": "manual_review",
+    "review_reason": "Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "AC0932_L"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 16925.29171762434,
+  "std_delta2": 13066.9873046875,
+  "tile_std_delta2": 8249.114581105476,
+  "variant": "AC0932_L",
+  "w": 45
+}

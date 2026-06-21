@@ -1,15 +1,116 @@
 {
+  "actual_iterations": 64,
   "base": "AC0551",
-  "best_error": 64.9875,
+  "best_error": 28.632083333333334,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.02030859375,
+  "elapsed_seconds": 2.0,
+  "error_per_pixel": 0.008947526041666667,
   "filename": "AC0551_2_L.jpg",
   "h": 80,
-  "mean_delta2": 19321.55859375,
+  "localized_error_fraction": 0.344152982958082,
+  "mean_delta2": 3238.3017578125,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
+    "description_constraints": {
+      "elements": [
+        {
+          "bbox": [
+            0.32,
+            0.12,
+            0.36,
+            0.76
+          ],
+          "confidence": 0.75,
+          "constraint": "inside_rect_border",
+          "id": "description_element_1",
+          "kind": "HorizontalGradient",
+          "source": "description",
+          "stops": [
+            "#8f8f8f",
+            "#dedede",
+            "#8f8f8f"
+          ]
+        },
+        {
+          "bbox": [
+            0.32,
+            0.12,
+            0.36,
+            0.76
+          ],
+          "confidence": 0.75,
+          "fill": "none",
+          "id": "description_element_2",
+          "kind": "RectBorder",
+          "source": "description",
+          "stroke": "#666666",
+          "stroke_width": 0.035
+        },
+        {
+          "confidence": 0.75,
+          "id": "description_element_3",
+          "kind": "HorizontalRuleSet",
+          "positions": [
+            0.3,
+            0.5,
+            0.7
+          ],
+          "rect_ref": "main_rect",
+          "source": "description",
+          "stroke": "#707070",
+          "stroke_width": 0.026,
+          "x_inset": 0.1
+        },
+        {
+          "confidence": 0.75,
+          "id": "description_element_4",
+          "kind": "OrthogonalPolyline",
+          "points": [
+            [
+              0.5,
+              0.02
+            ],
+            [
+              1.02,
+              0.5
+            ],
+            [
+              0.5,
+              0.98
+            ]
+          ],
+          "rect_ref": "main_rect",
+          "source": "description",
+          "stroke": "#707070",
+          "stroke_width": 0.034
+        }
+      ],
+      "relations": [
+        {
+          "confidence": 0.75,
+          "object": "main_rect",
+          "source": "description",
+          "subject": "description_element_3",
+          "type": "rect"
+        },
+        {
+          "confidence": 0.75,
+          "object": "main_rect",
+          "source": "description",
+          "subject": "description_element_4",
+          "type": "rect"
+        }
+      ],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
+      }
+    },
     "description_contract": {
       "deficits": [],
       "has_conditions": true,
@@ -91,8 +192,261 @@
         "stroke_width": 0.034
       }
     ],
+    "geometry_ir_optimizer_result": {
+      "element_refinement": {
+        "final_error": 75.17125,
+        "initial_error": 75.17125,
+        "mode": "right_rotated_valve_geometry",
+        "steps": []
+      },
+      "final_error": 75.17125,
+      "initial_error": 102.8175,
+      "mode": "geometry_ir_raster_registration",
+      "parameters": {
+        "scale_x": 1.5799999999999996,
+        "scale_y": 1.2999999999999998,
+        "stroke_scale": 2.5200000000000005,
+        "translate_x": -0.14,
+        "translate_y": -0.02
+      },
+      "steps": [
+        {
+          "best_delta": 1.3480208333333223,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": -0.08
+        },
+        {
+          "best_delta": 0.11406250000000284,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": -0.08
+        },
+        {
+          "best_delta": 1.9615624999999994,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 1.15
+        },
+        {
+          "best_delta": 1.2053125000000051,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 1.15
+        },
+        {
+          "best_delta": 0.9881249999999966,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 1.25
+        },
+        {
+          "best_delta": 3.251979166666672,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": -0.16
+        },
+        {
+          "best_delta": 0.7974999999999994,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": 0.0
+        },
+        {
+          "best_delta": 2.4984374999999943,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 1.2999999999999998
+        },
+        {
+          "best_delta": 2.0538541666666674,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 1.2999999999999998
+        },
+        {
+          "best_delta": 0.59427083333334,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 1.5
+        },
+        {
+          "best_delta": 3.7279166666666583,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 1.4499999999999997
+        },
+        {
+          "best_delta": 1.4659375000000097,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 1.75
+        },
+        {
+          "best_delta": 3.5284374999999955,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 1.5999999999999996
+        },
+        {
+          "best_delta": 1.277812499999996,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 2.0
+        },
+        {
+          "best_delta": 0.008437499999999432,
+          "parameter": "scale_y",
+          "stage": 1,
+          "value": 1.38
+        },
+        {
+          "best_delta": 0.27135416666666856,
+          "parameter": "scale_y",
+          "stage": 2,
+          "value": 1.3399999999999999
+        },
+        {
+          "best_delta": 0.32458333333333655,
+          "parameter": "translate_x",
+          "stage": 2,
+          "value": -0.14
+        },
+        {
+          "best_delta": 0.404791666666668,
+          "parameter": "stroke_scale",
+          "stage": 2,
+          "value": 2.08
+        },
+        {
+          "best_delta": 0.3696874999999977,
+          "parameter": "stroke_scale",
+          "stage": 2,
+          "value": 2.16
+        },
+        {
+          "best_delta": 0.03302083333333883,
+          "parameter": "scale_y",
+          "stage": 2,
+          "value": 1.2999999999999998
+        },
+        {
+          "best_delta": 0.3421874999999943,
+          "parameter": "stroke_scale",
+          "stage": 2,
+          "value": 2.24
+        },
+        {
+          "best_delta": 0.06322916666667311,
+          "parameter": "translate_y",
+          "stage": 2,
+          "value": -0.02
+        },
+        {
+          "best_delta": 0.3113541666666606,
+          "parameter": "stroke_scale",
+          "stage": 2,
+          "value": 2.3200000000000003
+        },
+        {
+          "best_delta": 0.07427083333332973,
+          "parameter": "stroke_scale",
+          "stage": 2,
+          "value": 2.4000000000000004
+        },
+        {
+          "best_delta": 0.26874999999999716,
+          "parameter": "scale_x",
+          "stage": 3,
+          "value": 1.5799999999999996
+        },
+        {
+          "best_delta": 0.13791666666666913,
+          "parameter": "stroke_scale",
+          "stage": 3,
+          "value": 2.4400000000000004
+        },
+        {
+          "best_delta": 0.1372916666666697,
+          "parameter": "stroke_scale",
+          "stage": 3,
+          "value": 2.4800000000000004
+        },
+        {
+          "best_delta": 0.08614583333333314,
+          "parameter": "stroke_scale",
+          "stage": 3,
+          "value": 2.5200000000000005
+        }
+      ]
+    },
     "label": "M",
     "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "bbox": [
+          0.07560000000000006,
+          -0.01399999999999994,
+          0.5687999999999999,
+          0.9879999999999999
+        ],
+        "constraint": "inside_rect_border",
+        "id": "background_gradient",
+        "kind": "HorizontalGradient",
+        "stops": [
+          "#8f8f8f",
+          "#dedede",
+          "#8f8f8f"
+        ]
+      },
+      {
+        "bbox": [
+          0.07560000000000006,
+          -0.01399999999999994,
+          0.5687999999999999,
+          0.9879999999999999
+        ],
+        "fill": "none",
+        "id": "main_rect",
+        "kind": "RectBorder",
+        "stroke": "#666666",
+        "stroke_width": 0.08820000000000003
+      },
+      {
+        "id": "horizontal_rule_set",
+        "kind": "HorizontalRuleSet",
+        "positions": [
+          0.3,
+          0.5,
+          0.7
+        ],
+        "rect_ref": "main_rect",
+        "stroke": "#707070",
+        "stroke_width": 0.06552000000000001,
+        "x_inset": 0.1
+      },
+      {
+        "id": "right_side_orthogonal_line",
+        "kind": "OrthogonalPolyline",
+        "points": [
+          [
+            0.36,
+            -0.14399999999999988
+          ],
+          [
+            1.1816,
+            0.48
+          ],
+          [
+            0.36,
+            1.1039999999999999
+          ]
+        ],
+        "rect_ref": "main_rect",
+        "stroke": "#707070",
+        "stroke_width": 0.08568000000000002
+      }
+    ],
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
@@ -103,7 +457,10 @@
     "top_source_ref": null,
     "variant_name": "AC0551_2_L"
   },
-  "std_delta2": 13693.841796875,
+  "requested_iterations": 64,
+  "spatial_quality_score": 4466.7651281448925,
+  "std_delta2": 2786.2060546875,
+  "tile_std_delta2": 971.5749269449948,
   "variant": "AC0551_2_L",
   "w": 40
 }

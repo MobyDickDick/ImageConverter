@@ -1,55 +1,6 @@
 {
-  "base": "AC0882",
-  "best_error": 15.34,
-  "best_iter": 1,
-  "convergence": "",
-  "error_per_pixel": 0.021914285714285713,
   "filename": "AC0882_M.jpg",
-  "h": 20,
-  "mean_delta2": 3999.13720703125,
-  "params": {
-    "bottom_shape": null,
-    "contract_status": "ok",
-    "description_contract": {
-      "deficits": [],
-      "has_conditions": true,
-      "has_geometry_terms": true,
-      "has_reference": false,
-      "status": "ok"
-    },
-    "description_fragments": [
-      {
-        "key": "AC0882",
-        "source": "base_name",
-        "text": "Kreisförmiges Badge. Abweichung: mit Text \"T\" (Temperatur) Abweichung: mit Griff (dunkelgraue Linie nach unten) Abweichung: nach rechts gedreht, Text immer noch horizontal. Der Griff liegt auf einer Symmetrieachse des Kreises."
-      }
-    ],
-    "documented_alias_refs": [],
-    "elements": [
-      "SEMANTIC: waagrechter Strich links vom Kreis",
-      "SEMANTIC: Kreis + Buchstabe"
-    ],
-    "geometry_ir": [],
-    "label": "T",
-    "mode": "semantic_badge",
-    "semantic_conflicts": [],
-    "semantic_priority_order": [
-      "family_rule",
-      "layout_override",
-      "description_heuristic"
-    ],
-    "semantic_sources": {
-      "description_heuristic": [
-        "SEMANTIC: Kreis + Buchstabe"
-      ],
-      "family_rule": [
-        "SEMANTIC: waagrechter Strich links vom Kreis"
-      ]
-    },
-    "top_source_ref": null,
-    "variant_name": "AC0882_M"
-  },
-  "std_delta2": 12226.7646484375,
-  "variant": "AC0882_M",
-  "w": 35
+  "mean_delta2": 5050.28564453125,
+  "std_delta2": 14081.818359375,
+  "variant": "AC0882_M"
 }

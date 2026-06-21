@@ -1,15 +1,31 @@
 {
+  "actual_iterations": 64,
   "base": "AC0814",
   "best_error": 8.328,
   "best_iter": 1,
   "convergence": "",
+  "elapsed_seconds": 1.3130000000001019,
   "error_per_pixel": 0.022208,
   "filename": "AC0814_S.jpg",
   "h": 15,
+  "localized_error_fraction": 0.7276546570955706,
   "mean_delta2": 748.719970703125,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
     "description_contract": {
       "deficits": [],
       "has_conditions": true,
@@ -64,10 +80,11 @@
         "description_heuristic"
       ],
       "semantic_sources": {
-        "description_heuristic": [],
-        "family_rule": [
-          "SEMANTIC: Kreis ohne Buchstabe",
+        "description_heuristic": [
           "SEMANTIC: waagrechter Strich rechts vom Kreis"
+        ],
+        "family_rule": [
+          "SEMANTIC: Kreis ohne Buchstabe"
         ]
       },
       "status": "semantic_ok"
@@ -79,16 +96,20 @@
       "description_heuristic"
     ],
     "semantic_sources": {
-      "description_heuristic": [],
-      "family_rule": [
-        "SEMANTIC: Kreis ohne Buchstabe",
+      "description_heuristic": [
         "SEMANTIC: waagrechter Strich rechts vom Kreis"
+      ],
+      "family_rule": [
+        "SEMANTIC: Kreis ohne Buchstabe"
       ]
     },
     "top_source_ref": null,
     "variant_name": "AC0814_S"
   },
+  "requested_iterations": 64,
+  "spatial_quality_score": 2253.8228683451193,
   "std_delta2": 2077.811279296875,
+  "tile_std_delta2": 1325.918621109183,
   "variant": "AC0814_S",
   "w": 25
 }

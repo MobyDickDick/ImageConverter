@@ -1,15 +1,31 @@
 {
+  "actual_iterations": 64,
   "base": "GE9033_1M",
-  "best_error": 26.411666666666665,
+  "best_error": 24.600833333333334,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.016507291666666667,
+  "elapsed_seconds": 0.8600000000005821,
+  "error_per_pixel": 0.015375520833333333,
   "filename": "GE9033_1M.jpg",
   "h": 40,
-  "mean_delta2": 8756.5126953125,
+  "localized_error_fraction": 0.775068580508487,
+  "mean_delta2": 6374.35107421875,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
     "description_contract": {
       "deficits": [],
       "has_conditions": false,
@@ -39,7 +55,10 @@
     "top_source_ref": null,
     "variant_name": "GE9033_1M"
   },
-  "std_delta2": 18117.048828125,
+  "requested_iterations": 64,
+  "spatial_quality_score": 17771.357502610845,
+  "std_delta2": 13300.595703125,
+  "tile_std_delta2": 9637.154050497196,
   "variant": "GE9033_1M",
   "w": 40
 }

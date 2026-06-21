@@ -1,15 +1,15 @@
 {
   "actual_iterations": 64,
   "base": "SE0024",
-  "best_error": 16.348809523809525,
+  "best_error": 16.889285714285716,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 0.8279999999795109,
-  "error_per_pixel": 0.019462868480725624,
+  "elapsed_seconds": 0.7970000000004802,
+  "error_per_pixel": 0.020106292517006803,
   "filename": "SE0024.jpg",
   "h": 24,
-  "localized_error_fraction": 0.6914583163341221,
-  "mean_delta2": 3698.58935546875,
+  "localized_error_fraction": 0.754142747476113,
+  "mean_delta2": 3980.125,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -56,9 +56,9 @@
     "variant_name": "SE0024"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 11335.872162918891,
-  "std_delta2": 10129.375,
-  "tile_std_delta2": 5313.790900667342,
+  "spatial_quality_score": 10164.24151156023,
+  "std_delta2": 10605.8720703125,
+  "tile_std_delta2": 4924.230449107534,
   "variant": "SE0024",
   "w": 35
 }

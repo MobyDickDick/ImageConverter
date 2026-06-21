@@ -1,15 +1,31 @@
 {
+  "actual_iterations": 64,
   "base": "Z_298",
-  "best_error": 38.41729323308271,
+  "best_error": 24.04385964912281,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.14442591441008537,
+  "elapsed_seconds": 0.8430000000007567,
+  "error_per_pixel": 0.09039044980873236,
   "filename": "z_298.jpg",
   "h": 14,
-  "mean_delta2": 8187.455078125,
+  "localized_error_fraction": 0.6488124165223322,
+  "mean_delta2": 3269.996337890625,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
     "description_contract": {
       "deficits": [],
       "has_conditions": true,
@@ -39,7 +55,10 @@
     "top_source_ref": null,
     "variant_name": "Z_298"
   },
-  "std_delta2": 10160.443359375,
+  "requested_iterations": 64,
+  "spatial_quality_score": 8171.00294608035,
+  "std_delta2": 4330.76318359375,
+  "tile_std_delta2": 3733.601435726075,
   "variant": "Z_298",
   "w": 19
 }

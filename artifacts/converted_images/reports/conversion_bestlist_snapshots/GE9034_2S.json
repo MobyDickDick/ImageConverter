@@ -1,15 +1,15 @@
 {
   "actual_iterations": 64,
   "base": "GE9034",
-  "best_error": 26.2875,
+  "best_error": 26.798333333333332,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 0.40700000000651926,
-  "error_per_pixel": 0.06571875,
+  "elapsed_seconds": 0.75,
+  "error_per_pixel": 0.06699583333333332,
   "filename": "GE9034_2S.jpg",
   "h": 20,
   "localized_error_fraction": 0.4804575149802544,
-  "mean_delta2": 5931.552734375,
+  "mean_delta2": 6671.259765625,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -57,7 +57,7 @@
   },
   "requested_iterations": 64,
   "spatial_quality_score": 7935.206030708248,
-  "std_delta2": 9238.75390625,
+  "std_delta2": 11292.404296875,
   "tile_std_delta2": 2184.6929800333137,
   "variant": "GE9034_2S",
   "w": 20

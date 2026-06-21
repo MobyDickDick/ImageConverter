@@ -1,15 +1,15 @@
 {
   "actual_iterations": 64,
   "base": "GE9033_4M",
-  "best_error": 16.378958333333333,
+  "best_error": 16.654166666666665,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 0.45300000000861473,
-  "error_per_pixel": 0.010236848958333333,
+  "elapsed_seconds": 0.8119999999998981,
+  "error_per_pixel": 0.010408854166666665,
   "filename": "GE9033_4M.jpg",
   "h": 40,
-  "localized_error_fraction": 0.7928996796451336,
-  "mean_delta2": 2549.1669921875,
+  "localized_error_fraction": 0.8065848474513855,
+  "mean_delta2": 1746.396240234375,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -56,9 +56,9 @@
     "variant_name": "GE9033_4M"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 7474.210954578755,
-  "std_delta2": 5552.75927734375,
-  "tile_std_delta2": 4004.209006095334,
+  "spatial_quality_score": 7301.06886033335,
+  "std_delta2": 2787.063232421875,
+  "tile_std_delta2": 3882.772849891149,
   "variant": "GE9033_4M",
   "w": 40
 }

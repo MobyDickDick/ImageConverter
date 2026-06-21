@@ -1,15 +1,15 @@
 {
   "actual_iterations": 64,
   "base": "GE9043",
-  "best_error": 16.608333333333334,
+  "best_error": 19.2225,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 0.28099999998812564,
-  "error_per_pixel": 0.04152083333333333,
+  "elapsed_seconds": 0.31300000000010186,
+  "error_per_pixel": 0.04805625,
   "filename": "GE9043_6S.jpg",
   "h": 20,
-  "localized_error_fraction": 0.6212388786889358,
-  "mean_delta2": 2954.820068359375,
+  "localized_error_fraction": 0.858136028590574,
+  "mean_delta2": 4244.7724609375,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -56,9 +56,9 @@
     "variant_name": "GE9043_6S"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 11660.218852935626,
-  "std_delta2": 5572.14892578125,
-  "tile_std_delta2": 5810.329494579846,
+  "spatial_quality_score": 8934.840645167249,
+  "std_delta2": 9235.0791015625,
+  "tile_std_delta2": 5225.544574531861,
   "variant": "GE9043_6S",
   "w": 20
 }

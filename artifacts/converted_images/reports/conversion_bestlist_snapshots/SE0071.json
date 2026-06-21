@@ -1,0 +1,131 @@
+{
+  "actual_iterations": 64,
+  "base": "SE0071",
+  "best_error": 25.04102564102564,
+  "best_iter": 1,
+  "convergence": "",
+  "elapsed_seconds": 0.7659999999996217,
+  "error_per_pixel": 0.02568310322156476,
+  "filename": "SE0071.jpg",
+  "h": 39,
+  "localized_error_fraction": 0.6957963346817642,
+  "mean_delta2": 6102.43994140625,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [
+        {
+          "body_bbox": [
+            0.02,
+            0.04,
+            0.96,
+            0.56
+          ],
+          "body_fill": "#e11e48",
+          "body_stroke": "#a0a0a0",
+          "body_stroke_width": 0.04,
+          "confidence": 0.75,
+          "connector": [
+            [
+              0.5,
+              0.6
+            ],
+            [
+              0.5,
+              1.0
+            ]
+          ],
+          "connector_stroke": "#808080",
+          "connector_width": 0.08,
+          "id": "description_element_1",
+          "kind": "UprightSquareKelleGlyph",
+          "source": "description"
+        }
+      ],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "SE0071",
+        "source": "base_name",
+        "text": "Wie AC0811, jecoch ist der Kreis viereckig anstatt rund gezeichnet."
+      }
+    ],
+    "documented_alias_refs": [
+      "AC0811"
+    ],
+    "elements": [
+      "SEMANTIC: Kreis ohne Buchstabe",
+      "SEMANTIC: senkrechter Strich hinter dem Kreis",
+      "SEMANTIC: waagrechter Strich rechts vom Kreis",
+      "REFERENZ: Abgeleitet aus AC0811"
+    ],
+    "geometry_ir": [
+      {
+        "body_bbox": [
+          0.02,
+          0.04,
+          0.96,
+          0.56
+        ],
+        "body_fill": "#e11e48",
+        "body_stroke": "#a0a0a0",
+        "body_stroke_width": 0.04,
+        "connector": [
+          [
+            0.5,
+            0.6
+          ],
+          [
+            0.5,
+            1.0
+          ]
+        ],
+        "connector_stroke": "#808080",
+        "connector_width": 0.08,
+        "id": "upright_square_kelle",
+        "kind": "UprightSquareKelleGlyph"
+      }
+    ],
+    "label": "",
+    "mode": "semantic_badge",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {
+      "description_heuristic": [
+        "SEMANTIC: waagrechter Strich rechts vom Kreis"
+      ],
+      "family_rule": [
+        "SEMANTIC: Kreis ohne Buchstabe",
+        "SEMANTIC: senkrechter Strich hinter dem Kreis"
+      ]
+    },
+    "top_source_ref": null,
+    "variant_name": "SE0071"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 15746.812215743397,
+  "std_delta2": 14000.5712890625,
+  "tile_std_delta2": 8009.784081262533,
+  "variant": "SE0071",
+  "w": 25
+}

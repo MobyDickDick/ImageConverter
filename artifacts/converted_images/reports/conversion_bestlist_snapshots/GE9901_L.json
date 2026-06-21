@@ -1,14 +1,38 @@
 {
+  "actual_iterations": 64,
   "base": "GE9901",
-  "best_error": 12.624230278862846,
+  "best_error": 3.667536841498481,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 1.6052538908466143e-05,
+  "elapsed_seconds": 3.4689999999991414,
+  "error_per_pixel": 4.6635142536144015e-06,
   "filename": "GE9901_L.jpg",
   "h": 768,
-  "mean_delta2": 2546.433349609375,
+  "localized_error_fraction": 0.9839700114763514,
+  "mean_delta2": 411.9441223144531,
   "params": {
     "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
     "description_fragments": [
       {
         "key": "GE9901",
@@ -20,6 +44,7 @@
       "GE0010"
     ],
     "elements": [],
+    "geometry_ir": [],
     "label": "M",
     "mode": "auto",
     "semantic_conflicts": [],
@@ -32,7 +57,10 @@
     "top_source_ref": null,
     "variant_name": "GE9901_L"
   },
-  "std_delta2": 4933.0732421875,
+  "requested_iterations": 64,
+  "spatial_quality_score": 8851.022754669459,
+  "std_delta2": 1674.1090087890625,
+  "tile_std_delta2": 4808.560095651577,
   "variant": "GE9901_L",
   "w": 1024
 }

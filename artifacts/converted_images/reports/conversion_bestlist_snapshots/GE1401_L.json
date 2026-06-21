@@ -1,0 +1,424 @@
+{
+  "actual_iterations": 64,
+  "base": "GE1401",
+  "best_error": 12.571851851851852,
+  "best_iter": 1,
+  "convergence": "",
+  "elapsed_seconds": 0.5159999999996217,
+  "error_per_pixel": 0.009312482853223595,
+  "filename": "GE1401_L.jpg",
+  "h": 45,
+  "localized_error_fraction": 0.6656597794119945,
+  "mean_delta2": 948.0385131835938,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [
+        {
+          "bbox": [
+            0.32,
+            0.12,
+            0.36,
+            0.76
+          ],
+          "confidence": 0.75,
+          "constraint": "inside_rect_border",
+          "id": "description_element_1",
+          "kind": "HorizontalGradient",
+          "source": "description",
+          "stops": [
+            "#8f8f8f",
+            "#dedede",
+            "#8f8f8f"
+          ]
+        },
+        {
+          "bbox": [
+            0.32,
+            0.12,
+            0.36,
+            0.76
+          ],
+          "confidence": 0.75,
+          "fill": "none",
+          "id": "description_element_2",
+          "kind": "RectBorder",
+          "source": "description",
+          "stroke": "#666666",
+          "stroke_width": 0.035
+        },
+        {
+          "confidence": 0.75,
+          "id": "description_element_3",
+          "kind": "HorizontalRuleSet",
+          "positions": [
+            0.3,
+            0.5,
+            0.7
+          ],
+          "rect_ref": "main_rect",
+          "source": "description",
+          "stroke": "#707070",
+          "stroke_width": 0.026,
+          "x_inset": 0.1
+        },
+        {
+          "confidence": 0.75,
+          "id": "description_element_4",
+          "kind": "OrthogonalPolyline",
+          "points": [
+            [
+              0.5,
+              0.02
+            ],
+            [
+              1.02,
+              0.5
+            ],
+            [
+              0.5,
+              0.98
+            ]
+          ],
+          "rect_ref": "main_rect",
+          "source": "description",
+          "stroke": "#707070",
+          "stroke_width": 0.034
+        }
+      ],
+      "relations": [
+        {
+          "confidence": 0.75,
+          "object": "main_rect",
+          "source": "description",
+          "subject": "description_element_3",
+          "type": "rect"
+        },
+        {
+          "confidence": 0.75,
+          "object": "main_rect",
+          "source": "description",
+          "subject": "description_element_4",
+          "type": "rect"
+        }
+      ],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": false,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "GE1401",
+        "source": "base_name",
+        "text": "Graues Rechteck hochkant, graue Umrandung, drei graue horizontale Linien, Farbverlauf dunkel-hell-dunkel, Graue Linien Oben-Mitte nach Rechts-Mitte nach Unten-Mitte Abweichung: ist die kräftige graue Ecke/ Winkel unten statt rechts."
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "geometry_ir": [
+      {
+        "bbox": [
+          0.32,
+          0.12,
+          0.36,
+          0.76
+        ],
+        "constraint": "inside_rect_border",
+        "id": "background_gradient",
+        "kind": "HorizontalGradient",
+        "stops": [
+          "#8f8f8f",
+          "#dedede",
+          "#8f8f8f"
+        ]
+      },
+      {
+        "bbox": [
+          0.32,
+          0.12,
+          0.36,
+          0.76
+        ],
+        "fill": "none",
+        "id": "main_rect",
+        "kind": "RectBorder",
+        "stroke": "#666666",
+        "stroke_width": 0.035
+      },
+      {
+        "id": "horizontal_rule_set",
+        "kind": "HorizontalRuleSet",
+        "positions": [
+          0.3,
+          0.5,
+          0.7
+        ],
+        "rect_ref": "main_rect",
+        "stroke": "#707070",
+        "stroke_width": 0.026,
+        "x_inset": 0.1
+      },
+      {
+        "id": "right_side_orthogonal_line",
+        "kind": "OrthogonalPolyline",
+        "points": [
+          [
+            0.5,
+            0.02
+          ],
+          [
+            1.02,
+            0.5
+          ],
+          [
+            0.5,
+            0.98
+          ]
+        ],
+        "rect_ref": "main_rect",
+        "stroke": "#707070",
+        "stroke_width": 0.034
+      }
+    ],
+    "geometry_ir_optimizer_result": {
+      "element_refinement": {
+        "final_error": 25.28938271604938,
+        "initial_error": 25.28938271604938,
+        "mode": "right_rotated_valve_geometry",
+        "steps": []
+      },
+      "final_error": 25.28938271604938,
+      "initial_error": 52.93259259259259,
+      "mode": "geometry_ir_raster_registration",
+      "parameters": {
+        "scale_x": 0.87,
+        "scale_y": 1.2999999999999998,
+        "stroke_scale": 0.21,
+        "translate_x": -0.32,
+        "translate_y": 0.0
+      },
+      "steps": [
+        {
+          "best_delta": 4.523950617283951,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": -0.08
+        },
+        {
+          "best_delta": 0.6044444444444395,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": 0.08
+        },
+        {
+          "best_delta": 1.0417283950617318,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.85
+        },
+        {
+          "best_delta": 0.8116049382716071,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 0.85
+        },
+        {
+          "best_delta": 2.1535802469135774,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 0.75
+        },
+        {
+          "best_delta": 2.818518518518516,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": -0.16
+        },
+        {
+          "best_delta": 1.2753086419753146,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": 0.16
+        },
+        {
+          "best_delta": 0.03333333333333144,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.7
+        },
+        {
+          "best_delta": 1.7728395061728364,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 0.5
+        },
+        {
+          "best_delta": 3.05456790123457,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": -0.24
+        },
+        {
+          "best_delta": 0.06246913580246627,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 1.0
+        },
+        {
+          "best_delta": 0.895802469135802,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 0.25
+        },
+        {
+          "best_delta": 3.6916049382716096,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": -0.32
+        },
+        {
+          "best_delta": 0.19506172839506064,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": 0.08
+        },
+        {
+          "best_delta": 0.9644444444444424,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.85
+        },
+        {
+          "best_delta": 0.8916049382716054,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 1.15
+        },
+        {
+          "best_delta": 0.36444444444444457,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": 0.0
+        },
+        {
+          "best_delta": 1.4530864197530882,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 1.2999999999999998
+        },
+        {
+          "best_delta": 0.2595061728395045,
+          "parameter": "scale_x",
+          "stage": 2,
+          "value": 0.89
+        },
+        {
+          "best_delta": 0.31185185185185205,
+          "parameter": "scale_x",
+          "stage": 3,
+          "value": 0.87
+        },
+        {
+          "best_delta": 0.463456790123459,
+          "parameter": "stroke_scale",
+          "stage": 3,
+          "value": 0.21
+        }
+      ]
+    },
+    "label": "M",
+    "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "bbox": [
+          0.023400000000000032,
+          0.006000000000000061,
+          0.3132,
+          0.9879999999999999
+        ],
+        "constraint": "inside_rect_border",
+        "id": "background_gradient",
+        "kind": "HorizontalGradient",
+        "stops": [
+          "#8f8f8f",
+          "#dedede",
+          "#8f8f8f"
+        ]
+      },
+      {
+        "bbox": [
+          0.023400000000000032,
+          0.006000000000000061,
+          0.3132,
+          0.9879999999999999
+        ],
+        "fill": "none",
+        "id": "main_rect",
+        "kind": "RectBorder",
+        "stroke": "#666666",
+        "stroke_width": 0.007350000000000001
+      },
+      {
+        "id": "horizontal_rule_set",
+        "kind": "HorizontalRuleSet",
+        "positions": [
+          0.3,
+          0.5,
+          0.7
+        ],
+        "rect_ref": "main_rect",
+        "stroke": "#707070",
+        "stroke_width": 0.00546,
+        "x_inset": 0.1
+      },
+      {
+        "id": "right_side_orthogonal_line",
+        "kind": "OrthogonalPolyline",
+        "points": [
+          [
+            0.18,
+            -0.12399999999999989
+          ],
+          [
+            0.6324000000000001,
+            0.5
+          ],
+          [
+            0.18,
+            1.1239999999999999
+          ]
+        ],
+        "rect_ref": "main_rect",
+        "stroke": "#707070",
+        "stroke_width": 0.0071400000000000005
+      }
+    ],
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "GE1401_L"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 2432.099608202176,
+  "std_delta2": 2726.118896484375,
+  "tile_std_delta2": 1209.5035624063123,
+  "variant": "GE1401_L",
+  "w": 30
+}

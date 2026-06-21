@@ -1,0 +1,223 @@
+{
+  "actual_iterations": 64,
+  "base": "AC0554",
+  "best_error": 20.415555555555557,
+  "best_iter": 1,
+  "convergence": "",
+  "elapsed_seconds": 0.75,
+  "error_per_pixel": 0.011341975308641975,
+  "filename": "AC0554_M.jpg",
+  "h": 30,
+  "localized_error_fraction": 0.7860065574473808,
+  "mean_delta2": 2693.4599609375,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [
+        {
+          "bbox": [
+            0.32,
+            0.12,
+            0.36,
+            0.76
+          ],
+          "confidence": 0.75,
+          "constraint": "inside_rect_border",
+          "id": "description_element_1",
+          "kind": "HorizontalGradient",
+          "source": "description",
+          "stops": [
+            "#8f8f8f",
+            "#dedede",
+            "#8f8f8f"
+          ]
+        },
+        {
+          "bbox": [
+            0.32,
+            0.12,
+            0.36,
+            0.76
+          ],
+          "confidence": 0.75,
+          "fill": "none",
+          "id": "description_element_2",
+          "kind": "RectBorder",
+          "source": "description",
+          "stroke": "#666666",
+          "stroke_width": 0.035
+        },
+        {
+          "confidence": 0.75,
+          "id": "description_element_3",
+          "kind": "HorizontalRuleSet",
+          "positions": [
+            0.3,
+            0.5,
+            0.7
+          ],
+          "rect_ref": "main_rect",
+          "source": "description",
+          "stroke": "#707070",
+          "stroke_width": 0.026,
+          "x_inset": 0.1
+        },
+        {
+          "confidence": 0.75,
+          "id": "description_element_4",
+          "kind": "OrthogonalPolyline",
+          "points": [
+            [
+              0.5,
+              0.02
+            ],
+            [
+              1.02,
+              0.5
+            ],
+            [
+              0.5,
+              0.98
+            ]
+          ],
+          "rect_ref": "main_rect",
+          "source": "description",
+          "stroke": "#707070",
+          "stroke_width": 0.034
+        }
+      ],
+      "relations": [
+        {
+          "confidence": 0.75,
+          "object": "main_rect",
+          "source": "description",
+          "subject": "description_element_3",
+          "type": "rect"
+        },
+        {
+          "confidence": 0.75,
+          "object": "main_rect",
+          "source": "description",
+          "subject": "description_element_4",
+          "type": "rect"
+        }
+      ],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "AC0554",
+        "source": "base_name",
+        "text": "Wie AC0551: Wie AC0150. Geometrische Variante: 90° nach links gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises."
+      }
+    ],
+    "documented_alias_refs": [
+      "AC0150",
+      "AC0551"
+    ],
+    "elements": [
+      "SEMANTIC: Kreis + Buchstabe",
+      "REFERENZ: Abgeleitet aus AC0551"
+    ],
+    "geometry_ir": [
+      {
+        "bbox": [
+          0.32,
+          0.12,
+          0.36,
+          0.76
+        ],
+        "constraint": "inside_rect_border",
+        "id": "background_gradient",
+        "kind": "HorizontalGradient",
+        "stops": [
+          "#8f8f8f",
+          "#dedede",
+          "#8f8f8f"
+        ]
+      },
+      {
+        "bbox": [
+          0.32,
+          0.12,
+          0.36,
+          0.76
+        ],
+        "fill": "none",
+        "id": "main_rect",
+        "kind": "RectBorder",
+        "stroke": "#666666",
+        "stroke_width": 0.035
+      },
+      {
+        "id": "horizontal_rule_set",
+        "kind": "HorizontalRuleSet",
+        "positions": [
+          0.3,
+          0.5,
+          0.7
+        ],
+        "rect_ref": "main_rect",
+        "stroke": "#707070",
+        "stroke_width": 0.026,
+        "x_inset": 0.1
+      },
+      {
+        "id": "right_side_orthogonal_line",
+        "kind": "OrthogonalPolyline",
+        "points": [
+          [
+            0.5,
+            0.02
+          ],
+          [
+            1.02,
+            0.5
+          ],
+          [
+            0.5,
+            0.98
+          ]
+        ],
+        "rect_ref": "main_rect",
+        "stroke": "#707070",
+        "stroke_width": 0.034
+      }
+    ],
+    "label": "M",
+    "mode": "semantic_badge",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {
+      "description_heuristic": [
+        "SEMANTIC: Kreis + Buchstabe"
+      ]
+    },
+    "top_source_ref": null,
+    "variant_name": "AC0554_M"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 7562.824065020727,
+  "std_delta2": 6091.0771484375,
+  "tile_std_delta2": 3922.377104772987,
+  "variant": "AC0554_M",
+  "w": 60
+}
