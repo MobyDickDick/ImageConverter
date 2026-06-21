@@ -23,5 +23,5 @@ Run RQ setzt IDO-17 aus `docs/image_description_only_tasks.md` fort und arbeitet
 ## Ergebnis
 
 - `tools/check_no_new_image_id_hardcoding.py` bleibt grün.
-- Die Legacy-Inventur sinkt von `195` auf `180` Runtime-ID-Vorkommen.
+- Die Legacy-Inventur sinkt von `195` auf `182` Runtime-ID-Vorkommen.
 - Kein neuer funktionaler Blocker; die verbleibenden IDO-17-Vorkommen enthalten weiterhin echte Runtime-Dispatches und historisch benannte APIs, die separat migriert werden müssen.
