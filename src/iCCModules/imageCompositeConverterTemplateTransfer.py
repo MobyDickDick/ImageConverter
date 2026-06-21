@@ -278,7 +278,11 @@ def tryTemplateTransferImpl(
 
     target_variant = str(target_row.get("variant", "")).upper()
     target_base = str(target_row.get("base", "")).upper()
-    if target_base == "AC0223":
+    target_params_raw = target_row.get("params")
+    target_head_style = ""
+    if isinstance(target_params_raw, dict):
+        target_head_style = str(target_params_raw.get("head_style", "")).lower()
+    if target_head_style == "ac0223_triple_valve":
         # Dedicated valve-head overlays are not encoded in generic geometry
         # extraction. Transferring donor templates can drop the polygon/hub
         # semantics, so keep native conversion output only.
@@ -286,7 +290,6 @@ def tryTemplateTransferImpl(
     target_svg_path = os.path.join(svg_out_dir, f"{target_variant}.svg")
     target_svg_geometry = read_svg_geometry_fn(target_svg_path)
     target_geom_params = dict(target_svg_geometry[2]) if target_svg_geometry is not None else None
-    target_params_raw = target_row.get("params")
     if isinstance(target_params_raw, dict) and str(target_params_raw.get("mode", "")) == "dual_arrow_badge":
         # Dual-arrow badges are fully semantics-driven. Generic template
         # transfer can replace them with unrelated historical donors when

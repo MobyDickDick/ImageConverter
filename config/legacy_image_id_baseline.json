@@ -5,24 +5,10 @@
     "src/iCCModules/imageCompositeConverterAudit.py": {
       "AR0100": 1
     },
-    "src/iCCModules/imageCompositeConverterBestlist.py": {
-      "AC0223": 1
-    },
     "src/iCCModules/imageCompositeConverterCli.py": {
       "AC0000": 1,
       "AC0223": 1,
-      "AC0800": 1,
-      "AC0811": 1,
-      "AC0899": 1
-    },
-    "src/iCCModules/imageCompositeConverterGeometryIr.py": {
-      "AC0231": 1,
-      "AC0251": 1,
-      "AC0401": 1,
-      "AC0521": 1,
-      "AC072": 1,
-      "AC0732": 1,
-      "AC0733": 1
+      "AC0811": 1
     },
     "src/iCCModules/imageCompositeConverterPerceptionReflection.py": {
       "AC0030": 2,
@@ -33,7 +19,6 @@
       "AR0104": 1
     },
     "src/iCCModules/imageCompositeConverterSemantic.py": {
-      "AC0000": 1,
       "AC0223": 4,
       "AC0800": 2,
       "AC0810": 2,
@@ -61,7 +46,7 @@
       "AC0870": 1,
       "AC0881": 2,
       "AC0882": 1,
-      "AR0100": 4
+      "AR0100": 3
     },
     "src/iCCModules/imageCompositeConverterSemanticAc0050.py": {
       "AC0050": 8
@@ -140,9 +125,6 @@
     },
     "src/iCCModules/imageCompositeConverterSemanticLabels.py": {
       "AC0820": 1
-    },
-    "src/iCCModules/imageCompositeConverterTemplateTransfer.py": {
-      "AC0223": 1
     },
     "src/imageCompositeConverter.py": {
       "AC0223": 1,
