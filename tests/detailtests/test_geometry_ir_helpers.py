@@ -50,7 +50,7 @@ def test_render_geometry_ir_to_svg_contains_centralized_primitives() -> None:
     assert svg.endswith("</svg>")
 
 
-def test_render_geometry_ir_top_glyphs_stay_inside_canvas() -> None:
+def test_render_geometry_ir_ac0010_top_glyphs_stay_inside_canvas_and_main_rect() -> None:
     ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
         "Heizelement, graues Rechteck, Plus-Minus-Zeichen oben links, "
         "Farbverlauf horizontal dunkel-hell-dunkel graue Diagonale oben rechts nach unten links"
@@ -58,8 +58,8 @@ def test_render_geometry_ir_top_glyphs_stay_inside_canvas() -> None:
 
     svg = geometry_ir_helpers.renderGeometryIrToSvgImpl(40, 80, ir)
 
-    assert 'id="plus_glyph" d="M 9.608 23.008 L 14.008 23.008 M 11.808 20.808 L 11.808 25.208"' in svg
-    assert 'id="minus_glyph" d="M 9.608 23.008 L 14.008 23.008"' in svg
+    assert 'id="plus_glyph" d="M 6.664 10.612 L 11.064 10.612 M 8.864 8.412 L 8.864 12.812"' in svg
+    assert 'id="minus_glyph" d="M 6.664 10.612 L 11.064 10.612"' in svg
     assert ' -' not in svg
 
 
@@ -86,7 +86,7 @@ def test_validate_geometry_ir_glyph_layout_accepts_ac0010_top_left_glyphs() -> N
 
 
 
-def test_render_geometry_ir_horizontal_gradient_uses_renderer_stable_bands() -> None:
+def test_render_geometry_ir_horizontal_gradient_uses_native_svg_gradient() -> None:
     ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(
         "Heizelement, graues Rechteck, Plus-Minus-Zeichen oben links, "
         "Farbverlauf horizontal dunkel-hell-dunkel graue Diagonale oben rechts nach unten links"
@@ -95,8 +95,8 @@ def test_render_geometry_ir_horizontal_gradient_uses_renderer_stable_bands() -> 
     svg = geometry_ir_helpers.renderGeometryIrToSvgImpl(40, 80, ir)
 
     assert 'id="background_gradient"' in svg
-    assert 'fill="url(#geometry-ir-horizontal-gradient)"' not in svg
-    assert svg.count('<rect x=') >= 12
+    assert 'fill="url(#geometry-ir-horizontal-gradient)"' in svg
+    assert svg.count('<rect x=') == 0
 
 def test_build_geometry_ir_maps_ac0150_vertical_heat_exchanger_description() -> None:
     description = (

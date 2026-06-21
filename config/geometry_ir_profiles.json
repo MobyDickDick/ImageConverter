@@ -1,0 +1,9 @@
+{
+  "heat_exchanger_plus_minus_diagonal": {
+    "match_tokens": ["heizelement"],
+    "required_features": ["gradient", "diagonal", "plus_or_plus_minus"],
+    "rect_bbox": [0.065, 0.057, 0.87, 0.89],
+    "gradient_stops": ["#8f8f8f", "#dedede", "#8f8f8f"],
+    "diagonal_stroke_width": 0.068
+  }
+}
