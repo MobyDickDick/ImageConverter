@@ -1,9 +1,51 @@
 {
   "heat_exchanger_plus_minus_diagonal": {
-    "match_tokens": ["heizelement"],
-    "required_features": ["gradient", "diagonal", "plus_or_plus_minus"],
-    "rect_bbox": [0.065, 0.057, 0.87, 0.89],
-    "gradient_stops": ["#8f8f8f", "#dedede", "#8f8f8f"],
+    "match_tokens": [
+      "heizelement"
+    ],
+    "required_features": [
+      "gradient",
+      "diagonal",
+      "plus_or_plus_minus"
+    ],
+    "rect_bbox": [
+      0.065,
+      0.057,
+      0.87,
+      0.89
+    ],
+    "gradient_stops": [
+      "#8f8f8f",
+      "#dedede",
+      "#8f8f8f"
+    ],
     "diagonal_stroke_width": 0.068
+  },
+  "dark_circle_background": {
+    "match_tokens": [
+      "ac0251",
+      "ac0401"
+    ]
+  },
+  "right_facing_square_kelle_p": {
+    "match_tokens": [
+      "ac0732",
+      "ac072"
+    ]
+  },
+  "right_rotated_square_kelle_p": {
+    "match_tokens": [
+      "ac0733"
+    ]
+  },
+  "left_rotated_circular_damper": {
+    "match_tokens": [
+      "ac0521"
+    ]
+  },
+  "top_kelle_three_way_valve": {
+    "match_tokens": [
+      "ac0231"
+    ]
   }
 }

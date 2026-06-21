@@ -38,6 +38,12 @@ def _profile_float(profile: dict[str, object], key: str, fallback: float) -> flo
         return fallback
 
 
+def _profile_tokens(name: str, fallback: list[object] | None = None) -> tuple[str, ...]:
+    return tuple(
+        str(token) for token in _profile_list(_profile(name), "match_tokens", list(fallback or []))
+    )
+
+
 def _normalize_text(text: str) -> str:
     return re.sub(r"\s+", " ", str(text or "").lower()).strip()
 
@@ -312,7 +318,7 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
     )
     pump_symbol_hint = (
         "pumpensymbol" in desc and "kreis" in desc and "dreieck" in desc
-    ) or _has_any(desc, ("ac0251", "ac0401"))
+    ) or _has_any(desc, _profile_tokens("dark_circle_background"))
     pump_rotated_180_hint = pump_symbol_hint and _has_any(
         desc, ("180° gedreht", "180 grad gedreht", "um 180°", "um 180 grad")
     )
@@ -346,7 +352,7 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
         and _has_any(desc, ("quadrat", "viereck"))
     )
     right_facing_square_kelle_p_hint = (
-        _has_any(desc, ("ac0732", "ac072"))
+        _has_any(desc, _profile_tokens("right_facing_square_kelle_p"))
         and _has_any(
             desc,
             (
@@ -359,13 +365,13 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
         and _has_any(desc, ('horizontal "p"', "horizontal 'p'", "text immer noch horizontal"))
     )
     right_rotated_square_kelle_p_hint = (
-        "ac0733" in desc
+        _has_any(desc, _profile_tokens("right_rotated_square_kelle_p"))
         and _has_any(desc, ("nach rechts gedreht", "90° nach rechts", "90 grad nach rechts"))
         and _has_any(desc, ('horizontal "p"', "horizontal 'p'", "text immer noch horizontal"))
     )
-    left_rotated_circular_damper_hint = "ac0521" in desc and _has_any(
-        desc, ("nach links gedreht", "90° nach links", "90 grad nach links")
-    )
+    left_rotated_circular_damper_hint = _has_any(
+        desc, _profile_tokens("left_rotated_circular_damper")
+    ) and _has_any(desc, ("nach links gedreht", "90° nach links", "90 grad nach links"))
     compressor_hint = _has_any(desc, ("kompressor", "kopressor"))
     upward_compressor_hint = compressor_hint and _has_any(desc, ("nach oben", "oben", "aufwärts", "aufwaerts"))
     grey_background_compressor_hint = upward_compressor_hint and _has_any(
@@ -388,7 +394,13 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
         desc, ("ohne \"m\"", "ohne 'm'", "ohne m", "kein \"m\"", "kein m")
     )
     top_kelle_family_hint = _has_any(
-        desc, ("ac0231", "3-weg ventil", "3 wege ventil", "3. spitzes dreieck")
+        desc,
+        (
+            *_profile_tokens("top_kelle_three_way_valve"),
+            "3-weg ventil",
+            "3 wege ventil",
+            "3. spitzes dreieck",
+        ),
     ) or (
         "kelle" in desc
         and "kreis" in desc
@@ -1154,35 +1166,55 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
         return elements
 
     heat_exchanger_profile = _profile("heat_exchanger_plus_minus_diagonal")
-    heat_exchanger_tokens = tuple(str(token) for token in _profile_list(heat_exchanger_profile, "match_tokens", ["heizelement"]))
-    ac0010_heat_exchanger_hint = (
+    heat_exchanger_tokens = _profile_tokens("heat_exchanger_plus_minus_diagonal", ["heizelement"])
+    heat_exchanger_hint = (
         _has_any(desc, heat_exchanger_tokens)
         and gradient_hint
         and diagonal_hint
         and _has_any(desc, ("plus-minus", "plus", "+"))
     )
-    tall_rect_bbox = [float(value) for value in _profile_list(heat_exchanger_profile, "rect_bbox", [0.065, 0.057, 0.870, 0.890])[:4]]
-    heat_exchanger_gradient_stops = [str(value) for value in _profile_list(heat_exchanger_profile, "gradient_stops", ["#8f8f8f", "#dedede", "#8f8f8f"])]
-    heat_exchanger_diagonal_stroke_width = _profile_float(heat_exchanger_profile, "diagonal_stroke_width", 0.068)
+    tall_rect_bbox = [
+        float(value)
+        for value in _profile_list(
+            heat_exchanger_profile, "rect_bbox", [0.065, 0.057, 0.870, 0.890]
+        )[:4]
+    ]
+    heat_exchanger_gradient_stops = [
+        str(value)
+        for value in _profile_list(
+            heat_exchanger_profile, "gradient_stops", ["#8f8f8f", "#dedede", "#8f8f8f"]
+        )
+    ]
+    heat_exchanger_diagonal_stroke_width = _profile_float(
+        heat_exchanger_profile, "diagonal_stroke_width", 0.068
+    )
 
     if gradient_hint:
         elements.append(
             {
                 "kind": "HorizontalGradient",
                 "id": "background_gradient",
-                "bbox": tall_rect_bbox if ac0010_heat_exchanger_hint else [0.18, 0.24, 0.64, 0.56],
-                "stops": heat_exchanger_gradient_stops if ac0010_heat_exchanger_hint else ["#8f8f8f", "#dedede", "#8f8f8f"],
+                "bbox": tall_rect_bbox if heat_exchanger_hint else [0.18, 0.24, 0.64, 0.56],
+                "stops": (
+                    heat_exchanger_gradient_stops
+                    if heat_exchanger_hint
+                    else ["#8f8f8f", "#dedede", "#8f8f8f"]
+                ),
                 "constraint": "inside_rect_border",
             }
         )
 
-    if rect_hint and ("hochkant" in desc or ac0010_heat_exchanger_hint):
+    if rect_hint and ("hochkant" in desc or heat_exchanger_hint):
         for element in elements:
             if element.get("kind") == "HorizontalGradient":
-                element["bbox"] = tall_rect_bbox if ac0010_heat_exchanger_hint else [0.32, 0.12, 0.36, 0.76]
+                element["bbox"] = tall_rect_bbox if heat_exchanger_hint else [0.32, 0.12, 0.36, 0.76]
 
     if rect_hint:
-        rect_bbox = tall_rect_bbox if ac0010_heat_exchanger_hint else ([0.32, 0.12, 0.36, 0.76] if "hochkant" in desc else [0.18, 0.24, 0.64, 0.56])
+        rect_bbox = (
+            tall_rect_bbox
+            if heat_exchanger_hint
+            else ([0.32, 0.12, 0.36, 0.76] if "hochkant" in desc else [0.18, 0.24, 0.64, 0.56])
+        )
         elements.append(
             {
                 "kind": "RectBorder",
@@ -1245,7 +1277,7 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
                 "rect_ref": "main_rect",
                 "direction": direction,
                 "stroke": "#707070",
-                "stroke_width": heat_exchanger_diagonal_stroke_width if ac0010_heat_exchanger_hint else 0.045,
+                "stroke_width": heat_exchanger_diagonal_stroke_width if heat_exchanger_hint else 0.045,
                 "clip_to": "main_rect",
             }
         )
