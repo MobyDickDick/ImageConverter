@@ -150,8 +150,8 @@ def makeAc08BadgeParamsImpl(
         )
 
     if name == "AC0835":
-        # AC0835 is the connector-free VOC circle/text badge. Its follow-up
-        # variants (for example AC0836/AC0839) add explicit connector geometry.
+        # Connector-free VOC circle/text badges can have follow-up variants
+        # with explicit connector geometry.
         defaults = apply_voc_label_fn(default_ac0870_params_fn(w, h))
         if img is None:
             return finalize_ac08_style_fn(name, tune_ac0835_voc_badge_fn(defaults, w, h))
@@ -177,8 +177,8 @@ def makeAc08BadgeParamsImpl(
         )
 
     if name == "AC0838":
-        # AC0838 mirrors AC0836 into the "vertical connector above circle"
-        # geometry class (same family as AC0813/AC0833) while keeping VOC text.
+        # Mirror the lower vertical VOC badge into the top-connector geometry
+        # class while keeping VOC text.
         defaults = apply_voc_label_fn(default_ac0813_params_fn(w, h))
         if img is None:
             return finalize_ac08_style_fn(name, defaults)
@@ -209,24 +209,24 @@ def makeAc08BadgeParamsImpl(
         return _finalize_right_arm_badge_params(defaults, fit_ac0814_params_from_image_fn)
 
     if name == "AC0850":
-        # AC0850 is the connector-free relative-humidity rF circle/text badge.
+        # Connector-free relative-humidity rF circle/text badge.
         defaults = _apply_rf_label(default_ac0870_params_fn(w, h))
         if img is None:
             return finalize_ac08_style_fn(name, defaults)
         return finalize_ac08_style_fn(name, fit_semantic_badge_from_image_fn(img, defaults))
 
     if name == "AC0861":
-        # AC0861 is the rF counterpart of the lower vertical-connector
-        # AC0881/AC0836 badge: circle/text badge with a stem below the circle.
+        # rF counterpart of the lower vertical-connector badge: circle/text
+        # badge with a stem below the circle.
         defaults = _apply_rf_label(default_ac0881_params_fn(w, h))
         if img is None:
             return finalize_ac08_style_fn(name, defaults)
         return finalize_ac08_style_fn(name, fit_ac0811_params_from_image_fn(img, defaults))
 
     if name == "AC0863":
-        # AC0863 continues the AC0842/AC0862 rF weak-family rotation: the
-        # connector is rotated into the upper vertical-arm geometry while the
-        # rF label remains horizontally oriented.
+        # Continue the rF weak-family rotation: the connector is rotated into
+        # the upper vertical-arm geometry while the rF label remains horizontally
+        # oriented.
         defaults = _apply_rf_label(default_ac0813_params_fn(w, h))
         if img is None:
             return finalize_ac08_style_fn(name, defaults)
