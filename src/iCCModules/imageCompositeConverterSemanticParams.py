@@ -17,7 +17,7 @@ def makeBadgeParamsImpl(
 ):
     """Build badge parameters for supported semantic families.
 
-    The dispatcher keeps AR0100 handling and AC08 handling centralized so the
+    The dispatcher keeps centered-glyph and circle-badge handling centralized so the
     monolith can delegate with a thin compatibility wrapper.
     """
 

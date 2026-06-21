@@ -1,4 +1,4 @@
-"""AC0811 semantic badge helper block extracted from imageCompositeConverter."""
+"""Lower-vertical semantic badge helper block extracted from imageCompositeConverter."""
 
 from __future__ import annotations
 
@@ -51,7 +51,7 @@ def defaultAc0811ParamsImpl(
     light_circle_stroke_gray: int,
     light_circle_fill_gray: int,
 ) -> dict:
-    """AC0811 is vertically elongated: circle sits in the upper square area."""
+    """Lower-vertical badges are elongated: circle sits in the upper square area."""
     if w <= 0 or h <= 0:
         return default_ac081x_shared(w, h)
 
@@ -149,7 +149,7 @@ def fitAc0811ParamsFromImageImpl(
     normalize_light_circle_colors_fn,
     persist_connector_length_floor_fn,
 ) -> dict:
-    """Fit AC0811 while keeping the vertical stem anchored to the lower edge."""
+    """Fit lower-vertical badges while keeping the vertical stem anchored to the lower edge."""
     params = fit_semantic_badge_from_image_fn(img, defaults)
     h, w = img.shape[:2]
 
@@ -232,7 +232,7 @@ def fitAc0811ParamsFromImageImpl(
         params["stem_len_min_ratio"] = float(max(float(params.get("stem_len_min_ratio", 0.0) or 0.0), 0.80))
         persist_connector_length_floor_fn(params, "stem", default_ratio=0.80)
 
-    # AC0811 now runs permanently without geometry lock restrictions.
+    # Lower-vertical badges now run permanently without geometry lock restrictions.
     for key in (
         "lock_circle_cx",
         "lock_circle_cy",

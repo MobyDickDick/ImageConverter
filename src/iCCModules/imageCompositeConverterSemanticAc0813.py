@@ -1,4 +1,4 @@
-"""AC0813/AC0814 semantic badge helper block extracted from imageCompositeConverter."""
+"""Top- and right-connector semantic badge helper block extracted from imageCompositeConverter."""
 
 from __future__ import annotations
 
@@ -15,7 +15,7 @@ def defaultAc0813ParamsImpl(
     light_circle_stroke_gray: int,
     light_circle_fill_gray: int,
 ) -> dict:
-    """AC0813 is AC0812 rotated 90° clockwise (vertical arm from top to circle)."""
+    """Top-connector badges are left-horizontal badges rotated 90° clockwise."""
     if w <= 0 or h <= 0:
         return default_ac081x_shared(w, h)
 
@@ -54,7 +54,7 @@ def fitAc0813ParamsFromImageImpl(
     enforce_directional_circle_side_fn,
     normalize_light_circle_colors_fn,
 ) -> dict:
-    """Fit AC0813 while keeping the vertical arm anchored to the upper edge."""
+    """Fit top-connector badges while keeping the vertical arm anchored to the upper edge."""
     params = fit_semantic_badge_from_image_fn(img, defaults)
     h, w = img.shape[:2]
     aspect_ratio = (float(h) / float(w)) if w > 0 else 1.0
@@ -114,7 +114,7 @@ def defaultAc0814ParamsImpl(
     light_circle_stroke_gray: int,
     light_circle_fill_gray: int,
 ) -> dict:
-    """AC0814 is horizontally elongated: circle on the left, arm to the right."""
+    """Right-horizontal badges are elongated: circle on the left, arm to the right."""
     if w <= 0 or h <= 0:
         return default_ac081x_shared(w, h)
 
@@ -155,7 +155,7 @@ def fitAc0814ParamsFromImageImpl(
     enforce_directional_circle_side_fn,
     normalize_light_circle_colors_fn,
 ) -> dict:
-    """Fit AC0814 while keeping the horizontal arm anchored to the right edge."""
+    """Fit right-horizontal badges while keeping the horizontal arm anchored to the right edge."""
     params = fit_semantic_badge_from_image_fn(img, defaults)
     h, w = img.shape[:2]
     aspect_ratio = (float(w) / float(h)) if h > 0 else 1.0
@@ -244,7 +244,7 @@ def defaultAc0810ParamsImpl(
     *,
     default_ac0814_params_fn,
 ) -> dict:
-    """AC0810 uses the same right-arm geometry as AC0814 (circle on the left)."""
+    """Plain right-horizontal badges use the same right-arm geometry class."""
     return default_ac0814_params_fn(w, h)
 
 
@@ -254,5 +254,5 @@ def fitAc0810ParamsFromImageImpl(
     *,
     fit_ac0814_params_from_image_fn,
 ) -> dict:
-    """Fit AC0810 with the same right-anchored arm behavior as AC0814."""
+    """Fit plain right-horizontal badges with the same right-anchored arm behavior."""
     return fit_ac0814_params_from_image_fn(img, defaults)

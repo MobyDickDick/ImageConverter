@@ -3,8 +3,6 @@
   "purpose": "Migration ratchet only; never loaded by converter runtime. Counts may decrease but not increase.",
   "files": {
     "src/iCCModules/imageCompositeConverterAudit.py": {
-      "AC0811": 2,
-      "AC0814": 2,
       "AR0100": 1
     },
     "src/iCCModules/imageCompositeConverterBestlist.py": {
@@ -26,9 +24,6 @@
       "AC072": 1,
       "AC0732": 1,
       "AC0733": 1
-    },
-    "src/iCCModules/imageCompositeConverterNonCompositeRuntime.py": {
-      "AC0100": 1
     },
     "src/iCCModules/imageCompositeConverterPerceptionReflection.py": {
       "AC0030": 2,
@@ -71,22 +66,6 @@
     },
     "src/iCCModules/imageCompositeConverterSemanticAc0050.py": {
       "AC0050": 11
-    },
-    "src/iCCModules/imageCompositeConverterSemanticAc0811.py": {
-      "AC0811": 4
-    },
-    "src/iCCModules/imageCompositeConverterSemanticAc0812.py": {
-      "AC0812": 3
-    },
-    "src/iCCModules/imageCompositeConverterSemanticAc0813.py": {
-      "AC0810": 2,
-      "AC0812": 1,
-      "AC0813": 3,
-      "AC0814": 5
-    },
-    "src/iCCModules/imageCompositeConverterSemanticAc08Families.py": {
-      "AC0811": 1,
-      "AC0813": 1
     },
     "src/iCCModules/imageCompositeConverterSemanticAc08Finalization.py": {
       "AC0820": 5,
@@ -149,7 +128,6 @@
       "AC0800": 1
     },
     "src/iCCModules/imageCompositeConverterSemanticHarmonization.py": {
-      "AC0223": 2,
       "AC0800": 2,
       "AC0811": 3,
       "AC0812": 3,
@@ -162,16 +140,7 @@
       "AC0834": 3
     },
     "src/iCCModules/imageCompositeConverterSemanticLabels.py": {
-      "AC0814": 1,
-      "AC0820": 1,
-      "AC0831": 1,
-      "AC0832": 1,
-      "AC0833": 1,
-      "AC0834": 2,
-      "AC0835": 1
-    },
-    "src/iCCModules/imageCompositeConverterSemanticParams.py": {
-      "AR0100": 1
+      "AC0820": 1
     },
     "src/iCCModules/imageCompositeConverterTemplateTransfer.py": {
       "AC0100": 1,

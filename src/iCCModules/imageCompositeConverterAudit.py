@@ -21,7 +21,7 @@ def semanticAuditRecordImpl(
     semantic_conflicts: list[str] | None = None,
     semantic_sources: dict[str, object] | None = None,
 ) -> dict[str, object]:
-    """Build a normalized semantic-audit record for AC0811..AC0814 style families."""
+    """Build a normalized semantic-audit record for connector-badge style families."""
     mismatch_reasons = [str(reason) for reason in (mismatch_reasons or []) if str(reason).strip()]
     joined_description = " ".join(fragment["text"] for fragment in description_fragments).strip()
     return {
@@ -81,7 +81,7 @@ def collectDescriptionFragmentsImpl(
 
 
 def writeSemanticAuditReportImpl(reports_out_dir: str, audit_rows: list[dict[str, object]]) -> None:
-    """Persist semantic audit rows as CSV/JSON for targeted AC0811..AC0814 review."""
+    """Persist semantic audit rows as CSV/JSON for targeted connector-badge review."""
     if not audit_rows:
         return
 

@@ -245,7 +245,7 @@ def tuneAc0832Co2BadgeImpl(
     light_circle_stroke_gray: int,
     ac08_stroke_width_px: int,
 ) -> dict:
-    """AC0832 has a compact circle; keep CO₂ comfortably inside the ring."""
+    """Keep compact CO₂ badges comfortably inside the ring."""
     p = dict(params)
     r = float(p.get("r", 0.0))
     p["stroke_gray"] = light_circle_stroke_gray
@@ -265,7 +265,7 @@ def tuneAc0831Co2BadgeImpl(
     *,
     ac08_stroke_width_px: int,
 ) -> dict:
-    """Stabilize AC0831 text placement for vertically elongated CO² badges."""
+    """Stabilize text placement for vertically elongated CO² badges."""
     p = dict(params)
     r = float(p.get("r", 0.0))
     p["stroke_gray"] = 155
@@ -301,7 +301,7 @@ def tuneAc0835VocBadgeImpl(
     *,
     light_circle_stroke_gray: int,
 ) -> dict:
-    """Keep tiny AC0835 badges from rendering the VOC label too high."""
+    """Keep tiny VOC badges from rendering the label too high."""
     p = dict(params)
     r = float(p.get("r", 0.0))
     p["stroke_gray"] = light_circle_stroke_gray
@@ -313,7 +313,7 @@ def tuneAc0835VocBadgeImpl(
 
 
 def tuneAc0833Co2BadgeImpl(params: dict, *, normalize_light_circle_colors_fn) -> dict:
-    """Tune AC0833 CO² badges so the trailing index stays superscript."""
+    """Tune CO² badges so the trailing index stays superscript."""
     p = normalize_light_circle_colors_fn(dict(params))
     p["co2_anchor_mode"] = str(p.get("co2_anchor_mode", "cluster"))
     p["co2_index_mode"] = "superscript"
@@ -330,7 +330,7 @@ def tuneAc0834Co2BadgeImpl(
     light_circle_stroke_gray: int,
     ac08_stroke_width_px: int,
 ) -> dict:
-    """Stabilize tiny AC0834 badges where fitting drifts the circle downward."""
+    """Stabilize tiny CO₂ badges where fitting drifts the circle downward."""
     p = dict(params)
     p["stroke_gray"] = light_circle_stroke_gray
     p["text_gray"] = p["stroke_gray"]
@@ -359,7 +359,7 @@ def defaultAc0834ParamsImpl(
     apply_co2_label_fn,
     tune_ac0834_co2_badge_fn,
 ) -> dict:
-    """Build AC0834 semantic defaults via the AC0814 base + CO₂ tuning."""
+    """Build right-arm CO₂ semantic defaults via the matching base and tuning."""
     params = default_ac0814_params_fn(w, h)
     params = apply_co2_label_fn(params)
     return tune_ac0834_co2_badge_fn(params, w, h)
