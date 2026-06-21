@@ -1,4 +1,4 @@
-"""AC0812 semantic badge helper block extracted from imageCompositeConverter."""
+"""Left-horizontal semantic badge helper block extracted from imageCompositeConverter."""
 
 from __future__ import annotations
 
@@ -14,7 +14,7 @@ def defaultAc0812ParamsImpl(
     light_circle_stroke_gray: int,
     light_circle_fill_gray: int,
 ) -> dict:
-    """AC0812 is horizontally elongated: left arm, circle on the right."""
+    """Left-horizontal badges are elongated: left arm, circle on the right."""
     if w <= 0 or h <= 0:
         return default_ac081x_shared(w, h)
 
@@ -52,7 +52,7 @@ def fitAc0812ParamsFromImageImpl(
     max_circle_radius_inside_canvas_fn,
     normalize_light_circle_colors_fn,
 ) -> dict:
-    """Fit AC0812 while keeping the horizontal arm anchored to the left edge."""
+    """Fit left-horizontal badges while keeping the horizontal arm anchored to the left edge."""
     params = fit_semantic_badge_from_image_fn(img, defaults)
     h, w = img.shape[:2]
     aspect_ratio = (float(w) / float(h)) if h > 0 else 1.0
