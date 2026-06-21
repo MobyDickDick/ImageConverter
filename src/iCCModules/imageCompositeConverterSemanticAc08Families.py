@@ -1,4 +1,4 @@
-"""AC08 family-level semantic tuning helpers extracted from the converter monolith."""
+"""Circle-badge family-level semantic tuning helpers extracted from the converter monolith."""
 
 from __future__ import annotations
 
@@ -52,7 +52,7 @@ def enforceVerticalConnectorBadgeGeometryImpl(
     *,
     ac08_stroke_width_px: float,
 ) -> dict:
-    """Ensure AC0811/AC0813-like badges keep a centered visible vertical connector."""
+    """Ensure vertical-connector badges keep a centered visible connector."""
     p = dict(params)
     if not p.get("circle_enabled", True):
         return p
@@ -108,14 +108,14 @@ def tuneAc08LeftConnectorFamilyImpl(
     enforce_left_arm_badge_geometry_fn,
     center_glyph_bbox_fn,
 ) -> dict:
-    """Apply shared guardrails for left-connector AC08 families."""
+    """Apply shared guardrails for left-connector circle-badge families."""
     p = dict(params)
     direction = str(p.get("connector_direction", p.get("connector_family_direction", ""))).lower()
     base_name = str(get_base_name_from_file_fn(name)).upper()
     horizontal_arm_evidence = (
         direction in {"left", "west"}
         # Compatibility for direct helper callers that still pass the legacy
-        # semantic AC08 family name without the fitted arm geometry metadata.
+        # semantic circle-badge family name without the fitted arm geometry metadata.
         or (base_name.startswith("AC08") and not direction and not {"arm_x1", "arm_x2"}.issubset(p))
         or (
             bool(p.get("arm_enabled", False))
@@ -199,7 +199,7 @@ def tuneAc08RightConnectorFamilyImpl(
     enforce_template_circle_edge_extent_fn,
     enforce_right_arm_badge_geometry_fn,
 ) -> dict:
-    """Apply shared guardrails for mirrored right-connector AC08 families."""
+    """Apply shared guardrails for mirrored right-connector circle-badge families."""
     p = dict(params)
     direction = str(p.get("connector_direction", p.get("connector_family_direction", ""))).lower()
     horizontal_arm_evidence = (
@@ -361,7 +361,7 @@ def tuneAc08CircleTextFamilyImpl(
     max_circle_radius_inside_canvas_fn,
     center_glyph_bbox_fn,
 ) -> dict:
-    """Apply shared guardrails for connector-free AC08 circle/text badges."""
+    """Apply shared guardrails for connector-free circle/text badges."""
     p = dict(params)
     text_mode = str(p.get("text_mode", "")).lower()
     connector_direction = str(p.get("connector_direction", p.get("connector_family_direction", ""))).lower()

@@ -445,7 +445,7 @@ def _fit_symbol_element_by_element(
         current["glyph_y_ratio"] = 0.15
     glyph_y_maximum = 0.30 if glyph_is_top else 0.45
     # Element-wise refinement order requested by project idea.  Position and
-    # size windows are centered on raster measurements so AC0100-like variants
+    # size windows are centered on raster measurements so diagonal/gradient variants
     # are fitted from the image evidence instead of from one fixed sample pose.
     gradient_edge_seed = float(int(str(current["gradient_edge"])[1:3], 16))
     gradient_mid_seed = float(int(str(current["gradient_mid"])[1:3], 16))
