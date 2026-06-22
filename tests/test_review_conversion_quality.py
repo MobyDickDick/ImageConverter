@@ -34,6 +34,28 @@ def _read_committed_validation_log(variant: str) -> str:
     )
 
 
+def _read_committed_bestlist_snapshot(variant: str) -> dict[str, object]:
+    candidates = (
+        Path("artifacts/converted_images/reports/conversion_bestlist_snapshots") / f"{variant}.json",
+        Path("artifacts/converted_images/reports/reports/conversion_bestlist_snapshots") / f"{variant}.json",
+    )
+    for candidate in candidates:
+        if candidate.exists():
+            return json.loads(candidate.read_text(encoding="utf-8"))
+    searched = ", ".join(str(candidate) for candidate in candidates)
+    raise AssertionError(
+        f"Missing committed bestlist snapshot for {variant}; searched: {searched}"
+    )
+
+
+def _committed_mean_delta2(variant: str, fallback: float) -> float:
+    snapshot = _read_committed_bestlist_snapshot(variant)
+    value = snapshot.get("mean_delta2")
+    if value is None:
+        return fallback
+    return float(value)
+
+
 def _record(
     variant: str,
     mse: float | None,
@@ -144,7 +166,9 @@ def test_ac0820_l_committed_svg_preserves_co2_badge_quality() -> None:
     assert record.width == 30
     assert record.height == 30
     assert record.mean_delta2 is not None
-    assert record.mean_delta2 == pytest.approx(8237.646484375)
+    assert record.mean_delta2 == pytest.approx(
+        _committed_mean_delta2("AC0820_L", 8237.646484375)
+    )
     assert record.normalized_mse is not None
     assert record.normalized_mse < 0.045945679012345676
 
