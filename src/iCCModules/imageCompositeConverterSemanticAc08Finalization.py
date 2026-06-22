@@ -60,6 +60,7 @@ def finalizeAc08StyleImpl(
         # Keep connector CO² families on their superscript-specific tuners, but
         # render this centered topology with a lowered index by default.
         p["co2_index_mode"] = "subscript"
+        p["co2_width_profile"] = "centered_subscript"
         p.pop("co2_superscript_offset_scale", None)
         p.pop("co2_superscript_min_gap_scale", None)
         p["co2_optical_bias"] = 0.080
