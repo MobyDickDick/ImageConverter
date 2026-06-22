@@ -175,13 +175,13 @@ def measureAndDrawAc0050Impl(
     mask = _foregroundMask(img, cv2_module=cv2_module, np_module=np_module)
     if mask is None:
         svg = generateAc0050SvgImpl(w, h, default)
-        return default, svg, ["ac0050: fallback to defaults (empty image)"]
+        return default, svg, ["centered-triangle: fallback to defaults (empty image)"]
 
     col_mass = mask.sum(axis=0)
     peaks = _pickTwoDistinctPeaks(col_mass, min_sep=max(2, int(round(w * float(cfg.min_peak_separation_ratio)))))
     if peaks is None:
         svg = generateAc0050SvgImpl(w, h, default)
-        return default, svg, ["ac0050: fallback to defaults (no peaks)"]
+        return default, svg, ["centered-triangle: fallback to defaults (no peaks)"]
 
     left_x, right_x = peaks
     half_window = max(1, int(round(w * float(cfg.line_window_ratio))))
@@ -249,7 +249,7 @@ def measureAndDrawAc0050Impl(
     measured = _applySymmetryIfRequested(measured, width=w, enabled=bool(cfg.enforce_horizontal_symmetry))
 
     logs.append(
-        "ac0050: measured left_x={:.2f}, right_x={:.2f}, line_bottom={:.2f}, tri_h={:.2f}, line_w={:.2f}".format(
+        "centered-triangle: measured left_x={:.2f}, right_x={:.2f}, line_bottom={:.2f}, tri_h={:.2f}, line_w={:.2f}".format(
             measured.left_x,
             measured.right_x,
             measured.line_bottom,
@@ -430,7 +430,7 @@ def refineAc0050GeometryIterativeImpl(
         return _maskError(target_mask, cand, np_module=np_module)
 
     best_err = _err(best)
-    logs.append(f"ac0050: iterative start_err={best_err:.4f}")
+    logs.append(f"centered-triangle: iterative start_err={best_err:.4f}")
 
     base_steps = {
         "left_x": max(0.5, w * 0.03),
@@ -458,7 +458,7 @@ def refineAc0050GeometryIterativeImpl(
                     best = candidate
                     best_err = err
                     improved = True
-                    logs.append(f"ac0050: r{round_idx + 1} improved {key} -> {value:.2f}, err={err:.4f}")
+                    logs.append(f"centered-triangle: r{round_idx + 1} improved {key} -> {value:.2f}, err={err:.4f}")
         if bool(optimize_colors) and img is not None and len(img.shape) == 3:
             region_masks = _renderAc0050RegionMasks(w, h, best, cv2_module=cv2_module, np_module=np_module)
             color_changed = False
@@ -472,11 +472,11 @@ def refineAc0050GeometryIterativeImpl(
                 if changed and refined_hex != str(getattr(best, color_key)):
                     best = Ac0050Geometry(**{**best.__dict__, color_key: refined_hex})
                     color_changed = True
-                    logs.append(f"ac0050: r{round_idx + 1} color {color_key} -> {refined_hex}, err={color_err:.4f}")
+                    logs.append(f"centered-triangle: r{round_idx + 1} color {color_key} -> {refined_hex}, err={color_err:.4f}")
             improved = improved or color_changed
 
         if not improved:
-            logs.append(f"ac0050: r{round_idx + 1} no improvement")
+            logs.append(f"centered-triangle: r{round_idx + 1} no improvement")
             break
 
     return best, generateAc0050SvgImpl(w, h, best), logs
@@ -514,7 +514,7 @@ def generateAc0050SvgImpl(width: int, height: int, geometry: Ac0050Geometry) -> 
                 f'viewBox="0 0 {int(width)} {int(height)}" version="1.1" '
                 'xmlns="http://www.w3.org/2000/svg">'
             ),
-            "  <g id=\"ac0050\">",
+            "  <g id=\"centered_triangle\">",
             f'    <path style="fill:{geometry.right_line_color}" d="{_line_path(float(geometry.right_x))}" />',
             f'    <path style="fill:{geometry.left_line_color}" d="{_line_path(float(geometry.left_x))}" />',
             f'    <path style="fill:{geometry.left_triangle_color}" d="{_triangle_path(float(geometry.left_x))}" />',

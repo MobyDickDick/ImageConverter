@@ -96,7 +96,7 @@ def test_measure_and_draw_detects_dual_stems_and_samples_colors() -> None:
     assert measured.triangle_height >= 6.0
     assert measured.left_line_color.startswith("#")
     assert measured.right_triangle_color.startswith("#")
-    assert "ac0050: measured" in "\n".join(logs)
+    assert "centered-triangle: measured" in "\n".join(logs)
     assert "<svg" in svg
 
 
@@ -165,7 +165,7 @@ def test_iterative_refinement_improves_projection_error() -> None:
     assert refined.left_x <= start.left_x
     assert refined.right_x >= start.right_x
     assert refined.line_bottom >= start.line_bottom
-    assert "ac0050: iterative start_err=" in logs[0]
+    assert "centered-triangle: iterative start_err=" in logs[0]
     assert "<svg" in svg
 
 
