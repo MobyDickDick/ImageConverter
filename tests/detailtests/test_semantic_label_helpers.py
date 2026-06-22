@@ -16,7 +16,7 @@ def test_apply_co2_label_sets_defaults() -> None:
     assert params["co2_index_mode"] == "subscript"
 
 
-def test_co2_layout_caps_width_scale_for_ac0820() -> None:
+def test_co2_layout_caps_width_scale_for_centered_subscript_profile() -> None:
     layout = semantic_label_helpers.co2LayoutImpl(
         {
             "cx": 20.0,
@@ -26,7 +26,8 @@ def test_co2_layout_caps_width_scale_for_ac0820() -> None:
             "co2_font_scale": 0.82,
             "co2_sub_font_scale": 66.0,
             "co2_width_scale": 1.1,
-            "badge_symbol_name": "AC0820",
+            "badge_symbol_name": "ZZ_NEUTRAL_CO2_BADGE",
+            "co2_width_profile": "centered_subscript",
         }
     )
 

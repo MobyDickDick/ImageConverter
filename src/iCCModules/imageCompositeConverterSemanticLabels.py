@@ -50,10 +50,8 @@ def co2LayoutImpl(params: dict) -> dict[str, float | str]:
 
     width_scale = float(params.get("co2_width_scale", 1.0))
     width_scale = float(max(0.78, min(1.12, width_scale)))
-    symbol_hint = str(params.get("badge_symbol_name", "")).upper()
-    if not symbol_hint:
-        symbol_hint = str(params.get("variant_name", "")).upper().split("_", 1)[0]
-    if symbol_hint == "AC0820":
+    width_profile = str(params.get("co2_width_profile", "")).lower()
+    if width_profile == "centered_subscript":
         if r >= 10.0:
             width_scale = min(width_scale, 0.90)
         elif r >= 6.0:
