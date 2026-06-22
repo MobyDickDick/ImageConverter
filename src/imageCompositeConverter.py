@@ -178,40 +178,6 @@ except ValueError:
     SVG_RENDER_SUBPROCESS_TIMEOUT_SEC = _default_svg_render_subprocess_timeout_sec
 
 
-AC08_ADAPTIVE_LOCK_PROFILES: dict[str, dict[str, float | bool]] = {
-    # Known semantic-badge outlier families from the improvement plan. Profiles only relax
-    # tightly bounded locks after validation stagnates or when the residual
-    # error stays clearly above the "good enough" range.
-    "AC0882": {
-        "radius_floor_ratio": 0.84,
-        "arm_min_ratio": 0.68,
-        "color_corridor": 10.0,
-    },
-    "AC0837": {
-        "radius_floor_ratio": 0.86,
-        "arm_min_ratio": 0.70,
-        "color_corridor": 10.0,
-    },
-    "AC0839": {
-        "radius_floor_ratio": 0.86,
-        "arm_min_ratio": 0.70,
-        "text_scale_delta": 0.10,
-        "color_corridor": 10.0,
-    },
-    "AC0820": {
-        "radius_floor_ratio": 0.88,
-        "text_scale_delta": 0.10,
-        "color_corridor": 8.0,
-    },
-    "AC0831": {
-        "radius_floor_ratio": 0.87,
-        "stem_min_ratio": 0.58,
-        "text_scale_delta": 0.10,
-        "color_corridor": 10.0,
-    },
-}
-
-
 def detectRelevantRegions(img) -> list[dict[str, object]]:
     return imageCompositeConverterRemaining_helpers.detectRelevantRegions(img)
 
