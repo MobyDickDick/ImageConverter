@@ -6,31 +6,44 @@ from collections.abc import Callable
 import os
 
 
-def _prototypeGroupForBase(base: str) -> str:
-    if base == "AC0800":
+def _is_plain_ring_params(params: dict) -> bool:
+    return bool(params.get("preserve_plain_ring_geometry") or params.get("plain_ring_geometry"))
+
+
+def _is_rotational_connector_params(params: dict) -> bool:
+    return bool(params.get("arm_enabled") or params.get("stem_enabled"))
+
+
+def _prototypeGroupForParams(params: dict, fallback_base: str | None = None) -> str:
+    if _is_plain_ring_params(params):
         return "ac08_plain_ring_scale"
-
-    if base in {"AC0811", "AC0812", "AC0813", "AC0814", "AC0831", "AC0832", "AC0833", "AC0834"}:
+    if _is_rotational_connector_params(params):
         return "ac08_rot_mirror_alias"
+    if bool(params.get("circle_enabled", False)):
+        return _topologySignatureForParams(params)
+    if fallback_base:
+        return f"base:{fallback_base}"
+    return _topologySignatureForParams(params)
 
-    return f"base:{base}"
 
-
-def _textOrientationPolicyForBase(base: str) -> str:
-    if base in {"AC0831", "AC0832", "AC0833", "AC0834"}:
+def _textOrientationPolicyForParams(params: dict) -> str:
+    text_mode = str(params.get("text_mode", "")).strip().lower()
+    if text_mode == "co2":
         return "rotate_geometry_only"
-    if base in {"AC0811", "AC0812", "AC0813", "AC0814"}:
+    if _is_rotational_connector_params(params):
         return "rotate_with_geometry"
     return "inherit_variant"
 
 
-def _crossFamilyHypothesisGroupForBase(base: str) -> str | None:
+def _crossFamilyHypothesisGroupForParams(params: dict) -> str | None:
     """Return the AC08 cross-family hypothesis group for data-only reports."""
-    if base in {"AC0800", "AC0820"}:
+    text_mode = str(params.get("text_mode", "")).strip().lower()
+    is_circle_without_connector = bool(params.get("circle_enabled", True)) and not _is_rotational_connector_params(params)
+    if _is_plain_ring_params(params) or (is_circle_without_connector and (not bool(params.get("draw_text", False)) or text_mode == "co2")):
         return "ac08_ring_scale_no_geometry_change"
-    if base in {"AC0811", "AC0812", "AC0813", "AC0814"}:
+    if _is_rotational_connector_params(params) and text_mode != "co2":
         return "ac08_rotational_topology"
-    if base in {"AC0831", "AC0832", "AC0833", "AC0834"}:
+    if _is_rotational_connector_params(params) and text_mode == "co2":
         return "ac08_static_text_alias"
     return None
 
@@ -53,10 +66,10 @@ def _appendCrossFamilyHypothesisLogs(
 ) -> list[str]:
     grouped_rows: dict[str, list[tuple[str, dict[str, object]]]] = {}
     for base, rows in variant_rows_by_base.items():
-        hypothesis_group = _crossFamilyHypothesisGroupForBase(base)
-        if hypothesis_group is None:
-            continue
         for row in rows:
+            hypothesis_group = _crossFamilyHypothesisGroupForParams(dict(row["params"]))
+            if hypothesis_group is None:
+                continue
             grouped_rows.setdefault(hypothesis_group, []).append((base, row))
 
     logs: list[str] = []
@@ -75,7 +88,7 @@ def _appendCrossFamilyHypothesisLogs(
                 max_delta = max(max_delta, max_signature_delta_fn(signatures[i], signatures[j]))
 
         topology_signatures = sorted({_topologySignatureForParams(dict(row["params"])) for _base, row in rows})
-        text_policies = sorted({_textOrientationPolicyForBase(base) for base, _row in rows})
+        text_policies = sorted({_textOrientationPolicyForParams(dict(row["params"])) for _base, row in rows})
         status = "confirmed" if max_delta <= 0.075 and len(topology_signatures) == 1 else "rejected"
         variants_joined = "|".join(sorted(str(row["variant"]) for _base, row in rows))
         logs.append(
@@ -355,7 +368,7 @@ def harmonizeSemanticSizeVariantsImpl(
 
     grouped_prototype_rows: dict[str, list[dict[str, object]]] = {}
     for base, rows in variant_rows_by_base.items():
-        prototype_group = _prototypeGroupForBase(base)
+        prototype_group = _prototypeGroupForParams(dict(rows[0]["params"]), base)
         grouped_prototype_rows.setdefault(prototype_group, []).extend(rows)
 
     harmonized_logs: list[str] = []
@@ -376,8 +389,8 @@ def harmonizeSemanticSizeVariantsImpl(
         if len(variant_rows) < 2:
             continue
 
-        prototype_group = _prototypeGroupForBase(base)
-        text_orientation_policy = _textOrientationPolicyForBase(base)
+        prototype_group = _prototypeGroupForParams(dict(variant_rows[0]["params"]), base)
+        text_orientation_policy = _textOrientationPolicyForParams(dict(variant_rows[0]["params"]))
         prototype_rows = grouped_prototype_rows.get(prototype_group, variant_rows)
 
         has_text = any(bool(dict(row["params"]).get("draw_text", False)) for row in variant_rows)

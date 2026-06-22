@@ -291,3 +291,26 @@ def test_harmonize_semantic_size_variants_reports_cross_family_rotation_hypothes
     metrics_text = (tmp_path / "reports" / "cross_family_hypothesis_metrics.csv").read_text(encoding="utf-8")
     assert "ac08_rotational_topology;AC0811,AC0812;AC0811_L|AC0812_L;0.0100;1;" in metrics_text
     assert metrics_text.rstrip().endswith(";confirmed")
+
+
+def test_harmonization_groups_plain_ring_from_geometry_flags() -> None:
+    params = {"circle_enabled": True, "draw_text": False, "preserve_plain_ring_geometry": True}
+
+    assert semantic_harmonization_helpers._prototypeGroupForParams(params) == "ac08_plain_ring_scale"
+    assert semantic_harmonization_helpers._crossFamilyHypothesisGroupForParams(params) == "ac08_ring_scale_no_geometry_change"
+    assert semantic_harmonization_helpers._textOrientationPolicyForParams(params) == "inherit_variant"
+
+
+def test_harmonization_groups_connector_badge_from_geometry_flags() -> None:
+    params = {"circle_enabled": True, "draw_text": True, "stem_enabled": True, "text_mode": "rf"}
+
+    assert semantic_harmonization_helpers._prototypeGroupForParams(params) == "ac08_rot_mirror_alias"
+    assert semantic_harmonization_helpers._crossFamilyHypothesisGroupForParams(params) == "ac08_rotational_topology"
+    assert semantic_harmonization_helpers._textOrientationPolicyForParams(params) == "rotate_with_geometry"
+
+
+def test_harmonization_keeps_co2_text_upright_from_text_mode() -> None:
+    params = {"circle_enabled": True, "draw_text": True, "arm_enabled": True, "text_mode": "co2"}
+
+    assert semantic_harmonization_helpers._crossFamilyHypothesisGroupForParams(params) == "ac08_static_text_alias"
+    assert semantic_harmonization_helpers._textOrientationPolicyForParams(params) == "rotate_geometry_only"
