@@ -245,3 +245,28 @@ def test_apply_semantic_badge_description_rules_derives_bottom_connector_from_in
     assert params["mode"] == "semantic_badge"
     assert params["label"] == ""
     assert "SEMANTIC: senkrechter Strich hinter dem Kreis" in params["elements"]
+
+
+def test_apply_semantic_badge_family_rules_loads_neutral_family_metadata(tmp_path, monkeypatch) -> None:
+    metadata_path = tmp_path / "semantic_badge_families_v1.json"
+    metadata_path.write_text(
+        '{"schema_version": 1, "families": ["ZZ_NEUTRAL_BADGE"]}',
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(helpers, "_SEMANTIC_BADGE_FAMILY_METADATA_PATH", metadata_path)
+    helpers.load_semantic_badge_families.cache_clear()
+    try:
+        params: dict[str, object] = {"elements": []}
+
+        applied = helpers.apply_semantic_badge_family_rules(
+            base_upper="ZZ_NEUTRAL_BADGE",
+            symbol_upper="ZZ_NEUTRAL_BADGE",
+            desc="neutraler Kreis mit Buchstabe",
+            params=params,
+        )
+
+        assert applied is True
+        assert params["mode"] == "semantic_badge"
+        assert "SEMANTIC: Kreis + Buchstabe" in params["elements"]
+    finally:
+        helpers.load_semantic_badge_families.cache_clear()
