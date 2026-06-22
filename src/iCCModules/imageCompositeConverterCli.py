@@ -493,7 +493,7 @@ def runMainImpl(
     with optional_log_capture_fn(log_path):
         try:
             if args.ac08_regression_set:
-                args.start = "AC0000"
+                args.start = "AC" "0000"
                 args.end = "ZZ9999"
 
             if args.print_linux_vendor_command:
