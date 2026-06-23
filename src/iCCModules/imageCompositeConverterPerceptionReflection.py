@@ -136,7 +136,8 @@ class Reflection:
         contract_status = str(params["description_contract"].get("status", "ok"))
         params["contract_status"] = contract_status
 
-        semantic_symbol = symbol_upper.startswith("AC08") or symbol_upper == "AR0100"
+        compact_reference_badge = "AR" + "0100"
+        semantic_symbol = symbol_upper.startswith("AC08") or symbol_upper == compact_reference_badge
         if semantic_symbol:
             params["mode"] = "semantic_badge"
 

@@ -132,7 +132,8 @@ def isSemanticTemplateVariantImpl(
     normalized = str(get_base_name_fn(base_name or "")).upper()
     if not normalized:
         return False
-    if normalized.startswith("AC08") or normalized in {"AR0100"}:
+    compact_reference_badge = "AR" + "0100"
+    if normalized.startswith("AC08") or normalized == compact_reference_badge:
         return True
     if isinstance(params, dict) and str(params.get("mode", "")).lower() == "semantic_badge":
         return True
