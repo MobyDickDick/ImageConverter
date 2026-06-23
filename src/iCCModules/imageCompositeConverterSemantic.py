@@ -1,38 +1,27 @@
 from __future__ import annotations
 
+import json
 import re
+from functools import lru_cache
+from pathlib import Path
 
 
-SEMANTIC_BADGE_FAMILIES: set[str] = {
-    "AR0100",
-    "AC0800",
-    "AC0811",
-    "AC0810",
-    "AC0812",
-    "AC0813",
-    "AC0814",
-    "AC0223",
-    "AC0820",
-    "AC0831",
-    "AC0832",
-    "AC0833",
-    "AC0834",
-    "AC0835",
-    "AC0836",
-    "AC0837",
-    "AC0838",
-    "AC0839",
-    "AC0842",
-    "AC0844",
-    "AC0850",
-    "AC0861",
-    "AC0862",
-    "AC0863",
-    "AC0864",
-    "AC0870",
-    "AC0881",
-    "AC0882",
-}
+_SEMANTIC_BADGE_FAMILY_METADATA_PATH = (
+    Path(__file__).resolve().parents[2] / "config" / "regression_metadata" / "semantic_badge_families_v1.json"
+)
+
+
+@lru_cache(maxsize=1)
+def load_semantic_badge_families() -> set[str]:
+    """Load legacy semantic-badge family membership from migration metadata."""
+    with _SEMANTIC_BADGE_FAMILY_METADATA_PATH.open("r", encoding="utf-8") as handle:
+        payload = json.load(handle)
+    if payload.get("schema_version") != 1:
+        raise ValueError("Unsupported semantic badge family metadata schema")
+    families = payload.get("families")
+    if not isinstance(families, list) or not all(isinstance(item, str) for item in families):
+        raise ValueError("Semantic badge family metadata must contain a string list")
+    return {item.upper() for item in families}
 
 
 def extract_documented_alias_refs(text: str) -> set[str]:
@@ -236,7 +225,7 @@ def apply_semantic_badge_family_rules(
     params: dict[str, object],
 ) -> bool:
     """Fill semantic-badge params for legacy semantic-family descriptions."""
-    if base_upper not in SEMANTIC_BADGE_FAMILIES:
+    if base_upper not in load_semantic_badge_families():
         return False
 
     params["mode"] = "semantic_badge"
