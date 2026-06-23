@@ -3829,6 +3829,15 @@ endet. Die Detailableitung und Akzeptanzkriterien stehen in
 - **Sicherung:** Neue Description-Contract-Tests decken VOC, CO₂, rF und textfreie Kreis-Badges ab; der Bild-ID-Ratchet bleibt bei `368 legacy occurrences remain` grün.
 - **Nächster sinnvoller Schritt:** IDO-13 an echte Text-/Glyph-Evidenz koppeln und weitere Lageformulierungen neben der zentrierten Badge-Position absichern.
 
+### Fortschritt vs. Blocker (Session 2026-06-23, IDO-13 rF-Badge-Label ohne Familienliste Run RS)
+
+- **Fortschritt:** Die rF-Labelauswahl hängt nicht mehr an einer expliziten Runtime-Familien-ID-Liste für `AC0842`/`AC0844`/`AC0850`/`AC0861`/`AC0862`/`AC0863`/`AC0864`; `rF` und „relative Feuchtigkeit“ werden nun direkt aus dem Beschreibungstext in `SEMANTIC: Kreis + Buchstabe rF` übersetzt.
+- **Relation/Rotation:** Die gespiegelte rechte Anschlusslage erkennt zusätzlich neutrale Formulierungen wie „Griff nach links gedreht, Text horizontal“ und dokumentiert den rechten Horizontalarm als `description_heuristic` statt als Familienregel.
+- **Gekoppelte Plan-B-Aufgabe:** Der PF8-Linkage-Report wurde für die aktive `GE1001_M`/`GE9021_7M`-Rotation erneut geschrieben; beide Samples behalten einen dokumentierten Perception-Lerneffekt.
+- **Sicherung:** Der gezielte rF-/Semantik-Testblock läuft grün; der Bild-ID-Hardcoding-Ratchet wurde aktualisiert und sinkt auf `66 legacy occurrences remain`.
+- **Blocker:** Kein neuer technischer Blocker; die verbleibenden AC08-Default-Parameterpfade werden in späteren IDO-Paketen weiter abgebaut.
+- **Nächster sinnvoller Schritt:** IDO-14/IDO-15 fortsetzen oder weitere Badge-Default-Dispatches aus Bild-ID-Listen in Beschreibung-/Perception-Merkmale überführen.
+
 ### Fortschritt vs. Blocker (Session 2026-06-18, IDO-13 Text-/Glyph-Evidenz und Textlagen Run QN)
 
 - **Fortschritt:** Kreis-/Text-Badges speichern nun `glyph_evidence` mit Quelle, normalisiertem Labeltext und erkannter Textlage; nicht-zentrierte Beschreibungen wie `T oben im Kreis` erzeugen lagebezogene Relationen (`top_inside`) und normierte `text_anchor`-Werte.
