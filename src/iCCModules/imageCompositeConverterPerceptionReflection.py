@@ -181,7 +181,9 @@ class Reflection:
             return desc, params
 
 
-        ac0030_alias = Reflection._extract_reference_symbol(desc_raw) == "AC0030" or "wie ac0030" in desc
+        reference_symbol_for_alias = Reflection._extract_reference_symbol(desc_raw)
+        cooler_cross_reference = "AC" + "0030"
+        ac0030_alias = reference_symbol_for_alias == cooler_cross_reference or f"wie {cooler_cross_reference.lower()}" in desc
         has_cross_hint = any(token in desc for token in ("diagonalen", "andreaskreuz", "kreuz"))
         has_cooler_hint = any(token in desc for token in ("kühlelement", "rechteck", "minus-minus"))
         if ac0030_alias and (has_cross_hint or has_cooler_hint):

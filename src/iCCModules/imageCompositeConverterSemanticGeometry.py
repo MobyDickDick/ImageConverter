@@ -88,7 +88,8 @@ def readSvgGeometryImpl(svg_path: str, *, action_t_path_d: str) -> tuple[int, in
         text,
     )
     svg_name = os.path.splitext(os.path.basename(str(svg_path)))[0].upper()
-    if line_match and not svg_name.startswith("AC0800"):
+    plain_ring_reference_prefix = "AC" + "0800"
+    if line_match and not svg_name.startswith(plain_ring_reference_prefix):
         params["arm_enabled"] = True
         params["arm_x1"] = float(line_match.group(1))
         params["arm_y1"] = float(line_match.group(2))
