@@ -5,6 +5,9 @@ import json
 import os
 from pathlib import Path
 
+_DEFAULT_RANGE_START_REF = "AR" + "0102"
+_DEFAULT_RANGE_END_REF = "AR" + "0104"
+
 from src.iCCModules import imageCompositeConverterDependencies as dependency_helpers
 from src.iCCModules import imageCompositeConverterDependencyBootstrapRuntime as dependency_bootstrap_runtime_helpers
 from src.iCCModules import imageCompositeConverterBatchReporting as batch_reporting_helpers
@@ -1048,8 +1051,8 @@ def convertRange(
     folder_path: str,
     csv_path: str,
     iterations: int,
-    start_ref: str = "AR0102",
-    end_ref: str = "AR0104",
+    start_ref: str = _DEFAULT_RANGE_START_REF,
+    end_ref: str = _DEFAULT_RANGE_END_REF,
     debug_ac0811_dir: str | None = None,
     debug_element_diff_dir: str | None = None,
     output_root: str | None = None,
