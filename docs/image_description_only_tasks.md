@@ -210,7 +210,12 @@ Für jedes Arbeitspaket gelten zusätzlich zu den jeweiligen Akzeptanzkriterien:
     aus der Beschreibung in `CircleBackground`-/`TextGlyph`-IR übersetzt.
     Zentrierte Textlage wird als `centered_in`-Relation modelliert; kleine und
     große Kreisformulierungen setzen generische Badge-Bounding-Boxes, und
-    connector-freie textlose Kreise behalten `connector_policy=forbid`.
+    connector-freie textlose Kreise behalten `connector_policy=forbid`. Run RS
+    entfernt die rF-Labelauswahl aus der verbliebenen Runtime-Familien-ID-Liste:
+    `rF`/„relative Feuchtigkeit“ wird nun direkt aus dem Beschreibungstext
+    abgeleitet, und die gespiegelte rechte Anschlusslage erkennt auch neutrale
+    Formulierungen wie „Griff nach links gedreht, Text horizontal“. Der
+    Hardcoding-Ratchet sinkt dadurch auf 66 Legacy-Vorkommen.
 
 - [ ] **IDO-14 – Ventil-/Kellen-Spezialpfade in Primitive zerlegen**
   - Aufgabe: Bisherige Spezialformen als Polygon-, Kreis-, Linien-,

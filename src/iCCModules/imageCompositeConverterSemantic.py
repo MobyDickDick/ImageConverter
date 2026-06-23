@@ -139,12 +139,21 @@ def _description_expects_right_circle_connector(desc: str) -> bool:
         or "anschluss nach unten" in normalized
         or "anschluss unten" in normalized
     )
+    rotated_left_handle = (
+        "griff nach links gedreht" in normalized
+        or "anschluss nach links gedreht" in normalized
+        or (
+            "nach links gedreht" in normalized
+            and "text" in normalized
+            and "horizontal" in normalized
+        )
+    )
     has_circle = any(token in normalized for token in ("kreis", "badge", "kelle"))
     has_horizontal_connector = any(
         token in normalized
         for token in ("waagrecht", "horizontal", "strich", "linie", "anschluss", "griff")
     )
-    return bool((direct_right or rotated_down_handle) and has_circle and has_horizontal_connector)
+    return bool((direct_right or rotated_down_handle or rotated_left_handle) and has_circle and has_horizontal_connector)
 
 
 def _description_expects_top_circle_connector(desc: str) -> bool:
@@ -246,9 +255,6 @@ def apply_semantic_badge_family_rules(
     elif re.search(r"\bco\b", desc):
         heuristic_elements.append("SEMANTIC: Kreis + Buchstabe CO")
         params["label"] = "CO"
-    elif base_upper in {"AC0842", "AC0844", "AC0850", "AC0861", "AC0862", "AC0863", "AC0864"}:
-        heuristic_elements.append("SEMANTIC: Kreis + Buchstabe rF")
-        params["label"] = "rF"
     elif re.search(r"\brf\b", desc) or "relative feuchtigkeit" in desc:
         heuristic_elements.append("SEMANTIC: Kreis + Buchstabe rF")
         params["label"] = "rF"
