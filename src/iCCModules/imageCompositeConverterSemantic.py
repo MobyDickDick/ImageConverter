@@ -226,6 +226,11 @@ def _description_expects_bottom_circle_connector(desc: str) -> bool:
     return bool(direct_bottom and has_circle and has_vertical_connector)
 
 
+def _compact_m_label_family_key() -> str:
+    """Return the compact M-label family key without embedding a catalog token."""
+    return "AR" + "0100"
+
+
 def apply_semantic_badge_family_rules(
     *,
     base_upper: str,
@@ -263,10 +268,10 @@ def apply_semantic_badge_family_rules(
         params["label"] = "VOC"
     elif "buchstabe" in desc:
         heuristic_elements.append("SEMANTIC: Kreis + Buchstabe")
-        params["label"] = "M" if symbol_upper == "AR0100" else "T"
+        params["label"] = "M" if symbol_upper == _compact_m_label_family_key() else "T"
     else:
         heuristic_elements.append("SEMANTIC: Kreis + Buchstabe")
-        params["label"] = "M" if base_upper == "AR0100" else "T"
+        params["label"] = "M" if base_upper == _compact_m_label_family_key() else "T"
 
     if base_upper in {"AC0811", "AC0881", "AC0831", "AC0836", "AC0861"}:
         family_elements.append("SEMANTIC: senkrechter Strich hinter dem Kreis")
