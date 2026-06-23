@@ -52,3 +52,18 @@ def test_build_pending_semantic_audit_row_impl_builds_pending_row() -> None:
     }
     assert captured["record"]["base_name"] == "AC0811_S"
     assert result["status"] == "semantic_pending"
+
+
+def test_should_create_semantic_audit_loads_default_targets_from_metadata() -> None:
+    from src.iCCModules import imageCompositeConverterSemanticAuditRuntime as runtime_helpers
+
+    runtime_helpers._load_default_semantic_audit_targets.cache_clear()
+
+    assert runtime_helpers.shouldCreateSemanticAuditForBaseNameImpl(
+        "AC0811_S",
+        get_base_name_from_file_fn=lambda name: name.rsplit("_", 1)[0],
+    )
+    assert not runtime_helpers.shouldCreateSemanticAuditForBaseNameImpl(
+        "ZZ_NEUTRAL_S",
+        get_base_name_from_file_fn=lambda name: name.rsplit("_", 1)[0],
+    )
