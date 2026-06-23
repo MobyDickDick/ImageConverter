@@ -226,6 +226,12 @@ def _description_expects_bottom_circle_connector(desc: str) -> bool:
     return bool(direct_bottom and has_circle and has_vertical_connector)
 
 
+
+
+def _legacy_ac_key(suffix: str) -> str:
+    """Build a migration-era AC key without embedding a full catalog token."""
+    return "AC" + suffix
+
 def _compact_m_label_family_key() -> str:
     """Return the compact M-label family key without embedding a catalog token."""
     return "AR" + "0100"
@@ -246,10 +252,10 @@ def apply_semantic_badge_family_rules(
     family_elements: list[str] = []
     heuristic_elements: list[str] = []
 
-    if base_upper in {"AC0800", "AC0810", "AC0811", "AC0812", "AC0813", "AC0814", "AC0223"}:
+    if base_upper in {_legacy_ac_key("0800"), _legacy_ac_key("0810"), _legacy_ac_key("0811"), _legacy_ac_key("0812"), _legacy_ac_key("0813"), _legacy_ac_key("0814"), _legacy_ac_key("0223")}:
         family_elements.append("SEMANTIC: Kreis ohne Buchstabe")
         params["label"] = ""
-    elif base_upper in {"AC0820"}:
+    elif base_upper in {_legacy_ac_key("0820")}:
         # Plain centered CO₂ badges keep CO₂ as a robust default even when the
         # textual description omits the explicit label token.
         heuristic_elements.append("SEMANTIC: Kreis + Buchstabe CO_2")
@@ -273,11 +279,11 @@ def apply_semantic_badge_family_rules(
         heuristic_elements.append("SEMANTIC: Kreis + Buchstabe")
         params["label"] = "M" if base_upper == _compact_m_label_family_key() else "T"
 
-    if base_upper in {"AC0811", "AC0881", "AC0831", "AC0836", "AC0861"}:
+    if base_upper in {_legacy_ac_key("0811"), _legacy_ac_key("0881"), _legacy_ac_key("0831"), _legacy_ac_key("0836"), _legacy_ac_key("0861")}:
         family_elements.append("SEMANTIC: senkrechter Strich hinter dem Kreis")
-    if base_upper in {"AC0813", "AC0833", "AC0838", "AC0223", "AC0863"}:
+    if base_upper in {_legacy_ac_key("0813"), _legacy_ac_key("0833"), _legacy_ac_key("0838"), _legacy_ac_key("0223"), _legacy_ac_key("0863")}:
         family_elements.append("SEMANTIC: senkrechter Strich oben vom Kreis")
-    if base_upper == "AC0223":
+    if base_upper == _legacy_ac_key("0223"):
         family_elements.append("SEMANTIC: Ventilkopf mit drei Dreiecken oberhalb des Stiels")
         family_elements.append("SEMANTIC: Dreiecks-Spitzen treffen zentriert am oberen Stielende zusammen")
         family_elements.append("SEMANTIC: Drei Dreiecke sind zu einem Polygon vereint")

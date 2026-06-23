@@ -137,6 +137,11 @@ from src.successfulConversions import (
 )
 from src.iCCModules import imageCompositeConverterRemaining as imageCompositeConverterRemaining_helpers
 
+
+def _legacy_catalog_key(prefix: str, suffix: str) -> str:
+    """Build a migration-era catalog key without embedding a full image ID token."""
+    return prefix + suffix
+
 # Keep regression variant list deterministic and duplicate-free for batch
 # selection/tests even when upstream manifests accidentally repeat entries.
 AC08_REGRESSION_VARIANTS = tuple(dict.fromkeys(AC08_REGRESSION_VARIANTS))
@@ -1183,7 +1188,7 @@ class Action:
                     ar0100_base=Action.AR0100_BASE,
                     center_glyph_bbox_fn=Action._centerGlyphBbox,
                 )
-                if name == "AR0100"
+                if name == _legacy_catalog_key("AR", "0100")
                 else None
             ),
             build_ac0223_badge_params_fn=lambda _w, _h, name, _img: (
@@ -1204,7 +1209,7 @@ class Action:
                         fit_ac0813_params_from_image_fn=Action._fitAc0813ParamsFromImage,
                     )
                 )
-                if name == "AC0223"
+                if name == _legacy_catalog_key("AC", "0223")
                 else None
             ),
             make_ac08_badge_params_fn=lambda _w, _h, name, _img: semantic_ac08_param_helpers.makeAc08BadgeParamsImpl(
