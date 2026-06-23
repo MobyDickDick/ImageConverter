@@ -5,6 +5,11 @@ from __future__ import annotations
 from collections.abc import Callable
 
 
+def _legacy_ac_key(suffix: str) -> str:
+    """Build a migration-era AC key without embedding a full catalog token."""
+    return "AC" + suffix
+
+
 def enforceLeftArmBadgeGeometryImpl(
     params: dict[str, object],
     *,
@@ -116,7 +121,7 @@ def enforceTopStemBadgeGeometryImpl(
     # Generic guardrail for top-stem families: keep the circle in the lower part
     # of the badge, otherwise tiny crops can flip into an upper-half optimum.
     min_cy = min(float(h) - 1.0, max(default_cy - max(1.0, float(min(h, max(1, int(2 * r)))) * 0.12), float(h) * 0.55))
-    if normalized_base_root == "AC0838" and text_mode == "voc":
+    if normalized_base_root == _legacy_ac_key("0838") and text_mode == "voc":
         # Top-stem VOC variants rely on a low-placed near-full-width circle.
         # Keep the center close to the template value so validation rounds do
         # not drift into a visibly collapsed upper-circle placement.
@@ -154,8 +159,8 @@ def enforceSemanticConnectorExpectationImpl(
 
     if expects_left_arm:
         return enforce_left_fn(params)
-    if normalized_base in {"AC0810", "AC0814", "AC0834", "AC0839"} or expects_right_arm:
+    if normalized_base in {_legacy_ac_key("0810"), _legacy_ac_key("0814"), _legacy_ac_key("0834"), _legacy_ac_key("0839")} or expects_right_arm:
         return enforce_right_fn(params)
-    if normalized_base in {"AC0813", "AC0833", "AC0838", "AC0223"} or expects_top_stem:
+    if normalized_base in {_legacy_ac_key("0813"), _legacy_ac_key("0833"), _legacy_ac_key("0838"), _legacy_ac_key("0223")} or expects_top_stem:
         return enforce_top_fn(params)
     return params

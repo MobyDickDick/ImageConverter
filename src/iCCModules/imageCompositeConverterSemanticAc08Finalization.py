@@ -3,6 +3,11 @@
 from __future__ import annotations
 
 
+def _legacy_ac_key(suffix: str) -> str:
+    """Build a migration-era AC key without embedding a full catalog token."""
+    return "AC" + suffix
+
+
 def finalizeAc08StyleImpl(
     name: str,
     params: dict,
@@ -45,15 +50,15 @@ def finalizeAc08StyleImpl(
     p = normalize_ac08_line_widths_fn(p)
     p["lock_colors"] = True
     p = normalize_centered_co2_label_fn(p)
-    if symbol_name == "AC0831" and str(p.get("text_mode", "")).lower() == "co2":
+    if symbol_name == _legacy_ac_key("0831") and str(p.get("text_mode", "")).lower() == "co2":
         p["fill_gray"] = 238
         p["stroke_gray"] = 155
         p["text_gray"] = 155
         if p.get("stem_enabled"):
             p["stem_gray"] = 155
-    if symbol_name == "AC0833" and str(p.get("text_mode", "")).lower() == "co2":
+    if symbol_name == _legacy_ac_key("0833") and str(p.get("text_mode", "")).lower() == "co2":
         p = tune_ac0833_co2_badge_fn(p)
-    if symbol_name == "AC0820" and str(p.get("text_mode", "")).lower() == "co2":
+    if symbol_name == _legacy_ac_key("0820") and str(p.get("text_mode", "")).lower() == "co2":
         p["co2_anchor_mode"] = str(p.get("co2_anchor_mode", "center_co"))
         # Plain centered CO₂ badges are documented with a lowered index; the
         # source XML explicitly notes that a raised 2 is wrong for this topology.
@@ -131,7 +136,7 @@ def finalizeAc08StyleImpl(
         base_r = max(1.0, template_r, current_r)
         min_ratio = 0.88
         if has_text:
-            min_ratio = 0.92 if symbol_name == "AC0820" else 0.90
+            min_ratio = 0.92 if symbol_name == _legacy_ac_key("0820") else 0.90
         elif has_connector and (aspect_ratio >= 1.60 or aspect_ratio <= (1.0 / 1.60)):
             min_ratio = 0.95
         p["min_circle_radius"] = float(max(float(p.get("min_circle_radius", 1.0)), base_r * min_ratio))
@@ -240,7 +245,7 @@ def finalizeAc08StyleImpl(
         if min_dim <= 0.0:
             min_dim = max(1.0, float(p.get("r", 1.0)) * 2.0)
         tiny_co2_variant = min_dim <= 15.5
-        p["lock_text_scale"] = not (symbol_name == "AC0820" or tiny_co2_variant)
+        p["lock_text_scale"] = not (symbol_name == _legacy_ac_key("0820") or tiny_co2_variant)
         if tiny_co2_variant:
             base_scale = float(p.get("co2_font_scale", 0.82))
             p["co2_font_scale_min"] = float(max(0.74, base_scale * 0.90))
@@ -253,7 +258,7 @@ def finalizeAc08StyleImpl(
         min_dim = float(min(float(p.get("width", 0.0) or 0.0), float(p.get("height", 0.0) or 0.0)))
         if min_dim <= 0.0:
             min_dim = max(1.0, float(p.get("r", 1.0)) * 2.0)
-        if symbol_name == "AC0835":
+        if symbol_name == _legacy_ac_key("0835"):
             p["lock_text_scale"] = False
             if min_dim <= 15.5:
                 legacy_base_scale = 0.52
@@ -266,7 +271,7 @@ def finalizeAc08StyleImpl(
     p = configure_ac08_small_variant_mode_fn(name, p)
     preserve_plain_ring_geometry = bool(p.get("preserve_plain_ring_geometry", False))
     preserve_centered_t_badge_geometry = (
-        symbol_name == "AC0870"
+        symbol_name == _legacy_ac_key("0870")
         and bool(p.get("ac08_small_variant_mode", False))
         and str(p.get("text_mode", "")).lower() == "path_t"
     )

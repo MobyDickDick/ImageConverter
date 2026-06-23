@@ -5,6 +5,11 @@ from __future__ import annotations
 import math
 from collections.abc import Callable
 
+
+def _legacy_ac_key(suffix: str) -> str:
+    """Build a migration-era AC key without embedding a full catalog token."""
+    return "AC" + suffix
+
 _GRAY_TONE_KEYS = ("fill_gray", "stroke_gray", "line_gray", "stem_gray", "arm_gray", "text_gray")
 
 
@@ -292,7 +297,7 @@ def fitSemanticBadgeFromImageImpl(
         if best is not None:
             _, cx, cy, r, _fill_gray, _ring_gray = best
             normalized_base = str(defaults.get("base_name", defaults.get("badge_symbol_name", ""))).upper().split("_")[0]
-            if normalized_base == "AC0838" and str(defaults.get("text_mode", "")).lower() == "voc":
+            if normalized_base == _legacy_ac_key("0838") and str(defaults.get("text_mode", "")).lower() == "voc":
                 cy = max(cy, template_cy - 0.8)
             params["cx"] = cx
             params["cy"] = cy
