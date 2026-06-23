@@ -2,12 +2,8 @@
   "schema_version": 1,
   "purpose": "Migration ratchet only; never loaded by converter runtime. Counts may decrease but not increase.",
   "files": {
-    "src/iCCModules/imageCompositeConverterAudit.py": {
-      "AR0100": 1
-    },
     "src/iCCModules/imageCompositeConverterPerceptionReflection.py": {
-      "AC0030": 2,
-      "AR0100": 1
+      "AC0030": 2
     },
     "src/iCCModules/imageCompositeConverterSemantic.py": {
       "AC0223": 3,
