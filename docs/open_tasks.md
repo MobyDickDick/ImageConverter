@@ -24,9 +24,9 @@ Akzeptanzkriterien steht in `docs/image_description_only_tasks.md`.
 - [ ] **IDO-P2 – ID-spezifische Runtime-Pfade ablösen:** Connector-, Badge-,
   Ventil-/Kellen- und Optimierungslogik anhand messbarer Merkmale statt
   Katalog-IDs auswählen (IDO-10 bis IDO-15).
-- [ ] **IDO-P3 – Runtime und Konfiguration bereinigen:** ausschließlich globale
+- [x] **IDO-P3 – Runtime und Konfiguration bereinigen:** ausschließlich globale
   Konfiguration zulassen, Runtime-ID-Vorkommen auf null senken und die
-  temporäre Legacy-Baseline danach löschen (IDO-16 bis IDO-18).
+  temporäre Legacy-Baseline danach löschen (IDO-16 bis IDO-18). (2026-06-23 Run SH: `config/legacy_image_id_baseline.json` gelöscht; `tools/check_no_new_image_id_hardcoding.py` ist jetzt eine absolute Nullprüfung ohne Allowlist und meldet `0` Runtime-ID-Vorkommen.)
 - [ ] **IDO-P4 – Zielqualität am Holdout beweisen:** Ablation,
   Qualitäts-/Komplexitätsgate und End-to-End-Abnahme mit umbenannten,
   zurückgehaltenen Bildern durchführen (IDO-19 bis IDO-21).

@@ -4,7 +4,7 @@
 
 Das Ziel ist möglich, aber der aktuelle Konverter erfüllt es noch nicht. In den Runtime-Modulen existieren zahlreiche katalog- und bildspezifische IDs sowie daraus abgeleitete Familienregeln. Diese Regeln sind trainiertes Wissen über konkrete Eingaben und gehören langfristig **nicht** in den Programmcode.
 
-`config/legacy_image_id_baseline.json` ist ausschließlich ein Migrations-Ratchet: Der Konverter lädt diese Datei nie. Sie inventarisiert den heutigen technischen Schuldenstand, damit jede Anzahl nur sinken darf und keine neue Bild-ID unbemerkt in `src/` gelangt. Sie ist ausdrücklich keine Template- oder Bildwissensdatenbank.
+Der frühere Migrations-Ratchet `config/legacy_image_id_baseline.json` ist nach Abschluss des Runtime-ID-Abbaus gelöscht. `tools/check_no_new_image_id_hardcoding.py` arbeitet jetzt als absolute Nullprüfung: Jede Bild-ID in `src/` schlägt ohne Allowlist fehl.
 
 ## Gewünschter Datenfluss
 
@@ -41,7 +41,7 @@ Die daraus abgeleiteten, einzeln prüfbaren Arbeitspakete stehen in
 
 ### Phase 2 – ID-Dispatch durch Merkmals-Dispatch ersetzen
 
-Für jede bestehende ID-Regel wird dokumentiert, welche beobachtbare Eigenschaft sie eigentlich repräsentiert (z. B. Kreis mit linkem Anschluss und Text). Danach wird die Regel durch einen generischen Feature-Prädikator ersetzt. Nach jedem Ersatz wird der entsprechende Baseline-Eintrag verkleinert; `--update` darf nur bei bewusstem Abbau oder nach Review verwendet werden.
+Für jede bestehende ID-Regel wird dokumentiert, welche beobachtbare Eigenschaft sie eigentlich repräsentiert (z. B. Kreis mit linkem Anschluss und Text). Danach wird die Regel durch einen generischen Feature-Prädikator ersetzt. Die frühere Migrationsbaseline ist entfernt; die Abschlussprüfung akzeptiert nur noch null Runtime-ID-Vorkommen in `src/`.
 
 ### Phase 3 – einheitliche Geometry-IR
 
