@@ -6,7 +6,7 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-06-19)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `400` · Erledigt `353` · Offen `47`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `400` · Erledigt `354` · Offen `46`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -27,9 +27,9 @@ Akzeptanzkriterien steht in `docs/image_description_only_tasks.md`.
 - [x] **IDO-P3 – Runtime und Konfiguration bereinigen:** ausschließlich globale
   Konfiguration zulassen, Runtime-ID-Vorkommen auf null senken und die
   temporäre Legacy-Baseline danach löschen (IDO-16 bis IDO-18). (2026-06-23 Run SH: `config/legacy_image_id_baseline.json` gelöscht; `tools/check_no_new_image_id_hardcoding.py` ist jetzt eine absolute Nullprüfung ohne Allowlist und meldet `0` Runtime-ID-Vorkommen.)
-- [ ] **IDO-P4 – Zielqualität am Holdout beweisen:** Ablation,
+- [x] **IDO-P4 – Zielqualität am Holdout beweisen:** Ablation,
   Qualitäts-/Komplexitätsgate und End-to-End-Abnahme mit umbenannten,
-  zurückgehaltenen Bildern durchführen (IDO-19 bis IDO-21). (2026-06-24 Run SI: IDO-19 automatisiert die Ablationsmatrix für `image_only`, `description_only` und `image_and_description` inklusive Source-Contributions und Development-/Holdout-Summary.) (2026-06-24 Run SJ: IDO-20 definiert `quality_complexity_gate_v1` und lehnt eingebettete Rasterkopien, unnötige Pfadkomplexität sowie semantisch falsche pixelnahe Ergebnisse maschinenlesbar ab.)
+  zurückgehaltenen Bildern durchführen (IDO-19 bis IDO-21). (2026-06-24 Run SI: IDO-19 automatisiert die Ablationsmatrix für `image_only`, `description_only` und `image_and_description` inklusive Source-Contributions und Development-/Holdout-Summary.) (2026-06-24 Run SJ: IDO-20 definiert `quality_complexity_gate_v1` und lehnt eingebettete Rasterkopien, unnötig komplexe Pfade sowie semantisch falsche pixelnahe Ergebnisse maschinenlesbar ab.) (2026-06-24 Run SK: IDO-21 führt die End-to-End-Holdout-Abnahme als `end_to_end_holdout_acceptance_v1` aus und bestätigt Rename-Invarianz, Qualitätsgate, Unsicherheitskalibrierung sowie Leckagefreiheit.)
 
 ## Testhygiene – nur echte Grün-Tests in der Kernliste (neu 2026-05-20)
 
