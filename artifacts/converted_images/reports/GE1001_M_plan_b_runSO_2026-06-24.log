@@ -1,0 +1,18 @@
+[INFO] Schreibe Konsolen-Output nach: /workspace/ImageConverter/imageCompositeConverter.local.log
+[INFO] Konvertiere GE1001_M.jpg | Parameter: Iterationen=64, Validierungsrunden=6
+
+--- Verarbeite GE1001_M.jpg ---
+Bildbeschreibung: Hintergrund GE1000, Vordergrund grüner Haken mit feiner grauer Umrandung
+Befehl erkannt: MANUELL: Beschreibung unzureichend (fehlende Geometriehinweise oder leerer Beschreibungstext).
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[INFO] Konvertiert GE1001_M.jpg | Parameter: mode=insufficient_description, label=, variant_name=GE1001_M | Qualität: Fehler/Pixel=0.073663, Mean-Delta²=18208.144531, Raumscore=47061.538849, beste Iteration=1, ausgeführt=64/64 | Dauer=0.3s
+[INFO] Konvertiere GE1001_M.jpg | Parameter: Iterationen=65, Validierungsrunden=7
+
+--- Verarbeite GE1001_M.jpg ---
+Bildbeschreibung: Hintergrund GE1000, Vordergrund grüner Haken mit feiner grauer Umrandung
+Befehl erkannt: MANUELL: Beschreibung unzureichend (fehlende Geometriehinweise oder leerer Beschreibungstext).
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[INFO] Konvertiert GE1001_M.jpg | Parameter: mode=insufficient_description, label=, variant_name=GE1001_M | Qualität: Fehler/Pixel=0.073663, Mean-Delta²=18208.144531, Raumscore=47061.538849, beste Iteration=1, ausgeführt=65/65 | Dauer=0.2s
+[INFO] Übersichts-Kacheln erzeugt: diff=/tmp/ic-ge1001-runso/reports/overview_diff_tiles.png, svg=/tmp/ic-ge1001-runso/reports/overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: /tmp/ic-ge1001-runso
