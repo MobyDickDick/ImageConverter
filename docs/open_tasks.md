@@ -3871,5 +3871,5 @@ endet. Die Detailableitung und Akzeptanzkriterien stehen in
 - **Nächster sinnvoller Schritt:** IDO-17 fortsetzen und den nächsten verbleibenden katalogspezifischen Runtime-Guard durch messbare Parameter, neutrale Metadaten oder reine Testdaten ersetzen.
 
 ## Automatisch erzeugte Folgeaufgaben (Konvertierungsfehler)
-- [ ] AUFGABE: Fehleranalyse `DLG0016` (status=batch_error, reason=KeyError) und Gegenmaßnahme ableiten.
+- [x] AUFGABE: Fehleranalyse `DLG0016` (status=batch_error, reason=KeyError) und Gegenmaßnahme ableiten. (2026-06-24 Run SN: Dual-Arrow-Dispatch reicht `img_path` nun an den Mode-Runner weiter; der Wrapper nutzt den Pfad nur fuer den Embedded-Raster-Fallback und entfernt ihn vor dem Runtime-Aufruf. Ein katalogfreier `ZZ_DUAL_ARROW`-Regressionstest sichert die Schnittstelle.)
 
