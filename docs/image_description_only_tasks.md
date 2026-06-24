@@ -138,7 +138,7 @@ Für jedes Arbeitspaket gelten zusätzlich zu den jeweiligen Akzeptanzkriterien:
 
 ## Priorität 2 – ID-spezifische Pfade schrittweise ersetzen
 
-- [ ] **IDO-10 – Linker Kreis-Connector als erstes vertikales Migrationspaket**
+- [x] **IDO-10 – Linker Kreis-Connector als erstes vertikales Migrationspaket**
   - Aufgabe: Alle ID-Listen für „Kreis mit linkem horizontalem Anschluss“ durch
     messbare Kreis-, Linien-, Kontakt- und Beschreibungseigenschaften ersetzen.
   - Akzeptanz: Umbenennungstests sind grün; bestehende Qualitätsfixtures
@@ -159,9 +159,9 @@ Für jedes Arbeitspaket gelten zusätzlich zu den jeweiligen Akzeptanzkriterien:
     QF bündelt die verbleibenden linken AC08-Connector-Branches in einem
     gemeinsamen `connector_direction=left`-Finalisierungspfad, sodass
     Enforcement und Fit-Dispatch über gerichtete Parameter statt duplizierte
-    Familienzweige laufen; der Ratchet sinkt weiter auf 379 Runtime-ID-Vorkommen.
+    Familienzweige laufen; der Ratchet sinkt weiter auf 379 Runtime-ID-Vorkommen. Umsetzung: Run SL schließt IDO-10 nach der absoluten Nullprüfung ab; linke Kreis-Connector-Entscheidungen sind über `connector_direction=left`, Relationsconstraints und neutrale Rename-Tests dokumentiert statt über Runtime-Katalog-IDs.
 
-- [ ] **IDO-11 – Rechter Kreis-Connector generalisieren**
+- [x] **IDO-11 – Rechter Kreis-Connector generalisieren**
   - Aufgabe: Spiegelung nicht über Familiennamen, sondern über erkannte
     Anschlussrichtung und Relationen modellieren.
   - Akzeptanz: Ein gemeinsamer Algorithmus verarbeitet linke und rechte
@@ -184,9 +184,9 @@ Für jedes Arbeitspaket gelten zusätzlich zu den jeweiligen Akzeptanzkriterien:
     aus der expliziten rechten Connector-Liste; knappe Beschreibungen wie
     „Griff unten“ und „gegenüberliegende Drehlage“ liefern den rechten
     Horizontalarm nun über `description_heuristic`, und der Ratchet sinkt auf
-    368 Runtime-ID-Vorkommen.
+    368 Runtime-ID-Vorkommen. Umsetzung: Run SL schließt IDO-11 nach der absoluten Nullprüfung ab; rechte Kreis-Connectoren nutzen denselben richtungsparametrisierten Pfad wie linke Varianten und keine getrennten Runtime-ID-Mengen.
 
-- [ ] **IDO-12 – Vertikale Kreis-Connectoren generalisieren**
+- [x] **IDO-12 – Vertikale Kreis-Connectoren generalisieren**
   - Aufgabe: Obere und untere Anschlüsse anhand von Bildgeometrie,
     Überdeckung/Z-Order und Beschreibung unterscheiden.
   - Akzeptanz: Tests umfassen Anschluss oben, Anschluss unten, teilweise
@@ -198,9 +198,9 @@ Für jedes Arbeitspaket gelten zusätzlich zu den jeweiligen Akzeptanzkriterien:
     untere Connectoren aus Relationsformulierungen statt aus neuen
     Familien-ID-Regeln ab. Run QL ergänzt teilverdeckte obere/untere Anschlüsse
     mit `z_order=behind_target` und `continues_behind`-Relation sowie
-    connector-freie Kreis-Negativtests mit `connector_policy=forbid`.
+    connector-freie Kreis-Negativtests mit `connector_policy=forbid`. Umsetzung: Run SL schließt IDO-12 nach der absoluten Nullprüfung ab; obere, untere, verdeckte und connector-freie Kreisfälle sind über vertikale Relationen, Z-Order und Connector-Policy beschrieben.
 
-- [ ] **IDO-13 – Kreis-/Text-Badges generalisieren**
+- [x] **IDO-13 – Kreis-/Text-Badges generalisieren**
   - Aufgabe: Labelinhalt, Textlage und Kreisgeometrie aus Beschreibung,
     Text-/Glyph-Evidenz und Bildmessung bestimmen.
   - Akzeptanz: `T`, `M`, `VOC`, `CO₂`, `rF` und „ohne Buchstabe“ werden ohne
@@ -215,9 +215,9 @@ Für jedes Arbeitspaket gelten zusätzlich zu den jeweiligen Akzeptanzkriterien:
     `rF`/„relative Feuchtigkeit“ wird nun direkt aus dem Beschreibungstext
     abgeleitet, und die gespiegelte rechte Anschlusslage erkennt auch neutrale
     Formulierungen wie „Griff nach links gedreht, Text horizontal“. Der
-    Hardcoding-Ratchet sinkt dadurch auf 66 Legacy-Vorkommen.
+    Hardcoding-Ratchet sinkt dadurch auf 66 Legacy-Vorkommen. Umsetzung: Run SL schließt IDO-13 nach der absoluten Nullprüfung ab; Badge-Label, Textlage, Subscript-Profil und textfreie Kreise werden aus Beschreibung, Glyph-/Textparametern und Kreisgeometrie abgeleitet.
 
-- [ ] **IDO-14 – Ventil-/Kellen-Spezialpfade in Primitive zerlegen**
+- [x] **IDO-14 – Ventil-/Kellen-Spezialpfade in Primitive zerlegen**
   - Aufgabe: Bisherige Spezialformen als Polygon-, Kreis-, Linien-,
     Symmetrie- und Rotationsrelationen ausdrücken.
   - Akzeptanz: Rotation und Spiegelung sind generische IR-Transformationen und
@@ -231,8 +231,12 @@ Für jedes Arbeitspaket gelten zusätzlich zu den jeweiligen Akzeptanzkriterien:
     erweitert denselben Vertrag auf vertikale 2-Wege-Motorventile: Die
     Geometry-IR beschreibt nun zwei Polygonhälften, Kreisgriff, Linien-Connector
     und Motor-Text sowie generische Rotationen für neutrale Beschreibungen.
+  - Umsetzung: Run SL schließt IDO-14 nach der absoluten Nullprüfung ab;
+    Ventil-/Kellenformen sind im dokumentierten Migrationspfad als Primitive,
+    Zerlegungen und generische Rotations-/Spiegeltransformationen statt als
+    Runtime-Katalogdispatch abgesichert.
 
-- [ ] **IDO-15 – Adaptive Locks und Optimierungsprofile entkoppeln**
+- [x] **IDO-15 – Adaptive Locks und Optimierungsprofile entkoppeln**
   - Aufgabe: Profilwahl ausschließlich aus messbaren Eigenschaften wie
     Objektgröße, Connector-Richtung, Textdichte, Kontrast und
     Konvergenzverhalten ableiten.
@@ -241,7 +245,7 @@ Für jedes Arbeitspaket gelten zusätzlich zu den jeweiligen Akzeptanzkriterien:
     Eingang für die globalen Optimierungsgrenzen. Der bisherige AC0811-
     Kompatibilitätsflag bleibt als Alias erhalten, aber neue neutrale Tests
     sichern, dass Radius-, Text- und Connector-Locks ohne Bild-ID über
-    Profilmetadaten entsperrt werden können.
+    Profilmetadaten entsperrt werden können. Umsetzung: Run SL schließt IDO-15 nach der absoluten Nullprüfung ab; Optimierungsprofile und Adaptive Locks werden über globale Profilmetadaten, Geometrieparameter und neutrale Validierung statt über Bild-IDs gewählt.
 
 ## Priorität 3 – Konfiguration und Runtime bereinigen
 
