@@ -316,11 +316,17 @@ Für jedes Arbeitspaket gelten zusätzlich zu den jeweiligen Akzeptanzkriterien:
 
 ## Priorität 4 – Zielqualität nachweisen
 
-- [ ] **IDO-19 – Ablationsmatrix automatisieren**
+- [x] **IDO-19 – Ablationsmatrix automatisieren**
   - Aufgabe: Für denselben Holdout-Satz die Modi „nur Bild“, „nur
     Beschreibung“ und „Bild + Beschreibung“ auswerten.
   - Akzeptanz: Der kombinierte Modus verbessert die definierte Gesamtmetrik und
     der Report zeigt, welche Quelle welche Constraints beigetragen hat.
+  - Umsetzung: Run SI ergänzt `tools/build_holdout_ablation_matrix.py` mit
+    dem versionierten Report `holdout_ablation_matrix_v1`. Der Report wertet
+    jeden IDO-04-Protokollsample in den Modi `image_only`, `description_only`
+    und `image_and_description` aus, dokumentiert die Source-Contributions je
+    Zeile und weist getrennt für Development und Holdout aus, dass der
+    kombinierte Modus die Single-Source-Modi übertrifft.
 
 - [ ] **IDO-20 – Qualitäts- und Komplexitätsgate definieren**
   - Aufgabe: Rasterähnlichkeit, Kantenlage, Struktur, Semantik,
