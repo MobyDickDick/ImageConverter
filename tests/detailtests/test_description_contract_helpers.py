@@ -597,3 +597,34 @@ def test_description_parser_generalizes_co2_rf_and_empty_circle_badges() -> None
     assert [element["kind"] for element in params["geometry_ir"]] == ["CircleBackground"]
     assert params["geometry_ir"][0]["connector_policy"] == "forbid"
     assert params["description_constraints"]["relations"] == []
+
+def test_description_parser_attaches_generic_checkmark_geometry_ir() -> None:
+    description = (
+        "Weißer quadratischer Hintergrund; rechts oben ein grüner Haken aus zwei dicken, "
+        "schrägen Liniensegmenten: ein kurzer Schenkel steigt von links unten zur Mitte, "
+        "ein langer Schenkel steigt von der Mitte nach rechts oben. Unter dem grünen Haken "
+        "liegt eine feine graue Kontur beziehungsweise ein grauer Schatten entlang der linken "
+        "und unteren Außenkante."
+    )
+
+    _desc, params = _parse(description)
+
+    assert params["contract_status"] == "ok"
+    assert [element["kind"] for element in params["geometry_ir"]] == [
+        "ColorPatch",
+        "PolygonPath",
+        "PolygonPath",
+    ]
+    assert params["geometry_ir"][2]["role"] == "checkmark"
+    assert params["geometry_ir"][2]["primitive_decomposition"]["schema_version"] == "checkmark_primitive_decomposition_v1"
+
+
+def test_description_parser_checkmark_geometry_ir_is_filename_invariant() -> None:
+    description = "Weißer Hintergrund mit grünem Haken aus zwei schrägen Schenkeln und grauem Schatten."
+    mapping = {"NEUTRAL_A": description, "NEUTRAL_B": description}
+    reflection = Reflection(mapping)
+
+    _first_desc, first = reflection.parse_description("NEUTRAL_A", "neutral-alpha.png")
+    _second_desc, second = reflection.parse_description("NEUTRAL_B", "renamed-random-input.png")
+
+    assert first["geometry_ir"] == second["geometry_ir"]

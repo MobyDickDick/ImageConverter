@@ -191,6 +191,9 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
     rect_hint = _has_any(desc, ("rechteck", "viereck", "kühlelement", "heizelement", "rechteck-plus-minus-bildbeschreibung"))
     gradient_hint = _has_any(desc, ("farbverlauf", "gradient")) and _has_any(desc, ("horizontal", "dunkel-hell-dunkel", "dunkel–hell–dunkel"))
     diagonal_hint = _has_any(desc, ("diagonal", "diagonale", "diagonalen", "andreaskreuz", "kreuz"))
+    checkmark_hint = _has_any(desc, ("haken", "checkmark", "check-mark", "prüfhaken", "haekchen", "häkchen")) and _has_any(
+        desc, ("grün", "gruen", "green", "schräg", "schraeg", "diagonal", "liniensegment", "schenkel")
+    )
     differential_pressure_hint = _has_any(desc, ("differenzdruckmessung", "dp")) and "doppelten grauen rand" in desc
     connector_free_hint = _has_any(desc, ("kreis", "kreisring")) and _has_any(
         desc,
@@ -445,6 +448,50 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
         m_top_kelle_three_way_valve_hint
         and _has_any(desc, ("hauptdiagonal gespiegelt", "diagonal gespiegelt"))
     )
+
+    if checkmark_hint:
+        elements.extend(
+            [
+                {
+                    "kind": "ColorPatch",
+                    "id": "checkmark_background",
+                    "bbox": [0.0, 0.0, 1.0, 1.0],
+                    "fill": "#ffffff",
+                    "stroke": "none",
+                },
+                {
+                    "kind": "PolygonPath",
+                    "id": "checkmark_shadow_outline",
+                    "points": [[0.245, 0.650], [0.405, 0.810], [0.875, 0.250]],
+                    "fill": "none",
+                    "stroke": "#9a9a9a",
+                    "stroke_width": 0.105,
+                    "linecap": "round",
+                    "linejoin": "round",
+                    "role": "checkmark_shadow",
+                },
+                {
+                    "kind": "PolygonPath",
+                    "id": "checkmark_green_stroke",
+                    "points": [[0.275, 0.595], [0.425, 0.745], [0.850, 0.235]],
+                    "fill": "none",
+                    "stroke": "#3c9f44",
+                    "stroke_width": 0.125,
+                    "linecap": "round",
+                    "linejoin": "round",
+                    "role": "checkmark",
+                    "primitive_decomposition": {
+                        "schema_version": "checkmark_primitive_decomposition_v1",
+                        "primitives": [
+                            {"role": "short_rising_leg", "kind": "LineSegment"},
+                            {"role": "long_rising_leg", "kind": "LineSegment"},
+                            {"role": "outer_shadow", "kind": "LineSegment"},
+                        ],
+                    },
+                },
+            ]
+        )
+        return elements
 
     if left_rotated_circular_damper_hint:
         elements.append(
@@ -1884,6 +1931,8 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
             stroke = html.escape(str(element.get("stroke", "#707070")))
             fill = html.escape(str(element.get("fill", "none")))
             sw = float(element.get("stroke_width", 0.020)) * min(w, h)
+            linecap = html.escape(str(element.get("linecap", "butt")))
+            linejoin = html.escape(str(element.get("linejoin", "round")))
             raw_points = element.get("points", [])
             points: list[str] = []
             if isinstance(raw_points, list):
@@ -1895,7 +1944,7 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
                 svg.append(
                     f'  <path id="{element_id}" d="M {" L ".join(points)}{suffix}" '
                     f'stroke="{stroke}" stroke-width="{_fmt(sw)}" fill="{fill}" '
-                    'stroke-linejoin="round" stroke-linecap="butt"/>'
+                    f'stroke-linejoin="{linejoin}" stroke-linecap="{linecap}"/>'
                 )
         elif kind == "DiagonalBand":
             stroke = html.escape(str(element.get("stroke", "#707070")))
