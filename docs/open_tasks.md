@@ -3887,3 +3887,11 @@ endet. Die Detailableitung und Akzeptanzkriterien stehen in
 - **Fortschritt:** Die unzureichende GE1001-Beschreibung wurde direkt ersetzt: Statt katalogreferenzieller Kurzform beschreibt sie nun weißen Hintergrund, Lage des grünen Hakens, zwei schräge Schenkel und die graue Kontur/Schattenkante.
 - **Sicherung:** Ein erneuter GE1001-M-Lauf endet mit Exit `0` und protokolliert die neue Beschreibung im `mode=auto`; die Qualitätswerte bleiben unverändert (`Mean-Delta²=18208.144531`, `Fehler/Pixel=0.073663`), weil weiterhin kein generischer Haken-/Checkmark-Primitive in Geometry-IR übersetzt wird.
 - **Blocker:** Der Beschreibungsmangel ist geschlossen; offen bleibt die Implementierung eines katalogfreien Haken-/Checkmark-Primitive-Contracts oder alternativ die Rotation auf `GE9021_7M`.
+
+
+### Fortschritt vs. Blocker (Session 2026-06-24, GE1001_M Checkmark-Primitive Run SQ)
+
+- **Fortschritt:** Der in Run SP benannte generische Haken-/Checkmark-Primitive-Contract ist umgesetzt: Katalogfreie Beschreibungen eines grünen Hakens erzeugen nun `ColorPatch` + graue `PolygonPath`-Kontur + grünen `PolygonPath`-Haken inklusive Primitive-Zerlegung.
+- **Sicherung:** Die neuen Regressionstests prüfen Checkmark-IR und Dateinamen-Invarianz mit neutralen Namen; die absolute Runtime-ID-Nullprüfung bleibt grün. Der echte GE1001-M-Lauf endet mit Exit `0` und schreibt eine SVG mit `checkmark_background`, `checkmark_shadow_outline` und `checkmark_green_stroke`.
+- **Qualität:** Die Metrik verbessert sich leicht von `Mean-Delta²=18208.144531` auf `17899.730469` (`Fehler/Pixel=0.071567`), bleibt aber sichtbar außerhalb eines finalen Qualitätsziels.
+- **Blocker:** Kein neuer technischer Blocker; offen bleibt weitere Pixel-/Perception-Feinjustierung oder die Rotation auf `GE9021_7M`.
