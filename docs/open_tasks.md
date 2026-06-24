@@ -3873,3 +3873,17 @@ endet. Die Detailableitung und Akzeptanzkriterien stehen in
 ## Automatisch erzeugte Folgeaufgaben (Konvertierungsfehler)
 - [x] AUFGABE: Fehleranalyse `DLG0016` (status=batch_error, reason=KeyError) und Gegenmaßnahme ableiten. (2026-06-24 Run SN: Dual-Arrow-Dispatch reicht `img_path` nun an den Mode-Runner weiter; der Wrapper nutzt den Pfad nur fuer den Embedded-Raster-Fallback und entfernt ihn vor dem Runtime-Aufruf. Ein katalogfreier `ZZ_DUAL_ARROW`-Regressionstest sichert die Schnittstelle.)
 
+
+### Fortschritt vs. Blocker (Session 2026-06-24, Plan-B GE1001_M Triage Run SO)
+
+- **Fortschritt:** Der aktive Plan-B-Spitzenkandidat `GE1001_M.jpg` wurde mit der vorhandenen Beschreibung im echten Non-Composite-Pfad erneut ausgeführt und als reproduzierbarer Triage-Lauf dokumentiert.
+- **Sicherung:** Der Lauf endet mit Exit `0`, bleibt aber im kontrollierten `insufficient_description`-/Raster-Fallback und reproduziert `Mean-Delta²=18208.144531` sowie `Fehler/Pixel=0.073663`; der PF8-Linkage-Test und die absolute Runtime-ID-Nullprüfung bleiben grün.
+- **Perception-Lerneffekt:** Der bestehende PF8-Befund bleibt `generalisiert` für Kreis-/Linien-Seeds, reicht aber noch nicht für einen sicheren generischen Haken-/Kontur-Primitive-Vertrag mit grauer Umrandung.
+- **Blocker:** Keine technische Laufzeitblockade; fachlich fehlt ein katalogfreier `hook/checkmark`-Primitive-Contract oder eine präzisere Beschreibung, damit `GE1001_M` aus dem Fallback herauskommt.
+- **Nächster sinnvoller Schritt:** Entweder den generischen Haken-/Checkmark-Primitive-Contract für `GE1001_M` implementieren oder auf den kleineren Linienkandidaten `GE9021_7M` rotieren.
+
+### Fortschritt vs. Blocker (Session 2026-06-24, GE1001_M Beschreibung Run SP)
+
+- **Fortschritt:** Die unzureichende GE1001-Beschreibung wurde direkt ersetzt: Statt katalogreferenzieller Kurzform beschreibt sie nun weißen Hintergrund, Lage des grünen Hakens, zwei schräge Schenkel und die graue Kontur/Schattenkante.
+- **Sicherung:** Ein erneuter GE1001-M-Lauf endet mit Exit `0` und protokolliert die neue Beschreibung im `mode=auto`; die Qualitätswerte bleiben unverändert (`Mean-Delta²=18208.144531`, `Fehler/Pixel=0.073663`), weil weiterhin kein generischer Haken-/Checkmark-Primitive in Geometry-IR übersetzt wird.
+- **Blocker:** Der Beschreibungsmangel ist geschlossen; offen bleibt die Implementierung eines katalogfreien Haken-/Checkmark-Primitive-Contracts oder alternativ die Rotation auf `GE9021_7M`.
