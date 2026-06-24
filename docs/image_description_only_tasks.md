@@ -340,12 +340,19 @@ Für jedes Arbeitspaket gelten zusätzlich zu den jeweiligen Akzeptanzkriterien:
     eingebettete Rasterkopien, unnötig komplexe Pfade sowie semantisch falsche
     pixelnahe Ergebnisse durch neutrale Regressionstests ab.
 
-- [ ] **IDO-21 – End-to-End-Holdout-Abnahme durchführen**
+- [x] **IDO-21 – End-to-End-Holdout-Abnahme durchführen**
   - Voraussetzung: IDO-01 bis IDO-20 sind abgeschlossen.
   - Aufgabe: Einen nie zur Implementierung verwendeten Satz technischer Symbole
     ausschließlich aus Bild und Beschreibung konvertieren.
   - Akzeptanz: Kein Holdout-Name kommt in Runtime oder Konfiguration vor;
     Rename-Invarianz, Qualitätsgate und Unsicherheitskalibrierung bestehen.
+  - Umsetzung: Run SK ergänzt `tools/run_end_to_end_holdout_acceptance.py`
+    mit dem versionierten Report `end_to_end_holdout_acceptance_v1`. Die
+    Abnahme nutzt ausschließlich anonymisierte Holdout-Evaluationsnamen, den
+    kombinierten `image_and_description`-Modus, das Qualitäts-/Komplexitätsgate
+    und den `fusion_uncertainty_v1`-Status; der Report prüft zusätzlich, dass
+    weder Holdout-Originalnamen noch Katalogtokens in den Runtime-Zeilen
+    auftauchen.
 
 ## Empfohlene Ausführungsreihenfolge
 

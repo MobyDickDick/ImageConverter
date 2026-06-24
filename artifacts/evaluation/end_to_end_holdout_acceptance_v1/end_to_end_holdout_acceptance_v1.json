@@ -1,0 +1,151 @@
+{
+  "schema_version": "end_to_end_holdout_acceptance_v1",
+  "protocol_schema_version": "holdout_rename_protocol_v1",
+  "ablation_schema_version": "holdout_ablation_matrix_v1",
+  "quality_gate_schema_version": "quality_complexity_gate_v1",
+  "acceptance_criteria": {
+    "uses_anonymized_holdout_names_only": true,
+    "requires_image_and_description_mode": true,
+    "requires_quality_gate_pass": true,
+    "requires_uncertainty_without_review": true,
+    "forbids_catalog_tokens_in_runtime_rows": true
+  },
+  "summary": {
+    "holdout_sample_count": 2,
+    "rename_invariance_passed": true,
+    "quality_gate_passed": true,
+    "uncertainty_calibration_passed": true,
+    "no_holdout_name_leakage": true,
+    "no_catalog_token_leakage": true,
+    "accepted": true
+  },
+  "leakage": {
+    "holdout_original_names": [],
+    "catalog_tokens": []
+  },
+  "conversions": [
+    {
+      "evaluation_name": "holdout_2fe95d0292dd8db5.png",
+      "mode": "image_and_description",
+      "source_contributions": {
+        "image": [
+          "circle",
+          "line"
+        ],
+        "description": [
+          "circle",
+          "line",
+          "text"
+        ]
+      },
+      "rename_invariant": true,
+      "metrics": {
+        "pixel_similarity": 0.95,
+        "edge_alignment": 0.975,
+        "structure_score": 1.0,
+        "semantic_score": 1.0,
+        "combined_score": 0.9775
+      },
+      "quality_gate": {
+        "passed": true,
+        "failures": [],
+        "metrics": {
+          "pixel_similarity": 0.95,
+          "edge_alignment": 0.975,
+          "structure_score": 1.0,
+          "semantic_score": 1.0,
+          "combined_score": 0.9775
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 3,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        },
+        "thresholds": {
+          "min_pixel_similarity": 0.78,
+          "min_edge_alignment": 0.72,
+          "min_structure_score": 0.72,
+          "min_semantic_score": 0.85,
+          "min_combined_score": 0.78,
+          "max_svg_element_count": 80,
+          "max_path_command_count": 160,
+          "max_path_complexity_ratio": 4.0
+        }
+      },
+      "uncertainty": {
+        "schema_version": "fusion_uncertainty_v1",
+        "status": "resolved",
+        "reasons": [],
+        "confidence": 0.9775,
+        "review_required": false,
+        "targets": []
+      },
+      "svg_preview": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\"><circle cx=\"12\" cy=\"12\" r=\"7\" fill=\"none\" stroke=\"black\"/><line x1=\"12\" y1=\"4\" x2=\"12\" y2=\"0\" stroke=\"black\"/><text x=\"12\" y=\"14\" text-anchor=\"middle\" font-size=\"5\">TXT</text><!-- evaluation:holdout_2fe95d0292dd8db5.png --></svg>"
+    },
+    {
+      "evaluation_name": "holdout_72cd31856282cdfe.png",
+      "mode": "image_and_description",
+      "source_contributions": {
+        "image": [
+          "circle",
+          "line",
+          "polygon"
+        ],
+        "description": [
+          "circle",
+          "line",
+          "polygon"
+        ]
+      },
+      "rename_invariant": true,
+      "metrics": {
+        "pixel_similarity": 0.95,
+        "edge_alignment": 0.975,
+        "structure_score": 1.0,
+        "semantic_score": 1.0,
+        "combined_score": 0.9775
+      },
+      "quality_gate": {
+        "passed": true,
+        "failures": [],
+        "metrics": {
+          "pixel_similarity": 0.95,
+          "edge_alignment": 0.975,
+          "structure_score": 1.0,
+          "semantic_score": 1.0,
+          "combined_score": 0.9775
+        },
+        "complexity": {
+          "parse_error": null,
+          "embedded_raster_count": 0,
+          "vector_element_count": 3,
+          "path_count": 0,
+          "path_command_count": 0,
+          "path_complexity_ratio": 0.0
+        },
+        "thresholds": {
+          "min_pixel_similarity": 0.78,
+          "min_edge_alignment": 0.72,
+          "min_structure_score": 0.72,
+          "min_semantic_score": 0.85,
+          "min_combined_score": 0.78,
+          "max_svg_element_count": 80,
+          "max_path_command_count": 160,
+          "max_path_complexity_ratio": 4.0
+        }
+      },
+      "uncertainty": {
+        "schema_version": "fusion_uncertainty_v1",
+        "status": "resolved",
+        "reasons": [],
+        "confidence": 0.9775,
+        "review_required": false,
+        "targets": []
+      },
+      "svg_preview": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\"><circle cx=\"12\" cy=\"12\" r=\"7\" fill=\"none\" stroke=\"black\"/><line x1=\"12\" y1=\"4\" x2=\"12\" y2=\"0\" stroke=\"black\"/><polygon points=\"5,19 12,7 19,19\" fill=\"none\" stroke=\"black\"/><!-- evaluation:holdout_72cd31856282cdfe.png --></svg>"
+    }
+  ]
+}

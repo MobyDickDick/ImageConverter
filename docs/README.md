@@ -374,6 +374,7 @@ Alle Markdown-Dokumente unter `docs/`, damit sie von `README.md` aus erreichbar 
 - [Nächstes Arbeitspaket – IDO-17 Kommentar-/CLI-Neutralisierung Run RQ (2026-06-21)](next_arbeitspaket_2026-06-21_runRQ.md)
 - [Nächstes Arbeitspaket – IDO-17 Kommentar-Neutralisierung Run RR (2026-06-21)](next_arbeitspaket_2026-06-21_runRR.md)
 - [Nächstes Arbeitspaket – IDO-18 Legacy-Ratchet-Entfernung Run SH (2026-06-23)](next_arbeitspaket_2026-06-23_runSH.md)
+- [Nächstes Arbeitspaket – IDO-21 End-to-End-Holdout-Abnahme Run SK (2026-06-24)](next_arbeitspaket_2026-06-24_runSK.md)
 - [Nächste dokumentierte Aufgabe – Run HK (2026-05-21)](next_aufgabe_2026-05-21_runHK.md)
 - [Nächste dokumentierte Aufgabe – Run HL (2026-05-21)](next_aufgabe_2026-05-21_runHL.md)
 - [Nächste dokumentierte Aufgabe – Run HM (2026-05-21)](next_aufgabe_2026-05-21_runHM.md)
