@@ -249,7 +249,7 @@ Für jedes Arbeitspaket gelten zusätzlich zu den jeweiligen Akzeptanzkriterien:
 
 ## Priorität 3 – Konfiguration und Runtime bereinigen
 
-- [ ] **IDO-16 – Globale Konfiguration v1 einführen**
+- [x] **IDO-16 – Globale Konfiguration v1 einführen**
   - Aufgabe: Ein kleines versioniertes JSON-Schema für globale
     Primitive-Schwellen, Kostenfunktionsgewichte, Budgets und
     Unsicherheitsgrenzen erstellen.
@@ -261,6 +261,10 @@ Für jedes Arbeitspaket gelten zusätzlich zu den jeweiligen Akzeptanzkriterien:
     ausschließlich Primitive-Schwellen, Kostenfunktionsgewichte, Budgets und
     Unsicherheitsgrenzen; Loader-/Validator-Tests sichern Defaults, Fallback
     sowie die Ablehnung unbekannter und bildbezogener Konfigurationsbereiche.
+  - Umsetzung: Run SM schließt IDO-16 nach erneuter Vertragsprüfung ab; die
+    globale Konfiguration bleibt versioniert, reproduziert das Default-Verhalten
+    ohne lokale Datei und lehnt unbekannte beziehungsweise bildbezogene Bereiche
+    maschinenlesbar ab.
 
 - [x] **IDO-17 – Runtime-Code von Katalog-IDs befreien**
   - Aufgabe: Nach Abschluss der vertikalen Migrationspakete verbleibende
