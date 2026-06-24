@@ -92,11 +92,12 @@ def buildIterationModeRunnersImpl(
         )
 
     def run_dual_arrow_badge_iteration(**kwargs):
+        img_path = kwargs.pop("img_path")
         return run_dual_arrow_badge_iteration_fn(
             **kwargs,
             detect_dual_arrow_badge_params_fn=lambda img: detect_dual_arrow_badge_params_fn(img, np_module=np_module),
             generate_dual_arrow_badge_svg_fn=generate_dual_arrow_badge_svg_fn,
-            render_embedded_raster_svg_fn=lambda: render_embedded_raster_svg_fn(kwargs["img_path"]),
+            render_embedded_raster_svg_fn=lambda: render_embedded_raster_svg_fn(img_path),
             render_svg_to_numpy_fn=render_svg_to_numpy_fn,
         )
 

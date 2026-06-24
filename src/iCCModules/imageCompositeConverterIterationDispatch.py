@@ -80,6 +80,7 @@ def runPreparedIterationModeImpl(
             params=params,
             width=width,
             height=height,
+            img_path=img_path,
             write_validation_log_fn=write_validation_log_fn,
             record_render_failure_fn=record_render_failure_fn,
             write_attempt_artifacts_fn=write_attempt_artifacts_fn,

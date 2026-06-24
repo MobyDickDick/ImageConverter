@@ -119,3 +119,45 @@ def test_run_prepared_iteration_mode_impl_normalizes_short_composite_result_shap
     )
 
     assert result == ("AC0001_S", "desc", {"mode": "composite"}, 3, 0.25)
+
+
+def test_run_prepared_iteration_mode_impl_routes_dual_arrow_with_image_path() -> None:
+    captured: dict[str, object] = {}
+
+    def _fake_dual_arrow_runtime(**kwargs):
+        captured.update(kwargs)
+        return ("ZZ_DUAL_ARROW", "desc", {"mode": "dual_arrow_badge"}, 1, 0.0)
+
+    result = iteration_dispatch_helpers.runPreparedIterationModeImpl(
+        mode="dual_arrow_badge",
+        width=32,
+        height=24,
+        params={"mode": "dual_arrow_badge"},
+        stripe_strategy=None,
+        semantic_mode_visual_override=False,
+        folder_path="input-folder",
+        img_path="input/ZZ_DUAL_ARROW.jpg",
+        filename="ZZ_DUAL_ARROW.jpg",
+        base_name="ZZ_DUAL_ARROW",
+        description="two vertical colored arrows",
+        perc_img=[[1]],
+        perc_base_name="ZZ_DUAL_ARROW",
+        semantic_audit_row=None,
+        max_iterations=2,
+        badge_validation_rounds=3,
+        debug_element_diff_dir=None,
+        debug_ac0811_dir=None,
+        write_validation_log_fn=lambda _lines: None,
+        write_attempt_artifacts_fn=lambda _svg, _rendered=None: None,
+        record_render_failure_fn=lambda _reason, **_kwargs: None,
+        run_semantic_badge_iteration_fn=lambda **_kwargs: None,
+        run_dual_arrow_badge_iteration_fn=_fake_dual_arrow_runtime,
+        run_non_composite_iteration_fn=lambda **_kwargs: None,
+        run_composite_iteration_fn=lambda **_kwargs: None,
+        calculate_error_fn=lambda _a, _b: 0.0,
+        print_fn=lambda _message: None,
+    )
+
+    assert result == ("ZZ_DUAL_ARROW", "desc", {"mode": "dual_arrow_badge"}, 1, 0.0)
+    assert captured["img_path"] == "input/ZZ_DUAL_ARROW.jpg"
+    assert captured["filename"] == "ZZ_DUAL_ARROW.jpg"
