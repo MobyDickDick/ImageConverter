@@ -6,7 +6,7 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-06-19)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `400` · Erledigt `354` · Offen `46`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `404` · Erledigt `358` · Offen `46`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -21,9 +21,9 @@ Akzeptanzkriterien steht in `docs/image_description_only_tasks.md`.
 - [x] **IDO-P1 – Gemeinsame Geometry-IR fertigstellen:** Beschreibung und
   Bildwahrnehmung als Constraints/Kandidaten fusionieren und Unsicherheit
   explizit modellieren (IDO-05 bis IDO-09). (2026-06-16 Run PZ: IDO-09 ergänzt den `fusion_uncertainty_v1`-Vertrag und trennt sichere `safe_geometry_ir` von Review-Fällen.)
-- [ ] **IDO-P2 – ID-spezifische Runtime-Pfade ablösen:** Connector-, Badge-,
+- [x] **IDO-P2 – ID-spezifische Runtime-Pfade ablösen:** Connector-, Badge-,
   Ventil-/Kellen- und Optimierungslogik anhand messbarer Merkmale statt
-  Katalog-IDs auswählen (IDO-10 bis IDO-15).
+  Katalog-IDs auswählen (IDO-10 bis IDO-15). (2026-06-24 Run SL: IDO-10 bis IDO-15 nach der absoluten Runtime-ID-Nullprüfung geschlossen; die dokumentierten Migrationspfade wählen Connectoren, Badge-Labels, Ventil-/Kellen-Primitive und Optimierungsprofile über messbare Relationen, Geometrie-, Text- und Profilmetadaten statt Katalog-IDs.)
 - [x] **IDO-P3 – Runtime und Konfiguration bereinigen:** ausschließlich globale
   Konfiguration zulassen, Runtime-ID-Vorkommen auf null senken und die
   temporäre Legacy-Baseline danach löschen (IDO-16 bis IDO-18). (2026-06-23 Run SH: `config/legacy_image_id_baseline.json` gelöscht; `tools/check_no_new_image_id_hardcoding.py` ist jetzt eine absolute Nullprüfung ohne Allowlist und meldet `0` Runtime-ID-Vorkommen.)
