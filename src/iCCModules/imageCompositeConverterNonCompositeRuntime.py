@@ -621,6 +621,21 @@ def _prefer_semantic_description_geometry(geometry_ir: list[dict[str, object]]) 
     return bool(SEMANTIC_GEOMETRY_IR_KINDS & kinds)
 
 
+def _description_reuses_reference_family(description: str) -> bool:
+    return _extract_reference_family_from_description(description) is not None
+
+
+def _prefer_description_geometry_candidate(geometry_ir: list[dict[str, object]], *, description: str) -> bool:
+    if _prefer_semantic_description_geometry(geometry_ir):
+        return True
+    # Canonical heat-exchanger descriptions are safer than generic stripe pixel
+    # fits: the description declares the rectangle, gradient, diagonal and
+    # plus/minus glyph contract.  Reference-derived variants ("Wie ...") may
+    # differ by size/raster details, so those variants should still be allowed
+    # to choose the measured elementwise fit by pixel error.
+    return _is_description_heat_exchanger_geometry(geometry_ir) and not _description_reuses_reference_family(description)
+
+
 def _try_build_description_geometry_ir_svg(width: int, height: int, *, description: str) -> str | None:
     geometry_ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(description)
     if not geometry_ir:
@@ -1102,7 +1117,7 @@ def runNonCompositeIterationImpl(
                     candidate
                     for candidate in candidates
                     if candidate["status"] == "non_composite_description_geometry_ir"
-                    and _prefer_semantic_description_geometry(candidate["geometry_ir"])
+                    and _prefer_description_geometry_candidate(candidate["geometry_ir"], description=description)
                 ),
                 None,
             )

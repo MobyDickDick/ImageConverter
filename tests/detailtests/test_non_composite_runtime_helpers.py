@@ -939,7 +939,7 @@ def test_description_driven_symbol_algorithm_skips_samples_for_all_ac0100_sizes(
     assert artifacts and all(rendered == "algorithm_rendered" for _svg, rendered in artifacts)
 
 
-def test_heat_exchanger_geometry_ir_does_not_override_better_elementwise_fit() -> None:
+def test_reference_derived_heat_exchanger_geometry_ir_does_not_override_better_elementwise_fit() -> None:
     geometry_ir = [
         {"kind": "HorizontalGradient"},
         {"kind": "RectBorder"},
@@ -949,13 +949,31 @@ def test_heat_exchanger_geometry_ir_does_not_override_better_elementwise_fit() -
     ]
 
     assert non_composite_runtime_helpers._is_description_heat_exchanger_geometry(geometry_ir)
-    assert not non_composite_runtime_helpers._prefer_semantic_description_geometry(geometry_ir)
+    assert not non_composite_runtime_helpers._prefer_description_geometry_candidate(
+        geometry_ir,
+        description="Wie AC0010: Heizelement mit horizontalem Farbverlauf und Diagonale.",
+    )
+
+
+def test_canonical_heat_exchanger_geometry_ir_prefers_description_contract() -> None:
+    geometry_ir = [
+        {"kind": "HorizontalGradient"},
+        {"kind": "RectBorder"},
+        {"kind": "DiagonalBand"},
+        {"kind": "PlusGlyph"},
+        {"kind": "MinusGlyph"},
+    ]
+
+    assert non_composite_runtime_helpers._prefer_description_geometry_candidate(
+        geometry_ir,
+        description="Heizelement, graues Rechteck, Plus-Minus-Zeichen oben links, Farbverlauf horizontal dunkel-hell-dunkel graue Diagonale oben rechts nach unten links",
+    )
 
 
 def test_semantic_geometry_ir_still_prefers_description_shape() -> None:
     geometry_ir = [{"kind": "TopKelleThreeWayValveGlyph"}]
 
-    assert non_composite_runtime_helpers._prefer_semantic_description_geometry(geometry_ir)
+    assert non_composite_runtime_helpers._prefer_description_geometry_candidate(geometry_ir, description="Wie AC0224")
 
 def test_try_load_sample_svg_auto_converts_inkscape_file(tmp_path) -> None:
     image_dir = tmp_path / "images"
