@@ -938,6 +938,25 @@ def test_description_driven_symbol_algorithm_skips_samples_for_all_ac0100_sizes(
     assert not any("status=non_composite_plan_b_sample_svg_selected" in line for row in logs for line in row)
     assert artifacts and all(rendered == "algorithm_rendered" for _svg, rendered in artifacts)
 
+
+def test_heat_exchanger_geometry_ir_does_not_override_better_elementwise_fit() -> None:
+    geometry_ir = [
+        {"kind": "HorizontalGradient"},
+        {"kind": "RectBorder"},
+        {"kind": "DiagonalBand"},
+        {"kind": "PlusGlyph"},
+        {"kind": "MinusGlyph"},
+    ]
+
+    assert non_composite_runtime_helpers._is_description_heat_exchanger_geometry(geometry_ir)
+    assert not non_composite_runtime_helpers._prefer_semantic_description_geometry(geometry_ir)
+
+
+def test_semantic_geometry_ir_still_prefers_description_shape() -> None:
+    geometry_ir = [{"kind": "TopKelleThreeWayValveGlyph"}]
+
+    assert non_composite_runtime_helpers._prefer_semantic_description_geometry(geometry_ir)
+
 def test_try_load_sample_svg_auto_converts_inkscape_file(tmp_path) -> None:
     image_dir = tmp_path / "images"
     samples_dir = image_dir / "samples"

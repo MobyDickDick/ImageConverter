@@ -618,9 +618,7 @@ def _is_description_heat_exchanger_geometry(geometry_ir: list[dict[str, object]]
 
 def _prefer_semantic_description_geometry(geometry_ir: list[dict[str, object]]) -> bool:
     kinds = {str(element.get("kind", "")) for element in geometry_ir}
-    if SEMANTIC_GEOMETRY_IR_KINDS & kinds:
-        return True
-    return _is_description_heat_exchanger_geometry(geometry_ir)
+    return bool(SEMANTIC_GEOMETRY_IR_KINDS & kinds)
 
 
 def _try_build_description_geometry_ir_svg(width: int, height: int, *, description: str) -> str | None:
