@@ -29,7 +29,7 @@ Akzeptanzkriterien steht in `docs/image_description_only_tasks.md`.
   temporäre Legacy-Baseline danach löschen (IDO-16 bis IDO-18). (2026-06-23 Run SH: `config/legacy_image_id_baseline.json` gelöscht; `tools/check_no_new_image_id_hardcoding.py` ist jetzt eine absolute Nullprüfung ohne Allowlist und meldet `0` Runtime-ID-Vorkommen.)
 - [ ] **IDO-P4 – Zielqualität am Holdout beweisen:** Ablation,
   Qualitäts-/Komplexitätsgate und End-to-End-Abnahme mit umbenannten,
-  zurückgehaltenen Bildern durchführen (IDO-19 bis IDO-21). (2026-06-24 Run SI: IDO-19 automatisiert die Ablationsmatrix für `image_only`, `description_only` und `image_and_description` inklusive Source-Contributions und Development-/Holdout-Summary.)
+  zurückgehaltenen Bildern durchführen (IDO-19 bis IDO-21). (2026-06-24 Run SI: IDO-19 automatisiert die Ablationsmatrix für `image_only`, `description_only` und `image_and_description` inklusive Source-Contributions und Development-/Holdout-Summary.) (2026-06-24 Run SJ: IDO-20 definiert `quality_complexity_gate_v1` und lehnt eingebettete Rasterkopien, unnötige Pfadkomplexität sowie semantisch falsche pixelnahe Ergebnisse maschinenlesbar ab.)
 
 ## Testhygiene – nur echte Grün-Tests in der Kernliste (neu 2026-05-20)
 

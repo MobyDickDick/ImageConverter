@@ -328,11 +328,17 @@ Für jedes Arbeitspaket gelten zusätzlich zu den jeweiligen Akzeptanzkriterien:
     Zeile und weist getrennt für Development und Holdout aus, dass der
     kombinierte Modus die Single-Source-Modi übertrifft.
 
-- [ ] **IDO-20 – Qualitäts- und Komplexitätsgate definieren**
+- [x] **IDO-20 – Qualitäts- und Komplexitätsgate definieren**
   - Aufgabe: Rasterähnlichkeit, Kantenlage, Struktur, Semantik,
     SVG-Elementanzahl und Pfadkomplexität in einem Gate kombinieren.
   - Akzeptanz: Pixelkopien als eingebettetes Raster, unnötig komplexe Pfade und
     semantisch falsche, aber pixelnahe Ergebnisse werden abgelehnt.
+  - Umsetzung: Run SJ ergänzt `tools/evaluate_quality_complexity_gate.py` mit
+    dem versionierten Vertrag `quality_complexity_gate_v1`. Das Gate kombiniert
+    Rasterähnlichkeit, Kantenlage, Struktur, Semantik, SVG-Elementanzahl und
+    Pfadkomplexität, protokolliert maschinenlesbare Failure-Codes und lehnt
+    eingebettete Rasterkopien, unnötig komplexe Pfade sowie semantisch falsche
+    pixelnahe Ergebnisse durch neutrale Regressionstests ab.
 
 - [ ] **IDO-21 – End-to-End-Holdout-Abnahme durchführen**
   - Voraussetzung: IDO-01 bis IDO-20 sind abgeschlossen.
