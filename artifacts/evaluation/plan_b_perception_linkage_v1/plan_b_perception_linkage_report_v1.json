@@ -11,13 +11,102 @@
   "records": [
     {
       "schema_version": "plan_b_perception_linkage_record_v1",
-      "variant": "GE1001_M",
-      "image_path": "artifacts/images_to_convert/GE1001_M.jpg",
+      "variant": "DLG0021",
+      "image_path": "artifacts/images_to_convert/DLG0021.jpg",
       "status": "evaluated",
-      "plan_b_reason": "Run-RQ-Triage: h\u00f6chster aktueller GE-Diff-Fehler.",
-      "description": "Kompaktes GE-Symbol mit dominanten Kontur- und Farbfl\u00e4chen.",
+      "plan_b_reason": "Run-SR-Triage: h\u00f6chster aktueller kompakter Diff-Fehler nach GE9021_7M.",
+      "description": "Kompaktes Dialogsymbol mit farbigen Fl\u00e4chen, Konturen und m\u00f6glichem Text-/Glyph-Anteil.",
       "perception_lerneffekt": {
-        "question": "Werden die dominanten Kontur- oder Farbfl\u00e4chen als katalogfreie Primitive erkannt?",
+        "question": "Werden dominante Farbfl\u00e4chen, Konturen oder Glyphen als katalogfreie Primitive erkannt?",
+        "expected_first_primitive": "color_patch",
+        "expected_candidate_kinds": [
+          "color_patch",
+          "line",
+          "polygon_path",
+          "rectangle",
+          "text_glyph"
+        ],
+        "expected_seed_kinds": [
+          "ColorPatch",
+          "HorizontalRule",
+          "PolygonPath",
+          "RectBorder",
+          "TextGlyph",
+          "VerticalRule"
+        ],
+        "decision": "noch nicht erkannt",
+        "matched_candidate_kinds": [],
+        "matched_seed_kinds": [],
+        "top_candidate_kind": "horizontal_rule",
+        "top_confidence": 0.99,
+        "next_action": "Vor der Plan-B-Umsetzung zus\u00e4tzliche Detector-/ROI-Regel oder manuelle Seed-Annahme festhalten."
+      },
+      "candidate_count": 3,
+      "top_candidate": {
+        "schema_version": "perception_primitive_candidate_v1",
+        "kind": "horizontal_rule",
+        "bbox": {
+          "x": 6.0,
+          "y": 20.0,
+          "width": 12.0,
+          "height": 1.0
+        },
+        "center": {
+          "x": 12.0,
+          "y": 20.5
+        },
+        "geometry": {
+          "orientation": "horizontal",
+          "x_left": 6.0,
+          "x_right": 18.0,
+          "y_center": 20.5,
+          "length_px": 12.0,
+          "stroke_width_px": 1.0,
+          "angle_deg": 0.0,
+          "text_equivalent": "-",
+          "geometry_ir_kind": "HorizontalRule"
+        },
+        "color": {
+          "fill_rgb": null,
+          "stroke_rgb": [
+            159,
+            163,
+            162
+          ],
+          "fill_hex": null,
+          "stroke_hex": "#9FA3A2",
+          "fill_confidence": 0.0,
+          "stroke_confidence": 0.2094
+        },
+        "confidence": 0.99,
+        "roi": {
+          "type": "description_hint",
+          "hint": "full_image",
+          "bbox": {
+            "x": 0.0,
+            "y": 0.0,
+            "width": 24.0,
+            "height": 24.0
+          },
+          "description": "Kompaktes Dialogsymbol mit farbigen Fl\u00e4chen, Konturen und m\u00f6glichem Text-/Glyph-Anteil."
+        },
+        "evidence": {
+          "detector": "detect_horizontal_rules",
+          "threshold_model": "dark_contour_horizontal_opening",
+          "description_hint": "full_image"
+        },
+        "source": "pf8_plan_b_perception_linkage"
+      }
+    },
+    {
+      "schema_version": "plan_b_perception_linkage_record_v1",
+      "variant": "GE1410_L",
+      "image_path": "artifacts/images_to_convert/GE1410_L.jpg",
+      "status": "evaluated",
+      "plan_b_reason": "Run-SR-Triage: zweiter aktueller kompakter Diff-Fehler oberhalb der Review-Grenze.",
+      "description": "Kompaktes GE-Symbol mit Kontur-, Linien- und Farbfl\u00e4chenstruktur.",
+      "perception_lerneffekt": {
+        "question": "Werden Kontur, Linien oder Farbfl\u00e4chen als katalogfreie Primitive erkannt?",
         "expected_first_primitive": "color_patch",
         "expected_candidate_kinds": [
           "circle",
@@ -42,56 +131,42 @@
         "matched_seed_kinds": [
           "CircleBackground"
         ],
-        "top_candidate_kind": "circle",
-        "top_confidence": 0.952,
+        "top_candidate_kind": "line",
+        "top_confidence": 0.92,
         "next_action": "Im n\u00e4chsten Plan-B-Paket als vorinitialisierten Geometry-IR-Seed protokollieren."
       },
-      "candidate_count": 5,
+      "candidate_count": 8,
       "top_candidate": {
         "schema_version": "perception_primitive_candidate_v1",
-        "kind": "circle",
+        "kind": "line",
         "bbox": {
-          "x": 2.0,
-          "y": 9.0,
-          "width": 10.0,
-          "height": 10.0
+          "x": 0.0,
+          "y": 0.0,
+          "width": 1.0,
+          "height": 25.0
         },
         "center": {
-          "x": 7.0,
-          "y": 14.0
+          "x": 0.5,
+          "y": 12.5
         },
         "geometry": {
-          "radius_px": 5.0,
-          "inner_radius_px": 0.0,
+          "orientation": "vertical",
+          "x_center": 0.5,
+          "y_top": 0.0,
+          "y_bottom": 25.0,
+          "length_px": 25.0,
           "stroke_width_px": 1.0,
-          "circularity": 1.0,
-          "ring": false,
-          "fill_ratio": 0.8272,
-          "geometry_ir_kind": "CircleBackground",
-          "geometry_ir_bbox": [
-            0.08,
-            0.36,
-            0.4,
-            0.4
-          ]
+          "angle_deg": 90.0
         },
         "color": {
-          "fill_rgb": [
-            91,
-            165,
-            115
-          ],
-          "stroke_rgb": [
-            112,
-            162,
-            127
-          ],
-          "fill_hex": "#5BA573",
-          "stroke_hex": "#70A27F",
-          "fill_confidence": 0.4975,
-          "stroke_confidence": 0.6298
+          "fill_rgb": null,
+          "stroke_rgb": null,
+          "fill_hex": null,
+          "stroke_hex": null,
+          "fill_confidence": 0.0,
+          "stroke_confidence": 0.0
         },
-        "confidence": 0.952,
+        "confidence": 0.92,
         "roi": {
           "type": "image",
           "hint": "full_image",
@@ -100,6 +175,99 @@
             "y": 0.0,
             "width": 25.0,
             "height": 25.0
+          }
+        },
+        "evidence": {
+          "detector": "detect_vertical_lines",
+          "edge_model": "canny+hough_lines_p"
+        },
+        "source": "hough"
+      }
+    },
+    {
+      "schema_version": "plan_b_perception_linkage_record_v1",
+      "variant": "SE0041_1",
+      "image_path": "artifacts/images_to_convert/SE0041_1.jpg",
+      "status": "evaluated",
+      "plan_b_reason": "Run-SR-Triage: dritter aktueller Diff-Fall mit mittlerer Symbolfl\u00e4che.",
+      "description": "Schmales SE-Symbol mit Linien-, Kontur- und Farbfl\u00e4chenanteilen.",
+      "perception_lerneffekt": {
+        "question": "Tauchen die dominanten Linien oder Farbfl\u00e4chen als generische Perception-Kandidaten auf?",
+        "expected_first_primitive": "line",
+        "expected_candidate_kinds": [
+          "color_patch",
+          "line",
+          "polygon_path",
+          "rectangle"
+        ],
+        "expected_seed_kinds": [
+          "ColorPatch",
+          "HorizontalRule",
+          "PolygonPath",
+          "RectBorder",
+          "VerticalRule"
+        ],
+        "decision": "noch nicht erkannt",
+        "matched_candidate_kinds": [],
+        "matched_seed_kinds": [],
+        "top_candidate_kind": "circle",
+        "top_confidence": 0.9396,
+        "next_action": "Vor der Plan-B-Umsetzung zus\u00e4tzliche Detector-/ROI-Regel oder manuelle Seed-Annahme festhalten."
+      },
+      "candidate_count": 1,
+      "top_candidate": {
+        "schema_version": "perception_primitive_candidate_v1",
+        "kind": "circle",
+        "bbox": {
+          "x": 2.0,
+          "y": 12.0,
+          "width": 24.0,
+          "height": 24.0
+        },
+        "center": {
+          "x": 14.0,
+          "y": 24.0
+        },
+        "geometry": {
+          "radius_px": 12.0,
+          "inner_radius_px": 0.0,
+          "stroke_width_px": 1.0,
+          "circularity": 1.0,
+          "ring": false,
+          "fill_ratio": 0.771,
+          "geometry_ir_kind": "CircleBackground",
+          "geometry_ir_bbox": [
+            0.07143,
+            0.27273,
+            0.85714,
+            0.54545
+          ]
+        },
+        "color": {
+          "fill_rgb": [
+            233,
+            68,
+            68
+          ],
+          "stroke_rgb": [
+            237,
+            87,
+            88
+          ],
+          "fill_hex": "#E94444",
+          "stroke_hex": "#ED5758",
+          "fill_confidence": 0.4419,
+          "stroke_confidence": 0.3792
+        },
+        "confidence": 0.9396,
+        "roi": {
+          "type": "image",
+          "hint": "full_image",
+          "bbox": {
+            "x": 0.0,
+            "y": 0.0,
+            "width": 28.0,
+            "height": 44.0
           }
         },
         "evidence": {
@@ -112,13 +280,100 @@
     },
     {
       "schema_version": "plan_b_perception_linkage_record_v1",
-      "variant": "GE9021_7M",
-      "image_path": "artifacts/images_to_convert/GE9021_7M.jpg",
+      "variant": "GE9012_6M",
+      "image_path": "artifacts/images_to_convert/GE9012_6M.jpg",
       "status": "evaluated",
-      "plan_b_reason": "Run-RQ-Triage: zweiter aktueller Diff-Fall oberhalb der Review-Grenze.",
-      "description": "Schmales GE-Symbol mit vertikaler Kontur und farbigen Fl\u00e4chen.",
+      "plan_b_reason": "Run-SR-Triage: vierter aktueller Diff-Fall oberhalb der Review-Grenze.",
+      "description": "Breites GE-Symbol mit horizontaler Struktur und farbigen Fl\u00e4chen.",
       "perception_lerneffekt": {
-        "question": "Wird die dominante vertikale Struktur als katalogfreier Linien-/Polygon- oder Farbfl\u00e4chenkandidat erkannt?",
+        "question": "Wird die horizontale Struktur als katalogfreier Linien-/Polygon- oder Farbfl\u00e4chenkandidat erkannt?",
+        "expected_first_primitive": "line",
+        "expected_candidate_kinds": [
+          "color_patch",
+          "line",
+          "polygon_path",
+          "rectangle"
+        ],
+        "expected_seed_kinds": [
+          "ColorPatch",
+          "HorizontalRule",
+          "PolygonPath",
+          "RectBorder"
+        ],
+        "decision": "nur Sonderfall",
+        "matched_candidate_kinds": [
+          "rectangle"
+        ],
+        "matched_seed_kinds": [],
+        "top_candidate_kind": "rectangle",
+        "top_confidence": 0.8826,
+        "next_action": "Als Perception-Hinweis dokumentieren, aber noch keinen generischen Seed erzwingen."
+      },
+      "candidate_count": 6,
+      "top_candidate": {
+        "schema_version": "perception_primitive_candidate_v1",
+        "kind": "rectangle",
+        "bbox": {
+          "x": 0.0,
+          "y": 11.0,
+          "width": 38.0,
+          "height": 4.0
+        },
+        "center": {
+          "x": 19.0,
+          "y": 13.0
+        },
+        "geometry": {
+          "width_px": 3.0,
+          "height_px": 37.0,
+          "angle_deg": -90.0,
+          "area_px": 111.0,
+          "extent": 0.7303
+        },
+        "color": {
+          "fill_rgb": [
+            116,
+            137,
+            158
+          ],
+          "stroke_rgb": [
+            162,
+            176,
+            190
+          ],
+          "fill_hex": "#74899E",
+          "stroke_hex": "#A2B0BE",
+          "fill_confidence": 0.7026,
+          "stroke_confidence": 0.5387
+        },
+        "confidence": 0.8826,
+        "roi": {
+          "type": "image",
+          "hint": "full_image",
+          "bbox": {
+            "x": 0.0,
+            "y": 0.0,
+            "width": 60.0,
+            "height": 20.0
+          }
+        },
+        "evidence": {
+          "detector": "contour",
+          "vertices": 4,
+          "convex": true
+        },
+        "source": "pf8_plan_b_perception_linkage"
+      }
+    },
+    {
+      "schema_version": "plan_b_perception_linkage_record_v1",
+      "variant": "GE9013_1M",
+      "image_path": "artifacts/images_to_convert/GE9013_1M.jpg",
+      "status": "evaluated",
+      "plan_b_reason": "Run-SR-Triage: f\u00fcnfter aktueller Diff-Fall oberhalb der Review-Grenze.",
+      "description": "Schmales GE-Symbol mit vertikaler Struktur und farbigen Fl\u00e4chen.",
+      "perception_lerneffekt": {
+        "question": "Wird die vertikale Struktur als katalogfreier Linien-/Polygon- oder Farbfl\u00e4chenkandidat erkannt?",
         "expected_first_primitive": "line",
         "expected_candidate_kinds": [
           "color_patch",
@@ -134,34 +389,35 @@
         ],
         "decision": "nur Sonderfall",
         "matched_candidate_kinds": [
-          "line"
+          "line",
+          "rectangle"
         ],
         "matched_seed_kinds": [],
         "top_candidate_kind": "line",
         "top_confidence": 1.0,
         "next_action": "Als Perception-Hinweis dokumentieren, aber noch keinen generischen Seed erzwingen."
       },
-      "candidate_count": 6,
+      "candidate_count": 7,
       "top_candidate": {
         "schema_version": "perception_primitive_candidate_v1",
         "kind": "line",
         "bbox": {
-          "x": 2.0,
+          "x": 14.125,
           "y": 0.0,
-          "width": 4.0,
-          "height": 57.0
+          "width": 1.75,
+          "height": 39.0
         },
         "center": {
-          "x": 4.0,
-          "y": 28.5
+          "x": 15.0,
+          "y": 19.5
         },
         "geometry": {
           "orientation": "vertical",
-          "x_center": 4.0,
+          "x_center": 15.0,
           "y_top": 0.0,
-          "y_bottom": 57.0,
-          "length_px": 57.0,
-          "stroke_width_px": 4.0,
+          "y_bottom": 39.0,
+          "length_px": 39.0,
+          "stroke_width_px": 1.75,
           "angle_deg": 90.0
         },
         "color": {
@@ -192,11 +448,11 @@
     }
   ],
   "metrics": {
-    "samples": 2,
-    "evaluated_samples": 2,
+    "samples": 5,
+    "evaluated_samples": 5,
     "generalisiert": 1,
-    "nur_sonderfall": 1,
-    "noch_nicht_erkannt": 0,
+    "nur_sonderfall": 2,
+    "noch_nicht_erkannt": 2,
     "all_have_perception_lerneffekt": true
   }
 }

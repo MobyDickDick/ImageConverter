@@ -1,3 +1,6 @@
 variant,image_path,status,expected_first_primitive,decision,matched_candidate_kinds,matched_seed_kinds,top_candidate_kind,top_confidence,next_action
-GE1001_M,artifacts/images_to_convert/GE1001_M.jpg,evaluated,color_patch,generalisiert,"circle,line",CircleBackground,circle,0.952,Im nächsten Plan-B-Paket als vorinitialisierten Geometry-IR-Seed protokollieren.
-GE9021_7M,artifacts/images_to_convert/GE9021_7M.jpg,evaluated,line,nur Sonderfall,line,,line,1.0,"Als Perception-Hinweis dokumentieren, aber noch keinen generischen Seed erzwingen."
+DLG0021,artifacts/images_to_convert/DLG0021.jpg,evaluated,color_patch,noch nicht erkannt,,,horizontal_rule,0.99,Vor der Plan-B-Umsetzung zusätzliche Detector-/ROI-Regel oder manuelle Seed-Annahme festhalten.
+GE1410_L,artifacts/images_to_convert/GE1410_L.jpg,evaluated,color_patch,generalisiert,"circle,line",CircleBackground,line,0.92,Im nächsten Plan-B-Paket als vorinitialisierten Geometry-IR-Seed protokollieren.
+SE0041_1,artifacts/images_to_convert/SE0041_1.jpg,evaluated,line,noch nicht erkannt,,,circle,0.9396,Vor der Plan-B-Umsetzung zusätzliche Detector-/ROI-Regel oder manuelle Seed-Annahme festhalten.
+GE9012_6M,artifacts/images_to_convert/GE9012_6M.jpg,evaluated,line,nur Sonderfall,rectangle,,rectangle,0.8826,"Als Perception-Hinweis dokumentieren, aber noch keinen generischen Seed erzwingen."
+GE9013_1M,artifacts/images_to_convert/GE9013_1M.jpg,evaluated,line,nur Sonderfall,"line,rectangle",,line,1.0,"Als Perception-Hinweis dokumentieren, aber noch keinen generischen Seed erzwingen."
