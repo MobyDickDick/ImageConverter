@@ -198,6 +198,13 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
         or checkbox_token_hint
     )
     checkbox_hint = checkmark_hint and checkbox_token_hint
+    chart_triangle_hint = (
+        _has_any(desc, ("diagrammlinie", "diagramm", "x-/y-achse", "x-achse", "y-achse"))
+        and _has_any(desc, ("dreieck", "dreiecke"))
+        and _has_any(desc, ("rot", "red"))
+        and _has_any(desc, ("blau", "blue"))
+        and _has_any(desc, ("graue horizontale linie", "grauer horizontaler linie", "horizontal"))
+    )
     yellow_u_loop_hint = _has_any(desc, ("u-form", "u form", "u-förmig", "ufoermig", "u förmig", "u-bogen", "u bogen")) and _has_any(
         desc, ("gelb", "yellow", "senkrecht", "vertikal", "bogen", "unten", "rund")
     )
@@ -517,6 +524,80 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
                             {"role": "outer_shadow", "kind": "LineSegment"},
                         ],
                     },
+                },
+            ]
+        )
+        return elements
+
+    if chart_triangle_hint:
+        elements.extend(
+            [
+                {
+                    "kind": "ColorPatch",
+                    "id": "diagram_background",
+                    "bbox": [0.0, 0.0, 1.0, 1.0],
+                    "fill": "#ffffff",
+                    "stroke": "none",
+                },
+                {
+                    "kind": "PolygonPath",
+                    "id": "diagram_y_axis",
+                    "points": [[0.020, 0.000], [0.020, 0.980]],
+                    "fill": "none",
+                    "stroke": "#000000",
+                    "stroke_width": 0.040,
+                    "linecap": "butt",
+                    "role": "y_axis",
+                },
+                {
+                    "kind": "PolygonPath",
+                    "id": "diagram_x_axis",
+                    "points": [[0.000, 0.980], [1.000, 0.980]],
+                    "fill": "none",
+                    "stroke": "#000000",
+                    "stroke_width": 0.040,
+                    "linecap": "butt",
+                    "role": "x_axis",
+                },
+                {
+                    "kind": "PolygonPath",
+                    "id": "diagram_horizontal_reference",
+                    "points": [[0.030, 0.500], [0.985, 0.500]],
+                    "fill": "none",
+                    "stroke": "#8a8a8a",
+                    "stroke_width": 0.040,
+                    "linecap": "butt",
+                    "role": "horizontal_reference_line",
+                },
+                {
+                    "kind": "PolygonPath",
+                    "id": "upper_red_triangle",
+                    "points": [[0.280, 0.175], [0.845, 0.175], [0.515, 0.480]],
+                    "fill": "#c7352b",
+                    "stroke": "#8f8f8f",
+                    "stroke_width": 0.030,
+                    "linejoin": "round",
+                    "role": "upper_triangle",
+                    "primitive_decomposition": {
+                        "schema_version": "chart_triangle_pair_decomposition_v1",
+                        "primitives": [
+                            {"role": "black_y_axis", "kind": "LineSegment"},
+                            {"role": "black_x_axis", "kind": "LineSegment"},
+                            {"role": "grey_horizontal_reference", "kind": "LineSegment"},
+                            {"role": "upper_red_triangle", "kind": "PolygonPath"},
+                            {"role": "lower_blue_triangle", "kind": "PolygonPath"},
+                        ],
+                    },
+                },
+                {
+                    "kind": "PolygonPath",
+                    "id": "lower_blue_triangle",
+                    "points": [[0.515, 0.525], [0.275, 0.850], [0.850, 0.850]],
+                    "fill": "#2b56b8",
+                    "stroke": "#8f8f8f",
+                    "stroke_width": 0.030,
+                    "linejoin": "round",
+                    "role": "lower_triangle",
                 },
             ]
         )
