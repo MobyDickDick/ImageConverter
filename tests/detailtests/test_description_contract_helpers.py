@@ -671,6 +671,45 @@ def test_description_parser_checkmark_geometry_ir_is_filename_invariant() -> Non
     assert first["geometry_ir"] == second["geometry_ir"]
 
 
+def test_description_parser_attaches_generic_chart_triangle_pair_geometry_ir() -> None:
+    description = (
+        "Diagrammlinie (x-/y-Achse schwarz), graue horizontale Linie, zwei Dreiecke, "
+        "welche sich in einer Spitze zusammen mit der grauen treffen. Oberes Dreieck "
+        "ist rot, unteres Dreieck ist blau."
+    )
+
+    _desc, params = _parse(description)
+
+    assert params["contract_status"] == "ok"
+    assert [element["kind"] for element in params["geometry_ir"]] == [
+        "ColorPatch",
+        "PolygonPath",
+        "PolygonPath",
+        "PolygonPath",
+        "PolygonPath",
+        "PolygonPath",
+    ]
+    assert [element["role"] for element in params["geometry_ir"][1:]] == [
+        "y_axis",
+        "x_axis",
+        "horizontal_reference_line",
+        "upper_triangle",
+        "lower_triangle",
+    ]
+    assert params["geometry_ir"][4]["primitive_decomposition"]["schema_version"] == "chart_triangle_pair_decomposition_v1"
+
+
+def test_description_parser_chart_triangle_pair_geometry_ir_is_filename_invariant() -> None:
+    description = "Diagramm mit schwarzer x-Achse und y-Achse, graue horizontale Linie, rotes oberes Dreieck und blaues unteres Dreieck."
+    mapping = {"NEUTRAL_CHART_A": description, "NEUTRAL_CHART_B": description}
+    reflection = Reflection(mapping)
+
+    _first_desc, first = reflection.parse_description("NEUTRAL_CHART_A", "neutral-chart-alpha.png")
+    _second_desc, second = reflection.parse_description("NEUTRAL_CHART_B", "renamed-chart-input.png")
+
+    assert first["geometry_ir"] == second["geometry_ir"]
+
+
 def test_description_parser_attaches_generic_yellow_u_loop_geometry_ir() -> None:
     description = (
         "Weißer schmaler Hintergrund mit gelber U-Form: zwei senkrechte gelbe Linien "
