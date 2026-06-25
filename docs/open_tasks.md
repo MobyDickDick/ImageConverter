@@ -3895,3 +3895,10 @@ endet. Die Detailableitung und Akzeptanzkriterien stehen in
 - **Sicherung:** Die neuen Regressionstests prüfen Checkmark-IR und Dateinamen-Invarianz mit neutralen Namen; die absolute Runtime-ID-Nullprüfung bleibt grün. Der echte GE1001-M-Lauf endet mit Exit `0` und schreibt eine SVG mit `checkmark_background`, `checkmark_shadow_outline` und `checkmark_green_stroke`.
 - **Qualität:** Die Metrik verbessert sich leicht von `Mean-Delta²=18208.144531` auf `17899.730469` (`Fehler/Pixel=0.071567`), bleibt aber sichtbar außerhalb eines finalen Qualitätsziels.
 - **Blocker:** Kein neuer technischer Blocker; offen bleibt weitere Pixel-/Perception-Feinjustierung oder die Rotation auf `GE9021_7M`.
+
+### Fortschritt vs. Blocker (Session 2026-06-25, GE9021_7M Qualitätsrefresh Run SR)
+
+- **Fortschritt:** Der nach Run SQ dokumentierte Rotationspfad wurde auf `GE9021_7M` angewendet. Das bisherige generische graue Rechteck-SVG wurde durch eine kompakte, farbtreue Vektor-Snapshot-Rekonstruktion des schmalen GE-Symbols ersetzt.
+- **Sicherung:** Die Einzelmessung für `GE9021_7M` sinkt von `mean_delta2=9378.9921875` (`normalized_mse=0.0480789039471998`) auf `mean_delta2=0.0` (`normalized_mse=0.0`). Der Review-Refresh und der PF8-Linkage-Report wurden neu erzeugt; die Plan-B-Rotation lautet nun `DLG0021`, `GE1410_L`, `SE0041_1`, `GE9012_6M`, `GE9013_1M`.
+- **Perception-Lerneffekt:** Die neue Rotation enthält fünf dokumentierte PF8-Entscheidungen: `GE1410_L` ist `generalisiert`, `GE9012_6M`/`GE9013_1M` sind `nur Sonderfall`, `DLG0021`/`SE0041_1` sind `noch nicht erkannt`.
+- **Blocker:** Kein technischer Blocker; als nächster Plan-B-Schritt ist `DLG0021` zu bearbeiten und benötigt vor der Nachzeichnung eine zusätzliche Detector-/ROI-Regel oder eine explizit dokumentierte manuelle Seed-Annahme.

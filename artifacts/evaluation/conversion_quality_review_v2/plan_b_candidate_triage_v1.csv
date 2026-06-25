@@ -1,3 +1,6 @@
 priority,variant,source,image_path,svg_path,width,height,mean_delta2,normalized_mse,status,image_area
-1,GE1001_M,diff_inventory,artifacts/images_to_convert/GE1001_M.jpg,artifacts/converted_images/converted_svgs/GE1001_M.svg,25,25,18208.14453125,0.09333920046776881,ok,625
-2,GE9021_7M,diff_inventory,artifacts/images_to_convert/GE9021_7M.jpg,artifacts/converted_images/converted_svgs/GE9021_7M.svg,20,60,9378.9921875,0.0480789039471998,ok,1200
+1,DLG0021,diff_inventory,artifacts/images_to_convert/DLG0021.jpg,artifacts/converted_images/converted_svgs/DLG0021.svg,24,24,24856.818359375,0.1274218549756504,ok,576
+2,GE1410_L,diff_inventory,artifacts/images_to_convert/GE1410_L.jpg,artifacts/converted_images/converted_svgs/GE1410_L.svg,25,25,24170.25390625,0.12390236527617583,ok,625
+3,SE0041_1,diff_inventory,artifacts/images_to_convert/SE0041_1.jpg,artifacts/converted_images/converted_svgs/SE0041_1.svg,28,44,22543.97265625,0.11556566785210816,ok,1232
+4,GE9012_6M,diff_inventory,artifacts/images_to_convert/GE9012_6M.jpg,artifacts/converted_images/converted_svgs/GE9012_6M.svg,60,20,16423.2109375,0.08418921408432654,ok,1200
+5,GE9013_1M,diff_inventory,artifacts/images_to_convert/GE9013_1M.jpg,artifacts/converted_images/converted_svgs/GE9013_1M.svg,20,60,16001.943359375,0.0820296981129053,ok,1200

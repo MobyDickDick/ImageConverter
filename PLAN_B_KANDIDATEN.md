@@ -2,18 +2,21 @@
 
 Ziel: maximal **5** aktive JPG-Kandidaten, die derzeit noch nicht zufriedenstellend konvertieren, aber voraussichtlich nicht "hoffnungslos komplex" sind.
 
-## Aktuelle Kandidaten (Stand: 2026-06-21, Review-Refresh Run RQ)
+## Aktuelle Kandidaten (Stand: 2026-06-25, Review-Refresh Run SR)
 
-Der reproduzierbare Review mit `tools/review_conversion_quality.py --max-candidates 5` findet aktuell zwei qualifizierte Diff-Fälle oberhalb der Review-Grenze. Die Reihenfolge folgt der automatisch erzeugten Triage `artifacts/evaluation/conversion_quality_review_v2/plan_b_candidate_triage_v1.csv`. Wichtig: Die Review-Grenze ist nur ein grobes technisches Gate; die harte Pixelnähe-Metrik `mean_delta2 <= 18.000` zeigt weiterhin, dass beide Diff-Paare sichtbar verbesserungsbedürftig sind.
+Der reproduzierbare Review mit `tools/review_conversion_quality.py --max-candidates 5` rotiert nach dem abgeschlossenen `GE9021_7M`-Qualitätsrefresh auf fünf qualifizierte Diff-Fälle oberhalb der Review-Grenze. Die Reihenfolge folgt der automatisch erzeugten Triage `artifacts/evaluation/conversion_quality_review_v2/plan_b_candidate_triage_v1.csv`. Wichtig: Die Review-Grenze ist nur ein grobes technisches Gate; die harte Pixelnähe-Metrik `mean_delta2 <= 18.000` zeigt weiterhin, dass alle fünf Diff-Paare sichtbar verbesserungsbedürftig sind.
 
-1. `GE1001_M` – höchster aktueller `normalized_mse`-Fehler der kompakten Plan-B-Triage (`mean_delta2=18208.14453125`, `normalized_mse=0.09333920046776881`).
-2. `GE9021_7M` – zweiter aktueller Diff-Fall oberhalb der Review-Grenze (`mean_delta2=9378.9921875`, `normalized_mse=0.0480789039471998`).
+1. `DLG0021` – höchster aktueller kompakter Diff-Fehler der Triage (`mean_delta2=24856.818359375`, `normalized_mse=0.1274218549756504`).
+2. `GE1410_L` – zweiter aktueller kompakter Diff-Fall oberhalb der Review-Grenze (`mean_delta2=24170.25390625`, `normalized_mse=0.12390236527617583`).
+3. `SE0041_1` – dritter aktueller Diff-Fall mit mittlerer Symbolfläche (`mean_delta2=22543.97265625`, `normalized_mse=0.11556566785210816`).
+4. `GE9012_6M` – breiter GE-Diff-Fall oberhalb der Review-Grenze (`mean_delta2=16423.2109375`, `normalized_mse=0.08418921408432654`).
+5. `GE9013_1M` – schmaler GE-Diff-Fall oberhalb der Review-Grenze (`mean_delta2=16001.943359375`, `normalized_mse=0.0820296981129053`).
 
 ## Perception-Lerneffekt (Pflichtabschnitt ab PF8)
 
-Die Run-RQ-Triage verschiebt die aktive Rotation von der GE9002-Familie auf zwei kleinere GE-Diff-Fälle. Vor der konkreten Nachzeichnung ist für `GE1001_M` zu prüfen, ob die dominanten grafischen Primitive bereits als katalogfreie Perception-Kandidaten (`circle`, `line`, `polygon_path`, `text_glyph` oder `color_patch`) auftauchen. Der Lerneffekt wird pro Kandidat im nächsten Arbeitspaket als `generalisiert`, `nur Sonderfall` oder `noch nicht erkannt` dokumentiert.
+Die Run-SR-Triage ersetzt die erledigte `GE1001_M`/`GE9021_7M`-Rotation durch fünf kleinere Diff-Fälle. Vor der konkreten Nachzeichnung ist für `DLG0021` zu prüfen, ob die dominanten grafischen Primitive bereits als katalogfreie Perception-Kandidaten (`color_patch`, `polygon_path`, `line`, `rectangle` oder `text_glyph`) auftauchen. Der Lerneffekt wird pro Kandidat im nächsten Arbeitspaket als `generalisiert`, `nur Sonderfall` oder `noch nicht erkannt` dokumentiert.
 
-Der PF8-Linkage-Report wurde als gekoppelte Plan-B-Aufgabe erneut auf die neue GE1001/GE9021-Rotation ausgerichtet (`2/2` Samples mit dokumentiertem Perception-Lerneffekt): `GE1001_M` ist für Kreis-/Linien-Seeds `generalisiert`, `GE9021_7M` liefert zunächst einen Linienhinweis als `nur Sonderfall`.
+Der PF8-Linkage-Report wurde als gekoppelte Plan-B-Aufgabe erneut auf die neue Rotation ausgerichtet (`5/5` Samples mit dokumentiertem Perception-Lerneffekt): `GE1410_L` ist für Kreis-/Linien-Seeds `generalisiert`, `GE9012_6M` und `GE9013_1M` liefern zunächst Sonderfall-Hinweise, während `DLG0021` und `SE0041_1` noch zusätzliche Detector-/ROI-Regeln oder eine manuelle Seed-Annahme benötigen.
 
 ## Pflege-Regel (fortan)
 
