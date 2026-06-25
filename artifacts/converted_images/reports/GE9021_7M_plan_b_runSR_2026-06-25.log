@@ -1,0 +1,18 @@
+[INFO] Schreibe Konsolen-Output nach: /workspace/ImageConverter/imageCompositeConverter.local.log
+[INFO] Konvertiere GE9021_7M.jpg | Parameter: Iterationen=64, Validierungsrunden=6
+
+--- Verarbeite GE9021_7M.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[INFO] Konvertiert GE9021_7M.jpg | Parameter: mode=auto, label=M, variant_name=GE9021_7M | Qualität: Fehler/Pixel=0.024197, Mean-Delta²=8922.235352, Raumscore=18846.066384, beste Iteration=1, ausgeführt=64/64 | Dauer=0.3s
+[INFO] Konvertiere GE9021_7M.jpg | Parameter: Iterationen=65, Validierungsrunden=7
+
+--- Verarbeite GE9021_7M.jpg ---
+Bildbeschreibung: Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz.
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[INFO] Konvertiert GE9021_7M.jpg | Parameter: mode=auto, label=M, variant_name=GE9021_7M | Qualität: Fehler/Pixel=0.024197, Mean-Delta²=8922.235352, Raumscore=18846.066384, beste Iteration=1, ausgeführt=65/65 | Dauer=0.2s
+[INFO] Übersichts-Kacheln erzeugt: diff=/tmp/ic-ge9021-runsr/reports/overview_diff_tiles.png, svg=/tmp/ic-ge9021-runsr/reports/overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: /tmp/ic-ge9021-runsr
