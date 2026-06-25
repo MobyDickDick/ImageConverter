@@ -12,7 +12,6 @@ DESCRIPTIONS = INPUT_DIR / "Finale_Wurzelformen_V3.xml"
 
 def test_ac08_regression_smoke_run_creates_expected_outputs(tmp_path: Path) -> None:
     """Run a tiny conversion slice to detect regressions in the conversion pipeline early."""
-    pytest.skip("AUFGABE: stabilisiere AC0800 smoke output (expected SVG/metrics drift in current env)")
     output_dir = tmp_path / "converted"
 
     exit_code = converter.main(
