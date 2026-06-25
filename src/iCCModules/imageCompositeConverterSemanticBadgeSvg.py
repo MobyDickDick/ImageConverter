@@ -8,6 +8,8 @@ from typing import Callable
 def _restore_ac0223_valve_head_defaults(params: dict, w: int, h: int) -> dict:
     """Restore neutral valve-head defaults after sparse quantization passes."""
     p = dict(params)
+    if str(p.get("head_style", "")).lower() == "square_badge":
+        return p
     valve_style = "ac0223_triple_valve"
     historical_token = "AC" + "0223"
     has_valve_style = str(p.get("head_style", "")).lower() == valve_style
@@ -174,7 +176,22 @@ def generateBadgeSvgImpl(
             )
         )
 
-    if p.get("circle_enabled", True) and str(p.get("ac0223_handle_style", "")).lower() != "square_diagonals":
+    if (
+        p.get("circle_enabled", True)
+        and str(p.get("ac0223_handle_style", "")).lower() != "square_diagonals"
+        and str(p.get("head_style", "")).lower() == "square_badge"
+    ):
+        side = max(0.0, float(p["r"]) * 2.0)
+        x = float(p["cx"]) - (side / 2.0)
+        y = float(p["cy"]) - (side / 2.0)
+        elements.append(
+            (
+                f'  <rect x="{x:.4f}" y="{y:.4f}" width="{side:.4f}" height="{side:.4f}" '
+                f'fill="{grayhex_fn(p["fill_gray"])}" stroke="{grayhex_fn(p["stroke_gray"])}" '
+                f'stroke-width="{p["stroke_circle"]:.4f}"/>'
+            )
+        )
+    elif p.get("circle_enabled", True) and str(p.get("ac0223_handle_style", "")).lower() != "square_diagonals":
         elements.append(
             (
                 f'  <circle cx="{p["cx"]:.4f}" cy="{p["cy"]:.4f}" r="{p["r"]:.4f}" '

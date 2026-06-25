@@ -204,6 +204,15 @@ class Reflection:
                 inherited_params["documented_alias_refs"] = sorted(Reflection._extractDocumentedAliasRefs(desc))
                 inherited_params["description_fragments"] = description_fragments
                 inherited_params["variant_name"] = os.path.splitext(str(img_filename))[0].upper()
+                if "viereckig" in desc and ("anstatt rund" in desc or "statt rund" in desc):
+                    inherited_params["head_style"] = "square_badge"
+                    inherited_params["elements"] = [
+                        str(element).replace("Kreis", "Viereck").replace("kreis", "viereck")
+                        for element in inherited_params.get("elements", [])
+                    ]
+                    inherited_params["elements"].append(
+                        "GEOMETRIE: Referenz-Badge mit viereckigem Kopf statt rundem Kreis"
+                    )
                 return desc, inherited_params
 
         non_traceable_hint = Reflection._detect_non_traceable_hint(desc)
@@ -246,7 +255,7 @@ class Reflection:
 
     def _inherit_mode_from_reference(self, *, reference_symbol: str, img_filename: str, visited: set[str]) -> tuple[str, dict[str, object]] | None:
         reference_desc = self.raw_desc.get(reference_symbol)
-        if not reference_desc:
+        if not reference_desc and not reference_symbol.upper().startswith("AC08"):
             return None
         ref_desc_text, ref_params = self.parseDescription(reference_symbol, img_filename, _visited=set(visited))
         ref_mode = str(ref_params.get("mode", "")).strip()
