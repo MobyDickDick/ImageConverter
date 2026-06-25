@@ -6,7 +6,7 @@ Quelle: automatische Auswertung von xfail-Markierungen + 30s-Timeout-Policy.
 - [x] `test_convert_one_impl_semantic_mismatch_is_reported_as_failure` in `tests/detailtests/test_conversion_execution_helpers.py` — erledigt am 2026-05-21 (Failed_<name>.svg wird geschrieben)
 - [x] `test_convert_one_impl_unknown_status_is_recorded_as_failure` in `tests/detailtests/test_conversion_execution_helpers.py` — erledigt am 2026-05-21 (Failed_<name>.svg wird geschrieben)
 - [x] `test_convert_one_impl_trivial_placeholder_svg_is_marked_failed` in `tests/detailtests/test_conversion_execution_helpers.py` — erledigt am 2026-05-21 (Placeholder-SVG wird als Failed_<name>.svg markiert)
-- [ ] `test_ac08_regression_smoke_run_creates_expected_outputs` in `tests/test_conversion_regression_smoke.py` — AUFGABE: stabilisiere AC0800 smoke output (expected SVG/metrics drift in current env)
+- [x] `test_ac08_regression_smoke_run_creates_expected_outputs` in `tests/test_conversion_regression_smoke.py` — erledigt am 2026-06-25 (AC0800-Smoke läuft wieder grün und prüft SVG sowie Iteration_Log)
 
 ## Kandidat aus Laufzeitgrenze (30s)
 - [ ] `tests/test_satisfactory_regression_battery.py::test_satisfactory_successful_variants_reconversion_keeps_or_improves_quality` überschreitet 30s und wird als `AUFGABE` geführt.
