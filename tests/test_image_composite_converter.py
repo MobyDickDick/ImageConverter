@@ -5822,6 +5822,39 @@ def test_parse_description_marks_ac0811_as_semantic_badge() -> None:
     assert "SEMANTIC: senkrechter Strich hinter dem Kreis" in params["elements"]
 
 
+def test_parse_description_preserves_se0041_square_badge_override() -> None:
+    """SE0041 inherits AC0811 geometry but documents a square head instead of a circle."""
+    raw = {"SE0041": "Wie AC0811, jecoch ist der Kreis viereckig anstatt rund gezeichnet."}
+
+    desc, params = image_composite_converter.Reflection(raw).parse_description("SE0041", "SE0041_1.jpg")
+
+    assert "viereckig anstatt rund" in desc
+    assert params["mode"] == "semantic_badge"
+    assert params["head_style"] == "square_badge"
+    assert "AC0811" in params["documented_alias_refs"]
+    assert "GEOMETRIE: Referenz-Badge mit viereckigem Kopf statt rundem Kreis" in params["elements"]
+
+
+def test_generate_badge_svg_renders_square_badge_head() -> None:
+    """Square-head semantic badges should emit a rect head instead of a circle."""
+    params = {
+        "circle_enabled": True,
+        "head_style": "square_badge",
+        "cx": 14.0,
+        "cy": 12.0,
+        "r": 9.0,
+        "fill_gray": 217,
+        "stroke_gray": 128,
+        "stroke_circle": 1.0,
+        "draw_text": False,
+    }
+
+    svg = Action.generate_badge_svg(28, 44, params)
+
+    assert '<rect x="5.0000" y="3.0000" width="18.0000" height="18.0000"' in svg
+    assert "<circle" not in svg
+
+
 def test_parse_description_marks_ac0223_as_semantic_badge() -> None:
     """AC0223 should use the semantic badge path with top connector + valve-head hint."""
     desc, params = image_composite_converter.Reflection({}).parse_description("AC0223", "AC0223_L.jpg")
