@@ -5843,6 +5843,19 @@ def test_backbottom_square_description_builds_catalog_free_rect_ir() -> None:
     assert '<rect id="backbottom_light_grey_square" x="0" y="0" width="60" height="20" fill="#d8d8d8" stroke="none"' in svg
 
 
+def test_backbottom_square_description_scales_to_vertical_variant_canvas() -> None:
+    """The light-grey square contract should scale by canvas dimensions, not by GE family IDs."""
+    from src.iCCModules.imageCompositeConverterGeometryIr import runtime as geometry_ir_helpers
+
+    description = "Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz."
+
+    geometry_ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(description)
+    svg = geometry_ir_helpers.renderGeometryIrToSvgImpl(20, 60, geometry_ir)
+
+    assert '<rect id="backbottom_light_grey_square" x="0" y="0" width="20" height="60" fill="#d8d8d8" stroke="none"' in svg
+    assert "GE9013" not in svg
+
+
 def test_parse_description_preserves_se0041_square_badge_override() -> None:
     """SE0041 inherits AC0811 geometry but documents a square head instead of a circle."""
     raw = {"SE0041": "Wie AC0811, jecoch ist der Kreis viereckig anstatt rund gezeichnet."}
