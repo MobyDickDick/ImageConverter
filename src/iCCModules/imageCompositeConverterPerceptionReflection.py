@@ -60,6 +60,8 @@ def _build_description_contract(desc_raw: str) -> dict[str, object]:
         "kopressor",
         "ventil",
         "kelle",
+        "haken",
+        "checkbox",
     )
     condition_tokens = ("wenn", "falls", "nur", "außer", "nicht", "ohne", "mit")
     has_reference = any(token in normalized for token in reference_tokens)

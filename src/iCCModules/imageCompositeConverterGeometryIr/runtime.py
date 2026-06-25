@@ -191,9 +191,13 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
     rect_hint = _has_any(desc, ("rechteck", "viereck", "kühlelement", "heizelement", "rechteck-plus-minus-bildbeschreibung"))
     gradient_hint = _has_any(desc, ("farbverlauf", "gradient")) and _has_any(desc, ("horizontal", "dunkel-hell-dunkel", "dunkel–hell–dunkel"))
     diagonal_hint = _has_any(desc, ("diagonal", "diagonale", "diagonalen", "andreaskreuz", "kreuz"))
-    checkmark_hint = _has_any(desc, ("haken", "checkmark", "check-mark", "prüfhaken", "haekchen", "häkchen")) and _has_any(
-        desc, ("grün", "gruen", "green", "schräg", "schraeg", "diagonal", "liniensegment", "schenkel")
+    checkmark_token_hint = _has_any(desc, ("haken", "checkmark", "check-mark", "prüfhaken", "haekchen", "häkchen"))
+    checkbox_token_hint = _has_any(desc, ("checkbox", "check box", "kästchen", "kaestchen"))
+    checkmark_hint = checkmark_token_hint and (
+        _has_any(desc, ("grün", "gruen", "green", "schräg", "schraeg", "diagonal", "liniensegment", "schenkel"))
+        or checkbox_token_hint
     )
+    checkbox_hint = checkmark_hint and checkbox_token_hint
     yellow_u_loop_hint = _has_any(desc, ("u-form", "u form", "u-förmig", "ufoermig", "u förmig", "u-bogen", "u bogen")) and _has_any(
         desc, ("gelb", "yellow", "senkrecht", "vertikal", "bogen", "unten", "rund")
     )
@@ -462,6 +466,28 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
                     "fill": "#ffffff",
                     "stroke": "none",
                 },
+                *(
+                    [
+                        {
+                            "kind": "RectBorder",
+                            "id": "checkbox_border",
+                            "bbox": [0.075, 0.130, 0.650, 0.720],
+                            "fill": "#ffffff",
+                            "stroke": "#7f7f7f",
+                            "stroke_width": 0.045,
+                            "role": "checkbox",
+                            "primitive_decomposition": {
+                                "schema_version": "checkbox_primitive_decomposition_v1",
+                                "primitives": [
+                                    {"role": "white_fill", "kind": "ColorPatch"},
+                                    {"role": "grey_border", "kind": "RectBorder"},
+                                ],
+                            },
+                        }
+                    ]
+                    if checkbox_hint
+                    else []
+                ),
                 {
                     "kind": "PolygonPath",
                     "id": "checkmark_shadow_outline",
