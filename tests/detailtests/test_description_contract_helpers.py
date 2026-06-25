@@ -628,3 +628,22 @@ def test_description_parser_checkmark_geometry_ir_is_filename_invariant() -> Non
     _second_desc, second = reflection.parse_description("NEUTRAL_B", "renamed-random-input.png")
 
     assert first["geometry_ir"] == second["geometry_ir"]
+
+
+def test_description_parser_attaches_generic_yellow_u_loop_geometry_ir() -> None:
+    description = (
+        "Weißer schmaler Hintergrund mit gelber U-Form: zwei senkrechte gelbe Linien "
+        "laufen links und rechts nach unten und sind unten durch einen runden gelben "
+        "Bogen verbunden."
+    )
+
+    _desc, params = _parse(description)
+
+    assert params["contract_status"] == "ok"
+    assert [element["kind"] for element in params["geometry_ir"]] == [
+        "ColorPatch",
+        "PolygonPath",
+    ]
+    loop = params["geometry_ir"][1]
+    assert loop["role"] == "u_loop"
+    assert loop["primitive_decomposition"]["schema_version"] == "u_loop_primitive_decomposition_v1"

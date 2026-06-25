@@ -194,6 +194,9 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
     checkmark_hint = _has_any(desc, ("haken", "checkmark", "check-mark", "prüfhaken", "haekchen", "häkchen")) and _has_any(
         desc, ("grün", "gruen", "green", "schräg", "schraeg", "diagonal", "liniensegment", "schenkel")
     )
+    yellow_u_loop_hint = _has_any(desc, ("u-form", "u form", "u-förmig", "ufoermig", "u förmig", "u-bogen", "u bogen")) and _has_any(
+        desc, ("gelb", "yellow", "senkrecht", "vertikal", "bogen", "unten", "rund")
+    )
     differential_pressure_hint = _has_any(desc, ("differenzdruckmessung", "dp")) and "doppelten grauen rand" in desc
     connector_free_hint = _has_any(desc, ("kreis", "kreisring")) and _has_any(
         desc,
@@ -486,6 +489,39 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
                             {"role": "short_rising_leg", "kind": "LineSegment"},
                             {"role": "long_rising_leg", "kind": "LineSegment"},
                             {"role": "outer_shadow", "kind": "LineSegment"},
+                        ],
+                    },
+                },
+            ]
+        )
+        return elements
+
+    if yellow_u_loop_hint:
+        elements.extend(
+            [
+                {
+                    "kind": "ColorPatch",
+                    "id": "u_loop_background",
+                    "bbox": [0.0, 0.0, 1.0, 1.0],
+                    "fill": "#ffffff",
+                    "stroke": "none",
+                },
+                {
+                    "kind": "PolygonPath",
+                    "id": "yellow_u_loop",
+                    "points": [[0.235, 0.000], [0.235, 0.835], [0.500, 0.965], [0.765, 0.835], [0.765, 0.000]],
+                    "fill": "none",
+                    "stroke": "#f2db18",
+                    "stroke_width": 0.115,
+                    "linecap": "butt",
+                    "linejoin": "round",
+                    "role": "u_loop",
+                    "primitive_decomposition": {
+                        "schema_version": "u_loop_primitive_decomposition_v1",
+                        "primitives": [
+                            {"role": "left_vertical_leg", "kind": "LineSegment"},
+                            {"role": "bottom_round_connector", "kind": "ArcSegment"},
+                            {"role": "right_vertical_leg", "kind": "LineSegment"},
                         ],
                     },
                 },
