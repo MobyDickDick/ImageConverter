@@ -6,7 +6,7 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-06-19)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `404` · Erledigt `358` · Offen `46`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `401` · Erledigt `358` · Offen `43`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -787,7 +787,8 @@ Deadlock-/Stagnationsschleifen.
   - 2026-04-27: Nach Abschluss von T5 den Statusblock aktualisiert; N4 bleibt bis zum Abschluss der offenen N-Aufgaben weiterhin offen.
 
 
-- [ ] T6: Sämtliche aktuell blockierenden Langläufer-Tests identifizieren und priorisiert abbauen (Stand: Volltest-Isolation vom 2026-05-03).
+- [x] T6: Sämtliche aktuell blockierenden Langläufer-Tests identifizieren und priorisiert abbauen (Stand: Volltest-Isolation vom 2026-05-03).
+  - 2026-06-25 (Run SW): Übergeordnete T6-Aufgabe geschlossen, weil alle dokumentierten T6-Teilpakete T6.1 bis T6.15 erledigt sind, die automatisierte Blocker-Inventur T6.11 existiert und der letzte Inventurlauf grün abgeschlossen wurde (`818 passed in 68.22s`).
   - 2026-05-14: T6-Inventur aktualisiert (siehe `docs/t6_blocking_langlaeufer_inventory_2026-05-14.md`): dominanter Blocker weiterhin N1/N2-Vollbereichslaufzeit; historischer Einzeltest-Blocker `test_global_search_skips_deterministic_track_after_strong_stochastic_gain` im Schnellrepro aktuell grün (`1 passed`, `0.18s`).
   - [x] T6-PB (Plan-B, 2026-05-14): Historischen Einzeltest-Blocker als Kurzrepro fahren, falls kein neuer sofortiger Langlauf-Abbau ohne Timeout möglich ist.
     - 2026-05-14 (Run 02): Wiederholung weiterhin grün mit Exit `0` (`1 passed`), Log: `artifacts/converted_images/reports/t6_planb_singletest_2026-05-14_run02.log`.
