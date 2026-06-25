@@ -178,6 +178,7 @@ Alle Markdown-Dokumente unter `docs/`, damit sie von `README.md` aus erreichbar 
 - [Nächstes Arbeitspaket – Run HA (2026-05-19)](next_arbeitspaket_2026-05-19_runHA.md)
 - [Nächstes Arbeitspaket – Run HB (2026-05-21)](next_arbeitspaket_2026-05-21_runHB.md)
 - [Nächstes Arbeitspaket – Run HC (2026-05-21)](next_arbeitspaket_2026-05-21_runHC.md)
+- [Optimization Tool Architecture](optimization_tool_architecture.md)
 - [Nächstes Arbeitspaket – Run HD (2026-05-21)](next_arbeitspaket_2026-05-21_runHD.md)
 - [Nächstes Arbeitspaket – Run HI (2026-05-21)](next_arbeitspaket_2026-05-21_runHI.md)
 - [Nächstes Arbeitspaket – Run HJ (2026-05-21)](next_arbeitspaket_2026-05-21_runHJ.md)

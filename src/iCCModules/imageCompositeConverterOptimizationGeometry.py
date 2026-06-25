@@ -5,6 +5,12 @@ from __future__ import annotations
 import math
 from collections.abc import Callable
 
+from .imageCompositeConverterOptimizationTool import (
+    OptimizationProblem,
+    OptimizationVariable,
+    evaluateCandidateGridImpl,
+)
+
 
 def elementErrorForExtentImpl(
     img_orig: object,
@@ -345,8 +351,19 @@ def optimizeElementWidthBracketImpl(
                 snap_half_fn(clip_scalar_fn(current, low, high)),
             }
         )
+
+    def _width_error(candidate_params: dict[str, float]) -> float:
+        return float(element_error_for_width_fn(img_orig, params, element, float(candidate_params[key])))
+
+    optimization_result = evaluateCandidateGridImpl(
+        OptimizationProblem(
+            variables=(OptimizationVariable(key, low, high, current=current),),
+            error_fn=_width_error,
+        ),
+        {key: candidates},
+    )
     candidate_errors = [element_error_for_width_fn(img_orig, params, element, v) for v in candidates]
-    if not all(math.isfinite(e) for e in candidate_errors):
+    if not optimization_result.converged or not all(math.isfinite(e) for e in candidate_errors):
         logs.append(
             f"{element}: Breiten-Bracketing abgebrochen ({key}) wegen nicht-finiten Fehlern "
             + ", ".join(f"{v:.3f}->{e:.3f}" for v, e in zip(candidates, candidate_errors, strict=False))
@@ -354,7 +371,7 @@ def optimizeElementWidthBracketImpl(
         return False
 
     best_idx = argmin_index_fn(candidate_errors)
-    best_width = float(candidates[best_idx])
+    best_width = float(optimization_result.parameters.get(key, candidates[best_idx]))
     boundary_best = abs(best_width - low) < 0.02 or abs(best_width - high) < 0.02
     if boundary_best:
         snap_fn = (lambda v: float(round(v, 3))) if key.endswith("_font_scale") else snap_half_fn

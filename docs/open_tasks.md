@@ -6,7 +6,7 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-06-19)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `401` · Erledigt `358` · Offen `43`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `401` · Erledigt `359` · Offen `42`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -919,7 +919,7 @@ Abarbeitungsregel: Nach jedem Bearbeitungsschritt wird bei weiterhin offenen Auf
 
 ## Architektur-Backlog (added 2026-04-25)
 
-- [ ] A1: Optimierungsteil als eigenständiges Tool modularisieren.
+- [x] A1: Optimierungsteil als eigenständiges Tool modularisieren.
   - 2026-05-06: Vorbereitender Entkopplungsschritt ergänzt: neues Modul `src/iCCModules/imageCompositeConverterImageBackend.py` mit `ImageBackend`-Vertrag, `OpenCvImageBackend`, `PurePythonImageBackend` und `pickImageBackendImpl` als Basis für backend-unabhängige Pfade.
   - Ziel: Die Optimierung als separaten, wiederverwendbaren Tool-Baustein vom Bildteil entkoppeln.
   - Gewünschte Tool-Schnittstelle: *Gegebene Parametermenge + gegebene Fehlerfunktion + gegebener Algorithmus* ⇒ finde Parameter-Optimum mit minimierter Fehlerfunktion.
@@ -928,6 +928,7 @@ Abarbeitungsregel: Nach jedem Bearbeitungsschritt wird bei weiterhin offenen Auf
     - Klare API/Interface-Definition (Inputs/Outputs, Nebenbedingungen, Abbruchkriterien).
     - Mindestens ein bestehender Optimierungspfad nutzt die Tool-Schnittstelle statt direkter In-Place-Optimierungslogik.
     - Dokumentation in `docs/` mit Architekturdiagramm oder Ablaufbeschreibung (`image part` ↔ `optimization tool`).
+  - 2026-06-25 (Run SN): `imageCompositeConverterOptimizationTool.py` ergänzt den generischen v1-Optimierungsvertrag (`OptimizationVariable`, `OptimizationProblem`, `OptimizationResult`, `evaluateCandidateGridImpl`). Der bestehende Element-Breiten-Bracketing-Pfad delegiert die Kandidatenauswahl nun an diese Tool-Schnittstelle; Rendering und Fehlerfunktion bleiben als Callback im Bildteil. Architektur und Ablauf sind in `docs/optimization_tool_architecture.md` dokumentiert, fokussierte Tool-/Breiten-Regressionen sind grün.
 
 ## Test-Follow-ups (added 2026-04-20)
 
