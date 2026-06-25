@@ -5822,6 +5822,27 @@ def test_parse_description_marks_ac0811_as_semantic_badge() -> None:
     assert "SEMANTIC: senkrechter Strich hinter dem Kreis" in params["elements"]
 
 
+
+def test_backbottom_square_description_builds_catalog_free_rect_ir() -> None:
+    """BackBottom alias descriptions should produce a generic light-grey rectangle contract."""
+    from src.iCCModules.imageCompositeConverterGeometryIr import runtime as geometry_ir_helpers
+
+    description = "Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz."
+
+    geometry_ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(description)
+    rect = next(element for element in geometry_ir if element["kind"] == "RectBorder")
+    constraints = geometry_ir_helpers.buildDescriptionConstraintsImpl(description)
+    svg = geometry_ir_helpers.renderGeometryIrToSvgImpl(60, 20, geometry_ir)
+
+    assert rect["id"] == "backbottom_light_grey_square"
+    assert rect["bbox"] == [0.0, 0.0, 1.0, 1.0]
+    assert rect["fill"] == "#d8d8d8"
+    assert rect["stroke"] == "none"
+    assert rect["primitive_decomposition"]["schema_version"] == "light_grey_square_decomposition_v1"
+    assert constraints["uncertainty"]["status"] == "ok"
+    assert '<rect id="backbottom_light_grey_square" x="0" y="0" width="60" height="20" fill="#d8d8d8" stroke="none"' in svg
+
+
 def test_parse_description_preserves_se0041_square_badge_override() -> None:
     """SE0041 inherits AC0811 geometry but documents a square head instead of a circle."""
     raw = {"SE0041": "Wie AC0811, jecoch ist der Kreis viereckig anstatt rund gezeichnet."}

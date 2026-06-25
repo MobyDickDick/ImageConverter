@@ -188,7 +188,7 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
         return []
 
     elements: list[dict[str, object]] = []
-    rect_hint = _has_any(desc, ("rechteck", "viereck", "kühlelement", "heizelement", "rechteck-plus-minus-bildbeschreibung"))
+    rect_hint = _has_any(desc, ("rechteck", "viereck", "quadrat", "kühlelement", "heizelement", "rechteck-plus-minus-bildbeschreibung"))
     gradient_hint = _has_any(desc, ("farbverlauf", "gradient")) and _has_any(desc, ("horizontal", "dunkel-hell-dunkel", "dunkel–hell–dunkel"))
     diagonal_hint = _has_any(desc, ("diagonal", "diagonale", "diagonalen", "andreaskreuz", "kreuz"))
     checkmark_token_hint = _has_any(desc, ("haken", "checkmark", "check-mark", "prüfhaken", "haekchen", "häkchen"))
@@ -1400,19 +1400,31 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
                 element["bbox"] = tall_rect_bbox if heat_exchanger_hint else [0.32, 0.12, 0.36, 0.76]
 
     if rect_hint:
+        backbottom_hint = _has_any(desc, ("backbottom", "hellgraues quadrat"))
         rect_bbox = (
             tall_rect_bbox
             if heat_exchanger_hint
-            else ([0.32, 0.12, 0.36, 0.76] if "hochkant" in desc else [0.18, 0.24, 0.64, 0.56])
+            else (
+                [0.0, 0.0, 1.0, 1.0]
+                if backbottom_hint
+                else ([0.32, 0.12, 0.36, 0.76] if "hochkant" in desc else [0.18, 0.24, 0.64, 0.56])
+            )
         )
         elements.append(
             {
                 "kind": "RectBorder",
-                "id": "main_rect",
+                "id": "main_rect" if not backbottom_hint else "backbottom_light_grey_square",
                 "bbox": rect_bbox,
                 "fill": "none" if gradient_hint else "#d8d8d8",
-                "stroke": "#666666",
-                "stroke_width": 0.035,
+                "stroke": "#666666" if not backbottom_hint else "none",
+                "stroke_width": 0.035 if not backbottom_hint else 0.0,
+                **({
+                    "role": "reference_light_grey_square",
+                    "primitive_decomposition": {
+                        "schema_version": "light_grey_square_decomposition_v1",
+                        "primitives": [{"role": "light_grey_fill", "kind": "ColorPatch"}],
+                    },
+                } if backbottom_hint else {}),
             }
         )
 
