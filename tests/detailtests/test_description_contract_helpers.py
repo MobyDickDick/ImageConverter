@@ -619,6 +619,28 @@ def test_description_parser_attaches_generic_checkmark_geometry_ir() -> None:
     assert params["geometry_ir"][2]["primitive_decomposition"]["schema_version"] == "checkmark_primitive_decomposition_v1"
 
 
+def test_description_parser_attaches_generic_checkbox_checkmark_geometry_ir() -> None:
+    description = (
+        "Weißer quadratischer Hintergrund mit Haken vor Checkbox: grauer Rand, weiss gefüllt. "
+        "Der Haken hat eine grüne Füllung, einen vertikalen Farbverlauf und eine dunkelgraue Umrandung "
+        "aus zwei schrägen Liniensegmenten."
+    )
+
+    _desc, params = _parse(description)
+
+    assert params["contract_status"] == "ok"
+    assert [element["kind"] for element in params["geometry_ir"]] == [
+        "ColorPatch",
+        "RectBorder",
+        "PolygonPath",
+        "PolygonPath",
+    ]
+    checkbox = params["geometry_ir"][1]
+    assert checkbox["role"] == "checkbox"
+    assert checkbox["primitive_decomposition"]["schema_version"] == "checkbox_primitive_decomposition_v1"
+    assert params["geometry_ir"][3]["role"] == "checkmark"
+
+
 def test_description_parser_checkmark_geometry_ir_is_filename_invariant() -> None:
     description = "Weißer Hintergrund mit grünem Haken aus zwei schrägen Schenkeln und grauem Schatten."
     mapping = {"NEUTRAL_A": description, "NEUTRAL_B": description}
