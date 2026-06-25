@@ -641,6 +641,25 @@ def test_description_parser_attaches_generic_checkbox_checkmark_geometry_ir() ->
     assert params["geometry_ir"][3]["role"] == "checkmark"
 
 
+def test_description_parser_attaches_dlg_style_checkbox_checkmark_geometry_ir() -> None:
+    description = (
+        "Haken vor Checkbox (grauer Rand, weiss gefüllt). Haken: Füllung grüner "
+        "Farbverlauf oben dunkel, unten hellgrau. Dunkelgraue Umrandung"
+    )
+
+    _desc, params = _parse(description)
+
+    assert params["contract_status"] == "ok"
+    assert [element["kind"] for element in params["geometry_ir"]] == [
+        "ColorPatch",
+        "RectBorder",
+        "PolygonPath",
+        "PolygonPath",
+    ]
+    assert params["geometry_ir"][1]["role"] == "checkbox"
+    assert params["geometry_ir"][3]["role"] == "checkmark"
+
+
 def test_description_parser_checkmark_geometry_ir_is_filename_invariant() -> None:
     description = "Weißer Hintergrund mit grünem Haken aus zwei schrägen Schenkeln und grauem Schatten."
     mapping = {"NEUTRAL_A": description, "NEUTRAL_B": description}

@@ -3903,3 +3903,11 @@ endet. Die Detailableitung und Akzeptanzkriterien stehen in
 - **Sicherung:** Die Einzelmessung für `GE9021_7M` sinkt von `mean_delta2=9378.9921875` (`normalized_mse=0.0480789039471998`) auf `mean_delta2=0.0` (`normalized_mse=0.0`). Der Review-Refresh und der PF8-Linkage-Report wurden neu erzeugt; die Plan-B-Rotation lautet nun `DLG0021`, `GE1410_L`, `SE0041_1`, `GE9012_6M`, `GE9013_1M`.
 - **Perception-Lerneffekt:** Die neue Rotation enthält fünf dokumentierte PF8-Entscheidungen: `GE1410_L` ist `generalisiert`, `GE9012_6M`/`GE9013_1M` sind `nur Sonderfall`, `DLG0021`/`SE0041_1` sind `noch nicht erkannt`.
 - **Blocker:** Kein technischer Blocker; als nächster Plan-B-Schritt ist `DLG0021` zu bearbeiten und benötigt vor der Nachzeichnung eine zusätzliche Detector-/ROI-Regel oder eine explizit dokumentierte manuelle Seed-Annahme.
+
+### Fortschritt vs. Blocker (Session 2026-06-25, DLG0021 Checkbox-Checkmark-Primitive Run SS)
+
+- **Fortschritt:** Der nächste Plan-B-Kandidat `DLG0021` nutzt die vorhandene katalogfreie Checkbox-/Haken-Beschreibung nun als echten Description-Geometry-IR-Pfad: `PolygonPath` ist im Non-Composite-Runtime-Gate zugelassen, und Checkmark-Rollen werden als semantischer Beschreibungskandidat priorisiert.
+- **Sicherung:** Der neutrale DLG-Beschreibungstest und der bestehende Checkbox-Haken-Test laufen grün; die absolute Runtime-ID-Nullprüfung meldet weiterhin `0 occurrences`. Der isolierte CLI-Lauf für `DLG0021` endet mit Exit `0` und protokolliert `status=non_composite_description_geometry_ir` sowie `non_composite_selection=semantic_description_geometry`.
+- **Qualität:** Der isolierte Run verbessert `Mean-Delta²` von der Run-SR-Triage `24856.818359` auf `22598.726562`, bleibt aber sichtbar oberhalb des Qualitätsziels. Der Review-Refresh ohne Aktualisierung der allgemeinen Converted-SVG-Baseline lässt die aktive Rotation unverändert.
+- **Perception-Lerneffekt:** Der bisherige PF8-Befund `noch nicht erkannt` ist für die reine Bilddetektion weiterhin korrekt; die Beschreibungsschiene besitzt jetzt jedoch eine dokumentierte manuelle Seed-Annahme über den neutralen Checkbox-/Haken-Primitive-Contract.
+- **Nächster sinnvoller Schritt:** Entweder `DLG0021` pixelnäher tunen und danach aus der Rotation nehmen oder mit `GE1410_L` als nächstem automatischen Plan-B-Kandidaten fortfahren.
