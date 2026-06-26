@@ -2,9 +2,9 @@
 
 Ziel: maximal **5** aktive JPG-Kandidaten, die derzeit noch nicht zufriedenstellend konvertieren, aber voraussichtlich nicht "hoffnungslos komplex" sind.
 
-## Aktuelle Kandidaten (Stand: 2026-06-25, Review-Refresh Run SR)
+## Aktuelle Kandidaten (Stand: 2026-06-26, Review-Refresh Run TD)
 
-Der reproduzierbare Review mit `tools/review_conversion_quality.py --max-candidates 5` rotiert nach dem abgeschlossenen `GE9021_7M`-Qualitätsrefresh auf fünf qualifizierte Diff-Fälle oberhalb der Review-Grenze. Die Reihenfolge folgt der automatisch erzeugten Triage `artifacts/evaluation/conversion_quality_review_v2/plan_b_candidate_triage_v1.csv`. Wichtig: Die Review-Grenze ist nur ein grobes technisches Gate; die harte Pixelnähe-Metrik `mean_delta2 <= 18.000` zeigt weiterhin, dass alle fünf Diff-Paare sichtbar verbesserungsbedürftig sind.
+Der reproduzierbare Review mit `tools/review_conversion_quality.py --max-candidates 5` bestätigt nach Run TC erneut dieselben fünf qualifizierten Diff-Fälle oberhalb der Review-Grenze; seit Run TD musste kein neuer Kandidat nachrücken. Die Reihenfolge folgt der automatisch erzeugten Triage `artifacts/evaluation/conversion_quality_review_v2/plan_b_candidate_triage_v1.csv`. Wichtig: Die Review-Grenze ist nur ein grobes technisches Gate; die harte Pixelnähe-Metrik `mean_delta2 <= 18.000` zeigt weiterhin, dass alle fünf Diff-Paare sichtbar verbesserungsbedürftig sind.
 
 1. `DLG0021` – höchster aktueller kompakter Diff-Fehler der Triage (`mean_delta2=24856.818359375`, `normalized_mse=0.1274218549756504`); Run SS ergänzt einen katalogfreien Description-Geometry-IR-Pfad, Run SX ergänzt den beschriebenen vertikalen Checkmark-Stroke-Gradienten, Geometrie-/Pixel-Feintuning bleibt offen.
 2. `GE1410_L` – zweiter aktueller kompakter Diff-Fall oberhalb der Review-Grenze (`mean_delta2=24170.25390625`, `normalized_mse=0.12390236527617583`); Run ST ergänzt einen katalogfreien Diagramm-/Dreieck-Primitive-Contract, Run SZ verbessert die isolierte Pixelmetrik durch engere Dreiecksregistrierung auf `Mean-Delta²=1926.409546`; weiteres Achsen-/Antialiasing-Feintuning bleibt optional.
