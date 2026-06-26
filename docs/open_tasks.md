@@ -3919,3 +3919,10 @@ endet. Die Detailableitung und Akzeptanzkriterien stehen in
 - **Sicherung:** Detailtests prüfen die neutralen Parser-Koordinaten und die bestehende Gradient-SVG-Ausgabe; die absolute Runtime-ID-Nullprüfung meldet weiterhin `0 occurrences`. Der isolierte CLI-Lauf für `DLG0021` endet mit Exit `0`.
 - **Qualität:** Die isolierte CLI-Metrik verbessert sich gegenüber Run SX von `Mean-Delta²=26451.279297` (`Fehler/Pixel=0.100804`) auf `Mean-Delta²=24805.169922` (`Fehler/Pixel=0.091186`), bleibt aber sichtbar oberhalb des Qualitätsziels.
 - **Nächster sinnvoller Schritt:** Entweder `DLG0021` weiter an Haken-Konturstärke/Farbregistrierung tunen oder mit `GE1410_L` als nächstem automatischen Plan-B-Kandidaten fortfahren.
+
+### Fortschritt vs. Blocker (Session 2026-06-26, GE1410_L Diagramm-Dreieck-Feintuning Run SZ)
+
+- **Fortschritt:** Der nach Run SY dokumentierte Folgekandidat `GE1410_L` wurde pixelnäher getunt: Der katalogfreie Diagramm-/Dreieck-Contract nutzt nun engere obere/untere Dreieckspunkte, rasterpassendere Spitzenlagen sowie gemessennähere Füll- und Konturfarben.
+- **Sicherung:** Detailtests prüfen die neutralen Parser-Koordinaten und die bestehende Dateinamen-Invarianz; der isolierte CLI-Lauf für `GE1410_L` endet mit Exit `0`.
+- **Qualität:** Die isolierte Metrik verbessert sich von `Mean-Delta²=3206.457520` auf `1926.409546` (`Fehler/Pixel=0.016481`).
+- **Nächster sinnvoller Schritt:** In der Plan-B-Rotation mit `SE0041_1` fortfahren oder, falls die Rotation bei `GE1410_L` bleibt, Achsen-/Antialiasing-Feinheiten nachziehen.
