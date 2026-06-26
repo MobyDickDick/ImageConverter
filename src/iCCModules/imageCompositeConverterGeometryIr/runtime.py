@@ -1427,7 +1427,7 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
                 "kind": "RectBorder",
                 "id": "main_rect" if not backbottom_hint else "backbottom_light_grey_square",
                 "bbox": rect_bbox,
-                "fill": "none" if gradient_hint else "#d8d8d8",
+                "fill": "none" if gradient_hint else ("#e8e8e8" if backbottom_hint else "#d8d8d8"),
                 "stroke": "#666666" if not backbottom_hint else "none",
                 "stroke_width": 0.035 if not backbottom_hint else 0.0,
                 **({

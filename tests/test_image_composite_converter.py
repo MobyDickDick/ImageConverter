@@ -5836,11 +5836,11 @@ def test_backbottom_square_description_builds_catalog_free_rect_ir() -> None:
 
     assert rect["id"] == "backbottom_light_grey_square"
     assert rect["bbox"] == [0.0, 0.0, 1.0, 1.0]
-    assert rect["fill"] == "#d8d8d8"
+    assert rect["fill"] == "#e8e8e8"
     assert rect["stroke"] == "none"
     assert rect["primitive_decomposition"]["schema_version"] == "light_grey_square_decomposition_v1"
     assert constraints["uncertainty"]["status"] == "ok"
-    assert '<rect id="backbottom_light_grey_square" x="0" y="0" width="60" height="20" fill="#d8d8d8" stroke="none"' in svg
+    assert '<rect id="backbottom_light_grey_square" x="0" y="0" width="60" height="20" fill="#e8e8e8" stroke="none"' in svg
 
 
 def test_backbottom_square_description_scales_to_vertical_variant_canvas() -> None:
@@ -5852,7 +5852,7 @@ def test_backbottom_square_description_scales_to_vertical_variant_canvas() -> No
     geometry_ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(description)
     svg = geometry_ir_helpers.renderGeometryIrToSvgImpl(20, 60, geometry_ir)
 
-    assert '<rect id="backbottom_light_grey_square" x="0" y="0" width="20" height="60" fill="#d8d8d8" stroke="none"' in svg
+    assert '<rect id="backbottom_light_grey_square" x="0" y="0" width="20" height="60" fill="#e8e8e8" stroke="none"' in svg
     assert "GE9013" not in svg
 
 
