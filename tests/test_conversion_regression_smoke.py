@@ -74,10 +74,9 @@ def test_ac0100_quality_uses_algorithmic_elementwise_fit(tmp_path: Path) -> None
 
     for variant in variants:
         log = (output_dir / "reports" / f"{variant}_element_validation.log").read_text(encoding="utf-8")
+        assert "status=non_composite_elementwise_symbol_fit" in log
         if variant == "AC0010":
-            assert "status=non_composite_description_geometry_ir" in log
-        else:
-            assert "status=non_composite_elementwise_symbol_fit" in log
+            assert "non_composite_selection=raster_fit_overrides_poor_description_geometry" in log
         assert "status=non_composite_plan_b_sample_svg_selected" not in log
         assert "template_transfer" not in log
         if variant != "AC0010":

@@ -164,6 +164,8 @@ def _build_structured_symbol_svg(
     diag_gray: float | str = 143.0,
     border_gray: float | str = 154.0,
     chevron_width: float = 0.0,
+    rect_x_inset_ratio: float = 0.0,
+    rect_y_inset_ratio: float = 0.0,
     chevron_inset_ratio: float = 0.0,
     chevron_center_x_ratio: float = 0.5,
     chevron_peak_x_ratio: float = 1.0,
@@ -172,6 +174,12 @@ def _build_structured_symbol_svg(
     safe_w = max(1, int(width or 1))
     safe_h = max(1, int(height or 1))
     inset = 0.5
+    rect_x_inset = max(0.0, min(0.30, float(rect_x_inset_ratio)))
+    rect_y_inset = max(0.0, min(0.30, float(rect_y_inset_ratio)))
+    content_x = inset + (safe_w - 1) * rect_x_inset
+    content_y = inset + (safe_h - 1) * rect_y_inset
+    content_w = max(1.0, (safe_w - 1) * (1.0 - 2.0 * rect_x_inset))
+    content_h = max(1.0, (safe_h - 1) * (1.0 - 2.0 * rect_y_inset))
     plus_cx = safe_w * float(plus_x_ratio)
     plus_cy = safe_h * float(glyph_y_ratio)
     plus_half = max(2.0, min(safe_w, safe_h) * float(plus_half_ratio))
@@ -179,10 +187,10 @@ def _build_structured_symbol_svg(
     minus_half = max(2.0, min(safe_w, safe_h) * 0.07)
     minus_start_x = plus_cx + plus_half * float(minus_gap_ratio)
     diagonal_inset = max(0.0, min(0.45, float(diagonal_inset_ratio)))
-    diag_x0 = inset + (safe_w - 1 - 2 * inset) * diagonal_inset
-    diag_x1 = safe_w - 1 - (safe_w - 1 - 2 * inset) * diagonal_inset
-    diag_y0 = inset + (safe_h - 1 - 2 * inset) * diagonal_inset
-    diag_y1 = safe_h - 1 - (safe_h - 1 - 2 * inset) * diagonal_inset
+    diag_x0 = content_x + content_w * diagonal_inset
+    diag_x1 = content_x + content_w * (1.0 - diagonal_inset)
+    diag_y0 = content_y + content_h * diagonal_inset
+    diag_y1 = content_y + content_h * (1.0 - diagonal_inset)
     chevron_inset = max(0.0, min(0.40, float(chevron_inset_ratio)))
     chevron_x0 = safe_w * max(0.0, min(1.0, float(chevron_center_x_ratio)))
     chevron_x1 = inset + (safe_w - 1 - inset) * max(0.5, min(1.0, float(chevron_peak_x_ratio)))
@@ -190,10 +198,10 @@ def _build_structured_symbol_svg(
     chevron_y0 = inset + (safe_h - 1 - 2 * inset) * chevron_inset
     chevron_y1 = safe_h - 1 - (safe_h - 1 - 2 * inset) * chevron_inset
     gradient_rects = _gradient_band_svg_rects(
-        x=inset,
-        y=inset,
-        width=safe_w - 1,
-        height=safe_h - 1,
+        x=content_x,
+        y=content_y,
+        width=content_w,
+        height=content_h,
         edge_hex=gradient_edge,
         mid_hex=gradient_mid,
         center_percent=gradient_center,
@@ -202,10 +210,11 @@ def _build_structured_symbol_svg(
     return (
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{safe_w}" height="{safe_h}" viewBox="0 0 {safe_w} {safe_h}">\n'
         '  <defs>\n'
-        f'    <clipPath id="innerRect"><rect x="{inset}" y="{inset}" width="{safe_w-1}" height="{safe_h-1}"/></clipPath>\n'
+        f'    <clipPath id="innerRect"><rect x="{content_x}" y="{content_y}" width="{content_w}" height="{content_h}"/></clipPath>\n'
         '  </defs>\n'
+        f'  <rect x="0" y="0" width="{safe_w}" height="{safe_h}" fill="#ffffff" stroke="none"/>\n'
         f'{gradient_rects}'
-        f'  <rect x="{inset}" y="{inset}" width="{safe_w-1}" height="{safe_h-1}" fill="none" stroke="{_color_hex(border_gray)}" stroke-width="{border_thickness:.2f}"/>\n'
+        f'  <rect x="{content_x}" y="{content_y}" width="{content_w}" height="{content_h}" fill="none" stroke="{_color_hex(border_gray)}" stroke-width="{border_thickness:.2f}"/>\n'
         + (f'  <line x1="{diag_x1:g}" y1="{diag_y0:g}" x2="{diag_x0:g}" y2="{diag_y1:g}" stroke="{_color_hex(diag_gray)}" stroke-width="{diag1_width:.2f}" clip-path="url(#innerRect)"/>\n' if diag1_width > 0 else '')
         + (f'  <line x1="{diag_x0:g}" y1="{diag_y0:g}" x2="{diag_x1:g}" y2="{diag_y1:g}" stroke="{_color_hex(diag_gray)}" stroke-width="{diag2_width:.2f}" clip-path="url(#innerRect)"/>\n' if diag2_width > 0 else '')
         + (f'  <path d="M {chevron_x0:g} {chevron_y0:g} L {chevron_x1:g} {chevron_peak_y:g} L {chevron_x0:g} {chevron_y1:g}" fill="none" stroke="{_color_hex(diag_gray)}" stroke-width="{chevron_width:.2f}" stroke-linejoin="round" stroke-linecap="butt" clip-path="url(#innerRect)"/>\n' if chevron_width > 0 else '')
@@ -297,6 +306,14 @@ def _derive_symbol_params_from_raster(*, width: int, height: int, perc_img) -> d
             mid_color = _rgb_hex(np.nanmedian(center_colors, axis=0))
         else:
             mid_color = _rgb_hex(color_profile[color_profile.shape[0] // 2])
+    nonwhite_threshold = min(252.0, max(float(np.nanpercentile(lum, 92)) - 3.0, float(np.nanpercentile(lum, 70))))
+    nonwhite_mask = lum < nonwhite_threshold
+    rect_x_inset_ratio = 0.0
+    rect_y_inset_ratio = 0.0
+    if int(nonwhite_mask.sum()) >= 4:
+        ys, xs = np.nonzero(nonwhite_mask)
+        rect_x_inset_ratio = max(0.0, min(0.25, min(float(xs.min()), float(w - 1 - xs.max())) / max(1.0, float(w))))
+        rect_y_inset_ratio = max(0.0, min(0.25, min(float(ys.min()), float(h - 1 - ys.max())) / max(1.0, float(h))))
     dark_ratio = float((lum < np.nanpercentile(lum, 35)).mean())
     light_ratio = float((lum > np.nanpercentile(lum, 70)).mean())
     scale = max(1.0, min(width, height))
@@ -320,6 +337,8 @@ def _derive_symbol_params_from_raster(*, width: int, height: int, perc_img) -> d
     glyph_geometry = _estimate_symbol_glyph_geometry_from_luminance(lum)
     return {
         "border_thickness": max(0.8, min(1.8, 0.9 + dark_ratio * 1.8)),
+        "rect_x_inset_ratio": rect_x_inset_ratio,
+        "rect_y_inset_ratio": rect_y_inset_ratio,
         "gradient_center": grad_center,
         "gradient_edge": edge_color,
         "gradient_mid": mid_color,
@@ -427,6 +446,8 @@ def _fit_symbol_element_by_element(
     has_right_chevron = bool(
         re.search(r"oben[-\s]*mitte.*rechts[-\s]*mitte.*unten[-\s]*mitte", description_text)
     )
+    current.setdefault("rect_x_inset_ratio", 0.0)
+    current.setdefault("rect_y_inset_ratio", 0.0)
     current.setdefault("diagonal_inset_ratio", 0.0)
     current.setdefault("chevron_inset_ratio", float(current["diagonal_inset_ratio"]))
     current.setdefault("chevron_center_x_ratio", 0.5)
@@ -452,6 +473,8 @@ def _fit_symbol_element_by_element(
     diagonal_gray_seed = current["diag_gray"]
     refinement_steps: list[tuple[str, tuple[float | str, ...]]] = [
         ("border_thickness", (0.8, 1.0, 1.2, 1.4, 1.8)),
+        ("rect_x_inset_ratio", _candidate_window(float(current["rect_x_inset_ratio"]), (-0.04, -0.02, 0.0, 0.02, 0.04), minimum=0.0, maximum=0.20, include_limits=False)),
+        ("rect_y_inset_ratio", _candidate_window(float(current["rect_y_inset_ratio"]), (-0.04, -0.02, 0.0, 0.02, 0.04), minimum=0.0, maximum=0.20, include_limits=False)),
         ("gradient_center", (40.0, 45.0, 50.0, 55.0, 60.0)),
         (
             "diag1_width",
@@ -1123,11 +1146,28 @@ def runNonCompositeIterationImpl(
                 ),
                 None,
             )
+            best_pixel_candidate = min(candidates, key=lambda candidate: float(candidate["error"]))
             if semantic_description_candidate is not None:
-                best_geometry_candidate = semantic_description_candidate
-                selection_reason = "semantic_description_geometry"
+                semantic_error = float(semantic_description_candidate["error"])
+                pixel_error = float(best_pixel_candidate["error"])
+                if (
+                    best_pixel_candidate is not semantic_description_candidate
+                    and _is_description_heat_exchanger_geometry(list(semantic_description_candidate.get("geometry_ir", [])))
+                    and pixel_error * 2.0 < semantic_error
+                ):
+                    # Keep the documented semantic algorithm as the default, but do not
+                    # force it when raster evidence shows that its generic proportions
+                    # are far outside the actual symbol.  This preserves an
+                    # algorithmic reconstruction (no samples/templates) while allowing
+                    # AC0010/AC0100-like size variants to derive geometry from the
+                    # image plus description instead of a fixed saved output.
+                    best_geometry_candidate = best_pixel_candidate
+                    selection_reason = "raster_fit_overrides_poor_description_geometry"
+                else:
+                    best_geometry_candidate = semantic_description_candidate
+                    selection_reason = "semantic_description_geometry"
             else:
-                best_geometry_candidate = min(candidates, key=lambda candidate: float(candidate["error"]))
+                best_geometry_candidate = best_pixel_candidate
                 selection_reason = "best_pixel_error"
             svg_content = str(best_geometry_candidate["svg"])
             svg_rendered = best_geometry_candidate["rendered"]
