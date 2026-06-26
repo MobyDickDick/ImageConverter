@@ -719,6 +719,8 @@ def test_description_parser_attaches_generic_chart_triangle_pair_geometry_ir() -
         "upper_triangle",
         "lower_triangle",
     ]
+    assert params["geometry_ir"][4]["points"] == [[0.280, 0.160], [0.720, 0.160], [0.480, 0.500]]
+    assert params["geometry_ir"][5]["points"] == [[0.480, 0.520], [0.280, 0.840], [0.720, 0.840]]
     assert params["geometry_ir"][4]["primitive_decomposition"]["schema_version"] == "chart_triangle_pair_decomposition_v1"
 
 
