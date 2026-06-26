@@ -3926,3 +3926,10 @@ endet. Die Detailableitung und Akzeptanzkriterien stehen in
 - **Sicherung:** Detailtests prüfen die neutralen Parser-Koordinaten und die bestehende Dateinamen-Invarianz; der isolierte CLI-Lauf für `GE1410_L` endet mit Exit `0`.
 - **Qualität:** Die isolierte Metrik verbessert sich von `Mean-Delta²=3206.457520` auf `1926.409546` (`Fehler/Pixel=0.016481`).
 - **Nächster sinnvoller Schritt:** In der Plan-B-Rotation mit `SE0041_1` fortfahren oder, falls die Rotation bei `GE1410_L` bleibt, Achsen-/Antialiasing-Feinheiten nachziehen.
+
+### Fortschritt vs. Blocker (Session 2026-06-26, SE0041_1 Square-Badge-Parametrisierung Run TA)
+
+- **Fortschritt:** Der nach Run SZ dokumentierte Folgekandidat `SE0041_1` nutzt den Square-Badge-Contract nun im Semantic-Badge-Parametrisierungspfad: Aliasbeschreibungen tragen eine neutrale `badge_param_source_ref`, Varianten können daraus Referenzparameter ableiten und anschließend `head_style=square_badge` anwenden.
+- **Sicherung:** Der fokussierte Square-Badge-Regressionstest läuft grün; die absolute Runtime-ID-Nullprüfung meldet weiterhin `0 occurrences`. Der isolierte CLI-Lauf für `SE0041_1` endet mit Exit `0` und rendert die Variante ohne `manual_review_elementwise_symbol_fit`-Fallback.
+- **Qualität:** Die direkte Square-Badge-Parametrisierung erreicht `Mean-Delta²=30585.052734` (`Fehler/Pixel=0.059423`) und ist damit noch schlechter als die vorherige elementweise Annäherung; sie ist daher als Architekturfortschritt, nicht als Qualitätsabschluss zu werten.
+- **Nächster sinnvoller Schritt:** Den Square-Badge-SVG-Seed weiter an Rasterfläche, Stiel-/Armgeometrie und Antialiasing tunen oder in der Rotation mit `GE9012_6M` fortfahren.

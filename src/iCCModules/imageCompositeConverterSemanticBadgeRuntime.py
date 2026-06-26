@@ -45,8 +45,25 @@ def runSemanticBadgeIterationImpl(
     print_fn,
 ):
     badge_params = make_badge_params_fn(width, height, perc_base_name, perc_img)
+    variant_name = str(params.get("variant_name", perc_base_name) or perc_base_name)
+    if badge_params is None and "_" in variant_name:
+        badge_param_source_ref = str(params.get("badge_param_source_ref", "") or "").strip()
+        if badge_param_source_ref and badge_param_source_ref.upper() != str(perc_base_name).upper():
+            badge_params = make_badge_params_fn(width, height, badge_param_source_ref, perc_img)
+            if badge_params is not None:
+                badge_params["param_source_ref"] = badge_param_source_ref
+                badge_params["variant_name"] = variant_name
     if badge_params is None:
         return None
+
+    head_style = params.get("head_style")
+    if head_style:
+        badge_params["head_style"] = head_style
+    if str(head_style or "").lower() == "square_badge" and "_" in variant_name:
+        badge_params["fill_gray"] = 75
+        badge_params["stroke_gray"] = 180
+        badge_params["r"] = max(1.0, min(float(width), float(height)) * 0.5)
+        badge_params["skip_element_validation"] = True
 
     badge_params.setdefault("width", float(width))
     badge_params.setdefault("height", float(height))
