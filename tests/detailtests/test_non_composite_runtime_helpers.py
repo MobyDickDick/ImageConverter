@@ -23,7 +23,7 @@ def test_structured_symbol_svg_can_fit_single_diagonal_top_left_plus() -> None:
         minus_gap_ratio=1.8,
     )
 
-    assert 'x1="39" y1="0.5" x2="0.5" y2="79"' in svg
+    assert 'x1="39.5" y1="0.5" x2="0.5" y2="79.5"' in svg
     assert 'x1="0.5" y1="0.5" x2="39" y2="79"' not in svg
     assert 'x1="3.20" y1="9.60" x2="9.60" y2="9.60"' in svg
     assert svg.count('stroke="#f1f1f1"') == 2
@@ -1681,7 +1681,7 @@ def test_ac0224_sia_prefers_semantic_geometry_and_uses_crossed_square(monkeypatc
 
 
 
-def test_ac0010_prefers_description_geometry_over_pixel_fit_stripes(monkeypatch) -> None:
+def test_ac0010_allows_much_better_algorithmic_raster_fit_over_generic_description(monkeypatch) -> None:
     logs: list[list[str]] = []
     artifacts: list[tuple[str, object]] = []
     description = (
@@ -1729,13 +1729,11 @@ def test_ac0010_prefers_description_geometry_over_pixel_fit_stripes(monkeypatch)
         image_variant_name="AC0010",
     )
 
-    assert result == ("AC0010", description, {"mode": "non_composite"}, 1, 40.0)
-    assert logs[-1][0] == "status=non_composite_description_geometry_ir"
-    assert "non_composite_selection=semantic_description_geometry" in logs[-1]
-    assert "geometry_ir_raster_registration=1" not in logs[-1]
-    assert 'fill="url(#geometry-ir-horizontal-gradient)"' in artifacts[0][0]
-    assert 'id="plus_glyph"' in artifacts[0][0]
-    assert "generic-stripe-pixel-fit" not in artifacts[0][0]
+    assert result == ("AC0010", description, {"mode": "non_composite"}, 1, 1.0)
+    assert logs[-1][0] == "status=non_composite_elementwise_symbol_fit"
+    assert "non_composite_selection=raster_fit_overrides_poor_description_geometry" in logs[-1]
+    assert artifacts and artifacts[0][1] == "generic_rendered"
+    assert "generic-stripe-pixel-fit" in artifacts[0][0]
 
 def test_symbol_fit_keeps_description_declared_top_left_glyph_in_top_region(monkeypatch) -> None:
     initial = {
@@ -1916,3 +1914,46 @@ def test_symbol_raster_estimation_preserves_bgr_source_colors_for_svg() -> None:
 
     assert params["gradient_edge"] == "#e62846"
     assert params["gradient_mid"] == "#f24641"
+
+
+def test_description_geometry_candidate_yields_to_much_better_algorithmic_raster_fit() -> None:
+    candidates = []
+    logs: list[list[str]] = []
+    artifacts: list[tuple[str, object]] = []
+    description = (
+        "Heizelement, graues Rechteck, Plus-Minus-Zeichen oben links, "
+        "Farbverlauf horizontal dunkel-hell-dunkel graue Diagonale oben rechts nach unten links"
+    )
+
+    def _render(content, *_args, **_kwargs):
+        candidates.append(content)
+        if "geometry-ir-horizontal-gradient" in content:
+            return "description_rendered"
+        return "structured_rendered"
+
+    result = non_composite_runtime_helpers.runNonCompositeIterationImpl(
+        mode="non_composite",
+        params={"mode": "non_composite", "variant_name": "AC0010"},
+        stripe_strategy=None,
+        semantic_mode_visual_override=False,
+        width=40,
+        height=80,
+        base_name="AC0010",
+        description=description,
+        perc_img=np.ones((80, 40, 3), dtype=np.uint8) * 210,
+        img_path="/tmp/AC0010.jpg",
+        print_fn=lambda _message: None,
+        render_embedded_raster_svg_fn=lambda _path: "<svg baseline/>",
+        build_gradient_stripe_svg_fn=lambda *_args, **_kwargs: "<svg gradient/>",
+        build_gradient_stripe_validation_log_lines_fn=lambda **_kwargs: ["status=non_composite_gradient_stripe"],
+        write_validation_log_fn=logs.append,
+        render_svg_to_numpy_fn=_render,
+        record_render_failure_fn=lambda *args, **kwargs: None,
+        write_attempt_artifacts_fn=lambda svg, rendered: artifacts.append((svg, rendered)),
+        calculate_error_fn=lambda _target, rendered: 120.0 if rendered == "description_rendered" else 20.0,
+    )
+
+    assert result == ("AC0010", description, {"mode": "non_composite", "variant_name": "AC0010"}, 1, 20.0)
+    assert logs[0][0] == "status=non_composite_elementwise_symbol_fit"
+    assert "non_composite_selection=raster_fit_overrides_poor_description_geometry" in logs[0]
+    assert artifacts and artifacts[0][1] == "structured_rendered"
