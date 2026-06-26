@@ -659,9 +659,15 @@ def test_description_parser_attaches_dlg_style_checkbox_checkmark_geometry_ir() 
         "PolygonPath",
         "PolygonPath",
     ]
-    assert params["geometry_ir"][1]["role"] == "checkbox"
-    assert params["geometry_ir"][3]["role"] == "checkmark"
-    assert params["geometry_ir"][3]["stroke_gradient"]["stops"][0]["color"] == "#176f28"
+    checkbox = params["geometry_ir"][1]
+    shadow = params["geometry_ir"][2]
+    checkmark = params["geometry_ir"][3]
+    assert checkbox["role"] == "checkbox"
+    assert checkbox["bbox"] == [0.250, 0.250, 0.580, 0.600]
+    assert shadow["points"] == [[0.315, 0.610], [0.540, 0.820], [0.910, 0.045]]
+    assert checkmark["role"] == "checkmark"
+    assert checkmark["points"] == [[0.340, 0.565], [0.560, 0.750], [0.885, 0.025]]
+    assert checkmark["stroke_gradient"]["stops"][0]["color"] == "#176f28"
 
 
 def test_geometry_ir_renderer_emits_checkmark_stroke_gradient() -> None:

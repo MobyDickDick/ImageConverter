@@ -478,7 +478,7 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
                         {
                             "kind": "RectBorder",
                             "id": "checkbox_border",
-                            "bbox": [0.075, 0.130, 0.650, 0.720],
+                            "bbox": [0.250, 0.250, 0.580, 0.600],
                             "fill": "#ffffff",
                             "stroke": "#7f7f7f",
                             "stroke_width": 0.045,
@@ -498,7 +498,7 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
                 {
                     "kind": "PolygonPath",
                     "id": "checkmark_shadow_outline",
-                    "points": [[0.245, 0.650], [0.405, 0.810], [0.875, 0.250]],
+                    "points": [[0.315, 0.610], [0.540, 0.820], [0.910, 0.045]],
                     "fill": "none",
                     "stroke": "#9a9a9a",
                     "stroke_width": 0.105,
@@ -509,7 +509,7 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
                 {
                     "kind": "PolygonPath",
                     "id": "checkmark_green_stroke",
-                    "points": [[0.275, 0.595], [0.425, 0.745], [0.850, 0.235]],
+                    "points": [[0.340, 0.565], [0.560, 0.750], [0.885, 0.025]],
                     "fill": "none",
                     "stroke": "#3c9f44",
                     "stroke_gradient": {

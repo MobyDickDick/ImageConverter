@@ -3912,3 +3912,10 @@ endet. Die Detailableitung und Akzeptanzkriterien stehen in
 - **Qualität:** Der isolierte Run verbessert `Mean-Delta²` von der Run-SR-Triage `24856.818359` auf `22598.726562`, bleibt aber sichtbar oberhalb des Qualitätsziels. Der Review-Refresh ohne Aktualisierung der allgemeinen Converted-SVG-Baseline lässt die aktive Rotation unverändert.
 - **Perception-Lerneffekt:** Der bisherige PF8-Befund `noch nicht erkannt` ist für die reine Bilddetektion weiterhin korrekt; die Beschreibungsschiene besitzt jetzt jedoch eine dokumentierte manuelle Seed-Annahme über den neutralen Checkbox-/Haken-Primitive-Contract.
 - **Nächster sinnvoller Schritt:** Entweder `DLG0021` pixelnäher tunen und danach aus der Rotation nehmen oder mit `GE1410_L` als nächstem automatischen Plan-B-Kandidaten fortfahren.
+
+### Fortschritt vs. Blocker (Session 2026-06-26, DLG0021 Checkmark-Geometrie Run SY)
+
+- **Fortschritt:** Das nach Run SX dokumentierte DLG0021-Pixel-Feintuning wurde auf die generische Checkbox-/Haken-Geometrie angewendet: Die Checkbox-Bounding-Box liegt nun näher auf der sichtbaren quadratischen Fläche, und graue Umrandung sowie grüner Gradient-Haken nutzen steilere, höher ansetzende Normalized-Points.
+- **Sicherung:** Detailtests prüfen die neutralen Parser-Koordinaten und die bestehende Gradient-SVG-Ausgabe; die absolute Runtime-ID-Nullprüfung meldet weiterhin `0 occurrences`. Der isolierte CLI-Lauf für `DLG0021` endet mit Exit `0`.
+- **Qualität:** Die isolierte CLI-Metrik verbessert sich gegenüber Run SX von `Mean-Delta²=26451.279297` (`Fehler/Pixel=0.100804`) auf `Mean-Delta²=24805.169922` (`Fehler/Pixel=0.091186`), bleibt aber sichtbar oberhalb des Qualitätsziels.
+- **Nächster sinnvoller Schritt:** Entweder `DLG0021` weiter an Haken-Konturstärke/Farbregistrierung tunen oder mit `GE1410_L` als nächstem automatischen Plan-B-Kandidaten fortfahren.
