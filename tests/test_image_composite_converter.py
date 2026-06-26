@@ -5904,6 +5904,29 @@ def test_generate_badge_svg_renders_square_badge_head() -> None:
     assert "<circle" not in svg
 
 
+def test_generate_badge_svg_renders_square_badge_head_with_explicit_colors() -> None:
+    """Square-head semantic badges may carry measured non-gray head colors."""
+    params = {
+        "circle_enabled": True,
+        "head_style": "square_badge",
+        "head_fill": "#fc0200",
+        "head_stroke": "#fc0200",
+        "square_badge_full_canvas": True,
+        "cx": 14.0,
+        "cy": 14.0,
+        "r": 13.0,
+        "fill_gray": 217,
+        "stroke_gray": 128,
+        "stroke_circle": 1.0,
+        "draw_text": False,
+    }
+
+    svg = Action.generate_badge_svg(28, 44, params)
+
+    assert '<rect x="0.5000" y="0.5000" width="27.0000" height="27.0000" fill="#fc0200" stroke="#fc0200"' in svg
+    assert "<circle" not in svg
+
+
 def test_parse_description_marks_ac0223_as_semantic_badge() -> None:
     """AC0223 should use the semantic badge path with top connector + valve-head hint."""
     desc, params = image_composite_converter.Reflection({}).parse_description("AC0223", "AC0223_L.jpg")
