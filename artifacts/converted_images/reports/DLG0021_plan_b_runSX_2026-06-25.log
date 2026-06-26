@@ -1,0 +1,18 @@
+[INFO] Schreibe Konsolen-Output nach: /workspace/ImageConverter/imageCompositeConverter.local.log
+[INFO] Konvertiere DLG0021.jpg | Parameter: Iterationen=64, Validierungsrunden=6
+
+--- Verarbeite DLG0021.jpg ---
+Bildbeschreibung: Haken vor Checkbox (grauer Rand, weiss gefüllt). Haken: Füllung grüner Farbverlauf oben dunkel, unten hellgrau. Dunkelgraue Umrandung
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[INFO] Konvertiert DLG0021.jpg | Parameter: mode=auto, label=M, variant_name=DLG0021 | Qualität: Fehler/Pixel=0.100804, Mean-Delta²=26451.279297, Raumscore=68778.461544, beste Iteration=1, ausgeführt=64/64 | Dauer=0.5s
+[INFO] Konvertiere DLG0021.jpg | Parameter: Iterationen=65, Validierungsrunden=7
+
+--- Verarbeite DLG0021.jpg ---
+Bildbeschreibung: Haken vor Checkbox (grauer Rand, weiss gefüllt). Haken: Füllung grüner Farbverlauf oben dunkel, unten hellgrau. Dunkelgraue Umrandung
+Befehl erkannt: Fallback-Modus aktiv (Beschreibung wird ohne expliziten Compositing-Befehl verarbeitet)
+  -> Fallback aktiv: elementweise iterative Annäherung aus Rasterbild.
+[INFO] Konvertiert DLG0021.jpg | Parameter: mode=auto, label=M, variant_name=DLG0021 | Qualität: Fehler/Pixel=0.100804, Mean-Delta²=26451.279297, Raumscore=68778.461544, beste Iteration=1, ausgeführt=65/65 | Dauer=0.2s
+[INFO] Übersichts-Kacheln erzeugt: diff=/tmp/ic-dlg0021-runsx/reports/overview_diff_tiles.png, svg=/tmp/ic-dlg0021-runsx/reports/overview_svg_tiles.png
+
+Abgeschlossen! Ausgaben unter: /tmp/ic-dlg0021-runsx

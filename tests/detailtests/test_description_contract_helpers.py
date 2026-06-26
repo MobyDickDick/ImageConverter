@@ -1,3 +1,4 @@
+from src.iCCModules.imageCompositeConverterGeometryIr import runtime as geometry_runtime
 from src.iCCModules.imageCompositeConverterPerceptionReflection import Reflection
 
 
@@ -639,6 +640,8 @@ def test_description_parser_attaches_generic_checkbox_checkmark_geometry_ir() ->
     assert checkbox["role"] == "checkbox"
     assert checkbox["primitive_decomposition"]["schema_version"] == "checkbox_primitive_decomposition_v1"
     assert params["geometry_ir"][3]["role"] == "checkmark"
+    assert params["geometry_ir"][3]["stroke_gradient"]["id"] == "checkmark-green-vertical-gradient"
+    assert params["geometry_ir"][3]["stroke_gradient"]["stops"][-1]["color"] == "#c8d0c3"
 
 
 def test_description_parser_attaches_dlg_style_checkbox_checkmark_geometry_ir() -> None:
@@ -658,6 +661,20 @@ def test_description_parser_attaches_dlg_style_checkbox_checkmark_geometry_ir() 
     ]
     assert params["geometry_ir"][1]["role"] == "checkbox"
     assert params["geometry_ir"][3]["role"] == "checkmark"
+    assert params["geometry_ir"][3]["stroke_gradient"]["stops"][0]["color"] == "#176f28"
+
+
+def test_geometry_ir_renderer_emits_checkmark_stroke_gradient() -> None:
+    description = "Haken vor Checkbox: grauer Rand, weiss gefüllt. Haken: Füllung grüner Farbverlauf oben dunkel, unten hellgrau."
+    _desc, params = _parse(description)
+
+    svg = geometry_runtime.renderGeometryIrToSvgImpl(80, 80, params["geometry_ir"])
+
+    assert '<linearGradient id="checkmark-green-vertical-gradient" x1="0%" y1="0%" x2="0%" y2="100%">' in svg
+    assert 'stop-color="#176f28"' in svg
+    assert 'stop-color="#c8d0c3"' in svg
+    assert 'id="checkmark_green_stroke"' in svg
+    assert 'stroke="url(#checkmark-green-vertical-gradient)"' in svg
 
 
 def test_description_parser_checkmark_geometry_ir_is_filename_invariant() -> None:

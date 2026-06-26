@@ -512,6 +512,18 @@ def buildGeometryIrFromDescriptionImpl(description: str) -> list[dict[str, objec
                     "points": [[0.275, 0.595], [0.425, 0.745], [0.850, 0.235]],
                     "fill": "none",
                     "stroke": "#3c9f44",
+                    "stroke_gradient": {
+                        "id": "checkmark-green-vertical-gradient",
+                        "x1": "0%",
+                        "y1": "0%",
+                        "x2": "0%",
+                        "y2": "100%",
+                        "stops": [
+                            {"offset": "0%", "color": "#176f28"},
+                            {"offset": "55%", "color": "#43ad49"},
+                            {"offset": "100%", "color": "#c8d0c3"},
+                        ],
+                    },
                     "stroke_width": 0.125,
                     "linecap": "round",
                     "linejoin": "round",
@@ -1677,6 +1689,10 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
     svg: list[str] = []
     rect_x, rect_y, rect_w, rect_h = _find_rect(geometry_ir, w, h)
     needs_gradient = any(element.get("kind") == "HorizontalGradient" for element in geometry_ir)
+    stroke_gradient_elements = [
+        element for element in geometry_ir
+        if isinstance(element.get("stroke_gradient"), dict)
+    ]
     valve_gradient_kinds = {
         "VerticalTwoWayValveMotorGlyph",
         "LeftRotatedTwoWayValveMotorGlyph",
@@ -1688,13 +1704,33 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
         "MainDiagonalMirroredTopKelleThreeWayValveGlyph",
     }
     needs_vertical_valve_defs = any(element.get("kind") in valve_gradient_kinds for element in geometry_ir)
-    if needs_gradient or needs_vertical_valve_defs:
+    if needs_gradient or needs_vertical_valve_defs or stroke_gradient_elements:
         svg.append("  <defs>")
         if needs_gradient:
             svg.append('    <linearGradient id="geometry-ir-horizontal-gradient" x1="0%" y1="0%" x2="100%" y2="0%">')
             svg.append('      <stop offset="0%" stop-color="#8f8f8f"/>')
             svg.append('      <stop offset="50%" stop-color="#dedede"/>')
             svg.append('      <stop offset="100%" stop-color="#8f8f8f"/>')
+            svg.append("    </linearGradient>")
+        for gradient_element in stroke_gradient_elements:
+            gradient = gradient_element.get("stroke_gradient", {})
+            if not isinstance(gradient, dict):
+                continue
+            gradient_id = html.escape(str(gradient.get("id", f"{gradient_element.get('id', 'stroke')}-gradient")))
+            x1 = html.escape(str(gradient.get("x1", "0%")))
+            y1 = html.escape(str(gradient.get("y1", "0%")))
+            x2 = html.escape(str(gradient.get("x2", "0%")))
+            y2 = html.escape(str(gradient.get("y2", "100%")))
+            svg.append(f'    <linearGradient id="{gradient_id}" x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}">')
+            raw_stops = gradient.get("stops", [])
+            if not isinstance(raw_stops, list) or not raw_stops:
+                raw_stops = [{"offset": "0%", "color": str(gradient_element.get("stroke", "#707070"))}]
+            for stop in raw_stops:
+                if not isinstance(stop, dict):
+                    continue
+                offset = html.escape(str(stop.get("offset", "0%")))
+                color = html.escape(str(stop.get("color", gradient_element.get("stroke", "#707070"))))
+                svg.append(f'      <stop offset="{offset}" stop-color="{color}"/>')
             svg.append("    </linearGradient>")
         if needs_vertical_valve_defs:
             svg.append('    <linearGradient id="vertical-two-way-valve-body-gradient" x1="0%" y1="0%" x2="100%" y2="100%">')
@@ -2084,6 +2120,10 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
                 )
         elif kind == "PolygonPath":
             stroke = html.escape(str(element.get("stroke", "#707070")))
+            stroke_gradient = element.get("stroke_gradient")
+            if isinstance(stroke_gradient, dict):
+                gradient_id = html.escape(str(stroke_gradient.get("id", f"{element_id}-gradient")))
+                stroke = f"url(#{gradient_id})"
             fill = html.escape(str(element.get("fill", "none")))
             sw = float(element.get("stroke_width", 0.020)) * min(w, h)
             linecap = html.escape(str(element.get("linecap", "butt")))
