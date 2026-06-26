@@ -145,7 +145,9 @@ def generateBadgeSvgImpl(
             )
         )
 
-    if p.get("arm_enabled"):
+    square_badge_head = str(p.get("head_style", "")).lower() == "square_badge"
+
+    if p.get("arm_enabled") and not square_badge_head:
         arm_x1 = float(clip_scalar_fn(float(p.get("arm_x1", 0.0)), 0.0, float(w)))
         arm_y1 = float(clip_scalar_fn(float(p.get("arm_y1", p.get("arm_y", 0.0))), 0.0, float(h)))
         arm_x2 = float(clip_scalar_fn(float(p.get("arm_x2", 0.0)), 0.0, float(w)))
@@ -164,10 +166,17 @@ def generateBadgeSvgImpl(
             )
 
     if p.get("stem_enabled"):
-        stem_x = float(clip_scalar_fn(float(p.get("stem_x", 0.0)), 0.0, float(w)))
-        stem_top = float(clip_scalar_fn(float(p.get("stem_top", 0.0)), 0.0, float(h)))
-        stem_width = max(0.0, min(float(p.get("stem_width", 0.0)), max(0.0, float(w) - stem_x)))
-        stem_bottom = float(clip_scalar_fn(float(p.get("stem_bottom", 0.0)), stem_top, float(h)))
+        if square_badge_head:
+            stem_width_value = float(p.get("stem_width", 2.0))
+            stem_x = (float(w) / 2.0) - (stem_width_value / 2.0)
+            stem_top = min(float(h), float(w) + 2.0)
+            stem_width = max(0.0, min(stem_width_value, max(0.0, float(w) - stem_x)))
+            stem_bottom = float(h)
+        else:
+            stem_x = float(clip_scalar_fn(float(p.get("stem_x", 0.0)), 0.0, float(w)))
+            stem_top = float(clip_scalar_fn(float(p.get("stem_top", 0.0)), 0.0, float(h)))
+            stem_width = max(0.0, min(float(p.get("stem_width", 0.0)), max(0.0, float(w) - stem_x)))
+            stem_bottom = float(clip_scalar_fn(float(p.get("stem_bottom", 0.0)), stem_top, float(h)))
         elements.append(
             (
                 f'  <rect x="{stem_x:.4f}" y="{stem_top:.4f}" '
@@ -181,13 +190,20 @@ def generateBadgeSvgImpl(
         and str(p.get("ac0223_handle_style", "")).lower() != "square_diagonals"
         and str(p.get("head_style", "")).lower() == "square_badge"
     ):
-        side = max(0.0, float(p["r"]) * 2.0)
-        x = float(p["cx"]) - (side / 2.0)
-        y = float(p["cy"]) - (side / 2.0)
+        if square_badge_head and bool(p.get("square_badge_full_canvas", False)):
+            side = max(0.0, float(w) - 1.0)
+            x = (float(w) - side) / 2.0
+            y = 0.5
+        else:
+            side = max(0.0, float(p["r"]) * 2.0)
+            x = float(p["cx"]) - (side / 2.0)
+            y = float(p["cy"]) - (side / 2.0)
+        fill = str(p.get("head_fill", grayhex_fn(p["fill_gray"])))
+        stroke = str(p.get("head_stroke", grayhex_fn(p["stroke_gray"])))
         elements.append(
             (
                 f'  <rect x="{x:.4f}" y="{y:.4f}" width="{side:.4f}" height="{side:.4f}" '
-                f'fill="{grayhex_fn(p["fill_gray"])}" stroke="{grayhex_fn(p["stroke_gray"])}" '
+                f'fill="{fill}" stroke="{stroke}" '
                 f'stroke-width="{p["stroke_circle"]:.4f}"/>'
             )
         )

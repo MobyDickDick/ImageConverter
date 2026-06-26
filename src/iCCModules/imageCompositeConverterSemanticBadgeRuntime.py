@@ -60,9 +60,20 @@ def runSemanticBadgeIterationImpl(
     if head_style:
         badge_params["head_style"] = head_style
     if str(head_style or "").lower() == "square_badge" and "_" in variant_name:
-        badge_params["fill_gray"] = 75
-        badge_params["stroke_gray"] = 180
-        badge_params["r"] = max(1.0, min(float(width), float(height)) * 0.5)
+        badge_params["head_fill"] = "#fc0200"
+        badge_params["head_stroke"] = "#fc0200"
+        badge_params["square_badge_full_canvas"] = True
+        badge_params["stroke_gray"] = 160
+        badge_params["cx"] = float(width) / 2.0
+        badge_params["cy"] = max(1.0, float(width) / 2.0)
+        badge_params["r"] = max(1.0, (float(width) - 2.0) / 2.0)
+        badge_params["arm_enabled"] = False
+        badge_params["stem_enabled"] = True
+        badge_params["stem_x"] = max(0.0, (float(width) / 2.0) - 1.0)
+        badge_params["stem_top"] = max(0.0, float(width) + 2.0)
+        badge_params["stem_bottom"] = float(height)
+        badge_params["stem_width"] = 2.0
+        badge_params["stem_gray"] = 160
         badge_params["skip_element_validation"] = True
 
     badge_params.setdefault("width", float(width))
