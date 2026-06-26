@@ -204,6 +204,7 @@ class Reflection:
                 inherited_params["documented_alias_refs"] = sorted(Reflection._extractDocumentedAliasRefs(desc))
                 inherited_params["description_fragments"] = description_fragments
                 inherited_params["variant_name"] = os.path.splitext(str(img_filename))[0].upper()
+                inherited_params["badge_param_source_ref"] = reference_symbol
                 if "viereckig" in desc and ("anstatt rund" in desc or "statt rund" in desc):
                     inherited_params["head_style"] = "square_badge"
                     inherited_params["elements"] = [
@@ -211,7 +212,7 @@ class Reflection:
                         for element in inherited_params.get("elements", [])
                     ]
                     inherited_params["elements"].append(
-                        "GEOMETRIE: Referenz-Badge mit viereckigem Kopf statt rundem Kreis"
+                        "GEOMETRIE: Referenz-Badge mit viereckigem Kopf statt runder Kopfkontur"
                     )
                 return desc, inherited_params
 

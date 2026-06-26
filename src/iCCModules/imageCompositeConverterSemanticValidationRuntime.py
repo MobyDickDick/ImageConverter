@@ -24,6 +24,10 @@ def collectSemanticBadgeValidationLogsImpl(
             text_mode=badge_params.get("text_mode", "unknown"),
         )
     ]
+    if bool(badge_params.get("skip_element_validation", False)):
+        validation_logs.append("semantic-guard: Elementvalidierung durch neutralen Geometrie-Seed übersprungen.")
+        return validation_logs
+
     validation_kwargs = {
         "max_rounds": max(1, int(badge_validation_rounds)),
         "debug_out_dir": debug_dir,

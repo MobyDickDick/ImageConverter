@@ -5865,8 +5865,9 @@ def test_parse_description_preserves_se0041_square_badge_override() -> None:
     assert "viereckig anstatt rund" in desc
     assert params["mode"] == "semantic_badge"
     assert params["head_style"] == "square_badge"
+    assert params["badge_param_source_ref"] == "AC0811"
     assert "AC0811" in params["documented_alias_refs"]
-    assert "GEOMETRIE: Referenz-Badge mit viereckigem Kopf statt rundem Kreis" in params["elements"]
+    assert "GEOMETRIE: Referenz-Badge mit viereckigem Kopf statt runder Kopfkontur" in params["elements"]
 
 
 def test_generate_badge_svg_renders_square_badge_head() -> None:
