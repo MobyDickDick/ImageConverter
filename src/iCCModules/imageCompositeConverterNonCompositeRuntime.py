@@ -643,7 +643,7 @@ def _is_description_heat_exchanger_geometry(geometry_ir: list[dict[str, object]]
 def _prefer_semantic_description_geometry(geometry_ir: list[dict[str, object]]) -> bool:
     kinds = {str(element.get("kind", "")) for element in geometry_ir}
     roles = {str(element.get("role", "")) for element in geometry_ir}
-    return bool(SEMANTIC_GEOMETRY_IR_KINDS & kinds) or "checkmark" in roles
+    return bool(SEMANTIC_GEOMETRY_IR_KINDS & kinds) or bool({"checkmark", "reference_light_grey_square"} & roles)
 
 
 def _description_reuses_reference_family(description: str) -> bool:

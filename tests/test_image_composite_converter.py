@@ -5856,6 +5856,20 @@ def test_backbottom_square_description_scales_to_vertical_variant_canvas() -> No
     assert "GE9013" not in svg
 
 
+
+def test_backbottom_square_description_is_preferred_semantic_geometry_candidate() -> None:
+    """BackBottom light-grey squares should use their description contract over elementwise fallback."""
+    from src.iCCModules import imageCompositeConverterNonCompositeRuntime as non_composite_runtime
+    from src.iCCModules.imageCompositeConverterGeometryIr import runtime as geometry_ir_helpers
+
+    description = "Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz."
+    geometry_ir = geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(description)
+
+    assert non_composite_runtime._prefer_description_geometry_candidate(
+        geometry_ir, description=description
+    )
+
+
 def test_parse_description_preserves_se0041_square_badge_override() -> None:
     """SE0041 inherits AC0811 geometry but documents a square head instead of a circle."""
     raw = {"SE0041": "Wie AC0811, jecoch ist der Kreis viereckig anstatt rund gezeichnet."}
