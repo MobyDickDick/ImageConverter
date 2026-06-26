@@ -1159,8 +1159,8 @@ def runNonCompositeIterationImpl(
                     # force it when raster evidence shows that its generic proportions
                     # are far outside the actual symbol.  This preserves an
                     # algorithmic reconstruction (no samples/templates) while allowing
-                    # AC0010/AC0100-like size variants to derive geometry from the
-                    # image plus description instead of a fixed saved output.
+                    # heat-exchanger size variants to derive geometry from the image
+                    # plus description instead of a fixed saved output.
                     best_geometry_candidate = best_pixel_candidate
                     selection_reason = "raster_fit_overrides_poor_description_geometry"
                 else:
