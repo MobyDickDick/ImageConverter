@@ -2258,6 +2258,7 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
   - [ ] Lauf mit fixer Toolchain/Timeout starten (`PYENV_VERSION=3.10.20`, `timeout ...`, Log via `tee`).
   - [ ] Logname mit Block-ID und Zeitstempel schreiben.
   - [ ] Direkt danach Kurzprüfung: Fehler/Timeout + tatsächlich verarbeitete IDs.
+  - **Session 2026-06-26 (Run SY, B-AC08-01):** Standard-Run mit fixer Toolchain und äußerem Timeout erfolgreich ausgeführt: `PYTHONPATH=vendor/linux-py310/site-packages:. PYENV_VERSION=3.10.20 timeout 300 python -m src.iCCModules.imageCompositeConverterCli artifacts/images_to_convert --descriptions-path artifacts/images_to_convert/Finale_Wurzelformen_V3.xml --output-dir /tmp/ic-b-ac08-01-20260626 --start AC0800 --end AC0840 --deterministic-order 2>&1 | tee artifacts/converted_images/reports/B-AC08-01_standard_run_2026-06-26.log` endete mit Exit `0`. Die Kurzprüfung ergab `49` Konvertiert-Meldungen für `29` eindeutige Varianten aus den `10` geplanten Basis-IDs; `AC0820_M.jpg` ist lokal nicht vorhanden, daher ist der Block für vorhandene Inputs vollständig. Auffällig bleiben sechs dokumentierte Fallback-Meldungen für `AC0840_*`/Qualitäts-Nachläufe, aber kein Timeout und kein Batch-Abbruch.
 
 - [ ] **A4 Review pro Block dokumentieren**
   - [ ] In der Doku je Block festhalten: Log-Pfad, Ergebnis (`stabil`/`instabil`), Kurznotiz (3–5 Sätze).
