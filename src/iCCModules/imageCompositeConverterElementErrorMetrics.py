@@ -189,6 +189,10 @@ def calculateSpatialDelta2QualityImpl(
         "std_delta2",
         "tile_std_delta2",
         "localized_error_fraction",
+        "error_pixel_count",
+        "error_pixel_cluster_count",
+        "largest_error_pixel_cluster_fraction",
+        "error_pixel_cluster_excess",
         "spatial_quality_score",
     )
     if img_svg is None:
@@ -226,17 +230,58 @@ def calculateSpatialDelta2QualityImpl(
         localized_error_fraction = expected_error_fraction
     concentration_excess = max(0.0, localized_error_fraction - expected_error_fraction)
 
+    positive_delta2 = delta2[delta2 > 0.0]
+    if int(positive_delta2.size) > 0:
+        upper_quartile_threshold = float(np_module.quantile(positive_delta2, 0.75))
+        error_pixel_mask = delta2 >= upper_quartile_threshold
+        error_pixel_mask &= delta2 > 0.0
+    else:
+        error_pixel_mask = np_module.zeros(delta2.shape, dtype=bool)
+
+    error_pixel_count = int(np_module.count_nonzero(error_pixel_mask))
+    component_sizes: list[int] = []
+    if error_pixel_count > 0:
+        visited = np_module.zeros(error_pixel_mask.shape, dtype=bool)
+        for start_y, start_x in np_module.argwhere(error_pixel_mask):
+            y = int(start_y)
+            x = int(start_x)
+            if bool(visited[y, x]):
+                continue
+            visited[y, x] = True
+            stack = [(y, x)]
+            size = 0
+            while stack:
+                cy, cx = stack.pop()
+                size += 1
+                for ny, nx in ((cy - 1, cx), (cy + 1, cx), (cy, cx - 1), (cy, cx + 1)):
+                    if 0 <= ny < height and 0 <= nx < width and bool(error_pixel_mask[ny, nx]) and not bool(visited[ny, nx]):
+                        visited[ny, nx] = True
+                        stack.append((ny, nx))
+            component_sizes.append(size)
+
+    error_pixel_cluster_count = len(component_sizes)
+    largest_error_pixel_cluster_fraction = (
+        float(max(component_sizes) / error_pixel_count) if error_pixel_count > 0 and component_sizes else 0.0
+    )
+    random_baseline_fraction = float(error_pixel_count / max(1, height * width))
+    error_pixel_cluster_excess = max(0.0, largest_error_pixel_cluster_fraction - random_baseline_fraction)
+
     spatial_quality_score = (
         mean_delta2
         + (0.10 * std_delta2)
         + (0.35 * tile_std_delta2)
         + (2.0 * mean_delta2 * concentration_excess)
+        + (0.5 * mean_delta2 * error_pixel_cluster_excess)
     )
     return {
         "mean_delta2": mean_delta2,
         "std_delta2": std_delta2,
         "tile_std_delta2": tile_std_delta2,
         "localized_error_fraction": localized_error_fraction,
+        "error_pixel_count": float(error_pixel_count),
+        "error_pixel_cluster_count": float(error_pixel_cluster_count),
+        "largest_error_pixel_cluster_fraction": largest_error_pixel_cluster_fraction,
+        "error_pixel_cluster_excess": error_pixel_cluster_excess,
         "spatial_quality_score": float(spatial_quality_score),
     }
 

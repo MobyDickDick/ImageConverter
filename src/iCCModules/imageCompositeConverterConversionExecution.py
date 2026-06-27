@@ -795,6 +795,10 @@ def convertOneImpl(
     std_delta2 = float("inf")
     tile_std_delta2 = float("inf")
     localized_error_fraction = float("inf")
+    error_pixel_count = float("inf")
+    error_pixel_cluster_count = float("inf")
+    largest_error_pixel_cluster_fraction = float("inf")
+    error_pixel_cluster_excess = float("inf")
     spatial_quality_score = float("inf")
     if img is not None:
         height, width = img.shape[:2]
@@ -813,6 +817,14 @@ def convertOneImpl(
                     tile_std_delta2 = float(spatial_metrics.get("tile_std_delta2", float("inf")))
                     localized_error_fraction = float(
                         spatial_metrics.get("localized_error_fraction", float("inf"))
+                    )
+                    error_pixel_count = float(spatial_metrics.get("error_pixel_count", float("inf")))
+                    error_pixel_cluster_count = float(spatial_metrics.get("error_pixel_cluster_count", float("inf")))
+                    largest_error_pixel_cluster_fraction = float(
+                        spatial_metrics.get("largest_error_pixel_cluster_fraction", float("inf"))
+                    )
+                    error_pixel_cluster_excess = float(
+                        spatial_metrics.get("error_pixel_cluster_excess", float("inf"))
                     )
                     spatial_quality_score = float(
                         spatial_metrics.get("spatial_quality_score", float("inf"))
@@ -839,6 +851,10 @@ def convertOneImpl(
         "std_delta2": float(std_delta2),
         "tile_std_delta2": float(tile_std_delta2),
         "localized_error_fraction": float(localized_error_fraction),
+        "error_pixel_count": float(error_pixel_count),
+        "error_pixel_cluster_count": float(error_pixel_cluster_count),
+        "largest_error_pixel_cluster_fraction": float(largest_error_pixel_cluster_fraction),
+        "error_pixel_cluster_excess": float(error_pixel_cluster_excess),
         "spatial_quality_score": float(spatial_quality_score),
         "w": int(width),
         "h": int(height),

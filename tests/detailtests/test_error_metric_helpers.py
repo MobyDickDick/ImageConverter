@@ -198,3 +198,32 @@ def test_spatial_delta2_quality_penalizes_localized_structure() -> None:
     assert clustered_metrics["tile_std_delta2"] > distributed_metrics["tile_std_delta2"]
     assert clustered_metrics["localized_error_fraction"] > distributed_metrics["localized_error_fraction"]
     assert clustered_metrics["spatial_quality_score"] > distributed_metrics["spatial_quality_score"]
+
+
+def test_spatial_delta2_quality_reports_upper_quartile_error_pixel_clustering() -> None:
+    img_orig = np.zeros((8, 8, 3), dtype=np.uint8)
+    clustered = np.zeros_like(img_orig)
+    distributed = np.zeros_like(img_orig)
+    clustered[1:3, 1:3, :] = 10
+    for y, x in [(0, 0), (0, 4), (4, 0), (4, 4)]:
+        distributed[y, x, :] = 10
+
+    clustered_metrics = error_metric_helpers.calculateSpatialDelta2QualityImpl(
+        img_orig,
+        clustered,
+        cv2_module=_FakeCv2,
+        np_module=np,
+    )
+    distributed_metrics = error_metric_helpers.calculateSpatialDelta2QualityImpl(
+        img_orig,
+        distributed,
+        cv2_module=_FakeCv2,
+        np_module=np,
+    )
+
+    assert clustered_metrics["error_pixel_count"] == distributed_metrics["error_pixel_count"] == 4.0
+    assert clustered_metrics["error_pixel_cluster_count"] == 1.0
+    assert distributed_metrics["error_pixel_cluster_count"] == 4.0
+    assert clustered_metrics["largest_error_pixel_cluster_fraction"] == 1.0
+    assert distributed_metrics["largest_error_pixel_cluster_fraction"] == 0.25
+    assert clustered_metrics["error_pixel_cluster_excess"] > distributed_metrics["error_pixel_cluster_excess"]
