@@ -93,6 +93,26 @@ def _default_candidate_provider(
                     candidate["points"] = candidate_points
                     yield candidate
 
+        stroke = str(element.get("stroke", "")).strip().lower()
+        if stroke not in {"", "none", "transparent"}:
+            for color in (
+                "#6f6f6f",
+                "#7f7f7f",
+                "#8a8a8a",
+                "#969696",
+                "#a0a0a0",
+                "#176f28",
+                "#2f8f3d",
+                "#3c9f44",
+                "#43ad49",
+                "#68b868",
+            ):
+                if color == stroke:
+                    continue
+                candidate = copy.deepcopy(element)
+                candidate["stroke"] = color
+                yield candidate
+
     if element.get("kind") in {"PlusGlyph", "MinusGlyph"}:
         for delta in (-0.02, 0.02):
             candidate = copy.deepcopy(element)

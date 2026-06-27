@@ -6,7 +6,7 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-06-19)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `401` · Erledigt `359` · Offen `42`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `404` · Erledigt `361` · Offen `43`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -3941,3 +3941,12 @@ endet. Die Detailableitung und Akzeptanzkriterien stehen in
 - **Sicherung:** Der fokussierte Square-Badge-Regressionstest läuft grün; die absolute Runtime-ID-Nullprüfung meldet weiterhin `0 occurrences`. Der isolierte CLI-Lauf für `SE0041_1` endet mit Exit `0` und rendert die Variante ohne `manual_review_elementwise_symbol_fit`-Fallback.
 - **Qualität:** Die direkte Square-Badge-Parametrisierung erreicht `Mean-Delta²=30585.052734` (`Fehler/Pixel=0.059423`) und ist damit noch schlechter als die vorherige elementweise Annäherung; sie ist daher als Architekturfortschritt, nicht als Qualitätsabschluss zu werten.
 - **Nächster sinnvoller Schritt:** Den Square-Badge-SVG-Seed weiter an Rasterfläche, Stiel-/Armgeometrie und Antialiasing tunen oder in der Rotation mit `GE9012_6M` fortfahren.
+
+
+### Fortschritt vs. Blocker (Session 2026-06-27, DLG0021 PolygonPath-Stroke-Probes Run TO)
+
+- **Fortschritt:** Der nach Run TN dokumentierte DLG0021-Folgepunkt wurde als generische Geometry-IR-Optimiererweiterung umgesetzt: `PolygonPath`-Elemente prüfen nun neutrale Grau-/Grün-Stroke-Farbproben und übernehmen sie nur bei strikt sinkendem Renderfehler.
+- **Sicherung:** Der fokussierte Optimierer-Testblock läuft grün; die absolute Runtime-ID-Nullprüfung meldet weiterhin `0 occurrences`. Der isolierte CLI-Lauf für `DLG0021` endet mit Exit `0`.
+- **Qualität:** Die isolierte Metrik bleibt gegenüber Run TN stabil bei `Mean-Delta²=18587.574219` (`Fehler/Pixel=0.081819`), weil keine der neuen Stroke-Farbproben den bisherigen Punkt-/Füllfarbstand weiter verbessert.
+- **Perception-Lerneffekt:** `DLG0021` bleibt `nur Sonderfall`; die Verbesserung ist eine katalogfreie Optimierer-Verallgemeinerung, keine neue reine Bilddetektion.
+- **Nächster sinnvoller Schritt:** In der aktiven Plan-B-Liste rotieren oder weiteres DLG-Farb-/Kontur-Feintuning versuchen.
