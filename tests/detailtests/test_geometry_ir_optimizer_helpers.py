@@ -108,6 +108,45 @@ def test_default_optimizer_refines_neutral_rect_to_warm_light_fill() -> None:
     assert result["steps"][0]["accepted"] is True
 
 
+def test_default_optimizer_refines_neutral_rect_to_green_tinted_fill() -> None:
+    ir = [{"kind": "ColorPatch", "id": "background", "bbox": [0.0, 0.0, 1.0, 1.0], "fill": "#ffffff"}]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: 0.0
+        if candidate_ir[0]["fill"] == "#bfd4ba"
+        else 10.0,
+    )
+
+    assert result["geometry_ir"][0]["fill"] == "#bfd4ba"
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_polygon_path_points_locally() -> None:
+    ir = [
+        {
+            "kind": "PolygonPath",
+            "id": "checkmark",
+            "points": [[0.20, 0.50], [0.50, 0.70], [0.80, 0.10]],
+            "fill": "none",
+            "stroke": "#3c9f44",
+            "stroke_width": 0.08,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: abs(candidate_ir[0]["points"][1][1] - 0.72),
+    )
+
+    assert result["geometry_ir"][0]["points"][1][1] == pytest.approx(0.72)
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
 def test_select_geometry_ir_prefers_elementwise_result_and_requires_explicit_one_shot_emergency() -> None:
     optimized = [{"kind": "RectBorder", "id": "optimized"}]
     raw = [{"kind": "RectBorder", "id": "raw"}]

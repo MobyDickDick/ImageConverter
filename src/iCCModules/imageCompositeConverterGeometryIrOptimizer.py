@@ -75,6 +75,24 @@ def _default_candidate_provider(
             candidate["stroke_width"] = max(0.001, stroke_width * factor)
             yield candidate
 
+    points = element.get("points")
+    if element.get("kind") == "PolygonPath" and isinstance(points, list) and points:
+        for point_index, point in enumerate(points):
+            if not (isinstance(point, list) and len(point) >= 2):
+                continue
+            for coord_index in (0, 1):
+                for delta in (-0.02, 0.02):
+                    candidate = copy.deepcopy(element)
+                    candidate_points = candidate.get("points")
+                    if not isinstance(candidate_points, list):
+                        continue
+                    candidate_point = candidate_points[point_index]
+                    if not (isinstance(candidate_point, list) and len(candidate_point) >= 2):
+                        continue
+                    candidate_point[coord_index] = _clamp01(float(candidate_point[coord_index]) + delta)
+                    candidate["points"] = candidate_points
+                    yield candidate
+
     if element.get("kind") in {"PlusGlyph", "MinusGlyph"}:
         for delta in (-0.02, 0.02):
             candidate = copy.deepcopy(element)
@@ -94,6 +112,10 @@ def _default_candidate_provider(
                 "#c0c0c0",
                 "#b8c8d0",
                 "#b1c1cc",
+                "#d8ead2",
+                "#d0e4ca",
+                "#c8dcc2",
+                "#bfd4ba",
                 "#f2b8b4",
                 "#f2bcb8",
                 "#f3c0bc",
