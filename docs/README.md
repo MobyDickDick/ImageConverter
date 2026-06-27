@@ -453,3 +453,5 @@ Alle Markdown-Dokumente unter `docs/`, damit sie von `README.md` aus erreichbar 
 
 - [Nächstes Arbeitspaket – GE1001_M Checkmark-Primitive Run SQ (2026-06-24)](next_arbeitspaket_2026-06-24_runSQ.md)
 - [Nächstes Arbeitspaket – GE9021_7M U-Loop-Primitive Run SR (2026-06-25)](next_arbeitspaket_2026-06-25_runSR.md)
+
+- [Nächstes Arbeitspaket – GE1410_L Diagramm-Stroke-Feintuning Run TG (2026-06-27)](next_arbeitspaket_2026-06-27_runTG.md)
