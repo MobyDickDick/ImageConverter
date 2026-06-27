@@ -67,6 +67,10 @@ def runSemanticBadgeIterationImpl(
         badge_params["cx"] = float(width) / 2.0
         badge_params["cy"] = max(1.0, float(width) / 2.0)
         badge_params["r"] = max(1.0, (float(width) - 2.0) / 2.0)
+        badge_params["square_badge_x"] = 1.0
+        badge_params["square_badge_y"] = 1.25
+        badge_params["square_badge_side"] = max(1.0, float(width) - 2.0)
+        badge_params["square_badge_height"] = max(1.0, float(width) - 1.5)
         badge_params["arm_enabled"] = False
         badge_params["stem_enabled"] = True
         badge_params["stem_x"] = max(0.0, (float(width) / 2.0) - 1.0)

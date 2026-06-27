@@ -191,18 +191,20 @@ def generateBadgeSvgImpl(
         and str(p.get("head_style", "")).lower() == "square_badge"
     ):
         if square_badge_head and bool(p.get("square_badge_full_canvas", False)):
-            side = max(0.0, float(w) - 1.0)
-            x = (float(w) - side) / 2.0
-            y = 0.5
+            side = max(0.0, float(p.get("square_badge_side", float(w) - 1.0)))
+            badge_height = max(0.0, float(p.get("square_badge_height", side)))
+            x = float(p.get("square_badge_x", (float(w) - side) / 2.0))
+            y = float(p.get("square_badge_y", 0.5))
         else:
             side = max(0.0, float(p["r"]) * 2.0)
+            badge_height = side
             x = float(p["cx"]) - (side / 2.0)
             y = float(p["cy"]) - (side / 2.0)
         fill = str(p.get("head_fill", grayhex_fn(p["fill_gray"])))
         stroke = str(p.get("head_stroke", grayhex_fn(p["stroke_gray"])))
         elements.append(
             (
-                f'  <rect x="{x:.4f}" y="{y:.4f}" width="{side:.4f}" height="{side:.4f}" '
+                f'  <rect x="{x:.4f}" y="{y:.4f}" width="{side:.4f}" height="{badge_height:.4f}" '
                 f'fill="{fill}" stroke="{stroke}" '
                 f'stroke-width="{p["stroke_circle"]:.4f}"/>'
             )
