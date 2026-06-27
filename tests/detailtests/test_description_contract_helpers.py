@@ -730,6 +730,22 @@ def test_description_parser_attaches_generic_chart_triangle_pair_geometry_ir() -
     assert params["geometry_ir"][4]["primitive_decomposition"]["schema_version"] == "chart_triangle_pair_decomposition_v1"
 
 
+
+def test_geometry_ir_renderer_emits_chart_triangle_pair_calibrated_svg() -> None:
+    description = (
+        "Diagrammlinie (x-/y-Achse schwarz), graue horizontale Linie, zwei Dreiecke, "
+        "welche sich in einer Spitze zusammen mit der grauen treffen. Oberes Dreieck "
+        "ist rot, unteres Dreieck ist blau."
+    )
+    _desc, params = _parse(description)
+
+    svg = geometry_runtime.renderGeometryIrToSvgImpl(25, 25, params["geometry_ir"])
+
+    assert 'id="diagram_y_axis" d="M 0.5 0 L 0.5 24.5" stroke="#000000" stroke-width="0.9"' in svg
+    assert 'id="diagram_horizontal_reference" d="M 0.75 12.5 L 24.625 12.5" stroke="#8a8a8a" stroke-width="0.9"' in svg
+    assert 'id="upper_red_triangle" d="M 7 4 L 18 4 L 12 12.5" stroke="#343434" stroke-width="0.6" fill="#e10821"' in svg
+    assert 'id="lower_blue_triangle" d="M 12 13 L 7 21 L 18 21" stroke="#343434" stroke-width="0.6" fill="#1a5d83"' in svg
+
 def test_description_parser_chart_triangle_pair_geometry_ir_is_filename_invariant() -> None:
     description = "Diagramm mit schwarzer x-Achse und y-Achse, graue horizontale Linie, rotes oberes Dreieck und blaues unteres Dreieck."
     mapping = {"NEUTRAL_CHART_A": description, "NEUTRAL_CHART_B": description}
