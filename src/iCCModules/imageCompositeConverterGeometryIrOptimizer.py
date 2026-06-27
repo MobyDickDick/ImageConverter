@@ -93,6 +93,22 @@ def _default_candidate_provider(
                     candidate["points"] = candidate_points
                     yield candidate
 
+        linecap = str(element.get("linecap", "butt")).strip().lower()
+        for candidate_linecap in ("butt", "round", "square"):
+            if candidate_linecap == linecap:
+                continue
+            candidate = copy.deepcopy(element)
+            candidate["linecap"] = candidate_linecap
+            yield candidate
+
+        linejoin = str(element.get("linejoin", "round")).strip().lower()
+        for candidate_linejoin in ("round", "miter", "bevel"):
+            if candidate_linejoin == linejoin:
+                continue
+            candidate = copy.deepcopy(element)
+            candidate["linejoin"] = candidate_linejoin
+            yield candidate
+
         stroke = str(element.get("stroke", "")).strip().lower()
         if stroke not in {"", "none", "transparent"}:
             for color in (
