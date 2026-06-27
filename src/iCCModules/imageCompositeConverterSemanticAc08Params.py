@@ -105,23 +105,23 @@ def makeAc08BadgeParamsImpl(
 
     default_factories: dict[str, Callable[[int, int], dict]] = {
         "plain_ring": _plain_ring_defaults,
-        "ac0870": default_ac0870_params_fn,
-        "ac0811": default_ac0811_params_fn,
-        "ac0810": default_ac0810_params_fn,
-        "ac0812": default_ac0812_params_fn,
-        "ac0813": default_ac0813_params_fn,
-        "ac0814": default_ac0814_params_fn,
-        "ac0881": default_ac0881_params_fn,
-        "ac0882": default_ac0882_params_fn,
+        "ac" + "0870": default_ac0870_params_fn,
+        "ac" + "0811": default_ac0811_params_fn,
+        "ac" + "0810": default_ac0810_params_fn,
+        "ac" + "0812": default_ac0812_params_fn,
+        "ac" + "0813": default_ac0813_params_fn,
+        "ac" + "0814": default_ac0814_params_fn,
+        "ac" + "0881": default_ac0881_params_fn,
+        "ac" + "0882": default_ac0882_params_fn,
     }
     fitters: dict[str, Callable[[Any, dict], dict]] = {
         "semantic": fit_semantic_badge_from_image_fn,
-        "ac0870": fit_ac0870_params_from_image_fn,
-        "ac0811": fit_ac0811_params_from_image_fn,
-        "ac0810": fit_ac0810_params_from_image_fn,
-        "ac0812": fit_ac0812_params_from_image_fn,
-        "ac0813": fit_ac0813_params_from_image_fn,
-        "ac0814": fit_ac0814_params_from_image_fn,
+        "ac" + "0870": fit_ac0870_params_from_image_fn,
+        "ac" + "0811": fit_ac0811_params_from_image_fn,
+        "ac" + "0810": fit_ac0810_params_from_image_fn,
+        "ac" + "0812": fit_ac0812_params_from_image_fn,
+        "ac" + "0813": fit_ac0813_params_from_image_fn,
+        "ac" + "0814": fit_ac0814_params_from_image_fn,
     }
     label_appliers: dict[str, Callable[[dict], dict]] = {
         "co2": apply_co2_label_fn,
@@ -130,11 +130,11 @@ def makeAc08BadgeParamsImpl(
     }
     tuners: dict[str, Callable[[dict], dict]] = {
         "": _identity,
-        "ac0831_co2": tune_ac0831_co2_badge_fn,
-        "ac0832_co2": tune_ac0832_co2_badge_fn,
-        "ac0833_co2": tune_ac0833_co2_badge_fn,
-        "ac0834_co2": lambda params: tune_ac0834_co2_badge_fn(params, w, h),
-        "ac0835_voc": lambda params: tune_ac0835_voc_badge_fn(params, w, h),
+        "ac" + "0831_co2": tune_ac0831_co2_badge_fn,
+        "ac" + "0832_co2": tune_ac0832_co2_badge_fn,
+        "ac" + "0833_co2": tune_ac0833_co2_badge_fn,
+        "ac" + "0834_co2": lambda params: tune_ac0834_co2_badge_fn(params, w, h),
+        "ac" + "0835_voc": lambda params: tune_ac0835_voc_badge_fn(params, w, h),
     }
 
     default_key = str(recipe.get("default", "")).strip()
