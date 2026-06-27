@@ -68,6 +68,22 @@ def test_sequential_optimizer_rejects_regression_and_keeps_current_ir() -> None:
     ]
 
 
+def test_default_optimizer_refines_neutral_rect_fill_color() -> None:
+    ir = [{"kind": "RectBorder", "id": "rect", "bbox": [0.0, 0.0, 1.0, 1.0], "fill": "#e8e8e8"}]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: 0.0
+        if candidate_ir[0]["fill"] == "#b1c1cc"
+        else 10.0,
+    )
+
+    assert result["geometry_ir"][0]["fill"] == "#b1c1cc"
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
 def test_select_geometry_ir_prefers_elementwise_result_and_requires_explicit_one_shot_emergency() -> None:
     optimized = [{"kind": "RectBorder", "id": "optimized"}]
     raw = [{"kind": "RectBorder", "id": "raw"}]

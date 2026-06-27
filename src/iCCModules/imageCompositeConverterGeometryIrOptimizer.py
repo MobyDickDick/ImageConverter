@@ -81,6 +81,26 @@ def _default_candidate_provider(
             candidate["dy"] = float(element.get("dy", 0.0)) + delta
             yield candidate
 
+    if element.get("kind") in {"ColorPatch", "RectBorder"} and isinstance(element.get("fill"), str):
+        fill = str(element.get("fill", "")).strip().lower()
+        if fill not in {"", "none", "transparent"}:
+            for color in (
+                "#f0f0f0",
+                "#e8e8e8",
+                "#e0e0e0",
+                "#d8d8d8",
+                "#d0d0d0",
+                "#c8c8c8",
+                "#c0c0c0",
+                "#b8c8d0",
+                "#b1c1cc",
+            ):
+                if color == fill:
+                    continue
+                candidate = copy.deepcopy(element)
+                candidate["fill"] = color
+                yield candidate
+
 
 def evaluateGeometryIrImpl(geometry_ir: GeometryIr, *, render_fn: RenderFn, error_fn: ErrorFn) -> float:
     """Render and score a Geometry-IR chain."""
@@ -583,6 +603,17 @@ def optimizeGeometryIrRegistrationImpl(
         current_rendered = element_refinement["rendered"]
         current_error = float(element_refinement["final_error"])
 
+    generic_element_refinement = optimizeGeometryIrSequentiallyImpl(
+        current_ir,
+        render_fn=render_fn,
+        error_fn=error_fn,
+        min_improvement=min_improvement,
+    )
+    if float(generic_element_refinement["final_error"]) < current_error - min_improvement:
+        current_ir = generic_element_refinement["geometry_ir"]
+        current_rendered = render_fn(current_ir)
+        current_error = float(generic_element_refinement["final_error"])
+
     return {
         "mode": "geometry_ir_raster_registration",
         "geometry_ir": current_ir,
@@ -594,6 +625,11 @@ def optimizeGeometryIrRegistrationImpl(
         "element_refinement": {
             key: value
             for key, value in element_refinement.items()
+            if key not in {"geometry_ir", "rendered"}
+        },
+        "generic_element_refinement": {
+            key: value
+            for key, value in generic_element_refinement.items()
             if key not in {"geometry_ir", "rendered"}
         },
     }
