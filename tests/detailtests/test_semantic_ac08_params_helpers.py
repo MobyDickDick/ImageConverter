@@ -348,3 +348,60 @@ def test_make_ac08_badge_params_uses_common_right_arm_finalizer_for_ac0864() -> 
     assert result["text_mode"] == "rf"
     assert result["label"] == "rF"
     assert result["enforced_right"] is True
+
+
+def test_make_ac08_badge_params_applies_centered_rf_text_mode_for_ac0840() -> None:
+    calls: list[str] = []
+
+    def _default_ac0870(_w: int, _h: int) -> dict:
+        calls.append("default_ac0870")
+        return {"seed": "ac0870", "stroke_gray": 152, "r": 9.0}
+
+    def _fit_semantic(_img, params: dict) -> dict:
+        calls.append("fit_semantic")
+        patched = dict(params)
+        patched["fit"] = True
+        return patched
+
+    def _finalize(name: str, params: dict) -> dict:
+        calls.append(f"finalize:{name}")
+        patched = dict(params)
+        patched["finalized"] = name
+        return patched
+
+    result = helpers.makeAc08BadgeParamsImpl(
+        20,
+        30,
+        "AC0840",
+        object(),
+        default_ac0870_params_fn=_default_ac0870,
+        default_ac0811_params_fn=lambda *_: _stub_params("ac0811"),
+        default_ac0810_params_fn=lambda *_: _stub_params("ac0810"),
+        default_ac0812_params_fn=lambda *_: _stub_params("ac0812"),
+        default_ac0813_params_fn=lambda *_: _stub_params("ac0813"),
+        default_ac0814_params_fn=lambda *_: _stub_params("ac0814"),
+        default_ac0881_params_fn=lambda *_: _stub_params("ac0881"),
+        default_ac0882_params_fn=lambda *_: _stub_params("ac0882"),
+        fit_ac0870_params_from_image_fn=lambda img, defaults: defaults,
+        fit_semantic_badge_from_image_fn=_fit_semantic,
+        fit_ac0811_params_from_image_fn=lambda img, defaults: defaults,
+        fit_ac0810_params_from_image_fn=lambda img, defaults: defaults,
+        fit_ac0812_params_from_image_fn=lambda img, defaults: defaults,
+        fit_ac0813_params_from_image_fn=lambda img, defaults: defaults,
+        fit_ac0814_params_from_image_fn=lambda img, defaults: defaults,
+        apply_co2_label_fn=lambda p: p,
+        apply_voc_label_fn=lambda p: p,
+        tune_ac0831_co2_badge_fn=lambda p: p,
+        tune_ac0832_co2_badge_fn=lambda p: p,
+        tune_ac0833_co2_badge_fn=lambda p: p,
+        tune_ac0834_co2_badge_fn=lambda p, _w, _h: p,
+        tune_ac0835_voc_badge_fn=lambda p, _w, _h: p,
+        finalize_ac08_style_fn=_finalize,
+        enforce_left_arm_badge_geometry_fn=lambda p, _w, _h: p,
+    )
+
+    assert calls == ["default_ac0870", "fit_semantic", "finalize:AC0840"]
+    assert result["text_mode"] == "rf"
+    assert result["label"] == "rF"
+    assert result["draw_text"] is True
+    assert result["fit"] is True

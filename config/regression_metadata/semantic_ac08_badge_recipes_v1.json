@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "purpose": "Data-driven AC08 semantic badge recipes. Keys are catalog families; runtime code applies recipes using only the image, description-selected family, and this configuration instead of source-level per-image branches.",
+  "recipes": {
+    "AC0800": {"default": "plain_ring", "fit": "semantic", "preserve_plain_ring_geometry": true},
+    "AC0810": {"default": "ac0810", "fit": "ac0810"},
+    "AC0811": {"default": "ac0811", "fit": "ac0811"},
+    "AC0812": {"default": "ac0812", "fit": "ac0812", "connector": "left"},
+    "AC0813": {"default": "ac0813", "fit": "ac0813"},
+    "AC0814": {"default": "ac0814", "fit": "ac0814", "connector": "right"},
+    "AC0820": {"default": "ac0870", "fit": "semantic", "labels": ["co2"]},
+    "AC0831": {"default": "ac0881", "fit": "ac0811", "labels": ["co2"], "tune": "ac0831_co2"},
+    "AC0832": {"default": "ac0812", "fit": "ac0812", "labels": ["co2"], "tune": "ac0832_co2", "connector": "left"},
+    "AC0833": {"default": "ac0813", "fit": "ac0813", "labels": ["co2"], "tune": "ac0833_co2"},
+    "AC0834": {"default": "ac0814", "fit": "ac0814", "labels": ["co2"], "tune": "ac0834_co2", "connector": "right"},
+    "AC0835": {"default": "ac0870", "fit": "semantic", "labels": ["voc"], "tune": "ac0835_voc"},
+    "AC0836": {"default": "ac0881", "fit": "ac0811", "labels": ["voc"]},
+    "AC0837": {"default": "ac0812", "fit": "ac0812", "labels": ["voc"], "connector": "left"},
+    "AC0838": {"default": "ac0813", "fit": "ac0813", "labels": ["voc"]},
+    "AC0839": {"default": "ac0814", "fit": "ac0814", "labels": ["voc"], "connector": "right"},
+    "AC0840": {"default": "ac0870", "fit": "semantic", "labels": ["rf"]},
+    "AC0842": {"default": "ac0812", "fit": "ac0812", "labels": ["rf"], "connector": "left"},
+    "AC0844": {"default": "ac0814", "fit": "ac0814", "labels": ["rf"], "connector": "right"},
+    "AC0850": {"default": "ac0870", "fit": "semantic", "labels": ["rf"]},
+    "AC0861": {"default": "ac0881", "fit": "ac0811", "labels": ["rf"]},
+    "AC0862": {"default": "ac0812", "fit": "ac0812", "labels": ["rf"], "connector": "left"},
+    "AC0863": {"default": "ac0813", "fit": "ac0813", "labels": ["rf"]},
+    "AC0864": {"default": "ac0814", "fit": "ac0814", "labels": ["rf"], "connector": "right"},
+    "AC0870": {"default": "ac0870", "fit": "ac0870"},
+    "AC0881": {"default": "ac0881", "fit": "semantic"},
+    "AC0882": {"default": "ac0882", "fit": "semantic", "connector": "left"}
+  }
+}
