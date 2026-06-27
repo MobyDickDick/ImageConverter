@@ -94,6 +94,10 @@ def _default_candidate_provider(
                 "#c0c0c0",
                 "#b8c8d0",
                 "#b1c1cc",
+                "#f2b8b4",
+                "#f2bcb8",
+                "#f3c0bc",
+                "#f4c4c0",
             ):
                 if color == fill:
                     continue
