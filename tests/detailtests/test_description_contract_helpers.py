@@ -664,10 +664,10 @@ def test_description_parser_attaches_dlg_style_checkbox_checkmark_geometry_ir() 
     checkmark = params["geometry_ir"][3]
     assert checkbox["role"] == "checkbox"
     assert checkbox["bbox"] == [0.250, 0.250, 0.580, 0.600]
-    assert shadow["points"] == [[0.285, 0.590], [0.510, 0.800], [0.880, 0.025]]
-    assert shadow["stroke_width"] == 0.105
+    assert shadow["points"] == [[0.255, 0.560], [0.490, 0.780], [0.860, 0.005]]
+    assert shadow["stroke_width"] == 0.120
     assert checkmark["role"] == "checkmark"
-    assert checkmark["points"] == [[0.310, 0.545], [0.530, 0.730], [0.855, 0.005]]
+    assert checkmark["points"] == [[0.285, 0.525], [0.510, 0.710], [0.835, 0.000]]
     assert checkmark["stroke_width"] == 0.075
     assert checkmark["stroke_gradient"]["stops"][0]["color"] == "#176f28"
 
