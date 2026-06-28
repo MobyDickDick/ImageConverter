@@ -884,6 +884,8 @@ def test_description_driven_symbol_algorithm_skips_sample_svg_lookup_for_ac0100_
 
     assert result == ("AC0100_S", description, {"mode": "non_composite"}, 1, 100.0)
     assert non_composite_runtime_helpers._has_description_driven_symbol_algorithm(description)
+    assert any("description_driven_algorithm_available=1" in line for row in logs for line in row)
+    assert any("sample_svg_lookup=skipped_description_driven_algorithm" in line for row in logs for line in row)
     assert all("sample" not in content for content in rendered_inputs)
     assert not any("status=non_composite_plan_b_sample_svg_selected" in line for row in logs for line in row)
     assert artifacts and artifacts[0][1] == "algorithm_rendered"
@@ -934,6 +936,8 @@ def test_description_driven_symbol_algorithm_skips_samples_for_all_ac0100_sizes(
         assert result == (base_name, description, {"mode": "non_composite", "variant_name": base_name}, 1, 100.0)
 
     assert non_composite_runtime_helpers._has_description_driven_symbol_algorithm(description)
+    assert any("description_driven_algorithm_available=1" in line for row in logs for line in row)
+    assert any("sample_svg_lookup=skipped_description_driven_algorithm" in line for row in logs for line in row)
     assert all("sample" not in content for content in rendered_inputs)
     assert not any("status=non_composite_plan_b_sample_svg_selected" in line for row in logs for line in row)
     assert artifacts and all(rendered == "algorithm_rendered" for _svg, rendered in artifacts)
