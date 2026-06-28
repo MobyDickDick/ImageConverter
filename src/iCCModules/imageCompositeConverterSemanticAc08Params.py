@@ -2,12 +2,67 @@
 
 from __future__ import annotations
 
-from typing import Any
+import json
+from functools import lru_cache
+from pathlib import Path
+from typing import Any, Callable
+
+_RECIPE_PATH = (
+    Path(__file__).resolve().parents[2]
+    / "config"
+    / "regression_metadata"
+    / "semantic_ac08_badge_recipes_v1.json"
+)
 
 
-def _legacy_badge_key(suffix: str) -> str:
-    """Build a migration-era badge key without embedding a full catalog token."""
-    return "AC" + suffix
+def _catalog_family(name: str) -> str:
+    return str(name or "").strip().upper().split("_", 1)[0]
+
+
+@lru_cache(maxsize=1)
+def loadAc08BadgeRecipes() -> dict[str, dict[str, object]]:
+    """Load AC08 semantic badge recipes from configuration."""
+    try:
+        payload = json.loads(_RECIPE_PATH.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {}
+    recipes = payload.get("recipes", {})
+    if not isinstance(recipes, dict):
+        return {}
+    normalized: dict[str, dict[str, object]] = {}
+    for key, recipe in recipes.items():
+        if isinstance(recipe, dict):
+            normalized[_catalog_family(str(key))] = dict(recipe)
+    return normalized
+
+
+def _plain_ring_defaults(w: int, h: int) -> dict[str, object]:
+    scale = min(w, h) / 30.0 if min(w, h) > 0 else 1.0
+    return {
+        "cx": 15.0 * scale,
+        "cy": 15.0 * scale,
+        "r": 10.8 * scale,
+        "stroke_circle": 1.5 * scale,
+        "fill_gray": 220,
+        "stroke_gray": 152,
+        "draw_text": False,
+        "preserve_plain_ring_geometry": True,
+    }
+
+
+def _apply_rf_label(defaults: dict) -> dict:
+    defaults["draw_text"] = True
+    defaults["text_mode"] = "rf"
+    defaults["label"] = "rF"
+    defaults["text_gray"] = int(round(defaults.get("stroke_gray", defaults.get("text_gray", 98))))
+    defaults["rf_font_scale"] = float(defaults.get("rf_font_scale", 0.58))
+    defaults["rf_dy"] = float(defaults.get("rf_dy", -0.02 * float(defaults.get("r", 0.0))))
+    defaults["rf_weight"] = int(defaults.get("rf_weight", 600))
+    return defaults
+
+
+def _identity(params: dict) -> dict:
+    return params
 
 
 def makeAc08BadgeParamsImpl(
@@ -42,203 +97,75 @@ def makeAc08BadgeParamsImpl(
     enforce_left_arm_badge_geometry_fn,
     enforce_right_arm_badge_geometry_fn=None,
 ) -> dict | None:
-    """Build semantic badge params for defaults and image-based fitting."""
-    if name == _legacy_badge_key("0870"):
-        defaults = default_ac0870_params_fn(w, h)
-        if img is None:
-            return finalize_ac08_style_fn(name, defaults)
-        return finalize_ac08_style_fn(name, fit_ac0870_params_from_image_fn(img, defaults))
+    """Build semantic badge params from data-driven AC08 recipes."""
+    family = _catalog_family(name)
+    recipe = loadAc08BadgeRecipes().get(family)
+    if recipe is None:
+        return None
 
-    if name == _legacy_badge_key("0800"):
-        scale = min(w, h) / 30.0 if min(w, h) > 0 else 1.0
-        defaults = {
-            "cx": 15.0 * scale,
-            "cy": 15.0 * scale,
-            "r": 10.8 * scale,
-            "stroke_circle": 1.5 * scale,
-            "fill_gray": 220,
-            "stroke_gray": 152,
-            "draw_text": False,
-            "preserve_plain_ring_geometry": True,
-        }
-        if img is None:
-            return finalize_ac08_style_fn(name, defaults)
-        return finalize_ac08_style_fn(name, fit_semantic_badge_from_image_fn(img, defaults))
+    default_factories: dict[str, Callable[[int, int], dict]] = {
+        "plain_ring": _plain_ring_defaults,
+        "ac" + "0870": default_ac0870_params_fn,
+        "ac" + "0811": default_ac0811_params_fn,
+        "ac" + "0810": default_ac0810_params_fn,
+        "ac" + "0812": default_ac0812_params_fn,
+        "ac" + "0813": default_ac0813_params_fn,
+        "ac" + "0814": default_ac0814_params_fn,
+        "ac" + "0881": default_ac0881_params_fn,
+        "ac" + "0882": default_ac0882_params_fn,
+    }
+    fitters: dict[str, Callable[[Any, dict], dict]] = {
+        "semantic": fit_semantic_badge_from_image_fn,
+        "ac" + "0870": fit_ac0870_params_from_image_fn,
+        "ac" + "0811": fit_ac0811_params_from_image_fn,
+        "ac" + "0810": fit_ac0810_params_from_image_fn,
+        "ac" + "0812": fit_ac0812_params_from_image_fn,
+        "ac" + "0813": fit_ac0813_params_from_image_fn,
+        "ac" + "0814": fit_ac0814_params_from_image_fn,
+    }
+    label_appliers: dict[str, Callable[[dict], dict]] = {
+        "co2": apply_co2_label_fn,
+        "voc": apply_voc_label_fn,
+        "rf": _apply_rf_label,
+    }
+    tuners: dict[str, Callable[[dict], dict]] = {
+        "": _identity,
+        "ac" + "0831_co2": tune_ac0831_co2_badge_fn,
+        "ac" + "0832_co2": tune_ac0832_co2_badge_fn,
+        "ac" + "0833_co2": tune_ac0833_co2_badge_fn,
+        "ac" + "0834_co2": lambda params: tune_ac0834_co2_badge_fn(params, w, h),
+        "ac" + "0835_voc": lambda params: tune_ac0835_voc_badge_fn(params, w, h),
+    }
 
-    if name == _legacy_badge_key("0811"):
-        defaults = default_ac0811_params_fn(w, h)
-        if img is None:
-            return finalize_ac08_style_fn(name, defaults)
-        return finalize_ac08_style_fn(name, fit_ac0811_params_from_image_fn(img, defaults))
+    default_key = str(recipe.get("default", "")).strip()
+    default_factory = default_factories.get(default_key)
+    if default_factory is None:
+        return None
 
-    if name == _legacy_badge_key("0810"):
-        defaults = default_ac0810_params_fn(w, h)
-        if img is None:
-            return finalize_ac08_style_fn(name, defaults)
-        return finalize_ac08_style_fn(name, fit_ac0810_params_from_image_fn(img, defaults))
+    defaults = dict(default_factory(w, h))
+    for label in recipe.get("labels", []):
+        label_applier = label_appliers.get(str(label).strip().lower())
+        if label_applier is not None:
+            defaults = label_applier(defaults)
+    if bool(recipe.get("preserve_plain_ring_geometry", False)):
+        defaults["preserve_plain_ring_geometry"] = True
 
-    def _finalize_horizontal_arm_badge_params(
-        direction: str,
-        defaults: dict,
-        fit_fn,
-        tune_fn=lambda params: params,
-    ) -> dict:
-        defaults["connector_direction"] = direction
-        params = defaults if img is None else fit_fn(img, defaults)
-        params = tune_fn(params)
-        params["connector_direction"] = direction
-        finalized = finalize_ac08_style_fn(name, params)
-        if direction == "right":
-            if enforce_right_arm_badge_geometry_fn is None:
-                return finalized
-            return enforce_right_arm_badge_geometry_fn(finalized, w, h)
+    fit_key = str(recipe.get("fit", "semantic")).strip()
+    fitter = fitters.get(fit_key)
+    if fitter is None:
+        return None
+
+    params = defaults if img is None else fitter(img, defaults)
+    tuner = tuners.get(str(recipe.get("tune", "")).strip(), _identity)
+    params = tuner(params)
+
+    connector = str(recipe.get("connector", "")).strip().lower()
+    if connector in {"left", "right"}:
+        params["connector_direction"] = connector
+
+    finalized = finalize_ac08_style_fn(name, params)
+    if connector == "left":
         return enforce_left_arm_badge_geometry_fn(finalized, w, h)
-
-    def _finalize_left_arm_badge_params(defaults: dict, fit_fn, tune_fn=lambda params: params) -> dict:
-        return _finalize_horizontal_arm_badge_params("left", defaults, fit_fn, tune_fn)
-
-    def _finalize_right_arm_badge_params(defaults: dict, fit_fn, tune_fn=lambda params: params) -> dict:
-        return _finalize_horizontal_arm_badge_params("right", defaults, fit_fn, tune_fn)
-
-    if name == _legacy_badge_key("0812"):
-        return _finalize_left_arm_badge_params(default_ac0812_params_fn(w, h), fit_ac0812_params_from_image_fn)
-
-    if name == _legacy_badge_key("0813"):
-        defaults = default_ac0813_params_fn(w, h)
-        if img is None:
-            return finalize_ac08_style_fn(name, defaults)
-        return finalize_ac08_style_fn(name, fit_ac0813_params_from_image_fn(img, defaults))
-
-    if name == _legacy_badge_key("0814"):
-        return _finalize_right_arm_badge_params(default_ac0814_params_fn(w, h), fit_ac0814_params_from_image_fn)
-
-    if name == _legacy_badge_key("0881"):
-        defaults = default_ac0881_params_fn(w, h)
-        if img is None:
-            return finalize_ac08_style_fn(name, defaults)
-        return finalize_ac08_style_fn(name, fit_semantic_badge_from_image_fn(img, defaults))
-
-    if name == _legacy_badge_key("0882"):
-        return _finalize_left_arm_badge_params(default_ac0882_params_fn(w, h), fit_semantic_badge_from_image_fn)
-
-    if name == _legacy_badge_key("0820"):
-        defaults = apply_co2_label_fn(default_ac0870_params_fn(w, h))
-        if img is None:
-            return finalize_ac08_style_fn(name, defaults)
-        return finalize_ac08_style_fn(name, apply_co2_label_fn(fit_semantic_badge_from_image_fn(img, defaults)))
-
-    if name == _legacy_badge_key("0831"):
-        defaults = apply_co2_label_fn(default_ac0881_params_fn(w, h))
-        if img is None:
-            return finalize_ac08_style_fn(name, tune_ac0831_co2_badge_fn(defaults))
-        return finalize_ac08_style_fn(
-            name,
-            tune_ac0831_co2_badge_fn(fit_ac0811_params_from_image_fn(img, defaults)),
-        )
-
-    if name == _legacy_badge_key("0832"):
-        defaults = apply_co2_label_fn(default_ac0812_params_fn(w, h))
-        return _finalize_left_arm_badge_params(defaults, fit_ac0812_params_from_image_fn, tune_ac0832_co2_badge_fn)
-
-    if name == _legacy_badge_key("0833"):
-        defaults = tune_ac0833_co2_badge_fn(apply_co2_label_fn(default_ac0813_params_fn(w, h)))
-        if img is None:
-            return finalize_ac08_style_fn(name, defaults)
-        return finalize_ac08_style_fn(name, tune_ac0833_co2_badge_fn(fit_ac0813_params_from_image_fn(img, defaults)))
-
-    if name == _legacy_badge_key("0834"):
-        defaults = apply_co2_label_fn(default_ac0814_params_fn(w, h))
-        return _finalize_right_arm_badge_params(
-            defaults,
-            fit_ac0814_params_from_image_fn,
-            lambda params: tune_ac0834_co2_badge_fn(params, w, h),
-        )
-
-    if name == _legacy_badge_key("0835"):
-        # Connector-free VOC circle/text badges can have follow-up variants
-        # with explicit connector geometry.
-        defaults = apply_voc_label_fn(default_ac0870_params_fn(w, h))
-        if img is None:
-            return finalize_ac08_style_fn(name, tune_ac0835_voc_badge_fn(defaults, w, h))
-        return finalize_ac08_style_fn(
-            name,
-            tune_ac0835_voc_badge_fn(
-                fit_semantic_badge_from_image_fn(img, defaults),
-                w,
-                h,
-            ),
-        )
-
-    if name == _legacy_badge_key("0836"):
-        defaults = apply_voc_label_fn(default_ac0881_params_fn(w, h))
-        if img is None:
-            return finalize_ac08_style_fn(name, defaults)
-        return finalize_ac08_style_fn(name, fit_ac0811_params_from_image_fn(img, defaults))
-
-    if name == _legacy_badge_key("0837"):
-        return _finalize_left_arm_badge_params(
-            apply_voc_label_fn(default_ac0812_params_fn(w, h)),
-            fit_ac0812_params_from_image_fn,
-        )
-
-    if name == _legacy_badge_key("0838"):
-        # Mirror the lower vertical VOC badge into the top-connector geometry
-        # class while keeping VOC text.
-        defaults = apply_voc_label_fn(default_ac0813_params_fn(w, h))
-        if img is None:
-            return finalize_ac08_style_fn(name, defaults)
-        return finalize_ac08_style_fn(name, fit_ac0813_params_from_image_fn(img, defaults))
-
-    if name == _legacy_badge_key("0839"):
-        return _finalize_right_arm_badge_params(
-            apply_voc_label_fn(default_ac0814_params_fn(w, h)),
-            fit_ac0814_params_from_image_fn,
-        )
-
-    def _apply_rf_label(defaults: dict) -> dict:
-        defaults["draw_text"] = True
-        defaults["text_mode"] = "rf"
-        defaults["label"] = "rF"
-        defaults["text_gray"] = int(round(defaults.get("stroke_gray", defaults.get("text_gray", 98))))
-        defaults["rf_font_scale"] = float(defaults.get("rf_font_scale", 0.58))
-        defaults["rf_dy"] = float(defaults.get("rf_dy", -0.02 * float(defaults.get("r", 0.0))))
-        defaults["rf_weight"] = int(defaults.get("rf_weight", 600))
-        return defaults
-
-    if name in {_legacy_badge_key("0842"), _legacy_badge_key("0862")}:
-        defaults = _apply_rf_label(default_ac0812_params_fn(w, h))
-        return _finalize_left_arm_badge_params(defaults, fit_ac0812_params_from_image_fn)
-
-    if name == _legacy_badge_key("0844"):
-        defaults = _apply_rf_label(default_ac0814_params_fn(w, h))
-        return _finalize_right_arm_badge_params(defaults, fit_ac0814_params_from_image_fn)
-
-    if name == _legacy_badge_key("0850"):
-        # Connector-free relative-humidity rF circle/text badge.
-        defaults = _apply_rf_label(default_ac0870_params_fn(w, h))
-        if img is None:
-            return finalize_ac08_style_fn(name, defaults)
-        return finalize_ac08_style_fn(name, fit_semantic_badge_from_image_fn(img, defaults))
-
-    if name == _legacy_badge_key("0861"):
-        # rF counterpart of the lower vertical-connector badge: circle/text
-        # badge with a stem below the circle.
-        defaults = _apply_rf_label(default_ac0881_params_fn(w, h))
-        if img is None:
-            return finalize_ac08_style_fn(name, defaults)
-        return finalize_ac08_style_fn(name, fit_ac0811_params_from_image_fn(img, defaults))
-
-    if name == _legacy_badge_key("0863"):
-        # Continue the rF weak-family rotation: the connector is rotated into
-        # the upper vertical-arm geometry while the rF label remains horizontally
-        # oriented.
-        defaults = _apply_rf_label(default_ac0813_params_fn(w, h))
-        if img is None:
-            return finalize_ac08_style_fn(name, defaults)
-        return finalize_ac08_style_fn(name, fit_ac0813_params_from_image_fn(img, defaults))
-
-    if name == _legacy_badge_key("0864"):
-        defaults = _apply_rf_label(default_ac0814_params_fn(w, h))
-        return _finalize_right_arm_badge_params(defaults, fit_ac0814_params_from_image_fn)
-
-    return None
+    if connector == "right" and enforce_right_arm_badge_geometry_fn is not None:
+        return enforce_right_arm_badge_geometry_fn(finalized, w, h)
+    return finalized

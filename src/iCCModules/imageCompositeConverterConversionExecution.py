@@ -129,6 +129,35 @@ def _svgQualityScore(
     return score if math.isfinite(score) else float("inf")
 
 
+def _classifyDiffErrorDistribution(row: dict[str, object]) -> tuple[str, str]:
+    """Classify whether residual error pixels look spatially structured."""
+    try:
+        error_pixel_count = float(row.get("error_pixel_count", 0.0))
+        largest_cluster_fraction = float(row.get("largest_error_pixel_cluster_fraction", 0.0))
+        cluster_excess = float(row.get("error_pixel_cluster_excess", 0.0))
+        localized_fraction = float(row.get("localized_error_fraction", 0.0))
+    except (TypeError, ValueError):
+        return "unknown", "spatial_metrics_unavailable"
+
+    if not all(
+        math.isfinite(value)
+        for value in (error_pixel_count, largest_cluster_fraction, cluster_excess, localized_fraction)
+    ):
+        return "unknown", "spatial_metrics_unavailable"
+    if error_pixel_count <= 0.0:
+        return "none", "no_error_pixels"
+
+    # A random-looking residual has many small, disconnected upper-quartile
+    # error components.  If one connected component owns at least half of those
+    # pixels, or the worst quartile of tiles owns most of the total error, the
+    # diff still contains recognizable geometry (letters, circles, bars, etc.).
+    if largest_cluster_fraction >= 0.50 and cluster_excess >= 0.25:
+        return "structured", "upper_quartile_error_pixels_form_large_connected_component"
+    if localized_fraction >= 0.70 and error_pixel_count >= 4.0:
+        return "structured", "error_energy_concentrated_in_worst_tiles"
+    return "random_like", "no_dominant_error_cluster_detected"
+
+
 
 
 def _resolveSampleSvgPath(*, sample_svg_path: str, folder_path: str, reports_out_dir: str) -> str:
@@ -861,6 +890,9 @@ def convertOneImpl(
         "base": base_name,
         "variant": os.path.splitext(filename)[0].upper(),
     }
+    error_distribution_status, error_distribution_reason = _classifyDiffErrorDistribution(row)
+    row["diff_error_distribution_status"] = error_distribution_status
+    row["diff_error_distribution_reason"] = error_distribution_reason
     _emitVariantDebugDump(
         debug_root_dir=debug_ac0811_dir,
         base_name=base_name,
@@ -889,6 +921,13 @@ def convertOneImpl(
         if math.isfinite(float(row["spatial_quality_score"]))
         else ""
     )
+    if error_distribution_status == "structured":
+        print_fn(
+            f"[WARN] {filename}: Differenzbild-Fehlerpixel sind nicht zufällig verteilt "
+            f"({error_distribution_reason}; "
+            f"largest_cluster_fraction={_formatQualityValue(row['largest_error_pixel_cluster_fraction'])}, "
+            f"localized_error_fraction={_formatQualityValue(row['localized_error_fraction'])})."
+        )
     print_fn(
         f"[INFO] Konvertiert {filename} | "
         f"Parameter: {_formatCompactParams(params)} | "
