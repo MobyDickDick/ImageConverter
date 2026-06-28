@@ -1235,6 +1235,13 @@ def runNonCompositeIterationImpl(
                     log_lines.append(
                         f"non_composite_candidate_error_{candidate['status']}={float(candidate['error']):.6f}"
                     )
+            if description_driven_algorithm_available:
+                log_lines.extend(
+                    [
+                        "description_driven_algorithm_available=1",
+                        "sample_svg_lookup=skipped_description_driven_algorithm",
+                    ]
+                )
             write_validation_log_fn(log_lines)
         else:
             description_driven_algorithm_available = False
