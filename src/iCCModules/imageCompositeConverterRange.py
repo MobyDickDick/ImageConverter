@@ -129,7 +129,10 @@ def matchesExactPrefixFilterImpl(
     stem = normalize_range_token_fn(get_base_name_fn(os.path.splitext(filename)[0]))
     if not stem:
         return False
-    return stem.startswith(start_token)
+    # Family filters match the normalized family exactly.  Standard size
+    # variants normalize back to the family token, while auxiliary files keep
+    # extra tokens and must not be selected.
+    return stem == start_token
 
 
 def inRequestedRangeImpl(
@@ -166,8 +169,14 @@ def inRequestedRangeImpl(
         return lower <= explicit_stem <= upper
 
     exact_prefix_match = matches_exact_prefix_filter_fn(filename, start_ref, end_ref)
+    same_normalized_family = bool(normalized_start and normalized_start == normalize_range_token_fn(end_ref))
     if exact_prefix_match:
         return True
+    if same_normalized_family and start_ref and end_ref:
+        # A single requested family is an exact family-prefix filter, not a
+        # numeric interval.  Without this guard, differently padded numeric
+        # aliases can collapse to the same integer and pollute the batch.
+        return False
     if (
         explicit_start
         and explicit_start == explicit_end
