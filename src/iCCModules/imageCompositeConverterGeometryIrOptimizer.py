@@ -199,6 +199,25 @@ def _default_candidate_provider(
                 candidate["fill"] = color
                 yield candidate
 
+    if element.get("kind") == "RectBorder" and isinstance(element.get("stroke"), str):
+        stroke = str(element.get("stroke", "")).strip().lower()
+        if stroke not in {"", "none", "transparent"}:
+            for color in (
+                "#606060",
+                "#6f6f6f",
+                "#7f7f7f",
+                "#8a8a8a",
+                "#969696",
+                "#a0a0a0",
+                "#adadad",
+                "#b8b8b8",
+            ):
+                if color == stroke:
+                    continue
+                candidate = copy.deepcopy(element)
+                candidate["stroke"] = color
+                yield candidate
+
 
 def evaluateGeometryIrImpl(geometry_ir: GeometryIr, *, render_fn: RenderFn, error_fn: ErrorFn) -> float:
     """Render and score a Geometry-IR chain."""
