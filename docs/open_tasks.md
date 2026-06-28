@@ -3958,3 +3958,11 @@ endet. Die Detailableitung und Akzeptanzkriterien stehen in
 - **Qualität:** Die isolierte Metrik verbessert sich gegenüber Run TI von `Mean-Delta²=3178.770264` auf `2436.707764` (`Fehler/Pixel=0.015932`).
 - **Perception-Lerneffekt:** `SE0041_1` bleibt `nur Sonderfall`, da die robuste Seed-Quelle weiterhin die neutrale Aliasbeschreibung statt reine Bilddetektion ist.
 - **Nächster sinnvoller Schritt:** Wieder in der aktiven Plan-B-Liste rotieren oder weiteres Square-Badge-Antialiasing-/Stem-Feintuning versuchen.
+
+
+### Fortschritt vs. Blocker (Session 2026-06-28, DLG0021 PolygonPath-Feinpunkt-Probes Run TW)
+
+- **Fortschritt:** Der nach Run TV dokumentierte Rotationsschritt wurde als generische Geometry-IR-Optimiererweiterung umgesetzt: `PolygonPath`-Elemente prüfen nun zusätzlich zu den groben Punktverschiebungen `±0.02` auch feine lokale Punktproben `±0.01`.
+- **Sicherung:** Der fokussierte Optimierer-Testblock läuft grün; die absolute Runtime-ID-Nullprüfung meldet weiterhin `0 occurrences`.
+- **Perception-Lerneffekt:** `DLG0021` bleibt `nur Sonderfall`; die Verbesserung ist eine katalogfreie Optimierer-Verallgemeinerung für beschreibungsbasierte Polygonpfade, keine neue reine Bilddetektion.
+- **Nächster sinnvoller Schritt:** In der aktiven Plan-B-Liste weiterrotieren oder das verbleibende DLG0021-Farb-/Kontur-Feintuning mit der feineren Punktpalette fortsetzen.
