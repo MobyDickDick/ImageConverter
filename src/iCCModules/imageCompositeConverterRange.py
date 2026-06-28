@@ -137,7 +137,7 @@ def matchesExactPrefixFilterImpl(
 
 
 def _canonical_legacy_short_family_token(token: str) -> str:
-    """Map legacy three-digit family refs (for example AC010) to AC0010."""
+    """Map legacy three-digit family refs to the corresponding padded token."""
 
     match = re.match(r"^([A-Z]{2,3})(\d{3})$", str(token or "").upper())
     if not match:
