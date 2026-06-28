@@ -5954,6 +5954,25 @@ def test_generate_badge_svg_renders_square_badge_with_explicit_canvas_inset() ->
     assert "<circle" not in svg
 
 
+def test_square_badge_variant_params_use_neutral_red_head_with_grey_outline() -> None:
+    """Square-badge variants should keep measured colors in neutral runtime params."""
+    from src.iCCModules.imageCompositeConverterSemanticBadgeRuntime import (
+        applySquareBadgeVariantParamsImpl,
+    )
+
+    params = applySquareBadgeVariantParamsImpl({}, width=28, height=44)
+
+    assert params["head_fill"] == "#e10821"
+    assert params["head_stroke"] == "#a0a0a0"
+    assert params["square_badge_x"] == 1.0
+    assert params["square_badge_y"] == 1.25
+    assert params["square_badge_side"] == 26.0
+    assert params["square_badge_height"] == 26.5
+    assert params["stem_enabled"] is True
+    assert params["stem_width"] == 2.0
+    assert params["stem_gray"] == 160
+
+
 def test_parse_description_marks_ac0223_as_semantic_badge() -> None:
     """AC0223 should use the semantic badge path with top connector + valve-head hint."""
     desc, params = image_composite_converter.Reflection({}).parse_description("AC0223", "AC0223_L.jpg")
