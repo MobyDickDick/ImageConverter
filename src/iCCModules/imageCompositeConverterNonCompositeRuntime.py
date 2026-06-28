@@ -1076,7 +1076,10 @@ def runNonCompositeIterationImpl(
                 else:
                     description_error = calculate_error_fn(perc_img, description_rendered)
                     optimizer_result = None
-                    if hasattr(perc_img, "shape") and not _is_description_heat_exchanger_geometry(description_geometry_ir):
+                    if hasattr(perc_img, "shape") and (
+                        not _is_description_heat_exchanger_geometry(description_geometry_ir)
+                        or _description_reuses_reference_family(description)
+                    ):
                         optimizer_result = geometry_ir_optimizer.optimizeGeometryIrRegistrationImpl(
                             description_geometry_ir,
                             render_fn=lambda candidate_ir: render_svg_to_numpy_fn(

@@ -1961,3 +1961,15 @@ def test_description_geometry_candidate_yields_to_much_better_algorithmic_raster
     assert logs[0][0] == "status=non_composite_elementwise_symbol_fit"
     assert "non_composite_selection=raster_fit_overrides_poor_description_geometry" in logs[0]
     assert artifacts and artifacts[0][1] == "structured_rendered"
+
+
+def test_reference_heat_exchanger_variants_remain_pixel_selectable_but_optimizable() -> None:
+    description = (
+        "Wie AC0010: Heizelement, graues Rechteck, Plus-Minus-Zeichen oben links, "
+        "horizontaler Farbverlauf dunkel-hell-dunkel sowie graue Diagonale von oben rechts nach unten links."
+    )
+    geometry_ir = non_composite_runtime_helpers.geometry_ir_helpers.buildGeometryIrFromDescriptionImpl(description)
+
+    assert non_composite_runtime_helpers._is_description_heat_exchanger_geometry(geometry_ir) is True
+    assert non_composite_runtime_helpers._description_reuses_reference_family(description) is True
+    assert non_composite_runtime_helpers._prefer_description_geometry_candidate(geometry_ir, description=description) is False
