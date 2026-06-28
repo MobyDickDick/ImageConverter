@@ -443,6 +443,31 @@ def test_right_rotated_valve_refinement_fits_relative_geometry_and_palette() -> 
     assert len(circle_x_steps) > 4
 
 
+def test_default_optimizer_refines_rect_border_stroke_with_neutral_palette() -> None:
+    ir = [
+        {
+            "kind": "RectBorder",
+            "id": "backbottom_border",
+            "bbox": [0.0, 0.0, 1.0, 1.0],
+            "fill": "#e8e8e8",
+            "stroke": "#888888",
+            "stroke_width": 0.04,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: 0.0
+        if candidate_ir[0]["stroke"] == "#adadad"
+        else 10.0,
+    )
+
+    assert result["geometry_ir"][0]["stroke"] == "#adadad"
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
 def test_default_optimizer_refines_rect_bbox_with_fine_edge_probe() -> None:
     ir = [{"kind": "RectBorder", "id": "rect", "bbox": [0.0, 0.0, 1.0, 1.0], "fill": "#e8e8e8"}]
 
