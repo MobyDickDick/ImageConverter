@@ -414,3 +414,19 @@ def test_right_rotated_valve_refinement_fits_relative_geometry_and_palette() -> 
         step for step in result["steps"] if step["parameter"] == "circle_x"
     ]
     assert len(circle_x_steps) > 4
+
+
+def test_default_optimizer_refines_rect_bbox_with_fine_edge_probe() -> None:
+    ir = [{"kind": "RectBorder", "id": "rect", "bbox": [0.0, 0.0, 1.0, 1.0], "fill": "#e8e8e8"}]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: 0.0
+        if candidate_ir[0]["bbox"] == [0.01, 0.0, 1.0, 1.0]
+        else 10.0,
+    )
+
+    assert result["geometry_ir"][0]["bbox"] == [0.01, 0.0, 1.0, 1.0]
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True

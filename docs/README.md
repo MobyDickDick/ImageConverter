@@ -460,3 +460,5 @@ Alle Markdown-Dokumente unter `docs/`, damit sie von `README.md` aus erreichbar 
 - [Nächstes Arbeitspaket – DLG0021 generische Geometry-IR-Elementverfeinerung Run TN (2026-06-27)](next_arbeitspaket_2026-06-27_runTN.md)
 
 - [Nächstes Arbeitspaket – GE1410_L generische PolygonPath-Stroke-Width-Probes Run TR (2026-06-28)](next_arbeitspaket_2026-06-28_runTR.md)
+
+- [Nächstes Arbeitspaket – GE9012_6M generische RectBorder-Feinkanten-Probes Run TV (2026-06-28)](next_arbeitspaket_2026-06-28_runTV.md)
