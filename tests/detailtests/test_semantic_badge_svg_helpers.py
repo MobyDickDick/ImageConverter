@@ -153,6 +153,81 @@ def test_generate_badge_svg_impl_renders_rf_text() -> None:
     assert ">rF</text>" in svg
 
 
+def test_generate_badge_svg_impl_honors_square_badge_stem_geometry() -> None:
+    """Square-head connector stems remain adjustable via neutral geometry params."""
+    svg = semantic_badge_svg_helpers.generateBadgeSvgImpl(
+        28,
+        44,
+        {
+            "head_style": "square_badge",
+            "circle_enabled": True,
+            "cx": 14.0,
+            "cy": 14.0,
+            "r": 13.0,
+            "stroke_circle": 1.0,
+            "fill_gray": 220,
+            "stroke_gray": 152,
+            "draw_text": False,
+            "stem_enabled": True,
+            "stem_x": 12.25,
+            "stem_top": 27.5,
+            "stem_bottom": 43.0,
+            "stem_width": 3.5,
+            "square_badge_use_explicit_stem_geometry": True,
+        },
+        align_stem_to_circle_center_fn=lambda p: dict(p),
+        quantize_badge_params_fn=lambda p, _w, _h: dict(p),
+        clip_scalar_fn=lambda value, lower, upper: min(max(value, lower), upper),
+        grayhex_fn=lambda _value: "#808080",
+        co2_layout_fn=lambda _p: {},
+        t_path_d="T",
+        t_xmin=0.0,
+        t_ymax=0.0,
+        m_path_d="M",
+        m_xmin=0.0,
+        m_ymax=0.0,
+    )
+
+    assert '<rect x="12.2500" y="27.5000" width="3.5000" height="15.5000"' in svg
+
+
+def test_generate_badge_svg_impl_keeps_square_badge_stem_defaults_without_opt_in() -> None:
+    """Legacy square-head defaults should ignore stale circle-stem coordinates."""
+    svg = semantic_badge_svg_helpers.generateBadgeSvgImpl(
+        28,
+        44,
+        {
+            "head_style": "square_badge",
+            "circle_enabled": True,
+            "cx": 13.5,
+            "cy": 14.0,
+            "r": 13.0,
+            "stroke_circle": 1.0,
+            "fill_gray": 220,
+            "stroke_gray": 152,
+            "draw_text": False,
+            "stem_enabled": True,
+            "stem_x": 12.5,
+            "stem_top": 27.5,
+            "stem_bottom": 43.0,
+            "stem_width": 2.0,
+        },
+        align_stem_to_circle_center_fn=lambda p: dict(p),
+        quantize_badge_params_fn=lambda p, _w, _h: dict(p),
+        clip_scalar_fn=lambda value, lower, upper: min(max(value, lower), upper),
+        grayhex_fn=lambda _value: "#808080",
+        co2_layout_fn=lambda _p: {},
+        t_path_d="T",
+        t_xmin=0.0,
+        t_ymax=0.0,
+        m_path_d="M",
+        m_xmin=0.0,
+        m_ymax=0.0,
+    )
+
+    assert '<rect x="13.0000" y="30.0000" width="2.0000" height="14.0000"' in svg
+
+
 def test_generate_badge_svg_impl_restores_valve_head_from_neutral_style_metadata() -> None:
     svg = semantic_badge_svg_helpers.generateBadgeSvgImpl(
         50,
