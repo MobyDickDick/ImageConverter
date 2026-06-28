@@ -129,10 +129,21 @@ def matchesExactPrefixFilterImpl(
     stem = normalize_range_token_fn(get_base_name_fn(os.path.splitext(filename)[0]))
     if not stem:
         return False
+    canonical_start_token = _canonical_legacy_short_family_token(start_token)
     # Family filters match the normalized family exactly.  Standard size
     # variants normalize back to the family token, while auxiliary files keep
     # extra tokens and must not be selected.
-    return stem == start_token
+    return stem == start_token or stem == canonical_start_token
+
+
+def _canonical_legacy_short_family_token(token: str) -> str:
+    """Map legacy three-digit family refs to the corresponding padded token."""
+
+    match = re.match(r"^([A-Z]{2,3})(\d{3})$", str(token or "").upper())
+    if not match:
+        return str(token or "").upper()
+    prefix, digits = match.groups()
+    return f"{prefix}0{digits}"
 
 
 def inRequestedRangeImpl(
