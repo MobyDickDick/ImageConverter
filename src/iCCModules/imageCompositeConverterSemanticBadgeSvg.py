@@ -168,10 +168,23 @@ def generateBadgeSvgImpl(
     if p.get("stem_enabled"):
         if square_badge_head:
             stem_width_value = float(p.get("stem_width", 2.0))
-            stem_x = (float(w) / 2.0) - (stem_width_value / 2.0)
-            stem_top = min(float(h), float(w) + 2.0)
+            default_stem_x = (float(w) / 2.0) - (stem_width_value / 2.0)
+            default_stem_top = min(float(h), float(w) + 2.0)
+            # Square-head badges are still semantic connector badges: their
+            # connector geometry must remain adjustable from measured,
+            # catalog-free parameters just like circle-head stems.  The
+            # full-canvas square defaults continue to be used when no explicit
+            # stem geometry is present, but raster/perception fitting can now
+            # nudge the stem independently of the head without adding
+            # image-specific branches.
+            use_explicit_stem_geometry = bool(p.get("square_badge_use_explicit_stem_geometry", False))
+            stem_x_source = p.get("stem_x", default_stem_x) if use_explicit_stem_geometry else default_stem_x
+            stem_top_source = p.get("stem_top", default_stem_top) if use_explicit_stem_geometry else default_stem_top
+            stem_bottom_source = p.get("stem_bottom", h) if use_explicit_stem_geometry else h
+            stem_x = float(clip_scalar_fn(float(stem_x_source), 0.0, float(w)))
+            stem_top = float(clip_scalar_fn(float(stem_top_source), 0.0, float(h)))
             stem_width = max(0.0, min(stem_width_value, max(0.0, float(w) - stem_x)))
-            stem_bottom = float(h)
+            stem_bottom = float(clip_scalar_fn(float(stem_bottom_source), stem_top, float(h)))
         else:
             stem_x = float(clip_scalar_fn(float(p.get("stem_x", 0.0)), 0.0, float(w)))
             stem_top = float(clip_scalar_fn(float(p.get("stem_top", 0.0)), 0.0, float(h)))
