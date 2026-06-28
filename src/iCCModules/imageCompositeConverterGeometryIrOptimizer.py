@@ -125,6 +125,22 @@ def _default_candidate_provider(
             candidate["linejoin"] = candidate_linejoin
             yield candidate
 
+        stroke_opacity = float(element.get("stroke_opacity", 1.0))
+        for candidate_opacity in (0.65, 0.75, 0.85, 0.95, 1.0):
+            if abs(candidate_opacity - stroke_opacity) < 1e-9:
+                continue
+            candidate = copy.deepcopy(element)
+            candidate["stroke_opacity"] = candidate_opacity
+            yield candidate
+
+        fill_opacity = float(element.get("fill_opacity", 1.0))
+        for candidate_opacity in (0.65, 0.75, 0.85, 0.95, 1.0):
+            if abs(candidate_opacity - fill_opacity) < 1e-9:
+                continue
+            candidate = copy.deepcopy(element)
+            candidate["fill_opacity"] = candidate_opacity
+            yield candidate
+
         stroke = str(element.get("stroke", "")).strip().lower()
         if stroke not in {"", "none", "transparent"}:
             for color in (

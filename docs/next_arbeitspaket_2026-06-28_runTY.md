@@ -1,37 +1,43 @@
-# Nächstes Arbeitspaket – AC0100 referenzbasierte Heizelement-Varianten Run TY (2026-06-28)
+# Nächstes Arbeitspaket – DLG0021 generische PolygonPath-Opacity-Probes Run TY (2026-06-28)
 
-Run TY greift die aktuelle AC0100-Rückmeldung auf: `AC0100_L` ist brauchbar,
-`AC0100_M` und `AC0100_S` dürfen aber nicht durch fest abgespeicherte
-Bilddaten stabilisiert werden. Der Fix bleibt deshalb katalogfrei und erweitert
-den allgemeinen Non-Composite-Pfad für beschreibungsbasierte Heizelemente.
+Run TY arbeitet nach Run TP erneut den höchstpriorisierten aktiven
+Plan-B-Kandidaten `DLG0021` aus `PLAN_B_KANDIDATEN.md` ab. Fokus bleibt ein
+katalogfreier Ausbau der allgemeinen Geometry-IR-Elementoptimierung: weiche
+Konturen und gefüllte Polygonpfade können nun über neutrale Opacity-Probes näher
+an das Raster angepasst werden.
 
 ## Änderungen
 
-- Referenzbasierte Heizelement-Beschreibungen (`Wie AC0010: Heizelement ...`)
-  werden weiterhin nicht hart gegenüber dem gemessenen Raster-Fit bevorzugt.
-- Gleichzeitig dürfen solche Varianten nun den allgemeinen Geometry-IR-
-  Rasterregistrierer durchlaufen. Damit ist die Beschreibung weiterhin der
-  Algorithmus-Seed, während größen-/rasterabhängige Anpassungen lokal anhand des
-  Eingabebildes optimiert werden können.
-- Ein Detailtest sichert die beabsichtigte Kombination aus Referenzvariantenerkennung,
-  Heizelement-Geometry-IR und pixelbasierter Kandidatenauswahl ohne neue Bild-ID-
-  Sonderfälle.
+- Die generische Geometry-IR-Elementoptimierung testet für `PolygonPath`-
+  Elemente jetzt zusätzliche `stroke_opacity`- und `fill_opacity`-Probes.
+- Die Probes sind bewusst neutral (`0.65`, `0.75`, `0.85`, `0.95`, `1.0`) und
+  werden wie alle Elementkandidaten nur übernommen, wenn der gerenderte Fehler
+  strikt sinkt.
+- Der Geometry-IR-SVG-Renderer gibt optionale `stroke-opacity`- und
+  `fill-opacity`-Attribute für `PolygonPath` aus; bei voller Deckkraft bleibt
+  das bisherige SVG unverändert.
+- Ein Detailtest sichert, dass die neue Opacity-Palette über den allgemeinen
+  sequentiellen Optimierer ausgewählt werden kann.
+
+## Perception-Lerneffekt
+
+- `DLG0021` bleibt `nur Sonderfall`: Die reine Bilddetektion liefert weiterhin
+  keinen stabilen generischen Checkbox-/Checkmark-Seed. Die Erweiterung ist aber
+  nicht DLG-spezifisch, sondern verbessert den allgemeinen Element-Fit für
+  Haken-, Schatten- und andere semitransparenznahe Polygonpfad-Symbole.
+
+## Artefakte
+
+- Isolierter Repro-Ausgabeordner: `/tmp/ic-dlg0021-opacityprobe`
 
 ## Sicherung
 
-- `pytest -q tests/detailtests/test_non_composite_runtime_helpers.py tests/detailtests/test_description_contract_helpers.py`
-  läuft grün mit `111 passed`.
-- `PYTHONPATH=vendor/linux-py310/site-packages:. python tools/check_no_new_image_id_hardcoding.py`
-  läuft grün und meldet `0 occurrences`.
-- `PYTHONPATH=vendor/linux-py310/site-packages:. timeout 120 python -m src.iCCModules.imageCompositeConverterCli --input-dir artifacts/images_to_convert --output-dir /tmp/ic-ac0100-final --start AC0100 --end AC0100 --descriptions-path artifacts/descriptions/Finale_Wurzelformen_V3.xml --deterministic-order`
-  läuft grün. Die isolierten AC0100-Metriken bleiben stabil: `AC0100_L`
-  `Mean-Delta²=949.427795`, `AC0100_M` `Mean-Delta²=828.678345`, `AC0100_S`
-  `Mean-Delta²=1213.068726`.
+- `PYTHONPATH=vendor/linux-py310/site-packages:. pytest -q tests/detailtests/test_geometry_ir_optimizer_helpers.py` läuft grün mit `19 passed`.
+- `PYTHONPATH=vendor/linux-py310/site-packages:. timeout 120 python -m src.iCCModules.imageCompositeConverterCli --input-dir artifacts/images_to_convert --output-dir /tmp/ic-dlg0021-opacityprobe --start DLG0021 --end DLG0021 --descriptions-path artifacts/images_to_convert/Finale_Wurzelformen_V3.xml --deterministic-order` läuft grün; die isolierte DLG0021-Metrik sinkt auf `Fehler/Pixel=0.077702` und `Mean-Delta²=17056.199219`.
 
 ## Ergebnis
 
-Der AC0100-Pfad speichert keine Varianten-Pixeldaten ab und führt keine neue
-Bild-ID-Weiche ein. Referenzbasierte Heizelemente behalten die pixelbasierte
-Auswahlmöglichkeit, können aber zusätzlich über die generische Geometry-IR-
-Registrierung angepasst werden. Weitere Qualitätsverbesserung sollte als
-allgemeine Erweiterung der Heizelement-Elementprobes erfolgen.
+`DLG0021` nutzt weiterhin denselben katalogfreien Description-Geometry-IR-Pfad.
+Run TY erweitert die allgemeine Elementregistrierung um neutrale Opacity-Probes
+und verbessert den isolierten Einzellauf gegenüber Run TP von
+`Mean-Delta²=18587.574219` auf `17056.199219`.

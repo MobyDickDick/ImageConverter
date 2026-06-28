@@ -2128,6 +2128,13 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
             sw = float(element.get("stroke_width", 0.020)) * min(w, h)
             linecap = html.escape(str(element.get("linecap", "butt")))
             linejoin = html.escape(str(element.get("linejoin", "round")))
+            stroke_opacity = max(0.0, min(1.0, float(element.get("stroke_opacity", 1.0))))
+            fill_opacity = max(0.0, min(1.0, float(element.get("fill_opacity", 1.0))))
+            opacity_attrs = (
+                f' stroke-opacity="{_fmt(stroke_opacity)}"' if stroke_opacity < 1.0 else ""
+            ) + (
+                f' fill-opacity="{_fmt(fill_opacity)}"' if fill_opacity < 1.0 else ""
+            )
             raw_points = element.get("points", [])
             points: list[str] = []
             if isinstance(raw_points, list):
@@ -2139,7 +2146,7 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
                 svg.append(
                     f'  <path id="{element_id}" d="M {" L ".join(points)}{suffix}" '
                     f'stroke="{stroke}" stroke-width="{_fmt(sw)}" fill="{fill}" '
-                    f'stroke-linejoin="{linejoin}" stroke-linecap="{linecap}"/>'
+                    f'stroke-linejoin="{linejoin}" stroke-linecap="{linecap}"{opacity_attrs}/>'
                 )
         elif kind == "DiagonalBand":
             stroke = html.escape(str(element.get("stroke", "#707070")))
