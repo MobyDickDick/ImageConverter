@@ -3950,3 +3950,11 @@ endet. Die Detailableitung und Akzeptanzkriterien stehen in
 - **Qualität:** Die isolierte Metrik bleibt gegenüber Run TN stabil bei `Mean-Delta²=18587.574219` (`Fehler/Pixel=0.081819`), weil keine der neuen Stroke-Farbproben den bisherigen Punkt-/Füllfarbstand weiter verbessert.
 - **Perception-Lerneffekt:** `DLG0021` bleibt `nur Sonderfall`; die Verbesserung ist eine katalogfreie Optimierer-Verallgemeinerung, keine neue reine Bilddetektion.
 - **Nächster sinnvoller Schritt:** In der aktiven Plan-B-Liste rotieren oder weiteres DLG-Farb-/Kontur-Feintuning versuchen.
+
+### Fortschritt vs. Blocker (Session 2026-06-28, SE0041_1 Square-Badge-Farbkontur Run TS)
+
+- **Fortschritt:** Der aktive Plan-B-Kandidat `SE0041_1` wurde erneut auf dem katalogfreien Square-Badge-Pfad getunt: Die Variantenparameter sind nun als neutraler Helper testbar, der rote Kopf nutzt `#e10821`, und die Kopfkontur rendert grau statt rot.
+- **Sicherung:** Der fokussierte Square-Badge-Testblock läuft grün; die absolute Runtime-ID-Nullprüfung meldet weiterhin `0 occurrences`. Der isolierte CLI-Lauf für `SE0041_1` endet mit Exit `0`.
+- **Qualität:** Die isolierte Metrik verbessert sich gegenüber Run TI von `Mean-Delta²=3178.770264` auf `2436.707764` (`Fehler/Pixel=0.015932`).
+- **Perception-Lerneffekt:** `SE0041_1` bleibt `nur Sonderfall`, da die robuste Seed-Quelle weiterhin die neutrale Aliasbeschreibung statt reine Bilddetektion ist.
+- **Nächster sinnvoller Schritt:** Wieder in der aktiven Plan-B-Liste rotieren oder weiteres Square-Badge-Antialiasing-/Stem-Feintuning versuchen.
