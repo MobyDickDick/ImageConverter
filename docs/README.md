@@ -458,3 +458,5 @@ Alle Markdown-Dokumente unter `docs/`, damit sie von `README.md` aus erreichbar 
 - [Nächstes Arbeitspaket – SE0041_1 Square-Badge-Inset-Feintuning Run TI (2026-06-27)](next_arbeitspaket_2026-06-27_runTI.md)
 - [Nächstes Arbeitspaket – GE9013_1M BackBottom-Farbregistrierung Run TM (2026-06-27)](next_arbeitspaket_2026-06-27_runTM.md)
 - [Nächstes Arbeitspaket – DLG0021 generische Geometry-IR-Elementverfeinerung Run TN (2026-06-27)](next_arbeitspaket_2026-06-27_runTN.md)
+
+- [Nächstes Arbeitspaket – GE1410_L generische PolygonPath-Stroke-Width-Probes Run TR (2026-06-28)](next_arbeitspaket_2026-06-28_runTR.md)
