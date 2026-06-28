@@ -129,6 +129,26 @@ def _default_candidate_provider(
                 candidate["stroke"] = color
                 yield candidate
 
+        fill = str(element.get("fill", "")).strip().lower()
+        if fill not in {"", "none", "transparent"}:
+            for color in (
+                "#d9001b",
+                "#e0001f",
+                "#e10821",
+                "#e3162a",
+                "#f00020",
+                "#0f557a",
+                "#1a5d83",
+                "#24678d",
+                "#2e7198",
+                "#367aa1",
+            ):
+                if color == fill:
+                    continue
+                candidate = copy.deepcopy(element)
+                candidate["fill"] = color
+                yield candidate
+
     if element.get("kind") in {"PlusGlyph", "MinusGlyph"}:
         for delta in (-0.02, 0.02):
             candidate = copy.deepcopy(element)
