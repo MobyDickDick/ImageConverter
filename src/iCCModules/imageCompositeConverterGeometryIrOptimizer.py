@@ -141,25 +141,49 @@ def _default_candidate_provider(
             candidate["fill_opacity"] = candidate_opacity
             yield candidate
 
+        stroke_palette = (
+            "#6f6f6f",
+            "#7f7f7f",
+            "#8a8a8a",
+            "#969696",
+            "#a0a0a0",
+            "#176f28",
+            "#2f8f3d",
+            "#3c9f44",
+            "#43ad49",
+            "#68b868",
+            "#8fc78e",
+            "#c8d0c3",
+        )
         stroke = str(element.get("stroke", "")).strip().lower()
         if stroke not in {"", "none", "transparent"}:
-            for color in (
-                "#6f6f6f",
-                "#7f7f7f",
-                "#8a8a8a",
-                "#969696",
-                "#a0a0a0",
-                "#176f28",
-                "#2f8f3d",
-                "#3c9f44",
-                "#43ad49",
-                "#68b868",
-            ):
+            for color in stroke_palette:
                 if color == stroke:
                     continue
                 candidate = copy.deepcopy(element)
                 candidate["stroke"] = color
                 yield candidate
+
+        stroke_gradient = element.get("stroke_gradient")
+        if isinstance(stroke_gradient, dict) and isinstance(stroke_gradient.get("stops"), list):
+            for stop_index, stop in enumerate(stroke_gradient["stops"]):
+                if not isinstance(stop, dict):
+                    continue
+                stop_color = str(stop.get("color", "")).strip().lower()
+                if stop_color in {"", "none", "transparent"}:
+                    continue
+                for color in stroke_palette:
+                    if color == stop_color:
+                        continue
+                    candidate = copy.deepcopy(element)
+                    candidate_gradient = candidate.get("stroke_gradient")
+                    if not isinstance(candidate_gradient, dict) or not isinstance(candidate_gradient.get("stops"), list):
+                        continue
+                    candidate_stops = candidate_gradient["stops"]
+                    if stop_index >= len(candidate_stops) or not isinstance(candidate_stops[stop_index], dict):
+                        continue
+                    candidate_stops[stop_index]["color"] = color
+                    yield candidate
 
         fill = str(element.get("fill", "")).strip().lower()
         if fill not in {"", "none", "transparent"}:
