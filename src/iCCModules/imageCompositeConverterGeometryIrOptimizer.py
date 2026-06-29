@@ -35,6 +35,29 @@ def _clamp01(value: float) -> float:
     return max(0.0, min(1.0, value))
 
 
+def _parse_percent_offset(value: object) -> float | None:
+    """Return a normalized gradient offset for percentage-style SVG stops."""
+
+    if not isinstance(value, str):
+        return None
+    stripped = value.strip()
+    if not stripped.endswith("%"):
+        return None
+    try:
+        return _clamp01(float(stripped[:-1]) / 100.0)
+    except ValueError:
+        return None
+
+
+def _format_percent_offset(value: float) -> str:
+    """Format a normalized gradient offset as stable SVG percentage text."""
+
+    percent = _clamp01(value) * 100.0
+    if abs(percent - round(percent)) < 1e-9:
+        return f"{int(round(percent))}%"
+    return f"{percent:.1f}".rstrip("0").rstrip(".") + "%"
+
+
 def _default_candidate_provider(
     element: dict[str, object], _current_ir: GeometryIr, _step_index: int
 ) -> Iterable[dict[str, object]]:
@@ -183,6 +206,22 @@ def _default_candidate_provider(
                     if stop_index >= len(candidate_stops) or not isinstance(candidate_stops[stop_index], dict):
                         continue
                     candidate_stops[stop_index]["color"] = color
+                    yield candidate
+                stop_offset = _parse_percent_offset(stop.get("offset"))
+                if stop_offset is None:
+                    continue
+                for delta in (-0.10, -0.05, 0.05, 0.10):
+                    candidate_offset = _clamp01(stop_offset + delta)
+                    if abs(candidate_offset - stop_offset) < 1e-9:
+                        continue
+                    candidate = copy.deepcopy(element)
+                    candidate_gradient = candidate.get("stroke_gradient")
+                    if not isinstance(candidate_gradient, dict) or not isinstance(candidate_gradient.get("stops"), list):
+                        continue
+                    candidate_stops = candidate_gradient["stops"]
+                    if stop_index >= len(candidate_stops) or not isinstance(candidate_stops[stop_index], dict):
+                        continue
+                    candidate_stops[stop_index]["offset"] = _format_percent_offset(candidate_offset)
                     yield candidate
 
         fill = str(element.get("fill", "")).strip().lower()
