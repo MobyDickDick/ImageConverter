@@ -68,6 +68,30 @@ def test_sequential_optimizer_rejects_regression_and_keeps_current_ir() -> None:
     ]
 
 
+
+def test_default_optimizer_refines_rect_bbox_with_subpixel_probe() -> None:
+    ir = [
+        {
+            "kind": "RectBorder",
+            "id": "square_badge_head",
+            "bbox": [0.10, 0.10, 0.80, 0.80],
+            "fill": "#f2b8b4",
+            "stroke": "#8a8a8a",
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: 0.0
+        if abs(candidate_ir[0]["bbox"][0] - 0.105) < 1e-9
+        else 10.0,
+    )
+
+    assert result["geometry_ir"][0]["bbox"][0] == pytest.approx(0.105)
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
 def test_default_optimizer_refines_neutral_rect_fill_color() -> None:
     ir = [{"kind": "RectBorder", "id": "rect", "bbox": [0.0, 0.0, 1.0, 1.0], "fill": "#e8e8e8"}]
 

@@ -462,3 +462,4 @@ Alle Markdown-Dokumente unter `docs/`, damit sie von `README.md` aus erreichbar 
 - [Nächstes Arbeitspaket – GE1410_L generische PolygonPath-Stroke-Width-Probes Run TR (2026-06-28)](next_arbeitspaket_2026-06-28_runTR.md)
 
 - [Nächstes Arbeitspaket – GE9012_6M generische RectBorder-Feinkanten-Probes Run TV (2026-06-28)](next_arbeitspaket_2026-06-28_runTV.md)
+- [Nächstes Arbeitspaket – SE0041_1 Rect/ColorPatch-BBox-Subpixel-Probes Run UC (2026-06-30)](next_arbeitspaket_2026-06-30_runUC.md)
