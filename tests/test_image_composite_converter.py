@@ -809,8 +809,8 @@ def test_apply_redraw_variation_keeps_path_t_scale_in_glyph_domain(monkeypatch: 
 
     assert 0.0036 <= float(varied["text_scale"]) <= 0.0108
 
-def test_apply_redraw_variation_uses_new_time_nonce_per_run(monkeypatch: pytest.MonkeyPatch) -> None:
-    """Separate redraw passes should produce different logged parameter jitters."""
+def test_apply_redraw_variation_is_stable_for_same_run_and_pass_seed(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Repeated redraw passes must not depend on a wall-clock nonce."""
     timestamps = iter([100, 200])
     monkeypatch.setattr(conv.time, "time_ns", lambda: next(timestamps))
     conv.Action.STOCHASTIC_RUN_SEED = 5
@@ -824,10 +824,11 @@ def test_apply_redraw_variation_uses_new_time_nonce_per_run(monkeypatch: pytest.
         "draw_text": False,
     }
 
-    _varied_a, logs_a = conv.Action.apply_redraw_variation(params, 20, 20)
-    _varied_b, logs_b = conv.Action.apply_redraw_variation(params, 20, 20)
+    varied_a, logs_a = conv.Action.apply_redraw_variation(params, 20, 20)
+    varied_b, logs_b = conv.Action.apply_redraw_variation(params, 20, 20)
 
-    assert logs_a[0] != logs_b[0]
+    assert logs_a[0] == logs_b[0]
+    assert varied_a == varied_b
 
 
 def test_select_circle_radius_plateau_candidate_prefers_plateau_midpoint(monkeypatch: pytest.MonkeyPatch) -> None:
@@ -2129,7 +2130,7 @@ def test_run_iteration_pipeline_element_validation_log_contains_run_meta(
     assert first_line.startswith("run-meta: ")
     assert "run_seed=123" in first_line
     assert "pass_seed_offset=7" in first_line
-    assert "nonce_ns=" in first_line
+    assert "trace_id=" in first_line
 
 
 def test_run_iteration_pipeline_writes_failed_best_attempt_artifacts_for_semantic_mismatch(

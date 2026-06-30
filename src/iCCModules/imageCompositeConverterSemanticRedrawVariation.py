@@ -21,11 +21,13 @@ def applyRedrawVariationImpl(
     if w <= 0 or h <= 0:
         return p, variation_logs
 
-    seed = (
-        int(stochastic_run_seed) * 1009
-        + int(stochastic_seed_offset) * 101
-        + int(time_ns_fn() % 1_000_000_007)
-    )
+    # The final redraw jitter must be reproducible from conversion inputs.
+    # Previously a wall-clock nonce was mixed into this seed, so converting the
+    # same image and description repeatedly could produce different geometry
+    # parameters. Keep the public dependency injection hook for compatibility,
+    # but deliberately derive the seed only from the documented run/pass seeds.
+    _ = time_ns_fn
+    seed = int(stochastic_run_seed) * 1009 + int(stochastic_seed_offset) * 101
     rng = make_rng_fn(seed)
 
     def _uniform(delta: float) -> float:
