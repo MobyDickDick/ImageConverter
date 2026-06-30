@@ -74,25 +74,12 @@ def _default_candidate_provider(
     bbox = element.get("bbox")
     if isinstance(bbox, list) and len(bbox) == 4:
         coarse_delta = 0.02
-        fine_delta = 0.01 if element.get("kind") in {"ColorPatch", "RectBorder"} else coarse_delta
-        probes = (
-            (0, -coarse_delta),
-            (0, -fine_delta),
-            (0, fine_delta),
-            (0, coarse_delta),
-            (1, -coarse_delta),
-            (1, -fine_delta),
-            (1, fine_delta),
-            (1, coarse_delta),
-            (2, -coarse_delta),
-            (2, -fine_delta),
-            (2, fine_delta),
-            (2, coarse_delta),
-            (3, -coarse_delta),
-            (3, -fine_delta),
-            (3, fine_delta),
-            (3, coarse_delta),
-        )
+        fine_deltas = (0.005, 0.01) if element.get("kind") in {"ColorPatch", "RectBorder"} else (coarse_delta,)
+        probes = []
+        for idx in range(4):
+            for delta in (-coarse_delta, *(-d for d in fine_deltas), *fine_deltas, coarse_delta):
+                if (idx, delta) not in probes:
+                    probes.append((idx, delta))
         for idx, delta in probes:
             candidate = copy.deepcopy(element)
             candidate_bbox = [float(v) for v in bbox]
