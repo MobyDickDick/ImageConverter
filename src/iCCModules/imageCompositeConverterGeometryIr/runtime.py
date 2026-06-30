@@ -2013,17 +2013,31 @@ def renderGeometryIrToSvgElementsImpl(w: int, h: int, geometry_ir: list[dict[str
             fill = html.escape(str(element.get("fill", "none")))
             stroke = html.escape(str(element.get("stroke", "#666666")))
             sw = float(element.get("stroke_width", 0.035)) * min(w, h)
+            fill_opacity = max(0.0, min(1.0, float(element.get("fill_opacity", 1.0))))
+            stroke_opacity = max(0.0, min(1.0, float(element.get("stroke_opacity", 1.0))))
+            opacity_attrs = (
+                f' fill-opacity="{_fmt(fill_opacity)}"' if fill_opacity < 1.0 else ""
+            ) + (
+                f' stroke-opacity="{_fmt(stroke_opacity)}"' if stroke_opacity < 1.0 else ""
+            )
             svg.append(
                 f'  <rect id="{element_id}" x="{_fmt(x)}" y="{_fmt(y)}" width="{_fmt(bw)}" height="{_fmt(bh)}" '
-                f'fill="{fill}" stroke="{stroke}" stroke-width="{_fmt(sw)}"/>'
+                f'fill="{fill}" stroke="{stroke}" stroke-width="{_fmt(sw)}"{opacity_attrs}/>'
             )
         elif kind == "ColorPatch":
             x, y, bw, bh = _scaled_bbox(element, w, h)
             fill = html.escape(str(element.get("fill", "#d8d8d8")))
             stroke = html.escape(str(element.get("stroke", "none")))
+            fill_opacity = max(0.0, min(1.0, float(element.get("fill_opacity", 1.0))))
+            stroke_opacity = max(0.0, min(1.0, float(element.get("stroke_opacity", 1.0))))
+            opacity_attrs = (
+                f' fill-opacity="{_fmt(fill_opacity)}"' if fill_opacity < 1.0 else ""
+            ) + (
+                f' stroke-opacity="{_fmt(stroke_opacity)}"' if stroke_opacity < 1.0 else ""
+            )
             svg.append(
                 f'  <rect id="{element_id}" x="{_fmt(x)}" y="{_fmt(y)}" width="{_fmt(bw)}" height="{_fmt(bh)}" '
-                f'fill="{fill}" stroke="{stroke}"/>'
+                f'fill="{fill}" stroke="{stroke}"{opacity_attrs}/>'
             )
         elif kind == "HalfDoubleRectBorder":
             x, y, bw, bh = _scaled_bbox(element, w, h)
