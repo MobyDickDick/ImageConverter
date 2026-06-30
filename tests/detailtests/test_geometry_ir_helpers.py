@@ -787,3 +787,32 @@ def test_render_geometry_ir_to_svg_contains_connector_free_rh_badge_primitives()
     assert '>rH</text>' in svg
     assert "<line" not in svg
     assert "<image" not in svg
+
+
+def test_render_geometry_ir_rects_emit_opacity_attributes() -> None:
+    ir = [
+        {
+            "kind": "RectBorder",
+            "id": "soft_rect",
+            "bbox": [0.1, 0.2, 0.3, 0.4],
+            "fill": "#e8e8e8",
+            "stroke": "#8a8a8a",
+            "fill_opacity": 0.95,
+            "stroke_opacity": 0.85,
+        },
+        {
+            "kind": "ColorPatch",
+            "id": "soft_patch",
+            "bbox": [0.5, 0.5, 0.2, 0.2],
+            "fill": "#d8d8d8",
+            "fill_opacity": 0.9,
+        },
+    ]
+
+    svg = geometry_ir_helpers.renderGeometryIrToSvgImpl(100, 100, ir)
+
+    assert 'id="soft_rect"' in svg
+    assert 'fill-opacity="0.95"' in svg
+    assert 'stroke-opacity="0.85"' in svg
+    assert 'id="soft_patch"' in svg
+    assert 'fill-opacity="0.9"' in svg

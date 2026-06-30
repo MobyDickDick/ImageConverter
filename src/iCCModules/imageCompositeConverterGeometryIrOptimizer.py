@@ -237,6 +237,23 @@ def _default_candidate_provider(
             candidate["dy"] = float(element.get("dy", 0.0)) + delta
             yield candidate
 
+    if element.get("kind") in {"ColorPatch", "RectBorder"}:
+        fill_opacity = float(element.get("fill_opacity", 1.0))
+        for candidate_opacity in (0.75, 0.85, 0.9, 0.95, 1.0):
+            if abs(candidate_opacity - fill_opacity) < 1e-9:
+                continue
+            candidate = copy.deepcopy(element)
+            candidate["fill_opacity"] = candidate_opacity
+            yield candidate
+
+        stroke_opacity = float(element.get("stroke_opacity", 1.0))
+        for candidate_opacity in (0.75, 0.85, 0.9, 0.95, 1.0):
+            if abs(candidate_opacity - stroke_opacity) < 1e-9:
+                continue
+            candidate = copy.deepcopy(element)
+            candidate["stroke_opacity"] = candidate_opacity
+            yield candidate
+
     if element.get("kind") in {"ColorPatch", "RectBorder"} and isinstance(element.get("fill"), str):
         fill = str(element.get("fill", "")).strip().lower()
         if fill not in {"", "none", "transparent"}:
