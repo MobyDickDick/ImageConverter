@@ -18,12 +18,19 @@ def writeValidationLogImpl(
 ) -> None:
     if not log_path:
         return
+    # Validation logs are used as reproducibility evidence. Do not mix a
+    # wall-clock nonce into the recorded run metadata: otherwise two identical
+    # conversions differ in their first log line even when all effective
+    # parameters are unchanged. Keep ``time_ns_fn`` in the signature for older
+    # call sites/tests that inject it, but intentionally leave it unused.
+    _ = time_ns_fn
+    trace_id = int(run_seed) * 1009 + int(pass_seed_offset) * 101
     payload = [
         (
             "run-meta: "
             f"run_seed={int(run_seed)} "
             f"pass_seed_offset={int(pass_seed_offset)} "
-            f"nonce_ns={time_ns_fn()}"
+            f"trace_id={trace_id}"
         )
     ]
     payload.extend(str(line) for line in lines)

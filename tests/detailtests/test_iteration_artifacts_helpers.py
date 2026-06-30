@@ -26,7 +26,7 @@ def test_write_validation_log_writes_meta_and_lines(tmp_path: Path):
     )
 
     content = log_path.read_text(encoding="utf-8")
-    assert "run-meta: run_seed=7 pass_seed_offset=11 nonce_ns=123456789" in content
+    assert "run-meta: run_seed=7 pass_seed_offset=11 trace_id=8174" in content
     assert "status=ok" in content
     assert content.endswith("\n")
 

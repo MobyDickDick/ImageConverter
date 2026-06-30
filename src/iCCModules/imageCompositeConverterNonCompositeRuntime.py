@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import hashlib
+import json
 import os
 import re
 from pathlib import Path
@@ -374,6 +376,13 @@ def _candidate_window(
     return tuple(sorted({round(value, 4) for value in values}))
 
 
+def _symbol_params_iteration_hash(params: dict[str, object]) -> str:
+    """Return a stable digest for one concrete element-wise fit candidate."""
+
+    payload = json.dumps(params, ensure_ascii=False, sort_keys=True, default=str, separators=(",", ":"))
+    return hashlib.sha256(payload.encode("utf-8")).hexdigest()
+
+
 def _weighted_symbol_candidate_error(
     perc_img,
     rendered,
@@ -538,12 +547,26 @@ def _fit_symbol_element_by_element(
         ("gradient_mid", (str(current["gradient_mid"]),) + tuple(_gray_hex(v) for v in sorted({100.0, 120.0, 140.0, 170.0, 190.0, 220.0, 245.0, gradient_mid_seed}))),
     ]
     step_logs: list[str] = []
+    iteration_logs: list[str] = []
+    logged_iteration_hashes: set[str] = set()
+    iteration_index = 0
     best: tuple[float, str, object] | None = None
     for key, candidates in refinement_steps:
         local_best = None
         for candidate_value in candidates:
             candidate = dict(current)
             candidate[key] = candidate_value
+            iteration_hash = _symbol_params_iteration_hash(candidate)
+            if iteration_hash not in logged_iteration_hashes:
+                logged_iteration_hashes.add(iteration_hash)
+                iteration_index += 1
+                iteration_logs.extend(
+                    [
+                        f"iteration_{iteration_index:03d}_key={key}",
+                        f"iteration_{iteration_index:03d}_value={candidate_value}",
+                        f"iteration_{iteration_index:03d}_params_hash={iteration_hash}",
+                    ]
+                )
             svg = _build_structured_symbol_svg(width, height, **candidate)
             rendered = render_svg_to_numpy_fn(svg, width, height)
             if rendered is None:
@@ -557,6 +580,7 @@ def _fit_symbol_element_by_element(
         current[key] = local_best[2]
         step_logs.append(f"step_{key}={local_best[2]}")
         best = (local_best[1], local_best[3], local_best[4])
+    step_logs = iteration_logs + step_logs
     if best is None:
         return None
     return best[0], best[1], best[2], current, step_logs

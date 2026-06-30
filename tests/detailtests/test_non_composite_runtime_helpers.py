@@ -29,6 +29,31 @@ def test_structured_symbol_svg_can_fit_single_diagonal_top_left_plus() -> None:
     assert svg.count('stroke="#f1f1f1"') == 2
 
 
+def test_elementwise_symbol_fit_logs_distinct_iteration_parameter_hashes() -> None:
+    raster = np.ones((80, 40, 3), dtype=np.uint8) * 150
+    raster[:, 18:22] = 220
+    raster[12, 5:13] = 245
+    raster[8:17, 9] = 245
+
+    def _render(_svg, width, height):
+        return np.ones((height, width, 3), dtype=np.uint8) * 128
+
+    result = non_composite_runtime_helpers._fit_symbol_element_by_element(
+        width=40,
+        height=80,
+        description="Heizelement, Plus-Minus-Zeichen oben links, Diagonale von oben rechts nach unten links",
+        perc_img=raster,
+        render_svg_to_numpy_fn=_render,
+        calculate_error_fn=lambda target, rendered: float(np.mean(np.abs(target.astype(float) - rendered.astype(float)))),
+    )
+
+    assert result is not None
+    _err, _svg, _rendered, _params, logs = result
+    hashes = [line.split("=", 1)[1] for line in logs if "_params_hash=" in line]
+    assert len(hashes) >= 12
+    assert len(set(hashes[:12])) == 12
+
+
 def test_symbol_params_detect_glyph_geometry_from_raster() -> None:
     raster = np.ones((80, 40, 3), dtype=np.uint8) * 150
     raster[:, 18:22] = 210
