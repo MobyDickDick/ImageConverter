@@ -3966,3 +3966,11 @@ endet. Die Detailableitung und Akzeptanzkriterien stehen in
 - **Sicherung:** Der fokussierte Optimierer-Testblock läuft grün; die absolute Runtime-ID-Nullprüfung meldet weiterhin `0 occurrences`.
 - **Perception-Lerneffekt:** `DLG0021` bleibt `nur Sonderfall`; die Verbesserung ist eine katalogfreie Optimierer-Verallgemeinerung für beschreibungsbasierte Polygonpfade, keine neue reine Bilddetektion.
 - **Nächster sinnvoller Schritt:** In der aktiven Plan-B-Liste weiterrotieren oder das verbleibende DLG0021-Farb-/Kontur-Feintuning mit der feineren Punktpalette fortsetzen.
+
+### Fortschritt vs. Blocker (Session 2026-06-30, GE9013_1M RectBorder-Stroke-Width-Probes Run UE)
+
+- **Fortschritt:** Der aktive Plan-B-Kandidat `GE9013_1M` wurde mit einer weiteren katalogfreien Rechteck-Optimiererweiterung abgesichert: `RectBorder`-Elemente prüfen nun zusätzlich feine absolute `stroke_width ± 0.005`-Probes.
+- **Sicherung:** Der fokussierte Geometry-IR-Optimierer-Testblock läuft grün; die absolute Runtime-ID-Nullprüfung meldet weiterhin `0 occurrences`. Der isolierte CLI-Lauf für `GE9013_1M` endet mit Exit `0`.
+- **Qualität:** Die isolierte Metrik bleibt gegenüber Run TX stabil bei `Mean-Delta²=12989.524414` (`Fehler/Pixel=0.035766`), weil keine neue Konturstärkenprobe den bisherigen Stand weiter verbessert.
+- **Perception-Lerneffekt:** `GE9013_1M` bleibt `nur Sonderfall`; die Änderung verallgemeinert die nachgelagerte Rechteck-Konturregistrierung, nicht die reine Bilddetektion.
+- **Nächster sinnvoller Schritt:** In der aktiven Plan-B-Liste wieder zu `DLG0021` rotieren oder weitere allgemeine Rechteck-/Antialiasing-Probes untersuchen.
