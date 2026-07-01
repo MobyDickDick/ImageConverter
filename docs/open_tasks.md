@@ -6,7 +6,7 @@ focused on the actual project scope.
 
 ## Aufgaben-Gesamtzähler (Snapshot 2026-06-19)
 
-**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `404` · Erledigt `361` · Offen `43`
+**Alle erkennbaren Checkbox-Aufgaben in dieser Datei:** Gesamt `401` · Erledigt `362` · Offen `39`
 
 > Zählregel: Gezählt werden alle Markdown-Checkboxen (`- [ ]` / `- [x]`) in `docs/open_tasks.md`.
 
@@ -2260,9 +2260,10 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
   - [ ] Direkt danach Kurzprüfung: Fehler/Timeout + tatsächlich verarbeitete IDs.
   - **Session 2026-06-26 (Run SY, B-AC08-01):** Standard-Run mit fixer Toolchain und äußerem Timeout erfolgreich ausgeführt: `PYTHONPATH=vendor/linux-py310/site-packages:. PYENV_VERSION=3.10.20 timeout 300 python -m src.iCCModules.imageCompositeConverterCli artifacts/images_to_convert --descriptions-path artifacts/images_to_convert/Finale_Wurzelformen_V3.xml --output-dir /tmp/ic-b-ac08-01-20260626 --start AC0800 --end AC0840 --deterministic-order 2>&1 | tee artifacts/converted_images/reports/B-AC08-01_standard_run_2026-06-26.log` endete mit Exit `0`. Die Kurzprüfung ergab `49` Konvertiert-Meldungen für `29` eindeutige Varianten aus den `10` geplanten Basis-IDs; `AC0820_M.jpg` ist lokal nicht vorhanden, daher ist der Block für vorhandene Inputs vollständig. Auffällig bleiben sechs dokumentierte Fallback-Meldungen für `AC0840_*`/Qualitäts-Nachläufe, aber kein Timeout und kein Batch-Abbruch.
 
-- [ ] **A4 Review pro Block dokumentieren**
-  - [ ] In der Doku je Block festhalten: Log-Pfad, Ergebnis (`stabil`/`instabil`), Kurznotiz (3–5 Sätze).
-  - [ ] Bei `instabil` Ursache markieren: Datenlücke / Range-Filter / Laufzeit / Qualitätsbefund.
+- [x] **A4 Review pro Block dokumentieren** (2026-07-01 Run UH: Review für `B-AC08-01` nachgetragen; Ergebnis `stabil` für alle vorhandenen Inputs, mit Datenlücke `AC0820_M.jpg` und Qualitätsfolgepunkt `AC0840_*`.)
+  - [x] In der Doku je Block festhalten: Log-Pfad, Ergebnis (`stabil`/`instabil`), Kurznotiz (3–5 Sätze).
+  - [x] Bei `instabil` Ursache markieren: Datenlücke / Range-Filter / Laufzeit / Qualitätsbefund.
+  - **Review B-AC08-01 (Run UH, 2026-07-01):** Log-Pfad: `artifacts/converted_images/reports/B-AC08-01_standard_run_2026-06-26.log`; Ergebnis: `stabil`. Der Standard-Run endete ohne Timeout, Traceback, ERROR oder `conversion_failed` und schrieb den Abschlussmarker `Abgeschlossen! Ausgaben unter: /tmp/ic-b-ac08-01-20260626`. Die Kurzprüfung bestätigt `49` Konvertiert-Meldungen und `29` eindeutige Varianten aus den `10` geplanten Basis-IDs; die einzige Datenlücke bleibt `AC0820_M.jpg`, das lokal nicht vorhanden ist. Für `AC0840_*` treten weiterhin dokumentierte Fallback-/Manual-Review-Elementfits auf, sie verursachen aber keinen Batch-Abbruch und werden daher als Qualitätsfolgepunkt statt Laufzeitblocker bewertet. Der Block erfüllt damit die Review-Kriterien bis `Review`; die endgültige `Done`-Entscheidung bleibt bei A6 gebündelt.
 
 - [ ] **A5 Qualitäts-Checkpoint nach je 3 Blöcken**
   - [ ] Fehlertrend und wiederkehrende Problem-IDs prüfen.
@@ -2278,6 +2279,13 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
   - [ ] `BLOCKED`-Blöcke gesammelt erneut fahren.
 
 - [ ] **A8 Kanban-Status pflegen**
+
+### Fortschritt vs. Blocker (Session 2026-07-01, B-AC08-01 Review Run UH)
+
+- **Fortschritt (Primäraufgabe A4):** Die nächste offene Aufgabe aus der Block-Abarbeitung wurde erledigt: Für `B-AC08-01` ist der Review mit Log-Pfad, Ergebnis und Kurznotiz direkt im Taskboard dokumentiert.
+- **Ergebnis:** Der bestehende Standard-Run `artifacts/converted_images/reports/B-AC08-01_standard_run_2026-06-26.log` ist als `stabil` bewertet, weil er ohne Timeout/Traceback/ERROR/`conversion_failed` bis zum Abschlussmarker lief.
+- **Befund:** `AC0820_M.jpg` bleibt eine reine Datenlücke; `AC0840_*` bleibt ein Qualitätsfolgepunkt wegen Fallback-/Manual-Review-Elementfits, aber kein Batch-Blocker.
+- **Nächster sinnvoller Schritt:** A5 noch nicht auslösen, weil erst ein Block reviewt ist; als nächstes A6 für `B-AC08-01` anwenden oder mit A3/A4 für `B-AC08-02` fortfahren.
 
 ### Fortschritt vs. Blocker (Session 2026-05-15, A1-Inventur + PB-A1-Dokumentationsfallback)
 

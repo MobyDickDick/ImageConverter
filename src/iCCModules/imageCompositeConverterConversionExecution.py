@@ -11,6 +11,10 @@ import shutil
 import time
 from contextlib import contextmanager
 
+from src.iCCModules.imageCompositeConverterValidationRounds import (
+    clampBadgeValidationRoundsImpl,
+)
+
 _ONE_BY_ONE_TRANSPARENT_PNG = (
     b"\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x00\x01\x00\x00\x00\x01"
     b"\x08\x06\x00\x00\x00\x1f\x15\xc4\x89\x00\x00\x00\x0bIDATx\x9cc`\x00\x02\x00\x00\x05\x00\x01"
@@ -486,10 +490,19 @@ def convertOneImpl(
     if anchor_test_active:
         _emit_anchor_variant_event("variant_start", attempt_idx=attempt_idx)
     started_at = time.monotonic()
+    effective_badge_rounds, rounds_capped, requested_badge_rounds = clampBadgeValidationRoundsImpl(
+        badge_rounds
+    )
+    if rounds_capped:
+        print_fn(
+            f"[WARN] {filename}: Validierungsrunden auf {effective_badge_rounds} "
+            f"begrenzt (angefordert={requested_badge_rounds})."
+        )
+
     print_fn(
         f"[INFO] Konvertiere {filename} | "
         f"Parameter: Iterationen={max(1, int(iteration_budget))}, "
-        f"max. Validierungsrunden={max(1, int(badge_rounds))}"
+        f"max. Validierungsrunden={effective_badge_rounds}"
     )
     try:
         with _wallClockTimeout(run_timeout_sec):
@@ -502,7 +515,7 @@ def convertOneImpl(
                 reports_out_dir,
                 debug_ac0811_dir,
                 debug_element_diff_dir,
-                badge_validation_rounds=max(1, int(badge_rounds)),
+                badge_validation_rounds=effective_badge_rounds,
             )
     except Exception as exc:  # noqa: BLE001 - keeps batch execution resilient per image.
         failed_svg_path = _writeFailedEmbeddedSvgArtifact(

@@ -44,7 +44,7 @@ for variant in "${VARIANTS[@]}"; do
   fi
   echo "==> AC08 segment ${variant}"
   set +e
-  timeout "$TIMEOUT_SECONDS" bash -lc "$command" >"$log_path" 2>&1
+  timeout "$TIMEOUT_SECONDS" bash -c "$command" >"$log_path" 2>&1
   status=$?
   set -e
   classification=PASS
@@ -70,7 +70,7 @@ if [[ "$BLOCKERS" -ne 0 ]]; then
 fi
 
 if [[ -n "${RC_GATE_AC08_FINALIZE_CMD:-}" ]]; then
-  bash -lc "$RC_GATE_AC08_FINALIZE_CMD"
+  bash -c "$RC_GATE_AC08_FINALIZE_CMD"
 else
   "$PYTHON_BIN" tools/finalize_ac08_segmented_run.py "$SEGMENTS_ROOT" "$OUTPUT_DIR" \
     --input-dir "$INPUT_DIR" --descriptions-path "$DESCRIPTIONS_PATH" --iterations "$ITERATIONS"

@@ -100,6 +100,59 @@ def test_convert_one_impl_success_reads_convergence_and_delta2(tmp_path: Path) -
     assert console_messages[1].endswith("s")
 
 
+def test_convert_one_impl_caps_oversized_badge_validation_rounds(tmp_path: Path) -> None:
+    folder = tmp_path / "images"
+    svg_out = tmp_path / "svg"
+    diff_out = tmp_path / "diff"
+    reports = tmp_path / "reports"
+    for path in (folder, svg_out, diff_out, reports):
+        path.mkdir()
+
+    filename = "AC0814_S.jpg"
+    (folder / filename).write_bytes(b"fake")
+    (svg_out / "AC0814_S.svg").write_text("<svg/>", encoding="utf-8")
+
+    captured: dict[str, object] = {}
+    console_messages: list[str] = []
+
+    def _run_iteration_pipeline(*_args, **kwargs):
+        captured.update(kwargs)
+        return ("AC0814_S", "desc", {"mode": "semantic_badge"}, 2, 12.0)
+
+    row, failed = conversion_execution_helpers.convertOneImpl(
+        filename=filename,
+        folder_path=str(folder),
+        csv_path="descriptions.csv",
+        iteration_budget=600,
+        badge_rounds=600,
+        svg_out_dir=str(svg_out),
+        diff_out_dir=str(diff_out),
+        png_out_dir=str(tmp_path / "png"),
+        reports_out_dir=str(reports),
+        debug_ac0811_dir=None,
+        debug_element_diff_dir=None,
+        run_iteration_pipeline_fn=_run_iteration_pipeline,
+        read_validation_log_details_fn=lambda _path: {},
+        render_svg_to_numpy_fn=lambda _svg, _w, _h: object(),
+        calculate_delta2_stats_fn=lambda _img, _rendered: (1.25, 0.75),
+        get_base_name_from_file_fn=lambda stem: stem.split("_")[0],
+        cv2_module=_Cv2Stub(_ImageStub((4, 3, 3))),
+        render_embedded_raster_svg_fn=lambda _path: "<svg/>",
+        append_batch_failure_fn=lambda _failure: None,
+        print_fn=console_messages.append,
+    )
+
+    assert failed is False
+    assert row is not None
+    assert captured["badge_validation_rounds"] == 12
+    assert console_messages[0] == (
+        "[WARN] AC0814_S.jpg: Validierungsrunden auf 12 begrenzt (angefordert=600)."
+    )
+    assert console_messages[1] == (
+        "[INFO] Konvertiere AC0814_S.jpg | Parameter: Iterationen=600, max. Validierungsrunden=12"
+    )
+
+
 def test_compact_params_keeps_relevant_scalars_and_omits_metadata() -> None:
     rendered = conversion_execution_helpers._formatCompactParams(
         {
