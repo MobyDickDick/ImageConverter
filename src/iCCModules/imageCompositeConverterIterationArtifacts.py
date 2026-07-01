@@ -4,8 +4,12 @@ from __future__ import annotations
 
 import os
 import json
+import numpy as np
 import time
+from pathlib import Path
 from typing import Callable
+
+from src.iCCModules import imageCompositeConverterDiffing as diffing_helpers
 
 
 def writeValidationLogImpl(
@@ -51,6 +55,8 @@ def writeAttemptArtifactsImpl(
     rendered_img=None,
     diff_img=None,
     failed: bool = False,
+    commented_diff_out_dir: str | None = None,
+    create_commented_diff: bool = True,
 ) -> None:
     suffix = "_failed" if failed else ""
     svg_path = os.path.join(svg_out_dir, f"{base_name}{suffix}.svg")
@@ -62,12 +68,46 @@ def writeAttemptArtifactsImpl(
     if failed:
         return
 
-    render = rendered_img if rendered_img is not None else render_svg_to_numpy_fn(svg_content)
+    render = (
+        rendered_img
+        if rendered_img is not None
+        else render_svg_to_numpy_fn(svg_content)
+    )
     if render is None:
         return
 
-    diff = diff_img if diff_img is not None else create_diff_image_fn(target_img, render)
-    cv2_module.imwrite(os.path.join(diff_out_dir, f"{base_name}{suffix}_diff.png"), diff)
+    diff = (
+        diff_img if diff_img is not None else create_diff_image_fn(target_img, render)
+    )
+    cv2_module.imwrite(
+        os.path.join(diff_out_dir, f"{base_name}{suffix}_diff.png"), diff
+    )
+
+    if (
+        create_commented_diff
+        and hasattr(target_img, "shape")
+        and hasattr(render, "shape")
+    ):
+        comment_dir = (
+            Path(commented_diff_out_dir)
+            if commented_diff_out_dir
+            else Path(diff_out_dir).parent / "commented_diff_images"
+        )
+        comment_dir.mkdir(parents=True, exist_ok=True)
+        summary = diffing_helpers.diffPixelSummaryImpl(
+            target_img, render, cv2_module=cv2_module, np_module=np
+        )
+        commented = diffing_helpers.createCommentedDiffImageImpl(
+            diff,
+            summary,
+            cv2_module=cv2_module,
+            np_module=np,
+            title=f"{base_name}{suffix}: source vs converted render",
+        )
+        if commented is not None:
+            cv2_module.imwrite(
+                str(comment_dir / f"{base_name}{suffix}_commented_diff.png"), commented
+            )
 
 
 def paramsSnapshotImpl(snapshot: dict[str, object]) -> str:

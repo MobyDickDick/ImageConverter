@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from pathlib import Path
 
+import numpy as np
+
 from src.iCCModules import imageCompositeConverterIterationArtifacts as helpers
 
 
@@ -85,20 +87,24 @@ def test_write_render_failure_log_with_svg_and_params():
         reason="render_failed",
         filename="AC0800_L.jpg",
         base_name="AC0800_L",
-        write_attempt_artifacts_fn=lambda svg, failed=False: attempt_calls.append((svg, failed)),
+        write_attempt_artifacts_fn=lambda svg, failed=False: attempt_calls.append(
+            (svg, failed)
+        ),
         write_validation_log_fn=log_lines.append,
         svg_content="<svg/>",
         params_snapshot={"x": 1},
     )
 
     assert attempt_calls == [("<svg/>", True)]
-    assert log_lines == [[
-        "status=render_failure",
-        "failure_reason=render_failed",
-        "filename=AC0800_L.jpg",
-        "best_attempt_svg=AC0800_L_failed.svg",
-        'params_snapshot={"x": 1}',
-    ]]
+    assert log_lines == [
+        [
+            "status=render_failure",
+            "failure_reason=render_failed",
+            "filename=AC0800_L.jpg",
+            "best_attempt_svg=AC0800_L_failed.svg",
+            'params_snapshot={"x": 1}',
+        ]
+    ]
 
 
 def test_write_render_failure_log_without_svg():
@@ -114,8 +120,42 @@ def test_write_render_failure_log_without_svg():
     )
 
     assert attempt_calls == []
-    assert log_lines == [[
-        "status=render_failure",
-        "failure_reason=render_failed",
-        "filename=AC0800_S.jpg",
-    ]]
+    assert log_lines == [
+        [
+            "status=render_failure",
+            "failure_reason=render_failed",
+            "filename=AC0800_S.jpg",
+        ]
+    ]
+
+
+def test_write_attempt_artifacts_writes_commented_diff_subdir_for_numpy_images(
+    tmp_path: Path,
+):
+    cv2_stub = _Cv2Stub()
+    target = np.zeros((2, 2, 3), dtype=np.uint8)
+    rendered = target.copy()
+    rendered[0, 0] = [12, 0, 0]
+    diff = rendered.copy()
+
+    (tmp_path / "svg").mkdir()
+    (tmp_path / "diff").mkdir()
+
+    helpers.writeAttemptArtifactsImpl(
+        svg_out_dir=str(tmp_path / "svg"),
+        diff_out_dir=str(tmp_path / "diff"),
+        base_name="AC0001",
+        svg_content="<svg/>",
+        target_img=target,
+        rendered_img=rendered,
+        diff_img=diff,
+        render_svg_to_numpy_fn=lambda _svg: rendered,
+        create_diff_image_fn=lambda _target, _render: diff,
+        cv2_module=cv2_stub,
+    )
+
+    assert cv2_stub.calls[0][0] == str(tmp_path / "diff" / "AC0001_diff.png")
+    assert cv2_stub.calls[1][0] == str(
+        tmp_path / "commented_diff_images" / "AC0001_commented_diff.png"
+    )
+    assert cv2_stub.calls[1][1].shape[0] > diff.shape[0]
