@@ -191,3 +191,47 @@ def test_run_quality_passes_does_not_force_isolated_skipped_variant() -> None:
     )
 
     assert stop is False
+
+
+def test_structured_residual_keeps_retrying_after_rejected_candidate() -> None:
+    row = {
+        "filename": "AC0820_L.jpg",
+        "variant": "AC0820_L",
+        "error_per_pixel": 0.25,
+        "mean_delta2": 8.0,
+        "diff_error_distribution_status": "structured",
+    }
+    attempts: list[int] = []
+    quality_logs: list[dict[str, object]] = []
+
+    stop = conversion_quality_pass_helpers.runQualityPassesImpl(
+        max_quality_passes=2,
+        stop_after_failure=False,
+        deterministic_order=True,
+        rng=object(),
+        base_iterations=5,
+        allowed_error_per_pixel=1.0,
+        skip_variants=set(),
+        result_map={"AC0820_L.jpg": row},
+        quality_logs=quality_logs,
+        conversion_bestlist_rows={},
+        convert_one_fn=lambda filename, iteration_budget, **_kwargs: (
+            attempts.append(iteration_budget)
+            or {**row, "error_per_pixel": 0.30, "mean_delta2": 9.0},
+            False,
+        ),
+        select_open_quality_cases_fn=lambda rows, **_kwargs: rows,
+        select_middle_lower_tercile_fn=lambda _rows: [],
+        iteration_strategy_for_pass_fn=lambda pass_idx, base: (base + pass_idx, 7),
+        adaptive_iteration_budget_for_quality_row_fn=lambda _row, planned: planned,
+        evaluate_quality_pass_candidate_fn=lambda _old, _new: (False, "rejected_spatial_regression", 0.25, 0.30, 8.0, 9.0),
+        store_conversion_bestlist_snapshot_fn=lambda _variant, _row: None,
+        restore_conversion_bestlist_snapshot_fn=lambda _variant: None,
+    )
+
+    assert stop is False
+    assert attempts == [6, 7]
+    assert [row["decision"] for row in quality_logs] == [
+        "rejected_spatial_regression",
+        "rejected_spatial_regression",
+    ]

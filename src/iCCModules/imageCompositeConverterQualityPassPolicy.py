@@ -45,15 +45,17 @@ def resolveMaxQualityPassesImpl(
             max_quality_passes = 0
             reason = "focused_initial_pass_only"
         else:
-            max_quality_passes = min(max_quality_passes, 1)
-            reason = "single_base_one_refinement_pass"
+            max_quality_passes = min(max_quality_passes, 2)
+            reason = "single_base_structured_retry_window"
     elif len(normalized_bases) > 1:
         # A broad batch used to retry the lower two terciles up to four times,
         # multiplying end-to-end runtime even when only marginal gains remained.
-        # Keep one targeted refinement pass by default; ICC_MAX_QUALITY_PASSES
-        # remains available for deliberate deep-quality runs.
-        max_quality_passes = min(max_quality_passes, 1)
-        reason = "multi_base_one_refinement_pass"
+        # Keep a small targeted retry window by default so structured residuals
+        # can try a different parameter budget without returning to the old
+        # four-pass blanket runtime. ICC_MAX_QUALITY_PASSES remains available
+        # for deliberate deep-quality runs.
+        max_quality_passes = min(max_quality_passes, 2)
+        reason = "multi_base_structured_retry_window"
 
     override = str(override_quality_passes or "").strip()
     if override:

@@ -14,14 +14,14 @@ def test_configured_focused_batch_skips_blanket_quality_retry() -> None:
     assert reason == "focused_initial_pass_only"
 
 
-def test_regular_single_base_keeps_one_refinement_pass() -> None:
+def test_regular_single_base_keeps_structured_retry_window() -> None:
     max_passes, reason = policy_helpers.resolveMaxQualityPassesImpl(
         default_max_quality_passes=4,
         base_names={"ZZREGULAR"},
     )
 
-    assert max_passes == 1
-    assert reason == "single_base_one_refinement_pass"
+    assert max_passes == 2
+    assert reason == "single_base_structured_retry_window"
 
 
 def test_quality_pass_policy_env_override_wins() -> None:
@@ -45,11 +45,11 @@ def test_base_names_from_filenames_uses_converter_base_parser() -> None:
     assert bases == {"ZZRISK", "ZZBASE"}
 
 
-def test_multi_base_batch_keeps_one_refinement_pass_by_default() -> None:
+def test_multi_base_batch_keeps_structured_retry_window_by_default() -> None:
     max_passes, reason = policy_helpers.resolveMaxQualityPassesImpl(
         default_max_quality_passes=4,
         base_names={"ZZBASE", "ZZOTHER"},
     )
 
-    assert max_passes == 1
-    assert reason == "multi_base_one_refinement_pass"
+    assert max_passes == 2
+    assert reason == "multi_base_structured_retry_window"
