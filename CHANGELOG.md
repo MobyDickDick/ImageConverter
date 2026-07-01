@@ -15,6 +15,8 @@
 All notable changes to ImageConverter will be documented in this file.
 
 ## Unreleased
+- Plan-B Run UI adds catalog-free fine opacity probes (`0.925`/`0.975`) for rectangular `ColorPatch` and `RectBorder` Geometry-IR elements, extending the GE9012_6M BackBottom/light-grey-square optimization space without runtime image-ID coupling.
+
 - Plan-B/IDO Run QP extends the catalog-free primitive/transform contract from 3-way Kelle valves to vertical 2-way motor valves, adding polygon-body, circle-handle, connector, text decomposition and neutral rotation regression coverage while lowering the runtime ID ratchet to 367 occurrences.
 
 - T6.13 Run PW confirms the real `AC0800_M` semantic regression case in `3.03s` Pytest time (`5s` wall time), preserving `semantic_ok` well below the 120-second acceptance limit without changing production or test budgets.
