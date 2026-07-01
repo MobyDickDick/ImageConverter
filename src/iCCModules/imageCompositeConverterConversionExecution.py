@@ -489,7 +489,7 @@ def convertOneImpl(
     print_fn(
         f"[INFO] Konvertiere {filename} | "
         f"Parameter: Iterationen={max(1, int(iteration_budget))}, "
-        f"Validierungsrunden={max(1, int(badge_rounds))}"
+        f"max. Validierungsrunden={max(1, int(badge_rounds))}"
     )
     try:
         with _wallClockTimeout(run_timeout_sec):

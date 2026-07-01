@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from src.iCCModules import imageCompositeConverterConversionInitialPass as initial_pass
 from src.iCCModules import imageCompositeConverterOptimizationPasses as pass_helpers
 
 
@@ -18,6 +19,35 @@ def test_select_open_quality_cases_filters_and_orders_descending() -> None:
     )
 
     assert [entry["variant"] for entry in selected] == ["AC0800_M"]
+
+
+def test_select_open_quality_cases_keeps_structured_diff_even_below_error_threshold() -> None:
+    rows = [
+        {
+            "variant": "AC0800_S",
+            "error_per_pixel": 0.2,
+            "diff_error_distribution_status": "structured",
+        },
+        {
+            "variant": "AC0800_M",
+            "error_per_pixel": 0.3,
+            "diff_error_distribution_status": "random_like",
+        },
+    ]
+
+    selected = pass_helpers.selectOpenQualityCasesImpl(
+        rows,
+        allowed_error_per_pixel=1.0,
+        skip_variants=set(),
+    )
+
+    assert [entry["variant"] for entry in selected] == ["AC0800_S"]
+
+
+def test_initial_badge_validation_rounds_scale_with_iteration_budget() -> None:
+    assert initial_pass.resolveInitialBadgeValidationRoundsImpl(64, override="") == 8
+    assert initial_pass.resolveInitialBadgeValidationRoundsImpl(128, override="") == 12
+    assert initial_pass.resolveInitialBadgeValidationRoundsImpl(64, override="5") == 5
 
 
 def test_compute_successful_conversions_error_threshold_uses_mean_plus_two_sigma() -> None:

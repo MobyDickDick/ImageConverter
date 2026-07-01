@@ -5,6 +5,24 @@ from __future__ import annotations
 import os
 
 
+def resolveInitialBadgeValidationRoundsImpl(base_iterations: int, override: str | None = None) -> int:
+    """Return an adaptive maximum for semantic badge validation rounds.
+
+    The element validator already stops early on stagnation/no movement.  This
+    value is therefore a safety cap, not a fixed amount of mandatory work.
+    """
+    override_value = str(
+        override if override is not None else os.environ.get("ICC_INITIAL_BADGE_VALIDATION_ROUNDS", "")
+    ).strip()
+    if override_value:
+        try:
+            return max(1, int(override_value))
+        except ValueError:
+            pass
+    budget = max(1, int(base_iterations))
+    return max(6, min(12, 4 + (budget // 16)))
+
+
 def runInitialConversionPassImpl(
     *,
     process_files: list[str],
@@ -41,7 +59,8 @@ def runInitialConversionPassImpl(
             os.environ["ICC_ANCHOR_VARIANT_IDX"] = str(variant_idx)
             os.environ["ICC_ANCHOR_VARIANT_TOTAL"] = str(total_variants)
             os.environ["ICC_ANCHOR_RUN_CONTEXT"] = f"initial_pass:{variant_idx}/{total_variants}"
-        row, failed = convert_one_fn(filename, iteration_budget=base_iterations, badge_rounds=6)
+        badge_rounds = resolveInitialBadgeValidationRoundsImpl(base_iterations)
+        row, failed = convert_one_fn(filename, iteration_budget=base_iterations, badge_rounds=badge_rounds)
         if failed:
             stop_after_failure = True
             if should_stop_after_failure_fn is not None and should_stop_after_failure_fn(filename):
