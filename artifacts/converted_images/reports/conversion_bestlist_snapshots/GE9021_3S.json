@@ -1,34 +1,372 @@
 {
+  "actual_iterations": 64,
   "base": "GE9021",
-  "best_error": 36.28,
+  "best_error": 19.91888888888889,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.12093333333333334,
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 0.29699999999999704,
+  "error_per_pixel": 0.0663962962962963,
+  "error_pixel_cluster_count": 5.0,
+  "error_pixel_cluster_excess": 0.2729824561403508,
+  "error_pixel_count": 76.0,
   "filename": "GE9021_3S.jpg",
   "h": 30,
-  "mean_delta2": 6863.06689453125,
+  "largest_error_pixel_cluster_fraction": 0.5263157894736842,
+  "localized_error_fraction": 0.8064784667269199,
+  "mean_delta2": 3831.9765625,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
+    "description_constraints": {
+      "elements": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "confidence": 0.75,
+          "fill": "#ffffff",
+          "id": "description_element_1",
+          "kind": "ColorPatch",
+          "source": "description",
+          "stroke": "none"
+        },
+        {
+          "confidence": 0.75,
+          "fill": "none",
+          "id": "description_element_2",
+          "kind": "PolygonPath",
+          "linecap": "butt",
+          "linejoin": "round",
+          "points": [
+            [
+              0.235,
+              0.0
+            ],
+            [
+              0.235,
+              0.835
+            ],
+            [
+              0.5,
+              0.965
+            ],
+            [
+              0.765,
+              0.835
+            ],
+            [
+              0.765,
+              0.0
+            ]
+          ],
+          "primitive_decomposition": {
+            "primitives": [
+              {
+                "kind": "LineSegment",
+                "role": "left_vertical_leg"
+              },
+              {
+                "kind": "ArcSegment",
+                "role": "bottom_round_connector"
+              },
+              {
+                "kind": "LineSegment",
+                "role": "right_vertical_leg"
+              }
+            ],
+            "schema_version": "u_loop_primitive_decomposition_v1"
+          },
+          "role": "u_loop",
+          "source": "description",
+          "stroke": "#f2db18",
+          "stroke_width": 0.115
+        }
+      ],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
+      }
+    },
     "description_contract": {
       "deficits": [],
-      "has_conditions": false,
-      "has_geometry_terms": false,
-      "has_reference": true,
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": false,
       "status": "ok"
     },
     "description_fragments": [
       {
         "key": "GE9021",
         "source": "base_name",
-        "text": "Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz."
+        "text": "Weißer schmaler Hintergrund mit gelber U-Form: zwei senkrechte gelbe Linien laufen links und rechts nach unten und sind unten durch einen runden gelben Bogen verbunden."
       }
     ],
     "documented_alias_refs": [],
     "elements": [],
-    "geometry_ir": [],
+    "geometry_ir": [
+      {
+        "bbox": [
+          0.0,
+          0.0,
+          1.0,
+          1.0
+        ],
+        "fill": "#ffffff",
+        "id": "u_loop_background",
+        "kind": "ColorPatch",
+        "stroke": "none"
+      },
+      {
+        "fill": "none",
+        "id": "yellow_u_loop",
+        "kind": "PolygonPath",
+        "linecap": "butt",
+        "linejoin": "round",
+        "points": [
+          [
+            0.235,
+            0.0
+          ],
+          [
+            0.235,
+            0.835
+          ],
+          [
+            0.5,
+            0.965
+          ],
+          [
+            0.765,
+            0.835
+          ],
+          [
+            0.765,
+            0.0
+          ]
+        ],
+        "primitive_decomposition": {
+          "primitives": [
+            {
+              "kind": "LineSegment",
+              "role": "left_vertical_leg"
+            },
+            {
+              "kind": "ArcSegment",
+              "role": "bottom_round_connector"
+            },
+            {
+              "kind": "LineSegment",
+              "role": "right_vertical_leg"
+            }
+          ],
+          "schema_version": "u_loop_primitive_decomposition_v1"
+        },
+        "role": "u_loop",
+        "stroke": "#f2db18",
+        "stroke_width": 0.115
+      }
+    ],
+    "geometry_ir_optimizer_result": {
+      "element_refinement": {
+        "final_error": 27.92111111111111,
+        "initial_error": 27.92111111111111,
+        "mode": "right_rotated_valve_geometry",
+        "steps": []
+      },
+      "final_error": 19.91888888888889,
+      "generic_element_refinement": {
+        "final_error": 19.91888888888889,
+        "initial_error": 27.92111111111111,
+        "mode": "elementwise_geometry_ir",
+        "steps": [
+          {
+            "accepted": true,
+            "best_delta": 5.105555555555554,
+            "element": "u_loop_background",
+            "error_after": 22.815555555555555,
+            "error_before": 27.92111111111111,
+            "step_index": 0
+          },
+          {
+            "accepted": true,
+            "best_delta": 2.8966666666666647,
+            "element": "yellow_u_loop",
+            "error_after": 19.91888888888889,
+            "error_before": 22.815555555555555,
+            "step_index": 1
+          }
+        ]
+      },
+      "initial_error": 44.92666666666667,
+      "mode": "geometry_ir_raster_registration",
+      "parameters": {
+        "scale_x": 0.72,
+        "scale_y": 0.94,
+        "stroke_scale": 0.78,
+        "translate_x": 0.0,
+        "translate_y": -0.07
+      },
+      "steps": [
+        {
+          "best_delta": 2.555555555555557,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": 0.08
+        },
+        {
+          "best_delta": 1.3077777777777797,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": -0.08
+        },
+        {
+          "best_delta": 1.474444444444444,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.85
+        },
+        {
+          "best_delta": 0.8144444444444474,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 0.75
+        },
+        {
+          "best_delta": 3.887777777777778,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": 0.0
+        },
+        {
+          "best_delta": 5.519999999999996,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.7
+        },
+        {
+          "best_delta": 0.5722222222222229,
+          "parameter": "stroke_scale",
+          "stage": 1,
+          "value": 0.9
+        },
+        {
+          "best_delta": 0.08333333333333215,
+          "parameter": "scale_x",
+          "stage": 2,
+          "value": 0.74
+        },
+        {
+          "best_delta": 0.137777777777778,
+          "parameter": "scale_y",
+          "stage": 2,
+          "value": 0.96
+        },
+        {
+          "best_delta": 0.07555555555555671,
+          "parameter": "stroke_scale",
+          "stage": 2,
+          "value": 0.8200000000000001
+        },
+        {
+          "best_delta": 0.5300000000000011,
+          "parameter": "scale_x",
+          "stage": 3,
+          "value": 0.72
+        },
+        {
+          "best_delta": 0.02666666666666373,
+          "parameter": "translate_y",
+          "stage": 3,
+          "value": -0.07
+        },
+        {
+          "best_delta": 0.013333333333335418,
+          "parameter": "scale_y",
+          "stage": 3,
+          "value": 0.94
+        },
+        {
+          "best_delta": 0.006666666666667709,
+          "parameter": "stroke_scale",
+          "stage": 3,
+          "value": 0.78
+        }
+      ]
+    },
     "label": "M",
     "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "bbox": [
+          0.14,
+          -0.03999999999999998,
+          0.72,
+          0.94
+        ],
+        "fill": "#d0e4ca",
+        "id": "u_loop_background",
+        "kind": "ColorPatch",
+        "stroke": "none"
+      },
+      {
+        "fill": "none",
+        "id": "yellow_u_loop",
+        "kind": "PolygonPath",
+        "linecap": "butt",
+        "linejoin": "round",
+        "points": [
+          [
+            0.30920000000000003,
+            -0.03999999999999998
+          ],
+          [
+            0.30920000000000003,
+            0.7448999999999999
+          ],
+          [
+            0.5,
+            0.8671
+          ],
+          [
+            0.6908,
+            0.7448999999999999
+          ],
+          [
+            0.6908,
+            -0.03999999999999998
+          ]
+        ],
+        "primitive_decomposition": {
+          "primitives": [
+            {
+              "kind": "LineSegment",
+              "role": "left_vertical_leg"
+            },
+            {
+              "kind": "ArcSegment",
+              "role": "bottom_round_connector"
+            },
+            {
+              "kind": "LineSegment",
+              "role": "right_vertical_leg"
+            }
+          ],
+          "schema_version": "u_loop_primitive_decomposition_v1"
+        },
+        "role": "u_loop",
+        "stroke": "#8fc78e",
+        "stroke_width": 0.0897
+      }
+    ],
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
@@ -39,7 +377,10 @@
     "top_source_ref": null,
     "variant_name": "GE9021_3S"
   },
-  "std_delta2": 9085.2177734375,
+  "requested_iterations": 64,
+  "spatial_quality_score": 12837.792115768374,
+  "std_delta2": 9521.3701171875,
+  "tile_std_delta2": 9330.921344373957,
   "variant": "GE9021_3S",
   "w": 10
 }
