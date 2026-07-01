@@ -3974,3 +3974,9 @@ endet. Die Detailableitung und Akzeptanzkriterien stehen in
 - **Qualität:** Die isolierte Metrik bleibt gegenüber Run TX stabil bei `Mean-Delta²=12989.524414` (`Fehler/Pixel=0.035766`), weil keine neue Konturstärkenprobe den bisherigen Stand weiter verbessert.
 - **Perception-Lerneffekt:** `GE9013_1M` bleibt `nur Sonderfall`; die Änderung verallgemeinert die nachgelagerte Rechteck-Konturregistrierung, nicht die reine Bilddetektion.
 - **Nächster sinnvoller Schritt:** In der aktiven Plan-B-Liste wieder zu `DLG0021` rotieren oder weitere allgemeine Rechteck-/Antialiasing-Probes untersuchen.
+### Fortschritt vs. Blocker (Session 2026-07-01, DLG0021 feine Stroke-Gradient-Offset-Probes Run UF)
+
+- **Fortschritt:** Der aktive Plan-B-Kandidat `DLG0021` wurde mit einer weiteren katalogfreien Geometry-IR-Optimiererweiterung abgesichert: `PolygonPath`-Stroke-Gradient-Offsets prüfen nun zusätzlich feine ±2,5-Prozentpunkte.
+- **Sicherung:** Der fokussierte Geometry-IR-Optimierer-Testblock läuft grün; die absolute Runtime-ID-Nullprüfung meldet weiterhin `0 occurrences`. Der isolierte CLI-Lauf für `DLG0021` endet mit Exit `0` und bleibt metrisch stabil.
+- **Perception-Lerneffekt:** `DLG0021` bleibt `nur Sonderfall`; die Änderung verallgemeinert die nachgelagerte Gradient-Stroke-Registrierung, nicht die reine Bilddetektion.
+- **Nächster sinnvoller Schritt:** In der aktiven Plan-B-Liste zu `GE1410_L` rotieren oder weiteres allgemeines Gradient-/Antialiasing-Feintuning untersuchen.
