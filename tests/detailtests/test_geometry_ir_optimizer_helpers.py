@@ -298,6 +298,32 @@ def test_default_optimizer_refines_polygon_path_stroke_width_with_absolute_probe
     assert result["steps"][0]["accepted"] is True
 
 
+
+def test_default_optimizer_refines_polygon_path_stroke_width_with_fine_absolute_probe() -> None:
+    ir = [
+        {
+            "kind": "PolygonPath",
+            "id": "fine_antialias_sensitive_triangle",
+            "points": [[0.28, 0.16], [0.72, 0.16], [0.48, 0.5]],
+            "fill": "#e10821",
+            "stroke": "#343434",
+            "stroke_width": 0.024,
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: 0.0
+        if candidate_ir[0]["stroke_width"] == 0.029
+        else 10.0,
+    )
+
+    assert result["geometry_ir"][0]["stroke_width"] == pytest.approx(0.029)
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
 def test_default_optimizer_refines_polygon_path_linecap_and_linejoin() -> None:
     ir = [
         {
