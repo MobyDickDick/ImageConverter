@@ -52,6 +52,7 @@ def runQualityPassesImpl(
         if not candidates:
             break
 
+        structured_candidates_in_pass = _hasStructuredResidual(candidates)
         improved_in_pass = False
         iteration_budget, badge_rounds = iteration_strategy_for_pass_fn(pass_idx, base_iterations)
         if len(candidates) > 1 and not deterministic_order:
@@ -105,13 +106,21 @@ def runQualityPassesImpl(
                 }
             )
 
-        if not improved_in_pass:
+        if not improved_in_pass and not structured_candidates_in_pass:
             break
         if pass_idx == last_configured_pass and continue_after_max_if_improved:
             last_configured_pass += 1
         pass_idx += 1
 
     return stop_after_failure
+
+
+def _hasStructuredResidual(rows: list[dict[str, object]]) -> bool:
+    for row in rows:
+        status = str(row.get("diff_error_distribution_status", "")).strip().lower()
+        if status == "structured":
+            return True
+    return False
 
 
 def _isFiniteNumber(value: object) -> bool:
