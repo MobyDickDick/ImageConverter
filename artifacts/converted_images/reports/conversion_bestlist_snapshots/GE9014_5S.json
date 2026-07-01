@@ -1,0 +1,226 @@
+{
+  "actual_iterations": 64,
+  "base": "GE9014",
+  "best_error": 26.724444444444444,
+  "best_iter": 1,
+  "convergence": "",
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 0.40600000007543713,
+  "error_per_pixel": 0.08908148148148148,
+  "error_pixel_cluster_count": 6.0,
+  "error_pixel_cluster_excess": 0.49572769953051643,
+  "error_pixel_count": 71.0,
+  "filename": "GE9014_5S.jpg",
+  "h": 10,
+  "largest_error_pixel_cluster_fraction": 0.7323943661971831,
+  "localized_error_fraction": 0.6580840620868212,
+  "mean_delta2": 6272.5068359375,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "confidence": 0.75,
+          "fill": "#e8e8e8",
+          "id": "description_element_1",
+          "kind": "RectBorder",
+          "primitive_decomposition": {
+            "primitives": [
+              {
+                "kind": "ColorPatch",
+                "role": "light_grey_fill"
+              }
+            ],
+            "schema_version": "light_grey_square_decomposition_v1"
+          },
+          "role": "reference_light_grey_square",
+          "source": "description",
+          "stroke": "none",
+          "stroke_width": 0.0
+        }
+      ],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": false,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "GE9014",
+        "source": "base_name",
+        "text": "Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz."
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "geometry_ir": [
+      {
+        "bbox": [
+          0.0,
+          0.0,
+          1.0,
+          1.0
+        ],
+        "fill": "#e8e8e8",
+        "id": "backbottom_light_grey_square",
+        "kind": "RectBorder",
+        "primitive_decomposition": {
+          "primitives": [
+            {
+              "kind": "ColorPatch",
+              "role": "light_grey_fill"
+            }
+          ],
+          "schema_version": "light_grey_square_decomposition_v1"
+        },
+        "role": "reference_light_grey_square",
+        "stroke": "none",
+        "stroke_width": 0.0
+      }
+    ],
+    "geometry_ir_optimizer_result": {
+      "element_refinement": {
+        "final_error": 35.413333333333334,
+        "initial_error": 35.413333333333334,
+        "mode": "right_rotated_valve_geometry",
+        "steps": []
+      },
+      "final_error": 26.724444444444444,
+      "generic_element_refinement": {
+        "final_error": 26.724444444444444,
+        "initial_error": 35.413333333333334,
+        "mode": "elementwise_geometry_ir",
+        "steps": [
+          {
+            "accepted": true,
+            "best_delta": 8.68888888888889,
+            "element": "backbottom_light_grey_square",
+            "error_after": 26.724444444444444,
+            "error_before": 35.413333333333334,
+            "step_index": 0
+          }
+        ]
+      },
+      "initial_error": 39.93555555555555,
+      "mode": "geometry_ir_raster_registration",
+      "parameters": {
+        "scale_x": 0.9299999999999999,
+        "scale_y": 0.85,
+        "stroke_scale": 1.0,
+        "translate_x": 0.09,
+        "translate_y": -0.12
+      },
+      "steps": [
+        {
+          "best_delta": 0.968888888888884,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": 0.08
+        },
+        {
+          "best_delta": 1.5655555555555551,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": -0.08
+        },
+        {
+          "best_delta": 0.2666666666666657,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.85
+        },
+        {
+          "best_delta": 1.0911111111111111,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 0.85
+        },
+        {
+          "best_delta": 0.33555555555555827,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": -0.16
+        },
+        {
+          "best_delta": 0.234444444444442,
+          "parameter": "translate_y",
+          "stage": 1,
+          "value": -0.12
+        },
+        {
+          "best_delta": 0.035555555555561114,
+          "parameter": "scale_x",
+          "stage": 1,
+          "value": 0.9299999999999999
+        },
+        {
+          "best_delta": 0.02444444444444116,
+          "parameter": "translate_x",
+          "stage": 3,
+          "value": 0.09
+        }
+      ]
+    },
+    "label": "M",
+    "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "bbox": [
+          0.12500000000000003,
+          -0.044999999999999984,
+          0.9299999999999999,
+          0.85
+        ],
+        "fill": "#f2bcb8",
+        "id": "backbottom_light_grey_square",
+        "kind": "RectBorder",
+        "primitive_decomposition": {
+          "primitives": [
+            {
+              "kind": "ColorPatch",
+              "role": "light_grey_fill"
+            }
+          ],
+          "schema_version": "light_grey_square_decomposition_v1"
+        },
+        "role": "reference_light_grey_square",
+        "stroke": "none",
+        "stroke_width": 0.001
+      }
+    ],
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "GE9014_5S"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 16153.985486218793,
+  "std_delta2": 8193.1552734375,
+  "tile_std_delta2": 6822.9008364277615,
+  "variant": "GE9014_5S",
+  "w": 30
+}

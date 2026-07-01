@@ -1,15 +1,37 @@
 {
+  "actual_iterations": 64,
   "base": "BTN_ELECTRO",
-  "best_error": 28.139309357666846,
+  "best_error": 15.525138665235284,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.001006953278141594,
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 1.0780000000959262,
+  "error_per_pixel": 0.0005555605176323236,
+  "error_pixel_cluster_count": 13.0,
+  "error_pixel_cluster_excess": 0.731034479676312,
+  "error_pixel_count": 7206.0,
   "filename": "btn_electro.jpg",
   "h": 81,
-  "mean_delta2": 4609.90625,
+  "largest_error_pixel_cluster_fraction": 0.9888981404385234,
+  "localized_error_fraction": 0.789323195055842,
+  "mean_delta2": 2227.65185546875,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
     "description_contract": {
       "deficits": [],
       "has_conditions": true,
@@ -42,7 +64,10 @@
     "top_source_ref": null,
     "variant_name": "BTN_ELECTRO"
   },
-  "std_delta2": 10593.3671875,
+  "requested_iterations": 64,
+  "spatial_quality_score": 7529.89291347944,
+  "std_delta2": 8504.4736328125,
+  "tile_std_delta2": 3527.7140139176963,
   "variant": "BTN_ELECTRO",
   "w": 345
 }

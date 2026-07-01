@@ -1,0 +1,70 @@
+{
+  "actual_iterations": 64,
+  "base": "GE0204",
+  "best_error": 39.80986394557823,
+  "best_iter": 1,
+  "convergence": "",
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 0.9529999999795109,
+  "error_per_pixel": 0.008124462029709843,
+  "error_pixel_cluster_count": 18.0,
+  "error_pixel_cluster_excess": 0.7611328573374059,
+  "error_pixel_count": 1049.0,
+  "filename": "GE0204_L.jpg",
+  "h": 70,
+  "largest_error_pixel_cluster_fraction": 0.9752144899904671,
+  "localized_error_fraction": 0.5311238591484522,
+  "mean_delta2": 8917.79296875,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": true,
+      "has_reference": false,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "GE0204",
+        "source": "base_name",
+        "text": "Hintergrund: GE0999. Komplexes zweifarbiges Flammensymbol. Unklar, ob dies automatisiert nachgezeichnet werden kann."
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "geometry_ir": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "GE0204_L"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 20708.122228702177,
+  "std_delta2": 8318.0830078125,
+  "tile_std_delta2": 7287.713110065738,
+  "variant": "GE0204_L",
+  "w": 70
+}

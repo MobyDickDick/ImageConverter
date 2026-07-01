@@ -1,7 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="85" height="160" viewBox="0 0 85 160">
   <defs>
-    <clipPath id="innerRect"><rect x="0.5" y="0.5" width="84" height="159"/></clipPath>
+    <clipPath id="innerRect"><rect x="0.5" y="0.5" width="84.0" height="159.0"/></clipPath>
   </defs>
+  <rect x="0" y="0" width="85" height="160" fill="#ffffff" stroke="none"/>
   <rect x="0.500" y="0.500" width="1.397" height="159.000" fill="#9c6f88" stroke="none"/>
   <rect x="1.812" y="0.500" width="1.397" height="159.000" fill="#9d718a" stroke="none"/>
   <rect x="3.125" y="0.500" width="1.397" height="159.000" fill="#9e728c" stroke="none"/>
@@ -66,5 +67,5 @@
   <rect x="80.562" y="0.500" width="1.397" height="159.000" fill="#9e728b" stroke="none"/>
   <rect x="81.875" y="0.500" width="1.397" height="159.000" fill="#9d7089" stroke="none"/>
   <rect x="83.188" y="0.500" width="1.397" height="159.000" fill="#9c6f88" stroke="none"/>
-  <rect x="0.5" y="0.5" width="84" height="159" fill="none" stroke="#aaaaaa" stroke-width="0.80"/>
+  <rect x="0.5" y="0.5" width="84.0" height="159.0" fill="none" stroke="#aaaaaa" stroke-width="0.80"/>
 </svg>

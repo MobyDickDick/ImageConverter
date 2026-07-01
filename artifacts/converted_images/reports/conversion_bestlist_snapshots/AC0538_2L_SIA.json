@@ -1,15 +1,19 @@
 {
   "actual_iterations": 64,
   "base": "AC0538_2L",
-  "best_error": 9.762916666666667,
+  "best_error": 17.883229166666666,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 0.23399999999674037,
-  "error_per_pixel": 0.0030509114583333334,
+  "elapsed_seconds": 0.3120000000053551,
+  "error_per_pixel": 0.0055885091145833335,
+  "error_pixel_cluster_count": 12.0,
+  "error_pixel_cluster_excess": 0.8660338050314466,
+  "error_pixel_count": 318.0,
   "filename": "AC0538_2L_sia.jpg",
   "h": 40,
-  "localized_error_fraction": 0.8965627108071692,
-  "mean_delta2": 2309.800048828125,
+  "largest_error_pixel_cluster_fraction": 0.9654088050314465,
+  "localized_error_fraction": 0.9211998102161617,
+  "mean_delta2": 5832.4013671875,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -59,9 +63,9 @@
     "variant_name": "AC0538_2L_SIA"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 28025.62214178498,
-  "std_delta2": 7728.97705078125,
-  "tile_std_delta2": 15945.820739921368,
+  "spatial_quality_score": 31341.568503734044,
+  "std_delta2": 14887.80078125,
+  "tile_std_delta2": 15903.3138106373,
   "variant": "AC0538_2L_SIA",
   "w": 80
 }

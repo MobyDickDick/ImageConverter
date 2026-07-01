@@ -1,34 +1,15 @@
 <svg width="40" height="80" viewBox="0 0 40 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-  <g transform="translate(20.000 40.000) rotate(0) scale(0.9000) translate(-20.000 -40.000)">
-<g transform="translate(14.000 5.500) rotate(0) scale(0.9200) translate(-14.000 -5.500)">
-<g transform="translate(87.500 20.000) rotate(0) scale(1.0000) translate(-87.500 -20.000)">
-<g transform="translate(75.000 17.500) rotate(0) scale(1.7480) translate(-75.000 -17.500)">
-<g transform="translate(25.000 25.000) rotate(90) scale(0.8579) translate(-25.000 -25.000)">
-<g transform="translate(25.000 25.000) rotate(0) scale(1.4744) translate(-25.000 -25.000)">
-<g transform="translate(30.500 30.500) rotate(90) scale(1.0000) translate(-30.500 -30.500)">
-<g transform="translate(5.000 15.000) rotate(270) scale(1.5960) translate(-5.000 -15.000)">
-<g transform="translate(6.500 9.500) rotate(180) scale(0.9200) translate(-6.500 -9.500)">
-<g transform="translate(20.000 20.000) rotate(0) scale(1.0000) translate(-20.000 -20.000)">
-<g transform="translate(34.000 3.000) rotate(0) scale(1.0000) translate(-34.000 -3.000)">
-<g transform="translate(15.000 15.000) rotate(0) scale(1.9000) translate(-15.000 -15.000)">
-<g transform="translate(37.500 12.500) rotate(180) scale(1.9000) translate(-37.500 -12.500)">
-<g transform="translate(20.000 20.000) rotate(180) scale(1.9000) translate(-20.000 -20.000)">
-<g transform="translate(10.000 20.000) rotate(180) scale(1.4887) translate(-10.000 -20.000)">
-<line x1="21.0000" y1="10.5000" x2="35.0000" y2="10.5000" stroke="#7f7f7f" stroke-width="1.0000" stroke-linecap="round"/>
-  <circle cx="12.0000" cy="10.5000" r="9.0000" fill="#f2f2f2" stroke="#7f7f7f" stroke-width="1.0000"/>
-  </g>
-  </g>
-  </g>
-  </g>
-  </g>
-  </g>
-  </g>
-  </g>
-  </g>
-  </g>
-  </g>
-  </g>
-  </g>
-  </g>
-  </g>
+  <defs>
+    <linearGradient id="geometry-ir-horizontal-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8f8f8f"/>
+      <stop offset="50%" stop-color="#dedede"/>
+      <stop offset="100%" stop-color="#8f8f8f"/>
+    </linearGradient>
+  </defs>
+  <rect id="background_gradient" x="7.2" y="19.2" width="25.6" height="44.8" fill="url(#geometry-ir-horizontal-gradient)" stroke="none"/>
+  <rect id="main_rect" x="7.2" y="19.2" width="25.6" height="44.8" fill="none" stroke="#666666" stroke-width="1.4"/>
+  <path id="diagonal_1_tl_br" d="M 8.1 20.1 L 31.9 63.1" stroke="#707070" stroke-width="1.8" fill="none" stroke-linecap="butt"/>
+  <path id="diagonal_2_tr_bl" d="M 31.9 20.1 L 8.1 63.1" stroke="#707070" stroke-width="1.8" fill="none" stroke-linecap="butt"/>
+  <path id="minus_glyph" d="M 17.8 23.008 L 22.2 23.008" stroke="#4f4f4f" stroke-width="1" fill="none" stroke-linecap="square"/>
+  <path id="minus_glyph_2" d="M 17.8 29.408 L 22.2 29.408" stroke="#4f4f4f" stroke-width="1" fill="none" stroke-linecap="square"/>
 </svg>

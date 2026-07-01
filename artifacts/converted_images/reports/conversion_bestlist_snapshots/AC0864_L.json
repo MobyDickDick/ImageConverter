@@ -1,15 +1,19 @@
 {
   "actual_iterations": 64,
   "base": "AC0864",
-  "best_error": 17.124444444444446,
+  "best_error": 16.098666666666666,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 1.6409999999996217,
-  "error_per_pixel": 0.01522172839506173,
+  "elapsed_seconds": 0.9060000000172295,
+  "error_per_pixel": 0.014309925925925926,
+  "error_pixel_cluster_count": 16.0,
+  "error_pixel_cluster_excess": 0.4085656565656565,
+  "error_pixel_count": 154.0,
   "filename": "AC0864_L.jpg",
   "h": 25,
-  "localized_error_fraction": 0.8391807234189231,
-  "mean_delta2": 4655.22412109375,
+  "largest_error_pixel_cluster_fraction": 0.5454545454545454,
+  "localized_error_fraction": 0.8608809931020259,
+  "mean_delta2": 4394.2373046875,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -45,11 +49,11 @@
       "AC0862"
     ],
     "elements": [
-      "SEMANTIC: Kreis + Buchstabe rF",
+      "SEMANTIC: Kreis + Buchstabe",
       "SEMANTIC: waagrechter Strich links vom Kreis"
     ],
     "geometry_ir": [],
-    "label": "rF",
+    "label": "T",
     "mode": "semantic_badge",
     "semantic_conflicts": [],
     "semantic_priority_order": [
@@ -59,7 +63,7 @@
     ],
     "semantic_sources": {
       "description_heuristic": [
-        "SEMANTIC: Kreis + Buchstabe rF",
+        "SEMANTIC: Kreis + Buchstabe",
         "SEMANTIC: waagrechter Strich links vom Kreis"
       ],
       "family_rule": []
@@ -68,9 +72,9 @@
     "variant_name": "AC0864_L"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 14824.499648509149,
-  "std_delta2": 13306.29296875,
-  "tile_std_delta2": 8255.977625496955,
+  "spatial_quality_score": 15152.067133567754,
+  "std_delta2": 13191.5205078125,
+  "tile_std_delta2": 8122.410691980472,
   "variant": "AC0864_L",
   "w": 45
 }

@@ -1,0 +1,74 @@
+{
+  "actual_iterations": 64,
+  "base": "GE0357",
+  "best_error": 20.61143703703704,
+  "best_iter": 1,
+  "convergence": "",
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 0.8120000000344589,
+  "error_per_pixel": 0.003664255473251029,
+  "error_pixel_cluster_count": 14.0,
+  "error_pixel_cluster_excess": 0.3981263888888889,
+  "error_pixel_count": 1408.0,
+  "filename": "GE0357.jpg",
+  "h": 75,
+  "largest_error_pixel_cluster_fraction": 0.6484375,
+  "localized_error_fraction": 0.5372572000015272,
+  "mean_delta2": 2234.96240234375,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "insufficient_description",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [
+        "missing_geometry_terms"
+      ],
+      "has_conditions": true,
+      "has_geometry_terms": false,
+      "has_reference": false,
+      "status": "insufficient_description"
+    },
+    "description_fragments": [
+      {
+        "key": "GE0357",
+        "source": "base_name",
+        "text": "Hintergrund: GE0999. Weisse hand mit Pinzettengriff. Daumen unten. Zeigfinger auf Daumen, Ringfinger, Ringfinger und kleiner Finger abgespreizt"
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [
+      "MANUELL: Beschreibung unzureichend (fehlende Geometriehinweise oder leerer Beschreibungstext)."
+    ],
+    "geometry_ir": [],
+    "label": "",
+    "mode": "insufficient_description",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "GE0357"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 4914.674652200691,
+  "std_delta2": 2721.03369140625,
+  "tile_std_delta2": 1939.120119516099,
+  "variant": "GE0357",
+  "w": 75
+}

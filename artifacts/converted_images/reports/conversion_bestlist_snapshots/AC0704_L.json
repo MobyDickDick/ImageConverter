@@ -1,15 +1,15 @@
 {
   "actual_iterations": 64,
   "base": "AC0704",
-  "best_error": 18.752,
+  "best_error": 17.906666666666666,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 0.8280000000013388,
-  "error_per_pixel": 0.016668444444444444,
+  "elapsed_seconds": 0.34400000001187436,
+  "error_per_pixel": 0.015917037037037035,
   "filename": "AC0704_L.jpg",
   "h": 25,
-  "localized_error_fraction": 0.9015464358793124,
-  "mean_delta2": 3206.97607421875,
+  "localized_error_fraction": 0.6478124793646239,
+  "mean_delta2": 3453.7626953125,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -58,9 +58,9 @@
     "variant_name": "AC0704_L"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 11043.090247860571,
-  "std_delta2": 8321.2587890625,
-  "tile_std_delta2": 5812.294695581767,
+  "spatial_quality_score": 11346.274101123407,
+  "std_delta2": 8527.5322265625,
+  "tile_std_delta2": 5255.275926928599,
   "variant": "AC0704_L",
   "w": 45
 }

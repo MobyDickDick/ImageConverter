@@ -1,16 +1,4 @@
 <svg width="25" height="26" viewBox="0 0 25 26" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-  <g transform="translate(12.500 13.000) rotate(0) scale(1.0000) translate(-12.500 -13.000)">
-<g transform="translate(34.000 3.000) rotate(0) scale(1.0000) translate(-34.000 -3.000)">
-<g transform="translate(15.000 15.000) rotate(0) scale(1.9000) translate(-15.000 -15.000)">
-<g transform="translate(37.500 12.500) rotate(180) scale(1.9000) translate(-37.500 -12.500)">
-<g transform="translate(20.000 20.000) rotate(180) scale(1.9000) translate(-20.000 -20.000)">
-<g transform="translate(10.000 20.000) rotate(180) scale(1.4887) translate(-10.000 -20.000)">
-<line x1="21.0000" y1="10.5000" x2="35.0000" y2="10.5000" stroke="#7f7f7f" stroke-width="1.0000" stroke-linecap="round"/>
-  <circle cx="12.0000" cy="10.5000" r="9.0000" fill="#f2f2f2" stroke="#7f7f7f" stroke-width="1.0000"/>
-  </g>
-  </g>
-  </g>
-  </g>
-  </g>
-  </g>
+  <ellipse id="described_circle" cx="12.5" cy="12.74" rx="11.445" ry="11.357" fill="#f2f2f2" stroke="#7f7f7f" stroke-width="1.086"/>
+  <text id="circle_badge_text" x="12.5" y="13.876" fill="#666666" font-family="Arial, Helvetica, sans-serif" font-size="10.92" font-weight="700" text-anchor="middle" dominant-baseline="middle">rF</text>
 </svg>

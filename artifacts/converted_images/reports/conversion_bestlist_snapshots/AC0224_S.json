@@ -4,10 +4,16 @@
   "best_error": 5.07,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 0.75,
+  "diff_error_distribution_reason": "error_energy_concentrated_in_worst_tiles",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 1.1410000000614673,
   "error_per_pixel": 0.008450000000000001,
+  "error_pixel_cluster_count": 28.0,
+  "error_pixel_cluster_excess": 0.12137681159420291,
+  "error_pixel_count": 115.0,
   "filename": "AC0224_S.jpg",
   "h": 20,
+  "largest_error_pixel_cluster_fraction": 0.3130434782608696,
   "localized_error_fraction": 0.7337197995362406,
   "mean_delta2": 222.81666564941406,
   "params": {
@@ -410,6 +416,21 @@
         ]
       },
       "final_error": 5.07,
+      "generic_element_refinement": {
+        "final_error": 5.07,
+        "initial_error": 5.07,
+        "mode": "elementwise_geometry_ir",
+        "steps": [
+          {
+            "accepted": false,
+            "best_delta": 0.0,
+            "element": "right_rotated_top_kelle_three_way_valve",
+            "error_after": 5.07,
+            "error_before": 5.07,
+            "step_index": 0
+          }
+        ]
+      },
       "initial_error": 23.08,
       "mode": "geometry_ir_raster_registration",
       "parameters": {
@@ -627,7 +648,7 @@
     "variant_name": "AC0224_S"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 599.7060930266854,
+  "spatial_quality_score": 613.2284812499742,
   "std_delta2": 584.531005859375,
   "tile_std_delta2": 293.9276031679932,
   "variant": "AC0224_S",

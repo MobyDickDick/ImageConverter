@@ -4,10 +4,16 @@
   "best_error": 23.936041666666668,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 2.04700000000048,
+  "diff_error_distribution_reason": "no_dominant_error_cluster_detected",
+  "diff_error_distribution_status": "random_like",
+  "elapsed_seconds": 1.125,
   "error_per_pixel": 0.014960026041666668,
+  "error_pixel_cluster_count": 10.0,
+  "error_pixel_cluster_excess": 0.15551020408163263,
+  "error_pixel_count": 392.0,
   "filename": "AC0412_1_L.jpg",
   "h": 40,
+  "largest_error_pixel_cluster_fraction": 0.4005102040816326,
   "localized_error_fraction": 0.5999189686452772,
   "mean_delta2": 6148.8544921875,
   "params": {
@@ -144,7 +150,30 @@
         "mode": "right_rotated_valve_geometry",
         "steps": []
       },
-      "final_error": 56.99729166666667,
+      "final_error": 55.960208333333334,
+      "generic_element_refinement": {
+        "final_error": 55.960208333333334,
+        "initial_error": 56.99729166666667,
+        "mode": "elementwise_geometry_ir",
+        "steps": [
+          {
+            "accepted": false,
+            "best_delta": 0.0,
+            "element": "compressor_circle",
+            "error_after": 56.99729166666667,
+            "error_before": 56.99729166666667,
+            "step_index": 0
+          },
+          {
+            "accepted": true,
+            "best_delta": 1.0370833333333351,
+            "element": "upward_compressor",
+            "error_after": 55.960208333333334,
+            "error_before": 56.99729166666667,
+            "step_index": 1
+          }
+        ]
+      },
       "initial_error": 76.255,
       "mode": "geometry_ir_raster_registration",
       "parameters": {
@@ -444,7 +473,7 @@
           ]
         ],
         "stroke": "#666666",
-        "stroke_width": 0.22640000000000005
+        "stroke_width": 0.26036000000000004
       }
     ],
     "semantic_conflicts": [],
@@ -458,7 +487,7 @@
     "variant_name": "AC0412_1_L"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 14002.098402688334,
+  "spatial_quality_score": 14480.203211162505,
   "std_delta2": 13486.44921875,
   "tile_std_delta2": 6289.706697467359,
   "variant": "AC0412_1_L",

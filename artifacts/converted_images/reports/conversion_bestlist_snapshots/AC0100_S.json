@@ -1,15 +1,100 @@
 {
+  "actual_iterations": 64,
   "base": "AC0100",
-  "best_error": 23.1725,
+  "best_error": 13.531666666666666,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.028965625,
+  "elapsed_seconds": 0.46899999999732245,
+  "error_per_pixel": 0.016914583333333334,
   "filename": "AC0100_S.jpg",
   "h": 40,
-  "mean_delta2": 2390.7900390625,
+  "localized_error_fraction": 0.7698080662527654,
+  "mean_delta2": 1400.092529296875,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
+    "description_constraints": {
+      "elements": [
+        {
+          "bbox": [
+            0.065,
+            0.057,
+            0.87,
+            0.89
+          ],
+          "confidence": 0.75,
+          "constraint": "inside_rect_border",
+          "id": "description_element_1",
+          "kind": "HorizontalGradient",
+          "source": "description",
+          "stops": [
+            "#8f8f8f",
+            "#dedede",
+            "#8f8f8f"
+          ]
+        },
+        {
+          "bbox": [
+            0.065,
+            0.057,
+            0.87,
+            0.89
+          ],
+          "confidence": 0.75,
+          "fill": "none",
+          "id": "description_element_2",
+          "kind": "RectBorder",
+          "source": "description",
+          "stroke": "#666666",
+          "stroke_width": 0.035
+        },
+        {
+          "clip_to": "main_rect",
+          "confidence": 0.75,
+          "direction": "tr_bl",
+          "id": "description_element_3",
+          "kind": "DiagonalBand",
+          "rect_ref": "main_rect",
+          "source": "description",
+          "stroke": "#707070",
+          "stroke_width": 0.068
+        },
+        {
+          "confidence": 0.75,
+          "id": "description_element_4",
+          "kind": "PlusGlyph",
+          "position": "top_left",
+          "source": "description",
+          "stroke": "#4f4f4f",
+          "stroke_width": 0.025
+        },
+        {
+          "confidence": 0.75,
+          "id": "description_element_5",
+          "kind": "MinusGlyph",
+          "position": "top_left",
+          "source": "description",
+          "stroke": "#4f4f4f",
+          "stroke_width": 0.025
+        }
+      ],
+      "relations": [
+        {
+          "confidence": 0.75,
+          "object": "main_rect",
+          "source": "description",
+          "subject": "description_element_3",
+          "type": "rect"
+        }
+      ],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
+      }
+    },
     "description_contract": {
       "deficits": [],
       "has_conditions": false,
@@ -31,10 +116,10 @@
     "geometry_ir": [
       {
         "bbox": [
-          0.18,
-          0.24,
-          0.64,
-          0.56
+          0.065,
+          0.057,
+          0.87,
+          0.89
         ],
         "constraint": "inside_rect_border",
         "id": "background_gradient",
@@ -47,10 +132,10 @@
       },
       {
         "bbox": [
-          0.18,
-          0.24,
-          0.64,
-          0.56
+          0.065,
+          0.057,
+          0.87,
+          0.89
         ],
         "fill": "none",
         "id": "main_rect",
@@ -65,7 +150,7 @@
         "kind": "DiagonalBand",
         "rect_ref": "main_rect",
         "stroke": "#707070",
-        "stroke_width": 0.045
+        "stroke_width": 0.068
       },
       {
         "id": "plus_glyph",
@@ -94,7 +179,10 @@
     "top_source_ref": null,
     "variant_name": "AC0100_S"
   },
-  "std_delta2": 3805.067626953125,
+  "requested_iterations": 64,
+  "spatial_quality_score": 4218.222990715009,
+  "std_delta2": 5127.91015625,
+  "tile_std_delta2": 2427.9447581018,
   "variant": "AC0100_S",
   "w": 20
 }

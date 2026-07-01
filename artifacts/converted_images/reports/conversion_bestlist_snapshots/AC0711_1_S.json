@@ -4,10 +4,16 @@
   "best_error": 10.356444444444444,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 0.9379999999946449,
+  "diff_error_distribution_reason": "error_energy_concentrated_in_worst_tiles",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 0.7029999999795109,
   "error_per_pixel": 0.027617185185185182,
+  "error_pixel_cluster_count": 6.0,
+  "error_pixel_cluster_excess": 0.224318407960199,
+  "error_pixel_count": 67.0,
   "filename": "AC0711_1_S.jpg",
   "h": 25,
+  "largest_error_pixel_cluster_fraction": 0.40298507462686567,
   "localized_error_fraction": 0.9380094550171774,
   "mean_delta2": 2051.53857421875,
   "params": {
@@ -105,6 +111,21 @@
         "steps": []
       },
       "final_error": 10.356444444444444,
+      "generic_element_refinement": {
+        "final_error": 10.356444444444444,
+        "initial_error": 10.356444444444444,
+        "mode": "elementwise_geometry_ir",
+        "steps": [
+          {
+            "accepted": false,
+            "best_delta": 0.0,
+            "element": "upright_square_kelle",
+            "error_after": 10.356444444444444,
+            "error_before": 10.356444444444444,
+            "step_index": 0
+          }
+        ]
+      },
       "initial_error": 11.72888888888889,
       "mode": "geometry_ir_raster_registration",
       "parameters": {
@@ -175,7 +196,7 @@
     "variant_name": "AC0711_1_S"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 7705.310292034329,
+  "spatial_quality_score": 7935.409225453172,
   "std_delta2": 7985.890625,
   "tile_std_delta2": 5806.362235787602,
   "variant": "AC0711_1_S",

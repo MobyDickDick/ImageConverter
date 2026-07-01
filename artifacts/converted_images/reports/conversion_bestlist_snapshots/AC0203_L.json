@@ -1,15 +1,88 @@
 {
+  "actual_iterations": 64,
   "base": "AC0203",
-  "best_error": 27.387384615384615,
+  "best_error": 26.24820512820513,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.008426887573964497,
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 0.75,
+  "error_per_pixel": 0.008076370808678502,
+  "error_pixel_cluster_count": 5.0,
+  "error_pixel_cluster_excess": 0.7005731411445697,
+  "error_pixel_count": 539.0,
   "filename": "AC0203_L.jpg",
   "h": 65,
-  "mean_delta2": 6111.234375,
+  "largest_error_pixel_cluster_fraction": 0.8664192949907236,
+  "localized_error_fraction": 0.5505242917154989,
+  "mean_delta2": 6351.89453125,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
+    "description_constraints": {
+      "elements": [
+        {
+          "bbox": [
+            0.06,
+            0.06,
+            0.88,
+            0.88
+          ],
+          "confidence": 0.75,
+          "fill": "#df2249",
+          "id": "description_element_1",
+          "kind": "CircleBackground",
+          "source": "description",
+          "stroke": "#8d8d8d",
+          "stroke_width": 0.02
+        },
+        {
+          "circle_ref": "compressor_circle",
+          "confidence": 0.75,
+          "id": "description_element_2",
+          "kind": "MainDiagonalMirroredCompressorGlyph",
+          "left_line": [
+            [
+              0.09,
+              0.22
+            ],
+            [
+              0.39,
+              1.01
+            ]
+          ],
+          "right_line": [
+            [
+              0.91,
+              0.22
+            ],
+            [
+              0.61,
+              1.01
+            ]
+          ],
+          "source": "description",
+          "stroke": "#f4f4f4",
+          "stroke_width": 0.032
+        }
+      ],
+      "relations": [
+        {
+          "confidence": 0.75,
+          "object": "compressor_circle",
+          "source": "description",
+          "subject": "description_element_2",
+          "type": "circle"
+        }
+      ],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
+      }
+    },
     "description_contract": {
       "deficits": [],
       "has_conditions": false,
@@ -70,8 +143,363 @@
         "stroke_width": 0.032
       }
     ],
+    "geometry_ir_optimizer_result": {
+      "element_refinement": {
+        "final_error": 29.706153846153846,
+        "initial_error": 29.706153846153846,
+        "mode": "right_rotated_valve_geometry",
+        "steps": []
+      },
+      "final_error": 29.612,
+      "generic_element_refinement": {
+        "final_error": 29.612,
+        "initial_error": 29.706153846153846,
+        "mode": "elementwise_geometry_ir",
+        "steps": [
+          {
+            "accepted": true,
+            "best_delta": 0.03200000000000003,
+            "element": "compressor_circle",
+            "error_after": 29.674153846153846,
+            "error_before": 29.706153846153846,
+            "step_index": 0
+          },
+          {
+            "accepted": true,
+            "best_delta": 0.06215384615384778,
+            "element": "main_diagonal_mirrored_compressor",
+            "error_after": 29.612,
+            "error_before": 29.674153846153846,
+            "step_index": 1
+          }
+        ]
+      },
+      "initial_error": 79.47907692307692,
+      "mode": "geometry_ir_raster_registration",
+      "parameters": {
+        "scale_x": 0.2899999999999999,
+        "scale_y": 0.2099999999999999,
+        "stroke_scale": 5.09,
+        "translate_x": 0.31,
+        "translate_y": -0.26
+      },
+      "steps": [
+        {
+          "best_delta": 7.549846153846147,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.85
+        },
+        {
+          "best_delta": 5.888307692307691,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 0.85
+        },
+        {
+          "best_delta": 0.8872820512820567,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 1.25
+        },
+        {
+          "best_delta": 0.369435897435892,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": 0.08
+        },
+        {
+          "best_delta": 0.49774358974359245,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": -0.08
+        },
+        {
+          "best_delta": 6.5575384615384635,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.7
+        },
+        {
+          "best_delta": 6.039487179487175,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 0.7
+        },
+        {
+          "best_delta": 0.7976410256410276,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 1.5
+        },
+        {
+          "best_delta": 0.5066666666666677,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": 0.16
+        },
+        {
+          "best_delta": 4.602153846153847,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.5499999999999999
+        },
+        {
+          "best_delta": 4.065333333333335,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 0.5499999999999999
+        },
+        {
+          "best_delta": 0.423282051282051,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 1.75
+        },
+        {
+          "best_delta": 0.45456410256409896,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": 0.08
+        },
+        {
+          "best_delta": 0.007076923076922981,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": -0.16
+        },
+        {
+          "best_delta": 3.0477948717948706,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.3999999999999999
+        },
+        {
+          "best_delta": 2.723179487179486,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 0.3999999999999999
+        },
+        {
+          "best_delta": 0.19928205128205434,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 2.0
+        },
+        {
+          "best_delta": 1.4955897435897398,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": 0.16
+        },
+        {
+          "best_delta": 0.6154871794871823,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.24999999999999992
+        },
+        {
+          "best_delta": 0.08779487179486978,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 0.24999999999999992
+        },
+        {
+          "best_delta": 0.2421538461538475,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 2.25
+        },
+        {
+          "best_delta": 0.5614358974358993,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": 0.08
+        },
+        {
+          "best_delta": 0.4478974358974348,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": -0.24
+        },
+        {
+          "best_delta": 0.014769230769232422,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 2.5
+        },
+        {
+          "best_delta": 0.1839999999999975,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": 0.16
+        },
+        {
+          "best_delta": 0.05097435897436142,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 2.75
+        },
+        {
+          "best_delta": 0.5175384615384608,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": 0.24
+        },
+        {
+          "best_delta": 0.24574358974359,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": 0.32
+        },
+        {
+          "best_delta": 0.08656410256410041,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 3.0
+        },
+        {
+          "best_delta": 0.08358974358974436,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 3.25
+        },
+        {
+          "best_delta": 0.06923076923077076,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 3.5
+        },
+        {
+          "best_delta": 0.04687179487179449,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 3.75
+        },
+        {
+          "best_delta": 0.06153846153846132,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 4.0
+        },
+        {
+          "best_delta": 0.041230769230768516,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 4.25
+        },
+        {
+          "best_delta": 0.029333333333333655,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 4.5
+        },
+        {
+          "best_delta": 0.019487179487178707,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 4.75
+        },
+        {
+          "best_delta": 0.0012307692307693685,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 5.0
+        },
+        {
+          "best_delta": 0.014153846153845961,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 5.25
+        },
+        {
+          "best_delta": 0.010358974358975814,
+          "parameter": "scale_x",
+          "stage": 1,
+          "value": 0.3299999999999999
+        },
+        {
+          "best_delta": 0.03661538461538427,
+          "parameter": "scale_x",
+          "stage": 2,
+          "value": 0.2899999999999999
+        },
+        {
+          "best_delta": 0.00041025641025527193,
+          "parameter": "translate_y",
+          "stage": 2,
+          "value": -0.26
+        },
+        {
+          "best_delta": 0.11692307692307935,
+          "parameter": "scale_y",
+          "stage": 2,
+          "value": 0.2099999999999999
+        },
+        {
+          "best_delta": 0.018461538461536975,
+          "parameter": "stroke_scale",
+          "stage": 2,
+          "value": 5.17
+        },
+        {
+          "best_delta": 0.013846153846152731,
+          "parameter": "stroke_scale",
+          "stage": 2,
+          "value": 5.09
+        },
+        {
+          "best_delta": 0.043076923076924345,
+          "parameter": "translate_x",
+          "stage": 3,
+          "value": 0.31
+        }
+      ]
+    },
     "label": "M",
     "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "bbox": [
+          0.6824000000000001,
+          0.14760000000000006,
+          0.2551999999999999,
+          0.1847999999999999
+        ],
+        "fill": "#df2249",
+        "id": "compressor_circle",
+        "kind": "CircleBackground",
+        "stroke": "#8d8d8d",
+        "stroke_width": 0.11707
+      },
+      {
+        "circle_ref": "compressor_circle",
+        "id": "main_diagonal_mirrored_compressor",
+        "kind": "MainDiagonalMirroredCompressorGlyph",
+        "left_line": [
+          [
+            0.09,
+            0.22
+          ],
+          [
+            0.39,
+            1.01
+          ]
+        ],
+        "right_line": [
+          [
+            0.91,
+            0.22
+          ],
+          [
+            0.61,
+            1.01
+          ]
+        ],
+        "stroke": "#f4f4f4",
+        "stroke_width": 0.138448
+      }
+    ],
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
@@ -82,7 +510,10 @@
     "top_source_ref": null,
     "variant_name": "AC0203_L"
   },
-  "std_delta2": 12805.6396484375,
+  "requested_iterations": 64,
+  "spatial_quality_score": 18656.565739805043,
+  "std_delta2": 13176.9697265625,
+  "tile_std_delta2": 6939.122069333863,
   "variant": "AC0203_L",
   "w": 50
 }

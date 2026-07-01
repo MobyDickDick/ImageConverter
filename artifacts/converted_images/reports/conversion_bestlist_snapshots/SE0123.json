@@ -1,0 +1,179 @@
+{
+  "actual_iterations": 64,
+  "base": "SE0123",
+  "best_error": 26.911324786324787,
+  "best_iter": 1,
+  "convergence": "",
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 0.5470000000204891,
+  "error_per_pixel": 0.028751415370005116,
+  "error_pixel_cluster_count": 8.0,
+  "error_pixel_cluster_excess": 0.303734139086562,
+  "error_pixel_count": 227.0,
+  "filename": "SE0123.jpg",
+  "h": 39,
+  "largest_error_pixel_cluster_fraction": 0.5462555066079295,
+  "localized_error_fraction": 0.702169280152228,
+  "mean_delta2": 6191.79150390625,
+  "params": {
+    "badge_param_source_ref": "AC0842",
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [
+        {
+          "badge_role": "circle_text_badge",
+          "bbox": [
+            0.08,
+            0.08,
+            0.84,
+            0.84
+          ],
+          "confidence": 0.75,
+          "fill": "#f2f2f2",
+          "id": "description_element_1",
+          "kind": "CircleBackground",
+          "source": "description",
+          "stroke": "#7f7f7f",
+          "stroke_width": 0.055
+        },
+        {
+          "bbox_ref": "described_circle",
+          "confidence": 0.75,
+          "fill": "#666666",
+          "font_size": 0.42,
+          "font_weight": "700",
+          "glyph_evidence": {
+            "normalized_text": "rF",
+            "position": "center",
+            "source": "description_text"
+          },
+          "id": "description_element_2",
+          "kind": "TextGlyph",
+          "relation": "centered_in",
+          "source": "description",
+          "target_ref": "described_circle",
+          "text": "rF",
+          "text_anchor": [
+            0.5,
+            0.5
+          ],
+          "text_position": "center"
+        }
+      ],
+      "relations": [
+        {
+          "confidence": 0.75,
+          "object": "described_circle",
+          "source": "description",
+          "subject": "description_element_2",
+          "type": "bbox"
+        },
+        {
+          "confidence": 0.75,
+          "object": "described_circle",
+          "source": "description",
+          "subject": "description_element_2",
+          "type": "target"
+        },
+        {
+          "confidence": 0.75,
+          "object": "described_circle",
+          "source": "description",
+          "subject": "description_element_2",
+          "type": "centered_in"
+        }
+      ],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "SE0123",
+        "source": "base_name",
+        "text": "Wie AC0842, jecoch nach rechts gedreht, Text immer noch horizontal"
+      }
+    ],
+    "documented_alias_refs": [
+      "AC0842"
+    ],
+    "elements": [
+      "SEMANTIC: Kreis + Buchstabe rF",
+      "SEMANTIC: waagrechter Strich links vom Kreis",
+      "REFERENZ: Abgeleitet aus AC0842"
+    ],
+    "geometry_ir": [
+      {
+        "badge_role": "circle_text_badge",
+        "bbox": [
+          0.08,
+          0.08,
+          0.84,
+          0.84
+        ],
+        "fill": "#f2f2f2",
+        "id": "described_circle",
+        "kind": "CircleBackground",
+        "stroke": "#7f7f7f",
+        "stroke_width": 0.055
+      },
+      {
+        "bbox_ref": "described_circle",
+        "fill": "#666666",
+        "font_size": 0.42,
+        "font_weight": "700",
+        "glyph_evidence": {
+          "normalized_text": "rF",
+          "position": "center",
+          "source": "description_text"
+        },
+        "id": "circle_badge_text",
+        "kind": "TextGlyph",
+        "relation": "centered_in",
+        "target_ref": "described_circle",
+        "text": "rF",
+        "text_anchor": [
+          0.5,
+          0.5
+        ],
+        "text_position": "center"
+      }
+    ],
+    "label": "rF",
+    "mode": "semantic_badge",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {
+      "description_heuristic": [
+        "SEMANTIC: Kreis + Buchstabe rF",
+        "SEMANTIC: waagrechter Strich links vom Kreis"
+      ],
+      "family_rule": []
+    },
+    "top_source_ref": null,
+    "variant_name": "SE0123"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 17199.321163425004,
+  "std_delta2": 13805.8271484375,
+  "tile_std_delta2": 8820.40542687382,
+  "variant": "SE0123",
+  "w": 24
+}

@@ -1,6 +1,79 @@
 {
+  "actual_iterations": 64,
+  "base": "AC0832",
+  "best_error": 19.826666666666668,
+  "best_iter": 1,
+  "convergence": "",
+  "elapsed_seconds": 1.1089999999967404,
+  "error_per_pixel": 0.05287111111111111,
+  "error_pixel_cluster_count": 17.0,
+  "error_pixel_cluster_excess": 0.029107344632768373,
+  "error_pixel_count": 59.0,
   "filename": "AC0832_S.jpg",
-  "mean_delta2": 3674.85595703125,
-  "std_delta2": 7488.60888671875,
-  "variant": "AC0832_S"
+  "h": 15,
+  "largest_error_pixel_cluster_fraction": 0.1864406779661017,
+  "localized_error_fraction": 0.7984363814047568,
+  "mean_delta2": 3520.0400390625,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": false,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "AC0832",
+        "source": "base_name",
+        "text": "Wie AC0832, jedoch nach rechts gedreht, Text immer noch horizontal"
+      }
+    ],
+    "documented_alias_refs": [
+      "AC0832"
+    ],
+    "elements": [
+      "SEMANTIC: Kreis + Buchstabe",
+      "SEMANTIC: waagrechter Strich links vom Kreis"
+    ],
+    "geometry_ir": [],
+    "label": "T",
+    "mode": "semantic_badge",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {
+      "description_heuristic": [
+        "SEMANTIC: Kreis + Buchstabe",
+        "SEMANTIC: waagrechter Strich links vom Kreis"
+      ],
+      "family_rule": []
+    },
+    "top_source_ref": null,
+    "variant_name": "AC0832_S"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 9915.88091688275,
+  "std_delta2": 7255.9267578125,
+  "tile_std_delta2": 5022.807571209542,
+  "variant": "AC0832_S",
+  "w": 25
 }

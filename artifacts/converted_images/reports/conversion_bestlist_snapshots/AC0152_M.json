@@ -1,0 +1,70 @@
+{
+  "actual_iterations": 64,
+  "base": "AC0152",
+  "best_error": 52.227140974967064,
+  "best_iter": 1,
+  "convergence": "",
+  "diff_error_distribution_reason": "no_dominant_error_cluster_detected",
+  "diff_error_distribution_status": "random_like",
+  "elapsed_seconds": 0.35999999998603016,
+  "error_per_pixel": 0.0020643138725283425,
+  "error_pixel_cluster_count": 33.0,
+  "error_pixel_cluster_excess": 0.1501946258519249,
+  "error_pixel_count": 6108.0,
+  "filename": "AC0152_M.jpg",
+  "h": 230,
+  "largest_error_pixel_cluster_fraction": 0.39161755075311067,
+  "localized_error_fraction": 0.4043433494894424,
+  "mean_delta2": 13753.294921875,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "AC0152",
+        "source": "base_name",
+        "text": "Wie AC0151_L, aber rechts mit grauer Kelle und dem Buchstaben „M“. Der Griff liegt auf einer Symmetrieachse des Kreises."
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "geometry_ir": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "AC0152_M"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 23161.381019069733,
+  "std_delta2": 14357.8720703125,
+  "tile_std_delta2": 7697.15482324495,
+  "variant": "AC0152_M",
+  "w": 110
+}

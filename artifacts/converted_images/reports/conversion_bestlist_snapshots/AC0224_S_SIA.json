@@ -1,17 +1,132 @@
 {
   "actual_iterations": 64,
   "base": "AC0224",
-  "best_error": 29.263333333333332,
+  "best_error": 6.285,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 0.25,
-  "error_per_pixel": 0.04877222222222222,
+  "diff_error_distribution_reason": "error_energy_concentrated_in_worst_tiles",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 2.797000000020489,
+  "error_per_pixel": 0.010475,
+  "error_pixel_cluster_count": 35.0,
+  "error_pixel_cluster_excess": 0.043939393939393945,
+  "error_pixel_count": 110.0,
   "filename": "AC0224_S_sia.jpg",
   "h": 20,
-  "mean_delta2": 5085.966796875,
+  "largest_error_pixel_cluster_fraction": 0.22727272727272727,
+  "localized_error_fraction": 0.7520257577516131,
+  "mean_delta2": 387.7149963378906,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
+    "description_constraints": {
+      "elements": [
+        {
+          "body_fill": "url(#vertical-two-way-valve-body-gradient)",
+          "body_paths": [
+            [
+              [
+                0.61,
+                0.5
+              ],
+              [
+                0.455,
+                0.98
+              ],
+              [
+                0.765,
+                0.98
+              ]
+            ],
+            [
+              [
+                0.61,
+                0.5
+              ],
+              [
+                0.455,
+                0.02
+              ],
+              [
+                0.765,
+                0.02
+              ]
+            ],
+            [
+              [
+                0.61,
+                0.5
+              ],
+              [
+                0.96,
+                0.667
+              ],
+              [
+                0.96,
+                0.333
+              ]
+            ]
+          ],
+          "circle": [
+            0.215,
+            0.5,
+            0.295
+          ],
+          "circle_fill": "url(#vertical-two-way-valve-circle-gradient)",
+          "confidence": 0.75,
+          "connector": [
+            [
+              0.412,
+              0.5
+            ],
+            [
+              0.61,
+              0.5
+            ]
+          ],
+          "connector_stroke": "#8f8f8f",
+          "connector_width": 0.075,
+          "id": "description_element_1",
+          "kind": "RightRotatedTopKelleThreeWayValveGlyph",
+          "label": "",
+          "primitive_decomposition": {
+            "orientation": "right",
+            "primitives": [
+              {
+                "count": 3,
+                "kind": "PolygonPath",
+                "role": "valve_body"
+              },
+              {
+                "kind": "CircleBackground",
+                "role": "handle_circle"
+              },
+              {
+                "kind": "LineSegment",
+                "role": "handle_connector"
+              }
+            ],
+            "schema_version": "kelle_valve_primitive_decomposition_v1"
+          },
+          "source": "description",
+          "stroke": "#969696",
+          "stroke_width": 0.04,
+          "text_fill": "#666666",
+          "transform": {
+            "rotation_deg": 90,
+            "schema_version": "generic_geometry_transform_v1"
+          }
+        }
+      ],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
+      }
+    },
     "description_contract": {
       "deficits": [],
       "has_conditions": true,
@@ -37,60 +152,60 @@
         "body_paths": [
           [
             [
-              0.39,
+              0.61,
               0.5
             ],
             [
-              0.545,
-              0.02
-            ],
-            [
-              0.235,
-              0.02
-            ]
-          ],
-          [
-            [
-              0.39,
-              0.5
-            ],
-            [
-              0.545,
+              0.455,
               0.98
             ],
             [
-              0.235,
+              0.765,
               0.98
             ]
           ],
           [
             [
-              0.39,
+              0.61,
               0.5
             ],
             [
-              0.04,
-              0.333
+              0.455,
+              0.02
             ],
             [
-              0.04,
+              0.765,
+              0.02
+            ]
+          ],
+          [
+            [
+              0.61,
+              0.5
+            ],
+            [
+              0.96,
               0.667
+            ],
+            [
+              0.96,
+              0.333
             ]
           ]
         ],
         "circle": [
-          0.765,
+          0.215,
           0.5,
-          0.225
+          0.295
         ],
         "circle_fill": "url(#vertical-two-way-valve-circle-gradient)",
         "connector": [
           [
-            0.55,
+            0.412,
             0.5
           ],
           [
-            0.39,
+            0.61,
             0.5
           ]
         ],
@@ -99,13 +214,519 @@
         "id": "right_rotated_top_kelle_three_way_valve",
         "kind": "RightRotatedTopKelleThreeWayValveGlyph",
         "label": "",
+        "primitive_decomposition": {
+          "orientation": "right",
+          "primitives": [
+            {
+              "count": 3,
+              "kind": "PolygonPath",
+              "role": "valve_body"
+            },
+            {
+              "kind": "CircleBackground",
+              "role": "handle_circle"
+            },
+            {
+              "kind": "LineSegment",
+              "role": "handle_connector"
+            }
+          ],
+          "schema_version": "kelle_valve_primitive_decomposition_v1"
+        },
         "stroke": "#969696",
         "stroke_width": 0.04,
-        "text_fill": "#666666"
+        "text_fill": "#666666",
+        "transform": {
+          "rotation_deg": 90,
+          "schema_version": "generic_geometry_transform_v1"
+        }
       }
     ],
+    "geometry_ir_optimizer_result": {
+      "element_refinement": {
+        "final_error": 6.285,
+        "initial_error": 14.124444444444444,
+        "mode": "right_rotated_valve_geometry",
+        "steps": [
+          {
+            "best_delta": 1.1016666666666666,
+            "delta": -0.08,
+            "parameter": "vertical_inner_x",
+            "pass": 0,
+            "stage": 0
+          },
+          {
+            "best_delta": 0.4666666666666668,
+            "delta": -0.08,
+            "parameter": "vertical_extent",
+            "pass": 0,
+            "stage": 0
+          },
+          {
+            "best_delta": 0.27611111111111164,
+            "delta": 0.08,
+            "parameter": "right_half_height",
+            "pass": 0,
+            "stage": 0
+          },
+          {
+            "best_delta": 0.336666666666666,
+            "delta": -0.08,
+            "parameter": "connector_start_x",
+            "pass": 0,
+            "stage": 0
+          },
+          {
+            "best_delta": 0.8466666666666676,
+            "delta": -0.04,
+            "parameter": "body_center_x",
+            "pass": 0,
+            "stage": 1
+          },
+          {
+            "best_delta": 0.32166666666666544,
+            "delta": 0.04,
+            "parameter": "vertical_outer_x",
+            "pass": 0,
+            "stage": 1
+          },
+          {
+            "best_delta": 0.42666666666666764,
+            "delta": 0.04,
+            "parameter": "vertical_extent",
+            "pass": 0,
+            "stage": 1
+          },
+          {
+            "best_delta": 1.129999999999999,
+            "delta": 0.04,
+            "parameter": "right_extent",
+            "pass": 0,
+            "stage": 1
+          },
+          {
+            "best_delta": 0.26333333333333364,
+            "delta": -0.04,
+            "parameter": "right_half_height",
+            "pass": 0,
+            "stage": 1
+          },
+          {
+            "best_delta": 0.13333333333333286,
+            "delta": -0.04,
+            "parameter": "connector_width",
+            "pass": 0,
+            "stage": 1
+          },
+          {
+            "best_delta": 0.17666666666666764,
+            "delta": -0.02,
+            "parameter": "right_extent",
+            "pass": 0,
+            "stage": 2
+          },
+          {
+            "best_delta": 0.004999999999999005,
+            "delta": 0.02,
+            "parameter": "connector_start_x",
+            "pass": 0,
+            "stage": 2
+          },
+          {
+            "best_delta": 0.14833333333333343,
+            "delta": 0.02,
+            "parameter": "connector_width",
+            "pass": 0,
+            "stage": 2
+          },
+          {
+            "best_delta": 0.030000000000001137,
+            "delta": -0.01,
+            "parameter": "connector_width",
+            "pass": 0,
+            "stage": 3
+          },
+          {
+            "best_delta": 0.19666666666666544,
+            "delta": -0.005,
+            "parameter": "stroke_width",
+            "pass": 0,
+            "stage": 4
+          },
+          {
+            "best_delta": 0.054999999999999716,
+            "delta": -0.005,
+            "parameter": "vertical_inner_x",
+            "pass": 1,
+            "stage": 4
+          },
+          {
+            "best_delta": 0.0600000000000005,
+            "delta": 0.005,
+            "parameter": "vertical_outer_x",
+            "pass": 1,
+            "stage": 4
+          },
+          {
+            "best_delta": 0.00833333333333286,
+            "delta": 0.005,
+            "parameter": "vertical_extent",
+            "pass": 1,
+            "stage": 4
+          },
+          {
+            "best_delta": 0.008333333333334636,
+            "delta": 0.005,
+            "parameter": "right_half_height",
+            "pass": 1,
+            "stage": 4
+          },
+          {
+            "best_delta": 0.0016666666666669272,
+            "delta": -0.005,
+            "parameter": "vertical_inner_x",
+            "pass": 2,
+            "stage": 4
+          },
+          {
+            "best_delta": 0.06833333333333336,
+            "delta": -0.005,
+            "parameter": "right_extent",
+            "pass": 2,
+            "stage": 4
+          },
+          {
+            "best_delta": 0.0216666666666665,
+            "delta": 0.005,
+            "parameter": "body_center_x",
+            "pass": 3,
+            "stage": 4
+          },
+          {
+            "best_delta": 0.056666666666665755,
+            "delta": -0.005,
+            "parameter": "vertical_inner_x",
+            "pass": 3,
+            "stage": 4
+          },
+          {
+            "best_delta": 0.006666666666666821,
+            "delta": -0.005,
+            "parameter": "vertical_outer_x",
+            "pass": 3,
+            "stage": 4
+          },
+          {
+            "best_delta": 0.023333333333333428,
+            "delta": -0.005,
+            "parameter": "vertical_extent",
+            "pass": 3,
+            "stage": 4
+          },
+          {
+            "best_delta": 0.0016666666666669272,
+            "delta": -0.005,
+            "parameter": "right_extent",
+            "pass": 3,
+            "stage": 4
+          },
+          {
+            "best_delta": 0.006666666666666821,
+            "delta": -0.005,
+            "parameter": "vertical_outer_x",
+            "pass": 4,
+            "stage": 4
+          },
+          {
+            "best_delta": 0.026666666666666394,
+            "delta": 0.0025,
+            "parameter": "body_center_x",
+            "pass": 0,
+            "stage": 5
+          },
+          {
+            "best_delta": 0.07333333333333325,
+            "delta": -0.0025,
+            "parameter": "vertical_inner_x",
+            "pass": 0,
+            "stage": 5
+          },
+          {
+            "best_delta": 0.008333333333333748,
+            "delta": -0.0025,
+            "parameter": "vertical_outer_x",
+            "pass": 0,
+            "stage": 5
+          },
+          {
+            "best_delta": 0.00833333333333286,
+            "delta": -0.0025,
+            "parameter": "right_half_height",
+            "pass": 0,
+            "stage": 5
+          },
+          {
+            "best_delta": 0.009999999999999787,
+            "delta": -0.0025,
+            "parameter": "vertical_inner_x",
+            "pass": 1,
+            "stage": 5
+          },
+          {
+            "best_delta": 0.6133333333333333,
+            "parameter": "body_fill",
+            "stage": 0,
+            "value": 175.0
+          },
+          {
+            "best_delta": 0.7350000000000003,
+            "parameter": "body_fill",
+            "stage": 1,
+            "value": 195.0
+          },
+          {
+            "best_delta": 0.06833333333333336,
+            "parameter": "body_fill",
+            "stage": 3,
+            "value": 190.0
+          },
+          {
+            "best_delta": 0.05999999999999961,
+            "parameter": "circle_fill",
+            "stage": 3,
+            "value": 245.0
+          },
+          {
+            "best_delta": 0.0033333333333338544,
+            "parameter": "stroke",
+            "stage": 3,
+            "value": 155.0
+          },
+          {
+            "best_delta": 0.046666666666666856,
+            "parameter": "stroke",
+            "stage": 4,
+            "value": 153.0
+          },
+          {
+            "best_delta": 0.00833333333333286,
+            "parameter": "connector_stroke",
+            "stage": 4,
+            "value": 141.0
+          }
+        ]
+      },
+      "final_error": 6.285,
+      "generic_element_refinement": {
+        "final_error": 6.285,
+        "initial_error": 6.285,
+        "mode": "elementwise_geometry_ir",
+        "steps": [
+          {
+            "accepted": false,
+            "best_delta": 0.0,
+            "element": "right_rotated_top_kelle_three_way_valve",
+            "error_after": 6.285,
+            "error_before": 6.285,
+            "step_index": 0
+          }
+        ]
+      },
+      "initial_error": 26.24,
+      "mode": "geometry_ir_raster_registration",
+      "parameters": {
+        "scale_x": 1.06,
+        "scale_y": 1.6199999999999997,
+        "stroke_scale": 1.5,
+        "translate_x": 0.08,
+        "translate_y": 0.0
+      },
+      "steps": [
+        {
+          "best_delta": 7.835555555555555,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": 0.08
+        },
+        {
+          "best_delta": 0.193888888888889,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 1.15
+        },
+        {
+          "best_delta": 0.5477777777777781,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 1.2999999999999998
+        },
+        {
+          "best_delta": 0.08944444444444244,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 1.25
+        },
+        {
+          "best_delta": 0.18222222222222229,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 1.4499999999999997
+        },
+        {
+          "best_delta": 0.6400000000000006,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 1.5
+        },
+        {
+          "best_delta": 0.03999999999999915,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 1.5999999999999996
+        },
+        {
+          "best_delta": 0.8038888888888902,
+          "parameter": "scale_x",
+          "stage": 1,
+          "value": 1.08
+        },
+        {
+          "best_delta": 0.20777777777777828,
+          "parameter": "scale_y",
+          "stage": 1,
+          "value": 1.6799999999999997
+        },
+        {
+          "best_delta": 1.0116666666666667,
+          "parameter": "scale_x",
+          "stage": 2,
+          "value": 1.04
+        },
+        {
+          "best_delta": 0.08499999999999908,
+          "parameter": "scale_y",
+          "stage": 2,
+          "value": 1.6399999999999997
+        },
+        {
+          "best_delta": 0.04499999999999993,
+          "parameter": "scale_y",
+          "stage": 2,
+          "value": 1.5999999999999996
+        },
+        {
+          "best_delta": 0.3583333333333343,
+          "parameter": "scale_x",
+          "stage": 3,
+          "value": 1.06
+        },
+        {
+          "best_delta": 0.07499999999999929,
+          "parameter": "scale_y",
+          "stage": 3,
+          "value": 1.6199999999999997
+        }
+      ]
+    },
     "label": "M",
     "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "body_fill": "#bebebe",
+        "body_paths": [
+          [
+            [
+              0.6640999999999999,
+              0.5
+            ],
+            [
+              0.43229999999999996,
+              1.2375999999999998
+            ],
+            [
+              0.8934000000000001,
+              1.2375999999999998
+            ]
+          ],
+          [
+            [
+              0.6640999999999999,
+              0.5
+            ],
+            [
+              0.43229999999999996,
+              -0.23759999999999984
+            ],
+            [
+              0.8934000000000001,
+              -0.23759999999999984
+            ]
+          ],
+          [
+            [
+              0.6640999999999999,
+              0.5
+            ],
+            [
+              1.0776000000000003,
+              0.81304
+            ],
+            [
+              1.0776000000000003,
+              0.1869600000000001
+            ]
+          ]
+        ],
+        "circle": [
+          0.2991,
+          0.5,
+          0.23850000000000002
+        ],
+        "circle_fill": "#f5f5f5",
+        "connector": [
+          [
+            0.467,
+            0.5
+          ],
+          [
+            0.6640999999999999,
+            0.5
+          ]
+        ],
+        "connector_stroke": "#8d8d8d",
+        "connector_width": 0.08249999999999999,
+        "handle_shape": "crossed_square",
+        "id": "right_rotated_top_kelle_three_way_valve",
+        "kind": "RightRotatedTopKelleThreeWayValveGlyph",
+        "label": "",
+        "primitive_decomposition": {
+          "orientation": "right",
+          "primitives": [
+            {
+              "count": 3,
+              "kind": "PolygonPath",
+              "role": "valve_body"
+            },
+            {
+              "kind": "CircleBackground",
+              "role": "handle_circle"
+            },
+            {
+              "kind": "LineSegment",
+              "role": "handle_connector"
+            }
+          ],
+          "schema_version": "kelle_valve_primitive_decomposition_v1"
+        },
+        "stroke": "#999999",
+        "stroke_width": 0.055,
+        "text_fill": "#666666",
+        "transform": {
+          "rotation_deg": 90,
+          "schema_version": "generic_geometry_transform_v1"
+        }
+      }
+    ],
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
@@ -117,7 +738,9 @@
     "variant_name": "AC0224_S_SIA"
   },
   "requested_iterations": 64,
-  "std_delta2": 8555.7470703125,
+  "spatial_quality_score": 1161.355218890265,
+  "std_delta2": 1212.8291015625,
+  "tile_std_delta2": 727.2957193131055,
   "variant": "AC0224_S_SIA",
   "w": 30
 }

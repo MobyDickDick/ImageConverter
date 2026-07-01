@@ -1,0 +1,74 @@
+{
+  "actual_iterations": 64,
+  "base": "GE0351",
+  "best_error": 23.54157037037037,
+  "best_iter": 1,
+  "convergence": "",
+  "diff_error_distribution_reason": "no_dominant_error_cluster_detected",
+  "diff_error_distribution_status": "random_like",
+  "elapsed_seconds": 0.8279999999795109,
+  "error_per_pixel": 0.004185168065843621,
+  "error_pixel_cluster_count": 39.0,
+  "error_pixel_cluster_excess": 0.024582140034771605,
+  "error_pixel_count": 1406.0,
+  "filename": "GE0351.jpg",
+  "h": 75,
+  "largest_error_pixel_cluster_fraction": 0.27453769559032715,
+  "localized_error_fraction": 0.6898249314847799,
+  "mean_delta2": 4399.38427734375,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "insufficient_description",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [
+        "missing_geometry_terms"
+      ],
+      "has_conditions": false,
+      "has_geometry_terms": false,
+      "has_reference": false,
+      "status": "insufficient_description"
+    },
+    "description_fragments": [
+      {
+        "key": "GE0351",
+        "source": "base_name",
+        "text": "Info-Button. Hintergrund GE0999"
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [
+      "MANUELL: Beschreibung unzureichend (fehlende Geometriehinweise oder leerer Beschreibungstext)."
+    ],
+    "geometry_ir": [],
+    "label": "",
+    "mode": "insufficient_description",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "GE0351"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 11768.78157214623,
+  "std_delta2": 10231.619140625,
+  "tile_std_delta2": 6062.882882211167,
+  "variant": "GE0351",
+  "w": 75
+}

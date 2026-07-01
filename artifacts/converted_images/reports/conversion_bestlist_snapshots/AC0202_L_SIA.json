@@ -1,15 +1,21 @@
 {
   "actual_iterations": 64,
   "base": "AC0202",
-  "best_error": 26.681128205128203,
+  "best_error": 27.136,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 1.485000000000582,
-  "error_per_pixel": 0.008209577909270217,
+  "diff_error_distribution_reason": "no_dominant_error_cluster_detected",
+  "diff_error_distribution_status": "random_like",
+  "elapsed_seconds": 0.75,
+  "error_per_pixel": 0.008349538461538462,
+  "error_pixel_cluster_count": 6.0,
+  "error_pixel_cluster_excess": 0.3259982713915298,
+  "error_pixel_count": 445.0,
   "filename": "AC0202_L_sia.jpg",
   "h": 50,
+  "largest_error_pixel_cluster_fraction": 0.46292134831460674,
   "localized_error_fraction": 0.6230972165877463,
-  "mean_delta2": 5900.38623046875,
+  "mean_delta2": 7223.36376953125,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -142,7 +148,30 @@
         "mode": "right_rotated_valve_geometry",
         "steps": []
       },
-      "final_error": 28.817128205128206,
+      "final_error": 28.67702564102564,
+      "generic_element_refinement": {
+        "final_error": 28.67702564102564,
+        "initial_error": 28.817128205128206,
+        "mode": "elementwise_geometry_ir",
+        "steps": [
+          {
+            "accepted": true,
+            "best_delta": 0.09764102564102828,
+            "element": "compressor_circle",
+            "error_after": 28.719487179487178,
+            "error_before": 28.817128205128206,
+            "step_index": 0
+          },
+          {
+            "accepted": true,
+            "best_delta": 0.042461538461537884,
+            "element": "rightward_compressor",
+            "error_after": 28.67702564102564,
+            "error_before": 28.719487179487178,
+            "step_index": 1
+          }
+        ]
+      },
       "initial_error": 73.6876923076923,
       "mode": "geometry_ir_raster_registration",
       "parameters": {
@@ -355,7 +384,7 @@
         "id": "compressor_circle",
         "kind": "CircleBackground",
         "stroke": "#8d8d8d",
-        "stroke_width": 0.0736
+        "stroke_width": 0.06255999999999999
       },
       {
         "circle_ref": "compressor_circle",
@@ -372,7 +401,7 @@
           ]
         ],
         "stroke": "#f4f4f4",
-        "stroke_width": 0.11776,
+        "stroke_width": 0.135424,
         "upper_line": [
           [
             0.22,
@@ -396,8 +425,8 @@
     "variant_name": "AC0202_L_SIA"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 18450.236098725196,
-  "std_delta2": 11960.306640625,
+  "spatial_quality_score": 19722.860048380317,
+  "std_delta2": 13784.1220703125,
   "tile_std_delta2": 9090.263075265655,
   "variant": "AC0202_L_SIA",
   "w": 65

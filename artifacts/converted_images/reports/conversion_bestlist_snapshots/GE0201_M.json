@@ -1,0 +1,64 @@
+{
+  "actual_iterations": 64,
+  "base": "GE0201",
+  "best_error": 28.14,
+  "best_iter": 1,
+  "convergence": "",
+  "elapsed_seconds": 0.45300000000861473,
+  "error_per_pixel": 0.007816666666666666,
+  "filename": "GE0201_M.jpg",
+  "h": 60,
+  "localized_error_fraction": 0.3951991868864761,
+  "mean_delta2": 3814.1455078125,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": false,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "GE0201",
+        "source": "base_name",
+        "text": "Hintergrund: GE0999. 3 Wellensymbole übereinander. Unten mit einer art Sinuswelle, oben eine Art weißes Band. Farbverlauf des weißen Bndes von hell rechts nach dunkel links. Versinnbildlicht Luftströmung"
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "geometry_ir": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "GE0201_M"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 5910.7046080546625,
+  "std_delta2": 3413.990234375,
+  "tile_std_delta2": 1850.1097828642905,
+  "variant": "GE0201_M",
+  "w": 60
+}

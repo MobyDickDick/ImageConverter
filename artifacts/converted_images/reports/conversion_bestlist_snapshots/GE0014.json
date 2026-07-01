@@ -4,7 +4,7 @@
   "best_error": 29.60391796755433,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 1.1570000000065193,
+  "elapsed_seconds": 0.5779999999940628,
   "error_per_pixel": 0.027184497674521885,
   "filename": "GE0014.jpg",
   "h": 33,
@@ -63,69 +63,45 @@
     ],
     "geometry_ir_optimizer_result": {
       "element_refinement": {
-        "final_error": 47.852157943067034,
-        "initial_error": 47.852157943067034,
+        "final_error": 49.318947046219776,
+        "initial_error": 49.318947046219776,
         "mode": "right_rotated_valve_geometry",
         "steps": []
       },
-      "final_error": 47.852157943067034,
-      "initial_error": 49.035506580961126,
+      "final_error": 49.318947046219776,
+      "initial_error": 49.64126109580655,
       "mode": "geometry_ir_raster_registration",
       "parameters": {
         "scale_x": 1.0,
         "scale_y": 1.0,
-        "stroke_scale": 2.9,
+        "stroke_scale": 0.4,
         "translate_x": 0.0,
         "translate_y": 0.0
       },
       "steps": [
         {
-          "best_delta": 0.04683195592286182,
+          "best_delta": 0.198041016222831,
           "parameter": "stroke_scale",
           "stage": 0,
-          "value": 1.25
+          "value": 0.75
         },
         {
-          "best_delta": 0.21946740128558417,
+          "best_delta": 0.08876645240281533,
           "parameter": "stroke_scale",
           "stage": 0,
-          "value": 1.5
+          "value": 0.5
         },
         {
-          "best_delta": 0.07805325987144585,
+          "best_delta": 0.024181205999390443,
           "parameter": "stroke_scale",
           "stage": 0,
-          "value": 1.75
+          "value": 0.25
         },
         {
-          "best_delta": 0.2865013774104668,
-          "parameter": "stroke_scale",
-          "stage": 0,
-          "value": 2.0
-        },
-        {
-          "best_delta": 0.2607897153351715,
-          "parameter": "stroke_scale",
-          "stage": 0,
-          "value": 2.25
-        },
-        {
-          "best_delta": 0.1640648913376168,
-          "parameter": "stroke_scale",
-          "stage": 0,
-          "value": 2.5
-        },
-        {
-          "best_delta": 0.11264156718701912,
-          "parameter": "stroke_scale",
-          "stage": 0,
-          "value": 2.75
-        },
-        {
-          "best_delta": 0.014998469543925808,
+          "best_delta": 0.01132537496173569,
           "parameter": "stroke_scale",
           "stage": 1,
-          "value": 2.9
+          "value": 0.4
         }
       ]
     },
@@ -137,7 +113,7 @@
         "kind": "PlusGlyph",
         "position": "top_center",
         "stroke": "#4f4f4f",
-        "stroke_width": 0.0725
+        "stroke_width": 0.010000000000000002
       }
     ],
     "semantic_conflicts": [],

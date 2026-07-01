@@ -1,15 +1,19 @@
 {
   "actual_iterations": 64,
   "base": "AC0845",
-  "best_error": 32.8425,
+  "best_error": 27.12,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 0.875,
-  "error_per_pixel": 0.08210625,
+  "elapsed_seconds": 0.26600000000325963,
+  "error_per_pixel": 0.0678,
+  "error_pixel_cluster_count": 26.0,
+  "error_pixel_cluster_excess": 0.3920588235294118,
+  "error_pixel_count": 102.0,
   "filename": "AC0845_M.jpg",
   "h": 20,
-  "localized_error_fraction": 0.49977582405417126,
-  "mean_delta2": 8743.462890625,
+  "largest_error_pixel_cluster_fraction": 0.6470588235294118,
+  "localized_error_fraction": 0.6461862884143551,
+  "mean_delta2": 8573.91015625,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -64,9 +68,9 @@
     "variant_name": "AC0845_M"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 14732.03739790329,
-  "std_delta2": 16741.619140625,
-  "tile_std_delta2": 4997.032855491448,
+  "spatial_quality_score": 20422.407568101797,
+  "std_delta2": 18351.5,
+  "tile_std_delta2": 8155.516607822813,
   "variant": "AC0845_M",
   "w": 20
 }

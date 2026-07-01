@@ -1,15 +1,31 @@
 {
+  "actual_iterations": 64,
   "base": "AC5020",
-  "best_error": 38.73933641975309,
+  "best_error": 38.99048611111111,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.0008967438986053956,
+  "elapsed_seconds": 0.4850000000005821,
+  "error_per_pixel": 0.0009025575488683128,
   "filename": "AC5020_M.jpg",
   "h": 180,
-  "mean_delta2": 6403.095703125,
+  "localized_error_fraction": 0.5055908366658354,
+  "mean_delta2": 6483.654296875,
   "params": {
     "bottom_shape": null,
     "contract_status": "insufficient_description",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
     "description_contract": {
       "deficits": [
         "missing_geometry_terms"
@@ -43,7 +59,10 @@
     "top_source_ref": null,
     "variant_name": "AC5020_M"
   },
-  "std_delta2": 6562.6611328125,
+  "requested_iterations": 64,
+  "spatial_quality_score": 12035.939533508361,
+  "std_delta2": 6655.17626953125,
+  "tile_std_delta2": 4492.69244828456,
   "variant": "AC5020_M",
   "w": 240
 }

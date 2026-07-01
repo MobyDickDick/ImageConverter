@@ -1,15 +1,19 @@
 {
   "actual_iterations": 64,
   "base": "AC0841",
-  "best_error": 33.90133333333333,
+  "best_error": 31.155555555555555,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 0.375,
-  "error_per_pixel": 0.03013451851851852,
+  "elapsed_seconds": 0.28100000001722947,
+  "error_per_pixel": 0.027693827160493827,
+  "error_pixel_cluster_count": 13.0,
+  "error_pixel_cluster_excess": 0.23069952442715086,
+  "error_pixel_count": 257.0,
   "filename": "AC0841_L.jpg",
   "h": 45,
-  "localized_error_fraction": 0.6328927281127172,
-  "mean_delta2": 7925.05859375,
+  "largest_error_pixel_cluster_fraction": 0.4591439688715953,
+  "localized_error_fraction": 0.6378932791249644,
+  "mean_delta2": 7201.83984375,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -152,9 +156,9 @@
     "variant_name": "AC0841_L"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 18147.71794963132,
-  "std_delta2": 14578.0126953125,
-  "tile_std_delta2": 7702.7527872054925,
+  "spatial_quality_score": 17667.539493784396,
+  "std_delta2": 14008.7099609375,
+  "tile_std_delta2": 7562.878842896596,
   "variant": "AC0841_L",
   "w": 25
 }

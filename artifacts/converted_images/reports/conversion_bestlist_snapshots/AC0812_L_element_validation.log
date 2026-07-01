@@ -1,4 +1,4 @@
-run-meta: run_seed=676876676 pass_seed_offset=0 nonce_ns=1782051046043291700
+run-meta: run_seed=205197064 pass_seed_offset=0 nonce_ns=1782590347684949900
 status=semantic_ok
 semantic_audit_status=semantic_ok
 semantic_audit_lookup_keys=AC0812
@@ -9,15 +9,15 @@ semantic_audit_conflicts=
 quality=borderline
 quality_reason=semantic_ok_trotz_hohem_elementfehler:circle=125.017
 quality_elevated_elements=arm,circle
-redraw_variation: seed=683536500653 changed_params=cx:17.750->18.013 | cy:12.500->12.511 | r:11.000->10.975 | stroke_circle:1.000->0.903 | arm_stroke:1.000->1.086
+redraw_variation: seed=207250655131 changed_params=cx:17.750->17.776 | cy:12.500->12.637 | r:11.000->10.801 | stroke_circle:1.000->0.942 | arm_stroke:1.000->0.972
 semantic-guard: Text bewusst deaktiviert (plain-ring Familie ohne Buchstabe).
 Runde 1: elementweise Validierung gestartet
 circle: Fehler=125.017
 circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
 circle: Mittelpunkt-Bracketing cx 32.500->28.500, cy 12.500->12.500 (best_err=67.458)
-perf_probe: circle_center_elapsed round=1 elapsed=0.02s
+perf_probe: circle_center_elapsed round=1 elapsed=0.05s
 circle: Radius-Bracketing r 10.667->11.000 (best_err=33.306, full_err=7.020); Kandidaten=9.600->121.553, 10.500->67.458, 11.000->33.306, 12.000->68.483
-perf_probe: circle_radius_elapsed round=1 elapsed=0.02s
+perf_probe: circle_radius_elapsed round=1 elapsed=0.00s
 arm: Fehler=58.432
 arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
 arm: Längen-Bracketing keine relevante Änderung (arm_len: 17.000); Kandidaten=16.000->59.279, 17.000->58.432, 23.000->58.432, 30.500->58.432, 38.000->58.432, 45.000->58.432

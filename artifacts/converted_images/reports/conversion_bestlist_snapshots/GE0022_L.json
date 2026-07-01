@@ -1,0 +1,72 @@
+{
+  "actual_iterations": 64,
+  "base": "GE0022",
+  "best_error": 24.11795918367347,
+  "best_iter": 1,
+  "convergence": "",
+  "diff_error_distribution_reason": "no_dominant_error_cluster_detected",
+  "diff_error_distribution_status": "random_like",
+  "elapsed_seconds": 0.3279999999795109,
+  "error_per_pixel": 0.004922032486463973,
+  "error_pixel_cluster_count": 107.0,
+  "error_pixel_cluster_excess": 0.1974203242941012,
+  "error_pixel_count": 1168.0,
+  "filename": "GE0022_L.jpg",
+  "h": 70,
+  "largest_error_pixel_cluster_fraction": 0.4357876712328767,
+  "localized_error_fraction": 0.4157619127739016,
+  "mean_delta2": 2850.438720703125,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "GE0022",
+        "source": "base_name",
+        "text": "Wie GE0021: Dicker Pfeil nach oben vor blaugrauem Hintergrund. Hintergrund GE0999. Geometrische Variante: 90° nach links gedreht. Der Griff liegt auf einer Symmetrieachse des Kreises."
+      }
+    ],
+    "documented_alias_refs": [
+      "GE0021"
+    ],
+    "elements": [],
+    "geometry_ir": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "GE0022_L"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 4890.3230469278415,
+  "std_delta2": 2732.23046875,
+  "tile_std_delta2": 1543.7304624622677,
+  "variant": "GE0022_L",
+  "w": 70
+}

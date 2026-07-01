@@ -1,15 +1,21 @@
 {
   "actual_iterations": 64,
   "base": "AC0160",
-  "best_error": 15.041666666666666,
+  "best_error": 14.486060606060606,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 1.2030000000086147,
-  "error_per_pixel": 0.002279040404040404,
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 0.8129999999655411,
+  "error_per_pixel": 0.00219485766758494,
+  "error_pixel_cluster_count": 11.0,
+  "error_pixel_cluster_excess": 0.5518779828647001,
+  "error_pixel_count": 1054.0,
   "filename": "AC0160.JPG",
   "h": 60,
-  "localized_error_fraction": 0.6823838160954088,
-  "mean_delta2": 3839.250244140625,
+  "largest_error_pixel_cluster_fraction": 0.7115749525616698,
+  "localized_error_fraction": 0.7063663426719083,
+  "mean_delta2": 3416.566162109375,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -138,7 +144,38 @@
         "mode": "right_rotated_valve_geometry",
         "steps": []
       },
-      "final_error": 17.186666666666667,
+      "final_error": 17.142272727272726,
+      "generic_element_refinement": {
+        "final_error": 17.142272727272726,
+        "initial_error": 17.186666666666667,
+        "mode": "elementwise_geometry_ir",
+        "steps": [
+          {
+            "accepted": true,
+            "best_delta": 0.041363636363637823,
+            "element": "half_double_rect",
+            "error_after": 17.14530303030303,
+            "error_before": 17.186666666666667,
+            "step_index": 0
+          },
+          {
+            "accepted": true,
+            "best_delta": 0.003030303030303827,
+            "element": "dp_label_box",
+            "error_after": 17.142272727272726,
+            "error_before": 17.14530303030303,
+            "step_index": 1
+          },
+          {
+            "accepted": false,
+            "best_delta": 0.0,
+            "element": "dp_label_text",
+            "error_after": 17.142272727272726,
+            "error_before": 17.142272727272726,
+            "step_index": 2
+          }
+        ]
+      },
       "initial_error": 23.411666666666665,
       "mode": "geometry_ir_raster_registration",
       "parameters": {
@@ -279,7 +316,7 @@
           0.3336,
           0.3452,
           0.35279999999999995,
-          0.2686
+          0.2886
         ],
         "fill": "none",
         "id": "half_double_rect",
@@ -300,7 +337,7 @@
         "id": "dp_label_box",
         "kind": "LabelBox",
         "stroke": "#777777",
-        "stroke_width": 0.0042
+        "stroke_width": 0.004829999999999999
       },
       {
         "bbox_ref": "dp_label_box",
@@ -323,9 +360,9 @@
     "variant_name": "AC0160"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 10134.563483757633,
-  "std_delta2": 11693.4443359375,
-  "tile_std_delta2": 5159.741322885001,
+  "spatial_quality_score": 10350.930854610173,
+  "std_delta2": 11013.12109375,
+  "tile_std_delta2": 5062.506155412954,
   "variant": "AC0160",
   "w": 110
 }

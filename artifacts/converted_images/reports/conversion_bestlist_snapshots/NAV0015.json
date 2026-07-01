@@ -1,15 +1,15 @@
 {
   "actual_iterations": 64,
   "base": "NAV0015",
-  "best_error": 35.25012345679012,
+  "best_error": 32.71950617283951,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 0.9690000000118744,
-  "error_per_pixel": 0.026111202560585276,
+  "elapsed_seconds": 0.35899999999674037,
+  "error_per_pixel": 0.024236671239140375,
   "filename": "NAV0015.JPG",
   "h": 30,
   "localized_error_fraction": 0.7310439479017766,
-  "mean_delta2": 7469.76220703125,
+  "mean_delta2": 7923.97314453125,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -57,7 +57,7 @@
   },
   "requested_iterations": 64,
   "spatial_quality_score": 20110.97492492678,
-  "std_delta2": 11655.96484375,
+  "std_delta2": 13697.0068359375,
   "tile_std_delta2": 10198.811185772725,
   "variant": "NAV0015",
   "w": 45

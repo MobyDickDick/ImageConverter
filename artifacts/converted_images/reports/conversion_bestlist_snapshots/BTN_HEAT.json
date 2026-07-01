@@ -1,0 +1,64 @@
+{
+  "actual_iterations": 64,
+  "base": "BTN_HEAT",
+  "best_error": 23.483545058746348,
+  "best_iter": 1,
+  "convergence": "",
+  "elapsed_seconds": 0.8119999999908032,
+  "error_per_pixel": 0.0008403487228035909,
+  "filename": "btn_heat.jpg",
+  "h": 81,
+  "localized_error_fraction": 0.9258382951659754,
+  "mean_delta2": 7021.4755859375,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": false,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "btn_heat",
+        "source": "base_name",
+        "text": "Hintergrund wie DLG002, Flamme wie bei b_heating1"
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "geometry_ir": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "BTN_HEAT"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 23252.729072891758,
+  "std_delta2": 21174.8359375,
+  "tile_std_delta2": 13208.587754586355,
+  "variant": "BTN_HEAT",
+  "w": 345
+}

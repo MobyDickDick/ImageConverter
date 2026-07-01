@@ -1,10 +1,23 @@
-<svg width="6" height="68" viewBox="0 0 6 68" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-  <g transform="translate(3.000 34.000) rotate(180) scale(0.8000) translate(-3.000 -34.000)">
-<g transform="translate(17.500 55.500) rotate(180) scale(0.7621) translate(-17.500 -55.500)">
-<line x1="5.5000" y1="0.0000" x2="5.5000" y2="128.0000" stroke="#2f6bff" stroke-width="2.0000" stroke-linecap="butt"/>
-  <polygon points="5.5000,129.0000 0.5000,137.0000 10.5000,137.0000" fill="#2f6bff"/>
-  <line x1="33.5000" y1="0.0000" x2="33.5000" y2="128.0000" stroke="#e53935" stroke-width="2.0000" stroke-linecap="butt"/>
-  <polygon points="33.5000,137.0000 28.5000,129.0000 38.5000,129.0000" fill="#e53935"/>
-  </g>
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" width="6" height="68" viewBox="0 0 6 68">
+  <defs>
+    <clipPath id="innerRect"><rect x="0.7" y="0.5" width="4.6000000000000005" height="67.0"/></clipPath>
+  </defs>
+  <rect x="0" y="0" width="6" height="68" fill="#ffffff" stroke="none"/>
+  <rect x="0.700" y="0.500" width="0.308" height="67.000" fill="#f3e68a" stroke="none"/>
+  <rect x="0.988" y="0.500" width="0.308" height="67.000" fill="#f3e68b" stroke="none"/>
+  <rect x="1.275" y="0.500" width="0.308" height="67.000" fill="#f3e68b" stroke="none"/>
+  <rect x="1.562" y="0.500" width="0.308" height="67.000" fill="#f3e68b" stroke="none"/>
+  <rect x="1.850" y="0.500" width="0.308" height="67.000" fill="#f3e68c" stroke="none"/>
+  <rect x="2.138" y="0.500" width="0.308" height="67.000" fill="#f4e68c" stroke="none"/>
+  <rect x="2.425" y="0.500" width="0.308" height="67.000" fill="#f4e68d" stroke="none"/>
+  <rect x="2.713" y="0.500" width="0.308" height="67.000" fill="#f4e68d" stroke="none"/>
+  <rect x="3.000" y="0.500" width="0.308" height="67.000" fill="#f4e68e" stroke="none"/>
+  <rect x="3.288" y="0.500" width="0.308" height="67.000" fill="#f4e68e" stroke="none"/>
+  <rect x="3.575" y="0.500" width="0.308" height="67.000" fill="#f4e68d" stroke="none"/>
+  <rect x="3.863" y="0.500" width="0.308" height="67.000" fill="#f4e68d" stroke="none"/>
+  <rect x="4.150" y="0.500" width="0.308" height="67.000" fill="#f4e68c" stroke="none"/>
+  <rect x="4.438" y="0.500" width="0.308" height="67.000" fill="#f3e68c" stroke="none"/>
+  <rect x="4.725" y="0.500" width="0.308" height="67.000" fill="#f3e68b" stroke="none"/>
+  <rect x="5.013" y="0.500" width="0.308" height="67.000" fill="#f3e68a" stroke="none"/>
+  <rect x="0.7" y="0.5" width="4.6000000000000005" height="67.0" fill="none" stroke="#bebebe" stroke-width="0.80"/>
 </svg>

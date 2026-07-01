@@ -1,9 +1,9 @@
-run-meta: run_seed=676876676 pass_seed_offset=0 nonce_ns=1782050721760128900
+run-meta: run_seed=205197064 pass_seed_offset=1 nonce_ns=1782590429535064400
 status=semantic_ok
 quality=borderline
 quality_reason=semantic_ok_trotz_hohem_elementfehler:text=64.436
 quality_elevated_elements=arm,circle,text
-redraw_variation: seed=683253335421 changed_params=cx:7.500->7.457 | cy:17.000->17.156 | r:7.000->7.067 | stroke_circle:1.000->0.901 | arm_stroke:1.000->1.095
+redraw_variation: seed=207099761958 changed_params=cx:7.500->7.426 | cy:17.000->17.239 | r:7.000->6.916 | stroke_circle:1.000->0.912 | arm_stroke:1.000->0.956
 semantic-guard: Textmodus aktiv (rf).
 small_variant_mode_active: reason=min_dim, min_dim=14.000, mask_dilate_px=1, text_mode=rf, arm_min_ratio=0.000, stem_min_ratio=0.000
 Runde 1: elementweise Validierung gestartet
@@ -13,7 +13,7 @@ circle: Mittelpunkt-Bracketing Achse fixiert (x-axis collapsed after radius-clea
 circle: Mittelpunkt-Bracketing cx 7.500->7.500, cy 17.350->17.000 (best_err=54.102)
 perf_probe: circle_center_elapsed round=1 elapsed=0.00s
 circle: Radius-Bracketing keine relevante Änderung (r: 7.000, best_err=54.102, full_err=18.408); Kandidaten=7.000->54.102, 7.200->54.102
-perf_probe: circle_radius_elapsed round=1 elapsed=0.03s
+perf_probe: circle_radius_elapsed round=1 elapsed=0.00s
 arm: Fehler=42.996
 arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
 arm: Längen-Bracketing keine relevante Änderung (arm_len: 9.500); Kandidaten=7.000->49.242, 9.500->42.996, 11.500->42.996, 16.000->42.996, 20.500->42.996, 25.000->42.996
@@ -28,7 +28,7 @@ global-search: plateau-repräsentant (runde=1, kandidat=best_sample, err=18.523,
 global-search: Runde 2 best_err=18.523, akzeptierte_kandidaten=0, sigma_mittel=1.707
 global-search: near-optimum-plateau (runde=2, punkte=1, epsilon=0.370, mittlere_spannweite=0.000, stabilitaet=stabil, spannweite=cx:0.000; cy:0.000; r:0.000; arm_x1:0.000; arm_y1:0.000; arm_x2:0.000; arm_y2:0.000)
 global-search: plateau-repräsentant (runde=2, kandidat=best_sample, err=18.523, begründung=niedrigster Fehler in dieser Runde)
-global-search: deterministischer track gestartet (modus=voll, seed=676880775, schritte=2, start_err=18.523)
+global-search: deterministischer track gestartet (modus=voll, seed=205201164, schritte=2, start_err=18.523)
 global-search: intervallhalbierung (pass=1, key=cx, final_step=0.500, iters=3)
 global-search: intervallhalbierung (pass=1, key=cy, final_step=0.562, iters=3)
 global-search: intervallhalbierung (pass=1, key=r, final_step=0.500, iters=0)
@@ -47,17 +47,17 @@ global-search: intervallhalbierung (pass=2, key=arm_y2, final_step=0.100, iters=
 global-search: deterministischer track (pass=2, verbesserungen=0, best_err=18.523)
 global-search: track-vergleich (stochastic_err=18.523, deterministic_err=18.523, gewählt=stochastic)
 global-search: keine relevante Verbesserung
-global-search: evaluate-telemetrie (requests=87, cache_hits=51, hit_rate=0.586, render_aufrufe=36)
-perf_probe: global_search_elapsed round=1 elapsed=0.17s
+global-search: evaluate-telemetrie (requests=87, cache_hits=52, hit_rate=0.598, render_aufrufe=35)
+perf_probe: global_search_elapsed round=1 elapsed=0.11s
 Runde 1: Gesamtfehler=18.523; Qualität (MAE-basiert, höher=besser): 91.97% -> 92.74% | mittlere Pixelabweichung (MAE, kleiner=besser): 20.475 -> 18.523 | Mean-Delta² (kleiner=besser): 4860.352 -> 4155.216 | Qualitätsgewinn=+1.952 (+9.53%) | Wirkung=verbessert
 Runde 2: elementweise Validierung gestartet
 circle: Fehler=54.102
 circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
 circle: Mittelpunkt-Bracketing Achse fixiert (x-axis collapsed after radius-clearance corridor; x-axis collapsed by template-centered window)
 circle: Mittelpunkt-Bracketing keine relevante Änderung (cx=7.500, cy=17.000, best_err=54.102)
-perf_probe: circle_center_elapsed round=2 elapsed=0.00s
+perf_probe: circle_center_elapsed round=2 elapsed=0.02s
 circle: Radius-Bracketing keine relevante Änderung (r: 7.000, best_err=54.102, full_err=18.523); Kandidaten=7.000->54.102, 7.200->54.102
-perf_probe: circle_radius_elapsed round=2 elapsed=0.01s
+perf_probe: circle_radius_elapsed round=2 elapsed=0.00s
 arm: Fehler=42.996
 arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
 arm: Längen-Bracketing keine relevante Änderung (arm_len: 9.500); Kandidaten=7.000->49.242, 9.500->42.996, 11.500->42.996, 16.000->42.996, 20.500->42.996, 25.000->42.996

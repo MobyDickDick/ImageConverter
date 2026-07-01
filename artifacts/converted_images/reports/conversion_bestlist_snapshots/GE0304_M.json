@@ -1,0 +1,74 @@
+{
+  "actual_iterations": 64,
+  "base": "GE0304",
+  "best_error": 27.188518518518517,
+  "best_iter": 1,
+  "convergence": "",
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 0.8440000000409782,
+  "error_per_pixel": 0.007552366255144032,
+  "error_pixel_cluster_count": 27.0,
+  "error_pixel_cluster_excess": 0.5539189667374381,
+  "error_pixel_count": 785.0,
+  "filename": "GE0304_M.jpg",
+  "h": 60,
+  "largest_error_pixel_cluster_fraction": 0.7719745222929937,
+  "localized_error_fraction": 0.839304517266697,
+  "mean_delta2": 6629.943359375,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "insufficient_description",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [
+        "missing_geometry_terms"
+      ],
+      "has_conditions": false,
+      "has_geometry_terms": false,
+      "has_reference": false,
+      "status": "insufficient_description"
+    },
+    "description_fragments": [
+      {
+        "key": "GE0304",
+        "source": "base_name",
+        "text": "Hintergrund: GE0999: Vordergrund französische Flagge"
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [
+      "MANUELL: Beschreibung unzureichend (fehlende Geometriehinweise oder leerer Beschreibungstext)."
+    ],
+    "geometry_ir": [],
+    "label": "",
+    "mode": "insufficient_description",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "GE0304_M"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 22000.08728741289,
+  "std_delta2": 14372.2119140625,
+  "tile_std_delta2": 12235.959735003467,
+  "variant": "GE0304_M",
+  "w": 60
+}

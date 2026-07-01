@@ -1,0 +1,66 @@
+{
+  "actual_iterations": 64,
+  "base": "AC0302",
+  "best_error": 16.772222222222222,
+  "best_iter": 1,
+  "convergence": "",
+  "elapsed_seconds": 0.6100000000005821,
+  "error_per_pixel": 0.004658950617283951,
+  "filename": "AC0302_M.jpg",
+  "h": 60,
+  "localized_error_fraction": 0.5139483665312639,
+  "mean_delta2": 2451.123291015625,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": false,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "AC0302",
+        "source": "base_name",
+        "text": "Wie AC0301: Kompresor grauer Hintergrund nach oben. Geometrische Variante: identisch zur Referenz."
+      }
+    ],
+    "documented_alias_refs": [
+      "AC0301"
+    ],
+    "elements": [],
+    "geometry_ir": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "AC0302_M"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 5108.387849178251,
+  "std_delta2": 6367.46875,
+  "tile_std_delta2": 2075.9363014343035,
+  "variant": "AC0302_M",
+  "w": 60
+}

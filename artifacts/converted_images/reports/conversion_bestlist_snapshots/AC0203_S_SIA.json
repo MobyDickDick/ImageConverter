@@ -1,15 +1,21 @@
 {
   "actual_iterations": 64,
   "base": "AC0203",
-  "best_error": 19.774,
+  "best_error": 27.618,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 1.125,
-  "error_per_pixel": 0.039548,
+  "diff_error_distribution_reason": "no_dominant_error_cluster_detected",
+  "diff_error_distribution_status": "random_like",
+  "elapsed_seconds": 0.2970000000204891,
+  "error_per_pixel": 0.055236,
+  "error_pixel_cluster_count": 18.0,
+  "error_pixel_cluster_excess": 0.2175686274509804,
+  "error_pixel_count": 102.0,
   "filename": "AC0203_S_sia.jpg",
   "h": 25,
+  "largest_error_pixel_cluster_fraction": 0.4215686274509804,
   "localized_error_fraction": 0.64635114917406,
-  "mean_delta2": 3514.7939453125,
+  "mean_delta2": 4070.669921875,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -144,7 +150,30 @@
         "mode": "right_rotated_valve_geometry",
         "steps": []
       },
-      "final_error": 30.585333333333335,
+      "final_error": 30.530666666666665,
+      "generic_element_refinement": {
+        "final_error": 30.530666666666665,
+        "initial_error": 30.585333333333335,
+        "mode": "elementwise_geometry_ir",
+        "steps": [
+          {
+            "accepted": true,
+            "best_delta": 0.05466666666666953,
+            "element": "compressor_circle",
+            "error_after": 30.530666666666665,
+            "error_before": 30.585333333333335,
+            "step_index": 0
+          },
+          {
+            "accepted": false,
+            "best_delta": 0.0,
+            "element": "main_diagonal_mirrored_compressor",
+            "error_after": 30.530666666666665,
+            "error_before": 30.530666666666665,
+            "step_index": 1
+          }
+        ]
+      },
       "initial_error": 74.81,
       "mode": "geometry_ir_raster_registration",
       "parameters": {
@@ -351,7 +380,7 @@
           0.3548,
           0.18680000000000002,
           0.29039999999999994,
-          0.4663999999999999
+          0.4463999999999999
         ],
         "fill": "#df2249",
         "id": "compressor_circle",
@@ -398,8 +427,8 @@
     "variant_name": "AC0203_S_SIA"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 13481.311235284142,
-  "std_delta2": 8324.484375,
+  "spatial_quality_score": 14117.390062068762,
+  "std_delta2": 6017.5205078125,
   "tile_std_delta2": 6138.041022182818,
   "variant": "AC0203_S_SIA",
   "w": 20

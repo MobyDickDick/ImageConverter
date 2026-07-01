@@ -1,15 +1,35 @@
 {
+  "actual_iterations": 64,
   "base": "AC0538_2M",
-  "best_error": 17.244814814814816,
+  "best_error": 17.337777777777777,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.00958045267489712,
+  "elapsed_seconds": 0.35899999999674037,
+  "error_per_pixel": 0.009632098765432098,
+  "error_pixel_cluster_count": 21.0,
+  "error_pixel_cluster_excess": 0.7891294387170676,
+  "error_pixel_count": 194.0,
   "filename": "AC0538_2M_sia.jpg",
   "h": 30,
-  "mean_delta2": 4654.95458984375,
+  "largest_error_pixel_cluster_fraction": 0.8969072164948454,
+  "localized_error_fraction": 0.8858460579333215,
+  "mean_delta2": 5574.51904296875,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
     "description_contract": {
       "deficits": [],
       "has_conditions": true,
@@ -42,7 +62,10 @@
     "top_source_ref": null,
     "variant_name": "AC0538_2M_SIA"
   },
-  "std_delta2": 11225.109375,
+  "requested_iterations": 64,
+  "spatial_quality_score": 29648.518816913795,
+  "std_delta2": 14576.0205078125,
+  "tile_std_delta2": 14937.43626860417,
   "variant": "AC0538_2M_SIA",
   "w": 60
 }

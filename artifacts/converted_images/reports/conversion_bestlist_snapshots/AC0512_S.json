@@ -1,15 +1,21 @@
 {
   "actual_iterations": 64,
   "base": "AC0512",
-  "best_error": 21.687916666666666,
+  "best_error": 21.61541666666667,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 1.1099999999860302,
-  "error_per_pixel": 0.02710989583333333,
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 0.7810000000754371,
+  "error_per_pixel": 0.027019270833333334,
+  "error_pixel_cluster_count": 8.0,
+  "error_pixel_cluster_excess": 0.5713265306122449,
+  "error_pixel_count": 196.0,
   "filename": "AC0512_S.jpg",
   "h": 20,
-  "localized_error_fraction": 0.7276698984764055,
-  "mean_delta2": 3966.688720703125,
+  "largest_error_pixel_cluster_fraction": 0.8163265306122449,
+  "localized_error_fraction": 0.7280495014560653,
+  "mean_delta2": 3934.833740234375,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -145,105 +151,298 @@
     ],
     "geometry_ir_optimizer_result": {
       "element_refinement": {
-        "final_error": 37.3875,
-        "initial_error": 37.3875,
+        "final_error": 43.29708333333333,
+        "initial_error": 43.29708333333333,
         "mode": "right_rotated_valve_geometry",
         "steps": []
       },
-      "final_error": 37.3875,
-      "initial_error": 55.24333333333333,
+      "final_error": 41.380833333333335,
+      "generic_element_refinement": {
+        "final_error": 41.380833333333335,
+        "initial_error": 43.29708333333333,
+        "mode": "elementwise_geometry_ir",
+        "steps": [
+          {
+            "accepted": true,
+            "best_delta": 0.5637499999999989,
+            "element": "background_gradient",
+            "error_after": 42.733333333333334,
+            "error_before": 43.29708333333333,
+            "step_index": 0
+          },
+          {
+            "accepted": true,
+            "best_delta": 1.240000000000002,
+            "element": "main_rect",
+            "error_after": 41.49333333333333,
+            "error_before": 42.733333333333334,
+            "step_index": 1
+          },
+          {
+            "accepted": true,
+            "best_delta": 0.11249999999999716,
+            "element": "horizontal_rule_set",
+            "error_after": 41.380833333333335,
+            "error_before": 41.49333333333333,
+            "step_index": 2
+          }
+        ]
+      },
+      "initial_error": 92.62958333333333,
       "mode": "geometry_ir_raster_registration",
       "parameters": {
-        "scale_x": 1.0,
-        "scale_y": 1.2199999999999998,
-        "stroke_scale": 0.75,
-        "translate_x": -0.16,
-        "translate_y": 0.0
+        "scale_x": 2.649999999999999,
+        "scale_y": 0.24999999999999992,
+        "stroke_scale": 1.79,
+        "translate_x": 0.0,
+        "translate_y": 0.56
       },
       "steps": [
         {
-          "best_delta": 2.7424999999999997,
+          "best_delta": 0.7466666666666555,
           "parameter": "translate_x",
           "stage": 0,
           "value": -0.08
         },
         {
-          "best_delta": 3.191666666666663,
+          "best_delta": 2.444583333333341,
           "parameter": "translate_y",
           "stage": 0,
           "value": 0.08
         },
         {
-          "best_delta": 1.0333333333333385,
+          "best_delta": 7.575833333333335,
           "parameter": "scale_x",
           "stage": 0,
           "value": 0.85
         },
         {
-          "best_delta": 0.9741666666666617,
-          "parameter": "stroke_scale",
+          "best_delta": 4.768749999999997,
+          "parameter": "scale_y",
           "stage": 0,
-          "value": 0.75
+          "value": 0.85
         },
         {
-          "best_delta": 2.9808333333333366,
+          "best_delta": 0.3708333333333371,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 1.25
+        },
+        {
+          "best_delta": 0.45250000000000057,
           "parameter": "translate_x",
           "stage": 0,
           "value": -0.16
         },
         {
-          "best_delta": 3.875,
+          "best_delta": 0.8254166666666691,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": 0.16
+        },
+        {
+          "best_delta": 0.24499999999999034,
           "parameter": "scale_x",
           "stage": 0,
           "value": 1.0
         },
         {
-          "best_delta": 0.47791666666666544,
+          "best_delta": 4.397083333333342,
           "parameter": "scale_y",
+          "stage": 0,
+          "value": 0.7
+        },
+        {
+          "best_delta": 0.894999999999996,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 1.5
+        },
+        {
+          "best_delta": 3.285416666666663,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": 0.24
+        },
+        {
+          "best_delta": 5.987083333333338,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 0.5499999999999999
+        },
+        {
+          "best_delta": 0.8825000000000003,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 1.75
+        },
+        {
+          "best_delta": 1.5216666666666612,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": 0.32
+        },
+        {
+          "best_delta": 5.061250000000001,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 0.3999999999999999
+        },
+        {
+          "best_delta": 0.48750000000000426,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 2.0
+        },
+        {
+          "best_delta": 1.3145833333333314,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": 0.4
+        },
+        {
+          "best_delta": 3.0020833333333314,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 0.24999999999999992
+        },
+        {
+          "best_delta": 0.07874999999999943,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 2.25
+        },
+        {
+          "best_delta": 0.701666666666668,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": 0.48000000000000004
+        },
+        {
+          "best_delta": 0.259999999999998,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 2.5
+        },
+        {
+          "best_delta": 1.1158333333333346,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": 0.56
+        },
+        {
+          "best_delta": 0.12125000000000341,
+          "parameter": "scale_x",
           "stage": 0,
           "value": 1.15
         },
         {
-          "best_delta": 0.35999999999999943,
+          "best_delta": 0.18249999999999744,
           "parameter": "stroke_scale",
           "stage": 0,
-          "value": 0.5
+          "value": 2.25
         },
         {
-          "best_delta": 0.5079166666666666,
-          "parameter": "scale_y",
+          "best_delta": 0.16250000000000142,
+          "parameter": "scale_x",
           "stage": 0,
           "value": 1.2999999999999998
         },
         {
-          "best_delta": 0.035000000000003695,
+          "best_delta": 0.22625000000000028,
           "parameter": "stroke_scale",
           "stage": 0,
-          "value": 0.25
+          "value": 2.0
         },
         {
-          "best_delta": 1.1704166666666609,
-          "parameter": "translate_y",
+          "best_delta": 0.19958333333332945,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 1.4499999999999997
+        },
+        {
+          "best_delta": 0.268333333333338,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 1.75
+        },
+        {
+          "best_delta": 0.21458333333333002,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 1.5999999999999996
+        },
+        {
+          "best_delta": 0.1983333333333377,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 1.7499999999999996
+        },
+        {
+          "best_delta": 0.03708333333332803,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 1.8999999999999995
+        },
+        {
+          "best_delta": 0.1287500000000037,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": -0.08
+        },
+        {
+          "best_delta": 0.22833333333333172,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 2.0499999999999994
+        },
+        {
+          "best_delta": 0.018749999999997158,
+          "parameter": "translate_x",
           "stage": 0,
           "value": 0.0
         },
         {
-          "best_delta": 0.382083333333334,
-          "parameter": "stroke_scale",
+          "best_delta": 0.22875000000000512,
+          "parameter": "scale_x",
           "stage": 0,
-          "value": 0.5
+          "value": 2.1999999999999993
         },
         {
-          "best_delta": 0.016666666666672825,
-          "parameter": "stroke_scale",
+          "best_delta": 0.015000000000000568,
+          "parameter": "translate_x",
           "stage": 0,
-          "value": 0.75
+          "value": 0.08
         },
         {
-          "best_delta": 0.10833333333332718,
-          "parameter": "scale_y",
-          "stage": 1,
-          "value": 1.2199999999999998
+          "best_delta": 0.11999999999999744,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 2.349999999999999
+        },
+        {
+          "best_delta": 0.1212499999999963,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": 0.0
+        },
+        {
+          "best_delta": 0.21750000000000114,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 2.499999999999999
+        },
+        {
+          "best_delta": 0.2150000000000034,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 2.649999999999999
+        },
+        {
+          "best_delta": 0.008749999999999147,
+          "parameter": "stroke_scale",
+          "stage": 3,
+          "value": 1.79
         }
       ]
     },
@@ -252,10 +451,10 @@
     "optimized_geometry_ir": [
       {
         "bbox": [
-          0.16,
-          0.0364000000000001,
-          0.36,
-          0.9271999999999998
+          0.023000000000000187,
+          0.9850000000000001,
+          0.9539999999999996,
+          0.18999999999999995
         ],
         "constraint": "inside_rect_border",
         "id": "background_gradient",
@@ -268,16 +467,16 @@
       },
       {
         "bbox": [
-          0.16,
-          0.0364000000000001,
-          0.36,
-          0.9271999999999998
+          0.023000000000000187,
+          0.9650000000000001,
+          0.9539999999999996,
+          0.18999999999999995
         ],
         "fill": "none",
         "id": "main_rect",
         "kind": "RectBorder",
-        "stroke": "#666666",
-        "stroke_width": 0.026250000000000002
+        "stroke": "#a0a0a0",
+        "stroke_width": 0.06265000000000001
       },
       {
         "id": "horizontal_rule_set",
@@ -289,7 +488,7 @@
         ],
         "rect_ref": "main_rect",
         "stroke": "#707070",
-        "stroke_width": 0.0195,
+        "stroke_width": 0.039559,
         "x_inset": 0.1
       }
     ],
@@ -304,9 +503,9 @@
     "variant_name": "AC0512_S"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 10361.248840772163,
-  "std_delta2": 9452.3544921875,
-  "tile_std_delta2": 4742.25449668217,
+  "spatial_quality_score": 11401.122700083384,
+  "std_delta2": 9357.3349609375,
+  "tile_std_delta2": 4698.363981200316,
   "variant": "AC0512_S",
   "w": 40
 }

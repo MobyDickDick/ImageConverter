@@ -1,50 +1,426 @@
 {
   "actual_iterations": 64,
   "base": "GE9021_2M",
-  "best_error": 40.679722222222225,
+  "best_error": 28.00138888888889,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 0.6720000000004802,
-  "error_per_pixel": 0.033899768518518524,
+  "diff_error_distribution_reason": "no_dominant_error_cluster_detected",
+  "diff_error_distribution_status": "random_like",
+  "elapsed_seconds": 0.7810000000754371,
+  "error_per_pixel": 0.023334490740740742,
+  "error_pixel_cluster_count": 10.0,
+  "error_pixel_cluster_excess": 0.1078205128205128,
+  "error_pixel_count": 286.0,
   "filename": "GE9021_2M.jpg",
   "h": 60,
-  "localized_error_fraction": 0.5389401641738397,
-  "mean_delta2": 13325.6142578125,
+  "largest_error_pixel_cluster_fraction": 0.34615384615384615,
+  "localized_error_fraction": 0.6745282041657127,
+  "mean_delta2": 8481.6875,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
     "description_constraints": {
-      "elements": [],
+      "elements": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "confidence": 0.75,
+          "fill": "#ffffff",
+          "id": "description_element_1",
+          "kind": "ColorPatch",
+          "source": "description",
+          "stroke": "none"
+        },
+        {
+          "confidence": 0.75,
+          "fill": "none",
+          "id": "description_element_2",
+          "kind": "PolygonPath",
+          "linecap": "butt",
+          "linejoin": "round",
+          "points": [
+            [
+              0.235,
+              0.0
+            ],
+            [
+              0.235,
+              0.835
+            ],
+            [
+              0.5,
+              0.965
+            ],
+            [
+              0.765,
+              0.835
+            ],
+            [
+              0.765,
+              0.0
+            ]
+          ],
+          "primitive_decomposition": {
+            "primitives": [
+              {
+                "kind": "LineSegment",
+                "role": "left_vertical_leg"
+              },
+              {
+                "kind": "ArcSegment",
+                "role": "bottom_round_connector"
+              },
+              {
+                "kind": "LineSegment",
+                "role": "right_vertical_leg"
+              }
+            ],
+            "schema_version": "u_loop_primitive_decomposition_v1"
+          },
+          "role": "u_loop",
+          "source": "description",
+          "stroke": "#f2db18",
+          "stroke_width": 0.115
+        }
+      ],
       "relations": [],
       "schema_version": "description_geometry_constraints_v1",
       "source": "description",
       "uncertainty": {
-        "confidence": 0.0,
-        "reasons": [
-          "no_supported_geometry_constraint"
-        ],
-        "status": "needs_review"
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
       }
     },
     "description_contract": {
       "deficits": [],
-      "has_conditions": false,
-      "has_geometry_terms": false,
-      "has_reference": true,
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": false,
       "status": "ok"
     },
     "description_fragments": [
       {
         "key": "GE9021_2M",
         "source": "base_name",
-        "text": "Wie BackBottom: hellgraues Quadrat. . Geometrische Variante: identisch zur Referenz."
+        "text": "Weißer schmaler Hintergrund mit gelber U-Form: zwei senkrechte gelbe Linien laufen links und rechts nach unten und sind unten durch einen runden gelben Bogen verbunden."
       }
     ],
     "documented_alias_refs": [],
     "elements": [],
-    "geometry_ir": [],
+    "geometry_ir": [
+      {
+        "bbox": [
+          0.0,
+          0.0,
+          1.0,
+          1.0
+        ],
+        "fill": "#ffffff",
+        "id": "u_loop_background",
+        "kind": "ColorPatch",
+        "stroke": "none"
+      },
+      {
+        "fill": "none",
+        "id": "yellow_u_loop",
+        "kind": "PolygonPath",
+        "linecap": "butt",
+        "linejoin": "round",
+        "points": [
+          [
+            0.235,
+            0.0
+          ],
+          [
+            0.235,
+            0.835
+          ],
+          [
+            0.5,
+            0.965
+          ],
+          [
+            0.765,
+            0.835
+          ],
+          [
+            0.765,
+            0.0
+          ]
+        ],
+        "primitive_decomposition": {
+          "primitives": [
+            {
+              "kind": "LineSegment",
+              "role": "left_vertical_leg"
+            },
+            {
+              "kind": "ArcSegment",
+              "role": "bottom_round_connector"
+            },
+            {
+              "kind": "LineSegment",
+              "role": "right_vertical_leg"
+            }
+          ],
+          "schema_version": "u_loop_primitive_decomposition_v1"
+        },
+        "role": "u_loop",
+        "stroke": "#f2db18",
+        "stroke_width": 0.115
+      }
+    ],
+    "geometry_ir_optimizer_result": {
+      "element_refinement": {
+        "final_error": 43.57111111111111,
+        "initial_error": 43.57111111111111,
+        "mode": "right_rotated_valve_geometry",
+        "steps": []
+      },
+      "final_error": 34.0475,
+      "generic_element_refinement": {
+        "final_error": 34.0475,
+        "initial_error": 43.57111111111111,
+        "mode": "elementwise_geometry_ir",
+        "steps": [
+          {
+            "accepted": true,
+            "best_delta": 2.7988888888888823,
+            "element": "u_loop_background",
+            "error_after": 40.772222222222226,
+            "error_before": 43.57111111111111,
+            "step_index": 0
+          },
+          {
+            "accepted": true,
+            "best_delta": 6.724722222222226,
+            "element": "yellow_u_loop",
+            "error_after": 34.0475,
+            "error_before": 40.772222222222226,
+            "step_index": 1
+          }
+        ]
+      },
+      "initial_error": 60.57083333333333,
+      "mode": "geometry_ir_raster_registration",
+      "parameters": {
+        "scale_x": 0.75,
+        "scale_y": 1.02,
+        "stroke_scale": 0.29000000000000004,
+        "translate_x": 0.0,
+        "translate_y": -0.09999999999999998
+      },
+      "steps": [
+        {
+          "best_delta": 1.8547222222222217,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": -0.08
+        },
+        {
+          "best_delta": 1.6711111111111094,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": -0.08
+        },
+        {
+          "best_delta": 0.5869444444444483,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 0.85
+        },
+        {
+          "best_delta": 3.3086111111111123,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 0.75
+        },
+        {
+          "best_delta": 0.6599999999999966,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": -0.16
+        },
+        {
+          "best_delta": 0.49027777777777715,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 0.7
+        },
+        {
+          "best_delta": 1.4613888888888908,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 0.5
+        },
+        {
+          "best_delta": 0.365000000000002,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": -0.24
+        },
+        {
+          "best_delta": 0.04527777777777686,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.85
+        },
+        {
+          "best_delta": 0.25305555555555515,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 0.5499999999999999
+        },
+        {
+          "best_delta": 1.8036111111111097,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 0.25
+        },
+        {
+          "best_delta": 1.358055555555552,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": 0.0
+        },
+        {
+          "best_delta": 0.030000000000001137,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": -0.15999999999999998
+        },
+        {
+          "best_delta": 0.19166666666666998,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 0.7
+        },
+        {
+          "best_delta": 0.0036111111111125638,
+          "parameter": "translate_y",
+          "stage": 0,
+          "value": -0.07999999999999997
+        },
+        {
+          "best_delta": 0.1202777777777726,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 0.85
+        },
+        {
+          "best_delta": 0.15555555555555856,
+          "parameter": "scale_y",
+          "stage": 0,
+          "value": 1.0
+        },
+        {
+          "best_delta": 2.458888888888886,
+          "parameter": "scale_x",
+          "stage": 1,
+          "value": 0.77
+        },
+        {
+          "best_delta": 0.020277777777778283,
+          "parameter": "translate_y",
+          "stage": 2,
+          "value": -0.09999999999999998
+        },
+        {
+          "best_delta": 0.046666666666666856,
+          "parameter": "stroke_scale",
+          "stage": 2,
+          "value": 0.33
+        },
+        {
+          "best_delta": 0.0072222222222251276,
+          "parameter": "scale_x",
+          "stage": 3,
+          "value": 0.75
+        },
+        {
+          "best_delta": 0.018055555555555713,
+          "parameter": "scale_y",
+          "stage": 3,
+          "value": 1.02
+        },
+        {
+          "best_delta": 0.08944444444444599,
+          "parameter": "stroke_scale",
+          "stage": 3,
+          "value": 0.29000000000000004
+        }
+      ]
+    },
     "label": "M",
     "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "bbox": [
+          0.125,
+          -0.10999999999999999,
+          0.75,
+          1.02
+        ],
+        "fill": "#e8e8e8",
+        "id": "u_loop_background",
+        "kind": "ColorPatch",
+        "stroke": "none"
+      },
+      {
+        "fill": "none",
+        "id": "yellow_u_loop",
+        "kind": "PolygonPath",
+        "linecap": "butt",
+        "linejoin": "round",
+        "points": [
+          [
+            0.30125,
+            -0.10999999999999999
+          ],
+          [
+            0.30125,
+            0.7416999999999999
+          ],
+          [
+            0.5,
+            0.8743
+          ],
+          [
+            0.69875,
+            0.7416999999999999
+          ],
+          [
+            0.69875,
+            -0.10999999999999999
+          ]
+        ],
+        "primitive_decomposition": {
+          "primitives": [
+            {
+              "kind": "LineSegment",
+              "role": "left_vertical_leg"
+            },
+            {
+              "kind": "ArcSegment",
+              "role": "bottom_round_connector"
+            },
+            {
+              "kind": "LineSegment",
+              "role": "right_vertical_leg"
+            }
+          ],
+          "schema_version": "u_loop_primitive_decomposition_v1"
+        },
+        "role": "u_loop",
+        "stroke": "#176f28",
+        "stroke_width": 0.033350000000000005
+      }
+    ],
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
@@ -56,9 +432,9 @@
     "variant_name": "GE9021_2M"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 26987.076691749953,
-  "std_delta2": 22328.17578125,
-  "tile_std_delta2": 12638.350315453437,
+  "spatial_quality_score": 24597.54399970161,
+  "std_delta2": 17841.06640625,
+  "tile_std_delta2": 13727.494964828164,
   "variant": "GE9021_2M",
   "w": 20
 }

@@ -1,15 +1,71 @@
 {
+  "actual_iterations": 64,
   "base": "AC0722",
-  "best_error": 31.552,
+  "best_error": 12.27111111111111,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.08413866666666667,
+  "diff_error_distribution_reason": "error_energy_concentrated_in_worst_tiles",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 0.75,
+  "error_per_pixel": 0.03272296296296296,
+  "error_pixel_cluster_count": 10.0,
+  "error_pixel_cluster_excess": 0.19904761904761906,
+  "error_pixel_count": 70.0,
   "filename": "AC0722_1_S.jpg",
   "h": 15,
-  "mean_delta2": 11082.6455078125,
+  "largest_error_pixel_cluster_fraction": 0.38571428571428573,
+  "localized_error_fraction": 0.928056099107381,
+  "mean_delta2": 2729.645263671875,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
+    "description_constraints": {
+      "elements": [
+        {
+          "body_bbox": [
+            0.378,
+            0.04,
+            0.467,
+            0.92
+          ],
+          "body_fill": "#d92645",
+          "body_stroke": "#a0a0a0",
+          "body_stroke_width": 0.04,
+          "confidence": 0.75,
+          "connector": [
+            [
+              0.0,
+              0.5
+            ],
+            [
+              0.378,
+              0.5
+            ]
+          ],
+          "connector_stroke": "#808080",
+          "connector_width": 0.08,
+          "font_size": 0.44,
+          "font_weight": "600",
+          "id": "description_element_1",
+          "kind": "LeftRotatedSquareKelleTGlyph",
+          "label": "T",
+          "label_center": [
+            0.611,
+            0.52
+          ],
+          "label_fill": "#dedede",
+          "source": "description"
+        }
+      ],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
+      }
+    },
     "description_contract": {
       "deficits": [],
       "has_conditions": true,
@@ -28,9 +84,167 @@
       "AC0701"
     ],
     "elements": [],
-    "geometry_ir": [],
+    "geometry_ir": [
+      {
+        "body_bbox": [
+          0.378,
+          0.04,
+          0.467,
+          0.92
+        ],
+        "body_fill": "#d92645",
+        "body_stroke": "#a0a0a0",
+        "body_stroke_width": 0.04,
+        "connector": [
+          [
+            0.0,
+            0.5
+          ],
+          [
+            0.378,
+            0.5
+          ]
+        ],
+        "connector_stroke": "#808080",
+        "connector_width": 0.08,
+        "font_size": 0.44,
+        "font_weight": "600",
+        "id": "left_rotated_square_kelle_t",
+        "kind": "LeftRotatedSquareKelleTGlyph",
+        "label": "T",
+        "label_center": [
+          0.611,
+          0.52
+        ],
+        "label_fill": "#dedede"
+      }
+    ],
+    "geometry_ir_optimizer_result": {
+      "element_refinement": {
+        "final_error": 12.27111111111111,
+        "initial_error": 12.27111111111111,
+        "mode": "right_rotated_valve_geometry",
+        "steps": []
+      },
+      "final_error": 12.27111111111111,
+      "generic_element_refinement": {
+        "final_error": 12.27111111111111,
+        "initial_error": 12.27111111111111,
+        "mode": "elementwise_geometry_ir",
+        "steps": [
+          {
+            "accepted": false,
+            "best_delta": 0.0,
+            "element": "left_rotated_square_kelle_t",
+            "error_after": 12.27111111111111,
+            "error_before": 12.27111111111111,
+            "step_index": 0
+          }
+        ]
+      },
+      "initial_error": 32.836444444444446,
+      "mode": "geometry_ir_raster_registration",
+      "parameters": {
+        "scale_x": 1.17,
+        "scale_y": 1.0,
+        "stroke_scale": 1.25,
+        "translate_x": 0.06,
+        "translate_y": 0.0
+      },
+      "steps": [
+        {
+          "best_delta": 9.585777777777778,
+          "parameter": "translate_x",
+          "stage": 0,
+          "value": 0.08
+        },
+        {
+          "best_delta": 4.9573333333333345,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 1.15
+        },
+        {
+          "best_delta": 0.8186666666666653,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 1.25
+        },
+        {
+          "best_delta": 1.8515555555555565,
+          "parameter": "translate_x",
+          "stage": 1,
+          "value": 0.04
+        },
+        {
+          "best_delta": 0.2417777777777772,
+          "parameter": "scale_x",
+          "stage": 1,
+          "value": 1.23
+        },
+        {
+          "best_delta": 0.6453333333333333,
+          "parameter": "translate_x",
+          "stage": 2,
+          "value": 0.06
+        },
+        {
+          "best_delta": 0.9884444444444451,
+          "parameter": "scale_x",
+          "stage": 2,
+          "value": 1.19
+        },
+        {
+          "best_delta": 0.9120000000000008,
+          "parameter": "scale_x",
+          "stage": 2,
+          "value": 1.15
+        },
+        {
+          "best_delta": 0.5644444444444439,
+          "parameter": "scale_x",
+          "stage": 3,
+          "value": 1.17
+        }
+      ]
+    },
     "label": "M",
     "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "body_bbox": [
+          0.41726,
+          0.03999999999999998,
+          0.54639,
+          0.92
+        ],
+        "body_fill": "#d92645",
+        "body_stroke": "#a0a0a0",
+        "body_stroke_width": 0.04,
+        "connector": [
+          [
+            -0.024999999999999967,
+            0.5
+          ],
+          [
+            0.41726,
+            0.5
+          ]
+        ],
+        "connector_stroke": "#808080",
+        "connector_width": 0.1,
+        "font_size": 0.44,
+        "font_weight": "600",
+        "id": "left_rotated_square_kelle_t",
+        "kind": "LeftRotatedSquareKelleTGlyph",
+        "label": "T",
+        "label_center": [
+          0.68987,
+          0.52
+        ],
+        "label_fill": "#dedede"
+      }
+    ],
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
@@ -41,7 +255,10 @@
     "top_source_ref": null,
     "variant_name": "AC0722_1_S"
   },
-  "std_delta2": 20799.94921875,
+  "requested_iterations": 64,
+  "spatial_quality_score": 10313.851156426907,
+  "std_delta2": 10706.689453125,
+  "tile_std_delta2": 7257.620037967727,
   "variant": "AC0722_1_S",
   "w": 25
 }

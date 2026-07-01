@@ -1,0 +1,64 @@
+{
+  "actual_iterations": 64,
+  "base": "Z_284",
+  "best_error": 26.836707152496626,
+  "best_iter": 1,
+  "convergence": "",
+  "elapsed_seconds": 0.375,
+  "error_per_pixel": 0.10865063624492562,
+  "filename": "z_284.jpg",
+  "h": 19,
+  "localized_error_fraction": 0.5991746806617554,
+  "mean_delta2": 4263.166015625,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": false,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "z_284",
+        "source": "base_name",
+        "text": "z_-Dateien sind Rohr-Symbole mit Verzierungen; enthalten sind gerade Rohre, gebogene Rohre und T-Stücke."
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "geometry_ir": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "Z_284"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 10055.546150681348,
+  "std_delta2": 5196.0498046875,
+  "tile_std_delta2": 4270.312345834036,
+  "variant": "Z_284",
+  "w": 13
+}

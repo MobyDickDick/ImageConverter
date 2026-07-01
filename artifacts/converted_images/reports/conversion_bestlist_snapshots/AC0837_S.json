@@ -1,6 +1,177 @@
 {
+  "actual_iterations": 65,
+  "base": "AC0837",
+  "best_error": 24.010666666666665,
+  "best_iter": 1,
+  "convergence": "",
+  "elapsed_seconds": 0.6559999999881256,
+  "error_per_pixel": 0.06402844444444444,
+  "error_pixel_cluster_count": 17.0,
+  "error_pixel_cluster_excess": 0.1324153005464481,
+  "error_pixel_count": 61.0,
   "filename": "AC0837_S.jpg",
+  "h": 15,
+  "largest_error_pixel_cluster_fraction": 0.29508196721311475,
+  "localized_error_fraction": 0.7428114329890265,
   "mean_delta2": 3344.303955078125,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [
+        {
+          "badge_role": "circle_text_badge",
+          "bbox": [
+            0.08,
+            0.08,
+            0.84,
+            0.84
+          ],
+          "confidence": 0.75,
+          "fill": "#f2f2f2",
+          "id": "description_element_1",
+          "kind": "CircleBackground",
+          "source": "description",
+          "stroke": "#7f7f7f",
+          "stroke_width": 0.055
+        },
+        {
+          "bbox_ref": "described_circle",
+          "confidence": 0.75,
+          "fill": "#666666",
+          "font_size": 0.3,
+          "font_weight": "700",
+          "glyph_evidence": {
+            "normalized_text": "VOC",
+            "position": "center",
+            "source": "description_text"
+          },
+          "id": "description_element_2",
+          "kind": "TextGlyph",
+          "relation": "centered_in",
+          "source": "description",
+          "target_ref": "described_circle",
+          "text": "VOC",
+          "text_anchor": [
+            0.5,
+            0.5
+          ],
+          "text_position": "center"
+        }
+      ],
+      "relations": [
+        {
+          "confidence": 0.75,
+          "object": "described_circle",
+          "source": "description",
+          "subject": "description_element_2",
+          "type": "bbox"
+        },
+        {
+          "confidence": 0.75,
+          "object": "described_circle",
+          "source": "description",
+          "subject": "description_element_2",
+          "type": "target"
+        },
+        {
+          "confidence": 0.75,
+          "object": "described_circle",
+          "source": "description",
+          "subject": "description_element_2",
+          "type": "centered_in"
+        }
+      ],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "AC0837",
+        "source": "base_name",
+        "text": "Wie AC0836, jedoch 90° nach links gedreht. Der Griff verläuft waagrecht nach links, der Text \"VOC\" bleibt horizontal lesbar. Der Griff liegt auf einer Symmetrieachse des Kreises."
+      }
+    ],
+    "documented_alias_refs": [
+      "AC0836"
+    ],
+    "elements": [
+      "SEMANTIC: Kreis + Buchstabe VOC",
+      "SEMANTIC: waagrechter Strich links vom Kreis",
+      "SEMANTIC: waagrechter Strich rechts vom Kreis"
+    ],
+    "geometry_ir": [
+      {
+        "badge_role": "circle_text_badge",
+        "bbox": [
+          0.08,
+          0.08,
+          0.84,
+          0.84
+        ],
+        "fill": "#f2f2f2",
+        "id": "described_circle",
+        "kind": "CircleBackground",
+        "stroke": "#7f7f7f",
+        "stroke_width": 0.055
+      },
+      {
+        "bbox_ref": "described_circle",
+        "fill": "#666666",
+        "font_size": 0.3,
+        "font_weight": "700",
+        "glyph_evidence": {
+          "normalized_text": "VOC",
+          "position": "center",
+          "source": "description_text"
+        },
+        "id": "circle_badge_text",
+        "kind": "TextGlyph",
+        "relation": "centered_in",
+        "target_ref": "described_circle",
+        "text": "VOC",
+        "text_anchor": [
+          0.5,
+          0.5
+        ],
+        "text_position": "center"
+      }
+    ],
+    "label": "VOC",
+    "mode": "semantic_badge",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {
+      "description_heuristic": [
+        "SEMANTIC: Kreis + Buchstabe VOC",
+        "SEMANTIC: waagrechter Strich links vom Kreis",
+        "SEMANTIC: waagrechter Strich rechts vom Kreis"
+      ],
+      "family_rule": []
+    },
+    "top_source_ref": null,
+    "variant_name": "AC0837_S"
+  },
+  "requested_iterations": 65,
+  "spatial_quality_score": 14310.483379895899,
   "std_delta2": 9528.55078125,
-  "variant": "AC0837_S"
+  "tile_std_delta2": 7186.436626123313,
+  "variant": "AC0837_S",
+  "w": 25
 }

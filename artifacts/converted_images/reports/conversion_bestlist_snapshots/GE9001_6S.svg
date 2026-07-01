@@ -1,24 +1,27 @@
-<svg width="10" height="60" viewBox="0 0 10 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+<svg xmlns="http://www.w3.org/2000/svg" width="10" height="60" viewBox="0 0 10 60">
   <defs>
-    <linearGradient id="geometry-ir-horizontal-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#8f8f8f"/>
-      <stop offset="50%" stop-color="#dedede"/>
-      <stop offset="100%" stop-color="#8f8f8f"/>
-    </linearGradient>
+    <clipPath id="innerRect"><rect x="2.3" y="0.5" width="5.3999999999999995" height="59.0"/></clipPath>
   </defs>
-  <g id="background_gradient">
-    <rect x="2.624" y="0.36" width="0.416" height="59.28" fill="#969696" stroke="none"/>
-    <rect x="3.02" y="0.36" width="0.416" height="59.28" fill="#a3a3a3" stroke="none"/>
-    <rect x="3.416" y="0.36" width="0.416" height="59.28" fill="#b0b0b0" stroke="none"/>
-    <rect x="3.812" y="0.36" width="0.416" height="59.28" fill="#bdbdbd" stroke="none"/>
-    <rect x="4.208" y="0.36" width="0.416" height="59.28" fill="#cacaca" stroke="none"/>
-    <rect x="4.604" y="0.36" width="0.416" height="59.28" fill="#d7d7d7" stroke="none"/>
-    <rect x="5" y="0.36" width="0.416" height="59.28" fill="#d7d7d7" stroke="none"/>
-    <rect x="5.396" y="0.36" width="0.416" height="59.28" fill="#cacaca" stroke="none"/>
-    <rect x="5.792" y="0.36" width="0.416" height="59.28" fill="#bdbdbd" stroke="none"/>
-    <rect x="6.188" y="0.36" width="0.416" height="59.28" fill="#b0b0b0" stroke="none"/>
-    <rect x="6.584" y="0.36" width="0.416" height="59.28" fill="#a3a3a3" stroke="none"/>
-    <rect x="6.98" y="0.36" width="0.416" height="59.28" fill="#969696" stroke="none"/>
-  </g>
-  <rect id="main_rect" x="2.624" y="0.36" width="4.752" height="59.28" fill="none" stroke="#666666" stroke-width="0.35"/>
+  <rect x="0" y="0" width="10" height="60" fill="#ffffff" stroke="none"/>
+  <rect x="2.300" y="0.500" width="0.290" height="59.000" fill="#4c4c4c" stroke="none"/>
+  <rect x="2.570" y="0.500" width="0.290" height="59.000" fill="#595959" stroke="none"/>
+  <rect x="2.840" y="0.500" width="0.290" height="59.000" fill="#656565" stroke="none"/>
+  <rect x="3.110" y="0.500" width="0.290" height="59.000" fill="#727272" stroke="none"/>
+  <rect x="3.380" y="0.500" width="0.290" height="59.000" fill="#7e7e7e" stroke="none"/>
+  <rect x="3.650" y="0.500" width="0.290" height="59.000" fill="#8b8b8b" stroke="none"/>
+  <rect x="3.920" y="0.500" width="0.290" height="59.000" fill="#979797" stroke="none"/>
+  <rect x="4.190" y="0.500" width="0.290" height="59.000" fill="#a4a4a4" stroke="none"/>
+  <rect x="4.460" y="0.500" width="0.290" height="59.000" fill="#a6a6a6" stroke="none"/>
+  <rect x="4.730" y="0.500" width="0.290" height="59.000" fill="#9e9e9e" stroke="none"/>
+  <rect x="5.000" y="0.500" width="0.290" height="59.000" fill="#959595" stroke="none"/>
+  <rect x="5.270" y="0.500" width="0.290" height="59.000" fill="#8d8d8d" stroke="none"/>
+  <rect x="5.540" y="0.500" width="0.290" height="59.000" fill="#848484" stroke="none"/>
+  <rect x="5.810" y="0.500" width="0.290" height="59.000" fill="#7c7c7c" stroke="none"/>
+  <rect x="6.080" y="0.500" width="0.290" height="59.000" fill="#747474" stroke="none"/>
+  <rect x="6.350" y="0.500" width="0.290" height="59.000" fill="#6c6c6c" stroke="none"/>
+  <rect x="6.620" y="0.500" width="0.290" height="59.000" fill="#636363" stroke="none"/>
+  <rect x="6.890" y="0.500" width="0.290" height="59.000" fill="#5b5b5b" stroke="none"/>
+  <rect x="7.160" y="0.500" width="0.290" height="59.000" fill="#525252" stroke="none"/>
+  <rect x="7.430" y="0.500" width="0.290" height="59.000" fill="#4a4a4a" stroke="none"/>
+  <rect x="2.3" y="0.5" width="5.3999999999999995" height="59.0" fill="none" stroke="#9a9a9a" stroke-width="0.80"/>
 </svg>

@@ -1,0 +1,90 @@
+{
+  "actual_iterations": 64,
+  "base": "SE0073",
+  "best_error": 21.207,
+  "best_iter": 1,
+  "convergence": "",
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 0.890999999945052,
+  "error_per_pixel": 0.021207,
+  "error_pixel_cluster_count": 2.0,
+  "error_pixel_cluster_excess": 0.48373819742489277,
+  "error_pixel_count": 233.0,
+  "filename": "SE0073.jpg",
+  "h": 40,
+  "largest_error_pixel_cluster_fraction": 0.7167381974248928,
+  "localized_error_fraction": 0.7094800940174614,
+  "mean_delta2": 4537.455078125,
+  "params": {
+    "badge_param_source_ref": "SE0072",
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "SE0073",
+        "source": "base_name",
+        "text": "Wie SE0072, aber nach rechts gekippt. \"T\" steht waagrecht geschrieben."
+      }
+    ],
+    "documented_alias_refs": [
+      "SE0072"
+    ],
+    "elements": [
+      "SEMANTIC: Viereck ohne Buchstabe",
+      "SEMANTIC: senkrechter Strich hinter dem Viereck",
+      "SEMANTIC: waagrechter Strich rechts vom Viereck",
+      "REFERENZ: Abgeleitet aus AC0811",
+      "GEOMETRIE: Referenz-Badge mit viereckigem Kopf statt runder Kopfkontur",
+      "REFERENZ: Abgeleitet aus SE0041",
+      "REFERENZ: Abgeleitet aus SE0072"
+    ],
+    "geometry_ir": [],
+    "head_style": "square_badge",
+    "label": "",
+    "mode": "semantic_badge",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {
+      "description_heuristic": [
+        "SEMANTIC: waagrechter Strich rechts vom Kreis"
+      ],
+      "family_rule": [
+        "SEMANTIC: Kreis ohne Buchstabe",
+        "SEMANTIC: senkrechter Strich hinter dem Kreis"
+      ]
+    },
+    "top_source_ref": null,
+    "variant_name": "SE0073"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 13404.862354489089,
+  "std_delta2": 11203.39453125,
+  "tile_std_delta2": 7085.305946431479,
+  "variant": "SE0073",
+  "w": 25
+}

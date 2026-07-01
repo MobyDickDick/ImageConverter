@@ -1,15 +1,37 @@
 {
+  "actual_iterations": 64,
   "base": "WEATHER04",
-  "best_error": 28.711636656812686,
+  "best_error": 25.024007883185522,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.0077161076744995125,
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 0.8279999999795109,
+  "error_per_pixel": 0.00672507602343067,
+  "error_pixel_cluster_count": 28.0,
+  "error_pixel_cluster_excess": 0.29776493240215396,
+  "error_pixel_count": 839.0,
   "filename": "weather04.jpg",
   "h": 61,
-  "mean_delta2": 6439.03466796875,
+  "largest_error_pixel_cluster_fraction": 0.5232419547079857,
+  "localized_error_fraction": 0.735747862201696,
+  "mean_delta2": 5658.07666015625,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
     "description_contract": {
       "deficits": [],
       "has_conditions": false,
@@ -39,7 +61,10 @@
     "top_source_ref": null,
     "variant_name": "WEATHER04"
   },
-  "std_delta2": 11969.212890625,
+  "requested_iterations": 64,
+  "spatial_quality_score": 18449.748961589903,
+  "std_delta2": 11968.2431640625,
+  "tile_std_delta2": 9021.744480115734,
   "variant": "WEATHER04",
   "w": 61
 }

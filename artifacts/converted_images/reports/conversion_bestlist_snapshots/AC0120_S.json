@@ -1,30 +1,229 @@
 {
+  "actual_iterations": 64,
   "base": "AC0120",
-  "best_error": 38.57666666666667,
-  "best_iter": 73,
-  "convergence": "plateau",
-  "error_per_pixel": 0.04822083333333334,
+  "best_error": 20.973333333333333,
+  "best_iter": 1,
+  "convergence": "",
+  "elapsed_seconds": 1.0,
+  "error_per_pixel": 0.026216666666666666,
   "filename": "AC0120_S.jpg",
   "h": 40,
-  "mean_delta2": 7921.34765625,
+  "localized_error_fraction": 0.7521487655550941,
+  "mean_delta2": 3124.177490234375,
   "params": {
-    "bottom_shape": "square_cross",
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [
+        {
+          "clip_to": "main_rect",
+          "confidence": 0.75,
+          "direction": "tr_bl",
+          "id": "description_element_1",
+          "kind": "DiagonalBand",
+          "rect_ref": "main_rect",
+          "source": "description",
+          "stroke": "#707070",
+          "stroke_width": 0.045
+        },
+        {
+          "clip_to": "main_rect",
+          "confidence": 0.75,
+          "direction": "tl_br",
+          "id": "description_element_2",
+          "kind": "DiagonalBand",
+          "rect_ref": "main_rect",
+          "source": "description",
+          "stroke": "#707070",
+          "stroke_width": 0.045
+        },
+        {
+          "confidence": 0.75,
+          "id": "description_element_3",
+          "kind": "PlusGlyph",
+          "position": "top_center",
+          "source": "description",
+          "stroke": "#4f4f4f",
+          "stroke_width": 0.025
+        },
+        {
+          "confidence": 0.75,
+          "id": "description_element_4",
+          "kind": "MinusGlyph",
+          "position": "top_center",
+          "source": "description",
+          "stroke": "#4f4f4f",
+          "stroke_width": 0.025
+        }
+      ],
+      "relations": [
+        {
+          "confidence": 0.75,
+          "object": "main_rect",
+          "source": "description",
+          "subject": "description_element_1",
+          "type": "rect"
+        },
+        {
+          "confidence": 0.75,
+          "object": "main_rect",
+          "source": "description",
+          "subject": "description_element_2",
+          "type": "rect"
+        }
+      ],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": false,
+      "has_reference": true,
+      "status": "ok"
+    },
     "description_fragments": [
       {
         "key": "AC0120",
         "source": "base_name",
-        "text": "Wie AC0030, jedoch mit einem zusätzlichen Plus-Minus-Zeichen unmittelbar über dem Minus-Minus-Zeichen."
+        "text": "Wie AC0120-Bildbeschreibung, zusätzlich analog AC0VR2_M4.svg mit einer zusätzlichen an der vertikalen Symmetrieachse ausgerichteten Diagonale; außerdem werden oben auf der vertikalen Symmetrieachse ein \"+\"- und ein \"-\"-Zeichen eingefügt."
       }
     ],
     "documented_alias_refs": [
-      "AC0030"
+      "AC0120"
     ],
-    "elements": [
-      "OBEN: Alias-Referenz auf AC0030",
-      "UNTEN: Parametrisch generiertes Viereck mit Andreaskreuz"
+    "elements": [],
+    "geometry_ir": [
+      {
+        "clip_to": "main_rect",
+        "direction": "tr_bl",
+        "id": "diagonal_1_tr_bl",
+        "kind": "DiagonalBand",
+        "rect_ref": "main_rect",
+        "stroke": "#707070",
+        "stroke_width": 0.045
+      },
+      {
+        "clip_to": "main_rect",
+        "direction": "tl_br",
+        "id": "diagonal_2_tl_br",
+        "kind": "DiagonalBand",
+        "rect_ref": "main_rect",
+        "stroke": "#707070",
+        "stroke_width": 0.045
+      },
+      {
+        "id": "plus_glyph",
+        "kind": "PlusGlyph",
+        "position": "top_center",
+        "stroke": "#4f4f4f",
+        "stroke_width": 0.025
+      },
+      {
+        "id": "minus_glyph",
+        "kind": "MinusGlyph",
+        "position": "top_center",
+        "stroke": "#4f4f4f",
+        "stroke_width": 0.025
+      }
     ],
+    "geometry_ir_optimizer_result": {
+      "element_refinement": {
+        "final_error": 49.24625,
+        "initial_error": 49.24625,
+        "mode": "right_rotated_valve_geometry",
+        "steps": []
+      },
+      "final_error": 49.24625,
+      "initial_error": 50.9475,
+      "mode": "geometry_ir_raster_registration",
+      "parameters": {
+        "scale_x": 1.0,
+        "scale_y": 1.0,
+        "stroke_scale": 2.07,
+        "translate_x": 0.0,
+        "translate_y": 0.0
+      },
+      "steps": [
+        {
+          "best_delta": 0.6029166666666654,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 1.25
+        },
+        {
+          "best_delta": 0.3191666666666677,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 1.5
+        },
+        {
+          "best_delta": 0.42583333333332973,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 1.75
+        },
+        {
+          "best_delta": 0.2608333333333377,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 2.0
+        },
+        {
+          "best_delta": 0.02291666666666714,
+          "parameter": "stroke_scale",
+          "stage": 1,
+          "value": 2.15
+        },
+        {
+          "best_delta": 0.06958333333332689,
+          "parameter": "stroke_scale",
+          "stage": 2,
+          "value": 2.07
+        }
+      ]
+    },
     "label": "M",
-    "mode": "composite",
+    "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "clip_to": "main_rect",
+        "direction": "tr_bl",
+        "id": "diagonal_1_tr_bl",
+        "kind": "DiagonalBand",
+        "rect_ref": "main_rect",
+        "stroke": "#707070",
+        "stroke_width": 0.09314999999999998
+      },
+      {
+        "clip_to": "main_rect",
+        "direction": "tl_br",
+        "id": "diagonal_2_tl_br",
+        "kind": "DiagonalBand",
+        "rect_ref": "main_rect",
+        "stroke": "#707070",
+        "stroke_width": 0.09314999999999998
+      },
+      {
+        "id": "plus_glyph",
+        "kind": "PlusGlyph",
+        "position": "top_center",
+        "stroke": "#4f4f4f",
+        "stroke_width": 0.05175
+      },
+      {
+        "id": "minus_glyph",
+        "kind": "MinusGlyph",
+        "position": "top_center",
+        "stroke": "#4f4f4f",
+        "stroke_width": 0.05175
+      }
+    ],
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
@@ -32,10 +231,13 @@
       "description_heuristic"
     ],
     "semantic_sources": {},
-    "top_source_ref": "AC0030",
+    "top_source_ref": null,
     "variant_name": "AC0120_S"
   },
-  "std_delta2": 12497.78125,
+  "requested_iterations": 64,
+  "spatial_quality_score": 8295.530618039682,
+  "std_delta2": 6923.53759765625,
+  "tile_std_delta2": 3832.5589367064986,
   "variant": "AC0120_S",
   "w": 20
 }

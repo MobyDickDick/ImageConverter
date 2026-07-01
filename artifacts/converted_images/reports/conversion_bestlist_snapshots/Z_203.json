@@ -1,15 +1,15 @@
 {
   "actual_iterations": 64,
   "base": "Z_203",
-  "best_error": 19.494281045751634,
+  "best_error": 20.170751633986928,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 0.75,
-  "error_per_pixel": 0.04778010060233244,
+  "elapsed_seconds": 0.35899999999674037,
+  "error_per_pixel": 0.04943811674996796,
   "filename": "z_203.jpg",
   "h": 6,
   "localized_error_fraction": 0.6409227710935491,
-  "mean_delta2": 2390.463134765625,
+  "mean_delta2": 1763.125,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -57,7 +57,7 @@
   },
   "requested_iterations": 64,
   "spatial_quality_score": 3992.221466793353,
-  "std_delta2": 3768.759521484375,
+  "std_delta2": 1945.0738525390625,
   "tile_std_delta2": 1874.5647427737686,
   "variant": "Z_203",
   "w": 68

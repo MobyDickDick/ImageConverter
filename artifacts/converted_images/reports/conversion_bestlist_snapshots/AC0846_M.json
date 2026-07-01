@@ -1,0 +1,76 @@
+{
+  "actual_iterations": 64,
+  "base": "AC0846",
+  "best_error": 24.584285714285713,
+  "best_iter": 1,
+  "convergence": "",
+  "elapsed_seconds": 0.75,
+  "error_per_pixel": 0.0351204081632653,
+  "error_pixel_cluster_count": 12.0,
+  "error_pixel_cluster_excess": 0.27190476190476187,
+  "error_pixel_count": 168.0,
+  "filename": "AC0846_M.jpg",
+  "h": 35,
+  "largest_error_pixel_cluster_fraction": 0.5119047619047619,
+  "localized_error_fraction": 0.7295068374806136,
+  "mean_delta2": 7122.595703125,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": false,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "AC0846",
+        "source": "base_name",
+        "text": "Unzugeordnete Wurzelform aus der Serie AC0846. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die kleine Variante (S). Bitte einer finalen Wurzelform-Kategorie zuordnen."
+      },
+      {
+        "key": "AC0846_M",
+        "source": "variant_name",
+        "text": "Unzugeordnete Wurzelform aus der Serie AC0846. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die mittlere Variante (M). Bitte einer finalen Wurzelform-Kategorie zuordnen."
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [
+      "MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie."
+    ],
+    "geometry_ir": [],
+    "label": "",
+    "mode": "manual_review",
+    "review_reason": "Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "AC0846_M"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 22909.98140032091,
+  "std_delta2": 15803.9658203125,
+  "tile_std_delta2": 10308.661359428572,
+  "variant": "AC0846_M",
+  "w": 20
+}

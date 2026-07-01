@@ -1,15 +1,21 @@
 {
   "actual_iterations": 64,
   "base": "AC5010",
-  "best_error": 25.434472934472936,
+  "best_error": 23.09489078822412,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 1.625,
-  "error_per_pixel": 0.0007246288585319925,
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 1.0150000000139698,
+  "error_per_pixel": 0.0006579740965306017,
+  "error_pixel_cluster_count": 36.0,
+  "error_pixel_cluster_excess": 0.7293927125506072,
+  "error_pixel_count": 8550.0,
   "filename": "AC5010_L_PKW.jpg",
   "h": 260,
-  "localized_error_fraction": 0.7863847430909997,
-  "mean_delta2": 5489.251953125,
+  "largest_error_pixel_cluster_fraction": 0.9729824561403508,
+  "localized_error_fraction": 0.7729321730911195,
+  "mean_delta2": 4899.78564453125,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -78,7 +84,22 @@
         "mode": "right_rotated_valve_geometry",
         "steps": []
       },
-      "final_error": 62.68738841405508,
+      "final_error": 47.53338081671415,
+      "generic_element_refinement": {
+        "final_error": 47.53338081671415,
+        "initial_error": 62.68738841405508,
+        "mode": "elementwise_geometry_ir",
+        "steps": [
+          {
+            "accepted": true,
+            "best_delta": 15.154007597340929,
+            "element": "main_rect",
+            "error_after": 47.53338081671415,
+            "error_before": 62.68738841405508,
+            "step_index": 0
+          }
+        ]
+      },
       "initial_error": 82.47084520417853,
       "mode": "geometry_ir_raster_registration",
       "parameters": {
@@ -269,7 +290,7 @@
           0.9919999999999999,
           0.8119999999999999
         ],
-        "fill": "#d8d8d8",
+        "fill": "#b1c1cc",
         "id": "main_rect",
         "kind": "RectBorder",
         "stroke": "#666666",
@@ -287,9 +308,9 @@
     "variant_name": "AC5010_L_PKW"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 14933.831079173626,
-  "std_delta2": 10009.908203125,
-  "tile_std_delta2": 7299.67516702481,
+  "spatial_quality_score": 15067.870761254748,
+  "std_delta2": 9843.916015625,
+  "tile_std_delta2": 6492.13838434176,
   "variant": "AC5010_L_PKW",
   "w": 135
 }

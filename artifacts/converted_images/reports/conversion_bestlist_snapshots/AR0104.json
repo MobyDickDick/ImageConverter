@@ -1,0 +1,80 @@
+{
+  "actual_iterations": 64,
+  "base": "AR0104",
+  "best_error": 31.967,
+  "best_iter": 1,
+  "convergence": "",
+  "diff_error_distribution_reason": "no_dominant_error_cluster_detected",
+  "diff_error_distribution_status": "random_like",
+  "elapsed_seconds": 0.8129999999655411,
+  "error_per_pixel": 0.031966999999999995,
+  "error_pixel_cluster_count": 28.0,
+  "error_pixel_cluster_excess": 0.18115444015444016,
+  "error_pixel_count": 259.0,
+  "filename": "AR0104.jpg",
+  "h": 25,
+  "largest_error_pixel_cluster_fraction": 0.44015444015444016,
+  "localized_error_fraction": 0.6831934764546496,
+  "mean_delta2": 7355.01904296875,
+  "params": {
+    "badge_param_source_ref": "AR0101",
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "AR0104",
+        "source": "base_name",
+        "text": "Wie AR0101, nach links gedreht, Text horizontal"
+      }
+    ],
+    "documented_alias_refs": [
+      "AR0101"
+    ],
+    "elements": [
+      "SEMANTIC: waagrechter Strich rechts vom Kreis",
+      "REFERENZ: Abgeleitet aus AR0101"
+    ],
+    "geometry_ir": [],
+    "label": "M",
+    "mode": "semantic_badge",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {
+      "description_heuristic": [
+        "SEMANTIC: waagrechter Strich rechts vom Kreis"
+      ]
+    },
+    "top_source_ref": null,
+    "variant_name": "AR0104"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 18940.188758652235,
+  "std_delta2": 14386.8828125,
+  "tile_std_delta2": 8879.97633908228,
+  "variant": "AR0104",
+  "w": 40
+}

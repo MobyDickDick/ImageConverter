@@ -1,0 +1,74 @@
+{
+  "actual_iterations": 64,
+  "base": "GE0348",
+  "best_error": 31.27845925925926,
+  "best_iter": 1,
+  "convergence": "",
+  "diff_error_distribution_reason": "no_dominant_error_cluster_detected",
+  "diff_error_distribution_status": "random_like",
+  "elapsed_seconds": 0.8900000000139698,
+  "error_per_pixel": 0.005560614979423869,
+  "error_pixel_cluster_count": 39.0,
+  "error_pixel_cluster_excess": 0.005019474058280016,
+  "error_pixel_count": 1407.0,
+  "filename": "GE0348.jpg",
+  "h": 75,
+  "largest_error_pixel_cluster_fraction": 0.25515280739161333,
+  "localized_error_fraction": 0.6393121403223451,
+  "mean_delta2": 6976.7138671875,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "insufficient_description",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [
+        "missing_geometry_terms"
+      ],
+      "has_conditions": false,
+      "has_geometry_terms": false,
+      "has_reference": false,
+      "status": "insufficient_description"
+    },
+    "description_fragments": [
+      {
+        "key": "GE0348",
+        "source": "base_name",
+        "text": "Weltkugel (links oben Nordamerika, links unten Südamerika rechts oben Westeuropa, rechts unten Teil von Afrika). Hintergrund GE0999"
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [
+      "MANUELL: Beschreibung unzureichend (fehlende Geometriehinweise oder leerer Beschreibungstext)."
+    ],
+    "geometry_ir": [],
+    "label": "",
+    "mode": "insufficient_description",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "GE0348"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 22421.6015019357,
+  "std_delta2": 12260.1689453125,
+  "tile_std_delta2": 9988.976834734583,
+  "variant": "GE0348",
+  "w": 75
+}

@@ -1,15 +1,21 @@
 {
   "actual_iterations": 64,
   "base": "GE0043",
-  "best_error": 22.527407407407406,
+  "best_error": 21.564444444444444,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 1.1090000000003783,
-  "error_per_pixel": 0.02503045267489712,
+  "diff_error_distribution_reason": "no_dominant_error_cluster_detected",
+  "diff_error_distribution_status": "random_like",
+  "elapsed_seconds": 0.9220000000204891,
+  "error_per_pixel": 0.023960493827160492,
+  "error_pixel_cluster_count": 46.0,
+  "error_pixel_cluster_excess": 0.0,
+  "error_pixel_count": 225.0,
   "filename": "GE0043_M.jpg",
   "h": 30,
-  "localized_error_fraction": 0.40565311384583636,
-  "mean_delta2": 2283.02880859375,
+  "largest_error_pixel_cluster_fraction": 0.11555555555555555,
+  "localized_error_fraction": 0.3885026699557128,
+  "mean_delta2": 2165.662109375,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -78,7 +84,22 @@
         "mode": "right_rotated_valve_geometry",
         "steps": []
       },
-      "final_error": 28.700370370370372,
+      "final_error": 23.08185185185185,
+      "generic_element_refinement": {
+        "final_error": 23.08185185185185,
+        "initial_error": 28.700370370370372,
+        "mode": "elementwise_geometry_ir",
+        "steps": [
+          {
+            "accepted": true,
+            "best_delta": 5.6185185185185205,
+            "element": "main_rect",
+            "error_after": 23.08185185185185,
+            "error_before": 28.700370370370372,
+            "step_index": 0
+          }
+        ]
+      },
       "initial_error": 49.74703703703704,
       "mode": "geometry_ir_raster_registration",
       "parameters": {
@@ -245,7 +266,7 @@
           1.0239999999999998,
           1.1479999999999997
         ],
-        "fill": "#d8d8d8",
+        "fill": "#b8c8d0",
         "id": "main_rect",
         "kind": "RectBorder",
         "stroke": "#666666",
@@ -263,9 +284,9 @@
     "variant_name": "GE0043_M"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 3485.4028617829117,
-  "std_delta2": 1759.2410888671875,
-  "tile_std_delta2": 902.0824519648821,
+  "spatial_quality_score": 3203.2452294977948,
+  "std_delta2": 1737.4713134765625,
+  "tile_std_delta2": 754.1029143840626,
   "variant": "GE0043_M",
   "w": 30
 }

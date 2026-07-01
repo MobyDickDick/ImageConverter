@@ -1,15 +1,35 @@
 {
+  "actual_iterations": 64,
   "base": "AC0814",
-  "best_error": 8.25511111111111,
+  "best_error": 6.222222222222222,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.0073378765432098765,
+  "elapsed_seconds": 0.7349999999860302,
+  "error_per_pixel": 0.005530864197530864,
+  "error_pixel_cluster_count": 23.0,
+  "error_pixel_cluster_excess": 0.4161457194899818,
+  "error_pixel_count": 122.0,
   "filename": "AC0814_L.jpg",
   "h": 25,
-  "mean_delta2": 1422.6319580078125,
+  "largest_error_pixel_cluster_fraction": 0.5245901639344263,
+  "localized_error_fraction": 0.8248694974678613,
+  "mean_delta2": 815.8079833984375,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
     "description_contract": {
       "deficits": [],
       "has_conditions": true,
@@ -64,10 +84,11 @@
         "description_heuristic"
       ],
       "semantic_sources": {
-        "description_heuristic": [],
-        "family_rule": [
-          "SEMANTIC: Kreis ohne Buchstabe",
+        "description_heuristic": [
           "SEMANTIC: waagrechter Strich rechts vom Kreis"
+        ],
+        "family_rule": [
+          "SEMANTIC: Kreis ohne Buchstabe"
         ]
       },
       "status": "semantic_ok"
@@ -79,16 +100,20 @@
       "description_heuristic"
     ],
     "semantic_sources": {
-      "description_heuristic": [],
-      "family_rule": [
-        "SEMANTIC: Kreis ohne Buchstabe",
+      "description_heuristic": [
         "SEMANTIC: waagrechter Strich rechts vom Kreis"
+      ],
+      "family_rule": [
+        "SEMANTIC: Kreis ohne Buchstabe"
       ]
     },
     "top_source_ref": null,
     "variant_name": "AC0814_L"
   },
-  "std_delta2": 4842.74072265625,
+  "requested_iterations": 64,
+  "spatial_quality_score": 2768.8891525629347,
+  "std_delta2": 2673.52685546875,
+  "tile_std_delta2": 1334.8583524939854,
   "variant": "AC0814_L",
   "w": 45
 }

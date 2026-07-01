@@ -1,15 +1,61 @@
 {
+  "actual_iterations": 64,
   "base": "BACKBOTTOM",
-  "best_error": 13.9928,
+  "best_error": 1.2,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.005597120000000001,
+  "diff_error_distribution_reason": "no_dominant_error_cluster_detected",
+  "diff_error_distribution_status": "random_like",
+  "elapsed_seconds": 0.4529999999795109,
+  "error_per_pixel": 0.00047999999999999996,
+  "error_pixel_cluster_count": 1.0,
+  "error_pixel_cluster_excess": 0.0,
+  "error_pixel_count": 2500.0,
   "filename": "BackBottom.jpg",
   "h": 50,
-  "mean_delta2": 587.6112060546875,
+  "largest_error_pixel_cluster_fraction": 1.0,
+  "localized_error_fraction": 0.6953719008264463,
+  "mean_delta2": 7.260000228881836,
   "params": {
     "bottom_shape": null,
     "contract_status": "insufficient_description",
+    "description_constraints": {
+      "elements": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "confidence": 0.75,
+          "fill": "#e8e8e8",
+          "id": "description_element_1",
+          "kind": "RectBorder",
+          "primitive_decomposition": {
+            "primitives": [
+              {
+                "kind": "ColorPatch",
+                "role": "light_grey_fill"
+              }
+            ],
+            "schema_version": "light_grey_square_decomposition_v1"
+          },
+          "role": "reference_light_grey_square",
+          "source": "description",
+          "stroke": "none",
+          "stroke_width": 0.0
+        }
+      ],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
+      }
+    },
     "description_contract": {
       "deficits": [
         "missing_geometry_terms"
@@ -30,9 +76,105 @@
     "elements": [
       "MANUELL: Beschreibung unzureichend (fehlende Geometriehinweise oder leerer Beschreibungstext)."
     ],
-    "geometry_ir": [],
+    "geometry_ir": [
+      {
+        "bbox": [
+          0.0,
+          0.0,
+          1.0,
+          1.0
+        ],
+        "fill": "#e8e8e8",
+        "id": "backbottom_light_grey_square",
+        "kind": "RectBorder",
+        "primitive_decomposition": {
+          "primitives": [
+            {
+              "kind": "ColorPatch",
+              "role": "light_grey_fill"
+            }
+          ],
+          "schema_version": "light_grey_square_decomposition_v1"
+        },
+        "role": "reference_light_grey_square",
+        "stroke": "none",
+        "stroke_width": 0.0
+      }
+    ],
+    "geometry_ir_optimizer_result": {
+      "element_refinement": {
+        "final_error": 8.7256,
+        "initial_error": 8.7256,
+        "mode": "right_rotated_valve_geometry",
+        "steps": []
+      },
+      "final_error": 1.2,
+      "generic_element_refinement": {
+        "final_error": 1.2,
+        "initial_error": 8.7256,
+        "mode": "elementwise_geometry_ir",
+        "steps": [
+          {
+            "accepted": true,
+            "best_delta": 7.5256,
+            "element": "backbottom_light_grey_square",
+            "error_after": 1.2,
+            "error_before": 8.7256,
+            "step_index": 0
+          }
+        ]
+      },
+      "initial_error": 9.0,
+      "mode": "geometry_ir_raster_registration",
+      "parameters": {
+        "scale_x": 1.0,
+        "scale_y": 1.0,
+        "stroke_scale": 1.0,
+        "translate_x": -0.01,
+        "translate_y": 0.01
+      },
+      "steps": [
+        {
+          "best_delta": 0.14000000000000057,
+          "parameter": "translate_x",
+          "stage": 3,
+          "value": -0.01
+        },
+        {
+          "best_delta": 0.1343999999999994,
+          "parameter": "translate_y",
+          "stage": 3,
+          "value": 0.01
+        }
+      ]
+    },
     "label": "",
     "mode": "insufficient_description",
+    "optimized_geometry_ir": [
+      {
+        "bbox": [
+          -0.01,
+          0.01,
+          1.0,
+          1.0
+        ],
+        "fill": "#f0f0f0",
+        "id": "backbottom_light_grey_square",
+        "kind": "RectBorder",
+        "primitive_decomposition": {
+          "primitives": [
+            {
+              "kind": "ColorPatch",
+              "role": "light_grey_fill"
+            }
+          ],
+          "schema_version": "light_grey_square_decomposition_v1"
+        },
+        "role": "reference_light_grey_square",
+        "stroke": "none",
+        "stroke_width": 0.001
+      }
+    ],
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
@@ -43,7 +185,10 @@
     "top_source_ref": null,
     "variant_name": "BACKBOTTOM"
   },
-  "std_delta2": 13.97446346282959,
+  "requested_iterations": 64,
+  "spatial_quality_score": 18.629428617964418,
+  "std_delta2": 21.584075927734375,
+  "tile_std_delta2": 7.840630264097334,
   "variant": "BACKBOTTOM",
   "w": 50
 }

@@ -1,15 +1,15 @@
 {
   "actual_iterations": 64,
   "base": "AC0203",
-  "best_error": 47.504133333333336,
+  "best_error": 49.526,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 0.8129999999946449,
-  "error_per_pixel": 0.019001653333333333,
+  "elapsed_seconds": 0.8599999999860302,
+  "error_per_pixel": 0.019810400000000002,
   "filename": "AC0203_2.jpg",
   "h": 50,
   "localized_error_fraction": 0.5423974652897425,
-  "mean_delta2": 12331.576171875,
+  "mean_delta2": 9774.0556640625,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -345,7 +345,7 @@
   },
   "requested_iterations": 64,
   "spatial_quality_score": 18691.9465493883,
-  "std_delta2": 18275.9375,
+  "std_delta2": 9089.0322265625,
   "tile_std_delta2": 6551.9127403545635,
   "variant": "AC0203_2",
   "w": 50

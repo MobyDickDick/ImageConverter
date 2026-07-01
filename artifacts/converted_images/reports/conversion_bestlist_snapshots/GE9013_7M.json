@@ -1,15 +1,15 @@
 {
   "actual_iterations": 64,
   "base": "GE9013_7M",
-  "best_error": 29.40361111111111,
+  "best_error": 26.90277777777778,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 0.5159999999741558,
-  "error_per_pixel": 0.02450300925925926,
+  "elapsed_seconds": 0.3120000000053551,
+  "error_per_pixel": 0.02241898148148148,
   "filename": "GE9013_7M.jpg",
   "h": 60,
   "localized_error_fraction": 0.6505158744896822,
-  "mean_delta2": 11885.8876953125,
+  "mean_delta2": 8795.8271484375,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -57,7 +57,7 @@
   },
   "requested_iterations": 64,
   "spatial_quality_score": 34191.967190064446,
-  "std_delta2": 17029.44140625,
+  "std_delta2": 13397.201171875,
   "tile_std_delta2": 16573.99487435802,
   "variant": "GE9013_7M",
   "w": 20

@@ -1,14 +1,44 @@
 {
+  "actual_iterations": 64,
   "base": "Z_300",
-  "best_error": 37.454887218045116,
+  "best_error": 31.786967418546364,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.14080784668438012,
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 0.5620000000344589,
+  "error_per_pixel": 0.1194998775133322,
+  "error_pixel_cluster_count": 7.0,
+  "error_pixel_cluster_excess": 0.31528447985635727,
+  "error_pixel_count": 67.0,
   "filename": "z_300.jpg",
   "h": 14,
-  "mean_delta2": 9363.2373046875,
+  "largest_error_pixel_cluster_fraction": 0.5671641791044776,
+  "localized_error_fraction": 0.712757054204626,
+  "mean_delta2": 5941.345703125,
   "params": {
     "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": false,
+      "status": "ok"
+    },
     "description_fragments": [
       {
         "key": "z_300",
@@ -18,6 +48,7 @@
     ],
     "documented_alias_refs": [],
     "elements": [],
+    "geometry_ir": [],
     "label": "M",
     "mode": "auto",
     "semantic_conflicts": [],
@@ -30,7 +61,10 @@
     "top_source_ref": null,
     "variant_name": "Z_300"
   },
-  "std_delta2": 14855.302734375,
+  "requested_iterations": 64,
+  "spatial_quality_score": 14440.673147844018,
+  "std_delta2": 10125.923828125,
+  "tile_std_delta2": 6122.438492515057,
   "variant": "Z_300",
   "w": 19
 }

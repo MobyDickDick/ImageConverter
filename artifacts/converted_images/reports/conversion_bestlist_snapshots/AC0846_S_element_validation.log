@@ -1,7 +1,9 @@
-run-meta: run_seed=676876676 pass_seed_offset=0 nonce_ns=1782050741812065000
+run-meta: run_seed=205197064 pass_seed_offset=1 nonce_ns=1782590421985352400
 status=manual_review_elementwise_symbol_fit
 step_border_thickness=0.8
-step_gradient_center=50.0
+step_rect_x_inset_ratio=0.04
+step_rect_y_inset_ratio=0.04
+step_gradient_center=45.0
 step_diag1_width=0.0
 step_diag2_width=0.0
 step_diagonal_inset_ratio=0.0
@@ -22,7 +24,7 @@ step_glyph_gray=55.0
 step_diag_gray=#ffffff
 step_border_gray=190.0
 step_gradient_edge=#f2f2f2
-step_gradient_mid=#dcdcdc
+step_gradient_mid=#dedede
 fit_border_gray=190.0
 fit_border_thickness=0.8
 fit_center_dot_gray=136.0
@@ -38,11 +40,13 @@ fit_diag_gray=#ffffff
 fit_diagonal_inset_ratio=0.0
 fit_glyph_gray=55.0
 fit_glyph_y_ratio=0.05
-fit_gradient_center=50.0
+fit_gradient_center=45.0
 fit_gradient_edge=#f2f2f2
-fit_gradient_mid=#dcdcdc
+fit_gradient_mid=#dedede
 fit_minus_gap_ratio=1.5
 fit_minus_width=0.0
 fit_plus_half_ratio=0.05
 fit_plus_width=0.0
 fit_plus_x_ratio=0.08
+fit_rect_x_inset_ratio=0.04
+fit_rect_y_inset_ratio=0.04

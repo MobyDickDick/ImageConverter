@@ -1,0 +1,34 @@
+run-meta: run_seed=205197064 pass_seed_offset=0 nonce_ns=1782590204637089000
+status=semantic_ok
+quality=borderline
+quality_reason=semantic_ok_trotz_hohem_elementfehler:arm=101.598
+quality_elevated_elements=arm,circle,text
+redraw_variation: seed=207202795232 changed_params=cx:15.000->15.232 | cy:6.000->5.941 | r:6.500->6.442 | stroke_circle:1.000->0.900 | arm_stroke:1.000->1.070
+semantic-guard: Text bewusst deaktiviert (plain-ring Familie ohne Buchstabe).
+small_variant_mode_active: reason=min_dim, min_dim=12.100, mask_dilate_px=1, text_mode=path_t, arm_min_ratio=0.750, stem_min_ratio=0.000
+Runde 1: elementweise Validierung gestartet
+circle: Fehler=87.476
+circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
+circle: Mittelpunkt-Bracketing cx 12.500->15.000, cy 7.500->6.000 (best_err=72.239)
+perf_probe: circle_center_elapsed round=1 elapsed=0.02s
+circle: Radius-Bracketing r 6.050->6.500 (best_err=72.239, full_err=31.795); Kandidaten=5.445->72.239, 5.500->72.239, 6.000->72.239, 7.200->72.239
+perf_probe: circle_radius_elapsed round=1 elapsed=0.00s
+arm: Fehler=101.598
+arm: Breiten-Bracketing übersprungen (arm_stroke: current=1.000, Range=1.000..1.000)
+arm: Längen-Stochastic-Survivor aktiviert (best_len=6.000, err=98.298)
+arm: Längen-Bracketing arm_len 8.000->6.000; Kandidaten=6.000->98.298, 8.000->101.598, 11.000->101.598, 15.500->101.598, 20.000->101.598, 25.000->101.598
+text: Fehler=55.359
+text: Breiten-Bracketing keine relevante Änderung (s: 0.005); Kandidaten=0.000->78.955
+perf_probe: global_search_elapsed round=1 elapsed=0.00s
+Runde 1: Gesamtfehler=31.291; Qualität (MAE-basiert, höher=besser): 88.24% -> 87.73% | mittlere Pixelabweichung (MAE, kleiner=besser): 29.997 -> 31.291 | Mean-Delta² (kleiner=besser): 6808.824 -> 7522.704 | Qualitätsgewinn=-1.293 (-4.31%) | Wirkung=verschlechtert
+phase2_rollback: no
+circle: Farb-Bracketing fill_gray 242->210; Kandidaten=200->7419.000, 203->7361.000, 210->7271.000, 220->7280.000, 226->7303.000, 230->7312.000, 234->7330.000, 240->7394.000, 242->7438.000, 250->7839.000, 255->8136.000
+circle: Farb-Stochastic-Survivor aktiviert (stroke_gray=203, err=6360.000)
+circle: Farb-Bracketing stroke_gray 127->203; Kandidaten=95->7912.000, 96->7896.000, 111->7586.000, 112->7564.000, 119->7429.000, 127->7271.000, 128->7259.000, 135->7132.000, 143->7010.000, 144->6993.000, 152->6869.000, 159->6780.000, 160->6762.000, 171->6614.000, 203->6360.000
+circle: Farboptimierung in Abschlussphase angewendet
+arm: Farb-Bracketing stroke_gray 203->219; Kandidaten=96->103.483, 112->100.883, 128->98.258, 144->95.683, 152->94.383, 160->93.083, 171->91.333, 187->89.308, 195->88.142, 201->88.142, 203->88.117, 211->88.117, 219->87.867, 235->93.960
+arm: Farboptimierung in Abschlussphase angewendet
+text: Farb-Stochastic-Survivor aktiviert (text_gray=178, err=53.550)
+text: Farb-Bracketing text_gray 127->178; Kandidaten=95->57.391, 96->57.167, 111->55.965, 112->55.912, 119->55.582, 127->55.359, 128->55.327, 135->55.029, 143->54.806, 144->54.710, 152->54.465, 159->54.189, 160->54.199, 171->53.838, 201->53.155
+text: Farboptimierung in Abschlussphase angewendet
+semantic-guard: Erwartete Arm-Geometrie bestätigt/wiederhergestellt (links/rechts aus Parametern).

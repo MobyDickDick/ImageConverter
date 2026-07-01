@@ -1,15 +1,19 @@
 {
   "actual_iterations": 64,
   "base": "AC0863",
-  "best_error": 23.71911111111111,
+  "best_error": 14.95111111111111,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 2.0309999999881256,
-  "error_per_pixel": 0.021083654320987653,
+  "elapsed_seconds": 1.4839999999967404,
+  "error_per_pixel": 0.013289876543209875,
+  "error_pixel_cluster_count": 12.0,
+  "error_pixel_cluster_excess": 0.3570522875816994,
+  "error_pixel_count": 136.0,
   "filename": "AC0863_L.jpg",
   "h": 45,
-  "localized_error_fraction": 0.6840351937038893,
-  "mean_delta2": 6633.06689453125,
+  "largest_error_pixel_cluster_fraction": 0.47794117647058826,
+  "localized_error_fraction": 0.9235096749736381,
+  "mean_delta2": 3949.1787109375,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -45,10 +49,11 @@
     ],
     "elements": [
       "SEMANTIC: senkrechter Strich oben vom Kreis",
-      "SEMANTIC: Kreis + Buchstabe rF"
+      "SEMANTIC: Kreis + Buchstabe",
+      "SEMANTIC: waagrechter Strich links vom Kreis"
     ],
     "geometry_ir": [],
-    "label": "rF",
+    "label": "T",
     "mode": "semantic_badge",
     "semantic_conflicts": [],
     "semantic_priority_order": [
@@ -58,7 +63,8 @@
     ],
     "semantic_sources": {
       "description_heuristic": [
-        "SEMANTIC: Kreis + Buchstabe rF"
+        "SEMANTIC: Kreis + Buchstabe",
+        "SEMANTIC: waagrechter Strich links vom Kreis"
       ],
       "family_rule": [
         "SEMANTIC: senkrechter Strich oben vom Kreis"
@@ -68,9 +74,9 @@
     "variant_name": "AC0863_L"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 18378.451762989913,
-  "std_delta2": 14801.8232421875,
-  "tile_std_delta2": 9014.252690142559,
+  "spatial_quality_score": 16673.428212263374,
+  "std_delta2": 12272.29296875,
+  "tile_std_delta2": 10132.055249821817,
   "variant": "AC0863_L",
   "w": 25
 }

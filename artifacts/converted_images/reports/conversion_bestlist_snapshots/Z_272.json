@@ -1,15 +1,37 @@
 {
+  "actual_iterations": 64,
   "base": "Z_272",
-  "best_error": 37.80431848852901,
+  "best_error": 31.36302294197031,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.15305392100619034,
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 0.5320000000065193,
+  "error_per_pixel": 0.12697580138449518,
+  "error_pixel_cluster_count": 5.0,
+  "error_pixel_cluster_excess": 0.4264072090897218,
+  "error_pixel_count": 62.0,
   "filename": "z_272.jpg",
   "h": 19,
-  "mean_delta2": 9529.056640625,
+  "largest_error_pixel_cluster_fraction": 0.6774193548387096,
+  "localized_error_fraction": 0.7161919614030385,
+  "mean_delta2": 7216.59130859375,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
     "description_contract": {
       "deficits": [],
       "has_conditions": true,
@@ -39,7 +61,10 @@
     "top_source_ref": null,
     "variant_name": "Z_272"
   },
-  "std_delta2": 15494.2353515625,
+  "requested_iterations": 64,
+  "spatial_quality_score": 22071.169130640257,
+  "std_delta2": 13112.1240234375,
+  "tile_std_delta2": 8804.134557657459,
   "variant": "Z_272",
   "w": 13
 }

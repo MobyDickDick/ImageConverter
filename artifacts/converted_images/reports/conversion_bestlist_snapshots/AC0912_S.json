@@ -1,15 +1,37 @@
 {
+  "actual_iterations": 64,
   "base": "AC0912",
-  "best_error": 15.768,
+  "best_error": 13.421333333333333,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.042048,
+  "diff_error_distribution_reason": "no_dominant_error_cluster_detected",
+  "diff_error_distribution_status": "random_like",
+  "elapsed_seconds": 0.8900000000139698,
+  "error_per_pixel": 0.03579022222222222,
+  "error_pixel_cluster_count": 18.0,
+  "error_pixel_cluster_excess": 0.25396969696969696,
+  "error_pixel_count": 88.0,
   "filename": "AC0912_S.jpg",
   "h": 15,
-  "mean_delta2": 3173.256103515625,
+  "largest_error_pixel_cluster_fraction": 0.48863636363636365,
+  "localized_error_fraction": 0.6938606995655564,
+  "mean_delta2": 2095.112060546875,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
     "description_contract": {
       "deficits": [],
       "has_conditions": true,
@@ -42,7 +64,10 @@
     "top_source_ref": null,
     "variant_name": "AC0912_S"
   },
-  "std_delta2": 8846.3759765625,
+  "requested_iterations": 64,
+  "spatial_quality_score": 14931.29136278194,
+  "std_delta2": 6074.96337890625,
+  "tile_std_delta2": 6692.024699145589,
   "variant": "AC0912_S",
   "w": 25
 }

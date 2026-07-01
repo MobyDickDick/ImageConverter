@@ -1,18 +1,5 @@
 <svg width="150" height="35" viewBox="0 0 150 35" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
   <g transform="translate(75.000 17.500) rotate(0) scale(1.0000) translate(-75.000 -17.500)">
-<g transform="translate(75.000 17.500) rotate(0) scale(1.5960) translate(-75.000 -17.500)">
-<g transform="translate(10.000 15.000) rotate(90) scale(1.4060) translate(-10.000 -15.000)">
-<defs>
-    <linearGradient id="detectedStripeGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0.000%" stop-color="#8ab8d9"/>
-      <stop offset="20.000%" stop-color="#7292c5"/>
-      <stop offset="40.000%" stop-color="#bdc8da"/>
-      <stop offset="80.000%" stop-color="#7193c1"/>
-      <stop offset="100.000%" stop-color="#8bb9db"/>
-    </linearGradient>
-  </defs>
-  <rect x="0.0000" y="2.0000" width="60.0000" height="6.0000" fill="url(#detectedStripeGradient)"/>
-  </g>
-  </g>
+<rect id="main_rect" x="0.12" y="11.977" width="149.76" height="29.988" fill="#d8d8d8" stroke="#adadad" stroke-width="0.306"/>
   </g>
 </svg>

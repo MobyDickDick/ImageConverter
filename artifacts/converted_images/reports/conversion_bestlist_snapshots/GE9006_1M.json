@@ -1,15 +1,15 @@
 {
   "actual_iterations": 64,
   "base": "GE9006_1M",
-  "best_error": 24.433333333333334,
+  "best_error": 30.069166666666668,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 0.9059999999881256,
-  "error_per_pixel": 0.06108333333333334,
+  "elapsed_seconds": 0.40699999999196734,
+  "error_per_pixel": 0.07517291666666667,
   "filename": "GE9006_1M.jpg",
   "h": 20,
   "localized_error_fraction": 0.8624297592008251,
-  "mean_delta2": 4308.89990234375,
+  "mean_delta2": 9596.8974609375,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -57,7 +57,7 @@
   },
   "requested_iterations": 64,
   "spatial_quality_score": 27269.058529915033,
-  "std_delta2": 6215.19189453125,
+  "std_delta2": 19259.029296875,
   "tile_std_delta2": 11404.019820388872,
   "variant": "GE9006_1M",
   "w": 20

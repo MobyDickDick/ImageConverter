@@ -1,15 +1,37 @@
 {
+  "actual_iterations": 64,
   "base": "AC0090",
-  "best_error": 27.370535714285715,
+  "best_error": 19.09636904761905,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.004887595663265306,
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 0.4690000000409782,
+  "error_per_pixel": 0.0034100659013605447,
+  "error_pixel_cluster_count": 10.0,
+  "error_pixel_cluster_excess": 0.4737964731347084,
+  "error_pixel_count": 561.0,
   "filename": "AC0090_L.jpg",
   "h": 140,
-  "mean_delta2": 12810.01171875,
+  "largest_error_pixel_cluster_fraction": 0.5739750445632799,
+  "localized_error_fraction": 0.8960178522744018,
+  "mean_delta2": 8347.1552734375,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
     "description_contract": {
       "deficits": [],
       "has_conditions": false,
@@ -43,7 +65,10 @@
     "top_source_ref": null,
     "variant_name": "AC0090_L"
   },
-  "std_delta2": 26250.962890625,
+  "requested_iterations": 64,
+  "spatial_quality_score": 28420.91609323348,
+  "std_delta2": 21211.361328125,
+  "tile_std_delta2": 14829.644793309035,
   "variant": "AC0090_L",
   "w": 40
 }

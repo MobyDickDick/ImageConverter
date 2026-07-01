@@ -1,0 +1,83 @@
+{
+  "actual_iterations": 64,
+  "base": "AR0103",
+  "best_error": 32.254273504273506,
+  "best_iter": 1,
+  "convergence": "",
+  "diff_error_distribution_reason": "error_energy_concentrated_in_worst_tiles",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 0.375,
+  "error_per_pixel": 0.03445969391482212,
+  "error_pixel_cluster_count": 22.0,
+  "error_pixel_cluster_excess": 0.21701673031460267,
+  "error_pixel_count": 235.0,
+  "filename": "AR0103.jpg",
+  "h": 39,
+  "largest_error_pixel_cluster_fraction": 0.46808510638297873,
+  "localized_error_fraction": 0.7088480425845631,
+  "mean_delta2": 7695.09619140625,
+  "params": {
+    "badge_param_source_ref": "AR0102",
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "AR0103",
+        "source": "base_name",
+        "text": "Wie AR0102, nach rechts gedreht, Text horizontal"
+      }
+    ],
+    "documented_alias_refs": [
+      "AR0102"
+    ],
+    "elements": [
+      "SEMANTIC: waagrechter Strich links vom Kreis",
+      "SEMANTIC: waagrechter Strich rechts vom Kreis",
+      "REFERENZ: Abgeleitet aus AR0101",
+      "REFERENZ: Abgeleitet aus AR0102"
+    ],
+    "geometry_ir": [],
+    "label": "M",
+    "mode": "semantic_badge",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {
+      "description_heuristic": [
+        "SEMANTIC: waagrechter Strich links vom Kreis",
+        "SEMANTIC: waagrechter Strich rechts vom Kreis"
+      ]
+    },
+    "top_source_ref": null,
+    "variant_name": "AR0103"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 20585.48805395506,
+  "std_delta2": 15047.67578125,
+  "tile_std_delta2": 9968.235220322207,
+  "variant": "AR0103",
+  "w": 24
+}

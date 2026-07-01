@@ -4,10 +4,16 @@
   "best_error": 31.314166666666665,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 1.3119999999998981,
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 0.734000000054948,
   "error_per_pixel": 0.07828541666666666,
+  "error_pixel_cluster_count": 3.0,
+  "error_pixel_cluster_excess": 0.41916666666666663,
+  "error_pixel_count": 99.0,
   "filename": "AC0402_2S_sia.jpg",
   "h": 20,
+  "largest_error_pixel_cluster_fraction": 0.6666666666666666,
   "localized_error_fraction": 0.820423148748697,
   "mean_delta2": 8938.58203125,
   "params": {
@@ -145,6 +151,29 @@
         "steps": []
       },
       "final_error": 31.314166666666665,
+      "generic_element_refinement": {
+        "final_error": 31.314166666666665,
+        "initial_error": 31.314166666666665,
+        "mode": "elementwise_geometry_ir",
+        "steps": [
+          {
+            "accepted": false,
+            "best_delta": 0.0,
+            "element": "compressor_circle",
+            "error_after": 31.314166666666665,
+            "error_before": 31.314166666666665,
+            "step_index": 0
+          },
+          {
+            "accepted": false,
+            "best_delta": 0.0,
+            "element": "upward_compressor",
+            "error_after": 31.314166666666665,
+            "error_before": 31.314166666666665,
+            "step_index": 1
+          }
+        ]
+      },
       "initial_error": 46.9925,
       "mode": "geometry_ir_raster_registration",
       "parameters": {
@@ -338,7 +367,7 @@
     "variant_name": "AC0402_2S_SIA"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 25095.76688679019,
+  "spatial_quality_score": 26969.144704173,
   "std_delta2": 15771.86328125,
   "tile_std_delta2": 12521.286606248252,
   "variant": "AC0402_2S_SIA",

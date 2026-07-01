@@ -1,0 +1,68 @@
+{
+  "actual_iterations": 64,
+  "base": "ALE3",
+  "best_error": 44.04011437908497,
+  "best_iter": 1,
+  "convergence": "",
+  "elapsed_seconds": 0.7660000000032596,
+  "error_per_pixel": 0.005397072840574138,
+  "filename": "ALE3.jpg",
+  "h": 96,
+  "localized_error_fraction": 0.5543558275687038,
+  "mean_delta2": 9591.6806640625,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "insufficient_description",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [
+        "missing_geometry_terms"
+      ],
+      "has_conditions": false,
+      "has_geometry_terms": false,
+      "has_reference": false,
+      "status": "insufficient_description"
+    },
+    "description_fragments": [
+      {
+        "key": "ALE3",
+        "source": "base_name",
+        "text": "sehr komplexe Form, wahrscheinlich sehr schwierig zum nachzeichnen. Es ist ein Photo eines dreiphasigen elektrischen Energiehählers. Das sollte wahrscheinlich stark schematisiert nachgezeichnet werden."
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [
+      "MANUELL: Beschreibung unzureichend (fehlende Geometriehinweise oder leerer Beschreibungstext)."
+    ],
+    "geometry_ir": [],
+    "label": "",
+    "mode": "insufficient_description",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "ALE3"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 19566.26325784406,
+  "std_delta2": 13181.9892578125,
+  "tile_std_delta2": 8050.902444083878,
+  "variant": "ALE3",
+  "w": 85
+}

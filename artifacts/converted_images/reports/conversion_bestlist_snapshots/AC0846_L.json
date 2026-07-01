@@ -1,15 +1,19 @@
 {
   "actual_iterations": 64,
   "base": "AC0846",
-  "best_error": 27.65688888888889,
+  "best_error": 19.245333333333335,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 0.7809999999990396,
-  "error_per_pixel": 0.0245839012345679,
+  "elapsed_seconds": 0.4220000000204891,
+  "error_per_pixel": 0.017106962962962963,
+  "error_pixel_cluster_count": 13.0,
+  "error_pixel_cluster_excess": 0.16989147286821704,
+  "error_pixel_count": 258.0,
   "filename": "AC0846_L.jpg",
   "h": 45,
-  "localized_error_fraction": 0.6564548039317524,
-  "mean_delta2": 7123.43994140625,
+  "largest_error_pixel_cluster_fraction": 0.3992248062015504,
+  "localized_error_fraction": 0.6651397909432444,
+  "mean_delta2": 5197.1171875,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -64,9 +68,9 @@
     "variant_name": "AC0846_L"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 20818.829220241914,
-  "std_delta2": 14403.7099609375,
-  "tile_std_delta2": 9144.764431028987,
+  "spatial_quality_score": 20243.623970476394,
+  "std_delta2": 14112.84765625,
+  "tile_std_delta2": 9063.290348706108,
   "variant": "AC0846_L",
   "w": 25
 }

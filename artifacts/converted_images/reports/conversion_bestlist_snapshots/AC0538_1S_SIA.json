@@ -1,0 +1,76 @@
+{
+  "actual_iterations": 65,
+  "base": "AC0538",
+  "best_error": 28.242916666666666,
+  "best_iter": 1,
+  "convergence": "",
+  "elapsed_seconds": 0.3120000000053551,
+  "error_per_pixel": 0.035303645833333334,
+  "error_pixel_cluster_count": 14.0,
+  "error_pixel_cluster_excess": 0.19861111111111113,
+  "error_pixel_count": 90.0,
+  "filename": "AC0538_1S_sia.jpg",
+  "h": 20,
+  "largest_error_pixel_cluster_fraction": 0.3111111111111111,
+  "localized_error_fraction": 0.9103345138774812,
+  "mean_delta2": 6741.947265625,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": false,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "AC0538",
+        "source": "base_name",
+        "text": "Unzugeordnete Wurzelform aus der Serie AC0538_S_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen."
+      },
+      {
+        "key": "AC0538_1S_sia",
+        "source": "variant_name",
+        "text": "Unzugeordnete Wurzelform aus der Serie AC0538_1S_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen."
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [
+      "MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie."
+    ],
+    "geometry_ir": [],
+    "label": "",
+    "mode": "manual_review",
+    "review_reason": "Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "AC0538_1S_SIA"
+  },
+  "requested_iterations": 65,
+  "spatial_quality_score": 22181.65166412585,
+  "std_delta2": 17462.55078125,
+  "tile_std_delta2": 11771.587317624304,
+  "variant": "AC0538_1S_SIA",
+  "w": 40
+}

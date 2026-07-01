@@ -1,15 +1,15 @@
 {
   "actual_iterations": 64,
   "base": "AC0537",
-  "best_error": 10.80625,
+  "best_error": 14.22375,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 0.8909999999741558,
-  "error_per_pixel": 0.0135078125,
+  "elapsed_seconds": 0.45300000000861473,
+  "error_per_pixel": 0.017779687500000002,
   "filename": "AC0537_S_sia.jpg",
   "h": 40,
   "localized_error_fraction": 0.6017426875301395,
-  "mean_delta2": 2179.2412109375,
+  "mean_delta2": 1709.793701171875,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -60,7 +60,7 @@
   },
   "requested_iterations": 64,
   "spatial_quality_score": 7521.250341561039,
-  "std_delta2": 6831.4228515625,
+  "std_delta2": 4783.06982421875,
   "tile_std_delta2": 3013.643176853335,
   "variant": "AC0537_S_SIA",
   "w": 20

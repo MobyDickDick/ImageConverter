@@ -1,0 +1,70 @@
+{
+  "actual_iterations": 64,
+  "base": "GE1411",
+  "best_error": 21.5792,
+  "best_iter": 1,
+  "convergence": "",
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 0.6870000000344589,
+  "error_per_pixel": 0.03452672,
+  "error_pixel_cluster_count": 15.0,
+  "error_pixel_cluster_excess": 0.4697846153846154,
+  "error_pixel_count": 91.0,
+  "filename": "GE1411_L.jpg",
+  "h": 25,
+  "largest_error_pixel_cluster_fraction": 0.6153846153846154,
+  "localized_error_fraction": 0.7657915360720349,
+  "mean_delta2": 11965.55078125,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "GE1411",
+        "source": "base_name",
+        "text": "Diagrammlinie (x-/y-Achse schwarz) wie bei GE1410, rote Sinuslinie nach oben verschoben"
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [],
+    "geometry_ir": [],
+    "label": "M",
+    "mode": "auto",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "GE1411_L"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 25294.448379496105,
+  "std_delta2": 36455.19921875,
+  "tile_std_delta2": 10277.658253756617,
+  "variant": "GE1411_L",
+  "w": 25
+}

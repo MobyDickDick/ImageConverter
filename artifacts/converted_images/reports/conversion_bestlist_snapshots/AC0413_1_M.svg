@@ -1,5 +1,6 @@
 <svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-  <g transform="translate(15.000 15.000) rotate(270) scale(1.0000) translate(-15.000 -15.000)">
-<ellipse id="perception_circle_background" cx="21" cy="18" rx="17" ry="17" fill="#E03F61" stroke="#D36079" stroke-width="7.14"/>
+  <g transform="translate(15.000 15.000) rotate(180) scale(1.0000) translate(-15.000 -15.000)">
+<ellipse id="pump_circle" cx="15" cy="15.3" rx="14.259" ry="13.968" fill="#de2048" stroke="#9a7d82" stroke-width="1.436"/>
+  <polygon id="pump_triangle" points="6.057,8.607 23.943,8.607 15,26.307" fill="#e7e7e7"/>
   </g>
 </svg>

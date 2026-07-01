@@ -1,18 +1,11 @@
 <svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-  <g transform="translate(15.000 15.000) rotate(90) scale(0.6546) translate(-15.000 -15.000)">
-<g transform="translate(30.000 10.000) rotate(180) scale(1.0000) translate(-30.000 -10.000)">
-<g transform="translate(60.000 10.000) rotate(0) scale(1.0000) translate(-60.000 -10.000)">
-<g transform="translate(10.000 10.000) rotate(90) scale(1.0000) translate(-10.000 -10.000)">
-<g transform="translate(10.000 30.000) rotate(180) scale(0.9000) translate(-10.000 -30.000)">
-<g transform="translate(17.500 55.500) rotate(180) scale(0.7621) translate(-17.500 -55.500)">
-<line x1="5.5000" y1="0.0000" x2="5.5000" y2="128.0000" stroke="#2f6bff" stroke-width="2.0000" stroke-linecap="butt"/>
-  <polygon points="5.5000,129.0000 0.5000,137.0000 10.5000,137.0000" fill="#2f6bff"/>
-  <line x1="33.5000" y1="0.0000" x2="33.5000" y2="128.0000" stroke="#e53935" stroke-width="2.0000" stroke-linecap="butt"/>
-  <polygon points="33.5000,137.0000 28.5000,129.0000 38.5000,129.0000" fill="#e53935"/>
-  </g>
-  </g>
-  </g>
-  </g>
-  </g>
-  </g>
+  <defs>
+    <linearGradient id="geometry-ir-horizontal-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8f8f8f"/>
+      <stop offset="50%" stop-color="#dedede"/>
+      <stop offset="100%" stop-color="#8f8f8f"/>
+    </linearGradient>
+  </defs>
+  <rect id="background_gradient" x="15.9" y="12.75" width="4.8" height="4.2" fill="url(#geometry-ir-horizontal-gradient)" stroke="none"/>
+  <rect id="main_rect" x="15.9" y="13.35" width="4.8" height="4.2" fill="none" stroke="#8a8a8a" stroke-width="2.342"/>
 </svg>

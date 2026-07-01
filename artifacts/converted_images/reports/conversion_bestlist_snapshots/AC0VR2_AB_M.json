@@ -1,15 +1,31 @@
 {
+  "actual_iterations": 64,
   "base": "AC0VR2",
-  "best_error": 14.777777777777779,
+  "best_error": 24.566296296296297,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.008209876543209878,
+  "elapsed_seconds": 0.4529999999940628,
+  "error_per_pixel": 0.013647942386831277,
   "filename": "AC0VR2_AB_M.jpg",
   "h": 30,
-  "mean_delta2": 1282.4599609375,
+  "localized_error_fraction": 0.3693170984104018,
+  "mean_delta2": 3445.985595703125,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
     "description_contract": {
       "deficits": [],
       "has_conditions": true,
@@ -47,7 +63,10 @@
     "top_source_ref": null,
     "variant_name": "AC0VR2_AB_M"
   },
-  "std_delta2": 2392.556884765625,
+  "requested_iterations": 64,
+  "spatial_quality_score": 180897.5120928718,
+  "std_delta2": 5675.0478515625,
+  "tile_std_delta2": 37307.35857366648,
   "variant": "AC0VR2_AB_M",
   "w": 60
 }

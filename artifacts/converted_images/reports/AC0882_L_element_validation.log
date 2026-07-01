@@ -1,15 +1,15 @@
-run-meta: run_seed=676876676 pass_seed_offset=0 nonce_ns=1782051062873954100
+run-meta: run_seed=205197064 pass_seed_offset=0 nonce_ns=1782590213064930200
 status=semantic_ok
 quality=borderline
 quality_reason=semantic_ok_trotz_hohem_elementfehler:circle=154.191
 quality_elevated_elements=arm,circle,text
-redraw_variation: seed=683368162834 changed_params=cx:26.500->26.561 | cy:12.000->12.071 | r:10.500->10.317 | stroke_circle:1.000->0.946 | arm_stroke:1.000->0.896
+redraw_variation: seed=207630636376 changed_params=cx:26.500->26.251 | cy:12.000->11.847 | r:10.500->10.493 | stroke_circle:1.000->1.045 | arm_stroke:1.000->0.914
 semantic-guard: Text bewusst deaktiviert (plain-ring Familie ohne Buchstabe).
 Runde 1: elementweise Validierung gestartet
 circle: Fehler=154.191
 circle: Breiten-Bracketing übersprungen (stroke_circle: current=1.000, Range=1.000..1.000)
 circle: Mittelpunkt-Bracketing cx 22.500->26.500, cy 12.500->12.000 (best_err=122.187)
-perf_probe: circle_center_elapsed round=1 elapsed=0.05s
+perf_probe: circle_center_elapsed round=1 elapsed=0.02s
 circle: Radius-Bracketing r 11.750->10.500 (best_err=120.370, full_err=19.540); Kandidaten=10.575->120.370, 11.000->122.187, 11.500->122.187, 12.000->122.187
 perf_probe: circle_radius_elapsed round=1 elapsed=0.00s
 arm: Fehler=73.031

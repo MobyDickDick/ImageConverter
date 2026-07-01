@@ -1,5 +1,5 @@
 <svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-  <g transform="translate(15.000 15.000) rotate(180) scale(1.2500) translate(-15.000 -15.000)">
-<ellipse id="perception_circle_background" cx="20" cy="20" rx="18" ry="18" fill="#E25C79" stroke="#D42D53" stroke-width="1.44"/>
-  </g>
+  <ellipse id="compressor_circle" cx="15" cy="15" rx="13.2" ry="13.2" fill="#45aa5e" stroke="#8d8d8d" stroke-width="3.576"/>
+  <path id="upward_compressor_left_line" d="M 9.192 22.392 L 12.888 6.024" stroke="#d7d7d7" stroke-width="8.225" fill="none" stroke-linecap="round"/>
+  <path id="upward_compressor_right_line" d="M 20.808 22.392 L 17.112 6.024" stroke="#d7d7d7" stroke-width="8.225" fill="none" stroke-linecap="round"/>
 </svg>

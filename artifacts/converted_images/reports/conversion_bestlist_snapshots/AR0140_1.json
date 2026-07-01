@@ -1,15 +1,21 @@
 {
   "actual_iterations": 64,
   "base": "AR0140",
-  "best_error": 43.322916666666664,
+  "best_error": 36.0375,
   "best_iter": 1,
   "convergence": "",
-  "elapsed_seconds": 0.9219999999913853,
-  "error_per_pixel": 0.027076822916666667,
+  "diff_error_distribution_reason": "no_dominant_error_cluster_detected",
+  "diff_error_distribution_status": "random_like",
+  "elapsed_seconds": 0.8440000000409782,
+  "error_per_pixel": 0.0225234375,
+  "error_pixel_cluster_count": 35.0,
+  "error_pixel_cluster_excess": 0.0,
+  "error_pixel_count": 400.0,
   "filename": "AR0140_1.jpg",
   "h": 40,
-  "localized_error_fraction": 0.4595574727901352,
-  "mean_delta2": 8536.3115234375,
+  "largest_error_pixel_cluster_fraction": 0.1775,
+  "localized_error_fraction": 0.3625317539410595,
+  "mean_delta2": 5740.92138671875,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
@@ -106,7 +112,30 @@
         "mode": "right_rotated_valve_geometry",
         "steps": []
       },
-      "final_error": 76.686875,
+      "final_error": 75.705625,
+      "generic_element_refinement": {
+        "final_error": 75.705625,
+        "initial_error": 76.686875,
+        "mode": "elementwise_geometry_ir",
+        "steps": [
+          {
+            "accepted": true,
+            "best_delta": 0.71145833333334,
+            "element": "main_rect",
+            "error_after": 75.97541666666666,
+            "error_before": 76.686875,
+            "step_index": 0
+          },
+          {
+            "accepted": true,
+            "best_delta": 0.2697916666666629,
+            "element": "diagonal_1_tr_bl",
+            "error_after": 75.705625,
+            "error_before": 75.97541666666666,
+            "step_index": 1
+          }
+        ]
+      },
       "initial_error": 105.7075,
       "mode": "geometry_ir_raster_registration",
       "parameters": {
@@ -351,7 +380,7 @@
           0.3923999999999999,
           0.8587999999999999
         ],
-        "fill": "#d8d8d8",
+        "fill": "#f2b8b4",
         "id": "main_rect",
         "kind": "RectBorder",
         "stroke": "#666666",
@@ -364,7 +393,7 @@
         "kind": "DiagonalBand",
         "rect_ref": "main_rect",
         "stroke": "#707070",
-        "stroke_width": 0.21465
+        "stroke_width": 0.1824525
       }
     ],
     "semantic_conflicts": [],
@@ -378,9 +407,9 @@
     "variant_name": "AR0140_1"
   },
   "requested_iterations": 64,
-  "spatial_quality_score": 14687.837537872823,
-  "std_delta2": 8992.744140625,
-  "tile_std_delta2": 4784.445316488803,
+  "spatial_quality_score": 8212.430805833497,
+  "std_delta2": 4691.63525390625,
+  "tile_std_delta2": 2029.3542512963431,
   "variant": "AR0140_1",
   "w": 40
 }

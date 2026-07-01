@@ -1,0 +1,78 @@
+{
+  "actual_iterations": 64,
+  "base": "AC0537",
+  "best_error": 10.686111111111112,
+  "best_iter": 1,
+  "convergence": "",
+  "diff_error_distribution_reason": "upper_quartile_error_pixels_form_large_connected_component",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 0.609000000054948,
+  "error_per_pixel": 0.005936728395061729,
+  "error_pixel_cluster_count": 17.0,
+  "error_pixel_cluster_excess": 0.3709477124183007,
+  "error_pixel_count": 272.0,
+  "filename": "AC0537_M_sia.jpg",
+  "h": 60,
+  "largest_error_pixel_cluster_fraction": 0.5220588235294118,
+  "localized_error_fraction": 0.7389877416868637,
+  "mean_delta2": 2584.848388671875,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": true,
+      "has_geometry_terms": true,
+      "has_reference": false,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "AC0537",
+        "source": "base_name",
+        "text": "Unzugeordnete Wurzelform aus der Serie AC0537_S_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen."
+      },
+      {
+        "key": "AC0537_M_sia",
+        "source": "variant_name",
+        "text": "Unzugeordnete Wurzelform aus der Serie AC0537_M_sia. Das Symbol liegt derzeit nur als einzelnes, noch nicht fachlich klassifiziertes Bildobjekt vor. Dokumentiert ist die dokumentierte Variante (sia). Bitte einer finalen Wurzelform-Kategorie zuordnen."
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [
+      "MANUELL: Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie."
+    ],
+    "geometry_ir": [],
+    "label": "",
+    "mode": "manual_review",
+    "review_reason": "Beschreibung fordert manuelle Zuordnung zu einer finalen Wurzelform-Kategorie.",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "AC0537_M_SIA"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 8898.892291072583,
+  "std_delta2": 8390.0693359375,
+  "tile_std_delta2": 3722.2923151191426,
+  "variant": "AC0537_M_SIA",
+  "w": 30
+}

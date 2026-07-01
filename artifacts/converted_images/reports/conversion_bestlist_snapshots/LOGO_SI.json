@@ -1,0 +1,74 @@
+{
+  "actual_iterations": 64,
+  "base": "LOGO",
+  "best_error": 22.608521303258147,
+  "best_iter": 1,
+  "convergence": "",
+  "diff_error_distribution_reason": "error_energy_concentrated_in_worst_tiles",
+  "diff_error_distribution_status": "structured",
+  "elapsed_seconds": 0.8440000000409782,
+  "error_per_pixel": 0.0013599110558350765,
+  "error_pixel_cluster_count": 16.0,
+  "error_pixel_cluster_excess": 0.19918594299957543,
+  "error_pixel_count": 2745.0,
+  "filename": "LOGO_SI.JPG",
+  "h": 95,
+  "largest_error_pixel_cluster_fraction": 0.36429872495446264,
+  "localized_error_fraction": 0.9258608925105763,
+  "mean_delta2": 12430.9248046875,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "insufficient_description",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [
+        "missing_geometry_terms"
+      ],
+      "has_conditions": false,
+      "has_geometry_terms": false,
+      "has_reference": false,
+      "status": "insufficient_description"
+    },
+    "description_fragments": [
+      {
+        "key": "LOGO",
+        "source": "base_name",
+        "text": "sehr komplexe Form, wahrscheinlich sehr schwierig zum nachzeichnen. Das ist eine Abbildung, welche auf dem Netz zu finden ist, jedoch verkleinert wurde. Es zeigt 6 kleine Bildschirme um einen zentralen grösseren Bildschrim. Der zentrale Bildschirm hat eine Tastatur und einen dunkelblauen Untergrund. Alle Bildeschirme sind parallel angeordnet."
+      }
+    ],
+    "documented_alias_refs": [],
+    "elements": [
+      "MANUELL: Beschreibung unzureichend (fehlende Geometriehinweise oder leerer Beschreibungstext)."
+    ],
+    "geometry_ir": [],
+    "label": "",
+    "mode": "insufficient_description",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {},
+    "top_source_ref": null,
+    "variant_name": "LOGO_SI"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 41908.091528788,
+  "std_delta2": 43229.78125,
+  "tile_std_delta2": 20322.868551015265,
+  "variant": "LOGO_SI",
+  "w": 175
+}

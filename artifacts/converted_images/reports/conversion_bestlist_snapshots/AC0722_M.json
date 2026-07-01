@@ -1,15 +1,65 @@
 {
+  "actual_iterations": 64,
   "base": "AC0722",
-  "best_error": 22.31,
+  "best_error": 21.69857142857143,
   "best_iter": 1,
   "convergence": "",
-  "error_per_pixel": 0.03187142857142857,
+  "elapsed_seconds": 0.5939999999973224,
+  "error_per_pixel": 0.03099795918367347,
   "filename": "AC0722_M.jpg",
   "h": 20,
-  "mean_delta2": 5563.0244140625,
+  "localized_error_fraction": 0.8033961326215253,
+  "mean_delta2": 4512.4501953125,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
+    "description_constraints": {
+      "elements": [
+        {
+          "body_bbox": [
+            0.378,
+            0.04,
+            0.467,
+            0.92
+          ],
+          "body_fill": "#d92645",
+          "body_stroke": "#a0a0a0",
+          "body_stroke_width": 0.04,
+          "confidence": 0.75,
+          "connector": [
+            [
+              0.0,
+              0.5
+            ],
+            [
+              0.378,
+              0.5
+            ]
+          ],
+          "connector_stroke": "#808080",
+          "connector_width": 0.08,
+          "font_size": 0.44,
+          "font_weight": "600",
+          "id": "description_element_1",
+          "kind": "LeftRotatedSquareKelleTGlyph",
+          "label": "T",
+          "label_center": [
+            0.611,
+            0.52
+          ],
+          "label_fill": "#dedede",
+          "source": "description"
+        }
+      ],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.75,
+        "reasons": [],
+        "status": "ok"
+      }
+    },
     "description_contract": {
       "deficits": [],
       "has_conditions": true,
@@ -28,9 +78,146 @@
       "AC0701"
     ],
     "elements": [],
-    "geometry_ir": [],
+    "geometry_ir": [
+      {
+        "body_bbox": [
+          0.378,
+          0.04,
+          0.467,
+          0.92
+        ],
+        "body_fill": "#d92645",
+        "body_stroke": "#a0a0a0",
+        "body_stroke_width": 0.04,
+        "connector": [
+          [
+            0.0,
+            0.5
+          ],
+          [
+            0.378,
+            0.5
+          ]
+        ],
+        "connector_stroke": "#808080",
+        "connector_width": 0.08,
+        "font_size": 0.44,
+        "font_weight": "600",
+        "id": "left_rotated_square_kelle_t",
+        "kind": "LeftRotatedSquareKelleTGlyph",
+        "label": "T",
+        "label_center": [
+          0.611,
+          0.52
+        ],
+        "label_fill": "#dedede"
+      }
+    ],
+    "geometry_ir_optimizer_result": {
+      "element_refinement": {
+        "final_error": 38.908095238095235,
+        "initial_error": 38.908095238095235,
+        "mode": "right_rotated_valve_geometry",
+        "steps": []
+      },
+      "final_error": 38.908095238095235,
+      "initial_error": 52.69714285714286,
+      "mode": "geometry_ir_raster_registration",
+      "parameters": {
+        "scale_x": 0.6299999999999999,
+        "scale_y": 0.88,
+        "stroke_scale": 1.25,
+        "translate_x": -0.04,
+        "translate_y": 0.0
+      },
+      "steps": [
+        {
+          "best_delta": 5.698571428571427,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.85
+        },
+        {
+          "best_delta": 0.7371428571428567,
+          "parameter": "stroke_scale",
+          "stage": 0,
+          "value": 1.25
+        },
+        {
+          "best_delta": 3.401904761904767,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.7
+        },
+        {
+          "best_delta": 2.7080952380952326,
+          "parameter": "scale_x",
+          "stage": 0,
+          "value": 0.5499999999999999
+        },
+        {
+          "best_delta": 0.5223809523809564,
+          "parameter": "translate_x",
+          "stage": 1,
+          "value": -0.04
+        },
+        {
+          "best_delta": 0.2871428571428538,
+          "parameter": "scale_x",
+          "stage": 1,
+          "value": 0.6299999999999999
+        },
+        {
+          "best_delta": 0.0019047619047611875,
+          "parameter": "scale_y",
+          "stage": 1,
+          "value": 0.92
+        },
+        {
+          "best_delta": 0.431904761904768,
+          "parameter": "scale_y",
+          "stage": 2,
+          "value": 0.88
+        }
+      ]
+    },
     "label": "M",
     "mode": "auto",
+    "optimized_geometry_ir": [
+      {
+        "body_bbox": [
+          0.38314000000000004,
+          0.0952,
+          0.29420999999999997,
+          0.8096
+        ],
+        "body_fill": "#d92645",
+        "body_stroke": "#a0a0a0",
+        "body_stroke_width": 0.04,
+        "connector": [
+          [
+            0.14500000000000005,
+            0.5
+          ],
+          [
+            0.38314000000000004,
+            0.5
+          ]
+        ],
+        "connector_stroke": "#808080",
+        "connector_width": 0.1,
+        "font_size": 0.27719999999999995,
+        "font_weight": "600",
+        "id": "left_rotated_square_kelle_t",
+        "kind": "LeftRotatedSquareKelleTGlyph",
+        "label": "T",
+        "label_center": [
+          0.5299299999999999,
+          0.5176000000000001
+        ],
+        "label_fill": "#dedede"
+      }
+    ],
     "semantic_conflicts": [],
     "semantic_priority_order": [
       "family_rule",
@@ -41,7 +228,10 @@
     "top_source_ref": null,
     "variant_name": "AC0722_M"
   },
-  "std_delta2": 12587.60546875,
+  "requested_iterations": 64,
+  "spatial_quality_score": 39516.53015830984,
+  "std_delta2": 10932.216796875,
+  "tile_std_delta2": 21411.348058103074,
   "variant": "AC0722_M",
   "w": 35
 }

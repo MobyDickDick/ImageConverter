@@ -1,6 +1,79 @@
 {
+  "actual_iterations": 64,
+  "base": "AC0834",
+  "best_error": 13.731555555555556,
+  "best_iter": 1,
+  "convergence": "",
+  "elapsed_seconds": 0.9060000000172295,
+  "error_per_pixel": 0.012205827160493827,
+  "error_pixel_cluster_count": 23.0,
+  "error_pixel_cluster_excess": 0.41902564102564105,
+  "error_pixel_count": 156.0,
   "filename": "AC0834_L.jpg",
-  "mean_delta2": 3420.221435546875,
-  "std_delta2": 10831.6953125,
-  "variant": "AC0834_L"
+  "h": 25,
+  "largest_error_pixel_cluster_fraction": 0.5576923076923077,
+  "localized_error_fraction": 0.8222105696730988,
+  "mean_delta2": 3045.10400390625,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "AC0834",
+        "source": "base_name",
+        "text": "Wie AC080, jedoch Griff unten (als Kelle ausfeführt) Abweichung: nach links gedreht, Text immer noch horizontal. Der Griff liegt auf einer Symmetrieachse des Kreises."
+      }
+    ],
+    "documented_alias_refs": [
+      "AC080"
+    ],
+    "elements": [
+      "SEMANTIC: Kreis + Buchstabe",
+      "SEMANTIC: waagrechter Strich rechts vom Kreis"
+    ],
+    "geometry_ir": [],
+    "label": "T",
+    "mode": "semantic_badge",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {
+      "description_heuristic": [
+        "SEMANTIC: Kreis + Buchstabe",
+        "SEMANTIC: waagrechter Strich rechts vom Kreis"
+      ],
+      "family_rule": []
+    },
+    "top_source_ref": null,
+    "variant_name": "AC0834_L"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 11633.356348851954,
+  "std_delta2": 9616.55859375,
+  "tile_std_delta2": 6347.866920990424,
+  "variant": "AC0834_L",
+  "w": 45
 }

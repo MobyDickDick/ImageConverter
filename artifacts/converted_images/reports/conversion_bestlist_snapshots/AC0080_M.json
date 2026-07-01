@@ -1,15 +1,35 @@
 {
+  "actual_iterations": 64,
   "base": "AC0080",
   "best_error": 14.423333333333334,
   "best_iter": 1,
   "convergence": "",
+  "elapsed_seconds": 0.17199999999138527,
   "error_per_pixel": 0.004370707070707071,
+  "error_pixel_cluster_count": 7.0,
+  "error_pixel_cluster_excess": 0.3083261938759321,
+  "error_pixel_count": 382.0,
   "filename": "AC0080_M.jpg",
   "h": 110,
+  "largest_error_pixel_cluster_fraction": 0.42408376963350786,
+  "localized_error_fraction": 0.7536435604717161,
   "mean_delta2": 5009.3564453125,
   "params": {
     "bottom_shape": null,
     "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
     "description_contract": {
       "deficits": [],
       "has_conditions": false,
@@ -43,7 +63,10 @@
     "top_source_ref": null,
     "variant_name": "AC0080_M"
   },
+  "requested_iterations": 64,
+  "spatial_quality_score": 15753.951185509854,
   "std_delta2": 16084.4892578125,
+  "tile_std_delta2": 9480.07908446375,
   "variant": "AC0080_M",
   "w": 30
 }

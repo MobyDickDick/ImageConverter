@@ -1,6 +1,79 @@
 {
+  "actual_iterations": 64,
+  "base": "AC0834",
+  "best_error": 17.514666666666667,
+  "best_iter": 1,
+  "convergence": "",
+  "elapsed_seconds": 0.7810000000172295,
+  "error_per_pixel": 0.04670577777777778,
+  "error_pixel_cluster_count": 20.0,
+  "error_pixel_cluster_excess": 0.3024086021505376,
+  "error_pixel_count": 62.0,
   "filename": "AC0834_S.jpg",
+  "h": 15,
+  "largest_error_pixel_cluster_fraction": 0.46774193548387094,
+  "localized_error_fraction": 0.8332186699601303,
   "mean_delta2": 3770.97607421875,
+  "params": {
+    "bottom_shape": null,
+    "contract_status": "ok",
+    "description_constraints": {
+      "elements": [],
+      "relations": [],
+      "schema_version": "description_geometry_constraints_v1",
+      "source": "description",
+      "uncertainty": {
+        "confidence": 0.0,
+        "reasons": [
+          "no_supported_geometry_constraint"
+        ],
+        "status": "needs_review"
+      }
+    },
+    "description_contract": {
+      "deficits": [],
+      "has_conditions": false,
+      "has_geometry_terms": true,
+      "has_reference": true,
+      "status": "ok"
+    },
+    "description_fragments": [
+      {
+        "key": "AC0834",
+        "source": "base_name",
+        "text": "Wie AC080, jedoch Griff unten (als Kelle ausfeführt) Abweichung: nach links gedreht, Text immer noch horizontal. Der Griff liegt auf einer Symmetrieachse des Kreises."
+      }
+    ],
+    "documented_alias_refs": [
+      "AC080"
+    ],
+    "elements": [
+      "SEMANTIC: Kreis + Buchstabe",
+      "SEMANTIC: waagrechter Strich rechts vom Kreis"
+    ],
+    "geometry_ir": [],
+    "label": "T",
+    "mode": "semantic_badge",
+    "semantic_conflicts": [],
+    "semantic_priority_order": [
+      "family_rule",
+      "layout_override",
+      "description_heuristic"
+    ],
+    "semantic_sources": {
+      "description_heuristic": [
+        "SEMANTIC: Kreis + Buchstabe",
+        "SEMANTIC: waagrechter Strich rechts vom Kreis"
+      ],
+      "family_rule": []
+    },
+    "top_source_ref": null,
+    "variant_name": "AC0834_S"
+  },
+  "requested_iterations": 64,
+  "spatial_quality_score": 12175.407537565177,
   "std_delta2": 11067.12890625,
-  "variant": "AC0834_S"
+  "tile_std_delta2": 6398.566220547978,
+  "variant": "AC0834_S",
+  "w": 25
 }
