@@ -64,7 +64,15 @@ def selectOpenQualityCasesImpl(
         variant = str(row.get("variant", "")).upper()
         if variant and variant in skips:
             continue
-        if math.isfinite(allowed_error_per_pixel) and err <= allowed_error_per_pixel:
+        diff_status = str(row.get("diff_error_distribution_status", "") or "").strip().lower()
+        # A low aggregate error can still hide a visible localized contour in
+        # the diff image.  Keep such rows eligible for the next quality pass
+        # instead of treating the warning as a final "poor conversion" verdict.
+        if (
+            diff_status != "structured"
+            and math.isfinite(allowed_error_per_pixel)
+            and err <= allowed_error_per_pixel
+        ):
             continue
         open_rows.append(row)
 

@@ -489,7 +489,7 @@ def convertOneImpl(
     print_fn(
         f"[INFO] Konvertiere {filename} | "
         f"Parameter: Iterationen={max(1, int(iteration_budget))}, "
-        f"Validierungsrunden={max(1, int(badge_rounds))}"
+        f"max. Validierungsrunden={max(1, int(badge_rounds))}"
     )
     try:
         with _wallClockTimeout(run_timeout_sec):
@@ -923,7 +923,8 @@ def convertOneImpl(
     )
     if error_distribution_status == "structured":
         print_fn(
-            f"[WARN] {filename}: Differenzbild-Fehlerpixel sind nicht zufällig verteilt "
+            f"[WARN] {filename}: Differenzbild-Fehlerpixel sind lokalisiert; "
+            f"Variante bleibt für einen Qualitäts-Nachbesserungslauf vorgemerkt "
             f"({error_distribution_reason}; "
             f"largest_cluster_fraction={_formatQualityValue(row['largest_error_pixel_cluster_fraction'])}, "
             f"localized_error_fraction={_formatQualityValue(row['localized_error_fraction'])})."
