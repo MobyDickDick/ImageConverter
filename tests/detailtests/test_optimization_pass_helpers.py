@@ -33,3 +33,26 @@ def test_compute_successful_conversions_error_threshold_uses_mean_plus_two_sigma
     )
 
     assert threshold == 4.0
+
+
+def test_select_open_quality_cases_keeps_structured_residual_below_error_threshold() -> None:
+    rows = [
+        {
+            "variant": "AC0814_L",
+            "error_per_pixel": 0.2,
+            "diff_error_distribution_status": "structured",
+        },
+        {
+            "variant": "AC0814_M",
+            "error_per_pixel": 0.3,
+            "diff_error_distribution_status": "random_like",
+        },
+    ]
+
+    selected = pass_helpers.selectOpenQualityCasesImpl(
+        rows,
+        allowed_error_per_pixel=1.0,
+        skip_variants=set(),
+    )
+
+    assert [entry["variant"] for entry in selected] == ["AC0814_L"]

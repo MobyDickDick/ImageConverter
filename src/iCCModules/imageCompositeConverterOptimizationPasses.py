@@ -64,7 +64,13 @@ def selectOpenQualityCasesImpl(
         variant = str(row.get("variant", "")).upper()
         if variant and variant in skips:
             continue
-        if math.isfinite(allowed_error_per_pixel) and err <= allowed_error_per_pixel:
+        distribution_status = str(row.get("diff_error_distribution_status", "")).strip().lower()
+        has_structured_residual = distribution_status == "structured"
+        if (
+            not has_structured_residual
+            and math.isfinite(allowed_error_per_pixel)
+            and err <= allowed_error_per_pixel
+        ):
             continue
         open_rows.append(row)
 
