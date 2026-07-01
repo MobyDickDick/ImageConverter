@@ -101,7 +101,7 @@ def _default_candidate_provider(
                 candidate["stroke_width"] = max(0.001, stroke_width + delta)
                 yield candidate
 
-        if element.get("kind") == "RectBorder":
+        if element.get("kind") in {"RectBorder", "HorizontalRule", "VerticalRule"}:
             for delta in (-0.005, 0.005):
                 candidate = copy.deepcopy(element)
                 candidate["stroke_width"] = max(0.001, stroke_width + delta)
