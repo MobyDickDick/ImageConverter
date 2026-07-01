@@ -828,3 +828,25 @@ def test_default_optimizer_refines_horizontal_rule_stroke_width_with_fine_probe(
     assert result["geometry_ir"][0]["stroke_width"] == pytest.approx(0.060)
     assert result["final_error"] == 0.0
     assert result["steps"][0]["accepted"] is True
+
+
+def test_default_rule_stroke_width_candidates_keep_relative_and_fine_absolute_probes() -> None:
+    element = {
+        "kind": "HorizontalRule",
+        "id": "square_badge_arm",
+        "bbox": [0.02, 0.48, 0.30, 0.08],
+        "stroke": "#666666",
+        "stroke_width": 0.055,
+    }
+
+    candidates = list(optimizer_helpers._default_candidate_provider(element, [element], 0))
+    stroke_widths = [
+        candidate["stroke_width"]
+        for candidate in candidates
+        if candidate.get("id") == "square_badge_arm" and "stroke_width" in candidate
+    ]
+
+    assert any(width == pytest.approx(0.055 * 0.85) for width in stroke_widths)
+    assert any(width == pytest.approx(0.055 * 1.15) for width in stroke_widths)
+    assert any(width == pytest.approx(0.050) for width in stroke_widths)
+    assert any(width == pytest.approx(0.060) for width in stroke_widths)
