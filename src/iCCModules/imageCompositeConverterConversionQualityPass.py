@@ -26,8 +26,11 @@ def runQualityPassesImpl(
     store_conversion_bestlist_snapshot_fn,
     restore_conversion_bestlist_snapshot_fn,
     before_pass_fn=None,
+    continue_after_max_if_improved: bool = False,
 ) -> bool:
-    for pass_idx in range(1, max_quality_passes + 1):
+    pass_idx = 1
+    last_configured_pass = max(0, int(max_quality_passes))
+    while pass_idx <= last_configured_pass:
         if stop_after_failure:
             break
         if before_pass_fn is not None:
@@ -105,6 +108,9 @@ def runQualityPassesImpl(
 
         if not improved_in_pass and not structured_candidates_in_pass:
             break
+        if pass_idx == last_configured_pass and continue_after_max_if_improved:
+            last_configured_pass += 1
+        pass_idx += 1
 
     return stop_after_failure
 

@@ -1342,6 +1342,7 @@ def convertRange(
                 reports_out_dir,
             ),
             before_pass_fn=lambda pass_idx: setattr(Action, "STOCHASTIC_SEED_OFFSET", pass_idx),
+            continue_after_max_if_improved=True,
         )
 
     conversion_finalization_helpers.runConversionFinalizationImpl(
