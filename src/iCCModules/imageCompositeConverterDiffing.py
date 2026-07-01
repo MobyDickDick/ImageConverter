@@ -9,20 +9,25 @@ def createDiffImageImpl(
     np_module,
     focus_mask=None,
 ):
+    """Return a source-image copy with ranked per-pixel delta² errors blacked out.
+
+    The visual diff is intentionally spatial: for every pixel, compute
+    ``(ΔR)² + (ΔG)² + (ΔB)²``, sort those pixel errors descending, and mark the
+    corresponding source-image pixels black.  A successful conversion should
+    therefore show localized black structures rather than an over-random scatter
+    across the original image.
+    """
     if img_svg.shape[:2] != img_orig.shape[:2]:
         img_svg = cv2_module.resize(
             img_svg,
             (img_orig.shape[1], img_orig.shape[0]),
             interpolation=cv2_module.INTER_AREA,
         )
-    orig = img_orig.astype(np_module.int16)
-    svg = img_svg.astype(np_module.int16)
-    dx = np_module.sum(svg - orig, axis=2, dtype=np_module.int32).astype(
-        np_module.float32
-    )
-    norm = np_module.clip(dx / (3.0 * 255.0), -1.0, 1.0)
 
-    mask = None
+    diff = img_svg.astype(np_module.int32) - img_orig.astype(np_module.int32)
+    delta2 = np_module.sum(diff * diff, axis=2)
+
+    mask = delta2 > 0
     if focus_mask is not None:
         if focus_mask.shape[:2] != img_orig.shape[:2]:
             focus_mask = cv2_module.resize(
@@ -30,25 +35,18 @@ def createDiffImageImpl(
                 (img_orig.shape[1], img_orig.shape[0]),
                 interpolation=cv2_module.INTER_NEAREST,
             )
-        mask = focus_mask > 0
-        norm = np_module.where(mask, norm, 0.0)
+        mask = np_module.logical_and(mask, focus_mask > 0)
 
-    mean_tone = np_module.mean(
-        np_module.concatenate((orig, svg), axis=2), axis=2
-    ).astype(np_module.float32)
-    magnitude = np_module.clip(np_module.abs(norm), 0.0, 1.0)
-    positive = norm >= 0.0
-
-    up = mean_tone + magnitude * (255.0 - mean_tone)
-    down = mean_tone * (1.0 - magnitude)
-
-    diff = np_module.zeros_like(img_orig)
-    diff[:, :, 0] = np_module.where(positive, up, down).astype(np_module.uint8)
-    diff[:, :, 1] = np_module.where(positive, up, down).astype(np_module.uint8)
-    diff[:, :, 2] = np_module.where(positive, down, up).astype(np_module.uint8)
-    if mask is not None:
-        diff = np_module.where(mask[:, :, None], diff, 0)
-    return diff
+    ranked_diff = img_orig.copy()
+    changed_indices = np_module.flatnonzero(mask.reshape(-1))
+    if changed_indices.size:
+        flat_delta2 = delta2.reshape(-1)
+        ranked_order = changed_indices[
+            np_module.argsort(flat_delta2[changed_indices], kind="stable")[::-1]
+        ]
+        flat_ranked = ranked_diff.reshape(-1, ranked_diff.shape[2])
+        flat_ranked[ranked_order] = 0
+    return ranked_diff
 
 
 def calculateErrorImpl(img_orig, img_svg, *, cv2_module, np_module) -> float:
@@ -185,15 +183,24 @@ def createCommentedDiffImageImpl(
     if len(image.shape) == 2:
         image = cv2_module.cvtColor(image, cv2_module.COLOR_GRAY2BGR)
     height, width = image.shape[:2]
-    panel_height = 112
+    readable_width = max(width, 640)
+    if readable_width > width:
+        expanded = np_module.full((height, readable_width, 3), 255, dtype=image.dtype)
+        x_offset = (readable_width - width) // 2
+        expanded[:, x_offset : x_offset + width] = image
+        image = expanded
+        width = readable_width
+    panel_height = 148
     panel = np_module.full((panel_height, width, 3), 255, dtype=image.dtype)
     bbox = summary.get("changed_bbox")
     pos = summary.get("max_delta_position")
     lines = [
         title or "Pixel difference diagnostics",
         f"changed_pixels={summary.get('changed_pixels', 0)}/{summary.get('pixel_count', 0)} ({float(summary.get('changed_fraction', 0.0)):.2%})",
-        f"mean_abs_channel_delta={float(summary.get('mean_abs_channel_delta', 0.0)):.3f} mean_delta2={float(summary.get('mean_delta2', 0.0)):.3f}",
-        f"max_delta2={summary.get('max_delta2', 0)} max_abs_channel_delta={summary.get('max_abs_channel_delta', 0)} at={pos} bbox={bbox}",
+        f"mean_abs_channel_delta={float(summary.get('mean_abs_channel_delta', 0.0)):.3f}",
+        f"mean_delta2={float(summary.get('mean_delta2', 0.0)):.3f} max_delta2={summary.get('max_delta2', 0)}",
+        f"max_abs_channel_delta={summary.get('max_abs_channel_delta', 0)} at={pos}",
+        f"changed_bbox={bbox}",
     ]
     font = getattr(cv2_module, "FONT_HERSHEY_SIMPLEX", 0)
     if hasattr(cv2_module, "putText"):
@@ -201,9 +208,9 @@ def createCommentedDiffImageImpl(
             cv2_module.putText(
                 panel,
                 str(line),
-                (6, 18 + idx * 24),
+                (10, 24 + idx * 24),
                 font,
-                0.45,
+                0.58,
                 (0, 0, 0),
                 1,
                 getattr(cv2_module, "LINE_AA", 8),
@@ -213,6 +220,6 @@ def createCommentedDiffImageImpl(
         # keep the artifact visibly annotated by reserving one dark marker row
         # per would-be text line.
         for idx, _line in enumerate(lines):
-            y = min(panel.shape[0] - 1, 18 + idx * 24)
+            y = min(panel.shape[0] - 1, 24 + idx * 24)
             panel[max(0, y - 1) : y + 1, :] = 0
     return np_module.vstack([image, panel])

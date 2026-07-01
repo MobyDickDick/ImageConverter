@@ -43,6 +43,25 @@ def test_calculate_error_impl_uses_mean_absdiff() -> None:
     assert err == 2.5
 
 
+def test_create_diff_image_impl_marks_ranked_delta2_pixels_black() -> None:
+    img_orig = np.full((2, 2, 3), 80, dtype=np.uint8)
+    img_svg = img_orig.copy()
+    img_svg[0, 0] = [100, 100, 100]
+    img_svg[1, 1] = [80, 90, 80]
+
+    diff = diffing_helpers.createDiffImageImpl(
+        img_orig,
+        img_svg,
+        cv2_module=_FakeCv2,
+        np_module=np,
+    )
+
+    assert np.all(diff[0, 0] == 0)
+    assert np.all(diff[1, 1] == 0)
+    assert np.all(diff[0, 1] == img_orig[0, 1])
+    assert np.all(diff[1, 0] == img_orig[1, 0])
+
+
 def test_create_diff_image_impl_applies_focus_mask() -> None:
     img_orig = np.full((2, 2, 3), 80, dtype=np.uint8)
     img_svg = np.full((2, 2, 3), 100, dtype=np.uint8)
@@ -56,10 +75,10 @@ def test_create_diff_image_impl_applies_focus_mask() -> None:
         focus_mask=focus_mask,
     )
 
-    assert np.any(diff[0, 0] != 0)
-    assert np.all(diff[0, 1] == 0)
-    assert np.all(diff[1, 0] == 0)
-    assert np.all(diff[1, 1] == 0)
+    assert np.all(diff[0, 0] == 0)
+    assert np.all(diff[0, 1] == img_orig[0, 1])
+    assert np.all(diff[1, 0] == img_orig[1, 0])
+    assert np.all(diff[1, 1] == img_orig[1, 1])
 
 
 class _CommentCv2(_FakeCv2):
@@ -106,5 +125,5 @@ def test_create_commented_diff_image_appends_description_panel() -> None:
         title="AC0001: source vs render",
     )
 
-    assert commented.shape == (114, 3, 3)
+    assert commented.shape == (150, 640, 3)
     assert np.any(commented[2:] != 255)
