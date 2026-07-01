@@ -923,8 +923,8 @@ def convertOneImpl(
     )
     if error_distribution_status == "structured":
         print_fn(
-            f"[WARN] {filename}: Differenzbild-Fehlerpixel sind lokalisiert; "
-            f"Variante bleibt für einen Qualitäts-Nachbesserungslauf vorgemerkt "
+            f"[WARN] {filename}: Differenzbild-Fehlerpixel sind nicht zufällig verteilt; "
+            f"Variante bleibt für einen Qualitäts-Nachbesserungslauf geöffnet "
             f"({error_distribution_reason}; "
             f"largest_cluster_fraction={_formatQualityValue(row['largest_error_pixel_cluster_fraction'])}, "
             f"localized_error_fraction={_formatQualityValue(row['localized_error_fraction'])})."
