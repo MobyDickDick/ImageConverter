@@ -655,6 +655,18 @@ def test_release_candidate_gate_help_documents_hard_gate_controls() -> None:
     assert "RC_GATE_TEST_CONTEXT" in result.stdout
 
 
+def test_release_candidate_gate_avoids_login_shell_for_inner_commands() -> None:
+    repo_root = Path(__file__).resolve().parents[2]
+
+    for script_name in (
+        "tools/run_release_candidate_gate.sh",
+        "tools/run_ac08_segmented_smoke.sh",
+    ):
+        script = (repo_root / script_name).read_text(encoding="utf-8")
+        assert "bash -lc" not in script
+        assert "bash -c" in script
+
+
 def test_segmented_ac08_smoke_withholds_aggregation_when_one_variant_fails(tmp_path: Path) -> None:
     evidence_dir = tmp_path / "evidence"
     output_dir = tmp_path / "output"

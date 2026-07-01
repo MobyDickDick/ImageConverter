@@ -68,7 +68,7 @@ run_gate_step() {
     --scenario-id "$RC_GATE_SCENARIO_ID" \
     --test-context "$RC_GATE_TEST_CONTEXT" \
     --run-id "$RC_GATE_RUN_ID" \
-    -- bash -lc "$command"
+    -- bash -c "$command"
   local status=$?
   set -e
 
