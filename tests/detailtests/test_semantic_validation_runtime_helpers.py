@@ -43,6 +43,29 @@ def test_collect_semantic_badge_validation_logs_impl_uses_guard_line_and_round_f
     }
 
 
+def test_collect_semantic_badge_validation_logs_impl_caps_oversized_round_budget() -> None:
+    captured: dict[str, object] = {}
+
+    def _validate(img, params, *, max_rounds: int, debug_out_dir: str | None, progress_fn=None):
+        captured["max_rounds"] = max_rounds
+        return ["semantic-check: capped"]
+
+    logs = helpers.collectSemanticBadgeValidationLogsImpl(
+        perc_img="img",
+        badge_params={"draw_text": True, "text_mode": "rf"},
+        badge_validation_rounds=600,
+        debug_dir=None,
+        validate_badge_by_elements_fn=_validate,
+    )
+
+    assert logs == [
+        "semantic-guard: Textmodus aktiv (rf).",
+        "semantic-guard: Validierungsrunden auf 12 begrenzt (angefordert=600).",
+        "semantic-check: capped",
+    ]
+    assert captured["max_rounds"] == 12
+
+
 def test_finalize_semantic_badge_iteration_result_impl_attaches_audit_and_error() -> None:
     captured: dict[str, object] = {}
 

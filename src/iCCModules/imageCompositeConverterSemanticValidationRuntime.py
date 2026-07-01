@@ -2,6 +2,10 @@ from __future__ import annotations
 
 import copy
 
+from src.iCCModules.imageCompositeConverterValidationRounds import (
+    clampBadgeValidationRoundsImpl,
+)
+
 
 def buildSemanticTextModeValidationLogLineImpl(*, draw_text: bool, text_mode: object) -> str:
     if not draw_text:
@@ -28,8 +32,17 @@ def collectSemanticBadgeValidationLogsImpl(
         validation_logs.append("semantic-guard: Elementvalidierung durch neutralen Geometrie-Seed übersprungen.")
         return validation_logs
 
+    max_rounds, rounds_capped, requested_rounds = clampBadgeValidationRoundsImpl(
+        badge_validation_rounds
+    )
+    if rounds_capped:
+        validation_logs.append(
+            "semantic-guard: Validierungsrunden auf "
+            f"{max_rounds} begrenzt (angefordert={requested_rounds})."
+        )
+
     validation_kwargs = {
-        "max_rounds": max(1, int(badge_validation_rounds)),
+        "max_rounds": max_rounds,
         "debug_out_dir": debug_dir,
     }
     if progress_fn is not None:
