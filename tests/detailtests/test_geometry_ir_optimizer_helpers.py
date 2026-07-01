@@ -828,3 +828,50 @@ def test_default_optimizer_refines_horizontal_rule_stroke_width_with_fine_probe(
     assert result["geometry_ir"][0]["stroke_width"] == pytest.approx(0.060)
     assert result["final_error"] == 0.0
     assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_color_patch_bbox_with_subpixel_probe() -> None:
+    ir = [
+        {
+            "kind": "ColorPatch",
+            "id": "neutral_fill_patch",
+            "bbox": [0.10, 0.20, 0.30, 0.40],
+            "fill": "#e8e8e8",
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: 0.0
+        if candidate_ir[0]["bbox"][1] == pytest.approx(0.1975)
+        else 10.0,
+    )
+
+    assert result["geometry_ir"][0]["bbox"][1] == pytest.approx(0.1975)
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True
+
+
+def test_default_optimizer_refines_rect_border_bbox_with_subpixel_probe() -> None:
+    ir = [
+        {
+            "kind": "RectBorder",
+            "id": "neutral_rect_border",
+            "bbox": [0.10, 0.20, 0.30, 0.40],
+            "fill": "#e8e8e8",
+            "stroke": "#8a8a8a",
+        }
+    ]
+
+    result = optimizer_helpers.optimizeGeometryIrSequentiallyImpl(
+        ir,
+        render_fn=lambda candidate_ir: candidate_ir,
+        error_fn=lambda candidate_ir: 0.0
+        if candidate_ir[0]["bbox"][2] == pytest.approx(0.3025)
+        else 10.0,
+    )
+
+    assert result["geometry_ir"][0]["bbox"][2] == pytest.approx(0.3025)
+    assert result["final_error"] == 0.0
+    assert result["steps"][0]["accepted"] is True

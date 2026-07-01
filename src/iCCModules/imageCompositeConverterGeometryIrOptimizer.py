@@ -74,7 +74,7 @@ def _default_candidate_provider(
     bbox = element.get("bbox")
     if isinstance(bbox, list) and len(bbox) == 4:
         coarse_delta = 0.02
-        fine_deltas = (0.005, 0.01) if element.get("kind") in {"ColorPatch", "RectBorder"} else (coarse_delta,)
+        fine_deltas = (0.0025, 0.005, 0.01) if element.get("kind") in {"ColorPatch", "RectBorder"} else (coarse_delta,)
         probes = []
         for idx in range(4):
             for delta in (-coarse_delta, *(-d for d in fine_deltas), *fine_deltas, coarse_delta):
