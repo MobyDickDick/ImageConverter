@@ -43,7 +43,7 @@ def test_calculate_error_impl_uses_mean_absdiff() -> None:
     assert err == 2.5
 
 
-def test_create_diff_image_impl_marks_ranked_delta2_pixels_black() -> None:
+def test_create_diff_image_impl_marks_only_upper_quartile_delta2_pixels_black() -> None:
     img_orig = np.full((2, 2, 3), 80, dtype=np.uint8)
     img_svg = img_orig.copy()
     img_svg[0, 0] = [100, 100, 100]
@@ -57,7 +57,7 @@ def test_create_diff_image_impl_marks_ranked_delta2_pixels_black() -> None:
     )
 
     assert np.all(diff[0, 0] == 0)
-    assert np.all(diff[1, 1] == 0)
+    assert np.all(diff[1, 1] == img_orig[1, 1])
     assert np.all(diff[0, 1] == img_orig[0, 1])
     assert np.all(diff[1, 0] == img_orig[1, 0])
 
@@ -79,6 +79,46 @@ def test_create_diff_image_impl_applies_focus_mask() -> None:
     assert np.all(diff[0, 1] == img_orig[0, 1])
     assert np.all(diff[1, 0] == img_orig[1, 0])
     assert np.all(diff[1, 1] == img_orig[1, 1])
+
+
+def test_create_diff_image_impl_uses_exact_upper_quartile_for_100_pixels() -> None:
+    img_orig = np.full((10, 10, 3), 80, dtype=np.uint8)
+    img_svg = img_orig.copy()
+    for idx in range(100):
+        y, x = divmod(idx, 10)
+        img_svg[y, x] = [80 + idx, 80, 80]
+
+    diff = diffing_helpers.createDiffImageImpl(
+        img_orig,
+        img_svg,
+        cv2_module=_FakeCv2,
+        np_module=np,
+    )
+
+    black_pixels = np.all(diff == 0, axis=2)
+    assert np.count_nonzero(black_pixels) == 25
+    assert np.all(black_pixels.reshape(-1)[75:100])
+    assert not np.any(black_pixels.reshape(-1)[:75])
+
+
+def test_diff_pixel_summary_reports_upper_quartile_not_raw_changed_pixels() -> None:
+    img_orig = np.zeros((10, 10, 3), dtype=np.uint8)
+    img_svg = img_orig.copy()
+    img_svg.reshape(-1, 3)[:71, 0] = 1
+
+    summary = diffing_helpers.diffPixelSummaryImpl(
+        img_orig,
+        img_svg,
+        cv2_module=_FakeCv2,
+        np_module=np,
+    )
+
+    assert summary["pixel_count"] == 100
+    assert summary["changed_pixels"] == 25
+    assert summary["quartile_pixel_count"] == 25
+    assert summary["raw_changed_pixels"] == 71
+    assert summary["changed_fraction"] == 0.25
+    assert summary["raw_changed_fraction"] == 0.71
 
 
 class _CommentCv2(_FakeCv2):

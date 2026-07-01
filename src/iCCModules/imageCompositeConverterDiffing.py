@@ -12,10 +12,10 @@ def createDiffImageImpl(
     """Return a source-image copy with ranked per-pixel delta² errors blacked out.
 
     The visual diff is intentionally spatial: for every pixel, compute
-    ``(ΔR)² + (ΔG)² + (ΔB)²``, sort those pixel errors descending, and mark the
-    corresponding source-image pixels black.  A successful conversion should
-    therefore show localized black structures rather than an over-random scatter
-    across the original image.
+    ``(ΔR)² + (ΔG)² + (ΔB)²``, sort those pixel errors descending, and mark only
+    the upper quartile of source-image pixels black.  A successful conversion
+    should therefore show whether the strongest 25% of pixel errors form
+    localized structures rather than an over-random scatter across the image.
     """
     if img_svg.shape[:2] != img_orig.shape[:2]:
         img_svg = cv2_module.resize(
@@ -27,7 +27,7 @@ def createDiffImageImpl(
     diff = img_svg.astype(np_module.int32) - img_orig.astype(np_module.int32)
     delta2 = np_module.sum(diff * diff, axis=2)
 
-    mask = delta2 > 0
+    eligible_mask = None
     if focus_mask is not None:
         if focus_mask.shape[:2] != img_orig.shape[:2]:
             focus_mask = cv2_module.resize(
@@ -35,18 +35,43 @@ def createDiffImageImpl(
                 (img_orig.shape[1], img_orig.shape[0]),
                 interpolation=cv2_module.INTER_NEAREST,
             )
-        mask = np_module.logical_and(mask, focus_mask > 0)
+        eligible_mask = focus_mask > 0
 
     ranked_diff = img_orig.copy()
-    changed_indices = np_module.flatnonzero(mask.reshape(-1))
-    if changed_indices.size:
-        flat_delta2 = delta2.reshape(-1)
-        ranked_order = changed_indices[
-            np_module.argsort(flat_delta2[changed_indices], kind="stable")[::-1]
-        ]
+    quartile_mask, _selection_count = _top_quartile_delta2_mask(
+        delta2, np_module=np_module, eligible_mask=eligible_mask
+    )
+    ranked_order = np_module.flatnonzero(quartile_mask.reshape(-1))
+    if ranked_order.size:
         flat_ranked = ranked_diff.reshape(-1, ranked_diff.shape[2])
         flat_ranked[ranked_order] = 0
     return ranked_diff
+
+
+def _top_quartile_delta2_mask(delta2, *, np_module, eligible_mask=None):
+    """Return a mask for the highest-delta² quartile of eligible pixels.
+
+    The diagnostics are intentionally capped at the upper quartile: for 100
+    eligible pixels exactly 25 pixels are selected (unless every delta² is 0).
+    """
+    flat_delta2 = delta2.reshape(-1)
+    if eligible_mask is None:
+        eligible_indices = np_module.arange(flat_delta2.size)
+    else:
+        eligible_indices = np_module.flatnonzero(eligible_mask.reshape(-1))
+    selected_mask = np_module.zeros(flat_delta2.shape, dtype=bool)
+    eligible_count = int(eligible_indices.size)
+    if eligible_count == 0:
+        return selected_mask.reshape(delta2.shape), 0
+    eligible_delta2 = flat_delta2[eligible_indices]
+    if not bool(np_module.any(eligible_delta2 > 0)):
+        return selected_mask.reshape(delta2.shape), 0
+    selection_count = max(1, int(np_module.ceil(float(eligible_count) * 0.25)))
+    ranked_order = eligible_indices[
+        np_module.argsort(eligible_delta2, kind="stable")[::-1][:selection_count]
+    ]
+    selected_mask[ranked_order] = True
+    return selected_mask.reshape(delta2.shape), selection_count
 
 
 def calculateErrorImpl(img_orig, img_svg, *, cv2_module, np_module) -> float:
@@ -144,10 +169,13 @@ def diffPixelSummaryImpl(
         diff.astype(np_module.int32) * diff.astype(np_module.int32), axis=2
     )
     changed_mask = np_module.any(abs_diff > 0, axis=2)
-    changed_pixels = int(np_module.count_nonzero(changed_mask))
+    raw_changed_pixels = int(np_module.count_nonzero(changed_mask))
     pixel_count = int(img_orig.shape[0] * img_orig.shape[1])
-    if changed_pixels:
-        ys, xs = np_module.where(changed_mask)
+    quartile_mask, quartile_pixel_count = _top_quartile_delta2_mask(
+        delta2, np_module=np_module
+    )
+    if quartile_pixel_count:
+        ys, xs = np_module.where(quartile_mask)
         max_index = int(np_module.argmax(delta2))
         max_y = int(max_index // img_orig.shape[1])
         max_x = int(max_index % img_orig.shape[1])
@@ -160,9 +188,19 @@ def diffPixelSummaryImpl(
     return {
         "status": "ok",
         "pixel_count": pixel_count,
-        "changed_pixels": changed_pixels,
+        # Backwards-compatible keys now describe the selected upper quartile, not
+        # all non-identical pixels.  The raw count is still available separately.
+        "changed_pixels": quartile_pixel_count,
         "changed_fraction": (
-            (float(changed_pixels) / float(pixel_count)) if pixel_count else 0.0
+            (float(quartile_pixel_count) / float(pixel_count)) if pixel_count else 0.0
+        ),
+        "raw_changed_pixels": raw_changed_pixels,
+        "raw_changed_fraction": (
+            (float(raw_changed_pixels) / float(pixel_count)) if pixel_count else 0.0
+        ),
+        "quartile_pixel_count": quartile_pixel_count,
+        "quartile_fraction": (
+            (float(quartile_pixel_count) / float(pixel_count)) if pixel_count else 0.0
         ),
         "mean_abs_channel_delta": float(abs_diff.mean()) if pixel_count else 0.0,
         "mean_delta2": float(delta2.mean()) if pixel_count else 0.0,
@@ -196,7 +234,7 @@ def createCommentedDiffImageImpl(
     pos = summary.get("max_delta_position")
     lines = [
         title or "Pixel difference diagnostics",
-        f"changed_pixels={summary.get('changed_pixels', 0)}/{summary.get('pixel_count', 0)} ({float(summary.get('changed_fraction', 0.0)):.2%})",
+        f"upper_quartile_pixels={summary.get('quartile_pixel_count', summary.get('changed_pixels', 0))}/{summary.get('pixel_count', 0)} ({float(summary.get('quartile_fraction', summary.get('changed_fraction', 0.0))):.2%})",
         f"mean_abs_channel_delta={float(summary.get('mean_abs_channel_delta', 0.0)):.3f}",
         f"mean_delta2={float(summary.get('mean_delta2', 0.0)):.3f} max_delta2={summary.get('max_delta2', 0)}",
         f"max_abs_channel_delta={summary.get('max_abs_channel_delta', 0)} at={pos}",
