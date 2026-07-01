@@ -245,7 +245,7 @@ def _default_candidate_provider(
 
     if element.get("kind") in {"ColorPatch", "RectBorder"}:
         fill_opacity = float(element.get("fill_opacity", 1.0))
-        for candidate_opacity in (0.75, 0.85, 0.9, 0.95, 1.0):
+        for candidate_opacity in (0.75, 0.85, 0.9, 0.925, 0.95, 0.975, 1.0):
             if abs(candidate_opacity - fill_opacity) < 1e-9:
                 continue
             candidate = copy.deepcopy(element)
@@ -253,7 +253,7 @@ def _default_candidate_provider(
             yield candidate
 
         stroke_opacity = float(element.get("stroke_opacity", 1.0))
-        for candidate_opacity in (0.75, 0.85, 0.9, 0.95, 1.0):
+        for candidate_opacity in (0.75, 0.85, 0.9, 0.925, 0.95, 0.975, 1.0):
             if abs(candidate_opacity - stroke_opacity) < 1e-9:
                 continue
             candidate = copy.deepcopy(element)
