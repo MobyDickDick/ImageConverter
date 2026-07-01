@@ -191,3 +191,63 @@ def test_run_quality_passes_does_not_force_isolated_skipped_variant() -> None:
     )
 
     assert stop is False
+
+
+def test_run_quality_passes_extends_after_configured_max_until_first_non_improvement() -> None:
+    row = {
+        "filename": "AC0821_L.jpg",
+        "variant": "AC0821_L",
+        "error_per_pixel": 1.0,
+        "mean_delta2": 10.0,
+    }
+    result_map = {"AC0821_L.jpg": row}
+    quality_logs: list[dict[str, object]] = []
+    errors = iter([0.8, 0.7, 0.75])
+
+    def _convert_one(filename: str, **_kwargs):
+        return {
+            "filename": filename,
+            "variant": "AC0821_L",
+            "error_per_pixel": next(errors),
+            "mean_delta2": 9.0,
+        }, False
+
+    def _evaluate(old, new):
+        old_error = float(old["error_per_pixel"])
+        new_error = float(new["error_per_pixel"])
+        improved = new_error < old_error
+        return (
+            improved,
+            "accepted_improvement" if improved else "rejected_regression",
+            old_error,
+            new_error,
+            float(old["mean_delta2"]),
+            float(new["mean_delta2"]),
+        )
+
+    stop = conversion_quality_pass_helpers.runQualityPassesImpl(
+        max_quality_passes=2,
+        stop_after_failure=False,
+        deterministic_order=True,
+        rng=object(),
+        base_iterations=5,
+        allowed_error_per_pixel=0.5,
+        skip_variants=set(),
+        result_map=result_map,
+        quality_logs=quality_logs,
+        conversion_bestlist_rows={},
+        convert_one_fn=_convert_one,
+        select_open_quality_cases_fn=lambda rows, **_kwargs: rows,
+        select_middle_lower_tercile_fn=lambda _rows: [],
+        iteration_strategy_for_pass_fn=lambda pass_idx, base: (base + pass_idx, 7),
+        adaptive_iteration_budget_for_quality_row_fn=lambda _row, planned: planned,
+        evaluate_quality_pass_candidate_fn=_evaluate,
+        store_conversion_bestlist_snapshot_fn=lambda _variant, _row: None,
+        restore_conversion_bestlist_snapshot_fn=lambda _variant: None,
+        continue_after_max_if_improved=True,
+    )
+
+    assert stop is False
+    assert [entry["pass"] for entry in quality_logs] == [1, 2, 3]
+    assert quality_logs[-1]["improved"] is False
+    assert result_map["AC0821_L.jpg"]["error_per_pixel"] == 0.7
