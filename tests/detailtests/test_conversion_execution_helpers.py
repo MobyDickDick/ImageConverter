@@ -90,7 +90,7 @@ def test_convert_one_impl_success_reads_convergence_and_delta2(tmp_path: Path) -
     assert row["elapsed_seconds"] >= 0.0
     assert batch_failures == []
     assert console_messages[0] == (
-        "[INFO] Konvertiere AC0800_S.jpg | Parameter: Iterationen=3, Validierungsrunden=5"
+        "[INFO] Konvertiere AC0800_S.jpg | Parameter: Iterationen=3, max. Validierungsrunden=5"
     )
     assert console_messages[1].startswith(
         "[INFO] Konvertiert AC0800_S.jpg | Parameter: mode=semantic_badge | "
