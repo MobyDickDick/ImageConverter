@@ -3988,3 +3988,11 @@ endet. Die Detailableitung und Akzeptanzkriterien stehen in
 - **Sicherung:** Der fokussierte Geometry-IR-Optimierer-Testblock läuft grün; die absolute Runtime-ID-Nullprüfung meldet weiterhin `0 occurrences`. Der isolierte CLI-Lauf für `DLG0021` endet mit Exit `0` und bleibt metrisch stabil.
 - **Perception-Lerneffekt:** `DLG0021` bleibt `nur Sonderfall`; die Änderung verallgemeinert die nachgelagerte Gradient-Stroke-Registrierung, nicht die reine Bilddetektion.
 - **Nächster sinnvoller Schritt:** In der aktiven Plan-B-Liste zu `GE1410_L` rotieren oder weiteres allgemeines Gradient-/Antialiasing-Feintuning untersuchen.
+
+### Fortschritt vs. Blocker (Session 2026-07-02, GE1410_L Subfine-PolygonPath-Stroke-Width-Probes Run UL)
+
+- **Fortschritt:** Der aktive Plan-B-Kandidat `GE1410_L` wurde mit einer weiteren katalogfreien Geometry-IR-Optimiererweiterung abgesichert: `PolygonPath`-Elemente prüfen nun zusätzlich absolute `stroke_width ± 0.0025`-Probes.
+- **Sicherung:** Der fokussierte Geometry-IR-Optimierer-Testblock läuft grün; die absolute Runtime-ID-Nullprüfung meldet weiterhin `0 occurrences`. Der isolierte CLI-Lauf für `GE1410_L` endet mit Exit `0` und bleibt metrisch stabil.
+- **Qualität:** Die isolierte Metrik bleibt gegenüber Run UG stabil bei `Mean-Delta²=763.174377` (`Fehler/Pixel=0.010206`), weil keine neue Konturstärkenprobe den bisherigen Stand weiter verbessert.
+- **Perception-Lerneffekt:** `GE1410_L` bleibt `generalisiert`; die Änderung verallgemeinert die nachgelagerte PolygonPath-Konturregistrierung, nicht die reine Bilddetektion.
+- **Nächster sinnvoller Schritt:** In der aktiven Plan-B-Liste zu `SE0041_1` rotieren oder weiteres allgemeines PolygonPath-Antialiasing-Feintuning untersuchen.
