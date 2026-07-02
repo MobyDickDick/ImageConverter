@@ -2259,6 +2259,7 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
   - [ ] Logname mit Block-ID und Zeitstempel schreiben.
   - [ ] Direkt danach Kurzprüfung: Fehler/Timeout + tatsächlich verarbeitete IDs.
   - **Session 2026-06-26 (Run SY, B-AC08-01):** Standard-Run mit fixer Toolchain und äußerem Timeout erfolgreich ausgeführt: `PYTHONPATH=vendor/linux-py310/site-packages:. PYENV_VERSION=3.10.20 timeout 300 python -m src.iCCModules.imageCompositeConverterCli artifacts/images_to_convert --descriptions-path artifacts/images_to_convert/Finale_Wurzelformen_V3.xml --output-dir /tmp/ic-b-ac08-01-20260626 --start AC0800 --end AC0840 --deterministic-order 2>&1 | tee artifacts/converted_images/reports/B-AC08-01_standard_run_2026-06-26.log` endete mit Exit `0`. Die Kurzprüfung ergab `49` Konvertiert-Meldungen für `29` eindeutige Varianten aus den `10` geplanten Basis-IDs; `AC0820_M.jpg` ist lokal nicht vorhanden, daher ist der Block für vorhandene Inputs vollständig. Auffällig bleiben sechs dokumentierte Fallback-Meldungen für `AC0840_*`/Qualitäts-Nachläufe, aber kein Timeout und kein Batch-Abbruch.
+  - **Session 2026-07-02 (Run UI, B-AC08-02):** Nächster Standard-Run mit fixer Toolchain und äußerem Timeout erfolgreich ausgeführt: `PYTHONPATH=vendor/linux-py310/site-packages:. PYENV_VERSION=3.10.20 timeout 300 python -m src.iCCModules.imageCompositeConverterCli artifacts/images_to_convert --descriptions-path artifacts/images_to_convert/Finale_Wurzelformen_V3.xml --output-dir /tmp/ic-b-ac08-02-20260702 --start AC0841 --end AC0850 --deterministic-order 2>&1 | tee artifacts/converted_images/reports/B-AC08-02_standard_run_2026-07-02.log` endete mit Exit `0`. Die Kurzprüfung ergab `62` Konvertiert-Meldungen für `30` eindeutige Varianten aus allen `10` geplanten Basis-IDs (`AC0841` bis `AC0850`), also keine lokale Datenlücke. Der Lauf enthält keinen Timeout, keinen Traceback und kein `conversion_failed`; auffällig bleiben `4` Semantik-Abgleich-`ERROR`-Meldungen für `AC0843_*` in Fallback-/Nachbesserungspfaden sowie `48` Qualitäts-`WARN`-Meldungen, daher ist der Block als stabiler Lauf mit Qualitätsfolgepunkten in A4 zu reviewen.
 
 - [x] **A4 Review pro Block dokumentieren** (2026-07-01 Run UH: Review für `B-AC08-01` nachgetragen; Ergebnis `stabil` für alle vorhandenen Inputs, mit Datenlücke `AC0820_M.jpg` und Qualitätsfolgepunkt `AC0840_*`.)
   - [x] In der Doku je Block festhalten: Log-Pfad, Ergebnis (`stabil`/`instabil`), Kurznotiz (3–5 Sätze).
@@ -2279,6 +2280,14 @@ Status-Check: Im aktuellen Stand gibt es bereits robuste Optimierungs-/Validieru
   - [ ] `BLOCKED`-Blöcke gesammelt erneut fahren.
 
 - [ ] **A8 Kanban-Status pflegen**
+
+
+### Fortschritt vs. Blocker (Session 2026-07-02, B-AC08-02 Standard-Run Run UI)
+
+- **Fortschritt (Primäraufgabe A3):** Der nächste dokumentierte Block `B-AC08-02` wurde als Standard-Run mit fixer Toolchain, äußerem `timeout 300`, deterministischer Reihenfolge und Log via `tee` ausgeführt.
+- **Ergebnis:** Der Lauf `artifacts/converted_images/reports/B-AC08-02_standard_run_2026-07-02.log` endete mit Exit `0` und Abschlussmarker; die Kurzprüfung zählt `62` Konvertiert-Meldungen für `30` eindeutige Varianten aus allen `10` geplanten Basis-IDs `AC0841` bis `AC0850`.
+- **Befund:** Es gab keinen Timeout, keinen Traceback und kein `conversion_failed`. Vier Semantik-Abgleich-`ERROR`-Meldungen betreffen `AC0843_*` und wurden durch Fallback-/Nachbesserungspfade abgefangen; `48` Qualitäts-`WARN`-Meldungen bleiben als Review-/Qualitätsfolgepunkte für A4 sichtbar.
+- **Nächster sinnvoller Schritt:** A4-Review für `B-AC08-02` nachtragen und danach entscheiden, ob A5 nach dem dritten reviewten Block ausgelöst wird oder zuerst `B-AC08-03` per A3 folgt.
 
 ### Fortschritt vs. Blocker (Session 2026-07-01, B-AC08-01 Review Run UH)
 
