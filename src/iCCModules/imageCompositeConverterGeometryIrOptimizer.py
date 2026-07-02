@@ -203,7 +203,7 @@ def _default_candidate_provider(
                 stop_offset = _parse_percent_offset(stop.get("offset"))
                 if stop_offset is None:
                     continue
-                for delta in (-0.10, -0.05, -0.025, 0.025, 0.05, 0.10):
+                for delta in (-0.10, -0.05, -0.025, -0.0125, 0.0125, 0.025, 0.05, 0.10):
                     candidate_offset = _clamp01(stop_offset + delta)
                     if abs(candidate_offset - stop_offset) < 1e-9:
                         continue
